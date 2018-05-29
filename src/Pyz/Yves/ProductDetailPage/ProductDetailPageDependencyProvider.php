@@ -15,7 +15,6 @@ use SprykerShop\Yves\ProductCategoryWidget\Plugin\ProductDetailPage\ProductCateg
 use SprykerShop\Yves\ProductDetailPage\ProductDetailPageDependencyProvider as SprykerShopProductDetailPageDependencyProvider;
 use SprykerShop\Yves\ProductImageWidget\Plugin\ProductDetailPage\ProductImageWidgetPlugin;
 use SprykerShop\Yves\ProductLabelWidget\Plugin\ProductDetailPage\ProductAbstractLabelWidgetPlugin;
-use SprykerShop\Yves\ProductMeasurementUnitWidget\Plugin\ProductDetailPage\ProductMeasurementUnitWidgetPlugin;
 use SprykerShop\Yves\ProductOptionWidget\Plugin\ProductDetailPage\ProductOptionWidgetPlugin;
 use SprykerShop\Yves\ProductRelationWidget\Plugin\ProductDetailPage\SimilarProductsWidgetPlugin;
 use SprykerShop\Yves\ProductReviewWidget\Plugin\ProductDetailPage\ProductReviewWidgetPlugin;
@@ -40,7 +39,6 @@ class ProductDetailPageDependencyProvider extends SprykerShopProductDetailPageDe
             ProductCmsBlockWidgetPlugin::class,
             ProductReviewWidgetPlugin::class,
             ExampleProductColorGroupWidgetPlugin::class,
-            ProductMeasurementUnitWidgetPlugin::class,
         ];
     }
 }
