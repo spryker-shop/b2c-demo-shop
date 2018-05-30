@@ -1,0 +1,18 @@
+{% extends molecule('toggler-checkbox') %}
+
+{% define config = {
+    name: 'toggler-radio',
+    tag: 'toggler-radio'
+} %}
+
+{% define data = {
+    type: 'radio'
+} %}
+
+{% define attributes = {
+    'name': required
+} %}
+
+{%- block extraAttributes -%}
+    group-name="{{attribute(attributes, 'name')}}"
+{%- endblock -%}

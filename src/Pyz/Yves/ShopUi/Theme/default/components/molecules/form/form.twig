@@ -1,0 +1,95 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'form',
+    tag: 'div'
+} %}
+
+{% define data = {
+    form: required,
+    enableStart: true,
+    enableEnd: true,
+    layout: {},
+    options: {
+        attr: {
+            novalidate: 'novalidate'
+        }
+    },
+
+    title: null,
+
+    submit: {
+        text: 'forms.submit-btn' | trans,
+        enable: false
+    },
+
+    cancel: {
+        text: 'general.back.button' | trans,
+        url: '#',
+        enable: false
+    }
+} %}
+
+{% block body %}
+    {% block title %}
+        {% if data.title is not empty %}
+            <h5>{{data.title}}</h5>
+        {% endif %}
+    {% endblock %}
+
+    {% if data.enableStart %}
+        {{ form_start(data.form, data.options) }}
+    {% endif %}
+
+    {% block formErrors %}
+        {{ form_errors(data.form) }}
+    {% endblock %}
+
+    {% block fields %}
+        <div class="grid grid--bottom">
+            {% for field in data.form.children | keys %}
+                {% set class = 'col col--sm-12' %}
+
+                {% if field in data.layout | keys %}
+                    {% set class = attribute(data.layout, field) %}
+                {% endif %}
+
+                <div class="{{class}}">
+                    {{ form_row(attribute(data.form.children, field)) }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endblock %}
+
+    {% block fieldsRest %}
+        {{ form_rest(data.form) }}
+    {% endblock %}
+
+    {% block actions %}
+        {% if data.submit.enable and data.cancel.enable %}
+            <div class="form-field grid grid--middle grid--justify">
+        {% else %}
+            <div class="form-field grid grid--middle {{ data.submit.enable ? 'grid--right' : 'grid--left'}}">
+        {% endif %}
+            {% if data.cancel.enable %}
+                {% block cancel %}
+                    <a href="{{data.cancel.url}}" class="button button--secondary button--hollow col col--sm-12 col--md-5 col--lg-3" {{qa('cancel-button')}}>
+                        {{data.cancel.text}}
+                    </a>
+                {% endblock %}
+            {% endif %}
+
+            {% if data.submit.enable %}
+                {% block submit %}
+                    <button type="submit" class="button button--success col col--sm-12 col--md-5 col--lg-3" {{qa('submit-button')}}>
+                        {{data.submit.text}}
+                    </button>
+                {% endblock %}
+            {% endif %}
+        </div>
+    {% endblock %}
+
+    {% if data.enableEnd %}
+        {{ form_end(data.form) }}
+    {% endif %}
+{% endblock %}

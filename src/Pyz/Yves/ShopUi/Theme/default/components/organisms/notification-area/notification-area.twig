@@ -1,0 +1,57 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'notification-area',
+    tag: 'section'
+} %}
+
+{% define data = {
+    messages: [],
+    successMessages: [],
+    warningMessages: [],
+    alertMessages: []
+} %}
+
+{% set messages = data.messages | merge(app.session.flashbag.get('flash.messages.info')) %}
+{% set successMessages = data.successMessages | merge(app.session.flashbag.get('flash.messages.success')) %}
+{% set warningMessages = data.warningMessages %}
+{% set alertMessages = data.alertMessages | merge(app.session.flashbag.get('flash.messages.error')) %}
+{% set hasNoMessage = messages is empty and successMessages is empty and warningMessages is empty and alertMessages is empty %}
+
+{% block component %}
+    {% if not hasNoMessage %}{{parent()}}{% endif %}
+{% endblock %}
+
+{% block body %}
+    {% for message in messages %}
+        {% include molecule('flash-message') with {
+            data: {
+                text: message
+            }
+        } only %}
+    {% endfor %}
+    {% for message in successMessages %}
+        {% include molecule('flash-message') with {
+            data: {
+                action: 'success',
+                text: message
+            }
+        } only %}
+    {% endfor %}
+    {% for message in warningMessages %}
+        {% include molecule('flash-message') with {
+            data: {
+                action: 'warning',
+                text: message
+            }
+        } only %}
+    {% endfor %}
+    {% for message in alertMessages %}
+        {% include molecule('flash-message') with {
+            data: {
+                action: 'alert',
+                text: message
+            }
+        } only %}
+    {% endfor %}
+{% endblock %}

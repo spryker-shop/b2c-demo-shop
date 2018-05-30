@@ -1,0 +1,13 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'ajax-provider',
+    tag: 'ajax-provider'
+} %}
+
+{% define attributes = {
+    'fetch-on-load': false,
+    'url': required,
+    'method': 'get',
+    'response-type': 'text'
+} %}
