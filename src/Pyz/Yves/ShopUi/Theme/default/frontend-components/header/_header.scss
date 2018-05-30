@@ -1,0 +1,30 @@
+
+@mixin shop-ui-header($name: '.header') {
+    #{$name} {
+        position: relative;
+        background-color: helper-color-light(red);
+        margin-bottom: 1rem;
+        z-index: $setting-zi-header;
+
+        &__row {
+            padding: .5rem;
+        }
+
+        &__navigation-top {
+            z-index: $setting-zi-header + 3;
+        }
+
+        &__search-form {
+            z-index: $setting-zi-header + 2;
+        }
+
+        &__navigation-main {
+            z-index: $setting-zi-header + 1;
+        }
+
+        @content;
+    }
+}
+
+@include shop-ui-header();
+
