@@ -1,0 +1,57 @@
+@function helper-breakpoint-edge-min($edges) {
+    @if length($edges) > 0 {
+        @return nth($edges, 1);
+    }
+
+    @return 0;
+}
+
+@function helper-breakpoint-edge-max($edges) {
+    @if length($edges) > 1 {
+        @return nth($edges, 2);
+    }
+
+    @return null;
+}
+
+@mixin helper-breakpoint-media-min($min: 0) {
+    @media only screen and (min-width: $min) {
+        @content;
+    }
+}
+
+@mixin helper-breakpoint-media-between($min: 0, $max: $setting-grid-max-width) {
+    @media only screen and (min-width: $min) and (max-width: $max) {
+        @content;
+    }
+}
+
+@mixin helper-breakpoint-media-max($max: $setting-grid-max-width) {
+    @media only screen and (max-width: $max) {
+        @content;
+    }
+}
+
+@mixin helper-breakpoint($min-bp, $max-bp: null) {
+    $edges-min: map-get($setting-breakpoints, $min-bp);
+    $edge-min: helper-breakpoint-edge-min($edges-min);
+
+    @if $max-bp == null {
+        @include helper-breakpoint-media-min($edge-min) {
+            @content;
+        }
+    } @else {
+        $edges-max: map-get($setting-breakpoints, $max-bp);
+        $edge-max: helper-breakpoint-edge-max($edges-max);
+
+        @if $edge-max == null {
+            @include helper-breakpoint-media-min($edge-min) {
+                @content;
+            }
+        } @else {
+            @include helper-breakpoint-media-between($edge-min, $edge-max) {
+                @content;
+            }
+        }
+    }
+}

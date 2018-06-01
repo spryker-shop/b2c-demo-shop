@@ -1,0 +1,67 @@
+@mixin basic-typography() {
+    html {
+        font-size: $setting-font-size-base;
+    }
+
+    body {
+        @include helper-font-size(default);
+        @include helper-font-weight(regular);
+        @include helper-font-line-height(default);
+        position: relative;
+        background-color: $setting-color-bg;
+        color: $setting-color-text;
+        font-family: $setting-font-family;
+    }
+
+    @each $i in (1, 2, 3, 4, 5, 6) {
+        h#{$i} {
+            @include helper-font-size($i);
+            @include helper-font-line-height($i);
+            display: block;
+
+            &--margins {
+                margin: 2rem 0 1rem 0;
+            }
+        }
+    }
+
+    a {
+        color: $setting-color-main;
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    b,
+    strong {
+        @include helper-font-weight(bold);
+    }
+
+    i,
+    em,
+    cite {
+        font-style: italic;
+    }
+
+    hr {
+        @include helper-ui-clearfix;
+        border-bottom: 1px solid $setting-color-lighter;
+        margin: .5rem 0;
+    }
+
+    small {
+        @include helper-font-size(small);
+    }
+
+    big {
+        @include helper-font-size(big);
+    }
+
+    p,
+    blockquote,
+    iframe {
+        margin: .5rem 0;
+    }
+}

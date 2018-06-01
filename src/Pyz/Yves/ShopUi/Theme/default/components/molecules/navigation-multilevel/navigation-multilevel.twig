@@ -15,16 +15,19 @@
 {% set menuChildrenClass = data.menuDropdown ? 'menu__item--has-children-dropdown' : 'menu__item--has-children-list' %}
 
 {% block body %}
-    <ul class="menu {{menuClass}}">
-        {% for node in data.nodes %}
-            {% set hasChildren = node.children | length > 0 %}
-            
-            {% include molecule('navigation-multilevel-node') with {
-                class: 'menu__item ' ~ (hasChildren ? menuChildrenClass : ''),
-                data: {
-                    node: node
-                }
-            } only %}
-        {% endfor %}
-    </ul>
+    <div class="grid grid--center">
+        <ul class="menu {{menuClass}}">
+            {% for node in data.nodes %}
+                {% set hasChildren = node.children | length > 0 %}
+
+                {% include molecule('navigation-multilevel-node') with {
+                    class: 'menu__item ' ~ (hasChildren ? menuChildrenClass : ''),
+                    data: {
+                        node: node
+                    }
+                } only %}
+            {% endfor %}
+        </ul>
+    </div>
+
 {% endblock %}

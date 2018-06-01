@@ -1,0 +1,57 @@
+@mixin util-visibility() {
+    .is-hidden {
+        display: none;
+
+        @each $breakpoint-a, $edges-a in $setting-breakpoints {
+            $edge-min: helper-breakpoint-edge-min($edges-a);
+            $edge-max: helper-breakpoint-edge-max($edges-a);
+
+            &-#{$breakpoint-a}-only {
+                @if $edge-max == null {
+                    @include helper-breakpoint-media-min($edge-min) {
+                        display: none;
+                    }
+                } @else {
+                    @include helper-breakpoint-media-between($edge-min, $edge-max) {
+                        display: none;
+                    }
+                }
+            }
+
+            @each $breakpoint-b, $edges-b in $setting-breakpoints {
+                @if helper-breakpoint-edge-min($edges-b) > helper-breakpoint-edge-min($edges-a) {
+                    $edge-min: helper-breakpoint-edge-min($edges-a);
+                    $edge-max: helper-breakpoint-edge-max($edges-b);
+
+                    &-#{$breakpoint-a}-#{$breakpoint-b} {
+                        @if $edge-max == null {
+                            @include helper-breakpoint-media-min($edge-min) {
+                                display: none;
+                            }
+                        } @else {
+                            @include helper-breakpoint-media-between($edge-min, $edge-max) {
+                                display: none;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .is-visible {
+        @include helper-visibility-visible;
+    }
+
+    .is-invisible {
+        @include helper-visibility-invisible;
+    }
+
+    .is-scrollable {
+        overflow-y: auto;
+    }
+
+    .is-not-scrollable {
+        overflow-y: hidden;
+    }
+}
