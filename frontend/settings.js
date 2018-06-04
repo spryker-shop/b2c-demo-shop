@@ -19,7 +19,7 @@ const paths = {
     core: {
         // all modules
         // modules: './vendor/spryker/spryker-shop/Bundles',
-        modules: './vendor/spryker-shop/shop-ui/src/SprykerShop/Yves/ShopUi',
+        modules: './vendor/spryker-shop',
         // ShopUi source folder
         shopUiModule: `./vendor/spryker/spryker-shop/Bundles/ShopUi/src/SprykerShop/Yves/ShopUi/Theme/${theme}`
     },

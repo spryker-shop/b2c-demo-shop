@@ -69,6 +69,10 @@
             max-width: $setting-grid-max-width;
         }
 
+        &--no-wrap {
+            flex-wrap: nowrap;
+        }
+
     }
 
     .col {
@@ -116,5 +120,20 @@
         &--middle {
             align-self: center;
         }
+
+        &--spaced {
+            &-sm {
+                padding: .2rem;
+            }
+            &-md {
+                padding: .5rem;
+            }
+            &-lg {
+                padding: .8rem;
+            }
+        }
+
     }
 }
+
+@include basic-grid();

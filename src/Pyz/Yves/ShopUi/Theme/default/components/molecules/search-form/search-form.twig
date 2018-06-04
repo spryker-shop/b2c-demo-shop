@@ -11,17 +11,41 @@
 } %}
 
 {% block body %}
-    <form class="grid grid--left" action="{{data.searchUrl}}">
-        <div class="">
-            <input name="q" type="text" class="input input--expand" placeholder="{{ 'global.search' | trans }}" value="{{data.searchValue}}" autocomplete="off">
+    <form class="grid grid--left grid--stretch" action="{{data.searchUrl}}">
+        <div>
+            <input name="q" type="text" class="input input--expand"
+                   {#placeholder="{{ 'global.search' | trans }}"#}
+                   value="{{data.searchValue}}" autocomplete="off">
         </div>
-        <div class="">
-            <button type="submit" class="{{config.name}}__submit button button--expand">
-                {% include atom('icon') with {
-                    data: {
-                        name: 'search'
-                    }
-                } only %}
+        <div class="grid grid--middle">
+            <button type="submit" class="{{config.name}}__submit button button--expand grid grid--middle">
+
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="17" viewBox="0 0 16 17">
+                    <defs>
+                        <path id="a" d="M4 3h19v22H4z"/>
+                        <path id="c" d="M0 0h18v22H0z"/>
+                    </defs>
+                    <g fill="none" fill-rule="evenodd" transform="translate(-5 -5)">
+                        <mask id="b" fill="#fff">
+                            <use xlink:href="#a"/>
+                        </mask>
+                        <g mask="url(#b)">
+                            <g transform="scale(-1 1) rotate(40 -7.995 -18.596)">
+                                <mask id="d" fill="#fff">
+                                    <use xlink:href="#c"/>
+                                </mask>
+                                <g mask="url(#d)">
+                                    <g transform="translate(2 2)">
+                                        <rect width="1" height="5.438" x="5.704" y="13" fill="#111" rx=".5"/>
+                                        <ellipse cx="6.203" cy="6.438" stroke="#111" rx="6.502" ry="6.5"/>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </svg>
+
+
             </button>
         </div>
     </form>
