@@ -1,0 +1,95 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'navigation-top',
+    tag: 'nav'
+} %}
+
+{% define data = {
+    cartQuantity: app['cart.quantity'],
+    showUserMenu: not (hideUserMenu | default(false)),
+    isUserAuthenticated: is_granted('IS_AUTHENTICATED_FULLY'),
+    isInline: true,
+    withSeparators: false
+} %}
+
+{% set cartQuantity = data.cartQuantity > 0 ? data.cartQuantity ~ ' ' : '' %}
+{% set menuClass = data.isInline ? 'menu--inline' : '' %}
+
+{% block body %}
+    <ul class="menu {{menuClass}}">
+        {#<li class="menu__item">{{ widgetGlobal('PriceModeSwitcherWidgetPlugin') }}</li>#}
+        {% if data.withSeparators %}<li class="menu__separator"></li>{% endif %}
+        {#<li class="menu__item">{{ widgetGlobal('CurrencyWidgetPlugin') }}</li>#}
+        {% if data.withSeparators %}<li class="menu__separator"></li>{% endif %}
+        {#<li class="menu__item">{{ widgetGlobal('LanguageSwitcherWidgetPlugin', app.request) }}</li>#}
+        {% if data.withSeparators %}<li class="menu__separator"></li>{% endif %}
+
+        {% if data.withSeparators %}<li class="menu__separator"></li>{% endif %}
+        {#<li class="menu__item"><a href="{{ url('quick-order') }}">{{ 'quick-order.page-title'|trans }}</a></li>#}
+        {% if data.withSeparators %}<li class="menu__separator"></li>{% endif %}
+
+        {% if data.showUserMenu %}
+            {% if data.isUserAuthenticated %}
+                <li class="menu__item"><a href="{{ url('wishlist/overview') }}" class="grid grid--middle">
+                        {% include atom('icon') with {
+                            class: 'icon--big',
+                            data: {
+                                name: 'wishlist'
+                            }
+                        } only %}
+                        {#{{ 'wishlist.wishlist'|trans }}#}
+                    </a></li>
+                <li class="menu__item"><a href="{{ url('customer/overview') }}" class="grid grid--middle">
+
+                        {% include atom('icon') with {
+                            class: 'icon--big',
+                            data: {
+                                name: 'user-account'
+                            }
+                        } only %}
+
+                        {#{{ 'customer.profile'|trans }}#}
+                    </a></li>
+                {#<li class="menu__item"><a href="{{ url('logout') }}">{{ 'customer.logout'|trans }}</a></li>#}
+            {% else %}
+                <li class="menu__item"><a href="{{ url('login') }}" class="grid grid--middle">
+
+                        {% include atom('icon') with {
+                            class: 'icon--big',
+                            data: {
+                                name: 'user-account'
+                            }
+                        } only %}
+
+                        {#{{ 'customer.login'|trans }}#}
+                    </a></li>
+            {% endif %}
+        {% endif %}
+
+        <li class="menu__item">
+            {#{% if widgetGlobalExists('MiniCartWidgetPlugin') %}#}
+            {#{{ widgetGlobal('MiniCartWidgetPlugin', cartQuantity) }}#}
+            {#{% else %}#}
+            <a href="{{ url('cart') }}" class="grid grid--middle cart-link">
+                {% if cartQuantity > 0 %}
+                <span class="cart-link__quantity">
+                    {{cartQuantity}}
+                </span>
+                {% else %}
+                {% endif %}
+
+                {% include atom('icon') with {
+                    class: 'icon--big',
+                    data: {
+                        name: 'cart'
+                    }
+                } only %}
+
+                {#{{ 'global.cart' | trans }}#}
+            </a>
+            {#{% endif %}#}
+        </li>
+
+    </ul>
+{% endblock %}

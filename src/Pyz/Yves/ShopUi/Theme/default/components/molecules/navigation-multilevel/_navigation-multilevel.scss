@@ -1,0 +1,25 @@
+@mixin shop-ui-navigation-multilevel($name: '.navigation-multilevel') {
+    #{$name} {
+        .menu {
+            li, a {
+                text-transform: capitalize;
+                white-space: nowrap;
+                color: $setting-color-black;
+                &:hover {
+                    text-decoration: unset;
+                    color: rgba(0,0,0,.5);
+                }
+
+            }
+            &--top-level {
+
+                &>li, &>li>a {
+                    text-transform: uppercase;
+                }
+            }
+        }
+
+    }
+}
+
+@include shop-ui-navigation-multilevel();

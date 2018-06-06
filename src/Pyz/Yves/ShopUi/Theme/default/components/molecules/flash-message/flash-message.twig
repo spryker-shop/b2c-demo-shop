@@ -1,0 +1,44 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'flash-message',
+    tag: 'flash-message'
+} %}
+
+{% define data = {
+    action: '',
+    title: '',
+    text: '',
+    icon: null
+} %}
+
+{% set modifiers = [data.action] | merge(modifiers | default([])) %}
+
+{% set iconName = data.action is empty ? 'action-default' : 'action-' ~ data.action %}
+{% set iconName = data.icon is empty ? iconName : data.icon %}
+
+{% block body %}
+    <div class="{{config.name}}__message container grid grid--middle">
+        {% include atom('icon') with {
+            modifiers: ['bigger'],
+            class: 'col col--sm-1',
+            data: {
+                name: iconName
+            }
+        } only %}
+
+        <div class="col col--sm-10">
+            {% if data.title is not empty %}
+                <h6>{{data.title | trans}}</h6>
+            {% endif %}
+            {{data.text | trans}}
+        </div>
+
+        {% include atom('icon') with {
+            class: 'col col--sm-1',
+            data: {
+                name: 'times'
+            }
+        } only %}
+    </div>
+{% endblock %}

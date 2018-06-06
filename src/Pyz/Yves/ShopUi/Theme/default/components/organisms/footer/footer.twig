@@ -1,0 +1,52 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'footer',
+    tag: 'footer'
+} %}
+
+{% block body %}
+    <div class="box">
+        {{ render(path('newsletter/subscribe')) }}
+    </div>
+
+    <div class="grid">
+        <div class="col col--sm-12 col--md-6">
+            <div class="box">
+                <h5>{{ 'global.payment_providers' | trans }}</h5>
+                {{ widgetGlobal('NavigationWidgetPlugin', 'PAYMENT_PROVIDERS', view('navigation-providers-payment', 'ShopLayout')) }}
+            </div>
+        </div>
+
+        <div class="col col--sm-12 col--md-6">
+            <div class="box">
+                <h5>{{ 'global.shipment_providers' | trans }}</h5>
+                {{ widgetGlobal('NavigationWidgetPlugin', 'SHIPMENT_PROVIDERS', view('navigation-providers-shipment', 'ShopLayout')) }}
+            </div>
+        </div>
+    </div>
+
+    <div class="box">
+        <div class="grid">
+            <div class="col col--sm-12 col--md-6 col--lg-6">
+                {{ widgetGlobal('NavigationWidgetPlugin', 'FOOTER_NAVIGATION', view('navigation-footer', 'ShopLayout')) }}
+            </div>
+
+            <ul class="col col--sm-12 col--md-6 col--lg-3">
+                <li><h5>{{ 'global.get_in_touch' | trans }}</h5></li>
+                <li>+49 (0)30 2084983 50</li>
+                <li><a href="mailto:info@spryker.com">info@spryker.com</a></li>
+            </ul>
+            
+            <div class="col col--lg-3 is-hidden-sm-md">
+                <h5>{{ 'global.social' | trans }}</h5>
+                {{ widgetGlobal('NavigationWidgetPlugin', 'SOCIAL_LINKS', view('navigation-social', 'ShopLayout')) }}
+            </div>
+        </div>
+    </div>
+
+    <div class="box is-hidden-lg-xl">
+        <h5>{{ 'global.social' | trans }}</h5>
+        {{ widgetGlobal('NavigationWidgetPlugin', 'SOCIAL_LINKS', view('navigation-social', 'ShopLayout')) }}
+    </div>
+{% endblock %}

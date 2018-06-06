@@ -1,0 +1,14 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'icon',
+    tag: 'svg'
+} %}
+
+{% define data = {
+    name: required
+} %}
+
+{% block body %}
+    <use xlink:href="#:{{data.name}}"></use>
+{% endblock %}

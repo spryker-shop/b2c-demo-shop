@@ -1,0 +1,22 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'display-address',
+    tag: 'ul'
+} %}
+
+{% define data = {
+    address: required
+} %}
+
+{% block body %}
+    <li>{{ data.address.salutation }} <strong>{{ data.address.firstName }} {{ data.address.lastName }}</strong></li>
+    {% if data.address.company is not empty %}
+        <li>{{ data.address.company }}</li>
+    {% endif %}
+    <li>{{ data.address.address1 }} {{ data.address.address2 }}</li>
+    <li>{{ data.address.zipCode }} {{ data.address.city }}, {{ ('countries.iso.' ~ data.address.iso2code) | trans }}</li>
+    {% if data.address.phone is not empty %}
+        <li>{{ data.address.phone }}</li>
+    {% endif %}
+{% endblock %}

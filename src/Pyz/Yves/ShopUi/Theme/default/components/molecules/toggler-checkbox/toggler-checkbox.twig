@@ -1,0 +1,24 @@
+{% extends atom(data.type | default('checkbox')) %}
+
+{% define config = {
+    name: 'toggler-checkbox',
+    tag: 'toggler-checkbox'
+} %}
+
+{% define data = {
+    type: 'checkbox'
+} %}
+
+{% define attributes = {
+    target: required,
+    'class-to-toggle': required,
+    'add-class-when-checked': false
+} %}
+
+{%- block class -%}
+    {{parent()}} {{config.name}}--{{data.type}}
+{%- endblock -%}
+
+{%- block inputClass -%}
+    {{parent()}} {{config.selector}}__trigger
+{%- endblock -%}
