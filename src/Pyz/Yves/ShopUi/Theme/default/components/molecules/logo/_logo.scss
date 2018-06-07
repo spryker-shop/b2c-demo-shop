@@ -1,0 +1,14 @@
+@mixin shop-ui-logo ($name: '.logo'){
+    #{$name} {
+        padding: .5rem .8rem;
+        @media screen and (max-width: 549px){
+            padding: .8rem;
+            border-bottom: 1px solid $setting-color-dark;
+            a {
+                width: 120px;
+            }
+        }
+    }
+}
+
+@include shop-ui-logo();
