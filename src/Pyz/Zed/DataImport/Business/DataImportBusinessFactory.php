@@ -12,6 +12,7 @@ use Pyz\Zed\DataImport\Business\Model\CmsBlock\Category\Repository\CategoryRepos
 use Pyz\Zed\DataImport\Business\Model\CmsBlock\CmsBlockWriterStep;
 use Pyz\Zed\DataImport\Business\Model\CmsBlockCategory\CmsBlockCategoryWriterStep;
 use Pyz\Zed\DataImport\Business\Model\CmsBlockCategoryPosition\CmsBlockCategoryPositionWriterStep;
+use Pyz\Zed\DataImport\Business\Model\CmsBlockStore\CmsBlockStoreWriterStep;
 use Pyz\Zed\DataImport\Business\Model\CmsPage\CmsPageWriterStep;
 use Pyz\Zed\DataImport\Business\Model\CmsPage\PlaceholderExtractorStep;
 use Pyz\Zed\DataImport\Business\Model\CmsTemplate\CmsTemplateWriterStep;
@@ -20,6 +21,7 @@ use Pyz\Zed\DataImport\Business\Model\Currency\CurrencyWriterStep;
 use Pyz\Zed\DataImport\Business\Model\Customer\CustomerWriterStep;
 use Pyz\Zed\DataImport\Business\Model\Discount\DiscountWriterStep;
 use Pyz\Zed\DataImport\Business\Model\DiscountAmount\DiscountAmountWriterStep;
+use Pyz\Zed\DataImport\Business\Model\DiscountStore\DiscountStoreWriterStep;
 use Pyz\Zed\DataImport\Business\Model\DiscountVoucher\DiscountVoucherWriterStep;
 use Pyz\Zed\DataImport\Business\Model\Glossary\GlossaryWriterStep;
 use Pyz\Zed\DataImport\Business\Model\Locale\LocaleNameToIdLocaleStep;
@@ -47,7 +49,6 @@ use Pyz\Zed\DataImport\Business\Model\ProductManagementAttribute\ProductManageme
 use Pyz\Zed\DataImport\Business\Model\ProductOption\ProductOptionWriterStep;
 use Pyz\Zed\DataImport\Business\Model\ProductOptionPrice\ProductOptionPriceWriterStep;
 use Pyz\Zed\DataImport\Business\Model\ProductPrice\ProductPriceWriterStep;
-use Pyz\Zed\DataImport\Business\Model\ProductQuantity\ProductQuantityWriterStep;
 use Pyz\Zed\DataImport\Business\Model\ProductRelation\Hook\ProductRelationAfterImportHook;
 use Pyz\Zed\DataImport\Business\Model\ProductRelation\ProductRelationWriter;
 use Pyz\Zed\DataImport\Business\Model\ProductReview\ProductReviewWriterStep;
@@ -94,6 +95,7 @@ class DataImportBusinessFactory extends SprykerDataImportBusinessFactory
             ->addDataImporter($this->createShipmentImporter())
             ->addDataImporter($this->createShipmentPriceImporter())
             ->addDataImporter($this->createDiscountImporter())
+            ->addDataImporter($this->createDiscountStoreImporter())
             ->addDataImporter($this->createDiscountVoucherImporter())
             ->addDataImporter($this->createStockImporter())
             ->addDataImporter($this->createProductAttributeKeyImporter())
@@ -113,10 +115,10 @@ class DataImportBusinessFactory extends SprykerDataImportBusinessFactory
             ->addDataImporter($this->createProductSetImporter())
             ->addDataImporter($this->createProductSearchAttributeMapImporter())
             ->addDataImporter($this->createProductSearchAttributeImporter())
-            ->addDataImporter($this->createProductQuantityImporter())
             ->addDataImporter($this->createCmsTemplateImporter())
             ->addDataImporter($this->createCmsPageImporter())
             ->addDataImporter($this->createCmsBlockImporter())
+            ->addDataImporter($this->createCmsBlockStoreImporter())
             ->addDataImporter($this->createCmsBlockCategoryPositionImporter())
             ->addDataImporter($this->createCmsBlockCategoryImporter())
             ->addDataImporter($this->createNavigationImporter())
@@ -293,6 +295,20 @@ class DataImportBusinessFactory extends SprykerDataImportBusinessFactory
     /**
      * @return \Spryker\Zed\DataImport\Business\Model\DataImporterInterface|\Spryker\Zed\DataImport\Business\Model\DataSet\DataSetStepBrokerAwareInterface
      */
+    protected function createCmsBlockStoreImporter()
+    {
+        $dataImporter = $this->getCsvDataImporterFromConfig($this->getConfig()->getCmsBlockStoreDataImporterConfiguration());
+
+        $dataSetStepBroker = $this->createTransactionAwareDataSetStepBroker(CmsBlockStoreWriterStep::BULK_SIZE);
+        $dataSetStepBroker->addStep(new CmsBlockStoreWriterStep());
+        $dataImporter->addDataSetStepBroker($dataSetStepBroker);
+
+        return $dataImporter;
+    }
+
+    /**
+     * @return \Spryker\Zed\DataImport\Business\Model\DataImporterInterface|\Spryker\Zed\DataImport\Business\Model\DataSet\DataSetStepBrokerAwareInterface
+     */
     protected function createCmsBlockCategoryPositionImporter()
     {
         $dataImporter = $this->getCsvDataImporterFromConfig($this->getConfig()->getCmsBlockCategoryPositionDataImporterConfiguration());
@@ -345,6 +361,19 @@ class DataImportBusinessFactory extends SprykerDataImportBusinessFactory
 
         $dataImporter->addDataSetStepBroker($dataSetStepBroker);
 
+        return $dataImporter;
+    }
+
+    /**
+     * @return \Spryker\Zed\DataImport\Business\Model\DataImporterInterface|\Spryker\Zed\DataImport\Business\Model\DataSet\DataSetStepBrokerAwareInterface
+     */
+    protected function createDiscountStoreImporter()
+    {
+        $dataImporter = $this->getCsvDataImporterFromConfig($this->getConfig()->getDiscountStoreDataImporterConfiguration());
+        $dataSetStepBroker = $this->createTransactionAwareDataSetStepBroker(DiscountStoreWriterStep::BULK_SIZE);
+        $dataSetStepBroker
+            ->addStep(new DiscountStoreWriterStep());
+        $dataImporter->addDataSetStepBroker($dataSetStepBroker);
         return $dataImporter;
     }
 
@@ -943,20 +972,6 @@ class DataImportBusinessFactory extends SprykerDataImportBusinessFactory
 
         $dataImporter->addDataSetStepBroker($dataSetStepBroker);
         $dataImporter->addAfterImportHook($this->createProductSearchAfterImportHook());
-
-        return $dataImporter;
-    }
-
-    /**
-     * @return \Spryker\Zed\DataImport\Business\Model\DataImporterInterface|\Spryker\Zed\DataImport\Business\Model\DataSet\DataSetStepBrokerAwareInterface
-     */
-    protected function createProductQuantityImporter()
-    {
-        $dataSetStepBroker = $this->createTransactionAwareDataSetStepBroker();
-        $dataSetStepBroker->addStep(new ProductQuantityWriterStep());
-
-        $dataImporter = $this->getCsvDataImporterFromConfig($this->getConfig()->getProductQuantityDataImporterConfiguration());
-        $dataImporter->addDataSetStepBroker($dataSetStepBroker);
 
         return $dataImporter;
     }

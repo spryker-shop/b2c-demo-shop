@@ -33,17 +33,14 @@ class DataImportConfig extends SprykerDataImportConfig
     const IMPORT_TYPE_PRODUCT_IMAGE = 'product-image';
     const IMPORT_TYPE_PRODUCT_SEARCH_ATTRIBUTE_MAP = 'product-search-attribute-map';
     const IMPORT_TYPE_PRODUCT_SEARCH_ATTRIBUTE = 'product-search-attribute';
-    const IMPORT_TYPE_PRODUCT_MEASUREMENT_UNIT = 'product-measurement-unit';
-    const IMPORT_TYPE_PRODUCT_MEASUREMENT_BASE_UNIT = 'product-measurement-base-unit';
-    const IMPORT_TYPE_PRODUCT_MEASUREMENT_SALES_UNIT = 'product-measurement-sales-unit';
-    const IMPORT_TYPE_PRODUCT_MEASUREMENT_SALES_UNIT_STORE = 'product-measurement-sales-unit-store';
-    const IMPORT_TYPE_PRODUCT_QUANTITY = 'product-quantity';
     const IMPORT_TYPE_CMS_TEMPLATE = 'cms-template';
     const IMPORT_TYPE_CMS_PAGE = 'cms-page';
     const IMPORT_TYPE_CMS_BLOCK = 'cms-block';
+    const IMPORT_TYPE_CMS_BLOCK_STORE = 'cms-block-store';
     const IMPORT_TYPE_CMS_BLOCK_CATEGORY_POSITION = 'cms-block-category-position';
     const IMPORT_TYPE_CMS_BLOCK_CATEGORY = 'cms-block-category';
     const IMPORT_TYPE_DISCOUNT = 'discount';
+    const IMPORT_TYPE_DISCOUNT_STORE = 'discount-store';
     const IMPORT_TYPE_DISCOUNT_AMOUNT = 'discount-amount';
     const IMPORT_TYPE_DISCOUNT_VOUCHER = 'discount-voucher';
     const IMPORT_TYPE_SHIPMENT = 'shipment';
@@ -248,46 +245,6 @@ class DataImportConfig extends SprykerDataImportConfig
     /**
      * @return \Generated\Shared\Transfer\DataImporterConfigurationTransfer
      */
-    public function getProductMeasurementUnitDataImporterConfiguration()
-    {
-        return $this->buildImporterConfiguration('product_measurement_unit.csv', static::IMPORT_TYPE_PRODUCT_MEASUREMENT_UNIT);
-    }
-
-    /**
-     * @return \Generated\Shared\Transfer\DataImporterConfigurationTransfer
-     */
-    public function getProductMeasurementBaseUnitDataImporterConfiguration()
-    {
-        return $this->buildImporterConfiguration('product_measurement_base_unit.csv', static::IMPORT_TYPE_PRODUCT_MEASUREMENT_BASE_UNIT);
-    }
-
-    /**
-     * @return \Generated\Shared\Transfer\DataImporterConfigurationTransfer
-     */
-    public function getProductMeasurementSalesUnitDataImporterConfiguration()
-    {
-        return $this->buildImporterConfiguration('product_measurement_sales_unit.csv', static::IMPORT_TYPE_PRODUCT_MEASUREMENT_SALES_UNIT);
-    }
-
-    /**
-     * @return \Generated\Shared\Transfer\DataImporterConfigurationTransfer
-     */
-    public function getProductMeasurementSalesUnitStoreDataImporterConfiguration()
-    {
-        return $this->buildImporterConfiguration('product_measurement_sales_unit_store.csv', static::IMPORT_TYPE_PRODUCT_MEASUREMENT_SALES_UNIT_STORE);
-    }
-
-    /**
-     * @return \Generated\Shared\Transfer\DataImporterConfigurationTransfer
-     */
-    public function getProductQuantityDataImporterConfiguration()
-    {
-        return $this->buildImporterConfiguration('product_quantity.csv', static::IMPORT_TYPE_PRODUCT_QUANTITY);
-    }
-
-    /**
-     * @return \Generated\Shared\Transfer\DataImporterConfigurationTransfer
-     */
     public function getProductGroupDataImporterConfiguration()
     {
         return $this->buildImporterConfiguration('product_group.csv', static::IMPORT_TYPE_PRODUCT_GROUP);
@@ -344,6 +301,14 @@ class DataImportConfig extends SprykerDataImportConfig
     /**
      * @return \Generated\Shared\Transfer\DataImporterConfigurationTransfer
      */
+    public function getCmsBlockStoreDataImporterConfiguration()
+    {
+        return $this->buildImporterConfiguration('cms_block_store.csv', static::IMPORT_TYPE_CMS_BLOCK_STORE);
+    }
+
+    /**
+     * @return \Generated\Shared\Transfer\DataImporterConfigurationTransfer
+     */
     public function getCmsBlockCategoryPositionDataImporterConfiguration()
     {
         return $this->buildImporterConfiguration('cms_block_category_position.csv', static::IMPORT_TYPE_CMS_BLOCK_CATEGORY_POSITION);
@@ -363,6 +328,14 @@ class DataImportConfig extends SprykerDataImportConfig
     public function getDiscountDataImporterConfiguration()
     {
         return $this->buildImporterConfiguration('discount.csv', static::IMPORT_TYPE_DISCOUNT);
+    }
+
+    /**
+     * @return \Generated\Shared\Transfer\DataImporterConfigurationTransfer
+     */
+    public function getDiscountStoreDataImporterConfiguration()
+    {
+        return $this->buildImporterConfiguration('discount_store.csv', static::IMPORT_TYPE_DISCOUNT_STORE);
     }
 
     /**
