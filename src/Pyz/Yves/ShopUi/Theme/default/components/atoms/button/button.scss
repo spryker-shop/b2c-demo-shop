@@ -1,0 +1,74 @@
+@mixin shop-ui-button($name: '.button') {
+    #{$name} {
+        @include helper-effect-transition(background-color);
+        display: inline-block;
+        padding: calc(.25rem + 1px) calc(.5rem + 1px);
+        background-color: $setting-color-main;
+        border: none;
+        color: $setting-color-white;
+        text-align: center;
+        cursor: pointer;
+
+        &:hover,
+        &:focus {
+            background-color: helper-color-dark($setting-color-alt);
+            text-decoration: none;
+        }
+
+        &--hollow {
+            padding: .25rem .5rem;
+            background-color: $setting-color-white;
+            border: 1px solid $setting-color-main;
+            color: $setting-color-main;
+
+            &:hover,
+            &:focus {
+                background-color: helper-color-light($setting-color-alt);
+            }
+        }
+
+        @each $action, $setting-color-action in $setting-color-actions {
+            @include shop-ui-button-action($action, $setting-color-action);
+        }
+
+        &--expand {
+            width: 100%;
+        }
+
+        &[disabled],
+        &--disabled {
+            background-color: $setting-color-light;
+            border-color: $setting-color-light;
+            cursor: not-allowed;
+
+            &:hover,
+            &:focus {
+                background-color: $setting-color-light;
+            }
+        }
+    }
+}
+
+@mixin shop-ui-button-action($action, $setting-color-action) {
+    &--#{$action} {
+        background-color: $setting-color-action;
+
+        &:hover,
+        &:focus {
+            background-color: helper-color-dark($setting-color-action);
+        }
+    }
+
+    &--#{$action}#{&}--hollow {
+        background-color: $setting-color-white;
+        border-color: $setting-color-action;
+        color: $setting-color-action;
+
+        &:hover,
+        &:focus {
+            background-color: helper-color-light($setting-color-action);
+        }
+    }
+
+    @content;
+}
