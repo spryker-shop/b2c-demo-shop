@@ -1,0 +1,75 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'footer',
+    tag: 'footer'
+} %}
+
+{% define data = {
+    showNavigation: true
+} %}
+
+{% block body %}
+    <div class="container">
+        <div class="grid footer-top">
+            <div class="col col--sm-12 col--md-4 col--lg-3">
+                <h5 class="footer__title">{{ 'global.newsletter' | trans }}</h5>
+                {{ render(path('newsletter/subscribe')) }}
+            </div>
+
+            <div class="col col--sm-12 col--md-4 col--lg-3">
+                <h5 class="footer__title">{{ 'global.categories' | trans }}</h5>
+                {% if data.showNavigation %}
+                    <div class="{{config.name}}__row {{config.name}}__navigation-main">
+                        {{ widgetGlobal('NavigationWidgetPlugin', 'MAIN_NAVIGATION', view('navigation-main', 'ShopLayout')) }}
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="col col--sm-12 col--md-4 col--lg-3">
+                <h5 class="footer__title">{{ 'global.company' | trans }}</h5>
+                {{ widgetGlobal('NavigationWidgetPlugin', 'FOOTER_NAVIGATION', view('navigation-footer', 'ShopLayout')) }}
+            </div>
+
+            <div class="col col--sm-12 col--md-4 col--lg-3">
+                <h5 class="footer__title">{{ 'global.social' | trans }}</h5>
+                {{ widgetGlobal('NavigationWidgetPlugin', 'SOCIAL_LINKS', view('navigation-social', 'ShopLayout')) }}
+            </div>
+
+        </div>
+
+        <div class="grid">
+
+            <div class="col">
+                {% include molecule('logo') with {
+                    class: 'grid grid--center'
+                } only %}
+            </div>
+
+            <div class="col">
+                <h5>{{ 'global.payment_providers' | trans }}</h5>
+                {{ widgetGlobal('NavigationWidgetPlugin', 'PAYMENT_PROVIDERS', view('navigation-providers-payment', 'ShopLayout')) }}
+            </div>
+
+            <div class="col">
+                <h5>{{ 'global.shipment_providers' | trans }}</h5>
+                {{ widgetGlobal('NavigationWidgetPlugin', 'SHIPMENT_PROVIDERS', view('navigation-providers-shipment', 'ShopLayout')) }}
+            </div>
+
+
+            <ul class="col col--sm-12 col--md-6 col--lg-3">
+                <li><h5>{{ 'global.get_in_touch' | trans }}</h5></li>
+                <li>+49 (0)30 2084983 50</li>
+                <li><a href="mailto:info@spryker.com">info@spryker.com</a></li>
+            </ul>
+
+        </div>
+
+        {% block copyright %}
+            <p class="text-center text-small text-secondary">
+                <br>&copy; ACME Company
+            </p>
+        {% endblock %}
+
+    </div>
+{% endblock %}

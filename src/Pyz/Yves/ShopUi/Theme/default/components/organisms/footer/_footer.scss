@@ -1,0 +1,24 @@
+
+@mixin shop-ui-footer($name: '.footer') {
+    #{$name} {
+        border-top: 1px solid $setting-color-lightest;
+        padding: 92px 0 86px;
+
+        &__title {
+            font: bold 13px $setting-font-family-additional;
+            text-transform: uppercase;
+            letter-spacing: 2.6px;
+            color: $setting-color-text;
+            margin-bottom: 16px;
+        }
+
+        .footer-top{
+            border-bottom: dotted 1px $setting-color-lightest;
+        }
+
+        @content;
+    }
+}
+
+@include shop-ui-footer();
+
