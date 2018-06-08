@@ -1,14 +1,21 @@
-@mixin shop-ui-navigation-multilevel($name: '.navigation-multilevel') {
+
+$setting-mobile-shadow-width: 12%;
+
+@mixin shop-ui-navigation-main($name: '.navigation-header') {
     #{$name} {
-        padding: .8rem 0;
+        height: 50px;
         .menu {
             li, a {
                 text-transform: capitalize;
                 white-space: nowrap;
-                color: $setting-color-black;
+                color: $setting-color-text;
+                font: normal 16px $setting-font-family;
+                letter-spacing: .2px;
+                line-height: 1.5;
                 &:hover {
-                    text-decoration: unset;
-                    color: rgba(0,0,0,.5);
+                    text-decoration: underline;
+                    color: map-get($setting-color-actions, alert)
+
                 }
 
             }
@@ -16,9 +23,15 @@
 
                 &>li, &>li>a {
                     text-transform: uppercase;
+                    font: normal 13px $setting-font-family-additional;
+                    letter-spacing: 2px;
+                    &:hover{
+                        color: rgba(0,0,0,.5);
+                        text-decoration: none;
+                    }
                 }
                 &>li {
-                    margin: 0 .5rem;
+                    margin: 0 .6rem;
                 }
 
             }
@@ -43,11 +56,20 @@
                         display: none;
                     }
                 }
+                &--top-level {
+                    justify-content: flex-start;
+                    &>li:first-child {
+                        padding-left: $setting-mobile-shadow-width/4;
+                    }
+                    &>li:last-child {
+                        padding-right: $setting-mobile-shadow-width/4;
+                    }
+                }
             }
             &::after, &::before {
                 content: '';
                 display: block;
-                width: 12%;
+                width: $setting-mobile-shadow-width;
                 height: 100%;
                 position: absolute;
                 top: 0;
@@ -70,4 +92,4 @@
     }
 }
 
-@include shop-ui-navigation-multilevel();
+@include shop-ui-navigation-main();
