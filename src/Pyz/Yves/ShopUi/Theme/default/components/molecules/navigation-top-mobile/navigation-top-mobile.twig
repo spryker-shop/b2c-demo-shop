@@ -1,0 +1,99 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'navigation-top-mobile',
+    tag: 'nav'
+} %}
+
+{% define data = {
+    url: '/',
+    searchUrl: path('search'),
+    cartQuantity: app['cart.quantity']
+} %}
+
+{% set cartQuantity = data.cartQuantity > 0 ? data.cartQuantity ~ ' ' : '' %}
+
+{% block body %}
+    <ul class="grid grid--middle grid--justify">
+
+        <li class="navigation-top-mobile__item col">
+            <div class="grid grid--middle grid--center">
+                <a href="{{data.url}}">
+                    {% include atom('icon') with {
+                        class: 'icon--bigger',
+                        data: {
+                            name: 'icon-home'
+                        }
+                    } only %}
+                </a>
+            </div>
+        </li>
+
+        <li class="navigation-top-mobile__item col">
+            <form action="{{data.searchUrl}}">
+                <div class="grid grid--middle grid--center">
+                    <button type="submit" class="search-form__submit">
+
+                        {% include atom('icon') with {
+                            class: 'icon--bigger',
+                            data: {
+                                name: 'search'
+                            }
+                        } only %}
+
+                    </button>
+                </div>
+            </form>
+        </li>
+
+        <li class="navigation-top-mobile__item col">
+            <div class="grid grid--middle grid--center">
+                <a href="{{ url('wishlist/overview') }}">
+                    {% include atom('icon') with {
+                        class: 'icon--bigger',
+                        data: {
+                            name: 'wishlist'
+                        }
+                    } only %}
+                </a>
+            </div>
+        </li>
+
+        <li class="navigation-top-mobile__item col">
+            <div class="grid grid--middle grid--center">
+                <a href="{{ url('customer/overview') }}">
+
+                    {% include atom('icon') with {
+                        class: 'icon--bigger',
+                        data: {
+                            name: 'user-account'
+                        }
+                    } only %}
+
+                </a>
+            </div>
+        </li>
+
+        <li class="navigation-top-mobile__item col">
+            <div class="grid grid--middle grid--center">
+                <a href="{{ url('cart') }}" class="cart-link">
+                    {% if cartQuantity > 0 %}
+                        <span class="cart-link__quantity">
+                        {{cartQuantity}}
+                    </span>
+                    {% else %}
+                    {% endif %}
+
+                    {% include atom('icon') with {
+                        class: 'icon--bigger',
+                        data: {
+                            name: 'cart'
+                        }
+                    } only %}
+
+                </a>
+            </div>
+        </li>
+
+    </ul>
+{% endblock %}

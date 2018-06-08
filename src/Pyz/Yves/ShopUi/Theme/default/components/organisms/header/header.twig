@@ -15,32 +15,24 @@
 
         <div class="{{config.name}}__row {{config.name}}__navigation-top grid grid--middle grid--justify">
 
-            <div class="col col--sm-12 col--lg-4 col--spaced-md is-hidden-sm-md">
+            <div class="col col--sm-12 col--lg-4 is-hidden-sm-md">
                 {% if data.showSearchForm %}
                     {% include molecule('search-form') with {
-                        class: config.name ~ '__search-form is-hidden-sm-md'
+                        class: config.name ~ '__search-form'
                     } only %}
                 {% endif %}
 
-                {#<div class="is-hidden-lg-xl text-right">#}
-                    {#{% block mobile %}{% endblock %}#}
-                {#</div>#}
             </div>
 
-            <div class="col col--sm-12 col--lg-4 col--spaced-md">
+            <div class="col col--sm-12 col--lg-4">
                 {% include molecule('logo') with {
                     class: 'grid grid--center'
                 } only %}
             </div>
 
-            <div class="col col--sm-12 col--lg-4 col--spaced-md">
+            <div class="col col--lg-4 is-hidden-sm-md">
 
-                <div class="grid grid--middle grid--justify">
-                    {% if data.showSearchForm %}
-                        {% include molecule('search-form') with {
-                            class: config.name ~ '__row' ~ config.name ~ '__search-form is-hidden-lg-xl col'
-                        } only %}
-                    {% endif %}
+                <div class="grid grid--middle grid--right">
 
                     {% include organism('navigation-top') with {
                         class: 'col'
@@ -51,9 +43,33 @@
 
         </div>
 
+        <div class="is-hidden-lg-xl">
+            <div class="{{config.name}}__row {{config.name}}__navigation-top">
+
+                {% include molecule('navigation-top-mobile') only %}
+
+            </div>
+        </div>
+
         {% if data.showNavigation %}
             <div class="{{config.name}}__row {{config.name}}__navigation-main">
                 {{ widgetGlobal('NavigationWidgetPlugin', 'MAIN_NAVIGATION', view('navigation-main', 'ShopLayout')) }}
+                <div class="nav-arrow nav-arrow--left">
+                    {% include atom('icon') with {
+                        class: 'icon--smaller',
+                        data: {
+                            name: 'arrow-left'
+                        }
+                    } only %}
+                </div>
+                <div class="nav-arrow nav-arrow--right">
+                    {% include atom('icon') with {
+                        class: 'icon--smaller',
+                        data: {
+                            name: 'arrow-right'
+                        }
+                    } only %}
+                </div>
             </div>
         {% endif %}
 
