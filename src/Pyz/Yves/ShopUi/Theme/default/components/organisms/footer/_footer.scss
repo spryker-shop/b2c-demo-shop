@@ -2,7 +2,10 @@
 @mixin shop-ui-footer($name: '.footer') {
     #{$name} {
         border-top: 1px solid $setting-color-lightest;
-        padding: 92px 0 86px;
+        padding: 50px 0 50px;
+        @include helper-breakpoint-media-min($xl-min) {
+            padding: 92px 0 86px;
+        }
 
         &__title {
             font: bold 13px $setting-font-family-additional;
@@ -10,12 +13,36 @@
             letter-spacing: 2.6px;
             color: $setting-color-text;
             margin-bottom: 16px;
+            white-space: nowrap;
         }
 
         .footer-top {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
             border-bottom: dotted 1px $setting-color-lightest;
-            padding: 0 0 86px;
-            margin: 0 1rem 17px;
+            padding: 0 0 30px;
+            margin: 0 1rem 16px;
+            &__col {
+            }
+            @include helper-breakpoint-media-min($xl-min) {
+                padding: 0 0 86px;
+                &__col {
+                    padding-right: 10%;
+                }
+            }
+        }
+
+        .subscription-wrapper {
+            width: 100%;
+            padding-bottom: 50px;
+            @include helper-breakpoint-media-between($md-min, $lg-max) {
+                margin-bottom: 30px;
+                border-bottom: dotted 1px $setting-color-lightest;
+            }
+            @include helper-breakpoint-media-min($xl-min) {
+                width: auto;
+            }
         }
 
         .footer-logo-copy {
@@ -85,6 +112,7 @@
             display: flex;
             .select {
                 margin-left: 10px;
+                font-size: 16px;
             }
             .select__caret {
                 pointer-events: none;

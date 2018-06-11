@@ -11,13 +11,13 @@
 
 {% block body %}
     <div class="container">
-        <div class="grid footer-top">
-            <div class="col col--sm-12 col--md-4 col--lg-3">
+        <div class="footer-top">
+            <div class="footer-top__col subscription-wrapper">
                 <h5 class="footer__title">{{ 'global.newsletter' | trans }}</h5>
                 {{ render(path('newsletter/subscribe')) }}
             </div>
 
-            <div class="col col--sm-12 col--md-4 col--lg-3">
+            <div class="footer-top__col">
                 <h5 class="footer__title">{{ 'global.categories' | trans }}</h5>
                 {% if data.showNavigation %}
                     <div class="{{config.name}}__row {{config.name}}__navigation-main">
@@ -26,12 +26,12 @@
                 {% endif %}
             </div>
 
-            <div class="col col--sm-12 col--md-4 col--lg-3">
+            <div class="footer-top__col">
                 <h5 class="footer__title">{{ 'global.company' | trans }}</h5>
                 {{ widgetGlobal('NavigationWidgetPlugin', 'FOOTER_NAVIGATION', view('navigation-footer', 'ShopLayout')) }}
             </div>
 
-            <div class="col col--sm-12 col--md-4 col--lg-3">
+            <div class="footer-top__col">
                 <h5 class="footer__title">{{ 'global.social' | trans }}</h5>
                 {{ widgetGlobal('NavigationWidgetPlugin', 'SOCIAL_LINKS', view('navigation-footer', 'ShopLayout')) }}
             </div>
@@ -64,6 +64,14 @@
             </div>
 
         </div>
+
+        {% include molecule('toggler-accordeon') with {
+            modifiers: ['expand'],
+            class: 'box is-hidden-lg-xl',
+            data: {
+                label: 'Show/Hide filters'
+            }
+        } only %}
 
     </div>
 {% endblock %}
