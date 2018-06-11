@@ -1,0 +1,27 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'select',
+    tag: 'label',
+    renderAttributes: false
+} %}
+
+{% define data = {
+    options: []
+} %}
+
+{% block body %}
+    <select class="{{config.name}}__select {% block selectClass %}{% endblock %}" {{block('attributes')}}>
+        {% block options %}
+            {% for option in data.options %}
+                <option value="{{option.value}}">{{option.label}}</option>
+            {% endfor %}
+        {% endblock %}
+    </select>
+    {% include atom('icon') with {
+        class: config.name ~ '__caret',
+        data: {
+            name: 'arrow-down'
+        }
+    } only %}
+{% endblock %}

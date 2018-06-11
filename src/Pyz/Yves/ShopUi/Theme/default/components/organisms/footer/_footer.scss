@@ -12,10 +12,10 @@
             margin-bottom: 16px;
         }
 
-        .footer-top{
+        .footer-top {
             border-bottom: dotted 1px $setting-color-lightest;
-            padding-bottom: 86px;
-            margin-bottom: 17px;
+            padding: 0 0 86px;
+            margin: 0 1rem 17px;
         }
 
         .footer-logo-copy {
@@ -30,6 +30,14 @@
             margin-right: 12px;
             svg {
                 width: 102px;
+            }
+        }
+
+        .footer-bottom {
+            margin: 0 1rem;
+            justify-content: space-between;
+            &:after {
+                display: none;
             }
         }
 
@@ -74,6 +82,13 @@
         }
 
         .footer-currency-lang {
+            display: flex;
+            .select {
+                margin-left: 10px;
+            }
+            .select__caret {
+                pointer-events: none;
+            }
 
         }
 

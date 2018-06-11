@@ -38,7 +38,7 @@
 
         </div>
 
-        <div class="grid grid--justify">
+        <div class="grid footer-bottom">
 
             <div class="col footer-logo-copy">
                 {% include molecule('logo') with {
@@ -59,8 +59,8 @@
             </div>
 
             <div class="col footer-currency-lang">
-                <div>{{ widgetGlobal('CurrencyWidgetPlugin') }}</div>
-                <div>{{ widgetGlobal('LanguageSwitcherWidgetPlugin', app.request) }}</div>
+                <div class="col">{{ widgetGlobal('LanguageSwitcherWidgetPlugin', app.request) }}</div>
+                <div class="col">{{ widgetGlobal('CurrencyWidgetPlugin') }}</div>
             </div>
 
         </div>
