@@ -89,6 +89,7 @@ module.exports = {
                 `**/Theme/${theme}/views/*/*.scss`,
                 `!**/Theme/${theme}/**/style.scss`,
 
+
                 // `**/Theme/${theme}/index.scss`,
 
                 '!config',

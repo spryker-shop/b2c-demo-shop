@@ -9,7 +9,7 @@
     cartQuantity: app['cart.quantity'],
     showUserMenu: not (hideUserMenu | default(false)),
     isUserAuthenticated: is_granted('IS_AUTHENTICATED_FULLY'),
-    isInline: true,
+    isInline: false,
     withSeparators: false
 } %}
 
@@ -17,17 +17,7 @@
 {% set menuClass = data.isInline ? 'menu--inline' : '' %}
 
 {% block body %}
-    <ul class="menu {{menuClass}}">
-        {#<li class="menu__item">{{ widgetGlobal('PriceModeSwitcherWidgetPlugin') }}</li>#}
-        {% if data.withSeparators %}<li class="menu__separator"></li>{% endif %}
-        {#<li class="menu__item">{{ widgetGlobal('CurrencyWidgetPlugin') }}</li>#}
-        {% if data.withSeparators %}<li class="menu__separator"></li>{% endif %}
-        {#<li class="menu__item">{{ widgetGlobal('LanguageSwitcherWidgetPlugin', app.request) }}</li>#}
-        {% if data.withSeparators %}<li class="menu__separator"></li>{% endif %}
-
-        {% if data.withSeparators %}<li class="menu__separator"></li>{% endif %}
-        {#<li class="menu__item"><a href="{{ url('quick-order') }}">{{ 'quick-order.page-title'|trans }}</a></li>#}
-        {% if data.withSeparators %}<li class="menu__separator"></li>{% endif %}
+    <ul class="menu {{menuClass}} grid grid--middle">
 
         {% if data.showUserMenu %}
             {% if data.isUserAuthenticated %}
@@ -38,7 +28,6 @@
                                 name: 'wishlist'
                             }
                         } only %}
-                        {#{{ 'wishlist.wishlist'|trans }}#}
                     </a></li>
                 <li class="menu__item"><a href="{{ url('customer/overview') }}" class="grid grid--middle">
 
@@ -49,10 +38,18 @@
                             }
                         } only %}
 
-                        {#{{ 'customer.profile'|trans }}#}
                     </a></li>
-                {#<li class="menu__item"><a href="{{ url('logout') }}">{{ 'customer.logout'|trans }}</a></li>#}
             {% else %}
+
+                <li class="menu__item"><a href="{{ url('login') }}" class="grid grid--middle">
+                        {% include atom('icon') with {
+                            class: 'icon--big',
+                            data: {
+                                name: 'wishlist'
+                            }
+                        } only %}
+                    </a></li>
+
                 <li class="menu__item"><a href="{{ url('login') }}" class="grid grid--middle">
 
                         {% include atom('icon') with {
@@ -62,20 +59,17 @@
                             }
                         } only %}
 
-                        {#{{ 'customer.login'|trans }}#}
                     </a></li>
             {% endif %}
         {% endif %}
 
         <li class="menu__item">
-            {#{% if widgetGlobalExists('MiniCartWidgetPlugin') %}#}
-            {#{{ widgetGlobal('MiniCartWidgetPlugin', cartQuantity) }}#}
-            {#{% else %}#}
+
             <a href="{{ url('cart') }}" class="grid grid--middle cart-link">
                 {% if cartQuantity > 0 %}
-                <span class="cart-link__quantity">
-                    {{cartQuantity}}
-                </span>
+                    <span class="cart-link__quantity">
+                        {{cartQuantity}}
+                    </span>
                 {% else %}
                 {% endif %}
 
@@ -86,9 +80,7 @@
                     }
                 } only %}
 
-                {#{{ 'global.cart' | trans }}#}
             </a>
-            {#{% endif %}#}
         </li>
 
     </ul>
