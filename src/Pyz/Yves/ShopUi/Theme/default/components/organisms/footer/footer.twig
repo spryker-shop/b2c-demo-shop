@@ -38,38 +38,32 @@
 
         </div>
 
-        <div class="grid">
+        <div class="grid grid--justify">
 
-            <div class="col">
+            <div class="col footer-logo-copy">
                 {% include molecule('logo') with {
-                    class: 'grid grid--center'
+                    class: 'footer-logo'
                 } only %}
+                {% block copyright %}
+                    <div class="copyright">
+                        &copy; ACME Company
+                    </div>
+                {% endblock %}
             </div>
 
-            <div class="col">
-                <h5>{{ 'global.payment_providers' | trans }}</h5>
+            <div class="col footer-icons">
+                {#<h5>{{ 'global.payment_providers' | trans }}</h5>#}
                 {{ widgetGlobal('NavigationWidgetPlugin', 'PAYMENT_PROVIDERS', view('navigation-providers-payment', 'ShopLayout')) }}
-            </div>
-
-            <div class="col">
-                <h5>{{ 'global.shipment_providers' | trans }}</h5>
+                {#<h5>{{ 'global.shipment_providers' | trans }}</h5>#}
                 {{ widgetGlobal('NavigationWidgetPlugin', 'SHIPMENT_PROVIDERS', view('navigation-providers-shipment', 'ShopLayout')) }}
             </div>
 
-
-            <ul class="col col--sm-12 col--md-6 col--lg-3">
-                <li><h5>{{ 'global.get_in_touch' | trans }}</h5></li>
-                <li>+49 (0)30 2084983 50</li>
-                <li><a href="mailto:info@spryker.com">info@spryker.com</a></li>
-            </ul>
+            <div class="col footer-currency-lang">
+                <div>{{ widgetGlobal('CurrencyWidgetPlugin') }}</div>
+                <div>{{ widgetGlobal('LanguageSwitcherWidgetPlugin', app.request) }}</div>
+            </div>
 
         </div>
-
-        {% block copyright %}
-            <p class="text-center text-small text-secondary">
-                <br>&copy; ACME Company
-            </p>
-        {% endblock %}
 
     </div>
 {% endblock %}
