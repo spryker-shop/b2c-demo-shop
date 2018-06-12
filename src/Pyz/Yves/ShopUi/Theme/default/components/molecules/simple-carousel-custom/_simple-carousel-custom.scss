@@ -6,17 +6,22 @@
                 padding-right: 0;
             }
             &__dots {
-                padding: 25px 0;
+                height: 60px;
             }
             &__dot {
-                padding: .3rem;
+                padding: .3rem .5rem;
                 &::before {
                     width: 6px;
                     height: 6px;
-                    background: $setting-color-lighter;
+                    background: $setting-color-lightest;
                 }
                 &--current {
-
+                    &::before {
+                        width: 12px;
+                        height: 12px;
+                        background: transparent;
+                        border: 1px solid map-get($setting-color-actions, alert);
+                    }
                 }
             }
         }
@@ -24,3 +29,4 @@
 }
 
 @include shop-ui-simple-carousel-custom();
+
