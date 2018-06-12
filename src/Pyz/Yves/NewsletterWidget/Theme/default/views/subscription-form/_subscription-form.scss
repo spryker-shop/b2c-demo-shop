@@ -4,13 +4,21 @@
         padding-top: 11px;
 
         &__grid {
-            max-width: 200px;
+            width: 100%;
+            max-width: 400px;
+            flex-wrap: nowrap;
+            @include helper-breakpoint-media-min($xl-min) {
+                wmax-width: 200px;
+            }
         }
         &__grid [type='email'] {
+            width: 100%;
             height: 48px;
             border-radius: 2px 0 0 2px;
             border: solid 1px $setting-color-lightest;
             border-right: 0;
+            font-size: 16px;
+            color: $setting-color-lighter;
         }
         &__button {
             width: 30px;

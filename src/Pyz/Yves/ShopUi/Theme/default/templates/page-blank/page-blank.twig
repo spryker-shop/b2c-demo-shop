@@ -1,0 +1,46 @@
+{% extends model('template') %}
+
+{% define data = {
+    locale: app.locale | slice(0, 2),
+    title: 'global.spryker.shop' | trans,
+    metaTitle: 'global.spryker.shop' | trans,
+    metaDescription: '',
+    metaKeywords: ''
+} %}
+
+{% block template %}
+    <!doctype html>
+    <html lang="{{ data.locale }}">
+        <head>
+            {% block meta %}
+                <meta charset="utf-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+                <meta name="title" content="{% block metaTitle %}{{ data.metaTitle }}{% endblock %}" />
+                <meta name="description" content="{% block metaDescription %}{{ data.metaDescription }}{% endblock %}" />
+                <meta name="keywords" content="{% block metaKeywords %}{{ data.metaKeywords }}{% endblock %}" />
+                <meta name="generator" content="spryker" />
+            {% endblock %}
+
+            {% block headStyles %}
+                <link rel="stylesheet" href="{{publicPath('css/yves_default.app.css')}}" />
+            {% endblock %}
+
+            {% block headScripts %}
+                <script src="{{publicPath('js/yves_default.runtime.js')}}"></script>
+            {% endblock %}
+
+            <title>{% block headTitle %}{{ data.title }}{% endblock %}</title>
+        </head>
+        <body {%- if block('class') is not empty %} class="{%- block class -%}{%- endblock -%}"{%- endif %}
+            {%- block attributes -%}{{qa('page')}}{%- endblock -%}>
+
+            {{parent()}}
+
+            {% block footerScripts %}
+                <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+                <script src="{{publicPath('js/yves_default.vendor.js')}}"></script>
+                <script src="{{publicPath('js/yves_default.app.js')}}"></script>
+            {% endblock %}
+        </body>
+    </html>
+{% endblock %}

@@ -2,33 +2,120 @@
 @mixin shop-ui-footer($name: '.footer') {
     #{$name} {
         border-top: 1px solid $setting-color-lightest;
-        padding: 92px 0 86px;
+        padding: 30px 0 50px;
+        @include helper-breakpoint-media-min($xl-min) {
+            padding: 92px 0 86px;
+        }
 
         &__title {
             font: bold 13px $setting-font-family-additional;
             text-transform: uppercase;
             letter-spacing: 2.6px;
             color: $setting-color-text;
-            margin-bottom: 16px;
+            white-space: nowrap;
+            padding: 0 0 16px;
+            cursor: default;
+            @include helper-breakpoint-media-max($md-max) {
+                padding: 16px 0;
+                cursor: pointer;
+            }
+        }
+
+        .footer-title-nav {
+            @include helper-breakpoint-media-max($md-max) {
+                position: relative;
+                &:before {
+                    content: "";
+                    width: 12px;
+                    height: 2px;
+                    background: $setting-color-dark;
+                    position: absolute;
+                    top: 50%;
+                    right: 0;
+                    margin-top: -1px;
+                }
+                &.active:after {
+                    content: "";
+                    width: 2px;
+                    height: 12px;
+                    background: $setting-color-dark;
+                    position: absolute;
+                    top: 50%;
+                    right: 5px;
+                    margin-top: -6px;
+                }
+            }
         }
 
         .footer-top {
-            border-bottom: dotted 1px $setting-color-lightest;
-            padding: 0 0 86px;
-            margin: 0 1rem 17px;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin: 0 1rem 16px;
+            &__col {
+                width: 100%;
+                margin-top: -1px;
+                border-top: solid 1px $setting-color-lightest;
+                border-bottom: solid 1px $setting-color-lightest;
+            }
+            .navigation-footer {
+                padding-bottom: 10px;
+            }
+            @include helper-breakpoint-media-min($md-min) {
+                border-bottom: dotted 1px $setting-color-lightest;
+                padding: 0 0 30px;
+                &__col {
+                    width: auto;
+                    border: none;
+                }
+                .navigation-footer {
+                    padding-bottom: 0;
+                }
+            }
+            @include helper-breakpoint-media-min($xl-min) {
+                padding: 0 0 86px;
+                &__col {
+                    padding-right: 10%;
+                }
+            }
+        }
+
+        .hidden-nav {
+            @include helper-breakpoint-media-max($sm-max) {
+                display: none;
+            }
+        }
+
+        .subscription-wrapper {
+            width: 100%;
+            padding-bottom: 50px;
+            @include helper-breakpoint-media-between($md-min, $lg-max) {
+                margin-bottom: 30px;
+                border-bottom: dotted 1px $setting-color-lightest;
+            }
+            @include helper-breakpoint-media-min($xl-min) {
+                width: auto;
+            }
         }
 
         .footer-logo-copy {
-            display: flex;
-            align-items: center;
+            order: 1;
+            @include helper-breakpoint-media-min($lg-min) {
+                display: flex;
+                align-items: center;
+            }
         }
 
         .footer-logo {
             padding: 0;
-            width: 102px;
+            width: 90px;
             display: block;
             margin-right: 12px;
+            border: none;
             svg {
+                width: 102px;
+            }
+            @include helper-breakpoint-media-min($md-min) {
                 width: 102px;
             }
         }
@@ -43,16 +130,35 @@
 
         .copyright {
             opacity: 0.4;
-            font-size: 14px;
+            font-size: 12px;
             line-height: normal;
             letter-spacing: normal;
             padding: 2px 0 0 1px;
+            @include helper-breakpoint-media-min($md-min) {
+                font-size: 14px;
+            }
         }
 
         .footer-icons {
             display: flex;
+            justify-content: center;
+            padding: 5px 0 20px;
+            margin: 0 0 15px;
+            border-bottom: dotted 1px $setting-color-lightest;
+            width: 100%;
+            order: 0;
             .menu__item {
-                margin: 0 5px !important;
+                margin: 0 4px !important;
+                @include helper-breakpoint-media-min($md-min) {
+                    margin: 0 5px !important;
+                }
+            }
+            @include helper-breakpoint-media-min($lg-min) {
+                width: auto;
+                border-bottom: 0;
+                order: 1;
+                padding: 5px 0 0;
+                margin-bottom: 0;
             }
         }
 
@@ -83,8 +189,10 @@
 
         .footer-currency-lang {
             display: flex;
+            order: 1;
             .select {
                 margin-left: 10px;
+                font-size: 16px;
             }
             .select__caret {
                 pointer-events: none;
