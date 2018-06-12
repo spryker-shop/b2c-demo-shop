@@ -1,0 +1,27 @@
+@mixin shop-ui-quote-teaser($name: '.quote-teaser'){
+    #{$name} {
+
+        &__container {
+            height: 32rem;
+            background-size: cover;
+        }
+        &__text {
+            font-size: 16px;
+            letter-spacing: 3px;
+            line-height: 1.8;
+            text-transform: uppercase;
+            color: $setting-color-white;
+            text-align: center;
+        }
+        &__auth {
+            padding: 20px 0;
+            font-size: 12px;
+            color: $setting-color-white;
+            opacity: .4;
+            text-align: center;
+            letter-spacing: 1.7px;
+        }
+    }
+}
+
+@include shop-ui-quote-teaser();
