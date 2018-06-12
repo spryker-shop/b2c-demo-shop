@@ -26,7 +26,7 @@
         } only %}
             {% block options %}
                 {% for currency in embed.currencies %}
-                    <option value="{{ currency.code }}" {{ (currency.code == embed.currentCurrency) ? 'selected' : ''}}>{{ currency.name | trans }}</option>
+                    <option value="{{ currency.code }}" {{ (currency.code == embed.currentCurrency) ? 'selected' : ''}}>{{ currency.code | trans }}</option>
                 {% endfor %}
             {% endblock %}
         {% endembed %}
