@@ -1,0 +1,86 @@
+{% extends template('page-blank') %}
+
+{%- block class -%}js-page-layout-main__side-drawer-container{%- endblock -%}
+
+{% block body %}
+    {% block notifications %}
+        {% include organism('notification-area') only %}
+    {% endblock %}
+
+    {% block sidebar %}
+        {% include organism('side-drawer') with {
+            class: 'is-hidden-lg-xl',
+            attributes: {
+                'container-selector': 'js-page-layout-main__side-drawer-container',
+                'trigger-selector': 'js-page-layout-main__side-drawer-trigger'
+            }
+        } only %}
+    {% endblock %}
+
+    {% block outside %}{% endblock %}
+
+    {% block header %}
+        {% embed organism('header') only %}
+            {% block mobile %}
+                <a href="#" class="link link--alt js-page-layout-main__side-drawer-trigger">
+                    {% include atom('icon') with {
+                        modifiers: ['big'],
+                        data: {
+                            name: 'bars'
+                        }
+                    } only %}
+                </a>
+            {% endblock %}
+        {% endembed %}
+    {% endblock %}
+
+    {#{% include molecule('jumbotron') with {#}
+        {#class: ''#}
+    {#} only %}#}
+
+    {% include molecule('simple-carousel-custom') with {
+        class: 'simple-carousel-custom',
+        data: {
+            slides: [{
+                        imageUrl: '/assets/images/section-brand-a-bg@3x.png',
+                        headline: 'The freedom of cellular',
+                        subHeadline: 'Take a call whenever you like. Explore the world of smart watches.'
+                    },
+                    {
+                        imageUrl: '/assets/images/section-brand-a-bg@3x.png',
+                        headline: 'The cellular of freedom',
+                        subHeadline: 'Explore the world of smart watches. Take a call whenever you like.'
+                    }]
+        }
+    } %}
+
+    <div class="container">
+        {% block pageInfo %}
+            <div class="box">
+                {% block breadcrumbs %}
+                    {% include molecule('breadcrumb') only %}
+                {% endblock %}
+
+                <hr />
+
+                {% block title %}
+                    <h3>{{data.title}}</h3>
+                {% endblock %}
+            </div>
+        {% endblock %}
+
+
+
+        <main>
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+
+    {% block footer %}
+        {% include organism('footer') only %}
+    {% endblock %}
+
+    {% block icons %}
+        {% include atom('icon-sprite') only %}
+    {% endblock %}
+{% endblock %}

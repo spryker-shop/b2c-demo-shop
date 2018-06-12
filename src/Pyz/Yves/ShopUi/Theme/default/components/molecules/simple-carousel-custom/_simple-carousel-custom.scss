@@ -1,0 +1,26 @@
+@mixin shop-ui-simple-carousel-custom ($name: '.simple-carousel-custom') {
+    #{$name} {
+        .simple-carousel {
+            &__container {
+                padding-left: 0;
+                padding-right: 0;
+            }
+            &__dots {
+                padding: 25px 0;
+            }
+            &__dot {
+                padding: .3rem;
+                &::before {
+                    width: 6px;
+                    height: 6px;
+                    background: $setting-color-lighter;
+                }
+                &--current {
+
+                }
+            }
+        }
+    }
+}
+
+@include shop-ui-simple-carousel-custom();
