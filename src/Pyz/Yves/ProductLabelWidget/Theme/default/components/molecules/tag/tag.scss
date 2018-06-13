@@ -1,0 +1,46 @@
+$product-label-widget-tag-burst-size: 2rem;
+
+@mixin product-label-widget-tag($name: '.tag') {
+    #{$name} {
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: $product-label-widget-tag-burst-size;
+        height: $product-label-widget-tag-burst-size;
+        margin-bottom: $product-label-widget-tag-burst-size;
+        background: $setting-color-alt;
+
+        &::before,
+        &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: $product-label-widget-tag-burst-size;
+            width: $product-label-widget-tag-burst-size;
+            background: $setting-color-alt;
+            z-index: 1;
+        }
+
+        &::before {
+            transform: rotate(30deg);
+        }
+
+        &::after {
+            transform: rotate(60deg);
+        }
+
+        &__text {
+            @include helper-font-size(small);
+            @include helper-font-line-height(tight);
+            display: block;
+            position: relative;
+            width: 100%;
+            color: $setting-color-white;
+            text-align: center;
+            z-index: 2;
+        }
+
+        @content;
+    }
+}

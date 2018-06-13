@@ -1,0 +1,58 @@
+@mixin shop-ui-product-card($name: '.product-card') {
+    #{$name} {
+        position: relative;
+
+        &__container {
+            position: relative;
+            padding-bottom: .5rem;
+            border: 1px solid $setting-color-lightest;
+            height: 100%;
+
+        }
+        &__thumbnail {
+            border: 1px solid $setting-color-lightest;
+            border-radius: 4px;
+            margin: 15px;
+            position: relative;
+            .thumbnail {
+                margin: 0;
+            }
+        }
+
+        &__actions-container {
+            position: absolute;
+            bottom: .5rem;
+            left: .5rem;
+            right: .5rem;
+            margin: auto;
+        }
+
+        &--stretch {
+            height: 100%;
+        }
+
+        &__info {
+            margin: 0 25px;
+            padding-bottom: 25px;
+            font-family: $setting-font-family-additional;
+            font-weight: 500;
+            font-size: 16px;
+            letter-spacing: .3px;
+        }
+
+        .price {
+            position: relative;
+            font-weight: normal;
+            &__amount {
+                &--original {
+                    position: absolute;
+                    bottom: -20px;
+                    right: 0;
+                    color: $setting-color-lightest;
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+
+}

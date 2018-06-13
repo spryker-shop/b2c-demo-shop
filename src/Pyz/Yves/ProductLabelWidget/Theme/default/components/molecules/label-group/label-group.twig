@@ -1,0 +1,54 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'label-group',
+    tag: 'div'
+} %}
+
+{% define data = {
+    labels: []
+}  %}
+
+{% block body %}
+    {% set leftColumnComponents = [] %}
+    {% set rightColumnComponents = [] %}
+
+    {% for label in data.labels %}
+        {% set componentName = 'flag' %}
+        {% set componentModifiers = [label.type] %}
+
+        {% if label.type == 'template:tag' %}
+            {% set componentName = 'tag' %}
+            {% set componentModifiers = [] %}
+        {% endif %}
+
+        {% set component = include(
+            [
+                molecule(componentName, 'ProductLabelWidget')
+            ],
+            {
+                modifiers: componentModifiers,
+                data: {
+                    text: label.text
+                }
+            },
+            with_context = false
+        ) %}
+
+        {% set component = '<div>' ~ component ~ '</div>' %}
+        {% if label.type == 'template:tag' %}
+            {% set leftColumnComponents = leftColumnComponents | merge([component]) %}
+        {% else %}
+            {% set rightColumnComponents = rightColumnComponents | merge([component]) %}
+        {% endif %}
+    {% endfor %}
+
+    <div class="grid grid--justify">
+        {% if leftColumnComponents is not empty %}
+            <div class="col col--expand">{{leftColumnComponents | join | raw}}</div>
+        {% endif %}
+        {% if rightColumnComponents is not empty %}
+            <div class="col col--expand text-right">{{rightColumnComponents | join | raw}}</div>
+        {% endif %}
+    </div>
+{% endblock %}
