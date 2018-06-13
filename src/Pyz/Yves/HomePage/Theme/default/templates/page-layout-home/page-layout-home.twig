@@ -80,22 +80,15 @@
             {% block content %}{% endblock %}
         </main>
     </div>
-    <div class="">
-        {{ spyCmsBlock({
-            name: 'Quote teaser home page'
-        }) }}
-    </div>
 
-    <div class="quote-teaser">
-        <div class="quote-teaser__container grid grid--middle grid--center grid--column" style="background-image: url('/assets/images/section-brand-a-bg@3x.png');">
-            <div>
-                <h2 class="quote-teaser__text">“Perfection is achieved, not when there is nothing more to add,<br>  but when there is nothing left to take away.”</h2>
-                <div class="quote-teaser__auth">
-                    ANTOINE DE SAINT-EXUPERY
-                </div>
-            </div>
-        </div>
-    </div>
+
+    {% include molecule('quote-teaser') with {
+        data: {
+            imageUrl: '/assets/images/section-brand-a-bg@3x.png',
+            quoteText: "Perfection is achieved, not when there is nothing more to add, but when there is nothing left to take away.",
+            quoteAuth: 'ANTOINE DE SAINT-EXUPERY'
+        }
+    } only %}
 
     {% block footer %}
         {% include organism('footer') only %}
