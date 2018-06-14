@@ -42,7 +42,9 @@
                     <div class="{{config.selector}}__slide col" style="width:{{slideWidth}}%;min-width:{{slideWidth}}%;">
                         {% include molecule('jumbotron') with {
                             data: {
-                                imageUrl: slide.imageUrl
+                                imageUrl: slide.imageUrl,
+                                headline: slide.headline,
+                                subHeadline: slide.subHeadline
                             }
                         } only %}
                     </div>
