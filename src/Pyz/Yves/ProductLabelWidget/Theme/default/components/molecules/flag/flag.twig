@@ -11,13 +11,13 @@
 
 {% block body %}
     <span class="{{config.name}}__text">
-        {% include atom('icon') with {
-            modifiers: ['small'],
-            class: config.name ~ '__icon',
-            data: {
-                name: 'bookmark'
-            }
-        } only %}
+        {#{% include atom('icon') with {#}
+            {#modifiers: ['small'],#}
+            {#class: config.name ~ '__icon',#}
+            {#data: {#}
+                {#name: 'bookmark'#}
+            {#}#}
+        {#} only %}#}
         {{data.text}}
     </span>
 {% endblock %}

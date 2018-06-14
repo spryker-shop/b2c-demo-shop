@@ -35,7 +35,7 @@
             with_context = false
         ) %}
 
-        {% set component = '<div>' ~ component ~ '</div>' %}
+        {% set component = '<div class="grid grid--right">' ~ component ~ '</div>' %}
         {% if label.type == 'template:tag' %}
             {% set leftColumnComponents = leftColumnComponents | merge([component]) %}
         {% else %}
