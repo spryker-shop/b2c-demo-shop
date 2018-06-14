@@ -43,18 +43,28 @@
         data: {
             slides: [{
                     imageUrl: '/assets/images/section-slider-item-10@2x.png',
+                    headline: null,
+                    subHeadline: null
                     },
                 {
                     imageUrl: '/assets/images/section-slider-item-4@2x.png',
+                    headline: null,
+                    subHeadline: null
                     },
                 {
                     imageUrl: '/assets/images/section-slider-item-6@2x.png',
+                    headline: null,
+                    subHeadline: null
                     },
                 {
                     imageUrl: '/assets/images/section-slider-item-7@2x.png',
+                    headline: null,
+                    subHeadline: null
                     },
                 {
                     imageUrl: '/assets/images/section-slider-item-1@2x.png',
+                    headline: null,
+                    subHeadline: null
                 }]
         }
     } %}
@@ -73,13 +83,22 @@
                 {% endblock %}
             </div>
         {% endblock %}
-
+    </div>
 
 
         <main>
             {% block content %}{% endblock %}
         </main>
-    </div>
+
+
+
+    {% include molecule('quote-teaser') with {
+        data: {
+            imageUrl: '/assets/images/section-brand-a-bg@3x.png',
+            quoteText: "Perfection is achieved, not when there is nothing more to add, but when there is nothing left to take away.",
+            quoteAuth: 'ANTOINE DE SAINT-EXUPERY'
+        }
+    } only %}
 
     {% block footer %}
         {% include organism('footer') only %}
