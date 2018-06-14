@@ -5,7 +5,6 @@
         &__container {
             position: relative;
             padding-bottom: .5rem;
-            border: 1px solid $setting-color-lightest;
             height: 100%;
 
         }
@@ -14,6 +13,22 @@
             border-radius: 4px;
             margin: 15px;
             position: relative;
+            &:hover {
+                box-shadow: 10px 10px 40px 0px rgba(0,0,0,.1);
+                &:after {
+                    content:'';
+                    position: absolute;
+                    top:0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    border-radius: 4px;
+                    display: block;
+                    background-image: linear-gradient(to bottom, #000000, rgba(0, 0, 0, 0));
+                    opacity: 0.09;
+                    z-index: $setting-zi-element-floating;
+                }
+            }
             .thumbnail {
                 margin: 0;
             }
