@@ -1,0 +1,24 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'quote-teaser',
+    tag: 'section'
+} %}
+
+{% define data = {
+    imageUrl: null,
+    quoteText: null,
+    quoteAuth: null
+} %}
+
+{% set backgroundImage = data.imageUrl is empty ?: 'background-image: url(' ~ data.imageUrl ~ '); ' %}
+
+
+{% block body %}
+    <div class="quote-teaser__container grid grid--middle grid--center grid--column" style="{{ backgroundImage }}">
+        <div class="quote-teaser__content">
+            <h2 class="quote-teaser__text">{{ data.quoteText }}</h2>
+            <div class="quote-teaser__auth">{{ data.quoteAuth }}</div>
+        </div>
+    </div>
+{% endblock %}
