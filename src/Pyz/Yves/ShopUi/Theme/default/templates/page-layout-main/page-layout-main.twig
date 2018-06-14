@@ -34,25 +34,27 @@
         {% endembed %}
     {% endblock %}
 
-    <div class="container">
-        {% block pageInfo %}
-            <div class="box">
-                {% block breadcrumbs %}
-                    {% include molecule('breadcrumb') only %}
-                {% endblock %}
+    {% block container %}
+        <div class="container">
+            {% block pageInfo %}
+                <div class="box">
+                    {% block breadcrumbs %}
+                        {% include molecule('breadcrumb') only %}
+                    {% endblock %}
 
-                <hr />
+                    <hr />
 
-                {% block title %}
-                    <h3>{{data.title}}</h3>
-                {% endblock %}
-            </div>
-        {% endblock %}
+                    {% block title %}
+                        <h3>{{data.title}}</h3>
+                    {% endblock %}
+                </div>
+            {% endblock %}
 
-        <main>
-            {% block content %}{% endblock %}
-        </main>
-    </div>
+            <main>
+                {% block content %}{% endblock %}
+            </main>
+        </div>
+    {% endblock %}
 
     {% block footer %}
         {% include organism('footer') only %}
