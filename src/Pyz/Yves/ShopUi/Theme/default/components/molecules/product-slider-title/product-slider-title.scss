@@ -1,0 +1,39 @@
+@mixin shop-ui-product-slider-title ($name: '.cms-product-slider-title') {
+    #{$name} {
+        &__text {
+            font: normal 34px $setting-font-family;
+            letter-spacing: -0.9px;
+        }
+        &__line {
+            height: 1px;
+            background-color: $setting-color-lightest;
+        }
+        &__link {
+            font: normal 11px $setting-font-family;
+            letter-spacing: 2.7px;
+            text-transform: uppercase;
+            font-weight: bold;
+            position: relative;
+            line-height: 31px;
+            &:hover {
+                text-decoration: none;
+                color: $setting-color-text;
+                font: normal 11px $setting-font-family;
+                letter-spacing: 2.7px;
+                text-transform: uppercase;
+                font-weight: bold;
+                line-height: 31px;
+            }
+            &::after {
+                content: '';
+                display: block;
+                position: absolute;
+                height: 1px;
+                width: 100%;
+                background: $setting-color-text;
+                bottom: 0;
+            }
+        }
+    }
+}
+@include shop-ui-product-slider-title();
