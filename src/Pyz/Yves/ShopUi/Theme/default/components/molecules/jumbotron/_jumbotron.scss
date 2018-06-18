@@ -8,6 +8,7 @@
             background-size: cover;
             background-repeat: no-repeat;
             text-align: center;
+            position: relative;
 
             @include helper-breakpoint(md) {
                 height: 26rem;
@@ -16,6 +17,14 @@
             @include helper-breakpoint(xl) {
                 height: 38rem;
             }
+        }
+        &__link {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            top: 0;
+            z-index: 100;
         }
 
         &__headline,
