@@ -1,0 +1,32 @@
+@mixin product-label-widget-flag($name: '.flag') {
+    #{$name} {
+        @include helper-font-size(default);
+        line-height: normal;
+        display: inline-block;
+        padding: .5rem;
+        margin-bottom: .5rem;
+        background: rgba($setting-color-light, 0.5);
+        color: $setting-color-text;
+
+        &__icon {
+            color: $setting-color-main;
+        }
+
+        &--highlight {
+            color: $setting-color-main;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 63px;
+            height: 28px;
+            background: $setting-color-white;
+            border-radius: 2px;
+            border: solid 1px $setting-color-main;
+            margin: 0;
+            padding: 0;
+            line-height: normal;
+        }
+
+        @content;
+    }
+}

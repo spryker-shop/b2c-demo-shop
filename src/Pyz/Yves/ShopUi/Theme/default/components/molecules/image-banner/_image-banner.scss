@@ -1,0 +1,41 @@
+@mixin shop-ui-image-banner($name: '.image-banner') {
+    #{$name}{
+        height: 750px;
+        margin: 180px 0;
+        &__text {
+            width: 570px;
+            position: relative;
+
+        }
+        &__image {
+            position: absolute;
+            right: -50%;
+            top:0;
+            img {
+                max-width: 320px;
+                max-height: 750px;
+            }
+        }
+        &__title {
+            h1 {
+                font: normal 53px $setting-font-family-additional;
+                line-height: 1.06;
+                letter-spacing: -1.5px;
+                color: $setting-color-white;
+            }
+        }
+        &__description {
+            p {
+                padding: 20px 0;
+                font: normal 16px $setting-font-family;
+                line-height: 1.69;
+                opacity: 0.64;
+                letter-spacing: 0.2px;
+                color: $setting-color-white * .6;
+                max-width: 420px;
+            }
+        }
+    }
+}
+
+@include shop-ui-image-banner();

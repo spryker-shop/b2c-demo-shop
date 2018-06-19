@@ -1,0 +1,87 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'navigation-top',
+    tag: 'nav'
+} %}
+
+{% define data = {
+    cartQuantity: app['cart.quantity'],
+    showUserMenu: not (hideUserMenu | default(false)),
+    isUserAuthenticated: is_granted('IS_AUTHENTICATED_FULLY'),
+    isInline: false,
+    withSeparators: false
+} %}
+
+{% set cartQuantity = data.cartQuantity > 0 ? data.cartQuantity ~ ' ' : '' %}
+{% set menuClass = data.isInline ? 'menu--inline' : '' %}
+
+{% block body %}
+    <ul class="menu {{menuClass}} grid grid--middle">
+
+        {% if data.showUserMenu %}
+            {% if data.isUserAuthenticated %}
+                <li class="menu__item"><a href="{{ url('wishlist/overview') }}" class="grid grid--middle">
+                        {% include atom('icon') with {
+                            class: 'icon--big',
+                            data: {
+                                name: 'wishlist'
+                            }
+                        } only %}
+                    </a></li>
+                <li class="menu__item"><a href="{{ url('customer/overview') }}" class="grid grid--middle">
+
+                        {% include atom('icon') with {
+                            class: 'icon--big',
+                            data: {
+                                name: 'user-account'
+                            }
+                        } only %}
+
+                    </a></li>
+            {% else %}
+
+                <li class="menu__item"><a href="{{ url('login') }}" class="grid grid--middle">
+                        {% include atom('icon') with {
+                            class: 'icon--big',
+                            data: {
+                                name: 'wishlist'
+                            }
+                        } only %}
+                    </a></li>
+
+                <li class="menu__item"><a href="{{ url('login') }}" class="grid grid--middle">
+
+                        {% include atom('icon') with {
+                            class: 'icon--big',
+                            data: {
+                                name: 'user-account'
+                            }
+                        } only %}
+
+                    </a></li>
+            {% endif %}
+        {% endif %}
+
+        <li class="menu__item">
+
+            <a href="{{ url('cart') }}" class="grid grid--middle cart-link">
+                {% if cartQuantity > 0 %}
+                    <span class="cart-link__quantity">
+                        {{cartQuantity}}
+                    </span>
+                {% else %}
+                {% endif %}
+
+                {% include atom('icon') with {
+                    class: 'icon--big',
+                    data: {
+                        name: 'cart'
+                    }
+                } only %}
+
+            </a>
+        </li>
+
+    </ul>
+{% endblock %}

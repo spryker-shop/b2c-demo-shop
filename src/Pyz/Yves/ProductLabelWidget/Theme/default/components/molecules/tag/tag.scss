@@ -1,0 +1,28 @@
+$product-label-widget-tag-burst-size: 2rem;
+
+@mixin product-label-widget-tag($name: '.tag') {
+    #{$name} {
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: 46px;
+        height: 28px;
+        background: $setting-color-white;
+        border-radius: 2px;
+        box-shadow: 1px 1px 0 0 rgba(0, 0, 0, 0.08);
+
+
+        &__text {
+            @include helper-font-size(default);
+            line-height: normal;
+            display: block;
+            position: relative;
+            width: 100%;
+            text-align: center;
+            z-index: 2;
+            text-transform: uppercase;
+        }
+
+        @content;
+    }
+}

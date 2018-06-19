@@ -1,0 +1,18 @@
+{% block content %}
+    <!-- CMS_BLOCK_PLACEHOLDER : "title" -->
+    <!-- CMS_BLOCK_PLACEHOLDER : "description" -->
+    {#<div style="background-image: url('/assets/images/section-slider-item-10@2x.png')"></div>#}
+    <div class="grid grid--center grid--middle image-banner" style="background-image: url('/assets/images/section-brand-a-bg@3x.png'); background-size: cover;">
+        <div class="image-banner__text">
+            <div class="image-banner__title">
+                {{ spyCmsBlockPlaceholder('title') | raw }}
+            </div>
+
+            <div class="image-banner__description">
+                {{ spyCmsBlockPlaceholder('description') | raw }}
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

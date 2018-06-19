@@ -1,0 +1,80 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'footer',
+    tag: 'footer'
+} %}
+
+{% define data = {
+    showNavigation: true
+} %}
+
+{% block body %}
+    <div class="container">
+        <div class="footer-top">
+            <div class="subscription-wrapper">
+                <h5 class="footer__title">{{ 'global.newsletter' | trans }}</h5>
+                {{ render(path('newsletter/subscribe')) }}
+            </div>
+
+            {% if data.showNavigation %}
+                <div class="footer-top__col">
+                    <h5 class="footer__title footer-title-nav js-toggle-nav" data-toggle-target=".js-footer-nav-1">{{ 'global.categories' | trans }}</h5>
+                    <div class="{{config.name}}__row {{config.name}}__navigation-main hidden-nav js-footer-nav-1">
+                        {{ widgetGlobal('NavigationWidgetPlugin', 'FOOTER_NAVIGATION_CATEGORIES', view('navigation-footer', 'ShopLayout')) }}
+                    </div>
+                </div>
+            {% endif %}
+
+            <div class="footer-top__col">
+                <h5 class="footer__title footer-title-nav js-toggle-nav" data-toggle-target=".js-footer-nav-2">{{ 'global.company' | trans }}</h5>
+                <div class="hidden-nav js-footer-nav-2">
+                    {{ widgetGlobal('NavigationWidgetPlugin', 'FOOTER_NAVIGATION', view('navigation-footer', 'ShopLayout')) }}
+                </div>
+            </div>
+
+            <div class="footer-top__col">
+                <h5 class="footer__title footer-title-nav js-toggle-nav" data-toggle-target=".js-footer-nav-3">{{ 'global.social' | trans }}</h5>
+                <div class="hidden-nav js-footer-nav-3">
+                    {{ widgetGlobal('NavigationWidgetPlugin', 'SOCIAL_LINKS', view('navigation-footer', 'ShopLayout')) }}
+                </div>
+            </div>
+
+        </div>
+
+        <div class="grid footer-bottom">
+
+            <div class="col footer-logo-copy">
+                {% include molecule('logo') with {
+                    class: 'footer-logo'
+                } only %}
+                {% block copyright %}
+                    <div class="copyright">
+                        &copy; ACME Company
+                    </div>
+                {% endblock %}
+            </div>
+
+            <div class="col footer-icons">
+                {#<h5>{{ 'global.payment_providers' | trans }}</h5>#}
+                {{ widgetGlobal('NavigationWidgetPlugin', 'PAYMENT_PROVIDERS', view('navigation-providers-payment', 'ShopLayout')) }}
+                {#<h5>{{ 'global.shipment_providers' | trans }}</h5>#}
+                {{ widgetGlobal('NavigationWidgetPlugin', 'SHIPMENT_PROVIDERS', view('navigation-providers-shipment', 'ShopLayout')) }}
+            </div>
+
+            <div class="col footer-currency-lang">
+                <div class="col">{{ widgetGlobal('LanguageSwitcherWidgetPlugin', app.request) }}</div>
+                <div class="col">{{ widgetGlobal('CurrencyWidgetPlugin') }}</div>
+            </div>
+
+        </div>
+
+        {% include molecule('toggler-accordeon') with {
+            attributes: {
+                trigger: '.js-toggle-nav',
+                'class-to-toggle': 'hidden-nav'
+            }
+        } only %}
+
+    </div>
+{% endblock %}

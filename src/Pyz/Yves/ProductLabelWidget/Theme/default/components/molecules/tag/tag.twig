@@ -1,0 +1,14 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'tag',
+    tag: 'span'
+} %}
+
+{% define data = {
+    text: ''
+} %}
+
+{% block body %}
+    <span class="{{config.name}}__text">{{data.text}}</span>
+{% endblock %}

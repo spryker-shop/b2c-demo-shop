@@ -1,0 +1,58 @@
+@mixin shop-ui-select($name: '.select') {
+    #{$name} {
+        @include helper-effect-transition(border-color);
+        display: inline-block;
+        position: relative;
+        max-width: 100%;
+        background-color: $setting-color-white;
+        border: 1px solid $setting-color-input-border;
+
+        &__select {
+            display: block;
+            max-width: 100%;
+            background-color: $setting-color-transparent;
+            border: .25rem solid $setting-color-transparent;
+            border-right-width: 1.5rem;
+            z-index: 2;
+            appearance: none;
+            -webkit-appearance: none;
+
+            &::-ms-expand {
+                display: none;
+            }
+        }
+
+        &__caret {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: .25rem;
+            margin: auto;
+            color: $setting-color-darker;
+            z-index: 1;
+            width: 8px;
+            height: 5px;
+        }
+
+        &--expand,
+        &--expand &__select {
+            display: block;
+            width: 100%;
+        }
+
+        &--naked {
+            background-color: $setting-color-transparent;
+            border: none;
+        }
+
+        &--error {
+            border-color: map-get($setting-color-actions, alert);
+        }
+
+        &--error &__caret {
+            color: map-get($setting-color-actions, alert);
+        }
+
+        @content;
+    }
+}

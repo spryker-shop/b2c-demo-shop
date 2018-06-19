@@ -1,0 +1,24 @@
+@mixin shop-ui-card($name: '.card') {
+    #{$name} {
+        position: relative;
+
+        &__container {
+            position: relative;
+            padding-bottom: 3.5rem;
+        }
+
+        &__actions-container {
+            position: absolute;
+            bottom: .5rem;
+            left: .5rem;
+            right: .5rem;
+            margin: auto;
+        }
+
+        &--stretch {
+            height: 100%;
+        }
+
+        @content;
+    }
+}
