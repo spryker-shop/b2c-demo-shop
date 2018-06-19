@@ -1,8 +1,28 @@
+{% define data = {
+    title:  spyCmsBlockPlaceholder('title') | raw
+} %}
+
 {% block content %}
     <!-- CMS_BLOCK_PLACEHOLDER : "title" -->
     <!-- CMS_BLOCK_PLACEHOLDER : "description" -->
-    <h1>{{ spyCmsBlockPlaceholder('title') | raw }}</h1>
+    <div class="container">
+        <div class="cms-product-slider-title grid grid--middle grid--justify grid--spaced-lg">
+            <div class="col col--lg-2">
+                <h1 class="cms-product-slider-title__text">{{ data.title }}</h1>
+            </div>
+            <div class="cms-product-slider-title__line col col--middle col--lg-8"></div>
+            <div class="col col--lg-2">
+                <div class="grid grid--right">
+                    <a href="#" class="cms-product-slider-title__link">Explore More</a>
+                </div>
+            </div>
 
-    {{ spyCmsBlockPlaceholder('description') | raw }}
+        </div>
+    </div>
+
+    <div class="container">
+        {{ spyCmsBlockPlaceholder('description') | raw }}
+    </div>
+
 {% endblock %}
 
