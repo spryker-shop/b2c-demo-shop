@@ -1,0 +1,23 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'jumbotron-slider-item',
+    tag: 'section'
+} %}
+
+{% define data = {
+    imageUrl: null,
+    cmsBlockName: null
+} %}
+
+{% set backgroundImage = data.imageUrl is empty ?: 'background-image: url(' ~ data.imageUrl ~ '); ' %}
+
+
+{% block body %}
+    <div class="{{config.name}}__container grid grid--center grid--middle" style="{{backgroundImage}}">
+        <a href="" class="{{ config.name }}__link"></a>
+        <div class="col col--sm-12">
+            {{ spyCmsBlock({name: data.cmsBlockName}) }}
+        </div>
+    </div>
+{% endblock %}
