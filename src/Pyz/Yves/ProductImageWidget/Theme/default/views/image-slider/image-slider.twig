@@ -1,0 +1,30 @@
+{% extends template('widget') %}
+
+{% define data = {
+    idProductAbstract: _widget.product.idProductAbstract | default,
+    images: _widget.product.images | default([])
+} %}
+
+{% block body %}
+    {% embed molecule('simple-carousel') with {
+        data: {
+            slides: data.images
+        },
+        embed: {
+            idProductAbstract: data.idProductAbstract
+        }
+    } only %}
+        {% block slide %}
+            <div class="text-center">
+                {% include atom('thumbnail') with {
+                    class: 'js-pdp-color-group__image-' ~ embed.idProductAbstract,
+                    modifiers: ['bigger'],
+                    attributes: {
+                        itemprop: 'image',
+                        src: slide.externalUrlLarge
+                    }
+                } only %}
+            </div>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
