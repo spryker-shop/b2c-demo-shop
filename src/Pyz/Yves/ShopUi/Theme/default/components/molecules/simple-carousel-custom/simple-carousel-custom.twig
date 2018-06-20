@@ -40,12 +40,11 @@
             <div class="{{config.name}}__slider {{config.selector}}__slider grid grid--stretch">
                 {% for slide in data.slides %}
                     <div class="{{config.selector}}__slide col" style="width:{{slideWidth}}%;min-width:{{slideWidth}}%;">
-                        {% include molecule('jumbotron') with {
+                        {% include molecule('jumbotron-slider-item') with {
                             data: {
                                 imageUrl: slide.imageUrl,
                                 link: slide.link,
-                                headline: slide.headline,
-                                subHeadline: slide.subHeadline
+                                cmsBlockName: slide.cmsBlockName
                             }
                         } only %}
                     </div>
