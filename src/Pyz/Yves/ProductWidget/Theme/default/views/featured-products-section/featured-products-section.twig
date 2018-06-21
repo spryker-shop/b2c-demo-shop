@@ -1,0 +1,10 @@
+{% include molecule('product-card') with {
+    data: {
+        name: _widget.product.name,
+        abstractId: _widget.product.idProductAbstract,
+        url: _widget.product.url,
+        imageUrl: (_widget.product.images|length ? _widget.product.images.0.externalUrlSmall : ''),
+        price: _widget.product.prices.DEFAULT,
+        originalPrice: (_widget.product.prices.ORIGINAL is defined ? _widget.product.prices.ORIGINAL : null)
+    }
+} only %}
