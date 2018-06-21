@@ -1,0 +1,67 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'simple-carousel',
+    tag: 'simple-carousel'
+} %}
+
+{% define data = {
+    slides: [],
+    showDots: true
+} %}
+
+{% define attributes = {
+    'slides-to-show': 1,
+    'slides-to-scroll': 1
+} %}
+
+{% set slidesCount = data.slides | length %}
+{% set slideWidth = 100 / attributes['slides-to-show'] %}
+{% set dotsCount = (((slidesCount - attributes['slides-to-show']) / attributes['slides-to-scroll']) | round(0, 'ceil')) + 1 %}
+{% set showNavigation = data.slides | length > 1 %}
+{% set showDots = data.showDots and dotsCount > 1 %}
+
+{% block body %}
+    <div class="{{config.name}}__container">
+        {% if showNavigation %}
+            <div class="{{config.name}}__navigation {{config.name}}__navigation--prev">
+                <a href="#prev" class="{{config.name}}__arrow {{config.selector}}__prev">
+                    {#{% include atom('icon') with {#}
+                        {#modifiers: ['big'],#}
+                        {#data: {#}
+                            {#name: 'chevron-left'#}
+                        {#}#}
+                    {#} only %}#}
+                </a>
+            </div>
+        {% endif %}
+
+        <div class="{{config.name}}__view">
+            <div class="{{config.name}}__slider {{config.selector}}__slider grid grid--stretch">
+                {% for slide in data.slides %}
+                    {{ slide }}
+                {% endfor %}
+            </div>
+            {% if showDots %}
+                <div class="{{config.name}}__dots grid grid--middle grid--center">
+                    {%- for dot in 1..dotsCount -%}
+                        <a href="#" class="{{config.name}}__dot {{config.selector}}__dot{% if loop.first %} {{config.name}}__dot--current{% endif %}"></a>
+                    {%- endfor -%}
+                </div>
+            {% endif %}
+        </div>
+
+        {% if showNavigation %}
+            <div class="{{config.name}}__navigation {{config.name}}__navigation--next">
+                <a href="#next" class="{{config.name}}__arrow {{config.selector}}__next">
+                    {#{% include atom('icon') with {#}
+                        {#modifiers: ['big'],#}
+                        {#data: {#}
+                            {#name: 'chevron-right'#}
+                        {#}#}
+                    {#} only %}#}
+                </a>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
