@@ -42,42 +42,59 @@
 
 {% block container %}
 
-    {% if data.title %}
-        <div class="category-banner">
-            {% block title %}
-                <h3>{{data.title}}</h3>
-            {% endblock %}
-        </div>
-    {% endif %}
+    {#{% if source('/assets/images/category-banner-bg.jpg', ignore_missing = true) %}#}
+        {#true#}
+    {#{% else %}#}
+        {#false#}
+    {#{% endif %}#}
+
+    {% block title %}
+        {% if data.title %}
+            {% include molecule('jumbotron') with {
+                modifiers: ['category'],
+                data: {
+                    imageUrl: '/assets/images/category-banner-bg.jpg',
+                    bgColor: '#333',
+                    headline: data.title,
+                    subHeadline: null
+                }
+            } only %}
+        {% endif %}
+    {% endblock %}
 
     <div class="container">
 
-        <main>
+        <main class="container__inner">
+            {% block cmsTop %}
+                {% if data.categoryId %}
+                    <div class="category-cms-block">
+                        {{ widgetBlock('CatalogCmsBlockWidgetPlugin', 'top', data.categoryId) }}
+                    </div>
+                {% endif %}
+            {% endblock %}
+
             {% block content %}
 
 
                 <form method="GET" class="grid">
                     {% block form %}
-                        <div class="col col--sm-12 col--lg-4 col--xl-3">
-                            {% include molecule('view-mode-switch', 'CatalogPage') with {
-                                class: 'box'
-                            } only %}
+                        <div class="col col--sm-12 col--lg-4 col--xl-3 ca">
 
-                            {% include molecule('toggler-checkbox') with {
-                                modifiers: ['expand'],
-                                class: 'box is-hidden-lg-xl',
-                                data: {
-                                    label: 'Show/Hide filters'
-                                },
-                                attributes: {
-                                    target: 'js-catalog__filters-toggle',
-                                    'class-to-toggle': 'is-hidden-sm-md',
-                                    checked: true
-                                }
-                            } only %}
+                            {#{% include molecule('toggler-checkbox') with {#}
+                                {#modifiers: ['expand'],#}
+                                {#class: 'box is-hidden-lg-xl',#}
+                                {#data: {#}
+                                    {#label: 'Show/Hide filters'#}
+                                {#},#}
+                                {#attributes: {#}
+                                    {#target: 'js-catalog__filters-toggle',#}
+                                    {#'class-to-toggle': 'is-hidden-sm-md',#}
+                                    {#checked: true#}
+                                {#}#}
+                            {#} only %}#}
 
                             {% include organism('filter-section', 'CatalogPage') with {
-                                class: 'box js-catalog__filters-toggle',
+                                class: 'js-catalog__filters-toggle',
                                 data: {
                                     facets: data.facets,
                                     filterPath: data.filterPath,
@@ -87,17 +104,13 @@
 
                             {% block cmsMiddle %}
                                 {% if data.categoryId %}
-                                    <div class="box">
-                                        {{ widgetBlock('CatalogCmsBlockWidgetPlugin', 'middle', data.categoryId) }}
-                                    </div>
+                                    {{ widgetBlock('CatalogCmsBlockWidgetPlugin', 'middle', data.categoryId) }}
                                 {% endif %}
                             {% endblock %}
                         </div>
 
                         <div class="col col--sm-12 col--lg-8 col--xl-9">
-                            {% include molecule('sort', 'CatalogPage') with {
-                                class: 'box'
-                            } only %}
+                            {% include molecule('sort', 'CatalogPage')  only %}
 
                             {% include organism('active-filter-section', 'CatalogPage') with {
                                 data: {
@@ -120,17 +133,18 @@
                                 class: 'box',
                                 data: data.pagination
                             } only %}
+
+                            {% block cmsBottom %}
+                                {% if data.categoryId %}
+                                    <div class="box">
+                                        {{ widgetBlock('CatalogCmsBlockWidgetPlugin', 'bottom', data.categoryId) }}
+                                    </div>
+                                {% endif %}
+                            {% endblock %}
                         </div>
                     {% endblock %}
                 </form>
 
-                {% block cmsBottom %}
-                    {% if data.categoryId %}
-                        <div class="box">
-                            {{ widgetBlock('CatalogCmsBlockWidgetPlugin', 'bottom', data.categoryId) }}
-                        </div>
-                    {% endif %}
-                {% endblock %}
             {% endblock %}
         </main>
 
