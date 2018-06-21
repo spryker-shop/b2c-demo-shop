@@ -6,16 +6,15 @@
             position: relative;
             padding-bottom: .5rem;
             height: 100%;
-
         }
         &__thumbnail {
-            border: 1px solid $setting-color-lightest;
             border-radius: 4px;
-            margin: 15px;
+            margin: 0 15px 15px 15px;
             position: relative;
+
             &:hover {
                 box-shadow: 10px 10px 40px 0px rgba(0,0,0,.1);
-                .thumbnail {
+                #{$name}__overlay {
                     &:after {
                         content:'';
                         position: absolute;
@@ -34,6 +33,20 @@
                 margin: 0;
             }
         }
+        &__overlay {
+            padding: 90px 0 120px 0;
+            &::before {
+                content:'';
+                position: absolute;
+                top:0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                border-radius: 4px;
+                background: rgba(0,0,0,.05);
+                z-index: $setting-zi-element-floating;
+            }
+        }
 
         &__actions-container {
             position: absolute;
@@ -49,7 +62,6 @@
 
         &__info {
             margin: 0 25px;
-            padding-bottom: 25px;
             font-family: $setting-font-family-additional;
             font-weight: 500;
             font-size: 16px;
@@ -59,6 +71,8 @@
         .price {
             position: relative;
             font-weight: normal;
+            margin-bottom: 25px;
+
             &__amount {
                 &--original {
                     position: absolute;
@@ -68,7 +82,11 @@
                     font-size: 14px;
                 }
             }
+            &__tag {
+                display: none;
+            }
         }
     }
 
 }
+
