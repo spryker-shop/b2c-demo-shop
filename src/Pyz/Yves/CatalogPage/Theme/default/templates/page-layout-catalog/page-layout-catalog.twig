@@ -118,11 +118,6 @@
                                 }
                             } only %}
 
-                            {% include molecule('pagination') with {
-                                class: 'box',
-                                data: data.pagination
-                            } only %}
-
                             <div class="grid grid--stretch">
                                 {% for product in data.products %}
                                     {{ widget('ProductWidgetPlugin', product, data.viewMode) }}
@@ -130,7 +125,6 @@
                             </div>
 
                             {% include molecule('pagination') with {
-                                class: 'box',
                                 data: data.pagination
                             } only %}
 

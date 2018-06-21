@@ -1,0 +1,60 @@
+@mixin shop-ui-pagination($name: '.pagination') {
+    #{$name} {
+        border-top: dotted 1px $setting-color-lightest;
+        border-bottom: dotted 1px $setting-color-lightest;
+
+        &__item {
+            display: inline-block;
+            &:first-child {
+                flex-grow: 1;
+            }
+            &:last-child {
+                flex-grow: 1;
+            }
+        }
+
+        &__step {
+            display: inline-block;
+            width: 68px;
+            height: 68px;
+            font: 400 18px/68px $setting-font-family-additional;
+            text-align: center;
+            color: $setting-color-dark;
+
+            &--previous {
+                float: left;
+            }
+
+            &--next {
+                float: right;
+            }
+
+            &:hover {
+                text-decoration: none;
+                background: #f5f7f7;
+            }
+
+            &:not(&--current):hover {
+                color: $setting-color-dark;
+            }
+
+            &--current {
+                color: $setting-color-alt;
+            }
+
+            &--disabled {
+                &:hover {
+                    background: none;
+                }
+            }
+        }
+
+        .icon {
+            width: 12px;
+            height: 12px;
+            svg {
+                fill: $setting-color-dark;
+            }
+        }
+    }
+}
