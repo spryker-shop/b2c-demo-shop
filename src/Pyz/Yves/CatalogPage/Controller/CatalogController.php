@@ -78,7 +78,7 @@ class CatalogController extends SprykerCatalogController
      */
     protected function getCategoryBannerPath(array $categoryNode)
     {
-        $shotPath = $this->formatBannerName($categoryNode['name']);
+        $shotPath = $this->formatBannerName($categoryNode);
 
         foreach ($this->availableBannerTypes as $type) {
             $filePath = APPLICATION_ROOT_DIR . '/public/Yves' . $shotPath . $type;
@@ -91,16 +91,16 @@ class CatalogController extends SprykerCatalogController
     }
 
     /**
-     * @param string $categoryName
+     * @param array $categoryNode
      *
      * @return string
      */
-    protected function formatBannerName(string $categoryName)
+    protected function formatBannerName(array $categoryNode)
     {
-        $categoryName = str_replace(' ', '-', $categoryName);
+        $categoryName = str_replace(' ', '-', $categoryNode['name']);
         $categoryName = preg_replace('/[^A-Za-z0-9\-]/', '', $categoryName);
         $categoryName = preg_replace('/-+/', '-', $categoryName);
 
-        return self::CATEGORY_BANNER_PATH . strtolower($categoryName);
+        return self::CATEGORY_BANNER_PATH . strtolower($categoryName) . '-' . $categoryNode['id_category'];
     }
 }
