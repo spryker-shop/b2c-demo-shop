@@ -1,0 +1,166 @@
+{% extends template('page-layout-main') %}
+
+{% define data = {
+    products: required,
+    facets: required,
+    category: null,
+    categories: [],
+    categoryId: null,
+    filterPath: null,
+    viewMode: null,
+
+    pagination: {
+        currentPage: required,
+        maxPage: required,
+        parameters: app.request.query.all(),
+        paginationPath: app.request.getPathInfo(),
+        showAlwaysFirstAndLast: true
+    }
+} %}
+
+{% macro renderBreadcrumbSteps(categoryNode, isLastLeaf, filterPath) %}
+    {% import _self as self %}
+    {% set categoryUrl = categoryNode.url | default %}
+    {% set categoryUrl = filterPath is not empty ? url(filterPath, {categoryPath: categoryUrl}) : categoryUrl %}
+    {% set categoryLabel = categoryNode.name | default %}
+    {% set categoryPatrentNodes = categoryNode.parents | default(null) %}
+
+    {% if categoryPatrentNodes is not empty %}
+        {{ self.renderBreadcrumbSteps(categoryPatrentNodes | first, false, filterPath) }}
+
+        {% if not isLastLeaf %}
+            {% include molecule('breadcrumb-step') with {
+                data: {
+                    url: categoryUrl,
+                    label: categoryLabel
+                }
+            } only %}
+        {% endif %}
+    {% endif %}
+{% endmacro %}
+
+
+{% block container %}
+
+    {#{% if source('/assets/images/category-banner-bg.jpg', ignore_missing = true) %}#}
+        {#true#}
+    {#{% else %}#}
+        {#false#}
+    {#{% endif %}#}
+
+    {% block title %}
+        {% if data.title %}
+            {% include molecule('jumbotron') with {
+                modifiers: ['category'],
+                data: {
+                    imageUrl: '/assets/images/category-banner-bg.jpg',
+                    bgColor: '#333',
+                    headline: data.title,
+                    subHeadline: null
+                }
+            } only %}
+        {% endif %}
+    {% endblock %}
+
+    <div class="container">
+
+        <main class="container__inner">
+            {% block cmsTop %}
+                {% if data.categoryId %}
+                    <div class="category-cms-block">
+                        {{ widgetBlock('CatalogCmsBlockWidgetPlugin', 'top', data.categoryId) }}
+                    </div>
+                {% endif %}
+            {% endblock %}
+
+            {% block content %}
+
+
+                <form method="GET" class="grid">
+                    {% block form %}
+                        <div class="col col--sm-12 col--lg-4 col--xl-3 ca">
+
+                            {#{% include molecule('toggler-checkbox') with {#}
+                                {#modifiers: ['expand'],#}
+                                {#class: 'box is-hidden-lg-xl',#}
+                                {#data: {#}
+                                    {#label: 'Show/Hide filters'#}
+                                {#},#}
+                                {#attributes: {#}
+                                    {#target: 'js-catalog__filters-toggle',#}
+                                    {#'class-to-toggle': 'is-hidden-sm-md',#}
+                                    {#checked: true#}
+                                {#}#}
+                            {#} only %}#}
+
+                            {% include organism('filter-section', 'CatalogPage') with {
+                                class: 'js-catalog__filters-toggle',
+                                data: {
+                                    facets: data.facets,
+                                    filterPath: data.filterPath,
+                                    categories: data.categories
+                                }
+                            } only %}
+
+                            {% block cmsMiddle %}
+                                {% if data.categoryId %}
+                                    {{ widgetBlock('CatalogCmsBlockWidgetPlugin', 'middle', data.categoryId) }}
+                                {% endif %}
+                            {% endblock %}
+                        </div>
+
+                        <div class="col col--sm-12 col--lg-8 col--xl-9">
+                            {% include molecule('sort', 'CatalogPage')  only %}
+
+                            {% include organism('active-filter-section', 'CatalogPage') with {
+                                data: {
+                                    facets: data.facets
+                                }
+                            } only %}
+
+                            {% include molecule('pagination') with {
+                                class: 'box',
+                                data: data.pagination
+                            } only %}
+
+                            <div class="grid grid--stretch">
+                                {% for product in data.products %}
+                                    {{ widget('ProductWidgetPlugin', product, data.viewMode) }}
+                                {% endfor %}
+                            </div>
+
+                            {% include molecule('pagination') with {
+                                class: 'box',
+                                data: data.pagination
+                            } only %}
+
+                            {% block cmsBottom %}
+                                {% if data.categoryId %}
+                                    <div class="box">
+                                        {{ widgetBlock('CatalogCmsBlockWidgetPlugin', 'bottom', data.categoryId) }}
+                                    </div>
+                                {% endif %}
+                            {% endblock %}
+                        </div>
+                    {% endblock %}
+                </form>
+
+            {% endblock %}
+        </main>
+
+        {% block breadcrumbs %}
+            {% import _self as self %}
+
+            {% embed molecule('breadcrumb') with {
+                embed: {
+                    breadcrumbs: self.renderBreadcrumbSteps(data.category, true, data.filterPath)
+                }
+            } only %}
+                {% block breadcrumbs %}
+                    {{ embed.breadcrumbs }}
+                {% endblock %}
+            {% endembed %}
+        {% endblock %}
+
+    </div>
+{% endblock %}

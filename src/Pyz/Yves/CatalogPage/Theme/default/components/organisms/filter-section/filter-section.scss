@@ -1,0 +1,15 @@
+@mixin catalog-page-filter-section($name: '.filter-section') {
+    #{$name} {
+        margin-top: 79px;
+        border-top: dotted 1px $setting-color-lightest;
+
+        &__item {
+            border-bottom: dotted 1px $setting-color-lightest;
+        }
+
+        @content;
+    }
+}
+
+@include catalog-page-filter-section;
+

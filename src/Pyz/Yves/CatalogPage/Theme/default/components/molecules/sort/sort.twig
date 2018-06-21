@@ -1,0 +1,42 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'sort'
+} %}
+
+{% block body %}
+    <div class="grid grid--middle">
+        <div class="{{config.name}}__col col col--lg-3 is-hidden-sm-md">
+            <strong>{{ _view.pagination.numFound }}</strong> {{ "catalog.itemsFound"|trans }}
+        </div>
+
+        <div class="{{config.name}}__col col col--sm-7 col--md-8 col--lg-6">
+            {% embed atom('select') with {
+                modifiers: ['expand'],
+                attributes: {
+                    name: 'sort'
+                },
+                embed: {
+                    sort: _view.sort
+                }
+            } only %}
+                {% block options %}
+                    <option value="">{{ 'catalog.sort.relevance' | trans }}</option>
+                    {% for sortParamName in embed.sort.sortParamNames %}
+                        <option value="{{ sortParamName }}" {% if sortParamName == embed.sort.currentSortParam %}selected{% endif %}>{{ ('catalog.sort.' ~ sortParamName) | trans }}</option>
+                    {% endfor %}
+                {% endblock %}
+            {% endembed %}
+        </div>
+
+        <div class="{{config.name}}__col col col--sm-2 col--lg-1">
+            <button type="submit" class="button button--expand">
+                {% include atom('icon') with {
+                    data: {
+                        name: 'sort'
+                    }
+                } only %}
+            </button>
+        </div>
+    </div>
+{% endblock %}

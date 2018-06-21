@@ -1,0 +1,48 @@
+@mixin jumbotron-category($name: '.jumbotron--category') {
+    @include shop-ui-jumbotron($name) {
+
+        .jumbotron__container {
+            height: auto;
+            @include helper-breakpoint(md) {
+                height: auto;
+            }
+            @include helper-breakpoint(xl) {
+                height: auto;
+            }
+        }
+
+        .grid {
+            margin: 0 1rem;
+            padding: 20px 0;
+            min-height: 9rem;
+            @include helper-breakpoint(md) {
+                min-height: 16rem;
+            }
+            @include helper-breakpoint(xl) {
+                min-height: 18.125rem;
+            }
+        }
+
+        .jumbotron__headline {
+            font-size: 3.125rem;
+            font-weight: 500;
+            @include helper-breakpoint-media-max($lg-max) {
+                font-size: 2rem;
+            }
+            @include helper-breakpoint-media-max($md-max) {
+                font-size: 1.5rem;
+            }
+        }
+
+        .jumbotron__sub-headline {
+            font: 300 2rem $setting-font-family;
+        }
+        @content;
+
+    }
+}
+
+@include jumbotron-category();
+
+
+
