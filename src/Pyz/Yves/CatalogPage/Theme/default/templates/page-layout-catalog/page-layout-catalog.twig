@@ -49,11 +49,11 @@
     {#{% endif %}#}
 
     {% block title %}
-        {% if data.title %}
+        {% if data.category.banner_path %}
             {% include molecule('jumbotron') with {
                 modifiers: ['category'],
                 data: {
-                    imageUrl: '/assets/images/category-banner-bg.jpg',
+                    imageUrl: data.category.banner_path,
                     bgColor: '#333',
                     headline: data.title,
                     subHeadline: null

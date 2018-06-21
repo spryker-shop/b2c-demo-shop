@@ -1,7 +1,10 @@
 @mixin shop-ui-image-banner($name: '.image-banner') {
     #{$name}{
-        height: 750px;
         margin: 180px 0;
+        height: 750px;
+        @include helper-breakpoint-media-max($md-max) {
+            height: 550px;
+        }
         &__text {
             width: 570px;
             position: relative;
@@ -9,11 +12,27 @@
         }
         &__image {
             position: absolute;
-            right: -50%;
+            right: -40%;
             top:0;
+            @include helper-breakpoint-media-max($lg-max) {
+                right: -25%;
+                top: 40%;
+            }
+            @include helper-breakpoint-media-max($md-max) {
+                right: -10%;
+                top: 60%;
+            }
             img {
                 max-width: 320px;
                 max-height: 750px;
+                @include helper-breakpoint-media-max($lg-max) {
+                    max-width: 240px;
+                    max-height: (750/4*3)px;
+                }
+                @include helper-breakpoint-media-max($md-max) {
+                    max-width: 160px;
+                    max-height: 375px;
+                }
             }
         }
         &__title {

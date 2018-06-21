@@ -2,8 +2,12 @@
     #{$name} {
         position: relative;
         overflow: hidden;
-        height: 32rem;
         margin: 150px 0;
+        height: 32rem;
+        @include helper-breakpoint-media-max($md-max) {
+            height: 22rem;
+        }
+
         video {
             width: auto;
             height: auto;
