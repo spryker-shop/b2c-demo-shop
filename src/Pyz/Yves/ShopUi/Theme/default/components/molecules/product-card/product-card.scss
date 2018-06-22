@@ -1,34 +1,39 @@
 @mixin shop-ui-product-card($name: '.product-card') {
     #{$name} {
         position: relative;
-
+        padding-bottom: 50px;
         &__container {
             position: relative;
-            padding-bottom: .5rem;
             height: 100%;
+            display: block;
+            color: $setting-color-text;
+            &:hover {
+                text-decoration: none;
+                color: $setting-color-text;
+                #{$name}__thumbnail {
+                    box-shadow: 10px 10px 40px 0px rgba(0,0,0,.1);
+                    #{$name}__overlay {
+                        &:after {
+                            content:'';
+                            position: absolute;
+                            top:0;
+                            left: 0;
+                            right: 0;
+                            bottom: 0;
+                            border-radius: 4px;
+                            background-image: linear-gradient(to bottom, #000000, rgba(0, 0, 0, 0));
+                            opacity: 0.09;
+                            z-index: $setting-zi-element-floating;
+                        }
+                    }
+                }
+            }
         }
         &__thumbnail {
             border-radius: 4px;
             margin: 0 15px 15px 15px;
             position: relative;
 
-            &:hover {
-                box-shadow: 10px 10px 40px 0px rgba(0,0,0,.1);
-                #{$name}__overlay {
-                    &:after {
-                        content:'';
-                        position: absolute;
-                        top:0;
-                        left: 0;
-                        right: 0;
-                        bottom: 0;
-                        border-radius: 4px;
-                        background-image: linear-gradient(to bottom, #000000, rgba(0, 0, 0, 0));
-                        opacity: 0.09;
-                        z-index: $setting-zi-element-floating;
-                    }
-                }
-            }
             .thumbnail {
                 margin: 0;
             }
@@ -81,9 +86,6 @@
                     color: $setting-color-lightest;
                     font-size: 14px;
                 }
-            }
-            &__tag {
-                display: none;
             }
         }
     }
