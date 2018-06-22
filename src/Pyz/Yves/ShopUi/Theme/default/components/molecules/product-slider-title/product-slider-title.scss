@@ -1,13 +1,26 @@
 @mixin shop-ui-product-slider-title ($name: '.cms-product-slider-title') {
     #{$name} {
         margin:45px 0 90px 0;
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 1rem;
         &__text {
             font: normal 34px $setting-font-family;
             letter-spacing: -0.9px;
+            @include helper-breakpoint-media-max($md-max) {
+                font: normal 24px $setting-font-family;
+            }
         }
         &__line {
             height: 1px;
             background-color: $setting-color-lightest;
+            flex: 1;
+            margin: 0 50px;
+            @include helper-breakpoint-media-max($md-max) {
+                margin: 0 0 0 50px;
+            }
         }
         &__link {
             font: normal 11px $setting-font-family;
@@ -34,6 +47,16 @@
                 background: $setting-color-text;
                 bottom: 0;
             }
+        }
+        &__link-mobile {
+            font: normal 12px $setting-font-family;
+            letter-spacing: 2.1px;
+            border-radius: 2px;
+            border: 1px solid $setting-color-text;
+            text-transform: uppercase;
+            display: block;
+            padding: 16px;
+            text-align: center;
         }
     }
 }
