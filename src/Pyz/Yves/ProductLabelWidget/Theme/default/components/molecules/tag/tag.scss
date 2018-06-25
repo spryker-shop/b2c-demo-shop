@@ -10,7 +10,11 @@ $product-label-widget-tag-burst-size: 2rem;
         background: $setting-color-white;
         border-radius: 2px;
         box-shadow: 1px 1px 0 0 rgba(0, 0, 0, 0.08);
-
+        @include helper-breakpoint-media-max($sm-max) {
+            width: 50px;
+            height: 22px;
+            font-size: 11px;
+        }
 
         &__text {
             @include helper-font-size(default);
@@ -21,6 +25,7 @@ $product-label-widget-tag-burst-size: 2rem;
             text-align: center;
             z-index: 2;
             text-transform: uppercase;
+            font-size: inherit;
         }
 
         @content;

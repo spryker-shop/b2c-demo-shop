@@ -2,77 +2,14 @@
 
 {% define data = {
     product: product | default,
-    products: products | default([]),
-    showDots: false
+    products: products | default([])
 } %}
 
-{% define config = {
-    name: 'simple-carousel',
-    tag: 'simple-carousel',
-    selector: 'js-simple-carousel'
-} %}
-
-{% define attributes = {
-    'slides-to-show': 4,
-    'slides-to-scroll': 1
-} %}
-
-{% set slidesCount = data.products | length %}
-{% set slideWidth = 100 / attributes['slides-to-show'] %}
-{% set dotsCount = (((slidesCount - attributes['slides-to-show']) / attributes['slides-to-scroll']) | round(0, 'ceil')) + 1 %}
-{% set showNavigation = data.products | length > 1 %}
-{% set showDots = data.showDots and dotsCount > 1 %}
 
 {% block body %}
 
-    <simple-carousel class="custom-element simple-carousel simple-carousel-custom" data-qa="component simple-carousel" slides-to-show="4" slides-to-scroll="1">
-        <div class="{{config.name}}__container">
-            {% if showNavigation %}
-                <div class="{{config.name}}__navigation {{config.name}}__navigation--prev">
-                    <a href="#prev" class="{{config.name}}__arrow {{config.selector}}__prev">
-                        {% include atom('icon') with {
-                        modifiers: ['big'],
-                        data: {
-                        name: 'chevron-left'
-                        }
-                        } only %}
-                    </a>
-                </div>
-            {% endif %}
-
-            <div class="{{config.name}}__view">
-                <div class="{{config.name}}__slider {{config.selector}}__slider grid grid--stretch">
-                    {% for availableProduct in data.products if availableProduct.available %}
-                        <div class="{{config.selector}}__slide col" style="width:{{slideWidth}}%;min-width:{{slideWidth}}%;">
-
-                            {{ widget('ProductGroupWidgetPlugin', availableProduct) }}
-
-                        </div>
-                    {% endfor %}
-                </div>
-                {% if showDots %}
-                    <div class="{{config.name}}__dots grid grid--middle grid--center">
-                        {%- for dot in 1..dotsCount -%}
-                            <a href="#" class="{{config.name}}__dot {{config.selector}}__dot{% if loop.first %} {{config.name}}__dot--current{% endif %}"></a>
-                        {%- endfor -%}
-                    </div>
-                {% endif %}
-            </div>
-
-            {% if showNavigation %}
-                <div class="{{config.name}}__navigation {{config.name}}__navigation--next">
-                    <a href="#next" class="{{config.name}}__arrow {{config.selector}}__next">
-                        {% include atom('icon') with {
-                        modifiers: ['big'],
-                        data: {
-                        name: 'chevron-right'
-                        }
-                        } only %}
-                    </a>
-                </div>
-            {% endif %}
-        </div>
-    </simple-carousel>
-
+        {% for availableProduct in data.products if availableProduct.available %}
+            {{ widget('ProductGroupWidgetPlugin', availableProduct) }}
+        {% endfor %}
 
 {% endblock %}

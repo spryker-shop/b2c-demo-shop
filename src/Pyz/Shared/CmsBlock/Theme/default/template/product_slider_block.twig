@@ -6,22 +6,31 @@
     <!-- CMS_BLOCK_PLACEHOLDER : "title" -->
     <!-- CMS_BLOCK_PLACEHOLDER : "description" -->
     <div class="container">
-        <div class="cms-product-slider-title grid grid--middle grid--justify grid--spaced-lg">
-            <div class="col col--lg-2">
+        <div class="cms-product-slider-title">
+            <div class="">
                 <h1 class="cms-product-slider-title__text">{{ data.title }}</h1>
             </div>
-            <div class="cms-product-slider-title__line col col--middle col--lg-8"></div>
-            <div class="col col--lg-2">
-                <div class="grid grid--right">
-                    <a href="#" class="cms-product-slider-title__link">Explore More</a>
+            <div class="cms-product-slider-title__line"></div>
+            <div class="">
+                <div class="grid grid--right is-hidden-sm-md">
+                    <a href="{{ 'camcorders.category.link' | trans }}" class="cms-product-slider-title__link">{{ 'cms-product-group.category.link.text' | trans}}</a>
                 </div>
             </div>
 
         </div>
     </div>
+    <div class="container">
 
-    {{ spyCmsBlockPlaceholder('description') | raw }}
+        <div class="grid grid--justify grid--spaced-md">
+            {{ spyCmsBlockPlaceholder('description') | raw }}
+            <div class="col col--expand">
+                <div class="grid grid--stretch grid--spaced-sm is-hidden-lg-xl">
+                    <a href="{{ 'camcorders.category.link' | trans }}" class="cms-product-slider-title__link-mobile col col--sm-12">{{ 'cms-product-group.category.link.text' | trans}}</a>
+                </div>
+            </div>
+        </div>
 
+    </div>
 
 {% endblock %}
 

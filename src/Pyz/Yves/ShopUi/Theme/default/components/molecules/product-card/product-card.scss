@@ -1,40 +1,53 @@
 @mixin shop-ui-product-card($name: '.product-card') {
     #{$name} {
         position: relative;
-
+        padding-bottom: 50px;
+        @include helper-breakpoint-media-max($sm-max) {
+            padding-bottom: 32px;
+        }
         &__container {
             position: relative;
-            padding-bottom: .5rem;
             height: 100%;
+            display: block;
+            color: $setting-color-text;
+            &:hover {
+                text-decoration: none;
+                color: $setting-color-text;
+                #{$name}__thumbnail {
+                    box-shadow: 10px 10px 40px 0px rgba(0,0,0,.1);
+                    #{$name}__overlay {
+                        &:after {
+                            content:'';
+                            position: absolute;
+                            top:0;
+                            left: 0;
+                            right: 0;
+                            bottom: 0;
+                            border-radius: 4px;
+                            background-image: linear-gradient(to bottom, #000000, rgba(0, 0, 0, 0));
+                            opacity: 0.09;
+                            z-index: $setting-zi-element-floating;
+                        }
+                    }
+                }
+            }
         }
         &__thumbnail {
             border-radius: 4px;
             margin: 0 15px 15px 15px;
             position: relative;
-
-            &:hover {
-                box-shadow: 10px 10px 40px 0px rgba(0,0,0,.1);
-                #{$name}__overlay {
-                    &:after {
-                        content:'';
-                        position: absolute;
-                        top:0;
-                        left: 0;
-                        right: 0;
-                        bottom: 0;
-                        border-radius: 4px;
-                        background-image: linear-gradient(to bottom, #000000, rgba(0, 0, 0, 0));
-                        opacity: 0.09;
-                        z-index: $setting-zi-element-floating;
-                    }
-                }
+            @include helper-breakpoint-media-max($sm-max) {
+                margin: 0 5px 5px 5px;
             }
             .thumbnail {
                 margin: 0;
             }
         }
         &__overlay {
-            padding: 90px 0 120px 0;
+            padding: 90px 20px 120px 20px;
+            @include helper-breakpoint-media-max($sm-max) {
+                padding: 45px 10px 70px 10px;
+            }
             &::before {
                 content:'';
                 position: absolute;
@@ -62,28 +75,39 @@
 
         &__info {
             margin: 0 25px;
-            font-family: $setting-font-family-additional;
+            font: normal 16px $setting-font-family-additional;
             font-weight: 500;
-            font-size: 16px;
             letter-spacing: .3px;
+            @include helper-breakpoint-media-max($sm-max) {
+                font-size: 13px;
+                margin: 0 10px;
+                flex-wrap: wrap;
+            }
         }
 
         .price {
             position: relative;
             font-weight: normal;
             margin-bottom: 25px;
-
+            text-align: right;
+            @include helper-breakpoint-media-max($sm-max) {
+                text-align: left;
+            }
             &__amount {
+                font-size: inherit;
+                color: $setting-color-dark;
                 &--original {
                     position: absolute;
                     bottom: -20px;
                     right: 0;
                     color: $setting-color-lightest;
                     font-size: 14px;
+                    @include helper-breakpoint-media-max($sm-max) {
+                        font-size: 11px;
+                        left:0;
+                        right: unset;
+                    }
                 }
-            }
-            &__tag {
-                display: none;
             }
         }
     }
