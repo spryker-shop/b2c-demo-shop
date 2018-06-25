@@ -1,0 +1,22 @@
+@mixin catalog-page-cms-block ($name: '.catalog-cms-block') {
+    #{$name} {
+        font-size: 14px;
+        line-height: 21px;
+        color: $setting-color-dark;
+        & h5 {
+            font: 500 15px $setting-font-family-additional;
+        }
+        &--top .row {
+            padding-top: 40px;
+        }
+        &--middle .row {
+            padding-top: 30px;
+        }
+        &--bottom .row {
+            padding-bottom: 100px;
+        }
+    }
+}
+
+@include catalog-page-cms-block;
+

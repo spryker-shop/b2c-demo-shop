@@ -2,6 +2,8 @@
     @include shop-ui-jumbotron($name) {
 
         .jumbotron__container {
+            background-color: #fff;
+            background-image: none;
             height: auto;
             @include helper-breakpoint(md) {
                 height: auto;
@@ -36,6 +38,24 @@
 
         .jumbotron__sub-headline {
             font: 300 2rem $setting-font-family;
+        }
+
+        &-no-img {
+            border-top: solid 1px $setting-color-lightest;
+            .grid {
+                border-bottom: solid 1px $setting-color-lightest;
+                min-height: 7.56rem;
+                @include helper-breakpoint(md) {
+                    min-height: 11rem;
+                }
+                @include helper-breakpoint(xl) {
+                    min-height: 15rem;
+                }
+            }
+            .jumbotron__headline,
+            .jumbotron__sub-headline {
+                color: $setting-color-darker;
+            }
         }
         @content;
 

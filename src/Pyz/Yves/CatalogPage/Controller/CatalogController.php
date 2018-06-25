@@ -101,6 +101,6 @@ class CatalogController extends SprykerCatalogController
         $categoryName = preg_replace('/[^A-Za-z0-9\-]/', '', $categoryName);
         $categoryName = preg_replace('/-+/', '-', $categoryName);
 
-        return self::CATEGORY_BANNER_PATH . strtolower($categoryName) . '-' . $categoryNode['id_category'];
+        return self::CATEGORY_BANNER_PATH . 'category-' . strtolower($categoryName) . '-' . $categoryNode['id_category'];
     }
 }

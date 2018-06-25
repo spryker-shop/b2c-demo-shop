@@ -13,9 +13,9 @@
     subHeadline: 'global.spryker.motto' | trans
 } %}
 
-{% set backgroundImage = data.imageUrl is empty ?: 'background-image: url(' ~ data.imageUrl ~ '); ' %}
-{% set backgroundColor = data.bgColor is empty ?: 'background-color: ' ~ data.bgColor ~ '; ' %}
-{% set textColor = data.textColor is empty ?: 'color: ' ~ data.textColor ~ ';' %}
+{% set backgroundImage = data.imageUrl is empty ? '' : 'background-image: url(' ~ data.imageUrl ~ '); ' %}
+{% set backgroundColor = data.bgColor is empty ? '' : 'background-color: ' ~ data.bgColor ~ '; ' %}
+{% set textColor = data.textColor is empty ? '' : 'color: ' ~ data.textColor ~ ';' %}
 
 {% block body %}
     <div class="{{config.name}}__container" style="{{backgroundImage}}{{backgroundColor}}{{textColor}}">
