@@ -2,6 +2,7 @@
     #{$name} {
         border-top: dotted 1px $setting-color-lightest;
         border-bottom: dotted 1px $setting-color-lightest;
+        margin-bottom: 50px;
 
         &__item {
             display: inline-block;
@@ -14,7 +15,9 @@
         }
 
         &__step {
-            display: inline-block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             width: 68px;
             height: 68px;
             font: 400 18px/68px $setting-font-family-additional;
@@ -43,6 +46,7 @@
             }
 
             &--disabled {
+                opacity: 0.15;
                 &:hover {
                     background: none;
                 }
