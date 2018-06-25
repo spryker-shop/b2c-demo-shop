@@ -7,10 +7,9 @@
 
 
 {% block body %}
-    <div class="grid grid--justify">
+
         {% for availableProduct in data.products if availableProduct.available %}
             {{ widget('ProductGroupWidgetPlugin', availableProduct) }}
         {% endfor %}
-    </div>
 
 {% endblock %}
