@@ -35,6 +35,20 @@ $setting-mobile-shadow-width: 12%;
                 }
 
             }
+
+            li .menu .menu__item--has-children-list {
+                &:hover {
+                    text-decoration: none;
+                    color: $setting-color-text;
+                    cursor: default;
+                    &>a {
+                        color: $setting-color-text;
+                        text-decoration: none;
+                        cursor: default;
+                    }
+
+                }
+            }
         }
 
         @include helper-breakpoint-media-max($md-max) {
