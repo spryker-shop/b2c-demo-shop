@@ -7,7 +7,7 @@
 
 namespace Orm\Zed\ShoppingList\Persistence;
 
-use Orm\Zed\ShoppingList\Persistence\Base\SpyShoppingListItemQuery as BaseSpyShoppingListItemQuery;
+use Spryker\Zed\ShoppingList\Persistence\Propel\AbstractSpyShoppingListItemQuery as BaseSpyShoppingListItemQuery;
 
 /**
  * Skeleton subclass for performing query and update operations on the 'spy_shopping_list_item' table.
