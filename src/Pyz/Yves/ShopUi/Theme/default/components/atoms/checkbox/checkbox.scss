@@ -1,0 +1,66 @@
+@mixin shop-ui-checkbox($name: '.checkbox') {
+    #{$name} {
+        position: relative;
+        display: inline-block;
+
+        &__container {
+            display: block;
+        }
+
+        &__box {
+            display: inline-block;
+            width: 1rem;
+            height: 1rem;
+            border: 1px solid #d7d7d7;
+            border-radius: 2px;
+            background-color: $setting-color-white;
+            margin-right: .63rem;
+            text-align: center;
+            vertical-align: top;
+        }
+
+        &__input {
+            @include helper-visibility-invisible;
+            position: absolute;
+        }
+
+        &__check {
+            @include helper-visibility-invisible;
+            @include helper-effect-transition;
+            position: absolute;
+            top: 3px !important;
+            left: 4px !important;
+            width: 9px !important;
+            height: 10px !important;
+            fill: #fff;
+        }
+
+        &__input:checked + .checkbox__box {
+            border: 1px solid $setting-color-main;
+            background-color: $setting-color-main;
+            & + .checkbox__check {
+                @include helper-visibility-visible;
+            }
+        }
+
+        &--expand {
+            display: block;
+        }
+
+        &--error &__box {
+            border-color: map-get($setting-color-actions, alert);
+        }
+
+        &[disabled] &__box,
+        &--disabled &__box {
+            background-color: $setting-color-lighter;
+            cursor: not-allowed;
+        }
+
+        &__label {
+            line-height: 18px;
+        }
+
+        @content;
+    }
+}

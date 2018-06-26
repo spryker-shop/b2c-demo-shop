@@ -14,15 +14,20 @@
 {% block body %}
     {% for filter in data.facets %}
         {% set filterHasValues = filter.values is not defined or filter.values | length > 0 %}
+        {% set hasToggler = filter.config.type == 'enumeration' %}
 
         {% if filterHasValues %}
             <div class="{{ config.name }}__item">
-                <h6>{{ ('product.filter.' ~ filter.name | lower) | trans }}</h6>
+                <div class="{{ config.name }}__title{{ hasToggler ? ' js-enumeration-trigger' : '' }}"
+                     {{ hasToggler ? 'data-toggle-target=.js-' ~  filter.name : '' }}>
+                    {{ ('product.filter.' ~ filter.name | lower) | trans }}
+                </div>
 
                 {% include [
                     molecule('filter-' ~ filter.config.name, 'CatalogPage'),
                     molecule('filter-' ~ filter.config.type, 'CatalogPage')
                 ] ignore missing with {
+                    class: hasToggler ? 'js-' ~  filter.name ~ ' is-hidden' : '',
                     data: {
                         filterPath: data.filterPath,
                         filter: filter,
@@ -33,7 +38,14 @@
         {% endif %}
     {% endfor %}
 
-    <button type="submit" class="button button--expand button--small">
+    {% include molecule('toggler-accordeon') with {
+        attributes: {
+            trigger: '.js-enumeration-trigger',
+            'class-to-toggle': 'is-hidden'
+        }
+    } only %}
+
+    <button type="submit" class="button button--expand button--small apply-filter">
         {{ 'catalog.filter.button' | trans }}
         {% include atom('icon') with {
             data: {

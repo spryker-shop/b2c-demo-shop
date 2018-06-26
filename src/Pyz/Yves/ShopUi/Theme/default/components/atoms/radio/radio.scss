@@ -1,0 +1,15 @@
+@mixin shop-ui-radio($name: '.radio') {
+    @include shop-ui-checkbox($name) {
+        &__box,
+        &__check {
+            border-radius: 100%;
+        }
+
+        &__input:checked + .radio__box {
+            border: 1px solid $setting-color-main;
+            background-color: $setting-color-main;
+        }
+
+        @content;
+    }
+}

@@ -1,0 +1,19 @@
+@mixin catalog-page-product-list($name: '.product-list') {
+    #{$name} {
+        margin-right: -15px;
+        margin-left: -15px;
+        max-width: none;
+
+        @content;
+    }
+
+    .catalog-left-side {
+        padding-right: 15px;
+    }
+    .catalog-right-side {
+        padding-left: 15px;
+    }
+}
+
+@include catalog-page-product-list;
+

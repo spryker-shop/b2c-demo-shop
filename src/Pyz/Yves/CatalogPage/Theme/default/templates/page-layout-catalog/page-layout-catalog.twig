@@ -57,20 +57,7 @@
 
                 <form method="GET" class="grid">
                     {% block form %}
-                        <div class="col col--sm-12 col--lg-4 col--xl-3 ca">
-
-                            {#{% include molecule('toggler-checkbox') with {#}
-                                {#modifiers: ['expand'],#}
-                                {#class: 'box is-hidden-lg-xl',#}
-                                {#data: {#}
-                                    {#label: 'Show/Hide filters'#}
-                                {#},#}
-                                {#attributes: {#}
-                                    {#target: 'js-catalog__filters-toggle',#}
-                                    {#'class-to-toggle': 'is-hidden-sm-md',#}
-                                    {#checked: true#}
-                                {#}#}
-                            {#} only %}#}
+                        <div class="col col--sm-12 col--lg-4 col--xl-3 catalog-left-side">
 
                             {% include organism('filter-section', 'CatalogPage') with {
                                 class: 'js-catalog__filters-toggle',
@@ -90,7 +77,7 @@
                             {% endblock %}
                         </div>
 
-                        <div class="col col--sm-12 col--lg-8 col--xl-9">
+                        <div class="col col--sm-12 col--lg-8 col--xl-9 catalog-right-side">
                             {% include molecule('sort', 'CatalogPage')  only %}
 
                             {% include organism('active-filter-section', 'CatalogPage') with {
@@ -99,7 +86,7 @@
                                 }
                             } only %}
 
-                            <div class="grid grid--stretch">
+                            <div class="grid grid--stretch product-list">
                                 {% for product in data.products %}
                                     {{ widget('ProductWidgetPlugin', product, data.viewMode) }}
                                 {% endfor %}

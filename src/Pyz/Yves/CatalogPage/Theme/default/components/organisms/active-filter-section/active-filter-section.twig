@@ -1,0 +1,48 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'active-filter-section',
+    tag: 'section'
+} %}
+
+{% define data = {
+    facets: []
+} %}
+
+{% set activeFilters = [] %}
+
+{% for filter in data.facets %}
+    {% set activeFilter = include(
+        [
+            molecule('active-filter-' ~ filter.config.name, 'CatalogPage'),
+            molecule('active-filter-' ~ filter.config.type, 'CatalogPage')
+        ], 
+        {
+            class: config.name ~ '__item',
+            data: {
+                filter: filter
+            }
+        }, 
+        with_context = false, 
+        ignore_missing = true
+    ) %}
+
+    {% if activeFilter | trim is not empty %}
+        {% set activeFilters = activeFilters | merge([activeFilter]) %}
+    {% endif %}    
+{% endfor %}
+
+{% block component %}
+    {% if activeFilters | length > 0 %}
+        {{parent()}}
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+
+    <a class="{{ config.name }}__item {{ config.name }}__item--all" href="{{ generateUrlWithoutAllActiveSearchFilters(data.facets) }}">
+        {{ 'catalog.filter.resetAllFilters' | trans }} <span class="ico">&times;</span>
+    </a>
+    {{ activeFilters | join | raw }}
+
+{% endblock %}

@@ -7,6 +7,79 @@
             border-bottom: dotted 1px $setting-color-lightest;
         }
 
+        &__title {
+            text-transform: uppercase;
+            font: bold 13px $setting-font-family-additional;
+            letter-spacing: 2.6px;
+            padding: 15px 20px 15px 0;
+            position: relative;
+            & + .filter-category {
+                margin-bottom: 25px;
+            }
+            &[data-toggle-target] {
+                cursor: pointer;
+                &:hover {
+                    opacity: 0.5;
+                }
+                &:before {
+                    content: "";
+                    width: 12px;
+                    height: 2px;
+                    background: $setting-color-dark;
+                    position: absolute;
+                    top: 50%;
+                    right: 0;
+                    margin-top: -1px;
+                }
+                &:after {
+                    content: "";
+                    width: 2px;
+                    height: 12px;
+                    background: $setting-color-dark;
+                    position: absolute;
+                    top: 50%;
+                    right: 5px;
+                    margin-top: -6px;
+                }
+                &.active:after {
+                    display: none;
+                }
+            }
+        }
+
+        .filter-category .menu__item--has-children-list .menu__item {
+            margin: 0 0 0 1rem;
+        }
+
+        .menu__item {
+            margin: 0;
+            font: 400 15px $setting-font-family;
+        }
+
+        .link {
+            font: 400 15px $setting-font-family;
+            margin-bottom: 14px;
+            color: $setting-color-darkest;
+            &:hover {
+                text-decoration: none;
+                color: $setting-color-alt
+            }
+        }
+
+        .filter-enumeration .menu__item {
+            margin-bottom: 16px;
+            .checkbox:hover,
+            .radio:hover {
+                color: $setting-color-main;
+            }
+        }
+
+        .apply-filter {
+            margin-top: 15px;
+            font-size: 16px;
+            padding: 10px;
+        }
+
         @content;
     }
 }
