@@ -1,0 +1,27 @@
+$color-selector-size: 1.5rem;
+
+.color-selector {
+    cursor: default;
+
+    &__color {
+        @include helper-effect-transition(border-color opacity);
+
+        display: inline-block;
+        width: $color-selector-size;
+        height: $color-selector-size;
+        border: 2px solid $setting-color-dark;
+        border-radius: 100%;
+        vertical-align: middle;
+        opacity: 0.5;
+
+        &:not(:last-child) {
+            margin-right: 0.5rem;
+        }
+
+        &:hover,
+        &--active {
+            border-color: $setting-color-main;
+            opacity: 1;
+        }
+    }
+}

@@ -78,7 +78,6 @@ module.exports = {
             dirs: [
                 path.join(context, paths.core.modules),
                 path.join(context, paths.project.modules)
-
             ],
             // files/dirs patterns
             patterns: [

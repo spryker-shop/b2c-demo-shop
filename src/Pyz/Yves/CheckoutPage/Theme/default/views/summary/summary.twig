@@ -1,0 +1,127 @@
+{% extends template('page-layout-checkout', 'CheckoutPage') %}
+
+{% define data = {
+    backUrl: _view.previousStepUrl,
+    transfer: _view.quoteTransfer,
+    cartItems: _view.cartItems,
+    shippingAddress: _view.quoteTransfer.shippingAddress,
+    billingAddress: _view.quoteTransfer.billingAddress,
+    shipmentMethod: _view.quoteTransfer.shipment.method.name,
+    paymentMethod: _view.quoteTransfer.payment.paymentMethod,
+
+    forms: {
+        summary: _view.summaryForm
+    },
+
+    overview: {
+        shipmentMethod: _view.quoteTransfer.shipment.method.name,
+        voucherDiscounts: _view.quoteTransfer.voucherDiscounts,
+        cartRuleDiscounts: _view.quoteTransfer.cartRuleDiscounts,
+
+        prices: {
+            subTotal: _view.quoteTransfer.totals.subtotal,
+            storeCurrency: _view.quoteTransfer.shipment.method.storeCurrencyPrice,
+            grandTotal: _view.quoteTransfer.totals.grandtotal,
+            tax: _view.quoteTransfer.totals.taxtotal.amount,
+            discountTotal: _view.quoteTransfer.totals.discounttotal | default(null)
+        }
+    },
+
+    title: 'checkout.step.summary.title' | trans
+} %}
+
+{% block content %}
+    <div class="grid">
+        <div class="col col--sm-12 col--lg-4">
+            <div class="box">
+                <span class="float-right">{{ 'checkout.step.summary.with_method' | trans }} <strong>{{data.paymentMethod}}</strong></span>
+                <h6>{{ 'checkout.step.summary.payment' | trans }}</h6>
+                {# {% if _view.quoteTransfer.payment.summaryPartialPath is defined and _view.quoteTransfer.payment.summaryPartialPath %}
+                    {% include '@' ~ _view.quoteTransfer.payment.summaryPartialPath ~ '.twig' with {'_view.quoteTransfer': _view.quoteTransfer} %}
+                {% endif %} #}
+                <hr/>
+
+                {% include molecule('display-address') with {
+                    class: 'text-small',
+                    data: {
+                        address: data.billingAddress
+                    }
+                } only %}
+            </div>
+
+            <div class="box">
+                <span class="float-right">{{ 'checkout.step.summary.with_method' | trans }} <strong>{{ data.shipmentMethod }}</strong></span>
+                <h6>{{ 'checkout.step.summary.shipping' | trans }}</h6>
+                <hr/>
+
+                {% include molecule('display-address') with {
+                    class: 'text-small',
+                    data: {
+                        address: data.shippingAddress
+                    }
+                } only %}
+            </div>
+        </div>
+
+        <div class="col col--sm-12 col--lg-8">
+            <div class="box">
+                {% for item in data.cartItems %}
+                    {% set item = item.bundleProduct is defined ? item.bundleProduct : item %}
+                    {% embed molecule('summary-item', 'CheckoutPage') with {
+                        data: {
+                            name: item.name,
+                            quantity: item.quantity,
+                            price: item.sumPrice | money,
+                            options: item.productOptions | default({}),
+                            bundleItems: item.bundleItems | default([]),
+                        },
+                        embed: {
+                            isLast: not loop.last,
+                            item: item
+                        }
+                    } only %}
+                        {% block body %}
+                            {{parent()}}
+                            {{ widget('CartNoteQuoteItemNoteWidgetPlugin', embed.item) }}
+                            {% if embed.isLast %}<hr/>{% endif %}
+                        {% endblock %}
+                    {% endembed %}
+                {% endfor %}
+            </div>
+
+            {{ widget('CartNoteQuoteNoteWidgetPlugin', data.transfer) }}
+
+            <div class="box">
+                {{ widget('CheckoutVoucherFormWidgetPlugin', data.transfer) }}
+            </div>
+
+            {% embed molecule('form') with {
+                class: 'box',
+                data: {
+                    form: data.forms.summary,
+                    submit: {
+                        enable: true,
+                        text: 'checkout.step.place.order' | trans
+                    },
+                    cancel: {
+                        enable: true,
+                        url: data.backUrl,
+                        text: 'general.back.button' | trans
+                    }
+                },
+                embed: {
+                    overview: data.overview
+                }
+            } only %}
+                {% block body %}
+                    {% include molecule('summary-overview', 'CheckoutPage') with {
+                        data: embed.overview
+                    } only %}
+
+                    <hr />
+                    {{parent()}}
+                {% endblock %}
+            {% endembed %}
+        </div>
+    </div>
+{% endblock %}

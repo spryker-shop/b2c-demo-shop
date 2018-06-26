@@ -8,7 +8,6 @@
 namespace Pyz\Client\Quote;
 
 use Spryker\Client\Kernel\Container;
-use Spryker\Client\MultiCart\Plugin\NameQuoteTransferExpanderPlugin;
 use Spryker\Client\Price\Plugin\PriceModeQuoteTransferExpanderPlugin;
 use Spryker\Client\Quote\QuoteDependencyProvider as BaseQuoteDependencyProvider;
 use Spryker\Client\Store\Plugin\StoreQuoteTransferExpanderPlugin;
@@ -23,7 +22,6 @@ class QuoteDependencyProvider extends BaseQuoteDependencyProvider
     protected function getQuoteTransferExpanderPlugins(Container $container)
     {
         return [
-            new NameQuoteTransferExpanderPlugin(), #MultiCartFeature
             new StoreQuoteTransferExpanderPlugin(),
             new PriceModeQuoteTransferExpanderPlugin(),
         ];
