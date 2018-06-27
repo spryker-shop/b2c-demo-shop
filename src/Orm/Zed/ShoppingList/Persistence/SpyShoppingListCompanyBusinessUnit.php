@@ -7,7 +7,7 @@
 
 namespace Orm\Zed\ShoppingList\Persistence;
 
-use Orm\Zed\ShoppingList\Persistence\Base\SpyShoppingListCompanyBusinessUnit as BaseSpyShoppingListCompanyBusinessUnit;
+use Spryker\Zed\ShoppingList\Persistence\Propel\AbstractSpyShoppingListCompanyBusinessUnit as BaseSpyShoppingListCompanyBusinessUnit;
 
 /**
  * Skeleton subclass for representing a row from the 'spy_shopping_list_company_business_unit' table.

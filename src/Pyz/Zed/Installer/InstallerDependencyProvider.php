@@ -14,8 +14,6 @@ use Spryker\Zed\Installer\InstallerDependencyProvider as SprykerInstallerDepende
 use Spryker\Zed\Locale\Communication\Plugin\LocaleInstallerPlugin;
 use Spryker\Zed\Newsletter\Communication\Plugin\NewsletterInstallerPlugin;
 use Spryker\Zed\PriceProduct\Communication\Plugin\PriceInstallerPlugin;
-use Spryker\Zed\SharedCart\Communication\Plugin\SharedCartPermissionInstallerPlugin;
-use Spryker\Zed\ShoppingList\Communication\Plugin\ShoppingListPermissionsInstallerPlugin;
 use Spryker\Zed\User\Communication\Plugin\UserInstallerPlugin;
 
 class InstallerDependencyProvider extends SprykerInstallerDependencyProvider
@@ -33,8 +31,6 @@ class InstallerDependencyProvider extends SprykerInstallerDependencyProvider
             new AclInstallerPlugin(),
             new NewsletterInstallerPlugin(),
             new GlossaryInstallerPlugin(),
-            new ShoppingListPermissionsInstallerPlugin(),
-            new SharedCartPermissionInstallerPlugin(), #SharedCartFeature
         ];
     }
 }

@@ -17,7 +17,7 @@ use SprykerShop\Yves\ShopRouter\ShopRouterDependencyProvider as SprykerShopRoute
 class ShopRouterDependencyProvider extends SprykerShopRouterDependencyProvider
 {
     /**
-     * @return \SprykerShop\Yves\ShopRouter\Dependency\Plugin\ResourceCreatorPluginInterface[]
+     * @return \SprykerShop\Yves\ShopRouterExtension\Dependency\Plugin\ResourceCreatorPluginInterface[]
      */
     protected function getResourceCreatorPlugins()
     {

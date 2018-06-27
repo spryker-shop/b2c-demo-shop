@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<database xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          name="zed"
+          xsi:noNamespaceSchemaLocation="http://static.spryker.com/schema-01.xsd"
+          namespace="Orm\Zed\UrlStorage\Persistence"
+          package="src.Orm.Zed.UrlStorage.Persistence">
+
+    <table name="spy_url_storage">
+        <behavior name="synchronization">
+            <parameter name="queue_pool" value="synchronizationPool" />
+        </behavior>
+    </table>
+
+    <table name="spy_url_redirect_storage">
+        <behavior name="synchronization">
+            <parameter name="queue_pool" value="synchronizationPool" />
+        </behavior>
+    </table>
+</database>
