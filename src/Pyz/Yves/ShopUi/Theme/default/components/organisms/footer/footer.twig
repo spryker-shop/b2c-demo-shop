@@ -21,7 +21,7 @@
                 <div class="footer-top__col">
                     <h5 class="footer__title footer-title-nav js-toggle-nav" data-toggle-target=".js-footer-nav-1">{{ 'global.categories' | trans }}</h5>
                     <div class="{{config.name}}__row {{config.name}}__navigation-main hidden-nav js-footer-nav-1">
-                        {{ widgetGlobal('NavigationWidgetPlugin', 'FOOTER_NAVIGATION_CATEGORIES', view('navigation-footer', 'ShopLayout')) }}
+                        {{ widgetGlobal('NavigationWidgetPlugin', 'FOOTER_NAVIGATION_CATEGORIES', 'navigation-footer') }}
                     </div>
                 </div>
             {% endif %}
@@ -29,14 +29,14 @@
             <div class="footer-top__col">
                 <h5 class="footer__title footer-title-nav js-toggle-nav" data-toggle-target=".js-footer-nav-2">{{ 'global.company' | trans }}</h5>
                 <div class="hidden-nav js-footer-nav-2">
-                    {{ widgetGlobal('NavigationWidgetPlugin', 'FOOTER_NAVIGATION', view('navigation-footer', 'ShopLayout')) }}
+                    {{ widgetGlobal('NavigationWidgetPlugin', 'FOOTER_NAVIGATION', 'navigation-footer') }}
                 </div>
             </div>
 
             <div class="footer-top__col">
                 <h5 class="footer__title footer-title-nav js-toggle-nav" data-toggle-target=".js-footer-nav-3">{{ 'global.social' | trans }}</h5>
                 <div class="hidden-nav js-footer-nav-3">
-                    {{ widgetGlobal('NavigationWidgetPlugin', 'SOCIAL_LINKS', view('navigation-footer', 'ShopLayout')) }}
+                    {{ widgetGlobal('NavigationWidgetPlugin', 'SOCIAL_LINKS', 'navigation-footer') }}
                 </div>
             </div>
 
@@ -57,13 +57,20 @@
 
             <div class="col footer-icons">
                 {#<h5>{{ 'global.payment_providers' | trans }}</h5>#}
-                {{ widgetGlobal('NavigationWidgetPlugin', 'PAYMENT_PROVIDERS', view('navigation-providers-payment', 'ShopLayout')) }}
+                {{ widgetGlobal('NavigationWidgetPlugin', 'PAYMENT_PROVIDERS', 'navigation-providers-payment') }}
                 {#<h5>{{ 'global.shipment_providers' | trans }}</h5>#}
-                {{ widgetGlobal('NavigationWidgetPlugin', 'SHIPMENT_PROVIDERS', view('navigation-providers-shipment', 'ShopLayout')) }}
+                {{ widgetGlobal('NavigationWidgetPlugin', 'SHIPMENT_PROVIDERS', 'navigation-providers-shipment') }}
             </div>
 
             <div class="col footer-currency-lang">
-                <div class="col">{{ widgetGlobal('LanguageSwitcherWidgetPlugin', app.request) }}</div>
+                <div class="col">
+                    {{ widgetGlobal(
+                        'LanguageSwitcherWidgetPlugin',
+                        app.request.pathInfo,
+                        app.request.queryString,
+                        app.request.requestUri
+                    ) }}
+                </div>
                 <div class="col">{{ widgetGlobal('CurrencyWidgetPlugin') }}</div>
             </div>
 
