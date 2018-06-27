@@ -3,7 +3,12 @@
         display: flex;
         flex-flow: row wrap;
         padding: 26px 0;
-        border-top: dotted 1px $setting-color-lightest;
+        border-bottom: dotted 1px $setting-color-lightest;
+
+        &--bottom {
+            border-bottom: none;
+            border-top: dotted 1px $setting-color-lightest;
+        }
 
         @content
     }

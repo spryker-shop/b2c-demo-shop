@@ -1,0 +1,30 @@
+@mixin shop-ui-form-field($name: '.form-field') {
+    #{$name} {
+        margin: 0 .5rem 1.2rem;
+
+        &__label {
+            display: inline-block;
+            font: normal 15px $setting-font-family;
+            margin-bottom: 6px;
+
+            &--required {
+                &::after {
+                    content: '*';
+                    margin-left: .2rem;
+                    color: $setting-color-main;
+                }
+            }
+        }
+
+        &__error-list {
+            @include helper-font-size(small);
+            color: map-get($setting-color-actions, alert);
+        }
+
+        &--spacing {
+            padding: .5rem 0;
+        }
+
+        @content;
+    }
+}

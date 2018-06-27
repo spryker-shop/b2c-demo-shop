@@ -134,6 +134,7 @@
                 {% import _self as self %}
 
                 {% embed molecule('breadcrumb') with {
+                    modifiers: ['bottom'],
                     embed: {
                         breadcrumbs: self.renderBreadcrumbSteps(data.category, false, data.filterPath)
                     }

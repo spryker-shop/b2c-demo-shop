@@ -1,0 +1,100 @@
+{% extends template('page-layout-checkout', 'CheckoutPage') %}
+
+{% define data = {
+    forms: {
+        address: _view.addressesForm,
+        shipping: _view.addressesForm.shippingAddress,
+        billing: _view.addressesForm.billingAddress
+    },
+    
+    title: 'checkout.step.address.title' | trans
+} %}
+
+{% block content %}
+    {% embed molecule('form') with {
+        class: 'checkout-layout',
+        data: {
+            form: data.forms.address,
+            submit: {
+                enable: true,
+                text: 'checkout.step.shipment' | trans
+            }
+        },
+        embed: {
+            forms: {
+                shipping: data.forms.shipping,
+                billing: data.forms.billing
+            }
+        }
+    } only %}
+        {% block fields %}
+
+            <div class="grid grid--justify">
+                <div class="col col--sm-6 checkout-layout__half-left">
+                    {% include molecule('form') with {
+                        data: {
+                            class: 'col col--sm-6',
+                            title: 'page.checkout.address.shipping-address' | trans,
+                            form: embed.forms.shipping,
+                            enableStart: false,
+                            enableEnd: false,
+                            layout: {
+                                salutation: 'col col--sm-12 col--lg-2',
+                                first_name: 'col col--sm-12 col--lg-5',
+                                last_name: 'col col--sm-12 col--lg-5',
+                                address1: 'col col--sm-12 col--md-8 col--lg-6',
+                                address2: 'col col--sm-12 col--md-4 col--lg-2',
+                                address3: 'col col--sm-12 col--md-4 col--lg-4',
+                                zip_code: 'col col--sm-6 col--lg-3',
+                                city: 'col col--sm-6 col--lg-5',
+                                iso2_code: 'col col--sm-12 col--lg-4'
+                            },
+                            submit: {
+                                enable: false
+                            },
+                            cancel: {
+                                enable: false
+                            }
+                        }
+                    } only %}
+                </div>
+
+                <div class="col col--sm-6 checkout-layout__half-right">
+                    <h5>{{'page.checkout.address.billing-address' | trans}}</h5>
+                    {{form_row(data.form.billingSameAsShipping, {
+                        component: molecule('toggler-checkbox'),
+                        attributes: {
+                            target: 'js-address__billing',
+                            'class-to-toggle': 'is-hidden',
+                            'add-class-when-checked': true
+                        }
+                    })}}
+                    {% include molecule('form') with {
+                        class: 'js-address__billing is-hidden',
+                        data: {
+                            form: embed.forms.billing,
+                            enableStart: false,
+                            enableEnd: false,
+                            layout: {
+                                salutation: 'col col--sm-12 col--lg-2',
+                                first_name: 'col col--sm-12 col--lg-5',
+                                last_name: 'col col--sm-12 col--lg-5',
+                                address1: 'col col--sm-8 col--lg-10',
+                                address2: 'col col--sm-4 col--lg-2',
+                                zip_code: 'col col--sm-6 col--lg-4',
+                                city: 'col col--sm-6 col--lg-4',
+                                iso2_code: 'col col--sm-12 col--lg-4'
+                            },
+                            submit: {
+                                enable: false
+                            },
+                            cancel: {
+                                enable: false
+                            }
+                        }
+                    } only %}
+                </div>
+            </div>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

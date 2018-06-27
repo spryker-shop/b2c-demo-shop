@@ -37,17 +37,13 @@
     {% block container %}
         <div class="container">
             {% block pageInfo %}
-                <div class="box">
-                    {% block breadcrumbs %}
-                        {% include molecule('breadcrumb') only %}
-                    {% endblock %}
+                {% block breadcrumbs %}
+                    {% include molecule('breadcrumb') only %}
+                {% endblock %}
 
-                    <hr />
-
-                    {% block title %}
-                        <h3>{{data.title}}</h3>
-                    {% endblock %}
-                </div>
+                {% block title %}
+                    <h1 class="main-title">{{data.title}}</h1>
+                {% endblock %}
             {% endblock %}
 
             <main>

@@ -2,10 +2,6 @@
 @mixin shop-ui-footer($name: '.footer') {
     #{$name} {
         border-top: 1px solid $setting-color-lightest;
-        padding: 30px 0 50px;
-        @include helper-breakpoint-media-min($xl-min) {
-            padding: 92px 0 86px;
-        }
 
         &__title {
             font: bold 13px $setting-font-family-additional;
@@ -21,7 +17,7 @@
             }
         }
 
-        .footer-title-nav {
+        &-title-nav {
             @include helper-breakpoint-media-max($sm-max) {
                 position: relative;
                 &:before {
@@ -50,11 +46,12 @@
             }
         }
 
-        .footer-top {
+        &-top {
             display: flex;
             justify-content: space-between;
             flex-wrap: wrap;
-            margin: 0 1rem 16px;
+            margin: 0 1rem;
+            padding: 30px 0 0;
             &__col {
                 width: 100%;
                 margin-top: -1px;
@@ -76,7 +73,7 @@
                 }
             }
             @include helper-breakpoint-media-min($xl-min) {
-                padding: 0 0 86px;
+                padding: 92px 0 86px;
                 &__col {
                     padding-right: 10%;
                 }
@@ -101,7 +98,7 @@
             }
         }
 
-        .footer-logo-copy {
+        &-logo-copy {
             order: 1;
             @include helper-breakpoint-media-min($lg-min) {
                 display: flex;
@@ -109,7 +106,7 @@
             }
         }
 
-        .footer-logo {
+        &-logo {
             padding: 0;
             width: 90px;
             display: block;
@@ -123,11 +120,18 @@
             }
         }
 
-        .footer-bottom {
-            margin: 0 1rem;
+        &-bottom {
+            margin: 16px 1rem 0;
             justify-content: space-between;
+            padding: 0 0 50px;
+            @include helper-breakpoint-media-min($xl-min) {
+                padding: 0 0 86px;
+            }
             &:after {
                 display: none;
+            }
+            &:first-child {
+                margin-top: 30px;
             }
         }
 
@@ -142,7 +146,7 @@
             }
         }
 
-        .footer-icons {
+        &-icons {
             display: flex;
             justify-content: center;
             padding: 5px 0 20px;
@@ -190,7 +194,7 @@
             height: 9px;
         }
 
-        .footer-currency-lang {
+        &-currency-lang {
             display: flex;
             order: 1;
             .select {

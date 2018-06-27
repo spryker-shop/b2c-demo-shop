@@ -2,15 +2,17 @@
     #{$name} {
         @include helper-effect-transition(background-color);
         display: inline-block;
-        padding: calc(.25rem + 1px) calc(.5rem + 1px);
+        padding: .5rem .5rem;
         background-color: $setting-color-main;
         border: none;
         color: $setting-color-white;
         text-align: center;
+        font: normal 15px $setting-font-family;
         cursor: pointer;
 
         &:hover,
         &:focus {
+            color: $setting-color-white;
             background-color: helper-color-dark($setting-color-alt);
             text-decoration: none;
         }
