@@ -1,0 +1,50 @@
+{% extends template('page-layout-catalog', 'CatalogPage') %}
+
+{% define data = {
+    products: _view.products,
+    facets: _view.facets,
+    category: _view.category | default,
+    categories: categories | default([]),
+    categoryId: _view.idCategory | default,
+    filterPath: _view.filterPath | default,
+    viewMode: _view.viewMode | default,
+
+    title: _view.category.name | default,
+    metaTitle: _view.pageTitle | default(_view.category.name | default),
+    metaDescription: _view.pageDescription | default,
+    metaKeywords: _view.pageKeywords | default,
+
+    pagination: {
+        parameters: app.request.query.all(),
+        currentPage: _view.pagination.currentPage,
+        paginationPath: app.request.getPathInfo(),
+        maxPage: _view.pagination.maxPage,
+        showAlwaysFirstAndLast: true
+    }
+} %}
+
+{% block filterBar %}
+    {{parent()}}
+
+    {% if data.categoryId %}
+        <div class="box">
+            {{ widgetBlock('CatalogCmsBlockWidgetPlugin', 'middle', data.categoryId) }}
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    {% if data.categoryId %}
+        <div class="box">
+            {{ widgetBlock('CatalogCmsBlockWidgetPlugin', 'top', data.categoryId) }}
+        </div>
+    {% endif %}
+
+    {{parent()}}
+
+    {% if data.categoryId %}
+        <div class="box">
+            {{ widgetBlock('CatalogCmsBlockWidgetPlugin', 'bottom', data.categoryId) }}
+        </div>
+    {% endif %}
+{% endblock %}

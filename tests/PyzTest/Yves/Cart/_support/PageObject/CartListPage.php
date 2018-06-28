@@ -12,6 +12,6 @@ class CartListPage
     const START_CHECKOUT_XPATH = '[data-qa="cart-go-to-checkout"]';
     const CART_HEADER = 'Cart';
 
-    const FIRST_CART_ITEM_QUANTITY_INPUT_XPATH = '[data-qa="cart-change-quantity-input"]';
-    const FIRST_CART_ITEM_CHANGE_QUANTITY_BUTTON_XPATH = '[data-qa="cart-update-quantity-button"]';
+    const FIRST_CART_ITEM_QUANTITY_INPUT_XPATH = '[data-qa*="cart-quantity-input"] [data-qa="quantity-input"]';
+    const FIRST_CART_ITEM_CHANGE_QUANTITY_BUTTON_XPATH = '[data-qa*="cart-quantity-input"] [data-qa="quantity-input-submit"]';
 }

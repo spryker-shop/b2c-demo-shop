@@ -21,7 +21,7 @@ const paths = {
         // modules: './vendor/spryker/spryker-shop/Bundles',
         modules: './vendor/spryker-shop',
         // ShopUi source folder
-        shopUiModule: `./vendor/spryker/spryker-shop/Bundles/ShopUi/src/SprykerShop/Yves/ShopUi/Theme/${theme}`
+        shopUiModule: `./vendor/spryker-shop/Bundles/ShopUi/src/SprykerShop/Yves/ShopUi/Theme/${theme}`
     },
 
     // project folders
@@ -78,7 +78,6 @@ module.exports = {
             dirs: [
                 path.join(context, paths.core.modules),
                 path.join(context, paths.project.modules)
-
             ],
             // files/dirs patterns
             patterns: [
