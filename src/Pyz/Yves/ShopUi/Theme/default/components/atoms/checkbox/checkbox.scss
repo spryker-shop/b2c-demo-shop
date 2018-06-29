@@ -22,6 +22,7 @@
         &__input {
             @include helper-visibility-invisible;
             position: absolute;
+            background: red;
         }
 
         &__check {
@@ -35,7 +36,7 @@
             fill: #fff;
         }
 
-        &__input:checked + .checkbox__box {
+        &__input:checked + #{$name}__box {
             border: 1px solid $setting-color-main;
             background-color: $setting-color-main;
             & + .checkbox__check {

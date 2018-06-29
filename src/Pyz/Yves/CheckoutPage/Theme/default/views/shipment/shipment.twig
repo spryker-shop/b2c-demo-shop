@@ -1,0 +1,47 @@
+{% extends template('page-layout-checkout', 'CheckoutPage') %}
+
+{% define data = {
+    backUrl: _view.previousStepUrl,
+    forms: {
+        shipment: _view.shipmentForm
+    },
+    
+    title: 'checkout.step.shipment.title' | trans
+} %}
+
+{% block content %}
+    {% embed molecule('form') with {
+        class: 'checkout-layout',
+        data: {
+            form: data.forms.shipment,
+            options: {
+                attr: { 
+                    id: 'payment-form' 
+                }
+            },
+            submit: {
+                enable: true,
+                text: 'checkout.step.payment' | trans
+            },
+            cancel: {
+                enable: true,
+                url: data.backUrl,
+                text: 'general.back.button' | trans
+            }
+        }
+    } only %}
+        {% block fields %}
+            {% for name, choices in data.form.idShipmentMethod.vars.choices %}
+                <div class="col col--sm-6 checkout-layout__half">
+                    <h5>{{name}}</h5>
+
+                    {% for key, choice in choices %}
+                        {{ form_row(data.form.idShipmentMethod[key], {
+                            label: data.form.idShipmentMethod[key].vars.label
+                        }) }}
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

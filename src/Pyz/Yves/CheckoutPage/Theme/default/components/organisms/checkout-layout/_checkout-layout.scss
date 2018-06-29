@@ -1,5 +1,6 @@
 @mixin shop-ui-checkout-layout ($name: '.checkout-layout'){
     #{$name} {
+        padding-bottom: 40px;
 
         h5 {
             font: 500 20px $setting-font-family-additional;
@@ -7,11 +8,25 @@
             text-transform: uppercase;
             margin-bottom: 30px;
         }
-        &__half-left {
-            padding-right: 20px;
+        &__half:nth-child(1) {
+            padding-right: 30px;
         }
-        &__half-right {
-            padding-left: 20px;
+        &__half:nth-child(2) {
+            padding-left: 30px;
+        }
+        .address-form .grid,
+        .address-form .toggler-checkbox{
+            margin: 0 -0.5rem;
+            max-width: none;
+        }
+
+        .checkout__address-list {
+            padding-left: 30px;
+        }
+
+        #payment-form {
+            display: flex;
+            flex-wrap: wrap;
         }
     }
 }
