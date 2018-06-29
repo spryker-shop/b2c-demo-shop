@@ -1,0 +1,48 @@
+{% extends template('page-layout-catalog', 'CatalogPage') %}
+
+{% define data = {
+    products: _view.products,
+    facets: _view.facets,
+    category: _view.category | default,
+    categories: categories | default([]),
+    categoryId: _view.idCategory | default,
+    filterPath: _view.filterPath | default,
+    viewMode: _view.viewMode | default,
+
+    title: _view.category.name | default,
+    metaTitle: _view.pageTitle | default(_view.category.name | default),
+    metaDescription: _view.pageDescription | default,
+    metaKeywords: _view.pageKeywords | default,
+
+    pagination: {
+        parameters: app.request.query.all(),
+        currentPage: _view.pagination.currentPage,
+        paginationPath: app.request.getPathInfo(),
+        maxPage: _view.pagination.maxPage,
+        showAlwaysFirstAndLast: true
+    }
+} %}
+
+{% block content %}
+    {% set cmsTop = spyCmsBlock({category: data.categoryId, position: 'top'}) %}
+    {% set cmsMiddle = spyCmsBlock({category: data.categoryId, position: 'middle'}) %}
+    {% set cmsBottom = spyCmsBlock({category: data.categoryId, position: 'bottom'}) %}
+
+    {% if cmsTop | trim is not empty %}
+        <div class="box">
+            {{ cmsTop | raw }}
+        <div>
+    {% endif %}
+
+    {% if cmsMiddle | trim is not empty %}
+        <div class="box">
+            {{ cmsMiddle | raw }}
+        <div>
+    {% endif %}
+
+    {% if cmsBottom | trim is not empty %}
+        <div class="box">
+            {{ cmsBottom | raw }}
+        <div>
+    {% endif %}
+{% endblock %}

@@ -12,6 +12,7 @@ use SprykerShop\Yves\CartNoteWidget\Plugin\CustomerPage\CartNoteOrderNoteWidgetP
 use SprykerShop\Yves\CustomerPage\CustomerPageDependencyProvider as SprykerShopCustomerPageDependencyProvider;
 use SprykerShop\Yves\CustomerReorderWidget\Plugin\CustomerPage\CustomerReorderWidgetPlugin;
 use SprykerShop\Yves\NewsletterWidget\Plugin\CustomerPage\NewsletterSubscriptionSummaryWidgetPlugin;
+use SprykerShop\Yves\WishlistWidget\Plugin\CustomerPage\WishlistMenuItemWidgetPlugin;
 
 class CustomerPageDependencyProvider extends SprykerShopCustomerPageDependencyProvider
 {
@@ -45,6 +46,25 @@ class CustomerPageDependencyProvider extends SprykerShopCustomerPageDependencyPr
             CustomerReorderWidgetPlugin::class,
             CartNoteOrderItemNoteWidgetPlugin::class, #CartNoteFeature
             CartNoteOrderNoteWidgetPlugin::class, #CartNoteFeature
+        ];
+    }
+
+    /**
+     * @return string[]
+     */
+    protected function getCustomerMenuItemWidgetPlugins(): array
+    {
+        return [
+            WishlistMenuItemWidgetPlugin::class,
+        ];
+    }
+
+    /**
+     * @return \SprykerShop\Yves\CustomerPageExtension\Dependency\Plugin\PreRegistrationCustomerTransferExpanderPluginInterface[]
+     */
+    protected function getPreRegistrationCustomerTransferExpanderPlugins(): array
+    {
+        return [
         ];
     }
 }

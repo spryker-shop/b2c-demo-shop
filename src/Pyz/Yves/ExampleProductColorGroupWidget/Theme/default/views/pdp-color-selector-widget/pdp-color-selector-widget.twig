@@ -1,0 +1,9 @@
+{% extends template('widget') %}
+
+{% define data = {
+    idProductAbstract: _widget.idProductAbstract | default
+} %}
+
+{% block body %}
+    {{ widgetGlobal('ProductGroupWidgetPlugin', data.idProductAbstract, view('pdp-color-selector', 'ExampleProductColorGroupWidget')) }}
+{% endblock %}

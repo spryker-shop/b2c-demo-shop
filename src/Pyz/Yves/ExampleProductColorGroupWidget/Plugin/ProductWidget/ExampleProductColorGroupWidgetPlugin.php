@@ -35,6 +35,6 @@ class ExampleProductColorGroupWidgetPlugin extends AbstractWidgetPlugin implemen
      */
     public static function getTemplate(): string
     {
-        return '@ExampleProductColorGroupWidget/_product-widget/product-groups.twig';
+        return '@ExampleProductColorGroupWidget/views/product-color-selector-widget/product-color-selector-widget.twig';
     }
 }

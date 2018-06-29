@@ -27,11 +27,15 @@
                     molecule('filter-' ~ filter.config.name, 'CatalogPage'),
                     molecule('filter-' ~ filter.config.type, 'CatalogPage')
                 ] ignore missing with {
-                    class: hasToggler ? 'js-' ~  filter.name ~ ' is-hidden' : '',
                     data: {
                         filterPath: data.filterPath,
+                        categories: data.categories,
                         filter: filter,
-                        categories: data.categories
+                        parameter: filter.config.parameterName | default(''),
+                        min: filter.min | default(0),
+                        max: filter.max | default(0),
+                        activeMin: filter.activeMin | default(0),
+                        activeMax: filter.activeMax | default(0)
                     }
                 } only %}
             </div>
