@@ -51,7 +51,50 @@
         }
 
         .summary-product-list {
+            width: 100%;
+            th, td {
+                border-bottom: dotted 1px $setting-color-lightest;
+                padding-top: 8px;
+                padding-bottom: 8px;
+                &:not(:first-child) {
+                    padding-left: 15px;
+                }
+            }
+        }
 
+        .checkout-product-img {
+            width: 3rem;
+            .thumbnail {
+                height: 3.5rem;
+                width: 3.5rem;
+                &:after {
+                    content: '';
+                    position: absolute;
+                    top: -4px;
+                    left: -4px;
+                    right: -4px;
+                    bottom: -4px;
+                    border-radius: 4px;
+                    background: rgba(0, 0, 0, 0.05);
+                    z-index: 350;
+                }
+            }
+        }
+
+        .summary-right {
+            padding-left: 1rem;
+            .cart-note {
+                border-bottom: dotted 1px $setting-color-lightest;
+                padding: 20px 0;
+            }
+        }
+
+        .summary-voucher {
+            padding: 40px 1rem 0 0;
+        }
+
+        .summary-overview {
+            padding: 40px 0 0 1rem;
         }
 
     }
