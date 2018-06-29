@@ -14,15 +14,33 @@
         }
     } only %}
 {% endblock %}
-    
-{% block breadcrumbs %}
-    {% include view('cart-checkout-breadcrumb', 'CheckoutWidget') with {
-        data: {
-            isCartPage: false,
-            checkoutBreadcrumbs: data.breadcrumbs
-        }
-    } only %}
+
+{% block container %}
+    <div class="container">
+        <div class="container__inner">
+            {% block pageInfo %}
+                {% block breadcrumbs %}
+                    {% include view('cart-checkout-breadcrumb', 'CheckoutWidget') with {
+                        data: {
+                            isCartPage: false,
+                            checkoutBreadcrumbs: data.breadcrumbs
+                        }
+                    } only %}
+                {% endblock %}
+
+                {% block title %}
+                    <h1 class="main-title">{{data.title}}</h1>
+                {% endblock %}
+            {% endblock %}
+
+            <main>
+                {% block content %}{% endblock %}
+            </main>
+        </div>
+    </div>
 {% endblock %}
+    
+
 
 {% block footer %}
     {% embed organism('footer') only %}

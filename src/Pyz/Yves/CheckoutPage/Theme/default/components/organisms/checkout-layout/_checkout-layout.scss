@@ -1,5 +1,6 @@
 @mixin shop-ui-checkout-layout ($name: '.checkout-layout'){
     #{$name} {
+        padding-bottom: 40px;
 
         h5 {
             font: 500 20px $setting-font-family-additional;
@@ -7,12 +8,52 @@
             text-transform: uppercase;
             margin-bottom: 30px;
         }
-        &__half-left {
-            padding-right: 20px;
+        &__half:nth-child(1) {
+            padding-right: 30px;
         }
-        &__half-right {
-            padding-left: 20px;
+        &__half:nth-child(2) {
+            padding-left: 30px;
+            .toggler-checkbox {
+                margin-bottom: 58px;
+            }
         }
+        .address-form .grid {
+            margin: 0 -0.5rem;
+            max-width: none;
+        }
+
+        .checkout__address-list {
+            padding-left: 30px;
+        }
+
+        .form__actions {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: dotted 1px $setting-color-lightest;
+        }
+
+        #payment-form .form__actions {
+            margin-top: 60px;
+        }
+
+        .payment-form-indent .form__fields {
+            padding-top: 15px;
+            padding-left: 21px;
+        }
+
+        .summary-address {
+            padding-bottom: 30px;
+            padding-right: 1rem;
+            h5 {
+                display: inline-block;
+                margin: 0 5px 15px 0;
+            }
+        }
+
+        .summary-product-list {
+
+        }
+
     }
 }
 

@@ -11,36 +11,37 @@
 
 {% block body %}
     <div class="container">
-        <div class="footer-top">
-            <div class="subscription-wrapper">
-                <h5 class="footer__title">{{ 'global.newsletter' | trans }}</h5>
-                {{ render(path('newsletter/subscribe')) }}
-            </div>
+        {% block footerTop %}
+            <div class="footer-top">
+                <div class="subscription-wrapper">
+                    <h5 class="footer__title">{{ 'global.newsletter' | trans }}</h5>
+                    {{ render(path('newsletter/subscribe')) }}
+                </div>
 
-            {% if data.showNavigation %}
+                {% if data.showNavigation %}
+                    <div class="footer-top__col">
+                        <h5 class="footer__title footer-title-nav js-toggle-nav" data-toggle-target=".js-footer-nav-1">{{ 'global.categories' | trans }}</h5>
+                        <div class="{{config.name}}__row {{config.name}}__navigation-main hidden-nav js-footer-nav-1">
+                            {{ widgetGlobal('NavigationWidgetPlugin', 'FOOTER_NAVIGATION_CATEGORIES', 'navigation-footer') }}
+                        </div>
+                    </div>
+                {% endif %}
+
                 <div class="footer-top__col">
-                    <h5 class="footer__title footer-title-nav js-toggle-nav" data-toggle-target=".js-footer-nav-1">{{ 'global.categories' | trans }}</h5>
-                    <div class="{{config.name}}__row {{config.name}}__navigation-main hidden-nav js-footer-nav-1">
-                        {{ widgetGlobal('NavigationWidgetPlugin', 'FOOTER_NAVIGATION_CATEGORIES', 'navigation-footer') }}
+                    <h5 class="footer__title footer-title-nav js-toggle-nav" data-toggle-target=".js-footer-nav-2">{{ 'global.company' | trans }}</h5>
+                    <div class="hidden-nav js-footer-nav-2">
+                        {{ widgetGlobal('NavigationWidgetPlugin', 'FOOTER_NAVIGATION', 'navigation-footer') }}
                     </div>
                 </div>
-            {% endif %}
 
-            <div class="footer-top__col">
-                <h5 class="footer__title footer-title-nav js-toggle-nav" data-toggle-target=".js-footer-nav-2">{{ 'global.company' | trans }}</h5>
-                <div class="hidden-nav js-footer-nav-2">
-                    {{ widgetGlobal('NavigationWidgetPlugin', 'FOOTER_NAVIGATION', 'navigation-footer') }}
+                <div class="footer-top__col">
+                    <h5 class="footer__title footer-title-nav js-toggle-nav" data-toggle-target=".js-footer-nav-3">{{ 'global.social' | trans }}</h5>
+                    <div class="hidden-nav js-footer-nav-3">
+                        {{ widgetGlobal('NavigationWidgetPlugin', 'SOCIAL_LINKS', 'navigation-footer') }}
+                    </div>
                 </div>
             </div>
-
-            <div class="footer-top__col">
-                <h5 class="footer__title footer-title-nav js-toggle-nav" data-toggle-target=".js-footer-nav-3">{{ 'global.social' | trans }}</h5>
-                <div class="hidden-nav js-footer-nav-3">
-                    {{ widgetGlobal('NavigationWidgetPlugin', 'SOCIAL_LINKS', 'navigation-footer') }}
-                </div>
-            </div>
-
-        </div>
+        {% endblock %}
 
         <div class="grid footer-bottom">
 

@@ -2,6 +2,7 @@
     #{$name} {
         position: relative;
         display: inline-block;
+        margin-bottom: 5px;
 
         &__container {
             display: block;
@@ -14,6 +15,7 @@
             border: 1px solid #d7d7d7;
             border-radius: 2px;
             background-color: $setting-color-white;
+            margin-top: 2px;
             margin-right: .63rem;
             text-align: center;
             vertical-align: top;
@@ -22,20 +24,21 @@
         &__input {
             @include helper-visibility-invisible;
             position: absolute;
+            background: red;
         }
 
         &__check {
             @include helper-visibility-invisible;
             @include helper-effect-transition;
             position: absolute;
-            top: 3px !important;
+            top: 5px !important;
             left: 4px !important;
             width: 9px !important;
             height: 10px !important;
             fill: #fff;
         }
 
-        &__input:checked + .checkbox__box {
+        &__input:checked + #{$name}__box {
             border: 1px solid $setting-color-main;
             background-color: $setting-color-main;
             & + .checkbox__check {
