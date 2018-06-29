@@ -2,19 +2,25 @@
 
 {% define config = {
     name: 'select',
-    tag: 'label',
-    renderAttributes: false
+    tag: 'label'
 } %}
 
 {% define data = {
     options: []
 } %}
 
+{% block attributes %}{% endblock %}
+
 {% block body %}
-    <select class="{{config.name}}__select {% block selectClass %}{% endblock %}" {{block('attributes')}}>
+    <select class="{{config.name}}__select {% block selectClass %}{% endblock %}" {% block selectAttributes %}{{component.renderAttributes(attributes)}}{% endblock %}>
         {% block options %}
             {% for option in data.options %}
-                <option value="{{option.value}}">{{option.label}}</option>
+                {% set isSelected = option.selected | default(false) %}
+                {% set isDisabled = option.disabled | default(false) %}
+
+                <option value="{{option.value}}" {% if isSelected %}selected{% endif %} {% if isDisabled %}disabled{% endif %}>
+                    {{option.label}}
+                </option>
             {% endfor %}
         {% endblock %}
     </select>
