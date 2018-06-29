@@ -31,97 +31,88 @@
 } %}
 
 {% block content %}
-    <div class="grid">
-        <div class="col col--sm-12 col--lg-4">
-            <div class="box">
-                <span class="float-right">{{ 'checkout.step.summary.with_method' | trans }} <strong>{{data.paymentMethod}}</strong></span>
-                <h6>{{ 'checkout.step.summary.payment' | trans }}</h6>
-                {# {% if _view.quoteTransfer.payment.summaryPartialPath is defined and _view.quoteTransfer.payment.summaryPartialPath %}
-                    {% include '@' ~ _view.quoteTransfer.payment.summaryPartialPath ~ '.twig' with {'_view.quoteTransfer': _view.quoteTransfer} %}
-                {% endif %} #}
-                <hr/>
-
-                {% include molecule('display-address') with {
-                    class: 'text-small',
-                    data: {
-                        address: data.billingAddress
-                    }
-                } only %}
+    <div class="checkout-layout">
+        <div class="grid">
+            <div class="col col--sm-12 col--lg-4">
+                <div class="summary-address">
+                    <div class="summary-address__title">
+                        <h5>{{ 'checkout.step.summary.payment' | trans }}</h5>
+                        {{ 'checkout.step.summary.with_method' | trans }} <strong>{{data.paymentMethod}}</strong>
+                    </div>
+                    {% include molecule('display-address') with {
+                        class: 'text-small',
+                        data: {
+                            address: data.billingAddress
+                        }
+                    } only %}
+                </div>
+                <div class="summary-address">
+                    <div class="summary-address__title">
+                        <h5>{{ 'checkout.step.summary.shipping' | trans }}</h5>
+                        {{ 'checkout.step.summary.with_method' | trans }} <strong>{{ data.shipmentMethod }}</strong>
+                    </div>
+                    {% include molecule('display-address') with {
+                        class: 'text-small',
+                        data: {
+                            address: data.shippingAddress
+                        }
+                    } only %}
+                </div>
             </div>
 
-            <div class="box">
-                <span class="float-right">{{ 'checkout.step.summary.with_method' | trans }} <strong>{{ data.shipmentMethod }}</strong></span>
-                <h6>{{ 'checkout.step.summary.shipping' | trans }}</h6>
-                <hr/>
-
-                {% include molecule('display-address') with {
-                    class: 'text-small',
-                    data: {
-                        address: data.shippingAddress
-                    }
-                } only %}
-            </div>
-        </div>
-
-        <div class="col col--sm-12 col--lg-8">
-            <div class="box">
+            <div class="col col--sm-12 col--lg-8">
                 {% for item in data.cartItems %}
                     {% set item = item.bundleProduct is defined ? item.bundleProduct : item %}
-                    {% embed molecule('summary-item', 'CheckoutPage') with {
+                    {% set firstImage = item.images | first %}
+                    <pre>
+                        </pre>
+                    {% include molecule('summary-item', 'CheckoutPage') with {
+                        class: 'summary-product-list',
                         data: {
                             name: item.name,
+                            image: firstImage.externalUrlSmall,
                             quantity: item.quantity,
                             price: item.sumPrice | money,
                             options: item.productOptions | default({}),
-                            bundleItems: item.bundleItems | default([]),
-                        },
-                        embed: {
-                            isLast: not loop.last,
-                            item: item
+                            bundleItems: item.bundleItems | default([])
                         }
                     } only %}
-                        {% block body %}
-                            {{parent()}}
-                            {{ widget('CartNoteQuoteItemNoteWidgetPlugin', embed.item) }}
-                            {% if embed.isLast %}<hr/>{% endif %}
-                        {% endblock %}
-                    {% endembed %}
                 {% endfor %}
-            </div>
 
-            {{ widget('CartNoteQuoteNoteWidgetPlugin', data.transfer) }}
+                {{ widget('CartNoteQuoteNoteWidgetPlugin', data.transfer) }}
 
-            <div class="box">
-                {{ widget('CheckoutVoucherFormWidgetPlugin', data.transfer) }}
-            </div>
+                <div class="box">
+                    {{ widget('CheckoutVoucherFormWidgetPlugin', data.transfer) }}
+                </div>
 
-            {% embed molecule('form') with {
-                class: 'box',
-                data: {
-                    form: data.forms.summary,
-                    submit: {
-                        enable: true,
-                        text: 'checkout.step.place.order' | trans
+                {% embed molecule('form') with {
+                    class: 'box',
+                    data: {
+                        form: data.forms.summary,
+                        submit: {
+                            enable: true,
+                            text: 'checkout.step.place.order' | trans
+                        },
+                        cancel: {
+                            enable: true,
+                            url: data.backUrl,
+                            text: 'general.back.button' | trans
+                        }
                     },
-                    cancel: {
-                        enable: true,
-                        url: data.backUrl,
-                        text: 'general.back.button' | trans
+                    embed: {
+                        overview: data.overview
                     }
-                },
-                embed: {
-                    overview: data.overview
-                }
-            } only %}
-                {% block body %}
-                    {% include molecule('summary-overview', 'CheckoutPage') with {
-                        data: embed.overview
-                    } only %}
+                } only %}
+                    {% block body %}
+                        {% include molecule('summary-overview', 'CheckoutPage') with {
+                            data: embed.overview
+                        } only %}
 
-                    <hr />
-                    {{parent()}}
-                {% endblock %}
-            {% endembed %}
+                        <hr />
+                        {{parent()}}
+                    {% endblock %}
+                {% endembed %}
+            </div>
         </div>
     </div>
 {% endblock %}

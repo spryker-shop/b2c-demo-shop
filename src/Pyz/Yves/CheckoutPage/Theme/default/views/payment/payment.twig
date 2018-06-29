@@ -1,0 +1,79 @@
+{% extends template('page-layout-checkout', 'CheckoutPage') %}
+
+{% define data = {
+    backUrl: _view.previousStepUrl,
+    forms: {
+        payment: _view.paymentForm
+    },
+
+    title: 'checkout.step.payment.title' | trans
+} %}
+
+{% block content %}
+    {% embed molecule('form') with {
+        class: 'checkout-layout',
+        data: {
+            form: data.forms.payment,
+            options: {
+                attr: {
+                    id: 'payment-form'
+                }
+            },
+            submit: {
+                enable: true,
+                text: 'checkout.step.summary' | trans
+            },
+            cancel: {
+                enable: true,
+                url: data.backUrl,
+                text: 'general.back.button' | trans
+            }
+        }
+    } only %}
+        {% block fieldset %}
+            {% for name, choices in data.form.paymentSelection.vars.choices %}
+                <h5>{{ ('checkout.payment.provider.' ~ name) | trans }}</h5>
+
+                <ul class="list spacing-y">
+                    {% for key, choice in choices %}
+                        <li class="list__item spacing-y clear">
+                            {% embed molecule('form') with {
+                                class: 'payment-form-indent',
+                                data: {
+                                    form: data.form[data.form.paymentSelection[key].vars.value],
+                                    enableStart: false,
+                                    enableEnd: false,
+                                    layout: {
+                                        'card_expires_month': 'col col--sm-4 col--bottom',
+                                        'card_expires_year': 'col col--sm-8 col--bottom'
+                                    }
+                                },
+                                embed: {
+                                    index: loop.index,
+                                    toggler: data.form.paymentSelection[key]
+                                }
+                            } only %}
+                                {% block fieldset %}
+                                    {{ form_row(embed.toggler, {
+                                        required: false,
+                                        component: molecule('toggler-radio'),
+                                        attributes: {
+                                            'target-selector': '.js-payment-method-' ~ embed.index,
+                                            'class-to-toggle': 'is-hidden'
+                                        }
+                                    }) }}
+
+                                    <div class="col col--sm-12 is-hidden js-payment-method-{{embed.index}}">
+                                        <div class="col col--sm-12 col--md-6">
+                                            {{parent()}}
+                                        </div>
+                                    </div>
+                                {% endblock %}
+                            {% endembed %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endfor %}
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
