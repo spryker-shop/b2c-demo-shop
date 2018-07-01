@@ -90,11 +90,11 @@
                     <div class="col col--sm-6 summary-voucher">
                         {{ widget('CheckoutVoucherFormWidgetPlugin', data.transfer) }}
                     </div>
-
-                    {% include molecule('summary-overview', 'CheckoutPage') with {
-                        class: 'col col--sm-6 summary-overview',
-                        data: data.overview
-                    } only %}
+                    <div class="col col--sm-6 summary-overview">
+                        {% include molecule('summary-overview', 'CheckoutPage') with {
+                            data: data.overview
+                        } only %}
+                    </div>
                 </div>
             </div>
 

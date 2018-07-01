@@ -1,6 +1,7 @@
 @mixin shop-ui-checkout-layout ($name: '.checkout-layout'){
     #{$name} {
         padding-bottom: 40px;
+        font-size: 16px;
 
         h5 {
             font: 500 20px $setting-font-family-additional;
@@ -54,11 +55,14 @@
             width: 100%;
             th, td {
                 border-bottom: dotted 1px $setting-color-lightest;
-                padding-top: 8px;
-                padding-bottom: 8px;
+                padding-top: 12px;
+                padding-bottom: 12px;
                 &:not(:first-child) {
                     padding-left: 15px;
                 }
+            }
+            th {
+                padding-top: 0;
             }
         }
 
@@ -91,10 +95,44 @@
 
         .summary-voucher {
             padding: 40px 1rem 0 0;
+            .form__field {
+                padding: 0 !important;
+                .input {
+                    border-radius: 2px 0 0 2px;
+                    border-right: 0;
+                }
+            }
+            .form__actions {
+                margin: 0;
+                padding: 0;
+                border: none;
+            }
+            .form__action {
+                margin: 0;
+            }
         }
 
         .summary-overview {
             padding: 40px 0 0 1rem;
+            table {
+                width: 100%;
+            }
+            td:last-child {
+                text-align: right;
+            }
+            .summary-overview-border {
+                border-bottom: dotted 1px $setting-color-lightest;
+                td {
+                    padding-bottom: 10px;
+                }
+                + tr td {
+                    padding-top: 10px;
+                }
+            }
+        }
+
+        .total td {
+            padding-top: 15px;
         }
 
     }
