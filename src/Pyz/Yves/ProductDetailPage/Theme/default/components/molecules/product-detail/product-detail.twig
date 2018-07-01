@@ -1,0 +1,26 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'product-detail',
+    tag: 'section'
+} %}
+
+{% define data = {
+    description: '',
+    attributes: []
+} %}
+
+{% block body %}
+    <h4>{{ 'product.attribute.long_description' | trans }}</h4>
+    <p>{{ data.description }}</p>
+
+    <h4 class="spacing-top--big">{{ 'page.product.details' | trans }}</h4>
+    <div class="grid">
+        {% for name, value in data.attributes if name %}
+            <p class="col col--sm-12 col--md-6 col--lg-4 col--xl-3" itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue">
+                <strong itemprop="name">{{ ('product.attribute.' ~ name) | trans }}</strong><br/>
+                <span itemprop="value">{{ value }}</span>
+            </p>
+        {% endfor %}
+    </div>
+{% endblock %}

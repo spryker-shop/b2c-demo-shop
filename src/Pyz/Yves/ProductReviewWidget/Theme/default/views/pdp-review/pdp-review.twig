@@ -1,0 +1,59 @@
+{% extends template('widget') %}
+
+{% define data = {
+    idProductAbstract: _widget.idProductAbstract
+} %}
+
+{% block rating %}
+    <hr />
+    {% include molecule('rating-selector', 'ProductReviewWidget') with {
+        modifiers: ['expand'],
+        data: {
+            value: _widget.productReviewStorageTransfer.averageRating | default(0),
+            maxValue: _widget.maximumRating
+        },
+        attributes: {
+            readonly: true
+        }
+    } only %}
+{% endblock %}
+
+{% block body %}
+    <div class="box">
+        {% include molecule('toggler-click') with {
+            attributes: {
+                'trigger-selector': '.js-review__new-review-trigger',
+                'target-selector': '.js-review__new-review-form-target',
+                'class-to-toggle': 'is-hidden'
+            }
+        } only %}
+
+        {% include molecule('toggler-hash') with {
+            attributes: {
+                'trigger-hash': '#review',
+                'target-selector': '.js-review__new-review-form-target',
+                'class-to-toggle': 'is-hidden',
+                'add-class-when-hash-in-url': false
+            }
+        } only %}
+
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <a id="review"></a>
+            <button class="button float-right js-review__new-review-trigger">
+                {{ 'product_review.submit.add_a_review' | trans }}
+            </button>
+        {% else %}
+            <a class="button" href="{{ path('login') }}">
+                {{ 'product_review.submit.add_a_review' | trans }}
+            </a>
+        {% endif %}
+    </div>
+
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <div class="is-hidden js-review__new-review-form-target">
+            {{ render(path('product-review/submit', {'idProductAbstract': data.idProductAbstract})) }}
+        </div>
+    {% endif %}
+
+    {{ render(path('product-review/index', {'idProductAbstract': data.idProductAbstract})) }}
+{% endblock %}
