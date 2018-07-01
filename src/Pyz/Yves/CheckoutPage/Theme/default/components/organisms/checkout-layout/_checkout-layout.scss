@@ -25,6 +25,15 @@
 
         .checkout__address-list {
             padding-left: 30px;
+            > label {
+                font-weight: bold;
+            }
+            > div {
+                margin-top: 10px;
+            }
+            .radio + label {
+                display: none;
+            }
         }
 
         .form__actions {
@@ -135,6 +144,34 @@
             padding-top: 15px;
         }
 
+        .register-form {
+            .form__field {
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+                label {
+                    display: none;
+                }
+                .form__field label {
+                    display: block;
+                }
+            }
+            .form__actions {
+                margin-top: 0;
+            }
+        }
+
+        .login-form .form__fields {
+            max-width: none;
+            margin-left: -0.5rem;
+            margin-right: -0.5rem;
+        }
+
+    }
+
+    .register-type {
+        border-bottom: dotted 1px $setting-color-lightest;
+        padding: 20px 0;
+        margin-bottom: 30px;
     }
 }
 
