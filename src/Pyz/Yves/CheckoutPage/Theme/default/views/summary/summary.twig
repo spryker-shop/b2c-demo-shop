@@ -60,59 +60,60 @@
                 </div>
             </div>
 
-            <div class="col col--sm-12 col--lg-8">
-                {% for item in data.cartItems %}
-                    {% set item = item.bundleProduct is defined ? item.bundleProduct : item %}
-                    {% set firstImage = item.images | first %}
-                    <pre>
-                        </pre>
-                    {% include molecule('summary-item', 'CheckoutPage') with {
-                        class: 'summary-product-list',
-                        data: {
-                            name: item.name,
-                            image: firstImage.externalUrlSmall,
-                            quantity: item.quantity,
-                            price: item.sumPrice | money,
-                            options: item.productOptions | default({}),
-                            bundleItems: item.bundleItems | default([])
-                        }
-                    } only %}
-                {% endfor %}
+            <div class="col col--sm-12 col--lg-8 summary-right">
+                <table class="summary-product-list">
+                    <tr>
+                        <th class="text-left" colspan="2">Product</th>
+                        <th class="text-center">Qty</th>
+                        <th class="text-right">Sum</th>
+                    </tr>
+                    {% for item in data.cartItems %}
+                        {% set item = item.bundleProduct is defined ? item.bundleProduct : item %}
+                        {% set firstImage = item.images | first %}
+                        {% include molecule('summary-item', 'CheckoutPage') with {
+                            class: 'summary-product-list',
+                            data: {
+                                name: item.name,
+                                image: firstImage.externalUrlSmall,
+                                quantity: item.quantity,
+                                price: item.sumPrice | money,
+                                options: item.productOptions | default({}),
+                                bundleItems: item.bundleItems | default([])
+                            }
+                        } only %}
+                    {% endfor %}
+                </table>
 
                 {{ widget('CartNoteQuoteNoteWidgetPlugin', data.transfer) }}
 
-                <div class="box">
-                    {{ widget('CheckoutVoucherFormWidgetPlugin', data.transfer) }}
-                </div>
-
-                {% embed molecule('form') with {
-                    class: 'box',
-                    data: {
-                        form: data.forms.summary,
-                        submit: {
-                            enable: true,
-                            text: 'checkout.step.place.order' | trans
-                        },
-                        cancel: {
-                            enable: true,
-                            url: data.backUrl,
-                            text: 'general.back.button' | trans
-                        }
-                    },
-                    embed: {
-                        overview: data.overview
-                    }
-                } only %}
-                    {% block body %}
+                <div class="grid">
+                    <div class="col col--sm-6 summary-voucher">
+                        {{ widget('CheckoutVoucherFormWidgetPlugin', data.transfer) }}
+                    </div>
+                    <div class="col col--sm-6 summary-overview">
                         {% include molecule('summary-overview', 'CheckoutPage') with {
-                            data: embed.overview
+                            data: data.overview
                         } only %}
-
-                        <hr />
-                        {{parent()}}
-                    {% endblock %}
-                {% endembed %}
+                    </div>
+                </div>
             </div>
+
+            {% include molecule('form') with {
+                class: 'col col--sm-12',
+                data: {
+                    form: data.forms.summary,
+                    submit: {
+                        enable: true,
+                        text: 'checkout.step.place.order' | trans
+                    },
+                    cancel: {
+                        enable: true,
+                        url: data.backUrl,
+                        text: 'general.back.button' | trans
+                    }
+                }
+            } only %}
+
         </div>
     </div>
 {% endblock %}

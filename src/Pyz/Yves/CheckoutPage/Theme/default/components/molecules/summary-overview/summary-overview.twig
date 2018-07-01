@@ -2,7 +2,7 @@
 
 {% define config = {
     name: 'summary-overview',
-    tag: 'ul'
+    tag: 'table'
 } %}
 
 {% define data = {
@@ -20,59 +20,57 @@
 } %}
 
 {% block body %}
-    <li>
-        <span class="float-right">{{ app['cart.quantity'] }} {{ 'checkout.step.summary.items' | trans }}</span>
-        <h6>{{ 'checkout.step.summary.overview' | trans }}</h6>
-    </li>
-    {% block separator %}
-        <li><hr /></li>
-    {% endblock %}
-    <li>
-        {{ 'checkout.step.summary.sub_total' | trans }}
-        <strong class="float-right">{{ data.prices.subTotal | money }}</strong>
-    </li>
-    {{block('separator')}}
+    <tr>
+        <td>{{ 'checkout.step.summary.overview' | trans }}</td>
+        <td>{{ app['cart.quantity'] }} {{ 'checkout.step.summary.items' | trans }}</td>
+    </tr>
+    <tr class="summary-overview-border">
+        <td>{{ 'checkout.step.summary.sub_total' | trans }}</td>
+        <td>{{ data.prices.subTotal | money }}</td>
+    </tr>
 
     {% if data.prices.discountTotal %}
         {% if data.voucherDiscounts is not empty %}
-            <li>
-                <strong>{{ 'cart.vouchers' | trans }}</strong>
-                {% for voucherDiscount in data.voucherDiscounts %}
-                    <div class="grid grid--justify">
-                        <span class="col col--sm-10">{{ voucherDiscount.displayName }}</span>
-                        <span class="col col--expand text-right">{{ voucherDiscount.amount | money }}</span>
-                    </div>
-                {% endfor %}
-            </li>
+            <tr>
+                <td>{{ 'cart.vouchers' | trans }}</td>
+                <td></td>
+            </tr>
+            {% for voucherDiscount in data.voucherDiscounts %}
+                <tr>
+                    <td>{{ voucherDiscount.displayName }}</td>
+                    <td>{{ voucherDiscount.amount | money }}</td>
+                </tr>
+            {% endfor %}
         {% endif %}
 
         {% if data.cartRuleDiscounts|length %}
-            <li>
-                <strong>{{ 'cart.discounts' | trans }}</strong>
-                {% for ruleDiscount in data.cartRuleDiscounts %}
-                    <div class="grid grid--justify">
-                        <span class="col col--sm-10">{{ ruleDiscount.displayName }}</span>
-                        <span class="col col--expand text-right">- {{ ruleDiscount.amount | money }}</span>
-                    </div>
-                {% endfor %}
-            </li>
+            <tr>
+                <td>{{ 'cart.discounts' | trans }}</td>
+                <td></td>
+            </tr>
+            {% for ruleDiscount in data.cartRuleDiscounts %}
+                <tr>
+                    <td>{{ ruleDiscount.displayName }}</td>
+                    <td>- {{ ruleDiscount.amount | money }}</td>
+                </tr>
+            {% endfor %}
         {% endif %}
-
-        {{block('separator')}}
     {% endif %}
 
-    <li>
-        <span class="float-right">{{ data.prices.storeCurrency | money }}</span>
-        {{ 'checkout.step.summary.shipping' | trans }} (<strong>{{ data.shipmentMethod }}</strong>)
-    </li>
-    {{block('separator')}}
-    <li>
-        {{ 'checkout.step.summary.tax' | trans }}
-        <span class="float-right">{{ data.prices.tax | money }}</span>
-    </li>
-    {{block('separator')}}
-    <li>
-        <h6 class="float-right">{{ data.prices.grandTotal | money }}</h6>
-        <h6>{{ 'checkout.step.summary.grand_total' | trans }}</h6>
-    </li>
+    <tr>
+        <td>{{ 'checkout.step.summary.shipping' | trans }} (<strong>{{ data.shipmentMethod }}</strong>)</td>
+        <td>{{ data.prices.storeCurrency | money }}</td>
+    </tr>
+    <tr>
+        <td>{{ 'checkout.step.summary.tax' | trans }}</td>
+        <td>{{ data.prices.tax | money }}</td>
+    </tr>
+    <tr class="total">
+        <td>
+            <h5>{{ 'checkout.step.summary.grand_total' | trans }}</h5>
+        </td>
+        <td>
+            <h5>{{ data.prices.grandTotal | money }}</h5>
+        </td>
+    </tr>
 {% endblock %}

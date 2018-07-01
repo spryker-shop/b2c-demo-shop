@@ -23,24 +23,49 @@
         {% set salesUnitSummary = data.quantitySalesUnit.value / data.quantitySalesUnit.precision ~ ' ' ~ salesUnitName | trans %}
     {% endif %}
 
-    <strong class="float-right">{{data.price}}</strong>
-    <img src="{{ data.image }}"> {{data.quantity}} <span class="text-secondary">&times;</span> {{data.name}} {% if salesUnitSummary is not empty %}(= {{ salesUnitSummary }}){% endif %}
+    <tr>
+        <td class="text-left checkout-product-img">
+            {% if data.image is not empty %}
+                {% include atom('thumbnail') with {
+                    attributes: {
+                        alt: data.name,
+                        src: data.image
+                    }
+                } only %}
+            {% else %}
+                <div class="text-center">
+                    <small>{{ 'global.no_image_available' | trans }}</small>
+                </div>
+            {% endif %}
+        </td>
+        <td class="text-left">
+            {{data.name}} <br>
+            {% if salesUnitSummary is not empty %}(= {{ salesUnitSummary }}){% endif %}
+            {% if data.bundleItems is not empty %}
+                <ul>
+                    <li>{{ 'checkout.summary.item.bundle.description' | trans }}</li>
+                    {% for item in data.bundleItems %}
+                        <li>  - {{ item.quantity }} x {{ item.name }}  </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
 
-    {% if data.bundleItems is not empty %}
-        <ul>
-            <li>{{ 'checkout.summary.item.bundle.description' | trans }}</li>
-            {% for item in data.bundleItems %}
-                <li>  - {{ item.quantity }} x {{ item.name }}  </li>
-            {% endfor %}
-        </ul>
-    {% endif %}
+            {% if data.options is not empty %}
+                <ul>
+                    <li>{{ 'checkout.summary.item.option.description' | trans }}</small></li>
+                    {% for option in data.options %}
+                        <li> + {{ option.value | trans }} <strong>{{ option.sumPrice | default(0) | money }}</strong></li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </td>
+        <td class="text-center">
+            {{data.quantity}}
+        </td>
+        <td class="text-right">
+            {{data.price}}
+        </td>
+    </tr>
 
-    {% if data.options is not empty %}
-        <ul>
-            <li>{{ 'checkout.summary.item.option.description' | trans }}</small></li>
-            {% for option in data.options %}
-                <li> + {{ option.value | trans }} <strong>{{ option.sumPrice | default(0) | money }}</strong></li>
-            {% endfor %}
-        </ul>
-    {% endif %}
+
 {% endblock %}
