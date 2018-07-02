@@ -85,6 +85,13 @@
             border-top-right-radius: 0;
             border-bottom-right-radius: 0;
         }
+        .cart-quantity-input {
+            @include helper-breakpoint-media-min($lg-min) {
+                .grid {
+                    flex-wrap: nowrap;
+                }
+            }
+        }
 
         @content;
     }
