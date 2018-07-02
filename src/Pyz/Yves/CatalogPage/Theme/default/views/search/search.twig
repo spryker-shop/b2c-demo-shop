@@ -45,6 +45,9 @@
             subHeadline: 'global.search.results' | trans
         }
     } only %}
+{% endblock %}
+
+{% block form %}
 
     {% embed molecule('spelling-suggestion', 'CatalogPage') with {
         data: {
@@ -52,14 +55,12 @@
         }
     } only %}
         {% block body %}
-            <hr />
             {{parent()}}
         {% endblock %}
     {% endembed %}
-{% endblock %}
 
-{% block form %}
     {{parent()}}
+
     {% if data.searchString is not empty %}
         <input type="hidden" name="q" value="{{ data.searchString }}" />
     {% endif %}
