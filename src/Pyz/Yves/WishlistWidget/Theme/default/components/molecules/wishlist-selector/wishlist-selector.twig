@@ -1,0 +1,56 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'wishlist-selector',
+    tag: 'div'
+} %}
+
+{% define data = {
+    sku: required,
+    idProductConcrete: required
+} %}
+
+{% set isUserLoggedIn = is_granted('IS_AUTHENTICATED_FULLY') %}
+{% set disableAddToWishlist = data.idProductConcrete is empty %}
+
+{% block body %}
+    {% if isUserLoggedIn %}
+        {% include molecule('ajax-provider') with {
+            class: config.jsName ~ '__provider',
+            attributes: {
+                'url': path('wishlist/add-to-wishlist'),
+                'fetch-on-load': true
+            }
+        } only %}
+
+        {% include molecule('ajax-loader') with {
+            modifiers: ['solid-bg'],
+            data: {
+                showSpinnerOnLoad: true
+            },
+            attributes: {
+                'provider-selector': '.' ~ config.jsName ~ '__provider'
+            }
+        } only %}
+    {% endif %}
+
+    <form method="POST" action="{{ path('wishlist/add-item', { sku: data.sku }) }}" class="{{config.name}}__form">
+        <div class="grid grid--justify">
+            <div class="col col--sm-5">
+                {% if isUserLoggedIn %}
+                    {% include molecule('ajax-renderer') with {
+                        attributes: {
+                            'provider-selector': '.' ~ config.jsName ~ '__provider'
+                        }
+                    } only %}
+                {% endif %}
+            </div>
+
+            <div class="col col--sm-6">
+                <button type="submit" class="button button--expand" {{ disableAddToWishlist ? 'disabled' : '' }}>
+                    {{ 'page.detail.add-to-wishlist' | trans }}
+                </button>
+            </div>
+        </div>
+    </form>
+{% endblock %}

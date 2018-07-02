@@ -1,0 +1,15 @@
+{% extends template('widget') %}
+
+{% define data = {
+    product: product | default,
+    products: products | default([])
+} %}
+
+
+{% block body %}
+
+        {% for availableProduct in data.products if availableProduct.available %}
+            {{ widget('ProductGroupWidgetPlugin', availableProduct) }}
+        {% endfor %}
+
+{% endblock %}

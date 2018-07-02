@@ -1,0 +1,17 @@
+{% extends template('widget') %}
+
+{% define data = {
+    label: '',
+    note: null
+} %}
+
+{% block body %}
+    {% if data.note is not empty %}
+        <div class="cart-note">
+            <ul>
+                <li><h6>{{ data.label | trans }}:</h6></li>
+                <li>{{ data.note | escape | nl2br }}</li>
+            </ul>
+        </div>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,17 @@
+@mixin shop-ui-breadcrumb($name: '.breadcrumb') {
+    #{$name} {
+        display: flex;
+        flex-flow: row wrap;
+        padding: 26px 0;
+        border-bottom: dotted 1px $setting-color-lightest;
+
+        &--bottom {
+            border-bottom: none;
+            border-top: dotted 1px $setting-color-lightest;
+        }
+
+        @content
+    }
+}
+
+@include shop-ui-breadcrumb();

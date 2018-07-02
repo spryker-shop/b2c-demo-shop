@@ -1,0 +1,149 @@
+{% extends template('page-layout-main') %}
+
+{% define data = {
+    products: required,
+    facets: required,
+    category: null,
+    categories: [],
+    categoryId: null,
+    filterPath: null,
+    viewMode: null,
+
+    pagination: {
+        currentPage: required,
+        maxPage: required,
+        parameters: app.request.query.all(),
+        paginationPath: app.request.getPathInfo(),
+        showAlwaysFirstAndLast: true
+    }
+} %}
+
+{% block container %}
+
+    {% block title %}
+        {% if data.category.banner_path %}
+            {% include molecule('jumbotron') with {
+                modifiers: ['category'],
+                data: {
+                    imageUrl: data.category.banner_path,
+                    headline: data.title,
+                    subHeadline: null
+                }
+            } only %}
+        {% else %}
+            {% include molecule('jumbotron') with {
+                modifiers: ['category', 'category-no-img'],
+                data: {
+                    headline: data.title,
+                    subHeadline: null
+                }
+            } only %}
+        {% endif %}
+    {% endblock %}
+
+    <div class="container">
+
+        <main class="container__inner">
+            {% block cmsTop %}
+                {% if data.categoryId %}
+                    <div class="catalog-cms-block catalog-cms-block--top">
+                        {{ widgetBlock('CatalogCmsBlockWidgetPlugin', 'top', data.categoryId) }}
+                    </div>
+                {% endif %}
+            {% endblock %}
+
+            {% block content %}
+                <form method="GET" class="grid">
+                    {% block form %}
+                        <div class="col col--sm-12 col--lg-4 col--xl-3 catalog-left-side">
+
+                            {% include organism('filter-section', 'CatalogPage') with {
+                                class: 'js-catalog__filters-toggle',
+                                data: {
+                                    facets: data.facets,
+                                    filterPath: data.filterPath,
+                                    categories: data.categories
+                                }
+                            } only %}
+
+                            {% block cmsMiddle %}
+                                {% if data.categoryId %}
+                                    <div class="catalog-cms-block catalog-cms-block--middle">
+                                        {{ widgetBlock('CatalogCmsBlockWidgetPlugin', 'middle', data.categoryId) }}
+                                    </div>
+                                {% endif %}
+                            {% endblock %}
+                        </div>
+
+                        <div class="col col--sm-12 col--lg-8 col--xl-9 catalog-right-side">
+                            {% include molecule('sort', 'CatalogPage')  only %}
+
+                            {% include organism('active-filter-section', 'CatalogPage') with {
+                                data: {
+                                    facets: data.facets
+                                }
+                            } only %}
+
+                            <div class="grid grid--stretch product-list">
+                                {% for product in data.products %}
+                                    {{ widget('ProductWidgetPlugin', product, data.viewMode) }}
+                                {% endfor %}
+                            </div>
+
+                            {% include molecule('pagination') with {
+                                data: data.pagination
+                            } only %}
+
+                            {% block cmsBottom %}
+                                {% if data.categoryId %}
+                                    <div class="catalog-cms-block catalog-cms-block--bottom">
+                                        {{ widgetBlock('CatalogCmsBlockWidgetPlugin', 'bottom', data.categoryId) }}
+                                    </div>
+                                {% endif %}
+                            {% endblock %}
+                        </div>
+                    {% endblock %}
+                </form>
+
+            {% endblock %}
+
+            {% macro renderBreadcrumbSteps(categoryNode, isLastLeaf, filterPath) %}
+                {% import _self as self %}
+                {% set categoryUrl = categoryNode.url | default %}
+                {% set categoryUrl = filterPath is not empty ? url(filterPath, {categoryPath: categoryUrl}) : categoryUrl %}
+                {% set categoryLabel = categoryNode.name | default %}
+                {% set categoryPatrentNodes = categoryNode.parents | default(null) %}
+
+                {% if categoryPatrentNodes is not empty %}
+                    {{ self.renderBreadcrumbSteps(categoryPatrentNodes | first, false, filterPath) }}
+
+                    {% if not isLastLeaf %}
+                        {% include molecule('breadcrumb-step') with {
+                            data: {
+                                url: categoryUrl,
+                                label: categoryLabel
+                            }
+                        } only %}
+                    {% endif %}
+                {% endif %}
+            {% endmacro %}
+
+            {% block breadcrumbs %}
+                {% import _self as self %}
+
+                {% embed molecule('breadcrumb') with {
+                    modifiers: ['bottom'],
+                    embed: {
+                        breadcrumbs: self.renderBreadcrumbSteps(data.category, false, data.filterPath)
+                    }
+                } only %}
+                    {% block breadcrumbs %}
+                        {{ embed.breadcrumbs }}
+                    {% endblock %}
+                {% endembed %}
+            {% endblock %}
+
+        </main>
+
+    </div>
+{% endblock %}

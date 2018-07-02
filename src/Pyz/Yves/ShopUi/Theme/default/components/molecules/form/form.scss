@@ -1,0 +1,66 @@
+$shop-ui-form-field-margin: 0.5rem;
+
+@mixin shop-ui-form($name: '.form') {
+    #{$name} {
+        //& & {
+        //    padding-left: $shop-ui-form-field-margin;
+        //    padding-right: $shop-ui-form-field-margin;
+        //}
+        //
+        //&__fields {
+        //    margin-left: - $shop-ui-form-field-margin;
+        //    margin-right: - $shop-ui-form-field-margin;
+        //}
+
+        &__field {
+            padding: 0 .5rem 1.2rem !important;
+        }
+
+        &__actions {
+            text-align: right;
+        }
+
+        &__action {
+            margin-top: $shop-ui-form-field-margin;
+            margin-left: $shop-ui-form-field-margin;
+        }
+
+        &--inline &__container {
+            display: flex;
+            flex-flow: row wrap;
+            align-items: flex-end;
+        }
+
+        &--inline &__fields {
+            float: left;
+            flex-grow: 1;
+            flex-basis: auto;
+        }
+
+        &--inline &__actions {
+            flex-grow: 0;
+            flex-basis: auto;
+        }
+
+        &--inline &__field {
+            padding-bottom: 0;
+            padding-right: 0;
+        }
+
+        .label {
+            display: inline-block;
+            font: normal 16px $setting-font-family;
+            margin-bottom: 6px;
+
+            &--required {
+                &::after {
+                    content: '*';
+                    margin-left: .2rem;
+                    color: $setting-color-main;
+                }
+            }
+        }
+
+        @content;
+    }
+}

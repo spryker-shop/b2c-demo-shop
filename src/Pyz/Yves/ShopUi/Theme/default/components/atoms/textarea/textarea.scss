@@ -1,0 +1,30 @@
+@mixin shop-ui-textarea($name: '.textarea') {
+    #{$name} {
+        @include helper-effect-transition(border-color);
+        display: inline-block;
+        font: normal 16px $setting-font-family;
+        color: $setting-color-dark;
+        padding: .5rem .5rem;
+        border: 1px solid $setting-color-input-border;
+        border-radius: 2px;
+
+        &:focus {
+            border-color: $setting-color-input-border-focus;
+        }
+
+        &::placeholder {
+            color: $setting-color-dark;
+        }
+
+        &--expand {
+            display: block;
+            width: 100%;
+        }
+
+        &--error {
+            border-color: map-get($setting-color-actions, alert);
+        }
+
+        @content;
+    }
+}

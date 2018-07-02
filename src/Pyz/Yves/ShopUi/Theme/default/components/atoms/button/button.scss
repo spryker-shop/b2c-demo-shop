@@ -1,0 +1,50 @@
+@mixin shop-ui-button($name: '.button') {
+    #{$name} {
+        @include helper-effect-transition(all);
+        display: inline-block;
+        padding: 9px 1rem 10px;
+        background-color: $setting-color-main;
+        border: none;
+        color: $setting-color-white;
+        text-align: center;
+        font: normal 15px $setting-font-family;
+        cursor: pointer;
+
+        &:hover,
+        &:focus {
+            color: $setting-color-white;
+            background-color: helper-color-dark($setting-color-main);
+            text-decoration: none;
+        }
+
+        &--hollow {
+            padding: .5rem 1rem;
+            background-color: $setting-color-white;
+            border: 1px solid $setting-color-main;
+            color: $setting-color-main;
+
+            &:hover,
+            &:focus {
+                border-color: helper-color-dark($setting-color-main);
+                background-color: helper-color-dark($setting-color-main);
+                color: #fff;
+            }
+        }
+
+        &--expand {
+            width: 100%;
+        }
+
+        &[disabled],
+        &--disabled {
+            background-color: $setting-color-light;
+            border-color: $setting-color-light;
+            cursor: not-allowed;
+
+            &:hover,
+            &:focus {
+                background-color: $setting-color-light;
+            }
+        }
+    }
+}

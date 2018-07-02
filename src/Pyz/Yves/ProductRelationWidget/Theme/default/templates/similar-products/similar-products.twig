@@ -1,0 +1,45 @@
+{% extends template('widget') %}
+
+{% define data = {
+    products: []
+} %}
+
+{% block body %}
+    {% if data.products is not empty %}
+
+        <div class="box">
+            <h4 class="spacing-y--big">{{ 'page.product.similar-products' | trans }}</h4>
+
+            {% embed molecule('simple-carousel') with {
+                modifiers: ['inset'],
+                class: 'is-hidden-sm-md',
+                data: {
+                    slides: data.products,
+                    showDots: false
+                },
+                attributes: {
+                    'slides-to-show': 4
+                }
+            } only %}
+                {% block slide %}
+                    {{ widget('ProductWidgetPlugin', slide) }}
+                {% endblock %}
+            {% endembed %}
+
+            {% embed molecule('simple-carousel') with {
+                class: 'is-hidden-lg-xl',
+                data: {
+                    slides: data.products,
+                    showDots: false
+                },
+                attributes: {
+                    'slides-to-show': 1
+                }
+            } only %}
+                {% block slide %}
+                    {{ widget('ProductWidgetPlugin', slide) }}
+                {% endblock %}
+            {% endembed %}
+        </div>
+    {% endif %}
+{% endblock %}

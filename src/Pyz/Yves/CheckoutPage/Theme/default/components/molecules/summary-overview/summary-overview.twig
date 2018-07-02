@@ -1,0 +1,76 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'summary-overview',
+    tag: 'table'
+} %}
+
+{% define data = {
+    shipmentMethod: required,
+    voucherDiscounts: [],
+    cartRuleDiscounts: [],
+
+    prices: {
+        subTotal: required,
+        storeCurrency: required,
+        tax: required,
+        grandTotal: required,
+        discountTotal: null
+    }
+} %}
+
+{% block body %}
+    <tr>
+        <td>{{ 'checkout.step.summary.overview' | trans }}</td>
+        <td>{{ app['cart.quantity'] }} {{ 'checkout.step.summary.items' | trans }}</td>
+    </tr>
+    <tr class="summary-overview-border">
+        <td>{{ 'checkout.step.summary.sub_total' | trans }}</td>
+        <td>{{ data.prices.subTotal | money }}</td>
+    </tr>
+
+    {% if data.prices.discountTotal %}
+        {% if data.voucherDiscounts is not empty %}
+            <tr>
+                <td>{{ 'cart.vouchers' | trans }}</td>
+                <td></td>
+            </tr>
+            {% for voucherDiscount in data.voucherDiscounts %}
+                <tr>
+                    <td>{{ voucherDiscount.displayName }}</td>
+                    <td>{{ voucherDiscount.amount | money }}</td>
+                </tr>
+            {% endfor %}
+        {% endif %}
+
+        {% if data.cartRuleDiscounts|length %}
+            <tr>
+                <td>{{ 'cart.discounts' | trans }}</td>
+                <td></td>
+            </tr>
+            {% for ruleDiscount in data.cartRuleDiscounts %}
+                <tr>
+                    <td>{{ ruleDiscount.displayName }}</td>
+                    <td>- {{ ruleDiscount.amount | money }}</td>
+                </tr>
+            {% endfor %}
+        {% endif %}
+    {% endif %}
+
+    <tr>
+        <td>{{ 'checkout.step.summary.shipping' | trans }} (<strong>{{ data.shipmentMethod }}</strong>)</td>
+        <td>{{ data.prices.storeCurrency | money }}</td>
+    </tr>
+    <tr>
+        <td>{{ 'checkout.step.summary.tax' | trans }}</td>
+        <td>{{ data.prices.tax | money }}</td>
+    </tr>
+    <tr class="total">
+        <td>
+            <h5>{{ 'checkout.step.summary.grand_total' | trans }}</h5>
+        </td>
+        <td>
+            <h5>{{ data.prices.grandTotal | money }}</h5>
+        </td>
+    </tr>
+{% endblock %}

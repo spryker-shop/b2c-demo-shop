@@ -1,0 +1,43 @@
+@mixin util-text() {
+    .text-small {
+        @include helper-font-size(small);
+    }
+
+    .text-big {
+        @include helper-font-size(big);
+    }
+
+    .text-left {
+        text-align: left;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+
+    .text-right {
+        text-align: right;
+    }
+
+    .text-alt {
+        color: $setting-color-alt;
+    }
+
+    .text-secondary {
+        color: $setting-color-dark;
+    }
+
+    @each $action, $setting-color-action in $setting-color-actions {
+        @include util-text-action($action, $setting-color-action);
+    }
+}
+
+@mixin util-text-action($action, $setting-color-action) {
+    .text-#{$action} {
+        color: $setting-color-action;
+    }
+
+    @content;
+}
+
+

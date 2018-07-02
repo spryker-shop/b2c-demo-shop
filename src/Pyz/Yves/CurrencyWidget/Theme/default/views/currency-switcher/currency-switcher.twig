@@ -1,0 +1,36 @@
+{% extends template('widget') %}
+
+{% define data = {
+    currencies: _widget.currencies,
+    currentCurrency: _widget.currentCurrency
+} %}
+
+{% block template %}
+    {% if data.currencies is not empty %}
+        {{parent()}}
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    <form method="GET" action="{{ path('currency-switch') }}">
+        {% embed atom('select') with {
+            modifiers: ['naked'],
+            attributes: {
+                name: 'currency-iso-code',
+                onchange: 'this.form.submit()'
+            },
+            embed: {
+                currencies: data.currencies,
+                currentCurrency: data.currentCurrency
+            }
+        } only %}
+            {% block options %}
+                {% for currency in embed.currencies %}
+                    <option value="{{ currency.code }}" {{ (currency.code == embed.currentCurrency) ? 'selected' : ''}}>{{ currency.code | trans }}</option>
+                {% endfor %}
+            {% endblock %}
+        {% endembed %}
+
+        <input type="hidden" name="referrer-url" value="{{ app.request.requestUri }}" />
+    </form>
+{% endblock %}

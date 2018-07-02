@@ -1,0 +1,61 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'filter-section',
+    tag: 'section'
+} %}
+
+{% define data = {
+    facets: [],
+    filterPath: null,
+    categories: []
+} %}
+
+{% block body %}
+    {% for filter in data.facets %}
+        {% set filterHasValues = filter.values is not defined or filter.values | length > 0 %}
+        {% set hasToggler = filter.config.type != 'category' %}
+
+        {% if filterHasValues %}
+            <div class="{{ config.name }}__item">
+                <div class="{{ config.name }}__title{{ hasToggler ? ' js-filter-trigger' : '' }}"
+                     {{ hasToggler ? 'data-toggle-target=.js-' ~  filter.name : '' }}>
+                    {{ ('product.filter.' ~ filter.name | lower) | trans }}
+                </div>
+
+                {% include [
+                    molecule('filter-' ~ filter.config.name, 'CatalogPage'),
+                    molecule('filter-' ~ filter.config.type, 'CatalogPage')
+                ] ignore missing with {
+                    class: hasToggler ? 'js-' ~  filter.name ~ ' is-hidden' : '',
+                    data: {
+                        filterPath: data.filterPath,
+                        categories: data.categories,
+                        filter: filter,
+                        parameter: filter.config.parameterName | default(''),
+                        min: filter.min | default(0),
+                        max: filter.max | default(0),
+                        activeMin: filter.activeMin | default(0),
+                        activeMax: filter.activeMax | default(0)
+                    }
+                } only %}
+            </div>
+        {% endif %}
+    {% endfor %}
+
+    {% include molecule('toggler-accordeon') with {
+        attributes: {
+            trigger: '.js-filter-trigger',
+            'class-to-toggle': 'is-hidden'
+        }
+    } only %}
+
+    <button type="submit" class="button button--expand button--small apply-filter">
+        {{ 'catalog.filter.button' | trans }}
+        {% include atom('icon') with {
+            data: {
+                name: 'filter'
+            }
+        } only %}
+    </button>
+{% endblock %}

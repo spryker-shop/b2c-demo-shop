@@ -1,0 +1,73 @@
+@mixin shop-ui-menu($name: '.menu') {
+    @include shop-ui-list($name) {
+        &__item {
+            @include helper-font-weight(regular);
+            margin: .5rem 0;
+
+            &--active {
+                @include helper-font-weight(bold);
+            }
+
+            &--has-children-list {
+                margin-bottom: 1rem;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+
+                & #{$name}__item {
+                    @include helper-font-size(small);
+                    margin: .5rem;
+                }
+            }
+
+            &--has-children-dropdown {
+                position: relative;
+                z-index: $setting-zi-element + 1;
+
+                & > #{$name} {
+                    //@include helper-ui-shadow;
+                    @include helper-visibility-invisible;
+                    @include helper-effect-transition;
+                    position: absolute;
+                    left: 0;
+                    width: 15rem;
+                    margin-left: - .5rem;
+                    border: none;
+                    padding: .5rem;
+                    background-color: $setting-color-white;
+                }
+
+                &:hover > #{$name} {
+                    @include helper-visibility-visible;
+                }
+
+                & > #{$name} > #{$name}__item {
+                    margin-left: .5rem;
+                    margin-right: .5rem;
+                }
+            }
+        }
+
+        &__separator {
+            &:not(&--horizontal-line) {
+                display: inline-block;
+                margin: 0 .5rem;
+
+                &::after {
+                    content: '|';
+                    color: $setting-color-lighter;
+                }
+            }
+
+            &--horizontal-line {
+                display: block;
+                border-top: 1px solid $setting-color-lighter;
+            }
+        }
+
+        @content;
+    }
+}
+
+@include shop-ui-menu();

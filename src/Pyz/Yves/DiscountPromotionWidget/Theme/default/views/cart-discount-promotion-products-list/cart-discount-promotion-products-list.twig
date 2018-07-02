@@ -1,0 +1,85 @@
+{% extends template('widget') %}
+
+{% define data = {
+    promotionProducts: _widget.promotionProducts
+} %}
+
+{% block body %}
+    {% if data.promotionProducts is not empty %}
+        <div class="promotion-item">
+            <h4>{{ 'cart.promotion.items' | trans }}</h4>
+        </div>
+
+        <div class="grid">
+            {% for product in data.promotionProducts %}
+                {% embed molecule('product-card') with {
+                    class: 'col col--sm-12 col--md-6',
+                    data: {
+                        name: product.name,
+                        abstractId: product.idProductAbstract,
+                        url: product.url,
+                        imageUrl: (product.images|length ? product.images.0.externalUrlSmall : ''),
+                        price: product.prices.DEFAULT,
+                        originalPrice: (product.prices.ORIGINAL is defined ? product.prices.ORIGINAL : null)
+                    },
+                    embed: {
+                        superAttributes: product.attributeMap.superAttributes,
+                        selectedAttributes: product.selectedAttributes,
+                        availableAttributes: product.availableAttributes,
+                        sku: product.sku,
+                        idProductAbstract: product.idProductAbstract,
+                        idProductConcrete: product.idProductConcrete,
+                        promotionDiscount: {
+                            id: product.promotionItem.discount.discountPromotion.idDiscountPromotion,
+                            maxQuantity: product.promotionItem.maxQuantity
+                        }
+                    }
+                } only %}
+                    {% block content %}
+                        {{parent()}}
+
+                        <hr />
+                        {% include molecule('variant-configurator', 'DiscountPromotionWidget') with {
+                            data: {
+                                idProductAbstract: embed.idProductAbstract,
+                                superAttributes: embed.superAttributes,
+                                selectedAttributes: embed.selectedAttributes,
+                                availableAttributes: embed.availableAttributes
+                            }
+                        } only %}
+                        <hr />
+                    {% endblock %}
+
+                    {% block actions %}
+                        {% set disabled = embed.idProductConcrete is empty %}
+
+                        <form method="POST" action="/cart/add/{{embed.sku}}" class="grid grid--bottom grid--justify">
+                            <div class="col col--sm-5">
+                                {% include molecule('quantity-selector') with {
+                                    data: {
+                                        maxQuantity: embed.promotionDiscount.maxQuantity,
+                                        hasUpdateButton: false
+                                    }
+                                } only %}
+                            </div>
+
+                            <div class="col col--sm-6">
+                                <input type="hidden" value="{{ embed.sku }}" name="groupKey">
+                                <input type="hidden" value="{{ embed.promotionDiscount.id }}" name="idDiscountPromotion">
+
+                                <button type="submit" class="button button--success button--expand" {{ disabled ? 'disabled' : '' }} onclick="this.form.submit(); this.disabled='disabled'; return false;">
+                                    {% include atom('icon') with {
+                                        data: {
+                                            name: 'cart-plus'
+                                        }
+                                    } only %}
+                                    {{ 'page.detail.add-to-cart' | trans }}
+                                </button>
+                            </div>
+                        </form>
+                    {% endblock %}
+                {% endembed %}
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endblock %}

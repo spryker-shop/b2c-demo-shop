@@ -1,0 +1,111 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'rating-selector',
+    tag: 'rating-selector'
+} %}
+
+{% define data = {
+    value: 0,
+    minValue: 1,
+    maxValue: 5,
+    steps: 5,
+    useHalfSteps: false,
+    inputId: '',
+    inputName: 'rating'
+} %}
+
+{% define attributes = {
+    'readonly': false,
+    'disable-if-empty-value': false
+} %}
+
+{% set singleStepValue = (data.maxValue - data.minValue) / (data.steps - 1) %}
+{% set precision = data.useHalfSteps ? 1 : 0 %}
+{% set value = data.value | round(precision, 'floor') %}
+{% set isActive = false %}
+
+{% block class %}
+    {{parent()}}
+    {% if attributes.readonly %}{{config.name}}--readonly{% endif %}
+{% endblock %}
+
+{% block body %}
+    <span class="{{config.name}}__steps">
+        {% spaceless %}
+            {% for step in data.steps..1 %}
+                {% set currentStepValue = step * singleStepValue %}
+                {% if value >= currentStepValue %}
+                    {% set isActive = true %}
+                {% endif %}
+
+                {% if data.useHalfSteps %}
+                    <a
+                        data-step-value="{{currentStepValue}}"
+                        class="
+                            {{config.name}}__step
+                            {{config.name}}__step--half
+                            {{isActive ? config.name ~ '__step--active' : ''}}
+                            {% if not attributes.readonly %}{{config.jsName}}__step{% endif %}">
+
+                        {% include atom('icon') with {
+                            class: config.name ~ '__star ' ~ config.name ~ '__star--half-right',
+                            data: {
+                                name: 'star-half'
+                            }
+                        } only %}
+                    </a>
+
+                    {% set currentStepValue = (step - 0.5) * singleStepValue %}
+                    {% if value >= currentStepValue %}
+                        {% set isActive = true %}
+                    {% endif %}
+
+                    <a
+                        data-step-value="{{currentStepValue}}"
+                        class="
+                            {{config.name}}__step
+                            {{config.name}}__step--half
+                            {{isActive ? config.name ~ '__step--active' : ''}}
+                            {% if not attributes.readonly %}{{config.jsName}}__step{% endif %}">
+
+                        {% include atom('icon') with {
+                            class: config.name ~ '__star ' ~ config.name ~ '__star--half-left',
+                            data: {
+                                name: 'star-half'
+                            }
+                        } only %}
+                    </a>
+                {% else %}
+                    <a
+                        data-step-value="{{currentStepValue}}"
+                        class="
+                            {{config.name}}__step
+                            {{config.name}}__step--full
+                            {{isActive ? config.name ~ '__step--active' : ''}}
+                            {% if not attributes.readonly %}{{config.jsName}}__step{% endif %}">
+
+                        {% include atom('icon') with {
+                            class: config.name ~ '__star',
+                            data: {
+                                name: 'star'
+                            }
+                        } only %}
+                    </a>
+                {% endif %}
+            {% endfor %}
+        {% endspaceless %}
+    </span>
+
+    {% if not attributes.readonly %}
+        {% block input %}
+            <input
+                type="hidden"
+                class="{{config.jsName}}__input"
+                {% if data.inputId is not empty %}id="{{data.inputId}}"{% endif %}
+                name="{{data.inputName}}"
+                value="{{data.value}}"
+                {% if attributes['disable-if-empty-value'] and data.value is empty %}disabled{% endif %} />
+        {% endblock %}
+    {% endif %}
+{% endblock %}

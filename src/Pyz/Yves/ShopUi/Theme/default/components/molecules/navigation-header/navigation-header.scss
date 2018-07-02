@@ -1,0 +1,116 @@
+
+$setting-mobile-shadow-width: 12%;
+
+@mixin shop-ui-navigation-header($name: '.navigation-header') {
+    #{$name} {
+        height: 50px;
+        .menu {
+            li, a {
+                text-transform: capitalize;
+                white-space: nowrap;
+                color: $setting-color-text;
+                font: normal 16px $setting-font-family;
+                letter-spacing: .2px;
+                line-height: 1.5;
+                &:hover {
+                    text-decoration: underline;
+                    color: map-get($setting-color-actions, alert)
+
+                }
+
+            }
+            &__item {
+                &--has-children-dropdown {
+                    & > .menu {
+                        box-shadow: 0 0 100px 0 rgba(12, 16, 31, 0.07);
+                    }
+                }
+            }
+            &--top-level {
+
+                &>li, &>li>a {
+                    text-transform: uppercase;
+                    font: 500 13px $setting-font-family-additional;
+                    letter-spacing: 2.2px;
+                    &:hover{
+                        color: rgba(0,0,0,.5);
+                        text-decoration: none;
+                    }
+                }
+                &>li {
+                    margin: 0 .6rem;
+                }
+
+            }
+
+            li .menu .menu__item--has-children-list {
+                &:hover {
+                    text-decoration: none;
+                    color: $setting-color-text;
+                    cursor: default;
+                    &>a {
+                        color: $setting-color-text;
+                        text-decoration: none;
+                        cursor: default;
+                    }
+
+                }
+            }
+        }
+
+        @include helper-breakpoint-media-max($md-max) {
+            position: relative;
+
+            .menu {
+                &__item {
+                    &--has-children-dropdown {
+                        .menu {
+                            display: none;
+                        }
+                    }
+                }
+                &--scrollable {
+                    margin: 0 15px;
+                    overflow-x: auto;
+                    overflow-y: hidden;
+                    &::-webkit-scrollbar {
+                        display: none;
+                    }
+                }
+                &--top-level {
+                    justify-content: flex-start;
+                    &>li:first-child {
+                        padding-left: $setting-mobile-shadow-width/4;
+                    }
+                    &>li:last-child {
+                        padding-right: $setting-mobile-shadow-width/4;
+                    }
+                }
+            }
+            &::after, &::before {
+                content: '';
+                display: block;
+                width: $setting-mobile-shadow-width;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                z-index: 200;
+            }
+
+            &::after {
+                right: 0;
+                //box-shadow: -50px 0 60px -10px white inset;
+                background: linear-gradient(to right, rgba(255,255,255,0) 0%,rgba(255,255,255,0) 8%,rgba(255,255,255,1) 54%,rgba(255,255,255,1) 100%);
+            }
+            &::before {
+                left: 0;
+                //box-shadow: 50px 0 60px -10px white inset;
+                background: linear-gradient(to right, rgba(255,255,255,1) 0%,rgba(255,255,255,1) 46%,rgba(255,255,255,0) 92%,rgba(255,255,255,0) 100%);
+
+            }
+        }
+
+    }
+}
+
+@include shop-ui-navigation-header();

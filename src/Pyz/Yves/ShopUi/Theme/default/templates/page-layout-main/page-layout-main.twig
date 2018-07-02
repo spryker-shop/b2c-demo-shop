@@ -1,0 +1,62 @@
+{% extends template('page-blank') %}
+
+{%- block class -%}js-page-layout-main__side-drawer-container{%- endblock -%}
+
+{% block body %}
+    {% block notifications %}
+        {% include organism('notification-area') only %}
+    {% endblock %}
+
+    {% block sidebar %}
+        {% include organism('side-drawer') with {
+            class: 'is-hidden-lg-xl',
+            attributes: {
+                'container-selector': 'js-page-layout-main__side-drawer-container',
+                'trigger-selector': 'js-page-layout-main__side-drawer-trigger'
+            }
+        } only %}
+    {% endblock %}
+
+    {% block outside %}{% endblock %}
+
+    {% block header %}
+        {% embed organism('header') only %}
+            {% block mobile %}
+                <a href="#" class="link link--alt js-page-layout-main__side-drawer-trigger">
+                    {% include atom('icon') with {
+                        modifiers: ['big'],
+                        data: {
+                            name: 'bars'
+                        }
+                    } only %}
+                </a>
+            {% endblock %}
+        {% endembed %}
+    {% endblock %}
+
+    {% block container %}
+        <div class="container">
+            {% block pageInfo %}
+                {% block breadcrumbs %}
+                    {% include molecule('breadcrumb') only %}
+                {% endblock %}
+
+                {% block title %}
+                    <h1 class="main-title">{{data.title}}</h1>
+                {% endblock %}
+            {% endblock %}
+
+            <main>
+                {% block content %}{% endblock %}
+            </main>
+        </div>
+    {% endblock %}
+
+    {% block footer %}
+        {% include organism('footer') only %}
+    {% endblock %}
+
+    {% block icons %}
+        {% include atom('icon-sprite') only %}
+    {% endblock %}
+{% endblock %}

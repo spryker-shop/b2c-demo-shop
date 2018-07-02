@@ -1,0 +1,181 @@
+@mixin shop-ui-checkout-layout ($name: '.checkout-layout'){
+    #{$name} {
+        padding-bottom: 40px;
+        font-size: 16px;
+
+        h5 {
+            font: 500 20px $setting-font-family-additional;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+        }
+        &__half:nth-child(1) {
+            padding-right: 30px;
+        }
+        &__half:nth-child(2) {
+            padding-left: 30px;
+            .toggler-checkbox {
+                margin-bottom: 58px;
+            }
+        }
+        .address-form .grid {
+            margin: 0 -0.5rem;
+            max-width: none;
+        }
+
+        .checkout__address-list {
+            padding-left: 30px;
+            > label {
+                font-weight: bold;
+            }
+            > div {
+                margin-top: 10px;
+            }
+            .radio + label {
+                display: none;
+            }
+        }
+
+        .form__actions {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: dotted 1px $setting-color-lightest;
+        }
+
+        #payment-form .form__actions {
+            margin-top: 60px;
+        }
+
+        .payment-form-indent .form__fields {
+            padding-top: 15px;
+            padding-left: 21px;
+        }
+
+        .summary-address {
+            padding-bottom: 30px;
+            padding-right: 1rem;
+            h5 {
+                display: inline-block;
+                margin: 0 5px 15px 0;
+            }
+        }
+
+        .summary-product-list {
+            width: 100%;
+            th, td {
+                border-bottom: dotted 1px $setting-color-lightest;
+                padding-top: 12px;
+                padding-bottom: 12px;
+                &:not(:first-child) {
+                    padding-left: 15px;
+                }
+            }
+            th {
+                padding-top: 0;
+            }
+        }
+
+        .checkout-product-img {
+            width: 3rem;
+            .thumbnail {
+                height: 3.5rem;
+                width: 3.5rem;
+                &:after {
+                    content: '';
+                    position: absolute;
+                    top: -4px;
+                    left: -4px;
+                    right: -4px;
+                    bottom: -4px;
+                    border-radius: 4px;
+                    background: rgba(0, 0, 0, 0.05);
+                    z-index: 350;
+                }
+            }
+        }
+
+        .summary-right {
+            padding-left: 1rem;
+            .cart-note {
+                border-bottom: dotted 1px $setting-color-lightest;
+                padding: 20px 0;
+            }
+        }
+
+        .summary-voucher {
+            padding: 40px 1rem 0 0;
+            .form__field {
+                padding: 0 !important;
+                .input {
+                    border-radius: 2px 0 0 2px;
+                    border-right: 0;
+                }
+            }
+            .form__actions {
+                margin: 0;
+                padding: 0;
+                border: none;
+            }
+            .form__action {
+                margin: 0;
+            }
+        }
+
+        .summary-overview {
+            padding: 40px 0 0 1rem;
+            table {
+                width: 100%;
+            }
+            td:last-child {
+                text-align: right;
+            }
+            .summary-overview-border {
+                border-bottom: dotted 1px $setting-color-lightest;
+                td {
+                    padding-bottom: 10px;
+                }
+                + tr td {
+                    padding-top: 10px;
+                }
+            }
+        }
+
+        .total td {
+            padding-top: 15px;
+        }
+
+        .register-form {
+            .form__field {
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+                label {
+                    display: none;
+                }
+                .form__field label {
+                    display: block;
+                }
+            }
+            .form__actions {
+                margin-top: 0;
+            }
+        }
+
+        .login-form .form__fields {
+            max-width: none;
+            margin-left: -0.5rem;
+            margin-right: -0.5rem;
+            label {
+                display: block;
+            }
+        }
+
+    }
+
+    .register-type {
+        border-bottom: dotted 1px $setting-color-lightest;
+        padding: 20px 0;
+        margin-bottom: 30px;
+    }
+}
+
+@include shop-ui-checkout-layout();

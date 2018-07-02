@@ -18,9 +18,10 @@ const paths = {
     // core folders
     core: {
         // all modules
+        // modules: './vendor/spryker/spryker-shop/Bundles',
         modules: './vendor/spryker-shop',
         // ShopUi source folder
-        shopUiModule: `./vendor/spryker-shop/shop-ui/src/SprykerShop/Yves/ShopUi/Theme/${theme}`
+        shopUiModule: `./vendor/spryker-shop/Bundles/ShopUi/src/SprykerShop/Yves/ShopUi/Theme/${theme}`
     },
 
     // project folders
@@ -55,6 +56,11 @@ module.exports = {
                 `**/Theme/${theme}/components/organisms/*/index.ts`,
                 `**/Theme/${theme}/templates/*/index.ts`,
                 `**/Theme/${theme}/views/*/index.ts`,
+
+                // `**/Theme/${theme}/components/**/*.scss`,
+                // `**/Theme/${theme}/index.scss`,
+
+
                 '!config',
                 '!data',
                 '!deploy',
@@ -70,7 +76,8 @@ module.exports = {
         componentStyles: {
             // absolute dirs in which look for
             dirs: [
-                path.join(context, paths.core.modules)
+                path.join(context, paths.core.modules),
+                path.join(context, paths.project.modules)
             ],
             // files/dirs patterns
             patterns: [
@@ -80,6 +87,10 @@ module.exports = {
                 `**/Theme/${theme}/templates/*/*.scss`,
                 `**/Theme/${theme}/views/*/*.scss`,
                 `!**/Theme/${theme}/**/style.scss`,
+
+
+                // `**/Theme/${theme}/index.scss`,
+
                 '!config',
                 '!data',
                 '!deploy',

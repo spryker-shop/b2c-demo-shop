@@ -1,0 +1,14 @@
+{% if _widget.languages is defined and _widget.languages|length > 0 %}
+    <form method="GET" action="" data-component="language-switch">
+        <label class="select select--naked" data-qa="component select currency-iso-code">
+            <select class="select__select" name="" onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
+                {% for language, url in _widget.languages %}
+                    <option value="{{ app.request.getSchemeAndHttpHost() }}{{ url }}" {{ (language == _widget.currentLanguage) ? 'selected' : ''}}>{{ language }}</option>
+                {% endfor %}
+            </select>
+            <svg class="icon select__caret" data-qa="component icon">
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#:arrow-down"></use>
+            </svg>
+        </label>
+    </form>
+{% endif %}
