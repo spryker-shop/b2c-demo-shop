@@ -30,7 +30,7 @@
 
 {% block body %}
     {% if brand is not empty %}
-        <h5>{{'page.product.by' | trans}} {{brand}}</h5>
+        <h5>{{brand}}</h5>
     {% endif %}
     <span>{{ 'product.attribute.sku' | trans }}: {{sku}}</span>
 
@@ -57,7 +57,7 @@
             {{ widget('ProductMeasurementUnitWidgetPlugin', data.product, isDisabled, options) }}
         {% else %}
             <div class="grid grid--bottom grid--justify">
-                <div class="col col--sm-5">
+                <div class="col col--sm-3">
                     <label>
                         {{'cart.item_quantity' | trans}}
                         {% include atom('select') with {
@@ -73,7 +73,7 @@
                     </label>
                 </div>
 
-                <div class="col col--sm-6">
+                <div class="col col--sm-8">
                     <button type="submit" class="button button--success button--expand" {{ isDisabled ? 'disabled' : '' }} onclick="this.form.submit(); this.disabled='disabled'; return false;" {{qa('add-to-cart-button')}}>
                         {{ 'page.detail.add-to-cart' | trans }}
                     </button>

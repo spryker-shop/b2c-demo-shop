@@ -1,0 +1,106 @@
+$shop-ui-simple-carousel-icon-size: $shop-ui-icon-size-big;
+
+@mixin shop-ui-simple-carousel($name: '.simple-carousel') {
+    #{$name} {
+        &__container {
+            position: relative;
+            padding-left: $shop-ui-simple-carousel-icon-size;
+            padding-right: $shop-ui-simple-carousel-icon-size;
+        }
+
+        &__view {
+            position: relative;
+            max-width: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        &__slider {
+            @include helper-effect-transition(transform, 500ms);
+            flex-wrap: nowrap;
+        }
+
+        &__dots {
+            text-align: center;
+            line-height: 0;
+        }
+
+        &__dot {
+            display: inline-block;
+            padding: 0.25rem;
+
+            &::before {
+                @include helper-effect-transition(background-color, 150ms);
+                content: '';
+                display: block;
+                width: 0.5rem;
+                height: 0.5rem;
+                background-color: $setting-color-light;
+                border-radius: 100%;
+            }
+
+            &:hover,
+            &--current {
+                &::before {
+                    background-color: $setting-color-main;
+                }
+            }
+        }
+
+        &__navigation {
+            display: flex;
+            align-items: center;
+            position: absolute;
+            top: 0;
+            bottom: 158px;
+            z-index: 2;
+            pointer-events: none;
+
+            &--prev {
+                left: 0;
+            }
+
+            &--next {
+                right: 0;
+            }
+        }
+
+        &__arrow {
+            @include helper-effect-transition(color);
+            color: $setting-color-light;
+            pointer-events: all;
+
+            &:hover {
+                color: $setting-color-main;
+            }
+        }
+
+        &--inset &__container {
+            padding-left:0;
+            padding-right: 0;
+        }
+
+        &--inset &__navigation {
+            width: auto;
+        }
+
+        &--inset &__arrow {
+            padding: 0.5rem;
+            background-color: rgba($setting-color-lightest, 0.75);
+        }
+
+        @include helper-breakpoint(lg) {
+            &__navigation {
+                @include helper-visibility-invisible;
+                @include helper-effect-transition;
+            }
+
+            &:hover &__navigation {
+                @include helper-visibility-visible;
+                pointer-events: none;
+            }
+        }
+
+        @content;
+    }
+}

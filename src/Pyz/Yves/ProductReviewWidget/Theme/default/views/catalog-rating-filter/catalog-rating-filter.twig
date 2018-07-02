@@ -1,0 +1,24 @@
+{% extends template('widget') %}
+
+{% define data = {
+    value: _widget.filterValue,
+    maxValue: _widget.maximumRating,
+    parameterName: _widget.filter.config.parameterName
+} %}
+
+{% block body %}
+    {% include molecule('rating-selector', 'ProductReviewWidget') with {
+        class: 'spacing-top spacing-right',
+        data: {
+            steps: 4,
+            value: data.value,
+            maxValue: data.maxValue - 1,
+            inputName: data.parameterName ~ '[min]'
+        },
+        attributes: {
+            'disable-if-empty-value': true
+        }
+    } only %}
+
+    {{'catalog.filter.rating_up' | trans}}
+{% endblock %}
