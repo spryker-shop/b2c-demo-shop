@@ -3,7 +3,7 @@
         margin-bottom: 40px;
         &__item {
             & + & {
-                border-top: 1px solid #a5a8a8;
+                border-top: 1px dotted #d3d3d3;
                 padding-top: 1.5rem;
                 margin-top: 1.5rem;
             }
@@ -12,7 +12,7 @@
             }
         }
         &__sidebar {
-            border-top: 1px solid #a5a8a8;
+            border-top: 1px dotted #d3d3d3;
             margin-top: 1.5rem;
             padding-top: 1.5rem;
             @include helper-breakpoint-media-min($xl-min) {
@@ -48,6 +48,7 @@
         }
         hr {
             margin: 1rem 0;
+            border-bottom: 1px dotted #d3d3d3;
         }
         label {
             font-size: 15px;
@@ -56,8 +57,7 @@
             font: 13px $setting-font-family-additional;
         }
         .promotion-item {
-            border-top: 1px solid #a5a8a8;
-            border-bottom: 1px solid #a5a8a8;
+            border-top: 1px dotted #d3d3d3;
             margin-top: 2rem;
             padding: 1rem 0;
             @include helper-breakpoint-media-min($xl-min) {
@@ -76,6 +76,9 @@
             .price {
                 margin-bottom: 0;
             }
+        }
+        .cart-summary {
+            margin-top: 2rem;
         }
         .input--expand {
             border-right: none;
