@@ -29,14 +29,14 @@
 
                 <div class="footer-top__col">
                     <h5 class="footer__title footer-title-nav js-toggle-nav" data-toggle-target=".js-footer-nav-2">{{ 'global.company' | trans }}</h5>
-                    <div class="hidden-nav js-footer-nav-2">
+                    <div class="{{config.name}}__row {{config.name}}__navigation-main hidden-nav js-footer-nav-2">
                         {{ widgetGlobal('NavigationWidgetPlugin', 'FOOTER_NAVIGATION', 'navigation-footer') }}
                     </div>
                 </div>
 
                 <div class="footer-top__col">
                     <h5 class="footer__title footer-title-nav js-toggle-nav" data-toggle-target=".js-footer-nav-3">{{ 'global.social' | trans }}</h5>
-                    <div class="hidden-nav js-footer-nav-3">
+                    <div class="{{config.name}}__row {{config.name}}__navigation-main hidden-nav js-footer-nav-3">
                         {{ widgetGlobal('NavigationWidgetPlugin', 'SOCIAL_LINKS', 'navigation-footer') }}
                     </div>
                 </div>
@@ -51,7 +51,7 @@
                 } only %}
                 {% block copyright %}
                     <div class="copyright">
-                        &copy; ACME Company
+                        &copy; 2018 Spryker
                     </div>
                 {% endblock %}
             </div>

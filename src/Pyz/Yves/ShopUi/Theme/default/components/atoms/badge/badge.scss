@@ -1,0 +1,19 @@
+@mixin shop-ui-badge($name: '.badge') {
+    #{$name} {
+        @include helper-font-size(small);
+        display: inline-block;
+        padding: 0.1rem 0.5rem 0;
+        color: $setting-color-light;
+        border: solid 1px $setting-color-light;
+        border-radius: 4px;
+
+        @content;
+    }
+}
+
+@mixin shop-ui-badge-action($action, $setting-color-action) {
+    &--#{$action} {
+    }
+
+    @content;
+}
