@@ -1,0 +1,14 @@
+{% extends template('page-layout-main') %}
+
+{% define data = {
+    error: error
+} %}
+
+{% block title %}
+    <h1 class="main-title">ERROR 404</h1>
+{% endblock %}
+
+{% block content %}
+    <p class="text-center"><big>{{ data.error }}</big></p>
+    <br><br><br><br><br><br><br>
+{% endblock %}
