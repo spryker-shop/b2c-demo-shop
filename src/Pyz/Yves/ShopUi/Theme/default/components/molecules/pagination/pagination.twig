@@ -29,89 +29,91 @@
 } %}
 
 {% block body %}
-    <ul class="grid grid--center">
-        {% if data.currentPage > 1 %}
-            <li class="{{config.name}}__item">
-                <a class="{{config.name}}__step {{config.name}}__step--previous" href="{{ path(data.paginationPath, data.parameters|merge({page: data.currentPage-1})) }}{{ data.anchor }}">
-                    {% include atom('icon') with {
-                        data: {
-                            name: 'arrow-left'
-                        }
-                    } only %}
-                </a>
-            </li>
-
-            {% for i in range(1, data.extremePagesLimit) if ( i < data.currentPage - data.nearbyPagesLimit ) %}
+    {% if data.maxPage > 1 %}
+        <ul class="grid grid--center">
+            {% if data.currentPage > 1 %}
                 <li class="{{config.name}}__item">
-                    <a class="{{config.name}}__step" href="{{ path(data.paginationPath, data.parameters|merge({page: i})) }}{{ data.anchor }}">{{ i }}</a>
+                    <a class="{{config.name}}__step {{config.name}}__step--previous" href="{{ path(data.paginationPath, data.parameters|merge({page: data.currentPage-1})) }}{{ data.anchor }}">
+                        {% include atom('icon') with {
+                            data: {
+                                name: 'arrow-left'
+                            }
+                        } only %}
+                    </a>
                 </li>
-            {% endfor %}
 
-            {% if data.extremePagesLimit + 1 < data.currentPage - data.nearbyPagesLimit %}
+                {% for i in range(1, data.extremePagesLimit) if ( i < data.currentPage - data.nearbyPagesLimit ) %}
+                    <li class="{{config.name}}__item">
+                        <a class="{{config.name}}__step" href="{{ path(data.paginationPath, data.parameters|merge({page: i})) }}{{ data.anchor }}">{{ i }}</a>
+                    </li>
+                {% endfor %}
+
+                {% if data.extremePagesLimit + 1 < data.currentPage - data.nearbyPagesLimit %}
+                    <li class="{{config.name}}__item">
+                        <span class="{{config.name}}__step {{config.name}}__step--ellipsis">&hellip;</span>
+                    </li>
+                {% endif %}
+
+                {% for i in range(data.currentPage - data.nearbyPagesLimit, data.currentPage - 1) if (i > 0) %}
+                    <li class="{{config.name}}__item">
+                        <a class="{{config.name}}__step" href="{{ path(data.paginationPath, data.parameters|merge({page: i})) }}{{ data.anchor }}">{{ i }}</a>
+                    </li>
+                {% endfor %}
+            {% elseif data.showAlwaysFirstAndLast %}
                 <li class="{{config.name}}__item">
-                    <span class="{{config.name}}__step {{config.name}}__step--ellipsis">&hellip;</span>
-                </li>
-            {% endif %}
-
-            {% for i in range(data.currentPage - data.nearbyPagesLimit, data.currentPage - 1) if (i > 0) %}
-                <li class="{{config.name}}__item">
-                    <a class="{{config.name}}__step" href="{{ path(data.paginationPath, data.parameters|merge({page: i})) }}{{ data.anchor }}">{{ i }}</a>
-                </li>
-            {% endfor %}
-        {% elseif data.showAlwaysFirstAndLast %}
-            <li class="{{config.name}}__item">
-                <span class="{{config.name}}__step {{config.name}}__step--previous {{config.name}}__step--disabled">
-                    {% include atom('icon') with {
-                        data: {
-                            name: 'arrow-left'
-                        }
-                    } only %}
-                </span>
-            </li>
-        {% endif %}
-
-        <li class="{{config.name}}__item">
-            <a class="{{config.name}}__step {{config.name}}__step--current" href="{{ path(data.paginationPath, data.parameters|merge({ page: data.currentPage })) }}{{ data.anchor }}">{{ data.currentPage }}</a>
-        </li>
-
-        {% if data.currentPage < data.maxPage %}
-            {% for i in range(data.currentPage + 1, data.currentPage + data.nearbyPagesLimit) if ( i <= data.maxPage ) %}
-                <li class="{{config.name}}__item">
-                    <a class="{{config.name}}__step" href="{{ path(data.paginationPath, data.parameters|merge({page: i})) }}{{ data.anchor }}">{{ i }}</a>
-                </li>
-            {% endfor %}
-
-            {% if  (data.maxPage - data.extremePagesLimit) > (data.currentPage + data.nearbyPagesLimit) %}
-                <li class="{{config.name}}__item">
-                    <span class="{{config.name}}__step {{config.name}}__step--ellipsis">&hellip;</span>
+                    <span class="{{config.name}}__step {{config.name}}__step--previous {{config.name}}__step--disabled">
+                        {% include atom('icon') with {
+                            data: {
+                                name: 'arrow-left'
+                            }
+                        } only %}
+                    </span>
                 </li>
             {% endif %}
 
-            {% for i in range(data.maxPage - data.extremePagesLimit + 1, data.maxPage) if ( i > data.currentPage + data.nearbyPagesLimit ) %}
-                <li class="{{config.name}}__item">
-                    <a class="{{config.name}}__step" href="{{ path(data.paginationPath, data.parameters|merge({page: i})) }}{{ data.anchor }}">{{ i }}</a>
-                </li>
-            {% endfor %}
+            <li class="{{config.name}}__item">
+                <a class="{{config.name}}__step {{config.name}}__step--current" href="{{ path(data.paginationPath, data.parameters|merge({ page: data.currentPage })) }}{{ data.anchor }}">{{ data.currentPage }}</a>
+            </li>
 
-            <li class="{{config.name}}__item">
-                <a class="{{config.name}}__step {{config.name}}__step--next" href="{{ path(data.paginationPath, data.parameters|merge({page: data.currentPage + 1})) }}{{ data.anchor }}">
-                    {% include atom('icon') with {
-                        data: {
-                            name: 'arrow-right'
-                        }
-                    } only %}
-                </a>
-            </li>
-        {% elseif data.showAlwaysFirstAndLast %}
-            <li class="{{config.name}}__item">
-                <span class="{{config.name}}__step {{config.name}}__step--next {{config.name}}__step--disabled">
-                    {% include atom('icon') with {
-                        data: {
-                            name: 'arrow-right'
-                        }
-                    } only %}
-                </span>
-            </li>
-        {% endif %}
-    </ul>
+            {% if data.currentPage < data.maxPage %}
+                {% for i in range(data.currentPage + 1, data.currentPage + data.nearbyPagesLimit) if ( i <= data.maxPage ) %}
+                    <li class="{{config.name}}__item">
+                        <a class="{{config.name}}__step" href="{{ path(data.paginationPath, data.parameters|merge({page: i})) }}{{ data.anchor }}">{{ i }}</a>
+                    </li>
+                {% endfor %}
+
+                {% if  (data.maxPage - data.extremePagesLimit) > (data.currentPage + data.nearbyPagesLimit) %}
+                    <li class="{{config.name}}__item">
+                        <span class="{{config.name}}__step {{config.name}}__step--ellipsis">&hellip;</span>
+                    </li>
+                {% endif %}
+
+                {% for i in range(data.maxPage - data.extremePagesLimit + 1, data.maxPage) if ( i > data.currentPage + data.nearbyPagesLimit ) %}
+                    <li class="{{config.name}}__item">
+                        <a class="{{config.name}}__step" href="{{ path(data.paginationPath, data.parameters|merge({page: i})) }}{{ data.anchor }}">{{ i }}</a>
+                    </li>
+                {% endfor %}
+
+                <li class="{{config.name}}__item">
+                    <a class="{{config.name}}__step {{config.name}}__step--next" href="{{ path(data.paginationPath, data.parameters|merge({page: data.currentPage + 1})) }}{{ data.anchor }}">
+                        {% include atom('icon') with {
+                            data: {
+                                name: 'arrow-right'
+                            }
+                        } only %}
+                    </a>
+                </li>
+            {% elseif data.showAlwaysFirstAndLast %}
+                <li class="{{config.name}}__item">
+                    <span class="{{config.name}}__step {{config.name}}__step--next {{config.name}}__step--disabled">
+                        {% include atom('icon') with {
+                            data: {
+                                name: 'arrow-right'
+                            }
+                        } only %}
+                    </span>
+                </li>
+            {% endif %}
+        </ul>
+    {% endif %}
 {% endblock %}
