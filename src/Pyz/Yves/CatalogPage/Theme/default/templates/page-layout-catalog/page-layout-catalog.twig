@@ -44,15 +44,14 @@
     <div class="container">
 
         <main class="container__inner">
-            {% block cmsTop %}
-                {% if data.categoryId %}
-                    <div class="catalog-cms-block catalog-cms-block--top">
-                        {{ widgetBlock('CatalogCmsBlockWidgetPlugin', 'top', data.categoryId) }}
-                    </div>
-                {% endif %}
-            {% endblock %}
-
             {% block content %}
+                {% block cmsTop %}
+                    {% if data.categoryId %}
+                        <div class="catalog-cms-block catalog-cms-block--top">
+                            {{ widgetBlock('CatalogCmsBlockWidgetPlugin', 'top', data.categoryId) }}
+                        </div>
+                    {% endif %}
+                {% endblock %}
                 <form method="GET" class="grid">
                     {% block form %}
                         <div class="col col--sm-12 col--lg-4 col--xl-3 catalog-left-side">
