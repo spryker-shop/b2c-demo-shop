@@ -1,9 +1,9 @@
 @mixin shop-ui-product-card($name: '.product-card') {
     #{$name} {
         position: relative;
-        padding-bottom: 50px;
+        padding: 0 15px 50px;
         @include helper-breakpoint-media-max($sm-max) {
-            padding-bottom: 32px;
+            padding: 0 5px 32px;
         }
         &__container {
             position: relative;
@@ -16,33 +16,30 @@
                     box-shadow: 10px 10px 40px 0px rgba(0,0,0,.1);
                     #{$name}__overlay {
                         &:after {
-                            content:'';
-                            position: absolute;
-                            top:0;
-                            left: 0;
-                            right: 0;
-                            bottom: 0;
-                            border-radius: 4px;
-                            background-image: linear-gradient(to bottom, #000000, rgba(0, 0, 0, 0));
                             opacity: 0.09;
-                            z-index: $setting-zi-element-floating;
                         }
                     }
+                }
+                .color-selector {
+                    margin-bottom: 0;
                 }
             }
         }
         &__thumbnail {
             border-radius: 4px;
-            margin: 0 15px 15px 15px;
+            margin-bottom: 15px;
             position: relative;
+            overflow: hidden;
+            @include helper-effect-transition(box-shadow);
             @include helper-breakpoint-media-max($sm-max) {
-                margin: 0 5px 5px 5px;
+                margin-bottom: 5px;
             }
             .thumbnail {
                 margin: 0;
             }
         }
         &__overlay {
+            display: block;
             padding: 90px 20px 120px 20px;
             @include helper-breakpoint-media-max($sm-max) {
                 padding: 45px 10px 70px 10px;
@@ -58,6 +55,31 @@
                 background: rgba(0,0,0,.05);
                 z-index: $setting-zi-element-floating;
             }
+            &:after {
+                @include helper-effect-transition(opacity);
+                content:'';
+                position: absolute;
+                top:0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                border-radius: 4px;
+                background-image: linear-gradient(to bottom, #000000, rgba(0, 0, 0, 0));
+                opacity: 0;
+                z-index: $setting-zi-element-floating;
+            }
+        }
+
+        .color-selector {
+            @include helper-effect-transition(margin-bottom);
+            background: #fff;
+            position: absolute;
+            z-index: 400;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            border-radius: 0 0 4px 4px;
+            margin-bottom: -100%;
         }
 
         &__actions-container {
@@ -73,10 +95,17 @@
         }
 
         &__info {
-            margin: 0 25px;
-            font: normal 16px $setting-font-family-additional;
-            font-weight: 500;
+            display: block;
+            margin: 0 11px;
+            font: 500 16px $setting-font-family-additional;
             letter-spacing: .3px;
+            color: $setting-color-darkest;
+
+            &:hover {
+                color: $setting-color-darkest;
+                text-decoration: none;
+            }
+
             @include helper-breakpoint-media-max($sm-max) {
                 font-size: 13px;
                 margin: 0 10px;
@@ -108,6 +137,9 @@
                     }
                 }
             }
+        }
+        .rating-selector {
+            margin: 0 11px;
         }
     }
 

@@ -16,10 +16,10 @@
 
 {% block body %}
 
-    <a href="{{data.url}}" class="{{config.name}}__container">
+    <div class="{{config.name}}__container">
         <div class="{{ config.name }}__thumbnail">
             {% block image %}
-                <div class="{{ config.name }}__overlay">
+                <a href="{{data.url}}" class="{{ config.name }}__overlay">
                     {% include atom('thumbnail') with {
                         attributes: {
                             alt: data.name,
@@ -27,45 +27,44 @@
                             title: data.name
                         }
                     } only %}
-                </div>
+                </a>
             {% endblock %}
             {% block labels %}
                 {{ widget('ProductAbstractLabelWidgetPlugin', data.abstractId) }}
+            {% endblock %}
+            {% block groups %}
+                {{ widget('ProductGroupWidgetPlugin', data.abstractId) }}
             {% endblock %}
         </div>
 
         {% block content %}
 
-            <div class="{{ config.name }}__info grid grid--justify grid--top grid--no-wrap">
-                    {% block name %}
-                        <div class="col col--md-8 col--sm-12">
-                            <span class="{{ config.name }}__name">{{data.name}}</span>
-                        </div>
-                    {% endblock %}
+            <a href="{{data.url}}" class="{{ config.name }}__info grid grid--justify grid--top grid--no-wrap">
+                {% block name %}
+                    <div class="col col--md-8 col--sm-12">
+                        <span class="{{ config.name }}__name">{{data.name}}</span>
+                    </div>
+                {% endblock %}
 
-                    {% block price %}
-                        <div class="col col--md-4 col--sm-12">
-                            {% include molecule('price') with {
-                                data: {
-                                    amount: data.price | money,
-                                    originalAmount: data.originalPrice is empty ? null : (data.originalPrice | money)
-                                }
-                            } only %}
-                        </div>
+                {% block price %}
+                    <div class="col col--md-4 col--sm-12">
+                        {% include molecule('price') with {
+                            data: {
+                                amount: data.price | money,
+                                originalAmount: data.originalPrice is empty ? null : (data.originalPrice | money)
+                            }
+                        } only %}
+                    </div>
 
-                    {% endblock %}
-            </div>
-
-            {#{% block groups %}#}
-                {#{{ widget('ProductGroupWidgetPlugin', data.abstractId) }}#}
-            {#{% endblock %}#}
+                {% endblock %}
+            </a>
 
             {% block rating %}
                 {{ widget('ProductAbstractReviewWidgetPlugin', data.abstractId) }}
             {% endblock %}
 
         {% endblock %}
-    </a>
+    </div>
 
 {% endblock %}
 
