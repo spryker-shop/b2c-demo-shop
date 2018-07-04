@@ -1,9 +1,63 @@
 {% block content %}
     <!-- CMS_BLOCK_PLACEHOLDER : "title" -->
     <!-- CMS_BLOCK_PLACEHOLDER : "description" -->
-    <h1>{{ spyCmsBlockPlaceholder('title') | raw }}</h1>
+    <div class="container">
+        <div class="grid grid--justify grid--spaced-lg multi-inspire-container multi-inspire-container--right">
+            <div class="col col--lg-6 col--md-12 col--sm-12">
+                <div class="multi-inspire-block multi-inspire-block--sm grid grid--no-wrap">
 
-    {{ spyCmsBlockPlaceholder('description') | raw }}
+                    <a href="#" class="multi-inspire-block__image multi-inspire-block__image--left">
+                        <div class="multi-inspire-block__img-wrap">
+                            <img src="/assets/images/inspire-1.png" alt="">
+                        </div>
+                    </a>
+
+                    <a href="#" class="multi-inspire-block__text multi-inspire-block__text--sm multi-inspire-block__text--right">
+                        <h5 class="multi-inspire-block__title">New Hot <br> Summer Edition</h5>
+                        <p class="multi-inspire-block__post-title">Style of the day</p>
+                    </a>
+
+                </div>
+
+                <div class="multi-inspire-block multi-inspire-block--sm grid grid--no-wrap">
+
+                    <a href="#" class="multi-inspire-block__text multi-inspire-block__text--sm multi-inspire-block__text--left">
+                        <h5 class="multi-inspire-block__title">Sunglasses from <br> our new desgners </h5>
+                        <p class="multi-inspire-block__post-title">New men’s arrival</p>
+                    </a>
+
+                    <a href="#" class="multi-inspire-block__image multi-inspire-block__image--right">
+                        <div class="multi-inspire-block__img-wrap">
+                            <img src="/assets/images/inspire-2.png" alt="">
+                        </div>
+                    </a>
+
+                </div>
+
+            </div>
+            <div class="col col--lg-6 col--md-12 col--sm-12">
+
+                <div class="multi-inspire-block multi-inspire-block--lg">
+                    <a href="#" class="multi-inspire-block__image multi-inspire-block__image--lg">
+                        <div class="multi-inspire-block__img-wrap">
+                            <img src="/assets/images/inspire-main-1.png" alt="">
+                        </div>
+                    </a>
+                    <a href="#" class="multi-inspire-block__text multi-inspire-block__text--lg">
+                        <h5 class="multi-inspire-block__title">
+                            Straight long <br>Cardigan for her
+                        </h5>
+                        <p class="multi-inspire-block__post-title">New 50% Sales this week</p>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    {#{{ spyCmsBlockPlaceholder('title') | raw }}#}
+
+    {#{{ spyCmsBlockPlaceholder('description') | raw }}#}
 
 {% endblock %}
 

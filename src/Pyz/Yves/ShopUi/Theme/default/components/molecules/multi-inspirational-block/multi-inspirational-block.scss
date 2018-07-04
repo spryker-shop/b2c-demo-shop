@@ -1,0 +1,103 @@
+@mixin helper-image-line($width, $height) {
+    content: '';
+    display: block;
+    width: $width;
+    height: $height;
+    background: $setting-color-text;
+    position: absolute;
+    z-index: -1;
+}
+
+@mixin shop-ui-multi-inspirational-block($name: '.multi-inspire-block') {
+    .multi-inspire-container {
+        margin: 0 0 150px 0;
+    }
+    #{$name} {
+        &--sm {
+            margin: 0 20px 40px 0;
+            @include helper-breakpoint-media-max($md-max) {
+                margin: 0 auto 30px auto;
+                max-width: 570px;
+            }
+        }
+        &--lg {
+            max-width: 570px;
+            margin: 0 auto;
+        }
+        &__image {
+            width: 270px;
+            height: 230px;
+            position: relative;
+            display: block;
+
+            &--lg {
+                width: 100%;
+                height: 500px;
+                max-width: 570px;
+                &::after {
+                    @include helper-image-line(2px, 59px);
+                    bottom: -35px;
+                    left: 54px;
+                }
+            }
+            &--left {
+                &::after {
+                    @include helper-image-line(36px, 2px);
+                    top: 30px;
+                    right: -35px;
+                }
+            }
+            &--right {
+                &::after {
+                    @include helper-image-line(36px, 2px);
+                    top: 30px;
+                    left: -35px;
+                }
+            }
+        }
+        &__img-wrap {
+            border-radius: 3px;
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            position: relative;
+            img {
+                width: 100%;
+                height: 100%;
+                min-width: fit-content;
+                position: absolute;
+            }
+        }
+        &__text {
+            text-transform: uppercase;
+            display: block;
+            @include helper-link-hover-reset;
+            &--lg {
+                margin: 35px 0 0 87px;
+            }
+            &--sm {
+                margin-top: 55px;
+            }
+            &--left {
+                text-align: right;
+                margin-right: 30px;
+            }
+            &--right {
+                margin-left: 30px;
+            }
+        }
+        &__title {
+            line-height: 1.52;
+            letter-spacing: 3.8px;
+            font:  bold 21px $setting-font-family-additional;
+        }
+        &__post-title {
+            letter-spacing: 3.2px;
+            line-height: normal;
+            font:  normal 10px $setting-font-family-additional;
+            color: $setting-color-darker;
+        }
+    }
+}
+
+@include shop-ui-multi-inspirational-block();
