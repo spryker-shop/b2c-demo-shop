@@ -6,15 +6,17 @@
 } %}
 
 {% block body %}
-    {% include molecule('rating-selector', 'ProductReviewWidget') with {
-        modifiers: ['expand'],
-        data: {
-            value: data.value,
-            maxValue: data.maxValue,
-            useHalfSteps: true
-        },
-        attributes: {
-            readonly: true
-        }
-    } only %}
+    {% if data.value %}
+        {% include molecule('rating-selector', 'ProductReviewWidget') with {
+            modifiers: ['expand'],
+            data: {
+                value: data.value,
+                maxValue: data.maxValue,
+                useHalfSteps: true
+            },
+            attributes: {
+                readonly: true
+            }
+        } only %}
+    {% endif %}
 {% endblock %}
