@@ -1,0 +1,32 @@
+{% block content %}
+    <!-- CMS_BLOCK_PLACEHOLDER : "title" -->
+    <!-- CMS_BLOCK_PLACEHOLDER : "description" -->
+    <div class="container">
+        <div class="grid grid--justify grid--middle grid--spaced-lg inspire-block inspire-block--left">
+            <div class="col col--lg-6 col--md-12 col--sm-12">
+
+                <div class="inspire-block__content inspire-block__content--left">
+                    <p class="inspire-block__pre-title">Limited Edition</p>
+                    <h5 class="inspire-block__title">{{ spyCmsBlockPlaceholder('title') | raw }}</h5>
+                    <p class="inspire-block__text">{{ spyCmsBlockPlaceholder('description') | raw }}</p>
+                    <a href="{{ 'samsung.search.link' | trans }}" class="inspire-block__link">View More</a>
+                </div>
+
+            </div>
+            <div class="col col--lg-6 col--md-12 col--sm-12">
+
+                <div class="inspire-block__images inspire-block__images--right">
+                    <div class="inspire-block__image inspire-block__image-1">
+                        <img src="/assets/images/inspire-main-bottom-1.png" alt="">
+                    </div>
+                    <div class="inspire-block__image inspire-block__image-2 inspire-block__image-2--right">
+                        <img src="/assets/images/inspire-main.png" alt="">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+

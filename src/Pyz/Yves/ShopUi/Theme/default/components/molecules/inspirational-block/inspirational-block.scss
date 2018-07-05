@@ -1,0 +1,170 @@
+@mixin shop-ui-inspirational-block ($name: '.inspire-block') {
+    #{$name} {
+        min-height: 300px;
+        margin: 130px 0 180px 0;
+        @include helper-breakpoint-media-max($sm-max) {
+            margin: 80px 0 100px 0;
+        }
+        &--left {
+            .col:first-of-type {
+                @include helper-breakpoint-media-max($md-max) {
+                    order: 2;
+                }
+            }
+            .col:last-of-type {
+                @include helper-breakpoint-media-max($md-max) {
+                    order: 1;
+                }
+            }
+        }
+        &__content {
+            &--right {
+                padding-left: 120px;
+            }
+            &--left {
+                padding-right: 120px;
+            }
+            @include helper-breakpoint-media-max($lg-max) {
+                padding: 0 20px;
+            }
+            @include helper-breakpoint-media-max($md-max) {
+                margin-top: 60px;
+            }
+        }
+        &__title {
+            font: bold 21px $setting-font-family-additional;
+            line-height: 1.52;
+            letter-spacing: 3.8px;
+            color: $setting-color-darker;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            @include helper-breakpoint-media-max($md-max) {
+                text-align: center;
+            }
+            @include helper-breakpoint-media-max($sm-max) {
+                line-height: 1.53;
+                letter-spacing: 3px;
+                font-size: 17px;
+            }
+        }
+        &__pre-title {
+            font: normal 10px $setting-font-family-additional;
+            line-height: normal;
+            letter-spacing: 3.2px;
+            color: $setting-color-darker;
+            text-transform: uppercase;
+            margin-bottom: 17px;
+            @include helper-breakpoint-media-max($md-max) {
+                text-align: center;
+            }
+            @include helper-breakpoint-media-max($sm-max) {
+                font-size: 9px;
+                line-height: normal;
+                letter-spacing: 2.9px;
+            }
+        }
+        &__text {
+            font: normal 15px $setting-font-family;
+            line-height: 1.67;
+            letter-spacing: 0.9px;
+            color: $setting-color-light;
+            margin-bottom: 27px;
+            @include helper-breakpoint-media-max($md-max) {
+                text-align: center;
+            }
+            @include helper-breakpoint-media-max($sm-max) {
+                line-height: 1.62;
+                letter-spacing: 0.8px;
+                font-size: 13px;
+            }
+        }
+
+        &__link {
+            display: block;
+            font: bold 11px $setting-font-family-additional;
+            letter-spacing: 2.5px;
+            line-height: 50px;
+            color: $setting-color-darker;
+            border: 1px solid $setting-color-text;
+            height: 52px;
+            width: 160px;
+            border-radius: 2px;
+            text-transform: uppercase;
+            text-align: center;
+            @include helper-link-hover-reset;
+            @include helper-breakpoint-media-max($md-max) {
+                margin: 0 auto;
+            }
+            @include helper-breakpoint-media-max($sm-max) {
+                width: 128px;
+                height: 46px;
+                letter-spacing: 2.1px;
+                line-height: 44px;
+                font-size: 10px;
+            }
+        }
+        &__images {
+            position: relative;
+            display: flex;
+            &--left {
+                justify-content: flex-start;
+            }
+            &--right {
+                justify-content: flex-end;
+            }
+        }
+        &__image {
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        &__image-1 {
+            width: 300px;
+            height: 550px;
+            @include helper-breakpoint-media-max($lg-max) {
+                width: 225px;
+                height: 412px;
+            }
+            @include helper-breakpoint-media-max($sm-max) {
+                width: 158px;
+                height: 257px;
+            }
+        }
+        &__image-2 {
+            width: 420px;
+            height: 400px;
+            position: absolute;
+            top: 50%;
+            transform: translate(0, -50%);
+            box-shadow: 20px 20px 80px 0 rgba(0,0,0,.3);
+            @include helper-breakpoint-media-max($lg-max) {
+                width: 315px;
+                height: 300px;
+            }
+            @include helper-breakpoint-media-max($sm-max) {
+                width: 210px;
+                height: 200px;
+            }
+            &--left {
+                left: 150px;
+                @include helper-breakpoint-media-max($lg-max) {
+                    left: 100px;
+                }
+                @include helper-breakpoint-media-max($sm-max) {
+                    left: 75px;
+                }
+            }
+            &--right {
+                right: 150px;
+                @include helper-breakpoint-media-max($lg-max) {
+                    right: 100px;
+                }
+                @include helper-breakpoint-media-max($sm-max) {
+                    right: 75px;
+                }
+            }
+
+        }
+    }
+}
+
+@include shop-ui-inspirational-block();
