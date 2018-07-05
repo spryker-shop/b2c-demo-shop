@@ -52,9 +52,10 @@
                         </div>
                     {% endif %}
                 {% endblock %}
-                <form method="GET" class="grid">
-                    {% block form %}
-                        <div class="col col--sm-12 col--lg-4 col--xl-3 catalog-left-side">
+
+                {% block form %}
+                    <form method="GET" class="grid">
+                        <div class="col col--sm-12 col--xl-3 catalog-left-side">
 
                             {% include organism('filter-section', 'CatalogPage') with {
                                 class: 'js-catalog__filters-toggle',
@@ -74,7 +75,7 @@
                             {% endblock %}
                         </div>
 
-                        <div class="col col--sm-12 col--lg-8 col--xl-9 catalog-right-side">
+                        <div class="col col--sm-12 col--xl-9 catalog-right-side">
                             {% include molecule('sort', 'CatalogPage')  only %}
 
                             {% include organism('active-filter-section', 'CatalogPage') with {
@@ -101,8 +102,9 @@
                                 {% endif %}
                             {% endblock %}
                         </div>
-                    {% endblock %}
-                </form>
+
+                    </form>
+                {% endblock %}
 
             {% endblock %}
 

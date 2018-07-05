@@ -1,0 +1,39 @@
+{% extends template('widget') %}
+
+{% define data = {
+    product: _widget.product,
+    viewMode: _widget.viewMode
+} %}
+
+{% block body %}
+    {% set productTemplate = molecule('product-card') %}
+    {% set class = 'col col--sm-6 col--lg-4' %}
+
+    {% if data.viewMode == 'list' %}
+        {% set productTemplate = molecule('product-list-item') %}
+        {% set class = 'col col--sm-12' %}
+    {% endif %}
+
+    {% embed productTemplate with {
+        productTemplate: productTemplate,
+        class: class,
+        data: {
+            name: data.product.abstract_name,
+            abstractId: data.product.id_product_abstract,
+            url: data.product.url,
+            imageUrl: data.product.images is empty ? '' : data.product.images.0.external_url_small,
+            price: data.product.prices.DEFAULT,
+            originalPrice: data.product.prices.ORIGINAL is defined ? data.product.prices.ORIGINAL : null
+        }
+    } only %}
+        {% block labels %}
+            {{ widget('ProductLabelWidgetPlugin', _widget.product.id_product_labels) }}
+        {% endblock %}
+
+        {% block rating %}
+            {% if _widget.product.rating is defined %}
+                {{ widget('ProductReviewWidgetPlugin', _widget.product.rating) }}
+            {% endif %}
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
