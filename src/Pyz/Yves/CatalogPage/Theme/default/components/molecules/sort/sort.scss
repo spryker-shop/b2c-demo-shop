@@ -6,15 +6,37 @@
             font-weight: 400;
             line-height: 24px;
             color: $setting-color-lighter;
+            @include helper-breakpoint-media-max($lg-max) {
+                display: none;
+            }
         }
 
         .select--sort {
             border: none;
         }
+
         .select__select {
             font-size: 16px;
             border-top: 0;
             border-bottom: 0;
+            color: $setting-color-darkest;
+        }
+
+        .select__caret {
+            color: $setting-color-darkest;
+        }
+
+        .trigger-filter {
+            @include helper-breakpoint-media-min($xl-min) {
+                display: none;
+            }
+            .sort__caret {
+                width: 8px;
+                height: 5px;
+                position: relative;
+                top: -1px;
+                left: 6px;
+            }
         }
 
         @content;

@@ -8,15 +8,55 @@
     }
 
     .catalog-left-side {
-        padding-right: 15px;
+        display: none;
+        @include helper-breakpoint-media-min($xl-min) {
+            display: block;
+            padding-right: 15px;
+        }
     }
     .catalog-right-side {
-        padding-left: 15px;
+        @include helper-breakpoint-media-min($xl-min) {
+            padding-left: 15px;
+        }
     }
 
     .spelling-suggestion {
         padding-top: 30px;
         width: 100%;
+    }
+
+    .overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        z-index: 1000;
+        background: rgba(0, 0, 0, 0.6);
+    }
+
+    @include helper-breakpoint-media-max($lg-max) {
+        .show-filter {
+            .overlay {
+                display: block;
+            }
+            .catalog-left-side {
+                display: block;
+                position: fixed;
+                z-index: 1001;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: #fff;
+                border-radius: 3px;
+                width: 500px;
+                min-width: 0;
+                max-width: calc(100vw - 28px);
+                max-height: calc(100vh - 28px);
+                overflow-y: auto;
+            }
+        }
     }
 }
 
