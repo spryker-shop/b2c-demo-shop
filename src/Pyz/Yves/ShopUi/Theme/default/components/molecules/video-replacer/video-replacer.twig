@@ -1,0 +1,16 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'video-replacer',
+    tag: 'video-replacer'
+} %}
+
+{% define data = {
+    url: ''
+} %}
+
+{% block body %}
+
+    <video src="" type="video/mp4" preload="preload" data-src="{{ data.url }}" id="video" autoplay="autoplay" loop="loop"></video>
+
+{% endblock %}
