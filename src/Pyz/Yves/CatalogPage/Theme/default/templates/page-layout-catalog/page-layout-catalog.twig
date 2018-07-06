@@ -54,11 +54,11 @@
                 {% endblock %}
 
                 {% block form %}
-                    <form method="GET" class="grid">
+                    <form method="GET" class="grid js-target-filter">
+
                         <div class="col col--sm-12 col--xl-3 catalog-left-side">
 
                             {% include organism('filter-section', 'CatalogPage') with {
-                                class: 'js-catalog__filters-toggle',
                                 data: {
                                     facets: data.facets,
                                     filterPath: data.filterPath,
@@ -102,6 +102,16 @@
                                 {% endif %}
                             {% endblock %}
                         </div>
+
+                        <div class="overlay"></div>
+
+                        {% include molecule('toggler-click') with {
+                            attributes: {
+                                'trigger-selector': '.js-trigger-filter',
+                                'target-selector': '.js-target-filter',
+                                'class-to-toggle': 'show-filter'
+                            }
+                        } only %}
 
                     </form>
                 {% endblock %}

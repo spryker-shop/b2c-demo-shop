@@ -1,10 +1,12 @@
 @mixin catalog-page-filter-section($name: '.filter-section') {
     #{$name} {
-        margin-top: 79px;
-        border-top: dotted 1px $setting-color-lightest;
+        padding-top: 79px;
 
         &__item {
             border-bottom: dotted 1px $setting-color-lightest;
+            &:first-child {
+                border-top: dotted 1px $setting-color-lightest;
+            }
             .checkbox,
             .radio {
                 margin-bottom: 0;
@@ -107,6 +109,25 @@
             font-size: 16px;
             padding: 10px;
         }
+
+        .close-popup {
+            @include helper-breakpoint-media-min($xl-min) {
+                display: none;
+            }
+        }
+
+        @include helper-breakpoint-media-max($lg-max) {
+            padding: 120px 24px 40px;
+            .filter-actions {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                background: #f7f7f7;
+                padding: 20px 24px;
+            }
+        }
+
 
         @content;
     }

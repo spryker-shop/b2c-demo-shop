@@ -50,12 +50,16 @@
         }
     } only %}
 
-    <button type="submit" class="button button--expand button--small apply-filter">
-        {{ 'catalog.filter.button' | trans }}
-        {% include atom('icon') with {
-            data: {
-                name: 'filter'
-            }
-        } only %}
-    </button>
+    <div class="filter-actions">
+        <span class="close-popup js-trigger-filter">
+            {% include atom('icon') with {
+                data: {
+                    name: 'close'
+                }
+            } only %}
+        </span>
+        <button type="submit" class="button button--expand button--small apply-filter">
+            {{ 'catalog.filter.button' | trans }}
+        </button>
+    </div>
 {% endblock %}
