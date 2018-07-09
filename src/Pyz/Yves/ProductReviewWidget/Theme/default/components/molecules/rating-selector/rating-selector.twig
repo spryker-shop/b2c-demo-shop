@@ -12,7 +12,8 @@
     steps: 5,
     useHalfSteps: false,
     inputId: '',
-    inputName: 'rating'
+    inputName: 'rating',
+    reviewCount: ''
 } %}
 
 {% define attributes = {
@@ -96,6 +97,8 @@
             {% endfor %}
         {% endspaceless %}
     </span>
+
+    <span class="product-review-count">{{ data.reviewCount }}</span>
 
     {% if not attributes.readonly %}
         {% block input %}

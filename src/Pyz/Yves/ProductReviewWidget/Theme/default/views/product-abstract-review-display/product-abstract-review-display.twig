@@ -2,6 +2,7 @@
 
 {% define data = {
     value: _widget.productReviewStorageTransfer.averageRating | default(0),
+    reviewCount: _widget.productReviewStorageTransfer.reviewCount | default(''),
     maxValue: _widget.maximumRating
 } %}
 
@@ -12,6 +13,7 @@
             data: {
                 value: data.value,
                 maxValue: data.maxValue,
+                reviewCount: data.reviewCount,
                 useHalfSteps: true
             },
             attributes: {
