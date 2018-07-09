@@ -1,7 +1,9 @@
 @mixin shop-ui-jumbotron-slider-item($name: '.jumbotron-slider-item') {
     #{$name} {
+        border-radius: 4px;
+        overflow: hidden;
         &__container {
-            height: 16rem;
+            height: 160px;
             background: $setting-color-main;
             background: linear-gradient(to left top, helper-color-dark($setting-color-main), helper-color-light($setting-color-main));
             background-position: center center;
@@ -11,11 +13,11 @@
             position: relative;
 
             @include helper-breakpoint(md) {
-                height: 26rem;
+                height: 240px;
             }
 
             @include helper-breakpoint(xl) {
-                height: 38rem;
+                height: 400px;
             }
         }
         &__link {
@@ -36,26 +38,26 @@
         }
         &__title {
             &>* {
-                font: bold 4.4rem $setting-font-family-additional;
+                font: 700 57px $setting-font-family-additional;
                 line-height: 1.5;
                 @include helper-breakpoint-media-max($lg-max) {
-                    font-size: 3rem;
+                    font-size: 34px;
                 }
                 @include helper-breakpoint-media-max($md-max) {
-                    font-size: 2rem;
+                    font-size: 23px;
                 }
             }
         }
 
         &__text {
             &>* {
-                font: 300 2rem $setting-font-family;
+                font: 200 26px $setting-font-family;
                 letter-spacing: .2px;
                 @include helper-breakpoint-media-max($lg-max) {
-                    font-size: 1.5rem;
+                    font-size: 16px;
                 }
                 @include helper-breakpoint-media-max($md-max) {
-                    font-size: 1rem;
+                    font-size: 11px;
                 }
             }
 

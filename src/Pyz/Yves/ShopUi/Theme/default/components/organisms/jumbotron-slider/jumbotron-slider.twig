@@ -1,0 +1,35 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'jumbotron-slider'
+} %}
+
+{% define data = {
+    slides: []
+} %}
+
+{% define attributes = {
+    'data-json': ''
+} %}
+
+{% block body %}
+
+    {% embed molecule('slick-carousel') with {
+        data: data,
+        attributes: attributes
+    } only %}
+
+        {% block slides %}
+            {% for slide in data.slides %}
+                {% include molecule('jumbotron-slider-item') with {
+                    data: {
+                        imageUrl: slide.imageUrl,
+                        link: slide.link,
+                        cmsBlockName: slide.cmsBlockName
+                    }
+                } only %}
+            {% endfor %}
+        {% endblock %}
+    {% endembed %}
+
+{% endblock %}
