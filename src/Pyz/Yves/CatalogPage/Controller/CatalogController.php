@@ -19,6 +19,8 @@ class CatalogController extends SprykerCatalogController
 {
     const CATEGORY_BANNER_PATH = '/assets/images/';
 
+    const KEY_PARENTS = 'parents';
+
     /**
      * @var array
      */
@@ -78,13 +80,17 @@ class CatalogController extends SprykerCatalogController
      */
     protected function getCategoryBannerPath(array $categoryNode)
     {
-        $shotPath = $this->formatBannerName($categoryNode);
+        $fileName = $this->formatBannerName($categoryNode);
 
         foreach ($this->availableBannerTypes as $type) {
-            $filePath = APPLICATION_ROOT_DIR . '/public/Yves' . $shotPath . $type;
+            $filePath = APPLICATION_ROOT_DIR . '/public/Yves' . $fileName . $type;
             if (file_exists($filePath)) {
-                return $shotPath . $type;
+                return $fileName . $type;
             }
+        }
+
+        if (array_key_exists(self::KEY_PARENTS, $categoryNode)) {
+            return $this->getCategoryBannerPath($categoryNode[self::KEY_PARENTS][0]);
         }
 
         return null;
@@ -97,10 +103,6 @@ class CatalogController extends SprykerCatalogController
      */
     protected function formatBannerName(array $categoryNode)
     {
-        $categoryName = str_replace(' ', '-', $categoryNode['name']);
-        $categoryName = preg_replace('/[^A-Za-z0-9\-]/', '', $categoryName);
-        $categoryName = preg_replace('/-+/', '-', $categoryName);
-
-        return self::CATEGORY_BANNER_PATH . 'category-' . strtolower($categoryName) . '-' . $categoryNode['id_category'];
+        return self::CATEGORY_BANNER_PATH . 'category-' . $categoryNode['id_category'];
     }
 }
