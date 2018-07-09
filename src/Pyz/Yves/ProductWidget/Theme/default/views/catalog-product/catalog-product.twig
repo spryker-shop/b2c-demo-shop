@@ -33,6 +33,7 @@
         {% block rating %}
             {% if _widget.product.rating is defined %}
                 {{ widget('ProductReviewWidgetPlugin', _widget.product.rating) }}
+                <span class="product-review-count">{{ _widget.product.review_count }}</span>
             {% endif %}
         {% endblock %}
     {% endembed %}
