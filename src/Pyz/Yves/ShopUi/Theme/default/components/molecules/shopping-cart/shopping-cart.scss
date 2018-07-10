@@ -14,11 +14,9 @@
         &__sidebar {
             border-top: 1px dotted #d3d3d3;
             margin-top: 1.5rem;
-            padding-top: 1.5rem;
             @include helper-breakpoint-media-min($xl-min) {
                 margin-top: 0;
                 margin-left: 1rem;
-                padding-top: 0;
                 border-top: none;
             }
             .form__field {
@@ -31,21 +29,7 @@
                 margin-left: 0;
             }
         }
-        .cart-image {
-            position: relative;
-            padding: 8px 0;
-            &::before {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                border-radius: 4px;
-                background: rgba(0, 0, 0, 0.05);
-                z-index: 350;
-            }
-        }
+
         hr {
             margin: 1rem 0;
             border-bottom: 1px dotted #d3d3d3;
@@ -96,5 +80,3 @@
         @content;
     }
 }
-
-@include shop-ui-shopping-cart();

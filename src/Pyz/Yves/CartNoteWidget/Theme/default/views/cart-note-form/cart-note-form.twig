@@ -1,0 +1,40 @@
+{% extends template('widget') %}
+
+{% define data = {
+    idQuote: _view.cart.idQuote,
+    form: _widget.cartNoteForm
+} %}
+
+{% set canWrite = (not is_granted('IS_AUTHENTICATED_FULLY') or can('WriteSharedCartPermissionPlugin', data.idQuote)) %}
+
+{% block body %}
+    {% if canWrite %}
+        <div class="cart-note">
+            <h4 class="cart-note__title js-form-toggle" data-toggle-target=".js-form-toggle-target">
+                Note for somero
+            </h4>
+            <div class="cart-note__form js-form-toggle-target">
+                {% include molecule('form') with {
+                    data: {
+                        form: data.form,
+                        options: {
+                            action: url('cart-note/quote')
+                        },
+                        submit: {
+                            enable: false,
+                            text: 'cart_note.form.save' | trans
+                        }
+                    }
+                } only %}
+            </div>
+        </div>
+    {% endif %}
+
+    {% include molecule('toggler-accordeon') with {
+        attributes: {
+            trigger: '.js-form-toggle',
+            'class-to-toggle': 'is-hidden'
+        }
+    } only %}
+
+{% endblock %}

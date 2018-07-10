@@ -32,21 +32,30 @@
         }
         &__image {
             position: absolute;
-            right: -40%;
-            top:0;
-            width: 320px;
-            height: 750px;
+            right: -220px;
+            top:-50px;
+            width: 270px;
+            height: 715px;
+            overflow: hidden;
+            border-radius: 4px;
+            box-shadow: 0 0 70px 0 rgba(0, 0, 0, 0.2);
+            img {
+                width: 100%;
+            }
+            @include helper-breakpoint-media-max($xl-max) {
+                right: -160px;
+            }
             @include helper-breakpoint-media-max($lg-max) {
-                right: -25%;
+                right: -100px;
                 top: 40%;
                 width: 240px;
                 height: 562px;
             }
+            //@include helper-breakpoint-media-max($md-max) {
+            //    right: 0%;
+            //    top: 60%;
+            //}
             @include helper-breakpoint-media-max($md-max) {
-                right: 0%;
-                top: 60%;
-            }
-            @include helper-breakpoint-media-max($sm-max) {
                 bottom: 0;
                 left: 50%;
                 top: unset;
