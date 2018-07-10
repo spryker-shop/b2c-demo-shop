@@ -104,10 +104,14 @@
             padding-bottom: 20px;
         }
 
-        .apply-filter {
+        .filter-actions {
             margin-top: 15px;
-            font-size: 16px;
-            padding: 10px;
+            .button {
+                font: 400 13px/16px $setting-font-family-additional;
+                padding: 12px 20px;
+                min-width: 92px;
+                width: 100%;
+            }
         }
 
         .close-popup {
@@ -125,9 +129,12 @@
                 width: 100%;
                 background: #f7f7f7;
                 padding: 20px 24px;
+                margin: 0;
+                .button {
+                    width: auto;
+                }
             }
         }
-
 
         @content;
     }

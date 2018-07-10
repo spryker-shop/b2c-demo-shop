@@ -36,6 +36,8 @@
 
             {{parent()}}
 
+            {% include molecule('check-touch') only %}
+
             {% block footerScripts %}
                 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
                 <script src="{{publicPath('js/yves_default.es6-polyfill.js')}}"></script>
