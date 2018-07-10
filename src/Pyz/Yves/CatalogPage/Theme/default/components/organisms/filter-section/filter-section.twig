@@ -14,12 +14,11 @@
 {% block body %}
     {% for filter in data.facets %}
         {% set filterHasValues = filter.values is not defined or filter.values | length > 0 %}
-        {% set hasToggler = filter.config.type != 'category' %}
 
         {% if filterHasValues %}
             <div class="{{ config.name }}__item">
-                <div class="{{ config.name }}__title{{ hasToggler ? ' js-filter-trigger' : '' }}"
-                     {{ hasToggler ? 'data-toggle-target=.js-' ~  filter.name : '' }}>
+                <div class="{{ config.name }}__title{{ ' js-filter-trigger' }}"
+                    {{ 'data-toggle-target=.js-' ~  filter.name }}>
                     {{ ('product.filter.' ~ filter.name | lower) | trans }}
                 </div>
 
@@ -27,7 +26,7 @@
                     molecule('filter-' ~ filter.config.name, 'CatalogPage'),
                     molecule('filter-' ~ filter.config.type, 'CatalogPage')
                 ] ignore missing with {
-                    class: hasToggler ? 'js-' ~  filter.name ~ ' is-hidden' : '',
+                    class: 'js-' ~  filter.name ~ ' is-hidden',
                     data: {
                         filterPath: data.filterPath,
                         categories: data.categories,

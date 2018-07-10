@@ -54,6 +54,13 @@
                     background: none;
                 }
             }
+
+            @include helper-breakpoint-media-max($lg-max) {
+                width: 44px;
+                height: 54px;
+                font-size: 15px;
+                line-height: 54px;
+            }
         }
 
         .icon {
@@ -62,6 +69,11 @@
             svg {
                 fill: $setting-color-dark;
             }
+            @include helper-breakpoint-media-max($lg-max) {
+                width: 11px;
+                height: 11px;
+            }
         }
+
     }
 }

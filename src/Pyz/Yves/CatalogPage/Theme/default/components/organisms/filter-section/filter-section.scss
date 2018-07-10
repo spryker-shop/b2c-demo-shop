@@ -6,6 +6,14 @@
             border-bottom: dotted 1px $setting-color-lightest;
             &:first-child {
                 border-top: dotted 1px $setting-color-lightest;
+                @include helper-breakpoint-media-min($xl-min) {
+                    #{$name}__title {
+                        &:before,
+                        &:after {
+                            display: none !important;
+                        }
+                    }
+                }
             }
             .checkbox,
             .radio {
@@ -28,7 +36,7 @@
             position: relative;
             &[data-toggle-target] {
                 cursor: pointer;
-                &:hover {
+                .no-touch &:hover {
                     opacity: 0.5;
                 }
                 &:before {
@@ -65,18 +73,27 @@
             .menu__item--has-children-list .menu__item {
                 margin: 0 0 0 1rem;
             }
+            @include helper-breakpoint-media-min($xl-min) {
+                display: block;
+            }
         }
 
         .menu__item {
             margin: 0;
             font: 400 15px $setting-font-family;
+            &.active > button {
+                color: #ff4859;
+            }
+            [disabled] {
+                color: $setting-color-lighter;
+            }
         }
 
         .link {
             font: 400 15px $setting-font-family;
             margin-bottom: 14px;
             color: $setting-color-darkest;
-            &:hover {
+            &:not([disabled]):hover {
                 text-decoration: none;
                 color: $setting-color-alt
             }

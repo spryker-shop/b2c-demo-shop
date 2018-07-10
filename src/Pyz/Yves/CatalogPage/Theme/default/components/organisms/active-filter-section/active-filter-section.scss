@@ -1,7 +1,8 @@
 @mixin catalog-page-active-filter-section($name: '.active-filter-section') {
     #{$name} {
-        padding: 0 0 60px;
-        margin-left: -8px;
+        margin: 0 -16px 50px -24px;
+        font: 0/0 $setting-font-family;
+        padding: 0 16px 10px;
 
         .active-filter__item,
         &__item {
@@ -40,6 +41,12 @@
                 right: 11px;
                 top: 5px;
             }
+        }
+
+        @include helper-breakpoint-media-max($lg-max) {
+            white-space: nowrap;
+            overflow-x: auto;
+            margin-bottom: 38px;
         }
 
         @content;

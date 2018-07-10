@@ -3,6 +3,10 @@
         margin-right: -15px;
         margin-left: -15px;
         max-width: none;
+        @include helper-breakpoint-media-max($sm-max) {
+            margin-right: -5px;
+            margin-left: -5px;
+        }
 
         @content;
     }
@@ -12,6 +16,7 @@
         @include helper-breakpoint-media-min($xl-min) {
             display: block;
             padding-right: 15px;
+            padding-bottom: 50px;
         }
     }
     .catalog-right-side {
