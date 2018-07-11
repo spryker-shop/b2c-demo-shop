@@ -76,6 +76,7 @@
                 <div class="col col--sm-12 col--xl-4 ">
                     <div class="shopping-cart__sidebar shopping-cart__block">
                         <h2 class="shopping-cart__title shopping-cart__box">{{ 'cart.title2' | trans }}</h2>
+                        <div class="shopping-cart__box shopping-cart__box--empty"></div>
                         <div class="shopping-cart__box">
                             {% if widgetExists('CartNoteQuoteWidgetPlugin') %}
                                 {{ widget('CartNoteQuoteWidgetPlugin', data.cart) }}
@@ -86,6 +87,8 @@
                                 {{ widget('DiscountVoucherFormWidgetPlugin') }}
                             {% endif %}
                         </div>
+
+                        <div class="shopping-cart__box shopping-cart__box--empty"></div>
 
                         {% include molecule('cart-summary', 'CartPage') with {
                             data: {

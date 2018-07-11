@@ -1,0 +1,26 @@
+@mixin shop-ui-cart-summary($name: '.cart-summary') {
+    #{$name} {
+
+        &__total {
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+        li, span {
+            font: 400 14px $setting-font-family-additional;
+        }
+        .shopping-cart__box {
+            padding: 0;
+        }
+        .spacing-y {
+            margin: 24px 0;
+        }
+        &__button {
+            height: 56px;
+            font: 500 16px $setting-font-family-additional;
+            line-height: 56px;
+            padding: 0 20px;
+            margin-top: 56px;
+        }
+    }
+}
+@include shop-ui-cart-summary();
