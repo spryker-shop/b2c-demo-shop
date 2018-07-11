@@ -11,6 +11,7 @@
 } %}
 
 {% set options = [] %}
+{% set productName = data.product.name | default %}
 {% set brand = data.product.attributes.brand | default %}
 {% set sku = data.product.sku %}
 {% set availabilityWidget = '' %}
@@ -29,8 +30,9 @@
 {% endif %}
 
 {% block body %}
+
     {% if brand is not empty %}
-        <h5>{{brand}}</h5>
+        <h1>{{productName}}</h1>
     {% endif %}
     <span>{{ 'product.attribute.sku' | trans }}: {{sku}}</span>
 
