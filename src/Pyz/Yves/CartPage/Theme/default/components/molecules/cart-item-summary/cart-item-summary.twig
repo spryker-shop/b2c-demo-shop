@@ -1,0 +1,32 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'cart-item-summary',
+    tag: 'ul'
+} %}
+
+{% define data = {
+    unitPrice: required,
+    subtotalPrice: required,
+    cartItem: required
+} %}
+
+{% block class %}{{parent()}} list{% endblock %}
+
+{% block body %}
+    {#<li class="list__item spacing-y">#}
+        {#{{ 'cart.item.item_price' | trans }}#}
+        {#<span class="float-right">{{ data.unitPrice }}</span>#}
+    {#</li>#}
+
+    {% if data.cartItem.productOptions | length > 0 %}
+        <li class="list__item text-small">
+            {{ widget('CartItemProductOptionWidgetPlugin', data.cartItem) }}
+        </li>
+    {% endif %}
+
+    <li class="list__item spacing-y">
+        {#<strong>{{ 'cart.item.item_total' | trans }}</strong>#}
+        <strong class="cart-item__total float-right">{{ data.subtotalPrice }}</strong>
+    </li>
+{% endblock %}

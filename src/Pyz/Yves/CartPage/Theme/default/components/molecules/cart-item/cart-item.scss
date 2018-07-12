@@ -1,0 +1,30 @@
+@mixin shop-ui-cart-item($name: '.cart-item') {
+    #{$name} {
+        &__title {
+            font: 500 17px $setting-font-family-additional;
+            line-height: 1.29;
+        }
+        &__content {
+            padding: 0 0 5px 24px;
+        }
+        &__options {
+
+        }
+        &__total {
+            font: 500 17px $setting-font-family-additional;
+            line-height: 1.29;
+        }
+        &__remove {
+            font: 300 13px $setting-font-family-additional;
+            line-height: 1.31;
+            opacity: .4;
+            text-transform: capitalize;
+            &:hover {
+                text-decoration: none;
+                color: inherit;
+                opacity: 1;
+            }
+        }
+    }
+}
+@include shop-ui-cart-item();

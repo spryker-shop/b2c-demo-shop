@@ -14,8 +14,8 @@
 {% set canEditCart = (not is_granted('IS_AUTHENTICATED_FULLY') or can('WriteSharedCartPermissionPlugin', data.cart.idQuote)) %}
 
 {% block body %}
-    <div class="grid grid--stretch grid--justify">
-        <div class="col col--sm-12 col--lg-2">
+    <div class="grid grid--middle grid--justify">
+        <div class="cart-item__image col col--sm-5 col--lg-2">
             {% include molecule('cart-image', 'CartPage') with {
                 data: {
                     name: data.cartItem.name | default(''),
@@ -23,56 +23,62 @@
                 }
             } only %}
         </div>
-
-        <div class="col col--sm-12 col--lg-6">
-            <h5>{{ data.cartItem.name }}</h5>
-
-            <small class="text-secondary">
-                {#{{ 'cart.item.sku' | trans }}#}
-                {#{{ data.cartItem.sku }}#}
-            </small>
-
-            {% if data.attributes is not empty %}
-                {% include molecule('cart-item-variant-selector', 'CartPage') with {
-                    data: {
-                        cartItem: data.cartItem,
-                        cartItemAttributes: data.attributes
-                    }
-                } only %}
-            {% endif %}
-
-            {{ widget('ProductBundleItemsWidgetPlugin', data.cartItem, data.cart) }}
-
-            {% include molecule('cart-item-summary', 'CartPage') with {
-                data: {
-                    unitPrice: data.cartItem.unitPrice | money,
-                    subtotalPrice: data.cartItem.sumSubtotalAggregation | money,
-                    cartItem: data.cartItem
-                }
-            } only %}
-        </div>
-
-        <div class="col col--sm-12 col--lg-3">
-            {% if canEditCart %}
-                {% if widgetExists('QuantitySalesUnitWidgetPlugin') %}
-                    {{ widget('QuantitySalesUnitWidgetPlugin', data.cartItem) }}
-                {% else %}
-                    {% include molecule('cart-quantity-input', 'CartPage') with {
+        <div class="cart-item__content col col--sm-7 col--lg-10">
+            <div class="grid grid--justify grid--middle">
+                <h5 class="cart-item__title col">{{ data.cartItem.name }}</h5>
+                <div class="cart-item__price col">
+                    {% include molecule('cart-item-summary', 'CartPage') with {
+                        class: 'cart-item__summary',
                         data: {
+                            unitPrice: data.cartItem.unitPrice | money,
+                            subtotalPrice: data.cartItem.sumSubtotalAggregation | money,
                             cartItem: data.cartItem
                         }
                     } only %}
-                {% endif %}
-            {% else %}
-                {{ 'cart.item_quantity' | trans }}
-                <strong>{{ cartItem.quantity }}</strong>
-            {% endif %}
+                </div>
+            </div>
+            <div class="cart-item__options">
+                {% if canEditCart %}
+                    {% if widgetExists('QuantitySalesUnitWidgetPlugin') %}
+                        {{ widget('QuantitySalesUnitWidgetPlugin', data.cartItem) }}
+                    {% else %}
+                        {% include molecule('cart-quantity-input', 'CartPage') with {
+                            data: {
+                                cartItem: data.cartItem
+                            }
+                        } only %}
+                    {% endif %}
+                {% else %}
+                    {{ 'cart.item_quantity' | trans }}
 
-            {% if canEditCart %}
-                <a class="float-right" href="{{ path('cart/remove', {'sku': data.cartItem.sku, 'groupKey': data.cartItem.groupKey }) }}">
-                    &times; {{ 'remove' | trans }}
-                </a>
-            {% endif %}
+                    <strong>{{ cartItem.quantity }}</strong>
+                {% endif %}
+
+                {% if canEditCart %}
+                    <a class="cart-item__remove" href="{{ path('cart/remove', {'sku': data.cartItem.sku, 'groupKey': data.cartItem.groupKey }) }}">
+                         {{ 'remove' | trans }}
+                    </a>
+                {% endif %}
+            </div>
         </div>
+
     </div>
+
+        {#<div class="col col--sm-12 col--lg-6">#}
+            {#<small class="text-secondary">#}
+                {#{{ 'cart.item.sku' | trans }}#}
+                {#{{ data.cartItem.sku }}#}
+            {#</small>#}
+
+            {#{% if data.attributes is not empty %}#}
+                {#{% include molecule('cart-item-variant-selector', 'CartPage') with {#}
+                    {#data: {#}
+                        {#cartItem: data.cartItem,#}
+                        {#cartItemAttributes: data.attributes#}
+                    {#}#}
+                {#} only %}#}
+            {#{% endif %}#}
+
+            {#{{ widget('ProductBundleItemsWidgetPlugin', data.cartItem, data.cart) }}#}
+        {#</div>#}
 {% endblock %}
