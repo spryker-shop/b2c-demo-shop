@@ -30,6 +30,7 @@ use Spryker\Zed\Calculation\Communication\Plugin\Calculator\SubtotalCalculatorPl
 use Spryker\Zed\Calculation\Communication\Plugin\Calculator\TaxTotalCalculatorPlugin;
 use Spryker\Zed\DiscountCalculationConnector\Communication\Plugin\DiscountCalculatorPlugin;
 use Spryker\Zed\DiscountPromotion\Communication\Plugin\Calculation\RemovePromotionItemsCalculatorPlugin;
+use Spryker\Zed\GiftCard\Communication\Plugin\GiftCardCalculatorPlugin;
 use Spryker\Zed\Kernel\Container;
 use Spryker\Zed\Payment\Communication\Plugin\Calculation\PaymentCalculatorPlugin;
 use Spryker\Zed\ProductBundle\Communication\Plugin\Calculation\CalculateBundlePricePlugin;
@@ -189,6 +190,8 @@ class CalculationDependencyProvider extends SprykerCalculationDependencyProvider
             new ProductItemTaxRateCalculatorPlugin(),
             new ProductOptionTaxRateCalculatorPlugin(),
             new ShipmentTaxRateCalculatorPlugin(),
+
+            new GiftCardCalculatorPlugin(),
 
             new InitialGrandTotalCalculatorPlugin(),
             new DiscountCalculatorPlugin(),
