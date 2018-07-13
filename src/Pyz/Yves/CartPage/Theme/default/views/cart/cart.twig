@@ -49,8 +49,8 @@
                 <h6>{{ 'cart.empty' | trans }}</h6>
             </div>
         {% else %}
-            <div class="grid">
-                <div class="col col--sm-12 col--xl-8">
+            <div class="grid grid--spaced-lg">
+                <div class="col col--sm-12 col--lg-8">
                     <div class="shopping-cart__block shopping-cart__block--left">
                         <div class="shopping-cart__box grid grid--middle grid--justify">
                             <h2 class="shopping-cart__title col">{{ 'cart.title1' | trans }}</h2>
@@ -67,13 +67,12 @@
                                     }
                                 } only %}
                             {% endfor %}
-
-                            {{ widget('DiscountPromotionItemListWidgetPlugin', data.cart, data.request) }}
                         </div>
+                        {{ widget('DiscountPromotionItemListWidgetPlugin', data.cart, data.request) }}
                     </div>
                 </div>
 
-                <div class="col col--sm-12 col--xl-4 ">
+                <div class="col col--sm-12 col--lg-4 ">
                     <div class="shopping-cart__sidebar shopping-cart__block">
                         <h2 class="shopping-cart__title shopping-cart__box">{{ 'cart.title2' | trans }}</h2>
                         <div class="shopping-cart__box shopping-cart__box--empty"></div>

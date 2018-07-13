@@ -1,12 +1,26 @@
 @mixin shop-ui-shopping-cart($name: '.shopping-cart') {
     #{$name} {
         margin-bottom: 180px;
+        @include helper-breakpoint-media-max($sm-max) {
+            margin-bottom: 100px;
+        }
         &__block {
             padding-top: 79px;
+            @include helper-breakpoint-media-max($sm-max) {
+                padding-top: 42px;
+            }
             &--left {
                 padding-right: 100px;
                 padding-bottom: 150px;
                 border-right: 1px dotted $setting-color-lightest;
+                @include helper-breakpoint-media-max($lg-max) {
+                    padding-right: 50px;
+                }
+                @include helper-breakpoint-media-max($md-max) {
+                    padding-right: 0px;
+                    border-right: none;
+                    padding-bottom: 8px;
+                }
             }
         }
         &__box {
@@ -18,11 +32,20 @@
         }
         &__sidebar {
             padding-left: 20px;
+            @include helper-breakpoint-media-max($md-max) {
+                padding-left: 0;
+            }
+            @include helper-breakpoint-media-max($sm-max) {
+                padding-left: 0;
+            }
         }
         &__title {
             font: 700 26px $setting-font-family-additional;
             line-height: 1.38;
             letter-spacing: -0.3px;
+            @include helper-breakpoint-media-max($sm-max) {
+                font-size: 25px;
+            }
         }
         &__quantity {
             font: 400 16px $setting-font-family;
@@ -30,6 +53,11 @@
         }
         &__items-container {
             padding-top: 38px;
+            margin-bottom: 80px;
+            @include helper-breakpoint-media-max($sm-max) {
+                padding-top: 20px;
+                margin-bottom: 42px;
+            }
         }
     }
 }

@@ -14,8 +14,8 @@
 {% set canEditCart = (not is_granted('IS_AUTHENTICATED_FULLY') or can('WriteSharedCartPermissionPlugin', data.cart.idQuote)) %}
 
 {% block body %}
-    <div class="grid grid--middle grid--justify">
-        <div class="cart-item__image col col--sm-5 col--lg-2">
+    <div class="grid grid--middle grid--justify grid--no-wrap">
+        <div class="{{ config.name }}__image col ">
             {% include molecule('cart-image', 'CartPage') with {
                 data: {
                     name: data.cartItem.name | default(''),
@@ -23,10 +23,10 @@
                 }
             } only %}
         </div>
-        <div class="cart-item__content col col--sm-7 col--lg-10">
+        <div class="{{ config.name }}__content col">
             <div class="grid grid--justify grid--middle">
-                <h5 class="cart-item__title col">{{ data.cartItem.name }}</h5>
-                <div class="cart-item__price col">
+                <h5 class="{{ config.name }}__title col col--lg-8 col--sm-12">{{ data.cartItem.name }}</h5>
+                <div class="{{ config.name }}__price col col--lg-4 col--sm-12">
                     {% include molecule('cart-item-summary', 'CartPage') with {
                         class: 'cart-item__summary',
                         data: {
@@ -37,7 +37,7 @@
                     } only %}
                 </div>
             </div>
-            <div class="cart-item__options">
+            <div class="{{ config.name }}__options">
                 {% if canEditCart %}
                     {% if widgetExists('QuantitySalesUnitWidgetPlugin') %}
                         {{ widget('QuantitySalesUnitWidgetPlugin', data.cartItem) }}
@@ -55,7 +55,7 @@
                 {% endif %}
 
                 {% if canEditCart %}
-                    <a class="cart-item__remove" href="{{ path('cart/remove', {'sku': data.cartItem.sku, 'groupKey': data.cartItem.groupKey }) }}">
+                    <a class="{{ config.name }}__remove" href="{{ path('cart/remove', {'sku': data.cartItem.sku, 'groupKey': data.cartItem.groupKey }) }}">
                          {{ 'remove' | trans }}
                     </a>
                 {% endif %}

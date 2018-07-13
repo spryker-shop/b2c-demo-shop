@@ -6,13 +6,21 @@
         }
         &__content {
             padding: 0 0 5px 24px;
+            width: calc(100% - 120px);
         }
         &__options {
 
         }
+        &__image{
+            width: 120px;
+        }
         &__total {
             font: 500 17px $setting-font-family-additional;
             line-height: 1.29;
+            text-align: right;
+            @include helper-breakpoint-media-max($sm-max) {
+                text-align: left;
+            }
         }
         &__remove {
             font: 300 13px $setting-font-family-additional;
