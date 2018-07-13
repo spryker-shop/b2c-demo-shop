@@ -13,39 +13,40 @@
 } %}
 
 {% block body %}
-    <div class="grid grid--justify grid--middle">
-        <div class="col">
-            <label>
-                {{ 'catalog.filter.rangeFrom'|trans }}
-            </label>
-        </div>
-        <div class="col">
-            <input class="input input--expand js-form-input-default-value-disabler__catalog-input"
-                   type="number"
-                   name="{{ data.parameter }}[min]"
-                   value="{{ data.activeMin }}"
-                   required="required"
-                   min="{{ data.min }}"
-                   max="{{ data.max }}"
-                   data-default-value="{{ data.min }}"
-            />
-        </div>
-
-        <div class="col">
-            <label>
-                {{ 'catalog.filter.rangeTo'|trans }}
-            </label>
-        </div>
-        <div class="col">
-            <input class="input input--expand js-form-input-default-value-disabler__catalog-input"
-                   type="number"
-                   name="{{ data.parameter }}[max]"
-                   value="{{ data.activeMax }}"
-                   required="required"
-                   min="{{ data.min }}"
-                   max="{{ data.max }}"
-                   data-default-value="{{ data.max }}"
-            />
+    <input class="input input--expand js-form-input-default-value-disabler__catalog-input js-range-slider-target-min"
+           type="hidden"
+           name="{{ data.parameter }}[min]"
+           value="{{ data.activeMin }}"
+           required="required"
+           min="{{ data.min }}"
+           max="{{ data.max }}"
+           data-default-value="{{ data.min }}"
+    />
+    <input class="input input--expand js-form-input-default-value-disabler__catalog-input  js-range-slider-target-max"
+           type="hidden"
+           name="{{ data.parameter }}[max]"
+           value="{{ data.activeMax }}"
+           required="required"
+           min="{{ data.min }}"
+           max="{{ data.max }}"
+           data-default-value="{{ data.max }}"
+    />
+    <div class="{{ 'range-slider js-' ~ config.name ~ '__range-slider' }}">
+        <div class="range-slider__values">
+            <span class="range-slider__values-item range-slider__values-min">{{ data.activeMin | money }}</span>
+            <span class="range-slider__values-item range-slider__values-max">{{ data.activeMax | money }}</span>
         </div>
     </div>
+    {% include molecule('range-slider') with {
+        attributes: {
+            'wrap-selector': '.js-' ~ config.name ~ '__range-slider',
+            'value-selector': '[".range-slider__values-min", ".range-slider__values-max"]',
+            'value-min': data.min,
+            'value-max': data.max,
+            'active-min': data.activeMin,
+            'active-max': data.activeMax,
+            'target-selector': '[".js-range-slider-target-min", ".js-range-slider-target-max"]',
+        }
+
+    } only %}
 {% endblock %}
