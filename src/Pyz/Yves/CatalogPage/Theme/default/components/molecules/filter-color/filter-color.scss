@@ -1,0 +1,74 @@
+@mixin filter-color($name: '.filter-color') {
+    #{$name} {
+        &-list {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        &-list__item {
+            &:not(:last-child) {
+                margin-right: 6px;
+            }
+        }
+        &-list__color {
+            &:hover {
+                .checkbox__label {
+                    transform: scale(1);
+                }
+            }
+            .checkbox__container {
+                position: relative;
+                width: 20px;
+                height: 20px;
+                border-radius: 100%;
+                background-color: #221199;
+                cursor: pointer;
+            }
+            .checkbox__check {
+                display: none;
+            }
+            .checkbox__label {
+                @include helper-effect-transition(all);
+                transform: scale(0);
+                transform-origin: bottom;
+                position: absolute;
+                top: -38px;
+                left: -13px;
+                background: #111;
+                color: #fff;
+                font: 300 16px $setting-font-family;
+                padding: 5px 11px 7px 10px;
+                white-space: nowrap;
+                border-radius: 2px;
+                &::before {
+                    content: "";
+                    position: absolute;
+                    left: 17px;
+                    bottom: -4px;
+                    border-radius: 2px;
+                    background: #111111;
+                    width: 10px;
+                    height: 10px;
+                    transform: rotate(45deg);
+                }
+            }
+            .checkbox__box {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                width: 22px;
+                height: 22px;
+                border: solid 4px #fff;
+                border-radius: 100%;
+                background: none;
+            }
+            &:hover .checkbox__box,
+            .checkbox__input:checked + .checkbox__box {
+                width: 18px;
+                height: 18px;
+                border: solid 2px #fff;
+                background: none;
+            }
+        }
+    }
+}

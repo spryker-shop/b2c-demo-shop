@@ -1,0 +1,34 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'filter-color'
+} %}
+
+{% define data = {
+    filter: null,
+    isMultiSelect: null
+} %}
+
+{% set isMultiSelect = data.isMultiSelect is null ? (data.filter.config.isMultiValued | default(false)) : false %}
+{% set activeValues = isMultiSelect ? data.filter.activeValue : [data.filter.activeValue] %}
+{% set inputComponent = isMultiSelect ? atom('checkbox') : atom('radio') %}
+
+{% block body %}
+    <ul class="{{ config.name ~ '-list' }}">
+        {% for filterValue in data.filter.values %}
+            <li class="{{ config.name ~ '-list__item' }}">
+                {% include inputComponent with {
+                    class: config.name ~ '-list__color',
+                    attributes: {
+                        name: data.filter.config.parameterName ~ (isMultiSelect ? '[]' : ''),
+                        value: filterValue.value,
+                        checked: (filterValue.value in activeValues)
+                    },
+                    data: {
+                        label: filterValue.value
+                    }
+                } only %}
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
