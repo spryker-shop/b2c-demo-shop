@@ -1,0 +1,52 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'cart-item-quantity',
+    tag: 'div'
+} %}
+
+{% define data = {
+    label: 'cart.item_quantity' | trans,
+    maxQuantity: null,
+    minQuantity: 1,
+    value: 1,
+    readOnly: false,
+    hasUpdateButton: false
+} %}
+
+{% block body %}
+    <div class="grid grid--middle grid--left">
+        {% block label %}
+            <label class="col col--left {{ config.name }}__label">
+                {{ data.label }} :
+            </label>
+        {% endblock %}
+
+
+        {% block input %}
+            {% include molecule('quantity-counter') with {
+                data: {
+                    maxQuantity: data.maxQuantity,
+                    minQuantity: data.minQuantity,
+                    value: data.value,
+                    readOnly: data.readOnly
+                }
+            } only %}
+        {% endblock %}
+    </div>
+
+
+        {% if data.hasUpdateButton and not data.readOnly %}
+            <span class="col">
+                <button type="submit" class="button button--expand" {{qa('quantity-input-submit')}}>
+                    {% include atom('icon') with {
+                        modifiers: ['small'],
+                        class: config.name ~ '__sync',
+                        data: {
+                            name: 'sync'
+                        }
+                    } only %}
+                </button>
+            </span>
+        {% endif %}
+{% endblock %}

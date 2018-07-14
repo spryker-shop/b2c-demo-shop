@@ -1,0 +1,45 @@
+@mixin shop-ui-quantity-counter($name: '.quantity-counter') {
+    #{$name} {
+        &__container {
+            padding: 0 10px;
+        }
+        &__input {
+            margin: 0;
+            padding: 0;
+            display: block;
+            font: 300 13px $setting-font-family-additional;
+            line-height: 2.08;
+            width: 30px;
+            text-align: center;
+            border: none;
+            &::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+            }
+        }
+        &__button {
+            border: 1px solid $setting-color-light;
+            border-radius: 50%;
+            font: 300 16px $setting-font-family-additional;
+            text-align: center;
+            &:hover {
+                color: $setting-color-main;
+                border-color: $setting-color-main;
+                cursor: pointer;
+            }
+            &--sm {
+                width: 20px;
+                height: 20px;
+                line-height: 17px;
+            }
+            &--lg {
+                width: 36px;
+                height: 36px;
+                line-height: 33px;
+                font-size: 21px;
+            }
+        }
+    }
+}
+@include shop-ui-quantity-counter();
+
+

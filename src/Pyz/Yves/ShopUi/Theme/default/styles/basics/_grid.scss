@@ -29,14 +29,6 @@
             align-items: flex-end;
         }
 
-        &--left {
-            justify-content: flex-start;
-        }
-
-        &--right {
-            justify-content: flex-end;
-        }
-
         &--center {
             justify-content: center;
         }
@@ -68,6 +60,22 @@
             & .col {
                 margin-top: 0;
                 margin-bottom: 0;
+            }
+        }
+
+        &--left {
+            justify-content: flex-start;
+            & .col--left {
+                margin-right: 0;
+                margin-left: 0;
+            }
+        }
+
+        &--right {
+            justify-content: flex-end;
+            & .col--right {
+                margin-right: 0;
+                margin-left: 0;
             }
         }
 
