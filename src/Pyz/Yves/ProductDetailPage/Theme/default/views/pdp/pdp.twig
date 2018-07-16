@@ -13,9 +13,7 @@
 {% block container %}
     <div class="container">
         {% block pageInfo %}
-
             {% block title %}
-                <h3 class="main-title text-left">{{data.title}}</h3>
                 <link itemprop="url" href="{{ data.productUrl }}" />
             {% endblock %}
         {% endblock %}
@@ -23,32 +21,36 @@
         <main>
             {% block content %}
                 <div class="grid">
-                    <div class="col col--sm-12 col--lg-7 col--xl-8">
-                        {% include molecule('product-carousel', 'ProductDetailPage') with {
-                            class: 'box',
+
+                    {% include molecule('product-carousel', 'ProductDetailPage') with {
+                        class: 'col pdp-left',
+                        data: {
+                            product: data.product
+                        }
+                    } only %}
+
+                    <div class="col pdp-right">
+                        {% include molecule('product-configurator', 'ProductDetailPage') with {
                             data: {
                                 product: data.product
                             }
                         } only %}
-                    </div>
 
-                    <div class="col col--sm-12 col--lg-5 col--xl-4">
-                        {% include molecule('product-configurator', 'ProductDetailPage') with {
-                            class: 'box',
+                        {% include molecule('product-detail', 'ProductDetailPage') with {
                             data: {
-                                product: data.product
+                                description: data.product.description,
+                                attributes: data.product.attributes,
+                                sku: data.product.sku
+                            }
+                        } only %}
+
+                        {% include molecule('toggler-accordeon') with {
+                            attributes: {
+                                trigger: '.js-toggle-pdp-options'
                             }
                         } only %}
                     </div>
                 </div>
-
-                {% include molecule('product-detail', 'ProductDetailPage') with {
-                    class: 'box spacing-top--big',
-                    data: {
-                        description: data.product.description,
-                        attributes: data.product.attributes
-                    }
-                } only %}
 
                 {{ widget('ProductReviewWidgetPlugin', data.product.idProductAbstract) }}
                 {{ widget('SimilarProductsWidgetPlugin', data.product) }}

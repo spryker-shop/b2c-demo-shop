@@ -1,0 +1,135 @@
+@mixin product-detail-page-configurator($name: '.product-configurator') {
+    #{$name} {
+
+        .product-name {
+            font: bold 38px/1.13 $setting-font-family-additional;
+            color: $setting-color-darkest;
+            margin-bottom: 7px;
+        }
+
+        .product-details__price {
+            text-align: right;
+            p {
+                margin: 0;
+            }
+            .price {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+                &__amount {
+                    color: $setting-color-darkest;
+                    font: 400 22px/28px $setting-font-family-additional;
+                }
+                &__amount--original {
+                    padding: 0;
+                    color: #d3d3d3;
+                    font-size: 15px;
+                    line-height: 19px;
+                }
+            }
+        }
+
+        .pdp-price-review {
+            margin-bottom: 29px;
+        }
+
+        .color-selector {
+            &__color {
+                width: 24px;
+                height: 24px;
+                &:before {
+                    width: 26px;
+                    height: 26px;
+                    border-width: 5px;
+                }
+                &:hover,
+                &--active {
+                    &:before {
+                        width: 22px;
+                        height: 22px;
+                        border-width: 3px;
+                    }
+                }
+            }
+        }
+
+        .add-to-cart {
+            border-top: dotted 1px $setting-color-lightest;
+            padding: 40px 0 15px;
+            button {
+                font: 500 16px $setting-font-family-additional;
+                padding: 18px;
+            }
+        }
+
+        .wishlist-selector {
+            padding: 15px 0 70px;
+            .wishlist-input {
+                padding-right: 10px;
+            }
+            button {
+                line-height: 16px;
+            }
+        }
+
+        @content;
+    }
+
+    .pdp-option {
+        border-top: dotted 1px $setting-color-lightest;
+        &__title {
+            font: bold 13px/16px $setting-font-family-additional;
+            color: $setting-color-darkest;
+            letter-spacing: 2.6px;
+            text-transform: uppercase;
+            padding: 17px 0;
+            position: relative;
+            &.js-toggle-pdp-options {
+                cursor: pointer;
+                transition: opacity 0.5s;
+                &:hover {
+                    opacity: 0.5;
+                }
+                &:before {
+                    content: "";
+                    width: 12px;
+                    height: 2px;
+                    background: $setting-color-dark;
+                    position: absolute;
+                    top: 50%;
+                    right: 0;
+                    margin-top: -1px;
+                }
+                &:after {
+                    content: "";
+                    width: 2px;
+                    height: 12px;
+                    background: $setting-color-dark;
+                    position: absolute;
+                    top: 50%;
+                    right: 5px;
+                    margin-top: -6px;
+                }
+                &.active:after {
+                    display: none;
+                }
+            }
+        }
+        &__wrapper {
+            padding-bottom: 30px;
+            line-height: 22px;
+            font-weight: 300;
+        }
+        &__sku {
+            padding-top: 22px;
+        }
+        &__detail {
+            padding-bottom: 20px;
+            font: 300 16px/22px $setting-font-family;
+        }
+        &__detail-name {
+            font-weight: 700;
+        }
+    }
+
+}
