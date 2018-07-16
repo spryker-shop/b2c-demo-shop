@@ -10,8 +10,6 @@
 } %}
 
 {% block body %}
-    <div class="{{ config.jsName }}">
-        {{ widget('ProductImageWidgetPlugin', data.product) }}
-        {{ widget('ProductAbstractLabelWidgetPlugin', data.product) }}
-    </div>
+    {{ widget('ProductImageWidgetPlugin', data.product) }}
+    {{ widget('ProductAbstractLabelWidgetPlugin', data.product) }}
 {% endblock %}

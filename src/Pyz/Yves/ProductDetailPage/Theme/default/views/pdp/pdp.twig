@@ -20,7 +20,7 @@
 
         <main>
             {% block content %}
-                <div class="grid grid--stretch">
+                <div class="grid">
 
                     {% include molecule('product-carousel', 'ProductDetailPage') with {
                         class: 'col pdp-left',
@@ -41,6 +41,12 @@
                                 description: data.product.description,
                                 attributes: data.product.attributes,
                                 sku: data.product.sku
+                            }
+                        } only %}
+
+                        {% include molecule('toggler-accordeon') with {
+                            attributes: {
+                                trigger: '.js-toggle-pdp-options'
                             }
                         } only %}
                     </div>

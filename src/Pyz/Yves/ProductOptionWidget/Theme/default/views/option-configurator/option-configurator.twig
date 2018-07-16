@@ -1,0 +1,35 @@
+{% extends template('widget') %}
+
+{% define data = {
+    optionGroups: _widget.productOptionGroups
+} %}
+
+{% block template %}
+    {% if data.optionGroups is not empty %}{{parent()}}{% endif %}
+{% endblock %}
+
+{% block body %}
+    {% for optionGroup in data.optionGroups %}
+        <div class="pdp-option">
+            <div class="pdp-option__title">{{optionGroup.name | trans}}</div>
+            <div class="pdp-option__wrapper">
+                {% embed atom('select') with {
+                    modifiers: ['expand'],
+                    attributes: {
+                        name: 'product-option[' ~ optionGroup.name ~ ']',
+                    },
+                    embed: {
+                        options: optionGroup.productOptionValues
+                    }
+                } only %}
+                    {% block options %}
+                        <option value="0">{{ 'product.product_options_select' | trans }}</option>
+                        {% for option in embed.options %}
+                            <option value="{{option.idProductOptionValue}}">{{ option.value | trans }} {{ option.price | money }}</option>
+                        {% endfor %}
+                    {% endblock %}
+                {% endembed %}
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
