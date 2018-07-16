@@ -9,6 +9,7 @@ export default class RangeSlider extends Component {
             start: [ this.valueCurrentMin, this.valueCurrentMax ],
             step: 1,
             connect: true,
+            margin: 1,
             range: {
                 'min': +this.valueMin,
                 'max': +this.valueMax
