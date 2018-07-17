@@ -5,9 +5,7 @@
 } %}
 
 {% block rating %}
-    <hr />
     {% include molecule('rating-selector', 'ProductReviewWidget') with {
-        modifiers: ['expand'],
         data: {
             value: _widget.productReviewStorageTransfer.averageRating | default(0),
             reviewCount: _widget.productReviewStorageTransfer.reviewCount | default(''),
@@ -20,7 +18,28 @@
 {% endblock %}
 
 {% block body %}
-    <div class="box">
+
+    <div class="pdp-review">
+        <div class="cms-product-slider-title">
+            <div class="">
+                <h2 class="cms-product-slider-title__text">{{ 'product_review.ratings_reviews' | trans }}</h2>
+            </div>
+            <div class="cms-product-slider-title__line"></div>
+            <div class="">
+                <div class="grid grid--right is-hidden-sm-md">
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <span class="cms-product-slider-title__link js-review__new-review-trigger">
+                            {{ 'product_review.submit.add_a_review' | trans }}
+                        </span>
+                    {% else %}
+                        <a class="cms-product-slider-title__link" href="{{ path('login') }}">
+                            {{ 'product_review.submit.add_a_review' | trans }}
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
         {% include molecule('toggler-click') with {
             attributes: {
                 'trigger-selector': '.js-review__new-review-trigger',
@@ -28,7 +47,6 @@
                 'class-to-toggle': 'is-hidden'
             }
         } only %}
-
         {% include molecule('toggler-hash') with {
             attributes: {
                 'trigger-hash': '#review',
@@ -39,22 +57,11 @@
         } only %}
 
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-            <a id="review"></a>
-            <button class="button float-right js-review__new-review-trigger">
-                {{ 'product_review.submit.add_a_review' | trans }}
-            </button>
-        {% else %}
-            <a class="button" href="{{ path('login') }}">
-                {{ 'product_review.submit.add_a_review' | trans }}
-            </a>
+            <div class="is-hidden js-review__new-review-form-target">
+                {{ render(path('product-review/submit', {'idProductAbstract': data.idProductAbstract})) }}
+            </div>
         {% endif %}
+
+        {{ render(path('product-review/index', {'idProductAbstract': data.idProductAbstract})) }}
     </div>
-
-    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-        <div class="is-hidden js-review__new-review-form-target">
-            {{ render(path('product-review/submit', {'idProductAbstract': data.idProductAbstract})) }}
-        </div>
-    {% endif %}
-
-    {{ render(path('product-review/index', {'idProductAbstract': data.idProductAbstract})) }}
 {% endblock %}

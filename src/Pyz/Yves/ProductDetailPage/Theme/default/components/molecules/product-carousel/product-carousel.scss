@@ -1,0 +1,17 @@
+@mixin product-detail-page-product-carousel($name: '.product-carousel') {
+    #{$name} {
+
+        position: relative;
+
+        .simple-carousel__container {
+            padding: 0;
+        }
+
+        .product-image {
+            position: relative;
+            padding: 8px 0;
+        }
+
+        @content;
+    }
+}

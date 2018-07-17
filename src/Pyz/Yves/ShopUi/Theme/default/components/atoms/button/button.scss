@@ -39,14 +39,23 @@
         &--hollow {
             padding: .5rem 1rem;
             background-color: $setting-color-white;
-            border: 1px solid $setting-color-main;
-            color: $setting-color-main;
+            border: 1px solid $setting-color-darkest;
+            color: $setting-color-darkest;
 
             &:hover,
             &:focus {
-                border-color: helper-color-dark($setting-color-main);
-                background-color: helper-color-dark($setting-color-main);
+                border-color: $setting-color-darkest;
+                background-color: $setting-color-darkest;
                 color: #fff;
+            }
+
+            &[disabled],
+            & #{name}--disabled,
+            &[disabled]:hover,
+            & #{name}--disabled:hover {
+                background-color: #fff;
+                border-color: $setting-color-light;
+                color: $setting-color-light;
             }
         }
 

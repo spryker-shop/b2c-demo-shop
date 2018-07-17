@@ -1,0 +1,15 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'product-carousel',
+    tag: 'product-carousel'
+} %}
+
+{% define data = {
+    product: required
+} %}
+
+{% block body %}
+    {{ widget('ProductImageWidgetPlugin', data.product) }}
+    {{ widget('ProductAbstractLabelWidgetPlugin', data.product) }}
+{% endblock %}
