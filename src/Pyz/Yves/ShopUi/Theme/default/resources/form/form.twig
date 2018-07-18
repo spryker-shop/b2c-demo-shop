@@ -8,7 +8,7 @@
     {%- set attr = attr | merge({
         class: ('input input--expand' ~ (errors is not empty ? ' input--error' : ' ') ~ (attr.class | default(''))) | trim,
         type: type | default('text'),
-        placeholder: attr.placeholder | default(label)
+        placeholder: ''
     }) -%}
 
     <input {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %} />
@@ -19,7 +19,7 @@
 
     {%- set attr = attr | merge({
         class: ('textarea textarea--expand' ~ (errors is not empty ? ' textarea--error' : ' ') ~ (attr.class | default(''))) | trim,
-        placeholder: attr.placeholder | default(label)
+        placeholder: ''
     }) -%}
 
     <textarea {{ block('widget_attributes') }}>{% if value is not empty %}{{ value }}{% endif %}</textarea>

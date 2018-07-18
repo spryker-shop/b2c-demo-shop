@@ -103,8 +103,55 @@
             }
         }
 
+        .popup--new-review {
+            .review-summary {
+                order: 1;
+                min-width: 0;
+                width: calc(100% - 154px);
+            }
+            .review-rating {
+                order: 2;
+                min-width: 0;
+                width: auto;
+                margin: 20px 0 0 auto;
+                .rating-selector {
+                    margin: 0;
+                }
+            }
+            .review-description {
+                order: 3;
+            }
+            .review-nickname {
+                order: 4;
+            }
+            .form__field {
+                padding: 0 0 28px !important;
+            }
+            input[type="text"],
+            textarea {
+                font: 400 17px/1.29 $setting-font-family;
+                color: $setting-color-dark;
+                transition: background-color 0.4s;
+                padding: 10px 15px;
+                &:focus {
+                    border-color: #434545;
+                }
+                &:hover {
+                    background: #fafafa;
+                }
+            }
+            input[type="text"] {
+                line-height: 22px;
+                padding: 12px 15px;
+            }
+            .button--send-review {
+                font: 500 14px/18px $setting-font-family;
+                padding: 15px 20px;
+                min-width: 177px;
+                margin-top: 20px;
+            }
+        }
+
         @content;
     }
 }
-
-@include pdp-review-rating;
