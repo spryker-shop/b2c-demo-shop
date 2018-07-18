@@ -57,8 +57,11 @@
         } only %}
 
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-            <div class="is-hidden js-review__new-review-form-target">
-                {{ render(path('product-review/submit', {'idProductAbstract': data.idProductAbstract})) }}
+            <div class="popup popup--new-review is-hidden js-review__new-review-form-target">
+                <div class="popup__overlay js-review__new-review-trigger"></div>
+                <div class="popup__inner">
+                    {{ render(path('product-review/submit', {'idProductAbstract': data.idProductAbstract})) }}
+                </div>
             </div>
         {% endif %}
 

@@ -1,0 +1,20 @@
+{% extends template('widget') %}
+
+{% define data = {
+    form: _view.form,
+    showSuccessMessage: _view.showSuccess
+} %}
+
+{% block body %}
+    {% if data.showSuccessMessage %}
+        <div class="box box--success">
+            {{ 'product_review.submit.success' | trans }}
+        </div>
+    {% endif %}
+
+    {% include molecule('new-review-form', 'ProductReviewWidget') with {
+        data: {
+            form: data.form
+        }
+    } only %}
+{% endblock %}

@@ -14,6 +14,8 @@
     isAvailable: true
 } %}
 
+{%- block class -%}variant-wrapper{%- endblock -%}
+
 {% block body %}
     <div class="pdp-option__title">{{data.label}}</div>
     <div class="pdp-option__wrapper">
@@ -40,7 +42,14 @@
                 {{ 'product.attribute.not_available' | trans }}
             {% endif %}
         {% else %}
-            {{data.selectedValue}} <a href="?">{{ 'Reset' | trans }}</a>
+            {{data.selectedValue}}
+            <a href="?" class="pdp-option__reset">
+                {% include atom('icon') with {
+                    data: {
+                        name: 'close'
+                    }
+                } only %}
+            </a>
             <input type="hidden" name="{{data.formName}}" value="{{data.selectedValue}}" />
         {% endif %}
     </div>
