@@ -11,7 +11,7 @@
     minQuantity: 1,
     value: 1,
     readOnly: false,
-    hasUpdateButton: false
+    hasUpdateButton: true
 } %}
 
 {% block body %}
@@ -33,12 +33,10 @@
                 }
             } only %}
         {% endblock %}
-    </div>
-
 
         {% if data.hasUpdateButton and not data.readOnly %}
-            <span class="col">
-                <button type="submit" class="button button--expand" {{qa('quantity-input-submit')}}>
+            <span class="col col--left">
+                <button type="submit" class="{{ config.name }}__button button button--skinless" {{qa('quantity-input-submit')}}>
                     {% include atom('icon') with {
                         modifiers: ['small'],
                         class: config.name ~ '__sync',
@@ -49,4 +47,8 @@
                 </button>
             </span>
         {% endif %}
+    </div>
+
+
+
 {% endblock %}

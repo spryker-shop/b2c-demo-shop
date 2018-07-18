@@ -4,6 +4,9 @@
         @include helper-breakpoint-media-max($sm-max) {
             margin-bottom: 100px;
         }
+        &__item {
+
+        }
         &__block {
             padding-top: 79px;
             @include helper-breakpoint-media-max($sm-max) {
@@ -24,10 +27,13 @@
             }
         }
         &__box {
-            padding: 18px 0;
             border-bottom: 1px dotted $setting-color-lightest;
+            padding: 18px 0;
             &--empty {
                 height: 56px;
+            }
+            &--borderless {
+                border-bottom: none;
             }
         }
         &__sidebar {
