@@ -20,19 +20,19 @@
 {% block body %}
 
     <div class="pdp-review">
-        <div class="cms-product-slider-title">
+        <div class="product-slider-title">
             <div class="">
-                <h2 class="cms-product-slider-title__text">{{ 'product_review.ratings_reviews' | trans }}</h2>
+                <h2 class="product-slider-title__text">{{ 'product_review.ratings_reviews' | trans }}</h2>
             </div>
-            <div class="cms-product-slider-title__line"></div>
+            <div class="product-slider-title__line"></div>
             <div class="">
                 <div class="grid grid--right is-hidden-sm-md">
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                        <span class="cms-product-slider-title__link js-review__new-review-trigger">
+                        <span class="product-slider-title__link js-review__new-review-trigger">
                             {{ 'product_review.submit.add_a_review' | trans }}
                         </span>
                     {% else %}
-                        <a class="cms-product-slider-title__link" href="{{ path('login') }}">
+                        <a class="product-slider-title__link" href="{{ path('login') }}">
                             {{ 'product_review.submit.add_a_review' | trans }}
                         </a>
                     {% endif %}
