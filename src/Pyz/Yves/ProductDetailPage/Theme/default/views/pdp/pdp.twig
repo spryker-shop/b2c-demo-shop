@@ -53,7 +53,11 @@
                 </div>
 
                 {{ widget('ProductReviewWidgetPlugin', data.product.idProductAbstract) }}
-                {{ widget('SimilarProductsWidgetPlugin', data.product) }}
+
+                <div class="product-slider-container">
+                    {{ widget('SimilarProductsWidgetPlugin', data.product) }}
+                </div>
+
                 {{ widget('ProductCmsBlockWidgetPlugin', data.product) }}
 
                 {% block breadcrumbs %}
