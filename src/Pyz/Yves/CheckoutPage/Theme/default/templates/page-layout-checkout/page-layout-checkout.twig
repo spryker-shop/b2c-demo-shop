@@ -7,12 +7,23 @@
 {% block sidebar %}{% endblock %}
 
 {% block header %}
-    {% include organism('header') with {
+    {% embed organism('header') with {
         data: {
             showSearchForm: false,
             showNavigation: false
         }
     } only %}
+        {% block additionalLink %}
+            <a class="header__back-link" href="{{ url('cart') }}">
+                {% include atom('icon') with {
+                    data: {
+                        name: 'arrow-left'
+                    }
+                } only %}
+                {{ 'cart.cart' | trans }}
+            </a>
+        {% endblock %}
+    {% endembed %}
 {% endblock %}
 
 {% block container %}
