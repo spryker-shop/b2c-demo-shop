@@ -7,8 +7,8 @@
 
 namespace Pyz\Zed\Shipment;
 
+use Spryker\Zed\GiftCard\Communication\Plugin\OnlyGiftCardShipmentMethodFilterPlugin;
 use Spryker\Zed\Kernel\Container;
-use Spryker\Zed\Money\Communication\Plugin\Form\MoneyCollectionFormTypePlugin;
 use Spryker\Zed\Shipment\ShipmentDependencyProvider as SprykerShipmentDependencyProvider;
 
 class ShipmentDependencyProvider extends SprykerShipmentDependencyProvider
@@ -16,40 +16,12 @@ class ShipmentDependencyProvider extends SprykerShipmentDependencyProvider
     /**
      * @param \Spryker\Zed\Kernel\Container $container
      *
-     * @return array
+     * @return \Spryker\Zed\Shipment\Dependency\Plugin\ShipmentMethodFilterPluginInterface[]
      */
-    protected function getAvailabilityPlugins(Container $container)
+    protected function getMethodFilterPlugins(Container $container)
     {
-        return [];
-    }
-
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return array
-     */
-    protected function getPricePlugins(Container $container)
-    {
-        return [];
-    }
-
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return array
-     */
-    protected function getDeliveryTimePlugins(Container $container)
-    {
-        return [];
-    }
-
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Communication\Form\FormTypeInterface
-     */
-    protected function createMoneyCollectionFormTypePlugin(Container $container)
-    {
-        return new MoneyCollectionFormTypePlugin();
+        return [
+            new OnlyGiftCardShipmentMethodFilterPlugin()
+        ];
     }
 }
