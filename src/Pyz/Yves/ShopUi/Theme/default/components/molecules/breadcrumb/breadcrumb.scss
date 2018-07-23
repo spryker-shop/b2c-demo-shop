@@ -10,8 +10,55 @@
             border-top: dotted 1px $setting-color-lightest;
         }
 
-        @content
+        &--progress {
+            @include helper-breakpoint-media-min($md-min) {
+                padding-bottom: 3.75rem;
+            }
+            display: inline-flex;
+            flex-wrap: nowrap;
+            justify-content: center;
+            padding: 0 0 3.5rem;
+            border-bottom: none;
+        }
+    }
+    .breadcrumb-wrap {
+        @include helper-breakpoint-media-min($md-min) {
+            padding-top: 1.25rem;
+            border-bottom: dotted 1px $setting-color-lightest;
+        }
+        text-align: center;
+        padding-top: 3.5rem;
+    }
+    .breadcrumb-progress-wrap {
+        @include helper-breakpoint-media-min($md-min) {
+            min-width: 0;
+        }
+        display: inline-block;
+        position: relative;
+        min-width: 50%;
+        &::before {
+            @include helper-breakpoint-media-min($md-min) {
+                display: none;
+            }
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+            height: 1px;
+            background-color: #111;
+            opacity: 0.4;
+        }
+    }
+    .breadcrumb-progress-mob {
+        @include helper-breakpoint-media-min($md-min) {
+            display: none;
+        }
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 1px;
+        width: 0;
+        background-color: #111;
     }
 }
-
-@include shop-ui-breadcrumb();
