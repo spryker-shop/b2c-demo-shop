@@ -171,11 +171,39 @@
 
     }
 
+    .header__navigation-top {
+        position: relative;
+    }
+
+    .header__back-link {
+        @include helper-breakpoint-media-min($md-min) {
+            font-size: 19px;
+            top: 0;
+            margin-top: 0;
+            padding: 0;
+            transform: translateY(0);
+        }
+        position: absolute;
+        top: 50%;
+        left: 1rem;
+        color: #444;
+        font-size: 0;
+        line-height: 19px;
+        font-weight: 500;
+        transform: translateY(-50%);
+        padding: 5px 5px 5px 0;
+        z-index: 100;
+        &:hover {
+            text-decoration: none;
+        }
+        .icon {
+            margin-top: -1px;
+        }
+    }
+
     .register-type {
         border-bottom: dotted 1px $setting-color-lightest;
         padding: 20px 0;
         margin-bottom: 30px;
     }
 }
-
-@include shop-ui-checkout-layout();

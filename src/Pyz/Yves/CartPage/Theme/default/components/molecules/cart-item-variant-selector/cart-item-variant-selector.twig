@@ -1,0 +1,66 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'cart-item-variant-selector',
+    tag: 'div'
+} %}
+
+{% define data = {
+    cartItem: required,
+    cartItemAttributes: []
+} %}
+
+{% block component %}
+    {% set isItemVariantReplaceAvailable = data.cartItemAttributes is not empty %}
+
+    {% if widgetExists('QuantitySalesUnitWidgetPlugin') %}
+        {% set isItemVariantReplaceAvailable = not widgetBlock('QuantitySalesUnitWidgetPlugin', 'hasSalesUnit', data.cartItem) and isItemVariantReplaceAvailable %}
+    {% endif %}
+
+    {% if isItemVariantReplaceAvailable %}{{parent()}}{% endif %}
+{% endblock %}
+
+{% block body %}
+    <form method="POST" action="{{ path('cart/update', {'sku': data.cartItem.sku }) }}">
+        <ul class="list">
+            {% for attributeName, attributeOptions in data.cartItemAttributes %}
+                {% set options = [] %}
+
+                {% for value, properties in attributeOptions %}
+                    {% set options = options | merge([{
+                        label: value,
+                        value: value,
+                        selected: attribute(properties, 'selected') ? true : false,
+                        disabled: attribute(properties, 'available') ? false : true
+                    }]) %}
+                {% endfor %}
+
+                <li class="list__item">
+                    <label class="{{ config.name }}__label">
+                        <strong class="{{ config.name }}__title">{{ ('product.attribute.' ~ attributeName) | trans }}:</strong>
+                        {% include atom('select') with {
+                            data: {
+                                label: ('product.attribute.' ~ attributeName) | trans,
+                                options: options
+                            },
+                            attributes: {
+                                name: 'preselectedAttributes[' ~ attributeName ~ ']',
+                                'onchange': 'this.form.submit();'
+                            }
+                        } only %}
+                    </label>
+                    <input name="selectedAttributes[{{ attributeName }}]" type="hidden" />
+                </li>
+            {% endfor %}
+        </ul>
+
+        <input type="hidden" value="{{ data.cartItem.groupKey }}" name="groupKey" />
+        <input type="hidden" value="{{ data.cartItem.quantity }}" name="quantity" />
+
+        {% if data.cartItem.productOptions is not empty %}
+            {% for productOption in data.cartItem.productOptions %}
+                <input name="product-option[{{ productOption.groupName }}]" type="hidden" value="{{ productOption.idProductOptionValue }}" />
+            {% endfor %}
+        {% endif %}
+    </form>
+{% endblock %}
