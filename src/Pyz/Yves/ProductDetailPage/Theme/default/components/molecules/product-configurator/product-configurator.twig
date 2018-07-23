@@ -56,8 +56,8 @@
             {{ widget('ProductMeasurementUnitWidgetPlugin', data.product, isDisabled, options) }}
         {% else %}
             <div class="pdp-option">
-                <div class="pdp-option__title js-toggle-pdp-options" data-toggle-target=".js-pdp-option-description">{{'cart.item_quantity' | trans}}</div>
-                <div class="pdp-option__wrapper js-pdp-option-description is-hidden">
+                <div class="pdp-option__title">{{'cart.item_quantity' | trans}}</div>
+                <div class="pdp-option__wrapper">
                     {% include atom('select') with {
                         modifiers: ['expand'],
                         data: {

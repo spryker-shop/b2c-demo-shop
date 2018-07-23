@@ -11,8 +11,8 @@
 {% block body %}
     {% for optionGroup in data.optionGroups %}
         <div class="pdp-option">
-            <div class="pdp-option__title">{{optionGroup.name | trans}}</div>
-            <div class="pdp-option__wrapper">
+            <div class="pdp-option__title js-toggle-pdp-options" data-toggle-target=".js-pdp-option-{{ loop.index }}">{{optionGroup.name | trans}}</div>
+            <div class="pdp-option__wrapper js-pdp-option-{{ loop.index }} is-hidden">
                 {% embed atom('select') with {
                     modifiers: ['expand'],
                     attributes: {

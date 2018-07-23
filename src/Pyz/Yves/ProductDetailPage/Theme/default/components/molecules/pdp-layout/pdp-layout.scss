@@ -4,16 +4,6 @@
         &-left {
             position: relative;
             width: 55.57%;
-            &::before {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background: rgba(0, 0, 0, 0.05);
-                z-index: 350;
-            }
         }
 
         &-right {
@@ -21,7 +11,26 @@
             padding: 40px 0 0 90px
         }
 
+        &-cms-block {
+            font-size: 14px;
+            line-height: 21px;
+            color: $setting-color-dark;
+            padding: 50px 0;
+            border-top: dotted 1px $setting-color-lightest;
+            h1 {
+                font: 500 15px/1.33 $setting-font-family-additional;
+                margin: 0 0 11px;
+            }
+            p {
+                margin: 0 0 11px;
+            }
+        }
+
         @content;
+    }
+
+    .product-slider-container {
+        margin: 0 -1rem;
     }
 }
 
