@@ -14,6 +14,7 @@
             margin-bottom: 3.6rem;
             border-bottom: dotted 1px $setting-color-lightest;
         }
+
         &__half:nth-child(1) {
             padding-right: 30px;
         }
@@ -23,14 +24,21 @@
                 margin-bottom: 58px;
             }
         }
+
+        label,
         .label {
             display: block;
             color: #333;
         }
 
         .grid {
-            margin: 0 -1rem;
-            max-width: none;
+            margin: 0;
+            display: block;
+            .grid {
+                display: flex;
+                margin: 0 -1rem;
+                max-width: none;
+            }
         }
 
         .col {
@@ -55,6 +63,19 @@
                 margin-top: 16px;
             }
             margin-top: 20px;
+        }
+
+        .checkbox__box,
+        .toggler-checkbox__box{
+            @include helper-breakpoint-media-min($md-min) {
+                margin-top: 4px;
+            }
+        }
+
+        .checkbox__check {
+            @include helper-breakpoint-media-min($md-min) {
+                top: 7px !important;
+            }
         }
 
         #payment-form .form__actions {
@@ -157,6 +178,46 @@
 
         .total td {
             padding-top: 15px;
+        }
+
+        .login-form {
+            .grid {
+                display: flex;
+                margin: 0 -1rem;
+                max-width: none;
+            }
+        }
+
+        .address-form {
+            &.form {
+                margin-bottom: 2.6rem;
+            }
+            &__billing {
+                margin-top: 2.6rem;
+            }
+        }
+
+        .checkout__address-list {
+            & > label,
+            .label {
+                display: none;
+            }
+            .radio {
+                margin-bottom: 1rem;
+            }
+        }
+
+        .radio__container {
+            overflow: hidden;
+            cursor: pointer;
+            .radio__box {
+                float: left;
+                margin-top: 1px;
+            }
+            .radio__label {
+                display: block;
+                overflow: hidden;
+            }
         }
 
     }

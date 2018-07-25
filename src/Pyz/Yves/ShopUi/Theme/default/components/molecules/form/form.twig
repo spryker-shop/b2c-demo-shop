@@ -51,35 +51,19 @@
         {% block errors %}
             {{ form_errors(data.form) }}
         {% endblock %}
-        {% block fieldset %}
 
+        {% block fieldset %}
             <div class="{{config.name}}__fields grid grid--top">
                 {% block fields %}
-                    {% for key, fieldName in data.form.children %}
-                        {% set field = attribute(data.form.children, key) %}
+                    {% for fieldName in data.form.children | keys %}
+                        {% set field = attribute(data.form.children, fieldName) %}
                         {% set fieldLayoutClass = 'col col--sm-12' %}
 
+                        {% if fieldName in data.layout | keys %}
+                            {% set fieldLayoutClass = attribute(data.layout, fieldName) %}
+                        {% endif %}
+
                         {% block field %}
-                            {% if fieldName is iterable %}
-                                {% for key, innerFieldName in fieldName %}
-                                    {% set fieldInner = attribute(fieldName, key) %}
-                                    {% set fieldLayoutClassInner = 'col col--sm-12' %}
-                                    {% if key in data.layout | keys %}
-                                        {% set fieldLayoutClassInner = attribute(data.layout, key) %}
-                                    {% endif %}
-                                    {{ form_row(fieldInner, {
-                                        rowAttr: {
-                                            class: config.name ~ '__field ' ~ fieldLayoutClassInner
-                                        }
-                                    }) }}
-                                {% endfor %}
-
-                            {% endif %}
-
-                            {% if key in data.layout | keys %}
-                                {% set fieldLayoutClass = attribute(data.layout, key) %}
-                            {% endif %}
-
                             {{ form_row(field, {
                                 rowAttr: {
                                     class: config.name ~ '__field ' ~ fieldLayoutClass

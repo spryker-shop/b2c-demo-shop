@@ -43,7 +43,9 @@
 
             <main class="checkout-content-wrap">
                 {% block title %}
-                    <h1 class="main-title">{{data.title}}</h1>
+                    {% if data.title is not empty %}
+                        <h1 class="main-title">{{data.title}}</h1>
+                    {% endif %}
                 {% endblock %}
 
                 {% block content %}{% endblock %}

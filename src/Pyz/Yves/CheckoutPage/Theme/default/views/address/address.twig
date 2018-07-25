@@ -6,18 +6,19 @@
         shipping: _view.addressesForm.shippingAddress,
         billing: _view.addressesForm.billingAddress
     },
-    
-    title: 'checkout.step.address.title' | trans
+
+    title: null
 } %}
 
 {% block content %}
     {% embed molecule('form') with {
-        class: 'checkout-layout',
+        class: 'checkout-layout checkout-layout--address-step',
         data: {
             form: data.forms.address,
             submit: {
                 enable: true,
-                text: 'checkout.step.shipment' | trans
+                text: 'checkout.step.shipment' | trans,
+                class: 'button button--black button--big button--expand'
             }
         },
         embed: {
@@ -28,78 +29,68 @@
         }
     } only %}
         {% block fields %}
-
-            <div class="grid grid--justify">
-                <div class="col col--sm-6 checkout-layout__half">
-                    {% include molecule('form') with {
-                        class: 'address-form',
-                        data: {
-                            class: 'col col--sm-6',
-                            title: 'page.checkout.address.shipping-address' | trans,
-                            form: embed.forms.shipping,
-                            enableStart: false,
-                            enableEnd: false,
-                            layout: {
-                                id_customer_address: 'col col--sm-12 checkout__address-list',
-                                salutation: 'col col--sm-12 col--lg-2',
-                                first_name: 'col col--sm-12 col--lg-5',
-                                last_name: 'col col--sm-12 col--lg-5',
-                                address1: 'col col--sm-12 col--md-8 col--lg-6',
-                                address2: 'col col--sm-12 col--md-4 col--lg-2',
-                                address3: 'col col--sm-12 col--md-4 col--lg-4',
-                                zip_code: 'col col--sm-6 col--lg-3',
-                                city: 'col col--sm-6 col--lg-5',
-                                iso2_code: 'col col--sm-12 col--lg-4'
-                            },
-                            submit: {
-                                enable: false
-                            },
-                            cancel: {
-                                enable: false
-                            }
+            {% include molecule('form') with {
+                class: 'address-form',
+                data: {
+                    class: 'col col--sm-6',
+                    title: 'page.checkout.address.shipping-address' | trans,
+                    form: embed.forms.shipping,
+                    enableStart: false,
+                    enableEnd: false,
+                    layout: {
+                        id_customer_address: 'col col--sm-12 checkout__address-list',
+                        salutation: 'col col--md-2',
+                        first_name: 'col col--md-5',
+                        last_name: 'col col--md-5',
+                        address1: 'col col--md-8',
+                        address2: 'col col--md-4',
+                        zip_code: 'col col--md-3',
+                        city: 'col col--md-5',
+                        iso2_code: 'col col--md-4'
+                    },
+                    submit: {
+                        enable: false
+                    },
+                    cancel: {
+                        enable: false
+                    }
+                }
+            } only %}
+            <h5>{{'page.checkout.address.billing-address' | trans}}</h5>
+            <div class="address-form">
+                {{form_row(data.form.billingSameAsShipping, {
+                    component: molecule('toggler-checkbox'),
+                    attributes: {
+                        'target-selector': '.js-address__billing',
+                        'class-to-toggle': 'is-hidden',
+                        'add-class-when-checked': true
+                    }
+                })}}
+                {% include molecule('form') with {
+                    class: 'address-form__billing js-address__billing form__fields is-hidden',
+                    data: {
+                        form: embed.forms.billing,
+                        enableStart: false,
+                        enableEnd: false,
+                        layout: {
+                            id_customer_address: 'col col--sm-12 checkout__address-list',
+                            salutation: 'col col--md-2',
+                            first_name: 'col col--md-5',
+                            last_name: 'col col--md-5',
+                            address1: 'col col--md-8',
+                            address2: 'col col--md-4',
+                            zip_code: 'col col--md-3',
+                            city: 'col col--md-5',
+                            iso2_code: 'col col--md-4'
+                        },
+                        submit: {
+                            enable: false
+                        },
+                        cancel: {
+                            enable: false
                         }
-                    } only %}
-                </div>
-
-                <div class="col col--sm-6 checkout-layout__half">
-                    <h5>{{'page.checkout.address.billing-address' | trans}}</h5>
-                    <div class="address-form">
-                        {{form_row(data.form.billingSameAsShipping, {
-                            component: molecule('toggler-checkbox'),
-                            attributes: {
-                                'target-selector': '.js-address__billing',
-                                'class-to-toggle': 'is-hidden',
-                                'add-class-when-checked': true
-                            }
-                        })}}
-                        {% include molecule('form') with {
-                            class: 'js-address__billing form__fields is-hidden',
-                            data: {
-                                form: embed.forms.billing,
-                                enableStart: false,
-                                enableEnd: false,
-                                layout: {
-                                    id_customer_address: 'col col--sm-12 checkout__address-list',
-                                    salutation: 'col col--sm-12 col--lg-2',
-                                    first_name: 'col col--sm-12 col--lg-5',
-                                    last_name: 'col col--sm-12 col--lg-5',
-                                    address1: 'col col--sm-12 col--md-8 col--lg-6',
-                                    address2: 'col col--sm-12 col--md-4 col--lg-2',
-                                    address3: 'col col--sm-12 col--md-4 col--lg-4',
-                                    zip_code: 'col col--sm-6 col--lg-3',
-                                    city: 'col col--sm-6 col--lg-5',
-                                    iso2_code: 'col col--sm-12 col--lg-4'
-                                },
-                                submit: {
-                                    enable: false
-                                },
-                                cancel: {
-                                    enable: false
-                                }
-                            }
-                        } only %}
-                    </div>
-                </div>
+                    }
+                } only %}
             </div>
         {% endblock %}
     {% endembed %}
