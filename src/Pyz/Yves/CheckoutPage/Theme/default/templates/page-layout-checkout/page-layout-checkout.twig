@@ -11,7 +11,8 @@
         data: {
             showSearchForm: false,
             showNavigation: false
-        }
+        },
+        class: 'header-checkout'
     } only %}
         {% block additionalLink %}
             <a class="header__back-link" href="{{ url('cart') }}">
@@ -38,13 +39,13 @@
                         }
                     } only %}
                 {% endblock %}
+            {% endblock %}
 
+            <main class="checkout-content-wrap">
                 {% block title %}
                     <h1 class="main-title">{{data.title}}</h1>
                 {% endblock %}
-            {% endblock %}
 
-            <main>
                 {% block content %}{% endblock %}
             </main>
         </div>

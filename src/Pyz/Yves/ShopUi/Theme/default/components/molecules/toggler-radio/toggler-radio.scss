@@ -1,0 +1,54 @@
+@mixin shop-ui-toggler-radio($name: '.toggler-radio') {
+    @include shop-ui-radio($name) {
+        @content;
+    };
+
+    #{$name} {
+        &--with_bg {
+            margin-bottom: 0;
+            display: block;
+
+            &:hover,
+            &:focus {
+                #{$name}__box::before {
+                    border-color:  $setting-color-input-border-focus;
+                }
+            }
+
+            #{$name}__container {
+                padding: 1rem 1.3rem;
+                position: relative;
+                cursor: pointer;
+                white-space: nowrap;
+            }
+
+            #{$name}__box {
+                margin-top: 4px;
+                &::before {
+                    content: '';
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    width: 100%;
+                    height: 100%;
+                    z-index: -1;
+                    border: 1px solid $setting-color-input-border;
+                    border-radius: 3px;
+                }
+            }
+            #{$name}__input:checked + #{$name}__box {
+                border: 3px solid $setting-color-white;
+                background-color: #222;
+                box-shadow: 0 0 0 1px $setting-color-input-border;
+                &::before {
+                    border: none;
+                    background-color: #c6e3e3;
+                }
+            }
+            #{$name}__label {
+                font-weight: 500;
+                color: #222;
+            }
+        }
+    }
+}

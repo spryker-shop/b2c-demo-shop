@@ -55,6 +55,14 @@
             font-size: 15px;
             font-weight: 700;
             display: none;
+            &:last-child:not(#{$name}--disabled) {
+                &::before {
+                    opacity: 0.4;
+                }
+                &::after {
+                    display: none;
+                }
+            }
             &::before,
             &::after {
                 @include helper-breakpoint-media-min($md-min) {
@@ -83,13 +91,16 @@
                 color: #111;
                 display: flex;
             }
-            &--active#{$name}--disabled {
-                &::before {
-                    opacity: 0.4;
-                }
-                &::after {
-                    display: block;
-                    width: 50%;
+            &--active {
+                &#{$name}--disabled,
+                &:last-child {
+                    &::before {
+                        opacity: 0.4;
+                    }
+                    &::after {
+                        display: block;
+                        width: 50%;
+                    }
                 }
             }
         }

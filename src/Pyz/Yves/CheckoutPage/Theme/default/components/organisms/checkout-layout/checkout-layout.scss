@@ -2,12 +2,17 @@
     #{$name} {
         padding-bottom: 40px;
         font-size: 16px;
+        overflow: hidden;
 
         h5 {
-            font: 500 20px $setting-font-family-additional;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            margin-bottom: 30px;
+            @include helper-breakpoint-media-min($md-min) {
+                font-size: 47px;
+            }
+            font: 700 32px $setting-font-family-additional;
+            letter-spacing: -0.5px;
+            padding-bottom: 10px;
+            margin-bottom: 3.6rem;
+            border-bottom: dotted 1px $setting-color-lightest;
         }
         &__half:nth-child(1) {
             padding-right: 30px;
@@ -18,28 +23,38 @@
                 margin-bottom: 58px;
             }
         }
-        .address-form .grid {
-            margin: 0 -0.5rem;
+        .label {
+            display: block;
+            color: #333;
+        }
+
+        .grid {
+            margin: 0 -1rem;
             max-width: none;
         }
 
-        .checkout__address-list {
-            padding-left: 30px;
-            > label {
-                font-weight: bold;
-            }
-            > div {
-                margin-top: 10px;
-            }
-            .radio + label {
-                display: none;
+        .col {
+            @include helper-breakpoint-media-max($md-max) {
+                width: 100%;
             }
         }
 
         .form__actions {
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: dotted 1px $setting-color-lightest;
+            padding-top: 29px;
+            display: flex;
+            flex-direction: column-reverse;
+            align-items: flex-end;
+        }
+
+        .form__action {
+            margin: 0;
+        }
+
+        .forgot-password-link {
+            @include helper-breakpoint-media-min($md-min) {
+                margin-top: 16px;
+            }
+            margin-top: 20px;
         }
 
         #payment-form .form__actions {
@@ -144,35 +159,20 @@
             padding-top: 15px;
         }
 
-        .register-form {
-            .form__field {
-                padding-left: 0 !important;
-                padding-right: 0 !important;
-                label {
-                    display: none;
-                }
-                .form__field label {
-                    display: block;
-                }
-            }
-            .form__actions {
-                margin-top: 0;
-            }
+    }
+    .header.header-checkout {
+        @include helper-breakpoint-media-max($md-max) {
+            padding-top: 0;
         }
-
-        .login-form .form__fields {
-            max-width: none;
-            margin-left: -0.5rem;
-            margin-right: -0.5rem;
-            label {
-                display: block;
-            }
-        }
-
     }
 
     .header__navigation-top {
         position: relative;
+        .logo {
+            @include helper-breakpoint-media-max($md-max) {
+                padding: 1.4rem 0.8rem;
+            }
+        }
     }
 
     .header__back-link {
@@ -202,8 +202,37 @@
     }
 
     .register-type {
-        border-bottom: dotted 1px $setting-color-lightest;
-        padding: 20px 0;
+        padding: 0 0 20px;
         margin-bottom: 30px;
+    }
+
+    .checkout-content-wrap {
+        @include helper-breakpoint-media-min($md-min) {
+            padding-top: 80px;
+        }
+        max-width: 570px;
+        margin: 0 auto;
+    }
+
+    .list-switches {
+        @include helper-breakpoint-media-min($md-min) {
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+    .list-switches__item {
+        @include helper-breakpoint-media-min($md-min) {
+            flex-grow: 1;
+            min-width: 100px;
+            margin: 0 30px 0 0;
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+        @include helper-breakpoint-media-min($lg-min) {
+            min-width: 170px;
+        }
+        display: block;
+        margin-bottom: 8px;
     }
 }
