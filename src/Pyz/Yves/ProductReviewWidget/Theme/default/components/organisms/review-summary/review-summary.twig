@@ -36,6 +36,18 @@
         }
     } only %}
 
+    <div class="is-hidden-lg-xl add-review-mobile">
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <span class="button button--black js-review__new-review-trigger">
+                {{ 'product_review.submit.add_a_review' | trans }}
+            </span>
+        {% else %}
+            <a class="button button--black" href="{{ path('login') }}">
+                {{ 'product_review.submit.add_a_review' | trans }}
+            </a>
+        {% endif %}
+    </div>
+
     {% if data.summary.totalReview > 0 %}
         <h3 class="pdp-review__sub-title">{{ 'product_review.product_reviews' | trans }}</h3>
 
@@ -44,7 +56,7 @@
         {% else %}
             <div class="reviews">
                 {% for review in data.reviews %}
-                    {% embed molecule('review', 'ProductReviewWidget') with {
+                    {% include molecule('review', 'ProductReviewWidget') with {
                         data: {
                             summary: review.summary,
                             ratingValue: review.rating,
@@ -54,8 +66,6 @@
                             description: review.description
                         }
                     } only %}
-                        {% block body %}{{parent()}}<hr />{% endblock %}
-                    {% endembed %}
                 {% endfor %}
             </div>
 

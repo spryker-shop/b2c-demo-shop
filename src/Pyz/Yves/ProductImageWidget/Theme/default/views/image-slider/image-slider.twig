@@ -22,7 +22,15 @@
                 "slidesToScroll": 1,
                 "arrows": false,
                 "fade": true,
-                "asNavFor": ".js-product-slider-thumbnails"
+                "dots": false,
+                "responsive": [
+                    {
+                        "breakpoint": 769,
+                        "settings": {
+                            "fade": false,
+                            "dots": true
+                        }
+                    }]
             }'
         }
     } only %}
@@ -47,7 +55,6 @@
                 'data-json': '{
                     "slidesToShow": ' ~ amountThumb ~ ',
                     "slidesToScroll": 1,
-                    "dots": true,
                     "centerMode": true,
                     "focusOnSelect": true,
                     "vertical": true,

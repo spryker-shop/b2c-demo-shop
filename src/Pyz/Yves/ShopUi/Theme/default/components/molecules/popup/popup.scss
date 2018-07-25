@@ -47,6 +47,32 @@
             cursor: pointer;
         }
 
+        @include helper-breakpoint-media-max($md-max) {
+            &__inner {
+                width: 450px;
+                min-width: 0;
+                padding: 0 24px 7px;
+            }
+            &__top {
+                background: #f7f7f7;
+                margin: 0 -24px 14px;
+                padding: 27px 24px;
+                border-bottom: none;
+                min-height: 80px;
+                justify-content: center;
+            }
+            &__title {
+                font-size: 20px;
+            }
+            &__close  {
+                width: 19px;
+                height: 19px;
+                position: absolute;
+                top: 31px;
+                left: 24px;
+            }
+        }
+
         @content;
     }
 }

@@ -12,7 +12,7 @@
 
 {% block body %}
 
-    {% set review = (data.summary.totalReview > 0) ? data.summary.totalReview : ('product_review.no_reviews' | trans) %}
+    {#{% set review = (data.summary.totalReview > 0) ? data.summary.totalReview : ('product_review.no_reviews' | trans) %}#}
 
     <div class="review-average__label">Average Rating</div>
 
@@ -21,7 +21,7 @@
             value: data.summary.averageRating,
             maxValue: data.ratingMaxValue,
             useHalfSteps: true,
-            reviewCount: review
+            reviewCount: data.summary.totalReview
         },
         attributes: {
             readonly: true
