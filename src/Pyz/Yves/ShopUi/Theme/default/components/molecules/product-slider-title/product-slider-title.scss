@@ -56,7 +56,7 @@
             }
         }
         &__link-mobile {
-            font: normal 12px $setting-font-family;
+            font: bold 12px $setting-font-family-additional;
             letter-spacing: 2.1px;
             border-radius: 2px;
             border: 1px solid $setting-color-text;
@@ -64,6 +64,11 @@
             display: block;
             padding: 16px;
             text-align: center;
+            @include helper-link-hover-reset;
+            &:hover {
+                background: $setting-color-black;
+                color: $setting-color-white;
+            }
         }
     }
 }

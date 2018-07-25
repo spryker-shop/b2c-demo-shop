@@ -1,0 +1,15 @@
+{% extends template('page-layout-customer', 'CustomerPage') %}
+
+{% define data = {
+    title: 'customer.account.profile_data' | trans,
+    activePage: 'profile'
+} %}
+
+{% block customerContent %}
+    <div class="box">
+        <h5>{{ "customer.profile.delete" | trans }}</h5>
+        <hr />
+        {{ "customer.profile.delete.confirmation_question" | trans }}
+        <a href="{{url('customer/delete/confirm')}}" class="button button--alert float-right">{{ "customer.profile.delete" | trans }}</a>
+    </div>
+{% endblock %}
