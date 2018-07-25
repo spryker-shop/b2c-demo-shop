@@ -5,6 +5,10 @@
             font: bold 38px/1.13 $setting-font-family-additional;
             color: $setting-color-darkest;
             margin-bottom: 7px;
+            @include helper-breakpoint-media-max($lg-max) {
+                font: bold 30px/1.27 $setting-font-family-additional;
+                margin-bottom: 12px;
+            }
         }
 
         .product-details__price {
@@ -19,6 +23,9 @@
                 &__amount {
                     color: $setting-color-darkest;
                     font: 400 22px/28px $setting-font-family-additional;
+                    @include helper-breakpoint-media-max($lg-max) {
+                        font: 400 20px/25px $setting-font-family-additional;
+                    }
                 }
                 &__amount--original {
                     padding: 0;
@@ -75,6 +82,10 @@
         @content;
     }
 
+    .product-detail {
+        border-bottom: dotted 1px $setting-color-lightest;
+    }
+
     .pdp-option {
         border-top: dotted 1px $setting-color-lightest;
         &__title {
@@ -114,6 +125,10 @@
                     display: none;
                 }
             }
+            @include helper-breakpoint-media-max($lg-max) {
+                font-size: 12px;
+                letter-spacing: 2.4px;
+            }
         }
         &__wrapper {
             padding-bottom: 30px;
@@ -136,6 +151,9 @@
                 width: 12px;
                 height: 12px;
             }
+        }
+        .quantity-counter__container {
+            padding: 0;
         }
     }
 
