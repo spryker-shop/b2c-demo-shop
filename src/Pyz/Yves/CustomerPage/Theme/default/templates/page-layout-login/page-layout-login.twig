@@ -1,0 +1,58 @@
+{% extends template('page-layout-main') %}
+
+{% define data = {
+    forms: {
+        register: _view.registerForm,
+        login: _view.loginForm
+    }
+} %}
+
+{% block pageInfo %}{% endblock %}
+
+{% block content %}
+    <div class="grid">
+        <div class="col col--sm-12 col--lg-6">
+            {% include molecule('form') with {
+                class: 'box',
+                data: {
+                    title: 'customer.registration.title' | trans,
+                    form: data.forms.register,
+                    options: {
+                        action: url('register')
+                    },
+                    submit: {
+                        enable: true,
+                        text: 'forms.submit.register' | trans
+                    }
+                },
+                qa: 'register-form'
+            } only %}
+        </div>
+
+        <div class="col col--sm-12 col--lg-6">
+            {% include molecule('form') with {
+                class: 'box',
+                data: {
+                    title: 'customer.login.title' | trans,
+                    form: data.forms.login,
+                    layout: {
+                        email: 'col col--sm-6',
+                        password: 'col col--sm-6'
+                    },
+                    submit: {
+                        enable: true,
+                        text: 'forms.submit.login' | trans
+                    },
+                    cancel: {
+                        enable: true,
+                        url: url('password/forgotten'),
+                        text: 'forms.forgot-password' | trans,
+                        icon: null,
+                        class: 'link',
+                        qa: 'customer-forgot-password-link'
+                    }
+                }
+            } only %}
+        </div>
+    </div>
+{% endblock %}

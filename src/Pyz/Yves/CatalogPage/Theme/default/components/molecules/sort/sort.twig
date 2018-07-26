@@ -22,8 +22,8 @@
         </div>
 
         <div class="{{config.name}}__col col">
-            {% embed atom('select') with {
-                modifiers: ['sort'],
+            {% embed atom('custom-select') with {
+                modifiers: ['sort', 'naked'],
                 attributes: {
                     name: 'sort',
                     'onchange': 'this.form.submit();'

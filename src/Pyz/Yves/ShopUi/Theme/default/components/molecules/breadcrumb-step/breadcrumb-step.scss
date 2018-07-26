@@ -45,6 +45,53 @@
             color: $setting-color-dark;
         }
 
-        @content
+        &--progress {
+            @include helper-breakpoint-media-min($md-min) {
+                display: flex;
+            }
+            padding: 15px 25px 0;
+            text-align: center;
+            position: relative;
+            font-size: 15px;
+            font-weight: 700;
+            display: none;
+            &::before,
+            &::after {
+                @include helper-breakpoint-media-min($md-min) {
+                    content: '';
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    right: 0;
+                    height: 1px;
+                    background-color: #111;
+                }
+            }
+            a {
+                color: #111;
+            }
+        }
+
+        &--progress#{&} {
+            &--disabled:not(&--active) {
+                font-weight: 500;
+                &::after {
+                    display: none;
+                }
+            }
+            &--active {
+                color: #111;
+                display: flex;
+            }
+            &--active#{$name}--disabled {
+                &::before {
+                    opacity: 0.4;
+                }
+                &::after {
+                    display: block;
+                    width: 50%;
+                }
+            }
+        }
     }
 }

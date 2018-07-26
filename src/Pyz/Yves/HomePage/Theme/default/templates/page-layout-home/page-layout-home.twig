@@ -34,50 +34,7 @@
         {% endembed %}
     {% endblock %}
 
-    {% include organism('jumbotron-slider') with {
-        data: {
-            slides: [{
-                imageUrl: '/assets/images/section-slider-item-image-10@2x.png',
-                link: 'jumbotron.smart_watches.link',
-                cmsBlockName: 'Jumbotron slide-1'
-            },
-                {
-                    imageUrl: '/assets/images/section-slider-item-image-6@2x.png',
-                    link: 'jumbotron.smartphones.link',
-                    cmsBlockName: 'Jumbotron slide-2'
-                },
-                {
-                    imageUrl: '/assets/images/section-slider-item-image-7@2x.png',
-                    link: 'jumbotron.tablets.link',
-                    cmsBlockName: 'Jumbotron slide-3'
-                }
-            ]
-        },
-        attributes: {
-            'data-json': '{
-                            "slidesToShow": 1,
-                            "dots": true,
-                            "autoplay": true,
-                            "nextArrow": false,
-                            "prevArrow": false,
-                            "autoplaySpeed": 4000,
-                            "centerMode": true,
-                            "centerPadding": "120px",
-                            "responsive": [{
-                                "breakpoint": 1240,
-                                "settings": {
-                                    "centerPadding": "40px"
-                                }
-                            },
-                            {
-                                "breakpoint": 770,
-                                "settings": {
-                                    "centerPadding": "12px"
-                                }
-                            }
-            ]}'
-        }
-    } %}
+    {% include organism('jumbotron-slider')%}
 
     <div class="container">
         {% block pageInfo %}

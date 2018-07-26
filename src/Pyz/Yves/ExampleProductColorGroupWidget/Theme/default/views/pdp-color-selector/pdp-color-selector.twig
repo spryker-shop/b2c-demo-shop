@@ -6,16 +6,23 @@
 } %}
 
 {% block body %}
-    {% embed molecule('color-selector', 'ExampleProductColorGroupWidget') with {
-        data: {
-            items: data.items
-        },
-        attributes: {
-            'target-image-selector': '.js-pdp-color-group__image-' ~ data.idProductAbstract ~ ' > img'
-        }
-    } only %}
-        {% block body %}
-            <hr />{{parent()}}
-        {% endblock %}
-    {% endembed %}
+
+    {% if data.items is not empty %}
+
+        <div class="pdp-option">
+            <div class="pdp-option__title">{{ 'product.attribute.color' | trans }}</div>
+            <div class="pdp-option__wrapper">
+                {% include molecule('color-selector', 'ExampleProductColorGroupWidget') with {
+                    data: {
+                        items: data.items
+                    },
+                    attributes: {
+                        'target-image-selector': '.js-pdp-color-group__image-' ~ data.idProductAbstract ~ ' > img'
+                    }
+                } only %}
+            </div>
+        </div>
+
+    {% endif %}
+
 {% endblock %}

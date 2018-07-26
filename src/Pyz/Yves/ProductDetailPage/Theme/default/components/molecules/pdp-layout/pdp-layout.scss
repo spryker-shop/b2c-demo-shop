@@ -1,0 +1,56 @@
+@mixin product-detail-page-layout($name: '.pdp') {
+    #{$name} {
+
+        &-left {
+            position: relative;
+            width: 55.57%;
+            @include helper-breakpoint-media-max($xl-max) {
+                width: calc(55% + 16px);
+                margin-left: -16px;
+            }
+            @include helper-breakpoint-media-max($md-max) {
+                margin: 0 -16px 74px;
+                width: calc(100% + 32px);
+            }
+        }
+
+        &-right {
+            width: 44.43%;
+            padding: 40px 0 0 90px;
+            @include helper-breakpoint-media-max($xl-max) {
+                padding: 40px 0 0 50px;
+                width: 45%;
+            }
+            @include helper-breakpoint-media-max($lg-max) {
+                padding: 40px 0 0 30px;
+            }
+            @include helper-breakpoint-media-max($md-max) {
+                padding: 0;
+                width: 100%;
+            }
+        }
+
+        &-cms-block {
+            font-size: 14px;
+            line-height: 21px;
+            color: $setting-color-dark;
+            h1 {
+                font: 500 15px/1.33 $setting-font-family-additional;
+                padding: 50px 0 11px;
+                border-top: dotted 1px $setting-color-lightest;
+            }
+            p {
+                margin: 0 0 11px;
+                &:last-child {
+                    margin-bottom: 50px;
+                }
+            }
+        }
+
+        @content;
+    }
+
+    .product-slider-container {
+        margin: 0 -1rem;
+    }
+}

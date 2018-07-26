@@ -1,0 +1,37 @@
+@mixin shop-ui-cart-item-summary($name: '.cart-item-summary') {
+  #{$name} {
+    width: calc(100% - 120px);
+    @include helper-breakpoint-media-max($sm-max) {
+      width: 100%;
+    }
+
+    &__list {
+      padding: 20px 0 0 24px;
+      @include helper-breakpoint-media-max($sm-max) {
+        padding: 20px 0 0 0;
+      }
+    }
+
+    & .list {
+      margin: 0;
+    }
+
+    & .list__item {
+      font: 500 17px $setting-font-family-additional;
+      line-height: 1.29;
+      padding: 19px 0;
+      border-bottom: 1px dotted $setting-color-lightest;
+
+      &:first-of-type {
+        border-top: 1px dotted $setting-color-lightest;
+      }
+      &:last-of-type {
+
+      }
+
+      &::before {
+        display: none;
+      }
+    }
+  }
+}

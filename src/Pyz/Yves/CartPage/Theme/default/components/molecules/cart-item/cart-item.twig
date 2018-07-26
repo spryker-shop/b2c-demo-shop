@@ -12,57 +12,80 @@
 } %}
 
 {% set canEditCart = (not is_granted('IS_AUTHENTICATED_FULLY') or can('WriteSharedCartPermissionPlugin', data.cart.idQuote)) %}
+{% set cartItemBox = data.cartItem.productOptions is empty ? 'shopping-cart__box' : 'shopping-cart__box shopping-cart__box--borderless' %}
+{% set cartItemSubTotal = data.cartItem.quantity * data.cartItem.unitPrice %}
 
 {% block body %}
-    <div class="grid grid--middle grid--justify grid--no-wrap">
-        <div class="{{ config.name }}__image col ">
-            {% include molecule('cart-image', 'CartPage') with {
-                data: {
-                    name: data.cartItem.name | default(''),
-                    image: data.cartItem.images is empty ? null : (data.cartItem.images | first)
-                }
-            } only %}
-        </div>
-        <div class="{{ config.name }}__content col">
-            <div class="grid grid--justify grid--middle">
-                <a href="{{ data.cartItem.url }}"><h5 class="{{ config.name }}__title col col--lg-8 col--sm-12">{{ data.cartItem.name }}</h5></a>
-                <div class="{{ config.name }}__price col col--lg-4 col--sm-12">
-                    {% include molecule('cart-item-summary', 'CartPage') with {
-                        class: 'cart-item__summary',
-                        data: {
-                            unitPrice: data.cartItem.unitPrice | money,
-                            subtotalPrice: data.cartItem.sumSubtotalAggregation | money,
-                            cartItem: data.cartItem
-                        }
-                    } only %}
+    <div class="{{ cartItemBox }}">
+        <div class="grid grid--middle grid--justify grid--no-wrap">
+            <a href="{{ data.cartItem.url }}" class="{{ config.name }}__image col ">
+                {% include molecule('cart-image', 'CartPage') with {
+                    data: {
+                        name: data.cartItem.name | default(''),
+                        image: data.cartItem.images is empty ? null : (data.cartItem.images | first)
+                    }
+                } only %}
+            </a>
+            <div class="{{ config.name }}__content col">
+                <div class="grid grid--justify grid--middle">
+                    <a href="{{ data.cartItem.url }}"><h5 class="{{ config.name }}__title col col--lg-8 col--sm-12">{{ data.cartItem.name }}</h5></a>
+                    <div class="{{ config.name }}__price col col--lg-4 col--sm-12">
+                        <span class="cart-item__price">{{ cartItemSubTotal | money }}</span>
+
+                    </div>
                 </div>
-            </div>
-            <div class="{{ config.name }}__options">
-                {% if canEditCart %}
-                    {% if widgetExists('QuantitySalesUnitWidgetPlugin') %}
-                        {{ widget('QuantitySalesUnitWidgetPlugin', data.cartItem) }}
-                    {% else %}
-                        {% include molecule('cart-quantity-input', 'CartPage') with {
+                <div class="{{ config.name }}__options">
+                    {% if data.attributes is not empty %}
+                        {% include molecule('cart-item-variant-selector', 'CartPage') with {
                             data: {
-                                cartItem: data.cartItem
+                                cartItem: data.cartItem,
+                                cartItemAttributes: data.attributes
                             }
                         } only %}
                     {% endif %}
-                {% else %}
-                    {{ 'cart.item_quantity' | trans }}
+                    {% if canEditCart %}
+                        {% if widgetExists('QuantitySalesUnitWidgetPlugin') %}
+                            {{ widget('QuantitySalesUnitWidgetPlugin', data.cartItem) }}
+                        {% else %}
+                            {% include molecule('cart-quantity-input', 'CartPage') with {
+                                data: {
+                                    cartItem: data.cartItem
+                                }
+                            } only %}
+                        {% endif %}
+                    {% else %}
+                        {{ 'cart.item_quantity' | trans }}
 
-                    <strong>{{ cartItem.quantity }}</strong>
-                {% endif %}
+                        <strong>{{ cartItem.quantity }}</strong>
+                    {% endif %}
 
-                {% if canEditCart %}
-                    <a class="{{ config.name }}__remove" href="{{ path('cart/remove', {'sku': data.cartItem.sku, 'groupKey': data.cartItem.groupKey }) }}">
-                         {{ 'remove' | trans }}
-                    </a>
-                {% endif %}
+                    {% if canEditCart %}
+                        <a class="{{ config.name }}__remove" href="{{ path('cart/remove', {'sku': data.cartItem.sku, 'groupKey': data.cartItem.groupKey }) }}">
+                            {{ 'remove' | trans }}
+                        </a>
+                    {% endif %}
+                </div>
+
             </div>
+
+        </div>
+
+
+        <div class="grid grid--right">
+            {% include molecule('cart-item-summary', 'CartPage') with {
+                class: 'cart-item__summary col',
+                data: {
+                    unitPrice: data.cartItem.unitPrice | money,
+                    subtotalPrice: data.cartItem.sumSubtotalAggregation | money,
+                    cartItem: data.cartItem
+                }
+            } only %}
         </div>
 
     </div>
+
+
+
 
         {#<div class="col col--sm-12 col--lg-6">#}
             {#<small class="text-secondary">#}
@@ -70,15 +93,8 @@
                 {#{{ data.cartItem.sku }}#}
             {#</small>#}
 
-            {#{% if data.attributes is not empty %}#}
-                {#{% include molecule('cart-item-variant-selector', 'CartPage') with {#}
-                    {#data: {#}
-                        {#cartItem: data.cartItem,#}
-                        {#cartItemAttributes: data.attributes#}
-                    {#}#}
-                {#} only %}#}
-            {#{% endif %}#}
 
-            {#{{ widget('ProductBundleItemsWidgetPlugin', data.cartItem, data.cart) }}#}
+
+            {{ widget('ProductBundleItemsWidgetPlugin', data.cartItem, data.cart) }}
         {#</div>#}
 {% endblock %}

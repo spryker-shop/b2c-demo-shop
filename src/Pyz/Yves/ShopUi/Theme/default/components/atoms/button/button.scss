@@ -25,28 +25,54 @@
             }
         }
 
+        &--alert {
+            background: $setting-color-alt;
+            &:hover {
+                background: map-get($setting-color-actions, alert);
+            }
+        }
+
         &--white {
-            background: transparent;
+            background: $setting-color-white;
             border: 1px solid $setting-color-text;
             color: $setting-color-text;
             &:hover {
-                background: transparent;
+                background: $setting-color-text;
                 border: 1px solid $setting-color-text;
-                color: $setting-color-text;
+                color: $setting-color-white;
+            }
+        }
+        &--skinless {
+            border: none;
+            background-color: transparent;
+            color: $setting-color-black;
+            &:visited, &:hover, &:focus, &:active{
+                border: none;
+                background-color: transparent;
+                color: $setting-color-black;
             }
         }
 
         &--hollow {
             padding: .5rem 1rem;
             background-color: $setting-color-white;
-            border: 1px solid $setting-color-main;
-            color: $setting-color-main;
+            border: 1px solid $setting-color-darkest;
+            color: $setting-color-darkest;
 
             &:hover,
             &:focus {
-                border-color: helper-color-dark($setting-color-main);
-                background-color: helper-color-dark($setting-color-main);
+                border-color: $setting-color-darkest;
+                background-color: $setting-color-darkest;
                 color: #fff;
+            }
+
+            &[disabled],
+            & #{name}--disabled,
+            &[disabled]:hover,
+            & #{name}--disabled:hover {
+                background-color: #fff !important;
+                border-color: $setting-color-light;
+                color: $setting-color-light;
             }
         }
 

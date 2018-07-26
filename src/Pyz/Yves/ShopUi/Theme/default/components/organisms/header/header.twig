@@ -15,6 +15,8 @@
 
         <div class="{{config.name}}__row {{config.name}}__navigation-top grid grid--middle grid--justify">
 
+            {% block additionalLink %}{% endblock %}
+
             <div class="col col--sm-12 col--lg-4 is-hidden-sm-md">
                 {% if data.showSearchForm %}
                     {% include molecule('search-form') with {
@@ -32,26 +34,28 @@
 
             <div class="col col--lg-4 is-hidden-sm-md">
 
-                <div class="grid grid--middle grid--right">
+                {% if data.showNavigation %}
+                    <div class="grid grid--middle grid--right">
 
-                    {% include organism('navigation-top') with {
-                        class: 'col'
-                    } only %}
-                </div>
+                        {% include organism('navigation-top') with {
+                            class: 'col'
+                        } only %}
+                    </div>
+                {% endif %}
 
             </div>
 
         </div>
 
-        <div class="is-hidden-lg-xl">
-            <div class="{{config.name}}__row {{config.name}}__navigation-top">
-
-                {% include molecule('navigation-top-mobile') only %}
-
-            </div>
-        </div>
 
         {% if data.showNavigation %}
+            <div class="is-hidden-lg-xl">
+                <div class="{{config.name}}__row {{config.name}}__navigation-top">
+
+                    {% include molecule('navigation-top-mobile') only %}
+
+                </div>
+            </div>
             <div class="{{config.name}}__row {{config.name}}__navigation-main">
                 {{ widgetGlobal('NavigationWidgetPlugin', 'MAIN_NAVIGATION', 'navigation-header') }}
                 <div class="nav-arrow nav-arrow--left">

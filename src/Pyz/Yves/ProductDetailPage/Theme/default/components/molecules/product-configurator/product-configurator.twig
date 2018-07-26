@@ -11,7 +11,7 @@
 } %}
 
 {% set options = [] %}
-{% set brand = data.product.attributes.brand | default %}
+{% set productName = data.product.name | default %}
 {% set sku = data.product.sku %}
 {% set availabilityWidget = '' %}
 {% set isDisabled = data.product.idProductConcrete is empty or data.product.price is empty %}
@@ -29,69 +29,73 @@
 {% endif %}
 
 {% block body %}
-    {% if brand is not empty %}
-        <h5>{{brand}}</h5>
-    {% endif %}
-    <span>{{ 'product.attribute.sku' | trans }}: {{sku}}</span>
 
-    <hr />
-    <div class="product-details__price"> {{ widget('PriceWidgetPlugin', data.product) }} </div>
-    {{ widgetBlock('ProductReviewWidgetPlugin', 'rating', data.product.idProductAbstract) }}
+    <h1 class="product-name">{{productName}}</h1>
+
+    <div class="grid grid--justify pdp-price-review">
+        {{ widgetBlock('ProductReviewWidgetPlugin', 'rating', data.product.idProductAbstract) }}
+        <div class="col product-details__price">
+            {{ widget('PriceWidgetPlugin', data.product) }}
+        </div>
+    </div>
+
     {{ widget('ProductGroupWidgetPlugin', data.product.idProductAbstract) }}
 
-    {% embed molecule('variant-configurator', 'ProductDetailPage') with {
+    {% include molecule('variant-configurator', 'ProductDetailPage') with {
         data: {
             superAttributes: data.product.attributeMap.superAttributes,
             selectedAttributes: data.product.selectedAttributes,
             availableAttributes: data.product.availableAttributes
         }
     } only %}
-        {% block body %}<hr />{{parent()}}{% endblock %}
-    {% endembed %}
 
-    <hr />
     <form method="POST" action="/cart/add/{{sku}}">
         {{ widget('ProductOptionWidgetPlugin', data.product) }}
 
         {% if widgetExists('ProductMeasurementUnitWidgetPlugin') %}
             {{ widget('ProductMeasurementUnitWidgetPlugin', data.product, isDisabled, options) }}
         {% else %}
-            <div class="grid grid--bottom grid--justify">
-                <div class="col col--sm-3">
-                    <label>
-                        {{'cart.item_quantity' | trans}}
-                        {% include atom('select') with {
-                            modifiers: ['expand'],
-                            data: {
-                                options: options
-                            },
-                            attributes: {
-                                name: 'quantity',
-                                disabled: isDisabled
-                            }
-                        } only %}
-                    </label>
-                </div>
 
-                <div class="col col--sm-8">
-                    <button type="submit" class="button button--success button--expand" {{ isDisabled ? 'disabled' : '' }} onclick="this.form.submit(); this.disabled='disabled'; return false;" {{qa('add-to-cart-button')}}>
-                        {{ 'page.detail.add-to-cart' | trans }}
-                    </button>
+            {% if not isDisabled %}
+                <div class="pdp-option">
+                    <div class="pdp-option__title">{{'cart.item_quantity' | trans}}</div>
+                    <div class="pdp-option__wrapper">
+
+                        {#{% include atom('select') with {#}
+                            {#modifiers: ['expand'],#}
+                            {#data: {#}
+                                {#options: options#}
+                            {#},#}
+                            {#attributes: {#}
+                                {#name: 'quantity',#}
+                                {#disabled: isDisabled#}
+                            {#}#}
+                        {#} only %}#}
+
+                        {% include molecule('quantity-counter') with {
+                            modifiers: ['lg']
+                        } only %}
+                    </div>
                 </div>
+            {% endif %}
+
+            <div class="add-to-cart">
+                <button type="submit" class="button button--black button--expand" {{ isDisabled ? 'disabled' : '' }} onclick="this.form.submit(); this.disabled='disabled'; return false;" {{qa('add-to-cart-button')}}>
+                    {{ 'page.detail.add-to-cart' | trans }}
+                </button>
             </div>
         {% endif %}
 
-        {{ widget('MultiCartWidgetPlugin', data.product, isDisabled) }}
+        {#{{ widget('MultiCartWidgetPlugin', data.product, isDisabled) }}#}
         {{ widget('AvailabilityWidgetPlugin', data.product) }}
+
     </form>
 
-    {% if widgetExists('ShoppingListWidgetPlugin') %}
-        <hr />
-        {{ widget('ShoppingListWidgetPlugin', sku, isDisabled) }}
-    {% endif %}
+    {#{% if widgetExists('ShoppingListWidgetPlugin') %}#}
+        {#{{ widget('ShoppingListWidgetPlugin', sku, isDisabled) }}#}
+    {#{% endif %}#}
 
     {% if widgetExists('WishlistWidgetPlugin') %}
-        <hr />
         {{ widget('WishlistWidgetPlugin', data.product) }}
     {% endif %}
 {% endblock %}

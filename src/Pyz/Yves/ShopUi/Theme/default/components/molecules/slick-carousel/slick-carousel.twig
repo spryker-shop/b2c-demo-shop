@@ -6,7 +6,8 @@
 } %}
 
 {% define data = {
-    slides: []
+    slides: [],
+    containerClass: ''
 } %}
 
 {% define attributes = {
@@ -15,7 +16,7 @@
 
 {% block body %}
 
-    <div class="{{config.name}}__container">
+    <div class="{{config.name}}__container {{ data.containerClass }}">
         {% block slides %}
             {% for slide in data.slides %}
                     {{ slide }}

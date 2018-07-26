@@ -1,0 +1,37 @@
+@mixin shop-ui-customer-account($name: '.customer-account') {
+  #{$name} {
+    margin-bottom: 75px;
+    &__title {
+      text-transform: capitalize;
+      text-align: center;
+      font: 500 50px $setting-font-family-additional;
+      color: $setting-color-text;
+      line-height: 75px;
+      border-bottom: 1px dotted $setting-color-lightest;
+      border-top: 1px dotted $setting-color-lightest;
+      padding: 25px 0;
+      margin: 25px 0;
+    }
+    &__box {
+      border-bottom: 1px dotted $setting-color-lightest;
+      padding: 15px 0;
+      margin: 15px 0;
+    }
+    &__subtitle {
+      font: 700 13px $setting-font-family-additional;
+      letter-spacing: 2.6px;
+      text-transform: uppercase;
+    }
+    .customer-navigation {
+      margin-top: 30px;
+    }
+    .order-table {
+      thead {
+        background: $setting-color-light;
+        color: $setting-color-white;
+      }
+    }
+  }
+}
+
+@include shop-ui-customer-account();

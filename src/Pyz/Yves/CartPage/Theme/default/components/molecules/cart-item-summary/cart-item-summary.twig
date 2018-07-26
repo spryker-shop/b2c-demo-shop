@@ -14,19 +14,19 @@
 {% block class %}{{parent()}} list{% endblock %}
 
 {% block body %}
-    {#<li class="list__item spacing-y">#}
+    {#<li class="list__item">#}
         {#{{ 'cart.item.item_price' | trans }}#}
-        {#<span class="float-right">{{ data.unitPrice }}</span>#}
+        {#<span class="cart-item__price">{{ data.unitPrice }}</span>#}
     {#</li>#}
 
     {% if data.cartItem.productOptions | length > 0 %}
-        <li class="list__item text-small">
+        <li class="{{ config.name }}__list">
             {{ widget('CartItemProductOptionWidgetPlugin', data.cartItem) }}
         </li>
     {% endif %}
 
-    <li class="list__item">
+    {#<li class="list__item">#}
         {#<strong>{{ 'cart.item.item_total' | trans }}</strong>#}
-        <div class="cart-item__total">{{ data.subtotalPrice }}</div>
-    </li>
+        {#<div class="cart-item__total">{{ data.subtotalPrice }}</div>#}
+    {#</li>#}
 {% endblock %}

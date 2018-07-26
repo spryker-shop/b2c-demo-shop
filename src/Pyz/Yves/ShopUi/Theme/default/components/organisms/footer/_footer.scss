@@ -207,22 +207,18 @@
         &-currency-lang {
             display: flex;
             order: 1;
-            .select {
-                margin-left: 10px;
+            .custom-select {
+                margin-left: 16px;
                 font-size: 16px;
+                .select2-selection__rendered {
+                    line-height: 24px;
+                }
             }
-            select {
-                text-transform: uppercase;
-            }
-            .select__caret {
+            .custom-select__caret {
                 pointer-events: none;
             }
 
         }
-
-        @content;
     }
 }
-
-@include shop-ui-footer();
 

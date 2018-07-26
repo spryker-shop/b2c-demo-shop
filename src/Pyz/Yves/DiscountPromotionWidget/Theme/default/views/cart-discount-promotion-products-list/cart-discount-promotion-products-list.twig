@@ -47,6 +47,7 @@
                                 }
                             } only %}
                         </div>
+
                     {% endblock %}
 
                     {% block actions %}
@@ -57,7 +58,7 @@
                             <div class="cart-item-quantity col">
                                 <div class="grid grid--middle grid--left">
                                     <label class="col col--left cart-item-quantity__label">
-                                        Quantity :
+                                        {{ 'cart.item_quantity' | trans }}
                                     </label>
                                     {% include molecule('quantity-counter') with {
                                         data: {
