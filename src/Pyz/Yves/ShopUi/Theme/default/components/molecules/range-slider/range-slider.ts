@@ -9,6 +9,7 @@ export default class RangeSlider extends Component {
             start: [ this.valueCurrentMin, this.valueCurrentMax ],
             step: 1,
             connect: true,
+            margin: 1,
             range: {
                 'min': +this.valueMin,
                 'max': +this.valueMax
@@ -23,9 +24,12 @@ export default class RangeSlider extends Component {
                     target[handle].value = Number(values[handle]);
                 });
             } else {
-                const currency = (target[0].innerHTML).replace(/[0-9-.]/g, '');
+                const currency = (target[0].innerHTML).replace(/[0-9_,.]/g, '');
                 wrap.noUiSlider.on('update', function (values, handle) {
-                    target[handle].innerHTML = currency + Number(values[handle]);
+                    currency.search(/&nbsp;/i) !==-1 ?
+                        target[handle].innerHTML = Number(values[handle]) + currency
+                        :
+                        target[handle].innerHTML = currency + Number(values[handle]);
                 });
             }
         }

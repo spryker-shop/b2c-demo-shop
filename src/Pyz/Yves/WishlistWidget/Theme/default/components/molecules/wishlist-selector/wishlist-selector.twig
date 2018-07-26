@@ -36,18 +36,19 @@
 
     <form method="POST" action="{{ path('wishlist/add-item', { sku: data.sku }) }}" class="{{config.name}}__form">
         <div class="grid grid--justify">
-            <div class="col col--sm-3">
-                {% if isUserLoggedIn %}
+
+            {% if isUserLoggedIn %}
+                <div class="col col--sm-6 wishlist-input">
                     {% include molecule('ajax-renderer') with {
                         attributes: {
                             'provider-selector': '.' ~ config.jsName ~ '__provider'
                         }
                     } only %}
-                {% endif %}
-            </div>
+                </div>
+            {% endif %}
 
-            <div class="col col--sm-8">
-                <button type="submit" class="button button--expand" {{ disableAddToWishlist ? 'disabled' : '' }}>
+            <div class="col col--expand">
+                <button type="submit" class="button button--hollow button--expand" {{ disableAddToWishlist ? 'disabled' : '' }}>
                     {{ 'page.detail.add-to-wishlist' | trans }}
                 </button>
             </div>

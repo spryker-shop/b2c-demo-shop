@@ -1,0 +1,39 @@
+@mixin shop-ui-cart-toggler($name: '.cart-toggler') {
+    #{$name} {
+        &__title {
+            cursor: pointer;
+            font: 600 13px $setting-font-family-additional;
+            letter-spacing: 2.6px;
+            text-transform: uppercase;
+            position: relative;
+            &:before {
+                content: "";
+                width: 12px;
+                height: 2px;
+                background: $setting-color-dark;
+                position: absolute;
+                top: 50%;
+                right: 0;
+                margin-top: -1px;
+            }
+            &:after {
+                content: "";
+                width: 2px;
+                height: 12px;
+                background: $setting-color-dark;
+                position: absolute;
+                top: 50%;
+                right: 5px;
+                margin-top: -6px;
+            }
+            &.active:after {
+                display: none;
+            }
+        }
+        &__content {
+            padding-top: 25px;
+            padding-bottom: 15px;
+        }
+    }
+}
+@include shop-ui-cart-toggler();

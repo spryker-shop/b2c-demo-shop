@@ -1,0 +1,31 @@
+{% extends template('widget') %}
+
+{% define data = {
+    languages: _widget.languages
+} %}
+
+{% block body %}
+    {% if data.languages is not empty %}
+        <form method="GET" action="">
+            {% embed atom('custom-select') with {
+                modifiers: ['naked'],
+                attributes: {
+                    'onchange': 'this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);'
+                },
+                embed: {
+                    languages: data.languages
+                }
+            } only %}
+                {% block options %}
+                    {% for language, url in embed.languages %}
+                        <option
+                            value="{{ app.request.getSchemeAndHttpHost() }}{{ url }}"
+                            {{ (language == _widget.currentLanguage) ? 'selected' : ''}}>
+                                {{ language | upper }}
+                        </option>
+                    {% endfor %}
+                {% endblock %}
+            {% endembed %}
+        </form>
+    {% endif %}
+{% endblock %}

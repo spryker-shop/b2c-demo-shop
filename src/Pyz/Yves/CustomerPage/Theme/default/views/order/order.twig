@@ -1,0 +1,33 @@
+{% extends template('page-layout-customer', 'CustomerPage') %}
+
+{% define data = {
+    orders: _view.orderList,
+
+    pagination: {
+        parameters: {},
+        currentPage: _view.pagination.page,
+        paginationPath: 'customer/order',
+        maxPage: _view.pagination.lastPage,
+        showAlwaysFirstAndLast: true
+    },
+
+    title: 'customer.account.order_history' | trans,
+    activePage: 'order'
+} %}
+
+{% block customerContent %}
+    <div class="box">
+        <div class="customer-account__box grid grid--justify grid--middle">
+            <h5 class="customer-account__subtitle col">{{ 'customer.order.all_orders' | trans }}</h5>
+        </div>
+        {% include molecule('order-table', 'CustomerPage') with {
+            data: {
+                orders: data.orders
+            }
+        } only %}
+        <hr/>
+        {% include molecule('pagination') with {
+            data: data.pagination
+        } only %}
+    </div>
+{% endblock %}

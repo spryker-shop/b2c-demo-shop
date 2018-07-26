@@ -1,0 +1,104 @@
+@mixin shop-ui-promotion-item($name: '.promotion-item') {
+    #{$name} {
+        position: relative;
+        @include helper-breakpoint-media-max($sm-max) {
+
+        }
+        &__container {
+            position: relative;
+            color: $setting-color-text;
+        }
+        &__thumbnail {
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+            width: 120px;
+
+            .thumbnail {
+                margin: 0;
+            }
+        }
+        &__overlay {
+            padding: 12px 15px;
+            &::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                border-radius: 4px;
+                background: rgba(0, 0, 0, 0.05);
+                z-index: 350;
+            }
+        }
+
+        &__content {
+            padding-left: 24px;
+            position: relative;
+            width: calc(100% - 120px);
+        }
+
+        &--stretch {
+            height: 100%;
+        }
+
+        &__info {
+            display: block;
+            &:hover {
+                color: $setting-color-darkest;
+                text-decoration: none;
+            }
+        }
+        &__name {
+            display: block;
+            font: 500 17px $setting-font-family-additional;
+            line-height: 1.29;
+        }
+
+        &__button {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            height: 32px;
+            font: normal 10px $setting-font-family-additional;
+            @include helper-breakpoint-media-max($sm-max) {
+                bottom: unset;
+                top: 0;
+                font-size: 0;
+                width: 29px;
+                height: 28px;
+                &::after {
+                    content: '+';
+                    font-size: 28px;
+                    display: block;
+                    width: 100%;
+                    height: 26px;
+                    line-height: 26px;
+                    position: absolute;
+                    top: -2px;
+                    left: 0;
+                }
+
+            }
+            &[disabled]{
+                color: $setting-color-white;
+            }
+        }
+
+        .price {
+            position: relative;
+            text-align: right;
+            @include helper-breakpoint-media-max($sm-max) {
+                text-align: left;
+            }
+            &__amount {
+                font: 500 17px $setting-font-family-additional;
+                line-height: 1.29;
+            }
+        }
+
+    }
+
+}
+@include shop-ui-promotion-item();

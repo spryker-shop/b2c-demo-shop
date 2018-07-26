@@ -1,0 +1,17 @@
+{% extends template('widget') %}
+
+{% define data = {
+    isSubscribed: _widget.isSubscribed
+} %}
+
+{% block body %}
+    <div class="customer-account__box grid grid--justify grid--middle box">
+        <h5 class="customer-account__subtitle col">{{ 'customer.account.newsletter' | trans }}</h5>
+        <a href="{{ url('customer/newsletter') }}" class="col">{{ 'general.edit.button' | trans }}</a>
+    </div>
+    {% if data.isSubscribed %}
+        {{ 'customer.newsletter.subscribed' | trans }}
+    {% else %}
+        {{ 'customer.newsletter.not_subscribed' | trans }}
+    {% endif %}
+{% endblock %}

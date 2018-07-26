@@ -6,14 +6,13 @@
 
 {% block body %}
     {% if data.promotionProducts is not empty %}
-        <div class="promotion-item">
-            <h4>{{ 'cart.promotion.items' | trans }}</h4>
+        <div class="promotion-block shopping-cart__box">
+            <h4 class="promotion-block__title">{{ 'cart.promotion.items' | trans }}</h4>
         </div>
 
-        <div class="grid">
             {% for product in data.promotionProducts %}
-                {% embed molecule('product-card') with {
-                    class: 'col col--sm-12 col--md-6',
+                {% embed molecule('promotion-item', 'CartPage') with {
+                    class: '',
                     data: {
                         name: product.name,
                         abstractId: product.idProductAbstract,
@@ -37,42 +36,44 @@
                 } only %}
                     {% block content %}
                         {{parent()}}
+                        <div class="grid">
+                            {% include molecule('variant-configurator', 'DiscountPromotionWidget') with {
+                                class: 'col col--lg-9 col--sm-12',
+                                data: {
+                                    idProductAbstract: embed.idProductAbstract,
+                                    superAttributes: embed.superAttributes,
+                                    selectedAttributes: embed.selectedAttributes,
+                                    availableAttributes: embed.availableAttributes
+                                }
+                            } only %}
+                        </div>
 
-                        <hr />
-                        {% include molecule('variant-configurator', 'DiscountPromotionWidget') with {
-                            data: {
-                                idProductAbstract: embed.idProductAbstract,
-                                superAttributes: embed.superAttributes,
-                                selectedAttributes: embed.selectedAttributes,
-                                availableAttributes: embed.availableAttributes
-                            }
-                        } only %}
-                        <hr />
                     {% endblock %}
 
                     {% block actions %}
                         {% set disabled = embed.idProductConcrete is empty %}
 
                         <form method="POST" action="/cart/add/{{embed.sku}}" class="grid grid--bottom grid--justify">
-                            <div class="col col--sm-5">
-                                {% include molecule('quantity-selector') with {
-                                    data: {
-                                        maxQuantity: embed.promotionDiscount.maxQuantity,
-                                        hasUpdateButton: false
-                                    }
-                                } only %}
+
+                            <div class="cart-item-quantity col">
+                                <div class="grid grid--middle grid--left">
+                                    <label class="col col--left cart-item-quantity__label">
+                                        {{ 'cart.item_quantity' | trans }}
+                                    </label>
+                                    {% include molecule('quantity-counter') with {
+                                        data: {
+                                            maxQuantity: embed.promotionDiscount.maxQuantity,
+                                            hasUpdateButton: false
+                                        }
+                                    } only %}
+                                </div>
                             </div>
 
-                            <div class="col col--sm-6">
+                            <div class="col">
                                 <input type="hidden" value="{{ embed.sku }}" name="groupKey">
                                 <input type="hidden" value="{{ embed.promotionDiscount.id }}" name="idDiscountPromotion">
 
-                                <button type="submit" class="button button--success button--expand" {{ disabled ? 'disabled' : '' }} onclick="this.form.submit(); this.disabled='disabled'; return false;">
-                                    {% include atom('icon') with {
-                                        data: {
-                                            name: 'cart-plus'
-                                        }
-                                    } only %}
+                                <button type="submit" class="button button--white promotion-item__button" {{ disabled ? 'disabled' : '' }} onclick="this.form.submit(); this.disabled='disabled'; return false;">
                                     {{ 'page.detail.add-to-cart' | trans }}
                                 </button>
                             </div>
@@ -80,6 +81,5 @@
                     {% endblock %}
                 {% endembed %}
             {% endfor %}
-        </div>
     {% endif %}
 {% endblock %}
