@@ -1,0 +1,37 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'pdp-carousel',
+    tag: 'pdp-carousel'
+} %}
+
+{% define data = {
+    slides: [],
+    containerClass: '',
+    thumbnailClass: ''
+} %}
+
+{% define attributes = {
+    'data-main-config': '',
+    'data-thumbnail-config': ''
+} %}
+
+{% block body %}
+
+    <div class="{{config.name}}__container {{ data.containerClass }}">
+        {% for slide in data.slides %}
+            <div class="pdp-img">
+                <img src="{{ slide.externalUrlLarge }}" alt="" >
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="{{config.name}}__thumbnail {{ data.thumbnailClass }}">
+        {% for slide in data.slides %}
+            <div class="pdp-img">
+                <img src="{{ slide.externalUrlLarge }}" alt="" >
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}
