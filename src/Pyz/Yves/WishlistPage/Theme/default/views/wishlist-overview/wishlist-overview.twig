@@ -1,0 +1,32 @@
+{% extends template('page-layout-wishlist', 'WishlistPage') %}
+
+{% define data = {
+    wishlists: _view.wishlistCollection.wishlists,
+    wishlistForm: _view.wishlistForm
+} %}
+
+{% block customerContent %}
+    <div class="box">
+        <div class="customer-account__box grid grid--justify grid--middle">
+            <h5 class="customer-account__subtitle col">{{ 'customer.account.wishlist.overview.title' | trans }}</h5>
+        </div>
+        {% include molecule('add-wishlist', 'WishlistPage') with {
+            data: {
+                wishlistForm: data.wishlistForm
+            }
+        }  only %}
+    </div>
+    <div class="box">
+        {% if data.wishlists is empty %}
+            <div class="text-center">
+                <h6>{{ 'customer.account.wishlist.overview.empty' | trans }}</h6>
+            </div>
+        {% else %}
+            {% include molecule('wishlist-overview-table', 'WishlistPage') with {
+                data: {
+                    wishlists: data.wishlists
+                }
+            } only %}
+        {% endif %}
+    </div>
+{% endblock %}

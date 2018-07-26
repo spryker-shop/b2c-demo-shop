@@ -1,0 +1,64 @@
+{% extends template('page-layout-wishlist', 'WishlistPage') %}
+
+{% define data = {
+    wishlists: _view.wishlistOverview.meta.wishlistCollection.wishlists,
+    wishlistName: _view.wishlistName,
+    wishlistItems: _view.wishlistItems,
+    addAllProductsToCart: _view.addAllAvailableProductsToCartForm,
+    activeWishlistId: _view.wishlistOverview.wishlist.idWishlist,
+
+    pagination: {
+        currentPage: _view.currentPage,
+        maxPage: _view.totalPages,
+        paginationPath: 'wishlist/details',
+        showAlwaysFirstAndLast: true,
+        parameters: {
+            wishlistName: _view.wishlistName
+        }
+    }
+} %}
+
+{% block customerContent %}
+    <div class="box">
+        {% if data.wishlistItems is not empty %}
+            {{ form_start(data.addAllProductsToCart, {
+                action: path('wishlist/move-all-available-to-cart', { wishlistName: data.wishlistName }),
+                attr: { class: 'float-right' }
+            }) }}
+                <button type="submit" class="button">
+                    {% include atom('icon') with {
+                        data: {
+                            name: 'cart-plus'
+                        }
+                    } only %}
+                    {{ 'customer.account.wishlist.add_all_available_to_cart' | trans }}
+                </button>
+
+                {% for wishlistItemMetaField in data.addAllProductsToCart.wishlistItemMetaCollection %}
+                    {{ form_widget(wishlistItemMetaField) }}
+                {% endfor %}
+            {{ form_end(data.addAllProductsToCart) }}
+        {% endif %}
+
+        <h4>{{ data.wishlistName }}</h4>
+
+        <hr />
+        {% if data.wishlistItems is empty %}
+            <div class="text-center">
+                <h6>{{ 'customer.account.wishlist.empty' | trans }}</h6>
+            </div>
+        {% else %}
+            {% include molecule('wishlist-detail-table', 'WishlistPage') with {
+                data: {
+                    wishlistItems: data.wishlistItems,
+                    wishlistName: data.wishlistName
+                }
+            } only %}
+
+            <hr />
+            {% include molecule('pagination') with {
+                data: data.pagination
+            } only %}
+        {% endif %}
+    </div>
+{% endblock %}

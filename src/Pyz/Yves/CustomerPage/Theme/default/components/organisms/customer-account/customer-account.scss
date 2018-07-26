@@ -1,12 +1,14 @@
 @mixin shop-ui-customer-account($name: '.customer-account') {
   #{$name} {
     margin-bottom: 75px;
+
     &__info {
       li, li>a {
         letter-spacing: .2px;
         font-weight: 300;
       }
     }
+
     &__title {
       text-transform: capitalize;
       text-align: center;
@@ -18,23 +20,44 @@
       padding: 25px 0;
       margin: 25px 0;
     }
+
     &__box {
       border-bottom: 1px dotted $setting-color-lightest;
       padding: 15px 0;
       margin: 15px 0;
     }
+
     &__subtitle {
       font: 700 13px $setting-font-family-additional;
       letter-spacing: 2.6px;
       text-transform: uppercase;
     }
+
     .customer-navigation {
       margin-top: 30px;
     }
-    .order-table {
-      thead {
-        background: $setting-color-light;
-        color: $setting-color-white;
+
+    thead {
+      background: $setting-color-light;
+      color: $setting-color-white;
+    }
+
+    .table tbody{
+      tr:nth-child(even) {
+        background: #f1f1f1;
+      }
+      .checkbox {
+        margin: 0;
+        &__box {
+          margin-top: 4px;
+        }
+      }
+    }
+
+    .order-summary {
+      li {
+        font: 300 16px $setting-font-family-additional;
+        margin: 10px 0;
       }
     }
   }
