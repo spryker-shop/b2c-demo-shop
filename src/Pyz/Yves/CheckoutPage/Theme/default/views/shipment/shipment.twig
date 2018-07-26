@@ -6,7 +6,7 @@
         shipment: _view.shipmentForm
     },
     
-    title: 'checkout.step.shipment.title' | trans
+    title: null
 } %}
 
 {% block content %}
@@ -21,27 +21,40 @@
             },
             submit: {
                 enable: true,
-                text: 'checkout.step.payment' | trans
+                text: 'checkout.step.payment' | trans,
+                class: 'button button--black button--big button--expand'
             },
             cancel: {
                 enable: true,
                 url: data.backUrl,
-                text: 'general.back.button' | trans
+                text: 'general.back.button' | trans,
+                class: 'button button--secondary button--hollow button--expand'
             }
         }
     } only %}
         {% block fields %}
-            {% for name, choices in data.form.idShipmentMethod.vars.choices %}
-                <div class="col col--sm-6 checkout-layout__half">
-                    <h5>{{name}}</h5>
 
-                    {% for key, choice in choices %}
-                        {{ form_row(data.form.idShipmentMethod[key], {
-                            label: data.form.idShipmentMethod[key].vars.label
-                        }) }}
-                    {% endfor %}
+            {% for name, choices in data.form.idShipmentMethod.vars.choices %}
+                <div class="col col--sm-12 shipping-form-item">
+
+                    <h5>{{name | trans}}</h5>
+
+                    <ul class="list-switches list-switches--two-colums">
+
+                        {% for key, choice in choices %}
+                            <li class="list-switches__item list-switches__item--half-width">
+                                {{ form_row(data.form.idShipmentMethod[key], {
+                                    label: data.form.idShipmentMethod[key].vars.label,
+                                    rowAttr: {class: 'radio--with-bg-wrap'},
+                                    errors: data.form.idShipmentMethod.vars.errors
+                                }) }}
+                            </li>
+                        {% endfor %}
+
+                    </ul>
                 </div>
             {% endfor %}
+
         {% endblock %}
     {% endembed %}
 {% endblock %}

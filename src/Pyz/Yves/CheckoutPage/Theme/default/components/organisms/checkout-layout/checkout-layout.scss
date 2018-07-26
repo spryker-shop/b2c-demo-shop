@@ -1,6 +1,6 @@
 @mixin shop-ui-checkout-layout ($name: '.checkout-layout'){
     #{$name} {
-        padding-bottom: 40px;
+        padding-bottom: 60px;
         font-size: 16px;
         overflow: hidden;
 
@@ -13,16 +13,6 @@
             padding-bottom: 10px;
             margin-bottom: 3.6rem;
             border-bottom: dotted 1px $setting-color-lightest;
-        }
-
-        &__half:nth-child(1) {
-            padding-right: 30px;
-        }
-        &__half:nth-child(2) {
-            padding-left: 30px;
-            .toggler-checkbox {
-                margin-bottom: 58px;
-            }
         }
 
         label,
@@ -58,6 +48,10 @@
             margin: 0;
         }
 
+        .button--secondary {
+            margin-top: 30px;
+        }
+
         .forgot-password-link {
             @include helper-breakpoint-media-min($md-min) {
                 margin-top: 16px;
@@ -76,10 +70,6 @@
             @include helper-breakpoint-media-min($md-min) {
                 top: 7px !important;
             }
-        }
-
-        #payment-form .form__actions {
-            margin-top: 60px;
         }
 
         .payment-form-indent .form__fields {
@@ -207,19 +197,27 @@
             }
         }
 
-        .radio__container {
-            overflow: hidden;
-            cursor: pointer;
-            .radio__box {
-                float: left;
-                margin-top: 1px;
-            }
-            .radio__label {
-                display: block;
+        &--address-step {
+            .radio__container {
                 overflow: hidden;
+                cursor: pointer;
+                .radio__box {
+                    float: left;
+                    margin-top: 1px;
+                }
+                .radio__label {
+                    display: block;
+                    overflow: hidden;
+                }
             }
         }
 
+        .shipping-form-item + .shipping-form-item {
+            @include helper-breakpoint-media-min($md-min) {
+                margin-top: 40px;
+            }
+            margin-top: 50px;
+        }
     }
     .header.header-checkout {
         @include helper-breakpoint-media-max($md-max) {
@@ -295,5 +293,17 @@
         }
         display: block;
         margin-bottom: 8px;
+    }
+    .list-switches--two-colums {
+        @include helper-breakpoint-media-min($md-min) {
+            flex-wrap: wrap;
+        }
+    }
+    .list-switches__item--half-width {
+        @include helper-breakpoint-media-min($md-min) {
+            min-width: calc(50% - 15px);
+            flex-grow: 0;
+            margin: 0 0 30px;
+        }
     }
 }
