@@ -32,20 +32,19 @@
             {% set isAvailable = selectedValue is empty %}
         {% endif %}
 
-        <div class="pdp-option">
-            {% block variant %}
-                {% include molecule('variant', 'ProductDetailPage') with {
-                    data: {
-                        name: name,
-                        formName: 'attribute[' ~ name ~ ']',
-                        values: values,
-                        selectedValue: selectedValue,
-                        label: ('product.attribute.' ~ name) | trans,
-                        isAvailable: isAvailable
-                    }
-                } only %}
-            {% endblock %}
-        </div>
+        {% block variant %}
+            {% include molecule('variant', 'ProductDetailPage') with {
+                class: 'pdp-option',
+                data: {
+                    name: name,
+                    formName: 'attribute[' ~ name ~ ']',
+                    values: values,
+                    selectedValue: selectedValue,
+                    label: ('product.attribute.' ~ name) | trans,
+                    isAvailable: isAvailable
+                }
+            } only %}
+        {% endblock %}
     {% endfor %}
 
     {% if not data.useExternalForm %}

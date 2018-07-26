@@ -16,10 +16,9 @@
 {% set cartItemSubTotal = data.cartItem.quantity * data.cartItem.unitPrice %}
 
 {% block body %}
-    {#<pre>{{  dump(data.cartItem) }}</pre>#}
     <div class="{{ cartItemBox }}">
         <div class="grid grid--middle grid--justify grid--no-wrap">
-            <a href="{{ '' }}" class="{{ config.name }}__image col ">
+            <a href="{{ data.cartItem.url }}" class="{{ config.name }}__image col ">
                 {% include molecule('cart-image', 'CartPage') with {
                     data: {
                         name: data.cartItem.name | default(''),
@@ -29,7 +28,7 @@
             </a>
             <div class="{{ config.name }}__content col">
                 <div class="grid grid--justify grid--middle">
-                    <h5 class="{{ config.name }}__title col col--lg-8 col--sm-12">{{ data.cartItem.name }}</h5>
+                    <a href="{{ data.cartItem.url }}"><h5 class="{{ config.name }}__title col col--lg-8 col--sm-12">{{ data.cartItem.name }}</h5></a>
                     <div class="{{ config.name }}__price col col--lg-4 col--sm-12">
                         <span class="cart-item__price">{{ cartItemSubTotal | money }}</span>
 
