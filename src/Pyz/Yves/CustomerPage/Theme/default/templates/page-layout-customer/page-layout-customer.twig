@@ -1,0 +1,34 @@
+{% extends template('page-layout-main') %}
+
+{% define data = {
+    activePage: 'overview'
+} %}
+
+{% block breadcrumbs %}
+    {#{% include molecule('breadcrumb') with {#}
+        {#data: {#}
+            {#steps: [{#}
+                {#label: 'customer.account' | trans#}
+            {#}]#}
+        {#}#}
+    {#} only %}#}
+{% endblock %}
+
+{% block title %}
+    <h1 class="customer-account__title">{{data.title}}</h1>
+{% endblock %}
+
+{% block content %}
+    <div class="grid customer-account">
+        <div class="col col--sm-12 col--md-3">
+            {% block customerNavigation %}
+                {{ widgetGlobal('CustomerNavigationWidgetPlugin', data.activePage) }}
+            {% endblock %}
+        </div>
+
+        <div class="col col--sm-12 col--md-9">
+            {% block customerContent %}{% endblock %}
+        </div>
+    </div>
+{% endblock %}
+

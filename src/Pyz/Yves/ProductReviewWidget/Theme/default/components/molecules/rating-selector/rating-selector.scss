@@ -49,7 +49,7 @@ $product-review-rating-selector-icon-size: 16px;
 
         &__step:hover > &__star,
         &__step:hover ~ &__step > &__star {
-            color: $setting-color-main;
+            color: #ffbf1c;
         }
 
         &__step--active > &__star {
@@ -67,6 +67,9 @@ $product-review-rating-selector-icon-size: 16px;
         .product-review-count {
             font: 400 19px $setting-font-family;
             color: #979797;
+            @include helper-breakpoint-media-max($md-max) {
+                font-size: 18px;
+            }
         }
 
         @content;

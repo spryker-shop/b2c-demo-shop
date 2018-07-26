@@ -1,25 +1,75 @@
 {% extends template('widget') %}
 
 {% define data = {
-    images: _widget.product.images | default([])
+    images: _widget.product.images | default([]),
+    amountSlides: 6
 } %}
 
 {% block body %}
-    {% embed molecule('simple-carousel') with {
+
+    {% set sliderLength = data.images | length %}
+    {% set amountThumb = (sliderLength > data.amountSlides) ? data.amountSlides : sliderLength %}
+
+    {% embed molecule('slick-carousel') with {
+        class: 'pdp-slider',
         data: {
-            slides: data.images
+            slides: data.images,
+            containerClass: 'js-product-slider'
+        },
+        attributes: {
+            'data-json': '{
+                "slidesToShow": 1,
+                "slidesToScroll": 1,
+                "arrows": false,
+                "fade": true,
+                "dots": false,
+                "responsive": [
+                    {
+                        "breakpoint": 769,
+                        "settings": {
+                            "fade": false,
+                            "dots": true
+                        }
+                    }]
+            }'
         }
     } only %}
-        {% block slide %}
-            <div class="text-center product-image">
-                {% include atom('thumbnail') with {
-                    modifiers: ['bigger'],
-                    attributes: {
-                        itemprop: 'image',
-                        src: slide.externalUrlLarge
-                    }
-                } only %}
-            </div>
+        {% block slides %}
+            {% for slide in data.slides %}
+                <div class="pdp-img">
+                    <img src="{{ slide.externalUrlLarge }}" alt="" >
+                </div>
+            {% endfor %}
         {% endblock %}
     {% endembed %}
+
+
+    {% if (sliderLength > 1) %}
+        {% embed molecule('slick-carousel') with {
+            class: 'pdp-slider-thumbnails',
+            data: {
+                slides: data.images,
+                containerClass: 'js-product-slider-thumbnails'
+            },
+            attributes: {
+                'data-json': '{
+                    "slidesToShow": ' ~ amountThumb ~ ',
+                    "slidesToScroll": 1,
+                    "centerMode": true,
+                    "focusOnSelect": true,
+                    "vertical": true,
+                    "asNavFor": ".js-product-slider"
+                }'
+            }
+        } only %}
+            {% block slides %}
+                {% for slide in data.slides %}
+                    <div class="thumb">
+                        <img src="{{ slide.externalUrlSmall }}" alt="" >
+                    </div>
+                {% endfor %}
+            {% endblock %}
+        {% endembed %}
+    {% endif %}
+
 {% endblock %}
