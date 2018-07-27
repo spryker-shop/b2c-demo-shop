@@ -8,6 +8,7 @@
 namespace Pyz\Yves\ProductDetailPage;
 
 use Pyz\Yves\ExampleProductColorGroupWidget\Plugin\ProductDetailPage\ExampleProductColorGroupWidgetPlugin;
+use Pyz\Yves\ProductRelationWidget\Plugin\ProductDetailPage\UpSellingProductsWidgetPlugin;
 use SprykerShop\Yves\AvailabilityWidget\Plugin\ProductDetailPage\AvailabilityWidgetPlugin;
 use SprykerShop\Yves\CmsBlockWidget\Plugin\ProductDetailPage\ProductCmsBlockWidgetPlugin;
 use SprykerShop\Yves\PriceWidget\Plugin\ProductDetailPage\PriceWidgetPlugin;
@@ -39,6 +40,7 @@ class ProductDetailPageDependencyProvider extends SprykerShopProductDetailPageDe
             ProductCmsBlockWidgetPlugin::class,
             ProductReviewWidgetPlugin::class,
             ExampleProductColorGroupWidgetPlugin::class,
+            UpSellingProductsWidgetPlugin::class,
         ];
     }
 }
