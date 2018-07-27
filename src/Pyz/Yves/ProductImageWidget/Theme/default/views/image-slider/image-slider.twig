@@ -10,19 +10,21 @@
     {% set sliderLength = data.images | length %}
     {% set amountThumb = (sliderLength > data.amountSlides) ? data.amountSlides : sliderLength %}
 
-    {% embed molecule('slick-carousel') with {
+    {% include molecule('pdp-carousel', 'ProductImageWidget') with {
         class: 'pdp-slider',
         data: {
             slides: data.images,
-            containerClass: 'js-product-slider'
+            containerClass: 'js-product-slider',
+            thumbnailClass: 'js-product-slider-thumbnails'
         },
         attributes: {
-            'data-json': '{
+            'data-main-config': '{
                 "slidesToShow": 1,
                 "slidesToScroll": 1,
                 "arrows": false,
                 "fade": true,
                 "dots": false,
+                "asNavFor": ".js-product-slider-thumbnails",
                 "responsive": [
                     {
                         "breakpoint": 769,
@@ -31,45 +33,20 @@
                             "dots": true
                         }
                     }]
+            }',
+            'data-thumbnail-config': '{
+                "slidesToShow": ' ~ amountThumb ~ ',
+                "slidesToScroll": 1,
+                "asNavFor": ".js-product-slider",
+                "centerMode": true,
+                "focusOnSelect": true,
+                "vertical": true
             }'
         }
     } only %}
-        {% block slides %}
-            {% for slide in data.slides %}
-                <div class="pdp-img">
-                    <img src="{{ slide.externalUrlLarge }}" alt="" >
-                </div>
-            {% endfor %}
-        {% endblock %}
-    {% endembed %}
 
 
-    {% if (sliderLength > 1) %}
-        {% embed molecule('slick-carousel') with {
-            class: 'pdp-slider-thumbnails',
-            data: {
-                slides: data.images,
-                containerClass: 'js-product-slider-thumbnails'
-            },
-            attributes: {
-                'data-json': '{
-                    "slidesToShow": ' ~ amountThumb ~ ',
-                    "slidesToScroll": 1,
-                    "centerMode": true,
-                    "focusOnSelect": true,
-                    "vertical": true,
-                    "asNavFor": ".js-product-slider"
-                }'
-            }
-        } only %}
-            {% block slides %}
-                {% for slide in data.slides %}
-                    <div class="thumb">
-                        <img src="{{ slide.externalUrlSmall }}" alt="" >
-                    </div>
-                {% endfor %}
-            {% endblock %}
-        {% endembed %}
-    {% endif %}
+    {#{% if (sliderLength > 1) %}#}
+    {#{% endif %}#}
 
 {% endblock %}

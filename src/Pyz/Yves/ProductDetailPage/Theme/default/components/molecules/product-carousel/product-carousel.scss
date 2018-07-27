@@ -12,7 +12,7 @@
             padding: 8px 0;
         }
 
-        .pdp-slider {
+        .pdp-carousel__container {
             padding: 100px 70px;
             position: relative;
             background: rgba(0, 0, 0, 0.05);
@@ -69,6 +69,7 @@
                         height: 4px;
                         font: 0/0 $setting-font-family;
                         border-radius: 100%;
+                        background: #d3d3d3;
                     }
                     .slick-active {
                         border-color: #ff4859;
@@ -83,7 +84,7 @@
             }
         }
 
-        .pdp-slider-thumbnails {
+        .pdp-carousel__thumbnail {
             position: absolute;
             top: 50%;
             left: 32px;
@@ -94,7 +95,7 @@
                 border: none;
                 height: 52px;
             }
-            .thumb {
+            .pdp-img {
                 display: flex !important;
                 align-items: center;
                 width: 36px;
@@ -119,7 +120,7 @@
                     z-index: 350;
                 }
             }
-            .slick-current .thumb {
+            .slick-current .pdp-img {
                 padding: 0;
                 border: solid 2px #fff;
                 img {

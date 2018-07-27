@@ -4,6 +4,8 @@
     product: _view.product,
     productUrl: _view.productUrl,
 
+    cart: _view.cart,
+
     title: product.metaTitle | default(_view.product.name),
     metaTitle: product.metaTitle | default(_view.product.name),
     metaDescription: _view.product.metaDescription | default,
@@ -57,6 +59,10 @@
 
                     <div class="product-slider-container">
                         {{ widget('SimilarProductsWidgetPlugin', data.product) }}
+                    </div>
+
+                    <div class="product-slider-container">
+                        {{ widget('UpSellingProductsWidgetPlugin', data.cart) }}
                     </div>
 
                     {{ widget('ProductCmsBlockWidgetPlugin', data.product) }}
