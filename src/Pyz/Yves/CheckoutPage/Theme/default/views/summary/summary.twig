@@ -27,13 +27,13 @@
         }
     },
 
-    title: 'checkout.step.summary.title' | trans
+    title: null
 } %}
 
 {% block content %}
-    <div class="checkout-layout">
+    <div class="checkout-layout checkout-layout--full-width">
         <div class="grid">
-            <div class="col col--sm-12 col--lg-4">
+            <div class="col col--sm-12 col--lg-6">
                 <div class="summary-address">
                     <div class="summary-address__title">
                         <h5>{{ 'checkout.step.summary.payment' | trans }}</h5>
@@ -60,7 +60,7 @@
                 </div>
             </div>
 
-            <div class="col col--sm-12 col--lg-8 summary-right">
+            <div class="col col--sm-12 col--lg-6 summary-right">
                 <table class="summary-product-list">
                     <tr>
                         <th class="text-left" colspan="2">Product</th>
@@ -104,12 +104,14 @@
                     form: data.forms.summary,
                     submit: {
                         enable: true,
-                        text: 'checkout.step.place.order' | trans
+                        text: 'checkout.step.place.order' | trans,
+                        class: 'button button--black button--big button--expand'
                     },
                     cancel: {
                         enable: true,
                         url: data.backUrl,
-                        text: 'general.back.button' | trans
+                        text: 'general.back.button' | trans,
+                        class: 'button button--secondary button--hollow button--expand'
                     }
                 }
             } only %}

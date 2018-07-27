@@ -43,11 +43,22 @@
 
                         {% for key, choice in choices %}
                             <li class="list-switches__item list-switches__item--half-width">
-                                {{ form_row(data.form.idShipmentMethod[key], {
-                                    label: data.form.idShipmentMethod[key].vars.label,
-                                    rowAttr: {class: 'radio--with-bg-wrap'},
-                                    errors: data.form.idShipmentMethod.vars.errors
-                                }) }}
+                                {% if choice.value == 1 %}
+                                    {{ form_row(data.form.idShipmentMethod[key], {
+                                        label: data.form.idShipmentMethod[key].vars.label,
+                                        rowAttr: {class: 'radio--with-bg-wrap'},
+                                        attributes: {
+                                            'checked': 'checked'
+                                        },
+                                        errors: data.form.idShipmentMethod.vars.errors
+                                    }) }}
+                                {% else %}
+                                    {{ form_row(data.form.idShipmentMethod[key], {
+                                        label: data.form.idShipmentMethod[key].vars.label,
+                                        rowAttr: {class: 'radio--with-bg-wrap'},
+                                        errors: data.form.idShipmentMethod.vars.errors
+                                    }) }}
+                                {% endif %}
                             </li>
                         {% endfor %}
 

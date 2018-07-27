@@ -1,8 +1,15 @@
 @mixin shop-ui-checkout-layout ($name: '.checkout-layout'){
     #{$name} {
+
+        max-width: 570px;
+        margin: 0 auto;
         padding-bottom: 60px;
         font-size: 16px;
         overflow: hidden;
+
+        &--full-width {
+            max-width: 100%;
+        }
 
         h5 {
             @include helper-breakpoint-media-min($md-min) {
@@ -70,11 +77,6 @@
             @include helper-breakpoint-media-min($md-min) {
                 top: 7px !important;
             }
-        }
-
-        .payment-form-indent .form__fields {
-            padding-top: 15px;
-            padding-left: 21px;
         }
 
         .summary-address {
@@ -262,15 +264,14 @@
 
     .register-type {
         padding: 0 0 20px;
-        margin-bottom: 30px;
+        max-width: 570px;
+        margin: 0 auto 30px;
     }
 
     .checkout-content-wrap {
         @include helper-breakpoint-media-min($md-min) {
             padding-top: 80px;
         }
-        max-width: 570px;
-        margin: 0 auto;
     }
 
     .list-switches {
