@@ -1,0 +1,25 @@
+{% extends template('widget') %}
+
+{% define data = {
+    concreteProductId: _widget.product.idProductConcrete,
+    isAvailable: _widget.product.available
+} %}
+
+{%- block isAvailable -%}
+    {{- _widget.product.idProductConcrete and _widget.product.available -}}
+{%- endblock -%}
+
+{% block template %}
+    {% if data.concreteProductId is not empty and not data.isAvailable %}
+        {{parent()}}
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    <div class="pdp-option">
+        <div class="pdp-option__title">{{'cart.item_quantity' | trans}}</div>
+        <div class="pdp-option__wrapper">
+            <p class="text-alert">{{ "product.detail.out_of_stock" | trans }}</p>
+        </div>
+    </div>
+{% endblock %}

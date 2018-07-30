@@ -56,20 +56,20 @@
             {{ widget('ProductMeasurementUnitWidgetPlugin', data.product, isDisabled, options) }}
         {% else %}
 
-
+            {% if not isDisabled %}
                 <div class="pdp-option">
                     <div class="pdp-option__title">{{'cart.item_quantity' | trans}}</div>
                     <div class="pdp-option__wrapper">
-                        {% if not isDisabled %}
-                            {% include molecule('quantity-counter') with {
-                                modifiers: ['lg']
-                            } only %}
-                        {% endif %}
-
-                        {{ widget('AvailabilityWidgetPlugin', data.product) }}
+                        {% include molecule('quantity-counter') with {
+                            modifiers: ['lg']
+                        } only %}
                     </div>
                 </div>
+            {% endif %}
 
+            {% if not isAvailable %}
+                {{ widget('AvailabilityWidgetPlugin', data.product) }}
+            {% endif %}
 
             <div class="add-to-cart">
                 <button type="submit" class="button button--black button--expand" {{ isDisabled ? 'disabled' : '' }} onclick="this.form.submit(); this.disabled='disabled'; return false;" {{qa('add-to-cart-button')}}>
