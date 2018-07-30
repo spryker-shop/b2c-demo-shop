@@ -1,0 +1,86 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'wishlist-overview-table',
+    tag: 'div'
+} %}
+
+{% define data = {
+    wishlists: required,
+    wishlistForm: null
+} %}
+
+{% block body %}
+    <div class="is-scrollable-x">
+        <table class="table table--expand">
+            <thead>
+                <tr>
+                    <th width="35%">{{ 'customer.account.wishlist.overview.name' | trans }}</th>
+                    <th width="20%">{{ 'customer.account.wishlist.overview.item_count' | trans }}</th>
+                    <th width="20%">{{ 'customer.account.wishlist.overview.date' | trans }}</th>
+                    <th width="25%"></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for wishlist in data.wishlists %}
+                {% set hasWishlistForm = data.wishlistForm is not empty and wishlist.idWishlist == data.wishlistForm.vars.data.idWishlist %}
+                <tr>
+                    <td>
+                        {% if hasWishlistForm %}
+                            {{ form_start(data.wishlistForm) }}
+                                <div class="grid">
+                                    <div class="col">
+                                        {{ form_widget(data.wishlistForm.name, {attr: {placeholder: 'customer.account.wishlist.overview.enter_name'|trans}}) }}
+
+                                    </div>
+                                    <div class="col">
+                                        <button type="submit" class="button button--black">
+                                            {#{% include atom('icon') with {#}
+                                            {#data: {#}
+                                            {#name: 'save'#}
+                                            {#}#}
+                                            {#} only %}#}
+                                            Save
+                                        </button>
+                                    </div>
+                                </div>
+                            {{ form_errors(data.wishlistForm) }}
+                            {{ form_end(data.wishlistForm) }}
+                        {% else %}
+                            <a href="{{ path('wishlist/details', { wishlistName: wishlist.name }) }}">{{ wishlist.name }}</a>
+                        {% endif %}
+                    </td>
+                    <td>{{ wishlist.numberOfItems }}</td>
+                    <td>{{ wishlist.createdAt | formatDate }}</td>
+                    <td>
+                        <ul class="menu menu--inline float-right">
+                            <li class="menu__item">
+                                <a href="{{ url('wishlist/update', {wishlistName: wishlist.name}) }}" title="{{ 'customer.account.wishlist.overview.edit' | trans }}">
+                                    {#{% include atom('icon') with {#}
+                                        {#data: {#}
+                                            {#name: 'edit'#}
+                                        {#}#}
+                                    {#} only %}#}
+                                    {{ 'customer.account.wishlist.overview.edit' | trans }}
+                                </a>
+                            </li>
+                            <li class="menu__item">
+                                <form method="POST" action="{{ path('wishlist/delete', {wishlistName: wishlist.name}) }}">
+                                    <button type="submit" class="{{ config.name }}__button" title="{{ 'customer.account.wishlist.overview.delete' | trans }}">
+                                        {#{% include atom('icon') with {#}
+                                            {#data: {#}
+                                                {#name: 'remove'#}
+                                            {#}#}
+                                        {#} only %}#}
+                                        {{ 'customer.account.wishlist.overview.delete' | trans }}
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
