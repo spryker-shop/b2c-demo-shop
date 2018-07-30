@@ -31,21 +31,9 @@
 } %}
 
 {% block content %}
-    <div class="checkout-layout checkout-layout--full-width">
+    <div class="checkout-layout checkout-layout--summary-step checkout-layout--full-width">
         <div class="grid">
             <div class="col col--sm-12 col--lg-6">
-                <div class="summary-address">
-                    <div class="summary-address__title">
-                        <h5>{{ 'checkout.step.summary.payment' | trans }}</h5>
-                        {{ 'checkout.step.summary.with_method' | trans }} <strong>{{data.paymentMethod}}</strong>
-                    </div>
-                    {% include molecule('display-address') with {
-                        class: 'text-small',
-                        data: {
-                            address: data.billingAddress
-                        }
-                    } only %}
-                </div>
                 <div class="summary-address">
                     <div class="summary-address__title">
                         <h5>{{ 'checkout.step.summary.shipping' | trans }}</h5>
@@ -58,19 +46,27 @@
                         }
                     } only %}
                 </div>
+                <div class="summary-address">
+                    <div class="summary-address__title">
+                        <h5>{{ 'checkout.step.summary.payment' | trans }}</h5>
+                        {{ 'checkout.step.summary.with_method' | trans }} <strong>{{data.paymentMethod}}</strong>
+                    </div>
+                    {% include molecule('display-address') with {
+                        class: 'text-small',
+                        data: {
+                            address: data.billingAddress
+                        }
+                    } only %}
+                </div>
             </div>
 
             <div class="col col--sm-12 col--lg-6 summary-right">
-                <table class="summary-product-list">
-                    <tr>
-                        <th class="text-left" colspan="2">Product</th>
-                        <th class="text-center">Qty</th>
-                        <th class="text-right">Sum</th>
-                    </tr>
-                    {% for item in data.cartItems %}
+                <h5>{{ 'page.checkout.summary.product' | trans }}</h5>
+                <div class="summary-product-list">
+                    {#{% for item in data.cartItems %}
                         {% set item = item.bundleProduct is defined ? item.bundleProduct : item %}
                         {% set firstImage = item.images | first %}
-                        {% include molecule('summary-item', 'CheckoutPage') with {
+                        {% include molecule('cart-item', 'CartPage') with {
                             class: 'summary-product-list',
                             data: {
                                 name: item.name,
@@ -81,40 +77,40 @@
                                 bundleItems: item.bundleItems | default([])
                             }
                         } only %}
+                    {% endfor %}#}
+                    {% for cartItem in data.cartItems %}
+                        {% include molecule('cart-item', 'CartPage') with {
+                            class: 'summary-product-list__item',
+                            data: {
+                                cart: null,
+                                cartItem: cartItem,
+                                attributes: data.attributes[cartItem.sku] | default([])
+                            }
+                        } only %}
                     {% endfor %}
-                </table>
+                </div>
 
                 {{ widget('CartNoteQuoteNoteWidgetPlugin', data.transfer) }}
-
-                <div class="grid">
-                    <div class="col col--sm-6 summary-voucher">
-                        {{ widget('CheckoutVoucherFormWidgetPlugin', data.transfer) }}
-                    </div>
-                    <div class="col col--sm-6 summary-overview">
-                        {% include molecule('summary-overview', 'CheckoutPage') with {
-                            data: data.overview
-                        } only %}
-                    </div>
+                <div class="summary-voucher">
+                    {{ widget('CheckoutVoucherFormWidgetPlugin', data.transfer) }}
                 </div>
-            </div>
-
-            {% include molecule('form') with {
-                class: 'col col--sm-12',
-                data: {
-                    form: data.forms.summary,
-                    submit: {
-                        enable: true,
-                        text: 'checkout.step.place.order' | trans,
-                        class: 'button button--black button--big button--expand'
-                    },
-                    cancel: {
-                        enable: true,
-                        url: data.backUrl,
-                        text: 'general.back.button' | trans,
-                        class: 'button button--secondary button--hollow button--expand'
+                <div class="summary-overview">
+                    {% include molecule('summary-overview', 'CheckoutPage') with {
+                        data: data.overview
+                    } only %}
+                </div>
+                {% include molecule('form') with {
+                    class: 'checkout-buttons',
+                    data: {
+                        form: data.forms.summary,
+                        submit: {
+                            enable: true,
+                            text: 'checkout.step.place.order' | trans,
+                            class: 'button button--black button--big button--expand'
+                        }
                     }
-                }
-            } only %}
+                } only %}
+            </div>
 
         </div>
     </div>
