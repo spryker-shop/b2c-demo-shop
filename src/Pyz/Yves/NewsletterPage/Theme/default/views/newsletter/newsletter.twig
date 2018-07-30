@@ -12,9 +12,11 @@
         <div class="customer-account__box grid grid--justify grid--middle">
             <h5 class="customer-account__subtitle col">{{ 'customer.newsletter.subscription' | trans }}</h5>
         </div>
-        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.</p>
-        <p>Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus.</p>
 
+        <p>{{ 'account.newsletter.text' | trans }}</p>
+
+    </div>
+    <div class="box">
         {% include molecule('customer-form', 'CustomerPage') with {
             data: {
                 form: data.form,
