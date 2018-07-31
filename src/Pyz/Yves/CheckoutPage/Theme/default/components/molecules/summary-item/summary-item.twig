@@ -6,66 +6,78 @@
 } %}
 
 {% define data = {
+    cartItem: required,
     name: required,
     image: required,
     quantity: required,
-    price: 0,
     options: [],
-    bundleItems: [],
-    quantitySalesUnit: null
+    bundleItems: []
 } %}
 
 
 {% block body %}
-    {% set salesUnitName = data.quantitySalesUnit.productMeasurementUnit.name | default('') %}
-    {% set salesUnitSummary = '' %}
-    {% if salesUnitName %}
-        {% set salesUnitSummary = data.quantitySalesUnit.value / data.quantitySalesUnit.precision ~ ' ' ~ salesUnitName | trans %}
-    {% endif %}
+    {% set canEditCart = (not is_granted('IS_AUTHENTICATED_FULLY') or can('WriteSharedCartPermissionPlugin', null)) %}
+    {% set cartItemSubTotal = data.cartItem.quantity * data.cartItem.unitPrice %}
 
-    <tr>
-        <td class="text-left checkout-product-img">
-            {% if data.image is not empty %}
-                {% include atom('thumbnail') with {
-                    attributes: {
-                        alt: data.name,
-                        src: data.image
+    <div class="shopping-cart__box">
+        <div class="grid grid--justify grid--no-wrap">
+            <div class="cart-item__image col ">
+                {% include molecule('cart-image', 'CartPage') with {
+                    data: {
+                        name: data.cartItem.name | default(''),
+                        image: data.cartItem.images is empty ? null : (data.cartItem.images | first)
                     }
                 } only %}
-            {% else %}
-                <div class="text-center">
-                    <small>{{ 'global.no_image_available' | trans }}</small>
+            </div>
+            <div class="cart-item__content col">
+                <div class="grid grid--justify grid--middle">
+                    <span class="cart-item__title col col--lg-8 col--sm-12">{{ data.cartItem.name }}</span>
+                    <div class="cart-item__price col col--lg-4 col--sm-12">
+                        <span class="cart-item__price">{{ cartItemSubTotal | money }}</span>
+                    </div>
                 </div>
-            {% endif %}
-        </td>
-        <td class="text-left">
-            {{data.name}} <br>
-            {% if salesUnitSummary is not empty %}(= {{ salesUnitSummary }}){% endif %}
-            {% if data.bundleItems is not empty %}
-                <ul>
-                    <li>{{ 'checkout.summary.item.bundle.description' | trans }}</li>
-                    {% for item in data.bundleItems %}
-                        <li>  - {{ item.quantity }} x {{ item.name }}  </li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
+                <div class="cart-item__options">
+                    {% if data.cartItem.concreteAttributes is not empty %}
+                        <ul>
+                            {% for key, item in data.cartItem.concreteAttributes %}
+                                <li> {{ ('product.attribute.' ~ key) | trans }}: {{ item }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                    {% if data.bundleItems is not empty %}
+                        <ul>
+                            {% for item in data.bundleItems %}
+                                <li>  - {{ item.quantity }} x {{ item.name }}  </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                    {% if data.options is not empty %}
+                        <ul>
+                            {% for option in data.options %}
+                                <li class="grid grid--justify grid--middle">
+                                    <span class="col col--lg-8 col--sm-12"> + {{ option.value | trans }}:</span>
+                                    <span class="col col--lg-4 col--sm-12 text-right">{{ option.sumPrice | default(0) | money }}</span>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
 
-            {% if data.options is not empty %}
-                <ul>
-                    <li>{{ 'checkout.summary.item.option.description' | trans }}</small></li>
-                    {% for option in data.options %}
-                        <li> + {{ option.value | trans }} <strong>{{ option.sumPrice | default(0) | money }}</strong></li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
-        </td>
-        <td class="text-center">
-            {{data.quantity}}
-        </td>
-        <td class="text-right">
-            {{data.price}}
-        </td>
-    </tr>
+                    <div class="cart-quantity-input">
+                        {{ 'cart.item_quantity' | trans }}:  {{ data.cartItem.quantity }}
+                    </div>
+
+                    {% if canEditCart %}
+                        <a class="cart-item__remove" href="{{ path('cart/remove', {'sku': data.cartItem.sku, 'groupKey': data.cartItem.groupKey }) }}">
+                            {{ 'remove' | trans }}
+                        </a>
+                    {% endif %}
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
 
 
 {% endblock %}
