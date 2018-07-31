@@ -34,7 +34,7 @@
     <div class="checkout-layout checkout-layout--summary-step checkout-layout--full-width">
         <div class="grid">
             <div class="col col--sm-12 col--lg-6">
-                <div class="summary-item summary-address">
+                <div class="summary-item-left summary-address">
                     <h5>{{ 'checkout.step.address.title' | trans }}</h5>
                     <div class="grid">
                         <div class="col col--sm-12 col--md-6">
@@ -69,7 +69,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="summary-item">
+                <div class="summary-item-left">
                     <h5>{{ 'checkout.step.summary.shipping' | trans }}</h5>
                     <ul class="list">
                         <li class="list__item">{{ data.shipmentMethod.carrierName | trans }}</li>
@@ -82,7 +82,7 @@
                         {% endif %}
                     {% endfor %}
                 </div>
-                <div class="summary-item">
+                <div class="summary-item-left">
                     <h5>{{ 'checkout.step.summary.payment' | trans }}</h5>
                     <ul class="list">
                         <li class="list__item">{{data.payment.paymentSelection | trans}}</li>

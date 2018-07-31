@@ -14,11 +14,12 @@
         h5 {
             @include helper-breakpoint-media-min($md-min) {
                 font-size: 47px;
+                margin-bottom: 3.6rem;
             }
             font: 700 32px $setting-font-family-additional;
             letter-spacing: -0.5px;
             padding-bottom: 10px;
-            margin-bottom: 3.6rem;
+            margin-bottom: 2rem;
             border-bottom: dotted 1px $setting-color-lightest;
         }
 
@@ -170,9 +171,12 @@
             margin-top: 60px;
         }
 
-        .summary-item {
-            & + .summary-item {
-                margin-top: 70px;
+        .summary-item-left {
+            & + .summary-item-left {
+                @include helper-breakpoint-media-min($md-min) {
+                    margin-top: 70px;
+                }
+                margin-top: 60px;
             }
             &-edit {
                 display: inline-block;
