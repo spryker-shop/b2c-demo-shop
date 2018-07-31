@@ -6,27 +6,21 @@ export default class PdpCarousel extends Component {
 
     readyCallback(): void {
 
-        const mainSlider = $(this).find(`.${this.name}__container`);
-        const imgAmount = mainSlider.find('img').length;
+        const thumbnailSlider = $(this).find(`.${this.name}__thumbnail`);
+        const imgContainer = $(this).find(`.${this.name}__container`);
+        const imgAmount = thumbnailSlider.find('img').length;
+
+        function animateImage(index) {
+            imgContainer.find('.pdp-img').stop(true);
+            imgContainer.find('.pdp-img').css('opacity', 0);
+            imgContainer.find('.pdp-img').eq(index).animate({
+                opacity: 1
+            }, 600);
+        }
 
         if(imgAmount > 1) {
-            const thumbnailSlider = $(this).find(`.${this.name}__thumbnail`);
-            const mainSliderConfig = $(this).data('main-config');
+
             const thumbnailSliderConfig = $(this).data('thumbnail-config');
-
-            const afterChangeConfig = {
-                afterChange: function (slickSlider, i) {
-                    thumbnailSlider.find('.slick-slide').removeClass('slick-active');
-                    thumbnailSlider.find('.slick-slide').eq(i).addClass('slick-active');
-                }
-            };
-            $.extend( mainSliderConfig, afterChangeConfig );
-
-            mainSlider.slick(
-                mainSliderConfig
-            );
-
-            thumbnailSlider.find('.slick-slide').eq(0).addClass('slick-active');
 
             thumbnailSlider.slick(
                 thumbnailSliderConfig
@@ -34,14 +28,24 @@ export default class PdpCarousel extends Component {
 
             thumbnailSlider.on('mouseenter', '.slick-slide', function (e) {
                 let $currTarget = $(e.currentTarget),
-                    index = $currTarget.data('slick-index'),
-                    slickObj = mainSlider.slick('getSlick');
+                    index = $currTarget.data('slick-index');
 
-                slickObj.slickGoTo(index);
-
+                if(!$currTarget.hasClass('slick-current')) {
+                    thumbnailSlider.find('.slick-slide').removeClass('slick-current');
+                    $currTarget.addClass('slick-current');
+                    animateImage(index);
+                }
             });
+
+            thumbnailSlider.on('afterChange', function(slick, currentSlide){
+                let index = currentSlide.currentSlide;
+                animateImage(index);
+            });
+
         }
 
     }
+
+
 
 }
