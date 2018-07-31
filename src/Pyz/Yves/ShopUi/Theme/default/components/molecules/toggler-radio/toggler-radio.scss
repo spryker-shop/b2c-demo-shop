@@ -1,21 +1,11 @@
-@mixin shop-ui-radio($name: '.radio') {
-    @include shop-ui-checkbox($name) {
-        &__box,
-        &__check {
-            border-radius: 100%;
-        }
+@mixin shop-ui-toggler-radio($name: '.toggler-radio') {
+    @include shop-ui-radio($name) {
+        @content;
+    };
 
-        &__input:checked + .radio__box {
-            border: 1px solid $setting-color-main;
-            background-color: $setting-color-main;
-        }
-
-        .checkbox__check {
-            display: none !important;
-        }
-
+    #{$name} {
         &--with-bg,
-        &--with-bg-wrap & {
+        &--with-bg & {
             margin-bottom: 0;
             display: block;
 
@@ -47,13 +37,6 @@
                     border-radius: 3px;
                 }
             }
-
-            &#{$name}--error {
-                #{$name}__box::before {
-                    border-color: map-get($setting-color-actions, alert);
-                }
-            }
-
             #{$name}__input:checked + #{$name}__box {
                 border: 3px solid $setting-color-white;
                 background-color: #222;
@@ -63,13 +46,10 @@
                     background-color: #c6e3e3;
                 }
             }
-
             #{$name}__label {
                 font-weight: 500;
                 color: #222;
             }
         }
-
-        @content;
     }
 }

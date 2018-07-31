@@ -6,7 +6,7 @@
         payment: _view.paymentForm
     },
 
-    title: 'checkout.step.payment.title' | trans
+    title: null
 } %}
 
 {% block content %}
@@ -21,58 +21,81 @@
             },
             submit: {
                 enable: true,
-                text: 'checkout.step.summary' | trans
+                text: 'checkout.step.summary' | trans,
+                class: 'button button--black button--big button--expand'
             },
             cancel: {
                 enable: true,
                 url: data.backUrl,
-                text: 'general.back.button' | trans
+                text: 'general.back.button' | trans,
+                class: 'button button--secondary button--hollow button--expand'
             }
         }
     } only %}
         {% block fieldset %}
+
             {% for name, choices in data.form.paymentSelection.vars.choices %}
-                <h5>{{ ('checkout.payment.provider.' ~ name) | trans }}</h5>
 
-                <ul class="list spacing-y">
+                <ul class="list-switches register-type">
                     {% for key, choice in choices %}
-                        <li class="list__item spacing-y clear">
-                            {% embed molecule('form') with {
-                                class: 'payment-form-indent',
-                                data: {
-                                    form: data.form[data.form.paymentSelection[key].vars.value],
-                                    enableStart: false,
-                                    enableEnd: false,
-                                    layout: {
-                                        'card_expires_month': 'col col--sm-4 col--bottom',
-                                        'card_expires_year': 'col col--sm-8 col--bottom'
-                                    }
-                                },
-                                embed: {
-                                    index: loop.index,
-                                    toggler: data.form.paymentSelection[key]
-                                }
-                            } only %}
-                                {% block fieldset %}
-                                    {{ form_row(embed.toggler, {
-                                        required: false,
-                                        component: molecule('toggler-radio'),
-                                        attributes: {
-                                            'target-selector': '.js-payment-method-' ~ embed.index,
-                                            'class-to-toggle': 'is-hidden'
-                                        }
-                                    }) }}
-
-                                    <div class="col col--sm-12 is-hidden js-payment-method-{{embed.index}}">
-                                        <div class="col col--sm-12 col--md-6">
-                                            {{parent()}}
-                                        </div>
-                                    </div>
-                                {% endblock %}
-                            {% endembed %}
+                        <li class="list-switches__item">
+                            {% if key == 0 %}
+                                {{ form_row(data.form.paymentSelection[key], {
+                                    required: false,
+                                    component: molecule('toggler-radio'),
+                                    attributes: {
+                                        'target-selector': '.js-payment-method-' ~ loop.index,
+                                        'class-to-toggle': 'is-hidden',
+                                        'checked': 'checked'
+                                    },
+                                    rowAttr: {class: 'toggler-radio--with-bg-wrap'},
+                                }) }}
+                            {% else %}
+                                {{ form_row(data.form.paymentSelection[key], {
+                                    required: false,
+                                    component: molecule('toggler-radio'),
+                                    attributes: {
+                                        'target-selector': '.js-payment-method-' ~ loop.index,
+                                        'class-to-toggle': 'is-hidden'
+                                    },
+                                    rowAttr: {class: 'toggler-radio--with-bg-wrap'},
+                            }) }}
+                            {% endif %}
                         </li>
                     {% endfor %}
                 </ul>
+
+                {% for key, choice in choices %}
+                    {% embed molecule('form') with {
+                        class: 'payment-form-indent grid',
+                        data: {
+                            form: data.form[data.form.paymentSelection[key].vars.value],
+                            enableStart: false,
+                            enableEnd: false,
+                            layout: {
+                                'card_number': 'col col--sm-6',
+                                'name_on_card': 'col col--sm-6',
+                                'card_expires_month': 'col col--sm-3 col--bottom',
+                                'card_expires_year': 'col col--sm-3 col--bottom',
+                                'card_security_code': 'col col--sm-6 col--bottom'
+                            }
+                        },
+                        embed: {
+                            index: loop.index,
+                            toggler: data.form.paymentSelection[key]
+                        }
+                    } only %}
+
+                        {% block fieldset %}
+                            <div class="js-payment-method-{{embed.index}} is-hidden">
+                                <h5>{{ embed.toggler.vars.label | trans }}</h5>
+                                {{parent()}}
+                            </div>
+                        {% endblock %}
+
+                    {% endembed %}
+                {% endfor %}
+
             {% endfor %}
         {% endblock %}
     {% endembed %}
