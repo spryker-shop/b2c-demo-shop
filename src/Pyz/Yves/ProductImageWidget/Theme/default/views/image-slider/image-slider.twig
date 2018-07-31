@@ -2,7 +2,7 @@
 
 {% define data = {
     images: _widget.product.images | default([]),
-    amountSlides: 6
+    amountSlides: 5
 } %}
 
 {% block body %}
@@ -14,39 +14,30 @@
         class: 'pdp-slider',
         data: {
             slides: data.images,
-            containerClass: 'js-product-slider',
-            thumbnailClass: 'js-product-slider-thumbnails'
+            containerClass: sliderLength > 1 ? 'js-product-slider' : '',
+            thumbnailClass: sliderLength > 1 ? 'js-product-slider-thumbnails' : ''
         },
         attributes: {
-            'data-main-config': '{
-                "slidesToShow": 1,
+            'data-thumbnail-config': '{
+                "slidesToShow": ' ~ amountThumb ~ ',
                 "slidesToScroll": 1,
-                "arrows": false,
-                "fade": true,
-                "dots": false,
-                "asNavFor": ".js-product-slider-thumbnails",
+                "infinite": false,
+                "vertical": true,
+                "prevArrow": "<dev class=\'thumb-prev\'><svg class=\'icon\'><use href=\'#:arrow-down\'></use></svg></div>",
+                "nextArrow": "<dev class=\'thumb-next\'><svg class=\'icon\'><use href=\'#:arrow-down\'></use></svg></div>",
                 "responsive": [
                     {
                         "breakpoint": 769,
                         "settings": {
-                            "fade": false,
+                            "slidesToShow": 1,
+                            "vertical": false,
+                            "infinite": true,
+                            "arrows": false,
                             "dots": true
                         }
                     }]
-            }',
-            'data-thumbnail-config': '{
-                "slidesToShow": ' ~ amountThumb ~ ',
-                "slidesToScroll": 1,
-                "asNavFor": ".js-product-slider",
-                "centerMode": true,
-                "focusOnSelect": true,
-                "vertical": true
             }'
         }
     } only %}
-
-
-    {#{% if (sliderLength > 1) %}#}
-    {#{% endif %}#}
 
 {% endblock %}
