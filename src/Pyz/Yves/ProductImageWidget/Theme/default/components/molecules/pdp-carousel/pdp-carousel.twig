@@ -16,6 +16,8 @@
     'data-thumbnail-config': ''
 } %}
 
+{% set sliderLength = data.slides | length %}
+
 {% block body %}
 
     <div class="{{config.name}}__container {{ data.containerClass }}">
@@ -26,12 +28,14 @@
         {% endfor %}
     </div>
 
-    <div class="{{config.name}}__thumbnail {{ data.thumbnailClass }}">
-        {% for slide in data.slides %}
-            <div class="pdp-img">
-                <img src="{{ slide.externalUrlLarge }}" alt="" >
-            </div>
-        {% endfor %}
-    </div>
+    {% if (sliderLength > 1) %}
+        <div class="{{config.name}}__thumbnail {{ data.thumbnailClass }}">
+            {% for slide in data.slides %}
+                <div class="pdp-img">
+                    <img src="{{ slide.externalUrlLarge }}" alt="" >
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
 
 {% endblock %}

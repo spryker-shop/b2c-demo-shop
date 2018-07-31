@@ -1,5 +1,12 @@
 @mixin shop-ui-jumbotron-slider($name: '.jumbotron-slider') {
     #{$name} {
+        min-height: 450px;
+        @include helper-breakpoint-media-max($lg-max){
+            min-height: 290px;
+        }
+        @include helper-breakpoint-media-max($sm-max){
+            min-height: 212px;
+        }
         .slick-slide {
             margin: 0 4px;
         }
@@ -28,6 +35,11 @@
                 button {
                     font-size: 0;
                 }
+            }
+        }
+        .slick-initialized {
+            .jumbotron-slider-item__container {
+                display: flex !important;
             }
         }
     }

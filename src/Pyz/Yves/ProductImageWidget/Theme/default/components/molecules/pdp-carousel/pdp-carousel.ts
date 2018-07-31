@@ -7,37 +7,40 @@ export default class PdpCarousel extends Component {
     readyCallback(): void {
 
         const mainSlider = $(this).find(`.${this.name}__container`);
-        const thumbnailSlider = $(this).find(`.${this.name}__thumbnail`);
-        const mainSliderConfig = $(this).data('main-config');
-        const thumbnailSliderConfig = $(this).data('thumbnail-config');
+        const imgAmount = mainSlider.find('img').length;
 
-        const afterChangeConfig = {
-            afterChange: function (slickSlider, i) {
-                thumbnailSlider.find('.slick-slide').removeClass('slick-active');
-                thumbnailSlider.find('.slick-slide').eq(i).addClass('slick-active');
-            }
-        };
-        $.extend( mainSliderConfig, afterChangeConfig );
+        if(imgAmount > 1) {
+            const thumbnailSlider = $(this).find(`.${this.name}__thumbnail`);
+            const mainSliderConfig = $(this).data('main-config');
+            const thumbnailSliderConfig = $(this).data('thumbnail-config');
 
-        mainSlider.slick(
-            mainSliderConfig
-        );
+            const afterChangeConfig = {
+                afterChange: function (slickSlider, i) {
+                    thumbnailSlider.find('.slick-slide').removeClass('slick-active');
+                    thumbnailSlider.find('.slick-slide').eq(i).addClass('slick-active');
+                }
+            };
+            $.extend( mainSliderConfig, afterChangeConfig );
 
-        thumbnailSlider.find('.slick-slide').eq(0).addClass('slick-active');
+            mainSlider.slick(
+                mainSliderConfig
+            );
 
-        thumbnailSlider.slick(
-            thumbnailSliderConfig
-        );
+            thumbnailSlider.find('.slick-slide').eq(0).addClass('slick-active');
 
-        thumbnailSlider.on('mouseenter', '.slick-slide', function (e) {
-            let $currTarget = $(e.currentTarget),
-                index = $currTarget.data('slick-index'),
-                slickObj = mainSlider.slick('getSlick');
+            thumbnailSlider.slick(
+                thumbnailSliderConfig
+            );
 
-            slickObj.slickGoTo(index);
+            thumbnailSlider.on('mouseenter', '.slick-slide', function (e) {
+                let $currTarget = $(e.currentTarget),
+                    index = $currTarget.data('slick-index'),
+                    slickObj = mainSlider.slick('getSlick');
 
-        });
+                slickObj.slickGoTo(index);
 
+            });
+        }
 
     }
 

@@ -38,13 +38,12 @@
         <div class="grid grid--justify">
 
             {% if isUserLoggedIn %}
-                <div class="col col--sm-6 wishlist-input">
-                    {% include molecule('ajax-renderer') with {
-                        attributes: {
-                            'provider-selector': '.' ~ config.jsName ~ '__provider'
-                        }
-                    } only %}
-                </div>
+                {% include molecule('ajax-renderer') with {
+                    class: 'col col--sm-6 wishlist-input',
+                    attributes: {
+                        'provider-selector': '.' ~ config.jsName ~ '__provider'
+                    }
+                } only %}
             {% endif %}
 
             <div class="col col--expand">
