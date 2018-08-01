@@ -1,18 +1,17 @@
-{% extends template('page-layout-checkout', 'CheckoutPage') %}
+{% extends template('page-layout-main') %}
 
 {% define data = {
     title: required,
     message: required
 } %}
 
-{% block pageInfo %}{% endblock %}
+{% block breadcrumbs %}{% endblock %}
+
+{% block title %}
+    <h1 class="main-title">{{data.title}}</h1>
+{% endblock %}
 
 {% block content %}
-    <h1 class="main-title">{{data.title}}</h1>
     <p class="text-center"><big>{{data.message}}</big></p>
-    <br>
-    <p class="text-center">
-        <img src="/assets/images/spryker-team.jpeg">
-    </p>
     <br><br>
 {% endblock %}
