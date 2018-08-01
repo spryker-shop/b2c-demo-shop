@@ -3,10 +3,12 @@ import Component from 'ShopUi/models/component';
 export default class ColorSelector extends Component {
     colors: HTMLAnchorElement[]
     images: HTMLImageElement[]
+    links: HTMLElement[]
 
     protected readyCallback(): void {
         this.colors = <HTMLAnchorElement[]>Array.from(this.getElementsByClassName(`${this.jsName}__color`));
-        this.images = <HTMLImageElement[]>Array.from(document.querySelectorAll(this.targetImageSelector));
+        this.links = <HTMLElement[]>Array.from(document.querySelectorAll(this.targetLinkSelector));
+        this.images = <HTMLImageElement[]>Array.from(document.querySelectorAll(`${this.targetLinkSelector} img`));
         this.mapEvents();
     }
 
@@ -20,8 +22,10 @@ export default class ColorSelector extends Component {
         event.preventDefault();
         const color = <HTMLAnchorElement>event.currentTarget;
         const imageSrc = color.getAttribute('data-image-src');
+        const productUrl = color.getAttribute('href');
         this.changeActiveColor(color);
         this.changeImage(imageSrc);
+        this.changeProductUrl(productUrl);
     }
 
     changeActiveColor(newColor: HTMLAnchorElement): void {
@@ -33,7 +37,6 @@ export default class ColorSelector extends Component {
     }
 
     changeImage(newImageSrc: string): void {
-        console.log(this.images);
         this.images.forEach((image: HTMLImageElement) => {
             console.log(newImageSrc);
             if (image.src !== newImageSrc) {
@@ -42,7 +45,15 @@ export default class ColorSelector extends Component {
         });
     }
 
-    get targetImageSelector(): string {
+    changeProductUrl(url: string): void {
+        this.links.forEach((link: HTMLElement) => {
+            if (link.getAttribute('href') !== url) {
+                link.setAttribute('href', url);
+            }
+        });
+    }
+
+    get targetLinkSelector(): string {
         return this.getAttribute('target-image-selector');
     }
 }
