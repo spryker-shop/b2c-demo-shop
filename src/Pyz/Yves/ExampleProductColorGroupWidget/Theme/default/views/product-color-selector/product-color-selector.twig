@@ -6,7 +6,7 @@
 } %}
 
 {% block body %}
-    {% embed molecule('color-selector', 'ExampleProductColorGroupWidget') with {
+    {% include molecule('color-selector', 'ExampleProductColorGroupWidget') with {
         class: 'text-center',
         data: {
             items: data.items
@@ -15,8 +15,4 @@
             'target-image-selector': '.js-product-color-group__image-' ~ data.idProductAbstract ~ ' > img'
         }
     } only %}
-        {% block body %}
-            <hr />{{parent()}}<hr />
-        {% endblock %}
-    {% endembed %}
 {% endblock %}
