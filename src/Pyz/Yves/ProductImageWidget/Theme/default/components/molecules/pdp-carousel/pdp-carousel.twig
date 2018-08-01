@@ -6,6 +6,7 @@
 } %}
 
 {% define data = {
+    idProductAbstract: required,
     slides: [],
     containerClass: '',
     thumbnailClass: ''
@@ -17,6 +18,7 @@
 } %}
 
 {% set sliderLength = data.slides | length %}
+{% set firstSlide = data.slides | first %}
 
 {% block body %}
 
@@ -26,6 +28,9 @@
                 <img src="{{ slide.externalUrlLarge }}" alt="" >
             </div>
         {% endfor %}
+        <div class="pdp-img js-pdp-color-group__image-{{ data.idProductAbstract }}">
+            <img src="{{ firstSlide.externalUrlLarge }}" alt="" >
+        </div>
     </div>
 
     {% if (sliderLength > 1) %}

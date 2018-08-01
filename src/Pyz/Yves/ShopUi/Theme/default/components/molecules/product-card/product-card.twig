@@ -21,6 +21,7 @@
             {% block image %}
                 <a href="{{data.url}}" class="{{ config.name }}__overlay">
                     {% include atom('thumbnail') with {
+                        class: 'js-product-color-group__image-' ~ data.abstractId,
                         attributes: {
                             alt: data.name,
                             src: data.imageUrl,
