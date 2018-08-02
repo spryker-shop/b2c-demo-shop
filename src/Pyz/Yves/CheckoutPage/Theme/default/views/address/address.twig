@@ -29,16 +29,42 @@
         }
     } only %}
         {% block fields %}
+
+            <h5>{{ 'page.checkout.address.shipping-address' | trans }}</h5>
+            {% set existingShippingAddresses = data.form.shippingAddress.id_customer_address | default %}
+            {% set hasShippingAddresses = existingShippingAddresses is not empty %}
+
+            {% if hasShippingAddresses %}
+                <div class="grid">
+                    <div class="form__field col col--sm-12">
+                        <ul class="list spacing-y">
+                            {% for address in existingShippingAddresses %}
+                                <li class="list__item spacing-y">
+                                    {{
+                                    form_row(address, {
+                                        component: molecule('toggler-radio'),
+                                        attributes: {
+                                            'target-selector': '.js-address__shipping',
+                                            'class-to-toggle': 'is-hidden',
+                                            'add-class-when-checked': not loop.last
+                                        }
+                                    })
+                                    }}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            {% endif %}
+
             {% include molecule('form') with {
-                class: 'address-form',
+                class: 'address-form js-address__shipping' ~ (hasShippingAddresses ? ' is-hidden' : ''),
                 data: {
                     class: 'col col--sm-6',
-                    title: 'page.checkout.address.shipping-address' | trans,
                     form: embed.forms.shipping,
                     enableStart: false,
                     enableEnd: false,
                     layout: {
-                        id_customer_address: 'col col--sm-12 checkout__address-list',
                         salutation: 'col col--md-2',
                         first_name: 'col col--md-5',
                         last_name: 'col col--md-5',
@@ -56,24 +82,25 @@
                     }
                 }
             } only %}
+
             <h5>{{'page.checkout.address.billing-address' | trans}}</h5>
             <div class="address-form">
                 {{form_row(data.form.billingSameAsShipping, {
                     component: molecule('toggler-checkbox'),
                     attributes: {
-                        'target-selector': '.js-address__billing',
+                        'target-selector': '.js-address__billing-same-as-shipping',
                         'class-to-toggle': 'is-hidden',
                         'add-class-when-checked': true
                     }
                 })}}
-                {% include molecule('form') with {
-                    class: 'address-form__billing js-address__billing form__fields is-hidden',
+
+                {% embed molecule('form') with {
+                    class: 'is-hidden spacing-top spacing-top--big js-address__billing-same-as-shipping',
                     data: {
                         form: embed.forms.billing,
                         enableStart: false,
                         enableEnd: false,
                         layout: {
-                            id_customer_address: 'col col--sm-12 checkout__address-list',
                             salutation: 'col col--md-2',
                             first_name: 'col col--md-5',
                             last_name: 'col col--md-5',
@@ -91,6 +118,36 @@
                         }
                     }
                 } only %}
+                    {% block fields %}
+                        {% set existingBillingAddresses = data.form.id_customer_address | default %}
+                        {% set hasBillingAddresses = existingBillingAddresses is not empty %}
+
+                        {% if hasBillingAddresses %}
+                            <div class="form__field col col--sm-12">
+                                <ul class="list spacing-y">
+                                    {% for address in existingBillingAddresses %}
+                                        <li class="list__item spacing-y">
+                                            {{
+                                            form_row(address, {
+                                                component: molecule('toggler-radio'),
+                                                attributes: {
+                                                    'target-selector': '.js-address__billing',
+                                                    'class-to-toggle': 'is-hidden',
+                                                    'add-class-when-checked': not loop.last
+                                                }
+                                            })
+                                            }}
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endif %}
+
+                        <div class="js-address__billing">
+                            {{parent()}}
+                        </div>
+                    {% endblock %}
+                {% endembed %}
             </div>
         {% endblock %}
     {% endembed %}
