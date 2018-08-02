@@ -1,16 +1,23 @@
 import Component from 'ShopUi/models/component';
-import $ from 'jquery/dist/jquery';
+import CheckTouch from 'ShopUiProject/components/molecules/check-touch/check-touch';
 
 export default class VideoReplacer extends Component {
-    readyCallback(): void {
-        const video = $(this).find('video');
-        const videoSrc = video.data('src');
-        const width = document.body.clientWidth;
+    CheckTouch: CheckTouch
+    video: HTMLVideoElement
 
-        $(window).on('load resize', function () {
-            if(width > 550){
-                video.prop('src', videoSrc);
-            }
-        })
+    readyCallback(): void {
+        this.video = <HTMLVideoElement>this.querySelector('video');
+        this.CheckTouch = <CheckTouch> document.querySelector('.check-touch');
+
+        if( !this.CheckTouch.isTouchDevice ){
+            this.video.setAttribute('src', this.videoSrc);
+        }
+        else {
+            this.video.style.display = 'none';
+        }
+    }
+
+    get videoSrc():string {
+        return this.video.getAttribute('data-src');
     }
 }
