@@ -33,6 +33,76 @@
             text-transform: uppercase;
         }
 
+        &__form-width {
+            @include helper-breakpoint-media-min($md-min) {
+                padding-left: 0;
+                padding-right: 0;
+            }
+
+            padding-left: 1rem;
+            padding-right: 1rem;
+            max-width: 570px;
+            overflow: hidden;
+            margin-left: auto;
+            margin-right: auto;
+
+            .form__container {
+                margin-left: -1rem;
+                margin-right: -1rem;
+
+                & > .list {
+                    margin: 0 1rem;
+                }
+            }
+        }
+
+        &--login-wrap {
+            margin-top: 40px;
+
+            .form__title {
+                @include helper-breakpoint-media-min($md-min) {
+                    font-size: 47px;
+                    margin-bottom: 3.6rem;
+                }
+                font: 700 32px $setting-font-family-additional;
+                letter-spacing: -0.5px;
+                padding-bottom: 10px;
+                margin-bottom: 2rem;
+                border-bottom: dotted 1px $setting-color-lightest;
+            }
+
+            .form__actions {
+                padding-top: 29px;
+                padding-bottom: 0;
+                display: flex;
+                flex-direction: column-reverse;
+                align-items: flex-end;
+            }
+
+            .form__action {
+                margin: 0;
+            }
+
+            .forgot-password-link {
+                @include helper-breakpoint-media-min($md-min) {
+                    margin-top: 16px;
+                }
+                margin-top: 20px;
+            }
+
+            .checkbox__box {
+                 @include helper-breakpoint-media-min($md-min) {
+                     margin-top: 4px;
+                 }
+             }
+
+            .checkbox__check {
+                @include helper-breakpoint-media-min($md-min) {
+                    top: 7px !important;
+                }
+            }
+        }
+
         .customer-navigation {
             margin-top: 30px;
         }

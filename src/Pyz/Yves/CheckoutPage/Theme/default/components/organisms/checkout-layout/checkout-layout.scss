@@ -40,7 +40,7 @@
         }
 
         .col:not(.cart-item__image) {
-            @include helper-breakpoint-media-max($md-max) {
+            @include helper-breakpoint-media-max($sm-max) {
                 width: 100%;
             }
         }
@@ -108,9 +108,7 @@
         }
 
         .address-form {
-            &.form {
-                margin-bottom: 2.6rem;
-            }
+            & + h5,
             &__billing {
                 margin-top: 2.6rem;
             }
@@ -171,28 +169,29 @@
             margin-top: 60px;
         }
 
-        .summary-item-left {
-            & + .summary-item-left {
+        .summary-item-wrap {
+            & + .summary-item-wrap {
                 @include helper-breakpoint-media-min($md-min) {
                     margin-top: 70px;
                 }
                 margin-top: 60px;
             }
-            &-edit {
-                display: inline-block;
-                font: 300 13px $setting-font-family-additional;
-                opacity: .4;
-                margin-top: 1rem;
-                &:hover {
-                    text-decoration: none;
-                    color: inherit;
-                    opacity: 1;
-                }
-            }
             .grid {
                 margin: 0;
                 max-width: 100%;
                 display: flex;
+            }
+        }
+
+        .summary-item-edit {
+            display: inline-block;
+            font: 300 13px $setting-font-family-additional;
+            opacity: .4;
+            margin-top: 1rem;
+            &:hover {
+                text-decoration: none;
+                color: inherit;
+                opacity: 1;
             }
         }
 
@@ -217,7 +216,7 @@
 
                 .cart-item__price,
                 .text-right {
-                    @include helper-breakpoint-media-max($md-max) {
+                    @include helper-breakpoint-media-max($sm-max) {
                         text-align: left;
                     }
                 }
@@ -231,7 +230,7 @@
                 max-width: none;
             }
             .col + .col {
-                @include helper-breakpoint-media-max($md-max) {
+                @include helper-breakpoint-media-max($sm-max) {
                     margin-top: 33px;
                 }
             }
@@ -257,7 +256,7 @@
         }
     }
     .header.header-checkout {
-        @include helper-breakpoint-media-max($md-max) {
+        @include helper-breakpoint-media-max($sm-max) {
             padding-top: 0;
         }
     }
@@ -265,7 +264,7 @@
     .header__navigation-top {
         position: relative;
         .logo {
-            @include helper-breakpoint-media-max($md-max) {
+            @include helper-breakpoint-media-max($sm-max) {
                 padding: 1.4rem 0.8rem;
             }
         }
@@ -294,6 +293,8 @@
         }
         .icon {
             margin-top: -1px;
+            width: 1.1rem;
+            height: 1.1rem;
         }
     }
 
