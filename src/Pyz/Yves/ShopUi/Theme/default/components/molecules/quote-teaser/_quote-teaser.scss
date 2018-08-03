@@ -4,6 +4,10 @@
         overflow: hidden;
         margin: 150px 0;
         height: 32rem;
+        .touch & {
+            background-image: url("/assets/images/bouguessa.jpg");
+            background-size: cover;
+        }
         @include helper-breakpoint-media-max($md-max) {
             height: 22rem;
         }
@@ -11,7 +15,12 @@
         video {
             width: auto;
             height: auto;
+            min-width: 100%;
+            min-height: 100%;
             position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
         &__container {
             height: 100%;
@@ -53,5 +62,3 @@
         }
     }
 }
-
-@include shop-ui-quote-teaser();
