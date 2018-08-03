@@ -11,6 +11,7 @@ export default class VideoReplacer extends Component {
 
         if( !this.CheckTouch.isTouchDevice ){
             this.video.setAttribute('src', this.videoSrc);
+            this.video.play();
         }
         else {
             this.video.style.display = 'none';
