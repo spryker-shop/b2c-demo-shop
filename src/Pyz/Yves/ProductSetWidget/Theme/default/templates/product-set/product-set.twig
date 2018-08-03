@@ -1,0 +1,145 @@
+{% extends template('widget') %}
+
+{% define data = {
+    products: required,
+    description: '',
+    images: []
+} %}
+
+{% block body %}
+    {% block carousel %}
+        {% embed molecule('slick-carousel') with {
+            data: {
+                slides: data.images,
+                containerClass: 'product-set-slider'
+            },
+            attributes: {
+                'data-json': '{
+                        "slidesToShow": 1,
+                        "dots": true,
+                        "arrows": false
+                    }'
+            }
+        } only %}
+
+            {% block slides %}
+                {% for slide in data.slides %}
+                    {% include atom('thumbnail') with {
+                        modifiers: ['bigger'],
+                        attributes: {
+                            itemprop: 'image',
+                            src: slide.externalUrlLarge
+                        }
+                    } only %}
+                {% endfor %}
+            {% endblock %}
+        {% endembed %}
+    {% endblock %}
+
+    {% block header %}
+        {% block title %}
+            <h5>{{ 'product.sets.widget.title' | trans }}</h5>
+        {% endblock %}
+
+        {% block description %}
+            {% if data.description is not empty %}
+                <p>{{ data.description }}</p>
+            {% endif %}
+        {% endblock %}
+    {% endblock %}
+
+    {% block productSet %}
+        <form method="GET">
+            {% embed molecule('slick-carousel') with {
+                data: {
+                    slides: data.products,
+                    containerClass: 'product-set-slider product-set-slider--set-images'
+                },
+                attributes: {
+                    'data-json': '{
+                        "slidesToShow": 1,
+                        "dots": false,
+                        "variableWidth": true,
+                        "mobileFirst": true,
+                        "responsive": [{
+                            "breakpoint": 550,
+                            "settings": {
+                                "slidesToShow": 3,
+                                "slidesToScroll": 2
+                            }
+                        }]
+                    }'
+                }
+            } only %}
+
+                {% block slides %}
+                    {% for product in data.slides %}
+                        {% embed molecule('product-card') with {
+                            modifiers: ['stretch'],
+                            data: {
+                                name: product.name,
+                                abstractId: product.idProductAbstract,
+                                url: product.url,
+                                imageUrl: product.images.0.externalUrlSmall | default,
+                                price: product.price,
+                                originalPrice: product.prices['ORIGINAL'] | default
+                            },
+                            embed: {
+                                product: product
+                            }
+                        } only %}
+                            {% block content %}
+                                {{parent()}}
+                                {% set isNotAvailable = embed.product.idProductConcrete and not embed.product.available %}
+
+                                {% embed molecule('variant-configurator', 'ProductDetailPage') with {
+                                    data: {
+                                        superAttributes: embed.product.attributeMap.superAttributes,
+                                        selectedAttributes: embed.product.selectedAttributes,
+                                        availableAttributes: embed.product.availableAttributes,
+                                        useExternalForm: true
+                                    },
+                                    embed: embed
+                                } only %}
+                                    {% block variant %}
+                                        <li class="list__item">
+                                            {% include molecule('variant', 'ProductDetailPage') with {
+                                                data: {
+                                                    name: name,
+                                                    formName: 'attributes[' ~ embed.product.idProductAbstract ~ '][' ~ name ~ ']',
+                                                    values: values,
+                                                    selectedValue: selectedValue,
+                                                    label: ('product.attribute.' ~ name) | trans,
+                                                    isAvailable: isAvailable
+                                                }
+                                            } only %}
+                                        </li>
+                                    {% endblock %}
+                                {% endembed %}
+
+                                {% if isNotAvailable %}
+                                    <p>
+                                        <strong>{{ "product.detail.out_of_stock" | trans }}</strong>
+                                    </p>
+                                {% endif %}
+                            {% endblock %}
+
+                            {% block actions %}
+                                {% set isDisabled = not embed.product.idProductConcrete or not embed.product.available %}
+
+                                <a href="{{ path('cart/add', {sku: embed.product.sku}) }}" class="button button--expand" {% if isDisabled %}disabled{% endif %}>
+                                    {% include atom('icon') with {
+                                        data: {
+                                            name: 'cart-plus'
+                                        }
+                                    } only %}
+                                    {{ 'page.detail.add-to-cart' | trans }}
+                                </a>
+                            {% endblock %}
+                        {% endembed %}
+                    {% endfor %}
+                {% endblock %}
+            {% endembed %}
+        </form>
+    {% endblock %}
+{% endblock %}
