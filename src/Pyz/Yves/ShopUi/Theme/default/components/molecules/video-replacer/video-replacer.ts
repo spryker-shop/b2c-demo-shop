@@ -21,7 +21,7 @@ export default class VideoReplacer extends Component {
 
     protected setVideoAttributes(): void {
         this.video.setAttribute('type', 'video/mp4');
-        this.video.setAttribute('preload', 'auto');
+        this.video.setAttribute('preload', 'none');
         this.video.setAttribute('loop', 'loop');
         this.video.setAttribute('muted', 'muted');
         this.video.setAttribute('src', this.videoSrc);

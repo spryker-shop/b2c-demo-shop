@@ -2,11 +2,14 @@
     <!-- CMS_BLOCK_PLACEHOLDER : "title" -->
     <!-- CMS_BLOCK_PLACEHOLDER : "description" -->
     <div class="quote-teaser">
-        {% include molecule('video-replacer') with {
-            attributes: {
-                url: '/assets/images/viden-lnfra_s.mp4'
-            }
-        } only %}
+        {#{% include molecule('video-replacer') with {#}
+            {#attributes: {#}
+                {#url: '/assets/images/viden-lnfra_s.mp4'#}
+            {#}#}
+        {#} only %}#}
+        <video preload="none" autoplay="autoplay" loop="loop" muted="muted">
+            <source src="/assets/images/viden-lnfra_s.mp4" type="video/mp4">
+        </video>
         <div class="quote-teaser__container grid grid--middle grid--center">
             <div class="quote-teaser__content">
                 <div class="quote-teaser__text">{{ spyCmsBlockPlaceholder('title') | raw }}</div>
