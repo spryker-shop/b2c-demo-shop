@@ -2,7 +2,7 @@
 
 {% define config = {
     name: 'nav-header-mobile',
-    tag: 'nav'
+    tag: 'nav-header-mobile'
 } %}
 
 {% define data = {
@@ -13,14 +13,40 @@
 {% set menuChildrenClass = data.menuDropdown ? 'menu__item--has-children-dropdown' : 'menu__item--has-children-list' %}
 
 {% block body %}
+    <nav class="{{ config.name }}__block">
+        <div class="{{ config.name }}__arrow {{ config.name }}__arrow--left">
+            {% include atom('icon') with {
+                class: 'icon--smaller',
+                data: {
+                    name: 'arrow-left'
+                }
+            } only %}
+        </div>
+        <div class="{{ config.name }}__bar">
+            <div class="{{ config.name }}__container">
+                <div class="{{ config.name }}__scroll">
+                    {% for node in data.nodes %}
+                        <li class="{{ config.name }}__item">
+                            {% if node.url is empty %}
+                                {{ node.title }}
+                            {% else %}
+                                <a href="{{ node.url }}">{{ node.title }}</a>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="{{ config.name }}__arrow {{ config.name }}__arrow--right">
+            {% include atom('icon') with {
+                class: 'icon--smaller',
+                data: {
+                    name: 'arrow-right'
+                }
+            } only %}
+        </div>
+    </nav>
 
-
-
-    {% include molecule('navigation-slider', 'NavigationWidget') with {
-        data: {
-            slides: data.nodes
-        }
-    } only %}
 
     {#<ul class="popup-menu">#}
         {#{% for node in data.nodes %}#}
@@ -34,6 +60,8 @@
             {#} only %}#}
         {#{% endfor %}#}
     {#</ul>#}
-
+    {% block icons %}
+        {% include atom('icon-sprite') only %}
+    {% endblock %}
 
 {% endblock %}
