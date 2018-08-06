@@ -8,10 +8,19 @@
 {% block breadcrumbs %}{% endblock %}
 
 {% block title %}
-    <h1 class="main-title">{{data.title}}</h1>
+    <div class="main-title"></div>
 {% endblock %}
 
 {% block content %}
-    <p class="text-center"><big>{{data.message}}</big></p>
-    <br><br>
+    <div class="checkout-layout success-page">
+        <h1 class="success-page__title">{{data.title}}</h1>
+        <p class="success-page__text">{{data.message}}</p>
+        <a class="success-page__link" href="{{ url('customer/overview') }}">{{ 'checkout.step.success.link' | trans }}
+            {% include atom('icon') with {
+                data: {
+                    name: 'chevron-right'
+                }
+            } only %}
+        </a>
+    </div>
 {% endblock %}

@@ -87,7 +87,7 @@
                     } only %}
 
                         {% block fieldset %}
-                            <div class="js-payment-method-{{embed.index}} is-hidden">
+                            <div class="js-payment-method-{{embed.index}} {% if embed.index != 1 %} is-hidden{% endif %}">
                                 <h5>{{ embed.toggler.vars.label | trans }}</h5>
                                 {{parent()}}
                             </div>
