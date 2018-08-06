@@ -1,0 +1,50 @@
+@mixin product-set-widget ($name: '.product-set-widget'){
+    #{$name} {
+        margin-top: 2rem;
+        margin-bottom: 3rem;
+        &__title {
+            @include helper-breakpoint-media-min($md-min) {
+                font-size: 34px;
+                line-height: 1.06;
+                letter-spacing: -0.9px;
+            }
+            font: 26px/1.38 $setting-font-family-additional;
+            letter-spacing: -0.7px;
+            position: relative;
+            margin-bottom: 1.5rem;
+            &::before {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 0;
+                right: 0;
+                height: 1px;
+                background-color: #f0f0f0;
+            }
+        }
+        &__title-text {
+            position: relative;
+            display: inline-block;
+            background-color: $setting-color-bg;
+            padding-right: 50px;
+        }
+        &__description {
+            @include helper-breakpoint-media-min($md-min) {
+                margin-bottom: 3rem;
+                font-size: 18px;
+                line-height: 1.33;
+                letter-spacing: -0.1px;
+            }
+            color: #333;
+            font: 300 14px/1.43 $setting-font-family;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.4px;
+        }
+        .product-set-slider--set-images {
+            @include helper-breakpoint-media-min($lg-min) {
+                margin-top: 0;
+            }
+            margin-top: 1.5rem;
+        }
+    }
+}

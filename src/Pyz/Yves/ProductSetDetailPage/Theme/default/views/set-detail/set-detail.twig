@@ -1,0 +1,14 @@
+{% extends template('page-layout-main') %}
+
+{% define data = {
+    set: _view.productSet,
+    views: _view.productViews,
+
+    title: _view.productSet.name
+} %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block content %}
+    {{ widget('ProductSetWidgetPlugin', data.set, data.views) }}
+{% endblock %}
