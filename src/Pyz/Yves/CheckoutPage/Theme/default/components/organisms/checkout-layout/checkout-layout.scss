@@ -254,6 +254,43 @@
         .cart-summary__total {
             font-size: 17px;
         }
+
+        .success-page {
+            @include helper-breakpoint-media-min($md-min) {
+                padding-left: 0;
+                padding-right: 0;
+            }
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        .success-page__title {
+            @include helper-breakpoint-media-min($md-min) {
+                font-size: 2.937rem;
+                letter-spacing: -0.5px;
+            }
+            font: 500 2.25rem $setting-font-family-additional;
+            letter-spacing: -0.3px;
+            border-bottom: dotted 1px #d3d3d3;
+            margin-bottom: 2.5rem;
+            padding-bottom: 0.5rem;
+        }
+
+        .success-page__text {
+            @include helper-breakpoint-media-min($md-min) {
+                font-size: 1.312rem;
+                line-height: 1.29;
+            }
+            font: 300 1.062rem/1.41 $setting-font-family;
+            margin-bottom: 2.5rem;
+        }
+
+        .success-page__link {
+            text-decoration: none;
+            .icon {
+                height: .813rem;
+            }
+        }
     }
     .header.header-checkout {
         @include helper-breakpoint-media-max($sm-max) {
