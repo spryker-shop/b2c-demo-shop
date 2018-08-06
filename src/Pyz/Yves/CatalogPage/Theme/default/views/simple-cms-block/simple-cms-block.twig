@@ -29,19 +29,19 @@
     {% set cmsBottom = spyCmsBlock({category: data.categoryId, position: 'bottom'}) %}
 
     {% if cmsTop | trim is not empty %}
-        <div class="box">
+        <div class="catalog-cms-block catalog-cms-block--wide">
             {{ cmsTop | raw }}
         <div>
     {% endif %}
 
     {% if cmsMiddle | trim is not empty %}
-        <div class="box">
+        <div class="catalog-cms-block catalog-cms-block--wide">
             {{ cmsMiddle | raw }}
         <div>
     {% endif %}
 
     {% if cmsBottom | trim is not empty %}
-        <div class="box">
+        <div class="catalog-cms-block catalog-cms-block--wide">
             {{ cmsBottom | raw }}
         <div>
     {% endif %}

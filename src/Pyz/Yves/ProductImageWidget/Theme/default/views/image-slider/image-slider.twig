@@ -1,6 +1,7 @@
 {% extends template('widget') %}
 
 {% define data = {
+    idProductAbstract: _widget.product.idProductAbstract | default,
     images: _widget.product.images | default([]),
     amountSlides: 5
 } %}
@@ -13,6 +14,7 @@
     {% include molecule('pdp-carousel', 'ProductImageWidget') with {
         class: 'pdp-slider',
         data: {
+            idProductAbstract: data.idProductAbstract,
             slides: data.images,
             containerClass: sliderLength > 1 ? 'js-product-slider' : '',
             thumbnailClass: sliderLength > 1 ? 'js-product-slider-thumbnails' : ''
