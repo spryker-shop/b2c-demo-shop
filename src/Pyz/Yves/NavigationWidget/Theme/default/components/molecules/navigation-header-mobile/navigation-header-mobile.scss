@@ -1,0 +1,81 @@
+$setting-mobile-shadow-width: 12%;
+
+@mixin shop-ui-navigation-header-mobile($name: '.nav-header-mobile') {
+    #{$name} {
+        &__block {
+            margin: 24px 0;
+            position: relative;
+            padding: 0 2px;
+        }
+        &__item {
+            text-transform: uppercase;
+            font: 500 13px $setting-font-family-additional;
+            letter-spacing: 2.2px;
+            white-space: nowrap;
+            margin: 0 .6rem;
+
+            list-style: none;
+            display: inline-block;
+
+            a {
+                &:hover {
+                    color: inherit;
+                    opacity: .5;
+                    text-decoration: none;
+                }
+            }
+        }
+        &__bar {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            margin: 0 15px;
+        }
+        &__container {
+            position: relative;
+            overflow-y: hidden;
+            height: 25px;
+        }
+        &__scroll {
+            white-space: nowrap;
+            overflow-x: scroll;
+            -webkit-overflow-scrolling: touch;
+            position: absolute;
+            left: 0;
+            right: 0;
+            margin-bottom: -42px;
+            padding-bottom: 42px;
+        }
+        &__arrow {
+            position: absolute;
+            top: 0;
+            font-size: 0;
+            display: block;
+            height: 100%;
+            width: $setting-mobile-shadow-width;
+            z-index: 100;
+
+            .icon {
+                position: absolute;
+                top: 50%;
+                transform: translate(0 , -50%);
+            }
+            &--left {
+                left: 1rem;
+                display: none;
+                background: linear-gradient(to right, white 0%, white 46%, rgba(255, 255, 255, 0) 92%, rgba(255, 255, 255, 0) 100%);
+                .icon {
+                    left: 0;
+                }
+            }
+            &--right {
+                right: 1rem;
+                background: linear-gradient(to right, rgba(255,255,255,0) 0%,rgba(255,255,255,0) 8%,rgba(255,255,255,1) 54%,rgba(255,255,255,1) 100%);
+                .icon {
+                    right: 0;
+                }
+            }
+
+        }
+    }
+}

@@ -1,0 +1,67 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'nav-header-mobile',
+    tag: 'nav-header-mobile'
+} %}
+
+{% define data = {
+    nodes: []
+} %}
+
+
+{% set menuChildrenClass = data.menuDropdown ? 'menu__item--has-children-dropdown' : 'menu__item--has-children-list' %}
+
+{% block body %}
+    <nav class="{{ config.name }}__block">
+        <div class="{{ config.name }}__arrow {{ config.name }}__arrow--left">
+            {% include atom('icon') with {
+                class: 'icon--smaller',
+                data: {
+                    name: 'arrow-left'
+                }
+            } only %}
+        </div>
+        <div class="{{ config.name }}__bar">
+            <div class="{{ config.name }}__container">
+                <div class="{{ config.name }}__scroll">
+                    {% for node in data.nodes %}
+                        <li class="{{ config.name }}__item">
+                            {% if node.url is empty %}
+                                {{ node.title }}
+                            {% else %}
+                                <a href="{{ node.url }}">{{ node.title }}</a>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="{{ config.name }}__arrow {{ config.name }}__arrow--right">
+            {% include atom('icon') with {
+                class: 'icon--smaller',
+                data: {
+                    name: 'arrow-right'
+                }
+            } only %}
+        </div>
+    </nav>
+
+
+    {#<ul class="popup-menu">#}
+        {#{% for node in data.nodes %}#}
+            {#{% set hasChildren = node.children | length > 0 %}#}
+
+            {#{% include molecule('navigation-multilevel-node') with {#}
+                {#class: 'menu__item ' ~ (hasChildren ? menuChildrenClass : ''),#}
+                {#data: {#}
+                    {#node: node#}
+                {#}#}
+            {#} only %}#}
+        {#{% endfor %}#}
+    {#</ul>#}
+    {% block icons %}
+        {% include atom('icon-sprite') only %}
+    {% endblock %}
+
+{% endblock %}
