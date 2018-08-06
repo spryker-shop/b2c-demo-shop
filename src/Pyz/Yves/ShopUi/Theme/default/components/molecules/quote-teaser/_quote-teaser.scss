@@ -5,7 +5,7 @@
         margin: 150px 0;
         height: 32rem;
         .touch & {
-            background-image: url("/assets/images/bouguessa.jpg");
+            background-image: url("/assets/images/viden-lnfra.jpg");
             background-size: cover;
         }
         @include helper-breakpoint-media-max($md-max) {
@@ -21,6 +21,10 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+            display: none;
+            .no-touch & {
+                display: block;
+            }
         }
         &__container {
             height: 100%;
