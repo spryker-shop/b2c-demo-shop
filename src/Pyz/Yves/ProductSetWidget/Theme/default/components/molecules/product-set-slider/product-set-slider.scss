@@ -12,16 +12,10 @@
                 margin-left: 0;
                 margin-right: 0;
             }
+            margin-bottom: 2rem;
         }
 
         &#{$name}--set-images {
-            &:hover {
-                @include helper-breakpoint-media-min($md-min) {
-                    .slick-prev {
-                        @include helper-visibility-visible;
-                    }
-                }
-            }
             .slick-slide {
                 @include helper-breakpoint-media-min($lg-min) {
                     width: 300px;
@@ -36,8 +30,6 @@
                 }
             }
             .slick-prev {
-                @include helper-effect-transition;
-                @include helper-visibility-invisible;
                 @include helper-breakpoint-media-max($md-max) {
                     left: 0;
                 }
@@ -48,13 +40,15 @@
                 }
             }
         }
+        .slick-disabled {
+            display: none !important;
+        }
         .product-card {
             @include helper-breakpoint-media-min($md-min) {
                 max-width: 270px;
             }
             max-width: 200px;
-            padding-left: 0;
-            padding-right: 0;
+            padding: 0;
             & + .product-card {
                 display: none;
             }
@@ -64,6 +58,9 @@
                 padding-top: 20px;
                 padding-bottom: 20px;
             }
+        }
+        .product-card__info {
+            min-height: 3rem;
         }
         .thumbnail {
             margin: 0;
@@ -112,6 +109,25 @@
                     height: 23rem;
                 }
                 height: 15rem;
+            }
+        }
+        .product-set-widget-slider-wrap & {
+            &#{$name}--set-images {
+                &:hover {
+                    @include helper-breakpoint-media-min($md-min) {
+                        .slick-prev {
+                            @include helper-visibility-visible;
+                        }
+                    }
+                }
+            }
+            .slick-prev {
+                @include helper-effect-transition;
+                @include helper-visibility-invisible;
+            }
+            #{$name}__button-add-to-cart,
+            .variant-configurator {
+                display: none;
             }
         }
     }

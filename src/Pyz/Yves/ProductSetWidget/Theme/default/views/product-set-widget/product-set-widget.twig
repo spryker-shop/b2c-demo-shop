@@ -5,6 +5,37 @@
     name: _widget.productSet.name,
     description: _widget.productSet.description,
     images: _widget.productSet.imageSets.0.images | default([]),
+    sliderConfig: '{
+        "slidesToShow": 1,
+        "dots": false,
+        "variableWidth": true,
+        "mobileFirst": true,
+        "responsive": [{
+            "breakpoint": 450,
+            "settings": {
+                "slidesToShow": 2
+            }
+        },
+        {
+            "breakpoint": 680,
+            "settings": {
+                "slidesToShow": 3
+            }
+        },
+        {
+            "breakpoint": 800,
+            "settings": {
+                "slidesToShow": 1
+            }
+        },
+        {
+            "breakpoint": 1000,
+            "settings": {
+                "slidesToShow": 2
+            }
+        }]
+    }',
+    addAllSetButton: false
 } %}
 
 {% block title %}

@@ -4,6 +4,34 @@
     products: _widget.productViews,
     description: _widget.productSet.description,
     images: _widget.productSet.imageSets.0.images | default([]),
+    sliderConfig: '{
+        "slidesToShow": 1,
+        "dots": false,
+        "infinite": false,
+        "mobileFirst": true,
+        "responsive": [{
+            "breakpoint": 550,
+            "settings": {
+                "slidesToShow": 2,
+                "slidesToScroll": 2
+            }
+        },
+        {
+            "breakpoint": 700,
+            "settings": {
+                "slidesToShow": 3,
+                "slidesToScroll": 3
+            }
+        },
+        {
+            "breakpoint": 1000,
+            "settings": {
+                "slidesToShow": 4,
+                "slidesToScroll": 4
+            }
+        }]
+    }',
+    addAllSetButton: true
 } %}
 
 {% block carousel %}
@@ -28,3 +56,4 @@
         {{parent()}}
     </div>
 {% endblock %}
+

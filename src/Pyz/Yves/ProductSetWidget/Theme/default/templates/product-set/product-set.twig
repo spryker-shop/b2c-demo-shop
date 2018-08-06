@@ -3,7 +3,9 @@
 {% define data = {
     products: required,
     description: '',
-    images: []
+    images: [],
+    sliderConfig: '',
+    addAllSetButton: true
 } %}
 
 {% block body %}
@@ -37,9 +39,30 @@
     {% endblock %}
 
     {% block header %}
-        {% block title %}
-            <h5>{{ 'product.sets.widget.title' | trans }}</h5>
-        {% endblock %}
+        <form method="POST" action="{{ path('cart/add-items') }}">
+            {% if data.addAllSetButton %}
+                {% set isDisabled = false %}
+
+                {% for product in data.products %}
+                    {% if product.idProductConcrete is not empty %}
+                        {% if product.available %}
+                            <input type="hidden" name="items[{{ loop.index }}][sku]" value="{{ product.sku }}" />
+                            <input type="hidden" name="items[{{ loop.index }}][quantity]" value="1" />
+                        {% endif %}
+                    {% else %}
+                        {% set isDisabled = true %}
+                    {% endif %}
+                {% endfor %}
+
+                <button type="submit" class="button button--black float-right" {% if isDisabled %}disabled{% endif %}>
+                    {{ 'product.set.detail.add-all-to-cart' | trans }}
+                </button>
+            {% endif %}
+
+            {% block title %}
+                <h5>{{ 'product.sets.widget.title' | trans }}</h5>
+            {% endblock %}
+        </form>
 
         {% block description %}
             {% if data.description is not empty %}
@@ -56,19 +79,7 @@
                     containerClass: 'product-set-slider product-set-slider--set-images'
                 },
                 attributes: {
-                    'data-json': '{
-                        "slidesToShow": 1,
-                        "dots": false,
-                        "variableWidth": true,
-                        "mobileFirst": true,
-                        "responsive": [{
-                            "breakpoint": 550,
-                            "settings": {
-                                "slidesToShow": 3,
-                                "slidesToScroll": 2
-                            }
-                        }]
-                    }'
+                    'data-json': data.sliderConfig
                 }
             } only %}
 
@@ -102,18 +113,16 @@
                                     embed: embed
                                 } only %}
                                     {% block variant %}
-                                        <li class="list__item">
-                                            {% include molecule('variant', 'ProductDetailPage') with {
-                                                data: {
-                                                    name: name,
-                                                    formName: 'attributes[' ~ embed.product.idProductAbstract ~ '][' ~ name ~ ']',
-                                                    values: values,
-                                                    selectedValue: selectedValue,
-                                                    label: ('product.attribute.' ~ name) | trans,
-                                                    isAvailable: isAvailable
-                                                }
-                                            } only %}
-                                        </li>
+                                        {% include molecule('variant', 'ProductDetailPage') with {
+                                            data: {
+                                                name: name,
+                                                formName: 'attributes[' ~ embed.product.idProductAbstract ~ '][' ~ name ~ ']',
+                                                values: values,
+                                                selectedValue: selectedValue,
+                                                label: ('product.attribute.' ~ name) | trans,
+                                                isAvailable: isAvailable
+                                            }
+                                        } only %}
                                     {% endblock %}
                                 {% endembed %}
 
@@ -122,17 +131,9 @@
                                         <strong>{{ "product.detail.out_of_stock" | trans }}</strong>
                                     </p>
                                 {% endif %}
-                            {% endblock %}
-
-                            {% block actions %}
                                 {% set isDisabled = not embed.product.idProductConcrete or not embed.product.available %}
 
-                                <a href="{{ path('cart/add', {sku: embed.product.sku}) }}" class="button button--expand" {% if isDisabled %}disabled{% endif %}>
-                                    {% include atom('icon') with {
-                                        data: {
-                                            name: 'cart-plus'
-                                        }
-                                    } only %}
+                                <a href="{{ isDisabled ? 'javascript:void(0)' : path('cart/add', {sku: embed.product.sku}) }}" class="button button--black button--expand product-set-slider__button-add-to-cart" {% if isDisabled %}disabled{% endif %}>
                                     {{ 'page.detail.add-to-cart' | trans }}
                                 </a>
                             {% endblock %}
