@@ -20,7 +20,10 @@
             <div class="col col--sm-12 col--lg-4 is-hidden-sm-md">
                 {% if data.showSearchForm %}
                     {% include molecule('search-form') with {
-                        class: config.name ~ '__search-form'
+                        class: config.name ~ '__row' ~ config.name ~ '__search-form is-hidden-lg-xl',
+                        attributes: {
+                            'data-search-id': 'desktop'
+                        }
                     } only %}
                 {% endif %}
 
