@@ -12,10 +12,10 @@
 
     #{$name} {
         &--left {
-            margin-right: 20px;
+            margin-right: 40px;
         }
         &--right {
-            margin-left: 20px;
+            margin-left: 40px;
         }
         &--sm {
             margin-bottom: 40px;
@@ -39,6 +39,8 @@
             height: 230px;
             position: relative;
             display: block;
+            flex-shrink: 0;
+            max-width: 50%;
             @include helper-breakpoint-media-max($sm-max) {
                 width: 158px;
                 height: 230px;
@@ -98,11 +100,14 @@
                 height: 100%;
                 min-width: fit-content;
                 position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
             }
         }
         &__text {
             text-transform: uppercase;
             display: block;
+            word-break: break-word;
             @include helper-link-hover-reset;
             &--lg {
                 margin: 35px 0 0 87px;
