@@ -12,6 +12,10 @@ export default class SlickCarousel extends Component {
         $container.slick(
             sliderConfig
         );
+
+        if ("ontouchstart" in document.documentElement){
+            $container.slick('slickPause');
+        }
     }
 
 }
