@@ -7,7 +7,9 @@
 
 {% define data = {
     product: required,
-    maxQuantity: 10
+    maxQuantity: 10,
+    isBundle: null,
+    bundleItems: []
 } %}
 
 {% set options = [] %}
@@ -38,6 +40,22 @@
             {{ widget('PriceWidgetPlugin', data.product) }}
         </div>
     </div>
+
+    {% if data.isBundle != null %}
+        <div class="pdp-option">
+            <div class="pdp-option__title js-toggle-pdp-options active" data-toggle-target=".js-pdp-option-bundle">{{ 'bundle.title' | trans }}</div>
+            <div class="pdp-option__wrapper bundle-list-options__wrap js-pdp-option-bundle">
+                <ul class="grid bundle-list-options">
+                    {% for item in data.bundleItems %}
+                        <li class="col col--sm-6 bundle-list-options__item">
+                            {{ item.name }}
+                            <span class="bundle-list-options__quantity bundle-quantity"> ·&nbsp; {{ item.quantity }}x</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    {% endif %}
 
     {{ widget('ProductGroupWidgetPlugin', data.product.idProductAbstract) }}
 
