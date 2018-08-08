@@ -20,7 +20,7 @@
             {% set hasChildren = node.children | length > 0 %}
 
             {% include molecule('navigation-multilevel-node') with {
-                class: 'menu__item ' ~ (hasChildren ? menuChildrenClass : ''),
+                class: '   menu__item ' ~ (hasChildren ? menuChildrenClass : ''),
                 data: {
                     node: node
                 }

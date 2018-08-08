@@ -5,12 +5,6 @@
     tag: 'video-replacer'
 } %}
 
-{% define data = {
-    url: ''
+{% define attributes = {
+    url: required
 } %}
-
-{% block body %}
-
-    <video src="" type="video/mp4" preload="preload" data-src="{{ data.url }}" id="video" autoplay="autoplay" loop="loop"></video>
-
-{% endblock %}

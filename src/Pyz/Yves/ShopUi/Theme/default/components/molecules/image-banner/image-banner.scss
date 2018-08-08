@@ -8,13 +8,17 @@
             width: auto;
             height: auto;
             min-width: 100%;
+            display: none;
+            .no-touch & {
+                display: block;
+            }
         }
         &__bg-wrapper {
             position: absolute;
             height: 100%;
             width: 100%;
             overflow: hidden;
-            @include helper-breakpoint-media-max($sm-max) {
+            .touch & {
                 background-image: url("/assets/images/section-brand-a-bg@3x.png");
                 background-size: cover;
             }
