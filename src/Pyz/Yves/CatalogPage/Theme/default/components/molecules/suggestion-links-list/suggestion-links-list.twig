@@ -1,0 +1,30 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'suggestion-links-list'
+} %}
+
+{% define data = {
+    name: required,
+    items: required,
+    length: required,
+    isTitleHiddenOnTablet: true,
+    isSuggestion: false
+} %}
+
+{% set titleHiddenClass = data.isTitleHiddenOnTablet ? 'is-hidden-sm-md' : '' %}
+
+{% block body %}
+    {% if data.items is not empty %}
+        <h6 class="spacing-y {{ titleHiddenClass }}">{{ data.name }}</h6>
+        <ul class="list {{ config.name }}">
+            {% for item in data.items | slice(0, data.length) %}
+                {% set href = data.isSuggestion ? path('search', {'q': item}) : item.url %}
+                {% set value = data.isSuggestion ? item : item.name %}
+                <li class="list__item">
+                    <a class="js-suggest-search__item--navigable" href="{{ href }}">{{ value }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}
