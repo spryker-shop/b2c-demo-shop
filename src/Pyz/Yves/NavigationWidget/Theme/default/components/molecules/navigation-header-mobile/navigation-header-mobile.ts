@@ -66,7 +66,11 @@ export default class NavHeaderMobile extends Component {
             $.each($tabs, (i, item)=> {
                 $(item).animate({opacity: 0}, 200);
             });
-            $dropDown.slideUp(600);
+            $.when($dropDown.slideUp(600)).done(
+                $.each($tabs, (i, item)=> {
+                    $(item).hide();
+                })
+            )
         });
     }
 }
