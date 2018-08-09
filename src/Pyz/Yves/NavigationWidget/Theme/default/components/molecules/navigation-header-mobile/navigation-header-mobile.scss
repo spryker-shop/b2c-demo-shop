@@ -2,6 +2,18 @@ $setting-mobile-shadow-width: 12%;
 
 @mixin shop-ui-navigation-header-mobile($name: '.nav-header-mobile') {
     #{$name} {
+        position: relative;
+        &__dropdown-container {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100vw;
+            background: $setting-color-white;
+            padding: 10px 1rem 20px 1rem;
+            border-bottom: 1px solid $setting-color-lightest;
+            box-shadow: 0 20px 15px -1px rgba(0,0,0,.1);
+        }
         &__block {
             margin: 24px 0;
             position: relative;
@@ -16,6 +28,10 @@ $setting-mobile-shadow-width: 12%;
 
             list-style: none;
             display: inline-block;
+
+            &:hover {
+                opacity: .5;
+            }
 
             a {
                 &:hover {
@@ -76,6 +92,23 @@ $setting-mobile-shadow-width: 12%;
                 }
             }
 
+        }
+
+        &__tab {
+            display: none;
+            opacity: 0;
+            li {
+                margin: 12px;
+            }
+            a {
+                font: normal 16px $setting-font-family;
+                &:hover {
+                    color: $setting-color-alt;
+                }
+            }
+        }
+        &__tab-close {
+            text-align: center;
         }
     }
 }

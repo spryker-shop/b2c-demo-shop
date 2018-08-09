@@ -1,0 +1,46 @@
+@mixin shop-ui-thumbnail($name: '.thumbnail') {
+    #{$name} {
+        position: relative;
+        display: block;
+        height: 10rem;
+        margin: 0.5rem;
+
+        &--smaller {
+            height: 3rem;
+        }
+
+        &--small {
+            height: 5rem;
+        }
+
+        &--big {
+            height: 20rem;
+        }
+
+        &--bigger {
+            height: 30rem;
+        }
+
+        &--min-size {
+            min-width: 2.5rem;
+        }
+
+        &__image {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        &--has-border {
+            border: 0.25rem solid transparent;
+            box-shadow: 0 0 0 1px $setting-color-lighter;
+        }
+
+        @content;
+    }
+}

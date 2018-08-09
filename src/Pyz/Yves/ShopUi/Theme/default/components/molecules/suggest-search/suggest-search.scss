@@ -1,0 +1,35 @@
+@mixin shop-ui-suggest-search($name: '.suggest-search') {
+  #{$name} {
+    &__container {
+      position: absolute;
+      margin: 0;
+      padding: map-get($setting-spacing, 'big');;
+      width: 100%;
+      max-height: 30rem;
+      overflow-x: scroll;
+    }
+
+    &__input {
+      position: relative;
+      z-index: $setting-zi-search-suggestions + 2;
+      &--transparent {
+        background-color: $setting-color-transparent;
+      }
+    }
+
+    &__item {
+      &--active {
+        text-decoration: underline;
+      }
+    }
+
+    &__hint {
+      position: absolute;
+      top: 0;
+      border-color: $setting-color-transparent;
+      z-index: $setting-zi-search-suggestions + 1;
+      color: $setting-color-light;
+    }
+    @content;
+  }
+}
