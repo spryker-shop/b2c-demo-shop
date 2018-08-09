@@ -1,5 +1,5 @@
-import Component from '../../../models/component';
-import AjaxProvider from '../../../components/molecules/ajax-provider/ajax-provider';
+import Component from 'ShopUi/models/component';
+import AjaxProvider from 'ShopUi/components/molecules/ajax-provider/ajax-provider';
 import debounce from 'lodash-es/debounce'
 import throttle from 'lodash-es/throttle'
 
