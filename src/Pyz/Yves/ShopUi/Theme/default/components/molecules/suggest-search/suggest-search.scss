@@ -1,17 +1,20 @@
 @mixin shop-ui-suggest-search($name: '.suggest-search') {
   #{$name} {
     &__container {
-      position: absolute;
+      //position: absolute;
       margin: 0;
-      padding: map-get($setting-spacing, 'big');;
+      padding: map-get($setting-spacing, 'big');
       width: 100%;
       max-height: 30rem;
       overflow-x: scroll;
     }
 
     &__input {
-      position: relative;
-      z-index: $setting-zi-search-suggestions + 2;
+        position: relative;
+        z-index: $setting-zi-search-suggestions + 2;
+        border: none;
+        padding: 0;
+        font: 500 20px $setting-font-family-additional;
       &--transparent {
         background-color: $setting-color-transparent;
       }
@@ -24,11 +27,13 @@
     }
 
     &__hint {
-      position: absolute;
-      top: 0;
-      border-color: $setting-color-transparent;
-      z-index: $setting-zi-search-suggestions + 1;
-      color: $setting-color-light;
+        position: absolute;
+        top: 0;
+        padding: 0;
+        border: none;
+        font: 500 20px $setting-font-family-additional;
+        z-index: $setting-zi-search-suggestions + 1;
+        color: $setting-color-light;
     }
     @content;
   }
