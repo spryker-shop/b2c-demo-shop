@@ -15,7 +15,9 @@
 } %}
 
 {% block body %}
-    <div class="box is-hidden {{ config.name }}__container {{ config.jsName }}__container"></div>
+    <div class="content-expander">
+        <div class="box is-hidden {{ config.name }}__container {{ config.jsName }}__container" style="display: block !important;"></div>
+    </div>
 
     {% include molecule('ajax-provider') with {
         class: config.jsName ~ '__ajax-provider',
