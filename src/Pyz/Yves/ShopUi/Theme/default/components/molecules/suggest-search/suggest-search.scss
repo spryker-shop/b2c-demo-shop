@@ -1,17 +1,43 @@
 @mixin shop-ui-suggest-search($name: '.suggest-search') {
   #{$name} {
     &__container {
-      position: absolute;
+      //position: absolute;
       margin: 0;
-      padding: map-get($setting-spacing, 'big');;
+      //padding: map-get($setting-spacing, 'big');
+      padding: 0;
       width: 100%;
-      max-height: 30rem;
-      overflow-x: scroll;
+      margin-top: 50px;
+      //max-height: 30rem;
+      //overflow-x: scroll;
+      h6 {
+        font: bold 20px $setting-font-family-additional;
+        padding: 12px 0;
+        margin: 0;
+        border-bottom: 1px dotted $setting-color-lightest;
+      }
+      .grid--no-wrap {
+        @include helper-breakpoint-media-max($lg-max) {
+          flex-wrap: wrap;
+        }
+        &>.col {
+          flex: 1;
+          min-width: 300px;
+          @include helper-breakpoint-media-max($lg-max) {
+            min-width: 100%;
+          }
+        }
+      }
     }
 
     &__input {
       position: relative;
       z-index: $setting-zi-search-suggestions + 2;
+      border: none;
+      padding: 0;
+      font: 500 20px $setting-font-family-additional;
+      @include helper-breakpoint-media-max($sm-max) {
+        font-size: 24px;
+      }
       &--transparent {
         background-color: $setting-color-transparent;
       }
@@ -26,10 +52,65 @@
     &__hint {
       position: absolute;
       top: 0;
-      border-color: $setting-color-transparent;
+      padding: 0;
+      border: none;
+      font: 500 20px $setting-font-family-additional;
       z-index: $setting-zi-search-suggestions + 1;
       color: $setting-color-light;
+      @include helper-breakpoint-media-max($sm-max) {
+        font-size: 24px;
+      }
     }
+    .suggestion-block {
+      margin: 2rem 1rem 1rem 1rem;
+      .list__item {
+        margin: 10px 0;
+      }
+      ul {
+        margin: 6px 0;
+      }
+
+      a {
+        font: normal 17px $setting-font-family;
+        line-height: 2;
+        color: $setting-color-dark;
+        text-transform: capitalize;
+        &:hover {
+          color: $setting-color-alt;
+        }
+      }
+      &--top {
+        h6 {
+          font: normal 12px $setting-font-family;
+          text-transform: uppercase;
+          color: #888;
+          letter-spacing: 1.2px;
+        }
+      }
+      &--products {
+        .list__item {
+          margin-bottom: 24px;
+        }
+      }
+      .link--show-more {
+        font: normal 16px $setting-font-family;
+        color: $setting-color-text;
+        line-height: 1.8;
+        &:hover {
+          color: $setting-color-alt;
+        }
+        .icon {
+          transform: rotate(90deg);
+        }
+      }
+    }
+
+
+    .content-expander {
+      margin-left: -15px;
+      margin-right: -15px;
+    }
+
     @content;
   }
 }

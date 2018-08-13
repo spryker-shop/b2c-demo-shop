@@ -11,12 +11,12 @@
     image: null,
     alt: '',
     title: '',
-    originalPrice: null
+    originalPrice: required
 } %}
 
 {% block body %}
-    <a class="grid js-suggest-search__item--navigable js-suggest-search__product-item--navigable {{ config.name }}__link"  href="{{ data.url }}">
-        <span class="col col--sm-3">
+    <a class="grid grid--middle js-suggest-search__item--navigable js-suggest-search__product-item--navigable {{ config.name }}__link"  href="{{ data.url }}">
+        <span class="col">
             {% if data.image %}
                 {% include atom('thumbnail') with {
                     modifiers: ['smaller', 'has-border'],
@@ -30,7 +30,7 @@
             {% endif %}
        </span>
 
-        <span class="col col--sm-9 spacing spacing--inner">
+        <span class="col col--lg-9 {{ config.name }}__title">
             {{ data.title }}
 
             {% include molecule('price') with {
