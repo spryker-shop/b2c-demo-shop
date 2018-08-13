@@ -28,18 +28,29 @@
 
         &__search-overlay {
             position: absolute;
-            top: 0;
+            top: -2000px;
             z-index: $setting-zi-search-suggestions;
+            transition: top 1s ease-in-out;
             &:after{
                 content: '';
                 position: fixed;
                 top: 0;
                 left: 0;
                 height: 100%;
-                width: 100%;
                 background: #000;
-                opacity: 0.4;
+                opacity: 0;
                 z-index: -1;
+                width: 0;
+                transition: opacity 1s ease-in-out;
+            }
+            &.active {
+                top: 0;
+                transition: top 1s ease-in-out;
+                &:after {
+                  width: 100%;
+                  opacity: .4;
+                  transition: opacity 1s ease-in-out;
+                }
             }
         }
         &__search-overlay-container {

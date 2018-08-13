@@ -14,7 +14,7 @@
 
 
     <div class="container">
-        <div class="{{ config.name }}__search-overlay js-toggle-search is-hidden">
+        <div class="{{ config.name }}__search-overlay js-toggle-search">
             <div class="{{ config.name }}__search-overlay-container">
                 <div class="{{ config.name }}__search-close js-search-hide-icon" data-toggle-target=".js-toggle-search">
                     {% include atom('icon') with {
@@ -96,14 +96,14 @@
     {% include molecule('toggler-accordeon') with {
         attributes: {
             trigger: '.js-search-show-icon',
-            'class-to-toggle': 'is-hidden'
+            'class-to-toggle': 'active'
         }
     } only %}
 
     {% include molecule('toggler-accordeon') with {
         attributes: {
             trigger: '.js-search-hide-icon',
-            'class-to-toggle': 'is-hidden'
+            'class-to-toggle': 'active'
         }
     } only %}
 
