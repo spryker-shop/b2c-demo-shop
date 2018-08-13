@@ -6,10 +6,10 @@
     category: suggestionByType.category | default([]),
     cms_page: suggestionByType.cms_page | default([]),
     product_abstract: suggestionByType.product_abstract | default([]),
-    suggestionsLength: 6,
-    categoriesLength: 6,
+    suggestionsLength: 4,
+    categoriesLength: 3,
     pagesLength: 3,
-    productsLength: 6
+    productsLength: 4
 } %}
 
 {% set topVisible = data.completion is not empty %}
@@ -37,7 +37,16 @@
 
             <div class="col">
                 <div class="suggestion-block suggestion-block--products">
-                    <h6>{{ 'global.search.suggestion.in_products' | trans }}</h6>
+                    <h6>
+                        {{ 'global.search.suggestion.in_products' | trans }}
+                        <button type="submit" class="link link--show-more float-right is-hidden-lg-xl">{{ 'global.search.suggestion.see_all_products' | trans }}
+                            {% include atom('icon') with {
+                                data: {
+                                    name: 'chevron-up'
+                                }
+                            } %}
+                        </button>
+                    </h6>
                     <ul>
                         {% for product in data.product_abstract | slice(0, data.productsLength)  %}
                             <li class="list__item">
@@ -56,7 +65,7 @@
 
                         {% endfor %}
                     </ul>
-                    <button type="submit" class="link link--show-more">{{ 'global.search.suggestion.see_all_products' | trans }}
+                    <button type="submit" class="link link--show-more is-hidden-sm-md">{{ 'global.search.suggestion.see_all_products' | trans }}
                         {% include atom('icon') with {
                             data: {
                                 name: 'chevron-up'

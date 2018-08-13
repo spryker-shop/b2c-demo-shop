@@ -27,7 +27,13 @@
     }
     &__title {
       font: bold 15px $setting-font-family;
-      white-space: nowrap;
+      .price__amount {
+        display: inline-block;
+        &--original {
+          opacity: .25;
+          margin-right: 6px;
+        }
+      }
     }
     .price__amount {
       font: normal 13px $setting-font-family;
