@@ -39,13 +39,15 @@
                 <div class="suggestion-block suggestion-block--products">
                     <h6>
                         {{ 'global.search.suggestion.in_products' | trans }}
-                        <button type="submit" class="link link--show-more float-right is-hidden-lg-xl">{{ 'global.search.suggestion.see_all_products' | trans }}
+                        <div class="float-right link--show-more is-hidden-lg-xl">
+                            <button type="submit" class="">{{'global.search.suggestion.see_all_products' | trans}}</button>
                             {% include atom('icon') with {
                                 data: {
                                     name: 'chevron-up'
                                 }
                             } %}
-                        </button>
+                        </div>
+
                     </h6>
                     <ul>
                         {% for product in data.product_abstract | slice(0, data.productsLength)  %}
@@ -65,13 +67,15 @@
 
                         {% endfor %}
                     </ul>
-                    <button type="submit" class="link link--show-more is-hidden-sm-md">{{ 'global.search.suggestion.see_all_products' | trans }}
+                    <div class="link--show-more is-hidden-sm-md float-left">
+                        <button type="submit" class="">{{'global.search.suggestion.see_all_products' | trans}}</button>
                         {% include atom('icon') with {
-                            data: {
+                                data: {
                                 name: 'chevron-up'
                             }
                         } %}
-                    </button>
+                    </div>
+
                 </div>
             </div>
         {% endif %}
