@@ -19,6 +19,9 @@ export default class SuggestSearch extends Component {
     navigation: HTMLElement[]
     activeItemIndex: number
     navigationActiveClass: string
+    searchOverlay: HTMLElement
+    overlayCloseButton: HTMLElement
+    bodyTrigger: HTMLElement
 
 
     constructor() {
@@ -40,6 +43,9 @@ export default class SuggestSearch extends Component {
         this.suggestionsContainer = <HTMLElement> this.querySelector(`.${this.jsName}__container`);
         this.searchInput = <HTMLInputElement> document.querySelector(this.searchInputSelector);
         this.navigationActiveClass = `${this.name}__item--active`;
+        this.searchOverlay = <HTMLElement> document.querySelector('.js-toggle-search');
+        this.overlayCloseButton = <HTMLElement> document.querySelector('.js-search-hide-icon');
+        this.bodyTrigger = <HTMLElement> document.querySelector('.js-search-hide-overlay');
         this.createHintInput();
         this.mapEvents();
     }
@@ -47,9 +53,14 @@ export default class SuggestSearch extends Component {
     protected mapEvents(): void {
         this.searchInput.addEventListener('keyup', debounce((event: Event) => this.onInputKeyUp(event), this.debounceDelay));
         this.searchInput.addEventListener('keydown', throttle((event: Event) => this.onInputKeyDown(<KeyboardEvent> event), this.throttleDelay));
-        this.searchInput.addEventListener('blur', debounce((event: Event) => this.onInputFocusOut(event), this.debounceDelay));
+        // this.searchInput.addEventListener('blur', debounce((event: Event) => this.onInputFocusOut(event), this.debounceDelay));
         this.searchInput.addEventListener('focus', (event: Event) => this.onInputFocusIn(event));
         this.searchInput.addEventListener('click', (event: Event) => this.onInputClick(event));
+        this.overlayCloseButton.addEventListener('click', (event: Event) => this.onInputFocusOut(event));
+        this.bodyTrigger.addEventListener('click', (event: Event) => {
+            this.onInputFocusOut(event);
+            this.searchOverlay.classList.toggle('active');
+        })
     }
 
     protected async onInputKeyUp(event: Event): Promise<void> {
@@ -130,6 +141,7 @@ export default class SuggestSearch extends Component {
 
     protected onInputFocusOut(event: Event): void {
         this.hideSugestions();
+        this.cleanUpInput();
     }
 
     protected getActiveNavigationItem(): HTMLElement {
@@ -219,6 +231,10 @@ export default class SuggestSearch extends Component {
 
     hideSugestions(): void {
         this.suggestionsContainer.classList.add('is-hidden');
+    }
+
+    cleanUpInput(): void {
+        this.searchInput.value = '';
     }
 
     protected createHintInput(): void {

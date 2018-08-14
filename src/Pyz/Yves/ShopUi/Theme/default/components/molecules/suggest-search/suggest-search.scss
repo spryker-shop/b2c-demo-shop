@@ -35,6 +35,10 @@
       border: none;
       padding: 0;
       font: 500 20px $setting-font-family-additional;
+      &::placeholder {
+        color: $setting-color-text;
+        opacity: .25;
+      }
       @include helper-breakpoint-media-max($sm-max) {
         font-size: 24px;
       }
@@ -57,6 +61,7 @@
       font: 500 20px $setting-font-family-additional;
       z-index: $setting-zi-search-suggestions + 1;
       color: $setting-color-light;
+      display: none;
       @include helper-breakpoint-media-max($sm-max) {
         font-size: 24px;
       }
@@ -91,20 +96,36 @@
         .list__item {
           margin-bottom: 24px;
         }
+        a:hover {
+          .price__amount {
+            color: $setting-color-text;
+            &--original {
+              color: $setting-color-text;
+              opacity: .25;
+            }
+          }
+        }
       }
       .link--show-more {
-        font: normal 16px $setting-font-family;
-        color: $setting-color-text;
-        line-height: 1.8;
+
         &:hover {
-          color: $setting-color-alt;
+          button, .icon {
+            color: $setting-color-alt;
+          }
+          button {
+            text-decoration: underline;
+          }
         }
         .icon {
           transform: rotate(90deg);
         }
+        button {
+          font: normal 16px $setting-font-family;
+          color: $setting-color-text;
+          line-height: 1.8;
+        }
       }
     }
-
 
     .content-expander {
       margin-left: -15px;
