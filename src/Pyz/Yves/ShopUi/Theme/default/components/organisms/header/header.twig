@@ -16,7 +16,7 @@
     <div class="container">
         <div class="{{ config.name }}__search-overlay js-toggle-search">
             <div class="{{ config.name }}__search-overlay-container">
-                <div class="{{ config.name }}__search-close js-search-hide-icon" data-toggle-target=".js-toggle-search">
+                <div class="{{ config.name }}__search-close js-search-hide-icon">
                     {% include atom('icon') with {
                         data: {
                             name: 'close'
@@ -40,16 +40,17 @@
 
             {% block additionalLink %}{% endblock %}
 
-            <div class="col col--sm-12 col--lg-4 is-hidden-sm-md">
-                <div class="{{ config.name }}__search-open js-search-show-icon" data-toggle-target=".js-toggle-search">
-                        {% include atom('icon') with {
-                            data: {
-                                name: 'search'
-                            }
-                        } only %}
+                <div class="col col--sm-12 col--lg-4 is-hidden-sm-md">
+                    {% if data.showSearchForm %}
+                        <div class="{{ config.name }}__search-open js-search-show-icon">
+                            {% include atom('icon') with {
+                                data: {
+                                    name: 'search'
+                                }
+                            } only %}
+                        </div>
+                    {% endif %}
                 </div>
-
-            </div>
 
             <div class="col col--sm-12 col--lg-4">
                 {% include molecule('logo') with {
@@ -93,19 +94,6 @@
 
     </div>
 
-    {% include molecule('toggler-accordeon') with {
-        attributes: {
-            trigger: '.js-search-show-icon',
-            'class-to-toggle': 'active'
-        }
-    } only %}
-
-    {% include molecule('toggler-accordeon') with {
-        attributes: {
-            trigger: '.js-search-hide-icon',
-            'class-to-toggle': 'active'
-        }
-    } only %}
 
 {% endblock %}
 
