@@ -21,6 +21,8 @@ export default class SuggestSearch extends Component {
     navigationActiveClass: string
     searchOverlay: HTMLElement
     overlayCloseButton: HTMLElement
+    overlayOpenButton: HTMLElement
+    overlayMobOpenButton: HTMLElement
     bodyTrigger: HTMLElement
 
 
@@ -45,6 +47,8 @@ export default class SuggestSearch extends Component {
         this.navigationActiveClass = `${this.name}__item--active`;
         this.searchOverlay = <HTMLElement> document.querySelector('.js-toggle-search');
         this.overlayCloseButton = <HTMLElement> document.querySelector('.js-search-hide-icon');
+        this.overlayOpenButton = <HTMLElement> document.querySelector('.js-search-show-icon');
+        this.overlayMobOpenButton = <HTMLElement> document.querySelector('.js-search-mob-show-icon');
         this.bodyTrigger = <HTMLElement> document.querySelector('.js-search-hide-overlay');
         this.createHintInput();
         this.mapEvents();
@@ -57,10 +61,9 @@ export default class SuggestSearch extends Component {
         this.searchInput.addEventListener('focus', (event: Event) => this.onInputFocusIn(event));
         this.searchInput.addEventListener('click', (event: Event) => this.onInputClick(event));
         this.overlayCloseButton.addEventListener('click', (event: Event) => this.onInputFocusOut(event));
-        this.bodyTrigger.addEventListener('click', (event: Event) => {
-            this.onInputFocusOut(event);
-            this.searchOverlay.classList.toggle('active');
-        })
+        this.overlayOpenButton.addEventListener('click', () => this.openSearchLayout());
+        this.overlayMobOpenButton.addEventListener('click', () => this.openSearchLayout());
+        this.bodyTrigger.addEventListener('click', (event: Event) => this.onInputFocusOut(event));
     }
 
     protected async onInputKeyUp(event: Event): Promise<void> {
@@ -141,6 +144,7 @@ export default class SuggestSearch extends Component {
 
     protected onInputFocusOut(event: Event): void {
         this.hideSugestions();
+        this.searchOverlay.classList.toggle('active');
         this.cleanUpInput();
     }
 
@@ -235,6 +239,12 @@ export default class SuggestSearch extends Component {
 
     cleanUpInput(): void {
         this.searchInput.value = '';
+        this.suggestionsContainer.innerHTML = '';
+    }
+
+    openSearchLayout(): void {
+        this.searchOverlay.classList.toggle('active');
+        this.searchInput.focus();
     }
 
     protected createHintInput(): void {

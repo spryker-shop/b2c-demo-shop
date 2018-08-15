@@ -32,7 +32,7 @@
         <li class="navigation-top-mobile__item col">
             <form action="{{data.searchUrl}}">
                 <div class="grid grid--middle grid--center">
-                    <div type="submit" class="search-form__submit js-search-mob-show-icon" data-toggle-target=".js-toggle-search">
+                    <div type="submit" class="search-form__submit js-search-mob-show-icon">
 
                         {% include atom('icon') with {
                             class: 'icon--bigger',
@@ -96,10 +96,5 @@
         </li>
 
     </ul>
-    {% include molecule('toggler-accordeon') with {
-        attributes: {
-            trigger: '.js-search-mob-show-icon',
-            'class-to-toggle': 'active'
-        }
-    } only %}
+
 {% endblock %}
