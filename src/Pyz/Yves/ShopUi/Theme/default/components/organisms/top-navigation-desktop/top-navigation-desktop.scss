@@ -1,0 +1,30 @@
+@mixin shop-ui-top-navigation-desktop() {
+  .top-navigation-desktop {
+    position: relative;
+
+    .flyout-fullscreen {
+      position: static;
+
+      .flyout-fullscreen__container {
+        margin: 0 auto;
+        width: 765px;
+      }
+      .menu {
+        position: absolute;
+        width: 100vw;
+        left: 50%;
+        transform: translate(-50%, 0);
+        padding: 0;
+        margin: 0;
+
+      }
+    }
+    .childless {
+      .menu {
+        display: none;
+      }
+    }
+  }
+
+
+}

@@ -9,6 +9,7 @@
     {{ parent() }}
 
         <ul class="menu">
+            <div class="flyout-fullscreen__container">
             {% for childNode in data.node.children %}
                 {% set hasChildren = childNode.children | length > 0 %}
 
@@ -19,6 +20,7 @@
                     }
                 } only %}
             {% endfor %}
+            </div>
         </ul>
 
 
