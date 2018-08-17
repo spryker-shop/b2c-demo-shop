@@ -7,7 +7,7 @@
 
 {% block body %}
     {{ parent() }}
-
+    {% if data.node.children is not empty %}
         <ul class="menu">
             <div class="flyout-fullscreen__container">
             {% for childNode in data.node.children %}
@@ -22,7 +22,7 @@
             {% endfor %}
             </div>
         </ul>
-
+    {% endif %}
 
 {% endblock %}
 
