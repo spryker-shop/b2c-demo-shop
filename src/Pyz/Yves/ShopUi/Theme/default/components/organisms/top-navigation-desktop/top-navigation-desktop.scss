@@ -7,13 +7,25 @@
 
       .menu {
         position: absolute;
-        width: 100vw;
+        width: calc(100vw - 16px);
         left: 50%;
         transform: translate(-50%, 0);
         padding: 40px 16px 28px 16px;
         margin: 0;
         height: 381px;
-
+        &:before {
+          position: absolute;
+          display: block;
+          content: '';
+          width: calc(100vw - 26px);
+          left: 50%;
+          top: 0;
+          transform: translate(-50%, 0);
+          padding: 40px 16px 28px 16px;
+          margin: 0;
+          height: 100%;
+          box-shadow: 30px 0 0 0 $setting-color-white;
+        }
       }
 
       .flyout-fullscreen__container {
@@ -76,43 +88,92 @@
             padding-top: 280px;
             font-size: 17px;
           }
-        }
-        .image-1 {
-          background: url("/assets/images/menu-img-5.png") top center no-repeat;
-          background-size: 250px 270px;
-        }
-        .image-2 {
-          background: url("/assets/images/menu-img-6.png") top center no-repeat;
-          background-size: 250px 270px;
-        }
-        .image-3 {
-          background: url("/assets/images/menu-img-3.png") top center no-repeat;
-          background-size: 250px 270px;
-        }
-        .image-4 {
-          background: url("/assets/images/menu-img-4.png") top center no-repeat;
-          background-size: 250px 270px;
-        }
-        .image-5 {
-          background: url("/assets/images/menu-img-1.png") top center no-repeat;
-          background-size: 250px 270px;
-        }
-        .image-6 {
-          background: url("/assets/images/menu-img-2.png") top center no-repeat;
-          background-size: 250px 270px;
+          &.image-1 {
+            background: url("/assets/images/menu-img-5.png") top center no-repeat;
+            background-size: 250px 270px;
+          }
+          &.image-2 {
+            background: url("/assets/images/menu-img-6.png") top center no-repeat;
+            background-size: 250px 270px;
+          }
+          &.image-3 {
+            background: url("/assets/images/menu-img-3.png") top center no-repeat;
+            background-size: 250px 270px;
+          }
+          &.image-4 {
+            background: url("/assets/images/menu-img-4.png") top center no-repeat;
+            background-size: 250px 270px;
+          }
+          &.image-5 {
+            background: url("/assets/images/menu-img-1.png") top center no-repeat;
+            background-size: 250px 270px;
+          }
+          &.image-6 {
+            background: url("/assets/images/menu-img-2.png") top center no-repeat;
+            background-size: 250px 270px;
+          }
         }
       }
 
-
-
     }
+
     .brand-dropdown {
 
+      .menu {
+        height: 270px;
+        padding: 40px 0 28px 0;
+        @include helper-breakpoint-media-max($lg-max) {
+          padding: 40px .5rem 28px .5rem;
+          height: 250px;
+        }
+      }
+
       .flyout-fullscreen__container {
+        display: flex;
+        justify-content: space-between;
+        max-width: 1204px;
+        width: 100%;
         &:before {
           display: none;
         }
       }
+
+      .brand-item {
+        height: 100%;
+        width: 270px;
+        margin: 0 1rem;
+        background-position: top center;
+        background-repeat: no-repeat;
+        background-size: 270px 170px;
+
+        @include helper-breakpoint-media-max($lg-max) {
+          margin: 0 .5rem;
+          background-size: 270px 150px;
+
+        }
+        a {
+          display: block;
+          text-align: center;
+          padding-top: 175px;
+          @include helper-breakpoint-media-max($lg-max) {
+            padding-top: 150px;
+          }
+        }
+        &.image-1 {
+          background-image: url("/assets/images/brand-img-1.png");
+        }
+        &.image-2 {
+          background-image: url("/assets/images/brand-img-2.png");
+        }
+        &.image-3 {
+          background-image: url("/assets/images/brand-img-3.png");
+        }
+        &.image-4 {
+          background-image: url("/assets/images/brand-img-4.png");
+        }
+      }
+
+
 
     }
 
