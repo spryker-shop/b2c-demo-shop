@@ -1,0 +1,30 @@
+{% extends template('widget') %}
+
+{% define data = {
+    items: _widget.bundleItems
+} %}
+
+{% block body %}
+    {% set d = [] %}
+    {% if data.items %}
+        <div>
+            <label>{{ 'cart.item.bundle.description' | trans }}</label>
+            <ul class="list list--bullet spacing-y text-small">
+                {% for item in data.items %}
+                    <li class="list__item">
+                            {% if (item.images|first).externalUrlSmall is defined %}
+                            {% include atom('thumbnail') with {
+                                attributes: {
+                                    alt: item.name,
+                                    src: (item.images|first).externalUrlSmall,
+                                    title: item.name
+                                }
+                            } only %}
+                            {% endif %}
+                        {{ item.quantity }} x {{ item.name }}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+{% endblock %}
