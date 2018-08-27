@@ -52,9 +52,16 @@
             padding: 15px 25px 0;
             text-align: center;
             position: relative;
-            font-size: 15px;
-            font-weight: 700;
+            font: 500 15px $setting-font-family-additional;
             display: none;
+            &:last-child:not(#{$name}--disabled) {
+                &::before {
+                    opacity: 0.4;
+                }
+                &::after {
+                    display: none;
+                }
+            }
             &::before,
             &::after {
                 @include helper-breakpoint-media-min($md-min) {
@@ -74,7 +81,6 @@
 
         &--progress#{&} {
             &--disabled:not(&--active) {
-                font-weight: 500;
                 &::after {
                     display: none;
                 }
@@ -83,13 +89,16 @@
                 color: #111;
                 display: flex;
             }
-            &--active#{$name}--disabled {
-                &::before {
-                    opacity: 0.4;
-                }
-                &::after {
-                    display: block;
-                    width: 50%;
+            &--active {
+                &#{$name}--disabled,
+                &:last-child {
+                    &::before {
+                        opacity: 0.4;
+                    }
+                    &::after {
+                        display: block;
+                        width: 50%;
+                    }
                 }
             }
         }

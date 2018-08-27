@@ -6,12 +6,16 @@ export default class SlickCarousel extends Component {
 
     readyCallback(): void {
 
-        const container = $(this).find(`.${this.name}__container`);
+        const $container = $(this).find(`.${this.name}__container`);
         const sliderConfig = $(this).data('json');
-
-        container.slick(
+        
+        $container.slick(
             sliderConfig
         );
+
+        if ("ontouchstart" in document.documentElement){
+            $container.slick('slickPause');
+        }
     }
 
 }

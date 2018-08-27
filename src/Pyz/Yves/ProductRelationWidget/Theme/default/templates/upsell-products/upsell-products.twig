@@ -1,0 +1,51 @@
+{% extends template('widget') %}
+
+{% define data = {
+    products: []
+} %}
+
+{% block body %}
+    {% if data.products is not empty %}
+
+        <div class="product-slider-title">
+            <div class="">
+                <h4 class="product-slider-title__text">{{ 'page.product.upsell-products' | trans }}</h4>
+            </div>
+            <div class="product-slider-title__line product-slider-title__line--expand"></div>
+        </div>
+
+        {% embed molecule('slick-carousel') with {
+            data: {
+                slides: data.products
+            },
+            attributes: {
+                'data-json': '{
+                            "slidesToShow": 4,
+                            "dots": false,
+                            "responsive": [{
+                                "breakpoint": 820,
+                                "settings": {
+                                    "slidesToShow": 3
+                                }
+                            },
+                            {
+                                "breakpoint": 570,
+                                "settings": {
+                                    "slidesToShow": 2
+                                }
+                            }
+                ]}'
+            }
+        } only %}
+
+            {% block slides %}
+                {% for slide in data.slides %}
+                    {{ widget('ProductWidgetPlugin', slide) }}
+                {% endfor %}
+            {% endblock %}
+        {% endembed %}
+
+    {% endif %}
+{% endblock %}
+
+

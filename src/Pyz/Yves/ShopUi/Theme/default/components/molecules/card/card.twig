@@ -9,7 +9,8 @@
     name: required,
     url: required,
     imageUrl: required,
-    description: ''
+    description: '',
+    buttonClass: ''
 } %}
 
 {% block body %}
@@ -41,7 +42,7 @@
         {% block actionsContainer %}
             <div class="{{config.name}}__actions-container">
                 {% block actions %}
-                    <a class="button button--expand" href="{{data.url}}">
+                    <a class="button button--expand {{ data.buttonClass }}" href="{{data.url}}">
                         {{'product.view' | trans}}
                         {% include atom('icon') with {
                             modifiers: ['small'],

@@ -20,7 +20,8 @@
 
         &--black {
             background: #111;
-            &:hover {
+            &:hover,
+            &:focus {
                 background: #ff4859;
             }
         }
@@ -78,6 +79,14 @@
 
         &--expand {
             width: 100%;
+        }
+
+        &--big {
+            @include helper-breakpoint-media-min($md-min) {
+                font-size: 16px;
+            }
+            padding: 1.25rem;
+            font: 500 15px $setting-font-family-additional;
         }
 
         &[disabled],

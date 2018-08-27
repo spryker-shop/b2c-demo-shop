@@ -1,0 +1,109 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'wishlist-table',
+    tag: 'div'
+} %}
+
+{% define data = {
+    wishlistItems: required,
+    wishlistName: required
+} %}
+
+{% block body %}
+    <div class="is-scrollable-x">
+        <table class="table table--expand">
+            <thead>
+                <tr>
+                    <th>{{ 'customer.account.wishlist.product' | trans  }}</th>
+                    <th>{{ 'customer.account.wishlist.price' | trans  }}</th>
+                    <th>{{ 'customer.account.wishlist.availability' | trans  }}</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for item in data.wishlistItems %}
+                <tr>
+                    <td class="product-cell">
+                        {% set imageUrl = item.images[0].externalUrlSmall %}
+                        {% if imageUrl %}
+                            {% include atom('thumbnail') with {
+                                modifiers: ['small', 'min-size'],
+                                attributes: {
+                                    alt: item.name,
+                                    src: imageUrl,
+                                    title: item.name,
+                                }
+                            } only %}
+                        {% endif %}
+                        <ul>
+                            <li><strong><a href="{{ item.url }}">{{ item.name }}</a></strong></li>
+                            {#<li>SKU: {{ item.sku }}</li>#}
+                            {% for attribute in item.superAttributesDefinition %}
+                                {% if item.attributes[attribute] is defined %}
+                                    <li>{{ ('product.attribute.'~attribute) | trans }}: {{ item.attributes[attribute] }}</li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </td>
+                    <td nowrap="nowrap">
+                        {% if item.price is not null %}
+                            {% include molecule('price') with {
+                                data: {
+                                    amount: item.price | money,
+                                    originalAmount: item.prices.DEFAULT is empty ? null : (item.prices.DEFAULT | money)
+                                }
+                            } only %}
+                        {% else %}
+                            N/A
+                        {% endif %}
+                    </td>
+                    <td class="availability-cell">
+                        {% if item.available %}
+                            {{ 'customer.account.wishlist.available' | trans }}
+                        {% else %}
+                            {{ 'customer.account.wishlist.not_available' | trans }}
+                        {% endif %}
+                    </td>
+                    <td>
+                        <ul class="menu menu--inline float-right">
+                            {% if item.available and item.price is not null %}
+                                <li class="menu__item float-right">
+                                    <form id="addToCart_{{ loop.index }}"
+                                          class=""
+                                          method="POST"
+                                          action="{{ path('wishlist/move-to-cart', {sku: item.sku, 'wishlist-name': data.wishlistName}) }}">
+                                                <button type="submit" class="wishlist-overview-table__button" title="{{ 'customer.account.wishlist.add-to-cart' | trans }}">
+                                                    {#{% include atom('icon') with {#}
+                                                        {#data: {#}
+                                                            {#name: 'cart-plus'#}
+                                                        {#}#}
+                                                    {#} only %}#}
+                                                    {{ 'customer.account.wishlist.add-to-cart' | trans }}
+                                                </button>
+                                    </form>
+                                </li>
+                            {% endif %}
+                            <li class="menu__item float-right">
+                                <form id="deleteWishlistItem_{{ loop.index }}"
+                                      class=""
+                                      method="POST"
+                                      action="{{ path('wishlist/remove-item', {sku: item.sku, 'wishlist-name': data.wishlistName}) }}">
+                                            <button type="submit" class="wishlist-overview-table__button" title="{{ 'customer.account.wishlist.remove' | trans }}">
+                                                {#{% include atom('icon') with {#}
+                                                    {#data: {#}
+                                                        {#name: 'remove'#}
+                                                    {#}#}
+                                                {#} only %}#}
+                                                {{ 'customer.account.wishlist.remove' | trans }}
+                                            </button>
+                                </form>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends template('page-layout-main') %}
+
+{% define data = {
+    sets: _view.productSets,
+
+    title: 'product.sets' | trans
+} %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block content %}
+    {% if data.sets is not empty %}
+        <div class="grid set-list">
+            {% for productSet in data.sets %}
+                {% set imageUrl = productSet.imageSets.0.images.0.externalUrlSmall | default('') %}
+
+                <div class="col col--sm-12 col--lg-4 set-list__item">
+                    {% include molecule('card') with {
+                        data: {
+                            name: productSet.name,
+                            url: productSet.url,
+                            imageUrl: imageUrl,
+                            buttonClass: 'button--black'
+                        }
+                    } only %}
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="box">
+            <p>
+                {{ 'product.sets.no-results' | trans }}
+            </p>
+        </div>
+    {% endif %}
+{% endblock %}

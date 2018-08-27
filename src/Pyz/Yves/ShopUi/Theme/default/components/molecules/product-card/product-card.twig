@@ -19,7 +19,7 @@
     <div class="{{config.name}}__container">
         <div class="{{ config.name }}__thumbnail">
             {% block image %}
-                <a href="{{data.url}}" class="{{ config.name }}__overlay">
+                <a href="{{data.url}}" class="{{ config.name }}__overlay js-product-color-group__image-{{ data.abstractId }}">
                     {% include atom('thumbnail') with {
                         attributes: {
                             alt: data.name,

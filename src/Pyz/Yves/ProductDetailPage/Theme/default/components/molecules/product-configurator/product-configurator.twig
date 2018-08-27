@@ -60,23 +60,15 @@
                 <div class="pdp-option">
                     <div class="pdp-option__title">{{'cart.item_quantity' | trans}}</div>
                     <div class="pdp-option__wrapper">
-
-                        {#{% include atom('select') with {#}
-                            {#modifiers: ['expand'],#}
-                            {#data: {#}
-                                {#options: options#}
-                            {#},#}
-                            {#attributes: {#}
-                                {#name: 'quantity',#}
-                                {#disabled: isDisabled#}
-                            {#}#}
-                        {#} only %}#}
-
                         {% include molecule('quantity-counter') with {
                             modifiers: ['lg']
                         } only %}
                     </div>
                 </div>
+            {% endif %}
+
+            {% if not isAvailable %}
+                {{ widget('AvailabilityWidgetPlugin', data.product) }}
             {% endif %}
 
             <div class="add-to-cart">
@@ -87,7 +79,6 @@
         {% endif %}
 
         {#{{ widget('MultiCartWidgetPlugin', data.product, isDisabled) }}#}
-        {{ widget('AvailabilityWidgetPlugin', data.product) }}
 
     </form>
 

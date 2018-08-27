@@ -1,8 +1,9 @@
 {% extends template('widget') %}
 
 {% define data = {
+    idProductAbstract: _widget.product.idProductAbstract | default,
     images: _widget.product.images | default([]),
-    amountSlides: 6
+    amountSlides: 5
 } %}
 
 {% block body %}
@@ -10,66 +11,35 @@
     {% set sliderLength = data.images | length %}
     {% set amountThumb = (sliderLength > data.amountSlides) ? data.amountSlides : sliderLength %}
 
-    {% embed molecule('slick-carousel') with {
+    {% include molecule('pdp-carousel', 'ProductImageWidget') with {
         class: 'pdp-slider',
         data: {
+            idProductAbstract: data.idProductAbstract,
             slides: data.images,
-            containerClass: 'js-product-slider'
+            containerClass: sliderLength > 1 ? 'js-product-slider' : '',
+            thumbnailClass: sliderLength > 1 ? 'js-product-slider-thumbnails' : ''
         },
         attributes: {
-            'data-json': '{
-                "slidesToShow": 1,
+            'data-thumbnail-config': '{
+                "slidesToShow": ' ~ amountThumb ~ ',
                 "slidesToScroll": 1,
-                "arrows": false,
-                "fade": true,
-                "dots": false,
+                "infinite": false,
+                "vertical": true,
+                "prevArrow": "<dev class=\'thumb-prev\'><svg class=\'icon\'><use href=\'#:arrow-down\'></use></svg></div>",
+                "nextArrow": "<dev class=\'thumb-next\'><svg class=\'icon\'><use href=\'#:arrow-down\'></use></svg></div>",
                 "responsive": [
                     {
                         "breakpoint": 769,
                         "settings": {
-                            "fade": false,
+                            "slidesToShow": 1,
+                            "vertical": false,
+                            "infinite": true,
+                            "arrows": false,
                             "dots": true
                         }
                     }]
             }'
         }
     } only %}
-        {% block slides %}
-            {% for slide in data.slides %}
-                <div class="pdp-img">
-                    <img src="{{ slide.externalUrlLarge }}" alt="" >
-                </div>
-            {% endfor %}
-        {% endblock %}
-    {% endembed %}
-
-
-    {% if (sliderLength > 1) %}
-        {% embed molecule('slick-carousel') with {
-            class: 'pdp-slider-thumbnails',
-            data: {
-                slides: data.images,
-                containerClass: 'js-product-slider-thumbnails'
-            },
-            attributes: {
-                'data-json': '{
-                    "slidesToShow": ' ~ amountThumb ~ ',
-                    "slidesToScroll": 1,
-                    "centerMode": true,
-                    "focusOnSelect": true,
-                    "vertical": true,
-                    "asNavFor": ".js-product-slider"
-                }'
-            }
-        } only %}
-            {% block slides %}
-                {% for slide in data.slides %}
-                    <div class="thumb">
-                        <img src="{{ slide.externalUrlSmall }}" alt="" >
-                    </div>
-                {% endfor %}
-            {% endblock %}
-        {% endembed %}
-    {% endif %}
 
 {% endblock %}

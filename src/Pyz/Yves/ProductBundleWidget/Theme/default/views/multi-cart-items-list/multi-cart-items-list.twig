@@ -1,0 +1,17 @@
+{% extends template('widget') %}
+
+{% define data = {
+    items: _widget.items,
+    itemDisplayLimit: _widget.itemDisplayLimit
+} %}
+
+{% block body %}
+    <ul class="list list--bullet">
+        {% for item in data.items | slice(0, data.itemDisplayLimit) %}
+            <li class="list__item">{{ item.name }}</li>
+        {% endfor %}
+        {% if data.itemDisplayLimit < data.items|length %}
+            <li class="list__item">&hellip;</li>
+        {% endif %}
+    </ul>
+{% endblock %}

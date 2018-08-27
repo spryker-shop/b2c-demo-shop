@@ -40,7 +40,8 @@
             margin-bottom: 29px;
         }
 
-        .color-selector {
+        .color-selector,
+        .color-selector-pdp {
             &__color {
                 width: 24px;
                 height: 24px;
@@ -73,6 +74,9 @@
             padding: 15px 0 70px;
             .wishlist-input {
                 padding-right: 10px;
+                &:empty {
+                    display: none;
+                }
             }
             button {
                 line-height: 16px;
@@ -134,6 +138,9 @@
             padding-bottom: 30px;
             line-height: 22px;
             font-weight: 300;
+            .text-alert {
+                margin: 0;
+            }
         }
         &__sku {
             padding-top: 22px;

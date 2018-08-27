@@ -4,24 +4,21 @@
     {#<div style="background-image: url('/assets/images/section-slider-item-10@2x.png')"></div>#}
     <div class="grid grid--center grid--middle image-banner">
         <div class="image-banner__bg-wrapper">
-            {#<video preload="preload"  id="video" autoplay="autoplay" loop="loop">#}
-                {#<source src="/assets/images/bouguessa.mp4" type="video/mp4">#}
-            {#</video>#}
-            {% include molecule('video-replacer') with {
-                data: {
-                    url: '/assets/images/bouguessa.mp4'
-                }
-            } only %}
+            <video preload="none" autoplay="autoplay" loop="loop" muted="muted">
+                <source src="/assets/images/bouguessa.mp4" type="video/mp4">
+            </video>
+            {#{% include molecule('video-replacer') with {#}
+                {#attributes: {#}
+                    {#url: '/assets/images/bouguessa.mp4'#}
+                {#}#}
+            {#} only %}#}
         </div>
         <div class="image-banner__text">
             <div class="image-banner__title">
                 {{ spyCmsBlockPlaceholder('title') | raw }}
             </div>
+            {{ spyCmsBlockPlaceholder('description') | raw }}
 
-            <div class="image-banner__description">
-                {{ spyCmsBlockPlaceholder('description') | raw }}
-            </div>
-            <a href="#" class="image-banner__link">{{ 'cms-product-group.category.link.text' | trans }}</a>
         </div>
     </div>
 

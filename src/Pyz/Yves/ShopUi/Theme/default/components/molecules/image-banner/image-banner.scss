@@ -1,0 +1,117 @@
+@mixin shop-ui-image-banner($name: '.image-banner') {
+    #{$name}{
+        margin: 180px 0;
+        height: 750px;
+        padding: 0 80px;
+        position: relative;
+        video {
+            width: auto;
+            height: auto;
+            min-width: 100%;
+            display: none;
+            .no-touch & {
+                display: block;
+            }
+        }
+        &__bg-wrapper {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            .touch & {
+                background-image: url("/assets/images/section-brand-a-bg@3x.png");
+                background-size: cover;
+            }
+        }
+        @include helper-breakpoint-media-max($md-max) {
+            padding: 0 55px;
+            margin-bottom: 400px;
+        }
+        &__text {
+            width: 570px;
+            position: relative;
+            @include helper-breakpoint-media-max($md-max) {
+                position: static;
+            }
+        }
+        &__image {
+            position: absolute;
+            right: -220px;
+            top:-50px;
+            width: 270px;
+            height: 715px;
+            overflow: hidden;
+            border-radius: 4px;
+            box-shadow: 0 0 70px 0 rgba(0, 0, 0, 0.2);
+            img {
+                width: 100%;
+            }
+            @include helper-breakpoint-media-max($xl-max) {
+                right: -160px;
+            }
+            @include helper-breakpoint-media-max($lg-max) {
+                right: -100px;
+                top: 40%;
+                width: 240px;
+                height: 562px;
+            }
+
+            @include helper-breakpoint-media-max($md-max) {
+                bottom: 0;
+                left: 50%;
+                top: unset;
+                right: unset;
+                transform: translate(-50%, 50%);
+                width: 260px;
+                height: 500px;
+            }
+            @include helper-breakpoint-media-max($sm-max) {
+                bottom: -40px;
+            }
+        }
+        &__title {
+            &>* {
+                font: normal 53px $setting-font-family-additional;
+                line-height: 1.06;
+                letter-spacing: -1.5px;
+                color: $setting-color-white;
+                text-indent: -30px;
+                @include helper-breakpoint-media-max($md-max) {
+                    font-size: 39px;
+                }
+            }
+        }
+        &__description {
+            p {
+                padding: 20px 0;
+                font: normal 16px $setting-font-family;
+                line-height: 1.69;
+                opacity: 0.64;
+                letter-spacing: 0.2px;
+                color: $setting-color-white * .6;
+                max-width: 420px;
+            }
+        }
+        &__link {
+            color: $setting-color-white;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2.7px;
+            position: relative;
+            &:hover {
+                color: $setting-color-white;
+                text-decoration: none;
+            }
+            &::after {
+                content: '';
+                display: block;
+                position: absolute;
+                height: 1px;
+                width: 100%;
+                background: $setting-color-white;
+                bottom: -9px;
+            }
+        }
+    }
+}
+

@@ -1,0 +1,46 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'pdp-carousel',
+    tag: 'pdp-carousel'
+} %}
+
+{% define data = {
+    idProductAbstract: required,
+    slides: [],
+    containerClass: '',
+    thumbnailClass: ''
+} %}
+
+{% define attributes = {
+    'data-main-config': '',
+    'data-thumbnail-config': ''
+} %}
+
+{% set sliderLength = data.slides | length %}
+{% set firstSlide = data.slides | first %}
+
+{% block body %}
+
+    <div class="{{config.name}}__container {{ data.containerClass }}">
+        {% for slide in data.slides %}
+            <div class="pdp-img">
+                <img src="{{ slide.externalUrlLarge }}" alt="" >
+            </div>
+        {% endfor %}
+        <div class="pdp-img js-pdp-color-group__image-{{ data.idProductAbstract }}">
+            <img src="{{ firstSlide.externalUrlLarge }}" alt="" >
+        </div>
+    </div>
+
+    {% if (sliderLength > 1) %}
+        <div class="{{config.name}}__thumbnail {{ data.thumbnailClass }}">
+            {% for slide in data.slides %}
+                <div class="pdp-img">
+                    <img src="{{ slide.externalUrlLarge }}" alt="" >
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+{% endblock %}

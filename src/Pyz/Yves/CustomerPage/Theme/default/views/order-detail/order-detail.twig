@@ -12,20 +12,26 @@
     {{ widgetBlock('CustomerReorderWidgetPlugin', 'formStart', data.order) }}
 
     <div class="box">
-        <a href="{{url('customer/order')}}" class="link float-right">{{ 'general.back.button' | trans }}</a>
-        <h5>{{ 'customer.profile.order_details' | trans }}</h5>
-        <hr />
-        <ul>
-            <li>
-                {{ 'customer.order.order_id' | trans }}:
-                <strong>{{ _view.order.orderReference }}</strong>
-            </li>
-            <li>
-                {{ 'customer.order.date' | trans }}:
-                <strong>{{ _view.order.createdAt | formatDateTime }}</strong>
-            </li>
-        </ul>
-        <hr />
+        <div class="customer-account__box grid grid--justify grid--middle box">
+            <h5 class="customer-account__subtitle col">{{ 'customer.profile.order_details' | trans }}</h5>
+        </div>
+        <div class="grid grid--justify">
+            <ul class="col">
+                <li>
+                    {{ 'customer.order.order_id' | trans }}:
+                    <strong>{{ _view.order.orderReference }}</strong>
+                </li>
+                <li>
+                    {{ 'customer.order.date' | trans }}:
+                    <strong>{{ _view.order.createdAt | formatDateTime }}</strong>
+                </li>
+            </ul>
+            <a href="{{url('customer/order')}}" class="button button--white col">{{ 'general.back.button' | trans }}</a>
+        </div>
+    </div>
+
+
+    <div class="box">
         {% embed molecule('order-detail-table', 'CustomerPage') with {
             data: {
                 items: data.orderItems,
@@ -55,34 +61,48 @@
                 {{parent()}}
             {% endblock %}
         {% endembed %}
-        <hr />
-        {% include molecule('order-summary', 'CustomerPage') with {
-            class: 'text-right',
-            data: {
-                order: data.order
-            }
-        } only %}
+        <div class="customer-account__box">
+            {% include molecule('order-summary', 'CustomerPage') with {
+                class: 'text-right',
+                data: {
+                    order: data.order
+                }
+            } only %}
+        </div>
     </div>
 
-    <div class="box">
-        <h5>{{ 'customer.order.shipping_address' | trans }}</h5>
-        <hr />
-        {% include molecule('display-address') with {
-            data: {
-                address: data.order.shippingAddress
-            }
-        } only %}
+    <div class="grid grid--justify">
+        <div class="col--lg-6 col--sm-12">
+            <div class="box">
+                <div class="customer-account__box">
+                    <h5 class="customer-account__subtitle">{{ 'customer.order.shipping_address' | trans }}</h5>
+
+                </div>
+                {% include molecule('display-address') with {
+                    data: {
+                        address: data.order.shippingAddress
+                    }
+                } only %}
+            </div>
+        </div>
+        <div class="col--lg-6 col--sm-12">
+            <div class="box">
+                <div class="customer-account__box">
+                    <h5 class="customer-account__subtitle">{{ 'customer.order.billing_address' | trans }}</h5>
+                </div>
+                {% include molecule('display-address') with {
+                    data: {
+                        address: data.order.billingAddress
+                    }
+                } only %}
+            </div>
+        </div>
+
+
+
     </div>
 
-    <div class="box">
-        <h5>{{ 'customer.order.billing_address' | trans }}</h5>
-        <hr />
-        {% include molecule('display-address') with {
-            data: {
-                address: data.order.billingAddress
-            }
-        } only %}
-    </div>
+
 
     {{ widget('CartNoteOrderNoteWidgetPlugin', data.order) }}
     {{ widgetBlock('CustomerReorderWidgetPlugin', 'formActions', data.order) }}

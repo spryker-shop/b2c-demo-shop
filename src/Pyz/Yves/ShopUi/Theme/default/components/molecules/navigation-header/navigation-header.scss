@@ -22,7 +22,7 @@ $setting-mobile-shadow-width: 12%;
             &__item {
                 &--has-children-dropdown {
                     & > .menu {
-                        box-shadow: 0 0 100px 0 rgba(12, 16, 31, 0.07);
+                        box-shadow: 0 12px 10px 0 rgba(12, 16, 31, 0.07);
                     }
                 }
             }
@@ -40,6 +40,10 @@ $setting-mobile-shadow-width: 12%;
                 }
                 &>li {
                     margin: 0 .6rem;
+                    cursor: default;
+                }
+                &>li>a {
+                    cursor: pointer;
                 }
 
             }
@@ -59,59 +63,6 @@ $setting-mobile-shadow-width: 12%;
             }
         }
 
-        @include helper-breakpoint-media-max($md-max) {
-            position: relative;
-
-            .menu {
-                &__item {
-                    &--has-children-dropdown {
-                        .menu {
-                            display: none;
-                        }
-                    }
-                }
-                &--scrollable {
-                    margin: 0 15px;
-                    overflow-x: auto;
-                    overflow-y: hidden;
-                    &::-webkit-scrollbar {
-                        display: none;
-                    }
-                }
-                &--top-level {
-                    justify-content: flex-start;
-                    &>li:first-child {
-                        padding-left: $setting-mobile-shadow-width/4;
-                    }
-                    &>li:last-child {
-                        padding-right: $setting-mobile-shadow-width/4;
-                    }
-                }
-            }
-            &::after, &::before {
-                content: '';
-                display: block;
-                width: $setting-mobile-shadow-width;
-                height: 100%;
-                position: absolute;
-                top: 0;
-                z-index: 200;
-            }
-
-            &::after {
-                right: 0;
-                //box-shadow: -50px 0 60px -10px white inset;
-                background: linear-gradient(to right, rgba(255,255,255,0) 0%,rgba(255,255,255,0) 8%,rgba(255,255,255,1) 54%,rgba(255,255,255,1) 100%);
-            }
-            &::before {
-                left: 0;
-                //box-shadow: 50px 0 60px -10px white inset;
-                background: linear-gradient(to right, rgba(255,255,255,1) 0%,rgba(255,255,255,1) 46%,rgba(255,255,255,0) 92%,rgba(255,255,255,0) 100%);
-
-            }
-        }
-
     }
 }
 
-@include shop-ui-navigation-header();

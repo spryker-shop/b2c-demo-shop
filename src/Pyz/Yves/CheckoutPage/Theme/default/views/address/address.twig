@@ -6,18 +6,19 @@
         shipping: _view.addressesForm.shippingAddress,
         billing: _view.addressesForm.billingAddress
     },
-    
-    title: 'checkout.step.address.title' | trans
+
+    title: null
 } %}
 
 {% block content %}
     {% embed molecule('form') with {
-        class: 'checkout-layout',
+        class: 'checkout-layout checkout-layout--address-step',
         data: {
             form: data.forms.address,
             submit: {
                 enable: true,
-                text: 'checkout.step.shipment' | trans
+                text: 'checkout.step.shipment' | trans,
+                class: 'button button--black button--big button--expand'
             }
         },
         embed: {
@@ -29,77 +30,124 @@
     } only %}
         {% block fields %}
 
-            <div class="grid grid--justify">
-                <div class="col col--sm-6 checkout-layout__half">
-                    {% include molecule('form') with {
-                        class: 'address-form',
-                        data: {
-                            class: 'col col--sm-6',
-                            title: 'page.checkout.address.shipping-address' | trans,
-                            form: embed.forms.shipping,
-                            enableStart: false,
-                            enableEnd: false,
-                            layout: {
-                                id_customer_address: 'col col--sm-12 checkout__address-list',
-                                salutation: 'col col--sm-12 col--lg-2',
-                                first_name: 'col col--sm-12 col--lg-5',
-                                last_name: 'col col--sm-12 col--lg-5',
-                                address1: 'col col--sm-12 col--md-8 col--lg-6',
-                                address2: 'col col--sm-12 col--md-4 col--lg-2',
-                                address3: 'col col--sm-12 col--md-4 col--lg-4',
-                                zip_code: 'col col--sm-6 col--lg-3',
-                                city: 'col col--sm-6 col--lg-5',
-                                iso2_code: 'col col--sm-12 col--lg-4'
-                            },
-                            submit: {
-                                enable: false
-                            },
-                            cancel: {
-                                enable: false
-                            }
-                        }
-                    } only %}
-                </div>
+            <h5>{{ 'page.checkout.address.shipping-address' | trans }}</h5>
+            {% set existingShippingAddresses = data.form.shippingAddress.id_customer_address | default %}
+            {% set hasShippingAddresses = existingShippingAddresses is not empty %}
 
-                <div class="col col--sm-6 checkout-layout__half">
-                    <h5>{{'page.checkout.address.billing-address' | trans}}</h5>
-                    <div class="address-form">
-                        {{form_row(data.form.billingSameAsShipping, {
-                            component: molecule('toggler-checkbox'),
-                            attributes: {
-                                'target-selector': '.js-address__billing',
-                                'class-to-toggle': 'is-hidden',
-                                'add-class-when-checked': true
-                            }
-                        })}}
-                        {% include molecule('form') with {
-                            class: 'js-address__billing form__fields is-hidden',
-                            data: {
-                                form: embed.forms.billing,
-                                enableStart: false,
-                                enableEnd: false,
-                                layout: {
-                                    id_customer_address: 'col col--sm-12 checkout__address-list',
-                                    salutation: 'col col--sm-12 col--lg-2',
-                                    first_name: 'col col--sm-12 col--lg-5',
-                                    last_name: 'col col--sm-12 col--lg-5',
-                                    address1: 'col col--sm-12 col--md-8 col--lg-6',
-                                    address2: 'col col--sm-12 col--md-4 col--lg-2',
-                                    address3: 'col col--sm-12 col--md-4 col--lg-4',
-                                    zip_code: 'col col--sm-6 col--lg-3',
-                                    city: 'col col--sm-6 col--lg-5',
-                                    iso2_code: 'col col--sm-12 col--lg-4'
-                                },
-                                submit: {
-                                    enable: false
-                                },
-                                cancel: {
-                                    enable: false
-                                }
-                            }
-                        } only %}
+            {% if hasShippingAddresses %}
+                <div class="grid">
+                    <div class="form__field col col--sm-12">
+                        <ul class="list spacing-y">
+                            {% for address in existingShippingAddresses %}
+                                <li class="list__item spacing-y">
+                                    {{
+                                    form_row(address, {
+                                        component: molecule('toggler-radio'),
+                                        attributes: {
+                                            'target-selector': '.js-address__shipping',
+                                            'class-to-toggle': 'is-hidden',
+                                            'add-class-when-checked': not loop.last
+                                        }
+                                    })
+                                    }}
+                                </li>
+                            {% endfor %}
+                        </ul>
                     </div>
                 </div>
+            {% endif %}
+
+            {% include molecule('form') with {
+                class: 'address-form js-address__shipping' ~ (hasShippingAddresses ? ' is-hidden' : ''),
+                data: {
+                    class: 'col col--sm-6',
+                    form: embed.forms.shipping,
+                    enableStart: false,
+                    enableEnd: false,
+                    layout: {
+                        salutation: 'col col--md-2',
+                        first_name: 'col col--md-5',
+                        last_name: 'col col--md-5',
+                        address1: 'col col--md-8',
+                        address2: 'col col--md-4',
+                        zip_code: 'col col--md-3',
+                        city: 'col col--md-5',
+                        iso2_code: 'col col--md-4'
+                    },
+                    submit: {
+                        enable: false
+                    },
+                    cancel: {
+                        enable: false
+                    }
+                }
+            } only %}
+
+            <h5>{{'page.checkout.address.billing-address' | trans}}</h5>
+            <div class="address-form">
+                {{form_row(data.form.billingSameAsShipping, {
+                    component: molecule('toggler-checkbox'),
+                    attributes: {
+                        'target-selector': '.js-address__billing-same-as-shipping',
+                        'class-to-toggle': 'is-hidden',
+                        'add-class-when-checked': true
+                    }
+                })}}
+
+                {% embed molecule('form') with {
+                    class: 'is-hidden spacing-top spacing-top--big js-address__billing-same-as-shipping',
+                    data: {
+                        form: embed.forms.billing,
+                        enableStart: false,
+                        enableEnd: false,
+                        layout: {
+                            salutation: 'col col--md-2',
+                            first_name: 'col col--md-5',
+                            last_name: 'col col--md-5',
+                            address1: 'col col--md-8',
+                            address2: 'col col--md-4',
+                            zip_code: 'col col--md-3',
+                            city: 'col col--md-5',
+                            iso2_code: 'col col--md-4'
+                        },
+                        submit: {
+                            enable: false
+                        },
+                        cancel: {
+                            enable: false
+                        }
+                    }
+                } only %}
+                    {% block fields %}
+                        {% set existingBillingAddresses = data.form.id_customer_address | default %}
+                        {% set hasBillingAddresses = existingBillingAddresses is not empty %}
+
+                        {% if hasBillingAddresses %}
+                            <div class="form__field col col--sm-12">
+                                <ul class="list spacing-y">
+                                    {% for address in existingBillingAddresses %}
+                                        <li class="list__item spacing-y">
+                                            {{
+                                            form_row(address, {
+                                                component: molecule('toggler-radio'),
+                                                attributes: {
+                                                    'target-selector': '.js-address__billing',
+                                                    'class-to-toggle': 'is-hidden',
+                                                    'add-class-when-checked': not loop.last
+                                                }
+                                            })
+                                            }}
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endif %}
+
+                        <div class="js-address__billing">
+                            {{parent()}}
+                        </div>
+                    {% endblock %}
+                {% endembed %}
             </div>
         {% endblock %}
     {% endembed %}
