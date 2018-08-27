@@ -1,0 +1,18 @@
+{% extends template('widget') %}
+
+{% define data = {
+    items: _widget.bundleItems
+} %}
+
+{% block body %}
+    {% if data.items %}
+        <div class="cart-bundle-list">
+            <label>{{ 'cart.item.bundle.description' | trans }}</label>
+            <ul class="list list--bullet spacing-y text-small">
+                {% for item in data.items %}
+                    <li class="list__item">{{ item.quantity }} x {{ item.name }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+{% endblock %}
