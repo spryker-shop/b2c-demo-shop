@@ -15,7 +15,7 @@
         <table class="table table--expand">
             <thead>
                 <tr>
-                    <th colspan="2">{{ 'customer.account.wishlist.product' | trans  }}</th>
+                    <th>{{ 'customer.account.wishlist.product' | trans  }}</th>
                     <th>{{ 'customer.account.wishlist.price' | trans  }}</th>
                     <th>{{ 'customer.account.wishlist.availability' | trans  }}</th>
                     <th></th>
@@ -24,7 +24,7 @@
             <tbody>
             {% for item in data.wishlistItems %}
                 <tr>
-                    <td>
+                    <td class="product-cell">
                         {% set imageUrl = item.images[0].externalUrlSmall %}
                         {% if imageUrl %}
                             {% include atom('thumbnail') with {
@@ -36,11 +36,9 @@
                                 }
                             } only %}
                         {% endif %}
-                    </td>
-                    <td>
                         <ul>
                             <li><strong><a href="{{ item.url }}">{{ item.name }}</a></strong></li>
-                            <li>SKU: {{ item.sku }}</li>
+                            {#<li>SKU: {{ item.sku }}</li>#}
                             {% for attribute in item.superAttributesDefinition %}
                                 {% if item.attributes[attribute] is defined %}
                                     <li>{{ ('product.attribute.'~attribute) | trans }}: {{ item.attributes[attribute] }}</li>
@@ -60,7 +58,7 @@
                             N/A
                         {% endif %}
                     </td>
-                    <td>
+                    <td class="availability-cell">
                         {% if item.available %}
                             {{ 'customer.account.wishlist.available' | trans }}
                         {% else %}
@@ -70,7 +68,7 @@
                     <td>
                         <ul class="menu menu--inline float-right">
                             {% if item.available and item.price is not null %}
-                                <li class="menu__item">
+                                <li class="menu__item float-right">
                                     <form id="addToCart_{{ loop.index }}"
                                           class=""
                                           method="POST"
@@ -86,7 +84,7 @@
                                     </form>
                                 </li>
                             {% endif %}
-                            <li class="menu__item">
+                            <li class="menu__item float-right">
                                 <form id="deleteWishlistItem_{{ loop.index }}"
                                       class=""
                                       method="POST"

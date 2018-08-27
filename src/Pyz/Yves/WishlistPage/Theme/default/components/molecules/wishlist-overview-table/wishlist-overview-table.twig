@@ -29,7 +29,7 @@
                         {% if hasWishlistForm %}
                             {{ form_start(data.wishlistForm) }}
                                 <div class="grid">
-                                    <div class="col">
+                                    <div class="col wishlist-input">
                                         {{ form_widget(data.wishlistForm.name, {attr: {placeholder: 'customer.account.wishlist.overview.enter_name'|trans}}) }}
 
                                     </div>
@@ -52,7 +52,7 @@
                     </td>
                     <td>{{ wishlist.numberOfItems }}</td>
                     <td>{{ wishlist.createdAt | formatDate }}</td>
-                    <td>
+                    <td class="action-buttons-cell">
                         <ul class="menu menu--inline float-right">
                             <li class="menu__item">
                                 <a href="{{ url('wishlist/update', {wishlistName: wishlist.name}) }}" title="{{ 'customer.account.wishlist.overview.edit' | trans }}">

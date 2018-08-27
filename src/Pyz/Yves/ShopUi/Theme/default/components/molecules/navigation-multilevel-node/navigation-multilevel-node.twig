@@ -7,19 +7,20 @@
 
 {% block body %}
     {{ parent() }}
+    {% if data.node.children is not empty %}
+        <ul class="menu">
+            {% for childNode in data.node.children %}
+                {% set hasChildren = childNode.children | length > 0 %}
 
-    <ul class="menu">
-        {% for childNode in data.node.children %}
-            {% set hasChildren = childNode.children | length > 0 %}
-
-            {% include molecule('navigation-multilevel-node') with {
-                class: 'menu__item' ~ (hasChildren ? ' menu__item--has-children-list' : ''),
-                data: {
-                    node: childNode
-                }
-            } only %}
-        {% endfor %}
-    </ul>
+                {% include molecule('navigation-multilevel-node') with {
+                    class: 'menu__item' ~ (hasChildren ? ' menu__item--has-children-list' : '' ) ~ ' ' ~ childNode.cssClass,
+                    data: {
+                        node: childNode
+                    }
+                } only %}
+            {% endfor %}
+        </ul>
+    {% endif %}
 {% endblock %}
 
 {% block url %}

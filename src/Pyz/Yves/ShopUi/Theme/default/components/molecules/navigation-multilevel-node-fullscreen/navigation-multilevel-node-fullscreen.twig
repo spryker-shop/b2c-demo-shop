@@ -1,0 +1,44 @@
+{% extends atom('node') %}
+
+{% define config = {
+    name: 'navigation-multilevel-node',
+    tag: 'li'
+} %}
+
+{% block body %}
+    {{ parent() }}
+    {% if data.node.children is not empty %}
+        <ul class="menu">
+            <div class="flyout-fullscreen__container">
+            {% for childNode in data.node.children %}
+                {% set hasChildren = childNode.children | length > 0 %}
+
+                {% include molecule('navigation-multilevel-node') with {
+                    class: 'menu__item' ~ (hasChildren ? ' menu__item--has-children-list' : '' ) ~ ' ' ~ childNode.cssClass,
+                    data: {
+                        node: childNode
+                    }
+                } only %}
+            {% endfor %}
+            </div>
+        </ul>
+    {% endif %}
+
+{% endblock %}
+
+{% block url %}
+    <a href="{{ data.node.url }}">{{ data.node.title }}</a>
+{% endblock %}
+
+{% block link %}
+    <a href="{{ data.node.url }}">{{ data.node.title }}</a>
+{% endblock %}
+
+{% block externalUrl %}
+    <a href="{{ data.node.url }}" target="_blank">{{ data.node.title }}</a>
+{% endblock %}
+
+{% block other %}
+    {{ data.node.title }}
+{% endblock %}
+

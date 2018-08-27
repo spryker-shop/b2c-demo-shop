@@ -11,20 +11,46 @@
 } %}
 
 {% block body %}
+
+
     <div class="container">
+        <div class="{{ config.name }}__search-overlay js-toggle-search">
+            <div class="{{ config.name }}__search-overlay-container">
+                <div class="{{ config.name }}__search-close js-search-hide-icon">
+                    {% include atom('icon') with {
+                        data: {
+                            name: 'close'
+                        }
+                    } only %}
+                </div>
+                {% if data.showSearchForm %}
+                    {% include molecule('search-form') with {
+                        class: '',
+                        attributes: {
+                            'data-search-id': 'desktop'
+                        }
+                    } only %}
+                {% endif %}
+
+            </div>
+            <div class="{{ config.name }}__overlay-shadow js-search-hide-overlay"></div>
+        </div>
 
         <div class="{{config.name}}__row {{config.name}}__navigation-top grid grid--middle grid--justify">
 
             {% block additionalLink %}{% endblock %}
 
-            <div class="col col--sm-12 col--lg-4 is-hidden-sm-md">
-                {% if data.showSearchForm %}
-                    {% include molecule('search-form') with {
-                        class: config.name ~ '__search-form'
-                    } only %}
-                {% endif %}
-
-            </div>
+                <div class="col col--sm-12 col--lg-4 is-hidden-sm-md">
+                    {% if data.showSearchForm %}
+                        <div class="{{ config.name }}__search-open js-search-show-icon">
+                            {% include atom('icon') with {
+                                data: {
+                                    name: 'search'
+                                }
+                            } only %}
+                        </div>
+                    {% endif %}
+                </div>
 
             <div class="col col--sm-12 col--lg-4">
                 {% include molecule('logo') with {
@@ -58,23 +84,7 @@
             </div>
 
             <div class="{{config.name}}__row {{config.name}}__navigation-main is-hidden-sm-md">
-                {{ widgetGlobal('NavigationWidgetPlugin', 'MAIN_NAVIGATION', 'navigation-header') }}
-                {#<div class="nav-arrow nav-arrow--left">#}
-                    {#{% include atom('icon') with {#}
-                        {#class: 'icon--smaller',#}
-                        {#data: {#}
-                            {#name: 'arrow-left'#}
-                        {#}#}
-                    {#} only %}#}
-                {#</div>#}
-                {#<div class="nav-arrow nav-arrow--right">#}
-                    {#{% include atom('icon') with {#}
-                        {#class: 'icon--smaller',#}
-                        {#data: {#}
-                            {#name: 'arrow-right'#}
-                        {#}#}
-                    {#} only %}#}
-                {#</div>#}
+                {{ widgetGlobal('NavigationWidgetPlugin', 'MAIN_NAVIGATION_DESKTOP', 'navigation-header') }}
             </div>
             <div class="{{ config.name }}__navigation-main-mobile is-hidden-lg-xl">
                 {{ widgetGlobal('NavigationWidgetPlugin', 'MAIN_NAVIGATION', 'navigation-header-mobile') }}
@@ -83,5 +93,7 @@
 
 
     </div>
+
+
 {% endblock %}
 

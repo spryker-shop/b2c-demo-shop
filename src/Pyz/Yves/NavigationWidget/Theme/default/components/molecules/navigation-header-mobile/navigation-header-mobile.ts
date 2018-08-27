@@ -11,32 +11,6 @@ export default class NavHeaderMobile extends Component {
         const $arrowRight = $container.find(`.${this.name}__arrow--right`);
         const $scroll = $container.find(`.${this.name}__scroll`);
 
-        const $dropDown = $(this).find(`.${this.name}__dropdown-container`);
-        const $tabs = $dropDown.find(`.${this.name}__tab`);
-        const $tabTogglers = $scroll.find('[data-target]');
-        const $tabClose = $dropDown.find(`.${this.name}__tab-close`);
-
-        $tabTogglers.on('click', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            $.each($tabs, (i, item)=>{
-                $(item).hide();
-                if($(this).data('target') == $(item).data('tab')){
-                    $(item).show();
-                    $dropDown.slideDown();
-                    $(item).animate({opacity: 1}, 500);
-                }
-            })
-        });
-
-        $tabClose.on('click', function () {
-            $.each($tabs, (i, item)=> {
-                $(item).animate({opacity: 0}, 400);
-            });
-            $dropDown.slideUp();
-        });
-
         function getRightEdge() {
             return $scroll.get(0).scrollWidth - $scrollBar.width() - 5;
         }
@@ -65,6 +39,60 @@ export default class NavHeaderMobile extends Component {
             toggleLeftArrow($scroll.scrollLeft(), 5);
             toggleRightArrow($scroll.scrollLeft(), getRightEdge())
 
+        });
+
+
+        const $dropDown = $(this).find(`.${this.name}__dropdown-container`);
+        const $tabs = $dropDown.find(`.${this.name}__tab`);
+        const $tabTogglers = $scroll.find('[data-target]');
+        const $tabClose = $dropDown.find(`.${this.name}__tab-close`);
+
+        let isDropDownOpen = false;
+        let isPreviousTab = false;
+        let previousTab;
+        let currentTab;
+
+        function findCurrentTab (currentToggler, tabs) {
+            let currentTab;
+            $.each(tabs, (i, item)=>{
+                if(currentToggler.data('target') == $(item).data('tab')){
+                    currentTab = $(item);
+                    return false;
+                }
+            });
+            return currentTab;
+        }
+
+        $tabTogglers.on('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            let currentToggler = $(this);
+
+            currentTab = findCurrentTab(currentToggler, $tabs);
+            
+            if(isPreviousTab) {
+                previousTab.hide().animate({opacity: 0}, 200);
+            }
+            previousTab = currentTab;
+            isPreviousTab = true;
+            currentTab.show();
+
+            if(isDropDownOpen) {
+                currentTab.animate({opacity: 1}, 400);
+            }else{
+                $dropDown.slideDown(400, ()=>{currentTab.animate({opacity: 1}, 400)});
+                isDropDownOpen = true;
+            }
+        });
+
+        $tabClose.on('click', function () {
+
+            currentTab.animate({opacity: 0}, 400, 'swing', ()=>{
+                $dropDown.slideUp(400, ()=>{currentTab.hide()});
+            });
+
+            isDropDownOpen = false;
+            isPreviousTab = false;
         });
     }
 }

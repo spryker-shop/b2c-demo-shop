@@ -38,9 +38,13 @@
             }
         }
         .slick-initialized {
+            @include helper-breakpoint-media-max($sm-max){
+                padding: 0;
+            }
             .jumbotron-slider-item__container {
                 display: flex !important;
             }
         }
+
     }
 }
