@@ -27,7 +27,7 @@
         {% block fields %}
             <div class="grid subscription-form__grid">
                 <div class="col col--expand">
-                    {{ form_widget(_view.newsletterSubscriptionForm.subscribe) }}
+                    {{ form_widget(_view.newsletterSubscriptionForm.subscribe, {'attr':{'placeholder': 'footer_subscribe.subscription_placeholder' | trans }}) }}
                 </div>
                 <div class="col">
                     <button type="submit" class="button subscription-form__button">
