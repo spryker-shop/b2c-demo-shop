@@ -20,6 +20,7 @@ use Spryker\Zed\DataImport\Business\Model\DataImportStep\DataImportStepInterface
 use Spryker\Zed\DataImport\Business\Model\DataImportStep\LocalizedAttributesExtractorStep;
 use Spryker\Zed\DataImport\Business\Model\DataImportStep\PublishAwareStep;
 use Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface;
+use Spryker\Zed\Product\Dependency\ProductEvents;
 use Spryker\Zed\ProductSet\Dependency\ProductSetEvents;
 use Spryker\Zed\Url\Dependency\UrlEvents;
 
@@ -120,6 +121,8 @@ class ProductSetWriterStep extends PublishAwareStep implements DataImportStepInt
 
             if ($productAbstractSetEntity->isNew() || $productAbstractSetEntity->isModified()) {
                 $productAbstractSetEntity->save();
+
+                $this->addPublishEvents(ProductEvents::PRODUCT_ABSTRACT_PUBLISH, $idProductAbstract);
             }
         }
     }

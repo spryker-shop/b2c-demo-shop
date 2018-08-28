@@ -16,7 +16,6 @@ use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
  */
 class ProductUrlCartConnectorBusinessFactory extends AbstractBusinessFactory
 {
-
     /**
      * @return \Pyz\Zed\ProductUrlCartConnector\Business\Expander\ProductUrlExpander
      */

@@ -12,7 +12,6 @@ use Spryker\Zed\Kernel\Container;
 
 class ProductUrlCartConnectorDependencyProvider extends AbstractBundleDependencyProvider
 {
-
     const FACADE_PRODUCT = 'FACADE_PRODUCT';
     const FACADE_LOCALE = 'FACADE_LOCALE';
 

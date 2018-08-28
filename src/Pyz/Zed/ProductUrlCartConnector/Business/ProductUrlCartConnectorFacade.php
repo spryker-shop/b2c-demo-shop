@@ -15,7 +15,6 @@ use Spryker\Zed\Kernel\Business\AbstractFacade;
  */
 class ProductUrlCartConnectorFacade extends AbstractFacade implements ProductUrlCartConnectorFacadeInterface
 {
-
     /**
      * {@inheritdoc}
      *
@@ -31,5 +30,4 @@ class ProductUrlCartConnectorFacade extends AbstractFacade implements ProductUrl
             ->createProductExpander()
             ->expandItems($cartChangeTransfer);
     }
-
 }

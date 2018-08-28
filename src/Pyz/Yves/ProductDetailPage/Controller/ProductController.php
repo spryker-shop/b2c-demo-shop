@@ -1,16 +1,16 @@
 <?php
 
 /**
- * Copyright © 2016-present Spryker Systems GmbH. All rights reserved.
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * This file is part of the Spryker Suite.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace Pyz\Yves\ProductDetailPage\Controller;
 
 use Generated\Shared\Transfer\ItemTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
-use Symfony\Component\HttpFoundation\Request;
 use SprykerShop\Yves\ProductDetailPage\Controller\ProductController as SprykerShopProductController;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @method \Spryker\Client\Product\ProductClientInterface getClient()
