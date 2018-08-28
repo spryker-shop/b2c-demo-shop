@@ -71,48 +71,6 @@ class ProductSetUpdater extends SprykerProductSetUpdater
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ProductSetTransfer $productSetTransfer
-     *
-     * @return \Generated\Shared\Transfer\ProductSetTransfer
-     */
-    public function updateProductSet(ProductSetTransfer $productSetTransfer)
-    {
-        return $this->handleDatabaseTransaction(function () use ($productSetTransfer) {
-            return $this->executeUpdateProductSetTransaction($productSetTransfer);
-        });
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\ProductSetTransfer $productSetTransfer
-     *
-     * @return \Generated\Shared\Transfer\ProductSetTransfer
-     */
-    protected function executeUpdateProductSetTransaction(ProductSetTransfer $productSetTransfer)
-    {
-        $productSetEntity = $this->productSetEntityReader->getProductSetEntity($productSetTransfer);
-
-        $this->updateSpyProductSetEntity($productSetEntity, $productSetTransfer);
-        $this->updateProductAbstractSetEntities($productSetEntity, $productSetTransfer);
-        $this->updateProductSetData($productSetEntity, $productSetTransfer);
-        $this->updateImageSets($productSetTransfer);
-        $this->touchProductSet($productSetTransfer);
-
-        return $productSetTransfer;
-    }
-
-    /**
-     * @param \Orm\Zed\ProductSet\Persistence\SpyProductSet $productSetEntity
-     * @param \Generated\Shared\Transfer\ProductSetTransfer $productSetTransfer
-     *
-     * @return void
-     */
-    protected function updateSpyProductSetEntity(SpyProductSet $productSetEntity, ProductSetTransfer $productSetTransfer)
-    {
-        $productSetEntity->fromArray($productSetTransfer->modifiedToArray());
-        $productSetEntity->save();
-    }
-
-    /**
      * @param \Orm\Zed\ProductSet\Persistence\SpyProductSet $productSetEntity
      * @param \Generated\Shared\Transfer\ProductSetTransfer $productSetTransfer
      *
@@ -145,68 +103,5 @@ class ProductSetUpdater extends SprykerProductSetUpdater
         }
 
         $productSetEntity->save();
-    }
-
-    /**
-     * @param \Orm\Zed\ProductSet\Persistence\SpyProductSet $productSetEntity
-     *
-     * @return void
-     */
-    protected function cleanProductAbstractSets(SpyProductSet $productSetEntity)
-    {
-        $productSetEntity->getSpyProductAbstractSets()->delete();
-    }
-
-    /**
-     * @param int $idProductAbstract
-     * @param int $position
-     *
-     * @return \Orm\Zed\ProductSet\Persistence\SpyProductAbstractSet
-     */
-    protected function createProductAbstractSetEntity($idProductAbstract, $position)
-    {
-        $productAbstractSetEntity = new SpyProductAbstractSet();
-        $productAbstractSetEntity
-            ->setFkProductAbstract($idProductAbstract)
-            ->setPosition($position);
-
-        return $productAbstractSetEntity;
-    }
-
-    /**
-     * @param \Orm\Zed\ProductSet\Persistence\SpyProductSet $productSetEntity
-     * @param \Generated\Shared\Transfer\ProductSetTransfer $productSetTransfer
-     *
-     * @return void
-     */
-    protected function updateProductSetData(SpyProductSet $productSetEntity, ProductSetTransfer $productSetTransfer)
-    {
-        foreach ($productSetTransfer->getLocalizedData() as $localizedProductSetTransfer) {
-            $this->productSetDataUpdater->updateProductSetData($localizedProductSetTransfer, $productSetEntity->getIdProductSet());
-        }
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\ProductSetTransfer $productSetTransfer
-     *
-     * @return void
-     */
-    protected function updateImageSets(ProductSetTransfer $productSetTransfer)
-    {
-        if (!$productSetTransfer->isPropertyModified(ProductSetTransfer::IMAGE_SETS)) {
-            return;
-        }
-
-        $this->productSetImageSaver->saveImageSets($productSetTransfer);
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\ProductSetTransfer $productSetTransfer
-     *
-     * @return void
-     */
-    protected function touchProductSet(ProductSetTransfer $productSetTransfer)
-    {
-        $this->productSetTouch->touchProductSetByStatus($productSetTransfer);
     }
 }

@@ -66,18 +66,6 @@ class ProductSetCreator extends SprykerProductSetCreator
      *
      * @return \Generated\Shared\Transfer\ProductSetTransfer
      */
-    public function createProductSet(ProductSetTransfer $productSetTransfer)
-    {
-        return $this->handleDatabaseTransaction(function () use ($productSetTransfer) {
-            return $this->executeCreateProductSetTransaction($productSetTransfer);
-        });
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\ProductSetTransfer $productSetTransfer
-     *
-     * @return \Generated\Shared\Transfer\ProductSetTransfer
-     */
     protected function executeCreateProductSetTransaction(ProductSetTransfer $productSetTransfer)
     {
         $productSetEntity = $this->createProductSetEntity($productSetTransfer);
@@ -97,53 +85,5 @@ class ProductSetCreator extends SprykerProductSetCreator
         }
 
         return $productSetTransfer;
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\ProductSetTransfer $productSetTransfer
-     *
-     * @return \Orm\Zed\ProductSet\Persistence\SpyProductSet
-     */
-    protected function createProductSetEntity(ProductSetTransfer $productSetTransfer)
-    {
-        $productSetEntity = new SpyProductSet();
-        $productSetEntity->fromArray($productSetTransfer->modifiedToArray());
-
-        $idProductAbstracts = array_values($productSetTransfer->getIdProductAbstracts());
-        foreach ($idProductAbstracts as $index => $idProductAbstract) {
-            $position = $index + 1;
-            $productAbstractSetEntity = $this->createProductAbstractSetEntity($idProductAbstract, $position);
-            $productSetEntity->addSpyProductAbstractSet($productAbstractSetEntity);
-        }
-
-        $productSetEntity->save();
-
-        return $productSetEntity;
-    }
-
-    /**
-     * @param int $idProductAbstract
-     * @param int $position
-     *
-     * @return \Orm\Zed\ProductSet\Persistence\SpyProductAbstractSet
-     */
-    protected function createProductAbstractSetEntity($idProductAbstract, $position)
-    {
-        $productAbstractSetEntity = new SpyProductAbstractSet();
-        $productAbstractSetEntity
-            ->setFkProductAbstract($idProductAbstract)
-            ->setPosition($position);
-
-        return $productAbstractSetEntity;
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\ProductSetTransfer $productSetTransfer
-     *
-     * @return void
-     */
-    protected function touchProductSet(ProductSetTransfer $productSetTransfer)
-    {
-        $this->productSetTouch->touchProductSetByStatus($productSetTransfer);
     }
 }
