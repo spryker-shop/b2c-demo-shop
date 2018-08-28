@@ -1,0 +1,28 @@
+@mixin shop-ui-cart-widget($name: '.cart-widget') {
+  #{$name} {
+    position: absolute;
+    right: calc(1.8rem - 40px);
+    top: -18px;
+    z-index: 5;
+    &:before {
+      content: '';
+      position: fixed;
+      top: 0px;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: #000;
+      opacity: 0.4;
+      z-index: -1;
+    }
+    &__container {
+      max-width: 450px;
+      background: $setting-color-white;
+      padding: 67px 40px 40px 40px;
+      z-index: 5;
+    }
+
+
+
+  }
+}
