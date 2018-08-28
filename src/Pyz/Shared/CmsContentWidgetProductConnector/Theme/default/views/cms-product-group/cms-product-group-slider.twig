@@ -8,7 +8,7 @@
 
 {% block body %}
 
-        {% for availableProduct in products if availableProduct.available %}
+        {% for availableProduct in data.products if availableProduct.available %}
             {{ widget('ProductGroupWidgetPlugin', availableProduct) }}
         {% endfor %}
 
