@@ -11,7 +11,7 @@
 
 {% set isMultiSelect = data.isMultiSelect is null ? (data.filter.config.isMultiValued | default(false)) : false %}
 {% set activeValues = isMultiSelect ? data.filter.activeValue : [data.filter.activeValue] %}
-{% set inputComponent = isMultiSelect ? atom('checkbox') : atom('radio') %}
+{% set inputComponent = isMultiSelect ? atom('checkbox', 'CatalogPage') : atom('radio') %}
 
 {% block body %}
     <ul class="{{ config.name ~ '-list' }}">
