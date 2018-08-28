@@ -1,0 +1,12 @@
+{% extends template('widget') %}
+
+{% define data = {
+    productSetList: _widget.productSetList
+} %}
+{% block body %}
+    {% if data.productSetList is defined %}
+        {% for productSet in data.productSetList %}
+            {{ widget('ProductSetWidgetPlugin', productSet.productSet, productSet.productViews) }}
+        {% endfor %}
+    {% endif %}
+{% endblock %}

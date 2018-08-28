@@ -24,5 +24,4 @@ interface ProductUrlCartConnectorFacadeInterface
      * @return \Generated\Shared\Transfer\CartChangeTransfer
      */
     public function expandItems(CartChangeTransfer $cartChangeTransfer);
-
 }
