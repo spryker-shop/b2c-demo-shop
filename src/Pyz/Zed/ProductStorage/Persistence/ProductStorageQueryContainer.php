@@ -13,7 +13,7 @@ use Propel\Runtime\ActiveQuery\ModelCriteria;
 use Spryker\Zed\ProductStorage\Persistence\ProductStorageQueryContainer as SprykerProductStorageQueryContainer;
 
 /**
- * @method \Spryker\Zed\ProductStorage\Persistence\ProductStoragePersistenceFactory getFactory()
+ * @method \Pyz\Zed\ProductStorage\Persistence\ProductStoragePersistenceFactory getFactory()
  */
 class ProductStorageQueryContainer extends SprykerProductStorageQueryContainer
 {
@@ -57,19 +57,6 @@ class ProductStorageQueryContainer extends SprykerProductStorageQueryContainer
      * @return \Orm\Zed\Product\Persistence\SpyProductAbstractLocalizedAttributesQuery
      */
     public function queryBundledProductIdsByProductConcreteId($idProductConcrete)
-    {
-        return $this->queryBundleProduct($idProductConcrete)
-            ->joinWithSpyProductRelatedByFkBundledProduct();
-    }
-
-    /**
-     * @api
-     *
-     * @param int $idProductConcrete
-     *
-     * @return \Orm\Zed\ProductBundle\Persistence\SpyProductBundleQuery
-     */
-    public function queryBundleProduct($idProductConcrete)
     {
         return $this->getFactory()
             ->createProductBundleQuery()

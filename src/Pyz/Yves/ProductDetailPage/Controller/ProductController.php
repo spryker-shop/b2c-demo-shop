@@ -36,13 +36,20 @@ class ProductController extends SprykerShopProductController
         );
 
         $bundledProducts = [];
-        foreach ($productData['bundled_product_ids'] as $bundledProductId) {
-            $bundledProduct = $this->getFactory()->getProductStoragePyzClient()->findProductConcreteStorageData($bundledProductId, $this->getLocale());
-
+        foreach ($productViewTransfer->getBundledProductIds() as $productId => $quantity) {
+            $bundledProduct = $this->getFactory()->getProductStoragePyzClient()->findProductConcreteStorageData($productId, $this->getLocale());
+            $bundledProduct['idProductAbstract'] = $bundledProduct['id_product_abstract'];
+            $bundledProduct['productUrl'] = $bundledProduct['url'];
+            $bundledProduct['quantity'] = $quantity;
+            $bundledProductView = $this->getFactory()->getProductStoragePyzClient()->mapProductStorageData(['attributeMap' => [], 'idProductConcrete' => $bundledProduct['id_product_concrete']], $this->getLocale());
+            $image = $bundledProductView->getImages()->offsetGet(0);
+            if ($image) {
+                $bundledProduct['image'] = $image->getExternalUrlSmall();
+            }
             $bundledProducts[] = $bundledProduct;
         }
 
-
+        $r = 3;
         return [
             'cart' => $quoteTransfer,
             'product' => $productViewTransfer,

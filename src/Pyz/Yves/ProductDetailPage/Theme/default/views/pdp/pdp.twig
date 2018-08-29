@@ -6,57 +6,7 @@
 
     cart: _view.cart,
     isBundle: _view.product.attributes.bundled_product | default(null),
-    bundleItems: [
-        {
-            idProductAbstract: 142,
-            name: 'Asus Zenbook US303UB',
-            quantity: 1,
-            image: '//images.icecat.biz/img/gallery_mediums/img_29380410_medium_1480597659_0651_26649.jpg',
-            productUrl: '/en/asus-zenbook-us303ub-142',
-            sku: '142',
-            description: "Classic design,stylish new color ASUS ZenBook series represents the essence of ASUS design spirit, and UX303 takes this to another level of sophistication with fresh and gorgeous color Smoky Brown. The elegant color is further enhanced by the iconic spun-metal finish that echoes the spirit of Zen. The classic lines of the ultra-light, all-aluminum ZenBook have been enhanced with a slimmer profile, tapering to just 3mm at the front. It's chic, elegant, timeless, and powerful — it's ZenBook UX303. Developed by the ASUS Golden Eye team, exclusive ASUS Splendid technology gives you vivid, accurate colors no matter what you're watching. It works by automatically fine-tuning various display settings to optimize all kinds of images. The result is richer, deeper colors and stunning visuals whether you're watching videos and movies, playing games or browsing through your photos.",
-            attributes: {
-                'product_type': 'ultrabook',
-                'form_factor': 'clamshell',
-                'processor_cache_type': '4',
-                'processor_frequency': '2.5 GHz',
-                'brand': 'Asus',
-                'color': 'Black',
-            },
-        },
-        {
-            idProductAbstract: 35,
-            name: 'Asus ZenPad Z580CA',
-            quantity: 2,
-            image: '//images.icecat.biz/img/gallery/29879507_3689.jpg',
-            productUrl: '/en/asus-zenpad-z580ca-165',
-            sku: '165',
-            description: "Fashion-inspired design The design of ASUS ZenPad S 8.0 carries modern influences and a simple, clean look that gives it a universal and stylish appeal. These elements are inspired by our Zen design philosophy of balancing beauty and strength. ASUS ZenPad S 8.0 is an 8-inch tablet that is only 6.6mm thin, weighs just 298g, and has a 74% screen-to-body ratio — an incredible engineering achievement made possible by reducing the bezel width to the bare minimum. Intelligent contrast enhancement analyzes and optimizes each pixel in an image before it is reproduced, rendering more detail in the highlights and shadows to reveal the true beauty in your pictures. ASUS ZenPad S 8.0 is equipped with ASUS Tru2Life+ technology, which improves video with fast action scenes — such as sports — by increasing the screen refresh rate, resulting in reduced blur and smooth, detailed motion.",
-            attributes: {
-                'processor_cores': '4',
-                'display_technology': 'IPS',
-                'touch_technology': 'Multi-touch',
-                'brand': 'Asus',
-                'color': 'Black',
-            },
-        },
-        {
-            idProductAbstract: 114,
-            name: 'ASUS M',
-            quantity: 1,
-            image: '//images.icecat.biz/img/gallery/29911081_1039.jpg',
-            productUrl: '/en/asus-m-114',
-            sku: '114',
-            description: "The Perfect Home Computer ASUS M32 desktop PC performs everything from your daily tasks to playing 4K Ultra HD video with enhanced energy efficiency. Multitask with several apps at once thanks to the 4th gen Intel® Core™ processor. Power visually demanding programs with discrete NVIDIA graphics. Whatever you choose to do, M32 makes it happen with unique optimization for increased performance or energy savings when you need it. M32 desktop PC features discrete NVIDIA or AMD graphics card that delivers twice the performance of the previous generation. Watch up to 4K Ultra HD video and enjoy smoother visuals and more responsiveness when playing the latest games. Giving you reliability with convenience, M32 desktop PC monitors internal temperatures and intelligently adjusts fan speed to ensure efficient cooling while staying under 25dB of sound at idle—quieter than a library.",
-            attributes: {
-                'processor_cores': '4',
-                'thermal_design_power': '84 W',
-                'internal_memory': '8 GB',
-                'bus_type': '2.5 DMI',
-                'brand': 'Asus',
-            },
-        }
-    ],
+    bundleItems: _view.bundledProducts,
 
     title: product.metaTitle | default(_view.product.name),
     metaTitle: product.metaTitle | default(_view.product.name),
