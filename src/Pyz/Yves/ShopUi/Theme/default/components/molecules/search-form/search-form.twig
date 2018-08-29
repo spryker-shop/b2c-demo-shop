@@ -6,29 +6,28 @@
 
 {% define data = {
     searchUrl: path('search'),
-    suggestionUrl: path('search/suggestion'),
     searchValue: app.request.get('q')
 } %}
 
+{% define attributes = {
+    'data-search-id': required
+} %}
+
 {% block body %}
-    <form class="grid grid--left grid--stretch" action="{{data.searchUrl}}">
-        <div>
-            <input name="q" type="text" class="input input--expand"
-                   {#placeholder="{{ 'global.search' | trans }}"#}
-                   value="{{data.searchValue}}" autocomplete="off">
+    <form action="{{data.searchUrl}}">
+        <div class="grid">
+            <div class="col col--sm-10">
+                <input name="q" type="text" class="input input--expand suggest-search__input {{ config.jsName }}__input" placeholder="{{ 'global.search' | trans }}" value="{{data.searchValue}}" autofocus="autofocus" autocomplete="off">
+            </div>
         </div>
-        <div class="grid grid--middle">
-            <button type="submit" class="{{config.name}}__submit button button--expand grid grid--middle">
 
-                {% include atom('icon') with {
-
-                    data: {
-                        name: 'search'
-                    }
-                } only %}
-
-            </button>
-        </div>
+        {% include molecule('suggest-search') with {
+            attributes: {
+                'suggestion-url': path('search/suggestion'),
+                'base-suggest-url': path('search/suggestion'),
+                'input-selector': '[data-search-id="' ~ attributes['data-search-id'] ~ '"] .' ~ config.jsName ~ '__input'
+            }
+        } only %}
+        <button type="submit" class="is-hidden"></button>
     </form>
 {% endblock %}
-

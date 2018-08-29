@@ -1,0 +1,119 @@
+{% extends template('widget') %}
+
+{% define data = {
+    completion: completion | default([]),
+    suggestionByType: suggestionByType | default,
+    category: suggestionByType.category | default([]),
+    cms_page: suggestionByType.cms_page | default([]),
+    product_abstract: suggestionByType.product_abstract | default([]),
+    suggestionsLength: 4,
+    categoriesLength: 3,
+    pagesLength: 3,
+    productsLength: 4
+} %}
+
+{% set topVisible = data.completion is not empty %}
+{% set firstVisible = data.product_abstract is not empty %}
+{% set secondVisible = data.category is not empty %}
+{% set thirdVisible = data.cms_page is not empty %}
+
+{% block body %}
+    {% if topVisible %}
+        <div class="">
+            {% include molecule('suggestion-links-list', 'CatalogPage') with {
+                class: 'suggestion-block suggestion-block--top',
+                data: {
+                    name: 'global.search.suggestions' | trans,
+                    items: data.completion,
+                    length: data.suggestionsLength,
+                    isTitleHiddenOnTablet: false,
+                    isSuggestion: true
+                }
+            } only %}
+        </div>
+    {% endif %}
+    <div class="grid grid--no-wrap">
+        {% if firstVisible %}
+
+            <div class="col">
+                <div class="suggestion-block suggestion-block--products">
+                    <h6>
+                        {{ 'global.search.suggestion.in_products' | trans }}
+                        <div class="float-right link--show-more is-hidden-lg-xl">
+                            <button type="submit" class="">{{'global.search.suggestion.see_all_products' | trans}}</button>
+                            {% include atom('icon') with {
+                                data: {
+                                    name: 'chevron-up'
+                                }
+                            } %}
+                        </div>
+
+                    </h6>
+                    <ul>
+                        {% for product in data.product_abstract | slice(0, data.productsLength)  %}
+                            <li class="list__item">
+                                {% include molecule('suggestion-product', 'CatalogPage') with {
+                                    data: {
+                                        product: product,
+                                        url: product.url | default,
+                                        image: product.images | first | default,
+                                        alt: product.abstract_name | default,
+                                        title: product.abstract_name | default,
+                                        price: product.price,
+                                        originalPrice: product.prices.ORIGINAL | default
+                                    }
+                                } only %}
+                            </li>
+
+                        {% endfor %}
+                    </ul>
+                    <div class="link--show-more is-hidden-sm-md float-left">
+                        <button type="submit" class="">{{'global.search.suggestion.see_all_products' | trans}}</button>
+                        {% include atom('icon') with {
+                                data: {
+                                name: 'chevron-up'
+                            }
+                        } %}
+                    </div>
+
+                </div>
+            </div>
+        {% endif %}
+        {% if secondVisible %}
+
+            <div class="col">
+                <div class="">
+                    {% include molecule('suggestion-links-list', 'CatalogPage') with {
+                        class: 'suggestion-block',
+                        data: {
+                            name: 'global.search.suggestion.in_categories' | trans,
+                            items: data.category,
+                            length: data.categoriesLength
+                        }
+                    } only %}
+                </div>
+            </div>
+        {% endif %}
+        {% if thirdVisible %}
+
+            <div class="col">
+                <div class="">
+                    {% include molecule('suggestion-links-list', 'CatalogPage') with {
+                        class: 'suggestion-block',
+                        data: {
+                            name: 'global.search.suggestion.in_cms' | trans,
+                            items: data.cms_page,
+                            length: data.pagesLength
+                        }
+                    } only %}
+                </div>
+            </div>
+        {% endif %}
+
+        {% if not topVisible and not firstVisible and not secondVisible and not thirdVisible %}
+            <div class="col text-center">
+                {{ 'global.search.suggestion.no_result' | trans }}
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

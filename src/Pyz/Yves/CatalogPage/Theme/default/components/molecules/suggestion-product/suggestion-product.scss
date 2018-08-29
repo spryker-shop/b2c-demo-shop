@@ -1,0 +1,44 @@
+@mixin catalog-page-suggestion-product($name: '.suggestion-product') {
+  #{$name} {
+    &__link {
+      color: $setting-color-black;
+    }
+
+    &__thumbnail {
+      margin:0 15px 0 0;
+      border: none;
+      box-shadow: none;
+      border-radius: 3px;
+      width: 41px;
+      height: 41px;
+      overflow: hidden;
+      position: relative;
+      &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        z-index: 10;
+        background: rgba(0, 0, 0, .05);
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+      }
+    }
+    &__title {
+      font: bold 15px $setting-font-family;
+      .price__amount {
+        display: inline-block;
+        &--original {
+          opacity: .25;
+          margin-right: 6px;
+        }
+      }
+    }
+    .price__amount {
+      font: normal 13px $setting-font-family;
+    }
+
+    @content;
+  }
+}

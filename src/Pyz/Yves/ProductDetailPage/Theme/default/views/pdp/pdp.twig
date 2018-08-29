@@ -122,6 +122,10 @@
 
                     {{ widget('ProductReviewWidgetPlugin', data.product.idProductAbstract) }}
 
+                    {% if data.product.productSetIds is not empty %}
+                        {{ widget('ProductSetIdsWidgetPlugin', data.product.productSetIds) }}
+                    {% endif %}
+
                     <div class="product-slider-container">
                         {{ widget('UpSellingProductsWidgetPlugin', data.cart) }}
                     </div>

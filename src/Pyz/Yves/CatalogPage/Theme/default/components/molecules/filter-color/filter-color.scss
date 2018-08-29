@@ -1,0 +1,136 @@
+@mixin filter-color($name: '.filter-color') {
+    #{$name} {
+        &-list {
+            display: flex;
+            flex-wrap: wrap;
+            padding-bottom: 30px;
+        }
+        &-list__item {
+            &:not(:last-child) {
+                margin-right: 6px;
+            }
+        }
+        &-list__color {
+            &:hover {
+                .checkbox__label {
+                    transform: scale(1);
+                }
+            }
+            .checkbox__container {
+                position: relative;
+                width: 20px;
+                height: 20px;
+                border-radius: 100%;
+                cursor: pointer;
+                &.White, &.Weiß {
+                  background-color: #F2F2F2;
+
+                }
+                &.Dark, &.Black, &.Schwarz {
+                  background-color: #000000;
+
+                }
+                &.Grey, &.Grau {
+                  background-color: #DCDCDC;
+
+                }
+                &.Silver, &.Silber {
+                  background-color:#D3D3D3;
+                }
+                &.Blue, &.Blau {
+                  background-color: #6281D8;
+
+                }
+                &.Yellow, &.Gelb {
+                  background-color: #FFFF00;
+
+                }
+                &.Purple, &.Lila {
+                  background-color: #9370DB;
+
+                }
+                &.Pink {
+                  background-color: #FF69B4;
+
+                }
+                &.Platinum, &.Platin {
+                  background-color: #E5E4E2;
+
+                }
+                &.Copper, &.Kupfer {
+                  background-color: #DA8A67;
+
+                }
+                &.Orange, &.Orange {
+                  background-color: #FF4500;
+
+                }
+                &.Gold {
+                  background-color: #C5B358;
+
+                }
+                &.Navy, &.Marineblau {
+                  background-color: #00004E;
+
+                }
+                &.Green, &.Grün {
+                  background-color: #006400;
+
+                }
+                &.Red, &.Rot {
+                  background-color: #DC2E09;
+                }
+                &.Brown, &.Braun {
+                  background-color: #835C3B;
+
+                }
+            }
+            .checkbox__check {
+                display: none;
+            }
+            .checkbox__label {
+                @include helper-effect-transition(all);
+                transform: scale(0);
+                transform-origin: bottom;
+                position: absolute;
+                top: -38px;
+                left: -13px;
+                background: #111;
+                color: #fff;
+                font: 300 16px $setting-font-family;
+                padding: 5px 11px 7px 10px;
+                white-space: nowrap;
+                border-radius: 2px;
+                &::before {
+                    content: "";
+                    position: absolute;
+                    left: 17px;
+                    bottom: -4px;
+                    border-radius: 2px;
+                    background: #111111;
+                    width: 10px;
+                    height: 10px;
+                    transform: rotate(45deg);
+                }
+            }
+            .checkbox__box {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                width: 22px;
+                height: 22px;
+                border: solid 4px #fff;
+                border-radius: 100%;
+                background: none;
+            }
+            &:hover .checkbox__box,
+            .checkbox__input:checked + .checkbox__box {
+                width: 18px;
+                height: 18px;
+                border: solid 2px #fff;
+                background: none;
+            }
+        }
+    }
+}
