@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @method \Spryker\Client\Product\ProductClientInterface getClient()
- * @method \SprykerShop\Yves\ProductDetailPage\ProductDetailPageFactory getFactory()
+ * @method \Pyz\Yves\ProductDetailPage\ProductDetailPageFactory getFactory()
  */
 class ProductController extends SprykerShopProductController
 {
@@ -35,10 +35,19 @@ class ProductController extends SprykerShopProductController
             (new ItemTransfer())->setIdProductAbstract($productViewTransfer->getIdProductAbstract())
         );
 
+        $bundledProducts = [];
+        foreach ($productData['bundled_product_ids'] as $bundledProductId) {
+            $bundledProduct = $this->getFactory()->getProductStoragePyzClient()->findProductConcreteStorageData($bundledProductId, $this->getLocale());
+
+            $bundledProducts[] = $bundledProduct;
+        }
+
+
         return [
             'cart' => $quoteTransfer,
             'product' => $productViewTransfer,
             'productUrl' => $this->getProductUrl($productViewTransfer),
+            'bundledProducts' => $bundledProducts,
         ];
     }
 }

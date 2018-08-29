@@ -48,4 +48,31 @@ class ProductStorageQueryContainer extends SprykerProductStorageQueryContainer
 
         return $query;
     }
+
+    /**
+     * @api
+     *
+     * @param int $idProductConcrete
+     *
+     * @return \Orm\Zed\Product\Persistence\SpyProductAbstractLocalizedAttributesQuery
+     */
+    public function queryBundledProductIdsByProductConcreteId($idProductConcrete)
+    {
+        return $this->queryBundleProduct($idProductConcrete)
+            ->joinWithSpyProductRelatedByFkBundledProduct();
+    }
+
+    /**
+     * @api
+     *
+     * @param int $idProductConcrete
+     *
+     * @return \Orm\Zed\ProductBundle\Persistence\SpyProductBundleQuery
+     */
+    public function queryBundleProduct($idProductConcrete)
+    {
+        return $this->getFactory()
+            ->createProductBundleQuery()
+            ->filterByFkProduct($idProductConcrete);
+    }
 }
