@@ -1,16 +1,17 @@
 <?php
 
 /**
- * Copyright © 2016-present Spryker Systems GmbH. All rights reserved.
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * This file is part of the Spryker Suite.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace Pyz\Yves\CartPage\Controller;
 
 use Generated\Shared\Transfer\ItemTransfer;
+use SprykerShop\Yves\CartPage\Controller\CartController as SprykerCartController;
 use SprykerShop\Yves\CartPage\Plugin\Provider\CartControllerProvider;
 use Symfony\Component\HttpFoundation\Request;
-use SprykerShop\Yves\CartPage\Controller\CartController as SprykerCartController;
+
 /**
  * @method \SprykerShop\Yves\CartPage\CartPageFactory getFactory()
  */
@@ -38,6 +39,25 @@ class CartController extends SprykerCartController
         $this->getFactory()
             ->getCartClient()
             ->addItem($itemTransfer, $request->request->all());
+
+        $this->getFactory()
+            ->getZedRequestClient()
+            ->addFlashMessagesFromLastZedRequest();
+
+        return $this->redirectResponseExternal($this->getRefererUrl($request));
+    }
+
+    /**
+     * @param string $sku
+     * @param string|null $groupKey
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function removeAction($sku, $groupKey = null, ?Request $request = null)
+    {
+        $this->getFactory()
+            ->getCartClient()
+            ->removeItem($sku, $groupKey);
 
         $this->getFactory()
             ->getZedRequestClient()

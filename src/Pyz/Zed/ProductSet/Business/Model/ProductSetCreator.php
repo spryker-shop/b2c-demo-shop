@@ -9,8 +9,6 @@ namespace Pyz\Zed\ProductSet\Business\Model;
 
 use Generated\Shared\Transfer\EventEntityTransfer;
 use Generated\Shared\Transfer\ProductSetTransfer;
-use Orm\Zed\ProductSet\Persistence\SpyProductAbstractSet;
-use Orm\Zed\ProductSet\Persistence\SpyProductSet;
 use Spryker\Zed\Event\Business\EventFacadeInterface;
 use Spryker\Zed\Product\Dependency\ProductEvents;
 use Spryker\Zed\ProductSet\Business\Model\Data\ProductSetDataCreatorInterface;

@@ -7,6 +7,7 @@
 
 {% define data = {
     cartQuantity: app['cart.quantity'] | default,
+    quote: app['quote'],
     showUserMenu: not (hideUserMenu | default(false)),
     isUserAuthenticated: is_granted('IS_AUTHENTICATED_FULLY'),
     isInline: false,
@@ -65,7 +66,7 @@
 
         <li class="menu__item">
 
-            <a href="{{ url('cart') }}" class="grid grid--middle cart-link">
+            <a href="#" class="grid grid--middle cart-link">
                 {% if cartQuantity > 0 %}
                     <span class="cart-link__quantity">
                         {{cartQuantity}}
@@ -79,8 +80,42 @@
                         name: 'cart'
                     }
                 } only %}
-
             </a>
+            <div>
+                {% if data.quote.items is not empty %}
+                    {% for item in data.quote.items %}
+                        {% set cartItemSubTotal = item.quantity * item.unitPrice %}
+                              {% include molecule('cart-image', 'CartPage') with {
+                            data: {
+                                name: item.name | default(''),
+                                image: item.images is empty ? null : (item.images | first)
+                            }
+                        } only %}
+                        <strong>{{ item.name }}</strong>
+                        <strong>{{ cartItemSubTotal | money }}</strong>
+                        <strong>{{ item.sumSubtotalAggregation | money }}</strong>
+                        {% for attribute in item.concreteAttributes %}
+                            {{ attribute }}
+                        {% endfor %}
+                        <strong>{{ item.quantity }}</strong>
+                        <a class="{{ config.name }}__remove" href="{{ path('cart/remove', {'sku': item.sku, 'groupKey': item.groupKey }) }}">
+                            {{ 'remove' | trans }}
+                        </a>
+                    {% endfor %}
+                    <strong>{{ data.quote.totals.grandTotal | money }}</strong>
+                    {% set canProceedToCheckout = data.quote.items is not empty
+                        and (not is_granted('IS_AUTHENTICATED_FULLY') or can('WriteSharedCartPermissionPlugin', data.quote.idQuote))
+                    %}
+                    {% if canProceedToCheckout %}
+                        <a class="button button--expand button--black cart-summary__button" href="{{ url('checkout-index') }}" {{qa('cart-go-to-checkout')}}>
+                            {{ 'cart.checkout' | trans }}
+                        </a>
+                    {% endif %}
+                {% endif %}
+                <a href="{{ url('cart') }}" class="grid grid--middle cart-link">
+                    {{ 'cart.cart' | trans }}
+                </a>
+            </div>
         </li>
     </ul>
 {% endblock %}
