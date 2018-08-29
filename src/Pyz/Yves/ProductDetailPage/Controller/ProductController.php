@@ -38,10 +38,8 @@ class ProductController extends SprykerShopProductController
         $bundledProducts = [];
         foreach ($productData['bundled_product_ids'] as $bundledProductId) {
             $bundledProduct = $this->getFactory()->getProductStoragePyzClient()->findProductConcreteStorageData($bundledProductId, $this->getLocale());
-            dd($bundledProduct);
-            $bundledProducts[] = $this->getFactory()
-                ->getProductStorageClient()
-                ->mapProductStorageData($bundledProduct, $this->getLocale());
+
+            $bundledProducts[] = $bundledProduct;
         }
 
 
