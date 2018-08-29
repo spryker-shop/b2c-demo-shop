@@ -49,7 +49,6 @@ class ProductController extends SprykerShopProductController
             $bundledProducts[] = $bundledProduct;
         }
 
-        $r = 3;
         return [
             'cart' => $quoteTransfer,
             'product' => $productViewTransfer,
