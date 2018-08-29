@@ -1,5 +1,9 @@
 {% extends template('widget') %}
 
+{% define config = {
+    name: 'cart-bundle'
+} %}
+
 {% define data = {
     items: _widget.bundleItems
 } %}
@@ -7,11 +11,11 @@
 {% block body %}
     {% set d = [] %}
     {% if data.items %}
-        <div>
-            <label>{{ 'cart.item.bundle.description' | trans }}</label>
-            <ul class="list list--bullet spacing-y text-small">
+        <div class="{{ config.name }}">
+            {#<label>{{ 'cart.item.bundle.description' | trans }}</label>#}
+            <ul class="{{ config.name }}__list">
                 {% for item in data.items %}
-                    <li class="list__item">
+                    <li class="{{ config.name }}__list-item">
                             {% if (item.images|first).externalUrlSmall is defined %}
                             {% include atom('thumbnail') with {
                                 attributes: {
@@ -21,7 +25,10 @@
                                 }
                             } only %}
                             {% endif %}
-                        {{ item.quantity }} x {{ item.name }}
+                        <p class="{{ config.name }}__item-title">
+                            {{ item.name }}
+                            <span class="{{ config.name }}__item-quantity">{{ item.quantity }}x </span>
+                        </p>
                     </li>
                 {% endfor %}
             </ul>
