@@ -84,6 +84,7 @@ export default class SuggestSearch extends Component {
     }
 
     protected onInputKeyDown(event: KeyboardEvent): void {
+        this.setHintValue('');
         var keyCode = event.keyCode;
 
         switch (this.keyboardCodes[keyCode]) {
@@ -243,6 +244,7 @@ export default class SuggestSearch extends Component {
     }
 
     openSearchLayout(): void {
+        this.setHintValue('');
         this.searchOverlay.classList.toggle('active');
         this.searchInput.focus();
     }

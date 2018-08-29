@@ -1,21 +1,20 @@
 <?php
 
 /**
- * Copyright © 2016-present Spryker Systems GmbH. All rights reserved.
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * This file is part of the Spryker Suite.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace Pyz\Yves\CatalogPage\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
 use SprykerShop\Yves\CatalogPage\Controller\SuggestionController as SprykerShopSuggestionController;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @method \SprykerShop\Yves\CatalogPage\CatalogPageFactory getFactory()
  */
 class SuggestionController extends SprykerShopSuggestionController
 {
-
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      *

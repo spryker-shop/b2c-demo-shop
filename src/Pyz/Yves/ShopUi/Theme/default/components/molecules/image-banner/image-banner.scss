@@ -4,6 +4,11 @@
         height: 750px;
         padding: 0 80px;
         position: relative;
+        @include helper-breakpoint-media-max($md-max) {
+          height: 400px;
+          margin: 80px 0 132px 0;
+          padding: 0;
+        }
         video {
             width: auto;
             height: auto;
@@ -18,86 +23,66 @@
             height: 100%;
             width: 100%;
             overflow: hidden;
+            &::after {
+              content: '';
+              display: block;
+              position: absolute;
+              bottom: 40px;
+              right: 40px;
+              width: 130px;
+              height: 53px;
+              background: url("/assets/images/spryker-logo@2x.png") center no-repeat;
+              background-size: contain;
+              @include helper-breakpoint-media-max($md-max) {
+                width: 78px;
+                height: 32px;
+                bottom: 20px;
+                right: 24px;
+              }
+            }
             .touch & {
-                background-image: url("/assets/images/section-brand-a-bg@3x.png");
+                background-image: url("/assets/images/brand-image@3x.jpg");
                 background-size: cover;
             }
         }
-        @include helper-breakpoint-media-max($md-max) {
-            padding: 0 55px;
-            margin-bottom: 400px;
-        }
-        &__text {
-            width: 570px;
-            position: relative;
-            @include helper-breakpoint-media-max($md-max) {
-                position: static;
-            }
-        }
-        &__image {
-            position: absolute;
-            right: -220px;
-            top:-50px;
-            width: 270px;
-            height: 715px;
-            overflow: hidden;
-            border-radius: 4px;
-            box-shadow: 0 0 70px 0 rgba(0, 0, 0, 0.2);
-            img {
-                width: 100%;
-            }
-            @include helper-breakpoint-media-max($xl-max) {
-                right: -160px;
-            }
-            @include helper-breakpoint-media-max($lg-max) {
-                right: -100px;
-                top: 40%;
-                width: 240px;
-                height: 562px;
-            }
 
+        &__text {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
             @include helper-breakpoint-media-max($md-max) {
-                bottom: 0;
-                left: 50%;
-                top: unset;
-                right: unset;
-                transform: translate(-50%, 50%);
-                width: 260px;
-                height: 500px;
-            }
-            @include helper-breakpoint-media-max($sm-max) {
-                bottom: -40px;
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50% , -50%);
+              width: 100%;
             }
         }
+
         &__title {
+            margin-bottom: 10px;
             &>* {
-                font: normal 53px $setting-font-family-additional;
-                line-height: 1.06;
-                letter-spacing: -1.5px;
+                font: bold 68px $setting-font-family-additional;
+                line-height: normal;
+                letter-spacing: -0.9px;
                 color: $setting-color-white;
-                text-indent: -30px;
+                text-align: center;
                 @include helper-breakpoint-media-max($md-max) {
-                    font-size: 39px;
+                    font-size: 38px;
                 }
-            }
-        }
-        &__description {
-            p {
-                padding: 20px 0;
-                font: normal 16px $setting-font-family;
-                line-height: 1.69;
-                opacity: 0.64;
-                letter-spacing: 0.2px;
-                color: $setting-color-white * .6;
-                max-width: 420px;
             }
         }
         &__link {
             color: $setting-color-white;
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 2.7px;
+            font: normal 22px $setting-font-family-additional;
+            letter-spacing: -0.4px;
             position: relative;
+            text-decoration: none;
+            @include helper-breakpoint-media-max($md-max) {
+             font-size: 14px;
+            }
             &:hover {
                 color: $setting-color-white;
                 text-decoration: none;
@@ -106,10 +91,17 @@
                 content: '';
                 display: block;
                 position: absolute;
-                height: 1px;
-                width: 100%;
-                background: $setting-color-white;
-                bottom: -9px;
+                height: 15px;
+                width: 10px;
+                background: url("/assets/images/arrow-white-bold.svg") center no-repeat;
+                right: -20px;
+                bottom: 4px;
+                @include helper-breakpoint-media-max($md-max) {
+                  width: 6px;
+                  height: 9px;
+                  right: -12px;
+                  bottom: 3px;
+                }
             }
         }
     }
