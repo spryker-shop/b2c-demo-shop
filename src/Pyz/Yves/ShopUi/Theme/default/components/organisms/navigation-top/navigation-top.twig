@@ -64,9 +64,9 @@
             {% endif %}
         {% endif %}
 
-        <li class="menu__item">
+        <li class="menu__item menu__item--cart">
 
-            <a href="#" class="grid grid--middle cart-link">
+            <a href="#" class="grid grid--middle cart-link js-cartoverlay-open">
                 {% if cartQuantity > 0 %}
                     <span class="cart-link__quantity">
                         {{cartQuantity}}
@@ -81,11 +81,16 @@
                     }
                 } only %}
             </a>
-            <div>
+
+        </li>
+
+        <div class="cart-widget js-cartoverlay">
+            <div class="cart-widget__container js-cartoverlay-inner">
+                <h4 class="cart-widget__title">{{ 'cart.cart' | trans }}</h4>
                 {% if data.quote.items is not empty %}
                     {% for item in data.quote.items %}
                         {% set cartItemSubTotal = item.quantity * item.unitPrice %}
-                              {% include molecule('cart-image', 'CartPage') with {
+                        {% include molecule('cart-image', 'CartPage') with {
                             data: {
                                 name: item.name | default(''),
                                 image: item.images is empty ? null : (item.images | first)
@@ -107,15 +112,25 @@
                         and (not is_granted('IS_AUTHENTICATED_FULLY') or can('WriteSharedCartPermissionPlugin', data.quote.idQuote))
                     %}
                     {% if canProceedToCheckout %}
-                        <a class="button button--expand button--black cart-summary__button" href="{{ url('checkout-index') }}" {{qa('cart-go-to-checkout')}}>
+                        <a class="button button--black cart-summary__button" href="{{ url('checkout-index') }}" {{qa('cart-go-to-checkout')}}>
                             {{ 'cart.checkout' | trans }}
                         </a>
+                        <a href="{{ url('cart') }}" class="button button--black">{{ 'cart.cart' | trans }}</a>
                     {% endif %}
                 {% endif %}
-                <a href="{{ url('cart') }}" class="grid grid--middle cart-link">
-                    {{ 'cart.cart' | trans }}
-                </a>
+                {% if data.quote.items is empty %}
+                    <p class="cart-widget__empty-text">Your bag is empty. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy.</p>
+                {% endif %}
             </div>
-        </li>
+        </div>
+
     </ul>
+    {% include molecule('cart-overlay-toggler') with {
+        attributes: {
+            'trigger-open': '.js-cartoverlay-open',
+            'trigger-close': '.js-cartoverlay-inner',
+            'toggle-target': '.js-cartoverlay',
+            'class-to-toggle': '.is-active'
+        }
+    } only %}
 {% endblock %}
