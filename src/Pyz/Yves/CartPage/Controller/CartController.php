@@ -48,6 +48,25 @@ class CartController extends SprykerCartController
     }
 
     /**
+     * @param string $sku
+     * @param string|null $groupKey
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function removeAction($sku, $groupKey = null, ?Request $request = null)
+    {
+        $this->getFactory()
+            ->getCartClient()
+            ->removeItem($sku, $groupKey);
+
+        $this->getFactory()
+            ->getZedRequestClient()
+            ->addFlashMessagesFromLastZedRequest();
+
+        return $this->redirectResponseExternal($this->getRefererUrl($request));
+    }
+
+    /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
      * @return array|string

@@ -7,6 +7,7 @@
 
 {% define data = {
     cartQuantity: app['cart.quantity'] | default,
+    quote: app['quote'],
     showUserMenu: not (hideUserMenu | default(false)),
     isUserAuthenticated: is_granted('IS_AUTHENTICATED_FULLY'),
     isInline: false,
@@ -63,9 +64,9 @@
             {% endif %}
         {% endif %}
 
-        <li class="menu__item">
+        <li class="menu__item menu__item--cart">
 
-            <a href="{{ url('cart') }}" class="grid grid--middle cart-link">
+            <a href="{{ url('cart') }}" class="grid grid--middle cart-link js-cartoverlay-open">
                 {% if cartQuantity > 0 %}
                     <span class="cart-link__quantity">
                         {{cartQuantity}}
@@ -73,14 +74,94 @@
                 {% else %}
                 {% endif %}
 
-                {% include atom('icon') with {
-                    class: 'icon--big',
-                    data: {
-                        name: 'cart'
-                    }
-                } only %}
-
+                {#{% include atom('icon') with {#}
+                    {#class: 'icon--big',#}
+                    {#data: {#}
+                        {#name: 'cart'#}
+                    {#}#}
+                {#} only %}#}
             </a>
+
         </li>
+
+        <div class="cart-widget js-cartoverlay ">
+            <div class="overlay-shadow js-cartoverlay-close"></div>
+            <div class="cart-widget__container">
+                <h4 class="cart-widget__title">{{ 'cart.cart' | trans }}</h4>
+                {% if data.quote.items is not empty %}
+                    {% for item in data.quote.items %}
+
+                        <div class="shopping-cart__box">
+                            <div class="grid grid--middle grid--justify grid--no-wrap">
+                                <div class="cart-item__image col">
+                                    {% set cartItemSubTotal = item.quantity * item.unitPrice %}
+                                    {% include molecule('cart-image', 'CartPage') with {
+                                        data: {
+                                            name: item.name | default(''),
+                                            image: item.images is empty ? null : (item.images | first)
+                                        }
+                                    } only %}
+                                </div>
+                                <div class="cart-item__content col">
+                                    <div class="grid grid--justify">
+                                        <p class="cart-item__title col col--lg-8 col--sm-12">{{ item.name }}</p>
+                                        <div class="cart-item__price col col--lg-4 col--sm-12">
+                                            <span class="cart-item__price">{{ cartItemSubTotal | money }}</span>
+                                        </div>
+
+                                    </div>
+                                    <div class="cart-item__options">
+                                        {#<strong>{{ item.sumSubtotalAggregation | money }}</strong>#}
+                                        {% for attribute in item.concreteAttributes %}
+                                            <div class="cart-widget__item-option">
+                                                Option Name:
+                                                <span>{{ attribute }}</span>
+                                            </div>
+                                        {% endfor %}
+                                        <div class="cart-widget__item-option">
+                                            {{ 'cart.item_quantity' | trans }}:
+                                            <span>{{ item.quantity }}</span>
+                                        </div>
+
+                                        <a class="cart-item__remove" href="{{ path('cart/remove', {'sku': item.sku, 'groupKey': item.groupKey }) }}">
+                                            {{ 'remove' | trans }}
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    {% endfor %}
+                    <div class="cart-widget__total grid grid--middle grid--justify">
+                        <strong class="col">{{ 'cart.total' | trans }}</strong>
+                        <strong class="col">{{ data.quote.totals.grandTotal | money }}</strong>
+                    </div>
+
+                    {% set canProceedToCheckout = data.quote.items is not empty
+                        and (not is_granted('IS_AUTHENTICATED_FULLY') or can('WriteSharedCartPermissionPlugin', data.quote.idQuote))
+                    %}
+                    {% if canProceedToCheckout %}
+                        <div class="grid grid--middle grid--justify cart-widget__buttons">
+                            <a href="{{ url('cart') }}" class="col button button--white">{{ 'cart.cart' | trans }}</a>
+                            <a class="col button button--black" href="{{ url('checkout-index') }}" {{qa('cart-go-to-checkout')}}>
+                                {{ 'cart.checkout' | trans }}
+                            </a>
+                        </div>
+                    {% endif %}
+                {% endif %}
+                {% if data.quote.items is empty %}
+                    <p class="cart-widget__empty-text">{{ 'cart_widget.empty_text' | trans }}</p>
+                {% endif %}
+            </div>
+        </div>
+
     </ul>
+    {% include molecule('cart-overlay-toggler') with {
+        attributes: {
+            'trigger-open': '.js-cartoverlay-open',
+            'trigger-close': '.js-cartoverlay-close',
+            'toggle-target': '.js-cartoverlay',
+            'class-to-toggle': 'is-active'
+        }
+    } only %}
 {% endblock %}
