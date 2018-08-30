@@ -14,6 +14,7 @@
         {% set class = 'col col--sm-12' %}
     {% endif %}
 
+    {% set image = data.product.images| last %}
     {% embed productTemplate with {
         productTemplate: productTemplate,
         class: class,
@@ -21,7 +22,7 @@
             name: data.product.abstract_name,
             abstractId: data.product.id_product_abstract,
             url: data.product.url,
-            imageUrl: data.product.images is empty ? '' : data.product.images.0.external_url_small,
+            imageUrl: data.product.images is empty ? '' : image.external_url_small,
             price: data.product.prices.DEFAULT,
             originalPrice: data.product.prices.ORIGINAL is defined ? data.product.prices.ORIGINAL : null
         }
