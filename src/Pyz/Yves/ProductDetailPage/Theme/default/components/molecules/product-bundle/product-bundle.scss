@@ -1,0 +1,48 @@
+@mixin product-detail-page-bundle($name: '.bundle-list') {
+    #{$name} {
+
+        & + .pdp-review {
+
+            .product-slider-title {
+                margin-top: 45px;
+            }
+
+        }
+
+        &__item {
+            @include helper-breakpoint-media-min($md-min) {
+                max-width: 25%;
+            }
+
+            & + #{$name}__item {
+                display: none;
+            }
+
+            .slick-slide & {
+                max-width: none;
+            }
+        }
+
+        .product-slider-title {
+            padding-right: 0;
+            margin-top: 8rem;
+        }
+
+        .slick-track {
+            margin-left: 0;
+        }
+
+        .product-detail {
+            margin-top: 1rem;
+        }
+
+        .pdp-option {
+            padding: 0 11px;
+        }
+    }
+
+    .bundle-quantity {
+        color: #999;
+        padding-left: 0.25rem;
+    }
+}

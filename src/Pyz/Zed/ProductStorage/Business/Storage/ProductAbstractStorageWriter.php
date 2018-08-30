@@ -13,6 +13,7 @@ use Spryker\Zed\ProductStorage\Business\Storage\ProductAbstractStorageWriter as 
 class ProductAbstractStorageWriter extends SprykerProductAbstractStorageWriter
 {
      const COL_FK_PRODUCT_SET = 'fk_product_set';
+
     /**
      * @param array $productAbstractLocalizedEntity
      * @param \Generated\Shared\Transfer\ProductAbstractStorageTransfer $productAbstractStorageTransfer

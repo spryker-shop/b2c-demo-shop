@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @method \Spryker\Client\Product\ProductClientInterface getClient()
- * @method \SprykerShop\Yves\ProductDetailPage\ProductDetailPageFactory getFactory()
+ * @method \Pyz\Yves\ProductDetailPage\ProductDetailPageFactory getFactory()
  */
 class ProductController extends SprykerShopProductController
 {
@@ -35,10 +35,25 @@ class ProductController extends SprykerShopProductController
             (new ItemTransfer())->setIdProductAbstract($productViewTransfer->getIdProductAbstract())
         );
 
+        $bundledProducts = [];
+        foreach ($productViewTransfer->getBundledProductIds() as $productId => $quantity) {
+            $bundledProduct = $this->getFactory()->getProductStoragePyzClient()->findProductConcreteStorageData($productId, $this->getLocale());
+            $bundledProduct['idProductAbstract'] = $bundledProduct['id_product_abstract'];
+            $bundledProduct['productUrl'] = $bundledProduct['url'];
+            $bundledProduct['quantity'] = $quantity;
+            $bundledProductView = $this->getFactory()->getProductStoragePyzClient()->mapProductStorageData(['attributeMap' => [], 'idProductConcrete' => $bundledProduct['id_product_concrete']], $this->getLocale());
+            $image = $bundledProductView->getImages()->offsetGet(0);
+            if ($image) {
+                $bundledProduct['image'] = $image->getExternalUrlSmall();
+            }
+            $bundledProducts[] = $bundledProduct;
+        }
+
         return [
             'cart' => $quoteTransfer,
             'product' => $productViewTransfer,
             'productUrl' => $this->getProductUrl($productViewTransfer),
+            'bundledProducts' => $bundledProducts,
         ];
     }
 }

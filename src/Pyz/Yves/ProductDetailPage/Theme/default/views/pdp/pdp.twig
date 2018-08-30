@@ -5,6 +5,8 @@
     productUrl: _view.productUrl,
 
     cart: _view.cart,
+    isBundle: _view.product.attributes.bundled_product | default(null),
+    bundleItems: _view.bundledProducts,
 
     title: product.metaTitle | default(_view.product.name),
     metaTitle: product.metaTitle | default(_view.product.name),
@@ -15,6 +17,7 @@
 {% block container %}
     <div class="container">
         <div class="container__inner">
+
             {% block pageInfo %}
                 {% block title %}
                     <link itemprop="url" href="{{ data.productUrl }}" />
@@ -33,9 +36,12 @@
                         } only %}
 
                         <div class="col pdp-right">
+
                             {% include molecule('product-configurator', 'ProductDetailPage') with {
                                 data: {
-                                    product: data.product
+                                    product: data.product,
+                                    isBundle: data.isBundle,
+                                    bundleItems: data.bundleItems
                                 }
                             } only %}
 
@@ -54,6 +60,15 @@
                             } only %}
                         </div>
                     </div>
+
+
+                    {% if data.isBundle != null %}
+                        {% include molecule('product-bundle', 'ProductDetailPage') with {
+                            data: {
+                                bundleItems: data.bundleItems
+                            }
+                        } only %}
+                    {% endif %}
 
                     {{ widget('ProductReviewWidgetPlugin', data.product.idProductAbstract) }}
 
