@@ -1,29 +1,111 @@
 @mixin shop-ui-cart-widget($name: '.cart-widget') {
+
   #{$name} {
     position: absolute;
     right: calc(1.8rem - 40px);
     top: -18px;
     z-index: 5;
-    display: none;
-    &.is-active {
-      display: block;
+    height: 0;
+
+    &__title {
+      font: bold 36px $setting-font-family-additional;
+      padding-bottom: 5px;
+      border-bottom: 1px dotted $setting-color-lightest;
     }
-    &:before {
-      content: '';
+    &__buttons {
+      border-top: 1px dotted $setting-color-lightest;
+      padding-top: 20px;
+      .button {
+        font: 500 14px $setting-font-family-additional;
+        height: 48px;
+        width: calc(50% - 10px);
+        padding: 0;
+        line-height: 48px;
+      }
+    }
+
+    .overlay-shadow {
       position: fixed;
-      top: 0px;
+      top: 0;
       left: 0;
-      height: 100%;
       width: 100%;
+      height: 100%;
       background: #000;
-      opacity: 0.4;
       z-index: -1;
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 400ms ease-in-out, visibility 400ms ease-in-out 400ms;
     }
     &__container {
-      max-width: 450px;
+      width: 450px;
       background: $setting-color-white;
       padding: 67px 40px 40px 40px;
       z-index: 5;
+      opacity: 0;
+      transition: all 400ms ease-in-out;
+      transform: scaleY(0);
+      visibility: hidden;
+      transform-origin: top center;
+    }
+
+    &__item-option {
+      font: normal 13px $setting-font-family-additional;
+      line-height: 1.31;
+      span {
+        display: inline-block;
+        margin-left: 5px;
+      }
+    }
+    &__total {
+      padding: 10px 0;
+      strong {
+        text-transform: uppercase;
+        font: 500 14px $setting-font-family-additional;
+      }
+    }
+
+    &__empty-text {
+      font: normal 15px $setting-font-family-additional;
+      line-height: 1.47;
+      padding: 30px 0;
+      border-bottom: 1px dotted $setting-color-lightest;
+      color: $setting-color-lighter;
+    }
+
+
+    &.is-active {
+      height: unset;
+      .overlay-shadow {
+        opacity: .4;
+        visibility: visible;
+        transition: opacity 400ms ease-in-out, visibility 0ms ease-in-out;
+      }
+      #{$name}__container {
+        opacity: 1;
+        transform: scaleY(1);
+        visibility: visible;
+      }
+
+    }
+    .cart-item {
+      &__title {
+        font-size: 15px;
+        margin: 0 0 5px 0;
+      }
+      &__price {
+        font-size: 15px;
+      }
+      &__image {
+        width: 100px;
+        .thumbnail {
+          height: 60px;
+        }
+      }
+      &__content {
+        margin-left: 0;
+        padding-left: 20px;
+        width: calc(100% - 100px);
+      }
     }
   }
 }

@@ -9,25 +9,19 @@ export default class CartOverlayToggler extends Component {
         const triggerOpen = $(triggerOpenSelector);
         const triggerClose = $(triggerCloseSelector);
         const classToToggle = $(this).attr('class-to-toggle');
-        const toggleTarget = $(this).attr('toggle-target');
+        const toggleTargetSelector = $(this).attr('toggle-target');
+        const toggleTarget = $(toggleTargetSelector);
 
-
-        // triggers.each(function(){
-        //     const _self = $(this);
-        //     const targetSelector = _self.data('toggle-target');
-        //     const target = $(targetSelector);
-        //
-        //     _self.on('click', function(){
-        //         target.toggleClass(classToToggle);
-        //         if (!target.hasClass(classToToggle)) {
-        //             _self.addClass('active');
-        //             return;
-        //         }
-        //         _self.removeClass('active');
-        //     });
-        // });
-        //
-        console.log(triggerOpen);
+        triggerOpen.mouseenter(function () {
+            if(!toggleTarget.hasClass('is-active')){
+                toggleTarget.addClass(classToToggle);
+                triggerOpen.addClass('is-active');
+            }
+        });
+        triggerClose.mouseenter(function () {
+            toggleTarget.removeClass(classToToggle);
+            triggerOpen.removeClass('is-active');
+        });
     }
 
 }
