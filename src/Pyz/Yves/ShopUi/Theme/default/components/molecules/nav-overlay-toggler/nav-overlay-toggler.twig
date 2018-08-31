@@ -1,13 +1,17 @@
 {% extends model('component') %}
 
 {% define config = {
-    name: 'cart-overlay-toggler',
-    tag: 'cart-overlay-toggler'
+    name: 'nav-overlay-toggler',
+    tag: 'nav-overlay-toggler'
 } %}
 
 {% define attributes = {
     'trigger-open': required,
     'trigger-close': required,
+    'trigger-cart-open': required,
+    'trigger-user-open': required,
+    'toggle-cart-target': required,
+    'toggle-user-target': required,
     'toggle-target': required,
     'class-to-toggle': 'is-active'
 } %}
