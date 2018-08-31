@@ -11,7 +11,7 @@
 } %}
 
 {% block body %}
-    <form method="POST" action="{{ path('cart/change/quantity', {'sku': data.cartItem.sku }) }}">
+    <form method="POST" action="{{ path('cart/change/quantity', {'sku': data.cartItem.sku }) }}" class="js-quantity-form">
         {% include molecule('cart-item-quantity-input', 'CartPage') with {
             data: {
                 maxQuantity: data.cartItem.maxQuantity,
