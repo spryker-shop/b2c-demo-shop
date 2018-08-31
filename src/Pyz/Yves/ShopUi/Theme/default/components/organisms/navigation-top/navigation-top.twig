@@ -30,14 +30,14 @@
                             }
                         } only %}
                     </a></li>
-                <li class="menu__item"><a href="{{ url('customer/overview') }}" class="grid grid--middle js-user-open js-overlay-open">
+                <li class="menu__item"><a href="{{ url('customer/overview') }}" class="grid grid--middle user-link js-user-open js-overlay-open">
 
-                        {% include atom('icon') with {
-                            class: 'icon--big',
-                            data: {
-                                name: 'user-account'
-                            }
-                        } only %}
+                        {#{% include atom('icon') with {#}
+                            {#class: 'icon--big',#}
+                            {#data: {#}
+                                {#name: 'user-account'#}
+                            {#}#}
+                        {#} only %}#}
 
                     </a></li>
             {% else %}
@@ -51,14 +51,14 @@
                         } only %}
                     </a></li>
 
-                <li class="menu__item"><a href="{{ url('login') }}" class="grid grid--middle js-user-open js-overlay-open">
+                <li class="menu__item"><a href="{{ url('login') }}" class="grid grid--middle user-link js-user-open js-overlay-open">
 
-                        {% include atom('icon') with {
-                            class: 'icon--big',
-                            data: {
-                                name: 'user-account'
-                            }
-                        } only %}
+                        {#{% include atom('icon') with {#}
+                            {#class: 'icon--big',#}
+                            {#data: {#}
+                                {#name: 'user-account'#}
+                            {#}#}
+                        {#} only %}#}
 
                     </a></li>
             {% endif %}
@@ -94,10 +94,12 @@
                         <a class="nav-overlay__link" href="{{ url('customer/profile') }}">{{ 'customer.profile' | trans }}</a>
                     </div>
                 {% if data.isUserAuthenticated %}
-                    <a href="{{ url('logout') }}">{{ 'customer.logout' | trans }}</a>
+                    <a href="{{ url('logout') }}" class="nav-overlay__link nav-overlay__link--sm">{{ 'customer.logout' | trans }}</a>
                 {% else %}
-                    <a href="{{ url('register') }}">{{ 'checkout.customer.auth_as_user' | trans }}</a>
-                    <a href="{{ url('login') }}">{{ 'global.login' | trans }}</a>
+                    <div class="grid grid--middle grid--justify nav-overlay__buttons">
+                        <a href="{{ url('register') }}" class="button button--white col">{{ 'checkout.customer.auth_as_user' | trans }}</a>
+                        <a href="{{ url('login') }}" class="button button--black col">{{ 'global.login' | trans }}</a>
+                    </div>
                 {% endif %}
 
             </div>
