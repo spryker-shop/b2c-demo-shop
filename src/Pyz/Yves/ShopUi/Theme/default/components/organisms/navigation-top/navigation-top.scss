@@ -5,6 +5,21 @@
                 margin: 0;
                 padding: .8rem;
             }
+            .user-link {
+              position: relative;
+              width: 24px;
+              height: 24px;
+              background: url("/assets/images/menu-profile-default.svg") center no-repeat;
+              background-size: 24px 24px;
+              &.is-active {
+                background: url("/assets/images/menu-profile-active.svg") center no-repeat;
+              }
+              @include helper-breakpoint-media-max($md-max) {
+                background: none;
+                width: unset;
+                height: unset;
+              }
+            }
 
         }
     }

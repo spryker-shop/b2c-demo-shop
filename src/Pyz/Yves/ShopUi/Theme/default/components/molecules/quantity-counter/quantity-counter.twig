@@ -10,9 +10,7 @@
     minQuantity: 1,
     value: 1,
     readOnly: false,
-    attributes: {
-
-    }
+    autoUpdate: false
 } %}
 
 {% block body %}
@@ -31,11 +29,11 @@
                 min="{{data.minQuantity}}"
                 {{qa('quantity-input')}}
                 {% if maxQuantity is not empty %}max="{{maxQuantity}}"{% endif %}
-                {% if data.readOnly %}disabled{% endif %} />
+                {% if data.readOnly %}disabled{% endif %}
+                {% if data.autoUpdate %}data-auto-update="true"{% endif %}/>
         </div>
         <div class="col">
             <div class="{{ config.name }}__button {{ config.name }}__button--sm js-quantity-incr">+</div>
         </div>
     </div>
 {% endblock %}
-

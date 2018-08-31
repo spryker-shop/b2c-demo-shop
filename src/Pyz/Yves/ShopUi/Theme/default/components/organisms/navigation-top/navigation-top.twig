@@ -30,14 +30,14 @@
                             }
                         } only %}
                     </a></li>
-                <li class="menu__item"><a href="{{ url('customer/overview') }}" class="grid grid--middle">
+                <li class="menu__item"><a href="{{ url('customer/overview') }}" class="grid grid--middle user-link js-user-open js-overlay-open">
 
-                        {% include atom('icon') with {
-                            class: 'icon--big',
-                            data: {
-                                name: 'user-account'
-                            }
-                        } only %}
+                        {#{% include atom('icon') with {#}
+                            {#class: 'icon--big',#}
+                            {#data: {#}
+                                {#name: 'user-account'#}
+                            {#}#}
+                        {#} only %}#}
 
                     </a></li>
             {% else %}
@@ -51,14 +51,14 @@
                         } only %}
                     </a></li>
 
-                <li class="menu__item"><a href="{{ url('login') }}" class="grid grid--middle">
+                <li class="menu__item"><a href="{{ url('login') }}" class="grid grid--middle user-link js-user-open js-overlay-open">
 
-                        {% include atom('icon') with {
-                            class: 'icon--big',
-                            data: {
-                                name: 'user-account'
-                            }
-                        } only %}
+                        {#{% include atom('icon') with {#}
+                            {#class: 'icon--big',#}
+                            {#data: {#}
+                                {#name: 'user-account'#}
+                            {#}#}
+                        {#} only %}#}
 
                     </a></li>
             {% endif %}
@@ -66,7 +66,7 @@
 
         <li class="menu__item menu__item--cart">
 
-            <a href="{{ url('cart') }}" class="grid grid--middle cart-link js-cartoverlay-open">
+            <a href="{{ url('cart') }}" class="grid grid--middle cart-link js-cart-open js-overlay-open">
                 {% if cartQuantity > 0 %}
                     <span class="cart-link__quantity">
                         {{cartQuantity}}
@@ -84,10 +84,27 @@
 
         </li>
 
-        <div class="cart-widget js-cartoverlay ">
-            <div class="overlay-shadow js-cartoverlay-close"></div>
-            <div class="cart-widget__container">
-                <h4 class="cart-widget__title">{{ 'cart.cart' | trans }}</h4>
+        <div class="nav-overlay js-overlay">
+            <div class="overlay-shadow js-overlay-close"></div>
+            <div class="nav-overlay__container js-user-block is-hidden">
+                <h4 class="nav-overlay__title">{{ 'customer.profile' | trans }}</h4>
+                    <div class="nav-overlay__inner-box">
+                        <a class="nav-overlay__link" href="{{ url('customer/overview') }}">{{ 'checkout.step.summary.overview' | trans }}</a>
+                        <a class="nav-overlay__link" href="{{ url('customer/order') }}">{{ 'customer.account.order_history' | trans }}</a>
+                        <a class="nav-overlay__link" href="{{ url('customer/profile') }}">{{ 'customer.profile' | trans }}</a>
+                    </div>
+                {% if data.isUserAuthenticated %}
+                    <a href="{{ url('logout') }}" class="nav-overlay__link nav-overlay__link--sm">{{ 'customer.logout' | trans }}</a>
+                {% else %}
+                    <div class="grid grid--middle grid--justify nav-overlay__buttons">
+                        <a href="{{ url('register') }}" class="button button--white col">{{ 'checkout.customer.auth_as_user' | trans }}</a>
+                        <a href="{{ url('login') }}" class="button button--black col">{{ 'global.login' | trans }}</a>
+                    </div>
+                {% endif %}
+
+            </div>
+            <div class="nav-overlay__container js-cart-block is-hidden">
+                <h4 class="nav-overlay__title">{{ 'cart.cart' | trans }}</h4>
                 {% if data.quote.items is not empty %}
                     {% for item in data.quote.items %}
 
@@ -112,13 +129,13 @@
                                     </div>
                                     <div class="cart-item__options">
                                         {#<strong>{{ item.sumSubtotalAggregation | money }}</strong>#}
-                                        {% for attribute in item.concreteAttributes %}
-                                            <div class="cart-widget__item-option">
-                                                Option Name:
+                                        {% for attributeName, attribute in item.concreteAttributes %}
+                                            <div class="nav-overlay__item-option">
+                                                {{ ('product.attribute.' ~ attributeName) | trans }}:
                                                 <span>{{ attribute }}</span>
                                             </div>
                                         {% endfor %}
-                                        <div class="cart-widget__item-option">
+                                        <div class="nav-overlay__item-option">
                                             {{ 'cart.item_quantity' | trans }}:
                                             <span>{{ item.quantity }}</span>
                                         </div>
@@ -132,7 +149,7 @@
                         </div>
 
                     {% endfor %}
-                    <div class="cart-widget__total grid grid--middle grid--justify">
+                    <div class="nav-overlay__total grid grid--middle grid--justify">
                         <strong class="col">{{ 'cart.total' | trans }}</strong>
                         <strong class="col">{{ data.quote.totals.grandTotal | money }}</strong>
                     </div>
@@ -141,7 +158,7 @@
                         and (not is_granted('IS_AUTHENTICATED_FULLY') or can('WriteSharedCartPermissionPlugin', data.quote.idQuote))
                     %}
                     {% if canProceedToCheckout %}
-                        <div class="grid grid--middle grid--justify cart-widget__buttons">
+                        <div class="grid grid--middle grid--justify nav-overlay__buttons">
                             <a href="{{ url('cart') }}" class="col button button--white">{{ 'cart.cart' | trans }}</a>
                             <a class="col button button--black" href="{{ url('checkout-index') }}" {{qa('cart-go-to-checkout')}}>
                                 {{ 'cart.checkout' | trans }}
@@ -150,17 +167,21 @@
                     {% endif %}
                 {% endif %}
                 {% if data.quote.items is empty %}
-                    <p class="cart-widget__empty-text">{{ 'cart_widget.empty_text' | trans }}</p>
+                    <p class="nav-overlay__empty-text">{{ 'cart_widget.empty_text' | trans }}</p>
                 {% endif %}
             </div>
         </div>
 
     </ul>
-    {% include molecule('cart-overlay-toggler') with {
+    {% include molecule('nav-overlay-toggler') with {
         attributes: {
-            'trigger-open': '.js-cartoverlay-open',
-            'trigger-close': '.js-cartoverlay-close',
-            'toggle-target': '.js-cartoverlay',
+            'trigger-open': '.js-overlay-open',
+            'trigger-close': '.js-overlay-close',
+            'trigger-cart-open': '.js-cart-open',
+            'trigger-user-open': '.js-user-open',
+            'toggle-cart-target': '.js-cart-block',
+            'toggle-user-target': '.js-user-block',
+            'toggle-target': '.js-overlay',
             'class-to-toggle': 'is-active'
         }
     } only %}

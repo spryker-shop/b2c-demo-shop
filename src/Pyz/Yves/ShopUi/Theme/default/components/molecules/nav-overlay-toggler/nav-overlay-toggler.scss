@@ -1,5 +1,4 @@
-@mixin shop-ui-cart-widget($name: '.cart-widget') {
-
+@mixin shop-ui-nav-overlay($name: '.nav-overlay') {
   #{$name} {
     position: absolute;
     right: calc(1.8rem - 40px);
@@ -9,7 +8,7 @@
 
     &__title {
       font: bold 36px $setting-font-family-additional;
-      padding-bottom: 5px;
+      padding-bottom: 10px;
       border-bottom: 1px dotted $setting-color-lightest;
     }
     &__buttons {
@@ -23,6 +22,46 @@
         line-height: 48px;
       }
     }
+
+    &__inner-box {
+      padding: 20px 0;
+    }
+    &__link {
+      display: block;
+      font: normal 14px $setting-font-family-additional;
+      margin: 30px 0;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      position: relative;
+      &:hover {
+        text-decoration: none;
+
+      }
+      &::after {
+        content: '';
+        display: block;
+        height: 13px;
+        width: 7px;
+        top: 50%;
+        right: 0;
+        transform: translate(0 , -50%);
+        position: absolute;
+        background: url("/assets/images/right-chevron.svg") center no-repeat;
+        background-size: cover;
+      }
+      &--sm {
+        font-size: 12px;
+        margin: 0;
+        padding-top: 25px;
+        border-top: 1px dotted $setting-color-lightest;
+        &::after {
+          width: 6px;
+          height: 11px;
+          top: calc(50% + 12px);
+        }
+      }
+    }
+
 
     .overlay-shadow {
       position: fixed;
