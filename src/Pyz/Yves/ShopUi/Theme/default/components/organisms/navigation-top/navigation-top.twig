@@ -86,7 +86,8 @@
 
         <div class="nav-overlay js-overlay">
             <div class="overlay-shadow js-overlay-close"></div>
-            <div class="nav-overlay__container js-user-block is-hidden">
+            <div class="nav-overlay__container">
+            <div class="js-user-block">
                 <h4 class="nav-overlay__title">{{ 'customer.profile' | trans }}</h4>
                     <div class="nav-overlay__inner-box">
                         <a class="nav-overlay__link" href="{{ url('customer/overview') }}">{{ 'checkout.step.summary.overview' | trans }}</a>
@@ -103,7 +104,7 @@
                 {% endif %}
 
             </div>
-            <div class="nav-overlay__container js-cart-block is-hidden">
+            <div class="js-cart-block">
                 <h4 class="nav-overlay__title">{{ 'cart.cart' | trans }}</h4>
                 {% if data.quote.items is not empty %}
                     {% for item in data.quote.items %}
@@ -169,6 +170,7 @@
                 {% if data.quote.items is empty %}
                     <p class="nav-overlay__empty-text">{{ 'cart_widget.empty_text' | trans }}</p>
                 {% endif %}
+            </div>
             </div>
         </div>
 
