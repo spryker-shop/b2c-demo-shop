@@ -35,9 +35,6 @@ export default class NavOverlayToggler extends Component {
         triggerClose.mouseenter(()=> {
             toggleTarget.removeClass(classToToggle);
             triggerOpen.removeClass(classToToggle);
-            toggleCart.addClass('is-hidden');
-            toggleUser.addClass('is-hidden');
-
         });
 
         triggerCart.mouseenter(()=> {
