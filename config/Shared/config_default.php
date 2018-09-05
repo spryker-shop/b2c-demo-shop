@@ -41,6 +41,7 @@ use Spryker\Zed\Log\Communication\Plugin\ZedLoggerConfigPlugin;
 use Spryker\Zed\Oms\OmsConfig;
 use Spryker\Zed\Propel\PropelConfig;
 use SprykerEco\Shared\Loggly\LogglyConstants;
+use Pyz\Shared\DataImport\DataImportConstants;
 
 $CURRENT_STORE = Store::getInstance()->getStoreName();
 
@@ -413,3 +414,6 @@ $config[CmsGuiConstants::CMS_PAGE_PREVIEW_URI] = '/en/cms/preview/%d';
 
 // ---------- Loggly
 $config[LogglyConstants::TOKEN] = 'loggly-token:sample:123456';
+
+// -------- DataImport
+$config[DataImportConstants::IS_ENABLE_INTERNAL_IMAGE] = false;

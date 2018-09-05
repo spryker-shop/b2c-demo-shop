@@ -7,6 +7,7 @@
 
 namespace Pyz\Zed\DataImport;
 
+use Pyz\Shared\DataImport\DataImportConstants;
 use Spryker\Zed\DataImport\DataImportConfig as SprykerDataImportConfig;
 
 /**
@@ -283,7 +284,9 @@ class DataImportConfig extends SprykerDataImportConfig
      */
     public function getProductImageDataImporterConfiguration()
     {
-        return $this->buildImporterConfiguration('icecat_biz_data' . DIRECTORY_SEPARATOR . 'product_image.csv', static::IMPORT_TYPE_PRODUCT_IMAGE);
+        $imageFile = ($this->isInternal()) ? 'product_image_internal.csv' : 'product_image.csv';
+
+        return $this->buildImporterConfiguration('icecat_biz_data' . DIRECTORY_SEPARATOR . $imageFile, static::IMPORT_TYPE_PRODUCT_IMAGE);
     }
 
     /**
@@ -364,5 +367,15 @@ class DataImportConfig extends SprykerDataImportConfig
     public function getDiscountVoucherDataImporterConfiguration()
     {
         return $this->buildImporterConfiguration('discount_voucher.csv', static::IMPORT_TYPE_DISCOUNT_VOUCHER);
+    }
+
+    /**
+     * @param int $idCmsPage
+     *
+     * @return string
+     */
+    public function isInternal()
+    {
+        return ($this->getConfig()->get(DataImportConstants::IS_ENABLE_INTERNAL_IMAGE)) ? true : false;
     }
 }
