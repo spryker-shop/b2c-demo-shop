@@ -126,7 +126,6 @@
                                         <div class="cart-item__price col col--lg-4 col--sm-12">
                                             <span class="cart-item__price">{{ cartItemSubTotal | money }}</span>
                                         </div>
-
                                     </div>
                                     <div class="cart-item__options">
                                         {#<strong>{{ item.sumSubtotalAggregation | money }}</strong>#}
@@ -134,6 +133,12 @@
                                             <div class="nav-overlay__item-option">
                                                 {{ ('product.attribute.' ~ attributeName) | trans }}:
                                                 <span>{{ attribute }}</span>
+                                            </div>
+                                        {% endfor %}
+                                        {% for option in item.productOptions %}
+                                            <div class="nav-overlay__item-option">
+                                                {{ option.value | trans }}:
+                                                <span>{{ option.unitPrice | money }}</span>
                                             </div>
                                         {% endfor %}
                                         <div class="nav-overlay__item-option">
@@ -145,11 +150,19 @@
                                             {{ 'remove' | trans }}
                                         </a>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
 
                     {% endfor %}
+
+                    {% if data.quote.totals.discounttotal %}
+                    <div class="nav-overlay__total grid grid--middle grid--justify">
+                        <strong class="col">{{ 'cart.discounts' | trans }}</strong>
+                        <strong class="col">- {{ data.quote.totals.discounttotal | money }}</strong>
+                    </div>
+                     {% endif %}
                     <div class="nav-overlay__total grid grid--middle grid--justify">
                         <strong class="col">{{ 'cart.total' | trans }}</strong>
                         <strong class="col">{{ data.quote.totals.grandTotal | money }}</strong>
