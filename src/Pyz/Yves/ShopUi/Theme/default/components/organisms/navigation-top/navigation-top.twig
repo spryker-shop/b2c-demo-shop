@@ -107,8 +107,8 @@
             <div class="js-cart-block">
                 <h4 class="nav-overlay__title">{{ 'cart.cart' | trans }}</h4>
                 {% if data.quote.items is not empty %}
+                    {% set optionPrice = 0 %}
                     {% for item in data.quote.items %}
-
                         <div class="shopping-cart__box">
                             <div class="grid grid--middle grid--justify grid--no-wrap">
                                 <div class="cart-item__image col">
@@ -127,18 +127,21 @@
                                             <span class="cart-item__price">{{ cartItemSubTotal | money }}</span>
                                         </div>
                                     </div>
+                                    {% set optionPrice = 0 %}
+                                    {% for option in item.productOptions %}
+                                        {% set optionPrice = optionPrice + option.unitPrice %}
+                                    {% endfor %}
+                                    {% if optionPrice %}
+                                        <div class="grid grid--middle grid--justify">
+                                            <span class="col nav-overlay__item-option">{{ 'cart.product-option' | trans }}</span>
+                                            <span class="col">{{ optionPrice | money }}</span>
+                                        </div>
+                                    {% endif %}
                                     <div class="cart-item__options">
-                                        {#<strong>{{ item.sumSubtotalAggregation | money }}</strong>#}
                                         {% for attributeName, attribute in item.concreteAttributes %}
                                             <div class="nav-overlay__item-option">
                                                 {{ ('product.attribute.' ~ attributeName) | trans }}:
                                                 <span>{{ attribute }}</span>
-                                            </div>
-                                        {% endfor %}
-                                        {% for option in item.productOptions %}
-                                            <div class="nav-overlay__item-option">
-                                                {{ option.value | trans }}:
-                                                <span>{{ option.unitPrice | money }}</span>
                                             </div>
                                         {% endfor %}
                                         <div class="nav-overlay__item-option">
@@ -156,7 +159,6 @@
                         </div>
 
                     {% endfor %}
-
                     {% if data.quote.totals.discounttotal %}
                     <div class="nav-overlay__total grid grid--middle grid--justify">
                         <strong class="col">{{ 'cart.discounts' | trans }}</strong>
