@@ -14,7 +14,7 @@
     {% if data.startWithHome %}
         {% include molecule('breadcrumb-step') with {
             data: {
-                url: '/',
+                url: '/' ~ app.locale | slice(0, 2),
                 label: 'global.home' | trans
             }
         } only %}
