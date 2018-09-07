@@ -15,6 +15,7 @@
     <div class="checkout-layout success-page">
         <h1 class="success-page__title">{{data.title}}</h1>
         <p class="success-page__text">{{data.message}}</p>
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
         <a class="success-page__link" href="{{ url('customer/overview') }}">{{ 'checkout.step.success.link' | trans }}
             {% include atom('icon') with {
                 data: {
@@ -22,5 +23,6 @@
                 }
             } only %}
         </a>
+        {% endif %}
     </div>
 {% endblock %}

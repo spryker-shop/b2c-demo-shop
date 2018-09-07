@@ -1,4 +1,3 @@
-
 @mixin shop-ui-header($name: '.header') {
     #{$name} {
         position: relative;
@@ -27,13 +26,13 @@
         }
 
         &__overlay-shadow {
-          position: fixed;
-          top: 0;
-          left: 0;
-          height: 100%;
-          z-index: -1;
-          width: 100%;
-          display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            z-index: -1;
+            width: 100%;
+            display: none;
         }
 
         &__search-overlay {
@@ -41,13 +40,13 @@
             top: -1000px;
             z-index: $setting-zi-search-suggestions;
             transition: top 300ms ease-in-out;
-            &:after{
+            &:after {
                 content: '';
                 position: fixed;
                 top: 0;
                 left: 0;
                 height: 100%;
-                background: #000;
+                background: $setting-color-black;
                 opacity: 0;
                 z-index: -2;
                 width: 0;
@@ -55,14 +54,14 @@
             }
             &.active {
                 #{$name}__overlay-shadow {
-                  display: block;
+                    display: block;
                 }
                 top: 0;
                 transition: top 300ms ease-in-out;
                 &:after {
-                  width: 100%;
-                  opacity: .4;
-                  transition: opacity 300ms ease-in-out;
+                    width: 100%;
+                    opacity: .4;
+                    transition: opacity 300ms ease-in-out;
                 }
             }
         }
@@ -80,8 +79,8 @@
             cursor: pointer;
             float: left;
             .icon {
-              margin-left: 10px;
-              vertical-align: bottom;
+                margin-left: 10px;
+                vertical-align: bottom;
             }
             &:before {
                 content: '';
@@ -89,7 +88,7 @@
                 width: 85px;
                 height: 25px;
                 float: left;
-                border-bottom: 1px solid #8d8d8d;
+                border-bottom: 1px solid $setting-color-gray;
             }
         }
         &__search-close {
@@ -99,16 +98,34 @@
             padding: 34px 30px;
             z-index: $setting-zi-search-suggestions;
             cursor: pointer;
-          @include helper-breakpoint-media-max($sm-max) {
-            position: static;
-            padding: 0;
-            margin-bottom: 25px;
-            width: 24px;
-            .icon {
-              width: 20px;
-              height: 20px;
+            @include helper-breakpoint-media-max($sm-max) {
+                position: static;
+                padding: 0;
+                margin-bottom: 25px;
+                width: 24px;
+                .icon {
+                    width: 20px;
+                    height: 20px;
+                }
             }
-          }
+        }
+
+        &__currency-lang {
+            display: flex;
+            order: 1;
+
+            .custom-select {
+                margin-right: 16px;
+                font-size: 16px;
+
+                &__caret {
+                    pointer-events: none;
+                }
+
+                .select2-selection__rendered {
+                    line-height: 24px;
+                }
+            }
         }
 
         @content;
