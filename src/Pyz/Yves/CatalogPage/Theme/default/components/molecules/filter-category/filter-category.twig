@@ -36,7 +36,7 @@
 
             <li class="menu__item {% if hasChildren %}menu__item--has-children-list{% endif %} {% if currentUrl == categoryUrl %} active{% endif %}">
                 <button class="link" onclick="this.form.action='{{ categoryUrl }}'" {% if quantity == 0 %}disabled="disabled"{% endif %}>
-                    {{ categoryNode.name }}
+                    {{ categoryNode.name }}{% if hasChildren is empty %} ({{ quantity }}){% endif %}
                 </button>
 
                 {% if hasChildren %}
