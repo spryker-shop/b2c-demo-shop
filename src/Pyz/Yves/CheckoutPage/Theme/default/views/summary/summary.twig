@@ -71,6 +71,9 @@
                 </div>
                 <div class="summary-item-wrap">
                     <h5>{{ 'checkout.step.summary.shipping' | trans }}</h5>
+                    <div class="checkout-form-heading__img checkout-form-heading__img--indent">
+                        <img src="/assets/images/checkout-logos/shipment-checkout.step.shipment.provider.b.png" width="65" height="10" alt="Hermes">
+                    </div>
                     <ul class="list">
                         <li class="list__item">{{ data.shipmentMethod.carrierName | trans }}</li>
                         <li class="list__item">{{ data.shipmentMethod.name }} {{ data.shipmentMethod.storeCurrencyPrice | money }}</li>
@@ -84,6 +87,14 @@
                 </div>
                 <div class="summary-item-wrap">
                     <h5>{{ 'checkout.step.summary.payment' | trans }}</h5>
+                    <div class="checkout-form-heading--row">
+                        <div class="checkout-form-heading__img checkout-form-heading__img--indent">
+                            <img src="/assets/images/checkout-logos/logo-visa.png" width="43" height="18" alt="Visa">
+                        </div>
+                        <div class="checkout-form-heading__img checkout-form-heading__img--indent">
+                            <img src="/assets/images/checkout-logos/logo-mastercard.png" width="29" height="22" alt="Mastercard">
+                        </div>
+                    </div>
                     <ul class="list">
                         <li class="list__item">{{data.payment.paymentSelection | trans}}</li>
                         {% if data.payment.paymentSelection == 'dummyPaymentCreditCard' %}

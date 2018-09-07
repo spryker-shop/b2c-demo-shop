@@ -25,12 +25,12 @@ builder.factory.register('development', () => class extends builder.factory.defa
     getCopyWebpackPluginPatterns() {
         return [
             {
-                from: './frontend/assets/images/*',
-                to: './images/[name].[ext]',
+                from: `./frontend/assets/images`,
+                to: 'images',
                 ignore: ['*.gitkeep']
             }, {
-                from: './frontend/assets/fonts/*',
-                to: './fonts/[name].[ext]',
+                from: `./frontend/assets/fonts`,
+                to: 'fonts',
                 ignore: ['*.gitkeep']
             }
         ]

@@ -37,7 +37,12 @@
             {% for name, choices in data.form.idShipmentMethod.vars.choices %}
                 <div class="col col--sm-12 shipping-form-item">
 
-                    <h5>{{name | trans}}</h5>
+                    <div class="checkout-form-heading">
+                        <h5>{{name | trans}}</h5>
+                        <div class="checkout-form-heading__img">
+                            <img src="/assets/images/checkout-logos/shipment-{{ name }}.png" width="65" height="10" alt="{{ name }}">
+                        </div>
+                    </div>
 
                     <ul class="list-switches list-switches--two-colums">
 
