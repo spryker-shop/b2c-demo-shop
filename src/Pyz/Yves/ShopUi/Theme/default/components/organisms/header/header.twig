@@ -41,6 +41,19 @@
             {% block additionalLink %}{% endblock %}
 
                 <div class="col col--sm-12 col--lg-4 is-hidden-sm-md">
+
+                    <div class="col {{config.name}}__currency-lang">
+                        <div class="col">
+                            {{ widgetGlobal(
+                                'LanguageSwitcherWidgetPlugin',
+                                app.request.pathInfo,
+                                app.request.queryString,
+                                app.request.requestUri
+                            ) }}
+                        </div>
+                        <div class="col">{{ widgetGlobal('CurrencyWidgetPlugin') }}</div>
+                    </div>
+
                     {% if data.showSearchForm %}
                         <div class="{{ config.name }}__search-open js-search-show-icon">
                             {% include atom('icon') with {
@@ -50,6 +63,7 @@
                             } only %}
                         </div>
                     {% endif %}
+
                 </div>
 
             <div class="col col--sm-12 col--lg-4">
