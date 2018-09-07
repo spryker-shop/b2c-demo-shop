@@ -1,8 +1,7 @@
 {% extends model('component') %}
 
 {% define config = {
-    name: 'filter-category',
-    requestUrl: app.request.attributes.get('categoryNode').url | replace({"'": "\\'", '"':'\\"'})
+    name: 'filter-category'
 } %}
 
 {% define data = {
@@ -29,11 +28,13 @@
 
             {% if data.filterPath is not empty %}
                 {% set categoryUrl = url(data.filterPath, {categoryPath: (categoryNode.url)}) %}
+                {% set currentUrl = url(data.filterPath, {categoryPath: (app.request.attributes.get('categoryPath'))}) %}
             {% else %}
                 {% set categoryUrl = categoryNode.url | replace({"'": "\\'", '"':'\\"'}) %}
+                {% set currentUrl = app.request.attributes.get('categoryPath') %}
             {% endif %}
 
-            <li class="menu__item {% if hasChildren %}menu__item--has-children-list{% endif %} {% if config.requestUrl == categoryUrl %} active{% endif %}">
+            <li class="menu__item {% if hasChildren %}menu__item--has-children-list{% endif %} {% if currentUrl == categoryUrl %} active{% endif %}">
                 <button class="link" onclick="this.form.action='{{ categoryUrl }}'" {% if quantity == 0 %}disabled="disabled"{% endif %}>
                     {{ categoryNode.name }}
                 </button>
