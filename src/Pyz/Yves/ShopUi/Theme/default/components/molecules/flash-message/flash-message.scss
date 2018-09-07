@@ -1,7 +1,7 @@
 @mixin shop-ui-flash-message($name: '.flash-message') {
     #{$name} {
         @include helper-visibility-invisible;
-        @include helper-effect-transition(max-height opacity visibility, 500ms);
+        @include helper-effect-transition(max-height opacity visibility, $setting-effect-default-duration * 2);
         max-height: 0;
         overflow-y: hidden;
         font-size: $setting-font-size-base + 1;
@@ -22,7 +22,7 @@
         }
 
         &__static-link {
-            color: rgba($setting-color-gray-1, .4);
+            color: rgba($setting-color-gray-1, 0.4);
             flex-shrink: 0;
         }
 
