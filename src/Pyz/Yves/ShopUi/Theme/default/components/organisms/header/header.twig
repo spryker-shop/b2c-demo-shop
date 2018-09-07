@@ -7,7 +7,8 @@
 
 {% define data = {
     showSearchForm: true,
-    showNavigation: true
+    showNavigation: true,
+    showLangCurrencySwitches: false
 } %}
 
 {% block body %}
@@ -42,17 +43,19 @@
 
                 <div class="col col--sm-12 col--lg-4 is-hidden-sm-md">
 
-                    <div class="col {{config.name}}__currency-lang">
-                        <div class="col">
-                            {{ widgetGlobal(
-                                'LanguageSwitcherWidgetPlugin',
-                                app.request.pathInfo,
-                                app.request.queryString,
-                                app.request.requestUri
-                            ) }}
+                    {% if data.showLangCurrencySwitches %}
+                        <div class="col {{config.name}}__currency-lang">
+                            <div class="col">
+                                {{ widgetGlobal(
+                                    'LanguageSwitcherWidgetPlugin',
+                                    app.request.pathInfo,
+                                    app.request.queryString,
+                                    app.request.requestUri
+                                ) }}
+                            </div>
+                            <div class="col">{{ widgetGlobal('CurrencyWidgetPlugin') }}</div>
                         </div>
-                        <div class="col">{{ widgetGlobal('CurrencyWidgetPlugin') }}</div>
-                    </div>
+                    {% endif %}
 
                     {% if data.showSearchForm %}
                         <div class="{{ config.name }}__search-open js-search-show-icon">
