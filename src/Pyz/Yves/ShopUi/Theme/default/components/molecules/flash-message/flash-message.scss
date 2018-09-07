@@ -4,7 +4,7 @@
         @include helper-visibility-invisible;
         @include helper-effect-transition(max-height opacity visibility, 500ms);
         max-height: 0;
-        background-color: rgba(helper-color-light($setting-color-main), 0.97);
+        background-color: rgba(helper-color-light($setting-color-main), 0.8);
         cursor: pointer;
         overflow-y: hidden;
 
@@ -16,6 +16,10 @@
         &--show {
             @include helper-visibility-visible;
             max-height: 8rem;
+        }
+
+        &--info {
+            color: $setting-color-black;
         }
 
         @each $action, $setting-color-action in $setting-color-actions {
