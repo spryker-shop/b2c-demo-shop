@@ -12,10 +12,10 @@
     withChevron: true
 } %}
 
-{% set isLink = data.url is not empty or data.url == '' %}
+{% set isLink = data.url is not empty %}
 
 {% block body %}
-    {%- if isLink -%}<a href="{{ url(data.url) }}">{%- endif -%}
+    {%- if isLink -%}<a href="{{ data.url }}">{%- endif -%}
     {%- if data.itemProp -%}<span itemprop="{{-data.itemProp-}}">{%- endif -%}
     {{-data.label-}}
     {%- if data.itemProp -%}</span>{%- endif -%}
