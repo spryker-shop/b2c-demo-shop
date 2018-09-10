@@ -1,21 +1,43 @@
 @mixin shop-ui-flash-message($name: '.flash-message') {
     #{$name} {
-        @include helper-ui-shadow;
         @include helper-visibility-invisible;
-        @include helper-effect-transition(max-height opacity visibility, 500ms);
+        @include helper-effect-transition(max-height opacity visibility, $setting-effect-default-duration * 2);
         max-height: 0;
-        background-color: rgba(helper-color-light($setting-color-main), 0.97);
-        cursor: pointer;
         overflow-y: hidden;
+        font-size: $setting-font-size-base + 1;
+        font-family: $setting-font-family-additional;
+
+        &__content {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+
+            &:after {
+                display: none;
+            }
+        }
+
+        &__text {
+            padding-right: 1rem;
+        }
+
+        &__static-link {
+            color: rgba($setting-color-gray-1, 0.4);
+            flex-shrink: 0;
+        }
 
         &__message {
-            padding: 1rem 0.5rem;
-            color: helper-color-dark($setting-color-main);
+            padding: 1.25rem 1rem;
+            color: $setting-color-white;
         }
 
         &--show {
             @include helper-visibility-visible;
             max-height: 8rem;
+        }
+
+        &--info {
+            color: $setting-color-black;
         }
 
         @each $action, $setting-color-action in $setting-color-actions {
@@ -28,12 +50,9 @@
 
 @mixin shop-ui-flash-message-action($action, $setting-color-action) {
     &--#{$action} {
-        background-color: rgba(helper-color-light($setting-color-action), 0.97);
-    }
-
-    &--#{$action} &__message {
-        color: helper-color-dark($setting-color-action);
+        background-color: $setting-color-action;
     }
 
     @content;
 }
+
