@@ -149,7 +149,7 @@ export default class SuggestSearch extends Component {
         this.hideSugestions();
         this.searchOverlay.classList.toggle('active');
         this.cleanUpInput();
-        clearInterval(this.focusTimeout);
+        clearTimeout(this.focusTimeout);
     }
 
     protected getActiveNavigationItem(): HTMLElement {
