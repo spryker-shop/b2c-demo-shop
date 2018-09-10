@@ -7,7 +7,9 @@
     shippingAddress: _view.quoteTransfer.shippingAddress,
     billingAddress: _view.quoteTransfer.billingAddress,
     shipmentMethod: _view.quoteTransfer.shipment.method,
+    shipmentMethodName: _view.quoteTransfer.shipment.method.carrierName | trans,
     payment: _view.quoteTransfer.payment,
+    paymentMethodName: _view.quoteTransfer.payment.dummyPayment.cardType,
 
     forms: {
         summary: _view.summaryForm
@@ -52,7 +54,6 @@
                                 {% endif %}
                             {% endfor %}
 
-                            {{ dump(data.overview.shipmentMethod ) }}
                         </div>
                         <div class="col col--sm-12 col--md-6">
                             <strong>{{ 'page.checkout.address.billing-address' | trans }}</strong>
@@ -73,9 +74,16 @@
                 </div>
                 <div class="summary-item-wrap">
                     <h5>{{ 'checkout.step.summary.shipping' | trans }}</h5>
-                    <div class="checkout-form-heading__img checkout-form-heading__img--indent">
-                        <img src="/assets/images/checkout-logos/shipment-checkout.step.shipment.provider.b.png" width="65" height="10" alt="Hermes">
-                    </div>
+                    {% if data.shipmentMethodName == 'DHL' %}
+                        <div class="checkout-form-heading__img checkout-form-heading__img--indent">
+                            <img src="/assets/images/checkout-logos/shipment-checkout.step.shipment.provider.a.png" width="65" height="10" alt="DHL">
+                        </div>
+                    {% endif %}
+                    {% if data.shipmentMethodName == 'Hermes' %}
+                        <div class="checkout-form-heading__img checkout-form-heading__img--indent">
+                            <img src="/assets/images/checkout-logos/shipment-checkout.step.shipment.provider.b.png" width="65" height="10" alt="Hermes">
+                        </div>
+                    {% endif %}
                     <ul class="list">
                         <li class="list__item">{{ data.shipmentMethod.carrierName | trans }}</li>
                         <li class="list__item">{{ data.shipmentMethod.name }} {{ data.shipmentMethod.storeCurrencyPrice | money }}</li>
@@ -89,14 +97,16 @@
                 </div>
                 <div class="summary-item-wrap">
                     <h5>{{ 'checkout.step.summary.payment' | trans }}</h5>
-                    <div class="checkout-form-heading--row">
+                    {% if data.paymentMethodName == 'Visa' %}
                         <div class="checkout-form-heading__img checkout-form-heading__img--indent">
                             <img src="/assets/images/checkout-logos/logo-visa.png" width="43" height="18" alt="Visa">
                         </div>
+                    {% endif %}
+                    {% if data.paymentMethodName == 'Master Card' %}
                         <div class="checkout-form-heading__img checkout-form-heading__img--indent">
                             <img src="/assets/images/checkout-logos/logo-mastercard.png" width="29" height="22" alt="Mastercard">
                         </div>
-                    </div>
+                    {% endif %}
                     <ul class="list">
                         <li class="list__item">{{data.payment.paymentSelection | trans}}</li>
                         {% if data.payment.paymentSelection == 'dummyPaymentCreditCard' %}
