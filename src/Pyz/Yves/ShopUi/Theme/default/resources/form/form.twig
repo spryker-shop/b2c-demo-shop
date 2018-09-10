@@ -183,7 +183,7 @@
         {% if errors | length > 0 %}
             <ul class="list list--bullet list--alert">
                 {% for error in errors %}
-                    <li class="list__item">{{ error.message }}</li>
+                    <li class="list__item">{{ error.message | trans }}</li>
                 {% endfor %}
             </ul>
         {% endif %}
