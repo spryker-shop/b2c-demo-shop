@@ -244,6 +244,7 @@ export default class SuggestSearch extends Component {
     }
 
     openSearchLayout(): void {
+        this.saveCurrentSearchValue('');
         this.setHintValue('');
         this.searchOverlay.classList.toggle('active');
         this.searchInput.focus();
