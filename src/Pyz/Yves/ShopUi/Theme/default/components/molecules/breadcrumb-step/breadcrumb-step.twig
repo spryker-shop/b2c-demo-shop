@@ -15,12 +15,12 @@
 {% set isLink = data.url is not empty %}
 
 {% block body %}
-    {%- if isLink -%}<a href="{{data.url}}">{%- endif -%}
+    {%- if isLink -%}<a href="{{ data.url }}">{%- endif -%}
     {%- if data.itemProp -%}<span itemprop="{{-data.itemProp-}}">{%- endif -%}
     {{-data.label-}}
     {%- if data.itemProp -%}</span>{%- endif -%}
     {%- if isLink -%}</a>{%- endif -%}
-    
+
     {% if data.withChevron %}
         <span class="breadcrumb-step__separator"></span>
     {% endif %}
