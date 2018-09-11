@@ -1,17 +1,18 @@
 <?php
 
 /**
- * Copyright © 2016-present Spryker Systems GmbH. All rights reserved.
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * This file is part of the Spryker Suite.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace Pyz\Zed\ProductCategoryFilterGui\Communication\Controller;
 
 use Generated\Shared\Search\PageIndexMap;
 use Spryker\Client\Search\Plugin\Elasticsearch\ResultFormatter\FacetResultFormatterPlugin;
+use Spryker\Zed\ProductCategoryFilterGui\Communication\Controller\ProductCategoryFilterController as SprykerProductCategoryFilterController;
 use Spryker\Zed\ProductCategoryFilterGui\Communication\Form\ProductCategoryFilterForm;
 use Symfony\Component\HttpFoundation\Request;
-use Spryker\Zed\ProductCategoryFilterGui\Communication\Controller\ProductCategoryFilterController as SprykerProductCategoryFilterController;
+
 /**
  * @method \Spryker\Zed\ProductCategoryFilterGui\Communication\ProductCategoryFilterGuiCommunicationFactory getFactory()
  * @method \Spryker\Zed\ProductCategoryFilterGui\Persistence\ProductCategoryFilterGuiQueryContainerInterface getQueryContainer()
@@ -84,7 +85,7 @@ class ProductCategoryFilterController extends SprykerProductCategoryFilterContro
         }
 
         $nonSearchFilters = $this->getNonSearchFilters(
-            ($productCategoryFilterTransfer->getFilters() !== null) ? (array) $productCategoryFilterTransfer->getFilters() : [],
+            ($productCategoryFilterTransfer->getFilters() !== null) ? (array)$productCategoryFilterTransfer->getFilters() : [],
             $searchResultsForCategory[FacetResultFormatterPlugin::NAME]
         );
 
