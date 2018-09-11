@@ -8,6 +8,7 @@
 {% define data = {
     cartQuantity: app['cart.quantity'] | default,
     quote: app['quote'],
+    cartItems: app['cartItems'],
     showUserMenu: not (hideUserMenu | default(false)),
     isUserAuthenticated: is_granted('IS_AUTHENTICATED_FULLY'),
     isInline: false,
@@ -106,9 +107,9 @@
             </div>
             <div class="js-cart-block">
                 <h4 class="nav-overlay__title">{{ 'cart.cart' | trans }}</h4>
-                {% if data.quote.items is not empty %}
+                {% if data.cartItems is not empty %}
                     {% set optionPrice = 0 %}
-                    {% for item in data.quote.items %}
+                    {% for item in data.cartItems %}
                         <div class="shopping-cart__box">
                             <div class="grid grid--middle grid--justify grid--no-wrap">
                                 <div class="cart-item__image col">
