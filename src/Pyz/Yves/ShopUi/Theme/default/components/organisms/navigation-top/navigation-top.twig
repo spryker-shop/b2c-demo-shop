@@ -88,11 +88,11 @@
             <div class="overlay-shadow js-overlay-close"></div>
             <div class="nav-overlay__container">
             <div class="js-user-block">
-                <h4 class="nav-overlay__title">{{ 'customer.profile' | trans }}</h4>
+                <h4 class="nav-overlay__title">{{ 'customer.profile.title' | trans }}</h4>
                     <div class="nav-overlay__inner-box">
                         <a class="nav-overlay__link" href="{{ url('customer/overview') }}">{{ 'checkout.step.summary.overview' | trans }}</a>
                         <a class="nav-overlay__link" href="{{ url('customer/order') }}">{{ 'customer.account.order_history' | trans }}</a>
-                        <a class="nav-overlay__link" href="{{ url('customer/profile') }}">{{ 'customer.profile' | trans }}</a>
+                        <a class="nav-overlay__link" href="{{ url('customer/profile') }}">{{ 'customer.profile.link' | trans }}</a>
                     </div>
                 {% if data.isUserAuthenticated %}
                     <a href="{{ url('logout') }}" class="nav-overlay__link nav-overlay__link--sm">{{ 'customer.logout' | trans }}</a>
