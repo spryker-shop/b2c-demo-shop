@@ -24,6 +24,7 @@ export default class SuggestSearch extends Component {
     overlayOpenButton: HTMLElement
     overlayMobOpenButton: HTMLElement
     bodyTrigger: HTMLElement
+    focusTimeout: number
 
 
     constructor() {
@@ -38,6 +39,7 @@ export default class SuggestSearch extends Component {
             40: 'arrowDown'
         };
         this.activeItemIndex = 0;
+        this.focusTimeout = 0;
     }
 
     protected readyCallback(): void {
@@ -147,6 +149,7 @@ export default class SuggestSearch extends Component {
         this.hideSugestions();
         this.searchOverlay.classList.toggle('active');
         this.cleanUpInput();
+        clearTimeout(this.focusTimeout);
     }
 
     protected getActiveNavigationItem(): HTMLElement {
@@ -247,7 +250,8 @@ export default class SuggestSearch extends Component {
         this.saveCurrentSearchValue('');
         this.setHintValue('');
         this.searchOverlay.classList.toggle('active');
-        this.searchInput.focus();
+        this.focusTimeout = setTimeout(()=>this.searchInput.focus(), 400);
+
     }
 
     protected createHintInput(): void {
