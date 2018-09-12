@@ -51,7 +51,7 @@
                 <ul>
                     {% for ruleDiscount in data.ruleDiscounts %}
                         <li class="grid grid--justify">
-                            <span class="col col--sm-8">{{ 'cart.discounts' | trans }}</span>
+                            <span class="col col--sm-8">{{ ruleDiscount.displayName }}</span>
                             <span class="col col--expand text-right">- {{ ruleDiscount.amount | money }}</span>
                         </li>
                     {% endfor %}

@@ -25,11 +25,21 @@ class CartServiceProvider extends SprykerCartServiceProvider
         parent::register($app);
 
         $app['quote'] = $app->share(function () {
-            $quantity = $this->getFactory()
+            $quote = $this->getFactory()
                 ->getCartClient()
                 ->getQuote();
 
-            return $quantity;
+            return $quote;
+        });
+
+        $app['cartItems'] = $app->share(function () {
+            $cartItems = $this->getFactory()
+                ->createCartItemReader()
+                ->getCartItems(
+                    $this->getFactory()->getCartClient()->getQuote()
+                );
+
+            return $cartItems;
         });
     }
 }
