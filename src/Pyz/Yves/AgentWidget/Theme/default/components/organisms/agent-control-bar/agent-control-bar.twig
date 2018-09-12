@@ -18,7 +18,7 @@
     <div class="{{ config.name }}__inner">
         <div class="container">
             <div class="grid grid--middle {{ config.name }}__container">
-                <div class="col col--md-5 col--sm-12">
+                <div class="col col--md-6 col--sm-12 spacing-y">
                     {% if not is_granted('ROLE_PREVIOUS_ADMIN') %}
                         <form method="GET" action="/">
                             <div class="grid">
@@ -55,7 +55,7 @@
                         </div>
                     {% endif %}
                 </div>
-                <div class="col col--md-7 col--sm-12 text-right">
+                <div class="col col--md-6 col--sm-12 text-right spacing-y">
                     <div class="grid grid--inline grid--middle">
                         <div class="col {{ config.name }}__info">
                             {{ 'agent.control_bar.username' | trans }}

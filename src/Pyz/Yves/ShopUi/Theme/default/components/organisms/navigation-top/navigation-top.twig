@@ -94,7 +94,7 @@
                         <a class="nav-overlay__link" href="{{ url('customer/order') }}">{{ 'customer.account.order_history' | trans }}</a>
                         <a class="nav-overlay__link" href="{{ url('customer/profile') }}">{{ 'customer.profile' | trans }}</a>
                     </div>
-                {% if data.isUserAuthenticated %}
+                {% if data.isUserAuthenticated and is_granted('ROLE_USER') %}
                     <a href="{{ url('logout') }}" class="nav-overlay__link nav-overlay__link--sm">{{ 'customer.logout' | trans }}</a>
                 {% else %}
                     <div class="grid grid--middle grid--justify nav-overlay__buttons">
