@@ -18,7 +18,7 @@
         }
         &__line {
             height: 1px;
-            background-color: $setting-color-lightest;
+            background-color: $setting-color-lightest-1;
             flex: 1;
             margin: 0 50px;
             &--expand {
@@ -34,7 +34,7 @@
             text-transform: uppercase;
             font-weight: bold;
             position: relative;
-            line-height: 31px;
+            line-height: normal;
             cursor: pointer;
             &:hover {
                 text-decoration: none;
@@ -47,18 +47,19 @@
                 height: 1px;
                 width: 100%;
                 background: $setting-color-text;
-                bottom: 0;
+                bottom: -9.5px;
             }
         }
         &__link-mobile {
             font: bold 12px $setting-font-family-additional;
             letter-spacing: 2.1px;
             border-radius: 2px;
-            border: 1px solid $setting-color-text;
+            border: 1px solid $setting-color-darker;
             text-transform: uppercase;
             display: block;
             padding: 16px;
             text-align: center;
+            color: $setting-color-darker;
             @include helper-link-hover-reset;
             &:hover {
                 background: $setting-color-black;
