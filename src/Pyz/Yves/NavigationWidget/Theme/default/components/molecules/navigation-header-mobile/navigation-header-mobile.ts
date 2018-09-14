@@ -5,6 +5,8 @@ export default class NavHeaderMobile extends Component {
 
     readyCallback(): void {
 
+        // menu scroll goes here
+
         const $container = $(this).find(`.${this.name}__block`);
         const $scrollBar = $(this).find(`.${this.name}__bar`);
         const $arrowLeft = $container.find(`.${this.name}__arrow--left`);
@@ -41,6 +43,8 @@ export default class NavHeaderMobile extends Component {
 
         });
 
+        // menu dropdown goes here
+
 
         const $dropDown = $(this).find(`.${this.name}__dropdown-container`);
         const $tabs = $dropDown.find(`.${this.name}__tab`);
@@ -49,8 +53,11 @@ export default class NavHeaderMobile extends Component {
 
         let isDropDownOpen = false;
         let isPreviousTab = false;
+        let isDropDownInAction = false;
+        let previousToggler;
         let previousTab;
         let currentTab;
+
 
         function findCurrentTab (currentToggler, tabs) {
             let currentTab;
@@ -63,50 +70,73 @@ export default class NavHeaderMobile extends Component {
             return currentTab;
         }
 
+        function openDropDown(){
+            if(!isDropDownOpen) {
+                isDropDownOpen = true;
+                $dropDown.slideDown(200, () => {
+                    currentTab.animate({opacity: 1}, 100, 'swing', () => {
+                        isDropDownOpen = true;
+                        isDropDownInAction = false;
+                        console.log(isDropDownInAction);
+                    });
+                });
+            }
+        }
+
+        function closeDropDown(){
+            if(isDropDownOpen) {
+                isDropDownInAction = true;
+                let tabToClose = currentTab;
+                tabToClose.animate({opacity: 0}, 100, 'swing', ()=>{
+                    $dropDown.slideUp(200, ()=>{
+                        tabToClose.hide();
+                        currentTab.hide().animate({opacity: 0}, 0);
+                        previousTab.hide().animate({opacity: 0}, 0);
+                        isDropDownOpen = false;
+                        isPreviousTab = false;
+                        isDropDownInAction = false;
+                        if(previousToggler) previousToggler.removeClass('active');
+
+                    });
+                });
+            }
+        }
+
+        function openTab(toggler, tabs){
+            if(previousToggler) previousToggler.removeClass('active');
+            toggler.addClass('active');
+
+            currentTab = findCurrentTab(toggler, tabs);
+
+            if(isPreviousTab) {
+                previousTab.hide().animate({opacity: 0}, 0, 'swing', ()=> {
+                    currentTab.show().animate({opacity: 1}, 200);
+                })
+            }else {
+                currentTab.show().animate({opacity: 1}, 200);
+
+            }
+
+            previousTab = currentTab;
+            previousToggler = toggler;
+            isPreviousTab = true;
+        }
+
         $tabTogglers.on('click', function (e) {
             e.preventDefault();
             e.stopPropagation();
-            let currentToggler = $(this);
+            if(!isDropDownInAction){
+                let currentToggler = $(this);
+                openTab(currentToggler, $tabs);
 
-            currentTab = findCurrentTab(currentToggler, $tabs);
-            
-            if(isPreviousTab) {
-                previousTab.hide().animate({opacity: 0}, 0, 'swing', ()=> {
-                    currentTab.show();
-                });
-            }else {
-                currentTab.show();
-
+                openDropDown();
             }
-            previousTab = currentTab;
-            isPreviousTab = true;
 
-            if(isDropDownOpen) {
-                currentTab.animate({opacity: 1}, 0);
-            }else{
-                $dropDown.slideDown(400, ()=>{
-                    currentTab.animate({opacity: 1}, 400, 'swing', ()=> {
-                        isDropDownOpen = true;
-                    });
-                    console.log(isDropDownOpen);
-
-                });
-            }
-            console.log(isDropDownOpen);
         });
 
         $tabClose.on('click', function () {
 
-            let tabToClose = currentTab;
-            tabToClose.animate({opacity: 0}, 400, 'swing', ()=>{
-                $dropDown.slideUp(400, ()=>{
-                    tabToClose.hide();
-                    isDropDownOpen = false;
-                });
-            });
-
-            isPreviousTab = false;
-            console.log(isDropDownOpen);
+            closeDropDown();
 
         });
     }
