@@ -71,28 +71,43 @@ export default class NavHeaderMobile extends Component {
             currentTab = findCurrentTab(currentToggler, $tabs);
             
             if(isPreviousTab) {
-                previousTab.hide().animate({opacity: 0}, 200);
+                previousTab.hide().animate({opacity: 0}, 0, 'swing', ()=> {
+                    currentTab.show();
+                });
+            }else {
+                currentTab.show();
+
             }
             previousTab = currentTab;
             isPreviousTab = true;
-            currentTab.show();
 
             if(isDropDownOpen) {
-                currentTab.animate({opacity: 1}, 400);
+                currentTab.animate({opacity: 1}, 0);
             }else{
-                $dropDown.slideDown(400, ()=>{currentTab.animate({opacity: 1}, 400)});
-                isDropDownOpen = true;
+                $dropDown.slideDown(400, ()=>{
+                    currentTab.animate({opacity: 1}, 400, 'swing', ()=> {
+                        isDropDownOpen = true;
+                    });
+                    console.log(isDropDownOpen);
+
+                });
             }
+            console.log(isDropDownOpen);
         });
 
         $tabClose.on('click', function () {
 
-            currentTab.animate({opacity: 0}, 400, 'swing', ()=>{
-                $dropDown.slideUp(400, ()=>{currentTab.hide()});
+            let tabToClose = currentTab;
+            tabToClose.animate({opacity: 0}, 400, 'swing', ()=>{
+                $dropDown.slideUp(400, ()=>{
+                    tabToClose.hide();
+                    isDropDownOpen = false;
+                });
             });
 
-            isDropDownOpen = false;
             isPreviousTab = false;
+            console.log(isDropDownOpen);
+
         });
     }
 }
