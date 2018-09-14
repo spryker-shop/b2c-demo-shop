@@ -21,7 +21,7 @@
                 position: relative;
                 &:before {
                     content: "";
-                    width: 12px;
+                    width: 10px;
                     height: 2px;
                     background: $setting-color-dark;
                     position: absolute;
@@ -32,12 +32,12 @@
                 &:after {
                     content: "";
                     width: 2px;
-                    height: 12px;
+                    height: 10px;
                     background: $setting-color-dark;
                     position: absolute;
                     top: 50%;
-                    right: 5px;
-                    margin-top: -6px;
+                    right: 4px;
+                    margin-top: -4px;
                 }
                 &.active:after {
                     display: none;
@@ -54,14 +54,14 @@
             &__col {
                 width: 100%;
                 margin-top: -1px;
-                border-top: solid 1px $setting-color-lightest;
-                border-bottom: solid 1px $setting-color-lightest;
+                border-top: solid 1px $setting-color-lightest-1;
+                border-bottom: solid 1px $setting-color-lightest-1;
             }
             .navigation-footer {
                 padding-bottom: 10px;
             }
             @include helper-breakpoint-media-min($md-min) {
-                border-bottom: dotted 1px $setting-color-lightest;
+                border-bottom: dotted 1px $setting-color-lightest-1;
                 padding: 0 0 30px;
                 &__col {
                     width: auto;
@@ -82,6 +82,11 @@
         &__navigation-main li {
             padding-bottom: 10px;
             font-size: 15px;
+            @include helper-breakpoint-media-max($sm-max) {
+                a {
+                    color: rgba($setting-color-text, .5);
+                }
+            }
         }
 
         .hidden-nav {
