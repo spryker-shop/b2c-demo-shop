@@ -1,1 +1,1 @@
-import './style';
+import './product-set-widget.scss';

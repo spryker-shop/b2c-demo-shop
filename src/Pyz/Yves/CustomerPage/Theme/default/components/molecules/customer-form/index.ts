@@ -1,1 +1,1 @@
-import './style.scss';
+import './customer-form.scss';

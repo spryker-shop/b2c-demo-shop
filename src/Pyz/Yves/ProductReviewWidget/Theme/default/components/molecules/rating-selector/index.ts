@@ -1,0 +1,1 @@
+import './rating-selector.scss';
