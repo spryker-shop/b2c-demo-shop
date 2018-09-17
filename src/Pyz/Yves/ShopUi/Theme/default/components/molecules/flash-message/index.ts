@@ -1,0 +1,1 @@
+import './flash-message.scss';

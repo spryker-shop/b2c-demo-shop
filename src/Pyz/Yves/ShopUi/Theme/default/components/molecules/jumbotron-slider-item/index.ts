@@ -1,1 +1,1 @@
-import './style.scss';
+import './jumbotron-slider-item.scss';
