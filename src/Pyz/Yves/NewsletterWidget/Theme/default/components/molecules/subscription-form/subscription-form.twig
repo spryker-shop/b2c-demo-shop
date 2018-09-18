@@ -1,0 +1,52 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'subscription-form',
+    tag: 'section'
+} %}
+
+{% define data = {
+    form: _view.newsletterSubscriptionForm,
+
+    events: {
+        success: _view.success,
+        error: _view.error
+    }
+} %}
+
+{% block body %}
+
+
+    {% embed molecule('form') with {
+        data: {
+            form: data.form
+        }
+    } only %}
+        {% block formErrors %}{% endblock %}
+
+        {% block fields %}
+            <div class="grid subscription-form__grid">
+                <div class="col col--expand">
+                    {{ form_widget(_view.newsletterSubscriptionForm.subscribe, {'attr':{'placeholder': 'footer_subscribe.subscription_placeholder' | trans }}) }}
+                </div>
+                <div class="col">
+                    <button type="submit" class="button subscription-form__button">
+                        {% include atom('icon') with {
+                            class: 'subscription-form__arrow',
+                            data: {
+                                name: 'arrow'
+                            }
+                        } only %}
+                    </button>
+                </div>
+            </div>
+            {{ form_errors(data.form) }}
+        {% endblock %}
+    {% endembed %}
+
+    {% if data.events.success is not empty %}
+        <div class="text-success subscription-form__success">{{data.events.success | trans}}</div>
+    {% elseif data.events.error is not empty %}
+        <div class="text-alert subscription-form__alert">{{data.events.error | trans}}</div>
+    {% endif %}
+{% endblock %}
