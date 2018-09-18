@@ -1,5 +1,5 @@
 import Component from 'ShopUi/models/component';
-import CheckTouch from 'ShopUiProject/components/molecules/check-touch/check-touch';
+import CheckTouch from '../check-touch/check-touch';
 
 export default class VideoReplacer extends Component {
     CheckTouch: CheckTouch

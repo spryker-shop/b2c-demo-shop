@@ -12,16 +12,21 @@ const context = process.cwd();
 
 // define project relative paths to context
 const paths = {
+    // locate the typescript configuration json file
+    tsConfig: './tsconfig.json',
+
+    // assets folder
+    assets: './frontend/assets',
+
     // public folder
     public: './public/Yves/assets',
 
     // core folders
     core: {
         // all modules
-        // modules: './vendor/spryker/spryker-shop/Bundles',
         modules: './vendor/spryker-shop',
         // ShopUi source folder
-        shopUiModule: `./vendor/spryker-shop/Bundles/ShopUi/src/SprykerShop/Yves/ShopUi/Theme/${theme}`
+        shopUiModule: `./vendor/spryker-shop/shop-ui/src/SprykerShop/Yves/ShopUi/Theme/${theme}`
     },
 
     // project folders
@@ -33,12 +38,19 @@ const paths = {
     }
 };
 
+// define relative urls to site host (/)
+const urls = {
+    // assets base url
+    assets: '/assets'
+};
+
 // export settings
 module.exports = {
     name,
     theme,
     context,
     paths,
+    urls,
 
     // define settings for suite-frontend-builder finder
     find: {
@@ -56,11 +68,6 @@ module.exports = {
                 `**/Theme/${theme}/components/organisms/*/index.ts`,
                 `**/Theme/${theme}/templates/*/index.ts`,
                 `**/Theme/${theme}/views/*/index.ts`,
-
-                // `**/Theme/${theme}/components/**/*.scss`,
-                // `**/Theme/${theme}/index.scss`,
-
-
                 '!config',
                 '!data',
                 '!deploy',
@@ -86,10 +93,6 @@ module.exports = {
                 `**/Theme/${theme}/templates/*/*.scss`,
                 `**/Theme/${theme}/views/*/*.scss`,
                 `!**/Theme/${theme}/**/style.scss`,
-
-
-                // `**/Theme/${theme}/index.scss`,
-
                 '!config',
                 '!data',
                 '!deploy',
