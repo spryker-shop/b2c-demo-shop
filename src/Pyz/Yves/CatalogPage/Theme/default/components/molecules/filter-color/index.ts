@@ -1,1 +1,1 @@
-import './style';
+import './filter-color.scss';

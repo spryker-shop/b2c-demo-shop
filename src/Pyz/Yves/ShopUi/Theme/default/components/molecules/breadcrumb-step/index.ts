@@ -1,1 +1,1 @@
-import './style';
+import './breadcrumb-step.scss';

@@ -1,1 +1,1 @@
-import './style';
+import './set-list.scss';

@@ -1,1 +1,1 @@
-import './style';
+import './product-configurator.scss';
