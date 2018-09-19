@@ -1,0 +1,1 @@
+import './jumbotron-category.scss';

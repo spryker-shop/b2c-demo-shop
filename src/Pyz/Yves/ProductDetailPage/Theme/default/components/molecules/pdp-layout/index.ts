@@ -1,1 +1,1 @@
-import './style';
+import './pdp-layout.scss';

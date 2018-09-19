@@ -1,1 +1,1 @@
-import './style';
+import './cart-image.scss';

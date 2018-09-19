@@ -1,1 +1,1 @@
-import './style.scss';
+import './navigation-top-mobile.scss';

@@ -1,1 +1,1 @@
-import './style.scss';
+import './wishlist-overview-table.scss';

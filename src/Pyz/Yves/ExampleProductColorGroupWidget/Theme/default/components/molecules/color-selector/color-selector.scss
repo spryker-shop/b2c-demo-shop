@@ -1,70 +1,75 @@
 $color-selector-size: 16px;
 
-.color-selector,
-.color-selector-pdp {
-    cursor: default;
+@mixin color-group-color-selector(){
+    .color-selector,
+    .color-selector-pdp {
+        cursor: default;
 
-    &__color {
-        display: inline-block;
-        width: $color-selector-size;
-        height: $color-selector-size;
-        border-radius: 100%;
-        vertical-align: middle;
-        position: relative;
-
-        &:before {
-            content: "";
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            width: 18px;
-            height: 18px;
-            border: solid 4px #fff;
+        &__color {
+            display: inline-block;
+            width: $color-selector-size;
+            height: $color-selector-size;
             border-radius: 100%;
-        }
+            vertical-align: middle;
+            position: relative;
 
-        &:not(:last-child) {
-            margin-right: 4px;
-        }
-
-        .color-tooltip {
-            @include helper-effect-transition(all);
-            transform: scale(0);
-            transform-origin: bottom;
-            position: absolute;
-            top: -43px;
-            left: -15px;
-            background: #111;
-            color: #fff;
-            font: 300 16px $setting-font-family;
-            padding: 5px 11px 7px 10px;
-            white-space: nowrap;
-            border-radius: 2px;
             &:before {
                 content: "";
                 position: absolute;
-                left: 17px;
-                bottom: -4px;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                width: 18px;
+                height: 18px;
+                border: solid 4px #fff;
+                border-radius: 100%;
+            }
+
+            &:not(:last-child) {
+                margin-right: 4px;
+            }
+
+            .color-tooltip {
+                @include helper-effect-transition(all);
+                transform: scale(0);
+                transform-origin: bottom;
+                position: absolute;
+                top: -43px;
+                left: -15px;
+                background: #111;
+                color: #fff;
+                font: 300 16px $setting-font-family;
+                padding: 5px 11px 7px 10px;
+                white-space: nowrap;
                 border-radius: 2px;
-                background: #111111;
-                width: 10px;
-                height: 10px;
-                transform: rotate(45deg);
+                &:before {
+                    content: "";
+                    position: absolute;
+                    left: 17px;
+                    bottom: -4px;
+                    border-radius: 2px;
+                    background: #111111;
+                    width: 10px;
+                    height: 10px;
+                    transform: rotate(45deg);
+                }
             }
-        }
 
-        &:hover,
-        &--active {
-            &:before {
-                width: 14px;
-                height: 14px;
-                border-width: 2px;
+            &:hover,
+            &--active {
+                &:before {
+                    width: 14px;
+                    height: 14px;
+                    border-width: 2px;
+                }
             }
-        }
 
-        &:hover .color-tooltip {
-            transform: scale(1);
+            &:hover .color-tooltip {
+                transform: scale(1);
+            }
         }
     }
 }
+
+
+@include color-group-color-selector();

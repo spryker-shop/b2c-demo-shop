@@ -1,1 +1,1 @@
-import './style';
+import './top-navigation-desktop.scss';
