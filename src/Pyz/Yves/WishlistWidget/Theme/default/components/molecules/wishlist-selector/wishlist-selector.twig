@@ -10,7 +10,7 @@
     idProductConcrete: required
 } %}
 
-{% set isUserLoggedIn = is_granted('IS_AUTHENTICATED_FULLY') %}
+{% set isUserLoggedIn = is_granted('ROLE_USER') %}
 {% set disableAddToWishlist = data.idProductConcrete is empty %}
 
 {% block body %}
