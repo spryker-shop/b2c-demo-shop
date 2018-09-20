@@ -1,11 +1,14 @@
 @mixin shop-ui-customer-navigation($name: '.customer-navigation') {
-  #{$name} {
-    .menu__link {
-      &--active {
-        color: $setting-color-alt;
-      }
+    #{$name} {
+        .menu__item {
+            &--active {
+                a {
+                    font-weight: normal;
+                    color: $setting-color-alt;
+                }
+            }
+        }
     }
-  }
 }
 
 @include shop-ui-customer-navigation();
