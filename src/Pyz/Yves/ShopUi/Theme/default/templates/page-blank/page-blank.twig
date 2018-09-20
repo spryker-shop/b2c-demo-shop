@@ -33,6 +33,7 @@
         </head>
         <body {%- if block('class') is not empty %} class="{%- block class -%}{%- endblock -%}"{%- endif %}
             {%- block attributes -%}{{qa('page')}}{%- endblock -%}>
+            {% include molecule('outside-widgets') only %}
 
             {{parent()}}
 

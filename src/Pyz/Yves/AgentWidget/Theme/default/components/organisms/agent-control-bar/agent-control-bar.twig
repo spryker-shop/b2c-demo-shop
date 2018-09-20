@@ -1,0 +1,72 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'agent-control-bar',
+    tag: 'agent-control-bar'
+} %}
+
+{% block class %}
+    {{ parent() }} js-agent-control-bar
+{% endblock %}
+
+{% define data = {
+    agent: required,
+    customer: null
+} %}
+
+{% block body %}
+    <div class="{{ config.name }}__inner">
+        <div class="container">
+            <div class="grid grid--middle {{ config.name }}__container">
+                <div class="col col--md-6 col--sm-12 spacing-y">
+                    {% if not is_granted('ROLE_PREVIOUS_ADMIN') %}
+                        <form method="GET" action="/">
+                            <div class="grid">
+                                <div class="col col--sm-9 col--lg-10">
+                                    {% include molecule('autocomplete-form') with {
+                                        attributes: {
+                                            'suggestion-url': path('agent-widget/customer-autocomplete'),
+                                            'selected-value-key': '_switch_user',
+                                            'value-data-attribute': 'data-value',
+                                            'item-selector': '.customer-list__container-item',
+                                            'show-clean-button': true,
+                                            'parent-wrap-selector': config.jsName
+                                        }
+                                    } only %}
+                                </div>
+
+                                <div class="col col--sm-3 col--lg-2">
+                                    <button type="submit" class="button button--success button--expand button--black button--agent">
+                                        {{ 'agent.confirm_user_selection' | trans }}
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    {% endif %}
+                    {% if is_granted('ROLE_PREVIOUS_ADMIN') %}
+                        <div class="grid grid--inline grid--middle">
+                            <div class="col {{ config.name }}__info">
+                                {{ 'agent.control_bar.customer_name' | trans }}
+                                <div class="{{ config.name }}__name">{{ data.customer.firstName }} {{ data.customer.lastName }}</div>
+                            </div>
+                            <div class="col {{ config.name }}__button-wrap">
+                                <a href="/?_switch_user=_exit" class="button button--hollow button--agent">{{ 'agent.control_bar.logout_as_customer' | trans }}</a>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="col col--md-6 col--sm-12 text-right spacing-y">
+                    <div class="grid grid--inline grid--middle">
+                        <div class="col {{ config.name }}__info">
+                            {{ 'agent.control_bar.username' | trans }}
+                            <div class="{{ config.name }}__name">{{ data.agent.firstName }} {{ data.agent.lastName }}</div>
+                        </div>
+                        <div class="col {{ config.name }}__button-wrap">
+                            <a href="{{ path('agent/logout') }}" class="button button--hollow button--agent">{{ 'agent.control_bar.logout' | trans }}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
