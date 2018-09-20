@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "396ad0b18b4ac32734ba3b45c53c67a9",
+    "content-hash": "be6263521f2750f862161826b3dcd927",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -3716,16 +3716,16 @@
         },
         {
             "name": "spryker-shop/product-option-widget",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker-shop/product-option-widget.git",
-                "reference": "3e09abffdd2a9bfd17b3e1a7aa77b32ee9e0e1e8"
+                "reference": "62bbfdc23c0f3e4b6bf214660915b9e7c37b617b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker-shop/product-option-widget/zipball/3e09abffdd2a9bfd17b3e1a7aa77b32ee9e0e1e8",
-                "reference": "3e09abffdd2a9bfd17b3e1a7aa77b32ee9e0e1e8",
+                "url": "https://api.github.com/repos/spryker-shop/product-option-widget/zipball/62bbfdc23c0f3e4b6bf214660915b9e7c37b617b",
+                "reference": "62bbfdc23c0f3e4b6bf214660915b9e7c37b617b",
                 "shasum": ""
             },
             "require": {
@@ -3736,7 +3736,9 @@
             },
             "require-dev": {
                 "spryker-shop/cart-page": "*",
-                "spryker-shop/product-detail-page": "*"
+                "spryker-shop/product-detail-page": "*",
+                "spryker/code-sniffer": "*",
+                "spryker/testify": "*"
             },
             "suggest": {
                 "spryker-shop/cart-page": "Widget plugins are available for this module.",
@@ -3758,7 +3760,7 @@
                 "proprietary"
             ],
             "description": "ProductOptionWidget module",
-            "time": "2018-06-15T09:21:34+00:00"
+            "time": "2018-09-20T08:42:29+00:00"
         },
         {
             "name": "spryker-shop/product-relation-widget",
@@ -11125,16 +11127,16 @@
         },
         {
             "name": "spryker/persistent-cart",
-            "version": "1.1.0",
+            "version": "dev-beta/dmexco",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/persistent-cart.git",
-                "reference": "87a1013e009aae4d6431243af4cbad39c789acc9"
+                "reference": "5a03ad7bf96ea5f9214d00f00d157393c555dcda"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/persistent-cart/zipball/87a1013e009aae4d6431243af4cbad39c789acc9",
-                "reference": "87a1013e009aae4d6431243af4cbad39c789acc9",
+                "url": "https://api.github.com/repos/spryker/persistent-cart/zipball/5a03ad7bf96ea5f9214d00f00d157393c555dcda",
+                "reference": "5a03ad7bf96ea5f9214d00f00d157393c555dcda",
                 "shasum": ""
             },
             "require": {
@@ -11150,8 +11152,7 @@
                 "spryker/zed-request": "^3.0.0"
             },
             "require-dev": {
-                "spryker/code-sniffer": "*",
-                "spryker/silex": "*",
+                "spryker/propel": "*",
                 "spryker/testify": "*"
             },
             "type": "library",
@@ -11170,7 +11171,7 @@
                 "proprietary"
             ],
             "description": "PersistentCart module",
-            "time": "2018-07-31T07:49:09+00:00"
+            "time": "2018-09-06T13:30:02+00:00"
         },
         {
             "name": "spryker/persistent-cart-extension",
@@ -23000,11 +23001,18 @@
             "alias_normalized": "1.0.0.0",
             "version": "9999999-dev",
             "package": "spryker-eco/loggly"
+        },
+        {
+            "alias": "1.1.0",
+            "alias_normalized": "1.1.0.0",
+            "version": "dev-beta/dmexco",
+            "package": "spryker/persistent-cart"
         }
     ],
     "minimum-stability": "dev",
     "stability-flags": {
-        "spryker-eco/loggly": 20
+        "spryker-eco/loggly": 20,
+        "spryker/persistent-cart": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
