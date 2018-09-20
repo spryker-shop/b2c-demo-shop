@@ -19,6 +19,9 @@
             border-top: 1px dotted $setting-color-lightest;
             padding: 25px 0;
             margin: 25px 0;
+            @include helper-breakpoint-media-min($sm-max) {
+              font-size: 32px;
+            }
         }
 
         &__box {
@@ -101,6 +104,15 @@
                     top: 7px !important;
                 }
             }
+            .form {
+                .label {
+                    color: $setting-color-dark;
+                }
+                .forgot-password-link {
+                    font: normal 14px $setting-font-family-additional;
+                    line-height: 1.71;
+                }
+            }
         }
 
         .customer-navigation {
@@ -138,5 +150,42 @@
                 margin: 10px 0;
             }
         }
+        .order-table {
+          th {
+            white-space: nowrap;
+          }
+          th, td {
+            @include helper-breakpoint-media-max($sm-max) {
+              font-size: 14px;
+            }
+          }
+          .menu {
+            &__item {
+              white-space: nowrap;
+            }
+          }
+        }
+        .order-detail-table {
+          @include helper-breakpoint-media-max($sm-max) {
+            .table {
+              thead, tbody {
+
+                th, td {
+                  font-size: 11px;
+                  padding: .25rem;
+                }
+                .checkbox {
+                  margin-top: 0;
+                }
+              }
+            }
+          }
+
+
+        }
+
+
     }
 }
+
+@include shop-ui-customer-account();

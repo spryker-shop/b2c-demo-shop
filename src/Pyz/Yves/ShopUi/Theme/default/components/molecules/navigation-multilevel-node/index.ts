@@ -1,1 +1,1 @@
-import './style.scss';
+import './navigation-multilevel-node.scss';

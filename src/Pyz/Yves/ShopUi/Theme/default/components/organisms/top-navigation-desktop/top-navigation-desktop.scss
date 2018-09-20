@@ -13,6 +13,8 @@
         padding: 40px 16px 28px 16px;
         margin: 0;
         height: 381px;
+        border-bottom: 1px solid #ebebeb;
+
         &:before {
           position: absolute;
           display: block;
@@ -24,7 +26,7 @@
           padding: 40px 16px 28px 16px;
           margin: 0;
           height: 100%;
-          box-shadow: 30px 0 0 0 $setting-color-white;
+          box-shadow: 100px 0 0 0 $setting-color-white, -100px 0 0 0 $setting-color-white;
         }
       }
 
@@ -71,7 +73,7 @@
           margin: 0;
           @include helper-breakpoint-media-max($lg-max) {
             width: 220px;
-            height: 270px;
+            height: 237px;
             right: 250px;
           }
             &:last-of-type {
@@ -89,28 +91,52 @@
             font-size: 17px;
           }
           &.image-1 {
-            background: url("/assets/images/menu-img-5.jpg") top center no-repeat;
+            background: url("/assets/images/menu-img-5.png") top center no-repeat;
             background-size: 250px 270px;
+              @include helper-breakpoint-media-max($lg-max) {
+                  background-size: 220px 237px;
+
+              }
           }
           &.image-2 {
-            background: url("/assets/images/menu-img-6.jpg") top center no-repeat;
+            background: url("/assets/images/menu-img-6.png") top center no-repeat;
             background-size: 250px 270px;
+              @include helper-breakpoint-media-max($lg-max) {
+                  background-size: 220px 237px;
+
+              }
           }
           &.image-3 {
-            background: url("/assets/images/menu-img-3.jpg") top center no-repeat;
+            background: url("/assets/images/menu-img-3.png") top center no-repeat;
             background-size: 250px 270px;
+              @include helper-breakpoint-media-max($lg-max) {
+                  background-size: 220px 237px;
+
+              }
           }
           &.image-4 {
-            background: url("/assets/images/menu-img-4.jpg") top center no-repeat;
+            background: url("/assets/images/menu-img-4.png") top center no-repeat;
             background-size: 250px 270px;
+              @include helper-breakpoint-media-max($lg-max) {
+                  background-size: 220px 237px;
+
+              }
           }
           &.image-5 {
-            background: url("/assets/images/menu-img-1.jpg") top center no-repeat;
+            background: url("/assets/images/menu-img-1.png") top center no-repeat;
             background-size: 250px 270px;
+              @include helper-breakpoint-media-max($lg-max) {
+                  background-size: 220px 237px;
+
+              }
           }
           &.image-6 {
-            background: url("/assets/images/menu-img-2.jpg") top center no-repeat;
+            background: url("/assets/images/menu-img-2.png") top center no-repeat;
             background-size: 250px 270px;
+              @include helper-breakpoint-media-max($lg-max) {
+                  background-size: 220px 237px;
+
+              }
           }
         }
       }
@@ -120,19 +146,24 @@
     .brand-dropdown {
 
       .menu {
-        height: 270px;
+        height: unset;
         padding: 40px 0 28px 0;
         @include helper-breakpoint-media-max($lg-max) {
           padding: 40px .5rem 28px .5rem;
-          height: 250px;
         }
       }
 
       .flyout-fullscreen__container {
         display: flex;
         justify-content: space-between;
-        max-width: 1204px;
+        max-width: 1210px;
         width: 100%;
+        @include helper-breakpoint-media-max($xl-max) {
+          max-width: 930px;
+        }
+        @include helper-breakpoint-media-max($lg-max) {
+          max-width: 730px;
+        }
         &:before {
           display: none;
         }
@@ -142,42 +173,63 @@
         height: 100%;
         width: 270px;
         margin: 0 1rem;
-        background-position: top center;
-        background-repeat: no-repeat;
-        background-size: 270px 170px;
-
-        @include helper-breakpoint-media-max($lg-max) {
+        @include helper-breakpoint-media-max($xl-max) {
+          width: 216px;
           margin: 0 .5rem;
-          background-size: 270px 150px;
+          background-size: contain;
+        }
+        @include helper-breakpoint-media-max($lg-max) {
+          width: 162px;
 
         }
+
         a {
           display: block;
           text-align: center;
-          padding-top: 175px;
-          @include helper-breakpoint-media-max($lg-max) {
-            padding-top: 150px;
+          position: relative;
+          &::before {
+            content: '';
+            display: block;
+            width: 270px;
+            height: 168px;
+            background-position: top center;
+            background-repeat: no-repeat;
+            background-size: contain;
+            margin-bottom: 10px;
+
+            @include helper-breakpoint-media-max($xl-max) {
+              width: 216px;
+              height: 134px;
+              margin: 0 auto;
+            }
+            @include helper-breakpoint-media-max($lg-max) {
+              width: 162px;
+              height: 101px;
+            }
+
           }
+
+
         }
-        &.image-1 {
-          background-image: url("/assets/images/brand-img-1.jpg");
+        &.image-1 a::before {
+          background-image: url("/assets/images/image-submenu-d-1@2x.png");
         }
-        &.image-2 {
-          background-image: url("/assets/images/brand-img-2.jpg");
+        &.image-2 a::before {
+          background-image: url("/assets/images/image-submenu-d-2@2x.png");
         }
-        &.image-3 {
-          background-image: url("/assets/images/brand-img-3.jpg");
+        &.image-3 a::before {
+          background-image: url("/assets/images/image-submenu-d-3@2x.png");
         }
-        &.image-4 {
-          background-image: url("/assets/images/brand-img-4.jpg");
+        &.image-4 a::before {
+          background-image: url("/assets/images/image-submenu-d-4@2x.png");
         }
       }
-
-
-
     }
-
   }
-
-
 }
+
+@include shop-ui-top-navigation-desktop();
+
+
+
+

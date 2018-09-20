@@ -26,6 +26,16 @@
     {% if data.address.phone is not empty %}
         <li class="list__item">{{ data.address.phone }}</li>
     {% endif %}
+    {% if data.address.isDefaultBilling or data.address.isDefaultShipping %}
+        <li class="list__item spacing-y">
+            {% if data.address.isDefaultBilling %}
+                <span class="badge badge--success spacing-right">{{'customer.order.billing_address' | trans}}</span>
+            {% endif %}
 
+            {% if data.address.isDefaultShipping %}
+                <span class="badge badge--success">{{'customer.order.shipping_address' | trans}}</span>
+            {% endif %}
+        </li>
+    {% endif %}
 
 {% endblock %}

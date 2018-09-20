@@ -1,1 +1,1 @@
-import './style.scss';
+import './nav-arrow.scss';

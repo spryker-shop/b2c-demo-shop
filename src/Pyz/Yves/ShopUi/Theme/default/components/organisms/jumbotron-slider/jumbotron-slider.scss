@@ -20,7 +20,8 @@
                 margin: .3rem .5rem;
                 width: 6px;
                 height: 6px;
-                background: $setting-color-lightest;
+                background: #1a1a1a;
+                opacity: .25;
                 border-radius: 50%;
                 &:hover {
                     cursor: pointer;
@@ -29,7 +30,8 @@
                     width: 12px;
                     height: 12px;
                     background: transparent;
-                    border: 1px solid map-get($setting-color-actions, alert);
+                    border: 1px solid $setting-color-alt;
+                    opacity: 1;
                 }
 
                 button {
@@ -48,3 +50,5 @@
 
     }
 }
+
+@include shop-ui-jumbotron-slider();

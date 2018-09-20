@@ -1,1 +1,1 @@
-import './style.scss';
+import './pdp-review.scss';

@@ -1,1 +1,1 @@
-import './style';
+import './checkout-layout.scss';
