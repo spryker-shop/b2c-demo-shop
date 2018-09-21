@@ -44,17 +44,25 @@
             </div>
         {% endblock %}
 
-        <div class="grid footer-bottom">
+        <div class="grid grid--middle footer-bottom">
 
-            <div class="col footer-logo-copy">
-                {% include molecule('logo') with {
-                    class: 'footer-logo'
-                } only %}
-                {% block copyright %}
-                    <div class="copyright">
-                        &copy; 2018 Spryker
-                    </div>
-                {% endblock %}
+            <div class="col footer-logo-section">
+                <div class="footer-logo-copy">
+                    <span class="footer-logo-copy__text">{{ 'footer.logo.text' | trans }}</span>
+
+                    <span class="footer-logo-copy__logo">
+                     <a href="{{'footer.logo.url' | trans}}">
+                        <span class="grid grid--middle">
+                            <img src="/assets/images/spryker-logo.svg" alt="Logo" />
+                        </span>
+                    </a>
+                </span>
+                    {% block copyright %}{% endblock %}
+                </div>
+                <div class="footer-logo-copy__links">
+                    <a href="{{ 'footer.logo.link.privacy' | trans }}" target="_blank" class="footer-logo-copy__link">{{ 'page.privacy.title' | trans }}</a>
+                    <a href="{{ 'footer.logo.link.imprint' | trans }}" target="_blank" class="footer-logo-copy__link">{{ 'page.imprint.title' | trans }}</a>
+                </div>
             </div>
 
             <div class="col footer-icons">
