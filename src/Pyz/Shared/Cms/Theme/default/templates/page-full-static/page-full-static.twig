@@ -7,14 +7,17 @@
     metaKeywords: _view.pageKeywords | default('')
 } %}
 
+{% block breadcrumbs %}{% endblock %}
+
 {% block title %}
     <!-- CMS_PLACEHOLDER : "title" -->
-    <h3>{{ spyCms('title') | raw }}</h3>
+    <div class="cms-page__title">{{ spyCms('title') | raw }}</div>
+    <span class="cms-page__notification">{{ 'cms-page.notification' | trans }}</span>
 {% endblock %}
 
 {% block content %}
     <!-- CMS_PLACEHOLDER : "content" -->
-    <div class="box">
+    <div class="cms-page__content">
         {{ spyCms('content') | raw }}
     </div>
 {% endblock %}
