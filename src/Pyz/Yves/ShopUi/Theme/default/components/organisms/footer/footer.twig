@@ -46,7 +46,7 @@
 
         <div class="grid grid--middle footer-bottom">
 
-            <div class="col">
+            <div class="col footer-logo-section">
                 <div class="footer-logo-copy">
                     <span class="footer-logo-copy__text">{{ 'footer.logo.text' | trans }}</span>
 
@@ -57,12 +57,11 @@
                         </span>
                     </a>
                 </span>
-                    {% block copyright %}
-                    {% endblock %}
+                    {% block copyright %}{% endblock %}
                 </div>
                 <div class="footer-logo-copy__links">
-                    <a href="https://spryker.com/privacy-policy/" class="footer-logo-copy__link">Data Privacy</a>
-                    <a href="https://spryker.com/imprint/" class="footer-logo-copy__link">Imprint</a>
+                    <a href="{{ 'footer.logo.link.privacy' | trans }}" target="_blank" class="footer-logo-copy__link">{{ 'page.privacy.title' | trans }}</a>
+                    <a href="{{ 'footer.logo.link.imprint' | trans }}" target="_blank" class="footer-logo-copy__link">{{ 'page.imprint.title' | trans }}</a>
                 </div>
             </div>
 
