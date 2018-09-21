@@ -15,19 +15,6 @@
 
     #{$name} {
       position: relative;
-      width: 24px;
-      height: 24px;
-      background: url("/assets/images/menu-basket-default.png") center no-repeat;
-      background-size: contain;
-      &.is-active {
-        background: url("/assets/images/menu-basket-active.png") center no-repeat;
-        background-size: contain;
-      }
-        @include helper-breakpoint-media-max($md-max) {
-          background: none;
-          width: unset;
-          height: unset;
-        }
 
         &__quantity {
             @include cart-bubble(18px, -12px);

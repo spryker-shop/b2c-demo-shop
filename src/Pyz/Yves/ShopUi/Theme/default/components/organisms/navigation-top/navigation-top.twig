@@ -33,12 +33,12 @@
                     </a></li>
                 <li class="menu__item"><a href="{{ url('customer/overview') }}" class="grid grid--middle user-link js-user-open js-overlay-open">
 
-                        {#{% include atom('icon') with {#}
-                            {#class: 'icon--big',#}
-                            {#data: {#}
-                                {#name: 'user-account'#}
-                            {#}#}
-                        {#} only %}#}
+                        {% include atom('icon') with {
+                            class: 'icon--big',
+                            data: {
+                                name: 'user-account'
+                            }
+                        } only %}
 
                     </a></li>
             {% else %}
@@ -54,12 +54,12 @@
 
                 <li class="menu__item"><a href="{{ url('login') }}" class="grid grid--middle user-link js-user-open js-overlay-open">
 
-                        {#{% include atom('icon') with {#}
-                            {#class: 'icon--big',#}
-                            {#data: {#}
-                                {#name: 'user-account'#}
-                            {#}#}
-                        {#} only %}#}
+                        {% include atom('icon') with {
+                            class: 'icon--big',
+                            data: {
+                                name: 'user-account'
+                            }
+                        } only %}
 
                     </a></li>
             {% endif %}
@@ -75,12 +75,12 @@
                 {% else %}
                 {% endif %}
 
-                {#{% include atom('icon') with {#}
-                    {#class: 'icon--big',#}
-                    {#data: {#}
-                        {#name: 'cart'#}
-                    {#}#}
-                {#} only %}#}
+                {% include atom('icon') with {
+                    class: 'icon--big',
+                    data: {
+                        name: 'cart'
+                    }
+                } only %}
             </a>
 
         </li>
