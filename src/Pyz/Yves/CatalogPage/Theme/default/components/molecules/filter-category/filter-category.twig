@@ -31,9 +31,8 @@
                 {% set currentUrl = url(data.filterPath, {categoryPath: (app.request.attributes.get('categoryPath'))}) %}
             {% else %}
                 {% set categoryUrl = categoryNode.url | replace({"'": "\\'", '"':'\\"'}) %}
-                {% set currentUrl = app.request.attributes.get('categoryPath') %}
+                {% set currentUrl = app.request.attributes.get('categoryNode').url %}
             {% endif %}
-
             <li class="menu__item {% if hasChildren %}menu__item--has-children-list{% endif %} {% if currentUrl == categoryUrl %} active{% endif %}">
                 <button class="link" onclick="this.form.action='{{ categoryUrl }}'" {% if quantity == 0 %}disabled="disabled"{% endif %}>
                     {{ categoryNode.name }}{% if hasChildren is empty %} ({{ quantity }}){% endif %}
