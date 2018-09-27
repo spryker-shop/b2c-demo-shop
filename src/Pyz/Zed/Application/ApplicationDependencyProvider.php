@@ -21,7 +21,6 @@ use Spryker\Zed\Api\Communication\Plugin\ServiceProvider\ApiRoutingServiceProvid
 use Spryker\Zed\Application\ApplicationDependencyProvider as SprykerApplicationDependencyProvider;
 use Spryker\Zed\Application\Communication\Plugin\ServiceProvider\AssertUrlConfigurationServiceProvider;
 use Spryker\Zed\Application\Communication\Plugin\ServiceProvider\EnvironmentInformationServiceProvider;
-use Spryker\Zed\Application\Communication\Plugin\ServiceProvider\KernelLogServiceProvider;
 use Spryker\Zed\Application\Communication\Plugin\ServiceProvider\MvcRoutingServiceProvider;
 use Spryker\Zed\Application\Communication\Plugin\ServiceProvider\RequestServiceProvider;
 use Spryker\Zed\Application\Communication\Plugin\ServiceProvider\RoutingServiceProvider;
@@ -39,7 +38,7 @@ use Spryker\Zed\Gui\Communication\Plugin\ServiceProvider\GuiTwigExtensionService
 use Spryker\Zed\Kernel\Container;
 use Spryker\Zed\Messenger\Communication\Plugin\ServiceProvider\MessengerServiceProvider;
 use Spryker\Zed\Money\Communication\Plugin\ServiceProvider\TwigMoneyServiceProvider;
-use Spryker\Zed\NewRelic\Communication\Plugin\ServiceProvider\NewRelicRequestTransactionServiceProvider;
+use Spryker\Zed\Monitoring\Communication\Plugin\ServiceProvider\MonitoringRequestTransactionServiceProvider;
 use Spryker\Zed\Propel\Communication\Plugin\ServiceProvider\PropelServiceProvider;
 use Spryker\Zed\Session\Communication\Plugin\ServiceProvider\SessionServiceProvider as SprykerSessionServiceProvider;
 use Spryker\Zed\Twig\Communication\Plugin\ServiceProvider\TwigServiceProvider as SprykerTwigServiceProvider;
@@ -60,7 +59,6 @@ class ApplicationDependencyProvider extends SprykerApplicationDependencyProvider
         $coreProviders = parent::getServiceProviders($container);
 
         $providers = [
-            new KernelLogServiceProvider(),
             new SessionServiceProvider(),
             new SprykerSessionServiceProvider(),
             new SslServiceProvider(),
@@ -80,7 +78,7 @@ class ApplicationDependencyProvider extends SprykerApplicationDependencyProvider
             new TwigCurrencyServiceProvider(),
             new MessengerServiceProvider(),
             new ZedNavigationServiceProvider(),
-            new NewRelicRequestTransactionServiceProvider(),
+            new MonitoringRequestTransactionServiceProvider(),
             new TranslationServiceProvider(),
             new DateTimeFormatterServiceProvider(),
             new GuiTwigExtensionServiceProvider(),
@@ -133,7 +131,6 @@ class ApplicationDependencyProvider extends SprykerApplicationDependencyProvider
     protected function getInternalCallServiceProviders(Container $container)
     {
         return [
-            new KernelLogServiceProvider(),
             new PropelServiceProvider(),
             new RequestServiceProvider(),
             new SslServiceProvider(),
@@ -142,7 +139,7 @@ class ApplicationDependencyProvider extends SprykerApplicationDependencyProvider
             new MvcRoutingServiceProvider(),
             new SilexRoutingServiceProvider(),
             new GatewayServiceProviderPlugin(),
-            new NewRelicRequestTransactionServiceProvider(),
+            new MonitoringRequestTransactionServiceProvider(),
             new HttpFragmentServiceProvider(),
             new SubRequestServiceProvider(),
             new TwigServiceProvider(),
@@ -159,7 +156,6 @@ class ApplicationDependencyProvider extends SprykerApplicationDependencyProvider
     protected function getInternalCallServiceProvidersWithAuthentication(Container $container)
     {
         return [
-            new KernelLogServiceProvider(),
             new PropelServiceProvider(),
             new RequestServiceProvider(),
             new SessionServiceProvider(),
@@ -172,7 +168,7 @@ class ApplicationDependencyProvider extends SprykerApplicationDependencyProvider
             new MvcRoutingServiceProvider(),
             new SilexRoutingServiceProvider(),
             new GatewayServiceProviderPlugin(),
-            new NewRelicRequestTransactionServiceProvider(),
+            new MonitoringRequestTransactionServiceProvider(),
             new HttpFragmentServiceProvider(),
             new SubRequestServiceProvider(),
             new TwigServiceProvider(),

@@ -17,11 +17,11 @@ use Spryker\Zed\ProductGroup\Dependency\ProductGroupEvents;
 
 class ProductGroupWriter extends PublishAwareStep implements DataImportStepInterface
 {
-    const BULK_SIZE = 100;
+    public const BULK_SIZE = 100;
 
-    const KEY_ABSTRACT_SKU = 'abstract_sku';
-    const KEY_PRODUCT_GROUP_KEY = 'group_key';
-    const KEY_POSITION = 'position';
+    public const KEY_ABSTRACT_SKU = 'abstract_sku';
+    public const KEY_PRODUCT_GROUP_KEY = 'group_key';
+    public const KEY_POSITION = 'position';
 
     /**
      * @var \Pyz\Zed\DataImport\Business\Model\Product\Repository\ProductRepository

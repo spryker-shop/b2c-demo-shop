@@ -42,7 +42,7 @@ class StoreReader implements DataReaderInterface
      *
      * @since 5.0.0
      *
-     * @return void Any returned value is ignored.
+     * @return void
      */
     public function next()
     {
@@ -70,7 +70,7 @@ class StoreReader implements DataReaderInterface
      *
      * @since 5.0.0
      *
-     * @return boolean The return value will be casted to boolean and then evaluated.
+     * @return bool The return value will be casted to boolean and then evaluated.
      * Returns true on success or false on failure.
      */
     public function valid()
@@ -85,7 +85,7 @@ class StoreReader implements DataReaderInterface
      *
      * @since 5.0.0
      *
-     * @return void Any returned value is ignored.
+     * @return void
      */
     public function rewind()
     {
