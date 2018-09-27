@@ -7,6 +7,7 @@
 
 namespace Pyz\Yves\ShopApplication;
 
+use SprykerShop\Yves\AgentWidget\Plugin\Widget\AgentWidgetPlugin;
 use SprykerShop\Yves\CurrencyWidget\Plugin\ShopUi\CurrencyWidgetPlugin;
 use SprykerShop\Yves\CustomerPage\Plugin\CustomerPage\CustomerNavigationWidgetPlugin;
 use SprykerShop\Yves\LanguageSwitcherWidget\Plugin\ShopUi\LanguageSwitcherWidgetPlugin;
@@ -31,6 +32,7 @@ class ShopApplicationDependencyProvider extends SprykerShopApplicationDependency
             ProductGroupWidgetPlugin::class,
             PriceModeSwitcherWidgetPlugin::class,
             CustomerNavigationWidgetPlugin::class,
+            AgentWidgetPlugin::class, #AgentFeature
         ];
     }
 }
