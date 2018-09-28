@@ -1,0 +1,68 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'cart-item',
+    tag: 'article'
+} %}
+
+{% define data = {
+    cart: required,
+    cartItem: required,
+    attributes: required
+} %}
+
+{% set canEditCart = (not is_granted('ROLE_USER') or can('WriteSharedCartPermissionPlugin', data.cart.idQuote)) %}
+
+{% block body %}
+    <div class="grid grid--stretch grid--justify">
+        <div class="col col--sm-12 col--lg-2">
+            {% include molecule('cart-image', 'CartPage') with {
+                data: {
+                    name: data.cartItem.name | default(''),
+                    image: data.cartItem.images is empty ? null : (data.cartItem.images | first)
+                }
+            } only %}
+        </div>
+
+        <div class="col col--sm-12 col--lg-5">
+            <h6>{{ data.cartItem.name }}</h6>
+
+            <small class="text-secondary">
+                {{ 'cart.item.sku' | trans }}
+                {{ data.cartItem.sku }}
+            </small>
+
+            {% if data.attributes is not empty %}
+                {% include molecule('cart-item-variant-selector', 'CartPage') with {
+                    data: {
+                        cartItem: data.cartItem,
+                        cartItemAttributes: data.attributes
+                    }
+                } only %}
+            {% endif %}
+
+            {{ widget('ProductBundleItemsWidgetPlugin', data.cartItem, data.cart) }}
+
+            {% include molecule('cart-item-summary', 'CartPage') with {
+                data: {
+                    unitPrice: data.cartItem.unitPrice | money,
+                    subtotalPrice: data.cartItem.sumSubtotalAggregation | money,
+                    cartItem: data.cartItem
+                }
+            } only %}
+
+        </div>
+
+        <div class="col col--sm-12 col--lg-4">
+            {{ widget('CartProductPackagingUnitWidgetPlugin', data.cartItem) }}
+
+            {% if canEditCart %}
+                <a class="float-right" href="{{ path('cart/remove', {'sku': data.cartItem.sku, 'groupKey': data.cartItem.groupKey }) }}">
+                    &times; {{ 'remove' | trans }}
+                </a>
+            {% endif %}
+
+            {{ widget('CartNoteQuoteItemWidgetPlugin', data.cartItem, data.cart) }}
+        </div>
+    </div>
+{% endblock %}
