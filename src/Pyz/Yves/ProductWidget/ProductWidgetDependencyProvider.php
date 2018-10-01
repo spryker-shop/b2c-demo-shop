@@ -84,4 +84,32 @@ class ProductWidgetDependencyProvider extends SprykerProductWidgetDependencyProv
             ProductReviewWidgetPlugin::class,
         ];
     }
+
+    /**
+     * Returns a list of widget plugin class names that implement \Spryker\Yves\Kernel\Dependency\Plugin\WidgetPluginInterface.
+     *
+     * @return string[]
+     */
+    protected function getProductReplacementForWidgetPlugins(): array
+    {
+        return [
+            ProductAbstractLabelWidgetPlugin::class, #ProductAlternativeFeature
+            ExampleProductColorGroupWidgetPlugin::class, #ProductAlternativeFeature
+            ProductAbstractReviewWidgetPlugin::class, #ProductAlternativeFeature
+        ];
+    }
+
+    /**
+     * Returns a list of widget plugin class names that implement \Spryker\Yves\Kernel\Dependency\Plugin\WidgetPluginInterface.
+     *
+     * @return string[]
+     */
+    protected function getProductAlternativeWidgetPlugins(): array
+    {
+        return [
+            ProductAbstractLabelWidgetPlugin::class, #ProductAlternativeFeature
+            ExampleProductColorGroupWidgetPlugin::class, #ProductAlternativeFeature
+            ProductAbstractReviewWidgetPlugin::class, #ProductAlternativeFeature
+        ];
+    }
 }

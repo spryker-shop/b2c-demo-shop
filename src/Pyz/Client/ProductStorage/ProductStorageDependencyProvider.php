@@ -20,11 +20,14 @@ class ProductStorageDependencyProvider extends SprykerProductStorageDependencyPr
      */
     protected function getProductViewExpanderPlugins()
     {
-        return [
+        /** @var \Spryker\Client\ProductStorage\Dependency\Plugin\ProductViewExpanderPluginInterface[] $plugins */
+        $plugins = [
             new ProductViewVariantExpanderPlugin(),
             new ProductViewPriceExpanderPlugin(),
             new ProductViewAvailabilityStorageExpanderPlugin(),
             new ProductViewImageExpanderPlugin(),
         ];
+
+        return $plugins;
     }
 }

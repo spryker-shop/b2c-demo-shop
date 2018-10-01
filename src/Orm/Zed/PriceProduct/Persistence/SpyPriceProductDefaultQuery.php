@@ -5,12 +5,12 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-namespace Orm\Zed\ProductMeasurementUnit\Persistence;
+namespace Orm\Zed\PriceProduct\Persistence;
 
-use Spryker\Zed\ProductMeasurementUnit\Persistence\Propel\AbstractSpyProductMeasurementSalesUnitStore;
+use Orm\Zed\PriceProduct\Persistence\Base\SpyPriceProductDefaultQuery as BaseSpyPriceProductDefaultQuery;
 
 /**
- * Skeleton subclass for representing a row from the 'spy_product_measurement_sales_unit_store' table.
+ * Skeleton subclass for performing query and update operations on the 'spy_price_product_default' table.
  *
  *
  *
@@ -19,6 +19,6 @@ use Spryker\Zed\ProductMeasurementUnit\Persistence\Propel\AbstractSpyProductMeas
  * long as it does not already exist in the output directory.
  *
  */
-class SpyProductMeasurementSalesUnitStore extends AbstractSpyProductMeasurementSalesUnitStore
+class SpyPriceProductDefaultQuery extends BaseSpyPriceProductDefaultQuery
 {
 }

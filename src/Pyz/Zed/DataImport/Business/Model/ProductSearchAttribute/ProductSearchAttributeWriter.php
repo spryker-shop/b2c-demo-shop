@@ -20,9 +20,9 @@ use Spryker\Zed\Glossary\Dependency\GlossaryEvents;
 
 class ProductSearchAttributeWriter extends PublishAwareStep implements DataImportStepInterface
 {
-    const BULK_SIZE = 100;
+    public const BULK_SIZE = 100;
 
-    const KEY = 'key';
+    public const KEY = 'key';
 
     /**
      * @var \Spryker\Shared\ProductSearch\Code\KeyBuilder\GlossaryKeyBuilderInterface
