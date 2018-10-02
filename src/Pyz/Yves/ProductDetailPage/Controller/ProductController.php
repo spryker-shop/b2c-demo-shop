@@ -41,7 +41,14 @@ class ProductController extends SprykerShopProductController
             $bundledProduct['idProductAbstract'] = $bundledProduct['id_product_abstract'];
             $bundledProduct['productUrl'] = $bundledProduct['url'];
             $bundledProduct['quantity'] = $quantity;
-            $bundledProductView = $this->getFactory()->getProductStoragePyzClient()->mapProductStorageData(['attributeMap' => [], 'idProductConcrete' => $bundledProduct['id_product_concrete']], $this->getLocale());
+            $bundledProductView = $this->getFactory()->getProductStoragePyzClient()->mapProductStorageData(
+                [
+                    'attributeMap' => [],
+                    'idProductConcrete' => $bundledProduct['id_product_concrete'],
+                    'idProductAbstract' => $bundledProduct['id_product_abstract']
+                ],
+                $this->getLocale()
+            );
             $image = $bundledProductView->getImages()->offsetGet(0);
             if ($image) {
                 $bundledProduct['image'] = $image->getExternalUrlSmall();
