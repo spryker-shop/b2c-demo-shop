@@ -9,7 +9,7 @@ namespace Pyz\Yves\ProductSetWidget\Plugin;
 
 use Generated\Shared\Transfer\ProductSetDataStorageTransfer;
 use Spryker\Yves\Kernel\Widget\AbstractWidgetPlugin;
-use SprykerShop\Yves\ProductSetWidget\Plugin\CmsContentWidgetProductSetConnector\ProductSetWidgetPlugin;
+use Pyz\Yves\ProductSetWidget\Plugin\CmsContentWidgetProductSetConnector\ProductSetWidgetPlugin;
 
 /**
  * @method \PYZ\Yves\ProductSetWidget\ProductSetWidgetFactory getFactory()
@@ -25,10 +25,12 @@ class ProductSetIdsWidgetPlugin extends AbstractWidgetPlugin
      */
     public function initialize(array $productSetIds): void
     {
-        $productSetList = $this->getProductSetList($productSetIds);
         $this->addWidgets([
             ProductSetWidgetPlugin::class,
         ]);
+
+        $productSetList = $this->getProductSetList($productSetIds);
+
         $this
             ->addParameter('productSetList', $productSetList);
     }
