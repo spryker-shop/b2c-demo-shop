@@ -24,8 +24,11 @@ class CurrencyAwareSuggestionByTypeResultFormatter extends SprykerCurrencyAwareS
     protected function formatSearchResultWithoutPriceDimensions(array $result)
     {
         $priceProductClient = $this->getFactory()->getPriceProductClient();
-        foreach ($result as &$product) {
-            $product['prices'] = array_key_exists('prices', $product) ?: [];
+        foreach ($result['product_abstract'] as &$product) {
+            if (!array_key_exists('prices', $product)) {
+                $product['prices'] = [];
+            }
+
             $currentProductPriceTransfer = $priceProductClient->resolveProductPrice($product['prices']);
             $product['price'] = $currentProductPriceTransfer->getPrice();
             $product['prices'] = $currentProductPriceTransfer->getPrices();
