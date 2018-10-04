@@ -3,9 +3,10 @@
         margin-bottom: 75px;
 
         &__info {
-            li, li>a {
-            letter-spacing: .2px;
-            font-weight: 300;
+            li,
+            li > a {
+                letter-spacing: 0.2px;
+                font-weight: 300;
             }
         }
 
@@ -20,7 +21,7 @@
             padding: 25px 0;
             margin: 25px 0;
             @include helper-breakpoint-media-min($sm-max) {
-              font-size: 32px;
+                font-size: 32px;
             }
         }
 
@@ -94,10 +95,10 @@
             }
 
             .checkbox__box {
-                 @include helper-breakpoint-media-min($md-min) {
-                     margin-top: 4px;
-                 }
-             }
+                @include helper-breakpoint-media-min($md-min) {
+                    margin-top: 4px;
+                }
+            }
 
             .checkbox__check {
                 @include helper-breakpoint-media-min($md-min) {
@@ -126,13 +127,15 @@
 
         .table {
             thead {
-                td, th {
-                    padding: .5rem .5rem;
+                td,
+                th {
+                    padding: 0.5rem;
                 }
             }
             tbody {
-                td, th {
-                    padding: .5rem .5rem;
+                td,
+                th {
+                    padding: 0.5rem;
                 }
                 tr:nth-child(even) {
                     background: #f1f1f1;
@@ -151,40 +154,39 @@
             }
         }
         .order-table {
-          th {
-            white-space: nowrap;
-          }
-          th, td {
-            @include helper-breakpoint-media-max($sm-max) {
-              font-size: 14px;
+            th {
+                white-space: nowrap;
             }
-          }
-          .menu {
-            &__item {
-              white-space: nowrap;
+            th,
+            td {
+                @include helper-breakpoint-media-max($sm-max) {
+                    font-size: 14px;
+                }
             }
-          }
+            .menu {
+                &__item {
+                    white-space: nowrap;
+                }
+            }
         }
         .order-detail-table {
-          @include helper-breakpoint-media-max($sm-max) {
-            .table {
-              thead, tbody {
+            @include helper-breakpoint-media-max($sm-max) {
+                .table {
+                    thead,
+                    tbody {
 
-                th, td {
-                  font-size: 11px;
-                  padding: .25rem;
+                        th,
+                        td {
+                            font-size: 11px;
+                            padding: 0.25rem;
+                        }
+                        .checkbox {
+                            margin-top: 0;
+                        }
+                    }
                 }
-                .checkbox {
-                  margin-top: 0;
-                }
-              }
             }
-          }
-
-
         }
-
-
     }
 }
 

@@ -17,8 +17,8 @@
             position: relative;
         }
 
-        &:not(:last-child) &__separator:before,
-        &:not(:last-child) &__separator:after {
+        &:not(:last-child) &__separator::before,
+        &:not(:last-child) &__separator::after {
             position: absolute;
             top: 50%;
             left: 50%;
@@ -30,7 +30,7 @@
             background-color: #d1d1d1;
             margin-top: -2px;
         }
-        &:not(:last-child) &__separator:after {
+        &:not(:last-child) &__separator::after {
             transform: translate(-50%, -50%) rotate(38deg);
             margin-top: 4px;
         }
@@ -88,8 +88,7 @@
             &--active {
                 color: #111;
                 display: flex;
-            }
-            &--active {
+
                 &#{$name}--disabled,
                 &:last-child {
                     &::before {

@@ -13,9 +13,9 @@
                 text-decoration: none;
                 color: $setting-color-text;
                 #{$name}__thumbnail {
-                    box-shadow: 10px 10px 40px 0px rgba(0,0,0,.1);
+                    box-shadow: 10px 10px 40px 0 rgba(0, 0, 0, 0.1);
                     #{$name}__overlay {
-                        &:after {
+                        &::after {
                             opacity: 0.09;
                         }
                     }
@@ -40,26 +40,26 @@
         }
         &__overlay {
             display: block;
-            padding: 90px 20px 120px 20px;
+            padding: 90px 20px 120px;
             @include helper-breakpoint-media-max($sm-max) {
-                padding: 45px 10px 70px 10px;
+                padding: 45px 10px 70px;
             }
             &::before {
-                content:'';
+                content: '';
                 position: absolute;
-                top:0;
+                top: 0;
                 left: 0;
                 right: 0;
                 bottom: 0;
                 border-radius: 4px;
-                background: rgba(0,0,0,.05);
+                background: rgba(0, 0, 0, 0.05);
                 z-index: $setting-zi-element-floating;
             }
-            &:after {
+            &::after {
                 @include helper-effect-transition(opacity);
-                content:'';
+                content: '';
                 position: absolute;
-                top:0;
+                top: 0;
                 left: 0;
                 right: 0;
                 bottom: 0;
@@ -85,9 +85,9 @@
 
         &__actions-container {
             position: absolute;
-            bottom: .5rem;
-            left: .5rem;
-            right: .5rem;
+            bottom: 0.5rem;
+            left: 0.5rem;
+            right: 0.5rem;
             margin: auto;
         }
 
@@ -99,7 +99,7 @@
             display: block;
             margin: 0 11px;
             font: 500 16px $setting-font-family-additional;
-            letter-spacing: .3px;
+            letter-spacing: 0.3px;
             color: $setting-color-darkest;
 
             &:hover {
@@ -133,7 +133,7 @@
                     font-size: 14px;
                     @include helper-breakpoint-media-max($sm-max) {
                         font-size: 11px;
-                        left:0;
+                        left: 0;
                         right: unset;
                     }
                 }
@@ -169,7 +169,6 @@
             top: 1px;
         }
     }
-
 }
 
 @include shop-ui-product-card();

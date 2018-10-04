@@ -1,9 +1,7 @@
 @mixin shop-ui-promotion-item($name: '.promotion-item') {
     #{$name} {
         position: relative;
-        @include helper-breakpoint-media-max($sm-max) {
 
-        }
         &__container {
             position: relative;
             color: $setting-color-text;
@@ -79,9 +77,8 @@
                     top: -2px;
                     left: 0;
                 }
-
             }
-            &[disabled]{
+            &[disabled] {
                 color: $setting-color-white;
             }
         }
@@ -98,24 +95,21 @@
             }
         }
         .variant-configurator {
-          display: flex;
-          justify-content: flex-start;
-          .list {
             display: flex;
-            flex-direction: column;
-          }
-          .variant {
-            display: flex;
-            align-items: center;
-          }
-          .variant__title {
-            flex: 1;
-          }
+            justify-content: flex-start;
+            .list {
+                display: flex;
+                flex-direction: column;
+            }
+            .variant {
+                display: flex;
+                align-items: center;
+            }
+            .variant__title {
+                flex: 1;
+            }
         }
-
-
     }
-
 }
 
 @include shop-ui-promotion-item();

@@ -1,10 +1,10 @@
 @mixin shop-ui-jumbotron-slider($name: '.jumbotron-slider') {
     #{$name} {
         min-height: 450px;
-        @include helper-breakpoint-media-max($lg-max){
+        @include helper-breakpoint-media-max($lg-max) {
             min-height: 290px;
         }
-        @include helper-breakpoint-media-max($sm-max){
+        @include helper-breakpoint-media-max($sm-max) {
             min-height: 212px;
         }
         .slick-slide {
@@ -17,11 +17,11 @@
             margin-top: 24px;
             li {
                 display: block;
-                margin: .3rem .5rem;
+                margin: 0.3rem 0.5rem;
                 width: 6px;
                 height: 6px;
                 background: #1a1a1a;
-                opacity: .25;
+                opacity: 0.25;
                 border-radius: 50%;
                 &:hover {
                     cursor: pointer;
@@ -40,14 +40,13 @@
             }
         }
         .slick-initialized {
-            @include helper-breakpoint-media-max($sm-max){
+            @include helper-breakpoint-media-max($sm-max) {
                 padding: 0;
             }
             .jumbotron-slider-item__container {
                 display: flex !important;
             }
         }
-
     }
 }
 

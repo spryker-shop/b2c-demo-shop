@@ -1,74 +1,74 @@
 @mixin cart-bundle-list($name: '.cart-bundle') {
-  #{$name} {
-    &__list {
-      margin-top: 44px;
-      position: relative;
+    #{$name} {
+        &__list {
+            margin-top: 44px;
+            position: relative;
 
-      &::after {
-        content: '';
-        display: block;
-        width: 1px;
-        height: 25px;
-        border-left: 1px dotted $setting-color-light;
-        position: absolute;
-        top: -35px;
-        left: 60px;
-      }
-    }
-    &__list-item {
-      display: flex;
-      align-items: center;
-      margin: 20px 0;
-      @include helper-breakpoint-media-max($sm-max) {
-        margin: 12px 0;
-      }
+            &::after {
+                content: '';
+                display: block;
+                width: 1px;
+                height: 25px;
+                border-left: 1px dotted $setting-color-light;
+                position: absolute;
+                top: -35px;
+                left: 60px;
+            }
+        }
+        &__list-item {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+            @include helper-breakpoint-media-max($sm-max) {
+                margin: 12px 0;
+            }
 
-      .thumbnail {
-        width: 120px;
-        min-width: 120px;
-        height: 44px;
-        margin: 0;
-        position: relative;
-        &__image {
-          margin: 5px auto;
-          max-height: calc(100% - 10px);
-          max-width: calc(100% - 10px);
+            .thumbnail {
+                width: 120px;
+                min-width: 120px;
+                height: 44px;
+                margin: 0;
+                position: relative;
+                &__image {
+                    margin: 5px auto;
+                    max-height: calc(100% - 10px);
+                    max-width: calc(100% - 10px);
+                }
+                &::after {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    border-radius: 4px;
+                    background: rgba(0, 0, 0, 0.05);
+                    z-index: 350;
+                }
+            }
         }
-        &::after {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          border-radius: 4px;
-          background: rgba(0, 0, 0, 0.05);
-          z-index: 350;
+        &__item-title {
+            font: 500 15px $setting-font-family-additional;
+            padding-left: 24px;
         }
-      }
+        &__item-quantity {
+            color: $setting-color-light;
+            font-weight: normal;
+            margin-left: 16px;
+            position: relative;
+            &::after {
+                content: '';
+                display: block;
+                width: 3px;
+                height: 3px;
+                position: absolute;
+                left: -10px;
+                background: $setting-color-light;
+                top: 9px;
+                border-radius: 50%;
+            }
+        }
     }
-    &__item-title {
-      font: 500 15px $setting-font-family-additional;
-      padding-left: 24px;
-    }
-    &__item-quantity {
-      color: $setting-color-light;
-      font-weight: normal;
-      margin-left: 16px;
-      position: relative;
-      &::after {
-        content: '';
-        display: block;
-        width: 3px;
-        height: 3px;
-        position: absolute;
-        left: -10px;
-        background: $setting-color-light;
-        top: 9px;
-        border-radius: 50%;
-      }
-    }
-  }
 }
 
 @include cart-bundle-list();

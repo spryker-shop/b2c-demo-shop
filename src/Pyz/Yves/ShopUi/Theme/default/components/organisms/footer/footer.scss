@@ -19,8 +19,8 @@
         &-title-nav {
             @include helper-breakpoint-media-max($sm-max) {
                 position: relative;
-                &:before {
-                    content: "";
+                &::before {
+                    content: '';
                     width: 10px;
                     height: 2px;
                     background: $setting-color-dark;
@@ -29,8 +29,8 @@
                     right: 0;
                     margin-top: -1px;
                 }
-                &:after {
-                    content: "";
+                &::after {
+                    content: '';
                     width: 2px;
                     height: 10px;
                     background: $setting-color-dark;
@@ -39,7 +39,7 @@
                     right: 4px;
                     margin-top: -4px;
                 }
-                &.active:after {
+                &.active::after {
                     display: none;
                 }
             }
@@ -59,7 +59,6 @@
             }
             .navigation-footer {
                 padding-bottom: 10px;
-
             }
             @include helper-breakpoint-media-min($md-min) {
                 border-bottom: dotted 1px $setting-color-lightest-1;
@@ -85,7 +84,7 @@
             font-size: 15px;
             @include helper-breakpoint-media-max($sm-max) {
                 a {
-                    color: rgba($setting-color-text, .5);
+                    color: rgba($setting-color-text, 0.5);
                 }
             }
         }
@@ -123,10 +122,9 @@
                 display: block;
                 margin-right: 12px;
                 border: none;
-                transform: translate(0 , -5px);
+                transform: translate(0, -5px);
                 img {
                     width: 150px;
-                    //height: 42px;
                 }
                 @include helper-breakpoint-media-min($md-min) {
                     width: 102px;
@@ -151,8 +149,6 @@
             }
         }
 
-
-
         &-bottom {
             margin: 16px 1rem 0;
             justify-content: space-between;
@@ -160,7 +156,7 @@
             @include helper-breakpoint-media-min($xl-min) {
                 padding: 0 0 86px;
             }
-            &:after {
+            &::after {
                 display: none;
             }
             &:first-child {
@@ -252,7 +248,6 @@
             .custom-select__caret {
                 pointer-events: none;
             }
-
         }
 
         .subscription-text {

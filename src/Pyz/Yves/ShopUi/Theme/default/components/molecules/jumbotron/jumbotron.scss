@@ -3,6 +3,8 @@
         &__container {
             height: 16rem;
             background: $setting-color-main;
+
+            /* stylelint-disable-next-line declaration-block-no-duplicate-properties */
             background: linear-gradient(to left top, helper-color-dark($setting-color-main), helper-color-light($setting-color-main));
             background-position: center center;
             background-size: cover;
@@ -40,12 +42,11 @@
             @include helper-breakpoint-media-max($md-max) {
                 font-size: 2rem;
             }
-
         }
 
         &__sub-headline {
             font: 300 2rem $setting-font-family;
-            letter-spacing: .2px;
+            letter-spacing: 0.2px;
             @include helper-breakpoint-media-max($lg-max) {
                 font-size: 1.5rem;
             }
@@ -54,10 +55,8 @@
             }
         }
 
-        @content
+        @content;
     }
 }
 
 @include shop-ui-jumbotron();
-
-

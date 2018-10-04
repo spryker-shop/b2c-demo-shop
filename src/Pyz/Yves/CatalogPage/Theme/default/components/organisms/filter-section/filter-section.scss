@@ -8,8 +8,8 @@
                 border-top: dotted 1px $setting-color-lightest;
                 @include helper-breakpoint-media-min($xl-min) {
                     #{$name}__title {
-                        &:before,
-                        &:after {
+                        &::before,
+                        &::after {
                             display: none !important;
                         }
                     }
@@ -39,8 +39,8 @@
                 .no-touch &:hover {
                     opacity: 0.5;
                 }
-                &:before {
-                    content: "";
+                &::before {
+                    content: '';
                     width: 12px;
                     height: 2px;
                     background: $setting-color-dark;
@@ -49,8 +49,8 @@
                     right: 0;
                     margin-top: -1px;
                 }
-                &:after {
-                    content: "";
+                &::after {
+                    content: '';
                     width: 2px;
                     height: 12px;
                     background: $setting-color-dark;
@@ -59,7 +59,7 @@
                     right: 5px;
                     margin-top: -6px;
                 }
-                &.active:after {
+                &.active::after {
                     display: none;
                 }
             }
@@ -95,7 +95,7 @@
             color: $setting-color-darkest;
             &:not([disabled]):hover {
                 text-decoration: none;
-                color: $setting-color-alt
+                color: $setting-color-alt;
             }
         }
 
