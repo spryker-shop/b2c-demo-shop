@@ -33,6 +33,7 @@ use Spryker\Zed\Application\Communication\Plugin\ServiceProvider\ZedHstsServiceP
 use Spryker\Zed\Assertion\Communication\Plugin\ServiceProvider\AssertionServiceProvider;
 use Spryker\Zed\Auth\Communication\Plugin\Bootstrap\AuthBootstrapProvider;
 use Spryker\Zed\Auth\Communication\Plugin\ServiceProvider\RedirectAfterLoginProvider;
+use Spryker\Zed\Chart\Communication\Plugin\ServiceProvider\TwigChartFunctionServiceProvider;
 use Spryker\Zed\Currency\Communication\Plugin\ServiceProvider\TwigCurrencyServiceProvider;
 use Spryker\Zed\EventBehavior\Communication\Plugin\ServiceProvider\EventBehaviorServiceProvider;
 use Spryker\Zed\Gui\Communication\Plugin\ServiceProvider\GuiTwigExtensionServiceProvider;
@@ -88,6 +89,7 @@ class ApplicationDependencyProvider extends SprykerApplicationDependencyProvider
             new PropelServiceProvider(),
             new GuiTwigExtensionServiceProvider(),
             new EventBehaviorServiceProvider(),
+            new TwigChartFunctionServiceProvider(),
         ];
 
         if (Environment::isDevelopment()) {
