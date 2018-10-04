@@ -68,19 +68,15 @@
                         }
                     } only %}
 
-                        {% block labels %}
-                        {% endblock %}
-                        {% block groups %}
-                            {#{{ widgetGlobal('ProductGroupWidgetPlugin', embed.abstractId, view('product-color-selector', 'ExampleProductColorGroupWidget')) }}#}
-                        {% endblock %}
+                        {% block labels %}{% endblock %}
+                        {% block groups %}{% endblock %}
                         {% block name %}
                             <div class="col col--sm-12">
                                 <span class="product-card__name">{{data.name}}</span>
                                 <span class="bundle-quantity"> ·&nbsp; {{ embed.quantity }}x</span>
                             </div>
                         {% endblock %}
-                        {% block price %}
-                        {% endblock %}
+                        {% block price %}{% endblock %}
                         {% block rating %}
                             {{ widget('ProductAbstractReviewWidgetPlugin', embed.abstractId) }}
                             {% include molecule('product-detail', 'ProductDetailPage') with {
