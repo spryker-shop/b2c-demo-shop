@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "be6263521f2750f862161826b3dcd927",
+    "content-hash": "9142a5e6a95c279576ce564650fcf72c",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -2427,6 +2427,53 @@
             "time": "2018-09-06T12:04:36+00:00"
         },
         {
+            "name": "spryker-shop/chart-widget",
+            "version": "0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker-shop/chart-widget.git",
+                "reference": "e0958d5f6e5e353d5ab69f80b3099c21a2c9ae68"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker-shop/chart-widget/zipball/e0958d5f6e5e353d5ab69f80b3099c21a2c9ae68",
+                "reference": "e0958d5f6e5e353d5ab69f80b3099c21a2c9ae68",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1",
+                "spryker/chart": "^1.0.0",
+                "spryker/kernel": "^3.16.0"
+            },
+            "require-dev": {
+                "spryker-shop/cms-content-widget-chart-connector": "*",
+                "spryker/silex": "*",
+                "spryker/twig": "*"
+            },
+            "suggest": {
+                "spryker-shop/cms-content-widget-chart-connector": "If you want to use ChartWidgetPlugin: ^1.0.0",
+                "spryker/silex": "*",
+                "spryker/twig": "If you want to use ChartWidgetPlugin: ^3.2.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "SprykerShop\\": "src/SprykerShop/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "ChartWidget module",
+            "time": "2018-06-26T10:36:31+00:00"
+        },
+        {
             "name": "spryker-shop/checkout-page",
             "version": "1.2.1",
             "source": {
@@ -2589,6 +2636,50 @@
             ],
             "description": "CmsBlockWidget module",
             "time": "2018-08-01T14:21:08+00:00"
+        },
+        {
+            "name": "spryker-shop/cms-content-widget-chart-connector",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker-shop/cms-content-widget-chart-connector.git",
+                "reference": "0ac8cf1426def7445156b50b4647c38a02f44e01"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker-shop/cms-content-widget-chart-connector/zipball/0ac8cf1426def7445156b50b4647c38a02f44e01",
+                "reference": "0ac8cf1426def7445156b50b4647c38a02f44e01",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1",
+                "spryker/cms-content-widget": "^1.0.0",
+                "spryker/kernel": "^3.16.0"
+            },
+            "require-dev": {
+                "spryker/twig": "*"
+            },
+            "suggest": {
+                "spryker-shop/chart-widget": "If you want to use ChartWidgetPlugin: ^0.1.0",
+                "spryker/twig": "If you want to use CmsChartContentWidgetPlugin: ^3.2.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "SprykerShop\\": "src/SprykerShop/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "CmsContentWidgetChartConnector module",
+            "time": "2018-06-27T07:14:14+00:00"
         },
         {
             "name": "spryker-shop/cms-content-widget-product-connector",
@@ -6425,6 +6516,52 @@
             "time": "2018-09-06T10:40:21+00:00"
         },
         {
+            "name": "spryker/chart",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/chart.git",
+                "reference": "46ad8f73b1b2e4041ebd3cb53c3714b5fa1e96f5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/chart/zipball/46ad8f73b1b2e4041ebd3cb53c3714b5fa1e96f5",
+                "reference": "46ad8f73b1b2e4041ebd3cb53c3714b5fa1e96f5",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1",
+                "spryker/kernel": "^3.0.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/silex": "*",
+                "spryker/testify": "*",
+                "spryker/twig": "*"
+            },
+            "suggest": {
+                "spryker/silex": "*",
+                "spryker/twig": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "Chart module",
+            "time": "2018-08-07T09:07:57+00:00"
+        },
+        {
             "name": "spryker/checkout",
             "version": "4.1.5",
             "source": {
@@ -8374,6 +8511,47 @@
             ],
             "description": "CustomerUserConnectorGui module",
             "time": "2018-09-05T07:46:20+00:00"
+        },
+        {
+            "name": "spryker/dashboard",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/dashboard.git",
+                "reference": "bb143949b3e74fcfa4d7dfa4f769d251f4420427"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/dashboard/zipball/bb143949b3e74fcfa4d7dfa4f769d251f4420427",
+                "reference": "bb143949b3e74fcfa4d7dfa4f769d251f4420427",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1",
+                "spryker/kernel": "^3.0.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/testify": "*",
+                "spryker/twig": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "Dashboard module",
+            "time": "2018-08-07T09:36:35+00:00"
         },
         {
             "name": "spryker/data-import",
@@ -15245,6 +15423,56 @@
             ],
             "description": "SalesSplit module",
             "time": "2018-02-05T06:01:59+00:00"
+        },
+        {
+            "name": "spryker/sales-statistics",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/sales-statistics.git",
+                "reference": "7274ead3c755a253edcb5e0d251920232b7baccf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/sales-statistics/zipball/7274ead3c755a253edcb5e0d251920232b7baccf",
+                "reference": "7274ead3c755a253edcb5e0d251920232b7baccf",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1",
+                "spryker/kernel": "^3.17.0",
+                "spryker/oms": "^8.0.0",
+                "spryker/propel-orm": "^1.0.0",
+                "spryker/sales": "^8.0.0",
+                "spryker/twig": "^3.3.1"
+            },
+            "require-dev": {
+                "spryker/chart": "*",
+                "spryker/code-sniffer": "*",
+                "spryker/dashboard": "^1.0.0",
+                "spryker/testify": "*"
+            },
+            "suggest": {
+                "spryker/chart": "If you want to use Chart Plugins. Minimum required version: 1.0.1.",
+                "spryker/dashboard": "If you want to use Dashboard. Minimum required version: 1.0.0."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "SalesStatistics module",
+            "time": "2018-08-07T12:53:30+00:00"
         },
         {
             "name": "spryker/search",
@@ -22153,6 +22381,7 @@
             ],
             "description": "A WebProfiler for Silex",
             "homepage": "http://silex.sensiolabs.org/",
+            "abandoned": true,
             "time": "2016-05-04T16:32:42+00:00"
         },
         {
