@@ -14,6 +14,8 @@ use SprykerShop\Yves\PriceWidget\Plugin\ProductDetailPage\PriceWidgetPlugin;
 use SprykerShop\Yves\ProductCategoryWidget\Plugin\ProductDetailPage\ProductCategoryWidgetPlugin;
 use SprykerShop\Yves\ProductDetailPage\ProductDetailPageDependencyProvider as SprykerShopProductDetailPageDependencyProvider;
 use SprykerShop\Yves\ProductImageWidget\Plugin\ProductDetailPage\ProductImageWidgetPlugin;
+use SprykerShop\Yves\ProductAlternativeWidget\Plugin\ProductDetailPage\ProductAlternativeWidgetPlugin;
+use SprykerShop\Yves\ProductDiscontinuedWidget\Plugin\ProductDetailPage\ProductDiscontinuedWidgetPlugin;
 use SprykerShop\Yves\ProductLabelWidget\Plugin\ProductDetailPage\ProductAbstractLabelWidgetPlugin;
 use SprykerShop\Yves\ProductOptionWidget\Plugin\ProductDetailPage\ProductOptionWidgetPlugin;
 use SprykerShop\Yves\ProductRelationWidget\Plugin\ProductDetailPage\SimilarProductsWidgetPlugin;
@@ -37,7 +39,9 @@ class ProductDetailPageDependencyProvider extends SprykerShopProductDetailPageDe
             WishlistWidgetPlugin::class,
             SimilarProductsWidgetPlugin::class,
             ProductCmsBlockWidgetPlugin::class,
+            ProductAlternativeWidgetPlugin::class,
             ProductReviewWidgetPlugin::class,
+            ProductDiscontinuedWidgetPlugin::class,
             ExampleProductColorGroupWidgetPlugin::class,
         ];
     }
