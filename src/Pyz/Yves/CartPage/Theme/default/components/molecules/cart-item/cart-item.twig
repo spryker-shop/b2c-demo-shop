@@ -55,7 +55,22 @@
 
         <div class="col col--sm-12 col--lg-4">
             {{ widget('CartProductPackagingUnitWidgetPlugin', data.cartItem) }}
-
+            {% if data.cartItem.amountSalesUnit is not defined or data.cartItem.amountSalesUnit is empty %}
+                {% if canEditCart %}
+                    {% if widgetExists('QuantitySalesUnitWidgetPlugin') %}
+                        {{ widget('QuantitySalesUnitWidgetPlugin', data.cartItem) }}
+                    {% else %}
+                        {% include molecule('cart-quantity-input', 'CartPage') with {
+                            data: {
+                                cartItem: data.cartItem
+                            }
+                        } only %}
+                    {% endif %}
+                {% else %}
+                    {{ 'cart.item_quantity' | trans }}:
+                    <strong>{{ data.cartItem.quantity }}</strong>
+                {% endif %}
+            {% endif %}
             {% if canEditCart %}
                 <a class="float-right" href="{{ path('cart/remove', {'sku': data.cartItem.sku, 'groupKey': data.cartItem.groupKey }) }}">
                     &times; {{ 'remove' | trans }}
