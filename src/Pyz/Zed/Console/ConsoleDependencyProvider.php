@@ -51,6 +51,8 @@ use Spryker\Zed\Oms\Communication\Console\CheckTimeoutConsole as OmsCheckTimeout
 use Spryker\Zed\Oms\Communication\Console\ClearLocksConsole as OmsClearLocksConsole;
 use Spryker\Zed\PriceProduct\Communication\Console\PriceProductStoreOptimizeConsole;
 use Spryker\Zed\PriceProductDataImport\PriceProductDataImportConfig;
+use Spryker\Zed\ProductAlternativeDataImport\ProductAlternativeDataImportConfig;
+use Spryker\Zed\ProductDiscontinuedDataImport\ProductDiscontinuedDataImportConfig;
 use Spryker\Zed\ProductLabel\Communication\Console\ProductLabelRelationUpdaterConsole;
 use Spryker\Zed\ProductLabel\Communication\Console\ProductLabelValidityConsole;
 use Spryker\Zed\ProductRelation\Communication\Console\ProductRelationUpdaterConsole;
@@ -177,6 +179,8 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
             new DataImportConsole(DataImportConsole::DEFAULT_NAME . ':' . DataImportConfig::IMPORT_TYPE_TAX),
             new DataImportConsole(DataImportConsole::DEFAULT_NAME . ':' . DataImportConfig::IMPORT_TYPE_DISCOUNT_AMOUNT),
             new DataImportConsole(DataImportConsole::DEFAULT_NAME . ':' . DataImportConfig::IMPORT_TYPE_ORDER_SOURCE),
+            new DataImportConsole(DataImportConsole::DEFAULT_NAME . ':' . ProductAlternativeDataImportConfig::IMPORT_TYPE_PRODUCT_ALTERNATIVE), #ProductAlternativeFeature
+            new DataImportConsole(DataImportConsole::DEFAULT_NAME . ':' . ProductDiscontinuedDataImportConfig::IMPORT_TYPE_PRODUCT_DISCONTINUED),
 
             //core data importers
             new DataImportConsole(DataImportConsole::DEFAULT_NAME . ':' . PriceProductDataImportConfig::IMPORT_TYPE_PRODUCT_PRICE),

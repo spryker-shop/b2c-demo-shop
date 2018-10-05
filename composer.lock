@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "10421ecf09276c7295d274c4d06b2be5",
+    "content-hash": "00c5b6e499e78d46d0bfd54a5468972b",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -3654,6 +3654,55 @@
             "time": "2018-06-15T09:21:34+00:00"
         },
         {
+            "name": "spryker-shop/product-alternative-widget",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker-shop/product-alternative-widget.git",
+                "reference": "26a138ad80a243e587720309f152a5ae34cef9d0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker-shop/product-alternative-widget/zipball/26a138ad80a243e587720309f152a5ae34cef9d0",
+                "reference": "26a138ad80a243e587720309f152a5ae34cef9d0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1",
+                "spryker/kernel": "^3.16.0",
+                "spryker/product-alternative-storage": "^1.0.0"
+            },
+            "require-dev": {
+                "spryker-shop/product-detail-page": "*",
+                "spryker-shop/shopping-list-page": "*",
+                "spryker-shop/wishlist-page": "*",
+                "spryker/code-sniffer": "*",
+                "spryker/testify": "*"
+            },
+            "suggest": {
+                "spryker-shop/product-detail-page": "if you want to use ProductAlternativeWidgetPlugin: ^1.1.0",
+                "spryker-shop/shopping-list-page": "if you want to use ProductAlternativeWidgetPlugin: ^0.4.1",
+                "spryker-shop/wishlist-page": "if you want to use ProductAlternativeWidgetPlugin: ^1.1.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "SprykerShop\\": "src/SprykerShop/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "ProductAlternativeWidget module",
+            "time": "2018-10-02T11:36:22+00:00"
+        },
+        {
             "name": "spryker-shop/product-barcode-widget",
             "version": "1.0.0",
             "source": {
@@ -3838,6 +3887,55 @@
             ],
             "description": "ProductDetailPage module",
             "time": "2018-09-27T09:00:11+00:00"
+        },
+        {
+            "name": "spryker-shop/product-discontinued-widget",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker-shop/product-discontinued-widget.git",
+                "reference": "e0ad110ef11203d51c0be27844e4e60342c30d47"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker-shop/product-discontinued-widget/zipball/e0ad110ef11203d51c0be27844e4e60342c30d47",
+                "reference": "e0ad110ef11203d51c0be27844e4e60342c30d47",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1",
+                "spryker/kernel": "^3.16.0",
+                "spryker/product-discontinued-storage": "^1.0.0"
+            },
+            "require-dev": {
+                "spryker-shop/product-detail-page": "*",
+                "spryker-shop/shopping-list-page": "*",
+                "spryker-shop/wishlist-page": "*",
+                "spryker/code-sniffer": "*",
+                "spryker/testify": "*"
+            },
+            "suggest": {
+                "spryker-shop/product-detail-page": "if you want to use ProductDiscontinuedWidgetPlugin: ^1.1.0",
+                "spryker-shop/shopping-list-page": "if you want to use ProductDiscontinuedWidgetPlugin: ~0.4.1",
+                "spryker-shop/wishlist-page": "if you want to use ProductDiscontinuedWidgetPlugin: ^1.1.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "SprykerShop\\": "src/SprykerShop/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "ProductDiscontinuedWidget module",
+            "time": "2018-07-25T07:52:32+00:00"
         },
         {
             "name": "spryker-shop/product-group-widget",
@@ -12350,6 +12448,95 @@
             "time": "2018-02-08T10:41:19+00:00"
         },
         {
+            "name": "spryker/product-alternative",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/product-alternative.git",
+                "reference": "c5f8c1e612834e3e81dd4ad8a54aaa98d4a7c749"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/product-alternative/zipball/c5f8c1e612834e3e81dd4ad8a54aaa98d4a7c749",
+                "reference": "c5f8c1e612834e3e81dd4ad8a54aaa98d4a7c749",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1",
+                "spryker/category": "^4.4.0",
+                "spryker/kernel": "^3.20.0",
+                "spryker/locale": "^3.1.0",
+                "spryker/product": "^6.0.0",
+                "spryker/product-alternative-extension": "^1.0.0",
+                "spryker/propel-orm": "^1.1.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/testify": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "ProductAlternative module",
+            "time": "2018-07-24T13:51:15+00:00"
+        },
+        {
+            "name": "spryker/product-alternative-data-import",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/product-alternative-data-import.git",
+                "reference": "a87851be858325fe1a03e91d271fceb2431bf5a0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/product-alternative-data-import/zipball/a87851be858325fe1a03e91d271fceb2431bf5a0",
+                "reference": "a87851be858325fe1a03e91d271fceb2431bf5a0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1",
+                "spryker/data-import": "^1.2.0",
+                "spryker/kernel": "^3.0.0",
+                "spryker/product": "^6.0.0",
+                "spryker/product-alternative": "^1.0.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/testify": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/",
+                    "SprykerTest\\Zed\\ProductAlternativeDataImport\\Helper\\": "tests/SprykerTest/Zed/ProductAlternativeDataImport/_support/Helper/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "ProductAlternativeDataImport module",
+            "time": "2018-07-24T08:04:43+00:00"
+        },
+        {
             "name": "spryker/product-alternative-extension",
             "version": "1.0.0",
             "source": {
@@ -12387,6 +12574,153 @@
             ],
             "description": "ProductAlternativeExtension module",
             "time": "2018-07-24T08:04:43+00:00"
+        },
+        {
+            "name": "spryker/product-alternative-gui",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/product-alternative-gui.git",
+                "reference": "80783efb16ea0dc6f3c232a8cce2891e3293ad72"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/product-alternative-gui/zipball/80783efb16ea0dc6f3c232a8cce2891e3293ad72",
+                "reference": "80783efb16ea0dc6f3c232a8cce2891e3293ad72",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1",
+                "spryker/gui": "^3.0.0",
+                "spryker/kernel": "^3.1.0",
+                "spryker/product": "^6.0.0",
+                "spryker/product-alternative": "^1.0.0",
+                "spryker/product-management-extension": "^1.1.0",
+                "spryker/symfony": "^3.0.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/testify": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "ProductAlternativeGui module",
+            "time": "2018-07-24T13:51:15+00:00"
+        },
+        {
+            "name": "spryker/product-alternative-product-label-connector",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/product-alternative-product-label-connector.git",
+                "reference": "5efb5fe12a47341eda54e7f3d46ff16d82cd0787"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/product-alternative-product-label-connector/zipball/5efb5fe12a47341eda54e7f3d46ff16d82cd0787",
+                "reference": "5efb5fe12a47341eda54e7f3d46ff16d82cd0787",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1",
+                "spryker/kernel": "^3.0.0",
+                "spryker/locale": "^3.0.0",
+                "spryker/product": "^6.2.0",
+                "spryker/product-alternative": "^1.0.0",
+                "spryker/product-alternative-extension": "^1.0.0",
+                "spryker/product-label": "^2.5.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/installer": "*",
+                "spryker/testify": "*"
+            },
+            "suggest": {
+                "spryker/installer": "If you want to use Installer plugins."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/",
+                    "SprykerTest\\Zed\\ProductAlternativeProductLabelConnector\\Helper\\": "tests/SprykerTest/Zed/ProductAlternativeProductLabelConnector/_support/Helper/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "ProductAlternativeProductLabelConnector module",
+            "time": "2018-07-24T21:54:48+00:00"
+        },
+        {
+            "name": "spryker/product-alternative-storage",
+            "version": "1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/product-alternative-storage.git",
+                "reference": "7c47e8e53388784a42021c671796f262a8111af7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/product-alternative-storage/zipball/7c47e8e53388784a42021c671796f262a8111af7",
+                "reference": "7c47e8e53388784a42021c671796f262a8111af7",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1",
+                "spryker/event-behavior": "^1.0.0",
+                "spryker/kernel": "^3.21.0",
+                "spryker/product": "^6.0.0",
+                "spryker/product-alternative": "^1.0.0",
+                "spryker/product-alternative-storage-extension": "^1.0.0",
+                "spryker/product-storage": "^1.1.0",
+                "spryker/propel-orm": "^1.0.0",
+                "spryker/storage": "^3.4.0",
+                "spryker/synchronization": "^1.0.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/event": "*",
+                "spryker/testify": "*"
+            },
+            "suggest": {
+                "spryker/event": "If you want to use Event plugins, minimum required version: 2.1.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "ProductAlternativeStorage module",
+            "time": "2018-09-24T00:29:06+00:00"
         },
         {
             "name": "spryker/product-alternative-storage-extension",
@@ -13079,6 +13413,339 @@
             ],
             "description": "ProductCategoryStorage module",
             "time": "2018-09-21T08:24:05+00:00"
+        },
+        {
+            "name": "spryker/product-discontinued",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/product-discontinued.git",
+                "reference": "bbb1c080197b0ea1d5f828f2d893e7acd803dfb6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/product-discontinued/zipball/bbb1c080197b0ea1d5f828f2d893e7acd803dfb6",
+                "reference": "bbb1c080197b0ea1d5f828f2d893e7acd803dfb6",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1",
+                "spryker/kernel": "^3.0.0",
+                "spryker/locale": "^3.0.0",
+                "spryker/log": "^2.0.0 || ^3.0.0",
+                "spryker/product": "^5.0.0 || ^6.0.0",
+                "spryker/product-alternative-extension": "^1.0.0",
+                "spryker/product-discontinued-extension": "^1.0.0",
+                "spryker/propel-orm": "^1.1.0",
+                "spryker/shopping-list-extension": "^1.1.0",
+                "spryker/symfony": "^3.0.0",
+                "spryker/wishlist-extension": "^1.0.0"
+            },
+            "require-dev": {
+                "spryker/cart": "*",
+                "spryker/checkout": "*",
+                "spryker/code-sniffer": "*",
+                "spryker/propel": "*",
+                "spryker/silex": "*",
+                "spryker/testify": "*"
+            },
+            "suggest": {
+                "spryker/cart": "If you want to use Cart plugins.",
+                "spryker/checkout": "If you want to use Checkout plugins."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "ProductDiscontinued module",
+            "time": "2018-07-24T14:18:13+00:00"
+        },
+        {
+            "name": "spryker/product-discontinued-data-import",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/product-discontinued-data-import.git",
+                "reference": "b2ad5b2966211e0addbfda91e6c4ba0c5b2af69e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/product-discontinued-data-import/zipball/b2ad5b2966211e0addbfda91e6c4ba0c5b2af69e",
+                "reference": "b2ad5b2966211e0addbfda91e6c4ba0c5b2af69e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1",
+                "spryker/data-import": "^1.2.0",
+                "spryker/kernel": "^3.0.0",
+                "spryker/product": "^6.0.0",
+                "spryker/product-discontinued": "^1.0.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/testify": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/",
+                    "SprykerTest\\Zed\\ProductDiscontinuedDataImport\\Helper\\": "tests/SprykerTest/Zed/ProductDiscontinuedDataImport/_support/Helper/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "ProductDiscontinuedDataImport module",
+            "time": "2018-07-24T08:04:43+00:00"
+        },
+        {
+            "name": "spryker/product-discontinued-extension",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/product-discontinued-extension.git",
+                "reference": "016710297d3606a869e2410635a12fa1c7d82892"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/product-discontinued-extension/zipball/016710297d3606a869e2410635a12fa1c7d82892",
+                "reference": "016710297d3606a869e2410635a12fa1c7d82892",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/testify": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "ProductDiscontinuedExtension module",
+            "time": "2018-07-24T08:04:43+00:00"
+        },
+        {
+            "name": "spryker/product-discontinued-gui",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/product-discontinued-gui.git",
+                "reference": "7539accd4e9535c35c4dcaa63d71d634ccf2adee"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/product-discontinued-gui/zipball/7539accd4e9535c35c4dcaa63d71d634ccf2adee",
+                "reference": "7539accd4e9535c35c4dcaa63d71d634ccf2adee",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1",
+                "spryker/kernel": "^3.0.0",
+                "spryker/locale": "^3.0.0",
+                "spryker/product-discontinued": "^1.0.0",
+                "spryker/product-management-extension": "^1.1.0",
+                "spryker/symfony": "^3.0.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/testify": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "ProductDiscontinuedGui module",
+            "time": "2018-08-13T10:09:37+00:00"
+        },
+        {
+            "name": "spryker/product-discontinued-product-bundle-connector",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/product-discontinued-product-bundle-connector.git",
+                "reference": "af8aedf55a549eba883d82aeb1a7dd74edca1c6a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/product-discontinued-product-bundle-connector/zipball/af8aedf55a549eba883d82aeb1a7dd74edca1c6a",
+                "reference": "af8aedf55a549eba883d82aeb1a7dd74edca1c6a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1",
+                "spryker/kernel": "^3.0.0",
+                "spryker/product-bundle": "^2.0.0 || ^3.0.0 || ^4.0.0",
+                "spryker/product-discontinued": "^1.0.0",
+                "spryker/product-discontinued-extension": "^1.0.0",
+                "spryker/propel-orm": "^1.1.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "ProductDiscontinuedProductBundleConnector module",
+            "time": "2018-07-24T08:04:43+00:00"
+        },
+        {
+            "name": "spryker/product-discontinued-product-label-connector",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/product-discontinued-product-label-connector.git",
+                "reference": "5a64c97b29d68a8d81653c30a576463ff4f7d91e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/product-discontinued-product-label-connector/zipball/5a64c97b29d68a8d81653c30a576463ff4f7d91e",
+                "reference": "5a64c97b29d68a8d81653c30a576463ff4f7d91e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1",
+                "spryker/kernel": "^3.0.0",
+                "spryker/locale": "^3.0.0",
+                "spryker/product": "^6.2.0",
+                "spryker/product-discontinued": "^1.0.0",
+                "spryker/product-discontinued-extension": "^1.0.0",
+                "spryker/product-label": "^2.5.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/installer": "*",
+                "spryker/testify": "*"
+            },
+            "suggest": {
+                "spryker/installer": "If you want to use Installer plugins."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/",
+                    "SprykerTest\\Zed\\ProductDiscontinuedProductLabelConnector\\Helper\\": "tests/SprykerTest/Zed/ProductDiscontinuedProductLabelConnector/_support/Helper/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "ProductDiscontinuedProductLabelConnector module",
+            "time": "2018-07-24T21:54:48+00:00"
+        },
+        {
+            "name": "spryker/product-discontinued-storage",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/product-discontinued-storage.git",
+                "reference": "057d5fb26f14d2eedc00fae622fc340ade8f9dc3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/product-discontinued-storage/zipball/057d5fb26f14d2eedc00fae622fc340ade8f9dc3",
+                "reference": "057d5fb26f14d2eedc00fae622fc340ade8f9dc3",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1",
+                "spryker/event-behavior": "^1.0.0",
+                "spryker/glossary-storage": "^1.0.0",
+                "spryker/kernel": "^3.21.0",
+                "spryker/locale": "^3.0.0",
+                "spryker/product-alternative-storage-extension": "^1.0.0",
+                "spryker/product-discontinued": "^1.0.0",
+                "spryker/storage": "^3.4.0",
+                "spryker/synchronization": "^1.0.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/config": "*",
+                "spryker/event": "*",
+                "spryker/product": "*",
+                "spryker/product-storage": "*",
+                "spryker/propel": "*",
+                "spryker/propel-orm": "*",
+                "spryker/propel-query-builder": "*",
+                "spryker/testify": "*"
+            },
+            "suggest": {
+                "spryker/event": "If you want to use Event plugins, minimum required version: 2.1.0",
+                "spryker/product-storage": "If you want to use ProductStorage plugins, minimum required version: 0.1.0",
+                "spryker/propel-orm": "If you want to use transaction functionality, minimum required version: 1.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "ProductDiscontinuedStorage module",
+            "time": "2018-09-24T00:29:06+00:00"
         },
         {
             "name": "spryker/product-discount-connector",
