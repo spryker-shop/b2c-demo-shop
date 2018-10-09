@@ -18,7 +18,7 @@ class PersistentCartDependencyProvider extends SprykerPersistentCartDependencyPr
      */
     protected function getQuoteItemFinderPlugin(): QuoteItemFinderPluginInterface
     {
-        return new BundleProductQuoteItemFinderPlugin();
+        return new BundleProductQuoteItemFinderPlugin(); #ProductBundleFeature
     }
 
     /**
@@ -27,7 +27,7 @@ class PersistentCartDependencyProvider extends SprykerPersistentCartDependencyPr
     protected function getRemoveItemsRequestExpanderPlugins(): array
     {
         return [
-            new RemoveBundleChangeRequestExpanderPlugin(),
+            new RemoveBundleChangeRequestExpanderPlugin(), #ProductBundleFeature
         ];
     }
 }
