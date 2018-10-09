@@ -6,7 +6,7 @@ export default class CustomSelect extends Component {
 
     protected readyCallback(): void {
         const select2 = select;
-        const targetSelect = this.querySelector(`.js-${this.name}`);
+        const targetSelect = this.querySelector(`.${this.jsName}`);
         if(document.body.classList.contains('no-touch')) {
             $(targetSelect).select2({
                 minimumResultsForSearch: Infinity
