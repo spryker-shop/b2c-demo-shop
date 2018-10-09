@@ -1,0 +1,87 @@
+{% extends template('page-layout-main') %}
+
+{% define data = {
+    cart: _view.cart,
+    cartItems: _view.cartItems,
+    isQuoteValid: _view.isQuoteValid,
+    attributes: _view.attributes,
+    request: app.request,
+
+    title: 'cart.cart' | trans
+} %}
+
+{% block breadcrumbs %}
+    {{ widget('CheckoutBreadcrumbWidgetPlugin', data.cart) }}
+{% endblock %}
+
+{% block title %}
+    {% if widgetExists('CartOperationsWidgetPlugin') %}
+        {{ widgetBlock('CartOperationsWidgetPlugin', 'title', data.cart) }}
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    {% set canEditCart = can('WriteSharedCartPermissionPlugin', data.cart.idQuote) %}
+    {% if data.cart.items is empty %}
+        <div class="box text-center">
+            {% include atom('icon') with {
+                modifiers: ['biggest'],
+                class: 'text-alt',
+                data: {
+                    name: 'shopping-cart'
+                }
+            } only %}
+            <h6>{{ 'cart.empty' | trans }}</h6>
+        </div>
+    {% else %}
+        <div class="grid">
+            <div class="col col--sm-12 col--xl-8">
+                {% for cartItem in data.cartItems %}
+                    {% include molecule('cart-item', 'CartPage') with {
+                        class: 'box',
+                        data: {
+                            cart: data.cart,
+                            cartItem: cartItem,
+                            attributes: data.attributes[cartItem.sku] | default([])
+                        }
+                    } only %}
+                {% endfor %}
+
+                {{ widget('DiscountPromotionItemListWidgetPlugin', data.cart, data.request) }}
+
+                {% if canEditCart and data.cart.idQuote is not empty %}
+                    {{ widgetBlock('CartOperationsWidgetPlugin', 'actions', data.cart) }}
+                {% endif %}
+            </div>
+
+            <div class="col col--sm-12 col--xl-4">
+                <div class="box">
+                    {{ widget('CartNoteQuoteWidgetPlugin', data.cart) }}
+
+                    {% if not is_granted('ROLE_USER') or canEditCart %}
+                        {{ widget('DiscountVoucherFormWidgetPlugin') }}
+                        <hr />
+                    {% endif %}
+
+                    {% if canEditCart and data.cart.idQuote is not empty and widgetExists('CartToShoppingListWidgetPlugin') %}
+                        {{ widget('CartToShoppingListWidgetPlugin', data.cart.idQuote) }}
+                        <hr />
+                    {% endif %}
+
+                    {% include molecule('cart-summary', 'CartPage') with {
+                        data: {
+                            cart: data.cart,
+                            isQuoteValid: data.isQuoteValid
+                        }
+                    } only %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    {{ widget('UpSellingProductsWidgetPlugin', data.cart) }}
+{% endblock %}
+
+{% block footer %}{% endblock %}

@@ -77,8 +77,6 @@ class SynchronizationDependencyProvider extends SprykerSynchronizationDependency
             new ProductConcreteImageSynchronizationDataPlugin(),
             new ProductAbstractLabelSynchronizationDataPlugin(),
             new ProductLabelDictionarySynchronizationDataPlugin(),
-            new ProductMeasurementUnitSynchronizationDataPlugin(),
-            new ProductConcreteMeasurementUnitSynchronizationDataPlugin(),
             new ProductQuantitySynchronizationDataPlugin(),
             new ProductOptionSynchronizationDataPlugin(),
             new ProductRelationSynchronizationDataPlugin(),
@@ -89,8 +87,6 @@ class SynchronizationDependencyProvider extends SprykerSynchronizationDependency
             new ProductAbstractSynchronizationDataPlugin(),
             new UrlRedirectSynchronizationDataPlugin(),
             new UrlSynchronizationDataPlugin(),
-            new ProductPackagingUnitSynchronizationDataPlugin(),
-            new ShoppingListSynchronizationDataPlugin(),
         ];
     }
 }
