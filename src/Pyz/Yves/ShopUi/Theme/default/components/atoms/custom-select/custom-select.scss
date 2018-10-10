@@ -54,11 +54,13 @@
         .select2-dropdown--above {
             margin-top: -12px;
 
-            .select2-results::before {
-                bottom: auto;
-                top: 100%;
-                border-bottom-color: transparent;
-                border-top-color: $setting-color-bg;
+            .select2-results {
+                &::before {
+                    bottom: auto;
+                    top: 100%;
+                    border-bottom-color: transparent;
+                    border-top-color: $setting-color-bg;
+                }
             }
         }
     }
@@ -73,6 +75,7 @@
             width: calc(100% + 48px);
             transform: translateX(-48px);
             position: relative;
+
             &::before {
                 content: '';
                 position: absolute;
@@ -95,6 +98,7 @@
 
         .select2-results__option[aria-selected=true] {
             position: relative;
+
             &::before {
                 content: '';
                 position: absolute;
@@ -117,6 +121,5 @@
         white-space: nowrap;
     }
 }
-
 
 @include shop-ui-custom-select();
