@@ -1,0 +1,19 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'image-gallery-thumbnail'
+} %}
+
+{% define data = {
+    images: []
+} %}
+
+{% block body %}
+    {% for image in data.images %}
+        <div class="{{config.name}}__item">
+            {% if image.externalUrlLarge is not empty %}
+                <img class="{{config.name}}__img" src="{{ image.externalUrlLarge }}" alt="">
+            {% endif %}
+        </div>
+    {% endfor %}
+{% endblock %}

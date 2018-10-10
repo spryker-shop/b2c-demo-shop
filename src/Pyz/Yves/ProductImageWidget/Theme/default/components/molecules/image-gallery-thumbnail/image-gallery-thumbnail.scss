@@ -1,0 +1,142 @@
+@mixin product-image-widget-image-gallery-thumbnail($name: '.image-gallery-thumbnail'){
+    #{$name}{
+        position: absolute;
+        top: 50%;
+        left: 30px;
+        transform: translateY(-50%);
+        z-index: $setting-zi-element + 1;
+        width: 36px;
+        max-height: 315px;
+        overflow: hidden;
+
+        &__item {
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            padding: 1px;
+            border: solid 1px $setting-color-lightest;
+            background: $setting-color-white;
+            position: relative;
+            margin: 8px 0;
+            cursor: pointer;
+
+            &::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: $setting-color-alpha-1;
+                z-index: 350;
+            }
+
+            @include helper-breakpoint-media-max($md-max) {
+                height: 280px;
+                background-color: $setting-color-white;
+                margin: 0;
+                cursor: default;
+            }
+        }
+
+        &__img {
+            opacity: 0.25;
+
+            @include helper-breakpoint-media-max($md-max) {
+                max-height: 250px;
+            }
+        }
+
+        &__prev,
+        &__next {
+            padding: 0 0 10px;
+            text-align: center;
+            cursor: pointer;
+            display: block;
+        }
+
+        &__prev {
+            padding: 10px 0 0;
+        }
+
+        .slick-slide {
+            border: none;
+            height: 52px;
+        }
+
+        .slick-current {
+            #{$name}__item {
+                padding: 0;
+                border: solid 2px $setting-color-white;
+                @include helper-breakpoint-media-max($md-max) {
+                    border: none;
+                }
+            }
+            #{$name}__img {
+                opacity: 1;
+            }
+        }
+
+        .slick-disabled {
+            cursor: default;
+            pointer-events: none;
+
+            .icon {
+                color: $setting-color-lighter;
+            }
+        }
+
+        @include helper-breakpoint-media-max($xl-max) {
+            left: 10px;
+        }
+
+        @include helper-breakpoint-media-max($md-max) {
+            position: relative;
+            top: 0;
+            left: 0;
+            transform: translateY(0);
+            width: 100%;
+            max-height: none;
+            overflow: visible;
+
+            &:not(.slick-initialized) {
+                display: flex !important;
+            }
+            .slick-slide {
+                border: none;
+                height: auto;
+            }
+
+            .slick-dots {
+                position: absolute;
+                bottom: -32px;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                li {
+                    margin: 0 4px;
+                    font: 0/0 $setting-font-family;
+                    border: solid 1px transparent;
+                    padding: 1px;
+                    border-radius: 100%;
+                }
+                button {
+                    width: 4px;
+                    height: 4px;
+                    font: 0/0 $setting-font-family;
+                    border-radius: 100%;
+                    background: $setting-color-lightest;
+                }
+                .slick-active {
+                    border-color: $setting-color-alt;
+                    button {
+                        background: transparent;
+                    }
+                }
+            }
+        }
+    }
+}
+@include product-image-widget-image-gallery-thumbnail();
