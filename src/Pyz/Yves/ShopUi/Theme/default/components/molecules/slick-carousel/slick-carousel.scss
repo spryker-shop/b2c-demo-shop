@@ -2,40 +2,46 @@
     #{$name} {
         &__container {
             position: relative;
-            @include helper-breakpoint-media-max($sm-max){
+
+            @include helper-breakpoint-media-max($sm-max) {
                 padding: 0 11px;
             }
+
             .slick-arrow {
                 position: absolute;
                 top: 165px;
                 font-size: 0;
                 width: 30px;
                 height: 30px;
-                background: url("/assets/images/right-chevron.svg") center center no-repeat;
-                background-size: 15px;
+                background: url("/assets/images/right-chevron.svg")no-repeat center / 15px;
                 border-radius: 50%;
                 z-index: 100;
-                opacity: .7;
-                @include helper-breakpoint-media-max($sm-max){
+                opacity: 0.7;
+
+                @include helper-breakpoint-media-max($sm-max) {
                     top: 125px;
                 }
+
                 &:hover {
                     background-color: $setting-color-white;
-                    //box-shadow: 10px 10px 40px 0px rgba(0,0,0,.1);
                     opacity: 1;
                     cursor: pointer;
                 }
             }
+
             .slick-prev {
                 left: 20px;
                 transform: rotate(180deg);
-                @include helper-breakpoint-media-max($sm-max){
+
+                @include helper-breakpoint-media-max($sm-max) {
                     left: 15px;
                 }
             }
+
             .slick-next {
                 right: 20px;
-                @include helper-breakpoint-media-max($sm-max){
+
+                @include helper-breakpoint-media-max($sm-max) {
                     right: 15px;
                 }
             }
