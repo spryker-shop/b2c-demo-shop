@@ -1,8 +1,6 @@
 @mixin range-slider($name: '.range-slider') {
     $width-handle: 24px;
     $width-slider-line: calc(100% + 24px);
-    $range-slider-color-gray: #444;
-    $range-slider-color-dark-white: #e6f7f8;
 
     #{$name} {
         display: flex;
@@ -15,7 +13,7 @@
 
         &__values {
             position: relative;
-            z-index: 1;
+            z-index: $setting-zi-element;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -37,7 +35,7 @@
 
         .noUi-base {
             position: relative;
-            z-index: 2;
+            z-index: $setting-zi-element + 1;
             padding: 11px 0 12px;
             box-sizing: border-box;
             cursor: pointer;
@@ -51,7 +49,7 @@
         }
 
         .noUi-connect {
-            background-color: $range-slider-color-gray;
+            background-color: $setting-color-gray-2;
         }
 
         .noUi-handle {
@@ -60,7 +58,7 @@
             height: 24px;
             border-radius: 12px;
             box-shadow: none;
-            border-color: $range-slider-color-gray;
+            border-color: $setting-color-gray-2;
 
             &::before,
             &::after {
@@ -69,7 +67,7 @@
 
             &:hover {
                 border-color: $setting-color-main;
-                background-color: $range-slider-color-dark-white;
+                background-color: $setting-color-white-1;
                 cursor: pointer;
                 transform: scale(1.25);
             }
