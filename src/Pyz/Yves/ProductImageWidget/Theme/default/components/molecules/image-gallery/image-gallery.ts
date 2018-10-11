@@ -3,9 +3,9 @@ import $ from 'jquery/dist/jquery';
 import 'slick-carousel';
 
 export default class ImageGallery extends Component {
-    readonly galleryItems: HTMLElement[]
-    readonly quantityImages: number
-    readonly thumbnailSlider: $
+    readonly galleryItems: HTMLElement[];
+    readonly quantityImages: number;
+    readonly thumbnailSlider: $;
 
 
     constructor() {
@@ -34,11 +34,11 @@ export default class ImageGallery extends Component {
     }
 
     protected onThumbnailHover(event: Event): void {
-        let slide = $(event.currentTarget),
-            index = slide.data('slick-index');
-        if(!slide.hasClass('slick-current')) {
+        let slide = <HTMLElement> event.currentTarget,
+            index = Number(slide.dataset.slickIndex);
+        if(!slide.classList.contains('slick-current')) {
             this.thumbnailSlider.find('.slick-slide').removeClass('slick-current');
-            slide.addClass('slick-current');
+            slide.classList.add('slick-current');
             this.changeImage(index);
         }
     }

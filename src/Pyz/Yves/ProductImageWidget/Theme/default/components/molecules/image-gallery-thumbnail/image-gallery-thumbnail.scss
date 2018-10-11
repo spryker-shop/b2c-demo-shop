@@ -2,24 +2,24 @@
     #{$name}{
         position: absolute;
         top: 50%;
-        left: 30px;
+        left: rem(30);
         transform: translateY(-50%);
         z-index: $setting-zi-element + 1;
-        width: 36px;
-        max-height: 315px;
+        width: rem(36);
+        max-height: rem(315);
         overflow: hidden;
 
         &__item {
             display: flex !important;
             align-items: center;
             justify-content: center;
-            width: 36px;
-            height: 36px;
-            padding: 1px;
+            width: rem(36);
+            height: rem(36);
+            padding: rem(1);
             border: solid 1px $setting-color-lightest;
             background: $setting-color-white;
             position: relative;
-            margin: 8px 0;
+            margin: rem(8) 0;
             cursor: pointer;
 
             &::before {
@@ -30,11 +30,11 @@
                 right: 0;
                 bottom: 0;
                 background: $setting-color-alpha-1;
-                z-index: 350;
+                z-index: $setting-zi-element-floating;
             }
 
             @include helper-breakpoint-media-max($md-max) {
-                height: 280px;
+                height: rem(280);
                 background-color: $setting-color-white;
                 margin: 0;
                 cursor: default;
@@ -45,28 +45,29 @@
             opacity: 0.25;
 
             @include helper-breakpoint-media-max($md-max) {
-                max-height: 250px;
+                max-height: rem(250);
             }
         }
 
         &__prev,
         &__next {
-            padding: 0 0 10px;
+            padding: 0 0 rem(10);
             text-align: center;
             cursor: pointer;
             display: block;
         }
 
         &__prev {
-            padding: 10px 0 0;
+            padding: rem(10) 0 0;
         }
 
         .slick-slide {
             border: none;
-            height: 52px;
+            height: rem(52);
         }
 
         .slick-current {
+
             #{$name}__item {
                 padding: 0;
                 border: solid 2px $setting-color-white;
@@ -74,6 +75,7 @@
                     border: none;
                 }
             }
+
             #{$name}__img {
                 opacity: 1;
             }
@@ -89,7 +91,7 @@
         }
 
         @include helper-breakpoint-media-max($xl-max) {
-            left: 10px;
+            left: rem(10);
         }
 
         @include helper-breakpoint-media-max($md-max) {
@@ -104,6 +106,7 @@
             &:not(.slick-initialized) {
                 display: flex !important;
             }
+
             .slick-slide {
                 border: none;
                 height: auto;
@@ -111,24 +114,27 @@
 
             .slick-dots {
                 position: absolute;
-                bottom: -32px;
+                bottom: rem(-32);
                 width: 100%;
                 display: flex;
                 justify-content: center;
+
                 li {
-                    margin: 0 4px;
+                    margin: 0 rem(4);
                     font: 0/0 $setting-font-family;
                     border: solid 1px transparent;
-                    padding: 1px;
+                    padding: rem(1);
                     border-radius: 100%;
                 }
+
                 button {
-                    width: 4px;
-                    height: 4px;
+                    width: rem(4);
+                    height: rem(4);
                     font: 0/0 $setting-font-family;
                     border-radius: 100%;
                     background: $setting-color-lightest;
                 }
+
                 .slick-active {
                     border-color: $setting-color-alt;
                     button {
@@ -139,4 +145,5 @@
         }
     }
 }
+
 @include product-image-widget-image-gallery-thumbnail();
