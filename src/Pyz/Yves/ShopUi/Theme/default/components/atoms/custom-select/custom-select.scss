@@ -5,7 +5,7 @@
     @include shop-ui-select($name) {
 
         .select2-selection--single {
-            padding: 4px 5px;
+            padding: rem(4) rem(5);
             border: none;
             background: none;
             border-radius: 0;
@@ -13,7 +13,7 @@
 
             .select2-selection__rendered {
                 color: $setting-color-darkest;
-                line-height: 16px;
+                line-height: rem(16);
             }
 
             .select2-selection__arrow {
@@ -43,16 +43,16 @@
             border: none;
             border-radius: 0;
             background: none;
-            margin: 12px 0;
+            margin: rem(12) 0;
             text-align: left;
         }
 
         .select2-dropdown--below {
-            margin-top: 12px;
+            margin-top: rem(12);
         }
 
         .select2-dropdown--above {
-            margin-top: -12px;
+            margin-top: rem(-12);
 
             .select2-results {
                 &::before {
@@ -68,25 +68,25 @@
     .select2-container--default {
 
         .select2-results {
-            padding: 12px 0;
-            border-radius: 4px;
+            padding: rem(12) 0;
+            border-radius: rem(4);
             background-color: $setting-color-bg;
-            box-shadow: 10px 10px 26px 0 rgba(0, 0, 0, 0.08), 0 0 30px 0 rgba(0, 0, 0, 0.08);
-            width: calc(100% + 48px);
-            transform: translateX(-48px);
+            box-shadow: rem(10) rem(10) rem(26) 0 rgba(0, 0, 0, 0.08), 0 0 rem(30) 0 rgba(0, 0, 0, 0.08);
+            width: calc(100% + rem(48));
+            transform: translateX(rem(-48));
             position: relative;
 
             &::before {
                 content: '';
                 position: absolute;
                 bottom: 100%;
-                right: 23px;
-                border: 6px solid transparent;
+                right: rem(23);
+                border: rem(6) solid transparent;
                 border-bottom-color: $setting-color-bg;
             }
 
             & > .select2-results__options {
-                max-height: 250px;
+                max-height: rem(250);
             }
         }
 
@@ -103,10 +103,10 @@
                 content: '';
                 position: absolute;
                 top: 50%;
-                right: 23px;
-                width: 12px;
-                height: 12px;
-                margin-top: -6px;
+                right: rem(23);
+                width: rem(12);
+                height: rem(12);
+                margin-top: rem(-6);
                 background: url('/assets/images/icon-chosen.svg') no-repeat 0 0;
             }
         }
@@ -114,10 +114,10 @@
 
     .select2-results__option {
         color: $setting-color-darker;
-        font-size: 17px;
+        font-size: rem(17);
         font-weight: 300;
-        line-height: 26px;
-        padding: 6px 24px;
+        line-height: rem(26);
+        padding: rem(6) rem(24);
         white-space: nowrap;
     }
 }

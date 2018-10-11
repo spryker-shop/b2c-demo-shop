@@ -4,7 +4,7 @@
     width: $size;
     height: $size;
     line-height: $size;
-    font-size: $size * 0.66;
+    font-size: (0.66 * $size);
     position: absolute;
     display: block;
     text-align: center;
@@ -17,7 +17,7 @@
         position: relative;
 
         &__quantity {
-            @include cart-bubble(18px, -12px);
+            @include cart-bubble(rem(18), rem(-12));
             background: $setting-color-alt;
             color: $setting-color-white;
         }

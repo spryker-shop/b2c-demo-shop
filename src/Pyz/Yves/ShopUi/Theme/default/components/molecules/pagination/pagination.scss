@@ -2,9 +2,9 @@
     #{$name} {
 
         ul {
-            border-top: dotted 1px $setting-color-lightest;
-            border-bottom: dotted 1px $setting-color-lightest;
-            margin-bottom: 50px;
+            border-top: dotted rem(1) $setting-color-lightest;
+            border-bottom: dotted rem(1) $setting-color-lightest;
+            margin-bottom: rem(50);
         }
 
         &__item {
@@ -21,9 +21,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 68px;
-            height: 68px;
-            font: 400 18px/68px $setting-font-family-additional;
+            width: rem(68);
+            height: rem(68);
+            font: 400 rem(18)/rem(68) $setting-font-family-additional;
             text-align: center;
             color: $setting-color-dark;
 
@@ -56,22 +56,22 @@
             }
 
             @include helper-breakpoint-media-max($lg-max) {
-                width: 44px;
-                height: 54px;
-                font-size: 15px;
-                line-height: 54px;
+                width: rem(44);
+                height: rem(54);
+                font-size: rem(15);
+                line-height: rem(54);
             }
         }
 
         .icon {
-            width: 12px;
-            height: 12px;
+            width: rem(12);
+            height: rem(12);
             svg {
                 fill: $setting-color-dark;
             }
             @include helper-breakpoint-media-max($lg-max) {
-                width: 11px;
-                height: 11px;
+                width: rem(11);
+                height: rem(11);
             }
         }
     }

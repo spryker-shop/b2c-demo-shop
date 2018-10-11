@@ -5,24 +5,24 @@
             position: relative;
             width: 55.57%;
             @include helper-breakpoint-media-max($xl-max) {
-                width: calc(55% + 16px);
-                margin-left: -16px;
+                width: calc(55% + rem(16));
+                margin-left: rem(-16);
             }
             @include helper-breakpoint-media-max($md-max) {
-                margin: 0 -16px 74px;
-                width: calc(100% + 32px);
+                margin: 0 rem(-16) rem(74);
+                width: calc(100% + rem(32));
             }
         }
 
         &-right {
             width: 44.43%;
-            padding: 40px 0 0 90px;
+            padding: rem(40) 0 0 rem(90);
             @include helper-breakpoint-media-max($xl-max) {
-                padding: 40px 0 0 50px;
+                padding: rem(40) 0 0 rem(50);
                 width: 45%;
             }
             @include helper-breakpoint-media-max($lg-max) {
-                padding: 40px 0 0 30px;
+                padding: rem(40) 0 0 rem(30);
             }
             @include helper-breakpoint-media-max($md-max) {
                 padding: 0;
@@ -31,18 +31,18 @@
         }
 
         &-cms-block {
-            font-size: 14px;
-            line-height: 21px;
+            font-size: rem(14);
+            line-height: rem(21);
             color: $setting-color-dark;
             h1 {
-                font: 500 15px/1.33 $setting-font-family-additional;
-                padding: 50px 0 11px;
-                border-top: dotted 1px $setting-color-lightest;
+                font: 500 rem(15)/1.33 $setting-font-family-additional;
+                padding: rem(50) 0 rem(11);
+                border-top: dotted rem(1) $setting-color-lightest;
             }
             p {
-                margin: 0 0 11px;
+                margin: 0 0 rem(11);
                 &:last-child {
-                    margin-bottom: 50px;
+                    margin-bottom: rem(50);
                 }
             }
             a {
@@ -59,7 +59,7 @@
     }
 
     .product-slider-container {
-        margin: 0 -1rem;
+        margin: 0 rem(-16);
     }
 }
 

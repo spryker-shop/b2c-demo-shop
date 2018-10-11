@@ -15,44 +15,44 @@
 
         .grid {
             flex-direction: column;
-            margin: 0 1rem;
-            padding: 20px 0;
-            min-height: 9rem;
+            margin: 0 rem(16);
+            padding: rem(20) 0;
+            min-height: rem(144);
             @include helper-breakpoint(md) {
-                min-height: 16rem;
+                min-height: rem(256);
             }
             @include helper-breakpoint(xl) {
-                min-height: 18.125rem;
+                min-height: rem(290);
             }
         }
 
         .jumbotron__headline {
-            font-size: 3.125rem;
+            font-size: rem(59);
             font-weight: 500;
             @include helper-breakpoint-media-max($lg-max) {
-                font-size: 2rem;
+                font-size: rem(32);
             }
             @include helper-breakpoint-media-max($md-max) {
-                font-size: 1.5rem;
+                font-size: rem(24);
             }
         }
 
         .jumbotron__sub-headline {
-            font: 500 13px $setting-font-family;
+            font: 500 rem(13) $setting-font-family;
             text-transform: uppercase;
-            letter-spacing: 2.6px;
+            letter-spacing: rem(2.6);
             color: $setting-color-darker;
         }
 
         &-no-img {
             .grid {
-                border-bottom: solid 1px $setting-color-lightest;
-                min-height: 7.56rem;
+                border-bottom: solid rem(1) $setting-color-lightest;
+                min-height: rem(121);
                 @include helper-breakpoint(md) {
-                    min-height: 11rem;
+                    min-height: rem(176);
                 }
                 @include helper-breakpoint(xl) {
-                    min-height: 15rem;
+                    min-height: rem(240);
                 }
             }
             .jumbotron__headline,

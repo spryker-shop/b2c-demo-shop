@@ -7,61 +7,61 @@
 
             .menu {
                 position: absolute;
-                width: calc(100vw - 16px);
+                width: calc(100vw - rem(16));
                 left: 50%;
                 transform: translate(-50%, 0);
-                padding: 40px 16px 28px;
+                padding: rem(40) rem(16) rem(28);
                 margin: 0;
-                height: 381px;
-                border-bottom: 1px solid #ebebeb;
+                height: rem(381);
+                border-bottom: rem(1) solid #ebebeb;
 
                 &::before {
                     position: absolute;
                     display: block;
                     content: '';
-                    width: calc(100vw - 26px);
+                    width: calc(100vw - rem(26));
                     left: 50%;
                     top: 0;
                     transform: translate(-50%, 0);
-                    padding: 40px 16px 28px;
+                    padding: rem(40) rem(16) rem(28);
                     margin: 0;
                     height: 100%;
-                    box-shadow: 100px 0 0 0 $setting-color-white, -100px 0 0 0 $setting-color-white;
+                    box-shadow: rem(100) 0 0 0 $setting-color-white, rem(-100) 0 0 0 $setting-color-white;
                 }
             }
 
             .flyout-fullscreen__container {
                 margin: 0 auto;
-                width: 850px;
+                width: rem(850);
                 position: relative;
                 height: 100%;
 
                 @include helper-breakpoint-media-max($lg-max) {
-                    width: 745px;
+                    width: rem(745);
                 }
 
                 &::before {
                     content: '';
                     position: absolute;
                     display: block;
-                    width: 1px;
+                    width: rem(1);
                     height: 100%;
-                    border-left: 1px dotted $setting-color-lightest;
+                    border-left: rem(1) dotted $setting-color-lightest;
                     top: 0;
-                    left: 280px;
+                    left: rem(280);
 
                     @include helper-breakpoint-media-max($lg-max) {
-                        left: 240px;
+                        left: rem(240);
                     }
                 }
 
                 .menu__item {
-                    max-width: 340px;
+                    max-width: rem(340);
 
                     a {
-                        font-size: 18px;
+                        font-size: rem(18);
                         color: $setting-color-dark;
-                        letter-spacing: 0.2px;
+                        letter-spacing: rem(0.2);
                         line-height: 1.94;
 
                         &:hover {
@@ -72,21 +72,21 @@
 
                 .node-image {
                     position: absolute;
-                    height: 300px;
-                    width: 250px;
+                    height: rem(300);
+                    width: rem(250);
                     top: 0;
-                    right: 280px;
+                    right: rem(280);
                     margin: 0;
 
                     background-position: center;
                     background-repeat: no-repeat;
-                    background-size: 250px 270px;
+                    background-size: rem(250) rem(270);
 
                     @include helper-breakpoint-media-max($lg-max) {
-                        width: 220px;
-                        height: 237px;
-                        right: 250px;
-                        background-size: 220px 237px;
+                        width: rem(220);
+                        height: rem(237);
+                        right: rem(250);
+                        background-size: rem(220) rem(237);
                     }
 
                     &:last-of-type {
@@ -101,8 +101,8 @@
                         height: 100%;
                         display: block;
                         text-align: center;
-                        padding-top: 280px;
-                        font-size: 17px;
+                        padding-top: rem(280);
+                        font-size: rem(17);
                     }
 
                     &.image-1 {
@@ -135,25 +135,25 @@
         .brand-dropdown {
             .menu {
                 height: unset;
-                padding: 40px 0 28px;
+                padding: rem(40) 0 rem(28);
 
                 @include helper-breakpoint-media-max($lg-max) {
-                    padding: 40px 0.5rem 28px;
+                    padding: rem(40) rem(8) rem(28);
                 }
             }
 
             .flyout-fullscreen__container {
                 display: flex;
                 justify-content: space-between;
-                max-width: 1210px;
+                max-width: rem(1210);
                 width: 100%;
 
                 @include helper-breakpoint-media-max($xl-max) {
-                    max-width: 930px;
+                    max-width: rem(930);
                 }
 
                 @include helper-breakpoint-media-max($lg-max) {
-                    max-width: 730px;
+                    max-width: rem(730);
                 }
 
                 &::before {
@@ -163,17 +163,17 @@
 
             .brand-item {
                 height: 100%;
-                width: 270px;
-                margin: 0 1rem;
+                width: rem(270);
+                margin: 0 rem(16);
 
                 @include helper-breakpoint-media-max($xl-max) {
-                    width: 216px;
-                    margin: 0 0.5rem;
+                    width: rem(216);
+                    margin: 0 rem(8);
                     background-size: contain;
                 }
 
                 @include helper-breakpoint-media-max($lg-max) {
-                    width: 162px;
+                    width: rem(162);
                 }
 
                 a {
@@ -184,22 +184,22 @@
                     &::before {
                         content: '';
                         display: block;
-                        width: 270px;
-                        height: 168px;
+                        width: rem(270);
+                        height: rem(168);
                         background-position: top center;
                         background-repeat: no-repeat;
                         background-size: contain;
-                        margin-bottom: 10px;
+                        margin-bottom: rem(10);
 
                         @include helper-breakpoint-media-max($xl-max) {
-                            width: 216px;
-                            height: 134px;
+                            width: rem(216);
+                            height: rem(134);
                             margin: 0 auto;
                         }
 
                         @include helper-breakpoint-media-max($lg-max) {
-                            width: 162px;
-                            height: 101px;
+                            width: rem(162);
+                            height: rem(101);
                         }
                     }
                 }
