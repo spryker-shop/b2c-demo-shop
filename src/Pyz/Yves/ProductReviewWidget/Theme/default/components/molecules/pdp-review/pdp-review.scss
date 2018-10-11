@@ -50,9 +50,9 @@
             td {
                 padding-bottom: 12px;
                 font: 300 14px/20px $setting-font-family;
-                color: #555;
+                color: $setting-color-emperor;
                 &:first-child {
-                    color: #111;
+                    color: $setting-color-darkest;
                     font-size: 16px;
                 }
             }
@@ -61,7 +61,7 @@
                 width: 103px;
                 height: 20px;
                 border-radius: 10px;
-                background-color: #f1f7fa;
+                background-color: $setting-color-black-squeeze;
                 box-shadow: 0.5px 0.5px 0.5px 0 rgba(0, 0, 0, 0.24);
                 overflow: hidden;
                 &__status {
@@ -69,7 +69,7 @@
                     border-radius: 10px;
                     width: 100%;
                     height: 20px;
-                    background-color: #ffbc00;
+                    background-color: $setting-color-selective-yellow;
                 }
             }
             @include helper-breakpoint-media-max($md-max) {
@@ -168,25 +168,25 @@
                 padding: 0 0 28px !important;
             }
             label {
-                color: #333;
-                &:after {
+                color: $setting-color-dark;
+                &::after {
                     display: none;
                 }
             }
-            input[type="text"],
+            input[type='text'],
             textarea {
                 font: 400 17px/1.29 $setting-font-family;
                 color: $setting-color-dark;
                 transition: background-color 0.4s;
                 padding: 10px 15px;
                 &:focus {
-                    border-color: #434545;
+                    border-color: $setting-color-tundora;
                 }
                 &:hover {
-                    background: #fafafa;
+                    background: $setting-color-alabaster;
                 }
             }
-            input[type="text"] {
+            input[type='text'] {
                 line-height: 22px;
                 padding: 12px 15px;
             }
@@ -240,7 +240,7 @@
             padding-bottom: 30px;
             .button {
                 width: 100%;
-                font: 400 14px "Circular", sans-serif;
+                font: 400 14px Circular, sans-serif;
                 padding: 14px;
             }
         }

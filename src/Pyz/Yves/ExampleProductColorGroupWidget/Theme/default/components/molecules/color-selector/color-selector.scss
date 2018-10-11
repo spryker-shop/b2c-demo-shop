@@ -1,6 +1,6 @@
 $color-selector-size: 16px;
 
-@mixin color-group-color-selector(){
+@mixin color-group-color-selector() {
     .color-selector,
     .color-selector-pdp {
         cursor: default;
@@ -13,15 +13,15 @@ $color-selector-size: 16px;
             vertical-align: middle;
             position: relative;
 
-            &:before {
-                content: "";
+            &::before {
+                content: '';
                 position: absolute;
                 left: 50%;
                 top: 50%;
                 transform: translate(-50%, -50%);
                 width: 18px;
                 height: 18px;
-                border: solid 4px #fff;
+                border: solid 4px $setting-color-white;
                 border-radius: 100%;
             }
 
@@ -36,19 +36,19 @@ $color-selector-size: 16px;
                 position: absolute;
                 top: -43px;
                 left: -15px;
-                background: #111;
-                color: #fff;
+                background: $setting-color-darkest;
+                color: $setting-color-white;
                 font: 300 16px $setting-font-family;
                 padding: 5px 11px 7px 10px;
                 white-space: nowrap;
                 border-radius: 2px;
-                &:before {
-                    content: "";
+                &::before {
+                    content: '';
                     position: absolute;
                     left: 17px;
                     bottom: -4px;
                     border-radius: 2px;
-                    background: #111111;
+                    background: $setting-color-darkest;
                     width: 10px;
                     height: 10px;
                     transform: rotate(45deg);
@@ -57,7 +57,7 @@ $color-selector-size: 16px;
 
             &:hover,
             &--active {
-                &:before {
+                &::before {
                     width: 14px;
                     height: 14px;
                     border-width: 2px;
@@ -70,6 +70,5 @@ $color-selector-size: 16px;
         }
     }
 }
-
 
 @include color-group-color-selector();

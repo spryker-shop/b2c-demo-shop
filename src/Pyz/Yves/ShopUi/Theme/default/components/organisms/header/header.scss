@@ -1,7 +1,7 @@
 @mixin shop-ui-header($name: '.header') {
     #{$name} {
         position: relative;
-        background-color: white;
+        background-color: $setting-color-white;
         padding-bottom: 0;
         z-index: $setting-zi-header;
         padding-top: 18px;
@@ -49,16 +49,15 @@
 
                 #{$name}__overlay-shadow {
                     visibility: visible;
-                    opacity: .4;
+                    opacity: 0.4;
                     transition: opacity 400ms ease-in-out, visibility 0ms ease-in-out;
                 }
                 #{$name}__search-overlay-container {
-                  transform: scaleY(1);
-                  opacity: 1;
-                  visibility: visible;
-                  transition: all 300ms ease-in-out;
+                    transform: scaleY(1);
+                    opacity: 1;
+                    visibility: visible;
+                    transition: all 300ms ease-in-out;
                 }
-
             }
         }
         &__search-overlay-container {
@@ -73,7 +72,6 @@
                 min-width: 300px;
                 width: 100vw;
             }
-
         }
         &__search-open {
             cursor: pointer;
@@ -82,7 +80,7 @@
                 margin-left: 10px;
                 vertical-align: bottom;
             }
-            &:before {
+            &::before {
                 content: '';
                 display: block;
                 width: 85px;

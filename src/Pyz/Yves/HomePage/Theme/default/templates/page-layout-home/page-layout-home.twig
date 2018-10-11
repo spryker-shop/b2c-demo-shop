@@ -7,15 +7,7 @@
         {% include organism('notification-area') only %}
     {% endblock %}
 
-    {% block sidebar %}
-        {#{% include organism('side-drawer') with {#}
-            {#class: 'is-hidden-lg-xl',#}
-            {#attributes: {#}
-                {#'container-selector': 'js-page-layout-main__side-drawer-container',#}
-                {#'trigger-selector': 'js-page-layout-main__side-drawer-trigger'#}
-            {#}#}
-        {#} only %}#}
-    {% endblock %}
+    {% block sidebar %}{% endblock %}
 
     {% block outside %}{% endblock %}
 
@@ -52,20 +44,9 @@
         {% endblock %}
     </div>
 
-
-        <main>
-            {% block content %}{% endblock %}
-        </main>
-
-
-
-    {#{% include molecule('quote-teaser') with {#}
-        {#data: {#}
-            {#imageUrl: '/assets/images/section-brand-a-bg@3x.png',#}
-            {#quoteText: "Perfection is achieved, not when there is nothing more to add, but when there is nothing left to take away.",#}
-            {#quoteAuth: 'ANTOINE DE SAINT-EXUPERY'#}
-        {#}#}
-    {#} only %}#}
+    <main>
+        {% block content %}{% endblock %}
+    </main>
 
     {% block footer %}
         {% include organism('footer') only %}
