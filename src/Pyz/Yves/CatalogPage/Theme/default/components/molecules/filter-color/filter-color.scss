@@ -1,94 +1,132 @@
 @mixin filter-color($name: '.filter-color') {
+    $filter-color-white:    #f2f2f2;
+    $filter-color-black:    #000000;
+    $filter-color-gray:     #dcdcdc;
+    $filter-color-silver:   #d3d3d3;
+    $filter-color-blue:     #6281d8;
+    $filter-color-yellow:   #ffff00;
+    $filter-color-purple:   #9370db;
+    $filter-color-pink:     #ff69b4;
+    $filter-color-platinum: #e5e4e2;
+    $filter-color-copper:   #da8a67;
+    $filter-color-organge:  #ff4500;
+    $filter-color-gold:     #c5b358;
+    $filter-color-navy:     #00004e;
+    $filter-color-green:    #006400;
+    $filter-color-red:      #dc2e09;
+    $filter-color-brown:    #835c3b;
+
     #{$name} {
         &-list {
             display: flex;
             flex-wrap: wrap;
             padding-bottom: 30px;
         }
+
         &-list__item {
             &:not(:last-child) {
                 margin-right: 6px;
             }
         }
+
         &-list__color {
             &:hover {
                 .checkbox__label {
                     transform: scale(1);
                 }
             }
+
             .checkbox__container {
                 position: relative;
                 width: 20px;
                 height: 20px;
                 border-radius: 100%;
                 cursor: pointer;
+
                 &.White,
                 &.Weiß {
-                    background-color: #f2f2f2;
+                    background-color: $filter-color-white;
                 }
+
                 &.Dark,
                 &.Black,
                 &.Schwarz {
-                    background-color: #000000;
+                    background-color: $filter-color-black;
                 }
+
                 &.Grey,
                 &.Grau {
-                    background-color: #dcdcdc;
+                    background-color: $filter-color-gray;
                 }
+
                 &.Silver,
                 &.Silber {
-                    background-color: #d3d3d3;
+                    background-color: $filter-color-silver;
                 }
+
                 &.Blue,
                 &.Blau {
-                    background-color: #6281d8;
+                    background-color: $filter-color-blue;
                 }
+
                 &.Yellow,
                 &.Gelb {
-                    background-color: #ffff00;
+                    background-color: $filter-color-yellow;
                 }
+
                 &.Purple,
                 &.Lila {
-                    background-color: #9370db;
+                    background-color: $filter-color-purple;
                 }
+
                 &.Pink {
-                    background-color: #ff69b4;
+                    background-color: $filter-color-pink;
                 }
+
                 &.Platinum,
                 &.Platin {
-                    background-color: #e5e4e2;
+                    background-color: $filter-color-platinum;
                 }
+
                 &.Copper,
                 &.Kupfer {
-                    background-color: #da8a67;
+                    background-color: $filter-color-copper;
                 }
+
                 &.Orange,
                 &.Orange {
-                    background-color: #ff4500;
+                    background-color: $filter-color-organge;
                 }
+
                 &.Gold {
-                    background-color: #c5b358;
+                    background-color: $filter-color-gold;
                 }
+
                 &.Navy,
                 &.Marineblau {
-                    background-color: #00004e;
+                    background-color: $filter-color-navy;
                 }
+
                 &.Green,
                 &.Grün {
-                    background-color: #006400;
+                    background-color: $filter-color-green;
                 }
+
                 &.Red,
                 &.Rot {
-                    background-color: #dc2e09;
+                    background-color: $filter-color-red;
                 }
+
                 &.Brown,
                 &.Braun {
-                    background-color: #835c3b;
+                    background-color: $filter-color-brown;
                 }
             }
+
             .checkbox__check {
                 display: none;
             }
+
             .checkbox__label {
                 @include helper-effect-transition(all);
                 transform: scale(0);
@@ -102,6 +140,7 @@
                 padding: 5px 11px 7px 10px;
                 white-space: nowrap;
                 border-radius: 2px;
+
                 &::before {
                     content: '';
                     position: absolute;
@@ -114,6 +153,7 @@
                     transform: rotate(45deg);
                 }
             }
+
             .checkbox__box {
                 position: absolute;
                 left: 50%;
@@ -125,6 +165,7 @@
                 border-radius: 100%;
                 background: none;
             }
+
             &:hover .checkbox__box,
             .checkbox__input:checked + .checkbox__box {
                 width: 18px;

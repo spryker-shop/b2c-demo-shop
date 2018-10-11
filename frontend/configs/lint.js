@@ -6,8 +6,7 @@ module.exports = {
 
     plugins: [
         new StyleLintPlugin({
-            context: appSettings.paths.project.modules,
-            fix: true
+            context: appSettings.paths.project.modules
         })
     ]
 };
