@@ -1,12 +1,14 @@
-@mixin shop-ui-cart-item-quantity($name: '.cart-item-quantity') {
+@mixin cart-page-cart-item-quantity($name: '.cart-item-quantity') {
     #{$name} {
         &__label {
-            font: 300 13px $setting-font-family-additional;
+            font: map-get($setting-font-weight, light) 13px $setting-font-family-additional;
             margin-right: 10px;
         }
+
         &__button {
-            opacity: .6;
+            opacity: 0.6;
             padding: 5px;
+
             &:hover {
                 color: $setting-color-main;
             }
@@ -14,4 +16,4 @@
     }
 }
 
-@include shop-ui-cart-item-quantity();
+@include cart-page-cart-item-quantity();

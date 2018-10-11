@@ -1,8 +1,7 @@
 {% extends model('component') %}
 
 {% define config = {
-    name: 'cart-item-variant-selector',
-    tag: 'div'
+    name: 'cart-item-variant-selector'
 } %}
 
 {% define data = {
@@ -22,7 +21,7 @@
 
 {% block body %}
     <form method="POST" action="{{ path('cart/update', {'sku': data.cartItem.sku }) }}">
-        <ul class="list">
+        <ul class="{{ config.name }}__list">
             {% for attributeName, attributeOptions in data.cartItemAttributes %}
                 {% set options = [] %}
 
@@ -35,10 +34,10 @@
                     }]) %}
                 {% endfor %}
 
-                <li class="list__item">
+                <li class="{{ config.name }}__item">
                     <label class="{{ config.name }}__label">
                         <strong class="{{ config.name }}__title">{{ ('product.attribute.' ~ attributeName) | trans }}:</strong>
-                        {% include atom('select') with {
+                        {% embed atom('select') with {
                             data: {
                                 label: ('product.attribute.' ~ attributeName) | trans,
                                 options: options
@@ -46,8 +45,11 @@
                             attributes: {
                                 name: 'preselectedAttributes[' ~ attributeName ~ ']',
                                 'onchange': 'this.form.submit();'
-                            }
+                            },
+                            modifiers: ['borderless']
                         } only %}
+                            {% block selectClass %}{{ config.name ~ '__variant' }}{% endblock %}
+                        {% endembed %}
                     </label>
                     <input name="selectedAttributes[{{ attributeName }}]" type="hidden" />
                 </li>

@@ -1,37 +1,41 @@
-@mixin shop-ui-cart-item($name: '.cart-item') {
+@mixin cart-page-cart-item($name: '.cart-item') {
     #{$name} {
         &__title {
-            font: 500 17px $setting-font-family-additional;
-            line-height: 1.29;
+            font: map-get($setting-font-weight, medium) 17px $setting-font-family-additional;
+            @include helper-font-line-height(medium);
+
             &:hover {
                 cursor: pointer;
                 text-decoration: none;
                 color: inherit;
             }
         }
+
         &__content {
             padding: 0 0 5px 24px;
             width: calc(100% - 120px);
         }
-        &__options {
 
-        }
-        &__image{
+        &__image {
             width: 120px;
         }
+
         &__price {
-            font: 500 17px $setting-font-family-additional;
-            line-height: 1.29;
-            text-align: right;
-            @include helper-breakpoint-media-max($sm-max) {
-                text-align: left;
+            font: map-get($setting-font-weight, medium) 17px $setting-font-family-additional;
+            @include helper-font-line-height(medium);
+            text-align: left;
+
+            @include helper-breakpoint-media-min($lg-min) {
+                text-align: right;
             }
         }
+
         &__remove {
-            font: 300 13px $setting-font-family-additional;
-            line-height: 1.31;
-            opacity: .4;
+            font: map-get($setting-font-weight, light) 13px $setting-font-family-additional;
+            @include helper-font-line-height(medium);
+            opacity: 0.4;
             text-transform: capitalize;
+
             &:hover {
                 text-decoration: none;
                 color: inherit;
@@ -41,4 +45,4 @@
     }
 }
 
-@include shop-ui-cart-item();
+@include cart-page-cart-item();

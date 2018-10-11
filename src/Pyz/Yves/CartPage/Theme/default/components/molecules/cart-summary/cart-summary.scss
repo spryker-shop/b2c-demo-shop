@@ -1,22 +1,21 @@
 @mixin cart-page-cart-summary($name: '.cart-summary') {
     #{$name} {
+        &--bordered {
+            border-bottom: 1px dotted $setting-color-lightest;
+        }
 
         &__total {
             text-transform: uppercase;
-            font-weight: bold;
+            @include helper-font-weight(bold);
         }
-        li, span {
-            font: 400 14px $setting-font-family-additional;
+
+        &__item {
+            font: map-get($setting-font-weight, reguilar) 14px $setting-font-family-additional;
         }
-        .shopping-cart__box {
-            padding: 0;
-        }
-        .spacing-y {
-            margin: 24px 0;
-        }
+
         &__button {
+            font: map-get($setting-font-weight, medium) 16px $setting-font-family-additional;
             height: 56px;
-            font: 500 16px $setting-font-family-additional;
             line-height: 56px;
             padding: 0 20px;
             margin-top: 56px;

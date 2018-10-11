@@ -1,8 +1,7 @@
 {% extends model('component') %}
 
 {% define config = {
-    name: 'cart-item-quantity',
-    tag: 'div'
+    name: 'cart-item-quantity'
 } %}
 
 {% define data = {
@@ -22,7 +21,6 @@
             </label>
         {% endblock %}
 
-
         {% block input %}
             {% include molecule('quantity-counter') with {
                 data: {
@@ -34,22 +32,5 @@
                 }
             } only %}
         {% endblock %}
-
-        {#{% if data.hasUpdateButton and not data.readOnly %}#}
-            {#<span class="col col--left">#}
-                {#<button type="submit" class="{{ config.name }}__button button button--skinless" {{qa('quantity-input-submit')}}>#}
-                    {#{% include atom('icon') with {#}
-                        {#modifiers: ['small'],#}
-                        {#class: config.name ~ '__sync',#}
-                        {#data: {#}
-                            {#name: 'sync'#}
-                        {#}#}
-                    {#} only %}#}
-                {#</button>#}
-            {#</span>#}
-        {#{% endif %}#}
     </div>
-
-
-
 {% endblock %}

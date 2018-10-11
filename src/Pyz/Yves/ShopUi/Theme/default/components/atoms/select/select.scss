@@ -33,6 +33,13 @@
             }
         }
 
+        &__variant {
+            border: none;
+            padding: 0 20px;
+            font: normal 13px $setting-font-family-additional;
+            @include helper-font-line-height(big);
+        }
+
         &__caret {
             position: absolute;
             top: 0;
@@ -63,6 +70,10 @@
 
         &--error &__caret {
             color: map-get($setting-color-actions, alert);
+        }
+
+        &--borderless {
+            border: none;
         }
 
         @content;
