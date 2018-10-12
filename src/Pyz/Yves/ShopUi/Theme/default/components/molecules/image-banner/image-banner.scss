@@ -1,13 +1,13 @@
 @mixin shop-ui-image-banner($name: '.image-banner') {
-    #{$name}{
+    #{$name} {
         margin: 180px 0;
         height: 750px;
         padding: 0 80px;
         position: relative;
         @include helper-breakpoint-media-max($md-max) {
-          height: 400px;
-          margin: 80px 0 132px 0;
-          padding: 0;
+            height: 400px;
+            margin: 80px 0 132px;
+            padding: 0;
         }
         video {
             width: auto;
@@ -24,24 +24,24 @@
             width: 100%;
             overflow: hidden;
             &::after {
-              content: '';
-              display: block;
-              position: absolute;
-              bottom: 40px;
-              right: 40px;
-              width: 130px;
-              height: 53px;
-              background: url("/assets/images/spryker-logo@2x.png") center no-repeat;
-              background-size: contain;
-              @include helper-breakpoint-media-max($md-max) {
-                width: 78px;
-                height: 32px;
-                bottom: 20px;
-                right: 24px;
-              }
+                content: '';
+                display: block;
+                position: absolute;
+                bottom: 40px;
+                right: 40px;
+                width: 130px;
+                height: 53px;
+                background: url('/assets/images/spryker-logo@2x.png') center no-repeat;
+                background-size: contain;
+                @include helper-breakpoint-media-max($md-max) {
+                    width: 78px;
+                    height: 32px;
+                    bottom: 20px;
+                    right: 24px;
+                }
             }
             .touch & {
-                background-image: url("/assets/images/brand-image@3x.jpg");
+                background-image: url('/assets/images/brand-image@3x.jpg');
                 background-size: cover;
             }
         }
@@ -53,17 +53,17 @@
             align-items: center;
             flex-direction: column;
             @include helper-breakpoint-media-max($md-max) {
-              position: absolute;
-              top: 50%;
-              left: 50%;
-              transform: translate(-50% , -50%);
-              width: 100%;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 100%;
             }
         }
 
         &__title {
             margin-bottom: 10px;
-            &>* {
+            & > * {
                 font: bold 68px $setting-font-family-additional;
                 line-height: normal;
                 letter-spacing: -0.9px;
@@ -81,7 +81,7 @@
             position: relative;
             text-decoration: none;
             @include helper-breakpoint-media-max($md-max) {
-             font-size: 14px;
+                font-size: 14px;
             }
             &:hover {
                 color: $setting-color-white;
@@ -93,14 +93,14 @@
                 position: absolute;
                 height: 15px;
                 width: 10px;
-                background: url("/assets/images/arrow-white-bold.svg") center no-repeat;
+                background: url('/assets/images/arrow-white-bold.svg') center no-repeat;
                 right: -20px;
                 bottom: 4px;
                 @include helper-breakpoint-media-max($md-max) {
-                  width: 6px;
-                  height: 9px;
-                  right: -12px;
-                  bottom: 3px;
+                    width: 6px;
+                    height: 9px;
+                    right: -12px;
+                    bottom: 3px;
                 }
             }
         }

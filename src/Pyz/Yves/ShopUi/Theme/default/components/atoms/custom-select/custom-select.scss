@@ -1,4 +1,4 @@
-@import "../select/select";
+@import '../select/select';
 
 @mixin shop-ui-custom-select($name: '.custom-select') {
 
@@ -34,7 +34,7 @@
                 left: 0;
                 height: 100%;
                 width: 100%;
-                background: #000;
+                background: $setting-color-black;
                 opacity: 0.4;
             }
         }
@@ -90,13 +90,13 @@
             }
         }
 
-        .select2-results__option[aria-selected=true],
+        .select2-results__option[aria-selected='true'],
         .select2-results__option--highlighted[aria-selected] {
             background: none;
-            color: #00afb4;
+            color: $setting-color-bondi-blue;
         }
 
-        .select2-results__option[aria-selected=true] {
+        .select2-results__option[aria-selected='true'] {
             position: relative;
 
             &::before {
@@ -113,7 +113,7 @@
     }
 
     .select2-results__option {
-        color: #222;
+        color: $setting-color-darker;
         font-size: 17px;
         font-weight: 300;
         line-height: 26px;

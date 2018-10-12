@@ -1,4 +1,4 @@
-@mixin shop-ui-checkout-layout ($name: '.checkout-layout'){
+@mixin shop-ui-checkout-layout ($name: '.checkout-layout') {
     #{$name} {
 
         max-width: 570px;
@@ -70,7 +70,7 @@
         label,
         .label {
             display: block;
-            color: #333;
+            color: $setting-color-dark;
         }
 
         .grid {
@@ -112,7 +112,7 @@
         }
 
         .checkbox__box,
-        .toggler-checkbox__box{
+        .toggler-checkbox__box {
             @include helper-breakpoint-media-min($md-min) {
                 margin-top: 4px;
             }
@@ -129,7 +129,7 @@
             .thumbnail {
                 height: 3.5rem;
                 width: 3.5rem;
-                &:after {
+                &::after {
                     content: '';
                     position: absolute;
                     top: -4px;
@@ -230,7 +230,7 @@
         .summary-item-edit {
             display: inline-block;
             font: 300 13px $setting-font-family-additional;
-            opacity: .4;
+            opacity: 0.4;
             margin-top: 1rem;
             &:hover {
                 text-decoration: none;
@@ -333,7 +333,7 @@
         .success-page__link {
             text-decoration: none;
             .icon {
-                height: .813rem;
+                height: 0.813rem;
             }
         }
     }
@@ -363,7 +363,7 @@
         position: absolute;
         top: 50%;
         left: 1rem;
-        color: #444;
+        color: $setting-color-tundora;
         font-size: 0;
         line-height: 19px;
         font-weight: 500;

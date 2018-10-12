@@ -1,20 +1,20 @@
-@mixin cart-bubble ($size, $position){
+@mixin cart-bubble ($size, $position) {
     top: $position;
     right: $position;
     width: $size;
     height: $size;
     line-height: $size;
-    font-size: $size * .66;
+    font-size: $size * 0.66;
     position: absolute;
     display: block;
     text-align: center;
     border-radius: 50%;
 }
 
-@mixin shop-ui-cart-icon ($name: '.cart-link'){
+@mixin shop-ui-cart-icon ($name: '.cart-link') {
 
     #{$name} {
-      position: relative;
+        position: relative;
 
         &__quantity {
             @include cart-bubble(18px, -12px);
@@ -22,7 +22,6 @@
             color: $setting-color-white;
         }
     }
-
 }
 
 @include shop-ui-cart-icon();

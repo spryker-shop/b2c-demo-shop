@@ -5,6 +5,8 @@
         &__container {
             height: 160px;
             background: $setting-color-main;
+
+            /* stylelint-disable-next-line declaration-block-no-duplicate-properties */
             background: linear-gradient(to left top, helper-color-dark($setting-color-main), helper-color-light($setting-color-main));
             background-position: center center;
             background-size: cover;
@@ -31,13 +33,12 @@
 
         &__title,
         &__text {
-            &>* {
+            & > * {
                 color: $setting-color-white;
             }
-
         }
         &__title {
-            &>* {
+            & > * {
                 font: 700 57px $setting-font-family-additional;
                 line-height: 1.5;
                 letter-spacing: -0.8px;
@@ -51,9 +52,9 @@
         }
 
         &__text {
-            &>* {
+            & > * {
                 font: 200 26px $setting-font-family;
-                letter-spacing: .2px;
+                letter-spacing: 0.2px;
                 @include helper-breakpoint-media-max($lg-max) {
                     font-size: 16px;
                 }
@@ -61,10 +62,9 @@
                     font-size: 11px;
                 }
             }
-
         }
 
-        @content
+        @content;
     }
 }
 

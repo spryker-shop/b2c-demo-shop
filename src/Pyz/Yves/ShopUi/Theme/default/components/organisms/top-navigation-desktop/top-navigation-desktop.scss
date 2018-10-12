@@ -1,235 +1,227 @@
 @mixin shop-ui-top-navigation-desktop() {
-  .top-navigation-desktop {
-    position: relative;
-
-    .flyout-fullscreen {
-      position: static;
-
-      .menu {
-        position: absolute;
-        width: calc(100vw - 16px);
-        left: 50%;
-        transform: translate(-50%, 0);
-        padding: 40px 16px 28px 16px;
-        margin: 0;
-        height: 381px;
-        border-bottom: 1px solid #ebebeb;
-
-        &:before {
-          position: absolute;
-          display: block;
-          content: '';
-          width: calc(100vw - 26px);
-          left: 50%;
-          top: 0;
-          transform: translate(-50%, 0);
-          padding: 40px 16px 28px 16px;
-          margin: 0;
-          height: 100%;
-          box-shadow: 100px 0 0 0 $setting-color-white, -100px 0 0 0 $setting-color-white;
-        }
-      }
-
-      .flyout-fullscreen__container {
-        margin: 0 auto;
-        width: 850px;
+    .top-navigation-desktop {
         position: relative;
-        height: 100%;
-        @include helper-breakpoint-media-max($lg-max) {
-          width: 745px;
-        }
-        &::before {
-          content: '';
-          position: absolute;
-          display: block;
-          width: 1px;
-          height: 100%;
-          border-left: 1px dotted $setting-color-lightest;
-          top:0;
-          left: 280px;
-          @include helper-breakpoint-media-max($lg-max) {
-            left: 240px;
-          }
 
-          }
-        .menu__item {
-          max-width: 340px;
-          a {
-            font-size: 18px;
-            color: $setting-color-dark;
-            letter-spacing: 0.2px;
-            line-height: 1.94;
-            &:hover {
-              color: $setting-color-alt;
+        .flyout-fullscreen {
+            position: static;
+
+            .menu {
+                position: absolute;
+                width: calc(100vw - 16px);
+                left: 50%;
+                transform: translate(-50%, 0);
+                padding: 40px 16px 28px;
+                margin: 0;
+                height: 381px;
+                border-bottom: 1px solid #ebebeb;
+
+                &::before {
+                    position: absolute;
+                    display: block;
+                    content: '';
+                    width: calc(100vw - 26px);
+                    left: 50%;
+                    top: 0;
+                    transform: translate(-50%, 0);
+                    padding: 40px 16px 28px;
+                    margin: 0;
+                    height: 100%;
+                    box-shadow: 100px 0 0 0 $setting-color-white, -100px 0 0 0 $setting-color-white;
+                }
             }
-          }
+
+            .flyout-fullscreen__container {
+                margin: 0 auto;
+                width: 850px;
+                position: relative;
+                height: 100%;
+
+                @include helper-breakpoint-media-max($lg-max) {
+                    width: 745px;
+                }
+
+                &::before {
+                    content: '';
+                    position: absolute;
+                    display: block;
+                    width: 1px;
+                    height: 100%;
+                    border-left: 1px dotted $setting-color-lightest;
+                    top: 0;
+                    left: 280px;
+
+                    @include helper-breakpoint-media-max($lg-max) {
+                        left: 240px;
+                    }
+                }
+
+                .menu__item {
+                    max-width: 340px;
+
+                    a {
+                        font-size: 18px;
+                        color: $setting-color-dark;
+                        letter-spacing: 0.2px;
+                        line-height: 1.94;
+
+                        &:hover {
+                            color: $setting-color-alt;
+                        }
+                    }
+                }
+
+                .node-image {
+                    position: absolute;
+                    height: 300px;
+                    width: 250px;
+                    top: 0;
+                    right: 280px;
+                    margin: 0;
+
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    background-size: 250px 270px;
+
+                    @include helper-breakpoint-media-max($lg-max) {
+                        width: 220px;
+                        height: 237px;
+                        right: 250px;
+                        background-size: 220px 237px;
+                    }
+
+                    &:last-of-type {
+                        right: 0;
+                    }
+
+                    a {
+                        position: absolute;
+                        bottom: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        display: block;
+                        text-align: center;
+                        padding-top: 280px;
+                        font-size: 17px;
+                    }
+
+                    &.image-1 {
+                        background-image: url('/assets/images/menu-img-5.png');
+                    }
+
+                    &.image-2 {
+                        background-image: url('/assets/images/menu-img-6.png');
+                    }
+
+                    &.image-3 {
+                        background-image: url('/assets/images/menu-img-3.png');
+                    }
+
+                    &.image-4 {
+                        background-image: url('/assets/images/menu-img-4.png');
+                    }
+
+                    &.image-5 {
+                        background-image: url('/assets/images/menu-img-1.png');
+                    }
+
+                    &.image-6 {
+                        background-image: url('/assets/images/menu-img-2.png');
+                    }
+                }
+            }
         }
-        .node-image {
-          position: absolute;
-          height: 300px;
-          width: 250px;
-          top: 0;
-          right: 280px;
-          margin: 0;
-          @include helper-breakpoint-media-max($lg-max) {
-            width: 220px;
-            height: 237px;
-            right: 250px;
-          }
-            &:last-of-type {
-            right: 0;
-          }
-          a {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: block;
-            text-align: center;
-            padding-top: 280px;
-            font-size: 17px;
-          }
-          &.image-1 {
-            background: url("/assets/images/menu-img-5.png") top center no-repeat;
-            background-size: 250px 270px;
-              @include helper-breakpoint-media-max($lg-max) {
-                  background-size: 220px 237px;
 
-              }
-          }
-          &.image-2 {
-            background: url("/assets/images/menu-img-6.png") top center no-repeat;
-            background-size: 250px 270px;
-              @include helper-breakpoint-media-max($lg-max) {
-                  background-size: 220px 237px;
+        .brand-dropdown {
+            .menu {
+                height: unset;
+                padding: 40px 0 28px;
 
-              }
-          }
-          &.image-3 {
-            background: url("/assets/images/menu-img-3.png") top center no-repeat;
-            background-size: 250px 270px;
-              @include helper-breakpoint-media-max($lg-max) {
-                  background-size: 220px 237px;
+                @include helper-breakpoint-media-max($lg-max) {
+                    padding: 40px 0.5rem 28px;
+                }
+            }
 
-              }
-          }
-          &.image-4 {
-            background: url("/assets/images/menu-img-4.png") top center no-repeat;
-            background-size: 250px 270px;
-              @include helper-breakpoint-media-max($lg-max) {
-                  background-size: 220px 237px;
+            .flyout-fullscreen__container {
+                display: flex;
+                justify-content: space-between;
+                max-width: 1210px;
+                width: 100%;
 
-              }
-          }
-          &.image-5 {
-            background: url("/assets/images/menu-img-1.png") top center no-repeat;
-            background-size: 250px 270px;
-              @include helper-breakpoint-media-max($lg-max) {
-                  background-size: 220px 237px;
+                @include helper-breakpoint-media-max($xl-max) {
+                    max-width: 930px;
+                }
 
-              }
-          }
-          &.image-6 {
-            background: url("/assets/images/menu-img-2.png") top center no-repeat;
-            background-size: 250px 270px;
-              @include helper-breakpoint-media-max($lg-max) {
-                  background-size: 220px 237px;
+                @include helper-breakpoint-media-max($lg-max) {
+                    max-width: 730px;
+                }
 
-              }
-          }
+                &::before {
+                    display: none;
+                }
+            }
+
+            .brand-item {
+                height: 100%;
+                width: 270px;
+                margin: 0 1rem;
+
+                @include helper-breakpoint-media-max($xl-max) {
+                    width: 216px;
+                    margin: 0 0.5rem;
+                    background-size: contain;
+                }
+
+                @include helper-breakpoint-media-max($lg-max) {
+                    width: 162px;
+                }
+
+                a {
+                    display: block;
+                    text-align: center;
+                    position: relative;
+
+                    &::before {
+                        content: '';
+                        display: block;
+                        width: 270px;
+                        height: 168px;
+                        background-position: top center;
+                        background-repeat: no-repeat;
+                        background-size: contain;
+                        margin-bottom: 10px;
+
+                        @include helper-breakpoint-media-max($xl-max) {
+                            width: 216px;
+                            height: 134px;
+                            margin: 0 auto;
+                        }
+
+                        @include helper-breakpoint-media-max($lg-max) {
+                            width: 162px;
+                            height: 101px;
+                        }
+                    }
+                }
+
+                &.image-1 a::before {
+                    background-image: url('/assets/images/image-submenu-d-1@2x.png');
+                }
+
+                &.image-2 a::before {
+                    background-image: url('/assets/images/image-submenu-d-2@2x.png');
+                }
+
+                &.image-3 a::before {
+                    background-image: url('/assets/images/image-submenu-d-3@2x.png');
+                }
+
+                &.image-4 a::before {
+                    background-image: url('/assets/images/image-submenu-d-4@2x.png');
+                }
+            }
         }
-      }
-
     }
-
-    .brand-dropdown {
-
-      .menu {
-        height: unset;
-        padding: 40px 0 28px 0;
-        @include helper-breakpoint-media-max($lg-max) {
-          padding: 40px .5rem 28px .5rem;
-        }
-      }
-
-      .flyout-fullscreen__container {
-        display: flex;
-        justify-content: space-between;
-        max-width: 1210px;
-        width: 100%;
-        @include helper-breakpoint-media-max($xl-max) {
-          max-width: 930px;
-        }
-        @include helper-breakpoint-media-max($lg-max) {
-          max-width: 730px;
-        }
-        &:before {
-          display: none;
-        }
-      }
-
-      .brand-item {
-        height: 100%;
-        width: 270px;
-        margin: 0 1rem;
-        @include helper-breakpoint-media-max($xl-max) {
-          width: 216px;
-          margin: 0 .5rem;
-          background-size: contain;
-        }
-        @include helper-breakpoint-media-max($lg-max) {
-          width: 162px;
-
-        }
-
-        a {
-          display: block;
-          text-align: center;
-          position: relative;
-          &::before {
-            content: '';
-            display: block;
-            width: 270px;
-            height: 168px;
-            background-position: top center;
-            background-repeat: no-repeat;
-            background-size: contain;
-            margin-bottom: 10px;
-
-            @include helper-breakpoint-media-max($xl-max) {
-              width: 216px;
-              height: 134px;
-              margin: 0 auto;
-            }
-            @include helper-breakpoint-media-max($lg-max) {
-              width: 162px;
-              height: 101px;
-            }
-
-          }
-
-
-        }
-        &.image-1 a::before {
-          background-image: url("/assets/images/image-submenu-d-1@2x.png");
-        }
-        &.image-2 a::before {
-          background-image: url("/assets/images/image-submenu-d-2@2x.png");
-        }
-        &.image-3 a::before {
-          background-image: url("/assets/images/image-submenu-d-3@2x.png");
-        }
-        &.image-4 a::before {
-          background-image: url("/assets/images/image-submenu-d-4@2x.png");
-        }
-      }
-    }
-  }
 }
 
 @include shop-ui-top-navigation-desktop();
-
-
-
-

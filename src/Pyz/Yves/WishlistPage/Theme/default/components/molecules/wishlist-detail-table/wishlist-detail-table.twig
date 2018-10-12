@@ -38,7 +38,6 @@
                         {% endif %}
                         <ul>
                             <li><strong><a href="{{ item.url }}">{{ item.name }}</a></strong></li>
-                            {#<li>SKU: {{ item.sku }}</li>#}
                             {% for attribute in item.superAttributesDefinition %}
                                 {% if item.attributes[attribute] is defined %}
                                     <li>{{ ('product.attribute.'~attribute) | trans }}: {{ item.attributes[attribute] }}</li>
@@ -70,33 +69,25 @@
                             {% if item.available and item.price is not null %}
                                 <li class="menu__item float-right">
                                     <form id="addToCart_{{ loop.index }}"
-                                          class=""
-                                          method="POST"
-                                          action="{{ path('wishlist/move-to-cart', {sku: item.sku, 'wishlist-name': data.wishlistName}) }}">
-                                                <button type="submit" class="wishlist-overview-table__button" title="{{ 'customer.account.wishlist.add-to-cart' | trans }}">
-                                                    {#{% include atom('icon') with {#}
-                                                        {#data: {#}
-                                                            {#name: 'cart-plus'#}
-                                                        {#}#}
-                                                    {#} only %}#}
-                                                    {{ 'customer.account.wishlist.add-to-cart' | trans }}
-                                                </button>
+                                        class=""
+                                        method="POST"
+                                        action="{{ path('wishlist/move-to-cart', {sku: item.sku, 'wishlist-name': data.wishlistName}) }}"
+                                    >
+                                        <button type="submit" class="wishlist-overview-table__button" title="{{ 'customer.account.wishlist.add-to-cart' | trans }}">
+                                            {{ 'customer.account.wishlist.add-to-cart' | trans }}
+                                        </button>
                                     </form>
                                 </li>
                             {% endif %}
                             <li class="menu__item float-right">
                                 <form id="deleteWishlistItem_{{ loop.index }}"
-                                      class=""
-                                      method="POST"
-                                      action="{{ path('wishlist/remove-item', {sku: item.sku, 'wishlist-name': data.wishlistName}) }}">
-                                            <button type="submit" class="wishlist-overview-table__button" title="{{ 'customer.account.wishlist.remove' | trans }}">
-                                                {#{% include atom('icon') with {#}
-                                                    {#data: {#}
-                                                        {#name: 'remove'#}
-                                                    {#}#}
-                                                {#} only %}#}
-                                                {{ 'customer.account.wishlist.remove' | trans }}
-                                            </button>
+                                    class=""
+                                    method="POST"
+                                    action="{{ path('wishlist/remove-item', {sku: item.sku, 'wishlist-name': data.wishlistName}) }}"
+                                >
+                                        <button type="submit" class="wishlist-overview-table__button" title="{{ 'customer.account.wishlist.remove' | trans }}">
+                                            {{ 'customer.account.wishlist.remove' | trans }}
+                                        </button>
                                 </form>
                             </li>
                         </ul>

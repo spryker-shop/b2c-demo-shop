@@ -12,11 +12,10 @@
     {% set d = [] %}
     {% if data.items %}
         <div class="{{ config.name }}">
-            {#<label>{{ 'cart.item.bundle.description' | trans }}</label>#}
             <ul class="{{ config.name }}__list">
                 {% for item in data.items %}
                     <li class="{{ config.name }}__list-item">
-                            {% if (item.images|first).externalUrlSmall is defined %}
+                        {% if (item.images|first).externalUrlSmall is defined %}
                             {% include atom('thumbnail') with {
                                 attributes: {
                                     alt: item.name,
@@ -24,7 +23,7 @@
                                     title: item.name
                                 }
                             } only %}
-                            {% endif %}
+                        {% endif %}
                         <p class="{{ config.name }}__item-title">
                             {{ item.name }}
                             <span class="{{ config.name }}__item-quantity">{{ item.quantity }}x </span>

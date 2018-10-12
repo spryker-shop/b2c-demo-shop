@@ -19,10 +19,10 @@
         }
 
         &--black {
-            background: #111;
+            background: $setting-color-darkest;
             &:hover,
             &:focus {
-                background: #ff4859;
+                background: $setting-color-radical-red;
             }
         }
 
@@ -47,7 +47,10 @@
             border: none;
             background-color: transparent;
             color: $setting-color-black;
-            &:visited, &:hover, &:focus, &:active{
+            &:visited,
+            &:hover,
+            &:focus,
+            &:active {
                 border: none;
                 background-color: transparent;
                 color: $setting-color-black;
@@ -55,7 +58,7 @@
         }
 
         &--hollow {
-            padding: .5rem 1rem;
+            padding: 0.5rem 1rem;
             background-color: $setting-color-white;
             border: 1px solid $setting-color-darkest;
             color: $setting-color-darkest;
@@ -64,14 +67,14 @@
             &:focus {
                 border-color: $setting-color-darkest;
                 background-color: $setting-color-darkest;
-                color: #fff;
+                color: $setting-color-white;
             }
 
             &[disabled],
             & #{name}--disabled,
             &[disabled]:hover,
             & #{name}--disabled:hover {
-                background-color: #fff !important;
+                background-color: $setting-color-white !important;
                 border-color: $setting-color-light;
                 color: $setting-color-light;
             }
