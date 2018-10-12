@@ -26,7 +26,6 @@ export default class SuggestSearch extends Component {
     bodyTrigger: HTMLElement
     focusTimeout: number
 
-
     constructor() {
         super();
 
@@ -43,15 +42,15 @@ export default class SuggestSearch extends Component {
     }
 
     protected readyCallback(): void {
-        this.ajaxProvider = <AjaxProvider> this.querySelector(`.${this.jsName}__ajax-provider`);
-        this.suggestionsContainer = <HTMLElement> this.querySelector(`.${this.jsName}__container`);
-        this.searchInput = <HTMLInputElement> document.querySelector(this.searchInputSelector);
+        this.ajaxProvider = <AjaxProvider>this.querySelector(`.${this.jsName}__ajax-provider`);
+        this.suggestionsContainer = <HTMLElement>this.querySelector(`.${this.jsName}__container`);
+        this.searchInput = <HTMLInputElement>document.querySelector(this.searchInputSelector);
         this.navigationActiveClass = `${this.name}__item--active`;
-        this.searchOverlay = <HTMLElement> document.querySelector('.js-toggle-search');
-        this.overlayCloseButton = <HTMLElement> document.querySelector('.js-search-hide-icon');
-        this.overlayOpenButton = <HTMLElement> document.querySelector('.js-search-show-icon');
-        this.overlayMobOpenButton = <HTMLElement> document.querySelector('.js-search-mob-show-icon');
-        this.bodyTrigger = <HTMLElement> document.querySelector('.js-search-hide-overlay');
+        this.searchOverlay = <HTMLElement>document.querySelector('.js-toggle-search');
+        this.overlayCloseButton = <HTMLElement>document.querySelector('.js-search-hide-icon');
+        this.overlayOpenButton = <HTMLElement>document.querySelector('.js-search-show-icon');
+        this.overlayMobOpenButton = <HTMLElement>document.querySelector('.js-search-mob-show-icon');
+        this.bodyTrigger = <HTMLElement>document.querySelector('.js-search-hide-overlay');
         this.createHintInput();
         this.mapEvents();
     }
@@ -59,7 +58,6 @@ export default class SuggestSearch extends Component {
     protected mapEvents(): void {
         this.searchInput.addEventListener('keyup', debounce((event: Event) => this.onInputKeyUp(event), this.debounceDelay));
         this.searchInput.addEventListener('keydown', throttle((event: Event) => this.onInputKeyDown(<KeyboardEvent> event), this.throttleDelay));
-        // this.searchInput.addEventListener('blur', debounce((event: Event) => this.onInputFocusOut(event), this.debounceDelay));
         this.searchInput.addEventListener('focus', (event: Event) => this.onInputFocusIn(event));
         this.searchInput.addEventListener('click', (event: Event) => this.onInputClick(event));
         this.overlayCloseButton.addEventListener('click', (event: Event) => this.onInputFocusOut(event));
@@ -87,7 +85,7 @@ export default class SuggestSearch extends Component {
 
     protected onInputKeyDown(event: KeyboardEvent): void {
         this.setHintValue('');
-        var keyCode = event.keyCode;
+        let keyCode = event.keyCode;
 
         switch (this.keyboardCodes[keyCode]) {
             case 'enter': this.onEnter(event); break;
@@ -101,6 +99,7 @@ export default class SuggestSearch extends Component {
 
     protected onInputClick(event: Event): void {
         this.activeItemIndex = 0;
+
         if (this.isNavigationExist()) {
             this.updateNavigation();
             this.showSugestions();
@@ -108,8 +107,8 @@ export default class SuggestSearch extends Component {
     }
 
     protected onTab(event: KeyboardEvent): boolean {
-        this.searchInput.value = this.hint;
         event.preventDefault();
+        this.searchInput.value = this.hint;
         return false;
     }
 
@@ -135,6 +134,7 @@ export default class SuggestSearch extends Component {
 
     protected onEnter(event: KeyboardEvent): void {
         const activeItem = this.getActiveNavigationItem();
+
         if (activeItem) {
             this.getActiveNavigationItem().click();
             event.preventDefault();
@@ -165,7 +165,7 @@ export default class SuggestSearch extends Component {
     }
 
     protected getNavigation(): HTMLElement[] {
-        return <HTMLElement[]> Array.from(this.getElementsByClassName(`${this.jsName}__item--navigable`))
+        return <HTMLElement[]>Array.from(this.getElementsByClassName(`${this.jsName}__item--navigable`))
     }
 
     protected updateNavigation(): void {
@@ -173,11 +173,13 @@ export default class SuggestSearch extends Component {
             this.navigation.forEach(element => {
                 element.classList.remove(this.navigationActiveClass);
             });
+
             if (this.activeItemIndex > this.navigation.length) {
                 this.activeItemIndex = 0;
                 this.searchInput.focus();
                 return;
             }
+
             if (this.activeItemIndex > 0) {
                 this.navigation[this.activeItemIndex - 1].classList.add(this.navigationActiveClass);
             }
@@ -194,7 +196,6 @@ export default class SuggestSearch extends Component {
 
     protected async getSuggestions(): Promise<void> {
         const suggestQuery = this.getSearchValue();
-
         const urlParams = [['q', suggestQuery]];
 
         this.addUrlParams(urlParams);
@@ -226,10 +227,12 @@ export default class SuggestSearch extends Component {
     protected addUrlParams(params: Array<Array<string>>): void {
         const baseSuggestUrl = this.getAttribute('base-suggest-url');
         let paramsString = '?';
+
         params.forEach( (element, index) => {
             paramsString += index == 0 ? '' : '&';
             paramsString += `${element[0]}=${element[1]}`;
         });
+
         this.ajaxProvider.setAttribute('url', `${baseSuggestUrl}${paramsString}`);
     }
 
@@ -264,9 +267,11 @@ export default class SuggestSearch extends Component {
     updateHintInput(value?: string): void {
         let hintValue = value ? value : this.hint;
         const inputValue = this.searchInput.value;
+
         if (!hintValue.toLowerCase().startsWith(inputValue.toLowerCase())) {
             hintValue = '';
         }
+
         hintValue = hintValue.replace(hintValue.slice(0, inputValue.length), inputValue);
         this.setHintValue(hintValue);
     }
@@ -292,7 +297,6 @@ export default class SuggestSearch extends Component {
     }
 
     get searchInputSelector(): string {
-        return <string> this.getAttribute('input-selector');
+        return <string>this.getAttribute('input-selector');
     }
-
 }

@@ -2,142 +2,148 @@ import Component from 'ShopUi/models/component';
 import $ from 'jquery/dist/jquery';
 
 export default class NavHeaderMobile extends Component {
+    private currentTab: HTMLElement
+    private previousToggler: HTMLElement
+    private previousTab: HTMLElement
+    private isDropDownOpen: boolean = false
+    private isDropDownInAction: boolean = false
+    private isPreviousTab: boolean = false
+
+    protected container: HTMLElement
+    protected scrollEl: HTMLElement
+    protected arrowLeft: HTMLElement
+    protected arrowRight: HTMLElement
+    protected dropDown: HTMLElement
+    protected tabs: HTMLElement[]
+    protected tabTogglers: HTMLElement[]
+    protected tabClosers: HTMLElement[]
 
     readyCallback(): void {
+        this.initMenuScroll();
+        this.initMenuDropDown();
+    }
 
-        // menu scroll goes here
+    protected initMenuScroll(): void {
+        this.container = this.querySelector(`.${this.name}__block`);
+        this.scrollEl = this.container.querySelector(`.${this.name}__scroll`);
+        this.arrowLeft = this.container.querySelector(`.${this.name}__arrow--left`);
+        this.arrowRight = this.container.querySelector(`.${this.name}__arrow--right`);
 
-        const $container = $(this).find(`.${this.name}__block`);
-        const $scrollBar = $(this).find(`.${this.name}__bar`);
-        const $arrowLeft = $container.find(`.${this.name}__arrow--left`);
-        const $arrowRight = $container.find(`.${this.name}__arrow--right`);
-        const $scroll = $container.find(`.${this.name}__scroll`);
+        this.scrollElHandler();
+    }
 
-        function getRightEdge() {
-            return $scroll.get(0).scrollWidth - $scrollBar.width() - 5;
+    protected scrollElHandler(): void {
+        this.scrollEl.addEventListener('scroll', this.toggleArrow.bind(this));
+    }
+
+    protected toggleArrow(e): void {
+        const point = e.target.scrollLeft,
+              pointMin = 30,
+              pointMax = this.scrollEl.scrollWidth - this.scrollEl.offsetWidth - 30;
+
+        if(point > pointMin && point < pointMax) {
+            $(this.arrowLeft).fadeIn(200);
+            $(this.arrowRight).fadeIn(200);
+        } else if(point < pointMin) {
+            $(this.arrowLeft).fadeOut(200);
+        } else {
+            $(this.arrowRight).fadeOut(200);
         }
+    }
 
-        function toggleLeftArrow(point, pointMin) {
-            switch (true){
+    protected initMenuDropDown(): void {
+        this.dropDown = this.querySelector(`.${this.name}__dropdown-container`);
+        this.tabs = Array.from(this.dropDown.querySelectorAll(`.${this.name}__tab`));
+        this.tabTogglers = Array.from(this.scrollEl.querySelectorAll('[data-target]'));
+        this.tabClosers = Array.from(this.dropDown.querySelectorAll(`.${this.name}__tab-close`));
 
-                case (point > pointMin): $arrowLeft.fadeIn(200); break;
+        this.menuDropDownOpenHandlers();
+        this.menuDropDownCloseHandlers();
+    }
 
-                case (point < pointMin): $arrowLeft.fadeOut(200); break;
+    protected menuDropDownOpenHandlers(): void {
+        const _this = this,
+              tabHandler = function (e) {
+                  e.preventDefault();
+                  e.stopPropagation();
 
-            }
+                  if(!_this.isDropDownInAction) {
+                      let currentToggler = this;
+                      _this.openTab(currentToggler, _this.tabs);
+                      _this.openDropDown();
+                  }
+              };
+
+        this.tabTogglers.forEach(tab => tab.addEventListener('click', tabHandler));
+    }
+
+    protected openTab(toggler: HTMLElement, tabs: HTMLElement[]): void {
+        this.currentTab = this.findCurrentTab(toggler, tabs);
+        toggler.classList.add('active');
+        
+        if(this.previousToggler) {
+            this.previousToggler.classList.remove('active');
         }
-
-        function toggleRightArrow(point, pointMax) {
-            switch (true){
-
-                case (point > pointMax): $arrowRight.fadeOut(200); break;
-
-                case (point < pointMax): $arrowRight.fadeIn(200); break;
-
-            }
-        }
-
-        $scroll.on('scroll', function () {
-            toggleLeftArrow($scroll.scrollLeft(), 5);
-            toggleRightArrow($scroll.scrollLeft(), getRightEdge())
-
-        });
-
-        // menu dropdown goes here
-
-
-        const $dropDown = $(this).find(`.${this.name}__dropdown-container`);
-        const $tabs = $dropDown.find(`.${this.name}__tab`);
-        const $tabTogglers = $scroll.find('[data-target]');
-        const $tabClose = $dropDown.find(`.${this.name}__tab-close`);
-
-        let isDropDownOpen = false;
-        let isPreviousTab = false;
-        let isDropDownInAction = false;
-        let previousToggler;
-        let previousTab;
-        let currentTab;
-
-
-        function findCurrentTab (currentToggler, tabs) {
-            let currentTab;
-            $.each(tabs, (i, item)=>{
-                if(currentToggler.data('target') == $(item).data('tab')){
-                    currentTab = $(item);
-                    return false;
-                }
+        
+        if(this.isPreviousTab) {
+            $(this.previousTab).hide().animate({opacity: 0}, 0, 'swing', () => {
+                $(this.currentTab).show().animate({opacity: 1}, 200);
             });
-            return currentTab;
+        } else {
+            $(this.currentTab).show().animate({opacity: 1}, 200);
         }
 
-        function openDropDown(){
-            if(!isDropDownOpen) {
-                isDropDownOpen = true;
-                $dropDown.slideDown(200, () => {
-                    currentTab.animate({opacity: 1}, 100, 'swing', () => {
-                        isDropDownOpen = true;
-                        isDropDownInAction = false;
-                        console.log(isDropDownInAction);
-                    });
+        this.previousTab = this.currentTab;
+        this.previousToggler = toggler;
+        this.isPreviousTab = true;
+    }
+
+    protected openDropDown(): void {
+        if(!this.isDropDownOpen) {
+            this.isDropDownOpen = true;
+            $(this.dropDown).slideDown(200, () => {
+                $(this.currentTab).animate({opacity: 1}, 100, 'swing', () => {
+                    this.isDropDownInAction = false;
                 });
-            }
+            });
         }
+    }
 
-        function closeDropDown(){
-            if(isDropDownOpen) {
-                isDropDownInAction = true;
-                let tabToClose = currentTab;
-                tabToClose.animate({opacity: 0}, 100, 'swing', ()=>{
-                    $dropDown.slideUp(200, ()=>{
-                        tabToClose.hide();
-                        currentTab.hide().animate({opacity: 0}, 0);
-                        previousTab.hide().animate({opacity: 0}, 0);
-                        isDropDownOpen = false;
-                        isPreviousTab = false;
-                        isDropDownInAction = false;
-                        if(previousToggler) previousToggler.removeClass('active');
+    protected findCurrentTab(currentToggler: HTMLElement, tabs: HTMLElement[]): HTMLElement {
+        let currentTab: HTMLElement;
 
-                    });
-                });
+        tabs.forEach(item => {
+            if(currentToggler.getAttribute('data-target') === item.getAttribute('data-tab')) {
+                currentTab = item;
+                return;
             }
-        }
-
-        function openTab(toggler, tabs){
-            if(previousToggler) previousToggler.removeClass('active');
-            toggler.addClass('active');
-
-            currentTab = findCurrentTab(toggler, tabs);
-
-            if(isPreviousTab) {
-                previousTab.hide().animate({opacity: 0}, 0, 'swing', ()=> {
-                    currentTab.show().animate({opacity: 1}, 200);
-                })
-            }else {
-                currentTab.show().animate({opacity: 1}, 200);
-
-            }
-
-            previousTab = currentTab;
-            previousToggler = toggler;
-            isPreviousTab = true;
-        }
-
-        $tabTogglers.on('click', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-            if(!isDropDownInAction){
-                let currentToggler = $(this);
-                openTab(currentToggler, $tabs);
-
-                openDropDown();
-            }
-
         });
 
-        $tabClose.on('click', function () {
+        return currentTab;
+    }
 
-            closeDropDown();
+    protected menuDropDownCloseHandlers(): void {
+        this.tabClosers.forEach(tab => tab.addEventListener('click', this.closeDropDown.bind(this)))
+    }
 
-        });
+    protected closeDropDown(): void {
+        if(this.isDropDownOpen) {
+            this.isDropDownInAction = true;
+            let $tabToClose = $(this.currentTab);
+            
+            $tabToClose.animate({opacity: 0}, 100, 'swing', () => {
+                $(this.dropDown).slideUp(200, () => {
+                    $tabToClose.hide();
+                    $(this.currentTab).hide();
+                    $(this.previousTab).hide();
+                    this.isDropDownOpen = false;
+                    this.isPreviousTab = false;
+                    this.isDropDownInAction = false;
+                    if(this.previousToggler) {
+                        this.previousToggler.classList.remove('active');
+                    }
+                });
+            });
+        }
     }
 }

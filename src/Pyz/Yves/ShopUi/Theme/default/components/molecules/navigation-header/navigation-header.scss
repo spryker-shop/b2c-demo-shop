@@ -1,6 +1,3 @@
-
-$setting-mobile-shadow-width: 12%;
-
 @mixin shop-ui-navigation-header($name: '.navigation-header') {
     #{$name} {
         height: 50px;
@@ -10,15 +7,15 @@ $setting-mobile-shadow-width: 12%;
                 white-space: nowrap;
                 color: $setting-color-text;
                 font: normal 16px $setting-font-family;
-                letter-spacing: .2px;
+                letter-spacing: 0.2px;
                 line-height: 1.5;
+
                 &:hover {
                     text-decoration: underline;
-                    color: map-get($setting-color-actions, alert)
-
+                    color: map-get($setting-color-actions, alert);
                 }
-
             }
+
             &__item {
                 &--has-children-dropdown {
                     & > .menu {
@@ -26,26 +23,29 @@ $setting-mobile-shadow-width: 12%;
                     }
                 }
             }
-            &--top-level {
 
-                &>li, &>li>a {
+            &--top-level {
+                & > li,
+                & > li > a {
                     text-transform: uppercase;
                     font: 500 13px $setting-font-family-additional;
                     letter-spacing: 2.2px;
                     white-space: nowrap;
+
                     &:hover{
-                        color: rgba(0,0,0,.5);
+                        color: rgba(0, 0, 0, 0.5);
                         text-decoration: none;
                     }
                 }
-                &>li {
-                    margin: 0 .6rem;
+
+                & > li {
+                    margin: 0 0.6rem;
                     cursor: default;
                 }
-                &>li>a {
+
+                & > li > a {
                     cursor: pointer;
                 }
-
             }
 
             li .menu .menu__item--has-children-list {
@@ -53,16 +53,15 @@ $setting-mobile-shadow-width: 12%;
                     text-decoration: none;
                     color: $setting-color-text;
                     cursor: default;
-                    &>a {
+
+                    & > a {
                         color: $setting-color-text;
                         text-decoration: none;
                         cursor: default;
                     }
-
                 }
             }
         }
-
     }
 }
 
