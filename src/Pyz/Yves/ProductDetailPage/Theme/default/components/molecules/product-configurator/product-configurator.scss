@@ -2,12 +2,12 @@
     #{$name} {
 
         .product-name {
-            font: bold 38px/1.13 $setting-font-family-additional;
+            font: bold rem(38)/1.13 $setting-font-family-additional;
             color: $setting-color-darkest;
-            margin-bottom: 7px;
+            margin-bottom: rem(7);
             @include helper-breakpoint-media-max($lg-max) {
-                font: bold 30px/1.27 $setting-font-family-additional;
-                margin-bottom: 12px;
+                font: bold rem(30)/1.27 $setting-font-family-additional;
+                margin-bottom: rem(12);
             }
         }
 
@@ -22,79 +22,79 @@
                 align-items: flex-end;
                 &__amount {
                     color: $setting-color-darkest;
-                    font: 400 22px/28px $setting-font-family-additional;
+                    font: 400 rem(22)/rem(28) $setting-font-family-additional;
                     @include helper-breakpoint-media-max($lg-max) {
-                        font: 400 20px/25px $setting-font-family-additional;
+                        font: 400 rem(20)/rem(25) $setting-font-family-additional;
                     }
                 }
                 &__amount--original {
                     padding: 0;
                     color: $setting-color-lightest;
-                    font-size: 15px;
-                    line-height: 19px;
+                    font-size: rem(15);
+                    line-height: rem(19);
                 }
             }
         }
 
         .pdp-price-review {
-            margin-bottom: 29px;
+            margin-bottom: rem(29);
         }
 
         .color-selector,
         .color-selector-pdp {
             &__color {
-                width: 24px;
-                height: 24px;
+                width: rem(24);
+                height: rem(24);
                 &::before {
-                    width: 26px;
-                    height: 26px;
-                    border-width: 5px;
+                    width: rem(26);
+                    height: rem(26);
+                    border-width: rem(5);
                 }
                 &:hover,
                 &--active {
                     &::before {
-                        width: 22px;
-                        height: 22px;
-                        border-width: 3px;
+                        width: rem(22);
+                        height: rem(22);
+                        border-width: rem(3);
                     }
                 }
             }
         }
 
         .add-to-cart {
-            border-top: dotted 1px $setting-color-lightest;
-            padding: 40px 0 15px;
+            border-top: dotted rem(1) $setting-color-lightest;
+            padding: rem(40) 0 rem(15);
             button {
-                font: 500 16px $setting-font-family-additional;
-                padding: 18px;
+                font: 500 rem(16) $setting-font-family-additional;
+                padding: rem(18);
             }
         }
 
         .wishlist-selector {
-            padding: 15px 0 70px;
+            padding: rem(15) 0 rem(70);
             .wishlist-input {
-                padding-right: 10px;
+                padding-right: rem(10);
                 &:empty {
                     display: none;
                 }
             }
             button {
-                line-height: 16px;
+                line-height: rem(16);
             }
         }
 
         .bundle-list-options__wrap {
-            padding-bottom: 1.125rem;
+            padding-bottom: rem(18);
         }
 
         .bundle-list-options__item {
-            padding-right: 0.5rem;
-            margin-bottom: 1.25rem;
+            padding-right: rem(8);
+            margin-bottom: rem(20);
             line-height: 1.38;
             font-weight: normal;
             &:nth-child(2n) {
                 padding-right: 0;
-                padding-left: 0.5rem;
+                padding-left: rem(8);
             }
         }
 
@@ -102,17 +102,17 @@
     }
 
     .product-detail {
-        border-bottom: dotted 1px $setting-color-lightest;
+        border-bottom: dotted rem(1) $setting-color-lightest;
     }
 
     .pdp-option {
-        border-top: dotted 1px $setting-color-lightest;
+        border-top: dotted rem(1) $setting-color-lightest;
         &__title {
-            font: bold 13px/16px $setting-font-family-additional;
+            font: bold rem(13)/rem(16) $setting-font-family-additional;
             color: $setting-color-darkest;
-            letter-spacing: 2.6px;
+            letter-spacing: rem(2.6);
             text-transform: uppercase;
-            padding: 17px 0;
+            padding: rem(17) 0;
             position: relative;
             &.js-toggle-pdp-options {
                 cursor: pointer;
@@ -122,56 +122,56 @@
                 }
                 &::before {
                     content: '';
-                    width: 12px;
-                    height: 2px;
+                    width: rem(12);
+                    height: rem(2);
                     background: $setting-color-dark;
                     position: absolute;
                     top: 50%;
                     right: 0;
-                    margin-top: -1px;
+                    margin-top: rem(-1);
                 }
                 &::after {
                     content: '';
-                    width: 2px;
-                    height: 12px;
+                    width: rem(2);
+                    height: rem(12);
                     background: $setting-color-dark;
                     position: absolute;
                     top: 50%;
-                    right: 5px;
-                    margin-top: -6px;
+                    right: rem(5);
+                    margin-top: rem(-6);
                 }
                 &.active::after {
                     display: none;
                 }
             }
             @include helper-breakpoint-media-max($lg-max) {
-                font-size: 12px;
-                letter-spacing: 2.4px;
+                font-size: rem(12);
+                letter-spacing: rem(2.4);
             }
         }
         &__wrapper {
-            padding-bottom: 30px;
-            line-height: 22px;
+            padding-bottom: rem(30);
+            line-height: rem(22);
             font-weight: 300;
             .text-alert {
                 margin: 0;
             }
         }
         &__sku {
-            padding-top: 22px;
+            padding-top: rem(22);
         }
         &__detail {
-            padding-bottom: 20px;
-            font: 300 16px/22px $setting-font-family;
+            padding-bottom: rem(20);
+            font: 300 rem(16)/rem(22) $setting-font-family;
         }
         &__detail-name {
             font-weight: 700;
         }
         &__reset {
-            margin-left: 15px;
+            margin-left: rem(15);
             .icon {
-                width: 12px;
-                height: 12px;
+                width: rem(12);
+                height: rem(12);
             }
         }
         .quantity-counter__container {

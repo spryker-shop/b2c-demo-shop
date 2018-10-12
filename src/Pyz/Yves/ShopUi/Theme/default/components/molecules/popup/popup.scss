@@ -19,57 +19,57 @@
             left: 50%;
             transform: translate(-50%, -50%);
             background: $setting-color-white;
-            border-radius: 3px;
-            width: 700px;
+            border-radius: rem(3);
+            width: rem(700);
             min-width: 0;
-            max-width: calc(100vw - 28px);
-            max-height: calc(100vh - 28px);
+            max-width: calc(100vw - rem(28));
+            max-height: calc(100vh - rem(28));
             overflow-y: auto;
-            padding: 28px 38px 38px;
+            padding: rem(28) rem(38) rem(38);
         }
 
         &__top {
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-            border-bottom: dotted 1px $setting-color-lightest;
+            padding-bottom: rem(10);
+            margin-bottom: rem(20);
+            border-bottom: dotted rem(1) $setting-color-lightest;
             display: flex;
             justify-content: space-between;
         }
 
         &__title {
-            font: 700 36px $setting-font-family-additional;
+            font: 700 rem(36) $setting-font-family-additional;
             color: $setting-color-darkest;
         }
 
         &__close {
-            width: 28px;
-            height: 28px;
+            width: rem(28);
+            height: rem(28);
             cursor: pointer;
         }
 
         @include helper-breakpoint-media-max($md-max) {
             &__inner {
-                width: 450px;
+                width: rem(450);
                 min-width: 0;
-                padding: 0 24px 7px;
+                padding: 0 rem(24) rem(7);
             }
             &__top {
                 background: $setting-color-wild-sand;
-                margin: 0 -24px 14px;
-                padding: 27px 24px;
+                margin: 0 rem(-24) rem(14);
+                padding: rem(27) rem(24);
                 border-bottom: none;
-                min-height: 80px;
+                min-height: rem(80);
                 justify-content: center;
             }
             &__title {
-                font-size: 20px;
+                font-size: rem(20);
             }
             &__close {
-                width: 19px;
-                height: 19px;
+                width: rem(19);
+                height: rem(19);
                 position: absolute;
-                top: 31px;
-                left: 24px;
+                top: rem(31);
+                left: rem(24);
             }
         }
 

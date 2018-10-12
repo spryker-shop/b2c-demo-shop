@@ -3,14 +3,14 @@ $setting-mobile-shadow-width: 12%;
 
 @mixin shop-ui-navigation-header($name: '.navigation-header') {
     #{$name} {
-        height: 50px;
+        height: rem(50);
         .menu {
             a {
                 text-transform: capitalize;
                 white-space: nowrap;
                 color: $setting-color-text;
-                font: normal 16px $setting-font-family;
-                letter-spacing: 0.2px;
+                font: normal rem(16) $setting-font-family;
+                letter-spacing: rem(0.2);
                 line-height: 1.5;
                 &:hover {
                     text-decoration: underline;
@@ -20,7 +20,7 @@ $setting-mobile-shadow-width: 12%;
             &__item {
                 &--has-children-dropdown {
                     & > .menu {
-                        box-shadow: 0 102px 100px 0 rgba(12, 16, 31, 0.07);
+                        box-shadow: 0 rem(102) rem(100) 0 rgba(12, 16, 31, 0.07);
                     }
                 }
             }
@@ -29,8 +29,8 @@ $setting-mobile-shadow-width: 12%;
                 & > li,
                 & > li > a {
                     text-transform: uppercase;
-                    font: 500 13px $setting-font-family-additional;
-                    letter-spacing: 2.2px;
+                    font: 500 rem(13) $setting-font-family-additional;
+                    letter-spacing: rem(2.2);
                     white-space: nowrap;
                     &:hover {
                         color: rgba(0, 0, 0, 0.5);
@@ -38,7 +38,7 @@ $setting-mobile-shadow-width: 12%;
                     }
                 }
                 & > li {
-                    margin: 0 0.6rem;
+                    margin: 0 rem(10);
                     cursor: default;
                 }
                 & > li > a {

@@ -1,9 +1,9 @@
 @mixin shop-ui-product-card($name: '.product-card') {
     #{$name} {
         position: relative;
-        padding: 0 15px 50px;
+        padding: 0 rem(15) rem(50);
         @include helper-breakpoint-media-max($sm-max) {
-            padding: 0 5px 32px;
+            padding: 0 rem(5) rem(32);
         }
         &__container {
             position: relative;
@@ -13,7 +13,7 @@
                 text-decoration: none;
                 color: $setting-color-text;
                 #{$name}__thumbnail {
-                    box-shadow: 10px 10px 40px 0 rgba(0, 0, 0, 0.1);
+                    box-shadow: rem(10) rem(10) rem(40) 0 rgba(0, 0, 0, 0.1);
                     #{$name}__overlay {
                         &::after {
                             opacity: 0.09;
@@ -26,13 +26,13 @@
             }
         }
         &__thumbnail {
-            border-radius: 4px;
-            margin-bottom: 24px;
+            border-radius: rem(4);
+            margin-bottom: rem(24);
             position: relative;
             overflow: hidden;
             @include helper-effect-transition(box-shadow);
             @include helper-breakpoint-media-max($sm-max) {
-                margin-bottom: 9px;
+                margin-bottom: rem(9);
             }
             .thumbnail {
                 margin: 0;
@@ -40,9 +40,9 @@
         }
         &__overlay {
             display: block;
-            padding: 90px 20px 120px;
+            padding: rem(90) rem(20) rem(120);
             @include helper-breakpoint-media-max($sm-max) {
-                padding: 45px 10px 70px;
+                padding: rem(45) rem(10) rem(70);
             }
             &::before {
                 content: '';
@@ -51,7 +51,7 @@
                 left: 0;
                 right: 0;
                 bottom: 0;
-                border-radius: 4px;
+                border-radius: rem(4);
                 background: rgba(0, 0, 0, 0.05);
                 z-index: $setting-zi-element-floating;
             }
@@ -63,7 +63,7 @@
                 left: 0;
                 right: 0;
                 bottom: 0;
-                border-radius: 4px;
+                border-radius: rem(4);
                 background-image: linear-gradient(to bottom, #000000, rgba(0, 0, 0, 0));
                 opacity: 0;
                 z-index: $setting-zi-element-floating;
@@ -78,16 +78,16 @@
             left: 0;
             bottom: 0;
             width: 100%;
-            border-radius: 0 0 4px 4px;
+            border-radius: 0 0 rem(4) rem(4);
             margin-bottom: -100%;
-            padding: 16px 0;
+            padding: rem(16) 0;
         }
 
         &__actions-container {
             position: absolute;
-            bottom: 0.5rem;
-            left: 0.5rem;
-            right: 0.5rem;
+            bottom: rem(8);
+            left: rem(8);
+            right: rem(8);
             margin: auto;
         }
 
@@ -97,9 +97,9 @@
 
         &__info {
             display: block;
-            margin: 0 11px;
-            font: 500 16px $setting-font-family-additional;
-            letter-spacing: 0.3px;
+            margin: 0 rem(11);
+            font: 500 rem(16) $setting-font-family-additional;
+            letter-spacing: rem(0.3);
             color: $setting-color-darkest;
 
             &:hover {
@@ -108,8 +108,8 @@
             }
 
             @include helper-breakpoint-media-max($sm-max) {
-                font-size: 13px;
-                margin: 0 10px 3px;
+                font-size: rem(13);
+                margin: 0 rem(10) rem(3);
                 flex-wrap: wrap;
             }
         }
@@ -119,7 +119,7 @@
             font-weight: normal;
             text-align: right;
             @include helper-breakpoint-media-max($sm-max) {
-                margin-top: 3px;
+                margin-top: rem(3);
                 text-align: left;
             }
             &__amount {
@@ -127,12 +127,12 @@
                 color: $setting-color-dark;
                 &--original {
                     position: absolute;
-                    bottom: -20px;
+                    bottom: rem(-20);
                     right: 0;
                     color: $setting-color-lightest;
-                    font-size: 14px;
+                    font-size: rem(14);
                     @include helper-breakpoint-media-max($sm-max) {
-                        font-size: 11px;
+                        font-size: rem(11);
                         left: 0;
                         right: unset;
                     }
@@ -142,31 +142,31 @@
 
         &__review {
             display: flex;
-            margin-top: 7px;
+            margin-top: rem(7);
         }
 
         .rating-selector {
-            margin: 0 3px 0 11px;
+            margin: 0 rem(3) 0 rem(11);
             &__step {
                 &--half {
-                    width: 7px;
-                    height: 14px;
+                    width: rem(7);
+                    height: rem(14);
                 }
             }
             &__star {
-                width: 14px;
-                height: 14px;
+                width: rem(14);
+                height: rem(14);
                 &--half-left {
-                    margin-right: -7px;
+                    margin-right: rem(-7);
                 }
             }
         }
 
         .product-review-count {
-            font-size: 15px;
+            font-size: rem(15);
             color: $setting-color-dusty-gray;
             position: relative;
-            top: 1px;
+            top: rem(1);
         }
     }
 }

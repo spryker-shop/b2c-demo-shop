@@ -1,9 +1,9 @@
-$product-review-rating-selector-icon-size: 16px;
+$product-review-rating-selector-icon-size: rem(16);
 
 @mixin product-review-rating-selector($name: '.rating-selector') {
     #{$name} {
         display: flex;
-        margin-top: 6px;
+        margin-top: rem(6);
         align-items: center;
 
         &__steps {
@@ -11,7 +11,7 @@ $product-review-rating-selector-icon-size: 16px;
             direction: rtl;
             vertical-align: middle;
             line-height: 0;
-            margin-right: 6px;
+            margin-right: rem(6);
         }
 
         &__step {
@@ -24,14 +24,14 @@ $product-review-rating-selector-icon-size: 16px;
 
             &--full {
                 &:not(:first-child) {
-                    padding-right: 2px;
+                    padding-right: rem(2);
                 }
             }
 
             &--half {
                 width: $product-review-rating-selector-icon-size / 2;
                 &:nth-child(odd) {
-                    margin-right: 2px;
+                    margin-right: rem(2);
                 }
             }
         }
@@ -65,10 +65,10 @@ $product-review-rating-selector-icon-size: 16px;
         }
 
         .product-review-count {
-            font: 400 19px $setting-font-family;
+            font: 400 rem(19) $setting-font-family;
             color: $setting-color-dusty-gray;
             @include helper-breakpoint-media-max($md-max) {
-                font-size: 18px;
+                font-size: rem(18);
             }
         }
 

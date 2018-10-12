@@ -1,37 +1,37 @@
 @mixin shop-ui-nav-overlay($name: '.nav-overlay') {
     #{$name} {
         position: absolute;
-        right: calc(1.8rem - 40px);
-        top: -18px;
+        right: rem(-11);
+        top: rem(-18);
         z-index: 5;
         height: 0;
 
         &__title {
-            font: bold 36px $setting-font-family-additional;
-            padding-bottom: 10px;
-            border-bottom: 1px dotted $setting-color-lightest;
+            font: bold rem(36) $setting-font-family-additional;
+            padding-bottom: rem(10);
+            border-bottom: rem(1) dotted $setting-color-lightest;
         }
         &__buttons {
-            border-top: 1px dotted $setting-color-lightest;
-            padding-top: 20px;
+            border-top: rem(1) dotted $setting-color-lightest;
+            padding-top: rem(20);
             .button {
-                font: 500 14px $setting-font-family-additional;
-                height: 48px;
-                width: calc(50% - 10px);
+                font: 500 rem(14) $setting-font-family-additional;
+                height: rem(48);
+                width: calc(50% - rem(10));
                 padding: 0;
-                line-height: 48px;
+                line-height: rem(48);
             }
         }
 
         &__inner-box {
-            padding: 20px 0;
+            padding: rem(20) 0;
         }
         &__link {
             display: block;
-            font: normal 14px $setting-font-family-additional;
-            margin: 30px 0;
+            font: normal rem(14) $setting-font-family-additional;
+            margin: rem(30) 0;
             text-transform: uppercase;
-            letter-spacing: 0.8px;
+            letter-spacing: rem(0.8);
             position: relative;
             &:hover {
                 text-decoration: none;
@@ -39,8 +39,8 @@
             &::after {
                 content: '';
                 display: block;
-                height: 13px;
-                width: 7px;
+                height: rem(13);
+                width: rem(7);
                 top: 50%;
                 right: 0;
                 transform: translate(0, -50%);
@@ -49,14 +49,14 @@
                 background-size: cover;
             }
             &--sm {
-                font-size: 12px;
+                font-size: rem(12);
                 margin: 0;
-                padding-top: 25px;
-                border-top: 1px dotted $setting-color-lightest;
+                padding-top: rem(25);
+                border-top: rem(1) dotted $setting-color-lightest;
                 &::after {
-                    width: 6px;
-                    height: 11px;
-                    top: calc(50% + 12px);
+                    width: rem(6);
+                    height: rem(11);
+                    top: calc(50% + rem(12));
                 }
             }
         }
@@ -74,9 +74,9 @@
             transition: opacity 400ms ease-in-out, visibility 400ms ease-in-out 400ms;
         }
         &__container {
-            width: 450px;
+            width: rem(450);
             background: $setting-color-white;
-            padding: 67px 40px 40px;
+            padding: rem(67) rem(40) rem(40);
             z-index: 5;
             opacity: 0;
             transition: all 400ms ease-in-out;
@@ -86,26 +86,26 @@
         }
 
         &__item-option {
-            font: normal 13px $setting-font-family-additional;
+            font: normal rem(13) $setting-font-family-additional;
             line-height: 1.31;
             span {
                 display: inline-block;
-                margin-left: 5px;
+                margin-left: rem(5);
             }
         }
         &__total {
-            padding: 10px 0;
+            padding: rem(10) 0;
             strong {
                 text-transform: uppercase;
-                font: 500 14px $setting-font-family-additional;
+                font: 500 rem(14) $setting-font-family-additional;
             }
         }
 
         &__empty-text {
-            font: normal 15px $setting-font-family-additional;
+            font: normal rem(15) $setting-font-family-additional;
             line-height: 1.47;
-            padding: 30px 0;
-            border-bottom: 1px dotted $setting-color-lightest;
+            padding: rem(30) 0;
+            border-bottom: rem(1) dotted $setting-color-lightest;
             color: $setting-color-lighter;
         }
 
@@ -125,22 +125,22 @@
 
         .cart-item {
             &__title {
-                font-size: 15px;
-                margin: 0 0 5px;
+                font-size: rem(15);
+                margin: 0 0 rem(5);
             }
             &__price {
-                font-size: 15px;
+                font-size: rem(15);
             }
             &__image {
-                width: 100px;
+                width: rem(100);
                 .thumbnail {
-                    height: 60px;
+                    height: rem(60);
                 }
             }
             &__content {
                 margin-left: 0;
-                padding-left: 20px;
-                width: calc(100% - 100px);
+                padding-left: rem(20);
+                width: calc(100% - rem(100));
             }
         }
     }
