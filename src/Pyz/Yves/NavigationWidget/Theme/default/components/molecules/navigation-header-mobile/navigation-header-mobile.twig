@@ -11,9 +11,9 @@
 
 {% block body %}
     <nav class="{{ config.name }}__block">
-        <div class="{{ config.name }}__arrow {{ config.name }}__arrow--left">
+        <div class="{{ config.name }}__arrow {{ config.name }}__arrow--left {{ config.name }}__arrow--hidden">
             {% include atom('icon') with {
-                class: 'icon--smaller',
+                class: config.name ~ '__icon icon--smaller',
                 data: {
                     name: 'arrow-left'
                 }
@@ -35,7 +35,7 @@
 
         <div class="{{ config.name }}__arrow {{ config.name }}__arrow--right">
             {% include atom('icon') with {
-                class: 'icon--smaller',
+                class: config.name ~ '__icon icon--smaller',
                 data: {
                     name: 'arrow-right'
                 }
