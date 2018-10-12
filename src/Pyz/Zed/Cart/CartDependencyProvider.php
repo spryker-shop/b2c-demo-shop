@@ -76,7 +76,6 @@ class CartDependencyProvider extends SprykerCartDependencyProvider
             new ProductOptionValuePriceExistsCartPreCheckPlugin(),
             new CartBundleAvailabilityPreCheckPlugin(),
             new CartShipmentPreCheckPlugin(),
-            new ProductQuantityRestrictionCartPreCheckPlugin(),
             new ProductDiscontinuedCartPreCheckPlugin(),
         ];
     }
@@ -126,9 +125,7 @@ class CartDependencyProvider extends SprykerCartDependencyProvider
      */
     protected function getCartRemovalPreCheckPlugins(Container $container)
     {
-        return [
-            new ProductQuantityRestrictionCartRemovalPreCheckPlugin(),
-        ];
+        return [];
     }
 
     /**

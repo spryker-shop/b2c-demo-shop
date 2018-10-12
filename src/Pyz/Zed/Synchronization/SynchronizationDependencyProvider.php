@@ -29,7 +29,6 @@ use Spryker\Zed\ProductLabelStorage\Communication\Plugin\Synchronization\Product
 use Spryker\Zed\ProductLabelStorage\Communication\Plugin\Synchronization\ProductLabelDictionarySynchronizationDataPlugin;
 use Spryker\Zed\ProductOptionStorage\Communication\Plugin\Synchronization\ProductOptionSynchronizationDataPlugin;
 use Spryker\Zed\ProductPageSearch\Communication\Plugin\Synchronization\ProductPageSynchronizationDataPlugin;
-use Spryker\Zed\ProductQuantityStorage\Communication\Plugin\Synchronization\ProductQuantitySynchronizationDataPlugin;
 use Spryker\Zed\ProductRelationStorage\Communication\Plugin\Synchronization\ProductRelationSynchronizationDataPlugin;
 use Spryker\Zed\ProductReviewSearch\Communication\Plugin\Synchronization\ProductReviewSynchronizationDataPlugin as ProductReviewSearchSynchronizationDataPlugin;
 use Spryker\Zed\ProductReviewStorage\Communication\Plugin\Synchronization\ProductReviewSynchronizationDataPlugin;
@@ -73,7 +72,6 @@ class SynchronizationDependencyProvider extends SprykerSynchronizationDependency
             new ProductConcreteImageSynchronizationDataPlugin(),
             new ProductAbstractLabelSynchronizationDataPlugin(),
             new ProductLabelDictionarySynchronizationDataPlugin(),
-            new ProductQuantitySynchronizationDataPlugin(),
             new ProductOptionSynchronizationDataPlugin(),
             new ProductRelationSynchronizationDataPlugin(),
             new ProductReviewSynchronizationDataPlugin(),
