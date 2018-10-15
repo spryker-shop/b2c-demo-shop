@@ -1,8 +1,4 @@
 @mixin basic-grid() {
-    .icon-sprite {
-        display: none;
-    }
-
     .container {
         display: block;
         width: 100%;
@@ -11,102 +7,6 @@
 
         &__inner {
             margin: 0 rem(16);
-        }
-    }
-
-    .grid {
-        @include helper-ui-clearfix;
-        clear: both;
-        display: flex;
-        flex-flow: row wrap;
-        align-items: flex-start;
-        justify-content: flex-start;
-        max-width: 100%;
-
-        &--top {
-            align-items: flex-start;
-        }
-
-        &--bottom {
-            align-items: flex-end;
-        }
-
-        &--center {
-            justify-content: center;
-        }
-
-        &--middle {
-            align-items: center;
-        }
-
-        &--justify {
-            justify-content: space-between;
-
-            & .col {
-                margin-left: auto;
-                margin-right: auto;
-
-                &:first-child {
-                    margin-left: 0;
-                }
-
-                &:last-child {
-                    margin-right: 0;
-                }
-            }
-        }
-
-        &--stretch {
-            align-items: stretch;
-
-            & .col {
-                margin-top: 0;
-                margin-bottom: 0;
-            }
-        }
-
-        &--left {
-            justify-content: flex-start;
-
-            & .col--left {
-                margin-right: 0;
-                margin-left: 0;
-            }
-        }
-
-        &--right {
-            justify-content: flex-end;
-
-            & .col--right {
-                margin-right: 0;
-                margin-left: 0;
-            }
-        }
-
-        &--inline {
-            display: inline-flex;
-        }
-
-        &.container {
-            max-width: $setting-grid-max-width;
-        }
-
-        &--no-wrap {
-            flex-wrap: nowrap;
-        }
-
-        &--spaced {
-            &-sm {
-                padding: 0 rem(8);
-            }
-
-            &-md {
-                padding: 0 rem(12.8);
-            }
-
-            &-lg {
-                padding: 0 rem(16);
-            }
         }
     }
 
@@ -167,6 +67,102 @@
 
             &-lg {
                 padding: rem(16);
+            }
+        }
+    }
+
+    .grid {
+        @include helper-ui-clearfix;
+        clear: both;
+        display: flex;
+        flex-flow: row wrap;
+        align-items: flex-start;
+        justify-content: flex-start;
+        max-width: 100%;
+
+        &--top {
+            align-items: flex-start;
+        }
+
+        &--bottom {
+            align-items: flex-end;
+        }
+
+        &--center {
+            justify-content: center;
+        }
+
+        &--middle {
+            align-items: center;
+        }
+
+        &--stretch {
+            align-items: stretch;
+
+            .col {
+                margin-top: 0;
+                margin-bottom: 0;
+            }
+        }
+
+        &--justify {
+            justify-content: space-between;
+
+            .col {
+                margin-left: auto;
+                margin-right: auto;
+
+                &:first-child {
+                    margin-left: 0;
+                }
+
+                &:last-child {
+                    margin-right: 0;
+                }
+            }
+        }
+
+        &--left {
+            justify-content: flex-start;
+
+            .col--left {
+                margin-right: 0;
+                margin-left: 0;
+            }
+        }
+
+        &--right {
+            justify-content: flex-end;
+
+            .col--right {
+                margin-right: 0;
+                margin-left: 0;
+            }
+        }
+
+        &--inline {
+            display: inline-flex;
+        }
+
+        &.container {
+            max-width: $setting-grid-max-width;
+        }
+
+        &--no-wrap {
+            flex-wrap: nowrap;
+        }
+
+        &--spaced {
+            &-sm {
+                padding: 0 rem(8);
+            }
+
+            &-md {
+                padding: 0 rem(12.8);
+            }
+
+            &-lg {
+                padding: 0 rem(16);
             }
         }
     }

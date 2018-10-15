@@ -2,6 +2,39 @@
     #{$name} {
         border-top: rem(1) solid $setting-color-lightest;
 
+        &__top {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin: 0 rem(16);
+            padding: rem(30) 0 0;
+
+            @include helper-breakpoint-media-min($md-min) {
+                border-bottom: dotted rem(1) $setting-color-lightest-1;
+                padding: 0 0 rem(30);
+            }
+
+            @include helper-breakpoint-media-min($xl-min) {
+                padding: rem(92) 0 rem(70);
+            }
+        }
+
+        &__top-col {
+            width: 100%;
+            margin-top: rem(-1);
+            border-top: solid rem(1) $setting-color-lightest-1;
+            border-bottom: solid rem(1) $setting-color-lightest-1;
+
+            @include helper-breakpoint-media-min($md-min) {
+                width: auto;
+                border: none;
+            }
+
+            @include helper-breakpoint-media-min($xl-min) {
+                padding-right: 10%;
+            }
+        }
+
         &__title {
             font: bold rem(13) $setting-font-family-additional;
             text-transform: uppercase;
@@ -10,179 +43,144 @@
             white-space: nowrap;
             padding: 0 0 rem(16);
             cursor: default;
+
             @include helper-breakpoint-media-max($md-max) {
                 padding: rem(16) 0;
                 cursor: pointer;
+
+                &--nav {
+                    position: relative;
+
+                    &::before {
+                        content: '';
+                        width: rem(10);
+                        height: rem(2);
+                        background: $setting-color-dark;
+                        position: absolute;
+                        top: 50%;
+                        right: 0;
+                        margin-top: rem(-1);
+                    }
+
+                    &::after {
+                        content: '';
+                        width: rem(2);
+                        height: rem(10);
+                        background: $setting-color-dark;
+                        position: absolute;
+                        top: 50%;
+                        right: rem(4);
+                        margin-top: rem(-5);
+                    }
+
+                    &.active {
+                        &::after {
+                            display: none;
+                        }
+                    }
+                }
             }
         }
 
-        &-title-nav {
-            @include helper-breakpoint-media-max($sm-max) {
-                position: relative;
-                &::before {
-                    content: '';
-                    width: rem(10);
-                    height: rem(2);
-                    background: $setting-color-dark;
-                    position: absolute;
-                    top: 50%;
-                    right: 0;
-                    margin-top: rem(-1);
-                }
-                &::after {
-                    content: '';
-                    width: rem(2);
-                    height: rem(10);
-                    background: $setting-color-dark;
-                    position: absolute;
-                    top: 50%;
-                    right: rem(4);
-                    margin-top: rem(-4);
-                }
-                &.active::after {
+        &__navigation-main {
+            &--hidden {
+                @include helper-breakpoint-media-max($sm-max) {
                     display: none;
                 }
             }
-        }
 
-        &-top {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            margin: 0 rem(16);
-            padding: rem(30) 0 0;
-            &__col {
-                width: 100%;
-                margin-top: rem(-1);
-                border-top: solid rem(1) $setting-color-lightest-1;
-                border-bottom: solid rem(1) $setting-color-lightest-1;
-            }
-            .navigation-footer {
+            li {
                 padding-bottom: rem(10);
-            }
-            @include helper-breakpoint-media-min($md-min) {
-                border-bottom: dotted rem(1) $setting-color-lightest-1;
-                padding: 0 0 rem(30);
-                &__col {
-                    width: auto;
-                    border: none;
-                }
-                .navigation-footer {
-                    padding-bottom: 0;
-                }
-            }
-            @include helper-breakpoint-media-min($xl-min) {
-                padding: rem(92) 0 rem(70);
-                &__col {
-                    padding-right: 10%;
+                font-size: rem(15);
+
+                @include helper-breakpoint-media-max($sm-max) {
+                    a {
+                        color: rgba($setting-color-text, 0.5);
+                    }
                 }
             }
         }
 
-        &__navigation-main li {
-            padding-bottom: rem(10);
-            font-size: rem(15);
-            @include helper-breakpoint-media-max($sm-max) {
-                a {
-                    color: rgba($setting-color-text, 0.5);
-                }
-            }
-        }
-
-        .hidden-nav {
-            @include helper-breakpoint-media-max($sm-max) {
-                display: none;
-            }
-        }
-
-        .subscription-wrapper {
+        &__subscription {
             width: 100%;
             padding-bottom: rem(50);
+
             @include helper-breakpoint-media-between($md-min, $lg-max) {
                 margin-bottom: rem(30);
                 border-bottom: dotted rem(1) $setting-color-lightest;
             }
+
             @include helper-breakpoint-media-min($xl-min) {
                 width: auto;
             }
         }
 
-        &-logo-section {
+        &__logo-section {
             order: 1;
         }
 
-        .footer-logo-copy {
+        &__logo-copy {
             @include helper-breakpoint-media-min($md-min) {
                 display: flex;
                 align-items: center;
             }
-            &__logo {
-                padding: 0;
-                width: rem(90);
-                display: block;
-                margin-right: rem(12);
-                border: none;
-                transform: translate(0, rem(-5));
-                img {
-                    width: rem(150);
-                }
-                @include helper-breakpoint-media-min($md-min) {
-                    width: rem(102);
-                }
+        }
+
+        &__logo-copy-logo {
+            padding: 0;
+            width: rem(90);
+            display: block;
+            margin-right: rem(12);
+            border: none;
+            transform: translate(0, rem(-5));
+
+            img {
+                width: rem(150);
             }
-            &__text {
-                letter-spacing: rem(3.2);
-                line-height: 1.6;
-                font: normal rem(10) $setting-font-family-additional;
-                text-transform: uppercase;
-                margin-right: rem(10);
-            }
-            &__links {
-                display: flex;
-                flex-direction: column;
-                position: absolute;
-            }
-            &__link {
-                font-size: rem(13);
-                margin-right: rem(10);
-                color: $setting-color-light;
+
+            @include helper-breakpoint-media-min($md-min) {
+                width: rem(102);
             }
         }
 
-        &-bottom {
+        &__logo-copy-text {
+            letter-spacing: rem(3.2);
+            font: normal rem(10)/rem(16) $setting-font-family-additional;
+            text-transform: uppercase;
+            margin-right: rem(10);
+        }
+
+        &__logo-copy-links {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+        }
+
+        &__logo-copy-link {
+            font-size: rem(13);
+            margin-right: rem(10);
+            color: $setting-color-light;
+        }
+
+        &__bottom {
             margin: rem(16) rem(16) 0;
             justify-content: space-between;
             padding: 0 0 rem(50);
+
             @include helper-breakpoint-media-min($xl-min) {
                 padding: 0 0 rem(86);
             }
+
             &::after {
                 display: none;
             }
+
             &:first-child {
                 margin-top: rem(30);
             }
         }
 
-        .navigation-footer {
-            font-size: rem(15);
-            font-weight: normal;
-            line-height: 2.13;
-            letter-spacing: rem(0.5);
-        }
-
-        .copyright {
-            opacity: 0.4;
-            font-size: rem(12);
-            line-height: normal;
-            letter-spacing: normal;
-            padding: rem(2) 0 0 rem(1);
-            @include helper-breakpoint-media-min($md-min) {
-                font-size: rem(14);
-            }
-        }
-
-        &-icons {
+        &__icon-lists {
             display: flex;
             justify-content: center;
             padding: rem(5) 0 rem(20);
@@ -190,12 +188,7 @@
             border-bottom: dotted rem(1) $setting-color-lightest;
             width: 100%;
             order: 0;
-            .menu__item {
-                margin: 0 rem(15) !important;
-                @include helper-breakpoint-media-min($md-min) {
-                    margin: 0 rem(10) !important;
-                }
-            }
+
             @include helper-breakpoint-media-min($lg-min) {
                 width: auto;
                 border-bottom: 0;
@@ -205,55 +198,28 @@
             }
         }
 
-        .icon-visa {
-            width: rem(32);
-            height: rem(10);
+        &__icon-list {
+            margin: 0 rem(15);
+
+            @include helper-breakpoint-media-min($md-min) {
+                margin: 0 rem(10);
+            }
         }
 
-        .icon-mastercard {
-            width: rem(26);
-            height: rem(20);
-        }
-
-        .icon-paypal {
-            width: rem(41);
-            height: rem(11);
-        }
-
-        .icon-klarna {
-            width: rem(40);
-            height: rem(11);
-        }
-
-        .icon-dhl {
-            width: rem(64);
-            height: rem(8);
-        }
-
-        .icon-hermes {
-            width: rem(68);
-            height: rem(9);
-        }
-
-        &-currency-lang {
+        &__currency-lang {
             display: flex;
             order: 1;
-            .custom-select {
-                margin-left: rem(16);
-                font-size: rem(16);
-                .select2-selection__rendered {
-                    line-height: rem(24);
-                }
-            }
-            .custom-select__caret {
-                pointer-events: none;
-            }
         }
 
-        .subscription-text {
+        &__select {
+            margin-left: rem(16);
+            font-size: rem(16);
+            line-height: rem(24);
+        }
+
+        &__subscription-text {
             color: $setting-color-text;
-            font: normal rem(15) $setting-font-family;
-            line-height: rem(22.5);
+            font: normal rem(15)/rem(22) $setting-font-family;
             display: block;
             max-width: rem(210);
         }
