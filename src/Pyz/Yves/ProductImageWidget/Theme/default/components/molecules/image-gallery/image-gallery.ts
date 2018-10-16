@@ -4,13 +4,13 @@ import 'slick-carousel';
 
 export default class ImageGallery extends Component {
     readonly galleryItems: HTMLElement[];
-    readonly thumbnailSlider: $;
+    readonly thumbnailSlider: HTMLElement;
     readonly thumbnailItems: HTMLElement[];
 
     constructor() {
         super();
         this.galleryItems = <HTMLElement[]>Array.from(this.querySelectorAll(`.${this.jsName}__item`));
-        this.thumbnailSlider = $(`.${this.jsName}-thumbnail`);
+        this.thumbnailSlider = this.querySelector(`.${this.jsName}-thumbnail`);
         this.thumbnailItems = <HTMLElement[]>Array.from(this.querySelectorAll(`.${this.jsName}-thumbnail__item`));
     }
 
@@ -20,13 +20,13 @@ export default class ImageGallery extends Component {
     }
 
     protected mapEvents(): void {
-        this.thumbnailSlider[0].addEventListener('mouseenter', (event: Event) => this.onThumbnailHover(event), true);
+        this.thumbnailSlider.addEventListener('mouseenter', (event: Event) => this.onThumbnailHover(event), true);
     }
 
     protected initSlider(): void {
         let imagesQuantity = this.galleryItems.length;
         if(imagesQuantity > 1) {
-            this.thumbnailSlider.slick(
+            $(this.thumbnailSlider).slick(
                 this.thumbnailSliderConfig
             );
         }
