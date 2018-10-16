@@ -1,0 +1,25 @@
+@mixin filter-enumeration($name: '.filter-enumeration') {
+    #{$name} {
+        &--sidebar {
+            padding-bottom: rem(14);
+
+            #{$name} {
+                &__item {
+                    margin: 0 0 rem(8);
+
+                    &:last-child {
+                        margin-bottom: 0;
+                    }
+                }
+
+                &__itemInner {
+                    &:hover {
+                        color: $setting-color-main;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@include filter-enumeration();

@@ -13,12 +13,14 @@
 
 {% block body %}
     {% for filter in data.facets %}
-        {% set filterHasValues = filter.values is not defined or filter.values | length > 0 %}
+        {% set filterHasValues = (filter.values is not defined) or (filter.values | length > 0) %}
 
         {% if filterHasValues %}
             <div class="{{ config.name }}__item">
-                <div class="{{ config.name }}__title{{ ' js-filter-trigger' }}"
-                    {{ 'data-toggle-target=.js-' ~  filter.name }}>
+                <div
+                    class="{{ config.name }}__title js-filter-trigger"
+                    data-toggle-target=".js-{{ filter.name }}"
+                >
                     {{ ('product.filter.' ~ filter.name | lower) | trans }}
                 </div>
 
@@ -27,6 +29,7 @@
                     molecule('filter-' ~ filter.config.type, 'CatalogPage')
                 ] ignore missing with {
                     class: 'js-' ~  filter.name ~ ' is-hidden',
+                    modifiers: ['sidebar'],
                     data: {
                         filterPath: data.filterPath,
                         categories: data.categories,
@@ -49,15 +52,16 @@
         }
     } only %}
 
-    <div class="grid grid--justify grid--middle filter-actions">
-        <span class="col close-popup js-trigger-filter">
+    <div class="grid grid--justify grid--middle {{ config.name }}__actions">
+        <span class="col {{ config.name }}__close-popup js-trigger-filter">
             {% include atom('icon') with {
                 data: {
                     name: 'close'
                 }
             } only %}
         </span>
-        <button type="submit" class="col button button--black apply-filter">
+
+        <button type="submit" class="col button button--black {{ config.name }}__button">
             {{ 'catalog.filter.button' | trans }}
         </button>
     </div>

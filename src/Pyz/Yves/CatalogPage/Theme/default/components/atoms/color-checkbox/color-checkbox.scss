@@ -1,0 +1,169 @@
+@mixin color-checkbox($name: '.color-checkbox') {
+    $filter-color-white:    #f2f2f2;
+    $filter-color-black:    #000000;
+    $filter-color-gray:     #dcdcdc;
+    $filter-color-silver:   #d3d3d3;
+    $filter-color-blue:     #6281d8;
+    $filter-color-yellow:   #ffff00;
+    $filter-color-purple:   #9370db;
+    $filter-color-pink:     #ff69b4;
+    $filter-color-platinum: #e5e4e2;
+    $filter-color-copper:   #da8a67;
+    $filter-color-organge:  #ff4500;
+    $filter-color-gold:     #c5b358;
+    $filter-color-navy:     #00004e;
+    $filter-color-green:    #006400;
+    $filter-color-red:      #dc2e09;
+    $filter-color-brown:    #835c3b;
+
+    @include shop-ui-checkbox('.color-checkbox');
+
+    #{$name} {
+        &:hover {
+            #{$name}__label {
+                transform: scale(1);
+            }
+        }
+
+        &__container {
+            position: relative;
+            width: rem(20);
+            height: rem(20);
+            border-radius: 100%;
+            cursor: pointer;
+
+            &.White,
+            &.Weiß {
+                background-color: $filter-color-white;
+            }
+
+            &.Dark,
+            &.Black,
+            &.Schwarz {
+                background-color: $filter-color-black;
+            }
+
+            &.Grey,
+            &.Grau {
+                background-color: $filter-color-gray;
+            }
+
+            &.Silver,
+            &.Silber {
+                background-color: $filter-color-silver;
+            }
+
+            &.Blue,
+            &.Blau {
+                background-color: $filter-color-blue;
+            }
+
+            &.Yellow,
+            &.Gelb {
+                background-color: $filter-color-yellow;
+            }
+
+            &.Purple,
+            &.Lila {
+                background-color: $filter-color-purple;
+            }
+
+            &.Pink {
+                background-color: $filter-color-pink;
+            }
+
+            &.Platinum,
+            &.Platin {
+                background-color: $filter-color-platinum;
+            }
+
+            &.Copper,
+            &.Kupfer {
+                background-color: $filter-color-copper;
+            }
+
+            &.Orange,
+            &.Orange {
+                background-color: $filter-color-organge;
+            }
+
+            &.Gold {
+                background-color: $filter-color-gold;
+            }
+
+            &.Navy,
+            &.Marineblau {
+                background-color: $filter-color-navy;
+            }
+
+            &.Green,
+            &.Grün {
+                background-color: $filter-color-green;
+            }
+
+            &.Red,
+            &.Rot {
+                background-color: $filter-color-red;
+            }
+
+            &.Brown,
+            &.Braun {
+                background-color: $filter-color-brown;
+            }
+        }
+
+        &__check {
+            display: none;
+        }
+
+        &__label {
+            @include helper-effect-transition(all);
+            transform: scale(0);
+            transform-origin: bottom;
+            position: absolute;
+            top: rem(-38);
+            left: rem(-13);
+            background: $setting-color-darkest;
+            color: $setting-color-white;
+            font: 300 rem(16) $setting-font-family;
+            padding: rem(5) rem(11) rem(7) rem(10);
+            white-space: nowrap;
+            border-radius: rem(2);
+
+            &::before {
+                content: '';
+                position: absolute;
+                left: rem(17);
+                bottom: rem(-4);
+                border-radius: rem(2);
+                background: $setting-color-darkest;
+                width: rem(10);
+                height: rem(10);
+                transform: rotate(45deg);
+            }
+        }
+
+        &__box {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: rem(22);
+            height: rem(22);
+            border: solid rem(4) $setting-color-white;
+            border-radius: 100%;
+            background: none;
+            margin-top: 0;
+        }
+
+        &:hover #{$name}__box,
+        &__input:checked + #{$name}__box {
+            width: rem(18);
+            height: rem(18);
+            border: solid rem(2) $setting-color-white;
+            background: none;
+        }
+    }
+}
+
+@include color-checkbox;
