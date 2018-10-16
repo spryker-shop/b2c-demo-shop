@@ -4,29 +4,28 @@ import 'slick-carousel';
 
 export default class ImageGallery extends Component {
     readonly galleryItems: HTMLElement[];
-    readonly quantityImages: number;
     readonly thumbnailSlider: $;
-
+    readonly thumbnailItems: HTMLElement[];
 
     constructor() {
         super();
-        this.galleryItems = <HTMLElement[]>Array.from(this.querySelectorAll(`.${this.jsName}-item`));
-        this.quantityImages = this.galleryItems.length;
+        this.galleryItems = <HTMLElement[]>Array.from(this.querySelectorAll(`.${this.jsName}__item`));
         this.thumbnailSlider = $(`.${this.jsName}-thumbnail`);
+        this.thumbnailItems = <HTMLElement[]>Array.from(this.querySelectorAll(`.${this.jsName}-thumbnail__item`));
     }
 
-    readyCallback(): void {
-        this.initializationSlider();
+    protected readyCallback(): void {
+        this.initSlider();
         this.mapEvents();
     }
 
     protected mapEvents(): void {
-        this.thumbnailSlider.on('mouseenter', '.slick-slide', (event: Event) => this.onThumbnailHover(event));
-        this.thumbnailSlider.on('afterChange', (event: Event, slider: $) => this.onAfterChange(event, slider));
+        this.thumbnailSlider[0].addEventListener('mouseenter', (event: Event) => this.onThumbnailHover(event), true);
     }
 
-    protected initializationSlider(): void {
-        if(this.quantityImages > 1) {
+    protected initSlider(): void {
+        let imagesQuantity = this.galleryItems.length;
+        if(imagesQuantity > 1) {
             this.thumbnailSlider.slick(
                 this.thumbnailSliderConfig
             );
@@ -34,29 +33,26 @@ export default class ImageGallery extends Component {
     }
 
     protected onThumbnailHover(event: Event): void {
-        let slide = <HTMLElement> event.currentTarget,
-            index = Number(slide.dataset.slickIndex);
-        if(!slide.classList.contains('slick-current')) {
-            this.thumbnailSlider.find('.slick-slide').removeClass('slick-current');
-            slide.classList.add('slick-current');
-            this.changeImage(index);
+        let hovered = <HTMLElement> event.target;
+        if(hovered.classList.contains(`${this.jsName}-thumbnail__item`)) {
+           this.thumbnailChange(hovered);
         }
     }
 
-    protected onAfterChange(event: Event, slider: $): void {
-        let index = slider.currentSlide;
-        this.changeImage(index);
+    protected thumbnailChange(thumbnail) {
+        let index = Number(thumbnail.dataset.thumbnailIndex);
+        if(!thumbnail.classList.contains(this.thumbnailActiveClass)) {
+            this.thumbnailItems.forEach((thumbnailItem) => thumbnailItem.classList.remove(this.thumbnailActiveClass));
+            thumbnail.classList.add(this.thumbnailActiveClass);
+            this.setActiveImage(index);
+        }
     }
 
-    protected changeImage(activeItemIndex: number): void {
-        this.galleryItems.forEach((galleryItem, index) => {
-            if(galleryItem.classList.contains(this.activeClass) && activeItemIndex !== index){
-                galleryItem.classList.remove(this.activeClass);
-            }
-            if(activeItemIndex === index) {
-                galleryItem.classList.add(this.activeClass);
-            }
+    public setActiveImage(activeItemIndex: number): void {
+        this.galleryItems.forEach((galleryItem) => {
+            galleryItem.classList.remove(this.activeClass);
         });
+        this.galleryItems[activeItemIndex].classList.add(this.activeClass);
     }
 
     get activeClass(): string {
@@ -65,5 +61,9 @@ export default class ImageGallery extends Component {
 
     get thumbnailSliderConfig(): object {
         return JSON.parse(this.getAttribute('slider-config'));
+    }
+
+    get thumbnailActiveClass(): string {
+        return this.getAttribute('thumbnail-active-class');
     }
 }

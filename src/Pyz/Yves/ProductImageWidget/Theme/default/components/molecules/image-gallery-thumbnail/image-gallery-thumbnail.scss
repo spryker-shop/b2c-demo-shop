@@ -22,6 +22,18 @@
             margin: rem(8) 0;
             cursor: pointer;
 
+            &--active {
+                padding: 0;
+                border: solid 2px $setting-color-white;
+                @include helper-breakpoint-media-max($md-max) {
+                    border: none;
+                }
+
+                #{$name}__img {
+                    opacity: 1;
+                }
+            }
+
             &::before {
                 content: '';
                 position: absolute;
@@ -38,6 +50,7 @@
                 background-color: $setting-color-white;
                 margin: 0;
                 cursor: default;
+                border: none;
             }
         }
 
@@ -46,6 +59,7 @@
 
             @include helper-breakpoint-media-max($md-max) {
                 max-height: rem(250);
+                opacity: 1;
             }
         }
 
@@ -64,21 +78,6 @@
         .slick-slide {
             border: none;
             height: rem(52);
-        }
-
-        .slick-current {
-
-            #{$name}__item {
-                padding: 0;
-                border: solid 2px $setting-color-white;
-                @include helper-breakpoint-media-max($md-max) {
-                    border: none;
-                }
-            }
-
-            #{$name}__img {
-                opacity: 1;
-            }
         }
 
         .slick-disabled {
@@ -121,7 +120,7 @@
 
                 li {
                     margin: 0 rem(4);
-                    font: 0/0 $setting-font-family;
+                    font-size: 0;
                     border: solid 1px transparent;
                     padding: rem(1);
                     border-radius: 100%;
