@@ -3,59 +3,78 @@
         position: absolute;
         right: calc(1.8rem - 40px);
         top: -18px;
-        z-index: 5;
+        z-index: -1;
         height: 0;
+
+        &.is-active {
+            .overlay-shadow {
+                opacity: 0.4;
+                visibility: visible;
+                transition: opacity 400ms ease-in-out, visibility 0ms ease-in-out;
+            }
+
+            #{$name}__container {
+                opacity: 1;
+                transform: scaleY(1);
+                visibility: visible;
+            }
+        }
 
         &__title {
             font: bold 36px $setting-font-family-additional;
-            padding-bottom: 10px;
+            padding-bottom: rem(10);
             border-bottom: 1px dotted $setting-color-lightest;
         }
+
         &__buttons {
             border-top: 1px dotted $setting-color-lightest;
-            padding-top: 20px;
+            padding-top: rem(20);
+
             .button {
                 font: 500 14px $setting-font-family-additional;
-                height: 48px;
                 width: calc(50% - 10px);
                 padding: 0;
-                line-height: 48px;
+                line-height: 46px;
             }
         }
 
         &__inner-box {
-            padding: 20px 0;
+            padding: rem(20) 0;
         }
+
         &__link {
             display: block;
             font: normal 14px $setting-font-family-additional;
-            margin: 30px 0;
+            margin: rem(30) 0;
             text-transform: uppercase;
-            letter-spacing: 0.8px;
+            letter-spacing: 1px;
             position: relative;
+
             &:hover {
                 text-decoration: none;
             }
+
             &::after {
                 content: '';
                 display: block;
-                height: 13px;
-                width: 7px;
+                height: rem(13);
+                width: rem(7);
+                position: absolute;
                 top: 50%;
                 right: 0;
-                transform: translate(0, -50%);
-                position: absolute;
-                background: url('/assets/images/right-chevron.svg') center no-repeat;
-                background-size: cover;
+                transform: translateY(-50%);
+                background: url('/assets/images/right-chevron.svg')no-repeat center / cover;
             }
+
             &--sm {
                 font-size: 12px;
                 margin: 0;
-                padding-top: 25px;
+                padding-top: rem(25);
                 border-top: 1px dotted $setting-color-lightest;
+
                 &::after {
-                    width: 6px;
-                    height: 11px;
+                    width: rem(6);
+                    height: rem(11);
                     top: calc(50% + 12px);
                 }
             }
@@ -68,18 +87,20 @@
             width: 100%;
             height: 100%;
             background: $setting-color-black;
-            z-index: -1;
+            z-index: $setting-zi-element;
             visibility: hidden;
             opacity: 0;
             transition: opacity 400ms ease-in-out, visibility 400ms ease-in-out 400ms;
         }
+
         &__container {
-            width: 450px;
+            @include helper-effect-transition(all, 400ms);
+            position: relative;
+            width: rem(450);
             background: $setting-color-white;
-            padding: 67px 40px 40px;
-            z-index: 5;
+            padding: rem(67) rem(40) rem(40);
+            z-index: $setting-zi-element + 1;
             opacity: 0;
-            transition: all 400ms ease-in-out;
             transform: scaleY(0);
             visibility: hidden;
             transform-origin: top center;
@@ -87,14 +108,17 @@
 
         &__item-option {
             font: normal 13px $setting-font-family-additional;
-            line-height: 1.31;
+            line-height: 1.3;
+
             span {
                 display: inline-block;
-                margin-left: 5px;
+                margin-left: rem(5);
             }
         }
+
         &__total {
-            padding: 10px 0;
+            padding: rem(10) 0;
+
             strong {
                 text-transform: uppercase;
                 font: 500 14px $setting-font-family-additional;
@@ -103,43 +127,33 @@
 
         &__empty-text {
             font: normal 15px $setting-font-family-additional;
-            line-height: 1.47;
-            padding: 30px 0;
+            line-height: 1.4;
+            padding: rem(30) 0;
             border-bottom: 1px dotted $setting-color-lightest;
             color: $setting-color-lighter;
-        }
-
-        &.is-active {
-            height: unset;
-            .overlay-shadow {
-                opacity: 0.4;
-                visibility: visible;
-                transition: opacity 400ms ease-in-out, visibility 0ms ease-in-out;
-            }
-            #{$name}__container {
-                opacity: 1;
-                transform: scaleY(1);
-                visibility: visible;
-            }
         }
 
         .cart-item {
             &__title {
                 font-size: 15px;
-                margin: 0 0 5px;
+                margin-bottom: rem(5);
             }
+
             &__price {
                 font-size: 15px;
             }
+
             &__image {
-                width: 100px;
+                width: rem(100);
+
                 .thumbnail {
-                    height: 60px;
+                    height: rem(60);
                 }
             }
+
             &__content {
                 margin-left: 0;
-                padding-left: 20px;
+                padding-left: rem(20);
                 width: calc(100% - 100px);
             }
         }

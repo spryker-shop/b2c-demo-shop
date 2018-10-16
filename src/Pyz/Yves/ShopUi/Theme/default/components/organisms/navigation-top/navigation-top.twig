@@ -11,19 +11,17 @@
     cartItems: app['cartItems'],
     showUserMenu: not (hideUserMenu | default(false)),
     isUserAuthenticated: is_granted('IS_AUTHENTICATED_FULLY'),
-    isInline: false,
     withSeparators: false
 } %}
 
 {% set cartQuantity = data.cartQuantity > 0 ? data.cartQuantity ~ ' ' : '' %}
-{% set menuClass = data.isInline ? 'menu--inline' : '' %}
 
 {% block body %}
-    <ul class="menu {{menuClass}} grid grid--middle">
+    <ul class="menu grid grid--middle grid--right">
         {% if data.showUserMenu %}
             {% if data.isUserAuthenticated %}
                 <li class="menu__item">
-                    <a href="{{ url('wishlist/overview') }}" class="grid grid--middle">
+                    <a href="{{ url('wishlist/overview') }}">
                         {% include atom('icon') with {
                             class: 'icon--big',
                             data: {
@@ -33,7 +31,7 @@
                     </a>
                 </li>
                 <li class="menu__item">
-                    <a href="{{ url('customer/overview') }}" class="grid grid--middle user-link js-user-open js-overlay-open">
+                    <a href="{{ url('customer/overview') }}" class="user-link js-user-open js-overlay-open">
                         {% include atom('icon') with {
                             class: 'icon--big',
                             data: {
@@ -44,7 +42,7 @@
                 </li>
             {% else %}
                 <li class="menu__item">
-                    <a href="{{ url('login') }}" class="grid grid--middle">
+                    <a href="{{ url('login') }}">
                         {% include atom('icon') with {
                             class: 'icon--big',
                             data: {
@@ -54,7 +52,7 @@
                     </a>
                 </li>
                 <li class="menu__item">
-                    <a href="{{ url('login') }}" class="grid grid--middle user-link js-user-open js-overlay-open">
+                    <a href="{{ url('login') }}" class="user-link js-user-open js-overlay-open">
                         {% include atom('icon') with {
                             class: 'icon--big',
                             data: {
@@ -67,7 +65,7 @@
         {% endif %}
 
         <li class="menu__item menu__item--cart">
-            <a href="{{ url('cart') }}" class="grid grid--middle cart-link js-cart-open js-overlay-open">
+            <a href="{{ url('cart') }}" class="cart-link js-cart-open js-overlay-open">
                 {% if cartQuantity > 0 %}
                     <span class="cart-link__quantity">{{cartQuantity}}</span>
                 {% endif %}
@@ -83,7 +81,7 @@
 
         <li class="nav-overlay js-overlay">
             <div class="overlay-shadow js-overlay-close"></div>
-            <div class="nav-overlay__container">
+            <div class="nav-overlay__container js-nav-overlay__container">
                 <div class="js-user-block">
                     <h4 class="nav-overlay__title">{{ 'customer.profile.title' | trans }}</h4>
                     <div class="nav-overlay__inner-box">
@@ -197,12 +195,9 @@
         attributes: {
             'trigger-open': '.js-overlay-open',
             'trigger-close': '.js-overlay-close',
-            'trigger-cart-open': '.js-cart-open',
-            'trigger-user-open': '.js-user-open',
-            'toggle-cart-target': '.js-cart-block',
-            'toggle-user-target': '.js-user-block',
+            'blocks': '.js-nav-overlay__container > div',
             'toggle-target': '.js-overlay',
-            'class-to-toggle': 'is-active'
+            'active-link': config.name ~ '--active'
         }
     } only %}
 {% endblock %}

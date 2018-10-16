@@ -1,55 +1,78 @@
 import Component from 'ShopUi/models/component';
-import $ from 'jquery/dist/jquery';
 
 export default class NavOverlayToggler extends Component {
+    protected triggers: HTMLElement[]
+    protected triggerClose: HTMLElement
+    protected blocks: HTMLElement[]
+    protected overlayElement: HTMLElement
+    protected savedIndex: number
 
     readyCallback(): void {
-        const triggerOpenSelector = $(this).attr('trigger-open');
-        const triggerCloseSelector = $(this).attr('trigger-close');
-        const triggerOpen = $(triggerOpenSelector);
-        const triggerClose = $(triggerCloseSelector);
+        this.triggers = <HTMLElement[]>Array.from(document.querySelectorAll(this.triggerOpenSelector));
+        this.triggerClose = <HTMLElement>document.querySelector(this.triggerCloseSelector);
+        this.blocks = <HTMLElement[]>Array.from(document.querySelectorAll(this.blocksSelector));
+        this.overlayElement = <HTMLElement>document.querySelector(this.overlaySelector);
+        this.savedIndex = <number> 0;
 
-        const triggerCartSelector = $(this).attr('trigger-cart-open');
-        const triggerUserSelector = $(this).attr('trigger-user-open');
-        const triggerCart = $(triggerCartSelector);
-        const triggerUser = $(triggerUserSelector);
-
-
-        const classToToggle = $(this).attr('class-to-toggle');
-        const toggleTargetSelector = $(this).attr('toggle-target');
-        const toggleTarget = $(toggleTargetSelector);
-
-        const toggleCartSelector = $(this).attr('toggle-cart-target');
-        const toggleUserSelector = $(this).attr('toggle-user-target');
-        const toggleCart = $(toggleCartSelector);
-        const toggleUser = $(toggleUserSelector);
-
-
-        triggerOpen.mouseenter(()=> {
-            if(!toggleTarget.hasClass(classToToggle)){
-                toggleTarget.addClass(classToToggle);
-                triggerOpen.addClass(classToToggle);
-            }
-        });
-
-        triggerClose.mouseenter(()=> {
-            toggleTarget.removeClass(classToToggle);
-            triggerOpen.removeClass(classToToggle);
-        });
-
-        triggerCart.mouseenter(()=> {
-            triggerUser.removeClass(classToToggle);
-            triggerCart.addClass(classToToggle);
-            toggleUser.addClass('is-hidden');
-            toggleCart.removeClass('is-hidden');
-        });
-
-        triggerUser.mouseenter(()=> {
-            triggerCart.removeClass(classToToggle);
-            triggerUser.addClass(classToToggle);
-            toggleCart.addClass('is-hidden');
-            toggleUser.removeClass('is-hidden');
-        });
+        this.hideBlocks();
+        this.mapEvents();
     }
 
+    protected hideBlocks(): void {
+        this.blocks.forEach(block => block.classList.add('is-hidden'));
+    }
+
+    protected mapEvents(): void {
+        this.triggers.forEach((trigger, index) => trigger.addEventListener('mouseenter', this.triggersHandler.bind(this, index)));
+        this.triggerClose.addEventListener('mouseenter', this.triggerCloseHandler.bind(this));
+    }
+
+    protected resetTriggersActiveClass(): void {
+        this.triggers.forEach(trigger => trigger.classList.remove(this.activetriggerClass));
+    }
+
+    protected triggersHandler(index, e): void {
+        e.stopPropagation();
+        if(!this.overlayElement.classList.contains(this.classToggle)) {
+            this.overlayElement.classList.add(this.classToggle);
+            this.blocks[index].classList.remove('is-hidden');
+            e.target.classList.add(this.activetriggerClass);
+        } else if(this.savedIndex !== index) {
+            this.hideBlocks();
+            this.resetTriggersActiveClass();
+            this.blocks[index].classList.remove('is-hidden');
+            e.target.classList.add(this.activetriggerClass);
+        }
+        this.savedIndex = index;
+    }
+
+    protected triggerCloseHandler(): void {
+        this.overlayElement.classList.remove(this.classToggle);
+        this.hideBlocks();
+        this.resetTriggersActiveClass();
+    }
+
+    get triggerOpenSelector(): string {
+        return this.getAttribute('trigger-open');
+    }
+
+    get triggerCloseSelector(): string {
+        return this.getAttribute('trigger-close');
+    }
+
+    get blocksSelector(): string {
+        return this.getAttribute('blocks');
+    }
+
+    get overlaySelector(): string {
+        return this.getAttribute('toggle-target');
+    }
+
+    get classToggle(): string {
+        return this.getAttribute('class-to-toggle');
+    }
+
+    get activetriggerClass(): string {
+        return this.getAttribute('active-link');
+    }
 }
