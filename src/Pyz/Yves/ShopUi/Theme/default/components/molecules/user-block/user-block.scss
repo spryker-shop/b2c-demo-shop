@@ -1,0 +1,67 @@
+@mixin user-block($name: '.user-block') {
+    #{$name} {
+        &__title {
+            font: bold 36px $setting-font-family-additional;
+            padding-bottom: rem(10);
+            border-bottom: 1px dotted $setting-color-lightest;
+        }
+
+        &__inner-box {
+            padding: rem(20) 0;
+        }
+
+        &__link {
+            display: block;
+            font: normal 14px $setting-font-family-additional;
+            margin: rem(30) 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+
+            &:hover {
+                text-decoration: none;
+            }
+
+            &::after {
+                content: '';
+                display: block;
+                height: rem(13);
+                width: rem(7);
+                position: absolute;
+                top: 50%;
+                right: 0;
+                transform: translateY(-50%);
+                background: url('/assets/images/right-chevron.svg')no-repeat center / cover;
+            }
+
+            &--sm {
+                font-size: 12px;
+                margin: 0;
+                padding-top: rem(25);
+                border-top: 1px dotted $setting-color-lightest;
+
+                &::after {
+                    width: rem(6);
+                    height: rem(11);
+                    top: calc(50% + 12px);
+                }
+            }
+        }
+
+        &__buttons-container {
+            border-top: 1px dotted $setting-color-lightest;
+            padding-top: rem(20);
+        }
+
+        &__button {
+            font: 500 14px $setting-font-family-additional;
+            width: calc(50% - 10px);
+            padding: 0;
+            line-height: 46px;
+        }
+
+        @content;
+    }
+}
+
+@include user-block();

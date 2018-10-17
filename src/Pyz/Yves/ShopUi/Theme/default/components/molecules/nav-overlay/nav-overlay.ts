@@ -1,17 +1,17 @@
 import Component from 'ShopUi/models/component';
 
-export default class NavOverlayToggler extends Component {
+export default class NavOverlay extends Component {
+    readonly classToggle = `${this.name}--active`
+
     protected triggers: HTMLElement[]
     protected triggerClose: HTMLElement
     protected blocks: HTMLElement[]
-    protected overlayElement: HTMLElement
     protected savedIndex: number
 
     readyCallback(): void {
         this.triggers = <HTMLElement[]>Array.from(document.querySelectorAll(this.triggerOpenSelector));
-        this.triggerClose = <HTMLElement>document.querySelector(this.triggerCloseSelector);
-        this.blocks = <HTMLElement[]>Array.from(document.querySelectorAll(this.blocksSelector));
-        this.overlayElement = <HTMLElement>document.querySelector(this.overlaySelector);
+        this.triggerClose = <HTMLElement>this.querySelector(`.${this.name}__shadow`);
+        this.blocks = <HTMLElement[]>Array.from(this.querySelectorAll(`.${this.name}__container > div`));
         this.savedIndex = <number> 0;
 
         this.hideBlocks();
@@ -28,26 +28,26 @@ export default class NavOverlayToggler extends Component {
     }
 
     protected resetTriggersActiveClass(): void {
-        this.triggers.forEach(trigger => trigger.classList.remove(this.activetriggerClass));
+        this.triggers.forEach(trigger => trigger.classList.remove(this.activeTriggerClass));
     }
 
     protected triggersHandler(index, e): void {
         e.stopPropagation();
-        if(!this.overlayElement.classList.contains(this.classToggle)) {
-            this.overlayElement.classList.add(this.classToggle);
+        if(!this.classList.contains(this.classToggle)) {
+            this.classList.add(this.classToggle);
             this.blocks[index].classList.remove('is-hidden');
-            e.target.classList.add(this.activetriggerClass);
+            e.target.classList.add(this.activeTriggerClass);
         } else if(this.savedIndex !== index) {
             this.hideBlocks();
             this.resetTriggersActiveClass();
             this.blocks[index].classList.remove('is-hidden');
-            e.target.classList.add(this.activetriggerClass);
+            e.target.classList.add(this.activeTriggerClass);
         }
         this.savedIndex = index;
     }
 
     protected triggerCloseHandler(): void {
-        this.overlayElement.classList.remove(this.classToggle);
+        this.classList.remove(this.classToggle);
         this.hideBlocks();
         this.resetTriggersActiveClass();
     }
@@ -56,23 +56,7 @@ export default class NavOverlayToggler extends Component {
         return this.getAttribute('trigger-open');
     }
 
-    get triggerCloseSelector(): string {
-        return this.getAttribute('trigger-close');
-    }
-
-    get blocksSelector(): string {
-        return this.getAttribute('blocks');
-    }
-
-    get overlaySelector(): string {
-        return this.getAttribute('toggle-target');
-    }
-
-    get classToggle(): string {
-        return this.getAttribute('class-to-toggle');
-    }
-
-    get activetriggerClass(): string {
+    get activeTriggerClass(): string {
         return this.getAttribute('active-link');
     }
 }

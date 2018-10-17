@@ -1,14 +1,22 @@
 @mixin shop-ui-navigation-top ($name: '.navigation-top') {
     #{$name} {
-        .menu {
-            &__item {
-                margin: 0;
-                padding: 0.8rem;
+        &__item {
+            position: relative;
+            margin: 0;
+            padding: 0.8rem;
+            z-index: $setting-zi-element + 2;
+
+            &--overlay {
+                position: static;
+                padding: 0;
+                z-index: $setting-zi-element;
             }
         }
 
-        &--active {
-            color: $setting-color-radical-red;
+        &__link {
+            &--active {
+                color: $setting-color-radical-red;
+            }
         }
     }
 }
