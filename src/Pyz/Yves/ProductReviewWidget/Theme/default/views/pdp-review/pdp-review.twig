@@ -47,22 +47,8 @@
                 'class-to-toggle': 'is-hidden'
             }
         } only %}
-        {% include molecule('toggler-hash') with {
-            attributes: {
-                'trigger-hash': '#review',
-                'target-selector': '.js-review__new-review-form-target',
-                'class-to-toggle': 'is-hidden',
-                'add-class-when-hash-in-url': false
-            }
-        } only %}
-
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-            <div class="popup popup--new-review is-hidden js-review__new-review-form-target">
-                <div class="popup__overlay js-review__new-review-trigger"></div>
-                <div class="popup__inner">
-                    {{ render(path('product-review/submit', {'idProductAbstract': data.idProductAbstract})) }}
-                </div>
-            </div>
+            {{ render(path('product-review/submit', {'idProductAbstract': data.idProductAbstract})) }}
         {% endif %}
 
         {{ render(path('product-review/index', {'idProductAbstract': data.idProductAbstract})) }}
