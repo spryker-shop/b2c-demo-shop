@@ -1,9 +1,57 @@
 @mixin shop-ui-navigation-multilevel-node($name: '.navigation-multilevel-node') {
     #{$name} {
         align-self: flex-end;
-        & > a {
-            color: inherit;
-            vertical-align: middle;
+        margin: 0 0.6rem;
+        text-transform: uppercase;
+        font: 500 rem(13) $setting-font-family-additional;
+        letter-spacing: rem(2);
+        white-space: nowrap;
+        cursor: default;
+
+        &:hover{
+            color: rgba(0, 0, 0, 0.5);
+            text-decoration: none;
+        }
+
+        &__menu {
+            box-shadow: 0 102px 100px 0 rgba(12, 16, 31, 0.07);
+        }
+
+        &__link {
+            text-transform: uppercase;
+            font: 500 rem(13) $setting-font-family-additional;
+            letter-spacing: rem(2);
+            white-space: nowrap;
+            cursor: pointer;
+
+            &:hover{
+                color: rgba(0, 0, 0, 0.5);
+                text-decoration: none;
+            }
+        }
+
+        &__child {
+            margin: rem(8) 0;
+
+            &:hover {
+                text-decoration: none;
+                color: $setting-color-text;
+                cursor: default;
+            }
+
+            #{$name}__link {
+                text-transform: capitalize;
+                white-space: nowrap;
+                color: $setting-color-text;
+                font: normal rem(16) $setting-font-family;
+                line-height: 1.5;
+                letter-spacing: normal;
+
+                &:hover {
+                    text-decoration: underline;
+                    color: map-get($setting-color-actions, alert);
+                }
+            }
         }
     }
 }
