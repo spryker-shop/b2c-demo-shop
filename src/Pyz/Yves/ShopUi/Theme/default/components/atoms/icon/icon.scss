@@ -1,0 +1,15 @@
+@mixin icon($name: '.icon') {
+    @include shop-ui-icon($name);
+
+    #{$name} {
+        &--inherit {
+            display: block;
+            width: inherit;
+            height: inherit;
+        }
+
+        @content;
+    }
+}
+
+@include icon();

@@ -1,0 +1,37 @@
+@mixin price($name: '.price') {
+    @include shop-ui-price($name);
+
+    #{$name} {
+        &--small {
+            position: relative;
+            font-weight: normal;
+            text-align: right;
+
+            @include helper-breakpoint-media-max($sm-max) {
+                margin-top: rem(3);
+                text-align: left;
+            }
+
+            #{$name}__amount {
+                font-size: inherit;
+                color: $setting-color-dark;
+
+                &--original {
+                    position: absolute;
+                    bottom: rem(-20);
+                    right: 0;
+                    color: $setting-color-lightest;
+                    font-size: rem(14);
+
+                    @include helper-breakpoint-media-max($sm-max) {
+                        font-size: rem(11);
+                        left: 0;
+                        right: unset;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@include price;

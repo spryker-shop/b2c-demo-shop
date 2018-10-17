@@ -27,12 +27,12 @@
 {% set isActive = false %}
 
 {% block class %}
-    {{parent()}}
-    {% if attributes.readonly %}{{config.name}}--readonly{% endif %}
+    {{ parent() }}
+    {% if attributes.readonly %}{{ config.name }}--readonly{% endif %}
 {% endblock %}
 
 {% block body %}
-    <span class="{{config.name}}__steps">
+    <span class="{{ config.name }}__steps">
         {% spaceless %}
             {% for step in data.steps..1 %}
                 {% set currentStepValue = step * singleStepValue %}
@@ -42,13 +42,13 @@
 
                 {% if data.useHalfSteps %}
                     <a
-                        data-step-value="{{currentStepValue}}"
+                        data-step-value="{{ currentStepValue }}"
                         class="
-                            {{config.name}}__step
-                            {{config.name}}__step--half
-                            {{isActive ? config.name ~ '__step--active' : ''}}
-                            {% if not attributes.readonly %}{{config.jsName}}__step{% endif %}">
-
+                            {{ config.name }}__step
+                            {{ config.name }}__step--half
+                            {{ isActive ? config.name ~ '__step--active' : '' }}
+                            {% if not attributes.readonly %}{{ config.jsName }}__step{% endif %}"
+                    >
                         {% include atom('icon') with {
                             class: config.name ~ '__star ' ~ config.name ~ '__star--half-right',
                             data: {
@@ -63,13 +63,13 @@
                     {% endif %}
 
                     <a
-                        data-step-value="{{currentStepValue}}"
+                        data-step-value="{{ currentStepValue }}"
                         class="
-                            {{config.name}}__step
-                            {{config.name}}__step--half
-                            {{isActive ? config.name ~ '__step--active' : ''}}
-                            {% if not attributes.readonly %}{{config.jsName}}__step{% endif %}">
-
+                            {{ config.name }}__step
+                            {{ config.name }}__step--half
+                            {{ isActive ? config.name ~ '__step--active' : '' }}
+                            {% if not attributes.readonly %}{{ config.jsName }}__step{% endif %}"
+                    >
                         {% include atom('icon') with {
                             class: config.name ~ '__star ' ~ config.name ~ '__star--half-left',
                             data: {
@@ -79,13 +79,13 @@
                     </a>
                 {% else %}
                     <a
-                        data-step-value="{{currentStepValue}}"
+                        data-step-value="{{ currentStepValue }}"
                         class="
-                            {{config.name}}__step
-                            {{config.name}}__step--full
-                            {{isActive ? config.name ~ '__step--active' : ''}}
-                            {% if not attributes.readonly %}{{config.jsName}}__step{% endif %}">
-
+                            {{ config.name }}__step
+                            {{ config.name }}__step--full
+                            {{ isActive ? config.name ~ '__step--active' : '' }}
+                            {% if not attributes.readonly %}{{ config.jsName }}__step{% endif %}"
+                    >
                         {% include atom('icon') with {
                             class: config.name ~ '__star',
                             data: {
@@ -98,16 +98,18 @@
         {% endspaceless %}
     </span>
 
-    <span class="product-review-count">{{ data.reviewCount }}</span>
+    <span class="{{ config.name }}__review-count">
+        {{ data.reviewCount }}
+    </span>
 
     {% if not attributes.readonly %}
         {% block input %}
             <input
                 type="hidden"
-                class="{{config.jsName}}__input"
-                {% if data.inputId is not empty %}id="{{data.inputId}}"{% endif %}
-                name="{{data.inputName}}"
-                value="{{data.value}}"
+                class="{{ config.jsName }}__input"
+                {% if data.inputId is not empty %}id="{{ data.inputId }}"{% endif %}
+                name="{{ data.inputName }}"
+                value="{{ data.value }}"
                 {% if attributes['disable-if-empty-value'] and data.value is empty %}disabled{% endif %} />
         {% endblock %}
     {% endif %}

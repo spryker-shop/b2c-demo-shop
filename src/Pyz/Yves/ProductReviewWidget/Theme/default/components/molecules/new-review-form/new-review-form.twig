@@ -53,7 +53,7 @@
                             <label>
                                 {{form_label(field)}}
                                 {% include molecule('rating-selector', 'ProductReviewWidget') with {
-                                    modifiers: ['expand'],
+                                    modifiers: ['expand', 'small'],
                                     data: {
                                         maxValue: (field.vars.choices | length) - 1,
                                         inputId: 'productReviewForm_rating',

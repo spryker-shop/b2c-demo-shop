@@ -15,13 +15,25 @@
 {% set isLink = data.url is not empty %}
 
 {% block body %}
-    {%- if isLink -%}<a href="{{ data.url }}">{%- endif -%}
-    {%- if data.itemProp -%}<span itemprop="{{-data.itemProp-}}">{%- endif -%}
-    {{-data.label-}}
-    {%- if data.itemProp -%}</span>{%- endif -%}
-    {%- if isLink -%}</a>{%- endif -%}
+    {%- if isLink -%}
+        <a class="{{ config.name }}__link" href="{{ data.url }}">
+    {%- endif -%}
+
+        {%- if data.itemProp -%}
+            <span class="{{ config.name }}__prop" itemprop="{{-data.itemProp-}}">
+        {%- endif -%}
+
+            {{- data.label -}}
+
+        {%- if data.itemProp -%}
+            </span>
+        {%- endif -%}
+
+    {%- if isLink -%}
+        </a>
+    {%- endif -%}
 
     {% if data.withChevron %}
-        <span class="breadcrumb-step__separator"></span>
+        <span class="{{ config.name }}__separator"></span>
     {% endif %}
 {% endblock %}

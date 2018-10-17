@@ -3,8 +3,9 @@
         display: flex;
         font-size: rem(13);
 
-        a {
+        &__link {
             color: $setting-color-dark;
+
             &:hover {
                 text-decoration: none;
                 color: $setting-color-alt;
@@ -17,22 +18,25 @@
             position: relative;
         }
 
-        &:not(:last-child) &__separator::before,
-        &:not(:last-child) &__separator::after {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            content: '';
-            width: rem(1);
-            height: rem(9);
-            transform: translate(-50%, -50%) rotate(-38deg);
-            border-radius: rem(0.5);
-            background-color: $setting-color-iron;
-            margin-top: rem(-2);
-        }
-        &:not(:last-child) &__separator::after {
-            transform: translate(-50%, -50%) rotate(38deg);
-            margin-top: rem(4);
+        &:not(:last-child) &__separator {
+            &::before,
+            &::after {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                content: '';
+                width: rem(1);
+                height: rem(9);
+                transform: translate(-50%, -50%) rotate(-38deg);
+                border-radius: rem(0.5);
+                background-color: $setting-color-iron;
+                margin-top: rem(-2);
+            }
+
+            &::after {
+                transform: translate(-50%, -50%) rotate(38deg);
+                margin-top: rem(4);
+            }
         }
 
         &--active {
@@ -46,22 +50,26 @@
         }
 
         &--progress {
-            @include helper-breakpoint-media-min($md-min) {
-                display: flex;
-            }
             padding: rem(15) rem(25) 0;
             text-align: center;
             position: relative;
             font: 500 rem(15) $setting-font-family-additional;
             display: none;
+
+            @include helper-breakpoint-media-min($md-min) {
+                display: flex;
+            }
+
             &:last-child:not(#{$name}--disabled) {
                 &::before {
                     opacity: 0.4;
                 }
+
                 &::after {
                     display: none;
                 }
             }
+
             &::before,
             &::after {
                 @include helper-breakpoint-media-min($md-min) {
@@ -74,7 +82,8 @@
                     background-color: $setting-color-darkest;
                 }
             }
-            a {
+
+            #{$name}__link {
                 color: $setting-color-darkest;
             }
         }
@@ -85,6 +94,7 @@
                     display: none;
                 }
             }
+
             &--active {
                 color: $setting-color-darkest;
                 display: flex;
@@ -94,6 +104,7 @@
                     &::before {
                         opacity: 0.4;
                     }
+
                     &::after {
                         display: block;
                         width: 50%;
