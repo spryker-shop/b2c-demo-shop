@@ -56,7 +56,6 @@ class ProductSetCreator extends SprykerProductSetCreator
         parent::__construct($productSetDataCreator, $productSetTouch, $productSetImageSaver);
 
         $this->eventFacade = $eventFacade;
-
     }
 
     /**

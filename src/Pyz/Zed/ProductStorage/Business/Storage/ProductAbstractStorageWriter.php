@@ -17,12 +17,14 @@ class ProductAbstractStorageWriter extends SprykerProductAbstractStorageWriter
     /**
      * @param array $productAbstractLocalizedEntity
      * @param \Generated\Shared\Transfer\ProductAbstractStorageTransfer $productAbstractStorageTransfer
+     * @param array $attributeMapBulk
      *
      * @return \Generated\Shared\Transfer\ProductAbstractStorageTransfer
      */
     protected function mapToProductAbstractStorageTransfer(
         array $productAbstractLocalizedEntity,
-        ProductAbstractStorageTransfer $productAbstractStorageTransfer
+        ProductAbstractStorageTransfer $productAbstractStorageTransfer,
+        array $attributeMapBulk = []
     ) {
         $productAbstractStorageTransfer = parent::mapToProductAbstractStorageTransfer($productAbstractLocalizedEntity, $productAbstractStorageTransfer);
 

@@ -23,7 +23,7 @@
             abstractId: data.product.id_product_abstract,
             url: data.product.url,
             imageUrl: data.product.images is empty ? '' : image.external_url_small,
-            price: data.product.prices.DEFAULT,
+            price: data.product.prices.DEFAULT is defined ? data.product.prices.DEFAULT : null,
             originalPrice: data.product.prices.ORIGINAL is defined ? data.product.prices.ORIGINAL : null
         }
     } only %}
