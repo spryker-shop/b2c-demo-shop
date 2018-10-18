@@ -1,9 +1,13 @@
 @mixin shop-ui-logo ($name: '.logo') {
     #{$name} {
-        padding: rem(12.8);
-        @media screen and (max-width: rem(549)) {
-            border-bottom: rem(1) solid $setting-color-lightest;
-            a {
+        padding: 0.8rem;
+
+        @include helper-breakpoint-media-max($sm-max) {
+            border-bottom: 1px solid $setting-color-lightest;
+        }
+
+        &__link {
+            @include helper-breakpoint-media-max($sm-max) {
                 width: rem(120);
             }
         }
