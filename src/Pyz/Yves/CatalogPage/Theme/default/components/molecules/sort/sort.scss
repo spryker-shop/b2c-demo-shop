@@ -1,37 +1,31 @@
 @mixin catalog-page-sort($name: '.sort') {
     #{$name} {
         padding: rem(27) 0;
-        .num-results {
+
+        &__results {
             font-size: rem(16);
             font-weight: 400;
             line-height: rem(24);
             color: $setting-color-lighter;
+
             @include helper-breakpoint-media-max($lg-max) {
                 display: none;
             }
         }
 
-        .custom-select__select {
-            border-top: 0;
-            border-bottom: 0;
-            color: $setting-color-darkest;
-        }
+        &__trigger-filter {
+            display: flex;
+            align-items: center;
 
-        .custom-select__caret {
-            color: $setting-color-darkest;
-        }
-
-        .trigger-filter {
             @include helper-breakpoint-media-min($xl-min) {
                 display: none;
             }
-            .sort__caret {
-                width: rem(8);
-                height: rem(5);
-                position: relative;
-                top: rem(-1);
-                left: rem(6);
-            }
+        }
+
+        &__caret {
+            width: rem(8);
+            height: rem(5);
+            margin-left: rem(10);
         }
 
         @content;
