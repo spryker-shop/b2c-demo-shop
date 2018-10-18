@@ -23,8 +23,6 @@ use Spryker\Zed\Product\Dependency\ProductEvents;
 use Spryker\Zed\ProductCategory\Dependency\ProductCategoryEvents;
 use Spryker\Zed\Url\Dependency\UrlEvents;
 
-/**
- */
 class ProductAbstractWriterStep extends PublishAwareStep implements DataImportStepInterface
 {
     const BULK_SIZE = 100;

@@ -13,7 +13,7 @@ class CustomerLoginPage extends Customer
 
     const FORGOT_PASSWORD_LINK = '[data-qa="customer-forgot-password-link"]';
 
-    const TITLE_LOGIN = 'Access your account';
+    const TITLE_LOGIN = 'Login';
     const TITLE_FORGOT_PASSWORD = 'Recover my password';
 
     const FORM_FIELD_SELECTOR_EMAIL = 'loginForm[email]';

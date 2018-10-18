@@ -9,7 +9,6 @@ namespace PyzTest\Yves\Availability\Presentation;
 
 use PyzTest\Yves\Availability\AvailabilityPresentationTester;
 use PyzTest\Yves\Cart\PageObject\CartListPage;
-use PyzTest\Yves\Product\PageObject\ProductDetailPage;
 
 /**
  * Auto-generated group annotations
@@ -32,9 +31,9 @@ class AvailabilityAddToCartCest
         $i->wantTo('Open product page, and add item to cart with larger quantity than available');
         $i->expectTo('Display error message');
 
-        $i->amOnPage(AvailabilityPresentationTester::FUJITSU2_PRODUCT_PAGE);
+        $i->amLoggedInCustomer();
 
-        $i->click(ProductDetailPage::ADD_TO_CART_XPATH);
+        $i->amOnPage(AvailabilityPresentationTester::ADD_FUJITSU2_PRODUCT_TO_CART_URL);
 
         $i->see(CartListPage::CART_HEADER);
 
