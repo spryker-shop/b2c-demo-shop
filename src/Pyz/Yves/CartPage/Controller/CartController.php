@@ -50,6 +50,7 @@ class CartController extends SprykerCartController
     /**
      * @param string $sku
      * @param string|null $groupKey
+     * @param \Symfony\Component\HttpFoundation\Request|null $request
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */

@@ -20,7 +20,7 @@ use Spryker\Zed\ProductStorage\ProductStorageDependencyProvider;
 class ProductStorageBusinessFactory extends SprykerProductStorageBusinessFactory
 {
     /**
-     * @return \Pyz\Zed\ProductStorage\Business\Storage\ProductAbstractStorageWriterInterface
+     * @return \Spryker\Zed\ProductStorage\Business\Storage\ProductAbstractStorageWriterInterface
      */
     public function createProductAbstractStorageWriter()
     {
@@ -33,7 +33,7 @@ class ProductStorageBusinessFactory extends SprykerProductStorageBusinessFactory
     }
 
     /**
-     * @return \Pyz\Zed\ProductStorage\Business\Storage\ProductConcreteStorageWriterInterface
+     * @return \Spryker\Zed\ProductStorage\Business\Storage\ProductConcreteStorageWriterInterface
      */
     public function createProductConcreteStorageWriter()
     {

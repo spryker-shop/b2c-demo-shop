@@ -12,7 +12,7 @@ use Pyz\Yves\ProductSetWidget\Plugin\CmsContentWidgetProductSetConnector\Product
 use Spryker\Yves\Kernel\Widget\AbstractWidgetPlugin;
 
 /**
- * @method \PYZ\Yves\ProductSetWidget\ProductSetWidgetFactory getFactory()
+ * @method \Pyz\Yves\ProductSetWidget\ProductSetWidgetFactory getFactory()
  */
 class ProductSetIdsWidgetPlugin extends AbstractWidgetPlugin
 {
