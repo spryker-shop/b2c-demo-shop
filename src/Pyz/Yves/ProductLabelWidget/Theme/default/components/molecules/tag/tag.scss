@@ -1,19 +1,19 @@
-$product-label-widget-tag-burst-size: 2rem;
+$product-label-widget-tag-burst-size: rem(32);
 
 @mixin product-label-widget-tag($name: '.tag') {
     #{$name} {
         position: relative;
         display: flex;
         align-items: center;
-        width: 46px;
-        height: 28px;
+        width: rem(46);
+        height: rem(28);
         background: $setting-color-white;
-        border-radius: 2px;
-        box-shadow: 1px 1px 0 0 rgba(0, 0, 0, 0.08);
+        border-radius: rem(2);
+        box-shadow: rem(1) rem(1) 0 0 rgba(0, 0, 0, 0.08);
         @include helper-breakpoint-media-max($sm-max) {
-            width: 50px;
-            height: 22px;
-            font-size: 11px;
+            width: rem(50);
+            height: rem(22);
+            font-size: rem(11);
         }
 
         &__text {

@@ -8,13 +8,13 @@
 {% block body %}
     {{ parent() }}
     {% if data.node.children is not empty %}
-        <ul class="menu">
+        <ul class="{{ config.name }}__menu menu">
             <div class="flyout-fullscreen__container">
             {% for childNode in data.node.children %}
                 {% set hasChildren = childNode.children | length > 0 %}
 
                 {% include molecule('navigation-multilevel-node') with {
-                    class: 'menu__item' ~ (hasChildren ? ' menu__item--has-children-list' : '' ) ~ ' ' ~ childNode.cssClass,
+                    class: 'menu__item' ~ ' ' ~ config.name ~ '__child' ~ ' ' ~ childNode.cssClass,
                     data: {
                         node: childNode
                     }
@@ -27,18 +27,17 @@
 {% endblock %}
 
 {% block url %}
-    <a href="{{ data.node.url }}">{{ data.node.title }}</a>
+    <a class="{{ config.name }}__link" href="{{ data.node.url }}">{{ data.node.title }}</a>
 {% endblock %}
 
 {% block link %}
-    <a href="{{ data.node.url }}">{{ data.node.title }}</a>
+    <a class="{{ config.name }}__link" href="{{ data.node.url }}">{{ data.node.title }}</a>
 {% endblock %}
 
 {% block externalUrl %}
-    <a href="{{ data.node.url }}" target="_blank">{{ data.node.title }}</a>
+    <a class="{{ config.name }}__link" href="{{ data.node.url }}" target="_blank">{{ data.node.title }}</a>
 {% endblock %}
 
 {% block other %}
     {{ data.node.title }}
 {% endblock %}
-

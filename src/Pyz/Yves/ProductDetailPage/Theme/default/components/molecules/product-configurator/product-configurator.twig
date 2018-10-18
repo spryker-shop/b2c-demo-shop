@@ -67,7 +67,7 @@
         }
     } only %}
 
-    <form method="POST" action="/cart/add/{{sku}}">
+    <form method="POST" action="{{ path("cart/add", {"sku": sku}) }}">
         {{ widget('ProductOptionWidgetPlugin', data.product) }}
 
         {% if widgetExists('ProductMeasurementUnitWidgetPlugin') %}

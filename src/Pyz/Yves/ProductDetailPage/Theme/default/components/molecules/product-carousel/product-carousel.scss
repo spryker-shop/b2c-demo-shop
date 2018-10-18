@@ -9,11 +9,11 @@
 
         .product-image {
             position: relative;
-            padding: 8px 0;
+            padding: rem(8) 0;
         }
 
         .pdp-carousel__container {
-            height: 650px;
+            height: rem(650);
             position: relative;
             background: rgba(0, 0, 0, 0.05);
             & > .pdp-img:not(:first-child) {
@@ -23,9 +23,9 @@
                 position: absolute;
                 left: 0;
                 top: 0;
-                padding: 100px 70px;
+                padding: rem(100) rem(70);
                 width: 100%;
-                height: 650px;
+                height: rem(650);
                 display: flex !important;
                 align-items: center;
                 justify-content: center;
@@ -42,7 +42,7 @@
                 }
                 img {
                     max-width: 100%;
-                    max-height: 450px;
+                    max-height: rem(450);
                 }
             }
             .pdp-img-color-active {
@@ -51,27 +51,27 @@
             }
             @include helper-breakpoint-media-max($xl-max) {
                 .pdp-img {
-                    padding: 80px 50px;
-                    height: 610px;
+                    padding: rem(80) rem(50);
+                    height: rem(610);
                 }
             }
             @include helper-breakpoint-media-max($lg-max) {
                 .pdp-img {
-                    padding: 15px 30px;
-                    height: 480px;
+                    padding: rem(15) rem(30);
+                    height: rem(480);
                 }
             }
             @include helper-breakpoint-media-max($md-max) {
                 &.js-product-slider {
                     display: none;
                 }
-                height: 280px;
+                height: rem(280);
                 .pdp-img {
                     width: 100%;
-                    height: 280px;
-                    padding: 15px 16px;
+                    height: rem(280);
+                    padding: rem(15) rem(16);
                     img {
-                        max-height: 250px;
+                        max-height: rem(250);
                     }
                 }
             }
@@ -80,22 +80,22 @@
         .pdp-carousel__thumbnail {
             position: absolute;
             top: 50%;
-            left: 32px;
+            left: rem(32);
             z-index: 400;
             transform: translateY(-50%);
-            width: 36px;
-            max-height: 315px;
+            width: rem(36);
+            max-height: rem(315);
             overflow: hidden;
             .thumb-prev,
             .thumb-next {
                 text-align: center;
-                padding: 0 0 10px;
+                padding: 0 0 rem(10);
                 cursor: pointer;
                 display: block !important;
                 svg {
                     display: block;
                     width: 100%;
-                    height: 6px;
+                    height: rem(6);
                     color: $setting-color-dark;
                 }
                 &[aria-disabled='true'] {
@@ -107,26 +107,26 @@
                 }
             }
             .thumb-prev {
-                padding: 10px 0 0;
+                padding: rem(10) 0 0;
                 svg {
                     transform: rotate(180deg);
                 }
             }
             .slick-slide {
                 border: none;
-                height: 52px;
+                height: rem(52);
             }
             .pdp-img {
                 display: flex !important;
                 align-items: center;
                 justify-content: center;
-                width: 36px;
-                height: 36px;
-                padding: 1px;
+                width: rem(36);
+                height: rem(36);
+                padding: rem(1);
                 background-color: $setting-color-white;
-                border: solid 1px #d9d9d7;
+                border: solid rem(1) #d9d9d7;
                 position: relative;
-                margin: 8px 0;
+                margin: rem(8) 0;
                 cursor: pointer;
                 img {
                     opacity: 0.25;
@@ -144,14 +144,14 @@
             }
             .slick-current .pdp-img {
                 padding: 0;
-                border: solid 2px #fff;
+                border: solid rem(2) #fff;
                 img {
                     opacity: 1;
                 }
             }
 
             @include helper-breakpoint-media-max($xl-max) {
-                left: 10px;
+                left: rem(10);
             }
 
             @include helper-breakpoint-media-max($md-max) {
@@ -171,33 +171,33 @@
                 }
                 .pdp-img {
                     width: 100%;
-                    height: 280px;
-                    padding: 15px 16px !important;
+                    height: rem(280);
+                    padding: rem(15) rem(16) !important;
                     background-color: $setting-color-white;
                     border: none !important;
                     position: relative;
                     margin: 0;
                     cursor: default;
                     img {
-                        max-height: 250px;
+                        max-height: rem(250);
                     }
                 }
                 .slick-dots {
                     position: absolute;
-                    bottom: -32px;
+                    bottom: rem(-32);
                     width: 100%;
                     display: flex;
                     justify-content: center;
                     li {
-                        margin: 0 4px;
+                        margin: 0 rem(4);
                         font: 0/0 $setting-font-family;
-                        border: solid 1px transparent;
-                        padding: 1px;
+                        border: solid rem(1) transparent;
+                        padding: rem(1);
                         border-radius: 100%;
                     }
                     button {
-                        width: 4px;
-                        height: 4px;
+                        width: rem(4);
+                        height: rem(4);
                         font: 0/0 $setting-font-family;
                         border-radius: 100%;
                         background: $setting-color-lightest;

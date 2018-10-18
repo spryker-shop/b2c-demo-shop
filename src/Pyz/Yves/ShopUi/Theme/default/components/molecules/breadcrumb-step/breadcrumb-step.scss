@@ -1,7 +1,7 @@
 @mixin shop-ui-breadcrumb-step($name: '.breadcrumb-step') {
     #{$name} {
         display: flex;
-        font-size: 13px;
+        font-size: rem(13);
 
         a {
             color: $setting-color-dark;
@@ -12,7 +12,7 @@
         }
 
         &__separator {
-            width: 37px;
+            width: rem(37);
             color: $setting-color-light;
             position: relative;
         }
@@ -23,16 +23,16 @@
             top: 50%;
             left: 50%;
             content: '';
-            width: 1px;
-            height: 9px;
+            width: rem(1);
+            height: rem(9);
             transform: translate(-50%, -50%) rotate(-38deg);
-            border-radius: 0.5px;
+            border-radius: rem(0.5);
             background-color: $setting-color-iron;
-            margin-top: -2px;
+            margin-top: rem(-2);
         }
         &:not(:last-child) &__separator::after {
             transform: translate(-50%, -50%) rotate(38deg);
-            margin-top: 4px;
+            margin-top: rem(4);
         }
 
         &--active {
@@ -49,10 +49,10 @@
             @include helper-breakpoint-media-min($md-min) {
                 display: flex;
             }
-            padding: 15px 25px 0;
+            padding: rem(15) rem(25) 0;
             text-align: center;
             position: relative;
-            font: 500 15px $setting-font-family-additional;
+            font: 500 rem(15) $setting-font-family-additional;
             display: none;
             &:last-child:not(#{$name}--disabled) {
                 &::before {
@@ -70,7 +70,7 @@
                     left: 0;
                     top: 0;
                     right: 0;
-                    height: 1px;
+                    height: rem(1);
                     background-color: $setting-color-darkest;
                 }
             }

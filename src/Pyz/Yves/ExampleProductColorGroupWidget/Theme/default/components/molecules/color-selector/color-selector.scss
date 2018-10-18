@@ -1,4 +1,4 @@
-$color-selector-size: 16px;
+$color-selector-size: rem(16);
 
 @mixin color-group-color-selector() {
     .color-selector,
@@ -19,14 +19,14 @@ $color-selector-size: 16px;
                 left: 50%;
                 top: 50%;
                 transform: translate(-50%, -50%);
-                width: 18px;
-                height: 18px;
-                border: solid 4px $setting-color-white;
+                width: rem(18);
+                height: rem(18);
+                border: solid rem(4) $setting-color-white;
                 border-radius: 100%;
             }
 
             &:not(:last-child) {
-                margin-right: 4px;
+                margin-right: rem(4);
             }
 
             .color-tooltip {
@@ -34,23 +34,23 @@ $color-selector-size: 16px;
                 transform: scale(0);
                 transform-origin: bottom;
                 position: absolute;
-                top: -43px;
-                left: -15px;
+                top: rem(-43);
+                left: rem(-15);
                 background: $setting-color-darkest;
                 color: $setting-color-white;
-                font: 300 16px $setting-font-family;
-                padding: 5px 11px 7px 10px;
+                font: 300 rem(16) $setting-font-family;
+                padding: rem(5) rem(11) rem(7) rem(10);
                 white-space: nowrap;
-                border-radius: 2px;
+                border-radius: rem(2);
                 &::before {
                     content: '';
                     position: absolute;
-                    left: 17px;
-                    bottom: -4px;
-                    border-radius: 2px;
+                    left: rem(17);
+                    bottom: rem(-4);
+                    border-radius: rem(2);
                     background: $setting-color-darkest;
-                    width: 10px;
-                    height: 10px;
+                    width: rem(10);
+                    height: rem(10);
                     transform: rotate(45deg);
                 }
             }
@@ -58,9 +58,9 @@ $color-selector-size: 16px;
             &:hover,
             &--active {
                 &::before {
-                    width: 14px;
-                    height: 14px;
-                    border-width: 2px;
+                    width: rem(14);
+                    height: rem(14);
+                    border-width: rem(2);
                 }
             }
 
