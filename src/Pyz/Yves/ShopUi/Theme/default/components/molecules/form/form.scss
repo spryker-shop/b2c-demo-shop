@@ -1,9 +1,9 @@
-$shop-ui-form-field-margin: 0.5rem;
+$shop-ui-form-field-margin: rem(8);
 
 @mixin shop-ui-form($name: '.form') {
     #{$name} {
         &__field {
-            padding: 0 1rem 1.7rem !important;
+            padding: 0 rem(16) rem(27) !important;
         }
 
         &__actions {
@@ -39,27 +39,27 @@ $shop-ui-form-field-margin: 0.5rem;
 
         .label {
             display: inline-block;
-            font: normal 15px $setting-font-family-additional;
-            margin-bottom: 6px;
+            font: normal rem(15) $setting-font-family-additional;
+            margin-bottom: rem(6);
 
             &--required {
                 &::after {
                     content: '*';
-                    margin-left: 0.2rem;
+                    margin-left: 3px;
                     color: $setting-color-main;
                 }
             }
         }
 
         .select__select {
-            padding-top: 0.65rem;
-            padding-bottom: 0.65rem;
-            padding-left: 0.5rem;
-            border-right-width: 1rem;
+            padding-top: rem(10);
+            padding-bottom: rem(10);
+            padding-left: rem(8);
+            border-right-width: rem(16);
         }
 
         .select__caret {
-            right: 0.5rem;
+            right: rem(8);
         }
 
         @content;

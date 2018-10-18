@@ -1,8 +1,8 @@
 @mixin shop-ui-box($name: '.box') {
     #{$name} {
         @include helper-ui-clearfix;
-        padding: 0.5rem;
-        margin: 0.5rem;
+        padding: rem(8);
+        margin: rem(8);
         background-color: $setting-color-white;
         border: none;
 
@@ -10,11 +10,11 @@
         &__separator {
             position: relative;
             display: block;
-            margin-top: 0.5rem;
-            margin-bottom: 0.5rem;
+            margin-top: rem(8);
+            margin-bottom: rem(8);
             border-bottom: none;
-            left: - 0.5rem;
-            width: calc(100% + #{1rem});
+            left: - rem(8);
+            width: calc(100% + #{rem(16)});
         }
 
         &--borderless {
@@ -22,11 +22,11 @@
         }
 
         &--stretch {
-            height: calc(100% - 1rem);
+            height: calc(100% - #{rem(16)});
         }
 
         & + & {
-            margin-top: 1rem;
+            margin-top: rem(16);
         }
 
         @each $action, $setting-color-action in $setting-color-actions {

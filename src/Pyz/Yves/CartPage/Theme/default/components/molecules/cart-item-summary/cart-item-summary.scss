@@ -1,14 +1,14 @@
 @mixin shop-ui-cart-item-summary($name: '.cart-item-summary') {
     #{$name} {
-        width: calc(100% - 120px);
+        width: calc(100% - #{rem(120)});
         @include helper-breakpoint-media-max($sm-max) {
             width: 100%;
         }
 
         &__list {
-            padding: 20px 0 0 24px;
+            padding: rem(20) 0 0 rem(24);
             @include helper-breakpoint-media-max($sm-max) {
-                padding: 20px 0 0;
+                padding: rem(20) 0 0;
             }
         }
 
@@ -17,13 +17,13 @@
         }
 
         & .list__item {
-            font: 500 17px $setting-font-family-additional;
+            font: 500 rem(17) $setting-font-family-additional;
             line-height: 1.29;
-            padding: 19px 0;
-            border-bottom: 1px dotted $setting-color-lightest;
+            padding: rem(19) 0;
+            border-bottom: rem(1) dotted $setting-color-lightest;
 
             &:first-of-type {
-                border-top: 1px dotted $setting-color-lightest;
+                border-top: rem(1) dotted $setting-color-lightest;
             }
 
             &::before {

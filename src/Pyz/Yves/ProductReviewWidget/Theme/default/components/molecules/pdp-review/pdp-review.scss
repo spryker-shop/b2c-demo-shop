@@ -3,169 +3,169 @@
 
         .product-slider-title {
             padding: 0;
-            margin: 130px 0 70px;
+            margin: rem(130) 0 rem(70);
             @include helper-breakpoint-media-max($md-max) {
-                margin: 100px 0 34px;
+                margin: rem(100) 0 rem(34);
                 .product-slider-title__text {
-                    font: 400 26px/36px $setting-font-family-additional;
+                    font: 400 rem(26)/rem(36) $setting-font-family-additional;
                 }
                 .product-slider-title__line {
-                    margin: 0 0 0 20px;
+                    margin: 0 0 0 rem(20);
                 }
             }
         }
 
         &__sub-title {
-            font: 400 27px/1.33 $setting-font-family-additional;
-            border-bottom: dotted 1px $setting-color-lightest;
-            padding-bottom: 10px;
-            margin-bottom: 50px;
+            font: 400 rem(27)/1.33 $setting-font-family-additional;
+            border-bottom: dotted rem(1) $setting-color-lightest;
+            padding-bottom: rem(10);
+            margin-bottom: rem(50);
             @include helper-breakpoint-media-max($md-max) {
-                font: 400 21px/1.71 $setting-font-family-additional;
-                padding-bottom: 6px;
-                margin-bottom: 29px;
+                font: 400 rem(21)/1.71 $setting-font-family-additional;
+                padding-bottom: rem(6);
+                margin-bottom: rem(29);
             }
         }
 
         .review-average-display {
             display: flex;
             align-items: center;
-            margin-bottom: 27px;
+            margin-bottom: rem(27);
             .rating-selector {
                 margin-top: 0;
             }
         }
 
         .review-average__label {
-            font: 400 21px $setting-font-family;
+            font: 400 rem(21) $setting-font-family;
             color: $setting-color-darkest;
-            margin-right: 12px;
+            margin-right: rem(12);
             @include helper-breakpoint-media-max($md-max) {
-                font-size: 18px;
+                font-size: rem(18);
             }
         }
 
         .review-distribution-display {
-            margin-bottom: 80px;
+            margin-bottom: rem(80);
             td {
-                padding-bottom: 12px;
-                font: 300 14px/20px $setting-font-family;
+                padding-bottom: rem(12);
+                font: 300 rem(14)/rem(20) $setting-font-family;
                 color: $setting-color-emperor;
                 &:first-child {
                     color: $setting-color-darkest;
-                    font-size: 16px;
+                    font-size: rem(16);
                 }
             }
             .rating-progress {
-                margin: 0 17px 0 21px;
-                width: 103px;
-                height: 20px;
-                border-radius: 10px;
+                margin: 0 rem(17) 0 rem(21);
+                width: rem(103);
+                height: rem(20);
+                border-radius: rem(10);
                 background-color: $setting-color-black-squeeze;
-                box-shadow: 0.5px 0.5px 0.5px 0 rgba(0, 0, 0, 0.24);
+                box-shadow: rem(0.5) rem(0.5) rem(0.5) 0 rgba(0, 0, 0, 0.24);
                 overflow: hidden;
                 &__status {
                     position: relative;
-                    border-radius: 10px;
+                    border-radius: rem(10);
                     width: 100%;
-                    height: 20px;
+                    height: rem(20);
                     background-color: $setting-color-selective-yellow;
                 }
             }
             @include helper-breakpoint-media-max($md-max) {
-                margin-bottom: 42px;
+                margin-bottom: rem(42);
             }
         }
 
         .reviews {
             column-count: 2;
-            column-gap: 30px;
-            margin: -32px 0 70px;
+            column-gap: rem(30);
+            margin: rem(-32) 0 rem(70);
             @include helper-breakpoint-media-max($md-max) {
                 column-count: 1;
             }
         }
 
         .review {
-            border-bottom: dotted 1px $setting-color-lightest;
-            padding: 32px 0;
+            border-bottom: dotted rem(1) $setting-color-lightest;
+            padding: rem(32) 0;
             break-inside: avoid;
             &__title-line {
                 display: flex;
             }
             h5 {
-                font: 500 17px/1.41 $setting-font-family-additional;
+                font: 500 rem(17)/1.41 $setting-font-family-additional;
                 color: $setting-color-darkest;
-                margin-right: 5px;
+                margin-right: rem(5);
             }
             .rating-selector {
                 display: inline-block;
-                margin: 0 0 0 12px;
+                margin: 0 0 0 rem(12);
                 position: relative;
-                top: -1px;
+                top: rem(-1);
                 &__steps {
-                    width: 65px;
+                    width: rem(65);
                     margin: 0;
                 }
                 &__step {
                     &--half {
-                        width: 6px;
-                        height: 12px;
+                        width: rem(6);
+                        height: rem(12);
                     }
                 }
                 &__star {
-                    width: 12px;
-                    height: 12px;
+                    width: rem(12);
+                    height: rem(12);
                     &--half-left {
-                        margin-right: -6px;
+                        margin-right: rem(-6);
                     }
                 }
                 &__step--half:nth-child(odd) {
-                    margin-right: 1px;
+                    margin-right: rem(1);
                 }
             }
             &__author-date {
-                font: 400 14px/1.71 $setting-font-family-additional;
-                margin: 0 0 12px;
+                font: 400 rem(14)/1.71 $setting-font-family-additional;
+                margin: 0 0 rem(12);
                 color: $setting-color-darkest;
             }
             &__description {
-                font: 300 16px/22px $setting-font-family;
+                font: 300 rem(16)/rem(22) $setting-font-family;
             }
             @include helper-breakpoint-media-max($md-max) {
-                padding: 20px 0;
+                padding: rem(20) 0;
                 h5 {
-                    font: 500 16px/1.38 $setting-font-family-additional;
-                    margin-right: 2px;
+                    font: 500 rem(16)/1.38 $setting-font-family-additional;
+                    margin-right: rem(2);
                 }
                 &__author-date {
-                    font: 400 13px/1.85 $setting-font-family-additional;
-                    margin: 0 0 16px;
+                    font: 400 rem(13)/1.85 $setting-font-family-additional;
+                    margin: 0 0 rem(16);
                 }
                 &__description {
-                    font: 300 15px/22px $setting-font-family;
+                    font: 300 rem(15)/rem(22) $setting-font-family;
                 }
             }
         }
 
         .popup--new-review {
             .form__fields {
-                padding-top: 23px;
+                padding-top: rem(23);
             }
             .review-summary {
                 min-width: 0;
-                width: calc(100% - 154px);
+                width: calc(100% - #{rem(154)});
             }
             .review-rating {
                 min-width: 0;
                 width: auto;
-                margin: 20px 0 0 auto;
+                margin: rem(20) 0 0 auto;
                 .rating-selector {
                     margin: 0;
                 }
             }
             .form__field {
-                padding: 0 0 28px !important;
+                padding: 0 0 rem(28) !important;
             }
             label {
                 color: $setting-color-dark;
@@ -175,10 +175,10 @@
             }
             input[type='text'],
             textarea {
-                font: 400 17px/1.29 $setting-font-family;
+                font: 400 rem(17)/1.29 $setting-font-family;
                 color: $setting-color-dark;
                 transition: background-color 0.4s;
-                padding: 10px 15px;
+                padding: rem(10) rem(15);
                 &:focus {
                     border-color: $setting-color-tundora;
                 }
@@ -187,27 +187,27 @@
                 }
             }
             input[type='text'] {
-                line-height: 22px;
-                padding: 12px 15px;
+                line-height: rem(22);
+                padding: rem(12) rem(15);
             }
             .button--send-review {
-                font: 500 14px/18px $setting-font-family;
-                padding: 15px 20px;
-                min-width: 177px;
-                margin-top: 20px;
+                font: 500 rem(14)/rem(18) $setting-font-family;
+                padding: rem(15) rem(20);
+                min-width: rem(177);
+                margin-top: rem(20);
             }
             @include helper-breakpoint-media-max($md-max) {
                 .popup__title {
                     display: none;
                 }
                 .form__fields {
-                    padding-top: 14px;
+                    padding-top: rem(14);
                 }
                 .form__field {
-                    padding: 0 0 25px !important;
+                    padding: 0 0 rem(25) !important;
                 }
                 label {
-                    font-size: 15px;
+                    font-size: rem(15);
                 }
                 .review-summary {
                     width: 100%;
@@ -220,28 +220,28 @@
                         align-items: center;
                     }
                     .label {
-                        font-size: 18px;
-                        margin: 0 12px 0 0;
+                        font-size: rem(18);
+                        margin: 0 rem(12) 0 0;
                     }
                 }
                 .button--send-review {
-                    font: 500 13px/16px $setting-font-family;
-                    padding: 12px 30px;
+                    font: 500 rem(13)/rem(16) $setting-font-family;
+                    padding: rem(12) rem(30);
                     min-width: 0;
                     margin: 0;
                     position: absolute;
-                    top: 20px;
-                    right: 24px;
+                    top: rem(20);
+                    right: rem(24);
                 }
             }
         }
 
         .add-review-mobile {
-            padding-bottom: 30px;
+            padding-bottom: rem(30);
             .button {
                 width: 100%;
-                font: 400 14px Circular, sans-serif;
-                padding: 14px;
+                font: 400 rem(14) Circular, sans-serif;
+                padding: rem(14);
             }
         }
 
