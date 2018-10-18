@@ -74,6 +74,21 @@
 
         @content;
     }
+
+    #{$name} {
+        &__container {
+            display: flex;
+            align-items: center;
+        }
+
+        &__box {
+            margin-right: rem(7);
+        }
+
+        &__label {
+            font: 400 rem(15) $setting-font-family;
+        }
+    }
 }
 
 @include shop-ui-radio();

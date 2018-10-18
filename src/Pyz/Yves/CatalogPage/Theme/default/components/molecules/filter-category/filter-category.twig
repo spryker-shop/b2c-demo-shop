@@ -7,7 +7,8 @@
 {% define data = {
     filter: null,
     filterPath: null,
-    categories: []
+    categories: [],
+    levelMenu: 1
 } %}
 
 {% block component %}
@@ -18,12 +19,15 @@
 
 {% block body %}
     <ul class="menu">
+
         {% for categoryNode in data.categories %}
             {% set quantity = 0 %}
-            {% set hasChildren = categoryNode.children is defined and categoryNode.children is not empty %}
+            {% set hasChildren = (categoryNode.children | default([]) is not empty) %}
 
-            {% for filterValue in data.filter.values if (filterValue.value == categoryNode.nodeId) %}
-                {% set quantity = filterValue.docCount %}
+            {% for filterValue in data.filter.values %}
+                {% if (filterValue.value == categoryNode.nodeId) %}
+                    {% set quantity = filterValue.docCount %}
+                {% endif %}
             {% endfor %}
 
             {% if data.filterPath is not empty %}
@@ -33,14 +37,28 @@
                 {% set categoryUrl = categoryNode.url | replace({"'": "\\'", '"':'\\"'}) %}
                 {% set currentUrl = app.request.attributes.get('categoryNode').url %}
             {% endif %}
-            <li class="menu__item {% if hasChildren %}menu__item--has-children-list{% endif %} {% if currentUrl == categoryUrl %} active{% endif %}">
-                <button class="link" onclick="this.form.action='{{ categoryUrl }}'" {% if quantity == 0 %}disabled="disabled"{% endif %}>
+
+            {% set isActive = currentUrl == categoryUrl %}
+            {% set classes = [
+                config.name ~ '__item',
+                config.name ~ '__item--level-' ~ data.levelMenu,
+                isActive ? config.name ~ '__item--active' : '',
+                hasChildren ? config.name ~ '__item--children' : '',
+            ] %}
+
+            <li class="{{ classes | join(' ') }}">
+                <button
+                    class="{{ config.name }}__link"
+                    onclick="this.form.action='{{ categoryUrl }}'"
+                    {% if quantity == 0 %}disabled="disabled"{% endif %}
+>
                     {{ categoryNode.name }}{% if hasChildren is empty %} ({{ quantity }}){% endif %}
                 </button>
 
                 {% if hasChildren %}
                     {% include molecule('filter-category', 'CatalogPage') with {
                         data: {
+                            levelMenu: data.levelMenu + 1,
                             filter: data.filter,
                             filterPath: data.filterPath,
                             categories: categoryNode.children
@@ -48,6 +66,8 @@
                     } only %}
                 {% endif %}
             </li>
+
         {% endfor %}
+
     </ul>
 {% endblock %}

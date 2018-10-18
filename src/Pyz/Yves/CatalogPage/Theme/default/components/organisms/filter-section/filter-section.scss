@@ -2,10 +2,16 @@
     #{$name} {
         padding-top: rem(79);
 
+        @include helper-breakpoint-media-max($lg-max) {
+            padding: rem(120) rem(24) rem(40);
+        }
+
         &__item {
             border-bottom: dotted rem(1) $setting-color-lightest;
+
             &:first-child {
                 border-top: dotted rem(1) $setting-color-lightest;
+
                 @include helper-breakpoint-media-min($xl-min) {
                     #{$name}__title {
                         &::before,
@@ -15,17 +21,6 @@
                     }
                 }
             }
-            .checkbox,
-            .radio {
-                margin-bottom: 0;
-            }
-            .checkbox__box,
-            .radio__box {
-                margin-top: 0;
-            }
-            .checkbox__check {
-                top: rem(3) !important;
-            }
         }
 
         &__title {
@@ -34,11 +29,14 @@
             letter-spacing: rem(2.6);
             padding: rem(15) rem(20) rem(15) 0;
             position: relative;
+
             &[data-toggle-target] {
                 cursor: pointer;
+
                 .no-touch &:hover {
                     opacity: 0.5;
                 }
+
                 &::before {
                     content: '';
                     width: rem(12);
@@ -49,6 +47,7 @@
                     right: 0;
                     margin-top: rem(-1);
                 }
+
                 &::after {
                     content: '';
                     width: rem(2);
@@ -59,87 +58,19 @@
                     right: rem(5);
                     margin-top: rem(-6);
                 }
-                &.active::after {
-                    display: none;
+
+                &.active {
+                    &::after {
+                        display: none;
+                    }
                 }
             }
         }
 
-        .filter-category {
-            margin-bottom: rem(25);
-            .filter-category {
-                margin-bottom: 0;
-            }
-            .menu__item--has-children-list .menu__item {
-                margin: 0 0 0 rem(16);
-            }
-            @include helper-breakpoint-media-min($xl-min) {
-                display: block;
-            }
-        }
-
-        .menu__item {
-            margin: 0;
-            font: 400 rem(15) $setting-font-family;
-            &.active > button {
-                color: $setting-color-radical-red;
-            }
-            [disabled] {
-                color: $setting-color-lighter;
-            }
-        }
-
-        .link {
-            font: 400 rem(15) $setting-font-family;
-            margin-bottom: rem(14);
-            color: $setting-color-darkest;
-            &:not([disabled]):hover {
-                text-decoration: none;
-                color: $setting-color-alt;
-            }
-        }
-
-        .filter-enumeration {
-            padding-bottom: rem(10);
-            .menu__item {
-                margin-bottom: rem(16);
-                .checkbox:hover,
-                .radio:hover {
-                    color: $setting-color-main;
-                }
-            }
-        }
-
-        .filter-price-range {
-            padding-bottom: rem(20);
-            input {
-                width: rem(87);
-            }
-        }
-
-        .filter-rating {
-            padding-bottom: rem(20);
-        }
-
-        .filter-actions {
+        &__actions {
             margin-top: rem(15);
-            .button {
-                font: 400 rem(13)/rem(16) $setting-font-family-additional;
-                padding: rem(12) rem(20);
-                min-width: rem(92);
-                width: 100%;
-            }
-        }
 
-        .close-popup {
-            @include helper-breakpoint-media-min($xl-min) {
-                display: none;
-            }
-        }
-
-        @include helper-breakpoint-media-max($lg-max) {
-            padding: rem(120) rem(24) rem(40);
-            .filter-actions {
+            @include helper-breakpoint-media-max($lg-max) {
                 position: absolute;
                 top: 0;
                 left: 0;
@@ -147,9 +78,23 @@
                 background: $setting-color-wild-sand;
                 padding: rem(20) rem(24);
                 margin: 0;
-                .button {
-                    width: auto;
-                }
+            }
+        }
+
+        &__button {
+            font: 400 rem(13)/rem(16) $setting-font-family-additional;
+            padding: rem(12) rem(20);
+            min-width: rem(92);
+            width: 100%;
+
+            @include helper-breakpoint-media-max($lg-max) {
+                width: auto;
+            }
+        }
+
+        &__close-popup {
+            @include helper-breakpoint-media-min($xl-min) {
+                display: none;
             }
         }
 
@@ -158,4 +103,3 @@
 }
 
 @include catalog-page-filter-section();
-
