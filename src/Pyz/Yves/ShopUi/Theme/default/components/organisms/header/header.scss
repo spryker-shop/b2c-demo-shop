@@ -52,7 +52,9 @@
                     opacity: 0.4;
                     transition: opacity 400ms ease-in-out, visibility 0ms ease-in-out;
                 }
+
                 #{$name}__search-overlay-container {
+                    @include helper-effect-transition(all);
                     transform: scaleY(1);
                     opacity: 1;
                     visibility: visible;
@@ -60,7 +62,9 @@
                 }
             }
         }
+
         &__search-overlay-container {
+            @include helper-effect-transition(all);
             padding: rem(34) rem(30);
             background: $setting-color-white;
             min-width: rem(480);
@@ -68,18 +72,22 @@
             transform-origin: top center;
             transform: scaleY(0);
             opacity: 0;
+
             @include helper-breakpoint-media-max($md-max) {
                 min-width: rem(300);
                 width: 100vw;
             }
         }
+
         &__search-open {
             cursor: pointer;
             float: left;
+
             .icon {
                 margin-left: rem(10);
                 vertical-align: bottom;
             }
+
             &::before {
                 content: '';
                 display: block;
@@ -89,6 +97,7 @@
                 border-bottom: rem(1) solid $setting-color-gray;
             }
         }
+
         &__search-close {
             position: absolute;
             right: 0;
@@ -96,6 +105,7 @@
             padding: rem(34) rem(30);
             z-index: $setting-zi-search-suggestions;
             cursor: pointer;
+
             @include helper-breakpoint-media-max($sm-max) {
                 position: static;
                 padding: 0;

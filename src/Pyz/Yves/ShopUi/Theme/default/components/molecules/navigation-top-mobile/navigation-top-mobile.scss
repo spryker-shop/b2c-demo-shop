@@ -1,18 +1,17 @@
 @mixin shop-ui-navigation-top-mobile ($name: '.navigation-top-mobile') {
     #{$name} {
-        @media screen and (max-width: rem(549)) {
-            border-bottom: rem(1) solid $setting-color-lightest;
+        @include helper-breakpoint-media-max($sm-max) {
+            border-bottom: 1px solid $setting-color-lightest;
+
+            .icon--bigger {
+                width: 1.5rem;
+                height: 1.5rem;
+            }
         }
 
         &__item {
             width: 20%;
-            padding: rem(12.8);
-        }
-        @media screen and (max-width: rem(549)) {
-            .icon--bigger {
-                width: rem(24);
-                height: rem(24);
-            }
+            padding: 0.8rem;
         }
     }
 }
