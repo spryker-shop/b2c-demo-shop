@@ -14,7 +14,6 @@ use Generated\Shared\Transfer\NavigationTreeNodeTransfer;
 use Generated\Shared\Transfer\NavigationTreeTransfer;
 use PyzTest\Zed\NavigationGui\NavigationGuiPresentationTester;
 use PyzTest\Zed\NavigationGui\PageObject\NavigationNodeCreatePage;
-use PyzTest\Zed\NavigationGui\PageObject\NavigationNodeUpdatePage;
 use PyzTest\Zed\NavigationGui\PageObject\NavigationPage;
 
 /**
@@ -111,45 +110,6 @@ class NavigationTreeCest
 
         $i->switchToNavigationTree();
         $i->seeNumberOfNavigationNodes(3);
-    }
-
-    /**
-     * @param \PyzTest\Zed\NavigationGui\NavigationGuiPresentationTester $i
-     *
-     * @return void
-     */
-    public function testUpdateNodeToCategoryType(NavigationGuiPresentationTester $i)
-    {
-        $i->wantTo('Update child node to category type.');
-        $i->expect('Node changes should persist in Zed.');
-
-        $i->amLoggedInUser();
-        $navigationTreeTransfer = $i->prepareTestNavigationTreeEntities((new NavigationTreeTransfer())
-            ->setNavigation((new NavigationTransfer())
-                ->setName('Update child node to category type test 4')
-                ->setKey('Update child node to category type test 4')
-                ->setIsActive(true))
-            ->addNode((new NavigationTreeNodeTransfer())
-                ->setNavigationNode((new NavigationNodeTransfer())
-                    ->addNavigationNodeLocalizedAttribute((new NavigationNodeLocalizedAttributesTransfer())
-                        ->setFkLocale($i->getIdLocale('en_US'))
-                        ->setTitle('foo'))
-                    ->addNavigationNodeLocalizedAttribute((new NavigationNodeLocalizedAttributesTransfer())
-                        ->setFkLocale($i->getIdLocale('de_DE'))
-                        ->setTitle('foo')))));
-        $i->amOnPage(NavigationPage::URL);
-
-        $idNavigationNode = $navigationTreeTransfer->getNodes()[0]->getNavigationNode()->getIdNavigationNode();
-
-        $i->waitForNavigationTree();
-        $i->clickNode($idNavigationNode);
-        $i->switchToNodeForm();
-        $i->see('Edit node');
-        $i->submitUpdateNodeToCategoryType('/en/computer', '/de/computer');
-
-        $i->seeSuccessMessage(NavigationNodeUpdatePage::MESSAGE_SUCCESS);
-        $i->switchToNavigationTree();
-        $i->seeNumberOfNavigationNodes(2);
     }
 
     /**

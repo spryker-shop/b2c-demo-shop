@@ -44,7 +44,7 @@ class CartController extends SprykerCartController
             ->getZedRequestClient()
             ->addFlashMessagesFromLastZedRequest();
 
-        return $this->redirectResponseExternal($this->getRefererUrl($request));
+        return $this->redirect($request);
     }
 
     /**
@@ -64,20 +64,20 @@ class CartController extends SprykerCartController
             ->getZedRequestClient()
             ->addFlashMessagesFromLastZedRequest();
 
-        return $this->redirectResponseExternal($this->getRefererUrl($request));
+        return $this->redirect($request);
     }
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
-     * @return array|string
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    protected function getRefererUrl(Request $request)
+    protected function redirect(Request $request)
     {
         if ($request->headers->has(static::REQUEST_HEADER_REFERER)) {
-            return $request->headers->get(static::REQUEST_HEADER_REFERER);
+            return $this->redirectResponseExternal($request->headers->get(static::REQUEST_HEADER_REFERER));
         }
 
-        return CartControllerProvider::ROUTE_CART;
+        return $this->redirectResponseInternal(CartControllerProvider::ROUTE_CART);
     }
 }
