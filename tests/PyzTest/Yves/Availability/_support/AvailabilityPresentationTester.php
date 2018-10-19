@@ -29,10 +29,11 @@ class AvailabilityPresentationTester extends Actor
 {
     use _generated\AvailabilityPresentationTesterActions;
 
-    const FUJITSU_PRODUCT_PAGE = '/en/fujitsu-esprimo-e420-118';
-    const FUJITSU2_PRODUCT_PAGE = '/en/fujitsu-esprimo-e920-119';
+    public const FUJITSU_PRODUCT_PAGE = '/en/fujitsu-esprimo-e420-118';
+    public const FUJITSU2_PRODUCT_PAGE = '/en/fujitsu-esprimo-e920-119';
+    public const ADD_FUJITSU2_PRODUCT_TO_CART_URL = '/cart/add/119_29804808';
 
-    const CART_PRE_CHECK_AVAILABILITY_ERROR_MESSAGE = 'Item 119_29804808 only has availability of 10.';
+    public const CART_PRE_CHECK_AVAILABILITY_ERROR_MESSAGE = 'Item 119_29804808 only has availability of 10.';
 
     /**
      * @param \Codeception\Scenario $scenario

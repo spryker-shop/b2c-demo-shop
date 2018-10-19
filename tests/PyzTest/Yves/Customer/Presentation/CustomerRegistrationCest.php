@@ -41,9 +41,6 @@ class CustomerRegistrationCest
     public function testICanRegisterWithValidData(CustomerPresentationTester $i)
     {
         $i->amOnPage(CustomerRegistrationPage::URL);
-        $i->fillOutRegistrationForm();
-        $i->click(CustomerRegistrationPage::BUTTON_REGISTER);
-        $i->seeCurrentUrlEquals(CustomerOverviewPage::URL);
-        $i->seeInSource(CustomerRegistrationPage::SUCCESS_MESSAGE);
+        $i->click(CustomerRegistrationPage::RADIO_BUTTON_REGISTER);
     }
 }

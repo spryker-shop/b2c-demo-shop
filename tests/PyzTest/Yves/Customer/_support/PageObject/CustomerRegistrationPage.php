@@ -14,6 +14,7 @@ class CustomerRegistrationPage extends Customer
     public const TITLE_CREATE_ACCOUNT = 'Sign Up';
 
     public const BUTTON_REGISTER = 'Sign Up';
+    public const RADIO_BUTTON_REGISTER = 'toggler-radio[data-qa*="register"]';
 
     public const FORM_FIELD_SELECTOR_SALUTATION = 'registerForm[salutation]';
     public const FORM_FIELD_SELECTOR_FIRST_NAME = 'registerForm[first_name]';

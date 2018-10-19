@@ -145,8 +145,7 @@ class NavigationTreeCest
         $i->clickNode($idNavigationNode);
         $i->switchToNodeForm();
         $i->see('Edit node');
-        $i->submitUpdateNodeToCategoryType('/en/computer', '/de/computer');
-
+        $i->submitUpdateNodeToCategoryType('/en/computer_en', '/de/computer_de');
         $i->seeSuccessMessage(NavigationNodeUpdatePage::MESSAGE_SUCCESS);
         $i->switchToNavigationTree();
         $i->seeNumberOfNavigationNodes(2);
