@@ -1,19 +1,14 @@
 <?php
 
 /**
- * Copyright © 2016-present Spryker Systems GmbH. All rights reserved.
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * This file is part of the Spryker Suite.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace Pyz\Yves\ProductReviewWidget\Controller;
 
-use Generated\Shared\Transfer\CustomerTransfer;
-use Spryker\Shared\Storage\StorageConstants;
-use SprykerShop\Yves\ShopApplication\Controller\AbstractController;
-use Symfony\Component\Form\FormError;
-use Symfony\Component\Form\FormInterface;
-use Symfony\Component\HttpFoundation\Request;
 use SprykerShop\Yves\ProductReviewWidget\Controller\SubmitController as SprykerSubmitController;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @method \SprykerShop\Yves\ProductReviewWidget\ProductReviewWidgetFactory getFactory()
