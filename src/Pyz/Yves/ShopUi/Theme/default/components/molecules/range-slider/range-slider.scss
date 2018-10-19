@@ -9,7 +9,7 @@
         background: none;
         height: auto;
         box-shadow: none;
-        margin: 0 $width-handle/2;
+        margin: 0 calc(#{$width-handle}/2);
 
         &__values {
             position: relative;
@@ -19,7 +19,7 @@
             align-items: center;
             font-size: rem(11);
             padding-top: rem(10);
-            margin: 0 (-$width-handle/2);
+            margin: 0 calc(-#{$width-handle}/2);
         }
 
         &.noUi-horizontal {
@@ -28,7 +28,7 @@
 
                 html:not([dir='rtl']) & {
                     right: 0;
-                    margin-right: -$width-handle/2;
+                    margin-right: calc(-#{$width-handle}/2);
                 }
             }
         }
@@ -44,7 +44,7 @@
         .noUi-connects {
             background-color: $setting-color-gallery;
             height: rem(1);
-            margin: 0 (-$width-handle/2);
+            margin: 0 calc(-#{$width-handle}/2);
             width: $width-slider-line;
         }
 
