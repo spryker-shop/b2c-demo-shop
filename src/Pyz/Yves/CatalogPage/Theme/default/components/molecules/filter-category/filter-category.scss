@@ -15,7 +15,7 @@
             font: 400 rem(15) $setting-font-family;
 
             &--active {
-                #{$name}__link {
+                & > #{$name}__link {
                     color: $setting-color-radical-red;
                 }
             }
@@ -38,6 +38,7 @@
             &:not([disabled]):hover {
                 text-decoration: none;
                 color: $setting-color-alt;
+                cursor: pointer;
             }
         }
     }
