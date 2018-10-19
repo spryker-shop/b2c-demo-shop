@@ -8,7 +8,6 @@
 namespace PyzTest\Yves\Customer\Presentation;
 
 use PyzTest\Yves\Customer\CustomerPresentationTester;
-use PyzTest\Yves\Customer\PageObject\CustomerOverviewPage;
 use PyzTest\Yves\Customer\PageObject\CustomerRegistrationPage;
 
 /**
