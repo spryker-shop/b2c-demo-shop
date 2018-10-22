@@ -1,48 +1,48 @@
 
 @mixin shop-ui-subscription-form($name: '.subscription-form') {
     #{$name} {
-        padding-top: 11px;
+        padding-top: rem(11);
 
         &__grid {
             width: 100%;
-            max-width: 400px;
+            max-width: rem(400);
             flex-wrap: nowrap;
             @include helper-breakpoint-media-min($xl-min) {
-                wmax-width: 200px;
+                max-width: rem(200);
             }
         }
         &__grid [type='email'] {
             width: 100%;
-            height: 48px;
-            border-radius: 2px 0 0 2px;
-            border: solid 1px $setting-color-lightest;
+            height: rem(48);
+            border-radius: rem(2) 0 0 rem(2);
+            border: solid rem(1) $setting-color-lightest;
             border-right: 0;
-            font-size: 16px;
+            font-size: rem(16);
             color: $setting-color-lighter;
             &::placeholder {
-              color: $setting-color-lightest;
+                color: $setting-color-lightest;
             }
         }
         &__button {
-            width: 30px;
-            height: 48px;
-            border-radius: 0 2px 2px 0;
+            width: rem(30);
+            height: rem(48);
+            border-radius: 0 rem(2) rem(2) 0;
         }
         &__arrow {
-            width: 6px;
-            height: 9px;
+            width: rem(6);
+            height: rem(9);
         }
         .form-field {
             margin: 0;
         }
-        & .form-field__error:before {
+        & .form-field__error::before {
             display: none;
         }
         & .form-field__error-list,
         &__success,
         &__alert {
-            padding-top: 10px;
-            font-size: 12px;
+            padding-top: rem(10);
+            font-size: rem(12);
             line-height: 1.2;
         }
 

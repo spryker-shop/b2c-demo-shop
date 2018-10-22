@@ -1,15 +1,15 @@
-@mixin shop-ui-quote-teaser($name: '.quote-teaser'){
+@mixin shop-ui-quote-teaser($name: '.quote-teaser') {
     #{$name} {
         position: relative;
         overflow: hidden;
-        margin: 150px 0;
-        height: 32rem;
+        margin: rem(150) 0;
+        height: rem(512);
         .touch & {
-            background-image: url("/assets/images/viden-lnfra.jpg");
+            background-image: url('/assets/images/viden-lnfra.jpg');
             background-size: cover;
         }
         @include helper-breakpoint-media-max($md-max) {
-            height: 22rem;
+            height: rem(352);
         }
 
         video {
@@ -28,39 +28,39 @@
         }
         &__container {
             height: 100%;
-            padding: 0 25px;
-            &:after {
+            padding: 0 rem(25);
+            &::after {
                 display: none;
             }
         }
         &__content {
-            max-width: 750px;
+            max-width: rem(750);
         }
         &__text {
-            margin-top: 35px;
-            &>* {
-                font-size: 16px;
-                letter-spacing: 3px;
+            margin-top: rem(35);
+            & > * {
+                font-size: rem(16);
+                letter-spacing: rem(3);
                 line-height: 1.8;
                 text-transform: uppercase;
                 color: $setting-color-white;
                 text-align: center;
                 @include helper-breakpoint-media-max($sm-max) {
-                    font-size: 13px;
+                    font-size: rem(13);
                 }
             }
         }
         &__auth {
-            &>* {
-                padding: 20px 0;
-                font-size: 12px;
+            & > * {
+                padding: rem(20) 0;
+                font-size: rem(12);
                 color: $setting-color-white;
-                opacity: .4;
+                opacity: 0.4;
                 text-align: center;
-                letter-spacing: 1.7px;
+                letter-spacing: rem(1.7);
                 text-transform: uppercase;
                 @include helper-breakpoint-media-max($sm-max) {
-                    font-size: 10px;
+                    font-size: rem(10);
                 }
             }
         }

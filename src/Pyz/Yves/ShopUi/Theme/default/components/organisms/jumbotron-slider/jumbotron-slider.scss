@@ -1,36 +1,36 @@
 @mixin shop-ui-jumbotron-slider($name: '.jumbotron-slider') {
     #{$name} {
-        min-height: 450px;
-        @include helper-breakpoint-media-max($lg-max){
-            min-height: 290px;
+        min-height: rem(450);
+        @include helper-breakpoint-media-max($lg-max) {
+            min-height: rem(290);
         }
-        @include helper-breakpoint-media-max($sm-max){
-            min-height: 212px;
+        @include helper-breakpoint-media-max($sm-max) {
+            min-height: rem(212);
         }
         .slick-slide {
-            margin: 0 4px;
+            margin: 0 rem(4);
         }
         .slick-dots {
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-top: 24px;
+            margin-top: rem(24);
             li {
                 display: block;
-                margin: .3rem .5rem;
-                width: 6px;
-                height: 6px;
-                background: #1a1a1a;
-                opacity: .25;
+                margin: rem(4.8) rem(8);
+                width: rem(6);
+                height: rem(6);
+                background: $setting-color-darkest;
+                opacity: 0.25;
                 border-radius: 50%;
                 &:hover {
                     cursor: pointer;
                 }
                 &.slick-active {
-                    width: 12px;
-                    height: 12px;
+                    width: rem(12);
+                    height: rem(12);
                     background: transparent;
-                    border: 1px solid $setting-color-alt;
+                    border: rem(1) solid $setting-color-alt;
                     opacity: 1;
                 }
 
@@ -40,14 +40,13 @@
             }
         }
         .slick-initialized {
-            @include helper-breakpoint-media-max($sm-max){
+            @include helper-breakpoint-media-max($sm-max) {
                 padding: 0;
             }
             .jumbotron-slider-item__container {
                 display: flex !important;
             }
         }
-
     }
 }
 

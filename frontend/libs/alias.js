@@ -2,7 +2,7 @@ const path = require('path');
 const appSettings = require('../settings');
 
 // get the aliases from the tsconfig.json file
-// and transform them in webpack alises
+// and transform them in webpack aliases
 // allowing the definition of aliases in one place
 function getFromTsConfig() {
     const tsConfigFile = path.join(appSettings.context, appSettings.paths.tsConfig);

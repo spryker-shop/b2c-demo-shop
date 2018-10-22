@@ -1,55 +1,55 @@
 @mixin basic-typography() {
     @font-face {
-        font-family: 'Calibre';
+        font-family: Calibre;
         src: url('https://s3.eu-central-1.amazonaws.com/spryker/fonts/calibre/CalibreWeb-Light.woff2') format('woff2'), url('https://s3.eu-central-1.amazonaws.com/spryker/fonts/calibre/CalibreWeb-Light.woff') format('woff');
         font-weight: 300;
         font-style: normal;
     }
 
     @font-face {
-        font-family: 'Calibre';
+        font-family: Calibre;
         src: url('https://s3.eu-central-1.amazonaws.com/spryker/fonts/calibre/CalibreWeb-Regular.woff2') format('woff2'), url('https://s3.eu-central-1.amazonaws.com/spryker/fonts/calibre/CalibreWeb-Regular.woff') format('woff');
         font-weight: 400;
         font-style: normal;
     }
 
     @font-face {
-        font-family: 'Calibre';
+        font-family: Calibre;
         src: url('https://s3.eu-central-1.amazonaws.com/spryker/fonts/calibre/CalibreWeb-Medium.woff2') format('woff2'), url('https://s3.eu-central-1.amazonaws.com/spryker/fonts/calibre/CalibreWeb-Medium.woff') format('woff');
         font-weight: 500;
         font-style: normal;
     }
 
     @font-face {
-        font-family: 'Calibre';
+        font-family: Calibre;
         src: url('https://s3.eu-central-1.amazonaws.com/spryker/fonts/calibre/CalibreWeb-Bold.woff2') format('woff2'), url('https://s3.eu-central-1.amazonaws.com/spryker/fonts/calibre/CalibreWeb-Bold.woff') format('woff');
         font-weight: 700;
         font-style: normal;
     }
 
     @font-face {
-        font-family: 'Circular';
+        font-family: Circular;
         src: url('https://s3.eu-central-1.amazonaws.com/spryker/fonts/circular-pro/lineto-circular-pro-book.woff2') format('woff2'), url('https://s3.eu-central-1.amazonaws.com/spryker/fonts/circular-pro/lineto-circular-pro-book.woff') format('woff');
         font-weight: 400;
         font-style: normal;
     }
 
     @font-face {
-        font-family: 'Circular';
+        font-family: Circular;
         src: url('https://s3.eu-central-1.amazonaws.com/spryker/fonts/circular-pro/lineto-circular-pro-medium.woff2') format('woff2'), url('https://s3.eu-central-1.amazonaws.com/spryker/fonts/circular-pro/lineto-circular-pro-medium.woff') format('woff');
         font-weight: 500;
         font-style: normal;
     }
 
     @font-face {
-        font-family: 'Circular';
+        font-family: Circular;
         src: url('https://s3.eu-central-1.amazonaws.com/spryker/fonts/circular-pro/lineto-circular-pro-bold.woff2') format('woff2'), url('https://s3.eu-central-1.amazonaws.com/spryker/fonts/circular-pro/lineto-circular-pro-bold.woff') format('woff');
         font-weight: 700;
         font-style: normal;
     }
 
     html {
-        font-size: $setting-font-size-base;
+        font-size: 100%;
     }
 
     body {
@@ -70,7 +70,7 @@
             display: block;
 
             &--margins {
-                margin: 2rem 0 1rem 0;
+                margin: rem(32) 0 rem(16);
             }
         }
     }
@@ -99,7 +99,7 @@
     hr {
         @include helper-ui-clearfix;
         border-bottom: none;
-        margin: .5rem 0;
+        margin: rem(8) 0;
     }
 
     small {
@@ -113,6 +113,6 @@
     p,
     blockquote,
     iframe {
-        margin: .5rem 0;
+        margin: rem(8) 0;
     }
 }

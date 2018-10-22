@@ -11,14 +11,16 @@
 
 {% set isMultiSelect = data.isMultiSelect is null ? (data.filter.config.isMultiValued | default(false)) : false %}
 {% set activeValues = isMultiSelect ? data.filter.activeValue : [data.filter.activeValue] %}
-{% set inputComponent = isMultiSelect ? atom('checkbox', 'CatalogPage') : atom('radio') %}
+{% set inputComponent = isMultiSelect ? atom('color-checkbox', 'CatalogPage') : atom('radio') %}
 
 {% block body %}
-    <ul class="{{ config.name ~ '-list' }}">
+    <ul class="{{ config.name }}__list">
+
         {% for filterValue in data.filter.values %}
-            <li class="{{ config.name ~ '-list__item' }}">
+            <li class="{{ config.name }}__item">
+
                 {% include inputComponent with {
-                    class: config.name ~ '-list__color',
+                    class: config.name ~ '__color',
                     attributes: {
                         name: data.filter.config.parameterName ~ (isMultiSelect ? '[]' : ''),
                         value: filterValue.value,
@@ -28,7 +30,9 @@
                         label: filterValue.value
                     }
                 } only %}
+
             </li>
         {% endfor %}
+
     </ul>
 {% endblock %}

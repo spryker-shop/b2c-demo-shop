@@ -2,21 +2,21 @@
     #{$name} {
         position: relative;
         display: inline-block;
-        margin-bottom: 5px;
+        margin-bottom: rem(5);
 
         &__container {
-            display: block;
+            display: flex;
+            align-items: center;
         }
 
         &__box {
             display: inline-block;
-            width: 1rem;
-            height: 1rem;
-            border: 1px solid $setting-color-input-border;
-            border-radius: 2px;
+            width: rem(16);
+            height: rem(16);
+            border: rem(1) solid $setting-color-input-border;
+            border-radius: rem(2);
             background-color: $setting-color-white;
-            margin-top: 2px;
-            margin-right: .63rem;
+            margin-right: rem(10);
             text-align: center;
             vertical-align: top;
         }
@@ -24,22 +24,21 @@
         &__input {
             @include helper-visibility-invisible;
             position: absolute;
-            background: red;
         }
 
         &__check {
             @include helper-visibility-invisible;
             @include helper-effect-transition;
             position: absolute;
-            top: 5px !important;
-            left: 4px !important;
-            width: 9px !important;
-            height: 10px !important;
-            fill: #fff;
+            top: rem(5) !important;
+            left: rem(4) !important;
+            width: rem(9) !important;
+            height: rem(10) !important;
+            fill: $setting-color-white;
         }
 
         &__input:checked + #{$name}__box {
-            border: 1px solid $setting-color-main;
+            border: rem(1) solid $setting-color-main;
             background-color: $setting-color-main;
             & + .checkbox__check {
                 @include helper-visibility-visible;
@@ -61,7 +60,7 @@
         }
 
         &__label {
-            line-height: 18px;
+            line-height: rem(18);
         }
 
         @content;

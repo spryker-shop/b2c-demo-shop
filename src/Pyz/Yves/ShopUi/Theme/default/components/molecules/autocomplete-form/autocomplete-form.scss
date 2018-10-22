@@ -1,7 +1,7 @@
 @mixin shop-ui-autocomplete-form($name: '.autocomplete-form') {
     #{$name} {
         position: relative;
-        margin-right: 20px;
+        margin-right: rem(20);
 
         &__field {
             position: relative;
@@ -9,10 +9,10 @@
 
         &__input {
             border: none;
-            background-color: #f2f2f2;
+            background-color: $setting-color-concrete;
             font-weight: 500;
-            font-size: 18px;
-            padding: 13px 40px 14px 18px;
+            font-size: rem(18);
+            padding: rem(13) rem(40) rem(14) rem(18);
 
             &::placeholder {
                 opacity: 0.3;
@@ -25,12 +25,12 @@
             top: 100%;
             left: 0;
             right: 0;
-            background-color: #fff;
-            border-radius: 3px;
-            padding: 12px 18px;
-            font-size: 19px;
+            background-color: $setting-color-white;
+            border-radius: rem(3);
+            padding: rem(12) rem(18);
+            font-size: rem(19);
             line-height: 1.79;
-            color: #333;
+            color: $setting-color-dark;
         }
 
         &__item {

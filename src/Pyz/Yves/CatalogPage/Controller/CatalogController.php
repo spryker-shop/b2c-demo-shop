@@ -76,7 +76,7 @@ class CatalogController extends SprykerCatalogController
     /**
      * @param array $categoryNode
      *
-     * @return null|string
+     * @return string|null
      */
     protected function getCategoryBannerPath(array $categoryNode)
     {

@@ -370,9 +370,7 @@ class DataImportConfig extends SprykerDataImportConfig
     }
 
     /**
-     * @param int $idCmsPage
-     *
-     * @return string
+     * @return bool
      */
     public function isInternal()
     {

@@ -1,0 +1,45 @@
+@mixin filter-category($name: '.filter-category') {
+    #{$name} {
+        &--sidebar {
+            padding-bottom: rem(4);
+        }
+
+        @include helper-breakpoint-media-min($xl-min) {
+            &#{$name} {
+                display: block;
+            }
+        }
+
+        #{$name}__item {
+            margin: 0 0 0 rem(16);
+            font: 400 rem(15) $setting-font-family;
+
+            &--active > #{$name}__link{
+                color: $setting-color-radical-red;
+            }
+
+            &--level-1 {
+                margin: 0;
+            }
+
+            [disabled] {
+                color: $setting-color-lighter;
+            }
+        }
+
+        #{$name}__link {
+            font: 400 rem(15) $setting-font-family;
+            margin-bottom: rem(14);
+            color: $setting-color-darkest;
+            background: transparent;
+
+            &:not([disabled]):hover {
+                text-decoration: none;
+                color: $setting-color-alt;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+@include filter-category;

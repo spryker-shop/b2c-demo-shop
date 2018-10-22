@@ -1,205 +1,193 @@
 @mixin shop-ui-footer($name: '.footer') {
     #{$name} {
-        border-top: 1px solid $setting-color-lightest;
+        border-top: rem(1) solid $setting-color-lightest;
 
-        &__title {
-            font: bold 13px $setting-font-family-additional;
-            text-transform: uppercase;
-            letter-spacing: 2.6px;
-            color: $setting-color-text;
-            white-space: nowrap;
-            padding: 0 0 16px;
-            cursor: default;
-            @include helper-breakpoint-media-max($md-max) {
-                padding: 16px 0;
-                cursor: pointer;
-            }
-        }
-
-        &-title-nav {
-            @include helper-breakpoint-media-max($sm-max) {
-                position: relative;
-                &:before {
-                    content: "";
-                    width: 10px;
-                    height: 2px;
-                    background: $setting-color-dark;
-                    position: absolute;
-                    top: 50%;
-                    right: 0;
-                    margin-top: -1px;
-                }
-                &:after {
-                    content: "";
-                    width: 2px;
-                    height: 10px;
-                    background: $setting-color-dark;
-                    position: absolute;
-                    top: 50%;
-                    right: 4px;
-                    margin-top: -4px;
-                }
-                &.active:after {
-                    display: none;
-                }
-            }
-        }
-
-        &-top {
+        &__top {
             display: flex;
             justify-content: space-between;
             flex-wrap: wrap;
-            margin: 0 1rem;
-            padding: 30px 0 0;
-            &__col {
-                width: 100%;
-                margin-top: -1px;
-                border-top: solid 1px $setting-color-lightest-1;
-                border-bottom: solid 1px $setting-color-lightest-1;
-            }
-            .navigation-footer {
-                padding-bottom: 10px;
+            margin: 0 rem(16);
+            padding: rem(30) 0 0;
 
-            }
             @include helper-breakpoint-media-min($md-min) {
-                border-bottom: dotted 1px $setting-color-lightest-1;
-                padding: 0 0 30px;
-                &__col {
-                    width: auto;
-                    border: none;
-                }
-                .navigation-footer {
-                    padding-bottom: 0;
-                }
+                border-bottom: dotted rem(1) $setting-color-lightest-1;
+                padding: 0 0 rem(30);
             }
+
             @include helper-breakpoint-media-min($xl-min) {
-                padding: 92px 0 70px;
-                &__col {
-                    padding-right: 10%;
-                }
+                padding: rem(92) 0 rem(70);
             }
         }
 
-        &__navigation-main li {
-            padding-bottom: 10px;
-            font-size: 15px;
-            @include helper-breakpoint-media-max($sm-max) {
-                a {
-                    color: rgba($setting-color-text, .5);
-                }
-            }
-        }
-
-        .hidden-nav {
-            @include helper-breakpoint-media-max($sm-max) {
-                display: none;
-            }
-        }
-
-        .subscription-wrapper {
+        &__top-col {
             width: 100%;
-            padding-bottom: 50px;
-            @include helper-breakpoint-media-between($md-min, $lg-max) {
-                margin-bottom: 30px;
-                border-bottom: dotted 1px $setting-color-lightest;
+            margin-top: rem(-1);
+            border-top: solid rem(1) $setting-color-lightest-1;
+            border-bottom: solid rem(1) $setting-color-lightest-1;
+
+            @include helper-breakpoint-media-min($md-min) {
+                width: auto;
+                border: none;
             }
+
+            @include helper-breakpoint-media-min($xl-min) {
+                padding-right: 10%;
+            }
+        }
+
+        &__title {
+            font: bold rem(13) $setting-font-family-additional;
+            text-transform: uppercase;
+            letter-spacing: rem(2.6);
+            color: $setting-color-text;
+            white-space: nowrap;
+            padding: 0 0 rem(16);
+            cursor: default;
+
+            @include helper-breakpoint-media-max($sm-max) {
+                padding: rem(16) 0;
+                cursor: pointer;
+
+                &--nav {
+                    position: relative;
+
+                    &::before {
+                        content: '';
+                        width: rem(10);
+                        height: rem(2);
+                        background: $setting-color-dark;
+                        position: absolute;
+                        top: 50%;
+                        right: 0;
+                    }
+
+                    &::after {
+                        content: '';
+                        width: rem(2);
+                        height: rem(10);
+                        background: $setting-color-dark;
+                        position: absolute;
+                        top: 50%;
+                        right: rem(4);
+                        margin-top: rem(-5);
+                    }
+
+                    &.active {
+                        &::after {
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+
+        &__navigation-main {
+            &--hidden {
+                @include helper-breakpoint-media-max($sm-max) {
+                    display: none;
+                }
+            }
+
+            li {
+                padding-bottom: rem(10);
+                font-size: rem(15);
+
+                @include helper-breakpoint-media-max($sm-max) {
+                    a {
+                        color: rgba($setting-color-text, 0.5);
+                    }
+                }
+            }
+        }
+
+        &__subscription {
+            width: 100%;
+            padding-bottom: rem(50);
+
+            @include helper-breakpoint-media-between($md-min, $lg-max) {
+                margin-bottom: rem(30);
+                border-bottom: dotted rem(1) $setting-color-lightest;
+            }
+
             @include helper-breakpoint-media-min($xl-min) {
                 width: auto;
             }
         }
 
-        &-logo-section {
+        &__logo-section {
             order: 1;
         }
 
-        .footer-logo-copy {
+        &__logo-copy {
             @include helper-breakpoint-media-min($md-min) {
                 display: flex;
                 align-items: center;
             }
-            &__logo {
-                padding: 0;
-                width: 90px;
-                display: block;
-                margin-right: 12px;
-                border: none;
-                transform: translate(0 , -5px);
-                img {
-                    width: 150px;
-                    //height: 42px;
-                }
-                @include helper-breakpoint-media-min($md-min) {
-                    width: 102px;
-                }
+        }
+
+        &__logo-copy-logo {
+            padding: 0;
+            width: rem(90);
+            display: block;
+            margin-right: rem(12);
+            border: none;
+            transform: translate(0, rem(-5));
+
+            img {
+                width: rem(150);
             }
-            &__text {
-                letter-spacing: 3.2px;
-                line-height: 1.6;
-                font: normal 10px $setting-font-family-additional;
-                text-transform: uppercase;
-                margin-right: 10px;
-            }
-            &__links {
-                display: flex;
-                flex-direction: column;
-                position: absolute;
-            }
-            &__link {
-                font-size: 13px;
-                margin-right: 10px;
-                color: $setting-color-light;
+
+            @include helper-breakpoint-media-min($md-min) {
+                width: rem(102);
             }
         }
 
+        &__logo-copy-text {
+            letter-spacing: rem(3.2);
+            font: normal rem(10)/rem(16) $setting-font-family-additional;
+            text-transform: uppercase;
+            margin-right: rem(10);
+        }
 
+        &__logo-copy-links {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+        }
 
-        &-bottom {
-            margin: 16px 1rem 0;
+        &__logo-copy-link {
+            font-size: rem(13);
+            margin-right: rem(10);
+            color: $setting-color-light;
+        }
+
+        &__bottom {
+            margin: rem(16) rem(16) 0;
             justify-content: space-between;
-            padding: 0 0 50px;
+            padding: 0 0 rem(50);
+
             @include helper-breakpoint-media-min($xl-min) {
-                padding: 0 0 86px;
+                padding: 0 0 rem(86);
             }
-            &:after {
+
+            &::after {
                 display: none;
             }
+
             &:first-child {
-                margin-top: 30px;
+                margin-top: rem(30);
             }
         }
 
-        .navigation-footer {
-            font-size: 15px;
-            font-weight: normal;
-            line-height: 2.13;
-            letter-spacing: 0.5px;
-        }
-
-        .copyright {
-            opacity: 0.4;
-            font-size: 12px;
-            line-height: normal;
-            letter-spacing: normal;
-            padding: 2px 0 0 1px;
-            @include helper-breakpoint-media-min($md-min) {
-                font-size: 14px;
-            }
-        }
-
-        &-icons {
+        &__icon-lists {
             display: flex;
             justify-content: center;
-            padding: 5px 0 20px;
-            margin: 0 0 15px;
-            border-bottom: dotted 1px $setting-color-lightest;
+            padding: rem(5) 0 rem(20);
+            margin: 0 0 rem(15);
+            border-bottom: dotted rem(1) $setting-color-lightest;
             width: 100%;
             order: 0;
-            .menu__item {
-                margin: 0 15px !important;
-                @include helper-breakpoint-media-min($md-min) {
-                    margin: 0 10px !important;
-                }
-            }
+
             @include helper-breakpoint-media-min($lg-min) {
                 width: auto;
                 border-bottom: 0;
@@ -209,58 +197,30 @@
             }
         }
 
-        .icon-visa {
-            width: 32px;
-            height: 10px;
+        &__icon-list {
+            margin: 0 rem(15);
+
+            @include helper-breakpoint-media-min($md-min) {
+                margin: 0 rem(10);
+            }
         }
 
-        .icon-mastercard {
-            width: 26px;
-            height: 20px;
-        }
-
-        .icon-paypal {
-            width: 41px;
-            height: 11px;
-        }
-
-        .icon-klarna {
-            width: 40px;
-            height: 11px;
-        }
-
-        .icon-dhl {
-            width: 64px;
-            height: 8px;
-        }
-
-        .icon-hermes {
-            width: 68px;
-            height: 9px;
-        }
-
-        &-currency-lang {
+        &__currency-lang {
             display: flex;
             order: 1;
-            .custom-select {
-                margin-left: 16px;
-                font-size: 16px;
-                .select2-selection__rendered {
-                    line-height: 24px;
-                }
-            }
-            .custom-select__caret {
-                pointer-events: none;
-            }
-
         }
 
-        .subscription-text {
+        &__select {
+            margin-left: rem(16);
+            font-size: rem(16);
+            line-height: rem(24);
+        }
+
+        &__subscription-text {
             color: $setting-color-text;
-            font: normal 15px $setting-font-family;
-            line-height: 22.5px;
+            font: normal rem(15)/rem(22) $setting-font-family;
             display: block;
-            max-width: 210px;
+            max-width: rem(210);
         }
     }
 }

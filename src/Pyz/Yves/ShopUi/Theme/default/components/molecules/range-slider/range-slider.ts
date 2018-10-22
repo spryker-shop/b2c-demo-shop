@@ -1,11 +1,27 @@
 import Component from 'ShopUi/models/component';
 import noUiSlider from 'nouislider';
 
+interface sliderConfig {
+    start: Array<string>,
+    step: number,
+    connect: boolean,
+    margin: number,
+    range: {
+        'min': number,
+        'max': number
+    }
+}
+
 export default class RangeSlider extends Component {
+    protected wrap: HTMLElement
+    protected sliderConfig: sliderConfig
+    protected targetSelectors: HTMLInputElement[]
+    protected valueTarget: HTMLElement[]
 
     protected readyCallback(): void {
-        const wrap = <any> document.querySelector(this.wrapSelector);
-        const sliderConfig = {
+        this.wrap = <HTMLElement>document.querySelector(this.wrapSelector);
+        this.targetSelectors = <HTMLInputElement[]>Array.from(document.querySelectorAll(JSON.parse(this.targetSelector)));
+        this.sliderConfig = {
             start: [ this.valueCurrentMin, this.valueCurrentMax ],
             step: 1,
             connect: true,
@@ -15,32 +31,35 @@ export default class RangeSlider extends Component {
                 'max': +this.valueMax
             }
         };
+        this.init();
+    }
 
-        noUiSlider.create(wrap, sliderConfig);
-
-        const valueUpdate = (wrap, target, type) => {
-            if(type) {
-                wrap.noUiSlider.on('update', function( values, handle ) {
-                    target[handle].value = Number(values[handle]);
-                });
-            } else {
-                const currency = (target[0].innerHTML).replace(/[0-9_,.]/g, '');
-                wrap.noUiSlider.on('update', function (values, handle) {
-                    currency.search(/&nbsp;/i) !==-1 ?
-                        target[handle].innerHTML = Number(values[handle]) + currency
-                        :
-                        target[handle].innerHTML = currency + Number(values[handle]);
-                });
-            }
-        }
+    protected init(): void {
+        noUiSlider.create(this.wrap, this.sliderConfig);
+        this.updateValues(this.wrap, this.targetSelectors);
 
         if(this.valueSelector !== '') {
-            const valueTarget = document.querySelectorAll(JSON.parse(this.valueSelector));
-            valueUpdate(wrap, valueTarget, false);
+            this.valueTarget = <HTMLElement[]>Array.from(document.querySelectorAll(JSON.parse(this.valueSelector)));
+            this.updateSelectors(this.wrap, this.valueTarget);
         }
+    }
+    
+    protected updateValues(wrap: noUiSlider, target: Array<HTMLInputElement>): void {
+        const update = (values, handle) => target[handle].value = Number(values[handle]) + '';
 
-        const targetSelector = document.querySelectorAll(JSON.parse(this.targetSelector));
-        valueUpdate(wrap, targetSelector, true);
+        wrap.noUiSlider.on('update', update);
+    }
+    
+    protected updateSelectors(wrap: noUiSlider, target: Array<HTMLElement>): void {
+        const currency = (target[0].innerHTML).replace(/[0-9_,.]/g, ''),
+              update = (values, handle) => {
+                  currency.search(/&nbsp;/i) !==-1 ?
+                      target[handle].innerHTML = Number(values[handle]) + currency
+                      :
+                      target[handle].innerHTML = currency + Number(values[handle]);
+              };
+
+        wrap.noUiSlider.on('update', update);
     }
 
     get wrapSelector(): string {
@@ -70,5 +89,4 @@ export default class RangeSlider extends Component {
     get valueCurrentMax(): string {
         return this.getAttribute('active-max');
     }
-
 }

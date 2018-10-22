@@ -2,7 +2,7 @@
     #{$name} {
         position: relative;
         z-index: $setting-zi-header;
-        border-bottom: 1px solid #e3e3e3;
+        border-bottom: rem(1) solid #e3e3e3;
 
         &.active {
             z-index: $setting-zi-header + 1;
@@ -14,7 +14,7 @@
                 top: 0;
                 bottom: 0;
                 right: 0;
-                background-color: #000;
+                background-color: $setting-color-black;
                 opacity: 0.4;
                 z-index: -1;
             }
@@ -22,7 +22,7 @@
 
         &__inner {
             position: relative;
-            background-color: #fff;
+            background-color: $setting-color-white;
             z-index: 10;
         }
 
@@ -32,11 +32,11 @@
                 text-align: right;
             }
 
-            padding: 0.75rem 1rem;
+            padding: rem(12) rem(16);
         }
 
         &__info {
-            font-size: 14px;
+            font-size: rem(14);
             line-height: normal;
         }
 
@@ -45,7 +45,7 @@
         }
 
         &__button-wrap {
-            margin-left: 1.125rem;
+            margin-left: rem(18);
         }
     }
 }

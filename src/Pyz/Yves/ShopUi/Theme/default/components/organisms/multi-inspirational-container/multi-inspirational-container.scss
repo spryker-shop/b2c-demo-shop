@@ -1,17 +1,17 @@
 @mixin shop-ui-multi-inspirational-container($name: '.multi-inspire-container') {
     #{$name} {
-        margin: 0 0 150px 0;
+        margin: 0 0 rem(150);
         @include helper-breakpoint-media-max($sm-max) {
-            margin: 0 0 60px 0;
+            margin: 0 0 rem(60);
         }
         &--left {
             .col:first-of-type {
-                @include helper-breakpoint-media-max($md-max){
+                @include helper-breakpoint-media-max($md-max) {
                     order: 2;
                 }
             }
             .col:last-of-type {
-                @include helper-breakpoint-media-max($md-max){
+                @include helper-breakpoint-media-max($md-max) {
                     order: 1;
                 }
             }

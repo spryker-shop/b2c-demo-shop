@@ -62,10 +62,8 @@ class ProductSetUpdater extends SprykerProductSetUpdater
         ProductSetTouchInterface $productSetTouch,
         EventFacadeInterface $eventFacade
     ) {
-        $this->productSetEntityReader = $productSetEntityReader;
-        $this->productSetDataUpdater = $productSetDataUpdater;
-        $this->productSetTouch = $productSetTouch;
-        $this->productSetImageSaver = $productSetImageSaver;
+        parent::__construct($productSetEntityReader, $productSetDataUpdater, $productSetImageSaver, $productSetTouch);
+
         $this->eventFacade = $eventFacade;
     }
 

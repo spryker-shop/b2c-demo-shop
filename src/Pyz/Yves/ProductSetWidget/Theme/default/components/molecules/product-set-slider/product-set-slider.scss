@@ -1,4 +1,4 @@
-@mixin product-set-slider ($name: '.product-set-slider'){
+@mixin product-set-slider ($name: '.product-set-slider') {
     #{$name} {
 
         &.slick-carousel__container {
@@ -12,21 +12,21 @@
                 margin-left: 0;
                 margin-right: 0;
             }
-            margin-bottom: 2rem;
+            margin-bottom: rem(32);
         }
 
         &#{$name}--set-images {
             .slick-slide {
                 @include helper-breakpoint-media-min($lg-min) {
-                    width: 300px;
-                    padding: 0 15px;
+                    width: rem(300);
+                    padding: 0 rem(15);
                 }
-                width: 215px;
-                padding-right: 15px;
+                width: rem(215);
+                padding-right: rem(15);
             }
             .slick-arrow {
                 @include helper-breakpoint-media-max($md-max) {
-                    top: 80px;
+                    top: rem(80);
                 }
             }
             .slick-prev {
@@ -45,9 +45,9 @@
         }
         .product-card {
             @include helper-breakpoint-media-min($md-min) {
-                max-width: 270px;
+                max-width: rem(270);
             }
-            max-width: 200px;
+            max-width: rem(200);
             padding: 0;
             & + .product-card {
                 display: none;
@@ -55,12 +55,12 @@
         }
         .product-card__overlay {
             @include helper-breakpoint-media-max($md-max) {
-                padding-top: 20px;
-                padding-bottom: 20px;
+                padding-top: rem(20);
+                padding-bottom: rem(20);
             }
         }
         .product-card__info {
-            min-height: 3rem;
+            min-height: rem(48);
         }
         .thumbnail {
             margin: 0;
@@ -69,28 +69,28 @@
             }
         }
         .thumbnail__image {
-            border-radius: 3px;
+            border-radius: rem(3);
         }
         .slick-dots {
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-top: 12px;
+            margin-top: rem(12);
             li {
                 display: block;
-                margin: .3rem .5rem;
-                width: 6px;
-                height: 6px;
+                margin: rem(4.8) rem(8);
+                width: rem(6);
+                height: rem(6);
                 background: $setting-color-lightest;
                 border-radius: 50%;
                 &:hover {
                     cursor: pointer;
                 }
                 &.slick-active {
-                    width: 12px;
-                    height: 12px;
+                    width: rem(12);
+                    height: rem(12);
                     background: transparent;
-                    border: 1px solid map-get($setting-color-actions, alert);
+                    border: rem(1) solid map-get($setting-color-actions, alert);
                 }
 
                 button {
@@ -101,14 +101,14 @@
         .product-set-widget-main-slider-wrap & {
             .slick-slide {
                 @include helper-breakpoint-media-min($lg-min) {
-                    padding-right: 15px;
+                    padding-right: rem(15);
                 }
             }
             .thumbnail {
                 @include helper-breakpoint-media-min($md-min) {
-                    height: 23rem;
+                    height: rem(368);
                 }
-                height: 15rem;
+                height: rem(240);
             }
         }
         .product-set-widget-slider-wrap & {

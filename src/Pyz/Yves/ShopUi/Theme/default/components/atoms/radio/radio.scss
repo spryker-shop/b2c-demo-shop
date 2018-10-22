@@ -6,7 +6,7 @@
         }
 
         &__input:checked + .radio__box {
-            border: 1px solid $setting-color-main;
+            border: rem(1) solid $setting-color-main;
             background-color: $setting-color-main;
         }
 
@@ -22,19 +22,19 @@
             &:hover,
             &:focus {
                 #{$name}__box::before {
-                    border-color:  $setting-color-input-border-focus;
+                    border-color: $setting-color-input-border-focus;
                 }
             }
 
             #{$name}__container {
-                padding: 1.13rem 1.3rem;
+                padding: rem(18) rem(21);
                 position: relative;
                 cursor: pointer;
                 white-space: nowrap;
             }
 
             #{$name}__box {
-                margin-top: 4px;
+                margin-top: rem(4);
                 &::before {
                     content: '';
                     position: absolute;
@@ -43,8 +43,8 @@
                     width: 100%;
                     height: 100%;
                     z-index: -1;
-                    border: 1px solid $setting-color-input-border;
-                    border-radius: 3px;
+                    border: rem(1) solid $setting-color-input-border;
+                    border-radius: rem(3);
                 }
             }
 
@@ -55,24 +55,39 @@
             }
 
             #{$name}__input:checked + #{$name}__box {
-                border: 3px solid $setting-color-white;
-                background-color: #222;
-                box-shadow: 0 0 0 1px $setting-color-input-border;
+                border: rem(3) solid $setting-color-white;
+                background-color: $setting-color-darker;
+                box-shadow: 0 0 0 rem(1) $setting-color-input-border;
                 &::before {
                     border: none;
-                    background-color: #c6e3e3;
+                    background-color: $setting-color-botticelli;
                 }
             }
 
             #{$name}__label {
                 font-weight: 500;
-                color: #222;
-                margin-top: 2px;
+                color: $setting-color-darker;
+                margin-top: rem(2);
                 display: inline-block;
             }
         }
 
         @content;
+    }
+
+    #{$name} {
+        &__container {
+            display: flex;
+            align-items: center;
+        }
+
+        &__box {
+            margin-right: rem(7);
+        }
+
+        &__label {
+            font: 400 rem(15) $setting-font-family;
+        }
     }
 }
 

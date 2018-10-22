@@ -1,151 +1,149 @@
 @mixin shop-ui-nav-overlay($name: '.nav-overlay') {
-  #{$name} {
-    position: absolute;
-    right: calc(1.8rem - 40px);
-    top: -18px;
-    z-index: 5;
-    height: 0;
-
-    &__title {
-      font: bold 36px $setting-font-family-additional;
-      padding-bottom: 10px;
-      border-bottom: 1px dotted $setting-color-lightest;
-    }
-    &__buttons {
-      border-top: 1px dotted $setting-color-lightest;
-      padding-top: 20px;
-      .button {
-        font: 500 14px $setting-font-family-additional;
-        height: 48px;
-        width: calc(50% - 10px);
-        padding: 0;
-        line-height: 48px;
-      }
-    }
-
-    &__inner-box {
-      padding: 20px 0;
-    }
-    &__link {
-      display: block;
-      font: normal 14px $setting-font-family-additional;
-      margin: 30px 0;
-      text-transform: uppercase;
-      letter-spacing: .8px;
-      position: relative;
-      &:hover {
-        text-decoration: none;
-
-      }
-      &::after {
-        content: '';
-        display: block;
-        height: 13px;
-        width: 7px;
-        top: 50%;
-        right: 0;
-        transform: translate(0 , -50%);
+    #{$name} {
         position: absolute;
-        background: url("/assets/images/right-chevron.svg") center no-repeat;
-        background-size: cover;
-      }
-      &--sm {
-        font-size: 12px;
-        margin: 0;
-        padding-top: 25px;
-        border-top: 1px dotted $setting-color-lightest;
-        &::after {
-          width: 6px;
-          height: 11px;
-          top: calc(50% + 12px);
+        right: rem(-11);
+        top: rem(-18);
+        z-index: 5;
+        height: 0;
+
+        &__title {
+            font: bold rem(36) $setting-font-family-additional;
+            padding-bottom: rem(10);
+            border-bottom: rem(1) dotted $setting-color-lightest;
         }
-      }
-    }
-
-    .overlay-shadow {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: #000;
-      z-index: -1;
-      visibility: hidden;
-      opacity: 0;
-      transition: opacity 400ms ease-in-out, visibility 400ms ease-in-out 400ms;
-    }
-    &__container {
-      width: 450px;
-      background: $setting-color-white;
-      padding: 67px 40px 40px 40px;
-      z-index: 5;
-      opacity: 0;
-      transition: all 400ms ease-in-out;
-      transform: scaleY(0);
-      visibility: hidden;
-      transform-origin: top center;
-    }
-
-    &__item-option {
-      font: normal 13px $setting-font-family-additional;
-      line-height: 1.31;
-      span {
-        display: inline-block;
-        margin-left: 5px;
-      }
-    }
-    &__total {
-      padding: 10px 0;
-      strong {
-        text-transform: uppercase;
-        font: 500 14px $setting-font-family-additional;
-      }
-    }
-
-    &__empty-text {
-      font: normal 15px $setting-font-family-additional;
-      line-height: 1.47;
-      padding: 30px 0;
-      border-bottom: 1px dotted $setting-color-lightest;
-      color: $setting-color-lighter;
-    }
-
-
-    &.is-active {
-      height: unset;
-      .overlay-shadow {
-        opacity: .4;
-        visibility: visible;
-        transition: opacity 400ms ease-in-out, visibility 0ms ease-in-out;
-      }
-      #{$name}__container {
-        opacity: 1;
-        transform: scaleY(1);
-        visibility: visible;
-      }
-
-    }
-    .cart-item {
-      &__title {
-        font-size: 15px;
-        margin: 0 0 5px 0;
-      }
-      &__price {
-        font-size: 15px;
-      }
-      &__image {
-        width: 100px;
-        .thumbnail {
-          height: 60px;
+        &__buttons {
+            border-top: rem(1) dotted $setting-color-lightest;
+            padding-top: rem(20);
+            .button {
+                font: 500 rem(14) $setting-font-family-additional;
+                height: rem(48);
+                width: calc(50% - #{rem(10)});
+                padding: 0;
+                line-height: rem(48);
+            }
         }
-      }
-      &__content {
-        margin-left: 0;
-        padding-left: 20px;
-        width: calc(100% - 100px);
-      }
+
+        &__inner-box {
+            padding: rem(20) 0;
+        }
+        &__link {
+            display: block;
+            font: normal rem(14) $setting-font-family-additional;
+            margin: rem(30) 0;
+            text-transform: uppercase;
+            letter-spacing: rem(0.8);
+            position: relative;
+            &:hover {
+                text-decoration: none;
+            }
+            &::after {
+                content: '';
+                display: block;
+                height: rem(13);
+                width: rem(7);
+                top: 50%;
+                right: 0;
+                transform: translate(0, -50%);
+                position: absolute;
+                background: url('/assets/images/right-chevron.svg') center no-repeat;
+                background-size: cover;
+            }
+            &--sm {
+                font-size: rem(12);
+                margin: 0;
+                padding-top: rem(25);
+                border-top: rem(1) dotted $setting-color-lightest;
+                &::after {
+                    width: rem(6);
+                    height: rem(11);
+                    top: calc(50% + #{rem(12)});
+                }
+            }
+        }
+
+        .overlay-shadow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: $setting-color-black;
+            z-index: -1;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 400ms ease-in-out, visibility 400ms ease-in-out 400ms;
+        }
+        &__container {
+            width: rem(450);
+            background: $setting-color-white;
+            padding: rem(67) rem(40) rem(40);
+            z-index: 5;
+            opacity: 0;
+            transition: all 400ms ease-in-out;
+            transform: scaleY(0);
+            visibility: hidden;
+            transform-origin: top center;
+        }
+
+        &__item-option {
+            font: normal rem(13) $setting-font-family-additional;
+            line-height: 1.31;
+            span {
+                display: inline-block;
+                margin-left: rem(5);
+            }
+        }
+        &__total {
+            padding: rem(10) 0;
+            strong {
+                text-transform: uppercase;
+                font: 500 rem(14) $setting-font-family-additional;
+            }
+        }
+
+        &__empty-text {
+            font: normal rem(15) $setting-font-family-additional;
+            line-height: 1.47;
+            padding: rem(30) 0;
+            border-bottom: rem(1) dotted $setting-color-lightest;
+            color: $setting-color-lighter;
+        }
+
+        &.is-active {
+            height: unset;
+            .overlay-shadow {
+                opacity: 0.4;
+                visibility: visible;
+                transition: opacity 400ms ease-in-out, visibility 0ms ease-in-out;
+            }
+            #{$name}__container {
+                opacity: 1;
+                transform: scaleY(1);
+                visibility: visible;
+            }
+        }
+
+        .cart-item {
+            &__title {
+                font-size: rem(15);
+                margin: 0 0 rem(5);
+            }
+            &__price {
+                font-size: rem(15);
+            }
+            &__image {
+                width: rem(100);
+                .thumbnail {
+                    height: rem(60);
+                }
+            }
+            &__content {
+                margin-left: 0;
+                padding-left: rem(20);
+                width: calc(100% - #{rem(100)});
+            }
+        }
     }
-  }
 }
 
 @include shop-ui-nav-overlay();

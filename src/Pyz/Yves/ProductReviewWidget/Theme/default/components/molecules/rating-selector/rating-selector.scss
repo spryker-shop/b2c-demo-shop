@@ -1,17 +1,37 @@
-$product-review-rating-selector-icon-size: 16px;
+$product-review-rating-selector-icon-size: rem(16);
 
 @mixin product-review-rating-selector($name: '.rating-selector') {
     #{$name} {
         display: flex;
-        margin-top: 6px;
+        margin-top: rem(6);
         align-items: center;
+
+        &--small {
+            margin: 0 rem(3) 0 rem(11);
+
+            &__step {
+                &--half {
+                    width: rem(7);
+                    height: rem(14);
+                }
+            }
+
+            &__star {
+                width: rem(14);
+                height: rem(14);
+
+                &--half-left {
+                    margin-right: rem(-7);
+                }
+            }
+        }
 
         &__steps {
             display: inline-block;
             direction: rtl;
             vertical-align: middle;
             line-height: 0;
-            margin-right: 6px;
+            margin-right: rem(6);
         }
 
         &__step {
@@ -24,14 +44,14 @@ $product-review-rating-selector-icon-size: 16px;
 
             &--full {
                 &:not(:first-child) {
-                    padding-right: 2px;
+                    padding-right: rem(2);
                 }
             }
 
             &--half {
                 width: $product-review-rating-selector-icon-size / 2;
                 &:nth-child(odd) {
-                    margin-right: 2px;
+                    margin-right: rem(2);
                 }
             }
         }
@@ -41,7 +61,7 @@ $product-review-rating-selector-icon-size: 16px;
             position: relative;
             width: $product-review-rating-selector-icon-size;
             height: $product-review-rating-selector-icon-size;
-            color: #dbdbdb;
+            color: $setting-color-alto;
             &--half-left {
                 margin-right: -$product-review-rating-selector-icon-size / 2;
             }
@@ -49,11 +69,11 @@ $product-review-rating-selector-icon-size: 16px;
 
         &__step:hover > &__star,
         &__step:hover ~ &__step > &__star {
-            color: #ffbf1c;
+            color: $setting-color-lightning-yellow;
         }
 
         &__step--active > &__star {
-            color: #ffbf1c;
+            color: $setting-color-lightning-yellow;
         }
 
         &--readonly {
@@ -64,12 +84,10 @@ $product-review-rating-selector-icon-size: 16px;
             display: block;
         }
 
-        .product-review-count {
-            font: 400 19px $setting-font-family;
-            color: #979797;
-            @include helper-breakpoint-media-max($md-max) {
-                font-size: 18px;
-            }
+        &__review-count {
+            font-size: rem(15);
+            color: $setting-color-dusty-gray;
+            position: relative;
         }
 
         @content;

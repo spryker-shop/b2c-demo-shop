@@ -1,8 +1,10 @@
 @mixin shop-ui-jumbotron($name: '.jumbotron') {
     #{$name} {
         &__container {
-            height: 16rem;
+            height: rem(256);
             background: $setting-color-main;
+
+            /* stylelint-disable-next-line declaration-block-no-duplicate-properties */
             background: linear-gradient(to left top, helper-color-dark($setting-color-main), helper-color-light($setting-color-main));
             background-position: center center;
             background-size: cover;
@@ -11,11 +13,11 @@
             position: relative;
 
             @include helper-breakpoint(md) {
-                height: 26rem;
+                height: rem(416);
             }
 
             @include helper-breakpoint(xl) {
-                height: 38rem;
+                height: rem(608);
             }
         }
         &__link {
@@ -32,32 +34,29 @@
             color: $setting-color-white;
         }
         &__headline {
-            font: bold 4.4rem $setting-font-family-additional;
+            font: bold rem(70) $setting-font-family-additional;
             line-height: 1.5;
             @include helper-breakpoint-media-max($lg-max) {
-                font-size: 3rem;
+                font-size: rem(48);
             }
             @include helper-breakpoint-media-max($md-max) {
-                font-size: 2rem;
+                font-size: rem(32);
             }
-
         }
 
         &__sub-headline {
-            font: 300 2rem $setting-font-family;
-            letter-spacing: .2px;
+            font: 300 rem(32) $setting-font-family;
+            letter-spacing: rem(0.2);
             @include helper-breakpoint-media-max($lg-max) {
-                font-size: 1.5rem;
+                font-size: rem(24);
             }
             @include helper-breakpoint-media-max($md-max) {
-                font-size: 1rem;
+                font-size: rem(16);
             }
         }
 
-        @content
+        @content;
     }
 }
 
 @include shop-ui-jumbotron();
-
-

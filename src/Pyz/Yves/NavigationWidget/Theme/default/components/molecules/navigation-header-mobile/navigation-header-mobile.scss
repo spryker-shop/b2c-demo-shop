@@ -1,36 +1,36 @@
-$setting-mobile-shadow-width: 12%;
-
 @mixin shop-ui-navigation-header-mobile($name: '.nav-header-mobile') {
     #{$name} {
         position: relative;
+
         &__dropdown-container {
-            display: none;
+            @include helper-effect-transition(transform);
             position: absolute;
             top: 100%;
             left: 0;
             width: 100vw;
             background: $setting-color-white;
-            padding: 10px 1rem 20px 1rem;
+            padding: rem(10) rem(16) rem(20);
             border-bottom: 1px solid $setting-color-lightest;
-            box-shadow: 0 20px 15px -1px rgba(0,0,0,.1);
+            box-shadow: 0 20px 15px -1px $setting-color-shadow;
+            transform-origin: center top;
+            transform: scaleY(0);
+
+            &--active {
+                transform: scaleY(1);
+            }
         }
-        &__block {
-            margin: 24px 0;
-            position: relative;
-            padding: 0 2px;
-        }
+
         &__item {
             text-transform: uppercase;
-            font: 500 11.7px $setting-font-family-additional;
-            letter-spacing: 2px;
+            font: 500 rem(12) $setting-font-family-additional;
+            letter-spacing: rem(2);
             white-space: nowrap;
-            margin: 0 .6rem;
-
+            margin: 0 0.6rem;
             list-style: none;
             display: inline-block;
 
             &.active {
-                opacity: .5;
+                opacity: 0.5;
             }
 
             a {
@@ -40,72 +40,81 @@ $setting-mobile-shadow-width: 12%;
                 }
             }
         }
-        &__bar {
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            margin: 0 15px;
-        }
-        &__container {
-            position: relative;
-            overflow-y: hidden;
-            height: 25px;
-        }
+
         &__scroll {
+            position: relative;
+            max-width: calc(100% - 30px);
+            margin: rem(24) auto rem(12);
+            padding: 0 rem(16) rem(12);
             white-space: nowrap;
-            overflow-x: scroll;
+            overflow-x: auto;
             -webkit-overflow-scrolling: touch;
-            position: absolute;
-            left: 0;
-            right: 0;
-            margin-bottom: -42px;
-            padding-bottom: 42px;
         }
+
         &__arrow {
+            @include helper-effect-transition(opacity);
             position: absolute;
-            top: 0;
+            top: rem(5);
             font-size: 0;
             display: block;
-            height: 100%;
-            width: $setting-mobile-shadow-width;
+            height: rem(16);
+            width: rem(30);
             z-index: 100;
 
-            .icon {
-                position: absolute;
-                top: 50%;
-                transform: translate(0 , -50%);
+            &--hidden {
+                opacity: 0;
             }
+
             &--left {
-                left: 1rem;
-                display: none;
-                background: linear-gradient(to right, white 0%, white 46%, rgba(255, 255, 255, 0) 92%, rgba(255, 255, 255, 0) 100%);
-                .icon {
+                left: rem(15);
+                background: linear-gradient(to right, $setting-color-white 0%, $setting-color-white 46%, rgba(255, 255, 255, 0) 92%, rgba(255, 255, 255, 0) 100%);
+
+                #{$name}__icon {
                     left: 0;
                 }
             }
+
             &--right {
-                right: 1rem;
-                background: linear-gradient(to right, rgba(255,255,255,0) 0%,rgba(255,255,255,0) 8%,rgba(255,255,255,1) 54%,rgba(255,255,255,1) 100%);
-                .icon {
+                right: rem(15);
+                background: linear-gradient(to right, rgba(255,255,255,0) 0%,
+                                                      rgba(255,255,255,0) 8%,
+                                                      rgba(255,255,255,1) 54%,
+                                                      rgba(255,255,255,1) 100%);
+
+                #{$name}__icon {
                     right: 0;
                 }
             }
+        }
 
+        &__icon {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
         }
 
         &__tab {
             display: none;
             opacity: 0;
+
             li {
-                margin: 12px;
+                margin: rem(12);
             }
+
             a {
                 font: normal 16px $setting-font-family;
+
                 &:hover {
                     color: $setting-color-alt;
                 }
             }
+
+            &--active {
+                display: block;
+                opacity: 1;
+            }
         }
+
         &__tab-close {
             text-align: center;
         }
