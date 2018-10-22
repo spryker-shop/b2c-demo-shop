@@ -5,6 +5,8 @@
         &__container {
             position: relative;
             color: $setting-color-text;
+            border-bottom: 1px dotted $setting-color-lightest;
+            padding: 18px 0;
         }
 
         &__thumbnail {
@@ -60,6 +62,15 @@
             width: 29px;
             height: 28px;
 
+            @include helper-breakpoint-media-min($lg-min) {
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                height: 32px;
+                width: auto;
+                font: map-get($setting-font-weight, regular) 10px $setting-font-family-additional;
+            }
+
             &::after {
                 content: '+';
                 font-size: 28px;
@@ -70,17 +81,8 @@
                 position: absolute;
                 top: -2px;
                 left: 0;
-            }
 
-            @include helper-breakpoint-media-min($lg-min) {
-                position: absolute;
-                right: 0;
-                bottom: 0;
-                height: 32px;
-                width: auto;
-                font: map-get($setting-font-weight, regular) 10px $setting-font-family-additional;
-
-                &::after {
+                @include helper-breakpoint-media-min($lg-min) {
                     display: none;
                 }
             }

@@ -1,14 +1,16 @@
 @mixin discount-promotion-block ($name: '.promotion-block'){
     #{$name} {
         margin-bottom: 36px;
+        border-bottom: 1px dotted $setting-color-lightest;
+        padding: 18px 0;
 
         &__title {
-            font: map-get($setting-font-weight, medium) 23px $setting-font-family-additional;
-            @include helper-font-line-height(default);
+            font: map-get($setting-font-weight, medium) 23px/32px $setting-font-family-additional;
             letter-spacing: -0.3px;
         }
 
         @content;
     }
 }
+
 @include discount-promotion-block();

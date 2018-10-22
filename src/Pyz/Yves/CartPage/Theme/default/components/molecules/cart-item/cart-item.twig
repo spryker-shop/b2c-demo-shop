@@ -12,7 +12,7 @@
 } %}
 
 {% set canEditCart = (not is_granted('IS_AUTHENTICATED_FULLY') or can('WriteSharedCartPermissionPlugin', data.cart.idQuote)) %}
-{% set cartItemBox = data.cartItem.productOptions is empty ? 'shopping-cart__box' : 'shopping-cart__box shopping-cart__box--borderless' %}
+{% set cartItemBox = data.cartItem.productOptions is empty ? config.name ~ '__box' : config.name ~ '__box' ~ config.name ~ '__box--borderless' %}
 {% set cartItemSubTotal = data.cartItem.quantity * data.cartItem.unitPrice %}
 
 {% block body %}
