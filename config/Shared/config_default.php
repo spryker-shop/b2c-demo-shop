@@ -15,6 +15,8 @@ use Spryker\Shared\ErrorHandler\ErrorRenderer\WebHtmlErrorRenderer;
 use Spryker\Shared\Event\EventConstants;
 use Spryker\Shared\EventBehavior\EventBehaviorConstants;
 use Spryker\Shared\EventJournal\EventJournalConstants;
+use Spryker\Shared\FileManager\FileManagerConstants;
+use Spryker\Shared\FileManagerGui\FileManagerGuiConstants;
 use Spryker\Shared\FileSystem\FileSystemConstants;
 use Spryker\Shared\Flysystem\FlysystemConstants;
 use Spryker\Shared\Kernel\ClassResolver\Cache\Provider\File;
@@ -413,3 +415,7 @@ $config[CmsGuiConstants::CMS_PAGE_PREVIEW_URI] = '/en/cms/preview/%d';
 
 // ---------- Loggly
 $config[LogglyConstants::TOKEN] = 'loggly-token:sample:123456';
+
+// ---------- FileManager
+$config[FileManagerConstants::STORAGE_NAME] = 'files';
+$config[FileManagerGuiConstants::DEFAULT_FILE_MAX_SIZE] = '10M';

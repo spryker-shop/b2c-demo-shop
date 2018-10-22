@@ -11,6 +11,7 @@ use Spryker\Zed\CategoryDataImport\Communication\Plugin\CategoryDataImportPlugin
 use Spryker\Zed\DataImport\Communication\Plugin\DataImportEventBehaviorPlugin;
 use Spryker\Zed\DataImport\Communication\Plugin\DataImportPublisherPlugin;
 use Spryker\Zed\DataImport\DataImportDependencyProvider as SprykerDataImportDependencyProvider;
+use Spryker\Zed\FileManagerDataImport\Communication\Plugin\FileManagerDataImportPlugin;
 use Spryker\Zed\Kernel\Container;
 use Spryker\Zed\PriceProductDataImport\Communication\Plugin\PriceProductDataImportPlugin;
 use Spryker\Zed\ProductAlternativeDataImport\Communication\Plugin\ProductAlternativeDataImportPlugin;
@@ -125,6 +126,7 @@ class DataImportDependencyProvider extends SprykerDataImportDependencyProvider
             new ProductDiscontinuedDataImportPlugin(),
             new ProductAlternativeDataImportPlugin(),
             new SalesOrderThresholdDataImportPlugin(),
+            new FileManagerDataImportPlugin(),
         ];
     }
 
