@@ -2,6 +2,7 @@
 
 use Monolog\Logger;
 use Spryker\Client\RabbitMq\Model\RabbitMqAdapter;
+use Spryker\Service\FlysystemLocalFileSystem\Plugin\Flysystem\LocalFilesystemBuilderPlugin;
 use Spryker\Shared\Acl\AclConstants;
 use Spryker\Shared\Application\ApplicationConstants;
 use Spryker\Shared\Auth\AuthConstants;
@@ -15,6 +16,8 @@ use Spryker\Shared\ErrorHandler\ErrorRenderer\WebHtmlErrorRenderer;
 use Spryker\Shared\Event\EventConstants;
 use Spryker\Shared\EventBehavior\EventBehaviorConstants;
 use Spryker\Shared\EventJournal\EventJournalConstants;
+use Spryker\Shared\FileManager\FileManagerConstants;
+use Spryker\Shared\FileManagerGui\FileManagerGuiConstants;
 use Spryker\Shared\FileSystem\FileSystemConstants;
 use Spryker\Shared\Flysystem\FlysystemConstants;
 use Spryker\Shared\Kernel\ClassResolver\Cache\Provider\File;
@@ -413,3 +416,16 @@ $config[CmsGuiConstants::CMS_PAGE_PREVIEW_URI] = '/en/cms/preview/%d';
 
 // ---------- Loggly
 $config[LogglyConstants::TOKEN] = 'loggly-token:sample:123456';
+
+// ---------- FileManager
+$config[FileManagerConstants::STORAGE_NAME] = 'files';
+$config[FileManagerGuiConstants::DEFAULT_FILE_MAX_SIZE] = '10M';
+
+// ---------- FileSystem
+$config[FileSystemConstants::FILESYSTEM_SERVICE] = [
+    'files' => [
+        'sprykerAdapterClass' => LocalFilesystemBuilderPlugin::class,
+        'root' => APPLICATION_ROOT_DIR . '/data/DE/media/',
+        'path' => 'files/',
+    ],
+];
