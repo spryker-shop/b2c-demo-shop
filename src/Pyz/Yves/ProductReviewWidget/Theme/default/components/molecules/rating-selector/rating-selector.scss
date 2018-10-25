@@ -1,4 +1,4 @@
-$product-review-rating-selector-icon-size: rem(16);
+$product-review-rating-selector-icon-size: rem(16, number);
 
 @mixin product-review-rating-selector($name: '.rating-selector') {
     #{$name} {
@@ -49,7 +49,7 @@ $product-review-rating-selector-icon-size: rem(16);
             }
 
             &--half {
-                width: calc(#{$product-review-rating-selector-icon-size} / 2);
+                width: $product-review-rating-selector-icon-size / 2;
                 &:nth-child(odd) {
                     margin-right: rem(2);
                 }
@@ -63,7 +63,7 @@ $product-review-rating-selector-icon-size: rem(16);
             height: $product-review-rating-selector-icon-size;
             color: $setting-color-alto;
             &--half-left {
-                margin-right: calc(#{-$product-review-rating-selector-icon-size} / 2);
+                margin-right: -$product-review-rating-selector-icon-size / 2;
             }
         }
 
