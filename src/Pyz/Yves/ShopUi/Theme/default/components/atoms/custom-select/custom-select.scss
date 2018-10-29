@@ -3,6 +3,9 @@
 @mixin shop-ui-custom-select($name: '.custom-select') {
 
     @include shop-ui-select($name) {
+        .select2-container {
+            width: auto;
+        }
 
         .select2-selection--single {
             padding: rem(4) rem(5);
@@ -22,51 +25,7 @@
         }
     }
 
-    .select2-container--open {
-
-        body > & {
-            z-index: 1000;
-
-            &::before {
-                content: '';
-                position: fixed;
-                top: 0;
-                left: 0;
-                height: 100%;
-                width: 100%;
-                background: $setting-color-black;
-                opacity: 0.4;
-            }
-        }
-
-        .select2-dropdown {
-            border: none;
-            border-radius: 0;
-            background: none;
-            margin: rem(12) 0;
-            text-align: left;
-        }
-
-        .select2-dropdown--below {
-            margin-top: rem(12);
-        }
-
-        .select2-dropdown--above {
-            margin-top: rem(-12);
-
-            .select2-results {
-                &::before {
-                    bottom: auto;
-                    top: 100%;
-                    border-bottom-color: transparent;
-                    border-top-color: $setting-color-bg;
-                }
-            }
-        }
-    }
-
     .select2-container--default {
-
         .select2-results {
             padding: rem(12) 0;
             border-radius: rem(4);
@@ -112,6 +71,48 @@
         }
     }
 
+    .select2-container--open {
+        body > & {
+            z-index: 1000;
+
+            &::before {
+                content: '';
+                position: fixed;
+                top: 0;
+                left: 0;
+                height: 100%;
+                width: 100%;
+                background: $setting-color-black;
+                opacity: 0.4;
+            }
+        }
+
+        .select2-dropdown {
+            border: none;
+            border-radius: 0;
+            background: none;
+            margin: rem(12) 0;
+            text-align: left;
+        }
+
+        .select2-dropdown--below {
+            margin-top: rem(12);
+        }
+
+        .select2-dropdown--above {
+            margin-top: rem(-12);
+
+            .select2-results {
+                &::before {
+                    bottom: auto;
+                    top: 100%;
+                    border-bottom-color: transparent;
+                    border-top-color: $setting-color-bg;
+                }
+            }
+        }
+    }
+
     .select2-results__option {
         color: $setting-color-darker;
         font-size: rem(17);
@@ -119,6 +120,10 @@
         line-height: rem(26);
         padding: rem(6) rem(24);
         white-space: nowrap;
+    }
+
+    .select2-selection {
+        text-align: right;
     }
 }
 

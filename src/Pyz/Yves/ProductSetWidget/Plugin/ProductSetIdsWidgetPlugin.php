@@ -8,11 +8,11 @@
 namespace Pyz\Yves\ProductSetWidget\Plugin;
 
 use Generated\Shared\Transfer\ProductSetDataStorageTransfer;
-use Spryker\Yves\Kernel\Widget\AbstractWidgetPlugin;
 use Pyz\Yves\ProductSetWidget\Plugin\CmsContentWidgetProductSetConnector\ProductSetWidgetPlugin;
+use Spryker\Yves\Kernel\Widget\AbstractWidgetPlugin;
 
 /**
- * @method \PYZ\Yves\ProductSetWidget\ProductSetWidgetFactory getFactory()
+ * @method \Pyz\Yves\ProductSetWidget\ProductSetWidgetFactory getFactory()
  */
 class ProductSetIdsWidgetPlugin extends AbstractWidgetPlugin
 {

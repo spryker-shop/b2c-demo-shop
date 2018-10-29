@@ -30,7 +30,7 @@ class ProductImageWriterStep extends PublishAwareStep implements DataImportStepI
     const KEY_CONCRETE_SKU = 'concrete_sku';
     const KEY_EXTERNAL_URL_LARGE = 'external_url_large';
     const KEY_EXTERNAL_URL_SMALL = 'external_url_small';
-    static $order = 0;
+    protected static $order = 0;
 
     /**
      * @var \Pyz\Zed\DataImport\Business\Model\Locale\Repository\LocaleRepositoryInterface

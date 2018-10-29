@@ -4,6 +4,15 @@
     }
 
     #{$name} {
+
+        &__input:checked {
+            & + #{$name}__box {
+                border: rem(3) solid $setting-color-white;
+                background-color: $setting-color-darker;
+                box-shadow: 0 0 0 rem(1) $setting-color-input-border;
+            }
+        }
+
         &--with-bg,
         &--with-bg & {
             margin-bottom: 0;
@@ -41,9 +50,6 @@
 
             #{$name}__input:checked {
                 & + #{$name}__box {
-                    border: rem(3) solid $setting-color-white;
-                    background-color: $setting-color-darker;
-                    box-shadow: 0 0 0 rem(1) $setting-color-input-border;
 
                     &::before {
                         border: none;

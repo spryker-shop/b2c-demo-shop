@@ -15,6 +15,7 @@ use Generated\Shared\Transfer\SaveOrderTransfer;
 use Spryker\Yves\Messenger\FlashMessenger\FlashMessengerInterface;
 use Spryker\Yves\StepEngine\Dependency\Plugin\Handler\StepHandlerPluginInterface;
 use SprykerShop\Yves\CheckoutPage\Dependency\Client\CheckoutPageToCheckoutClientInterface;
+use SprykerShop\Yves\CheckoutPage\Dependency\Client\CheckoutPageToGlossaryStorageClientInterface;
 use SprykerShop\Yves\CheckoutPage\Process\Steps\PlaceOrderStep;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -30,6 +31,9 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class PlaceOrderStepTest extends Unit
 {
+    protected const LOCALE_NAME_PLACE_ORDER_STEP = 'en_US';
+    protected const MESSAGE_CHECKOUT_ERROR_TRANSFER = 'MESSAGE_CHECKOUT_ERROR_TRANSFER';
+
     /**
      * @return void
      */
@@ -80,8 +84,12 @@ class PlaceOrderStepTest extends Unit
         $checkoutClientMock = $this->createCheckoutClientMock();
 
         $checkoutResponseTransfer = new CheckoutResponseTransfer();
-        $checkoutResponseTransfer->addError(new CheckoutErrorTransfer());
-        $checkoutResponseTransfer->addError(new CheckoutErrorTransfer());
+        $checkoutResponseTransfer->addError(
+            (new CheckoutErrorTransfer())->setMessage(static::MESSAGE_CHECKOUT_ERROR_TRANSFER)
+        );
+        $checkoutResponseTransfer->addError(
+            (new CheckoutErrorTransfer())->setMessage(static::MESSAGE_CHECKOUT_ERROR_TRANSFER)
+        );
 
         $checkoutClientMock->expects($this->once())->method('placeOrder')->willReturn($checkoutResponseTransfer);
 
@@ -138,9 +146,19 @@ class PlaceOrderStepTest extends Unit
         return new PlaceOrderStep(
             $checkoutClientMock,
             $flashMessengerMock,
+            static::LOCALE_NAME_PLACE_ORDER_STEP,
+            $this->createGlossaryStorageClientMock(),
             'place_order',
             'escape_route'
         );
+    }
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject|\SprykerShop\Yves\CheckoutPage\Dependency\Client\CheckoutPageToGlossaryStorageClientInterface
+     */
+    protected function createGlossaryStorageClientMock(): CheckoutPageToGlossaryStorageClientInterface
+    {
+        return $this->getMockBuilder(CheckoutPageToGlossaryStorageClientInterface::class)->getMock();
     }
 
     /**

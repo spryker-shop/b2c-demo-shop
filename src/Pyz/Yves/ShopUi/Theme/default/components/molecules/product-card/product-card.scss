@@ -2,48 +2,60 @@
     #{$name} {
         position: relative;
         padding: 0 rem(15) rem(50);
+
         @include helper-breakpoint-media-max($sm-max) {
             padding: 0 rem(5) rem(32);
         }
+
+        &--stretch {
+            height: 100%;
+        }
+
         &__container {
             position: relative;
             display: block;
             color: $setting-color-text;
+
             .no-touch &:hover {
                 text-decoration: none;
                 color: $setting-color-text;
+
                 #{$name}__thumbnail {
                     box-shadow: rem(10) rem(10) rem(40) 0 rgba(0, 0, 0, 0.1);
-                    #{$name}__overlay {
-                        &::after {
-                            opacity: 0.09;
-                        }
+                }
+
+                #{$name}__overlay {
+                    &::after {
+                        opacity: 0.09;
                     }
                 }
+
                 .color-selector {
                     margin-bottom: 0;
                 }
             }
         }
+
         &__thumbnail {
             border-radius: rem(4);
             margin-bottom: rem(24);
             position: relative;
             overflow: hidden;
             @include helper-effect-transition(box-shadow);
+
             @include helper-breakpoint-media-max($sm-max) {
                 margin-bottom: rem(9);
             }
-            .thumbnail {
-                margin: 0;
-            }
         }
+
         &__overlay {
             display: block;
             padding: rem(90) rem(20) rem(120);
+
             @include helper-breakpoint-media-max($sm-max) {
                 padding: rem(45) rem(10) rem(70);
             }
+
             &::before {
                 content: '';
                 position: absolute;
@@ -55,6 +67,7 @@
                 background: rgba(0, 0, 0, 0.05);
                 z-index: $setting-zi-element-floating;
             }
+
             &::after {
                 @include helper-effect-transition(opacity);
                 content: '';
@@ -91,10 +104,6 @@
             margin: auto;
         }
 
-        &--stretch {
-            height: 100%;
-        }
-
         &__info {
             display: block;
             margin: 0 rem(11);
@@ -114,55 +123,12 @@
             }
         }
 
-        .price {
-            position: relative;
-            font-weight: normal;
-            text-align: right;
-            @include helper-breakpoint-media-max($sm-max) {
-                margin-top: rem(3);
-                text-align: left;
-            }
-            &__amount {
-                font-size: inherit;
-                color: $setting-color-dark;
-                &--original {
-                    position: absolute;
-                    bottom: rem(-20);
-                    right: 0;
-                    color: $setting-color-lightest;
-                    font-size: rem(14);
-                    @include helper-breakpoint-media-max($sm-max) {
-                        font-size: rem(11);
-                        left: 0;
-                        right: unset;
-                    }
-                }
-            }
-        }
-
         &__review {
             display: flex;
             margin-top: rem(7);
         }
 
-        .rating-selector {
-            margin: 0 rem(3) 0 rem(11);
-            &__step {
-                &--half {
-                    width: rem(7);
-                    height: rem(14);
-                }
-            }
-            &__star {
-                width: rem(14);
-                height: rem(14);
-                &--half-left {
-                    margin-right: rem(-7);
-                }
-            }
-        }
-
-        .product-review-count {
+        &__review-count {
             font-size: rem(15);
             color: $setting-color-dusty-gray;
             position: relative;

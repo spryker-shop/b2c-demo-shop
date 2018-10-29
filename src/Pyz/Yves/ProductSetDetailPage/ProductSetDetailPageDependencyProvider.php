@@ -7,9 +7,9 @@
 
 namespace Pyz\Yves\ProductSetDetailPage;
 
+use Pyz\Yves\ProductSetWidget\Plugin\ProductSetDetailPage\ProductSetWidgetPlugin;
 use SprykerShop\Yves\ProductLabelWidget\Plugin\ProductDetailPage\ProductAbstractLabelWidgetPlugin;
 use SprykerShop\Yves\ProductSetDetailPage\ProductSetDetailPageDependencyProvider as SprykerShopProductSetDetailPageDependencyProvider;
-use Pyz\Yves\ProductSetWidget\Plugin\ProductSetDetailPage\ProductSetWidgetPlugin;
 
 class ProductSetDetailPageDependencyProvider extends SprykerShopProductSetDetailPageDependencyProvider
 {

@@ -15,7 +15,7 @@ use Spryker\Zed\Kernel\Communication\AbstractPlugin;
  * @method \Pyz\Zed\ProductUrlCartConnector\Business\ProductUrlCartConnectorFacade getFacade()
  * @method \Pyz\Zed\ProductUrlCartConnector\Communication\ProductUrlCartConnectorCommunicationFactory getFactory()
  */
-class ProducturlCartPlugin extends AbstractPlugin implements ItemExpanderPluginInterface
+class ProductUrlCartPlugin extends AbstractPlugin implements ItemExpanderPluginInterface
 {
     /**
      * @param \Generated\Shared\Transfer\CartChangeTransfer $cartChangeTransfer

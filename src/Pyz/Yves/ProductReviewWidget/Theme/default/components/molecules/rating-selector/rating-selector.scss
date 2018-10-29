@@ -6,6 +6,26 @@ $product-review-rating-selector-icon-size: rem(16);
         margin-top: rem(6);
         align-items: center;
 
+        &--small {
+            margin: 0 rem(3) 0 rem(11);
+
+            &__step {
+                &--half {
+                    width: rem(7);
+                    height: rem(14);
+                }
+            }
+
+            &__star {
+                width: rem(14);
+                height: rem(14);
+
+                &--half-left {
+                    margin-right: rem(-7);
+                }
+            }
+        }
+
         &__steps {
             display: inline-block;
             direction: rtl;
@@ -64,12 +84,10 @@ $product-review-rating-selector-icon-size: rem(16);
             display: block;
         }
 
-        .product-review-count {
-            font: 400 rem(19) $setting-font-family;
+        &__review-count {
+            font-size: rem(15);
             color: $setting-color-dusty-gray;
-            @include helper-breakpoint-media-max($md-max) {
-                font-size: rem(18);
-            }
+            position: relative;
         }
 
         @content;
