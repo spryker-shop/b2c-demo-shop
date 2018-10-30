@@ -49,6 +49,15 @@
                     }
                 } only %}
 
+                <div class="{{ config.name }}__top-col is-hidden-md-xl">
+                    <h5 class="{{ config.name }}__title {{ config.name }}__title--nav js-toggle-nav" data-toggle-target=".js-footer-nav-4">
+                        {{ 'footer.providers__title' | trans }}
+                    </h5>
+                    <div class="{{ config.name }}__navigation-main {{ config.name }}__navigation-main--hidden js-footer-nav-4">
+                        {{- widgetGlobal('NavigationWidgetPlugin', 'SHIPMENT_PROVIDERS', 'navigation-providers-shipment') -}}
+                        {{- widgetGlobal('NavigationWidgetPlugin', 'PAYMENT_PROVIDERS', 'navigation-providers-payment') -}}
+                    </div>
+                </div>
             </div>
         {% endblock %}
 
@@ -84,8 +93,7 @@
                     </a>
                 </div>
             </div>
-
-            <div class="col {{ config.name }}__icon-lists">
+            <div class="col {{ config.name }}__icon-lists is-hidden-sm-only">
                 <div class="{{ config.name }}__icon-list">
                     {{- widgetGlobal('NavigationWidgetPlugin', 'PAYMENT_PROVIDERS', 'navigation-providers-payment') -}}
                 </div>
