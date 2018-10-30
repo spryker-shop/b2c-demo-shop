@@ -1,27 +1,33 @@
 import Component from 'ShopUi/models/component';
-import $ from 'jquery/dist/jquery';
 
 export default class TogglerAccordeon extends Component {
-
+    protected triggers: HTMLElement[];
+    
     readyCallback(): void {
-        const triggerSelector = $(this).attr('trigger');
-        const triggers = $(triggerSelector);
-        const classToToggle = $(this).attr('class-to-toggle');
-
-        triggers.each(function(){
-            const _self = $(this);
-            const targetSelector = _self.data('toggle-target');
-            const target = $(targetSelector);
-
-            _self.on('click', function(){
-                target.toggleClass(classToToggle);
-                if (!target.hasClass(classToToggle)) {
-                    _self.addClass('active');
-                    return;
-                }
-                _self.removeClass('active');
-            });
-        });
+        this.triggers = <HTMLElement[]>Array.from(document.querySelectorAll(this.triggerSelector));
+        this.mapEvents();
     }
 
+    protected mapEvents(): void {
+        this.triggers.forEach(trigger => trigger.addEventListener('click', this.triggerHandler.bind(this, trigger)));
+    }
+
+    protected triggerHandler(trigger): void {
+        const togglerContent = document.querySelector(trigger.getAttribute('data-toggle-target'));
+        togglerContent.classList.toggle(this.toggleClass);
+
+        if(!togglerContent.classList.contains(this.toggleClass)) {
+            trigger.classList.add('active');
+        }else {
+            trigger.classList.remove('active');
+        }
+    }
+
+    get triggerSelector(): string {
+        return this.getAttribute('trigger');
+    }
+
+    get toggleClass(): string {
+        return this.getAttribute('class-to-toggle');
+    }
 }
