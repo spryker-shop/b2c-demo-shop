@@ -47,6 +47,7 @@ export default class NavOverlay extends Component {
     }
 
     protected triggerCloseHandler(): void {
+        console.log('hover');
         this.classList.remove(this.classToggle);
         this.hideBlocks();
         this.resetTriggersActiveClass();

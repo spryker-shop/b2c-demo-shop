@@ -27,7 +27,7 @@
                     </a>
                 </li>
                 <li class="{{ config.name }}__item">
-                    <a href="{{ url('customer/overview') }}" class="{{ config.name }}__link js-overlay-open">
+                    <a href="{{ url('customer/overview') }}" class="{{ config.name }}__link {{ config.jsName }}__trigger">
                         {% include atom('icon') with {
                             modifiers: ['big'],
                             data: {
@@ -48,7 +48,7 @@
                     </a>
                 </li>
                 <li class="{{ config.name }}__item">
-                    <a href="{{ url('login') }}" class="{{ config.name }}__link js-overlay-open">
+                    <a href="{{ url('login') }}" class="{{ config.name }}__link {{ config.jsName }}__trigger">
                         {% include atom('icon') with {
                             modifiers: ['big'],
                             data: {
@@ -61,7 +61,7 @@
         {% endif %}
 
         <li class="{{ config.name }}__item">
-            <a href="{{ url('cart') }}" class="{{ config.name }}__link js-overlay-open">
+            <a href="{{ url('cart') }}" class="{{ config.name }}__link {{ config.jsName }}__trigger">
                 {% if cartQuantity > 0 %}
                     <span class="cart-link__quantity">{{cartQuantity}}</span>
                 {% endif %}
@@ -78,7 +78,7 @@
         <li class="{{ config.name }}__item {{ config.name }}__item--overlay">
             {% include molecule('nav-overlay') with {
                 attributes: {
-                    'trigger-open': '.js-overlay-open',
+                    'trigger-open': '.' ~ config.jsName ~ '__trigger',
                     'active-link': config.name ~ '__link--active'
                 }
             } only %}
