@@ -1,0 +1,21 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'nav-overlay',
+    tag: 'nav-overlay'
+} %}
+
+{% define attributes = {
+    'trigger-open': required,
+    'active-link': required
+} %}
+
+{% block body %}
+    <div class="{{ config.name }}__shadow"></div>
+    <div class="{{ config.name }}__container">
+        {% block dropDown %}
+            {% include molecule('user-block') only %}
+            {% include molecule('cart-block') only %}
+        {% endblock %}
+    </div>
+{% endblock %}
