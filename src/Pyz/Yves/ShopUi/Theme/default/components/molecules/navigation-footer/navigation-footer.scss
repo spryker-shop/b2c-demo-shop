@@ -46,23 +46,23 @@
                 &--nav {
                     position: relative;
 
-                    &::before {
-                        content: '';
-                        width: rem(10);
-                        height: rem(2);
-                        background: $setting-color-dark;
+                    &::before,
+                    &:after {
                         position: absolute;
                         top: 50%;
+                        content: '';
+                        background: $setting-color-dark;
+                    }
+
+                    &::before {
+                        width: rem(10);
+                        height: rem(2);
                         right: 0;
                     }
 
                     &::after {
-                        content: '';
                         width: rem(2);
                         height: rem(10);
-                        background: $setting-color-dark;
-                        position: absolute;
-                        top: 50%;
                         right: rem(4);
                         margin-top: rem(-5);
                     }
