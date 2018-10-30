@@ -14,13 +14,24 @@ export default class TogglerAccordeon extends Component {
 
     protected triggerHandler(trigger): void {
         const togglerContent = document.querySelector(trigger.getAttribute('data-toggle-target'));
-        togglerContent.classList.toggle(this.toggleClass);
 
-        if(!togglerContent.classList.contains(this.toggleClass)) {
-            trigger.classList.add('active');
-        }else {
+        if(trigger.classList.contains('active')) {
             trigger.classList.remove('active');
+            togglerContent.classList.add(this.toggleClass);
+        }else {
+            this.resetToggleClass();
+            trigger.classList.add('active');
+            togglerContent.classList.remove(this.toggleClass);
         }
+    }
+
+    protected resetToggleClass(): void {
+        this.triggers.forEach(trigger => {
+            const togglerContent = document.querySelector(trigger.getAttribute('data-toggle-target'));
+
+            togglerContent.classList.add(this.toggleClass);
+            trigger.classList.remove('active');
+        });
     }
 
     get triggerSelector(): string {
