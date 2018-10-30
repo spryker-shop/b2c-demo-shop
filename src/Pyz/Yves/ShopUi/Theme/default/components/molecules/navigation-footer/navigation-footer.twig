@@ -1,0 +1,45 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'navigation-footer',
+    tag: 'navigation-footer'
+} %}
+
+{% define data = {
+    items: []
+} %}
+
+{% block body %}
+
+    {% if data.items is not empty %}
+
+        {% for itemMenu in data.items %}
+
+            {% if itemMenu.isShow %}
+                <div class="{{ config.name }}__col">
+                    <h5
+                            class="{{ config.name }}__title {{ config.name }}__title--nav {{ config.jsName }}"
+                            data-toggle-target=".{{ config.jsName }}-{{ loop.index }}"
+                    >
+                        {{- itemMenu.title | trans -}}
+                    </h5>
+
+                    <div class="{{ config.name }}__main {{ config.name }}__main--hidden {{ config.jsName }}-{{ loop.index }}">
+                        {{- widgetGlobal('NavigationWidgetPlugin', itemMenu.menu, 'navigation-footer') -}}
+                    </div>
+                </div>
+            {% endif %}
+
+        {% endfor %}
+
+    {% endif %}
+
+    {% include molecule('toggler-accordeon') with {
+        class: 'is-hidden',
+        attributes: {
+            trigger: '.' ~ config.jsName,
+            'class-to-toggle': config.name ~ '__main--hidden'
+        }
+    } only %}
+
+{% endblock %}
