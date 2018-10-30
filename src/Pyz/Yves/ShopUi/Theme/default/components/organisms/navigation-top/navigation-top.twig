@@ -7,7 +7,7 @@
 
 {% define data = {
     cartQuantity: app['cart.quantity'] | default,
-    showUserMenu: not (hideUserMenu | default(false))
+    showUserMenu: true
 } %}
 
 {% set cartQuantity = data.cartQuantity > 0 ? data.cartQuantity ~ ' ' : '' %}
