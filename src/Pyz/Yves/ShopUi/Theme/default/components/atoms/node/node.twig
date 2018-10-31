@@ -1,0 +1,33 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'node',
+    tag: 'span'
+} %}
+
+{% define data = {
+    node: required
+} %}
+
+{% set today = 'now' | date('Ymd') %}
+{% set type = data.node.nodeType %}
+{% set isActive = data.node.isActive %}
+{% set isValidFrom = data.node.validFrom is empty or data.node.validFrom | date('Ymd') <= today %}
+{% set isValidTo = data.node.validFrom is empty or data.node.validFrom | date('Ymd') <= today %}
+{% set isActiveAndValid = isActive and isValidFrom and isValidTo %}
+
+{% block component %}
+    {% if isActiveAndValid %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    {% if type == 'category' or type == 'link' or type == 'cms_page' %}
+        {% block url %}{% endblock %}
+    {% elseif type == 'external_url' %}
+        {% block externalUrl %}{% endblock %}
+    {% else %}
+        {% block other %}{% endblock %}
+    {% endif %}
+{% endblock %}

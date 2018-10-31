@@ -1,0 +1,20 @@
+@mixin shop-ui-node($name: '.node') {
+    #{$name} {
+        &__link {
+            &--footer {
+                @include helper-breakpoint-media-max($sm-max) {
+                    color: rgba($setting-color-text, 0.5);
+                }
+            }
+        }
+
+        &--footer {
+            padding-bottom: rem(10);
+            font-size: rem(15);
+        }
+
+        @content;
+    }
+}
+
+@include shop-ui-node();
