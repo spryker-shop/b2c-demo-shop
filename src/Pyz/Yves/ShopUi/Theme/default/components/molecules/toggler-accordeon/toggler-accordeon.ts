@@ -15,7 +15,7 @@ export default class TogglerAccordeon extends Component {
     protected triggerHandler(trigger): void {
         const togglerContent = document.querySelector(trigger.getAttribute('data-toggle-target'));
 
-        if(trigger.classList.contains('active')) {
+        if(trigger.classList.contains(this.activeClass)) {
             trigger.classList.remove('active');
             togglerContent.classList.add(this.toggleClass);
         }else {
@@ -40,5 +40,9 @@ export default class TogglerAccordeon extends Component {
 
     get toggleClass(): string {
         return this.getAttribute('class-to-toggle');
+    }
+
+    get activeClass(): string {
+        return 'active'
     }
 }
