@@ -28,8 +28,7 @@
                     molecule('filter-' ~ filter.config.name, 'CatalogPage'),
                     molecule('filter-' ~ filter.config.type, 'CatalogPage')
                 ] ignore missing with {
-                    class: 'js-' ~  filter.name ~ ' is-hidden',
-                    modifiers: ['sidebar'],
+                    class: 'js-' ~  filter.name ~ ' is-hidden spacing-bottom spacing-bottom--big',
                     data: {
                         filterPath: data.filterPath,
                         categories: data.categories,

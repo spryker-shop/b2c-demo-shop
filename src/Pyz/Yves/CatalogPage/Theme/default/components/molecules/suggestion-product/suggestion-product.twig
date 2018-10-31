@@ -19,7 +19,7 @@
         <span class="col">
             {% if data.image %}
                 {% include atom('thumbnail') with {
-                    modifiers: ['smaller', 'has-border'],
+                    modifiers: ['catalog', 'smaller', 'has-border'],
                     attributes: {
                         alt: data.alt,
                         src: data.image.external_url_small,
@@ -34,6 +34,7 @@
             {{ data.title }}
 
             {% include molecule('price') with {
+                modifiers: ['suggestion-product'],
                 data: {
                     amount: data.price | money,
                     originalAmount: data.originalPrice is empty ? null : (data.originalPrice | money)

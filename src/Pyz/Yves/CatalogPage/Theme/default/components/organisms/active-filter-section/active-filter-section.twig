@@ -9,10 +9,6 @@
     facets: []
 } %}
 
-{%- block class -%}
-    {{parent()}}
-{%- endblock -%}
-
 {% block component %}
     {% set activeFilters = [] %}
 
@@ -47,7 +43,6 @@
 {% endblock %}
 
 {% block body %}
-
     <a class="{{ config.name }}__item {{ config.name }}__item--all" href="{{ generateUrlWithoutAllActiveSearchFilters(data.facets) }}">
         {{ 'catalog.filter.resetAllFilters' | trans }} <span class="ico">&times;</span>
     </a>
