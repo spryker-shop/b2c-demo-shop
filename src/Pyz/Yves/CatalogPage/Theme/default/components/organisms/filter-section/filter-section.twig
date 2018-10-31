@@ -18,7 +18,7 @@
         {% if filterHasValues %}
             <div class="{{ config.name }}__item">
                 <div
-                    class="{{ config.name }}__title js-filter-trigger"
+                    class="{{ config.name }}__title js-filter-toggler-accordeon-trigger"
                     data-toggle-target=".js-{{ filter.name }}"
                 >
                     {{ ('product.filter.' ~ filter.name | lower) | trans }}
@@ -47,13 +47,13 @@
 
     {% include molecule('toggler-accordeon') with {
         attributes: {
-            trigger: '.js-filter-trigger',
+            trigger: '.js-filter-toggler-accordeon-trigger',
             'class-to-toggle': 'is-hidden'
         }
     } only %}
 
     <div class="grid grid--justify grid--middle {{ config.name }}__actions">
-        <span class="col {{ config.name }}__close-popup js-trigger-filter">
+        <span class="col {{ config.name }}__close-popup js-filter-toggle-selector">
             {% include atom('icon') with {
                 data: {
                     name: 'close'
