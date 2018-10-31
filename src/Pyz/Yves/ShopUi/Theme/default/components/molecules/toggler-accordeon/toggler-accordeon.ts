@@ -16,11 +16,11 @@ export default class TogglerAccordeon extends Component {
         const togglerContent = document.querySelector(trigger.getAttribute('data-toggle-target'));
 
         if(trigger.classList.contains(this.activeClass)) {
-            trigger.classList.remove('active');
+            trigger.classList.remove(this.activeClass);
             togglerContent.classList.add(this.toggleClass);
         }else {
             this.resetToggleClass();
-            trigger.classList.add('active');
+            trigger.classList.add(this.activeClass);
             togglerContent.classList.remove(this.toggleClass);
         }
     }
@@ -30,7 +30,7 @@ export default class TogglerAccordeon extends Component {
             const togglerContent = document.querySelector(trigger.getAttribute('data-toggle-target'));
 
             togglerContent.classList.add(this.toggleClass);
-            trigger.classList.remove('active');
+            trigger.classList.remove(this.activeClass);
         });
     }
 
@@ -43,6 +43,6 @@ export default class TogglerAccordeon extends Component {
     }
 
     get activeClass(): string {
-        return 'active'
+        return this.getAttribute('activeClass');
     }
 }
