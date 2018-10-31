@@ -19,18 +19,16 @@
 
 {% block body %}
     {% if topVisible %}
-        <div class="">
-            {% include molecule('suggestion-links-list', 'CatalogPage') with {
-                class: 'suggestion-block suggestion-block--top',
-                data: {
-                    name: 'global.search.suggestions' | trans,
-                    items: data.completion,
-                    length: data.suggestionsLength,
-                    isTitleHiddenOnTablet: false,
-                    isSuggestion: true
-                }
-            } only %}
-        </div>
+        {% include molecule('suggestion-links-list', 'CatalogPage') with {
+            class: 'suggestion-block suggestion-block--top',
+            data: {
+                name: 'global.search.suggestions' | trans,
+                items: data.completion,
+                length: data.suggestionsLength,
+                isTitleHiddenOnTablet: false,
+                isSuggestion: true
+            }
+        } only %}
     {% endif %}
     <div class="grid grid--no-wrap">
         {% if firstVisible %}
@@ -83,31 +81,27 @@
         {% if secondVisible %}
 
             <div class="col">
-                <div class="">
-                    {% include molecule('suggestion-links-list', 'CatalogPage') with {
-                        class: 'suggestion-block',
-                        data: {
-                            name: 'global.search.suggestion.in_categories' | trans,
-                            items: data.category,
-                            length: data.categoriesLength
-                        }
-                    } only %}
-                </div>
+                {% include molecule('suggestion-links-list', 'CatalogPage') with {
+                    class: 'suggestion-block',
+                    data: {
+                        name: 'global.search.suggestion.in_categories' | trans,
+                        items: data.category,
+                        length: data.categoriesLength
+                    }
+                } only %}
             </div>
         {% endif %}
         {% if thirdVisible %}
 
             <div class="col">
-                <div class="">
-                    {% include molecule('suggestion-links-list', 'CatalogPage') with {
-                        class: 'suggestion-block',
-                        data: {
-                            name: 'global.search.suggestion.in_cms' | trans,
-                            items: data.cms_page,
-                            length: data.pagesLength
-                        }
-                    } only %}
-                </div>
+                {% include molecule('suggestion-links-list', 'CatalogPage') with {
+                    class: 'suggestion-block',
+                    data: {
+                        name: 'global.search.suggestion.in_cms' | trans,
+                        items: data.cms_page,
+                        length: data.pagesLength
+                    }
+                } only %}
             </div>
         {% endif %}
 
