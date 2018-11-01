@@ -76,6 +76,6 @@ class SaleController extends AbstractController
             ));
         }
 
-        return $categoryNode;
+        return $categoryNode['data'];
     }
 }
