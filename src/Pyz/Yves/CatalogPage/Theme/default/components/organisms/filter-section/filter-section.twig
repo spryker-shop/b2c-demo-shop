@@ -18,7 +18,7 @@
         {% if filterHasValues %}
             <div class="{{ config.name }}__item">
                 <div
-                    class="{{ config.name }}__title js-filter-trigger"
+                    class="{{ config.name }}__title {{ config.jsName }}__title"
                     data-toggle-target=".js-{{ filter.name }}"
                 >
                     {{ ('product.filter.' ~ filter.name | lower) | trans }}
@@ -47,7 +47,7 @@
 
     {% include molecule('toggler-accordeon') with {
         attributes: {
-            trigger: '.js-filter-trigger',
+            trigger: '.' ~ config.jsName ~ '__title',
             'class-to-toggle': 'is-hidden'
         }
     } only %}
