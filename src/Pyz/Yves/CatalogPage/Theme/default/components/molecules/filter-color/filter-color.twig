@@ -14,11 +14,9 @@
 {% set inputComponent = isMultiSelect ? atom('color-checkbox', 'CatalogPage') : atom('radio') %}
 
 {% block body %}
-    {#<ul class="{{ config.name }}__list">#}
     <ul class="grid spacing-bottom">
 
         {% for filterValue in data.filter.values %}
-            {#<li class="{{ config.name }}__item">#}
             <li class="{{ config.name }}__item spacing-right">
 
                 {% include inputComponent with {

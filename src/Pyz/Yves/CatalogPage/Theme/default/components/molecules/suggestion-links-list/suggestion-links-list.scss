@@ -1,0 +1,61 @@
+@mixin catalog-page-suggestion-links-list($name: '.suggestion-links-list') {
+    #{$name} {
+        margin: 2rem 1rem 1rem 1rem;
+
+        .list__item {
+            margin: 10px 0;
+        }
+
+        .link--show-more {
+            &:hover {
+                button,
+                .icon {
+                    color: $setting-color-alt;
+                }
+
+                button {
+                    text-decoration: underline;
+                }
+            }
+
+            .icon {
+                transform: rotate(90deg);
+            }
+
+            button {
+                font: normal 16px $setting-font-family;
+                color: $setting-color-text;
+                line-height: 1.8;
+                background: none;
+            }
+        }
+
+        ul {
+            margin: 6px 0;
+        }
+
+        a {
+            font: normal 17px $setting-font-family;
+            line-height: 2;
+            color: $setting-color-dark;
+            text-transform: capitalize;
+
+            &:hover {
+                color: $setting-color-alt;
+            }
+        }
+
+        &--top {
+            h6 {
+                font: normal 12px $setting-font-family;
+                text-transform: uppercase;
+                color: $setting-color-gray;
+                letter-spacing: 1.2px;
+            }
+        }
+
+        @content;
+    }
+}
+
+@include catalog-page-suggestion-links-list();

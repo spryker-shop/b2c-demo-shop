@@ -14,7 +14,7 @@
 
 {% block body %}
     <input
-        class="input input--expand js-form-input-default-value-disabler__catalog-input js-range-slider-target-min"
+        class="{{ config.jsName }}__input-min"
         type="hidden"
         name="{{ data.parameter }}[min]"
         value="{{ data.activeMin }}"
@@ -25,7 +25,7 @@
     />
 
     <input
-        class="input input--expand js-form-input-default-value-disabler__catalog-input js-range-slider-target-max"
+        class="{{ config.jsName }}__input-max"
         type="hidden"
         name="{{ data.parameter }}[max]"
         value="{{ data.activeMax }}"
@@ -39,10 +39,10 @@
     {% if not filtersEqual %}
         <div class="range-slider {{ config.jsName }}__range-slider }}">
             <div class="range-slider__values">
-                <span class="range-slider__values-item range-slider__values-min">
+                <span class="range-slider__values-item {{ config.jsName }}__values-min">
                     {{- data.activeMin | money -}}
                 </span>
-                <span class="range-slider__values-item range-slider__values-max">
+                <span class="range-slider__values-item {{ config.jsName }}__values-max">
                     {{- data.activeMax | money -}}
                 </span>
             </div>
@@ -51,14 +51,13 @@
         {% include molecule('range-slider') with {
             attributes: {
                 'wrap-selector': '.' ~ config.jsName ~ '__range-slider',
-                'value-selector': '[".range-slider__values-min", ".range-slider__values-max"]',
+                'value-selector': '[".' ~ config.jsName ~ '__values-min", ".' ~ config.jsName ~ '__values-max"]',
                 'value-min': data.min,
                 'value-max': data.max,
                 'active-min': data.activeMin,
                 'active-max': data.activeMax,
-                'target-selector': '[".js-range-slider-target-min", ".js-range-slider-target-max"]',
+                'target-selector': '[".' ~ config.jsName ~ '__input-min", ".' ~ config.jsName ~ '__input-max"]',
             }
-
         } only %}
     {% endif %}
 

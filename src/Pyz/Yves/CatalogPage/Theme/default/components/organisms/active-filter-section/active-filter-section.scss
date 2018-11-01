@@ -4,7 +4,19 @@
         font: 0/0 $setting-font-family;
         padding: 0 rem(16) rem(10);
 
-        .active-filter__item,
+        @include helper-breakpoint-media-max($lg-max) {
+            white-space: nowrap;
+            overflow-x: auto;
+            margin-bottom: rem(38);
+        }
+
+        &__icon-close {
+            position: absolute;
+            right: rem(10);
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
         &__item {
             display: inline-block;
             font: 500 rem(11) $setting-font-family;
@@ -20,7 +32,7 @@
             &:hover {
                 color: $setting-color-silver-chalice;
                 text-decoration: none;
-                background-color: rgba(17, 17, 17, 0.03);
+                background-color: rgba($setting-color-darkest, 0.03);
             }
 
             &--all {
@@ -30,23 +42,9 @@
                 &:hover {
                     color: $setting-color-main;
                     border-color: $setting-color-main;
-                    background-color: rgba(0, 175, 180, 0.04);
+                    background-color: rgba($setting-color-main, 0.04);
                 }
             }
-
-            .ico {
-                font-weight: bold;
-                font-size: rem(20);
-                position: absolute;
-                right: rem(11);
-                top: rem(5);
-            }
-        }
-
-        @include helper-breakpoint-media-max($lg-max) {
-            white-space: nowrap;
-            overflow-x: auto;
-            margin-bottom: rem(38);
         }
 
         @content;

@@ -20,7 +20,6 @@
 {% block body %}
     {% if topVisible %}
         {% include molecule('suggestion-links-list', 'CatalogPage') with {
-            class: 'suggestion-block suggestion-block--top',
             data: {
                 name: 'global.search.suggestions' | trans,
                 items: data.completion,

@@ -52,7 +52,8 @@
                                     data: {
                                         facets: data.facets,
                                         filterPath: data.filterPath,
-                                        categories: data.categories
+                                        categories: data.categories,
+                                        togglerClass: 'js-toggler-click__trigger'
                                     }
                                 } only %}
                             {% endblock %}
@@ -60,7 +61,11 @@
 
                         <div class="col col--sm-12 col--xl-9 catalog-right-side">
                             {% block catalogContent %}
-                                {% include molecule('sort', 'CatalogPage')  only %}
+                                {% include molecule('sort', 'CatalogPage') with {
+                                    data: {
+                                        togglerClass: 'js-toggler-click__trigger'
+                                    }
+                                }  only %}
 
                                 {% include organism('active-filter-section', 'CatalogPage') with {
                                     data: {
@@ -84,7 +89,7 @@
 
                         {% include molecule('toggler-click') with {
                             attributes: {
-                                'trigger-selector': '.js-filter-toggle-selector',
+                                'trigger-selector': '.js-toggler-click__trigger',
                                 'target-selector': '.js-target-filter',
                                 'class-to-toggle': 'show-filter'
                             }
