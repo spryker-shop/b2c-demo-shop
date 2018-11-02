@@ -24,6 +24,30 @@
     }
 } %}
 
+{% block content %}
+    {% block cmsTop %}
+        {% if data.categoryId %}
+            <div class="catalog-cms-block catalog-cms-block--top">
+                {{ widgetBlock('CatalogCmsBlockWidgetPlugin', 'top', data.categoryId) }}
+            </div>
+        {% endif %}
+    {% endblock %}
+
+    {{parent()}}
+{% endblock %}
+
+{% block filterSection %}
+    {{parent()}}
+
+    {% block cmsMiddle %}
+        {% if data.categoryId %}
+            <div class="catalog-cms-block catalog-cms-block--middle">
+                {{ widgetBlock('CatalogCmsBlockWidgetPlugin', 'middle', data.categoryId) }}
+            </div>
+        {% endif %}
+    {% endblock %}
+{% endblock %}
+
 {% block filterBar %}
     {{parent()}}
 
@@ -35,10 +59,21 @@
 {% endblock %}
 
 {% block form %}
-
     {{parent()}}
 
     {% if data.searchString is not empty %}
         <input type="hidden" name="q" value="{{ data.searchString }}" />
     {% endif %}
+{% endblock %}
+
+{% block catalogContent %}
+    {{parent()}}
+
+    {% block cmsBottom %}
+        {% if data.categoryId %}
+            <div class="catalog-cms-block catalog-cms-block--bottom">
+                {{ widgetBlock('CatalogCmsBlockWidgetPlugin', 'bottom', data.categoryId) }}
+            </div>
+        {% endif %}
+    {% endblock %}
 {% endblock %}

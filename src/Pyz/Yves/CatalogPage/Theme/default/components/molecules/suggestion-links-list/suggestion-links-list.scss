@@ -1,0 +1,37 @@
+@mixin catalog-page-suggestion-links-list($name: '.suggestion-links-list') {
+    #{$name} {
+        margin: 2rem 1rem 1rem 1rem;
+
+        &--top {
+            #{$name}__title {
+                font: normal rem(12) $setting-font-family;
+                text-transform: uppercase;
+                color: $setting-color-gray;
+                letter-spacing: rem(1);
+            }
+        }
+
+        &__holder {
+            margin: rem(6) 0;
+        }
+
+        &__item {
+            margin: rem(10) 0;
+        }
+
+        &__item-link {
+            font: normal rem(17) $setting-font-family;
+            line-height: 2;
+            color: $setting-color-dark;
+            text-transform: capitalize;
+
+            &:hover {
+                color: $setting-color-alt;
+            }
+        }
+
+        @content;
+    }
+}
+
+@include catalog-page-suggestion-links-list();

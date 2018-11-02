@@ -58,7 +58,7 @@
                                 {{ 'cart.item_quantity' | trans }}:
                                 <span class="{{ config.name }}__item-option-text">{{ item.quantity }}</span>
                             </div>
-                            <a href="{{ path('cart/remove', {'sku': item.sku, 'groupKey': item.groupKey }) }}">
+                            <a class="{{ config.name }}__item-remove" href="{{ path('cart/remove', {'sku': item.sku, 'groupKey': item.groupKey }) }}">
                                 {{ 'remove' | trans }}
                             </a>
                         </div>

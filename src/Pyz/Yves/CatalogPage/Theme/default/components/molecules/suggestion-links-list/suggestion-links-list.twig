@@ -16,14 +16,14 @@
 
 {% block body %}
     {% if data.items is not empty %}
-        <h6 class="spacing-y {{ titleHiddenClass }}">{{ data.name }}</h6>
-        <ul class="list {{ config.name }}">
+        <h6 class="spacing-y {{ titleHiddenClass }} {{ config.name }}__title">{{ data.name }}</h6>
+        <ul class="{{ config.name }}__holder">
             {% for item in data.items | slice(0, data.length) %}
                 {% if item %}
                     {% set href = data.isSuggestion ? path('search', {'q': item}) : item.url %}
                     {% set value = data.isSuggestion ? item : item.name %}
-                    <li class="list__item">
-                        <a class="js-suggest-search__item--navigable" href="{{ href }}">{{ value }}</a>
+                    <li class="{{ config.name }}__item">
+                        <a class="{{ config.name }}__item-link js-suggest-search__item--navigable" href="{{ href }}">{{ value }}</a>
                     </li>
                 {% endif %}
             {% endfor %}

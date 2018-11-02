@@ -48,7 +48,7 @@
 
             <li class="{{ classes | join(' ') }}">
                 <button
-                    class="{{ config.name }}__link"
+                    class="{{ config.name }}__link {% if isActive %}{{ config.name }}__link--active{% endif %}"
                     onclick="this.form.action='{{ categoryUrl }}'"
                     {% if quantity == 0 %}disabled="disabled"{% endif %}
 >
