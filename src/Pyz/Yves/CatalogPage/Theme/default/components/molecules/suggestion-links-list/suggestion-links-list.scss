@@ -2,55 +2,31 @@
     #{$name} {
         margin: 2rem 1rem 1rem 1rem;
 
-        .list__item {
-            margin: 10px 0;
-        }
-
-        .link--show-more {
-            &:hover {
-                button,
-                .icon {
-                    color: $setting-color-alt;
-                }
-
-                button {
-                    text-decoration: underline;
-                }
-            }
-
-            .icon {
-                transform: rotate(90deg);
-            }
-
-            button {
-                font: normal 16px $setting-font-family;
-                color: $setting-color-text;
-                line-height: 1.8;
-                background: none;
+        &--top {
+            #{$name}__title {
+                font: normal rem(12) $setting-font-family;
+                text-transform: uppercase;
+                color: $setting-color-gray;
+                letter-spacing: rem(1);
             }
         }
 
-        ul {
-            margin: 6px 0;
+        &__holder {
+            margin: rem(6) 0;
         }
 
-        a {
-            font: normal 17px $setting-font-family;
+        &__item {
+            margin: rem(10) 0;
+        }
+
+        &__item-link {
+            font: normal rem(17) $setting-font-family;
             line-height: 2;
             color: $setting-color-dark;
             text-transform: capitalize;
 
             &:hover {
                 color: $setting-color-alt;
-            }
-        }
-
-        &--top {
-            h6 {
-                font: normal 12px $setting-font-family;
-                text-transform: uppercase;
-                color: $setting-color-gray;
-                letter-spacing: 1.2px;
             }
         }
 

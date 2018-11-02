@@ -20,6 +20,7 @@
 {% block body %}
     {% if topVisible %}
         {% include molecule('suggestion-links-list', 'CatalogPage') with {
+            modifiers: ['top'],
             data: {
                 name: 'global.search.suggestions' | trans,
                 items: data.completion,
@@ -81,7 +82,6 @@
 
             <div class="col">
                 {% include molecule('suggestion-links-list', 'CatalogPage') with {
-                    class: 'suggestion-block',
                     data: {
                         name: 'global.search.suggestion.in_categories' | trans,
                         items: data.category,
@@ -94,7 +94,6 @@
 
             <div class="col">
                 {% include molecule('suggestion-links-list', 'CatalogPage') with {
-                    class: 'suggestion-block',
                     data: {
                         name: 'global.search.suggestion.in_cms' | trans,
                         items: data.cms_page,

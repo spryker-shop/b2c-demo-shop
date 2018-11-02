@@ -2,13 +2,7 @@
     #{$name} {
         &__container {
             height: rem(256);
-            background: $setting-color-main;
-
-            /* stylelint-disable-next-line declaration-block-no-duplicate-properties */
-            background: linear-gradient(to left top, helper-color-dark($setting-color-main), helper-color-light($setting-color-main));
-            background-position: center center;
-            background-size: cover;
-            background-repeat: no-repeat;
+            background: linear-gradient(to left top, helper-color-dark($setting-color-main), helper-color-light($setting-color-main)) no-repeat center / cover;
             text-align: center;
             position: relative;
 
@@ -20,6 +14,7 @@
                 height: rem(608);
             }
         }
+
         &__link {
             position: absolute;
             left: 0;
@@ -33,12 +28,15 @@
         &__sub-headline {
             color: $setting-color-white;
         }
+
         &__headline {
             font: bold rem(70) $setting-font-family-additional;
             line-height: 1.5;
+
             @include helper-breakpoint-media-max($lg-max) {
                 font-size: rem(48);
             }
+
             @include helper-breakpoint-media-max($md-max) {
                 font-size: rem(32);
             }
@@ -47,9 +45,11 @@
         &__sub-headline {
             font: 300 rem(32) $setting-font-family;
             letter-spacing: rem(0.2);
+
             @include helper-breakpoint-media-max($lg-max) {
                 font-size: rem(24);
             }
+
             @include helper-breakpoint-media-max($md-max) {
                 font-size: rem(16);
             }
@@ -72,22 +72,26 @@
             #{$name}__headline {
                 font-size: rem(59);
                 font-weight: 500;
+
                 @include helper-breakpoint-media-max($lg-max) {
                     font-size: rem(32);
                 }
+
                 @include helper-breakpoint-media-max($md-max) {
                     font-size: rem(24);
                 }
             }
 
-            .grid {
+            #{$name}__grid {
                 flex-direction: column;
                 margin: 0 rem(16);
                 padding: rem(20) 0;
                 min-height: rem(144);
+
                 @include helper-breakpoint(md) {
                     min-height: rem(256);
                 }
+
                 @include helper-breakpoint(xl) {
                     min-height: rem(290);
                 }
@@ -95,12 +99,14 @@
         }
 
         &--category-no-img {
-            .grid {
+            #{$name}__grid {
                 border-bottom: solid rem(1) $setting-color-lightest;
                 min-height: rem(121);
+
                 @include helper-breakpoint(md) {
                     min-height: rem(176);
                 }
+
                 @include helper-breakpoint(xl) {
                     min-height: rem(240);
                 }
