@@ -46,7 +46,7 @@
                                 name: 'preselectedAttributes[' ~ attributeName ~ ']'
                             },
                             embed: {
-                                jsClass: config.jsName ~ '-trigger'
+                                jsClass: config.jsName ~ '__select-trigger'
                             }
                         } only %}
                             {% block selectClass -%}
@@ -57,7 +57,7 @@
                     <input name="selectedAttributes[{{ attributeName }}]" type="hidden" />
                     {% include molecule('form-submitter') with {
                         attributes: {
-                            'trigger-selector': '.' ~ config.jsName ~ '-trigger'
+                            'trigger-selector': '.' ~ config.jsName ~ '__select-trigger'
                         }
                     } only %}
                 </li>
