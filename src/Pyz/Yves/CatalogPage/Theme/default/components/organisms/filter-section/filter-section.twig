@@ -8,7 +8,8 @@
 {% define data = {
     facets: [],
     filterPath: null,
-    categories: []
+    categories: [],
+    togglerClass: ''
 } %}
 
 {% block body %}
@@ -18,7 +19,7 @@
         {% if filterHasValues %}
             <div class="{{ config.name }}__item">
                 <div
-                    class="{{ config.name }}__title {{ config.jsName }}__title"
+                    class="{{ config.name }}__title {{ config.jsName }}__title-trigger"
                     data-toggle-target=".js-{{ filter.name }}"
                 >
                     {{ ('product.filter.' ~ filter.name | lower) | trans }}
@@ -28,8 +29,7 @@
                     molecule('filter-' ~ filter.config.name, 'CatalogPage'),
                     molecule('filter-' ~ filter.config.type, 'CatalogPage')
                 ] ignore missing with {
-                    class: 'js-' ~  filter.name ~ ' is-hidden',
-                    modifiers: ['sidebar'],
+                    class: 'js-' ~  filter.name ~ ' is-hidden spacing-bottom spacing-bottom--big',
                     data: {
                         filterPath: data.filterPath,
                         categories: data.categories,
@@ -47,13 +47,13 @@
 
     {% include molecule('toggler-accordeon') with {
         attributes: {
-            trigger: '.' ~ config.jsName ~ '__title',
+            trigger: '.' ~ config.jsName ~ '__title-trigger',
             'class-to-toggle': 'is-hidden'
         }
     } only %}
 
     <div class="grid grid--justify grid--middle {{ config.name }}__actions">
-        <span class="col {{ config.name }}__close-popup js-trigger-filter">
+        <span class="col {{ config.name }}__close-popup {{ data.togglerClass }}">
             {% include atom('icon') with {
                 data: {
                     name: 'close'

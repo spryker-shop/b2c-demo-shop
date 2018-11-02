@@ -25,13 +25,13 @@
             width: calc(100% - #{rem(100)});
         }
 
-        &__cart-item-title {
-            font-size: rem(15);
-            margin-bottom: rem(5);
+        &__cart-item-title,
+        &__cart-item-price {
+            font: 500 rem(15)/1.3 $setting-font-family-additional;
         }
 
-        &__cart-item-price {
-            font-size: rem(15);
+        &__cart-item-title {
+            margin: 0 0 rem(5);
         }
 
         &__buttons-container {
@@ -68,6 +68,12 @@
             padding: rem(30) 0;
             border-bottom: rem(1) dotted $setting-color-lightest;
             color: $setting-color-lighter;
+        }
+
+        &__item-remove {
+            font: 300 rem(13)/1.3 $setting-font-family-additional;
+            opacity: 0.4;
+            text-transform: capitalize;
         }
         
         @content;
