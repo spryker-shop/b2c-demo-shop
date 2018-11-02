@@ -24,7 +24,7 @@
             }
         } only %}
             {% block selectClass -%}
-                {{ parent() }} {{ config.jsName }}-currency-trigger
+                {{ parent() }} js-currency__select-trigger
             {%- endblock %}
             {% block options %}
                 {% for currency in embed.currencies %}
@@ -36,7 +36,7 @@
         <input type="hidden" name="referrer-url" value="{{ app.request.requestUri }}" />
         {% include molecule('form-submitter') with {
             attributes: {
-                'trigger-selector': '.js-custom-select-currency-trigger'
+                'trigger-selector': '.js-currency__select-trigger'
             }
         } only %}
     </form>

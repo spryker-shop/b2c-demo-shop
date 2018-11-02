@@ -1,8 +1,7 @@
 {% extends model('component') %}
 
 {% define config = {
-    name: 'cart-item-variant-selector',
-    tag: 'div'
+    name: 'cart-item-variant-selector'
 } %}
 
 {% define data = {
@@ -45,17 +44,20 @@
                             },
                             attributes: {
                                 name: 'preselectedAttributes[' ~ attributeName ~ ']'
+                            },
+                            embed: {
+                                jsClass: config.jsName ~ '-trigger'
                             }
                         } only %}
                             {% block selectClass -%}
-                                {{ parent() }} {{ config.jsName }}-variant-trigger
+                                {{ parent() }} {{ embed.jsClass }}
                             {%- endblock %}
                         {% endembed %}
                     </label>
                     <input name="selectedAttributes[{{ attributeName }}]" type="hidden" />
                     {% include molecule('form-submitter') with {
                         attributes: {
-                            'trigger-selector': '.js-select-variant-trigger'
+                            'trigger-selector': '.' ~ config.jsName ~ '-trigger'
                         }
                     } only %}
                 </li>

@@ -33,11 +33,12 @@
                     name: 'sort'
                 },
                 embed: {
-                    sort: _view.sort
+                    sort: _view.sort,
+                    jsClass: config.jsName ~ '__select-trigger'
                 }
             } only %}
                 {% block selectClass -%}
-                    {{ parent() }} {{ config.jsName }}__sort-trigger
+                    {{ parent() }} {{ embed.jsClass }}
                 {%- endblock %}
                 {% block options %}
                     <option value="">
@@ -60,7 +61,7 @@
 
     {% include molecule('form-submitter') with {
         attributes: {
-            'trigger-selector': '.js-custom-select__sort-trigger'
+            'trigger-selector': '.' ~ config.jsName ~ '__select-trigger'
         }
     } only %}
 {% endblock %}
