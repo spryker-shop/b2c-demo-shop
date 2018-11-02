@@ -13,17 +13,19 @@
 
 {% block body %}
     <form method="GET" action="{{ path('currency-switch') }}">
-        {% embed atom('custom-select') with {
+        {% embed molecule('custom-select') with {
             modifiers: ['naked'],
             attributes: {
-                name: 'currency-iso-code',
-                onchange: 'this.form.submit()'
+                name: 'currency-iso-code'
             },
             embed: {
                 currencies: data.currencies,
                 currentCurrency: data.currentCurrency
             }
         } only %}
+            {% block selectClass -%}
+                {{ parent() }} {{ config.jsName }}-currency-trigger
+            {%- endblock %}
             {% block options %}
                 {% for currency in embed.currencies %}
                     <option value="{{ currency.code }}" {{ (currency.code == embed.currentCurrency) ? 'selected' : ''}}>{{ currency.code | trans }}</option>
@@ -32,5 +34,10 @@
         {% endembed %}
 
         <input type="hidden" name="referrer-url" value="{{ app.request.requestUri }}" />
+        {% include molecule('form-submitter') with {
+            attributes: {
+                'trigger-selector': '.js-custom-select-currency-trigger'
+            }
+        } only %}
     </form>
 {% endblock %}

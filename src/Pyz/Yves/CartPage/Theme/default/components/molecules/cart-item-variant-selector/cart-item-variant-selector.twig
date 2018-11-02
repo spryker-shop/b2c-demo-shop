@@ -38,18 +38,26 @@
                 <li class="list__item">
                     <label class="{{ config.name }}__label">
                         <strong class="{{ config.name }}__title">{{ ('product.attribute.' ~ attributeName) | trans }}:</strong>
-                        {% include atom('select') with {
+                        {% embed atom('select') with {
                             data: {
                                 label: ('product.attribute.' ~ attributeName) | trans,
                                 options: options
                             },
                             attributes: {
-                                name: 'preselectedAttributes[' ~ attributeName ~ ']',
-                                'onchange': 'this.form.submit();'
+                                name: 'preselectedAttributes[' ~ attributeName ~ ']'
                             }
                         } only %}
+                            {% block selectClass -%}
+                                {{ parent() }} {{ config.jsName }}-variant-trigger
+                            {%- endblock %}
+                        {% endembed %}
                     </label>
                     <input name="selectedAttributes[{{ attributeName }}]" type="hidden" />
+                    {% include molecule('form-submitter') with {
+                        attributes: {
+                            'trigger-selector': '.js-select-variant-trigger'
+                        }
+                    } only %}
                 </li>
             {% endfor %}
         </ul>

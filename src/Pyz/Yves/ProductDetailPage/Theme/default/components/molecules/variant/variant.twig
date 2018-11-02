@@ -24,13 +24,15 @@
                 {% embed atom('select') with {
                     modifiers: ['expand'],
                     attributes: {
-                        name: data.formName,
-                        onchange: 'this.form.submit()'
+                        name: data.formName
                     },
                     embed: {
                         values: data.values
                     }
                 } only %}
+                    {% block selectClass -%}
+                        {{ parent() }} {{ config.jsName }}-variant-trigger
+                    {%- endblock %}
                     {% block options %}
                         <option>{{ 'product.attribute._none' | trans }}</option>
                         {% for value in embed.values %}
@@ -38,6 +40,11 @@
                         {% endfor %}
                     {% endblock %}
                 {% endembed %}
+                {% include molecule('form-submitter') with {
+                    attributes: {
+                        'trigger-selector': '.js-select-variant-trigger'
+                    }
+                } only %}
             {% else %}
                 {{ 'product.attribute.not_available' | trans }}
             {% endif %}
