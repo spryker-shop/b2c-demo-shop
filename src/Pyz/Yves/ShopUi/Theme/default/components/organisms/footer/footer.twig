@@ -10,21 +10,6 @@
 } %}
 
 {% block body %}
-    {% macro topCol(name, index, title, menu) %}
-        <div class="{{ name }}__top-col">
-            <h5
-                class="{{ name }}__title {{ name }}__title--nav js-toggle-nav"
-                data-toggle-target=".js-footer-nav-{{ index }}"
-            >
-                {{- title | trans -}}
-            </h5>
-
-            <div class="{{ name }}__navigation-main {{ name }}__navigation-main--hidden js-footer-nav-{{ index }}">
-                {{- widgetGlobal('NavigationWidgetPlugin', menu, 'navigation-footer') -}}
-            </div>
-        </div>
-    {% endmacro %}
-
     <div class="container">
 
         {% block footerTop %}
@@ -42,23 +27,54 @@
                     {{- render(path('newsletter/subscribe')) -}}
                 </div>
 
-                {% if data.showNavigation %}
-                    {{ _self.topCol(config.name, 1, 'global.categories', 'FOOTER_NAVIGATION_CATEGORIES') }}
-                {% endif %}
-
-                {{ _self.topCol(config.name, 2, 'global.company', 'FOOTER_NAVIGATION') }}
-
-                {{ _self.topCol(config.name, 3, 'global.social', 'SOCIAL_LINKS') }}
-
-                <div class="{{ config.name }}__top-col is-hidden-md-xl">
-                    <h5 class="{{ config.name }}__title {{ config.name }}__title--nav js-toggle-nav" data-toggle-target=".js-footer-nav-4">
-                        {{ 'footer.providers__title' | trans }}
-                    </h5>
-                    <div class="{{ config.name }}__navigation-main {{ config.name }}__navigation-main--hidden js-footer-nav-4">
-                        {{- widgetGlobal('NavigationWidgetPlugin', 'SHIPMENT_PROVIDERS', 'navigation-providers-shipment') -}}
-                        {{- widgetGlobal('NavigationWidgetPlugin', 'PAYMENT_PROVIDERS', 'navigation-providers-payment') -}}
-                    </div>
-                </div>
+                {% include molecule('navigation-footer') with {
+                    data: {
+                        items: [
+                            {
+                                title: 'global.categories',
+                                isShow: data.showNavigation,
+                                templates: [
+                                    {
+                                        template: 'navigation-footer',
+                                        menu: 'FOOTER_NAVIGATION_CATEGORIES'
+                                    }
+                                ]
+                            },
+                            {
+                                title: 'global.company',
+                                templates: [
+                                    {
+                                        template: 'navigation-footer',
+                                        menu: 'FOOTER_NAVIGATION'
+                                    }
+                                ]
+                            },
+                            {
+                                title: 'global.social',
+                                templates: [
+                                    {
+                                        template: 'navigation-footer',
+                                        menu: 'SOCIAL_LINKS'
+                                    }
+                                ]
+                            },
+                            {
+                                class: 'is-hidden-md-xl',
+                                title: 'footer.providers__title',
+                                templates: [
+                                    {
+                                        template: 'navigation-providers-shipment',
+                                        menu: 'SHIPMENT_PROVIDERS'
+                                    },
+                                    {
+                                        template: 'navigation-providers-payment',
+                                        menu: 'PAYMENT_PROVIDERS'
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                } only %}
             </div>
         {% endblock %}
 
@@ -71,13 +87,7 @@
                         {{- 'footer.logo.text' | trans -}}
                     </span>
 
-                    <span class="{{ config.name }}__logo-copy-logo">
-                        <a href="{{ 'footer.logo.url' | trans }}">
-                            <span class="grid grid--middle">
-                                <img src="/assets/images/spryker-logo.svg" alt="Logo" />
-                            </span>
-                        </a>
-                    </span>
+                    {% include molecule('footer-logo') only %}
 
                     {% block copyright %}{% endblock %}
                 </div>
@@ -126,13 +136,6 @@
             </div>
 
         </div>
-
-        {% include molecule('toggler-accordeon') with {
-            attributes: {
-                trigger: '.js-toggle-nav',
-                'class-to-toggle': config.name ~ '__navigation-main--hidden'
-            }
-        } only %}
 
     </div>
 {% endblock %}
