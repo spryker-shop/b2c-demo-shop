@@ -23,9 +23,9 @@ export default class RangeSlider extends Component {
         this.targetSelectors = <HTMLInputElement[]>Array.from(document.querySelectorAll(this.targetSelector));
         this.sliderConfig = {
             start: [ this.valueCurrentMin, this.valueCurrentMax ],
-            step: 1,
-            connect: true,
-            margin: 1,
+            step: this.stepAttribute,
+            connect: this.connectAttribute,
+            margin: this.marginAttribute,
             range: {
                 'min': +this.valueMin,
                 'max': +this.valueMax
@@ -88,5 +88,17 @@ export default class RangeSlider extends Component {
 
     get valueCurrentMax(): string {
         return this.getAttribute('active-max');
+    }
+
+    get stepAttribute(): number {
+        return parseInt(this.getAttribute('step'));
+    }
+
+    get connectAttribute(): boolean {
+        return Boolean(this.getAttribute('connect'));
+    }
+
+    get marginAttribute(): number {
+        return parseInt(this.getAttribute('margin'));
     }
 }
