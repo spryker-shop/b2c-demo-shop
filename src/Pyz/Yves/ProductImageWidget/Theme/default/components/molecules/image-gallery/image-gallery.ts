@@ -24,7 +24,7 @@ export default class ImageGallery extends Component {
     }
 
     protected initSlider(): void {
-        let imagesQuantity = this.galleryItems.length;
+        const imagesQuantity = this.galleryItems.length;
         if(imagesQuantity > 1) {
             $(this.thumbnail).slick(this.thumbnailSliderConfig);
         }
