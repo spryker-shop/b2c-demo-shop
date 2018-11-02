@@ -4,13 +4,13 @@ import 'slick-carousel';
 
 export default class ImageGallery extends Component {
     readonly galleryItems: HTMLElement[];
-    readonly thumbnailSlider: HTMLElement;
+    readonly thumbnail: HTMLElement;
     readonly thumbnailItems: HTMLElement[];
 
     constructor() {
         super();
         this.galleryItems = <HTMLElement[]>Array.from(this.querySelectorAll(`.${this.jsName}__item`));
-        this.thumbnailSlider = this.querySelector(`.${this.jsName}-thumbnail`);
+        this.thumbnail = this.querySelector(`.${this.jsName}-thumbnail`);
         this.thumbnailItems = <HTMLElement[]>Array.from(this.querySelectorAll(`.${this.jsName}-thumbnail__item`));
     }
 
@@ -20,26 +20,24 @@ export default class ImageGallery extends Component {
     }
 
     protected mapEvents(): void {
-        this.thumbnailSlider.addEventListener('mouseenter', (event: Event) => this.onThumbnailHover(event), true);
+        this.thumbnail.addEventListener('mouseenter', (event: Event) => this.onThumbnailHover(event), true);
     }
 
     protected initSlider(): void {
         let imagesQuantity = this.galleryItems.length;
         if(imagesQuantity > 1) {
-            $(this.thumbnailSlider).slick(
-                this.thumbnailSliderConfig
-            );
+            $(this.thumbnail).slick(this.thumbnailSliderConfig);
         }
     }
 
     protected onThumbnailHover(event: Event): void {
-        let hovered = <HTMLElement> event.target;
-        if(hovered.classList.contains(`${this.jsName}-thumbnail__item`)) {
-           this.thumbnailChange(hovered);
+        let thumbnail = <HTMLElement> event.target;
+        if(thumbnail.classList.contains(`${this.jsName}-thumbnail__item`)) {
+           this.thumbnailChange(thumbnail);
         }
     }
 
-    protected thumbnailChange(thumbnail) {
+    protected thumbnailChange(thumbnail: HTMLElement): void {
         let index = Number(thumbnail.dataset.thumbnailIndex);
         if(!thumbnail.classList.contains(this.thumbnailActiveClass)) {
             this.thumbnailItems.forEach((thumbnailItem) => thumbnailItem.classList.remove(this.thumbnailActiveClass));
