@@ -27,5 +27,10 @@
 
 {% block body %}
     {{data.value}}
-    <span class="ico">&times;</span>
+    {% include atom('icon') with {
+        modifiers: ['medium', 'close-filter'],
+        data: {
+            name: 'close-filter'
+        }
+    } only %}
 {% endblock %}

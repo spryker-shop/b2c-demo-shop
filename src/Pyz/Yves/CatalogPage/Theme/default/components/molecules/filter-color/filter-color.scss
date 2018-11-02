@@ -1,17 +1,11 @@
-@mixin filter-color($name: '.filter-color') {
+@mixin catalog-page-filter-color($name: '.filter-color') {
     #{$name} {
-        &__list {
-            display: flex;
-            flex-wrap: wrap;
-            padding-bottom: rem(8);
-        }
-
         &__item {
-            &:not(:last-child) {
-                margin-right: rem(6);
+            &:last-child {
+                margin-right: 0;
             }
         }
     }
 }
 
-@include filter-color();
+@include catalog-page-filter-color();
