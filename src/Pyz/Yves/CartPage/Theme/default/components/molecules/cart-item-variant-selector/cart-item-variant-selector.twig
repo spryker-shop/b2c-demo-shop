@@ -1,8 +1,7 @@
 {% extends model('component') %}
 
 {% define config = {
-    name: 'cart-item-variant-selector',
-    tag: 'div'
+    name: 'cart-item-variant-selector'
 } %}
 
 {% define data = {
@@ -38,18 +37,29 @@
                 <li class="list__item">
                     <label class="{{ config.name }}__label">
                         <strong class="{{ config.name }}__title">{{ ('product.attribute.' ~ attributeName) | trans }}:</strong>
-                        {% include atom('select') with {
+                        {% embed atom('select') with {
                             data: {
                                 label: ('product.attribute.' ~ attributeName) | trans,
                                 options: options
                             },
                             attributes: {
-                                name: 'preselectedAttributes[' ~ attributeName ~ ']',
-                                'onchange': 'this.form.submit();'
+                                name: 'preselectedAttributes[' ~ attributeName ~ ']'
+                            },
+                            embed: {
+                                jsClass: config.jsName ~ '__select-trigger'
                             }
                         } only %}
+                            {% block selectClass -%}
+                                {{ parent() }} {{ embed.jsClass }}
+                            {%- endblock %}
+                        {% endembed %}
                     </label>
                     <input name="selectedAttributes[{{ attributeName }}]" type="hidden" />
+                    {% include molecule('form-submitter') with {
+                        attributes: {
+                            'trigger-selector': '.' ~ config.jsName ~ '__select-trigger'
+                        }
+                    } only %}
                 </li>
             {% endfor %}
         </ul>
