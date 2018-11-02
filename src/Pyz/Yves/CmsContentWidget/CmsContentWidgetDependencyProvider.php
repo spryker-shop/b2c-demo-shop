@@ -8,10 +8,12 @@
 namespace Pyz\Yves\CmsContentWidget;
 
 use Spryker\Yves\CmsContentWidget\CmsContentWidgetDependencyProvider as SprykerCmsContentWidgetDependencyProvider;
+use SprykerShop\Shared\CmsContentWidgetChartConnector\ContentWidgetConfigurationProvider\CmsChartContentWidgetConfigurationProvider;
 use SprykerShop\Shared\CmsContentWidgetProductConnector\ContentWidgetConfigurationProvider\CmsProductContentWidgetConfigurationProvider;
 use SprykerShop\Shared\CmsContentWidgetProductConnector\ContentWidgetConfigurationProvider\CmsProductGroupContentWidgetConfigurationProvider;
 use SprykerShop\Shared\CmsContentWidgetProductSetConnector\ContentWidgetConfigurationProvider\CmsProductSetContentWidgetConfigurationProvider;
 use SprykerShop\Shared\FileManagerWidget\CmsContentWidgetConfigurationProvider\FileManagerWidgetConfigurationProvider;
+use SprykerShop\Yves\CmsContentWidgetChartConnector\Plugin\CmsContentWidget\CmsChartContentWidgetPlugin;
 use SprykerShop\Yves\CmsContentWidgetProductConnector\Plugin\CmsProductContentWidgetPlugin;
 use SprykerShop\Yves\CmsContentWidgetProductSetConnector\Plugin\CmsProductSetContentWidgetPlugin;
 use SprykerShop\Yves\FileManagerWidget\Plugin\CmsContentWidget\FileManagerWidgetPlugin;
@@ -26,6 +28,9 @@ class CmsContentWidgetDependencyProvider extends SprykerCmsContentWidgetDependen
     public function getCmsContentWidgetPlugins()
     {
         return [
+            CmsChartContentWidgetConfigurationProvider::FUNCTION_NAME => new CmsChartContentWidgetPlugin(
+                new CmsChartContentWidgetConfigurationProvider()
+            ),
             CmsProductContentWidgetConfigurationProvider::FUNCTION_NAME => new CmsProductContentWidgetPlugin(
                 new CmsProductContentWidgetConfigurationProvider()
             ),
