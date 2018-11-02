@@ -37,7 +37,7 @@
 
     {% set filtersEqual = data.max is same as(data.min)%}
     {% if not filtersEqual %}
-        <div class="range-slider {{ config.jsName }}__range-slider }}">
+        <div class="range-slider range-slider--horizontal {{ config.jsName }}__range-slider">
             <div class="range-slider__values">
                 <span class="range-slider__values-item {{ config.jsName }}__values-min">
                     {{- data.activeMin | money -}}
@@ -51,12 +51,12 @@
         {% include molecule('range-slider') with {
             attributes: {
                 'wrap-selector': '.' ~ config.jsName ~ '__range-slider',
-                'value-selector': '[".' ~ config.jsName ~ '__values-min", ".' ~ config.jsName ~ '__values-max"]',
+                'value-selector': '.' ~ config.jsName ~ '__values-min, .' ~ config.jsName ~ '__values-max',
                 'value-min': data.min,
                 'value-max': data.max,
                 'active-min': data.activeMin,
                 'active-max': data.activeMax,
-                'target-selector': '[".' ~ config.jsName ~ '__input-min", ".' ~ config.jsName ~ '__input-max"]',
+                'target-selector': '.' ~ config.jsName ~ '__input-min, .' ~ config.jsName ~ '__input-max'
             }
         } only %}
     {% endif %}

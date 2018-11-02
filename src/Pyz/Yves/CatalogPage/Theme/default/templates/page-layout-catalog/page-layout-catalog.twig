@@ -44,7 +44,7 @@
     <div class="container">
         <main class="container__inner">
             {% block content %}
-                <form method="GET" class="grid js-target-filter js-form-input-default-value-disabler__catalog-form">
+                <form method="GET" class="grid js-catalog-filter-target js-form-input-default-value-disabler__catalog-form">
                     {% block form %}
                         <div class="col col--sm-12 col--xl-3 catalog-left-side">
                             {% block filterSection %}
@@ -90,7 +90,7 @@
                         {% include molecule('toggler-click') with {
                             attributes: {
                                 'trigger-selector': '.js-toggler-click__trigger',
-                                'target-selector': '.js-target-filter',
+                                'target-selector': '.js-catalog-filter-target',
                                 'class-to-toggle': 'show-filter'
                             }
                         } only %}

@@ -20,7 +20,7 @@ export default class RangeSlider extends Component {
 
     protected readyCallback(): void {
         this.wrap = <HTMLElement>document.querySelector(this.wrapSelector);
-        this.targetSelectors = <HTMLInputElement[]>Array.from(document.querySelectorAll(JSON.parse(this.targetSelector)));
+        this.targetSelectors = <HTMLInputElement[]>Array.from(document.querySelectorAll(this.targetSelector));
         this.sliderConfig = {
             start: [ this.valueCurrentMin, this.valueCurrentMax ],
             step: 1,
@@ -39,7 +39,7 @@ export default class RangeSlider extends Component {
         this.updateValues(this.wrap, this.targetSelectors);
 
         if(this.valueSelector !== '') {
-            this.valueTarget = <HTMLElement[]>Array.from(document.querySelectorAll(JSON.parse(this.valueSelector)));
+            this.valueTarget = <HTMLElement[]>Array.from(document.querySelectorAll(this.valueSelector));
             this.updateSelectors(this.wrap, this.valueTarget);
         }
     }
