@@ -2,27 +2,31 @@
     #{$name} {
         position: relative;
         display: block;
-        height: 10rem;
-        margin: 0.5rem;
+        height: rem(160);
+        margin: rem(8);
 
         &--smaller {
-            height: 3rem;
+            height: rem(48);
         }
 
         &--small {
-            height: 5rem;
+            height: rem(80);
         }
 
         &--big {
-            height: 20rem;
+            height: rem(320);
         }
 
         &--bigger {
-            height: 30rem;
+            height: rem(480);
         }
 
         &--min-size {
-            min-width: 2.5rem;
+            min-width: rem(40);
+        }
+
+        &--no-margin {
+            margin: 0;
         }
 
         &__image {
@@ -37,8 +41,8 @@
         }
 
         &--has-border {
-            border: 0.25rem solid transparent;
-            box-shadow: 0 0 0 1px $setting-color-lighter;
+            border: rem(4) solid transparent;
+            box-shadow: 0 0 0 rem(1) $setting-color-lighter;
         }
 
         @content;

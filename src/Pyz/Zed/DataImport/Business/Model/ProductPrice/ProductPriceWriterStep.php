@@ -9,7 +9,10 @@ namespace Pyz\Zed\DataImport\Business\Model\ProductPrice;
 
 use Orm\Zed\Currency\Persistence\SpyCurrencyQuery;
 use Orm\Zed\PriceProduct\Persistence\Map\SpyPriceTypeTableMap;
+use Orm\Zed\PriceProduct\Persistence\SpyPriceProductDefault;
+use Orm\Zed\PriceProduct\Persistence\SpyPriceProductDefaultQuery;
 use Orm\Zed\PriceProduct\Persistence\SpyPriceProductQuery;
+use Orm\Zed\PriceProduct\Persistence\SpyPriceProductStore;
 use Orm\Zed\PriceProduct\Persistence\SpyPriceProductStoreQuery;
 use Orm\Zed\PriceProduct\Persistence\SpyPriceTypeQuery;
 use Orm\Zed\Store\Persistence\SpyStoreQuery;
@@ -117,6 +120,8 @@ class ProductPriceWriterStep extends PublishAwareStep implements DataImportStepI
         $priceProductStoreEntity->setNetPrice($dataSet[static::KEY_PRICE_NET]);
 
         $priceProductStoreEntity->save();
+
+        $this->findOrCreatePriceProductDefault($priceProductStoreEntity);
     }
 
     /**
@@ -157,5 +162,21 @@ class ProductPriceWriterStep extends PublishAwareStep implements DataImportStepI
         static::$storeCache[$storeName] = $storeEntity;
 
         return $storeEntity;
+    }
+
+    /**
+     * @param \Orm\Zed\PriceProduct\Persistence\SpyPriceProductStore $priceProductStore
+     *
+     * @return \Orm\Zed\PriceProduct\Persistence\SpyPriceProductDefault
+     */
+    protected function findOrCreatePriceProductDefault(SpyPriceProductStore $priceProductStore): SpyPriceProductDefault
+    {
+        $priceProductDefault = SpyPriceProductDefaultQuery::create()
+            ->filterByFkPriceProductStore($priceProductStore->getIdPriceProductStore())
+            ->findOneOrCreate();
+
+        $priceProductDefault->save();
+
+        return $priceProductDefault;
     }
 }

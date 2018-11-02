@@ -1,13 +1,13 @@
 @mixin shop-ui-image-banner($name: '.image-banner') {
-    #{$name}{
-        margin: 180px 0;
-        height: 750px;
-        padding: 0 80px;
+    #{$name} {
+        margin: rem(180) 0;
+        height: rem(750);
+        padding: 0 rem(80);
         position: relative;
         @include helper-breakpoint-media-max($md-max) {
-          height: 400px;
-          margin: 80px 0 132px 0;
-          padding: 0;
+            height: rem(400);
+            margin: rem(80) 0 rem(132);
+            padding: 0;
         }
         video {
             width: auto;
@@ -24,24 +24,24 @@
             width: 100%;
             overflow: hidden;
             &::after {
-              content: '';
-              display: block;
-              position: absolute;
-              bottom: 40px;
-              right: 40px;
-              width: 130px;
-              height: 53px;
-              background: url("/assets/images/spryker-logo@2x.png") center no-repeat;
-              background-size: contain;
-              @include helper-breakpoint-media-max($md-max) {
-                width: 78px;
-                height: 32px;
-                bottom: 20px;
-                right: 24px;
-              }
+                content: '';
+                display: block;
+                position: absolute;
+                bottom: rem(40);
+                right: rem(40);
+                width: rem(130);
+                height: rem(53);
+                background: url('/assets/images/spryker-logo@2x.png') center no-repeat;
+                background-size: contain;
+                @include helper-breakpoint-media-max($md-max) {
+                    width: rem(78);
+                    height: rem(32);
+                    bottom: rem(20);
+                    right: rem(24);
+                }
             }
             .touch & {
-                background-image: url("/assets/images/brand-image@3x.jpg");
+                background-image: url('/assets/images/brand-image@3x.jpg');
                 background-size: cover;
             }
         }
@@ -53,35 +53,35 @@
             align-items: center;
             flex-direction: column;
             @include helper-breakpoint-media-max($md-max) {
-              position: absolute;
-              top: 50%;
-              left: 50%;
-              transform: translate(-50% , -50%);
-              width: 100%;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 100%;
             }
         }
 
         &__title {
-            margin-bottom: 10px;
-            &>* {
-                font: bold 68px $setting-font-family-additional;
+            margin-bottom: rem(10);
+            & > * {
+                font: bold rem(68) $setting-font-family-additional;
                 line-height: normal;
-                letter-spacing: -0.9px;
+                letter-spacing: rem(-0.9);
                 color: $setting-color-white;
                 text-align: center;
                 @include helper-breakpoint-media-max($md-max) {
-                    font-size: 38px;
+                    font-size: rem(38);
                 }
             }
         }
         &__link {
             color: $setting-color-white;
-            font: normal 22px $setting-font-family-additional;
-            letter-spacing: -0.4px;
+            font: normal rem(22) $setting-font-family-additional;
+            letter-spacing: rem(-0.4);
             position: relative;
             text-decoration: none;
             @include helper-breakpoint-media-max($md-max) {
-             font-size: 14px;
+                font-size: rem(14);
             }
             &:hover {
                 color: $setting-color-white;
@@ -91,16 +91,16 @@
                 content: '';
                 display: block;
                 position: absolute;
-                height: 15px;
-                width: 10px;
-                background: url("/assets/images/arrow-white-bold.svg") center no-repeat;
-                right: -20px;
-                bottom: 4px;
+                height: rem(15);
+                width: rem(10);
+                background: url('/assets/images/arrow-white-bold.svg') center no-repeat;
+                right: rem(-20);
+                bottom: rem(4);
                 @include helper-breakpoint-media-max($md-max) {
-                  width: 6px;
-                  height: 9px;
-                  right: -12px;
-                  bottom: 3px;
+                    width: rem(6);
+                    height: rem(9);
+                    right: rem(-12);
+                    bottom: rem(3);
                 }
             }
         }

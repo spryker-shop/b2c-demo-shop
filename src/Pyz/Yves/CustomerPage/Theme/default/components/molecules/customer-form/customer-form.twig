@@ -84,14 +84,6 @@
                     {% if data.cancel.enable %}
                         {% block cancel %}
                             <a href="{{data.cancel.url}}" class="{{config.name}}__action {{data.cancel.class}}" {{qa(data.cancel.qa)}}>
-                                {#{% if data.cancel.icon is not empty %}#}
-                                {#{% include atom('icon') with {#}
-                                {#modifiers: ['small'],#}
-                                {#data: {#}
-                                {#name: data.cancel.icon#}
-                                {#}#}
-                                {#} only %}#}
-                                {#{% endif %}#}
                                 {{data.cancel.text}}
                             </a>
                         {% endblock %}

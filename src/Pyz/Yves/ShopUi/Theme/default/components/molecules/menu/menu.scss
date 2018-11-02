@@ -2,14 +2,14 @@
     @include shop-ui-list($name) {
         &__item {
             @include helper-font-weight(regular);
-            margin: .5rem 0;
+            margin: rem(8) 0;
 
             &--active {
                 @include helper-font-weight(bold);
             }
 
             &--has-children-list {
-                margin-bottom: 1rem;
+                margin-bottom: rem(16);
 
                 &:last-child {
                     margin-bottom: 0;
@@ -17,7 +17,7 @@
 
                 & #{$name}__item {
                     @include helper-font-size(small);
-                    margin: .5rem;
+                    margin: rem(8);
                 }
             }
 
@@ -26,14 +26,13 @@
                 z-index: $setting-zi-element + 1;
 
                 & > #{$name} {
-                    //@include helper-ui-shadow;
                     @include helper-visibility-invisible;
                     @include helper-effect-transition;
                     position: absolute;
                     left: 0;
-                    margin-left: - .5rem;
+                    margin-left: - rem(8);
                     border: none;
-                    padding: .5rem;
+                    padding: rem(8);
                     background-color: $setting-color-white;
                 }
 
@@ -42,8 +41,8 @@
                 }
 
                 & > #{$name} > #{$name}__item {
-                    margin-left: .5rem;
-                    margin-right: .5rem;
+                    margin-left: rem(8);
+                    margin-right: rem(8);
                 }
             }
         }
@@ -51,7 +50,7 @@
         &__separator {
             &:not(&--horizontal-line) {
                 display: inline-block;
-                margin: 0 .5rem;
+                margin: 0 rem(8);
 
                 &::after {
                     content: '|';
@@ -61,7 +60,7 @@
 
             &--horizontal-line {
                 display: block;
-                border-top: 1px solid $setting-color-lighter;
+                border-top: rem(1) solid $setting-color-lighter;
             }
         }
 

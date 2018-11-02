@@ -1,12 +1,26 @@
-@include shop-ui-icon {
-    &--thumbnail-arrow {
-        display: block;
-        width: 100%;
-        height: 6px;
-        color: $setting-color-dark;
-    }
+@mixin icon($name: '.icon') {
+    @include shop-ui-icon($name);
 
-    &--reverse {
-        transform: rotate(180deg);
+    #{$name} {
+        &--inherit {
+            display: block;
+            width: inherit;
+            height: inherit;
+        }
+
+        &--thumbnail-arrow {
+            display: block;
+            width: 100%;
+            height: 6px;
+            color: $setting-color-dark;
+        }
+
+        &--reverse {
+            transform: rotate(180deg);
+        }
+
+        @content;
     }
 }
+
+@include icon();

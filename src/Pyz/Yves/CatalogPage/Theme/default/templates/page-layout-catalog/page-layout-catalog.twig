@@ -42,8 +42,8 @@
     {% endblock %}
 
     <div class="container">
-
         <main class="container__inner">
+
             {% block content %}
                 {% block cmsTop %}
                     {% if data.categoryId %}
@@ -53,10 +53,9 @@
                     {% endif %}
                 {% endblock %}
 
-                    <form method="GET" class="grid js-target-filter js-form-input-default-value-disabler__catalog-form">
-                {% block form %}
+                <form method="GET" class="grid js-target-filter js-form-input-default-value-disabler__catalog-form">
+                    {% block form %}
                         <div class="col col--sm-12 col--xl-3 catalog-left-side">
-
                             {% include organism('filter-section', 'CatalogPage') with {
                                 data: {
                                     facets: data.facets,
@@ -111,14 +110,15 @@
                                 'class-to-toggle': 'show-filter'
                             }
                         } only %}
+
                         {% include molecule('form-input-default-value-disabler') with {
                             attributes: {
                                 'form-selector': '.js-form-input-default-value-disabler__catalog-form',
                                 'input-selector': '.js-form-input-default-value-disabler__catalog-input'
                             }
                         } only %}
-                {% endblock %}
-                    </form>
+                    {% endblock %}
+                </form>
 
             {% endblock %}
 
@@ -159,6 +159,5 @@
             {% endblock %}
 
         </main>
-
     </div>
 {% endblock %}

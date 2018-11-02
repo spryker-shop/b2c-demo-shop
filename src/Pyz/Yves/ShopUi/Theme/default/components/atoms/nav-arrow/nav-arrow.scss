@@ -1,17 +1,17 @@
-@mixin shop-ui-nav-arrow($name: '.nav-arrow'){
+@mixin shop-ui-nav-arrow($name: '.nav-arrow') {
     #{$name} {
         display: none;
-        @media only screen and (max-width: 769px) {
+        @media only screen and (max-width: rem(769)) {
             display: block;
             position: absolute;
             top: 50%;
             transform: translate(0, -50%);
 
             &--left {
-                left: 20px;
+                left: rem(20);
             }
             &--right {
-                right: 20px;
+                right: rem(20);
             }
         }
     }

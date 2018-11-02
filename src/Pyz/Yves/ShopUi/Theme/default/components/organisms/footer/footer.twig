@@ -11,87 +11,131 @@
 
 {% block body %}
     <div class="container">
+
         {% block footerTop %}
-            <div class="footer-top">
-                <div class="subscription-wrapper">
-                    <h5 class="footer__title">{{ 'global.newsletter' | trans }}</h5>
-                    <span class="subscription-text">{{ 'footer_subscribe.subscription_text' | trans }}</span>
-                    {{ render(path('newsletter/subscribe')) }}
+            <div class="{{ config.name }}__top">
+
+                <div class="{{ config.name }}__subscription">
+                    <h5 class="{{ config.name }}__title">
+                        {{- 'global.newsletter' | trans -}}
+                    </h5>
+
+                    <span class="{{ config.name }}__subscription-text">
+                        {{- 'footer_subscribe.subscription_text' | trans -}}
+                    </span>
+
+                    {{- render(path('newsletter/subscribe')) -}}
                 </div>
 
-                {% if data.showNavigation %}
-                    <div class="footer-top__col">
-                        <h5 class="footer__title footer-title-nav js-toggle-nav" data-toggle-target=".js-footer-nav-1">{{ 'global.categories' | trans }}</h5>
-                        <div class="{{config.name}}__row {{config.name}}__navigation-main hidden-nav js-footer-nav-1">
-                            {{ widgetGlobal('NavigationWidgetPlugin', 'FOOTER_NAVIGATION_CATEGORIES', 'navigation-footer') }}
-                        </div>
-                    </div>
-                {% endif %}
-
-                <div class="footer-top__col">
-                    <h5 class="footer__title footer-title-nav js-toggle-nav" data-toggle-target=".js-footer-nav-2">{{ 'global.company' | trans }}</h5>
-                    <div class="{{config.name}}__row {{config.name}}__navigation-main hidden-nav js-footer-nav-2">
-                        {{ widgetGlobal('NavigationWidgetPlugin', 'FOOTER_NAVIGATION', 'navigation-footer') }}
-                    </div>
-                </div>
-
-                <div class="footer-top__col">
-                    <h5 class="footer__title footer-title-nav js-toggle-nav" data-toggle-target=".js-footer-nav-3">{{ 'global.social' | trans }}</h5>
-                    <div class="{{config.name}}__row {{config.name}}__navigation-main hidden-nav js-footer-nav-3">
-                        {{ widgetGlobal('NavigationWidgetPlugin', 'SOCIAL_LINKS', 'navigation-footer') }}
-                    </div>
-                </div>
+                {% include molecule('navigation-footer') with {
+                    data: {
+                        items: [
+                            {
+                                title: 'global.categories',
+                                isShow: data.showNavigation,
+                                templates: [
+                                    {
+                                        template: 'navigation-footer',
+                                        menu: 'FOOTER_NAVIGATION_CATEGORIES'
+                                    }
+                                ]
+                            },
+                            {
+                                title: 'global.company',
+                                templates: [
+                                    {
+                                        template: 'navigation-footer',
+                                        menu: 'FOOTER_NAVIGATION'
+                                    }
+                                ]
+                            },
+                            {
+                                title: 'global.social',
+                                templates: [
+                                    {
+                                        template: 'navigation-footer',
+                                        menu: 'SOCIAL_LINKS'
+                                    }
+                                ]
+                            },
+                            {
+                                class: 'is-hidden-md-xl',
+                                title: 'footer.providers__title',
+                                templates: [
+                                    {
+                                        template: 'navigation-providers-shipment',
+                                        menu: 'SHIPMENT_PROVIDERS'
+                                    },
+                                    {
+                                        template: 'navigation-providers-payment',
+                                        menu: 'PAYMENT_PROVIDERS'
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                } only %}
             </div>
         {% endblock %}
 
-        <div class="grid grid--middle footer-bottom">
+        <div class="grid grid--middle {{ config.name }}__bottom">
 
-            <div class="col footer-logo-section">
-                <div class="footer-logo-copy">
-                    <span class="footer-logo-copy__text">{{ 'footer.logo.text' | trans }}</span>
+            <div class="col {{ config.name }}__logo-section">
 
-                    <span class="footer-logo-copy__logo">
-                     <a href="{{'footer.logo.url' | trans}}">
-                        <span class="grid grid--middle">
-                            <img src="/assets/images/spryker-logo.svg" alt="Logo" />
-                        </span>
-                    </a>
-                </span>
+                <div class="{{ config.name }}__logo-copy">
+                    <span class="{{ config.name }}__logo-copy-text">
+                        {{- 'footer.logo.text' | trans -}}
+                    </span>
+
+                    {% include molecule('footer-logo') only %}
+
                     {% block copyright %}{% endblock %}
                 </div>
-                <div class="footer-logo-copy__links">
-                    <a href="{{ 'footer.logo.link.privacy' | trans }}" target="_blank" class="footer-logo-copy__link">{{ 'page.privacy.title' | trans }}</a>
-                    <a href="{{ 'footer.logo.link.imprint' | trans }}" target="_blank" class="footer-logo-copy__link">{{ 'page.imprint.title' | trans }}</a>
+
+                <div class="{{ config.name }}__logo-copy-links">
+                    <a
+                        href="{{ 'footer.logo.link.privacy' | trans }}"
+                        target="_blank"
+                        class="{{ config.name }}__logo-copy-link"
+                    >
+                        {{- 'page.privacy.title' | trans -}}
+                    </a>
+
+                    <a
+                        href="{{ 'footer.logo.link.imprint' | trans }}"
+                        target="_blank"
+                        class="{{ config.name }}__logo-copy-link"
+                    >
+                        {{- 'page.imprint.title' | trans -}}
+                    </a>
+                </div>
+            </div>
+            <div class="col {{ config.name }}__icon-lists is-hidden-sm-only">
+                <div class="{{ config.name }}__icon-list">
+                    {{- widgetGlobal('NavigationWidgetPlugin', 'PAYMENT_PROVIDERS', 'navigation-providers-payment') -}}
+                </div>
+
+                <div class="{{ config.name }}__icon-list">
+                    {{- widgetGlobal('NavigationWidgetPlugin', 'SHIPMENT_PROVIDERS', 'navigation-providers-shipment') -}}
                 </div>
             </div>
 
-            <div class="col footer-icons">
-                {#<h5>{{ 'global.payment_providers' | trans }}</h5>#}
-                {{ widgetGlobal('NavigationWidgetPlugin', 'PAYMENT_PROVIDERS', 'navigation-providers-payment') }}
-                {#<h5>{{ 'global.shipment_providers' | trans }}</h5>#}
-                {{ widgetGlobal('NavigationWidgetPlugin', 'SHIPMENT_PROVIDERS', 'navigation-providers-shipment') }}
-            </div>
-
-            <div class="col footer-currency-lang">
-                <div class="col">
-                    {{ widgetGlobal(
+            <div class="col {{ config.name }}__currency-lang">
+                <div class="{{ config.name }}__select">
+                    {{- widgetGlobal(
                         'LanguageSwitcherWidgetPlugin',
                         app.request.pathInfo,
                         app.request.queryString,
                         app.request.requestUri
-                    ) }}
+                    ) -}}
                 </div>
-                <div class="col">{{ widgetGlobal('CurrencyWidgetPlugin') }}</div>
+
+                <div class="{{ config.name }}__select">
+                    {{- widgetGlobal('CurrencyWidgetPlugin') -}}
+                </div>
             </div>
 
         </div>
-
-        {% include molecule('toggler-accordeon') with {
-            attributes: {
-                trigger: '.js-toggle-nav',
-                'class-to-toggle': 'hidden-nav'
-            }
-        } only %}
 
     </div>
 {% endblock %}

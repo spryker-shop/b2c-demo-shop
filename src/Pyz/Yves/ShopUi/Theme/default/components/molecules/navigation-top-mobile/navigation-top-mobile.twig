@@ -33,14 +33,12 @@
             <form action="{{data.searchUrl}}">
                 <div class="grid grid--middle grid--center">
                     <div type="submit" class="search-form__submit js-search-mob-show-icon">
-
                         {% include atom('icon') with {
                             class: 'icon--bigger',
                             data: {
                                 name: 'search'
                             }
                         } only %}
-
                     </div>
                 </div>
             </form>
@@ -62,15 +60,7 @@
         <li class="navigation-top-mobile__item col">
             <div class="grid grid--middle grid--center">
                 <a href="{{ url('customer/overview') }}" class="icon icon--bigger">
-
-                    {#{% include atom('icon') with {#}
-                        {#class: 'icon--bigger',#}
-                        {#data: {#}
-                            {#name: 'user-account'#}
-                        {#}#}
-                    {#} only %}#}
-                    <img src="/assets/images/menu-profile-default.png" alt=""  style="vertical-align: text-top">
-
+                    <img src="/assets/images/menu-profile-default.png" alt="{{ 'customer.account.profile_data' | trans }}"  style="vertical-align: text-top">
                 </a>
             </div>
         </li>
@@ -80,9 +70,8 @@
                 <a href="{{ url('cart') }}" class="cart-link">
                     {% if cartQuantity > 0 %}
                         <span class="cart-link__quantity">
-                        {{cartQuantity}}
-                    </span>
-                    {% else %}
+                            {{cartQuantity}}
+                        </span>
                     {% endif %}
 
                     {% include atom('icon') with {
@@ -91,11 +80,8 @@
                             name: 'cart'
                         }
                     } only %}
-
                 </a>
             </div>
         </li>
-
     </ul>
-
 {% endblock %}

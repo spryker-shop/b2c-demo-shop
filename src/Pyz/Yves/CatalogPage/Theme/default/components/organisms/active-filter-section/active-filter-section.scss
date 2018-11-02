@@ -1,24 +1,24 @@
 @mixin catalog-page-active-filter-section($name: '.active-filter-section') {
     #{$name} {
-        margin: 0 -16px 50px -24px;
+        margin: 0 rem(-16) rem(50) rem(-24);
         font: 0/0 $setting-font-family;
-        padding: 0 16px 10px;
+        padding: 0 rem(16) rem(10);
 
         .active-filter__item,
         &__item {
             display: inline-block;
-            font: 500 11px $setting-font-family;
-            letter-spacing: 1.2px;
+            font: 500 rem(11) $setting-font-family;
+            letter-spacing: rem(1.2);
             text-transform: uppercase;
-            padding: 9px 33px 10px 11px;
-            margin: 0 0 0 8px;
-            border: solid 1px $setting-color-input-border;
-            border-radius: 2px;
-            color: #ababab;
+            padding: rem(9) rem(33) rem(10) rem(11);
+            margin: 0 0 0 rem(8);
+            border: solid rem(1) $setting-color-input-border;
+            border-radius: rem(2);
+            color: $setting-color-silver-chalice;
             position: relative;
 
             &:hover {
-                color: #ababab;
+                color: $setting-color-silver-chalice;
                 text-decoration: none;
                 background-color: rgba(17, 17, 17, 0.03);
             }
@@ -36,17 +36,17 @@
 
             .ico {
                 font-weight: bold;
-                font-size: 20px;
+                font-size: rem(20);
                 position: absolute;
-                right: 11px;
-                top: 5px;
+                right: rem(11);
+                top: rem(5);
             }
         }
 
         @include helper-breakpoint-media-max($lg-max) {
             white-space: nowrap;
             overflow-x: auto;
-            margin-bottom: 38px;
+            margin-bottom: rem(38);
         }
 
         @content;

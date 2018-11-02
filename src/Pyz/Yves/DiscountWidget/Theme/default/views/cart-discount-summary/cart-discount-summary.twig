@@ -28,12 +28,6 @@
                                 {{ voucherDiscount.displayName }}
                                 <br/>
                                 <a class="text-small" href="{{ url('discount/voucher/remove', {'code': voucherDiscount.voucherCode}) }}">
-                                    {#{% include atom('icon') with {#}
-                                        {#modifiers: ['smaller'],#}
-                                        {#data: {#}
-                                            {#name: 'times'#}
-                                        {#}#}
-                                    {#} only %}#}
                                     {{ 'cart.voucher.remove' | trans }}
                                 </a>
                             </span>
@@ -47,7 +41,6 @@
 
         {% if data.ruleDiscounts is not empty %}
             <li>
-                {#<strong>{{ 'cart.discounts' | trans }}</strong>#}
                 <ul>
                     {% for ruleDiscount in data.ruleDiscounts %}
                         <li class="grid grid--justify">

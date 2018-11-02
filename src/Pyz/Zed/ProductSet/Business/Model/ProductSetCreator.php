@@ -53,9 +53,8 @@ class ProductSetCreator extends SprykerProductSetCreator
         ProductSetImageSaverInterface $productSetImageSaver,
         EventFacadeInterface $eventFacade
     ) {
-        $this->productSetTouch = $productSetTouch;
-        $this->productSetDataCreator = $productSetDataCreator;
-        $this->productSetImageSaver = $productSetImageSaver;
+        parent::__construct($productSetDataCreator, $productSetTouch, $productSetImageSaver);
+
         $this->eventFacade = $eventFacade;
     }
 

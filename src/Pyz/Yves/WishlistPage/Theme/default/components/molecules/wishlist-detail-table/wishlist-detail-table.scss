@@ -1,34 +1,34 @@
 @mixin wishlist-page-wishlist-table () {
     .wishlist-table {
         .menu--inline > .menu__item:last-child {
-            margin: 0 .5rem;
+            margin: 0 rem(8);
         }
         .thumbnail {
-            margin: .5rem 0;
-          &--small {
-            @include helper-breakpoint-media-max($sm-max){
-              height: 2rem;
+            margin: rem(8) 0;
+            &--small {
+                @include helper-breakpoint-media-max($sm-max) {
+                    height: rem(32);
+                }
             }
-          }
         }
         .price__amount {
-            font: 500 16px $setting-font-family-additional;
+            font: 500 rem(16) $setting-font-family-additional;
             &--original {
                 color: $setting-color-dark;
-                font-size: 14px;
+                font-size: rem(14);
             }
         }
         .product-cell {
-          .thumbnail {
-            display: inline-block;
-            margin-right: 10px;
-          }
-          ul {
-            display: inline-block;
-          }
+            .thumbnail {
+                display: inline-block;
+                margin-right: rem(10);
+            }
+            ul {
+                display: inline-block;
+            }
         }
         .availability-cell {
-          text-align: center;
+            text-align: center;
         }
     }
 }

@@ -5,23 +5,21 @@
         position: relative;
         max-width: 100%;
         background-color: $setting-color-white;
-        border: 1px solid $setting-color-input-border;
-        border-radius: 2px;
+        border: rem(1) solid $setting-color-input-border;
+        border-radius: rem(2);
 
         &__select {
             display: block;
             max-width: 100%;
             background-color: $setting-color-transparent;
-            border: .25rem solid $setting-color-transparent;
-            border-right-width: 1.5rem;
-            padding: 4px 5px;
+            border: rem(4) solid $setting-color-transparent;
+            border-right-width: rem(24);
+            padding: rem(4) rem(5);
             z-index: 2;
-            font: normal 16px $setting-font-family;
+            font: normal rem(16) $setting-font-family;
             color: $setting-color-dark;
             appearance: none;
-            -moz-appearance: none;
-            -webkit-appearance: none;
-            border-radius: 2px;
+            border-radius: rem(2);
 
             &::-ms-expand {
                 display: none;
@@ -35,14 +33,13 @@
 
         &__caret {
             position: absolute;
-            top: 0;
-            bottom: 0;
-            right: .25rem;
-            margin: auto;
+            top: 50%;
+            transform: translateY(-50%);
+            right: rem(4);
             color: $setting-color-darker;
             z-index: 1;
-            width: 8px;
-            height: 5px;
+            width: rem(8);
+            height: rem(5);
             pointer-events: none;
         }
 

@@ -27,14 +27,14 @@ $shop-ui-simple-carousel-icon-size: $shop-ui-icon-size-big;
 
         &__dot {
             display: inline-block;
-            padding: 0.25rem;
+            padding: rem(4);
 
             &::before {
                 @include helper-effect-transition(background-color, 150ms);
                 content: '';
                 display: block;
-                width: 0.5rem;
-                height: 0.5rem;
+                width: rem(8);
+                height: rem(8);
                 background-color: $setting-color-light;
                 border-radius: 100%;
             }
@@ -52,7 +52,7 @@ $shop-ui-simple-carousel-icon-size: $shop-ui-icon-size-big;
             align-items: center;
             position: absolute;
             top: 0;
-            bottom: 158px;
+            bottom: rem(158);
             z-index: 2;
             pointer-events: none;
 
@@ -76,7 +76,7 @@ $shop-ui-simple-carousel-icon-size: $shop-ui-icon-size-big;
         }
 
         &--inset &__container {
-            padding-left:0;
+            padding-left: 0;
             padding-right: 0;
         }
 
@@ -85,7 +85,7 @@ $shop-ui-simple-carousel-icon-size: $shop-ui-icon-size-big;
         }
 
         &--inset &__arrow {
-            padding: 0.5rem;
+            padding: rem(8);
             background-color: rgba($setting-color-lightest, 0.75);
         }
 

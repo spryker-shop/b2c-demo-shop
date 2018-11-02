@@ -2,19 +2,16 @@
     #{$name} {
         @include helper-font-size(small);
         display: inline-block;
-        padding: 0.1rem 0.5rem 0;
+        padding: rem(1.6) rem(8) 0;
         color: $setting-color-light;
-        border: solid 1px $setting-color-light;
-        border-radius: 4px;
+        border: solid rem(1) $setting-color-light;
+        border-radius: rem(4);
 
         @content;
     }
 }
 
 @mixin shop-ui-badge-action($action, $setting-color-action) {
-    &--#{$action} {
-    }
-
     @content;
 }
 

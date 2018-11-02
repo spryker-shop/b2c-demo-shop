@@ -1,9 +1,9 @@
 @mixin shop-ui-inspirational-block ($name: '.inspire-block') {
     #{$name} {
-        min-height: 300px;
-        margin: 130px 0 180px 0;
+        min-height: rem(300);
+        margin: rem(130) 0 rem(180);
         @include helper-breakpoint-media-max($sm-max) {
-            margin: 80px 0 100px 0;
+            margin: rem(80) 0 rem(100);
         }
         &--left {
             .col:first-of-type {
@@ -19,76 +19,76 @@
         }
         &__content {
             &--right {
-                padding-left: 120px;
+                padding-left: rem(120);
             }
             &--left {
-                padding-right: 120px;
+                padding-right: rem(120);
             }
             @include helper-breakpoint-media-max($lg-max) {
-                padding: 0 20px;
+                padding: 0 rem(20);
             }
             @include helper-breakpoint-media-max($md-max) {
-                margin-top: 60px;
+                margin-top: rem(60);
             }
         }
         &__title {
-            font: bold 21px $setting-font-family-additional;
+            font: bold rem(21) $setting-font-family-additional;
             line-height: 1.52;
-            letter-spacing: 3.8px;
+            letter-spacing: rem(3.8);
             color: $setting-color-darker;
-            margin-bottom: 15px;
+            margin-bottom: rem(15);
             text-transform: uppercase;
             @include helper-breakpoint-media-max($md-max) {
                 text-align: center;
             }
             @include helper-breakpoint-media-max($sm-max) {
                 line-height: 1.53;
-                letter-spacing: 3px;
-                font-size: 17px;
+                letter-spacing: rem(3);
+                font-size: rem(17);
             }
         }
         &__pre-title {
-            font: normal 10px $setting-font-family-additional;
+            font: normal rem(10) $setting-font-family-additional;
             line-height: normal;
-            letter-spacing: 3.2px;
+            letter-spacing: rem(3.2);
             color: $setting-color-darker;
             text-transform: uppercase;
-            margin-bottom: 17px;
+            margin-bottom: rem(17);
             @include helper-breakpoint-media-max($md-max) {
                 text-align: center;
             }
             @include helper-breakpoint-media-max($sm-max) {
-                font-size: 9px;
+                font-size: rem(9);
                 line-height: normal;
-                letter-spacing: 2.9px;
+                letter-spacing: rem(2.9);
             }
         }
         &__text {
-            font: normal 17px $setting-font-family;
+            font: normal rem(17) $setting-font-family;
             line-height: 1.47;
-            letter-spacing: 1px;
+            letter-spacing: rem(1);
             color: $setting-color-light-1;
-            margin-bottom: 27px;
+            margin-bottom: rem(27);
             @include helper-breakpoint-media-max($md-max) {
                 text-align: center;
             }
             @include helper-breakpoint-media-max($sm-max) {
                 line-height: 1.62;
-                letter-spacing: 0.8px;
-                font-size: 13px;
+                letter-spacing: rem(0.8);
+                font-size: rem(13);
             }
         }
 
         &__link {
             display: block;
-            font: bold 11px $setting-font-family-additional;
-            letter-spacing: 2.5px;
-            line-height: 50px;
+            font: bold rem(11) $setting-font-family-additional;
+            letter-spacing: rem(2.5);
+            line-height: rem(50);
             color: $setting-color-darker;
-            border: 1px solid $setting-color-text;
-            height: 52px;
-            width: 160px;
-            border-radius: 2px;
+            border: rem(1) solid $setting-color-text;
+            height: rem(52);
+            width: rem(160);
+            border-radius: rem(2);
             text-transform: uppercase;
             text-align: center;
             @include helper-link-hover-reset;
@@ -100,11 +100,11 @@
                 margin: 0 auto;
             }
             @include helper-breakpoint-media-max($sm-max) {
-                width: 128px;
-                height: 46px;
-                letter-spacing: 2.1px;
-                line-height: 44px;
-                font-size: 10px;
+                width: rem(128);
+                height: rem(46);
+                letter-spacing: rem(2.1);
+                line-height: rem(44);
+                font-size: rem(10);
             }
         }
         &__images {
@@ -118,60 +118,59 @@
             }
         }
         &__image {
-            border-radius: 3px;
+            border-radius: rem(3);
             overflow: hidden;
             img {
-              width: 100%;
-              height: 100%;
+                width: 100%;
+                height: 100%;
             }
         }
         &__image-1 {
-            width: 300px;
-            height: 550px;
+            width: rem(300);
+            height: rem(550);
             @include helper-breakpoint-media-max($lg-max) {
-                width: 225px;
-                height: 412px;
+                width: rem(225);
+                height: rem(412);
             }
             @include helper-breakpoint-media-max($sm-max) {
-                width: 158px;
-                height: 257px;
+                width: rem(158);
+                height: rem(257);
             }
         }
         &__image-2 {
-            width: 420px;
-            height: 400px;
+            width: rem(420);
+            height: rem(400);
             position: absolute;
             top: 50%;
             transform: translate(0, -50%);
-            box-shadow: 0 70px 80px -40px rgba(0, 0, 0, 0.18);
+            box-shadow: 0 rem(70) rem(80) rem(-40) rgba(0, 0, 0, 0.18);
 
             @include helper-breakpoint-media-max($lg-max) {
-                width: 315px;
-                height: 300px;
+                width: rem(315);
+                height: rem(300);
             }
             @include helper-breakpoint-media-max($sm-max) {
-                width: 210px;
-                height: 200px;
+                width: rem(210);
+                height: rem(200);
             }
             &--left {
-                left: 150px;
+                left: rem(150);
                 @include helper-breakpoint-media-max($lg-max) {
-                    left: 100px;
+                    left: rem(100);
                 }
                 @include helper-breakpoint-media-max($sm-max) {
-                    left: 75px;
+                    left: rem(75);
                 }
             }
             &--right {
-                right: 150px;
+                right: rem(150);
                 @include helper-breakpoint-media-max($lg-max) {
-                    right: 100px;
+                    right: rem(100);
                 }
                 @include helper-breakpoint-media-max($sm-max) {
-                    right: 75px;
+                    right: rem(75);
                 }
             }
-
         }
     }
 }

@@ -1,7 +1,7 @@
 @mixin shop-ui-cart-item($name: '.cart-item') {
     #{$name} {
         &__title {
-            font: 500 17px $setting-font-family-additional;
+            font: 500 rem(17) $setting-font-family-additional;
             line-height: 1.29;
             &:hover {
                 cursor: pointer;
@@ -10,17 +10,14 @@
             }
         }
         &__content {
-            padding: 0 0 5px 24px;
-            width: calc(100% - 120px);
+            padding: 0 0 rem(5) rem(24);
+            width: calc(100% - #{rem(120)});
         }
-        &__options {
-
-        }
-        &__image{
-            width: 120px;
+        &__image {
+            width: rem(120);
         }
         &__price {
-            font: 500 17px $setting-font-family-additional;
+            font: 500 rem(17) $setting-font-family-additional;
             line-height: 1.29;
             text-align: right;
             @include helper-breakpoint-media-max($sm-max) {
@@ -28,9 +25,9 @@
             }
         }
         &__remove {
-            font: 300 13px $setting-font-family-additional;
+            font: 300 rem(13) $setting-font-family-additional;
             line-height: 1.31;
-            opacity: .4;
+            opacity: 0.4;
             text-transform: capitalize;
             &:hover {
                 text-decoration: none;

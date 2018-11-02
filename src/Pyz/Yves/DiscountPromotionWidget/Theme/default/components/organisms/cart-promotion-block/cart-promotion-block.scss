@@ -1,11 +1,12 @@
-@mixin shop-ui-promotion-block ($name: '.promotion-block'){
+@mixin shop-ui-promotion-block ($name: '.promotion-block') {
     #{$name} {
-        margin-bottom: 36px;
+        margin-bottom: rem(36);
         &__title {
-            font: 500 23px $setting-font-family-additional;
+            font: 500 rem(23) $setting-font-family-additional;
             line-height: 1.57;
-            letter-spacing: -0.3px;
+            letter-spacing: rem(-0.3);
         }
     }
 }
+
 @include shop-ui-promotion-block();

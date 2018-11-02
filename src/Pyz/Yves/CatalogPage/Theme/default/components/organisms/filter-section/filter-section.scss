@@ -1,155 +1,100 @@
 @mixin catalog-page-filter-section($name: '.filter-section') {
     #{$name} {
-        padding-top: 79px;
+        padding-top: rem(79);
+
+        @include helper-breakpoint-media-max($lg-max) {
+            padding: rem(120) rem(24) rem(40);
+        }
 
         &__item {
-            border-bottom: dotted 1px $setting-color-lightest;
+            border-bottom: dotted rem(1) $setting-color-lightest;
+
             &:first-child {
-                border-top: dotted 1px $setting-color-lightest;
+                border-top: dotted rem(1) $setting-color-lightest;
+
                 @include helper-breakpoint-media-min($xl-min) {
                     #{$name}__title {
-                        &:before,
-                        &:after {
+                        &::before,
+                        &::after {
                             display: none !important;
                         }
                     }
                 }
             }
-            .checkbox,
-            .radio {
-                margin-bottom: 0;
-            }
-            .checkbox__box,
-            .radio__box {
-                margin-top: 0;
-            }
-            .checkbox__check {
-                top: 3px !important;
-            }
         }
 
         &__title {
             text-transform: uppercase;
-            font: bold 13px $setting-font-family-additional;
-            letter-spacing: 2.6px;
-            padding: 15px 20px 15px 0;
+            font: bold rem(13) $setting-font-family-additional;
+            letter-spacing: rem(2.6);
+            padding: rem(15) rem(20) rem(15) 0;
             position: relative;
+
             &[data-toggle-target] {
                 cursor: pointer;
+
                 .no-touch &:hover {
                     opacity: 0.5;
                 }
-                &:before {
-                    content: "";
-                    width: 12px;
-                    height: 2px;
+
+                &::before {
+                    content: '';
+                    width: rem(12);
+                    height: rem(2);
                     background: $setting-color-dark;
                     position: absolute;
                     top: 50%;
                     right: 0;
-                    margin-top: -1px;
+                    margin-top: rem(-1);
                 }
-                &:after {
-                    content: "";
-                    width: 2px;
-                    height: 12px;
+
+                &::after {
+                    content: '';
+                    width: rem(2);
+                    height: rem(12);
                     background: $setting-color-dark;
                     position: absolute;
                     top: 50%;
-                    right: 5px;
-                    margin-top: -6px;
+                    right: rem(5);
+                    margin-top: rem(-6);
                 }
-                &.active:after {
-                    display: none;
-                }
-            }
-        }
 
-        .filter-category {
-            margin-bottom: 25px;
-            .filter-category {
-                margin-bottom: 0;
-            }
-            .menu__item--has-children-list .menu__item {
-                margin: 0 0 0 1rem;
-            }
-            @include helper-breakpoint-media-min($xl-min) {
-                display: block;
-            }
-        }
-
-        .menu__item {
-            margin: 0;
-            font: 400 15px $setting-font-family;
-            &.active > button {
-                color: #ff4859;
-            }
-            [disabled] {
-                color: $setting-color-lighter;
-            }
-        }
-
-        .link {
-            font: 400 15px $setting-font-family;
-            margin-bottom: 14px;
-            color: $setting-color-darkest;
-            &:not([disabled]):hover {
-                text-decoration: none;
-                color: $setting-color-alt
-            }
-        }
-
-        .filter-enumeration {
-            padding-bottom: 10px;
-            .menu__item {
-                margin-bottom: 16px;
-                .checkbox:hover,
-                .radio:hover {
-                    color: $setting-color-main;
+                &.active {
+                    &::after {
+                        display: none;
+                    }
                 }
             }
         }
 
-        .filter-price-range {
-            padding-bottom: 20px;
-            input {
-                width: 87px;
-            }
-        }
+        &__actions {
+            margin-top: rem(15);
 
-        .filter-rating {
-            padding-bottom: 20px;
-        }
-
-        .filter-actions {
-            margin-top: 15px;
-            .button {
-                font: 400 13px/16px $setting-font-family-additional;
-                padding: 12px 20px;
-                min-width: 92px;
-                width: 100%;
-            }
-        }
-
-        .close-popup {
-            @include helper-breakpoint-media-min($xl-min) {
-                display: none;
-            }
-        }
-
-        @include helper-breakpoint-media-max($lg-max) {
-            padding: 120px 24px 40px;
-            .filter-actions {
+            @include helper-breakpoint-media-max($lg-max) {
                 position: absolute;
                 top: 0;
                 left: 0;
                 width: 100%;
-                background: #f7f7f7;
-                padding: 20px 24px;
+                background: $setting-color-wild-sand;
+                padding: rem(20) rem(24);
                 margin: 0;
-                .button {
-                    width: auto;
-                }
+            }
+        }
+
+        &__button {
+            font: 400 rem(13)/rem(16) $setting-font-family-additional;
+            padding: rem(12) rem(20);
+            min-width: rem(92);
+            width: 100%;
+
+            @include helper-breakpoint-media-max($lg-max) {
+                width: auto;
+            }
+        }
+
+        &__close-popup {
+            @include helper-breakpoint-media-min($xl-min) {
+                display: none;
             }
         }
 
@@ -158,4 +103,3 @@
 }
 
 @include catalog-page-filter-section();
-

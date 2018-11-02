@@ -1,0 +1,219 @@
+@mixin product-detail-page-product-carousel($name: '.product-carousel') {
+    #{$name} {
+
+        position: relative;
+
+        .simple-carousel__container {
+            padding: 0;
+        }
+
+        .product-image {
+            position: relative;
+            padding: rem(8) 0;
+        }
+
+        .pdp-carousel__container {
+            height: rem(650);
+            position: relative;
+            background: rgba(0, 0, 0, 0.05);
+            & > .pdp-img:not(:first-child) {
+                opacity: 0;
+            }
+            .pdp-img {
+                position: absolute;
+                left: 0;
+                top: 0;
+                padding: rem(100) rem(70);
+                width: 100%;
+                height: rem(650);
+                display: flex !important;
+                align-items: center;
+                justify-content: center;
+                background: $setting-color-white;
+                &::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background: rgba(0, 0, 0, 0.05);
+                    z-index: 350;
+                }
+                img {
+                    max-width: 100%;
+                    max-height: rem(450);
+                }
+            }
+            .pdp-img-color-active {
+                z-index: 100;
+                opacity: 1 !important;
+            }
+            @include helper-breakpoint-media-max($xl-max) {
+                .pdp-img {
+                    padding: rem(80) rem(50);
+                    height: rem(610);
+                }
+            }
+            @include helper-breakpoint-media-max($lg-max) {
+                .pdp-img {
+                    padding: rem(15) rem(30);
+                    height: rem(480);
+                }
+            }
+            @include helper-breakpoint-media-max($md-max) {
+                &.js-product-slider {
+                    display: none;
+                }
+                height: rem(280);
+                .pdp-img {
+                    width: 100%;
+                    height: rem(280);
+                    padding: rem(15) rem(16);
+                    img {
+                        max-height: rem(250);
+                    }
+                }
+            }
+        }
+
+        .pdp-carousel__thumbnail {
+            position: absolute;
+            top: 50%;
+            left: rem(32);
+            z-index: 400;
+            transform: translateY(-50%);
+            width: rem(36);
+            max-height: rem(315);
+            overflow: hidden;
+            .thumb-prev,
+            .thumb-next {
+                text-align: center;
+                padding: 0 0 rem(10);
+                cursor: pointer;
+                display: block !important;
+                svg {
+                    display: block;
+                    width: 100%;
+                    height: rem(6);
+                    color: $setting-color-dark;
+                }
+                &[aria-disabled='true'] {
+                    cursor: default;
+                    pointer-events: none;
+                    svg {
+                        color: $setting-color-lighter;
+                    }
+                }
+            }
+            .thumb-prev {
+                padding: rem(10) 0 0;
+                svg {
+                    transform: rotate(180deg);
+                }
+            }
+            .slick-slide {
+                border: none;
+                height: rem(52);
+            }
+            .pdp-img {
+                display: flex !important;
+                align-items: center;
+                justify-content: center;
+                width: rem(36);
+                height: rem(36);
+                padding: rem(1);
+                background-color: $setting-color-white;
+                border: solid rem(1) #d9d9d7;
+                position: relative;
+                margin: rem(8) 0;
+                cursor: pointer;
+                img {
+                    opacity: 0.25;
+                }
+                &::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background: rgba(0, 0, 0, 0.05);
+                    z-index: 350;
+                }
+            }
+            .slick-current .pdp-img {
+                padding: 0;
+                border: solid rem(2) #fff;
+                img {
+                    opacity: 1;
+                }
+            }
+
+            @include helper-breakpoint-media-max($xl-max) {
+                left: rem(10);
+            }
+
+            @include helper-breakpoint-media-max($md-max) {
+                position: relative;
+                top: 0;
+                left: 0;
+                transform: translateY(0);
+                width: 100%;
+                max-height: none;
+                overflow: visible;
+                &:not(.slick-initialized) {
+                    display: flex !important;
+                }
+                .slick-slide {
+                    border: none;
+                    height: auto;
+                }
+                .pdp-img {
+                    width: 100%;
+                    height: rem(280);
+                    padding: rem(15) rem(16) !important;
+                    background-color: $setting-color-white;
+                    border: none !important;
+                    position: relative;
+                    margin: 0;
+                    cursor: default;
+                    img {
+                        max-height: rem(250);
+                    }
+                }
+                .slick-dots {
+                    position: absolute;
+                    bottom: rem(-32);
+                    width: 100%;
+                    display: flex;
+                    justify-content: center;
+                    li {
+                        margin: 0 rem(4);
+                        font: 0/0 $setting-font-family;
+                        border: solid rem(1) transparent;
+                        padding: rem(1);
+                        border-radius: 100%;
+                    }
+                    button {
+                        width: rem(4);
+                        height: rem(4);
+                        font: 0/0 $setting-font-family;
+                        border-radius: 100%;
+                        background: $setting-color-lightest;
+                    }
+                    .slick-active {
+                        border-color: $setting-color-radical-red;
+                        button {
+                            background: transparent;
+                        }
+                    }
+                }
+            }
+        }
+
+        @content;
+    }
+}
+
+@include product-detail-page-product-carousel();

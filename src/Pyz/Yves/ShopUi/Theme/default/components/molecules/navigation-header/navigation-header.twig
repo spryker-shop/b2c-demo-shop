@@ -15,11 +15,9 @@
 {% set menuChildrenClass = data.menuDropdown ? 'menu__item--has-children-dropdown' : 'menu__item--has-children-list' %}
 
 {% block body %}
-    <ul class="menu {{menuClass}} menu--top-level top-navigation-desktop grid grid--center grid--no-wrap">
+    <ul class="menu {{menuClass}} top-navigation-desktop grid grid--center grid--no-wrap">
         {% for node in data.nodes %}
-
             {% set hasChildren = node.children | length > 0 %}
-
             {% set flyoutClass = 'flyout-fullscreen' %}
             {% set flyoutClassBrand = 'flyout-fullscreen brand-dropdown' %}
 
@@ -31,7 +29,6 @@
                     }
                 } only %}
             {% else %}
-
                 {% include molecule('navigation-multilevel-node') with {
                     class: 'menu__item ' ~ (hasChildren ? menuChildrenClass : 'childless') ~ ' ' ~  node.cssClass ,
                     data: {
