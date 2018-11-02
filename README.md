@@ -1,4 +1,4 @@
-# Spryker Shop Suite
+# Spryker B2C Demo Shop
 [![Build Status](https://api.travis-ci.org/spryker-shop/suite-b2b.svg?branch=master)](https://travis-ci.org/spryker-shop/suite)
 [![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.1-8892BF.svg)](https://php.net/)
 
