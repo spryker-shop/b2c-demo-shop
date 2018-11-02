@@ -28,8 +28,8 @@
         } only %}
     {% endif %}
     <div class="{{config.name}}__container {{config.jsName}}">
-        {% for i, image in data.images %}
-            <div class="{{config.name}}__item {{config.jsName}}__item {% if i == 0 %}{{config.name}}__item--active{% endif %}">
+        {% for image in data.images %}
+            <div class="{{config.name}}__item {{config.jsName}}__item {% if loop.first %}{{config.name}}__item--active{% endif %}">
                 {% if image.externalUrlLarge is not empty %}
                     <img class="{{config.name}}__image" src="{{ image.externalUrlLarge }}" alt="{{ 'page.product.details.slider_image' | trans }}">
                 {% endif %}

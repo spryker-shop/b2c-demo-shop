@@ -31,14 +31,14 @@ export default class ImageGallery extends Component {
     }
 
     protected onThumbnailHover(event: Event): void {
-        let thumbnail = <HTMLElement> event.target;
+        const thumbnail = <HTMLElement> event.target;
         if(thumbnail.classList.contains(`${this.jsName}-thumbnail__item`)) {
            this.thumbnailChange(thumbnail);
         }
     }
 
     protected thumbnailChange(thumbnail: HTMLElement): void {
-        let index = Number(thumbnail.dataset.thumbnailIndex);
+        const index = Number(thumbnail.dataset.thumbnailIndex);
         if(!thumbnail.classList.contains(this.thumbnailActiveClass)) {
             this.thumbnailItems.forEach((thumbnailItem) => thumbnailItem.classList.remove(this.thumbnailActiveClass));
             thumbnail.classList.add(this.thumbnailActiveClass);
