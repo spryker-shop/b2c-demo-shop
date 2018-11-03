@@ -36,7 +36,8 @@
                 {% include molecule('cart-item-variant-selector', 'CartPage') with {
                     data: {
                         cartItem: data.cartItem,
-                        cartItemAttributes: data.attributes
+                        cartItemAttributes: data.attributes,
+                        canEditCart: canEditCart
                     }
                 } only %}
             {% endif %}
