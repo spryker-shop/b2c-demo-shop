@@ -15,6 +15,7 @@ use Spryker\Shared\Mail\MailConstants;
 use Spryker\Shared\Newsletter\NewsletterConstants;
 use Spryker\Shared\ProductManagement\ProductManagementConstants;
 use Spryker\Shared\Propel\PropelConstants;
+use Spryker\Shared\Quote\QuoteConstants;
 use Spryker\Shared\RabbitMq\RabbitMqEnv;
 use Spryker\Shared\Search\SearchConstants;
 use Spryker\Shared\Session\SessionConstants;
@@ -162,3 +163,8 @@ $config[ApplicationConstants::YVES_TRUSTED_HOSTS] = [
     $config[ApplicationConstants::HOST_ZED],
     'localhost',
 ];
+
+// ---------- Guest cart
+$config[QuoteConstants::GUEST_QUOTE_LIFETIME] = 'P01M';
+
+$config[MailConstants::SMTP_PORT] = 1025;
