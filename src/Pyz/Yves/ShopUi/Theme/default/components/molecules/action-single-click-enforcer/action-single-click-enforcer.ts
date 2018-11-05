@@ -30,7 +30,9 @@ export default class ActionSingleClickEnforcer extends Component {
 
         if (isSubmit) {
             const form = <HTMLFormElement>targetElement.closest('form');
-            form.submit();
+            if (form) {
+                form.submit();
+            }
         }
 
         targetElement.setAttribute('disabled', 'disabled');

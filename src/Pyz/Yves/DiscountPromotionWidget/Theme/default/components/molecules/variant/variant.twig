@@ -14,7 +14,7 @@
 } %}
 
 {% block body %}
-    <strong class="variant__title">{{data.label}}:</strong>
+    <strong class="{{ config.name }}__label">{{data.label}}:</strong>
     {% if data.selectedValue is null %}
         {% if data.isAvailable %}
             {% embed atom('select') with {
