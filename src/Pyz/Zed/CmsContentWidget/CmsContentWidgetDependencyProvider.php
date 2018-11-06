@@ -28,7 +28,6 @@ class CmsContentWidgetDependencyProvider extends SprykerCmsContentWidgetDependen
     protected function getCmsContentWidgetParameterMapperPlugins(Container $container)
     {
         return [
-            CmsChartContentWidgetConfigurationProvider::FUNCTION_NAME => new CmsChartContentWidgetConfigurationProvider(),
             CmsProductContentWidgetConfigurationProvider::FUNCTION_NAME => new CmsProductSkuMapperPlugin(),
             CmsProductSetContentWidgetConfigurationProvider::FUNCTION_NAME => new CmsProductSetKeyMapperPlugin(),
             CmsProductGroupContentWidgetConfigurationProvider::FUNCTION_NAME => new CmsProductSkuMapperPlugin(),
