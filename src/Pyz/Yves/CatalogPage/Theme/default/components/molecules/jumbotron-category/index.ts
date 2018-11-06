@@ -1,1 +1,0 @@
-import './jumbotron-category.scss';

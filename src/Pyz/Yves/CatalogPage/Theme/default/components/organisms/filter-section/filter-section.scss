@@ -16,7 +16,7 @@
                     #{$name}__title {
                         &::before,
                         &::after {
-                            display: none !important;
+                            display: none;
                         }
                     }
                 }
@@ -37,24 +37,24 @@
                     opacity: 0.5;
                 }
 
-                &::before {
+                &::before,
+                &::after {
                     content: '';
-                    width: rem(12);
-                    height: rem(2);
                     background: $setting-color-dark;
                     position: absolute;
                     top: 50%;
+                }
+
+                &::before {
+                    width: rem(12);
+                    height: rem(2);
                     right: 0;
                     margin-top: rem(-1);
                 }
 
                 &::after {
-                    content: '';
                     width: rem(2);
                     height: rem(12);
-                    background: $setting-color-dark;
-                    position: absolute;
-                    top: 50%;
                     right: rem(5);
                     margin-top: rem(-6);
                 }

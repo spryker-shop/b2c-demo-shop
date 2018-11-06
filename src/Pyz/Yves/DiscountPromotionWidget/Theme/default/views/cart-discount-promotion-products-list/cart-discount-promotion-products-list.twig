@@ -1,18 +1,13 @@
 {% extends template('widget') %}
 
-{% define config = {
-    name: 'promotion-block'
-} %}
-
 {% define data = {
     promotionProducts: _widget.promotionProducts
 } %}
 
 {% block body %}
     {% if data.promotionProducts is not empty %}
-        <div class="{{ config.name }}">
-            <h4 class="{{ config.name }}__title">{{ 'cart.promotion.items' | trans }}</h4>
-        </div>
+        <h4 class="promotion-header">{{ 'cart.promotion.items' | trans }}</h4>
+
         {% for product in data.promotionProducts %}
             {% embed molecule('promotion-item', 'CartPage') with {
                 data: {
@@ -49,28 +44,33 @@
                             }
                         } only %}
                     </div>
+
                 {% endblock %}
 
                 {% block actions %}
                     {% set disabled = embed.idProductConcrete is empty %}
 
-                    <form method="POST" action="/cart/add/{{ embed.sku }}" class="grid grid--bottom grid--justify">
-                        <div class="col">
-                            {% include molecule('cart-item-quantity-input', 'CartPage') with {
-                                data: {
-                                    maxQuantity: embed.promotionDiscount.maxQuantity,
-                                    hasUpdateButton: false
-                                }
-                            } only %}
-                        </div>
+                    <form method="POST" action="/cart/add/{{embed.sku}}" class="grid grid--bottom grid--justify">
+
+                        {% include molecule('product-quantity-input') with {
+                            data: {
+                                maxQuantity: embed.promotionDiscount.maxQuantity,
+                                hasUpdateButton: false
+                            }
+                        } only %}
 
                         <div class="col">
                             <input type="hidden" value="{{ embed.sku }}" name="groupKey">
                             <input type="hidden" value="{{ embed.promotionDiscount.id }}" name="idDiscountPromotion">
 
-                            <button type="submit" class="button button--white {{ config.name }}__button" {{ disabled ? 'disabled' : '' }} onclick="this.form.submit(); this.disabled='disabled'; return false;">
+                            <button type="submit" class="button button--white {{ config.name }}__button {{ config.jsName ~ '__button-' ~ embed.sku }}" {{ disabled ? 'disabled' : '' }}>
                                 {{ 'page.detail.add-to-cart' | trans }}
                             </button>
+                            {% include molecule('action-single-click-enforcer') with {
+                                attributes: {
+                                    'target-selector': '.' ~ config.jsName ~ '__button-' ~ embed.sku
+                                }
+                            } only %}
                         </div>
                     </form>
                 {% endblock %}

@@ -43,15 +43,23 @@
                                 options: options
                             },
                             attributes: {
-                                name: 'preselectedAttributes[' ~ attributeName ~ ']',
-                                'onchange': 'this.form.submit();'
+                                name: 'preselectedAttributes[' ~ attributeName ~ ']'
                             },
-                            modifiers: ['borderless']
+                            embed: {
+                                jsClass: config.jsName ~ '__select-trigger'
+                            }
                         } only %}
-                            {% block selectClass %}{{ config.name ~ '__variant' }}{% endblock %}
+                            {% block selectClass -%}
+                                {{ parent() }} {{ embed.jsClass }}
+                            {%- endblock %}
                         {% endembed %}
                     </label>
                     <input name="selectedAttributes[{{ attributeName }}]" type="hidden" />
+                    {% include molecule('form-submitter') with {
+                        attributes: {
+                            'trigger-selector': '.' ~ config.jsName ~ '__select-trigger'
+                        }
+                    } only %}
                 </li>
             {% endfor %}
         </ul>

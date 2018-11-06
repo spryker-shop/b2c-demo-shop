@@ -1,0 +1,100 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'cart-block'
+} %}
+
+{% define data = {
+    quote: app['quote'],
+    cartItems: app['cartItems'],
+} %}
+
+{% block body %}
+    <h4 class="{{ config.name }}__title">{{ 'cart.cart' | trans }}</h4>
+    {% if data.cartItems is not empty %}
+        {% set optionPrice = 0 %}
+
+        {% for item in data.cartItems %}
+            <div class="{{ config.name }}__cart-item">
+                <div class="grid grid--middle grid--justify grid--no-wrap">
+                    <div class="{{ config.name }}__cart-item-image col">
+                        {% set cartItemSubTotal = item.quantity * item.unitPrice %}
+
+                        {% include molecule('cart-image', 'CartPage') with {
+                            data: {
+                                name: item.name | default(''),
+                                image: item.images is empty ? null : (item.images | first)
+                            }
+                        } only %}
+                    </div>
+                    <div class="{{ config.name }}__cart-item-content col">
+                        <div class="grid grid--justify">
+                            <p class="{{ config.name }}__cart-item-title col col--lg-8 col--sm-12">{{ item.name }}</p>
+                            <div class="{{ config.name }}__cart-item-price col col--lg-4 col--sm-12">
+                                <span class="{{ config.name }}__cart-item-price">{{ cartItemSubTotal | money }}</span>
+                            </div>
+                        </div>
+                        {% set optionPrice = 0 %}
+
+                        {% for option in item.productOptions %}
+                            {% set optionPrice = optionPrice + option.unitPrice %}
+                        {% endfor %}
+
+                        {% if optionPrice %}
+                            <div class="grid grid--middle grid--justify">
+                                <span class="col {{ config.name }}__item-option">{{ 'cart.product-option' | trans }}</span>
+                                <span class="col">{{ optionPrice | money }}</span>
+                            </div>
+                        {% endif %}
+
+                        <div class="{{ config.name }}__options">
+                            {% for attributeName, attribute in item.concreteAttributes %}
+                                <div class="{{ config.name }}__item-option">
+                                    {{ ('product.attribute.' ~ attributeName) | trans }}:
+                                    <span class="{{ config.name }}__item-option-text">{{ attribute }}</span>
+                                </div>
+                            {% endfor %}
+                            <div class="{{ config.name }}__item-option">
+                                {{ 'cart.item_quantity' | trans }}:
+                                <span class="{{ config.name }}__item-option-text">{{ item.quantity }}</span>
+                            </div>
+                            <a class="{{ config.name }}__item-remove" href="{{ path('cart/remove', {'sku': item.sku, 'groupKey': item.groupKey }) }}">
+                                {{ 'remove' | trans }}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+        {% if data.quote.totals.discounttotal %}
+            <div class="{{ config.name }}__total grid grid--middle grid--justify">
+                <strong class="{{ config.name }}__total-text col">{{ 'cart.discounts' | trans }}</strong>
+                <strong class="{{ config.name }}__total-text col">- {{ data.quote.totals.discounttotal | money }}</strong>
+            </div>
+        {% endif %}
+
+        <div class="{{ config.name }}__total grid grid--middle grid--justify">
+            <strong class="{{ config.name }}__total-text col">{{ 'cart.total' | trans }}</strong>
+            <strong class="{{ config.name }}__total-text col">{{ data.quote.totals.grandTotal | money }}</strong>
+        </div>
+
+        {% set canProceedToCheckout = data.quote.items is not empty
+            and (not is_granted('IS_AUTHENTICATED_FULLY')
+            or can('WriteSharedCartPermissionPlugin', data.quote.idQuote))
+        %}
+
+        {% if canProceedToCheckout %}
+            <div class="{{ config.name }}__buttons-container grid grid--middle grid--justify">
+                <a href="{{ url('cart') }}" class="{{ config.name }}__button button button--white col">{{ 'cart.cart' | trans }}</a>
+                <a class="{{ config.name }}__button button button--black col" href="{{ url('checkout-index') }}" {{qa('cart-go-to-checkout')}}>
+                    {{ 'cart.checkout' | trans }}
+                </a>
+            </div>
+        {% endif %}
+    {% endif %}
+
+    {% if data.quote.items is empty %}
+        <p class="{{ config.name }}__empty-text">{{ 'cart_widget.empty_text' | trans }}</p>
+    {% endif %}
+{% endblock %}

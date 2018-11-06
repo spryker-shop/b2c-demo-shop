@@ -1,0 +1,26 @@
+@mixin catalog-page-active-filter($name: '.active-filter') {
+    #{$name} {
+        &__item {
+            display: inline-block;
+            font: 500 rem(11) $setting-font-family;
+            letter-spacing: rem(1.2);
+            text-transform: uppercase;
+            padding: rem(9) rem(33) rem(10) rem(11);
+            margin: 0 0 0 rem(8);
+            border: solid rem(1) $setting-color-input-border;
+            border-radius: rem(2);
+            color: $setting-color-silver-chalice;
+            position: relative;
+
+            &:hover {
+                color: $setting-color-silver-chalice;
+                text-decoration: none;
+                background-color: rgba($setting-color-darkest, 0.03);
+            }
+        }
+
+        @content;
+    }
+}
+
+@include catalog-page-active-filter();

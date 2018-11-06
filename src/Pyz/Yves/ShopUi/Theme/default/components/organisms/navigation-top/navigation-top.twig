@@ -7,35 +7,29 @@
 
 {% define data = {
     cartQuantity: app['cart.quantity'] | default,
-    quote: app['quote'],
-    cartItems: app['cartItems'],
-    showUserMenu: not (hideUserMenu | default(false)),
-    isUserAuthenticated: is_granted('IS_AUTHENTICATED_FULLY'),
-    isInline: false,
-    withSeparators: false
+    showUserMenu: true
 } %}
 
 {% set cartQuantity = data.cartQuantity > 0 ? data.cartQuantity ~ ' ' : '' %}
-{% set menuClass = data.isInline ? 'menu--inline' : '' %}
 
 {% block body %}
-    <ul class="menu {{menuClass}} grid grid--middle">
+    <ul class="grid grid--middle grid--right">
         {% if data.showUserMenu %}
-            {% if data.isUserAuthenticated %}
-                <li class="menu__item">
-                    <a href="{{ url('wishlist/overview') }}" class="grid grid--middle">
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <li class="{{ config.name }}__item">
+                    <a href="{{ url('wishlist/overview') }}" class="{{ config.name }}__link">
                         {% include atom('icon') with {
-                            class: 'icon--big',
+                            modifiers: ['big'],
                             data: {
                                 name: 'wishlist'
                             }
                         } only %}
                     </a>
                 </li>
-                <li class="menu__item">
-                    <a href="{{ url('customer/overview') }}" class="grid grid--middle user-link js-user-open js-overlay-open">
+                <li class="{{ config.name }}__item">
+                    <a href="{{ url('customer/overview') }}" class="{{ config.name }}__link {{ config.jsName }}__trigger">
                         {% include atom('icon') with {
-                            class: 'icon--big',
+                            modifiers: ['big'],
                             data: {
                                 name: 'user-account'
                             }
@@ -43,20 +37,20 @@
                     </a>
                 </li>
             {% else %}
-                <li class="menu__item">
-                    <a href="{{ url('login') }}" class="grid grid--middle">
+                <li class="{{ config.name }}__item">
+                    <a href="{{ url('login') }}" class="{{ config.name }}__link">
                         {% include atom('icon') with {
-                            class: 'icon--big',
+                            modifiers: ['big'],
                             data: {
                                 name: 'wishlist'
                             }
                         } only %}
                     </a>
                 </li>
-                <li class="menu__item">
-                    <a href="{{ url('login') }}" class="grid grid--middle user-link js-user-open js-overlay-open">
+                <li class="{{ config.name }}__item">
+                    <a href="{{ url('login') }}" class="{{ config.name }}__link {{ config.jsName }}__trigger">
                         {% include atom('icon') with {
-                            class: 'icon--big',
+                            modifiers: ['big'],
                             data: {
                                 name: 'user-account'
                             }
@@ -66,14 +60,14 @@
             {% endif %}
         {% endif %}
 
-        <li class="menu__item menu__item--cart">
-            <a href="{{ url('cart') }}" class="grid grid--middle cart-link js-cart-open js-overlay-open">
+        <li class="{{ config.name }}__item">
+            <a href="{{ url('cart') }}" class="{{ config.name }}__link {{ config.jsName }}__trigger">
                 {% if cartQuantity > 0 %}
                     <span class="cart-link__quantity">{{cartQuantity}}</span>
                 {% endif %}
 
                 {% include atom('icon') with {
-                    class: 'icon--big',
+                    modifiers: ['big'],
                     data: {
                         name: 'cart'
                     }
@@ -81,128 +75,13 @@
             </a>
         </li>
 
-        <li class="nav-overlay js-overlay">
-            <div class="overlay-shadow js-overlay-close"></div>
-            <div class="nav-overlay__container">
-                <div class="js-user-block">
-                    <h4 class="nav-overlay__title">{{ 'customer.profile.title' | trans }}</h4>
-                    <div class="nav-overlay__inner-box">
-                        <a class="nav-overlay__link" href="{{ url('customer/overview') }}">{{ 'checkout.step.summary.overview' | trans }}</a>
-                        <a class="nav-overlay__link" href="{{ url('customer/order') }}">{{ 'customer.account.order_history' | trans }}</a>
-                        <a class="nav-overlay__link" href="{{ url('customer/profile') }}">{{ 'customer.profile.link' | trans }}</a>
-                    </div>
-                    {% if data.isUserAuthenticated and is_granted('ROLE_USER') %}
-                        <a href="{{ url('logout') }}" class="nav-overlay__link nav-overlay__link--sm">{{ 'customer.logout' | trans }}</a>
-                    {% else %}
-                        <div class="grid grid--middle grid--justify nav-overlay__buttons">
-                            <a href="{{ url('register') }}" class="button button--white col">{{ 'checkout.customer.auth_as_user' | trans }}</a>
-                            <a href="{{ url('login') }}" class="button button--black col">{{ 'global.login' | trans }}</a>
-                        </div>
-                    {% endif %}
-                </div>
-                <div class="js-cart-block">
-                    <h4 class="nav-overlay__title">{{ 'cart.cart' | trans }}</h4>
-                    {% if data.cartItems is not empty %}
-                        {% set optionPrice = 0 %}
-
-                        {% for item in data.cartItems %}
-                            <div class="shopping-cart__box">
-                                <div class="grid grid--middle grid--justify grid--no-wrap">
-                                    <div class="cart-item__image col">
-                                        {% set cartItemSubTotal = item.quantity * item.unitPrice %}
-
-                                        {% include molecule('cart-image', 'CartPage') with {
-                                            data: {
-                                                name: item.name | default(''),
-                                                image: item.images is empty ? null : (item.images | first)
-                                            }
-                                        } only %}
-                                    </div>
-                                    <div class="cart-item__content col">
-                                        <div class="grid grid--justify">
-                                            <p class="cart-item__title col col--lg-8 col--sm-12">{{ item.name }}</p>
-                                            <div class="cart-item__price col col--lg-4 col--sm-12">
-                                                <span class="cart-item__price">{{ cartItemSubTotal | money }}</span>
-                                            </div>
-                                        </div>
-                                        {% set optionPrice = 0 %}
-
-                                        {% for option in item.productOptions %}
-                                            {% set optionPrice = optionPrice + option.unitPrice %}
-                                        {% endfor %}
-
-                                        {% if optionPrice %}
-                                            <div class="grid grid--middle grid--justify">
-                                                <span class="col nav-overlay__item-option">{{ 'cart.product-option' | trans }}</span>
-                                                <span class="col">{{ optionPrice | money }}</span>
-                                            </div>
-                                        {% endif %}
-
-                                        <div class="cart-item__options">
-                                            {% for attributeName, attribute in item.concreteAttributes %}
-                                                <div class="nav-overlay__item-option">
-                                                    {{ ('product.attribute.' ~ attributeName) | trans }}:
-                                                    <span>{{ attribute }}</span>
-                                                </div>
-                                            {% endfor %}
-                                            <div class="nav-overlay__item-option">
-                                                {{ 'cart.item_quantity' | trans }}:
-                                                <span>{{ item.quantity }}</span>
-                                            </div>
-                                            <a class="cart-item__remove" href="{{ path('cart/remove', {'sku': item.sku, 'groupKey': item.groupKey }) }}">
-                                                {{ 'remove' | trans }}
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        {% endfor %}
-
-                        {% if data.quote.totals.discounttotal %}
-                            <div class="nav-overlay__total grid grid--middle grid--justify">
-                                <strong class="col">{{ 'cart.discounts' | trans }}</strong>
-                                <strong class="col">- {{ data.quote.totals.discounttotal | money }}</strong>
-                            </div>
-                        {% endif %}
-
-                        <div class="nav-overlay__total grid grid--middle grid--justify">
-                            <strong class="col">{{ 'cart.total' | trans }}</strong>
-                            <strong class="col">{{ data.quote.totals.grandTotal | money }}</strong>
-                        </div>
-
-                        {% set canProceedToCheckout = data.quote.items is not empty
-                            and (not is_granted('IS_AUTHENTICATED_FULLY')
-                            or can('WriteSharedCartPermissionPlugin', data.quote.idQuote))
-                        %}
-
-                        {% if canProceedToCheckout %}
-                            <div class="grid grid--middle grid--justify nav-overlay__buttons">
-                                <a href="{{ url('cart') }}" class="col button button--white">{{ 'cart.cart' | trans }}</a>
-                                <a class="col button button--black" href="{{ url('checkout-index') }}" {{qa('cart-go-to-checkout')}}>
-                                    {{ 'cart.checkout' | trans }}
-                                </a>
-                            </div>
-                        {% endif %}
-                    {% endif %}
-
-                    {% if data.quote.items is empty %}
-                        <p class="nav-overlay__empty-text">{{ 'cart_widget.empty_text' | trans }}</p>
-                    {% endif %}
-                </div>
-            </div>
+        <li class="{{ config.name }}__item {{ config.name }}__item--overlay">
+            {% include molecule('nav-overlay') with {
+                attributes: {
+                    'trigger-open': '.' ~ config.jsName ~ '__trigger',
+                    'active-link': config.name ~ '__link--active'
+                }
+            } only %}
         </li>
     </ul>
-
-    {% include molecule('nav-overlay-toggler') with {
-        attributes: {
-            'trigger-open': '.js-overlay-open',
-            'trigger-close': '.js-overlay-close',
-            'trigger-cart-open': '.js-cart-open',
-            'trigger-user-open': '.js-user-open',
-            'toggle-cart-target': '.js-cart-block',
-            'toggle-user-target': '.js-user-block',
-            'toggle-target': '.js-overlay',
-            'class-to-toggle': 'is-active'
-        }
-    } only %}
 {% endblock %}

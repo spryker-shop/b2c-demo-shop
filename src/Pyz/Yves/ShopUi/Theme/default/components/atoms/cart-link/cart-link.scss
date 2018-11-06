@@ -1,10 +1,10 @@
-@mixin cart-bubble ($size, $position) {
-    top: rem($position);
-    right: rem($position);
-    width: rem($size);
-    height: rem($size);
-    line-height: rem($size);
-    font-size: rem(0.66 * $size);
+@mixin shop-ui-cart-bubble ($size, $position) {
+    top: $position;
+    right: $position;
+    width: $size;
+    height: $size;
+    line-height: $size;
+    font-size: (0.66 * #{$size});
     position: absolute;
     display: block;
     text-align: center;
@@ -17,7 +17,7 @@
         position: relative;
 
         &__quantity {
-            @include cart-bubble(18, -12);
+            @include shop-ui-cart-bubble(rem(18), 0);
             background: $setting-color-alt;
             color: $setting-color-white;
         }
