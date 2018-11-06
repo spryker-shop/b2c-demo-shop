@@ -7,7 +7,7 @@
 {% block body %}
     {% if data.languages is not empty %}
         <form method="GET" action="">
-            {% embed atom('custom-select') with {
+            {% embed molecule('custom-select') with {
                 modifiers: ['naked'],
                 attributes: {
                     'onchange': 'this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);'

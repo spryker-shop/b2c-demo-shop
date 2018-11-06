@@ -1,0 +1,19 @@
+@mixin shop-ui-product-quantity-input($name: '.product-quantity-input') {
+    #{$name} {
+        &__label {
+            font: 300 rem(13) $setting-font-family-additional;
+            margin-right: rem(10);
+        }
+
+        &__button {
+            opacity: 0.6;
+            padding: rem(5);
+
+            &:hover {
+                color: $setting-color-main;
+            }
+        }
+    }
+}
+
+@include shop-ui-product-quantity-input();

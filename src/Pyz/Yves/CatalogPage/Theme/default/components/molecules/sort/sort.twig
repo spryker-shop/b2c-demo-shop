@@ -31,16 +31,19 @@
         </div>
 
         <div class="{{ config.name }}__col col">
-            {% embed atom('custom-select') with {
+            {% embed molecule('custom-select') with {
                 modifiers: ['sort', 'naked'],
                 attributes: {
-                    name: 'sort',
-                    onchange: 'this.form.submit();'
+                    name: 'sort'
                 },
                 embed: {
-                    sort: _view.sort
+                    sort: _view.sort,
+                    jsClass: config.jsName ~ '__select-trigger'
                 }
             } only %}
+                {% block selectClass -%}
+                    {{ parent() }} {{ embed.jsClass }}
+                {%- endblock %}
                 {% block options %}
                     <option value="">
                         {{ 'catalog.sort.relevance' | trans }}
@@ -58,6 +61,11 @@
                 {% endblock %}
             {% endembed %}
         </div>
-
     </div>
+
+    {% include molecule('form-submitter') with {
+        attributes: {
+            'trigger-selector': '.' ~ config.jsName ~ '__select-trigger'
+        }
+    } only %}
 {% endblock %}

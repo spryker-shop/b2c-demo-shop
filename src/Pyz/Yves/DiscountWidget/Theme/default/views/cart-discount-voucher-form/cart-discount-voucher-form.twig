@@ -5,31 +5,9 @@
 } %}
 
 {% block body %}
-    <div class="cart-discount-form">
-        <h4 class="cart-toggler__title js-cart-toggler__title-trigger" data-toggle-target=".js-cart-toggler__content-target">
-            {{ 'cart.voucher-title' | trans }}
-        </h4>
-        <div class="cart-toggler__content js-cart-toggler__content-target is-hidden">
-            {% include molecule('form') with {
-                modifiers: ['inline'],
-                data: {
-                    form: data.form,
-                    submit: {
-                        enable: true,
-                        text: 'cart.voucher.redeem' | trans,
-                        icon: null,
-                        class: 'button button--black'
-                    }
-                }
-            } only %}
-        </div>
-    </div>
-
-
-    {% include molecule('toggler-accordeon') with {
-        attributes: {
-            trigger: '.js-cart-toggler__title-trigger',
-            'class-to-toggle': 'is-hidden'
+    {% include molecule('cart-discount-form', 'DiscountWidget') with {
+        data: {
+            form: data.form
         }
     } only %}
 {% endblock %}

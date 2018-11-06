@@ -1,8 +1,7 @@
 {% extends model('component') %}
 
 {% define config = {
-    name: 'variant',
-    tag: 'div'
+    name: 'variant'
 } %}
 
 {% define data = {
@@ -24,13 +23,16 @@
                 {% embed atom('select') with {
                     modifiers: ['expand'],
                     attributes: {
-                        name: data.formName,
-                        onchange: 'this.form.submit()'
+                        name: data.formName
                     },
                     embed: {
-                        values: data.values
+                        values: data.values,
+                        jsClass: config.jsName ~ '__select-trigger'
                     }
                 } only %}
+                    {% block selectClass -%}
+                        {{ parent() }} {{ embed.jsClass }}
+                    {%- endblock %}
                     {% block options %}
                         <option>{{ 'product.attribute._none' | trans }}</option>
                         {% for value in embed.values %}
@@ -38,6 +40,11 @@
                         {% endfor %}
                     {% endblock %}
                 {% endembed %}
+                {% include molecule('form-submitter') with {
+                    attributes: {
+                        'trigger-selector': '.' ~ config.jsName ~ '__select-trigger'
+                    }
+                } only %}
             {% else %}
                 {{ 'product.attribute.not_available' | trans }}
             {% endif %}
