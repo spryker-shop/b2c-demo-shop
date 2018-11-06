@@ -1,8 +1,7 @@
 {% extends model('component') %}
 
 {% define config = {
-    name: 'cart-item-quantity',
-    tag: 'div'
+    name: 'product-quantity-input'
 } %}
 
 {% define data = {
@@ -30,7 +29,7 @@
                     minQuantity: data.minQuantity,
                     value: data.value,
                     readOnly: data.readOnly,
-                    autoUpdate: 'true'
+                    autoUpdate: data.hasUpdateButton
                 }
             } only %}
         {% endblock %}

@@ -1,8 +1,7 @@
 {% extends model('component') %}
 
 {% define config = {
-    name: 'cart-quantity-input',
-    tag: 'div'
+    name: 'cart-quantity-input'
 } %}
 
 {% define data = {
@@ -12,7 +11,7 @@
 
 {% block body %}
     <form method="POST" action="{{ path('cart/change/quantity', {'sku': data.cartItem.sku }) }}" class="js-quantity-form">
-        {% include molecule('cart-item-quantity-input', 'CartPage') with {
+        {% include molecule('product-quantity-input') with {
             data: {
                 maxQuantity: data.cartItem.maxQuantity,
                 value: data.cartItem.quantity,
