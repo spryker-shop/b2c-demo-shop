@@ -12,7 +12,7 @@
 {% block attributes %}{% endblock %}
 
 {% block body %}
-    <select class="{{config.name}}__select {% block selectClass %}{% endblock %}" {% block selectAttributes %}{{component.renderAttributes(attributes)}}{% endblock %}>
+    <select class="{{ component.renderClass(config.name ~ '__select', modifiers) }} {% block selectClass %}{% endblock %}" {% block selectAttributes %}{{component.renderAttributes(attributes)}}{% endblock %}>
         {% block options %}
             {% for option in data.options %}
                 {% set isSelected = option.selected | default(false) %}
