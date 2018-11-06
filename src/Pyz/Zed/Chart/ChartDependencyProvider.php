@@ -23,6 +23,7 @@ class ChartDependencyProvider extends SprykerChartDependencyProvider
             new CountOrderChartPlugin(),
             new StatusOrderChartPlugin(),
             new TopOrdersChartPlugin(),
+            new ExampleChart(),
         ];
     }
 }
