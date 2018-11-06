@@ -80,17 +80,34 @@
                     } only %}
                         {% block body %}
                             {{parent()}}
-                            {{ widget('CartNoteQuoteItemNoteWidgetPlugin', embed.item) }}
+                            {% if embed.item.cartNote is not empty %}
+                                {% include molecule('note-list', 'CartNoteWidget') ignore missing with {
+                                    data: {
+                                        label: 'cart_note.checkout_page.item_note',
+                                        note: embed.item.cartNote
+                                    }
+                                } only %}
+                            {% endif %}
                             {% if embed.isLast %}<hr/>{% endif %}
                         {% endblock %}
                     {% endembed %}
                 {% endfor %}
             </div>
 
-            {{ widget('CartNoteQuoteNoteWidgetPlugin', data.transfer) }}
+            {% if data.transfer.cartNote is not empty %}
+                    <div class="box">
+                        {% include molecule('note-list', 'CartNoteWidget') ignore missing with {
+                            data: {
+                                label: 'cart_note.checkout_page.quote_note',
+                                note: data.transfer.cartNote
+                            }
+                        } only %}
+                    </div>
+            {% endif %}
 
             <div class="box">
-                {{ widget('CheckoutVoucherFormWidgetPlugin', data.transfer) }}
+                {% widget 'CheckoutVoucherFormWidget' args [data.transfer] only %}
+                {% endwidget %}
             </div>
 
             {% embed molecule('form') with {

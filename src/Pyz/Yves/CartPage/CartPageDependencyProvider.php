@@ -7,40 +7,11 @@
 
 namespace Pyz\Yves\CartPage;
 
-use SprykerShop\Yves\CartNoteWidget\Plugin\CartPage\CartNoteQuoteItemWidgetPlugin;
-use SprykerShop\Yves\CartNoteWidget\Plugin\CartPage\CartNoteQuoteWidgetPlugin;
 use SprykerShop\Yves\CartPage\CartPageDependencyProvider as SprykerCartPageDependencyProvider;
-use SprykerShop\Yves\CheckoutWidget\Plugin\CartPage\CheckoutBreadcrumbWidgetPlugin;
-use SprykerShop\Yves\DiscountPromotionWidget\Plugin\CartPage\DiscountPromotionItemListWidgetPlugin;
-use SprykerShop\Yves\DiscountWidget\Plugin\CartPage\DiscountSummaryWidgetPlugin;
-use SprykerShop\Yves\DiscountWidget\Plugin\CartPage\DiscountVoucherFormWidgetPlugin;
 use SprykerShop\Yves\ProductBundleWidget\Plugin\CartPage\ProductBundleCartItemTransformerPlugin;
-use SprykerShop\Yves\ProductBundleWidget\Plugin\CartPage\ProductBundleItemsWidgetPlugin;
-use SprykerShop\Yves\ProductOptionWidget\Plugin\CartPage\CartItemProductOptionWidgetPlugin;
-use SprykerShop\Yves\ProductRelationWidget\Plugin\CartPage\UpSellingProductsWidgetPlugin;
-use SprykerShop\Yves\SalesOrderThresholdWidget\Plugin\CartPage\SalesOrderThresholdWidgetPlugin;
 
 class CartPageDependencyProvider extends SprykerCartPageDependencyProvider
 {
-    /**
-     * @return array
-     */
-    protected function getCartPageWidgetPlugins(): array
-    {
-        return [
-            CartItemProductOptionWidgetPlugin::class,
-            CheckoutBreadcrumbWidgetPlugin::class,
-            DiscountVoucherFormWidgetPlugin::class,
-            DiscountSummaryWidgetPlugin::class,
-            DiscountPromotionItemListWidgetPlugin::class,
-            UpSellingProductsWidgetPlugin::class,
-            ProductBundleItemsWidgetPlugin::class,
-            CartNoteQuoteWidgetPlugin::class, #CartNoteFeature
-            CartNoteQuoteItemWidgetPlugin::class, #CartNoteFeature
-            SalesOrderThresholdWidgetPlugin::class, #SalesOrderThreshold
-        ];
-    }
-
     /**
      * @return \SprykerShop\Yves\CartPage\Dependency\Plugin\CartItemTransformerPluginInterface[]
      */

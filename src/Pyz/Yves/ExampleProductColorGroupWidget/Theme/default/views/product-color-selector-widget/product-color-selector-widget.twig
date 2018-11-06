@@ -5,5 +5,5 @@
 } %}
 
 {% block body %}
-    {{ widgetGlobal('ProductGroupWidgetPlugin', data.idProductAbstract, view('product-color-selector', 'ExampleProductColorGroupWidget')) }}
+    {% widget 'ProductGroupWidget' args [data.idProductAbstract] use view('product-color-selector', 'ExampleProductColorGroupWidget') only %}{% endwidget %}
 {% endblock %}
