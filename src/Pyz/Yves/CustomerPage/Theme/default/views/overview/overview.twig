@@ -15,18 +15,23 @@
     <div class="box">
         <div class="customer-account__box grid grid--justify grid--middle">
             <h5 class="customer-account__subtitle col">{{ 'customer.account.last_orders' | trans }}</h5>
+
             {% if data.orders is not empty %}
                 <a href="{{url('customer/order')}}" class="col">
                     {{ 'customer.order.view_all' | trans }}
                 </a>
             {% endif %}
+
         </div>
+
         {% include molecule('order-table', 'CustomerPage') with {
             data: {
                 orders: data.orders
             }
         } only %}
+
     </div>
+
     <div class="grid grid--justify">
         <div class="col--lg-6 col--sm-12">
             <div class="box">
@@ -36,17 +41,20 @@
                         {{ 'general.edit.button' | trans }}
                     </a>
                 </div>
+
                 <ul>
                     <li>{{ data.customer.firstName }} {{ data.customer.lastName }}</li>
                     <li><a href="mailto:{{ data.customer.email }}">{{ data.customer.email }}</a></li>
                 </ul>
             </div>
         </div>
+
         <div class="col--lg-6 col--sm-12">
             <div class="box">
                 {{ widget('NewsletterSubscriptionSummaryWidgetPlugin', data.customer) }}
             </div>
         </div>
+
         <div class="col--lg-6 col--sm-12">
             {% if data.billingAddress is not empty %}
                 <div class="box">
@@ -56,14 +64,17 @@
                             {{ 'general.edit.button' | trans }}
                         </a>
                     </div>
+
                     {% include molecule('display-address', 'CustomerPage') with {
                         data: {
                             address: data.billingAddress
                         }
                     } only %}
+
                 </div>
             {% endif %}
         </div>
+
         <div class="col--lg-6 col--sm-12">
             {% if data.shippingAddress is not empty %}
                 <div class="box">
@@ -73,20 +84,15 @@
                             {{ 'general.edit.button' | trans }}
                         </a>
                     </div>
+
                     {% include molecule('display-address', 'CustomerPage') with {
                         data: {
                             address: data.shippingAddress
                         }
                     } only %}
+
                 </div>
             {% endif %}
         </div>
     </div>
-
-
-
-
-
-
-
 {% endblock %}

@@ -23,12 +23,13 @@
                             id: 'register',
                             checked: not data.forms.isLogin,
                             name: 'accountLoginSwitcher',
-                            'target-selector': '.js-login__register',
+                            'target-selector': '.js-customer-page-login-register',
                             'class-to-toggle': 'is-hidden'
                         },
                         class: 'toggler-radio--with-bg'
                     } only %}
                 </li>
+
                 <li class="list-switches__item">
                     {% include molecule('toggler-radio') with {
                         data: {
@@ -38,16 +39,16 @@
                             id: 'login',
                             checked: data.forms.isLogin,
                             name: 'accountLoginSwitcher',
-                            'target-selector': '.js-login__login',
+                            'target-selector': '.js-customer-page-login',
                             'class-to-toggle': 'is-hidden'
                         },
                         class: 'toggler-radio--with-bg'
                     } only %}
                 </li>
             </ul>
-            <div class="js-login__register {{ data.forms.isLogin ? ' is-hidden' : '' }}">
+
+            <div class="js-customer-page-login-register {{ data.forms.isLogin ? ' is-hidden' : '' }}">
                 {% include molecule('form') with {
-                    class: '',
                     data: {
                         title: 'checkout.customer.auth_as_user' | trans,
                         form: data.forms.register,
@@ -70,9 +71,8 @@
                 } only %}
             </div>
 
-            <div class="js-login__login {{ data.forms.isLogin ? '' : ' is-hidden' }}">
+            <div class="js-customer-page-login {{ data.forms.isLogin ? '' : ' is-hidden' }}">
                 {% include molecule('form') with {
-                    class: '',
                     data: {
                         title: 'checkout.customer.auth_as_login' | trans,
                         form: data.forms.login,
