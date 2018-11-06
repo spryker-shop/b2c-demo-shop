@@ -7,7 +7,7 @@
 
 namespace Pyz\Yves\ChartWidget;
 
-use Pyz\Yves\ExampleChart\Plugin\ExampleChart;
+use Pyz\Yves\ExampleChart\Plugin\ExampleChartPlugin;
 use SprykerShop\Yves\ChartWidget\ChartWidgetDependencyProvider as SprykerShopChartDependencyProvider;
 
 class ChartWidgetDependencyProvider extends SprykerShopChartDependencyProvider
@@ -18,7 +18,7 @@ class ChartWidgetDependencyProvider extends SprykerShopChartDependencyProvider
     protected function getChartPlugins(): array
     {
         return [
-            new ExampleChart(),
+            new ExampleChartPlugin(),
         ];
     }
 }

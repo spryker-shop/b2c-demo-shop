@@ -10,16 +10,19 @@ namespace Pyz\Yves\ExampleChart\Plugin;
 use Generated\Shared\Transfer\ChartDataTraceTransfer;
 use Generated\Shared\Transfer\ChartDataTransfer;
 use Generated\Shared\Transfer\ChartLayoutTransfer;
+use Spryker\Shared\Chart\Dependency\Plugin\ChartLayoutablePluginInterface;
 use Spryker\Shared\Chart\Dependency\Plugin\ChartPluginInterface;
 
-class ExampleChart implements ChartPluginInterface
+class ExampleChartPlugin implements ChartPluginInterface, ChartLayoutablePluginInterface
 {
+    public const TEST_CHART = 'testChart';
+
     /**
      * @return string
      */
     public function getName(): string
     {
-        return 'testChart';
+        return static::TEST_CHART;
     }
 
     /**
