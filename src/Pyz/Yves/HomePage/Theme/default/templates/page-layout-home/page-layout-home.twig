@@ -2,23 +2,10 @@
 
 {% block container %}
     {% include organism('jumbotron-slider') only %}
-    <div class="container">
-        {% block pageInfo %}
-            <div class="box">
-                {% block breadcrumbs %}
-                    {% include molecule('breadcrumb') only %}
-                {% endblock %}
 
-                <hr>
-
-                {% block title %}
-                    <h3>{{data.title}}</h3>
-                {% endblock %}
-            </div>
-        {% endblock %}
+    <div class="container container--home-page">
+        <main>
+            {% block content %}{% endblock %}
+        </main>
     </div>
-
-    <main>
-        {% block content %}{% endblock %}
-    </main>
 {% endblock %}
