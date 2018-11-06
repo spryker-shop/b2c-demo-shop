@@ -1,61 +1,39 @@
-@mixin cart-bundle-list($name: '.cart-bundle') {
+@mixin product-bundle-widget-cart-bundle-list($name: '.cart-bundle-list') {
     #{$name} {
-        &__list {
-            margin-top: rem(44);
-            position: relative;
+        margin-top: rem(44);
+        position: relative;
 
-            &::after {
-                content: '';
-                display: block;
-                width: rem(1);
-                height: rem(25);
-                border-left: rem(1) dotted $setting-color-light;
-                position: absolute;
-                top: rem(-35);
-                left: rem(60);
-            }
+        &::after {
+            content: '';
+            display: block;
+            width: rem(1);
+            height: rem(25);
+            border-left: rem(1) dotted $setting-color-light;
+            position: absolute;
+            top: rem(-35);
+            left: rem(60);
         }
-        &__list-item {
+
+        &__item {
             display: flex;
             align-items: center;
             margin: rem(20) 0;
+
             @include helper-breakpoint-media-max($sm-max) {
                 margin: rem(12) 0;
             }
-
-            .thumbnail {
-                width: rem(120);
-                min-width: rem(120);
-                height: rem(44);
-                margin: 0;
-                position: relative;
-                &__image {
-                    margin: rem(5) auto;
-                    max-height: calc(100% - #{rem(10)});
-                    max-width: calc(100% - #{rem(10)});
-                }
-                &::after {
-                    content: '';
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    right: 0;
-                    bottom: 0;
-                    border-radius: rem(4);
-                    background: rgba(0, 0, 0, 0.05);
-                    z-index: 350;
-                }
-            }
         }
-        &__item-title {
+        &__title {
             font: 500 rem(15) $setting-font-family-additional;
             padding-left: rem(24);
         }
-        &__item-quantity {
+
+        &__quantity {
             color: $setting-color-light;
             font-weight: normal;
             margin-left: rem(16);
             position: relative;
+
             &::after {
                 content: '';
                 display: block;
@@ -71,4 +49,4 @@
     }
 }
 
-@include cart-bundle-list();
+@include product-bundle-widget-cart-bundle-list();
