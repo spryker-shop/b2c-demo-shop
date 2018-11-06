@@ -7,6 +7,7 @@
 
 namespace Pyz\Zed\Chart;
 
+use Pyz\Zed\ExampleChart\Plugin\ExampleChart;
 use Spryker\Zed\Chart\ChartDependencyProvider as SprykerChartDependencyProvider;
 use Spryker\Zed\SalesStatistics\Communication\Plugin\CountOrderChartPlugin;
 use Spryker\Zed\SalesStatistics\Communication\Plugin\StatusOrderChartPlugin;
