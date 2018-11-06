@@ -13,7 +13,8 @@
 } %}
 
 {% block title %}
-    <ul class="list-switches register-type">
+    <ul class="list-switches list-switches--register-type">
+
         <li class="list-switches__item">
             {% include molecule('toggler-radio') with {
                 data: {
@@ -29,6 +30,7 @@
                 class: 'toggler-radio--with-bg'
             } only %}
         </li>
+
         <li class="list-switches__item">
             {% include molecule('toggler-radio') with {
                 data: {
@@ -44,6 +46,7 @@
                 class: 'toggler-radio--with-bg'
             } only %}
         </li>
+
         <li class="list-switches__item">
             {% include molecule('toggler-radio') with {
                 data: {
@@ -59,6 +62,7 @@
                 class: 'toggler-radio--with-bg'
             } only %}
         </li>
+
     </ul>
 {% endblock %}
 
@@ -66,6 +70,7 @@
     <div class="checkout-layout">
         {% embed molecule('form') with {
             class: 'register-form js-login__register' ~ (data.isGuest or data.isLogin? ' is-hidden' : ''),
+            modifiers: ['checkout-login-step'],
             data: {
                 form: data.forms.registration,
                 submit: {
@@ -83,6 +88,7 @@
         } only %}
             {% block fields %}
                 {% include molecule('form') with {
+                    modifiers: ['checkout-login-step', 'checkout-grid-indent'],
                     data: {
                         class: 'col col--sm-6',
                         title: 'checkout.customer.auth_as_user' | trans,
@@ -106,9 +112,9 @@
             {% endblock %}
         {% endembed %}
 
-
         {% embed molecule('form') with {
             class: 'register-form js-login__guest' ~ (data.isGuest ? '' : ' is-hidden'),
+            modifiers: ['checkout-login-step'],
             data: {
                 form: data.forms.guest,
                 submit: {
@@ -125,6 +131,7 @@
         } only %}
             {% block fields %}
                 {% include molecule('form') with {
+                    modifiers: ['checkout-login-step', 'checkout-grid-indent'],
                     data: {
                         class: 'col col--sm-6',
                         title: 'checkout.customer.auth_as_guest' | trans,
@@ -148,7 +155,8 @@
         {% endembed %}
 
         {% embed molecule('form') with {
-            class: 'login-form js-login__login' ~ (data.isLogin ? '' : ' is-hidden'),
+            class: 'js-login__login' ~ (data.isLogin ? '' : ' is-hidden'),
+            modifiers: ['checkout-login-step', 'checkout-grid-indent'],
             data: {
                 title: 'checkout.customer.auth_as_login' | trans,
                 form: data.forms.login,
@@ -167,7 +175,7 @@
             }
         } only %}
             {% block cancel %}
-                <a href="{{ url('password/forgotten') }}" class="forgot-password-link" {{qa('customer-forgot-password-link')}}>
+                <a href="{{ url('password/forgotten') }}" class="{{ config.name }}__login-forgot-password-link" {{qa('customer-forgot-password-link')}}>
                     {{ 'forms.forgot-password' | trans~'?' }}
                 </a>
             {% endblock %}

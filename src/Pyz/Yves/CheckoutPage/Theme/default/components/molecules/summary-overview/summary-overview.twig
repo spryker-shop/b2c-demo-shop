@@ -20,46 +20,48 @@
 } %}
 
 {% block body %}
-    <div class="cart-summary">
-        <ul class="list spacing-y">
-            <li>
-                {{ 'checkout.step.summary.sub_total' | trans }}
-                <span class="float-right">{{ data.prices.subTotal | money }}</span>
-            </li>
+    <ul class="{{ config.name }}__list">
 
-            {% if data.prices.discountTotal %}
-                {% if data.voucherDiscounts is not empty %}
-                    {% for voucherDiscount in data.voucherDiscounts %}
-                        <li class="list__item spacing-y">
-                            {{ voucherDiscount.displayName }}
-                            <span class="float-right">{{ voucherDiscount.amount | money }}</span>
-                        </li>
-                    {% endfor %}
-                {% endif %}
+        <li>
+            {{ 'checkout.step.summary.sub_total' | trans }}
+            <span class="float-right">{{ data.prices.subTotal | money }}</span>
+        </li>
 
-                {% if data.cartRuleDiscounts|length %}
-                    {% for ruleDiscount in data.cartRuleDiscounts %}
-                        <li class="list__item spacing-y">
-                            {{ ruleDiscount.displayName }}
-                            <span class="float-right">- {{ ruleDiscount.amount | money }}</span>
-                        </li>
-                    {% endfor %}
-                {% endif %}
+        {% if data.prices.discountTotal %}
+            {% if data.voucherDiscounts is not empty %}
+                {% for voucherDiscount in data.voucherDiscounts %}
+                    <li class="{{ config.name }}__list-item">
+                        {{ voucherDiscount.displayName }}
+                        <span class="float-right">{{ voucherDiscount.amount | money }}</span>
+                    </li>
+                {% endfor %}
             {% endif %}
 
-            <li class="list__item spacing-y">
-                <strong>{{ 'checkout.step.summary.shipping' | trans }}</strong>
-                {{ data.shipmentMethod }}
-                <span class="float-right">{{ data.prices.storeCurrency | money }}</span>
-            </li>
-            <li class="list__item spacing-y">
-                {{ 'checkout.step.summary.tax' | trans }}
-                <span class="float-right">{{ data.prices.tax | money }}</span>
-            </li>
-            <li class="list__item cart-summary__total spacing-y">
-                <strong>{{ 'checkout.step.summary.grand_total' | trans }}</strong>
-                <strong class="float-right">{{ data.prices.grandTotal | money }}</strong>
-            </li>
-        </ul>
-    </div>
+            {% if data.cartRuleDiscounts|length %}
+                {% for ruleDiscount in data.cartRuleDiscounts %}
+                    <li class="{{ config.name }}__list-item">
+                        {{ ruleDiscount.displayName }}
+                        <span class="float-right">- {{ ruleDiscount.amount | money }}</span>
+                    </li>
+                {% endfor %}
+            {% endif %}
+        {% endif %}
+
+        <li class="{{ config.name }}__list-item">
+            <strong>{{ 'checkout.step.summary.shipping' | trans }}</strong>
+            {{ data.shipmentMethod }}
+            <span class="float-right">{{ data.prices.storeCurrency | money }}</span>
+        </li>
+
+        <li class="{{ config.name }}__list-item">
+            {{ 'checkout.step.summary.tax' | trans }}
+            <span class="float-right">{{ data.prices.tax | money }}</span>
+        </li>
+
+        <li class="{{ config.name }}__list-item {{ config.name }}__list-item--total">
+            <strong>{{ 'checkout.step.summary.grand_total' | trans }}</strong>
+            <strong class="float-right">{{ data.prices.grandTotal | money }}</strong>
+        </li>
+
+</ul>
 {% endblock %}

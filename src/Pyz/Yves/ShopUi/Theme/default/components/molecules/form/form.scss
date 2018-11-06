@@ -3,7 +3,7 @@ $shop-ui-form-field-margin: rem(8);
 @mixin shop-ui-form($name: '.form') {
     #{$name} {
         &__field {
-            padding: 0 rem(16) rem(27) !important;
+            padding: 0 rem(16) rem(27);
         }
 
         &__actions {
@@ -35,6 +35,134 @@ $shop-ui-form-field-margin: rem(8);
         &--inline &__field {
             padding-bottom: 0;
             padding-right: 0;
+        }
+
+        &__login-forgot-password-link {
+            margin-top: rem(20);
+
+            @include helper-breakpoint-media-min($md-min) {
+                margin-top: rem(16);
+            }
+        }
+
+        &--checkout-address-step,
+        &--checkout-shipment-step,
+        &--checkout-payment-step,
+        &--checkout-login-step {
+            #{$name}__actions {
+                padding-top: rem(29);
+                display: flex;
+                flex-direction: column-reverse;
+                align-items: flex-end;
+            }
+
+            #{$name}__action {
+                margin: 0;
+            }
+        }
+
+        &--checkout-address-step,
+        &--checkout-payment-step {
+            .col {
+                @include helper-breakpoint-media-max($sm-max) {
+                    width: 100%;
+                }
+            }
+        }
+
+        &--checkout-shipment-step,
+        &--checkout-payment-step {
+            .button--secondary {
+                margin-top: rem(30);
+            }
+        }
+
+        &__checkout-shipment-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin: 0 0 rem(32);
+            padding-bottom: rem(10);
+            border-bottom: dotted rem(1) $setting-color-lightest;
+
+            @include helper-breakpoint-media-min($md-min) {
+                margin-bottom: rem(58);
+            }
+        }
+
+        &__checkout-title,
+        &--checkout-login-step #{$name}__title {
+            width: 100%;
+            font: 700 rem(32) $setting-font-family-additional;
+            letter-spacing: rem(-0.5);
+            line-height: 1;
+            margin-bottom: rem(32);
+            padding-bottom: rem(10);
+            border-bottom: dotted rem(1) $setting-color-lightest;
+
+            @include helper-breakpoint-media-min($md-min) {
+                font-size: rem(47);
+                margin-bottom: rem(58);
+            }
+
+            &--shipment {
+                margin: 0 rem(10) 0 0;
+                border: none;
+                padding: 0;
+            }
+        }
+
+        &--checkout-grid-indent {
+            .grid {
+                margin: 0 rem(-16);
+                max-width: none;
+            }
+        }
+
+        &__checkout-billing-indent {
+            margin-top: rem(42);
+        }
+
+        &__shipment-item {
+            &:nth-of-type(1n + 2) {
+                margin-top: rem(50);
+
+                @include helper-breakpoint-media-min($md-min) {
+                    margin-top: rem(40);
+                }
+            }
+        }
+
+        &__checkout-shipment-heading-img {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0;
+            width: rem(93);
+            height: rem(36);
+            border-radius: rem(2);
+            border: solid rem(1) $setting-color-input-border;
+        }
+
+        &__checkout-summary-heading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0;
+            width: rem(93);
+            height: rem(36);
+            border-radius: rem(2);
+            border: solid rem(1) $setting-color-input-border;
+
+            &--indent {
+                margin: 0 rem(8) rem(10) 0;
+            }
+        }
+
+        &__checkout-summary-heading-img {
+            flex-shrink: 0;
+            max-width: 70%;
+            max-height: 90%;
         }
 
         .label {
