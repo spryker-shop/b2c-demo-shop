@@ -16,7 +16,7 @@
         }
     } only %}
         {% block additionalLink %}
-            <a class="header__back-link" href="{{ url('cart') }}">
+            <a class="{{ config.name }}__back-link" href="{{ url('cart') }}">
                 {% include atom('icon') with {
                     modifiers: ['medium-up', 'to-cart'],
                     data: {
