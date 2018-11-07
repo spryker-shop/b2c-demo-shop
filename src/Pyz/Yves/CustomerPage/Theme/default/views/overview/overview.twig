@@ -42,9 +42,9 @@
                     </a>
                 </div>
 
-                <ul>
-                    <li>{{ data.customer.firstName }} {{ data.customer.lastName }}</li>
-                    <li><a href="mailto:{{ data.customer.email }}">{{ data.customer.email }}</a></li>
+                <ul class="menu menu--customer-account">
+                    <li class="menu__item">{{ data.customer.firstName }} {{ data.customer.lastName }}</li>
+                    <li class="menu__item"><a class="menu__link" href="mailto:{{ data.customer.email }}">{{ data.customer.email }}</a></li>
                 </ul>
             </div>
         </div>
@@ -66,6 +66,8 @@
                     </div>
 
                     {% include molecule('display-address', 'CustomerPage') with {
+                        class: 'menu menu--customer-account',
+                        modifiers: ['testing'],
                         data: {
                             address: data.billingAddress
                         }
@@ -86,6 +88,8 @@
                     </div>
 
                     {% include molecule('display-address', 'CustomerPage') with {
+                        class: 'menu menu--customer-account',
+                        modifiers: ['testing'],
                         data: {
                             address: data.shippingAddress
                         }

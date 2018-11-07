@@ -9,9 +9,9 @@
     address: required
 } %}
 
-{% block class %}
-    list
-{% endblock %}
+{% block class -%}
+    {{ parent() }} list
+{%- endblock %}
 
 {% block body %}
     <li class="list__item">{{ data.address.salutation }} <strong>{{ data.address.firstName }} {{ data.address.lastName }}</strong></li>
