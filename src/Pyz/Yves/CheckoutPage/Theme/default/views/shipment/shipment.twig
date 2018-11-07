@@ -23,13 +23,13 @@
             submit: {
                 enable: true,
                 text: 'checkout.step.payment' | trans,
-                class: 'button button--black button--big button--expand'
+                class: 'form__action--checkout button button--black button--big button--expand'
             },
             cancel: {
                 enable: true,
                 url: data.backUrl,
                 text: 'general.back.button' | trans,
-                class: 'button button--secondary button--hollow button--expand'
+                class: 'form__action--checkout button button--secondary button--hollow button--expand'
             }
         }
     } only %}
@@ -37,9 +37,9 @@
             {% for name, choices in data.form.idShipmentMethod.vars.choices %}
                 <div class="col col--sm-12 {{ config.name }}__shipment-item">
 
-                    <div class="{{ config.name }}__checkout-shipment-heading">
-                        <h5 class="{{ config.name }}__checkout-title {{ config.name }}__checkout-title--shipment">{{name | trans}}</h5>
-                        <div class="{{ config.name }}__checkout-shipment-heading-img">
+                    <div class="checkout-layout__heading">
+                        <h5 class="checkout-layout__title checkout-layout__title--shipment">{{name | trans}}</h5>
+                        <div class="checkout-layout__heading-logo">
                             <img src="/assets/images/shipment-{{ name }}.png" width="65" height="10" alt="{{ name }}">
                         </div>
                     </div>

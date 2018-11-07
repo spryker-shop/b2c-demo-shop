@@ -23,13 +23,13 @@
             submit: {
                 enable: true,
                 text: 'checkout.step.summary' | trans,
-                class: 'button button--black button--big button--expand'
+                class: 'form__action--checkout button button--black button--big button--expand'
             },
             cancel: {
                 enable: true,
                 url: data.backUrl,
                 text: 'general.back.button' | trans,
-                class: 'button button--secondary button--hollow button--expand'
+                class: 'form__action--checkout button button--secondary button--hollow button--expand'
             }
         }
     } only %}
@@ -96,7 +96,7 @@
 
                         {% block fieldset %}
                             <div class="js-payment-method-{{embed.index}} {% if embed.index != 1 %} is-hidden{% endif %}">
-                                <h5 class="{{ config.name }}__checkout-title">{{ embed.toggler.vars.label | trans }}</h5>
+                                <h5 class="checkout-layout__title">{{ embed.toggler.vars.label | trans }}</h5>
                                 {{parent()}}
                             </div>
                         {% endblock %}

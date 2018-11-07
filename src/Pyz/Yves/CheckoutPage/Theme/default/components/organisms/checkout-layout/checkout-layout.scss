@@ -26,7 +26,76 @@
             }
         }
 
+        &__title,
+        .form__title {
+            width: 100%;
+            font: 700 rem(32) $setting-font-family-additional;
+            letter-spacing: rem(-0.5);
+            line-height: 1;
+            margin-bottom: rem(32);
+            padding-bottom: rem(10);
+            border-bottom: dotted rem(1) $setting-color-lightest;
+
+            @include helper-breakpoint-media-min($md-min) {
+                font-size: rem(47);
+                margin-bottom: rem(58);
+            }
+        }
+
+        &__title {
+            &:not(:first-of-type) {
+                margin-top: rem(42);
+            }
+
+            &--shipment {
+                margin: 0 rem(10) 0 0;
+                border: none;
+                padding: 0;
+            }
+        }
+
+        &__heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin: 0 0 rem(32);
+            padding-bottom: rem(10);
+            border-bottom: dotted rem(1) $setting-color-lightest;
+
+            @include helper-breakpoint-media-min($md-min) {
+                margin-bottom: rem(58);
+            }
+        }
+
+        &__heading-logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0;
+            width: rem(93);
+            height: rem(36);
+            border-radius: rem(2);
+            border: solid rem(1) $setting-color-input-border;
+
+            &--indent {
+                margin: 0 rem(8) rem(10) 0;
+            }
+
+            &--img {
+                flex-shrink: 0;
+                max-width: 70%;
+                max-height: 90%;
+            }
+        }
+
         &--summary-step {
+            .grid {
+                &:nth-child(1n + 2) {
+                    margin: 0 rem(-16);
+                    max-width: none;
+                }
+            }
+
             .col {
                 padding: 0 rem(16);
             }
@@ -60,67 +129,10 @@
             }
         }
 
-        &__summary-item-edit {
-            display: inline-block;
-            font: 300 rem(13) $setting-font-family-additional;
-            opacity: 0.4;
-            margin-top: rem(16);
-
-            &:hover {
-                text-decoration: none;
-                color: inherit;
-                opacity: 1;
-            }
-        }
-
         &__summary-address-indent {
             @include helper-breakpoint-media-max($sm-max) {
                 margin-top: rem(33);
             }
-        }
-
-        &__content-wrap {
-            @include helper-breakpoint-media-min($md-min) {
-                padding-top: rem(80);
-            }
-        }
-
-        &--success-page {
-            padding: 0 rem(16);
-
-            @include helper-breakpoint-media-min($md-min) {
-                padding: 0;
-            }
-        }
-
-        &__success-page-title {
-            margin-bottom: rem(40);
-            padding-bottom: rem(8);
-            font: 500 rem(36) $setting-font-family-additional;
-            border-bottom: dotted rem(1) $setting-color-lightest;
-
-            @include helper-breakpoint-media-min($md-min) {
-                margin-bottom: rem(48);
-                font-size: rem(47);
-                letter-spacing: rem(-0.5);
-            }
-        }
-
-        &__success-page-text {
-            font: 300 rem(17)/1.41 $setting-font-family;
-            margin-bottom: rem(40);
-
-            @include helper-breakpoint-media-min($md-min) {
-                font-size: rem(21);
-                line-height: 1.3;
-            }
-        }
-
-        &__success-page-link {
-            @include helper-effect-transition(color);
-            display: inline-block;
-            margin-bottom: rem(15);
-            text-decoration: none;
         }
 
         label,

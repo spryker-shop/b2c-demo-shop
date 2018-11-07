@@ -141,7 +141,8 @@
                 padding-top: 0;
             }
 
-            #{$name}__navigation-top {
+            #{$name}__navigation-top,
+            .container {
                 position: relative;
             }
         }
@@ -156,24 +157,15 @@
             font-weight: 500;
             transform: translateY(-50%);
             padding: rem(5) rem(5) rem(5) 0;
-            z-index: 100;
+            z-index: $setting-zi-element-floating;
 
             @include helper-breakpoint-media-min($md-min) {
                 font-size: rem(19);
-                top: 0;
-                margin-top: 0;
                 padding: 0;
-                transform: translateY(0);
             }
 
             &:hover {
                 text-decoration: none;
-            }
-
-            .icon {
-                margin-top: rem(-1);
-                width: rem(18);
-                height: rem(18);
             }
         }
 

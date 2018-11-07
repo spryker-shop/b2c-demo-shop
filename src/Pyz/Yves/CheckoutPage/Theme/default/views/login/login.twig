@@ -167,7 +167,7 @@
                 submit: {
                     enable: true,
                     text: 'forms.submit.login' | trans,
-                    class: 'button button--black button--big button--expand'
+                    class: 'form__action--checkout button button--black button--big button--expand'
                 },
                 cancel: {
                     enable: true
@@ -175,7 +175,7 @@
             }
         } only %}
             {% block cancel %}
-                <a href="{{ url('password/forgotten') }}" class="{{ config.name }}__login-forgot-password-link" {{qa('customer-forgot-password-link')}}>
+                <a href="{{ url('password/forgotten') }}" class="link link--login-forgot-password" {{qa('customer-forgot-password-link')}}>
                     {{ 'forms.forgot-password' | trans~'?' }}
                 </a>
             {% endblock %}

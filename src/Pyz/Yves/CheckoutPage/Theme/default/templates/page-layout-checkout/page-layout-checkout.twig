@@ -18,6 +18,7 @@
         {% block additionalLink %}
             <a class="header__back-link" href="{{ url('cart') }}">
                 {% include atom('icon') with {
+                    modifiers: ['medium-up', 'to-cart'],
                     data: {
                         name: 'arrow-left'
                     }
@@ -42,7 +43,7 @@
                 {% endblock %}
             {% endblock %}
 
-            <main class="checkout-layout__content-wrap">
+            <main class="container__checkout">
                 {% block title %}
                     {% if data.title is not empty %}
                         <h1 class="main-title">{{data.title}}</h1>
