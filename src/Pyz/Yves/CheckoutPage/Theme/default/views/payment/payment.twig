@@ -11,7 +11,6 @@
 
 {% block content %}
     {% embed molecule('form') with {
-        class: 'checkout-layout',
         modifiers: ['checkout-payment-step'],
         data: {
             form: data.forms.payment,
@@ -96,7 +95,7 @@
 
                         {% block fieldset %}
                             <div class="js-payment-method-{{embed.index}} {% if embed.index != 1 %} is-hidden{% endif %}">
-                                <h5 class="checkout-layout__title">{{ embed.toggler.vars.label | trans }}</h5>
+                                <h5 class="title--checkout">{{ embed.toggler.vars.label | trans }}</h5>
                                 {{parent()}}
                             </div>
                         {% endblock %}

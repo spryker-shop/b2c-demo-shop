@@ -10,9 +10,12 @@
     title: null
 } %}
 
+{% block contentClass %}
+    page-layout-checkout--address-step
+{% endblock %}
+
 {% block content %}
     {% embed molecule('form') with {
-        class: 'checkout-layout checkout-layout--address-step',
         modifiers: ['checkout-address-step'],
         data: {
             form: data.forms.address,
@@ -31,7 +34,7 @@
         }
     } only %}
         {% block fields %}
-            <h5 class="checkout-layout__title">{{ 'page.checkout.address.shipping-address' | trans }}</h5>
+            <h5 class="title--checkout">{{ 'page.checkout.address.shipping-address' | trans }}</h5>
             {% set existingShippingAddresses = data.form.shippingAddress.id_customer_address | default %}
             {% set hasShippingAddresses = existingShippingAddresses is not empty %}
 
@@ -87,7 +90,7 @@
                 }
             } only %}
 
-            <h5 class="checkout-layout__title">{{'page.checkout.address.billing-address' | trans}}</h5>
+            <h5 class="title--checkout">{{'page.checkout.address.billing-address' | trans}}</h5>
             <div class="grid">
                 <div class="col col--sm-12">
                     {{form_row(data.form.billingSameAsShipping, {

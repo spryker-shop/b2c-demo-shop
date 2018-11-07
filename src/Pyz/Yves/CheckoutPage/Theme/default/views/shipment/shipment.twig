@@ -11,7 +11,6 @@
 
 {% block content %}
     {% embed molecule('form') with {
-        class: 'checkout-layout',
         modifiers: ['checkout-shipment-step'],
         data: {
             form: data.forms.shipment,
@@ -37,9 +36,9 @@
             {% for name, choices in data.form.idShipmentMethod.vars.choices %}
                 <div class="col col--sm-12 {{ config.name }}__shipment-item">
 
-                    <div class="checkout-layout__heading">
-                        <h5 class="checkout-layout__title checkout-layout__title--shipment">{{name | trans}}</h5>
-                        <div class="checkout-layout__heading-logo">
+                    <div class="heading">
+                        <h5 class="title--checkout title--shipment">{{name | trans}}</h5>
+                        <div class="heading__logo">
                             <img src="/assets/images/shipment-{{ name }}.png" width="65" height="10" alt="{{ name }}">
                         </div>
                     </div>

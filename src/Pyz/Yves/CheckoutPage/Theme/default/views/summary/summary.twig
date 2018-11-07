@@ -32,12 +32,15 @@
     title: null
 } %}
 
+{% block contentClass %}
+    page-layout-checkout--full-width summary-page
+{% endblock %}
+
 {% block content %}
-    <div class="checkout-layout checkout-layout--summary-step checkout-layout--full-width">
-        <div class="grid">
+    <div class="grid">
             <div class="col col--sm-12 col--lg-6">
                 <div class="summary-item__wrap">
-                    <h5 class="checkout-layout__title">{{ 'checkout.step.address.title' | trans }}</h5>
+                    <h5 class="title--checkout">{{ 'checkout.step.address.title' | trans }}</h5>
                     <div class="grid">
                         <div class="col col--sm-12 col--md-6">
                             <strong>{{ 'page.checkout.summary.shipping' | trans }}</strong>
@@ -55,7 +58,7 @@
                             {% endfor %}
 
                         </div>
-                        <div class="checkout-layout__summary-address-indent col col--sm-12 col--md-6">
+                        <div class="summary-page__address-indent col col--sm-12 col--md-6">
                             <strong>{{ 'page.checkout.address.billing-address' | trans }}</strong>
                             {% include molecule('display-address', 'CheckoutPage') with {
                                 class: 'text-small',
@@ -73,15 +76,15 @@
                     </div>
                 </div>
                 <div class="summary-item__wrap">
-                    <h5 class="checkout-layout__title">{{ 'checkout.step.summary.shipping' | trans }}</h5>
+                    <h5 class="title--checkout">{{ 'checkout.step.summary.shipping' | trans }}</h5>
                     {% if data.shipmentMethodName == 'DHL' %}
-                        <div class="checkout-layout__heading-logo checkout-layout__heading-logo--indent">
-                            <img class="checkout-layout__heading-logo--img" src="/assets/images/shipment-checkout.step.shipment.provider.a.png" width="65" height="10" alt="DHL">
+                        <div class="heading__logo heading__logo--indent">
+                            <img class="heading__logo--img" src="/assets/images/shipment-checkout.step.shipment.provider.a.png" width="65" height="10" alt="DHL">
                         </div>
                     {% endif %}
                     {% if data.shipmentMethodName == 'Hermes' %}
-                        <div class="checkout-layout__heading-logo checkout-layout__heading-logo--indent">
-                            <img class="checkout-layout__heading-logo--img" src="/assets/images/shipment-checkout.step.shipment.provider.b.png" width="65" height="10" alt="Hermes">
+                        <div class="heading__logo heading__logo--indent">
+                            <img class="heading__logo--img" src="/assets/images/shipment-checkout.step.shipment.provider.b.png" width="65" height="10" alt="Hermes">
                         </div>
                     {% endif %}
                     <ul class="list">
@@ -96,15 +99,15 @@
                     {% endfor %}
                 </div>
                 <div class="summary-item__wrap">
-                    <h5 class="checkout-layout__title">{{ 'checkout.step.summary.payment' | trans }}</h5>
+                    <h5 class="title--checkout">{{ 'checkout.step.summary.payment' | trans }}</h5>
                     {% if data.paymentMethodName == 'Visa' %}
-                        <div class="checkout-layout__heading-logo checkout-layout__heading-logo--indent">
-                            <img class="checkout-layout__heading-logo--img" src="/assets/images/logo-visa.png" width="50" height="18" alt="Visa">
+                        <div class="heading__logo heading__logo--indent">
+                            <img class="heading__logo--img" src="/assets/images/logo-visa.png" width="50" height="18" alt="Visa">
                         </div>
                     {% endif %}
                     {% if data.paymentMethodName == 'Master Card' %}
-                        <div class="form__checkout-summary-heading form__checkout-summary-heading--indent">
-                            <img class="checkout-layout__heading-logo--img" src="/assets/images/logo-mastercard.png" width="29" height="22" alt="Mastercard">
+                        <div class="heading__logo heading__logo--indent">
+                            <img class="heading__logo--img" src="/assets/images/logo-mastercard.png" width="29" height="22" alt="Mastercard">
                         </div>
                     {% endif %}
                     <ul class="list">
@@ -126,9 +129,9 @@
                 </div>
             </div>
 
-            <div class="col col--sm-12 col--lg-6 checkout-layout__summary-right">
+            <div class="col col--sm-12 col--lg-6 summary-page__right">
                 <div class="summary-item__wrap">
-                    <h5 class="checkout-layout__title"> {{ 'page.checkout.summary.products' | trans }}</h5>
+                    <h5 class="title--checkout"> {{ 'page.checkout.summary.products' | trans }}</h5>
                     <div class="summary-product-list">
                         {% for item in data.cartItems %}
                             {% set item = item.bundleProduct is defined ? item.bundleProduct : item %}
@@ -148,7 +151,7 @@
                     </div>
                 </div>
                 <div class="summary-item__wrap">
-                    <h5 class="checkout-layout__title">{{ 'checkout.step.summary.total' | trans }}</h5>
+                    <h5 class="title--checkout">{{ 'checkout.step.summary.total' | trans }}</h5>
                     {{ widget('CartNoteQuoteNoteWidgetPlugin', data.transfer) }}
                     {{ widget('CheckoutVoucherFormWidgetPlugin', data.transfer, 'test') }}
 
@@ -170,6 +173,5 @@
                 </div>
             </div>
 
-        </div>
     </div>
 {% endblock %}

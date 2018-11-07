@@ -67,7 +67,7 @@
 {% endblock %}
 
 {% block content %}
-    <div class="checkout-layout">
+
         {% embed molecule('form') with {
             class: 'register-form js-login__register' ~ (data.isGuest or data.isLogin? ' is-hidden' : ''),
             modifiers: ['checkout-login-step'],
@@ -181,5 +181,4 @@
             {% endblock %}
         {% endembed %}
 
-    </div>
 {% endblock %}
