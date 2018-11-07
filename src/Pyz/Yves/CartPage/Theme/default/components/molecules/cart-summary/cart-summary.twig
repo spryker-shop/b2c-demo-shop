@@ -33,9 +33,7 @@
                 <span class="float-right">{{ data.cart.totals.taxTotal.amount | money }}</span>
             </li>
             {% if widgetExists('DiscountSummaryWidgetPlugin') %}
-                <li class="{{ config.name }}__item spacing-y spacing-y--bigger">
-                    {{ widget('DiscountSummaryWidgetPlugin', data.cart) }}
-                </li>
+                {{ widget('DiscountSummaryWidgetPlugin', data.cart) }}
             {% endif %}
             <li class="{{ config.name }}__item {{ config.name }}__total spacing-y spacing-y--bigger">
                 <strong>{{ 'cart.price.grand.total' | trans }}</strong>

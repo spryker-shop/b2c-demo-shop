@@ -1,12 +1,11 @@
 @mixin cart-page-cart-item-summary($name: '.cart-item-summary') {
     #{$name} {
-        &__list {
-            width: 100%;
-            margin: 0;
+        width: 100%;
+        margin: 0;
 
-            @include helper-breakpoint-media-min($lg-min) {
-                width: calc(100% - #{rem(120, number)});
-            }
+        @include helper-breakpoint-media-min($lg-min) {
+            width: calc(100% - #{rem(144, number)});
+            padding-top: rem(20);
         }
 
         &__item {
@@ -23,7 +22,7 @@
             }
 
             @include helper-breakpoint-media-min($lg-min) {
-                padding: rem(20) 0 0 rem(24);
+                padding-top: rem(20);
             }
         }
     }

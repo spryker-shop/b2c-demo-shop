@@ -1,7 +1,8 @@
 {% extends model('component') %}
 
 {% define config = {
-    name: 'cart-item-summary'
+    name: 'cart-item-summary',
+    tag: 'ul'
 } %}
 
 {% define data = {
@@ -14,10 +15,8 @@
 
 {% block body %}
     {% if data.cartItem.productOptions is not empty %}
-        <ul class="{{ config.name }}__list">
-            <li class="{{ config.name }}__item">
-                {{ widget('CartItemProductOptionWidgetPlugin', data.cartItem) }}
-            </li>
-        </ul>
+        <li class="{{ config.name }}__item">
+            {{ widget('CartItemProductOptionWidgetPlugin', data.cartItem) }}
+        </li>
     {% endif %}
 {% endblock %}
