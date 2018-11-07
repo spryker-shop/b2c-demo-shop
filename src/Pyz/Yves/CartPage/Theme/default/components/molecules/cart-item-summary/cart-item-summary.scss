@@ -9,7 +9,7 @@
         }
 
         &__item {
-            padding: rem(20) 0 0 0;
+            padding-top: rem(20);
             font: map-get($setting-font-weight, medium) rem(17)/1.3 $setting-font-family-additional;
             border-bottom: rem(1) dotted $setting-color-lightest;
 
@@ -19,10 +19,6 @@
 
             &::before {
                 display: none;
-            }
-
-            @include helper-breakpoint-media-min($lg-min) {
-                padding-top: rem(20);
             }
         }
     }

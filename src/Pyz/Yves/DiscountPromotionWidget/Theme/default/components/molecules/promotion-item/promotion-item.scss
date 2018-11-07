@@ -5,19 +5,19 @@
         &__container {
             position: relative;
             color: $setting-color-text;
-            border-bottom: 1px dotted $setting-color-lightest;
-            padding: 18px 0;
+            border-bottom: rem(1) dotted $setting-color-lightest;
+            padding: rem(18) 0;
         }
 
         &__thumbnail {
-            border-radius: 4px;
+            border-radius: rem(4);
             position: relative;
             overflow: hidden;
-            width: 120px;
+            width: rem(120);
         }
 
         &__overlay {
-            padding: 12px 15px;
+            padding: rem(12) rem(15);
 
             &::before {
                 content: '';
@@ -26,16 +26,16 @@
                 left: 0;
                 right: 0;
                 bottom: 0;
-                border-radius: 4px;
+                border-radius: rem(4);
                 background: rgba($setting-color-black, 0.05);
                 z-index: $setting-zi-element-floating;
             }
         }
 
         &__content {
-            padding-left: 24px;
+            padding-left: rem(24);
             position: relative;
-            width: calc(100% - 120px);
+            width: calc(100% - #{rem(120, number)});
         }
 
         &--stretch {
@@ -58,27 +58,27 @@
 
         &__button {
             font-size: 0;
-            width: 29px;
-            height: 28px;
+            width: rem(29);
+            height: rem(28);
 
             @include helper-breakpoint-media-min($lg-min) {
                 position: absolute;
                 right: 0;
                 bottom: 0;
-                height: 32px;
+                height: rem(32);
                 width: auto;
-                font: map-get($setting-font-weight, regular) 10px $setting-font-family-additional;
+                font: map-get($setting-font-weight, regular) rem(10) $setting-font-family-additional;
             }
 
             &::after {
                 content: '+';
-                font-size: 28px;
+                font-size: rem(28);
                 display: block;
                 width: 100%;
-                height: 26px;
-                line-height: 26px;
+                height: rem(26);
+                line-height: rem(26);
                 position: absolute;
-                top: -2px;
+                top: rem(-2);
                 left: 0;
 
                 @include helper-breakpoint-media-min($lg-min) {
