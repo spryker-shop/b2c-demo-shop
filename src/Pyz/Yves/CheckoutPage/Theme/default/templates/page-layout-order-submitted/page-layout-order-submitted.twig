@@ -17,7 +17,7 @@
         <p class="success-page__text">{{data.message}}</p>
 
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-            <a class="link link--checkout-success" href="{{ url('customer/overview') }}">{{ 'checkout.step.success.link' | trans }}
+            <a class="link link-darkest link--checkout-success" href="{{ url('customer/overview') }}">{{ 'checkout.step.success.link' | trans }}
                 {% include atom('icon') with {
                     modifiers: ['small', 'checkout-success'],
                     data: {
