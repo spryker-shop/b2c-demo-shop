@@ -12,6 +12,16 @@
             align-self: center;
         }
 
+        &__wrap {
+            &:nth-of-type(1n + 2) {
+                margin-top: rem(60);
+
+                @include helper-breakpoint-media-min($md-min) {
+                    margin-top: rem(70);
+                }
+            }
+        }
+
         &__box {
             padding: rem(18) 0;
             border-bottom: rem(1) dotted $setting-color-lightest;
@@ -33,6 +43,16 @@
 
         &__image {
             width: rem(120);
+        }
+
+        &--product {
+            .grid {
+                margin: 0;
+            }
+
+            .col {
+                padding: 0;
+            }
         }
 
         @content;

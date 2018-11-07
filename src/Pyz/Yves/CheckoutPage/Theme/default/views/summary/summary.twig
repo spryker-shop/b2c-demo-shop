@@ -36,7 +36,7 @@
     <div class="checkout-layout checkout-layout--summary-step checkout-layout--full-width">
         <div class="grid">
             <div class="col col--sm-12 col--lg-6">
-                <div class="checkout-layout__summary-item-wrap">
+                <div class="summary-item__wrap">
                     <h5 class="checkout-layout__title">{{ 'checkout.step.address.title' | trans }}</h5>
                     <div class="grid">
                         <div class="col col--sm-12 col--md-6">
@@ -72,7 +72,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="checkout-layout__summary-item-wrap">
+                <div class="summary-item__wrap">
                     <h5 class="checkout-layout__title">{{ 'checkout.step.summary.shipping' | trans }}</h5>
                     {% if data.shipmentMethodName == 'DHL' %}
                         <div class="checkout-layout__heading-logo checkout-layout__heading-logo--indent">
@@ -95,7 +95,7 @@
                         {% endif %}
                     {% endfor %}
                 </div>
-                <div class="checkout-layout__summary-item-wrap">
+                <div class="summary-item__wrap">
                     <h5 class="checkout-layout__title">{{ 'checkout.step.summary.payment' | trans }}</h5>
                     {% if data.paymentMethodName == 'Visa' %}
                         <div class="checkout-layout__heading-logo checkout-layout__heading-logo--indent">
@@ -127,14 +127,14 @@
             </div>
 
             <div class="col col--sm-12 col--lg-6 checkout-layout__summary-right">
-                <div class="checkout-layout__summary-item-wrap">
+                <div class="summary-item__wrap">
                     <h5 class="checkout-layout__title"> {{ 'page.checkout.summary.products' | trans }}</h5>
                     <div class="summary-product-list">
                         {% for item in data.cartItems %}
                             {% set item = item.bundleProduct is defined ? item.bundleProduct : item %}
                             {% set firstImage = item.images | first %}
                             {% include molecule('summary-item', 'CheckoutPage') with {
-                                class: 'checkout-layout__summary-product-list-item',
+                                class: 'summary-item--product',
                                 data: {
                                     cartItem: item,
                                     name: item.name,
@@ -147,7 +147,7 @@
                         {% endfor %}
                     </div>
                 </div>
-                <div class="checkout-layout__summary-item-wrap">
+                <div class="summary-item__wrap">
                     <h5 class="checkout-layout__title">{{ 'checkout.step.summary.total' | trans }}</h5>
                     {{ widget('CartNoteQuoteNoteWidgetPlugin', data.transfer) }}
                     {{ widget('CheckoutVoucherFormWidgetPlugin', data.transfer, 'test') }}
