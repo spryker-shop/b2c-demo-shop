@@ -28,9 +28,6 @@ class CmsContentWidgetDependencyProvider extends SprykerCmsContentWidgetDependen
     public function getCmsContentWidgetPlugins()
     {
         return [
-            CmsChartContentWidgetConfigurationProvider::FUNCTION_NAME => new CmsChartContentWidgetPlugin(
-                new CmsChartContentWidgetConfigurationProvider()
-            ),
             CmsProductContentWidgetConfigurationProvider::FUNCTION_NAME => new CmsProductContentWidgetPlugin(
                 new CmsProductContentWidgetConfigurationProvider()
             ),
@@ -39,6 +36,9 @@ class CmsContentWidgetDependencyProvider extends SprykerCmsContentWidgetDependen
             ),
             CmsProductSetContentWidgetConfigurationProvider::FUNCTION_NAME => new CmsProductSetContentWidgetPlugin(
                 new CmsProductSetContentWidgetConfigurationProvider()
+            ),
+            CmsChartContentWidgetConfigurationProvider::FUNCTION_NAME => new CmsChartContentWidgetPlugin(
+                new CmsChartContentWidgetConfigurationProvider()
             ),
             FileManagerWidgetConfigurationProvider::FUNCTION_NAME => new FileManagerWidgetPlugin(
                 new FileManagerWidgetConfigurationProvider()

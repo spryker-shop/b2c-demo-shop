@@ -93,7 +93,7 @@
                     <div class="col col--sm-5">
                         <label>
                             {{'cart.item_quantity' | trans}}
-                            {% include atom('select') with {
+                            {% embed atom('select') with {
                                 modifiers: ['expand'],
                                 data: {
                                     options: options
@@ -103,6 +103,8 @@
                                     disabled: isDisabled
                                 }
                             } only %}
+                                {% block selectClass %}js-volume-price__quantity{% endblock %}
+                            {% endembed %}
                         </label>
                     </div>
 
