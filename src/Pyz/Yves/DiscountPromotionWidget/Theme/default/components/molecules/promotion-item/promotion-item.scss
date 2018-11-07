@@ -1,4 +1,4 @@
-@mixin cart-page-promotion-item($name: '.promotion-item') {
+@mixin discount-promotion-widget-promotion-item($name: '.promotion-item') {
     #{$name} {
         position: relative;
 
@@ -53,8 +53,7 @@
 
         &__name {
             display: block;
-            font: map-get($setting-font-weight, regular) 17px $setting-font-family-additional;
-            @include helper-font-line-height(medium);
+            font: map-get($setting-font-weight, regular) rem(17)/1.3 $setting-font-family-additional;
         }
 
         &__button {
@@ -93,8 +92,7 @@
         }
 
         &__price {
-            font: map-get($setting-font-weight, medium) 17px $setting-font-family-additional;
-            @include helper-font-line-height(medium);
+            font: map-get($setting-font-weight, medium) rem(17)/1.3 $setting-font-family-additional;
             position: relative;
             text-align: left;
 
@@ -105,4 +103,4 @@
     }
 }
 
-@include cart-page-promotion-item();
+@include discount-promotion-widget-promotion-item();

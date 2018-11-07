@@ -30,7 +30,7 @@
                 <div class="grid grid--justify grid--middle">
                     <a href="{{ data.cartItem.url }}" class="{{ config.name }}__title col col--lg-8 col--sm-12">{{ data.cartItem.name }}</a>
                     <div class="{{ config.name }}__price col col--lg-4 col--sm-12">
-                        <span class="{{ config.name }}__price">{{ cartItemSubTotal | money }}</span>
+                        {{ cartItemSubTotal | money }}
                     </div>
                 </div>
                 <div class="{{ config.name }}__options">

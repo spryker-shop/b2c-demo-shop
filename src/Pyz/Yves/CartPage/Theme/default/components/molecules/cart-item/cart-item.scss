@@ -1,8 +1,7 @@
 @mixin cart-page-cart-item($name: '.cart-item') {
     #{$name} {
         &__title {
-            font: map-get($setting-font-weight, medium) 17px $setting-font-family-additional;
-            @include helper-font-line-height(medium);
+            font: map-get($setting-font-weight, medium) rem(17)/1.3 $setting-font-family-additional;
 
             &:hover {
                 cursor: pointer;
@@ -12,17 +11,16 @@
         }
 
         &__content {
-            padding: 0 0 5px 24px;
-            width: calc(100% - 120px);
+            padding: 0 0 rem(5) rem(24);
+            width: calc(100% - #{rem(120, number)});
         }
 
         &__image {
-            width: 120px;
+            width: rem(120);
         }
 
         &__price {
-            font: map-get($setting-font-weight, medium) 17px $setting-font-family-additional;
-            @include helper-font-line-height(medium);
+            font: map-get($setting-font-weight, medium) rem(17)/1.3 $setting-font-family-additional;
             text-align: left;
 
             @include helper-breakpoint-media-min($lg-min) {
@@ -31,8 +29,7 @@
         }
 
         &__remove {
-            font: map-get($setting-font-weight, light) 13px $setting-font-family-additional;
-            @include helper-font-line-height(medium);
+            font: map-get($setting-font-weight, light) rem(13)/1.3 $setting-font-family-additional;
             opacity: 0.4;
             text-transform: capitalize;
 
@@ -44,8 +41,8 @@
         }
 
         &__box {
-            border-bottom: 1px dotted $setting-color-lightest;
-            padding: 18px 0;
+            border-bottom: rem(1) dotted $setting-color-lightest;
+            padding: rem(18) 0;
 
             &--borderless {
                 border-bottom: none;

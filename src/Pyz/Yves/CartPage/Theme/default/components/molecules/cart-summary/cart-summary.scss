@@ -1,7 +1,15 @@
 @mixin cart-page-cart-summary($name: '.cart-summary') {
     #{$name} {
-        &--bordered {
-            border-bottom: 1px dotted $setting-color-lightest;
+        margin-top: rem(20);
+
+        @include helper-breakpoint-media-min($lg-min) {
+            margin-top: rem(56);
+        }
+
+        &__inner {
+            border-top: rem(1) dotted $setting-color-lightest;
+            border-bottom: rem(1) dotted $setting-color-lightest;
+            overflow: hidden;
         }
 
         &__total {
@@ -10,15 +18,7 @@
         }
 
         &__item {
-            font: map-get($setting-font-weight, reguilar) 14px $setting-font-family-additional;
-        }
-
-        &__button {
-            font: map-get($setting-font-weight, medium) 16px $setting-font-family-additional;
-            height: 56px;
-            line-height: 56px;
-            padding: 0 20px;
-            margin-top: 56px;
+            font: 400 rem(14) $setting-font-family-additional;
         }
     }
 }

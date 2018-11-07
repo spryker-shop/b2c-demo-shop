@@ -15,29 +15,29 @@
 %}
 
 {% block body %}
-    <div class="{{ config.name }}--bordered">
-        <ul class="{{ config.name }}__list spacing-y spacing-y--biggest">
+    <div class="{{ config.name }}__inner">
+        <ul class="{{ config.name }}__list spacing-y spacing-y--bigger">
             {% if data.cart.shipment is not empty and data.cart.shipment.method is not empty %}
-                <li class="{{ config.name }}__item spacing-y spacing-y--biggest">
+                <li class="{{ config.name }}__item spacing-y spacing-y--bigger">
                     <strong>{{ 'cart.shipping' | trans }}</strong>
                     {{ data.cart.shipment.method.name }}
                     <span class="float-right">{{ data.cart.shipment.method.storeCurrencyPrice | money }}</span>
                 </li>
             {% endif %}
-            <li class="{{ config.name }}__item spacing-y spacing-y--biggest">
+            <li class="{{ config.name }}__item spacing-y spacing-y--bigger">
                 {{ 'cart.price.subtotal' | trans }}
                 <span class="float-right">{{ data.cart.totals.subtotal | money }}</span>
             </li>
-            <li class="{{ config.name }}__item spacing-y spacing-y--biggest">
+            <li class="{{ config.name }}__item spacing-y spacing-y--bigger">
                 {{ 'cart.total.tax_total' | trans }}
                 <span class="float-right">{{ data.cart.totals.taxTotal.amount | money }}</span>
             </li>
             {% if widgetExists('DiscountSummaryWidgetPlugin') %}
-                <li class="{{ config.name }}__item spacing-y spacing-y--biggest">
+                <li class="{{ config.name }}__item spacing-y spacing-y--bigger">
                     {{ widget('DiscountSummaryWidgetPlugin', data.cart) }}
                 </li>
             {% endif %}
-            <li class="{{ config.name }}__item {{ config.name }}__total spacing-y spacing-y--biggest">
+            <li class="{{ config.name }}__item {{ config.name }}__total spacing-y spacing-y--bigger">
                 <strong>{{ 'cart.price.grand.total' | trans }}</strong>
                 <strong class="float-right">{{ data.cart.totals.grandTotal | money }}</strong>
             </li>
@@ -45,7 +45,7 @@
     </div>
 
     {% if canProceedToCheckout %}
-        <a class="button button--expand button--black {{ config.name }}__button" href="{{ url('checkout-index') }}" {{qa('cart-go-to-checkout')}}>
+        <a class="button button--expand button--black button--cart" href="{{ url('checkout-index') }}" {{qa('cart-go-to-checkout')}}>
             {{ 'cart.checkout' | trans }}
         </a>
     {% endif %}
