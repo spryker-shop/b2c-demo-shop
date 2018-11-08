@@ -20,25 +20,25 @@
 {% block body %}
 
     <div class="pdp-review">
-        <div class="product-slider-title">
-            <div class="">
-                <h2 class="product-slider-title__text">{{ 'product_review.ratings_reviews' | trans }}</h2>
-            </div>
-            <div class="product-slider-title__line"></div>
-            <div class="">
-                <div class="grid grid--right is-hidden-sm-md">
+        {% embed molecule('product-slider-title') with {
+            data: {
+                title: 'product_review.ratings_reviews' | trans
+            }
+        } only %}
+            {% block subContent %}
+                <div class="{{ config.name }}__sub-col is-hidden-sm-md">
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                        <span class="product-slider-title__link js-review__new-review-trigger">
+                        <span class="link link--custom-underline js-review__new-review-trigger">
                             {{ 'product_review.submit.add_a_review' | trans }}
                         </span>
                     {% else %}
-                        <a class="product-slider-title__link" href="{{ path('login') }}">
+                        <a class="link link--custom-underline" href="{{ path('login') }}">
                             {{ 'product_review.submit.add_a_review' | trans }}
                         </a>
                     {% endif %}
                 </div>
-            </div>
-        </div>
+            {% endblock %}
+        {% endembed %}
 
         {% include molecule('toggler-click') with {
             attributes: {
