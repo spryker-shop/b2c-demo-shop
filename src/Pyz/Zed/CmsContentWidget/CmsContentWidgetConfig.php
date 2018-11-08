@@ -24,10 +24,10 @@ class CmsContentWidgetConfig extends SprykerCmsContentConfig
     public function getCmsContentWidgetConfigurationProviders()
     {
         return [
-            CmsChartContentWidgetConfigurationProvider::FUNCTION_NAME => new CmsChartContentWidgetConfigurationProvider(),
             CmsProductContentWidgetConfigurationProvider::FUNCTION_NAME => new CmsProductContentWidgetConfigurationProvider(),
             CmsProductSetContentWidgetConfigurationProvider::FUNCTION_NAME => new CmsProductSetContentWidgetConfigurationProvider(),
             CmsProductGroupContentWidgetConfigurationProvider::FUNCTION_NAME => new CmsProductGroupContentWidgetConfigurationProvider(),
+            CmsChartContentWidgetConfigurationProvider::FUNCTION_NAME => new CmsChartContentWidgetConfigurationProvider(),
             FileManagerWidgetConfigurationProvider::FUNCTION_NAME => new FileManagerWidgetConfigurationProvider(),
         ];
     }
