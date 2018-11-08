@@ -16,14 +16,13 @@ use Spryker\Shared\Application\ServiceProvider\FormFactoryServiceProvider;
 use Spryker\Shared\Config\Environment;
 use Spryker\Shared\ErrorHandler\Plugin\ServiceProvider\WhoopsErrorHandlerServiceProvider;
 use Spryker\Zed\Acl\Communication\Plugin\Bootstrap\AclBootstrapProvider;
-use Spryker\Zed\Api\Communication\Plugin\ApiServiceProviderPlugin;
-use Spryker\Zed\Api\Communication\Plugin\ServiceProvider\ApiRoutingServiceProvider;
 use Spryker\Zed\Application\ApplicationDependencyProvider as SprykerApplicationDependencyProvider;
 use Spryker\Zed\Application\Communication\Plugin\ServiceProvider\AssertUrlConfigurationServiceProvider;
 use Spryker\Zed\Application\Communication\Plugin\ServiceProvider\EnvironmentInformationServiceProvider;
 use Spryker\Zed\Application\Communication\Plugin\ServiceProvider\MvcRoutingServiceProvider;
 use Spryker\Zed\Application\Communication\Plugin\ServiceProvider\RequestServiceProvider;
 use Spryker\Zed\Application\Communication\Plugin\ServiceProvider\RoutingServiceProvider;
+use Spryker\Zed\Application\Communication\Plugin\ServiceProvider\SaveSessionServiceProvider;
 use Spryker\Zed\Application\Communication\Plugin\ServiceProvider\SilexRoutingServiceProvider;
 use Spryker\Zed\Application\Communication\Plugin\ServiceProvider\SslServiceProvider;
 use Spryker\Zed\Application\Communication\Plugin\ServiceProvider\SubRequestServiceProvider;
@@ -88,6 +87,7 @@ class ApplicationDependencyProvider extends SprykerApplicationDependencyProvider
             new GuiTwigExtensionServiceProvider(),
             new EventBehaviorServiceProvider(),
             new TwigChartFunctionServiceProvider(),
+            new SaveSessionServiceProvider(),
         ];
 
         if (Environment::isDevelopment()) {
@@ -112,8 +112,6 @@ class ApplicationDependencyProvider extends SprykerApplicationDependencyProvider
             new SslServiceProvider(),
             new ServiceControllerServiceProvider(),
             new RoutingServiceProvider(),
-            new ApiServiceProviderPlugin,
-            new ApiRoutingServiceProvider(),
             new PropelServiceProvider(),
             new EventBehaviorServiceProvider(),
         ];

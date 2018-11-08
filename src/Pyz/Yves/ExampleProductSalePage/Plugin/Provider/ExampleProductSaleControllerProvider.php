@@ -12,7 +12,7 @@ use SprykerShop\Yves\ShopApplication\Plugin\Provider\AbstractYvesControllerProvi
 
 class ExampleProductSaleControllerProvider extends AbstractYvesControllerProvider
 {
-    const ROUTE_SALE = 'sale';
+    public const ROUTE_SALE = 'sale';
 
     /**
      * @param \Silex\Application $app

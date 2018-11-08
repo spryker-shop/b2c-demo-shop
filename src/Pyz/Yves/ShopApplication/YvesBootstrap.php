@@ -28,7 +28,7 @@ use Spryker\Yves\Application\Plugin\ServiceProvider\KernelLogServiceProvider;
 use Spryker\Yves\Application\Plugin\ServiceProvider\SslServiceProvider;
 use Spryker\Yves\CmsContentWidget\Plugin\CmsContentWidgetServiceProvider;
 use Spryker\Yves\Messenger\Plugin\Provider\FlashMessengerServiceProvider;
-use Spryker\Yves\NewRelic\Plugin\ServiceProvider\NewRelicRequestTransactionServiceProvider;
+use Spryker\Yves\Monitoring\Plugin\ServiceProvider\MonitoringRequestTransactionServiceProvider;
 use Spryker\Yves\Session\Plugin\ServiceProvider\SessionServiceProvider as SprykerSessionServiceProvider;
 use Spryker\Yves\Storage\Plugin\Provider\StorageCacheServiceProvider;
 use Spryker\Yves\Twig\Plugin\ServiceProvider\TwigServiceProvider as SprykerTwigServiceProvider;
@@ -44,6 +44,7 @@ use SprykerShop\Yves\CartPage\Plugin\Provider\CartServiceProvider;
 use SprykerShop\Yves\CatalogPage\Plugin\Provider\CatalogPageControllerProvider;
 use SprykerShop\Yves\CatalogPage\Plugin\Provider\CatalogPageTwigServiceProvider;
 use SprykerShop\Yves\CategoryWidget\Plugin\Provider\CategoryServiceProvider;
+use SprykerShop\Yves\ChartWidget\Plugin\Provider\TwigChartFunctionServiceProvider;
 use SprykerShop\Yves\CheckoutPage\Plugin\Provider\CheckoutPageControllerProvider;
 use SprykerShop\Yves\CmsBlockWidget\Plugin\Provider\CmsBlockTwigFunctionServiceProvider;
 use SprykerShop\Yves\CmsPage\Plugin\Provider\CmsTwigFunctionServiceProvider;
@@ -112,7 +113,7 @@ class YvesBootstrap extends SprykerYvesBootstrap
         $this->application->register(new YvesSecurityServiceProvider());
         $this->application->register(new YvesExceptionServiceProvider());
         $this->application->register(new ErrorPageServiceProvider());
-        $this->application->register(new NewRelicRequestTransactionServiceProvider());
+        $this->application->register(new MonitoringRequestTransactionServiceProvider());
         $this->application->register(new CookieServiceProvider());
         $this->application->register(new UrlGeneratorServiceProvider());
         $this->application->register(new ServiceControllerServiceProvider());
@@ -136,6 +137,7 @@ class YvesBootstrap extends SprykerYvesBootstrap
         $this->application->register(new CmsBlockTwigFunctionServiceProvider());
         $this->application->register(new CatalogPageTwigServiceProvider());
         $this->application->register(new ShopUiTwigServiceProvider());
+        $this->application->register(new TwigChartFunctionServiceProvider());
         $this->application->register(new AgentPageSecurityServiceProvider()); # AgentFeature
     }
 

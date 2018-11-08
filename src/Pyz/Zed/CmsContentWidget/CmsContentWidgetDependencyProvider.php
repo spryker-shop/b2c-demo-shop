@@ -14,7 +14,6 @@ use Spryker\Zed\CmsContentWidget\CmsContentWidgetDependencyProvider as SprykerCm
 use Spryker\Zed\CmsContentWidgetProductConnector\Communication\Plugin\Cms\CmsProductSkuMapperPlugin;
 use Spryker\Zed\CmsContentWidgetProductSetConnector\Communication\Plugin\Cms\CmsProductSetKeyMapperPlugin;
 use Spryker\Zed\Kernel\Container;
-use SprykerShop\Shared\CmsContentWidgetChartConnector\ContentWidgetConfigurationProvider\CmsChartContentWidgetConfigurationProvider;
 
 class CmsContentWidgetDependencyProvider extends SprykerCmsContentWidgetDependencyProvider
 {
@@ -28,7 +27,6 @@ class CmsContentWidgetDependencyProvider extends SprykerCmsContentWidgetDependen
     protected function getCmsContentWidgetParameterMapperPlugins(Container $container)
     {
         return [
-            CmsChartContentWidgetConfigurationProvider::FUNCTION_NAME => new CmsChartContentWidgetConfigurationProvider(),
             CmsProductContentWidgetConfigurationProvider::FUNCTION_NAME => new CmsProductSkuMapperPlugin(),
             CmsProductSetContentWidgetConfigurationProvider::FUNCTION_NAME => new CmsProductSetKeyMapperPlugin(),
             CmsProductGroupContentWidgetConfigurationProvider::FUNCTION_NAME => new CmsProductSkuMapperPlugin(),

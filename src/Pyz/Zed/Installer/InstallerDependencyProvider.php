@@ -9,6 +9,7 @@ namespace Pyz\Zed\Installer;
 
 use Spryker\Zed\Acl\Communication\Plugin\AclInstallerPlugin;
 use Spryker\Zed\Country\Communication\Plugin\CountryInstallerPlugin;
+use Spryker\Zed\CustomerAccess\Communication\Plugin\CustomerAccessInstallerPlugin;
 use Spryker\Zed\Glossary\Communication\Plugin\GlossaryInstallerPlugin;
 use Spryker\Zed\Installer\InstallerDependencyProvider as SprykerInstallerDependencyProvider;
 use Spryker\Zed\Locale\Communication\Plugin\LocaleInstallerPlugin;
@@ -34,9 +35,10 @@ class InstallerDependencyProvider extends SprykerInstallerDependencyProvider
             new AclInstallerPlugin(),
             new NewsletterInstallerPlugin(),
             new GlossaryInstallerPlugin(),
-            new ProductAlternativeProductLabelConnectorInstallerPlugin(),
-            new ProductDiscontinuedProductLabelConnectorInstallerPlugin(),
-            new SalesOrderThresholdTypeInstallerPlugin(),
+            new CustomerAccessInstallerPlugin(),
+            new ProductAlternativeProductLabelConnectorInstallerPlugin(), #ProductAlternativeFeature
+            new ProductDiscontinuedProductLabelConnectorInstallerPlugin(), #ProductDiscontinuedFeature
+            new SalesOrderThresholdTypeInstallerPlugin(), #SalesOrderThresholdFeature
         ];
     }
 }

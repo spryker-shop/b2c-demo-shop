@@ -11,15 +11,11 @@
 } %}
 
 {% block breadcrumbs %}
-    {{ widget('CheckoutBreadcrumbWidgetPlugin', data.cart) }}
+    {% widget 'CheckoutBreadcrumbWidget' args [data.cart] only %}{% endwidget %}
 {% endblock %}
 
 {% block title %}
-    {% if widgetExists('CartOperationsWidgetPlugin') %}
-        {{ widgetBlock('CartOperationsWidgetPlugin', 'title', data.cart) }}
-    {% else %}
-        {{ parent() }}
-    {% endif %}
+    {% widget 'CartOperationsWidget' args [data.cart] use view('cart-operations-title', 'MultiCartWidget') only %}{% endwidget %}
 {% endblock %}
 
 {% block content %}
@@ -49,24 +45,27 @@
                     } only %}
                 {% endfor %}
 
-                {{ widget('DiscountPromotionItemListWidgetPlugin', data.cart, data.request) }}
+                {% widget 'CartDiscountPromotionProductListWidget' args [data.cart, data.request] only %}{% endwidget %}
 
                 {% if canEditCart and data.cart.idQuote is not empty %}
-                    {{ widgetBlock('CartOperationsWidgetPlugin', 'actions', data.cart) }}
+                    {% widget 'CartOperationsWidget' args [data.cart] use view('cart-operations-actions', 'MultiCartWidget') only %}{% endwidget %}
                 {% endif %}
             </div>
 
             <div class="col col--sm-12 col--xl-4">
                 <div class="box">
-                    {{ widget('CartNoteQuoteWidgetPlugin', data.cart) }}
+                    {% widget 'CartNoteFormWidget' args [data.cart] only %}{% endwidget %}
 
                     {% if not is_granted('ROLE_USER') or canEditCart %}
-                        {{ widget('DiscountVoucherFormWidgetPlugin') }}
-                        <hr />
+                        {% widget 'DiscountVoucherFormWidget' only %}
+                            {% block body %}
+                                {{ parent() }}
+                                <hr />
+                            {% endblock %}
+                        {% endwidget %}
                     {% endif %}
-
-                    {% if canEditCart and data.cart.idQuote is not empty and widgetExists('CartToShoppingListWidgetPlugin') %}
-                        {{ widget('CartToShoppingListWidgetPlugin', data.cart.idQuote) }}
+                    {% if canEditCart and data.cart.idQuote is not empty %}
+                        {% widget 'CreateShoppingListFromCartWidget' args [data.cart.idQuote] only %}{% endwidget %}
                         <hr />
                     {% endif %}
 
@@ -81,7 +80,7 @@
         </div>
     {% endif %}
 
-    {{ widget('UpSellingProductsWidgetPlugin', data.cart) }}
+    {% widget 'UpSellingProductsWidget' args [data.cart] only %}{% endwidget %}
 {% endblock %}
 
 {% block footer %}{% endblock %}

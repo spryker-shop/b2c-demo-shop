@@ -19,7 +19,7 @@ class ProductAlternativeStorageDependencyProvider extends SprykerProductAlternat
     protected function getAlternativeProductApplicableCheckPlugins(): array
     {
         return [
-            new DiscontinuedCheckAlternativeProductApplicablePlugin(),
+            new DiscontinuedCheckAlternativeProductApplicablePlugin(), #ProductDiscontinuedFeature
             new AvailabilityCheckAlternativeProductApplicablePlugin(),
         ];
     }

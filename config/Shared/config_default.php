@@ -15,7 +15,6 @@ use Spryker\Shared\ErrorHandler\ErrorHandlerConstants;
 use Spryker\Shared\ErrorHandler\ErrorRenderer\WebHtmlErrorRenderer;
 use Spryker\Shared\Event\EventConstants;
 use Spryker\Shared\EventBehavior\EventBehaviorConstants;
-use Spryker\Shared\EventJournal\EventJournalConstants;
 use Spryker\Shared\FileManager\FileManagerConstants;
 use Spryker\Shared\FileManagerGui\FileManagerGuiConstants;
 use Spryker\Shared\FileSystem\FileSystemConstants;
@@ -24,7 +23,6 @@ use Spryker\Shared\Kernel\ClassResolver\Cache\Provider\File;
 use Spryker\Shared\Kernel\KernelConstants;
 use Spryker\Shared\Kernel\Store;
 use Spryker\Shared\Log\LogConstants;
-use Spryker\Shared\NewRelic\NewRelicConstants;
 use Spryker\Shared\Oms\OmsConstants;
 use Spryker\Shared\Propel\PropelConstants;
 use Spryker\Shared\Queue\QueueConfig;
@@ -32,6 +30,7 @@ use Spryker\Shared\Queue\QueueConstants;
 use Spryker\Shared\Sales\SalesConstants;
 use Spryker\Shared\Search\SearchConstants;
 use Spryker\Shared\SequenceNumber\SequenceNumberConstants;
+use Spryker\Shared\Session\SessionConfig;
 use Spryker\Shared\Session\SessionConstants;
 use Spryker\Shared\Storage\StorageConstants;
 use Spryker\Shared\Tax\TaxConstants;
@@ -244,14 +243,14 @@ $config[StorageConstants::STORAGE_KV_SOURCE] = 'redis';
 $config[StorageConstants::STORAGE_PERSISTENT_CONNECTION] = true;
 
 // ---------- Session
-$config[SessionConstants::YVES_SESSION_SAVE_HANDLER] = SessionConstants::SESSION_HANDLER_REDIS_LOCKING;
-$config[SessionConstants::YVES_SESSION_TIME_TO_LIVE] = SessionConstants::SESSION_LIFETIME_1_HOUR;
-$config[SessionConstants::YVES_SESSION_COOKIE_TIME_TO_LIVE] = SessionConstants::SESSION_LIFETIME_0_5_HOUR;
+$config[SessionConstants::YVES_SESSION_SAVE_HANDLER] = SessionConfig::SESSION_HANDLER_REDIS_LOCKING;
+$config[SessionConstants::YVES_SESSION_TIME_TO_LIVE] = SessionConfig::SESSION_LIFETIME_1_HOUR;
+$config[SessionConstants::YVES_SESSION_COOKIE_TIME_TO_LIVE] = SessionConfig::SESSION_LIFETIME_0_5_HOUR;
 $config[SessionConstants::YVES_SESSION_FILE_PATH] = session_save_path();
 $config[SessionConstants::YVES_SESSION_PERSISTENT_CONNECTION] = $config[StorageConstants::STORAGE_PERSISTENT_CONNECTION];
-$config[SessionConstants::ZED_SESSION_SAVE_HANDLER] = SessionConstants::SESSION_HANDLER_REDIS;
-$config[SessionConstants::ZED_SESSION_TIME_TO_LIVE] = SessionConstants::SESSION_LIFETIME_1_HOUR;
-$config[SessionConstants::ZED_SESSION_COOKIE_TIME_TO_LIVE] = SessionConstants::SESSION_LIFETIME_BROWSER_SESSION;
+$config[SessionConstants::ZED_SESSION_SAVE_HANDLER] = SessionConfig::SESSION_HANDLER_REDIS;
+$config[SessionConstants::ZED_SESSION_TIME_TO_LIVE] = SessionConfig::SESSION_LIFETIME_1_HOUR;
+$config[SessionConstants::ZED_SESSION_COOKIE_TIME_TO_LIVE] = SessionConfig::SESSION_LIFETIME_BROWSER_SESSION;
 $config[SessionConstants::ZED_SESSION_FILE_PATH] = session_save_path();
 $config[SessionConstants::ZED_SESSION_PERSISTENT_CONNECTION] = $config[StorageConstants::STORAGE_PERSISTENT_CONNECTION];
 $config[SessionConstants::SESSION_HANDLER_REDIS_LOCKING_TIMEOUT_MILLISECONDS] = 0;
@@ -278,13 +277,17 @@ $config[ApplicationConstants::YVES_HTTP_STRICT_TRANSPORT_SECURITY_CONFIG] = $HST
 
 // ---------- SSL
 $config[SessionConstants::YVES_SSL_ENABLED] = false;
-$config[ApplicationConstants::YVES_SSL_ENABLED] = false;
+$config[ApplicationConstants::YVES_SSL_ENABLED] =
+$config[SessionConstants::YVES_SSL_ENABLED]
+    = false;
 $config[ApplicationConstants::YVES_SSL_EXCLUDED] = [
     'heartbeat' => '/heartbeat',
 ];
 
 $config[ZedRequestConstants::ZED_API_SSL_ENABLED] = false;
-$config[ApplicationConstants::ZED_SSL_ENABLED] = false;
+$config[ApplicationConstants::ZED_SSL_ENABLED] =
+    $config[SessionConstants::ZED_SSL_ENABLED]
+    = false;
 $config[ApplicationConstants::ZED_SSL_EXCLUDED] = ['heartbeat/index'];
 
 // ---------- Theme
@@ -323,11 +326,6 @@ $config[LogConstants::LOG_SANITIZE_FIELDS] = [
 $config[LogConstants::LOG_QUEUE_NAME] = 'log-queue';
 $config[LogConstants::LOG_ERROR_QUEUE_NAME] = 'error-log-queue';
 
-/**
- * As long EventJournal is in ZedRequest bundle this needs to be disabled by hand
- */
-$config[EventJournalConstants::DISABLE_EVENT_JOURNAL] = true;
-
 // ---------- Auto-loader
 $config[KernelConstants::AUTO_LOADER_CACHE_FILE_NO_LOCK] = false;
 $config[KernelConstants::AUTO_LOADER_UNRESOLVABLE_CACHE_ENABLED] = false;
@@ -360,9 +358,6 @@ $config[SalesConstants::PAYMENT_METHOD_STATEMACHINE_MAPPING] = [
     DummyPaymentConfig::PAYMENT_METHOD_INVOICE => 'DummyPayment01',
     DummyPaymentConfig::PAYMENT_METHOD_CREDIT_CARD => 'DummyPayment01',
 ];
-
-// ---------- NewRelic
-$config[NewRelicConstants::NEWRELIC_API_KEY] = null;
 
 // ---------- Queue
 $config[QueueConstants::QUEUE_SERVER_ID] = (gethostname()) ?: php_uname('n');

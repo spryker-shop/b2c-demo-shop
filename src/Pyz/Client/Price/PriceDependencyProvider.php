@@ -7,6 +7,7 @@
 
 namespace Pyz\Client\Price;
 
+use Spryker\Client\PersistentCart\Plugin\UpdatePersistentCartPriceModePlugin;
 use Spryker\Client\Price\PriceDependencyProvider as SprykerPriceDependencyProvider;
 
 class PriceDependencyProvider extends SprykerPriceDependencyProvider
@@ -17,6 +18,7 @@ class PriceDependencyProvider extends SprykerPriceDependencyProvider
     protected function getPriceModePostUpdatePlugins(): array
     {
         return [
+            new UpdatePersistentCartPriceModePlugin(),
         ];
     }
 }

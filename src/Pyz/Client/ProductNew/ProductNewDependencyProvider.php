@@ -31,9 +31,13 @@ class ProductNewDependencyProvider extends SprykerProductNewDependencyProvider
             new StoreQueryExpanderPlugin(),
             new LocalizedQueryExpanderPlugin(),
             new ProductPriceQueryExpanderPlugin(),
-            new FacetQueryExpanderPlugin(),
             new SortedQueryExpanderPlugin(),
             new PaginatedQueryExpanderPlugin(),
+
+            /**
+             * FacetQueryExpanderPlugin needs to be after other query expanders which filters down the results.
+             */
+            new FacetQueryExpanderPlugin(),
         ];
     }
 

@@ -1,0 +1,55 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'summary-item',
+    tag: 'div'
+} %}
+
+{% define data = {
+    name: required,
+    quantity: required,
+    price: 0,
+    options: [],
+    bundleItems: [],
+    quantitySalesUnit: null,
+    amountSalesUnit: null,
+    amount: 0
+} %}
+
+{% block body %}
+    {% if widgetExists('SummaryProductPackagingUnitWidgetPlugin') %}
+        {{ widget('SummaryProductPackagingUnitWidgetPlugin', data) }} {# @deprecated Use molecule('summary-product-packaging-unit', 'ProductPackagingUnitWidget') instead. #}
+    {% else %}
+        {% include [
+            molecule('summary-product-packaging-unit', 'ProductPackagingUnitWidget'),
+            molecule('summary-product-packaging-unit-default', 'CheckoutPage')
+        ] ignore missing with {
+            data: {
+                name: data.name,
+                quantity: data.quantity,
+                amount: data.amount,
+                price: data.price,
+                quantitySalesUnit: data.quantitySalesUnit,
+                amountSalesUnit: data.amountSalesUnit
+            }
+        } only %}
+    {% endif %}
+
+    {% if data.bundleItems is not empty %}
+        <ul>
+            <li>{{ 'checkout.summary.item.bundle.description' | trans }}</li>
+            {% for item in data.bundleItems %}
+                <li> - {{ item.quantity }} x {{ item.name }}  </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% if data.options is not empty %}
+        <ul>
+            <li>{{ 'checkout.summary.item.option.description' | trans }}</small></li>
+            {% for option in data.options %}
+                <li> + {{ option.value | trans }} <strong>{{ option.sumPrice | default(0) | money }}</strong></li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}
