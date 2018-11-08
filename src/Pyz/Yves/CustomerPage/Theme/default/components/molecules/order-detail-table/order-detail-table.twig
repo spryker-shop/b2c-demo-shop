@@ -24,74 +24,70 @@
             </tr>
         </thead>
         <tbody>
-                {% for item in data.items %}
-                    {% set isBundle = item.bundleItems is defined %}
-                    {% set concreteItem = item.bundleProduct | default(item) %}
+            {% for item in data.items %}
+                {% set isBundle = item.bundleItems is defined %}
+                {% set concreteItem = item.bundleProduct | default(item) %}
 
+                <tr>
+                    {% block row %}
+                        <td>
+                            {{ concreteItem.sku }}
+                        </td>
+                        <td>
+                            {{ concreteItem.name }}
+                        </td>
+                        <td>
+                            {{ concreteItem.sumPrice | money(true, data.currencyIsoCode) }}
+                        </td>
+                        <td>
+                            {{ concreteItem.quantity }}
+                        </td>
+                        <td>
+                            {{ concreteItem.sumPriceToPayAggregation | money(true, data.currencyIsoCode) }}
+                        </td>
+                    {% endblock %}
+                </tr>
+
+                {% if isBundle %}
                     <tr>
-                        {% block row %}
-                            {% if widgetExists('OrderDetailProductPackagingUnitWidgetPlugin') %}
-                                {{ widget('OrderDetailProductPackagingUnitWidgetPlugin', item, data.currencyIsoCode) }}
-                            {% else %}
-                                <td>
-                                    {{ concreteItem.sku }}
-                                </td>
-                                <td>
-                                    {{ concreteItem.name }}
-                                </td>
-                                <td>
-                                    {{ concreteItem.sumPrice | money(true, data.currencyIsoCode) }}
-                                </td>
-                                <td>
-                                    {{ concreteItem.quantity }}
-                                </td>
-                                <td>
-                                    {{ concreteItem.sumPriceToPayAggregation | money(true, data.currencyIsoCode) }}
-                                </td>
-                            {% endif %}
+                        {% block bundleDetailRow %}
+                            <td colspan="5">
+                                {{ "customer.order.bundled_items" | trans }} <br />
+                                {% for bundledItem in item.bundleItems %}
+                                    - {{ bundledItem.quantity }} x {{ bundledItem.name }} <br />
+                                {% endfor %}
+
+                                {% if concreteItem.productOptions is not empty %}
+                                    {{ "customer.order.options" | trans }} <br />
+                                    {% for productOption in concreteItem.productOptions %}
+                                        &nbsp; - {{ productOption.value | trans }} {{ productOption.sumPrice | money(true, data.currencyIsoCode) }}  <br />
+                                    {% endfor %}
+                                {% endif %}
+                            </td>
                         {% endblock %}
                     </tr>
-
-                    {% if isBundle %}
-                        <tr>
-                            {% block bundleDetailRow %}
-                                <td colspan="5">
-                                    {{ "customer.order.bundled_items" | trans }} <br />
-                                    {% for bundledItem in item.bundleItems %}
-                                        - {{ bundledItem.quantity }} x {{ bundledItem.name }} <br />
-                                    {% endfor %}
-
-                                    {% if concreteItem.productOptions is not empty %}
-                                        {{ "customer.order.options" | trans }} <br />
-                                        {% for productOption in concreteItem.productOptions %}
-                                            &nbsp; - {{ productOption.value | trans }} {{ productOption.sumPrice | money(true, data.currencyIsoCode) }}  <br />
-                                        {% endfor %}
-                                    {% endif %}
-                                </td>
-                            {% endblock %}
-                        </tr>
-                    {% else %}
-                        {% if concreteItem.productOptions is not empty %}
-                            {% for productOption in concreteItem.productOptions %}
-                                <tr>
-                                    {% block detailRow %}
-                                        <td>
-                                            &nbsp; + <small>{{ productOption.sku }}</small>
-                                        </td>
-                                        <td>
-                                            <small>{{ productOption.value | trans }}</small>
-                                        </td>
-                                        <td>
-                                            <small>{{ productOption.sumPrice | money(true, data.currencyIsoCode) }}</small>
-                                        </td>
-                                        <td colspan="2"></td>
-                                    {% endblock %}
-                                </tr>
-                            {% endfor %}
-                        {% endif %}
+                {% else %}
+                    {% if concreteItem.productOptions is not empty %}
+                        {% for productOption in concreteItem.productOptions %}
+                            <tr>
+                                {% block detailRow %}
+                                    <td>
+                                        &nbsp; + <small>{{ productOption.sku }}</small>
+                                    </td>
+                                    <td>
+                                        <small>{{ productOption.value | trans }}</small>
+                                    </td>
+                                    <td>
+                                        <small>{{ productOption.sumPrice | money(true, data.currencyIsoCode) }}</small>
+                                    </td>
+                                    <td colspan="2"></td>
+                                {% endblock %}
+                            </tr>
+                        {% endfor %}
                     {% endif %}
-                    {{ widget('CartNoteOrderItemNoteWidgetPlugin', item) }}
-                {% endfor %}
+                {% endif %}
+                {{ widget('CartNoteOrderItemNoteWidgetPlugin', item) }}
+            {% endfor %}
         </tbody>
     </table>
 {% endblock %}
