@@ -6,6 +6,7 @@
 
 {% block body %}
     {% include molecule('cart-discount-form', 'DiscountWidget') with {
+        modifiers: ['checkout'],
         data: {
             form: data.form
         }

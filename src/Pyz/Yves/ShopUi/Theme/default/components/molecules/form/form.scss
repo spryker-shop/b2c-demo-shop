@@ -13,6 +13,14 @@ $shop-ui-form-field-margin: rem(8);
         &__action {
             margin-top: $shop-ui-form-field-margin;
             margin-left: $shop-ui-form-field-margin;
+
+            &--checkout {
+                margin: 0;
+
+                &:not(:last-child) {
+                    margin-top: rem(30);
+                }
+            }
         }
 
         &--inline &__container {
@@ -35,6 +43,58 @@ $shop-ui-form-field-margin: rem(8);
         &--inline &__field {
             padding-bottom: 0;
             padding-right: 0;
+        }
+
+        &--checkout-actions {
+            #{$name}__actions {
+                padding-top: rem(29);
+                display: flex;
+                flex-direction: column-reverse;
+                align-items: flex-end;
+            }
+        }
+
+        &--checkout-address-step,
+        &--checkout-payment-step {
+            .col {
+                @include helper-breakpoint-media-max($sm-max) {
+                    width: 100%;
+                }
+            }
+        }
+
+        &--checkout-login-step {
+            #{$name}__title {
+                width: 100%;
+                font: 700 rem(32) $setting-font-family-additional;
+                letter-spacing: rem(-0.5);
+                line-height: 1;
+                margin-bottom: rem(32);
+                padding-bottom: rem(10);
+                border-bottom: dotted rem(1) $setting-color-lightest;
+
+                @include helper-breakpoint-media-min($md-min) {
+                    font-size: rem(47);
+                    margin-bottom: rem(58);
+                }
+            }
+        }
+
+        &--checkout-grid-indent {
+            .grid {
+                margin: 0 rem(-16);
+                max-width: none;
+            }
+        }
+
+        &__shipment-item {
+            &:not(:first-child) {
+                margin-top: rem(50);
+
+                @include helper-breakpoint-media-min($md-min) {
+                    margin-top: rem(40);
+                }
+            }
         }
 
         .label {

@@ -1,0 +1,1 @@
+import './page-layout-checkout';

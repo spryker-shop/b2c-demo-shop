@@ -1,0 +1,52 @@
+.page-layout-checkout {
+    max-width: rem(570);
+    margin: 0 auto;
+    padding-bottom: rem(60);
+    overflow: hidden;
+
+    @include helper-breakpoint-media-min($md-min) {
+        padding-top: rem(80);
+    }
+
+    &--full-width {
+        max-width: 100%;
+    }
+
+    &--address-step {
+        .toggler-radio__container {
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .toggler-radio__box {
+            float: left;
+            margin-top: rem(1);
+        }
+
+        .toggler-radio__label {
+            display: block;
+            overflow: hidden;
+        }
+    }
+
+    label,
+    .label {
+        display: block;
+        color: $setting-color-dark;
+    }
+
+    .checkbox__box,
+    .toggler-checkbox__box {
+        margin-top: rem(2);
+
+        @include helper-breakpoint-media-min($md-min) {
+            margin-top: rem(4);
+        }
+    }
+
+    .checkbox__check {
+        @include helper-breakpoint-media-min($md-min) {
+            top: rem(7);
+        }
+    }
+}

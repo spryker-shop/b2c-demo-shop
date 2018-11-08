@@ -1,0 +1,26 @@
+@mixin checkout-page-summary-overview($name: '.summary-overview') {
+    #{$name} {
+        margin: rem(56) 0 rem(50);
+        border-top: dotted rem(1) $setting-color-lightest;
+        border-bottom: dotted rem(1) $setting-color-lightest;
+
+        &__list,
+        &__list-item {
+            margin: rem(24) 0;
+        }
+
+        &__list-item {
+            font: 400 rem(14) $setting-font-family-additional;
+
+            &--total {
+                font-size: rem(17);
+                text-transform: uppercase;
+                font-weight: bold;
+            }
+        }
+
+        @content;
+    }
+}
+
+@include checkout-page-summary-overview();
