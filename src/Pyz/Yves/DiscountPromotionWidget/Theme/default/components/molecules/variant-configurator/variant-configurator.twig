@@ -1,8 +1,7 @@
 {% extends model('component') %}
 
 {% define config = {
-    name: 'variant-configurator',
-    tag: 'section'
+    name: 'variant-configurator'
 } %}
 
 {% define data = {
@@ -22,20 +21,20 @@
         <form method="GET">
     {% endif %}
 
-    {% for name, values in data.superAttributes %}
-        {% set selectedValue = data.selectedAttributes[name] | default %}
-        {% set selectedValue = selectedValue in values ? selectedValue : null %}
-        {% set isAvailable = true %}
+    <ul>
+        {% for name, values in data.superAttributes %}
+            {% set selectedValue = data.selectedAttributes[name] | default %}
+            {% set selectedValue = selectedValue in values ? selectedValue : null %}
+            {% set isAvailable = true %}
 
-        {% if name in data.availableAttributes | keys %}
-            {% set values = data.availableAttributes[name] %}
-        {% else %}
-            {% set isAvailable = selectedValue is empty %}
-        {% endif %}
+            {% if name in data.availableAttributes | keys %}
+                {% set values = data.availableAttributes[name] %}
+            {% else %}
+                {% set isAvailable = selectedValue is empty %}
+            {% endif %}
 
-        <ul class="list">
             {% block variant %}
-                <li class="list__item">
+                <li>
                     {% include molecule('variant', 'DiscountPromotionWidget') with {
                         data: {
                             name: name,
@@ -48,8 +47,8 @@
                     } only %}
                 </li>
             {% endblock %}
-        </ul>
-    {% endfor %}
+        {% endfor %}
+    </ul>
 
     {% if not data.useExternalForm %}
         </form>

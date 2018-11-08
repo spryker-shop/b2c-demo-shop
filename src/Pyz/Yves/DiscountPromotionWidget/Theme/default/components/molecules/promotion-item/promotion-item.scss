@@ -1,0 +1,108 @@
+@mixin discount-promotion-widget-promotion-item($name: '.promotion-item') {
+    $image-width: rem(120);
+
+    #{$name} {
+        position: relative;
+
+        &__container {
+            position: relative;
+            color: $setting-color-text;
+            border-bottom: rem(1) dotted $setting-color-lightest;
+            padding: rem(18) 0;
+        }
+
+        &__thumbnail {
+            border-radius: rem(4);
+            position: relative;
+            overflow: hidden;
+            width: $image-width;
+        }
+
+        &__overlay {
+            padding: rem(12) rem(15);
+
+            &::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                border-radius: rem(4);
+                background: rgba($setting-color-black, 0.05);
+                z-index: $setting-zi-element-floating;
+            }
+        }
+
+        &__content {
+            padding-left: rem(24);
+            position: relative;
+            width: calc(100% - #{$image-width});
+        }
+
+        &--stretch {
+            height: 100%;
+        }
+
+        &__info {
+            display: block;
+
+            &:hover {
+                color: $setting-color-darkest;
+                text-decoration: none;
+            }
+        }
+
+        &__name {
+            display: block;
+            font: map-get($setting-font-weight, regular) rem(17)/1.3 $setting-font-family-additional;
+        }
+
+        &__button {
+            font-size: 0;
+            width: rem(29);
+            height: rem(28);
+
+            @include helper-breakpoint-media-min($lg-min) {
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                height: rem(32);
+                width: auto;
+                font: map-get($setting-font-weight, regular) rem(10) $setting-font-family-additional;
+            }
+
+            &::after {
+                content: '+';
+                font-size: rem(28);
+                display: block;
+                width: 100%;
+                height: rem(26);
+                line-height: rem(26);
+                position: absolute;
+                top: rem(-2);
+                left: 0;
+
+                @include helper-breakpoint-media-min($lg-min) {
+                    display: none;
+                }
+            }
+
+            &[disabled]{
+                color: $setting-color-white;
+            }
+        }
+
+        &__price {
+            font: map-get($setting-font-weight, medium) rem(17)/1.3 $setting-font-family-additional;
+            position: relative;
+            text-align: left;
+
+            @include helper-breakpoint-media-min($lg-min) {
+                text-align: right;
+            }
+        }
+    }
+}
+
+@include discount-promotion-widget-promotion-item();

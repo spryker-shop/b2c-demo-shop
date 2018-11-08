@@ -14,8 +14,8 @@
 {% block class %}{{parent()}} list{% endblock %}
 
 {% block body %}
-    {% if data.cartItem.productOptions | length > 0 %}
-        <li class="{{ config.name }}__list">
+    {% if data.cartItem.productOptions is not empty %}
+        <li class="{{ config.name }}__item">
             {{ widget('CartItemProductOptionWidgetPlugin', data.cartItem) }}
         </li>
     {% endif %}
