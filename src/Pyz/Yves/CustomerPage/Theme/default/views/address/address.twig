@@ -14,13 +14,15 @@
             <div class="col--lg-6 col--sm-12">
                 <div class="box">
                     <div class="page-layout-customer__box grid grid--justify grid--middle">
-                        <h5 class="customer-account__subtitle col">{{ data.activePage}} {{ loop.index }}</h5>
+                        <h5 class="title title--account-secondary col">{{ data.activePage}} {{ loop.index }}</h5>
+
                         <ul class="menu menu--inline menu--customer-account float-right">
                             <li class="menu__item">
                                 <a href="{{ url('customer/address/update', {'id': address.idCustomerAddress }) }}">
                                     {{ "customer.profile.address.edit" | trans }}
                                 </a>
                             </li>
+
                             <li class="menu__item">
                                 <a href="{{ url('customer/address/delete', {'id': address.idCustomerAddress }) }}">
                                     {{ "customer.profile.address.delete" | trans }}

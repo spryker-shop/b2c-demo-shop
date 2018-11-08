@@ -13,19 +13,23 @@
 
     <div class="box">
         <div class="page-layout-customer__box grid grid--justify grid--middle box">
-            <h5 class="customer-account__subtitle col">{{ 'customer.profile.order_details' | trans }}</h5>
+            <h5 class="title title--account-secondary col">{{ 'customer.profile.order_details' | trans }}</h5>
         </div>
+
         <div class="grid grid--justify">
             <ul class="col menu menu--customer-account">
                 <li class="menu__item">
                     {{ 'customer.order.order_id' | trans }}:
                     <strong>{{ _view.order.orderReference }}</strong>
                 </li>
+
                 <li class="menu__item">
                     {{ 'customer.order.date' | trans }}:
                     <strong>{{ _view.order.createdAt | formatDateTime }}</strong>
                 </li>
+
             </ul>
+
             <a href="{{url('customer/order')}}" class="button button--white col">{{ 'general.back.button' | trans }}</a>
         </div>
     </div>
@@ -45,10 +49,12 @@
                 <td></td>
                 {{parent()}}
             {% endblock %}
+
             {% block bundleDetailRow %}
                 <td></td>
                 {{parent()}}
             {% endblock %}
+
             {% block detailRow %}
                 <td></td>
                 {{parent()}}
@@ -61,6 +67,7 @@
                 {{parent()}}
             {% endblock %}
         {% endembed %}
+
         <div class="page-layout-customer__box">
             {% include molecule('order-summary', 'CustomerPage') with {
                 class: 'menu menu--customer-account menu--order-summary text-right',
@@ -75,9 +82,9 @@
         <div class="col--lg-6 col--sm-12">
             <div class="box">
                 <div class="page-layout-customer__box">
-                    <h5 class="customer-account__subtitle">{{ 'customer.order.shipping_address' | trans }}</h5>
-
+                    <h5 class="title title--account-secondary">{{ 'customer.order.shipping_address' | trans }}</h5>
                 </div>
+
                 {% include molecule('display-address', 'CustomerPage') with {
                     class: 'menu menu--customer-account',
                     data: {
@@ -86,11 +93,13 @@
                 } only %}
             </div>
         </div>
+
         <div class="col--lg-6 col--sm-12">
             <div class="box">
                 <div class="page-layout-customer__box">
-                    <h5 class="customer-account__subtitle">{{ 'customer.order.billing_address' | trans }}</h5>
+                    <h5 class="title title--account-secondary">{{ 'customer.order.billing_address' | trans }}</h5>
                 </div>
+
                 {% include molecule('display-address', 'CustomerPage') with {
                     class: 'menu menu--customer-account',
                     data: {
@@ -100,18 +109,19 @@
             </div>
         </div>
     </div>
+
     <div class="grid grid--justify">
         <div class="col--lg-6 col--sm-12">
             <div class="box">
                 <div class="page-layout-customer__box">
-                    <h5 class="customer-account__subtitle">{{ 'customer.order.shipment' | trans }}</h5>
+                    <h5 class="title title--account-secondary">{{ 'customer.order.shipment' | trans }}</h5>
                 </div>
+
                 <ul class="menu menu--customer-account">
                     {% for expense in data.order.expenses %}
                         <li class="menu__item">{{ expense.name }}</li>
                     {% endfor %}
                 </ul>
-
             </div>
         </div>
     </div>

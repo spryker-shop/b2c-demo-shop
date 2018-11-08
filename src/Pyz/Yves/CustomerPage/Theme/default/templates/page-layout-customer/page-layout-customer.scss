@@ -23,5 +23,21 @@
 
     &--login-wrap {
         margin-top: rem(40);
+
+        .checkbox__box {
+            @include helper-breakpoint-media-min($md-min) {
+                margin-top: rem(4);
+            }
+        }
+
+        .checkbox__check {
+            @include helper-breakpoint-media-min($md-min) {
+                top: rem(7);
+            }
+        }
+
+        .label {
+            color: $setting-color-dark;
+        }
     }
 }

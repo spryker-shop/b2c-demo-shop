@@ -40,7 +40,7 @@
     {% block title %}
         {% if data.title is not empty %}
             <div class="page-layout-customer__box grid grid--justify grid--middle box">
-                <h5 class="customer-account__subtitle col">{{data.title}}</h5>
+                <h5 class="title title--account-secondary col">{{data.title}}</h5>
             </div>
         {% endif %}
     {% endblock %}
@@ -49,7 +49,7 @@
         {{ form_start(data.form, data.options) }}
     {% endif %}
 
-    <div class="{{config.name}}__container">
+    <div class="page-layout-customer__container">
         {% block errors %}
             {{ form_errors(data.form) }}
         {% endblock %}

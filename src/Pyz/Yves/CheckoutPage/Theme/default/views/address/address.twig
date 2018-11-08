@@ -65,7 +65,7 @@
 
             {% include molecule('form') with {
                 class: embed.parentJsClass ~ '__shipping' ~ (hasShippingAddresses ? ' is-hidden' : ''),
-                modifiers: ['checkout-grid-indent'],
+                modifiers: ['grid-indent'],
                 data: {
                     class: 'col col--sm-6',
                     form: embed.forms.shipping,
@@ -105,7 +105,7 @@
 
                     {% embed molecule('form') with {
                         class: 'is-hidden spacing-top spacing-top--big ' ~ embed.parentJsClass ~  '__billing-same-as-shipping',
-                        modifiers: ['checkout-grid-indent'],
+                        modifiers: ['grid-indent'],
                         data: {
                             form: embed.forms.billing,
                             enableStart: false,
