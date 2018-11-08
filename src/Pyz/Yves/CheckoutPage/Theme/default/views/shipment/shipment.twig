@@ -11,7 +11,7 @@
 
 {% block content %}
     {% embed molecule('form') with {
-        class: 'checkout-layout',
+        modifiers: ['checkout-shipment-step', 'checkout-actions'],
         data: {
             form: data.forms.shipment,
             options: {
@@ -22,24 +22,23 @@
             submit: {
                 enable: true,
                 text: 'checkout.step.payment' | trans,
-                class: 'button button--black button--big button--expand'
+                class: 'form__action--checkout button button--black button--big button--expand'
             },
             cancel: {
                 enable: true,
                 url: data.backUrl,
                 text: 'general.back.button' | trans,
-                class: 'button button--secondary button--hollow button--expand'
+                class: 'form__action--checkout button button--secondary button--hollow button--expand'
             }
         }
     } only %}
         {% block fields %}
-
             {% for name, choices in data.form.idShipmentMethod.vars.choices %}
-                <div class="col col--sm-12 shipping-form-item">
+                <div class="col col--sm-12 {{ config.name }}__shipment-item">
 
-                    <div class="checkout-form-heading">
-                        <h5>{{name | trans}}</h5>
-                        <div class="checkout-form-heading__img">
+                    <div class="heading">
+                        <h5 class="title title--checkout title--shipment">{{name | trans}}</h5>
+                        <div class="heading__logo">
                             <img src="/assets/images/shipment-{{ name }}.png" width="65" height="10" alt="{{ name }}">
                         </div>
                     </div>

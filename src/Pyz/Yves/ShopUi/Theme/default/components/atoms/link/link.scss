@@ -1,0 +1,30 @@
+@include shop-ui-link {
+    &--darkest {
+        @include helper-effect-transition(all);
+        color: $setting-color-darkest;
+    }
+
+    &--checkout-success {
+        text-decoration: none;
+    }
+
+    &--login-forgot-password {
+        margin-top: rem(20);
+
+        @include helper-breakpoint-media-min($md-min) {
+            margin-top: rem(16);
+        }
+    }
+
+    &--edit {
+        font: 300 rem(13) $setting-font-family-additional;
+        opacity: 0.4;
+        margin-top: rem(16);
+
+        &:hover {
+            text-decoration: none;
+            color: inherit;
+            opacity: 1;
+        }
+    }
+}
