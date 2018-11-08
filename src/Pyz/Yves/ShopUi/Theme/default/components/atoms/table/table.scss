@@ -1,9 +1,33 @@
 @include shop-ui-table {
     &--customer-account {
         thead,
+        &__head,
+        tbody,
+        &__body {
+            td,
+            th {
+                padding: rem(8);
+            }
+        }
+
+        thead,
         &__head {
             background: $setting-color-light;
             color: $setting-color-white;
+        }
+
+        tbody,
+        &__body {
+            tr {
+                &:nth-child(even) {
+                    background: $setting-color-lightest-1;
+                }
+            }
+
+            .checkbox {
+                margin: 0;
+                margin-top: rem(4);
+            }
         }
     }
 }
