@@ -1,4 +1,6 @@
 @mixin discount-promotion-widget-promotion-item($name: '.promotion-item') {
+    $image-width: rem(120);
+
     #{$name} {
         position: relative;
 
@@ -13,7 +15,7 @@
             border-radius: rem(4);
             position: relative;
             overflow: hidden;
-            width: rem(120);
+            width: $image-width;
         }
 
         &__overlay {
@@ -35,7 +37,7 @@
         &__content {
             padding-left: rem(24);
             position: relative;
-            width: calc(100% - #{rem(120)});
+            width: calc(100% - #{$image-width});
         }
 
         &--stretch {

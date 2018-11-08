@@ -1,10 +1,12 @@
 @mixin cart-page-cart-item-summary($name: '.cart-item-summary') {
+    $image-width-with-spacing: rem(120 + 24);
+
     #{$name} {
         width: 100%;
         margin: 0;
 
         @include helper-breakpoint-media-min($lg-min) {
-            width: calc(100% - #{rem(144)});
+            width: calc(100% - #{$image-width-with-spacing});
             padding-top: rem(20);
         }
 
