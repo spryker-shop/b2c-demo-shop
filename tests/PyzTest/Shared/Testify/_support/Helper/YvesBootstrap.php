@@ -29,11 +29,11 @@ class YvesBootstrap extends Framework
     }
 
     /**
-     * @param \Codeception\TestInterface $test
+     * @param array $settings
      *
      * @return void
      */
-    public function _before(TestInterface $test)
+    public function _beforeSuite($settings = [])
     {
         $this->client = new Client($this->yvesBootstrap->boot());
     }
