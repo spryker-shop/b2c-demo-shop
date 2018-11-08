@@ -8,16 +8,17 @@
 
 {% block header %}
     {% embed organism('header') with {
+        modifiers: ['checkout'],
         data: {
             showSearchForm: false,
             showNavigation: false,
             showLangCurrencySwitches: false
-        },
-        class: 'header-checkout'
+        }
     } only %}
         {% block additionalLink %}
-            <a class="header__back-link" href="{{ url('cart') }}">
+            <a class="{{ config.name }}__back-link" href="{{ url('cart') }}">
                 {% include atom('icon') with {
+                    modifiers: ['medium-up', 'to-cart'],
                     data: {
                         name: 'arrow-left'
                     }
@@ -42,7 +43,7 @@
                 {% endblock %}
             {% endblock %}
 
-            <main class="checkout-content-wrap">
+            <main class="page-layout-checkout {% block contentClass %}{% endblock %}">
                 {% block title %}
                     {% if data.title is not empty %}
                         <h1 class="main-title">{{data.title}}</h1>
@@ -54,8 +55,6 @@
         </div>
     </div>
 {% endblock %}
-    
-
 
 {% block footer %}
     {% embed organism('footer') only %}

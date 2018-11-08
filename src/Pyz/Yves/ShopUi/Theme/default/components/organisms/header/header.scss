@@ -141,6 +141,39 @@
             }
         }
 
+        &--checkout {
+            @include helper-breakpoint-media-max($sm-max) {
+                padding-top: 0;
+            }
+
+            #{$name}__navigation-top,
+            .container {
+                position: relative;
+            }
+        }
+
+        &__back-link {
+            position: absolute;
+            top: 50%;
+            left: rem(16);
+            color: $setting-color-tundora;
+            font-size: 0;
+            line-height: rem(19);
+            font-weight: 500;
+            transform: translateY(-50%);
+            padding: rem(5) rem(5) rem(5) 0;
+            z-index: $setting-zi-element-floating;
+
+            @include helper-breakpoint-media-min($md-min) {
+                font-size: rem(19);
+                padding: 0;
+            }
+
+            &:hover {
+                text-decoration: none;
+            }
+        }
+
         @content;
     }
 }

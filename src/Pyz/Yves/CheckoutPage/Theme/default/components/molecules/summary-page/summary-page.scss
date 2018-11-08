@@ -1,0 +1,34 @@
+@mixin checkout-page-summary($name: '.summary-page') {
+    #{$name} {
+        &__col {
+            &:not(:first-child) {
+                margin-top: rem(60);
+
+                @include helper-breakpoint-media-min($md-min) {
+                    margin-top: 0;
+                }
+            }
+        }
+
+        &__address-indent {
+            @include helper-breakpoint-media-max($sm-max) {
+                margin-top: rem(33);
+            }
+        }
+
+        .grid {
+            &:not(:first-child) {
+                margin: 0 rem(-16);
+                max-width: none;
+            }
+        }
+
+        .col {
+            padding: 0 rem(16);
+        }
+
+        @content;
+    }
+}
+
+@include checkout-page-summary();

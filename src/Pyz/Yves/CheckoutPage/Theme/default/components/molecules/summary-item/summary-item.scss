@@ -1,0 +1,62 @@
+@mixin checkout-page-summary-item($name: '.summary-item') {
+    #{$name} {
+        &:first-of-type {
+            #{$name}__box {
+                padding-top: 0;
+            }
+        }
+
+        &__content {
+            width: calc(100% - #{rem(120)});
+            padding: 0 0 rem(5) rem(24);
+            align-self: center;
+        }
+
+        &__wrap {
+            &:not(:first-child) {
+                margin-top: rem(60);
+
+                @include helper-breakpoint-media-min($md-min) {
+                    margin-top: rem(70);
+                }
+            }
+        }
+
+        &__box {
+            padding: rem(18) 0;
+            border-bottom: rem(1) dotted $setting-color-lightest;
+        }
+
+        &__price {
+            font: 500 rem(17)/1.3 $setting-font-family-additional;
+            text-align: right;
+
+            @include helper-breakpoint-media-max($sm-max) {
+                font-size: rem(15);
+                text-align: left;
+            }
+        }
+
+        &__title {
+            cursor: default;
+        }
+
+        &__image {
+            width: rem(120);
+        }
+
+        &--product {
+            .grid {
+                margin: 0;
+
+                .col {
+                    padding: 0;
+                }
+            }
+        }
+
+        @content;
+    }
+}
+
+@include checkout-page-summary-item();
