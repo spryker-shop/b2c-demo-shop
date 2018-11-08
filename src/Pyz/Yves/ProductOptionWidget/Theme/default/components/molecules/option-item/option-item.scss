@@ -1,0 +1,14 @@
+@mixin product-option-widget-option-item($name: '.option-item') {
+    #{$name} {
+        margin-bottom: rem(20);
+
+        &:not(:first-child) {
+            border-top: rem(1) dotted $setting-color-lightest;
+            padding-top: rem(18);
+        }
+
+        @content;
+    }
+}
+
+@include product-option-widget-option-item();

@@ -1,25 +1,18 @@
-@mixin shop-ui-cart-item-summary($name: '.cart-item-summary') {
+@mixin cart-page-cart-item-summary($name: '.cart-item-summary') {
+    $image-width-with-spacing: rem(120 + 24);
+
     #{$name} {
-        width: calc(100% - #{rem(120)});
-        @include helper-breakpoint-media-max($sm-max) {
-            width: 100%;
+        width: 100%;
+        margin: 0;
+
+        @include helper-breakpoint-media-min($lg-min) {
+            width: calc(100% - #{$image-width-with-spacing});
+            padding-top: rem(20);
         }
 
-        &__list {
-            padding: rem(20) 0 0 rem(24);
-            @include helper-breakpoint-media-max($sm-max) {
-                padding: rem(20) 0 0;
-            }
-        }
-
-        & .list {
-            margin: 0;
-        }
-
-        & .list__item {
-            font: 500 rem(17) $setting-font-family-additional;
-            line-height: 1.29;
-            padding: rem(19) 0;
+        &__item {
+            padding-top: rem(20);
+            font: map-get($setting-font-weight, medium) rem(17)/1.3 $setting-font-family-additional;
             border-bottom: rem(1) dotted $setting-color-lightest;
 
             &:first-of-type {
@@ -33,4 +26,4 @@
     }
 }
 
-@include shop-ui-cart-item-summary();
+@include cart-page-cart-item-summary();

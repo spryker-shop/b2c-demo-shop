@@ -1,4 +1,4 @@
-{% extends template('page-layout-main') %}
+{% extends template('page-layout-cart', 'CartPage') %}
 
 {% define data = {
     cart: _view.cart,
@@ -10,90 +10,70 @@
     title: 'cart.cart' | trans
 } %}
 
-{% block breadcrumbs %}{% endblock %}
-
 {% block title %}
     {% if widgetExists('CartOperationsWidgetPlugin') %}
         {% set cartOperation = widget('CartOperationsWidgetPlugin', data.cart) | trim %}
 
         {% if cartOperation is not empty %}
             {{ cartOperation | raw }}
-        {% else %}
-
         {% endif %}
-    {% else %}
-
     {% endif %}
 {% endblock %}
 
 {% block content %}
-    <div class="shopping-cart">
-        {% if widgetExists('CartToShoppingListWidgetPlugin') and data.cart.idQuote is not empty and data.cart.items is not empty %}
-            <div>
-                {{ widget('CartToShoppingListWidgetPlugin', data.cart.idQuote) }}
-            </div>
-        {% endif %}
+    {% if widgetExists('CartToShoppingListWidgetPlugin') and (data.cart.idQuote is not empty) and (data.cart.items is not empty) %}
+        <div>
+            {{ widget('CartToShoppingListWidgetPlugin', data.cart.idQuote) }}
+        </div>
+    {% endif %}
 
-        {% if data.cart.items is empty %}
-            <div class="text-center">
-                {% include atom('icon') with {
-                    modifiers: ['biggest'],
-                    class: 'text-alt',
-                    data: {
-                        name: 'shopping-cart'
-                    }
-                } only %}
-                <h1>{{ data.title }}</h1>
-                <h6>{{ 'cart.empty' | trans }}</h6>
-            </div>
-        {% else %}
-            <div class="grid grid--spaced-lg">
-                <div class="col col--sm-12 col--lg-8">
-                    <div class="shopping-cart__block shopping-cart__block--left">
-                        <div class="shopping-cart__box grid grid--middle grid--justify">
-                            <h2 class="shopping-cart__title col">{{ 'cart.title1' | trans }}</h2>
-                            <h6 class="shopping-cart__quantity">{{ app['cart.quantity'] }} {{ 'item' | trans }}</h6>
-                        </div>
-                        <div class="shopping-cart__items-container">
-                            {% for cartItem in data.cartItems %}
-                                {% include molecule('cart-item', 'CartPage') with {
-                                    class: 'shopping-cart__item',
-                                    data: {
-                                        cart: data.cart,
-                                        cartItem: cartItem,
-                                        attributes: data.attributes[cartItem.sku] | default([])
-                                    }
-                                } only %}
-                            {% endfor %}
-                        </div>
-                        {{ widget('DiscountPromotionItemListWidgetPlugin', data.cart, data.request) }}
+    {% if data.cart.items is empty %}
+        <div class="page-layout-cart__empty text-center">
+            <h1>{{ data.title }}</h1>
+            <h6>{{ 'cart.empty' | trans }}</h6>
+        </div>
+    {% else %}
+        <div class="grid grid--spaced-lg">
+            <div class="col col--sm-12 col--lg-8">
+                <div class="page-layout-cart__col page-layout-cart__col--content">
+                    <div class="cart-box grid grid--middle grid--justify">
+                        <h2 class="col title title--cart">{{ 'cart.title1' | trans }}</h2>
+                        <h6 class="title title--quantity col">{{ app['cart.quantity'] }} {{ 'item' | trans }}</h6>
                     </div>
-                </div>
-
-                <div class="col col--sm-12 col--lg-4 ">
-                    <div class="shopping-cart__sidebar shopping-cart__block">
-                        <h2 class="shopping-cart__title shopping-cart__box">{{ 'cart.title2' | trans }}</h2>
-                        <div class="shopping-cart__box shopping-cart__box--empty"></div>
-                        <div class="shopping-cart__box">
-                            {% if not is_granted('IS_AUTHENTICATED_FULLY') or can('WriteSharedCartPermissionPlugin', data.cart.idQuote) %}
-                                {{ widget('DiscountVoucherFormWidgetPlugin') }}
-                            {% endif %}
-                        </div>
-
-                        <div class="shopping-cart__box shopping-cart__box--empty"></div>
-
-                        {% include molecule('cart-summary', 'CartPage') with {
-                            data: {
-                                cart: data.cart,
-                                isQuoteValid: data.isQuoteValid
-                            }
-                        } only %}
+                    <div class="page-layout-cart__items-wrap">
+                        {% for cartItem in data.cartItems %}
+                            {% include molecule('cart-item', 'CartPage') with {
+                                data: {
+                                    cart: data.cart,
+                                    cartItem: cartItem,
+                                    attributes: data.attributes[cartItem.sku] | default([])
+                                }
+                            } only %}
+                        {% endfor %}
                     </div>
+                    {{ widget('DiscountPromotionItemListWidgetPlugin', data.cart, data.request) }}
                 </div>
             </div>
-        {% endif %}
 
-        {{ widget('UpSellingProductsWidgetPlugin', data.cart) }}
-        {{ widget('MultiCartListWidgetPlugin', data.cart) }}
-    </div>
+            <div class="col col--sm-12 col--lg-4">
+                <div class="page-layout-cart__col page-layout-cart__col--sidebar">
+                    <h2 class="cart-box title title--cart">{{ 'cart.title2' | trans }}</h2>
+                    <div class="cart-box cart-box--voucher cart-box--reset-spacing">
+                        {% if not is_granted('IS_AUTHENTICATED_FULLY') or can('WriteSharedCartPermissionPlugin', data.cart.idQuote) %}
+                            {{ widget('DiscountVoucherFormWidgetPlugin') }}
+                        {% endif %}
+                    </div>
+                    {% include molecule('cart-summary', 'CartPage') with {
+                        data: {
+                            cart: data.cart,
+                            isQuoteValid: data.isQuoteValid
+                        }
+                    } only %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    {{ widget('UpSellingProductsWidgetPlugin', data.cart) }}
+    {{ widget('MultiCartListWidgetPlugin', data.cart) }}
 {% endblock %}

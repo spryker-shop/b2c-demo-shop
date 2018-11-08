@@ -38,6 +38,7 @@
                     <label class="{{ config.name }}__label">
                         <strong class="{{ config.name }}__title">{{ ('product.attribute.' ~ attributeName) | trans }}:</strong>
                         {% embed atom('select') with {
+                            modifiers: ['naked', 'variant'],
                             data: {
                                 label: ('product.attribute.' ~ attributeName) | trans,
                                 options: options

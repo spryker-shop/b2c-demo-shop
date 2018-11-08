@@ -1,0 +1,21 @@
+@mixin cart-page-cart-box($name: '.cart-box') {
+    #{$name} {
+        border-bottom: rem(1) dotted $setting-color-lightest;
+        padding: rem(18) 0;
+
+        &--voucher {
+            margin-top: rem(20);
+            border-top: rem(1) dotted $setting-color-lightest;
+
+            @include helper-breakpoint-media-min($lg-min) {
+                margin-top: rem(56);
+            }
+        }
+
+        &--reset-spacing {
+            padding: 0;
+        }
+    }
+}
+
+@include cart-page-cart-box();
