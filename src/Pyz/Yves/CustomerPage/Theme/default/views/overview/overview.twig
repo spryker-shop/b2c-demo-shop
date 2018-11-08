@@ -13,7 +13,7 @@
 
 {% block customerContent %}
     <div class="box">
-        <div class="customer-account__box grid grid--justify grid--middle">
+        <div class="page-layout-customer__box grid grid--justify grid--middle">
             <h5 class="customer-account__subtitle col">{{ 'customer.account.last_orders' | trans }}</h5>
 
             {% if data.orders is not empty %}
@@ -35,7 +35,7 @@
     <div class="grid grid--justify">
         <div class="col--lg-6 col--sm-12">
             <div class="box">
-                <div class="customer-account__box grid grid--justify grid--middle box">
+                <div class="page-layout-customer__box grid grid--justify grid--middle box">
                     <h5 class="customer-account__subtitle col">{{ 'customer.account.profile_data' | trans }}</h5>
                     <a href="{{url('customer/profile')}}" class="col">
                         {{ 'general.edit.button' | trans }}
@@ -58,7 +58,7 @@
         <div class="col--lg-6 col--sm-12">
             {% if data.billingAddress is not empty %}
                 <div class="box">
-                    <div class="customer-account__box grid grid--justify grid--middle box">
+                    <div class="page-layout-customer__box grid grid--justify grid--middle box">
                         <h5 class="customer-account__subtitle col">{{ 'customer.account.default_billing_address' | trans }}</h5>
                         <a href="{{ url('customer/address/update', { id: data.billingAddressId }) }}" class="col">
                             {{ 'general.edit.button' | trans }}
@@ -79,7 +79,7 @@
         <div class="col--lg-6 col--sm-12">
             {% if data.shippingAddress is not empty %}
                 <div class="box">
-                    <div class="customer-account__box grid grid--justify grid--middle box">
+                    <div class="page-layout-customer__box grid grid--justify grid--middle box">
                         <h5 class="customer-account__subtitle col">{{ 'customer.account.default_shipping_address' | trans }}</h5>
                         <a href="{{ url('customer/address/update', { id: data.shippingAddressId }) }}" class="col">
                             {{ 'general.edit.button' | trans }}

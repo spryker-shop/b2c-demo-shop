@@ -13,9 +13,9 @@
         {% for address in data.addresses %}
             <div class="col--lg-6 col--sm-12">
                 <div class="box">
-                    <div class="customer-account__box grid grid--justify grid--middle">
+                    <div class="page-layout-customer__box grid grid--justify grid--middle">
                         <h5 class="customer-account__subtitle col">{{ data.activePage}} {{ loop.index }}</h5>
-                        <ul class="menu menu--inline float-right">
+                        <ul class="menu menu--inline menu--customer-account float-right">
                             <li class="menu__item">
                                 <a href="{{ url('customer/address/update', {'id': address.idCustomerAddress }) }}">
                                     {{ "customer.profile.address.edit" | trans }}
@@ -31,6 +31,7 @@
 
 
                     {% include molecule('display-address', 'CustomerPage') with {
+                        class: 'menu menu--customer-account',
                         data: {
                             address: address
                         }

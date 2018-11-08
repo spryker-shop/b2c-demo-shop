@@ -9,28 +9,32 @@
     order: required
 } %}
 
+{% block class -%}
+    {{ parent() }}
+{%- endblock %}
+
 {% block body %}
-    <li>
+    <li class="menu__item">
         {{ 'customer.order.subTotal' | trans }}: 
         {{ data.order.totals.subtotal | money(true, data.order.currencyIsoCode) }}
     </li>
-    <li>
+    <li class="menu__item">
         {% for expense in data.order.expenses %}
             {{ 'customer.order.shipment' | trans }} {{ expense.name }}: 
             {{ expense.unitPrice | money(true, data.order.currencyIsoCode) }}
         {% endfor %}
     </li>
-    <li>
+    <li class="menu__item">
         {{ 'customer.order.discount.total' | trans }}: 
         - {{ data.order.totals.discountTotal | money(true, data.order.currencyIsoCode) }}
     </li>
-    <li>
+    <li class="menu__item">
         {% if data.order.totals.canceledTotal %}
             {{ 'customer.order.canceledTotal' | trans }}: 
             - {{ data.order.totals.canceledTotal | money(true, data.order.currencyIsoCode) }}
         {% endif %}
     </li>
-    <li>
+    <li class="menu__item">
         <strong>{{ 'customer.order.grandTotal' | trans }}: 
         {{ data.order.totals.grandTotal | money(true, data.order.currencyIsoCode) }}</strong>
     </li>
