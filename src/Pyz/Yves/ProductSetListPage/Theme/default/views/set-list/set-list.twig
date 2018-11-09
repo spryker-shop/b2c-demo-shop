@@ -14,8 +14,8 @@
             {% for productSet in data.sets %}
                 {% set imageUrl = productSet.imageSets.0.images.0.externalUrlSmall | default('') %}
 
-                <div class="col col--sm-12 col--lg-4 set-list__item">
-                    {% include molecule('card') with {
+                <div class="col col--sm-12 col--lg-4 text-center">
+                    {% embed molecule('card') with {
                         data: {
                             name: productSet.name,
                             url: productSet.url,
@@ -23,6 +23,23 @@
                             buttonClass: 'button--black'
                         }
                     } only %}
+                        {% block image %}
+                            <a href="{{data.url}}">
+                                {% include atom('thumbnail') with {
+                                    modifiers: ['product-set'],
+                                    attributes: {
+                                        alt: data.name,
+                                        src: data.imageUrl,
+                                        title: data.name
+                                    }
+                                } only %}
+                            </a>
+                        {% endblock %}
+
+                        {% block name %}
+                            <strong class="title title--medium">{{data.name}}</strong>
+                        {% endblock %}
+                    {% endembed %}
                 </div>
             {% endfor %}
         </div>
