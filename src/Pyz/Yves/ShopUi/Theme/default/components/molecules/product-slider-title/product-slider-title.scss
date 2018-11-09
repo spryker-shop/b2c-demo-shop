@@ -6,65 +6,22 @@
         justify-content: space-between;
         align-items: center;
         padding: 0 rem(16);
+
         @include helper-breakpoint-media-max($md-max) {
             margin: rem(30) 0;
         }
-        &__text {
-            font: normal rem(34) $setting-font-family-additional;
-            letter-spacing: rem(-0.9);
-            @include helper-breakpoint-media-max($md-max) {
-                font: normal rem(24) $setting-font-family;
-            }
-        }
-        &__line {
-            height: rem(1);
-            background-color: $setting-color-lightest-1;
+
+        &::after {
+            content: '';
+            order: 2;
+            border-top: rem(1) solid $setting-color-lightest-1;
             flex: 1;
-            margin: 0 rem(50);
-            &--expand {
-                margin: 0 0 0 rem(50);
-            }
-            @include helper-breakpoint-media-max($md-max) {
-                margin: 0 0 0 rem(50);
-            }
+            margin-left: rem(50);
         }
-        &__link {
-            font: normal rem(11) $setting-font-family-additional;
-            letter-spacing: rem(2.7);
-            text-transform: uppercase;
-            font-weight: bold;
-            position: relative;
-            line-height: normal;
-            cursor: pointer;
-            &:hover {
-                text-decoration: none;
-                color: $setting-color-text;
-            }
-            &::after {
-                content: '';
-                display: block;
-                position: absolute;
-                height: rem(1);
-                width: 100%;
-                background: $setting-color-text;
-                bottom: rem(-9.5);
-            }
-        }
-        &__link-mobile {
-            font: bold rem(12) $setting-font-family-additional;
-            letter-spacing: rem(2.1);
-            border-radius: rem(2);
-            border: rem(1) solid $setting-color-darker;
-            text-transform: uppercase;
-            display: block;
-            padding: rem(16);
-            text-align: center;
-            color: $setting-color-darker;
-            @include helper-link-hover-reset;
-            &:hover {
-                background: $setting-color-black;
-                color: $setting-color-white;
-            }
+
+        &__sub-col {
+            order: 3;
+            margin-left: rem(50);
         }
     }
 }

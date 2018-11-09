@@ -42,6 +42,15 @@
             @include helper-font-weight(medium);
         }
 
+        &--slider {
+            font: normal rem(24) $setting-font-family;
+            letter-spacing: rem(-0.9);
+
+            @include helper-breakpoint-media-min($md-min) {
+                font: normal rem(34) $setting-font-family-additional;
+            }
+        }
+
         @content;
     }
 }
