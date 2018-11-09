@@ -27,7 +27,7 @@
             {% block slides %}
                 {% for slide in data.slides %}
                     {% include atom('thumbnail') with {
-                        modifiers: ['bigger'],
+                        modifiers: ['bigger', 'no-margin', 'product-set'],
                         attributes: {
                             itemprop: 'image',
                             src: slide.externalUrlLarge
@@ -86,7 +86,7 @@
                 {% block slides %}
                     {% for product in data.slides %}
                         {% embed molecule('product-card') with {
-                            modifiers: ['stretch'],
+                            modifiers: ['stretch', 'product-set'],
                             data: {
                                 product: product,
                                 name: product.name,

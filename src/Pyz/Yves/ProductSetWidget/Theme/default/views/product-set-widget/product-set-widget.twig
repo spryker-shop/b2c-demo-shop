@@ -45,24 +45,24 @@
 {% endblock %}
 
 {% block description %}
-    <div class="col col--sm-12 col--lg-5 product-set-widget__description">
+    <div class="col col--sm-12 col--lg-5 node node--product-set">
         {{parent()}}
     </div>
 {% endblock %}
 
 {% block body %}
-    <div class="product-set-widget">
+    <div class="product-set">
         {% block header %}
             {{parent()}}
         {% endblock %}
 
         <div class="grid grid--stretch">
-            <div class="col col--sm-12 col--lg-5 product-set-widget-main-slider-wrap">
+            <div class="col col--sm-12 col--lg-5 product-set-slider--main-wrap">
                 {% block carousel %}
                     {{parent()}}
                 {% endblock %}
             </div>
-            <div class="col col--sm-12 col--lg-7 product-set-widget-slider-wrap">
+            <div class="col col--sm-12 col--lg-7 product-set-slider--wrap product-set-slider--popular">
                 {% block productSet %}
                     {{parent()}}
                 {% endblock %}

@@ -1,1 +1,1 @@
-import './product-set-slider.scss';
+import './product-set-slider';
