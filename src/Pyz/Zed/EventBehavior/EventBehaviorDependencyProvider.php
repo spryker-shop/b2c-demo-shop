@@ -30,6 +30,7 @@ use Spryker\Zed\ProductLabelStorage\Communication\Plugin\Event\ProductAbstractLa
 use Spryker\Zed\ProductLabelStorage\Communication\Plugin\Event\ProductLabelDictionaryEventResourceQueryContainerPlugin;
 use Spryker\Zed\ProductOptionStorage\Communication\Plugin\Event\ProductOptionEventResourceQueryContainerPlugin;
 use Spryker\Zed\ProductPageSearch\Communication\Plugin\Event\ProductPageEventResourceQueryContainerPlugin;
+use Spryker\Zed\ProductQuantityStorage\Communication\Plugin\Event\ProductQuantityEventResourceRepositoryPlugin;
 use Spryker\Zed\ProductRelationStorage\Communication\Plugin\Event\ProductRelationEventResourceQueryContainerPlugin;
 use Spryker\Zed\ProductReviewSearch\Communication\Plugin\Event\ProductReviewEventResourceQueryContainerPlugin as ProductReviewSearchEventResourceQueryContainerPlugin;
 use Spryker\Zed\ProductReviewStorage\Communication\Plugin\Event\ProductReviewEventResourceQueryContainerPlugin;
@@ -81,6 +82,7 @@ class EventBehaviorDependencyProvider extends SprykerEventBehaviorDependencyProv
             new ProductConcreteEventResourceQueryContainerPlugin(),
             new UrlEventResourceQueryContainerPlugin(),
             new RedirectEventResourceQueryContainerPlugin(),
+            new ProductQuantityEventResourceRepositoryPlugin(),
         ];
     }
 }
