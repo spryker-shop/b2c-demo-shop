@@ -11,8 +11,8 @@
 {% block pageInfo %}{% endblock %}
 
 {% block content %}
-    <div class="customer-account customer-account--login-wrap">
-        <div class="customer-account__form-width">
+    <div class="page-layout-customer page-layout-customer--login-wrap">
+        <div class="page-layout-customer__form-wrap">
             <ul class="list-switches list-switches--register-type">
                 <li class="list-switches__item">
                     {% include molecule('toggler-radio') with {
@@ -23,12 +23,13 @@
                             id: 'register',
                             checked: not data.forms.isLogin,
                             name: 'accountLoginSwitcher',
-                            'target-selector': '.js-login__register',
+                            'target-selector': '.js-customer-page-login-register',
                             'class-to-toggle': 'is-hidden'
                         },
                         class: 'toggler-radio--with-bg'
                     } only %}
                 </li>
+
                 <li class="list-switches__item">
                     {% include molecule('toggler-radio') with {
                         data: {
@@ -38,16 +39,16 @@
                             id: 'login',
                             checked: data.forms.isLogin,
                             name: 'accountLoginSwitcher',
-                            'target-selector': '.js-login__login',
+                            'target-selector': '.js-customer-page-login',
                             'class-to-toggle': 'is-hidden'
                         },
                         class: 'toggler-radio--with-bg'
                     } only %}
                 </li>
             </ul>
-            <div class="js-login__register {{ data.forms.isLogin ? ' is-hidden' : '' }}">
+
+            <div class="js-customer-page-login-register {{ data.forms.isLogin ? ' is-hidden' : '' }}">
                 {% include molecule('form') with {
-                    class: '',
                     data: {
                         title: 'checkout.customer.auth_as_user' | trans,
                         form: data.forms.register,
@@ -63,16 +64,16 @@
                         submit: {
                             enable: true,
                             text: 'checkout.customer.auth_as_user' | trans,
-                            class: 'button button--black button--big button--expand'
+                            class: 'form__action--login button button--black button--big button--expand'
                         }
                     },
+                    modifiers: ['grid-indent', 'login', 'checkout-actions'],
                     qa: 'register-form'
                 } only %}
             </div>
 
-            <div class="js-login__login {{ data.forms.isLogin ? '' : ' is-hidden' }}">
-                {% include molecule('form') with {
-                    class: '',
+            <div class="js-customer-page-login {{ data.forms.isLogin ? '' : ' is-hidden' }}">
+                {% embed molecule('form') with {
                     data: {
                         title: 'checkout.customer.auth_as_login' | trans,
                         form: data.forms.login,
@@ -83,18 +84,21 @@
                         submit: {
                             enable: true,
                             text: 'forms.submit.login' | trans,
-                            class: 'button button--black button--big button--expand'
+                            class: 'form__action--login button button--black button--big button--expand'
                         },
                         cancel: {
                             enable: true,
-                            url: url('password/forgotten'),
-                            text: 'forms.forgot-password' | trans~'?',
-                            icon: null,
-                            class: 'forgot-password-link',
                             qa: 'customer-forgot-password-link'
                         }
-                    }
+                    },
+                    modifiers: ['grid-indent', 'login', 'checkout-actions']
                 } only %}
+                    {% block cancel %}
+                        <a href="{{ url('password/forgotten') }}" class="link link--darkest link--login-forgot-password" {{qa('customer-forgot-password-link')}}>
+                            {{ 'forms.forgot-password' | trans~'?' }}
+                        </a>
+                    {% endblock %}
+                {% endembed %}
             </div>
         </div>
     </div>

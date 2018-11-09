@@ -7,9 +7,11 @@
 
 {% block customerContent %}
     <div class="box">
-        <div class="customer-account__box grid grid--justify grid--middle">
-            <h5 class="customer-account__subtitle col">{{ 'customer.account.wishlist.overview.title' | trans }}</h5>
-        </div>
+        {% include molecule('title-box', 'CustomerPage') with {
+            data: {
+                title: 'customer.account.wishlist.overview.title' | trans
+            }
+        } only %}
 
         {% if data.wishlists is empty %}
             <div class="text-center">

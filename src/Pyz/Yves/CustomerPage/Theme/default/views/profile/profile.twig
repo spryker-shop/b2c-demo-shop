@@ -28,6 +28,7 @@
                 }
             } only %}
         </div>
+
         <div class="col--lg-6 col--sm-12">
             {% include molecule('customer-form', 'CustomerPage') with {
                 class: 'box',
@@ -40,17 +41,18 @@
                 }
             } only %}
         </div>
+
         <div class="col--lg-6 col--sm-12">
             <div class="box">
-                <div class="customer-account__box grid grid--justify grid--middle box">
-                    <h5 class="customer-account__subtitle col">{{ "customer.profile.delete" | trans }}</h5>
-                </div>
+                {% include molecule('title-box', 'CustomerPage') with {
+                    data: {
+                        title: "customer.profile.delete" | trans
+                    }
+                } only %}
+
                 <p>{{ "customer.profile.delete.description" | trans }}</p>
                 <a href="{{url('customer/delete')}}" class="button button--alert">{{ "customer.profile.delete" | trans }}</a>
             </div>
         </div>
     </div>
-
-
-
 {% endblock %}

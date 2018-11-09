@@ -51,6 +51,27 @@
             }
         }
 
+        &--account-main {
+            text-transform: capitalize;
+            text-align: center;
+            font: 500 rem(50)/rem(75) $setting-font-family-additional;
+            color: $setting-color-text;
+            border-bottom: rem(1) dotted $setting-color-lightest;
+            border-top: rem(1) dotted $setting-color-lightest;
+            padding: rem(25) 0;
+            margin: rem(25) 0;
+
+            @include helper-breakpoint-media-min($sm-max) {
+                font-size: rem(32);
+            }
+        }
+
+        &--account-secondary {
+            font: 700 rem(13) $setting-font-family-additional;
+            letter-spacing: rem(2.6);
+            text-transform: uppercase;
+        }
+
         @content;
     }
 }
