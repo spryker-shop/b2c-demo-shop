@@ -1,1 +1,0 @@
-import './customer-form.scss';

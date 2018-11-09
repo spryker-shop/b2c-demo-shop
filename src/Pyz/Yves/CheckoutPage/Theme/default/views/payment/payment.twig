@@ -11,7 +11,7 @@
 
 {% block content %}
     {% embed molecule('form') with {
-        modifiers: ['checkout-payment-step', 'checkout-actions'],
+        modifiers: ['checkout-payment-step', 'checkout-actions', 'checkout-form-elements'],
         data: {
             form: data.forms.payment,
             options: {
@@ -74,7 +74,7 @@
                 {% for key, choice in choices %}
                     {% embed molecule('form') with {
                         class: 'payment-form-indent',
-                        modifiers: ['checkout-grid-indent'],
+                        modifiers: ['grid-indent', 'checkout-form-elements'],
                         data: {
                             form: data.form[data.form.paymentSelection[key].vars.value],
                             enableStart: false,

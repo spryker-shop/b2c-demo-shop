@@ -1,0 +1,55 @@
+@include shop-ui-table {
+    &--customer-account {
+        td,
+        th {
+            padding: rem(8);
+        }
+
+        thead,
+        &__head {
+            background: $setting-color-light;
+            color: $setting-color-white;
+        }
+
+        tbody,
+        &__body {
+            tr {
+                &:nth-child(even) {
+                    background: $setting-color-lightest-1;
+                }
+            }
+        }
+
+        .checkbox {
+            margin: 0;
+            margin-top: rem(4);
+        }
+    }
+
+    &--order {
+        th,
+        td {
+            @include helper-breakpoint-media-max($sm-max) {
+                font-size: rem(14);
+            }
+        }
+
+        th {
+            white-space: nowrap;
+        }
+    }
+
+    &--order-detail {
+        @include helper-breakpoint-media-max($sm-max) {
+            th,
+            td {
+                font-size: rem(11);
+                padding: rem(4);
+            }
+
+            .checkbox {
+                margin-top: 0;
+            }
+        }
+    }
+}

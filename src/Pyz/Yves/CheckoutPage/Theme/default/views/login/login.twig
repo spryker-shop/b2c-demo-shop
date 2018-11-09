@@ -70,7 +70,7 @@
 
         {% embed molecule('form') with {
             class: 'register-form js-login__register' ~ (data.isGuest or data.isLogin? ' is-hidden' : ''),
-            modifiers: ['checkout-login-step', 'checkout-actions'],
+            modifiers: ['login', 'checkout-actions'],
             data: {
                 form: data.forms.registration,
                 submit: {
@@ -88,7 +88,7 @@
         } only %}
             {% block fields %}
                 {% include molecule('form') with {
-                    modifiers: ['checkout-login-step', 'checkout-actions', 'checkout-grid-indent'],
+                    modifiers: ['login', 'checkout-actions', 'grid-indent'],
                     data: {
                         class: 'col col--sm-6',
                         title: 'checkout.customer.auth_as_user' | trans,
@@ -114,7 +114,7 @@
 
         {% embed molecule('form') with {
             class: 'register-form js-login__guest' ~ (data.isGuest ? '' : ' is-hidden'),
-            modifiers: ['checkout-login-step', 'checkout-actions'],
+            modifiers: ['login', 'checkout-actions'],
             data: {
                 form: data.forms.guest,
                 submit: {
@@ -131,7 +131,7 @@
         } only %}
             {% block fields %}
                 {% include molecule('form') with {
-                    modifiers: ['checkout-login-step', 'checkout-actions', 'checkout-grid-indent'],
+                    modifiers: ['login', 'checkout-actions', 'grid-indent'],
                     data: {
                         class: 'col col--sm-6',
                         title: 'checkout.customer.auth_as_guest' | trans,
@@ -156,7 +156,7 @@
 
         {% embed molecule('form') with {
             class: 'js-login__login' ~ (data.isLogin ? '' : ' is-hidden'),
-            modifiers: ['checkout-login-step', 'checkout-actions', 'checkout-grid-indent'],
+            modifiers: ['login', 'checkout-actions', 'grid-indent'],
             data: {
                 title: 'checkout.customer.auth_as_login' | trans,
                 form: data.forms.login,

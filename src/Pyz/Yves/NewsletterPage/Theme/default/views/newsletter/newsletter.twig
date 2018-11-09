@@ -9,9 +9,11 @@
 
 {% block customerContent %}
     <div class="box">
-        <div class="customer-account__box grid grid--justify grid--middle">
-            <h5 class="customer-account__subtitle col">{{ 'customer.newsletter.subscription' | trans }}</h5>
-        </div>
+        {% include molecule('title-box', 'CustomerPage') with {
+            data: {
+                title: 'customer.newsletter.subscription' | trans
+            }
+        } only %}
 
         <p>{{ 'account.newsletter.text' | trans }}</p>
 
