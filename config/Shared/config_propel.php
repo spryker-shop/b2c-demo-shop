@@ -3,6 +3,8 @@
 use Spryker\Shared\Kernel\Store;
 use Spryker\Shared\Propel\PropelConstants;
 use Spryker\Zed\Propel\PropelConfig;
+use Spryker\Zed\PropelOrm\Business\Builder\ExtensionObjectBuilder;
+use Spryker\Zed\PropelOrm\Business\Builder\ExtensionQueryBuilder;
 use Spryker\Zed\PropelOrm\Business\Builder\ObjectBuilder;
 use Spryker\Zed\PropelOrm\Business\Builder\QueryBuilder;
 
@@ -54,7 +56,9 @@ $config[PropelConstants::PROPEL] = [
                 // If you need full entity logging on Create/Update/Delete, then switch to
                 // Spryker\Zed\PropelOrm\Business\Builder\ObjectBuilderWithLogger instead.
                 'object' => ObjectBuilder::class,
+                'objectstub' => ExtensionObjectBuilder::class,
                 'query' => QueryBuilder::class,
+                'querystub' => ExtensionQueryBuilder::class,
             ],
         ],
     ],
