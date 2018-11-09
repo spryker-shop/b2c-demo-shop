@@ -1,11 +1,18 @@
 @mixin pdp-review-rating($name: '.pdp-review') {
     #{$name} {
 
+        &__title {
+            margin: rem(100) 0 rem(34);
+            @include helper-breakpoint-media-max($md-max) {
+
+            }
+        }
+
         .product-slider-title {
             padding: 0;
             margin: rem(130) 0 rem(70);
             @include helper-breakpoint-media-max($md-max) {
-                margin: rem(100) 0 rem(34);
+
                 .product-slider-title__text {
                     font: 400 rem(26)/rem(36) $setting-font-family-additional;
                 }

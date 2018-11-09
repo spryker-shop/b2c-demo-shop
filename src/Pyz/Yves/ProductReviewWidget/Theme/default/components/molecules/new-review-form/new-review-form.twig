@@ -9,8 +9,8 @@
 } %}
 
 {% block body %}
-    <div class="popup popup--new-review is-hidden js-review__new-review-form-target">
-        <div class="popup__overlay js-review__new-review-trigger"></div>
+    <div class="popup popup--new-review is-hidden {{ config.jsName }}__target">
+        <div class="popup__overlay {{ config.jsName }}__trigger"></div>
         <div class="popup__inner">
             {% embed molecule('form') with {
                 data: {
@@ -38,7 +38,7 @@
                             <h5 class="popup__title">{{ embed.title }}</h5>
                         {% endif %}
                         {% include atom('icon') with {
-                            class: 'popup__close js-review__new-review-trigger',
+                            class: 'popup__close ' ~ config.name ~ '__trigger',
                             data: {
                                 name: 'close'
                             }

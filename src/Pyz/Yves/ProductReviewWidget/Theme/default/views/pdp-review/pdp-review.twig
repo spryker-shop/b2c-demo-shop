@@ -18,35 +18,31 @@
 {% endblock %}
 
 {% block body %}
-
     <div class="pdp-review">
-        <div class="product-slider-title">
-            <div class="">
-                <h2 class="product-slider-title__text">{{ 'product_review.ratings_reviews' | trans }}</h2>
-            </div>
+        <div class="product-slider-title pdp-review__title">
+            <h2 class="product-slider-title__text">{{ 'product_review.ratings_reviews' | trans }}</h2>
             <div class="product-slider-title__line"></div>
-            <div class="">
-                <div class="grid grid--right is-hidden-sm-md">
-                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                        <span class="product-slider-title__link js-review__new-review-trigger">
-                            {{ 'product_review.submit.add_a_review' | trans }}
-                        </span>
-                    {% else %}
-                        <a class="product-slider-title__link" href="{{ path('login') }}">
-                            {{ 'product_review.submit.add_a_review' | trans }}
-                        </a>
-                    {% endif %}
-                </div>
+            <div class="is-hidden-sm-md">
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <span class="product-slider-title__link js-new-review-form__trigger">
+                        {{ 'product_review.submit.add_a_review' | trans }}
+                    </span>
+                {% else %}
+                    <a class="product-slider-title__link" href="{{ path('login') }}">
+                        {{ 'product_review.submit.add_a_review' | trans }}
+                    </a>
+                {% endif %}
             </div>
         </div>
 
         {% include molecule('toggler-click') with {
             attributes: {
-                'trigger-selector': '.js-review__new-review-trigger',
-                'target-selector': '.js-review__new-review-form-target',
+                'trigger-selector': '.js-new-review-form__trigger',
+                'target-selector': '.js-new-review-form__target',
                 'class-to-toggle': 'is-hidden'
             }
         } only %}
+
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
             {{ render(path('product-review/submit', {'idProductAbstract': data.idProductAbstract})) }}
         {% endif %}
