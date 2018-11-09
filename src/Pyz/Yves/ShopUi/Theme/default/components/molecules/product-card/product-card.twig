@@ -29,11 +29,11 @@
 
 {% block content %}
     {% block labels %}
-        {{ widget('ProductAbstractLabelWidgetPlugin', data.abstractId) }}
+        {% widget 'ProductAbstractLabelWidget' args [data.abstractId] only %}{% endwidget %}
     {% endblock %}
 
     {% block groups %}
-        {{ widget('ProductGroupWidgetPlugin', data.abstractId) }}
+        {% widget 'ExampleProductColorSelectorWidget' args [data.abstractId] use view('product-color-selector', 'ExampleProductColorGroupWidget') only %}{% endwidget %}
     {% endblock %}
 
     {% block name %}
@@ -41,17 +41,21 @@
     {% endblock %}
 
     {% block rating %}
-        {{ widget('ProductAbstractReviewWidgetPlugin', data.abstractId) }}
+        {% widget 'ProductAbstractReviewWidget' args [data.abstractId] only %}{% endwidget %}
     {% endblock %}
 
     {% block price %}
         <p>
-            {% include molecule('price') with {
-                data: {
-                    amount: data.price | money,
-                    originalAmount: data.originalPrice is empty ? null : (data.originalPrice | money)
-                }
-            } only %}
+            {% if can('SeePricePermissionPlugin') %}
+                {% include molecule('price') with {
+                    data: {
+                        amount: data.price | money,
+                        originalAmount: data.originalPrice is empty ? null : (data.originalPrice | money)
+                    }
+                } only %}
+            {% else %}
+                {{ 'customer.access.cannot_see_price' | trans }}
+            {% endif %}
         </p>
     {% endblock %}
 {% endblock %}

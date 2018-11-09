@@ -15,46 +15,10 @@ class QuoteDependencyProvider extends SprykerQuoteDependencyProvider
     /**
      * @return \Spryker\Zed\QuoteExtension\Dependency\Plugin\QuoteWritePluginInterface[]
      */
-    protected function getQuoteCreateAfterPlugins(): array
-    {
-        return [
-        ];
-    }
-
-    /**
-     * @return \Spryker\Zed\QuoteExtension\Dependency\Plugin\QuoteWritePluginInterface[]
-     */
     protected function getQuoteCreateBeforePlugins(): array
     {
         return [
             new SetDefaultCurrencyBeforeQuoteCreatePlugin(),
-        ];
-    }
-
-    /**
-     * @return \Spryker\Zed\QuoteExtension\Dependency\Plugin\QuoteWritePluginInterface[]
-     */
-    protected function getQuoteUpdateAfterPlugins(): array
-    {
-        return [
-        ];
-    }
-
-    /**
-     * @return \Spryker\Zed\QuoteExtension\Dependency\Plugin\QuoteWritePluginInterface[]
-     */
-    protected function getQuoteUpdateBeforePlugins(): array
-    {
-        return [
-        ];
-    }
-
-    /**
-     * @return \Spryker\Zed\QuoteExtension\Dependency\Plugin\QuoteWritePluginInterface[]
-     */
-    protected function getQuoteDeleteBeforePlugins(): array
-    {
-        return [
         ];
     }
 }

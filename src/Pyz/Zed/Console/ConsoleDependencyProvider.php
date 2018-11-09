@@ -45,12 +45,15 @@ use Spryker\Zed\Log\Communication\Console\DeleteLogFilesConsole;
 use Spryker\Zed\Maintenance\Communication\Console\MaintenanceDisableConsole;
 use Spryker\Zed\Maintenance\Communication\Console\MaintenanceEnableConsole;
 use Spryker\Zed\Money\Communication\Plugin\ServiceProvider\TwigMoneyServiceProvider;
-use Spryker\Zed\NewRelic\Communication\Plugin\NewRelicConsolePlugin;
+use Spryker\Zed\Monitoring\Communication\Plugin\MonitoringConsolePlugin;
 use Spryker\Zed\Oms\Communication\Console\CheckConditionConsole as OmsCheckConditionConsole;
 use Spryker\Zed\Oms\Communication\Console\CheckTimeoutConsole as OmsCheckTimeoutConsole;
 use Spryker\Zed\Oms\Communication\Console\ClearLocksConsole as OmsClearLocksConsole;
 use Spryker\Zed\PriceProduct\Communication\Console\PriceProductStoreOptimizeConsole;
 use Spryker\Zed\PriceProductDataImport\PriceProductDataImportConfig;
+use Spryker\Zed\ProductAlternativeDataImport\ProductAlternativeDataImportConfig;
+use Spryker\Zed\ProductDiscontinued\Communication\Console\DeactivateDiscontinuedProductsConsole;
+use Spryker\Zed\ProductDiscontinuedDataImport\ProductDiscontinuedDataImportConfig;
 use Spryker\Zed\ProductLabel\Communication\Console\ProductLabelRelationUpdaterConsole;
 use Spryker\Zed\ProductLabel\Communication\Console\ProductLabelValidityConsole;
 use Spryker\Zed\ProductRelation\Communication\Console\ProductRelationUpdaterConsole;
@@ -177,6 +180,8 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
             new DataImportConsole(DataImportConsole::DEFAULT_NAME . ':' . DataImportConfig::IMPORT_TYPE_TAX),
             new DataImportConsole(DataImportConsole::DEFAULT_NAME . ':' . DataImportConfig::IMPORT_TYPE_DISCOUNT_AMOUNT),
             new DataImportConsole(DataImportConsole::DEFAULT_NAME . ':' . DataImportConfig::IMPORT_TYPE_ORDER_SOURCE),
+            new DataImportConsole(DataImportConsole::DEFAULT_NAME . ':' . ProductAlternativeDataImportConfig::IMPORT_TYPE_PRODUCT_ALTERNATIVE), #ProductAlternativeFeature
+            new DataImportConsole(DataImportConsole::DEFAULT_NAME . ':' . ProductDiscontinuedDataImportConfig::IMPORT_TYPE_PRODUCT_DISCONTINUED),
 
             //core data importers
             new DataImportConsole(DataImportConsole::DEFAULT_NAME . ':' . PriceProductDataImportConfig::IMPORT_TYPE_PRODUCT_PRICE),
@@ -232,6 +237,8 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
             new MaintenanceEnableConsole(),
             new MaintenanceDisableConsole(),
 
+            new DeactivateDiscontinuedProductsConsole(), #ProductDiscontinuedFeature
+
             new PriceProductStoreOptimizeConsole(),
         ];
 
@@ -282,7 +289,7 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
 
         if (!Environment::isDevelopment()) {
             $eventSubscriber[] = new ConsoleLogPlugin();
-            $eventSubscriber[] = new NewRelicConsolePlugin();
+            $eventSubscriber[] = new MonitoringConsolePlugin();
         }
 
         return $eventSubscriber;
