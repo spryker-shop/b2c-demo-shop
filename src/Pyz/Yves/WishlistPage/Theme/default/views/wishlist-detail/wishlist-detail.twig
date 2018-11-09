@@ -20,14 +20,13 @@
 
 {% block customerContent %}
     <div class="box">
-
-        <div class="page-layout-customer__box grid grid--justify grid--middle">
-            <h5 class="title title--account-secondary col">{{ data.wishlistName }}</h5>
-            <div class="col">
-
-            </div>
-        </div>
-
+        {% include molecule('title-box', 'CustomerPage') with {
+            class: 'grid grid--justify grid--middle',
+            data: {
+                title: data.wishlistName,
+                titleClass: 'title title--account-secondary col'
+            }
+        } only %}
 
         {% if data.wishlistItems is empty %}
             <div class="text-center">

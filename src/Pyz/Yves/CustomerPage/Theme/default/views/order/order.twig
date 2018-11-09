@@ -17,9 +17,13 @@
 
 {% block customerContent %}
     <div class="box">
-        <div class="page-layout-customer__box grid grid--justify grid--middle">
-            <h5 class="title title--account-secondary col">{{ 'customer.order.all_orders' | trans }}</h5>
-        </div>
+        {% include molecule('title-box', 'CustomerPage') with {
+            class: 'grid grid--justify grid--middle',
+            data: {
+                title: 'customer.order.all_orders' | trans,
+                titleClass: 'title title--account-secondary col'
+            }
+        } only %}
 
         {% include molecule('order-table', 'CustomerPage') with {
             data: {
@@ -27,7 +31,7 @@
             }
         } only %}
 
-        <hr/>
+        <hr>
 
         {% include molecule('pagination') with {
             data: data.pagination

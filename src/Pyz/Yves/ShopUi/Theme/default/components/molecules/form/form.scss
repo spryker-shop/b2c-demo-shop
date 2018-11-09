@@ -8,13 +8,18 @@ $shop-ui-form-field-margin: rem(8);
 
         &__actions {
             text-align: right;
+
+            &--profile {
+                padding: rem(8) rem(16);
+            }
         }
 
         &__action {
             margin-top: $shop-ui-form-field-margin;
             margin-left: $shop-ui-form-field-margin;
 
-            &--checkout {
+            &--checkout,
+            &--login {
                 margin: 0;
 
                 &:not(:last-child) {
@@ -59,6 +64,30 @@ $shop-ui-form-field-margin: rem(8);
             .col {
                 @include helper-breakpoint-media-max($sm-max) {
                     width: 100%;
+                }
+            }
+        }
+
+        &--login,
+        &--checkout-form-elements {
+            label,
+            .label {
+                display: block;
+                color: $setting-color-dark;
+            }
+
+            .checkbox__box,
+            .toggler-checkbox__box {
+                margin-top: rem(2);
+
+                @include helper-breakpoint-media-min($md-min) {
+                    margin-top: rem(4);
+                }
+            }
+
+            .checkbox__check {
+                @include helper-breakpoint-media-min($md-min) {
+                    top: rem(7);
                 }
             }
         }

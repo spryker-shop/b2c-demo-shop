@@ -13,24 +13,30 @@
         {% for address in data.addresses %}
             <div class="col--lg-6 col--sm-12">
                 <div class="box">
-                    <div class="page-layout-customer__box grid grid--justify grid--middle">
-                        <h5 class="title title--account-secondary col">{{ data.activePage}} {{ loop.index }}</h5>
+                    {% embed molecule('title-box', 'CustomerPage') with {
+                        class: 'grid grid--justify grid--middle',
+                        data: {
+                            title: data.activePage ~ loop.index,
+                            titleClass: 'title title--account-secondary col',
+                            additionalContent: address
+                        }
+                    } only %}
+                        {% block additionalContent %}
+                            <ul class="menu menu--inline menu--customer-account float-right">
+                                <li class="menu__item">
+                                    <a href="{{ url('customer/address/update', {'id': data.additionalContent.idCustomerAddress }) }}">
+                                        {{ "customer.profile.address.edit" | trans }}
+                                    </a>
+                                </li>
 
-                        <ul class="menu menu--inline menu--customer-account float-right">
-                            <li class="menu__item">
-                                <a href="{{ url('customer/address/update', {'id': address.idCustomerAddress }) }}">
-                                    {{ "customer.profile.address.edit" | trans }}
-                                </a>
-                            </li>
-
-                            <li class="menu__item">
-                                <a href="{{ url('customer/address/delete', {'id': address.idCustomerAddress }) }}">
-                                    {{ "customer.profile.address.delete" | trans }}
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-
+                                <li class="menu__item">
+                                    <a href="{{ url('customer/address/delete', {'id': data.additionalContent.idCustomerAddress }) }}">
+                                        {{ "customer.profile.address.delete" | trans }}
+                                    </a>
+                                </li>
+                            </ul>
+                        {% endblock %}
+                    {% endembed %}
 
                     {% include molecule('display-address', 'CustomerPage') with {
                         class: 'menu menu--customer-account',

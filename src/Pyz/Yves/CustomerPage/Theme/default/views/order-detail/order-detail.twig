@@ -12,9 +12,13 @@
     {{ widgetBlock('CustomerReorderWidgetPlugin', 'formStart', data.order) }}
 
     <div class="box">
-        <div class="page-layout-customer__box grid grid--justify grid--middle box">
-            <h5 class="title title--account-secondary col">{{ 'customer.profile.order_details' | trans }}</h5>
-        </div>
+        {% include molecule('title-box', 'CustomerPage') with {
+            class: 'grid grid--justify grid--middle',
+            data: {
+                title: 'customer.profile.order_details' | trans,
+                titleClass: 'title title--account-secondary'
+            }
+        } only %}
 
         <div class="grid grid--justify">
             <ul class="col menu menu--customer-account">
@@ -68,7 +72,7 @@
             {% endblock %}
         {% endembed %}
 
-        <div class="page-layout-customer__box">
+        <div class="title-box">
             {% include molecule('order-summary', 'CustomerPage') with {
                 class: 'menu menu--customer-account menu--order-summary text-right',
                 data: {
@@ -81,9 +85,13 @@
     <div class="grid grid--justify">
         <div class="col--lg-6 col--sm-12">
             <div class="box">
-                <div class="page-layout-customer__box">
-                    <h5 class="title title--account-secondary">{{ 'customer.order.shipping_address' | trans }}</h5>
-                </div>
+                {% include molecule('title-box', 'CustomerPage') with {
+                    class: 'grid grid--justify grid--middle',
+                    data: {
+                        title: 'customer.order.shipping_address' | trans,
+                        titleClass: 'title title--account-secondary'
+                    }
+                } only %}
 
                 {% include molecule('display-address', 'CustomerPage') with {
                     class: 'menu menu--customer-account',
@@ -96,9 +104,13 @@
 
         <div class="col--lg-6 col--sm-12">
             <div class="box">
-                <div class="page-layout-customer__box">
-                    <h5 class="title title--account-secondary">{{ 'customer.order.billing_address' | trans }}</h5>
-                </div>
+                {% include molecule('title-box', 'CustomerPage') with {
+                    class: 'grid grid--justify grid--middle',
+                    data: {
+                        title: 'customer.order.billing_address' | trans,
+                        titleClass: 'title title--account-secondary'
+                    }
+                } only %}
 
                 {% include molecule('display-address', 'CustomerPage') with {
                     class: 'menu menu--customer-account',
@@ -113,9 +125,13 @@
     <div class="grid grid--justify">
         <div class="col--lg-6 col--sm-12">
             <div class="box">
-                <div class="page-layout-customer__box">
-                    <h5 class="title title--account-secondary">{{ 'customer.order.shipment' | trans }}</h5>
-                </div>
+                {% include molecule('title-box', 'CustomerPage') with {
+                    class: 'grid grid--justify grid--middle',
+                    data: {
+                        title: 'customer.order.shipment' | trans,
+                        titleClass: 'title title--account-secondary'
+                    }
+                } only %}
 
                 <ul class="menu menu--customer-account">
                     {% for expense in data.order.expenses %}

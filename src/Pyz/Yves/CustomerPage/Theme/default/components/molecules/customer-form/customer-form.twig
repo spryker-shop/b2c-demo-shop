@@ -39,9 +39,13 @@
 {% block body %}
     {% block title %}
         {% if data.title is not empty %}
-            <div class="page-layout-customer__box grid grid--justify grid--middle box">
-                <h5 class="title title--account-secondary col">{{data.title}}</h5>
-            </div>
+            {% include molecule('title-box', 'CustomerPage') with {
+                class: 'grid grid--justify grid--middle',
+                data: {
+                    title: data.title,
+                    titleClass: 'title title--account-secondary col'
+                }
+            } only %}
         {% endif %}
     {% endblock %}
 
@@ -49,66 +53,62 @@
         {{ form_start(data.form, data.options) }}
     {% endif %}
 
-    <div class="page-layout-customer__container">
-        {% block errors %}
-            {{ form_errors(data.form) }}
-        {% endblock %}
+    {% block errors %}
+        {{ form_errors(data.form) }}
+    {% endblock %}
 
-        {% block fieldset %}
-            <div class="{{config.name}}__fields grid grid--top">
-                {% block fields %}
-                    {% for fieldName in data.form.children | keys %}
-                        {% set field = attribute(data.form.children, fieldName) %}
-                        {% set fieldLayoutClass = 'col col--sm-12' %}
+    {% block fieldset %}
+        <div class="{{config.name}}__fields grid grid--top">
+            {% block fields %}
+                {% for fieldName in data.form.children | keys %}
+                    {% set field = attribute(data.form.children, fieldName) %}
+                    {% set fieldLayoutClass = 'col col--sm-12' %}
 
-                        {% if fieldName in data.layout | keys %}
-                            {% set fieldLayoutClass = attribute(data.layout, fieldName) %}
-                        {% endif %}
+                    {% if fieldName in data.layout | keys %}
+                        {% set fieldLayoutClass = attribute(data.layout, fieldName) %}
+                    {% endif %}
 
-                        {% block field %}
-                            {{ form_row(field, {
-                                rowAttr: {
-                                    class: config.name ~ '__field ' ~ fieldLayoutClass
-                                }
-                            }) }}
-                        {% endblock %}
-                    {% endfor %}
-                {% endblock %}
+                    {% block field %}
+                        {{ form_row(field, {
+                            rowAttr: {
+                                class: config.name ~ '__field ' ~ fieldLayoutClass
+                            }
+                        }) }}
+                    {% endblock %}
+                {% endfor %}
+            {% endblock %}
+        </div>
+    {% endblock %}
+
+    {% if data.submit.enable or data.cancel.enable %}
+        {% block actions %}
+            <div class="{{config.name}}__actions {{config.name}}__actions--profile">
+                {% if data.cancel.enable %}
+                    {% block cancel %}
+                        <a href="{{data.cancel.url}}" class="{{config.name}}__action {{data.cancel.class}}" {{qa(data.cancel.qa)}}>
+                            {{data.cancel.text}}
+                        </a>
+                    {% endblock %}
+                {% endif %}
+
+                {% if data.submit.enable %}
+                    {% block submit %}
+                        <button type="submit" class="{{config.name}}__action {{data.submit.class}}" {{qa(data.submit.qa)}}>
+                            {% if data.submit.icon is not empty %}
+                                {% include atom('icon') with {
+                                    modifiers: ['small'],
+                                    data: {
+                                        name: data.submit.icon
+                                    }
+                                } only %}
+                            {% endif %}
+                            {{data.submit.text}}
+                        </button>
+                    {% endblock %}
+                {% endif %}
             </div>
         {% endblock %}
-
-
-        {% if data.submit.enable or data.cancel.enable %}
-            {% block actions %}
-                <div class="{{config.name}}__actions">
-                    {% if data.cancel.enable %}
-                        {% block cancel %}
-                            <a href="{{data.cancel.url}}" class="{{config.name}}__action {{data.cancel.class}}" {{qa(data.cancel.qa)}}>
-                                {{data.cancel.text}}
-                            </a>
-                        {% endblock %}
-                    {% endif %}
-
-                    {% if data.submit.enable %}
-                        {% block submit %}
-                            <button type="submit" class="{{config.name}}__action {{data.submit.class}}" {{qa(data.submit.qa)}}>
-                                {% if data.submit.icon is not empty %}
-                                    {% include atom('icon') with {
-                                        modifiers: ['small'],
-                                        data: {
-                                            name: data.submit.icon
-                                        }
-                                    } only %}
-                                {% endif %}
-                                {{data.submit.text}}
-                            </button>
-                        {% endblock %}
-                    {% endif %}
-                </div>
-            {% endblock %}
-        {% endif %}
-
-    </div>
+    {% endif %}
 
     {% if data.enableEnd %}
         {{ form_end(data.form) }}
