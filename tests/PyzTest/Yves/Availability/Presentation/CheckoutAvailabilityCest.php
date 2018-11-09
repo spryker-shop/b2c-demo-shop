@@ -34,7 +34,7 @@ class CheckoutAvailabilityCest
      */
     public function testCheckoutItemWithAvailability(AvailabilityPresentationTester $i, Scenario $scenario)
     {
-        $scenario->skip('Re-enable the test when VM with PHP 7.2 is available.');
+        $scenario->skip('Re-enable when incompatibility with CustomerAccess issue will be solved');
 
         $i->wantTo('Checkout item with stock');
         $i->expectTo('Availability changed during SM processing.');
