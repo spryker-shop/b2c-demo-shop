@@ -14,23 +14,23 @@
             <div class="col--lg-6 col--sm-12">
                 <div class="box">
                     {% embed molecule('title-box', 'CustomerPage') with {
-                        class: 'grid grid--justify grid--middle',
                         data: {
-                            title: data.activePage ~ loop.index,
-                            titleClass: 'title title--account-secondary col',
-                            additionalContent: address
+                            title: data.activePage ~ loop.index
+                        },
+                        embed: {
+                            address: address
                         }
                     } only %}
                         {% block additionalContent %}
                             <ul class="menu menu--inline menu--customer-account float-right">
                                 <li class="menu__item">
-                                    <a href="{{ url('customer/address/update', {'id': data.additionalContent.idCustomerAddress }) }}">
+                                    <a href="{{ url('customer/address/update', {'id': embed.address.idCustomerAddress }) }}">
                                         {{ "customer.profile.address.edit" | trans }}
                                     </a>
                                 </li>
 
                                 <li class="menu__item">
-                                    <a href="{{ url('customer/address/delete', {'id': data.additionalContent.idCustomerAddress }) }}">
+                                    <a href="{{ url('customer/address/delete', {'id': embed.address.idCustomerAddress }) }}">
                                         {{ "customer.profile.address.delete" | trans }}
                                     </a>
                                 </li>

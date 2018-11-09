@@ -40,10 +40,8 @@
     {% block title %}
         {% if data.title is not empty %}
             {% include molecule('title-box', 'CustomerPage') with {
-                class: 'grid grid--justify grid--middle',
                 data: {
-                    title: data.title,
-                    titleClass: 'title title--account-secondary col'
+                    title: data.title
                 }
             } only %}
         {% endif %}

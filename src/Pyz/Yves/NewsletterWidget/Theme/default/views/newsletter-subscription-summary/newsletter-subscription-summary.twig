@@ -6,10 +6,8 @@
 
 {% block body %}
     {% embed molecule('title-box', 'CustomerPage') with {
-        class: 'grid grid--justify grid--middle',
         data: {
-            title: 'customer.account.newsletter' | trans,
-            titleClass: 'title title--account-secondary col'
+            title: 'customer.account.newsletter' | trans
         }
     } only %}
         {% block additionalContent %}

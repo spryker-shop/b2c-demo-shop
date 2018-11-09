@@ -6,13 +6,14 @@
 
 {% define data = {
     title: required,
-    titleClass: '',
-    additionalContent: null
+    titleClass: ''
 } %}
+
+{% block class %}title-box grid grid--justify grid--middle{% endblock %}
 
 {% block body %}
     {% block title %}
-        <h5 {% if data.titleClass is not empty %} class="{{ data.titleClass }}" {% endif %}>{{data.title}}</h5>
+        <h5 class="title title--account-secondary col">{{data.title}}</h5>
     {% endblock %}
     {% block additionalContent %}{% endblock %}
 {% endblock %}
