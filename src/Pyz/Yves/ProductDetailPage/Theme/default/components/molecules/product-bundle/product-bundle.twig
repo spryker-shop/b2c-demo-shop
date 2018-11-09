@@ -12,10 +12,11 @@
 
 {% block body %}
     <div class="bundle-list">
-        <div class="product-slider-title">
-            <h4 class="product-slider-title__text">{{ 'bundle.title' | trans }}</h4>
-            <div class="product-slider-title__line product-slider-title__line--expand"></div>
-        </div>
+        {% include molecule('product-slider-title') with {
+            data: {
+                title: 'bundle.title' | trans
+            }
+        } only %}
 
         {% embed molecule('slick-carousel') with {
             data: {

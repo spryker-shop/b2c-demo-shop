@@ -1,0 +1,1 @@
+import './promotion-item.scss';

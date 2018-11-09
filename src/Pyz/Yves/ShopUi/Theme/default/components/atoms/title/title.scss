@@ -1,10 +1,23 @@
 @mixin shop-ui-title($name: '.title') {
     #{$name} {
+        &--cart {
+            font: 700 rem(26)/1.5 $setting-font-family-additional;
+            letter-spacing: rem(-0.3);
+
+            @include helper-breakpoint-media-min($lg-min) {
+                font-size: rem(25);
+            }
+        }
+
+        &--quantity {
+            font: rem(16) $setting-font-family;
+            color: $setting-color-light;
+        }
+
         &--checkout {
             width: 100%;
-            font: 700 rem(32) $setting-font-family-additional;
+            font: 700 rem(32)/1 $setting-font-family-additional;
             letter-spacing: rem(-0.5);
-            line-height: 1;
             margin-bottom: rem(32);
             padding-bottom: rem(10);
             border-bottom: dotted rem(1) $setting-color-lightest;
@@ -23,6 +36,15 @@
             margin: 0 rem(10) 0 0;
             border: none;
             padding: 0;
+        }
+
+        &--slider {
+            font: normal rem(24) $setting-font-family;
+            letter-spacing: rem(-0.9);
+
+            @include helper-breakpoint-media-min($md-min) {
+                font: normal rem(34) $setting-font-family-additional;
+            }
         }
 
         &--account-main {
