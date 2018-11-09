@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of the Spryker Suite.
+ * This file is part of the Spryker Commerce OS.
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
@@ -49,7 +49,6 @@ use Pyz\Zed\DataImport\Business\Model\ProductManagementAttribute\ProductManageme
 use Pyz\Zed\DataImport\Business\Model\ProductManagementAttribute\ProductManagementLocalizedAttributesExtractorStep;
 use Pyz\Zed\DataImport\Business\Model\ProductOption\ProductOptionWriterStep;
 use Pyz\Zed\DataImport\Business\Model\ProductOptionPrice\ProductOptionPriceWriterStep;
-use Pyz\Zed\DataImport\Business\Model\ProductPrice\ProductPriceWriterStep;
 use Pyz\Zed\DataImport\Business\Model\ProductRelation\Hook\ProductRelationAfterImportHook;
 use Pyz\Zed\DataImport\Business\Model\ProductRelation\ProductRelationWriter;
 use Pyz\Zed\DataImport\Business\Model\ProductReview\ProductReviewWriterStep;
@@ -81,10 +80,11 @@ use Spryker\Zed\Discount\DiscountConfig;
 class DataImportBusinessFactory extends SprykerDataImportBusinessFactory
 {
     /**
-     * @return \Spryker\Zed\DataImport\Business\Model\DataImporterInterface
+     * @return \Spryker\Zed\DataImport\Business\Model\DataImporterCollectionInterface
      */
     public function getImporter()
     {
+        /** @var \Spryker\Zed\DataImport\Business\Model\DataImporterPluginCollectionInterface|\Spryker\Zed\DataImport\Business\Model\DataImporterCollectionInterface $dataImporterCollection */
         $dataImporterCollection = $this->createDataImporterCollection();
         $dataImporterCollection
             ->addDataImporter($this->createStoreImporter())
@@ -110,7 +110,6 @@ class DataImportBusinessFactory extends SprykerDataImportBusinessFactory
             ->addDataImporter($this->createProductOptionImporter())
             ->addDataImporter($this->createProductOptionPriceImporter())
             ->addDataImporter($this->createProductGroupImporter())
-            ->addDataImporter($this->createProductPriceImporter())
             ->addDataImporter($this->createProductRelationImporter())
             ->addDataImporter($this->createProductReviewImporter())
             ->addDataImporter($this->createProductLabelImporter())
@@ -167,6 +166,7 @@ class DataImportBusinessFactory extends SprykerDataImportBusinessFactory
      */
     protected function createStoreImporter()
     {
+        /** @var \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetStepBrokerAwareInterface|\Spryker\Zed\DataImport\Business\Model\DataImporterInterface $dataImporter */
         $dataImporter = $this->createDataImporter(
             $this->getConfig()->getStoreDataImporterConfiguration()->getImportType(),
             new StoreReader(
@@ -432,22 +432,6 @@ class DataImportBusinessFactory extends SprykerDataImportBusinessFactory
     protected function createDiscountConfig()
     {
         return new DiscountConfig();
-    }
-
-    /**
-     * @return \Spryker\Zed\DataImport\Business\Model\DataImporterInterface|\Spryker\Zed\DataImport\Business\Model\DataSet\DataSetStepBrokerAwareInterface
-     */
-    protected function createProductPriceImporter()
-    {
-        $dataImporter = $this->getCsvDataImporterFromConfig($this->getConfig()->getProductPriceDataImporterConfiguration());
-
-        $dataSetStepBroker = $this->createTransactionAwareDataSetStepBroker(ProductPriceWriterStep::BULK_SIZE);
-        $dataSetStepBroker
-            ->addStep(new ProductPriceWriterStep($this->createProductRepository()));
-
-        $dataImporter->addDataSetStepBroker($dataSetStepBroker);
-
-        return $dataImporter;
     }
 
     /**

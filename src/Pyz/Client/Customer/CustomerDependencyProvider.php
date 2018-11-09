@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of the Spryker Suite.
+ * This file is part of the Spryker Commerce OS.
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
@@ -10,7 +10,8 @@ namespace Pyz\Client\Customer;
 use Spryker\Client\Cart\Plugin\CustomerChangeCartUpdatePlugin;
 use Spryker\Client\Customer\CustomerDependencyProvider as SprykerCustomerDependencyProvider;
 use Spryker\Client\Customer\Plugin\CustomerAddressSessionUpdatePlugin;
-use Spryker\Client\Customer\Plugin\CustomerTransferRefreshPlugin;
+use Spryker\Client\Customer\Plugin\CustomerTransferSessionRefreshPlugin;
+use Spryker\Client\PersistentCart\Plugin\GuestCartUpdateCustomerSessionSetPlugin;
 
 class CustomerDependencyProvider extends SprykerCustomerDependencyProvider
 {
@@ -20,7 +21,7 @@ class CustomerDependencyProvider extends SprykerCustomerDependencyProvider
     protected function getCustomerSessionGetPlugins()
     {
         return [
-            new CustomerTransferRefreshPlugin(),
+            new CustomerTransferSessionRefreshPlugin(),
         ];
     }
 
@@ -30,6 +31,7 @@ class CustomerDependencyProvider extends SprykerCustomerDependencyProvider
     protected function getCustomerSessionSetPlugins()
     {
         return [
+            new GuestCartUpdateCustomerSessionSetPlugin(), #PersistentCartFeature
             new CustomerChangeCartUpdatePlugin(),
         ];
     }

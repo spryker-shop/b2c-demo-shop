@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of the Spryker Suite.
+ * This file is part of the Spryker Commerce OS.
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
@@ -11,8 +11,8 @@ use Spryker\Client\ProductReview\ProductReviewConfig as ProductReviewProductRevi
 
 class ProductReviewConfig extends ProductReviewProductReviewConfig
 {
-    const PAGINATION_DEFAULT_ITEMS_PER_PAGE = 3;
-    const PAGINATION_VALID_ITEMS_PER_PAGE = [
+    public const PAGINATION_DEFAULT_ITEMS_PER_PAGE = 3;
+    public const PAGINATION_VALID_ITEMS_PER_PAGE = [
         3,
     ];
 }

@@ -2,6 +2,17 @@
 <database xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:noNamespaceSchemaLocation="http://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\PriceProduct\Persistence" package="src.Orm.Zed.PriceProduct.Persistence">
 
     <table name="spy_price_product">
+
+        <unique name="fk_price_type_unique_fk_product_abstract_unique">
+            <unique-column name="fk_product_abstract"/>
+            <unique-column name="fk_price_type"/>
+        </unique>
+
+        <unique name="fk_price_type_unique_fk_product_unique">
+            <unique-column name="fk_product"/>
+            <unique-column name="fk_price_type"/>
+        </unique>
+
         <behavior name="event">
             <parameter name="spy_price_product_all" column="*"/>
         </behavior>

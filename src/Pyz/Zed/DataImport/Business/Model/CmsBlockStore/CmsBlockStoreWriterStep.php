@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of the Spryker Suite.
+ * This file is part of the Spryker Commerce OS.
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
@@ -15,9 +15,9 @@ use Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface;
 
 class CmsBlockStoreWriterStep implements DataImportStepInterface
 {
-    const BULK_SIZE = 100;
-    const KEY_BLOCK_NAME = 'block_name';
-    const KEY_STORE_NAME = 'store_name';
+    public const BULK_SIZE = 100;
+    public const KEY_BLOCK_NAME = 'block_name';
+    public const KEY_STORE_NAME = 'store_name';
 
     /**
      * @var int[] Keys are CMS Block names, values are CMS Block IDs.

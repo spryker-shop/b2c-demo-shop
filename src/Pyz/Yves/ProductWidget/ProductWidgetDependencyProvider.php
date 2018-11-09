@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of the Spryker Suite.
+ * This file is part of the Spryker Commerce OS.
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
@@ -82,6 +82,34 @@ class ProductWidgetDependencyProvider extends SprykerProductWidgetDependencyProv
             ProductLabelWidgetPlugin::class,
             ExampleProductColorGroupWidgetPlugin::class,
             ProductReviewWidgetPlugin::class,
+        ];
+    }
+
+    /**
+     * Returns a list of widget plugin class names that implement \Spryker\Yves\Kernel\Dependency\Plugin\WidgetPluginInterface.
+     *
+     * @return string[]
+     */
+    protected function getProductReplacementForWidgetPlugins(): array
+    {
+        return [
+            ProductAbstractLabelWidgetPlugin::class, #ProductAlternativeFeature
+            ExampleProductColorGroupWidgetPlugin::class, #ProductAlternativeFeature
+            ProductAbstractReviewWidgetPlugin::class, #ProductAlternativeFeature
+        ];
+    }
+
+    /**
+     * Returns a list of widget plugin class names that implement \Spryker\Yves\Kernel\Dependency\Plugin\WidgetPluginInterface.
+     *
+     * @return string[]
+     */
+    protected function getProductAlternativeWidgetPlugins(): array
+    {
+        return [
+            ProductAbstractLabelWidgetPlugin::class, #ProductAlternativeFeature
+            ExampleProductColorGroupWidgetPlugin::class, #ProductAlternativeFeature
+            ProductAbstractReviewWidgetPlugin::class, #ProductAlternativeFeature
         ];
     }
 }

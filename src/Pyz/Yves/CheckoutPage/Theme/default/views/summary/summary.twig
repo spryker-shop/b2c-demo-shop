@@ -15,6 +15,7 @@
 
     overview: {
         shipmentMethod: _view.quoteTransfer.shipment.method.name,
+        expenses: _view.quoteTransfer.expenses,
         voucherDiscounts: _view.quoteTransfer.voucherDiscounts,
         cartRuleDiscounts: _view.quoteTransfer.cartRuleDiscounts,
 
@@ -23,7 +24,7 @@
             storeCurrency: _view.quoteTransfer.shipment.method.storeCurrencyPrice,
             grandTotal: _view.quoteTransfer.totals.grandtotal,
             tax: _view.quoteTransfer.totals.taxtotal.amount,
-            discountTotal: _view.quoteTransfer.totals.discounttotal | default(null)
+            discountTotal: _view.quoteTransfer.totals.discounttotal | default
         }
     },
 
@@ -36,9 +37,6 @@
             <div class="box">
                 <span class="float-right">{{ 'checkout.step.summary.with_method' | trans }} <strong>{{data.paymentMethod}}</strong></span>
                 <h6>{{ 'checkout.step.summary.payment' | trans }}</h6>
-                {# {% if _view.quoteTransfer.payment.summaryPartialPath is defined and _view.quoteTransfer.payment.summaryPartialPath %}
-                    {% include '@' ~ _view.quoteTransfer.payment.summaryPartialPath ~ '.twig' with {'_view.quoteTransfer': _view.quoteTransfer} %}
-                {% endif %} #}
                 <hr/>
 
                 {% include molecule('display-address') with {
@@ -73,7 +71,7 @@
                             quantity: item.quantity,
                             price: item.sumPrice | money,
                             options: item.productOptions | default({}),
-                            bundleItems: item.bundleItems | default([]),
+                            bundleItems: item.bundleItems | default([])
                         },
                         embed: {
                             isLast: not loop.last,
@@ -82,17 +80,34 @@
                     } only %}
                         {% block body %}
                             {{parent()}}
-                            {{ widget('CartNoteQuoteItemNoteWidgetPlugin', embed.item) }}
+                            {% if embed.item.cartNote is not empty %}
+                                {% include molecule('note-list', 'CartNoteWidget') ignore missing with {
+                                    data: {
+                                        label: 'cart_note.checkout_page.item_note',
+                                        note: embed.item.cartNote
+                                    }
+                                } only %}
+                            {% endif %}
                             {% if embed.isLast %}<hr/>{% endif %}
                         {% endblock %}
                     {% endembed %}
                 {% endfor %}
             </div>
 
-            {{ widget('CartNoteQuoteNoteWidgetPlugin', data.transfer) }}
+            {% if data.transfer.cartNote is not empty %}
+                    <div class="box">
+                        {% include molecule('note-list', 'CartNoteWidget') ignore missing with {
+                            data: {
+                                label: 'cart_note.checkout_page.quote_note',
+                                note: data.transfer.cartNote
+                            }
+                        } only %}
+                    </div>
+            {% endif %}
 
             <div class="box">
-                {{ widget('CheckoutVoucherFormWidgetPlugin', data.transfer) }}
+                {% widget 'CheckoutVoucherFormWidget' args [data.transfer] only %}
+                {% endwidget %}
             </div>
 
             {% embed molecule('form') with {
@@ -100,7 +115,7 @@
                 data: {
                     form: data.forms.summary,
                     submit: {
-                        enable: true,
+                        enable: can('SeeOrderPlaceSubmitPermissionPlugin'),
                         text: 'checkout.step.place.order' | trans
                     },
                     cancel: {

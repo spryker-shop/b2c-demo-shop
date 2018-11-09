@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of the Spryker Suite.
+ * This file is part of the Spryker Commerce OS.
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
@@ -15,9 +15,9 @@ use Pyz\Zed\DataImport\Business\Exception\EntityNotFoundException;
 
 class ProductRepository implements ProductRepositoryInterface
 {
-    const ID_PRODUCT = 'idProduct';
-    const ID_PRODUCT_ABSTRACT = 'idProductAbstract';
-    const ABSTRACT_SKU = 'abstractSku';
+    public const ID_PRODUCT = 'idProduct';
+    public const ID_PRODUCT_ABSTRACT = 'idProductAbstract';
+    public const ABSTRACT_SKU = 'abstractSku';
 
     /**
      * @var array

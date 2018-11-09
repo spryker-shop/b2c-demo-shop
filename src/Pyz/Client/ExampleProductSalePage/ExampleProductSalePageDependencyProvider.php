@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of the Spryker Suite.
+ * This file is part of the Spryker Commerce OS.
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
@@ -104,9 +104,10 @@ class ExampleProductSalePageDependencyProvider extends AbstractDependencyProvide
                 new StoreQueryExpanderPlugin(),
                 new LocalizedQueryExpanderPlugin(),
                 new ProductPriceQueryExpanderPlugin(),
-                new FacetQueryExpanderPlugin(),
                 new SortedQueryExpanderPlugin(),
                 new PaginatedQueryExpanderPlugin(),
+
+                new FacetQueryExpanderPlugin(),
             ];
         };
 

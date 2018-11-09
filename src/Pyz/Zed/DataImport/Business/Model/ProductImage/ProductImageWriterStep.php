@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of the Spryker Suite.
+ * This file is part of the Spryker Commerce OS.
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
@@ -22,14 +22,14 @@ use Spryker\Zed\ProductImage\Dependency\ProductImageEvents;
 
 class ProductImageWriterStep extends PublishAwareStep implements DataImportStepInterface
 {
-    const BULK_SIZE = 100;
+    public const BULK_SIZE = 100;
 
-    const KEY_LOCALE = 'locale';
-    const KEY_IMAGE_SET_NAME = 'image_set_name';
-    const KEY_ABSTRACT_SKU = 'abstract_sku';
-    const KEY_CONCRETE_SKU = 'concrete_sku';
-    const KEY_EXTERNAL_URL_LARGE = 'external_url_large';
-    const KEY_EXTERNAL_URL_SMALL = 'external_url_small';
+    public const KEY_LOCALE = 'locale';
+    public const KEY_IMAGE_SET_NAME = 'image_set_name';
+    public const KEY_ABSTRACT_SKU = 'abstract_sku';
+    public const KEY_CONCRETE_SKU = 'concrete_sku';
+    public const KEY_EXTERNAL_URL_LARGE = 'external_url_large';
+    public const KEY_EXTERNAL_URL_SMALL = 'external_url_small';
 
     /**
      * @var \Pyz\Zed\DataImport\Business\Model\Locale\Repository\LocaleRepositoryInterface

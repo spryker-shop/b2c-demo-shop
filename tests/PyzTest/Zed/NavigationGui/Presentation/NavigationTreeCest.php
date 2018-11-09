@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of the Spryker Suite.
+ * This file is part of the Spryker Commerce OS.
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
@@ -264,7 +264,6 @@ class NavigationTreeCest
          * TODO: once we have Selenium, enable this test case.
          */
         return;
-//
 //        $i->wantTo('Remove child node.');
 //        $i->expect('Node should be removed from Zed.');
 //
