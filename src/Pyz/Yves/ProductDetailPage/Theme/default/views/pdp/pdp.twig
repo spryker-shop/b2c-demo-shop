@@ -14,83 +14,71 @@
     metaKeywords: _view.product.metaKeywords | default
 } %}
 
-{% block container %}
-    <div class="container">
-        <div class="container__inner">
+{% block headStyles %}
+    {{ parent() }}
+    <link itemprop="url" href="{{ data.productUrl }}">
+{% endblock %}
 
-            {% block pageInfo %}
-                {% block title %}
-                    <link itemprop="url" href="{{ data.productUrl }}" />
-                {% endblock %}
-            {% endblock %}
+{% block pageInfo %}{% endblock %}
+{% block contentClass %} page-layout-main page-layout-main--pdp {% endblock %}
+{% block content %}
+    <div class="container__inner">
+        <div class="grid">
+            {% include molecule('product-carousel', 'ProductDetailPage') with {
+                class: 'col page-layout-main__content',
+                data: {
+                    product: data.product
+                }
+            } only %}
 
-            <main>
-                {% block content %}
-                    <div class="grid">
+            <div class="col page-layout-main__sidebar">
+                {% include molecule('product-configurator', 'ProductDetailPage') with {
+                    data: {
+                        product: data.product,
+                        isBundle: data.isBundle,
+                        bundleItems: data.bundleItems
+                    }
+                } only %}
 
-                        {% include molecule('product-carousel', 'ProductDetailPage') with {
-                            class: 'col pdp pdp--left',
-                            data: {
-                                product: data.product
-                            }
-                        } only %}
+                {% include molecule('product-detail', 'ProductDetailPage') with {
+                    data: {
+                        description: data.product.description,
+                        attributes: data.product.attributes,
+                        sku: data.product.sku
+                    }
+                } only %}
 
-                        <div class="col pdp-right">
-
-                            {% include molecule('product-configurator', 'ProductDetailPage') with {
-                                data: {
-                                    product: data.product,
-                                    isBundle: data.isBundle,
-                                    bundleItems: data.bundleItems
-                                }
-                            } only %}
-
-                            {% include molecule('product-detail', 'ProductDetailPage') with {
-                                data: {
-                                    description: data.product.description,
-                                    attributes: data.product.attributes,
-                                    sku: data.product.sku
-                                }
-                            } only %}
-
-                            {% include molecule('toggler-accordeon') with {
-                                attributes: {
-                                    trigger: '.js-toggle-pdp-options'
-                                }
-                            } only %}
-                        </div>
-                    </div>
-
-
-                    {% if data.isBundle != null %}
-                        {% include molecule('product-bundle', 'ProductDetailPage') with {
-                            data: {
-                                bundleItems: data.bundleItems
-                            }
-                        } only %}
-                    {% endif %}
-
-                    {{ widget('ProductReviewWidgetPlugin', data.product.idProductAbstract) }}
-
-                    {% if data.product.productSetIds is not empty %}
-                        {{ widget('ProductSetIdsWidgetPlugin', data.product.productSetIds) }}
-                    {% endif %}
-
-                    <div class="product-slider-container">
-                        {{ widget('UpSellingProductsWidgetPlugin', data.cart) }}
-                    </div>
-                    
-                    <div class="product-slider-container">
-                        {{ widget('SimilarProductsWidgetPlugin', data.product) }}
-                    </div>
-
-                    {{ widget('ProductCmsBlockWidgetPlugin', data.product) }}
-
-                    {% block breadcrumbs %}
-                        {{ widget('ProductCategoryWidgetPlugin', data.product, app.locale) }}
-                    {% endblock %}
-                {% endblock %}
-            </main>
+                {% include molecule('toggler-accordeon') with {
+                    attributes: {
+                        trigger: '.js-toggle-pdp-options'
+                    }
+                } only %}
+            </div>
         </div>
+    </div>
+
+    {% if data.isBundle != null %}
+        {% include molecule('product-bundle', 'ProductDetailPage') with {
+            data: {
+                bundleItems: data.bundleItems
+            }
+        } only %}
+    {% endif %}
+
+    {{ widget('ProductReviewWidgetPlugin', data.product.idProductAbstract) }}
+
+    {% if data.product.productSetIds is not empty %}
+        {{ widget('ProductSetIdsWidgetPlugin', data.product.productSetIds) }}
+    {% endif %}
+
+    {{ widget('UpSellingProductsWidgetPlugin', data.cart) }}
+    {{ widget('SimilarProductsWidgetPlugin', data.product) }}
+
+    <div class="container__inner">
+        {{ widget('ProductCmsBlockWidgetPlugin', data.product) }}
+
+        {% block breadcrumbs %}
+            {{ widget('ProductCategoryWidgetPlugin', data.product, app.locale) }}
+        {% endblock %}
     </div>
 {% endblock %}

@@ -1,0 +1,35 @@
+@mixin cms-block-widget-pdp-cms-block($name: '.pdp-cms-block') {
+    #{$name} {
+        font-size: rem(14);
+        line-height: rem(21);
+        color: $setting-color-dark;
+
+        h1 {
+            font: 500 rem(15)/1.33 $setting-font-family-additional;
+            padding: rem(50) 0 rem(11);
+            border-top: dotted rem(1) $setting-color-lightest;
+        }
+
+        p {
+            margin: 0 0 rem(11);
+
+            &:last-child {
+                margin-bottom: rem(50);
+            }
+        }
+
+        a {
+            @include helper-effect-transition(color);
+            text-decoration: underline;
+            color: $setting-color-dark;
+
+            &:hover {
+                color: $setting-color-radical-red;
+            }
+        }
+    }
+
+    @content;
+}
+
+@include cms-block-widget-pdp-cms-block();

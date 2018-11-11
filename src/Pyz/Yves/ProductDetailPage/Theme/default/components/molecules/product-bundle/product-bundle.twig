@@ -1,8 +1,7 @@
 {% extends model('component') %}
 
 {% define config = {
-    name: 'product-configurator',
-    tag: 'section'
+    name: 'product-bundle'
 } %}
 
 {% define data = {
@@ -11,87 +10,84 @@
 
 
 {% block body %}
-    <div class="bundle-list">
-        {% include molecule('product-slider-title') with {
-            data: {
-                title: 'bundle.title' | trans
-            }
-        } only %}
+    {% include molecule('product-slider-title') with {
+        data: {
+            title: 'bundle.title' | trans
+        }
+    } only %}
 
-        {% embed molecule('slick-carousel') with {
-            data: {
-                slides: data.bundleItems
-            },
-            attributes: {
-                'data-json': '{
-                    "slidesToShow": 4,
-                    "dots": false,
-                    "responsive": [{
-                            "breakpoint": 820,
-                            "settings": {
-                                "slidesToShow": 3
-                            }
-                        },
-                        {
-                            "breakpoint": 570,
-                            "settings": {
-                                "slidesToShow": 2
-                            }
-                        },
-                        {
-                            "breakpoint": 480,
-                            "settings": {
-                                "slidesToShow": 1
-                            }
+    {% embed molecule('slick-carousel') with {
+        modifiers: ['align-left'],
+        data: {
+            slides: data.bundleItems
+        },
+        attributes: {
+            'data-json': '{
+                "slidesToShow": 4,
+                "dots": false,
+                "responsive": [{
+                        "breakpoint": 820,
+                        "settings": {
+                            "slidesToShow": 3
                         }
-                    ]}'
-            }
-        } only %}
-
-            {% block slides %}
-                {% for slide in data.slides %}
-                    {% embed molecule('product-card') with {
-                        data: {
-                            name: slide.name,
-                            abstractId: slide.idProductAbstract,
-                            url: slide.productUrl,
-                            imageUrl: slide.image,
-                            price: '1'
-                        },
-                        class: 'bundle-list__item',
-                        embed: {
-                            quantity: slide.quantity,
-                            description: slide.description,
-                            sku: slide.sku,
-                            index: loop.index,
-                            abstractId: slide.idProductAbstract,
-                            attributes: slide.attributes
+                    },
+                    {
+                        "breakpoint": 570,
+                        "settings": {
+                            "slidesToShow": 2
                         }
-                    } only %}
+                    },
+                    {
+                        "breakpoint": 480,
+                        "settings": {
+                            "slidesToShow": 1
+                        }
+                    }
+                ]}'
+        }
+    } only %}
 
-                        {% block labels %}{% endblock %}
-                        {% block groups %}{% endblock %}
-                        {% block name %}
-                            <div class="col col--sm-12">
-                                <span class="product-card__name">{{data.name}}</span>
-                                <span class="bundle-quantity"> ·&nbsp; {{ embed.quantity }}x</span>
-                            </div>
-                        {% endblock %}
-                        {% block price %}{% endblock %}
-                        {% block rating %}
-                            {{ widget('ProductAbstractReviewWidgetPlugin', embed.abstractId) }}
-                            {% include molecule('product-detail', 'ProductDetailPage') with {
-                                data: {
-                                    description: embed.description,
-                                    attributes: embed.attributes,
-                                    sku: embed.sku,
-                                    index: embed.index
-                                }
-                            } only %}
-                        {% endblock %}
-                    {% endembed %}
-                {% endfor %}
-            {% endblock %}
-        {% endembed %}
-    </div>
+        {% block slides %}
+            {% for slide in data.slides %}
+                {% embed molecule('product-card') with {
+                    modifiers: ['slider'],
+                    data: {
+                        name: slide.name,
+                        abstractId: slide.idProductAbstract,
+                        url: slide.productUrl,
+                        imageUrl: slide.image,
+                        price: 0
+                    },
+                    embed: {
+                        quantity: slide.quantity,
+                        description: slide.description,
+                        sku: slide.sku,
+                        index: loop.index,
+                        attributes: slide.attributes
+                    }
+                } only %}
+                    {% block labels %}{% endblock %}
+                    {% block groups %}{% endblock %}
+                    {% block name %}
+                        <div class="col col--sm-12">
+                            {{data.name}}
+                            <span class="{{ config.name }}__quantity"> ·&nbsp; {{ embed.quantity }}x</span>
+                        </div>
+                    {% endblock %}
+                    {% block price %}{% endblock %}
+                    {% block detail %}
+                        {% include molecule('product-detail', 'ProductDetailPage') with {
+                            modifiers: ['bundle'],
+                            data: {
+                                description: embed.description,
+                                attributes: embed.attributes,
+                                sku: embed.sku,
+                                index: embed.index
+                            }
+                        } only %}
+                    {% endblock %}
+                {% endembed %}
+            {% endfor %}
+        {% endblock %}
+    {% endembed %}
 {% endblock %}
