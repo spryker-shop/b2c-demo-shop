@@ -1,23 +1,13 @@
-@mixin shop-ui-cart-item-variant-selector($name: '.cart-item-variant-selector') {
+@mixin cart-page-cart-item-variant-selector($name: '.cart-item-variant-selector') {
     #{$name} {
         &__label {
             display: block;
         }
+
         &__title {
-            font: normal rem(13) $setting-font-family-additional;
-            line-height: 1.31;
-        }
-        & label.select {
-            display: inline-block;
-            border: none;
-        }
-        & .select__select {
-            border: none;
-            padding: 0 rem(20);
-            font: normal rem(13) $setting-font-family-additional;
-            line-height: 2.08;
+            font: 400 rem(13)/1.3 $setting-font-family-additional;
         }
     }
 }
 
-@include shop-ui-cart-item-variant-selector();
+@include cart-page-cart-item-variant-selector();

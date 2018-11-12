@@ -1,7 +1,8 @@
-@mixin shop-ui-cart-image($name: '.cart-image') {
+@mixin cart-page-cart-image($name: '.cart-image') {
     #{$name} {
         position: relative;
         padding: rem(12) rem(15);
+
         &::before {
             content: '';
             position: absolute;
@@ -10,10 +11,10 @@
             right: 0;
             bottom: 0;
             border-radius: rem(4);
-            background: rgba(0, 0, 0, 0.05);
-            z-index: 350;
+            background: rgba($setting-color-black, 0.05);
+            z-index: $setting-zi-element + 1;
         }
     }
 }
 
-@include shop-ui-cart-image();
+@include cart-page-cart-image();

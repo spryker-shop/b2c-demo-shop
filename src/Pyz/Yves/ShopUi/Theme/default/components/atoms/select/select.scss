@@ -27,17 +27,20 @@
 
             &:-moz-focusring {
                 color: transparent;
-                text-shadow: 0 0 0 #000;
-            }
-
-            &--naked {
-                border: none;
+                text-shadow: 0 0 0 $setting-color-black;
             }
 
             &--variant {
+                border: none;
                 padding: 0 rem(20);
                 font: normal rem(13)/2.08 $setting-font-family-additional;
             }
+        }
+
+        &__variant {
+            border: none;
+            padding: 0 rem(20);
+            font: normal rem(13)/2 $setting-font-family-additional;
         }
 
         &__caret {
@@ -69,6 +72,10 @@
 
         &--error &__caret {
             color: map-get($setting-color-actions, alert);
+        }
+
+        &--borderless {
+            border: none;
         }
 
         @content;
