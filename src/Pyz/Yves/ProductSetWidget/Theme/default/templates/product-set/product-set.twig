@@ -21,13 +21,14 @@
                         "dots": true,
                         "arrows": false
                     }'
-            }
+            },
+            modifiers: ['product-set']
         } only %}
 
             {% block slides %}
                 {% for slide in data.slides %}
                     {% include atom('thumbnail') with {
-                        modifiers: ['bigger'],
+                        modifiers: ['bigger', 'no-margin', 'product-set'],
                         attributes: {
                             itemprop: 'image',
                             src: slide.externalUrlLarge
@@ -76,17 +77,18 @@
             {% embed molecule('slick-carousel') with {
                 data: {
                     slides: data.products,
-                    containerClass: 'product-set-slider product-set-slider--set-images'
+                    containerClass: 'product-set-slider'
                 },
                 attributes: {
                     'data-json': data.sliderConfig
-                }
+                },
+                modifiers: ['product-set', 'product-set-secondary']
             } only %}
 
                 {% block slides %}
                     {% for product in data.slides %}
                         {% embed molecule('product-card') with {
-                            modifiers: ['stretch'],
+                            modifiers: ['stretch', 'product-set'],
                             data: {
                                 product: product,
                                 name: product.name,
