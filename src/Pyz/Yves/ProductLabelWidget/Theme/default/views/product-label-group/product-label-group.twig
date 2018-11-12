@@ -13,9 +13,11 @@
 {% endfor %}
 
 {% block body %}
-    {% include molecule('label-group', 'ProductLabelWidget') with {
-        data: {
-            labels: labels
-        }
-    } only %}
+    {% if labels is not empty %}
+        {% include molecule('label-group', 'ProductLabelWidget') with {
+            data: {
+                labels: labels
+            }
+        } only %}
+    {% endif %}
 {% endblock %}
