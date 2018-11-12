@@ -33,6 +33,12 @@
             background-color: $setting-color-white;
             border: rem(1) solid $setting-color-darkest;
             color: $setting-color-darkest;
+
+            &[disabled] {
+                background-color: $setting-color-white !important;
+                border-color: $setting-color-gray-3 !important;
+                color: $setting-color-gray-3 !important;
+            }
         }
 
         &--secondary {
@@ -42,9 +48,14 @@
                 background: $setting-color-radical-red;
                 color: $setting-color-white;
             }
+        }
 
-            &[disabled] {
-
+        &--hollow {
+            &:hover,
+            &:focus {
+                border-color: $setting-color-darkest;
+                background-color: $setting-color-darkest;
+                color: $setting-color-white;
             }
         }
 
@@ -68,24 +79,6 @@
                 border: none;
                 background-color: transparent;
                 color: $setting-color-black;
-            }
-        }
-
-        &--hollow {
-            &:hover,
-            &:focus {
-                border-color: $setting-color-darkest;
-                background-color: $setting-color-darkest;
-                color: $setting-color-white;
-            }
-
-            &[disabled],
-            & #{name}--disabled,
-            &[disabled]:hover,
-            & #{name}--disabled:hover {
-                background-color: $setting-color-white !important;
-                border-color: $setting-color-light;
-                color: $setting-color-light;
             }
         }
 
