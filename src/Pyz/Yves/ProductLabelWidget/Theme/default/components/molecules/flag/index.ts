@@ -1,1 +1,1 @@
-import './flag.scss';
+import './flag';

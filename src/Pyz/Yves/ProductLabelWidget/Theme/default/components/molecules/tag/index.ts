@@ -1,1 +1,1 @@
-import './tag.scss';
+import './tag';
