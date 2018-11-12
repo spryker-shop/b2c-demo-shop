@@ -1,0 +1,49 @@
+@mixin product-review-widget-review($name: '.review') {
+    #{$name} {
+        border-bottom: dotted rem(1) $setting-color-lightest;
+        padding: rem(20) 0;
+        break-inside: avoid;
+
+        @include helper-breakpoint-media-min($md-min) {
+            padding: rem(32) 0;
+        }
+
+        &__title {
+            display: flex;
+        }
+
+        &__title-text {
+            font: 500 rem(16)/rem(22) $setting-font-family-additional;
+            color: $setting-color-darkest;
+            margin-right: rem(14);
+
+            @include helper-breakpoint-media-min($md-min) {
+                font-size: rem(17);
+                margin-right: rem(19);
+            }
+        }
+
+        &__author-date {
+            font: 400 rem(13)/rem(23) $setting-font-family-additional;
+            margin: 0 0 rem(16);
+            color: $setting-color-darkest;
+
+            @include helper-breakpoint-media-min($md-min) {
+                font-size: rem(14);
+                margin: 0 0 rem(12);
+            }
+        }
+
+        &__description {
+            font: 300 rem(15)/rem(22) $setting-font-family;
+
+            @include helper-breakpoint-media-min($md-min) {
+                font-size: rem(16);
+            }
+        }
+
+        @content;
+    }
+}
+
+@include product-review-widget-review();

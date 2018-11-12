@@ -19,26 +19,28 @@
                         action: '#review'
                     },
                     layout: {
-                        'summary': 'col col--sm-12 review-summary',
-                        'description': 'col col--sm-12 review-description',
-                        'nickname': 'col col--sm-12 review-nickname'
+                        'summary': 'col col--sm-12 ' ~ config.name ~ '__field ' ~ config.name ~ '__field-summary',
+                        'description': 'col col--sm-12 ' ~ config.name ~ '__field',
+                        'nickname': 'col col--sm-12 ' ~ config.name ~ '__field'
                     },
                     submit: {
                         enable: true,
-                        class: 'button button--black button--send-review'
+                        class: 'button button--black ' ~ config.name ~ '__send-review'
                     }
                 },
                 embed: {
                     title: 'product_review.submit.add_a_review' | trans,
+                    jsName: config.jsName,
+                    name: config.name
                 }
             } only %}
                 {% block title %}
-                    <div class="popup__top">
+                    <div class="popup__top popup__top--bottom-indent">
                         {% if embed.title is not empty %}
                             <h5 class="popup__title">{{ embed.title }}</h5>
                         {% endif %}
                         {% include atom('icon') with {
-                            class: 'popup__close ' ~ config.name ~ '__trigger',
+                            class: 'popup__close ' ~ embed.jsName ~ '__trigger',
                             data: {
                                 name: 'close'
                             }
@@ -48,12 +50,12 @@
 
                 {% block field %}
                     {% if fieldName == 'rating' %}
-                        <div class="form__field col col--sm-12 review-rating">
+                        <div class="form__field col col--sm-12 {{ embed.name }}__field {{ embed.name }}__field-rating">
                             {% do field.setRendered %}
                             <label>
                                 {{form_label(field)}}
                                 {% include molecule('rating-selector', 'ProductReviewWidget') with {
-                                    modifiers: ['expand', 'small'],
+                                    modifiers: ['expand', 'small', 'marginless'],
                                     data: {
                                         maxValue: (field.vars.choices | length) - 1,
                                         inputId: 'productReviewForm_rating',
@@ -70,5 +72,4 @@
             {% endembed %}
         </div>
     </div>
-
 {% endblock %}

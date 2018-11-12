@@ -15,9 +15,10 @@
 } %}
 
 {% block body %}
-    <div class="review__title-line">
-        <h5>{{ data.summary | e('html') }}</h5>
+    <div class="{{ config.name }}__title">
+        <h5 class="{{ config.name }}__title-text">{{ data.summary | e('html') }}</h5>
         {% include molecule('rating-selector', 'ProductReviewWidget') with {
+            modifiers: ['smallest', 'marginless'],
             data: {
                 value: data.ratingValue,
                 maxValue: data.ratingMaxValue,
@@ -29,12 +30,11 @@
         } only %}
     </div>
 
-    <div class="review__author-date">
+    <div class="{{ config.name }}__author-date">
         {{ 'page.product.by' | trans }} {{ data.nickname | e('html')}} - {{ data.createdAt }}
     </div>
 
-    <div class="review__description">
+    <div class="{{ config.name }}__description">
         {{ data.description | e('html')}}
     </div>
-
 {% endblock %}
