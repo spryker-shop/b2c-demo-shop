@@ -1,1 +1,1 @@
-import './label-group';
+import './label-group.scss';
