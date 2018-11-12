@@ -1,8 +1,7 @@
 {% extends model('component') %}
 
 {% define config = {
-    name: 'wishlist-form',
-    tag: 'div'
+    name: 'wishlist-form'
 } %}
 
 {% define data = {
@@ -12,7 +11,7 @@
 {% block body %}
     {{ form_start(data.wishlistForm) }}
         <div class="grid">
-            <div class="col col--expand wishlist-input">
+            <div class="col col--expand wishlist-table__input">
                 {{ form_widget(data.wishlistForm.name, { attr: { placeholder: 'customer.account.wishlist.overview.enter_name' | trans }}) }}
             </div>
             <div class="col">
