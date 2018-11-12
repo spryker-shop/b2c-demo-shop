@@ -21,7 +21,8 @@
                         "dots": true,
                         "arrows": false
                     }'
-            }
+            },
+            modifiers: ['product-set']
         } only %}
 
             {% block slides %}
@@ -76,11 +77,12 @@
             {% embed molecule('slick-carousel') with {
                 data: {
                     slides: data.products,
-                    containerClass: 'product-set-slider product-set-slider--set-images'
+                    containerClass: 'product-set-slider'
                 },
                 attributes: {
                     'data-json': data.sliderConfig
-                }
+                },
+                modifiers: ['product-set', 'product-set-secondary']
             } only %}
 
                 {% block slides %}

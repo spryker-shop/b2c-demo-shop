@@ -1,21 +1,20 @@
-@mixin product-set-slider ($name: '.product-set-slider') {
+@mixin product-set-widget-product-set-slider ($name: '.product-set-slider') {
     #{$name} {
         &--popular {
             .slick-slide {
-                padding-right: rem(15);
-            }
-        }
-
-        &--main-wrap,
-        &#{$name}--set-images {
-            .slick-slide {
-                @include helper-breakpoint-media-min($lg-min) {
-                    padding-right: rem(15);
+                @include helper-breakpoint-media-max($sm-max) {
+                    padding-right: rem(10);
                 }
             }
         }
 
         &--main-wrap {
+            .slick-slide {
+                @include helper-breakpoint-media-min($lg-min) {
+                    padding-right: rem(15);
+                }
+            }
+
             .thumbnail {
                 height: rem(240);
 
@@ -28,14 +27,7 @@
         &--wrap {
             margin-bottom: rem(32);
 
-            @include helper-breakpoint-media-min($lg-min) {
-                padding-left: 0;
-                padding-right: 0;
-                margin-left: 0;
-                margin-right: 0;
-            }
-
-            &#{$name}--set-images {
+            #{$name} {
                 &:hover {
                     @include helper-breakpoint-media-min($md-min) {
                         .slick-prev {
@@ -43,81 +35,16 @@
                         }
                     }
                 }
-            }
 
-            .slick-prev {
-                @include helper-effect-transition;
-                @include helper-visibility-invisible;
-            }
-        }
-
-        &--set-images {
-            margin-top: rem(24);
-
-            @include helper-breakpoint-media-min($lg-min) {
-                margin-top: 0;
-            }
-        }
-
-        &#{$name}--set-images {
-            .slick-arrow {
-                @include helper-breakpoint-media-max($md-max) {
-                    top: rem(80);
+                .slick-prev {
+                    @include helper-breakpoint-media-min($md-min) {
+                        @include helper-effect-transition;
+                        @include helper-visibility-invisible;
+                    }
                 }
             }
-
-            .slick-prev {
-                @include helper-breakpoint-media-max($md-max) {
-                    left: 0;
-                }
-            }
-
-            .slick-next {
-                @include helper-breakpoint-media-max($md-max) {
-                    right: 0;
-                }
-            }
-        }
-
-        .slick-disabled {
-            display: none !important;
-        }
-
-        .slick-dots {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: rem(12);
-
-            li {
-                display: block;
-                margin: rem(4.8) rem(8);
-                width: rem(6);
-                height: rem(6);
-                background: $setting-color-lightest;
-                border-radius: 50%;
-
-                &:hover {
-                    cursor: pointer;
-                }
-
-                &.slick-active {
-                    width: rem(12);
-                    height: rem(12);
-                    background: transparent;
-                    border: rem(1) solid map-get($setting-color-actions, alert);
-                }
-
-                button {
-                    font-size: 0;
-                }
-            }
-        }
-
-        &.slick-carousel__container {
-            padding: 0;
         }
     }
 }
 
-@include product-set-slider();
+@include product-set-widget-product-set-slider();
