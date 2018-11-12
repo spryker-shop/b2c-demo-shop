@@ -57,12 +57,12 @@
         {% endblock %}
 
         <div class="grid grid--stretch">
-            <div class="col col--sm-12 col--lg-5 product-set-slider--main-wrap">
+            <div class="col col--sm-12 col--lg-5 product-set-slider product-set-slider--single">
                 {% block carousel %}
                     {{parent()}}
                 {% endblock %}
             </div>
-            <div class="col col--sm-12 col--lg-7 product-set-slider--wrap product-set-slider--popular">
+            <div class="col col--sm-12 col--lg-7 product-set-slider product-set-slider--hide-prev-btn product-set-slider--multiple">
                 {% block productSet %}
                     {{parent()}}
                 {% endblock %}
