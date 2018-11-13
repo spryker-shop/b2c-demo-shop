@@ -109,6 +109,32 @@ $shop-ui-form-field-margin: rem(8);
             }
         }
 
+        &--pdp-review-form {
+            .label {
+                color: $setting-color-dark;
+
+                &::after {
+                    display: none;
+                }
+            }
+
+            input[type='text'],
+            textarea {
+                @include helper-effect-transition(all 0.4s ease);
+                font: fw(regular) rem(17)/rem(22) $setting-font-family;
+                color: $setting-color-dark;
+                padding: rem(10) rem(15);
+
+                &:focus {
+                    border-color: $setting-color-tundora;
+                }
+
+                &:hover {
+                    background-color: $setting-color-alabaster;
+                }
+            }
+        }
+
         &--grid-indent {
             .grid {
                 margin: 0 rem(-16);

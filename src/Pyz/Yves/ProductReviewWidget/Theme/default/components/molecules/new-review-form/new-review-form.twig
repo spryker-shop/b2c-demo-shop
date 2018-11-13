@@ -13,6 +13,7 @@
         <div class="popup__overlay {{ config.jsName }}__trigger"></div>
         <div class="popup__inner">
             {% embed molecule('form') with {
+                modifiers: ['pdp-review-form'],
                 data: {
                     form: data.form,
                     options: {
@@ -25,7 +26,7 @@
                     },
                     submit: {
                         enable: true,
-                        class: 'button button--black ' ~ config.name ~ '__send-review'
+                        class: 'button button--primary ' ~ config.name ~ '__send-review'
                     }
                 },
                 embed: {

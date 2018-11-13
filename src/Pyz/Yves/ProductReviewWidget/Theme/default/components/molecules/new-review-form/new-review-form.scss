@@ -9,30 +9,6 @@ $review-button-min-width: rem(177);
             @include helper-breakpoint-media-min($md-min) {
                 padding: 0 0 rem(28);
             }
-
-            .label {
-                color: $setting-color-dark;
-
-                &::after {
-                    display: none;
-                }
-            }
-
-            input[type='text'],
-            textarea {
-                @include helper-effect-transition(all 0.4s ease);
-                font: 400 rem(17)/rem(22) $setting-font-family;
-                color: $setting-color-dark;
-                padding: rem(10) rem(15);
-
-                &:focus {
-                    border-color: $setting-color-tundora;
-                }
-
-                &:hover {
-                    background-color: $setting-color-alabaster;
-                }
-            }
         }
 
         &__field-summary {
@@ -51,7 +27,7 @@ $review-button-min-width: rem(177);
         }
 
         &__send-review {
-            font: 500 rem(13)/rem(16) $setting-font-family;
+            font: fw(medium) rem(13)/rem(16) $setting-font-family;
             padding: rem(12) rem(30);
             position: absolute;
             top: rem(20);

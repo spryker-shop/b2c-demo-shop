@@ -22,7 +22,7 @@
 } %}
 
 {% block body %}
-    <h3 class="{{ config.name }}__sub-title">{{ 'product_review.product_ratings' | trans }}</h3>
+    <h3 class="title title--review-summary">{{ 'product_review.product_ratings' | trans }}</h3>
     {% include molecule('review-average-display', 'ProductReviewWidget') with {
         data: {
             summary: data.summary,
@@ -37,18 +37,18 @@
 
     <div class="is-hidden-lg-xl {{ config.name }}__add-review-mobile">
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-            <span class="button button--hollow js-new-review-form__trigger {{ config.name }}__add-review-mobile-btn">
+            <span class="button button--hollow button--expand button--medium js-new-review-form__trigger">
                 {{ 'product_review.submit.add_a_review' | trans }}
             </span>
         {% else %}
-            <a class="button button--hollow {{ config.name }}__add-review-mobile-btn" href="{{ path('login') }}">
+            <a class="button button--hollow button--expand button--medium" href="{{ path('login') }}">
                 {{ 'product_review.submit.add_a_review' | trans }}
             </a>
         {% endif %}
     </div>
 
     {% if data.summary.totalReview > 0 %}
-        <h3 class="{{ config.name }}__sub-title">{{ 'product_review.product_reviews' | trans }}</h3>
+        <h3 class="title title--review-summary">{{ 'product_review.product_reviews' | trans }}</h3>
 
         {% if data.reviews is empty %}
             <p>{{ 'product_review.no_reviews' | trans }}</p>
