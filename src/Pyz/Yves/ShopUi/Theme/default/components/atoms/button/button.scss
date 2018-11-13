@@ -8,7 +8,7 @@
         border-radius: rem(2);
         color: $setting-color-white;
         text-align: center;
-        font: fw(regular) rem(15) $setting-font-family;
+        font: normal rem(15) $setting-font-family;
         cursor: pointer;
 
         &:hover,
@@ -18,34 +18,52 @@
             text-decoration: none;
         }
 
-        &--black {
-            background-color: $setting-color-darkest;
+        &--primary {
+            background: $setting-color-darkest;
 
             &:hover,
             &:focus {
-                background-color: $setting-color-radical-red;
+                background: $setting-color-radical-red;
+            }
+        }
+
+        &--secondary,
+        &--hollow {
+            padding: rem(8) rem(16);
+            background-color: $setting-color-white;
+            border: rem(1) solid $setting-color-darkest;
+            color: $setting-color-darkest;
+
+            &[disabled] {
+                background-color: $setting-color-white !important;
+                border-color: $setting-color-gray-3 !important;
+                color: $setting-color-gray-3 !important;
+            }
+        }
+
+        &--secondary {
+            &:hover,
+            &:focus {
+                border-color: $setting-color-radical-red;
+                background: $setting-color-radical-red;
+                color: $setting-color-white;
+            }
+        }
+
+        &--hollow {
+            &:hover,
+            &:focus {
+                border-color: $setting-color-darkest;
+                background-color: $setting-color-darkest;
+                color: $setting-color-white;
             }
         }
 
         &--alert {
-            background-color: $setting-color-alt;
+            background: $setting-color-alt;
 
-            &:hover,
-            &:focus {
-                background-color: map-get($setting-color-actions, alert);
-            }
-        }
-
-        &--white {
-            background-color: $setting-color-white;
-            border: rem(1) solid $setting-color-text;
-            color: $setting-color-text;
-
-            &:hover,
-            &:focus {
-                background-color: $setting-color-text;
-                border: rem(1) solid $setting-color-text;
-                color: $setting-color-white;
+            &:hover {
+                background: map-get($setting-color-actions, alert);
             }
         }
 
@@ -64,35 +82,13 @@
             }
         }
 
-        &--hollow {
-            padding: rem(8) rem(16);
-            background-color: $setting-color-white;
-            border: rem(1) solid $setting-color-darkest;
-            color: $setting-color-darkest;
-
-            &:hover,
-            &:focus {
-                border-color: $setting-color-darkest;
-                background-color: $setting-color-darkest;
-                color: $setting-color-white;
-            }
-
-            &[disabled],
-            & #{$name}--disabled,
-            &[disabled]:hover,
-            & #{$name}--disabled:hover {
-                background-color: $setting-color-white !important;
-                color: $setting-color-light;
-            }
-        }
-
         &--expand {
             width: 100%;
         }
 
-        &--big {
+        &--large {
             padding: rem(20);
-            font: fw(medium) rem(15) $setting-font-family-additional;
+            font: fw(500) rem(15) $setting-font-family-additional;
 
             @include helper-breakpoint-media-min($md-min) {
                 font-size: rem(16);

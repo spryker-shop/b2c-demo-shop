@@ -74,6 +74,36 @@
             text-transform: uppercase;
         }
 
+        &--product-set-main {
+            font: rem(26)/1.38 $setting-font-family-additional;
+            letter-spacing: rem(-0.7);
+            position: relative;
+            margin-bottom: rem(24);
+
+            @include helper-breakpoint-media-min($md-min) {
+                font-size: rem(34);
+                line-height: 1.06;
+                letter-spacing: rem(-0.9);
+            }
+
+            &::before {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 0;
+                right: 0;
+                height: rem(1);
+                background-color: $setting-color-lightest-1;
+            }
+        }
+
+        &--product-set-secondary {
+            position: relative;
+            display: inline-block;
+            background-color: $setting-color-bg;
+            padding-right: rem(50);
+        }
+
         @content;
     }
 }

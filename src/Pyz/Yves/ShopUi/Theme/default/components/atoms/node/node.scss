@@ -15,6 +15,19 @@
             font-size: rem(15);
         }
 
+        &--product-set {
+            color: $setting-color-dark;
+            font: 300 rem(14)/1.43 $setting-font-family;
+            margin-bottom: rem(24);
+            letter-spacing: rem(-0.4);
+
+            @include helper-breakpoint-media-min($md-min) {
+                margin-bottom: rem(48);
+                font-size: rem(18);
+                line-height: 1.33;
+            }
+        }
+
         @content;
     }
 }
