@@ -26,7 +26,7 @@
                 color: $setting-color-text;
 
                 #{$name}__thumbnail {
-                    box-shadow: rem(10) rem(10) rem(40) 0 rgba(0, 0, 0, 0.1);
+                    box-shadow: rem(10) rem(10) rem(40) 0 $setting-color-shadow;
                 }
 
                 #{$name}__overlay {
@@ -69,7 +69,7 @@
                 right: 0;
                 bottom: 0;
                 border-radius: rem(4);
-                background: rgba(0, 0, 0, 0.05);
+                background: $setting-color-alpha-1;
                 z-index: $setting-zi-element-floating;
             }
 
@@ -82,7 +82,7 @@
                 right: 0;
                 bottom: 0;
                 border-radius: rem(4);
-                background-image: linear-gradient(to bottom, #000000, rgba(0, 0, 0, 0));
+                background-image: linear-gradient(to bottom, $setting-color-black, rgba($setting-color-black, 0));
                 opacity: 0;
                 z-index: $setting-zi-element-floating;
             }
@@ -138,6 +138,23 @@
             color: $setting-color-dusty-gray;
             position: relative;
             top: rem(1);
+        }
+
+        &--product-set {
+            @include helper-breakpoint-media-min($md-min) {
+                padding: 0;
+            }
+
+            #{$name}__overlay {
+                @include helper-breakpoint-media-max($md-max) {
+                    padding-top: rem(20);
+                    padding-bottom: rem(20);
+                }
+            }
+
+            #{$name}__info {
+                min-height: rem(48);
+            }
         }
 
         &__quantity {

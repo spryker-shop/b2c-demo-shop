@@ -52,6 +52,89 @@
                 }
             }
         }
+
+        &--product-set {
+            #{$name}__container {
+                padding: 0;
+            }
+
+            .slick-dots {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-top: rem(12);
+
+                li {
+                    display: block;
+                    margin: rem(4.8) rem(8);
+                    width: rem(6);
+                    height: rem(6);
+                    background: $setting-color-lightest;
+                    border-radius: 50%;
+
+                    &:hover {
+                        cursor: pointer;
+                    }
+
+                    &.slick-active {
+                        width: rem(12);
+                        height: rem(12);
+                        background: transparent;
+                        border: rem(1) solid map-get($setting-color-actions, alert);
+                    }
+
+                    button {
+                        font-size: 0;
+                    }
+                }
+            }
+
+            .slick-arrow {
+                @include helper-breakpoint-media-max($md-max) {
+                    top: rem(80);
+                }
+            }
+
+            .slick-prev {
+                @include helper-breakpoint-media-max($md-max) {
+                    left: 0;
+                }
+            }
+
+            .slick-next {
+                @include helper-breakpoint-media-max($md-max) {
+                    right: 0;
+                }
+            }
+
+            .slick-disabled {
+                display: none !important;
+            }
+        }
+
+        &--product-set-secondary {
+            margin-top: rem(24);
+
+            @include helper-breakpoint-media-min($lg-min) {
+                margin-top: 0;
+            }
+
+            .slick-slide {
+                width: rem(215);
+
+                @include helper-breakpoint-media-min($sm-max) {
+                    padding-right: rem(15);
+
+                    &:last-of-type {
+                        padding-right: 0;
+                    }
+                }
+
+                @include helper-breakpoint-media-min($lg-min) {
+                    width: rem(300);
+                }
+            }
+        }
     }
 }
 

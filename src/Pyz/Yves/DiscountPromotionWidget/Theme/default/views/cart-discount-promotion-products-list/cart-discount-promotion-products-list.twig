@@ -63,7 +63,7 @@
                             <input type="hidden" value="{{ embed.sku }}" name="groupKey">
                             <input type="hidden" value="{{ embed.promotionDiscount.id }}" name="idDiscountPromotion">
 
-                            <button type="submit" class="button button--white {{ config.name }}__button {{ config.jsName ~ '__button-' ~ embed.sku }}" {{ disabled ? 'disabled' : '' }}>
+                            <button type="submit" class="button button--hollow {{ config.name }}__button {{ config.jsName ~ '__button-' ~ embed.sku }}" {{ disabled ? 'disabled' : '' }}>
                                 {{ 'page.detail.add-to-cart' | trans }}
                             </button>
                             {% include molecule('action-single-click-enforcer') with {
