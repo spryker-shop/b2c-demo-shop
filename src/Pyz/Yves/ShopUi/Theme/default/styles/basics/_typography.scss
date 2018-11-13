@@ -1,49 +1,57 @@
+$font-calibre-light: 'https://s3.eu-central-1.amazonaws.com/spryker/fonts/calibre/CalibreWeb-Light';
+$font-calibre-regular: 'https://s3.eu-central-1.amazonaws.com/spryker/fonts/calibre/CalibreWeb-Regular';
+$font-calibre-medium: 'https://s3.eu-central-1.amazonaws.com/spryker/fonts/calibre/CalibreWeb-Medium';
+$font-calibre-bold: 'https://s3.eu-central-1.amazonaws.com/spryker/fonts/calibre/CalibreWeb-Bold';
+$font-circular-normal: 'https://s3.eu-central-1.amazonaws.com/spryker/fonts/circular-pro/lineto-circular-pro-book';
+$font-circular-medium: 'https://s3.eu-central-1.amazonaws.com/spryker/fonts/circular-pro/lineto-circular-pro-medium';
+$font-circular-bold: 'https://s3.eu-central-1.amazonaws.com/spryker/fonts/circular-pro/lineto-circular-pro-bold';
+
 @mixin basic-typography() {
     @font-face {
         font-family: Calibre;
-        src: url('https://s3.eu-central-1.amazonaws.com/spryker/fonts/calibre/CalibreWeb-Light.woff2') format('woff2'), url('https://s3.eu-central-1.amazonaws.com/spryker/fonts/calibre/CalibreWeb-Light.woff') format('woff');
+        src: url('#{$font-calibre-light}.woff2') format('woff2'), url('#{$font-calibre-light}.woff') format('woff');
         font-weight: 300;
         font-style: normal;
     }
 
     @font-face {
         font-family: Calibre;
-        src: url('https://s3.eu-central-1.amazonaws.com/spryker/fonts/calibre/CalibreWeb-Regular.woff2') format('woff2'), url('https://s3.eu-central-1.amazonaws.com/spryker/fonts/calibre/CalibreWeb-Regular.woff') format('woff');
+        src: url('#{$font-calibre-regular}.woff2') format('woff2'), url('#{$font-calibre-regular}.woff') format('woff');
         font-weight: 400;
         font-style: normal;
     }
 
     @font-face {
         font-family: Calibre;
-        src: url('https://s3.eu-central-1.amazonaws.com/spryker/fonts/calibre/CalibreWeb-Medium.woff2') format('woff2'), url('https://s3.eu-central-1.amazonaws.com/spryker/fonts/calibre/CalibreWeb-Medium.woff') format('woff');
+        src: url('#{$font-calibre-medium}.woff2') format('woff2'), url('#{$font-calibre-medium}.woff') format('woff');
         font-weight: 500;
         font-style: normal;
     }
 
     @font-face {
         font-family: Calibre;
-        src: url('https://s3.eu-central-1.amazonaws.com/spryker/fonts/calibre/CalibreWeb-Bold.woff2') format('woff2'), url('https://s3.eu-central-1.amazonaws.com/spryker/fonts/calibre/CalibreWeb-Bold.woff') format('woff');
+        src: url('#{$font-calibre-bold}.woff2') format('woff2'), url('#{$font-calibre-bold}.woff') format('woff');
         font-weight: 700;
         font-style: normal;
     }
 
     @font-face {
         font-family: Circular;
-        src: url('https://s3.eu-central-1.amazonaws.com/spryker/fonts/circular-pro/lineto-circular-pro-book.woff2') format('woff2'), url('https://s3.eu-central-1.amazonaws.com/spryker/fonts/circular-pro/lineto-circular-pro-book.woff') format('woff');
+        src: url('#{$font-circular-normal}.woff2') format('woff2'), url('#{$font-circular-normal}.woff') format('woff');
         font-weight: 400;
         font-style: normal;
     }
 
     @font-face {
         font-family: Circular;
-        src: url('https://s3.eu-central-1.amazonaws.com/spryker/fonts/circular-pro/lineto-circular-pro-medium.woff2') format('woff2'), url('https://s3.eu-central-1.amazonaws.com/spryker/fonts/circular-pro/lineto-circular-pro-medium.woff') format('woff');
+        src: url('#{$font-circular-medium}.woff2') format('woff2'), url('#{$font-circular-medium}.woff') format('woff');
         font-weight: 500;
         font-style: normal;
     }
 
     @font-face {
         font-family: Circular;
-        src: url('https://s3.eu-central-1.amazonaws.com/spryker/fonts/circular-pro/lineto-circular-pro-bold.woff2') format('woff2'), url('https://s3.eu-central-1.amazonaws.com/spryker/fonts/circular-pro/lineto-circular-pro-bold.woff') format('woff');
+        src: url('#{$font-circular-bold}.woff2') format('woff2'), url('#{$font-circular-bold}.woff') format('woff');
         font-weight: 700;
         font-style: normal;
     }

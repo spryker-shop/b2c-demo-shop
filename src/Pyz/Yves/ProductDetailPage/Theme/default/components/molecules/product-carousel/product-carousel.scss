@@ -38,7 +38,7 @@
                     right: 0;
                     bottom: 0;
                     background: $setting-color-alpha-1;
-                    z-index: 350;
+                    z-index: $setting-zi-element-floating;
                 }
                 img {
                     max-width: 100%;
@@ -46,7 +46,7 @@
                 }
             }
             .pdp-img-color-active {
-                z-index: 100;
+                z-index: $setting-zi-element + 1;
                 opacity: 1 !important;
             }
             @include helper-breakpoint-media-max($xl-max) {
@@ -81,7 +81,7 @@
             position: absolute;
             top: 50%;
             left: rem(32);
-            z-index: 400;
+            z-index: $setting-zi-header;
             transform: translateY(-50%);
             width: rem(36);
             max-height: rem(315);
@@ -139,7 +139,7 @@
                     right: 0;
                     bottom: 0;
                     background: $setting-color-alpha-1;
-                    z-index: 350;
+                    z-index: $setting-zi-element-floating;
                 }
             }
             .slick-current .pdp-img {
