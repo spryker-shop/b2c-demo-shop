@@ -1,31 +1,18 @@
-$product-label-widget-tag-burst-size: rem(32);
-
 @mixin product-label-widget-tag($name: '.tag') {
     #{$name} {
-        position: relative;
-        display: flex;
-        align-items: center;
-        width: rem(46);
-        height: rem(28);
+        display: inline-block;
+        padding: rem(2) rem(8);
         background: $setting-color-white;
         border-radius: rem(2);
-        box-shadow: rem(1) rem(1) 0 0 $setting-color-alpha-1;
+        box-shadow: rem(1) rem(1) 0 0 $setting-color-shadow;
+
         @include helper-breakpoint-media-max($sm-max) {
-            width: rem(50);
-            height: rem(22);
+            padding: rem(3) rem(15);
             font-size: rem(11);
         }
 
         &__text {
-            @include helper-font-size(default);
-            line-height: normal;
-            display: block;
-            position: relative;
-            width: 100%;
-            text-align: center;
-            z-index: 2;
             text-transform: uppercase;
-            font-size: inherit;
         }
 
         @content;

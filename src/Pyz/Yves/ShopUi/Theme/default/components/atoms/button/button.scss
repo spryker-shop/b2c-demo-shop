@@ -18,35 +18,62 @@
             text-decoration: none;
         }
 
-        &--black {
-            background: $setting-color-darkest-1;
+        &--primary {
+            background: $setting-color-darkest;
+
             &:hover,
             &:focus {
                 background: $setting-color-radical-red;
             }
         }
 
+        &--secondary,
+        &--hollow {
+            padding: rem(8) rem(16);
+            background-color: $setting-color-white;
+            border: rem(1) solid $setting-color-darkest;
+            color: $setting-color-darkest;
+
+            &[disabled] {
+                background-color: $setting-color-white !important;
+                border-color: $setting-color-gray-3 !important;
+                color: $setting-color-gray-3 !important;
+            }
+        }
+
+        &--secondary {
+        &--black {
+            background: $setting-color-darkest-1;
+            &:hover,
+            &:focus {
+                border-color: $setting-color-radical-red;
+                background: $setting-color-radical-red;
+                color: $setting-color-white;
+            }
+        }
+
+        &--hollow {
+            &:hover,
+            &:focus {
+                border-color: $setting-color-darkest;
+                background-color: $setting-color-darkest;
+                color: $setting-color-white;
+            }
+        }
+
         &--alert {
             background: $setting-color-alt;
+
             &:hover {
                 background: map-get($setting-color-actions, alert);
             }
         }
 
-        &--white {
-            background: $setting-color-white;
-            border: rem(1) solid $setting-color-text;
-            color: $setting-color-text;
-            &:hover {
-                background: $setting-color-text;
-                border: rem(1) solid $setting-color-text;
-                color: $setting-color-white;
-            }
-        }
         &--skinless {
             border: none;
             background-color: transparent;
             color: $setting-color-black;
+
             &:visited,
             &:hover,
             &:focus,
@@ -84,17 +111,18 @@
             width: 100%;
         }
 
-        &--big {
+        &--large {
+            padding: rem(20);
+            font: fw(500) rem(15) $setting-font-family-additional;
+
             @include helper-breakpoint-media-min($md-min) {
                 font-size: rem(16);
             }
-            padding: rem(20);
-            font: 500 rem(15) $setting-font-family-additional;
         }
 
         &--agent {
             font-size: rem(14);
-            font-weight: 500;
+            font-weight: fw(medium);
             min-width: rem(79);
             min-height: rem(48);
             padding-top: rem(15);
@@ -105,11 +133,11 @@
             border-radius: 0 rem(2) rem(2) 0;
             min-width: rem(113);
             height: rem(48);
-            font: 400 rem(13) $setting-font-family-additional;
+            font: fw(regular) rem(13) $setting-font-family-additional;
         }
 
         &--cart {
-            font: 500 rem(16)/rem(56) $setting-font-family-additional;
+            font: fw(medium) rem(16)/rem(56) $setting-font-family-additional;
             height: rem(56);
             padding: 0 rem(20);
             margin-top: rem(56);
