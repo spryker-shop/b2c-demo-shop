@@ -15,8 +15,8 @@
         <a href="{{ url('logout') }}" class="{{ config.name }}__link {{ config.name }}__link--sm">{{ 'customer.logout' | trans }}</a>
     {% else %}
         <div class="grid grid--middle grid--justify {{ config.name }}__buttons-container">
-            <a href="{{ url('register') }}" class="{{ config.name }}__button button button--white col">{{ 'checkout.customer.auth_as_user' | trans }}</a>
-            <a href="{{ url('login') }}" class="{{ config.name }}__button button button--black col">{{ 'global.login' | trans }}</a>
+            <a href="{{ url('register') }}" class="{{ config.name }}__button button button--hollow col">{{ 'checkout.customer.auth_as_user' | trans }}</a>
+            <a href="{{ url('login') }}" class="{{ config.name }}__button button button--primary col">{{ 'global.login' | trans }}</a>
         </div>
     {% endif %}
 {% endblock %}
