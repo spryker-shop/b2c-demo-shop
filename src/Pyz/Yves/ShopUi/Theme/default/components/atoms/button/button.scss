@@ -19,11 +19,11 @@
         }
 
         &--primary {
-            background: $setting-color-darkest;
+            background-color: $setting-color-darkest;
 
             &:hover,
             &:focus {
-                background: $setting-color-radical-red;
+                background-color: $setting-color-radical-red;
             }
         }
 
@@ -34,7 +34,8 @@
             border: rem(1) solid $setting-color-darkest;
             color: $setting-color-darkest;
 
-            &[disabled] {
+            &[disabled],
+            &--disabled {
                 background-color: $setting-color-white !important;
                 border-color: $setting-color-gray-3 !important;
                 color: $setting-color-gray-3 !important;
@@ -45,7 +46,7 @@
             &:hover,
             &:focus {
                 border-color: $setting-color-radical-red;
-                background: $setting-color-radical-red;
+                background-color: $setting-color-radical-red;
                 color: $setting-color-white;
             }
         }
@@ -60,10 +61,11 @@
         }
 
         &--alert {
-            background: $setting-color-alt;
+            background-color: $setting-color-alt;
 
-            &:hover {
-                background: map-get($setting-color-actions, alert);
+            &:hover,
+            &:focus {
+                background-color: map-get($setting-color-actions, alert);
             }
         }
 
@@ -116,6 +118,41 @@
             height: rem(56);
             padding: 0 rem(20);
             margin-top: rem(56);
+        }
+
+        &--quantity {
+            border: rem(1) solid $setting-color-light;
+            border-radius: 50%;
+            font: fw(light) rem(16)/rem(17) $setting-font-family-additional;
+            background-color: $setting-color-transparent;
+            color: $setting-color-light;
+            padding: 0;
+            width: rem(20);
+            height: rem(20);
+            user-select: none;
+
+            &:hover,
+            &:focus {
+                color: $setting-color-main;
+                border-color: $setting-color-main;
+                background-color: $setting-color-transparent;
+            }
+        }
+
+        &--quantity-large {
+            width: rem(36);
+            height: rem(36);
+            line-height: rem(33);
+            font-size: rem(21);
+            border-color: $setting-color-pacific-blue;
+            color: $setting-color-pacific-blue;
+
+            &:hover,
+            &:focus {
+                border-color: $setting-color-pacific-blue;
+                color: $setting-color-pacific-blue;
+                background-color: $setting-color-transparent;
+            }
         }
 
         &[disabled],

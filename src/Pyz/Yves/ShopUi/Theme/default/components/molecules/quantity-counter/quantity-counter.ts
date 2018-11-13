@@ -4,13 +4,11 @@ export default class QuantityCounter extends Component {
     quantityInput: HTMLInputElement;
     decrButton: HTMLButtonElement;
     incrButton: HTMLButtonElement;
-    form: HTMLFormElement;
 
     protected readyCallback(): void {
         this.quantityInput = <HTMLInputElement>this.querySelector(`.${this.jsName}__input`);
         this.decrButton = <HTMLButtonElement>this.querySelector(`.${this.jsName}__decr`);
         this.incrButton = <HTMLButtonElement>this.querySelector(`.${this.jsName}__incr`);
-        this.form = <HTMLFormElement>document.querySelector(`.${this.jsName}__form`);
 
         this.mapEvents();
         this.setMaxQuantityToInfinity();
@@ -44,14 +42,14 @@ export default class QuantityCounter extends Component {
 
     protected autoUpdateOnChange(): void {
         if(this.autoUpdate) {
-            this.timer(this.form);
+            this.timer();
         }
     }
 
-    protected timer(form: HTMLFormElement): void {
+    protected timer(): void {
         let timeout = null;
         clearTimeout(timeout);
-        timeout = setTimeout(() => form.submit(), 1000);
+        timeout = setTimeout(() => this.quantityInput.form.submit(), 1000);
     }
 
     protected setMaxQuantityToInfinity(): void {
