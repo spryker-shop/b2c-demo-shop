@@ -67,7 +67,7 @@
 
             &--left {
                 left: rem(15);
-                background: linear-gradient(to right, $setting-color-white 0%, $setting-color-white 46%, rgba(255, 255, 255, 0) 92%, rgba(255, 255, 255, 0) 100%);
+                background: linear-gradient(to right, $setting-color-white 0%, $setting-color-white 46%, $setting-color-transparent 92%, $setting-color-transparent 100%);
 
                 #{$name}__icon {
                     left: 0;
@@ -76,10 +76,10 @@
 
             &--right {
                 right: rem(15);
-                background: linear-gradient(to right, rgba(255,255,255,0) 0%,
-                                                      rgba(255,255,255,0) 8%,
-                                                      rgba(255,255,255,1) 54%,
-                                                      rgba(255,255,255,1) 100%);
+                background: linear-gradient(to right, $setting-color-transparent 0%,
+                                                      $setting-color-transparent 8%,
+                                                      rgba($setting-color-white, 1) 54%,
+                                                      rgba($setting-color-white, 1) 100%);
 
                 #{$name}__icon {
                     right: 0;
