@@ -2,8 +2,10 @@
     #{$name} {
         &__link {
             &--footer {
-                @include helper-breakpoint-media-max($sm-max) {
-                    color: rgba($setting-color-text, 0.5);
+                color: rgba($setting-color-text, 0.5);
+
+                @include helper-breakpoint-media-min($md-min) {
+                    color: $setting-color-text;
                 }
             }
         }

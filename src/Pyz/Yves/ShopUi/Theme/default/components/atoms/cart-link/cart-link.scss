@@ -11,21 +11,20 @@
     border-radius: 50%;
 }
 
-@mixin shop-ui-cart-icon ($name: '.cart-link') {
-
+@mixin shop-ui-cart-link ($name: '.cart-link') {
     #{$name} {
         position: relative;
 
         &__quantity {
-            @include shop-ui-cart-bubble(rem(18), 0);
-            background: $setting-color-alt;
+            @include shop-ui-cart-bubble(rem(18), rem(-12));
+            background-color: $setting-color-alt;
             color: $setting-color-white;
 
-            @include helper-breakpoint-media-max($lg-min) {
-                @include shop-ui-cart-bubble(rem(18), rem(-12));
+            @include helper-breakpoint-media-min($lg-min) {
+                @include shop-ui-cart-bubble(rem(18), 0);
             }
         }
     }
 }
 
-@include shop-ui-cart-icon();
+@include shop-ui-cart-link();

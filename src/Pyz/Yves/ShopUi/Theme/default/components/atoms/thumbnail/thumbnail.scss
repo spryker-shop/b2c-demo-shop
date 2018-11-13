@@ -1,102 +1,55 @@
-@mixin shop-ui-thumbnail($name: '.thumbnail') {
-    #{$name} {
+@include shop-ui-thumbnail {
+    &--no-margin {
+        margin: 0;
+    }
+
+    &--catalog {
+        margin: 0 rem(15) 0 0;
+        border-radius: rem(3);
+        width: rem(41);
+        height: rem(41);
+        overflow: hidden;
         position: relative;
-        display: block;
-        height: rem(160);
-        margin: rem(8);
 
-        &--smaller {
-            height: rem(48);
-        }
-
-        &--small {
-            height: rem(80);
-        }
-
-        &--big {
-            height: rem(320);
-        }
-
-        &--bigger {
-            height: rem(480);
-        }
-
-        &--min-size {
-            min-width: rem(40);
-        }
-
-        &--no-margin {
-            margin: 0;
-        }
-
-        &--has-border {
-            border: rem(4) solid transparent;
-            box-shadow: 0 0 0 rem(1) $setting-color-lighter;
-        }
-
-        &--catalog {
-            margin: 0 rem(15) 0 0;
-            border-radius: rem(3);
-            width: rem(41);
-            height: rem(41);
-            overflow: hidden;
-            position: relative;
-
-            &::after {
-                content: '';
-                display: block;
-                position: absolute;
-                z-index: $setting-zi-element;
-                background: rgba($setting-color-black, 0.05);
-                top: 0;
-                bottom: 0;
-                left: 0;
-                right: 0;
-            }
-        }
-
-        &--cart-bundle {
-            width: rem(120);
-            height: rem(44);
-            margin: 0;
-
-            &::after {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                border-radius: rem(4);
-                z-index: $setting-zi-element;
-                background: rgba($setting-color-black, 0.05);
-            }
-        }
-
-        &__image {
+        &::after {
+            content: '';
+            display: block;
             position: absolute;
-            left: 0;
-            right: 0;
+            background-color: rgba($setting-color-black, 0.05);
             top: 0;
             bottom: 0;
-            margin: auto;
-            max-width: 100%;
-            max-height: 100%;
-
-            &--cart-bundle {
-                max-height: calc(100% - #{rem(10)});
-                max-width: calc(100% - #{rem(10)});
-            }
+            left: 0;
+            right: 0;
         }
-
-        &--product-set {
-            height: rem(208);
-            margin-left: 0;
-            margin-right: 0;
-        }
-
-        @content;
     }
-}
 
-@include shop-ui-thumbnail();
+    &--cart-bundle {
+        width: rem(120);
+        height: rem(44);
+        margin: 0;
+
+        &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: rem(4);
+            background: rgba($setting-color-black, 0.05);
+        }
+    }
+
+    &__image {
+        &--cart-bundle {
+            max-height: calc(100% - #{rem(10)});
+            max-width: calc(100% - #{rem(10)});
+        }
+    }
+
+    &--product-set {
+        height: rem(208);
+        margin-left: 0;
+        margin-right: 0;
+    }
+};
