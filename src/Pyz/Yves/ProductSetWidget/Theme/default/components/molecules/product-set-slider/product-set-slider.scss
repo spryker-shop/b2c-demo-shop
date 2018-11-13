@@ -1,118 +1,33 @@
-@mixin product-set-slider ($name: '.product-set-slider') {
+@mixin product-set-widget-product-set-slider ($name: '.product-set-slider') {
     #{$name} {
-
-        &.slick-carousel__container {
-            padding: 0;
-        }
-
-        &-wrap {
-            @include helper-breakpoint-media-min($lg-min) {
-                padding-left: 0;
-                padding-right: 0;
-                margin-left: 0;
-                margin-right: 0;
-            }
-            margin-bottom: rem(32);
-        }
-
-        &#{$name}--set-images {
+        &--multiple {
             .slick-slide {
-                @include helper-breakpoint-media-min($lg-min) {
-                    width: rem(300);
-                    padding: 0 rem(15);
-                }
-                width: rem(215);
-                padding-right: rem(15);
-            }
-            .slick-arrow {
-                @include helper-breakpoint-media-max($md-max) {
-                    top: rem(80);
-                }
-            }
-            .slick-prev {
-                @include helper-breakpoint-media-max($md-max) {
-                    left: 0;
-                }
-            }
-            .slick-next {
-                @include helper-breakpoint-media-max($md-max) {
-                    right: 0;
+                @include helper-breakpoint-media-max($sm-max) {
+                    padding-right: rem(10);
                 }
             }
         }
-        .slick-disabled {
-            display: none !important;
-        }
-        .product-card {
-            @include helper-breakpoint-media-min($md-min) {
-                max-width: rem(270);
-            }
-            max-width: rem(200);
-            padding: 0;
-            & + .product-card {
-                display: none;
-            }
-        }
-        .product-card__overlay {
-            @include helper-breakpoint-media-max($md-max) {
-                padding-top: rem(20);
-                padding-bottom: rem(20);
-            }
-        }
-        .product-card__info {
-            min-height: rem(48);
-        }
-        .thumbnail {
-            margin: 0;
-            & + .thumbnail {
-                display: none;
-            }
-        }
-        .thumbnail__image {
-            border-radius: rem(3);
-        }
-        .slick-dots {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: rem(12);
-            li {
-                display: block;
-                margin: rem(4.8) rem(8);
-                width: rem(6);
-                height: rem(6);
-                background: $setting-color-lightest;
-                border-radius: 50%;
-                &:hover {
-                    cursor: pointer;
-                }
-                &.slick-active {
-                    width: rem(12);
-                    height: rem(12);
-                    background: transparent;
-                    border: rem(1) solid map-get($setting-color-actions, alert);
-                }
 
-                button {
-                    font-size: 0;
-                }
-            }
-        }
-        .product-set-widget-main-slider-wrap & {
+        &--single {
             .slick-slide {
                 @include helper-breakpoint-media-min($lg-min) {
                     padding-right: rem(15);
                 }
             }
+
             .thumbnail {
+                height: rem(240);
+
                 @include helper-breakpoint-media-min($md-min) {
                     height: rem(368);
                 }
-                height: rem(240);
             }
         }
-        .product-set-widget-slider-wrap & {
-            &#{$name}--set-images {
+
+        &--hide-prev-btn {
+            margin-bottom: rem(32);
+
+            #{$name} {
                 &:hover {
                     @include helper-breakpoint-media-min($md-min) {
                         .slick-prev {
@@ -120,17 +35,16 @@
                         }
                     }
                 }
-            }
-            .slick-prev {
-                @include helper-effect-transition;
-                @include helper-visibility-invisible;
-            }
-            #{$name}__button-add-to-cart,
-            .variant-configurator {
-                display: none;
+
+                .slick-prev {
+                    @include helper-breakpoint-media-min($md-min) {
+                        @include helper-effect-transition;
+                        @include helper-visibility-invisible;
+                    }
+                }
             }
         }
     }
 }
 
-@include product-set-slider();
+@include product-set-widget-product-set-slider();

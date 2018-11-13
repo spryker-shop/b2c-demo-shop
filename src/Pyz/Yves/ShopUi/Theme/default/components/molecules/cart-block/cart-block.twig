@@ -86,8 +86,8 @@
 
         {% if canProceedToCheckout %}
             <div class="{{ config.name }}__buttons-container grid grid--middle grid--justify">
-                <a href="{{ url('cart') }}" class="{{ config.name }}__button button button--white col">{{ 'cart.cart' | trans }}</a>
-                <a class="{{ config.name }}__button button button--black col" href="{{ url('checkout-index') }}" {{qa('cart-go-to-checkout')}}>
+                <a href="{{ url('cart') }}" class="{{ config.name }}__button button button--hollow col">{{ 'cart.cart' | trans }}</a>
+                <a class="{{ config.name }}__button button button--primary col" href="{{ url('checkout-index') }}" {{qa('cart-go-to-checkout')}}>
                     {{ 'cart.checkout' | trans }}
                 </a>
             </div>
