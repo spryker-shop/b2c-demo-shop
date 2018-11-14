@@ -90,6 +90,11 @@
             }
         }
 
+        &--medium {
+            font: fw(regular) rem(14) $setting-font-family-additional;
+            padding: rem(14);
+        }
+
         &--agent {
             font-size: rem(14);
             font-weight: fw(medium);
@@ -111,6 +116,24 @@
             height: rem(56);
             padding: 0 rem(20);
             margin-top: rem(56);
+        }
+
+        &--send-review {
+            font: fw(medium) rem(13)/rem(16) $setting-font-family;
+            padding: rem(12) rem(30);
+            position: absolute;
+            top: rem(13);
+            right: rem(24);
+
+            @include helper-breakpoint-media-min($lg-min) {
+                font-size: rem(14);
+                padding: rem(15) rem(20);
+                min-width: $review-button-min-width;
+                margin-top: rem(20);
+                position: relative;
+                top: 0;
+                right: 0;
+            }
         }
 
         &--quantity {
