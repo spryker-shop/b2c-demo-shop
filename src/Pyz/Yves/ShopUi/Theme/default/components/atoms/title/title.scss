@@ -104,6 +104,35 @@
             padding-right: rem(50);
         }
 
+        &--pdp-review {
+            font: fw(medium) rem(16)/rem(22) $setting-font-family-additional;
+            color: $setting-color-darkest;
+            margin-right: rem(14);
+
+            @include helper-breakpoint-media-min($md-min) {
+                font-size: rem(17);
+                margin-right: rem(19);
+            }
+        }
+
+        &--review-summary {
+            font: fw(regular) rem(21)/rem(35) $setting-font-family-additional;
+            border-bottom: dotted rem(1) $setting-color-lightest;
+            padding-bottom: rem(6);
+            margin-bottom: rem(29);
+
+            @include helper-breakpoint-media-min($md-min) {
+                font-size: rem(27);
+                padding-bottom: rem(10);
+                margin-bottom: rem(50);
+            }
+        }
+
+        &--popup-review {
+            font: fw(bold) rem(36) $setting-font-family-additional;
+            color: $setting-color-darkest;
+        }
+
         @content;
     }
 }

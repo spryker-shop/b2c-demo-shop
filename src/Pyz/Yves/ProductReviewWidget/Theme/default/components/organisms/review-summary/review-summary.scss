@@ -1,0 +1,21 @@
+@mixin product-review-widget-review-summary($name: '.review-summary') {
+    #{$name} {
+        &__add-review-mobile {
+            padding-bottom: rem(30);
+        }
+
+        &__reviews {
+            column-count: 1;
+            column-gap: rem(30);
+            margin: rem(-32) 0 rem(70);
+
+            @include helper-breakpoint-media-min($md-min) {
+                column-count: 2;
+            }
+        }
+
+        @content;
+    }
+}
+
+@include product-review-widget-review-summary();
