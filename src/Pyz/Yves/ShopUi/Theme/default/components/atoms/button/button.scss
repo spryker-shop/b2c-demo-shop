@@ -1,3 +1,5 @@
+$review-button-min-width: rem(177);
+
 @mixin shop-ui-button($name: '.button') {
     #{$name} {
         @include helper-effect-transition(all);
@@ -33,12 +35,6 @@
             background-color: $setting-color-white;
             border: rem(1) solid $setting-color-darkest;
             color: $setting-color-darkest;
-
-            &[disabled] {
-                background-color: $setting-color-white !important;
-                border-color: $setting-color-gray-3 !important;
-                color: $setting-color-gray-3 !important;
-            }
         }
 
         &--secondary {
@@ -62,7 +58,8 @@
         &--alert {
             background-color: $setting-color-alt;
 
-            &:hover {
+            &:hover,
+            &:focus {
                 background-color: map-get($setting-color-actions, alert);
             }
         }
@@ -95,6 +92,11 @@
             }
         }
 
+        &--medium {
+            font: fw(regular) rem(14) $setting-font-family-additional;
+            padding: rem(14);
+        }
+
         &--agent {
             font-size: rem(14);
             font-weight: fw(medium);
@@ -118,6 +120,59 @@
             margin-top: rem(56);
         }
 
+        &--send-review {
+            font: fw(medium) rem(13)/rem(16) $setting-font-family;
+            padding: rem(12) rem(30);
+            position: absolute;
+            top: rem(13);
+            right: rem(24);
+
+            @include helper-breakpoint-media-min($lg-min) {
+                font-size: rem(14);
+                padding: rem(15) rem(20);
+                min-width: $review-button-min-width;
+                margin-top: rem(20);
+                position: relative;
+                top: 0;
+                right: 0;
+            }
+        }
+
+        &--quantity {
+            border: rem(1) solid $setting-color-light;
+            border-radius: 50%;
+            font: fw(light) rem(16)/rem(17) $setting-font-family-additional;
+            background-color: $setting-color-transparent;
+            color: $setting-color-light;
+            padding: 0;
+            width: rem(20);
+            height: rem(20);
+            user-select: none;
+
+            &:hover,
+            &:focus {
+                color: $setting-color-main;
+                border-color: $setting-color-main;
+                background-color: $setting-color-transparent;
+            }
+        }
+
+        &--quantity-large {
+            width: rem(36);
+            height: rem(36);
+            line-height: rem(33);
+            font-size: rem(21);
+            border-color: $setting-color-pacific-blue;
+            color: $setting-color-pacific-blue;
+
+            &:hover,
+            &:focus {
+                border-color: $setting-color-pacific-blue;
+                color: $setting-color-pacific-blue;
+                background-color: $setting-color-transparent;
+            }
+        }
+
         &[disabled],
         &--disabled {
             background-color: $setting-color-light;
@@ -127,6 +182,13 @@
             &:hover,
             &:focus {
                 background-color: $setting-color-light;
+            }
+
+            &#{$name}--hollow,
+            &#{$name}--secondary {
+                background-color: $setting-color-white;
+                border-color: $setting-color-gray-3;
+                color: $setting-color-gray-3;
             }
         }
     }
