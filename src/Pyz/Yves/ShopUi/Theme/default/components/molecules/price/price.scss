@@ -45,6 +45,28 @@
                 }
             }
         }
+
+        &--pdp {
+            display: flex;
+            flex-direction: column-reverse;
+            align-items: flex-end;
+
+            #{$name}__amount {
+                color: $setting-color-darkest;
+                font: fw(regular) rem(22)/rem(28) $setting-font-family-additional;
+
+                @include helper-breakpoint-media-max($lg-max) {
+                    font: fw(regular) rem(20)/rem(25) $setting-font-family-additional;
+                }
+
+                &--original {
+                    padding: 0;
+                    color: $setting-color-lightest;
+                    font-size: rem(15);
+                    line-height: rem(19);
+                }
+            }
+        }
     }
 }
 

@@ -3,42 +3,44 @@
         &__title {
             @include helper-effect-transition(opacity);
             text-transform: uppercase;
-            font: bold rem(13) $setting-font-family-additional;
+            font: fw(bold) rem(13) $setting-font-family-additional;
             letter-spacing: rem(2.6);
             padding: rem(15) rem(20) rem(15) 0;
             position: relative;
-            cursor: pointer;
             opacity: 1;
 
-            .no-touch &:hover {
-                opacity: 0.5;
-            }
+            &:not(&--read-only) {
+                .no-touch &:hover {
+                    cursor: pointer;
+                    opacity: 0.5;
+                }
 
-            &::before,
-            &::after {
-                content: '';
-                background: $setting-color-dark;
-                position: absolute;
-                top: 50%;
-            }
-
-            &::before {
-                width: rem(12);
-                height: rem(2);
-                right: 0;
-                margin-top: rem(-1);
-            }
-
-            &::after {
-                width: rem(2);
-                height: rem(12);
-                right: rem(5);
-                margin-top: rem(-6);
-            }
-
-            &.active {
+                &::before,
                 &::after {
-                    display: none;
+                    content: '';
+                    background: $setting-color-dark;
+                    position: absolute;
+                    top: 50%;
+                }
+
+                &::before {
+                    width: rem(12);
+                    height: rem(2);
+                    right: 0;
+                    margin-top: rem(-1);
+                }
+
+                &::after {
+                    width: rem(2);
+                    height: rem(12);
+                    right: rem(5);
+                    margin-top: rem(-6);
+                }
+
+                &.active {
+                    &::after {
+                        display: none;
+                    }
                 }
             }
         }
@@ -46,6 +48,15 @@
         &__content {
             padding-top: rem(25);
             padding-bottom: rem(15);
+
+            &--option {
+                padding-top: rem(5);
+                padding-bottom: rem(40);
+            }
+        }
+
+        &--with-top-border {
+            border-top: rem(1) dotted $setting-color-lightest;
         }
 
         @content;

@@ -102,6 +102,17 @@
             padding-right: rem(50);
         }
 
+        &--product {
+            font: fw(bold) rem(30)/1.27 $setting-font-family-additional;
+            color: $setting-color-darkest;
+            margin-bottom: rem(12);
+
+            @include helper-breakpoint-media-min($xl-min) {
+                font: fw(bold) rem(38)/1.13 $setting-font-family-additional;
+                margin-bottom: rem(7);
+            }
+        }
+
         @content;
     }
 }

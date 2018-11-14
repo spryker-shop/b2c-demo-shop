@@ -8,20 +8,28 @@
 {% block body %}
 
     {% if data.items is not empty %}
-
-        <div class="pdp-option">
-            <div class="pdp-option__title">{{ 'product.attribute.color' | trans }}</div>
-            <div class="pdp-option__wrapper">
+        {% embed molecule('toggler-item') with {
+            modifiers: ['with-top-border', 'option'],
+            data: {
+                title: 'product.attribute.color' | trans,
+                isToggler: false,
+            },
+            embed: {
+                idProductAbstract: data.idProductAbstract,
+                items: data.items,
+            }
+        } only %}
+            {% block contentText %}
                 {% include molecule('color-selector-pdp', 'ExampleProductColorGroupWidget') with {
                     data: {
-                        items: data.items
+                        items: embed.items
                     },
                     attributes: {
-                        'target-image-selector': '.js-pdp-color-group__image-' ~ data.idProductAbstract ~ ' > img'
+                        'target-image-selector': '.js-pdp-color-group__image-' ~ embed.idProductAbstract ~ ' > img'
                     }
                 } only %}
-            </div>
-        </div>
+            {% endblock %}
+        {% endembed %}
 
     {% endif %}
 

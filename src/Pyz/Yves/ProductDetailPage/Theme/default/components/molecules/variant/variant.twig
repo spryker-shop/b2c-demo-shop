@@ -13,51 +13,63 @@
     isAvailable: true
 } %}
 
-{%- block class -%}variant-wrapper pdp-option{%- endblock -%}
-
 {% block body %}
-    <div class="pdp-option__title">{{data.label}}</div>
-    <div class="pdp-option__wrapper">
-        {% if data.selectedValue is null %}
-            {% if data.isAvailable %}
-                {% embed atom('select') with {
-                    modifiers: ['expand'],
-                    attributes: {
-                        name: data.formName
-                    },
-                    embed: {
-                        values: data.values,
-                        jsClass: config.jsName ~ '__select-trigger'
-                    }
-                } only %}
-                    {% block selectClass -%}
-                        {{ parent() }} {{ embed.jsClass }}
-                    {%- endblock %}
-                    {% block options %}
-                        <option>{{ 'product.attribute._none' | trans }}</option>
-                        {% for value in embed.values %}
-                            <option value="{{value}}">{{value}}</option>
-                        {% endfor %}
-                    {% endblock %}
-                {% endembed %}
-                {% include molecule('form-submitter') with {
-                    attributes: {
-                        'trigger-selector': '.' ~ config.jsName ~ '__select-trigger'
-                    }
-                } only %}
+    {% embed molecule('toggler-item') with {
+        modifiers: ['with-top-border', 'option'],
+        data: {
+            title: data.label,
+            isToggler: false,
+        },
+        embed: {
+            selectedValue: data.selectedValue,
+            isAvailable: data.isAvailable,
+            formName: data.formName,
+            values: data.values,
+        }
+    } only %}
+        {% block contentText %}
+            {% if embed.selectedValue is null %}
+                {% if embed.isAvailable %}
+                    {% embed atom('select') with {
+                        modifiers: ['expand'],
+                        attributes: {
+                            name: embed.formName,
+                        },
+                        embed: {
+                            values: embed.values,
+                            jsClass: config.jsName ~ '__select-trigger'
+                        }
+                    } only %}
+                        {% block selectClass -%}
+                            {{ parent() }} {{ embed.jsClass }}
+                        {%- endblock %}
+                        {% block options %}
+                            <option>{{ 'product.attribute._none' | trans }}</option>
+                            {% for value in embed.values %}
+                                <option value="{{value}}">{{value}}</option>
+                            {% endfor %}
+                        {% endblock %}
+                    {% endembed %}
+                    {% include molecule('form-submitter') with {
+                        attributes: {
+                            'trigger-selector': '.' ~ config.jsName ~ '__select-trigger'
+                        }
+                    } only %}
+                {% else %}
+                    {{ 'product.attribute.not_available' | trans }}
+                {% endif %}
             {% else %}
-                {{ 'product.attribute.not_available' | trans }}
+                {{embed.selectedValue}}
+                <a href="?" class="spacing-left">
+                    {%- include atom('icon') with {
+                        modifiers: ['secondary'],
+                        data: {
+                            name: 'close'
+                        }
+                    } only -%}
+                </a>
+                <input type="hidden" name="{{embed.formName}}" value="{{embed.selectedValue}}" />
             {% endif %}
-        {% else %}
-            {{data.selectedValue}}
-            <a href="?" class="pdp-option__reset">
-                {% include atom('icon') with {
-                    data: {
-                        name: 'close'
-                    }
-                } only %}
-            </a>
-            <input type="hidden" name="{{data.formName}}" value="{{data.selectedValue}}" />
-        {% endif %}
-    </div>
+        {% endblock %}
+    {% endembed %}
 {% endblock %}
