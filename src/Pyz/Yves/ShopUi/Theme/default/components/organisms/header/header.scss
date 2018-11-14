@@ -2,7 +2,6 @@
     #{$name} {
         position: relative;
         background-color: $setting-color-white;
-        padding-bottom: 0;
         z-index: $setting-zi-header;
         padding-top: rem(18);
 
@@ -26,12 +25,13 @@
         }
 
         &__navigation-main {
-            z-index: $setting-zi-header + 1;
             position: relative;
+            z-index: $setting-zi-header + 1;
         }
 
         &__overlay-shadow {
-            background: $setting-color-black;
+            @include helper-effect-transition(opacity visibility, 400ms, ease-in-out);
+            background-color: $setting-color-black;
             position: fixed;
             top: 0;
             left: 0;
@@ -39,7 +39,6 @@
             width: 100%;
             z-index: -1;
             opacity: 0;
-            transition: opacity 400ms ease-in-out, visibility 400ms ease-in-out 400ms;
             visibility: hidden;
         }
 
