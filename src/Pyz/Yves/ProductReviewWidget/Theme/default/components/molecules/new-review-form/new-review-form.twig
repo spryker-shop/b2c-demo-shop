@@ -20,25 +20,24 @@
                         action: '#review'
                     },
                     layout: {
-                        'summary': 'col col--sm-12 ' ~ config.name ~ '__field ' ~ config.name ~ '__field-summary',
-                        'description': 'col col--sm-12 ' ~ config.name ~ '__field',
-                        'nickname': 'col col--sm-12 ' ~ config.name ~ '__field'
+                        'summary': 'col col--sm-12 form__field--review form__field--review-summary',
+                        'description': 'col col--sm-12 form__field--review',
+                        'nickname': 'col col--sm-12 form__field--review'
                     },
                     submit: {
                         enable: true,
-                        class: 'button button--primary ' ~ config.name ~ '__send-review'
+                        class: 'button button--primary button--send-review'
                     }
                 },
                 embed: {
                     title: 'product_review.submit.add_a_review' | trans,
-                    jsName: config.jsName,
-                    name: config.name
+                    jsName: config.jsName
                 }
             } only %}
                 {% block title %}
                     <div class="popup__top popup__top--bottom-indent">
                         {% if embed.title is not empty %}
-                            <h5 class="popup__title">{{ embed.title }}</h5>
+                            <h5 class="title title--popup-review is-hidden-sm-md">{{ embed.title }}</h5>
                         {% endif %}
                         {% include atom('icon') with {
                             class: 'popup__close ' ~ embed.jsName ~ '__trigger',
@@ -51,7 +50,7 @@
 
                 {% block field %}
                     {% if fieldName == 'rating' %}
-                        <div class="form__field col col--sm-12 {{ embed.name }}__field {{ embed.name }}__field-rating">
+                        <div class="form__field col col--sm-12 form__field--review form__field--review-rating">
                             {% do field.setRendered %}
                             <label>
                                 {{form_label(field)}}

@@ -1,9 +1,33 @@
 $shop-ui-form-field-margin: rem(8);
+$review-rating-field-width: rem(154);
 
 @mixin shop-ui-form($name: '.form') {
     #{$name} {
         &__field {
             padding: 0 rem(16) rem(27);
+
+            &--review {
+                padding: 0 0 rem(25);
+
+                @include helper-breakpoint-media-min($md-min) {
+                    padding: 0 0 rem(28);
+                }
+            }
+
+            &--review-summary {
+                @include helper-breakpoint-media-min($md-min) {
+                    min-width: 0;
+                    width: calc(100% - #{$review-rating-field-width});
+                }
+            }
+
+            &--review-rating {
+                @include helper-breakpoint-media-min($md-min) {
+                    min-width: 0;
+                    width: auto;
+                    margin: rem(20) 0 0 auto;
+                }
+            }
         }
 
         &__actions {
