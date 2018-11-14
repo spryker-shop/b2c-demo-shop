@@ -69,7 +69,6 @@
                             {% if item.available and item.price is not null %}
                                 <li class="menu__item">
                                     <form id="addToCart_{{ loop.index }}"
-                                        class=""
                                         method="POST"
                                         action="{{ path('wishlist/move-to-cart', {sku: item.sku, 'wishlist-name': data.wishlistName}) }}"
                                     >
@@ -81,7 +80,6 @@
                             {% endif %}
                             <li class="menu__item float-right spacing-y">
                                 <form id="deleteWishlistItem_{{ loop.index }}"
-                                    class=""
                                     method="POST"
                                     action="{{ path('wishlist/remove-item', {sku: item.sku, 'wishlist-name': data.wishlistName}) }}"
                                 >
