@@ -1,8 +1,7 @@
 $color-selector-size: rem(16);
 
-@mixin color-group-color-selector() {
-    .color-selector,
-    .color-selector-pdp {
+@mixin color-group-color-selector($name: '.color-selector') {
+    #{$name} {
         cursor: default;
 
         &__color {
@@ -29,32 +28,6 @@ $color-selector-size: rem(16);
                 margin-right: rem(4);
             }
 
-            .color-tooltip {
-                @include helper-effect-transition(all);
-                transform: scale(0);
-                transform-origin: bottom;
-                position: absolute;
-                top: rem(-43);
-                left: rem(-15);
-                background: $setting-color-darkest;
-                color: $setting-color-white;
-                font: 300 rem(16) $setting-font-family;
-                padding: rem(5) rem(11) rem(7) rem(10);
-                white-space: nowrap;
-                border-radius: rem(2);
-                &::before {
-                    content: '';
-                    position: absolute;
-                    left: rem(17);
-                    bottom: rem(-4);
-                    border-radius: rem(2);
-                    background: $setting-color-darkest;
-                    width: rem(10);
-                    height: rem(10);
-                    transform: rotate(45deg);
-                }
-            }
-
             &:hover,
             &--active {
                 &::before {
@@ -64,8 +37,35 @@ $color-selector-size: rem(16);
                 }
             }
 
-            &:hover .color-tooltip {
+            &:hover #{$name}__tooltip {
                 transform: scale(1);
+            }
+        }
+
+        &__tooltip {
+            @include helper-effect-transition(all);
+            transform: scale(0);
+            transform-origin: bottom;
+            position: absolute;
+            top: rem(-43);
+            left: rem(-15);
+            background: $setting-color-darkest;
+            color: $setting-color-white;
+            font: 300 rem(16) $setting-font-family;
+            padding: rem(5) rem(11) rem(7) rem(10);
+            white-space: nowrap;
+            border-radius: rem(2);
+
+            &::before {
+                content: '';
+                position: absolute;
+                left: rem(17);
+                bottom: rem(-4);
+                border-radius: rem(2);
+                background: $setting-color-darkest;
+                width: rem(10);
+                height: rem(10);
+                transform: rotate(45deg);
             }
         }
     }
