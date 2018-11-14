@@ -29,38 +29,6 @@ $button-min-width: rem(177);
             text-decoration: none;
         }
 
-        &[disabled],
-        &--disabled {
-            background-color: $setting-color-gray-3;
-            cursor: not-allowed;
-
-            &:hover,
-            &:focus,
-            &:active {
-                background-color: $setting-color-gray-3;
-            }
-        }
-
-        &--hollow {
-            padding: rem(15) rem(16);
-            background-color: $setting-color-white;
-            border: rem(1) solid $setting-color-darkest;
-            color: $setting-color-darkest;
-
-            &[disabled],
-            &--disabled {
-                background-color: $setting-color-white;
-                border-color: $setting-color-gray-3;
-                color: $setting-color-gray-3;
-
-                &:hover,
-                &:focus,
-                &:active {
-                    background-color: $setting-color-white;
-                }
-            }
-        }
-
         &--alert {
             background-color: map-get($setting-color-actions, alert);
             border-color: map-get($setting-color-actions, alert);
@@ -80,27 +48,6 @@ $button-min-width: rem(177);
                 background-color: transparent;
                 color: $setting-color-black;
             }
-        }
-
-        &--agent {
-            min-width: rem(79);
-        }
-
-        &--combined {
-            border-radius: 0 rem(2) rem(2) 0;
-            min-width: rem(113);
-            font-weight: fw(regular);
-            font-size: rem(13);
-        }
-
-        &--expand {
-            width: 100%;
-        }
-
-        &--large {
-            padding: rem(19);
-            font-weight: fw(medium);
-            font-size: rem(16);
         }
 
         &--send-review {
@@ -155,6 +102,59 @@ $button-min-width: rem(177);
                 color: $setting-color-pacific-blue;
                 background-color: $setting-color-transparent;
             }
+        }
+
+        &[disabled],
+        &--disabled {
+            background-color: $setting-color-gray-3;
+            cursor: not-allowed;
+
+            &:hover,
+            &:focus,
+            &:active {
+                background-color: $setting-color-gray-3;
+            }
+        }
+
+        &--hollow {
+            padding: rem(15) rem(16);
+            background-color: $setting-color-white;
+            border: rem(1) solid $setting-color-darkest;
+            color: $setting-color-darkest;
+
+            &[disabled],
+            &--disabled {
+                background-color: $setting-color-white;
+                border-color: $setting-color-gray-3;
+                color: $setting-color-gray-3;
+
+                &:hover,
+                &:focus,
+                &:active {
+                    background-color: $setting-color-white;
+                }
+            }
+        }
+
+        &--agent {
+            min-width: rem(79);
+        }
+
+        &--combined {
+            border-radius: 0 rem(2) rem(2) 0;
+            min-width: rem(113);
+            font-weight: fw(regular);
+            font-size: rem(13);
+        }
+
+        &--expand {
+            width: 100%;
+        }
+
+        &--large {
+            padding: rem(19);
+            font-weight: fw(medium);
+            font-size: rem(16);
         }
 
         @content;
