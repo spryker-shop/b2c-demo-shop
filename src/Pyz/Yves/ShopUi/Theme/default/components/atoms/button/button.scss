@@ -33,13 +33,6 @@
             background-color: $setting-color-white;
             border: rem(1) solid $setting-color-darkest;
             color: $setting-color-darkest;
-
-            &[disabled],
-            &--disabled {
-                background-color: $setting-color-white !important;
-                border-color: $setting-color-gray-3 !important;
-                color: $setting-color-gray-3 !important;
-            }
         }
 
         &--secondary {
@@ -164,6 +157,13 @@
             &:hover,
             &:focus {
                 background-color: $setting-color-light;
+            }
+
+            &#{$name}--hollow,
+            &#{$name}--secondary {
+                background-color: $setting-color-white;
+                border-color: $setting-color-gray-3;
+                color: $setting-color-gray-3;
             }
         }
     }

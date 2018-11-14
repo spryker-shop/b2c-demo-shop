@@ -4,11 +4,13 @@ export default class QuantityCounter extends Component {
     quantityInput: HTMLInputElement;
     decrButton: HTMLButtonElement;
     incrButton: HTMLButtonElement;
+    value: number;
 
     protected readyCallback(): void {
         this.quantityInput = <HTMLInputElement>this.querySelector(`.${this.jsName}__input`);
         this.decrButton = <HTMLButtonElement>this.querySelector(`.${this.jsName}__decr`);
         this.incrButton = <HTMLButtonElement>this.querySelector(`.${this.jsName}__incr`);
+        this.value = this.getValue;
 
         this.mapEvents();
         this.setMaxQuantityToInfinity();
@@ -23,7 +25,7 @@ export default class QuantityCounter extends Component {
     protected onDecrButtonClick(): void {
         let value: number = +this.quantityInput.value;
 
-        if(value > +this.minQuantity) {
+        if(value > this.minQuantity) {
             this.quantityInput.value = (value - 1).toString();
 
             this.autoUpdateOnChange();
@@ -33,7 +35,7 @@ export default class QuantityCounter extends Component {
     protected onIncrButtonClick(): void {
         let value: number = +this.quantityInput.value;
 
-        if(value < +this.maxQuantity) {
+        if(value < this.maxQuantity) {
             this.quantityInput.value = (value + 1).toString();
 
             this.autoUpdateOnChange();
@@ -49,7 +51,11 @@ export default class QuantityCounter extends Component {
     protected timer(): void {
         let timeout = null;
         clearTimeout(timeout);
-        timeout = setTimeout(() => this.quantityInput.form.submit(), 1000);
+        timeout = setTimeout(() => {
+            if(this.value !== this.getValue) {
+                this.quantityInput.form.submit();
+            }
+        }, 1000);
     }
 
     protected setMaxQuantityToInfinity(): void {
@@ -58,15 +64,19 @@ export default class QuantityCounter extends Component {
         }
     }
 
-    get maxQuantity(): string {
-        return this.quantityInput.getAttribute('data-max-quantity');
+    get maxQuantity(): number {
+        return +this.quantityInput.getAttribute('data-max-quantity');
     }
 
-    get minQuantity(): string {
-        return this.quantityInput.getAttribute('data-min-quantity');
+    get minQuantity(): number {
+        return +this.quantityInput.getAttribute('data-min-quantity');
     }
 
     get autoUpdate(): string {
         return this.quantityInput.getAttribute('data-auto-update');
+    }
+
+    get getValue(): number {
+        return +this.quantityInput.value;
     }
 }
