@@ -1,4 +1,5 @@
-$color-selector-size: rem(16);
+$color-selector-size: 16;
+$selector-border-size: 2;
 
 @mixin color-group-color-selector($name: '.color-selector') {
     #{$name} {
@@ -6,9 +7,10 @@ $color-selector-size: rem(16);
 
         &__color {
             display: inline-block;
-            width: $color-selector-size;
-            height: $color-selector-size;
+            width: rem($color-selector-size);
+            height: rem($color-selector-size);
             border-radius: 100%;
+            border: rem($selector-border-size) solid $setting-color-white;
             vertical-align: middle;
             position: relative;
 
@@ -18,10 +20,11 @@ $color-selector-size: rem(16);
                 left: 50%;
                 top: 50%;
                 transform: translate(-50%, -50%);
-                width: rem(18);
-                height: rem(18);
-                border: solid rem(4) $setting-color-white;
+                width: rem($color-selector-size - 2);
+                height: rem($color-selector-size - 2);
+                border: solid rem($selector-border-size) $setting-color-white;
                 border-radius: 100%;
+                visibility: hidden;
             }
 
             &:not(:last-child) {
@@ -30,10 +33,9 @@ $color-selector-size: rem(16);
 
             &:hover,
             &--active {
+                border: unset;
                 &::before {
-                    width: rem(14);
-                    height: rem(14);
-                    border-width: rem(2);
+                    visibility: visible;
                 }
             }
 
