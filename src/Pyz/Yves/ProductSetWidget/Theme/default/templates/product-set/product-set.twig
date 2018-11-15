@@ -55,7 +55,7 @@
                     {% endif %}
                 {% endfor %}
 
-                <button type="submit" class="button button--primary float-right" {% if isDisabled %}disabled{% endif %}>
+                <button type="submit" class="button  float-right" {% if isDisabled %}disabled{% endif %}>
                     {{ 'product.set.detail.add-all-to-cart' | trans }}
                 </button>
             {% endif %}
@@ -136,7 +136,7 @@
                                 {% endif %}
                                 {% set isDisabled = not embed.product.idProductConcrete or not embed.product.available %}
 
-                                <a href="{{ isDisabled ? 'javascript:void(0)' : path('cart/add', {sku: embed.product.sku}) }}" class="button button--primary button--expand product-set-slider__button-add-to-cart" {% if isDisabled %}disabled{% endif %}>
+                                <a href="{{ isDisabled ? 'javascript:void(0)' : path('cart/add', {sku: embed.product.sku}) }}" class="button  button--expand product-set-slider__button-add-to-cart" {% if isDisabled %}disabled{% endif %}>
                                     {{ 'page.detail.add-to-cart' | trans }}
                                 </a>
                             {% endblock %}

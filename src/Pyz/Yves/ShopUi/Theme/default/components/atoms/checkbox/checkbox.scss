@@ -40,9 +40,14 @@
         &__input:checked + #{$name}__box {
             border: rem(1) solid $setting-color-main;
             background-color: $setting-color-main;
-            & + .checkbox__check {
+
+            & + #{$name}__check {
                 @include helper-visibility-visible;
             }
+        }
+
+        &__label {
+            line-height: rem(18);
         }
 
         &--expand {
@@ -55,12 +60,8 @@
 
         &[disabled] &__box,
         &--disabled &__box {
-            background-color: $setting-color-lighter;
+            background-color: $setting-color-gray-6;
             cursor: not-allowed;
-        }
-
-        &__label {
-            line-height: rem(18);
         }
 
         @content;

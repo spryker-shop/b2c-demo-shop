@@ -1,20 +1,20 @@
 @mixin shop-ui-product-slider-title ($name: '.product-slider-title') {
     #{$name} {
-        margin: rem(45) 0 rem(90);
+        margin: rem(30) 0;
         display: flex;
         flex-wrap: nowrap;
         justify-content: space-between;
         align-items: center;
         padding: 0 rem(16);
 
-        @include helper-breakpoint-media-max($md-max) {
-            margin: rem(30) 0;
+        @include helper-breakpoint-media-min($md-min) {
+            margin: rem(45) 0 rem(90);
         }
 
         &::after {
             content: '';
             order: 2;
-            border-top: rem(1) solid $setting-color-lightest-1;
+            border-top: rem(1) solid $setting-color-gray-6;
             flex: 1;
             margin-left: rem(50);
         }
@@ -22,6 +22,15 @@
         &__sub-col {
             order: 3;
             margin-left: rem(50);
+        }
+
+        &--pdp-review {
+            padding: 0;
+            margin: rem(100) 0 rem(34);
+
+            @include helper-breakpoint-media-min($md-min) {
+                margin: rem(130) 0 rem(70);
+            }
         }
     }
 }

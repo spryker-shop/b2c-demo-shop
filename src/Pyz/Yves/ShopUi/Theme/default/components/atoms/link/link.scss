@@ -1,7 +1,7 @@
 @include shop-ui-link {
     &--darkest {
         @include helper-effect-transition(all);
-        color: $setting-color-darkest;
+        color: $setting-color-black;
     }
 
     &--checkout-success {
@@ -10,7 +10,7 @@
 
     &--login-forgot-password {
         margin-top: rem(20);
-        font: normal rem(14)/1.7 $setting-font-family-additional;
+        font: fw(regular) rem(14)/rem(23) $setting-font-family-additional;
 
         @include helper-breakpoint-media-min($md-min) {
             margin-top: rem(16);
@@ -18,11 +18,12 @@
     }
 
     &--edit {
-        font: 300 rem(13) $setting-font-family-additional;
+        font: fw(light) rem(13) $setting-font-family-additional;
         opacity: 0.4;
         margin-top: rem(16);
 
-        &:hover {
+        &:hover,
+        &:focus {
             text-decoration: none;
             color: inherit;
             opacity: 1;
@@ -31,7 +32,7 @@
 
     &--custom-underline {
         @include helper-effect-transition(opacity);
-        font: bold rem(11)/normal $setting-font-family-additional;
+        font: fw(bold) rem(11) $setting-font-family-additional;
         letter-spacing: rem(2.7);
         text-transform: uppercase;
         position: relative;
@@ -39,7 +40,8 @@
         color: $setting-color-text;
         padding: rem(9) 0;
 
-        &:hover {
+        &:hover,
+        &:focus {
             text-decoration: none;
             color: $setting-color-text;
             opacity: 0.5;
