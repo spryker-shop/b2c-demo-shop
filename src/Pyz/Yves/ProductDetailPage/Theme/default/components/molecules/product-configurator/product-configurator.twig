@@ -108,7 +108,7 @@
             {% endif %}
 
             <div class="{{ config.name }}__button-wrap">
-                <button type="submit" class="button button--primary button--expand {{ config.jsName ~ '__button' }}" {{ isDisabled ? 'disabled' : '' }} {{qa('add-to-cart-button')}}>
+                <button type="submit" class="button button--large button--expand {{ config.jsName ~ '__button' }}" {{ isDisabled ? 'disabled' : '' }} {{qa('add-to-cart-button')}}>
                     {{ 'page.detail.add-to-cart' | trans }}
                 </button>
                 {% include molecule('action-single-click-enforcer') with {

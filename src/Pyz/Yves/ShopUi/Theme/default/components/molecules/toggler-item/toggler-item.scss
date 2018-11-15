@@ -43,6 +43,17 @@
                     }
                 }
             }
+
+            &--bundle {
+                padding-left: rem(11);
+
+                &:not(&--read-only) {
+                    &::before,
+                    &::after {
+                        transform: translateX(rem(-11));
+                    }
+                }
+            }
         }
 
         &__content {
@@ -52,6 +63,11 @@
             &--option {
                 padding-top: rem(5);
                 padding-bottom: rem(40);
+            }
+
+            &--bundle {
+                padding-left: rem(11);
+                padding-right: rem(11);
             }
         }
 
