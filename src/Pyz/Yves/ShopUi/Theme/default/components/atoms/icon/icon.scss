@@ -1,56 +1,48 @@
-@mixin icon($name: '.icon') {
-    @include shop-ui-icon($name);
-
-    #{$name} {
-        &--inherit {
-            display: block;
-            width: inherit;
-            height: inherit;
-        }
-
-        &--medium {
-            width: rem(10);
-            height: rem(10);
-        }
-
-        &--medium-up {
-            width: rem(18);
-            height: rem(18);
-        }
-
-        &--secondary {
-            width: rem(12);
-            height: rem(12);
-        }
-
-        &--close-filter {
-            position: absolute;
-            right: rem(10);
-            top: 50%;
-            transform: translateY(-50%);
-        }
-
-        &--thumbnail-arrow {
-            display: block;
-            width: 100%;
-            height: 6px;
-            color: $setting-color-dark;
-        }
-
-        &--reverse {
-            transform: rotate(180deg);
-        }
-
-        &--checkout-success {
-            margin-top: rem(-2);
-        }
-
-        &--to-cart {
-            margin-top: rem(-1);
-        }
-
-        @content;
+@include shop-ui-icon {
+    &--inherit {
+        display: block;
+        width: inherit;
+        height: inherit;
     }
-}
 
-@include icon();
+    &--medium {
+        width: rem(10);
+        height: rem(10);
+    }
+
+    &--medium-up {
+        width: rem(18);
+        height: rem(18);
+    }
+
+    &--close-filter {
+        position: absolute;
+        right: rem(10);
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    &--secondary {
+        width: rem(12);
+        height: rem(12);
+    }
+
+    &--thumbnail-arrow {
+        display: block;
+        width: 100%;
+        height: rem(6);
+        color: $setting-color-dark;
+    }
+
+    &--reverse {
+        transform: rotate(180deg);
+    }
+
+    &--checkout-success {
+        margin-top: rem(-2);
+    }
+
+    &--to-cart {
+        margin-top: rem(-1);
+    }
+};
