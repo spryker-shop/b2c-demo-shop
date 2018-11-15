@@ -27,7 +27,7 @@
             href="{{ item.url }}"
             data-image-src="{{ image ? image.externalUrlSmall : '' }}"
             {% if item.colorCode %}style="background-color:{{ item.colorCode }};"{% endif %}>
-            <span class="color-tooltip">{{ item.attributes.color }}</span>
+            <span class="{{ config.name }}__tooltip">{{ item.attributes.color }}</span>
         </a>
     {% endfor %}
 {% endblock %}
