@@ -3,10 +3,10 @@
         position: relative;
 
         &__container {
-            height: rem(650);
             position: relative;
             z-index: $setting-zi-element;
             background: $setting-color-white;
+            display: none;
 
             &::before {
                 content: '';
@@ -19,9 +19,9 @@
                 z-index: $setting-zi-element + 1;
             }
 
-            @include helper-breakpoint-media-max($md-max) {
-                display: none;
-                height: rem(280);
+            @include helper-breakpoint-media-min($lg-min) {
+                display: block;
+                height: rem(650);
             }
         }
 
@@ -30,9 +30,9 @@
             position: absolute;
             left: 0;
             top: 0;
-            padding: rem(100) rem(70);
+            height: rem(280);
+            padding: rem(15) rem(16);
             width: 100%;
-            height: rem(650);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -44,29 +44,29 @@
                 opacity: 1;
             }
 
-            @include helper-breakpoint-media-max($xl-max) {
-                padding: rem(80) rem(50);
-                height: rem(610);
-            }
-
-            @include helper-breakpoint-media-max($lg-max) {
+            @include helper-breakpoint-media-min($lg-min) {
                 padding: rem(15) rem(30);
                 height: rem(480);
             }
 
-            @include helper-breakpoint-media-max($md-max) {
-                width: 100%;
-                height: rem(280);
-                padding: rem(15) rem(16);
+            @include helper-breakpoint-media-min($xl-min) {
+                padding: rem(100) rem(70);
+                height: rem(650);
+            }
+
+            @include helper-breakpoint-media-min($xxl-min) {
+                padding: rem(80) rem(50);
+                height: rem(610);
             }
         }
 
         &__image {
             max-width: 100%;
-            max-height: 100%;
+            max-height: rem(250);
 
-            @include helper-breakpoint-media-max($md-max) {
-                max-height: rem(250);
+            @include helper-breakpoint-media-min($lg-min) {
+                max-height: 100%;
+
             }
         }
 

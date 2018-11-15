@@ -1,51 +1,82 @@
 import Component from 'ShopUi/models/component';
-import $ from 'jquery/dist/jquery';
 
 export default class QuantityCounter extends Component {
-
-    timeout = null;
+    quantityInput: HTMLInputElement;
+    decrButton: HTMLButtonElement;
+    incrButton: HTMLButtonElement;
+    value: number;
 
     protected readyCallback(): void {
+        this.quantityInput = <HTMLInputElement>this.querySelector(`.${this.jsName}__input`);
+        this.decrButton = <HTMLButtonElement>this.querySelector(`.${this.jsName}__decr`);
+        this.incrButton = <HTMLButtonElement>this.querySelector(`.${this.jsName}__incr`);
+        this.value = this.getValue;
 
-        const input = $(this).find(`.${this.name}__input`);
-        let maxQuantity = input.data('max-quantity');
-        const decrButton = $(this).find('.js-quantity-decr');
-        const incrButton = $(this).find('.js-quantity-incr');
-        const autoUpdate = input.data('auto-update');
-        const form = $(this).closest('.js-quantity-form');
+        this.mapEvents();
+        this.setMaxQuantityToInfinity();
+    }
 
+    protected mapEvents(): void {
+        this.quantityInput.addEventListener('change', () => this.autoUpdateOnChange());
+        this.decrButton.addEventListener('click', () => this.onDecrButtonClick());
+        this.incrButton.addEventListener('click', () => this.onIncrButtonClick());
+    }
 
-        if(!maxQuantity){
-            maxQuantity = Infinity;
-        }
-        decrButton.click(() => {
-            let value = +input.val();
-            if(value > 1){
-                input.val(value - 1);
+    protected onDecrButtonClick(): void {
+        let value: number = +this.quantityInput.value;
 
-                if(autoUpdate) {
-                    this.timer(form);
-                }
-            }
-        });
-        incrButton.click(() => {
-            let value = +input.val();
-            if(value < maxQuantity) {
-                input.val(value + 1);
+        if(value > this.minQuantity) {
+            this.quantityInput.value = (value - 1).toString();
 
-                if(autoUpdate) {
-                    this.timer(form);
-                }
-            }
-        });
-
-        if(autoUpdate) {
-            input.change(() => this.timer(form));
+            this.autoUpdateOnChange();
         }
     }
 
-    protected timer(form): void {
-        clearTimeout(this.timeout);
-        this.timeout = setTimeout(() => form.submit(), 1000);
+    protected onIncrButtonClick(): void {
+        let value: number = +this.quantityInput.value;
+
+        if(value < this.maxQuantity) {
+            this.quantityInput.value = (value + 1).toString();
+
+            this.autoUpdateOnChange();
+        }
+    }
+
+    protected autoUpdateOnChange(): void {
+        if(this.autoUpdate) {
+            this.timer();
+        }
+    }
+
+    protected timer(): void {
+        let timeout = null;
+        clearTimeout(timeout);
+        timeout = setTimeout(() => {
+            if(this.value !== this.getValue) {
+                this.quantityInput.form.submit();
+            }
+        }, 1000);
+    }
+
+    protected setMaxQuantityToInfinity(): void {
+        if(!this.maxQuantity) {
+            this.quantityInput.setAttribute('data-max-quantity', 'Infinity');
+        }
+    }
+
+    get maxQuantity(): number {
+        return +this.quantityInput.getAttribute('data-max-quantity');
+    }
+
+    get minQuantity(): number {
+        return +this.quantityInput.getAttribute('data-min-quantity');
+    }
+
+    get autoUpdate(): string {
+        return this.quantityInput.getAttribute('data-auto-update');
+    }
+
+    get getValue(): number {
+        return +this.quantityInput.value;
     }
 }

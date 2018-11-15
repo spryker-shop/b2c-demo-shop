@@ -119,7 +119,12 @@
             text-transform: uppercase;
             display: block;
             word-break: break-word;
-            @include helper-link-hover-reset;
+
+            &:hover {
+                text-decoration: none;
+                color: inherit;
+            }
+
             &--lg {
                 padding: rem(35) 0 0 rem(87);
                 @include helper-breakpoint-media-max($sm-max) {
