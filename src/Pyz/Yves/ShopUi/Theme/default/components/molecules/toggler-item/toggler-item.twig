@@ -8,16 +8,18 @@
     title: required,
     text: '',
     triggerClass: '',
-    targetClass: ''
+    targetClass: '',
+    isActive: false,
+    isToggler: true,
 } %}
 
 {% block body %}
     {% block title %}
-        <h4 class="{{ config.name }}__title {{ data.triggerClass }}" data-toggle-target=".{{ data.targetClass }}">{{ data.title }}</h4>
+        <h4 class="{{ component.renderClass(config.name ~ '__title', modifiers) }} {{ data.triggerClass }} {% if data.isActive %} active {% endif %} {% if not data.isToggler %} {{ config.name }}__title--read-only {% endif %}" {% if data.targetClass is not empty %}data-toggle-target=".{{ data.targetClass }}"{% endif %}>{{ data.title }}</h4>
     {% endblock %}
 
     {% block content %}
-        <div class="{{ config.name }}__content is-hidden {{ data.targetClass }}">
+        <div class="{{ component.renderClass(config.name ~ '__content', modifiers) }} {{ data.targetClass }} {% if data.isToggler %}{% if data.isActive %} active {% else %} is-hidden {% endif %}{% endif %}">
             {% block contentText %}{{ data.text }}{% endblock %}
         </div>
     {% endblock %}
