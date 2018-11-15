@@ -51,21 +51,14 @@
         height: rem(208);
         margin-left: 0;
         margin-right: 0;
-        &--product-set {
-            height: rem(208);
-            margin-left: 0;
-            margin-right: 0;
+    }
+
+    &--wishlist {
+        display: inline-block;
+        margin-right: rem(10);
+
+        @include helper-breakpoint-media-max($sm-max) {
+            height: rem(32);
         }
-
-        &--wishlist {
-            display: inline-block;
-            margin-right: rem(10);
-
-            @include helper-breakpoint-media-max($sm-max) {
-                height: rem(32);
-            }
-        }
-
-        @content;
     }
 };
