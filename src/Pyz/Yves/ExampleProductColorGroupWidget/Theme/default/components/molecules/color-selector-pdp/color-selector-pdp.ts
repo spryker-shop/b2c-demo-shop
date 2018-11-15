@@ -40,7 +40,7 @@ export default class ColorSelectorPdp extends Component {
             const imgWrapper = <HTMLElement>image.parentNode;
             if (image.src !== newImageSrc) {
                 image.src = newImageSrc;
-                imgWrapper.classList.add('pdp-img-color-active');
+                imgWrapper.classList.add(`${imgWrapper.classList[0]}--active`);
             }
         });
     }
@@ -62,7 +62,7 @@ export default class ColorSelectorPdp extends Component {
     removeImage(): void {
         this.images.forEach((image: HTMLImageElement) => {
             const imgWrapper = <HTMLElement>image.parentNode;
-            imgWrapper.classList.remove('pdp-img-color-active');
+            imgWrapper.classList.remove(`${imgWrapper.classList[0]}--active`);
         });
     }
 
