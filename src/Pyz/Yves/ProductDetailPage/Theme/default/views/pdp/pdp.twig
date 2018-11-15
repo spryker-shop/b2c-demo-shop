@@ -20,18 +20,18 @@
 {% endblock %}
 
 {% block pageInfo %}{% endblock %}
-{% block contentClass %} page-layout-main page-layout-main--pdp {% endblock %}
+{% block contentClass %} page-layout-main {% endblock %}
 {% block content %}
     <div class="container__inner">
         <div class="grid">
             {% include molecule('product-carousel', 'ProductDetailPage') with {
-                class: 'col page-layout-main__content',
+                class: 'col page-layout-main__content-pdp',
                 data: {
                     product: data.product
                 }
             } only %}
 
-            <div class="col page-layout-main__sidebar">
+            <div class="col page-layout-main__sidebar-pdp">
                 {% include molecule('product-configurator', 'ProductDetailPage') with {
                     data: {
                         product: data.product,
