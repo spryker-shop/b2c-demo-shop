@@ -65,7 +65,9 @@
         } only %}
     {% endif %}
 
-    {{ widget('ProductReviewWidgetPlugin', data.product.idProductAbstract) }}
+    <div class="container__inner">
+        {{ widget('ProductReviewWidgetPlugin', data.product.idProductAbstract) }}
+    </div>
 
     {% if data.product.productSetIds is not empty %}
         {{ widget('ProductSetIdsWidgetPlugin', data.product.productSetIds) }}

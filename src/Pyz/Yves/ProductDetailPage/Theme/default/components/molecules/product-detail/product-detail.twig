@@ -29,7 +29,7 @@
             {% if embed.description is not empty %}
                 {{ embed.description }}
             {% endif %}
-            <div class="pdp-option__sku">{{ 'product.attribute.sku' | trans }}: {{ embed.sku }}</div>
+            <div class="spacing-top spacing-top--bigger">{{ 'product.attribute.sku' | trans }}: {{ embed.sku }}</div>
         {% endblock %}
     {% endembed %}
 
@@ -49,8 +49,8 @@
             <div class="grid">
                 {% for name, value in embed.attributes if name %}
                     <div class="col col--sm-6 pdp-option__detail" itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue">
-                        <div class="pdp-option__detail-name" itemprop="name">{{ ('product.attribute.' ~ name) | trans }}</div>
-                        <div class="pdp-option__detail-value" itemprop="value">{{ value }}</div>
+                        <div itemprop="name"><b>{{ ('product.attribute.' ~ name) | trans }}</b></div>
+                        <div itemprop="value">{{ value }}</div>
                     </div>
                 {% endfor %}
             </div>

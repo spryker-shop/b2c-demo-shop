@@ -94,7 +94,7 @@
                 } only %}
                     {% block contentText %}
                         {% include molecule('quantity-counter') with {
-                            modifiers: ['quantity-large'],
+                            modifiers: ['quantity-large', 'no-spacing'],
                             data: {
                                 readOnly: true
                             }
@@ -107,7 +107,7 @@
                 {{ widget('AvailabilityWidgetPlugin', data.product) }}
             {% endif %}
 
-            <div class="add-to-cart">
+            <div class="{{ config.name }}__button-wrap">
                 <button type="submit" class="button button--primary button--expand {{ config.jsName ~ '__button' }}" {{ isDisabled ? 'disabled' : '' }} {{qa('add-to-cart-button')}}>
                     {{ 'page.detail.add-to-cart' | trans }}
                 </button>
