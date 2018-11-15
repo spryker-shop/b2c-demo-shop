@@ -36,7 +36,15 @@
 
     <div class="grid grid--justify spacing-bottom spacing-bottom--bigger">
         {{ widgetBlock('ProductReviewWidgetPlugin', 'rating', data.product.idProductAbstract) }}
-        {{ widget('PriceWidgetPlugin', data.product) }}
+        <div class="col text-right">
+            {% include molecule('price') with {
+                modifiers: ['pdp'],
+                data: {
+                    amount: data.product.price | money,
+                    originalAmount: data.product.prices.ORIGINAL is not defined ? null : data.product.prices.ORIGINAL | money
+                }
+            } only %}
+        </div>
     </div>
 
     {% if data.isBundle != null %}
