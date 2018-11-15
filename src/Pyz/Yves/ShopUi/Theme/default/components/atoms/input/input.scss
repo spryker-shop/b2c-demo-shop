@@ -1,37 +1,7 @@
-@mixin shop-ui-input($name: '.input') {
-    #{$name} {
-        @include helper-effect-transition(border-color);
-        display: inline-block;
-        font: normal rem(16) $setting-font-family;
-        color: $setting-color-dark;
-        padding: rem(14) rem(8);
-        border: rem(1) solid $setting-color-input-border;
-        border-radius: rem(2);
-
-        &:focus {
-            border-color: $setting-color-input-border-focus;
-        }
-
-        &::placeholder {
-            color: $setting-color-dark;
-        }
-
-        &--expand {
-            display: block;
-            width: 100%;
-        }
-
-        &--naked {
-            background-color: $setting-color-transparent;
-            border: none;
-        }
-
-        &--error {
-            border-color: map-get($setting-color-actions, alert);
-        }
-
-        @content;
-    }
-}
-
-@include shop-ui-input();
+@include shop-ui-input {
+    font: fw(regular) rem(16) $setting-font-family;
+    color: $setting-color-dark;
+    padding: rem(14) rem(8);
+    border: rem(1) solid $setting-color-input-border;
+    border-radius: rem(2);
+};

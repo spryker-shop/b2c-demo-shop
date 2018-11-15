@@ -1,75 +1,46 @@
-$review-button-min-width: rem(177);
+$button-min-width: rem(177);
 
 @mixin shop-ui-button($name: '.button') {
     #{$name} {
         @include helper-effect-transition(all);
         display: inline-block;
-        padding: rem(9) rem(16) rem(10);
-        background-color: $setting-color-main;
+        padding: rem(16);
+        background-color: $setting-color-darkest;
         border: none;
         border-radius: rem(2);
+        min-width: $button-min-width;
         color: $setting-color-white;
         text-align: center;
-        font: normal rem(15) $setting-font-family;
+        font: fw(medium) rem(14) $setting-font-family-additional;
         cursor: pointer;
 
         &:hover,
         &:focus {
             color: $setting-color-white;
-            background-color: helper-color-dark($setting-color-main);
+            background-color: $setting-color-radical-red;
+            border-color: $setting-color-radical-red;
             text-decoration: none;
         }
 
-        &--primary {
-            background-color: $setting-color-darkest;
-
-            &:hover,
-            &:focus {
-                background-color: $setting-color-radical-red;
-            }
-        }
-
-        &--secondary,
-        &--hollow {
-            padding: rem(8) rem(16);
-            background-color: $setting-color-white;
-            border: rem(1) solid $setting-color-darkest;
-            color: $setting-color-darkest;
-        }
-
-        &--secondary {
-            &:hover,
-            &:focus {
-                border-color: $setting-color-radical-red;
-                background-color: $setting-color-radical-red;
-                color: $setting-color-white;
-            }
-        }
-
-        &--hollow {
-            &:hover,
-            &:focus {
-                border-color: $setting-color-darkest;
-                background-color: $setting-color-darkest;
-                color: $setting-color-white;
-            }
+        &:active {
+            color: $setting-color-white;
+            background-color: $setting-color-brick-red;
+            border-color: $setting-color-brick-red;
+            text-decoration: none;
         }
 
         &--alert {
-            background-color: $setting-color-alt;
-
-            &:hover,
-            &:focus {
-                background-color: map-get($setting-color-actions, alert);
-            }
+            background-color: map-get($setting-color-actions, alert);
+            border-color: map-get($setting-color-actions, alert);
+            color: $setting-color-white;
         }
 
         &--skinless {
             border: none;
             background-color: transparent;
             color: $setting-color-black;
+            min-width: 0;
 
-            &:visited,
             &:hover,
             &:focus,
             &:active {
@@ -79,58 +50,16 @@ $review-button-min-width: rem(177);
             }
         }
 
-        &--expand {
-            width: 100%;
-        }
-
-        &--large {
-            padding: rem(20);
-            font: fw(500) rem(15) $setting-font-family-additional;
-
-            @include helper-breakpoint-media-min($md-min) {
-                font-size: rem(16);
-            }
-        }
-
-        &--medium {
-            font: fw(regular) rem(14) $setting-font-family-additional;
-            padding: rem(14);
-        }
-
-        &--agent {
-            font-size: rem(14);
-            font-weight: fw(medium);
-            min-width: rem(79);
-            min-height: rem(48);
-            padding-top: rem(15);
-            padding-bottom: rem(15);
-        }
-
-        &--combined {
-            border-radius: 0 rem(2) rem(2) 0;
-            min-width: rem(113);
-            height: rem(48);
-            font: fw(regular) rem(13) $setting-font-family-additional;
-        }
-
-        &--cart {
-            font: fw(medium) rem(16)/rem(56) $setting-font-family-additional;
-            height: rem(56);
-            padding: 0 rem(20);
-            margin-top: rem(56);
-        }
-
         &--send-review {
-            font: fw(medium) rem(13)/rem(16) $setting-font-family;
-            padding: rem(12) rem(30);
             position: absolute;
             top: rem(13);
             right: rem(24);
+            min-width: rem(100);
+            padding: rem(12) rem(16);
 
             @include helper-breakpoint-media-min($lg-min) {
-                font-size: rem(14);
-                padding: rem(15) rem(20);
-                min-width: $review-button-min-width;
+                min-width: $button-min-width;
+                padding: rem(16);
                 margin-top: rem(20);
                 position: relative;
                 top: 0;
@@ -148,9 +77,11 @@ $review-button-min-width: rem(177);
             width: rem(20);
             height: rem(20);
             user-select: none;
+            min-width: 0;
 
             &:hover,
-            &:focus {
+            &:focus,
+            &:active {
                 color: $setting-color-main;
                 border-color: $setting-color-main;
                 background-color: $setting-color-transparent;
@@ -166,7 +97,8 @@ $review-button-min-width: rem(177);
             color: $setting-color-pacific-blue;
 
             &:hover,
-            &:focus {
+            &:focus,
+            &:active {
                 border-color: $setting-color-pacific-blue;
                 color: $setting-color-pacific-blue;
                 background-color: $setting-color-transparent;
@@ -175,22 +107,58 @@ $review-button-min-width: rem(177);
 
         &[disabled],
         &--disabled {
-            background-color: $setting-color-light;
-            border-color: $setting-color-light;
+            background-color: $setting-color-gray-3;
             cursor: not-allowed;
 
             &:hover,
-            &:focus {
-                background-color: $setting-color-light;
+            &:focus,
+            &:active {
+                background-color: $setting-color-gray-3;
             }
+        }
 
-            &#{$name}--hollow,
-            &#{$name}--secondary {
+        &--hollow {
+            padding: rem(15) rem(16);
+            background-color: $setting-color-white;
+            border: rem(1) solid $setting-color-darkest;
+            color: $setting-color-darkest;
+
+            &[disabled],
+            &--disabled {
                 background-color: $setting-color-white;
                 border-color: $setting-color-gray-3;
                 color: $setting-color-gray-3;
+
+                &:hover,
+                &:focus,
+                &:active {
+                    background-color: $setting-color-white;
+                }
             }
         }
+
+        &--agent {
+            min-width: rem(79);
+        }
+
+        &--combined {
+            border-radius: 0 rem(2) rem(2) 0;
+            min-width: rem(113);
+            font-weight: fw(regular);
+            font-size: rem(13);
+        }
+
+        &--expand {
+            width: 100%;
+        }
+
+        &--large {
+            padding: rem(19);
+            font-weight: fw(medium);
+            font-size: rem(16);
+        }
+
+        @content;
     }
 }
 

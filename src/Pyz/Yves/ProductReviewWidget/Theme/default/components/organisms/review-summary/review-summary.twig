@@ -37,11 +37,11 @@
 
     <div class="is-hidden-lg-xl {{ config.name }}__add-review-mobile">
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-            <span class="button button--hollow button--expand button--medium js-new-review-form__trigger">
+            <span class="button button--hollow button--expand js-new-review-form__trigger">
                 {{ 'product_review.submit.add_a_review' | trans }}
             </span>
         {% else %}
-            <a class="button button--hollow button--expand button--medium" href="{{ path('login') }}">
+            <a class="button button--hollow button--expand" href="{{ path('login') }}">
                 {{ 'product_review.submit.add_a_review' | trans }}
             </a>
         {% endif %}
