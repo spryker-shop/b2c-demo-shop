@@ -1,8 +1,7 @@
 {% extends model('component') %}
 
 {% define config = {
-    name: 'wishlist-overview-table',
-    tag: 'div'
+    name: 'wishlist-overview-table'
 } %}
 
 {% define data = {
@@ -29,14 +28,12 @@
                         {% if hasWishlistForm %}
                             {{ form_start(data.wishlistForm) }}
                             <div class="grid">
-                                <div class="col wishlist-input">
+                                <div class="col">
                                     {{ form_widget(data.wishlistForm.name, {attr: {placeholder: 'customer.account.wishlist.overview.enter_name'|trans}}) }}
-
                                 </div>
                                 <div class="col">
-                                    <button type="submit" class="button ">
-                                        {# TODO: replace with translation #}
-                                        Save
+                                    <button type="submit" class="button">
+                                        {{ 'wishlist.form.save' | trans }}
                                     </button>
                                 </div>
                             </div>
@@ -48,16 +45,16 @@
                     </td>
                     <td>{{ wishlist.numberOfItems }}</td>
                     <td>{{ wishlist.createdAt | formatDate }}</td>
-                    <td class="action-buttons-cell">
-                        <ul class="menu menu--inline float-right">
+                    <td>
+                        <ul class="menu menu--inline float-right text-right">
                             <li class="menu__item">
-                                <a href="{{ url('wishlist/update', {wishlistName: wishlist.name}) }}" title="{{ 'customer.account.wishlist.overview.edit' | trans }}">
+                                <a href="{{ url('wishlist/update', {wishlistName: wishlist.name}) }}" class="link link--user-account" title="{{ 'customer.account.wishlist.overview.edit' | trans }}">
                                     {{ 'customer.account.wishlist.overview.edit' | trans }}
                                 </a>
                             </li>
                             <li class="menu__item">
                                 <form method="POST" action="{{ path('wishlist/delete', {wishlistName: wishlist.name}) }}">
-                                    <button type="submit" class="{{ config.name }}__button" title="{{ 'customer.account.wishlist.overview.delete' | trans }}">
+                                    <button type="submit" class="link link--user-account" title="{{ 'customer.account.wishlist.overview.delete' | trans }}">
                                         {{ 'customer.account.wishlist.overview.delete' | trans }}
                                     </button>
                                 </form>

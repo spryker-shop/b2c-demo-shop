@@ -38,7 +38,6 @@
                 }
             } only %}
 
-
             {% include molecule('pagination') with {
                 data: data.pagination
             } only %}
@@ -53,17 +52,18 @@
                         action: path('wishlist/move-all-available-to-cart', { wishlistName: data.wishlistName }),
                         attr: { class: '' }
                     }) }}
-                    <button type="submit" class="button ">
+
+                    <button type="submit" class="button">
                         {{ 'customer.account.wishlist.add_all_available_to_cart' | trans }}
                     </button>
 
                     {% for wishlistItemMetaField in data.addAllProductsToCart.wishlistItemMetaCollection %}
                         {{ form_widget(wishlistItemMetaField) }}
                     {% endfor %}
+
                     {{ form_end(data.addAllProductsToCart) }}
                 {% endif %}
             </div>
         </div>
-
     </div>
 {% endblock %}
