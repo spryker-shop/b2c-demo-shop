@@ -1,9 +1,33 @@
 $shop-ui-form-field-margin: rem(8);
+$review-rating-field-width: rem(154);
 
 @mixin shop-ui-form($name: '.form') {
     #{$name} {
         &__field {
             padding: 0 rem(16) rem(27);
+
+            &--review {
+                padding: 0 0 rem(25);
+
+                @include helper-breakpoint-media-min($md-min) {
+                    padding: 0 0 rem(28);
+                }
+            }
+
+            &--review-summary {
+                @include helper-breakpoint-media-min($md-min) {
+                    min-width: 0;
+                    width: calc(100% - #{$review-rating-field-width});
+                }
+            }
+
+            &--review-rating {
+                @include helper-breakpoint-media-min($md-min) {
+                    min-width: 0;
+                    width: auto;
+                    margin: rem(20) 0 0 auto;
+                }
+            }
         }
 
         &__actions {
@@ -105,6 +129,32 @@ $shop-ui-form-field-margin: rem(8);
                 @include helper-breakpoint-media-min($md-min) {
                     font-size: rem(47);
                     margin-bottom: rem(58);
+                }
+            }
+        }
+
+        &--pdp-review-form {
+            .label {
+                color: $setting-color-dark;
+
+                &::after {
+                    display: none;
+                }
+            }
+
+            input[type='text'],
+            textarea {
+                @include helper-effect-transition(all 0.4s ease);
+                font: fw(regular) rem(17)/rem(22) $setting-font-family;
+                color: $setting-color-dark;
+                padding: rem(10) rem(15);
+
+                &:focus {
+                    border-color: $setting-color-tundora;
+                }
+
+                &:hover {
+                    background-color: $setting-color-alabaster;
                 }
             }
         }
