@@ -4,7 +4,7 @@ $button-min-width: rem(177);
     #{$name} {
         @include helper-effect-transition(all);
         display: inline-block;
-        padding: rem(16);
+        padding: rem(15) rem(16);
         background-color: $setting-color-black;
         border: none;
         border-radius: rem(2);
@@ -101,7 +101,7 @@ $button-min-width: rem(177);
             &:active {
                 border-color: $setting-color-main;
                 color: $setting-color-main;
-                background-color: $setting-color-transparent;
+                background-color: rgba($setting-color-main, 0.1);
             }
         }
 
@@ -118,7 +118,7 @@ $button-min-width: rem(177);
         }
 
         &--hollow {
-            padding: rem(15) rem(16);
+            padding: rem(14) rem(16);
             background-color: $setting-color-white;
             border: rem(1) solid $setting-color-black;
             color: $setting-color-black;
@@ -153,7 +153,7 @@ $button-min-width: rem(177);
         }
 
         &--large {
-            padding: rem(19);
+            padding: rem(18);
             font-weight: fw(medium);
             font-size: rem(16);
         }
