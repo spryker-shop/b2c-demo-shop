@@ -15,6 +15,23 @@
         }
     }
 
+    .grid,
+    .col {
+        &--spaced {
+            &-sm {
+                padding: rem(8);
+            }
+
+            &-md {
+                padding: rem(12.8);
+            }
+
+            &-lg {
+                padding: rem(16);
+            }
+        }
+    }
+
     .col {
         @include helper-ui-clearfix;
         float: left;
@@ -39,40 +56,34 @@
 
         &--top {
             align-self: flex-start;
+            margin-bottom: auto;
         }
 
         &--bottom {
             align-self: flex-end;
+            margin-top: auto;
         }
 
         &--left {
             justify-self: flex-start;
+            margin-right: auto;
         }
 
         &--right {
             justify-self: flex-end;
+            margin-left: auto;
         }
 
         &--center {
             justify-self: center;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         &--middle {
             align-self: center;
-        }
-
-        &--spaced {
-            &-sm {
-                padding: rem(8);
-            }
-
-            &-md {
-                padding: rem(12.8);
-            }
-
-            &-lg {
-                padding: rem(16);
-            }
+            margin-top: auto;
+            margin-bottom: auto;
         }
     }
 
@@ -156,27 +167,5 @@
         &--no-wrap {
             flex-wrap: nowrap;
         }
-
-        &--spaced {
-            &-sm {
-                padding: 0 rem(8);
-            }
-
-            &-md {
-                padding: 0 rem(12.8);
-            }
-
-            &-lg {
-                padding: 0 rem(16);
-            }
-        }
-    }
-
-    .main-title {
-        padding: rem(20) 0;
-        text-align: center;
-        border-bottom: dotted rem(1) $setting-color-lightest;
-        margin-bottom: rem(40);
-        font-weight: fw(medium);
     }
 }
