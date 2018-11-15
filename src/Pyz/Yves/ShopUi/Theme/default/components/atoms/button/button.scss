@@ -5,7 +5,7 @@ $button-min-width: rem(177);
         @include helper-effect-transition(all);
         display: inline-block;
         padding: rem(16);
-        background-color: $setting-color-darkest;
+        background-color: $setting-color-black;
         border: none;
         border-radius: rem(2);
         min-width: $button-min-width;
@@ -17,15 +17,15 @@ $button-min-width: rem(177);
         &:hover,
         &:focus {
             color: $setting-color-white;
-            background-color: $setting-color-radical-red;
-            border-color: $setting-color-radical-red;
+            background-color: $setting-color-alt;
+            border-color: $setting-color-alt;
             text-decoration: none;
         }
 
         &:active {
             color: $setting-color-white;
-            background-color: $setting-color-brick-red;
-            border-color: $setting-color-brick-red;
+            background-color: map-get($setting-color-actions, alert);
+            border-color: map-get($setting-color-actions, alert);
             text-decoration: none;
         }
 
@@ -68,11 +68,11 @@ $button-min-width: rem(177);
         }
 
         &--quantity {
-            border: rem(1) solid $setting-color-light;
+            border: rem(1) solid $setting-color-gray-3;
             border-radius: 50%;
             font: fw(light) rem(16)/rem(17) $setting-font-family-additional;
             background-color: $setting-color-transparent;
-            color: $setting-color-light;
+            color: $setting-color-gray-3;
             padding: 0;
             width: rem(20);
             height: rem(20);
@@ -93,14 +93,14 @@ $button-min-width: rem(177);
             height: rem(36);
             line-height: rem(33);
             font-size: rem(21);
-            border-color: $setting-color-pacific-blue;
-            color: $setting-color-pacific-blue;
+            border-color: $setting-color-main;
+            color: $setting-color-main;
 
             &:hover,
             &:focus,
             &:active {
-                border-color: $setting-color-pacific-blue;
-                color: $setting-color-pacific-blue;
+                border-color: $setting-color-main;
+                color: $setting-color-main;
                 background-color: $setting-color-transparent;
             }
         }
@@ -120,8 +120,8 @@ $button-min-width: rem(177);
         &--hollow {
             padding: rem(15) rem(16);
             background-color: $setting-color-white;
-            border: rem(1) solid $setting-color-darkest;
-            color: $setting-color-darkest;
+            border: rem(1) solid $setting-color-black;
+            color: $setting-color-black;
 
             &[disabled],
             &--disabled {
