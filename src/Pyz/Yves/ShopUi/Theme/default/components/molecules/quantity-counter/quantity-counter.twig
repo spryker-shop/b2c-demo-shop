@@ -17,23 +17,24 @@
     {% set maxQuantity = data.maxQuantity < 0 or data.maxQuantity < data.minQuantity ? null : data.maxQuantity %}
     <div class="{{ config.name }}__container grid grid--middle">
         <div class="col">
-            <div class="{{ config.name }}__button {{ config.name }}__button--sm js-quantity-decr">-</div>
+            <div class="{{ component.renderClass('button', modifiers) }} button--quantity {{ config.jsName }}__decr">-</div>
         </div>
         <div class="col">
             <input
-                class="{{ config.name }}__input input"
+                class="{{ config.name }}__input {{ config.jsName }}__input input"
                 data-max-quantity="{{ maxQuantity }}"
+                data-min-quantity="{{ data.minQuantity }}"
                 type="number"
-                value="{{data.value}}"
+                value="{{ data.value }}"
                 name="quantity"
-                min="{{data.minQuantity}}"
-                {{qa('quantity-input')}}
-                {% if maxQuantity is not empty %}max="{{maxQuantity}}"{% endif %}
+                min="{{ data.minQuantity }}"
+                {{ qa('quantity-input') }}
+                {% if maxQuantity is not empty %}max="{{ maxQuantity }}"{% endif %}
                 {% if data.readOnly %}readonly{% endif %}
                 {% if data.autoUpdate %}data-auto-update="true"{% endif %}/>
         </div>
         <div class="col">
-            <div class="{{ config.name }}__button {{ config.name }}__button--sm js-quantity-incr">+</div>
+            <div class="{{ component.renderClass('button', modifiers) }} button--quantity {{ config.jsName }}__incr">+</div>
         </div>
     </div>
 {% endblock %}

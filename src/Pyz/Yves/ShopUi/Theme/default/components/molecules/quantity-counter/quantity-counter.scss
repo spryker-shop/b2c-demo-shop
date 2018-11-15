@@ -3,46 +3,28 @@
         &__container {
             padding: 0 rem(10);
         }
+
         &__input {
             margin: 0;
             padding: 0;
             display: block;
-            font: 300 rem(13) $setting-font-family-additional;
-            line-height: 2.08;
+            font: fw(light) rem(13)/rem(31) $setting-font-family-additional;
             width: rem(30);
             text-align: center;
             border: none;
+
             &::-webkit-inner-spin-button {
                 appearance: none;
             }
         }
-        &__button {
-            border: rem(1) solid $setting-color-gray-3;
-            border-radius: 50%;
-            font: 300 rem(16) $setting-font-family-additional;
-            text-align: center;
-            width: rem(20);
-            height: rem(20);
-            line-height: rem(17);
-            &:hover {
-                color: $setting-color-main;
-                border-color: $setting-color-main;
-                cursor: pointer;
-            }
-        }
-        &--lg {
+
+        &--quantity-large {
             #{$name}__input {
                 font-size: rem(15);
             }
-            #{$name}__button {
-                width: rem(36);
-                height: rem(36);
-                line-height: rem(33);
-                font-size: rem(21);
-                border-color: $setting-color-main;
-                color: $setting-color-main;
-            }
         }
+
+        @content;
     }
 }
 

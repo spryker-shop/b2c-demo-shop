@@ -18,9 +18,9 @@
 {% endblock %}
 
 {% block body %}
-
     <div class="pdp-review">
         {% embed molecule('product-slider-title') with {
+            modifiers: ['pdp-review'],
             data: {
                 title: 'product_review.ratings_reviews' | trans
             }
@@ -28,7 +28,7 @@
             {% block subContent %}
                 <div class="{{ config.name }}__sub-col is-hidden-sm-md">
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                        <span class="link link--custom-underline js-review__new-review-trigger">
+                        <span class="link link--custom-underline js-new-review-form__trigger">
                             {{ 'product_review.submit.add_a_review' | trans }}
                         </span>
                     {% else %}
@@ -42,11 +42,12 @@
 
         {% include molecule('toggler-click') with {
             attributes: {
-                'trigger-selector': '.js-review__new-review-trigger',
-                'target-selector': '.js-review__new-review-form-target',
+                'trigger-selector': '.js-new-review-form__trigger',
+                'target-selector': '.js-new-review-form__target',
                 'class-to-toggle': 'is-hidden'
             }
         } only %}
+
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
             {{ render(path('product-review/submit', {'idProductAbstract': data.idProductAbstract})) }}
         {% endif %}
