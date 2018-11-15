@@ -1,50 +1,8 @@
-@mixin shop-ui-box($name: '.box') {
-    #{$name} {
-        @include helper-ui-clearfix;
-        padding: rem(8);
-        margin: rem(8);
-        background-color: $setting-color-white;
-        border: none;
+@include shop-ui-box {
+    border: none;
 
-        hr,
-        &__separator {
-            position: relative;
-            display: block;
-            margin-top: rem(8);
-            margin-bottom: rem(8);
-            border-bottom: none;
-            left: - rem(8);
-            width: calc(100% + #{rem(16)});
-        }
-
-        &--borderless {
-            border-color: $setting-color-transparent;
-        }
-
-        &--stretch {
-            height: calc(100% - #{rem(16)});
-        }
-
-        & + & {
-            margin-top: rem(16);
-        }
-
-        @each $action, $setting-color-action in $setting-color-actions {
-            @include shop-ui-box-action($action, $setting-color-action);
-        }
-
-        @content;
+    hr,
+    &__separator {
+        border-bottom: none;
     }
-}
-
-@mixin shop-ui-box-action($action, $setting-color-action) {
-    &--#{$action} {
-        background-color: helper-color-light($setting-color-action);
-        border-color: $setting-color-action;
-        color: helper-color-dark($setting-color-action);
-    }
-
-    @content;
-}
-
-@include shop-ui-box();
+};

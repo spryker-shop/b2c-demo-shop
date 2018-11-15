@@ -1,94 +1,80 @@
-@mixin shop-ui-radio($name: '.radio') {
-    @include shop-ui-checkbox($name) {
-        &__box,
-        &__check {
-            border-radius: 100%;
-        }
-
-        &__input:checked + .radio__box {
-            border: rem(1) solid $setting-color-main;
-            background-color: $setting-color-main;
-        }
-
-        .checkbox__check {
-            display: none !important;
-        }
-
-        &--with-bg,
-        &--with-bg-wrap & {
-            margin-bottom: 0;
-            display: block;
-
-            &:hover,
-            &:focus {
-                #{$name}__box::before {
-                    border-color: $setting-color-input-border-focus;
-                }
-            }
-
-            #{$name}__container {
-                padding: rem(18) rem(21);
-                position: relative;
-                cursor: pointer;
-                white-space: nowrap;
-            }
-
-            #{$name}__box {
-                margin-top: rem(4);
-                &::before {
-                    content: '';
-                    position: absolute;
-                    left: 0;
-                    top: 0;
-                    width: 100%;
-                    height: 100%;
-                    z-index: -1;
-                    border: rem(1) solid $setting-color-input-border;
-                    border-radius: rem(3);
-                }
-            }
-
-            &#{$name}--error {
-                #{$name}__box::before {
-                    border-color: map-get($setting-color-actions, alert);
-                }
-            }
-
-            #{$name}__input:checked + #{$name}__box {
-                border: rem(3) solid $setting-color-white;
-                background-color: $setting-color-gray-6;
-                box-shadow: 0 0 0 rem(1) $setting-color-input-border;
-                &::before {
-                    border: none;
-                    background-color: $setting-color-gray-3;
-                }
-            }
-
-            #{$name}__label {
-                font-weight: fw(medium);
-                color: $setting-color-gray-6;
-                margin-top: rem(2);
-                display: inline-block;
-            }
-        }
-
-        @content;
+@include shop-ui-radio {
+    $name: '.radio';
+    &__container {
+        display: flex;
+        align-items: center;
     }
 
-    #{$name} {
-        &__container {
-            display: flex;
-            align-items: center;
+    &__box {
+        margin-right: rem(7);
+    }
+
+    &__label {
+        font: fw(regular) rem(15) $setting-font-family;
+    }
+
+    &__input:checked + #{$name}__box {
+        border: rem(1) solid $setting-color-main;
+        background-color: $setting-color-main;
+    }
+
+    &--with-bg,
+    &--with-bg-wrap & {
+        margin-bottom: 0;
+        display: block;
+
+        &:hover,
+        &:focus {
+            #{$name}__box::before {
+                border-color: $setting-color-input-border-focus;
+            }
         }
 
-        &__box {
-            margin-right: rem(7);
+        #{$name}__container {
+            padding: rem(18) rem(21);
+            position: relative;
+            cursor: pointer;
+            white-space: nowrap;
         }
 
-        &__label {
-            font: fw(regular) rem(15) $setting-font-family;
+        #{$name}__box {
+            margin-top: rem(2);
+
+            &::before {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                z-index: $setting-zi-hide;
+                border: rem(1) solid $setting-color-input-border;
+                border-radius: rem(3);
+            }
+        }
+
+        &#{$name}--error {
+            #{$name}__box::before {
+                border-color: map-get($setting-color-actions, alert);
+            }
+        }
+
+        #{$name}__input:checked + #{$name}__box {
+            border: rem(3) solid $setting-color-white;
+            background-color: $setting-color-darker;
+            box-shadow: 0 0 0 rem(1) $setting-color-input-border;
+
+            &::before {
+                border: none;
+                background-color: $setting-color-botticelli;
+            }
+        }
+
+        #{$name}__label {
+            font-weight: fw(medium);
+            color: $setting-color-darker;
+            margin-top: rem(2);
+            display: inline-block;
         }
     }
 }
-
-@include shop-ui-radio();
