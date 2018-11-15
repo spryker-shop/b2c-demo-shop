@@ -7,8 +7,7 @@
 
 {% define data = {
     showSearchForm: true,
-    showNavigation: true,
-    showLangCurrencySwitches: false
+    showNavigation: true
 } %}
 
 {% block body %}
@@ -17,6 +16,7 @@
             <div class="{{ config.name }}__search-overlay-container">
                 <div class="{{ config.name }}__search-close js-search-hide-icon">
                     {% include atom('icon') with {
+                        class: config.name ~ '__search-close-icon',
                         data: {
                             name: 'close'
                         }
@@ -38,23 +38,10 @@
 
         <div class="{{ config.name }}__row {{ config.name }}__navigation-top grid grid--middle grid--justify">
             <div class="col col--sm-12 col--lg-4 is-hidden-sm-md">
-                {% if data.showLangCurrencySwitches %}
-                    <div class="grid {{ config.name }}__currency-lang">
-                        <div class="col">
-                            {{ widgetGlobal(
-                                'LanguageSwitcherWidgetPlugin',
-                                app.request.pathInfo,
-                                app.request.queryString,
-                                app.request.requestUri
-                            ) }}
-                        </div>
-                        <div class="col">{{ widgetGlobal('CurrencyWidgetPlugin') }}</div>
-                    </div>
-                {% endif %}
-
                 {% if data.showSearchForm %}
                     <div class="{{ config.name }}__search-open js-search-show-icon">
                         {% include atom('icon') with {
+                            class: config.name ~ '__search-open-icon',
                             data: {
                                 name: 'search'
                             }
@@ -65,6 +52,7 @@
 
             <div class="col col--sm-12 col--lg-4">
                 {% include molecule('logo') with {
+                    modifiers: modifiers,
                     class: 'grid grid--center'
                 } only %}
             </div>
