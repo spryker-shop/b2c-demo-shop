@@ -37,8 +37,8 @@
                 <li class="list__item">
                     <label class="{{ config.name }}__label">
                         <strong class="{{ config.name }}__title">{{ ('product.attribute.' ~ attributeName) | trans }}:</strong>
-                        {% embed atom('select') with {
-                            modifiers: ['naked', 'variant'],
+                        {% embed molecule('custom-select') with {
+                            modifiers: ['hollow'],
                             data: {
                                 label: ('product.attribute.' ~ attributeName) | trans,
                                 options: options

@@ -32,9 +32,10 @@
 
         <div class="{{ config.name }}__col col">
             {% embed molecule('custom-select') with {
-                modifiers: ['sort', 'naked'],
+                modifiers: ['hollow'],
                 attributes: {
-                    name: 'sort'
+                    name: 'sort',
+                    'config-theme': 'secondary'
                 },
                 embed: {
                     sort: _view.sort,

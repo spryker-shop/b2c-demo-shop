@@ -30,7 +30,7 @@
         {% block contentText %}
             {% if embed.selectedValue is null %}
                 {% if embed.isAvailable %}
-                    {% embed atom('select') with {
+                    {% embed molecule('custom-select') with {
                         modifiers: ['expand'],
                         attributes: {
                             name: embed.formName,
