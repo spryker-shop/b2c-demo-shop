@@ -1,1 +1,1 @@
-import './multi-inspirational-container.scss';
+import './multi-inspirational-wrap.scss';

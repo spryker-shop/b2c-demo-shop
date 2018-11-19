@@ -4,7 +4,7 @@
 
     #{$name} {
         align-self: flex-end;
-        margin: 0 rem(9.5);
+        margin: 0 rem(9);
         text-transform: uppercase;
         font: fw(medium) rem(13) $setting-font-family-additional;
         letter-spacing: rem(2);
@@ -18,13 +18,6 @@
 
         &__menu {
             box-shadow: 0 rem(100) rem(100) 0 $setting-color-alpha-1;
-
-            &#{$name}__menu--flyout {
-                left: 50%;
-                padding: rem(40) rem(16) rem(28);
-                margin: 0;
-                background-color: $setting-color-transparent;
-            }
 
             &--flyout {
                 position: absolute;
@@ -50,16 +43,6 @@
                 }
             }
 
-            &#{$name}__menu--brand {
-                padding: rem(40) rem(8) rem(28);
-                margin: 0;
-                background-color: $setting-color-transparent;
-
-                @include helper-breakpoint-media-min($lg-min) {
-                    padding: rem(40) 0 rem(28);
-                }
-            }
-
             &--brand {
                 height: unset;
                 display: flex;
@@ -81,6 +64,23 @@
             }
         }
 
+        #{$name}__menu--flyout {
+            left: 50%;
+            padding: rem(40) rem(16) rem(28);
+            margin: 0;
+            background-color: $setting-color-transparent;
+        }
+
+        #{$name}__menu--brand {
+            padding: rem(40) rem(8) rem(28);
+            margin: 0;
+            background-color: $setting-color-transparent;
+
+            @include helper-breakpoint-media-min($lg-min) {
+                padding: rem(40) 0 rem(28);
+            }
+        }
+
         &__link {
             text-transform: uppercase;
             font: fw(medium) rem(13) $setting-font-family-additional;
@@ -91,6 +91,18 @@
             &:hover {
                 color: $setting-color-alpha-3;
                 text-decoration: none;
+            }
+
+            &--lvl-2 {
+                text-transform: capitalize;
+                color: $setting-color-text;
+                font: fw(regular) rem(16)/rem(24) $setting-font-family;
+                letter-spacing: normal;
+
+                &:hover {
+                    text-decoration: underline;
+                    color: map-get($setting-color-actions, alert);
+                }
             }
         }
 
@@ -103,17 +115,12 @@
                 cursor: default;
             }
 
+            &--flyout {
+                max-width: 27%;
+                white-space: normal;
+            }
+
             #{$name}__link {
-                text-transform: capitalize;
-                color: $setting-color-text;
-                font: fw(regular) rem(16)/rem(24) $setting-font-family;
-                letter-spacing: normal;
-
-                &:hover {
-                    text-decoration: underline;
-                    color: map-get($setting-color-actions, alert);
-                }
-
                 &--flyout {
                     font-size: rem(16);
                     color: $setting-color-black;
@@ -147,11 +154,6 @@
                     }
                 }
             }
-
-            &--flyout {
-                max-width: 27%;
-                white-space: normal;
-            }
         }
 
         &__node-image {
@@ -176,22 +178,20 @@
                 right: 0;
             }
 
-            #{$name}__link {
-                &--flyout {
-                    position: absolute;
-                    bottom: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                    display: block;
-                    text-align: center;
-                    padding-top: rem(280);
-                    font-size: rem(16);
-                    line-height: rem(34);
+            #{$name}__link--flyout {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                display: block;
+                text-align: center;
+                padding-top: rem(280);
+                font-size: rem(16);
+                line-height: rem(34);
 
-                    @include helper-breakpoint-media-min($xl-min) {
-                        font-size: rem(17);
-                    }
+                @include helper-breakpoint-media-min($xl-min) {
+                    font-size: rem(17);
                 }
             }
 
@@ -219,7 +219,7 @@
             }
 
             @for $i from 1 through 4 {
-                &.#{$image-class}-#{$i} #{$name}__link {
+                &.#{$image-class}-#{$i} {
                     background-image: url('#{$image-url}/image-submenu-d-#{$i}@2x.png');
                 }
             }

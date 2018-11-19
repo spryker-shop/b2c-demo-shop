@@ -5,6 +5,10 @@
     tag: 'li'
 } %}
 
+{% define data = {
+    levelMenu: 1
+} %}
+
 {% block body %}
     {{ parent() }}
     {% if data.node.children is not empty %}
@@ -17,7 +21,8 @@
                         class: 'menu__item ' ~ component.renderClass(config.name ~ '__child', modifiers) ~ ' ' ~ config.name ~ '__' ~ childNode.cssClass,
                         modifiers: modifiers,
                         data: {
-                            node: childNode
+                            node: childNode,
+                            levelMenu: data.levelMenu + 1
                         }
                     } only %}
                 {% endfor %}
@@ -27,15 +32,15 @@
 {% endblock %}
 
 {% block url %}
-    <a class="{{ component.renderClass(config.name ~ '__link', modifiers) }}" href="{{ data.node.url }}">{{ data.node.title }}</a>
+    <a class="{{ component.renderClass(config.name ~ '__link', modifiers) }} {{ config.name }}__link--lvl-{{ data.levelMenu }}" href="{{ data.node.url }}">{{ data.node.title }}</a>
 {% endblock %}
 
 {% block link %}
-    <a class="{{ component.renderClass(config.name ~ '__link', modifiers) }}" href="{{ data.node.url }}">{{ data.node.title }}</a>
+    <a class="{{ component.renderClass(config.name ~ '__link', modifiers) }} {{ config.name }}__link--lvl-{{ data.levelMenu }}" href="{{ data.node.url }}">{{ data.node.title }}</a>
 {% endblock %}
 
 {% block externalUrl %}
-    <a class="{{ component.renderClass(config.name ~ '__link', modifiers) }}" href="{{ data.node.url }}" target="_blank">{{ data.node.title }}</a>
+    <a class="{{ component.renderClass(config.name ~ '__link', modifiers) }} {{ config.name }}__link--lvl-{{ data.levelMenu }}" href="{{ data.node.url }}" target="_blank">{{ data.node.title }}</a>
 {% endblock %}
 
 {% block other %}
