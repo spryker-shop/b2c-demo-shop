@@ -29,9 +29,9 @@
         {% set required = false %}
     {%- endif -%}
 
-    {%- set modifiers = errors is empty ? ['expand'] : ['expand', 'error'] -%}
+    {%- set modifiers = ['expand'] -%}
 
-    {% embed atom('select') with {
+    {% embed molecule('custom-select') with {
         modifiers: modifiers,
         attributes: {
             multiple: multiple,

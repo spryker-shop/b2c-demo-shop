@@ -8,9 +8,10 @@
     {% if data.languages is not empty %}
         <form method="GET" action="">
             {% embed molecule('custom-select') with {
-                modifiers: ['naked'],
+                modifiers: ['hollow'],
                 attributes: {
-                    'onchange': 'this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);'
+                    'onchange': 'this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);',
+                    'config-theme': 'secondary'
                 },
                 embed: {
                     languages: data.languages
@@ -18,10 +19,8 @@
             } only %}
                 {% block options %}
                     {% for language, url in embed.languages %}
-                        <option
-                            value="{{ app.request.getSchemeAndHttpHost() }}{{ url }}"
-                            {{ (language == _widget.currentLanguage) ? 'selected' : ''}}>
-                                {{ language | upper }}
+                        <option value="{{ app.request.getSchemeAndHttpHost() }}{{ url }}" {{ (language == _widget.currentLanguage) ? 'selected' : ''}}>
+                            {{ language | upper }}
                         </option>
                     {% endfor %}
                 {% endblock %}
