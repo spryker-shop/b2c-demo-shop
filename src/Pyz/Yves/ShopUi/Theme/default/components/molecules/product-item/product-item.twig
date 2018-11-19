@@ -1,0 +1,84 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'product-item',
+    tag: 'article'
+} %}
+
+{% define data = {
+    cart: required,
+    cartItem: required,
+    attributes: required
+} %}
+
+{% set canEditCart = (not is_granted('IS_AUTHENTICATED_FULLY') or can('WriteSharedCartPermissionPlugin', data.cart.idQuote)) %}
+{% set cartItemBox = data.cartItem.productOptions is empty ? config.name ~ '__box' : config.name ~ '__box ' ~ config.name ~ '__box--with-options' %}
+{% set cartItemSubTotal = data.cartItem.quantity * data.cartItem.unitPrice %}
+
+{% block body %}
+    <div class="{{ cartItemBox }}">
+        <div class="grid grid--middle grid--justify grid--no-wrap">
+            <a href="{{ data.cartItem.url }}" class="{{ config.name }}__image col">
+                {% include molecule('cart-image', 'CartPage') with {
+                    data: {
+                        name: data.cartItem.name | default(''),
+                        image: data.cartItem.images is empty ? null : (data.cartItem.images | first)
+                    }
+                } only %}
+            </a>
+            <div class="{{ config.name }}__content col">
+                <div class="grid grid--justify grid--middle">
+                    <a href="{{ data.cartItem.url }}" class="{{ config.name }}__title col col--lg-8 col--sm-12">{{ data.cartItem.name }}</a>
+                    <div class="{{ config.name }}__price col col--lg-4 col--sm-12">
+                        {{ cartItemSubTotal | money }}
+                    </div>
+                </div>
+                <div class="{{ config.name }}__options">
+                    {% if data.attributes is not empty %}
+                        {% include molecule('cart-item-variant-selector', 'CartPage') with {
+                            data: {
+                                cartItem: data.cartItem,
+                                cartItemAttributes: data.attributes
+                            }
+                        } only %}
+                    {% endif %}
+                    {% if canEditCart %}
+                        {% if widgetExists('QuantitySalesUnitWidgetPlugin') %}
+                            {{ widget('QuantitySalesUnitWidgetPlugin', data.cartItem) }}
+                        {% else %}
+                            {% include molecule('cart-quantity-input', 'CartPage') with {
+                                data: {
+                                    cartItem: data.cartItem
+                                }
+                            } only %}
+                        {% endif %}
+                    {% else %}
+                        {{ 'cart.item_quantity' | trans }}
+
+                        <strong>{{ cartItem.quantity }}</strong>
+                    {% endif %}
+
+                    {% if canEditCart %}
+                        <a class="{{ config.name }}__remove" href="{{ path('cart/remove', {'sku': data.cartItem.sku, 'groupKey': data.cartItem.groupKey }) }}">
+                            {{ 'remove' | trans }}
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        {{ widget('ProductBundleItemsWidgetPlugin', data.cartItem, data.cart) }}
+
+        <div class="grid grid--right">
+            {% include molecule('cart-item-summary', 'CartPage') with {
+                class: 'col',
+                data: {
+                    unitPrice: data.cartItem.unitPrice | money,
+                    subtotalPrice: data.cartItem.sumSubtotalAggregation | money,
+                    cartItem: data.cartItem
+                }
+            } only %}
+        </div>
+    </div>
+
+{% endblock %}
