@@ -21,9 +21,10 @@
                 modifiers: ['filter'],
                 data: {
                     title: ('product.filter.' ~ filter.name | lower) | trans,
-                    triggerClass: config.jsName ~ '__trigger--' ~ filter.name,
+                    triggerClass: config.jsName ~ '__trigger',
                     targetClass: config.jsName ~ '__target--' ~ filter.name,
-                    isActive: loop.first ? true : false
+                    isActive: loop.first ? true : false,
+                    isTogglerIncluded: false
                 },
                 embed: {
                     filterPath: data.filterPath,
@@ -51,6 +52,11 @@
             {% endembed %}
         {% endif %}
     {% endfor %}
+    {% include molecule('toggler-accordion') with {
+        attributes: {
+            trigger: '.' ~ config.jsName ~ '__trigger'
+        }
+    } only %}
     <div class="grid grid--justify grid--middle {{ config.name }}__actions">
         <span class="col {{ config.name }}__close-popup {{ data.togglerClass }}">
             {% include atom('icon') with {
