@@ -33,8 +33,7 @@
         }
     }
 
-    .select2-container--default,
-    .select2-container--secondary {
+    .select2-container {
         .select2-results {
             padding: rem(12) 0;
             border-radius: rem(4);
@@ -67,39 +66,39 @@
             position: relative;
 
             &::before {
-                content: "";
+                content: '';
                 position: absolute;
                 top: 50%;
                 right: rem(23);
                 width: rem(12);
                 height: rem(12);
                 margin-top: rem(-6);
-                background: url("/assets/images/icon-chosen.svg") no-repeat 0 0;
+                background: url('/assets/images/icon-chosen.svg') no-repeat 0 0;
+            }
+        }
+
+        &--secondary {
+            .select2-results {
+                width: calc(100% + #{rem(48)});
+                transform: translateX(rem(-48));
+                border: none;
+
+                &::before {
+                    content: '';
+                    position: absolute;
+                    bottom: 100%;
+                    right: rem(23);
+                    border: rem(6) solid transparent;
+                    border-bottom-color: $setting-color-bg;
+                }
+            }
+            .select2-dropdown--below {
+                box-shadow: rem(10) rem(10) rem(26) 0 $setting-color-alpha-1,
+                0 0 rem(30) 0 $setting-color-alpha-1,
+                0 rem(-10) rem(30) 0 $setting-color-alpha-1;
             }
         }
     }
-
-    .select2-container--secondary {
-        .select2-results {
-            width: calc(100% + #{rem(48)});
-            transform: translateX(rem(-48));
-            border: none;
-
-            &::before {
-                content: '';
-                position: absolute;
-                bottom: 100%;
-                right: rem(23);
-                border: rem(6) solid transparent;
-                border-bottom-color: $setting-color-bg;
-            }
-        }
-        .select2-dropdown--below {
-            box-shadow: rem(10) rem(10) rem(26) 0 $setting-color-alpha-1,
-                0 0 rem(30) 0 $setting-color-alpha-1,
-                0 rem(-10) rem(30) 0 $setting-color-alpha-1;
-        }
-    } 
 
     .select2-container--open {
         .select2-dropdown {
