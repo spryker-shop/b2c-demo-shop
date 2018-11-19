@@ -1,15 +1,16 @@
-$color-selector-size: rem(16);
+$color-selector-size: 16;
+$selector-border-size: 2;
 
-@mixin color-group-color-selector() {
-    .color-selector,
-    .color-selector-pdp {
+@mixin color-group-color-selector($name: '.color-selector') {
+    #{$name} {
         cursor: default;
 
         &__color {
             display: inline-block;
-            width: $color-selector-size;
-            height: $color-selector-size;
+            width: rem($color-selector-size);
+            height: rem($color-selector-size);
             border-radius: 100%;
+            border: rem($selector-border-size) solid $setting-color-white;
             vertical-align: middle;
             position: relative;
 
@@ -19,53 +20,54 @@ $color-selector-size: rem(16);
                 left: 50%;
                 top: 50%;
                 transform: translate(-50%, -50%);
-                width: rem(18);
-                height: rem(18);
-                border: solid rem(4) $setting-color-white;
+                width: rem($color-selector-size - 2);
+                height: rem($color-selector-size - 2);
+                border: rem($selector-border-size) solid $setting-color-white;
                 border-radius: 100%;
+                visibility: hidden;
             }
 
             &:not(:last-child) {
                 margin-right: rem(4);
             }
 
-            .color-tooltip {
-                @include helper-effect-transition(all);
-                transform: scale(0);
-                transform-origin: bottom;
-                position: absolute;
-                top: rem(-43);
-                left: rem(-15);
-                background: $setting-color-black;
-                color: $setting-color-white;
-                font: 300 rem(16) $setting-font-family;
-                padding: rem(5) rem(11) rem(7) rem(10);
-                white-space: nowrap;
-                border-radius: rem(2);
-                &::before {
-                    content: '';
-                    position: absolute;
-                    left: rem(17);
-                    bottom: rem(-4);
-                    border-radius: rem(2);
-                    background: $setting-color-black;
-                    width: rem(10);
-                    height: rem(10);
-                    transform: rotate(45deg);
-                }
-            }
-
             &:hover,
             &--active {
+                border: unset;
                 &::before {
-                    width: rem(14);
-                    height: rem(14);
-                    border-width: rem(2);
+                    visibility: visible;
                 }
             }
 
-            &:hover .color-tooltip {
+            &:hover #{$name}__tooltip {
                 transform: scale(1);
+            }
+        }
+
+        &__tooltip {
+            @include helper-effect-transition(all);
+            transform: scale(0);
+            transform-origin: bottom;
+            position: absolute;
+            top: rem(-43);
+            left: rem(-15);
+            background: $setting-color-black;
+            color: $setting-color-white;
+            font: fw(light) rem(16) $setting-font-family;
+            padding: rem(5) rem(11) rem(7) rem(10);
+            white-space: nowrap;
+            border-radius: rem(2);
+
+            &::before {
+                content: '';
+                position: absolute;
+                left: rem(17);
+                bottom: rem(-4);
+                border-radius: rem(2);
+                background: $setting-color-black;
+                width: rem(10);
+                height: rem(10);
+                transform: rotate(45deg);
             }
         }
     }

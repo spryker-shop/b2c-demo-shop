@@ -1,8 +1,7 @@
 {% extends model('component') %}
 
 {% define config = {
-    name: 'wishlist-selector',
-    tag: 'div'
+    name: 'wishlist-selector'
 } %}
 
 {% define data = {
@@ -39,7 +38,7 @@
 
             {% if isUserLoggedIn %}
                 {% include molecule('ajax-renderer') with {
-                    class: 'col col--sm-6 wishlist-input',
+                    class: 'col col--sm-6',
                     attributes: {
                         'provider-selector': '.' ~ config.jsName ~ '__provider'
                     }
