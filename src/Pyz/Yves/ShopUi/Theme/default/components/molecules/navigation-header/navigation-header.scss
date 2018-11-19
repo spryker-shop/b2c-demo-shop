@@ -3,222 +3,38 @@
         padding: rem(16) 0;
         position: relative;
 
-        .flyout-fullscreen {
+        &__flyout-fullscreen {
             position: static;
 
-            .menu {
+            &::after {
+                @include helper-visibility-invisible;
+                @include helper-effect-transition;
+                content: '';
                 position: absolute;
-                width: calc(100vw - #{rem(16)});
+                width: 100vw;
                 left: 50%;
+                top: rem(30);
+                display: block;
                 transform: translate(-50%, 0);
-                padding: rem(40) rem(16) rem(28);
-                margin: 0;
                 height: rem(381);
-                border-bottom: rem(1) solid #ebebeb;
-
-                &::before {
-                    position: absolute;
-                    display: block;
-                    content: '';
-                    width: calc(100vw - #{rem(26)});
-                    left: 50%;
-                    top: 0;
-                    transform: translate(-50%, 0);
-                    padding: rem(40) rem(16) rem(28);
-                    margin: 0;
-                    height: 100%;
-                    box-shadow: rem(100) 0 0 0 $setting-color-white, rem(-100) 0 0 0 $setting-color-white;
-                }
+                background-color: $setting-color-white;
+                pointer-events: none;
+                box-shadow: 0 rem(102) rem(100) 0 $setting-color-alpha-1;
             }
 
-            .flyout-fullscreen__container {
-                margin: 0 auto;
-                width: rem(850);
-                position: relative;
-                height: 100%;
-
-                @include helper-breakpoint-media-max($lg-max) {
-                    width: rem(745);
-                }
-
-                &::before {
-                    content: '';
-                    position: absolute;
-                    display: block;
-                    width: rem(1);
-                    height: 100%;
-                    border-left: rem(1) dotted $setting-color-gray-3;
-                    top: 0;
-                    left: rem(280);
-
-                    @include helper-breakpoint-media-max($lg-max) {
-                        left: rem(240);
-                    }
-                }
-
-                .menu__item {
-                    max-width: rem(340);
-
-                    a {
-                        font-size: rem(18);
-                        color: $setting-color-black;
-                        letter-spacing: rem(0.2);
-                        line-height: 1.94;
-
-                        &:hover {
-                            color: $setting-color-alt;
-                        }
-                    }
-                }
-
-                .node-image {
-                    position: absolute;
-                    height: rem(300);
-                    width: rem(250);
-                    top: 0;
-                    right: rem(280);
-                    margin: 0;
-
-                    background-position: center;
-                    background-repeat: no-repeat;
-                    background-size: rem(250) rem(270);
-
-                    @include helper-breakpoint-media-max($lg-max) {
-                        width: rem(220);
-                        height: rem(237);
-                        right: rem(250);
-                        background-size: rem(220) rem(237);
-                    }
-
-                    &:last-of-type {
-                        right: 0;
-                    }
-
-                    a {
-                        position: absolute;
-                        bottom: 0;
-                        left: 0;
-                        width: 100%;
-                        height: 100%;
-                        display: block;
-                        text-align: center;
-                        padding-top: rem(280);
-                        font-size: rem(17);
-                    }
-
-                    &.image-1 {
-                        background-image: url('/assets/images/menu-img-5.png');
-                    }
-
-                    &.image-2 {
-                        background-image: url('/assets/images/menu-img-6.png');
-                    }
-
-                    &.image-3 {
-                        background-image: url('/assets/images/menu-img-3.png');
-                    }
-
-                    &.image-4 {
-                        background-image: url('/assets/images/menu-img-4.png');
-                    }
-
-                    &.image-5 {
-                        background-image: url('/assets/images/menu-img-1.png');
-                    }
-
-                    &.image-6 {
-                        background-image: url('/assets/images/menu-img-2.png');
-                    }
+            &:hover {
+                &::after {
+                    @include helper-visibility-visible;
+                    pointer-events: all;
                 }
             }
         }
 
-        .brand-dropdown {
-            .menu {
-                height: unset;
-                padding: rem(40) 0 rem(28);
-
-                @include helper-breakpoint-media-max($lg-max) {
-                    padding: rem(40) rem(8) rem(28);
-                }
-            }
-
-            .flyout-fullscreen__container {
-                display: flex;
-                justify-content: space-between;
-                max-width: rem(1210);
-                width: 100%;
-
-                @include helper-breakpoint-media-max($xl-max) {
-                    max-width: rem(930);
-                }
-
-                @include helper-breakpoint-media-max($lg-max) {
-                    max-width: rem(730);
-                }
-
-                &::before {
-                    display: none;
-                }
-            }
-
-            .brand-item {
-                height: 100%;
-                width: rem(270);
-                margin: 0 rem(16);
-
-                @include helper-breakpoint-media-max($xl-max) {
-                    width: rem(216);
-                    margin: 0 rem(8);
-                    background-size: contain;
-                }
-
-                @include helper-breakpoint-media-max($lg-max) {
-                    width: rem(162);
-                }
-
-                a {
-                    display: block;
-                    text-align: center;
-                    position: relative;
-
-                    &::before {
-                        content: '';
-                        display: block;
-                        width: rem(270);
-                        height: rem(168);
-                        background-position: top center;
-                        background-repeat: no-repeat;
-                        background-size: contain;
-                        margin-bottom: rem(10);
-
-                        @include helper-breakpoint-media-max($xl-max) {
-                            width: rem(216);
-                            height: rem(134);
-                            margin: 0 auto;
-                        }
-
-                        @include helper-breakpoint-media-max($lg-max) {
-                            width: rem(162);
-                            height: rem(101);
-                        }
-                    }
-                }
-
-                &.image-1 a::before {
-                    background-image: url('/assets/images/image-submenu-d-1@2x.png');
-                }
-
-                &.image-2 a::before {
-                    background-image: url('/assets/images/image-submenu-d-2@2x.png');
-                }
-
-                &.image-3 a::before {
-                    background-image: url('/assets/images/image-submenu-d-3@2x.png');
-                }
-
-                &.image-4 a::before {
-                    background-image: url('/assets/images/image-submenu-d-4@2x.png');
+        &__brand-dropdown {
+            &::after {
+                height: rem(241);
+                @include helper-breakpoint-media-min($xl-min) {
+                    height: rem(281);
                 }
             }
         }
