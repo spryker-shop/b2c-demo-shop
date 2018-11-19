@@ -14,8 +14,9 @@
             modifiers: ['with-top-border', 'option'],
             data: {
                 title: optionGroup.name | trans,
-                triggerClass: 'js-option-configurator__trigger' ~ loop.index,
+                triggerClass: 'js-option-configurator__trigger',
                 targetClass: 'js-option-configurator__target-' ~ loop.index,
+                isTogglerIncluded: loop.first ? true : false
             },
             embed: {
                 optionGroup: optionGroup,
