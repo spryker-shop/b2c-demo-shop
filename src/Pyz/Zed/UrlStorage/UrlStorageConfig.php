@@ -1,14 +1,30 @@
 <?php
 
 /**
- * Copyright © 2016-present Spryker Systems GmbH. All rights reserved.
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * This file is part of the Spryker Suite.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace Pyz\Zed\UrlStorage;
 
+use Pyz\Zed\Synchronization\SynchronizationConfig;
+use Spryker\Zed\UrlStorage\UrlStorageConfig as SprykerUrlStorageConfig;
 
-class UrlStorageConfig
+class UrlStorageConfig extends SprykerUrlStorageConfig
 {
+    /**
+     * @return string|null
+     */
+    public function getUrlSynchronizationPoolName(): ?string
+    {
+        return SynchronizationConfig::DEFAULT_SYNCHRONIZATION_POOL_NAME;
+    }
 
+    /**
+     * @return string|null
+     */
+    public function getUrlRedirectSynchronizationPoolName(): ?string
+    {
+        return SynchronizationConfig::DEFAULT_SYNCHRONIZATION_POOL_NAME;
+    }
 }

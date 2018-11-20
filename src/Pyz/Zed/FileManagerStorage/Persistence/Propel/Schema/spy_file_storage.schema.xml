@@ -1,29 +1,13 @@
 <?xml version="1.0"?>
-<database xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed"
+<database xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          name="zed"
           xsi:noNamespaceSchemaLocation="http://static.spryker.com/schema-01.xsd"
-          namespace="Orm\Zed\FileManager\Persistence" package="src.Orm.Zed.FileManager.Persistence">
+          namespace="Orm\Zed\FileManagerStorage\Persistence"
+          package="src.Orm.Zed.FileManagerStorage.Persistence">
 
-    <table name="spy_file">
-        <behavior name="event">
-            <parameter name="spy_file_all" column="*"/>
-        </behavior>
-    </table>
-
-    <table name="spy_file_info">
-        <behavior name="event">
-            <parameter name="spy_file_info_all" column="*"/>
-        </behavior>
-    </table>
-
-    <table name="spy_file_localized_attributes">
-        <behavior name="event">
-            <parameter name="spy_file_localized_attributes_all" column="*"/>
-        </behavior>
-    </table>
-
-    <table name="spy_file_directory_localized_attributes">
-        <behavior name="event">
-            <parameter name="spy_file_directory_localized_attributes_all" column="*"/>
+    <table name="spy_file_storage">
+        <behavior name="synchronization">
+            <parameter name="queue_pool" value="synchronizationPool" />
         </behavior>
     </table>
 </database>

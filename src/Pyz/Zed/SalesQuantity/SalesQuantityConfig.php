@@ -1,14 +1,18 @@
 <?php
 
 /**
- * Copyright © 2016-present Spryker Systems GmbH. All rights reserved.
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * This file is part of the Spryker Suite.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace Pyz\Zed\SalesQuantity;
 
+use Spryker\Zed\SalesQuantity\SalesQuantityConfig as SprykerSalesQuantityConfig;
 
-class SalesQuantityConfig
+class SalesQuantityConfig extends SprykerSalesQuantityConfig
 {
-
+    /**
+     * @see \Spryker\Zed\SalesQuantity\SalesQuantityConfig::ITEM_NONSPLIT_QUANTITY_THRESHOLD
+     */
+    protected const ITEM_NONSPLIT_QUANTITY_THRESHOLD = 10;
 }

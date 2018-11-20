@@ -7,6 +7,7 @@
 
 namespace Pyz\Zed\DataImport\Business\Model\ProductConcrete;
 
+use Orm\Zed\Product\Persistence\Map\SpyProductTableMap;
 use Orm\Zed\Product\Persistence\SpyProduct;
 use Orm\Zed\Product\Persistence\SpyProductLocalizedAttributesQuery;
 use Orm\Zed\Product\Persistence\SpyProductQuery;
@@ -20,24 +21,30 @@ use Spryker\Zed\Product\Dependency\ProductEvents;
 
 class ProductConcreteWriter extends PublishAwareStep implements DataImportStepInterface
 {
-    const BULK_SIZE = 100;
+    public const BULK_SIZE = 100;
 
-    const KEY_ATTRIBUTES = 'attributes';
-    const KEY_LOCALIZED_ATTRIBUTES = 'localizedAttributes';
-    const KEY_NAME = 'name';
-    const KEY_DESCRIPTION = 'description';
-    const KEY_LOCALES = 'locales';
-    const KEY_CONCRETE_SKU = 'concrete_sku';
-    const KEY_IS_ACTIVE = 'is_active';
-    const KEY_ABSTRACT_SKU = 'abstract_sku';
-    const KEY_IS_COMPLETE = 'is_complete';
-    const KEY_IS_SEARCHABLE = 'is_searchable';
-    const KEY_BUNDLES = 'bundled';
+    public const KEY_ATTRIBUTES = 'attributes';
+    public const KEY_LOCALIZED_ATTRIBUTES = 'localizedAttributes';
+    public const KEY_NAME = 'name';
+    public const KEY_DESCRIPTION = 'description';
+    public const KEY_LOCALES = 'locales';
+    public const KEY_CONCRETE_SKU = 'concrete_sku';
+    public const KEY_IS_ACTIVE = 'is_active';
+    public const KEY_ABSTRACT_SKU = 'abstract_sku';
+    public const KEY_IS_COMPLETE = 'is_complete';
+    public const KEY_IS_SEARCHABLE = 'is_searchable';
+    public const KEY_BUNDLES = 'bundled';
+    public const KEY_IS_QUANTITY_SPLITTABLE = 'is_quantity_splittable';
 
     /**
      * @var \Pyz\Zed\DataImport\Business\Model\Product\Repository\ProductRepository
      */
     protected $productRepository;
+
+    /**
+     * @var bool[] Keys are product column names
+     */
+    protected static $isProductColumnBuffer = [];
 
     /**
      * @param \Pyz\Zed\DataImport\Business\Model\Product\Repository\ProductRepository $productRepository
@@ -82,9 +89,31 @@ class ProductConcreteWriter extends PublishAwareStep implements DataImportStepIn
             ->setFkProductAbstract($idAbstract)
             ->setAttributes(json_encode($dataSet[static::KEY_ATTRIBUTES]));
 
+        if ($this->isProductColumn(static::KEY_IS_QUANTITY_SPLITTABLE)) {
+            $isQuantitySplittable = $dataSet[static::KEY_IS_QUANTITY_SPLITTABLE] === "" ? true : $dataSet[static::KEY_IS_QUANTITY_SPLITTABLE];
+            $productEntity->setIsQuantitySplittable($isQuantitySplittable);
+        }
+
         $productEntity->save();
 
         return $productEntity;
+    }
+
+    /**
+     * @param string $columnName
+     *
+     * @return bool
+     */
+    protected function isProductColumn(string $columnName): bool
+    {
+        if (isset(static::$isProductColumnBuffer[$columnName])) {
+            return static::$isProductColumnBuffer[$columnName];
+        }
+
+        $isColumnExists = SpyProductTableMap::getTableMap()->hasColumn($columnName);
+        static::$isProductColumnBuffer[$columnName] = $isColumnExists;
+
+        return $isColumnExists;
     }
 
     /**
@@ -132,7 +161,7 @@ class ProductConcreteWriter extends PublishAwareStep implements DataImportStepIn
             $bundleProducts = explode(',', $dataSet[static::KEY_BUNDLES]);
             foreach ($bundleProducts as $bundleProduct) {
                 $bundleProduct = trim($bundleProduct);
-                list($sku, $quantity) = explode('/', $bundleProduct);
+                [$sku, $quantity] = explode('/', $bundleProduct);
                 $idProduct = $this->productRepository->getIdProductByConcreteSku($sku);
 
                 $productBundleEntity = SpyProductBundleQuery::create()

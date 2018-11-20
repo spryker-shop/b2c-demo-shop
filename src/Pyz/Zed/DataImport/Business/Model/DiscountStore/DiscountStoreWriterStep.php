@@ -15,9 +15,9 @@ use Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface;
 
 class DiscountStoreWriterStep implements DataImportStepInterface
 {
-    const BULK_SIZE = 100;
-    const KEY_DISCOUNT_KEY = 'discount_key';
-    const KEY_STORE_NAME = 'store_name';
+    public const BULK_SIZE = 100;
+    public const KEY_DISCOUNT_KEY = 'discount_key';
+    public const KEY_STORE_NAME = 'store_name';
 
     /**
      * @var int[] Keys are discount keys, values are discount IDs.

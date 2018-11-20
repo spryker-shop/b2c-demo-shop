@@ -1,14 +1,24 @@
 <?php
 
 /**
- * Copyright © 2016-present Spryker Systems GmbH. All rights reserved.
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * This file is part of the Spryker Suite.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace Pyz\Client\PriceProductStorage;
 
+use Spryker\Client\PriceProductStorage\PriceProductStorageDependencyProvider as SprykerPriceProductStorageDependencyProvider;
+use Spryker\Client\PriceProductVolume\Plugin\PriceProductStorageExtension\PriceProductVolumeExtractorPlugin;
 
-class PriceProductStorageDependencyProvider
+class PriceProductStorageDependencyProvider extends SprykerPriceProductStorageDependencyProvider
 {
-
+    /**
+     * @return \Spryker\Client\PriceProductStorageExtension\Dependency\Plugin\PriceProductStoragePricesExtractorPluginInterface[]
+     */
+    protected function getPriceProductPricesExtractorPlugins(): array
+    {
+        return [
+            new PriceProductVolumeExtractorPlugin(),
+        ];
+    }
 }

@@ -25,6 +25,7 @@ use Spryker\Zed\Calculation\Communication\Plugin\Calculator\PriceToPayAggregator
 use Spryker\Zed\Calculation\Communication\Plugin\Calculator\RefundableAmountCalculatorPlugin;
 use Spryker\Zed\Calculation\Communication\Plugin\Calculator\RefundTotalCalculatorPlugin;
 use Spryker\Zed\Calculation\Communication\Plugin\Calculator\RemoveAllCalculatedDiscountsCalculatorPlugin;
+use Spryker\Zed\Calculation\Communication\Plugin\Calculator\RemoveCanceledAmountCalculatorPlugin;
 use Spryker\Zed\Calculation\Communication\Plugin\Calculator\RemoveTotalsCalculatorPlugin;
 use Spryker\Zed\Calculation\Communication\Plugin\Calculator\SubtotalCalculatorPlugin;
 use Spryker\Zed\Calculation\Communication\Plugin\Calculator\TaxTotalCalculatorPlugin;
@@ -34,6 +35,8 @@ use Spryker\Zed\Kernel\Container;
 use Spryker\Zed\Payment\Communication\Plugin\Calculation\PaymentCalculatorPlugin;
 use Spryker\Zed\ProductBundle\Communication\Plugin\Calculation\CalculateBundlePricePlugin;
 use Spryker\Zed\ProductOption\Communication\Plugin\ProductOptionTaxRateCalculatorPlugin;
+use Spryker\Zed\SalesOrderThreshold\Communication\Plugin\Calculation\AddSalesOrderThresholdExpenseCalculatorPlugin;
+use Spryker\Zed\SalesOrderThreshold\Communication\Plugin\Calculation\RemoveSalesOrderThresholdExpenseCalculatorPlugin;
 use Spryker\Zed\Shipment\Communication\Plugin\ShipmentTaxRateCalculatorPlugin;
 use Spryker\Zed\Tax\Communication\Plugin\Calculator\TaxAmountAfterCancellationCalculatorPlugin;
 use Spryker\Zed\Tax\Communication\Plugin\Calculator\TaxAmountCalculatorPlugin;
@@ -179,12 +182,15 @@ class CalculationDependencyProvider extends SprykerCalculationDependencyProvider
             new RemoveTotalsCalculatorPlugin(),
             new RemoveAllCalculatedDiscountsCalculatorPlugin(),
             new RemovePromotionItemsCalculatorPlugin(),
+            new RemoveCanceledAmountCalculatorPlugin(),
+            new RemoveSalesOrderThresholdExpenseCalculatorPlugin(),
 
             new PriceCalculatorPlugin(),
             new ItemProductOptionPriceAggregatorPlugin(),
             new ItemSubtotalAggregatorPlugin(),
 
             new SubtotalCalculatorPlugin(),
+            new AddSalesOrderThresholdExpenseCalculatorPlugin(),
 
             new ProductItemTaxRateCalculatorPlugin(),
             new ProductOptionTaxRateCalculatorPlugin(),
@@ -222,7 +228,7 @@ class CalculationDependencyProvider extends SprykerCalculationDependencyProvider
      *
      * @param \Spryker\Zed\Kernel\Container $container
      *
-     * @return \Spryker\Zed\Calculation\Dependency\Plugin\CalculationPluginInterface[]
+     * @return \Spryker\Zed\CalculationExtension\Dependency\Plugin\CalculationPluginInterface[]
      */
     protected function getOrderCalculatorPluginStack(Container $container)
     {

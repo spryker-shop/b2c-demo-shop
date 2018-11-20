@@ -32,7 +32,7 @@ class SaleController extends AbstractController
         if ($categoryPath) {
             $categoryNode = $this->getCategoryNode($categoryPath);
 
-            $parameters['category'] = $categoryNode['data']['node_id'];
+            $parameters['category'] = $categoryNode['node_id'];
         }
 
         $searchResults = $this
@@ -76,6 +76,6 @@ class SaleController extends AbstractController
             ));
         }
 
-        return $categoryNode;
+        return $categoryNode['data'];
     }
 }

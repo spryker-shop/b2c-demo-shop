@@ -1,14 +1,37 @@
 <?php
 
 /**
- * Copyright © 2016-present Spryker Systems GmbH. All rights reserved.
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * This file is part of the Spryker Suite.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace Pyz\Zed\ProductDiscontinued;
 
+use Spryker\Zed\ProductDiscontinued\ProductDiscontinuedDependencyProvider as SprykerProductDiscontinuedDependencyProvider;
+use Spryker\Zed\ProductDiscontinuedProductBundleConnector\Communication\Plugin\DiscontinueBundlePostProductDiscontinuePlugin;
+use Spryker\Zed\ProductDiscontinuedProductLabelConnector\Communication\Plugin\PostDeleteProductDiscontinuedPlugin;
+use Spryker\Zed\ProductDiscontinuedProductLabelConnector\Communication\Plugin\PostProductDiscontinuedPlugin;
 
-class ProductDiscontinuedDependencyProvider
+class ProductDiscontinuedDependencyProvider extends SprykerProductDiscontinuedDependencyProvider
 {
+    /**
+     * @return \Spryker\Zed\ProductDiscontinuedExtension\Dependency\Plugin\PostProductDiscontinuePluginInterface[]
+     */
+    protected function getPostProductDiscontinuePlugins(): array
+    {
+        return [
+            new DiscontinueBundlePostProductDiscontinuePlugin(),
+            new PostProductDiscontinuedPlugin(),
+        ];
+    }
 
+    /**
+     * @return \Spryker\Zed\ProductDiscontinuedExtension\Dependency\Plugin\PostDeleteProductDiscontinuedPluginInterface[]
+     */
+    protected function getPostDeleteProductDiscontinuedPlugins(): array
+    {
+        return [
+            new PostDeleteProductDiscontinuedPlugin(),
+        ];
+    }
 }
