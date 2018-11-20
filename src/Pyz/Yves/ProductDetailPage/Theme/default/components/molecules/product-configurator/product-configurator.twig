@@ -32,29 +32,42 @@
 
 {% block body %}
 
-    <h1 class="product-name">{{productName}}</h1>
+    <h1 class="title title--product">{{productName}}</h1>
 
-    <div class="grid grid--justify pdp-price-review">
+    <div class="grid grid--justify spacing-bottom spacing-bottom--bigger">
         {{ widgetBlock('ProductReviewWidgetPlugin', 'rating', data.product.idProductAbstract) }}
-        <div class="col product-details__price">
-            {{ widget('PriceWidgetPlugin', data.product) }}
+        <div class="col text-right">
+            {% include molecule('price') with {
+                modifiers: ['pdp'],
+                data: {
+                    amount: data.product.price | money,
+                    originalAmount: data.product.prices.ORIGINAL is not defined ? null : data.product.prices.ORIGINAL | money
+                }
+            } only %}
         </div>
     </div>
 
     {% if data.isBundle != null %}
-        <div class="pdp-option">
-            <div class="pdp-option__title js-toggle-pdp-options active" data-toggle-target=".js-pdp-option-bundle">{{ 'bundle.title' | trans }}</div>
-            <div class="pdp-option__wrapper bundle-list-options__wrap js-pdp-option-bundle">
-                <ul class="grid bundle-list-options">
-                    {% for item in data.bundleItems %}
-                        <li class="col col--sm-6 bundle-list-options__item">
-                            {{ item.name }}
-                            <span class="bundle-list-options__quantity bundle-quantity"> ·&nbsp; {{ item.quantity }}x</span>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
-        </div>
+        {% embed molecule('toggler-item') with {
+            modifiers: ['with-top-border', 'option'],
+            data: {
+                title: 'bundle.title' | trans,
+                triggerClass: config.jsName ~ '__trigger-bundle',
+                targetClass: config.jsName ~ '__target-bundle',
+                isActive: true,
+            },
+            embed: {
+                bundleItems: data.bundleItems,
+            }
+        } only %}
+            {% block contentText %}
+                {% include molecule('bundle-option-list', 'ProductDetailPage') with {
+                    data: {
+                        bundleItems: embed.bundleItems,
+                    }
+                } only %}
+            {% endblock %}
+        {% endembed %}
     {% endif %}
 
     {{ widget('ProductGroupWidgetPlugin', data.product.idProductAbstract) }}
@@ -75,27 +88,37 @@
         {% else %}
 
             {% if not isDisabled %}
-                <div class="pdp-option">
-                    <div class="pdp-option__title">{{'cart.item_quantity' | trans}}</div>
-                    <div class="pdp-option__wrapper">
+                {% embed molecule('toggler-item') with {
+                    modifiers: ['with-top-border', 'option'],
+                    data: {
+                        title: 'cart.item_quantity' | trans,
+                        isToggler: false,
+                    }
+                } only %}
+                    {% block contentText %}
                         {% include molecule('quantity-counter') with {
-                            modifiers: ['lg'],
+                            modifiers: ['quantity-large', 'no-spacing'],
                             data: {
                                 readOnly: true
                             }
                         } only %}
-                    </div>
-                </div>
+                    {% endblock %}
+                {% endembed %}
             {% endif %}
 
             {% if not isAvailable %}
                 {{ widget('AvailabilityWidgetPlugin', data.product) }}
             {% endif %}
 
-            <div class="add-to-cart">
-                <button type="submit" class="button button--black button--expand" {{ isDisabled ? 'disabled' : '' }} onclick="this.form.submit(); this.disabled='disabled'; return false;" {{qa('add-to-cart-button')}}>
+            <div class="{{ config.name }}__button-wrap">
+                <button type="submit" class="button button--large button--expand {{ config.jsName ~ '__button' }}" {{ isDisabled ? 'disabled' : '' }} {{qa('add-to-cart-button')}}>
                     {{ 'page.detail.add-to-cart' | trans }}
                 </button>
+                {% include molecule('action-single-click-enforcer') with {
+                    attributes: {
+                        'target-selector': '.' ~ config.jsName ~ '__button'
+                    }
+                } only %}
             </div>
         {% endif %}
     </form>

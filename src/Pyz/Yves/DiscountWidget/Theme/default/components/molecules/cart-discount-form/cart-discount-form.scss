@@ -1,0 +1,32 @@
+@mixin discount-widget-cart-discount-form($name: '.cart-discount-form') {
+    #{$name} {
+        &--checkout {
+            padding: rem(18) 0;
+            border-top: dotted rem(1) $setting-color-gray-3;
+            border-bottom: dotted rem(1) $setting-color-gray-3;
+
+            .grid {
+                margin: 0;
+            }
+        }
+
+        .label {
+            display: none;
+        }
+
+        .form__field {
+            padding: 0;
+        }
+
+        .form__action {
+            margin: 0;
+        }
+
+        .input {
+            border-radius: rem(2) 0 0 rem(2);
+            height: rem(48);
+        }
+    }
+}
+
+@include discount-widget-cart-discount-form();

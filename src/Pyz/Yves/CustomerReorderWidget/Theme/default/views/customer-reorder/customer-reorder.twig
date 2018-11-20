@@ -30,14 +30,14 @@
         <div class="grid grid--middle grid--right">
             <div class="form-field col col--sm-5 col--lg-3">
                 <div class="box">
-                    <button class="button button--expand button--black js-customer-reorder__trigger" {% if not _widget.availability %}disabled{% endif %}>
+                    <button class="button button--expand  js-customer-reorder__trigger" {% if not _widget.availability %}disabled{% endif %}>
                         {{'customer.order.reorder_selected' | trans}}
                     </button>
                 </div>
             </div>
             <div class="form-field col col--sm-5 col--lg-3">
                 <div class="box">
-                    <a href="{{ path('customer/order/reorder', {'idOrder': _widget.order.idSalesOrder}) }}" class="button button--expand button--black">
+                    <a href="{{ path('customer/order/reorder', {'idOrder': _widget.order.idSalesOrder}) }}" class="button button--expand ">
                         {{ 'customer.order.reorder_all' | trans }}
                     </a>
                 </div>

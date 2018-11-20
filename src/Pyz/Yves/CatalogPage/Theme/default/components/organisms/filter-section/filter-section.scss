@@ -7,16 +7,16 @@
         }
 
         &__item {
-            border-bottom: dotted rem(1) $setting-color-lightest;
+            border-bottom: dotted rem(1) $setting-color-gray-3;
 
             &:first-child {
-                border-top: dotted rem(1) $setting-color-lightest;
+                border-top: dotted rem(1) $setting-color-gray-3;
 
                 @include helper-breakpoint-media-min($xl-min) {
                     #{$name}__title {
                         &::before,
                         &::after {
-                            display: none !important;
+                            display: none;
                         }
                     }
                 }
@@ -37,24 +37,24 @@
                     opacity: 0.5;
                 }
 
-                &::before {
+                &::before,
+                &::after {
                     content: '';
-                    width: rem(12);
-                    height: rem(2);
-                    background: $setting-color-dark;
+                    background: $setting-color-black;
                     position: absolute;
                     top: 50%;
+                }
+
+                &::before {
+                    width: rem(12);
+                    height: rem(2);
                     right: 0;
                     margin-top: rem(-1);
                 }
 
                 &::after {
-                    content: '';
                     width: rem(2);
                     height: rem(12);
-                    background: $setting-color-dark;
-                    position: absolute;
-                    top: 50%;
                     right: rem(5);
                     margin-top: rem(-6);
                 }
@@ -75,7 +75,7 @@
                 top: 0;
                 left: 0;
                 width: 100%;
-                background: $setting-color-wild-sand;
+                background: $setting-color-gray-1;
                 padding: rem(20) rem(24);
                 margin: 0;
             }

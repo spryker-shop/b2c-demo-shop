@@ -1,0 +1,26 @@
+{% extends template('page-layout-main') %}
+
+{% define data = {
+    breadcrumbs: _view.stepBreadcrumbs.breadcrumbs | default([])
+} %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block header %}
+    {% embed organism('header') with {
+        modifiers: ['border-bottom']
+    } only %}
+        {% block mobile %}
+            <a href="#" class="link link--alt js-page-layout-main__side-drawer-trigger">
+                {% include atom('icon') with {
+                    modifiers: ['big'],
+                    data: {
+                        name: 'bars'
+                    }
+                } only %}
+            </a>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
+
+{% block contentClass %}page-layout-cart{% endblock %}

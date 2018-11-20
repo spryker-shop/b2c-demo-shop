@@ -1,0 +1,23 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'bundle-option-list',
+    tag: 'ul'
+} %}
+
+{% define data = {
+    bundleItems: required,
+} %}
+
+{% block class -%}
+    {{ parent() }} grid
+{%- endblock %}
+
+{% block body %}
+    {% for item in data.bundleItems %}
+        <li class="col col--sm-6 {{ config.name }}__item">
+            {{ item.name }}
+            <span class="{{ config.name }}__quantity"> ·&nbsp; {{ item.quantity }}x</span>
+        </li>
+    {% endfor %}
+{% endblock %}

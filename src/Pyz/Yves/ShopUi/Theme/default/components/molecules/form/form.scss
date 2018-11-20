@@ -1,18 +1,55 @@
 $shop-ui-form-field-margin: rem(8);
+$review-rating-field-width: rem(154);
 
 @mixin shop-ui-form($name: '.form') {
     #{$name} {
         &__field {
-            padding: 0 rem(16) rem(27) !important;
+            padding: 0 rem(16) rem(27);
+
+            &--review {
+                padding: 0 0 rem(25);
+
+                @include helper-breakpoint-media-min($md-min) {
+                    padding: 0 0 rem(28);
+                }
+            }
+
+            &--review-summary {
+                @include helper-breakpoint-media-min($md-min) {
+                    min-width: 0;
+                    width: calc(100% - #{$review-rating-field-width});
+                }
+            }
+
+            &--review-rating {
+                @include helper-breakpoint-media-min($md-min) {
+                    min-width: 0;
+                    width: auto;
+                    margin: rem(20) 0 0 auto;
+                }
+            }
         }
 
         &__actions {
             text-align: right;
+
+            &--profile {
+                padding: rem(8) rem(16);
+            }
         }
 
         &__action {
             margin-top: $shop-ui-form-field-margin;
             margin-left: $shop-ui-form-field-margin;
+
+            &--checkout,
+            &--login {
+                margin: 0;
+
+                &:not(:last-child) {
+                    margin-top: rem(30);
+                }
+            }
         }
 
         &--inline &__container {
@@ -35,6 +72,108 @@ $shop-ui-form-field-margin: rem(8);
         &--inline &__field {
             padding-bottom: 0;
             padding-right: 0;
+        }
+
+        &--checkout-actions {
+            #{$name}__actions {
+                padding-top: rem(29);
+                display: flex;
+                flex-direction: column-reverse;
+                align-items: flex-end;
+            }
+        }
+
+        &--checkout-address-step,
+        &--checkout-payment-step {
+            .col {
+                @include helper-breakpoint-media-max($sm-max) {
+                    width: 100%;
+                }
+            }
+        }
+
+        &--login,
+        &--checkout-form-elements {
+            label,
+            .label {
+                display: block;
+                color: $setting-color-black;
+            }
+
+            .checkbox__box,
+            .toggler-checkbox__box {
+                margin-top: rem(2);
+
+                @include helper-breakpoint-media-min($md-min) {
+                    margin-top: rem(4);
+                }
+            }
+
+            .checkbox__check {
+                @include helper-breakpoint-media-min($md-min) {
+                    top: rem(7);
+                }
+            }
+        }
+
+        &--login {
+            #{$name}__title {
+                width: 100%;
+                font: fw(bold) rem(32) $setting-font-family-additional;
+                letter-spacing: rem(-0.5);
+                line-height: 1;
+                margin-bottom: rem(32);
+                padding-bottom: rem(10);
+                border-bottom: dotted rem(1) $setting-color-gray-3;
+
+                @include helper-breakpoint-media-min($md-min) {
+                    font-size: rem(47);
+                    margin-bottom: rem(58);
+                }
+            }
+        }
+
+        &--pdp-review-form {
+            .label {
+                color: $setting-color-gray-6;
+
+                &::after {
+                    display: none;
+                }
+            }
+
+            input[type='text'],
+            textarea {
+                @include helper-effect-transition(all 0.4s ease);
+                font: fw(regular) rem(17)/rem(22) $setting-font-family;
+                color: $setting-color-gray-6;
+                padding: rem(10) rem(15);
+
+                &:focus {
+                    border-color: $setting-color-gray-5;
+                }
+
+                &:hover {
+                    background-color: $setting-color-gray-1;
+                }
+            }
+        }
+
+        &--grid-indent {
+            .grid {
+                margin: 0 rem(-16);
+                max-width: none;
+            }
+        }
+
+        &__shipment-item {
+            &:not(:first-child) {
+                margin-top: rem(50);
+
+                @include helper-breakpoint-media-min($md-min) {
+                    margin-top: rem(40);
+                }
+            }
         }
 
         .label {

@@ -20,14 +20,11 @@
 
 {% block customerContent %}
     <div class="box">
-
-        <div class="customer-account__box grid grid--justify grid--middle">
-            <h5 class="customer-account__subtitle col">{{ data.wishlistName }}</h5>
-            <div class="col">
-
-            </div>
-        </div>
-
+        {% include molecule('title-box', 'CustomerPage') with {
+            data: {
+                title: data.wishlistName
+            }
+        } only %}
 
         {% if data.wishlistItems is empty %}
             <div class="text-center">
@@ -40,7 +37,6 @@
                     wishlistName: data.wishlistName
                 }
             } only %}
-
 
             {% include molecule('pagination') with {
                 data: data.pagination
@@ -56,17 +52,18 @@
                         action: path('wishlist/move-all-available-to-cart', { wishlistName: data.wishlistName }),
                         attr: { class: '' }
                     }) }}
-                    <button type="submit" class="button button--black">
+
+                    <button type="submit" class="button">
                         {{ 'customer.account.wishlist.add_all_available_to_cart' | trans }}
                     </button>
 
                     {% for wishlistItemMetaField in data.addAllProductsToCart.wishlistItemMetaCollection %}
                         {{ form_widget(wishlistItemMetaField) }}
                     {% endfor %}
+
                     {{ form_end(data.addAllProductsToCart) }}
                 {% endif %}
             </div>
         </div>
-
     </div>
 {% endblock %}

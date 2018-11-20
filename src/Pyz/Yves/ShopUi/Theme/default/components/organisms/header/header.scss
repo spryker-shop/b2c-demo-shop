@@ -2,9 +2,13 @@
     #{$name} {
         position: relative;
         background-color: $setting-color-white;
-        padding-bottom: 0;
         z-index: $setting-zi-header;
         padding-top: rem(18);
+
+        &--border-bottom {
+            padding-bottom: rem(14);
+            border-bottom: rem(1) dotted $setting-color-gray-3;
+        }
 
         &__row {
             padding: 0 rem(16);
@@ -21,20 +25,20 @@
         }
 
         &__navigation-main {
-            z-index: $setting-zi-header + 1;
             position: relative;
+            z-index: $setting-zi-header + 1;
         }
 
         &__overlay-shadow {
-            background: $setting-color-black;
+            @include helper-effect-transition(opacity visibility, 400ms, ease-in-out);
+            background-color: $setting-color-black;
             position: fixed;
             top: 0;
             left: 0;
             height: 100%;
             width: 100%;
-            z-index: -1;
+            z-index: $setting-zi-hide;
             opacity: 0;
-            transition: opacity 400ms ease-in-out, visibility 400ms ease-in-out 400ms;
             visibility: hidden;
         }
 
@@ -48,9 +52,9 @@
                 visibility: visible;
 
                 #{$name}__overlay-shadow {
+                    @include helper-effect-transition(opacity visibility, 400ms, ease-in-out);
                     visibility: visible;
                     opacity: 0.4;
-                    transition: opacity 400ms ease-in-out, visibility 0ms ease-in-out;
                 }
 
                 #{$name}__search-overlay-container {
@@ -58,7 +62,6 @@
                     transform: scaleY(1);
                     opacity: 1;
                     visibility: visible;
-                    transition: all 300ms ease-in-out;
                 }
             }
         }
@@ -67,26 +70,18 @@
             @include helper-effect-transition(all);
             padding: rem(34) rem(30);
             background: $setting-color-white;
-            min-width: rem(480);
-            transition: all 300ms ease-in-out;
+            min-width: 100vw;
             transform-origin: top center;
             transform: scaleY(0);
             opacity: 0;
 
-            @include helper-breakpoint-media-max($md-max) {
-                min-width: rem(300);
-                width: 100vw;
+            @include helper-breakpoint-media-min($md-min) {
+                min-width: rem(480);
             }
         }
 
         &__search-open {
             cursor: pointer;
-            float: left;
-
-            .icon {
-                margin-left: rem(10);
-                vertical-align: bottom;
-            }
 
             &::before {
                 content: '';
@@ -94,45 +89,73 @@
                 width: rem(85);
                 height: rem(25);
                 float: left;
-                border-bottom: rem(1) solid $setting-color-gray;
+                border-bottom: rem(1) solid $setting-color-gray-3;
             }
+        }
+
+        &__search-open-icon {
+            margin-left: rem(10);
+            vertical-align: bottom;
         }
 
         &__search-close {
-            position: absolute;
-            right: 0;
-            top: 0;
-            padding: rem(34) rem(30);
             z-index: $setting-zi-search-suggestions;
             cursor: pointer;
+            margin-bottom: rem(25);
+            width: rem(20);
+            padding: 0;
 
-            @include helper-breakpoint-media-max($sm-max) {
-                position: static;
-                padding: 0;
-                margin-bottom: rem(25);
-                width: rem(24);
-                .icon {
-                    width: rem(20);
-                    height: rem(20);
-                }
+            @include helper-breakpoint-media-min($md-min) {
+                padding: rem(34) rem(30);
+                position: absolute;
+                right: 0;
+                top: 0;
+                width: auto;
             }
         }
 
-        &__currency-lang {
-            display: flex;
-            order: 1;
+        &__search-close-icon {
+            width: rem(20);
+            height: rem(20);
 
-            .custom-select {
-                margin-right: rem(16);
-                font-size: rem(16);
+            @include helper-breakpoint-media-min($md-min) {
+                width: rem(16);
+                height: rem(16);
+            }
+        }
 
-                &__caret {
-                    pointer-events: none;
-                }
+        &--checkout {
+            padding-top: 0;
 
-                .select2-selection__rendered {
-                    line-height: rem(24);
-                }
+            @include helper-breakpoint-media-min($md-min) {
+                padding-top: rem(18);
+            }
+
+            #{$name}__navigation-top,
+            .container {
+                position: relative;
+            }
+        }
+
+        &__back-link {
+            position: absolute;
+            top: 50%;
+            left: rem(16);
+            color: $setting-color-gray-5;
+            font-size: 0;
+            line-height: rem(19);
+            font-weight: fw(medium);
+            transform: translateY(-50%);
+            padding: rem(5) rem(5) rem(5) 0;
+            z-index: $setting-zi-side-drawer;
+
+            @include helper-breakpoint-media-min($md-min) {
+                font-size: rem(19);
+                padding: 0;
+            }
+
+            &:hover {
+                text-decoration: none;
             }
         }
 

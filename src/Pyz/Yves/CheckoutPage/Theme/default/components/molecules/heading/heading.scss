@@ -1,0 +1,40 @@
+@mixin checkout-page-heading($name: '.heading') {
+    #{$name} {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin: 0 0 rem(32);
+        padding-bottom: rem(10);
+        border-bottom: dotted rem(1) $setting-color-gray-3;
+
+        @include helper-breakpoint-media-min($md-min) {
+            margin-bottom: rem(58);
+        }
+
+
+        &__logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0;
+            width: rem(93);
+            height: rem(36);
+            border-radius: rem(2);
+            border: solid rem(1) $setting-color-input-border;
+
+            &--indent {
+                margin: 0 rem(8) rem(10) 0;
+            }
+
+            &--img {
+                flex-shrink: 0;
+                max-width: 70%;
+                max-height: 90%;
+            }
+        }
+
+        @content;
+    }
+}
+
+@include checkout-page-heading();

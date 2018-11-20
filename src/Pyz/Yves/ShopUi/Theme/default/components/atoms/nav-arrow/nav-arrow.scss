@@ -1,16 +1,22 @@
 @mixin shop-ui-nav-arrow($name: '.nav-arrow') {
     #{$name} {
         display: none;
-        @media only screen and (max-width: rem(769)) {
+
+        @include helper-breakpoint-media-min($lg-min) {
             display: block;
             position: absolute;
             top: 50%;
             transform: translate(0, -50%);
+        }
 
-            &--left {
+        &--left {
+            @include helper-breakpoint-media-min($lg-min) {
                 left: rem(20);
             }
-            &--right {
+        }
+
+        &--right {
+            @include helper-breakpoint-media-min($lg-min) {
                 right: rem(20);
             }
         }

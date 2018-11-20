@@ -1,0 +1,45 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'image-gallery',
+    tag: 'image-gallery'
+} %}
+
+{% define data = {
+    idProductAbstract: required,
+    images: []
+} %}
+
+{% define attributes = {
+    'active-class': '',
+    'slider-config': '{}'
+} %}
+
+{% set imagesQuantity = data.images | length %}
+{% set firstImage = data.images | first %}
+
+{% block body %}
+    {% if (imagesQuantity > 1) %}
+        {% include molecule('image-gallery-thumbnail', 'ProductImageWidget') with {
+            class: config.jsName ~ '-thumbnail',
+            data: {
+                images: data.images
+            }
+        } only %}
+    {% endif %}
+    <div class="{{config.name}}__container {{config.jsName}}">
+        {% for image in data.images %}
+            <div class="{{config.name}}__item {{config.jsName}}__item {% if loop.first %}{{config.name}}__item--active{% endif %}">
+                {% if image.externalUrlLarge is not empty %}
+                    <img class="{{config.name}}__image" src="{{ image.externalUrlLarge }}" alt="{{ 'page.product.details.slider_image' | trans }}">
+                {% endif %}
+            </div>
+        {% endfor %}
+
+        <div class="{{config.name}}__item {{ 'js-pdp-color-group__image-' ~ data.idProductAbstract }}">
+            {% if firstImage.externalUrlLarge is not empty %}
+                <img class="{{config.name}}__image" src="{{ firstImage.externalUrlLarge }}" alt="{{ 'page.product.details.slider_image' | trans }}">
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

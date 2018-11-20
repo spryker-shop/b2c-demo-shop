@@ -34,11 +34,11 @@
                 {% endblock %}
 
                 {% block title %}
-                    <h1 class="main-title">{{data.title}}</h1>
+                    <h1 class="title title--main">{{data.title}}</h1>
                 {% endblock %}
             {% endblock %}
 
-            <main>
+            <main class="{% block contentClass %}{% endblock %}">
                 {% block content %}{% endblock %}
             </main>
         </div>

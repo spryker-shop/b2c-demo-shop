@@ -1,0 +1,22 @@
+@mixin shop-ui-multi-inspirational-wrap($name: '.multi-inspirational-wrap') {
+    #{$name} {
+        margin: 0 0 rem(150);
+        @include helper-breakpoint-media-max($sm-max) {
+            margin: 0 0 rem(60);
+        }
+        &--left {
+            .col:first-of-type {
+                @include helper-breakpoint-media-max($md-max) {
+                    order: 2;
+                }
+            }
+            .col:last-of-type {
+                @include helper-breakpoint-media-max($md-max) {
+                    order: 1;
+                }
+            }
+        }
+    }
+}
+
+@include shop-ui-multi-inspirational-wrap();

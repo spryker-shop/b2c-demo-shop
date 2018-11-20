@@ -11,7 +11,7 @@
 
 {% block content %}
     {% embed molecule('form') with {
-        class: 'checkout-layout',
+        modifiers: ['checkout-payment-step', 'checkout-actions', 'checkout-form-elements'],
         data: {
             form: data.forms.payment,
             options: {
@@ -22,13 +22,13 @@
             submit: {
                 enable: true,
                 text: 'checkout.step.summary' | trans,
-                class: 'button button--black button--big button--expand'
+                class: 'form__action--checkout button  button--large button--expand'
             },
             cancel: {
                 enable: true,
                 url: data.backUrl,
                 text: 'general.back.button' | trans,
-                class: 'button button--secondary button--hollow button--expand'
+                class: 'form__action--checkout button button--hollow button--expand'
             }
         }
     } only %}
@@ -36,7 +36,7 @@
 
             {% for name, choices in data.form.paymentSelection.vars.choices %}
 
-                <ul class="list-switches register-type">
+                <ul class="list-switches list-switches--register-type">
                     {% for key, choice in choices %}
                         <li class="list-switches__item">
                             {% if key == 0 %}
@@ -52,8 +52,8 @@
                                 }) }}
 
                                 <div class="list-switches__img-wrap">
-                                    <img src="/assets/images/logo-visa.png" alt="Visa">
-                                    <img src="/assets/images/logo-mastercard.png" alt="Mastercard">
+                                    <img class="list-switches__img" src="/assets/images/logo-visa.png" alt="Visa">
+                                    <img class="list-switches__img" src="/assets/images/logo-mastercard.png" alt="Mastercard">
                                 </div>
 
                             {% else %}
@@ -73,7 +73,8 @@
 
                 {% for key, choice in choices %}
                     {% embed molecule('form') with {
-                        class: 'payment-form-indent grid',
+                        class: 'payment-form-indent',
+                        modifiers: ['grid-indent', 'checkout-form-elements'],
                         data: {
                             form: data.form[data.form.paymentSelection[key].vars.value],
                             enableStart: false,
@@ -94,7 +95,7 @@
 
                         {% block fieldset %}
                             <div class="js-payment-method-{{embed.index}} {% if embed.index != 1 %} is-hidden{% endif %}">
-                                <h5>{{ embed.toggler.vars.label | trans }}</h5>
+                                <h5 class="title title--checkout">{{ embed.toggler.vars.label | trans }}</h5>
                                 {{parent()}}
                             </div>
                         {% endblock %}

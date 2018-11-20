@@ -10,16 +10,26 @@
 
 {% block body %}
     {% for optionGroup in data.optionGroups %}
-        <div class="pdp-option">
-            <div class="pdp-option__title js-toggle-pdp-options" data-toggle-target=".js-pdp-option-{{ loop.index }}">{{optionGroup.name | trans}}</div>
-            <div class="pdp-option__wrapper js-pdp-option-{{ loop.index }} is-hidden">
+        {% embed molecule('toggler-item') with {
+            modifiers: ['with-top-border', 'option'],
+            data: {
+                title: optionGroup.name | trans,
+                triggerClass: 'js-option-configurator__trigger',
+                targetClass: 'js-option-configurator__target-' ~ loop.index,
+                isTogglerIncluded: loop.first ? true : false
+            },
+            embed: {
+                optionGroup: optionGroup,
+            }
+        } only %}
+            {% block contentText %}
                 {% embed atom('select') with {
                     modifiers: ['expand'],
                     attributes: {
-                        name: 'product-option[' ~ optionGroup.name ~ ']',
+                        name: 'product-option[' ~ embed.optionGroup.name ~ ']',
                     },
                     embed: {
-                        options: optionGroup.productOptionValues
+                        options: embed.optionGroup.productOptionValues
                     }
                 } only %}
                     {% block options %}
@@ -29,7 +39,7 @@
                         {% endfor %}
                     {% endblock %}
                 {% endembed %}
-            </div>
-        </div>
+            {% endblock %}
+        {% endembed %}
     {% endfor %}
 {% endblock %}

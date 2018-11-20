@@ -43,61 +43,45 @@
 
     <div class="container">
         <main class="container__inner">
-
             {% block content %}
-                {% block cmsTop %}
-                    {% if data.categoryId %}
-                        <div class="catalog-cms-block catalog-cms-block--top">
-                            {{ widgetBlock('CatalogCmsBlockWidgetPlugin', 'top', data.categoryId) }}
-                        </div>
-                    {% endif %}
-                {% endblock %}
-
-                <form method="GET" class="grid js-target-filter js-form-input-default-value-disabler__catalog-form">
+                <form method="GET" class="grid js-catalog-filter-target js-form-input-default-value-disabler__catalog-form">
                     {% block form %}
                         <div class="col col--sm-12 col--xl-3 catalog-left-side">
-                            {% include organism('filter-section', 'CatalogPage') with {
-                                data: {
-                                    facets: data.facets,
-                                    filterPath: data.filterPath,
-                                    categories: data.categories
-                                }
-                            } only %}
-
-                            {% block cmsMiddle %}
-                                {% if data.categoryId %}
-                                    <div class="catalog-cms-block catalog-cms-block--middle">
-                                        {{ widgetBlock('CatalogCmsBlockWidgetPlugin', 'middle', data.categoryId) }}
-                                    </div>
-                                {% endif %}
+                            {% block filterSection %}
+                                {% include organism('filter-section', 'CatalogPage') with {
+                                    data: {
+                                        facets: data.facets,
+                                        filterPath: data.filterPath,
+                                        categories: data.categories,
+                                        togglerClass: 'js-catalog-toggler-click__trigger'
+                                    }
+                                } only %}
                             {% endblock %}
                         </div>
 
                         <div class="col col--sm-12 col--xl-9 catalog-right-side">
-                            {% include molecule('sort', 'CatalogPage')  only %}
+                            {% block catalogContent %}
+                                {% include molecule('sort', 'CatalogPage') with {
+                                    data: {
+                                        togglerClass: 'js-catalog-toggler-click__trigger'
+                                    }
+                                }  only %}
 
-                            {% include organism('active-filter-section', 'CatalogPage') with {
-                                data: {
-                                    facets: data.facets
-                                }
-                            } only %}
+                                {% include organism('active-filter-section', 'CatalogPage') with {
+                                    data: {
+                                        facets: data.facets
+                                    }
+                                } only %}
 
-                            <div class="grid grid--stretch product-list">
-                                {% for product in data.products %}
-                                    {{ widget('ProductWidgetPlugin', product, data.viewMode) }}
-                                {% endfor %}
-                            </div>
+                                <div class="grid grid--stretch product-list">
+                                    {% for product in data.products %}
+                                        {{ widget('ProductWidgetPlugin', product, data.viewMode) }}
+                                    {% endfor %}
+                                </div>
 
-                            {% include molecule('pagination') with {
-                                data: data.pagination
-                            } only %}
-
-                            {% block cmsBottom %}
-                                {% if data.categoryId %}
-                                    <div class="catalog-cms-block catalog-cms-block--bottom">
-                                        {{ widgetBlock('CatalogCmsBlockWidgetPlugin', 'bottom', data.categoryId) }}
-                                    </div>
-                                {% endif %}
+                                {% include molecule('pagination') with {
+                                    data: data.pagination
+                                } only %}
                             {% endblock %}
                         </div>
 
@@ -105,8 +89,8 @@
 
                         {% include molecule('toggler-click') with {
                             attributes: {
-                                'trigger-selector': '.js-trigger-filter',
-                                'target-selector': '.js-target-filter',
+                                'trigger-selector': '.js-catalog-toggler-click__trigger',
+                                'target-selector': '.js-catalog-filter-target',
                                 'class-to-toggle': 'show-filter'
                             }
                         } only %}

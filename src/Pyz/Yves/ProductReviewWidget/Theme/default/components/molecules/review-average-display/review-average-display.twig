@@ -1,8 +1,7 @@
 {% extends model('component') %}
 
 {% define config = {
-    name: 'review-average-display',
-    tag: 'section'
+    name: 'review-average-display'
 } %}
 
 {% define data = {
@@ -11,9 +10,10 @@
 } %}
 
 {% block body %}
-    <div class="review-average__label">Average Rating</div>
+    <div class="{{ config.name }}__title">{{ 'product_review.average_ratings' | trans }}</div>
 
     {% include molecule('rating-selector', 'ProductReviewWidget') with {
+        modifiers: ['marginless'],
         data: {
             value: data.summary.averageRating,
             maxValue: data.ratingMaxValue,

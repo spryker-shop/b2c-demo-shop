@@ -8,21 +8,23 @@
 {% block breadcrumbs %}{% endblock %}
 
 {% block title %}
-    <div class="main-title"></div>
+    <div class="title title--main"></div>
 {% endblock %}
 
 {% block content %}
-    <div class="checkout-layout success-page">
+    <div class="page-layout-checkout success-page">
         <h1 class="success-page__title">{{data.title}}</h1>
         <p class="success-page__text">{{data.message}}</p>
+
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-        <a class="success-page__link" href="{{ url('customer/overview') }}">{{ 'checkout.step.success.link' | trans }}
-            {% include atom('icon') with {
-                data: {
-                    name: 'chevron-right'
-                }
-            } only %}
-        </a>
+            <a class="link link--darkest link--checkout-success" href="{{ url('customer/overview') }}">{{ 'checkout.step.success.link' | trans }}
+                {% include atom('icon') with {
+                    modifiers: ['small', 'checkout-success'],
+                    data: {
+                        name: 'chevron-right'
+                    }
+                } only %}
+            </a>
         {% endif %}
     </div>
 {% endblock %}

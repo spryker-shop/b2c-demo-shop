@@ -9,29 +9,48 @@
     description: '',
     attributes: [],
     sku: '',
-    index: null
+    index: ''
 } %}
 
 {% block body %}
-    <div class="pdp-option">
-        <div class="pdp-option__title js-toggle-pdp-options" data-toggle-target=".js-pdp-option-description{% if data.index != null %}-{{ data.index }}{% endif %}">{{ 'product.attribute.description' | trans }}</div>
-        <div class="pdp-option__wrapper js-pdp-option-description{% if data.index != null %}-{{ data.index }}{% endif %} is-hidden">
-            {% if data.description is not empty %}
-                {{ data.description }}
+    {% embed molecule('toggler-item') with {
+        modifiers: modifiers | merge(['with-top-border', 'option']),
+        data: {
+            title: 'product.attribute.description' | trans,
+            triggerClass: config.jsName ~ '__trigger-description' ~ (data.index is not empty ? '-' ~ data.index : ''),
+            targetClass: config.jsName ~ '__target-description' ~ (data.index is not empty ? '-' ~ data.index : ''),
+        },
+        embed: {
+            description: data.description,
+            sku: data.sku
+        }
+    } only %}
+        {% block contentText %}
+            {% if embed.description is not empty %}
+                {{ embed.description }}
             {% endif %}
-            <div class="pdp-option__sku">{{ 'product.attribute.sku' | trans }}: {{ data.sku }}</div>
-        </div>
-    </div>
+            <div class="spacing-top spacing-top--bigger">{{ 'product.attribute.sku' | trans }}: {{ embed.sku }}</div>
+        {% endblock %}
+    {% endembed %}
 
-    <div class="pdp-option">
-        <div class="pdp-option__title js-toggle-pdp-options" data-toggle-target=".js-pdp-option-detail{% if data.index != null %}-{{ data.index }}{% endif %}">{{ 'page.product.details' | trans }}</div>
-        <div class="pdp-option__wrapper grid js-pdp-option-detail{% if data.index != null %}-{{ data.index }}{% endif %} is-hidden">
-            {% for name, value in data.attributes if name %}
-                <div class="col col--sm-6 pdp-option__detail" itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue">
-                    <div class="pdp-option__detail-name" itemprop="name">{{ ('product.attribute.' ~ name) | trans }}</div>
-                    <div class="pdp-option__detail-value" itemprop="value">{{ value }}</div>
-                </div>
-            {% endfor %}
-        </div>
-    </div>
+    {% embed molecule('toggler-item') with {
+        modifiers: modifiers | merge(['with-top-border', 'option']),
+        data: {
+            title: 'page.product.details' | trans,
+            triggerClass: config.jsName ~ '__trigger-details' ~ (data.index is not empty ? '-' ~ data.index : ''),
+            targetClass: config.jsName ~ '__target-details' ~ (data.index is not empty ? '-' ~ data.index : ''),
+        },
+        embed: {
+            attributes: data.attributes,
+            sku: data.sku
+        }
+    } only %}
+        {% block contentText %}
+            {% include molecule('product-detail-option', 'ProductDetailPage') with {
+                data: {
+                    attributes: embed.attributes
+                }
+            } only %}
+        {% endblock %}
+    {% endembed %}
 {% endblock %}

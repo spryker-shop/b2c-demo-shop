@@ -9,14 +9,21 @@
 
 {% block body %}
     {% if canWrite %}
-        <div class="cart-note">
-            <h4 class="cart-toggler__title js-form-toggle-1" data-toggle-target=".js-form-toggle-target-1">
-                {{ 'cart.note-title' | trans }}
-            </h4>
-            <div class="cart-toggler__content js-form-toggle-target-1 is-hidden">
+        {% embed molecule('toggler-item') with {
+            class: 'cart-note',
+            data: {
+                title: 'cart.note-title' | trans,
+                triggerClass: 'js-cart-note-form__trigger',
+                targetClass: 'js-cart-note-form__target'
+            },
+            embed: {
+                form: data.form
+            }
+        } only %}
+            {% block contentText %}
                 {% include molecule('form') with {
                     data: {
-                        form: data.form,
+                        form: embed.form,
                         options: {
                             action: url('cart-note/quote')
                         },
@@ -26,15 +33,7 @@
                         }
                     }
                 } only %}
-            </div>
-        </div>
+            {% endblock %}
+        {% endembed %}
     {% endif %}
-
-    {% include molecule('toggler-accordeon') with {
-        attributes: {
-            trigger: '.js-form-toggle-1',
-            'class-to-toggle': 'is-hidden'
-        }
-    } only %}
-
 {% endblock %}

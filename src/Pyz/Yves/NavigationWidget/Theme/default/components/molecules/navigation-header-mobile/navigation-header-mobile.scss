@@ -10,7 +10,7 @@
             width: 100vw;
             background: $setting-color-white;
             padding: rem(10) rem(16) rem(20);
-            border-bottom: 1px solid $setting-color-lightest;
+            border-bottom: 1px solid $setting-color-gray-3;
             box-shadow: 0 20px 15px -1px $setting-color-shadow;
             transform-origin: center top;
             transform: scaleY(0);
@@ -59,7 +59,7 @@
             display: block;
             height: rem(16);
             width: rem(30);
-            z-index: 100;
+            z-index: $setting-zi-element + 1;
 
             &--hidden {
                 opacity: 0;
@@ -67,7 +67,7 @@
 
             &--left {
                 left: rem(15);
-                background: linear-gradient(to right, $setting-color-white 0%, $setting-color-white 46%, rgba(255, 255, 255, 0) 92%, rgba(255, 255, 255, 0) 100%);
+                background: linear-gradient(to right, $setting-color-white 0%, $setting-color-white 46%, $setting-color-transparent 92%, $setting-color-transparent 100%);
 
                 #{$name}__icon {
                     left: 0;
@@ -76,10 +76,10 @@
 
             &--right {
                 right: rem(15);
-                background: linear-gradient(to right, rgba(255,255,255,0) 0%,
-                                                      rgba(255,255,255,0) 8%,
-                                                      rgba(255,255,255,1) 54%,
-                                                      rgba(255,255,255,1) 100%);
+                background: linear-gradient(to right, $setting-color-transparent 0%,
+                                                      $setting-color-transparent 8%,
+                                                      $setting-color-white 54%,
+                                                      $setting-color-white 100%);
 
                 #{$name}__icon {
                     right: 0;

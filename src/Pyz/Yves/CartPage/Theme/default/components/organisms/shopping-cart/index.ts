@@ -1,1 +1,0 @@
-import './shopping-cart.scss';

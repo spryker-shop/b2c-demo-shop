@@ -1,0 +1,79 @@
+@mixin product-image-widget-image-gallery($name: '.image-gallery') {
+    #{$name} {
+        position: relative;
+
+        &__container {
+            position: relative;
+            z-index: $setting-zi-element;
+            background: $setting-color-white;
+            display: none;
+
+            &::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: $setting-color-alpha-1;
+                z-index: $setting-zi-element + 1;
+            }
+
+            @include helper-breakpoint-media-min($lg-min) {
+                display: block;
+                height: rem(650);
+            }
+        }
+
+        &__item {
+            @include helper-effect-transition(opacity);
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: rem(280);
+            padding: rem(15) rem(16);
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            z-index: $setting-zi-element - 1;
+            background: $setting-color-white;
+
+            &--active,
+            &--color-active {
+                opacity: 1;
+            }
+
+            @include helper-breakpoint-media-min($lg-min) {
+                padding: rem(15) rem(30);
+                height: rem(480);
+            }
+
+            @include helper-breakpoint-media-min($xl-min) {
+                padding: rem(100) rem(70);
+                height: rem(650);
+            }
+
+            @include helper-breakpoint-media-min($xxl-min) {
+                padding: rem(80) rem(50);
+                height: rem(610);
+            }
+        }
+
+        &__image {
+            max-width: 100%;
+            max-height: rem(250);
+
+            @include helper-breakpoint-media-min($lg-min) {
+                max-height: 100%;
+
+            }
+        }
+
+        @content;
+
+    }
+}
+
+@include product-image-widget-image-gallery();

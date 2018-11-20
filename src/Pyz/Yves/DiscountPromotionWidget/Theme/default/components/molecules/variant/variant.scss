@@ -1,19 +1,9 @@
-@mixin shop-ui-variant($name: '.variant') {
+@mixin discount-promotion-widget-variant($name: '.variant') {
     #{$name} {
-        .select {
-            border: none;
-            select {
-                border: none;
-                padding: 0 rem(20);
-                font: normal rem(13) $setting-font-family-additional;
-                line-height: 2.08;
-            }
-        }
-        &__title {
-            font: normal rem(13) $setting-font-family-additional;
-            line-height: 1.31;
+        &__label {
+            font: normal rem(13)/1.31 $setting-font-family-additional;
         }
     }
 }
 
-@include shop-ui-variant();
+@include discount-promotion-widget-variant();

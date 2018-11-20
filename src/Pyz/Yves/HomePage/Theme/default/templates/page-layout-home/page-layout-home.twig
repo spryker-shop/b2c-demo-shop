@@ -1,58 +1,11 @@
-{% extends template('page-blank') %}
+{% extends template('page-layout-main') %}
 
-{%- block class -%}js-page-layout-main__side-drawer-container{%- endblock -%}
+{% block container %}
+    {% include organism('jumbotron-slider') only %}
 
-{% block body %}
-    {% block notifications %}
-        {% include organism('notification-area') only %}
-    {% endblock %}
-
-    {% block sidebar %}{% endblock %}
-
-    {% block outside %}{% endblock %}
-
-    {% block header %}
-        {% embed organism('header') only %}
-            {% block mobile %}
-                <a href="#" class="link link--alt js-page-layout-main__side-drawer-trigger">
-                    {% include atom('icon') with {
-                        modifiers: ['big'],
-                        data: {
-                            name: 'bars'
-                        }
-                    } only %}
-                </a>
-            {% endblock %}
-        {% endembed %}
-    {% endblock %}
-
-    {% include organism('jumbotron-slider')%}
-
-    <div class="container">
-        {% block pageInfo %}
-            <div class="box">
-                {% block breadcrumbs %}
-                    {% include molecule('breadcrumb') only %}
-                {% endblock %}
-
-                <hr />
-
-                {% block title %}
-                    <h3>{{data.title}}</h3>
-                {% endblock %}
-            </div>
-        {% endblock %}
+    <div class="container container--home-page">
+        <main>
+            {% block content %}{% endblock %}
+        </main>
     </div>
-
-    <main>
-        {% block content %}{% endblock %}
-    </main>
-
-    {% block footer %}
-        {% include organism('footer') only %}
-    {% endblock %}
-
-    {% block icons %}
-        {% include atom('icon-sprite') only %}
-    {% endblock %}
 {% endblock %}

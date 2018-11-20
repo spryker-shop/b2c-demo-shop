@@ -1,0 +1,20 @@
+{% extends template('widget') %}
+
+{% define data = {
+    options: _widget.cartItem.productOptions
+} %}
+
+{% block template %}
+    {% if data.options is not empty %}{{parent()}}{% endif %}
+{% endblock %}
+
+{% block body %}
+    <ul class="list list--expand list--plus">
+         {% for option in data.options %}
+            <li class="list__item option-item">
+                {{ option.value | trans }}
+                <span class="float-right">{{ option.unitPrice | money }}</span>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
