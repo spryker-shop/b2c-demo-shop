@@ -4,7 +4,9 @@ use Spryker\Shared\Kernel\Store;
 use Spryker\Shared\Propel\PropelConstants;
 use Spryker\Zed\Propel\PropelConfig;
 use Spryker\Zed\PropelOrm\Business\Builder\ExtensionObjectBuilder;
+use Spryker\Zed\PropelOrm\Business\Builder\ExtensionQueryBuilder;
 use Spryker\Zed\PropelOrm\Business\Builder\ObjectBuilder;
+use Spryker\Zed\PropelOrm\Business\Builder\QueryBuilder;
 
 $CURRENT_STORE = Store::getInstance()->getStoreName();
 $DSN = sprintf(
@@ -55,6 +57,8 @@ $config[PropelConstants::PROPEL] = [
                 // Spryker\Zed\PropelOrm\Business\Builder\ObjectBuilderWithLogger instead.
                 'object' => ObjectBuilder::class,
                 'objectstub' => ExtensionObjectBuilder::class,
+                'query' => QueryBuilder::class,
+                'querystub' => ExtensionQueryBuilder::class,
             ],
         ],
     ],

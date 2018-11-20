@@ -40,7 +40,7 @@ use SprykerShop\Yves\AgentWidget\Plugin\Provider\AgentWidgetControllerProvider;
 use SprykerShop\Yves\CalculationPage\Plugin\Provider\CalculationPageControllerProvider;
 use SprykerShop\Yves\CartNoteWidget\Plugin\Provider\CartNoteWidgetControllerProvider;
 use SprykerShop\Yves\CartPage\Plugin\Provider\CartControllerProvider;
-use SprykerShop\Yves\CartPage\Plugin\Provider\CartServiceProvider;
+use Pyz\Yves\CartPage\Plugin\Provider\CartServiceProvider;
 use SprykerShop\Yves\CatalogPage\Plugin\Provider\CatalogPageControllerProvider;
 use SprykerShop\Yves\CatalogPage\Plugin\Provider\CatalogPageTwigServiceProvider;
 use SprykerShop\Yves\CategoryWidget\Plugin\Provider\CategoryServiceProvider;
