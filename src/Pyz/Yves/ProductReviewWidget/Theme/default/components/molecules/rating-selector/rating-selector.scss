@@ -91,6 +91,10 @@ $product-review-rating-selector-icon-size-smallest: rem(12, number);
                 &--half {
                     width: $product-review-rating-selector-icon-size-smallest / 2;
                     height: $product-review-rating-selector-icon-size-smallest;
+
+                    &:nth-child(odd) {
+                        margin-right: rem(1);
+                    }
                 }
             }
 
@@ -100,12 +104,6 @@ $product-review-rating-selector-icon-size-smallest: rem(12, number);
 
                 &--half-left {
                     margin-right: -$product-review-rating-selector-icon-size-smallest / 2;
-                }
-            }
-
-            #{$name}__step--half {
-                &:nth-child(odd) {
-                    margin-right: rem(1);
                 }
             }
         }
