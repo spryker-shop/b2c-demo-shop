@@ -15,7 +15,7 @@
 
 
 {% block body %}
-    <div class="{{config.name}}__container grid grid--center grid--middle" style="display: none; {{backgroundImage}}">
+    <div class="{{config.name}}__container grid grid--center grid--middle" style="{{backgroundImage}}">
         <a href="{{ data.link | trans }}" class="{{ config.name }}__link"></a>
         <div class="col col--sm-12">
             {{ spyCmsBlock({name: data.cmsBlockName}) }}
