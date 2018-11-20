@@ -68,11 +68,6 @@
                 } only %}
             {% endblock %}
         {% endembed %}
-        {% include molecule('toggler-accordeon') with {
-            attributes: {
-                trigger: '.' ~ config.jsName ~ '__trigger-bundle'
-            }
-        } only %}
     {% endif %}
 
     {{ widget('ProductGroupWidgetPlugin', data.product.idProductAbstract) }}
