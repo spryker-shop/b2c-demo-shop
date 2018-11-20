@@ -1,17 +1,11 @@
 @mixin shop-ui-cart-block($name: '.cart-block') {
     #{$name} {
-        &__title {
-            font: bold rem(36) $setting-font-family-additional;
-            padding-bottom: rem(10);
-            border-bottom: rem(1) dotted $setting-color-gray-3;
-        }
-
-        &__cart-item {
+        &__item {
             padding: rem(18) 0;
             border-bottom: rem(1) dotted $setting-color-gray-3;
         }
 
-        &__cart-item-image {
+        &__image {
             width: rem(100);
 
             .thumbnail {
@@ -19,18 +13,18 @@
             }
         }
 
-        &__cart-item-content {
+        &__item-content {
             margin-left: 0;
             padding-left: rem(20);
             width: calc(100% - #{rem(100)});
         }
 
-        &__cart-item-title,
-        &__cart-item-price {
-            font: 500 rem(15)/1.3 $setting-font-family-additional;
+        &__name,
+        &__price {
+            font: fw(medium) rem(15)/1.3 $setting-font-family-additional;
         }
 
-        &__cart-item-title {
+        &__name {
             margin: 0 0 rem(5);
         }
 
@@ -40,13 +34,13 @@
         }
 
         &__button {
-            font: 500 rem(14)/rem(46) $setting-font-family-additional;
             width: calc(50% - #{rem(10)});
-            padding: 0;
+            padding-left: 0;
+            padding-right: 0;
         }
 
         &__item-option {
-            font: normal rem(13)/1.3 $setting-font-family-additional;
+            font: rem(13)/1.3 $setting-font-family-additional;
         }
 
         &__item-option-text {
@@ -60,18 +54,18 @@
 
         &__total-text {
             text-transform: uppercase;
-            font: 500 rem(14) $setting-font-family-additional;
+            font: fw(medium) rem(14) $setting-font-family-additional;
         }
 
         &__empty-text {
-            font: normal rem(15)/1.4 $setting-font-family-additional;
+            font: rem(15)/1.4 $setting-font-family-additional;
             padding: rem(30) 0;
             border-bottom: rem(1) dotted $setting-color-gray-3;
             color: $setting-color-gray-6;
         }
 
         &__item-remove {
-            font: 300 rem(13)/1.3 $setting-font-family-additional;
+            font: fw(light) rem(13)/1.3 $setting-font-family-additional;
             opacity: 0.4;
             text-transform: capitalize;
         }

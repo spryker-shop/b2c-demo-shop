@@ -1,10 +1,8 @@
+@import '../../atoms/radio/radio';
+
 @mixin shop-ui-toggler-radio($name: '.toggler-radio') {
-    @include shop-ui-radio($name) {
-        @content;
-    }
-
+    @include shop-ui-radio($name);
     #{$name} {
-
         &__input:checked {
             & + #{$name}__box {
                 border: rem(3) solid $setting-color-white;
@@ -53,7 +51,7 @@
 
                     &::before {
                         border: none;
-                        background-color: $setting-color-gray-3;
+                        background-color: $setting-color-alpha-9;
                     }
                 }
             }
