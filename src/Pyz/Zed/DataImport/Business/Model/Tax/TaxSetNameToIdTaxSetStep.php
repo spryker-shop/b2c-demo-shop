@@ -1,14 +1,13 @@
 <?php
 
 /**
- * This file is part of the Spryker Suite.
+ * This file is part of the Spryker Commerce OS.
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace Pyz\Zed\DataImport\Business\Model\Tax;
 
 use Orm\Zed\Tax\Persistence\SpyTaxSetQuery;
-use Pyz\Zed\DataImport\Business\Exception\EntityNotFoundException;
 use Spryker\Zed\DataImport\Business\Exception\DataKeyNotFoundInDataSetException;
 use Spryker\Zed\DataImport\Business\Model\DataImportStep\DataImportStepInterface;
 use Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface;
@@ -70,8 +69,6 @@ class TaxSetNameToIdTaxSetStep implements DataImportStepInterface
     /**
      * @param string $taxSetName
      *
-     * @throws \Pyz\Zed\DataImport\Business\Exception\EntityNotFoundException
-     *
      * @return int
      */
     protected function resolveIdStock($taxSetName)
@@ -79,10 +76,6 @@ class TaxSetNameToIdTaxSetStep implements DataImportStepInterface
         $taxSetEntity = SpyTaxSetQuery::create()
             ->filterByName($taxSetName)
             ->findOneOrCreate();
-
-        if (!$taxSetEntity) {
-            throw new EntityNotFoundException(sprintf('Tax set by name "%s" not found.', $taxSetName));
-        }
 
         $taxSetEntity->save();
 

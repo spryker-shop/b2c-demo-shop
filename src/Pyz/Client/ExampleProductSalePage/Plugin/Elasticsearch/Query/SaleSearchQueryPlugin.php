@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of the Spryker Suite.
+ * This file is part of the Spryker Commerce OS.
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
@@ -84,10 +84,13 @@ class SaleSearchQueryPlugin extends AbstractPlugin implements QueryInterface
             ->getProductLabelStorageClient()
             ->findLabelByName($labelName, $localeName);
 
-        $stringFacetFieldFilter = $this->createStringFacetFieldFilter(ProductLabelFacetConfigTransferBuilderPlugin::NAME);
-        $stringFacetValueFilter = $this->createStringFacetValueFilter($storageProductLabelTransfer->getIdProductLabel());
+        $labelId = $storageProductLabelTransfer ? $storageProductLabelTransfer->getIdProductLabel() : 0;
 
         $newProductsBoolQuery = new BoolQuery();
+
+        $stringFacetFieldFilter = $this->createStringFacetFieldFilter(ProductLabelFacetConfigTransferBuilderPlugin::NAME);
+        $stringFacetValueFilter = $this->createStringFacetValueFilter($labelId);
+
         $newProductsBoolQuery
             ->addFilter($stringFacetFieldFilter)
             ->addFilter($stringFacetValueFilter);
