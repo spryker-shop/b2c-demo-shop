@@ -1,14 +1,13 @@
 @import '../../atoms/select/select';
 
 @mixin shop-ui-custom-select($name: '.custom-select') {
-
     @include shop-ui-select($name) {
         .select2-container {
             width: auto;
         }
 
         .select2-selection--single {
-            padding: rem(4) rem(5);
+            padding: rem(14) rem(10);
             border: none;
             background: none;
             border-radius: 0;
@@ -23,35 +22,43 @@
                 display: none;
             }
         }
+
+        &--hollow {
+            .select2-selection {
+                text-align: right;
+            }
+            .select2-selection--single {
+                padding: rem(0) rem(10);
+            }
+        }
     }
 
-    .select2-container--default {
+    .select2-container {
         .select2-results {
             padding: rem(12) 0;
             border-radius: rem(4);
             background-color: $setting-color-bg;
-            box-shadow: rem(10) rem(10) rem(26) 0 $setting-color-alpha-1, 0 0 rem(30) 0 $setting-color-alpha-1;
-            width: calc(100% + #{rem(48)});
-            transform: translateX(rem(-48));
+            box-shadow: rem(10) rem(10) rem(26) 0 $setting-color-alpha-1,
+                0 0 rem(30) 0 $setting-color-alpha-1;
             position: relative;
-
-            &::before {
-                content: '';
-                position: absolute;
-                bottom: 100%;
-                right: rem(23);
-                border: rem(6) solid transparent;
-                border-bottom-color: $setting-color-bg;
-            }
+            border: rem(1) solid $setting-color-alpha-7;
 
             & > .select2-results__options {
                 max-height: rem(250);
             }
         }
 
-        .select2-results__option[aria-selected='true'],
-        .select2-results__option--highlighted[aria-selected] {
+        .select2-results__option[aria-selected='true'] {
             background: none;
+            color: $setting-color-main;
+        }
+
+        .select2-results__option--highlighted[aria-selected] {
+            background: $setting-color-gray-1;
+            color: $setting-color-gray-6;
+        }
+
+        .select2-results__option--highlighted[aria-selected='true'] {
             color: $setting-color-main;
         }
 
@@ -69,24 +76,31 @@
                 background: url('/assets/images/icon-chosen.svg') no-repeat 0 0;
             }
         }
+
+        &--secondary {
+            .select2-results {
+                width: calc(100% + #{rem(48)});
+                transform: translateX(rem(-48));
+                border: none;
+
+                &::before {
+                    content: '';
+                    position: absolute;
+                    bottom: 100%;
+                    right: rem(23);
+                    border: rem(6) solid transparent;
+                    border-bottom-color: $setting-color-bg;
+                }
+            }
+            .select2-dropdown--below {
+                box-shadow: rem(10) rem(10) rem(26) 0 $setting-color-alpha-1,
+                0 0 rem(30) 0 $setting-color-alpha-1,
+                0 rem(-10) rem(30) 0 $setting-color-alpha-1;
+            }
+        }
     }
 
     .select2-container--open {
-        body > & {
-            z-index: $setting-zi-navigation-top + 1;
-
-            &::before {
-                content: '';
-                position: fixed;
-                top: 0;
-                left: 0;
-                height: 100%;
-                width: 100%;
-                background: $setting-color-black;
-                opacity: 0.4;
-            }
-        }
-
         .select2-dropdown {
             border: none;
             border-radius: 0;
@@ -96,11 +110,11 @@
         }
 
         .select2-dropdown--below {
-            margin-top: rem(12);
+            margin-top: rem(6);
         }
 
         .select2-dropdown--above {
-            margin-top: rem(-12);
+            margin-top: rem(-6);
 
             .select2-results {
                 &::before {
@@ -118,12 +132,8 @@
         font-size: rem(17);
         font-weight: fw(light);
         line-height: rem(26);
-        padding: rem(6) rem(24);
+        padding: rem(6) rem(10);
         white-space: nowrap;
-    }
-
-    .select2-selection {
-        text-align: right;
     }
 }
 

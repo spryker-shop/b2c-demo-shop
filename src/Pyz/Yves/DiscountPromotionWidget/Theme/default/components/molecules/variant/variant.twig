@@ -17,8 +17,8 @@
     <strong class="{{ config.name }}__label">{{data.label}}:</strong>
     {% if data.selectedValue is null %}
         {% if data.isAvailable %}
-            {% embed atom('select') with {
-                modifiers: ['naked', 'variant'],
+            {% embed molecule('custom-select') with {
+                modifiers: ['hollow'],
                 attributes: {
                     name: data.formName
                 },

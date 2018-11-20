@@ -53,10 +53,4 @@
             } only %}
         {% endblock %}
     {% endembed %}
-
-    {% include molecule('toggler-accordeon') with {
-        attributes: {
-            trigger: '.' ~ config.jsName ~ '__trigger-description' ~ (data.index is not empty ? '-' ~ data.index : '') ~ ', .' ~ config.jsName ~ '__trigger-details' ~ (data.index is not empty ? '-' ~ data.index : '')
-        }
-    } only %}
 {% endblock %}
