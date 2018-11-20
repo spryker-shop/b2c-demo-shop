@@ -13,6 +13,7 @@
             background-repeat: no-repeat;
             text-align: center;
             position: relative;
+            display: none;
 
             @include helper-breakpoint(md) {
                 height: rem(240);
@@ -20,6 +21,10 @@
 
             @include helper-breakpoint(xl) {
                 height: rem(400);
+            }
+
+            .slick-initialized & {
+                display: flex;
             }
         }
         &__link {

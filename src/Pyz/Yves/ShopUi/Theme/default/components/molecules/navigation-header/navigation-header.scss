@@ -1,6 +1,43 @@
 @mixin shop-ui-navigation-header($name: '.navigation-header') {
     #{$name} {
         padding: rem(16) 0;
+        position: relative;
+
+        &__flyout-fullscreen {
+            position: static;
+
+            &::after {
+                @include helper-visibility-invisible;
+                @include helper-effect-transition;
+                content: '';
+                position: absolute;
+                width: 100vw;
+                left: 50%;
+                top: rem(30);
+                display: block;
+                transform: translate(-50%, 0);
+                height: rem(381);
+                background-color: $setting-color-white;
+                pointer-events: none;
+                box-shadow: 0 rem(102) rem(100) 0 $setting-color-alpha-1;
+            }
+
+            &:hover {
+                &::after {
+                    @include helper-visibility-visible;
+                    pointer-events: all;
+                }
+            }
+        }
+
+        &__brand-dropdown {
+            &::after {
+                height: rem(241);
+                @include helper-breakpoint-media-min($xl-min) {
+                    height: rem(281);
+                }
+            }
+        }
     }
 }
 

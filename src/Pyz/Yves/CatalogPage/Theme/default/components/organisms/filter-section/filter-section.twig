@@ -17,41 +17,41 @@
         {% set filterHasValues = (filter.values is not defined) or (filter.values | length > 0) %}
 
         {% if filterHasValues %}
-            <div class="{{ config.name }}__item">
-                <div
-                    class="{{ config.name }}__title {{ config.jsName }}__title-trigger"
-                    data-toggle-target=".js-{{ filter.name }}"
-                >
-                    {{ ('product.filter.' ~ filter.name | lower) | trans }}
-                </div>
-
-                {% include [
-                    molecule('filter-' ~ filter.config.name, 'CatalogPage'),
-                    molecule('filter-' ~ filter.config.type, 'CatalogPage')
-                ] ignore missing with {
-                    class: 'js-' ~  filter.name ~ ' is-hidden spacing-bottom spacing-bottom--big',
-                    data: {
-                        filterPath: data.filterPath,
-                        categories: data.categories,
-                        filter: filter,
-                        parameter: filter.config.parameterName | default(''),
-                        min: filter.min | default(0),
-                        max: filter.max | default(0),
-                        activeMin: filter.activeMin | default(0),
-                        activeMax: filter.activeMax | default(0)
-                    }
-                } only %}
-            </div>
+            {% embed molecule('toggler-item') with {
+                modifiers: ['filter'],
+                data: {
+                    title: ('product.filter.' ~ filter.name | lower) | trans,
+                    triggerClass: config.jsName ~ '__trigger',
+                    targetClass: config.jsName ~ '__target--' ~ filter.name,
+                    isActive: loop.first ? true : false,
+                    isTogglerIncluded: loop.first ? true : false
+                },
+                embed: {
+                    filterPath: data.filterPath,
+                    categories: data.categories,
+                    filter: filter
+                }
+            } only %}
+                {% block contentText %}
+                    {% include [
+                        molecule('filter-' ~ embed.filter.config.name, 'CatalogPage'),
+                        molecule('filter-' ~ embed.filter.config.type, 'CatalogPage')
+                        ] ignore missing with {
+                        data: {
+                            filterPath: embed.filterPath,
+                            categories: embed.categories,
+                            filter: embed.filter,
+                            parameter: embed.filter.config.parameterName | default(''),
+                            min: embed.filter.min | default(0),
+                            max: embed.filter.max | default(0),
+                            activeMin: embed.filter.activeMin | default(0),
+                            activeMax: embed.filter.activeMax | default(0)
+                        }
+                    } only %}
+                {% endblock %}
+            {% endembed %}
         {% endif %}
     {% endfor %}
-
-    {% include molecule('toggler-accordeon') with {
-        attributes: {
-            trigger: '.' ~ config.jsName ~ '__title-trigger',
-            'class-to-toggle': 'is-hidden'
-        }
-    } only %}
-
     <div class="grid grid--justify grid--middle {{ config.name }}__actions">
         <span class="col {{ config.name }}__close-popup {{ data.togglerClass }}">
             {% include atom('icon') with {
