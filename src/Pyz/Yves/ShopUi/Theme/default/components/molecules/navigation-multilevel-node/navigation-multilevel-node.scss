@@ -1,25 +1,89 @@
 @mixin shop-ui-navigation-multilevel-node($name: '.navigation-multilevel-node') {
+    $image-url: '/assets/images';
+    $image-class: image;
+
     #{$name} {
         align-self: flex-end;
-        margin: 0 0.6rem;
+        margin: 0 rem(9);
         text-transform: uppercase;
-        font: 500 rem(13) $setting-font-family-additional;
+        font: fw(medium) rem(13) $setting-font-family-additional;
         letter-spacing: rem(2);
         white-space: nowrap;
         cursor: default;
 
         &:hover {
-            color: $setting-color-alpha-1;
+            color: $setting-color-alpha-3;
             text-decoration: none;
         }
 
         &__menu {
-            box-shadow: 0 rem(102) rem(100) 0 $setting-color-alpha-1;
+            box-shadow: 0 rem(100) rem(100) 0 $setting-color-alpha-1;
+
+            &--flyout {
+                position: absolute;
+                transform: translate(-50%, 0);
+                height: rem(380);
+                box-shadow: none;
+                max-width: rem(745);
+                width: 100%;
+
+                @include helper-breakpoint-media-min($lg-min) {
+                    max-width: rem(850);
+                }
+
+                &::before {
+                    content: '';
+                    position: absolute;
+                    display: block;
+                    width: rem(1);
+                    height: rem(312);
+                    border-left: rem(1) dotted $setting-color-gray-3;
+                    top: rem(40);
+                    left: 30%;
+                }
+            }
+
+            &--brand {
+                height: unset;
+                display: flex;
+                justify-content: space-between;
+                max-width: rem(730);
+                width: 100%;
+
+                @include helper-breakpoint-media-min($lg-min) {
+                    max-width: rem(930);
+                }
+
+                @include helper-breakpoint-media-min($xl-min) {
+                    max-width: rem(1210);
+                }
+
+                &::before {
+                    display: none;
+                }
+            }
+        }
+
+        #{$name}__menu--flyout {
+            left: 50%;
+            padding: rem(40) rem(16) rem(28);
+            margin: 0;
+            background-color: $setting-color-transparent;
+        }
+
+        #{$name}__menu--brand {
+            padding: rem(40) rem(8) rem(28);
+            margin: 0;
+            background-color: $setting-color-transparent;
+
+            @include helper-breakpoint-media-min($lg-min) {
+                padding: rem(40) 0 rem(28);
+            }
         }
 
         &__link {
             text-transform: uppercase;
-            font: 500 rem(13) $setting-font-family-additional;
+            font: fw(medium) rem(13) $setting-font-family-additional;
             letter-spacing: rem(2);
             white-space: nowrap;
             cursor: pointer;
@@ -27,6 +91,18 @@
             &:hover {
                 color: $setting-color-alpha-3;
                 text-decoration: none;
+            }
+
+            &--lvl-2 {
+                text-transform: capitalize;
+                color: $setting-color-text;
+                font: fw(regular) rem(16)/rem(24) $setting-font-family;
+                letter-spacing: normal;
+
+                &:hover {
+                    text-decoration: underline;
+                    color: map-get($setting-color-actions, alert);
+                }
             }
         }
 
@@ -39,16 +115,112 @@
                 cursor: default;
             }
 
-            #{$name}__link {
-                text-transform: capitalize;
-                white-space: nowrap;
-                color: $setting-color-text;
-                font: normal rem(16)/1.5 $setting-font-family;
-                letter-spacing: normal;
+            &--flyout {
+                max-width: 27%;
+                white-space: normal;
+            }
 
-                &:hover {
-                    text-decoration: underline;
-                    color: map-get($setting-color-actions, alert);
+            #{$name}__link {
+                &--flyout {
+                    font-size: rem(16);
+                    color: $setting-color-black;
+                    letter-spacing: rem(0.2);
+                    line-height: rem(28);
+                    white-space: normal;
+
+                    @include helper-breakpoint-media-min($xl-min) {
+                        font-size: rem(18);
+                        line-height: rem(35);
+                    }
+
+                    &:hover {
+                        color: $setting-color-alt;
+                    }
+                }
+
+                &--brand {
+                    display: block;
+                    text-align: center;
+                    background-position: top center;
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                    margin-bottom: rem(10);
+                    height: 100%;
+
+                    &::before {
+                        content: '';
+                        display: block;
+                        height: 100%;
+                    }
+                }
+            }
+        }
+
+        &__node-image {
+            position: absolute;
+            height: rem(237);
+            width: rem(220);
+            top: rem(30);
+            right: rem(250);
+            margin: 0;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: rem(220) rem(237);
+
+            @include helper-breakpoint-media-min($lg-min) {
+                height: rem(300);
+                width: rem(250);
+                right: rem(280);
+                background-size: rem(250) rem(270);
+            }
+
+            &:last-of-type {
+                right: 0;
+            }
+
+            #{$name}__link--flyout {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                display: block;
+                text-align: center;
+                padding-top: rem(280);
+                font-size: rem(16);
+                line-height: rem(34);
+
+                @include helper-breakpoint-media-min($xl-min) {
+                    font-size: rem(17);
+                }
+            }
+
+            @for $i from 1 through 6 {
+                &.#{$image-class}-#{$i} {
+                    background-image: url('#{$image-url}/menu-img-#{$i}.png');
+                }
+            }
+        }
+
+        &__brand-item {
+            height: rem(101);
+            width: rem(162);
+            margin: 0 rem(8);
+
+            @include helper-breakpoint-media-min($lg-min) {
+                width: rem(216);
+                margin: 0 rem(16);
+                height: rem(134);
+            }
+
+            @include helper-breakpoint-media-min($xl-min) {
+                width: rem(270);
+                height: rem(168);
+            }
+
+            @for $i from 1 through 4 {
+                &.#{$image-class}-#{$i} {
+                    background-image: url('#{$image-url}/image-submenu-d-#{$i}@2x.png');
                 }
             }
         }

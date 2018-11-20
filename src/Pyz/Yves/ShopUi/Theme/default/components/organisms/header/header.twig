@@ -7,8 +7,7 @@
 
 {% define data = {
     showSearchForm: true,
-    showNavigation: true,
-    showLangCurrencySwitches: false
+    showNavigation: true
 } %}
 
 {% block body %}
@@ -17,6 +16,7 @@
             <div class="{{ config.name }}__search-overlay-container">
                 <div class="{{ config.name }}__search-close js-search-hide-icon">
                     {% include atom('icon') with {
+                        class: config.name ~ '__search-close-icon',
                         data: {
                             name: 'close'
                         }
@@ -25,7 +25,6 @@
 
                 {% if data.showSearchForm %}
                     {% include molecule('search-form') with {
-                        class: '',
                         attributes: {
                             'data-search-id': 'desktop'
                         }
@@ -37,25 +36,16 @@
 
         {% block additionalLink %}{% endblock %}
 
-        <div class="{{config.name}}__row {{config.name}}__navigation-top grid grid--middle grid--justify">
+        <div class="{{ config.name }}__row {{ config.name }}__navigation-top grid grid--middle grid--justify">
             <div class="col col--sm-12 col--lg-4 is-hidden-sm-md">
-                {% if data.showLangCurrencySwitches %}
-                    <div class="col {{config.name}}__currency-lang">
-                        <div class="col">
-                            {{ widgetGlobal(
-                                'LanguageSwitcherWidgetPlugin',
-                                app.request.pathInfo,
-                                app.request.queryString,
-                                app.request.requestUri
-                            ) }}
-                        </div>
-                        <div class="col">{{ widgetGlobal('CurrencyWidgetPlugin') }}</div>
-                    </div>
-                {% endif %}
-
                 {% if data.showSearchForm %}
                     <div class="{{ config.name }}__search-open js-search-show-icon">
-                        <img src="/assets/images/menu-search-ico-default@3x.png" alt="{{ 'global.search' | trans }}" class="icon" style="width: auto">
+                        {% include atom('icon') with {
+                            class: config.name ~ '__search-open-icon',
+                            data: {
+                                name: 'search'
+                            }
+                        } only %}
                     </div>
                 {% endif %}
             </div>
@@ -76,11 +66,11 @@
 
         {% if data.showNavigation %}
             <div class="is-hidden-lg-xl">
-                <div class="{{config.name}}__row {{config.name}}__navigation-top">
+                <div class="{{ config.name }}__row {{ config.name }}__navigation-top">
                     {% include molecule('navigation-top-mobile') only %}
                 </div>
             </div>
-            <div class="{{config.name}}__row {{config.name}}__navigation-main is-hidden-sm-md">
+            <div class="{{ config.name }}__row {{ config.name }}__navigation-main is-hidden-sm-md">
                 {{ widgetGlobal('NavigationWidgetPlugin', 'MAIN_NAVIGATION_DESKTOP', 'navigation-header') }}
             </div>
             <div class="{{ config.name }}__navigation-main-mobile is-hidden-lg-xl">

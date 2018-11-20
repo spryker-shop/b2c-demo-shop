@@ -10,7 +10,7 @@
 
         &__select {
             display: block;
-            max-width: 100%;
+            width: 100%;
             background-color: $setting-color-transparent;
             border: rem(4) solid $setting-color-transparent;
             border-right-width: rem(24);
@@ -27,18 +27,6 @@
                 color: transparent;
                 text-shadow: 0 0 0 $setting-color-black;
             }
-
-            &--variant {
-                border: none;
-                padding: 0 rem(20);
-                font: fw(regular) rem(13)/rem(27) $setting-font-family-additional;
-            }
-        }
-
-        &__variant {
-            border: none;
-            padding: 0 rem(20);
-            font: fw(regular) rem(13)/rem(26) $setting-font-family-additional;
         }
 
         &__caret {
@@ -52,26 +40,13 @@
             pointer-events: none;
         }
 
-        &--expand,
-        &--expand &__select {
+        &--expand {
             display: block;
             width: 100%;
         }
 
-        &--naked {
+        &--hollow {
             background-color: $setting-color-transparent;
-            border: none;
-        }
-
-        &--error {
-            border-color: map-get($setting-color-actions, alert);
-        }
-
-        &--error &__caret {
-            color: map-get($setting-color-actions, alert);
-        }
-
-        &--borderless {
             border: none;
         }
 

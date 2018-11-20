@@ -11,6 +11,7 @@
     targetClass: '',
     isActive: false,
     isToggler: true,
+    isTogglerIncluded: true
 } %}
 
 {% block body %}
@@ -22,5 +23,12 @@
         <div class="{{ component.renderClass(config.name ~ '__content', modifiers) }} {{ data.targetClass }} {% if data.isToggler %}{% if data.isActive %} active {% else %} is-hidden {% endif %}{% endif %}">
             {% block contentText %}{{ data.text }}{% endblock %}
         </div>
+        {% if data.isToggler and data.isTogglerIncluded %}
+            {% include molecule('toggler-accordion') with {
+                attributes: {
+                    trigger: '.' ~ data.triggerClass
+                }
+            } only %}
+        {% endif %}
     {% endblock %}
 {% endblock %}
