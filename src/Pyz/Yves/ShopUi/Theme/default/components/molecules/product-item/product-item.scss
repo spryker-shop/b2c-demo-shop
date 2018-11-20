@@ -1,7 +1,7 @@
 @mixin shop-ui-product-item($name: '.product-item') {
     #{$name} {
         &__title {
-            font: map-get($setting-font-weight, medium) rem(17)/1.3 $setting-font-family-additional;
+            font: fw(medium) rem(17)/rem(23) $setting-font-family-additional;
 
             &:hover {
                 cursor: pointer;
@@ -20,7 +20,7 @@
         }
 
         &__price {
-            font: map-get($setting-font-weight, medium) rem(17)/1.3 $setting-font-family-additional;
+            font: fw(medium) rem(17)/rem(23) $setting-font-family-additional;
             text-align: left;
 
             @include helper-breakpoint-media-min($lg-min) {
@@ -29,7 +29,7 @@
         }
 
         &__remove {
-            font: map-get($setting-font-weight, light) rem(13)/1.3 $setting-font-family-additional;
+            font: fw(light) rem(13)/rem(17) $setting-font-family-additional;
             opacity: 0.4;
             text-transform: capitalize;
 

@@ -19,7 +19,7 @@
     <div class="{{ cartItemBox }}">
         <div class="grid grid--middle grid--justify grid--no-wrap">
             <a href="{{ data.cartItem.url }}" class="{{ config.name }}__image col">
-                {% include molecule('cart-image', 'CartPage') with {
+                {% include molecule('product-image') with {
                     data: {
                         name: data.cartItem.name | default(''),
                         image: data.cartItem.images is empty ? null : (data.cartItem.images | first)
