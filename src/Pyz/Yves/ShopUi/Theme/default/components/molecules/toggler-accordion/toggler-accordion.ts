@@ -1,6 +1,6 @@
 import Component from 'ShopUi/models/component';
 
-export default class TogglerAccordeon extends Component {
+export default class TogglerAccordion extends Component {
     protected triggers: HTMLElement[];
     
     readyCallback(): void {
@@ -14,24 +14,8 @@ export default class TogglerAccordeon extends Component {
 
     protected triggerHandler(trigger): void {
         const togglerContent = document.querySelector(trigger.getAttribute('data-toggle-target'));
-
-        if(trigger.classList.contains(this.activeClass)) {
-            trigger.classList.remove(this.activeClass);
-            togglerContent.classList.add(this.toggleClass);
-        }else {
-            this.resetToggleClass();
-            trigger.classList.add(this.activeClass);
-            togglerContent.classList.remove(this.toggleClass);
-        }
-    }
-
-    protected resetToggleClass(): void {
-        this.triggers.forEach(trigger => {
-            const togglerContent = document.querySelector(trigger.getAttribute('data-toggle-target'));
-
-            togglerContent.classList.add(this.toggleClass);
-            trigger.classList.remove(this.activeClass);
-        });
+        trigger.classList.toggle(this.activeClass);
+        togglerContent.classList.toggle(this.toggleClass);
     }
 
     get triggerSelector(): string {

@@ -1,3 +1,5 @@
+/* stylelint-disable */
+
 @include shop-ui-table {
     &--customer-account {
         td,
@@ -11,12 +13,10 @@
             color: $setting-color-white;
         }
 
-        tbody,
-        &__body {
-            tr {
-                &:nth-child(even) {
-                    background-color: $setting-color-gray-6;
-                }
+        &__body,
+        tbody {
+            tr:nth-child(even) {
+                background-color: $setting-color-gray-2;
             }
         }
 

@@ -63,7 +63,7 @@
         <li class="{{ config.name }}__item">
             <a href="{{ url('cart') }}" class="{{ config.name }}__link {{ config.jsName }}__trigger">
                 {% if cartQuantity > 0 %}
-                    <span class="cart-link__quantity">{{cartQuantity}}</span>
+                    <span class="cart-link__quantity">{{ cartQuantity }}</span>
                 {% endif %}
 
                 {% include atom('icon') with {

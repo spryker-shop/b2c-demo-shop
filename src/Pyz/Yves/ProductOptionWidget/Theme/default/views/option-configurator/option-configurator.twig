@@ -16,6 +16,7 @@
                 title: optionGroup.name | trans,
                 triggerClass: 'js-option-configurator__trigger',
                 targetClass: 'js-option-configurator__target-' ~ loop.index,
+                isTogglerIncluded: loop.first ? true : false
             },
             embed: {
                 optionGroup: optionGroup,
@@ -41,9 +42,4 @@
             {% endblock %}
         {% endembed %}
     {% endfor %}
-    {% include molecule('toggler-accordeon') with {
-        attributes: {
-            trigger: '.js-option-configurator__trigger'
-        }
-    } only %}
 {% endblock %}
