@@ -1,3 +1,7 @@
 @function fw($weight) {
     @return map-get($setting-font-weight, $weight);
 }
+
+@mixin helper-font-letter-spacing($spacing) {
+    letter-spacing: map-get($setting-font-letter-spacing, $spacing);
+}

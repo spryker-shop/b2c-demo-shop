@@ -67,22 +67,34 @@ $font-circular-bold: '#{$font-circular-url}lineto-circular-pro-bold';
         @include helper-font-weight(regular);
         @include helper-font-line-height(default);
         position: relative;
-        background-color: $setting-color-bg;
+        background-color: $setting-color-white;
         color: $setting-color-text;
         font-family: $setting-font-family;
     }
 
     @each $i in (1, 2, 3, 4, 5, 6) {
-        h#{$i} {
+        h#{$i}, .h#{$i} {
             font-family: $setting-font-family-additional;
-            @include helper-font-size($i);
+            @include helper-font-size($i/2);
+            @include helper-font-letter-spacing($i/2);
             @include helper-font-line-height($i);
+            font-weight: fw(bold);
             display: block;
+
+            @include helper-breakpoint-media-min($lg-min) {
+                @include helper-font-size($i);
+                @include helper-font-letter-spacing($i);
+            }
 
             &--margins {
                 margin: rem(32) 0 rem(16);
             }
         }
+    }
+
+    h4, .h4 {
+        font-family: $setting-font-family;
+        font-weight: fw(light);
     }
 
     a {

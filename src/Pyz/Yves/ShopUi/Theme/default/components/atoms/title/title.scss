@@ -8,31 +8,13 @@
             font-weight: fw(medium);
         }
 
-        &--cart {
-            font: fw(bold) rem(26)/rem(37) $setting-font-family-additional;
-            letter-spacing: rem(-0.3);
-
-            @include helper-breakpoint-media-min($lg-min) {
-                font-size: rem(25);
-            }
-        }
-
-        &--quantity {
-            font: rem(16) $setting-font-family;
-            color: $setting-color-gray-3;
-        }
-
         &--checkout {
             width: 100%;
-            font: fw(bold) rem(32)/rem(32) $setting-font-family-additional;
-            letter-spacing: rem(-0.5);
             margin-bottom: rem(32);
             padding-bottom: rem(10);
             border-bottom: dotted rem(1) $setting-color-gray-3;
 
             @include helper-breakpoint-media-min($md-min) {
-                font-size: rem(47);
-                line-height: rem(47);
                 margin-bottom: rem(58);
             }
 
@@ -51,35 +33,21 @@
             font-weight: fw(medium);
         }
 
-        &--slider {
-            font: fw(regular) rem(24) $setting-font-family;
-            letter-spacing: rem(-0.9);
+        &--regular {
+            font-weight: fw(regular);
+        }
 
-            @include helper-breakpoint-media-min($md-min) {
-                font: fw(regular) rem(34) $setting-font-family-additional;
-            }
+        &--uppercase {
+            text-transform: uppercase;
         }
 
         &--account-main {
             text-transform: capitalize;
             text-align: center;
-            font: fw(medium) rem(32) $setting-font-family-additional;
-            color: $setting-color-text;
             border-bottom: rem(1) dotted $setting-color-gray-3;
             border-top: rem(1) dotted $setting-color-gray-3;
             padding: rem(25) 0;
             margin: rem(25) 0;
-
-            @include helper-breakpoint-media-min($md-min) {
-                font-size: rem(50);
-                line-height: rem(75);
-            }
-        }
-
-        &--account-secondary {
-            font: fw(bold) rem(13) $setting-font-family-additional;
-            letter-spacing: rem(2.6);
-            text-transform: uppercase;
         }
 
         &--product-set-main {
