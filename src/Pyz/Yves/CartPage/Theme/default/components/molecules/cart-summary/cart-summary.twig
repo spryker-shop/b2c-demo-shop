@@ -32,9 +32,14 @@
                 {{ 'cart.total.tax_total' | trans }}
                 <span class="float-right">{{ data.cart.totals.taxTotal.amount | money }}</span>
             </li>
-            {% if widgetExists('DiscountSummaryWidgetPlugin') %}
-                {{ widget('DiscountSummaryWidgetPlugin', data.cart) }}
-            {% endif %}
+            {% include molecule('cart-discount-summary', 'DiscountWidget') ignore missing with {
+                class: 'list spacing-y',
+                data: {
+                    voucherDiscounts: data.cart.voucherDiscounts,
+                    ruleDiscounts: data.cart.cartRuleDiscounts,
+                    discountTotal: data.cart.totals.discounttotal
+                }
+            } only %}
             <li class="{{ config.name }}__item {{ config.name }}__total spacing-y spacing-y--bigger">
                 <strong>{{ 'cart.price.grand.total' | trans }}</strong>
                 <strong class="float-right">{{ data.cart.totals.grandTotal | money }}</strong>

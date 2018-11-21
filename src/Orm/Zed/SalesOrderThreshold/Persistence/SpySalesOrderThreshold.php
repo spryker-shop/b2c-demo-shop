@@ -7,7 +7,7 @@
 
 namespace Orm\Zed\SalesOrderThreshold\Persistence;
 
-use Orm\Zed\SalesOrderThreshold\Persistence\Base\SpySalesOrderThreshold as BaseSpySalesOrderThreshold;
+use Spryker\Zed\SalesOrderThreshold\Persistence\Propel\AbstractSpySalesOrderThreshold;
 
 /**
  * Skeleton subclass for representing a row from the 'spy_sales_order_threshold' table.
@@ -19,6 +19,6 @@ use Orm\Zed\SalesOrderThreshold\Persistence\Base\SpySalesOrderThreshold as BaseS
  * long as it does not already exist in the output directory.
  *
  */
-class SpySalesOrderThreshold extends BaseSpySalesOrderThreshold
+class SpySalesOrderThreshold extends AbstractSpySalesOrderThreshold
 {
 }

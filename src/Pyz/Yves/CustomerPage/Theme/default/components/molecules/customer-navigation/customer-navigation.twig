@@ -38,7 +38,7 @@
                data-id="sidebar-newsletter">{{ 'customer.account.newsletter' | trans }}</a>
         </li>
         {% block wishlistNavigation %}
-            {{ widget('WishlistMenuItemWidgetPlugin', data.activePage, data.activeEntityId) }}
+            {% widget 'WishlistMenuItemWidget' args [data.activePage, data.activeEntityId] only %}{% endwidget %}
         {% endblock %}
     </ul>
 {% endblock %}

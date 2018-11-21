@@ -46,6 +46,7 @@ class ProductController extends SprykerShopProductController
                     'attributeMap' => [],
                     'idProductConcrete' => $bundledProduct['id_product_concrete'],
                     'idProductAbstract' => $bundledProduct['id_product_abstract'],
+                    'sku' => $bundledProduct['sku'],
                 ],
                 $this->getLocale()
             );

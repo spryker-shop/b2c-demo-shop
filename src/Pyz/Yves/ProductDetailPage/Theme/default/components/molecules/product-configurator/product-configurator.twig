@@ -17,6 +17,7 @@
 {% set sku = data.product.sku %}
 {% set availabilityWidget = '' %}
 {% set isDisabled = data.product.idProductConcrete is empty or data.product.price is empty %}
+{% set isProductAvailable = true %}
 
 {% for index in 1..data.maxQuantity %}
     {% set options = options | merge([{
@@ -28,6 +29,16 @@
 {% if widgetExists('AvailabilityWidgetPlugin') %}
     {% set isAvailable = widgetBlock('AvailabilityWidgetPlugin', 'isAvailable', data.product) %}
     {% set isDisabled = not isAvailable or isDisabled %}
+{% else %}
+    {% set isAvailable = data.product.idProductConcrete and data.product.available %}
+    {% set isDisabled = not isAvailable or isDisabled %}
+{% endif %}
+
+{% set productDiscontinuedNoteWidget = findWidget('ProductDiscontinuedNoteWidget', [sku]) %}
+{% set isDiscontinued = productDiscontinuedNoteWidget.isDiscontinued ?? widgetBlock('ProductDiscontinuedWidgetPlugin', 'isDiscontinued', sku) %}
+{% if isDiscontinued is not null %}
+    {% set isDisabled = isDiscontinued or isDisabled %}
+    {% set isProductAvailable = not isDiscontinued %}
 {% endif %}
 
 {% block body %}
@@ -35,7 +46,7 @@
     <h1 class="title title--product">{{productName}}</h1>
 
     <div class="grid grid--justify spacing-bottom spacing-bottom--bigger">
-        {{ widgetBlock('ProductReviewWidgetPlugin', 'rating', data.product.idProductAbstract) }}
+        {% widget 'ProductDetailPageReviewWidget' args [data.product.idProductAbstract] use view('pdp-review-rating', 'ProductReviewWidget') only %}{% endwidget %}
         <div class="col text-right">
             {% include molecule('price') with {
                 modifiers: ['pdp'],
@@ -70,8 +81,7 @@
         {% endembed %}
     {% endif %}
 
-    {{ widget('ProductGroupWidgetPlugin', data.product.idProductAbstract) }}
-
+    {% widget 'ProductGroupWidget' args [data.product.idProductAbstract] only %}{% endwidget %}
     {% include molecule('variant-configurator', 'ProductDetailPage') with {
         data: {
             superAttributes: data.product.attributeMap.superAttributes,
@@ -81,49 +91,50 @@
     } only %}
 
     <form method="POST" action="{{ path("cart/add", {"sku": sku}) }}">
-        {{ widget('ProductOptionWidgetPlugin', data.product) }}
-
-        {% if widgetExists('ProductMeasurementUnitWidgetPlugin') %}
-            {{ widget('ProductMeasurementUnitWidgetPlugin', data.product, isDisabled, options) }}
-        {% else %}
-
-            {% if not isDisabled %}
-                {% embed molecule('toggler-item') with {
-                    modifiers: ['with-top-border', 'option'],
-                    data: {
-                        title: 'cart.item_quantity' | trans,
-                        isToggler: false,
-                    }
-                } only %}
-                    {% block contentText %}
-                        {% include molecule('quantity-counter') with {
-                            modifiers: ['quantity-large', 'no-spacing'],
-                            data: {
-                                readOnly: true
-                            }
-                        } only %}
-                    {% endblock %}
-                {% endembed %}
-            {% endif %}
-
-            {% if not isAvailable %}
-                {{ widget('AvailabilityWidgetPlugin', data.product) }}
-            {% endif %}
-
-            <div class="{{ config.name }}__button-wrap">
-                <button type="submit" class="button button--large button--expand {{ config.jsName ~ '__button' }}" {{ isDisabled ? 'disabled' : '' }} {{qa('add-to-cart-button')}}>
-                    {{ 'page.detail.add-to-cart' | trans }}
-                </button>
-                {% include molecule('action-single-click-enforcer') with {
-                    attributes: {
-                        'target-selector': '.' ~ config.jsName ~ '__button'
-                    }
-                } only %}
-            </div>
+        {% widget 'ProductOptionConfiguratorWidget' args [data.product] only %}{% endwidget %}
+        {% if not isDisabled %}
+            {% embed molecule('toggler-item') with {
+                modifiers: ['with-top-border', 'option'],
+                data: {
+                    title: 'cart.item_quantity' | trans,
+                    isToggler: false,
+                }
+            } only %}
+                {% block contentText %}
+                    {% include molecule('quantity-counter') with {
+                        modifiers: ['quantity-large', 'no-spacing'],
+                        data: {
+                            readOnly: true
+                        }
+                    } only %}
+                {% endblock %}
+            {% endembed %}
         {% endif %}
-    </form>
 
-    {% if widgetExists('WishlistWidgetPlugin') %}
-        {{ widget('WishlistWidgetPlugin', data.product) }}
+        {% include molecule('availability-product', 'AvailabilityWidget') ignore missing with {
+            data: {
+                idProductConcrete: data.product.idProductConcrete,
+                isAvailable: data.product.available
+            }
+        } only %}
+
+        <div class="{{ config.name }}__button-wrap">
+            <button type="submit" class="button button--large button--expand {{ config.jsName ~ '__button' }}" {{ isDisabled ? 'disabled' : '' }} {{qa('add-to-cart-button')}}>
+                {{ 'page.detail.add-to-cart' | trans }}
+            </button>
+            {% include molecule('action-single-click-enforcer') with {
+                attributes: {
+                    'target-selector': '.' ~ config.jsName ~ '__button'
+                }
+            } only %}
+        </div>
+    </form>
+    {% if can('SeeWishlistPermissionPlugin') and isProductAvailable %}
+        {% include molecule('wishlist-selector-for-pdp', 'WishlistWidget') ignore missing with {
+            data: {
+                sku: data.product.sku,
+                idProductConcrete: data.product.idProductConcrete | default
+            }
+        } only %}
     {% endif %}
 {% endblock %}

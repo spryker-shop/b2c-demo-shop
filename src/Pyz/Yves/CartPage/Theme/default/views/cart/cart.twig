@@ -11,19 +11,13 @@
 } %}
 
 {% block title %}
-    {% if widgetExists('CartOperationsWidgetPlugin') %}
-        {% set cartOperation = widget('CartOperationsWidgetPlugin', data.cart) | trim %}
-
-        {% if cartOperation is not empty %}
-            {{ cartOperation | raw }}
-        {% endif %}
-    {% endif %}
+    {% widget 'CartOperationsWidget' args [data.cart] use view('cart-operations-title', 'MultiCartWidget') only %}{% endwidget %}
 {% endblock %}
 
 {% block content %}
-    {% if widgetExists('CartToShoppingListWidgetPlugin') and (data.cart.idQuote is not empty) and (data.cart.items is not empty) %}
+    {% if data.cart.idQuote is not empty %}
         <div>
-            {{ widget('CartToShoppingListWidgetPlugin', data.cart.idQuote) }}
+        {% widget 'CreateShoppingListFromCartWidget' args [data.cart.idQuote] only %}{% endwidget %}
         </div>
     {% endif %}
 
@@ -51,7 +45,7 @@
                             } only %}
                         {% endfor %}
                     </div>
-                    {{ widget('DiscountPromotionItemListWidgetPlugin', data.cart, data.request) }}
+                    {% widget 'CartDiscountPromotionProductListWidget' args [data.cart, data.request] only %}{% endwidget %}
                 </div>
             </div>
 
@@ -60,7 +54,7 @@
                     <h2 class="cart-box title title--cart">{{ 'cart.title2' | trans }}</h2>
                     <div class="cart-box cart-box--voucher cart-box--reset-spacing">
                         {% if not is_granted('IS_AUTHENTICATED_FULLY') or can('WriteSharedCartPermissionPlugin', data.cart.idQuote) %}
-                            {{ widget('DiscountVoucherFormWidgetPlugin') }}
+                            {% widget 'DiscountVoucherFormWidget' only %}{% endwidget %}
                         {% endif %}
                     </div>
                     {% include molecule('cart-summary', 'CartPage') with {
@@ -73,7 +67,5 @@
             </div>
         </div>
     {% endif %}
-
-    {{ widget('UpSellingProductsWidgetPlugin', data.cart) }}
-    {{ widget('MultiCartListWidgetPlugin', data.cart) }}
+    {% widget 'UpSellingProductsWidget' args [data.cart] only %}{% endwidget %}
 {% endblock %}

@@ -43,15 +43,11 @@
                         } only %}
                     {% endif %}
                     {% if canEditCart %}
-                        {% if widgetExists('QuantitySalesUnitWidgetPlugin') %}
-                            {{ widget('QuantitySalesUnitWidgetPlugin', data.cartItem) }}
-                        {% else %}
-                            {% include molecule('cart-quantity-input', 'CartPage') with {
-                                data: {
-                                    cartItem: data.cartItem
-                                }
-                            } only %}
-                        {% endif %}
+                        {% include molecule('cart-quantity-input', 'CartPage') with {
+                            data: {
+                                cartItem: data.cartItem
+                            }
+                        } only %}
                     {% else %}
                         {{ 'cart.item_quantity' | trans }}
 
@@ -67,8 +63,7 @@
             </div>
         </div>
 
-        {{ widget('ProductBundleItemsWidgetPlugin', data.cartItem, data.cart) }}
-
+        {% widget 'ProductBundleCartItemsListWidget' args [data.cartItem, data.cart] only %}{% endwidget %}
         <div class="grid grid--right">
             {% include molecule('cart-item-summary', 'CartPage') with {
                 class: 'col',

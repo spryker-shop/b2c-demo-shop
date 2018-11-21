@@ -86,7 +86,19 @@
                         {% endfor %}
                     {% endif %}
                 {% endif %}
-                {{ widget('CartNoteOrderItemNoteWidgetPlugin', item) }}
+                {% if concreteItem.cartNote is not empty %}
+                    <tr>
+                        <td></td>
+                        <td colspan="5">
+                            {% include molecule('note-list', 'CartNoteWidget') ignore missing with {
+                                data: {
+                                    label: 'cart_note.customer_page.item_note',
+                                    note: concreteItem.cartNote
+                                }
+                            } only %}
+                        </td>
+                    </tr>
+                {% endif %}
             {% endfor %}
         </tbody>
     </table>

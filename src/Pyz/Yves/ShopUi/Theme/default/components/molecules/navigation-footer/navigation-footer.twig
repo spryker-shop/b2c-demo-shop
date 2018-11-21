@@ -25,7 +25,7 @@
                 <div class="{{ config.name }}__main {{ config.name }}__main--hidden {{ config.jsName }}-{{ loop.index }}">
 
                     {% for itemMenu in itemNavigation.templates %}
-                        {{- widgetGlobal('NavigationWidgetPlugin', itemMenu.menu, itemMenu.template) -}}
+                        {% widget 'NavigationWidget' args [itemMenu.menu, itemMenu.template] %}{% endwidget %}
                     {% endfor %}
 
                 </div>

@@ -1,7 +1,8 @@
 {% extends template('widget') %}
 
 {% define data = {
-    languages: _widget.languages
+    languages: _widget.languages,
+    currentLanguage: _widget.currentLanguage
 } %}
 
 {% block body %}
@@ -14,12 +15,13 @@
                     'config-theme': 'secondary'
                 },
                 embed: {
-                    languages: data.languages
+                    languages: data.languages,
+                    currentLanguage: data.currentLanguage
                 }
             } only %}
                 {% block options %}
                     {% for language, url in embed.languages %}
-                        <option value="{{ app.request.getSchemeAndHttpHost() }}{{ url }}" {{ (language == _widget.currentLanguage) ? 'selected' : ''}}>
+                        <option value="{{ app.request.getSchemeAndHttpHost() }}{{ url }}" {{ (language == embed.currentLanguage) ? 'selected' : ''}}>
                             {{ language | upper }}
                         </option>
                     {% endfor %}

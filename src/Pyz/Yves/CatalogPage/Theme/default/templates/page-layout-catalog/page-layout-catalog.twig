@@ -75,7 +75,7 @@
 
                                 <div class="grid grid--stretch product-list">
                                     {% for product in data.products %}
-                                        {{ widget('ProductWidgetPlugin', product, data.viewMode) }}
+                                        {% widget 'CatalogPageProductWidget' args [product, data.viewMode] only %}{% endwidget %}
                                     {% endfor %}
                                 </div>
 

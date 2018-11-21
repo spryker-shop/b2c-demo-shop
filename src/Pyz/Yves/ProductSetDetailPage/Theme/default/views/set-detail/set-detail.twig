@@ -10,5 +10,12 @@
 {% block breadcrumbs %}{% endblock %}
 
 {% block content %}
-    {{ widget('ProductSetWidgetPlugin', data.set, data.views) }}
+    {% include organism('product-set-details', 'ProductSetWidget') ignore missing with {
+        data: {
+            products: data.views,
+            name: data.set.name,
+            description: data.set.description,
+            images: data.set.imageSets.0.images | default([])
+        }
+    } only %}
 {% endblock %}

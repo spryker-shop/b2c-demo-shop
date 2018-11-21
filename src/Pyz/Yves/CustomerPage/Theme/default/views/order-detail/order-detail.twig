@@ -135,7 +135,13 @@
     </div>
 
 
-    {{ widget('CartNoteOrderNoteWidgetPlugin', data.order) }}
+    {% include molecule('note-list', 'CartNoteWidget') ignore missing with {
+        data: {
+            label: 'cart_note.customer_page.order_note',
+            note: data.order.cartNote
+        }
+    } only %}
+
     {{ widgetBlock('CustomerReorderWidgetPlugin', 'formActions', data.order) }}
     {{ widgetBlock('CustomerReorderWidgetPlugin', 'formEnd', data.order) }}
 {% endblock %}

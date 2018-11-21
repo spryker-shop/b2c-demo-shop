@@ -1,7 +1,7 @@
 {% extends template('widget') %}
 
 {% block reorderAction %}
-    <a href="{{ path('customer/order/reorder', {'idOrder': _widget.order.idSalesOrder}) }}">
+    <a href="{{ path('customer/order/reorder', {'idSalesOrder': _widget.order.idSalesOrder}) }}">
         {{ 'customer.order.reorder' | trans }}
     </a>
 {% endblock %}
@@ -37,7 +37,7 @@
             </div>
             <div class="form-field col col--sm-5 col--lg-3">
                 <div class="box">
-                    <a href="{{ path('customer/order/reorder', {'idOrder': _widget.order.idSalesOrder}) }}" class="button button--expand ">
+                    <a href="{{ path('customer/order/reorder', {'idSalesOrder': _widget.order.idSalesOrder}) }}" class="button button--expand ">
                         {{ 'customer.order.reorder_all' | trans }}
                     </a>
                 </div>

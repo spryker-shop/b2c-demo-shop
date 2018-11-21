@@ -16,7 +16,11 @@
 {% block body %}
     {% if data.cartItem.productOptions is not empty %}
         <li class="{{ config.name }}__item">
-            {{ widget('CartItemProductOptionWidgetPlugin', data.cartItem) }}
+            {% include molecule('product-options', 'ProductOptionWidget') ignore missing with {
+                data: {
+                    options: data.cartItem.productOptions | default([])
+                }
+            } only %}
         </li>
     {% endif %}
 {% endblock %}
