@@ -132,21 +132,57 @@
             <div class="col col--sm-12 col--lg-6 summary-page__col">
                 <div class="summary-item__wrap">
                     <h5 class="title title--checkout"> {{ 'page.checkout.summary.products' | trans }}</h5>
-                    <div class="summary-product-list">
+                    <div class="summary-item__product-list">
                         {% for item in data.cartItems %}
                             {% set item = item.bundleProduct is defined ? item.bundleProduct : item %}
                             {% set firstImage = item.images | first %}
-                            {% include molecule('summary-item', 'CheckoutPage') with {
-                                class: 'summary-item--product',
+
+                            {% embed molecule('product-item') with {
+                                modifiers: ['summary'],
                                 data: {
-                                    cartItem: item,
-                                    name: item.name,
-                                    image: firstImage.externalUrlSmall,
-                                    quantity: item.quantity,
-                                    options: item.productOptions | default({}),
-                                    bundleItems: item.bundleItems | default([])
+                                    productItem: item
                                 }
                             } only %}
+                                {% block imageWrap %}
+                                    <div class="{{ config.name }}__image col">
+                                        {% block image %}{{ parent() }}{% endblock %}
+                                    </div>
+                                {% endblock %}
+
+                                {% block title %}
+                                    <div class="{{ config.name }}__title col col--lg-8 col--sm-12">{{ data.productItem.name }}</div>
+                                {% endblock %}
+
+                                {% block options %}
+                                    {% if data.productItem.concreteAttributes is not empty %}
+                                        <ul>
+                                            {% for key, item in data.productItem.concreteAttributes %}
+                                                <li> {{ ('product.attribute.' ~ key) | trans }}: {{ item }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% endif %}
+
+                                    {% if data.productItem.productOptions is not empty %}
+                                        <ul>
+                                            {% for option in data.productItem.productOptions %}
+                                                <li class="grid grid--justify grid--middle">
+                                                    <span class="col col--lg-8 col--sm-12"> + {{ option.value | trans }}:</span>
+                                                    <span class="col col--lg-4 col--sm-12 text-right">{{ option.sumPrice | default(0) | money }}</span>
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% endif %}
+                                {% endblock %}
+
+                                {% block quantity %}
+                                    <div>
+                                        {{ 'cart.item_quantity' | trans }}: {{ data.productItem.quantity }}
+                                    </div>
+                                {% endblock %}
+
+                                {% block itemSummary %}{% endblock %}
+                            {% endembed %}
+
                         {% endfor %}
                     </div>
                 </div>

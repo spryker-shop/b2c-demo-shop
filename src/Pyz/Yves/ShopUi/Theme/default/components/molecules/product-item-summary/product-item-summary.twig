@@ -1,7 +1,7 @@
 {% extends model('component') %}
 
 {% define config = {
-    name: 'cart-item-summary',
+    name: 'product-item-summary',
     tag: 'ul'
 } %}
 
@@ -11,7 +11,7 @@
     cartItem: required
 } %}
 
-{% block class %}{{parent()}} list{% endblock %}
+{% block class %}{{ parent() }} list{% endblock %}
 
 {% block body %}
     {% if data.cartItem.productOptions is not empty %}

@@ -44,9 +44,9 @@
                         {% for cartItem in data.cartItems %}
                             {% include molecule('product-item') with {
                                 data: {
-                                    cart: data.cart,
-                                    cartItem: cartItem,
-                                    attributes: data.attributes[cartItem.sku] | default([])
+                                    product: data.cart,
+                                    productItem: cartItem,
+                                    attributes: data.attributes[cartItem.sku]
                                 }
                             } only %}
                         {% endfor %}

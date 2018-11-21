@@ -4,19 +4,36 @@
             font: fw(medium) rem(17)/rem(23) $setting-font-family-additional;
 
             &:hover {
-                cursor: pointer;
                 text-decoration: none;
                 color: inherit;
+            }
+
+            &--mini-cart {
+                font-size: rem(15);
+                line-height: rem(20);
+                margin-bottom: 5px;
             }
         }
 
         &__content {
             padding: 0 0 rem(5) rem(24);
             width: calc(100% - #{rem(120)});
+
+            &--mini-cart {
+                width: calc(100% - #{rem(100)});
+            }
         }
 
         &__image {
             width: rem(120);
+
+            &--mini-cart {
+                width: rem(100);
+
+                .thumbnail {
+                    height: rem(60);
+                }
+            }
         }
 
         &__price {
@@ -25,6 +42,18 @@
 
             @include helper-breakpoint-media-min($lg-min) {
                 text-align: right;
+            }
+
+            &--mini-cart {
+                font-size: rem(15);
+                line-height: rem(20);
+                align-self: flex-start;
+            }
+        }
+
+        &__option {
+            &--mini-cart {
+                font: fw(regular) rem(13)/rem(17) $setting-font-family-additional;
             }
         }
 
@@ -42,11 +71,25 @@
 
         &__box {
             border-bottom: rem(1) dotted $setting-color-gray-3;
-            padding: rem(18) 0;
+            padding-bottom: rem(18);
+            margin-bottom: rem(18);
 
             &--with-options {
                 border-bottom: none;
                 padding-bottom: 0;
+                margin-bottom: 0;
+            }
+
+            &--summary {
+                border-bottom: rem(1) dotted $setting-color-gray-3;
+                padding-bottom: rem(18);
+                margin-bottom: rem(18);
+            }
+
+            &--mini-cart {
+                border-bottom: rem(1) dotted $setting-color-gray-3;
+                padding: rem(18) 0;
+                margin: 0;
             }
         }
     }

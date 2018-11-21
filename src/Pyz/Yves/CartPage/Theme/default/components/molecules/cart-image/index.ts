@@ -1,1 +1,0 @@
-import './cart-image.scss';
