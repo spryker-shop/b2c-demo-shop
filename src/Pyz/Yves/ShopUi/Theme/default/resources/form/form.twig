@@ -29,14 +29,13 @@
         {% set required = false %}
     {%- endif -%}
 
-    {%- set modifiers = ['expand'] -%}
-
     {% embed molecule('custom-select') with {
-        modifiers: modifiers,
+        modifiers: ['expand'],
         attributes: {
             multiple: multiple,
             placeholder: placeholder,
-            required: required
+            required: required,
+            'config-width': '100%'
         },
         embed: {
             attributes: block('widget_attributes'),
