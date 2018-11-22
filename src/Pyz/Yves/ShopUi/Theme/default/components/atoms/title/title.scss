@@ -3,9 +3,7 @@
         &--main {
             padding: rem(20) 0;
             text-align: center;
-            border-bottom: dotted rem(1) $setting-color-gray-3;
             margin-bottom: rem(40);
-            font-weight: fw(medium);
         }
 
         &--checkout {
@@ -27,18 +25,6 @@
             margin: 0 rem(10) 0 0;
             border: none;
             padding: 0;
-        }
-
-        &--medium {
-            font-weight: fw(medium);
-        }
-
-        &--regular {
-            font-weight: fw(regular);
-        }
-
-        &--uppercase {
-            text-transform: uppercase;
         }
 
         &--account-main {
@@ -86,18 +72,64 @@
 
         &--footer {
             padding: 0 0 rem(16);
-            letter-spacing: rem(2.6);
         }
 
         &--product {
-            font: fw(bold) rem(30)/1.27 $setting-font-family-additional;
-            color: $setting-color-black;
             margin-bottom: rem(12);
 
             @include helper-breakpoint-media-min($xl-min) {
-                font: fw(bold) rem(38)/1.13 $setting-font-family-additional;
                 margin-bottom: rem(7);
             }
+        }
+
+        &--checkout-success {
+            margin-bottom: rem(40);
+            padding-bottom: rem(8);
+
+            @include helper-breakpoint-media-min($md-min) {
+                margin-bottom: rem(48);
+            }
+        }
+
+        &--promotion {
+            padding: rem(18) 0;
+            margin-bottom: rem(36);
+            letter-spacing: rem(-0.3);
+        }
+
+        &--mini-cart {
+            padding-bottom: rem(10);
+        }
+
+        &--form {
+            width: 100%;
+            margin-bottom: rem(32);
+            padding-bottom: rem(10);
+
+            @include helper-breakpoint-media-min($md-min) {
+                margin-bottom: rem(58);
+            }
+        }
+
+        &--catalog-cms {
+            margin: 0 0 rem(11);
+            letter-spacing: normal;
+        }
+
+        &--medium {
+            font-weight: fw(medium);
+        }
+
+        &--regular {
+            font-weight: fw(regular);
+        }
+
+        &--uppercase {
+            text-transform: uppercase;
+        }
+
+        &--with-border {
+            border-bottom: dotted rem(1) $setting-color-gray-3;
         }
 
         @content;
