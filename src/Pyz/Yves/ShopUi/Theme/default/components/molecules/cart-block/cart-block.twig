@@ -16,23 +16,11 @@
 
         {% for item in data.cartItems %}
             {% embed molecule('product-item') with {
-                modifiers: ['mini-cart'],
+                modifiers: ['mini-cart', 'readonly'],
                 data: {
                     productItem: item
                 }
             } only %}
-                {% block imageWrap %}
-                    <div class="{{ config.name }}__image {{ config.name }}__image--mini-cart col">
-                        {% block image %}{{ parent() }}{% endblock %}
-                    </div>
-                {% endblock %}
-
-                {% block title %}
-                    <div class="{{ config.name }}__title {{ config.name }}__title--mini-cart col col--lg-8 col--sm-12">
-                        {{ data.productItem.name }}
-                    </div>
-                {% endblock %}
-
                 {% block options %}
                     {% set optionPrice = 0 %}
 
@@ -41,7 +29,7 @@
                     {% endfor %}
 
                     {% if optionPrice %}
-                        <div class="grid grid--middle grid--justify {{ config.name }}__option {{ config.name }}__option--mini-cart">
+                        <div class="grid grid--middle grid--justify {{ component.renderClass(config.name ~ '__option', modifiers) }}">
                             <span class="col">
                                 {{ 'cart.product-option' | trans }}:
                             </span>
@@ -50,19 +38,20 @@
                     {% endif %}
 
                     {% for attributeName, attribute in data.productItem.concreteAttributes %}
-                        <div class="{{ config.name }}__option {{ config.name }}__option--mini-cart">
+                        <div class="{{ component.renderClass(config.name ~ '__option', modifiers) }}">
                             {{ ('product.attribute.' ~ attributeName) | trans }}: {{ attribute }}
                         </div>
                     {% endfor %}
                 {% endblock %}
 
                 {% block quantity %}
-                    <div class="{{ config.name }}__option {{ config.name }}__option--mini-cart">
+                    <div class="{{ component.renderClass(config.name ~ '__option', modifiers) }}">
                         {{ 'cart.item_quantity' | trans }}: {{ data.productItem.quantity }}
                     </div>
                 {% endblock %}
 
-                {% block itemSummary %}{% endblock %}
+                {% block bundles %}{% endblock %}
+                {% block summary %}{% endblock %}
             {% endembed %}
         {% endfor %}
 

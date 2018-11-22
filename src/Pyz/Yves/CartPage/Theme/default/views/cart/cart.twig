@@ -46,7 +46,7 @@
                                 data: {
                                     product: data.cart,
                                     productItem: cartItem,
-                                    attributes: data.attributes[cartItem.sku]
+                                    attributes: data.attributes[cartItem.sku] | default([])
                                 }
                             } only %}
                         {% endfor %}

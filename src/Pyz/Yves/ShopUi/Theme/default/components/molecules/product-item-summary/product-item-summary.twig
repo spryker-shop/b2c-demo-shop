@@ -6,17 +6,27 @@
 } %}
 
 {% define data = {
-    unitPrice: required,
-    subtotalPrice: required,
-    cartItem: required
+    productItem: {},
+    options: []
 } %}
 
 {% block class %}{{ parent() }} list{% endblock %}
 
 {% block body %}
-    {% if data.cartItem.productOptions is not empty %}
+    {% if data.productItem is not empty %}
         <li class="{{ config.name }}__item">
-            {{ widget('CartItemProductOptionWidgetPlugin', data.cartItem) }}
+            {{ widget('CartItemProductOptionWidgetPlugin', data.productItem) }}
         </li>
+    {% else %}
+        {% for option in data.options %}
+            <li class="{{ config.name }}__item">
+                <ul>
+                    <li class="option-item">
+                        + {{ option.value | trans }}:
+                        <span class="float-right">{{ option.sumPrice | default(0) | money }}</span>
+                    </li>
+                </ul>
+            </li>
+        {% endfor %}
     {% endif %}
 {% endblock %}

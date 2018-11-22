@@ -9,6 +9,7 @@
     product: {},
     productItem: required,
     attributes: [],
+    options: [],
     idQuote: data.product.idQuote | default(null),
     isPromotionItem: false
 } %}
@@ -21,16 +22,15 @@
 {% block body %}
     <div class="{{ component.renderClass(config.name ~ '__box', modifiers) }} {{ productItemBox }}">
         <div class="grid grid--middle grid--justify grid--no-wrap">
-            {% block imageWrap %}
-                <a href="{{ data.productItem.url }}" class="{{ config.name }}__image col">
-                    {% block image %}
-                        {% include molecule('product-image') with {
-                            data: {
-                                name: data.productItem.name | default(''),
-                                image: data.productItem.images is empty ? null : (data.productItem.images | first)
-                            }
-                        } only %}
-                    {% endblock %}
+            {% block image %}
+                <a href="{{ data.productItem.url }}" class="{{ component.renderClass(config.name ~ '__image', modifiers) }} col">
+                    {% include molecule('product-image') with {
+                        data: {
+                            name: data.productItem.name | default(''),
+                            image: data.productItem.images is empty ? null : (data.productItem.images | first)
+                        }
+                    } only %}
+
                     {% block labels %}{% endblock %}
                     {% block groups %}{% endblock %}
                 </a>
@@ -39,7 +39,9 @@
             <div class="{{ component.renderClass(config.name ~ '__content', modifiers) }} col">
                 <div class="grid grid--justify grid--middle">
                     {% block title %}
-                        <a href="{{ data.productItem.url }}" class="{{ config.name }}__title col col--lg-8 col--sm-12">{{ data.productItem.name }}</a>
+                        <a href="{{ data.productItem.url }}" class="{{ component.renderClass(config.name ~ '__title', modifiers) }} col col--lg-8 col--sm-12">
+                            {{ data.productItem.name }}
+                        </a>
                     {% endblock %}
 
                     {% block price %}
@@ -101,17 +103,17 @@
             </div>
         </div>
 
-        {% block itemSummary %}
+        {% block bundles %}
             {{ widget('ProductBundleItemsWidgetPlugin', data.productItem, data.product) }}
+        {% endblock %}
 
+        {% block summary %}
             {% if data.productItem.productOptions is defined and data.productItem.productOptions is not empty %}
                 <div class="grid grid--right">
                     {% include molecule('product-item-summary') with {
                         class: 'col',
                         data: {
-                            unitPrice: data.productItem.unitPrice | money,
-                            subtotalPrice: data.productItem.sumSubtotalAggregation | money,
-                            cartItem: data.productItem
+                            productItem: data.productItem
                         }
                     } only %}
                 </div>
