@@ -1,28 +1,28 @@
 {% extends model('component') %}
 
 {% define config = {
-    name: 'cart-item-variant-selector'
+    name: 'product-item-variant-selector'
 } %}
 
 {% define data = {
-    cartItem: required,
-    cartItemAttributes: []
+    productItem: required,
+    productItemAttributes: []
 } %}
 
 {% block component %}
-    {% set isItemVariantReplaceAvailable = data.cartItemAttributes is not empty %}
+    {% set isItemVariantReplaceAvailable = data.productItemAttributes is not empty %}
 
     {% if widgetExists('QuantitySalesUnitWidgetPlugin') %}
-        {% set isItemVariantReplaceAvailable = not widgetBlock('QuantitySalesUnitWidgetPlugin', 'hasSalesUnit', data.cartItem) and isItemVariantReplaceAvailable %}
+        {% set isItemVariantReplaceAvailable = not widgetBlock('QuantitySalesUnitWidgetPlugin', 'hasSalesUnit', data.productItem) and isItemVariantReplaceAvailable %}
     {% endif %}
 
-    {% if isItemVariantReplaceAvailable %}{{parent()}}{% endif %}
+    {% if isItemVariantReplaceAvailable %}{{ parent() }}{% endif %}
 {% endblock %}
 
 {% block body %}
-    <form method="POST" action="{{ path('cart/update', {'sku': data.cartItem.sku }) }}">
+    <form method="POST" action="{{ path('cart/update', {'sku': data.productItem.sku }) }}">
         <ul class="list">
-            {% for attributeName, attributeOptions in data.cartItemAttributes %}
+            {% for attributeName, attributeOptions in data.productItemAttributes %}
                 {% set options = [] %}
 
                 {% for value, properties in attributeOptions %}
@@ -44,7 +44,8 @@
                                 options: options
                             },
                             attributes: {
-                                name: 'preselectedAttributes[' ~ attributeName ~ ']'
+                                name: 'preselectedAttributes[' ~ attributeName ~ ']',
+                                'config-theme': 'small'
                             },
                             embed: {
                                 jsClass: config.jsName ~ '__select-trigger'
@@ -65,11 +66,11 @@
             {% endfor %}
         </ul>
 
-        <input type="hidden" value="{{ data.cartItem.groupKey }}" name="groupKey" />
-        <input type="hidden" value="{{ data.cartItem.quantity }}" name="quantity" />
+        <input type="hidden" value="{{ data.productItem.groupKey }}" name="groupKey" />
+        <input type="hidden" value="{{ data.productItem.quantity }}" name="quantity" />
 
-        {% if data.cartItem.productOptions is not empty %}
-            {% for productOption in data.cartItem.productOptions %}
+        {% if data.productItem.productOptions is not empty %}
+            {% for productOption in data.productItem.productOptions %}
                 <input name="product-option[{{ productOption.groupName }}]" type="hidden" value="{{ productOption.idProductOptionValue }}" />
             {% endfor %}
         {% endif %}

@@ -132,21 +132,47 @@
             <div class="col col--sm-12 col--lg-6 summary-page__col">
                 <div class="summary-item__wrap">
                     <h5 class="title title--checkout"> {{ 'page.checkout.summary.products' | trans }}</h5>
-                    <div class="summary-product-list">
+                    <div class="summary-item__product-list">
                         {% for item in data.cartItems %}
                             {% set item = item.bundleProduct is defined ? item.bundleProduct : item %}
                             {% set firstImage = item.images | first %}
-                            {% include molecule('summary-item', 'CheckoutPage') with {
-                                class: 'summary-item--product',
+
+                            {% embed molecule('product-item') with {
+                                modifiers: ['readonly'],
                                 data: {
-                                    cartItem: item,
-                                    name: item.name,
-                                    image: firstImage.externalUrlSmall,
-                                    quantity: item.quantity,
-                                    options: item.productOptions | default({}),
-                                    bundleItems: item.bundleItems | default([])
+                                    productItem: item,
+                                    options: item.productOptions | default([])
                                 }
                             } only %}
+                                {% block options %}
+                                    {% if data.productItem.concreteAttributes is not empty %}
+                                        <ul>
+                                            {% for key, item in data.productItem.concreteAttributes %}
+                                                <li> {{ ('product.attribute.' ~ key) | trans }}: {{ item }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% endif %}
+                                {% endblock %}
+
+                                {% block quantity %}
+                                    <div>
+                                        {{ 'cart.item_quantity' | trans }}: {{ data.productItem.quantity }}
+                                    </div>
+                                {% endblock %}
+
+                                {% block summary %}
+                                    {% if data.options is defined and data.options is not empty %}
+                                        <div class="grid grid--right">
+                                            {% include molecule('product-item-summary') with {
+                                                class: 'col',
+                                                data: {
+                                                    options: data.options
+                                                }
+                                            } only %}
+                                        </div>
+                                    {% endif %}
+                                {% endblock %}
+                            {% endembed %}
                         {% endfor %}
                     </div>
                 </div>

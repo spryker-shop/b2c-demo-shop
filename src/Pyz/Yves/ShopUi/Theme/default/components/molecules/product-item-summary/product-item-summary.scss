@@ -1,5 +1,5 @@
-@mixin cart-page-cart-item-summary($name: '.cart-item-summary') {
-    $image-width-with-spacing: rem(120 + 24);
+@mixin shop-ui-product-item-summary($name: '.product-item-summary') {
+    $image-width-with-spacing: rem(144);
 
     #{$name} {
         width: 100%;
@@ -8,11 +8,12 @@
         @include helper-breakpoint-media-min($lg-min) {
             width: calc(100% - #{$image-width-with-spacing});
             padding-top: rem(20);
+            margin-bottom: rem(20);
         }
 
         &__item {
             padding-top: rem(20);
-            font: map-get($setting-font-weight, medium) rem(17)/1.3 $setting-font-family-additional;
+            font: fw(medium) rem(17)/rem(24) $setting-font-family-additional;
             border-bottom: rem(1) dotted $setting-color-gray-3;
 
             &:first-of-type {
@@ -26,4 +27,4 @@
     }
 }
 
-@include cart-page-cart-item-summary();
+@include shop-ui-product-item-summary();
