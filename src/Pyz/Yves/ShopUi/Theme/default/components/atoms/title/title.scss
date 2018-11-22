@@ -141,6 +141,12 @@
             border-bottom: dotted rem(1) $setting-color-gray-3;
         }
 
+        @each $i in (1, 2, 3, 4, 5, 6) {
+            &--h#{$i} {
+                @include helper-heading($i);
+            }
+        }
+
         @content;
     }
 }
