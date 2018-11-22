@@ -37,7 +37,7 @@
             <div class="col col--sm-12 col--lg-8">
                 <div class="page-layout-cart__col page-layout-cart__col--content">
                     <div class="cart-box grid grid--middle grid--justify">
-                        <h3 class="col">{{ 'cart.title1' | trans }}</h3>
+                        <h3 class="col">{{ 'cart.title_content' | trans }}</h3>
                         <span class="cart-box__quantity col">{{ app['cart.quantity'] }} {{ 'item' | trans }}</span>
                     </div>
                     <div class="page-layout-cart__items-wrap">
@@ -57,7 +57,7 @@
 
             <div class="col col--sm-12 col--lg-4">
                 <div class="page-layout-cart__col page-layout-cart__col--sidebar">
-                    <h3 class="cart-box">{{ 'cart.title2' | trans }}</h3>
+                    <h3 class="cart-box">{{ 'cart.title_sidebar' | trans }}</h3>
                     <div class="cart-box cart-box--voucher cart-box--reset-spacing">
                         {% if not is_granted('IS_AUTHENTICATED_FULLY') or can('WriteSharedCartPermissionPlugin', data.cart.idQuote) %}
                             {{ widget('DiscountVoucherFormWidgetPlugin') }}
