@@ -1,9 +1,11 @@
 @mixin shop-ui-cart-link ($name: '.cart-link') {
     #{$name} {
-        position: relative;
+        &--mobile {
+            position: relative;
+        }
 
         &__quantity {
-            @include shop-ui-cart-link-bubble(rem(18), rem(-12));
+            @include shop-ui-cart-link-bubble(rem(18), rem(-11));
             background-color: $setting-color-alt;
             color: $setting-color-white;
 

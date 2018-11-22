@@ -1,0 +1,27 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'cart-link',
+    tag: 'a'
+} %}
+
+{% define data = {
+    cartQuantity: required,
+} %}
+
+{% define attributes = {
+    href: required,
+} %}
+
+{% block body %}
+    {% if data.cartQuantity > 0 %}
+        <span class="{{ config.name }}__quantity">{{ data.cartQuantity }}</span>
+    {% endif %}
+
+    {% include atom('icon') with {
+        modifiers: ['big'],
+        data: {
+            name: 'cart',
+        }
+    } only %}
+{% endblock %}

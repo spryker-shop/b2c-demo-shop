@@ -1,17 +1,50 @@
 @mixin shop-ui-jumbotron($name: '.jumbotron') {
     #{$name} {
-        &__container {
-            height: rem(256);
-            background: linear-gradient(to left top, helper-color-dark($setting-color-main), helper-color-light($setting-color-main)) no-repeat center / cover;
-            text-align: center;
-            position: relative;
+        height: rem(256);
+        background: linear-gradient(to left top, $setting-color-gray-3, $setting-color-gray-4) no-repeat center / cover;
+        text-align: center;
+        position: relative;
 
-            @include helper-breakpoint(md) {
-                height: rem(416);
+        @include helper-breakpoint(md) {
+            height: rem(416);
+        }
+
+        @include helper-breakpoint(xl) {
+            height: rem(608);
+        }
+
+        &--category {
+            background-color: $setting-color-white;
+            height: auto;
+        }
+
+        &__inner {
+            &--category {
+                flex-direction: column;
+                margin: 0 rem(16);
+                padding: rem(20) 0;
+                min-height: rem(144);
+
+                @include helper-breakpoint(md) {
+                    min-height: rem(256);
+                }
+
+                @include helper-breakpoint(xl) {
+                    min-height: rem(290);
+                }
             }
 
-            @include helper-breakpoint(xl) {
-                height: rem(608);
+            &--category-no-img {
+                border-bottom: solid rem(1) $setting-color-gray-3;
+                min-height: rem(121);
+
+                @include helper-breakpoint(md) {
+                    min-height: rem(176);
+                }
+
+                @include helper-breakpoint(xl) {
+                    min-height: rem(240);
+                }
             }
         }
 
@@ -27,93 +60,53 @@
         &__headline,
         &__sub-headline {
             color: $setting-color-white;
+
+            &--category-no-img {
+                color: $setting-color-gray-6;
+            }
         }
 
         &__headline {
-            font: bold rem(70) $setting-font-family-additional;
-            line-height: 1.5;
+            font: fw(bold) rem(32)/1.5 $setting-font-family-additional;
 
-            @include helper-breakpoint-media-max($lg-max) {
+            @include helper-breakpoint-media-min($lg-min) {
                 font-size: rem(48);
             }
 
-            @include helper-breakpoint-media-max($md-max) {
-                font-size: rem(32);
+            @include helper-breakpoint-media-min($xl-min) {
+                font-size: rem(70);
+            }
+
+            &--category {
+                font-size: rem(24);
+                font-weight: fw(medium);
+
+                @include helper-breakpoint-media-min($lg-min) {
+                    font-size: rem(32);
+                }
+
+                @include helper-breakpoint-media-min($xl-min) {
+                    font-size: rem(59);
+                }
             }
         }
 
         &__sub-headline {
-            font: 300 rem(32) $setting-font-family;
+            font: fw(light) rem(16) $setting-font-family;
             letter-spacing: rem(0.2);
 
-            @include helper-breakpoint-media-max($lg-max) {
+            @include helper-breakpoint-media-min($lg-min) {
                 font-size: rem(24);
             }
 
-            @include helper-breakpoint-media-max($md-max) {
-                font-size: rem(16);
-            }
-        }
-
-        &--category {
-            #{$name}__container {
-                background-color: $setting-color-white;
-                background-image: none;
-                height: auto;
+            @include helper-breakpoint-media-min($xl-min) {
+                font-size: rem(32);
             }
 
-            #{$name}__sub-headline {
-                font: 500 rem(13) $setting-font-family;
+            &--category {
+                font: fw(medium) rem(13) $setting-font-family;
                 text-transform: uppercase;
                 letter-spacing: rem(2.6);
-                color: $setting-color-gray-6;
-            }
-
-            #{$name}__headline {
-                font-size: rem(59);
-                font-weight: fw(medium);
-
-                @include helper-breakpoint-media-max($lg-max) {
-                    font-size: rem(32);
-                }
-
-                @include helper-breakpoint-media-max($md-max) {
-                    font-size: rem(24);
-                }
-            }
-
-            #{$name}__inner {
-                flex-direction: column;
-                margin: 0 rem(16);
-                padding: rem(20) 0;
-                min-height: rem(144);
-
-                @include helper-breakpoint(md) {
-                    min-height: rem(256);
-                }
-
-                @include helper-breakpoint(xl) {
-                    min-height: rem(290);
-                }
-            }
-        }
-
-        &--category-no-img {
-            #{$name}__inner {
-                border-bottom: solid rem(1) $setting-color-gray-3;
-                min-height: rem(121);
-
-                @include helper-breakpoint(md) {
-                    min-height: rem(176);
-                }
-
-                @include helper-breakpoint(xl) {
-                    min-height: rem(240);
-                }
-            }
-
-            #{$name}__headline,
-            #{$name}__sub-headline {
                 color: $setting-color-gray-6;
             }
         }

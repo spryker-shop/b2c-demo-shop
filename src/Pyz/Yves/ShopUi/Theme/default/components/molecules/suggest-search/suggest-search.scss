@@ -37,10 +37,10 @@
             z-index: $setting-zi-search-suggestions + 2;
             border: none;
             padding: 0;
-            font: 500 20px $setting-font-family-additional;
+            font: fw(medium) rem(24) $setting-font-family-additional;
 
-            @include helper-breakpoint-media-max($sm-max) {
-                font-size: 24px;
+            @include helper-breakpoint-media-min($md-min) {
+                font-size: rem(20);
             }
 
             &::placeholder {
@@ -116,6 +116,7 @@
 
                 &:hover {
                     color: $setting-color-alt;
+                    text-decoration: none;
                 }
             }
 
@@ -131,17 +132,6 @@
             &--products {
                 .list__item {
                     margin: 24px 0;
-                }
-
-                a:hover {
-                    .price__amount {
-                        color: $setting-color-text;
-
-                        &--original {
-                          color: $setting-color-text;
-                          opacity: 0.25;
-                        }
-                    }
                 }
             }
         }

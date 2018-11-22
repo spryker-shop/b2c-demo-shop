@@ -16,8 +16,10 @@
         &__content {
             margin-top: rem(60);
             padding: 0 rem(20);
+            text-align: center;
 
             @include helper-breakpoint-media-min($lg-min) {
+                text-align: left;
                 margin-top: 0;
             }
 
@@ -34,39 +36,27 @@
             }
         }
 
+        &__pre-title,
         &__title {
             font: fw(bold) rem(17)/1.52 $setting-font-family-additional;
             letter-spacing: rem(3);
             color: $setting-color-gray-6;
             margin-bottom: rem(15);
             text-transform: uppercase;
-            text-align: center;
 
             @include helper-breakpoint-media-min($md-min) {
                 letter-spacing: rem(3.8);
                 font-size: rem(21);
             }
-
-            @include helper-breakpoint-media-min($lg-min) {
-                text-align: left;
-            }
         }
 
         &__pre-title {
             font: normal rem(9)/normal $setting-font-family-additional;
-            letter-spacing: rem(2.9);
-            color: $setting-color-gray-6;
-            text-transform: uppercase;
             margin-bottom: rem(17);
-            text-align: center;
 
             @include helper-breakpoint-media-min($md-min) {
                 font-size: rem(10);
                 letter-spacing: rem(3.2);
-            }
-
-            @include helper-breakpoint-media-min($lg-min) {
-                text-align: left;
             }
         }
 
@@ -75,48 +65,11 @@
             letter-spacing: rem(0.8);
             color: $setting-color-gray-4;
             margin-bottom: rem(27);
-            text-align: center;
 
             @include helper-breakpoint-media-min($md-min) {
                 line-height: 1.47;
                 letter-spacing: rem(1);
                 font-size: rem(17);
-            }
-
-            @include helper-breakpoint-media-min($lg-min) {
-                text-align: left;
-            }
-        }
-
-        &__link {
-            display: block;
-            font: fw(bold) rem(10)/rem(44) $setting-font-family-additional;
-            letter-spacing: rem(2.1);
-            color: $setting-color-gray-6;
-            border: rem(1) solid $setting-color-text;
-            height: rem(46);
-            width: rem(128);
-            border-radius: rem(2);
-            text-transform: uppercase;
-            text-align: center;
-            margin: 0 auto;
-
-            &:hover {
-                background: $setting-color-black;
-                color: $setting-color-white;
-                text-decoration: none;
-            }
-
-            @include helper-breakpoint-media-min($md-min) {
-                width: rem(160);
-                height: rem(52);
-                letter-spacing: rem(2.5);
-                line-height: rem(50);
-                font-size: rem(11);
-            }
-
-            @include helper-breakpoint-media-min($lg-min) {
-                margin: 0;
             }
         }
 

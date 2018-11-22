@@ -2,7 +2,6 @@
 
 {% define config = {
     name: 'logo',
-    tag: 'span',
     renderAttributes: false
 } %}
 
@@ -25,7 +24,7 @@
                     </g>
                 </svg>
             {% else %}
-                <img {{block('attributes')}} />
+                <img {{block('attributes')}}>
             {% endif %}
         </span>
     </a>

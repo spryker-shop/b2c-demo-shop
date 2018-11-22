@@ -1,0 +1,28 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'navigation-top-mobile-item',
+    tag: 'li'
+} %}
+
+{% define data = {
+    url: '/',
+    iconName: required,
+} %}
+
+{% block body %}
+    <div class="grid grid--middle grid--center">
+        {% block button %}
+            <a href="{{ data.url }}">
+                {% block icon %}
+                    {% include atom('icon') with {
+                        modifiers: ['big'],
+                        data: {
+                            name: data.iconName,
+                        }
+                    } only %}
+                {% endblock %}
+            </a>
+        {% endblock %}
+    </div>
+{% endblock %}

@@ -1,18 +1,24 @@
-$button-min-width: rem(177);
-
 @mixin shop-ui-button($name: '.button') {
+    $button-min-width: rem(177);
+
     #{$name} {
         @include helper-effect-transition(all);
         display: inline-block;
-        padding: rem(15) rem(16);
+        padding: rem(8);
         background-color: $setting-color-black;
         border: none;
         border-radius: rem(2);
-        min-width: $button-min-width;
+        min-width: rem(92);
         color: $setting-color-white;
         text-align: center;
-        font: fw(medium) rem(14) $setting-font-family-additional;
+        font: fw(medium) rem(8) $setting-font-family-additional;
         cursor: pointer;
+
+        @include helper-breakpoint-media-min($lg-min) {
+            font-size: rem(14);
+            padding: rem(15) rem(16);
+            min-width: $button-min-width;
+        }
 
         &:hover,
         &:focus {
@@ -101,7 +107,7 @@ $button-min-width: rem(177);
             &:active {
                 border-color: $setting-color-main;
                 color: $setting-color-main;
-                background-color: $setting-color-alpha-9;
+                background-color: $setting-color-alpha-2;
             }
         }
 
@@ -118,10 +124,13 @@ $button-min-width: rem(177);
         }
 
         &--hollow {
-            padding: rem(14) rem(16);
             background-color: $setting-color-white;
             border: rem(1) solid $setting-color-black;
             color: $setting-color-black;
+
+            @include helper-breakpoint-media-min($lg-min) {
+                padding: rem(14) rem(16);
+            }
 
             &[disabled],
             &--disabled {
@@ -134,6 +143,16 @@ $button-min-width: rem(177);
                 &:active {
                     background-color: $setting-color-white;
                 }
+            }
+        }
+
+        &--inspirational {
+            text-transform: uppercase;
+            letter-spacing: rem(2.1);
+            min-width: 0;
+
+            @include helper-breakpoint-media-min($md-min) {
+                letter-spacing: rem(2.5);
             }
         }
 
@@ -153,9 +172,14 @@ $button-min-width: rem(177);
         }
 
         &--large {
-            padding: rem(18);
+            padding: rem(12);
             font-weight: fw(medium);
-            font-size: rem(16);
+            font-size: rem(10);
+
+            @include helper-breakpoint-media-min($lg-min) {
+                padding: rem(18);
+                font-size: rem(16);
+            }
         }
 
         @content;

@@ -49,7 +49,7 @@ export default class SuggestSearch extends Component {
         this.searchOverlay = <HTMLElement>document.querySelector('.js-toggle-search');
         this.overlayCloseButton = <HTMLElement>document.querySelector('.js-search-hide-icon');
         this.overlayOpenButton = <HTMLElement>document.querySelector('.js-search-show-icon');
-        this.overlayMobOpenButton = <HTMLElement>document.querySelector('.js-search-mob-show-icon');
+        this.overlayMobOpenButton = <HTMLElement>document.querySelector('.js-navigation-top-mobile__search');
         this.bodyTrigger = <HTMLElement>document.querySelector('.js-search-hide-overlay');
         this.createHintInput();
         this.mapEvents();

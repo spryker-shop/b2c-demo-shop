@@ -16,13 +16,6 @@
             margin-bottom: 0;
             display: block;
 
-            &:hover,
-            &:focus {
-                #{$name}__box::before {
-                    border-color: $setting-color-input-border-focus;
-                }
-            }
-
             #{$name}__container {
                 padding: rem(18.08) rem(20.8);
                 position: relative;
@@ -43,6 +36,14 @@
                     z-index: -1;
                     border: rem(1) solid $setting-color-input-border;
                     border-radius: rem(3);
+                }
+            }
+
+            &:hover,
+            &:focus {
+                #{$name}__box::before {
+                    border-color: $setting-color-input-border-focus;
+                    background-color: $setting-color-gray-2;
                 }
             }
 
