@@ -9,7 +9,7 @@
 {% block body %}
     {% if data.discountTotal %}
         {% if data.voucherDiscounts is not empty %}
-            <li>
+            <li class="cart-summary__item spacing-y spacing-y--bigger">
                 <a class="float-right text-small" href="{{ url('discount/voucher/clear') }}">
                     {% include atom('icon') with {
                         modifiers: ['smaller'],
@@ -40,7 +40,7 @@
         {% endif %}
 
         {% if data.ruleDiscounts is not empty %}
-            <li>
+            <li class="cart-summary__item spacing-y spacing-y--bigger">
                 <ul>
                     {% for ruleDiscount in data.ruleDiscounts %}
                         <li class="grid grid--justify">
