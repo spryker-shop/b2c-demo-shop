@@ -42,10 +42,10 @@
                     </div>
                     <div class="page-layout-cart__items-wrap">
                         {% for cartItem in data.cartItems %}
-                            {% include molecule('cart-item', 'CartPage') with {
+                            {% include molecule('product-item') with {
                                 data: {
-                                    cart: data.cart,
-                                    cartItem: cartItem,
+                                    product: data.cart,
+                                    productItem: cartItem,
                                     attributes: data.attributes[cartItem.sku] | default([])
                                 }
                             } only %}

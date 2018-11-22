@@ -9,14 +9,10 @@
         <h4 class="title title--promotion title--medium title--with-border">{{ 'cart.promotion.items' | trans }}</h4>
 
         {% for product in data.promotionProducts %}
-            {% embed molecule('promotion-item', 'DiscountPromotionWidget') with {
+            {% embed molecule('product-item') with {
                 data: {
-                    name: product.name,
-                    abstractId: product.idProductAbstract,
-                    url: product.url,
-                    imageUrl: (product.images|length ? product.images.0.externalUrlSmall : ''),
-                    price: product.prices.DEFAULT,
-                    originalPrice: (product.prices.ORIGINAL is defined ? product.prices.ORIGINAL : null)
+                    productItem: product,
+                    isPromotionItem: true
                 },
                 embed: {
                     superAttributes: product.attributeMap.superAttributes,
@@ -32,7 +28,7 @@
                 }
             } only %}
                 {% block content %}
-                    {{parent()}}
+                    {{ parent() }}
                     <div class="grid">
                         {% include molecule('variant-configurator', 'DiscountPromotionWidget') with {
                             class: 'col col--lg-9 col--sm-12',
@@ -44,14 +40,20 @@
                             }
                         } only %}
                     </div>
+                {% endblock %}
 
+                {% block labels %}
+                    {{ widget('ProductAbstractLabelWidgetPlugin', embed.idProductAbstract) }}
+                {% endblock %}
+
+                {% block groups %}
+                    {{ widget('ProductGroupWidgetPlugin', embed.idProductAbstract) }}
                 {% endblock %}
 
                 {% block actions %}
                     {% set disabled = embed.idProductConcrete is empty %}
 
-                    <form method="POST" action="/cart/add/{{embed.sku}}" class="grid grid--bottom grid--justify">
-
+                    <form method="POST" action="/cart/add/{{ embed.sku }}" class="grid grid--bottom grid--justify">
                         {% include molecule('product-quantity-input') with {
                             data: {
                                 maxQuantity: embed.promotionDiscount.maxQuantity,
@@ -63,9 +65,10 @@
                             <input type="hidden" value="{{ embed.sku }}" name="groupKey">
                             <input type="hidden" value="{{ embed.promotionDiscount.id }}" name="idDiscountPromotion">
 
-                            <button type="submit" class="button button--hollow {{ config.name }}__button {{ config.jsName ~ '__button-' ~ embed.sku }}" {{ disabled ? 'disabled' : '' }}>
+                            <button type="submit" class="button button--hollow button--promotion-item {{ config.jsName ~ '__button-' ~ embed.sku }}" {{ disabled ? 'disabled' : '' }}>
                                 {{ 'page.detail.add-to-cart' | trans }}
                             </button>
+
                             {% include molecule('action-single-click-enforcer') with {
                                 attributes: {
                                     'target-selector': '.' ~ config.jsName ~ '__button-' ~ embed.sku
