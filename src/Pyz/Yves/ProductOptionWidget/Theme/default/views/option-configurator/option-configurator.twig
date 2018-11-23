@@ -23,10 +23,11 @@
             }
         } only %}
             {% block contentText %}
-                {% embed atom('select') with {
+                {% embed molecule('custom-select') with {
                     modifiers: ['expand'],
                     attributes: {
                         name: 'product-option[' ~ embed.optionGroup.name ~ ']',
+                        'config-width': '100%'
                     },
                     embed: {
                         options: embed.optionGroup.productOptionValues
