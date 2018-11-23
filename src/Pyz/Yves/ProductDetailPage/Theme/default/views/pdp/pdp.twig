@@ -6,7 +6,7 @@
 
     cart: _view.cart,
     isBundle: _view.product.attributes.bundled_product | default(null),
-    bundleItems: _view.bundledProducts,
+    bundleItems: _view.product.bundledProducts,
 
     title: product.metaTitle | default(_view.product.name),
     metaTitle: product.metaTitle | default(_view.product.name),
@@ -64,10 +64,10 @@
     </div>
 
     {% if data.product.productSetIds is not empty %}
-        {{ widget('ProductSetIdsWidgetPlugin', data.product.productSetIds) }}
+        {% widget 'ProductSetIdsWidget' args [data.product.productSetIds] only %}{% endwidget %}
     {% endif %}
 
-    {{ widget('UpSellingProductsWidgetPlugin', data.cart) }}
+    {% widget 'UpSellingProductsWidget' args [data.cart] only %}{% endwidget %}
     {% widget 'SimilarProductsWidget' args [data.product] only %}{% endwidget %}
 
     <div class="container__inner">

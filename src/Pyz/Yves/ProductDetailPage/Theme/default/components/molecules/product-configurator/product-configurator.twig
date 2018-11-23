@@ -26,19 +26,13 @@
     }]) %}
 {% endfor %}
 
-{% if widgetExists('AvailabilityWidgetPlugin') %}
-    {% set isAvailable = widgetBlock('AvailabilityWidgetPlugin', 'isAvailable', data.product) %}
-    {% set isDisabled = not isAvailable or isDisabled %}
-{% else %}
-    {% set isAvailable = data.product.idProductConcrete and data.product.available %}
-    {% set isDisabled = not isAvailable or isDisabled %}
-{% endif %}
+{% set isAvailable = data.product.idProductConcrete and data.product.available %}
+{% set isDisabled = not isAvailable or isDisabled %}
 
 {% set productDiscontinuedNoteWidget = findWidget('ProductDiscontinuedNoteWidget', [sku]) %}
-{% set isDiscontinued = productDiscontinuedNoteWidget.isDiscontinued ?? widgetBlock('ProductDiscontinuedWidgetPlugin', 'isDiscontinued', sku) %}
-{% if isDiscontinued is not null %}
-    {% set isDisabled = isDiscontinued or isDisabled %}
-    {% set isProductAvailable = not isDiscontinued %}
+{% if productDiscontinuedNoteWidget.isDiscontinued is not null %}
+    {% set isDisabled = productDiscontinuedNoteWidget.isDiscontinued or isDisabled %}
+    {% set isProductAvailable = not productDiscontinuedNoteWidget.isDiscontinued %}
 {% endif %}
 
 {% block body %}
@@ -80,8 +74,7 @@
             {% endblock %}
         {% endembed %}
     {% endif %}
-
-    {% widget 'ProductGroupWidget' args [data.product.idProductAbstract] only %}{% endwidget %}
+    {% widget 'ProductGroupWidget' args [data.product.idProductAbstract] use view('pdp-color-selector', 'ProductGroupWidget') only %}{% endwidget %}
     {% include molecule('variant-configurator', 'ProductDetailPage') with {
         data: {
             superAttributes: data.product.attributeMap.superAttributes,

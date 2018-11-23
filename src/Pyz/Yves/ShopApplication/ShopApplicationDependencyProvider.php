@@ -7,6 +7,8 @@
 
 namespace Pyz\Yves\ShopApplication;
 
+use Pyz\Yves\ProductRelationWidget\Widget\UpSellingProductsWidget;
+use Pyz\Yves\ProductSetWidget\Widget\ProductSetIdsWidget;
 use SprykerShop\Yves\AgentWidget\Widget\AgentControlBarWidget;
 use SprykerShop\Yves\CartNoteWidget\Widget\CartItemNoteFormWidget;
 use SprykerShop\Yves\CartNoteWidget\Widget\CartNoteFormWidget;
@@ -36,14 +38,12 @@ use SprykerShop\Yves\ProductLabelWidget\Widget\ProductAbstractLabelWidget;
 use SprykerShop\Yves\ProductLabelWidget\Widget\ProductConcreteLabelWidget;
 use SprykerShop\Yves\ProductOptionWidget\Widget\ProductOptionConfiguratorWidget;
 use SprykerShop\Yves\ProductRelationWidget\Widget\SimilarProductsWidget;
-use SprykerShop\Yves\ProductRelationWidget\Widget\UpSellingProductsWidget;
 use SprykerShop\Yves\ProductReplacementForWidget\Widget\ProductReplacementForListWidget;
 use SprykerShop\Yves\ProductReviewWidget\Widget\DisplayProductAbstractReviewWidget;
 use SprykerShop\Yves\ProductReviewWidget\Widget\ProductDetailPageReviewWidget;
 use SprykerShop\Yves\ProductReviewWidget\Widget\ProductRatingFilterWidget;
 use SprykerShop\Yves\ProductReviewWidget\Widget\ProductReviewDisplayWidget;
 use SprykerShop\Yves\ProductWidget\Widget\CatalogPageProductWidget;
-use SprykerShop\Yves\ProductWidget\Widget\CmsProductGroupWidget;
 use SprykerShop\Yves\ProductWidget\Widget\CmsProductWidget;
 use SprykerShop\Yves\ProductWidget\Widget\PdpProductRelationWidget;
 use SprykerShop\Yves\ProductWidget\Widget\PdpProductReplacementForListWidget;
@@ -66,7 +66,6 @@ class ShopApplicationDependencyProvider extends SprykerShopApplicationDependency
             CartNoteFormWidget::class,
             CatalogPageProductWidget::class,
             CheckoutBreadcrumbWidget::class,
-            CmsProductGroupWidget::class,
             CmsProductWidget::class,
             CurrencyWidget::class,
             CustomerNavigationWidget::class,
@@ -103,6 +102,7 @@ class ShopApplicationDependencyProvider extends SprykerShopApplicationDependency
             CheckoutVoucherFormWidget::class,
             WishlistMenuItemWidget::class,
             WishlistProductAlternativeWidget::class,
+            ProductSetIdsWidget::class,
         ];
     }
 }

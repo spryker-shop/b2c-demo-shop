@@ -33,7 +33,7 @@
                 {% widget 'ProductAbstractLabelWidget' args [data.abstractId] only %}{% endwidget %}
             {% endblock %}
             {% block groups %}
-                {% widget 'ProductGroupWidget' args [data.abstractId] only %}{% endwidget %}
+                {% widget 'ProductGroupWidget' args [data.abstractId] use view('product-color-selector', 'ProductGroupWidget') only %}{% endwidget %}
             {% endblock %}
         </div>
         <div class="{{ config.name }}__content col">

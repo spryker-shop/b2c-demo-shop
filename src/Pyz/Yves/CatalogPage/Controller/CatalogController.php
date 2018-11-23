@@ -7,7 +7,6 @@
 
 namespace Pyz\Yves\CatalogPage\Controller;
 
-use Generated\Shared\Search\PageIndexMap;
 use SprykerShop\Yves\CatalogPage\Controller\CatalogController as SprykerCatalogController;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -28,49 +27,17 @@ class CatalogController extends SprykerCatalogController
 
     /**
      * @param array $categoryNode
+     * @param int $idCategoryNode
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
-     * @return \Spryker\Yves\Kernel\View\View
+     * @return array
      */
-    public function indexAction(array $categoryNode, Request $request)
+    protected function executeIndexAction(array $categoryNode, int $idCategoryNode, Request $request): array
     {
-        $searchString = $request->query->get('q', '');
-        $idCategoryNode = $categoryNode['node_id'];
-        $idCategory = $categoryNode['id_category'];
+        $viewData = parent::executeIndexAction($categoryNode, $idCategoryNode, $request);
+        $viewData['category']['banner_path'] = $this->getCategoryBannerPath($categoryNode);
 
-        $parameters = $request->query->all();
-        $parameters[PageIndexMap::CATEGORY] = $idCategoryNode;
-
-        $searchResults = $this
-            ->getFactory()
-            ->getCatalogClient()
-            ->catalogSearch($searchString, $parameters);
-
-        $searchResults = $this->updateFacetFiltersByCategory($searchResults, $idCategory);
-        $metaTitle = isset($categoryNode['meta_title']) ? $categoryNode['meta_title'] : '';
-        $metaDescription = isset($categoryNode['meta_description']) ? $categoryNode['meta_description'] : '';
-        $metaKeywords = isset($categoryNode['meta_keywords']) ? $categoryNode['meta_keywords'] : '';
-        $categoryNode['banner_path'] = $this->getCategoryBannerPath($categoryNode);
-        $metaAttributes = [
-            'idCategory' => $idCategory,
-            'category' => $categoryNode,
-            'pageTitle' => ($metaTitle ?: $categoryNode['name']),
-            'pageDescription' => $metaDescription,
-            'pageKeywords' => $metaKeywords,
-            'searchString' => $searchString,
-            'viewMode' => $this->getFactory()
-                ->getCatalogClient()
-                ->getCatalogViewMode($request),
-        ];
-
-        $searchResults = array_merge($searchResults, $metaAttributes);
-        $template = $this->getCategoryNodeTemplate($idCategoryNode);
-
-        return $this->view(
-            $searchResults,
-            $this->getFactory()->getCatalogPageWidgetPlugins(),
-            $template
-        );
+        return $viewData;
     }
 
     /**

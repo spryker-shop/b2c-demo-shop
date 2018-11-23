@@ -5,34 +5,26 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-namespace Pyz\Yves\ProductSetWidget\Plugin;
+namespace Pyz\Yves\ProductSetWidget\Widget;
 
 use Generated\Shared\Transfer\ProductSetDataStorageTransfer;
-use Pyz\Yves\ProductSetWidget\Plugin\CmsContentWidgetProductSetConnector\ProductSetWidgetPlugin;
-use Spryker\Yves\Kernel\Widget\AbstractWidgetPlugin;
+use Spryker\Yves\Kernel\Widget\AbstractWidget;
 
 /**
  * @method \Pyz\Yves\ProductSetWidget\ProductSetWidgetFactory getFactory()
  */
-class ProductSetIdsWidgetPlugin extends AbstractWidgetPlugin
+class ProductSetIdsWidget extends AbstractWidget
 {
-    const NAME = 'ProductSetIdsWidgetPlugin';
+    const NAME = 'ProductSetIdsWidget';
 
     /**
      * @param array $productSetIds
-     *
-     * @return void
      */
-    public function initialize(array $productSetIds): void
+    public function __construct(array $productSetIds)
     {
-        $this->addWidgets([
-            ProductSetWidgetPlugin::class,
-        ]);
-
         $productSetList = $this->getProductSetList($productSetIds);
 
-        $this
-            ->addParameter('productSetList', $productSetList);
+        $this->addParameter('productSetList', $productSetList);
     }
 
     /**

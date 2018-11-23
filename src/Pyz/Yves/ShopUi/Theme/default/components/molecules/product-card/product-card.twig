@@ -39,7 +39,7 @@
             {% endblock %}
 
             {% block groups %}
-                {% widget 'ProductGroupWidget' args [data.abstractId] only %}{% endwidget %}
+                {% widget 'ProductGroupWidget' args [data.abstractId] use view('product-color-selector', 'ProductGroupWidget') only %}{% endwidget %}
             {% endblock %}
         </div>
 
