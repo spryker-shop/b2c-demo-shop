@@ -17,7 +17,7 @@
 
 {% block body %}
     {% block title %}
-        <h4 class="{{ component.renderClass(config.name ~ '__title', modifiers) }} {{ data.triggerClass }} {% if data.isActive %} active {% endif %} {% if not data.isToggler %} {{ config.name }}__title--read-only {% endif %}" {% if data.targetClass is not empty %}data-toggle-target=".{{ data.targetClass }}"{% endif %}>{{ data.title }}</h4>
+        <h4 class="title title--h6 title--uppercase {{ component.renderClass(config.name ~ '__title', modifiers) }} {{ data.triggerClass }} {% if data.isActive %} active {% endif %} {% if not data.isToggler %} {{ config.name }}__title--read-only {% endif %}" {% if data.targetClass is not empty %}data-toggle-target=".{{ data.targetClass }}"{% endif %}>{{ data.title }}</h4>
     {% endblock %}
 
     {% block content %}

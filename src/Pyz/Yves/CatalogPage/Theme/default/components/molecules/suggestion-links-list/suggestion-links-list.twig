@@ -14,7 +14,7 @@
 
 {% block body %}
     {% if data.items is not empty %}
-        <h4 class="title title--with-border title--suggestion {{ data.titleClass }}">{{ data.name }}</h4>
+        <h4 class="title title--heading title--with-border title--suggestion {{ data.titleClass }}">{{ data.name }}</h4>
         <ul class="{{ config.name }}__holder">
             {% for item in data.items | slice(0, data.length) %}
                 {% if item %}
