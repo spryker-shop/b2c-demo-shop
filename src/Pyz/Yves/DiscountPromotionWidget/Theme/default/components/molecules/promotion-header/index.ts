@@ -1,1 +1,0 @@
-import './promotion-header.scss';

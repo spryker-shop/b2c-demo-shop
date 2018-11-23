@@ -22,7 +22,7 @@
 } %}
 
 {% block body %}
-    <h3 class="title title--review-summary">{{ 'product_review.product_ratings' | trans }}</h3>
+    <h3 class="title title--review-summary title--regular">{{ 'product_review.product_ratings' | trans }}</h3>
     {% include molecule('review-average-display', 'ProductReviewWidget') with {
         data: {
             summary: data.summary,
@@ -48,7 +48,7 @@
     </div>
 
     {% if data.summary.totalReview > 0 %}
-        <h3 class="title title--review-summary">{{ 'product_review.product_reviews' | trans }}</h3>
+        <h3 class="title title--review-summary title--regular">{{ 'product_review.product_reviews' | trans }}</h3>
 
         {% if data.reviews is empty %}
             <p>{{ 'product_review.no_reviews' | trans }}</p>

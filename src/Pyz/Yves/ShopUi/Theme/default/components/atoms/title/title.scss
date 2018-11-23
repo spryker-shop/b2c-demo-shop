@@ -3,36 +3,16 @@
         &--main {
             padding: rem(20) 0;
             text-align: center;
-            border-bottom: dotted rem(1) $setting-color-gray-3;
             margin-bottom: rem(40);
-            font-weight: fw(medium);
-        }
-
-        &--cart {
-            font: fw(bold) rem(26)/rem(37) $setting-font-family-additional;
-            letter-spacing: rem(-0.3);
-
-            @include helper-breakpoint-media-min($lg-min) {
-                font-size: rem(25);
-            }
-        }
-
-        &--quantity {
-            font: rem(16) $setting-font-family;
-            color: $setting-color-gray-4;
         }
 
         &--checkout {
             width: 100%;
-            font: fw(bold) rem(32)/rem(32) $setting-font-family-additional;
-            letter-spacing: rem(-0.5);
             margin-bottom: rem(32);
             padding-bottom: rem(10);
             border-bottom: dotted rem(1) $setting-color-gray-3;
 
             @include helper-breakpoint-media-min($md-min) {
-                font-size: rem(47);
-                line-height: rem(47);
                 margin-bottom: rem(58);
             }
 
@@ -47,52 +27,18 @@
             padding: 0;
         }
 
-        &--medium {
-            font-weight: fw(medium);
-        }
-
-        &--slider {
-            font: fw(regular) rem(24) $setting-font-family;
-            letter-spacing: rem(-0.9);
-
-            @include helper-breakpoint-media-min($md-min) {
-                font: fw(regular) rem(34) $setting-font-family-additional;
-            }
-        }
-
         &--account-main {
             text-transform: capitalize;
             text-align: center;
-            font: fw(medium) rem(32) $setting-font-family-additional;
-            color: $setting-color-text;
             border-bottom: rem(1) dotted $setting-color-gray-3;
             border-top: rem(1) dotted $setting-color-gray-3;
             padding: rem(25) 0;
             margin: rem(25) 0;
-
-            @include helper-breakpoint-media-min($md-min) {
-                font-size: rem(50);
-                line-height: rem(75);
-            }
-        }
-
-        &--account-secondary {
-            font: fw(bold) rem(13) $setting-font-family-additional;
-            letter-spacing: rem(2.6);
-            text-transform: uppercase;
         }
 
         &--product-set-main {
-            font: rem(26)/1.38 $setting-font-family-additional;
-            letter-spacing: rem(-0.7);
             position: relative;
             margin-bottom: rem(24);
-
-            @include helper-breakpoint-media-min($md-min) {
-                font-size: rem(34);
-                line-height: 1.06;
-                letter-spacing: rem(-0.9);
-            }
 
             &::before {
                 content: '';
@@ -112,53 +58,70 @@
             padding-right: rem(50);
         }
 
-        &--pdp-review {
-            font: fw(medium) rem(16)/rem(22) $setting-font-family-additional;
-            color: $setting-color-black;
-            margin-right: rem(14);
-
-            @include helper-breakpoint-media-min($md-min) {
-                font-size: rem(17);
-                margin-right: rem(19);
-            }
-        }
-
         &--review-summary {
-            font: fw(regular) rem(21)/rem(35) $setting-font-family-additional;
             border-bottom: dotted rem(1) $setting-color-gray-3;
             padding-bottom: rem(6);
             margin-bottom: rem(29);
+            letter-spacing: rem(-0.3);
 
             @include helper-breakpoint-media-min($md-min) {
-                font-size: rem(27);
                 padding-bottom: rem(10);
                 margin-bottom: rem(50);
             }
         }
 
-        &--popup-review {
-            font: fw(bold) rem(36) $setting-font-family-additional;
-            color: $setting-color-black;
-        }
-
         &--footer {
-            font: fw(bold) rem(13) $setting-font-family-additional;
-            text-transform: uppercase;
-            letter-spacing: rem(2.6);
-            color: $setting-color-text;
-            white-space: nowrap;
             padding: 0 0 rem(16);
-            cursor: default;
         }
 
         &--product {
-            font: fw(bold) rem(30)/1.27 $setting-font-family-additional;
-            color: $setting-color-black;
             margin-bottom: rem(12);
 
             @include helper-breakpoint-media-min($xl-min) {
-                font: fw(bold) rem(38)/1.13 $setting-font-family-additional;
                 margin-bottom: rem(7);
+            }
+        }
+
+        &--checkout-success {
+            margin-bottom: rem(40);
+            padding-bottom: rem(8);
+
+            @include helper-breakpoint-media-min($md-min) {
+                margin-bottom: rem(48);
+            }
+        }
+
+        &--promotion {
+            padding: rem(18) 0;
+            margin-bottom: rem(36);
+            letter-spacing: rem(-0.3);
+        }
+
+        &--mini-cart {
+            padding-bottom: rem(10);
+        }
+
+        &--form {
+            width: 100%;
+            margin-bottom: rem(32);
+            padding-bottom: rem(10);
+
+            @include helper-breakpoint-media-min($md-min) {
+                margin-bottom: rem(58);
+            }
+        }
+
+        &--catalog-cms {
+            margin: 0 0 rem(11);
+            letter-spacing: normal;
+        }
+
+        &--pdp-review {
+            margin-right: rem(14);
+            letter-spacing: normal;
+
+            @include helper-breakpoint-media-min($md-min) {
+                margin-right: rem(19);
             }
         }
 
@@ -180,8 +143,26 @@
             text-transform: uppercase;
         }
 
+        &--medium {
+            font-weight: fw(medium);
+        }
+
+        &--regular {
+            font-weight: fw(regular);
+        }
+
+        &--uppercase {
+            text-transform: uppercase;
+        }
+
         &--with-border {
             border-bottom: dotted rem(1) $setting-color-gray-3;
+        }
+
+        @each $i in (1, 2, 3, 4, 5, 6) {
+            &--h#{$i} {
+                @include helper-heading($i);
+            }
         }
 
         @content;
