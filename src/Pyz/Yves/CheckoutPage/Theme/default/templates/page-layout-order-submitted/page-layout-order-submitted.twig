@@ -8,12 +8,12 @@
 {% block breadcrumbs %}{% endblock %}
 
 {% block title %}
-    <div class="title title--main"></div>
+    <div class="title title--main title--with-border"></div>
 {% endblock %}
 
 {% block content %}
     <div class="page-layout-checkout success-page">
-        <h1 class="success-page__title">{{data.title}}</h1>
+        <h1 class="title title--checkout-success title--with-border">{{data.title}}</h1>
         <p class="success-page__text">{{data.message}}</p>
 
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}

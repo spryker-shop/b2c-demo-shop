@@ -34,7 +34,7 @@
         }
     } only %}
         {% block fields %}
-            <h5 class="title title--checkout">{{ 'page.checkout.address.shipping-address' | trans }}</h5>
+            <h5 class="title title--checkout title--h1">{{ 'page.checkout.address.shipping-address' | trans }}</h5>
             {% set existingShippingAddresses = data.form.shippingAddress.id_customer_address | default %}
             {% set hasShippingAddresses = existingShippingAddresses is not empty %}
 
@@ -90,7 +90,7 @@
                 }
             } only %}
 
-            <h5 class="title title--checkout">{{'page.checkout.address.billing-address' | trans}}</h5>
+            <h5 class="title title--checkout title--h1">{{'page.checkout.address.billing-address' | trans}}</h5>
             <div class="grid">
                 <div class="col col--sm-12">
                     {{form_row(data.form.billingSameAsShipping, {
