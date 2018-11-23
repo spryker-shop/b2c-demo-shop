@@ -71,20 +71,16 @@
 
                         {% block quantity %}
                             {% if canEditCart %}
-                                {% if widgetExists('QuantitySalesUnitWidgetPlugin') %}
-                                    {{ widget('QuantitySalesUnitWidgetPlugin', data.productItem) }}
-                                {% else %}
-                                    <form method="POST" action="{{ path('cart/change/quantity', {'sku': data.productItem.sku }) }}">
-                                        {% include molecule('product-quantity-input') with {
-                                            data: {
-                                                maxQuantity: data.productItem.maxQuantity,
-                                                value: data.productItem.quantity
-                                            }
-                                        } only %}
+                                <form method="POST" action="{{ path('cart/change/quantity', {'sku': data.productItem.sku }) }}">
+                                    {% include molecule('product-quantity-input') with {
+                                        data: {
+                                            maxQuantity: data.productItem.maxQuantity,
+                                            value: data.productItem.quantity
+                                        }
+                                    } only %}
 
-                                        <input type="hidden" value="{{ data.productItem.groupKey }}" name="groupKey" />
-                                    </form>
-                                {% endif %}
+                                    <input type="hidden" value="{{ data.productItem.groupKey }}" name="groupKey" />
+                                </form>
                             {% else %}
                                 {{ 'cart.item_quantity' | trans }}: {{ productItem.quantity }}
                             {% endif %}
@@ -104,7 +100,7 @@
         </div>
 
         {% block bundles %}
-            {{ widget('ProductBundleItemsWidgetPlugin', data.productItem, data.product) }}
+            {% widget 'ProductBundleCartItemsListWidget' args [data.productItem, data.product] only %}{% endwidget %}
         {% endblock %}
 
         {% block summary %}

@@ -141,7 +141,8 @@
                                 modifiers: ['readonly'],
                                 data: {
                                     productItem: item,
-                                    options: item.productOptions | default([])
+                                    options: item.productOptions | default([]),
+                                    product: data.transfer
                                 }
                             } only %}
                                 {% block options %}
@@ -153,6 +154,8 @@
                                         </ul>
                                     {% endif %}
                                 {% endblock %}
+
+
 
                                 {% block quantity %}
                                     <div>
