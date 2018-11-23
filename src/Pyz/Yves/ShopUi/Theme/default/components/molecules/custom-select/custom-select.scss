@@ -2,6 +2,8 @@
 
 @mixin shop-ui-custom-select($name: '.custom-select') {
     @include shop-ui-select($name) {
+        line-height: 0;
+
         .select2-container {
             width: auto;
         }
@@ -38,19 +40,13 @@
             padding: rem(12) 0;
             border-radius: rem(4);
             background-color: $setting-color-bg;
-            box-shadow: rem(10) rem(10) rem(26) 0 $setting-color-alpha-1,
-                0 0 rem(30) 0 $setting-color-alpha-1;
+            box-shadow: rem(10) rem(10) rem(26) 0 $setting-color-alpha-1, 0 0 rem(30) 0 $setting-color-alpha-1;
             position: relative;
             border: rem(1) solid $setting-color-alpha-7;
 
             & > .select2-results__options {
                 max-height: rem(250);
             }
-        }
-
-        .select2-results__option[aria-selected='true'] {
-            background: none;
-            color: $setting-color-main;
         }
 
         .select2-results__option--highlighted[aria-selected] {
@@ -63,6 +59,8 @@
         }
 
         .select2-results__option[aria-selected='true'] {
+            background: none;
+            color: $setting-color-main;
             position: relative;
 
             &::before {
@@ -80,7 +78,7 @@
         &--secondary {
             .select2-results {
                 width: calc(100% + #{rem(48)});
-                transform: translateX(rem(-48));
+                transform: translateX(rem(-32));
                 border: none;
 
                 &::before {
@@ -92,10 +90,21 @@
                     border-bottom-color: $setting-color-bg;
                 }
             }
+
             .select2-dropdown--below {
-                box-shadow: rem(10) rem(10) rem(26) 0 $setting-color-alpha-1,
-                0 0 rem(30) 0 $setting-color-alpha-1,
-                0 rem(-10) rem(30) 0 $setting-color-alpha-1;
+                box-shadow: rem(10) rem(10) rem(26) 0 $setting-color-alpha-1, 0 0 rem(30) 0 $setting-color-alpha-1, 0 rem(-10) rem(30) 0 $setting-color-alpha-1;
+            }
+        }
+
+        &--small {
+            .select2-results__option {
+                padding: rem(4) rem(10);
+            }
+
+            .select2-results__option[aria-selected='true'] {
+                &:before {
+                    right: rem(10);
+                }
             }
         }
     }

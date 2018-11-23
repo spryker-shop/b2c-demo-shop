@@ -11,20 +11,11 @@
         }
 
         &__address-indent {
-            @include helper-breakpoint-media-max($sm-max) {
-                margin-top: rem(33);
-            }
-        }
+            margin-top: rem(33);
 
-        .grid {
-            &:not(:first-child) {
-                margin: 0 rem(-16);
-                max-width: none;
+            @include helper-breakpoint-media-min($md-min) {
+                margin-top: 0;
             }
-        }
-
-        .col {
-            padding: 0 rem(16);
         }
 
         @content;

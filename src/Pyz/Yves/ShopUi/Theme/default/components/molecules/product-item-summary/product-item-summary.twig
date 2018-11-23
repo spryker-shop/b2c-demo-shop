@@ -1,0 +1,32 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'product-item-summary',
+    tag: 'ul'
+} %}
+
+{% define data = {
+    productItem: {},
+    options: []
+} %}
+
+{% block class %}{{ parent() }} list{% endblock %}
+
+{% block body %}
+    {% if data.productItem is not empty %}
+        <li class="{{ config.name }}__item">
+            {{ widget('CartItemProductOptionWidgetPlugin', data.productItem) }}
+        </li>
+    {% else %}
+        {% for option in data.options %}
+            <li class="{{ config.name }}__item">
+                <ul>
+                    <li class="option-item">
+                        + {{ option.value | trans }}:
+                        <span class="float-right">{{ option.sumPrice | default(0) | money }}</span>
+                    </li>
+                </ul>
+            </li>
+        {% endfor %}
+    {% endif %}
+{% endblock %}
