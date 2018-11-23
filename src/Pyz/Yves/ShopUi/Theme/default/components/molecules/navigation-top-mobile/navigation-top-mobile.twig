@@ -11,77 +11,80 @@
     cartQuantity: app['cart.quantity']
 } %}
 
-{% set cartQuantity = data.cartQuantity > 0 ? data.cartQuantity ~ ' ' : '' %}
-
 {% block body %}
+    {% set items = [
+        {
+            iconName: 'icon-home'
+        },
+        {
+            iconName: 'search',
+            isEmbed: true,
+            isSearch: true,
+        },
+        {
+            url: url('wishlist/overview'),
+            iconName: 'wishlist'
+        },
+        {
+            url: url('customer/overview'),
+            iconName: 'user-account'
+        },
+        {
+            iconName: 'cart',
+            isEmbed: true,
+            isCart: true,
+        },
+    ] %}
     <ul class="grid grid--middle grid--justify">
-
-        <li class="navigation-top-mobile__item col">
-            <div class="grid grid--middle grid--center">
-                <a href="{{data.url}}">
-                    {% include atom('icon') with {
-                        class: 'icon--bigger',
-                        data: {
-                            name: 'icon-home'
-                        }
-                    } only %}
-                </a>
-            </div>
-        </li>
-
-        <li class="navigation-top-mobile__item col">
-            <form action="{{data.searchUrl}}">
-                <div class="grid grid--middle grid--center">
-                    <div type="submit" class="search-form__submit js-search-mob-show-icon">
-                        {% include atom('icon') with {
-                            class: 'icon--bigger',
-                            data: {
-                                name: 'search'
-                            }
-                        } only %}
-                    </div>
-                </div>
-            </form>
-        </li>
-
-        <li class="navigation-top-mobile__item col">
-            <div class="grid grid--middle grid--center">
-                <a href="{{ url('wishlist/overview') }}">
-                    {% include atom('icon') with {
-                        class: 'icon--bigger',
-                        data: {
-                            name: 'wishlist'
-                        }
-                    } only %}
-                </a>
-            </div>
-        </li>
-
-        <li class="navigation-top-mobile__item col">
-            <div class="grid grid--middle grid--center">
-                <a href="{{ url('customer/overview') }}" class="icon icon--bigger">
-                    <img src="/assets/images/menu-profile-default.png" alt="{{ 'customer.account.profile_data' | trans }}"  style="vertical-align: text-top">
-                </a>
-            </div>
-        </li>
-
-        <li class="navigation-top-mobile__item col">
-            <div class="grid grid--middle grid--center">
-                <a href="{{ url('cart') }}" class="cart-link">
-                    {% if cartQuantity > 0 %}
-                        <span class="cart-link__quantity">
-                            {{cartQuantity}}
-                        </span>
-                    {% endif %}
-
-                    {% include atom('icon') with {
-                        class: 'icon--bigger',
-                        data: {
-                            name: 'cart'
-                        }
-                    } only %}
-                </a>
-            </div>
-        </li>
+        {% for item in items %}
+            {% if item.isEmbed is defined %}
+                {% embed molecule('navigation-top-mobile-item') with {
+                    class: 'col',
+                    data: {
+                        url: item.url is defined ? item.url : data.url,
+                        iconName: item.iconName,
+                    },
+                    embed: {
+                        item: item,
+                        searchUrl: data.searchUrl,
+                        cartQuantity: data.cartQuantity
+                    }
+                } only %}
+                    {% block button %}
+                        {% if embed.item.isSearch is defined %}
+                            <form action="{{embed.searchUrl}}">
+                                <button type="button" class="button button--skinless spacing spacing--inner spacing--reset js-suggest-search-show">
+                                    {% include atom('icon') with {
+                                        modifiers: ['big'],
+                                        data: {
+                                            name: data.iconName,
+                                        }
+                                    } only %}
+                                </button>
+                            </form>
+                        {% endif %}
+                        {% if embed.item.isCart is defined %}
+                            {% include atom('cart-link') with {
+                                modifiers: ['mobile'],
+                                data: {
+                                    cartQuantity: embed.cartQuantity,
+                                },
+                                attributes: {
+                                    href: url('cart'),
+                                }
+                            } only %}
+                        {% endif %}
+                    {% endblock %}
+                {% endembed %}
+            {% else %}
+                {% include molecule('navigation-top-mobile-item') with {
+                    class: 'col',
+                    data: {
+                        url: item.url is defined ? item.url : data.url,
+                        iconName: item.iconName,
+                    }
+                } only %}
+            {% endif %}
+        {% endfor %}
     </ul>
 {% endblock %}

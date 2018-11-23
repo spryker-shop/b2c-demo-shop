@@ -1,7 +1,7 @@
-$shop-ui-form-field-margin: rem(8);
-$review-rating-field-width: rem(154);
-
 @mixin shop-ui-form($name: '.form') {
+    $shop-ui-form-field-margin: rem(8);
+    $review-rating-field-width: rem(154);
+
     #{$name} {
         &__field {
             padding: 0 rem(16) rem(27);
@@ -10,7 +10,7 @@ $review-rating-field-width: rem(154);
                 padding: 0 0 rem(25);
 
                 @include helper-breakpoint-media-min($md-min) {
-                    padding: 0 0 rem(28);
+                    padding-bottom: rem(28);
                 }
             }
 
@@ -52,26 +52,28 @@ $review-rating-field-width: rem(154);
             }
         }
 
-        &--inline &__container {
-            display: flex;
-            flex-flow: row wrap;
-            align-items: flex-end;
-        }
+        &--inline {
+            #{$name}__container {
+                display: flex;
+                flex-flow: row wrap;
+                align-items: flex-end;
+            }
 
-        &--inline &__fields {
-            float: left;
-            flex-grow: 1;
-            flex-basis: auto;
-        }
+            #{$name}__fields {
+                float: left;
+                flex-grow: 1;
+                flex-basis: auto;
+            }
 
-        &--inline &__actions {
-            flex-grow: 0;
-            flex-basis: auto;
-        }
+            #{$name}__actions {
+                flex-grow: 0;
+                flex-basis: auto;
+            }
 
-        &--inline &__field {
-            padding-bottom: 0;
-            padding-right: 0;
+            #{$name}__field {
+                padding-bottom: 0;
+                padding-right: 0;
+            }
         }
 
         &--checkout-actions {
@@ -100,35 +102,14 @@ $review-rating-field-width: rem(154);
                 color: $setting-color-black;
             }
 
-            .checkbox__box,
-            .toggler-checkbox__box {
-                margin-top: rem(2);
-
-                @include helper-breakpoint-media-min($md-min) {
-                    margin-top: rem(4);
-                }
+            .checkbox__container,
+            .toggler-checkbox__container {
+                display: flex;
             }
 
             .checkbox__check {
                 @include helper-breakpoint-media-min($md-min) {
                     top: rem(7);
-                }
-            }
-        }
-
-        &--login {
-            #{$name}__title {
-                width: 100%;
-                font: fw(bold) rem(32) $setting-font-family-additional;
-                letter-spacing: rem(-0.5);
-                line-height: 1;
-                margin-bottom: rem(32);
-                padding-bottom: rem(10);
-                border-bottom: dotted rem(1) $setting-color-gray-3;
-
-                @include helper-breakpoint-media-min($md-min) {
-                    font-size: rem(47);
-                    margin-bottom: rem(58);
                 }
             }
         }
@@ -184,21 +165,10 @@ $review-rating-field-width: rem(154);
             &--required {
                 &::after {
                     content: '*';
-                    margin-left: 3px;
+                    margin-left: rem(3);
                     color: $setting-color-main;
                 }
             }
-        }
-
-        .select__select {
-            padding-top: rem(10);
-            padding-bottom: rem(10);
-            padding-left: rem(8);
-            border-right-width: rem(16);
-        }
-
-        .select__caret {
-            right: rem(8);
         }
 
         @content;

@@ -10,7 +10,6 @@
 } %}
 
 {% block body %}
-
     <ul class="menu menu--inline">
         {% for node in data.nodes %}
             {% embed atom('node') with {
@@ -20,16 +19,12 @@
                 },
                 data: {
                     node: node
-                },
-                embed: {
-                    name: config.name
                 }
             } only %}
                 {% block url %}
                     <a class="link link--alt" href="{{ data.node.url }}" title="{{ data.node.title }}">
                         {% include atom('icon') with {
-                            class: 'icon-' ~ data.node.cssClass,
-                            modifiers: ['big'],
+                            modifiers: ['big', data.node.cssClass],
                             data: {
                                 name: data.node.cssClass
                             }
@@ -40,8 +35,7 @@
                 {% block externalUrl %}
                     <a class="link link--alt" href="{{ data.node.url }}" target="_blank" title="{{ data.node.title }}">
                         {% include atom('icon') with {
-                            class: 'icon-' ~ data.node.cssClass,
-                            modifiers: ['big'],
+                            modifiers: ['big', data.node.cssClass],
                             data: {
                                 name: data.node.cssClass
                             }
@@ -51,8 +45,7 @@
 
                 {% block other %}
                     {% include atom('icon') with {
-                        modifiers: ['big'],
-                        class: embed.name ~ '__icon ' ~ embed.name ~ '__icon--' ~ data.node.cssClass,
+                        modifiers: ['big', data.node.cssClass],
                         data: {
                             name: data.node.cssClass
                         }

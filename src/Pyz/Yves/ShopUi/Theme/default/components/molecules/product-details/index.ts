@@ -1,1 +1,0 @@
-import './product-details.scss';

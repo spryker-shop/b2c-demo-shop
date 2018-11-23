@@ -11,11 +11,11 @@
 } %}
 
 {% block body %}
-    {% if data.originalAmount is not empty -%}
-        <span class="{{config.name}}__amount {{config.name}}__amount--original">{{data.originalAmount}}</span>
-    {%- endif -%}
-
-    <span class="{{config.name}}__amount">
+    <span class="{{ component.renderClass(config.name ~ '__amount', modifiers) }}">
         {{data.amount}}
     </span>
+
+    {% if data.originalAmount is not empty -%}
+        <span class="{{ component.renderClass(config.name ~ '__amount', modifiers) }} {{config.name}}__amount--original">{{data.originalAmount}}</span>
+    {%- endif -%}
 {% endblock %}

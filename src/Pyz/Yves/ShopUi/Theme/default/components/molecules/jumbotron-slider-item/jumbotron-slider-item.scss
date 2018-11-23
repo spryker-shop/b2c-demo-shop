@@ -2,15 +2,10 @@
     #{$name} {
         border-radius: rem(4);
         overflow: hidden;
+
         &__container {
             height: rem(160);
-            background: $setting-color-main;
-
-            /* stylelint-disable-next-line declaration-block-no-duplicate-properties */
-            background: linear-gradient(to left top, helper-color-dark($setting-color-main), helper-color-light($setting-color-main));
-            background-position: center center;
-            background-size: cover;
-            background-repeat: no-repeat;
+            background: linear-gradient(to left top, $setting-color-gray-3, $setting-color-gray-4) no-repeat center / cover;
             text-align: center;
             position: relative;
             display: none;
@@ -27,6 +22,7 @@
                 display: flex;
             }
         }
+
         &__link {
             position: absolute;
             left: 0;
@@ -44,27 +40,30 @@
         }
         &__title {
             & > * {
-                font: 700 rem(57) $setting-font-family-additional;
-                line-height: 1.5;
+                font: fw(bold) rem(23)/1.5 $setting-font-family-additional;
                 letter-spacing: rem(-0.8);
-                @include helper-breakpoint-media-max($lg-max) {
+
+                @include helper-breakpoint-media-min($lg-min) {
                     font-size: rem(34);
                 }
-                @include helper-breakpoint-media-max($md-max) {
-                    font-size: rem(23);
+
+                @include helper-breakpoint-media-min($xl-min) {
+                    font-size: rem(57);
                 }
             }
         }
 
         &__text {
             & > * {
-                font: 200 rem(26) $setting-font-family;
+                font: fw(light) rem(11) $setting-font-family;
                 letter-spacing: rem(0.2);
-                @include helper-breakpoint-media-max($lg-max) {
+
+                @include helper-breakpoint-media-min($lg-min) {
                     font-size: rem(16);
                 }
-                @include helper-breakpoint-media-max($md-max) {
-                    font-size: rem(11);
+
+                @include helper-breakpoint-media-min($xl-min) {
+                    font-size: rem(26);
                 }
             }
         }

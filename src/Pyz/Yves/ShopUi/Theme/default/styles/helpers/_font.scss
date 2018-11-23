@@ -1,3 +1,29 @@
 @function fw($weight) {
     @return map-get($setting-font-weight, $weight);
 }
+
+@mixin helper-font-letter-spacing($spacing) {
+    letter-spacing: map-get($setting-font-letter-spacing, $spacing);
+}
+
+@mixin helper-font-half-letter-spacing($spacing) {
+    letter-spacing: map-get($setting-font-letter-spacing, $spacing) / 2;
+}
+
+@mixin helper-half-font-size($size) {
+    font-size: map-get($setting-font-size, $size) / 2;
+}
+
+@mixin helper-heading($size) {
+    font-family: $setting-font-family-additional;
+    @include helper-half-font-size($size);
+    @include helper-font-half-letter-spacing($size);
+    @include helper-font-line-height($size);
+    font-weight: fw(bold);
+    display: block;
+
+    @include helper-breakpoint-media-min($lg-min) {
+        @include helper-font-size($size);
+        @include helper-font-letter-spacing($size);
+    }
+}

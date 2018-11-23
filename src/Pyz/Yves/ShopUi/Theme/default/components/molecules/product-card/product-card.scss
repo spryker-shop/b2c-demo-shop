@@ -19,49 +19,48 @@
         &__container {
             position: relative;
             display: block;
-            color: $setting-color-text;
+            color: $setting-color-black;
 
             .no-touch &:hover {
                 text-decoration: none;
-                color: $setting-color-text;
+                color: $setting-color-black;
 
                 #{$name}__thumbnail {
                     box-shadow: rem(10) rem(10) rem(40) 0 $setting-color-shadow;
                 }
 
-                #{$name}__overlay {
-                    &::after {
-                        opacity: 0.09;
-                    }
+                #{$name}__overlay::after {
+                    opacity: 0.09;
                 }
 
                 .color-selector {
-                    margin-bottom: 0;
+                    transform: translateY(0);
                 }
             }
         }
 
-        &__thumbnail {
+        &__image-wrap {
+            @include helper-effect-transition(box-shadow);
             border-radius: rem(4);
             margin-bottom: rem(24);
             position: relative;
             overflow: hidden;
-            @include helper-effect-transition(box-shadow);
 
-            @include helper-breakpoint-media-max($sm-max) {
+            @include helper-breakpoint-media-min($md-min) {
                 margin-bottom: rem(9);
             }
         }
 
         &__overlay {
             display: block;
-            padding: rem(90) rem(20) rem(120);
+            padding: rem(45) rem(10) rem(70);
 
-            @include helper-breakpoint-media-max($sm-max) {
-                padding: rem(45) rem(10) rem(70);
+            @include helper-breakpoint-media-min($md-min) {
+                padding: rem(90) rem(20) rem(120);
             }
 
-            &::before {
+            &::before,
+            &::after {
                 content: '';
                 position: absolute;
                 top: 0;
@@ -75,30 +74,9 @@
 
             &::after {
                 @include helper-effect-transition(opacity);
-                content: '';
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                border-radius: rem(4);
-                background-image: linear-gradient(to bottom, $setting-color-black, $setting-color-alpha-1);
+                background: linear-gradient(to bottom, $setting-color-black, $setting-color-alpha-1);
                 opacity: 0;
-                z-index: $setting-zi-element-floating;
             }
-        }
-
-        .color-selector {
-            @include helper-effect-transition(margin-bottom);
-            background: $setting-color-white;
-            position: absolute;
-            z-index: $setting-zi-header;
-            left: 0;
-            bottom: 0;
-            width: 100%;
-            border-radius: 0 0 rem(4) rem(4);
-            margin-bottom: -100%;
-            padding: rem(16) 0;
         }
 
         &__actions-container {
@@ -155,11 +133,6 @@
             #{$name}__info {
                 min-height: rem(48);
             }
-        }
-
-        &__quantity {
-            color: $setting-color-gray-3;
-            padding-left: rem(4);
         }
     }
 }

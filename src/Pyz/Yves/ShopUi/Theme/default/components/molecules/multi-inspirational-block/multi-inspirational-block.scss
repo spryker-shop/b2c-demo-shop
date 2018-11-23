@@ -1,120 +1,128 @@
-@mixin helper-image-line($width, $height) {
-    content: '';
-    display: block;
-    width: $width;
-    height: $height;
-    background: $setting-color-text;
-    position: absolute;
-    z-index: -1;
-}
-
-@mixin shop-ui-multi-inspirational-block($name: '.multi-inspire-block') {
-
+@mixin shop-ui-multi-inspirational-block($name: '.multi-inspirational-block') {
     #{$name} {
         &--left {
             margin-right: rem(40);
         }
+
         &--right {
             margin-left: rem(40);
         }
+
         &--sm {
             margin-bottom: rem(40);
+
             @include helper-breakpoint-media-max($md-max) {
                 margin: 0 auto rem(30);
                 max-width: rem(570);
             }
+
             #{$name}__img-wrap {
                 img {
                     min-width: rem(273);
                 }
             }
         }
+
         &--lg {
-            max-width: rem(570);
-            margin: 0 auto;
-            @include helper-breakpoint-media-max($md-max) {
-                margin-bottom: rem(40);
+            max-width: rem(327);
+            margin: 0 auto rem(40);
+
+            @include helper-breakpoint-media-min($md-min) {
+                max-width: rem(570);
             }
-            @include helper-breakpoint-media-max($sm-max) {
-                max-width: rem(327);
+
+            @include helper-breakpoint-media-min($lg-min) {
+                margin-bottom: 0;
             }
+
             #{$name}__img-wrap {
                 img {
-                    min-width: rem(570);
-                    @include helper-breakpoint-media-max($sm-max) {
-                        min-width: rem(327);
+                    min-width: rem(327);
+
+                    @include helper-breakpoint-media-min($md-min) {
+                        max-width: rem(570);
                     }
                 }
             }
         }
+
         &__image {
             height: rem(230);
-            width: 50%;
+            width: 48%;
             position: relative;
             display: block;
             flex-shrink: 0;
             max-width: 50%;
-            @include helper-breakpoint-media-max($sm-max) {
-                height: rem(230);
-                width: 48%;
+
+            @include helper-breakpoint-media-min($md-min) {
+                width: 50%;
             }
+
             &--lg {
                 width: 100%;
-                height: rem(500);
-                max-width: rem(570);
-                @include helper-breakpoint-media-max($sm-max) {
-                    max-width: rem(327);
-                    height: rem(287);
+                max-width: rem(327);
+                height: rem(287);
+
+                @include helper-breakpoint-media-min($md-min) {
+                    max-width: rem(570);
+                    height: rem(500);
                 }
+
                 &::after {
                     @include helper-image-line(rem(1), rem(59));
-                    bottom: rem(-35);
-                    left: rem(54);
-                    @include helper-breakpoint-media-max($sm-max) {
-                        bottom: rem(-20);
-                        left: rem(16);
+                    bottom: rem(-20);
+                    left: rem(16);
+
+                    @include helper-breakpoint-media-min($md-min) {
+                        bottom: rem(-35);
+                        left: rem(54);
                     }
                 }
             }
+
             &--left,
             &--right {
                 &::after {
                     @include helper-image-line(rem(36), rem(1));
-                    top: rem(30);
-                    @include helper-breakpoint-media-max($sm-max) {
-                        top: rem(17);
+                    top: rem(17);
+
+                    @include helper-breakpoint-media-min($md-min) {
+                        top: rem(30);
                     }
                 }
             }
-            &--left {
-                &::after {
+
+            &--left::after {
+                right: rem(-23);
+
+                @include helper-breakpoint-media-min($md-min) {
                     right: rem(-35);
-                    @include helper-breakpoint-media-max($sm-max) {
-                        right: rem(-23);
-                    }
                 }
             }
-            &--right {
-                &::after {
+
+            &--right::after {
+                left: rem(-23);
+
+                @include helper-breakpoint-media-min($md-min) {
                     left: rem(-35);
-                    @include helper-breakpoint-media-max($sm-max) {
-                        left: rem(-23);
-                    }
                 }
             }
         }
+
         &__img-wrap {
             border-radius: rem(3);
             overflow: hidden;
             width: 100%;
             height: 100%;
             position: relative;
+
             img {
                 width: 100%;
                 height: 100%;
                 position: absolute;
             }
         }
+
         &__text {
             text-transform: uppercase;
             display: block;
@@ -126,52 +134,71 @@
             }
 
             &--lg {
-                padding: rem(35) 0 0 rem(87);
-                @include helper-breakpoint-media-max($sm-max) {
-                    padding: rem(22) 0 0 rem(41);
+                padding: rem(22) 0 0 rem(41);
+
+                @include helper-breakpoint-media-min($md-min) {
+                    padding: rem(35) 0 0 rem(87);
                 }
             }
+
             &--sm {
-                padding-top: rem(60);
-                @include helper-breakpoint-media-max($sm-max) {
-                    padding-top: rem(42);
+                padding-top: rem(42);
+
+                @include helper-breakpoint-media-min($md-min) {
+                    padding-top: rem(60);
                 }
             }
+
             &--left {
                 text-align: right;
-                padding-right: rem(30);
-                @include helper-breakpoint-media-max($sm-max) {
-                    padding-right: rem(24);
+                padding-right: rem(24);
+
+                @include helper-breakpoint-media-min($md-min) {
+                    padding-right: rem(30);
                 }
             }
+
             &--right {
-                padding-left: rem(30);
-                @include helper-breakpoint-media-max($sm-max) {
-                    padding-left: rem(24);
+                padding-left: rem(24);
+
+                @include helper-breakpoint-media-min($md-min) {
+                    padding-left: rem(30);
                 }
             }
         }
+
         &__title {
-            line-height: 1.52;
-            letter-spacing: rem(3.8);
-            font: bold rem(21) $setting-font-family-additional;
-            @include helper-breakpoint-media-max($md-max) {
-                font-size: rem(17);
-                letter-spacing: rem(3);
+            font: fw(bold) rem(17)/1.52 $setting-font-family-additional;
+            letter-spacing: rem(3);
+
+            @include helper-breakpoint-media-min($md-min) {
+                font-size: rem(21);
+                letter-spacing: rem(3.8);
             }
         }
+
         &__post-title {
-            letter-spacing: rem(3.2);
-            line-height: 1.6;
-            font: normal rem(10) $setting-font-family-additional;
+            font: fw(regular) rem(9)/1.56 $setting-font-family-additional;
+            letter-spacing: rem(2.9);
             color: $setting-color-gray-6;
-            @include helper-breakpoint-media-max($md-max) {
-                font-size: rem(9);
-                letter-spacing: rem(2.9);
-                line-height: 1.56;
+
+            @include helper-breakpoint-media-min($md-min) {
+                font-size: rem(10);
+                line-height: 1.6;
+                letter-spacing: rem(3.2);
             }
         }
     }
+}
+
+@mixin helper-image-line($width, $height) {
+    content: '';
+    display: block;
+    width: $width;
+    height: $height;
+    background: $setting-color-text;
+    position: absolute;
+    z-index: $setting-zi-hide;
 }
 
 @include shop-ui-multi-inspirational-block();

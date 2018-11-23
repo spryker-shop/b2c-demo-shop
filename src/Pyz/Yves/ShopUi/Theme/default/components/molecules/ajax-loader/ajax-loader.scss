@@ -1,36 +1,3 @@
-@mixin shop-ui-ajax-loader($name: '.ajax-loader') {
-    #{$name} {
-        @include helper-effect-transition();
-        position: absolute;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        padding: rem(8);
-        background: transparent;
-        z-index: $setting-zi-element-floating;
-
-        &__spinner {
-            animation-name: spin;
-            animation-duration: 1s;
-            animation-iteration-count: infinite;
-            animation-timing-function: linear;
-        }
-
-        &__label {
-            margin-left: rem(8);
-        }
-
-        &--solid-bg {
-            background-color: $setting-color-white;
-        }
-
-        &--big &__label {
-            @include helper-font-size(big);
-        }
-
-        @content;
-    }
+@include shop-ui-ajax-loader {
+    background-color: $setting-color-transparent;
 }
-
-@include shop-ui-ajax-loader();

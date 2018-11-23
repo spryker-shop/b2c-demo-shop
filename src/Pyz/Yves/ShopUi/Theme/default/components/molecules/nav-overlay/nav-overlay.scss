@@ -1,8 +1,8 @@
 @mixin shop-ui-nav-overlay($name: '.nav-overlay') {
     #{$name} {
         position: absolute;
-        right: calc(1.8rem - 40px);
-        top: -18px;
+        right: calc(1.8rem - #{rem(40, number)});
+        top: rem(-18);
         height: 0;
 
         &--active {

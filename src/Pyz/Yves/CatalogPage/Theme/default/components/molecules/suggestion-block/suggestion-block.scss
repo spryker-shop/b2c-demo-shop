@@ -1,0 +1,28 @@
+@mixin catalog-page-suggestion-block($name: '.suggestion-block') {
+    #{$name} {
+        margin: rem(18) rem(-16) 0;
+        flex-wrap: wrap;
+        max-width: calc(100% + #{rem(32)});
+
+        @include helper-breakpoint-media-min($xl-min) {
+            flex-wrap: nowrap;
+        }
+
+        &__col {
+            flex: 1;
+            min-width: 100%;
+
+            @include helper-breakpoint-media-min($xl-min) {
+                min-width: rem(300);
+            }
+        }
+
+        &__item {
+            margin: rem(32) rem(16) 0;
+        }
+
+        @content;
+    }
+}
+
+@include catalog-page-suggestion-block();

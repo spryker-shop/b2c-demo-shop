@@ -10,7 +10,7 @@
 } %}
 
 {% block body %}
-    <h4 class="{{ config.name }}__title">{{ 'cart.cart' | trans }}</h4>
+    <h2 class="title title--mini-cart title--with-border">{{ 'cart.cart' | trans }}</h2>
     {% if data.cartItems is not empty %}
         {% set optionPrice = 0 %}
 
@@ -75,7 +75,7 @@
         {% if canProceedToCheckout %}
             <div class="{{ config.name }}__buttons-container grid grid--middle grid--justify">
                 <a href="{{ url('cart') }}" class="{{ config.name }}__button button button--hollow col">{{ 'cart.cart' | trans }}</a>
-                <a class="{{ config.name }}__button button  col" href="{{ url('checkout-index') }}" {{qa('cart-go-to-checkout')}}>
+                <a class="{{ config.name }}__button button col" href="{{ url('checkout-index') }}" {{qa('cart-go-to-checkout')}}>
                     {{ 'cart.checkout' | trans }}
                 </a>
             </div>

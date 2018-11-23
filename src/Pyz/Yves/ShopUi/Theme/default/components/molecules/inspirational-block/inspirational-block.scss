@@ -1,175 +1,155 @@
-@mixin shop-ui-inspirational-block ($name: '.inspire-block') {
+@mixin shop-ui-inspirational-block ($name: '.inspirational-block') {
     #{$name} {
         min-height: rem(300);
-        margin: rem(130) 0 rem(180);
-        @include helper-breakpoint-media-max($sm-max) {
-            margin: rem(80) 0 rem(100);
+        margin: rem(80) 0 rem(100);
+
+        @include helper-breakpoint-media-min($md-min) {
+            margin: rem(130) 0 rem(180);
         }
+
         &--left {
-            .col:first-of-type {
-                @include helper-breakpoint-media-max($md-max) {
-                    order: 2;
-                }
-            }
-            .col:last-of-type {
-                @include helper-breakpoint-media-max($md-max) {
-                    order: 1;
-                }
-            }
-        }
-        &__content {
-            &--right {
-                padding-left: rem(120);
-            }
-            &--left {
-                padding-right: rem(120);
-            }
-            @include helper-breakpoint-media-max($lg-max) {
-                padding: 0 rem(20);
-            }
             @include helper-breakpoint-media-max($md-max) {
-                margin-top: rem(60);
+                flex-direction: column-reverse;
             }
         }
+
+        &__content {
+            margin-top: rem(60);
+            padding: 0 rem(20);
+            text-align: center;
+
+            @include helper-breakpoint-media-min($lg-min) {
+                text-align: left;
+                margin-top: 0;
+            }
+
+            &--right {
+                @include helper-breakpoint-media-min($xl-min) {
+                    padding-left: rem(120);
+                }
+            }
+
+            &--left {
+                @include helper-breakpoint-media-min($xl-min) {
+                    padding-right: rem(120);
+                }
+            }
+        }
+
+        &__pre-title,
         &__title {
-            font: bold rem(21) $setting-font-family-additional;
-            line-height: 1.52;
-            letter-spacing: rem(3.8);
+            font: fw(bold) rem(17)/1.52 $setting-font-family-additional;
+            letter-spacing: rem(3);
             color: $setting-color-gray-6;
             margin-bottom: rem(15);
             text-transform: uppercase;
-            @include helper-breakpoint-media-max($md-max) {
-                text-align: center;
+
+            @include helper-breakpoint-media-min($md-min) {
+                letter-spacing: rem(3.8);
+                font-size: rem(21);
             }
-            @include helper-breakpoint-media-max($sm-max) {
-                line-height: 1.53;
-                letter-spacing: rem(3);
+        }
+
+        &__pre-title {
+            font: fw(regular) rem(9)/normal $setting-font-family-additional;
+            margin-bottom: rem(17);
+
+            @include helper-breakpoint-media-min($md-min) {
+                font-size: rem(10);
+                letter-spacing: rem(3.2);
+            }
+        }
+
+        &__text {
+            font: fw(regular) rem(13)/1.62 $setting-font-family;
+            letter-spacing: rem(0.8);
+            color: $setting-color-gray-4;
+            margin-bottom: rem(27);
+
+            @include helper-breakpoint-media-min($md-min) {
+                line-height: 1.47;
+                letter-spacing: rem(1);
                 font-size: rem(17);
             }
         }
-        &__pre-title {
-            font: normal rem(10) $setting-font-family-additional;
-            line-height: normal;
-            letter-spacing: rem(3.2);
-            color: $setting-color-gray-6;
-            text-transform: uppercase;
-            margin-bottom: rem(17);
-            @include helper-breakpoint-media-max($md-max) {
-                text-align: center;
-            }
-            @include helper-breakpoint-media-max($sm-max) {
-                font-size: rem(9);
-                line-height: normal;
-                letter-spacing: rem(2.9);
-            }
-        }
-        &__text {
-            font: normal rem(17) $setting-font-family;
-            line-height: 1.47;
-            letter-spacing: rem(1);
-            color: $setting-color-gray-3;
-            margin-bottom: rem(27);
-            @include helper-breakpoint-media-max($md-max) {
-                text-align: center;
-            }
-            @include helper-breakpoint-media-max($sm-max) {
-                line-height: 1.62;
-                letter-spacing: rem(0.8);
-                font-size: rem(13);
-            }
-        }
 
-        &__link {
-            display: block;
-            font: bold rem(11) $setting-font-family-additional;
-            letter-spacing: rem(2.5);
-            line-height: rem(50);
-            color: $setting-color-gray-6;
-            border: rem(1) solid $setting-color-text;
-            height: rem(52);
-            width: rem(160);
-            border-radius: rem(2);
-            text-transform: uppercase;
-            text-align: center;
-
-            &:hover {
-                background: $setting-color-black;
-                color: $setting-color-white;
-                text-decoration: none;
-            }
-            @include helper-breakpoint-media-max($md-max) {
-                margin: 0 auto;
-            }
-            @include helper-breakpoint-media-max($sm-max) {
-                width: rem(128);
-                height: rem(46);
-                letter-spacing: rem(2.1);
-                line-height: rem(44);
-                font-size: rem(10);
-            }
-        }
         &__images {
             position: relative;
             display: flex;
+
             &--left {
                 justify-content: flex-start;
             }
+
             &--right {
                 justify-content: flex-end;
             }
         }
+
         &__image {
             border-radius: rem(3);
             overflow: hidden;
+
             img {
                 width: 100%;
                 height: 100%;
             }
         }
+
         &__image-1 {
-            width: rem(300);
-            height: rem(550);
-            @include helper-breakpoint-media-max($lg-max) {
+            width: rem(158);
+            height: rem(257);
+
+            @include helper-breakpoint-media-min($md-min) {
                 width: rem(225);
                 height: rem(412);
             }
-            @include helper-breakpoint-media-max($sm-max) {
-                width: rem(158);
-                height: rem(257);
+
+            @include helper-breakpoint-media-min($xl-min) {
+                width: rem(300);
+                height: rem(550);
             }
         }
+
         &__image-2 {
-            width: rem(420);
-            height: rem(400);
+            width: rem(210);
+            height: rem(200);
             position: absolute;
             top: 50%;
             transform: translate(0, -50%);
-            box-shadow: 0 rem(70) rem(80) rem(-40) $setting-color-shadow;
+            box-shadow: 0 rem(70) rem(80) rem(-40) $setting-color-alpha-8;
 
-            @include helper-breakpoint-media-max($lg-max) {
+            @include helper-breakpoint-media-min($md-min) {
                 width: rem(315);
                 height: rem(300);
             }
-            @include helper-breakpoint-media-max($sm-max) {
-                width: rem(210);
-                height: rem(200);
+
+            @include helper-breakpoint-media-min($xl-min) {
+                width: rem(420);
+                height: rem(400);
             }
+
             &--left {
-                left: rem(150);
-                @include helper-breakpoint-media-max($lg-max) {
+                left: rem(75);
+
+                @include helper-breakpoint-media-min($md-min) {
                     left: rem(100);
                 }
-                @include helper-breakpoint-media-max($sm-max) {
-                    left: rem(75);
+
+                @include helper-breakpoint-media-min($xl-min) {
+                    left: rem(150);
                 }
             }
+
             &--right {
-                right: rem(150);
-                @include helper-breakpoint-media-max($lg-max) {
+                right: rem(75);
+
+                @include helper-breakpoint-media-min($md-min) {
                     right: rem(100);
                 }
-                @include helper-breakpoint-media-max($sm-max) {
-                    right: rem(75);
+
+                @include helper-breakpoint-media-min($xl-min) {
+                    right: rem(150);
                 }
             }
         }
