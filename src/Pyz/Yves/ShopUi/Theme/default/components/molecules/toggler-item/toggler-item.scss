@@ -10,7 +10,7 @@
             opacity: 1;
 
             &:not(&--read-only) {
-                .no-touch &:not(&--footer):hover {
+                .no-touch &:hover {
                     cursor: pointer;
                     opacity: 0.5;
                 }
@@ -47,7 +47,7 @@
             &--bundle {
                 padding-left: rem(11);
 
-                &:not(&--read-only) {
+                &:not(#{$name}__title--read-only) {
                     &::before,
                     &::after {
                         transform: translateX(rem(-11));
@@ -56,6 +56,12 @@
             }
 
             &--footer {
+                &:hover,
+                .no-touch &:not(#{$name}__title--read-only):hover {
+                    cursor: default;
+                    opacity: 1;
+                }
+
                 @include helper-breakpoint-media-min($md-min) {
                     padding-top: 0;
                     padding-right: 0;

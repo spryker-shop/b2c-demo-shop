@@ -48,12 +48,9 @@
             }
 
             #{$name}__input:checked {
-                & + #{$name}__box {
-
-                    &::before {
-                        border: none;
-                        background-color: $setting-color-alpha-9;
-                    }
+                & + #{$name}__box::before {
+                    border: none;
+                    background-color: $setting-color-alpha-9;
                 }
             }
 

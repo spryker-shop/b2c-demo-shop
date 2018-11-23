@@ -25,32 +25,32 @@
                 name: 'global.search.suggestions' | trans,
                 items: data.completion,
                 length: data.suggestionsLength,
-                isTitleHiddenOnTablet: false,
+                titleClass: 'is-hidden-sm-md title--search',
                 isSuggestion: true
             }
         } only %}
     {% endif %}
-    <div class="grid grid--no-wrap">
-        {% if firstVisible %}
 
-            <div class="col">
-                <div class="suggestion-block suggestion-block--products">
-                    <h6>
+    <div class="grid suggestion-block">
+        {% if firstVisible %}
+            <div class="col suggestion-block__col">
+                <div class="suggestion-block__item">
+                    <h4 class="title title--with-border title--suggestion">
                         {{ 'global.search.suggestion.in_products' | trans }}
-                        <div class="float-right link--show-more is-hidden-lg-xl">
-                            <button type="submit" class="">{{'global.search.suggestion.see_all_products' | trans}}</button>
+                        <div class="float-right is-hidden-lg-xl">
+                            <button type="submit" class="button button--skinless button--search">{{'global.search.suggestion.see_all_products' | trans}}
                             {% include atom('icon') with {
                                 data: {
-                                    name: 'chevron-up'
+                                    name: 'chevron-right'
                                 }
-                            } %}
+                            } only %}</button>
                         </div>
 
-                    </h6>
+                    </h4>
                     <ul>
                         {% for product in data.product_abstract | slice(0, data.productsLength)  %}
                             {% if product is not empty %}
-                                <li class="list__item">
+                                <li class="list__item spacing-y spacing-y--bigger">
                                     {% include molecule('suggestion-product', 'CatalogPage') with {
                                         data: {
                                             product: product,
@@ -66,22 +66,23 @@
                             {% endif %}
                         {% endfor %}
                     </ul>
-                    <div class="link--show-more is-hidden-sm-md float-left">
-                        <button type="submit" class="">{{'global.search.suggestion.see_all_products' | trans}}</button>
+                    <div class="is-hidden-sm-md">
+                        <button type="submit" class="button button--skinless button--search">{{'global.search.suggestion.see_all_products' | trans}}
                         {% include atom('icon') with {
                                 data: {
-                                name: 'chevron-up'
+                                name: 'chevron-right'
                             }
-                        } %}
+                        } only %}</button>
                     </div>
 
                 </div>
             </div>
         {% endif %}
-        {% if secondVisible %}
 
-            <div class="col">
+        {% if secondVisible %}
+            <div class="col suggestion-block__col">
                 {% include molecule('suggestion-links-list', 'CatalogPage') with {
+                    class: 'suggestion-block__item',
                     data: {
                         name: 'global.search.suggestion.in_categories' | trans,
                         items: data.category,
@@ -90,10 +91,11 @@
                 } only %}
             </div>
         {% endif %}
-        {% if thirdVisible %}
 
-            <div class="col">
+        {% if thirdVisible %}
+            <div class="col suggestion-block__col">
                 {% include molecule('suggestion-links-list', 'CatalogPage') with {
+                    class: 'suggestion-block__item',
                     data: {
                         name: 'global.search.suggestion.in_cms' | trans,
                         items: data.cms_page,
@@ -104,7 +106,7 @@
         {% endif %}
 
         {% if not topVisible and not firstVisible and not secondVisible and not thirdVisible %}
-            <div class="col text-center">
+            <div class="col col--sm-12 text-center">
                 {{ 'global.search.suggestion.no_result' | trans }}
             </div>
         {% endif %}

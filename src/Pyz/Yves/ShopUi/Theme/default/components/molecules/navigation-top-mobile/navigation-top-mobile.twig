@@ -46,7 +46,6 @@
                     },
                     embed: {
                         item: item,
-                        jsName: config.jsName,
                         searchUrl: data.searchUrl,
                         cartQuantity: data.cartQuantity
                     }
@@ -54,7 +53,7 @@
                     {% block button %}
                         {% if embed.item.isSearch is defined %}
                             <form action="{{embed.searchUrl}}">
-                                <button type="button" class="button button--skinless spacing spacing--inner spacing--reset {{ embed.jsName }}__search">
+                                <button type="button" class="button button--skinless spacing spacing--inner spacing--reset js-suggest-search-show">
                                     {% include atom('icon') with {
                                         modifiers: ['big'],
                                         data: {

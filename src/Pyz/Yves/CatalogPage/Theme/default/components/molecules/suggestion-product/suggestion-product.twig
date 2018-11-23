@@ -15,7 +15,7 @@
 } %}
 
 {% block body %}
-    <a class="grid grid--middle js-suggest-search__item--navigable js-suggest-search__product-item--navigable {{ config.name }}__link"  href="{{ data.url }}">
+    <a class="container grid grid--middle link link--without-underline link--darkest js-suggest-search__item--navigable js-suggest-search__product-item--navigable"  href="{{ data.url }}">
         <span class="col">
             {% if data.image %}
                 {% include atom('thumbnail') with {
@@ -25,12 +25,11 @@
                         src: data.image.external_url_small,
                         title: data.title
                     },
-                    class: config.name ~ '__thumbnail'
                 } only %}
             {% endif %}
        </span>
 
-        <span class="col col--lg-9 {{ config.name }}__title">
+        <span class="col col--lg-9 title title--h5 title--medium">
             {{ data.title }}
 
             {% include molecule('price') with {
