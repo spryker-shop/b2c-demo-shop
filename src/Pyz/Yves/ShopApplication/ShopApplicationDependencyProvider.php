@@ -44,6 +44,7 @@ use SprykerShop\Yves\ProductReviewWidget\Widget\ProductDetailPageReviewWidget;
 use SprykerShop\Yves\ProductReviewWidget\Widget\ProductRatingFilterWidget;
 use SprykerShop\Yves\ProductReviewWidget\Widget\ProductReviewDisplayWidget;
 use SprykerShop\Yves\ProductWidget\Widget\CatalogPageProductWidget;
+use SprykerShop\Yves\ProductWidget\Widget\CmsProductGroupWidget;
 use SprykerShop\Yves\ProductWidget\Widget\CmsProductWidget;
 use SprykerShop\Yves\ProductWidget\Widget\PdpProductRelationWidget;
 use SprykerShop\Yves\ProductWidget\Widget\PdpProductReplacementForListWidget;
@@ -67,6 +68,7 @@ class ShopApplicationDependencyProvider extends SprykerShopApplicationDependency
             CatalogPageProductWidget::class,
             CheckoutBreadcrumbWidget::class,
             CmsProductWidget::class,
+            CmsProductGroupWidget::class,
             CurrencyWidget::class,
             CustomerNavigationWidget::class,
             DisplayProductAbstractReviewWidget::class,
