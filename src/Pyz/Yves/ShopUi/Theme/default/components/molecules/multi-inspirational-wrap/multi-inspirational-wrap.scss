@@ -1,19 +1,14 @@
 @mixin shop-ui-multi-inspirational-wrap($name: '.multi-inspirational-wrap') {
     #{$name} {
-        margin: 0 0 rem(150);
-        @include helper-breakpoint-media-max($sm-max) {
-            margin: 0 0 rem(60);
+        margin: 0 0 rem(60);
+
+        @include helper-breakpoint-media-min($md-min) {
+            margin-bottom: rem(150);
         }
+
         &--left {
-            .col:first-of-type {
-                @include helper-breakpoint-media-max($md-max) {
-                    order: 2;
-                }
-            }
-            .col:last-of-type {
-                @include helper-breakpoint-media-max($md-max) {
-                    order: 1;
-                }
+            @include helper-breakpoint-media-max($md-max) {
+                flex-direction: column-reverse;
             }
         }
     }

@@ -1,57 +1,46 @@
-@mixin shop-ui-autocomplete-form($name: '.autocomplete-form') {
-    #{$name} {
+@include shop-ui-autocomplete-form {
+    margin-right: rem(20);
+
+    &__suggestion {
+        background-color: $setting-color-white;
+        border-radius: rem(3);
+        padding: rem(12) rem(18);
+        font-size: rem(19);
+        line-height: 1.79;
+        color: $setting-color-black;
+    }
+
+    &__item {
+        padding: 0;
+
+        &:hover {
+            color: $setting-color-alt;
+            text-decoration: underline;
+            background: none;
+        }
+    }
+
+    &__field {
         position: relative;
-        margin-right: rem(20);
+    }
 
-        &__field {
-            position: relative;
+    &__input {
+        border: none;
+        background-color: $setting-color-gray-1;
+        font-weight: fw(medium);
+        font-size: rem(18);
+        padding-right: rem(40);
+        padding-left: rem(18);
+
+        &::placeholder {
+            opacity: 0.3;
         }
+    }
 
-        &__input {
-            border: none;
-            background-color: $setting-color-gray-1;
-            font-weight: fw(medium);
-            font-size: rem(18);
-            padding: rem(13) rem(40) rem(14) rem(18);
-
-            &::placeholder {
-                opacity: 0.3;
-            }
-        }
-
-        &__suggestion {
-            margin: 0;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            background-color: $setting-color-white;
-            border-radius: rem(3);
-            padding: rem(12) rem(18);
-            font-size: rem(19);
-            line-height: 1.79;
-            color: $setting-color-black;
-        }
-
-        &__item {
-            cursor: pointer;
-            padding: 0;
-
-            &:hover {
-                color: $setting-color-alt;
-                text-decoration: underline;
-            }
-        }
-
-        &__clean-button {
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-        }
-
-        @content;
+    &__clean-button {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
     }
 }
-
-@include shop-ui-autocomplete-form();

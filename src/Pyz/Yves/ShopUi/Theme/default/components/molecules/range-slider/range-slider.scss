@@ -53,23 +53,36 @@
         }
 
         .noUi-handle {
-            @include helper-effect-transition(transform);
+            @include helper-effect-transition(transform border-color);
             width: $width-handle;
             height: rem(24);
             border-radius: rem(12);
             box-shadow: none;
             border-color: $setting-color-gray-5;
 
-            &::before,
-            &::after {
+            &::before {
                 display: none;
+            }
+
+            &::after {
+                @include helper-effect-transition(opacity);
+                height: 100%;
+                width: 100%;
+                background-color: $setting-color-alpha-2;
+                top: 0;
+                left: 0;
+                border-radius: 50%;
+                opacity: 0;
             }
 
             &:hover {
                 border-color: $setting-color-main;
-                background-color: $setting-color-gray-2;
                 cursor: pointer;
                 transform: scale(1.25);
+
+                &::after {
+                    opacity: 1;
+                }
             }
         }
     }

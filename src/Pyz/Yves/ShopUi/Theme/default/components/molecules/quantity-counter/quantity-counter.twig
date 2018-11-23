@@ -21,7 +21,7 @@
         </div>
         <div class="col">
             <input
-                class="{{ config.name }}__input {{ config.jsName }}__input input"
+                class="{{ component.renderClass(config.name ~ '__input', modifiers) }} {{ config.jsName }}__input input"
                 data-max-quantity="{{ maxQuantity }}"
                 data-min-quantity="{{ data.minQuantity }}"
                 type="number"

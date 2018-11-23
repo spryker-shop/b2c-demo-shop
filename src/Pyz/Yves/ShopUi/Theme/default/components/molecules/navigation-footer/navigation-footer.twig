@@ -14,32 +14,27 @@
     {% for itemNavigation in data.items %}
 
         {% if itemNavigation.isShow is defined ? itemNavigation.isShow : true %}
-            <div class="{{ config.name }}__col {% if itemNavigation.class is defined %}{{ itemNavigation.class }}{% endif %}">
-                <h5
-                        class="{{ config.name }}__title {{ config.name }}__title--nav {{ config.jsName }}__title"
-                        data-toggle-target=".{{ config.jsName }}-{{ loop.index }}"
-                >
-                    {{- itemNavigation.title | trans -}}
-                </h5>
-
-                <div class="{{ config.name }}__main {{ config.name }}__main--hidden {{ config.jsName }}-{{ loop.index }}">
-
-                    {% for itemMenu in itemNavigation.templates %}
+            {% embed molecule('toggler-item') with {
+                modifiers: ['footer'],
+                class: config.name ~ '__col ' ~ (itemNavigation.class is defined ? itemNavigation.class : ''),
+                data: {
+                    title: itemNavigation.title | trans,
+                    triggerClass: config.jsName ~ '__trigger',
+                    targetClass: config.jsName ~ '__target--' ~ loop.index,
+                    isTogglerIncluded: loop.first ? true : false,
+                    hiddenClass: 'is-hidden-sm-only'
+                },
+                embed: {
+                    itemNavigation: itemNavigation,
+                }
+            } only %}
+                {% block contentText %}
+                    {% for itemMenu in embed.itemNavigation.templates %}
                         {{- widgetGlobal('NavigationWidgetPlugin', itemMenu.menu, itemMenu.template) -}}
                     {% endfor %}
-
-                </div>
-            </div>
+                {% endblock %}
+            {% endembed %}
         {% endif %}
 
     {% endfor %}
-
-    {% include molecule('toggler-accordion') with {
-        class: 'is-hidden',
-        attributes: {
-            trigger: '.' ~ config.jsName ~ '__title',
-            'class-to-toggle': config.name ~ '__main--hidden'
-        }
-    } only %}
-
 {% endblock %}

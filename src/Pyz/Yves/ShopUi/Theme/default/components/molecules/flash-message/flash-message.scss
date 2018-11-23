@@ -1,11 +1,3 @@
-@mixin shop-ui-flash-message-action($action, $setting-color-action) {
-    &--#{$action} {
-        background-color: $setting-color-action;
-    }
-
-    @content;
-}
-
 @mixin shop-ui-flash-message($name: '.flash-message') {
     #{$name} {
         @include helper-visibility-invisible;
@@ -23,10 +15,6 @@
             &::after {
                 display: none;
             }
-        }
-
-        &__text {
-            padding-right: rem(16);
         }
 
         &__static-link {
@@ -56,5 +44,12 @@
     }
 }
 
-@include shop-ui-flash-message();
+@mixin shop-ui-flash-message-action($action, $setting-color-action) {
+    &--#{$action} {
+        background-color: $setting-color-action;
+    }
 
+    @content;
+}
+
+@include shop-ui-flash-message();

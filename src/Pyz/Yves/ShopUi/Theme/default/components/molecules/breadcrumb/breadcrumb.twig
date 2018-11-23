@@ -14,7 +14,7 @@
     {% if data.startWithHome %}
         {% include molecule('breadcrumb-step') with {
             data: {
-                url: '/' ~ app.locale | slice(0, 2),
+                url: url('home'),
                 label: 'global.home' | trans
             }
         } only %}
@@ -23,9 +23,9 @@
         {% for step in data.steps %}
             {% include molecule('breadcrumb-step') with {
                 data: {
-                    url: step.url | default(null),
-                    label: step.label | default(null),
-                    itemProp: step.itemProp | default(null),
+                    url: step.url | default,
+                    label: step.label | default,
+                    itemProp: step.itemProp | default,
                     withChevron: step.withChevron is defined ? step.withChevron : true
                 }
             } only %}

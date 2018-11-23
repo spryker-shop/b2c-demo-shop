@@ -2,9 +2,6 @@
     #{$name} {
         &__title {
             @include helper-effect-transition(opacity);
-            text-transform: uppercase;
-            font: fw(bold) rem(13) $setting-font-family-additional;
-            letter-spacing: rem(2.6);
             padding: rem(15) rem(20) rem(15) 0;
             position: relative;
             opacity: 1;
@@ -47,10 +44,30 @@
             &--bundle {
                 padding-left: rem(11);
 
-                &:not(&--read-only) {
+                &:not(#{$name}__title--read-only) {
                     &::before,
                     &::after {
                         transform: translateX(rem(-11));
+                    }
+                }
+            }
+
+            &--footer {
+                &:hover,
+                .no-touch &:not(#{$name}__title--read-only):hover {
+                    cursor: default;
+                    opacity: 1;
+                }
+
+                @include helper-breakpoint-media-min($md-min) {
+                    padding-top: 0;
+                    padding-right: 0;
+                }
+
+                &::before,
+                &::after {
+                    @include helper-breakpoint-media-min($md-min) {
+                        display: none;
                     }
                 }
             }
@@ -74,10 +91,23 @@
                 padding-top: 0;
                 padding-bottom: rem(14);
             }
+
+            &--footer {
+                padding-top: 0;
+                padding-bottom: rem(5);
+            }
         }
 
         &--with-top-border {
             border-top: rem(1) dotted $setting-color-gray-3;
+        }
+
+        &--footer {
+            border-top: rem(1) dotted $setting-color-gray-3;
+
+            @include helper-breakpoint-media-min($md-min) {
+                border-top: none;
+            }
         }
 
         @content;

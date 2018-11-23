@@ -8,15 +8,13 @@
     name: required,
     items: required,
     length: required,
-    isTitleHiddenOnTablet: false,
+    titleClass: '',
     isSuggestion: false
 } %}
 
-{% set titleHiddenClass = data.isTitleHiddenOnTablet ? 'is-hidden-sm-md' : '' %}
-
 {% block body %}
     {% if data.items is not empty %}
-        <h6 class="spacing-y {{ titleHiddenClass }} {{ config.name }}__title">{{ data.name }}</h6>
+        <h4 class="title title--heading title--with-border title--suggestion {{ data.titleClass }}">{{ data.name }}</h4>
         <ul class="{{ config.name }}__holder">
             {% for item in data.items | slice(0, data.length) %}
                 {% if item %}

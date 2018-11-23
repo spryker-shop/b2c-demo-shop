@@ -12,9 +12,9 @@
 
 {% block body %}
     <div class="container">
-        <div class="{{ config.name }}__search-overlay js-toggle-search">
+        <div class="{{ config.name }}__search-overlay js-suggest-search-overlay">
             <div class="{{ config.name }}__search-overlay-container">
-                <div class="{{ config.name }}__search-close js-search-hide-icon">
+                <div class="{{ config.name }}__search-close js-suggest-search-hide">
                     {% include atom('icon') with {
                         class: config.name ~ '__search-close-icon',
                         data: {
@@ -31,7 +31,7 @@
                     } only %}
                 {% endif %}
             </div>
-            <div class="{{ config.name }}__overlay-shadow js-search-hide-overlay"></div>
+            <div class="{{ config.name }}__overlay-shadow js-suggest-search-hide"></div>
         </div>
 
         {% block additionalLink %}{% endblock %}
@@ -39,7 +39,7 @@
         <div class="{{ config.name }}__row {{ config.name }}__navigation-top grid grid--middle grid--justify">
             <div class="col col--sm-12 col--lg-4 is-hidden-sm-md">
                 {% if data.showSearchForm %}
-                    <div class="{{ config.name }}__search-open js-search-show-icon">
+                    <div class="{{ config.name }}__search-open js-suggest-search-show">
                         {% include atom('icon') with {
                             class: config.name ~ '__search-open-icon',
                             data: {

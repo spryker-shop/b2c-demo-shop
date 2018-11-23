@@ -1,7 +1,6 @@
 @mixin shop-ui-pagination($name: '.pagination') {
     #{$name} {
-
-        ul {
+        &__list {
             border-top: dotted rem(1) $setting-color-gray-3;
             border-bottom: dotted rem(1) $setting-color-gray-3;
             margin-bottom: rem(50);
@@ -20,11 +19,18 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            width: rem(68);
-            height: rem(68);
-            font: 400 rem(18)/rem(68) $setting-font-family-additional;
+            width: rem(44);
+            height: rem(54);
+            font: fw(regular) rem(15)/rem(54) $setting-font-family-additional;
             text-align: center;
             color: $setting-color-black;
+
+            @include helper-breakpoint-media-min($xl-min) {
+                width: rem(68);
+                height: rem(68);
+                font-size: rem(18);
+                line-height: rem(68);
+            }
 
             &--previous {
                 float: left;
@@ -37,14 +43,14 @@
             &:hover {
                 text-decoration: none;
                 background: $setting-color-gray-1;
-            }
-
-            &:not(&--current):hover {
                 color: $setting-color-black;
             }
 
             &--current {
-                color: $setting-color-alt;
+                &,
+                &:hover {
+                    color: $setting-color-alt;
+                }
             }
 
             &--disabled {
@@ -53,24 +59,6 @@
                 &:hover {
                     background: none;
                 }
-            }
-
-            @include helper-breakpoint-media-max($lg-max) {
-                width: rem(44);
-                height: rem(54);
-                font-size: rem(15);
-                line-height: rem(54);
-            }
-        }
-
-        &__icon {
-            width: rem(12);
-            height: rem(12);
-            color: $setting-color-black;
-
-            @include helper-breakpoint-media-max($lg-max) {
-                width: rem(11);
-                height: rem(11);
             }
         }
     }

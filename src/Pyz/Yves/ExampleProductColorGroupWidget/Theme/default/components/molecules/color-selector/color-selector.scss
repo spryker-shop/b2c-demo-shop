@@ -5,6 +5,19 @@ $selector-border-size: 2;
     #{$name} {
         cursor: default;
 
+        &--card {
+            @include helper-effect-transition(transform);
+            background: $setting-color-white;
+            position: absolute;
+            z-index: $setting-zi-header;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            border-radius: 0 0 rem(4) rem(4);
+            padding: rem(16) 0;
+            transform: translateY(100%);
+        }
+
         &__color {
             display: inline-block;
             width: rem($color-selector-size);

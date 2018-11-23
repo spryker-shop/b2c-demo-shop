@@ -1,62 +1,13 @@
 @mixin shop-ui-user-block($name: '.user-block') {
     #{$name} {
-        &__title {
-            font: bold rem(36) $setting-font-family-additional;
-            padding-bottom: rem(10);
-            border-bottom: rem(1) dotted $setting-color-gray-3;
-        }
-
-        &__inner-box {
-            padding: rem(20) 0;
-        }
-
-        &__link {
-            display: block;
-            font: normal rem(14) $setting-font-family-additional;
-            margin: rem(30) 0;
-            text-transform: uppercase;
-            letter-spacing: rem(1);
-            position: relative;
-
-            &:hover {
-                text-decoration: none;
-            }
-
-            &::after {
-                content: '';
-                display: block;
-                height: rem(13);
-                width: rem(7);
-                position: absolute;
-                top: 50%;
-                right: 0;
-                transform: translateY(-50%);
-                background: url('/assets/images/right-chevron.svg') no-repeat center / cover;
-            }
-
-            &--sm {
-                font-size: rem(12);
-                margin: 0;
-                padding-top: rem(25);
-                border-top: rem(1) dotted $setting-color-gray-3;
-
-                &::after {
-                    width: rem(6);
-                    height: rem(11);
-                    top: calc(50% + #{rem(12)});
-                }
-            }
-        }
-
         &__buttons-container {
             border-top: rem(1) dotted $setting-color-gray-3;
             padding-top: rem(20);
         }
 
         &__button {
-            font: 500 rem(14)/rem(46) $setting-font-family-additional;
+            min-width: 0;
             width: calc(50% - #{rem(10)});
-            padding: 0;
         }
 
         @content;

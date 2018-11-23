@@ -30,7 +30,7 @@
 
 {% block body %}
     {% if data.maxPage > 1 %}
-        <ul class="grid grid--center">
+        <ul class="{{ config.name }}__list grid grid--center">
 
             {% if data.currentPage > 1 %}
                 <li class="{{ config.name }}__item">
@@ -38,14 +38,12 @@
                         class="{{ config.name }}__step {{ config.name }}__step--previous"
                         href="{{ path(data.paginationPath, data.parameters | merge({ page: data.currentPage-1 })) }}{{ data.anchor }}"
                     >
-                        <div class="{{ config.name }}__icon">
-                            {% include atom('icon') with {
-                                modifiers: ['inherit'],
-                                data: {
-                                    name: 'arrow-left'
-                                }
-                            } only %}
-                        </div>
+                        {% include atom('icon') with {
+                            modifiers: ['arrow'],
+                            data: {
+                                name: 'arrow-left'
+                            }
+                        } only %}
                     </a>
                 </li>
 
@@ -86,14 +84,12 @@
             {% elseif data.showAlwaysFirstAndLast %}
                 <li class="{{ config.name }}__item">
                     <span class="{{ config.name }}__step {{ config.name }}__step--previous {{config.name }}__step--disabled">
-                        <div class="{{ config.name }}__icon">
-                            {% include atom('icon') with {
-                                modifiers: ['inherit'],
-                                data: {
-                                    name: 'arrow-left'
-                                }
-                            } only %}
-                        </div>
+                        {% include atom('icon') with {
+                            modifiers: ['arrow'],
+                            data: {
+                                name: 'arrow-left'
+                            }
+                        } only %}
                     </span>
                 </li>
             {% endif %}
@@ -147,28 +143,24 @@
                         class="{{ config.name }}__step {{ config.name }}__step--next"
                         href="{{ path(data.paginationPath, data.parameters | merge({ page: data.currentPage + 1 })) }}{{ data.anchor }}"
                     >
-                        <div class="{{ config.name }}__icon">
-                            {% include atom('icon') with {
-                                modifiers: ['inherit'],
-                                data: {
-                                    name: 'arrow-right'
-                                }
-                            } only %}
-                        </div>
+                        {% include atom('icon') with {
+                            modifiers: ['arrow'],
+                            data: {
+                                name: 'arrow-right'
+                            }
+                        } only %}
                     </a>
                 </li>
 
             {% elseif data.showAlwaysFirstAndLast %}
                 <li class="{{ config.name }}__item">
                     <span class="{{ config.name }}__step {{ config.name }}__step--next {{config.name }}__step--disabled">
-                        <div class="{{ config.name }}__icon">
-                            {% include atom('icon') with {
-                                modifiers: ['inherit'],
-                                data: {
-                                    name: 'arrow-right'
-                                }
-                            } only %}
-                        </div>
+                        {% include atom('icon') with {
+                            modifiers: ['arrow'],
+                            data: {
+                                name: 'arrow-right'
+                            }
+                        } only %}
                     </span>
                 </li>
             {% endif %}

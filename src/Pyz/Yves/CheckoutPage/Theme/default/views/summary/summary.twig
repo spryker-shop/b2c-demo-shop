@@ -40,7 +40,7 @@
     <div class="grid summary-item">
             <div class="col col--sm-12 col--lg-6 summary-page__col">
                 <div class="summary-item__wrap">
-                    <h5 class="title title--checkout">{{ 'checkout.step.address.title' | trans }}</h5>
+                    <h5 class="title title--checkout title--h1">{{ 'checkout.step.address.title' | trans }}</h5>
                     <div class="grid">
                         <div class="col col--sm-12 col--md-6">
                             <strong>{{ 'page.checkout.summary.shipping' | trans }}</strong>
@@ -76,7 +76,7 @@
                     </div>
                 </div>
                 <div class="summary-item__wrap">
-                    <h5 class="title title--checkout">{{ 'checkout.step.summary.shipping' | trans }}</h5>
+                    <h5 class="title title--checkout title--h1">{{ 'checkout.step.summary.shipping' | trans }}</h5>
                     {% if data.shipmentMethodName == 'DHL' %}
                         <div class="heading__logo heading__logo--indent">
                             <img class="heading__logo--img" src="/assets/images/shipment-checkout.step.shipment.provider.a.png" width="65" height="10" alt="DHL">
@@ -99,7 +99,7 @@
                     {% endfor %}
                 </div>
                 <div class="summary-item__wrap">
-                    <h5 class="title title--checkout">{{ 'checkout.step.summary.payment' | trans }}</h5>
+                    <h5 class="title title--checkout title--h1">{{ 'checkout.step.summary.payment' | trans }}</h5>
                     {% if data.paymentMethodName == 'Visa' %}
                         <div class="heading__logo heading__logo--indent">
                             <img class="heading__logo--img" src="/assets/images/logo-visa.png" width="50" height="18" alt="Visa">
@@ -131,7 +131,7 @@
 
             <div class="col col--sm-12 col--lg-6 summary-page__col">
                 <div class="summary-item__wrap">
-                    <h5 class="title title--checkout"> {{ 'page.checkout.summary.products' | trans }}</h5>
+                    <h5 class="title title--checkout title--h1"> {{ 'page.checkout.summary.products' | trans }}</h5>
                     <div class="summary-item__product-list">
                         {% for item in data.cartItems %}
                             {% set item = item.bundleProduct is defined ? item.bundleProduct : item %}
@@ -177,7 +177,7 @@
                     </div>
                 </div>
                 <div class="summary-item__wrap">
-                    <h5 class="title title--checkout">{{ 'checkout.step.summary.total' | trans }}</h5>
+                    <h5 class="title title--checkout title--h1">{{ 'checkout.step.summary.total' | trans }}</h5>
                     {{ widget('CartNoteQuoteNoteWidgetPlugin', data.transfer) }}
                     {{ widget('CheckoutVoucherFormWidgetPlugin', data.transfer, 'test') }}
 
