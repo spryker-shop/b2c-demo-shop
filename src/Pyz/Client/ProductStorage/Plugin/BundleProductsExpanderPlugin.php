@@ -7,9 +7,11 @@
 
 namespace Pyz\Client\ProductStorage\Plugin;
 
+use Generated\Shared\Transfer\AttributeMapStorageTransfer;
 use Generated\Shared\Transfer\ProductViewTransfer;
 use Spryker\Client\Kernel\AbstractPlugin;
 use Spryker\Client\ProductStorage\Dependency\Plugin\ProductViewExpanderPluginInterface;
+use Spryker\Client\ProductStorage\ProductStorageConfig;
 
 /**
  * @method \Spryker\Client\ProductStorage\ProductStorageFactory getFactory()
@@ -32,23 +34,10 @@ class BundleProductsExpanderPlugin extends AbstractPlugin implements ProductView
     {
         foreach ($productViewTransfer->getBundledProductIds() as $productId => $quantity) {
             $bundledProduct = $this->getClient()->findProductConcreteStorageData($productId, $localeName);
-            $bundledProduct['idProductAbstract'] = $bundledProduct['id_product_abstract'];
-            $bundledProduct['productUrl'] = $bundledProduct['url'];
-            $bundledProduct['quantity'] = $quantity;
-            $bundledProductView = $this->getClient()->mapProductStorageData(
-                [
-                    'attributeMap' => [],
-                    'idProductConcrete' => $bundledProduct['id_product_concrete'],
-                    'idProductAbstract' => $bundledProduct['id_product_abstract'],
-                    'sku' => $bundledProduct['sku'],
-                ],
-                $localeName
-            );
-            $image = $bundledProductView->getImages()->offsetGet(0);
-            if ($image) {
-                $bundledProduct['image'] = $image->getExternalUrlSmall();
-            }
-            $productViewTransfer->addBundledProduct($bundledProduct);
+            $bundledProduct[ProductStorageConfig::RESOURCE_TYPE_ATTRIBUTE_MAP] = (new AttributeMapStorageTransfer())->toArray();
+            $bundledProductView = $this->getClient()->mapProductStorageData($bundledProduct, $localeName);
+            $bundledProductView->setQuantity($quantity);
+            $productViewTransfer->addBundledProduct($bundledProductView);
         }
 
         return $productViewTransfer;
