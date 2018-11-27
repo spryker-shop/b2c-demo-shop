@@ -42,7 +42,7 @@
             } only %}
                 {% block breadcrumbs %}
                     {% for step in data.steps %}
-                        {% set modifiers = step.isActive ? ['active', 'progress'] : ['progress'] %}
+                        {% set modifiers = step.isActive ? ['active', 'progress', 'progress-active'] : ['progress'] %}
                         {% set modifiers = step.isEnabled ? modifiers : modifiers | merge(['disabled']) %}
 
                         {% include molecule('breadcrumb-step') with {

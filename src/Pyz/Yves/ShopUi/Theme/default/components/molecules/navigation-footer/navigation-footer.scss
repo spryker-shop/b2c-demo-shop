@@ -1,24 +1,16 @@
 @mixin shop-ui-navigation-footer($name: '.navigation-footer') {
     #{$name} {
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        width: 100%;
+        border-bottom: rem(1) dotted $setting-color-gray-3;
 
-        @include helper-breakpoint-media-min($xl-min) {
-            max-width: calc(100% - #{rem(202)});
-            padding-left: 9%;
+        @include helper-breakpoint-media-min($md-min) {
+            border-bottom: none;
         }
 
         &__col {
             width: 100%;
-            margin-top: rem(-1);
-            border-top: solid rem(1) $setting-color-gray-6;
-            border-bottom: solid rem(1) $setting-color-gray-6;
 
             @include helper-breakpoint-media-min($md-min) {
-                width: auto;
-                border: none;
+                width: 33%;
             }
 
             @include helper-breakpoint-media-min($xl-min) {
@@ -30,56 +22,6 @@
             }
         }
 
-        &__title {
-            text-transform: uppercase;
-            white-space: nowrap;
-            padding: 0 0 rem(16);
-            cursor: default;
-
-            @include helper-breakpoint-media-max($sm-max) {
-                padding: rem(16) 0;
-                cursor: pointer;
-
-                &--nav {
-                    position: relative;
-
-                    &::before,
-                    &::after {
-                        position: absolute;
-                        top: 50%;
-                        content: '';
-                        background: $setting-color-black;
-                    }
-
-                    &::before {
-                        width: rem(10);
-                        height: rem(2);
-                        right: 0;
-                    }
-
-                    &::after {
-                        width: rem(2);
-                        height: rem(10);
-                        right: rem(4);
-                        margin-top: rem(-5);
-                    }
-
-                    &.active {
-                        &::after {
-                            display: none;
-                        }
-                    }
-                }
-            }
-        }
-
-        &__main {
-            &--hidden {
-                @include helper-breakpoint-media-max($sm-max) {
-                    display: none;
-                }
-            }
-        }
         @content;
     }
 }

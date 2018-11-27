@@ -1,85 +1,70 @@
-@mixin price($name: '.price') {
-    @include shop-ui-price($name);
+@include shop-ui-price {
+    $name: '.price';
 
-    #{$name} {
-        &--small {
-            position: relative;
-            font-weight: normal;
+    font-weight: fw(regular);
+
+    &--small {
+        font-weight: fw(regular);
+        margin-top: rem(3);
+        text-align: left;
+
+        @include helper-breakpoint-media-min($md-min) {
+            margin-top: 0;
             text-align: right;
+        }
+    }
 
-            @include helper-breakpoint-media-max($sm-max) {
-                margin-top: rem(3);
-                text-align: left;
-            }
+    &--suggestion-product {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: flex-end;
+    }
 
-            #{$name}__amount {
-                font-size: inherit;
-                color: $setting-color-black;
+    &__amount {
+        color: $setting-color-black;
 
-                &--original {
-                    position: absolute;
-                    bottom: rem(-20);
-                    right: 0;
-                    color: $setting-color-gray-3;
-                    font-size: rem(14);
-
-                    @include helper-breakpoint-media-max($sm-max) {
-                        font-size: rem(11);
-                        left: 0;
-                        right: unset;
-                    }
-                }
-            }
+        &--small {
+            font-size: inherit;
         }
 
         &--suggestion-product {
-            font: normal rem(13) $setting-font-family;
+            font-size: rem(13);
 
-            #{$name}__amount {
-                display: inline-block;
-                font-size: inherit;
+            &:not(:last-child) {
+                margin-left: rem(6);
+            }
 
-                &--original {
-                    opacity: 0.25;
-                    margin-right: rem(6);
-                }
+            &#{$name}__amount--original {
+                color: $setting-color-gray-4;
+                font-size: rem(13);
             }
         }
 
         &--wishlist {
-            #{$name}__amount {
-                font: fw(medium) rem(16) $setting-font-family-additional;
-
-                &--original {
-                    color: $setting-color-black;
-                    font-size: rem(14);
-                }
-            }
+            font: fw(medium) rem(16) $setting-font-family-additional;
         }
 
         &--pdp {
-            display: flex;
-            flex-direction: column-reverse;
-            align-items: flex-end;
+            font: fw(regular) rem(20)/rem(25) $setting-font-family-additional;
 
-            #{$name}__amount {
-                color: $setting-color-black;
-                font: fw(regular) rem(20)/rem(25) $setting-font-family-additional;
+            @include helper-breakpoint-media-min($xl-min) {
+                font-size: rem(22);
+                line-height: rem(28);
+            }
 
-                @include helper-breakpoint-media-min($xl-min) {
-                    font-size: rem(22);
-                    line-height: rem(28);
-                }
+            &#{$name}__amount--original {
+                font-size: rem(15);
+                line-height: rem(19);
+            }
+        }
 
-                &--original {
-                    padding: 0;
-                    color: $setting-color-gray-3;
-                    font-size: rem(15);
-                    line-height: rem(19);
-                }
+        &--original {
+            color: $setting-color-gray-3;
+            font-size: rem(11);
+
+            @include helper-breakpoint-media-min($md-min) {
+                font-size: rem(14);
             }
         }
     }
 }
-
-@include price;

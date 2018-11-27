@@ -20,7 +20,9 @@ export default class ImageGallery extends Component {
     }
 
     protected mapEvents(): void {
-        this.thumbnail.addEventListener('mouseenter', (event: Event) => this.onThumbnailHover(event), true);
+        if(this.thumbnail) {
+            this.thumbnail.addEventListener('mouseenter', (event: Event) => this.onThumbnailHover(event), true);
+        }
     }
 
     protected initSlider(): void {

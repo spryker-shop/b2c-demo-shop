@@ -1,0 +1,25 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'user-block-item',
+    tag: 'a',
+} %}
+
+{% define data = {
+    name: '',
+    iconName: 'chevron-right',
+} %}
+
+{% define attributes = {
+    href: required,
+} %}
+
+{% block body %}
+    {{- data.name -}}
+    {% include atom('icon') with {
+        modifiers: modifiers,
+        data: {
+            name: data.iconName,
+        }
+    } only %}
+{% endblock %}

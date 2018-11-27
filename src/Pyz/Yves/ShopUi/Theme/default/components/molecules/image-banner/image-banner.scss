@@ -1,47 +1,54 @@
 @mixin shop-ui-image-banner($name: '.image-banner') {
+    $images-folder-path: '/assets/images/';
+
     #{$name} {
-        margin: rem(180) 0;
-        height: rem(750);
-        padding: 0 rem(80);
+        margin: rem(80) 0 rem(132);
+        height: rem(400);
         position: relative;
-        @include helper-breakpoint-media-max($md-max) {
-            height: rem(400);
-            margin: rem(80) 0 rem(132);
-            padding: 0;
+
+        @include helper-breakpoint-media-min($lg-min) {
+            height: rem(750);
+            margin: rem(180) 0;
+            padding: 0 rem(80);
         }
-        video {
+
+        &__video {
             width: auto;
             height: auto;
             min-width: 100%;
             display: none;
+
             .no-touch & {
                 display: block;
             }
         }
-        &__bg-wrapper {
+
+        &__bg-wrap {
             position: absolute;
             height: 100%;
             width: 100%;
             overflow: hidden;
+
             &::after {
                 content: '';
                 display: block;
                 position: absolute;
-                bottom: rem(40);
-                right: rem(40);
-                width: rem(130);
-                height: rem(53);
-                background: url('/assets/images/spryker-logo@2x.png') center no-repeat;
-                background-size: contain;
-                @include helper-breakpoint-media-max($md-max) {
-                    width: rem(78);
-                    height: rem(32);
-                    bottom: rem(20);
-                    right: rem(24);
+                width: rem(78);
+                height: rem(32);
+                bottom: rem(20);
+                right: rem(24);
+                background: url('#{$images-folder-path}spryker-logo@2x.png') center no-repeat / contain;
+
+                @include helper-breakpoint-media-min($lg-min) {
+                    width: rem(130);
+                    height: rem(53);
+                    bottom: rem(40);
+                    right: rem(40);
                 }
             }
+
             .touch & {
-                background-image: url('/assets/images/brand-image@3x.jpg');
+                background-image: url('#{$images-folder-path}brand-image@3x.jpg');
                 background-size: cover;
             }
         }
@@ -52,6 +59,7 @@
             justify-content: center;
             align-items: center;
             flex-direction: column;
+
             @include helper-breakpoint-media-max($md-max) {
                 position: absolute;
                 top: 50%;
@@ -63,44 +71,52 @@
 
         &__title {
             margin-bottom: rem(10);
-            & > * {
-                font: bold rem(68) $setting-font-family-additional;
-                line-height: normal;
+
+            & * {
+                font: fw(bold) rem(38)/normal $setting-font-family-additional;
                 letter-spacing: rem(-0.9);
                 color: $setting-color-white;
                 text-align: center;
-                @include helper-breakpoint-media-max($md-max) {
-                    font-size: rem(38);
+
+                @include helper-breakpoint-media-min($lg-min) {
+                    font-size: rem(68);
                 }
             }
         }
+
         &__link {
             color: $setting-color-white;
-            font: normal rem(22) $setting-font-family-additional;
+            font: fw(regular) rem(14) $setting-font-family-additional;
             letter-spacing: rem(-0.4);
             position: relative;
             text-decoration: none;
-            @include helper-breakpoint-media-max($md-max) {
-                font-size: rem(14);
+            display: inline-block;
+            padding-right: rem(12);
+
+            @include helper-breakpoint-media-min($lg-min) {
+                font-size: rem(22);
+                padding-right: rem(20);
             }
+
             &:hover {
                 color: $setting-color-white;
                 text-decoration: none;
             }
+
             &::after {
                 content: '';
                 display: block;
                 position: absolute;
-                height: rem(15);
-                width: rem(10);
-                background: url('/assets/images/arrow-white-bold.svg') center no-repeat;
-                right: rem(-20);
-                bottom: rem(4);
-                @include helper-breakpoint-media-max($md-max) {
-                    width: rem(6);
-                    height: rem(9);
-                    right: rem(-12);
-                    bottom: rem(3);
+                background: url('#{$images-folder-path}arrow-white-bold.svg') center no-repeat;
+                width: rem(6);
+                height: rem(9);
+                right: 0;
+                bottom: rem(3);
+
+                @include helper-breakpoint-media-min($lg-min) {
+                    width: rem(10);
+                    height: rem(15);
+                    bottom: rem(4);
                 }
             }
         }
@@ -108,4 +124,3 @@
 }
 
 @include shop-ui-image-banner();
-

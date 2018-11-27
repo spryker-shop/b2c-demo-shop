@@ -1,5 +1,7 @@
 @mixin shop-ui-footer($name: '.footer') {
     #{$name} {
+        $footer-subscription-width: rem(202);
+
         border-top: rem(1) solid $setting-color-gray-3;
 
         &__top {
@@ -10,7 +12,7 @@
             padding: rem(30) 0 0;
 
             @include helper-breakpoint-media-min($md-min) {
-                border-bottom: dotted rem(1) $setting-color-gray-6;
+                border-bottom: dotted rem(1) $setting-color-gray-3;
             }
 
             @include helper-breakpoint-media-min($xl-min) {
@@ -28,7 +30,7 @@
             }
 
             @include helper-breakpoint-media-min($xl-min) {
-                max-width: rem(202);
+                max-width: #{$footer-subscription-width};
             }
         }
 
@@ -122,6 +124,18 @@
             font: fw(regular) rem(15)/rem(22) $setting-font-family;
             display: block;
             max-width: rem(210);
+        }
+
+        &__navigation {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            width: 100%;
+
+            @include helper-breakpoint-media-min($xl-min) {
+                max-width: calc(100% - #{$footer-subscription-width});
+                padding-left: 9%;
+            }
         }
     }
 }

@@ -10,8 +10,6 @@
     showUserMenu: true
 } %}
 
-{% set cartQuantity = data.cartQuantity > 0 ? data.cartQuantity ~ ' ' : '' %}
-
 {% block body %}
     <ul class="grid grid--middle grid--right">
         {% if data.showUserMenu %}
@@ -61,18 +59,15 @@
         {% endif %}
 
         <li class="{{ config.name }}__item">
-            <a href="{{ url('cart') }}" class="{{ config.name }}__link {{ config.jsName }}__trigger">
-                {% if cartQuantity > 0 %}
-                    <span class="cart-link__quantity">{{ cartQuantity }}</span>
-                {% endif %}
-
-                {% include atom('icon') with {
-                    modifiers: ['big'],
-                    data: {
-                        name: 'cart'
-                    }
-                } only %}
-            </a>
+            {% include atom('cart-link') with {
+                class: config.jsName ~ '__trigger',
+                data: {
+                    cartQuantity: data.cartQuantity,
+                },
+                attributes: {
+                    href: url('cart'),
+                }
+            } only %}
         </li>
 
         <li class="{{ config.name }}__item {{ config.name }}__item--overlay">
