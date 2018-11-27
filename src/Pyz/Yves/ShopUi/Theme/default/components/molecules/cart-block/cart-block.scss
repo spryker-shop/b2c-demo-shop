@@ -1,12 +1,14 @@
 @mixin shop-ui-cart-block($name: '.cart-block') {
     #{$name} {
+        $image-width: rem(100);
+
         &__item {
             padding: rem(18) 0;
             border-bottom: rem(1) dotted $setting-color-gray-3;
         }
 
         &__image {
-            width: rem(100);
+            width: #{$image-width};
 
             .thumbnail {
                 height: rem(60);
@@ -16,7 +18,7 @@
         &__item-content {
             margin-left: 0;
             padding-left: rem(20);
-            width: calc(100% - #{rem(100)});
+            width: calc(100% - #{$image-width});
         }
 
         &__name,
