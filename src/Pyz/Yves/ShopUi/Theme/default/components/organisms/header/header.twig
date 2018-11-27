@@ -69,12 +69,14 @@
                     {% include molecule('navigation-top-mobile') only %}
                 </div>
             </div>
-            <div class="{{ config.name }}__row {{ config.name }}__navigation-main is-hidden-sm-md">
-                {% widget 'NavigationWidget' args ['MAIN_NAVIGATION_DESKTOP', 'navigation-header'] %}{% endwidget %}
-            </div>
             <div class="{{ config.name }}__navigation-main-mobile is-hidden-lg-xl">
                 {% widget 'NavigationWidget' args ['MAIN_NAVIGATION', 'navigation-header-mobile'] %}{% endwidget %}
             </div>
         {% endif %}
     </div>
+    {% if data.showNavigation %}
+        <div class="{{ config.name }}__row {{ config.name }}__navigation-main is-hidden-sm-md">
+            {% widget 'NavigationWidget' args ['MAIN_NAVIGATION_DESKTOP', 'navigation-header'] %}{% endwidget %}
+        </div>
+    {% endif %}
 {% endblock %}
