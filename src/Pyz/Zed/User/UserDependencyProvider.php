@@ -11,7 +11,6 @@ use Spryker\Zed\Acl\Communication\Plugin\GroupPlugin;
 use Spryker\Zed\AgentGui\Communication\Plugin\UserAgentFormExpanderPlugin;
 use Spryker\Zed\AgentGui\Communication\Plugin\UserAgentTableConfigExpanderPlugin;
 use Spryker\Zed\AgentGui\Communication\Plugin\UserAgentTableDataExpanderPlugin;
-use Spryker\Zed\CustomerUserConnectorGui\Communication\Plugin\UsersTableExpanderPlugin;
 use Spryker\Zed\CustomerUserConnectorGui\Communication\Plugin\UserTableActionExpanderPlugin;
 use Spryker\Zed\Kernel\Container;
 use Spryker\Zed\User\UserDependencyProvider as SprykerUserDependencyProvider;
@@ -38,7 +37,7 @@ class UserDependencyProvider extends SprykerUserDependencyProvider
     protected function getUsersTableExtenderPlugins()
     {
         return [
-            new UsersTableExpanderPlugin(),
+            new UserTableActionExpanderPlugin(),
         ];
     }
 

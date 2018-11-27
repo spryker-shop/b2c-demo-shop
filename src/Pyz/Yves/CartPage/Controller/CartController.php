@@ -29,20 +29,7 @@ class CartController extends SprykerCartController
      */
     public function addAction($sku, $quantity, array $optionValueIds, Request $request)
     {
-        $itemTransfer = new ItemTransfer();
-        $itemTransfer
-            ->setSku($sku)
-            ->setQuantity($quantity);
-
-        $this->addProductOptions($optionValueIds, $itemTransfer);
-
-        $this->getFactory()
-            ->getCartClient()
-            ->addItem($itemTransfer, $request->request->all());
-
-        $this->getFactory()
-            ->getZedRequestClient()
-            ->addFlashMessagesFromLastZedRequest();
+        parent::addAction($sku, $quantity, $optionValueIds, $request);
 
         return $this->redirect($request);
     }
@@ -56,13 +43,7 @@ class CartController extends SprykerCartController
      */
     public function removeAction($sku, $groupKey = null, ?Request $request = null)
     {
-        $this->getFactory()
-            ->getCartClient()
-            ->removeItem($sku, $groupKey);
-
-        $this->getFactory()
-            ->getZedRequestClient()
-            ->addFlashMessagesFromLastZedRequest();
+        parent::removeAction($sku, $groupKey);
 
         return $this->redirect($request);
     }
