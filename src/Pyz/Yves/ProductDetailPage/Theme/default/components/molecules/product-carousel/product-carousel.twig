@@ -1,17 +1,19 @@
-{% extends template('widget') %}
+{% extends model('component') %}
+
+{% define config = {
+    name: 'product-carousel',
+    tag: 'product-carousel'
+} %}
 
 {% define data = {
-    idProductAbstract: _widget.product.idProductAbstract | default,
-    images: _widget.product.images | default([]),
-    amountSlides: 5
+    product: required
 } %}
 
 {% block body %}
-
     {% include molecule('image-gallery', 'ProductImageWidget') with {
         data: {
-            idProductAbstract: data.idProductAbstract,
-            images: data.images
+            idProductAbstract: data.product.idProductAbstract,
+            images: data.product.images | default([])
         },
         attributes: {
             'active-class': 'image-gallery__item--active',
@@ -37,5 +39,5 @@
             }'
         }
     } only %}
-
+    {% widget 'ProductAbstractLabelWidget' args [data.product.idProductAbstract] only %}{% endwidget %}
 {% endblock %}
