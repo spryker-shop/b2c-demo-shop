@@ -1,5 +1,5 @@
 @mixin shop-ui-image-banner($name: '.image-banner') {
-    $image-url: '/assets/images/';
+    $images-folder-path: '/assets/images/';
 
     #{$name} {
         margin: rem(80) 0 rem(132);
@@ -37,7 +37,7 @@
                 height: rem(32);
                 bottom: rem(20);
                 right: rem(24);
-                background: url('#{$image-url}spryker-logo@2x.png') center no-repeat / contain;
+                background: url('#{$images-folder-path}spryker-logo@2x.png') center no-repeat / contain;
 
                 @include helper-breakpoint-media-min($lg-min) {
                     width: rem(130);
@@ -48,7 +48,7 @@
             }
 
             .touch & {
-                background-image: url('#{$image-url}brand-image@3x.jpg');
+                background-image: url('#{$images-folder-path}brand-image@3x.jpg');
                 background-size: cover;
             }
         }
@@ -107,7 +107,7 @@
                 content: '';
                 display: block;
                 position: absolute;
-                background: url('#{$image-url}arrow-white-bold.svg') center no-repeat;
+                background: url('#{$images-folder-path}arrow-white-bold.svg') center no-repeat;
                 width: rem(6);
                 height: rem(9);
                 right: 0;

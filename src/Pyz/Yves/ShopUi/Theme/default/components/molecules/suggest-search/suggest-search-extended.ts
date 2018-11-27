@@ -14,9 +14,9 @@ export default class SuggestSearchExtended extends SuggestSearch {
     }
 
     protected readyCallback(): void {
-        this.searchOverlay = <HTMLElement>document.querySelector(`.${this.jsName}-overlay`);
-        this.overlayOpenButtons = <HTMLElement[]>Array.from(document.querySelectorAll(`.${this.jsName}-show`));
-        this.overlayCloseTriggers = <HTMLElement[]>Array.from(document.querySelectorAll(`.${this.jsName}-hide`));
+        this.searchOverlay = <HTMLElement>document.querySelector(`.${this.jsName}__overlay`);
+        this.overlayOpenButtons = <HTMLElement[]>Array.from(document.querySelectorAll(`.${this.jsName}__show`));
+        this.overlayCloseTriggers = <HTMLElement[]>Array.from(document.querySelectorAll(`.${this.jsName}__hide`));
         super.readyCallback();
     }
 
