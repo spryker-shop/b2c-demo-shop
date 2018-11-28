@@ -7,7 +7,6 @@
 
 namespace Pyz\Yves\CartPage\Controller;
 
-use Generated\Shared\Transfer\ItemTransfer;
 use SprykerShop\Yves\CartPage\Controller\CartController as SprykerCartController;
 use SprykerShop\Yves\CartPage\Plugin\Provider\CartControllerProvider;
 use Symfony\Component\HttpFoundation\Request;

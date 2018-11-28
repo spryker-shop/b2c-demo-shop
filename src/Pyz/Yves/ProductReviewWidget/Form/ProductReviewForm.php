@@ -21,7 +21,6 @@ use Symfony\Component\Validator\Constraints\LessThanOrEqual;
  */
 class ProductReviewForm extends SprykerShopProductReviewForm
 {
-
     /**
      * @return string
      */
