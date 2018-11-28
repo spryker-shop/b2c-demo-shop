@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<database xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:noNamespaceSchemaLocation="http://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\SalesReclamation\Persistence" package="src.Orm.Zed.SalesReclamation.Persistence">
+  <table name="spy_sales_reclamation">
+    <index name="index-spy_sales_reclamation-fk_sales_order">
+      <index-column name="fk_sales_order"/>
+    </index>
+  </table>
+  <table name="spy_sales_reclamation_item">
+    <index name="index-spy_sales_reclamation_item-fk_sales_reclamation">
+      <index-column name="fk_sales_reclamation"/>
+    </index>
+    <index name="index-spy_sales_reclamation_item-fk_sales_order_item">
+      <index-column name="fk_sales_order_item"/>
+    </index>
+  </table>
+</database>
