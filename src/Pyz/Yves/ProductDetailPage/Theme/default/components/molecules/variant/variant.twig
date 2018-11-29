@@ -15,7 +15,7 @@
 
 {% block body %}
     {% embed molecule('toggler-item') with {
-        modifiers: ['with-top-border', 'option'],
+        modifiers: modifiers | merge(['with-top-border', 'option']),
         data: {
             title: data.label,
             isToggler: false,

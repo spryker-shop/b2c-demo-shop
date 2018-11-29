@@ -179,12 +179,6 @@
                 </div>
                 <div class="summary-item__wrap">
                     <h5 class="title title--checkout title--h1">{{ 'checkout.step.summary.total' | trans }}</h5>
-                    {% include molecule('note-list', 'CartNoteWidget') ignore missing with {
-                        data: {
-                            label: 'cart_note.checkout_page.quote_note',
-                            note: data.transfer.cartNote
-                        }
-                    } only %}
                     {% widget 'CheckoutVoucherFormWidget' args [data.transfer] only %}{% endwidget %}
 
                     {% include molecule('summary-overview', 'CheckoutPage') with {
