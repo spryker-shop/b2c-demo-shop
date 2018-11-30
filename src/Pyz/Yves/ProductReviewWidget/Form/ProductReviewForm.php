@@ -7,10 +7,8 @@
 
 namespace Pyz\Yves\ProductReviewWidget\Form;
 
-use Generated\Shared\Transfer\ProductReviewRequestTransfer;
 use SprykerShop\Yves\ProductReviewWidget\Form\ProductReviewForm as SprykerShopProductReviewForm;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -23,15 +21,6 @@ use Symfony\Component\Validator\Constraints\LessThanOrEqual;
  */
 class ProductReviewForm extends SprykerShopProductReviewForm
 {
-    public const FIELD_RATING = ProductReviewRequestTransfer::RATING;
-    public const FIELD_SUMMARY = ProductReviewRequestTransfer::SUMMARY;
-    public const FIELD_DESCRIPTION = ProductReviewRequestTransfer::DESCRIPTION;
-    public const FIELD_NICKNAME = ProductReviewRequestTransfer::NICKNAME;
-    public const FIELD_PRODUCT = ProductReviewRequestTransfer::ID_PRODUCT_ABSTRACT;
-
-    public const UNSELECTED_RATING = -1;
-    public const MINIMUM_RATING = 1;
-
     /**
      * @return string
      */
@@ -170,24 +159,6 @@ class ProductReviewForm extends SprykerShopProductReviewForm
                 'constraints' => [
                     new Length(['min' => 1, 'max' => 255]),
                 ],
-            ]
-        );
-
-        return $this;
-    }
-
-    /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     *
-     * @return $this
-     */
-    protected function addProductField(FormBuilderInterface $builder)
-    {
-        $builder->add(
-            static::FIELD_PRODUCT,
-            HiddenType::class,
-            [
-                'required' => true,
             ]
         );
 
