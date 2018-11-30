@@ -11,6 +11,7 @@ use Pyz\Zed\DataImport\DataImportConfig;
 use Silex\Provider\TwigServiceProvider as SilexTwigServiceProvider;
 use Spryker\Shared\Config\Environment;
 use Spryker\Zed\Cache\Communication\Console\EmptyAllCachesConsole;
+use Spryker\Zed\CategoryDataImport\CategoryDataImportConfig;
 use Spryker\Zed\CodeGenerator\Communication\Console\BundleClientCodeGeneratorConsole;
 use Spryker\Zed\CodeGenerator\Communication\Console\BundleCodeGeneratorConsole;
 use Spryker\Zed\CodeGenerator\Communication\Console\BundleServiceCodeGeneratorConsole;
@@ -143,6 +144,7 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
             new DataImportConsole(),
             new DataImportConsole(DataImportConsole::DEFAULT_NAME . ':' . DataImportConfig::IMPORT_TYPE_STORE),
             new DataImportConsole(DataImportConsole::DEFAULT_NAME . ':' . DataImportConfig::IMPORT_TYPE_CURRENCY),
+            new DataImportConsole(DataImportConsole::DEFAULT_NAME . ':' . CategoryDataImportConfig::IMPORT_TYPE_CATEGORY),
             new DataImportConsole(DataImportConsole::DEFAULT_NAME . ':' . DataImportConfig::IMPORT_TYPE_CATEGORY_TEMPLATE),
             new DataImportConsole(DataImportConsole::DEFAULT_NAME . ':' . DataImportConfig::IMPORT_TYPE_CUSTOMER),
             new DataImportConsole(DataImportConsole::DEFAULT_NAME . ':' . DataImportConfig::IMPORT_TYPE_GLOSSARY),

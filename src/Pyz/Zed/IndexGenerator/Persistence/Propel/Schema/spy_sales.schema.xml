@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<database xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:noNamespaceSchemaLocation="http://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\Sales\Persistence" package="src.Orm.Zed.Sales.Persistence">
+  <table name="spy_sales_order">
+    <index name="index-spy_sales_order-fk_order_source">
+      <index-column name="fk_order_source"/>
+    </index>
+    <index name="index-spy_sales_order-fk_sales_reclamation">
+      <index-column name="fk_sales_reclamation"/>
+    </index>
+    <index name="index-spy_sales_order-fk_sales_order_address_billing">
+      <index-column name="fk_sales_order_address_billing"/>
+    </index>
+    <index name="index-spy_sales_order-fk_sales_order_address_shipping">
+      <index-column name="fk_sales_order_address_shipping"/>
+    </index>
+    <index name="index-spy_sales_order-fk_locale">
+      <index-column name="fk_locale"/>
+    </index>
+  </table>
+  <table name="spy_sales_order_item">
+    <index name="index-spy_sales_order_item-fk_sales_order_item_bundle">
+      <index-column name="fk_sales_order_item_bundle"/>
+    </index>
+    <index name="index-spy_sales_order_item-fk_sales_order">
+      <index-column name="fk_sales_order"/>
+    </index>
+    <index name="index-spy_sales_order_item-fk_oms_order_item_state">
+      <index-column name="fk_oms_order_item_state"/>
+    </index>
+    <index name="index-spy_sales_order_item-fk_oms_order_process">
+      <index-column name="fk_oms_order_process"/>
+    </index>
+  </table>
+  <table name="spy_sales_discount">
+    <index name="index-spy_sales_discount-fk_sales_order">
+      <index-column name="fk_sales_order"/>
+    </index>
+    <index name="index-spy_sales_discount-fk_sales_order_item">
+      <index-column name="fk_sales_order_item"/>
+    </index>
+    <index name="index-spy_sales_discount-fk_sales_expense">
+      <index-column name="fk_sales_expense"/>
+    </index>
+    <index name="index-spy_sales_discount-fk_sales_order_item_option">
+      <index-column name="fk_sales_order_item_option"/>
+    </index>
+  </table>
+  <table name="spy_sales_discount_code">
+    <index name="index-spy_sales_discount_code-fk_sales_discount">
+      <index-column name="fk_sales_discount"/>
+    </index>
+  </table>
+  <table name="spy_sales_order_item_gift_card">
+    <index name="index-spy_sales_order_item_gift_card-fk_sales_order_item">
+      <index-column name="fk_sales_order_item"/>
+    </index>
+  </table>
+  <table name="spy_sales_order_item_option">
+    <index name="index-spy_sales_order_item_option-fk_sales_order_item">
+      <index-column name="fk_sales_order_item"/>
+    </index>
+  </table>
+  <table name="spy_sales_order_address">
+    <index name="index-spy_sales_order_address-fk_country">
+      <index-column name="fk_country"/>
+    </index>
+    <index name="index-spy_sales_order_address-fk_region">
+      <index-column name="fk_region"/>
+    </index>
+  </table>
+  <table name="spy_sales_order_address_history">
+    <index name="index-spy_sales_order_address_history-fk_country">
+      <index-column name="fk_country"/>
+    </index>
+    <index name="index-spy_sales_order_address_history-fk_sales_order_address">
+      <index-column name="fk_sales_order_address"/>
+    </index>
+    <index name="index-spy_sales_order_address_history-fk_region">
+      <index-column name="fk_region"/>
+    </index>
+  </table>
+  <table name="spy_sales_order_totals">
+    <index name="index-spy_sales_order_totals-fk_sales_order">
+      <index-column name="fk_sales_order"/>
+    </index>
+  </table>
+  <table name="spy_sales_order_note">
+    <index name="index-spy_sales_order_note-fk_sales_order">
+      <index-column name="fk_sales_order"/>
+    </index>
+  </table>
+  <table name="spy_sales_order_comment">
+    <index name="index-spy_sales_order_comment-fk_sales_order">
+      <index-column name="fk_sales_order"/>
+    </index>
+  </table>
+  <table name="spy_sales_expense">
+    <index name="index-spy_sales_expense-fk_sales_order">
+      <index-column name="fk_sales_order"/>
+    </index>
+  </table>
+  <table name="spy_sales_shipment">
+    <index name="index-spy_sales_shipment-fk_sales_order">
+      <index-column name="fk_sales_order"/>
+    </index>
+    <index name="index-spy_sales_shipment-fk_sales_expense">
+      <index-column name="fk_sales_expense"/>
+    </index>
+  </table>
+</database>

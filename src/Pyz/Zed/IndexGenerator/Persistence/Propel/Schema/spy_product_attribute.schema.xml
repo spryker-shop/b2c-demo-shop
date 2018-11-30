@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<database xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:noNamespaceSchemaLocation="http://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\ProductAttribute\Persistence" package="src.Orm.Zed.ProductAttribute.Persistence">
+  <table name="spy_product_management_attribute">
+    <index name="index-spy_product_management_attribute-fk_product_attribute_key">
+      <index-column name="fk_product_attribute_key"/>
+    </index>
+  </table>
+  <table name="spy_product_management_attribute_value">
+    <index name="index-spy_product_management_attribute_value-fk_pr-7f614d579abb">
+      <index-column name="fk_product_management_attribute"/>
+    </index>
+  </table>
+  <table name="spy_product_management_attribute_value_translation">
+    <index name="index-spy_product_management_attribute_value_trans-a710a253ee1d">
+      <index-column name="fk_locale"/>
+    </index>
+    <index name="index-spy_product_management_attribute_value_trans-8f14a52f8fbf">
+      <index-column name="fk_product_management_attribute_value"/>
+    </index>
+  </table>
+</database>

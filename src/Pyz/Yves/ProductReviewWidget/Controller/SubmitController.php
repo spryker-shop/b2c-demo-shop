@@ -7,8 +7,9 @@
 
 namespace Pyz\Yves\ProductReviewWidget\Controller;
 
+use Generated\Shared\Transfer\CustomerTransfer;
 use SprykerShop\Yves\ProductReviewWidget\Controller\SubmitController as SprykerSubmitController;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Form\FormInterface;
 
 /**
  * @method \SprykerShop\Yves\ProductReviewWidget\ProductReviewWidgetFactory getFactory()
@@ -16,30 +17,25 @@ use Symfony\Component\HttpFoundation\Request;
 class SubmitController extends SprykerSubmitController
 {
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \Symfony\Component\Form\FormInterface $form
+     * @param \Generated\Shared\Transfer\CustomerTransfer|null $customer
      *
-     * @return array
+     * @return bool Returns true if the review was posted
      */
-    protected function executeIndexAction(Request $request): array
+    protected function processProductReviewForm(FormInterface $form, ?CustomerTransfer $customer = null)
     {
-        $parentRequest = $this->getParentRequest();
-        $idProductAbstract = $request->attributes->get('idProductAbstract');
-
-        $customer = $this->getFactory()->getCustomerClient()->getCustomer();
-        $productReviewForm = $this->getFactory()
-            ->createProductReviewForm($idProductAbstract)
-            ->handleRequest($parentRequest);
-        $isFormEmpty = !$productReviewForm->isSubmitted();
-        $isReviewPosted = $this->processProductReviewForm($productReviewForm, $customer);
-
-        if ($isReviewPosted) {
-            $productReviewForm = $this->getFactory()->createProductReviewForm($idProductAbstract);
-            $this->addSuccessMessage('product_review.submit.success');
+        if (!$form->isSubmitted()) {
+            return false;
         }
 
-        return [
-            'hideForm' => $isFormEmpty || $isReviewPosted,
-            'form' => $productReviewForm->createView(),
-        ];
+        $result = parent::processProductReviewForm($form, $customer);
+
+        if ($result) {
+            $this->addSuccessMessage('product_review.submit.success');
+        } else {
+            $this->addErrorMessage('product_review.submit.error');
+        }
+
+        return $result;
     }
 }
