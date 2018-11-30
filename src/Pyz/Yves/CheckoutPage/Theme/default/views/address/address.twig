@@ -141,14 +141,14 @@
                                         {% for address in existingBillingAddresses %}
                                             <li class="list__item spacing-y">
                                                 {{
-                                                form_row(address, {
-                                                    component: molecule('toggler-radio'),
-                                                    attributes: {
-                                                        'target-selector': '.' ~ embed.parentJsClass,
-                                                        'class-to-toggle': 'is-hidden',
-                                                        'add-class-when-checked': not loop.last
-                                                    }
-                                                })
+                                                    form_row(address, {
+                                                        component: molecule('toggler-radio'),
+                                                        attributes: {
+                                                            'target-selector': '.' ~ embed.parentJsClass,
+                                                            'class-to-toggle': 'is-hidden',
+                                                            'add-class-when-checked': not loop.last
+                                                        }
+                                                    })
                                                 }}
                                             </li>
                                         {% endfor %}
