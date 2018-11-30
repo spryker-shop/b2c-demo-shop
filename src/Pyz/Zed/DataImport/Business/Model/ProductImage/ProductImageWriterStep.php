@@ -30,7 +30,7 @@ class ProductImageWriterStep extends PublishAwareStep implements DataImportStepI
     public const KEY_CONCRETE_SKU = 'concrete_sku';
     public const KEY_EXTERNAL_URL_LARGE = 'external_url_large';
     public const KEY_EXTERNAL_URL_SMALL = 'external_url_small';
-    public const ORDER_IMAGE = 0;
+    public const DEFAULT_IMAGE_SORT_ORDER = 0;
 
     /**
      * @var \Pyz\Zed\DataImport\Business\Model\Locale\Repository\LocaleRepositoryInterface
@@ -151,7 +151,7 @@ class ProductImageWriterStep extends PublishAwareStep implements DataImportStepI
             ->findOneOrCreate();
 
         $productImageSetToProductImageEntity
-            ->setSortOrder(static::ORDER_IMAGE);
+            ->setSortOrder(static::DEFAULT_IMAGE_SORT_ORDER);
 
         if ($productImageSetToProductImageEntity->isNew() || $productImageSetToProductImageEntity->isModified()) {
             $productImageSetToProductImageEntity->save();
