@@ -60,7 +60,7 @@
                                 {% if concreteItem.productOptions is not empty %}
                                     {{ "customer.order.options" | trans }} <br>
                                     {% for productOption in concreteItem.productOptions %}
-                                        &nbsp; - {{ productOption.value | trans }} {{ productOption.sumPrice | money(true, data.currencyIsoCode) }}  <br />
+                                        &nbsp; - {{ productOption.value | trans }} {{ productOption.sumPrice | money(true, data.currencyIsoCode) }}  <br>
                                     {% endfor %}
                                 {% endif %}
                             </td>
