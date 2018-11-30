@@ -14,7 +14,7 @@
         <li class="{{ config.name }}__item">
             {% if (item.images|first).externalUrlSmall is defined %}
                 {% include atom('thumbnail') with {
-                    modifiers: ['cart-bundle'],
+                    modifiers: ['cart-bundle', 'with-overlay'],
                     attributes: {
                         alt: item.name,
                         src: (item.images|first).externalUrlSmall,

@@ -27,8 +27,7 @@
             {% for item in data.items %}
                 {% set isBundle = item.bundleItems is defined %}
                 {% set concreteItem = item.bundleProduct | default(item) %}
-
-                <tr>
+                <tr class="table__tr--with-border">
                     {% block row %}
                         <td>
                             {{ concreteItem.sku }}
@@ -51,14 +50,15 @@
                 {% if isBundle %}
                     <tr>
                         {% block bundleDetailRow %}
-                            <td colspan="5">
-                                {{ "customer.order.bundled_items" | trans }} <br />
+                            <td></td>
+                            <td colspan="4">
+                                {{ "customer.order.bundled_items" | trans }} <br>
                                 {% for bundledItem in item.bundleItems %}
-                                    - {{ bundledItem.quantity }} x {{ bundledItem.name }} <br />
+                                    - {{ bundledItem.quantity }} x {{ bundledItem.name }} <br>
                                 {% endfor %}
 
                                 {% if concreteItem.productOptions is not empty %}
-                                    {{ "customer.order.options" | trans }} <br />
+                                    {{ "customer.order.options" | trans }} <br>
                                     {% for productOption in concreteItem.productOptions %}
                                         &nbsp; - {{ productOption.value | trans }} {{ productOption.sumPrice | money(true, data.currencyIsoCode) }}  <br />
                                     {% endfor %}
@@ -71,9 +71,7 @@
                         {% for productOption in concreteItem.productOptions %}
                             <tr>
                                 {% block detailRow %}
-                                    <td>
-                                        &nbsp; + <small>{{ productOption.sku }}</small>
-                                    </td>
+                                    <td></td>
                                     <td>
                                         <small>{{ productOption.value | trans }}</small>
                                     </td>
@@ -85,19 +83,6 @@
                             </tr>
                         {% endfor %}
                     {% endif %}
-                {% endif %}
-                {% if concreteItem.cartNote is not empty %}
-                    <tr>
-                        <td></td>
-                        <td colspan="5">
-                            {% include molecule('note-list', 'CartNoteWidget') ignore missing with {
-                                data: {
-                                    label: 'cart_note.customer_page.item_note',
-                                    note: concreteItem.cartNote
-                                }
-                            } only %}
-                        </td>
-                    </tr>
                 {% endif %}
             {% endfor %}
         </tbody>

@@ -1,13 +1,18 @@
+/* stylelint-disable */
 @import '../../atoms/radio/radio';
 
 @mixin shop-ui-toggler-radio($name: '.toggler-radio') {
     @include shop-ui-radio($name);
     #{$name} {
+        &__box {
+            width: rem(16);
+            height: rem(16);
+        }
+
         &__input:checked {
             & + #{$name}__box {
-                border: rem(3) solid $setting-color-white;
-                background-color: $setting-color-gray-6;
-                box-shadow: 0 0 0 rem(1) $setting-color-input-border;
+                background-color: $setting-color-main;
+                border-color: $setting-color-main;
             }
         }
 
@@ -24,7 +29,7 @@
             }
 
             #{$name}__box {
-                margin-top: rem(4);
+                margin-top: rem(6);
 
                 &::before {
                     content: '';
@@ -48,9 +53,15 @@
             }
 
             #{$name}__input:checked {
-                & + #{$name}__box::before {
-                    border: none;
-                    background-color: $setting-color-alpha-9;
+                & + #{$name}__box {
+                    border: rem(3) solid $setting-color-white;
+                    background-color: $setting-color-gray-6;
+                    box-shadow: 0 0 0 rem(1) $setting-color-input-border;
+
+                    &::before {
+                        border: none;
+                        background-color: $setting-color-alpha-9;
+                    }
                 }
             }
 

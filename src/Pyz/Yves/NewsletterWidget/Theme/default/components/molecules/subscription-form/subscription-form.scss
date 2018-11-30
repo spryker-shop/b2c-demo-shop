@@ -2,43 +2,15 @@
     #{$name} {
         padding-top: rem(11);
 
-        &__grid {
-            width: 100%;
-            max-width: rem(400);
-            flex-wrap: nowrap;
-            @include helper-breakpoint-media-min($xl-min) {
-                max-width: rem(200);
-            }
-        }
-        &__grid [type='email'] {
-            width: 100%;
-            height: rem(48);
-            border-radius: rem(2) 0 0 rem(2);
-            border: solid rem(1) $setting-color-gray-3;
-            border-right: 0;
-            font-size: rem(16);
-            color: $setting-color-gray-6;
-            &::placeholder {
-                color: $setting-color-gray-3;
-            }
-        }
-        &__button {
-            width: rem(30);
-            height: rem(48);
-            border-radius: 0 rem(2) rem(2) 0;
-            min-width: 0;
-        }
-        &__arrow {
-            width: rem(6);
-            height: rem(9);
-        }
         .form-field {
             margin: 0;
         }
-        & .form-field__error::before {
+
+        .form-field__error::before {
             display: none;
         }
-        & .form-field__error-list,
+
+        .form-field__error-list,
         &__success,
         &__alert {
             padding-top: rem(10);

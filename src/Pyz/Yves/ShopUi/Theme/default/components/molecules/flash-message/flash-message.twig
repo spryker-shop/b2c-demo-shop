@@ -12,13 +12,13 @@
     icon: null
 } %}
 
-{% set modifiers = [data.action] | merge(modifiers | default([])) %}
+{% set modifiers = [data.action] | merge(modifiers | default(['info'])) %}
 
 {% set iconName = data.action is empty ? 'action-default' : 'action-' ~ data.action %}
 {% set iconName = data.icon is empty ? iconName : data.icon %}
 
 {% block body %}
-    <div class="{{config.name}}__message container grid">
+    <div class="{{ component.renderClass(config.name ~ '__message', modifiers) }} container grid">
 
         <div class="col {{config.name}}__content">
             {% if data.title is not empty %}
