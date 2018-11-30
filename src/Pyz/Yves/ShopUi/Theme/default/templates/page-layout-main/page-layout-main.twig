@@ -3,10 +3,6 @@
 {%- block class -%}js-page-layout-main__side-drawer-container{%- endblock -%}
 
 {% block body %}
-    {% block notifications %}
-        {% include organism('notification-area') only %}
-    {% endblock %}
-
     {% block sidebar %}{% endblock %}
 
     {% block outside %}{% endblock %}
@@ -50,5 +46,8 @@
 
     {% block icons %}
         {% include atom('icon-sprite') only %}
+    {% endblock %}
+    {% block notifications %}
+        {% include organism('notification-area') only %}
     {% endblock %}
 {% endblock %}
