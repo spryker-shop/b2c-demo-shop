@@ -27,7 +27,7 @@
             {% for item in data.items %}
                 {% set isBundle = item.bundleItems is defined %}
                 {% set concreteItem = item.bundleProduct | default(item) %}
-                <tr class="table__tr--with-border">
+                <tr class="table__tr table__tr--with-border">
                     {% block row %}
                         <td>
                             {{ concreteItem.sku }}
