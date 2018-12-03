@@ -27,20 +27,18 @@
         &--hide-prev-btn {
             margin-bottom: rem(32);
 
-            #{$name} {
-                &:hover {
-                    @include helper-breakpoint-media-min($md-min) {
-                        .slick-prev {
-                            @include helper-visibility-visible;
-                        }
+            &:hover {
+                @include helper-breakpoint-media-min($md-min) {
+                    .slick-prev {
+                        @include helper-visibility-visible;
                     }
                 }
+            }
 
-                .slick-prev {
-                    @include helper-breakpoint-media-min($md-min) {
-                        @include helper-effect-transition;
-                        @include helper-visibility-invisible;
-                    }
+            .slick-prev {
+                @include helper-breakpoint-media-min($md-min) {
+                    @include helper-effect-transition;
+                    @include helper-visibility-invisible;
                 }
             }
         }

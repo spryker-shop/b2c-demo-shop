@@ -35,7 +35,7 @@
                 {% set currentUrl = url(data.filterPath, {categoryPath: (app.request.attributes.get('categoryNode').url)}) %}
             {% else %}
                 {% set categoryUrl = categoryNode.url | replace({"'": "\\'", '"':'\\"'}) %}
-                {% set currentUrl = app.request.attributes.get('categoryNode').url %}
+                {% set currentUrl = app.request.attributes.get('categoryNode') is not null ? app.request.attributes.get('categoryNode').url : null %}
             {% endif %}
 
             {% set isActive = currentUrl == categoryUrl %}

@@ -24,7 +24,7 @@
             </thead>
             <tbody>
                 {% for order in data.orders %}
-                    <tr class="table__tr--with-border">
+                    <tr class="table__tr table__tr--with-border">
                         <td>{{ order.orderReference }}</td>
                         <td>{{ date(order.createdAt) | formatDateTime }}</td>
                         <td>{{ order.totals.grandTotal | default(0) | money(true, order.currencyIsoCode) }}</td>
