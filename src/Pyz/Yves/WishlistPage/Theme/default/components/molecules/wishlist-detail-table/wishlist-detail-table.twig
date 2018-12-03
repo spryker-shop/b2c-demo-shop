@@ -27,7 +27,7 @@
                         {% set imageUrl = item.images[0].externalUrlSmall %}
                         {% if imageUrl %}
                             {% include atom('thumbnail') with {
-                                modifiers: ['small', 'min-size', 'wishlist'],
+                                modifiers: ['min-size', 'wishlist'],
                                 attributes: {
                                     alt: item.name,
                                     src: imageUrl,
