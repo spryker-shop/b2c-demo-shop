@@ -19,16 +19,16 @@
                     <th>{{ 'customer.order.order_id' | trans }}</th>
                     <th>{{ 'customer.order.date' | trans }}</th>
                     <th>{{ 'customer.order.total' | trans }}</th>
-                    <th>{{ 'customer.table.actions' | trans }}</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 {% for order in data.orders %}
-                    <tr>
+                    <tr class="table__tr table__tr--with-border">
                         <td>{{ order.orderReference }}</td>
                         <td>{{ date(order.createdAt) | formatDateTime }}</td>
                         <td>{{ order.totals.grandTotal | default(0) | money(true, order.currencyIsoCode) }}</td>
-                        <td>
+                        <td class="text-right">
                             <ul class="menu menu--inline menu--customer-account menu--order-table">
                                 <li class="menu__item">
                                     <a class="menu__link" href="{{ path('customer/order/details', {'id': order.idSalesOrder}) }}">

@@ -25,7 +25,7 @@
                 text-decoration: none;
                 color: $setting-color-black;
 
-                #{$name}__thumbnail {
+                #{$name}__image-wrap {
                     box-shadow: rem(10) rem(10) rem(40) 0 $setting-color-shadow;
                 }
 
@@ -42,12 +42,12 @@
         &__image-wrap {
             @include helper-effect-transition(box-shadow);
             border-radius: rem(4);
-            margin-bottom: rem(24);
+            margin-bottom: rem(9);
             position: relative;
             overflow: hidden;
 
             @include helper-breakpoint-media-min($md-min) {
-                margin-bottom: rem(9);
+                margin-bottom: rem(24);
             }
         }
 

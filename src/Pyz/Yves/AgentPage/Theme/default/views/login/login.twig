@@ -9,9 +9,10 @@
 {% block pageInfo %}{% endblock %}
 
 {% block content %}
-    <div class="customer-account customer-account--login-wrap">
-        <div class="customer-account__form-width">
+    <div class="page-layout-customer page-layout-customer--login-wrap">
+        <div class="page-layout-customer__form-wrap">
             {% include molecule('form') with {
+                modifiers: ['grid-indent', 'login', 'checkout-actions'],
                 data: {
                     title: 'agent.login.title' | trans,
                     form: data.forms.login,
