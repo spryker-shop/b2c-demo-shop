@@ -18,19 +18,15 @@ use Spryker\Shared\EventBehavior\EventBehaviorConstants;
 use Spryker\Shared\EventJournal\EventJournalConstants;
 use Spryker\Shared\FileSystem\FileSystemConstants;
 use Spryker\Shared\Flysystem\FlysystemConstants;
-use Spryker\Shared\GlueApplication\GlueApplicationConstants;
 use Spryker\Shared\Kernel\ClassResolver\Cache\Provider\File;
 use Spryker\Shared\Kernel\KernelConstants;
 use Spryker\Shared\Kernel\Store;
 use Spryker\Shared\Log\LogConstants;
-use Spryker\Shared\Oauth\OauthConstants;
-use Spryker\Shared\OauthCustomerConnector\OauthCustomerConnectorConstants;
 use Spryker\Shared\NewRelic\NewRelicConstants;
 use Spryker\Shared\Oms\OmsConstants;
 use Spryker\Shared\Propel\PropelConstants;
 use Spryker\Shared\Queue\QueueConfig;
 use Spryker\Shared\Queue\QueueConstants;
-use Spryker\Shared\Quote\QuoteConstants;
 use Spryker\Shared\Sales\SalesConstants;
 use Spryker\Shared\Search\SearchConstants;
 use Spryker\Shared\SequenceNumber\SequenceNumberConstants;
@@ -421,20 +417,3 @@ $config[LogglyConstants::TOKEN] = 'loggly-token:sample:123456';
 
 // -------- DataImport
 $config[DataImportConstants::IS_ENABLE_INTERNAL_IMAGE] = false;
-
-// ----------- Glue Application
-$config[GlueApplicationConstants::GLUE_APPLICATION_DOMAIN] = '';
-$config[GlueApplicationConstants::GLUE_APPLICATION_REST_DEBUG] = false;
-
-// ----------- OAUTH
-//Check how to generate https://oauth2.thephpleague.com/installation/
-$config[OauthConstants::PRIVATE_KEY_PATH] = 'file://';
-$config[OauthConstants::PUBLIC_KEY_PATH] = 'file://';
-$config[OauthConstants::ENCRYPTION_KEY] = '';
-
-// ----------- AuthRestApi
-$config[OauthCustomerConnectorConstants::OAUTH_CLIENT_IDENTIFIER] = '';
-$config[OauthCustomerConnectorConstants::OAUTH_CLIENT_SECRET] = '';
-
-// ---------- Guest cart
-$config[QuoteConstants::GUEST_QUOTE_LIFETIME] = 'P01M';
