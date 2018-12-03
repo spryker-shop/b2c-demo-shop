@@ -1,38 +1,62 @@
-{% extends template('page-layout-home','HomePage') %}
+{% extends template('page-layout-main') %}
+
+{% block header %}
+    {% embed organism('header') with {
+        modifiers: ['border-bottom-less']
+    } only %}
+        {% block mobile %}
+            <a href="#" class="link link--alt js-page-layout-main__side-drawer-trigger">
+                {% include atom('icon') with {
+                    modifiers: ['big'],
+                    data: {
+                        name: 'bars'
+                    }
+                } only %}
+            </a>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
 
 {% block pageInfo %}{% endblock %}
 
-{% block content %}
+{% block container %}
+    {% include organism('jumbotron-slider') only %}
 
-    {{ spyCmsBlock({
-        name: 'Inspirational block for Cameras'
-    }) }}
+    <div class="container container--home-page">
+        <main>
+            {% block content %}
+                {{ spyCmsBlock({
+                    name: 'Inspirational block for Cameras'
+                }) }}
 
-    {{ spyCmsBlock({
-        name: 'Inspirational block for Accessories 1'
-    }) }}
+                {{ spyCmsBlock({
+                    name: 'Inspirational block for Accessories 1'
+                }) }}
 
-    {{ spyCmsBlock({
-        name: 'Home page camcorders'
-    }) }}
+                {{ spyCmsBlock({
+                    name: 'Home page camcorders'
+                }) }}
 
-    {{ spyCmsBlock({
-        name: 'Inspirational block for Samsung'
-    }) }}
+                {{ spyCmsBlock({
+                    name: 'Inspirational block for Samsung'
+                }) }}
 
-    {{ spyCmsBlock({
-        name: 'Inspirational block for Accessories 2'
-    }) }}
+                {{ spyCmsBlock({
+                    name: 'Inspirational block for Accessories 2'
+                }) }}
 
-    {{ spyCmsBlock({
-        name: 'Teaser with img home page'
-    }) }}
+                {{ spyCmsBlock({
+                    name: 'Teaser with img home page'
+                }) }}
 
-    {{ spyCmsBlock({
-        name: 'Home page smartphones'
-    }) }}
+                {{ spyCmsBlock({
+                    name: 'Home page smartphones'
+                }) }}
 
-    {{ spyCmsBlock({
-        name: 'Quote home page'
-    }) }}
+                {{ spyCmsBlock({
+                    name: 'Quote home page'
+                }) }}
+            {% endblock %}
+        </main>
+    </div>
 {% endblock %}

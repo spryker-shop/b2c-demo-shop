@@ -28,7 +28,7 @@
                 width: 100%;
 
                 @include helper-breakpoint-media-min($lg-min) {
-                    max-width: rem(850);
+                    max-width: rem(870);
                 }
 
                 &::before {
@@ -39,7 +39,7 @@
                     height: rem(312);
                     border-left: rem(1) dotted $setting-color-gray-3;
                     top: rem(40);
-                    left: 30%;
+                    left: 34%;
                 }
             }
 
@@ -116,7 +116,7 @@
             }
 
             &--flyout {
-                max-width: 27%;
+                max-width: 30%;
                 white-space: normal;
             }
 
@@ -125,12 +125,17 @@
                     font-size: rem(16);
                     color: $setting-color-black;
                     letter-spacing: rem(0.2);
-                    line-height: rem(28);
+                    line-height: rem(20);
                     white-space: normal;
+                    display: inline-block;
+                    padding-top: rem(4);
+                    padding-bottom: rem(4);
 
                     @include helper-breakpoint-media-min($xl-min) {
                         font-size: rem(18);
-                        line-height: rem(35);
+                        line-height: rem(22);
+                        padding-top: rem(7);
+                        padding-bottom: rem(7);
                     }
 
                     &:hover {
@@ -146,6 +151,13 @@
                     background-size: cover;
                     margin-bottom: rem(10);
                     height: 100%;
+                    padding: 0;
+                    line-height: rem(28);
+
+                    @include helper-breakpoint-media-min($xl-min) {
+                        padding: 0;
+                        line-height: rem(35);
+                    }
 
                     &::before {
                         content: '';
@@ -206,6 +218,7 @@
             height: rem(101);
             width: rem(162);
             margin: 0 rem(8);
+            background-size: cover;
 
             @include helper-breakpoint-media-min($lg-min) {
                 width: rem(216);

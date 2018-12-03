@@ -10,6 +10,7 @@
 
 {% block body %}
     {% embed molecule('toggler-item') with {
+        modifiers: ['filter'],
         data: {
             title: 'cart.voucher-title' | trans,
             triggerClass: config.jsName ~ '__trigger',

@@ -23,7 +23,7 @@
             <tbody>
             {% for wishlist in data.wishlists %}
                 {% set hasWishlistForm = data.wishlistForm is not empty and wishlist.idWishlist == data.wishlistForm.vars.data.idWishlist %}
-                <tr>
+                <tr class="table__tr--with-border">
                     <td>
                         {% if hasWishlistForm %}
                             {{ form_start(data.wishlistForm) }}

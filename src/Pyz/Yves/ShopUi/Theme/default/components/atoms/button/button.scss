@@ -4,21 +4,15 @@
     #{$name} {
         @include helper-effect-transition(all);
         display: inline-block;
-        padding: rem(8);
+        padding: rem(15) rem(16);
         background-color: $setting-color-black;
         border: none;
         border-radius: rem(2);
-        min-width: rem(92);
+        min-width: $button-min-width;
         color: $setting-color-white;
         text-align: center;
-        font: fw(medium) rem(8) $setting-font-family-additional;
+        font: fw(medium) rem(14)/rem(18) $setting-font-family-additional;
         cursor: pointer;
-
-        @include helper-breakpoint-media-min($lg-min) {
-            font-size: rem(14);
-            padding: rem(15) rem(16);
-            min-width: $button-min-width;
-        }
 
         &:hover,
         &:focus {
@@ -74,11 +68,11 @@
         }
 
         &--quantity {
-            border: rem(1) solid $setting-color-gray-3;
+            border: rem(1) solid $setting-color-gray-4;
             border-radius: 50%;
             font: fw(light) rem(16)/rem(17) $setting-font-family-additional;
             background-color: $setting-color-transparent;
-            color: $setting-color-gray-3;
+            color: $setting-color-gray-4;
             padding: 0;
             width: rem(20);
             height: rem(20);
@@ -127,10 +121,7 @@
             background-color: $setting-color-white;
             border: rem(1) solid $setting-color-black;
             color: $setting-color-black;
-
-            @include helper-breakpoint-media-min($lg-min) {
-                padding: rem(14) rem(16);
-            }
+            padding: rem(14) rem(16);
 
             &[disabled],
             &--disabled {
@@ -179,19 +170,21 @@
             font-size: rem(13);
         }
 
+        &--combined-small {
+            min-width: 0;
+            padding-left: rem(12);
+            padding-right: rem(12);
+        }
+
         &--expand {
             width: 100%;
         }
 
         &--large {
-            padding: rem(12);
+            padding: rem(18);
             font-weight: fw(medium);
-            font-size: rem(10);
-
-            @include helper-breakpoint-media-min($lg-min) {
-                padding: rem(18);
-                font-size: rem(16);
-            }
+            font-size: rem(16);
+            line-height: rem(20);
         }
 
         &--search {

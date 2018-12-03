@@ -1,31 +1,37 @@
 @mixin cart-page-layout-cart($name: '.page-layout-cart') {
     #{$name} {
+        padding-bottom: rem(50);
+
+        @include helper-breakpoint-media-min($lg-min) {
+            padding-bottom: rem(180);
+        }
+
         &__empty {
             margin-top: rem(48);
-            margin-bottom: rem(100);
+            margin-bottom: rem(50);
 
             @include helper-breakpoint-media-min($lg-min) {
-                margin-bottom: rem(180);
+                margin-bottom: 0;
             }
         }
 
         &__col {
-            padding: rem(20) 0 rem(50);
+            padding: rem(20) 0 0;
 
             @include helper-breakpoint-media-min($lg-min) {
-                padding: rem(60) 0 rem(180);
+                padding-top: rem(60);
             }
 
             &--content {
                 @include helper-breakpoint-media-min($lg-min) {
                     padding-right: rem(100);
-                    border-right: rem(1) dotted $setting-color-gray-3;
                 }
             }
 
             &--sidebar {
                 @include helper-breakpoint-media-min($lg-min) {
                     padding-left: rem(20);
+                    border-left: rem(1) dotted $setting-color-gray-3;
                 }
             }
         }

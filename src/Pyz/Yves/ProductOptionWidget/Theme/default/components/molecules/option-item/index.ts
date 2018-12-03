@@ -1,1 +1,0 @@
-import './option-item.scss';
