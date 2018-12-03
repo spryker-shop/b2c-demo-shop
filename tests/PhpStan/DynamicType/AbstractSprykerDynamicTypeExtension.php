@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of the Spryker Suite.
+ * This file is part of the Spryker Commerce OS.
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
@@ -56,7 +56,7 @@ abstract class AbstractSprykerDynamicTypeExtension implements DynamicMethodRetur
         preg_match_all('#@method\s+(?:(?P<IsStatic>static)\s+)?(?:(?P<Type>[^\(\*]+?)(?<!\|)\s+)?(?P<MethodName>[a-zA-Z0-9_]+)(?P<Parameters>(?:\([^\)]*\))?)#', $docComment, $matches, PREG_SET_ORDER);
 
         foreach ($matches as $match) {
-            if ($match['MethodName'] === $methodCall->name) {
+            if ($match['MethodName'] === $methodCall->name->name) {
                 return new ObjectType($match['Type']);
             }
         }

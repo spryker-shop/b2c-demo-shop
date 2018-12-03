@@ -43,12 +43,14 @@
                 {% endblock %}
 
                 {% block labels %}
-                    {{ widget('ProductAbstractLabelWidgetPlugin', embed.idProductAbstract) }}
+                    {% widget 'ProductAbstractLabelWidget' args [embed.idProductAbstract] only %}{% endwidget %}
                 {% endblock %}
 
                 {% block groups %}
-                    {{ widget('ProductGroupWidgetPlugin', embed.idProductAbstract) }}
+                    {% widget 'ProductGroupWidget' args [embed.idProductAbstract] only %}{% endwidget %}
                 {% endblock %}
+
+                {% block bundles %}{% endblock %}
 
                 {% block actions %}
                     {% set disabled = embed.idProductConcrete is empty %}

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of the Spryker Suite.
+ * This file is part of the Spryker Commerce OS.
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
@@ -12,11 +12,11 @@ use Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface;
 
 class ProductSetImageExtractorStep implements DataImportStepInterface
 {
-    const KEY_TARGET = 'productImageSets';
+    public const KEY_TARGET = 'productImageSets';
 
-    const IMAGE_SET_KEY_PREFIX = 'image_set.';
-    const IMAGE_SMALL_KEY_PREFIX = 'image_small.';
-    const IMAGE_LARGE_KEY_PREFIX = 'image_large.';
+    public const IMAGE_SET_KEY_PREFIX = 'image_set.';
+    public const IMAGE_SMALL_KEY_PREFIX = 'image_small.';
+    public const IMAGE_LARGE_KEY_PREFIX = 'image_large.';
 
     /**
      * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet

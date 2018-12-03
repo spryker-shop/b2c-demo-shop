@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<database xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:noNamespaceSchemaLocation="http://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\GiftCard\Persistence" package="src.Orm.Zed.GiftCard.Persistence">
+  <table name="spy_gift_card_product_abstract_configuration_link">
+    <index name="index-spy_gift_card_product_abstract_configuration-ea801cb20841">
+      <index-column name="fk_product_abstract"/>
+    </index>
+    <index name="index-spy_gift_card_product_abstract_configuration-5c47cd7f57d8">
+      <index-column name="fk_gift_card_product_abstract_configuration"/>
+    </index>
+  </table>
+  <table name="spy_gift_card_product_configuration_link">
+    <index name="index-spy_gift_card_product_configuration_link-fk_product">
+      <index-column name="fk_product"/>
+    </index>
+    <index name="index-spy_gift_card_product_configuration_link-fk_-b6cecefc1da0">
+      <index-column name="fk_gift_card_product_configuration"/>
+    </index>
+  </table>
+  <table name="spy_payment_gift_card">
+    <index name="index-spy_payment_gift_card-fk_sales_payment">
+      <index-column name="fk_sales_payment"/>
+    </index>
+  </table>
+</database>

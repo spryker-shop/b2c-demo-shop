@@ -25,15 +25,15 @@
         &__message {
             padding: rem(20) rem(16);
             color: $setting-color-white;
+
+            &--info {
+                color: $setting-color-black;
+            }
         }
 
         &--show {
             @include helper-visibility-visible;
             max-height: rem(128);
-        }
-
-        &--info {
-            color: $setting-color-black;
         }
 
         @each $action, $setting-color-action in $setting-color-actions {

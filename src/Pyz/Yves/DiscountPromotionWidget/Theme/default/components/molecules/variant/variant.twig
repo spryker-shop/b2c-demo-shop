@@ -47,7 +47,7 @@
             {{ 'product.attribute.not_available' | trans }}
         {% endif %}
     {% else %}
-        <span class="spacing-x spacing-x--big">{{data.selectedValue}}</span> <a href="?">{{ 'Reset' | trans }}</a>
+        <span class="spacing-x spacing-x--big">{{data.selectedValue}}</span> <a class="link link--darkest link--edit" href="?">{{- 'product.attribute.variant.reset' | trans -}}</a>
         <input type="hidden" name="{{data.formName}}" value="{{data.selectedValue}}" />
     {% endif %}
 {% endblock %}

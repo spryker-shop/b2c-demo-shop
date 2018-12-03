@@ -1,13 +1,13 @@
 <?php
 
 /**
- * This file is part of the Spryker Suite.
+ * This file is part of the Spryker Commerce OS.
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace Orm\Zed\CustomerAccessStorage\Persistence;
 
-use Orm\Zed\CustomerAccessStorage\Persistence\Base\SpyUnauthenticatedCustomerAccessStorageQuery as BaseSpyUnauthenticatedCustomerAccessStorageQuery;
+use Spryker\Zed\CustomerAccessStorage\Persistence\Propel\AbstractSpyUnauthenticatedCustomerAccessStorageQuery;
 
 /**
  * Skeleton subclass for performing query and update operations on the 'spy_unauthenticated_customer_access_storage' table.
@@ -19,6 +19,6 @@ use Orm\Zed\CustomerAccessStorage\Persistence\Base\SpyUnauthenticatedCustomerAcc
  * long as it does not already exist in the output directory.
  *
  */
-class SpyUnauthenticatedCustomerAccessStorageQuery extends BaseSpyUnauthenticatedCustomerAccessStorageQuery
+class SpyUnauthenticatedCustomerAccessStorageQuery extends AbstractSpyUnauthenticatedCustomerAccessStorageQuery
 {
 }

@@ -62,7 +62,7 @@
 
         <div class="col--lg-6 col--sm-12">
             <div class="box">
-                {{ widget('NewsletterSubscriptionSummaryWidgetPlugin', data.customer) }}
+                {% widget 'NewsletterSubscriptionSummaryWidget' args [data.customer] only %}{% endwidget %}
             </div>
         </div>
 

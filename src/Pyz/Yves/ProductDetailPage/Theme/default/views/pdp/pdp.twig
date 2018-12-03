@@ -6,7 +6,7 @@
 
     cart: _view.cart,
     isBundle: _view.product.attributes.bundled_product | default(null),
-    bundleItems: _view.bundledProducts,
+    bundleItems: _view.product.bundledProducts,
 
     title: product.metaTitle | default(_view.product.name),
     metaTitle: product.metaTitle | default(_view.product.name),
@@ -18,7 +18,22 @@
     {{ parent() }}
     <link itemprop="url" href="{{ data.productUrl }}">
 {% endblock %}
-
+{% block header %}
+    {% embed organism('header') with {
+        modifiers: ['border-less-bottom']
+    } only %}
+        {% block mobile %}
+            <a href="#" class="link link--alt js-page-layout-main__side-drawer-trigger">
+                {% include atom('icon') with {
+                    modifiers: ['big'],
+                    data: {
+                        name: 'bars'
+                    }
+                } only %}
+            </a>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
 {% block pageInfo %}{% endblock %}
 {% block contentClass %} page-layout-main {% endblock %}
 {% block content %}
@@ -60,21 +75,25 @@
     {% endif %}
 
     <div class="container__inner">
-        {{ widget('ProductReviewWidgetPlugin', data.product.idProductAbstract) }}
+        {% widget 'ProductDetailPageReviewWidget' args [data.product.idProductAbstract] only %}{% endwidget %}
     </div>
 
     {% if data.product.productSetIds is not empty %}
-        {{ widget('ProductSetIdsWidgetPlugin', data.product.productSetIds) }}
+        {% widget 'ProductSetIdsWidget' args [data.product.productSetIds] only %}{% endwidget %}
     {% endif %}
 
-    {{ widget('UpSellingProductsWidgetPlugin', data.cart) }}
-    {{ widget('SimilarProductsWidgetPlugin', data.product) }}
+    {% widget 'UpSellingProductsWidget' args [data.cart] only %}{% endwidget %}
+    {% widget 'SimilarProductsWidget' args [data.product] only %}{% endwidget %}
 
     <div class="container__inner">
-        {{ widget('ProductCmsBlockWidgetPlugin', data.product) }}
-
+        {% include molecule('product-cms-block', 'CmsBlockWidget') ignore missing with {
+            class: 'box',
+            data: {
+                idProductAbstract: data.product.idProductAbstract
+            }
+        } only %}
         {% block breadcrumbs %}
-            {{ widget('ProductCategoryWidgetPlugin', data.product, app.locale) }}
+            {% widget 'ProductBreadcrumbsWithCategoriesWidget' args [data.product] only %}{% endwidget %}
         {% endblock %}
     </div>
 {% endblock %}

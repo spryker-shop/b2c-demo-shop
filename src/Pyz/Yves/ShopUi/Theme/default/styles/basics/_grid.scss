@@ -167,5 +167,11 @@
         &--no-wrap {
             flex-wrap: nowrap;
         }
+
+        &--desktop-no-wrap {
+            @include helper-breakpoint-media-min($md-min) {
+                flex-wrap: nowrap;
+            }
+        }
     }
 }

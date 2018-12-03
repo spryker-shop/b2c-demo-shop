@@ -6,23 +6,6 @@
             padding: rem(120) rem(24) rem(40);
         }
 
-        &__item {
-            border-bottom: dotted rem(1) $setting-color-gray-3;
-
-            &:first-child {
-                border-top: dotted rem(1) $setting-color-gray-3;
-
-                @include helper-breakpoint-media-min($xl-min) {
-                    #{$name}__title {
-                        &::before,
-                        &::after {
-                            display: none;
-                        }
-                    }
-                }
-            }
-        }
-
         &__title {
             text-transform: uppercase;
             font: bold rem(13) $setting-font-family-additional;
@@ -77,8 +60,8 @@
                 left: 0;
                 width: 100%;
                 background: $setting-color-gray-1;
+                border-top: none;
                 padding: rem(20) rem(24);
-                margin: 0;
             }
         }
 

@@ -26,7 +26,7 @@
                 {% endblock %}
 
                 {% block externalUrl %}
-                    <a href="{{ data.node.url }}" target="_blank">{{ data.node.title }}</a>
+                    <a class="{{ component.renderClass(config.name ~ '__link', modifiers) }}" href="{{ data.node.url }}" target="_blank">{{ data.node.title }}</a>
                 {% endblock %}
 
                 {% block other %}

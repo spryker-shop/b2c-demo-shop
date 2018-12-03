@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of the Spryker Suite.
+ * This file is part of the Spryker Commerce OS.
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
@@ -13,8 +13,8 @@ use Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface;
 
 class CmsTemplateWriterStep implements DataImportStepInterface
 {
-    const KEY_TEMPLATE_NAME = 'template_name';
-    const KEY_TEMPLATE_PATH = 'template_path';
+    public const KEY_TEMPLATE_NAME = 'template_name';
+    public const KEY_TEMPLATE_PATH = 'template_path';
 
     /**
      * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet

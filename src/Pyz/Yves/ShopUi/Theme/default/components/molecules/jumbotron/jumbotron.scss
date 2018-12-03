@@ -1,7 +1,8 @@
 @mixin shop-ui-jumbotron($name: '.jumbotron') {
     #{$name} {
         height: rem(256);
-        background: linear-gradient(to left top, $setting-color-gray-3, $setting-color-gray-4) no-repeat center / cover;
+        background: linear-gradient(to left top, $setting-color-gray-3, $setting-color-gray-4) no-repeat center;
+        background-size: cover;
         text-align: center;
         position: relative;
 
@@ -14,7 +15,7 @@
         }
 
         &--category {
-            background-color: $setting-color-white;
+            background: $setting-color-white;
             height: auto;
         }
 

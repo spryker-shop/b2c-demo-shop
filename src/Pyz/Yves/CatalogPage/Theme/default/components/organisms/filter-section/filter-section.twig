@@ -24,7 +24,7 @@
                     triggerClass: loop.first ? '' : config.jsName ~ '__trigger',
                     targetClass: loop.first ? '' : config.jsName ~ '__target--' ~ filter.name,
                     isToggler: loop.first ? false : true,
-                    isTogglerIncluded: loop.last ? true : false
+                    isTogglerIncluded: false
                 },
                 embed: {
                     filterPath: data.filterPath,
@@ -52,6 +52,11 @@
             {% endembed %}
         {% endif %}
     {% endfor %}
+    {% include molecule('toggler-accordion') with {
+        attributes: {
+            trigger: '.' ~ config.jsName ~ '__trigger',
+        }
+    } only %}
     <div class="grid grid--justify grid--middle {{ config.name }}__actions">
         <span class="col {{ config.name }}__close-popup {{ data.togglerClass }}">
             {% include atom('icon') with {

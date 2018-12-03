@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of the Spryker Suite.
+ * This file is part of the Spryker Commerce OS.
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
@@ -14,12 +14,12 @@ use Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface;
 
 class ShipmentWriterStep implements DataImportStepInterface
 {
-    const COL_CARRIER = 'carrier';
-    const COL_SHIPMENT_METHOD_KEY = 'shipment_method_key';
-    const COL_NAME = 'name';
-    const COL_ID_TAX_SET = 'idTaxSet';
+    public const COL_CARRIER = 'carrier';
+    public const COL_SHIPMENT_METHOD_KEY = 'shipment_method_key';
+    public const COL_NAME = 'name';
+    public const COL_ID_TAX_SET = 'idTaxSet';
 
-    const BULK_SIZE = 100;
+    public const BULK_SIZE = 100;
 
     /**
      * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet

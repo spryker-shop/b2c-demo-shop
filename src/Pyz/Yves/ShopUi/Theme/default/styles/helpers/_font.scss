@@ -6,18 +6,18 @@
     letter-spacing: map-get($setting-font-letter-spacing, $spacing);
 }
 
-@mixin helper-font-half-letter-spacing($spacing) {
-    letter-spacing: map-get($setting-font-letter-spacing, $spacing) / 2;
+@mixin helper-font-reduced-letter-spacing($spacing) {
+    letter-spacing: map-get($setting-font-letter-spacing, $spacing) / 1.35;
 }
 
-@mixin helper-half-font-size($size) {
-    font-size: map-get($setting-font-size, $size) / 2;
+@mixin helper-reduced-font-size($size) {
+    font-size: map-get($setting-font-size, $size) / 1.35;
 }
 
 @mixin helper-heading($size) {
     font-family: $setting-font-family-additional;
-    @include helper-half-font-size($size);
-    @include helper-font-half-letter-spacing($size);
+    @include helper-reduced-font-size($size);
+    @include helper-font-reduced-letter-spacing($size);
     @include helper-font-line-height($size);
     font-weight: fw(bold);
     display: block;

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of the Spryker Suite.
+ * This file is part of the Spryker Commerce OS.
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
@@ -32,7 +32,7 @@ class SaleController extends AbstractController
         if ($categoryPath) {
             $categoryNode = $this->getCategoryNode($categoryPath);
 
-            $parameters['category'] = $categoryNode['data']['node_id'];
+            $parameters['category'] = $categoryNode['node_id'];
         }
 
         $searchResults = $this
@@ -47,7 +47,7 @@ class SaleController extends AbstractController
 
         return $this->view(
             $searchResults,
-            $this->getFactory()->getExampleProductSalePageWidgetPlugins(),
+            [],
             '@ExampleProductSalePage/views/sale-example/sale-example.twig'
         );
     }
@@ -76,6 +76,6 @@ class SaleController extends AbstractController
             ));
         }
 
-        return $categoryNode;
+        return $categoryNode['data'];
     }
 }

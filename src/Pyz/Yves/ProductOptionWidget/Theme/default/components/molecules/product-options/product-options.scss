@@ -1,0 +1,16 @@
+@mixin product-option-widget-product-options($name: '.product-options') {
+    #{$name} {
+        &__item {
+            margin-bottom: rem(20);
+
+            &:not(:first-child) {
+                border-top: rem(1) dotted $setting-color-gray-3;
+                padding-top: rem(18);
+            }
+        }
+
+        @content;
+    }
+}
+
+@include product-option-widget-product-options();

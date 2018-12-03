@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<database xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:noNamespaceSchemaLocation="http://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\Availability\Persistence" package="src.Orm.Zed.Availability.Persistence">
+  <table name="spy_availability_abstract">
+    <index name="index-spy_availability_abstract-fk_store">
+      <index-column name="fk_store"/>
+    </index>
+  </table>
+  <table name="spy_availability">
+    <index name="index-spy_availability-fk_availability_abstract">
+      <index-column name="fk_availability_abstract"/>
+    </index>
+    <index name="index-spy_availability-fk_store">
+      <index-column name="fk_store"/>
+    </index>
+  </table>
+</database>
