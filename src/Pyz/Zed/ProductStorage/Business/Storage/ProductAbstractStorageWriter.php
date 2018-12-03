@@ -26,7 +26,7 @@ class ProductAbstractStorageWriter extends SprykerProductAbstractStorageWriter
         ProductAbstractStorageTransfer $productAbstractStorageTransfer,
         array $attributeMapBulk = []
     ) {
-        $productAbstractStorageTransfer = parent::mapToProductAbstractStorageTransfer($productAbstractLocalizedEntity, $productAbstractStorageTransfer);
+        $productAbstractStorageTransfer = parent::mapToProductAbstractStorageTransfer($productAbstractLocalizedEntity, $productAbstractStorageTransfer, $attributeMapBulk);
 
         $productAbstractStorageTransfer->setProductSetIds([]);
 

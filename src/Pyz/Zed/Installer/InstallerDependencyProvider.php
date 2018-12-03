@@ -13,6 +13,7 @@ use Spryker\Zed\Glossary\Communication\Plugin\GlossaryInstallerPlugin;
 use Spryker\Zed\Installer\InstallerDependencyProvider as SprykerInstallerDependencyProvider;
 use Spryker\Zed\Locale\Communication\Plugin\LocaleInstallerPlugin;
 use Spryker\Zed\Newsletter\Communication\Plugin\NewsletterInstallerPlugin;
+use Spryker\Zed\OauthCustomerConnector\Communication\Plugin\Installer\OauthCustomerInstallerPlugin;
 use Spryker\Zed\PriceProduct\Communication\Plugin\PriceInstallerPlugin;
 use Spryker\Zed\User\Communication\Plugin\UserInstallerPlugin;
 
@@ -31,6 +32,7 @@ class InstallerDependencyProvider extends SprykerInstallerDependencyProvider
             new AclInstallerPlugin(),
             new NewsletterInstallerPlugin(),
             new GlossaryInstallerPlugin(),
+            new OauthCustomerInstallerPlugin(),
         ];
     }
 }
