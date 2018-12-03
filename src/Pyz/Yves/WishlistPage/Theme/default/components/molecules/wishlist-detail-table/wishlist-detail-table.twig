@@ -35,11 +35,11 @@
                                 }
                             } only %}
                         {% endif %}
-                        <ul class="menu menu--inline">
+                        <ul class="menu menu--inline menu--middle">
                             <li><strong><a href="{{ item.url }}">{{ item.name }}</a></strong></li>
                             {% for attribute in item.superAttributesDefinition %}
                                 {% if item.attributes[attribute] is defined %}
-                                    <li>{{ ('product.attribute.'~attribute) | trans }}: {{ item.attributes[attribute] }}</li>
+                                    <li>{{ ('product.attribute.' ~ attribute) | trans }}: <span class="title title--medium">{{ item.attributes[attribute] }}</span></li>
                                 {% endif %}
                             {% endfor %}
                         </ul>
@@ -83,9 +83,9 @@
                                     method="POST"
                                     action="{{ path('wishlist/remove-item', {sku: item.sku, 'wishlist-name': data.wishlistName}) }}"
                                 >
-                                        <button type="submit" class="link link--user-account" title="{{ 'customer.account.wishlist.remove' | trans }}">
-                                            {{ 'customer.account.wishlist.remove' | trans }}
-                                        </button>
+                                    <button type="submit" class="link link--user-account" title="{{ 'customer.account.wishlist.remove' | trans }}">
+                                        {{ 'customer.account.wishlist.remove' | trans }}
+                                    </button>
                                 </form>
                             </li>
                         </ul>

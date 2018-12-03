@@ -21,7 +21,7 @@
 {% block container %}
 
     {% block title %}
-        {% if data.category.image %}
+        {% if data.category.image is defined %}
             {% include molecule('jumbotron') with {
                 modifiers: ['category'],
                 data: {
