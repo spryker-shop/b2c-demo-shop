@@ -148,7 +148,7 @@
                             {% block actions %}
                                 {% set isDisabled = not embed.product.idProductConcrete or not embed.product.available %}
 
-                                <a href="{{ path('cart/add', {sku: embed.product.sku}) }}" class="button button--expand js-product-set__add-to-cart" {% if isDisabled %}disabled{% endif %}>
+                                <a href="{{ path('cart/add', {sku: embed.product.sku}) }}" class="button button--expand {% if isDisabled %}button--disabled{% endif %} js-product-set__add-to-cart" >
                                     {% include atom('icon') with {
                                         data: {
                                             name: 'cart-plus'
