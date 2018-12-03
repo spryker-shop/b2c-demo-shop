@@ -10,8 +10,8 @@
             width: 100vw;
             background: $setting-color-white;
             padding: rem(10) rem(16) rem(20);
-            border-bottom: 1px solid $setting-color-gray-3;
-            box-shadow: 0 20px 15px -1px $setting-color-shadow;
+            border-bottom: rem(1) solid $setting-color-gray-3;
+            box-shadow: 0 rem(20) rem(15) rem(-1) $setting-color-shadow;
             transform-origin: center top;
             transform: scaleY(0);
 
@@ -22,7 +22,7 @@
 
         &__item {
             text-transform: uppercase;
-            font: 500 rem(12) $setting-font-family-additional;
+            font: fw(medium) rem(12) $setting-font-family-additional;
             letter-spacing: rem(2);
             white-space: nowrap;
             margin: 0 0.6rem;
@@ -93,18 +93,6 @@
         &__tab {
             display: none;
             opacity: 0;
-
-            li {
-                margin: rem(12);
-            }
-
-            a {
-                font: normal 16px $setting-font-family;
-
-                &:hover {
-                    color: $setting-color-alt;
-                }
-            }
 
             &--active {
                 display: block;

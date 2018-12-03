@@ -53,6 +53,7 @@
                     <ul>
                         {% for childNode in children %}
                             {% include molecule('navigation-multilevel-node') with {
+                                modifiers: ['mobile'],
                                 data: {
                                     node: childNode
                                 }
