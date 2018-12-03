@@ -138,7 +138,6 @@
                         {% set firstImage = item.images | first %}
 
                         {% embed molecule('product-item') with {
-                            modifiers: ['readonly'],
                             data: {
                                 productItem: item,
                                 options: item.productOptions | default([]),
