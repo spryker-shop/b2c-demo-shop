@@ -2,7 +2,11 @@
     #{$name} {
         &__button-wrap {
             border-top: rem(1) dotted $setting-color-gray-3;
-            padding: rem(40) 0 rem(15);
+            padding: rem(40) 0 rem(10);
+
+            @include helper-breakpoint-media-min($xl-min) {
+                padding-top: rem(30);
+            }
         }
 
         @content;

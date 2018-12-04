@@ -54,16 +54,16 @@
                         bundleItems: data.bundleItems
                     }
                 } only %}
-
-                {% include molecule('product-detail', 'ProductDetailPage') with {
-                    data: {
-                        description: data.product.description,
-                        attributes: data.product.attributes,
-                        sku: data.product.sku
-                    }
-                } only %}
             </div>
         </div>
+
+        {% include molecule('product-detail', 'ProductDetailPage') with {
+            data: {
+                description: data.product.description,
+                attributes: data.product.attributes,
+                sku: data.product.sku
+            }
+        } only %}
     </div>
 
     {% if data.isBundle != null %}

@@ -1,7 +1,7 @@
 {% extends template('widget') %}
 
 {% block reorderAction %}
-    <a href="{{ path('customer/order/reorder', {'idSalesOrder': _widget.order.idSalesOrder}) }}">
+    <a class="menu__link" href="{{ path('customer/order/reorder', {'idSalesOrder': _widget.order.idSalesOrder}) }}">
         {{ 'customer.order.reorder' | trans }}
     </a>
 {% endblock %}

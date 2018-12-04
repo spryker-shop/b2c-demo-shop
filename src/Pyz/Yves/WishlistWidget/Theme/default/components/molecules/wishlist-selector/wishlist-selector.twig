@@ -34,7 +34,7 @@
     {% endif %}
 
     <form method="POST" action="{{ path('wishlist/add-item', { sku: data.sku }) }}" class="{{config.name}}__form">
-        <div class="grid grid--justify">
+        <div class="grid grid--justify grid--no-wrap">
 
             {% if isUserLoggedIn %}
                 {% include molecule('ajax-renderer') with {
@@ -46,7 +46,7 @@
             {% endif %}
 
             <div class="col col--expand">
-                <button type="submit" class="button button--hollow button--expand" {{ disableAddToWishlist ? 'disabled' : '' }}>
+                <button type="submit" class="button button--hollow button--expand button--reset-min-width" {{ disableAddToWishlist ? 'disabled' : '' }}>
                     {{ 'page.detail.add-to-wishlist' | trans }}
                 </button>
             </div>

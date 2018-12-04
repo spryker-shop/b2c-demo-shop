@@ -1,6 +1,23 @@
 @mixin product-detail-page-product-detail($name: '.product-detail') {
     #{$name} {
+        display: flex;
+        flex-wrap: wrap;
         border-bottom: rem(1) dotted $setting-color-gray-3;
+        padding-top: rem(40);
+
+        @include helper-breakpoint-media-min($md-min) {
+            justify-content: space-between;
+            border-bottom: none;
+            padding-top: rem(80);
+        }
+
+        &__col {
+            width: 100%;
+
+            @include helper-breakpoint-media-min($md-min) {
+                width: calc(50% - #{rem(45)});
+            }
+        }
     }
 }
 
