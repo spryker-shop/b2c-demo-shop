@@ -5,6 +5,11 @@
             padding: rem(15) rem(20) rem(15) 0;
             position: relative;
             opacity: 1;
+            font-size: rem(13);
+
+            @include helper-breakpoint-media-min($lg-min) {
+                font-size: rem(14);
+            }
 
             &:not(&--read-only) {
                 .no-touch &:hover {
