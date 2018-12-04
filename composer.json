@@ -1,7 +1,7 @@
 {
-  "name": "spryker-shop/suite",
-  "description": "Spryker Shop Suite",
-  "license": "MIT",
+  "name": "spryker-shop/suite-b2c-internal",
+  "description": "Spryker B2C Demo Shop",
+  "license": "proprietary",
   "require": {
     "php": ">=7.1",
     "ext-bcmath": "*",
@@ -14,332 +14,105 @@
     "ext-pgsql": "*",
     "ext-readline": "*",
     "ext-redis": "*",
-    "spryker-eco/loggly": "dev-master as 1.0.0",
-    "spryker-shop/agent-page": "^1.0",
-    "spryker-shop/agent-widget": "^1.0",
-    "spryker-shop/availability-widget": "^1.0.0",
+    "spryker-eco/loggly": "dev-master",
+    "spryker-feature/agent-assist": "~2018.11.0",
+    "spryker-feature/alternative-products": "~2018.11.0",
+    "spryker-feature/cart": "~2018.11.0",
+    "spryker-feature/cart-notes": "~2018.11.0",
+    "spryker-feature/catalog": "~2018.11.0",
+    "spryker-feature/category-management": "~2018.11.0",
+    "spryker-feature/checkout": "~2018.11.0",
+    "spryker-feature/cms": "~2018.11.0",
+    "spryker-feature/content-based-shop-navigation": "~2018.11.0",
+    "spryker-feature/customer-account-management": "~2018.11.0",
+    "spryker-feature/customer-notes": "~2018.11.0",
+    "spryker-feature/deployment-tools": "~2018.11.0",
+    "spryker-feature/development-integration": "~2018.11.0",
+    "spryker-feature/development-tools": "~2018.11.0",
+    "spryker-feature/digital-asset-management": "~2018.11.0",
+    "spryker-feature/discontinued-products": "~2018.11.0",
+    "spryker-feature/file-manager": "~2018.11.0",
+    "spryker-feature/gift-cards": "~2018.11.0",
+    "spryker-feature/inventory-management": "~2018.11.0",
+    "spryker-feature/invoice": "~2018.11.0",
+    "spryker-feature/mailing-notifications": "~2018.11.0",
+    "spryker-feature/navigation": "~2018.11.0",
+    "spryker-feature/newsletter-subscription": "~2018.11.0",
+    "spryker-feature/non-splittable-products": "~2018.11.0",
+    "spryker-feature/order-management": "~2018.11.0",
+    "spryker-feature/order-threshold": "~2018.11.0",
+    "spryker-feature/payments": "~2018.11.0",
+    "spryker-feature/persistent-cart": "~2018.11.0",
+    "spryker-feature/prices": "~2018.11.0",
+    "spryker-feature/product": "~2018.11.0",
+    "spryker-feature/product-barcode": "~2018.11",
+    "spryker-feature/product-bundles": "~2018.11.0",
+    "spryker-feature/product-groups": "~2018.11.0",
+    "spryker-feature/product-image-management": "~2018.11.0",
+    "spryker-feature/product-labels": "~2018.11.0",
+    "spryker-feature/product-options": "~2018.11.0",
+    "spryker-feature/product-promotions": "~2018.11.0",
+    "spryker-feature/product-raiting-reviews": "~2018.11.0",
+    "spryker-feature/product-relations": "~2018.11.0",
+    "spryker-feature/product-sets": "~2018.11.0",
+    "spryker-feature/product-validity": "~2018.11.0",
+    "spryker-feature/promotions-discounts": "~2018.11.0",
+    "spryker-feature/raitings-review": "~2018.11.0",
+    "spryker-feature/reclamations": "~2018.11.0",
+    "spryker-feature/refunds": "~2018.11.0",
+    "spryker-feature/reorder": "~2018.11.0",
+    "spryker-feature/search": "~2018.11.0",
+    "spryker-feature/shipment": "~2018.11.0",
+    "spryker-feature/spryker-core": "~2018.11.0",
+    "spryker-feature/spryker-core-back-office": "~2018.11.0",
+    "spryker-feature/spryker-core-e-commerce": "~2018.11.0",
+    "spryker-feature/state-machine": "~2018.11.0",
+    "spryker-feature/tax": "~2018.11.0",
+    "spryker-feature/wishlist": "~2018.11.0",
     "spryker-shop/calculation-page": "^1.0.0",
-    "spryker-shop/cart-note-widget": "^1.0.0",
-    "spryker-shop/cart-page": "^1.0.0",
-    "spryker-shop/catalog-page": "^1.0.0",
-    "spryker-shop/category-widget": "^1.0.0",
-    "spryker-shop/chart-widget": "^0.1.0",
-    "spryker-shop/checkout-page": "^1.0.0",
-    "spryker-shop/checkout-widget": "^1.0.0",
-    "spryker-shop/cms-block-widget": "^1.0.0",
-    "spryker-shop/cms-content-widget-chart-connector": "^1.0",
+    "spryker-shop/chart-widget": "^0.1.1",
+    "spryker-shop/cms-content-widget-chart-connector": "^1.0.0",
     "spryker-shop/cms-content-widget-product-connector": "^1.0.0",
     "spryker-shop/cms-content-widget-product-set-connector": "^1.0.0",
-    "spryker-shop/cms-page": "^1.0.0",
-    "spryker-shop/currency-widget": "^1.0.0",
-    "spryker-shop/customer-page": "^1.4",
-    "spryker-shop/customer-page-extension": "^1.2",
-    "spryker-shop/customer-reorder-widget": "^3.0.0",
-    "spryker-shop/discount-promotion-widget": "^1.0.0",
-    "spryker-shop/discount-widget": "^1.0.0",
-    "spryker-shop/error-page": "^1.0.0",
-    "spryker-shop/heartbeat-page": "^1.0.0",
-    "spryker-shop/home-page": "^1.0.0",
-    "spryker-shop/language-switcher-widget": "^1.0.0",
-    "spryker-shop/money-widget": "^1.0.0",
-    "spryker-shop/navigation-widget": "^1.0.0",
-    "spryker-shop/newsletter-page": "^1.0.0",
-    "spryker-shop/newsletter-widget": "^1.0.0",
-    "spryker-shop/price-widget": "^1.0.0",
-    "spryker-shop/product-barcode-widget": "^1.0.0",
-    "spryker-shop/product-bundle-widget": "^1.0.0",
-    "spryker-shop/product-category-widget": "^1.0.0",
-    "spryker-shop/product-detail-page": "^1.0.0",
-    "spryker-shop/product-group-widget": "^1.0.0",
-    "spryker-shop/product-image-widget": "^1.0.0",
-    "spryker-shop/product-label-widget": "^1.0.0",
-    "spryker-shop/product-new-page": "^1.0.0",
-    "spryker-shop/product-option-widget": "^1.0.0",
-    "spryker-shop/product-relation-widget": "^1.0.0",
-    "spryker-shop/product-review-widget": "^1.0.0",
-    "spryker-shop/product-set-detail-page": "^1.0.0",
-    "spryker-shop/product-set-list-page": "^1.0.0",
-    "spryker-shop/product-set-widget": "^1.0.0",
-    "spryker-shop/product-widget": "^1.0.0",
-    "spryker-shop/redirect-page": "^1.0.0",
-    "spryker-shop/shop-application": "^1.1",
-    "spryker-shop/shop-application-extension": "^1.0.0",
-    "spryker-shop/shop-router": "^1.0.0",
-    "spryker-shop/shop-router-extension": "^1.0.0",
-    "spryker-shop/shop-translator": "^1.0.0",
-    "spryker-shop/shop-ui": "^1.3",
-    "spryker-shop/shop-ui-extension": "1.0.0",
-    "spryker-shop/web-profiler-widget": "^1.0.0",
-    "spryker-shop/wishlist-page": "^1.0.0",
-    "spryker-shop/wishlist-widget": "^1.0.0",
-    "spryker/acl": "^3.0.0",
-    "spryker/agent": "^1.0",
-    "spryker/agent-gui": "^1.0",
-    "spryker/api": "^0.1.0",
-    "spryker/api-query-builder": "^0.1.0",
-    "spryker/application": "^3.0.0",
-    "spryker/assertion": "^3.0.0",
-    "spryker/auth": "^3.0.0",
-    "spryker/auth-mail-connector": "^3.0.0",
-    "spryker/auth-rest-api": "^2.0.0",
-    "spryker/availability": "^6.0.0",
-    "spryker/availability-cart-connector": "^4.0.0",
-    "spryker/availability-data-feed": "^0.1.0",
-    "spryker/availability-gui": "^3.0.0",
-    "spryker/availability-offer-connector": "^1.0.0",
-    "spryker/availability-storage": "^1.0.0",
-    "spryker/barcode": "^1.0.0",
-    "spryker/barcode-extension": "^1.0.0",
-    "spryker/braintree": "^0.5.0",
-    "spryker/cache": "^3.0.0",
-    "spryker/calculation": "^4.0.0",
-    "spryker/cart": "^5.0.0",
-    "spryker/cart-currency-connector": "^1.0.0",
-    "spryker/cart-extension": "^1.0.0",
-    "spryker/cart-note": "^0.1.0",
-    "spryker/cart-note-extension": "^1.0.0",
+    "spryker/assertion": "*",
+    "spryker/availability-cart-connector": "^4.2",
+    "spryker/cart-currency-connector": "^1.1",
     "spryker/cart-note-product-bundle-connector": "^0.1.0",
-    "spryker/cart-variant": "^1.0.0",
-    "spryker/carts-rest-api": "^2.0.1",
-    "spryker/catalog": "^5.0.0",
-    "spryker/catalog-price-product-connector": "^1.0.0",
-    "spryker/catalog-search-products-resource-relationship": "^1.0.1",
-    "spryker/catalog-search-rest-api": "^1.4.0",
-    "spryker/categories-rest-api": "^1.1.1",
-    "spryker/category": "^4.0.0",
-    "spryker/category-data-feed": "^0.2.0",
-    "spryker/category-data-import": "^0.2.0",
-    "spryker/category-exporter": "^3.0.0",
+    "spryker/catalog-price-product-connector": "^1.2",
     "spryker/category-navigation-connector": "^1.0.0",
-    "spryker/category-page-search": "^1.0.0",
-    "spryker/category-storage": "^1.0.0",
-    "spryker/chart": "^1.0",
-    "spryker/checkout": "^4.0.0",
-    "spryker/cms": "^6.0.0",
-    "spryker/cms-block": "^2.0.0",
-    "spryker/cms-block-category-connector": "^2.0.0",
-    "spryker/cms-block-category-storage": "^1.0.0",
-    "spryker/cms-block-collector": "^2.0.0",
-    "spryker/cms-block-gui": "^2.0.0",
-    "spryker/cms-block-product-connector": "^1.0.0",
-    "spryker/cms-block-product-storage": "^1.0.0",
-    "spryker/cms-block-storage": "^1.0.0",
-    "spryker/cms-collector": "^2.0.0",
-    "spryker/cms-content-widget": "^1.0.0",
-    "spryker/cms-content-widget-product-connector": "^1.0.0",
-    "spryker/cms-content-widget-product-group-connector": "^1.0.0",
-    "spryker/cms-content-widget-product-set-connector": "^1.0.0",
-    "spryker/cms-gui": "^4.0.0",
+    "spryker/chart": "*",
+    "spryker/category": "4.8.0",
     "spryker/cms-navigation-connector": "^1.0.0",
-    "spryker/cms-page-search": "^1.0.0",
-    "spryker/cms-storage": "^1.0.0",
-    "spryker/cms-user-connector": "^1.0.0",
-    "spryker/code-it-now": "^1.0.0",
-    "spryker/collector": "^6.0.0",
-    "spryker/collector-search-connector": "^1.0.0",
-    "spryker/collector-storage-connector": "^1.0.0",
-    "spryker/config": "^3.0.0",
-    "spryker/console": "^4.0.0",
-    "spryker/country": "^3.0.0",
-    "spryker/currency": "^3.0.0",
-    "spryker/currency-extension": "^1.0.0",
-    "spryker/customer": "^7.14.0",
-    "spryker/customer-api": "^0.1.0",
-    "spryker/customer-extension": "1.1.0",
-    "spryker/customer-group": "^2.0.0",
-    "spryker/customer-group-discount-connector": "^2.0.0",
-    "spryker/customer-note-gui": "^1.0.0",
-    "spryker/customer-offer-connector": "^1.0.0",
-    "spryker/customer-user-connector": "^1.0.0",
-    "spryker/customer-user-connector-gui": "^1.0.0",
-    "spryker/customers-rest-api": "^1.4.1",
-    "spryker/dashboard": "^1.0",
-    "spryker/data-import": "^1.0.0",
-    "spryker/discount": "^6.0.0",
-    "spryker/discount-calculation-connector": "^5.0.0",
-    "spryker/discount-promotion": "^1.0.0",
-    "spryker/documentation-generator-rest-api": "^1.0.0",
-    "spryker/dummy-payment": "^2.0.0",
-    "spryker/egulias": "^1.0.0",
-    "spryker/elastica": "^4.0.0",
-    "spryker/error-handler": "^2.0.0",
-    "spryker/event": "^2.0.0",
-    "spryker/event-behavior": "^1.0.0",
+    "spryker/cms-user-connector": "^1.0",
+    "spryker/code-it-now": "^1.0",
+    "spryker/customer-catalog": "^1.0",
+    "spryker/customer-group-discount-connector": "^2.0",
+    "spryker/customer-user-connector": "^1.0",
+    "spryker/customer-user-connector-gui": "^1.1",
+    "spryker/discount-calculation-connector": "^5.0",
     "spryker/event-journal": "^3.0.0",
-    "spryker/file-system": "^1.0.0",
-    "spryker/flysystem": "^1.0.0",
-    "spryker/flysystem-aws3v3-file-system": "^1.0.0",
     "spryker/flysystem-ftp-file-system": "^1.0.0",
-    "spryker/flysystem-local-file-system": "^1.0.0",
-    "spryker/gift-card": "^1.0.0",
-    "spryker/gift-card-balance": "^1.0.0",
-    "spryker/gift-card-mail-connector": "^1.0.0",
-    "spryker/glossary": "^3.0.0",
-    "spryker/glossary-storage": "^1.0.0",
-    "spryker/glue-application": "^1.8.2",
-    "spryker/glue-application-extension": "^1.1.0",
-    "spryker/graph": "^3.0.0",
-    "spryker/graphviz": "^2.0.0",
-    "spryker/gui": "^3.0.0",
-    "spryker/guzzle": "^2.0.0",
-    "spryker/heartbeat": "^3.0.0",
-    "spryker/install": "^0.4.0",
-    "spryker/installer": "^4.0.0",
-    "spryker/invoice": "^2.0.0",
-    "spryker/kernel": "^3.24.0",
-    "spryker/key-builder": "^1.0.0",
-    "spryker/locale": "^3.0.0",
-    "spryker/log": "^3.0.0",
-    "spryker/mail": "^4.0.0",
-    "spryker/maintenance": "^3.0.0",
-    "spryker/mandrill": "^2.0.0",
-    "spryker/manual-order-entry": "^1.0.0",
-    "spryker/manual-order-entry-gui": "^0.5.0",
-    "spryker/manual-order-entry-gui-extension": "^1.0.0",
-    "spryker/messenger": "^3.0.0",
-    "spryker/money": "^2.0.0",
-    "spryker/monolog": "^2.0.0",
-    "spryker/navigation": "^2.0.0",
-    "spryker/navigation-collector": "^1.0.0",
-    "spryker/navigation-gui": "^2.0.0",
-    "spryker/navigation-storage": "^1.0.0",
+    "spryker/flysystem-local-file-system": "^1.0",
+    "spryker/gift-card-mail-connector": "^1.0",
     "spryker/new-relic": "^3.0.0",
-    "spryker/new-relic-api": "^1.0.0",
-    "spryker/newsletter": "^4.0.0",
-    "spryker/nopayment": "^4.0.0",
-    "spryker/oauth-customer-connector": "^1.1.0",
-    "spryker/offer": "^0.1.0",
-    "spryker/offer-extension": "^1.0.0",
-    "spryker/offer-gui": "^0.1.0",
-    "spryker/oms": "^8.0.0",
-    "spryker/oms-discount-connector": "^3.0.0",
-    "spryker/orders-rest-api": "^1.1.0",
-    "spryker/payment": "^4.0.0",
-    "spryker/payment-cart-connector": "^1.0.0",
-    "spryker/persistent-cart": "^1.2.0",
-    "spryker/persistent-cart-extension": "^1.0.0",
-    "spryker/pimple": "^2.0.0",
-    "spryker/price": "^5.3.0",
-    "spryker/price-cart-connector": "^4.0.0",
-    "spryker/price-data-feed": "^0.2.0",
-    "spryker/price-extension": "^1.0.0",
-    "spryker/price-product": "^2.0.0",
-    "spryker/price-product-storage": "^2.2.0",
-    "spryker/product": "^6.7.0",
-    "spryker/product-abstract-data-feed": "^0.2.0",
-    "spryker/product-api": "^0.1.0",
-    "spryker/product-attribute": "^1.1.0",
-    "spryker/product-attribute-gui": "^1.0.0",
-    "spryker/product-availabilities-rest-api": "^1.0.1",
-    "spryker/product-barcode": "^1.0.0",
-    "spryker/product-barcode-gui": "^1.0.0",
-    "spryker/product-bundle": "^4.0.0",
-    "spryker/product-cart-connector": "^4.0.0",
-    "spryker/product-category": "^4.0.0",
-    "spryker/product-category-filter": "^1.0.0",
-    "spryker/product-category-filter-collector": "^1.0.0",
-    "spryker/product-category-filter-gui": "^1.0.0",
-    "spryker/product-category-filter-storage": "^1.0.0",
-    "spryker/product-category-storage": "^1.0.0",
-    "spryker/product-discount-connector": "^3.0.0",
-    "spryker/product-group": "^1.0.0",
-    "spryker/product-group-collector": "^1.0.0",
-    "spryker/product-group-storage": "^1.0.0",
-    "spryker/product-image": "^3.0.0",
-    "spryker/product-image-cart-connector": "^1.0.0",
-    "spryker/product-image-sets-rest-api": "^1.0.2",
-    "spryker/product-image-storage": "^1.0.0",
-    "spryker/product-label": "^2.0.0",
-    "spryker/product-label-collector": "^1.0.0",
-    "spryker/product-label-discount-connector": "^1.0.0",
-    "spryker/product-label-gui": "^2.0.0",
-    "spryker/product-label-search": "^1.0.0",
-    "spryker/product-label-storage": "^1.0.0",
-    "spryker/product-labels-rest-api": "^1.0.0",
-    "spryker/product-management": "^0.14.7",
-    "spryker/product-new": "^1.0.0",
-    "spryker/product-option": "^6.0.0",
-    "spryker/product-option-cart-connector": "^5.0.0",
-    "spryker/product-option-storage": "^1.0.0",
-    "spryker/product-page-search": "^2.0.0",
-    "spryker/product-prices-rest-api": "^1.0.2",
-    "spryker/product-relation": "^2.0.0",
-    "spryker/product-relation-collector": "^2.0.0",
-    "spryker/product-relation-storage": "^1.0.0",
-    "spryker/product-review": "^2.0.0",
-    "spryker/product-review-collector": "^1.0.0",
-    "spryker/product-review-gui": "^1.0.0",
-    "spryker/product-review-search": "^1.0.0",
-    "spryker/product-review-storage": "^1.0.0",
-    "spryker/product-search": "^5.0.0",
-    "spryker/product-search-config-storage": "^1.0.0",
-    "spryker/product-set": "^1.0.0",
-    "spryker/product-set-collector": "^1.0.0",
-    "spryker/product-set-gui": "^2.0.0",
-    "spryker/product-set-page-search": "^1.0.0",
-    "spryker/product-set-storage": "^1.0.0",
-    "spryker/product-storage": "^1.3.0",
-    "spryker/product-tax-sets-rest-api": "^1.0.5",
-    "spryker/product-validity": "^1.0.0",
-    "spryker/products-categories-resource-relationship": "^1.0.0",
-    "spryker/products-product-availabilities-resource-relationship": "^1.0.0",
-    "spryker/products-product-prices-resource-relationship": "^1.0.0",
-    "spryker/products-product-tax-sets-resource-relationship": "^1.0.0",
-    "spryker/products-rest-api": "^2.2.0",
-    "spryker/propel": "^3.0.0",
-    "spryker/propel-orm": "^1.0.0",
-    "spryker/propel-query-builder": "^0.3.0",
-    "spryker/queue": "^1.0.0",
-    "spryker/quote": "^2.2.0",
-    "spryker/quote-extension": "^1.0.0",
-    "spryker/rabbit-mq": "^2.0.0",
-    "spryker/redis": "^2.0.0",
-    "spryker/refund": "^5.0.0",
-    "spryker/rest-request-validator": "^1.0.0",
-    "spryker/sales": "^8.13.0",
-    "spryker/sales-extension": "^1.0.0",
-    "spryker/sales-product-connector": "^1.0.0",
-    "spryker/sales-reclamation": "^0.3.0",
-    "spryker/sales-split": "^3.0.0",
-    "spryker/sales-statistics": "^1.0",
-    "spryker/search": "^8.0.0",
-    "spryker/sequence-number": "^3.0.0",
-    "spryker/session": "^3.0.0",
-    "spryker/setup": "^4.0.0",
-    "spryker/setup-frontend": "^1.0.0",
-    "spryker/shipment": "^6.0.0",
-    "spryker/shipment-cart-connector": "^1.0.0",
+    "spryker/oms-discount-connector": "^3.0",
+    "spryker/payment-cart-connector": "^1.0",
+    "spryker/price-cart-connector": "^4.5",
+    "spryker/product-alternative-product-label-connector": "^1.0",
+    "spryker/product-cart-connector": "^4.3",
+    "spryker/product-category": "^4.6",
+    "spryker/product-discontinued-product-bundle-connector": "^1.0",
+    "spryker/product-discontinued-product-label-connector": "^1.0",
+    "spryker/product-discount-connector": "^3.2",
+    "spryker/product-image-cart-connector": "^1.0",
+    "spryker/product-option-cart-connector": "^5.1",
+    "spryker/rabbit-mq": "^2.2",
+    "spryker/sales-product-connector": "^1.1",
+    "spryker/sales-statistics": "^1.0.0",
     "spryker/shipment-checkout-connector": "^1.0.0",
-    "spryker/shipment-discount-connector": "^1.0.0",
-    "spryker/silex": "^2.0.0",
-    "spryker/sql-criteria-builder": "^1.0.0",
-    "spryker/state-machine": "^2.0.0",
-    "spryker/step-engine": "^3.0.0",
-    "spryker/stock": "^5.0.0",
-    "spryker/stock-sales-connector": "^3.0.0",
-    "spryker/storage": "^3.0.0",
-    "spryker/store": "^1.0.0",
-    "spryker/stores-rest-api": "^1.0.0",
-    "spryker/symfony": "^3.0.0",
-    "spryker/synchronization": "^0.2.0",
-    "spryker/synchronization-behavior": "^1.0.0",
-    "spryker/tax": "^5.0.0",
-    "spryker/tax-product-connector": "^4.0.0",
-    "spryker/touch": "^4.0.0",
-    "spryker/transfer": "^3.7.0",
-    "spryker/twig": "^3.0.0",
-    "spryker/url": "^3.0.0",
-    "spryker/url-collector": "^1.0.0",
-    "spryker/url-storage": "^1.0.0",
-    "spryker/user": "^3.3",
-    "spryker/util-validate": "^1.0.0",
-    "spryker/uuid-behavior": "^1.0.1",
-    "spryker/wishlist": "^6.2.0",
-    "spryker/wishlist-items-products-resource-relationship": "^1.0.0",
-    "spryker/wishlists-rest-api": "^1.2.1",
-    "spryker/zed-navigation": "^1.0.0",
-    "spryker/zed-request": "^3.0.0",
-    "spryker/zend": "^2.0.0",
+    "spryker/stock-sales-connector": "^3.0",
+    "spryker/symfony": "3.2.0",
+    "stecman/symfony-console-completion": "^0.7.0",
     "swiftmailer/swiftmailer": "^5.4.5"
   },
   "require-dev": {
@@ -350,15 +123,10 @@
     "jakoch/phantomjs-installer": "^2.1.0",
     "nette/php-generator": "^2.6.1",
     "pdepend/pdepend": "^2.2.4",
-    "php-mock/php-mock": "^1.0",
-    "phpdocumentor/reflection-docblock": "^2.0",
-    "phpmd/phpmd": "~2.4.3",
-    "phpstan/phpstan": "^0.9.0",
+    "phpstan/phpstan": "^0.10.2",
     "phpunit/php-code-coverage": "^5.2.2",
     "phpunit/php-timer": "^1.0.9",
-    "phpunit/php-token-stream": "^1.4.11",
     "phpunit/phpunit": "^6.0.0",
-    "phpunit/phpunit-mock-objects": "^4.0.4",
     "sebastian/comparator": "^2.1.3",
     "sebastian/diff": "^2.0.1",
     "sebastian/environment": "^3.1.0",
@@ -367,16 +135,15 @@
     "sebastian/phpcpd": "^2.0.2",
     "sebastian/recursion-context": "^3.0.0",
     "sensiolabs/security-checker": "^3.0.2",
-    "silex/web-profiler": "*",
     "site5/phantoman": "^1.1",
     "sllh/composer-versions-check": "^2.0.2",
     "spryker/architecture-sniffer": "^0.4.0",
     "spryker/code-generator": "^0.3.0",
-    "spryker/code-sniffer": "^0.11.0",
+    "spryker/code-sniffer": "^0.12.0",
     "spryker/development": "^3.0.0",
     "spryker/testify": "^3.0.0",
-    "squizlabs/php_codesniffer": "~3.1.0",
-    "stecman/symfony-console-completion": "^0.7.0",
+    "spryker/web-profiler": "1.1.1",
+    "squizlabs/php_codesniffer": "~3.3.0",
     "symfony/var-dumper": "*",
     "symfony/web-profiler-bundle": "*"
   },
@@ -409,9 +176,301 @@
     },
     "use-include-path": true,
     "sort-packages": true,
-    "github-protocols": ["https"],
+    "github-protocols": [
+      "https"
+    ],
     "process-timeout": 900
   },
+  "repositories": [
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/agent-assist.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/alternative-products.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/backup.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/product-barcode.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/cart.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/customer-notes.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/cart-notes.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/catalog.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/category-management.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/checkout.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/cms.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/company-account.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/content-based-shop-navigation.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/customer-account-management.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/data-export.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/deployment-tools.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/development-integration.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/development-tools.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/digital-asset-management.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/discontinued-products.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/file-manager.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/gift-cards.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/inventory-management.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/invoice.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/mailing-notifications.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/measurement-units.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/merchant.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/merchant-contracts.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/merchant-custom-prices.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/merchant-order-threshold.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/merchant-product-restrictions.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/multiple-carts.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/multistore.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/navigation.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/newsletter-subscription.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/non-splittable-products.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/order-management.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/order-threshold.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/payments.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/persistent-cart.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/prices.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/product.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/product-based-shop-navigation.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/product-bundles.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/product-customer-restrictions.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/product-groups.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/product-image-management.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/product-labels.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/product-lists.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/product-options.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/product-promotions.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/product-raiting-reviews.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/product-relations.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/product-sets.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/product-validity.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/promotions-discounts.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/purchaise-approval-not-in-october-release.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/quick-add-to-cart.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/raitings-review.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/reclamations.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/refunds.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/reorder.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/search.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/shipment.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/shopping-lists.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/split-shipment.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/spryker-core.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/spryker-core-back-office.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/spryker-core-e-commerce.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/state-machine.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/tax.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/spryker-feature/wishlist.git"
+    }
+  ],
   "scripts": {
     "compile": [
       "mkdir -p ./data/DE/logs/ZED",
@@ -422,8 +481,10 @@
       "PhantomInstaller\\Installer::installPhantomJS"
     ],
     "post-update-cmd": [
-      "PhantomInstaller\\Installer::installPhantomJS",
-      "Install\\ComposerAdjuster::assertDemoshopGitUrls"
+      "PhantomInstaller\\Installer::installPhantomJS"
+    ],
+    "phpstan": [
+      "php -d memory_limit=1024M vendor/bin/phpstan analyze -c phpstan.neon src/ -l 4"
     ],
     "phpstan-setup": "vendor/bin/console dev:ide:generate-auto-completion"
   }

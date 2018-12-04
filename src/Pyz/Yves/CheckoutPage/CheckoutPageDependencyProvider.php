@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of the Spryker Suite.
+ * This file is part of the Spryker Commerce OS.
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
@@ -9,8 +9,7 @@ namespace Pyz\Yves\CheckoutPage;
 
 use Spryker\Yves\Kernel\Container;
 use Spryker\Yves\Kernel\Plugin\Pimple;
-use SprykerShop\Yves\CartNoteWidget\Plugin\CheckoutPage\CartNoteQuoteItemNoteWidgetPlugin;
-use SprykerShop\Yves\CartNoteWidget\Plugin\CheckoutPage\CartNoteQuoteNoteWidgetPlugin;
+use Spryker\Yves\Payment\Plugin\PaymentFormFilterPlugin;
 use SprykerShop\Yves\CheckoutPage\CheckoutPageDependencyProvider as SprykerShopCheckoutPageDependencyProvider;
 use SprykerShop\Yves\CustomerPage\Form\CheckoutAddressCollectionForm;
 use SprykerShop\Yves\CustomerPage\Form\CustomerCheckoutForm;
@@ -18,7 +17,7 @@ use SprykerShop\Yves\CustomerPage\Form\DataProvider\CheckoutAddressFormDataProvi
 use SprykerShop\Yves\CustomerPage\Form\GuestForm;
 use SprykerShop\Yves\CustomerPage\Form\LoginForm;
 use SprykerShop\Yves\CustomerPage\Form\RegisterForm;
-use SprykerShop\Yves\DiscountWidget\Plugin\CheckoutPage\CheckoutVoucherFormWidgetPlugin;
+use SprykerShop\Yves\SalesOrderThresholdWidget\Plugin\CheckoutPage\SalesOrderThresholdWidgetPlugin;
 
 class CheckoutPageDependencyProvider extends SprykerShopCheckoutPageDependencyProvider
 {
@@ -28,9 +27,7 @@ class CheckoutPageDependencyProvider extends SprykerShopCheckoutPageDependencyPr
     protected function getSummaryPageWidgetPlugins(): array
     {
         return [
-            CheckoutVoucherFormWidgetPlugin::class,
-            CartNoteQuoteItemNoteWidgetPlugin::class, #CartNoteFeature
-            CartNoteQuoteNoteWidgetPlugin::class, #CartNoteFeature
+            SalesOrderThresholdWidgetPlugin::class, #SalesOrderThresholdFeature
         ];
     }
 
@@ -100,5 +97,15 @@ class CheckoutPageDependencyProvider extends SprykerShopCheckoutPageDependencyPr
     protected function getAddressStepFormDataProvider(Container $container)
     {
         return new CheckoutAddressFormDataProvider($this->getCustomerClient($container), $this->getStore());
+    }
+
+    /**
+     * @return \Spryker\Yves\Checkout\Dependency\Plugin\Form\SubFormFilterPluginInterface[]
+     */
+    protected function getSubFormFilterPlugins(): array
+    {
+        return [
+            new PaymentFormFilterPlugin(),
+        ];
     }
 }

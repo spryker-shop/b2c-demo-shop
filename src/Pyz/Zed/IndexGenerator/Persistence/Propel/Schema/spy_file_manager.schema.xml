@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<database xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:noNamespaceSchemaLocation="http://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\FileManager\Persistence" package="src.Orm.Zed.FileManager.Persistence">
+  <table name="spy_file">
+    <index name="index-spy_file-fk_file_directory">
+      <index-column name="fk_file_directory"/>
+    </index>
+  </table>
+  <table name="spy_file_info">
+    <index name="index-spy_file_info-fk_file">
+      <index-column name="fk_file"/>
+    </index>
+  </table>
+  <table name="spy_file_localized_attributes">
+    <index name="index-spy_file_localized_attributes-fk_file">
+      <index-column name="fk_file"/>
+    </index>
+    <index name="index-spy_file_localized_attributes-fk_locale">
+      <index-column name="fk_locale"/>
+    </index>
+  </table>
+  <table name="spy_file_directory">
+    <index name="index-spy_file_directory-fk_parent_file_directory">
+      <index-column name="fk_parent_file_directory"/>
+    </index>
+  </table>
+  <table name="spy_file_directory_localized_attributes">
+    <index name="index-spy_file_directory_localized_attributes-fk_file_directory">
+      <index-column name="fk_file_directory"/>
+    </index>
+    <index name="index-spy_file_directory_localized_attributes-fk_locale">
+      <index-column name="fk_locale"/>
+    </index>
+  </table>
+</database>

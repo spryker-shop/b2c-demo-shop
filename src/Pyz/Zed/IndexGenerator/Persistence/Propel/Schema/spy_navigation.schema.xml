@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<database xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:noNamespaceSchemaLocation="http://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\Navigation\Persistence" package="src.Orm.Zed.Navigation.Persistence">
+  <table name="spy_navigation_node">
+    <index name="index-spy_navigation_node-fk_parent_navigation_node">
+      <index-column name="fk_parent_navigation_node"/>
+    </index>
+    <index name="index-spy_navigation_node-fk_navigation">
+      <index-column name="fk_navigation"/>
+    </index>
+  </table>
+  <table name="spy_navigation_node_localized_attributes">
+    <index name="index-spy_navigation_node_localized_attributes-fk_-4f569df99f9b">
+      <index-column name="fk_navigation_node"/>
+    </index>
+    <index name="index-spy_navigation_node_localized_attributes-fk_locale">
+      <index-column name="fk_locale"/>
+    </index>
+    <index name="index-spy_navigation_node_localized_attributes-fk_url">
+      <index-column name="fk_url"/>
+    </index>
+  </table>
+</database>

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of the Spryker Suite.
+ * This file is part of the Spryker Commerce OS.
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
@@ -15,45 +15,45 @@ use Spryker\Zed\DataImport\DataImportConfig as SprykerDataImportConfig;
  */
 class DataImportConfig extends SprykerDataImportConfig
 {
-    const IMPORT_TYPE_CATEGORY_TEMPLATE = 'category-template';
-    const IMPORT_TYPE_CUSTOMER = 'customer';
-    const IMPORT_TYPE_GLOSSARY = 'glossary';
-    const IMPORT_TYPE_NAVIGATION = 'navigation';
-    const IMPORT_TYPE_NAVIGATION_NODE = 'navigation-node';
-    const IMPORT_TYPE_PRODUCT_PRICE = 'product-price';
-    const IMPORT_TYPE_PRODUCT_STOCK = 'product-stock';
-    const IMPORT_TYPE_PRODUCT_ABSTRACT = 'product-abstract';
-    const IMPORT_TYPE_PRODUCT_ABSTRACT_STORE = 'product-abstract-store';
-    const IMPORT_TYPE_PRODUCT_CONCRETE = 'product-concrete';
-    const IMPORT_TYPE_PRODUCT_ATTRIBUTE_KEY = 'product-attribute-key';
-    const IMPORT_TYPE_PRODUCT_MANAGEMENT_ATTRIBUTE = 'product-management-attribute';
-    const IMPORT_TYPE_PRODUCT_RELATION = 'product-relation';
-    const IMPORT_TYPE_PRODUCT_REVIEW = 'product-review';
-    const IMPORT_TYPE_PRODUCT_LABEL = 'product-label';
-    const IMPORT_TYPE_PRODUCT_SET = 'product-set';
-    const IMPORT_TYPE_PRODUCT_GROUP = 'product-group';
-    const IMPORT_TYPE_PRODUCT_OPTION = 'product-option';
-    const IMPORT_TYPE_PRODUCT_OPTION_PRICE = 'product-option-price';
-    const IMPORT_TYPE_PRODUCT_IMAGE = 'product-image';
-    const IMPORT_TYPE_PRODUCT_SEARCH_ATTRIBUTE_MAP = 'product-search-attribute-map';
-    const IMPORT_TYPE_PRODUCT_SEARCH_ATTRIBUTE = 'product-search-attribute';
-    const IMPORT_TYPE_CMS_TEMPLATE = 'cms-template';
-    const IMPORT_TYPE_CMS_PAGE = 'cms-page';
-    const IMPORT_TYPE_CMS_BLOCK = 'cms-block';
-    const IMPORT_TYPE_CMS_BLOCK_STORE = 'cms-block-store';
-    const IMPORT_TYPE_CMS_BLOCK_CATEGORY_POSITION = 'cms-block-category-position';
-    const IMPORT_TYPE_CMS_BLOCK_CATEGORY = 'cms-block-category';
-    const IMPORT_TYPE_DISCOUNT = 'discount';
-    const IMPORT_TYPE_DISCOUNT_STORE = 'discount-store';
-    const IMPORT_TYPE_DISCOUNT_AMOUNT = 'discount-amount';
-    const IMPORT_TYPE_DISCOUNT_VOUCHER = 'discount-voucher';
-    const IMPORT_TYPE_SHIPMENT = 'shipment';
-    const IMPORT_TYPE_SHIPMENT_PRICE = 'shipment-price';
-    const IMPORT_TYPE_STOCK = 'stock';
-    const IMPORT_TYPE_TAX = 'tax';
-    const IMPORT_TYPE_CURRENCY = 'currency';
-    const IMPORT_TYPE_STORE = 'store';
-    const IMPORT_TYPE_ORDER_SOURCE = 'order-source';
+    public const IMPORT_TYPE_CATEGORY_TEMPLATE = 'category-template';
+    public const IMPORT_TYPE_CUSTOMER = 'customer';
+    public const IMPORT_TYPE_GLOSSARY = 'glossary';
+    public const IMPORT_TYPE_NAVIGATION = 'navigation';
+    public const IMPORT_TYPE_NAVIGATION_NODE = 'navigation-node';
+    public const IMPORT_TYPE_PRODUCT_PRICE = 'product-price';
+    public const IMPORT_TYPE_PRODUCT_STOCK = 'product-stock';
+    public const IMPORT_TYPE_PRODUCT_ABSTRACT = 'product-abstract';
+    public const IMPORT_TYPE_PRODUCT_ABSTRACT_STORE = 'product-abstract-store';
+    public const IMPORT_TYPE_PRODUCT_CONCRETE = 'product-concrete';
+    public const IMPORT_TYPE_PRODUCT_ATTRIBUTE_KEY = 'product-attribute-key';
+    public const IMPORT_TYPE_PRODUCT_MANAGEMENT_ATTRIBUTE = 'product-management-attribute';
+    public const IMPORT_TYPE_PRODUCT_RELATION = 'product-relation';
+    public const IMPORT_TYPE_PRODUCT_REVIEW = 'product-review';
+    public const IMPORT_TYPE_PRODUCT_LABEL = 'product-label';
+    public const IMPORT_TYPE_PRODUCT_SET = 'product-set';
+    public const IMPORT_TYPE_PRODUCT_GROUP = 'product-group';
+    public const IMPORT_TYPE_PRODUCT_OPTION = 'product-option';
+    public const IMPORT_TYPE_PRODUCT_OPTION_PRICE = 'product-option-price';
+    public const IMPORT_TYPE_PRODUCT_IMAGE = 'product-image';
+    public const IMPORT_TYPE_PRODUCT_SEARCH_ATTRIBUTE_MAP = 'product-search-attribute-map';
+    public const IMPORT_TYPE_PRODUCT_SEARCH_ATTRIBUTE = 'product-search-attribute';
+    public const IMPORT_TYPE_CMS_TEMPLATE = 'cms-template';
+    public const IMPORT_TYPE_CMS_PAGE = 'cms-page';
+    public const IMPORT_TYPE_CMS_BLOCK = 'cms-block';
+    public const IMPORT_TYPE_CMS_BLOCK_STORE = 'cms-block-store';
+    public const IMPORT_TYPE_CMS_BLOCK_CATEGORY_POSITION = 'cms-block-category-position';
+    public const IMPORT_TYPE_CMS_BLOCK_CATEGORY = 'cms-block-category';
+    public const IMPORT_TYPE_DISCOUNT = 'discount';
+    public const IMPORT_TYPE_DISCOUNT_STORE = 'discount-store';
+    public const IMPORT_TYPE_DISCOUNT_AMOUNT = 'discount-amount';
+    public const IMPORT_TYPE_DISCOUNT_VOUCHER = 'discount-voucher';
+    public const IMPORT_TYPE_SHIPMENT = 'shipment';
+    public const IMPORT_TYPE_SHIPMENT_PRICE = 'shipment-price';
+    public const IMPORT_TYPE_STOCK = 'stock';
+    public const IMPORT_TYPE_TAX = 'tax';
+    public const IMPORT_TYPE_CURRENCY = 'currency';
+    public const IMPORT_TYPE_STORE = 'store';
+    public const IMPORT_TYPE_ORDER_SOURCE = 'order-source';
 
     /**
      * @return \Generated\Shared\Transfer\DataImporterConfigurationTransfer
@@ -109,14 +109,6 @@ class DataImportConfig extends SprykerDataImportConfig
     public function getTaxDataImporterConfiguration()
     {
         return $this->buildImporterConfiguration('tax.csv', static::IMPORT_TYPE_TAX);
-    }
-
-    /**
-     * @return \Generated\Shared\Transfer\DataImporterConfigurationTransfer
-     */
-    public function getProductPriceDataImporterConfiguration()
-    {
-        return $this->buildImporterConfiguration('product_price.csv', static::IMPORT_TYPE_PRODUCT_PRICE);
     }
 
     /**

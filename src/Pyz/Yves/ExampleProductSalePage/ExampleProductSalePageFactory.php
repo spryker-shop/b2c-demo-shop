@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of the Spryker Suite.
+ * This file is part of the Spryker Commerce OS.
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
@@ -11,14 +11,6 @@ use Spryker\Yves\Kernel\AbstractFactory;
 
 class ExampleProductSalePageFactory extends AbstractFactory
 {
-    /**
-     * @return string[]
-     */
-    public function getExampleProductSalePageWidgetPlugins(): array
-    {
-        return $this->getProvidedDependency(ExampleProductSalePageDependencyProvider::PLUGIN_PRODUCT_SALE_PAGE_WIDGETS);
-    }
-
     /**
      * @return \Spryker\Client\Search\SearchClientInterface
      */

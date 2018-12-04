@@ -15,13 +15,17 @@
 {% block body %}
     {% if data.productItem is not empty %}
         <li class="{{ config.name }}__item">
-            {{ widget('CartItemProductOptionWidgetPlugin', data.productItem) }}
+            {% include molecule('product-options', 'ProductOptionWidget') ignore missing with {
+                data: {
+                    options: data.productItem.productOptions | default([])
+                }
+            } only %}
         </li>
     {% else %}
         {% for option in data.options %}
             <li class="{{ config.name }}__item">
                 <ul>
-                    <li class="option-item">
+                    <li class="{{ config.name }}__item-inner">
                         + {{ option.value | trans }}:
                         <span class="float-right">{{ option.sumPrice | default(0) | money }}</span>
                     </li>

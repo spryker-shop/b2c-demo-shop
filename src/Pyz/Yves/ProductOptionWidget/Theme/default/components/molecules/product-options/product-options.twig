@@ -1,0 +1,29 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'product-options',
+} %}
+
+{% define data = {
+    options: null
+} %}
+
+{% block component %}
+    {% if data.options is not empty %}
+        {{parent()}}
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    <ul class="list list--expand list--plus">
+        {% for option in data.options %}
+            <li class="list__item {{ config.name }}__item">
+                {{ option.value | trans }}
+
+                {% if can('SeePricePermissionPlugin') %}
+                    <span class="float-right">{{ option.unitPrice | money }}</span>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

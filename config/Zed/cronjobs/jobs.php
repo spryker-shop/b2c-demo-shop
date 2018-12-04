@@ -94,6 +94,15 @@ $jobs[] = [
 'stores' => $allStores,
 ];
 
+$jobs[] = [
+    'name' => 'deactivate-discontinued-products',
+    'command' => '$PHP_BIN vendor/bin/console deactivate-discontinued-products',
+    'schedule' => '0 0 * * *',
+    'enable' => true,
+    'run_on_non_production' => true,
+    'stores' => $allStores,
+];
+
 /* StateMachine */
 /*
 $jobs[] = [
@@ -123,3 +132,13 @@ $jobs[] = [
     'stores' => $allStores,
 ];
 */
+
+/* Quote */
+$jobs[] = [
+    'name' => 'clean-expired-guest-cart',
+    'command' => '$PHP_BIN vendor/bin/console quote:delete-expired-guest-quotes',
+    'schedule' => '30 1 * * *',
+    'enable' => true,
+    'run_on_non_production' => true,
+    'stores' => $allStores,
+];

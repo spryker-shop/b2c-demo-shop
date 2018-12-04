@@ -6,7 +6,14 @@
 {% block body %}
     {% if data.productSetList is defined %}
         {% for productSet in data.productSetList %}
-            {{ widget('ProductSetWidgetPlugin', productSet.productSet, productSet.productViews) }}
+            {% include organism('product-set-cms-content', 'ProductSetWidget') ignore missing with {
+                data: {
+                    products: productSet.productViews,
+                    name: productSet.productSet.name,
+                    description: productSet.productSet.description,
+                    images: productSet.productSet.imageSets.0.images | default([])
+                }
+            } only %}
         {% endfor %}
     {% endif %}
 {% endblock %}

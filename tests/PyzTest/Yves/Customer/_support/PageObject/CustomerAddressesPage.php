@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of the Spryker Suite.
+ * This file is part of the Spryker Commerce OS.
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
@@ -11,12 +11,12 @@ use Generated\Shared\Transfer\AddressTransfer;
 
 class CustomerAddressesPage extends Customer
 {
-    const URL = '/customer/address';
+    public const URL = '/customer/address';
 
-    const ADD_ADDRESS_LINK = '[data-qa="customer-add-new-address"]';
+    public const ADD_ADDRESS_LINK = '[data-qa="customer-add-new-address"]';
 
-    const ADDRESS_A = 'address a';
-    const ADDRESS_B = 'address b';
+    public const ADDRESS_A = 'address a';
+    public const ADDRESS_B = 'address b';
 
     /**
      * @var array

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of the Spryker Suite.
+ * This file is part of the Spryker Commerce OS.
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
@@ -12,7 +12,7 @@ use SprykerShop\Yves\ShopApplication\Plugin\Provider\AbstractYvesControllerProvi
 
 class ExampleProductSaleControllerProvider extends AbstractYvesControllerProvider
 {
-    const ROUTE_SALE = 'sale';
+    public const ROUTE_SALE = 'sale';
 
     /**
      * @param \Silex\Application $app

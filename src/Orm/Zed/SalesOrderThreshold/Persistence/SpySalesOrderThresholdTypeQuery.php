@@ -1,13 +1,13 @@
 <?php
 
 /**
- * This file is part of the Spryker Suite.
+ * This file is part of the Spryker Commerce OS.
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace Orm\Zed\SalesOrderThreshold\Persistence;
 
-use Orm\Zed\SalesOrderThreshold\Persistence\Base\SpySalesOrderThresholdTypeQuery as BaseSpySalesOrderThresholdTypeQuery;
+use Spryker\Zed\SalesOrderThreshold\Persistence\Propel\AbstractSpySalesOrderThresholdTypeQuery;
 
 /**
  * Skeleton subclass for performing query and update operations on the 'spy_sales_order_threshold_type' table.
@@ -19,6 +19,6 @@ use Orm\Zed\SalesOrderThreshold\Persistence\Base\SpySalesOrderThresholdTypeQuery
  * long as it does not already exist in the output directory.
  *
  */
-class SpySalesOrderThresholdTypeQuery extends BaseSpySalesOrderThresholdTypeQuery
+class SpySalesOrderThresholdTypeQuery extends AbstractSpySalesOrderThresholdTypeQuery
 {
 }

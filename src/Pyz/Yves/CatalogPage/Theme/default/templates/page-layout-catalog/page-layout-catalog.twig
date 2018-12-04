@@ -21,11 +21,11 @@
 {% block container %}
 
     {% block title %}
-        {% if data.category.banner_path %}
+        {% if data.category.image is defined %}
             {% include molecule('jumbotron') with {
                 modifiers: ['category'],
                 data: {
-                    imageUrl: data.category.banner_path,
+                    imageUrl: data.category.image,
                     headline: data.title,
                     subHeadline: null
                 }
@@ -75,7 +75,7 @@
 
                                 <div class="grid grid--stretch product-list">
                                     {% for product in data.products %}
-                                        {{ widget('ProductWidgetPlugin', product, data.viewMode) }}
+                                        {% widget 'CatalogPageProductWidget' args [product, data.viewMode] only %}{% endwidget %}
                                     {% endfor %}
                                 </div>
 

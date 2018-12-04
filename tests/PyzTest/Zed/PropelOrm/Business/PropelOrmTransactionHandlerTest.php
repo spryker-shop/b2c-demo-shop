@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of the Spryker Suite.
+ * This file is part of the Spryker Commerce OS.
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
@@ -25,8 +25,8 @@ use Throwable;
  */
 class PropelOrmTransactionHandlerTest extends Unit
 {
-    const TEST_SKU = 'foo';
-    const TEST_NAME = 'Foo Bar';
+    public const TEST_SKU = 'foo';
+    public const TEST_NAME = 'Foo Bar';
 
     /**
      * @var \Spryker\Zed\Product\Persistence\ProductQueryContainerInterface

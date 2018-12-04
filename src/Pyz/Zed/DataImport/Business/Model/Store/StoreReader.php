@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of the Spryker Suite.
+ * This file is part of the Spryker Commerce OS.
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
@@ -42,7 +42,7 @@ class StoreReader implements DataReaderInterface
      *
      * @since 5.0.0
      *
-     * @return void Any returned value is ignored.
+     * @return void
      */
     public function next()
     {
@@ -85,7 +85,7 @@ class StoreReader implements DataReaderInterface
      *
      * @since 5.0.0
      *
-     * @return void Any returned value is ignored.
+     * @return void
      */
     public function rewind()
     {

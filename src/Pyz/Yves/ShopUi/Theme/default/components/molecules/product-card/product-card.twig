@@ -35,11 +35,11 @@
             {% endblock %}
 
             {% block labels %}
-                {{ widget('ProductAbstractLabelWidgetPlugin', data.abstractId) }}
+                {% widget 'ProductAbstractLabelWidget' args [data.abstractId] only %}{% endwidget %}
             {% endblock %}
 
             {% block groups %}
-                {{ widget('ProductGroupWidgetPlugin', data.abstractId) }}
+                {% widget 'ProductGroupWidget' args [data.abstractId] use view('product-color-selector', 'ProductGroupWidget') only %}{% endwidget %}
             {% endblock %}
         </div>
 
@@ -68,7 +68,7 @@
             </a>
 
             {% block rating %}
-                {{ widget('ProductAbstractReviewWidgetPlugin', data.abstractId) }}
+                {% widget 'DisplayProductAbstractReviewWidget' args [data.abstractId] only %}{% endwidget %}
             {% endblock %}
 
             {% block detail %}{% endblock %}

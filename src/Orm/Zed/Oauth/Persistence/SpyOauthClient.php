@@ -1,13 +1,13 @@
 <?php
 
 /**
- * This file is part of the Spryker Suite.
+ * This file is part of the Spryker Commerce OS.
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace Orm\Zed\Oauth\Persistence;
 
-use Orm\Zed\Oauth\Persistence\Base\SpyOauthClient as BaseSpyOauthClient;
+use Spryker\Zed\Oauth\Persistence\Propel\AbstractSpyOauthClient as BaseSpyOauthClient;
 
 /**
  * Skeleton subclass for representing a row from the 'spy_oauth_client' table.

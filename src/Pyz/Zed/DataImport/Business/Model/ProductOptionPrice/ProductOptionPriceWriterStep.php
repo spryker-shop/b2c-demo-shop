@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of the Spryker Suite.
+ * This file is part of the Spryker Commerce OS.
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
@@ -20,13 +20,13 @@ use Spryker\Zed\ProductOption\Dependency\ProductOptionEvents;
 
 class ProductOptionPriceWriterStep extends PublishAwareStep implements DataImportStepInterface
 {
-    const BULK_SIZE = 100;
+    public const BULK_SIZE = 100;
 
-    const KEY_PRODUCT_OPTION_SKU = 'product_option_sku';
-    const KEY_STORE = 'store';
-    const KEY_CURRENCY = 'currency';
-    const KEY_NET_AMOUNT = 'value_net';
-    const KEY_GROSS_AMOUNT = 'value_gross';
+    public const KEY_PRODUCT_OPTION_SKU = 'product_option_sku';
+    public const KEY_STORE = 'store';
+    public const KEY_CURRENCY = 'currency';
+    public const KEY_NET_AMOUNT = 'value_net';
+    public const KEY_GROSS_AMOUNT = 'value_gross';
 
     /**
      * @var int[] Keys are store names

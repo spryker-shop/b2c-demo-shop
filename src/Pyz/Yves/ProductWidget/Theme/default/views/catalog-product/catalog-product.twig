@@ -16,6 +16,7 @@
 
     {% set image = data.product.images| last %}
     {% embed productTemplate with {
+        _widget: _widget,
         productTemplate: productTemplate,
         class: class,
         data: {
@@ -28,14 +29,13 @@
         }
     } only %}
         {% block labels %}
-            {{ widget('ProductLabelWidgetPlugin', _widget.product.id_product_labels) }}
+            {% widget 'ProductConcreteLabelWidget' args [_widget.product.id_product_labels] only %}{% endwidget %}
         {% endblock %}
 
         {% block rating %}
             {% if _widget.product.rating is defined %}
                 <div class="{{ config.name }}__review">
-                    {{ widget('ProductReviewWidgetPlugin', _widget.product.rating) }}
-
+                    {% widget 'ProductReviewDisplayWidget' args [_widget.product.rating] only %}{% endwidget %}
                     <span class="{{ config.name }}__review-count">
                         {{ _widget.product.review_count }}
                     </span>

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of the Spryker Suite.
+ * This file is part of the Spryker Commerce OS.
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
@@ -11,15 +11,20 @@ use Spryker\Zed\CategoryDataImport\Communication\Plugin\CategoryDataImportPlugin
 use Spryker\Zed\DataImport\Communication\Plugin\DataImportEventBehaviorPlugin;
 use Spryker\Zed\DataImport\Communication\Plugin\DataImportPublisherPlugin;
 use Spryker\Zed\DataImport\DataImportDependencyProvider as SprykerDataImportDependencyProvider;
+use Spryker\Zed\FileManagerDataImport\Communication\Plugin\FileManagerDataImportPlugin;
 use Spryker\Zed\Kernel\Container;
+use Spryker\Zed\PriceProductDataImport\Communication\Plugin\PriceProductDataImportPlugin;
+use Spryker\Zed\ProductAlternativeDataImport\Communication\Plugin\ProductAlternativeDataImportPlugin;
+use Spryker\Zed\ProductDiscontinuedDataImport\Communication\Plugin\ProductDiscontinuedDataImportPlugin;
+use Spryker\Zed\SalesOrderThresholdDataImport\Communication\Plugin\DataImport\SalesOrderThresholdDataImportPlugin;
 
 class DataImportDependencyProvider extends SprykerDataImportDependencyProvider
 {
-    const FACADE_AVAILABILITY = 'availability facade';
-    const FACADE_CATEGORY = 'category facade';
-    const FACADE_PRODUCT_BUNDLE = 'product bundle facade';
-    const FACADE_PRODUCT_RELATION = 'product relation facade';
-    const FACADE_PRODUCT_SEARCH = 'product search facade';
+    public const FACADE_AVAILABILITY = 'availability facade';
+    public const FACADE_CATEGORY = 'category facade';
+    public const FACADE_PRODUCT_BUNDLE = 'product bundle facade';
+    public const FACADE_PRODUCT_RELATION = 'product relation facade';
+    public const FACADE_PRODUCT_SEARCH = 'product search facade';
 
     /**
      * @param \Spryker\Zed\Kernel\Container $container
@@ -116,6 +121,11 @@ class DataImportDependencyProvider extends SprykerDataImportDependencyProvider
     {
         return [
             [new CategoryDataImportPlugin(), DataImportConfig::IMPORT_TYPE_CATEGORY_TEMPLATE],
+            new PriceProductDataImportPlugin(),
+            new ProductDiscontinuedDataImportPlugin(),
+            new ProductAlternativeDataImportPlugin(),
+            new SalesOrderThresholdDataImportPlugin(),
+            new FileManagerDataImportPlugin(),
         ];
     }
 

@@ -11,12 +11,7 @@
 
 {% block component %}
     {% set isItemVariantReplaceAvailable = data.productItemAttributes is not empty %}
-
-    {% if widgetExists('QuantitySalesUnitWidgetPlugin') %}
-        {% set isItemVariantReplaceAvailable = not widgetBlock('QuantitySalesUnitWidgetPlugin', 'hasSalesUnit', data.productItem) and isItemVariantReplaceAvailable %}
-    {% endif %}
-
-    {% if isItemVariantReplaceAvailable %}{{ parent() }}{% endif %}
+    {% if isItemVariantReplaceAvailable %}{{parent()}}{% endif %}
 {% endblock %}
 
 {% block body %}

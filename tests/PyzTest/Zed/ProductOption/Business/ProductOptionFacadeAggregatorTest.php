@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of the Spryker Suite.
+ * This file is part of the Spryker Commerce OS.
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
@@ -61,7 +61,7 @@ class ProductOptionFacadeAggregatorTest extends Test
         $productOptionTransfer = $orderTransfer->getItems()[0]->getProductOptions()[0];
 
         $this->assertNotEmpty($salesOrderItemOptionEntity);
-        $this->assertSame($salesOrderItemOptionEntity->getGrossPrice(), $productOptionTransfer->getUnitGrossPrice());
+        $this->assertSame($salesOrderItemOptionEntity->getGrossPrice(), $productOptionTransfer->getSumGrossPrice());
     }
 
     /**
@@ -212,7 +212,7 @@ class ProductOptionFacadeAggregatorTest extends Test
         $itemTransfer->setIdSalesOrderItem($salesOrderItemEntity->getIdSalesOrderItem());
 
         $productOptionTransfer = new ProductOptionTransfer();
-        $productOptionTransfer->setUnitGrossPrice(200);
+        $productOptionTransfer->setSumGrossPrice(200);
         $productOptionTransfer->setValue('value');
         $productOptionTransfer->setGroupName('group name');
         $productOptionTransfer->setTaxRate(19);

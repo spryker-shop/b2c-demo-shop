@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of the Spryker Suite.
+ * This file is part of the Spryker Commerce OS.
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
@@ -11,8 +11,8 @@ use Orm\Zed\Glossary\Persistence\SpyGlossaryKeyQuery;
 use Orm\Zed\Glossary\Persistence\SpyGlossaryTranslationQuery;
 use Orm\Zed\Product\Persistence\Map\SpyProductAbstractTableMap;
 use Orm\Zed\Product\Persistence\SpyProductAbstractQuery;
-use Orm\Zed\ProductOption\Persistence\Base\SpyProductOptionGroup;
 use Orm\Zed\ProductOption\Persistence\SpyProductAbstractProductOptionGroupQuery;
+use Orm\Zed\ProductOption\Persistence\SpyProductOptionGroup;
 use Orm\Zed\ProductOption\Persistence\SpyProductOptionGroupQuery;
 use Orm\Zed\ProductOption\Persistence\SpyProductOptionValueQuery;
 use Propel\Runtime\ActiveQuery\Criteria;
@@ -29,16 +29,16 @@ use Spryker\Zed\ProductOption\Dependency\ProductOptionEvents;
  */
 class ProductOptionWriterStep extends PublishAwareStep implements DataImportStepInterface
 {
-    const BULK_SIZE = 100;
+    public const BULK_SIZE = 100;
 
-    const KEY_ABSTRACT_PRODUCT_SKUS = 'abstract_product_skus';
-    const KEY_GROUP_NAME_TRANSLATION_KEY = 'group_name_translation_key';
-    const KEY_IS_ACTIVE = 'is_active';
-    const KEY_SKU = 'sku';
-    const KEY_OPTION_NAME_TRANSLATION_KEY = 'option_name_translation_key';
-    const KEY_OPTION_NAME = 'option_name';
-    const KEY_GROUP_NAME = 'group_name';
-    const KEY_TAX_SET_NAME = 'tax_set_name';
+    public const KEY_ABSTRACT_PRODUCT_SKUS = 'abstract_product_skus';
+    public const KEY_GROUP_NAME_TRANSLATION_KEY = 'group_name_translation_key';
+    public const KEY_IS_ACTIVE = 'is_active';
+    public const KEY_SKU = 'sku';
+    public const KEY_OPTION_NAME_TRANSLATION_KEY = 'option_name_translation_key';
+    public const KEY_OPTION_NAME = 'option_name';
+    public const KEY_GROUP_NAME = 'group_name';
+    public const KEY_TAX_SET_NAME = 'tax_set_name';
 
     /**
      * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
@@ -92,7 +92,7 @@ class ProductOptionWriterStep extends PublishAwareStep implements DataImportStep
 
     /**
      * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     * @param \Orm\Zed\ProductOption\Persistence\Base\SpyProductOptionGroup $productOptionGroupEntity
+     * @param \Orm\Zed\ProductOption\Persistence\SpyProductOptionGroup $productOptionGroupEntity
      *
      * @return bool
      */

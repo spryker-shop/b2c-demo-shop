@@ -1,16 +1,14 @@
 <?php
 
 /**
- * This file is part of the Spryker Suite.
+ * This file is part of the Spryker Commerce OS.
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace Pyz\Yves\ProductReviewWidget\Form;
 
-use Generated\Shared\Transfer\ProductReviewRequestTransfer;
 use SprykerShop\Yves\ProductReviewWidget\Form\ProductReviewForm as SprykerShopProductReviewForm;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -23,15 +21,6 @@ use Symfony\Component\Validator\Constraints\LessThanOrEqual;
  */
 class ProductReviewForm extends SprykerShopProductReviewForm
 {
-    const FIELD_RATING = ProductReviewRequestTransfer::RATING;
-    const FIELD_SUMMARY = ProductReviewRequestTransfer::SUMMARY;
-    const FIELD_DESCRIPTION = ProductReviewRequestTransfer::DESCRIPTION;
-    const FIELD_NICKNAME = ProductReviewRequestTransfer::NICKNAME;
-    const FIELD_PRODUCT = ProductReviewRequestTransfer::ID_PRODUCT_ABSTRACT;
-
-    const UNSELECTED_RATING = -1;
-    const MINIMUM_RATING = 1;
-
     /**
      * @return string
      */
@@ -102,7 +91,7 @@ class ProductReviewForm extends SprykerShopProductReviewForm
     {
         $unselectedChoice = [static::UNSELECTED_RATING => 'product_review.submit.rating.none'];
         $choices = range(static::MINIMUM_RATING, $this->getFactory()->getProductReviewClient()->getMaximumRating());
-        $choices = $unselectedChoice + array_combine($choices, $choices);
+        $choices = array_merge($unselectedChoice, array_combine($choices, $choices));
 
         return $choices;
     }
@@ -170,24 +159,6 @@ class ProductReviewForm extends SprykerShopProductReviewForm
                 'constraints' => [
                     new Length(['min' => 1, 'max' => 255]),
                 ],
-            ]
-        );
-
-        return $this;
-    }
-
-    /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     *
-     * @return $this
-     */
-    protected function addProductField(FormBuilderInterface $builder)
-    {
-        $builder->add(
-            static::FIELD_PRODUCT,
-            HiddenType::class,
-            [
-                'required' => true,
             ]
         );
 

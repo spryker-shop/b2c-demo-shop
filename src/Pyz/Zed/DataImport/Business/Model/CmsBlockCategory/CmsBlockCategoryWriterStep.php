@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of the Spryker Suite.
+ * This file is part of the Spryker Commerce OS.
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
@@ -20,10 +20,10 @@ use Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface;
 
 class CmsBlockCategoryWriterStep extends PublishAwareStep implements DataImportStepInterface
 {
-    const KEY_BLOCK_NAME = 'block_name';
-    const KEY_CATEGORY_KEY = 'category_key';
-    const KEY_CATEGORY_TEMPLATE_NAME = 'template_name';
-    const KEY_CMS_BLOCK_CATEGORY_POSITION_NAME = 'cms_block_category_position_name';
+    public const KEY_BLOCK_NAME = 'block_name';
+    public const KEY_CATEGORY_KEY = 'category_key';
+    public const KEY_CATEGORY_TEMPLATE_NAME = 'template_name';
+    public const KEY_CMS_BLOCK_CATEGORY_POSITION_NAME = 'cms_block_category_position_name';
 
     /**
      * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of the Spryker Suite.
+ * This file is part of the Spryker Commerce OS.
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
@@ -16,10 +16,10 @@ use Spryker\Zed\ProductRelation\Dependency\ProductRelationEvents;
 
 class ProductRelationWriter extends PublishAwareStep implements DataImportStepInterface
 {
-    const KEY_RELATION_TYPE = 'relation_type';
-    const KEY_RULE = 'rule';
-    const KEY_IS_ACTIVE = 'is_active';
-    const KEY_IS_REBUILD_SCHEDULED = 'is_rebuild_scheduled';
+    public const KEY_RELATION_TYPE = 'relation_type';
+    public const KEY_RULE = 'rule';
+    public const KEY_IS_ACTIVE = 'is_active';
+    public const KEY_IS_REBUILD_SCHEDULED = 'is_rebuild_scheduled';
 
     /**
      * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet

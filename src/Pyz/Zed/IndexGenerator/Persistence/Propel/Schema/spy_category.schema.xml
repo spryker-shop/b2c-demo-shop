@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<database xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:noNamespaceSchemaLocation="http://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\Category\Persistence" package="src.Orm.Zed.Category.Persistence">
+  <table name="spy_category">
+    <index name="index-spy_category-fk_category_template">
+      <index-column name="fk_category_template"/>
+    </index>
+  </table>
+  <table name="spy_category_attribute">
+    <index name="index-spy_category_attribute-fk_locale">
+      <index-column name="fk_locale"/>
+    </index>
+    <index name="index-spy_category_attribute-fk_category">
+      <index-column name="fk_category"/>
+    </index>
+  </table>
+  <table name="spy_category_node">
+    <index name="index-spy_category_node-fk_parent_category_node">
+      <index-column name="fk_parent_category_node"/>
+    </index>
+    <index name="index-spy_category_node-fk_category">
+      <index-column name="fk_category"/>
+    </index>
+  </table>
+  <table name="spy_category_closure_table">
+    <index name="index-spy_category_closure_table-fk_category_node">
+      <index-column name="fk_category_node"/>
+    </index>
+    <index name="index-spy_category_closure_table-fk_category_node_descendant">
+      <index-column name="fk_category_node_descendant"/>
+    </index>
+  </table>
+</database>

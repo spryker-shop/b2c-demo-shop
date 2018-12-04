@@ -10,12 +10,12 @@
     categoryId: _view.idCategory | default(null),
     filterPath: _view.filterPath | default(null),
     viewMode: _view.viewMode | default(null),
-    
+
     title: ('global.search.results' | trans) ~ ' ' ~ _view.searchString,
     metaTitle: _view.pageTitle | default(_view.category.name | default),
     metaDescription: _view.pageDescription | default,
     metaKeywords: _view.pageKeywords | default,
-    
+
     pagination: {
         parameters: app.request.query.all(),
         currentPage: _view.pagination.currentPage,

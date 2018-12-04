@@ -11,29 +11,23 @@
 } %}
 
 {% block title %}
-    {% if widgetExists('CartOperationsWidgetPlugin') %}
-        {% set cartOperation = widget('CartOperationsWidgetPlugin', data.cart) | trim %}
-
-        {% if cartOperation is not empty %}
-            {{ cartOperation | raw }}
-        {% endif %}
-    {% endif %}
+    {% widget 'CartOperationsWidget' args [data.cart] use view('cart-operations-title', 'MultiCartWidget') only %}{% endwidget %}
 {% endblock %}
 
 {% block content %}
-    {% if widgetExists('CartToShoppingListWidgetPlugin') and (data.cart.idQuote is not empty) and (data.cart.items is not empty) %}
+    {% if data.cart.idQuote is not empty %}
         <div>
-            {{ widget('CartToShoppingListWidgetPlugin', data.cart.idQuote) }}
+        {% widget 'CreateShoppingListFromCartWidget' args [data.cart.idQuote] only %}{% endwidget %}
         </div>
     {% endif %}
 
     {% if data.cart.items is empty %}
         <div class="page-layout-cart__empty text-center">
             <h1>{{ data.title }}</h1>
-            <h6>{{ 'cart.empty' | trans }}</h6>
+            <h6 class="spacing-top spacing-top--bigger">{{ 'cart.empty' | trans }}</h6>
         </div>
     {% else %}
-        <div class="grid grid--spaced-lg">
+        <div class="grid spacing-x spacing-x--big">
             <div class="col col--sm-12 col--lg-8">
                 <div class="page-layout-cart__col page-layout-cart__col--content">
                     <div class="cart-box grid grid--middle grid--justify">
@@ -51,7 +45,7 @@
                             } only %}
                         {% endfor %}
                     </div>
-                    {{ widget('DiscountPromotionItemListWidgetPlugin', data.cart, data.request) }}
+                    {% widget 'CartDiscountPromotionProductListWidget' args [data.cart, data.request] only %}{% endwidget %}
                 </div>
             </div>
 
@@ -60,7 +54,7 @@
                     <h3 class="cart-box">{{ 'cart.title_sidebar' | trans }}</h3>
                     <div class="cart-box cart-box--voucher cart-box--reset-spacing">
                         {% if not is_granted('IS_AUTHENTICATED_FULLY') or can('WriteSharedCartPermissionPlugin', data.cart.idQuote) %}
-                            {{ widget('DiscountVoucherFormWidgetPlugin') }}
+                            {% widget 'DiscountVoucherFormWidget' only %}{% endwidget %}
                         {% endif %}
                     </div>
                     {% include molecule('cart-summary', 'CartPage') with {
@@ -73,7 +67,5 @@
             </div>
         </div>
     {% endif %}
-
-    {{ widget('UpSellingProductsWidgetPlugin', data.cart) }}
-    {{ widget('MultiCartListWidgetPlugin', data.cart) }}
+    {% widget 'UpSellingProductsWidget' args [data.cart] only %}{% endwidget %}
 {% endblock %}

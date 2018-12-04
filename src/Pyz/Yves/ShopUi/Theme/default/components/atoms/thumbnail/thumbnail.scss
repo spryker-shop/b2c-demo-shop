@@ -3,42 +3,34 @@
         margin: 0;
     }
 
+    &--with-overlay {
+        position: relative;
+        overflow: hidden;
+
+        &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: $setting-color-alpha-1;
+            z-index: $setting-zi-element;
+        }
+    }
+
     &--catalog {
         margin: 0 rem(15) 0 0;
         border-radius: rem(3);
         width: rem(41);
         height: rem(41);
-        overflow: hidden;
-        position: relative;
-
-        &::after {
-            content: '';
-            display: block;
-            position: absolute;
-            background-color: $setting-color-alpha-1;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            z-index: $setting-zi-element;
-        }
     }
 
     &--cart-bundle {
         width: rem(120);
         height: rem(44);
+        border-radius: rem(3);
         margin: 0;
-
-        &::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            border-radius: rem(4);
-            background: $setting-color-alpha-1;
-        }
     }
 
     &__image {
@@ -56,10 +48,12 @@
 
     &--wishlist {
         display: inline-block;
+        vertical-align: middle;
         margin-right: rem(10);
+        height: rem(32);
 
-        @include helper-breakpoint-media-max($sm-max) {
-            height: rem(32);
+        @include helper-breakpoint-media-min($md-min) {
+            height: 5rem;
         }
     }
 }
