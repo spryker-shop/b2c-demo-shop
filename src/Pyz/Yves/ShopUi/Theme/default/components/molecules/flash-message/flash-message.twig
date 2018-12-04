@@ -5,6 +5,8 @@
     tag: 'flash-message'
 } %}
 
+{% define modifiers = [] %}
+
 {% define data = {
     action: '',
     title: '',
@@ -12,7 +14,7 @@
     icon: null
 } %}
 
-{% set modifiers = [data.action] | merge(modifiers | default(['info'])) %}
+{% set modifiers = [data.action | default('info')] | merge(modifiers) %}
 
 {% set iconName = data.action is empty ? 'action-default' : 'action-' ~ data.action %}
 {% set iconName = data.icon is empty ? iconName : data.icon %}
