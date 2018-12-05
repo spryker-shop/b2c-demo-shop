@@ -95,9 +95,14 @@
             }
         }
 
-        &--order-table {
+        &--actions {
             #{$name}__item {
                 white-space: nowrap;
+                margin: 0;
+
+                @include helper-breakpoint-media-min($md-min) {
+                    margin: 0 0.5rem;
+                }
             }
         }
 

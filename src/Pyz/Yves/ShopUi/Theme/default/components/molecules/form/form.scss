@@ -38,7 +38,12 @@
             text-align: right;
 
             &--profile {
-                padding: rem(8) rem(16);
+                padding: rem(8) 0;
+
+                @include helper-breakpoint-media-max($lg-max) {
+                    display: flex;
+                    flex-direction: column-reverse;
+                }
             }
         }
 

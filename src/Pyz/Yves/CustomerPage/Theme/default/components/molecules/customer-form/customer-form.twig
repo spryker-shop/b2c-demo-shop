@@ -20,7 +20,7 @@
 
     submit: {
         text: 'forms.submit-btn' | trans,
-        class: 'button ',
+        class: 'button button--expand-mobile spacing-top',
         icon: null,
         enable: false,
         qa: 'submit-button'
@@ -28,7 +28,7 @@
 
     cancel: {
         text: 'general.back.button' | trans,
-        class: 'button  button--hollow',
+        class: 'button  button--hollow button--expand-mobile spacing-top',
         icon: 'chevron-left',
         url: '#',
         enable: false,
@@ -60,7 +60,7 @@
             {% block fields %}
                 {% for fieldName in data.form.children | keys %}
                     {% set field = attribute(data.form.children, fieldName) %}
-                    {% set fieldLayoutClass = 'col col--sm-12' %}
+                    {% set fieldLayoutClass = 'col col--sm-12 spacing-x spacing-x--inner spacing-x--reset' %}
 
                     {% if fieldName in data.layout | keys %}
                         {% set fieldLayoutClass = attribute(data.layout, fieldName) %}
@@ -83,7 +83,7 @@
             <div class="{{config.name}}__actions {{config.name}}__actions--profile">
                 {% if data.cancel.enable %}
                     {% block cancel %}
-                        <a href="{{data.cancel.url}}" class="{{config.name}}__action {{data.cancel.class}}" {{qa(data.cancel.qa)}}>
+                        <a href="{{data.cancel.url}}" class="{{config.name}}__action {{config.name}}__action--no-margin {{data.cancel.class}}" {{qa(data.cancel.qa)}}>
                             {{data.cancel.text}}
                         </a>
                     {% endblock %}
@@ -91,7 +91,7 @@
 
                 {% if data.submit.enable %}
                     {% block submit %}
-                        <button type="submit" class="{{config.name}}__action {{data.submit.class}}" {{qa(data.submit.qa)}}>
+                        <button type="submit" class="{{config.name}}__action {{config.name}}__action--no-margin {{data.submit.class}}" {{qa(data.submit.qa)}}>
                             {% if data.submit.icon is not empty %}
                                 {% include atom('icon') with {
                                     modifiers: ['small'],
