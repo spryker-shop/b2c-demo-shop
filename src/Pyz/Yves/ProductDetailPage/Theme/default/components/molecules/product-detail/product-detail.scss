@@ -1,4 +1,6 @@
 @mixin product-detail-page-product-detail($name: '.product-detail') {
+    $spacing-between-col: rem(45);
+
     #{$name} {
         display: flex;
         flex-wrap: wrap;
@@ -15,7 +17,7 @@
             width: 100%;
 
             @include helper-breakpoint-media-min($md-min) {
-                width: calc(50% - #{rem(45)});
+                width: calc(50% - #{$spacing-between-col});
             }
         }
     }
