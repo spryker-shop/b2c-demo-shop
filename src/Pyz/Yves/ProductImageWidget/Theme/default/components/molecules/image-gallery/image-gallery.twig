@@ -27,7 +27,7 @@
             }
         } only %}
     {% endif %}
-    <div class="{{config.name}}__container {{config.jsName}}">
+    <div class="{{config.name}}__container {% if imagesQuantity == 1 %} {{config.name}}__container--single-image {% endif %} {{config.jsName}}">
         {% for image in data.images %}
             <div class="{{config.name}}__item {{config.jsName}}__item {% if loop.first %}{{config.name}}__item--active{% endif %}">
                 {% if image.externalUrlLarge is not empty %}

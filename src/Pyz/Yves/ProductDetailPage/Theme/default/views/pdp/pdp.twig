@@ -54,16 +54,16 @@
                         bundleItems: data.bundleItems
                     }
                 } only %}
-
-                {% include molecule('product-detail', 'ProductDetailPage') with {
-                    data: {
-                        description: data.product.description,
-                        attributes: data.product.attributes,
-                        sku: data.product.sku
-                    }
-                } only %}
             </div>
         </div>
+
+        {% include molecule('product-detail', 'ProductDetailPage') with {
+            data: {
+                description: data.product.description,
+                attributes: data.product.attributes,
+                sku: data.product.sku
+            }
+        } only %}
     </div>
 
     {% if data.isBundle != null %}
@@ -76,11 +76,11 @@
 
     <div class="container__inner">
         {% widget 'ProductDetailPageReviewWidget' args [data.product.idProductAbstract] only %}{% endwidget %}
-    </div>
 
-    {% if data.product.productSetIds is not empty %}
-        {% widget 'ProductSetIdsWidget' args [data.product.productSetIds] only %}{% endwidget %}
-    {% endif %}
+        {% if data.product.productSetIds is not empty %}
+            {% widget 'ProductSetIdsWidget' args [data.product.productSetIds] only %}{% endwidget %}
+        {% endif %}
+    </div>
 
     {% widget 'UpSellingProductsWidget' args [data.cart] only %}{% endwidget %}
     {% widget 'SimilarProductsWidget' args [data.product] only %}{% endwidget %}

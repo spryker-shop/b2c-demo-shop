@@ -1,6 +1,10 @@
 @mixin product-review-widget-review-distribution-display($name: '.review-distribution-display') {
     #{$name} {
-        margin-bottom: rem(80);
+        margin-bottom: rem(40);
+
+        @include helper-breakpoint-media-min($md-min) {
+            margin-bottom: rem(80);
+        }
 
         &__cell {
             padding-bottom: rem(12);

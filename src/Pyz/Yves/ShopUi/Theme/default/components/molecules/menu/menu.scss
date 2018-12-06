@@ -81,6 +81,9 @@
             #{$name}__item,
             #{$name}__link {
                 letter-spacing: rem(0.2);
+            }
+
+            #{$name}__link {
                 font-weight: fw(light);
             }
         }
@@ -92,9 +95,14 @@
             }
         }
 
-        &--order-table {
+        &--actions {
             #{$name}__item {
                 white-space: nowrap;
+                margin: 0;
+
+                @include helper-breakpoint-media-min($md-min) {
+                    margin: 0 0.5rem;
+                }
             }
         }
 

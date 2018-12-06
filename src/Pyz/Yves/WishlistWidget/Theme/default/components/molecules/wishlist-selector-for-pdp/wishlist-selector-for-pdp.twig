@@ -1,0 +1,19 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'wishlist-selector-for-pdp',
+} %}
+
+{% define data = {
+    sku: required,
+    idProductConcrete: required
+} %}
+
+{% block body %}
+    {% include molecule('wishlist-selector', 'WishlistWidget') ignore missing with {
+        data: {
+            sku: data.sku,
+            idProductConcrete: data.idProductConcrete
+        }
+    } only %}
+{% endblock %}

@@ -104,22 +104,34 @@
                 border: solid rem(1) $setting-color-transparent;
                 padding: rem(1);
                 border-radius: 100%;
+                position: relative;
+
+                &::before {
+                    content: '';
+                    position: absolute;
+                    left: 50%;
+                    top: 50%;
+                    transform: translate(-50%, -50%);
+                    width: rem(4);
+                    height: rem(4);
+                    border-radius: 50%;
+                    background-color: $setting-color-gray-3;
+                }
             }
 
             button {
                 width: rem(4);
                 height: rem(4);
                 font: 0/0 $setting-font-family;
-                border-radius: 100%;
-                background: $setting-color-gray-3;
-
-                &[aria-selected] {
-                    background: $setting-color-transparent;
-                }
+                opacity: 0;
             }
 
             .slick-active {
                 border-color: $setting-color-alt;
+
+                &::before {
+                    background-color: $setting-color-transparent;
+                }
             }
         }
 

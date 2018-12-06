@@ -57,7 +57,7 @@
                 }
             }
 
-            &--footer {
+            &--mobile {
                 &:hover,
                 .no-touch &:not(#{$name}__title--read-only):hover {
                     cursor: default;
@@ -76,11 +76,24 @@
                     }
                 }
             }
+
+            &--desktop-border-bottom {
+                @include helper-breakpoint-media-min($md-min) {
+                    border-bottom: rem(1) dotted $setting-color-gray-3;
+                    padding-bottom: rem(14);
+                    margin-bottom: rem(16);
+                }
+            }
         }
 
         &__content {
             padding-top: rem(25);
             padding-bottom: rem(15);
+
+            &--mobile {
+                padding-top: 0;
+                padding-bottom: rem(5);
+            }
 
             &--option {
                 padding-top: rem(5);
@@ -97,11 +110,6 @@
                 padding-bottom: rem(14);
             }
 
-            &--footer {
-                padding-top: 0;
-                padding-bottom: rem(5);
-            }
-
             &--flex {
                 display: flex;
             }
@@ -111,7 +119,7 @@
             border-top: rem(1) dotted $setting-color-gray-3;
         }
 
-        &--footer {
+        &--mobile {
             border-top: rem(1) dotted $setting-color-gray-3;
 
             @include helper-breakpoint-media-min($md-min) {
