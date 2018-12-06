@@ -54,7 +54,6 @@
                         bundleItems: data.bundleItems
                     }
                 } only %}
-
                 {% include molecule('product-detail', 'ProductDetailPage') with {
                     data: {
                         description: data.product.description,
@@ -65,7 +64,7 @@
             </div>
         </div>
     </div>
-
+    {% widget 'ProductAlternativeListWidget' args [data.product] only %}{% endwidget %}
     {% if data.isBundle != null %}
         {% include molecule('product-bundle', 'ProductDetailPage') with {
             data: {
