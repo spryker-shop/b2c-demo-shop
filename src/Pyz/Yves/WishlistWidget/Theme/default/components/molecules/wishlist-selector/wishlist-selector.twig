@@ -34,18 +34,16 @@
     {% endif %}
 
     <form method="POST" action="{{ path('wishlist/add-item', { sku: data.sku }) }}" class="{{config.name}}__form">
-        <div class="grid grid--justify grid--no-wrap">
-
+        <div class="spacing-top spacing-top--big">
             {% if isUserLoggedIn %}
                 {% include molecule('ajax-renderer') with {
-                    class: 'col col--sm-6 spacing-right spacing-right--inner',
                     attributes: {
                         'provider-selector': '.' ~ config.jsName ~ '__provider'
                     }
                 } only %}
             {% endif %}
 
-            <div class="col col--expand">
+            <div class="spacing-top">
                 <button type="submit" class="button button--hollow button--expand" {{ disableAddToWishlist ? 'disabled' : '' }}>
                     {{ 'page.detail.add-to-wishlist' | trans }}
                 </button>
