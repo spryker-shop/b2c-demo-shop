@@ -36,10 +36,12 @@
             </div>
         {% endfor %}
 
-        <div class="{{config.name}}__item {{ 'js-pdp-color-group__image-' ~ data.idProductAbstract }}">
-            {% if firstImage.externalUrlLarge is not empty %}
-                <img class="{{config.name}}__image" src="{{ firstImage.externalUrlLarge }}" alt="{{ 'page.product.details.slider_image' | trans }}">
-            {% endif %}
-        </div>
+        {% if firstImage != false %}
+            <div class="{{config.name}}__item {{ 'js-pdp-color-group__image-' ~ data.idProductAbstract }}">
+                {% if firstImage.externalUrlLarge is not empty %}
+                    <img class="{{config.name}}__image" src="{{ firstImage.externalUrlLarge }}" alt="{{ 'page.product.details.slider_image' | trans }}">
+                {% endif %}
+            </div>
+        {% endif %}
     </div>
 {% endblock %}
