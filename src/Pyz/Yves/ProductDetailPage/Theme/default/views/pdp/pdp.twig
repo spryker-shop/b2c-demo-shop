@@ -65,7 +65,7 @@
             }
         } only %}
     </div>
-
+    {% widget 'ProductAlternativeListWidget' args [data.product] only %}{% endwidget %}
     {% if data.isBundle != null %}
         {% include molecule('product-bundle', 'ProductDetailPage') with {
             data: {
