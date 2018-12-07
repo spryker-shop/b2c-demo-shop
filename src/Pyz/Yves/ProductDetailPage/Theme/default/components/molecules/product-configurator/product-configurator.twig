@@ -41,18 +41,18 @@
 
     <div class="grid grid--justify spacing-bottom spacing-bottom--bigger">
         {% widget 'ProductDetailPageReviewWidget' args [data.product.idProductAbstract] use view('pdp-review-rating', 'ProductReviewWidget') only %}{% endwidget %}
-        <div class="col text-right">
-            {% include molecule('price') with {
-                modifiers: ['pdp'],
-                data: {
-                    amount: data.product.price | money,
-                    originalAmount: data.product.prices.ORIGINAL is not defined ? null : data.product.prices.ORIGINAL | money
-                }
-            } only %}
-        </div>
-    </div>
-    <div class="grid grid--justify spacing-bottom spacing-bottom--bigger">
-        {% widget 'ProductPriceVolumeWidget' args [data.product] only %}{% endwidget %}
+        {% widget 'ProductPriceVolumeWidget' args [data.product] only %}
+        {% nowidget %}
+            <div class="col text-right">
+                {% include molecule('price') with {
+                    modifiers: ['pdp'],
+                    data: {
+                        amount: data.product.price | money,
+                        originalAmount: data.product.prices.ORIGINAL is not defined ? null : data.product.prices.ORIGINAL | money
+                    }
+                } only %}
+            </div>
+        {% endwidget %}
     </div>
     {% if data.isBundle != null %}
         {% embed molecule('toggler-item') with {
