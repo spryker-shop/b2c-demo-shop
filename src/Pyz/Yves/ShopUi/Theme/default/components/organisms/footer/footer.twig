@@ -133,20 +133,6 @@
                 </div>
             </div>
 
-            <div class="col {{ config.name }}__currency-lang">
-                <div class="{{ config.name }}__select">
-                    {% widget 'LanguageSwitcherWidget' args [
-                        app.request.pathInfo,
-                        app.request.queryString,
-                        app.request.requestUri
-                    ] only %}{% endwidget %}
-                </div>
-
-                <div class="{{ config.name }}__select">
-                    {%- widget 'CurrencyWidget' only -%}{%- endwidget -%}
-                </div>
-            </div>
-
         </div>
 
     </div>

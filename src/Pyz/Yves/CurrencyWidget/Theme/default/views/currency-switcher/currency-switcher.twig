@@ -14,7 +14,7 @@
 {% block body %}
     <form method="GET" action="{{ path('currency-switch') }}">
         {% embed molecule('custom-select') with {
-            modifiers: ['hollow'],
+            modifiers: ['hollow', 'header'],
             attributes: {
                 name: 'currency-iso-code',
                 'config-theme': 'secondary'
