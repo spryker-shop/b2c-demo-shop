@@ -11,9 +11,7 @@
 
     {% if data.volumeProductPrices.volumePrices is defined and data.volumeProductPrices.volumePrices is not empty %}
         {% for volumePrice in data.volumeProductPrices.volumePrices %}
-            {% set jsonVolumeProductPrices = jsonVolumeProductPrices|merge(
-                [{"price": volumePrice.price|money, "count": volumePrice.quantity}]
-                ) %}
+            {% set jsonVolumeProductPrices = jsonVolumeProductPrices | merge([{"price": volumePrice.price | money, "count": volumePrice.quantity}]) %}
         {% endfor %}
     {% endif %}
 
