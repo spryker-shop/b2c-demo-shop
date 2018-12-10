@@ -14,13 +14,7 @@
 
     {% for label in data.labels %}
         {% set componentName = 'flag' %}
-        {% set labelType = '' %}
-        {% if 'Alternatives' in label.text %}
-            {% set labelType = 'alternative' %}
-        {% elseif 'Discontinued' in label.text  %}
-            {% set labelType = 'discontinued' %}
-        {% endif %}
-        {% set componentModifiers = [labelType is not empty ? labelType : label.type] %}
+        {% set componentModifiers = [label.type] %}
 
         {% if label.type == 'template:tag' %}
             {% set componentName = 'tag' %}
