@@ -1,0 +1,30 @@
+@mixin catalog-page-view-mode-switch($name: '.view-mode-switch') {
+    #{$name} {
+        display: flex;
+        width: 100%;
+        border-top: rem(1) dotted $setting-color-gray-3;
+        margin-top: rem(8);
+        padding: rem(17) 0;
+
+        &__link {
+            @include helper-effect-transition(color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50%;
+            padding: rem(2);
+
+            &:hover {
+                text-decoration: none;
+            }
+
+            &:not(:first-child) {
+                border-left: rem(1) dotted $setting-color-gray-3;
+            }
+        }
+
+        @content;
+    }
+}
+
+@include catalog-page-view-mode-switch();

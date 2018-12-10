@@ -47,6 +47,8 @@
                 <form method="GET" class="grid js-catalog-filter-target js-form-input-default-value-disabler__catalog-form">
                     {% block form %}
                         <div class="col col--sm-12 col--xl-3 catalog-left-side">
+                            {% include molecule('view-mode-switch', 'CatalogPage') only %}
+
                             {% block filterSection %}
                                 {% include organism('filter-section', 'CatalogPage') with {
                                     data: {
