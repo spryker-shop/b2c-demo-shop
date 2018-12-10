@@ -51,9 +51,7 @@
             } only %}
         </div>
     </div>
-    <div class="grid grid--justify spacing-bottom spacing-bottom--bigger">
-        {% widget 'ProductPriceVolumeWidget' args [data.product] only %}{% endwidget %}
-    </div>
+
     {% if data.isBundle != null %}
         {% embed molecule('toggler-item') with {
             modifiers: ['with-top-border', 'option'],
@@ -132,5 +130,4 @@
             }
         } only %}
     {% endif %}
-    {% widget 'ProductDiscontinuedNoteWidget' args [data.product.sku] only %}{% endwidget %}
 {% endblock %}
