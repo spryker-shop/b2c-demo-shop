@@ -1,0 +1,41 @@
+{% extends template('widget') %}
+
+{% define data = {
+    amount: _widget.product.price,
+    originalAmount: _widget.product.prices.ORIGINAL | default,
+    volumeProductPrices: _widget.volumeProductPrices,
+} %}
+
+{% block body %}
+    {% set jsonVolumeProductPrices = [{"price": data.amount|money, "count": 1}] %}
+
+    {% if data.volumeProductPrices.volumePrices is defined and data.volumeProductPrices.volumePrices is not empty %}
+        {% for volumePrice in data.volumeProductPrices.volumePrices %}
+            {% set jsonVolumeProductPrices = jsonVolumeProductPrices | merge([{"price": volumePrice.price | money, "count": volumePrice.quantity}]) %}
+        {% endfor %}
+    {% endif %}
+
+    {% if can('SeePricePermissionPlugin') %}
+        {% include molecule('volume-price', 'PriceProductVolumeWidget') with {
+            attributes: {
+                'data-json': jsonVolumeProductPrices|json_encode()
+            },
+            data: {
+                amount: data.amount,
+                originalAmount: data.originalAmount
+            }
+        } only %}
+    {% else %}
+        {{ 'customer.access.cannot_see_price' | trans }}
+    {% endif %}
+
+    {% if data.volumeProductPrices.volumePrices is defined and data.volumeProductPrices.volumePrices is not empty %}
+        {% include molecule('volume-price-table', 'PriceProductVolumeWidget') with {
+            class: 'col col--sm-12',
+            data: {
+                volumePrices: data.volumeProductPrices.volumePrices
+            }
+        } only %}
+    {% endif %}
+
+{% endblock %}

@@ -56,7 +56,11 @@
                 } only %}
             </div>
         </div>
+    </div>
 
+    {% widget 'ProductAlternativeListWidget' args [data.product] only %}{% endwidget %}
+
+    <div class="container__inner">
         {% include molecule('product-detail', 'ProductDetailPage') with {
             data: {
                 description: data.product.description,
@@ -65,7 +69,6 @@
             }
         } only %}
     </div>
-
     {% if data.isBundle != null %}
         {% include molecule('product-bundle', 'ProductDetailPage') with {
             data: {

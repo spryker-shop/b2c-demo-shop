@@ -5,6 +5,16 @@ export default class QuantityCounter extends Component {
     decrButton: HTMLButtonElement;
     incrButton: HTMLButtonElement;
     value: number;
+    readonly duration: number;
+    timeout: number;
+    inputChange: Event;
+
+    constructor() {
+        super();
+        this.duration = 1000;
+        this.timeout = 0;
+        this.inputChange = new Event('change');
+    }
 
     protected readyCallback(): void {
         this.quantityInput = <HTMLInputElement>this.querySelector(`.${this.jsName}__input`);
@@ -17,6 +27,7 @@ export default class QuantityCounter extends Component {
     }
 
     protected mapEvents(): void {
+        this.quantityInput.addEventListener('input', (event: Event) => this.triggerInputEvent());
         this.quantityInput.addEventListener('change', () => this.autoUpdateOnChange());
         this.decrButton.addEventListener('click', () => this.onDecrButtonClick());
         this.incrButton.addEventListener('click', () => this.onIncrButtonClick());
@@ -29,6 +40,7 @@ export default class QuantityCounter extends Component {
             this.quantityInput.value = (value - 1).toString();
 
             this.autoUpdateOnChange();
+            this.triggerInputEvent();
         }
     }
 
@@ -39,6 +51,7 @@ export default class QuantityCounter extends Component {
             this.quantityInput.value = (value + 1).toString();
 
             this.autoUpdateOnChange();
+            this.triggerInputEvent();
         }
     }
 
@@ -48,14 +61,17 @@ export default class QuantityCounter extends Component {
         }
     }
 
+    protected triggerInputEvent(): void {
+        this.quantityInput.dispatchEvent(this.inputChange);
+    }
+
     protected timer(): void {
-        let timeout = null;
-        clearTimeout(timeout);
-        timeout = setTimeout(() => {
+        clearTimeout(this.timeout);
+        this.timeout = setTimeout(() => {
             if(this.value !== this.getValue) {
                 this.quantityInput.form.submit();
             }
-        }, 1000);
+        }, this.duration);
     }
 
     protected setMaxQuantityToInfinity(): void {
