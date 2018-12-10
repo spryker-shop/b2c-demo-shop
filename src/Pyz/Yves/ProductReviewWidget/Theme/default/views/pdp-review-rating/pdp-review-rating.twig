@@ -6,6 +6,7 @@
 
 {% block body %}
     {% include molecule('rating-selector', 'ProductReviewWidget') with {
+        class: 'col col--expand',
         modifiers: ['expand'],
         data: {
             value: _widget.productReviewStorageTransfer.averageRating | default(0),

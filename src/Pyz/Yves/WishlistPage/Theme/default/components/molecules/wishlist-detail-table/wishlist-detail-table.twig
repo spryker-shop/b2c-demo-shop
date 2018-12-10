@@ -11,10 +11,10 @@
 
 {% block body %}
     <div class="is-scrollable-x">
-        <table class="table table--expand">
+        <table class="table table--expand table--wishlist">
             <thead>
                 <tr>
-                    <th>{{ 'customer.account.wishlist.product' | trans  }}</th>
+                    <th colspan="2">{{ 'customer.account.wishlist.product' | trans  }}</th>
                     <th>{{ 'customer.account.wishlist.price' | trans  }}</th>
                     <th>{{ 'customer.account.wishlist.availability' | trans  }}</th>
                     <th></th>
@@ -35,8 +35,11 @@
                                 }
                             } only %}
                         {% endif %}
+                    </td>
+                    <td>
                         <ul class="menu menu--inline menu--middle">
                             <li><strong><a href="{{ item.url }}">{{ item.name }}</a></strong></li>
+                            <li>{{ item.sku }}</li>
                             {% for attribute in item.superAttributesDefinition %}
                                 {% if item.attributes[attribute] is defined %}
                                     <li>{{ ('product.attribute.' ~ attribute) | trans }}: <span class="title title--medium">{{ item.attributes[attribute] }}</span></li>

@@ -1,0 +1,19 @@
+{% extends template('widget') %}
+
+{% define data = {
+    discontinuedProduct: _widget.discontinuedProduct
+} %}
+
+{%- block isDiscontinued -%}
+    {{- _widget.discontinuedProduct is not empty -}}
+{%- endblock -%}
+
+{% block body %}
+    {% if data.discontinuedProduct is not empty %}
+        <span class="text-alert">
+            {{ 'product_alternative_widget.product_status.discontinued' | trans }}
+        </span>
+    {% else %}
+        {{ 'customer.account.wishlist.not_available' | trans }}
+    {% endif %}
+{% endblock %}

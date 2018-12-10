@@ -10,7 +10,7 @@
 } %}
 
 {% block body %}
-    <span class="{{config.name}}__text">
+    <span class="{{ component.renderClass(config.name ~ '__text', modifiers) }}">
         {{data.text}}
     </span>
 {% endblock %}

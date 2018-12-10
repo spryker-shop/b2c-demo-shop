@@ -1,0 +1,59 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'label-group',
+} %}
+
+{% define data = {
+    labels: []
+}  %}
+
+{% block body %}
+    {% set leftColumnComponents = [] %}
+    {% set rightColumnComponents = [] %}
+
+    {% for label in data.labels %}
+        {% set componentName = 'flag' %}
+        {% set labelType = '' %}
+        {% if 'Alternatives' in label.text %}
+            {% set labelType = 'alternative' %}
+        {% elseif 'Discontinued' in label.text  %}
+            {% set labelType = 'discontinued' %}
+        {% endif %}
+        {% set componentModifiers = [labelType is not empty ? labelType : label.type] %}
+
+        {% if label.type == 'template:tag' %}
+            {% set componentName = 'tag' %}
+            {% set componentModifiers = [] %}
+        {% endif %}
+
+        {% set component = include(
+            [
+                molecule(componentName, 'ProductLabelWidget')
+            ],
+            {
+                modifiers: componentModifiers,
+                data: {
+                    text: label.text
+                }
+            },
+            with_context = false
+        ) %}
+
+        {% set component = '<div class="col">' ~ component ~ '</div>' %}
+        {% if label.type == 'template:tag' %}
+            {% set leftColumnComponents = leftColumnComponents | merge([component]) %}
+        {% else %}
+            {% set rightColumnComponents = rightColumnComponents | merge([component]) %}
+        {% endif %}
+    {% endfor %}
+
+    <div class="grid grid--right">
+        {% if leftColumnComponents is not empty %}
+            {{leftColumnComponents | join | raw}}
+        {% endif %}
+        {% if rightColumnComponents is not empty %}
+            {{rightColumnComponents | join | raw}}
+        {% endif %}
+    </div>
+{% endblock %}
