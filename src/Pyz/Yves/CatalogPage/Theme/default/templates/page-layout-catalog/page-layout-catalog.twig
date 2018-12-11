@@ -21,13 +21,13 @@
 {% block container %}
 
     {% block breadcrumbs %}
-        {% import _self as self %}
+        {% set breadcrumbSteps = _self.renderBreadcrumbSteps(data.category, false, data.filterPath) %}
         <div class="container">
             <div class="container__inner">
                 {% embed molecule('breadcrumb') with {
                     modifiers: ['no-border'],
                     embed: {
-                        breadcrumbs: self.renderBreadcrumbSteps(data.category, false, data.filterPath)
+                        breadcrumbs: breadcrumbSteps
                     }
                 } only %}
                     {% block breadcrumbs %}
