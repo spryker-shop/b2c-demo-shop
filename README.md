@@ -7,7 +7,7 @@ In order to install the B2C Demo Shop on your machine, you can follow the instru
 
 * [Installation Guide](https://academy.spryker.com/getting_started/installation_guide.html)
 
-__NOTE: instead of `vagrant up` run `VM_PROJECT=suite SPRYKER_REPOSITORY="git@github.com:spryker-shop/suite.git" vagrant up`__.
+__NOTE: instead of `vagrant up` run `VM_PROJECT=suite SPRYKER_REPOSITORY="git@github.com:spryker/suite-b2c-internal.git" vagrant up`__.
 
 If you encounter any issues during or after installation, you can first check our Troubleshooting article:
 
