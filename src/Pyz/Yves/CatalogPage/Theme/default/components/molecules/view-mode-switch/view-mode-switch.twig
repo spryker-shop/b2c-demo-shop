@@ -4,11 +4,15 @@
     name: 'view-mode-switch',
 } %}
 
+{% define data = {
+    viewMode: '',
+} %}
+
 {% set gridHref = path('change-view-mode', { mode: 'grid', 'referer-url': app.request.requestUri }) %}
 {% set listHref = path('change-view-mode', { mode: 'list', 'referer-url': app.request.requestUri }) %}
 
 {% block body %}
-    <a class="{{ config.name }}__link" href="{{gridHref}}">
+    <a class="{{ config.name }}__link {% if data.viewMode == 'grid' %} {{ config.name }}__link--active {% endif %}" href="{{gridHref}}">
         {% include atom('icon') with {
             class: 'spacing-right',
             modifiers: ['grid'],
@@ -18,7 +22,7 @@
         } only %}
         {{ 'catalog.view.mode.grid' | trans }}
     </a>
-    <a class="{{ config.name }}__link" href="{{listHref}}">
+    <a class="{{ config.name }}__link {% if data.viewMode != 'grid' %} {{ config.name }}__link--active {% endif %}" href="{{listHref}}">
         {% include atom('icon') with {
             class: 'spacing-right',
             data: {

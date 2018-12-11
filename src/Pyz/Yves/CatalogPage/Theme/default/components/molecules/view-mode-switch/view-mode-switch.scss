@@ -3,8 +3,11 @@
         display: flex;
         width: 100%;
         border-top: rem(1) dotted $setting-color-gray-3;
-        margin-top: rem(8);
-        padding: rem(17) 0;
+        padding: rem(120) rem(24) rem(10);
+
+        @include helper-breakpoint-media-min($xl-min) {
+            padding: rem(17) 0;
+        }
 
         &__link {
             @include helper-effect-transition(color);
@@ -13,6 +16,7 @@
             justify-content: center;
             width: 50%;
             padding: rem(2);
+            color: $setting-color-gray-3;
 
             &:hover {
                 text-decoration: none;
@@ -20,6 +24,10 @@
 
             &:not(:first-child) {
                 border-left: rem(1) dotted $setting-color-gray-3;
+            }
+
+            &--active {
+                color: $setting-color-black;
             }
         }
 
