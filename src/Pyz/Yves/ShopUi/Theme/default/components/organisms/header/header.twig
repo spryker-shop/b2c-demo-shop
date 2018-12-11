@@ -11,6 +11,37 @@
 } %}
 
 {% block body %}
+    {% set benefits = [
+        'global.benefit.free_returns',
+        'global.benefit.warranty',
+        'global.benefit.competitive_prices'
+    ] %}
+
+    <div class="{{ config.name }}__top">
+        <div class="container grid grid--justify">
+            {% include molecule('panel-info') with {
+                class: 'grid grid--justify',
+                data: {
+                    info: benefits
+                }
+            } only %}
+
+            <div class="col {{ config.name }}__currency-lang">
+                <div class="{{ config.name }}__select">
+                    {% widget 'LanguageSwitcherWidget' args [
+                        app.request.pathInfo,
+                        app.request.queryString,
+                        app.request.requestUri
+                    ] only %}{% endwidget %}
+                </div>
+
+                <div class="{{ config.name }}__select">
+                    {%- widget 'CurrencyWidget' only -%}{%- endwidget -%}
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="container">
         <div class="{{ config.name }}__search-overlay js-suggest-search__overlay">
             <div class="{{ config.name }}__search-overlay-container">

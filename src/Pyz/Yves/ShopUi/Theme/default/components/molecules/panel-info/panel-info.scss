@@ -1,0 +1,25 @@
+@mixin shop-ui-panel-info($name: '.panel-info') {
+    #{$name} {
+        font-size: rem(10);
+        font-weight: fw(medium);
+        letter-spacing: rem(2.1);
+        line-height: rem(30);
+        text-transform: uppercase;
+        color: $setting-color-gray-3;
+        padding: 0 rem(16);
+
+        &__item {
+            &:not(:first-child) {
+                padding-left: rem(40);
+
+                @include helper-breakpoint-media-min($xl-min) {
+                    padding-left: rem(90);
+                }
+            }
+        }
+
+        @content;
+    }
+}
+
+@include shop-ui-panel-info;
