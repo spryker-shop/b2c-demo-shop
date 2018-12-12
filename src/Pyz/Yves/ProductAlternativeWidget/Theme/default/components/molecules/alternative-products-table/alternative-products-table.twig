@@ -1,0 +1,96 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'alternative-products-table',
+    tag: 'table'
+} %}
+
+{% define data = {
+    item: required,
+    shoppingList: required,
+    products: required,
+    maxShownItems: 3
+} %}
+
+{% set idShoppingListItem = data.item.idShoppingListItem %}
+
+{% block body %}
+    {% for item in data.products %}
+        <tr class="{{ loop.index > data.maxShownItems ? config.jsName ~ '-' ~ idShoppingListItem ~ '__show-all-target is-hidden' : '' }}">
+            <td class="text-center">
+                {% if item.images is defined and item.images is not empty and item.images.0.externalUrlSmall is not empty %}
+                    {% include atom('thumbnail') with {
+                        modifiers: ['small', 'min-size'],
+                        attributes: {
+                            alt: item.name | default,
+                            src: item.images.0.externalUrlSmall,
+                            title: item.name | default
+                        }
+                    } only %}
+                {% endif %}
+            </td>
+            <td class="text-center">
+                <ul class="list spacing-y">
+                    {% if item.name is not empty %}
+                        <li class="list__item">
+                            <a href="{% if item.url is not empty %}{{ item.url }}{% endif %}">{{ item.name }}</a>
+                        </li>
+                    {% endif %}
+                    {% if item.sku is not empty %}
+                        <li class="list__item">
+                            <small class="text-secondary">
+                                {{ item.sku }}
+                            </small>
+                        </li>
+                    {% endif %}
+                    {% for attribute in item.superAttributesDefinition %}
+                        {% if item.attributes[attribute] is defined %}
+                            <li class="list__item">
+                                <strong>{{ ('product.attribute.' ~ attribute) | trans }}</strong>: {{ item.attributes[attribute] }}
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                    <li class="list__item">
+                        <span class="text-alert">{{ 'product_alternative_widget.alternative_for' | trans({name: data.item.name}) }}</span>
+                    </li>
+                </ul>
+            </td>
+            <td nowrap="nowrap" class="text-center">
+                {% if item.price is not empty %}
+                    {% include molecule('price') with {
+                        data: {
+                            amount: item.price | money,
+                            originalAmount: item.prices.ORIGINAL is not defined or item.prices.ORIGINAL is empty ? null : (item.prices.ORIGINAL | money)
+                        }
+                    } only %}
+                {% else %}
+                    {{ 'product_alternative_widget.not_applicable' | trans }}
+                {% endif %}
+            </td>
+            <td>
+                <input class="input" disabled type="number" value="{{ data.item.quantity }}"/>
+            </td>
+            <td>
+                <a class="button button--success" href="{{ url('shopping-list/add-item', {quantity: data.item.quantity, sku: item.sku, idShoppingList: data.shoppingList.idShoppingList}) }}">
+                    {{ 'product_alternative_widget.add_to_shopping_list' | trans}}
+                </a>
+            </td>
+        </tr>
+        {% if loop.index > data.maxShownItems and loop.last %}
+            <tr class="{{ config.jsName }}-{{- idShoppingListItem -}}__show-all-target">
+                <td colspan="5">
+                    <div class="text-center spacing-y">
+                        <span class="button button--hollow {{ config.jsName }}-{{- idShoppingListItem -}}__show-all-trigger">{{ 'product_alternative_widget.show_all' | trans }}</span>
+                    </div>
+                </td>
+            </tr>
+            {% include molecule('toggler-click') with {
+                attributes: {
+                    'trigger-selector': '.' ~ config.jsName ~ '-' ~ idShoppingListItem ~ '__show-all-trigger',
+                    'target-selector': '.' ~ config.jsName ~ '-' ~ idShoppingListItem ~ '__show-all-target',
+                    'class-to-toggle': 'is-hidden'
+                }
+            } only %}
+        {% endif %}
+    {% endfor %}
+{% endblock %}

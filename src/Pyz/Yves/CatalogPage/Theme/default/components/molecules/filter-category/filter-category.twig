@@ -52,7 +52,7 @@
                     onclick="this.form.action='{{ categoryUrl }}'"
                     {% if quantity == 0 %}disabled="disabled"{% endif %}
 >
-                    {{ categoryNode.name }}{% if hasChildren is empty %} ({{ quantity }}){% endif %}
+                    {{ categoryNode.name }}{% if hasChildren is empty %} <span class="text-secondary">({{ quantity }})</span>{% endif %}
                 </button>
 
                 {% if hasChildren %}
