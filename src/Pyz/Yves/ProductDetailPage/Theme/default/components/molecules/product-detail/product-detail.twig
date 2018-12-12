@@ -15,8 +15,9 @@
 {% block body %}
     {% set modifiers = 'bundle' in modifiers ? modifiers | merge(['filter', 'with-top-border']) : modifiers | merge(['mobile', 'filter', 'desktop-border-bottom']) %}
     {% set hiddenClass = 'bundle' in modifiers ? 'is-hidden' : 'is-hidden-sm-only' %}
+    {% set colClass = 'bundle' in modifiers ? 'col col--sm-12' : config.name ~ '__col' %}
     {% embed molecule('toggler-item') with {
-        class: config.name ~ '__col',
+        class: colClass,
         modifiers: modifiers,
         data: {
             title: 'product.attribute.description' | trans,
@@ -38,7 +39,7 @@
     {% endembed %}
 
     {% embed molecule('toggler-item') with {
-        class: config.name ~ '__col',
+        class: colClass,
         modifiers: modifiers,
         data: {
             title: 'page.product.details' | trans,
