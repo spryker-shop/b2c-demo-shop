@@ -9,13 +9,14 @@
     description: '',
     attributes: [],
     sku: '',
-    index: ''
+    index: '',
+    isBundle: false,
+    hiddenClass: 'is-hidden-sm-only',
 } %}
 
 {% block body %}
-    {% set modifiers = 'bundle' in modifiers ? modifiers | merge(['filter', 'with-top-border']) : modifiers | merge(['mobile', 'filter', 'desktop-border-bottom']) %}
-    {% set hiddenClass = 'bundle' in modifiers ? 'is-hidden' : 'is-hidden-sm-only' %}
-    {% set colClass = 'bundle' in modifiers ? 'col col--sm-12' : config.name ~ '__col' %}
+    {% set modifiers = data.isBundle ? modifiers : modifiers | merge(['mobile', 'filter', 'desktop-border-bottom']) %}
+    {% set colClass = data.isBundle ? 'col col--sm-12' : config.name ~ '__col' %}
     {% embed molecule('toggler-item') with {
         class: colClass,
         modifiers: modifiers,
@@ -23,7 +24,7 @@
             title: 'product.attribute.description' | trans,
             triggerClass: config.jsName ~ '__trigger-description' ~ (data.index is not empty ? '-' ~ data.index : ''),
             targetClass: config.jsName ~ '__target-description' ~ (data.index is not empty ? '-' ~ data.index : ''),
-            hiddenClass: hiddenClass,
+            hiddenClass: data.hiddenClass,
         },
         embed: {
             description: data.description,
@@ -45,7 +46,7 @@
             title: 'page.product.details' | trans,
             triggerClass: config.jsName ~ '__trigger-details' ~ (data.index is not empty ? '-' ~ data.index : ''),
             targetClass: config.jsName ~ '__target-details' ~ (data.index is not empty ? '-' ~ data.index : ''),
-            hiddenClass: hiddenClass,
+            hiddenClass: data.hiddenClass,
         },
         embed: {
             attributes: data.attributes,
