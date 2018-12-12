@@ -7,6 +7,7 @@
 
 {% define data = {
     shipmentMethod: required,
+    expenses: [],
     voucherDiscounts: [],
     cartRuleDiscounts: [],
 
@@ -52,6 +53,14 @@
             {{ data.shipmentMethod }}
             <span class="float-right">{{ data.prices.storeCurrency | money }}</span>
         </li>
+
+        {% widget 'SalesOrderThresholdWidgetPlugin' args [data.expenses] with {config: config} only %}
+            {% block expenseItems %}
+                <li class="{{ config.name }}__list-item">
+                    {{ parent() }}
+                </li>
+            {% endblock %}
+        {% endwidget %}
 
         <li class="{{ config.name }}__list-item">
             {{ 'checkout.step.summary.tax' | trans }}

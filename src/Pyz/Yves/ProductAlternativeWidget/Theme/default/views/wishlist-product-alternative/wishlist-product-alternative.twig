@@ -11,13 +11,13 @@
 {% block body %}
     {% if data.products is not empty %}
         <tr>
-            <td></td>
+            <td class="is-hidden-sm-only"></td>
             <td colspan="4" class="spacing spacing--inner spacing--reset spacing-top spacing-top--inner spacing-top--bigger">
                 <h4 class="title title--medium">{{ 'product_alternative_widget.alternative_for' | trans({name: data.item.name}) }}</h4>
             </td>
         </tr>
         <tr>
-            <td></td>
+            <td class="is-hidden-sm-only"></td>
             <td colspan="4" class="spacing-x spacing-x--inner spacing-x--reset spacing-bottom spacing-bottom--inner spacing-bottom--bigger">
                 <table class="table table--expand">
                 {% for item in data.products %}
