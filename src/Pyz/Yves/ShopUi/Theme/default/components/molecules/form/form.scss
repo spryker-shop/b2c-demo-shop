@@ -4,7 +4,11 @@
 
     #{$name} {
         &__field {
-            padding: 0 rem(16) rem(27);
+            padding: 0 rem(16) rem(16);
+
+            @include helper-breakpoint-media-min($md-min) {
+                padding-bottom: rem(27);
+            }
 
             &--review {
                 padding: 0 0 rem(25);
@@ -34,7 +38,12 @@
             text-align: right;
 
             &--profile {
-                padding: rem(8) rem(16);
+                padding: rem(8) 0;
+
+                @include helper-breakpoint-media-max($lg-max) {
+                    display: flex;
+                    flex-direction: column-reverse;
+                }
             }
         }
 
@@ -78,10 +87,13 @@
 
         &--checkout-actions {
             #{$name}__actions {
-                padding-top: rem(29);
+                padding-top: rem(15);
                 display: flex;
                 flex-direction: column-reverse;
                 align-items: flex-end;
+                @include helper-breakpoint-media-min($md-min) {
+                    padding-top: rem(29);
+                }
             }
         }
 
@@ -131,6 +143,14 @@
                 &:hover {
                     background-color: $setting-color-gray-1;
                 }
+            }
+        }
+
+        &--reverse-actions {
+            #{$name}__actions {
+                display: flex;
+                flex-direction: column-reverse;
+                align-items: flex-end;
             }
         }
 

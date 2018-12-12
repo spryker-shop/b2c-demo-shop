@@ -67,118 +67,116 @@
 {% endblock %}
 
 {% block content %}
-
-        {% embed molecule('form') with {
-            class: 'register-form js-login__register' ~ (data.isGuest or data.isLogin? ' is-hidden' : ''),
-            modifiers: ['login', 'checkout-actions'],
-            data: {
-                form: data.forms.registration,
-                submit: {
-                    enable: true,
-                    text: 'checkout.customer.auth_as_user' | trans,
-                    class: 'button  button--large button--expand'
-                }
-            },
-            embed: {
-                forms: {
-                    customer: data.forms.customer
-                }
-            },
-            qa: 'register-form'
-        } only %}
-            {% block fields %}
-                {% include molecule('form') with {
-                    modifiers: ['login', 'checkout-actions', 'grid-indent'],
-                    data: {
-                        class: 'col col--sm-6',
-                        title: 'checkout.customer.auth_as_user' | trans,
-                        form: embed.forms.customer,
-                        enableStart: false,
-                        enableEnd: false,
-                        layout: {
-                            salutation: 'col col--md-2',
-                            first_name: 'col col--md-5',
-                            last_name: 'col col--md-5',
-                            password: 'col col--md-6'
-                        },
-                        submit: {
-                            enable: false
-                        },
-                        cancel: {
-                            enable: false
-                        }
-                    }
-                } only %}
-            {% endblock %}
-        {% endembed %}
-
-        {% embed molecule('form') with {
-            class: 'register-form js-login__guest' ~ (data.isGuest ? '' : ' is-hidden'),
-            modifiers: ['login', 'checkout-actions'],
-            data: {
-                form: data.forms.guest,
-                submit: {
-                    enable: true,
-                    text: 'checkout.customer.auth_as_guest' | trans,
-                    class: 'button  button--large button--expand'
-                }
-            },
-            embed: {
-                forms: {
-                    customerGuest: data.forms.customerGuest
-                }
+    {% embed molecule('form') with {
+        class: 'register-form js-login__register' ~ (data.isGuest or data.isLogin? ' is-hidden' : ''),
+        modifiers: ['login', 'checkout-actions'],
+        data: {
+            form: data.forms.registration,
+            submit: {
+                enable: true,
+                text: 'checkout.customer.auth_as_user' | trans,
+                class: 'button  button--large button--expand'
             }
-        } only %}
-            {% block fields %}
-                {% include molecule('form') with {
-                    modifiers: ['login', 'checkout-actions', 'grid-indent'],
-                    data: {
-                        class: 'col col--sm-6',
-                        title: 'checkout.customer.auth_as_guest' | trans,
-                        form: embed.forms.customerGuest,
-                        enableStart: false,
-                        enableEnd: false,
-                        layout: {
-                            salutation: 'col col--md-2',
-                            first_name: 'col col--md-5',
-                            last_name: 'col col--md-5'
-                        },
-                        submit: {
-                            enable: false
-                        },
-                        cancel: {
-                            enable: false
-                        }
-                    }
-                } only %}
-            {% endblock %}
-        {% endembed %}
-
-        {% embed molecule('form') with {
-            class: 'js-login__login' ~ (data.isLogin ? '' : ' is-hidden'),
-            modifiers: ['login', 'checkout-actions', 'grid-indent'],
-            data: {
-                title: 'checkout.customer.auth_as_login' | trans,
-                form: data.forms.login,
-                layout: {
-                    email: 'col col--md-6',
-                    password: 'col col--md-6'
-                },
-                submit: {
-                    enable: true,
-                    text: 'forms.submit.login' | trans,
-                    class: 'form__action--checkout button  button--large button--expand'
-                },
-                cancel: {
-                    enable: true
-                }
+        },
+        embed: {
+            forms: {
+                customer: data.forms.customer
             }
-        } only %}
-            {% block cancel %}
-                <a href="{{ url('password/forgotten') }}" class="link link--darkest link--login-forgot-password" {{qa('customer-forgot-password-link')}}>
-                    {{ 'forms.forgot-password' | trans~'?' }}
-                </a>
-            {% endblock %}
-        {% endembed %}
+        },
+        qa: 'register-form'
+    } only %}
+        {% block fields %}
+            {% include molecule('form') with {
+                modifiers: ['login', 'checkout-actions', 'grid-indent'],
+                data: {
+                    class: 'col col--sm-6',
+                    title: 'checkout.customer.auth_as_user' | trans,
+                    form: embed.forms.customer,
+                    enableStart: false,
+                    enableEnd: false,
+                    layout: {
+                        salutation: 'col col--sm-12 col--md-2',
+                        first_name: 'col col--sm-12 col--md-5',
+                        last_name: 'col col--sm-12 col--md-5',
+                        password: 'col col--sm-12 col--md-6'
+                    },
+                    submit: {
+                        enable: false
+                    },
+                    cancel: {
+                        enable: false
+                    }
+                }
+            } only %}
+        {% endblock %}
+    {% endembed %}
 
+    {% embed molecule('form') with {
+        class: 'register-form js-login__guest' ~ (data.isGuest ? '' : ' is-hidden'),
+        modifiers: ['login', 'checkout-actions'],
+        data: {
+            form: data.forms.guest,
+            submit: {
+                enable: true,
+                text: 'checkout.customer.auth_as_guest' | trans,
+                class: 'button  button--large button--expand'
+            }
+        },
+        embed: {
+            forms: {
+                customerGuest: data.forms.customerGuest
+            }
+        }
+    } only %}
+        {% block fields %}
+            {% include molecule('form') with {
+                modifiers: ['login', 'checkout-actions', 'grid-indent'],
+                data: {
+                    class: 'col col--sm-6',
+                    title: 'checkout.customer.auth_as_guest' | trans,
+                    form: embed.forms.customerGuest,
+                    enableStart: false,
+                    enableEnd: false,
+                    layout: {
+                        salutation: 'col col--sm-12 col--md-2',
+                        first_name: 'col col--sm-12 col--md-5',
+                        last_name: 'col col--sm-12 col--md-5'
+                    },
+                    submit: {
+                        enable: false
+                    },
+                    cancel: {
+                        enable: false
+                    }
+                }
+            } only %}
+        {% endblock %}
+    {% endembed %}
+
+    {% embed molecule('form') with {
+        class: 'js-login__login' ~ (data.isLogin ? '' : ' is-hidden'),
+        modifiers: ['login', 'checkout-actions', 'grid-indent'],
+        data: {
+            title: 'checkout.customer.auth_as_login' | trans,
+            form: data.forms.login,
+            layout: {
+                email: 'col col--sm-12 col--md-6',
+                password: 'col col--sm-12 col--md-6'
+            },
+            submit: {
+                enable: true,
+                text: 'forms.submit.login' | trans,
+                class: 'form__action--checkout button  button--large button--expand'
+            },
+            cancel: {
+                enable: true
+            }
+        }
+    } only %}
+        {% block cancel %}
+            <a href="{{ url('password/forgotten') }}" class="link link--darkest link--login-forgot-password" {{qa('customer-forgot-password-link')}}>
+                {{ 'forms.forgot-password' | trans~'?' }}
+            </a>
+        {% endblock %}
+    {% endembed %}
 {% endblock %}

@@ -31,8 +31,6 @@
                 </li>
 
             </ul>
-
-            <a href="{{url('customer/order')}}" class="button button--hollow col">{{ 'general.back.button' | trans }}</a>
         </div>
     </div>
 
@@ -127,7 +125,7 @@
 
                 <ul class="menu menu--customer-account">
                     {% for expense in data.order.expenses %}
-                        <li class="menu__item">{{ expense.name }}</li>
+                        <li class="menu__item">{{ expense.name | trans }}</li>
                     {% endfor %}
                 </ul>
             </div>

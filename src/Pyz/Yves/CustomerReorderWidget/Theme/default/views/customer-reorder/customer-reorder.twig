@@ -1,7 +1,7 @@
 {% extends template('widget') %}
 
 {% block reorderAction %}
-    <a href="{{ path('customer/order/reorder', {'idSalesOrder': _widget.order.idSalesOrder}) }}">
+    <a class="menu__link" href="{{ path('customer/order/reorder', {'idSalesOrder': _widget.order.idSalesOrder}) }}">
         {{ 'customer.order.reorder' | trans }}
     </a>
 {% endblock %}
@@ -27,19 +27,26 @@
 {% endblock %}
 
 {% block formActions %}
-        <div class="grid grid--middle grid--right">
-            <div class="form-field col col--sm-5 col--lg-3">
+        <div class="grid grid--bottom grid--mobile-row-revers">
+            <div class="form-field col col--sm-12 col--lg-3">
                 <div class="box">
-                    <button class="button button--expand  js-customer-reorder__trigger" {% if not _widget.availability %}disabled{% endif %}>
-                        {{'customer.order.reorder_selected' | trans}}
-                    </button>
+                    <a href="{{url('customer/order')}}" class="button button--hollow button--expand">{{ 'general.back.button' | trans }}</a>
                 </div>
             </div>
-            <div class="form-field col col--sm-5 col--lg-3">
-                <div class="box">
-                    <a href="{{ path('customer/order/reorder', {'idSalesOrder': _widget.order.idSalesOrder}) }}" class="button button--expand ">
-                        {{ 'customer.order.reorder_all' | trans }}
-                    </a>
+            <div class="grid grid--right col col--sm-12 col--lg-8">
+                <div class="form-field col col--sm-12 col--lg-7">
+                    <div class="spacing spacing--big spacing-bottom spacing-bottom--reset">
+                        <button class="button button--expand js-customer-reorder__trigger" {% if not _widget.availability %}disabled{% endif %}>
+                            {{'customer.order.reorder_selected' | trans}}
+                        </button>
+                    </div>
+                </div>
+                <div class="form-field col col--sm-12 col--lg-7">
+                    <div class="spacing spacing--big spacing-top">
+                        <a href="{{ path('customer/order/reorder', {'idSalesOrder': _widget.order.idSalesOrder}) }}" class="button button--expand ">
+                            {{ 'customer.order.reorder_all' | trans }}
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

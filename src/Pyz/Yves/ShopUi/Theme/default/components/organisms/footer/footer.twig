@@ -14,18 +14,28 @@
 
         {% block footerTop %}
             <div class="{{ config.name }}__top">
-
-                <div class="{{ config.name }}__subscription">
-                    <h4 class="title title--h6 title--footer title--uppercase">
-                        {{- 'global.newsletter' | trans -}}
-                    </h4>
-
-                    <span class="{{ config.name }}__subscription-text">
-                        {{- 'footer_subscribe.subscription_text' | trans -}}
-                    </span>
-
-                    {{- render(path('newsletter/subscribe')) -}}
-                </div>
+                {% embed molecule('toggler-item') with {
+                    modifiers: ['mobile'],
+                    class: config.name ~ '__subscription',
+                    data: {
+                        title: 'global.newsletter' | trans,
+                        triggerClass: config.jsName ~ '__trigger-subscription',
+                        targetClass: config.jsName ~ '__target-subscription',
+                        hiddenClass: 'is-hidden-sm-only'
+                    },
+                    embed: {
+                       footerName : config.name
+                    }
+                } only %}
+                    {% block contentText %}
+                        <span class="{{ embed.footerName }}__subscription-text">
+                            {{- 'footer_subscribe.subscription_text' | trans -}}
+                        </span>
+                        <div class="spacing-bottom spacing-bottom--big">
+                            {{- render(path('newsletter/subscribe')) -}}
+                        </div>
+                    {% endblock %}
+                {% endembed %}
 
                 {% include molecule('navigation-footer') with {
                     class: config.name ~ '__navigation',

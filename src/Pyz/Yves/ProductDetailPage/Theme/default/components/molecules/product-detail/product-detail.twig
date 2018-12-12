@@ -9,16 +9,22 @@
     description: '',
     attributes: [],
     sku: '',
-    index: ''
+    index: '',
+    isBundle: false,
+    hiddenClass: 'is-hidden-sm-only',
 } %}
 
 {% block body %}
+    {% set modifiers = data.isBundle ? modifiers : modifiers | merge(['mobile', 'filter', 'desktop-border-bottom']) %}
+    {% set colClass = data.isBundle ? 'col col--sm-12' : config.name ~ '__col' %}
     {% embed molecule('toggler-item') with {
-        modifiers: modifiers | merge(['with-top-border', 'option']),
+        class: colClass,
+        modifiers: modifiers,
         data: {
             title: 'product.attribute.description' | trans,
             triggerClass: config.jsName ~ '__trigger-description' ~ (data.index is not empty ? '-' ~ data.index : ''),
             targetClass: config.jsName ~ '__target-description' ~ (data.index is not empty ? '-' ~ data.index : ''),
+            hiddenClass: data.hiddenClass,
         },
         embed: {
             description: data.description,
@@ -34,11 +40,13 @@
     {% endembed %}
 
     {% embed molecule('toggler-item') with {
-        modifiers: modifiers | merge(['with-top-border', 'option']),
+        class: colClass,
+        modifiers: modifiers,
         data: {
             title: 'page.product.details' | trans,
             triggerClass: config.jsName ~ '__trigger-details' ~ (data.index is not empty ? '-' ~ data.index : ''),
             targetClass: config.jsName ~ '__target-details' ~ (data.index is not empty ? '-' ~ data.index : ''),
+            hiddenClass: data.hiddenClass,
         },
         embed: {
             attributes: data.attributes,

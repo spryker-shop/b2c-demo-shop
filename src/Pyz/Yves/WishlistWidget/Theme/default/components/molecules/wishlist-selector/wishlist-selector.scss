@@ -1,4 +1,9 @@
-.wishlist-selector {
-    position: relative;
-    padding: 0 0 rem(70);
+@mixin wishlist-widget-wishlist-selector($name: '.wishlist-selector') {
+    #{$name} {
+        position: relative;
+
+        @content;
+    }
 }
+
+@include wishlist-widget-wishlist-selector();

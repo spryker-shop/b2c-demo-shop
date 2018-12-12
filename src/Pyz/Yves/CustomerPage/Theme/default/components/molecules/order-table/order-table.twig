@@ -29,7 +29,7 @@
                         <td>{{ date(order.createdAt) | formatDateTime }}</td>
                         <td>{{ order.totals.grandTotal | default(0) | money(true, order.currencyIsoCode) }}</td>
                         <td class="text-right">
-                            <ul class="menu menu--inline menu--customer-account menu--order-table">
+                            <ul class="menu menu--inline menu--customer-account menu--actions">
                                 <li class="menu__item">
                                     <a class="menu__link" href="{{ path('customer/order/details', {'id': order.idSalesOrder}) }}">
                                         {{ 'customer.order.view_order' | trans }}
