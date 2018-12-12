@@ -125,7 +125,9 @@
 
                 <ul class="menu menu--customer-account">
                     {% for expense in data.order.expenses %}
-                        <li class="menu__item">{{ expense.name | trans }}</li>
+                        {% if expense.type == 'SHIPMENT_EXPENSE_TYPE' %}
+                            <li class="menu__item">{{ expense.name | trans }}</li>
+                        {% endif %}
                     {% endfor %}
                 </ul>
             </div>
