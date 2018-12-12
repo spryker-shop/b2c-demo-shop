@@ -64,6 +64,15 @@
     }
 
     &--wishlist {
+        th,
+        td {
+            padding-left: 0;
+
+            @include helper-breakpoint-media-min($lg-min) {
+                padding-left: rem(4);
+            }
+        }
+
         td:first-child {
             width: 5%;
         }
