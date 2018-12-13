@@ -23,6 +23,11 @@
             </thead>
             <tbody>
             {% for item in data.wishlistItems %}
+                {% set isItemAvailable = item.available is defined and item.available and item.price is defined and item.price is not null %}{% set productDiscontinuedWidget = findWidget('ProductDiscontinuedWidget', [item.sku]) %}
+                {% set isDiscontinued = productDiscontinuedWidget.isDiscontinued %}
+                {% if isDiscontinued is not null %}
+                    {% set isItemAvailable = not isDiscontinued and isItemAvailable %}
+                {% endif %}
                 <tr>
                     <td class="is-hidden-sm-only">
                         {% set imageUrl = item.images[0].externalUrlSmall %}
@@ -73,15 +78,18 @@
                         {% endif %}
                     </td>
                     <td class="text-center">
-                        {% if item.available %}
+                        {% if isItemAvailable %}
                             {{ 'customer.account.wishlist.available' | trans }}
                         {% else %}
-                            {{ 'customer.account.wishlist.not_available' | trans }}
+                            {% widget 'ProductDiscontinuedWidget' args [item.sku] use view('wishlist-product-discontinued', 'ProductDiscontinuedWidget') only %}
+                            {% nowidget %}
+                                {{ 'customer.account.wishlist.not_available' | trans }}
+                            {% endwidget %}
                         {% endif %}
                     </td>
                     <td>
                         <ul class="menu menu--inline menu--actions float-right">
-                            {% if item.available and item.price is not null %}
+                            {% if isItemAvailable %}
                                 <li class="menu__item">
                                     <form id="addToCart_{{ loop.index }}"
                                         method="POST"
