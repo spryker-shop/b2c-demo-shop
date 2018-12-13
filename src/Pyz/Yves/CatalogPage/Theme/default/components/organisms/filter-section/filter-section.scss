@@ -1,9 +1,9 @@
 @mixin catalog-page-filter-section($name: '.filter-section') {
     #{$name} {
-        padding-top: rem(79);
+        padding: rem(10) rem(24) rem(40);
 
-        @include helper-breakpoint-media-max($lg-max) {
-            padding: rem(120) rem(24) rem(40);
+        @include helper-breakpoint-media-min($xl-min) {
+            padding: 0;
         }
 
         &__title {

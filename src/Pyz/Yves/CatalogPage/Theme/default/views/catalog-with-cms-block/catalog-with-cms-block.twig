@@ -25,18 +25,6 @@
     }
 } %}
 
-{% block content %}
-    {% block cmsTop %}
-        {% if data.categoryId %}
-            <div class="catalog-cms-block catalog-cms-block--top">
-                {{ widgetBlock('CatalogCmsBlockWidgetPlugin', 'top', data.categoryId) }}
-            </div>
-        {% endif %}
-    {% endblock %}
-
-    {{parent()}}
-{% endblock %}
-
 {% block filterSection %}
     {{parent()}}
 
@@ -68,6 +56,14 @@
 {% endblock %}
 
 {% block catalogContent %}
+    {% block cmsTop %}
+        {% if data.categoryId %}
+            <div class="catalog-cms-block catalog-cms-block--top">
+                {{ widgetBlock('CatalogCmsBlockWidgetPlugin', 'top', data.categoryId) }}
+            </div>
+        {% endif %}
+    {% endblock %}
+
     {{parent()}}
 
     {% block cmsBottom %}
