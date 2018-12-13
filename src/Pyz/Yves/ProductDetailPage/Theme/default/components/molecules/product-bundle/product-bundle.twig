@@ -25,6 +25,7 @@
             'data-json': '{
                 "slidesToShow": 4,
                 "dots": false,
+                "infinite": false,
                 "responsive": [{
                         "breakpoint": 820,
                         "settings": {
@@ -78,12 +79,14 @@
                     {% block detail %}
                         {% include molecule('product-detail', 'ProductDetailPage') with {
                             class: 'spacing-top spacing-top--big',
-                            modifiers: ['bundle'],
+                            modifiers: ['bundle', 'filter', 'with-top-border'],
                             data: {
                                 description: embed.description,
                                 attributes: embed.attributes,
                                 sku: embed.sku,
-                                index: embed.index
+                                index: embed.index,
+                                isBundle: true,
+                                hiddenClass: 'is-hidden',
                             }
                         } only %}
                     {% endblock %}
