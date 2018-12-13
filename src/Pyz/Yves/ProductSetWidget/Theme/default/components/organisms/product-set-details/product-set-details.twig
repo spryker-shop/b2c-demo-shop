@@ -8,7 +8,25 @@
     name: '',
     products: required,
     description: '',
-    images: []
+    images: [],
+    sliderConfig: '{
+        "slidesToShow": 4,
+        "slidesToScroll": 1,
+        "dots": false,
+        "infinite": false,
+        "responsive": [{
+            "breakpoint": 768,
+            "settings": {
+                "slidesToShow": 2
+                }
+        },
+        {
+            "breakpoint": 375,
+            "settings": {
+                "slidesToShow": 1
+            }
+        }]
+    }',
 } %}
 
 {% block body %}
@@ -90,11 +108,19 @@
 
     {% block productSet %}
         <form method="GET">
-            <div class="grid grid--stretch grid--center">
-                {% for product in data.products %}
-                    <div class="col col--sm-12 col--lg-4">
+            {% embed molecule('slick-carousel') with {
+                modifiers: ['align-left'],
+                data: {
+                    slides: data.products
+                },
+                attributes: {
+                    'data-json': data.sliderConfig
+                }
+            } only %}
+                {% block slides %}
+                    {% for product in data.slides %}
                         {% embed molecule('product-card') with {
-                            modifiers: ['stretch'],
+                            modifiers: ['stretch', 'slider', 'product-set'],
                             data: {
                                 name: product.name,
                                 abstractId: product.idProductAbstract,
@@ -142,26 +168,18 @@
                                     <p>
                                         <strong>{{ "product.detail.out_of_stock" | trans }}</strong>
                                     </p>
+                                {% else %}
+                                    {% set isDisabled = not embed.product.idProductConcrete or not embed.product.available %}
+
+                                    <a href="{{ path('cart/add', {sku: embed.product.sku}) }}" class="button button--expand js-product-set__add-to-cart" {% if isDisabled %}disabled{% endif %}>
+                                        {{ 'page.detail.add-to-cart' | trans }}
+                                    </a>
                                 {% endif %}
                             {% endblock %}
-
-                            {% block actions %}
-                                {% set isDisabled = not embed.product.idProductConcrete or not embed.product.available %}
-
-                                <a href="{{ path('cart/add', {sku: embed.product.sku}) }}" class="button button--expand {% if isDisabled %}button--disabled{% endif %} js-product-set__add-to-cart" >
-                                    {% include atom('icon') with {
-                                        data: {
-                                            name: 'cart-plus'
-                                        }
-                                    } only %}
-                                    {{ 'page.detail.add-to-cart' | trans }}
-                                </a>
-
-                            {% endblock %}
                         {% endembed %}
-                    </div>
-                {% endfor %}
-            </div>
+                    {% endfor %}
+                {% endblock %}
+            {% endembed %}
         </form>
         {% include molecule('action-single-click-enforcer') with {
             attributes: {

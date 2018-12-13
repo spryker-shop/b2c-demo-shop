@@ -119,14 +119,6 @@
         }
 
         &--product-set {
-            @include helper-breakpoint-media-min($md-min) {
-                padding: 0;
-            }
-
-            &:not(:first-child) {
-                display: none;
-            }
-
             #{$name}__overlay {
                 @include helper-breakpoint-media-max($md-max) {
                     padding-top: rem(20);
@@ -136,6 +128,16 @@
 
             #{$name}__info {
                 min-height: rem(48);
+            }
+        }
+
+        &--widget {
+            @include helper-breakpoint-media-min($md-min) {
+                padding: 0;
+            }
+
+            &:not(:first-child) {
+                display: none;
             }
         }
     }
