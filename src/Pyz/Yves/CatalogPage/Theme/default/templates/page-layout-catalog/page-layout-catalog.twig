@@ -20,6 +20,24 @@
 
 {% block container %}
 
+    {% block breadcrumbs %}
+        {% set breadcrumbSteps = _self.renderBreadcrumbSteps(data.category, false, data.filterPath) %}
+        <div class="container">
+            <div class="container__inner">
+                {% embed molecule('breadcrumb') with {
+                    modifiers: ['no-border'],
+                    embed: {
+                        breadcrumbs: breadcrumbSteps
+                    }
+                } only %}
+                    {% block breadcrumbs %}
+                        {{ embed.breadcrumbs }}
+                    {% endblock %}
+                {% endembed %}
+            </div>
+        </div>
+    {% endblock %}
+
     {% block title %}
         {% if data.category.image is defined %}
             {% include molecule('jumbotron') with {
@@ -47,6 +65,12 @@
                 <form method="GET" class="grid js-catalog-filter-target js-form-input-default-value-disabler__catalog-form">
                     {% block form %}
                         <div class="col col--sm-12 col--xl-3 catalog-left-side">
+                            {% include molecule('view-mode-switch', 'CatalogPage') with {
+                                data: {
+                                    viewMode: data.viewMode,
+                                }
+                            } only %}
+
                             {% block filterSection %}
                                 {% include organism('filter-section', 'CatalogPage') with {
                                     data: {
@@ -73,7 +97,7 @@
                                     }
                                 } only %}
 
-                                <div class="grid grid--stretch product-list">
+                                <div class="grid {% if data.viewMode != 'list' %}grid--stretch product-list{% endif %}">
                                     {% for product in data.products %}
                                         {% widget 'CatalogPageProductWidget' args [product, data.viewMode] only %}{% endwidget %}
                                     {% endfor %}
@@ -126,21 +150,6 @@
                     {% endif %}
                 {% endif %}
             {% endmacro %}
-
-            {% block breadcrumbs %}
-                {% import _self as self %}
-
-                {% embed molecule('breadcrumb') with {
-                    modifiers: ['bottom'],
-                    embed: {
-                        breadcrumbs: self.renderBreadcrumbSteps(data.category, false, data.filterPath)
-                    }
-                } only %}
-                    {% block breadcrumbs %}
-                        {{ embed.breadcrumbs }}
-                    {% endblock %}
-                {% endembed %}
-            {% endblock %}
 
         </main>
     </div>

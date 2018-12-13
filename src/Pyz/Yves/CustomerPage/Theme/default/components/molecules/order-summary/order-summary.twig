@@ -16,7 +16,7 @@
     </li>
     {% for expense in data.order.expenses %}
         <li class="menu__item">
-            {{ 'customer.order.shipment' | trans }} {{ expense.name }}: 
+            {{ 'customer.order.shipment' | trans }} {{ expense.name | trans }}:
             {{ expense.unitPrice | money(true, data.order.currencyIsoCode) }}
         </li>
     {% endfor %}

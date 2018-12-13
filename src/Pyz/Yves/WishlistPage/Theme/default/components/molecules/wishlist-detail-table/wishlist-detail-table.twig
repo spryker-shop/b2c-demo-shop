@@ -14,7 +14,8 @@
         <table class="table table--expand table--wishlist">
             <thead>
                 <tr>
-                    <th colspan="2">{{ 'customer.account.wishlist.product' | trans  }}</th>
+                    <th>{{ 'customer.account.wishlist.product' | trans  }}</th>
+                    <th class="is-hidden-sm-only"></th>
                     <th>{{ 'customer.account.wishlist.price' | trans  }}</th>
                     <th>{{ 'customer.account.wishlist.availability' | trans  }}</th>
                     <th></th>
@@ -23,7 +24,7 @@
             <tbody>
             {% for item in data.wishlistItems %}
                 <tr>
-                    <td>
+                    <td class="is-hidden-sm-only">
                         {% set imageUrl = item.images[0].externalUrlSmall %}
                         {% if imageUrl %}
                             {% include atom('thumbnail') with {
@@ -37,6 +38,17 @@
                         {% endif %}
                     </td>
                     <td>
+                        {% if imageUrl %}
+                            {% include atom('thumbnail') with {
+                                class: 'is-hidden-md-xl',
+                                modifiers: ['min-size', 'wishlist'],
+                                attributes: {
+                                    alt: item.name,
+                                    src: imageUrl,
+                                    title: item.name,
+                                }
+                            } only %}
+                        {% endif %}
                         <ul class="menu menu--inline menu--middle">
                             <li><strong><a href="{{ item.url }}">{{ item.name }}</a></strong></li>
                             <li>{{ item.sku }}</li>
