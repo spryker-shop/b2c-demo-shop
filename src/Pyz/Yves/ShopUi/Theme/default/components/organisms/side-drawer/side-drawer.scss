@@ -27,6 +27,8 @@ $shop-ui-side-drawer-width: rem(375);
             width: 100%;
             background-color: $setting-color-bg;
             overflow-y: auto;
+            display: flex;
+            flex-direction: column;
 
             @include helper-breakpoint-media-min($md-min) {
                 left: - $shop-ui-side-drawer-width;
@@ -37,6 +39,7 @@ $shop-ui-side-drawer-width: rem(375);
         &__top-bar {
             padding: rem(14) rem(24) rem(14) rem(10);
             background-color: $setting-color-gray-1;
+            min-height: rem(52);
         }
 
         &__close {
@@ -59,6 +62,7 @@ $shop-ui-side-drawer-width: rem(375);
 
         &__bottom-bar {
             padding: rem(24);
+            margin-top: auto;
         }
 
         @content;
