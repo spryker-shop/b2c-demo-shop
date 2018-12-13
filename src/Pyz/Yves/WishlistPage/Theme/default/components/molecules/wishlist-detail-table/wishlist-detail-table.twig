@@ -23,7 +23,8 @@
             </thead>
             <tbody>
             {% for item in data.wishlistItems %}
-                {% set isItemAvailable = item.available is defined and item.available and item.price is defined and item.price is not null %}{% set productDiscontinuedWidget = findWidget('ProductDiscontinuedWidget', [item.sku]) %}
+                {% set isItemAvailable = item.available is defined and item.available and item.price is defined and item.price is not null %}
+                {% set productDiscontinuedWidget = findWidget('ProductDiscontinuedWidget', [item.sku]) %}
                 {% set isDiscontinued = productDiscontinuedWidget.isDiscontinued %}
                 {% if isDiscontinued is not null %}
                     {% set isItemAvailable = not isDiscontinued and isItemAvailable %}
