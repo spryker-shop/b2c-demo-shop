@@ -10,20 +10,21 @@
     description: '',
     images: [],
     sliderConfig: '{
-        "slidesToShow": 4,
+        "slidesToShow": 1,
         "slidesToScroll": 1,
         "dots": false,
         "infinite": false,
+        "mobileFirst": true,
         "responsive": [{
-            "breakpoint": 768,
+            "breakpoint": 375,
             "settings": {
                 "slidesToShow": 2
                 }
         },
         {
-            "breakpoint": 375,
+            "breakpoint": 768,
             "settings": {
-                "slidesToShow": 1
+                "slidesToShow": 4
             }
         }]
     }',
@@ -97,7 +98,7 @@
                 {% endembed %}
             </form>
 
-            <hr />
+            <hr>
             {% block description %}
                 {% if data.description is not empty %}
                     <p>{{ data.description }}</p>
@@ -171,9 +172,13 @@
                                 {% else %}
                                     {% set isDisabled = not embed.product.idProductConcrete or not embed.product.available %}
 
-                                    <a href="{{ path('cart/add', {sku: embed.product.sku}) }}" class="button button--expand js-product-set__add-to-cart" {% if isDisabled %}disabled{% endif %}>
-                                        {{ 'page.detail.add-to-cart' | trans }}
-                                    </a>
+                                    {% if isDisabled %}
+                                        <button type="button" class="button button--expand" disabled>{{ 'page.detail.add-to-cart' | trans }}</button>
+                                    {% else %}
+                                        <a href="{{ path('cart/add', {sku: embed.product.sku}) }}" class="button button--expand js-product-set__add-to-cart">
+                                            {{ 'page.detail.add-to-cart' | trans }}
+                                        </a>
+                                    {% endif %}
                                 {% endif %}
                             {% endblock %}
                         {% endembed %}
