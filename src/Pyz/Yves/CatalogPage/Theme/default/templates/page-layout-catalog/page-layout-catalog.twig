@@ -78,18 +78,36 @@
                         </div>
 
                         <div class="col col--sm-12 col--xl-9 catalog-right-side">
+                            <button type="button" class="button button--hollow button--expand spacing-y spacing-y--big is-hidden-lg-xl js-catalog-toggler-click__trigger">
+                                {{- 'catalog.filter.filter' | trans -}}
+                                {%- include atom('icon') with {
+                                    modifiers: ['small'],
+                                    data: {
+                                        name: 'arrow-down'
+                                    }
+                                } only -%}
+                            </button>
                             {% block catalogContent %}
-                                {% include molecule('sort', 'CatalogPage') with {
-                                    data: {
-                                        togglerClass: 'js-catalog-toggler-click__trigger'
-                                    }
-                                }  only %}
-
-                                {% include organism('active-filter-section', 'CatalogPage') with {
-                                    data: {
-                                        facets: data.facets
-                                    }
-                                } only %}
+                                <div class="grid grid--column-mob-reverse">
+                                    <div class="col col--sm-12 is-hidden-sm-md">
+                                        {% include molecule('sort', 'CatalogPage') only %}
+                                    </div>
+                                    <div class="col col--sm-12">
+                                        {% include organism('active-filter-section', 'CatalogPage') with {
+                                            data: {
+                                                facets: data.facets
+                                            }
+                                        } only %}
+                                    </div>
+                                    <div class="col col--sm-12">
+                                        {% include molecule('view-mode-switch', 'CatalogPage') with {
+                                            class: 'is-hidden-lg-xl',
+                                            data: {
+                                                viewMode: data.viewMode
+                                            }
+                                        } only %}
+                                    </div>
+                                </div>
 
                                 <div class="grid grid--stretch product-list">
                                     {% for product in data.products %}
