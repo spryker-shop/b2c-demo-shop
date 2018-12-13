@@ -14,7 +14,9 @@
 {% block body %}
     {% set items = [
         {
-            iconName: 'icon-home'
+            iconName: 'icon-hamburger',
+            isEmbed: true,
+            isMainNavigation: true,
         },
         {
             iconName: 'search',
@@ -51,6 +53,16 @@
                     }
                 } only %}
                     {% block button %}
+                        {% if embed.item.isMainNavigation is defined %}
+                            <button type="button" class="button button--skinless spacing spacing--inner spacing--reset js-page-layout-main__side-drawer-trigger">
+                                {% include atom('icon') with {
+                                    modifiers: ['big'],
+                                    data: {
+                                        name: data.iconName,
+                                    }
+                                } only %}
+                            </button>
+                        {% endif %}
                         {% if embed.item.isSearch is defined %}
                             <form action="{{embed.searchUrl}}">
                                 <button type="button" class="button button--skinless spacing spacing--inner spacing--reset js-suggest-search__show">

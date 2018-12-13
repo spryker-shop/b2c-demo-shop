@@ -3,16 +3,18 @@
         position: relative;
         background-color: $setting-color-white;
         z-index: $setting-zi-header;
-        padding-top: rem(18);
-        padding-bottom: rem(14);
+        padding-top: rem(4);
         border-bottom: rem(1) solid $setting-color-gray-3;
+
+        @include helper-breakpoint-media-min($md-min) {
+            padding-top: rem(18);
+        }
 
         @include helper-breakpoint-media-min($lg-min) {
             padding-top: 0;
         }
 
         &--border-less-bottom {
-            padding-bottom: 0;
             border-bottom: none;
         }
 

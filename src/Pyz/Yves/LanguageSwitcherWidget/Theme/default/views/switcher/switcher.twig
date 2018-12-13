@@ -5,11 +5,13 @@
     currentLanguage: _widget.currentLanguage
 } %}
 
+{% set selectModifiers = ['hollow', 'header'] %}
+
 {% block body %}
     {% if data.languages is not empty %}
         <form method="GET" action="">
             {% embed molecule('custom-select') with {
-                modifiers: ['hollow', 'header'],
+                modifiers: selectModifiers,
                 attributes: {
                     'onchange': 'this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);',
                     'config-theme': 'secondary'
