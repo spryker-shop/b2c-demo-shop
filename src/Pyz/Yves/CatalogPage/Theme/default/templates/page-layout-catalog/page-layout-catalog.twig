@@ -66,6 +66,7 @@
                     {% block form %}
                         <div class="col col--sm-12 col--xl-3 catalog-left-side">
                             {% include molecule('view-mode-switch', 'CatalogPage') with {
+                                class: 'catalog-left-side__switcher',
                                 data: {
                                     viewMode: data.viewMode,
                                 }
@@ -85,17 +86,17 @@
 
                         <div class="col col--sm-12 col--xl-9 catalog-right-side">
                             <button type="button" class="button button--hollow button--expand spacing-y spacing-y--big is-hidden-lg-xl js-catalog-toggler-click__trigger">
-                                {{- 'catalog.filter.filter' | trans -}}
                                 {%- include atom('icon') with {
-                                    modifiers: ['small'],
+                                    class: 'spacing-right',
                                     data: {
-                                        name: 'arrow-down'
+                                        name: 'filters'
                                     }
                                 } only -%}
+                                {{- 'catalog.filter.filter' | trans -}}
                             </button>
                             {% block catalogContent %}
-                                <div class="grid grid--column-mob-reverse">
-                                    <div class="col col--sm-12 is-hidden-sm-md">
+                                <div class="grid">
+                                    <div class="col col--sm-12">
                                         {% include molecule('sort', 'CatalogPage') only %}
                                     </div>
                                     <div class="col col--sm-12">
@@ -126,8 +127,6 @@
                                 } only %}
                             {% endblock %}
                         </div>
-
-                        <div class="overlay"></div>
 
                         {% include molecule('toggler-click') with {
                             attributes: {

@@ -10,43 +10,74 @@
             {{- _view.pagination.numFound }} {{ 'catalog.itemsFound' | trans -}}
         </div>
 
-        <div class="col">
-            {% embed molecule('custom-select') with {
-                modifiers: ['hollow'],
-                attributes: {
-                    name: 'sort',
-                    'config-theme': 'secondary'
-                },
-                embed: {
-                    sort: _view.sort,
-                    jsClass: config.jsName ~ '__select-trigger'
-                }
-            } only %}
-                {% block selectClass -%}
-                    {{ parent() }} {{ embed.jsClass }}
-                {%- endblock %}
-                {% block options %}
-                    <option value="">
-                        {{ 'catalog.sort.relevance' | trans }}
-                    </option>
+        <div class="col is-hidden-sm-md">
+            <div class="grid grid--middle">
+                {% block selects %}
+                    <div class="col">
+                        {% block label %}
+                            <label class="{{ config.name }}__label">{{ 'catalog.filter.per' | trans }}:</label>
+                        {% endblock %}
+                        {% embed molecule('custom-select') with {
+                            modifiers: ['hollow'],
+                            attributes: {
+                                name: 'ipp',
+                                'config-theme': 'secondary'
+                            },
+                            embed: {
+                                pagination: _view.pagination,
+                                jsClass: config.jsName ~ '__per-page-select-trigger'
+                            }
+                        } only %}
+                            {% block selectClass -%}
+                                {{ parent() }} {{ embed.jsClass }}
+                            {%- endblock %}
+                            {% block options %}
+                                {% for limit in embed.pagination.config.validItemsPerPageOptions %}
+                                    <option value="{{ limit }}" {% if limit == embed.pagination.currentItemsPerPage %}selected{% endif %}>{{ limit }}</option>
+                                {% endfor %}
+                            {% endblock %}
+                        {% endembed %}
+                    </div>
+                    <div class="col">
+                        {% embed molecule('custom-select') with {
+                            modifiers: ['hollow'],
+                            attributes: {
+                                name: 'sort',
+                                'config-theme': 'secondary'
+                            },
+                            embed: {
+                                sort: _view.sort,
+                                jsClass: config.jsName ~ '__select-trigger'
+                            }
+                        } only %}
+                            {% block selectClass -%}
+                                {{ parent() }} {{ embed.jsClass }}
+                            {%- endblock %}
+                            {% block options %}
+                                <option value="">
+                                    {{ 'catalog.sort.relevance' | trans }}
+                                </option>
 
-                    {% for sortParamName in embed.sort.sortParamNames %}
-                        {% set isSelected = sortParamName == embed.sort.currentSortParam %}
-                        <option
-                            value="{{ sortParamName }}"
-                            {% if isSelected %}selected{% endif %}
-                        >
-                            {{ ('catalog.sort.' ~ sortParamName) | trans }}
-                        </option>
-                    {% endfor %}
+                                {% for sortParamName in embed.sort.sortParamNames %}
+                                    {% set isSelected = sortParamName == embed.sort.currentSortParam %}
+                                    <option
+                                        value="{{ sortParamName }}"
+                                        {% if isSelected %}selected{% endif %}
+                                    >
+                                        {{ ('catalog.sort.' ~ sortParamName) | trans }}
+                                    </option>
+                                {% endfor %}
+                            {% endblock %}
+                        {% endembed %}
+                    </div>
                 {% endblock %}
-            {% endembed %}
+            </div>
         </div>
     </div>
 
     {% include molecule('form-submitter') with {
         attributes: {
-            'trigger-selector': '.' ~ config.jsName ~ '__select-trigger'
+            'trigger-selector': '.' ~ config.jsName ~ '__select-trigger, .' ~ config.jsName ~ '__per-page-select-trigger'
         }
     } only %}
 {% endblock %}
