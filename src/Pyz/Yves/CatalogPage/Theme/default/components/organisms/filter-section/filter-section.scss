@@ -1,9 +1,11 @@
 @mixin catalog-page-filter-section($name: '.filter-section') {
+    $mobile-max-height: rem(192);
+
     #{$name} {
         margin-top: rem(118);
         padding: rem(10) rem(24) 0;
         overflow-y: auto;
-        max-height: calc(100vh - #{rem(192)});
+        max-height: calc(100vh - #{$mobile-max-height});
 
         @include helper-breakpoint-media-min($xl-min) {
             margin: 0;
