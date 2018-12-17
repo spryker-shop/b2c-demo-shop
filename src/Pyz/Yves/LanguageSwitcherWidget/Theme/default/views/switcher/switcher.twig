@@ -9,25 +9,13 @@
 {% block body %}
     {% if data.languages is not empty %}
         <form method="GET" action="">
-            {% embed molecule('custom-select') with {
-                modifiers: data.additionalModifiers,
-                attributes: {
-                    'onchange': 'this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);',
-                    'config-theme': 'secondary'
-                },
-                embed: {
+            {% include molecule('language-switcher', 'LanguageSwitcherWidget') with {
+                data: {
                     languages: data.languages,
-                    currentLanguage: data.currentLanguage
+                    currentLanguage: data.currentLanguage,
+                    additionalModifiers: data.additionalModifiers
                 }
             } only %}
-                {% block options %}
-                    {% for language, url in embed.languages %}
-                        <option value="{{ app.request.getSchemeAndHttpHost() }}{{ url }}" {{ (language == embed.currentLanguage) ? 'selected' : ''}}>
-                            {{ language | upper }}
-                        </option>
-                    {% endfor %}
-                {% endblock %}
-            {% endembed %}
         </form>
     {% endif %}
 {% endblock %}
