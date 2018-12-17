@@ -14,5 +14,5 @@ use Spryker\Zed\CategoryDataImport\Business\Model\CategoryWriterStep as SprykerC
  */
 class CategoryWriterStep extends SprykerCategoryWriterStep
 {
-    const KEY_CATEGORY_IMAGE_NAME = 'category_image_name';
+    public const KEY_CATEGORY_IMAGE_NAME = 'category_image_name';
 }
