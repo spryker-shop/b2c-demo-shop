@@ -1,13 +1,15 @@
 import Component from 'ShopUi/models/component';
 
 export default class LanguageSwitcher extends Component {
+    protected select: HTMLSelectElement
+
     protected readyCallback(): void {
+        this.select = this.querySelector(`.${this.jsName}__select`);
         this.mapEvents();
     }
 
     protected mapEvents(): void {
-        const select = this.querySelector(`.${this.jsName}`);
-        select.addEventListener('change', (event: Event) => this.onTriggerChange(event));
+        this.select.addEventListener('change', (event: Event) => this.onTriggerChange(event));
     }
 
     protected onTriggerChange(event: Event): void {
