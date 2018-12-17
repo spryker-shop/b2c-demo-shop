@@ -1,0 +1,23 @@
+@mixin product-label-widget-tag($name: '.tag') {
+    #{$name} {
+        display: inline-block;
+        padding: rem(2) rem(8);
+        background: $setting-color-white;
+        border-radius: rem(2);
+        box-shadow: rem(1) rem(1) 0 0 $setting-color-shadow;
+        margin: rem(4) 0 0 rem(8);
+
+        @include helper-breakpoint-media-max($sm-max) {
+            padding: rem(3) rem(15);
+            font-size: rem(11);
+        }
+
+        &__text {
+            text-transform: uppercase;
+        }
+
+        @content;
+    }
+}
+
+@include product-label-widget-tag();

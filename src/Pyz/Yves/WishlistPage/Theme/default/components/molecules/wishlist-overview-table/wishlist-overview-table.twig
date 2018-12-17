@@ -1,0 +1,71 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'wishlist-overview-table'
+} %}
+
+{% define data = {
+    wishlists: required,
+    wishlistForm: null
+} %}
+
+{% block body %}
+    <div class="is-scrollable-x">
+        <table class="table table--expand">
+            <thead>
+                <tr>
+                    <th width="35%">{{ 'customer.account.wishlist.overview.name' | trans }}</th>
+                    <th width="20%">{{ 'customer.account.wishlist.overview.item_count' | trans }}</th>
+                    <th width="20%">{{ 'customer.account.wishlist.overview.date' | trans }}</th>
+                    <th width="25%"></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for wishlist in data.wishlists %}
+                {% set hasWishlistForm = data.wishlistForm is not empty and wishlist.idWishlist == data.wishlistForm.vars.data.idWishlist %}
+                <tr class="table__tr table__tr--with-border">
+                    <td>
+                        {% if hasWishlistForm %}
+                            {{ form_start(data.wishlistForm) }}
+                            <div class="grid grid--desktop-no-wrap">
+                                <div class="col">
+                                    {{ form_widget(data.wishlistForm.name, {attr: {placeholder: 'customer.account.wishlist.overview.enter_name'|trans}}) }}
+                                </div>
+                                <div class="col">
+                                    <button type="submit" class="button button--combined">
+                                        {{ 'wishlist.form.save' | trans }}
+                                    </button>
+                                </div>
+                            </div>
+                            {{ form_errors(data.wishlistForm) }}
+                            {{ form_end(data.wishlistForm) }}
+                        {% else %}
+                            <a href="{{ path('wishlist/details', { wishlistName: wishlist.name }) }}">{{ wishlist.name }}</a>
+                        {% endif %}
+                    </td>
+                    <td>{{ wishlist.numberOfItems }}</td>
+                    <td>{{ wishlist.createdAt | formatDate }}</td>
+                    <td>
+                        <ul class="menu menu--inline float-right text-right">
+                            {% if not hasWishlistForm %}
+                                <li class="menu__item">
+                                    <a href="{{ url('wishlist/update', {wishlistName: wishlist.name}) }}" class="link link--user-account" title="{{ 'customer.account.wishlist.overview.edit' | trans }}">
+                                        {{ 'customer.account.wishlist.overview.edit' | trans }}
+                                    </a>
+                                </li>
+                            {% endif %}
+                            <li class="menu__item">
+                                <form method="POST" action="{{ path('wishlist/delete', {wishlistName: wishlist.name}) }}">
+                                    <button type="submit" class="link link--user-account" title="{{ 'customer.account.wishlist.overview.delete' | trans }}">
+                                        {{ 'customer.account.wishlist.overview.delete' | trans }}
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

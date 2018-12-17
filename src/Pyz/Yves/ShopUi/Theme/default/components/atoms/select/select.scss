@@ -1,0 +1,57 @@
+@mixin shop-ui-select($name: '.select') {
+    #{$name} {
+        @include helper-effect-transition(border-color);
+        display: inline-block;
+        position: relative;
+        max-width: 100%;
+        background-color: $setting-color-white;
+        border: rem(1) solid $setting-color-input-border;
+        border-radius: rem(2);
+
+        &__select {
+            display: block;
+            width: 100%;
+            background-color: $setting-color-transparent;
+            border: rem(4) solid $setting-color-transparent;
+            border-right-width: rem(24);
+            padding: rem(10);
+            font: fw(regular) rem(16)/rem(18) $setting-font-family;
+            color: $setting-color-black;
+            appearance: none;
+
+            &::-ms-expand {
+                display: none;
+            }
+
+            &:-moz-focusring {
+                color: transparent;
+                text-shadow: 0 0 0 $setting-color-black;
+            }
+        }
+
+        &__caret {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: rem(10);
+            color: $setting-color-black;
+            width: rem(8);
+            height: rem(5);
+            pointer-events: none;
+        }
+
+        &--expand {
+            display: block;
+            width: 100%;
+        }
+
+        &--hollow {
+            background-color: $setting-color-transparent;
+            border: none;
+        }
+
+        @content;
+    }
+}
+
+@include shop-ui-select();

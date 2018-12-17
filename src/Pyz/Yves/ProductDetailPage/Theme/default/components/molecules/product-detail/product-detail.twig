@@ -1,0 +1,64 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'product-detail',
+    tag: 'section'
+} %}
+
+{% define data = {
+    description: '',
+    attributes: [],
+    sku: '',
+    index: '',
+    isBundle: false,
+    hiddenClass: 'is-hidden-sm-only',
+} %}
+
+{% block body %}
+    {% set modifiers = data.isBundle ? modifiers : modifiers | merge(['mobile', 'filter', 'desktop-border-bottom']) %}
+    {% set colClass = data.isBundle ? 'col col--sm-12' : config.name ~ '__col' %}
+    {% embed molecule('toggler-item') with {
+        class: colClass,
+        modifiers: modifiers,
+        data: {
+            title: 'product.attribute.description' | trans,
+            triggerClass: config.jsName ~ '__trigger-description' ~ (data.index is not empty ? '-' ~ data.index : ''),
+            targetClass: config.jsName ~ '__target-description' ~ (data.index is not empty ? '-' ~ data.index : ''),
+            hiddenClass: data.hiddenClass,
+        },
+        embed: {
+            description: data.description,
+            sku: data.sku
+        }
+    } only %}
+        {% block contentText %}
+            {% if embed.description is not empty %}
+                {{ embed.description }}
+            {% endif %}
+            <div class="spacing-top spacing-top--bigger">{{ 'product.attribute.sku' | trans }}: {{ embed.sku }}</div>
+        {% endblock %}
+    {% endembed %}
+
+    {% embed molecule('toggler-item') with {
+        class: colClass,
+        modifiers: modifiers,
+        data: {
+            title: 'page.product.details' | trans,
+            triggerClass: config.jsName ~ '__trigger-details' ~ (data.index is not empty ? '-' ~ data.index : ''),
+            targetClass: config.jsName ~ '__target-details' ~ (data.index is not empty ? '-' ~ data.index : ''),
+            hiddenClass: data.hiddenClass,
+        },
+        embed: {
+            attributes: data.attributes,
+            sku: data.sku
+        }
+    } only %}
+        {% block contentText %}
+            {% include molecule('product-detail-option', 'ProductDetailPage') with {
+                data: {
+                    attributes: embed.attributes
+                }
+            } only %}
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

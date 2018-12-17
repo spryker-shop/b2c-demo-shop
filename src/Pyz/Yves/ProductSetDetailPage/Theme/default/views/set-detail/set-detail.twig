@@ -1,0 +1,21 @@
+{% extends template('page-layout-main') %}
+
+{% define data = {
+    set: _view.productSet,
+    views: _view.productViews,
+
+    title: _view.productSet.name
+} %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block content %}
+    {% include organism('product-set-details', 'ProductSetWidget') ignore missing with {
+        data: {
+            products: data.views,
+            name: data.set.name,
+            description: data.set.description,
+            images: data.set.imageSets.0.images | default([])
+        }
+    } only %}
+{% endblock %}

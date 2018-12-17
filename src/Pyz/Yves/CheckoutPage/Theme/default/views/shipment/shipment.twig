@@ -1,0 +1,75 @@
+{% extends template('page-layout-checkout', 'CheckoutPage') %}
+
+{% define data = {
+    backUrl: _view.previousStepUrl,
+    forms: {
+        shipment: _view.shipmentForm
+    },
+    
+    title: null
+} %}
+
+{% block content %}
+    {% embed molecule('form') with {
+        modifiers: ['checkout-shipment-step', 'checkout-actions', 'checkout-form-elements'],
+        data: {
+            form: data.forms.shipment,
+            options: {
+                attr: { 
+                    id: 'payment-form' 
+                }
+            },
+            submit: {
+                enable: true,
+                text: 'checkout.step.payment' | trans,
+                class: 'form__action--checkout button  button--large button--expand'
+            },
+            cancel: {
+                enable: true,
+                url: data.backUrl,
+                text: 'general.back.button' | trans,
+                class: 'form__action--checkout button button--hollow button--expand'
+            }
+        }
+    } only %}
+        {% block fields %}
+            {% for name, choices in data.form.idShipmentMethod.vars.choices %}
+                <div class="col col--sm-12 {{ config.name }}__shipment-item">
+
+                    <div class="heading">
+                        <h2 class="title title--checkout title--shipment">{{name | trans}}</h2>
+                        <div class="heading__logo">
+                            <img src="/assets/images/shipment-{{ name }}.png" width="65" height="10" alt="{{ name }}">
+                        </div>
+                    </div>
+
+                    <ul class="list-switches list-switches--two-colums">
+
+                        {% for key, choice in choices %}
+                            <li class="list-switches__item list-switches__item--half-width">
+                                {% if choice.value == 1 %}
+                                    {{ form_row(data.form.idShipmentMethod[key], {
+                                        label: data.form.idShipmentMethod[key].vars.label,
+                                        rowAttr: {class: 'radio--with-bg-wrap'},
+                                        attributes: {
+                                            'checked': 'checked'
+                                        },
+                                        errors: data.form.idShipmentMethod.vars.errors
+                                    }) }}
+                                {% else %}
+                                    {{ form_row(data.form.idShipmentMethod[key], {
+                                        label: data.form.idShipmentMethod[key].vars.label,
+                                        rowAttr: {class: 'radio--with-bg-wrap'},
+                                        errors: data.form.idShipmentMethod.vars.errors
+                                    }) }}
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+
+                    </ul>
+                </div>
+            {% endfor %}
+
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

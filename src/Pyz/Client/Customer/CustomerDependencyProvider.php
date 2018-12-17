@@ -31,7 +31,7 @@ class CustomerDependencyProvider extends SprykerCustomerDependencyProvider
     protected function getCustomerSessionSetPlugins()
     {
         return [
-            new GuestCartUpdateCustomerSessionSetPlugin(), #PersistentCartFeature
+            new GuestCartUpdateCustomerSessionSetPlugin(),
             new CustomerChangeCartUpdatePlugin(),
         ];
     }

@@ -1,0 +1,24 @@
+@mixin product-detail-page-bundle-option-list($name: '.bundle-option-list') {
+    #{$name} {
+        margin-bottom: rem(-20);
+
+        &__item {
+            padding-right: rem(8);
+            margin-bottom: rem(20);
+            line-height: 1.38;
+            font-weight: fw(regular);
+
+            &:nth-child(2n) {
+                padding-right: 0;
+                padding-left: rem(8);
+            }
+        }
+
+        &__quantity {
+            padding-left: rem(4);
+            color: $setting-color-gray-3;
+        }
+    }
+}
+
+@include product-detail-page-bundle-option-list();

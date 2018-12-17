@@ -1,0 +1,15 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'form-submitter',
+    tag: 'form-submitter'
+} %}
+
+{% define attributes = {
+    'trigger-selector': required,
+    'event': 'change'
+} %}
+
+{%- block class -%}
+    {{ parent() }} {{ config.jsName }}
+{%- endblock -%}

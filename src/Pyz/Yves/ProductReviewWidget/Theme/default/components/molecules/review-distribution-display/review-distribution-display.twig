@@ -1,0 +1,36 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'review-distribution-display',
+    tag: 'table'
+} %}
+
+{% define data = {
+    summary: required
+} %}
+
+{% block body %}
+    {% for rating, ratingReview in data.summary.ratingAggregation %}
+
+        {% if data.summary.totalReview == 0  %}
+            {% set ratingReviewPercent = 100 %}
+        {% else %}
+            {% set ratingReviewPercent = 100 - (ratingReview / data.summary.totalReview * 100) %}
+        {% endif %}
+
+        <tr>
+            <td class="{{ config.name }}__cell">
+                {{ rating }}
+                {% transchoice rating %}
+                    product_review.summary.star | product_review.summary.stars
+                {% endtranschoice %}
+            </td>
+            <td class="{{ config.name }}__cell">
+                <div class="{{ config.name }}__progress" max="{{ data.summary.totalReview }}" value="{{ ratingReview }}">
+                    <div class="{{ config.name }}__progress-status" style="left: -{{ ratingReviewPercent }}%;"></div>
+                </div>
+            </td>
+            <td class="{{ config.name }}__cell">{{ ratingReview }}</td>
+        </tr>
+    {% endfor %}
+{% endblock %}

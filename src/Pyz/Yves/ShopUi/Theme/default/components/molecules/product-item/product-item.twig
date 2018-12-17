@@ -1,0 +1,119 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'product-item',
+    tag: 'article'
+} %}
+
+{% define data = {
+    product: {},
+    productItem: required,
+    attributes: [],
+    options: [],
+    idQuote: data.product.idQuote | default(null),
+    isPromotionItem: false
+} %}
+
+{% set canEditCart = (not is_granted('IS_AUTHENTICATED_FULLY') or can('WriteSharedCartPermissionPlugin', data.idQuote)) %}
+{% set productItemBox = (data.productItem.productOptions is defined and data.productItem.productOptions is empty) ? '' : config.name ~ '__box--with-options' %}
+{% set price = data.productItem.unitPrice is defined ? data.productItem.unitPrice : data.productItem.price %}
+{% set productItemSubTotal = data.productItem.quantity is not empty ? data.productItem.quantity * price : price %}
+
+{% block body %}
+    <div class="{{ component.renderClass(config.name ~ '__box', modifiers) }} {{ productItemBox }}">
+        <div class="grid grid--middle grid--justify grid--no-wrap">
+            {% block image %}
+                <a href="{{ data.productItem.url }}" class="{{ component.renderClass(config.name ~ '__image', modifiers) }} col">
+                    {% include molecule('product-image') with {
+                        data: {
+                            name: data.productItem.name | default(''),
+                            image: data.productItem.images is empty ? null : (data.productItem.images | first)
+                        }
+                    } only %}
+
+                    {% block labels %}{% endblock %}
+                    {% block groups %}{% endblock %}
+                </a>
+            {% endblock %}
+
+            <div class="{{ component.renderClass(config.name ~ '__content', modifiers) }} col">
+                <div class="grid grid--justify grid--middle">
+                    {% block title %}
+                        <a href="{{ data.productItem.url }}" class="{{ component.renderClass(config.name ~ '__title', modifiers) }} col col--lg-8 col--sm-12">
+                            {{ data.productItem.name }}
+                        </a>
+                    {% endblock %}
+
+                    {% block price %}
+                        {% include molecule('price') with {
+                            modifiers: ['small'],
+                            class: component.renderClass(config.name ~ '__price', modifiers) ~ ' col col--lg-4 col--sm-12',
+                            data: {
+                                amount: productItemSubTotal | money,
+                                originalAmount: data.productItem.prices.ORIGINAL is not defined or data.productItem.prices.ORIGINAL is empty ? null : (data.productItem.prices.ORIGINAL | money)
+                            },
+                        } only %}
+                    {% endblock %}
+                </div>
+
+                {% if not data.isPromotionItem %}
+                    <div class="{{ config.name }}__options">
+                        {% block options %}
+                            {% if data.attributes is not empty %}
+                                {% include molecule('product-item-variant-selector') with {
+                                    data: {
+                                        productItem: data.productItem,
+                                        productItemAttributes: data.attributes
+                                    }
+                                } only %}
+                            {% endif %}
+                        {% endblock %}
+
+                        {% block quantity %}
+                            {% if canEditCart %}
+                                <form method="POST" action="{{ path('cart/change/quantity', {'sku': data.productItem.sku }) }}">
+                                    {% include molecule('product-quantity-input') with {
+                                        data: {
+                                            maxQuantity: data.productItem.maxQuantity,
+                                            value: data.productItem.quantity
+                                        }
+                                    } only %}
+
+                                    <input type="hidden" value="{{ data.productItem.groupKey }}" name="groupKey" />
+                                </form>
+                            {% else %}
+                                {{ 'cart.item_quantity' | trans }}: {{ productItem.quantity }}
+                            {% endif %}
+                        {% endblock %}
+
+                        {% if canEditCart %}
+                            <a class="link link--darkest link--edit" href="{{ path('cart/remove', {'sku': data.productItem.sku, 'groupKey': data.productItem.groupKey }) }}">
+                                {{ 'remove' | trans }}
+                            </a>
+                        {% endif %}
+                    </div>
+                {% endif %}
+
+                {% block content %}{% endblock %}
+                {% block actions %}{% endblock %}
+            </div>
+        </div>
+
+        {% block bundles %}
+            {% widget 'ProductBundleCartItemsListWidget' args [data.productItem, data.product] only %}{% endwidget %}
+        {% endblock %}
+
+        {% block summary %}
+            {% if data.productItem.productOptions is defined and data.productItem.productOptions is not empty %}
+                <div class="grid grid--right">
+                    {% include molecule('product-item-summary') with {
+                        class: 'col',
+                        data: {
+                            productItem: data.productItem
+                        }
+                    } only %}
+                </div>
+            {% endif %}
+        {% endblock %}
+    </div>
+{% endblock %}

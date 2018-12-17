@@ -1,0 +1,30 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'jumbotron'
+} %}
+
+{% define data = {
+    imageUrl: null,
+    bgColor: null,
+    textColor: null,
+    headline: 'global.spryker.shop' | trans,
+    subHeadline: 'global.spryker.motto' | trans
+} %}
+
+{% set backgroundImage = data.imageUrl is empty ? '' : 'background-image: url(' ~ data.imageUrl ~ '); ' %}
+{% set backgroundColor = data.bgColor is empty ? '' : 'background-color: ' ~ data.bgColor ~ '; ' %}
+{% set textColor = data.textColor is empty ? '' : 'color: ' ~ data.textColor ~ ';' %}
+
+{% define attributes = {
+    'style': backgroundImage ~ backgroundColor ~ textColor
+} %}
+
+{% block body %}
+    <div class="container">
+        <div class="{{ component.renderClass(config.name ~ '__inner', modifiers) }} grid grid--center grid--middle">
+            <h1 class="{{ component.renderClass(config.name ~ '__headline', modifiers) }}">{{ data.headline }}</h1>
+            <h4 class="{{ component.renderClass(config.name ~ '__sub-headline', modifiers) }}">{{ data.subHeadline }}</h4>
+        </div>
+    </div>
+{% endblock %}

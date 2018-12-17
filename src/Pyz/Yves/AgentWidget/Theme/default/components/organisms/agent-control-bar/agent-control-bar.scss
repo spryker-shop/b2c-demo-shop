@@ -1,0 +1,53 @@
+@mixin agent-control-bar($name: '.agent-control-bar') {
+    #{$name} {
+        position: relative;
+        z-index: $setting-zi-header;
+        border-bottom: rem(1) solid #e3e3e3;
+
+        &.active {
+            z-index: $setting-zi-header + 1;
+
+            &::before {
+                content: '';
+                position: fixed;
+                left: 0;
+                top: 0;
+                bottom: 0;
+                right: 0;
+                background-color: $setting-color-black;
+                opacity: 0.4;
+                z-index: -1;
+            }
+        }
+
+        &__inner {
+            position: relative;
+            background-color: $setting-color-white;
+            z-index: $setting-zi-element;
+        }
+
+        &__container {
+            @include helper-breakpoint-media-max($sm-max) {
+                flex-direction: column-reverse;
+                text-align: right;
+            }
+
+            padding: rem(12) rem(16);
+        }
+
+        &__info {
+            font-size: rem(14);
+            line-height: normal;
+        }
+
+        &__name {
+            font-weight: fw(medium);
+        }
+
+        &__button-wrap {
+            margin-left: rem(18);
+        }
+    }
+}
+
+@include agent-control-bar();

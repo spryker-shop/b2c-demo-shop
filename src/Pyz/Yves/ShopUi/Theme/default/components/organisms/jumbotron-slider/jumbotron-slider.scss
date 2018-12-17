@@ -1,0 +1,56 @@
+@mixin shop-ui-jumbotron-slider($name: '.jumbotron-slider') {
+    #{$name} {
+        min-height: rem(212);
+
+        @include helper-breakpoint-media-min($md-min) {
+            min-height: rem(290);
+        }
+
+        @include helper-breakpoint-media-min($lg-min) {
+            min-height: rem(450);
+        }
+
+        .slick-slide {
+            margin: 0 rem(4);
+        }
+
+        .slick-dots {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: rem(24);
+
+            li {
+                display: block;
+                margin: rem(4.8) rem(8);
+                width: rem(6);
+                height: rem(6);
+                background-color: $setting-color-black;
+                opacity: 0.25;
+                border-radius: 50%;
+
+                &:hover {
+                    cursor: pointer;
+                }
+
+                &.slick-active {
+                    width: rem(12);
+                    height: rem(12);
+                    background-color: $setting-color-transparent;
+                    border: rem(1) solid $setting-color-alt;
+                    opacity: 1;
+                }
+            }
+
+            button {
+                font-size: 0;
+            }
+        }
+
+        .slick-initialized {
+            padding: 0;
+        }
+    }
+}
+
+@include shop-ui-jumbotron-slider();

@@ -1,0 +1,25 @@
+@mixin shop-ui-user-block($name: '.user-block-item') {
+    #{$name} {
+        display: flex;
+        justify-content: space-between;
+        font: fw(regular) rem(14) $setting-font-family-additional;
+        margin: rem(30) 0;
+        text-transform: uppercase;
+        letter-spacing: rem(1);
+
+        &:hover {
+            text-decoration: none;
+        }
+
+        &--small {
+            font-size: rem(12);
+            margin: 0;
+            padding-top: rem(25);
+            border-top: rem(1) dotted $setting-color-gray-3;
+        }
+
+        @content;
+    }
+}
+
+@include shop-ui-user-block();

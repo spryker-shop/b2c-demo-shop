@@ -1,0 +1,48 @@
+{% extends atom('node') %}
+
+{% define config = {
+    name: 'navigation-multilevel-node',
+    tag: 'li'
+} %}
+
+{% define data = {
+    levelMenu: 1
+} %}
+
+{% block body %}
+    {{ parent() }}
+    {% if data.node.children is not empty %}
+        {% block menu %}
+            <ul class="{{ component.renderClass(config.name ~ '__menu', modifiers) }} menu">
+                {% for childNode in data.node.children %}
+                    {% set hasChildren = childNode.children | length > 0 %}
+
+                    {% include molecule('navigation-multilevel-node') with {
+                        class: 'menu__item ' ~ component.renderClass(config.name ~ '__child', modifiers) ~ ' ' ~ config.name ~ '__' ~ childNode.cssClass,
+                        modifiers: modifiers,
+                        data: {
+                            node: childNode,
+                            levelMenu: data.levelMenu + 1
+                        }
+                    } only %}
+                {% endfor %}
+            </ul>
+        {% endblock %}
+    {% endif %}
+{% endblock %}
+
+{% block url %}
+    <a class="{{ component.renderClass(config.name ~ '__link', modifiers) }} {{ config.name }}__link--lvl-{{ data.levelMenu }}" href="{{ data.node.url }}">{{ data.node.title }}</a>
+{% endblock %}
+
+{% block link %}
+    <a class="{{ component.renderClass(config.name ~ '__link', modifiers) }} {{ config.name }}__link--lvl-{{ data.levelMenu }}" href="{{ data.node.url }}">{{ data.node.title }}</a>
+{% endblock %}
+
+{% block externalUrl %}
+    <a class="{{ component.renderClass(config.name ~ '__link', modifiers) }} {{ config.name }}__link--lvl-{{ data.levelMenu }}" href="{{ data.node.url }}" target="_blank">{{ data.node.title }}</a>
+{% endblock %}
+
+{% block other %}
+    {{ data.node.title }}
+{% endblock %}

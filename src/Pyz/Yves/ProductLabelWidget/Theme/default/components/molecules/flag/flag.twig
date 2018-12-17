@@ -1,0 +1,16 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'flag',
+    tag: 'span'
+} %}
+
+{% define data = {
+    text: ''
+} %}
+
+{% block body %}
+    <span class="{{ component.renderClass(config.name ~ '__text', modifiers) }}">
+        {{data.text}}
+    </span>
+{% endblock %}

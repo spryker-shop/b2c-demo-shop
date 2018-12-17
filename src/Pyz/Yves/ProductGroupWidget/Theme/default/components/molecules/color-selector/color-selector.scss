@@ -1,0 +1,89 @@
+$color-selector-size: 16;
+$selector-border-size: 2;
+
+@mixin color-group-color-selector($name: '.color-selector') {
+    #{$name} {
+        cursor: default;
+
+        &--card {
+            @include helper-effect-transition(transform);
+            background: $setting-color-white;
+            position: absolute;
+            z-index: $setting-zi-header;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            border-radius: 0 0 rem(4) rem(4);
+            padding: rem(16) 0;
+            transform: translateY(100%);
+        }
+
+        &__color {
+            display: inline-block;
+            width: rem($color-selector-size);
+            height: rem($color-selector-size);
+            border-radius: 100%;
+            border: rem($selector-border-size) solid $setting-color-white;
+            vertical-align: middle;
+            position: relative;
+
+            &::before {
+                content: '';
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                width: rem($color-selector-size - 2);
+                height: rem($color-selector-size - 2);
+                border: rem($selector-border-size) solid $setting-color-white;
+                border-radius: 100%;
+                visibility: hidden;
+            }
+
+            &:not(:last-child) {
+                margin-right: rem(4);
+            }
+
+            &:hover,
+            &--active {
+                border: unset;
+                &::before {
+                    visibility: visible;
+                }
+            }
+
+            &:hover #{$name}__tooltip {
+                transform: scale(1);
+            }
+        }
+
+        &__tooltip {
+            @include helper-effect-transition(all);
+            transform: scale(0);
+            transform-origin: bottom;
+            position: absolute;
+            top: rem(-43);
+            left: rem(-15);
+            background: $setting-color-black;
+            color: $setting-color-white;
+            font: fw(light) rem(16) $setting-font-family;
+            padding: rem(5) rem(11) rem(7) rem(10);
+            white-space: nowrap;
+            border-radius: rem(2);
+
+            &::before {
+                content: '';
+                position: absolute;
+                left: rem(17);
+                bottom: rem(-4);
+                border-radius: rem(2);
+                background: $setting-color-black;
+                width: rem(10);
+                height: rem(10);
+                transform: rotate(45deg);
+            }
+        }
+    }
+}
+
+@include color-group-color-selector();

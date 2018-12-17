@@ -1,0 +1,14 @@
+{% extends template('widget') %}
+
+{% define data = {  
+    nodes: _widget.navigationTree.nodes
+} %}
+
+{% block body %}
+    {% include molecule('navigation-list') with {
+        modifiers: ['footer'],
+        data: {
+            nodes: data.nodes
+        }
+    } only %}
+{% endblock %}

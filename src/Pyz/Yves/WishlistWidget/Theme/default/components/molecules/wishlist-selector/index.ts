@@ -1,0 +1,1 @@
+import './wishlist-selector.scss';

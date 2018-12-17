@@ -1,0 +1,29 @@
+{% extends template('widget') %}
+
+{% define data = {  
+    categories: _widget.categories
+} %}
+
+{% set steps = [] %}
+{% for category in data.categories %}
+    {% set steps = steps | merge([{
+        url: category.url,
+        label: category.name,
+        itemProp: 'category'
+    }]) %}
+{% endfor %}
+
+{% block template %}
+    {% if data.categories is not empty %}
+        {{parent()}}
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    {% include molecule('breadcrumb') with {
+        modifiers: ['bottom'],
+        data: {
+            steps: steps
+        }
+    } only %}
+{% endblock %}

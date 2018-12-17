@@ -1,0 +1,188 @@
+@mixin basic-grid() {
+    .container {
+        display: block;
+        width: 100%;
+        max-width: $setting-grid-max-width;
+        margin: auto;
+
+        &--home-page {
+            max-width: none;
+            padding-bottom: rem(80);
+        }
+
+        &__inner {
+            margin: 0 rem(16);
+        }
+    }
+
+    .grid,
+    .col {
+        &--spaced {
+            &-sm {
+                padding: rem(8);
+            }
+
+            &-md {
+                padding: rem(13);
+            }
+
+            &-lg {
+                padding: rem(16);
+            }
+        }
+    }
+
+    .col {
+        @include helper-ui-clearfix;
+        float: left;
+        display: block;
+        flex-grow: 0;
+        flex-basis: auto;
+
+        @each $breakpoint, $edges in $setting-breakpoints {
+            @include helper-breakpoint-media-min(helper-breakpoint-edge-min($edges)) {
+                @for $column from 1 through $setting-grid-columns {
+                    &--#{$breakpoint}-#{$column} {
+                        width: helper-grid-span($column);
+                        min-width: helper-grid-span($column);
+                    }
+                }
+            }
+        }
+
+        &--expand {
+            flex-grow: 1;
+        }
+
+        &--top {
+            align-self: flex-start;
+            margin-bottom: auto;
+        }
+
+        &--bottom {
+            align-self: flex-end;
+            margin-top: auto;
+        }
+
+        &--left {
+            justify-self: flex-start;
+            margin-right: auto;
+        }
+
+        &--right {
+            justify-self: flex-end;
+            margin-left: auto;
+        }
+
+        &--center {
+            justify-self: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        &--middle {
+            align-self: center;
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+    }
+
+    .grid {
+        @include helper-ui-clearfix;
+        clear: both;
+        display: flex;
+        flex-flow: row wrap;
+        align-items: flex-start;
+        justify-content: flex-start;
+        max-width: 100%;
+
+        &--top {
+            align-items: flex-start;
+        }
+
+        &--bottom {
+            align-items: flex-end;
+        }
+
+        &--center {
+            justify-content: center;
+        }
+
+        &--middle {
+            align-items: center;
+        }
+
+        &--stretch {
+            align-items: stretch;
+
+            .col {
+                margin-top: 0;
+                margin-bottom: 0;
+            }
+        }
+
+        &--justify {
+            justify-content: space-between;
+
+            .col {
+                margin-left: auto;
+                margin-right: auto;
+
+                &:first-child {
+                    margin-left: 0;
+                }
+
+                &:last-child {
+                    margin-right: 0;
+                }
+            }
+        }
+
+        &--left {
+            justify-content: flex-start;
+
+            .col--left {
+                margin-right: 0;
+                margin-left: 0;
+            }
+        }
+
+        &--right {
+            justify-content: flex-end;
+
+            .col--right {
+                margin-right: 0;
+                margin-left: 0;
+            }
+        }
+
+        &--inline {
+            display: inline-flex;
+        }
+
+        &.container {
+            max-width: $setting-grid-max-width;
+        }
+
+        &--no-wrap {
+            flex-wrap: nowrap;
+        }
+
+        &--desktop-no-wrap {
+            @include helper-breakpoint-media-min($md-min) {
+                flex-wrap: nowrap;
+            }
+        }
+
+        &--mobile-row-revers {
+            @include helper-breakpoint-media-max($lg-max) {
+                flex-direction: column-reverse;
+            }
+        }
+
+        &--indent {
+            max-width: none;
+            margin: 0 rem(-16);
+        }
+    }
+}

@@ -7,11 +7,13 @@
 
 {% define data = {
     product: required,
-    maxQuantity: 10
+    maxQuantity: 10,
+    isBundle: null,
+    bundleItems: []
 } %}
 
 {% set options = [] %}
-{% set brand = data.product.attributes.brand | default %}
+{% set productName = data.product.name | default %}
 {% set sku = data.product.sku %}
 {% set availabilityWidget = '' %}
 {% set isDisabled = data.product.idProductConcrete is empty or data.product.price is empty %}
@@ -28,100 +30,82 @@
 {% set isDisabled = not isAvailable or isDisabled %}
 
 {% set productDiscontinuedNoteWidget = findWidget('ProductDiscontinuedNoteWidget', [sku]) %}
-{% set isDiscontinued = productDiscontinuedNoteWidget.isDiscontinued ?? widgetBlock('ProductDiscontinuedWidgetPlugin', 'isDiscontinued', sku) %} {# @deprecated Use productDiscontinuedNoteWidget instead of ProductDiscontinuedWidgetPlugin. #}
-{% if isDiscontinued is not null %}
-    {% set isDisabled = isDiscontinued or isDisabled %}
-    {% set isProductAvailable = not isDiscontinued %}
+{% if productDiscontinuedNoteWidget.isDiscontinued is not null %}
+    {% set isDisabled = productDiscontinuedNoteWidget.isDiscontinued or isDisabled %}
+    {% set isProductAvailable = not productDiscontinuedNoteWidget.isDiscontinued %}
 {% endif %}
 
 {% block body %}
-    {% if brand is not empty %}
-        <h5><small>{{'page.product.by' | trans}}</small> {{brand}}</h5>
-    {% endif %}
-    <small>{{ 'product.attribute.sku' | trans }}: {{sku}}</small>
 
-    <hr />
-    {% widget 'ProductPriceVolumeWidget' args [data.product] only %}
-    {% elsewidget 'PriceProductVolumeWidgetPlugin' args [data.product] only %} {# @deprecated Use ProductPriceVolumeWidget instead. #}
-    {% nowidget %}
-        {% if widgetExists('PriceWidgetPlugin') %}
-            {{ widget('PriceWidgetPlugin', data.product) }}  {# @deprecated Use molecule('price') instead. #}
-        {% else %}
-            <p>
+    <h1 class="title title--product title--h2">{{productName}}</h1>
+
+    <div class="grid grid--justify spacing-bottom spacing-bottom--bigger">
+        {% widget 'ProductDetailPageReviewWidget' args [data.product.idProductAbstract] use view('pdp-review-rating', 'ProductReviewWidget') only %}{% endwidget %}
+        {% widget 'ProductPriceVolumeWidget' args [data.product] only %}
+        {% nowidget %}
+            <div class="col text-right">
                 {% include molecule('price') with {
+                    modifiers: ['pdp'],
                     data: {
                         amount: data.product.price | money,
-                        originalAmount: data.product.prices.ORIGINAL | default
+                        originalAmount: data.product.prices.ORIGINAL is not defined ? null : data.product.prices.ORIGINAL | money
                     }
                 } only %}
-            </p>
-        {% endif %}
-    {% endwidget %}
-
-    {% widget 'ProductDetailPageReviewWidget' args [data.product.idProductAbstract] use view('pdp-review-rating', 'ProductReviewWidget') only %}
-    {% nowidget %}
-        {{ widgetBlock('ProductReviewWidgetPlugin', 'rating', data.product.idProductAbstract) }} {# @deprecated Use ProductDetailPageReviewWidget instead. #}
-    {% endwidget %}
-
-    {% widget 'ExampleProductColorSelectorWidget' args [data.product.idProductAbstract] use view('pdp-color-selector', 'ExampleProductColorGroupWidget') only %}
-    {% elsewidget 'ProductGroupWidgetPlugin' args [data.product.idProductAbstract] only %} {# @deprecated Use ExampleProductColorSelectorWidget or ProductGroupWidget instead. #}
-    {% endwidget %}
-
-    {% embed molecule('variant-configurator', 'ProductDetailPage') with {
+            </div>
+        {% endwidget %}
+    </div>
+    {% if data.isBundle != null %}
+        {% embed molecule('toggler-item') with {
+            modifiers: ['with-top-border', 'option'],
+            data: {
+                title: 'bundle.title' | trans,
+                triggerClass: config.jsName ~ '__trigger-bundle',
+                targetClass: config.jsName ~ '__target-bundle',
+                isActive: true,
+            },
+            embed: {
+                bundleItems: data.bundleItems,
+            }
+        } only %}
+            {% block contentText %}
+                {% include molecule('bundle-option-list', 'ProductDetailPage') with {
+                    data: {
+                        bundleItems: embed.bundleItems,
+                    }
+                } only %}
+            {% endblock %}
+        {% endembed %}
+    {% endif %}
+    {% widget 'ProductGroupWidget' args [data.product.idProductAbstract] use view('pdp-color-selector', 'ProductGroupWidget') only %}{% endwidget %}
+    {% include molecule('variant-configurator', 'ProductDetailPage') with {
+        class: 'js-volume-price__quantity',
         data: {
             superAttributes: data.product.attributeMap.superAttributes,
             selectedAttributes: data.product.selectedAttributes,
             availableAttributes: data.product.availableAttributes
         }
     } only %}
-        {% block body %}<hr />{{parent()}}{% endblock %}
-    {% endembed %}
 
-    <hr />
     <form method="POST" action="{{ path("cart/add", {"sku": sku}) }}">
-        {% widget 'ProductOptionConfiguratorWidget' args [data.product] only %}
-        {% elsewidget 'ProductOptionWidgetPlugin' args [data.product] only %} {# @deprecated Use ProductOptionConfiguratorWidget instead. #}
-        {% endwidget %}
-
-        {% if can('SeeAddToCartPermissionPlugin') %}
-            {% widget 'ProductPackagingUnitWidget' args [data.product, isDisabled, options] only %}
-            {% elsewidget 'ProductPackagingUnitWidgetPlugin' args [data.product, isDisabled, options] only %} {# @deprecated Use ProductPackagingUnitWidget instead. #}
-            {% elsewidget 'ManageProductMeasurementUnitWidget' args [data.product, isDisabled, options] only %}
-            {% elsewidget 'ProductMeasurementUnitWidgetPlugin' args [data.product, isDisabled, options] only %} {# @deprecated Use ManageProductMeasurementUnitWidget instead. #}
-            {% nowidget %}
-                <div class="grid grid--bottom grid--justify">
-                    <div class="col col--sm-5">
-                        <label>
-                            {{'cart.item_quantity' | trans}}
-                            {% embed atom('select') with {
-                                modifiers: ['expand'],
-                                data: {
-                                    options: options
-                                },
-                                attributes: {
-                                    name: 'quantity',
-                                    disabled: isDisabled
-                                }
-                            } only %}
-                                {% block selectClass %}js-volume-price__quantity{% endblock %}
-                            {% endembed %}
-                        </label>
-                    </div>
-
-                    <div class="col col--sm-6">
-                        <button type="submit" class="button button--success button--expand" {{ isDisabled ? 'disabled' : '' }} onclick="this.form.submit(); this.disabled='disabled'; return false;" {{qa('add-to-cart-button')}}>
-                            {% include atom('icon') with {
-                                data: {
-                                    name: 'cart-plus'
-                                }
-                            } only %}
-                            {{ 'page.detail.add-to-cart' | trans }}
-                        </button>
-                    </div>
-                </div>
-            {% endwidget %}
+        {% widget 'ProductOptionConfiguratorWidget' args [data.product] only %}{% endwidget %}
+        {% if not isDisabled %}
+            {% embed molecule('toggler-item') with {
+                modifiers: ['with-top-border', 'option'],
+                data: {
+                    title: 'cart.item_quantity' | trans,
+                    isToggler: false,
+                }
+            } only %}
+                {% block contentText %}
+                    {% include molecule('quantity-counter') with {
+                        modifiers: ['quantity-large', 'no-spacing'],
+                        data: {
+                            readOnly: true
+                        }
+                    } only %}
+                {% endblock %}
+            {% endembed %}
         {% endif %}
-
 
         {% include molecule('availability-product', 'AvailabilityWidget') ignore missing with {
             data: {
@@ -129,17 +113,20 @@
                 isAvailable: data.product.available
             }
         } only %}
+
+        {% widget 'ProductDiscontinuedNoteWidget' args [data.product.sku] only %}{% endwidget %}
+
+        <div class="{{ config.name }}__button-wrap">
+            <button type="submit" class="button button--large button--expand {{ config.jsName ~ '__button' }}" {{ isDisabled ? 'disabled' : '' }} {{qa('add-to-cart-button')}}>
+                {{ 'page.detail.add-to-cart' | trans }}
+            </button>
+            {% include molecule('action-single-click-enforcer') with {
+                attributes: {
+                    'target-selector': '.' ~ config.jsName ~ '__button'
+                }
+            } only %}
+        </div>
     </form>
-
-    {% if can('SeeShoppingListPermissionPlugin') and isProductAvailable %}
-        {% widget 'AddToShoppingListWidget' args [sku, isDisabled] only %}
-            {% block body %}
-                <hr />
-                {{ parent() }}
-            {% endblock %}
-        {% endwidget %}
-    {% endif %}
-
     {% if can('SeeWishlistPermissionPlugin') and isProductAvailable %}
         {% include molecule('wishlist-selector-for-pdp', 'WishlistWidget') ignore missing with {
             data: {
@@ -148,7 +135,4 @@
             }
         } only %}
     {% endif %}
-
-    {% widget 'ProductDiscontinuedNoteWidget' args [sku] only %}{% endwidget %}
-
 {% endblock %}

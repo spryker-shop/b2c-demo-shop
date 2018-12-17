@@ -1,0 +1,34 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'search-form'
+} %}
+
+{% define data = {
+    searchUrl: path('search'),
+    searchValue: app.request.get('q')
+} %}
+
+{% define attributes = {
+    'data-search-id': required
+} %}
+
+{% block body %}
+    <form action="{{data.searchUrl}}">
+        <div class="grid">
+            <div class="col col--sm-10">
+                <input name="q" type="text" class="input input--expand suggest-search__input {{ config.jsName }}__input" placeholder="{{ 'global.search' | trans }}" value="{{data.searchValue}}" autofocus="autofocus" autocomplete="off">
+            </div>
+        </div>
+
+        {% include molecule('suggest-search') with {
+            attributes: {
+                'suggestion-url': path('search/suggestion'),
+                'base-suggest-url': path('search/suggestion'),
+                'input-selector': '[data-search-id="' ~ attributes['data-search-id'] ~ '"] .' ~ config.jsName ~ '__input'
+            }
+        } only %}
+
+        <button type="submit" class="is-hidden"></button>
+    </form>
+{% endblock %}

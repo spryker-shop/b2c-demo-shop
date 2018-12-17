@@ -47,7 +47,7 @@ class SaleController extends AbstractController
 
         return $this->view(
             $searchResults,
-            $this->getFactory()->getExampleProductSalePageWidgetPlugins(),
+            [],
             '@ExampleProductSalePage/views/sale-example/sale-example.twig'
         );
     }

@@ -1,0 +1,119 @@
+@mixin shop-ui-breadcrumb-step($name: '.breadcrumb-step') {
+    #{$name} {
+        display: flex;
+        font-size: rem(13);
+
+        &__link {
+            color: $setting-color-black;
+
+            &:hover {
+                text-decoration: none;
+                color: $setting-color-alt;
+            }
+        }
+
+        &__separator {
+            width: rem(37);
+            color: $setting-color-gray-3;
+            position: relative;
+        }
+
+        &:not(:last-child) &__separator {
+            &::before,
+            &::after {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                content: '';
+                width: rem(1);
+                height: rem(9);
+                transform: translate(-50%, -50%) rotate(-38deg);
+                border-radius: rem(0.5);
+                background-color: $setting-color-gray-3;
+                margin-top: rem(-2);
+            }
+
+            &::after {
+                transform: translate(-50%, -50%) rotate(38deg);
+                margin-top: rem(4);
+            }
+        }
+
+        &--active {
+            @include helper-font-weight(bold);
+            color: $setting-color-main;
+        }
+
+        &--disabled:not(&--active) {
+            opacity: 0.4;
+            color: $setting-color-black;
+        }
+
+        &--progress {
+            padding: rem(15) rem(25) 0;
+            text-align: center;
+            position: relative;
+            font: fw(medium) rem(15) $setting-font-family-additional;
+            display: none;
+
+            @include helper-breakpoint-media-min($md-min) {
+                display: flex;
+            }
+
+            &::before,
+            &::after {
+                @include helper-breakpoint-media-min($md-min) {
+                    content: '';
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    right: 0;
+                    height: rem(1);
+                    background-color: $setting-color-black;
+                }
+            }
+
+            &:not(#{$name}--progress-active) {
+                &::after {
+                    opacity: 0;
+                }
+            }
+
+            &:not(#{$name}--disabled) {
+                &::after {
+                    width: 100%;
+                }
+
+                &:last-child {
+                    &::before {
+                        opacity: 0.4;
+                    }
+
+                    &::after {
+                        width: 50%;
+                    }
+                }
+            }
+
+            #{$name}__link {
+                color: $setting-color-black;
+            }
+        }
+
+        &--progress-active {
+            color: $setting-color-black;
+            display: flex;
+
+            &::before {
+                opacity: 0.4;
+            }
+
+            &::after {
+                width: 50%;
+                opacity: 1;
+            }
+        }
+    }
+}
+
+@include shop-ui-breadcrumb-step();

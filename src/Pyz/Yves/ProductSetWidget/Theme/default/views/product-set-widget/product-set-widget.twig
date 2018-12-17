@@ -1,0 +1,72 @@
+{% extends template('product-set', 'ProductSetWidget') %}
+
+{% define data = {
+    products: _widget.productViews,
+    name: _widget.productSet.name,
+    description: _widget.productSet.description,
+    images: _widget.productSet.imageSets.0.images | default([]),
+    sliderConfig: '{
+        "slidesToShow": 1,
+        "dots": false,
+        "variableWidth": true,
+        "mobileFirst": true,
+        "responsive": [{
+            "breakpoint": 450,
+            "settings": {
+                "slidesToShow": 2
+            }
+        },
+        {
+            "breakpoint": 680,
+            "settings": {
+                "slidesToShow": 3
+            }
+        },
+        {
+            "breakpoint": 800,
+            "settings": {
+                "slidesToShow": 1
+            }
+        },
+        {
+            "breakpoint": 1000,
+            "settings": {
+                "slidesToShow": 2
+            }
+        }]
+    }',
+    addAllSetButton: false
+} %}
+
+{% block title %}
+    <h4 class="title title--product-set-main title--h2">
+        <span class="title title--product-set-secondary">{{data.name}}</span>
+    </h4>
+{% endblock %}
+
+{% block description %}
+    <div class="col col--sm-12 col--lg-5 node node--product-set">
+        {{parent()}}
+    </div>
+{% endblock %}
+
+{% block body %}
+    <div class="product-set">
+        {% block header %}
+            {{parent()}}
+        {% endblock %}
+
+        <div class="grid grid--stretch">
+            <div class="col col--sm-12 col--lg-5 product-set-slider product-set-slider--single">
+                {% block carousel %}
+                    {{parent()}}
+                {% endblock %}
+            </div>
+            <div class="col col--sm-12 col--lg-7 product-set-slider product-set-slider--hide-prev-btn product-set-slider--multiple">
+                {% block productSet %}
+                    {{parent()}}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'product-slider-title'
+} %}
+
+{% define data = {
+    title: required,
+    subText: '',
+} %}
+
+{% block body %}
+    <h2 class="title title--regular">{{ data.title }}</h2>
+    {% block subContent %}
+        {% if data.subText is not empty %}
+            <div class="{{ config.name }}__sub-col">{{ data.subText }}</div>
+        {% endif %}
+    {% endblock %}
+{% endblock %}

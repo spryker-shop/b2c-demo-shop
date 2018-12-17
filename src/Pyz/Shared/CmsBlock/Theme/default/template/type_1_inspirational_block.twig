@@ -1,0 +1,31 @@
+{% block content %}
+    <!-- CMS_BLOCK_PLACEHOLDER : "title" -->
+    <!-- CMS_BLOCK_PLACEHOLDER : "description" -->
+    <div class="container">
+        <div class="grid grid--justify grid--middle grid--spaced-lg inspirational-block inspirational-block--right">
+            <div class="col col--lg-6 col--md-12 col--sm-12">
+
+                <div class="inspirational-block__images inspirational-block__images--left">
+                    <div class="inspirational-block__image inspirational-block__image-1">
+                        <img src="/assets/images/inspire1-bottom.jpg" alt="">
+                    </div>
+                    <a href="{{ 'cameras.category.link' | trans }}" class="inspirational-block__image inspirational-block__image-2 inspirational-block__image-2--left">
+                        <img src="/assets/images/inspire1-main.jpg" alt="">
+                    </a>
+                </div>
+
+            </div>
+            <div class="col col--lg-6 col--md-12 col--sm-12">
+
+                <div class="inspirational-block__content inspirational-block__content--right">
+                    {{ spyCmsBlockPlaceholder('title') | raw }}
+                    <p class="inspirational-block__text">{{ spyCmsBlockPlaceholder('description') | raw }}</p>
+                    <a href='{{ 'cameras.category.link' | trans }}' class="button button--hollow button--inspirational button--expand-mobile">{{ 'cms-product-group.category.link.text' | trans }}</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+

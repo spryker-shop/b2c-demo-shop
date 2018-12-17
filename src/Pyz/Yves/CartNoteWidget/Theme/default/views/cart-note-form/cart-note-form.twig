@@ -1,0 +1,39 @@
+{% extends template('widget') %}
+
+{% define data = {
+    idQuote: _view.cart.idQuote,
+    form: _widget.cartNoteForm
+} %}
+
+{% set canWrite = (not is_granted('IS_AUTHENTICATED_FULLY') or can('WriteSharedCartPermissionPlugin', data.idQuote)) %}
+
+{% block body %}
+    {% if canWrite %}
+        {% embed molecule('toggler-item') with {
+            class: 'cart-note',
+            data: {
+                title: 'cart.note-title' | trans,
+                triggerClass: 'js-cart-note-form__trigger',
+                targetClass: 'js-cart-note-form__target'
+            },
+            embed: {
+                form: data.form
+            }
+        } only %}
+            {% block contentText %}
+                {% include molecule('form') with {
+                    data: {
+                        form: embed.form,
+                        options: {
+                            action: url('cart-note/quote')
+                        },
+                        submit: {
+                            enable: false,
+                            text: 'cart_note.form.save' | trans
+                        }
+                    }
+                } only %}
+            {% endblock %}
+        {% endembed %}
+    {% endif %}
+{% endblock %}

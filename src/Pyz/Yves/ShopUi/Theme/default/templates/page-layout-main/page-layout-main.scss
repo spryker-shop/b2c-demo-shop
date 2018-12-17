@@ -1,0 +1,40 @@
+@mixin shop-ui-page-layout-main($name: '.page-layout-main') {
+    #{$name} {
+        &__content-pdp {
+            margin: 0 rem(-16) rem(74);
+            width: calc(100% + #{rem(32)});
+
+            @include helper-breakpoint-media-min($lg-min) {
+                width: calc(55% + #{rem(16)});
+                margin: 0 0 0 rem(-16);
+            }
+
+            @include helper-breakpoint-media-min($xxl-min) {
+                width: 55.6%;
+                margin: 0;
+            }
+        }
+
+        &__sidebar-pdp {
+            width: 100%;
+
+            @include helper-breakpoint-media-min($lg-min) {
+                padding: rem(40) 0 0 rem(30);
+            }
+
+            @include helper-breakpoint-media-min($xl-min) {
+                padding-left: rem(50);
+                width: 45%;
+            }
+
+            @include helper-breakpoint-media-min($xxl-min) {
+                width: 44.4%;
+                padding-left: rem(90);
+            }
+        }
+
+        @content;
+    }
+}
+
+@include shop-ui-page-layout-main();

@@ -10,8 +10,6 @@ namespace Pyz\Yves\WishlistPage;
 use Spryker\Client\AvailabilityStorage\Plugin\ProductViewAvailabilityStorageExpanderPlugin;
 use Spryker\Client\PriceProductStorage\Plugin\ProductViewPriceExpanderPlugin;
 use Spryker\Client\ProductImageStorage\Plugin\ProductViewImageExpanderPlugin;
-use SprykerShop\Yves\ProductAlternativeWidget\Plugin\WishlistPage\ProductAlternativeWidgetPlugin;
-use SprykerShop\Yves\ProductDiscontinuedWidget\Plugin\WishlistPage\ProductDiscontinuedWidgetPlugin;
 use SprykerShop\Yves\WishlistPage\WishlistPageDependencyProvider as SprykerWishlistPageDependencyProvider;
 
 class WishlistPageDependencyProvider extends SprykerWishlistPageDependencyProvider
@@ -25,20 +23,6 @@ class WishlistPageDependencyProvider extends SprykerWishlistPageDependencyProvid
             new ProductViewPriceExpanderPlugin(),
             new ProductViewImageExpanderPlugin(),
             new ProductViewAvailabilityStorageExpanderPlugin(),
-        ];
-    }
-
-    /**
-     * Returns a list of widget plugin class names that implement
-     * \Spryker\Yves\Kernel\Dependency\Plugin\WidgetPluginInterface.
-     *
-     * @return string[]
-     */
-    protected function getWishlistViewWidgetPlugins(): array
-    {
-        return [
-            ProductAlternativeWidgetPlugin::class,
-            ProductDiscontinuedWidgetPlugin::class,
         ];
     }
 }

@@ -1,0 +1,89 @@
+@mixin shop-ui-popup($name: '.popup') {
+    #{$name} {
+        &__overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            z-index: $setting-zi-popup;
+            background: $setting-color-overlay;
+        }
+
+        &__inner {
+            display: block;
+            position: fixed;
+            z-index: $setting-zi-popup + 1;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: $setting-color-white;
+            border-radius: rem(3);
+            width: rem(450);
+            min-width: 0;
+            max-width: calc(100vw - #{rem(28)});
+            max-height: calc(100vh - #{rem(28)});
+            overflow-y: auto;
+            padding: 0 rem(24) rem(7);
+
+            @include helper-breakpoint-media-min($lg-min) {
+                width: rem(700);
+                padding: rem(28) rem(38) rem(38);
+            }
+        }
+
+        &__top {
+            display: flex;
+            background-color: $setting-color-gray-1;
+            margin: 0 rem(-24) rem(14);
+            padding: rem(27) rem(24);
+            min-height: rem(80);
+            justify-content: center;
+
+            @include helper-breakpoint-media-min($lg-min) {
+                background-color: $setting-color-transparent;
+                margin: 0 0 rem(20);
+                padding: 0 0 rem(10);
+                justify-content: space-between;
+                border-bottom: rem(1) dotted $setting-color-gray-3;
+                min-height: 0;
+            }
+
+            &--bottom-indent {
+                margin-bottom: rem(34);
+
+                @include helper-breakpoint-media-min($lg-min) {
+                    margin-bottom: rem(43);
+                }
+            }
+        }
+
+        &__title {
+            font: fw(bold) rem(20) $setting-font-family-additional;
+            color: $setting-color-black;
+
+            @include helper-breakpoint-media-min($lg-min) {
+                margin-bottom: rem(36);
+            }
+        }
+
+        &__close {
+            width: rem(19);
+            height: rem(19);
+            position: absolute;
+            top: rem(31);
+            left: rem(24);
+
+            @include helper-breakpoint-media-min($lg-min) {
+                width: rem(28);
+                height: rem(28);
+                cursor: pointer;
+                position: static;
+            }
+        }
+
+        @content;
+    }
+}
+
+@include shop-ui-popup();

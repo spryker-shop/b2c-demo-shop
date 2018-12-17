@@ -1,0 +1,82 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'header',
+    tag: 'header'
+} %}
+
+{% define data = {
+    showSearchForm: true,
+    showNavigation: true
+} %}
+
+{% block body %}
+    <div class="container">
+        <div class="{{ config.name }}__search-overlay js-suggest-search__overlay">
+            <div class="{{ config.name }}__search-overlay-container">
+                <div class="{{ config.name }}__search-close js-suggest-search__hide">
+                    {% include atom('icon') with {
+                        class: config.name ~ '__search-close-icon',
+                        data: {
+                            name: 'close'
+                        }
+                    } only %}
+                </div>
+
+                {% if data.showSearchForm %}
+                    {% include molecule('search-form') with {
+                        attributes: {
+                            'data-search-id': 'desktop'
+                        }
+                    } only %}
+                {% endif %}
+            </div>
+            <div class="{{ config.name }}__overlay-shadow js-suggest-search__hide"></div>
+        </div>
+
+        {% block additionalLink %}{% endblock %}
+
+        <div class="{{ config.name }}__row {{ config.name }}__navigation-top grid grid--middle grid--justify">
+            <div class="col col--sm-12 col--lg-4 is-hidden-sm-md">
+                {% if data.showSearchForm %}
+                    <div class="{{ config.name }}__search-open js-suggest-search__show">
+                        {% include atom('icon') with {
+                            class: config.name ~ '__search-open-icon',
+                            data: {
+                                name: 'search'
+                            }
+                        } only %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="col col--sm-12 col--lg-4">
+                {% include molecule('logo') with {
+                    modifiers: modifiers,
+                    class: 'grid grid--center'
+                } only %}
+            </div>
+
+            <div class="col col--lg-4 is-hidden-sm-md">
+                {% if data.showNavigation %}
+                    {% include organism('navigation-top') only %}
+                {% endif %}
+            </div>
+        </div>
+        {% if data.showNavigation %}
+            <div class="is-hidden-lg-xl">
+                <div class="{{ config.name }}__row {{ config.name }}__navigation-top">
+                    {% include molecule('navigation-top-mobile') only %}
+                </div>
+            </div>
+            <div class="{{ config.name }}__navigation-main-mobile is-hidden-lg-xl">
+                {% widget 'NavigationWidget' args ['MAIN_NAVIGATION', 'navigation-header-mobile'] %}{% endwidget %}
+            </div>
+        {% endif %}
+    </div>
+    {% if data.showNavigation %}
+        <div class="{{ config.name }}__row {{ config.name }}__navigation-main is-hidden-sm-md">
+            {% widget 'NavigationWidget' args ['MAIN_NAVIGATION_DESKTOP', 'navigation-header'] %}{% endwidget %}
+        </div>
+    {% endif %}
+{% endblock %}

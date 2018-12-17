@@ -1,0 +1,46 @@
+{% extends template('widget') %}
+
+{% define data = {
+    product: _widget.product,
+    viewMode: _widget.viewMode
+} %}
+
+{% block body %}
+    {% set productTemplate = molecule('product-card') %}
+    {% set class = 'col col--sm-6 col--lg-4' %}
+
+    {% if data.viewMode == 'list' %}
+        {% set productTemplate = molecule('product-list-item') %}
+        {% set class = 'col col--sm-12' %}
+    {% endif %}
+
+    {% set image = data.product.images| last %}
+    {% embed productTemplate with {
+        _widget: _widget,
+        productTemplate: productTemplate,
+        class: class,
+        data: {
+            name: data.product.abstract_name,
+            abstractId: data.product.id_product_abstract,
+            url: data.product.url,
+            imageUrl: data.product.images is empty ? '' : image.external_url_small,
+            price: data.product.prices.DEFAULT is defined ? data.product.prices.DEFAULT : null,
+            originalPrice: data.product.prices.ORIGINAL is defined ? data.product.prices.ORIGINAL : null
+        }
+    } only %}
+        {% block labels %}
+            {% widget 'ProductConcreteLabelWidget' args [_widget.product.id_product_labels] only %}{% endwidget %}
+        {% endblock %}
+
+        {% block rating %}
+            {% if _widget.product.rating is defined %}
+                <div class="{{ config.name }}__review">
+                    {% widget 'ProductReviewDisplayWidget' args [_widget.product.rating] only %}{% endwidget %}
+                    <span class="{{ config.name }}__review-count">
+                        {{ _widget.product.review_count }}
+                    </span>
+                </div>
+            {% endif %}
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

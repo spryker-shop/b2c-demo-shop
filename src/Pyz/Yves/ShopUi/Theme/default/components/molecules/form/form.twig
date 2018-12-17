@@ -1,0 +1,114 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'form',
+    tag: 'div'
+} %}
+
+{% define data = {
+    form: required,
+    enableStart: true,
+    enableEnd: true,
+    layout: {},
+    options: {
+        attr: {
+            novalidate: 'novalidate'
+        }
+    },
+
+    title: null,
+
+    submit: {
+        text: 'forms.submit-btn' | trans,
+        class: 'button button--success',
+        icon: null,
+        enable: false,
+        qa: 'submit-button'
+    },
+
+    cancel: {
+        text: 'general.back.button' | trans,
+        class: 'button button--hollow',
+        icon: 'chevron-left',
+        url: '#',
+        enable: false,
+        qa: 'cancel-button'
+    }
+} %}
+
+{% block body %}
+    {% block title %}
+        {% if data.title is not empty %}
+            <h2 class="title title--form title--with-border">{{data.title}}</h2>
+        {% endif %}
+    {% endblock %}
+
+    {% if data.enableStart %}
+        {{ form_start(data.form, data.options) }}
+    {% endif %}
+
+    <div class="{{config.name}}__container">
+        {% block errors %}
+            {{ form_errors(data.form) }}
+        {% endblock %}
+
+        {% block fieldset %}
+            <div class="{{config.name}}__fields grid grid--top">
+                {% block fields %}
+                    {% for fieldName in data.form.children | keys %}
+                        {% set field = attribute(data.form.children, fieldName) %}
+                        {% set fieldLayoutClass = 'col col--sm-12' %}
+
+                        {% if fieldName in data.layout | keys %}
+                            {% set fieldLayoutClass = attribute(data.layout, fieldName) %}
+                        {% endif %}
+
+                        {% block field %}
+                            {{ form_row(field, {
+                                rowAttr: {
+                                    class: config.name ~ '__field ' ~ fieldLayoutClass
+                                }
+                            }) }}
+                        {% endblock %}
+                    {% endfor %}
+                {% endblock %}
+            </div>
+        {% endblock %}
+
+
+        {% if data.submit.enable or data.cancel.enable %}
+            {% block actions %}
+                <div class="{{config.name}}__actions">
+                    {% if data.cancel.enable %}
+                        {% block cancel %}
+                            <a href="{{data.cancel.url}}" class="{{config.name}}__action {{data.cancel.class}}" {{qa(data.cancel.qa)}}>
+                                {{data.cancel.text}}
+                            </a>
+                        {% endblock %}
+                    {% endif %}
+
+                    {% if data.submit.enable %}
+                        {% block submit %}
+                            <button type="submit" class="{{config.name}}__action {{data.submit.class}}" {{qa(data.submit.qa)}}>
+                                {% if data.submit.icon is not empty %}
+                                    {% include atom('icon') with {
+                                        modifiers: ['small'],
+                                        data: {
+                                            name: data.submit.icon
+                                        }
+                                    } only %}
+                                {% endif %}
+                                {{data.submit.text}}
+                            </button>
+                        {% endblock %}
+                    {% endif %}
+                </div>
+            {% endblock %}
+        {% endif %}
+
+    </div>
+
+    {% if data.enableEnd %}
+        {{ form_end(data.form) }}
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,17 @@
+@mixin shop-ui-multi-inspirational-wrap($name: '.multi-inspirational-wrap') {
+    #{$name} {
+        margin: 0 0 rem(60);
+
+        @include helper-breakpoint-media-min($md-min) {
+            margin-bottom: rem(150);
+        }
+
+        &--left {
+            @include helper-breakpoint-media-max($md-max) {
+                flex-direction: column-reverse;
+            }
+        }
+    }
+}
+
+@include shop-ui-multi-inspirational-wrap();

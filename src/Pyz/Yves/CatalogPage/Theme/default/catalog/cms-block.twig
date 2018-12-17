@@ -1,0 +1,15 @@
+{% include view('catalog', 'CatalogPage') %}
+
+{% block content %}
+    <div class="row">
+        {{ spyCmsBlock({category: _view.idCategory, position: 'top'}) }}
+    </div>
+
+    <div class="row">
+        {{ spyCmsBlock({category: _view.idCategory, position: 'middle'}) }}
+    </div>
+{% endblock %}
+
+{% block footer %}
+    {{ spyCmsBlock({category: _view.idCategory, position: 'bottom'}) }}
+{% endblock %}

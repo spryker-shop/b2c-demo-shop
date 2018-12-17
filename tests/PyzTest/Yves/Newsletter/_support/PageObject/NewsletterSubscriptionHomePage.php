@@ -9,13 +9,13 @@ namespace PyzTest\Yves\Newsletter\PageObject;
 
 class NewsletterSubscriptionHomePage
 {
-    public const NEW_EMAIL = 'foo@bar.com';
-    public const EXISTING_EMAIL = 'bar@foo.com';
+    const NEW_EMAIL = 'foo@bar.com';
+    const EXISTING_EMAIL = 'bar@foo.com';
 
-    public const FORM_SELECTOR = ['id' => 'newsletterSubscriptionForm_subscribe'];
+    const FORM_SELECTOR = ['id' => 'newsletterSubscriptionForm_subscribe'];
 
-    public const ERROR_MESSAGE = 'You are already subscribed to the newsletter';
-    public const SUCCESS_MESSAGE = 'You successfully subscribed to the newsletter';
+    const ERROR_MESSAGE = 'You are already subscribed to the newsletter';
+    const SUCCESS_MESSAGE = 'You successfully subscribed to the newsletter';
 
-    public const FORM_SUBMIT = 'Subscribe';
+    const FORM_SUBMIT = '[data-qa="subscription-form__button"]';
 }

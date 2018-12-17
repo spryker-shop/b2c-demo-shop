@@ -1,0 +1,52 @@
+@mixin product-bundle-widget-cart-bundle-list($name: '.cart-bundle-list') {
+    #{$name} {
+        margin-top: rem(44);
+        position: relative;
+
+        &::after {
+            content: '';
+            display: block;
+            width: rem(1);
+            height: rem(25);
+            border-left: rem(1) dotted $setting-color-gray-3;
+            position: absolute;
+            top: rem(-35);
+            left: rem(60);
+        }
+
+        &__item {
+            display: flex;
+            align-items: center;
+            margin: rem(20) 0;
+
+            @include helper-breakpoint-media-max($sm-max) {
+                margin: rem(12) 0;
+            }
+        }
+        &__title {
+            font: 500 rem(15) $setting-font-family-additional;
+            padding-left: rem(24);
+        }
+
+        &__quantity {
+            color: $setting-color-gray-6;
+            font-weight: normal;
+            margin-left: rem(16);
+            position: relative;
+
+            &::after {
+                content: '';
+                display: block;
+                width: rem(3);
+                height: rem(3);
+                position: absolute;
+                left: rem(-10);
+                background: $setting-color-gray-6;
+                top: rem(9);
+                border-radius: 50%;
+            }
+        }
+    }
+}
+
+@include product-bundle-widget-cart-bundle-list();

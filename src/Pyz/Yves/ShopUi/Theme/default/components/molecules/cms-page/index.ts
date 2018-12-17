@@ -1,0 +1,1 @@
+import './cms-page.scss';

@@ -1,0 +1,25 @@
+@mixin shop-ui-subscription-form($name: '.subscription-form') {
+    #{$name} {
+        padding-top: rem(11);
+
+        .form-field {
+            margin: 0;
+        }
+
+        .form-field__error::before {
+            display: none;
+        }
+
+        .form-field__error-list,
+        &__success,
+        &__alert {
+            padding-top: rem(10);
+            font-size: rem(12);
+            line-height: 1.2;
+        }
+
+        @content;
+    }
+}
+
+@include shop-ui-subscription-form();

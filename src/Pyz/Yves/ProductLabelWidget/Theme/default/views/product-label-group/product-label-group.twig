@@ -1,0 +1,23 @@
+{% extends template('widget') %}
+
+{% define data = {
+    dictionary: _widget.productLabelDictionaryItemTransfers
+} %}
+
+{% set labels = labels | default([]) %}
+{% for item in data.dictionary %}
+    {% set labels = labels | merge([{
+        text: item.getName() | default(''),
+        type: item.getFrontEndReference() | default('')
+    }]) %}
+{% endfor %}
+
+{% block body %}
+    {% if labels is not empty %}
+        {% include molecule('label-group', 'ProductLabelWidget') with {
+            data: {
+                labels: labels
+            }
+        } only %}
+    {% endif %}
+{% endblock %}

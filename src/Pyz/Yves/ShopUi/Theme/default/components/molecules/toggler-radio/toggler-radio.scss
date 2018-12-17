@@ -1,0 +1,78 @@
+/* stylelint-disable */
+@import '../../atoms/radio/radio';
+
+@mixin shop-ui-toggler-radio($name: '.toggler-radio') {
+    @include shop-ui-radio($name);
+    #{$name} {
+        &__box {
+            width: rem(16);
+            height: rem(16);
+        }
+
+        &__input:checked {
+            & + #{$name}__box {
+                background-color: $setting-color-main;
+                border-color: $setting-color-main;
+            }
+        }
+
+        &--with-bg,
+        &--with-bg & {
+            margin-bottom: 0;
+            display: block;
+
+            #{$name}__container {
+                padding: rem(18.08) rem(20.8);
+                position: relative;
+                cursor: pointer;
+                white-space: nowrap;
+            }
+
+            #{$name}__box {
+                margin-top: rem(6);
+
+                &::before {
+                    content: '';
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    width: 100%;
+                    height: 100%;
+                    z-index: -1;
+                    border: rem(1) solid $setting-color-input-border;
+                    border-radius: rem(3);
+                }
+            }
+
+            &:hover,
+            &:focus {
+                #{$name}__box::before {
+                    border-color: $setting-color-input-border-focus;
+                    background-color: $setting-color-gray-2;
+                }
+            }
+
+            #{$name}__input:checked {
+                & + #{$name}__box {
+                    border: rem(3) solid $setting-color-white;
+                    background-color: $setting-color-gray-6;
+                    box-shadow: 0 0 0 rem(1) $setting-color-input-border;
+
+                    &::before {
+                        border: none;
+                        background-color: $setting-color-alpha-9;
+                    }
+                }
+            }
+
+            #{$name}__label {
+                font-weight: fw(medium);
+                color: $setting-color-gray-6;
+                margin-top: rem(2);
+                display: inline-block;
+            }
+        }
+    }
+}
+
+@include shop-ui-toggler-radio();

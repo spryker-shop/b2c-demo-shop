@@ -1,0 +1,23 @@
+{% extends template('widget') %}
+
+{% define data = {
+    isSubscribed: _widget.isSubscribed
+} %}
+
+{% block body %}
+    {% embed molecule('title-box', 'CustomerPage') with {
+        data: {
+            title: 'customer.account.newsletter' | trans
+        }
+    } only %}
+        {% block additionalContent %}
+            <a href="{{ url('customer/newsletter') }}" class="col">{{ 'general.edit.button' | trans }}</a>
+        {% endblock %}
+    {% endembed %}
+
+    {% if data.isSubscribed %}
+        {{ 'customer.newsletter.subscribed' | trans }}
+    {% else %}
+        {{ 'customer.newsletter.not_subscribed' | trans }}
+    {% endif %}
+{% endblock %}

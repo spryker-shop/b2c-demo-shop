@@ -1,0 +1,41 @@
+@mixin product-review-widget-review-distribution-display($name: '.review-distribution-display') {
+    #{$name} {
+        margin-bottom: rem(40);
+
+        @include helper-breakpoint-media-min($md-min) {
+            margin-bottom: rem(80);
+        }
+
+        &__cell {
+            padding-bottom: rem(12);
+            font: fw(light) rem(14)/rem(20) $setting-font-family;
+            color: $setting-color-gray-4;
+
+            &:first-child {
+                color: $setting-color-black;
+                font-size: rem(16);
+            }
+        }
+
+        &__progress {
+            margin: 0 rem(17) 0 rem(21);
+            width: rem(103);
+            height: rem(20);
+            border-radius: rem(10);
+            background-color: $setting-color-gray-1;
+            box-shadow: rem(0.5) rem(0.5) rem(0.5) 0 rgba($setting-color-black, 0.24);
+            overflow: hidden;
+        }
+
+        &__progress-status {
+            position: relative;
+            border-radius: rem(10);
+            height: rem(20);
+            background-color: $setting-color-yellow;
+        }
+
+        @content;
+    }
+}
+
+@include product-review-widget-review-distribution-display();

@@ -1,0 +1,126 @@
+@mixin shop-ui-image-banner($name: '.image-banner') {
+    $images-folder-path: '/assets/images/';
+
+    #{$name} {
+        margin: rem(80) 0 rem(132);
+        height: rem(400);
+        position: relative;
+
+        @include helper-breakpoint-media-min($lg-min) {
+            height: rem(750);
+            margin: rem(180) 0;
+            padding: 0 rem(80);
+        }
+
+        &__video {
+            width: auto;
+            height: auto;
+            min-width: 100%;
+            display: none;
+
+            .no-touch & {
+                display: block;
+            }
+        }
+
+        &__bg-wrap {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+
+            &::after {
+                content: '';
+                display: block;
+                position: absolute;
+                width: rem(78);
+                height: rem(32);
+                bottom: rem(20);
+                right: rem(24);
+                background: url('#{$images-folder-path}spryker-logo@2x.png') center no-repeat / contain;
+
+                @include helper-breakpoint-media-min($lg-min) {
+                    width: rem(130);
+                    height: rem(53);
+                    bottom: rem(40);
+                    right: rem(40);
+                }
+            }
+
+            .touch & {
+                background-image: url('#{$images-folder-path}brand-image@3x.jpg');
+                background-size: cover;
+            }
+        }
+
+        &__text {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+
+            @include helper-breakpoint-media-max($md-max) {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 100%;
+            }
+        }
+
+        &__title {
+            margin-bottom: rem(10);
+
+            & * {
+                font: fw(bold) rem(38)/normal $setting-font-family-additional;
+                letter-spacing: rem(-0.9);
+                color: $setting-color-white;
+                text-align: center;
+
+                @include helper-breakpoint-media-min($lg-min) {
+                    font-size: rem(68);
+                }
+            }
+        }
+
+        &__link {
+            color: $setting-color-white;
+            font: fw(regular) rem(14) $setting-font-family-additional;
+            letter-spacing: rem(-0.4);
+            position: relative;
+            text-decoration: none;
+            display: inline-block;
+            padding-right: rem(12);
+
+            @include helper-breakpoint-media-min($lg-min) {
+                font-size: rem(22);
+                padding-right: rem(20);
+            }
+
+            &:hover {
+                color: $setting-color-white;
+                text-decoration: none;
+            }
+
+            &::after {
+                content: '';
+                display: block;
+                position: absolute;
+                background: url('#{$images-folder-path}arrow-white-bold.svg') center no-repeat;
+                width: rem(6);
+                height: rem(9);
+                right: 0;
+                bottom: rem(3);
+
+                @include helper-breakpoint-media-min($lg-min) {
+                    width: rem(10);
+                    height: rem(15);
+                    bottom: rem(4);
+                }
+            }
+        }
+    }
+}
+
+@include shop-ui-image-banner();

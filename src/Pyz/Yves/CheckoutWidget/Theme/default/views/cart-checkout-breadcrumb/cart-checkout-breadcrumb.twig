@@ -1,0 +1,61 @@
+{% extends template('widget') %}
+
+{% define config = {
+    name: 'cart-checkout-breadcrumb'
+} %}
+
+{% define data = {
+    addCartBreadcrumb: true,
+    isCartPage: true,
+    checkoutBreadcrumbs: _widget.stepBreadcrumbs.breadcrumbs | default([])
+} %}
+
+{% set steps = [] %}
+
+{% for checkoutBreadcrumb in data.checkoutBreadcrumbs %}
+    {% set steps = steps | merge([{
+        label: checkoutBreadcrumb.title | trans,
+        url: url(checkoutBreadcrumb.route),
+        isActive: checkoutBreadcrumb.isActive,
+        isEnabled: checkoutBreadcrumb.isEnabled
+    }]) %}
+{% endfor %}
+
+{% block body %}
+    {% set stepsLength = steps | length %}
+    {% set progressWidth = 20 %}
+    {% for step in steps %}
+        {% if step.isActive %}
+            {% set progressWidth = loop.index * 100 / stepsLength - 10 %}
+        {% endif %}
+    {% endfor %}
+
+    <div class="{{ config.name }}__wrap">
+        <div class="{{ config.name }}__progress-wrap">
+            <div class="{{ config.name }}__progress-mob" style="width: {{ progressWidth }}%"></div>
+            {% embed molecule('breadcrumb') with {
+                modifiers: ['progress'],
+                data: {
+                    steps: steps,
+                    startWithHome: false
+                }
+            } only %}
+                {% block breadcrumbs %}
+                    {% for step in data.steps %}
+                        {% set modifiers = step.isActive ? ['active', 'progress', 'progress-active'] : ['progress'] %}
+                        {% set modifiers = step.isEnabled ? modifiers : modifiers | merge(['disabled']) %}
+
+                        {% include molecule('breadcrumb-step') with {
+                            modifiers: modifiers,
+                            data: {
+                                label: step.label,
+                                url: (step.isActive or not step.isEnabled) ? '' : step.url,
+                                withChevron: false
+                            }
+                        } only %}
+                    {% endfor %}
+                {% endblock %}
+            {% endembed %}
+        </div>
+    </div>
+{% endblock %}

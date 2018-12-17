@@ -1,0 +1,17 @@
+@mixin checkout-page-success($name: '.success-page') {
+    #{$name} {
+        padding: 0 rem(16) rem(60);
+
+        @include helper-breakpoint-media-min($md-min) {
+            padding: 0 0 rem(60);
+        }
+
+        &__text {
+            margin-bottom: rem(40);
+        }
+
+        @content;
+    }
+}
+
+@include checkout-page-success();

@@ -1,0 +1,39 @@
+@mixin shop-ui-product-item-summary($name: '.product-item-summary') {
+    $image-width-with-spacing: rem(144);
+
+    #{$name} {
+        width: 100%;
+        margin: 0;
+
+        @include helper-breakpoint-media-min($lg-min) {
+            width: calc(100% - #{$image-width-with-spacing});
+            padding-top: rem(20);
+            margin-bottom: rem(20);
+        }
+
+        &__item {
+            padding-top: rem(20);
+            font: fw(medium) rem(17)/rem(24) $setting-font-family-additional;
+            border-bottom: rem(1) dotted $setting-color-gray-3;
+
+            &:first-of-type {
+                border-top: rem(1) dotted $setting-color-gray-3;
+            }
+
+            &::before {
+                display: none;
+            }
+        }
+
+        &__item-inner {
+            margin-bottom: rem(20);
+
+            &:not(:first-child) {
+                border-top: rem(1) dotted $setting-color-gray-3;
+                padding-top: rem(18);
+            }
+        }
+    }
+}
+
+@include shop-ui-product-item-summary();

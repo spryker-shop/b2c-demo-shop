@@ -7,7 +7,7 @@
 
 namespace Orm\Zed\FileManagerStorage\Persistence;
 
-use Orm\Zed\FileManagerStorage\Persistence\Base\SpyFileStorage as BaseSpyFileStorage;
+use Spryker\Zed\FileManagerStorage\Persistence\Propel\AbstractSpyFileStorage as BaseSpyFileStorage;
 
 /**
  * Skeleton subclass for representing a row from the 'spy_file_storage' table.

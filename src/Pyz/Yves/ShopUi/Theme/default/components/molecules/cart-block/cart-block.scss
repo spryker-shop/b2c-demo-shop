@@ -1,0 +1,79 @@
+@mixin shop-ui-cart-block($name: '.cart-block') {
+    #{$name} {
+        $image-width: rem(100);
+
+        &__item {
+            padding: rem(18) 0;
+            border-bottom: rem(1) dotted $setting-color-gray-3;
+        }
+
+        &__image {
+            width: #{$image-width};
+
+            .thumbnail {
+                height: rem(60);
+            }
+        }
+
+        &__item-content {
+            margin-left: 0;
+            padding-left: rem(20);
+            width: calc(100% - #{$image-width});
+        }
+
+        &__name,
+        &__price {
+            font: fw(medium) rem(15)/1.3 $setting-font-family-additional;
+        }
+
+        &__name {
+            margin: 0 0 rem(5);
+        }
+
+        &__buttons-container {
+            border-top: rem(1) dotted $setting-color-gray-3;
+            padding-top: rem(20);
+        }
+
+        &__button {
+            width: calc(50% - #{rem(10)});
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        &__item-option {
+            font: rem(13)/1.3 $setting-font-family-additional;
+        }
+
+        &__item-option-text {
+            display: inline-block;
+            margin-left: rem(5);
+        }
+
+        &__total {
+            padding: rem(10) 0;
+        }
+
+        &__total-text {
+            text-transform: uppercase;
+            font: fw(medium) rem(14) $setting-font-family-additional;
+        }
+
+        &__empty-text {
+            font: rem(15)/1.4 $setting-font-family-additional;
+            padding: rem(30) 0;
+            border-bottom: rem(1) dotted $setting-color-gray-3;
+            color: $setting-color-gray-6;
+        }
+
+        &__item-remove {
+            font: fw(light) rem(13)/1.3 $setting-font-family-additional;
+            opacity: 0.4;
+            text-transform: capitalize;
+        }
+
+        @content;
+    }
+}
+
+@include shop-ui-cart-block();

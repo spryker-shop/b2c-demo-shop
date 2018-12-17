@@ -1,0 +1,27 @@
+@mixin shop-ui-cms-page($name: '.cms-page') {
+    #{$name} {
+        &__title {
+            border-top: rem(1) dotted $setting-color-gray-3;
+            padding: rem(25) 0;
+            margin: rem(20) rem(16);
+            h2 {
+                text-align: center;
+            }
+        }
+        &__content {
+            margin: 0 rem(16) rem(50);
+            h2,
+            h3 {
+                text-align: center;
+                padding: rem(15) 0;
+                margin: rem(10) 0;
+            }
+        }
+        &__notification {
+            color: $setting-color-alt;
+            font-size: rem(15);
+        }
+    }
+}
+
+@include shop-ui-cms-page();

@@ -1,0 +1,40 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'quantity-counter',
+    tag: 'quantity-counter'
+} %}
+
+{% define data = {
+    maxQuantity: null,
+    minQuantity: 1,
+    value: 1,
+    readOnly: false,
+    autoUpdate: false
+} %}
+
+{% block body %}
+    {% set maxQuantity = data.maxQuantity < 0 or data.maxQuantity < data.minQuantity ? null : data.maxQuantity %}
+    <div class="{{ component.renderClass(config.name ~ '__container', modifiers) }} grid grid--middle">
+        <div class="col">
+            <div class="{{ component.renderClass('button', modifiers) }} button--quantity {{ config.jsName }}__decr">-</div>
+        </div>
+        <div class="col">
+            <input
+                class="{{ component.renderClass(config.name ~ '__input', modifiers) }} {{ config.jsName }}__input input js-volume-price__quantity"
+                data-max-quantity="{{ maxQuantity }}"
+                data-min-quantity="{{ data.minQuantity }}"
+                type="number"
+                value="{{ data.value }}"
+                name="quantity"
+                min="{{ data.minQuantity }}"
+                {{ qa('quantity-input') }}
+                {% if maxQuantity is not empty %}max="{{ maxQuantity }}"{% endif %}
+                {% if data.readOnly %}readonly{% endif %}
+                {% if data.autoUpdate %}data-auto-update="true"{% endif %}/>
+        </div>
+        <div class="col">
+            <div class="{{ component.renderClass('button', modifiers) }} button--quantity {{ config.jsName }}__incr">+</div>
+        </div>
+    </div>
+{% endblock %}

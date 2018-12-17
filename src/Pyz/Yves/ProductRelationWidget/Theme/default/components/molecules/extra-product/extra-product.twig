@@ -1,0 +1,48 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'extra-product',
+} %}
+
+{% define data = {
+    title: required,
+    products: required,
+} %}
+
+{% block body %}
+    {% include molecule('product-slider-title') with {
+        data: {
+            title: data.title
+        }
+    } only %}
+
+    {% embed molecule('slick-carousel') with {
+        data: {
+            slides: data.products
+        },
+        attributes: {
+            'data-json': '{
+                "slidesToShow": 4,
+                "dots": false,
+                "responsive": [{
+                    "breakpoint": 820,
+                    "settings": {
+                        "slidesToShow": 3
+                    }
+                },
+                {
+                    "breakpoint": 570,
+                    "settings": {
+                        "slidesToShow": 2
+                    }
+                }
+            ]}'
+        }
+    } only %}
+        {% block slides %}
+            {% for slide in data.slides %}
+                {% widget 'PdpProductRelationWidget' args [slide] only %}{% endwidget %}
+            {% endfor %}
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

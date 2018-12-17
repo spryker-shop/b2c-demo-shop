@@ -1,0 +1,31 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'cart-bundle-list',
+    tag: 'ul'
+} %}
+
+{% define data = {
+    items: required
+} %}
+
+{% block body %}
+    {% for item in data.items %}
+        <li class="{{ config.name }}__item">
+            {% if (item.images|first).externalUrlSmall is defined %}
+                {% include atom('thumbnail') with {
+                    modifiers: ['cart-bundle', 'with-overlay'],
+                    attributes: {
+                        alt: item.name,
+                        src: (item.images|first).externalUrlSmall,
+                        title: item.name
+                    }
+                } only %}
+            {% endif %}
+            <p class="{{ config.name }}__title">
+                {{ item.name }}
+                <span class="{{ config.name }}__quantity">{{ item.quantity }}x </span>
+            </p>
+        </li>
+    {% endfor %}
+{% endblock %}
