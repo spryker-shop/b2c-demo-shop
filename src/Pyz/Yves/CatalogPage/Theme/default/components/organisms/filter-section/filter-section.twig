@@ -13,18 +13,30 @@
 } %}
 
 {% block body %}
+    <div class="{{ config.name }}__top-panel is-hidden-lg-xl">
+        <h3 class="text-center title title--medium spacing-bottom">{{ 'catalog.filter.filter' | trans }}</h3>
+        <span class="{{ config.name }}__top-panel-button {{ data.togglerClass }}">
+            {% include atom('icon') with {
+                data: {
+                    name: 'close'
+                }
+            } only %}
+        </span>
+
+        <div class="grid grid--justify grid--no-wrap {{ config.jsName }}__sorting"></div>
+    </div>
     {% for filter in data.facets %}
         {% set filterHasValues = (filter.values is not defined) or (filter.values | length > 0) %}
 
         {% if filterHasValues %}
             {% embed molecule('toggler-item') with {
-                modifiers: ['filter', 'with-top-border'],
+                modifiers: ['filter', 'with-top-border', (loop.first ? 'mobile' : '')],
                 data: {
                     title: ('product.filter.' ~ filter.name | lower) | trans,
-                    triggerClass: loop.first ? '' : config.jsName ~ '__trigger',
-                    targetClass: loop.first ? '' : config.jsName ~ '__target--' ~ filter.name,
-                    isToggler: loop.first ? false : true,
-                    isTogglerIncluded: false
+                    triggerClass: loop.first ? config.jsName ~ '__trigger-category' : config.jsName ~ '__trigger',
+                    targetClass: config.jsName ~ '__target--' ~ filter.name,
+                    isTogglerIncluded: loop.first ? true : false,
+                    hiddenClass: loop.first ? 'is-hidden-sm-md' : 'is-hidden'
                 },
                 embed: {
                     filterPath: data.filterPath,
@@ -57,16 +69,8 @@
             trigger: '.' ~ config.jsName ~ '__trigger',
         }
     } only %}
-    <div class="grid grid--justify grid--middle {{ config.name }}__actions">
-        <span class="col {{ config.name }}__close-popup {{ data.togglerClass }}">
-            {% include atom('icon') with {
-                data: {
-                    name: 'close'
-                }
-            } only %}
-        </span>
-
-        <button type="submit" class="col button  {{ config.name }}__button">
+    <div class="{{ config.name }}__actions">
+        <button type="submit" class="button button--large button--expand">
             {{ 'catalog.filter.button' | trans }}
         </button>
     </div>
