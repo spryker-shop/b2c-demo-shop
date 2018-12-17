@@ -24,21 +24,21 @@
                             app.request.queryString,
                             app.request.requestUri
                         ] only %}
-                            {% block template %}
-                                {% set selectModifiers = ['hollow', 'header', 'side-drawer'] %}
-                                {% block body %}
-                                    {{ parent() }}
-                                {% endblock %}
+                            {% block body %}
+                                {% define data = {
+                                    additionalModifiers: ['hollow', 'header', 'side-drawer']
+                                } %}
+                                {{ parent() }}
                             {% endblock %}
                         {% endwidget %}
                     </div>
                     <div class="col">
                         {%- widget 'CurrencyWidget' only -%}
-                            {% block template %}
-                                {% set selectModifiers = ['hollow', 'header', 'side-drawer'] %}
-                                {% block body %}
-                                    {{ parent() }}
-                                {% endblock %}
+                            {% block body %}
+                                {% define data = {
+                                    additionalModifiers: ['hollow', 'header', 'side-drawer']
+                                } %}
+                                {{ parent() }}
                             {% endblock %}
                         {%- endwidget -%}
                     </div>

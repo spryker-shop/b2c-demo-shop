@@ -2,7 +2,8 @@
 
 {% define data = {
     currencies: _widget.currencies,
-    currentCurrency: _widget.currentCurrency
+    currentCurrency: _widget.currentCurrency,
+    additionalModifiers: ['hollow', 'header']
 } %}
 
 {% block template %}
@@ -11,12 +12,10 @@
     {% endif %}
 {% endblock %}
 
-{% set selectModifiers = ['hollow', 'header'] %}
-
 {% block body %}
     <form method="GET" action="{{ path('currency-switch') }}">
         {% embed molecule('custom-select') with {
-            modifiers: selectModifiers,
+            modifiers: data.additionalModifiers,
             attributes: {
                 name: 'currency-iso-code',
                 'config-theme': 'secondary'
