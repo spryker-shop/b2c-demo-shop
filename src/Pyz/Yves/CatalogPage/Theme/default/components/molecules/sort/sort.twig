@@ -6,6 +6,7 @@
 
 {% define data = {
     pagination: _view.pagination,
+
 } %}
 
 {% block body %}
@@ -17,9 +18,9 @@
         <div class="col is-hidden-sm-md">
             <div class="grid grid--middle">
                 {% block selects %}
-                    <div class="col">
+                    <div class="col {{config.jsName}}__filter-per-page" data-block-to=".js-filter-section__sorting" data-breackpoint="769">
                         {% block label %}
-                            <label class="{{ config.name }}__label">{{ 'catalog.filter.per' | trans }}:</label>
+                            <label class="{{ config.name }}__label is-hidden-sm-md">{{ 'catalog.filter.per' | trans }}:</label>
                         {% endblock %}
                         {% embed molecule('custom-select') with {
                             modifiers: ['hollow'],
@@ -42,7 +43,7 @@
                             {% endblock %}
                         {% endembed %}
                     </div>
-                    <div class="col">
+                    <div class="col {{config.jsName}}__filter-sort" data-block-to=".js-filter-section__sorting" data-breackpoint="769">
                         {% embed molecule('custom-select') with {
                             modifiers: ['hollow'],
                             attributes: {
@@ -78,6 +79,12 @@
             </div>
         </div>
     </div>
+
+    {% include molecule('breakpoint-dependent-block-placer') with {
+        attributes: {
+            'block-selector': '.' ~ config.jsName ~ '__filter-per-page, .' ~ config.jsName ~ '__filter-sort'
+        }
+    } only %}
 
     {% include molecule('form-submitter') with {
         attributes: {

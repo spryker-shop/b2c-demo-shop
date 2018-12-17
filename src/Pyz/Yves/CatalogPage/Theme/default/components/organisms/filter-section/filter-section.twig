@@ -23,16 +23,7 @@
             } only %}
         </span>
 
-        {% embed molecule('sort', 'CatalogPage') only %}
-            {% block body %}
-                <div class="grid grid--justify grid--no-wrap">
-                    {% block selects %}
-                        {% block label %}{% endblock %}
-                        {{ parent() }}
-                    {% endblock %}
-                </div>
-            {% endblock %}
-        {% endembed %}
+        <div class="grid grid--justify grid--no-wrap {{ config.jsName }}__sorting"></div>
     </div>
     {% for filter in data.facets %}
         {% set filterHasValues = (filter.values is not defined) or (filter.values | length > 0) %}
