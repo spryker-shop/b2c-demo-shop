@@ -1,5 +1,5 @@
 @mixin shop-ui-button($name: '.button') {
-    $button-min-width: rem(177);
+    $button-min-width: rem(177, number);
 
     #{$name} {
         @include helper-effect-transition(all);
@@ -8,11 +8,15 @@
         background-color: $setting-color-black;
         border: none;
         border-radius: rem(2);
-        min-width: $button-min-width;
+        min-width: $button-min-width/1.3;
         color: $setting-color-white;
         text-align: center;
         font: fw(medium) rem(14)/rem(18) $setting-font-family-additional;
         cursor: pointer;
+
+        @include helper-breakpoint-media-min($md-min) {
+            min-width: $button-min-width;
+        }
 
         &:hover,
         &:focus {
