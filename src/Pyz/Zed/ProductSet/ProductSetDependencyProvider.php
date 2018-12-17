@@ -12,7 +12,7 @@ use Spryker\Zed\ProductSet\ProductSetDependencyProvider as SprykerProductSetDepe
 
 class ProductSetDependencyProvider extends SprykerProductSetDependencyProvider
 {
-    const FACADE_EVENT = 'FACADE_EVENT';
+    public const FACADE_EVENT = 'FACADE_EVENT';
 
     /**
      * @param \Spryker\Zed\Kernel\Container $container

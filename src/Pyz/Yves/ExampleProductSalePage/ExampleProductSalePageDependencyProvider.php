@@ -13,10 +13,10 @@ use Spryker\Yves\Kernel\Container;
 
 class ExampleProductSalePageDependencyProvider extends AbstractBundleDependencyProvider
 {
-    const CLIENT_SEARCH = 'CLIENT_SEARCH';
-    const CLIENT_URL_STORAGE = 'CLIENT_URL_STORAGE';
-    const STORE = 'STORE';
-    const CLIENT_CATALOG = 'CLIENT_CATALOG';
+    public const CLIENT_SEARCH = 'CLIENT_SEARCH';
+    public const CLIENT_URL_STORAGE = 'CLIENT_URL_STORAGE';
+    public const STORE = 'STORE';
+    public const CLIENT_CATALOG = 'CLIENT_CATALOG';
 
     /**
      * @param \Spryker\Yves\Kernel\Container $container
