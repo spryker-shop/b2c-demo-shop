@@ -78,6 +78,7 @@
     {% endif %}
     {% widget 'ProductGroupWidget' args [data.product.idProductAbstract] use view('pdp-color-selector', 'ProductGroupWidget') only %}{% endwidget %}
     {% include molecule('variant-configurator', 'ProductDetailPage') with {
+        class: 'js-volume-price__quantity',
         data: {
             superAttributes: data.product.attributeMap.superAttributes,
             selectedAttributes: data.product.selectedAttributes,

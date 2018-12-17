@@ -5,68 +5,90 @@
 } %}
 
 {% define data = {
-    togglerClass: ''
+    pagination: _view.pagination,
+
 } %}
 
 {% block body %}
     <div class="grid grid--justify grid--middle">
-
-        <div class="col">
-            <div class="{{ config.name }}__results">
-                {{- _view.pagination.numFound }} {{ 'catalog.itemsFound' | trans -}}
-            </div>
-
-            <div class="{{ config.name }}__trigger-filter {{ data.togglerClass }}">
-                {{- 'catalog.filter.filter' | trans -}}
-
-                <div class="{{ config.name }}__caret">
-                    {%- include atom('icon') with {
-                        modifiers: ['inherit'],
-                        data: {
-                            name: 'arrow-down'
-                        }
-                    } only -%}
-                </div>
-            </div>
+        <div class="{{ config.name }}__results col">
+            {{- data.pagination.numFound }} {{ 'catalog.itemsFound' | trans -}}
         </div>
 
-        <div class="col">
-            {% embed molecule('custom-select') with {
-                modifiers: ['hollow'],
-                attributes: {
-                    name: 'sort',
-                    'config-theme': 'secondary'
-                },
-                embed: {
-                    sort: _view.sort,
-                    jsClass: config.jsName ~ '__select-trigger'
-                }
-            } only %}
-                {% block selectClass -%}
-                    {{ parent() }} {{ embed.jsClass }}
-                {%- endblock %}
-                {% block options %}
-                    <option value="">
-                        {{ 'catalog.sort.relevance' | trans }}
-                    </option>
+        <div class="col is-hidden-sm-md">
+            <div class="grid grid--middle">
+                {% block selects %}
+                    <div class="col {{config.jsName}}__filter-per-page" data-block-to=".js-filter-section__sorting" data-breackpoint="769">
+                        {% block label %}
+                            <label class="{{ config.name }}__label is-hidden-sm-md">{{ 'catalog.filter.per' | trans }}:</label>
+                        {% endblock %}
+                        {% embed molecule('custom-select') with {
+                            modifiers: ['hollow'],
+                            attributes: {
+                                name: 'ipp',
+                                'config-theme': 'secondary'
+                            },
+                            embed: {
+                                pagination: data.pagination,
+                                jsClass: config.jsName ~ '__per-page-select-trigger'
+                            }
+                        } only %}
+                            {% block selectClass -%}
+                                {{ parent() }} {{ embed.jsClass }}
+                            {%- endblock %}
+                            {% block options %}
+                                {% for limit in embed.pagination.config.validItemsPerPageOptions %}
+                                    <option value="{{ limit }}" {% if limit == embed.pagination.currentItemsPerPage %}selected{% endif %}>{{ limit }}</option>
+                                {% endfor %}
+                            {% endblock %}
+                        {% endembed %}
+                    </div>
+                    <div class="col {{config.jsName}}__filter-sort" data-block-to=".js-filter-section__sorting" data-breackpoint="769">
+                        {% embed molecule('custom-select') with {
+                            modifiers: ['hollow'],
+                            attributes: {
+                                name: 'sort',
+                                'config-theme': 'secondary'
+                            },
+                            embed: {
+                                sort: _view.sort,
+                                jsClass: config.jsName ~ '__select-trigger'
+                            }
+                        } only %}
+                            {% block selectClass -%}
+                                {{ parent() }} {{ embed.jsClass }}
+                            {%- endblock %}
+                            {% block options %}
+                                <option value="">
+                                    {{ 'catalog.sort.relevance' | trans }}
+                                </option>
 
-                    {% for sortParamName in embed.sort.sortParamNames %}
-                        {% set isSelected = sortParamName == embed.sort.currentSortParam %}
-                        <option
-                            value="{{ sortParamName }}"
-                            {% if isSelected %}selected{% endif %}
-                        >
-                            {{ ('catalog.sort.' ~ sortParamName) | trans }}
-                        </option>
-                    {% endfor %}
+                                {% for sortParamName in embed.sort.sortParamNames %}
+                                    {% set isSelected = sortParamName == embed.sort.currentSortParam %}
+                                    <option
+                                        value="{{ sortParamName }}"
+                                        {% if isSelected %}selected{% endif %}
+                                    >
+                                        {{ ('catalog.sort.' ~ sortParamName) | trans }}
+                                    </option>
+                                {% endfor %}
+                            {% endblock %}
+                        {% endembed %}
+                    </div>
                 {% endblock %}
-            {% endembed %}
+            </div>
         </div>
     </div>
 
+    {% include molecule('breakpoint-dependent-block-placer') with {
+        attributes: {
+            'block-selector': '.' ~ config.jsName ~ '__filter-per-page, .' ~ config.jsName ~ '__filter-sort'
+        }
+    } only %}
+
     {% include molecule('form-submitter') with {
         attributes: {
-            'trigger-selector': '.' ~ config.jsName ~ '__select-trigger'
+            'trigger-selector': '.' ~ config.jsName ~ '__select-trigger, .' ~ config.jsName ~ '__per-page-select-trigger'
         }
     } only %}
 {% endblock %}
