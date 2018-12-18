@@ -17,15 +17,6 @@
         {% block button %}
             {% if data.isButton == true %}
                 <button type="button" class="button button--skinless spacing spacing--inner spacing--reset {{ data.jsClass }}">
-                    {% include atom('icon') with {
-                        modifiers: ['big'],
-                        data: {
-                            name: data.iconName,
-                        }
-                    } only %}
-                </button>
-            {% else %}
-                <a href="{{ data.url }}">
                     {% block icon %}
                         {% include atom('icon') with {
                             modifiers: ['big'],
@@ -34,6 +25,10 @@
                             }
                         } only %}
                     {% endblock %}
+                </button>
+            {% else %}
+                <a href="{{ data.url }}">
+                    {{ block('icon') }}
                 </a>
             {% endif %}
         {% endblock %}
