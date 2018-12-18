@@ -1,5 +1,10 @@
 {% extends template('page-blank') %}
 
+{% define data = {
+    activePage: false,
+    activeEntityId: false
+} %}
+
 {%- block class -%}js-page-layout-main__side-drawer-container{%- endblock -%}
 
 {% block body %}
@@ -21,6 +26,10 @@
                 attributes: {
                     'container-selector': 'js-page-layout-main__side-drawer-container',
                     'trigger-selector': 'js-page-layout-main__account-side-drawer-trigger'
+                },
+                embed: {
+                    activePage: data.activePage,
+                    activeEntityId: data.activeEntityId
                 }
             } only %}
                 {% block topBar %}
@@ -41,7 +50,7 @@
                 {% endblock %}
                 {% block content %}
                     <div class="{{config.name}}__navigation">
-                        {% widget 'CustomerNavigationWidget' args [''] only %}
+                        {% widget 'CustomerNavigationWidget' args [embed.activePage, embed.activeEntityId] only %}
                             {% block body %}
                                 {% define data = {
                                     modifiers: ['side-drawer']
