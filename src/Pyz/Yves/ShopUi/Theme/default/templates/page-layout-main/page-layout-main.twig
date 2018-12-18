@@ -24,6 +24,7 @@
                 }
             } only %}
                 {% block topBar %}
+                    {% set user = app['user'].customerTransfer %}
                     <div class="col grid">
                         <div class="col">
                             {% include atom('icon') with {
@@ -33,10 +34,8 @@
                                 }
                             } only %}
                         </div>
-
-                        {# TODO: need to add User name #}
                         <div class="col">
-                            User Name
+                            {{ user.firstName }} {{ user.lastName }}
                         </div>
                     </div>
                 {% endblock %}
