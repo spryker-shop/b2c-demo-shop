@@ -16,29 +16,38 @@
 {%- import _self as macros -%}
 
 {% block body %}
-    <ul class="menu menu--{{ config.name }}">
-        <li class="menu__item {{macros.isActive('overview', data.activePage)}}">
-            <a class="menu__link" href="{{ path('customer/overview') }}"
+    <ul class="{{ component.renderClass('menu', modifiers) }}">
+        <li class="{{ component.renderClass('menu__item', modifiers) }} {{macros.isActive('overview', data.activePage)}}">
+            <a class="{{ component.renderClass('menu__link', modifiers) }}" href="{{ path('customer/overview') }}"
                data-id="sidebar-overview">{{ 'customer.account.overview' | trans }}</a>
         </li>
-        <li class="menu__item {{macros.isActive('profile', data.activePage)}}">
-            <a class="menu__link" href="{{ path('customer/profile') }}"
+        <li class="{{ component.renderClass('menu__item', modifiers) }} {{macros.isActive('profile', data.activePage)}}">
+            <a class="{{ component.renderClass('menu__link', modifiers) }}" href="{{ path('customer/profile') }}"
                data-id="sidebar-profile">{{ 'customer.account.profile_data' | trans }}</a>
         </li>
-        <li class="menu__item {{macros.isActive('address', data.activePage)}}">
-            <a class="menu__link" href="{{ path('customer/address') }}"
+        <li class="{{ component.renderClass('menu__item', modifiers) }} {{macros.isActive('address', data.activePage)}}">
+            <a class="{{ component.renderClass('menu__link', modifiers) }}" href="{{ path('customer/address') }}"
                data-id="sidebar-address">{{ 'customer.account.address' | trans }}</a>
         </li>
-        <li class="menu__item {{macros.isActive('order', data.activePage)}}">
-            <a class="menu__link" href="{{ path('customer/order') }}"
+        <li class="{{ component.renderClass('menu__item', modifiers) }} {{macros.isActive('order', data.activePage)}}">
+            <a class="{{ component.renderClass('menu__link', modifiers) }}" href="{{ path('customer/order') }}"
                data-id="sidebar-order">{{ 'customer.account.order_history' | trans }}</a>
         </li>
-        <li class="menu__item {{macros.isActive('newsletter', data.activePage)}}">
-            <a class="menu__link" href="{{ path('customer/newsletter') }}"
+        <li class="{{ component.renderClass('menu__item', modifiers) }} {{macros.isActive('newsletter', data.activePage)}}">
+            <a class="{{ component.renderClass('menu__link', modifiers) }}" href="{{ path('customer/newsletter') }}"
                data-id="sidebar-newsletter">{{ 'customer.account.newsletter' | trans }}</a>
         </li>
         {% block wishlistNavigation %}
-            {% widget 'WishlistMenuItemWidget' args [data.activePage, data.activeEntityId] only %}{% endwidget %}
+            {% widget 'WishlistMenuItemWidget' args [data.activePage, data.activeEntityId] with {
+                modifiers: modifiers
+            } only %}
+                {% block body %}
+                    {% define data = {
+                        modifiers: modifiers
+                    } %}
+                    {{ parent() }}
+                {% endblock %}
+            {% endwidget %}
         {% endblock %}
     </ul>
 {% endblock %}

@@ -1,4 +1,5 @@
 $shop-ui-side-drawer-width: rem(375);
+$shop-ui-right-side-drawer-width: rem(320);
 
 @mixin shop-ui-side-drawer($name: '.side-drawer') {
     #{$name} {
@@ -19,7 +20,7 @@ $shop-ui-side-drawer-width: rem(375);
         &__drawer {
             @include helper-ui-shadow;
             @include helper-visibility-invisible;
-            @include helper-effect-transition(opacity visibility left);
+            @include helper-effect-transition(opacity visibility left right);
             position: fixed;
             top: 0;
             bottom: 0;
@@ -33,6 +34,12 @@ $shop-ui-side-drawer-width: rem(375);
             @include helper-breakpoint-media-min($md-min) {
                 left: - $shop-ui-side-drawer-width;
                 width: $shop-ui-side-drawer-width;
+            }
+
+            &--right {
+                left: auto;
+                right: - $shop-ui-right-side-drawer-width;
+                width: $shop-ui-right-side-drawer-width;
             }
         }
 
@@ -58,6 +65,11 @@ $shop-ui-side-drawer-width: rem(375);
         &--show &__drawer {
             @include helper-visibility-visible;
             left: 0;
+
+            &--right {
+                left: auto;
+                right: 0;
+            }
         }
 
         &__bottom-bar {

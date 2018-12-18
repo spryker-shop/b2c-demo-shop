@@ -12,9 +12,18 @@
 
 {% block content %}
     <div class="grid page-layout-customer">
-        <div class="col col--sm-12 col--md-12 col--lg-3">
+        <div class="col col--sm-12 col--md-12 col--lg-3 is-hidden-sm-md">
             {% block customerNavigation %}
-                {% widget 'CustomerNavigationWidget' args [data.activePage] only %}{% endwidget %}
+                <div class="box">
+                    {% widget 'CustomerNavigationWidget' args [data.activePage] only %}
+                        {% block body %}
+                            {% define data = {
+                                modifiers: ['customer-navigation']
+                            } %}
+                            {{ parent() }}
+                        {% endblock %}
+                    {% endwidget %}
+                </div>
             {% endblock %}
         </div>
 
