@@ -3,7 +3,15 @@
 {%- block class -%}js-page-layout-main__side-drawer-container{%- endblock -%}
 
 {% block body %}
-    {% block sidebar %}{% endblock %}
+    {% block sidebar %}
+        {% include organism('side-drawer') with {
+            class: 'is-hidden-lg-xl',
+            attributes: {
+                'container-selector': 'js-page-layout-main__side-drawer-container',
+                'trigger-selector': 'js-page-layout-main__side-drawer-trigger'
+            }
+        } only %}
+    {% endblock %}
 
     {% block outside %}{% endblock %}
 

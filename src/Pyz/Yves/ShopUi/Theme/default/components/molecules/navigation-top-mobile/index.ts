@@ -1,1 +1,0 @@
-import './navigation-top-mobile.scss';
