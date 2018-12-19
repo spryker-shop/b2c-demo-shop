@@ -1,0 +1,26 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'product-image'
+} %}
+
+{% define data = {
+    name: '',
+    image: null
+} %}
+
+{% block body %}
+    {% if data.image is not empty %}
+        {% include atom('thumbnail') with {
+            modifiers: ['small'],
+            attributes: {
+                alt: data.name,
+                src: data.image.externalUrlLarge
+            }
+        } only %}
+    {% else %}
+        <div class="text-center">
+            <small>{{ 'global.no_image_available' | trans }}</small>
+        </div>
+    {% endif %}
+{% endblock %}

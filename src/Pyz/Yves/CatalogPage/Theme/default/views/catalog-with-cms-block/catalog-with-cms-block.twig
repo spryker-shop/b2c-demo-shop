@@ -3,13 +3,13 @@
 {% define data = {
     products: _view.products,
     facets: _view.facets,
+    searchString: _view.searchString | default,
     category: _view.category | default,
     categories: categories | default([]),
     categoryId: _view.idCategory | default,
     isEmptyCategoryFilterValueVisible: _view.isEmptyCategoryFilterValueVisible | default,
     filterPath: _view.filterPath | default,
     viewMode: _view.viewMode | default,
-    isEmptyCategoryFilterValueVisible: _view.isEmptyCategoryFilterValueVisible | default,
 
     title: _view.category.name | default,
     metaTitle: _view.pageTitle | default(_view.category.name | default),
@@ -25,6 +25,30 @@
     }
 } %}
 
+{% block content %}
+    {% block cmsTop %}
+        {% if data.categoryId %}
+            <div class="catalog-cms-block catalog-cms-block--top">
+                {{ widgetBlock('CatalogCmsBlockWidgetPlugin', 'top', data.categoryId) }}
+            </div>
+        {% endif %}
+    {% endblock %}
+
+    {{parent()}}
+{% endblock %}
+
+{% block filterSection %}
+    {{parent()}}
+
+    {% block cmsMiddle %}
+        {% if data.categoryId %}
+            <div class="catalog-cms-block catalog-cms-block--middle">
+                {{ widgetBlock('CatalogCmsBlockWidgetPlugin', 'middle', data.categoryId) }}
+            </div>
+        {% endif %}
+    {% endblock %}
+{% endblock %}
+
 {% block filterBar %}
     {{parent()}}
 
@@ -35,18 +59,22 @@
     {% endif %}
 {% endblock %}
 
-{% block content %}
-    {% if data.categoryId %}
-        <div class="box">
-            {{ widgetBlock('CatalogCmsBlockWidgetPlugin', 'top', data.categoryId) }}
-        </div>
-    {% endif %}
-
+{% block form %}
     {{parent()}}
 
-    {% if data.categoryId %}
-        <div class="box">
-            {{ widgetBlock('CatalogCmsBlockWidgetPlugin', 'bottom', data.categoryId) }}
-        </div>
+    {% if data.searchString is not empty %}
+        <input type="hidden" name="q" value="{{ data.searchString }}" />
     {% endif %}
+{% endblock %}
+
+{% block catalogContent %}
+    {{parent()}}
+
+    {% block cmsBottom %}
+        {% if data.categoryId %}
+            <div class="catalog-cms-block catalog-cms-block--bottom">
+                {{ widgetBlock('CatalogCmsBlockWidgetPlugin', 'bottom', data.categoryId) }}
+            </div>
+        {% endif %}
+    {% endblock %}
 {% endblock %}

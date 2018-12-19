@@ -1,0 +1,17 @@
+@mixin shop-ui-user-block($name: '.user-block') {
+    #{$name} {
+        &__buttons-container {
+            border-top: rem(1) dotted $setting-color-gray-3;
+            padding-top: rem(20);
+        }
+
+        &__button {
+            min-width: 0;
+            width: calc(50% - #{rem(10)});
+        }
+
+        @content;
+    }
+}
+
+@include shop-ui-user-block();

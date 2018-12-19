@@ -7,7 +7,7 @@
 
 namespace Orm\Zed\FileManager\Persistence;
 
-use Orm\Zed\FileManager\Persistence\Base\SpyFileInfo as BaseSpyFileInfo;
+use Spryker\Zed\FileManager\Persistence\Propel\AbstractSpyFileInfo as BaseSpyFileInfo;
 
 /**
  * Skeleton subclass for representing a row from the 'spy_file_info' table.

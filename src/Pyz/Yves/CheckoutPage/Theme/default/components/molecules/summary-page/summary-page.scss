@@ -1,0 +1,25 @@
+@mixin checkout-page-summary($name: '.summary-page') {
+    #{$name} {
+        &__col {
+            &:not(:first-child) {
+                margin-top: rem(60);
+
+                @include helper-breakpoint-media-min($md-min) {
+                    margin-top: 0;
+                }
+            }
+        }
+
+        &__address-indent {
+            margin-top: rem(33);
+
+            @include helper-breakpoint-media-min($md-min) {
+                margin-top: 0;
+            }
+        }
+
+        @content;
+    }
+}
+
+@include checkout-page-summary();

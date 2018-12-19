@@ -1,0 +1,38 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'flash-message',
+    tag: 'flash-message'
+} %}
+
+{% define modifiers = [] %}
+
+{% define data = {
+    action: '',
+    title: '',
+    text: '',
+    icon: null
+} %}
+
+{% set modifiers = [data.action | default('info')] | merge(modifiers) %}
+
+{% set iconName = data.action is empty ? 'action-default' : 'action-' ~ data.action %}
+{% set iconName = data.icon is empty ? iconName : data.icon %}
+
+{% block body %}
+    <div class="{{ component.renderClass(config.name ~ '__message', modifiers) }} container grid">
+
+        <div class="col {{config.name}}__content">
+            {% if data.title is not empty %}
+                <h6>{{data.title | trans}}</h6>
+            {% endif %}
+            <div class="spacing-right spacing-right--big">
+                {{data.text | trans}}
+            </div>
+            <span class="{{config.name}}__static-link">{{ 'message.submit_link' | trans }}</span>
+        </div>
+
+    </div>
+{% endblock %}
+
+

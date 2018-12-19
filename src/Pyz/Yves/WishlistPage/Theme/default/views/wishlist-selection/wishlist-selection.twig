@@ -1,0 +1,27 @@
+{% extends template('widget') %}
+
+{% define data = {
+    wishlists: _view.wishlistCollection.wishlists | default([])
+} %}
+
+{% block body %}
+    {% if data.wishlists is empty %}
+        <input type="hidden" name="wishlist-name" value="">
+    {% else %}
+        {% embed molecule('custom-select') with {
+            modifiers: ['expand'],
+            attributes: {
+                name: 'wishlist-name'
+            },
+            embed: {
+                wishlists: data.wishlists
+            }
+        } only %}
+            {% block options %}
+                {% for wishlist in embed.wishlists %}
+                    <option value="{{ wishlist.name }}">{{ wishlist.name }}</option>
+                {% endfor %}
+            {% endblock %}
+        {% endembed %}
+    {% endif %}
+{% endblock %}

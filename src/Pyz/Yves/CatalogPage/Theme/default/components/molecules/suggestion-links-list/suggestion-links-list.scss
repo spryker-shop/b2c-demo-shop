@@ -1,0 +1,29 @@
+@mixin catalog-page-suggestion-links-list($name: '.suggestion-links-list') {
+    #{$name} {
+        &--top {
+            margin-top: rem(38);
+        }
+
+        &__holder {
+            margin: rem(6) 0;
+        }
+
+        &__item {
+            margin: rem(10) 0;
+        }
+
+        &__item-link {
+            font: fw(regular) rem(17)/2 $setting-font-family;
+            color: $setting-color-black;
+            text-transform: capitalize;
+
+            &:hover {
+                color: $setting-color-alt;
+            }
+        }
+
+        @content;
+    }
+}
+
+@include catalog-page-suggestion-links-list();

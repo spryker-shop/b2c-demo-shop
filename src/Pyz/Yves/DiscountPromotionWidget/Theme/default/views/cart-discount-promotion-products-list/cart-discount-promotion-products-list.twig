@@ -1,0 +1,85 @@
+{% extends template('widget') %}
+
+{% define data = {
+    promotionProducts: _widget.promotionProducts
+} %}
+
+{% block body %}
+    {% if data.promotionProducts is not empty %}
+        <h4 class="title title--promotion title--medium title--with-border">{{ 'cart.promotion.items' | trans }}</h4>
+
+        {% for product in data.promotionProducts %}
+            {% embed molecule('product-item') with {
+                data: {
+                    productItem: product,
+                    isPromotionItem: true
+                },
+                embed: {
+                    superAttributes: product.attributeMap.superAttributes,
+                    selectedAttributes: product.selectedAttributes,
+                    availableAttributes: product.availableAttributes,
+                    sku: product.sku,
+                    idProductAbstract: product.idProductAbstract,
+                    idProductConcrete: product.idProductConcrete,
+                    promotionDiscount: {
+                        id: product.promotionItem.discount.discountPromotion.idDiscountPromotion,
+                        maxQuantity: product.promotionItem.maxQuantity
+                    }
+                }
+            } only %}
+                {% block content %}
+                    {{ parent() }}
+                    <div class="grid">
+                        {% include molecule('variant-configurator', 'DiscountPromotionWidget') with {
+                            class: 'col col--lg-9 col--sm-12',
+                            data: {
+                                idProductAbstract: embed.idProductAbstract,
+                                superAttributes: embed.superAttributes,
+                                selectedAttributes: embed.selectedAttributes,
+                                availableAttributes: embed.availableAttributes
+                            }
+                        } only %}
+                    </div>
+                {% endblock %}
+
+                {% block labels %}
+                    {% widget 'ProductAbstractLabelWidget' args [embed.idProductAbstract] only %}{% endwidget %}
+                {% endblock %}
+
+                {% block groups %}
+                    {% widget 'ProductGroupWidget' args [embed.idProductAbstract] only %}{% endwidget %}
+                {% endblock %}
+
+                {% block bundles %}{% endblock %}
+
+                {% block actions %}
+                    {% set disabled = embed.idProductConcrete is empty %}
+
+                    <form method="POST" action="/cart/add/{{ embed.sku }}" class="grid grid--bottom grid--justify">
+                        {% include molecule('product-quantity-input') with {
+                            data: {
+                                maxQuantity: embed.promotionDiscount.maxQuantity,
+                                hasUpdateButton: false
+                            }
+                        } only %}
+
+                        <div class="col col--sm-12 col--md-4 text-right">
+                            <input type="hidden" value="{{ embed.sku }}" name="groupKey">
+                            <input type="hidden" value="{{ embed.promotionDiscount.id }}" name="idDiscountPromotion">
+
+                            <button type="submit" class="button button--hollow button--promotion-item {{ config.jsName ~ '__button-' ~ embed.sku }}" {{ disabled ? 'disabled' : '' }}>
+                                {{ 'page.detail.add-to-cart' | trans }}
+                            </button>
+
+                            {% include molecule('action-single-click-enforcer') with {
+                                attributes: {
+                                    'target-selector': '.' ~ config.jsName ~ '__button-' ~ embed.sku
+                                }
+                            } only %}
+                        </div>
+                    </form>
+                {% endblock %}
+            {% endembed %}
+        {% endfor %}
+    {% endif %}
+{% endblock %}

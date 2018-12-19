@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<database xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:noNamespaceSchemaLocation="http://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\ProductDiscontinued\Persistence" package="src.Orm.Zed.ProductDiscontinued.Persistence">
+  <table name="spy_product_discontinued">
+    <index name="index-spy_product_discontinued-fk_product">
+      <index-column name="fk_product"/>
+    </index>
+  </table>
+  <table name="spy_product_discontinued_note">
+    <index name="index-spy_product_discontinued_note-fk_product_discontinued">
+      <index-column name="fk_product_discontinued"/>
+    </index>
+    <index name="index-spy_product_discontinued_note-fk_locale">
+      <index-column name="fk_locale"/>
+    </index>
+  </table>
+</database>

@@ -1,0 +1,227 @@
+@mixin shop-ui-button($name: '.button') {
+    $button-min-width: rem(177, number);
+
+    #{$name} {
+        @include helper-effect-transition(all);
+        display: inline-block;
+        padding: rem(15) rem(16);
+        background-color: $setting-color-black;
+        border: none;
+        border-radius: rem(2);
+        min-width: $button-min-width/1.3;
+        color: $setting-color-white;
+        text-align: center;
+        font: fw(medium) rem(14)/rem(18) $setting-font-family-additional;
+        cursor: pointer;
+
+        @include helper-breakpoint-media-min($md-min) {
+            min-width: $button-min-width;
+        }
+
+        &:hover,
+        &:focus {
+            color: $setting-color-white;
+            background-color: $setting-color-alt;
+            border-color: $setting-color-alt;
+            text-decoration: none;
+        }
+
+        &:active {
+            color: $setting-color-white;
+            background-color: map-get($setting-color-actions, alert);
+            border-color: map-get($setting-color-actions, alert);
+            text-decoration: none;
+        }
+
+        &--alert {
+            background-color: map-get($setting-color-actions, alert);
+            border-color: map-get($setting-color-actions, alert);
+            color: $setting-color-white;
+        }
+
+        &--skinless {
+            border: none;
+            background-color: $setting-color-transparent;
+            color: $setting-color-black;
+            min-width: 0;
+
+            &:hover,
+            &:focus,
+            &:active {
+                border: none;
+                background-color: $setting-color-transparent;
+                color: $setting-color-black;
+            }
+        }
+
+        &--send-review {
+            position: absolute;
+            top: rem(13);
+            right: rem(24);
+            min-width: rem(100);
+            padding: rem(12) rem(16);
+
+            @include helper-breakpoint-media-min($lg-min) {
+                min-width: $button-min-width;
+                padding: rem(16);
+                margin-top: rem(20);
+                position: relative;
+                top: 0;
+                right: 0;
+            }
+        }
+
+        &--quantity {
+            border: rem(1) solid $setting-color-gray-4;
+            border-radius: 50%;
+            font: fw(light) rem(16)/rem(17) $setting-font-family-additional;
+            background-color: $setting-color-transparent;
+            color: $setting-color-gray-4;
+            padding: 0;
+            width: rem(20);
+            height: rem(20);
+            user-select: none;
+            min-width: 0;
+
+            &:hover,
+            &:focus,
+            &:active {
+                color: $setting-color-main;
+                border-color: $setting-color-main;
+                background-color: $setting-color-transparent;
+            }
+        }
+
+        &--quantity-large {
+            width: rem(36);
+            height: rem(36);
+            line-height: rem(33);
+            font-size: rem(21);
+            border-color: $setting-color-main;
+            color: $setting-color-main;
+
+            &:hover,
+            &:focus,
+            &:active {
+                border-color: $setting-color-main;
+                color: $setting-color-main;
+                background-color: $setting-color-alpha-2;
+            }
+        }
+
+        &[disabled],
+        &--disabled {
+            background-color: $setting-color-gray-3;
+            cursor: not-allowed;
+
+            &:hover,
+            &:focus,
+            &:active {
+                background-color: $setting-color-gray-3;
+            }
+        }
+
+        &--hollow {
+            background-color: $setting-color-white;
+            border: rem(1) solid $setting-color-black;
+            color: $setting-color-black;
+            padding: rem(14) rem(16);
+
+            &[disabled],
+            &--disabled {
+                background-color: $setting-color-white;
+                border-color: $setting-color-gray-3;
+                color: $setting-color-gray-3;
+
+                &:hover,
+                &:focus,
+                &:active {
+                    background-color: $setting-color-white;
+                }
+            }
+        }
+
+        &--inspirational {
+            text-transform: uppercase;
+            letter-spacing: rem(2.1);
+            min-width: 0;
+
+            @include helper-breakpoint-media-min($md-min) {
+                letter-spacing: rem(2.5);
+            }
+        }
+
+        &--promotion-item {
+            min-width: 0;
+            width: 100%;
+            margin-top: rem(16);
+            height: rem(28);
+            padding: 0 rem(16);
+            font: fw(regular) rem(10)/rem(26) $setting-font-family-additional;
+
+            @include helper-breakpoint-media-min($md-min) {
+                margin-top: 0;
+            }
+
+            @include helper-breakpoint-media-min($lg-min) {
+                width: auto;
+                height: rem(32);
+                line-height: rem(30);
+            }
+        }
+
+        &--agent {
+            min-width: rem(79);
+        }
+
+        &--combined {
+            border-radius: 0 rem(2) rem(2) 0;
+            min-width: rem(113);
+            font-weight: fw(regular);
+            font-size: rem(13);
+        }
+
+        &--combined-small {
+            min-width: 0;
+            padding-left: rem(12);
+            padding-right: rem(12);
+        }
+
+        &--expand {
+            width: 100%;
+        }
+
+        &--expand-mobile {
+            width: 100%;
+
+            @include helper-breakpoint-media-min($md-min) {
+                width: auto;
+            }
+        }
+
+        &--large {
+            padding: rem(18);
+            font-weight: fw(medium);
+            font-size: rem(16);
+            line-height: rem(20);
+        }
+
+        &--search {
+            padding: 0;
+            font-weight: fw(regular);
+
+            &:hover,
+            &:focus {
+                color: $setting-color-alt;
+            }
+        }
+
+        &--reset-min-width {
+            min-width: 0;
+        }
+
+        @content;
+    }
+}
+
+@include shop-ui-button();

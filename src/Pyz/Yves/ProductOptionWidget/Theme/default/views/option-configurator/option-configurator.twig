@@ -1,0 +1,46 @@
+{% extends template('widget') %}
+
+{% define data = {
+    optionGroups: _widget.productOptionGroups
+} %}
+
+{% block template %}
+    {% if data.optionGroups is not empty %}{{parent()}}{% endif %}
+{% endblock %}
+
+{% block body %}
+    {% for optionGroup in data.optionGroups %}
+        {% embed molecule('toggler-item') with {
+            modifiers: ['with-top-border', 'option'],
+            data: {
+                title: optionGroup.name | trans,
+                triggerClass: 'js-option-configurator__trigger',
+                targetClass: 'js-option-configurator__target-' ~ loop.index,
+                isTogglerIncluded: loop.first ? true : false
+            },
+            embed: {
+                optionGroup: optionGroup,
+            }
+        } only %}
+            {% block contentText %}
+                {% embed molecule('custom-select') with {
+                    modifiers: ['expand'],
+                    attributes: {
+                        name: 'product-option[' ~ embed.optionGroup.name ~ ']',
+                        'config-width': '100%'
+                    },
+                    embed: {
+                        options: embed.optionGroup.productOptionValues
+                    }
+                } only %}
+                    {% block options %}
+                        <option value="0">{{ 'product.product_options_select' | trans }}</option>
+                        {% for option in embed.options %}
+                            <option value="{{option.idProductOptionValue}}">{{ option.value | trans }} {{ option.price | money }}</option>
+                        {% endfor %}
+                    {% endblock %}
+                {% endembed %}
+            {% endblock %}
+        {% endembed %}
+    {% endfor %}
+{% endblock %}

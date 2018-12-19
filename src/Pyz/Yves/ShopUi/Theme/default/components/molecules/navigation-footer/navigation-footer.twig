@@ -1,0 +1,50 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'navigation-footer',
+    tag: 'navigation-footer'
+} %}
+
+{% define data = {
+    items: []
+} %}
+
+{% block body %}
+
+    {% for itemNavigation in data.items %}
+
+        {% if itemNavigation.isShow is defined ? itemNavigation.isShow : true %}
+            {% embed molecule('toggler-item') with {
+                modifiers: ['mobile'] | merge(itemNavigation.modifiers is defined ? itemNavigation.modifiers : []),
+                class: config.name ~ '__col ' ~ (itemNavigation.class is defined ? itemNavigation.class : ''),
+                data: {
+                    title: itemNavigation.title | trans,
+                    triggerClass: config.jsName ~ '__trigger',
+                    targetClass: config.jsName ~ '__target--' ~ loop.index,
+                    isTogglerIncluded: loop.first ? true : false,
+                    hiddenClass: 'is-hidden-sm-only'
+                },
+                embed: {
+                    itemNavigation: itemNavigation,
+                }
+            } only %}
+                {% block contentText %}
+                    {% for itemMenu in embed.itemNavigation.templates %}
+                        {% widget 'NavigationWidget' args [itemMenu.menu, itemMenu.template] %}
+                            {% block body %}
+                                {% if itemMenu.wrapClass is defined %}
+                                    <div class="{{ itemMenu.wrapClass }}">
+                                        {{ parent() }}
+                                    </div>
+                                {% else %}
+                                    {{ parent() }}
+                                {% endif %}
+                            {% endblock %}
+                        {% endwidget %}
+                    {% endfor %}
+                {% endblock %}
+            {% endembed %}
+        {% endif %}
+
+    {% endfor %}
+{% endblock %}

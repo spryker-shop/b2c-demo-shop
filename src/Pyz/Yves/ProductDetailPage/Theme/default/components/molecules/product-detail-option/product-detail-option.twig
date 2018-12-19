@@ -1,0 +1,22 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'product-detail-option',
+} %}
+
+{% define data = {
+    attributes: required,
+} %}
+
+{% block class -%}
+    grid {{ parent() }}
+{%- endblock %}
+
+{% block body %}
+    {% for name, value in data.attributes if name is not empty %}
+        <div class="col col--sm-6 {{ config.name }}__item" itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue">
+            <div class="{{ config.name }}__name" itemprop="name">{{ ('product.attribute.' ~ name) | trans }}</div>
+            <div itemprop="value">{{ value }}</div>
+        </div>
+    {% endfor %}
+{% endblock %}

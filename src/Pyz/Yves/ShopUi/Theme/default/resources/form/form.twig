@@ -1,0 +1,190 @@
+{% extends 'form_div_layout.html.twig' %}
+
+{# widgets #}
+
+{%- block form_widget_simple -%}
+    {%- set label = (label | default('')) | trans -%}
+
+    {%- set attr = attr | merge({
+        class: ('input input--expand' ~ (errors is not empty ? ' input--error' : ' ') ~ (attr.class | default(''))) | trim,
+        type: type | default('text')
+    }) -%}
+
+    <input {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %} />
+{%- endblock -%}
+
+{%- block textarea_widget -%}
+    {%- set label = (label | default('')) | trans -%}
+
+    {%- set attr = attr | merge({
+        class: ('textarea textarea--expand' ~ (errors is not empty ? ' textarea--error' : ' ') ~ (attr.class | default(''))) | trim,
+        placeholder: ''
+    }) -%}
+
+    <textarea {{ block('widget_attributes') }}>{% if value is not empty %}{{ value }}{% endif %}</textarea>
+{%- endblock textarea_widget -%}
+
+{%- block choice_widget_collapsed -%}
+    {%- if required and placeholder is none and not placeholder_in_choices and not multiple and (attr.size is not defined or attr.size <= 1) -%}
+        {% set required = false %}
+    {%- endif -%}
+
+    {% embed molecule('custom-select') with {
+        modifiers: ['expand'],
+        attributes: {
+            multiple: multiple,
+            placeholder: placeholder,
+            required: required,
+            'config-width': '100%'
+        },
+        embed: {
+            attributes: block('widget_attributes'),
+            value: value,
+            translation_domain: translation_domain,
+            preferred_choices: preferred_choices,
+            choices: choices,
+            separator: separator,
+            choice_translation_domain: choice_translation_domain
+        }
+    } only %}
+        {% block selectAttributes %}
+            {{parent()}}
+            {{embed.attributes | raw}}
+        {% endblock %}
+
+        {% block options %}
+            {%- if attributes.placeholder is not none -%}
+                <option value=""{% if attributes.required and embed.value is empty %} selected="selected"{% endif %}>
+                    {{ attributes.placeholder != '' ? (embed.translation_domain is same as(false) ? attributes.placeholder : attributes.placeholder|trans({}, embed.translation_domain)) }}
+                </option>
+            {%- endif -%}
+
+            {%- if embed.preferred_choices|length > 0 -%}
+                {% set options = embed.preferred_choices %}
+
+                {{- block('renderOptions') -}}
+
+                {%- if attributes.choices|length > 0 and embed.separator is not none -%}
+                    <option disabled="disabled">{{ embed.separator }}</option>
+                {%- endif -%}
+            {%- endif -%}
+
+            {%- set options = embed.choices -%}
+
+            {%- block renderOptions -%}
+                {% for group_label, choice in options %}
+                    {%- if choice is iterable -%}
+                        <optgroup label="{{ embed.choice_translation_domain is same as(false) ? group_label : group_label|trans({}, embed.choice_translation_domain) }}">
+                            {% set options = choice %}
+                            {{- block('renderOptions') -}}
+                        </optgroup>
+                    {%- else -%}
+                        <option value="{{ choice.value }}"{% if choice.attr %}{% with { attr: choice.attr } %}{{ block('attributes') }}{% endwith %}{% endif %}{% if choice is selectedchoice(embed.value) %} selected="selected"{% endif %}>
+                            {{ embed.choice_translation_domain is same as(false) ? choice.label : choice.label|trans({}, embed.choice_translation_domain) }}
+                        </option>
+                    {%- endif -%}
+                {% endfor %}
+            {%- endblock -%}
+        {% endblock %}
+    {% endembed %}
+{%- endblock -%}
+
+{%- block checkbox_widget -%}
+    {%- set type = type | default('checkbox') -%}
+    {%- set component = component | default(atom(type)) -%}
+    {%- set label = label | default(name | humanize) | trans -%}
+    {%- set modifiers = errors is empty ? ['expand'] : ['expand', 'error'] -%}
+
+    {% define attributes = {
+        id: id,
+        name: full_name,
+        checked: checked | default(false),
+        required: required | default(false),
+        disabled: disabled | default(false),
+        value: value | default()
+    } %}
+
+    {% include component with {
+        modifiers: modifiers,
+        data: {
+            label: label
+        },
+        attributes: attributes
+    } only %}
+{%- endblock -%}
+
+{%- block radio_widget -%}
+    {% set type = 'radio' %}
+    {{block('checkbox_widget')}}
+{%- endblock -%}
+
+{# rows #}
+
+{%- block form_row -%}
+    {%- set rowClass = rowAttr.class | default('') -%}
+
+    <div class="{{rowClass}}">
+        {{- form_label(form) -}}
+        {{- form_widget(form) -}}
+        {{- form_errors(form) -}}
+    </div>
+{%- endblock -%}
+
+{%- block form_rows -%}
+    {% for child in form %}
+        {{- form_row(child, {
+            rowAttr: rowAttr | default({})
+        }) -}}
+    {% endfor %}
+{%- endblock -%}
+
+{%- block checkbox_row -%}
+    {%- set rowClass = rowAttr.class | default('') -%}
+
+    <div class="{{rowClass}}">
+        {{- form_widget(form) -}}
+        {{- form_errors(form) -}}
+    </div>
+{%- endblock -%}
+
+{%- block radio_row -%}
+    {{- block('checkbox_row') -}}
+{%- endblock -%}
+
+{# labels #}
+
+{%- block form_label -%}
+    {% if label is not same as(false) -%}
+        {% if not compound -%}
+            {% set label_attr = label_attr|merge({'for': id, 'class': (label_attr.class|default('') ~ ' label')|trim}) %}
+        {%- endif -%}
+        {% if required -%}
+            {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' label--required')|trim}) %}
+        {%- endif -%}
+        {% if label is empty -%}
+            {%- if label_format is not empty -%}
+                {% set label = label_format|replace({
+                    '%name%': name,
+                    '%id%': id,
+                }) %}
+            {%- else -%}
+                {% set label = name|humanize %}
+            {%- endif -%}
+        {%- endif -%}
+        <label{% if label_attr %}{% with { attr: label_attr } %}{{ block('attributes') }}{% endwith %}{% endif %}>{{ translation_domain is same as(false) ? label : label|trans({}, translation_domain) }}</label>
+    {%- endif -%}
+{%- endblock -%}
+
+{# errors #}
+
+{% block form_errors %}
+    {% spaceless %}
+        {% if errors | length > 0 %}
+            <ul class="list list--bullet list--alert">
+                {% for error in errors %}
+                    <li class="list__item">{{ error.message | trans }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endspaceless %}
+{% endblock %}

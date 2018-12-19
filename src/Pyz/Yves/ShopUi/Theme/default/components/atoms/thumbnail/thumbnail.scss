@@ -1,0 +1,59 @@
+@include shop-ui-thumbnail {
+    &--no-margin {
+        margin: 0;
+    }
+
+    &--with-overlay {
+        position: relative;
+        overflow: hidden;
+
+        &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: $setting-color-alpha-1;
+            z-index: $setting-zi-element;
+        }
+    }
+
+    &--catalog {
+        margin: 0 rem(15) 0 0;
+        border-radius: rem(3);
+        width: rem(41);
+        height: rem(41);
+    }
+
+    &--cart-bundle {
+        width: rem(120);
+        height: rem(44);
+        border-radius: rem(3);
+        margin: 0;
+    }
+
+    &__image {
+        &--cart-bundle {
+            max-height: calc(100% - #{rem(10)});
+            max-width: calc(100% - #{rem(10)});
+        }
+    }
+
+    &--product-set {
+        height: rem(208);
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    &--wishlist {
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: rem(10);
+        height: rem(32);
+
+        @include helper-breakpoint-media-min($md-min) {
+            height: 5rem;
+        }
+    }
+}

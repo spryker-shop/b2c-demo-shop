@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<database xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:noNamespaceSchemaLocation="http://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\Wishlist\Persistence" package="src.Orm.Zed.Wishlist.Persistence">
+  <table name="spy_wishlist">
+    <index name="index-spy_wishlist-fk_customer">
+      <index-column name="fk_customer"/>
+    </index>
+  </table>
+  <table name="spy_wishlist_item">
+    <index name="index-spy_wishlist_item-fk_wishlist">
+      <index-column name="fk_wishlist"/>
+    </index>
+    <index name="index-spy_wishlist_item-sku">
+      <index-column name="sku"/>
+    </index>
+  </table>
+</database>

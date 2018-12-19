@@ -1,0 +1,24 @@
+@mixin shop-ui-navigation-top ($name: '.navigation-top') {
+    #{$name} {
+        &__item {
+            position: relative;
+            margin: 0;
+            padding: rem(12.8);
+            z-index: $setting-zi-element + 2;
+
+            &--overlay {
+                position: static;
+                padding: 0;
+                z-index: $setting-zi-element;
+            }
+        }
+
+        &__link {
+            &--active {
+                color: $setting-color-alt;
+            }
+        }
+    }
+}
+
+@include shop-ui-navigation-top();

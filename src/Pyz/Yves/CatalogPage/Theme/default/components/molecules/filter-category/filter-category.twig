@@ -1,0 +1,73 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'filter-category'
+} %}
+
+{% define data = {
+    filter: null,
+    filterPath: null,
+    categories: [],
+    levelMenu: 1
+} %}
+
+{% block component %}
+    {% if data.categories is not empty %}
+        {{parent()}}
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    <ul class="menu">
+
+        {% for categoryNode in data.categories %}
+            {% set quantity = 0 %}
+            {% set hasChildren = (categoryNode.children | default([]) is not empty) %}
+
+            {% for filterValue in data.filter.values %}
+                {% if (filterValue.value == categoryNode.nodeId) %}
+                    {% set quantity = filterValue.docCount %}
+                {% endif %}
+            {% endfor %}
+
+            {% if data.filterPath is not empty %}
+                {% set categoryUrl = url(data.filterPath, {categoryPath: (categoryNode.url)}) %}
+                {% set currentUrl = url(data.filterPath, {categoryPath: (app.request.attributes.get('categoryNode').url)}) %}
+            {% else %}
+                {% set categoryUrl = categoryNode.url | replace({"'": "\\'", '"':'\\"'}) %}
+                {% set currentUrl = app.request.attributes.get('categoryNode') is not null ? app.request.attributes.get('categoryNode').url : null %}
+            {% endif %}
+
+            {% set isActive = currentUrl == categoryUrl %}
+            {% set classes = [
+                config.name ~ '__item',
+                config.name ~ '__item--level-' ~ data.levelMenu,
+                isActive ? config.name ~ '__item--active' : '',
+                hasChildren ? config.name ~ '__item--children' : '',
+            ] %}
+
+            <li class="{{ classes | join(' ') }}">
+                <button
+                    class="{{ config.name }}__link {% if isActive %}{{ config.name }}__link--active{% endif %}"
+                    onclick="this.form.action='{{ categoryUrl }}'"
+                    {% if quantity == 0 %}disabled="disabled"{% endif %}
+>
+                    {{ categoryNode.name }}{% if hasChildren is empty %} <span class="text-secondary">({{ quantity }})</span>{% endif %}
+                </button>
+
+                {% if hasChildren %}
+                    {% include molecule('filter-category', 'CatalogPage') with {
+                        data: {
+                            levelMenu: data.levelMenu + 1,
+                            filter: data.filter,
+                            filterPath: data.filterPath,
+                            categories: categoryNode.children
+                        }
+                    } only %}
+                {% endif %}
+            </li>
+
+        {% endfor %}
+
+    </ul>
+{% endblock %}

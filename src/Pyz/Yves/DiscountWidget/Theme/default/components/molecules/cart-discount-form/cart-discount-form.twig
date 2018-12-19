@@ -1,0 +1,38 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'cart-discount-form'
+} %}
+
+{% define data = {
+    form: required
+} %}
+
+{% block body %}
+    {% embed molecule('toggler-item') with {
+        modifiers: ['filter'],
+        data: {
+            title: 'cart.voucher-title' | trans,
+            triggerClass: config.jsName ~ '__trigger',
+            targetClass: config.jsName ~ '__target'
+        },
+        embed: {
+            form: data.form
+        }
+    } only %}
+        {% block contentText %}
+            {% include molecule('form') with {
+                modifiers: ['inline'],
+                data: {
+                    form: embed.form,
+                    submit: {
+                        enable: true,
+                        text: 'cart.voucher.redeem' | trans,
+                        icon: null,
+                        class: 'button  button--combined'
+                    }
+                }
+            } only %}
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

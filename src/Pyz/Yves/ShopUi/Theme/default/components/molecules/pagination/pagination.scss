@@ -1,0 +1,67 @@
+@mixin shop-ui-pagination($name: '.pagination') {
+    #{$name} {
+        &__list {
+            border-top: dotted rem(1) $setting-color-gray-3;
+            border-bottom: dotted rem(1) $setting-color-gray-3;
+            margin-bottom: rem(50);
+        }
+
+        &__item {
+            display: inline-block;
+
+            &:first-child,
+            &:last-child {
+                flex-grow: 1;
+            }
+        }
+
+        &__step {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: rem(44);
+            height: rem(54);
+            font: fw(regular) rem(15)/rem(54) $setting-font-family-additional;
+            text-align: center;
+            color: $setting-color-black;
+
+            @include helper-breakpoint-media-min($xl-min) {
+                width: rem(68);
+                height: rem(68);
+                font-size: rem(18);
+                line-height: rem(68);
+            }
+
+            &--previous {
+                float: left;
+            }
+
+            &--next {
+                float: right;
+            }
+
+            &:hover {
+                text-decoration: none;
+                background: $setting-color-gray-1;
+                color: $setting-color-black;
+            }
+
+            &--current {
+                &,
+                &:hover {
+                    color: $setting-color-alt;
+                }
+            }
+
+            &--disabled {
+                opacity: 0.15;
+
+                &:hover {
+                    background: none;
+                }
+            }
+        }
+    }
+}
+
+@include shop-ui-pagination();

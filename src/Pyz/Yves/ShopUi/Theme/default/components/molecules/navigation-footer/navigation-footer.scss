@@ -1,0 +1,29 @@
+@mixin shop-ui-navigation-footer($name: '.navigation-footer') {
+    #{$name} {
+        border-bottom: rem(1) dotted $setting-color-gray-3;
+
+        @include helper-breakpoint-media-min($md-min) {
+            border-bottom: none;
+        }
+
+        &__col {
+            width: 100%;
+
+            @include helper-breakpoint-media-min($md-min) {
+                width: 33%;
+            }
+
+            @include helper-breakpoint-media-min($xl-min) {
+                padding-right: 10%;
+            }
+
+            @include helper-breakpoint-media-min($xl-max) {
+                padding-right: 15%;
+            }
+        }
+
+        @content;
+    }
+}
+
+@include shop-ui-navigation-footer();

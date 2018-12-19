@@ -1,0 +1,7 @@
+@function rem($value: $setting-font-size-base, $type: string) {
+    $remSize: $value / ($setting-font-size-base / 1px);
+    @if ($type == number) {
+        @return $remSize * 1rem;
+    }
+    @return #{$remSize}rem;
+}

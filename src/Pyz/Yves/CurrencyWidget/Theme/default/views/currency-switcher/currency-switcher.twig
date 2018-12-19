@@ -1,0 +1,45 @@
+{% extends template('widget') %}
+
+{% define data = {
+    currencies: _widget.currencies,
+    currentCurrency: _widget.currentCurrency
+} %}
+
+{% block template %}
+    {% if data.currencies is not empty %}
+        {{parent()}}
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    <form method="GET" action="{{ path('currency-switch') }}">
+        {% embed molecule('custom-select') with {
+            modifiers: ['hollow'],
+            attributes: {
+                name: 'currency-iso-code',
+                'config-theme': 'secondary'
+            },
+            embed: {
+                currencies: data.currencies,
+                currentCurrency: data.currentCurrency
+            }
+        } only %}
+            {% block selectClass -%}
+                {{ parent() }}
+                js-currency__select-trigger
+            {%- endblock %}
+            {% block options %}
+                {% for currency in embed.currencies %}
+                    <option value="{{ currency.code }}" {{ (currency.code == embed.currentCurrency) ? 'selected' : ''}}>{{ currency.code | trans }}</option>
+                {% endfor %}
+            {% endblock %}
+        {% endembed %}
+
+        <input type="hidden" name="referrer-url" value="{{ app.request.requestUri }}"/>
+        {% include molecule('form-submitter') with {
+            attributes: {
+                'trigger-selector': '.js-currency__select-trigger'
+            }
+        } only %}
+    </form>
+{% endblock %}

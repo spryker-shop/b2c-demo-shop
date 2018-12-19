@@ -1,0 +1,52 @@
+{% extends template('page-layout-main') %}
+
+{% define data = {
+    sets: _view.productSets,
+
+    title: 'product.sets' | trans
+} %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block content %}
+    {% if data.sets is not empty %}
+        <div class="grid set-list">
+            {% for productSet in data.sets %}
+                {% set imageUrl = productSet.imageSets.0.images.0.externalUrlSmall | default('') %}
+
+                <div class="col col--sm-12 col--lg-4 text-center">
+                    {% embed molecule('card') with {
+                        data: {
+                            name: productSet.name,
+                            url: productSet.url,
+                            imageUrl: imageUrl
+                        }
+                    } only %}
+                        {% block image %}
+                            <a href="{{data.url}}">
+                                {% include atom('thumbnail') with {
+                                    modifiers: ['product-set'],
+                                    attributes: {
+                                        alt: data.name,
+                                        src: data.imageUrl,
+                                        title: data.name
+                                    }
+                                } only %}
+                            </a>
+                        {% endblock %}
+
+                        {% block name %}
+                            <h3 class="title title--h4 title--medium title--mobile-size spacing-bottom">{{data.name}}</h3>
+                        {% endblock %}
+                    {% endembed %}
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="box">
+            <p>
+                {{ 'product.sets.no-results' | trans }}
+            </p>
+        </div>
+    {% endif %}
+{% endblock %}

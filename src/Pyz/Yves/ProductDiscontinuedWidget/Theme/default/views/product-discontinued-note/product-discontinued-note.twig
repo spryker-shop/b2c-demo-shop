@@ -1,0 +1,22 @@
+{% extends template('widget') %}
+
+{% define data = {
+    discontinuedProduct: _widget.discontinuedProduct
+} %}
+
+{%- block isDiscontinued -%}
+    {{- _widget.discontinuedProduct is not empty -}}
+{%- endblock -%}
+
+{% block body %}
+    {% if data.discontinuedProduct.note is defined and data.discontinuedProduct.note is not empty %}
+        {% include molecule('toggler-item') with {
+            modifiers: ['with-top-border', 'option'],
+            data: {
+                title: 'product_discontinued_widget.note' | trans,
+                text: data.discontinuedProduct.note,
+                isToggler: false,
+            }
+        } only %}
+    {% endif %}
+{% endblock %}

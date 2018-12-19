@@ -1,0 +1,56 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'active-filter-section',
+    tag: 'section'
+} %}
+
+{% define data = {
+    facets: []
+} %}
+
+{% block component %}
+    {% set activeFilters = [] %}
+
+    {% for filter in data.facets %}
+        {% set activeFilter = include(
+            [
+                molecule('active-filter-' ~ filter.config.name, 'CatalogPage'),
+                molecule('active-filter-' ~ filter.config.type, 'CatalogPage')
+            ],
+            {
+                class: config.name ~ '__item',
+                data: {
+                    filter: filter,
+                    min: filter.min | default(0),
+                    max: filter.max | default(0),
+                    activeMin: filter.activeMin | default(0),
+                    activeMax: filter.activeMax | default(0)
+                }
+            },
+            with_context = false,
+            ignore_missing = true
+            ) %}
+
+        {% if activeFilter | trim is not empty %}
+            {% set activeFilters = activeFilters | merge([activeFilter]) %}
+        {% endif %}
+    {% endfor %}
+
+    {% if activeFilters is not empty %}
+        {{parent()}}
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    <a class="{{ config.name }}__item {{ config.name }}__item--all" href="{{ generateUrlWithoutAllActiveSearchFilters(data.facets) }}">
+        {{ 'catalog.filter.resetAllFilters' | trans }} 
+        {% include atom('icon') with {
+            modifiers: ['medium', 'close-filter'],
+            data: {
+                name: 'close-filter'
+            }
+        } only %}
+    </a>
+    {{ activeFilters | join | raw }}
+{% endblock %}

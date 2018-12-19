@@ -7,46 +7,76 @@
 
 {% define data = {
     cartQuantity: app['cart.quantity'] | default,
-    showUserMenu: not (hideUserMenu | default(false)),
-    isInline: true,
-    withSeparators: true
+    showUserMenu: true
 } %}
 
-{% set cartQuantity = data.cartQuantity > 0 ? data.cartQuantity ~ ' ' : '' %}
-{% set menuClass = data.isInline ? 'menu--inline' : '' %}
-
 {% block body %}
-    <ul class="menu {{menuClass}}">
-        <li class="menu__item">
-            {%- widget 'CurrencyWidget' only -%}{%- endwidget -%}
-        </li>
-        {% if data.withSeparators %}<li class="menu__separator"></li>{% endif %}
-        <li class="menu__item">
-            {% widget 'LanguageSwitcherWidget' args [
-                app.request.pathInfo,
-                app.request.queryString,
-                app.request.requestUri
-            ] only %}
-            {%- endwidget -%}
-        </li>
-        {% if data.withSeparators %}<li class="menu__separator"></li>{% endif %}
-        <li class="menu__item">
-            {% include molecule('cart-items-counter') with {
+    <ul class="grid grid--middle grid--right">
+        {% if data.showUserMenu %}
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <li class="{{ config.name }}__item">
+                    <a href="{{ url('wishlist/overview') }}" class="{{ config.name }}__link">
+                        {% include atom('icon') with {
+                            modifiers: ['big'],
+                            data: {
+                                name: 'wishlist'
+                            }
+                        } only %}
+                    </a>
+                </li>
+                <li class="{{ config.name }}__item">
+                    <a href="{{ url('customer/overview') }}" class="{{ config.name }}__link {{ config.jsName }}__trigger">
+                        {% include atom('icon') with {
+                            modifiers: ['big'],
+                            data: {
+                                name: 'user-account'
+                            }
+                        } only %}
+                    </a>
+                </li>
+            {% else %}
+                <li class="{{ config.name }}__item">
+                    <a href="{{ url('login') }}" class="{{ config.name }}__link">
+                        {% include atom('icon') with {
+                            modifiers: ['big'],
+                            data: {
+                                name: 'wishlist'
+                            }
+                        } only %}
+                    </a>
+                </li>
+                <li class="{{ config.name }}__item">
+                    <a href="{{ url('login') }}" class="{{ config.name }}__link {{ config.jsName }}__trigger">
+                        {% include atom('icon') with {
+                            modifiers: ['big'],
+                            data: {
+                                name: 'user-account'
+                            }
+                        } only %}
+                    </a>
+                </li>
+            {% endif %}
+        {% endif %}
+
+        <li class="{{ config.name }}__item">
+            {% include atom('cart-link') with {
+                class: config.jsName ~ '__trigger',
                 data: {
-                    quantity: data.cartQuantity
+                    cartQuantity: data.cartQuantity,
+                },
+                attributes: {
+                    href: url('cart'),
                 }
             } only %}
         </li>
-        {% if data.withSeparators %}<li class="menu__separator"></li>{% endif %}
 
-        {% if data.showUserMenu %}
-            {% if is_granted('ROLE_USER') %}
-                <li class="menu__item"><a href="{{ url('customer/overview') }}">{{ 'customer.profile'|trans }}</a></li>
-                <li class="menu__item"><a href="{{ url('wishlist/overview') }}">{{ 'wishlist.wishlist'|trans }}</a></li>
-                <li class="menu__item"><a href="{{ url('logout') }}">{{ 'customer.logout'|trans }}</a></li>
-            {% else %}
-                <li class="menu__item"><a href="{{ url('login') }}">{{ 'customer.login'|trans }}</a></li>
-            {% endif %}
-        {% endif %}
+        <li class="{{ config.name }}__item {{ config.name }}__item--overlay">
+            {% include molecule('nav-overlay') with {
+                attributes: {
+                    'trigger-open': '.' ~ config.jsName ~ '__trigger',
+                    'active-link': config.name ~ '__link--active'
+                }
+            } only %}
+        </li>
     </ul>
 {% endblock %}

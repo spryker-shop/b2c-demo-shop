@@ -1,0 +1,127 @@
+{% extends template('page-layout-customer', 'CustomerPage') %}
+
+{% define data = {
+    orders: _view.orderList,
+    customer: _view.customer,
+    billingAddress: _view.addresses.billing | default,
+    shippingAddress: _view.addresses.shipping | default,
+    billingAddressId: _view.addresses.billing.idCustomerAddress | default(''),
+    shippingAddressId: _view.addresses.shipping.idCustomerAddress | default(''),
+
+    title: 'customer.account.overview' | trans
+} %}
+
+{% block customerContent %}
+    <div class="box">
+        {% embed molecule('title-box', 'CustomerPage') with {
+            data: {
+                title: 'customer.account.last_orders' | trans,
+            },
+            embed: {
+                orders: data.orders
+            }
+        } only %}
+            {% if embed.orders is not empty %}
+                {% block additionalContent %}
+                    <a href="{{url('customer/order')}}" class="col">
+                        {{ 'customer.order.view_all' | trans }}
+                    </a>
+                {% endblock %}
+            {% endif %}
+        {% endembed %}
+
+        {% include molecule('order-table', 'CustomerPage') with {
+            data: {
+                orders: data.orders
+            }
+        } only %}
+
+    </div>
+
+    <div class="grid grid--justify">
+        <div class="col--lg-6 col--sm-12">
+            <div class="box">
+                {% embed molecule('title-box', 'CustomerPage') with {
+                    data: {
+                        title: 'customer.account.profile_data' | trans
+                    }
+                } only %}
+                    {% block additionalContent %}
+                        <a href="{{url('customer/profile')}}" class="col">
+                            {{ 'general.edit.button' | trans }}
+                        </a>
+                    {% endblock %}
+                {% endembed %}
+
+                <ul class="menu menu--customer-account">
+                    <li class="menu__item">{{ data.customer.firstName }} {{ data.customer.lastName }}</li>
+                    <li class="menu__item"><a class="menu__link" href="mailto:{{ data.customer.email }}">{{ data.customer.email }}</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col--lg-6 col--sm-12">
+            <div class="box">
+                {% widget 'NewsletterSubscriptionSummaryWidget' args [data.customer] only %}{% endwidget %}
+            </div>
+        </div>
+
+        <div class="col--lg-6 col--sm-12">
+            {% if data.billingAddress is not empty %}
+                <div class="box">
+                    {% embed molecule('title-box', 'CustomerPage') with {
+                        data: {
+                            title: 'customer.account.default_billing_address' | trans
+                        },
+                        embed: {
+                            billingAddressId: data.billingAddressId
+                        }
+                    } only %}
+                        {% block additionalContent %}
+                            <a href="{{ url('customer/address/update', { id: embed.billingAddressId }) }}" class="col">
+                                {{ 'general.edit.button' | trans }}
+                            </a>
+                        {% endblock %}
+                    {% endembed %}
+
+                    {% include molecule('display-address', 'CustomerPage') with {
+                        class: 'menu menu--customer-account',
+                        data: {
+                            address: data.billingAddress
+                        }
+                    } only %}
+
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="col--lg-6 col--sm-12">
+            {% if data.shippingAddress is not empty %}
+                <div class="box">
+                    {% embed molecule('title-box', 'CustomerPage') with {
+                        data: {
+                            title: 'customer.account.default_shipping_address' | trans
+                        },
+                        embed: {
+                            shippingAddressId: data.shippingAddressId
+                        }
+                    } only %}
+                        {% block additionalContent %}
+                            <a href="{{ url('customer/address/update', { id: embed.shippingAddressId }) }}" class="col">
+                                {{ 'general.edit.button' | trans }}
+                            </a>
+                        {% endblock %}
+                    {% endembed %}
+
+                    {% include molecule('display-address', 'CustomerPage') with {
+                        class: 'menu menu--customer-account',
+                        data: {
+                            address: data.shippingAddress
+                        }
+                    } only %}
+
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

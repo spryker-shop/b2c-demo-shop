@@ -7,7 +7,7 @@
 
 namespace Orm\Zed\Oauth\Persistence;
 
-use Orm\Zed\Oauth\Persistence\Base\SpyOauthAccessToken as BaseSpyOauthAccessToken;
+use Spryker\Zed\Oauth\Persistence\Propel\AbstractSpyOauthAccessToken as BaseSpyOauthAccessToken;
 
 /**
  * Skeleton subclass for representing a row from the 'spy_oauth_access_token' table.

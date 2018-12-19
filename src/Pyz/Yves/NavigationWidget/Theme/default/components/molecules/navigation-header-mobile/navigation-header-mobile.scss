@@ -1,0 +1,109 @@
+@mixin shop-ui-navigation-header-mobile($name: '.nav-header-mobile') {
+    #{$name} {
+        position: relative;
+
+        &__dropdown-container {
+            @include helper-effect-transition(transform);
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100vw;
+            background: $setting-color-white;
+            padding: rem(10) rem(16) rem(20);
+            border-bottom: rem(1) solid $setting-color-gray-3;
+            box-shadow: 0 rem(20) rem(15) rem(-1) $setting-color-shadow;
+            transform-origin: center top;
+            transform: scaleY(0);
+
+            &--active {
+                transform: scaleY(1);
+            }
+        }
+
+        &__item {
+            text-transform: uppercase;
+            font: fw(medium) rem(12) $setting-font-family-additional;
+            letter-spacing: rem(2);
+            white-space: nowrap;
+            margin: 0 0.6rem;
+            list-style: none;
+            display: inline-block;
+
+            &.active {
+                opacity: 0.5;
+            }
+
+            a {
+                &:hover {
+                    color: inherit;
+                    text-decoration: none;
+                }
+            }
+        }
+
+        &__scroll {
+            position: relative;
+            max-width: calc(100% - 30px);
+            margin: rem(24) auto rem(12);
+            padding: 0 rem(16) rem(12);
+            white-space: nowrap;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        &__arrow {
+            @include helper-effect-transition(opacity);
+            position: absolute;
+            top: rem(5);
+            font-size: 0;
+            display: block;
+            height: rem(16);
+            width: rem(30);
+            z-index: $setting-zi-element + 1;
+
+            &--hidden {
+                opacity: 0;
+            }
+
+            &--left {
+                left: rem(15);
+                background: linear-gradient(to right, $setting-color-white 0%, $setting-color-white 46%, $setting-color-transparent 92%, $setting-color-transparent 100%);
+
+                #{$name}__icon {
+                    left: 0;
+                }
+            }
+
+            &--right {
+                right: rem(15);
+                background: linear-gradient(to right, $setting-color-transparent 0%, $setting-color-transparent 8%, $setting-color-white 54%, $setting-color-white 100%);
+
+                #{$name}__icon {
+                    right: 0;
+                }
+            }
+        }
+
+        &__icon {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        &__tab {
+            display: none;
+            opacity: 0;
+
+            &--active {
+                display: block;
+                opacity: 1;
+            }
+        }
+
+        &__tab-close {
+            text-align: center;
+        }
+    }
+}
+
+@include shop-ui-navigation-header-mobile();

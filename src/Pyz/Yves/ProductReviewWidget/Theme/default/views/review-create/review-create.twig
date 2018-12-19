@@ -1,0 +1,13 @@
+{% extends template('widget') %}
+
+{% define data = {
+    form: _view.form
+} %}
+
+{% block body %}
+    {% include molecule('new-review-form', 'ProductReviewWidget') with {
+        data: {
+            form: data.form
+        }
+    } only %}
+{% endblock %}

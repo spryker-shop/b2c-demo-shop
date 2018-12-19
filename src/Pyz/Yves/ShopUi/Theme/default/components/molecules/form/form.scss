@@ -1,0 +1,192 @@
+@mixin shop-ui-form($name: '.form') {
+    $shop-ui-form-field-margin: rem(8);
+    $review-rating-field-width: rem(154);
+
+    #{$name} {
+        &__field {
+            padding: 0 rem(16) rem(16);
+
+            @include helper-breakpoint-media-min($md-min) {
+                padding-bottom: rem(27);
+            }
+
+            &--review {
+                padding: 0 0 rem(25);
+
+                @include helper-breakpoint-media-min($md-min) {
+                    padding-bottom: rem(28);
+                }
+            }
+
+            &--review-summary {
+                @include helper-breakpoint-media-min($md-min) {
+                    min-width: 0;
+                    width: calc(100% - #{$review-rating-field-width});
+                }
+            }
+
+            &--review-rating {
+                @include helper-breakpoint-media-min($md-min) {
+                    min-width: 0;
+                    width: auto;
+                    margin: rem(20) 0 0 auto;
+                }
+            }
+        }
+
+        &__actions {
+            text-align: right;
+
+            &--profile {
+                padding: rem(8) 0;
+
+                @include helper-breakpoint-media-max($lg-max) {
+                    display: flex;
+                    flex-direction: column-reverse;
+                }
+            }
+        }
+
+        &__action {
+            margin-top: $shop-ui-form-field-margin;
+            margin-left: $shop-ui-form-field-margin;
+
+            &--checkout,
+            &--login {
+                margin: 0;
+
+                &:not(:last-child) {
+                    margin-top: rem(30);
+                }
+            }
+        }
+
+        &--inline {
+            #{$name}__container {
+                display: flex;
+                flex-flow: row wrap;
+                align-items: flex-end;
+            }
+
+            #{$name}__fields {
+                float: left;
+                flex-grow: 1;
+                flex-basis: auto;
+            }
+
+            #{$name}__actions {
+                flex-grow: 0;
+                flex-basis: auto;
+            }
+
+            #{$name}__field {
+                padding-bottom: 0;
+                padding-right: 0;
+            }
+        }
+
+        &--checkout-actions {
+            #{$name}__actions {
+                padding-top: rem(15);
+                display: flex;
+                flex-direction: column-reverse;
+                align-items: flex-end;
+                @include helper-breakpoint-media-min($md-min) {
+                    padding-top: rem(29);
+                }
+            }
+        }
+
+        &--checkout-address-step,
+        &--checkout-payment-step {
+            .col {
+                @include helper-breakpoint-media-max($sm-max) {
+                    width: 100%;
+                }
+            }
+        }
+
+        &--login,
+        &--checkout-form-elements {
+            label,
+            .label {
+                display: block;
+                color: $setting-color-black;
+            }
+
+            .checkbox__container,
+            .toggler-checkbox__container {
+                display: flex;
+            }
+        }
+
+        &--pdp-review-form {
+            .label {
+                color: $setting-color-gray-6;
+
+                &::after {
+                    display: none;
+                }
+            }
+
+            input[type='text'],
+            textarea {
+                @include helper-effect-transition(all 0.4s ease);
+                font: fw(regular) rem(17)/rem(22) $setting-font-family;
+                color: $setting-color-gray-6;
+                padding: rem(10) rem(15);
+
+                &:focus {
+                    border-color: $setting-color-gray-5;
+                }
+
+                &:hover {
+                    background-color: $setting-color-gray-1;
+                }
+            }
+        }
+
+        &--reverse-actions {
+            #{$name}__actions {
+                display: flex;
+                flex-direction: column-reverse;
+                align-items: flex-end;
+            }
+        }
+
+        &--grid-indent {
+            .grid {
+                margin: 0 rem(-16);
+                max-width: none;
+            }
+        }
+
+        &__shipment-item {
+            &:not(:first-child) {
+                margin-top: rem(50);
+
+                @include helper-breakpoint-media-min($md-min) {
+                    margin-top: rem(40);
+                }
+            }
+        }
+
+        .label {
+            display: inline-block;
+            font: normal rem(15) $setting-font-family-additional;
+            margin-bottom: rem(6);
+
+            &--required {
+                &::after {
+                    content: '*';
+                    margin-left: rem(3);
+                    color: $setting-color-main;
+                }
+            }
+        }
+
+        @content;
+    }
+}
+
+@include shop-ui-form();

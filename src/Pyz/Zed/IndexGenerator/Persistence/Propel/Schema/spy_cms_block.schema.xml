@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<database xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:noNamespaceSchemaLocation="http://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\CmsBlock\Persistence" package="src.Orm.Zed.CmsBlock.Persistence">
+  <table name="spy_cms_block_glossary_key_mapping">
+    <index name="index-spy_cms_block_glossary_key_mapping-fk_cms_block">
+      <index-column name="fk_cms_block"/>
+    </index>
+    <index name="index-spy_cms_block_glossary_key_mapping-fk_glossary_key">
+      <index-column name="fk_glossary_key"/>
+    </index>
+  </table>
+  <table name="spy_cms_block">
+    <index name="index-spy_cms_block-fk_template">
+      <index-column name="fk_template"/>
+    </index>
+  </table>
+  <table name="spy_cms_block_store">
+    <index name="index-spy_cms_block_store-fk_cms_block">
+      <index-column name="fk_cms_block"/>
+    </index>
+    <index name="index-spy_cms_block_store-fk_store">
+      <index-column name="fk_store"/>
+    </index>
+  </table>
+</database>

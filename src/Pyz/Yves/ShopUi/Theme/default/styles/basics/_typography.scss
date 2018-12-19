@@ -1,0 +1,130 @@
+$font-calibre-url: 'https://s3.eu-central-1.amazonaws.com/spryker/fonts/calibre/';
+$font-circular-url: 'https://s3.eu-central-1.amazonaws.com/spryker/fonts/circular-pro/';
+$font-calibre-light: '#{$font-calibre-url}CalibreWeb-Light';
+$font-calibre-regular: '#{$font-calibre-url}CalibreWeb-Regular';
+$font-calibre-medium: '#{$font-calibre-url}CalibreWeb-Medium';
+$font-calibre-bold: '#{$font-calibre-url}CalibreWeb-Bold';
+$font-circular-normal: '#{$font-circular-url}lineto-circular-pro-book';
+$font-circular-medium: '#{$font-circular-url}lineto-circular-pro-medium';
+$font-circular-bold: '#{$font-circular-url}lineto-circular-pro-bold';
+
+@mixin basic-typography() {
+    @font-face {
+        font-family: Calibre;
+        src: url('#{$font-calibre-light}.woff2') format('woff2'), url('#{$font-calibre-light}.woff') format('woff');
+        font-weight: 300;
+        font-style: normal;
+    }
+
+    @font-face {
+        font-family: Calibre;
+        src: url('#{$font-calibre-regular}.woff2') format('woff2'), url('#{$font-calibre-regular}.woff') format('woff');
+        font-weight: 400;
+        font-style: normal;
+    }
+
+    @font-face {
+        font-family: Calibre;
+        src: url('#{$font-calibre-medium}.woff2') format('woff2'), url('#{$font-calibre-medium}.woff') format('woff');
+        font-weight: 500;
+        font-style: normal;
+    }
+
+    @font-face {
+        font-family: Calibre;
+        src: url('#{$font-calibre-bold}.woff2') format('woff2'), url('#{$font-calibre-bold}.woff') format('woff');
+        font-weight: 700;
+        font-style: normal;
+    }
+
+    @font-face {
+        font-family: Circular;
+        src: url('#{$font-circular-normal}.woff2') format('woff2'), url('#{$font-circular-normal}.woff') format('woff');
+        font-weight: 400;
+        font-style: normal;
+    }
+
+    @font-face {
+        font-family: Circular;
+        src: url('#{$font-circular-medium}.woff2') format('woff2'), url('#{$font-circular-medium}.woff') format('woff');
+        font-weight: 500;
+        font-style: normal;
+    }
+
+    @font-face {
+        font-family: Circular;
+        src: url('#{$font-circular-bold}.woff2') format('woff2'), url('#{$font-circular-bold}.woff') format('woff');
+        font-weight: 700;
+        font-style: normal;
+    }
+
+    html {
+        font-size: 100%;
+    }
+
+    body {
+        @include helper-font-size(default);
+        @include helper-font-weight(regular);
+        @include helper-font-line-height(default);
+        position: relative;
+        background-color: $setting-color-white;
+        color: $setting-color-text;
+        font-family: $setting-font-family;
+    }
+
+    @each $i in (1, 2, 3, 4, 5, 6) {
+        h#{$i} {
+            @include helper-heading($i);
+        }
+    }
+
+    h4 {
+        font-family: $setting-font-family;
+        font-weight: fw(light);
+    }
+
+    a {
+        color: $setting-color-text;
+        text-decoration: none;
+
+        &:hover {
+            color: $setting-color-alt;
+            text-decoration: underline;
+        }
+    }
+
+    b,
+    strong {
+        @include helper-font-weight(bold);
+    }
+
+    i,
+    em,
+    cite {
+        font-style: italic;
+    }
+
+    hr {
+        @include helper-ui-clearfix;
+        border-bottom: none;
+        margin: rem(8) 0;
+    }
+
+    small {
+        @include helper-font-size(small);
+    }
+
+    big {
+        @include helper-font-size(big);
+    }
+
+    p,
+    blockquote,
+    iframe {
+        margin: rem(8) 0;
+    }
+
+    iframe {
+        max-width: 100%;
+    }
+}

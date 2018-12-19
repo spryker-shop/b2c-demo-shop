@@ -1,0 +1,55 @@
+@mixin shop-ui-flash-message($name: '.flash-message') {
+    #{$name} {
+        @include helper-visibility-invisible;
+        @include helper-effect-transition(max-height opacity visibility, $setting-effect-default-duration * 2);
+        max-height: 0;
+        overflow-y: hidden;
+        font-size: $setting-font-size-base + 1;
+        font-family: $setting-font-family-additional;
+
+        &__content {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+
+            &::after {
+                display: none;
+            }
+        }
+
+        &__static-link {
+            color: $setting-color-alpha-5;
+            flex-shrink: 0;
+        }
+
+        &__message {
+            padding: rem(20) rem(16);
+            color: $setting-color-white;
+
+            &--info {
+                color: $setting-color-black;
+            }
+        }
+
+        &--show {
+            @include helper-visibility-visible;
+            max-height: rem(128);
+        }
+
+        @each $action, $setting-color-action in $setting-color-actions {
+            @include shop-ui-flash-message-action($action, $setting-color-action);
+        }
+
+        @content;
+    }
+}
+
+@mixin shop-ui-flash-message-action($action, $setting-color-action) {
+    &--#{$action} {
+        background-color: $setting-color-action;
+    }
+
+    @content;
+}
+
+@include shop-ui-flash-message();

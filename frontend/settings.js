@@ -12,6 +12,12 @@ const context = process.cwd();
 
 // define project relative paths to context
 const paths = {
+    // locate the typescript configuration json file
+    tsConfig: './tsconfig.json',
+
+    // assets folder
+    assets: './frontend/assets',
+
     // public folder
     public: './public/Yves/assets',
 
@@ -32,12 +38,19 @@ const paths = {
     }
 };
 
+// define relative urls to site host (/)
+const urls = {
+    // assets base url
+    assets: '/assets'
+};
+
 // export settings
 module.exports = {
     name,
     theme,
     context,
     paths,
+    urls,
 
     // define settings for suite-frontend-builder finder
     find: {

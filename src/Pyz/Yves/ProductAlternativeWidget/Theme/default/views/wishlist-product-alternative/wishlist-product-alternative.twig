@@ -1,0 +1,88 @@
+{% extends template('widget') %}
+
+{% define data = {
+    item: _widget.item,
+    wishlistName: _widget.wishlistName,
+    products: _widget.products
+} %}
+
+{% set wishlistItemSku = data.item.sku %}
+
+{% block body %}
+    {% if data.products is not empty %}
+        <tr>
+            <td class="is-hidden-sm-only"></td>
+            <td colspan="4" class="spacing spacing--inner spacing--reset spacing-top spacing-top--inner spacing-top--bigger">
+                <h4 class="title title--medium">{{ 'product_alternative_widget.alternative_for' | trans({name: data.item.name}) }}</h4>
+            </td>
+        </tr>
+        <tr>
+            <td class="is-hidden-sm-only"></td>
+            <td colspan="4" class="spacing-x spacing-x--inner spacing-x--reset spacing-bottom spacing-bottom--inner spacing-bottom--bigger">
+                <table class="table table--expand">
+                {% for item in data.products %}
+                    {% if loop.index == 4 %}
+                        <tr class="table table__tr--with-border-bottom js-product-alternative-{{- wishlistItemSku -}}__show-all-target">
+                            <td class="spacing-bottom spacing-bottom--inner spacing-bottom--big" colspan="5">
+                                <div class="text-center">
+                                    <button type="button" class="button button--hollow js-product-alternative-{{- wishlistItemSku -}}__show-all-trigger">{{ 'product_alternative_widget.show_all' | trans }}</button>
+                                </div>
+                            </td>
+                        </tr>
+                        {% include molecule('toggler-click') with {
+                            attributes: {
+                                'trigger-selector': '.js-product-alternative-' ~ wishlistItemSku ~ '__show-all-trigger',
+                                'target-selector': '.js-product-alternative-' ~ wishlistItemSku ~ '__show-all-target',
+                                'class-to-toggle': 'is-hidden'
+                            }
+                        } only %}
+                    {% endif %}
+                    <tr class="{{ loop.index > 3 ? 'js-product-alternative-' ~ wishlistItemSku ~ '__show-all-target is-hidden' : '' }}">
+                        <td>
+                            {% if item.images is defined and item.images is not empty %}
+                                {% include atom('thumbnail') with {
+                                    modifiers: ['min-size', 'wishlist'],
+                                    attributes: {
+                                        alt: item.name,
+                                        src: item.images.0.externalUrlSmall,
+                                        title: item.name
+                                    }
+                                } only %}
+                            {% endif %}
+                        </td>
+                        <td>
+                            <ul class="menu menu--inline menu--middle">
+                                <li><strong><a href="{{ item.url }}">{{ item.name }}</a></strong></li>
+                                <li>{{ item.sku }}</li>
+                                {% for attribute in item.superAttributesDefinition %}
+                                    {% if item.attributes[attribute] is defined %}
+                                        <li>{{ ('product.attribute.' ~ attribute) | trans }}: <span class="title title--medium">{{ item.attributes[attribute] }}</span></li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </td>
+                        <td nowrap="nowrap">
+                            {% if item.price is not null %}
+                                {% include molecule('price') with {
+                                    modifiers: ['wishlist'],
+                                    data: {
+                                        amount: item.price | money,
+                                        originalAmount: item.prices.ORIGINAL is not defined or item.prices.ORIGINAL is empty ? null : (item.prices.ORIGINAL | money)
+                                    }
+                                } only %}
+                            {% else %}
+                                N/A
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a class="link link--user-account float-right" href="{{ url('wishlist/add-item', {sku: item.sku, 'product-id': item.idProductConcrete, 'wishlist-name': data.wishlistName}) }}">
+                                {{ 'product_alternative_widget.add_to_wishlist' | trans}}
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </table>
+            </td>
+        </tr>
+    {% endif %}
+{% endblock %}

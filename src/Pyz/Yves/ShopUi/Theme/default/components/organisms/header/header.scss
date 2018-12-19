@@ -1,0 +1,168 @@
+@mixin shop-ui-header($name: '.header') {
+    #{$name} {
+        position: relative;
+        background-color: $setting-color-white;
+        z-index: $setting-zi-header;
+        padding-top: rem(6);
+        padding-bottom: rem(14);
+        border-bottom: rem(1) solid $setting-color-gray-3;
+
+        &--border-less-bottom {
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        &__row {
+            padding: 0 rem(16);
+        }
+
+        &__navigation-top {
+            position: relative;
+            z-index: $setting-zi-header + 3;
+        }
+
+        &__search-form {
+            position: relative;
+            z-index: $setting-zi-header + 2;
+        }
+
+        &__navigation-main {
+            position: relative;
+            z-index: $setting-zi-header + 1;
+        }
+
+        &__overlay-shadow {
+            @include helper-effect-transition(opacity visibility, 400ms, ease-in-out);
+            background-color: $setting-color-black;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            z-index: $setting-zi-underside;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        &__search-overlay {
+            position: absolute;
+            top: 0;
+            z-index: $setting-zi-search-suggestions;
+            visibility: hidden;
+
+            &.active {
+                visibility: visible;
+
+                #{$name}__overlay-shadow {
+                    @include helper-effect-transition(opacity visibility, 400ms, ease-in-out);
+                    visibility: visible;
+                    opacity: 0.4;
+                }
+
+                #{$name}__search-overlay-container {
+                    @include helper-effect-transition(all);
+                    transform: scaleY(1);
+                    opacity: 1;
+                    visibility: visible;
+                }
+            }
+        }
+
+        &__search-overlay-container {
+            @include helper-effect-transition(all);
+            padding: rem(34) rem(30);
+            background: $setting-color-white;
+            min-width: 100vw;
+            transform-origin: top center;
+            transform: scaleY(0);
+            opacity: 0;
+
+            @include helper-breakpoint-media-min($md-min) {
+                min-width: rem(480);
+            }
+        }
+
+        &__search-open {
+            cursor: pointer;
+
+            &::before {
+                content: '';
+                display: block;
+                width: rem(85);
+                height: rem(25);
+                float: left;
+                border-bottom: rem(1) solid $setting-color-gray-4;
+            }
+        }
+
+        &__search-open-icon {
+            margin-left: rem(10);
+            vertical-align: bottom;
+        }
+
+        &__search-close {
+            z-index: $setting-zi-search-suggestions;
+            cursor: pointer;
+            margin-bottom: rem(25);
+            width: rem(20);
+            padding: 0;
+
+            @include helper-breakpoint-media-min($md-min) {
+                padding: rem(34) rem(30);
+                position: absolute;
+                right: 0;
+                top: 0;
+                width: auto;
+            }
+        }
+
+        &__search-close-icon {
+            width: rem(20);
+            height: rem(20);
+
+            @include helper-breakpoint-media-min($md-min) {
+                width: rem(16);
+                height: rem(16);
+            }
+        }
+
+        &--checkout {
+            padding-top: 0;
+
+            @include helper-breakpoint-media-min($md-min) {
+                padding-top: rem(18);
+            }
+
+            #{$name}__navigation-top,
+            .container {
+                position: relative;
+            }
+        }
+
+        &__back-link {
+            position: absolute;
+            top: 50%;
+            left: rem(16);
+            color: $setting-color-gray-5;
+            font-size: 0;
+            line-height: rem(19);
+            font-weight: fw(medium);
+            transform: translateY(-50%);
+            padding: rem(5) rem(5) rem(5) 0;
+            z-index: $setting-zi-side-drawer;
+
+            @include helper-breakpoint-media-min($md-min) {
+                font-size: rem(19);
+                padding: 0;
+            }
+
+            &:hover {
+                text-decoration: none;
+            }
+        }
+
+        @content;
+    }
+}
+
+@include shop-ui-header();

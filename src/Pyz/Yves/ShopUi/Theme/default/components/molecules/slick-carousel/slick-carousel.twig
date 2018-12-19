@@ -1,0 +1,27 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'slick-carousel',
+    tag: 'slick-carousel'
+} %}
+
+{% define data = {
+    slides: [],
+    containerClass: ''
+} %}
+
+{% define attributes = {
+    'data-json': ''
+} %}
+
+{% block body %}
+
+    <div class="{{config.name}}__container {{ data.containerClass }}">
+        {% block slides %}
+            {% for slide in data.slides %}
+                    {{ slide }}
+            {% endfor %}
+        {% endblock %}
+    </div>
+
+{% endblock %}

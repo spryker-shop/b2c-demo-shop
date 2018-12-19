@@ -1,0 +1,139 @@
+{% extends template('page-layout-customer', 'CustomerPage') %}
+
+{% define data = {
+    order: _view.order,
+    orderItems: _view.items,
+
+    title: 'customer.account.order_history' | trans,
+    activePage: 'order'
+} %}
+
+{% block customerContent %}
+    {{ widgetBlock('CustomerReorderWidgetPlugin', 'formStart', data.order) }}
+
+    <div class="box">
+        {% include molecule('title-box', 'CustomerPage') with {
+            data: {
+                title: 'customer.profile.order_details' | trans
+            }
+        } only %}
+
+        <div class="grid grid--justify">
+            <ul class="col menu menu--customer-account">
+                <li class="menu__item">
+                    {{ 'customer.order.order_id' | trans }}:
+                    <strong>{{ _view.order.orderReference }}</strong>
+                </li>
+
+                <li class="menu__item">
+                    {{ 'customer.order.date' | trans }}:
+                    <strong>{{ _view.order.createdAt | formatDateTime }}</strong>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="box">
+        {% embed molecule('order-detail-table', 'CustomerPage') with {
+            data: {
+                items: data.orderItems,
+                currencyIsoCode: data.order.currencyIsoCode
+            },
+            embed: {
+                order: data.order
+            }
+        } only %}
+            {% block headerRow %}
+                <td></td>
+                {{parent()}}
+            {% endblock %}
+
+            {% block bundleDetailRow %}
+                <td></td>
+                {{parent()}}
+            {% endblock %}
+
+            {% block detailRow %}
+                <td></td>
+                {{parent()}}
+            {% endblock %}
+
+            {% block row %}
+                <td>
+                    {{ widgetBlock('CustomerReorderWidgetPlugin', 'formCheckbox', embed.order, concreteItem) }}
+                </td>
+                {{parent()}}
+            {% endblock %}
+        {% endembed %}
+
+        <div class="title-box">
+            {% include molecule('order-summary', 'CustomerPage') with {
+                class: 'menu menu--customer-account menu--order-summary text-right',
+                data: {
+                    order: data.order
+                }
+            } only %}
+        </div>
+    </div>
+
+    <div class="grid grid--justify">
+        <div class="col--lg-6 col--sm-12">
+            <div class="box">
+                {% include molecule('title-box', 'CustomerPage') with {
+                    data: {
+                        title: 'customer.order.shipping_address' | trans
+                    }
+                } only %}
+
+                {% include molecule('display-address', 'CustomerPage') with {
+                    class: 'menu menu--customer-account',
+                    data: {
+                        address: data.order.shippingAddress
+                    }
+                } only %}
+            </div>
+        </div>
+
+        <div class="col--lg-6 col--sm-12">
+            <div class="box">
+                {% include molecule('title-box', 'CustomerPage') with {
+                    data: {
+                        title: 'customer.order.billing_address' | trans
+                    }
+                } only %}
+
+                {% include molecule('display-address', 'CustomerPage') with {
+                    class: 'menu menu--customer-account',
+                    data: {
+                        address: data.order.billingAddress
+                    }
+                } only %}
+            </div>
+        </div>
+    </div>
+
+    <div class="grid grid--justify">
+        <div class="col--lg-6 col--sm-12">
+            <div class="box">
+                {% include molecule('title-box', 'CustomerPage') with {
+                    data: {
+                        title: 'customer.order.shipment' | trans
+                    }
+                } only %}
+
+                <ul class="menu menu--customer-account">
+                    {% for expense in data.order.expenses %}
+                        {% if expense.type == 'SHIPMENT_EXPENSE_TYPE' %}
+                            <li class="menu__item">{{ expense.name | trans }}</li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    {{ widgetBlock('CustomerReorderWidgetPlugin', 'formActions', data.order) }}
+    {{ widgetBlock('CustomerReorderWidgetPlugin', 'formEnd', data.order) }}
+{% endblock %}

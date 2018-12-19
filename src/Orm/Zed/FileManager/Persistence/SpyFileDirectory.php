@@ -7,7 +7,7 @@
 
 namespace Orm\Zed\FileManager\Persistence;
 
-use Orm\Zed\FileManager\Persistence\Base\SpyFileDirectory as BaseSpyFileDirectory;
+use Spryker\Zed\FileManager\Persistence\Propel\AbstractSpyFileDirectory as BaseSpyFileDirectory;
 
 /**
  * Skeleton subclass for representing a row from the 'spy_file_directory' table.

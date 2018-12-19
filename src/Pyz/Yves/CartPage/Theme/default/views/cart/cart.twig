@@ -1,4 +1,4 @@
-{% extends template('page-layout-main') %}
+{% extends template('page-layout-cart', 'CartPage') %}
 
 {% define data = {
     cart: _view.cart,
@@ -10,65 +10,53 @@
     title: 'cart.cart' | trans
 } %}
 
-{% block breadcrumbs %}
-    {% widget 'CheckoutBreadcrumbWidget' args [data.cart] only %}{% endwidget %}
-{% endblock %}
-
 {% block title %}
     {% widget 'CartOperationsWidget' args [data.cart] use view('cart-operations-title', 'MultiCartWidget') only %}{% endwidget %}
 {% endblock %}
 
 {% block content %}
-    {% set canEditCart = can('WriteSharedCartPermissionPlugin', data.cart.idQuote) %}
+    {% if data.cart.idQuote is not empty %}
+        <div>
+        {% widget 'CreateShoppingListFromCartWidget' args [data.cart.idQuote] only %}{% endwidget %}
+        </div>
+    {% endif %}
+
     {% if data.cart.items is empty %}
-        <div class="box text-center">
-            {% include atom('icon') with {
-                modifiers: ['biggest'],
-                class: 'text-alt',
-                data: {
-                    name: 'shopping-cart'
-                }
-            } only %}
-            <h6>{{ 'cart.empty' | trans }}</h6>
+        <div class="page-layout-cart__empty text-center">
+            <h1>{{ data.title }}</h1>
+            <h6 class="spacing-top spacing-top--bigger">{{ 'cart.empty' | trans }}</h6>
         </div>
     {% else %}
-        <div class="grid">
-            <div class="col col--sm-12 col--xl-8">
-                {% for cartItem in data.cartItems %}
-                    {% include molecule('cart-item', 'CartPage') with {
-                        class: 'box',
-                        data: {
-                            cart: data.cart,
-                            cartItem: cartItem,
-                            attributes: data.attributes[cartItem.sku] | default([])
-                        }
-                    } only %}
-                {% endfor %}
-
-                {% widget 'CartDiscountPromotionProductListWidget' args [data.cart, data.request] only %}{% endwidget %}
-
-                {% if canEditCart and data.cart.idQuote is not empty %}
-                    {% widget 'CartOperationsWidget' args [data.cart] use view('cart-operations-actions', 'MultiCartWidget') only %}{% endwidget %}
-                {% endif %}
+        <div class="grid spacing-x spacing-x--big">
+            <div class="col col--sm-12 col--lg-8">
+                <div class="page-layout-cart__col page-layout-cart__col--content">
+                    <div class="cart-box grid grid--middle grid--justify">
+                        <h3 class="col">{{ 'cart.title_content' | trans }}</h3>
+                        <span class="cart-box__quantity col">{{ app['cart.quantity'] }} {{ 'item' | trans }}</span>
+                    </div>
+                    <div class="page-layout-cart__items-wrap">
+                        {% for cartItem in data.cartItems %}
+                            {% include molecule('product-item') with {
+                                data: {
+                                    product: data.cart,
+                                    productItem: cartItem,
+                                    attributes: data.attributes[cartItem.sku] | default([])
+                                }
+                            } only %}
+                        {% endfor %}
+                    </div>
+                    {% widget 'CartDiscountPromotionProductListWidget' args [data.cart, data.request] only %}{% endwidget %}
+                </div>
             </div>
 
-            <div class="col col--sm-12 col--xl-4">
-                <div class="box">
-                    {% widget 'CartNoteFormWidget' args [data.cart] only %}{% endwidget %}
-
-                    {% if not is_granted('ROLE_USER') or canEditCart %}
-                        {% widget 'DiscountVoucherFormWidget' only %}
-                            {% block body %}
-                                {{ parent() }}
-                                <hr />
-                            {% endblock %}
-                        {% endwidget %}
-                    {% endif %}
-                    {% if canEditCart and data.cart.idQuote is not empty %}
-                        {% widget 'CreateShoppingListFromCartWidget' args [data.cart.idQuote] only %}{% endwidget %}
-                        <hr />
-                    {% endif %}
-
+            <div class="col col--sm-12 col--lg-4">
+                <div class="page-layout-cart__col page-layout-cart__col--sidebar">
+                    <h3 class="cart-box">{{ 'cart.title_sidebar' | trans }}</h3>
+                    <div class="cart-box cart-box--voucher cart-box--reset-spacing">
+                        {% if not is_granted('IS_AUTHENTICATED_FULLY') or can('WriteSharedCartPermissionPlugin', data.cart.idQuote) %}
+                            {% widget 'DiscountVoucherFormWidget' only %}{% endwidget %}
+                        {% endif %}
+                    </div>
                     {% include molecule('cart-summary', 'CartPage') with {
                         data: {
                             cart: data.cart,
@@ -79,8 +67,5 @@
             </div>
         </div>
     {% endif %}
-
     {% widget 'UpSellingProductsWidget' args [data.cart] only %}{% endwidget %}
 {% endblock %}
-
-{% block footer %}{% endblock %}

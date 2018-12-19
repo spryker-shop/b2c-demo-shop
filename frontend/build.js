@@ -1,16 +1,11 @@
-// require suite-frontend-builder
-const builder = require('@spryker/suite-frontend-builder');
+// get the webpack compiler
+const compiler = require('./libs/compiler');
 
-// require project settings
-const settings = require('./settings');
-
-// get the mode arg from `npm run xxx` script
-// defined in package.json
+// get the mode arg from `npm run xxx` script defined in package.json
 const [mode] = process.argv.slice(2);
 
-// register custom development configuration factory
-require('./config/development');
+// get the webpack configuration associated with the provided mode
+const config = require(`./configs/${mode}`);
 
-// build the project using the configuration factory
-// associated with the provided mode
-builder.build(settings, mode);
+// build the project
+compiler.compile(config);

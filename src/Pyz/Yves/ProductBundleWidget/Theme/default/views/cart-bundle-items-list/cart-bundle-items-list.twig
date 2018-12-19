@@ -1,0 +1,15 @@
+{% extends template('widget') %}
+
+{% define data = {
+    items: _widget.bundleItems
+} %}
+
+{% block body %}
+    {% if data.items %}
+        {% include molecule('cart-bundle-list', 'ProductBundleWidget') with {
+            data: {
+                items: data.items
+            }
+        } only %}
+    {% endif %}
+{% endblock %}

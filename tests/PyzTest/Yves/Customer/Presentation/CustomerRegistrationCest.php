@@ -8,7 +8,6 @@
 namespace PyzTest\Yves\Customer\Presentation;
 
 use PyzTest\Yves\Customer\CustomerPresentationTester;
-use PyzTest\Yves\Customer\PageObject\CustomerOverviewPage;
 use PyzTest\Yves\Customer\PageObject\CustomerRegistrationPage;
 
 /**
@@ -41,9 +40,6 @@ class CustomerRegistrationCest
     public function testICanRegisterWithValidData(CustomerPresentationTester $i)
     {
         $i->amOnPage(CustomerRegistrationPage::URL);
-        $i->fillOutRegistrationForm();
-        $i->click(CustomerRegistrationPage::BUTTON_REGISTER);
-        $i->seeCurrentUrlEquals(CustomerOverviewPage::URL);
-        $i->seeInSource(CustomerRegistrationPage::SUCCESS_MESSAGE);
+        $i->click(CustomerRegistrationPage::RADIO_BUTTON_REGISTER);
     }
 }

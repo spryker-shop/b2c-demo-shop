@@ -1,0 +1,50 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'order-table',
+    tag: 'div'
+} %}
+
+{% define data = {
+    orders: required
+} %}
+
+{% block body %}
+    {% if data.orders is empty %}
+        <p>{{ 'customer.account.no_order' | trans }}</p>
+    {% else %}
+        <table class="table table--expand table--customer-account table--order">
+            <thead>
+                <tr>
+                    <th>{{ 'customer.order.order_id' | trans }}</th>
+                    <th>{{ 'customer.order.date' | trans }}</th>
+                    <th>{{ 'customer.order.total' | trans }}</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in data.orders %}
+                    <tr class="table__tr table__tr--with-border">
+                        <td>{{ order.orderReference }}</td>
+                        <td>{{ date(order.createdAt) | formatDateTime }}</td>
+                        <td>{{ order.totals.grandTotal | default(0) | money(true, order.currencyIsoCode) }}</td>
+                        <td class="text-right">
+                            <ul class="menu menu--inline menu--customer-account menu--actions">
+                                <li class="menu__item">
+                                    <a class="menu__link" href="{{ path('customer/order/details', {'id': order.idSalesOrder}) }}">
+                                        {{ 'customer.order.view_order' | trans }}
+                                    </a>
+                                </li>
+                                {% if widgetExists('CustomerReorderWidgetPlugin') %}
+                                    <li class="menu__item">
+                                        {{ widgetBlock('CustomerReorderWidgetPlugin', 'reorderAction', order) }}
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock %}

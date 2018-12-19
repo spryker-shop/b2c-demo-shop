@@ -1,0 +1,34 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'breadcrumb',
+    tag: 'ul'
+} %}
+
+{% define data = {
+    steps: [],
+    startWithHome: true
+} %}
+
+{% block body %}
+    {% if data.startWithHome %}
+        {% include molecule('breadcrumb-step') with {
+            data: {
+                url: url('home'),
+                label: 'global.home' | trans
+            }
+        } only %}
+    {% endif %}
+    {% block breadcrumbs %}
+        {% for step in data.steps %}
+            {% include molecule('breadcrumb-step') with {
+                data: {
+                    url: step.url | default,
+                    label: step.label | default,
+                    itemProp: step.itemProp | default,
+                    withChevron: step.withChevron is defined ? step.withChevron : true
+                }
+            } only %}
+        {% endfor %}
+    {% endblock %}
+{% endblock %}

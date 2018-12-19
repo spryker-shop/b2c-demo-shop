@@ -1,0 +1,37 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'order-summary',
+    tag: 'ul'
+} %}
+
+{% define data = {
+    order: required
+} %}
+
+{% block body %}
+    <li class="menu__item">
+        {{ 'customer.order.subTotal' | trans }}: 
+        {{ data.order.totals.subtotal | money(true, data.order.currencyIsoCode) }}
+    </li>
+    {% for expense in data.order.expenses %}
+        <li class="menu__item">
+        {% if expense.type == 'SHIPMENT_EXPENSE_TYPE' %}{{ 'customer.order.shipment' | trans }} {% endif %}{{ expense.name | trans }}:
+            {{ expense.unitPrice | money(true, data.order.currencyIsoCode) }}
+        </li>
+    {% endfor %}
+    <li class="menu__item">
+        {{ 'customer.order.discount.total' | trans }}: 
+        - {{ data.order.totals.discountTotal | money(true, data.order.currencyIsoCode) }}
+    </li>
+    <li class="menu__item">
+        {% if data.order.totals.canceledTotal %}
+            {{ 'customer.order.canceledTotal' | trans }}: 
+            - {{ data.order.totals.canceledTotal | money(true, data.order.currencyIsoCode) }}
+        {% endif %}
+    </li>
+    <li class="menu__item">
+        <strong>{{ 'customer.order.grandTotal' | trans }}: 
+        {{ data.order.totals.grandTotal | money(true, data.order.currencyIsoCode) }}</strong>
+    </li>
+{% endblock %}

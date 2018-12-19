@@ -1,0 +1,18 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'title-box'
+} %}
+
+{% define data = {
+    title: required
+} %}
+
+{% block class %}{{ parent() }} title-box grid grid--justify grid--middle{% endblock %}
+
+{% block body %}
+    {% block title %}
+        <h5 class="title title--uppercase title--h6 col">{{ data.title }}</h5>
+    {% endblock %}
+    {% block additionalContent %}{% endblock %}
+{% endblock %}

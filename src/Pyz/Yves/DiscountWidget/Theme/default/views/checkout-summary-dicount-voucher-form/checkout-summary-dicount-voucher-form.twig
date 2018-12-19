@@ -1,0 +1,14 @@
+{% extends template('widget') %}
+
+{% define data = {
+    form: _widget.voucherForm
+} %}
+
+{% block body %}
+    {% include molecule('cart-discount-form', 'DiscountWidget') with {
+        modifiers: ['checkout'],
+        data: {
+            form: data.form
+        }
+    } only %}
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends template('page-layout-main') %}
+
+{% define data = {
+    error: error,
+    title: 'error.404' | trans
+} %}
+
+{% block contentClass %}spacing-bottom spacing-bottom--biggest{% endblock %}
+
+{% block content %}
+    <p class="text-center text-big spacing-bottom spacing-bottom--inner spacing-bottom--biggest">{{ data.error }}</p>
+{% endblock %}

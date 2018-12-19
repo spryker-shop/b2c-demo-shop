@@ -13,15 +13,6 @@ use Spryker\Client\PersistentCart\PersistentCartDependencyProvider as SprykerPer
 class PersistentCartDependencyProvider extends SprykerPersistentCartDependencyProvider
 {
     /**
-     * @return \Spryker\Client\PersistentCartExtension\Dependency\Plugin\QuoteUpdatePluginInterface[]
-     */
-    protected function getQuoteUpdatePlugins(): array
-    {
-        return [
-        ];
-    }
-
-    /**
      * @return \Spryker\Client\PersistentCartExtension\Dependency\Plugin\PersistentCartChangeExpanderPluginInterface[]
      */
     protected function getChangeRequestExtendPlugins(): array

@@ -122,7 +122,6 @@ class DataImportDependencyProvider extends SprykerDataImportDependencyProvider
         return [
             [new CategoryDataImportPlugin(), DataImportConfig::IMPORT_TYPE_CATEGORY_TEMPLATE],
             new PriceProductDataImportPlugin(),
-            new PriceProductDataImportPlugin(),
             new ProductDiscontinuedDataImportPlugin(),
             new ProductAlternativeDataImportPlugin(),
             new SalesOrderThresholdDataImportPlugin(),

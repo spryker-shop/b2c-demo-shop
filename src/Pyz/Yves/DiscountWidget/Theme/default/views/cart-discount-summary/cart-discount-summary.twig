@@ -1,0 +1,56 @@
+{% extends template('widget') %}
+
+{% define data = {
+    voucherDiscounts: _widget.cart.voucherDiscounts,
+    ruleDiscounts: _widget.cart.cartRuleDiscounts,
+    discountTotal: _widget.cart.totals.discounttotal
+} %}
+
+{% block body %}
+    {% if data.discountTotal %}
+        {% if data.voucherDiscounts is not empty %}
+            <li class="cart-summary__item spacing-y spacing-y--bigger">
+                <a class="float-right text-small" href="{{ url('discount/voucher/clear') }}">
+                    {% include atom('icon') with {
+                        modifiers: ['smaller'],
+                        data: {
+                            name: 'times'
+                        }
+                    } only %}
+                    {{ 'cart.vouchers.clear-all' | trans }}
+                </a>
+                <strong>{{ 'cart.vouchers' | trans }}</strong>
+
+                <ul>
+                    {% for voucherDiscount in data.voucherDiscounts %}
+                        <li class="grid grid--justify">
+                            <span class="col col--sm-8">
+                                {{ voucherDiscount.displayName }}
+                                <br/>
+                                <a class="text-small" href="{{ url('discount/voucher/remove', {'code': voucherDiscount.voucherCode}) }}">
+                                    {{ 'cart.voucher.remove' | trans }}
+                                </a>
+                            </span>
+                            <span class="col col--expand text-right">- {{ voucherDiscount.amount | money }}</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <hr />
+            </li>
+        {% endif %}
+
+        {% if data.ruleDiscounts is not empty %}
+            <li class="cart-summary__item spacing-y spacing-y--bigger">
+                <ul>
+                    {% for ruleDiscount in data.ruleDiscounts %}
+                        <li class="grid grid--justify">
+                            <span class="col col--sm-8">{{ ruleDiscount.displayName }}</span>
+                            <span class="col col--expand text-right">- {{ ruleDiscount.amount | money }}</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <hr />
+            </li>
+        {% endif %}
+    {% endif %}
+{% endblock %}

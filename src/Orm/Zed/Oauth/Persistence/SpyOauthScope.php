@@ -7,7 +7,7 @@
 
 namespace Orm\Zed\Oauth\Persistence;
 
-use Orm\Zed\Oauth\Persistence\Base\SpyOauthScope as BaseSpyOauthScope;
+use Spryker\Zed\Oauth\Persistence\Propel\AbstractSpyOauthScope as BaseSpyOauthScope;
 
 /**
  * Skeleton subclass for representing a row from the 'spy_oauth_scope' table.

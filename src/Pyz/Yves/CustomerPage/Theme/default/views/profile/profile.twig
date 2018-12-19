@@ -1,0 +1,58 @@
+{% extends template('page-layout-customer', 'CustomerPage') %}
+
+{% define data = {
+    forms: {
+        profile: _view.profileForm,
+        password: _view.passwordForm
+    },
+
+    title: 'customer.account.profile_data' | trans,
+    activePage: 'profile'
+} %}
+{% block customerContent %}
+    <div class="grid grid--justify">
+        <div class="col--lg-6 col--sm-12">
+            {% include molecule('customer-form', 'CustomerPage') with {
+                class: 'box',
+                data: {
+                    title: 'customer.profile.update' | trans,
+                    form: data.forms.profile,
+                    layout: {
+                        salutation: 'col col--sm-12 col--lg-4 col--xl-4',
+                        first_name: 'col col--sm-12 col--lg-4 col--xl-4',
+                        last_name: 'col col--sm-12 col--lg-4 col--xl-4'
+                    },
+                    submit: {
+                        enable: true
+                    }
+                }
+            } only %}
+        </div>
+
+        <div class="col--lg-6 col--sm-12">
+            {% include molecule('customer-form', 'CustomerPage') with {
+                class: 'box',
+                data: {
+                    title: 'customer.password.update' | trans,
+                    form: data.forms.password,
+                    submit: {
+                        enable: true
+                    }
+                }
+            } only %}
+        </div>
+
+        <div class="col--lg-6 col--sm-12">
+            <div class="box">
+                {% include molecule('title-box', 'CustomerPage') with {
+                    data: {
+                        title: "customer.profile.delete" | trans
+                    }
+                } only %}
+
+                <p>{{ "customer.profile.delete.description" | trans }}</p>
+                <a href="{{url('customer/delete')}}" class="button button--alert">{{ "customer.profile.delete" | trans }}</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,23 @@
+@mixin shop-ui-logo ($name: '.logo') {
+    #{$name} {
+        padding: rem(6);
+
+        @include helper-breakpoint-media-max($sm-max) {
+            border-bottom: rem(1) solid $setting-color-gray-3;
+        }
+
+        &__link {
+            @include helper-breakpoint-media-max($sm-max) {
+                width: rem(120);
+            }
+        }
+
+        &--checkout {
+            @include helper-breakpoint-media-max($sm-max) {
+                padding: rem(22) rem(13);
+            }
+        }
+    }
+}
+
+@include shop-ui-logo();
