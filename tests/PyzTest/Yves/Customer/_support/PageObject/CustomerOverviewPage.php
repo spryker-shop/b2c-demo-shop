@@ -18,10 +18,10 @@ class CustomerOverviewPage extends Customer
     public const BOX_HEADLINE_BILLING_ADDRESS = 'Default Billing Address';
     public const BOX_HEADLINE_SHIPPING_ADDRESS = 'Default Shipping Address';
 
-    public const LINK_TO_PROFILE_PAGE = '//a[@data-id="sidebar-profile"]';//'Profile';
-    public const LINK_TO_ADDRESSES_PAGE = '//a[@data-id="sidebar-address"]';//'Addresses';
-    public const LINK_TO_ORDERS_PAGE = '//a[@data-id="sidebar-order"]';//'Orders History';
-    public const LINK_TO_NEWSLETTER_PAGE = '//a[@data-id="sidebar-newsletter"]';//'Newsletter';
+    public const LINK_TO_PROFILE_PAGE = '[data-qa="customer-account-sidebar"] a[data-id="sidebar-profile"]';//'Profile';
+    public const LINK_TO_ADDRESSES_PAGE = '[data-qa="customer-account-sidebar"] a[data-id="sidebar-address"]';//'Addresses';
+    public const LINK_TO_ORDERS_PAGE = '[data-qa="customer-account-sidebar"] a[data-id="sidebar-order"]';//'Orders History';
+    public const LINK_TO_NEWSLETTER_PAGE = '[data-qa="customer-account-sidebar"] a[data-id="sidebar-newsletter"]';//'Newsletter';
 
     public const INFO_TEXT_ADD_SHIPPING_ADDRESS = 'Please Specify Shipping Address';
     public const INFO_TEXT_ADD_BILLING_ADDRESS = 'Please Specify Billing Address';

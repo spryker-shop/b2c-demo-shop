@@ -13,7 +13,7 @@
 {% block body %}
     <div class="{{config.name}}__overlay {{attributes['trigger-selector']}}"></div>
 
-    <aside class="{{config.name}}__drawer">
+    <aside class="{{ component.renderClass(config.name ~ '__drawer', modifiers) }}">
 
         <div class="{{config.name}}__top-bar grid grid--justify">
             {% block topBar %}
