@@ -15,7 +15,7 @@ use Spryker\Yves\Kernel\Widget\AbstractWidget;
  */
 class ProductSetIdsWidget extends AbstractWidget
 {
-    const NAME = 'ProductSetIdsWidget';
+    public const NAME = 'ProductSetIdsWidget';
 
     /**
      * @param array $productSetIds

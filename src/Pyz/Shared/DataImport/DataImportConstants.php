@@ -11,5 +11,5 @@ use Spryker\Shared\DataImport\DataImportConstants as SprykerDataImportConstants;
 
 class DataImportConstants implements SprykerDataImportConstants
 {
-    const IS_ENABLE_INTERNAL_IMAGE = 'DATA_IMPORT:IS_ENABLE_INTERNAL_IMAGE';
+    public const IS_ENABLE_INTERNAL_IMAGE = 'DATA_IMPORT:IS_ENABLE_INTERNAL_IMAGE';
 }
