@@ -1,0 +1,30 @@
+@mixin checkout-page-summary-item($name: '.summary-item') {
+    #{$name} {
+        margin: 0 rem(-16);
+        max-width: none;
+
+        &:first-of-type {
+            #{$name}__box {
+                padding-top: 0;
+            }
+        }
+
+        &__wrap {
+            &:not(:first-child) {
+                margin-top: rem(60);
+
+                @include helper-breakpoint-media-min($md-min) {
+                    margin-top: rem(70);
+                }
+            }
+        }
+
+        > .col {
+            padding: 0 rem(16);
+        }
+
+        @content;
+    }
+}
+
+@include checkout-page-summary-item();

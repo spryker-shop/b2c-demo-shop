@@ -1,0 +1,47 @@
+@mixin catalog-page-filter-category($name: '.filter-category') {
+    #{$name} {
+        &--sidebar {
+            padding-bottom: rem(4);
+        }
+
+        &#{$name} {
+            @include helper-breakpoint-media-min($xl-min) {
+                display: block;
+            }
+        }
+
+        #{$name}__item {
+            margin: 0 0 0 rem(16);
+            font: 400 rem(15) $setting-font-family;
+
+            &--level-1 {
+                margin: 0;
+            }
+
+            [disabled] {
+                color: $setting-color-gray-6;
+            }
+        }
+
+        #{$name}__link {
+            font: 400 rem(15) $setting-font-family;
+            margin-bottom: rem(14);
+            color: $setting-color-black;
+            background: $setting-color-transparent;
+
+            &:not([disabled]) {
+                cursor: pointer;
+
+                &:hover {
+                    color: $setting-color-alt;
+                }
+            }
+
+            &--active {
+                color: $setting-color-alt;
+            }
+        }
+    }
+}
+
+@include catalog-page-filter-category;

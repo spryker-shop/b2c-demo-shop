@@ -1,0 +1,59 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'cart-summary'
+} %}
+
+{% define data = {
+    cart: required,
+    isQuoteValid: required
+} %}
+
+{% set canProceedToCheckout = data.cart.items is not empty
+    and data.isQuoteValid
+    and (not is_granted('IS_AUTHENTICATED_FULLY') or can('WriteSharedCartPermissionPlugin', data.cart.idQuote))
+%}
+
+{% block body %}
+    <div class="{{ config.name }}__inner">
+        <ul class="{{ config.name }}__list spacing-y spacing-y--bigger">
+            {% if data.cart.shipment is not empty and data.cart.shipment.method is not empty %}
+                <li class="{{ config.name }}__item spacing-y spacing-y--bigger">
+                    <strong>{{ 'cart.shipping' | trans }}</strong>
+                    {{ data.cart.shipment.method.name }}
+                    <span class="float-right">{{ data.cart.shipment.method.storeCurrencyPrice | money }}</span>
+                </li>
+            {% endif %}
+            <li class="{{ config.name }}__item spacing-y spacing-y--bigger">
+                {{ 'cart.price.subtotal' | trans }}
+                <span class="float-right">{{ data.cart.totals.subtotal | money }}</span>
+            </li>
+            <li class="{{ config.name }}__item spacing-y spacing-y--bigger">
+                {{ 'cart.total.tax_total' | trans }}
+                <span class="float-right">{{ data.cart.totals.taxTotal.amount | money }}</span>
+            </li>
+            <li class="{{ config.name }}__item spacing-y spacing-y--bigger">
+                {{ 'sales-order-threshold.strategy.soft-minimum-threshold-fixed-fee' | trans }}
+                <span class="float-right">{{ data.cart.totals.expenseTotal | money }}</span>
+            </li>
+            {% include molecule('cart-discount-summary', 'DiscountWidget') ignore missing with {
+                class: 'list spacing-y',
+                data: {
+                    voucherDiscounts: data.cart.voucherDiscounts,
+                    ruleDiscounts: data.cart.cartRuleDiscounts,
+                    discountTotal: data.cart.totals.discounttotal
+                }
+            } only %}
+            <li class="{{ config.name }}__item {{ config.name }}__total spacing-y spacing-y--bigger">
+                <strong>{{ 'cart.price.grand.total' | trans }}</strong>
+                <strong class="float-right">{{ data.cart.totals.grandTotal | money }}</strong>
+            </li>
+        </ul>
+    </div>
+
+    {% if canProceedToCheckout %}
+        <a class="button button--expand button--large" href="{{ url('checkout-index') }}" {{qa('cart-go-to-checkout')}}>
+            {{ 'cart.checkout' | trans }}
+        </a>
+    {% endif %}
+{% endblock %}

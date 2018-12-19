@@ -7,6 +7,7 @@
 
 namespace Pyz\Client\ProductStorage;
 
+use Pyz\Client\ProductStorage\Plugin\BundleProductsExpanderPlugin;
 use Spryker\Client\AvailabilityStorage\Plugin\ProductViewAvailabilityStorageExpanderPlugin;
 use Spryker\Client\PriceProductStorage\Plugin\ProductViewPriceExpanderPlugin;
 use Spryker\Client\ProductDiscontinuedStorage\Plugin\ProductStorage\ProductDiscontinuedProductAvailabilityExpanderPlugin;
@@ -22,17 +23,14 @@ class ProductStorageDependencyProvider extends SprykerProductStorageDependencyPr
      */
     protected function getProductViewExpanderPlugins()
     {
-        /** @var \Spryker\Client\ProductStorage\Dependency\Plugin\ProductViewExpanderPluginInterface[] $plugins */
-        $plugins = [
-            new ProductViewDiscontinuedOptionsExpanderPlugin(), #ProductDiscontinuedFeature
+        return [
+            new ProductViewDiscontinuedOptionsExpanderPlugin(),
             new ProductViewVariantExpanderPlugin(),
             new ProductViewPriceExpanderPlugin(),
             new ProductViewAvailabilityStorageExpanderPlugin(),
-            new ProductDiscontinuedProductAvailabilityExpanderPlugin(), #ProductDiscontinuedFeature
             new ProductViewImageExpanderPlugin(),
             new ProductDiscontinuedProductAvailabilityExpanderPlugin(),
+            new BundleProductsExpanderPlugin(),
         ];
-
-        return $plugins;
     }
 }

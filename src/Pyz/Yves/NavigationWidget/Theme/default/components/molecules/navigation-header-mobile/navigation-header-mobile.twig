@@ -1,0 +1,75 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'nav-header-mobile',
+    tag: 'nav-header-mobile'
+} %}
+
+{% define data = {
+    nodes: []
+} %}
+
+{% block body %}
+    <nav class="{{ config.name }}__block">
+        <div class="{{ config.name }}__arrow {{ config.name }}__arrow--left {{ config.name }}__arrow--hidden">
+            {% include atom('icon') with {
+                class: config.name ~ '__icon icon--smaller',
+                data: {
+                    name: 'arrow-left'
+                }
+            } only %}
+        </div>
+
+        <ul class="{{ config.name }}__scroll">
+            {% for node in data.nodes %}
+                {% set hasChildren = node.children | length > 0 %}
+                <li class="{{ config.name }}__item" {% if hasChildren %} data-target="{{ loop.index }}"{% endif %}>
+                    {% if node.url is empty %}
+                        {{ node.title }}
+                    {% else %}
+                        <a href="{{ node.url }}">{{ node.title }}</a>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+
+        <div class="{{ config.name }}__arrow {{ config.name }}__arrow--right">
+            {% include atom('icon') with {
+                class: config.name ~ '__icon icon--smaller',
+                data: {
+                    name: 'arrow-right'
+                }
+            } only %}
+        </div>
+    </nav>
+
+    <div class="{{ config.name }}__dropdown-container">
+        {% for node in data.nodes %}
+            {% set hasChildren = node.children | length > 0 %}
+            {% set children = node.children %}
+
+            {% if hasChildren %}
+                <div class="{{ config.name }}__tab" data-tab="{{ loop.index }}">
+                    <ul>
+                        {% for childNode in children %}
+                            {% include molecule('navigation-multilevel-node') with {
+                                modifiers: ['mobile'],
+                                data: {
+                                    node: childNode
+                                }
+                            } only %}
+                        {% endfor %}
+                    </ul>
+                    <div class="{{ config.name }}__tab-close">
+                        {% include atom('icon') with {
+                            class: 'icon--big',
+                            data: {
+                                name: 'chevron-up'
+                            }
+                        } only %}
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}

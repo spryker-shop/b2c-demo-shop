@@ -1,0 +1,20 @@
+{% define data = {
+    title:  spyCmsBlockPlaceholder('title') | raw
+} %}
+
+{% block content %}
+    <!-- CMS_BLOCK_PLACEHOLDER : "title" -->
+    <!-- CMS_BLOCK_PLACEHOLDER : "description" -->
+    <div class="container">
+        <div class="title title--h2 title--regular">
+            {{ spyCmsBlockPlaceholder('title') | raw }}
+        </div>
+    </div>
+    <div class="container">
+        <div class="grid grid--justify">
+            {{ spyCmsBlockPlaceholder('description') | raw }}
+        </div>
+    </div>
+
+{% endblock %}
+

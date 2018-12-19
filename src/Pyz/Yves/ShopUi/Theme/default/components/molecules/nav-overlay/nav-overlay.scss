@@ -1,0 +1,50 @@
+@mixin shop-ui-nav-overlay($name: '.nav-overlay') {
+    #{$name} {
+        position: absolute;
+        right: calc(1.8rem - #{rem(40, number)});
+        top: rem(-18);
+        height: 0;
+
+        &--active {
+            #{$name}__shadow {
+                opacity: 0.4;
+                visibility: visible;
+                transition: opacity 400ms ease-in-out, visibility 0ms ease-in-out;
+            }
+
+            #{$name}__container {
+                opacity: 1;
+                transform: scaleY(1);
+                visibility: visible;
+            }
+        }
+
+        &__shadow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: $setting-color-black;
+            z-index: $setting-zi-element;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 400ms ease-in-out, visibility 400ms ease-in-out 400ms;
+        }
+
+        &__container {
+            @include helper-effect-transition(all, 400ms);
+            position: relative;
+            width: rem(450);
+            background: $setting-color-white;
+            padding: rem(67) rem(40) rem(40);
+            z-index: $setting-zi-element + 1;
+            opacity: 0;
+            transform: scaleY(0);
+            visibility: hidden;
+            transform-origin: top center;
+        }
+    }
+}
+
+@include shop-ui-nav-overlay();

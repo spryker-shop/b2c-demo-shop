@@ -1,0 +1,26 @@
+@mixin cart-page-cart-box($name: '.cart-box') {
+    #{$name} {
+        border-bottom: rem(1) dotted $setting-color-gray-3;
+        padding: rem(18) 0;
+
+        &__quantity {
+            font: rem(16) $setting-font-family;
+            color: $setting-color-alpha-3;
+        }
+
+        &--voucher {
+            margin-top: rem(32);
+            border-top: rem(1) dotted $setting-color-gray-3;
+
+            @include helper-breakpoint-media-min($lg-min) {
+                margin-top: rem(56);
+            }
+        }
+
+        &--reset-spacing {
+            padding: 0;
+        }
+    }
+}
+
+@include cart-page-cart-box();

@@ -1,0 +1,55 @@
+{% extends template('page-layout-customer', 'CustomerPage') %}
+
+{% define data = {
+    addresses: _view.addresses,
+
+    title: 'customer.account.address' | trans,
+    activePage: 'address'
+} %}
+
+{% block customerContent %}
+
+    <div class="grid grid-justify">
+        {% for address in data.addresses %}
+            <div class="col--lg-6 col--sm-12">
+                <div class="box">
+                    {% embed molecule('title-box', 'CustomerPage') with {
+                        data: {
+                            title: data.activePage ~ loop.index
+                        },
+                        embed: {
+                            address: address
+                        }
+                    } only %}
+                        {% block additionalContent %}
+                            <ul class="menu menu--inline menu--customer-account float-right">
+                                <li class="menu__item">
+                                    <a href="{{ url('customer/address/update', {'id': embed.address.idCustomerAddress }) }}">
+                                        {{ "customer.profile.address.edit" | trans }}
+                                    </a>
+                                </li>
+
+                                <li class="menu__item">
+                                    <a href="{{ url('customer/address/delete', {'id': embed.address.idCustomerAddress }) }}">
+                                        {{ "customer.profile.address.delete" | trans }}
+                                    </a>
+                                </li>
+                            </ul>
+                        {% endblock %}
+                    {% endembed %}
+
+                    {% include molecule('display-address', 'CustomerPage') with {
+                        class: 'menu menu--customer-account',
+                        data: {
+                            address: address
+                        }
+                    } only %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="box">
+        <a class="button " href="{{url('customer/address/new')}}" {{qa('customer-add-new-address')}}>{{ 'customer.account.add_new_address' | trans }}</a>
+    </div>
+{% endblock %}

@@ -14,7 +14,6 @@ use Generated\Shared\Transfer\NavigationTreeNodeTransfer;
 use Generated\Shared\Transfer\NavigationTreeTransfer;
 use PyzTest\Zed\NavigationGui\NavigationGuiPresentationTester;
 use PyzTest\Zed\NavigationGui\PageObject\NavigationNodeCreatePage;
-use PyzTest\Zed\NavigationGui\PageObject\NavigationNodeUpdatePage;
 use PyzTest\Zed\NavigationGui\PageObject\NavigationPage;
 
 /**
@@ -118,79 +117,34 @@ class NavigationTreeCest
      *
      * @return void
      */
-    public function testUpdateNodeToCategoryType(NavigationGuiPresentationTester $i)
-    {
-        $i->wantTo('Update child node to category type.');
-        $i->expect('Node changes should persist in Zed.');
-
-        $i->amLoggedInUser();
-        $navigationTreeTransfer = $i->prepareTestNavigationTreeEntities((new NavigationTreeTransfer())
-            ->setNavigation((new NavigationTransfer())
-                ->setName('Update child node to category type test 4')
-                ->setKey('Update child node to category type test 4')
-                ->setIsActive(true))
-            ->addNode((new NavigationTreeNodeTransfer())
-                ->setNavigationNode((new NavigationNodeTransfer())
-                    ->addNavigationNodeLocalizedAttribute((new NavigationNodeLocalizedAttributesTransfer())
-                        ->setFkLocale($i->getIdLocale('en_US'))
-                        ->setTitle('foo'))
-                    ->addNavigationNodeLocalizedAttribute((new NavigationNodeLocalizedAttributesTransfer())
-                        ->setFkLocale($i->getIdLocale('de_DE'))
-                        ->setTitle('foo')))));
-        $i->amOnPage(NavigationPage::URL);
-
-        $idNavigationNode = $navigationTreeTransfer->getNodes()[0]->getNavigationNode()->getIdNavigationNode();
-
-        $i->waitForNavigationTree();
-        $i->clickNode($idNavigationNode);
-        $i->switchToNodeForm();
-        $i->see('Edit node');
-        $i->submitUpdateNodeToCategoryType('/en/computer', '/de/computer');
-
-        $i->seeSuccessMessage(NavigationNodeUpdatePage::MESSAGE_SUCCESS);
-        $i->switchToNavigationTree();
-        $i->seeNumberOfNavigationNodes(2);
-    }
-
-    /**
-     * @param \PyzTest\Zed\NavigationGui\NavigationGuiPresentationTester $i
-     *
-     * @return void
-     */
     public function testCreateChildNodeWithCmsPageType(NavigationGuiPresentationTester $i)
     {
-        $i->wantTo('Create CMS page child node.');
-        $i->expect('Navigation should have a new child node persisted.');
+        $i->wantTo('Create external URL child node.');
+        $i->expect('Navigation should have a root node persisted.');
 
         $i->amLoggedInUser();
-        $navigationTreeTransfer = $i->prepareTestNavigationTreeEntities((new NavigationTreeTransfer())
+
+        $i->prepareTestNavigationTreeEntities((new NavigationTreeTransfer())
             ->setNavigation((new NavigationTransfer())
-                ->setName('Create child node with CMS page type test 5')
-                ->setKey('Create child node with CMS page type test 5')
+                ->setName('Create child node with external URL type test 3')
+                ->setKey('Create child node with external URL type test 3')
                 ->setIsActive(true))
             ->addNode((new NavigationTreeNodeTransfer())
                 ->setNavigationNode((new NavigationNodeTransfer())
                     ->addNavigationNodeLocalizedAttribute((new NavigationNodeLocalizedAttributesTransfer())
                         ->setFkLocale($i->getIdLocale('en_US'))
-                        ->setTitle('foo'))
-                    ->addNavigationNodeLocalizedAttribute((new NavigationNodeLocalizedAttributesTransfer())
-                        ->setFkLocale($i->getIdLocale('de_DE'))
                         ->setTitle('foo')))));
         $i->amOnPage(NavigationPage::URL);
 
-        $idNavigationNode = $navigationTreeTransfer->getNodes()[0]->getNavigationNode()->getIdNavigationNode();
-
         $i->waitForNavigationTree();
-        $i->clickNode($idNavigationNode);
         $i->switchToNodeForm();
-        $i->clickAddChildNodeButton();
         $i->see('Create child node');
-        $i->submitCreateNodeFormWithCmsPageType('Child 1.1', '/en/imprint', '/de/impressum');
+        $i->submitCreateNodeFormWithExternalUrlType('Child 2', 'http://google.com');
 
-        $childNavigationNodeName = $i->seeSuccessMessage(NavigationNodeCreatePage::MESSAGE_SUCCESS);
+        $i->seeSuccessMessage(NavigationNodeCreatePage::MESSAGE_SUCCESS);
+
         $i->switchToNavigationTree();
         $i->seeNumberOfNavigationNodes(3);
-        $i->seeNavigationNodeHierarchyByChildNodeName($idNavigationNode, $childNavigationNodeName);
     }
 
     /**

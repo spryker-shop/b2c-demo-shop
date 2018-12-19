@@ -1,0 +1,24 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'wishlist-form'
+} %}
+
+{% define data = {
+    wishlistForm: required
+} %}
+
+{% block body %}
+    {{ form_start(data.wishlistForm) }}
+        <div class="grid grid--no-wrap">
+            <div class="col col--expand">
+                {{ form_widget(data.wishlistForm.name, { attr: { placeholder: 'customer.account.wishlist.overview.enter_name' | trans }}) }}
+            </div>
+            <div class="col">
+                <button type="submit" class="button button--combined">{{ 'customer.account.wishlist.overview.add_new' | trans }}</button>
+            </div>
+        </div>
+
+        {{ form_errors(data.wishlistForm) }}
+    {{ form_end(data.wishlistForm) }}
+{% endblock %}

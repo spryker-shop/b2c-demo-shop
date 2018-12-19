@@ -1,0 +1,32 @@
+@mixin product-detail-page-product-detail($name: '.product-detail') {
+    $spacing-between-col: rem(45);
+
+    #{$name} {
+        display: flex;
+        flex-wrap: wrap;
+        clear: both;
+        border-bottom: rem(1) dotted $setting-color-gray-3;
+        padding-top: rem(40);
+
+        @include helper-breakpoint-media-min($md-min) {
+            justify-content: space-between;
+            border-bottom: none;
+            padding-top: rem(80);
+        }
+
+        &--bundle {
+            padding-top: 0;
+            border-bottom: rem(1) dotted $setting-color-gray-3;
+        }
+
+        &__col {
+            width: 100%;
+
+            @include helper-breakpoint-media-min($md-min) {
+                width: calc(50% - #{$spacing-between-col});
+            }
+        }
+    }
+}
+
+@include product-detail-page-product-detail();

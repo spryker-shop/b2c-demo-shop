@@ -1,0 +1,75 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'new-review-form'
+} %}
+
+{% define data = {
+    form: required
+} %}
+
+{% block body %}
+    <div class="popup popup--new-review is-hidden {{ config.jsName }}__target">
+        <div class="popup__overlay {{ config.jsName }}__trigger"></div>
+        <div class="popup__inner">
+            {% embed molecule('form') with {
+                modifiers: ['pdp-review-form'],
+                data: {
+                    form: data.form,
+                    options: {
+                        action: '#review'
+                    },
+                    layout: {
+                        'summary': 'col col--sm-12 form__field--review form__field--review-summary',
+                        'description': 'col col--sm-12 form__field--review',
+                        'nickname': 'col col--sm-12 form__field--review'
+                    },
+                    submit: {
+                        enable: true,
+                        class: 'button  button--send-review'
+                    }
+                },
+                embed: {
+                    title: 'product_review.submit.add_a_review' | trans,
+                    jsName: config.jsName
+                }
+            } only %}
+                {% block title %}
+                    <div class="popup__top popup__top--bottom-indent">
+                        {% if embed.title is not empty %}
+                            <h2 class="is-hidden-sm-md">{{ embed.title }}</h2>
+                        {% endif %}
+                        {% include atom('icon') with {
+                            class: 'popup__close ' ~ embed.jsName ~ '__trigger',
+                            data: {
+                                name: 'close'
+                            }
+                        } only %}
+                    </div>
+                {% endblock %}
+
+                {% block field %}
+                    {% if fieldName == 'rating' %}
+                        <div class="form__field col col--sm-12 form__field--review form__field--review-rating">
+                            {% do field.setRendered %}
+                            <label>
+                                {{form_label(field)}}
+                                {% include molecule('rating-selector', 'ProductReviewWidget') with {
+                                    modifiers: ['expand', 'small', 'marginless'],
+                                    data: {
+                                        maxValue: (field.vars.choices | length) - 1,
+                                        inputId: 'productReviewForm_rating',
+                                        inputName: 'productReviewForm[rating]'
+                                    }
+                                } only %}
+                                {{form_errors(field)}}
+                            </label>
+                        </div>
+                    {% else %}
+                        {{parent()}}
+                    {% endif %}
+                {% endblock %}
+            {% endembed %}
+        </div>
+    </div>
+{% endblock %}

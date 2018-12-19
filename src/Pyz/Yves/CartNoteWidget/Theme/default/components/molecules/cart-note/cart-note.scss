@@ -1,0 +1,17 @@
+@mixin shop-ui-cart-note($name: '.cart-note') {
+    #{$name} {
+        .label {
+            display: none;
+        }
+        .textarea {
+            resize: none;
+            min-height: rem(90);
+            width: 100%;
+        }
+        .form__field {
+            padding: 0 !important;
+        }
+    }
+}
+
+@include shop-ui-cart-note();

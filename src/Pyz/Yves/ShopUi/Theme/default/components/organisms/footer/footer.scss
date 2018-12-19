@@ -1,0 +1,137 @@
+@mixin shop-ui-footer($name: '.footer') {
+    #{$name} {
+        $footer-subscription-width: rem(202);
+
+        border-top: rem(1) solid $setting-color-gray-3;
+
+        &__top {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin: 0 rem(16);
+            padding: rem(30) 0 0;
+
+            @include helper-breakpoint-media-min($md-min) {
+                border-bottom: dotted rem(1) $setting-color-gray-3;
+            }
+
+            @include helper-breakpoint-media-min($xl-min) {
+                padding: rem(92) 0 rem(70);
+            }
+        }
+
+        &__subscription {
+            width: 100%;
+
+            @include helper-breakpoint-media-min($xl-min) {
+                max-width: #{$footer-subscription-width};
+            }
+        }
+
+        &__logo-section {
+            order: 1;
+        }
+
+        &__logo-copy {
+            @include helper-breakpoint-media-min($md-min) {
+                display: flex;
+                align-items: center;
+            }
+        }
+
+        &__logo-copy-text {
+            letter-spacing: rem(3.2);
+            font: fw(regular) rem(10)/rem(16) $setting-font-family-additional;
+            text-transform: uppercase;
+            margin-right: rem(10);
+        }
+
+        &__logo-copy-links {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+        }
+
+        &__logo-copy-link {
+            font-size: rem(13);
+            margin-right: rem(10);
+            color: $setting-color-gray-4;
+        }
+
+        &__bottom {
+            margin: rem(16) rem(16) 0;
+            justify-content: space-between;
+            padding: 0 0 rem(50);
+
+            @include helper-breakpoint-media-min($xl-min) {
+                padding: 0 0 rem(86);
+            }
+
+            &::after {
+                display: none;
+            }
+
+            &:first-child {
+                margin-top: rem(30);
+            }
+        }
+
+        &__icon-lists {
+            display: flex;
+            justify-content: center;
+            padding: rem(5) 0 rem(20);
+            margin: 0 0 rem(15);
+            border-bottom: dotted rem(1) $setting-color-gray-3;
+            width: 100%;
+            order: 0;
+
+            @include helper-breakpoint-media-min($lg-min) {
+                width: auto;
+                border-bottom: 0;
+                order: 1;
+                padding: 0;
+                margin-bottom: 0;
+            }
+        }
+
+        &__icon-list {
+            margin: 0 rem(15);
+
+            @include helper-breakpoint-media-min($md-min) {
+                margin: 0 rem(10);
+            }
+        }
+
+        &__currency-lang {
+            display: flex;
+            order: 1;
+        }
+
+        &__select {
+            margin-left: rem(16);
+            font-size: rem(16);
+            line-height: rem(24);
+        }
+
+        &__subscription-text {
+            color: $setting-color-text;
+            font: fw(regular) rem(15)/rem(22) $setting-font-family;
+            display: block;
+            max-width: rem(210);
+        }
+
+        &__navigation {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            width: 100%;
+
+            @include helper-breakpoint-media-min($xl-min) {
+                max-width: calc(100% - #{$footer-subscription-width});
+                padding-left: 9%;
+            }
+        }
+    }
+}
+
+@include shop-ui-footer();

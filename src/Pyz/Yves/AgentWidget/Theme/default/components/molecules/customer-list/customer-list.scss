@@ -1,0 +1,18 @@
+@mixin agent-widget-customer-list($name: '.customer-list') {
+    #{$name} {
+
+        &__container-item {
+            cursor: pointer;
+            padding: 0;
+
+            &:hover {
+                color: $setting-color-alt;
+                text-decoration: underline;
+            }
+        }
+
+        @content;
+    }
+}
+
+@include agent-widget-customer-list();

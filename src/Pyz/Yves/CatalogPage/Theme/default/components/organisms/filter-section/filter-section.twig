@@ -1,0 +1,73 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'filter-section',
+    tag: 'section'
+} %}
+
+{% define data = {
+    facets: [],
+    filterPath: null,
+    categories: [],
+    togglerClass: ''
+} %}
+
+{% block body %}
+    {% for filter in data.facets %}
+        {% set filterHasValues = (filter.values is not defined) or (filter.values | length > 0) %}
+
+        {% if filterHasValues %}
+            {% embed molecule('toggler-item') with {
+                modifiers: ['filter', 'with-top-border'],
+                data: {
+                    title: ('product.filter.' ~ filter.name | lower) | trans,
+                    triggerClass: loop.first ? '' : config.jsName ~ '__trigger',
+                    targetClass: loop.first ? '' : config.jsName ~ '__target--' ~ filter.name,
+                    isToggler: loop.first ? false : true,
+                    isTogglerIncluded: false
+                },
+                embed: {
+                    filterPath: data.filterPath,
+                    categories: data.categories,
+                    filter: filter
+                }
+            } only %}
+                {% block contentText %}
+                    {% include [
+                        molecule('filter-' ~ embed.filter.config.name, 'CatalogPage'),
+                        molecule('filter-' ~ embed.filter.config.type, 'CatalogPage')
+                        ] ignore missing with {
+                        data: {
+                            filterPath: embed.filterPath,
+                            categories: embed.categories,
+                            filter: embed.filter,
+                            parameter: embed.filter.config.parameterName | default(''),
+                            min: embed.filter.min | default(0),
+                            max: embed.filter.max | default(0),
+                            activeMin: embed.filter.activeMin | default(0),
+                            activeMax: embed.filter.activeMax | default(0)
+                        }
+                    } only %}
+                {% endblock %}
+            {% endembed %}
+        {% endif %}
+    {% endfor %}
+    {% include molecule('toggler-accordion') with {
+        attributes: {
+            trigger: '.' ~ config.jsName ~ '__trigger',
+        }
+    } only %}
+    <div class="grid grid--justify grid--middle {{ config.name }}__actions">
+        <span class="col {{ config.name }}__close-popup {{ data.togglerClass }}">
+            {% include atom('icon') with {
+                data: {
+                    name: 'close'
+                }
+            } only %}
+        </span>
+
+        <button type="submit" class="col button  {{ config.name }}__button">
+            {{ 'catalog.filter.button' | trans }}
+        </button>
+    </div>
+{% endblock %}

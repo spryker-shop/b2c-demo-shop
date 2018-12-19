@@ -1,0 +1,76 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'summary-overview',
+    tag: 'div'
+} %}
+
+{% define data = {
+    shipmentMethod: required,
+    expenses: [],
+    voucherDiscounts: [],
+    cartRuleDiscounts: [],
+
+    prices: {
+        subTotal: required,
+        storeCurrency: required,
+        tax: required,
+        grandTotal: required,
+        discountTotal: null
+    }
+} %}
+
+{% block body %}
+    <ul class="{{ config.name }}__list">
+
+        <li>
+            {{ 'checkout.step.summary.sub_total' | trans }}
+            <span class="float-right">{{ data.prices.subTotal | money }}</span>
+        </li>
+
+        {% if data.prices.discountTotal %}
+            {% if data.voucherDiscounts is not empty %}
+                {% for voucherDiscount in data.voucherDiscounts %}
+                    <li class="{{ config.name }}__list-item">
+                        {{ voucherDiscount.displayName }}
+                        <span class="float-right">{{ voucherDiscount.amount | money }}</span>
+                    </li>
+                {% endfor %}
+            {% endif %}
+
+            {% if data.cartRuleDiscounts|length %}
+                {% for ruleDiscount in data.cartRuleDiscounts %}
+                    <li class="{{ config.name }}__list-item">
+                        {{ ruleDiscount.displayName }}
+                        <span class="float-right">- {{ ruleDiscount.amount | money }}</span>
+                    </li>
+                {% endfor %}
+            {% endif %}
+        {% endif %}
+
+        <li class="{{ config.name }}__list-item">
+            <strong>{{ 'checkout.step.summary.shipping' | trans }}</strong>
+            {{ data.shipmentMethod }}
+            <span class="float-right">{{ data.prices.storeCurrency | money }}</span>
+        </li>
+
+        {% widget 'SalesOrderThresholdWidgetPlugin' args [data.expenses] with {config: config} only %}
+            {% block expenseItems %}
+                <li class="{{ config.name }}__list-item">
+                    {{ parent() }}
+                </li>
+            {% endblock %}
+        {% endwidget %}
+
+        <li class="{{ config.name }}__list-item">
+            {{ 'checkout.step.summary.tax' | trans }}
+            <span class="float-right">{{ data.prices.tax | money }}</span>
+        </li>
+
+        <li class="{{ config.name }}__list-item {{ config.name }}__list-item--total">
+            <strong>{{ 'checkout.step.summary.grand_total' | trans }}</strong>
+            <strong class="float-right">{{ data.prices.grandTotal | money }}</strong>
+        </li>
+
+    </ul>
+{% endblock %}

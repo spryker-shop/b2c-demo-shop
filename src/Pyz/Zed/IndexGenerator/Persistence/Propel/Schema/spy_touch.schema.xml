@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<database xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:noNamespaceSchemaLocation="http://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\Touch\Persistence" package="src.Orm.Zed.Touch.Persistence">
+  <table name="spy_touch_storage">
+    <index name="index-spy_touch_storage-fk_touch">
+      <index-column name="fk_touch"/>
+    </index>
+    <index name="index-spy_touch_storage-fk_store">
+      <index-column name="fk_store"/>
+    </index>
+    <index name="index-spy_touch_storage-fk_locale">
+      <index-column name="fk_locale"/>
+    </index>
+  </table>
+  <table name="spy_touch_search">
+    <index name="index-spy_touch_search-fk_touch">
+      <index-column name="fk_touch"/>
+    </index>
+    <index name="index-spy_touch_search-fk_store">
+      <index-column name="fk_store"/>
+    </index>
+    <index name="index-spy_touch_search-fk_locale">
+      <index-column name="fk_locale"/>
+    </index>
+  </table>
+</database>

@@ -1,0 +1,24 @@
+{% extends template('widget') %}
+
+{% define data = {
+    value: _widget.productReviewStorageTransfer.averageRating | default(0),
+    reviewCount: _widget.productReviewStorageTransfer.reviewCount | default(''),
+    maxValue: _widget.maximumRating
+} %}
+
+{% block body %}
+    {% if data.value %}
+        {% include molecule('rating-selector', 'ProductReviewWidget') with {
+            modifiers: ['expand', 'small'],
+            data: {
+                value: data.value,
+                maxValue: data.maxValue,
+                reviewCount: data.reviewCount,
+                useHalfSteps: true
+            },
+            attributes: {
+                readonly: true
+            }
+        } only %}
+    {% endif %}
+{% endblock %}

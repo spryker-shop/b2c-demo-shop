@@ -1,0 +1,53 @@
+@mixin cart-checkout-breadcrumb($name: '.cart-checkout-breadcrumb') {
+    #{$name} {
+        &__wrap {
+            text-align: center;
+            padding-top: rem(56);
+
+            @include helper-breakpoint-media-min($md-min) {
+                padding-top: rem(20);
+                border-bottom: dotted rem(1) $setting-color-gray-3;
+            }
+        }
+
+        &__progress-wrap {
+            display: inline-block;
+            position: relative;
+            min-width: 50%;
+
+            @include helper-breakpoint-media-min($md-min) {
+                min-width: 0;
+            }
+
+            &::before {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 0;
+                right: 0;
+                height: rem(1);
+                background-color: $setting-color-black;
+                opacity: 0.4;
+
+                @include helper-breakpoint-media-min($md-min) {
+                    display: none;
+                }
+            }
+        }
+
+        &__progress-mob {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: rem(1);
+            width: 0;
+            background-color: $setting-color-black;
+
+            @include helper-breakpoint-media-min($md-min) {
+                display: none;
+            }
+        }
+    }
+}
+
+@include cart-checkout-breadcrumb;

@@ -1,0 +1,70 @@
+@include shop-ui-price {
+    $name: '.price';
+
+    font-weight: fw(regular);
+
+    &--small {
+        font-weight: fw(regular);
+        margin-top: rem(3);
+        text-align: left;
+
+        @include helper-breakpoint-media-min($md-min) {
+            margin-top: 0;
+            text-align: right;
+        }
+    }
+
+    &--suggestion-product {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: flex-end;
+    }
+
+    &__amount {
+        color: $setting-color-black;
+
+        &--small {
+            font-size: inherit;
+        }
+
+        &--suggestion-product {
+            font-size: rem(13);
+
+            &:not(:last-child) {
+                margin-left: rem(6);
+            }
+
+            &#{$name}__amount--original {
+                color: $setting-color-gray-4;
+                font-size: rem(13);
+            }
+        }
+
+        &--wishlist {
+            font: fw(medium) rem(16) $setting-font-family-additional;
+        }
+
+        &--pdp {
+            font: fw(regular) rem(20)/rem(25) $setting-font-family-additional;
+
+            @include helper-breakpoint-media-min($xl-min) {
+                font-size: rem(22);
+                line-height: rem(28);
+            }
+
+            &#{$name}__amount--original {
+                font-size: rem(15);
+                line-height: rem(19);
+            }
+        }
+
+        &--original {
+            color: $setting-color-gray-3;
+            font-size: rem(11);
+
+            @include helper-breakpoint-media-min($md-min) {
+                font-size: rem(14);
+            }
+        }
+    }
+}

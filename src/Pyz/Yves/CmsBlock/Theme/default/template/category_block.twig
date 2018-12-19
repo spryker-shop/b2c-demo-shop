@@ -1,0 +1,11 @@
+{% block content %}
+    <!-- CMS_BLOCK_PLACEHOLDER : "title" -->
+    <!-- CMS_BLOCK_PLACEHOLDER : "description" -->
+    <div class="catalog-cms-block__inner">
+        {% if spyCmsBlockPlaceholder('title') %}
+            <h5 class="title title--catalog-cms title--medium">{{ spyCmsBlockPlaceholder('title') | raw }}</h5>
+        {% endif %}
+        {{ spyCmsBlockPlaceholder('description') | raw }}
+    </div>
+{% endblock %}
+

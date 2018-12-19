@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<database xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:noNamespaceSchemaLocation="http://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\ProductRelation\Persistence" package="src.Orm.Zed.ProductRelation.Persistence">
+  <table name="spy_product_relation">
+    <index name="index-spy_product_relation-fk_product_abstract">
+      <index-column name="fk_product_abstract"/>
+    </index>
+    <index name="index-spy_product_relation-fk_product_relation_type">
+      <index-column name="fk_product_relation_type"/>
+    </index>
+  </table>
+  <table name="spy_product_relation_product_abstract">
+    <index name="index-spy_product_relation_product_abstract-fk_product_relation">
+      <index-column name="fk_product_relation"/>
+    </index>
+    <index name="index-spy_product_relation_product_abstract-fk_product_abstract">
+      <index-column name="fk_product_abstract"/>
+    </index>
+  </table>
+</database>

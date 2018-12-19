@@ -1,0 +1,18 @@
+{% extends template('widget') %}
+
+{% define data = {
+    products: []
+} %}
+
+{% block body %}
+    {% if data.products is not empty %}
+        {% include molecule('extra-product', 'ProductRelationWidget') with {
+            data: {
+                title: 'page.product.similar-products' | trans,
+                products: data.products
+            }
+        } only %}
+    {% endif %}
+{% endblock %}
+
+

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<database xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:noNamespaceSchemaLocation="http://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\ProductOption\Persistence" package="src.Orm.Zed.ProductOption.Persistence">
+  <table name="spy_product_option_group">
+    <index name="index-spy_product_option_group-fk_tax_set">
+      <index-column name="fk_tax_set"/>
+    </index>
+  </table>
+  <table name="spy_product_option_value">
+    <index name="index-spy_product_option_value-fk_product_option_group">
+      <index-column name="fk_product_option_group"/>
+    </index>
+  </table>
+  <table name="spy_product_option_value_price">
+    <index name="index-spy_product_option_value_price-fk_currency">
+      <index-column name="fk_currency"/>
+    </index>
+    <index name="index-spy_product_option_value_price-fk_store">
+      <index-column name="fk_store"/>
+    </index>
+    <index name="index-spy_product_option_value_price-fk_product_option_value">
+      <index-column name="fk_product_option_value"/>
+    </index>
+  </table>
+</database>

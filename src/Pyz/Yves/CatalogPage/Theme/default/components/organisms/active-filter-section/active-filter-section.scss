@@ -1,0 +1,47 @@
+@mixin catalog-page-active-filter-section($name: '.active-filter-section') {
+    #{$name} {
+        margin: 0 rem(-16) rem(50) rem(-24);
+        font: 0/0 $setting-font-family;
+        padding: 0 rem(16) rem(2);
+
+        @include helper-breakpoint-media-max($lg-max) {
+            white-space: nowrap;
+            overflow-x: auto;
+            margin-bottom: rem(38);
+        }
+
+        &__item {
+            display: inline-block;
+            font: 500 rem(11) $setting-font-family;
+            letter-spacing: rem(1.2);
+            text-transform: uppercase;
+            padding: rem(9) rem(33) rem(10) rem(11);
+            margin: 0 0 rem(8) rem(8);
+            border: solid rem(1) $setting-color-input-border;
+            border-radius: rem(2);
+            color: $setting-color-gray-3;
+            position: relative;
+
+            &:hover {
+                color: $setting-color-gray-3;
+                text-decoration: none;
+                background-color: $setting-color-alpha-1;
+            }
+
+            &--all {
+                color: $setting-color-main;
+                border-color: $setting-color-main;
+
+                &:hover {
+                    color: $setting-color-main;
+                    border-color: $setting-color-main;
+                    background-color: $setting-color-alpha-2;
+                }
+            }
+        }
+
+        @content;
+    }
+}
+
+@include catalog-page-active-filter-section();

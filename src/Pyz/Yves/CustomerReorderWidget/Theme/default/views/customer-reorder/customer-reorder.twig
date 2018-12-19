@@ -1,0 +1,58 @@
+{% extends template('widget') %}
+
+{% block reorderAction %}
+    <a class="menu__link" href="{{ path('customer/order/reorder', {'idSalesOrder': _widget.order.idSalesOrder}) }}">
+        {{ 'customer.order.reorder' | trans }}
+    </a>
+{% endblock %}
+
+{% block formStart %}
+    <customer-reorder class="custom-component customer-reorder">
+        <form action="{{ path('customer/order/reorder-items') }}" method="post">
+            <input type="hidden" name="id" value="{{ _widget.order.idSalesOrder }}" />
+{% endblock %}
+
+{% block formCheckbox %}
+    {% embed atom('checkbox') with {
+        attributes: {
+            name: 'items[]',
+            disabled: not _widget.availability,
+            value: _widget.item.idSalesOrderItem
+        }
+    } only %}
+        {%- block inputClass -%}
+            js-customer-reorder__selection
+        {%- endblock -%}
+    {% endembed %}
+{% endblock %}
+
+{% block formActions %}
+        <div class="grid grid--bottom grid--mobile-row-revers">
+            <div class="form-field col col--sm-12 col--lg-3">
+                <div class="box">
+                    <a href="{{url('customer/order')}}" class="button button--hollow button--expand">{{ 'general.back.button' | trans }}</a>
+                </div>
+            </div>
+            <div class="grid grid--right col col--sm-12 col--lg-8">
+                <div class="form-field col col--sm-12 col--lg-7">
+                    <div class="spacing spacing--big spacing-bottom spacing-bottom--reset">
+                        <button class="button button--expand js-customer-reorder__trigger" {% if not _widget.availability %}disabled{% endif %}>
+                            {{'customer.order.reorder_selected' | trans}}
+                        </button>
+                    </div>
+                </div>
+                <div class="form-field col col--sm-12 col--lg-7">
+                    <div class="spacing spacing--big spacing-top">
+                        <a href="{{ path('customer/order/reorder', {'idSalesOrder': _widget.order.idSalesOrder}) }}" class="button button--expand ">
+                            {{ 'customer.order.reorder_all' | trans }}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}
+
+{% block formEnd %}
+        </form>
+    </customer-reorder>
+{% endblock %}

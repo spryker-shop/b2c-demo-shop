@@ -1,0 +1,15 @@
+{% extends template('widget') %}
+
+{% define data = {
+    nodes: _widget.navigationTree.nodes
+} %}
+
+{% block body %}
+    {% include molecule('navigation-header-mobile', 'NavigationWidget') with {
+        data: {
+            nodes: data.nodes,
+            menuInline: false,
+            menuDropdown: true
+        }
+    } only %}
+{% endblock %}

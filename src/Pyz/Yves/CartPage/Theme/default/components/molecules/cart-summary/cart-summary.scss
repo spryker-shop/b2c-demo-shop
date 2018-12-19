@@ -1,0 +1,27 @@
+@mixin cart-page-cart-summary($name: '.cart-summary') {
+    #{$name} {
+        margin-top: rem(56);
+
+        &__inner {
+            border-top: rem(1) dotted $setting-color-gray-3;
+            border-bottom: rem(1) dotted $setting-color-gray-3;
+            overflow: hidden;
+            margin-bottom: rem(20);
+
+            @include helper-breakpoint-media-min($lg-min) {
+                margin-bottom: rem(56);
+            }
+        }
+
+        &__total {
+            text-transform: uppercase;
+            font-weight: fw(bold);
+        }
+
+        &__item {
+            font: fw(regular) rem(14) $setting-font-family-additional;
+        }
+    }
+}
+
+@include cart-page-cart-summary();

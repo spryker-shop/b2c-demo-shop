@@ -7,7 +7,7 @@
 
 namespace Orm\Zed\FileManager\Persistence;
 
-use Orm\Zed\FileManager\Persistence\Base\SpyMimeType as BaseSpyMimeType;
+use Spryker\Zed\FileManager\Persistence\Propel\AbstractSpyMimeType as BaseSpyMimeType;
 
 /**
  * Skeleton subclass for representing a row from the 'spy_mime_type' table.

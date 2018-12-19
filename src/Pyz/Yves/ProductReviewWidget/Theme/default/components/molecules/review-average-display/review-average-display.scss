@@ -1,0 +1,21 @@
+@mixin product-review-widget-review-average-display($name: '.review-average-display') {
+    #{$name} {
+        display: flex;
+        align-items: center;
+        margin-bottom: rem(27);
+
+        &__title {
+            font: fw(regular) rem(18) $setting-font-family;
+            color: $setting-color-black;
+            margin-right: rem(12);
+
+            @include helper-breakpoint-media-min($md-min) {
+                font-size: rem(21);
+            }
+        }
+
+        @content;
+    }
+}
+
+@include product-review-widget-review-average-display();

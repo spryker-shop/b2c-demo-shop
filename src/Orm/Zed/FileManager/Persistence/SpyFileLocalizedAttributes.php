@@ -7,7 +7,7 @@
 
 namespace Orm\Zed\FileManager\Persistence;
 
-use Orm\Zed\FileManager\Persistence\Base\SpyFileLocalizedAttributes as BaseSpyFileLocalizedAttributes;
+use Spryker\Zed\FileManager\Persistence\Propel\AbstractSpyFileLocalizedAttributes as BaseSpyFileLocalizedAttributes;
 
 /**
  * Skeleton subclass for representing a row from the 'spy_file_localized_attributes' table.

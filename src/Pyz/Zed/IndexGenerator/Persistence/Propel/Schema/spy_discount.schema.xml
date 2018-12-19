@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<database xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:noNamespaceSchemaLocation="http://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\Discount\Persistence" package="src.Orm.Zed.Discount.Persistence">
+  <table name="spy_discount">
+    <index name="index-spy_discount-fk_discount_voucher_pool">
+      <index-column name="fk_discount_voucher_pool"/>
+    </index>
+    <index name="index-spy_discount-fk_store">
+      <index-column name="fk_store"/>
+    </index>
+  </table>
+  <table name="spy_discount_store">
+    <index name="index-spy_discount_store-fk_discount">
+      <index-column name="fk_discount"/>
+    </index>
+    <index name="index-spy_discount_store-fk_store">
+      <index-column name="fk_store"/>
+    </index>
+  </table>
+  <table name="spy_discount_voucher">
+    <index name="index-spy_discount_voucher-fk_discount_voucher_pool">
+      <index-column name="fk_discount_voucher_pool"/>
+    </index>
+  </table>
+  <table name="spy_discount_amount">
+    <index name="index-spy_discount_amount-fk_currency">
+      <index-column name="fk_currency"/>
+    </index>
+    <index name="index-spy_discount_amount-fk_discount">
+      <index-column name="fk_discount"/>
+    </index>
+  </table>
+</database>

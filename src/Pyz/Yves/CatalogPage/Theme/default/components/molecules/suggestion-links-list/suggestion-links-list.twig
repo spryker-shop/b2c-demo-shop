@@ -1,0 +1,30 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'suggestion-links-list'
+} %}
+
+{% define data = {
+    name: required,
+    items: required,
+    length: required,
+    titleClass: '',
+    isSuggestion: false
+} %}
+
+{% block body %}
+    {% if data.items is not empty %}
+        <h4 class="title title--heading title--with-border title--suggestion {{ data.titleClass }}">{{ data.name }}</h4>
+        <ul class="{{ config.name }}__holder">
+            {% for item in data.items | slice(0, data.length) %}
+                {% if item %}
+                    {% set href = data.isSuggestion ? path('search', {'q': item}) : item.url %}
+                    {% set value = data.isSuggestion ? item : item.name %}
+                    <li class="{{ config.name }}__item">
+                        <a class="{{ config.name }}__item-link js-suggest-search__item--navigable" href="{{ href }}">{{ value }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}

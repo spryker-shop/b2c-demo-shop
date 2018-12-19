@@ -1,0 +1,102 @@
+{% extends template('page-layout-main') %}
+
+{% define data = {
+    product: _view.product,
+    productUrl: _view.productUrl,
+
+    cart: _view.cart,
+    isBundle: _view.product.attributes.bundled_product | default(null),
+    bundleItems: _view.product.bundledProducts,
+
+    title: product.metaTitle | default(_view.product.name),
+    metaTitle: product.metaTitle | default(_view.product.name),
+    metaDescription: _view.product.metaDescription | default,
+    metaKeywords: _view.product.metaKeywords | default
+} %}
+
+{% block headStyles %}
+    {{ parent() }}
+    <link itemprop="url" href="{{ data.productUrl }}">
+{% endblock %}
+{% block header %}
+    {% embed organism('header') with {
+        modifiers: ['border-less-bottom']
+    } only %}
+        {% block mobile %}
+            <a href="#" class="link link--alt js-page-layout-main__side-drawer-trigger">
+                {% include atom('icon') with {
+                    modifiers: ['big'],
+                    data: {
+                        name: 'bars'
+                    }
+                } only %}
+            </a>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
+{% block pageInfo %}{% endblock %}
+{% block contentClass %} page-layout-main {% endblock %}
+{% block content %}
+    <div class="container__inner">
+        <div class="grid">
+            {% include molecule('product-carousel', 'ProductDetailPage') with {
+                class: 'col page-layout-main__content-pdp',
+                data: {
+                    product: data.product
+                }
+            } only %}
+
+            <div class="col page-layout-main__sidebar-pdp">
+                {% include molecule('product-configurator', 'ProductDetailPage') with {
+                    data: {
+                        product: data.product,
+                        isBundle: data.isBundle,
+                        bundleItems: data.bundleItems
+                    }
+                } only %}
+            </div>
+        </div>
+    </div>
+
+    {% widget 'ProductAlternativeListWidget' args [data.product] only %}{% endwidget %}
+
+    <div class="container__inner">
+        {% include molecule('product-detail', 'ProductDetailPage') with {
+            data: {
+                description: data.product.description,
+                attributes: data.product.attributes,
+                sku: data.product.sku
+            }
+        } only %}
+    </div>
+    {% if data.isBundle != null %}
+        {% include molecule('product-bundle', 'ProductDetailPage') with {
+            data: {
+                bundleItems: data.bundleItems
+            }
+        } only %}
+    {% endif %}
+
+    <div class="container__inner">
+        {% widget 'ProductDetailPageReviewWidget' args [data.product.idProductAbstract] only %}{% endwidget %}
+
+        {% if data.product.productSetIds is not empty %}
+            {% widget 'ProductSetIdsWidget' args [data.product.productSetIds] only %}{% endwidget %}
+        {% endif %}
+    </div>
+
+    {% widget 'UpSellingProductsWidget' args [data.cart] only %}{% endwidget %}
+    {% widget 'SimilarProductsWidget' args [data.product] only %}{% endwidget %}
+
+    <div class="container__inner">
+        {% include molecule('product-cms-block', 'CmsBlockWidget') ignore missing with {
+            class: 'box',
+            data: {
+                idProductAbstract: data.product.idProductAbstract
+            }
+        } only %}
+        {% block breadcrumbs %}
+            {% widget 'ProductBreadcrumbsWithCategoriesWidget' args [data.product] only %}{% endwidget %}
+        {% endblock %}
+    </div>
+{% endblock %}

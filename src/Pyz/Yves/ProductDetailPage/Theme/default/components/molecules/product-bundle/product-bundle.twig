@@ -1,0 +1,97 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'product-bundle'
+} %}
+
+{% define data = {
+    bundleItems: required,
+} %}
+
+
+{% block body %}
+    {% include molecule('product-slider-title') with {
+        data: {
+            title: 'bundle.title' | trans
+        }
+    } only %}
+
+    {% embed molecule('slick-carousel') with {
+        modifiers: ['align-left'],
+        data: {
+            slides: data.bundleItems
+        },
+        attributes: {
+            'data-json': '{
+                "slidesToShow": 4,
+                "dots": false,
+                "infinite": false,
+                "responsive": [{
+                        "breakpoint": 820,
+                        "settings": {
+                            "slidesToShow": 3
+                        }
+                    },
+                    {
+                        "breakpoint": 570,
+                        "settings": {
+                            "slidesToShow": 2
+                        }
+                    },
+                    {
+                        "breakpoint": 480,
+                        "settings": {
+                            "slidesToShow": 1
+                        }
+                    }
+                ]}'
+        }
+    } only %}
+
+        {% block slides %}
+            {% for slide in data.slides %}
+                {% embed molecule('product-card') with {
+                    modifiers: ['slider'],
+                    data: {
+                        name: slide.name,
+                        abstractId: slide.idProductAbstract,
+                        url: slide.url,
+                        imageUrl: slide.images[0].externalUrlSmall,
+                        price: 0
+                    },
+                    embed: {
+                        quantity: slide.quantity,
+                        description: slide.description,
+                        sku: slide.sku,
+                        index: loop.index,
+                        attributes: slide.attributes
+                    }
+                } only %}
+                    {% block labels %}{% endblock %}
+                    {% block groups %}{% endblock %}
+                    {% block name %}
+                        <div class="col col--sm-12">
+                            {{data.name}}
+                            <span class="{{ config.name }}__quantity"> ·&nbsp; {{ embed.quantity }}x</span>
+                        </div>
+                    {% endblock %}
+                    {% block price %}{% endblock %}
+                    {% block detail %}
+                        {% include molecule('product-detail', 'ProductDetailPage') with {
+                            class: 'spacing-top spacing-top--big',
+                            modifiers: ['bundle', 'filter', 'with-top-border'],
+                            data: {
+                                description: embed.description,
+                                attributes: embed.attributes,
+                                sku: embed.sku,
+                                index: embed.index,
+                                isBundle: true,
+                                hiddenClass: 'is-hidden',
+                            }
+                        } only %}
+                    {% endblock %}
+                {% endembed %}
+            {% endfor %}
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

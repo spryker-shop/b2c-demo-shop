@@ -1,0 +1,73 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'product-item-variant-selector'
+} %}
+
+{% define data = {
+    productItem: required,
+    productItemAttributes: []
+} %}
+
+{% block component %}
+    {% set isItemVariantReplaceAvailable = data.productItemAttributes is not empty %}
+    {% if isItemVariantReplaceAvailable %}{{parent()}}{% endif %}
+{% endblock %}
+
+{% block body %}
+    <form method="POST" action="{{ path('cart/update', {'sku': data.productItem.sku }) }}">
+        <ul class="list">
+            {% for attributeName, attributeOptions in data.productItemAttributes %}
+                {% set options = [] %}
+
+                {% for value, properties in attributeOptions %}
+                    {% set options = options | merge([{
+                        label: value,
+                        value: value,
+                        selected: attribute(properties, 'selected') ? true : false,
+                        disabled: attribute(properties, 'available') ? false : true
+                    }]) %}
+                {% endfor %}
+
+                <li class="list__item">
+                    <label class="{{ config.name }}__label">
+                        <strong class="{{ config.name }}__title">{{ ('product.attribute.' ~ attributeName) | trans }}:</strong>
+                        {% embed molecule('custom-select') with {
+                            modifiers: ['hollow'],
+                            data: {
+                                label: ('product.attribute.' ~ attributeName) | trans,
+                                options: options
+                            },
+                            attributes: {
+                                name: 'preselectedAttributes[' ~ attributeName ~ ']',
+                                'config-theme': 'small'
+                            },
+                            embed: {
+                                jsClass: config.jsName ~ '__select-trigger'
+                            }
+                        } only %}
+                            {% block selectClass -%}
+                                {{ parent() }} {{ embed.jsClass }}
+                            {%- endblock %}
+                        {% endembed %}
+                    </label>
+                    <input name="selectedAttributes[{{ attributeName }}]" type="hidden" />
+                    {% include molecule('form-submitter') with {
+                        attributes: {
+                            'trigger-selector': '.' ~ config.jsName ~ '__select-trigger'
+                        }
+                    } only %}
+                </li>
+            {% endfor %}
+        </ul>
+
+        <input type="hidden" value="{{ data.productItem.groupKey }}" name="groupKey" />
+        <input type="hidden" value="{{ data.productItem.quantity }}" name="quantity" />
+
+        {% if data.productItem.productOptions is not empty %}
+            {% for productOption in data.productItem.productOptions %}
+                <input name="product-option[{{ productOption.groupName }}]" type="hidden" value="{{ productOption.idProductOptionValue }}" />
+            {% endfor %}
+        {% endif %}
+    </form>
+{% endblock %}

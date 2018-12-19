@@ -1,0 +1,52 @@
+@mixin product-set-widget-product-set-slider ($name: '.product-set-slider') {
+    #{$name} {
+        &--multiple {
+            .slick-slide {
+                @include helper-breakpoint-media-max($sm-max) {
+                    padding-right: rem(10);
+                }
+            }
+        }
+
+        &--single {
+            .slick-slide {
+                @include helper-breakpoint-media-min($lg-min) {
+                    padding-right: rem(30);
+                }
+            }
+
+            .thumbnail {
+                height: rem(240);
+
+                @include helper-breakpoint-media-min($md-min) {
+                    height: rem(368);
+                }
+
+                &:not(:first-child) {
+                    display: none;
+                }
+            }
+        }
+
+        &--hide-prev-btn {
+            margin-bottom: rem(32);
+
+            &:hover {
+                @include helper-breakpoint-media-min($md-min) {
+                    .slick-prev {
+                        @include helper-visibility-visible;
+                    }
+                }
+            }
+
+            .slick-prev {
+                @include helper-breakpoint-media-min($md-min) {
+                    @include helper-effect-transition;
+                    @include helper-visibility-invisible;
+                }
+            }
+        }
+    }
+}
+
+@include product-set-widget-product-set-slider();

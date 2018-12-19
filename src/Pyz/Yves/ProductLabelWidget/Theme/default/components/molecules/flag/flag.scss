@@ -1,0 +1,41 @@
+@mixin product-label-widget-flag($name: '.flag') {
+    #{$name} {
+        display: inline-block;
+        padding: rem(1) rem(7);
+        background: $setting-color-alpha-6;
+        border-radius: rem(2);
+        margin: rem(4) 0 0 rem(8);
+
+        @include helper-breakpoint-media-max($sm-max) {
+            padding: rem(3) rem(8);
+            font-size: rem(11);
+        }
+
+        &__icon {
+            color: $setting-color-main;
+        }
+
+        &--highlight {
+            background-color: $setting-color-main;
+            border: rem(1) solid $setting-color-main;
+            color: $setting-color-white;
+        }
+
+        &--alternative {
+            background: $setting-color-transparent;
+            border: rem(1) solid $setting-color-main;
+            color: $setting-color-main;
+            white-space: nowrap;
+        }
+
+        &--discontinued {
+            background: $setting-color-transparent;
+            border: rem(1) solid $setting-color-alt;
+            color: $setting-color-alt;
+        }
+
+        @content;
+    }
+}
+
+@include product-label-widget-flag();

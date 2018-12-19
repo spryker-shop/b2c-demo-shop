@@ -17,5 +17,5 @@ class NewsletterSubscriptionHomePage
     public const ERROR_MESSAGE = 'You are already subscribed to the newsletter';
     public const SUCCESS_MESSAGE = 'You successfully subscribed to the newsletter';
 
-    public const FORM_SUBMIT = 'Subscribe';
+    public const FORM_SUBMIT = '[data-qa="subscription-form__button"]';
 }

@@ -1,0 +1,35 @@
+@mixin shop-ui-node($name: '.node') {
+    #{$name} {
+        &__link {
+            &--footer {
+                color: rgba($setting-color-text, 0.5);
+
+                @include helper-breakpoint-media-min($md-min) {
+                    color: $setting-color-text;
+                }
+            }
+        }
+
+        &--footer {
+            padding-bottom: rem(10);
+            font-size: rem(15);
+        }
+
+        &--product-set {
+            color: $setting-color-black;
+            font: fw(light) rem(14)/rem(20) $setting-font-family;
+            margin-bottom: rem(24);
+            letter-spacing: rem(-0.4);
+
+            @include helper-breakpoint-media-min($md-min) {
+                margin-bottom: rem(48);
+                font-size: rem(18);
+                line-height: rem(24);
+            }
+        }
+
+        @content;
+    }
+}
+
+@include shop-ui-node();

@@ -7,6 +7,8 @@
 
 namespace Pyz\Yves\ShopApplication;
 
+use Pyz\Yves\ProductRelationWidget\Widget\UpSellingProductsWidget;
+use Pyz\Yves\ProductSetWidget\Widget\ProductSetIdsWidget;
 use SprykerShop\Yves\AgentWidget\Widget\AgentControlBarWidget;
 use SprykerShop\Yves\CartNoteWidget\Widget\CartItemNoteFormWidget;
 use SprykerShop\Yves\CartNoteWidget\Widget\CartNoteFormWidget;
@@ -36,7 +38,6 @@ use SprykerShop\Yves\ProductLabelWidget\Widget\ProductAbstractLabelWidget;
 use SprykerShop\Yves\ProductLabelWidget\Widget\ProductConcreteLabelWidget;
 use SprykerShop\Yves\ProductOptionWidget\Widget\ProductOptionConfiguratorWidget;
 use SprykerShop\Yves\ProductRelationWidget\Widget\SimilarProductsWidget;
-use SprykerShop\Yves\ProductRelationWidget\Widget\UpSellingProductsWidget;
 use SprykerShop\Yves\ProductReplacementForWidget\Widget\ProductReplacementForListWidget;
 use SprykerShop\Yves\ProductReviewWidget\Widget\DisplayProductAbstractReviewWidget;
 use SprykerShop\Yves\ProductReviewWidget\Widget\ProductDetailPageReviewWidget;
@@ -66,8 +67,8 @@ class ShopApplicationDependencyProvider extends SprykerShopApplicationDependency
             CartNoteFormWidget::class,
             CatalogPageProductWidget::class,
             CheckoutBreadcrumbWidget::class,
-            CmsProductGroupWidget::class,
             CmsProductWidget::class,
+            CmsProductGroupWidget::class,
             CurrencyWidget::class,
             CustomerNavigationWidget::class,
             DisplayProductAbstractReviewWidget::class,
@@ -103,6 +104,7 @@ class ShopApplicationDependencyProvider extends SprykerShopApplicationDependency
             CheckoutVoucherFormWidget::class,
             WishlistMenuItemWidget::class,
             WishlistProductAlternativeWidget::class,
+            ProductSetIdsWidget::class,
         ];
     }
 }

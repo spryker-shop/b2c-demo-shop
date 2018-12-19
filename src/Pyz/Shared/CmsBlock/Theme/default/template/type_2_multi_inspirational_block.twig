@@ -1,0 +1,18 @@
+{% block content %}
+    <!-- CMS_BLOCK_PLACEHOLDER : "title" -->
+    <!-- CMS_BLOCK_PLACEHOLDER : "description" -->
+    <div class="container">
+        <div class="grid grid--justify grid--spaced-lg multi-inspirational-wrap multi-inspirational-wrap--right">
+            <div class="col col--lg-6 col--md-12 col--sm-12">
+                <div class="multi-inspirational-block multi-inspirational-block--lg">
+                    {{ spyCmsBlockPlaceholder('title') | raw }}
+                </div>
+            </div>
+            <div class="col col--lg-6 col--md-12 col--sm-12">
+                {{ spyCmsBlockPlaceholder('description') | raw }}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+

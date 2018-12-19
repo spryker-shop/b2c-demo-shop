@@ -1,0 +1,25 @@
+{% extends template('page-layout-main') %}
+
+{% define data = {
+    activePage: 'overview'
+} %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block title %}
+    <h1 class="title title--account-main title--medium">{{data.title}}</h1>
+{% endblock %}
+
+{% block content %}
+    <div class="grid page-layout-customer">
+        <div class="col col--sm-12 col--md-12 col--lg-3">
+            {% block customerNavigation %}
+                {% widget 'CustomerNavigationWidget' args [data.activePage] only %}{% endwidget %}
+            {% endblock %}
+        </div>
+
+        <div class="col col--sm-12 col--md-12 col--lg-9">
+            {% block customerContent %}{% endblock %}
+        </div>
+    </div>
+{% endblock %}

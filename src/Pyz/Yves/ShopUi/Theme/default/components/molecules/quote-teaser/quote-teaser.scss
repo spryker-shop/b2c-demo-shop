@@ -1,0 +1,80 @@
+@mixin shop-ui-quote-teaser($name: '.quote-teaser') {
+    #{$name} {
+        position: relative;
+        overflow: hidden;
+        margin: rem(150) 0;
+        height: rem(512);
+
+        .touch & {
+            background-image: url('/assets/images/viden-lnfra.jpg');
+            background-size: cover;
+        }
+        @include helper-breakpoint-media-max($md-max) {
+            height: rem(352);
+        }
+
+        &__video {
+            width: auto;
+            height: auto;
+            min-width: 100%;
+            min-height: 100%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: none;
+
+            .no-touch & {
+                display: block;
+            }
+        }
+
+        &__container {
+            height: 100%;
+            padding: 0 rem(25);
+
+            &::after {
+                display: none;
+            }
+        }
+
+        &__content {
+            max-width: rem(750);
+        }
+
+        &__text {
+            margin-top: rem(35);
+
+            & > * {
+                font-size: rem(13);
+                letter-spacing: rem(3);
+                line-height: 1.8;
+                text-transform: uppercase;
+                color: $setting-color-white;
+                text-align: center;
+
+                @include helper-breakpoint-media-min($md-min) {
+                    font-size: rem(16);
+                }
+            }
+        }
+
+        &__auth {
+            & > * {
+                padding: rem(20) 0;
+                font-size: rem(10);
+                color: $setting-color-white;
+                opacity: 0.4;
+                text-align: center;
+                letter-spacing: rem(1.7);
+                text-transform: uppercase;
+
+                @include helper-breakpoint-media-min($md-min) {
+                    font-size: rem(12);
+                }
+            }
+        }
+    }
+}
+
+@include shop-ui-quote-teaser();

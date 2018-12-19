@@ -1,0 +1,46 @@
+@include shop-ui-autocomplete-form {
+    margin-right: rem(20);
+
+    &__suggestion {
+        background-color: $setting-color-white;
+        border-radius: rem(3);
+        padding: rem(12) rem(18);
+        font-size: rem(19);
+        line-height: 1.79;
+        color: $setting-color-black;
+    }
+
+    &__item {
+        padding: 0;
+
+        &:hover {
+            color: $setting-color-alt;
+            text-decoration: underline;
+            background: none;
+        }
+    }
+
+    &__field {
+        position: relative;
+    }
+
+    &__input {
+        border: none;
+        background-color: $setting-color-gray-1;
+        font-weight: fw(medium);
+        font-size: rem(18);
+        padding-right: rem(40);
+        padding-left: rem(18);
+
+        &::placeholder {
+            opacity: 0.3;
+        }
+    }
+
+    &__clean-button {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+    }
+}

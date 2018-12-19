@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<database xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:noNamespaceSchemaLocation="http://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\Customer\Persistence" package="src.Orm.Zed.Customer.Persistence">
+  <table name="spy_customer">
+    <index name="index-spy_customer-default_billing_address">
+      <index-column name="default_billing_address"/>
+    </index>
+    <index name="index-spy_customer-default_shipping_address">
+      <index-column name="default_shipping_address"/>
+    </index>
+    <index name="index-spy_customer-fk_locale">
+      <index-column name="fk_locale"/>
+    </index>
+    <index name="index-spy_customer-fk_user">
+      <index-column name="fk_user"/>
+    </index>
+  </table>
+  <table name="spy_customer_address">
+    <index name="index-spy_customer_address-fk_region">
+      <index-column name="fk_region"/>
+    </index>
+    <index name="index-spy_customer_address-fk_country">
+      <index-column name="fk_country"/>
+    </index>
+  </table>
+</database>

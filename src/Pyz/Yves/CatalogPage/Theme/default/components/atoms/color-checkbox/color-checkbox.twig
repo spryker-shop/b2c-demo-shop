@@ -1,0 +1,41 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'color-checkbox',
+    tag: 'span',
+    renderAttributes: false
+} %}
+
+{% define attributes = {
+    type: 'checkbox'
+} %}
+
+{% define data = {
+    label: ''
+} %}
+
+{% set disabled = attributes['disabled'] | default(false) %}
+
+{% block extraAttributes %}
+    {%- if disabled %}disabled{% endif -%}
+{% endblock %}
+
+{% block body %}
+    <label class="{{ config.name }}__container {{ data.label }}" {{ qa('label') }}>
+        <input class="{{ config.name }}__input {% block inputClass %}{% endblock %}" {{ block('attributes') }}/>
+        <span class="{{ config.name }}__box"></span>
+
+        {% include atom('icon') with {
+            class: 'checkbox__check',
+            data: {
+                name: 'check'
+            }
+        } only %}
+
+        {%- block labelContainer -%}
+            <span class="{{ config.name }}__label {% block labelClass %}{% endblock %}">
+                {%- block label -%}{{ data.label }}{%- endblock -%}
+            </span>
+        {%- endblock -%}
+    </label>
+{% endblock %}

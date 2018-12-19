@@ -1,0 +1,195 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'product-set-details',
+} %}
+
+{% define data = {
+    name: '',
+    products: required,
+    description: '',
+    images: [],
+    sliderConfig: '{
+        "slidesToShow": 1,
+        "slidesToScroll": 1,
+        "dots": false,
+        "infinite": false,
+        "mobileFirst": true,
+        "responsive": [{
+            "breakpoint": 375,
+            "settings": {
+                "slidesToShow": 2
+                }
+        },
+        {
+            "breakpoint": 768,
+            "settings": {
+                "slidesToShow": 4
+            }
+        }]
+    }',
+} %}
+
+{% block body %}
+    <div class="box">
+        {% block carousel %}
+            {% embed molecule('slick-carousel') with {
+                data: {
+                    slides: data.images,
+                    containerClass: 'product-set-slider'
+                },
+                attributes: {
+                    'data-json': '{
+                        "slidesToShow": 1,
+                        "dots": true,
+                        "arrows": false
+                    }'
+                },
+                modifiers: ['product-set']
+            } only %}
+
+                {% block slides %}
+                    {% for slide in data.slides %}
+                        {% include atom('thumbnail') with {
+                            modifiers: ['bigger', 'no-margin'],
+                            attributes: {
+                                itemprop: 'image',
+                                src: slide.externalUrlLarge
+                            }
+                        } only %}
+                    {% endfor %}
+                {% endblock %}
+            {% endembed %}
+        {% endblock %}
+    </div>
+
+    <div class="box">
+        {% block header %}
+            <form method="POST" action="{{ path('cart/add-items') }}">
+                {% set isDisabled = false %}
+
+                {% for product in data.products %}
+                    {% if product.idProductConcrete is not empty %}
+                        {% if product.available %}
+                            <input type="hidden" name="items[{{ loop.index }}][sku]" value="{{ product.sku }}" />
+                            <input type="hidden" name="items[{{ loop.index }}][quantity]" value="1" />
+                        {% endif %}
+                    {% else %}
+                        {% set isDisabled = true %}
+                    {% endif %}
+                {% endfor %}
+
+                {% embed molecule('product-slider-title') with {
+                    modifiers: ['set'],
+                    data: {
+                        title: 'product.set.detail.set-contents' | trans
+                    },
+                    embed: {
+                        isDisabled: isDisabled
+                    }
+                } only %}
+                    {% block subContent %}
+                        <div class="{{ config.name }}__sub-col">
+                            <button type="submit" class="button button--expand-mobile float-right" {% if embed.isDisabled %}disabled{% endif %}>
+                                {{ 'product.set.detail.add-all-to-cart' | trans }}
+                            </button>
+                        </div>
+                    {% endblock %}
+                {% endembed %}
+            </form>
+
+            <hr>
+            {% block description %}
+                {% if data.description is not empty %}
+                    <p>{{ data.description }}</p>
+                {% endif %}
+            {% endblock %}
+        {% endblock %}
+    </div>
+
+    {% block productSet %}
+        <form method="GET">
+            {% embed molecule('slick-carousel') with {
+                modifiers: ['align-left'],
+                data: {
+                    slides: data.products
+                },
+                attributes: {
+                    'data-json': data.sliderConfig
+                }
+            } only %}
+                {% block slides %}
+                    {% for product in data.slides %}
+                        {% embed molecule('product-card') with {
+                            modifiers: ['stretch', 'slider', 'product-set'],
+                            data: {
+                                name: product.name,
+                                abstractId: product.idProductAbstract,
+                                url: product.url,
+                                imageUrl: product.images.0.externalUrlSmall | default,
+                                price: product.price,
+                                originalPrice: product.prices['ORIGINAL'] | default
+                            },
+                            embed: {
+                                product: product
+                            }
+                        } only %}
+                            {% block content %}
+                                {{parent()}}
+                                {% set isNotAvailable = embed.product.idProductConcrete and not embed.product.available %}
+
+                                {% embed molecule('variant-configurator', 'ProductDetailPage') with {
+                                    class: 'spacing-top spacing-top--big',
+                                    data: {
+                                        superAttributes: embed.product.attributeMap.superAttributes,
+                                        selectedAttributes: embed.product.selectedAttributes,
+                                        availableAttributes: embed.product.availableAttributes,
+                                        useExternalForm: true
+                                    },
+                                    embed: embed
+                                } only %}
+                                    {% block variant %}
+                                        <li class="list__item">
+                                            {% include molecule('variant', 'ProductDetailPage') with {
+                                                modifiers: ['bundle'],
+                                                data: {
+                                                    name: name,
+                                                    formName: 'attributes[' ~ embed.product.idProductAbstract ~ '][' ~ name ~ ']',
+                                                    values: values,
+                                                    selectedValue: selectedValue,
+                                                    label: ('product.attribute.' ~ name) | trans,
+                                                    isAvailable: isAvailable
+                                                }
+                                            } only %}
+                                        </li>
+                                    {% endblock %}
+                                {% endembed %}
+
+                                {% if isNotAvailable %}
+                                    <p>
+                                        <strong>{{ "product.detail.out_of_stock" | trans }}</strong>
+                                    </p>
+                                {% else %}
+                                    {% set isDisabled = not embed.product.idProductConcrete or not embed.product.available %}
+
+                                    {% if isDisabled %}
+                                        <button type="button" class="button button--expand" disabled>{{ 'page.detail.add-to-cart' | trans }}</button>
+                                    {% else %}
+                                        <a href="{{ path('cart/add', {sku: embed.product.sku}) }}" class="button button--expand js-product-set__add-to-cart">
+                                            {{ 'page.detail.add-to-cart' | trans }}
+                                        </a>
+                                    {% endif %}
+                                {% endif %}
+                            {% endblock %}
+                        {% endembed %}
+                    {% endfor %}
+                {% endblock %}
+            {% endembed %}
+        </form>
+        {% include molecule('action-single-click-enforcer') with {
+            attributes: {
+                'target-selector': '.js-product-set__add-to-cart'
+            }
+        } only %}
+    {% endblock %}
+{% endblock %}

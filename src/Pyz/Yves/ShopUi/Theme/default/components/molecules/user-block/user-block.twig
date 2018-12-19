@@ -1,0 +1,51 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'user-block'
+} %}
+
+{% block body %}
+    <h2 class="title title--mini-cart title--with-border">{{ 'customer.profile.title' | trans }}</h2>
+    <div class="spacing-y spacing-y--inner spacing-y--big">
+        {% set links = [
+            {
+                name: 'checkout.step.summary.overview' | trans,
+                url: url('customer/overview'),
+            },
+            {
+                name: 'customer.account.order_history' | trans,
+                url: url('customer/order'),
+            },
+            {
+                name: 'customer.profile.link' | trans,
+                url: url('customer/profile'),
+            }
+        ] %}
+        {% for link in links %}
+            {% include molecule('user-block-item') with {
+                data: {
+                    name: link.name,
+                },
+                attributes: {
+                    href: link.url,
+                },
+            } only %}
+        {% endfor %}
+    </div>
+    {% if is_granted('IS_AUTHENTICATED_FULLY') and is_granted('ROLE_USER') %}
+        {% include molecule('user-block-item') with {
+            modifiers: ['small'],
+            data: {
+                name: 'customer.logout' | trans,
+            },
+            attributes: {
+                href: url('logout'),
+            },
+        } only %}
+    {% else %}
+        <div class="grid grid--middle grid--justify {{ config.name }}__buttons-container">
+            <a href="{{ url('register') }}" class="{{ config.name }}__button button button--hollow col">{{ 'checkout.customer.auth_as_user' | trans }}</a>
+            <a href="{{ url('login') }}" class="{{ config.name }}__button button col">{{ 'global.login' | trans }}</a>
+        </div>
+    {% endif %}
+{% endblock %}

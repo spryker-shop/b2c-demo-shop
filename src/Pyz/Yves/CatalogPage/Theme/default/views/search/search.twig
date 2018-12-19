@@ -1,0 +1,67 @@
+{% extends template('page-layout-catalog', 'CatalogPage') %}
+
+{% define data = {
+    products: _view.products,
+    facets: _view.facets,
+    searchString: _view.searchString,
+    suggestion: _view.spellingSuggestion,
+    category: _view.category | default(null),
+    categories: categories | default([]),
+    categoryId: _view.idCategory | default(null),
+    filterPath: _view.filterPath | default(null),
+    viewMode: _view.viewMode | default(null),
+
+    title: ('global.search.results' | trans) ~ ' ' ~ _view.searchString,
+    metaTitle: _view.pageTitle | default(_view.category.name | default),
+    metaDescription: _view.pageDescription | default,
+    metaKeywords: _view.pageKeywords | default,
+
+    pagination: {
+        parameters: app.request.query.all(),
+        currentPage: _view.pagination.currentPage,
+        paginationPath: app.request.attributes.get('_route'),
+        maxPage: _view.pagination.maxPage,
+        showAlwaysFirstAndLast: true
+    }
+} %}
+
+{% block breadcrumbs %}
+    {% include molecule('breadcrumb') with {
+        modifiers: ['bottom'],
+        data: {
+            steps: [{
+                label: 'global.search' | trans
+            }]
+        }
+    } only %}
+{% endblock %}
+
+{% block title %}
+
+    {% include molecule('jumbotron') with {
+        modifiers: ['category', 'category-no-img'],
+        data: {
+            headline: data.searchString,
+            subHeadline: 'global.search.results' | trans
+        }
+    } only %}
+{% endblock %}
+
+{% block form %}
+
+    {% embed molecule('spelling-suggestion', 'CatalogPage') with {
+        data: {
+            suggestion: data.suggestion
+        }
+    } only %}
+        {% block body %}
+            {{parent()}}
+        {% endblock %}
+    {% endembed %}
+
+    {{parent()}}
+
+    {% if data.searchString is not empty %}
+        <input type="hidden" name="q" value="{{ data.searchString }}" />
+    {% endif %}
+{% endblock %}
