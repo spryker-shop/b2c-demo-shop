@@ -13,12 +13,11 @@ export default class ScrollParallax extends Component {
     windowWidth: number;
     wrapperHeight: number;
     distanceToWrapper: number;
-    initialized: boolean;
+    initialized: boolean = false;
     
     readyCallback(): void {
         this.wrapper = <HTMLElement>document.querySelector(this.wrapperSelector);
         this.target = <HTMLElement>this.wrapper.querySelector(this.targetSelector);
-        this.initialized = false;
         this.defineDimensions();
 
         this.mapEvents();
