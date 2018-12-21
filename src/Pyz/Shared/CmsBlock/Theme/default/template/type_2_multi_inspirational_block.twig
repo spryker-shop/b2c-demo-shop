@@ -2,8 +2,8 @@
     <!-- CMS_BLOCK_PLACEHOLDER : "title" -->
     <!-- CMS_BLOCK_PLACEHOLDER : "description" -->
     <div class="container">
-        <div class="grid grid--justify grid--spaced-lg multi-inspirational-wrap multi-inspirational-wrap--right">
-            <div class="col col--lg-6 col--md-12 col--sm-12">
+        <div class="grid grid--justify grid--spaced-lg multi-inspirational-wrap multi-inspirational-wrap--right js-multi-inspirational-block-2">
+            <div class="col col--lg-6 col--md-12 col--sm-12 js-multi-inspirational-block-2__target">
                 <div class="multi-inspirational-block multi-inspirational-block--lg">
                     {{ spyCmsBlockPlaceholder('title') | raw }}
                 </div>
@@ -12,6 +12,16 @@
                 {{ spyCmsBlockPlaceholder('description') | raw }}
             </div>
         </div>
+
+        {% include molecule('scroll-parallax') with {
+            attributes: {
+                'wrapper-selector': '.js-multi-inspirational-block-2',
+                'target-selector': '.js-multi-inspirational-block-2__target',
+                'motion-direction': 'top',
+                'motion-ratio': '10',
+                'breakpoint-min': '769'
+            }
+        } only %}
     </div>
 
 {% endblock %}

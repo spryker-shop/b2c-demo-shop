@@ -14,14 +14,22 @@
             </div>
             <div class="col col--lg-6 col--md-12 col--sm-12">
 
-                <div class="inspirational-block__images inspirational-block__images--right">
+                <div class="inspirational-block__images inspirational-block__images--right js-inspirational-block-2">
                     <div class="inspirational-block__image inspirational-block__image-1">
                         <img src="/assets/images/inspire2-bottom.jpg" alt="">
                     </div>
-                    <a href="{{ 'samsung.search.link' | trans }}" class="inspirational-block__image inspirational-block__image-2 inspirational-block__image-2--right">
+                    <a href="{{ 'samsung.search.link' | trans }}" class="inspirational-block__image inspirational-block__image-2 inspirational-block__image-2--right js-inspirational-block-2__target">
                         <img src="/assets/images/inspire2-main.jpg" alt="">
                     </a>
                 </div>
+
+                {% include molecule('scroll-parallax') with {
+                    attributes: {
+                        'wrapper-selector': '.js-inspirational-block-2',
+                        'target-selector': '.js-inspirational-block-2__target',
+                        'motion-direction': 'top'
+                    }
+                } only %}
 
             </div>
         </div>

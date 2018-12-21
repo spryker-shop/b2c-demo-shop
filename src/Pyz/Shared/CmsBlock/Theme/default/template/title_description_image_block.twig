@@ -1,13 +1,13 @@
 {% block content %}
     <!-- CMS_BLOCK_PLACEHOLDER : "title" -->
     <!-- CMS_BLOCK_PLACEHOLDER : "description" -->
-    <div class="grid grid--center grid--middle image-banner">
+    <div class="grid grid--center grid--middle image-banner js-image-banner">
         <div class="image-banner__bg-wrap">
             <video class="image-banner__video" preload="none" autoplay="autoplay" loop="loop" muted="muted">
                 <source src="/assets/images/spryker-video.mp4" type="video/mp4">
             </video>
         </div>
-        <div class="image-banner__text">
+        <div class="image-banner__text js-image-banner__target">
             <div class="image-banner__title">
                 {{ spyCmsBlockPlaceholder('title') | raw }}
             </div>
@@ -15,5 +15,12 @@
         </div>
     </div>
 
+    {% include molecule('scroll-parallax') with {
+        attributes: {
+            'wrapper-selector': '.js-image-banner',
+            'target-selector': '.js-image-banner__target',
+            'motion-ratio': '6'
+        }
+    } only %}
 
 {% endblock %}
