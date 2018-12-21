@@ -54,15 +54,15 @@ export default class ScrollParallax extends Component {
     }
 
     protected moveTarget(): void {
-        let scrollToBottomScreen: number = window.scrollY + this.windowHeight;
+        let scrollHeight: number = window.scrollY + this.windowHeight;
         let targetOffset: string = '';
 
-        if(scrollToBottomScreen > this.distanceToWrapper) {
+        if(scrollHeight > this.distanceToWrapper) {
             if (this.motionDirection === DIRECTIONS.TOP) {
-                targetOffset = `-${this.getTargetOffest(scrollToBottomScreen)}`;
+                targetOffset = `-${this.getTargetOffest(scrollHeight)}`;
             }
             if (this.motionDirection === DIRECTIONS.DOWN) {
-                targetOffset = this.getTargetOffest(scrollToBottomScreen);
+                targetOffset = this.getTargetOffest(scrollHeight);
             }
             if (targetOffset !== '') {
                 this.target.style.transform = `translateY(${targetOffset})`;
@@ -71,17 +71,17 @@ export default class ScrollParallax extends Component {
         }
     }
 
-    protected getTargetOffest(scrollToBottomScreen): string {
-        return (scrollToBottomScreen - this.distanceToWrapper) / this.motionRatio + 'px';
+    protected getTargetOffest(scrollHeight): string {
+        return (scrollHeight - this.distanceToWrapper) / this.motionRatio + 'px';
     }
 
     protected getDistanceToWrapper(): number {
-        let element: HTMLElement = this.wrapper;
+        let wrapper: HTMLElement = this.wrapper;
         let yPosition: number  = 0;
 
-        while(element) {
-            yPosition += (element.offsetTop - element.scrollTop + element.clientTop);
-            element = <HTMLElement>element.offsetParent;
+        while(wrapper) {
+            yPosition += (wrapper.offsetTop - wrapper.scrollTop + wrapper.clientTop);
+            wrapper = <HTMLElement>wrapper.offsetParent;
         }
         return yPosition;
     }
