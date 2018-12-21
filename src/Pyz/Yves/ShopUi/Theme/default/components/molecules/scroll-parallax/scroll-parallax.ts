@@ -1,10 +1,10 @@
 import Component from 'ShopUi/models/component';
-import $ from 'jquery/dist/jquery';
 
 const DIRECTIONS = {
     TOP: 'top',
     DOWN: 'down'
-}
+};
+const THROTTLE_DURATION = 300;
 
 export default class ScrollParallax extends Component {
     protected target: HTMLElement;
@@ -13,26 +13,23 @@ export default class ScrollParallax extends Component {
     windowWidth: number;
     wrapperHeight: number;
     distanceToWrapper: number;
-    initialized: boolean
+    initialized: boolean;
     
     readyCallback(): void {
         this.wrapper = <HTMLElement>document.querySelector(this.wrapperSelector);
         this.target = <HTMLElement>this.wrapper.querySelector(this.targetSelector);
-        this.windowHeight = window.innerHeight;
-        this.windowWidth = window.innerWidth;
-        this.wrapperHeight = this.wrapper.offsetHeight;
-        this.distanceToWrapper = this.getDistanceToWrapper();
         this.initialized = false;
+        this.defineDimensions();
 
         this.mapEvents();
     }
 
     protected mapEvents(): void {
-        window.addEventListener('resize', () => setTimeout(() => this.recalculateDimensions(), 300));
+        window.addEventListener('resize', () => setTimeout(() => this.defineDimensions(), THROTTLE_DURATION));
         window.addEventListener('scroll', this.checkBreakpointsToScroll.bind(this));
     }
 
-    protected recalculateDimensions(): void {
+    protected defineDimensions(): void {
         this.windowHeight = window.innerHeight;
         this.windowWidth = window.innerWidth;
         this.wrapperHeight = this.wrapper.offsetHeight;
@@ -50,7 +47,7 @@ export default class ScrollParallax extends Component {
     }
 
     protected cleanOffset(): void {
-        if(this.initialized === true) {
+        if(this.initialized) {
             this.initialized = false;
             this.target.removeAttribute('style');
         }
@@ -74,7 +71,7 @@ export default class ScrollParallax extends Component {
         }
     }
 
-    protected getTargetOffest(scrollToBottomScreen) {
+    protected getTargetOffest(scrollToBottomScreen): string {
         return (scrollToBottomScreen - this.distanceToWrapper) / this.motionRatio + 'px';
     }
 

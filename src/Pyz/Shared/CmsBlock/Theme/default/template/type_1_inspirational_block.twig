@@ -5,19 +5,19 @@
         <div class="grid grid--justify grid--middle grid--spaced-lg inspirational-block inspirational-block--right">
             <div class="col col--lg-6 col--md-12 col--sm-12">
 
-                <div class="inspirational-block__images inspirational-block__images--left js-inspirational-block-1">
+                <div class="inspirational-block__images inspirational-block__images--left js-inspirational-block--1">
                     <div class="inspirational-block__image inspirational-block__image-1">
                         <img src="/assets/images/inspire1-bottom.jpg" alt="">
                     </div>
-                    <a href="{{ 'cameras.category.link' | trans }}" class="inspirational-block__image inspirational-block__image-2 inspirational-block__image-2--left js-inspirational-block-1__target">
+                    <a href="{{ 'cameras.category.link' | trans }}" class="inspirational-block__image inspirational-block__image-2 inspirational-block__image-2--left js-inspirational-block__image-2--1">
                         <img src="/assets/images/inspire1-main.jpg" alt="">
                     </a>
                 </div>
 
                 {% include molecule('scroll-parallax') with {
                     attributes: {
-                        'wrapper-selector': '.js-inspirational-block-1',
-                        'target-selector': '.js-inspirational-block-1__target',
+                        'wrapper-selector': '.js-inspirational-block--1',
+                        'target-selector': '.js-inspirational-block__image-2--1',
                         'motion-direction': 'top'
                     }
                 } only %}
