@@ -11,11 +11,11 @@
 
 {% block body %}
     {% block imageContainer %}
-        <div class="col col--sm-12 col--md-2 col--xl-3 {{ config.name }}__col {{ config.name }}__col-image">
+        <div class="col col--sm-12 col--md-3 {{ config.name }}__col {{ config.name }}__col-image">
             {% block image %}
                 <a class="{{ config.name }}__overlay js-product-color-group__image-{{ data.abstractId }}" href="{{ data.url }}">
                     {% include atom('thumbnail') with {
-                        modifiers: ['small'],
+                        modifiers: ['product-list-item'],
                         attributes: {
                             alt: data.name,
                             src: data.imageUrl,
@@ -27,7 +27,7 @@
         </div>
     {% endblock %}
 
-    <div class="col col--sm-8 col--md-8 col--xl-7 {{ config.name }}__col {{ config.name }}__col-main">
+    <div class="col col--sm-8 col--md-7 {{ config.name }}__col {{ config.name }}__col-main">
         {% block name %}
             <a class="{{ config.name }}__name title title--medium" href="{{ data.url }}">{{ data.name }}</a>
         {% endblock %}
