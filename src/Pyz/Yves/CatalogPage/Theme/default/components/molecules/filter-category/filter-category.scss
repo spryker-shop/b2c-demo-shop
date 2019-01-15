@@ -28,13 +28,16 @@
             margin-bottom: rem(14);
             color: $setting-color-black;
             background: $setting-color-transparent;
+            cursor: pointer;
 
-            &:not([disabled]) {
-                cursor: pointer;
+            &:hover {
+                color: $setting-color-alt;
+            }
 
-                &:hover {
-                    color: $setting-color-alt;
-                }
+            &[disabled],
+            &--disabled {
+                color: $setting-color-dark;
+                cursor: default;
             }
 
             &--active {
