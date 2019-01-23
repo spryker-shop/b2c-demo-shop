@@ -30,7 +30,7 @@
 
         {% if filterHasValues %}
             {% embed molecule('toggler-item') with {
-                modifiers: ['filter', 'with-top-border', (loop.first ? 'mobile' : '')],
+                modifiers: ['filter', 'with-bottom-border', (loop.first ? 'mobile' : '')],
                 data: {
                     title: ('product.filter.' ~ filter.name | lower) | trans,
                     triggerClass: loop.first ? config.jsName ~ '__trigger-category' : config.jsName ~ '__trigger',

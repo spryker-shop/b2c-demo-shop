@@ -18,7 +18,7 @@
         <div class="col is-hidden-sm-md">
             <div class="grid grid--middle">
                 {% block selects %}
-                    <div class="col {{config.jsName}}__filter-per-page" data-block-to=".js-filter-section__sorting" data-breackpoint="769">
+                    <div class="col col--sm-3 col--md-5 {{config.jsName}}__filter-per-page" data-block-to=".js-filter-section__sorting" data-breackpoint="769">
                         {% block label %}
                             <label class="{{ config.name }}__label is-hidden-sm-md">{{ 'catalog.filter.per' | trans }}:</label>
                         {% endblock %}
@@ -43,8 +43,9 @@
                             {% endblock %}
                         {% endembed %}
                     </div>
-                    <div class="col {{config.jsName}}__filter-sort" data-block-to=".js-filter-section__sorting" data-breackpoint="769">
+                    <div class="col col--sm-9 col--md-7 {{config.jsName}}__filter-sort" data-block-to=".js-filter-section__sorting" data-breackpoint="769">
                         {% embed molecule('custom-select') with {
+                            class: 'float-right',
                             modifiers: ['hollow'],
                             attributes: {
                                 name: 'sort',
