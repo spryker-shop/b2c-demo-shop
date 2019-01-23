@@ -24,16 +24,18 @@
         {% set breadcrumbSteps = _self.renderBreadcrumbSteps(data.category, false, data.filterPath) %}
         <div class="container">
             <div class="container__inner">
-                {% embed molecule('breadcrumb') with {
-                    modifiers: ['no-border'],
-                    embed: {
-                        breadcrumbs: breadcrumbSteps
-                    }
-                } only %}
-                    {% block breadcrumbs %}
-                        {{ embed.breadcrumbs }}
-                    {% endblock %}
-                {% endembed %}
+                {% block breadcrumb %}
+                    {% embed molecule('breadcrumb') with {
+                        modifiers: ['no-border'],
+                        embed: {
+                            breadcrumbs: breadcrumbSteps
+                        }
+                    } only %}
+                        {% block breadcrumbs %}
+                            {{ embed.breadcrumbs }}
+                        {% endblock %}
+                    {% endembed %}
+                {% endblock %}
             </div>
         </div>
     {% endblock %}
