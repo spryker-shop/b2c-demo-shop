@@ -3,11 +3,11 @@
     <!-- CMS_BLOCK_PLACEHOLDER : "description" -->
     <div class="container">
         <div class="grid grid--justify grid--spaced-lg multi-inspirational-wrap multi-inspirational-wrap--left js-multi-inspirational-wrap--1">
-            <div class="col col--lg-6 col--md-12 col--sm-12 js-multi-inspirational-wrap__target--1">
+            <div class="col col--lg-6 col--md-12 col--sm-12">
                 {{ spyCmsBlockPlaceholder('description') | raw }}
             </div>
-            <div class="col col--lg-6 col--md-12 col--sm-12">
-                <div class="multi-inspirational-block multi-inspirational-block--lg">
+            <div class="col col--lg-6 col--md-12 col--sm-12 multi-inspirational-wrap__holder multi-inspirational-wrap__holder--paralax-to-bottom">
+                <div class="multi-inspirational-block multi-inspirational-block--lg js-multi-inspirational-wrap__target--1">
                     {{ spyCmsBlockPlaceholder('title') | raw }}
                 </div>
             </div>
@@ -18,7 +18,7 @@
                 'wrapper-selector': '.js-multi-inspirational-wrap--1',
                 'target-selector': '.js-multi-inspirational-wrap__target--1',
                 'motion-direction': 'top',
-                'motion-ratio': '10',
+                'motion-ratio': '8',
                 'breakpoint-min': '769'
             }
         } only %}
