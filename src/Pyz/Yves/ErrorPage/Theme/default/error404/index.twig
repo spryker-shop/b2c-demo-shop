@@ -5,9 +5,13 @@
     title: 'error_page.title' | trans
 } %}
 
-{% block contentClass %}spacing-y spacing-y--biggest{% endblock %}
+{% block contentClass %}spacing-y spacing-y--biggest spacing-x spacing-x--big{% endblock %}
 
 {% block breadcrumbs %}{% endblock %}
+
+{% block title %}
+    <h1 class="title title--main title--with-border title--medium spacing-x spacing-x--big">{{data.title}}</h1>
+{% endblock %}
 
 {% block content %}
     <div class="spacing-bottom spacing-bottom--inner spacing-bottom--biggest">
