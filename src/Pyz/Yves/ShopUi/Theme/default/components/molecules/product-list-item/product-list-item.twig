@@ -23,38 +23,38 @@
                         }
                     } only %}
                 </a>
+                {% block groups %}
+                    {% widget 'ProductGroupWidget' args [data.abstractId] use view('product-color-selector', 'ProductGroupWidget') only %}
+                        {% block body %}
+                            {% include molecule('color-selector', 'ProductGroupWidget') with {
+                                modifiers: ['product-list'],
+                                class: 'spacing-top spacing-top--small text-center',
+                                data: {
+                                    items: data.items
+                                },
+                                attributes: {
+                                    'target-image-selector': '.js-product-color-group__image-' ~ data.idProductAbstract
+                                }
+                            } only %}
+                        {% endblock %}
+                    {% endwidget %}
+                {% endblock %}
             {% endblock %}
         </div>
     {% endblock %}
 
-    <div class="col col--sm-8 col--md-7 {{ config.name }}__col {{ config.name }}__col-main">
+    <a class="col col--sm-8 col--md-7 {{ config.name }}__col {{ config.name }}__col-name" href="{{ data.url }}">
         {% block name %}
-            <a class="{{ config.name }}__name title title--medium" href="{{ data.url }}">{{ data.name }}</a>
+            <span class="title title--medium" >{{ data.name }}</span>
         {% endblock %}
 
         {% block rating %}
             {% widget 'DisplayProductAbstractReviewWidget' args [data.abstractId] only %}{% endwidget %}
         {% endblock %}
-
-        {% block groups %}
-            {% widget 'ProductGroupWidget' args [data.abstractId] use view('product-color-selector', 'ProductGroupWidget') only %}
-                {% block body %}
-                    {% include molecule('color-selector', 'ProductGroupWidget') with {
-                        class: 'spacing-top spacing-top--small',
-                        data: {
-                            items: data.items
-                        },
-                        attributes: {
-                            'target-image-selector': '.js-product-color-group__image-' ~ data.idProductAbstract
-                        }
-                    } only %}
-                {% endblock %}
-            {% endwidget %}
-        {% endblock %}
-    </div>
+    </a>
 
     {% block actionsContainer %}
-        <div class="col col--sm-4 col--md-2 col--xl-2 text-right {{ config.name }}__col {{ config.name }}__col-price">
+        <a class="col col--sm-4 col--md-2 col--xl-2 text-right {{ config.name }}__col {{ config.name }}__col-price" href="{{ data.url }}">
             {% block price %}
                 <div>
                     {% if can('SeePricePermissionPlugin') and data.price %}
@@ -70,7 +70,7 @@
                     {% endif %}
                 </div>
             {% endblock %}
-        </div>
+        </a>
     {% endblock %}
 
     <div class="{{ config.name }}__labels-wrap">
