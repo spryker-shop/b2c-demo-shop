@@ -57,6 +57,9 @@ class CalculationDependencyProvider extends SprykerCalculationDependencyProvider
      *   - Item.productOption.calculatedDiscounts
      *   - Expense.calculatedDiscounts
      *
+     * RemoveCanceledAmountCalculatorPlugin - Reset item canceled amount for:
+     *   - Item.canceledAmount
+     *
      * PriceCalculatorPlugin - Calculates price based on tax mode, tax mode is set in this calculator based on CalculationConstants::TAX_MODE configuration key.
      *    - Item.unitPrice
      *    - Item.sumPrice
@@ -174,23 +177,24 @@ class CalculationDependencyProvider extends SprykerCalculationDependencyProvider
      *
      * @param \Spryker\Zed\Kernel\Container $container
      *
-     * @return \Spryker\Zed\Calculation\Dependency\Plugin\CalculationPluginInterface[]
+     * @return \Spryker\Zed\CalculationExtension\Dependency\Plugin\CalculationPluginInterface[]
      */
     protected function getQuoteCalculatorPluginStack(Container $container)
     {
-        return [
+        /** @var \Spryker\Zed\Calculation\Dependency\Plugin\CalculationPluginInterface[] $pluginStack */
+        $pluginStack = [
             new RemoveTotalsCalculatorPlugin(),
             new RemoveAllCalculatedDiscountsCalculatorPlugin(),
             new RemovePromotionItemsCalculatorPlugin(),
             new RemoveCanceledAmountCalculatorPlugin(),
-            new RemoveSalesOrderThresholdExpenseCalculatorPlugin(),
+            new RemoveSalesOrderThresholdExpenseCalculatorPlugin(), #SalesOrderThresholdFeature
 
             new PriceCalculatorPlugin(),
             new ItemProductOptionPriceAggregatorPlugin(),
             new ItemSubtotalAggregatorPlugin(),
 
             new SubtotalCalculatorPlugin(),
-            new AddSalesOrderThresholdExpenseCalculatorPlugin(),
+            new AddSalesOrderThresholdExpenseCalculatorPlugin(), #SalesOrderThresholdFeature
 
             new ProductItemTaxRateCalculatorPlugin(),
             new ProductOptionTaxRateCalculatorPlugin(),
@@ -221,6 +225,8 @@ class CalculationDependencyProvider extends SprykerCalculationDependencyProvider
 
             new PaymentCalculatorPlugin(),
         ];
+
+        return $pluginStack;
     }
 
     /**

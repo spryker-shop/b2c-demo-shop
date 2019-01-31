@@ -66,14 +66,6 @@ class DataImportConfig extends SprykerDataImportConfig
     /**
      * @return \Generated\Shared\Transfer\DataImporterConfigurationTransfer
      */
-    public function getOrderSourceDataImporterConfiguration()
-    {
-        return $this->buildImporterConfiguration('order_source.csv', static::IMPORT_TYPE_ORDER_SOURCE);
-    }
-
-    /**
-     * @return \Generated\Shared\Transfer\DataImporterConfigurationTransfer
-     */
     public function getStoreDataImporterConfiguration()
     {
         return $this->buildImporterConfiguration('', static::IMPORT_TYPE_STORE);

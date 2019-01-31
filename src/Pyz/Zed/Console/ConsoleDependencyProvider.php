@@ -30,6 +30,7 @@ use Spryker\Zed\Development\Communication\Console\CodePhpstanConsole;
 use Spryker\Zed\Development\Communication\Console\CodeStyleSnifferConsole;
 use Spryker\Zed\Development\Communication\Console\CodeTestConsole;
 use Spryker\Zed\Development\Communication\Console\GenerateClientIdeAutoCompletionConsole;
+use Spryker\Zed\Development\Communication\Console\GenerateGlueIdeAutoCompletionConsole;
 use Spryker\Zed\Development\Communication\Console\GenerateIdeAutoCompletionConsole;
 use Spryker\Zed\Development\Communication\Console\GenerateServiceIdeAutoCompletionConsole;
 use Spryker\Zed\Development\Communication\Console\GenerateYvesIdeAutoCompletionConsole;
@@ -41,7 +42,10 @@ use Spryker\Zed\Development\Communication\Console\PropelAbstractValidateConsole;
 use Spryker\Zed\DocumentationGeneratorRestApi\Communication\Console\GenerateRestApiDocumentationConsole;
 use Spryker\Zed\EventBehavior\Communication\Console\EventBehaviorTriggerTimeoutConsole;
 use Spryker\Zed\EventBehavior\Communication\Console\EventTriggerConsole;
+use Spryker\Zed\EventBehavior\Communication\Console\EventTriggerListenerConsole;
 use Spryker\Zed\EventBehavior\Communication\Plugin\Console\EventBehaviorPostHookPlugin;
+use Spryker\Zed\IndexGenerator\Communication\Console\PostgresIndexGeneratorConsole;
+use Spryker\Zed\IndexGenerator\Communication\Console\PostgresIndexRemoverConsole;
 use Spryker\Zed\Installer\Communication\Console\InitializeDatabaseConsole;
 use Spryker\Zed\Kernel\Container;
 use Spryker\Zed\Log\Communication\Console\DeleteLogFilesConsole;
@@ -61,12 +65,15 @@ use Spryker\Zed\ProductLabel\Communication\Console\ProductLabelRelationUpdaterCo
 use Spryker\Zed\ProductLabel\Communication\Console\ProductLabelValidityConsole;
 use Spryker\Zed\ProductRelation\Communication\Console\ProductRelationUpdaterConsole;
 use Spryker\Zed\ProductTaxSetsRestApi\Communication\Console\ProductTaxSetsRestApiConsole;
+use Spryker\Zed\ProductValidity\Communication\Console\ProductValidityConsole;
 use Spryker\Zed\Propel\Communication\Console\DatabaseDropConsole;
 use Spryker\Zed\Propel\Communication\Console\DatabaseExportConsole;
 use Spryker\Zed\Propel\Communication\Console\DatabaseImportConsole;
 use Spryker\Zed\Propel\Communication\Console\DeleteMigrationFilesConsole;
 use Spryker\Zed\Propel\Communication\Console\PropelSchemaValidatorConsole;
+use Spryker\Zed\Propel\Communication\Console\PropelSchemaXmlNameValidatorConsole;
 use Spryker\Zed\Propel\Communication\Plugin\ServiceProvider\PropelServiceProvider;
+use Spryker\Zed\Queue\Communication\Console\QueueDumpConsole;
 use Spryker\Zed\Queue\Communication\Console\QueueTaskConsole;
 use Spryker\Zed\Queue\Communication\Console\QueueWorkerConsole;
 use Spryker\Zed\Quote\Communication\Console\DeleteExpiredGuestQuoteConsole;
@@ -131,6 +138,7 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
         $commands = [
             new CacheWarmerConsole(),
             new BuildNavigationConsole(),
+            new BuildValidationCacheConsole(),
             new EmptyAllCachesConsole(),
             new GeneratorConsole(),
             new InitializeDatabaseConsole(),
@@ -148,6 +156,7 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
             new ProductRelationUpdaterConsole(),
             new ProductLabelValidityConsole(),
             new ProductLabelRelationUpdaterConsole(),
+            new ProductValidityConsole(),
             new DataImportConsole(),
             new DataImportConsole(DataImportConsole::DEFAULT_NAME . ':' . DataImportConfig::IMPORT_TYPE_STORE),
             new DataImportConsole(DataImportConsole::DEFAULT_NAME . ':' . DataImportConfig::IMPORT_TYPE_CURRENCY),
@@ -284,10 +293,16 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
             $commands[] = new CompletionCommand();
             $commands[] = new DataBuilderGeneratorConsole();
             $commands[] = new PropelSchemaValidatorConsole();
+            $commands[] = new PropelSchemaXmlNameValidatorConsole();
             $commands[] = new DataImportDumpConsole();
+            $commands[] = new GenerateGlueIdeAutoCompletionConsole();
             $commands[] = new PropelAbstractValidateConsole();
             $commands[] = new PluginUsageFinderConsole();
+            $commands[] = new PostgresIndexGeneratorConsole();
+            $commands[] = new PostgresIndexRemoverConsole();
             $commands[] = new GenerateRestApiDocumentationConsole();
+            $commands[] = new QueueDumpConsole();
+            $commands[] = new EventTriggerListenerConsole();
         }
 
         return $commands;

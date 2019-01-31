@@ -30,7 +30,7 @@ class CartDependencyProvider extends SprykerCartDependencyProvider
     protected function getQuoteStorageStrategyPlugins()
     {
         $quoteStorageStrategyPlugins = parent::getQuoteStorageStrategyPlugins();
-        $quoteStorageStrategyPlugins[] = new DatabaseQuoteStorageStrategy();
+        $quoteStorageStrategyPlugins[] = new DatabaseQuoteStorageStrategy(); #PersistentCartFeature
 
         return $quoteStorageStrategyPlugins;
     }

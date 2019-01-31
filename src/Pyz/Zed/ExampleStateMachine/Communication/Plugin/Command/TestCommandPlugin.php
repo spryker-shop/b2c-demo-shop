@@ -14,6 +14,7 @@ use Spryker\Zed\StateMachine\Dependency\Plugin\CommandPluginInterface;
 /**
  * @method \Pyz\Zed\ExampleStateMachine\Business\ExampleStateMachineFacade getFacade()
  * @method \Pyz\Zed\ExampleStateMachine\Communication\ExampleStateMachineCommunicationFactory getFactory()
+ * @method \Pyz\Zed\ExampleStateMachine\Persistence\ExampleStateMachineQueryContainerInterface getQueryContainer()
  */
 class TestCommandPlugin extends AbstractPlugin implements CommandPluginInterface
 {
