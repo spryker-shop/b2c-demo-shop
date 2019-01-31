@@ -91,7 +91,7 @@ class ProductSetIdsWidget extends AbstractWidget
         /** @var \Generated\Shared\Transfer\ProductSetStorageTransfer|null $productSetStorageTransfer */
         $productSetStorageTransfer = $this->getFactory()->getProductSetStorageClient()->getProductSetByIdProductSet($idProductSet, $this->getLocale());
 
-        return $productSetStorageTransfer ;
+        return $productSetStorageTransfer;
     }
 
     /**
