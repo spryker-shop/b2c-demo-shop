@@ -54,7 +54,7 @@ class ProductStorageQueryContainer extends SprykerProductStorageQueryContainer
      *
      * @param int $idProductConcrete
      *
-     * @return \Orm\Zed\Product\Persistence\SpyProductAbstractLocalizedAttributesQuery
+     * @return \Orm\Zed\ProductBundle\Persistence\SpyProductBundleQuery
      */
     public function queryBundledProductIdsByProductConcreteId($idProductConcrete)
     {

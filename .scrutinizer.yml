@@ -1,13 +1,13 @@
 build:
     environment:
         php: '7.1'
-        node: '8.10.0'
-    dependencies:
-        before:
-            - 'rm -rf ./node_modules'
-            - 'npm cache -f clear'
-            - 'composer remove --dev spryker/git-hook'
 
     tests:
         override:
             - true # disable test execution on scrutinizer
+
+    nodes:
+        analysis:
+            tests:
+                override:
+                    - php-scrutinizer-run

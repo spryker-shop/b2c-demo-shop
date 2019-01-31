@@ -26,7 +26,7 @@ class WishlistDependencyProvider extends SprykerWishlistDependencyProvider
     protected function getAddItemPreCheckPlugins(): array
     {
         return [
-            new ProductDiscontinuedAddItemPreCheckPlugin(),
+            new ProductDiscontinuedAddItemPreCheckPlugin(), #ProductDiscontinuedFeature
         ];
     }
 }

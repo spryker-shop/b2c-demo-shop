@@ -26,6 +26,7 @@ use Spryker\Shared\Kernel\ClassResolver\Cache\Provider\File;
 use Spryker\Shared\Kernel\KernelConstants;
 use Spryker\Shared\Kernel\Store;
 use Spryker\Shared\Log\LogConstants;
+use Spryker\Shared\Monitoring\MonitoringConstants;
 use Spryker\Shared\Oauth\OauthConstants;
 use Spryker\Shared\OauthCustomerConnector\OauthCustomerConnectorConstants;
 use Spryker\Shared\Oms\OmsConstants;
@@ -79,7 +80,7 @@ $config[PropelConstants::ZED_DB_SUPPORTED_ENGINES] = [
     PropelConfig::DB_ENGINE_MYSQL => 'MySql',
     PropelConfig::DB_ENGINE_PGSQL => 'PostgreSql',
 ];
-$config[PropelConstants::SCHEMA_FILE_PATH_PATTERN] = APPLICATION_VENDOR_DIR . '/*/*/src/*/Zed/*/Persistence/Propel/Schema/';
+
 $config[PropelConstants::USE_SUDO_TO_MANAGE_DATABASE] = true;
 $config[PropelConstants::PROPEL_DEBUG] = false;
 
@@ -333,6 +334,7 @@ $config[LogConstants::LOG_FILE_PATH_GLUE] = $baseLogFilePath . '/GLUE/applicatio
 $config[LogConstants::EXCEPTION_LOG_FILE_PATH_YVES] = $baseLogFilePath . '/YVES/exception.log';
 $config[LogConstants::EXCEPTION_LOG_FILE_PATH_ZED] = $baseLogFilePath . '/ZED/exception.log';
 $config[LogConstants::EXCEPTION_LOG_FILE_PATH_GLUE] = $baseLogFilePath . '/GLUE/exception.log';
+$config[LogConstants::LOG_FOLDER_PATH_INSTALLATION] = sprintf('%s/data/install/logs', APPLICATION_ROOT_DIR);
 
 $config[LogConstants::LOG_SANITIZE_FIELDS] = [
     'password',
@@ -380,6 +382,7 @@ $config[QueueConstants::QUEUE_WORKER_INTERVAL_MILLISECONDS] = 1000;
 $config[QueueConstants::QUEUE_PROCESS_TRIGGER_INTERVAL_MICROSECONDS] = 1001;
 $config[QueueConstants::QUEUE_WORKER_MAX_THRESHOLD_SECONDS] = 59;
 $config[QueueConstants::QUEUE_WORKER_LOG_ACTIVE] = false;
+$config[QueueConstants::QUEUE_WORKER_LOOP] = false;
 
 /*
  * Queues can have different adapters and maximum worker number
@@ -407,8 +410,8 @@ $config[QueueConstants::QUEUE_ADAPTER_CONFIGURATION] = [
 $config[LogglyConstants::QUEUE_NAME] = 'loggly-log-queue';
 $config[LogglyConstants::ERROR_QUEUE_NAME] = 'loggly-log-queue.error';
 
-// ---------- Events
-$config[EventConstants::LOGGER_ACTIVE] = false;
+// ---------- Event
+$config[EventConstants::EVENT_CHUNK] = 500;
 
 // ---------- EventBehavior
 $config[EventBehaviorConstants::EVENT_BEHAVIOR_TRIGGERING_ACTIVE] = true;
@@ -427,18 +430,8 @@ $config[CmsGuiConstants::CMS_PAGE_PREVIEW_URI] = '/en/cms/preview/%d';
 // ---------- Loggly
 $config[LogglyConstants::TOKEN] = 'loggly-token:sample:123456';
 
-// ---------- FileManager
-$config[FileManagerConstants::STORAGE_NAME] = 'files';
-$config[FileManagerGuiConstants::DEFAULT_FILE_MAX_SIZE] = '10M';
-
-// ---------- FileSystem
-$config[FileSystemConstants::FILESYSTEM_SERVICE] = [
-    'files' => [
-        'sprykerAdapterClass' => LocalFilesystemBuilderPlugin::class,
-        'root' => APPLICATION_ROOT_DIR . '/data/DE/media/',
-        'path' => 'files/',
-    ],
-];
+// ---------- CMS
+$config[CmsGuiConstants::CMS_FOLDER_PATH] = '@Cms/templates/';
 
 // -------- DataImport
 $config[DataImportConstants::IS_ENABLE_INTERNAL_IMAGE] = false;
@@ -446,6 +439,7 @@ $config[DataImportConstants::IS_ENABLE_INTERNAL_IMAGE] = false;
 // ----------- Glue Application
 $config[GlueApplicationConstants::GLUE_APPLICATION_DOMAIN] = '';
 $config[GlueApplicationConstants::GLUE_APPLICATION_REST_DEBUG] = false;
+$config[GlueApplicationConstants::GLUE_APPLICATION_CORS_ALLOW_ORIGIN] = '';
 
 // ----------- OAUTH
 //Check how to generate https://oauth2.thephpleague.com/installation/
@@ -456,6 +450,25 @@ $config[OauthConstants::ENCRYPTION_KEY] = '';
 // ----------- AuthRestApi
 $config[OauthCustomerConnectorConstants::OAUTH_CLIENT_IDENTIFIER] = '';
 $config[OauthCustomerConnectorConstants::OAUTH_CLIENT_SECRET] = '';
+
+// ---------- FileSystem
+$config[FileSystemConstants::FILESYSTEM_SERVICE] = [
+    'files' => [
+        'sprykerAdapterClass' => LocalFilesystemBuilderPlugin::class,
+        'root' => APPLICATION_ROOT_DIR . '/data/DE/media/',
+        'path' => 'files/',
+    ],
+];
+
+// ---------- FileManager
+$config[FileManagerConstants::STORAGE_NAME] = 'files';
+$config[FileManagerGuiConstants::DEFAULT_FILE_MAX_SIZE] = '10M';
+
+// ---------- Monitoring
+$config[MonitoringConstants::IGNORABLE_TRANSACTIONS] = [
+    '_profiler',
+    '_wdt',
+];
 
 // ---------- Guest cart
 $config[QuoteConstants::GUEST_QUOTE_LIFETIME] = 'P01M';

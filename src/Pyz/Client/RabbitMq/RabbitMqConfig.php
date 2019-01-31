@@ -93,6 +93,7 @@ class RabbitMqConfig extends SprykerRabbitMqConfig
         $queueOptionTransfer
             ->setQueueName($queueName)
             ->setDurable(true)
+            ->setNoWait(false)
             ->addRoutingKey('');
 
         return $queueOptionTransfer;

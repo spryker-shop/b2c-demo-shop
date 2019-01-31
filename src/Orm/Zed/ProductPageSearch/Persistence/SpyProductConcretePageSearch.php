@@ -5,12 +5,12 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-namespace Orm\Zed\ManualOrderEntry\Persistence;
+namespace Orm\Zed\ProductPageSearch\Persistence;
 
-use Orm\Zed\ManualOrderEntry\Persistence\Base\SpyOrderSource as BaseSpyOrderSource;
+use Spryker\Zed\ProductPageSearch\Persistence\Propel\AbstractSpyProductConcretePageSearch as BaseSpyProductConcretePageSearch;
 
 /**
- * Skeleton subclass for representing a row from the 'spy_order_source' table.
+ * Skeleton subclass for representing a row from the 'spy_product_concrete_page_search' table.
  *
  *
  *
@@ -19,6 +19,6 @@ use Orm\Zed\ManualOrderEntry\Persistence\Base\SpyOrderSource as BaseSpyOrderSour
  * long as it does not already exist in the output directory.
  *
  */
-class SpyOrderSource extends BaseSpyOrderSource
+class SpyProductConcretePageSearch extends BaseSpyProductConcretePageSearch
 {
 }

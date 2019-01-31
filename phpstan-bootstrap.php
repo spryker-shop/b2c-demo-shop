@@ -17,6 +17,11 @@ require_once(__DIR__ . '/src/Generated/Service/Ide/AutoCompletion.php');
 require_once(__DIR__ . '/src/Generated/Yves/Ide/AutoCompletion.php');
 require_once(__DIR__ . '/src/Generated/Zed/Ide/AutoCompletion.php');
 
+$codeceptionShimFilePath = __DIR__ . '/vendor/codeception/codeception/shim.php';
+if (file_exists($codeceptionShimFilePath)) {
+    require_once($codeceptionShimFilePath);
+}
+
 // Shim to not throw "Function opcache_invalidate not found" error when opcache is not enabled
 if (!function_exists('opcache_invalidate')) {
     /**
