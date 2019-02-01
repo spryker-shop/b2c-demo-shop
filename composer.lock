@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cb70d6365cc5d22b1ab5f224874d43fe",
+    "content-hash": "44df8656b7b891047d9c9af8e43c6e6f",
     "packages": [
         {
             "name": "codeitnowin/barcode",
@@ -2177,6 +2177,29 @@
             "time": "2019-01-17T10:02:55+00:00"
         },
         {
+            "name": "spryker-feature/category-image",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker-feature/category-image.git",
+                "reference": "f38319efd510a2a6df7526c47dbf86aee0c936a9"
+            },
+            "require": {
+                "php": ">=7.1",
+                "spryker-feature/category-management": "^201902.0",
+                "spryker-shop/category-image-storage-widget": "^1.0.0",
+                "spryker/category-image": "^1.0.0",
+                "spryker/category-image-gui": "^1.0.0",
+                "spryker/category-image-storage": "^1.0.0"
+            },
+            "type": "metapackage",
+            "license": [
+                "proprietary"
+            ],
+            "description": "Category Image [feature]",
+            "time": "2019-02-01T08:31:18+00:00"
+        },
+        {
             "name": "spryker-feature/category-management",
             "version": "dev-master",
             "source": {
@@ -3639,6 +3662,47 @@
                 "proprietary"
             ],
             "description": "CatalogPage module",
+            "time": "2019-01-16T08:14:30+00:00"
+        },
+        {
+            "name": "spryker-shop/category-image-storage-widget",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker-shop/category-image-storage-widget.git",
+                "reference": "052f20bee0bf74d485fb09db540a468f0b73dc68"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker-shop/category-image-storage-widget/zipball/052f20bee0bf74d485fb09db540a468f0b73dc68",
+                "reference": "052f20bee0bf74d485fb09db540a468f0b73dc68",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1",
+                "spryker/category-image-storage": "^1.0.0",
+                "spryker/kernel": "^3.25.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/testify": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "SprykerShop\\": "src/SprykerShop/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "CategoryImageStorageWidget module",
             "time": "2019-01-16T08:14:30+00:00"
         },
         {
@@ -8258,6 +8322,150 @@
             ],
             "description": "CategoryExtension module",
             "time": "2019-01-10T18:40:34+00:00"
+        },
+        {
+            "name": "spryker/category-image",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/category-image.git",
+                "reference": "40d6dbf99d4bf90c4a98a5cd4398a4b5a6502780"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/category-image/zipball/40d6dbf99d4bf90c4a98a5cd4398a4b5a6502780",
+                "reference": "40d6dbf99d4bf90c4a98a5cd4398a4b5a6502780",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1",
+                "spryker/category": "^4.11.0",
+                "spryker/category-extension": "^1.0.0",
+                "spryker/kernel": "^3.24.0",
+                "spryker/locale": "^3.1.0",
+                "spryker/propel-orm": "^1.0.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/propel": "*",
+                "spryker/testify": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/",
+                    "SprykerTest\\Zed\\CategoryImage\\Helper\\": "tests/SprykerTest/Zed/CategoryImage/_support/Helper/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "CategoryImage module",
+            "time": "2019-01-16T13:42:43+00:00"
+        },
+        {
+            "name": "spryker/category-image-gui",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/category-image-gui.git",
+                "reference": "662dfc2f7dbd7c41b81f730d2567d175ee812eb4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/category-image-gui/zipball/662dfc2f7dbd7c41b81f730d2567d175ee812eb4",
+                "reference": "662dfc2f7dbd7c41b81f730d2567d175ee812eb4",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1",
+                "spryker/category-extension": "^1.0.0",
+                "spryker/gui": "^3.13.3",
+                "spryker/kernel": "^3.24.0",
+                "spryker/locale": "^3.1.0",
+                "spryker/symfony": "^3.2.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/testify": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "CategoryImageGui module",
+            "time": "2019-01-16T07:46:48+00:00"
+        },
+        {
+            "name": "spryker/category-image-storage",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/category-image-storage.git",
+                "reference": "5765dc86a96778536cd1e980f06145c986f4d698"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/category-image-storage/zipball/5765dc86a96778536cd1e980f06145c986f4d698",
+                "reference": "5765dc86a96778536cd1e980f06145c986f4d698",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1",
+                "spryker/category-image": "^1.0.0",
+                "spryker/event-behavior": "^1.1.0",
+                "spryker/kernel": "^3.24.0",
+                "spryker/propel-orm": "^1.0.0",
+                "spryker/storage": "^3.4.0",
+                "spryker/synchronization": "^1.1.0",
+                "spryker/synchronization-extension": "^1.0.0"
+            },
+            "require-dev": {
+                "spryker/category": "*",
+                "spryker/code-sniffer": "*",
+                "spryker/event": "*",
+                "spryker/locale": "*",
+                "spryker/propel": "*",
+                "spryker/queue": "*",
+                "spryker/testify": "*"
+            },
+            "suggest": {
+                "spryker/event": "If you want to use Event plugins, minimum required version: 2.1.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "CategoryImageStorage module",
+            "time": "2019-01-16T15:45:59+00:00"
         },
         {
             "name": "spryker/category-navigation-connector",
@@ -28314,6 +28522,12 @@
             "alias": "201902.0",
             "alias_normalized": "201902.0",
             "version": "9999999-dev",
+            "package": "spryker-feature/category-image"
+        },
+        {
+            "alias": "201902.0",
+            "alias_normalized": "201902.0",
+            "version": "9999999-dev",
             "package": "spryker-feature/category-management"
         },
         {
@@ -28607,6 +28821,7 @@
         "spryker-feature/cart": 20,
         "spryker-feature/cart-notes": 20,
         "spryker-feature/catalog": 20,
+        "spryker-feature/category-image": 20,
         "spryker-feature/category-management": 20,
         "spryker-feature/checkout": 20,
         "spryker-feature/cms": 20,
