@@ -48,7 +48,10 @@ class ExampleProductSalePageFactory extends AbstractFactory
      */
     public function getConfig()
     {
-        return parent::getConfig();
+        /** @var \Pyz\Client\ExampleProductSalePage\ExampleProductSalePageConfig $config */
+        $config = parent::getConfig();
+
+        return $config;
     }
 
     /**

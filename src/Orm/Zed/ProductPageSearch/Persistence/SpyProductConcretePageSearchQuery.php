@@ -5,12 +5,12 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-namespace Orm\Zed\ManualOrderEntry\Persistence;
+namespace Orm\Zed\ProductPageSearch\Persistence;
 
-use Orm\Zed\ManualOrderEntry\Persistence\Base\SpyOrderSourceQuery as BaseSpyOrderSourceQuery;
+use Spryker\Zed\ProductPageSearch\Persistence\Propel\AbstractSpyProductConcretePageSearchQuery as BaseSpyProductConcretePageSearchQuery;
 
 /**
- * Skeleton subclass for performing query and update operations on the 'spy_order_source' table.
+ * Skeleton subclass for performing query and update operations on the 'spy_product_concrete_page_search' table.
  *
  *
  *
@@ -19,6 +19,6 @@ use Orm\Zed\ManualOrderEntry\Persistence\Base\SpyOrderSourceQuery as BaseSpyOrde
  * long as it does not already exist in the output directory.
  *
  */
-class SpyOrderSourceQuery extends BaseSpyOrderSourceQuery
+class SpyProductConcretePageSearchQuery extends BaseSpyProductConcretePageSearchQuery
 {
 }

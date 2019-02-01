@@ -21,6 +21,9 @@ sections:
         navigation-cache-warmup:
             command: "vendor/bin/console navigation:build-cache"
 
+        rest-request-validation-cache-warmup:
+            command: "vendor/bin/console glue:rest:build-request-validation-cache"
+
     queue-flush:
         set-permissions:
             command: "vendor/bin/console queue:permission:set"
@@ -56,7 +59,16 @@ sections:
         propel-postgres-compatibility:
             command: "vendor/bin/console propel:pg-sql-compat"
 
+        propel-postgres-index-remover:
+            command: "vendor/bin/console propel:postgres-indexes:remove"
+
         propel-copy-schema:
+            command: "vendor/bin/console propel:schema:copy"
+
+        propel-postgres-index-generator:
+            command: "vendor/bin/console propel:postgres-indexes:generate"
+
+        propel-copy-and-merge-with-generated-indices:
             command: "vendor/bin/console propel:schema:copy"
 
         propel-build:
@@ -82,6 +94,7 @@ sections:
     setup-test:
         codeception-build:
             command: "vendor/bin/codecept build --ansi"
+
         databuilder-generate:
             command: "vendor/bin/console transfer:databuilder:generate"
 

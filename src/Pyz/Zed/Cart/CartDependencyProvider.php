@@ -74,7 +74,8 @@ class CartDependencyProvider extends SprykerCartDependencyProvider
      */
     protected function getCartPreCheckPlugins(Container $container)
     {
-        return [
+        /** @var \Spryker\Zed\Cart\Dependency\CartPreCheckPluginInterface[] $cartPreCheckPlugins */
+        $cartPreCheckPlugins = [
             new ProductExistsCartPreCheckPlugin(),
             new CartItemPricePreCheckPlugin(),
             new ProductOptionValuePriceExistsCartPreCheckPlugin(),
@@ -83,6 +84,8 @@ class CartDependencyProvider extends SprykerCartDependencyProvider
             new ProductQuantityRestrictionCartPreCheckPlugin(),
             new ProductDiscontinuedCartPreCheckPlugin(),
         ];
+
+        return $cartPreCheckPlugins;
     }
 
     /**
@@ -106,12 +109,15 @@ class CartDependencyProvider extends SprykerCartDependencyProvider
      */
     protected function getPreReloadPlugins(Container $container)
     {
-        return [
+        /** @var \Spryker\Zed\Cart\Dependency\PreReloadItemsPluginInterface[] $preReloadPlugins */
+        $preReloadPlugins = [
             new CartBundleItemsPreReloadPlugin(),
             new RemoveInactiveItemsPreReloadPlugin(),
             new CleanUpItemsPreReloadPlugin(),
             new FilterItemsWithoutPricePlugin(),
         ];
+
+        return $preReloadPlugins;
     }
 
     /**
