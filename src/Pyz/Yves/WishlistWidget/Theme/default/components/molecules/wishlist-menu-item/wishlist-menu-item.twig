@@ -1,0 +1,39 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'wishlist-menu-item',
+    tag: 'li'
+} %}
+
+{% define data = {
+    wishlistCollection: required,
+    isActivePage: required,
+    activeWishlistId: required
+} %}
+
+{% set hasWishlists = data.wishlistCollection is not empty %}
+{% set itemClass = data.isActivePage ? ' menu__item--active' : '' %}
+{% set itemClass = itemClass ~ (hasWishlists ? ' menu__item--has-children-list' : '') %}
+
+{%- macro isActive(idWishlist, activeWishlistId) -%}
+    {%- if idWishlist == activeWishlistId -%}menu__item--active{%- endif -%}
+{%- endmacro -%}
+
+{%- import _self as macros -%}
+
+{% block class %}
+    {{ parent() }} {{ component.renderClass('menu__item', modifiers) }} {{ itemClass }}
+{% endblock %}
+
+{% block body %}
+    <a class="{{ component.renderClass('menu__link', modifiers) }}" href="{{ path('wishlist/overview') }}" data-id="sidebar-wishlist">{{ 'wishlist.wishlist' | trans }}</a>
+    {% if hasWishlists %}
+        <ul class="menu">
+            {% for wishlist in data.wishlistCollection %}
+                <li class="menu__item {{macros.isActive(wishlist.idWishlist, data.activeWishlistId)}}">
+                    <a class="menu__link" href="{{ path('wishlist/details', {wishlistName: wishlist.name}) }}">{{ wishlist.name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}

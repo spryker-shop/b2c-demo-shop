@@ -1,0 +1,15 @@
+{% extends template('widget') %}
+
+{% define data = {  
+    nodes: _widget.navigationTree.nodes
+} %}
+
+{% block body %}
+    {% include molecule('navigation-multilevel') with {
+        data: {
+            nodes: data.nodes,
+            menuInline: false,
+            menuDropdown: false
+        }
+    } only %}
+{% endblock %}

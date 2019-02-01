@@ -19,9 +19,7 @@
     <link itemprop="url" href="{{ data.productUrl }}">
 {% endblock %}
 {% block header %}
-    {% embed organism('header') with {
-        modifiers: ['border-less-bottom']
-    } only %}
+    {% embed organism('header') only %}
         {% block mobile %}
             <a href="#" class="link link--alt js-page-layout-main__side-drawer-trigger">
                 {% include atom('icon') with {
@@ -34,7 +32,13 @@
         {% endblock %}
     {% endembed %}
 {% endblock %}
-{% block pageInfo %}{% endblock %}
+{% block pageInfo %}
+    <div class="container__inner">
+        {% block breadcrumbs %}
+            {% widget 'ProductBreadcrumbsWithCategoriesWidget' args [data.product] only %}{% endwidget %}
+        {% endblock %}
+    </div>
+{% endblock %}
 {% block contentClass %} page-layout-main {% endblock %}
 {% block content %}
     <div class="container__inner">
@@ -95,8 +99,5 @@
                 idProductAbstract: data.product.idProductAbstract
             }
         } only %}
-        {% block breadcrumbs %}
-            {% widget 'ProductBreadcrumbsWithCategoriesWidget' args [data.product] only %}{% endwidget %}
-        {% endblock %}
     </div>
 {% endblock %}

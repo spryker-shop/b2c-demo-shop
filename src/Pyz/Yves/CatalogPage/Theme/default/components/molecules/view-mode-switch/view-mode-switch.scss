@@ -1,0 +1,42 @@
+@mixin catalog-page-view-mode-switch($name: '.view-mode-switch') {
+    #{$name} {
+        display: flex;
+        width: 100%;
+        border-top: rem(1) dotted $setting-color-gray-3;
+        border-bottom: rem(1) dotted $setting-color-gray-3;
+        padding: rem(20) 0;
+        margin: rem(10) auto rem(20);
+
+        @include helper-breakpoint-media-min($xl-min) {
+            padding: rem(17) 0;
+            margin: 0;
+            border-bottom: none;
+        }
+
+        &__link {
+            @include helper-effect-transition(color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50%;
+            padding: rem(2);
+            color: $setting-color-gray-3;
+
+            &:hover {
+                text-decoration: none;
+            }
+
+            &:not(:first-child) {
+                border-left: rem(1) dotted $setting-color-gray-3;
+            }
+
+            &--active {
+                color: $setting-color-black;
+            }
+        }
+
+        @content;
+    }
+}
+
+@include catalog-page-view-mode-switch();

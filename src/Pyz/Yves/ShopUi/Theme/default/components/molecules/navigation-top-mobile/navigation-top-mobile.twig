@@ -14,55 +14,46 @@
 {% block body %}
     {% set items = [
         {
-            iconName: 'icon-home'
+            iconName: 'icon-hamburger',
+            isButton: true,
+            jsClass: 'js-page-layout-main__side-drawer-trigger'
         },
         {
             iconName: 'search',
-            isEmbed: true,
-            isSearch: true,
+            isButton: true,
+            jsClass: 'js-suggest-search__show'
         },
         {
-            url: url('wishlist/overview'),
-            iconName: 'wishlist'
+            iconName: 'wishlist',
+            url: url('wishlist/overview')
         },
         {
+            iconName: 'user-account',
             url: url('customer/overview'),
-            iconName: 'user-account'
+            isButton: is_granted('IS_AUTHENTICATED_FULLY') ? true : false,
+            jsClass: 'js-page-layout-main__account-side-drawer-trigger'
         },
         {
             iconName: 'cart',
             isEmbed: true,
-            isCart: true,
-        },
+            isCart: true
+        }
     ] %}
+
     <ul class="grid grid--middle grid--justify">
         {% for item in items %}
             {% if item.isEmbed is defined %}
                 {% embed molecule('navigation-top-mobile-item') with {
                     class: 'col',
                     data: {
-                        url: item.url is defined ? item.url : data.url,
-                        iconName: item.iconName,
+                        iconName: item.iconName
                     },
                     embed: {
                         item: item,
-                        searchUrl: data.searchUrl,
                         cartQuantity: data.cartQuantity
                     }
                 } only %}
                     {% block button %}
-                        {% if embed.item.isSearch is defined %}
-                            <form action="{{embed.searchUrl}}">
-                                <button type="button" class="button button--skinless spacing spacing--inner spacing--reset js-suggest-search__show">
-                                    {% include atom('icon') with {
-                                        modifiers: ['big'],
-                                        data: {
-                                            name: data.iconName,
-                                        }
-                                    } only %}
-                                </button>
-                            </form>
-                        {% endif %}
                         {% if embed.item.isCart is defined %}
                             {% include atom('cart-link') with {
                                 modifiers: ['mobile'],
@@ -82,6 +73,8 @@
                     data: {
                         url: item.url is defined ? item.url : data.url,
                         iconName: item.iconName,
+                        isButton: item.isButton is defined ? item.isButton : false,
+                        jsClass: item.jsClass is defined ? item.jsClass : ''
                     }
                 } only %}
             {% endif %}

@@ -1,13 +1,15 @@
 @mixin catalog-page-active-filter-section($name: '.active-filter-section') {
     #{$name} {
-        margin: 0 rem(-16) rem(50) rem(-24);
         font: 0/0 $setting-font-family;
-        padding: 0 rem(16) rem(2);
+        white-space: nowrap;
+        overflow-x: auto;
+        margin: rem(8) 0;
 
-        @include helper-breakpoint-media-max($lg-max) {
-            white-space: nowrap;
-            overflow-x: auto;
-            margin-bottom: rem(38);
+        @include helper-breakpoint-media-min($xl-min) {
+            white-space: normal;
+            overflow-x: visible;
+            margin: 0 rem(-16) rem(50) rem(-24);
+            padding: 0 rem(16) rem(2);
         }
 
         &__item {
@@ -16,11 +18,15 @@
             letter-spacing: rem(1.2);
             text-transform: uppercase;
             padding: rem(9) rem(33) rem(10) rem(11);
-            margin: 0 0 rem(8) rem(8);
+            margin-right: rem(8);
             border: solid rem(1) $setting-color-input-border;
             border-radius: rem(2);
             color: $setting-color-gray-3;
             position: relative;
+
+            @include helper-breakpoint-media-min($xl-min) {
+                margin: 0 0 rem(8) rem(8);
+            }
 
             &:hover {
                 color: $setting-color-gray-3;
