@@ -1,0 +1,84 @@
+$shop-ui-side-drawer-width: rem(375);
+$shop-ui-right-side-drawer-width: rem(320);
+
+@mixin shop-ui-side-drawer($name: '.side-drawer') {
+    #{$name} {
+        position: relative;
+        z-index: $setting-zi-side-drawer;
+
+        &__overlay {
+            @include helper-visibility-invisible;
+            @include helper-effect-transition(opacity visibility);
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: $setting-color-overlay;
+        }
+
+        &__drawer {
+            @include helper-ui-shadow;
+            @include helper-visibility-invisible;
+            @include helper-effect-transition(opacity visibility left right);
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: -100%;
+            width: 100%;
+            background-color: $setting-color-bg;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+
+            @include helper-breakpoint-media-min($md-min) {
+                left: - $shop-ui-side-drawer-width;
+                width: $shop-ui-side-drawer-width;
+            }
+
+            &--right {
+                left: auto;
+                right: - $shop-ui-right-side-drawer-width;
+                width: $shop-ui-right-side-drawer-width;
+            }
+        }
+
+        &__top-bar {
+            padding: rem(14) rem(24) rem(14) rem(10);
+            background-color: $setting-color-gray-1;
+            min-height: rem(52);
+        }
+
+        &__close {
+            color: $setting-color-black;
+            margin: rem(3) 0;
+        }
+
+        &__navigation {
+            margin: rem(10) rem(24) 0;
+        }
+
+        &--show &__overlay {
+            @include helper-visibility-visible;
+        }
+
+        &--show &__drawer {
+            @include helper-visibility-visible;
+            left: 0;
+
+            &--right {
+                left: auto;
+                right: 0;
+            }
+        }
+
+        &__bottom-bar {
+            padding: rem(24);
+            margin-top: auto;
+        }
+
+        @content;
+    }
+}
+
+@include shop-ui-side-drawer;

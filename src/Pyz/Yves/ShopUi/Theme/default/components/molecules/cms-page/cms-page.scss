@@ -1,15 +1,27 @@
 @mixin shop-ui-cms-page($name: '.cms-page') {
     #{$name} {
         &__title {
-            border-top: rem(1) dotted $setting-color-gray-3;
+            border-bottom: rem(1) dotted $setting-color-gray-3;
             padding: rem(25) 0;
-            margin: rem(20) rem(16);
+            margin: 0 rem(16) rem(25);
+
             h2 {
                 text-align: center;
+                font-weight: fw(medium);
+                @include helper-reduced-font-size(1);
+                @include helper-font-reduced-letter-spacing(1);
+                @include helper-font-line-height(1);
+
+                @include helper-breakpoint-media-min($lg-min) {
+                    @include helper-font-size(1);
+                    @include helper-font-letter-spacing(1);
+                }
             }
         }
+
         &__content {
             margin: 0 rem(16) rem(50);
+
             h2,
             h3 {
                 text-align: center;
@@ -17,6 +29,7 @@
                 margin: rem(10) 0;
             }
         }
+
         &__notification {
             color: $setting-color-alt;
             font-size: rem(15);

@@ -45,6 +45,34 @@
                     margin-right: rem(8);
                 }
             }
+
+            &--side-drawer {
+                border-top: dotted rem(1) $setting-color-gray-3;
+                margin: 0;
+
+                & > #{$name} {
+                    padding-bottom: rem(10);
+                }
+
+                & #{$name}__item {
+                    font-size: rem(15);
+
+                    &:first-child {
+                        margin-top: 0;
+                    }
+                }
+            }
+        }
+
+        &__link {
+            &--side-drawer {
+                text-transform: uppercase;
+                font: fw(medium) rem(13) $setting-font-family-additional;
+                letter-spacing: rem(2);
+                white-space: nowrap;
+                display: inline-block;
+                padding: rem(16) 0;
+            }
         }
 
         &__separator {
@@ -77,6 +105,10 @@
             }
         }
 
+        &--side-drawer {
+            border-bottom: dotted rem(1) $setting-color-gray-3;
+        }
+
         &--customer-account {
             #{$name}__item,
             #{$name}__link {
@@ -101,7 +133,7 @@
 
                 @include helper-breakpoint-media-min($md-min) {
                     white-space: nowrap;
-                    margin: 0 0.5rem;
+                    margin: 0 rem(8);
                 }
             }
         }

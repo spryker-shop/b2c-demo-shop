@@ -1,0 +1,124 @@
+@mixin shop-ui-product-list-item($name: '.product-list-item') {
+    #{$name} {
+        @include helper-effect-transition(box-shadow z-index);
+        position: relative;
+        margin-bottom: rem(10);
+        font-family: $setting-font-family-additional;
+        border-radius: rem(4);
+        overflow: hidden;
+        background: $setting-color-alpha-1;
+
+        &::before {
+            @include helper-effect-transition(opacity);
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, $setting-color-black, $setting-color-alpha-1);
+            opacity: 0;
+        }
+
+        &:last-child {
+            margin-bottom: rem(53);
+        }
+
+        &__col {
+            padding: rem(10) rem(16) rem(25);
+            position: relative;
+
+            @include helper-breakpoint-media-min($md-min) {
+                padding: rem(48) 0;
+            }
+        }
+
+        &__col-name {
+            &:hover {
+                text-decoration: none;
+                cursor: pointer;
+                color: $setting-color-black;
+            }
+        }
+
+        &__col-image {
+            padding: rem(38) 0 0;
+            background-color: $setting-color-bg;
+            position: relative;
+            z-index: $setting-zi-element;
+
+            @include helper-breakpoint-media-min($md-min) {
+                padding: rem(40) rem(20) rem(25) rem(38);
+            }
+        }
+
+        &__col-price {
+            &:hover {
+                text-decoration: none;
+            }
+
+            @include helper-breakpoint-media-min($md-min) {
+                padding-right: rem(38);
+            }
+        }
+
+        &__labels-wrap {
+            z-index: $setting-zi-element + 1;
+
+            .label-group {
+                left: 0;
+                top: 0;
+                bottom: auto;
+                right: auto;
+                padding: rem(8) rem(6);
+            }
+        }
+
+        &__overlay {
+            &::before,
+            &::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: $setting-color-alpha-1;
+                z-index: $setting-zi-element-floating;
+            }
+
+            &::after {
+                @include helper-effect-transition(opacity);
+                background: linear-gradient(to bottom, $setting-color-black, $setting-color-alpha-1);
+                opacity: 0;
+            }
+        }
+
+        &__review {
+            display: flex;
+            flex-wrap: nowrap;
+            align-items: center;
+            margin-top: rem(7);
+            margin-left: rem(-11);
+        }
+
+        &__review-count {
+            font-size: rem(15);
+            color: $setting-color-gray-3;
+        }
+
+        .no-touch &:hover {
+            box-shadow: rem(2) rem(10) rem(30) 0 $setting-color-shadow;
+            z-index: $setting-zi-element + 1;
+
+            &::before,
+            #{$name}__overlay::after {
+                opacity: 0.05;
+            }
+        }
+
+        @content;
+    }
+}
+
+@include shop-ui-product-list-item();
