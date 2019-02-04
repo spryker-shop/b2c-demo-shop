@@ -14,7 +14,7 @@ class CmsConfig extends SprykerCmsConfig
     /**
      * @return bool
      */
-    public function appendPrefixToCmsPageUrl()
+    public function appendPrefixToCmsPageUrl(): bool
     {
         return true;
     }
