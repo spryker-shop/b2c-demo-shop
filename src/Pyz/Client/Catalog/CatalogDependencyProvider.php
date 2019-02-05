@@ -145,4 +145,18 @@ class CatalogDependencyProvider extends SprykerCatalogDependencyProvider
             ),
         ];
     }
+
+    /**
+     * @return \Spryker\Client\Search\Dependency\Plugin\QueryExpanderPluginInterface[]
+     */
+    protected function createCatalogSearchCountQueryExpanderPlugins(): array
+    {
+        return [
+            new StoreQueryExpanderPlugin(),
+            new LocalizedQueryExpanderPlugin(),
+            new IsActiveQueryExpanderPlugin(),
+            new IsActiveInDateRangeQueryExpanderPlugin(),
+            new ProductListQueryExpanderPlugin(),
+        ];
+    }
 }
