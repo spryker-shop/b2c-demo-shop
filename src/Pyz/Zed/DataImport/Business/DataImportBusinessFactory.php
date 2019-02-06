@@ -13,8 +13,6 @@ use Pyz\Zed\DataImport\Business\Model\CmsBlock\CmsBlockWriterStep;
 use Pyz\Zed\DataImport\Business\Model\CmsBlockCategory\CmsBlockCategoryWriterStep;
 use Pyz\Zed\DataImport\Business\Model\CmsBlockCategoryPosition\CmsBlockCategoryPositionWriterStep;
 use Pyz\Zed\DataImport\Business\Model\CmsBlockStore\CmsBlockStoreWriterStep;
-use Pyz\Zed\DataImport\Business\Model\CmsPage\CmsPageWriterStep;
-use Pyz\Zed\DataImport\Business\Model\CmsPage\PlaceholderExtractorStep;
 use Pyz\Zed\DataImport\Business\Model\CmsTemplate\CmsTemplateWriterStep;
 use Pyz\Zed\DataImport\Business\Model\Country\Repository\CountryRepository;
 use Pyz\Zed\DataImport\Business\Model\Currency\CurrencyWriterStep;
@@ -115,7 +113,6 @@ class DataImportBusinessFactory extends SprykerDataImportBusinessFactory
             ->addDataImporter($this->createProductSearchAttributeMapImporter())
             ->addDataImporter($this->createProductSearchAttributeImporter())
             ->addDataImporter($this->createCmsTemplateImporter())
-            ->addDataImporter($this->createCmsPageImporter())
             ->addDataImporter($this->createCmsBlockImporter())
             ->addDataImporter($this->createCmsBlockStoreImporter())
             ->addDataImporter($this->createCmsBlockCategoryPositionImporter())
@@ -235,34 +232,6 @@ class DataImportBusinessFactory extends SprykerDataImportBusinessFactory
     /**
      * @return \Spryker\Zed\DataImport\Business\Model\DataImporterInterface|\Spryker\Zed\DataImport\Business\Model\DataSet\DataSetStepBrokerAwareInterface
      */
-    protected function createCmsPageImporter()
-    {
-        $dataImporter = $this->getCsvDataImporterFromConfig($this->getConfig()->getCmsPageDataImporterConfiguration());
-
-        $dataSetStepBroker = $this->createTransactionAwareDataSetStepBroker(CmsPageWriterStep::BULK_SIZE);
-        $dataSetStepBroker
-            ->addStep($this->createAddLocalesStep())
-            ->addStep($this->createPlaceholderExtractorStep([
-                CmsPageWriterStep::KEY_PLACEHOLDER_TITLE,
-                CmsPageWriterStep::KEY_PLACEHOLDER_CONTENT,
-            ]))
-            ->addStep($this->createLocalizedAttributesExtractorStep([
-                CmsPageWriterStep::KEY_URL,
-                CmsPageWriterStep::KEY_NAME,
-                CmsPageWriterStep::KEY_META_TITLE,
-                CmsPageWriterStep::KEY_META_DESCRIPTION,
-                CmsPageWriterStep::KEY_META_KEYWORDS,
-            ]))
-            ->addStep(new CmsPageWriterStep());
-
-        $dataImporter->addDataSetStepBroker($dataSetStepBroker);
-
-        return $dataImporter;
-    }
-
-    /**
-     * @return \Spryker\Zed\DataImport\Business\Model\DataImporterInterface|\Spryker\Zed\DataImport\Business\Model\DataSet\DataSetStepBrokerAwareInterface
-     */
     protected function createCmsBlockImporter()
     {
         $dataImporter = $this->getCsvDataImporterFromConfig($this->getConfig()->getCmsBlockDataImporterConfiguration());
@@ -336,16 +305,6 @@ class DataImportBusinessFactory extends SprykerDataImportBusinessFactory
         $dataImporter->addDataSetStepBroker($dataSetStepBroker);
 
         return $dataImporter;
-    }
-
-    /**
-     * @param array $defaultPlaceholder
-     *
-     * @return \Spryker\Zed\DataImport\Business\Model\DataImportStep\DataImportStepInterface
-     */
-    protected function createPlaceholderExtractorStep(array $defaultPlaceholder = [])
-    {
-        return new PlaceholderExtractorStep($defaultPlaceholder);
     }
 
     /**
