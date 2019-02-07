@@ -52,7 +52,6 @@ class DataImportConfig extends SprykerDataImportConfig
     public const IMPORT_TYPE_TAX = 'tax';
     public const IMPORT_TYPE_CURRENCY = 'currency';
     public const IMPORT_TYPE_STORE = 'store';
-    public const IMPORT_TYPE_ORDER_SOURCE = 'order-source';
 
     /**
      * @return \Generated\Shared\Transfer\DataImporterConfigurationTransfer
