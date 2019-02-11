@@ -30,12 +30,20 @@
 
         &__logo-section {
             order: 1;
+            width: 100%;
+
+            @include helper-breakpoint-media-min($lg-min) {
+                width: auto;
+            }
         }
 
         &__logo-copy {
-            @include helper-breakpoint-media-min($md-min) {
-                display: flex;
-                align-items: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            @include helper-breakpoint-media-min($lg-min) {
+                justify-content: flex-start;
             }
         }
 
@@ -48,14 +56,20 @@
 
         &__logo-copy-links {
             display: flex;
-            flex-direction: column;
-            position: absolute;
+            justify-content: center;
+
+            @include helper-breakpoint-media-min($lg-min) {
+                justify-content: flex-start;
+            }
         }
 
         &__logo-copy-link {
             font-size: rem(13);
-            margin-right: rem(10);
             color: $setting-color-gray-4;
+
+            &:not(:first-child) {
+                margin-left: rem(25);
+            }
         }
 
         &__bottom {
@@ -100,17 +114,6 @@
             @include helper-breakpoint-media-min($md-min) {
                 margin: 0 rem(10);
             }
-        }
-
-        &__currency-lang {
-            display: flex;
-            order: 1;
-        }
-
-        &__select {
-            margin-left: rem(16);
-            font-size: rem(16);
-            line-height: rem(24);
         }
 
         &__subscription-text {

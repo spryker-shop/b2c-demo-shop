@@ -15,12 +15,14 @@
         display: none;
         @include helper-breakpoint-media-min($xl-min) {
             display: block;
+            padding-top: rem(60);
             padding-right: rem(15);
             padding-bottom: rem(50);
         }
     }
     .catalog-right-side {
         @include helper-breakpoint-media-min($xl-min) {
+            padding-top: rem(60);
             padding-left: rem(15);
         }
     }
@@ -30,36 +32,21 @@
         width: 100%;
     }
 
-    .overlay {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        z-index: $setting-zi-navigation-top + 1;
-        background: rgba($setting-color-black, 0.6);
-    }
-
     @include helper-breakpoint-media-max($lg-max) {
         .show-filter {
-            .overlay {
-                display: block;
-            }
             .catalog-left-side {
                 display: block;
                 position: fixed;
+                left: 0;
+                top: 0;
+                right: 0;
+                bottom: 0;
                 z-index: $setting-zi-navigation-top + 2;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                background: $setting-color-white;
-                border-radius: rem(3);
-                width: rem(500);
-                min-width: 0;
-                max-width: calc(100vw - #{rem(28)});
-                max-height: calc(100vh - #{rem(28)});
-                overflow-y: auto;
+                background-color: $setting-color-white;
+            }
+
+            .catalog-left-side__switcher {
+                display: none;
             }
         }
     }

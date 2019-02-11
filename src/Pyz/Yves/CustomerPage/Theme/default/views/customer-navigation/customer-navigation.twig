@@ -1,0 +1,17 @@
+{% extends template('widget') %}
+
+{% define data = {
+    activePage: _widget.activePage,
+    activeEntityId: _widget.activeEntityId,
+    modifiers: []
+} %}
+
+{% block body %}
+    {% include molecule('customer-navigation', 'CustomerPage') with {
+        modifiers: data.modifiers,
+        data: {
+            activePage: data.activePage,
+            activeEntityId: data.activeEntityId
+        }
+    } only %}
+{% endblock %}

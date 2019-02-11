@@ -11,6 +11,10 @@
             width: rem(36);
             max-height: rem(315);
             overflow: hidden;
+
+            &:not(.slick-initialized) #{$name}__item {
+                margin: rem(16) 0;
+            }
         }
 
         @include helper-breakpoint-media-min($xxl-min) {
@@ -21,7 +25,7 @@
             display: flex !important;
             align-items: center;
             justify-content: center;
-            width: rem(36);
+            width: 100%;
             padding: rem(1);
             position: relative;
             height: rem(280);
@@ -29,9 +33,16 @@
             margin: 0;
             cursor: default;
 
+            @include helper-breakpoint-media-max($md-max) {
+                &:not(:first-child) {
+                    display: none !important;
+                }
+            }
+
             @include helper-breakpoint-media-min($lg-min) {
+                width: rem(36);
                 height: rem(36);
-                border: solid 1px $setting-color-gray-3;
+                border: solid rem(1) $setting-color-gray-3;
                 margin: rem(8) 0;
                 cursor: pointer;
             }
@@ -40,7 +51,7 @@
                 padding: 0;
 
                 @include helper-breakpoint-media-min($lg-min) {
-                    border: solid 2px $setting-color-white;
+                    border: solid rem(2) $setting-color-white;
                 }
 
                 #{$name}__img {
@@ -80,10 +91,6 @@
 
         &__prev {
             padding: rem(10) 0 0;
-        }
-
-        &:not(.slick-initialized) {
-            display: flex !important;
         }
 
         .slick-slide {

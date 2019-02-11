@@ -18,6 +18,10 @@
 {% endblock %}
 
 {% block body %}
+    {% set categoryPath = app.request.attributes.get('categoryNode') is not null
+        ? app.request.attributes.get('categoryNode').url
+        : app.request.attributes.get('categoryPath')
+    %}
     <ul class="menu">
 
         {% for categoryNode in data.categories %}
@@ -29,15 +33,13 @@
                     {% set quantity = filterValue.docCount %}
                 {% endif %}
             {% endfor %}
-
             {% if data.filterPath is not empty %}
                 {% set categoryUrl = url(data.filterPath, {categoryPath: (categoryNode.url)}) %}
-                {% set currentUrl = url(data.filterPath, {categoryPath: (app.request.attributes.get('categoryNode').url)}) %}
+                {% set currentUrl = url(data.filterPath, {categoryPath: (categoryPath)}) %}
             {% else %}
                 {% set categoryUrl = categoryNode.url | replace({"'": "\\'", '"':'\\"'}) %}
-                {% set currentUrl = app.request.attributes.get('categoryNode') is not null ? app.request.attributes.get('categoryNode').url : null %}
+                {% set currentUrl = categoryPath %}
             {% endif %}
-
             {% set isActive = currentUrl == categoryUrl %}
             {% set classes = [
                 config.name ~ '__item',

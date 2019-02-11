@@ -2,11 +2,22 @@
 
 {% define data = {
     error: error,
-    title: 'error.404' | trans
+    title: 'error_page.title' | trans
 } %}
 
-{% block contentClass %}spacing-bottom spacing-bottom--biggest{% endblock %}
+{% block contentClass %}spacing-y spacing-y--biggest spacing-x spacing-x--big{% endblock %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block title %}
+    <h1 class="title title--main title--with-border title--medium spacing-x spacing-x--big">{{data.title}}</h1>
+{% endblock %}
 
 {% block content %}
-    <p class="text-center text-big spacing-bottom spacing-bottom--inner spacing-bottom--biggest">{{ data.error }}</p>
+    <div class="spacing-bottom spacing-bottom--inner spacing-bottom--biggest">
+        <p class="text-center text-big spacing-bottom spacing-bottom--biggest">{{ 'error_page.text' | trans }}</p>
+        <p class="text-center">
+            <a href="{{ url('home') }}" class="button">{{ 'error_page.home_link' | trans }}</a>
+        </p>
+    </div>
 {% endblock %}
