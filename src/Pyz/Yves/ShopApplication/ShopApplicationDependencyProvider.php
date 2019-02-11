@@ -52,6 +52,7 @@ use SprykerShop\Yves\ProductWidget\Widget\PdpProductReplacementForListWidget;
 use SprykerShop\Yves\ProductWidget\Widget\ProductAlternativeWidget;
 use SprykerShop\Yves\SalesOrderThresholdWidget\Widget\SalesOrderThresholdWidget;
 use SprykerShop\Yves\ShopApplication\ShopApplicationDependencyProvider as SprykerShopApplicationDependencyProvider;
+use SprykerShop\Yves\TabsWidget\Widget\FullTextSearchTabsWidget;
 use SprykerShop\Yves\WishlistWidget\Widget\WishlistMenuItemWidget;
 
 class ShopApplicationDependencyProvider extends SprykerShopApplicationDependencyProvider
@@ -107,6 +108,7 @@ class ShopApplicationDependencyProvider extends SprykerShopApplicationDependency
             WishlistProductAlternativeWidget::class,
             ProductSetIdsWidget::class,
             CategoryImageStorageWidget::class,
+            FullTextSearchTabsWidget::class,
         ];
     }
 }
