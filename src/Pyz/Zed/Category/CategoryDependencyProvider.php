@@ -116,10 +116,10 @@ class CategoryDependencyProvider extends SprykerDependencyProvider
      */
     protected function getCategoryFormPlugins()
     {
-        return [
+        return array_merge(parent::getCategoryFormPlugins(), [
             new CategoryFormPlugin(),
             new CategoryImageFormPlugin(),
-        ];
+        ]);
     }
 
     /**
