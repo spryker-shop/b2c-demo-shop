@@ -86,9 +86,9 @@ class CategoryDependencyProvider extends SprykerDependencyProvider
      */
     protected function getCategoryPostUpdatePlugins(): array
     {
-        return [
+        return array_merge(parent::getCategoryPostUpdatePlugins(), [
             new CategoryImageSetUpdaterPlugin(),
-        ];
+        ]);
     }
 
     /**
@@ -96,9 +96,9 @@ class CategoryDependencyProvider extends SprykerDependencyProvider
      */
     protected function getCategoryPostCreatePlugins(): array
     {
-        return [
+        return array_merge(parent::getCategoryPostCreatePlugins(), [
             new CategoryImageSetCreatorPlugin(),
-        ];
+        ]);
     }
 
     /**
@@ -106,9 +106,9 @@ class CategoryDependencyProvider extends SprykerDependencyProvider
      */
     protected function getCategoryFormTabExpanderPlugins(): array
     {
-        return [
+        return array_merge(parent::getCategoryFormTabExpanderPlugins(), [
             new CategoryImageFormTabExpanderPlugin(),
-        ];
+        ]);
     }
 
     /**
