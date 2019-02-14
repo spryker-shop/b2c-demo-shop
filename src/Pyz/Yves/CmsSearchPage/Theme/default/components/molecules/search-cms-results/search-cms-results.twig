@@ -1,8 +1,7 @@
 {% extends model('component') %}
 
 {% define config = {
-    name: 'search-cms-results',
-    tag: 'ul'
+    name: 'search-cms-results'
 } %}
 
 {% define data = {
@@ -10,19 +9,16 @@
 } %}
 
 {% block body %}
-    {% for page in data.pages %}
-        <li class="list__item">
-            <div class="box grid grid--justify grid--middle">
-                <div class="col spacing-y spacing-y--inner">
+    <ul class="{{ config.name }}__list">
+        {% for page in data.pages %}
+            <li class="{{ config.name }}__item">
+                <div class="{{ config.name }}__name spacing-y spacing-y--inner">
                     {{ page.name }}
                 </div>
-                <div class="col">
-                    <a href="{{ page.url }}" class="button">
-                        {{ 'global.search.results.view' | trans }} >>
-                    </a>
-                </div>
-            </div>
-        </li>
-    {% endfor %}
-
+                <a href="{{ page.url }}" class="button button--hollow button--medium">
+                    {{ 'global.search.results.view' | trans }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
 {% endblock %}

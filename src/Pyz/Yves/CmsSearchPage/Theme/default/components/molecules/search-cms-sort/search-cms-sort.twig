@@ -1,7 +1,7 @@
 {% extends model('component') %}
 
 {% define config = {
-    name: 'sort'
+    name: 'search-cms-sort'
 } %}
 
 {% define data = {
@@ -10,13 +10,13 @@
 
 {% block body %}
     <div class="grid grid--middle grid--justify">
-        <div class="{{ config.name }}__col col">
+        <div class="{{ config.name }}__title col">
             {{ data.pagination.numFound }} {{ "cms.page.itemsFound" | trans }}
         </div>
 
         <div class="col grid grid--middle">
             {% block selects %}
-                <div class="col col--sm-3 col--md-5">
+                <div class="col">
                     {% block label %}
                         <label class="{{ config.name }}__label is-hidden-sm-md">
                             {{ 'cms.page.filter.per' | trans }}:
@@ -48,7 +48,7 @@
                     {% endembed %}
                 </div>
 
-                <div class="col col--sm-9 col--md-7">
+                <div class="col">
                     {% embed molecule('custom-select') with {
                         modifiers: ['hollow'],
                         attributes: {

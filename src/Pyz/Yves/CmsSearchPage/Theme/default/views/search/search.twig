@@ -45,7 +45,7 @@
     </div>
 
     <div class="col col--sm-12">
-        {% include molecule('sort', 'CmsSearchPage') only %}
+        {% include molecule('search-cms-sort', 'CmsSearchPage') only %}
 
         {% include molecule('search-cms-results', 'CmsSearchPage') with {
             data: {
@@ -54,6 +54,7 @@
         } only %}
 
         {% include molecule('pagination') with {
+            modifiers: ['search-cms-results'],
             data: data.pagination
         } only %}
 
