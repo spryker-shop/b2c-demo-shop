@@ -1,0 +1,11 @@
+@mixin cms-search-page-sort($name: '.sort') {
+    #{$name} {
+        &__col:not(:last-child) {
+            padding-right: 0.5rem;
+        }
+
+        @content;
+    }
+}
+
+@include cms-search-page-sort();
