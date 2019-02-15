@@ -84,6 +84,7 @@ class UserDependencyProvider extends SprykerUserDependencyProvider
             new AssignUserLocalePreSavePlugin(),
         ];
     }
+
     /**
      * @return \Spryker\Zed\UserExtension\Dependency\Plugin\UserTransferExpanderPluginInterface[]
      */
