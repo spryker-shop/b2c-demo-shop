@@ -25,9 +25,9 @@ use Spryker\Zed\ProductCategory\Communication\Plugin\UpdateProductCategoryRelati
 class CategoryDependencyProvider extends SprykerDependencyProvider
 {
     /**
-     * @return \Spryker\Zed\Category\Dependency\Plugin\CategoryRelationDeletePluginInterface[]
+     * @return array
      */
-    protected function getRelationDeletePluginStack()
+    protected function getRelationDeletePluginStack(): array
     {
         return [
             new RemoveProductCategoryRelationPlugin(),
@@ -38,7 +38,7 @@ class CategoryDependencyProvider extends SprykerDependencyProvider
     /**
      * @return \Spryker\Zed\Category\Dependency\Plugin\CategoryRelationUpdatePluginInterface[]
      */
-    protected function getRelationUpdatePluginStack()
+    protected function getRelationUpdatePluginStack(): array
     {
         return [
             new UpdateProductCategoryRelationPlugin(),
@@ -50,7 +50,7 @@ class CategoryDependencyProvider extends SprykerDependencyProvider
     /**
      * @return \Spryker\Zed\Category\Dependency\Plugin\CategoryRelationReadPluginInterface[]
      */
-    protected function getRelationReadPluginStack()
+    protected function getRelationReadPluginStack(): array
     {
         return [
            new ReadProductCategoryRelationPlugin(),
@@ -101,7 +101,7 @@ class CategoryDependencyProvider extends SprykerDependencyProvider
     /**
      * @return array
      */
-    protected function getCategoryFormPlugins()
+    protected function getCategoryFormPlugins(): array
     {
         return [
             new CategoryFormPlugin(),
@@ -112,7 +112,7 @@ class CategoryDependencyProvider extends SprykerDependencyProvider
     /**
      * @return \Spryker\Zed\Category\Dependency\Plugin\CategoryUrlPathPluginInterface[]
      */
-    protected function getCategoryUrlPathPlugins()
+    protected function getCategoryUrlPathPlugins(): array
     {
         return [
             new CategoryUrlPathPrefixUpdaterPlugin(),
