@@ -26,7 +26,6 @@ use Spryker\Zed\Application\Communication\Plugin\ServiceProvider\SaveSessionServ
 use Spryker\Zed\Application\Communication\Plugin\ServiceProvider\SilexRoutingServiceProvider;
 use Spryker\Zed\Application\Communication\Plugin\ServiceProvider\SslServiceProvider;
 use Spryker\Zed\Application\Communication\Plugin\ServiceProvider\SubRequestServiceProvider;
-use Spryker\Zed\Application\Communication\Plugin\ServiceProvider\TranslationServiceProvider;
 use Spryker\Zed\Application\Communication\Plugin\ServiceProvider\ZedHstsServiceProvider;
 use Spryker\Zed\Assertion\Communication\Plugin\ServiceProvider\AssertionServiceProvider;
 use Spryker\Zed\Auth\Communication\Plugin\Bootstrap\AuthBootstrapProvider;
@@ -41,8 +40,10 @@ use Spryker\Zed\Money\Communication\Plugin\ServiceProvider\TwigMoneyServiceProvi
 use Spryker\Zed\Monitoring\Communication\Plugin\ServiceProvider\MonitoringRequestTransactionServiceProvider;
 use Spryker\Zed\Propel\Communication\Plugin\ServiceProvider\PropelServiceProvider;
 use Spryker\Zed\Session\Communication\Plugin\ServiceProvider\SessionServiceProvider as SprykerSessionServiceProvider;
+use Spryker\Zed\Translator\Communication\Plugin\Application\ZedTranslatorPlugin;
 use Spryker\Zed\Twig\Communication\Plugin\ServiceProvider\TwigServiceProvider as SprykerTwigServiceProvider;
 use Spryker\Zed\User\Communication\Plugin\ServiceProvider\UserServiceProvider;
+use Spryker\Zed\UserLocale\Communication\Plugin\Application\UserLocalePlugin;
 use Spryker\Zed\WebProfiler\Communication\Plugin\ServiceProvider\WebProfilerServiceProvider;
 use Spryker\Zed\ZedNavigation\Communication\Plugin\ServiceProvider\ZedNavigationServiceProvider;
 use Spryker\Zed\ZedRequest\Communication\Plugin\GatewayServiceProviderPlugin;
@@ -79,7 +80,6 @@ class ApplicationDependencyProvider extends SprykerApplicationDependencyProvider
             new MessengerServiceProvider(),
             new ZedNavigationServiceProvider(),
             new MonitoringRequestTransactionServiceProvider(),
-            new TranslationServiceProvider(),
             new DateTimeFormatterServiceProvider(),
             new GuiTwigExtensionServiceProvider(),
             new RedirectAfterLoginProvider(),
@@ -174,6 +174,17 @@ class ApplicationDependencyProvider extends SprykerApplicationDependencyProvider
             new TwigServiceProvider(),
             new SprykerTwigServiceProvider(),
             new EventBehaviorServiceProvider(),
+        ];
+    }
+
+    /**
+     * @return \Spryker\Shared\ApplicationExtension\Dependency\Plugin\ApplicationPluginInterface[]
+     */
+    protected function getApplicationPlugins(): array
+    {
+        return [
+            new UserLocalePlugin(),
+            new ZedTranslatorPlugin(),
         ];
     }
 }

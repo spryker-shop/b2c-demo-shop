@@ -7,23 +7,25 @@
 
 namespace Pyz\Zed\Messenger;
 
-use Spryker\Zed\Glossary\Communication\Plugin\TranslationPlugin;
-use Spryker\Zed\Kernel\Container;
+use Spryker\Zed\Glossary\Communication\Plugin\TranslationPlugin as GlossaryTranslationPlugin;
 use Spryker\Zed\Messenger\MessengerDependencyProvider as SprykerMessengerDependencyProvider;
+use Spryker\Zed\Translator\Communication\Plugin\Messenger\TranslationPlugin;
 
 class MessengerDependencyProvider extends SprykerMessengerDependencyProvider
 {
     /**
      * @param \Spryker\Zed\Kernel\Container $container
      *
-     * @return \Spryker\Zed\Kernel\Container
+     * @return \Spryker\Zed\MessengerExtension\Dependency\Plugin\TranslationPluginInterface[]
      */
-    protected function addTranslationPlugin(Container $container)
+    protected function getTranslationPlugins(): array
     {
-        $container[static::PLUGIN_TRANSLATION] = function (Container $container) {
-            return new TranslationPlugin();
-        };
-
-        return $container;
+        return [
+            new GlossaryTranslationPlugin(),
+            /**
+             * TranslationPlugin needs to be after other translator plugins.
+             */
+            new TranslationPlugin(),
+        ];
     }
 }
