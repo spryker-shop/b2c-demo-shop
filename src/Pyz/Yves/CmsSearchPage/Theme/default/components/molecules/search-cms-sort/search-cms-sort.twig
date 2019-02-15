@@ -1,0 +1,91 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'search-cms-sort'
+} %}
+
+{% define data = {
+    pagination: _view.pagination
+} %}
+
+{% block body %}
+    <div class="grid grid--middle grid--justify">
+        <div class="{{ config.name }}__title col">
+            {{ data.pagination.numFound }} {{ "cms.page.itemsFound" | trans }}
+        </div>
+
+        <div class="col grid grid--middle">
+            {% block selects %}
+                <div class="col">
+                    {% block label %}
+                        <label class="{{ config.name }}__label is-hidden-sm-md">
+                            {{ 'cms.page.filter.per' | trans }}:
+                        </label>
+                    {% endblock %}
+
+                    {% embed molecule('custom-select') with {
+                        modifiers: ['hollow'],
+                        attributes: {
+                            name: 'ipp',
+                            'config-theme': 'secondary'
+                        },
+                        embed: {
+                            pagination: data.pagination,
+                            jsName: config.jsName
+                        }
+                    } only %}
+                        {% block selectClass -%}
+                            {{ parent() }} {{ embed.jsName }}__per-page-select-trigger
+                        {%- endblock %}
+
+                        {% block options %}
+                            {% for limit in embed.pagination.config.validItemsPerPageOptions %}
+                                <option value="{{ limit }}" {% if limit == embed.pagination.currentItemsPerPage %}selected{% endif %}>
+                                    {{ limit }}
+                                </option>
+                            {% endfor %}
+                        {% endblock %}
+                    {% endembed %}
+                </div>
+
+                <div class="col">
+                    {% embed molecule('custom-select') with {
+                        modifiers: ['hollow'],
+                        attributes: {
+                            name: 'sort',
+                            'config-theme': 'secondary'
+                        },
+                        embed: {
+                            sort: _view.sort,
+                            jsName: config.jsName
+                        }
+                    } only %}
+                        {% block selectClass -%}
+                            {{ parent() }} {{ embed.jsName }}__select-trigger
+                        {%- endblock %}
+
+                        {% block options %}
+                            <option value="">
+                                {{ 'cms.page.sort.relevance' | trans }}
+                            </option>
+
+                            {% for sortParamName in embed.sort.sortParamNames %}
+                                {% set isSelected = sortParamName == embed.sort.currentSortParam %}
+
+                                <option value="{{ sortParamName }}" {% if isSelected %}selected{% endif %}>
+                                    {{ ('cms.page.sort.' ~ sortParamName) | trans }}
+                                </option>
+                            {% endfor %}
+                        {% endblock %}
+                    {% endembed %}
+                </div>
+            {% endblock %}
+        </div>
+    </div>
+
+    {% include molecule('form-submitter') with {
+        attributes: {
+            'trigger-selector': '.' ~ config.jsName ~ '__select-trigger, .' ~ config.jsName ~ '__per-page-select-trigger'
+        }
+    } only %}
+{% endblock %}
