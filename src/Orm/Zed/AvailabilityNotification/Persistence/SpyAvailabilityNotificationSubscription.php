@@ -1,10 +1,13 @@
 <?php
+
 /**
  * This file is part of the Spryker Commerce OS.
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 namespace Orm\Zed\AvailabilityNotification\Persistence;
+
 use Spryker\Zed\AvailabilityNotification\Persistence\Propel\AbstractSpyAvailabilityNotificationSubscription as BaseSpyAvailabilityNotificationSubscription;
+
 /**
  * Skeleton subclass for representing a row from the 'spy_availability_notification_subscription' table.
  *
