@@ -25,7 +25,7 @@ use Spryker\Zed\ProductCategory\Communication\Plugin\UpdateProductCategoryRelati
 class CategoryDependencyProvider extends SprykerDependencyProvider
 {
     /**
-     * @return array
+     * @return \Spryker\Zed\Category\Dependency\Plugin\CategoryRelationDeletePluginInterface[]
      */
     protected function getRelationDeletePluginStack(): array
     {
@@ -99,7 +99,7 @@ class CategoryDependencyProvider extends SprykerDependencyProvider
     }
 
     /**
-     * @return array
+     * @return \Spryker\Zed\Category\Dependency\Plugin\CategoryFormPluginInterface[]
      */
     protected function getCategoryFormPlugins(): array
     {

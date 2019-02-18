@@ -1,18 +1,11 @@
-{% extends template('page-layout-catalog', 'CatalogPage') %}
+{% extends template('search-cms-template', 'CmsSearchPage') %}
 
 {% define data = {
-    products: _view.products,
-    facets: _view.facets,
+    pages: _view.cms_pages,
     searchString: _view.searchString,
-    suggestion: _view.spellingSuggestion,
-    category: _view.category | default(null),
-    categories: categories | default([]),
-    categoryId: _view.idCategory | default(null),
-    filterPath: _view.filterPath | default(null),
-    viewMode: _view.viewMode | default(null),
 
     title: ('global.search.results' | trans) ~ ' ' ~ _view.searchString,
-    metaTitle: _view.pageTitle | default(_view.category.name | default),
+    metaTitle: _view.pageTitle | default,
     metaDescription: _view.pageDescription | default,
     metaKeywords: _view.pageKeywords | default,
 
@@ -25,7 +18,7 @@
     }
 } %}
 
-{% block breadcrumb %}
+{% block breadcrumbs %}
     {% include molecule('breadcrumb') with {
         modifiers: ['no-border'],
         data: {
@@ -37,7 +30,6 @@
 {% endblock %}
 
 {% block title %}
-
     {% include molecule('jumbotron') with {
         modifiers: ['category', 'category-no-img'],
         data: {
@@ -49,20 +41,26 @@
 
 {% block form %}
     <div class="col col--sm-12 spacing spacing--inner">
-        {% widget 'FullTextSearchTabsWidget' args [data.searchString, 'FullTextSearchProductsTab'] only %}{% endwidget %}
+        {% widget 'FullTextSearchTabsWidget' args [data.searchString, 'FullTextSearchCmsPage'] only %}{% endwidget %}
     </div>
 
-    {% embed molecule('spelling-suggestion', 'CatalogPage') with {
-        data: {
-            suggestion: data.suggestion
-        }
-    } only %}
-        {% block body %}
-            {{parent()}}
-        {% endblock %}
-    {% endembed %}
+    <div class="col col--sm-12">
+        {% include molecule('search-cms-sort', 'CmsSearchPage') only %}
 
-    {{parent()}}
+        {% include molecule('search-cms-results', 'CmsSearchPage') with {
+            data: {
+                pages: data.pages
+            }
+        } only %}
+
+        {% include molecule('pagination') with {
+            modifiers: ['search-cms-results'],
+            data: data.pagination
+        } only %}
+
+    </div>
+
+    {{ parent() }}
 
     {% if data.searchString is not empty %}
         <input type="hidden" name="q" value="{{ data.searchString }}" />

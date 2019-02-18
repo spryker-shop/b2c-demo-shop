@@ -1,5 +1,6 @@
 @mixin shop-ui-button($name: '.button') {
     $button-min-width: rem(177, number);
+    $button-medium-min-width: rem(120, number);
 
     #{$name} {
         @include helper-effect-transition(all);
@@ -218,6 +219,12 @@
 
         &--reset-min-width {
             min-width: 0;
+        }
+
+        &--medium {
+            @include helper-breakpoint-media-min($md-min) {
+                min-width: $button-medium-min-width;
+            }
         }
 
         @content;
