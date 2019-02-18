@@ -44,7 +44,6 @@ class MailDependencyProvider extends SprykerMailDependencyProvider
                 ->add(new NewsletterUnsubscribedMailTypePlugin())
                 ->add(new OrderConfirmationMailTypePlugin())
                 ->add(new OrderShippedMailTypePlugin())
-                ->add(new OrderShippedMailTypePlugin())
                 ->add(new AvailabilityNotificationUnsubscribedMailTypePlugin())
                 ->add(new AvailabilityNotificationSubscriptionMailTypePlugin())
                 ->add(new AvailabilityNotificationMailTypePlugin());
