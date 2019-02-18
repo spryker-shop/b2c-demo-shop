@@ -129,7 +129,7 @@
         </div>
     </form>
 
-    {% if not isAvailable and not isProductConcrete %}
+    {% if not isAvailable and isProductConcrete %}
         {% widget 'AvailabilityNotificationSubscriptionWidget' args [data.product] only %}{% endwidget %}
     {% endif %}
 
