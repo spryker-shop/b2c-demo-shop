@@ -10,6 +10,7 @@ namespace Pyz\Yves\ShopApplication;
 use Pyz\Yves\ProductRelationWidget\Widget\UpSellingProductsWidget;
 use Pyz\Yves\ProductSetWidget\Widget\ProductSetIdsWidget;
 use SprykerShop\Yves\AgentWidget\Widget\AgentControlBarWidget;
+use SprykerShop\Yves\AvailabilityNotificationWidget\Widget\AvailabilityNotificationSubscriptionWidget;
 use SprykerShop\Yves\CartNoteWidget\Widget\CartItemNoteFormWidget;
 use SprykerShop\Yves\CartNoteWidget\Widget\CartNoteFormWidget;
 use SprykerShop\Yves\CheckoutWidget\Widget\CheckoutBreadcrumbWidget;
@@ -107,6 +108,7 @@ class ShopApplicationDependencyProvider extends SprykerShopApplicationDependency
             WishlistProductAlternativeWidget::class,
             ProductSetIdsWidget::class,
             FullTextSearchTabsWidget::class,
+            AvailabilityNotificationSubscriptionWidget::class,
         ];
     }
 }

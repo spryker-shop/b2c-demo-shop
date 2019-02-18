@@ -7,6 +7,9 @@
 
 namespace Pyz\Zed\Mail;
 
+use Spryker\Zed\AvailabilityNotification\Communication\Plugin\Mail\AvailabilityNotificationMailTypePlugin;
+use Spryker\Zed\AvailabilityNotification\Communication\Plugin\Mail\AvailabilityNotificationSubscriptionMailTypePlugin;
+use Spryker\Zed\AvailabilityNotification\Communication\Plugin\Mail\AvailabilityNotificationUnsubscribedMailTypePlugin;
 use Spryker\Zed\Customer\Communication\Plugin\Mail\CustomerRegistrationMailTypePlugin;
 use Spryker\Zed\Customer\Communication\Plugin\Mail\CustomerRestoredPasswordConfirmationMailTypePlugin;
 use Spryker\Zed\Customer\Communication\Plugin\Mail\CustomerRestorePasswordMailTypePlugin;
@@ -40,7 +43,11 @@ class MailDependencyProvider extends SprykerMailDependencyProvider
                 ->add(new NewsletterSubscribedMailTypePlugin())
                 ->add(new NewsletterUnsubscribedMailTypePlugin())
                 ->add(new OrderConfirmationMailTypePlugin())
-                ->add(new OrderShippedMailTypePlugin());
+                ->add(new OrderShippedMailTypePlugin())
+                ->add(new OrderShippedMailTypePlugin())
+                ->add(new AvailabilityNotificationUnsubscribedMailTypePlugin())
+                ->add(new AvailabilityNotificationSubscriptionMailTypePlugin())
+                ->add(new AvailabilityNotificationMailTypePlugin());
 
             return $mailCollection;
         });
