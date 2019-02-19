@@ -9,7 +9,8 @@
     facets: [],
     filterPath: null,
     categories: [],
-    togglerClass: ''
+    togglerClass: '',
+    isEmptyCategoryFilterValueVisible: null
 } %}
 
 {% block body %}
@@ -29,39 +30,25 @@
         {% set filterHasValues = (filter.values is not defined) or (filter.values | length > 0) %}
 
         {% if filterHasValues %}
-            {% embed molecule('toggler-item') with {
-                modifiers: ['filter', 'with-bottom-border', (loop.first ? 'mobile' : '')],
-                data: {
-                    title: ('product.filter.' ~ filter.name | lower) | trans,
-                    triggerClass: loop.first ? config.jsName ~ '__trigger-category' : config.jsName ~ '__trigger',
-                    targetClass: config.jsName ~ '__target--' ~ filter.name,
-                    isTogglerIncluded: loop.first ? true : false,
-                    hiddenClass: loop.first ? 'is-hidden-sm-md' : 'is-hidden'
-                },
-                embed: {
-                    filterPath: data.filterPath,
-                    categories: data.categories,
-                    filter: filter
-                }
-            } only %}
-                {% block contentText %}
-                    {% include [
-                        molecule('filter-' ~ embed.filter.config.name, 'CatalogPage'),
-                        molecule('filter-' ~ embed.filter.config.type, 'CatalogPage')
-                        ] ignore missing with {
-                        data: {
-                            filterPath: embed.filterPath,
-                            categories: embed.categories,
-                            filter: embed.filter,
-                            parameter: embed.filter.config.parameterName | default(''),
-                            min: embed.filter.min | default(0),
-                            max: embed.filter.max | default(0),
-                            activeMin: embed.filter.activeMin | default(0),
-                            activeMax: embed.filter.activeMax | default(0)
-                        }
-                    } only %}
-                {% endblock %}
-            {% endembed %}
+            {% block filters %}
+                <h6>{{ ('product.filter.' ~ filter.name | lower) | trans }}</h6>
+                {% include [
+                    molecule('filter-' ~ filter.config.name, 'CatalogPage'),
+                    molecule('filter-' ~ filter.config.type, 'CatalogPage')
+                    ] ignore missing with {
+                    data: {
+                        filterPath: data.filterPath,
+                        categories: data.categories,
+                        filter: filter,
+                        parameter: filter.config.parameterName | default(''),
+                        min: filter.min | default(0),
+                        max: filter.max | default(0),
+                        activeMin: filter.activeMin | default(0),
+                        activeMax: filter.activeMax | default(0),
+                        isEmptyCategoryFilterValueVisible: data.isEmptyCategoryFilterValueVisible
+                    }
+                } only %}
+            {% endblock %}
         {% endif %}
     {% endfor %}
     {% include molecule('toggler-accordion') with {
