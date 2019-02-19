@@ -7,6 +7,7 @@
 
 namespace Pyz\Zed\Event;
 
+use Spryker\Zed\AvailabilityNotification\Communication\Plugin\Event\Subscriber\AvailabilityNotificationSubscriber;
 use Spryker\Zed\AvailabilityStorage\Communication\Plugin\Event\Subscriber\AvailabilityStorageEventSubscriber;
 use Spryker\Zed\CategoryPageSearch\Communication\Plugin\Event\Subscriber\CategoryPageSearchEventSubscriber;
 use Spryker\Zed\CategoryStorage\Communication\Plugin\Event\Subscriber\CategoryStorageEventSubscriber;
@@ -83,6 +84,8 @@ class EventDependencyProvider extends SprykerEventDependencyProvider
         $eventSubscriberCollection->add(new ProductSearchConfigStorageEventSubscriber());
         $eventSubscriberCollection->add(new ProductAlternativeStorageEventSubscriber());
         $eventSubscriberCollection->add(new ProductDiscontinuedStorageEventSubscriber());
+
+        $eventSubscriberCollection->add(new AvailabilityNotificationSubscriber());
 
         /**
          * Search Events
