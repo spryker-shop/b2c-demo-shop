@@ -29,10 +29,15 @@ class CategoryDependencyProvider extends SprykerDependencyProvider
      */
     protected function getRelationDeletePluginStack(): array
     {
-        return [
+        /**
+         * @var \Spryker\Zed\Category\Dependency\Plugin\CategoryRelationDeletePluginInterface[] $deletePlugins
+         */
+        $deletePlugins = [
             new RemoveProductCategoryRelationPlugin(),
             new RemoveCategoryImageSetRelationPlugin(),
         ];
+
+        return $deletePlugins;
     }
 
     /**
@@ -103,10 +108,15 @@ class CategoryDependencyProvider extends SprykerDependencyProvider
      */
     protected function getCategoryFormPlugins(): array
     {
-        return [
+        /**
+         * @var \Spryker\Zed\Category\Dependency\Plugin\CategoryFormPluginInterface[] $formPlugins
+         */
+        $formPlugins = [
             new CategoryFormPlugin(),
             new CategoryImageFormPlugin(),
         ];
+
+        return $formPlugins;
     }
 
     /**
