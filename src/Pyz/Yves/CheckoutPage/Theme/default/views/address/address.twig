@@ -35,28 +35,20 @@
     } only %}
         {% block fields %}
             <h2 class="title title--checkout">{{ 'page.checkout.address.shipping-address' | trans }}</h2>
-            {% set existingShippingAddresses = data.form.shippingAddress.id_customer_address | default %}
-            {% set hasShippingAddresses = existingShippingAddresses is not empty %}
+            {% set existingShippingAddresses = data.form.shippingAddress.id_customer_address is defined %}
+            {% set hasShippingAddresses = data.form.shippingAddress.id_customer_address is defined %}
 
             {% if hasShippingAddresses %}
-                <div class="grid">
-                    <div class="form__field col col--sm-12">
+                <div class="grid col">
+                    <div class="form__field col col--sm-12 spacing-x spacing-x--inner spacing-x--reset">
                         <ul class="list spacing-y">
-
-                            {% for address in existingShippingAddresses %}
-                                <li class="list__item spacing-y">
-                                    {{
-                                        form_row(address, {
-                                            component: molecule('toggler-radio'),
-                                            attributes: {
-                                                'target-selector': '.' ~ embed.parentJsClass ~ '__shipping',
-                                                'class-to-toggle': 'is-hidden',
-                                                'add-class-when-checked': not loop.last
-                                            }
-                                        })
-                                    }}
-                                </li>
-                            {% endfor %}
+                            <li class="list__item spacing-y">
+                                {{
+                                    form_row(embed.forms.shipping.id_customer_address, {
+                                        component: molecule('select')
+                                    })
+                                }}
+                            </li>
 
                         </ul>
                     </div>
@@ -132,26 +124,19 @@
                         }
                     } only %}
                         {% block fields %}
-                            {% set existingBillingAddresses = data.form.id_customer_address | default %}
-                            {% set hasBillingAddresses = existingBillingAddresses is not empty %}
+                            {% set existingBillingAddresses = data.form.id_customer_address is defined %}
+                            {% set hasBillingAddresses = data.form.id_customer_address is defined %}
 
                             {% if hasBillingAddresses %}
                                 <div class="form__field col col--sm-12">
                                     <ul class="list spacing-y">
-                                        {% for address in existingBillingAddresses %}
-                                            <li class="list__item spacing-y">
-                                                {{
-                                                    form_row(address, {
-                                                        component: molecule('toggler-radio'),
-                                                        attributes: {
-                                                            'target-selector': '.' ~ embed.parentJsClass,
-                                                            'class-to-toggle': 'is-hidden',
-                                                            'add-class-when-checked': not loop.last
-                                                        }
-                                                    })
-                                                }}
-                                            </li>
-                                        {% endfor %}
+                                        <li class="list__item spacing-y">
+                                            {{
+                                                form_row(data.form.id_customer_address, {
+                                                    component: molecule('select')
+                                                })
+                                            }}
+                                        </li>
                                     </ul>
                                 </div>
                             {% endif %}
@@ -164,6 +149,60 @@
                 </div>
             </div>
 
+        {% endblock %}
+        {% block actions %}
+            <div class="grid grid--middle grid--justify">
+                <div class="col">
+                    {% if data.form.isAddressSavingSkipped is defined %}
+                        {% set companyBusinessUnitAddressWidget = findWidget('CompanyBusinessUnitAddressWidget', ['shippingAddress', embed.forms.shipping.vars.data]) %}
+                        {% set hasCompanyBusinessUnitAddress =  companyBusinessUnitAddressWidget and companyBusinessUnitAddressWidget.isApplicable %}
+
+                        {% if not hasCompanyBusinessUnitAddress %}
+                            {% set existingShippingAddressSelectSelector = embed.forms.shipping.id_customer_address is defined ? '[name="' ~ embed.forms.shipping.id_customer_address.vars.full_name ~ '"]' : '' %}
+                            {% set existingBillingAddressSelectSelector = embed.forms.shipping.id_customer_address is defined ? '[name="' ~ embed.forms.billing.id_customer_address.vars.full_name ~ '"]' : '' %}
+                        {% else %}
+                            {% set existingShippingAddressSelectSelector = '.js-form-select-address__shippingAddress' %}
+                            {% set existingBillingAddressSelectSelector = '.js-form-select-address__billingAddress' %}
+                        {% endif %}
+
+                        {% include molecule('address-form-toggler', 'CustomerPage') ignore missing with {
+                            attributes: {
+                                'trigger-selector': existingShippingAddressSelectSelector | default(''),
+                                'target-selector': '.js-address__shipping',
+                                'class-to-toggle': 'is-hidden',
+                                'has-company-business-unit-address': hasCompanyBusinessUnitAddress ? 'true' : 'false'
+                            }
+                        } only %}
+
+                        {% include molecule('address-form-toggler', 'CustomerPage') ignore missing with {
+                            attributes: {
+                                'trigger-selector': existingBillingAddressSelectSelector | default(''),
+                                'target-selector': '.js-address__billing',
+                                'class-to-toggle': 'is-hidden',
+                                'has-company-business-unit-address': hasCompanyBusinessUnitAddress ? 'true' : 'false'
+                            }
+                        } only %}
+
+                        {% include molecule('save-new-address', 'CustomerPage') ignore missing with {
+                            class: 'col is-hidden',
+                            data: {
+                                form: data.form
+                            },
+                            attributes: {
+                                'shipping-address-toggler-selector': embed.forms.shipping.id_customer_address is defined ? '[name="' ~ embed.forms.shipping.id_customer_address.vars.full_name ~ '"]' : '',
+                                'billing-address-toggler-selector': embed.forms.billing.id_customer_address is defined ? '[name="' ~ embed.forms.billing.id_customer_address.vars.full_name ~ '"]' : '',
+                                'billing-same-as-shipping-toggler-selector': '[name="' ~ data.form.billingSameAsShipping.vars.full_name ~ '"]',
+                                'save-address-toggler-selector': '[name="' ~ data.form.isAddressSavingSkipped.vars.full_name ~ '"]',
+                                'add-new-shipping-address-selector': '.js-form-add-new-address__shippingAddress' | default (''),
+                                'add-new-billing-address-selector': '.js-form-add-new-address__billingAddress' | default ('')
+                            }
+                        } only %}
+                    {% endif %}
+                </div>
+                <div class="col">
+                    {{ parent() }}
+                </div>
+            </div>
         {% endblock %}
     {% endembed %}
 {% endblock %}

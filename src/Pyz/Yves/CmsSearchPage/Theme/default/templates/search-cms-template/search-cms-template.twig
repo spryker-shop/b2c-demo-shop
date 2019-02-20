@@ -1,0 +1,25 @@
+{% extends template('page-layout-main') %}
+
+{% define data = {
+    pages: required
+} %}
+
+{% block container %}
+    <div class="container">
+        <div class="container__inner">
+            {% block breadcrumbs %}{% endblock %}
+        </div>
+    </div>
+
+    {% block title %}{% endblock %}
+
+    <div class="container">
+        <main class="container__inner">
+            {% block content %}
+                <form method="GET" class="grid js-form-input-default-value-disabler__catalog-form">
+                    {% block form %}{% endblock %}
+                </form>
+            {% endblock %}
+        </main>
+    </div>
+{% endblock %}

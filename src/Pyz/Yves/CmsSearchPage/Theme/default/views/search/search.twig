@@ -1,0 +1,68 @@
+{% extends template('search-cms-template', 'CmsSearchPage') %}
+
+{% define data = {
+    pages: _view.cms_pages,
+    searchString: _view.searchString,
+
+    title: ('global.search.results' | trans) ~ ' ' ~ _view.searchString,
+    metaTitle: _view.pageTitle | default,
+    metaDescription: _view.pageDescription | default,
+    metaKeywords: _view.pageKeywords | default,
+
+    pagination: {
+        parameters: app.request.query.all(),
+        currentPage: _view.pagination.currentPage,
+        paginationPath: app.request.attributes.get('_route'),
+        maxPage: _view.pagination.maxPage,
+        showAlwaysFirstAndLast: true
+    }
+} %}
+
+{% block breadcrumbs %}
+    {% include molecule('breadcrumb') with {
+        modifiers: ['no-border'],
+        data: {
+            steps: [{
+                label: 'global.search' | trans
+            }]
+        }
+    } only %}
+{% endblock %}
+
+{% block title %}
+    {% include molecule('jumbotron') with {
+        modifiers: ['category', 'category-no-img'],
+        data: {
+            headline: data.searchString,
+            subHeadline: 'global.search.results' | trans
+        }
+    } only %}
+{% endblock %}
+
+{% block form %}
+    <div class="col col--sm-12 spacing spacing--inner">
+        {% widget 'FullTextSearchTabsWidget' args [data.searchString, 'FullTextSearchCmsPage'] only %}{% endwidget %}
+    </div>
+
+    <div class="col col--sm-12">
+        {% include molecule('search-cms-sort', 'CmsSearchPage') only %}
+
+        {% include molecule('search-cms-results', 'CmsSearchPage') with {
+            data: {
+                pages: data.pages
+            }
+        } only %}
+
+        {% include molecule('pagination') with {
+            modifiers: ['search-cms-results'],
+            data: data.pagination
+        } only %}
+
+    </div>
+
+    {{ parent() }}
+
+    {% if data.searchString is not empty %}
+        <input type="hidden" name="q" value="{{ data.searchString }}" />
+    {% endif %}
+{% endblock %}
