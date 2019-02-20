@@ -20,7 +20,7 @@
                         action: '#review'
                     },
                     layout: {
-                        'summary': 'col col--sm-12 form__field--review form__field--review-summary',
+                        'summary': 'col col--sm-12 col-md-10 form__field--review form__field--review-summary',
                         'description': 'col col--sm-12 form__field--review',
                         'nickname': 'col col--sm-12 form__field--review'
                     },
@@ -50,7 +50,7 @@
 
                 {% block field %}
                     {% if fieldName == 'rating' %}
-                        <div class="form__field col col--sm-12 form__field--review form__field--review-rating">
+                        <div class="form__field col col--sm-12 col--md-2 form__field--review form__field--review-rating">
                             {% do field.setRendered %}
                             <label>
                                 {{form_label(field)}}
