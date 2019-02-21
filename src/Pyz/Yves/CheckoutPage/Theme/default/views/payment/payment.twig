@@ -6,7 +6,8 @@
         payment: _view.paymentForm
     },
 
-    title: null
+    title: null,
+    customForms: {}
 } %}
 
 {% block content %}
@@ -29,13 +30,14 @@
                 url: data.backUrl,
                 text: 'general.back.button' | trans,
                 class: 'form__action--checkout button button--hollow button--expand'
-            }
+            },
+            customForms: data.customForms
         }
     } only %}
         {% block fieldset %}
 
             {% for name, choices in data.form.paymentSelection.vars.choices %}
-
+                {% set paymentProviderIndex = loop.index0 %}
                 <ul class="list-switches list-switches--register-type">
                     {% for key, choice in choices %}
                         <li class="list-switches__item">
@@ -79,6 +81,7 @@
                             form: data.form[data.form.paymentSelection[key].vars.value],
                             enableStart: false,
                             enableEnd: false,
+                            customForms: data.customForms,
                             layout: {
                                 'card_number': 'col col--sm-6',
                                 'name_on_card': 'col col--sm-6',
@@ -88,7 +91,7 @@
                             }
                         },
                         embed: {
-                            index: loop.index,
+                            index: loop.index ~ '-' ~ paymentProviderIndex,
                             toggler: data.form.paymentSelection[key]
                         }
                     } only %}
@@ -96,7 +99,15 @@
                         {% block fieldset %}
                             <div class="js-payment-method-{{embed.index}} {% if embed.index != 1 %} is-hidden{% endif %}">
                                 <h2 class="title title--checkout">{{ embed.toggler.vars.label | trans }}</h2>
-                                {{parent()}}
+                                {% if data.customForms[data.form.vars.template_path] is not defined %}
+                                    {{ parent() }}
+                                {% else %}
+                                    {% set viewName = data.customForms[data.form.vars.template_path] | first %}
+                                    {% set moduleName = data.customForms[data.form.vars.template_path] | last %}
+                                    {% include view(viewName, moduleName) ignore missing with {
+                                        form: data.form.parent
+                                    } only %}
+                                {% endif %}
                             </div>
                         {% endblock %}
 
