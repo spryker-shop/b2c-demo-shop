@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fa15e75e3d397ddcbe9496cc4cd8c81c",
+    "content-hash": "9e61c704d497c1997f7fc252dd735098",
     "packages": [
         {
             "name": "codeitnowin/barcode",
@@ -2453,6 +2453,41 @@
             ],
             "description": "Content Based Shop Navigation [feature]",
             "time": "2019-02-04T11:53:37+00:00"
+        },
+        {
+            "name": "spryker-feature/customer-access",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker-feature/customer-access.git",
+                "reference": "b06eb11fd1297ed962c9c7c4668ea6706b78ea57"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker-feature/customer-access/zipball/b06eb11fd1297ed962c9c7c4668ea6706b78ea57",
+                "reference": "b06eb11fd1297ed962c9c7c4668ea6706b78ea57",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1",
+                "spryker-feature/spryker-core": "^201902.0",
+                "spryker/customer-access": "^1.1.0",
+                "spryker/customer-access-gui": "^1.1.0",
+                "spryker/customer-access-permission": "^1.2.0",
+                "spryker/customer-access-storage": "^1.1.0"
+            },
+            "type": "metapackage",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "201902.x-dev"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "Customer Access [feature]",
+            "time": "2019-02-14T13:15:51+00:00"
         },
         {
             "name": "spryker-feature/customer-account-management",
@@ -11805,6 +11840,190 @@
             ],
             "description": "Customer module",
             "time": "2019-02-19T11:44:41+00:00"
+        },
+        {
+            "name": "spryker/customer-access",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/customer-access.git",
+                "reference": "1d891d79fc9a27afa139525ff2d62c36e4718c11"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/customer-access/zipball/1d891d79fc9a27afa139525ff2d62c36e4718c11",
+                "reference": "1d891d79fc9a27afa139525ff2d62c36e4718c11",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1",
+                "spryker/kernel": "^3.17.0",
+                "spryker/propel-orm": "^1.5.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/installer": "*",
+                "spryker/propel": "^3.0.0",
+                "spryker/testify": "*"
+            },
+            "suggest": {
+                "spryker/installer": "If the installer for the customer access will be used, InstallerPluginInterface is needed"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/",
+                    "SprykerTest\\Zed\\CustomerAccess\\Helper\\": "tests/SprykerTest/Zed/CustomerAccess/_support/Helper/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "CustomerAccess module",
+            "time": "2018-12-07T12:35:47+00:00"
+        },
+        {
+            "name": "spryker/customer-access-gui",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/customer-access-gui.git",
+                "reference": "209fb21298db58a2c446da7d30f36b44961ccdda"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/customer-access-gui/zipball/209fb21298db58a2c446da7d30f36b44961ccdda",
+                "reference": "209fb21298db58a2c446da7d30f36b44961ccdda",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1",
+                "spryker/customer-access": "^1.0.0",
+                "spryker/kernel": "^3.0.0",
+                "spryker/symfony": "^3.0.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/testify": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "CustomerAccessGui module",
+            "time": "2019-01-28T15:17:37+00:00"
+        },
+        {
+            "name": "spryker/customer-access-permission",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/customer-access-permission.git",
+                "reference": "d2c3580c806e6a81096bea766738ef8d722d9fd8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/customer-access-permission/zipball/d2c3580c806e6a81096bea766738ef8d722d9fd8",
+                "reference": "d2c3580c806e6a81096bea766738ef8d722d9fd8",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1",
+                "spryker/customer": "^7.0.0",
+                "spryker/customer-access-storage": "^1.0.0",
+                "spryker/customer-extension": "^1.2.0",
+                "spryker/kernel": "^3.0.0",
+                "spryker/permission-extension": "^1.1.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/testify": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "CustomerAccessPermission module",
+            "time": "2019-01-24T10:04:04+00:00"
+        },
+        {
+            "name": "spryker/customer-access-storage",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/customer-access-storage.git",
+                "reference": "7b6d6253a0a5df4b1cff6aa8ce7c9056600f1551"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/customer-access-storage/zipball/7b6d6253a0a5df4b1cff6aa8ce7c9056600f1551",
+                "reference": "7b6d6253a0a5df4b1cff6aa8ce7c9056600f1551",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1",
+                "spryker/customer-access": "^1.0.0",
+                "spryker/kernel": "^3.17.0",
+                "spryker/propel-orm": "^1.5.0",
+                "spryker/storage": "^3.0.0",
+                "spryker/synchronization": "^0.2.0 || ^1.0.0",
+                "spryker/synchronization-extension": "^1.0.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/event": "*",
+                "spryker/propel": "*",
+                "spryker/queue": "*",
+                "spryker/testify": "*"
+            },
+            "suggest": {
+                "spryker/event": "If you want to use Event plugins, minimum required version: 2.1.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "CustomerAccessStorage module",
+            "time": "2018-11-16T13:44:20+00:00"
         },
         {
             "name": "spryker/customer-extension",
@@ -30293,6 +30512,12 @@
             "alias": "201902.0",
             "alias_normalized": "201902.0",
             "version": "9999999-dev",
+            "package": "spryker-feature/customer-access"
+        },
+        {
+            "alias": "201902.0",
+            "alias_normalized": "201902.0",
+            "version": "9999999-dev",
             "package": "spryker-feature/customer-account-management"
         },
         {
@@ -30568,6 +30793,7 @@
         "spryker-feature/checkout": 20,
         "spryker-feature/cms": 20,
         "spryker-feature/content-based-shop-navigation": 20,
+        "spryker-feature/customer-access": 20,
         "spryker-feature/customer-account-management": 20,
         "spryker-feature/customer-notes": 20,
         "spryker-feature/deployment-tools": 20,
