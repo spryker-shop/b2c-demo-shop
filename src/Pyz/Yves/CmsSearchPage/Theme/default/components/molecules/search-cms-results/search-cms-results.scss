@@ -50,6 +50,20 @@
             letter-spacing: rem(0.3);
             font-family: $setting-font-family-additional;
             font-weight: fw(medium);
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        &__button {
+            text-decoration-color: $setting-color-white;
+            text-decoration-line: inherit;
+
+            &:hover {
+                @include helper-effect-transition(text-decoration-color);
+                text-decoration-color: $setting-color-alt;
+            }
         }
 
         @content;
