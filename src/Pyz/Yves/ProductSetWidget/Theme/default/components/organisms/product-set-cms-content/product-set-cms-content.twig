@@ -14,6 +14,7 @@
         "dots": false,
         "variableWidth": true,
         "mobileFirst": true,
+        "infinite": false,
         "responsive": [{
             "breakpoint": 450,
             "settings": {
@@ -122,7 +123,8 @@
                             slides: data.products,
                         },
                         attributes: {
-                            'data-json': data.sliderConfig
+                            'data-json': data.sliderConfig,
+                            'custom-select-selector': '.custom-select'
                         },
                         modifiers: ['product-set', 'product-set-secondary']
                     } only %}
@@ -165,7 +167,8 @@
                                                         values: values,
                                                         selectedValue: selectedValue,
                                                         label: ('product.attribute.' ~ name) | trans,
-                                                        isAvailable: isAvailable
+                                                        isAvailable: isAvailable,
+                                                        autoInitSelect: true
                                                     }
                                                 } only %}
                                             {% endblock %}

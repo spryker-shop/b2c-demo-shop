@@ -3,18 +3,17 @@ import $ from 'jquery';
 import select from 'select2';
 
 export default class CustomSelect extends Component {
-
-    select: HTMLSelectElement
-    $select: $
+    select: HTMLSelectElement;
+    $select: $;
 
     protected readyCallback(): void {
-
         const select2 = select;
         this.select = <HTMLSelectElement>this.querySelector(`.${this.jsName}`);
         this.$select = $(this.select);
 
         this.mapEvents();
-        if(document.body.classList.contains('no-touch')) {
+
+        if(document.body.classList.contains('no-touch') && this.autoInit) {
             this.initSelect();
             this.removeAttributeTitle();
         }
@@ -31,7 +30,7 @@ export default class CustomSelect extends Component {
         this.removeAttributeTitle();
     }
 
-    protected initSelect(): void {
+    initSelect(): void {
         this.$select.select2({
             minimumResultsForSearch: Infinity,
             width: this.configWidth,
@@ -57,5 +56,9 @@ export default class CustomSelect extends Component {
 
     get configTheme(): string {
         return this.select.getAttribute('config-theme');
+    }
+
+    get autoInit(): boolean {
+        return !this.select.hasAttribute('auto-init');
     }
 }
