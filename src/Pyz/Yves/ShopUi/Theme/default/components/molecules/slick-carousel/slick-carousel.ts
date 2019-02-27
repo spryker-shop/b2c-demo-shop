@@ -23,7 +23,7 @@ export default class SlickCarousel extends Component {
         this.container.on('init', () => {
             if (this.customSelects) {
                 this.customSelects.forEach((select: CustomSelect) => {
-                    select.initSelect()
+                    select.initSelect();
                 });
             }
         });
