@@ -33,20 +33,76 @@
                 } only %}
             </span>
         {% endblock %}
+
         {% block menu %}
             <ul class="{{ component.renderClass(config.name ~ '__menu', modifiers) }} menu {{ isToggler ? config.name ~ '__menu--hidden' }} {{ targetClass }}">
-                {% for childNode in data.node.children %}
-                    {% set hasChildren = childNode.children | length > 0 %}
+                {% if data.node.cssClass == 'flyout-fullscreen' %}
+                    <li class="{{ config.name }}__flyout-fullscreen-container grid grid--justify">
+                        <ul class="{{ config.name }}__flyout-fullscreen-list">
+                            {% for childNode in data.node.children %}
+                                {% if 'node-image' not in childNode.cssClass %}
+                                    {% set hasChildren = childNode.children | length > 0 %}
 
-                    {% include molecule('navigation-multilevel-node') with {
-                        class: 'menu__item ' ~ component.renderClass(config.name ~ '__child', modifiers) ~ ' ' ~ config.name ~ '__' ~ childNode.cssClass,
-                        modifiers: modifiers,
-                        data: {
-                            node: childNode,
-                            levelMenu: data.levelMenu + 1
-                        }
-                    } only %}
-                {% endfor %}
+                                    {% include molecule('navigation-multilevel-node') with {
+                                        class: 'menu__item ' ~ component.renderClass(config.name ~ '__child', modifiers) ~ ' ' ~ config.name ~ '__' ~ childNode.cssClass,
+                                        modifiers: modifiers,
+                                        data: {
+                                            node: childNode,
+                                            levelMenu: data.levelMenu + 1
+                                        }
+                                    } only %}
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+
+                        <ul class="{{ config.name }}__flyout-fullscreen-list-node-image grid grid--justify">
+                            {% for childNode in data.node.children %}
+                                {% if 'node-image' in childNode.cssClass %}
+                                    {% set hasChildren = childNode.children | length > 0 %}
+
+                                    {% include molecule('navigation-multilevel-node') with {
+                                        class: 'menu__item ' ~ component.renderClass(config.name ~ '__child', modifiers) ~ ' ' ~ config.name ~ '__' ~ childNode.cssClass,
+                                        modifiers: modifiers,
+                                        data: {
+                                            node: childNode,
+                                            levelMenu: data.levelMenu + 1
+                                        }
+                                    } only %}
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </li>
+                {% elseif 'brand-dropdown' in data.node.cssClass %}
+                    <li class="{{ config.name }}__brand-dropdown-container">
+                        <ul class="{{ config.name }}__brand-dropdown-list grid grid--justify">
+                            {% for childNode in data.node.children %}
+                                {% set hasChildren = childNode.children | length > 0 %}
+
+                                {% include molecule('navigation-multilevel-node') with {
+                                    class: 'menu__item ' ~ component.renderClass(config.name ~ '__child', modifiers) ~ ' ' ~ config.name ~ '__' ~ childNode.cssClass,
+                                    modifiers: modifiers,
+                                    data: {
+                                        node: childNode,
+                                        levelMenu: data.levelMenu + 1
+                                    }
+                                } only %}
+                            {% endfor %}
+                        </ul>
+                    </li>
+                {% else %}
+                    {% for childNode in data.node.children %}
+                        {% set hasChildren = childNode.children | length > 0 %}
+
+                        {% include molecule('navigation-multilevel-node') with {
+                            class: 'menu__item ' ~ component.renderClass(config.name ~ '__child', modifiers) ~ ' ' ~ config.name ~ '__' ~ childNode.cssClass,
+                            modifiers: modifiers,
+                            data: {
+                                node: childNode,
+                                levelMenu: data.levelMenu + 1
+                            }
+                        } only %}
+                    {% endfor %}
+                {% endif %}
             </ul>
         {% endblock %}
     {% endif %}
