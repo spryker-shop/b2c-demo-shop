@@ -24,6 +24,7 @@ export default class SlickCarousel extends Component {
             if (this.customSelects) {
                 this.customSelects.forEach((select: CustomSelect) => {
                     select.initSelect();
+                    select.changeSelectEvent();
                 });
             }
         });

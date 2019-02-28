@@ -20,7 +20,7 @@ export default class CustomSelect extends Component {
     }
 
     protected mapEvents(): void {
-        this.$select.on('select2:select', () => this.onChangeSelect());
+        this.changeSelectEvent();
         document.body.addEventListener('click', (event) => this.closeHandler(event));
     }
 
@@ -28,6 +28,10 @@ export default class CustomSelect extends Component {
         const event = new Event('change');
         this.select.dispatchEvent(event);
         this.removeAttributeTitle();
+    }
+
+    changeSelectEvent(): void {
+        this.$select.on('select2:select', () => this.onChangeSelect());
     }
 
     initSelect(): void {
