@@ -178,6 +178,16 @@
                                             <p>
                                                 <strong>{{ "product.detail.out_of_stock" | trans }}</strong>
                                             </p>
+                                        {% else %}
+                                            {% set isDisabled = not embed.product.idProductConcrete or not embed.product.available %}
+
+                                            {% if isDisabled %}
+                                                <button type="button" class="button button--expand" disabled>{{ 'page.detail.add-to-cart' | trans }}</button>
+                                            {% else %}
+                                                <a href="{{ path('cart/add', {sku: embed.product.sku}) }}" class="button button--expand js-product-set__add-to-cart">
+                                                    {{ 'page.detail.add-to-cart' | trans }}
+                                                </a>
+                                            {% endif %}
                                         {% endif %}
                                     {% endblock %}
                                 {% endembed %}
@@ -185,6 +195,11 @@
                         {% endblock %}
                     {% endembed %}
                 </form>
+                {% include molecule('action-single-click-enforcer') with {
+                    attributes: {
+                        'target-selector': '.js-product-set__add-to-cart'
+                    }
+                } only %}
             {% endblock %}
         </div>
     </div>
