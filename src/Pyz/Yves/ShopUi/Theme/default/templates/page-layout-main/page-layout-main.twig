@@ -31,7 +31,7 @@
                 }
             } only %}
                 {% block topBar %}
-                    {% set user = app['user'].customerTransfer %}
+                    {% set user = app['user'].customerTransfer ?? app['user'].userTransfer %}
                     <div class="col grid">
                         <div class="col">
                             {% include atom('icon') with {
