@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<database xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:noNamespaceSchemaLocation="http://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\CategoryImage\Persistence" package="src.Orm.Zed.CategoryImage.Persistence">
+  <table name="spy_category_image_set">
+    <index name="index-spy_category_image_set-fk_locale">
+      <index-column name="fk_locale"/>
+    </index>
+  </table>
+  <table name="spy_category_image_set_to_category_image">
+    <index name="index-spy_category_image_set_to_category_image-fk_-85872f21dafe">
+      <index-column name="fk_category_image_set"/>
+    </index>
+    <index name="index-spy_category_image_set_to_category_image-fk_-7c0ba662126c">
+      <index-column name="fk_category_image"/>
+    </index>
+  </table>
+</database>
