@@ -1,0 +1,16 @@
+{% extends template('widget') %}
+
+{% define data = {
+    products: _widget.products
+} %}
+
+{% block body %}
+    {% if data.products is not empty %}
+        {% include molecule('upsell-product', 'ProductReplacementForWidget') with {
+            data: {
+                title: 'replacement_for_widget.replacement_for' | trans,
+                products: data.products
+            }
+        } only %}
+    {% endif %}
+{% endblock %}
