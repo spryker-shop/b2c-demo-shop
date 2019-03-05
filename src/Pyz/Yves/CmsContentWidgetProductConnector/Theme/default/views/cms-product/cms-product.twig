@@ -1,0 +1,24 @@
+{% extends template('widget') %}
+
+{% define data = {
+    product: product | default,
+    products: products | default([])
+} %}
+
+{% block body %}
+    <div class="grid grid--stretch product-list">
+        {% for availableProduct in data.products if availableProduct.available %}
+            {% widget 'CmsProductWidget' args [availableProduct] only %}
+            {% elsewidget 'ProductWidgetPlugin' args [availableProduct] only %} {# @deprecated Use CmsProductWidget instead. #}
+            {% endwidget %}
+        {% endfor %}
+    </div>
+
+    {% if data.product is not empty %}
+        <div class="grid grid--stretch product-list">
+            {% widget 'CmsProductWidget' args [data.product] only %}
+            {% elsewidget 'ProductWidgetPlugin' args [data.product] only %} {# @deprecated Use CmsProductWidget instead. #}
+            {% endwidget %}
+        </div>
+    {% endif %}
+{% endblock %}
