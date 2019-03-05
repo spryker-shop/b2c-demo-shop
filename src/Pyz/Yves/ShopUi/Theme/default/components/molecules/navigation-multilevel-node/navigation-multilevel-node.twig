@@ -44,7 +44,7 @@
                                     {% set hasChildren = childNode.children | length > 0 %}
 
                                     {% include molecule('navigation-multilevel-node') with {
-                                        class: 'menu__item ' ~ component.renderClass(config.name ~ '__child', modifiers) ~ ' ' ~ config.name ~ '__' ~ childNode.cssClass,
+                                        class: 'menu__item ' ~ component.renderClass(config.name ~ '__child', modifiers) ~ ' ' ~ config.name ~ '__' ~ childNode.cssClass ~ (childNode.url ? '' : ' ' ~ childNode.cssClass),
                                         modifiers: modifiers,
                                         data: {
                                             node: childNode,
@@ -61,7 +61,7 @@
                                     {% set hasChildren = childNode.children | length > 0 %}
 
                                     {% include molecule('navigation-multilevel-node') with {
-                                        class: 'menu__item ' ~ component.renderClass(config.name ~ '__child', modifiers) ~ ' ' ~ config.name ~ '__' ~ childNode.cssClass,
+                                        class: 'menu__item ' ~ component.renderClass(config.name ~ '__child', modifiers) ~ ' ' ~ config.name ~ '__' ~ childNode.cssClass ~ (childNode.url ? '' : ' ' ~ childNode.cssClass),
                                         modifiers: modifiers,
                                         data: {
                                             node: childNode,
@@ -79,7 +79,7 @@
                                 {% set hasChildren = childNode.children | length > 0 %}
 
                                 {% include molecule('navigation-multilevel-node') with {
-                                    class: 'menu__item ' ~ component.renderClass(config.name ~ '__child', modifiers) ~ ' ' ~ config.name ~ '__' ~ childNode.cssClass,
+                                    class: 'menu__item ' ~ component.renderClass(config.name ~ '__child', modifiers) ~ ' ' ~ config.name ~ '__' ~ childNode.cssClass ~ (childNode.url ? '' : ' ' ~ childNode.cssClass),
                                     modifiers: modifiers,
                                     data: {
                                         node: childNode,
@@ -94,7 +94,7 @@
                         {% set hasChildren = childNode.children | length > 0 %}
 
                         {% include molecule('navigation-multilevel-node') with {
-                            class: 'menu__item ' ~ component.renderClass(config.name ~ '__child', modifiers) ~ ' ' ~ config.name ~ '__' ~ childNode.cssClass,
+                            class: 'menu__item ' ~ component.renderClass(config.name ~ '__child', modifiers) ~ ' ' ~ config.name ~ '__' ~ childNode.cssClass ~ (childNode.url ? '' : ' ' ~ childNode.cssClass),
                             modifiers: modifiers,
                             data: {
                                 node: childNode,
@@ -109,15 +109,15 @@
 {% endblock %}
 
 {% block url %}
-    <a class="{{ component.renderClass(config.name ~ '__link', modifiers) }} {{ config.name }}__link--lvl-{{ data.levelMenu }}" href="{{ data.node.url }}">{{ data.node.title }}</a>
+    <a class="{{ component.renderClass(config.name ~ '__link', modifiers) }} {{ config.name }}__link--lvl-{{ data.levelMenu }} {{ data.node.cssClass }}" href="{{ data.node.url }}">{{ data.node.title }}</a>
 {% endblock %}
 
 {% block link %}
-    <a class="{{ component.renderClass(config.name ~ '__link', modifiers) }} {{ config.name }}__link--lvl-{{ data.levelMenu }}" href="{{ data.node.url }}">{{ data.node.title }}</a>
+    <a class="{{ component.renderClass(config.name ~ '__link', modifiers) }} {{ config.name }}__link--lvl-{{ data.levelMenu }} {{ data.node.cssClass }}" href="{{ data.node.url }}">{{ data.node.title }}</a>
 {% endblock %}
 
 {% block externalUrl %}
-    <a class="{{ component.renderClass(config.name ~ '__link', modifiers) }} {{ config.name }}__link--lvl-{{ data.levelMenu }}" href="{{ data.node.url }}" target="_blank">{{ data.node.title }}</a>
+    <a class="{{ component.renderClass(config.name ~ '__link', modifiers) }} {{ config.name }}__link--lvl-{{ data.levelMenu }} {{ data.node.cssClass }}" href="{{ data.node.url }}" target="_blank">{{ data.node.title }}</a>
 {% endblock %}
 
 {% block other %}
