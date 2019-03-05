@@ -13,6 +13,7 @@ use Spryker\Client\CmsPageSearch\Plugin\Elasticsearch\QueryExpander\SortedCmsPag
 use Spryker\Client\CmsPageSearch\Plugin\Elasticsearch\ResultFormatter\PaginatedCmsPageResultFormatterPlugin;
 use Spryker\Client\CmsPageSearch\Plugin\Elasticsearch\ResultFormatter\RawCmsPageSearchResultFormatterPlugin;
 use Spryker\Client\CmsPageSearch\Plugin\Elasticsearch\ResultFormatter\SortedCmsPageSearchResultFormatterPlugin;
+use Spryker\Client\Search\Plugin\Elasticsearch\QueryExpander\IsActiveInDateRangeQueryExpanderPlugin;
 use Spryker\Client\Search\Plugin\Elasticsearch\QueryExpander\IsActiveQueryExpanderPlugin;
 use Spryker\Client\Search\Plugin\Elasticsearch\QueryExpander\LocalizedQueryExpanderPlugin;
 use Spryker\Client\Search\Plugin\Elasticsearch\QueryExpander\StoreQueryExpanderPlugin;
@@ -42,6 +43,7 @@ class CmsPageSearchDependencyProvider extends SprykerCmsPageSearchDependencyProv
             new SortedCmsPageQueryExpanderPlugin(),
             new PaginatedCmsPageQueryExpanderPlugin(),
             new IsActiveQueryExpanderPlugin(),
+            new IsActiveInDateRangeQueryExpanderPlugin(),
         ];
     }
 
@@ -54,6 +56,7 @@ class CmsPageSearchDependencyProvider extends SprykerCmsPageSearchDependencyProv
             new StoreQueryExpanderPlugin(),
             new LocalizedQueryExpanderPlugin(),
             new IsActiveQueryExpanderPlugin(),
+            new IsActiveInDateRangeQueryExpanderPlugin(),
         ];
     }
 }

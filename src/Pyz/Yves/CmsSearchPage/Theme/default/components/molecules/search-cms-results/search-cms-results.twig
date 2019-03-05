@@ -12,11 +12,11 @@
     <ul class="{{ config.name }}__list">
         {% for page in data.pages %}
             <li class="{{ config.name }}__item">
-                <div class="{{ config.name }}__name spacing-y spacing-y--inner">
+                <a href="{{ page.url }}" class="{{ config.name }}__name spacing-y spacing-y--inner" title="{{ page.name }}">
                     {{ page.name }}
-                </div>
-                <a href="{{ page.url }}" class="button button--hollow button--medium">
-                    {{ 'global.search.results.view' | trans }}
+                    <span class="{{ config.name }}__button button button--hollow button--medium">
+                        {{ 'global.search.results.view' | trans }}
+                    </span>
                 </a>
             </li>
         {% endfor %}
