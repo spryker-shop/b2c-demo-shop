@@ -70,7 +70,7 @@ class ProductSetIdsWidget extends AbstractWidget
      *
      * @return array
      */
-    protected function getSingleProductSet($productSetId): array
+    protected function getSingleProductSet(int $productSetId): array
     {
         $productSet = $this->getProductSetDataStorageTransfer($productSetId);
 
