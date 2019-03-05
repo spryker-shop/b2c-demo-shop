@@ -85,11 +85,11 @@ class ProductSetIdsWidget extends AbstractWidget
     }
 
     /**
-     * @param $idProductSet
+     * @param int $idProductSet
      *
      * @return \Generated\Shared\Transfer\ProductSetDataStorageTransfer|null
      */
-    protected function getProductSetDataStorageTransfer($idProductSet): ?ProductSetDataStorageTransfer
+    protected function getProductSetDataStorageTransfer(int $idProductSet): ?ProductSetDataStorageTransfer
     {
         return $this->getFactory()->getProductSetStorageClient()->getProductSetByIdProductSet($idProductSet, $this->getLocale());
     }
@@ -125,7 +125,7 @@ class ProductSetIdsWidget extends AbstractWidget
      *
      * @return array
      */
-    protected function getSelectedAttributes($idProductAbstract): array
+    protected function getSelectedAttributes(int $idProductAbstract): array
     {
         $attributes = $this->getRequest()->query->get(static::PARAM_ATTRIBUTE, []);
 
