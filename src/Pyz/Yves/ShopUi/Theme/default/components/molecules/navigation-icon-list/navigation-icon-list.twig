@@ -13,7 +13,7 @@
     <ul class="menu menu--inline">
         {% for node in data.nodes %}
             {% embed atom('node') with {
-                class: 'menu__item',
+                class: 'menu__item' ~ (node.url ? '' : ' ' ~ node.cssClass),
                 config: {
                     tag: 'li'
                 },
@@ -22,7 +22,7 @@
                 }
             } only %}
                 {% block url %}
-                    <a class="link link--alt" href="{{ data.node.url }}" title="{{ data.node.title }}">
+                    <a class="link link--alt {{ data.node.cssClass }}" href="{{ data.node.url }}" title="{{ data.node.title }}">
                         {% include atom('icon') with {
                             modifiers: ['big', data.node.cssClass],
                             data: {
@@ -33,7 +33,7 @@
                 {% endblock %}
 
                 {% block externalUrl %}
-                    <a class="link link--alt" href="{{ data.node.url }}" target="_blank" title="{{ data.node.title }}">
+                    <a class="link link--alt {{ data.node.cssClass }}" href="{{ data.node.url }}" target="_blank" title="{{ data.node.title }}">
                         {% include atom('icon') with {
                             modifiers: ['big', data.node.cssClass],
                             data: {
