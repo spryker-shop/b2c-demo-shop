@@ -37,7 +37,6 @@
         {% block fieldset %}
 
             {% for name, choices in data.form.paymentSelection.vars.choices %}
-                {% set paymentProviderIndex = loop.index0 %}
                 <ul class="list-switches list-switches--register-type">
                     {% for key, choice in choices %}
                         <li class="list-switches__item">
@@ -91,7 +90,7 @@
                             }
                         },
                         embed: {
-                            index: loop.index ~ '-' ~ paymentProviderIndex,
+                            index: loop.index,
                             toggler: data.form.paymentSelection[key]
                         }
                     } only %}

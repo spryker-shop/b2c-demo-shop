@@ -81,6 +81,10 @@
         } only %}
     {% endif %}
 
+    {% widget 'ProductReplacementForListWidget' args [data.product.sku] only %}
+    {% elsewidget 'ProductReplacementForWidgetPlugin' args [data.product.sku] only %} {# @deprecated Use ProductReplacementForListWidget instead. #}
+    {% endwidget %}
+
     <div class="container__inner">
         {% widget 'ProductDetailPageReviewWidget' args [data.product.idProductAbstract] only %}{% endwidget %}
 
