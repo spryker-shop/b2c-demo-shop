@@ -45,8 +45,8 @@ class CheckoutDependencyProvider extends SprykerCheckoutDependencyProvider
             new ProductBundleAvailabilityCheckoutPreConditionPlugin(),
             new PaymentPreCheckPlugin(),
             new ShipmentCheckoutPreCheckPlugin(),
-            new ProductDiscontinuedCheckoutPreConditionPlugin(),
-            new SalesOrderThresholdCheckoutPreConditionPlugin(),
+            new ProductDiscontinuedCheckoutPreConditionPlugin(), #ProductDiscontinuedFeature
+            new SalesOrderThresholdCheckoutPreConditionPlugin(), #SalesOrderThresholdFeature
             new VoucherDiscountMaxUsageCheckoutPreConditionPlugin(),
         ];
     }
@@ -69,7 +69,7 @@ class CheckoutDependencyProvider extends SprykerCheckoutDependencyProvider
             new DiscountOrderSavePlugin(),
             new ProductBundleOrderSaverPlugin(),
             new PaymentOrderSaverPlugin(),
-            new SalesOrderThresholdExpenseSavePlugin(),
+            new SalesOrderThresholdExpenseSavePlugin(), #SalesOrderThresholdFeature
         ];
 
         return $plugins;
