@@ -32,10 +32,12 @@
                 {{ 'cart.total.tax_total' | trans }}
                 <span class="float-right">{{ data.cart.totals.taxTotal.amount | money }}</span>
             </li>
-            <li class="{{ config.name }}__item spacing-y spacing-y--bigger">
-                {{ 'sales-order-threshold.strategy.soft-minimum-threshold-fixed-fee' | trans }}
-                <span class="float-right">{{ data.cart.totals.expenseTotal | money }}</span>
-            </li>
+            {% if data.cart.totals.expenseTotal > 0 %}
+                <li class="{{ config.name }}__item spacing-y spacing-y--bigger">
+                    {{ 'sales-order-threshold.strategy.soft-minimum-threshold-fixed-fee' | trans }}
+                    <span class="float-right">{{ data.cart.totals.expenseTotal | money }}</span>
+                </li>
+            {% endif %}
             {% include molecule('cart-discount-summary', 'DiscountWidget') ignore missing with {
                 class: 'list spacing-y',
                 data: {
