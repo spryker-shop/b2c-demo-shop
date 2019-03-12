@@ -36,7 +36,10 @@ class ProductStorageEventSubscriber extends SprykerProductStorageEventSubscriber
      */
     protected function addProductBundleCreateStorageListener(EventCollectionInterface $eventCollection): EventCollectionInterface
     {
-        $eventCollection->addListenerQueued(ProductBundleEvents::ENTITY_SPY_PRODUCT_BUNDLE_CREATE, new ProductBundleStoragePublishListener());
+        $eventCollection->addListenerQueued(
+            ProductBundleEvents::ENTITY_SPY_PRODUCT_BUNDLE_CREATE,
+            new ProductBundleStoragePublishListener()
+        );
 
         return $eventCollection;
     }
@@ -48,7 +51,10 @@ class ProductStorageEventSubscriber extends SprykerProductStorageEventSubscriber
      */
     protected function addProductBundleUpdateStorageListener(EventCollectionInterface $eventCollection): EventCollectionInterface
     {
-        $eventCollection->addListenerQueued(ProductBundleEvents::ENTITY_SPY_PRODUCT_BUNDLE_UPDATE, new ProductBundleStoragePublishListener());
+        $eventCollection->addListenerQueued(
+            ProductBundleEvents::ENTITY_SPY_PRODUCT_BUNDLE_UPDATE,
+            new ProductBundleStoragePublishListener()
+        );
 
         return $eventCollection;
     }
@@ -60,7 +66,10 @@ class ProductStorageEventSubscriber extends SprykerProductStorageEventSubscriber
      */
     protected function addProductBundleDeleteStorageListener(EventCollectionInterface $eventCollection): EventCollectionInterface
     {
-        $eventCollection->addListenerQueued(ProductBundleEvents::ENTITY_SPY_PRODUCT_BUNDLE_DELETE, new ProductBundleStoragePublishListener());
+        $eventCollection->addListenerQueued(
+            ProductBundleEvents::ENTITY_SPY_PRODUCT_BUNDLE_DELETE,
+            new ProductBundleStoragePublishListener()
+        );
 
         return $eventCollection;
     }
