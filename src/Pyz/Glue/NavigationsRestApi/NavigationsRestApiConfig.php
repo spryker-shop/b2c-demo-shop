@@ -7,9 +7,9 @@
 
 namespace Pyz\Glue\NavigationsRestApi;
 
-use Spryker\Glue\NavigationsRestApi\NavigationsRestApiConfig as SprykerNavigationsRestApiConfigi;
+use Spryker\Glue\NavigationsRestApi\NavigationsRestApiConfig as SprykerNavigationsRestApiConfig;
 
-class NavigationsRestApiConfig extends SprykerNavigationsRestApiConfigi
+class NavigationsRestApiConfig extends SprykerNavigationsRestApiConfig
 {
     /**
      * {@inheritdoc}
