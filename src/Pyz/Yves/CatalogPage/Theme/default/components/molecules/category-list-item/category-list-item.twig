@@ -1,0 +1,37 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'category-list-item'
+} %}
+
+{% define data = {
+    id: required,
+    name: required,
+    url: required
+} %}
+
+{% block body %}
+    <div class="grid grid--middle">
+        {% block image %}
+            <div class="col col--sm-12 col--md-2">
+                <a href="{{ data.url }}">
+                    {% widget 'CategoryImageStorageWidget' args [data.id, data.name] only %}{% endwidget %}
+                </a>
+            </div>
+        {% endblock %}
+
+        {% block name %}
+            <div class="col col--sm-12 col--md-7 spacing spacing--inner">
+                <strong>{{ data.name }}</strong>
+            </div>
+        {% endblock %}
+
+        {% block actions %}
+            <div class="{{ config.name }}__actions col col--sm-12 col--md-3">
+                <a class="button button--medium" href="{{ data.url }}">
+                    {{ 'product.view' | trans }}
+                </a>
+            </div>
+        {% endblock %}
+    </div>
+{% endblock %}
