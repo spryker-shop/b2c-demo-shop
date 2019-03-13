@@ -14,10 +14,13 @@
     'suggestion-url': required,
     'debounce-delay': 500,
     'min-letters': 3,
-    'query-string': 'query',
+    'query-param-name': 'query',
+    'query-string': attributes['query-param-name'] is defined ? attributes['query-param-name'] : 'query',
     'selected-value-key': '',
-    'value-attribute-name': 'data-value',
-    'suggested-item-selector': '',
+    'value-data-attribute': 'data-value',
+    'value-attribute-name': attributes['value-data-attribute'] is defined ? attributes['value-data-attribute'] : 'data-value',
+    'item-selector': '',
+    'suggested-item-selector': attributes['item-selector'] is defined ? attributes['item-selector'] : '',
     'show-clean-button': false,
     'parent-wrap-selector': ''
 } %}
@@ -41,12 +44,12 @@
         <div class="{{ config.name }}__field">
             <input name="query"
                    type="text"
-                   class="input input--expand {{ config.name }}__input {{ config.jsName }}__text-input"
+                   class="input input--expand {{ config.name }}__input {{ config.jsName }}__input"
                    placeholder="{{ 'autocomplete.placeholder' | trans }}"
                    value="{{ data.value }}"
                    autocomplete="off">
 
-            <input type="hidden" name="{{ attributes['selected-value-key'] }}" class="{{ config.jsName }}__value-input"/>
+            <input type="hidden" name="{{ attributes['selected-value-key'] }}" class="{{ config.jsName }}__input-hidden"/>
 
             {% if attributes['show-clean-button'] %}
                 {% block cleanButton %}
@@ -63,7 +66,7 @@
     {% endblock %}
 
     {% block suggestion %}
-        <div class="is-hidden {{ config.name }}__suggestion {{ config.name }}__suggestions {{ config.jsName }}__suggestions {{ config.jsName }}__suggestions-{{ data.id }}">
+        <div class="is-hidden {{ config.jsName }}__container {{ config.name }}__suggestion {{ config.name }}__suggestions {{ config.jsName }}__suggestions {{ config.jsName }}__suggestions-{{ data.id }}">
             {% include molecule('ajax-renderer') with {
                 attributes: {
                     'provider-selector': '.' ~ config.jsName ~ '__provider-' ~ data.id,
