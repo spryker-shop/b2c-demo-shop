@@ -52,9 +52,9 @@
                 <button
                     class="{{ config.name }}__link {% if isActive %}{{ config.name }}__link--active{% endif %}"
                     onclick="this.form.action='{{ categoryUrl }}'"
-                    {% if quantity == 0 %}disabled="disabled"{% endif %}
->
-                    {{ categoryNode.name }}{% if hasChildren is empty %} <span class="text-secondary">({{ quantity }})</span>{% endif %}
+                    {% if quantity == 0 %}disabled="disabled"{% endif %}>
+                    {{ categoryNode.name }}
+                    <span class="text-secondary">({{ quantity }})</span>
                 </button>
 
                 {% if hasChildren %}
