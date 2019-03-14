@@ -1,0 +1,13 @@
+@mixin catalog-page-category-card($name: '.category-card') {
+    #{$name} {
+        padding: 0 rem(5) rem(32);
+
+        @include helper-breakpoint-media-min($md-min) {
+            padding: 0 rem(15) rem(50);
+        }
+
+        @content;
+    }
+}
+
+@include catalog-page-category-card();

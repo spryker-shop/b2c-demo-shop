@@ -18,58 +18,58 @@
 } %}
 
 {% set categoryTemplate = molecule('category-card', 'CatalogPage') %}
-{% set cardClass = 'col col--sm-12 col--md-6 col--lg-6 col--xl-4' %}
+{% set cardClass = 'col col--sm-6 col--xl-4' %}
 
 {% if data.viewMode == 'list' %}
     {% set categoryTemplate = molecule('category-list-item', 'CatalogPage') %}
     {% set cardClass = 'col col--sm-12' %}
 {% endif %}
 
-{% block form %}
-    <div class="col col--sm-12 col--lg-4 col--xl-3">
-        {% block filterBar %}
-            {% include molecule('view-mode-switch', 'CatalogPage') with {
-                data: {
-                    viewMode: data.viewMode,
-                }
-            } only %}
-
-            {% embed organism('filter-section', 'CatalogPage') with {
-                class: 'js-catalog__filters-toggle',
-                data: {
-                    facets: data.facets,
-                    categories: data.categories,
-                    isEmptyCategoryFilterValueVisible: data.isEmptyCategoryFilterValueVisible
-                }
-            } only %}
-                {% block body %}
-                    {% for filter in data.facets %}
-                        {% set filterHasValues = filter.values is not defined or filter.values | length > 0 %}
-                        {% set filterIsVisible = filter.name == 'category' %}
-
-                        {% if filterHasValues and filterIsVisible %}
-                            {% block filters %}
-                                {{ parent() }}
-                            {% endblock %}
-                        {% endif %}
-                    {% endfor %}
-                {% endblock %}
-            {% endembed %}
-        {% endblock %}
-    </div>
-
-    <div class="col col--sm-12 col--lg-8 col--xl-9">
-        <div class="grid grid--stretch">
-            {% for childCategory in data.children %}
-                {% include categoryTemplate with {
-                    class: cardClass,
-                    data: {
-                        id: childCategory.id_category,
-                        name: childCategory.name,
-                        url: childCategory.url
-                    }
-                } only %}
+{% block filterSection %}
+    {% embed organism('filter-section', 'CatalogPage') with {
+        data: {
+            facets: data.facets,
+            categories: data.categories,
+            togglerClass: 'js-catalog-toggler-click__trigger'
+        }
+    } only %}
+        {% block filters %}
+            {% for filter in data.facets %}
+                {% set filterHasValues = filter.values is not defined or filter.values | length > 0 %}
+                {% set filterIsVisible = filter.name == 'category' %}
+                {% if filterHasValues and filterIsVisible %}
+                    {% block filter %}
+                        {{ parent() }}
+                    {% endblock %}
+                {% endif %}
             {% endfor %}
+        {% endblock %}
+
+        {% block actions %}{% endblock %}
+    {% endembed %}
+{% endblock %}
+
+{% block catalogContent %}
+    <div class="grid">
+        <div class="col col--sm-12">
+            {% include molecule('view-mode-switch', 'CatalogPage') with {
+                class: 'is-hidden-xl-only',
+                data: {
+                    viewMode: data.viewMode
+                }
+            } only %}
         </div>
+    </div>
+    <div class="grid {% if data.viewMode != 'list' %}product-list{% endif %}">
+        {% for childCategory in data.children %}
+            {% include categoryTemplate with {
+                class: cardClass,
+                data: {
+                    id: childCategory.id_category,
+                    name: childCategory.name,
+                    url: childCategory.url
+                }
+            } only %}
+        {% endfor %}
     </div>
 {% endblock %}

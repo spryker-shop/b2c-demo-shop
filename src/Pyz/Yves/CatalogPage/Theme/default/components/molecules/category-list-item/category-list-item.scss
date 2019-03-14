@@ -1,0 +1,21 @@
+@mixin catalog-page-category-list-item($name: '.category-list-item') {
+    #{$name} {
+        text-align: center;
+        padding-bottom: rem(32);
+
+        @include helper-breakpoint-media-min($md-min) {
+            text-align: left;
+            padding-bottom: rem(50);
+        }
+
+        &__actions {
+            @include helper-breakpoint-media-min($md-min) {
+                text-align: right;
+            }
+        }
+
+        @content;
+    }
+}
+
+@include catalog-page-category-list-item();

@@ -6,6 +6,7 @@
 } %}
 
 {% define data = {
+    id: required,
     value: ''
 } %}
 
@@ -14,17 +15,19 @@
     'debounce-delay': 500,
     'min-letters': 3,
     'query-param-name': 'query',
+    'query-string': attributes['query-param-name'] is defined ? attributes['query-param-name'] : 'query',
     'selected-value-key': '',
     'value-data-attribute': 'data-value',
+    'value-attribute-name': attributes['value-data-attribute'] is defined ? attributes['value-data-attribute'] : 'data-value',
     'item-selector': '',
+    'suggested-item-selector': attributes['item-selector'] is defined ? attributes['item-selector'] : '',
     'show-clean-button': false,
     'parent-wrap-selector': ''
 } %}
 
 {% block body %}
-
     {% include molecule('ajax-provider') with {
-        class: config.jsName ~ '__provider',
+        class: config.jsName ~ '__provider ' ~ config.jsName ~ '__provider-' ~ data.id,
         attributes: {
             method: 'GET',
             url: attributes['suggestion-url']
@@ -33,7 +36,7 @@
 
     {% include molecule('ajax-loader') with {
         attributes: {
-            'provider-selector': '.' ~ config.jsName ~ '__provider'
+            'provider-selector': '.' ~ config.jsName ~ '__provider-' ~ data.id
         }
     } only %}
 
@@ -47,6 +50,7 @@
                    autocomplete="off">
 
             <input type="hidden" name="{{ attributes['selected-value-key'] }}" class="{{ config.jsName }}__input-hidden"/>
+
             {% if attributes['show-clean-button'] %}
                 {% block cleanButton %}
                     <button type="button" class="button button--skinless {{ config.name }}__clean-button {{ config.jsName }}__clean-button">
@@ -62,15 +66,14 @@
     {% endblock %}
 
     {% block suggestion %}
-        <div class="is-hidden {{ config.name }}__suggestion {{ config.jsName }}__container">
+        <div class="is-hidden {{ config.jsName }}__container {{ config.name }}__suggestion {{ config.name }}__suggestions {{ config.jsName }}__suggestions {{ config.jsName }}__suggestions-{{ data.id }}">
             {% include molecule('ajax-renderer') with {
                 attributes: {
-                    'provider-selector': '.' ~ config.jsName ~ '__provider',
-                    'render-if-response-is-empty': true,
-                    'target-selector': config.jsName ~ '__suggestions',
+                    'provider-selector': '.' ~ config.jsName ~ '__provider-' ~ data.id,
+                    'target-selector': '.' ~ config.jsName ~ '__suggestions-' ~ data.id,
+                    'render-if-response-is-empty': true
                 }
             } only %}
         </div>
     {% endblock %}
-
 {% endblock %}

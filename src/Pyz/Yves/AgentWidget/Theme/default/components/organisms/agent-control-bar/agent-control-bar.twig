@@ -24,10 +24,12 @@
                             <div class="grid">
                                 <div class="col col--sm-9 col--lg-10">
                                     {% include molecule('autocomplete-form') with {
+                                        data: {
+                                            id: 'agent',
+                                        },
                                         attributes: {
                                             'suggestion-url': path('agent-widget/customer-autocomplete'),
                                             'selected-value-key': '_switch_user',
-                                            'value-data-attribute': 'data-value',
                                             'item-selector': '.customer-list__container-item',
                                             'show-clean-button': true,
                                             'parent-wrap-selector': config.jsName
