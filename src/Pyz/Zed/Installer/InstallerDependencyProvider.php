@@ -20,6 +20,7 @@ use Spryker\Zed\PriceProduct\Communication\Plugin\PriceInstallerPlugin;
 use Spryker\Zed\ProductAlternativeProductLabelConnector\Communication\Plugin\Installer\ProductAlternativeProductLabelConnectorInstallerPlugin;
 use Spryker\Zed\ProductDiscontinuedProductLabelConnector\Communication\Plugin\Installer\ProductDiscontinuedProductLabelConnectorInstallerPlugin;
 use Spryker\Zed\SalesOrderThreshold\Communication\Plugin\Installer\SalesOrderThresholdTypeInstallerPlugin;
+use Spryker\Zed\Translator\Communication\Plugin\TranslatorInstallerPlugin;
 use Spryker\Zed\User\Communication\Plugin\UserInstallerPlugin;
 
 class InstallerDependencyProvider extends SprykerInstallerDependencyProvider
@@ -38,6 +39,7 @@ class InstallerDependencyProvider extends SprykerInstallerDependencyProvider
             new NewsletterInstallerPlugin(),
             new GlossaryInstallerPlugin(),
             new CustomerAccessInstallerPlugin(),
+            new TranslatorInstallerPlugin(),
             new ProductAlternativeProductLabelConnectorInstallerPlugin(), #ProductAlternativeFeature
             new ProductDiscontinuedProductLabelConnectorInstallerPlugin(), #ProductDiscontinuedFeature
             new SalesOrderThresholdTypeInstallerPlugin(), #SalesOrderThresholdFeature

@@ -16,6 +16,7 @@
 {% set productName = data.product.name | default %}
 {% set sku = data.product.sku %}
 {% set availabilityWidget = '' %}
+{% set isProductConcrete = data.product.idProductConcrete is not empty %}
 {% set isDisabled = data.product.idProductConcrete is empty or data.product.price is empty %}
 {% set isProductAvailable = true %}
 
@@ -78,7 +79,6 @@
     {% endif %}
     {% widget 'ProductGroupWidget' args [data.product.idProductAbstract] use view('pdp-color-selector', 'ProductGroupWidget') only %}{% endwidget %}
     {% include molecule('variant-configurator', 'ProductDetailPage') with {
-        class: 'js-volume-price__quantity',
         data: {
             superAttributes: data.product.attributeMap.superAttributes,
             selectedAttributes: data.product.selectedAttributes,
@@ -105,6 +105,8 @@
                     } only %}
                 {% endblock %}
             {% endembed %}
+        {% else %}
+            <input type="hidden" class="js-volume-price__quantity"/>
         {% endif %}
 
         {% include molecule('availability-product', 'AvailabilityWidget') ignore missing with {
@@ -127,6 +129,11 @@
             } only %}
         </div>
     </form>
+
+    {% if not isAvailable and isProductConcrete %}
+        {% widget 'AvailabilityNotificationSubscriptionWidget' args [data.product] only %}{% endwidget %}
+    {% endif %}
+
     {% if can('SeeWishlistPermissionPlugin') and isProductAvailable %}
         {% include molecule('wishlist-selector-for-pdp', 'WishlistWidget') ignore missing with {
             data: {

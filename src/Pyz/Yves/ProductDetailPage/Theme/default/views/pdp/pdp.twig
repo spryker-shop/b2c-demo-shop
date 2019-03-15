@@ -19,9 +19,7 @@
     <link itemprop="url" href="{{ data.productUrl }}">
 {% endblock %}
 {% block header %}
-    {% embed organism('header') with {
-        modifiers: ['border-less-bottom']
-    } only %}
+    {% embed organism('header') only %}
         {% block mobile %}
             <a href="#" class="link link--alt js-page-layout-main__side-drawer-trigger">
                 {% include atom('icon') with {
@@ -34,7 +32,13 @@
         {% endblock %}
     {% endembed %}
 {% endblock %}
-{% block pageInfo %}{% endblock %}
+{% block pageInfo %}
+    <div class="container__inner">
+        {% block breadcrumbs %}
+            {% widget 'ProductBreadcrumbsWithCategoriesWidget' args [data.product] only %}{% endwidget %}
+        {% endblock %}
+    </div>
+{% endblock %}
 {% block contentClass %} page-layout-main {% endblock %}
 {% block content %}
     <div class="container__inner">
@@ -50,7 +54,7 @@
                 {% include molecule('product-configurator', 'ProductDetailPage') with {
                     data: {
                         product: data.product,
-                        isBundle: data.isBundle,
+                        isBundle: data.bundleItems,
                         bundleItems: data.bundleItems
                     }
                 } only %}
@@ -69,13 +73,17 @@
             }
         } only %}
     </div>
-    {% if data.isBundle != null %}
+    {% if data.bundleItems %}
         {% include molecule('product-bundle', 'ProductDetailPage') with {
             data: {
                 bundleItems: data.bundleItems
             }
         } only %}
     {% endif %}
+
+    {% widget 'ProductReplacementForListWidget' args [data.product.sku] only %}
+    {% elsewidget 'ProductReplacementForWidgetPlugin' args [data.product.sku] only %} {# @deprecated Use ProductReplacementForListWidget instead. #}
+    {% endwidget %}
 
     <div class="container__inner">
         {% widget 'ProductDetailPageReviewWidget' args [data.product.idProductAbstract] only %}{% endwidget %}
@@ -95,8 +103,5 @@
                 idProductAbstract: data.product.idProductAbstract
             }
         } only %}
-        {% block breadcrumbs %}
-            {% widget 'ProductBreadcrumbsWithCategoriesWidget' args [data.product] only %}{% endwidget %}
-        {% endblock %}
     </div>
 {% endblock %}

@@ -1,4 +1,5 @@
 import AutocompleteForm from 'ShopUi/components/molecules/autocomplete-form/autocomplete-form';
+import AjaxProvider from 'ShopUi/components/molecules/ajax-provider/ajax-provider';
 
 export default class AutocompleteFormExtended extends AutocompleteForm {
     parentWrap: HTMLElement;
@@ -7,7 +8,14 @@ export default class AutocompleteFormExtended extends AutocompleteForm {
         if (this.wrapSelector){
             this.parentWrap = <HTMLElement> document.querySelector(`.${this.wrapSelector}`);
         }
-        super.readyCallback();
+        this.textInput = <HTMLInputElement>this.querySelector(`.${this.jsName}__input`);
+        if (this.textInput) {
+            this.ajaxProvider = <AjaxProvider>this.querySelector(`.${this.jsName}__provider`);
+            this.valueInput = <HTMLInputElement>this.querySelector(`.${this.jsName}__input-hidden`);
+            this.suggestionsContainer = <HTMLElement>this.querySelector(`.${this.jsName}__container`);
+            this.cleanButton = <HTMLButtonElement>this.querySelector(`.${this.jsName}__clean-button`);
+            this.mapEvents();
+        } else super.readyCallback();
     }
 
     protected onBlur(): void {

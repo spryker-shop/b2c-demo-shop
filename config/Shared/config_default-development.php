@@ -10,7 +10,6 @@ use Spryker\Shared\Application\ApplicationConstants;
 use Spryker\Shared\Config\ConfigConstants;
 use Spryker\Shared\ErrorHandler\ErrorHandlerConstants;
 use Spryker\Shared\ErrorHandler\ErrorRenderer\WebExceptionErrorRenderer;
-use Spryker\Shared\Event\EventConstants;
 use Spryker\Shared\GlueApplication\GlueApplicationConstants;
 use Spryker\Shared\Kernel\KernelConstants;
 use Spryker\Shared\Kernel\Store;
@@ -43,7 +42,7 @@ $config[ApplicationConstants::ZED_SSL_ENABLED] = false;
 $config[ApplicationConstants::YVES_SSL_ENABLED] = false;
 
 // ---------- Propel
-$config[PropelConstants::PROPEL_DEBUG] = true;
+$config[PropelConstants::PROPEL_DEBUG] = false;
 $config[PropelOrmConstants::PROPEL_SHOW_EXTENDED_EXCEPTION] = true;
 $config[PropelConstants::ZED_DB_USERNAME] = 'development';
 $config[PropelConstants::ZED_DB_PASSWORD] = 'mate20mg';
@@ -64,35 +63,6 @@ $config[RabbitMqEnv::RABBITMQ_API_HOST] = 'localhost';
 $config[RabbitMqEnv::RABBITMQ_API_PORT] = '15672';
 $config[RabbitMqEnv::RABBITMQ_API_USERNAME] = 'admin';
 $config[RabbitMqEnv::RABBITMQ_API_PASSWORD] = 'mate20mg';
-$config[RabbitMqEnv::RABBITMQ_CONNECTIONS] = [
-    'DE' => [
-        RabbitMqEnv::RABBITMQ_CONNECTION_NAME => 'DE-connection',
-        RabbitMqEnv::RABBITMQ_HOST => 'localhost',
-        RabbitMqEnv::RABBITMQ_PORT => '5672',
-        RabbitMqEnv::RABBITMQ_PASSWORD => 'mate20mg',
-        RabbitMqEnv::RABBITMQ_USERNAME => 'DE_development',
-        RabbitMqEnv::RABBITMQ_VIRTUAL_HOST => '/DE_development_zed',
-        RabbitMqEnv::RABBITMQ_STORE_NAMES => ['DE'],
-    ],
-    'AT' => [
-        RabbitMqEnv::RABBITMQ_CONNECTION_NAME => 'AT-connection',
-        RabbitMqEnv::RABBITMQ_HOST => 'localhost',
-        RabbitMqEnv::RABBITMQ_PORT => '5672',
-        RabbitMqEnv::RABBITMQ_PASSWORD => 'mate20mg',
-        RabbitMqEnv::RABBITMQ_USERNAME => 'AT_development',
-        RabbitMqEnv::RABBITMQ_VIRTUAL_HOST => '/AT_development_zed',
-        RabbitMqEnv::RABBITMQ_STORE_NAMES => ['AT'],
-    ],
-    'US' => [
-        RabbitMqEnv::RABBITMQ_CONNECTION_NAME => 'US-connection',
-        RabbitMqEnv::RABBITMQ_HOST => 'localhost',
-        RabbitMqEnv::RABBITMQ_PORT => '5672',
-        RabbitMqEnv::RABBITMQ_PASSWORD => 'mate20mg',
-        RabbitMqEnv::RABBITMQ_USERNAME => 'US_development',
-        RabbitMqEnv::RABBITMQ_VIRTUAL_HOST => '/US_development_zed',
-        RabbitMqEnv::RABBITMQ_STORE_NAMES => ['US'],
-    ],
-];
 
 // ---------- Session
 $config[SessionConstants::YVES_SESSION_COOKIE_SECURE] = false;
@@ -143,9 +113,6 @@ $baseLogFilePath = sprintf('%s/data/%s/logs', APPLICATION_ROOT_DIR, $CURRENT_STO
 
 $config[LogConstants::EXCEPTION_LOG_FILE_PATH_YVES] = $baseLogFilePath . '/YVES/exception.log';
 $config[LogConstants::EXCEPTION_LOG_FILE_PATH_ZED] = $baseLogFilePath . '/ZED/exception.log';
-
-// ---------- Events
-$config[EventConstants::LOGGER_ACTIVE] = true;
 
 // ----------- Glue Application
 $config[GlueApplicationConstants::GLUE_APPLICATION_REST_DEBUG] = true;

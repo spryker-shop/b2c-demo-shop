@@ -1,7 +1,23 @@
 {% extends template('widget') %}
 
 {% define data = {
-    idProductAbstract: _widget.idProductAbstract
+    idProductAbstract: _widget.idProductAbstract,
+    form: _widget.form,
+    showSuccessMessage: false,
+    action: 'product-review/submit',
+    reviews: _widget.productReviews,
+    summary: _widget.summary,
+    ratingMaxValue: _widget.maximumRating,
+    hasCustomer: _widget.hasCustomer,
+
+    pagination: {
+        parameters: app.request.query.all(),
+        currentPage: _widget.pagination.currentPage,
+        paginationPath: app.request.getPathInfo(),
+        maxPage: _widget.pagination.maxPage,
+        showAlwaysFirstAndLast: true,
+        anchor: 'product-reviews'
+    }
 } %}
 
 {% block rating %}
@@ -48,10 +64,31 @@
             }
         } only %}
 
-        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-            {{ render(path('product-review/submit', {'idProductAbstract': data.idProductAbstract})) }}
+        {% if is_granted('ROLE_USER') %}
+            <div class="is-hidden js-review__new-review-form-target">
+                {% if data.showSuccessMessage %}
+                    <div class="box box--success">
+                        {{ 'product_review.submit.success' | trans }}
+                    </div>
+                {% endif %}
+
+                {% include molecule('new-review-form', 'ProductReviewWidget') with {
+                    data: {
+                        form: data.form,
+                        action: url(data.action, {idProductAbstract: data.idProductAbstract})
+                    }
+                } only %}
+            </div>
         {% endif %}
 
-        {{ render(path('product-review/index', {'idProductAbstract': data.idProductAbstract})) }}
+        {% include organism('review-summary', 'ProductReviewWidget') with {
+            data: {
+                reviews: data.reviews,
+                summary: data.summary,
+                ratingMaxValue: data.ratingMaxValue,
+                hasCustomer: data.hasCustomer,
+                pagination: data.pagination
+            }
+        } only %}
     </div>
 {% endblock %}

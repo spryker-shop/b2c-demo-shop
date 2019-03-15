@@ -14,6 +14,9 @@ use Spryker\Zed\AgentGui\Communication\Plugin\UserAgentTableDataExpanderPlugin;
 use Spryker\Zed\CustomerUserConnectorGui\Communication\Plugin\UserTableActionExpanderPlugin;
 use Spryker\Zed\Kernel\Container;
 use Spryker\Zed\User\UserDependencyProvider as SprykerUserDependencyProvider;
+use Spryker\Zed\UserLocale\Communication\Plugin\User\AssignUserLocalePreSavePlugin;
+use Spryker\Zed\UserLocale\Communication\Plugin\User\UserLocaleTransferExpanderPlugin;
+use Spryker\Zed\UserLocaleGui\Communication\Plugin\UserLocaleFormExpanderPlugin;
 
 class UserDependencyProvider extends SprykerUserDependencyProvider
 {
@@ -29,16 +32,6 @@ class UserDependencyProvider extends SprykerUserDependencyProvider
         };
 
         return $container;
-    }
-
-    /**
-     * @return \Spryker\Zed\User\Dependency\Plugin\UsersTableExpanderPluginInterface[]
-     */
-    protected function getUsersTableExtenderPlugins()
-    {
-        return [
-            new UserTableActionExpanderPlugin(),
-        ];
     }
 
     /**
@@ -58,6 +51,7 @@ class UserDependencyProvider extends SprykerUserDependencyProvider
     {
         return [
             new UserAgentFormExpanderPlugin(),
+            new UserLocaleFormExpanderPlugin(),
         ];
     }
 
@@ -78,6 +72,26 @@ class UserDependencyProvider extends SprykerUserDependencyProvider
     {
         return [
             new UserAgentTableDataExpanderPlugin(),
+        ];
+    }
+
+    /**
+     * @return \Spryker\Zed\UserExtension\Dependency\Plugin\UserPreSavePluginInterface[]
+     */
+    protected function getUserPreSavePlugins(): array
+    {
+        return [
+            new AssignUserLocalePreSavePlugin(),
+        ];
+    }
+
+    /**
+     * @return \Spryker\Zed\UserExtension\Dependency\Plugin\UserTransferExpanderPluginInterface[]
+     */
+    protected function getUserTransferExpanderPlugins(): array
+    {
+        return [
+            new UserLocaleTransferExpanderPlugin(),
         ];
     }
 }

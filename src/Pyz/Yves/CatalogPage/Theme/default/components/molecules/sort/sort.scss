@@ -1,31 +1,18 @@
 @mixin catalog-page-sort($name: '.sort') {
     #{$name} {
-        padding: rem(27) 0;
+        @include helper-breakpoint-media-min($xl-min) {
+            padding: rem(20) 0 rem(27);
+        }
 
         &__results {
             font-size: rem(16);
             font-weight: fw(regular);
             line-height: rem(24);
-            color: $setting-color-gray-6;
-
-            @include helper-breakpoint-media-max($lg-max) {
-                display: none;
-            }
+            color: $setting-color-gray-4;
         }
 
-        &__trigger-filter {
-            display: flex;
-            align-items: center;
-
-            @include helper-breakpoint-media-min($xl-min) {
-                display: none;
-            }
-        }
-
-        &__caret {
-            width: rem(8);
-            height: rem(5);
-            margin-left: rem(10);
+        &__label {
+            vertical-align: middle;
         }
 
         @content;

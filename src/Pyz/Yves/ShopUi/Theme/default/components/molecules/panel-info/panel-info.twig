@@ -1,0 +1,23 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'panel-info'
+} %}
+
+{% define data = {
+    info: required
+} %}
+
+{% block body %}
+    {% for text in data.info %}
+        <div class="{{ config.name }}__item">
+            {% include atom('icon') with {
+                modifiers: ['panel-info'],
+                data: {
+                    name: 'check-additional'
+                }
+            } only %}
+            {{ text | trans }}
+        </div>
+    {% endfor %}
+{% endblock %}

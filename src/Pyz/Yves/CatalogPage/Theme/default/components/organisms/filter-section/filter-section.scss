@@ -1,84 +1,48 @@
 @mixin catalog-page-filter-section($name: '.filter-section') {
-    #{$name} {
-        padding-top: rem(79);
+    $mobile-sort-and-button-max-height: rem(192);
 
-        @include helper-breakpoint-media-max($lg-max) {
-            padding: rem(120) rem(24) rem(40);
+    #{$name} {
+        margin-top: rem(118);
+        padding: rem(10) rem(24) 0;
+        overflow-y: auto;
+        max-height: calc(100vh - #{$mobile-sort-and-button-max-height});
+
+        @include helper-breakpoint-media-min($xl-min) {
+            margin: 0;
+            padding: rem(15) 0 0;
+            overflow-y: visible;
+            max-height: none;
+            border-top: rem(1) dotted $setting-color-gray-3;
         }
 
-        &__title {
-            text-transform: uppercase;
-            font: bold rem(13) $setting-font-family-additional;
-            letter-spacing: rem(2.6);
-            padding: rem(15) rem(20) rem(15) 0;
-            position: relative;
+        &__top-panel {
+            @include helper-breakpoint-media-max($lg-max) {
+                position: absolute;
+                left: 0;
+                top: 0;
+                right: 0;
+                background-color: $setting-color-gray-1;
+                padding: rem(20) rem(24) rem(8);
+                min-height: rem(112);
+            }
+        }
 
-            &[data-toggle-target] {
-                cursor: pointer;
-
-                .no-touch &:hover {
-                    opacity: 0.5;
-                }
-
-                &::before,
-                &::after {
-                    content: '';
-                    background: $setting-color-black;
-                    position: absolute;
-                    top: 50%;
-                }
-
-                &::before {
-                    width: rem(12);
-                    height: rem(2);
-                    right: 0;
-                    margin-top: rem(-1);
-                }
-
-                &::after {
-                    width: rem(2);
-                    height: rem(12);
-                    right: rem(5);
-                    margin-top: rem(-6);
-                }
-
-                &.active {
-                    &::after {
-                        display: none;
-                    }
-                }
+        &__top-panel-button {
+            @include helper-breakpoint-media-max($lg-max) {
+                position: absolute;
+                top: rem(24);
+                right: rem(24);
             }
         }
 
         &__actions {
             padding-top: rem(15);
-            border-top: rem(1) dotted $setting-color-gray-3;
 
             @include helper-breakpoint-media-max($lg-max) {
                 position: absolute;
-                top: 0;
                 left: 0;
-                width: 100%;
-                background: $setting-color-gray-1;
-                border-top: none;
-                padding: rem(20) rem(24);
-            }
-        }
-
-        &__button {
-            font: 400 rem(13)/rem(16) $setting-font-family-additional;
-            padding: rem(12) rem(20);
-            min-width: rem(92);
-            width: 100%;
-
-            @include helper-breakpoint-media-max($lg-max) {
-                width: auto;
-            }
-        }
-
-        &__close-popup {
-            @include helper-breakpoint-media-min($xl-min) {
-                display: none;
+                bottom: 0;
+                right: 0;
             }
         }
 

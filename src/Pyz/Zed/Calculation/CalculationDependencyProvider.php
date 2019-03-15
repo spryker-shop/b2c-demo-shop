@@ -33,6 +33,7 @@ use Spryker\Zed\DiscountCalculationConnector\Communication\Plugin\DiscountCalcul
 use Spryker\Zed\DiscountPromotion\Communication\Plugin\Calculation\RemovePromotionItemsCalculatorPlugin;
 use Spryker\Zed\Kernel\Container;
 use Spryker\Zed\Payment\Communication\Plugin\Calculation\PaymentCalculatorPlugin;
+use Spryker\Zed\PersistentCart\Communication\Plugin\Calculation\QuoteSaveQuotePostRecalculateStrategyPlugin;
 use Spryker\Zed\ProductBundle\Communication\Plugin\Calculation\CalculateBundlePricePlugin;
 use Spryker\Zed\ProductOption\Communication\Plugin\ProductOptionTaxRateCalculatorPlugin;
 use Spryker\Zed\SalesOrderThreshold\Communication\Plugin\Calculation\AddSalesOrderThresholdExpenseCalculatorPlugin;
@@ -56,6 +57,9 @@ class CalculationDependencyProvider extends SprykerCalculationDependencyProvider
      *   - Item.calculatedDiscounts
      *   - Item.productOption.calculatedDiscounts
      *   - Expense.calculatedDiscounts
+     *
+     * RemoveCanceledAmountCalculatorPlugin - Reset item canceled amount for:
+     *   - Item.canceledAmount
      *
      * PriceCalculatorPlugin - Calculates price based on tax mode, tax mode is set in this calculator based on CalculationConstants::TAX_MODE configuration key.
      *    - Item.unitPrice
@@ -174,23 +178,24 @@ class CalculationDependencyProvider extends SprykerCalculationDependencyProvider
      *
      * @param \Spryker\Zed\Kernel\Container $container
      *
-     * @return \Spryker\Zed\Calculation\Dependency\Plugin\CalculationPluginInterface[]
+     * @return \Spryker\Zed\CalculationExtension\Dependency\Plugin\CalculationPluginInterface[]
      */
     protected function getQuoteCalculatorPluginStack(Container $container)
     {
-        return [
+        /** @var \Spryker\Zed\Calculation\Dependency\Plugin\CalculationPluginInterface[] $pluginStack */
+        $pluginStack = [
             new RemoveTotalsCalculatorPlugin(),
             new RemoveAllCalculatedDiscountsCalculatorPlugin(),
             new RemovePromotionItemsCalculatorPlugin(),
             new RemoveCanceledAmountCalculatorPlugin(),
-            new RemoveSalesOrderThresholdExpenseCalculatorPlugin(),
+            new RemoveSalesOrderThresholdExpenseCalculatorPlugin(), #SalesOrderThresholdFeature
 
             new PriceCalculatorPlugin(),
             new ItemProductOptionPriceAggregatorPlugin(),
             new ItemSubtotalAggregatorPlugin(),
 
             new SubtotalCalculatorPlugin(),
-            new AddSalesOrderThresholdExpenseCalculatorPlugin(),
+            new AddSalesOrderThresholdExpenseCalculatorPlugin(), #SalesOrderThresholdFeature
 
             new ProductItemTaxRateCalculatorPlugin(),
             new ProductOptionTaxRateCalculatorPlugin(),
@@ -221,6 +226,8 @@ class CalculationDependencyProvider extends SprykerCalculationDependencyProvider
 
             new PaymentCalculatorPlugin(),
         ];
+
+        return $pluginStack;
     }
 
     /**
@@ -259,6 +266,16 @@ class CalculationDependencyProvider extends SprykerCalculationDependencyProvider
             new OrderTaxTotalCalculationPlugin(),
             new GrandTotalCalculatorPlugin(),
             new NetTotalCalculatorPlugin(),
+        ];
+    }
+
+    /**
+     * @return \Spryker\Zed\CalculationExtension\Dependency\Plugin\QuotePostRecalculatePluginStrategyInterface[]
+     */
+    protected function getQuotePostRecalculatePlugins(): array
+    {
+        return [
+            new QuoteSaveQuotePostRecalculateStrategyPlugin(),
         ];
     }
 }

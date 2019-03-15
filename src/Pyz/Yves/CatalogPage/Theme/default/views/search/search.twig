@@ -25,9 +25,9 @@
     }
 } %}
 
-{% block breadcrumbs %}
+{% block breadcrumb %}
     {% include molecule('breadcrumb') with {
-        modifiers: ['bottom'],
+        modifiers: ['no-border'],
         data: {
             steps: [{
                 label: 'global.search' | trans
@@ -48,6 +48,9 @@
 {% endblock %}
 
 {% block form %}
+    <div class="col col--sm-12 spacing spacing--inner">
+        {% widget 'FullTextSearchTabsWidget' args [data.searchString, 'FullTextSearchProductsTab'] only %}{% endwidget %}
+    </div>
 
     {% embed molecule('spelling-suggestion', 'CatalogPage') with {
         data: {

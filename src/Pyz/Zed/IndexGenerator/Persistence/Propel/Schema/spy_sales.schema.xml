@@ -1,12 +1,6 @@
 <?xml version="1.0"?>
 <database xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:noNamespaceSchemaLocation="http://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\Sales\Persistence" package="src.Orm.Zed.Sales.Persistence">
   <table name="spy_sales_order">
-    <index name="index-spy_sales_order-fk_order_source">
-      <index-column name="fk_order_source"/>
-    </index>
-    <index name="index-spy_sales_order-fk_sales_reclamation">
-      <index-column name="fk_sales_reclamation"/>
-    </index>
     <index name="index-spy_sales_order-fk_sales_order_address_billing">
       <index-column name="fk_sales_order_address_billing"/>
     </index>
@@ -91,11 +85,6 @@
   </table>
   <table name="spy_sales_order_comment">
     <index name="index-spy_sales_order_comment-fk_sales_order">
-      <index-column name="fk_sales_order"/>
-    </index>
-  </table>
-  <table name="spy_sales_expense">
-    <index name="index-spy_sales_expense-fk_sales_order">
       <index-column name="fk_sales_order"/>
     </index>
   </table>
