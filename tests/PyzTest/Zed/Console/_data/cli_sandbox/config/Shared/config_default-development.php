@@ -78,8 +78,6 @@ $config[KernelConstants::AUTO_LOADER_UNRESOLVABLE_CACHE_ENABLED] = false;
 
 $config[KernelConstants::SPRYKER_ROOT] = APPLICATION_ROOT_DIR . '/vendor/spryker/spryker/Bundles';
 
-$config[EventJournalConstants::LOCK_OPTIONS][EventJournalConstants::NO_LOCK] = true;
-
 $config[LogConstants::LOG_LEVEL] = \Monolog\Logger::INFO;
 
 $config[TwigConstants::YVES_PATH_CACHE_FILE] = APPLICATION_ROOT_DIR . '/data/' . Store::getInstance()->getStoreName() . '/cache/Yves/twig/.pathCache';
