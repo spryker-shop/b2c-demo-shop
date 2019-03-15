@@ -1,0 +1,62 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'cart-discount-summary',
+    tag: 'li'
+} %}
+
+{% define data = {
+    voucherDiscounts: null,
+    ruleDiscounts: null,
+    discountTotal: null,
+    isQuoteEditable: false
+} %}
+
+{% block component %}
+    {% if data.discountTotal and (data.voucherDiscounts is not empty or data.ruleDiscounts is not empty) %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    {% if data.voucherDiscounts is not empty %}
+        <strong>
+            {{ 'cart.vouchers' | trans }}
+            {% if data.isQuoteEditable %}
+                <a class="float-right link link--darkest link--edit" href="{{ url('discount/voucher/clear') }}">
+                    {{ 'cart.vouchers.clear-all' | trans }}
+                </a>
+            {% endif %}
+        </strong>
+        <ul>
+            {% for voucherDiscount in data.voucherDiscounts %}
+                <li class="grid grid--justify spacing-y">
+                    <span class="col col--sm-8">
+                        {{ voucherDiscount.displayName }}
+                        {% if data.isQuoteEditable %}
+                            <br/>
+                            <a class="link link--darkest link--edit" href="{{ url('discount/voucher/remove', {'code': voucherDiscount.voucherCode}) }}">
+                                {{ 'cart.voucher.remove' | trans }}
+                            </a>
+                        {% endif %}
+                    </span>
+                    <span class="col col--expand text-right">- {{ voucherDiscount.amount | money }}</span>
+                </li>
+            {% endfor %}
+        </ul>
+        <hr />
+    {% endif %}
+
+    {% if data.ruleDiscounts is not empty %}
+        <strong>{{ 'cart.discounts' | trans }}</strong>
+        <ul>
+            {% for ruleDiscount in data.ruleDiscounts %}
+                <li class="grid grid--justify spacing-y">
+                    <span class="col col--sm-8">{{ ruleDiscount.displayName }}</span>
+                    <span class="col col--expand text-right">- {{ ruleDiscount.amount | money }}</span>
+                </li>
+            {% endfor %}
+        </ul>
+        <hr />
+    {% endif %}
+{% endblock %}

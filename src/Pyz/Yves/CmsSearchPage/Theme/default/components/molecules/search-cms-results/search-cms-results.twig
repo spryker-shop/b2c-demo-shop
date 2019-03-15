@@ -1,0 +1,24 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'search-cms-results'
+} %}
+
+{% define data = {
+    pages: required
+} %}
+
+{% block body %}
+    <ul class="{{ config.name }}__list">
+        {% for page in data.pages %}
+            <li class="{{ config.name }}__item">
+                <a href="{{ page.url }}" class="{{ config.name }}__name spacing-y spacing-y--inner" title="{{ page.name }}">
+                    {{ page.name }}
+                    <span class="{{ config.name }}__button button button--hollow button--medium">
+                        {{ 'global.search.results.view' | trans }}
+                    </span>
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

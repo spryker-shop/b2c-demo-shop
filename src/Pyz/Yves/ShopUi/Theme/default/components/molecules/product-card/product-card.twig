@@ -10,7 +10,7 @@
     abstractId: required,
     url: required,
     imageUrl: required,
-    price: required,
+    price: null,
     originalPrice: null
 } %}
 
@@ -48,9 +48,7 @@
             <a href="{{data.url}}" class="{{ config.name }}__info grid grid--justify grid--top grid--no-wrap">
                 {% block name %}
                     <div class="col col--md-8 col--sm-12">
-                        <span class="{{ config.name }}__name">
-                            {{ data.name }}
-                        </span>
+                        {{ data.name }}
                     </div>
                 {% endblock %}
 

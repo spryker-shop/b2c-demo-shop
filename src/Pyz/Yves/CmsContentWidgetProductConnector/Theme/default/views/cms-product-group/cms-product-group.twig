@@ -13,6 +13,8 @@
     </div>
 
     {% if data.product is not empty %}
-        {% widget 'CmsProductGroupWidget' args [data.product] only %}{% endwidget %}
+        <div class="grid grid--stretch product-list">
+            {% widget 'CmsProductGroupWidget' args [data.product] only %}{% endwidget %}
+        </div>
     {% endif %}
 {% endblock %}

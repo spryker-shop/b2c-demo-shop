@@ -9,6 +9,7 @@ namespace Pyz\Yves\ProductSetWidget\Widget;
 
 use Generated\Shared\Transfer\ProductSetDataStorageTransfer;
 use Spryker\Yves\Kernel\Widget\AbstractWidget;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @method \Pyz\Yves\ProductSetWidget\ProductSetWidgetFactory getFactory()
@@ -16,6 +17,7 @@ use Spryker\Yves\Kernel\Widget\AbstractWidget;
 class ProductSetIdsWidget extends AbstractWidget
 {
     public const NAME = 'ProductSetIdsWidget';
+    public const PARAM_ATTRIBUTE = 'attributes';
 
     /**
      * @param array $productSetIds
@@ -48,7 +50,7 @@ class ProductSetIdsWidget extends AbstractWidget
      *
      * @return array
      */
-    protected function getProductSetList(array $productSetIds)
+    protected function getProductSetList(array $productSetIds): array
     {
         $productSets = [];
         foreach ($productSetIds as $productSetId) {
@@ -68,25 +70,26 @@ class ProductSetIdsWidget extends AbstractWidget
      *
      * @return array
      */
-    protected function getSingleProductSet($productSetId)
+    protected function getSingleProductSet(int $productSetId): array
     {
-        $productSet = $this->getProductSetStorageTransfer($productSetId);
+        $productSet = $this->getProductSetDataStorageTransfer($productSetId);
+
         if (!$productSet || !$productSet->getIsActive()) {
             return [];
         }
 
         return [
             'productSet' => $productSet,
-            'productViews' => $this->mapProductSetDataStorageTransfers($productSet),
+            'productViews' => $this->mapProductViewTransfers($productSet),
         ];
     }
 
     /**
      * @param int $idProductSet
      *
-     * @return \Generated\Shared\Transfer\ProductSetStorageTransfer|null
+     * @return \Generated\Shared\Transfer\ProductSetDataStorageTransfer|null
      */
-    protected function getProductSetStorageTransfer($idProductSet)
+    protected function getProductSetDataStorageTransfer(int $idProductSet): ?ProductSetDataStorageTransfer
     {
         return $this->getFactory()->getProductSetStorageClient()->getProductSetByIdProductSet($idProductSet, $this->getLocale());
     }
@@ -96,22 +99,44 @@ class ProductSetIdsWidget extends AbstractWidget
      *
      * @return \Generated\Shared\Transfer\ProductViewTransfer[]
      */
-    protected function mapProductSetDataStorageTransfers(ProductSetDataStorageTransfer $productSetDataStorageTransfer)
+    protected function mapProductViewTransfers(ProductSetDataStorageTransfer $productSetDataStorageTransfer): array
     {
         $productViewTransfers = [];
-        foreach ($productSetDataStorageTransfer->getProductAbstractIds() as $idProductAbstract) {
-            $productAbstractData = $this->getFactory()->getProductStorageClient()->findProductAbstractStorageData($idProductAbstract, $this->getLocale());
 
-            if ($productAbstractData === null) {
+        foreach ($productSetDataStorageTransfer->getProductAbstractIds() as $idProductAbstract) {
+            $productViewTransfer = $this->getFactory()->getProductStorageClient()->findProductAbstractViewTransfer(
+                $idProductAbstract,
+                $this->getLocale(),
+                $this->getSelectedAttributes($idProductAbstract)
+            );
+
+            if ($productViewTransfer === null) {
                 continue;
             }
 
-            $productViewTransfers[] = $this->getFactory()->getProductStorageClient()->mapProductStorageData(
-                $productAbstractData,
-                $this->getLocale()
-            );
+            $productViewTransfers[] = $productViewTransfer;
         }
 
         return $productViewTransfers;
+    }
+
+    /**
+     * @param int $idProductAbstract
+     *
+     * @return array
+     */
+    protected function getSelectedAttributes(int $idProductAbstract): array
+    {
+        $attributes = $this->getRequest()->query->get(static::PARAM_ATTRIBUTE, []);
+
+        return isset($attributes[$idProductAbstract]) ? array_filter($attributes[$idProductAbstract]) : [];
+    }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\Request
+     */
+    protected function getRequest(): Request
+    {
+        return $this->getApplication()['request'];
     }
 }

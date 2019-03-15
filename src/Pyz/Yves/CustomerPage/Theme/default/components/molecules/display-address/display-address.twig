@@ -17,6 +17,7 @@
     {% endif %}
 
     <li class="menu__item">{{ data.address.address1 }} {{ data.address.address2 }}</li>
+    <li class="menu__item">{{ data.address.address3 }}</li>
     <li class="menu__item">{{ data.address.zipCode }} {{ data.address.city }}, {{ ('countries.iso.' ~ data.address.iso2code) | trans }}</li>
 
     {% if data.address.phone is not empty %}

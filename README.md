@@ -1,4 +1,5 @@
 # Spryker B2C Demo Shop
+[![Build Status](https://travis-ci.com/spryker/b2c-demo-shop-internal.svg?token=uuNLarTLvJGpcdGUgqj2&branch=master)](https://travis-ci.com/spryker/b2c-demo-shop-internal)
 [![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.1-8892BF.svg)](https://php.net/)
 
 ## Installation

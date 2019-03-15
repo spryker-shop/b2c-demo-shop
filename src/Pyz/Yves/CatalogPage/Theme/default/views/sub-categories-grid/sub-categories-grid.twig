@@ -1,0 +1,75 @@
+{% extends template('page-layout-catalog', 'CatalogPage') %}
+
+{% define data = {
+    products: [],
+    facets: _view.facets,
+    category: _view.category | default,
+    categories: categories | default([]),
+    isEmptyCategoryFilterValueVisible: _view.isEmptyCategoryFilterValueVisible | default,
+    viewMode: _view.viewMode | default,
+    children: _view.category.children | default([]),
+
+    title: _view.category.name | default,
+    metaTitle: _view.pageTitle | default(_view.category.name | default),
+    metaDescription: _view.pageDescription | default,
+    metaKeywords: _view.pageKeywords | default,
+
+    pagination: null
+} %}
+
+{% set categoryTemplate = molecule('category-card', 'CatalogPage') %}
+{% set cardClass = 'col col--sm-6 col--xl-4' %}
+
+{% if data.viewMode == 'list' %}
+    {% set categoryTemplate = molecule('category-list-item', 'CatalogPage') %}
+    {% set cardClass = 'col col--sm-12' %}
+{% endif %}
+
+{% block filterSection %}
+    {% embed organism('filter-section', 'CatalogPage') with {
+        data: {
+            facets: data.facets,
+            categories: data.categories,
+            togglerClass: 'js-catalog-toggler-click__trigger'
+        }
+    } only %}
+        {% block filters %}
+            {% for filter in data.facets %}
+                {% set filterHasValues = filter.values is not defined or filter.values | length > 0 %}
+                {% set filterIsVisible = filter.name == 'category' %}
+                {% if filterHasValues and filterIsVisible %}
+                    {% block filter %}
+                        {{ parent() }}
+                    {% endblock %}
+                {% endif %}
+            {% endfor %}
+        {% endblock %}
+
+        {% block actions %}{% endblock %}
+    {% endembed %}
+{% endblock %}
+
+{% block catalogContent %}
+    <div class="grid">
+        <div class="col col--sm-12">
+            {% include molecule('view-mode-switch', 'CatalogPage') with {
+                class: 'is-hidden-xl-only',
+                data: {
+                    viewMode: data.viewMode
+                }
+            } only %}
+        </div>
+    </div>
+    <div class="grid {% if data.viewMode != 'list' %}product-list{% endif %}">
+        {% for childCategory in data.children %}
+            {% include categoryTemplate with {
+                class: cardClass,
+                data: {
+                    id: childCategory.id_category,
+                    name: childCategory.name,
+                    url: childCategory.url
+                }
+            } only %}
+        {% endfor %}
+    </div>
+{% endblock %}

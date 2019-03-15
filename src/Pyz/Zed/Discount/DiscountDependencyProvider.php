@@ -73,6 +73,16 @@ class DiscountDependencyProvider extends SprykerDiscountDependencyProvider
     }
 
     /**
+     * @return \Spryker\Zed\DiscountExtension\Dependency\Plugin\DiscountableItemTransformerStrategyPluginInterface[]
+     */
+    protected function getDiscountableItemTransformerStrategyPlugins(): array
+    {
+        return [
+            new NonSplittableDiscountableItemTransformerStrategyPlugin(),
+        ];
+    }
+
+    /**
      * @return \Spryker\Zed\Discount\Dependency\Plugin\CollectorStrategyPluginInterface[]
      */
     protected function getCollectorStrategyPlugins()
@@ -143,7 +153,7 @@ class DiscountDependencyProvider extends SprykerDiscountDependencyProvider
     }
 
     /**
-     * @return \Spryker\Zed\Discount\Dependency\Plugin\DiscountViewBlockProviderPluginInterface[]
+     * @return \Spryker\Zed\Discount\Dependency\Plugin\DiscountApplicableFilterPluginInterface[]
      */
     protected function getDiscountApplicableFilterPlugins()
     {
@@ -158,15 +168,5 @@ class DiscountDependencyProvider extends SprykerDiscountDependencyProvider
     protected function getStoreRelationFormTypePlugin()
     {
         return new StoreRelationToggleFormTypePlugin();
-    }
-
-    /**
-     * @return \Spryker\Zed\DiscountExtension\Dependency\Plugin\DiscountableItemTransformerStrategyPluginInterface[]
-     */
-    protected function getDiscountableItemTransformerStrategyPlugins(): array
-    {
-        return [
-            new NonSplittableDiscountableItemTransformerStrategyPlugin(),
-        ];
     }
 }

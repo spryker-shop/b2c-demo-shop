@@ -13,7 +13,7 @@
         {% for node in data.nodes %}
             {% embed atom('node') with {
                 modifiers: modifiers,
-                class: 'list__item',
+                class: 'list__item' ~ (node.url ? '' : ' ' ~ node.cssClass),
                 config: {
                     tag: 'li'
                 },
@@ -22,11 +22,11 @@
                 }
             } only %}
                 {% block url %}
-                    <a class="{{ component.renderClass(config.name ~ '__link', modifiers) }}" href="{{ data.node.url }}">{{ data.node.title }}</a>
+                    <a class="{{ component.renderClass(config.name ~ '__link', modifiers) }} {{ data.node.cssClass }}" href="{{ data.node.url }}">{{ data.node.title }}</a>
                 {% endblock %}
 
                 {% block externalUrl %}
-                    <a class="{{ component.renderClass(config.name ~ '__link', modifiers) }}" href="{{ data.node.url }}" target="_blank">{{ data.node.title }}</a>
+                    <a class="{{ component.renderClass(config.name ~ '__link', modifiers) }} {{ data.node.cssClass }}" href="{{ data.node.url }}" target="_blank">{{ data.node.title }}</a>
                 {% endblock %}
 
                 {% block other %}

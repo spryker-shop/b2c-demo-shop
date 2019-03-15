@@ -29,6 +29,8 @@ use Spryker\Zed\ProductImage\Communication\Plugin\ProductConcreteReadPlugin as I
 use Spryker\Zed\ProductSearch\Communication\Plugin\ProductConcrete\ProductSearchProductConcreteAfterCreatePlugin;
 use Spryker\Zed\ProductSearch\Communication\Plugin\ProductConcrete\ProductSearchProductConcreteAfterUpdatePlugin;
 use Spryker\Zed\ProductSearch\Communication\Plugin\ProductConcrete\ProductSearchProductConcreteReadPlugin;
+use Spryker\Zed\ProductValidity\Communication\Plugin\ProductValidityReadPlugin;
+use Spryker\Zed\ProductValidity\Communication\Plugin\ProductValidityUpdatePlugin;
 use Spryker\Zed\Stock\Communication\Plugin\ProductConcreteAfterCreatePlugin as StockProductConcreteAfterCreatePlugin;
 use Spryker\Zed\Stock\Communication\Plugin\ProductConcreteAfterUpdatePlugin as StockProductConcreteAfterUpdatePlugin;
 use Spryker\Zed\Stock\Communication\Plugin\ProductConcreteReadPlugin as StockProductConcreteReadPlugin;
@@ -129,6 +131,7 @@ class ProductDependencyProvider extends SprykerProductDependencyProvider
             new PriceProductConcreteReadPlugin(),
             new ProductSearchProductConcreteReadPlugin(),
             new ProductBundleProductConcreteReadPlugin(),
+            new ProductValidityReadPlugin(),
         ];
     }
 
@@ -140,7 +143,7 @@ class ProductDependencyProvider extends SprykerProductDependencyProvider
     protected function getProductConcreteBeforeUpdatePlugins(Container $container)
     {
         return [
-            new ProductAlternativeGuiProductConcretePluginUpdate(),
+            new ProductAlternativeGuiProductConcretePluginUpdate(), #ProductAlternativeFeature
         ];
     }
 
@@ -157,6 +160,7 @@ class ProductDependencyProvider extends SprykerProductDependencyProvider
             new PriceProductConcreteAfterUpdatePlugin(),
             new ProductSearchProductConcreteAfterUpdatePlugin(),
             new ProductBundleProductConcreteAfterUpdatePlugin(),
+            new ProductValidityUpdatePlugin(),
             new SaveDiscontinuedNotesProductConcretePluginUpdate(),
         ];
     }

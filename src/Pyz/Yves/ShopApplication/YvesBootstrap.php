@@ -38,6 +38,8 @@ use Spryker\Yves\ZedRequest\Plugin\ServiceProvider\ZedRequestLogServiceProvider;
 use SprykerShop\Yves\AgentPage\Plugin\Provider\AgentPageControllerProvider;
 use SprykerShop\Yves\AgentPage\Plugin\Provider\AgentPageSecurityServiceProvider;
 use SprykerShop\Yves\AgentWidget\Plugin\Provider\AgentWidgetControllerProvider;
+use SprykerShop\Yves\AvailabilityNotificationPage\Plugin\Provider\AvailabilityNotificationPageControllerProvider;
+use SprykerShop\Yves\AvailabilityNotificationWidget\Plugin\Provider\AvailabilityNotificationWidgetControllerProvider;
 use SprykerShop\Yves\CalculationPage\Plugin\Provider\CalculationPageControllerProvider;
 use SprykerShop\Yves\CartNoteWidget\Plugin\Provider\CartNoteWidgetControllerProvider;
 use SprykerShop\Yves\CartPage\Plugin\Provider\CartControllerProvider;
@@ -49,6 +51,7 @@ use SprykerShop\Yves\CheckoutPage\Plugin\Provider\CheckoutPageControllerProvider
 use SprykerShop\Yves\CmsBlockWidget\Plugin\Provider\CmsBlockTwigFunctionServiceProvider;
 use SprykerShop\Yves\CmsPage\Plugin\Provider\CmsTwigFunctionServiceProvider;
 use SprykerShop\Yves\CmsPage\Plugin\Provider\PreviewControllerProvider;
+use SprykerShop\Yves\CmsSearchPage\Plugin\Provider\CmsSearchPageControllerProvider;
 use SprykerShop\Yves\CurrencyWidget\Plugin\Provider\CurrencyWidgetControllerProvider;
 use SprykerShop\Yves\CustomerPage\Plugin\Provider\CustomerPageControllerProvider;
 use SprykerShop\Yves\CustomerPage\Plugin\Provider\CustomerSecurityServiceProvider;
@@ -196,6 +199,9 @@ class YvesBootstrap extends SprykerYvesBootstrap
             new AgentPageControllerProvider($isSsl), #AgentFeature
             new AgentWidgetControllerProvider($isSsl), #AgentFeature
             new FileManagerWidgetControllerProvider($isSsl),
+            new CmsSearchPageControllerProvider($isSsl),
+            new AvailabilityNotificationWidgetControllerProvider($isSsl),
+            new AvailabilityNotificationPageControllerProvider($isSsl),
         ];
     }
 }

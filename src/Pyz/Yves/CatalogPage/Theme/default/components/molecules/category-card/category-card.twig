@@ -1,0 +1,31 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'category-card'
+} %}
+
+{% define data = {
+    id: required,
+    name: required,
+    url: required
+} %}
+
+{% block body %}
+    {% block image %}
+        <a href="{{ data.url }}">
+            {% widget 'CategoryImageStorageWidget' args [data.id, data.name] only %}{% endwidget %}
+        </a>
+    {% endblock %}
+
+    {% block name %}
+        <p class="text-center">
+            <strong>{{ data.name }}</strong>
+        </p>
+    {% endblock %}
+
+    {% block actions %}
+        <a class="button button--expand" href="{{ data.url }}">
+            {{ 'product.view' | trans }}
+        </a>
+    {% endblock %}
+{% endblock %}

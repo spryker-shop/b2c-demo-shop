@@ -4,6 +4,7 @@
     cart: _view.cart,
     cartItems: _view.cartItems,
     isQuoteValid: _view.isQuoteValid,
+    isQuoteEditable: _view.isQuoteEditable,
     attributes: _view.attributes,
     request: app.request,
 
@@ -60,7 +61,8 @@
                     {% include molecule('cart-summary', 'CartPage') with {
                         data: {
                             cart: data.cart,
-                            isQuoteValid: data.isQuoteValid
+                            isQuoteValid: data.isQuoteValid,
+                            isQuoteEditable: data.isQuoteEditable
                         }
                     } only %}
                 </div>

@@ -1,0 +1,73 @@
+@mixin cms-search-page-search-cms-results($name: '.search-cms-results') {
+    #{$name} {
+        &__list {
+            margin-bottom: rem(60);
+        }
+
+        &__item {
+            padding: rem(11) rem(25);
+            border-bottom: rem(1) dotted $setting-color-gray-3;
+            text-align: center;
+            position: relative;
+
+            &:first-child {
+                border-top: rem(1) dotted $setting-color-gray-3;
+            }
+
+            @include helper-breakpoint-media-min($md-min) {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            @include helper-breakpoint-media-min($xl-min) {
+                @include helper-effect-transition(box-shadow border-bottom-color);
+
+                &::before {
+                    @include helper-effect-transition(opacity);
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background: linear-gradient(to bottom, $setting-color-black, $setting-color-alpha-1);
+                    opacity: 0;
+                }
+
+                &:hover {
+                    box-shadow: rem(2) rem(10) rem(30) 0 $setting-color-shadow;
+                    border-bottom-color: $setting-color-transparent;
+
+                    &::before {
+                        opacity: 0.05;
+                    }
+                }
+            }
+        }
+
+        &__name {
+            letter-spacing: rem(0.3);
+            font-family: $setting-font-family-additional;
+            font-weight: fw(medium);
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        &__button {
+            text-decoration-color: $setting-color-white;
+            text-decoration-line: inherit;
+
+            &:hover {
+                @include helper-effect-transition(text-decoration-color);
+                text-decoration-color: $setting-color-alt;
+            }
+        }
+
+        @content;
+    }
+}
+
+@include cms-search-page-search-cms-results();

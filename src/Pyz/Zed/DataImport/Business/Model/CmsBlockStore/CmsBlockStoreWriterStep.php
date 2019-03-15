@@ -10,10 +10,12 @@ namespace Pyz\Zed\DataImport\Business\Model\CmsBlockStore;
 use Orm\Zed\CmsBlock\Persistence\SpyCmsBlockQuery;
 use Orm\Zed\CmsBlock\Persistence\SpyCmsBlockStoreQuery;
 use Orm\Zed\Store\Persistence\SpyStoreQuery;
+use Spryker\Zed\CmsBlock\Dependency\CmsBlockEvents;
 use Spryker\Zed\DataImport\Business\Model\DataImportStep\DataImportStepInterface;
+use Spryker\Zed\DataImport\Business\Model\DataImportStep\PublishAwareStep;
 use Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface;
 
-class CmsBlockStoreWriterStep implements DataImportStepInterface
+class CmsBlockStoreWriterStep extends PublishAwareStep implements DataImportStepInterface
 {
     public const BULK_SIZE = 100;
     public const KEY_BLOCK_NAME = 'block_name';
@@ -36,11 +38,15 @@ class CmsBlockStoreWriterStep implements DataImportStepInterface
      */
     public function execute(DataSetInterface $dataSet)
     {
+        $idCmsBlock = $this->getIdCmsBlockByName($dataSet[static::KEY_BLOCK_NAME]);
+
         (new SpyCmsBlockStoreQuery())
-            ->filterByFkCmsBlock($this->getIdCmsBlockByName($dataSet[static::KEY_BLOCK_NAME]))
+            ->filterByFkCmsBlock($idCmsBlock)
             ->filterByFkStore($this->getIdStoreByName($dataSet[static::KEY_STORE_NAME]))
             ->findOneOrCreate()
             ->save();
+
+        $this->addPublishEvents(CmsBlockEvents::CMS_BLOCK_PUBLISH, $idCmsBlock);
     }
 
     /**

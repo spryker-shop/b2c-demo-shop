@@ -115,7 +115,8 @@
                     slides: data.products
                 },
                 attributes: {
-                    'data-json': data.sliderConfig
+                    'data-json': data.sliderConfig,
+                    'custom-select-selector': '.custom-select'
                 }
             } only %}
                 {% block slides %}
@@ -158,7 +159,8 @@
                                                     values: values,
                                                     selectedValue: selectedValue,
                                                     label: ('product.attribute.' ~ name) | trans,
-                                                    isAvailable: isAvailable
+                                                    isAvailable: isAvailable,
+                                                    autoInitSelect: true
                                                 }
                                             } only %}
                                         </li>
