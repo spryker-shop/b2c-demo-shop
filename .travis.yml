@@ -33,7 +33,6 @@ addons:
 cache:
   directories:
     - $HOME/.composer/cache
-    - /home/travis/.rvm/gems # Mailcatcher is a ruby gem, takes 5 minutes to install.
 
 services:
   - postgresql
@@ -99,7 +98,7 @@ script:
   - if [[ $VALIDATION == 1 ]] ; then vendor/bin/console code:sniff:style ; fi
   - if [[ $VALIDATION == 1 ]] ; then vendor/bin/phpmd src/ text vendor/spryker/architecture-sniffer/src/ruleset.xml --minimumpriority 2 ; fi
 
-  - vendor/bin/phantomjs --webdriver=4444 --disk-cache=true --load-images=false &
+  - vendor/bin/phantomjs --webdriver=4444 &
   - if [[ $TEST_GROUP == 'without-acceptance' ]] ; then vendor/bin/codecept run -x Presentation ; fi
   - if [[ $TEST_GROUP == 'acceptance' ]] ; then vendor/bin/codecept run -g Presentation ; fi
 
