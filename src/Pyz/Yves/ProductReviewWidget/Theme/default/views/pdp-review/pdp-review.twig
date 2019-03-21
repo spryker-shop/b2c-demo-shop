@@ -3,7 +3,7 @@
 {% define data = {
     idProductAbstract: _widget.idProductAbstract,
     form: _widget.form,
-    showSuccessMessage: false,
+    showSuccessMessage: true,
     action: 'product-review/submit',
     reviews: _widget.productReviews,
     summary: _widget.summary,
@@ -65,7 +65,7 @@
         } only %}
 
         {% if is_granted('ROLE_USER') %}
-            <div class="is-hidden js-review__new-review-form-target">
+            <div class="is-hidden js-new-review-form__target">
                 {% if data.showSuccessMessage %}
                     <div class="box box--success">
                         {{ 'product_review.submit.success' | trans }}
