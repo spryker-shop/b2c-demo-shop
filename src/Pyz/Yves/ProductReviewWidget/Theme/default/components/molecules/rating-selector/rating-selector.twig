@@ -41,7 +41,7 @@
                 {% endif %}
 
                 {% if data.useHalfSteps %}
-                    <a
+                    <span
                         data-step-value="{{ currentStepValue }}"
                         class="
                             {{ config.name }}__step
@@ -55,14 +55,14 @@
                                 name: 'star'
                             }
                         } only %}
-                    </a>
+                    </span>
 
                     {% set currentStepValue = (step - 0.5) * singleStepValue %}
                     {% if value >= currentStepValue %}
                         {% set isActive = true %}
                     {% endif %}
 
-                    <a
+                    <span
                         data-step-value="{{ currentStepValue }}"
                         class="
                             {{ config.name }}__step
@@ -76,9 +76,9 @@
                                 name: 'star'
                             }
                         } only %}
-                    </a>
+                    </span>
                 {% else %}
-                    <a
+                    <span
                         data-step-value="{{ currentStepValue }}"
                         class="
                             {{ config.name }}__step
@@ -92,7 +92,7 @@
                                 name: 'star'
                             }
                         } only %}
-                    </a>
+                    </span>
                 {% endif %}
             {% endfor %}
         {% endspaceless %}
