@@ -3,7 +3,6 @@ import CustomSelect from '../custom-select/custom-select';
 import $ from 'jquery/dist/jquery';
 import 'slick-carousel';
 
-
 export default class SlickCarousel extends Component {
     protected container: $;
     protected sliderConfig: Object;
@@ -33,7 +32,7 @@ export default class SlickCarousel extends Component {
             this.sliderConfig
         );
 
-        if ("ontouchstart" in document.documentElement){
+        if ('ontouchstart' in document.documentElement){
             this.container.slick('slickPause');
         }
     }

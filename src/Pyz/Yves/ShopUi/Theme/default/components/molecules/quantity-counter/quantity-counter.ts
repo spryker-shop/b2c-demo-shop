@@ -5,13 +5,12 @@ export default class QuantityCounter extends Component {
     decrButton: HTMLButtonElement;
     incrButton: HTMLButtonElement;
     value: number;
-    readonly duration: number;
+    readonly duration: number = 1000;
     timeout: number;
     inputChange: Event;
 
     constructor() {
         super();
-        this.duration = 1000;
         this.timeout = 0;
         this.inputChange = new Event('change');
     }
@@ -34,9 +33,9 @@ export default class QuantityCounter extends Component {
     }
 
     protected onDecrButtonClick(): void {
-        let value: number = +this.quantityInput.value;
+        const value: number = +this.quantityInput.value;
 
-        if(value > this.minQuantity) {
+        if (value > this.minQuantity) {
             this.quantityInput.value = (value - 1).toString();
 
             this.autoUpdateOnChange();
@@ -45,9 +44,9 @@ export default class QuantityCounter extends Component {
     }
 
     protected onIncrButtonClick(): void {
-        let value: number = +this.quantityInput.value;
+        const value: number = +this.quantityInput.value;
 
-        if(value < this.maxQuantity) {
+        if (value < this.maxQuantity) {
             this.quantityInput.value = (value + 1).toString();
 
             this.autoUpdateOnChange();
@@ -56,7 +55,7 @@ export default class QuantityCounter extends Component {
     }
 
     protected autoUpdateOnChange(): void {
-        if(this.autoUpdate) {
+        if (this.autoUpdate) {
             this.timer();
         }
     }
@@ -68,14 +67,14 @@ export default class QuantityCounter extends Component {
     protected timer(): void {
         clearTimeout(this.timeout);
         this.timeout = setTimeout(() => {
-            if(this.value !== this.getValue) {
+            if (this.value !== this.getValue) {
                 this.quantityInput.form.submit();
             }
         }, this.duration);
     }
 
     protected setMaxQuantityToInfinity(): void {
-        if(!this.maxQuantity) {
+        if (!this.maxQuantity) {
             this.quantityInput.setAttribute('data-max-quantity', 'Infinity');
         }
     }
