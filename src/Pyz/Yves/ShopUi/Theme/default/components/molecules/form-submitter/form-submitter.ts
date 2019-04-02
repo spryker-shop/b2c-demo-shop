@@ -1,8 +1,8 @@
 import Component from 'ShopUi/models/component';
 
 export default class FormSubmitter extends Component {
-    readonly event: string
-    readonly triggers: HTMLElement[]
+    readonly event: string;
+    readonly triggers: HTMLElement[];
 
     constructor() {
         super();
@@ -15,7 +15,9 @@ export default class FormSubmitter extends Component {
     }
 
     protected mapEvents(): void {
-        this.triggers.forEach((trigger: HTMLElement) => trigger.addEventListener(this.event, (event: Event) => this.onTriggerEvent(event)));
+        this.triggers.forEach((trigger: HTMLElement) => {
+            trigger.addEventListener(this.event, (event: Event) => this.onTriggerEvent(event));
+        });
     }
 
     protected onTriggerEvent(event: Event): void {

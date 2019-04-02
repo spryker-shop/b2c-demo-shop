@@ -1,12 +1,12 @@
 import Component from 'ShopUi/models/component';
 
 export default class NavOverlay extends Component {
-    readonly classToggle = `${this.name}--active`
+    readonly classToggle = `${this.name}--active`;
 
-    protected triggers: HTMLElement[]
-    protected triggerClose: HTMLElement
-    protected blocks: HTMLElement[]
-    protected savedIndex: number
+    protected triggers: HTMLElement[];
+    protected triggerClose: HTMLElement;
+    protected blocks: HTMLElement[];
+    protected savedIndex: number;
 
     readyCallback(): void {
         this.triggers = <HTMLElement[]>Array.from(document.querySelectorAll(this.triggerOpenSelector));
@@ -23,7 +23,9 @@ export default class NavOverlay extends Component {
     }
 
     protected mapEvents(): void {
-        this.triggers.forEach((trigger, index) => trigger.addEventListener('mouseenter', this.triggersHandler.bind(this, index)));
+        this.triggers.forEach((trigger, index) => {
+            trigger.addEventListener('mouseenter', this.triggersHandler.bind(this, index));
+        });
         this.triggerClose.addEventListener('mouseenter', this.triggerCloseHandler.bind(this));
     }
 
@@ -31,17 +33,17 @@ export default class NavOverlay extends Component {
         this.triggers.forEach(trigger => trigger.classList.remove(this.activeTriggerClass));
     }
 
-    protected triggersHandler(index, e): void {
-        e.stopPropagation();
-        if(!this.classList.contains(this.classToggle)) {
+    protected triggersHandler(index: number, event: Event): void {
+        event.stopPropagation();
+        if (!this.classList.contains(this.classToggle)) {
             this.classList.add(this.classToggle);
             this.blocks[index].classList.remove('is-hidden');
-            e.target.classList.add(this.activeTriggerClass);
-        } else if(this.savedIndex !== index) {
+            (<HTMLElement>event.target).classList.add(this.activeTriggerClass);
+        } else if (this.savedIndex !== index) {
             this.hideBlocks();
             this.resetTriggersActiveClass();
             this.blocks[index].classList.remove('is-hidden');
-            e.target.classList.add(this.activeTriggerClass);
+            (<HTMLElement>event.target).classList.add(this.activeTriggerClass);
         }
         this.savedIndex = index;
     }
