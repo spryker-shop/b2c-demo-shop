@@ -16,29 +16,6 @@
             width: 25%;
         }
 
-        &__container {
-            position: relative;
-            display: block;
-            color: $setting-color-black;
-
-            .no-touch &:hover {
-                text-decoration: none;
-                color: $setting-color-black;
-
-                #{$name}__image-wrap {
-                    box-shadow: rem(10) rem(10) rem(40) 0 $setting-color-shadow;
-                }
-
-                #{$name}__overlay::after {
-                    opacity: 0.09;
-                }
-
-                .color-selector {
-                    transform: translateY(0);
-                }
-            }
-        }
-
         &__image-wrap {
             @include helper-effect-transition(box-shadow);
             border-radius: rem(4);
@@ -76,6 +53,29 @@
                 @include helper-effect-transition(opacity);
                 background: linear-gradient(to bottom, $setting-color-black, $setting-color-alpha-1);
                 opacity: 0;
+            }
+        }
+
+        &__container {
+            position: relative;
+            display: block;
+            color: $setting-color-black;
+
+            .no-touch &:hover {
+                text-decoration: none;
+                color: $setting-color-black;
+
+                #{$name}__image-wrap {
+                    box-shadow: rem(10) rem(10) rem(40) 0 $setting-color-shadow;
+                }
+
+                #{$name}__overlay::after {
+                    opacity: 0.09;
+                }
+
+                .color-selector {
+                    transform: translateY(0);
+                }
             }
         }
 
