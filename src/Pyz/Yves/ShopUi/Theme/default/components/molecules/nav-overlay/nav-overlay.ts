@@ -34,16 +34,17 @@ export default class NavOverlay extends Component {
     }
 
     protected triggersHandler(index: number, event: Event): void {
+        const eventTarget = <HTMLElement>event.target;
         event.stopPropagation();
         if (!this.classList.contains(this.classToggle)) {
             this.classList.add(this.classToggle);
             this.blocks[index].classList.remove('is-hidden');
-            (<HTMLElement>event.target).classList.add(this.activeTriggerClass);
+            eventTarget.classList.add(this.activeTriggerClass);
         } else if (this.savedIndex !== index) {
             this.hideBlocks();
             this.resetTriggersActiveClass();
             this.blocks[index].classList.remove('is-hidden');
-            (<HTMLElement>event.target).classList.add(this.activeTriggerClass);
+            eventTarget.classList.add(this.activeTriggerClass);
         }
         this.savedIndex = index;
     }

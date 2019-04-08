@@ -28,11 +28,11 @@ export default class QuantityCounter extends Component {
     protected mapEvents(): void {
         this.quantityInput.addEventListener('input', (event: Event) => this.triggerInputEvent());
         this.quantityInput.addEventListener('change', () => this.autoUpdateOnChange());
-        this.decrButton.addEventListener('click', () => this.onDecrButtonClick());
-        this.incrButton.addEventListener('click', () => this.onIncrButtonClick());
+        this.decrButton.addEventListener('click', () => this.onDecrementButtonClick());
+        this.incrButton.addEventListener('click', () => this.onIncrementButtonClick());
     }
 
-    protected onDecrButtonClick(): void {
+    protected onDecrementButtonClick(): void {
         const value: number = +this.quantityInput.value;
 
         if (value > this.minQuantity) {
@@ -43,8 +43,8 @@ export default class QuantityCounter extends Component {
         }
     }
 
-    protected onIncrButtonClick(): void {
-        const value: number = +this.quantityInput.value;
+    protected onIncrementButtonClick(): void {
+        const value: number = Number(this.quantityInput.value);
 
         if (value < this.maxQuantity) {
             this.quantityInput.value = (value + 1).toString();

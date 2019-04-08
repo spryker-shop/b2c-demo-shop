@@ -27,8 +27,8 @@ export default class RangeSlider extends Component {
             connect: this.connectAttribute,
             margin: this.marginAttribute,
             range: {
-                min: +this.valueMin,
-                max: +this.valueMax
+                min: Number(this.valueMin),
+                max: Number(this.valueMax)
             }
         };
         this.init();
@@ -45,7 +45,7 @@ export default class RangeSlider extends Component {
     }
 
     protected updateValues(wrap: noUiSlider, target: HTMLInputElement[]): void {
-        const update = (values, handle) => target[handle].value = `${+values[handle]}`;
+        const update = (values, handle) => target[handle].value = `${Number(values[handle])}`;
 
         wrap.noUiSlider.on('update', update);
     }
@@ -54,9 +54,8 @@ export default class RangeSlider extends Component {
         const currency = (target[0].innerHTML).replace(/[0-9_,.]/g, '');
         const update = (values, handle) => {
             currency.search(/&nbsp;/i) !== -1 ?
-                target[handle].innerHTML = `${+values[handle]}${currency}`
-                :
-                target[handle].innerHTML = `${currency}${+values[handle]}`;
+                target[handle].innerHTML = `${Number(values[handle])}${currency}` :
+                target[handle].innerHTML = `${currency}${Number(values[handle])}`;
         };
 
         wrap.noUiSlider.on('update', update);
