@@ -5,7 +5,8 @@
 } %}
 
 {% define data = {
-    form: required
+    form: required,
+    action: required
 } %}
 
 {% block body %}
@@ -17,7 +18,7 @@
                 data: {
                     form: data.form,
                     options: {
-                        action: '#review'
+                        action: data.action
                     },
                     layout: {
                         'summary': 'col col--sm-12 col-md-10 form__field--review form__field--review-summary',
