@@ -9,7 +9,7 @@ stylelint.lint({
     if (data.errored) {
         const messages = JSON.parse(JSON.stringify(data.output));
         process.stdout.write(messages);
-        if(process.env.NODE_ENV !== 'development') {
+        if (process.env.NODE_ENV !== 'development') {
             process.exit(1);
         }
     }
