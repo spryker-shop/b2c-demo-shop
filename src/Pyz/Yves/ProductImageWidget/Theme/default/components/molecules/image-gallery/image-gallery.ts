@@ -20,38 +20,36 @@ export default class ImageGallery extends Component {
     }
 
     protected mapEvents(): void {
-        if(this.thumbnail) {
+        if (this.thumbnail) {
             this.thumbnail.addEventListener('mouseenter', (event: Event) => this.onThumbnailHover(event), true);
         }
     }
 
     protected initSlider(): void {
         const imagesQuantity = this.galleryItems.length;
-        if(imagesQuantity > 1) {
+        if (imagesQuantity > 1) {
             $(this.thumbnail).slick(this.thumbnailSliderConfig);
         }
     }
 
     protected onThumbnailHover(event: Event): void {
         const thumbnail = <HTMLElement> event.target;
-        if(thumbnail.classList.contains(`${this.jsName}-thumbnail__item`)) {
+        if (thumbnail.classList.contains(`${this.jsName}-thumbnail__item`)) {
            this.thumbnailChange(thumbnail);
         }
     }
 
     protected thumbnailChange(thumbnail: HTMLElement): void {
         const index = Number(thumbnail.dataset.thumbnailIndex);
-        if(!thumbnail.classList.contains(this.thumbnailActiveClass)) {
-            this.thumbnailItems.forEach((thumbnailItem) => thumbnailItem.classList.remove(this.thumbnailActiveClass));
+        if (!thumbnail.classList.contains(this.thumbnailActiveClass)) {
+            this.thumbnailItems.forEach(thumbnailItem => thumbnailItem.classList.remove(this.thumbnailActiveClass));
             thumbnail.classList.add(this.thumbnailActiveClass);
             this.setActiveImage(index);
         }
     }
 
-    public setActiveImage(activeItemIndex: number): void {
-        this.galleryItems.forEach((galleryItem) => {
-            galleryItem.classList.remove(this.activeClass);
-        });
+    setActiveImage(activeItemIndex: number): void {
+        this.galleryItems.forEach(galleryItem => galleryItem.classList.remove(this.activeClass));
         this.galleryItems[activeItemIndex].classList.add(this.activeClass);
     }
 

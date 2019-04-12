@@ -50,6 +50,25 @@ const urls = {
     assets: '/assets'
 };
 
+// define components directories patterns
+const componentDirsPattern = {
+    atoms: `**/Theme/${theme}/components/atoms`,
+    molecules: `**/Theme/${theme}/components/molecules`,
+    organisms: `**/Theme/${theme}/components/organisms`,
+    templates: `**/Theme/${theme}/templates`,
+    views: `**/Theme/${theme}/views`,
+};
+
+// define ignore dirs for entry points
+const ignoreDirs = [
+    '!config',
+    '!data',
+    '!deploy',
+    '!node_modules',
+    '!public',
+    '!test'
+];
+
 // export settings
 module.exports = {
     name,
@@ -57,6 +76,8 @@ module.exports = {
     context,
     paths,
     urls,
+    componentDirsPattern,
+    ignoreDirs,
 
     // define settings for suite-frontend-builder finder
     find: {
@@ -70,17 +91,12 @@ module.exports = {
             ],
             // files/dirs patterns
             patterns: [
-                `**/Theme/${theme}/components/atoms/*/index.ts`,
-                `**/Theme/${theme}/components/molecules/*/index.ts`,
-                `**/Theme/${theme}/components/organisms/*/index.ts`,
-                `**/Theme/${theme}/templates/*/index.ts`,
-                `**/Theme/${theme}/views/*/index.ts`,
-                '!config',
-                '!data',
-                '!deploy',
-                '!node_modules',
-                '!public',
-                '!test'
+                `${componentDirsPattern.atoms}/*/index.ts`,
+                `${componentDirsPattern.molecules}/*/index.ts`,
+                `${componentDirsPattern.organisms}/*/index.ts`,
+                `${componentDirsPattern.templates}/*/index.ts`,
+                `${componentDirsPattern.views}/*/index.ts`,
+                ...ignoreDirs
             ]
         },
 
@@ -94,18 +110,13 @@ module.exports = {
             ],
             // files/dirs patterns
             patterns: [
-                `**/Theme/${theme}/components/atoms/*/*.scss`,
-                `**/Theme/${theme}/components/molecules/*/*.scss`,
-                `**/Theme/${theme}/components/organisms/*/*.scss`,
-                `**/Theme/${theme}/templates/*/*.scss`,
-                `**/Theme/${theme}/views/*/*.scss`,
+                `${componentDirsPattern.atoms}/*/*.scss`,
+                `${componentDirsPattern.molecules}/*/*.scss`,
+                `${componentDirsPattern.organisms}/*/*.scss`,
+                `${componentDirsPattern.templates}/*/*.scss`,
+                `${componentDirsPattern.views}/*/*.scss`,
                 `!**/Theme/${theme}/**/style.scss`,
-                '!config',
-                '!data',
-                '!deploy',
-                '!node_modules',
-                '!public',
-                '!test'
+                ...ignoreDirs
             ]
         }
     }

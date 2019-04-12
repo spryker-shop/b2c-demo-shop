@@ -1,8 +1,8 @@
 import Component from 'ShopUi/models/component';
 
 export default class ColorSelectorPdp extends Component {
-    colors: HTMLAnchorElement[]
-    images: HTMLImageElement[]
+    colors: HTMLAnchorElement[];
+    images: HTMLImageElement[];
 
     protected readyCallback(): void {
         this.colors = <HTMLAnchorElement[]>Array.from(this.getElementsByClassName(`${this.jsName}__color`));
@@ -11,8 +11,8 @@ export default class ColorSelectorPdp extends Component {
     }
 
     protected mapEvents(): void {
-        this.colors.forEach((color: HTMLAnchorElement, i: Number) => {
-            if (i !== 0) {
+        this.colors.forEach((color: HTMLAnchorElement, index: number) => {
+            if (index !== 0) {
                 color.addEventListener('mouseenter', (event: Event) => this.onColorSelection(event));
                 color.addEventListener('mouseout', (event: Event) => this.onColorUnselection(event));
             }

@@ -1,5 +1,5 @@
 import Component from 'ShopUi/models/component';
-import $ from 'jquery';
+import $ from 'jquery/dist/jquery';
 import select from 'select2';
 
 export default class CustomSelect extends Component {
@@ -13,7 +13,7 @@ export default class CustomSelect extends Component {
 
         this.mapEvents();
 
-        if(document.body.classList.contains('no-touch') && this.autoInit) {
+        if (document.body.classList.contains('no-touch') && this.autoInit) {
             this.initSelect();
             this.removeAttributeTitle();
         }
@@ -21,7 +21,7 @@ export default class CustomSelect extends Component {
 
     protected mapEvents(): void {
         this.changeSelectEvent();
-        document.body.addEventListener('click', (event) => this.closeHandler(event));
+        document.body.addEventListener('click', (event: Event) => this.closeHandler(event));
     }
 
     protected onChangeSelect(): void {
@@ -46,7 +46,7 @@ export default class CustomSelect extends Component {
         this.querySelector('.select2-selection__rendered').removeAttribute('title');
     }
 
-    protected closeHandler(event): void {
+    protected closeHandler(event: Event): void {
         const eventTarget = <HTMLElement>event.target;
 
         if (eventTarget.classList.contains('select2-container--open')) {

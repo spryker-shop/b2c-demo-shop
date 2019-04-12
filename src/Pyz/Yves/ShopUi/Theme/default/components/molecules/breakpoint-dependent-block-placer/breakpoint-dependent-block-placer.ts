@@ -1,8 +1,17 @@
 import Component from 'ShopUi/models/component';
 
+interface BlockMovingInterface {
+    breakpoint: number;
+    selectorBlockToMove: string;
+    node: HTMLElement;
+    parentNode: HTMLElement;
+    isMoved: boolean;
+}
+
 export default class BreakpointDependentBlockPlacer extends Component {
-    protected data: Object[]
-    protected blocks: HTMLElement[]
+    protected data: Object[];
+    protected blocks: HTMLElement[];
+    protected timeout: number = 300;
 
     protected readyCallback(): void {
         this.blocks = <HTMLElement[]>Array.from(document.querySelectorAll(this.blockSelector));
@@ -14,7 +23,7 @@ export default class BreakpointDependentBlockPlacer extends Component {
                 parentNode: block.parentElement,
                 breakpoint: +this.getDataAttribute(block, 'data-breackpoint'),
                 selectorBlockToMove: this.getDataAttribute(block, 'data-block-to')
-            }
+            };
         });
 
         this.initBlockMoving();
@@ -22,26 +31,26 @@ export default class BreakpointDependentBlockPlacer extends Component {
     }
 
     protected mapEvents(): void {
-        window.addEventListener('resize', () => setTimeout(() => this.initBlockMoving(), 300));
+        window.addEventListener('resize', () => {
+            setTimeout(() => this.initBlockMoving(), this.timeout);
+        });
     }
 
     protected initBlockMoving(): void {
-        this.data.forEach((item: {breakpoint: number, selectorBlockToMove: string, node: HTMLElement, parentNode: HTMLElement, isMoved: boolean}) => {
-            let {isMoved, breakpoint} = item;
-
-            if (window.innerWidth < breakpoint && !isMoved) {
+        this.data.forEach((item: BlockMovingInterface) => {
+            if (window.innerWidth < item.breakpoint && !item.isMoved) {
                 const {selectorBlockToMove, node} = item;
                 const blockToMove = document.querySelector(selectorBlockToMove);
 
                 item.isMoved = true;
                 blockToMove.appendChild(node);
-            } else if (window.innerWidth >= breakpoint && isMoved) {
+            } else if (window.innerWidth >= item.breakpoint && item.isMoved) {
                 const {parentNode, node} = item;
 
                 item.isMoved = false;
                 parentNode.appendChild(node);
             }
-        })
+        });
     }
 
     get blockSelector(): string {
