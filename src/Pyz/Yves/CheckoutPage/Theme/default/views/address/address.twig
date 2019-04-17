@@ -35,11 +35,10 @@
     } only %}
         {% block fields %}
             <h2 class="title title--checkout">{{ 'page.checkout.address.shipping-address' | trans }}</h2>
-            {% set existingShippingAddresses = data.form.shippingAddress.id_customer_address is defined %}
             {% set hasShippingAddresses = data.form.shippingAddress.id_customer_address is defined %}
 
             {% if hasShippingAddresses %}
-                <div class="grid col">
+                <div class="grid grid--expand col">
                     <div class="form__field col col--sm-12 spacing-x spacing-x--inner spacing-x--reset">
                         <ul class="list spacing-y">
                             <li class="list__item spacing-y">
@@ -56,7 +55,7 @@
             {% endif %}
 
             {% include molecule('form') with {
-                class: embed.parentJsClass ~ '__shipping' ~ (hasShippingAddresses ? ' is-hidden' : ''),
+                class: embed.parentJsClass ~ '__shipping',
                 modifiers: ['grid-indent', 'checkout-form-elements'],
                 data: {
                     class: 'col col--sm-6',
@@ -83,7 +82,7 @@
             } only %}
 
             <h2 class="title title--checkout">{{'page.checkout.address.billing-address' | trans}}</h2>
-            <div class="grid">
+            <div class="grid grid--expand">
                 <div class="col col--sm-12">
                     {{form_row(data.form.billingSameAsShipping, {
                         component: molecule('toggler-checkbox'),
@@ -96,7 +95,7 @@
                     })}}
 
                     {% embed molecule('form') with {
-                        class: 'is-hidden spacing-top spacing-top--big ' ~ embed.parentJsClass ~  '__billing-same-as-shipping',
+                        class: 'spacing-top spacing-top--big ' ~ embed.parentJsClass ~  '__billing-same-as-shipping',
                         modifiers: ['grid-indent', 'checkout-form-elements'],
                         data: {
                             form: embed.forms.billing,
@@ -124,7 +123,6 @@
                         }
                     } only %}
                         {% block fields %}
-                            {% set existingBillingAddresses = data.form.id_customer_address is defined %}
                             {% set hasBillingAddresses = data.form.id_customer_address is defined %}
 
                             {% if hasBillingAddresses %}

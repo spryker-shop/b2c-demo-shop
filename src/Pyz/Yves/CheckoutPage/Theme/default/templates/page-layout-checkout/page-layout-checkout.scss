@@ -1,31 +1,36 @@
-.page-layout-checkout {
-    max-width: rem(570);
-    margin: 0 auto;
-    padding-bottom: rem(60);
-    overflow: hidden;
+@mixin checkout-page-layout-checkout($name: '.page-layout-checkout') {
+    #{$name} {
+        max-width: rem(570);
+        margin: 0 auto;
+        padding-bottom: rem(60);
+        overflow: hidden;
+        display: block;
 
-    @include helper-breakpoint-media-min($md-min) {
-        padding-top: rem(80);
-    }
-
-    &--full-width {
-        max-width: 100%;
-    }
-
-    &--address-step {
-        .toggler-radio__container {
-            display: flex;
-            align-items: center;
-            cursor: pointer;
+        @include helper-breakpoint-media-min($md-min) {
+            padding-top: rem(80);
         }
 
-        .toggler-radio__box {
-            margin-right: rem(8);
+        &--full-width {
+            max-width: 100%;
         }
 
-        .toggler-radio__label {
-            display: block;
-            overflow: hidden;
+        &--address-step {
+            .toggler-radio__container {
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+            }
+
+            .toggler-radio__box {
+                margin-right: rem(8);
+            }
+
+            .toggler-radio__label {
+                display: block;
+                overflow: hidden;
+            }
         }
     }
 }
+
+@include checkout-page-layout-checkout();

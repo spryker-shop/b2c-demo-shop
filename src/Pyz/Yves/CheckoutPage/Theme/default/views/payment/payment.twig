@@ -96,7 +96,7 @@
                     } only %}
 
                         {% block fieldset %}
-                            <div class="js-payment-method-{{embed.index}} {% if embed.index != 1 %} is-hidden{% endif %}">
+                            <div class="js-payment-method-{{ embed.index }} {% if embed.index == 1 %} is-hidden{% endif %}">
                                 <h2 class="title title--checkout">{{ embed.toggler.vars.label | trans }}</h2>
                                 {% if data.customForms[data.form.vars.template_path] is not defined %}
                                     {{ parent() }}
