@@ -139,6 +139,16 @@ module.exports = {
 
         new MiniCssExtractPlugin({
             filename: `./css/${appSettings.name}.[name].css`,
-        })
+        }),
+
+        (compiler) => {
+            compiler.hooks.done.tap('webpack', compilationParams => {
+                if (compilationParams.compilation.errors && compilationParams.compilation.errors.length &&
+                    process.env.npm_lifecycle_event !== 'yves:watch') {
+                    compilationParams.compilation.errors.forEach(error => console.log(error.message));
+                    process.exit(1);
+                }
+            });
+        }
     ]
-}
+};
