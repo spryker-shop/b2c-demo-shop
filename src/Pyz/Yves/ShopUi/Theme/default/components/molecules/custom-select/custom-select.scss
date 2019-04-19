@@ -95,11 +95,11 @@
             box-shadow: rem(10) rem(10) rem(26) 0 $setting-color-alpha-1, 0 0 rem(30) 0 $setting-color-alpha-1;
             position: relative;
             border: rem(1) solid $setting-color-alpha-7;
+        }
 
-            & > .select2-results__options {
-                max-height: rem(250);
-                overflow-y: auto;
-            }
+        .select2-results__options {
+            max-height: rem(250);
+            overflow-y: auto;
         }
 
         .select2-results__option--highlighted[aria-selected] {
@@ -135,15 +135,6 @@
                 transform: translateX(rem(-32));
                 border: none;
 
-                &::before {
-                    content: '';
-                    position: absolute;
-                    bottom: 100%;
-                    right: rem(23);
-                    border: rem(6) solid $setting-color-transparent;
-                    border-bottom-color: $setting-color-white;
-                }
-
                 &__option[aria-selected='true']::before {
                     right: rem(23);
                 }
@@ -173,6 +164,16 @@
                 background: none;
                 margin: rem(12) 0;
                 text-align: left;
+
+                &::before {
+                    content: '';
+                    position: absolute;
+                    bottom: 100%;
+                    right: rem(8);
+                    border: rem(6) solid $setting-color-transparent;
+                    border-bottom-color: $setting-color-white;
+                    z-index: $setting-zi-element + 1;
+                }
             }
 
             .select2-dropdown--below {
@@ -182,13 +183,11 @@
             .select2-dropdown--above {
                 margin-top: rem(-6);
 
-                .select2-results {
-                    &::before {
-                        bottom: auto;
-                        top: 100%;
-                        border-bottom-color: $setting-color-transparent;
-                        border-top-color: $setting-color-white;
-                    }
+                &::before {
+                    bottom: auto;
+                    top: 100%;
+                    border-bottom-color: $setting-color-transparent;
+                    border-top-color: $setting-color-white;
                 }
             }
         }
