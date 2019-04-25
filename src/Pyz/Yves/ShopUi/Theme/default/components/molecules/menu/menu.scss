@@ -21,6 +21,23 @@
                 }
             }
 
+            &--side-drawer {
+                border-top: dotted rem(1) $setting-color-gray-3;
+                margin: 0;
+
+                & > #{$name} {
+                    padding-bottom: rem(10);
+                }
+
+                & #{$name}__item {
+                    font-size: rem(15);
+
+                    &:first-child {
+                        margin-top: 0;
+                    }
+                }
+            }
+
             &--has-children-dropdown {
                 position: relative;
                 z-index: $setting-zi-element + 1;
@@ -43,23 +60,6 @@
                 & > #{$name} > #{$name}__item {
                     margin-left: rem(8);
                     margin-right: rem(8);
-                }
-            }
-
-            &--side-drawer {
-                border-top: dotted rem(1) $setting-color-gray-3;
-                margin: 0;
-
-                & > #{$name} {
-                    padding-bottom: rem(10);
-                }
-
-                & #{$name}__item {
-                    font-size: rem(15);
-
-                    &:first-child {
-                        margin-top: 0;
-                    }
                 }
             }
         }
