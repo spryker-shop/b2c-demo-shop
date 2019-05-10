@@ -45,11 +45,11 @@
         {% widget 'ProductPriceVolumeWidget' args [data.product] only %}
         {% nowidget %}
             <div class="col text-right">
-                {% include molecule('price') with {
+                {% include molecule('money-price') with {
                     modifiers: ['pdp'],
                     data: {
-                        amount: data.product.price | money,
-                        originalAmount: data.product.prices.ORIGINAL is not defined ? null : data.product.prices.ORIGINAL | money
+                        amount: data.product.price,
+                        originalAmount: data.product.prices.ORIGINAL is not defined ? null : data.product.prices.ORIGINAL
                     }
                 } only %}
             </div>
