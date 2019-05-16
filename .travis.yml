@@ -10,12 +10,15 @@ matrix:
   fast_finish: true
   include:
     - php: "7.1"
+      dist: trusty
       env:
         - TEST_GROUP=without-acceptance
     - php: "7.1"
+      dist: trusty
       env:
         - TEST_GROUP=acceptance
     - php: "7.1"
+      dist: trusty
       env:
         - VALIDATION=1
 addons:
