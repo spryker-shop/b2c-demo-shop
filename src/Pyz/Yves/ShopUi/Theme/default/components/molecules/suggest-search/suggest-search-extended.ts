@@ -23,19 +23,19 @@ export default class SuggestSearchExtended extends SuggestSearch {
 
     protected mapEvents(): void {
         this.searchInput.addEventListener('keyup', debounce((event: Event) => {
-            this.onInputKeyUp(event);
+            this.onInputKeyUp();
         }, this.debounceDelay));
         this.searchInput.addEventListener('keydown', throttle((event: Event) => {
             this.onInputKeyDown(<KeyboardEvent> event);
             }, this.throttleDelay));
-        this.searchInput.addEventListener('focus', (event: Event) => this.onInputFocusIn(event));
-        this.searchInput.addEventListener('click', (event: Event) => this.onInputClick(event));
+        this.searchInput.addEventListener('focus', (event: Event) => this.onInputFocusIn());
+        this.searchInput.addEventListener('click', (event: Event) => this.onInputClick());
 
         this.overlayOpenButtons.forEach(button => {
             button.addEventListener('click', () => this.openSearchLayout());
         });
         this.overlayCloseTriggers.forEach(trigger => {
-            trigger.addEventListener('click', (event: Event) => this.onInputFocusOut(event));
+            trigger.addEventListener('click', (event: Event) => this.onInputFocusOut());
         });
     }
 
@@ -51,8 +51,8 @@ export default class SuggestSearchExtended extends SuggestSearch {
         return false;
     }
 
-    protected onInputFocusOut(event: Event): void {
-        super.onInputFocusOut(event);
+    protected onInputFocusOut(): void {
+        super.onInputFocusOut();
         this.searchOverlay.classList.toggle('active');
         this.cleanUpInput();
         clearTimeout(this.focusTimeout);

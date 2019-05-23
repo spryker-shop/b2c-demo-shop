@@ -58,11 +58,11 @@
             {% block price %}
                 <div>
                     {% if can('SeePricePermissionPlugin') and data.price %}
-                        {% include molecule('price') with {
+                        {% include molecule('money-price') with {
                             modifiers: ['medium'],
                             data: {
-                                amount: data.price | money,
-                                originalAmount: data.originalPrice is empty ? null : (data.originalPrice | money)
+                                amount: data.price,
+                                originalAmount: data.originalPrice is empty ? null : data.originalPrice
                             }
                         } only %}
                     {% else %}
