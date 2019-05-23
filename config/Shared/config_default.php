@@ -27,6 +27,8 @@ use Spryker\Shared\Kernel\KernelConstants;
 use Spryker\Shared\Kernel\Store;
 use Spryker\Shared\Log\LogConstants;
 use Spryker\Shared\Monitoring\MonitoringConstants;
+use Spryker\Shared\Nopayment\NopaymentConfig;
+use Spryker\Shared\Nopayment\NopaymentConstants;
 use Spryker\Shared\Oauth\OauthConstants;
 use Spryker\Shared\OauthCustomerConnector\OauthCustomerConnectorConstants;
 use Spryker\Shared\Oms\OmsConstants;
@@ -51,6 +53,7 @@ use Spryker\Zed\Log\Communication\Plugin\ZedLoggerConfigPlugin;
 use Spryker\Zed\Oms\OmsConfig;
 use Spryker\Zed\Propel\PropelConfig;
 use SprykerEco\Shared\Loggly\LogglyConstants;
+use Spryker\Zed\GiftCard\GiftCardConfig;
 
 $CURRENT_STORE = Store::getInstance()->getStoreName();
 
@@ -353,28 +356,41 @@ $config[KernelConstants::AUTO_LOADER_UNRESOLVABLE_CACHE_PROVIDER] = File::class;
 $config[KernelConstants::DEPENDENCY_INJECTOR_YVES] = [
     'CheckoutPage' => [
         'DummyPayment',
+        NopaymentConfig::PAYMENT_PROVIDER_NAME,
     ],
 ];
 $config[KernelConstants::DEPENDENCY_INJECTOR_ZED] = [
     'Payment' => [
         'DummyPayment',
+        GiftCardConfig::PROVIDER_NAME,
+        NopaymentConfig::PAYMENT_PROVIDER_NAME,
     ],
     'Oms' => [
         'DummyPayment',
+        GiftCardConfig::PROVIDER_NAME,
     ],
+];
+
+$config[NopaymentConstants::NO_PAYMENT_METHODS] = [
+    NopaymentConfig::PAYMENT_PROVIDER_NAME,
+];
+$config[NopaymentConstants::WHITELIST_PAYMENT_METHODS] = [
+    GiftCardConfig::PROVIDER_NAME,
 ];
 
 // ---------- State machine (OMS)
 $config[OmsConstants::PROCESS_LOCATION] = [
     OmsConfig::DEFAULT_PROCESS_LOCATION,
-    $config[KernelConstants::SPRYKER_ROOT] . '/dummy-payment/config/Zed/Oms',
 ];
 $config[OmsConstants::ACTIVE_PROCESSES] = [
     'DummyPayment01',
+    'Nopayment01',
 ];
 $config[SalesConstants::PAYMENT_METHOD_STATEMACHINE_MAPPING] = [
     DummyPaymentConfig::PAYMENT_METHOD_INVOICE => 'DummyPayment01',
     DummyPaymentConfig::PAYMENT_METHOD_CREDIT_CARD => 'DummyPayment01',
+    GiftCardConfig::PROVIDER_NAME => 'DummyPayment01',
+    NopaymentConfig::PAYMENT_PROVIDER_NAME => 'Nopayment01',
 ];
 
 // ---------- Queue

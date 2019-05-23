@@ -30,6 +30,8 @@ use Spryker\Zed\ShipmentDiscountConnector\Communication\Plugin\DiscountCollector
 use Spryker\Zed\ShipmentDiscountConnector\Communication\Plugin\DiscountCollector\ItemByShipmentMethodPlugin;
 use Spryker\Zed\ShipmentDiscountConnector\Communication\Plugin\DiscountCollector\ItemByShipmentPricePlugin;
 use Spryker\Zed\Store\Communication\Plugin\Form\StoreRelationToggleFormTypePlugin;
+use Spryker\Zed\GiftCard\Communication\Plugin\GiftCardDiscountableItemFilterPlugin;
+
 
 class DiscountDependencyProvider extends SprykerDiscountDependencyProvider
 {
@@ -69,6 +71,7 @@ class DiscountDependencyProvider extends SprykerDiscountDependencyProvider
     {
         return [
             new DiscountPromotionFilterCollectedItemsPlugin(),
+            new GiftCardDiscountableItemFilterPlugin(), #GiftCardFeature
         ];
     }
 

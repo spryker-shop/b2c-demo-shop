@@ -70,6 +70,8 @@ use Spryker\Shared\ProductSearch\Code\KeyBuilder\FilterGlossaryKeyBuilder;
 use Spryker\Zed\DataImport\Business\DataImportBusinessFactory as SprykerDataImportBusinessFactory;
 use Spryker\Zed\DataImport\Business\Model\DataImportStep\DataImportStepInterface;
 use Spryker\Zed\Discount\DiscountConfig;
+use Pyz\Zed\DataImport\Business\Model\GiftCard\GiftCardAbstractConfigurationWriterStep;
+use Pyz\Zed\DataImport\Business\Model\GiftCard\GiftCardConcreteConfigurationWriterStep;
 
 /**
  * @method \Pyz\Zed\DataImport\DataImportConfig getConfig()
@@ -119,7 +121,10 @@ class DataImportBusinessFactory extends SprykerDataImportBusinessFactory
             ->addDataImporter($this->createCmsBlockStoreImporter())
             ->addDataImporter($this->createCmsBlockCategoryPositionImporter())
             ->addDataImporter($this->createCmsBlockCategoryImporter())
-            ->addDataImporter($this->createDiscountAmountImporter());
+            ->addDataImporter($this->createDiscountAmountImporter())
+            ->addDataImporter($this->createDiscountAmountImporter())
+            ->addDataImporter($this->createAbstractGiftCardConfigurationImporter())
+            ->addDataImporter($this->createConcreteGiftCardConfigurationImporter());
 
         $dataImporterCollection->addDataImporterPlugins($this->getDataImporterPlugins());
 
@@ -781,6 +786,34 @@ class DataImportBusinessFactory extends SprykerDataImportBusinessFactory
 
         return $dataImporter;
     }
+
+    /**
+     * @return \Spryker\Zed\DataImport\Business\Model\DataImporterInterface|\Spryker\Zed\DataImport\Business\Model\DataSet\DataSetStepBrokerAwareInterface
+     */
+    protected function createAbstractGiftCardConfigurationImporter()
+    {
+        $dataImporter = $this->getCsvDataImporterFromConfig($this->getConfig()->getAbstractGiftCardProductConfigurationDataImporterConfiguration());
+        $dataSetStepBroker = $this->createTransactionAwareDataSetStepBroker(GiftCardAbstractConfigurationWriterStep::BULK_SIZE);
+        $dataSetStepBroker
+            ->addStep(new GiftCardAbstractConfigurationWriterStep($this->createProductRepository()));
+        $dataImporter->addDataSetStepBroker($dataSetStepBroker);
+
+        return $dataImporter;
+    }
+    /**
+     * @return \Spryker\Zed\DataImport\Business\Model\DataImporterInterface|\Spryker\Zed\DataImport\Business\Model\DataSet\DataSetStepBrokerAwareInterface
+     */
+    protected function createConcreteGiftCardConfigurationImporter()
+    {
+        $dataImporter = $this->getCsvDataImporterFromConfig($this->getConfig()->getConcreteGiftCardProductConfigurationDataImporterConfiguration());
+        $dataSetStepBroker = $this->createTransactionAwareDataSetStepBroker(GiftCardConcreteConfigurationWriterStep::BULK_SIZE);
+        $dataSetStepBroker
+            ->addStep(new GiftCardConcreteConfigurationWriterStep($this->createProductRepository()));
+        $dataImporter->addDataSetStepBroker($dataSetStepBroker);
+
+        return $dataImporter;
+    }
+
 
     /**
      * @return \Spryker\Zed\DataImport\Business\Model\DataImporterInterface|\Spryker\Zed\DataImport\Business\Model\DataSet\DataSetStepBrokerAwareInterface
