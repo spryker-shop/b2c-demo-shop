@@ -9,6 +9,7 @@
     shipmentMethod: _view.quoteTransfer.shipment.method,
     shipmentMethodName: _view.quoteTransfer.shipment.method.carrierName | trans,
     payment: _view.quoteTransfer.payment,
+    cart: _view.quoteTransfer,
     paymentMethodName: _view.quoteTransfer.payment.dummyPayment.cardType,
 
     forms: {
@@ -183,6 +184,12 @@
 
                 {% include molecule('summary-overview', 'CheckoutPage') with {
                     data: data.overview
+                } only %}
+
+                {% include molecule('gift-card-payment-summary', 'GiftCardWidget') ignore missing with {
+                    data: {
+                        cart: data.cart
+                    }
                 } only %}
 
                 {% include molecule('form') with {

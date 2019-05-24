@@ -16,6 +16,7 @@ use SprykerShop\Yves\CartNoteWidget\Widget\CartNoteFormWidget;
 use SprykerShop\Yves\CategoryImageStorageWidget\Widget\CategoryImageStorageWidget;
 use SprykerShop\Yves\CheckoutWidget\Widget\CheckoutBreadcrumbWidget;
 use SprykerShop\Yves\CurrencyWidget\Widget\CurrencyWidget;
+use SprykerShop\Yves\CartCodeWidget\Widget\CartCodeFormWidget;
 use SprykerShop\Yves\CustomerPage\Widget\CustomerNavigationWidget;
 use SprykerShop\Yves\DiscountPromotionWidget\Widget\CartDiscountPromotionProductListWidget;
 use SprykerShop\Yves\DiscountWidget\Widget\CheckoutVoucherFormWidget;
@@ -66,6 +67,7 @@ class ShopApplicationDependencyProvider extends SprykerShopApplicationDependency
         return [
             AgentControlBarWidget::class,
             CartDiscountPromotionProductListWidget::class,
+            CartCodeFormWidget::class,
             CartItemNoteFormWidget::class,
             CartNoteFormWidget::class,
             CatalogPageProductWidget::class,
