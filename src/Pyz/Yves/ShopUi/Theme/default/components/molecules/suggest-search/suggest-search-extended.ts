@@ -35,7 +35,7 @@ export default class SuggestSearchExtended extends SuggestSearch {
             button.addEventListener('click', () => this.openSearchLayout());
         });
         this.overlayCloseTriggers.forEach(trigger => {
-            trigger.addEventListener('click', () => this.onInputFocusOut());
+            trigger.addEventListener('click', (event: Event) => this.onInputFocusOut());
         });
     }
 

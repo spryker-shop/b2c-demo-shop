@@ -67,11 +67,11 @@
                     </td>
                     <td nowrap="nowrap">
                         {% if item.price is not null %}
-                            {% include molecule('price') with {
+                            {% include molecule('money-price') with {
                                 modifiers: ['wishlist'],
                                 data: {
-                                    amount: item.price | money,
-                                    originalAmount: item.prices.ORIGINAL is not defined ? null : (item.prices.ORIGINAL | money)
+                                    amount: item.price,
+                                    originalAmount: item.prices.ORIGINAL is not defined ? null : item.prices.ORIGINAL
                                 }
                             } only %}
                         {% else %}
