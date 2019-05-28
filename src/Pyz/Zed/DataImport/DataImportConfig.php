@@ -361,6 +361,7 @@ class DataImportConfig extends SprykerDataImportConfig
     {
         return $this->buildImporterConfiguration('gift_card_abstract_configuration.csv', static::IMPORT_TYPE_ABSTRACT_GIFT_CARD_CONFIGURATION);
     }
+
     /**
      * @return \Generated\Shared\Transfer\DataImporterConfigurationTransfer
      */

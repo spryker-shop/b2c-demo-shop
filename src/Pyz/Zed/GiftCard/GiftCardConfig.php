@@ -1,9 +1,12 @@
 <?php
+
 /**
- * This file is part of the Spryker Suite.
+ * This file is part of the Spryker Commerce OS.
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
+
 namespace Pyz\Zed\GiftCard;
+
 use Spryker\Shared\DummyPayment\DummyPaymentConfig;
 use Spryker\Shared\Shipment\ShipmentConfig;
 use Spryker\Zed\GiftCard\GiftCardConfig as SprykerGiftCardConfig;

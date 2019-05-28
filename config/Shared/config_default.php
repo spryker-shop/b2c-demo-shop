@@ -49,11 +49,11 @@ use Spryker\Shared\User\UserConstants;
 use Spryker\Shared\ZedNavigation\ZedNavigationConstants;
 use Spryker\Shared\ZedRequest\ZedRequestConstants;
 use Spryker\Yves\Log\Plugin\YvesLoggerConfigPlugin;
+use Spryker\Zed\GiftCard\GiftCardConfig;
 use Spryker\Zed\Log\Communication\Plugin\ZedLoggerConfigPlugin;
 use Spryker\Zed\Oms\OmsConfig;
 use Spryker\Zed\Propel\PropelConfig;
 use SprykerEco\Shared\Loggly\LogglyConstants;
-use Spryker\Zed\GiftCard\GiftCardConfig;
 
 $CURRENT_STORE = Store::getInstance()->getStoreName();
 
