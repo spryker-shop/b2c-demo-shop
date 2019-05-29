@@ -67,6 +67,8 @@
             <span class="float-right">{{ data.prices.tax | money }}</span>
         </li>
 
+        {% block giftCard %}{% endblock %}
+
         <li class="{{ config.name }}__list-item {{ config.name }}__list-item--total">
             <strong>{{ 'checkout.step.summary.grand_total' | trans }}</strong>
             <strong class="float-right">{{ data.prices.grandTotal | money }}</strong>

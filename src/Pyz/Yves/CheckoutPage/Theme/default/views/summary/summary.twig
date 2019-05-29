@@ -31,7 +31,7 @@
         }
     },
 
-    title: null
+    title: null,
 } %}
 
 {% block contentClass %}
@@ -49,8 +49,8 @@
                         {% include molecule('display-address', 'CheckoutPage') with {
                             class: 'text-small',
                             data: {
-                                address: data.shippingAddress
-                            }
+                                address: data.shippingAddress,
+                            },
                         } only %}
 
                         {% for step in data.breadcrumbs %}
@@ -65,8 +65,8 @@
                         {% include molecule('display-address', 'CheckoutPage') with {
                             class: 'text-small',
                             data: {
-                                address: data.billingAddress
-                            }
+                                address: data.billingAddress,
+                            },
                         } only %}
 
                         {% for step in data.breadcrumbs %}
@@ -143,8 +143,8 @@
                             data: {
                                 productItem: item,
                                 options: item.productOptions | default([]),
-                                product: data.transfer
-                            }
+                                product: data.transfer,
+                            },
                         } only %}
                             {% block options %}
                                 {% if data.productItem.concreteAttributes is not empty %}
@@ -168,8 +168,8 @@
                                         {% include molecule('product-item-summary') with {
                                             class: 'col',
                                             data: {
-                                                options: data.options
-                                            }
+                                                options: data.options,
+                                            },
                                         } only %}
                                     </div>
                                 {% endif %}
@@ -184,15 +184,20 @@
                 {% elsewidget 'CheckoutVoucherFormWidget' args [data.transfer] only %} {# @deprecated Use CartCodeFormWidget instead. #}
                 {% endwidget %}
 
-                {% include molecule('summary-overview', 'CheckoutPage') with {
-                    data: data.overview
+                {% embed molecule('summary-overview', 'CheckoutPage') with {
+                    data: data.overview,
+                    embed: {
+                        cart: data.cart,
+                    },
                 } only %}
-
-                {% include molecule('gift-card-payment-summary', 'GiftCardWidget') ignore missing with {
-                    data: {
-                        cart: data.cart
-                    }
-                } only %}
+                    {% block giftCard %}
+                        {% include molecule('gift-card-payment-summary', 'GiftCardWidget') ignore missing with {
+                            data: {
+                                cart: embed.cart,
+                            },
+                        } only %}
+                    {% endblock %}
+                {% endembed %}
 
                 {% include molecule('form') with {
                     class: 'checkout-buttons',
@@ -201,10 +206,10 @@
                         submit: {
                             enable: true,
                             text: 'checkout.step.place.order' | trans,
-                            class: 'form__action--checkout button  button--large button--expand'
-                        }
+                            class: 'form__action--checkout button  button--large button--expand',
+                        },
                     },
-                    modifiers: ['checkout-form-elements']
+                    modifiers: ['checkout-form-elements'],
                 } only %}
             </div>
         </div>

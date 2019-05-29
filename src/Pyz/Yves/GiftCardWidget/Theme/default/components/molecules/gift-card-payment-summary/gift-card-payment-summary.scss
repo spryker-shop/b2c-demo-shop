@@ -1,0 +1,12 @@
+@mixin gift-card-widget-gift-card-payment-summary($name: '.gift-card-payment-summary') {
+    #{$name} {
+        &__list-item {
+            font: fw(regular) rem(14) $setting-font-family-additional;
+            margin: rem(24) 0;
+        }
+
+        @content;
+    }
+}
+
+@include gift-card-widget-gift-card-payment-summary();

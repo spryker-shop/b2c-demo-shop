@@ -39,6 +39,7 @@
                     <span class="float-right">{{ data.cart.totals.expenseTotal | money }}</span>
                 </li>
             {% endif %}
+
             {% include molecule('cart-discount-summary', 'DiscountWidget') ignore missing with {
                 class: config.name ~ '__item spacing-y spacing-y--bigger',
                 data: {
@@ -48,19 +49,19 @@
                     isQuoteEditable: data.isQuoteEditable
                 }
             } only %}
+
+            {% include molecule('gift-card-payment-summary', 'GiftCardWidget') ignore missing with {
+                class: 'list spacing-y',
+                data: {
+                    cart: data.cart,
+                    isQuoteEditable: data.isQuoteEditable
+                }
+            } only %}
             <li class="{{ config.name }}__item {{ config.name }}__total spacing-y spacing-y--bigger">
                 <strong>{{ 'cart.price.grand.total' | trans }}</strong>
                 <strong class="float-right">{{ data.cart.totals.grandTotal | money }}</strong>
             </li>
         </ul>
-
-        {% include molecule('gift-card-payment-summary', 'GiftCardWidget') ignore missing with {
-            class: 'list spacing-y',
-            data: {
-                cart: data.cart,
-                isQuoteEditable: data.isQuoteEditable
-            }
-        } only %}
     </div>
 
     {% if canProceedToCheckout %}

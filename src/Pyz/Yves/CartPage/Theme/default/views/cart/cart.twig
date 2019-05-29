@@ -68,12 +68,6 @@
                                 {% endblock %}
                             {% endwidget %}
                         {% endif %}
-
-                        {% include molecule('gift-card-payment-summary', 'GiftCardWidget') ignore missing with {
-                            data: {
-                                cart: data.cart
-                            }
-                        } only %}
                     </div>
                     {% include molecule('cart-summary', 'CartPage') with {
                         data: {
