@@ -53,6 +53,14 @@
                 <strong class="float-right">{{ data.cart.totals.grandTotal | money }}</strong>
             </li>
         </ul>
+
+        {% include molecule('gift-card-payment-summary', 'GiftCardWidget') ignore missing with {
+            class: 'list spacing-y',
+            data: {
+                cart: data.cart,
+                isQuoteEditable: data.isQuoteEditable
+            }
+        } only %}
     </div>
 
     {% if canProceedToCheckout %}
