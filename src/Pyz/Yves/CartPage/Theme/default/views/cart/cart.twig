@@ -41,7 +41,7 @@
                                 data: {
                                     product: data.cart,
                                     productItem: cartItem,
-                                    attributes: data.attributes[cartItem.sku] | default([])
+                                    attributes: data.attributes[cartItem.sku] | default([]),
                                 }
                             } only %}
                         {% endfor %}
@@ -59,12 +59,12 @@
                             {% widget 'CartCodeFormWidget' args [data.cart] only %}
                                 {% block body %}
                                     {{ parent() }}
-                                    <hr />
+                                    <hr>
                                 {% endblock %}
                             {% elsewidget 'DiscountVoucherFormWidget' only %}
                                 {% block body %}
                                     {{ parent() }}
-                                    <hr />
+                                    <hr>
                                 {% endblock %}
                             {% endwidget %}
                         {% endif %}
@@ -73,7 +73,7 @@
                         data: {
                             cart: data.cart,
                             isQuoteValid: data.isQuoteValid,
-                            isQuoteEditable: data.isQuoteEditable
+                            isQuoteEditable: data.isQuoteEditable,
                         }
                     } only %}
                 </div>
