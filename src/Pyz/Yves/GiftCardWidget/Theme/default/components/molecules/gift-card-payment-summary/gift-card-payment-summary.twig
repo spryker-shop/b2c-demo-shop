@@ -12,7 +12,7 @@
 
 {% block body %}
     {% for payment in data.cart.payments %}
-        {% if payment.giftCard is not null %}
+        {% if payment.giftCard is defined and payment.giftCard %}
             <li class="{{ config.name }}__list-item">
                 {{ 'cart.giftcard.label' | trans }}: {{ payment.giftCard.code }}
 
