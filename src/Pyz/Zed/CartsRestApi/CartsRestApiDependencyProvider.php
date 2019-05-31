@@ -13,6 +13,9 @@ use Spryker\Zed\CartsRestApiExtension\Dependency\Plugin\QuoteCreatorPluginInterf
 
 class CartsRestApiDependencyProvider extends SprykerCartsRestApiDependencyProvider
 {
+    /**
+     * @return \Spryker\Zed\CartsRestApiExtension\Dependency\Plugin\QuoteCreatorPluginInterface
+     */
     protected function getQuoteCreatorPlugin(): QuoteCreatorPluginInterface
     {
         return new QuoteCreatorPlugin();
