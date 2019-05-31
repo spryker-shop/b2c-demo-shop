@@ -12,7 +12,6 @@ use Pyz\Zed\PriceProductScheduleDataImport\PriceProductScheduleDataImportConfig;
 use Silex\Provider\TwigServiceProvider as SilexTwigServiceProvider;
 use Spryker\Shared\Config\Environment;
 use Spryker\Zed\Cache\Communication\Console\EmptyAllCachesConsole;
-use Spryker\Zed\CartsRestApi\Communication\Console\QuoteUuidGeneratorConsole;
 use Spryker\Zed\CategoryDataImport\CategoryDataImportConfig;
 use Spryker\Zed\CodeGenerator\Communication\Console\BundleClientCodeGeneratorConsole;
 use Spryker\Zed\CodeGenerator\Communication\Console\BundleCodeGeneratorConsole;
@@ -124,6 +123,7 @@ use Spryker\Zed\Translator\Communication\Console\CleanTranslationCacheConsole;
 use Spryker\Zed\Translator\Communication\Console\GenerateTranslationCacheConsole;
 use Spryker\Zed\Twig\Communication\Console\CacheWarmerConsole;
 use Spryker\Zed\Twig\Communication\Plugin\ServiceProvider\TwigServiceProvider as SprykerTwigServiceProvider;
+use Spryker\Zed\Uuid\Communication\Console\UuidGeneratorConsole;
 use Spryker\Zed\WishlistsRestApi\Communication\Console\WishlistsUuidWriterConsole;
 use Spryker\Zed\ZedNavigation\Communication\Console\BuildNavigationConsole;
 use Stecman\Component\Symfony\Console\BashCompletion\CompletionCommand;
@@ -263,7 +263,7 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
             new PriceProductStoreOptimizeConsole(),
 
             new CustomerAddressesUuidWriterConsole(),
-            new QuoteUuidGeneratorConsole(),
+            new UuidGeneratorConsole(),
             new WishlistsUuidWriterConsole(),
             new ProductTaxSetsRestApiConsole(),
             new DeleteExpiredGuestQuoteConsole(),
