@@ -103,16 +103,10 @@ class YvesBootstrap extends SprykerYvesBootstrap
         $this->application->register(new ZedRequestLogServiceProvider());
 
         $this->application->register(new ShopControllerEventServiceProvider());
-        $this->application->register(new ShopTwigServiceProvider());
-        $this->application->register(new SprykerTwigServiceProvider());
-        $this->application->register(new WidgetServiceProvider());
-        $this->application->register(new ShopApplicationServiceProvider());
-        $this->application->register(new DateTimeFormatterServiceProvider());
         $this->application->register(new SessionServiceProvider());
         $this->application->register(new SprykerSessionServiceProvider());
         $this->application->register(new SecurityServiceProvider());
         $this->application->register(new CustomerSecurityServiceProvider());
-        $this->application->register(new CustomerTwigFunctionServiceProvider());
         $this->application->register(new YvesSecurityServiceProvider());
         $this->application->register(new YvesExceptionServiceProvider());
         $this->application->register(new ErrorPageServiceProvider());
@@ -126,7 +120,6 @@ class YvesBootstrap extends SprykerYvesBootstrap
         $this->application->register(new ValidatorServiceProvider());
         $this->application->register(new FormServiceProvider());
         $this->application->register(new HttpFragmentServiceProvider());
-        $this->application->register(new CategoryServiceProvider());
         $this->application->register(new FlashMessengerServiceProvider());
         $this->application->register(new HeadersSecurityServiceProvider());
         $this->application->register(new WebProfilerWidgetServiceProvider());
@@ -134,12 +127,6 @@ class YvesBootstrap extends SprykerYvesBootstrap
         $this->application->register(new YvesHstsServiceProvider());
         $this->application->register(new CartServiceProvider());
         $this->application->register(new FormFactoryServiceProvider());
-        $this->application->register(new TwigMoneyServiceProvider());
-        $this->application->register(new CmsContentWidgetServiceProvider());
-        $this->application->register(new CmsTwigFunctionServiceProvider());
-        $this->application->register(new CmsBlockTwigFunctionServiceProvider());
-        $this->application->register(new CatalogPageTwigServiceProvider());
-        $this->application->register(new ShopUiTwigServiceProvider());
         $this->application->register(new TwigChartFunctionServiceProvider());
         $this->application->register(new AgentPageSecurityServiceProvider()); # AgentFeature
     }

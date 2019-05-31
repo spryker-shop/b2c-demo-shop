@@ -13,6 +13,7 @@ use Spryker\Shared\CategoryStorage\CategoryStorageConstants;
 use Spryker\Shared\CmsPageSearch\CmsPageSearchConstants;
 use Spryker\Shared\CmsStorage\CmsStorageConstants;
 use Spryker\Shared\Config\Config;
+use Spryker\Shared\ContentStorage\ContentStorageConfig;
 use Spryker\Shared\CustomerAccessStorage\CustomerAccessStorageConstants;
 use Spryker\Shared\Event\EventConstants;
 use Spryker\Shared\FileManagerStorage\FileManagerStorageConstants;
@@ -55,6 +56,7 @@ class QueueDependencyProvider extends SprykerDependencyProvider
             CategoryPageSearchConstants::CATEGORY_SYNC_SEARCH_QUEUE => new SynchronizationSearchQueueMessageProcessorPlugin(),
             ProductPageSearchConstants::PRODUCT_SYNC_SEARCH_QUEUE => new SynchronizationSearchQueueMessageProcessorPlugin(),
             FileManagerStorageConstants::FILE_SYNC_STORAGE_QUEUE => new SynchronizationStorageQueueMessageProcessorPlugin(),
+            ContentStorageConfig::CONTENT_SYNC_STORAGE_QUEUE => new SynchronizationStorageQueueMessageProcessorPlugin(),
         ];
     }
 }
