@@ -16,7 +16,7 @@
             <li class="{{ config.name }}__list-item">
                 {{ 'cart.giftcard.label' | trans }}: {{ payment.giftCard.code }}
 
-                {% include molecule('cart-code-remove-link', 'CartCodeWidget') with {
+                {% include molecule('cart-code-remove-link', 'CartCodeWidget') ignore missing with {
                     class: 'text-small',
                     data: {
                         isQuoteEditable: data.isQuoteEditable,

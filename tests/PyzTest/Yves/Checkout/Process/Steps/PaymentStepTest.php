@@ -14,6 +14,8 @@ use Spryker\Yves\Messenger\FlashMessenger\FlashMessengerInterface;
 use Spryker\Yves\StepEngine\Dependency\Plugin\Handler\StepHandlerPluginCollection;
 use Spryker\Yves\StepEngine\Dependency\Plugin\Handler\StepHandlerPluginInterface;
 use SprykerShop\Yves\CheckoutPage\Dependency\Client\CheckoutPageToCalculationClientBridge;
+use SprykerShop\Yves\CheckoutPage\Dependency\Client\CheckoutPageToPaymentClientBridge;
+use SprykerShop\Yves\CheckoutPage\Dependency\Client\CheckoutPageToPaymentClientInterface;
 use SprykerShop\Yves\CheckoutPage\Process\Steps\PaymentStep;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -36,9 +38,9 @@ class PaymentStepTest extends Unit
     {
         $paymentPluginMock = $this->createPaymentPluginMock();
         $paymentPluginMock->expects($this->once())->method('addToDataClass');
-
         $paymentStepHandler = new StepHandlerPluginCollection();
         $paymentStepHandler->add($paymentPluginMock, 'test');
+
         $paymentStep = $this->createPaymentStep($paymentStepHandler);
 
         $quoteTransfer = new QuoteTransfer();
@@ -79,9 +81,10 @@ class PaymentStepTest extends Unit
      *
      * @return \SprykerShop\Yves\CheckoutPage\Process\Steps\PaymentStep
      */
-    protected function createPaymentStep(StepHandlerPluginCollection $paymentPlugins)
+    protected function createPaymentStep(StepHandlerPluginCollection $paymentPlugins): PaymentStep
     {
         return new PaymentStep(
+            $this->getPaymentClientMock(),
             $paymentPlugins,
             'payment',
             'escape_route',
@@ -120,5 +123,13 @@ class PaymentStepTest extends Unit
     protected function getFlashMessengerMock()
     {
         return $this->getMockBuilder(FlashMessengerInterface::class)->getMock();
+    }
+
+    /**
+     * @return \SprykerShop\Yves\CheckoutPage\Dependency\Client\CheckoutPageToPaymentClientInterface
+     */
+    public function getPaymentClientMock(): CheckoutPageToPaymentClientInterface
+    {
+        return new CheckoutPageToPaymentClientBridge($this->tester->getLocator()->payment()->client());
     }
 }
