@@ -7,25 +7,17 @@
 
 {% define data = {
     product: required,
-    maxQuantity: 10,
+    maxQuantity: null,
     isBundle: null,
     bundleItems: []
 } %}
 
-{% set options = [] %}
 {% set productName = data.product.name | default %}
 {% set sku = data.product.sku %}
 {% set availabilityWidget = '' %}
 {% set isProductConcrete = data.product.idProductConcrete is not empty %}
 {% set isDisabled = data.product.idProductConcrete is empty or data.product.price is empty %}
 {% set isProductAvailable = true %}
-
-{% for index in 1..data.maxQuantity %}
-    {% set options = options | merge([{
-        label: index,
-        value: index
-    }]) %}
-{% endfor %}
 
 {% set isAvailable = data.product.idProductConcrete and data.product.available %}
 {% set isDisabled = not isAvailable or isDisabled %}
