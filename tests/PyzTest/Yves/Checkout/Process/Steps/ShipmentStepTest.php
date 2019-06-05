@@ -8,6 +8,7 @@
 namespace PyzTest\Yves\Checkout\Process\Steps;
 
 use Codeception\Test\Unit;
+use Generated\Shared\DataBuilder\QuoteBuilder;
 use Generated\Shared\Transfer\ExpenseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Generated\Shared\Transfer\ShipmentTransfer;
@@ -73,7 +74,11 @@ class ShipmentStepTest extends Unit
     public function testShipmentRequireInputShouldReturnTrue()
     {
         $shipmentStep = $this->createShipmentStep(new StepHandlerPluginCollection());
-        $this->assertTrue($shipmentStep->requireInput(new QuoteTransfer()));
+        $quoteTransfer = (new QuoteBuilder())
+            ->withItem()
+            ->build();
+
+        $this->assertTrue($shipmentStep->requireInput($quoteTransfer));
     }
 
     /**
