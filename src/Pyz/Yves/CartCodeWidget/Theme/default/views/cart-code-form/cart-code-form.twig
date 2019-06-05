@@ -1,0 +1,16 @@
+{% extends template('widget') %}
+
+{% define data = {
+    form: _widget.cartCodeForm,
+    isQuoteEditable: _widget.isQuoteEditable,
+} %}
+
+{% block body %}
+    {% include molecule('cart-code-form', 'CartCodeWidget') with {
+        modifiers: ['checkout'],
+        data: {
+            form: data.form,
+            isQuoteEditable: data.isQuoteEditable,
+        },
+    } only %}
+{% endblock %}

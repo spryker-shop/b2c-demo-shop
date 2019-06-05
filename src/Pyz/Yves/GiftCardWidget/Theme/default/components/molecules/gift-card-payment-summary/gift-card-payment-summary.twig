@@ -1,0 +1,34 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'gift-card-payment-summary',
+    tag: 'ul',
+} %}
+
+{% define data = {
+    cart: required,
+    isQuoteEditable: false,
+} %}
+
+{% block body %}
+    {% for payment in data.cart.payments %}
+        {% if payment.giftCard is defined and payment.giftCard %}
+            <li class="{{ config.name }}__list-item">
+                {{ 'cart.giftcard.label' | trans }}: {{ payment.giftCard.code }}
+
+                {% include molecule('cart-code-remove-link', 'CartCodeWidget') ignore missing with {
+                    class: 'text-small',
+                    data: {
+                        isQuoteEditable: data.isQuoteEditable,
+                        code: payment.giftCard.code,
+                    },
+                } only %}
+                <span class="float-right">- {{ payment.amount | money }}</span>
+            </li>
+        {% else %}
+            <li class="{{ config.name }}__list-item">
+                {{ payment.paymentMethod }} <span class="float-right">- {{ payment.amount | money }}</span>
+            </li>
+        {% endif %}
+    {% endfor %}
+{% endblock %}
