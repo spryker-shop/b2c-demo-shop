@@ -15,24 +15,6 @@
 {% block body %}
 
     {% embed molecule('slick-carousel') with {
-        data: {
-            slides: [{
-                imageUrl: '/assets/images/section-slider-item-image-10@2x.png',
-                link: 'jumbotron.smart_watches.link',
-                cmsBlockName: 'Jumbotron slide-1'
-            },
-                {
-                    imageUrl: '/assets/images/section-slider-item-image-6@2x.png',
-                    link: 'jumbotron.smartphones.link',
-                    cmsBlockName: 'Jumbotron slide-2'
-                },
-                {
-                    imageUrl: '/assets/images/section-slider-item-image-7@2x.png',
-                    link: 'jumbotron.tablets.link',
-                    cmsBlockName: 'Jumbotron slide-3'
-                }
-            ]
-        },
         attributes: {
             'data-json': '{
                             "slidesToShow": 1,
@@ -61,15 +43,7 @@
     } only %}
 
         {% block slides %}
-            {% for slide in data.slides %}
-                {% include molecule('jumbotron-slider-item') with {
-                    data: {
-                        imageUrl: slide.imageUrl,
-                        link: slide.link,
-                        cmsBlockName: slide.cmsBlockName
-                    }
-                } only %}
-            {% endfor %}
+            {{ spyCmsBlock({name: 'Homepage Top Banners Carousel'}) }}
         {% endblock %}
     {% endembed %}
 

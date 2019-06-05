@@ -5,9 +5,15 @@
 {% block content %}
     <!-- CMS_BLOCK_PLACEHOLDER : "title" -->
     <!-- CMS_BLOCK_PLACEHOLDER : "description" -->
+    <!-- CMS_BLOCK_PLACEHOLDER : "link" -->
     <div class="container">
         <div class="title title--h2 title--regular">
-            {{ spyCmsBlockPlaceholder('title') | raw }}
+            <div class="product-slider-title">
+                <h1 class="title title--h2 title--regular">{{ spyCmsBlockPlaceholder('title') | raw }}</h1>
+                {% if spyCmsBlockPlaceholder('link') %}
+                <div class="product-slider-title__sub-col is-hidden-sm-md">{{ spyCmsBlockPlaceholder('link') | raw }}</div>
+                {% endif %}
+            </div>
         </div>
     </div>
     <div class="container">

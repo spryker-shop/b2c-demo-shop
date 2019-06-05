@@ -16,6 +16,7 @@ use Orm\Zed\CmsBlockCategoryConnector\Persistence\SpyCmsBlockCategoryConnectorQu
 use Orm\Zed\CmsBlockProductConnector\Persistence\SpyCmsBlockProductConnectorQuery;
 use Orm\Zed\Glossary\Persistence\SpyGlossaryKeyQuery;
 use Orm\Zed\Glossary\Persistence\SpyGlossaryTranslationQuery;
+use Pyz\Zed\Content\Business\Model\ReplacerContentKeyToContentIdTrait;
 use Pyz\Zed\DataImport\Business\Model\CmsBlock\Category\Repository\CategoryRepositoryInterface;
 use Pyz\Zed\DataImport\Business\Model\Product\Repository\ProductRepositoryInterface;
 use Spryker\Zed\CmsBlock\Business\Model\CmsBlockGlossaryKeyGenerator;
@@ -33,6 +34,8 @@ use Spryker\Zed\Glossary\Dependency\GlossaryEvents;
  */
 class CmsBlockWriterStep extends PublishAwareStep implements DataImportStepInterface
 {
+    use ReplacerContentKeyToContentIdTrait;
+
     public const BULK_SIZE = 100;
 
     public const KEY_BLOCK_NAME = 'block_name';
@@ -45,6 +48,7 @@ class CmsBlockWriterStep extends PublishAwareStep implements DataImportStepInter
     public const KEY_ACTIVE = 'active';
     public const KEY_PLACEHOLDER_TITLE = 'placeholder.title';
     public const KEY_PLACEHOLDER_DESCRIPTION = 'placeholder.description';
+    public const KEY_PLACEHOLDER_LINK = 'placeholder.link';
 
     /**
      * @var \Pyz\Zed\DataImport\Business\Model\CmsBlock\Category\Repository\CategoryRepositoryInterface
@@ -190,6 +194,9 @@ class CmsBlockWriterStep extends PublishAwareStep implements DataImportStepInter
     {
         foreach ($dataSet[LocalizedAttributesExtractorStep::KEY_LOCALIZED_ATTRIBUTES] as $idLocale => $placeholder) {
             foreach ($placeholder as $key => $value) {
+
+                $value = $this->replaceContentItemId($value);
+
                 $key = str_replace('placeholder.', '', $key);
                 $keyName = CmsBlockGlossaryKeyGenerator::GENERATED_GLOSSARY_KEY_PREFIX . '.';
                 $keyName .= str_replace([' ', '.'], '-', $dataSet[static::KEY_TEMPLATE_NAME]) . '.';

@@ -127,6 +127,9 @@ class DataImportDependencyProvider extends SprykerDataImportDependencyProvider
     {
         return [
             [new CategoryDataImportPlugin(), DataImportConfig::IMPORT_TYPE_CATEGORY_TEMPLATE],
+            new ContentBannerDataImportPlugin(),
+            new ContentProductAbstractListDataImportPlugin(),
+            new ContentProductSetDataImportPlugin(),
             new CmsPageDataImportPlugin(),
             new CmsPageStoreDataImportPlugin(),
             new PriceProductDataImportPlugin(),
@@ -135,9 +138,6 @@ class DataImportDependencyProvider extends SprykerDataImportDependencyProvider
             new SalesOrderThresholdDataImportPlugin(),
             new FileManagerDataImportPlugin(),
             new PriceProductScheduleDataImportPlugin(),
-            new ContentBannerDataImportPlugin(),
-            new ContentProductAbstractListDataImportPlugin(),
-            new ContentProductSetDataImportPlugin(),
         ];
     }
 
