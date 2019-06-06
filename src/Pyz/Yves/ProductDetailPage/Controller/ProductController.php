@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @method \Spryker\Client\Product\ProductClientInterface getClient()
+ * @method \Pyz\Yves\ProductDetailPage\ProductDetailPageFactory getFactory()
  */
 class ProductController extends SprykerShopProductController
 {
@@ -32,6 +33,30 @@ class ProductController extends SprykerShopProductController
             (new ItemTransfer())->setIdProductAbstract($viewData['product']->getIdProductAbstract())
         );
         $viewData['cart'] = $quoteTransfer;
+
+        return $this->setQuantityRestrictions($viewData);
+    }
+
+    /**
+     * @param array $viewData
+     *
+     * @return array
+     */
+    protected function setQuantityRestrictions(array $viewData): array
+    {
+        $viewData['minQuantity'] = 1;
+        $viewData['maxQuantity'] = null;
+        $viewData['quantityInterval'] = 1;
+
+        $productQuantityStorageTransfer = $this->getFactory()
+            ->getProductQuantityStorageClient()
+            ->findProductQuantityStorage($viewData['product']->getIdProductConcrete());
+
+        if ($productQuantityStorageTransfer !== null) {
+            $viewData['minQuantity'] = $productQuantityStorageTransfer->getQuantityMin() ?? 1;
+            $viewData['maxQuantity'] = $productQuantityStorageTransfer->getQuantityMax();
+            $viewData['quantityInterval'] = $productQuantityStorageTransfer->getQuantityInterval() ?? 1;
+        }
 
         return $viewData;
     }
