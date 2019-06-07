@@ -66,7 +66,6 @@ use Spryker\Zed\ProductDiscontinuedDataImport\ProductDiscontinuedDataImportConfi
 use Spryker\Zed\ProductLabel\Communication\Console\ProductLabelRelationUpdaterConsole;
 use Spryker\Zed\ProductLabel\Communication\Console\ProductLabelValidityConsole;
 use Spryker\Zed\ProductRelation\Communication\Console\ProductRelationUpdaterConsole;
-use Spryker\Zed\ProductTaxSetsRestApi\Communication\Console\ProductTaxSetsRestApiConsole;
 use Spryker\Zed\ProductValidity\Communication\Console\ProductValidityConsole;
 use Spryker\Zed\Propel\Communication\Console\DatabaseDropConsole;
 use Spryker\Zed\Propel\Communication\Console\DatabaseExportConsole;
@@ -267,7 +266,6 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
             new CustomerAddressesUuidWriterConsole(),
             new UuidGeneratorConsole(),
             new WishlistsUuidWriterConsole(),
-            new ProductTaxSetsRestApiConsole(),
             new DeleteExpiredGuestQuoteConsole(),
             new BuildValidationCacheConsole(),
 

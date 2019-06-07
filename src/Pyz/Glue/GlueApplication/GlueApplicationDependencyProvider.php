@@ -67,11 +67,11 @@ use Spryker\Glue\ProductsProductAvailabilitiesResourceRelationship\Plugin\Abstra
 use Spryker\Glue\ProductsProductAvailabilitiesResourceRelationship\Plugin\ConcreteProductAvailabilitiesResourceRelationshipPlugin;
 use Spryker\Glue\ProductsProductPricesResourceRelationship\Plugin\AbstractProductsProductPricesResourceRelationshipPlugin;
 use Spryker\Glue\ProductsProductPricesResourceRelationship\Plugin\ConcreteProductsProductPricesResourceRelationshipPlugin;
-use Spryker\Glue\ProductsProductTaxSetsResourceRelationship\Plugin\ProductsProductTaxSetsResourceRelationshipPlugin;
 use Spryker\Glue\ProductsRestApi\Plugin\AbstractProductsResourceRoutePlugin;
 use Spryker\Glue\ProductsRestApi\Plugin\ConcreteProductsResourceRoutePlugin;
 use Spryker\Glue\ProductsRestApi\ProductsRestApiConfig;
-use Spryker\Glue\ProductTaxSetsRestApi\Plugin\ProductTaxSetsResourceRoutePlugin;
+use Spryker\Glue\ProductTaxSetsRestApi\Plugin\GlueApplication\ProductTaxSetByProductAbstractSkuResourceRelationshipPlugin;
+use Spryker\Glue\ProductTaxSetsRestApi\Plugin\GlueApplication\ProductTaxSetsResourceRoutePlugin;
 use Spryker\Glue\RelatedProductsRestApi\Plugin\GlueApplication\RelatedProductsResourceRoutePlugin;
 use Spryker\Glue\RestRequestValidator\Plugin\ValidateRestRequestAttributesPlugin;
 use Spryker\Glue\StoresRestApi\Plugin\StoresResourceRoutePlugin;
@@ -119,7 +119,6 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
             new OrdersResourceRoutePlugin(),
             new WishlistsResourceRoutePlugin(),
             new WishlistItemsResourceRoutePlugin(),
-            new ProductTaxSetsResourceRoutePlugin(),
             new CustomerPasswordResourceRoutePlugin(),
             new AddressesResourceRoutePlugin(),
             new GuestCartsResourceRoutePlugin(),
@@ -133,6 +132,7 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
             new GuestCartUpSellingProductsResourceRoutePlugin(),
             new ConcreteAlternativeProductsResourceRoutePlugin(),
             new AbstractAlternativeProductsResourceRoutePlugin(),
+            new ProductTaxSetsResourceRoutePlugin(),
         ];
     }
 
@@ -242,10 +242,6 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
             new AbstractProductsCategoriesResourceRelationshipPlugin()
         );
         $resourceRelationshipCollection->addRelationship(
-            ProductsRestApiConfig::RESOURCE_ABSTRACT_PRODUCTS,
-            new ProductsProductTaxSetsResourceRelationshipPlugin()
-        );
-        $resourceRelationshipCollection->addRelationship(
             CustomersRestApiConfig::RESOURCE_CUSTOMERS,
             new CustomersToAddressesRelationshipPlugin()
         );
@@ -272,6 +268,10 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
         $resourceRelationshipCollection->addRelationship(
             NavigationsRestApiConfig::RESOURCE_NAVIGATIONS,
             new CategoryNodeByResourceIdResourceRelationshipPlugin()
+        );
+        $resourceRelationshipCollection->addRelationship(
+            ProductsRestApiConfig::RESOURCE_ABSTRACT_PRODUCTS,
+            new ProductTaxSetByProductAbstractSkuResourceRelationshipPlugin()
         );
 
         return $resourceRelationshipCollection;
