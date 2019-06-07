@@ -43,6 +43,8 @@ use Spryker\Glue\CustomersRestApi\Plugin\SetCustomerBeforeActionPlugin;
 use Spryker\Glue\GlueApplication\GlueApplicationDependencyProvider as SprykerGlueApplicationDependencyProvider;
 use Spryker\Glue\GlueApplication\Plugin\Rest\SetStoreCurrentLocaleBeforeActionPlugin;
 use Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\ResourceRelationshipCollectionInterface;
+use Spryker\Glue\NavigationsCategoryNodesResourceRelationship\Plugin\GlueApplication\CategoryNodeByResourceIdResourceRelationshipPlugin;
+use Spryker\Glue\NavigationsRestApi\NavigationsRestApiConfig;
 use Spryker\Glue\NavigationsRestApi\Plugin\ResourceRoute\NavigationsResourceRoutePlugin;
 use Spryker\Glue\OrdersRestApi\Plugin\OrderRelationshipByOrderReferencePlugin;
 use Spryker\Glue\OrdersRestApi\Plugin\OrdersResourceRoutePlugin;
@@ -266,6 +268,10 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
         $resourceRelationshipCollection->addRelationship(
             CartsRestApiConfig::RESOURCE_GUEST_CARTS_ITEMS,
             new CartItemsProductsRelationshipPlugin()
+        );
+        $resourceRelationshipCollection->addRelationship(
+            NavigationsRestApiConfig::RESOURCE_NAVIGATIONS,
+            new CategoryNodeByResourceIdResourceRelationshipPlugin()
         );
 
         return $resourceRelationshipCollection;
