@@ -11,9 +11,6 @@ use SprykerShop\Yves\ContentBannerWidget\Twig\ContentBannerTwigFunction as Spryk
 
 class ContentBannerTwigFunction extends SprykerContentBannerTwigFunction
 {
-    /**
-     * @uses \Spryker\Shared\ContentBanner\ContentBannerConfig::WIDGET_TEMPLATE_IDENTIFIER_JUMBOTRON
-     */
     protected const WIDGET_TEMPLATE_IDENTIFIER_JUMBOTRON = 'banner-jumbotron';
 
     /**
