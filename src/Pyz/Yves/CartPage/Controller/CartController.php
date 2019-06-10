@@ -7,12 +7,13 @@
 
 namespace Pyz\Yves\CartPage\Controller;
 
+use Generated\Shared\Transfer\ProductQuantityTransfer;
 use SprykerShop\Yves\CartPage\Controller\CartController as SprykerCartController;
 use SprykerShop\Yves\CartPage\Plugin\Provider\CartControllerProvider;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * @method \SprykerShop\Yves\CartPage\CartPageFactory getFactory()
+ * @method \Pyz\Yves\CartPage\CartPageFactory getFactory()
  */
 class CartController extends SprykerCartController
 {
@@ -31,6 +32,52 @@ class CartController extends SprykerCartController
         parent::addAction($sku, $quantity, $optionValueIds, $request);
 
         return $this->redirect($request);
+    }
+
+    /**
+     * @param array|null $selectedAttributes
+     *
+     * @return array
+     */
+    protected function executeIndexAction(?array $selectedAttributes): array
+    {
+        $viewData = parent::executeIndexAction($selectedAttributes);
+        $itemTransfers = $viewData['cartItems'];
+
+        $viewData['quantityRestrictionsBySku'] = $this->setQuantityRestrictions($itemTransfers);
+
+        return $viewData;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ItemTransfer[] $itemTransfers
+     *
+     * @return \Generated\Shared\Transfer\ProductQuantityTransfer[]
+     */
+    protected function setQuantityRestrictions(array $itemTransfers): array
+    {
+        $quantityRestrictionsBySku = [];
+        $productQuantityStorageClient = $this->getFactory()->getProductQuantityStorageClient();
+
+        foreach ($itemTransfers as $itemTransfer) {
+            $quantityMin = 1;
+            $quantityMax = null;
+            $quantityInterval = null;
+            $productQuantityStorageTransfer = $productQuantityStorageClient->findProductQuantityStorage($itemTransfer->getId());
+            if ($productQuantityStorageTransfer !== null) {
+                $quantityMin = $productQuantityStorageTransfer->getQuantityMin() ?? 1;
+                $quantityMax = $productQuantityStorageTransfer->getQuantityMax();
+                $quantityInterval = $productQuantityStorageTransfer->getQuantityInterval() ?? 1;
+            }
+
+            $productQuantityTransfer = new ProductQuantityTransfer();
+            $productQuantityTransfer->setQuantityMin($quantityMin)
+                ->setQuantityMax($quantityMax)
+                ->setQuantityInterval($quantityInterval);
+            $quantityRestrictionsBySku[$itemTransfer->getSku()] = $productQuantityTransfer;
+        }
+
+        return $quantityRestrictionsBySku;
     }
 
     /**
