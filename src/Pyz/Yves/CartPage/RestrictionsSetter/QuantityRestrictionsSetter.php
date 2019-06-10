@@ -8,6 +8,7 @@
 namespace Pyz\Yves\CartPage\RestrictionsSetter;
 
 use Generated\Shared\Transfer\ProductQuantityTransfer;
+use Spryker\Client\ProductQuantityStorage\ProductQuantityStorageClientInterface;
 
 class QuantityRestrictionsSetter implements QuantityRestrictionsSetterInterface
 {
@@ -15,6 +16,14 @@ class QuantityRestrictionsSetter implements QuantityRestrictionsSetterInterface
      * @var \Spryker\Client\ProductQuantityStorage\ProductQuantityStorageClientInterface
      */
     protected $productQuantityStorageClient;
+
+    /**
+     * @param \Spryker\Client\ProductQuantityStorage\ProductQuantityStorageClientInterface $productQuantityStorageClient
+     */
+    public function __construct(ProductQuantityStorageClientInterface $productQuantityStorageClient)
+    {
+        $this->productQuantityStorageClient = $productQuantityStorageClient;
+    }
 
     /**
      * @param \Generated\Shared\Transfer\ItemTransfer[] $itemTransfers
@@ -28,7 +37,7 @@ class QuantityRestrictionsSetter implements QuantityRestrictionsSetterInterface
         foreach ($itemTransfers as $itemTransfer) {
             $quantityMin = 1;
             $quantityMax = null;
-            $quantityInterval = null;
+            $quantityInterval = 1;
             $productQuantityStorageTransfer = $this->productQuantityStorageClient->findProductQuantityStorage($itemTransfer->getId());
             if ($productQuantityStorageTransfer !== null) {
                 $quantityMin = $productQuantityStorageTransfer->getQuantityMin() ?? 1;

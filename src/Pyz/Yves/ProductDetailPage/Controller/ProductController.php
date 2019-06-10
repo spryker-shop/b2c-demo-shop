@@ -48,9 +48,15 @@ class ProductController extends SprykerShopProductController
         $viewData['maxQuantity'] = null;
         $viewData['quantityInterval'] = 1;
 
+        $fkProductConcrete = $viewData['product']->getIdProductConcrete();
+
+        if ($fkProductConcrete === null) {
+            return $viewData;
+        }
+
         $productQuantityStorageTransfer = $this->getFactory()
             ->getProductQuantityStorageClient()
-            ->findProductQuantityStorage($viewData['product']->getIdProductConcrete());
+            ->findProductQuantityStorage($fkProductConcrete);
 
         if ($productQuantityStorageTransfer !== null) {
             $viewData['minQuantity'] = $productQuantityStorageTransfer->getQuantityMin() ?? 1;
