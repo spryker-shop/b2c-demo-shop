@@ -11,21 +11,23 @@
 } %}
 
 {% block body %}
-    {% block image %}
-        <a href="{{ data.url }}">
-            {% widget 'CategoryImageStorageWidget' args [data.id, data.name] only %}{% endwidget %}
-        </a>
-    {% endblock %}
+    <div class="{{ config.name }}__container">
+        {% block image %}
+            <a href="{{ data.url }}">
+                {% widget 'CategoryImageStorageWidget' args [data.id, data.name] only %}{% endwidget %}
+            </a>
+        {% endblock %}
 
-    {% block name %}
-        <p class="text-center">
-            <strong>{{ data.name }}</strong>
-        </p>
-    {% endblock %}
+        {% block name %}
+            <p class="text-center">
+                <strong>{{ data.name }}</strong>
+            </p>
+        {% endblock %}
 
-    {% block actions %}
-        <a class="button button--expand" href="{{ data.url }}">
-            {{ 'product.view' | trans }}
-        </a>
-    {% endblock %}
+        {% block actions %}
+            <a class="button button--expand" href="{{ data.url }}">
+                {{ 'product.view' | trans }}
+            </a>
+        {% endblock %}
+    </div>
 {% endblock %}

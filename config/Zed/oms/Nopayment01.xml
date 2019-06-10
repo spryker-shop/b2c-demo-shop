@@ -1,90 +1,72 @@
 <?xml version="1.0"?>
 <statemachine
-    xmlns="spryker:oms-01"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="spryker:oms-01 http://static.spryker.com/oms-01.xsd">
-    <!-- Used as example XML for OMS implementation -->
+        xmlns="spryker:oms-01"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="spryker:oms-01 http://static.spryker.com/oms-01.xsd">
 
     <process name="Nopayment01" main="true">
+        <subprocesses>
+            <process>DummyRefund</process>
+        </subprocesses>
 
         <states>
             <state name="new" reserved="true"/>
-            <state name="waiting for payment"/>
-            <state name="payment done"/>
-            <state name="underpaid"/>
-            <state name="start shippment"/>
-            <state name="end shippment"/>
+            <state name="paid" reserved="true"/>
+            <state name="exported" reserved="true"/>
+            <state name="shipped" reserved="true"/>
+            <state name="delivered"/>
             <state name="closed"/>
-            <state name="returned"/>
-            <state name="canceled"/>
-            <state name="invalid"/>
         </states>
 
         <transitions>
             <transition happy="true">
                 <source>new</source>
-                <target>waiting for payment</target>
+                <target>paid</target>
                 <event>authorize</event>
             </transition>
-            <transition>
-                <source>new</source>
-                <target>invalid</target>
-                <event>authorize</event>
-            </transition>
+
             <transition happy="true">
-                <source>waiting for payment</source>
-                <target>payment done</target>
-                <event>paid</event>
+                <source>paid</source>
+                <target>exported</target>
+                <event>export</event>
             </transition>
 
             <transition happy="true">
-                <source>waiting for payment</source>
-                <target>underpaid</target>
-                <event>paid</event>
-            </transition>
-
-            <transition>
-                <source>underpaid</source>
-                <target>waiting for payment</target>
-                <event>forward</event>
-            </transition>
-
-            <transition>
-                <source>waiting for payment</source>
-                <target>canceled</target>
-            </transition>
-            <transition happy="true">
-                <source>payment done</source>
-                <target>start shippment</target>
-                <event>pick</event>
-            </transition>
-            <transition happy="true">
-                <source>start shippment</source>
-                <target>end shippment</target>
+                <source>exported</source>
+                <target>shipped</target>
                 <event>ship</event>
             </transition>
+
             <transition happy="true">
-                <source>end shippment</source>
+                <source>shipped</source>
+                <target>delivered</target>
+                <event>stock-update</event>
+            </transition>
+
+            <transition>
+                <source>delivered</source>
+                <target>ready for return</target>
+                <event>return</event>
+            </transition>
+
+            <transition happy="true">
+                <source>delivered</source>
                 <target>closed</target>
                 <event>close</event>
             </transition>
-            <transition happy="true">
-                <source>end shippment</source>
-                <target>returned</target>
-                <event>return</event>
-            </transition>
+
         </transitions>
 
         <events>
-            <event name="authorize" onEnter="true" manual="true"/>
-            <event name="paid" manual="true" />
-            <event name="pick" manual="true" />
-            <event name="ship" manual="true" />
-            <event name="forward" onEnter="true" />
-            <event name="close" manual="true" />
+            <event name="authorize" onEnter="true"/>
+            <event name="export" onEnter="true" manual="true" command="Oms/SendOrderConfirmation"/>
+            <event name="ship" manual="true" command="Oms/SendOrderShipped"/>
+            <event name="stock-update" manual="true"/>
+            <event name="close" manual="true" timeout="1 hour"/>
             <event name="return" manual="true" />
         </events>
-
     </process>
+
+    <process name="DummyRefund" file="DummySubprocess/DummyRefund01.xml"/>
 
 </statemachine>
