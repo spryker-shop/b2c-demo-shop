@@ -25,6 +25,11 @@ class CartPageDependencyProvider extends SprykerCartPageDependencyProvider
         ];
     }
 
+    /**
+     * @param \Spryker\Yves\Kernel\Container $container
+     *
+     * @return \Spryker\Yves\Kernel\Container
+     */
     public function provideDependencies(Container $container)
     {
         $container = parent::provideDependencies($container);
