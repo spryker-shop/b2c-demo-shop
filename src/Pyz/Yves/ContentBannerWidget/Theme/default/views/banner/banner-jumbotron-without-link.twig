@@ -3,6 +3,10 @@
 } %}
 {% block content %}
     {% include molecule('banner-jumbotron', 'ContentBannerWidget') with {
-        banner: data.banner
+        banner: {
+            imageUrl: data.banner.imageUrl,
+            title: data.banner.title,
+            subtitle: data.banner.subtitle
+        }
     } only %}
 {% endblock %}

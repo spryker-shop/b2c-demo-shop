@@ -1,0 +1,30 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'banner-jumbotron',
+    tag: 'section'
+} %}
+
+{% define data = {
+    banner: banner,
+} %}
+
+{% block body %}
+
+    {% set backgroundImage = data.banner.imageUrl is empty ?: 'background-image: url(' ~ data.banner.imageUrl ~ '); ' %}
+
+    <div class="jumbotron-slider-item__container grid grid--center grid--middle" style="{{backgroundImage}} display:flex;">
+        {% if data.banner.clickUrl is defined %}
+            <a href="{{ data.banner.clickUrl }}" class="jumbotron-slider-item__link"></a>
+        {% endif %}
+        <div class="col col--sm-12">
+            <div class="jumbotron-slider-item__title">
+                <h1>{{ data.banner.title | raw }}</h1>
+            </div>
+
+            <div class="jumbotron-slider-item__text">
+                <p>{{ data.banner.subtitle | raw }}</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

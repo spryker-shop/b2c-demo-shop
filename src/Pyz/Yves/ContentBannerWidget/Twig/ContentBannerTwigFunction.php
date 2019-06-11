@@ -12,6 +12,7 @@ use SprykerShop\Yves\ContentBannerWidget\Twig\ContentBannerTwigFunction as Spryk
 class ContentBannerTwigFunction extends SprykerContentBannerTwigFunction
 {
     protected const WIDGET_TEMPLATE_IDENTIFIER_JUMBOTRON = 'banner-jumbotron';
+    protected const WIDGET_TEMPLATE_IDENTIFIER_JUMBOTRON_WITHOUT_LINK = 'banner-jumbotron-without-link';
 
     /**
      * @return array
@@ -22,6 +23,7 @@ class ContentBannerTwigFunction extends SprykerContentBannerTwigFunction
             parent::getAvailableTemplates(),
             [
                 static::WIDGET_TEMPLATE_IDENTIFIER_JUMBOTRON => '@ContentBannerWidget/views/banner/banner-jumbotron.twig',
+                static::WIDGET_TEMPLATE_IDENTIFIER_JUMBOTRON_WITHOUT_LINK => '@ContentBannerWidget/views/banner/banner-jumbotron-without-link.twig',
             ]
         );
     }
