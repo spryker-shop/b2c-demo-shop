@@ -3,28 +3,28 @@
 } %}
 
 {% block content %}
-<div class="grid grid--stretch product-list">
-    {% for productAbstractView in data.productAbstractViewCollection  if productAbstractView.available%}
-        {% embed molecule('product-card') with {
-            class: 'col col--sm-6 col--md-6 col--lg-3',
-            data: {
-                name: productAbstractView.name,                abstractId: productAbstractView.idProductAbstract,
-                url: productAbstractView.url,
-                imageUrl: productAbstractView.images is empty ? '' : productAbstractView.images.0.externalUrlSmall,
-                price: productAbstractView.prices.DEFAULT | default(null),
-                originalPrice: productAbstractView.prices.ORIGINAL is defined ? productAbstractView.prices.ORIGINAL : null
-            },
-            embed: {
-                sku: productAbstractView.sku,
-            },
-        } only %}
-            {% block content %}
-                {{ parent() }}
-                <a href="{{ path('cart/add', {sku: embed.sku}) }}" class="button button--expand js-product-set__add-to-cart">
-                    {{ 'page.detail.add-to-cart' | trans }}
-                </a>
-            {% endblock %}
-        {% endembed %}
-    {% endfor %}
-</div>
+    <div class="grid grid--stretch product-list">
+        {% for productAbstractView in data.productAbstractViewCollection  if productAbstractView.available%}
+            {% embed molecule('product-card') with {
+                class: 'col col--sm-6 col--md-6 col--lg-3',
+                data: {
+                    name: productAbstractView.name,                abstractId: productAbstractView.idProductAbstract,
+                    url: productAbstractView.url,
+                    imageUrl: productAbstractView.images is empty ? '' : productAbstractView.images.0.externalUrlSmall,
+                    price: productAbstractView.prices.DEFAULT | default(null),
+                    originalPrice: productAbstractView.prices.ORIGINAL is defined ? productAbstractView.prices.ORIGINAL : null
+                },
+                embed: {
+                    sku: productAbstractView.sku,
+                },
+            } only %}
+                {% block content %}
+                    {{ parent() }}
+                    <a href="{{ path('cart/add', {sku: embed.sku}) }}" class="button button--expand js-product-set__add-to-cart">
+                        {{ 'page.detail.add-to-cart' | trans }}
+                    </a>
+                {% endblock %}
+            {% endembed %}
+        {% endfor %}
+    </div>
 {% endblock %}
