@@ -53,6 +53,7 @@ class NavigationGuiPresentationTester extends Actor
     public const SWEET_ALERT_SELECTOR = '.sweet-alert';
     public const SWEET_ALERT_CONFIRM_SELECTOR = '.sweet-alert button.confirm';
     public const NODE_FORM_SELECTOR = 'form';
+    public const FLASH_MESSAGES_SELECTOR = '//div[@class="flash-messages"]/div';
 
     /**
      * @param \Codeception\Scenario $scenario
@@ -133,7 +134,8 @@ class NavigationGuiPresentationTester extends Actor
      */
     public function seeSuccessMessage($expectedMessagePattern)
     {
-        $successMessage = $this->grabTextFrom('//div[@class="flash-messages"]/div');
+        $this->waitForElement(static::FLASH_MESSAGES_SELECTOR, 30);
+        $successMessage = $this->grabTextFrom(static::FLASH_MESSAGES_SELECTOR);
         $this->seeMatches($expectedMessagePattern, $successMessage);
 
         preg_match($expectedMessagePattern, $successMessage, $matches);
