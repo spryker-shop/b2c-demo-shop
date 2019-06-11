@@ -7,6 +7,7 @@
 
 namespace Pyz\Yves\CartPage\RestrictionsSetter;
 
+use Generated\Shared\Transfer\ProductQuantityStorageTransfer;
 use Generated\Shared\Transfer\ProductQuantityTransfer;
 use Spryker\Client\ProductQuantityStorage\ProductQuantityStorageClientInterface;
 
@@ -35,23 +36,34 @@ class QuantityRestrictionsSetter implements QuantityRestrictionsSetterInterface
         $quantityRestrictionsBySku = [];
 
         foreach ($itemTransfers as $itemTransfer) {
-            $quantityMin = 1;
-            $quantityMax = null;
-            $quantityInterval = 1;
             $productQuantityStorageTransfer = $this->productQuantityStorageClient->findProductQuantityStorage($itemTransfer->getId());
-            if ($productQuantityStorageTransfer !== null) {
-                $quantityMin = $productQuantityStorageTransfer->getQuantityMin() ?? 1;
-                $quantityMax = $productQuantityStorageTransfer->getQuantityMax();
-                $quantityInterval = $productQuantityStorageTransfer->getQuantityInterval() ?? 1;
-            }
-
-            $productQuantityTransfer = new ProductQuantityTransfer();
-            $productQuantityTransfer->setQuantityMin($quantityMin)
-                ->setQuantityMax($quantityMax)
-                ->setQuantityInterval($quantityInterval);
+            $productQuantityTransfer = $this->createProductQuantityTransferWithRestrictions($productQuantityStorageTransfer);
             $quantityRestrictionsBySku[$itemTransfer->getSku()] = $productQuantityTransfer;
         }
 
         return $quantityRestrictionsBySku;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ProductQuantityStorageTransfer|null $productQuantityStorageTransfer
+     *
+     * @return \Generated\Shared\Transfer\ProductQuantityTransfer
+     */
+    protected function createProductQuantityTransferWithRestrictions(?ProductQuantityStorageTransfer $productQuantityStorageTransfer): ProductQuantityTransfer
+    {
+        $quantityMin = 1;
+        $quantityMax = null;
+        $quantityInterval = 1;
+
+        if ($productQuantityStorageTransfer !== null) {
+            $quantityMin = $productQuantityStorageTransfer->getQuantityMin() ?? 1;
+            $quantityMax = $productQuantityStorageTransfer->getQuantityMax();
+            $quantityInterval = $productQuantityStorageTransfer->getQuantityInterval() ?? 1;
+        }
+
+        return (new ProductQuantityTransfer())
+            ->setQuantityMin($quantityMin)
+            ->setQuantityMax($quantityMax)
+            ->setQuantityInterval($quantityInterval);
     }
 }

@@ -34,7 +34,9 @@ class ProductController extends SprykerShopProductController
         );
         $viewData['cart'] = $quoteTransfer;
 
-        return $this->setQuantityRestrictions($viewData);
+        return $this->getFactory()
+            ->createQuantityRestrictionViewDataExpander()
+            ->expandProductDetailViewWithQuantityRestrictions($viewData);
     }
 
     /**

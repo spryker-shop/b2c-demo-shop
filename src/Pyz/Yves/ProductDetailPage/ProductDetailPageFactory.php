@@ -7,11 +7,21 @@
 
 namespace Pyz\Yves\ProductDetailPage;
 
+use Pyz\Yves\ProductDetailPage\Expander\QuantityRestrictionViewDataExpander;
+use Pyz\Yves\ProductDetailPage\Expander\QuantityRestrictionViewDataExpanderInterface;
 use Spryker\Client\ProductQuantityStorage\ProductQuantityStorageClientInterface;
 use SprykerShop\Yves\ProductDetailPage\ProductDetailPageFactory as SprykerProductDetailPageFactory;
 
 class ProductDetailPageFactory extends SprykerProductDetailPageFactory
 {
+    /**
+     * @return \Pyz\Yves\ProductDetailPage\Expander\QuantityRestrictionViewDataExpanderInterface
+     */
+    public function createQuantityRestrictionViewDataExpander(): QuantityRestrictionViewDataExpanderInterface
+    {
+        return new QuantityRestrictionViewDataExpander($this->getProductQuantityStorageClient());
+    }
+
     /**
      * @return \Spryker\Client\ProductQuantityStorage\ProductQuantityStorageClientInterface
      */
