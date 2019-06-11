@@ -46,7 +46,7 @@ class QuantityRestrictionViewDataExpander implements QuantityRestrictionViewData
      *
      * @return array
      */
-    protected function setQuantityRestrictionsToViewData(int $fkProductConcrete, array $viewData)
+    protected function setQuantityRestrictionsToViewData(int $fkProductConcrete, array $viewData): array
     {
         $viewData['minQuantity'] = 1;
         $viewData['maxQuantity'] = null;
