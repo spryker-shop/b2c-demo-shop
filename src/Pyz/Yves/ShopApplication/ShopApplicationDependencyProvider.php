@@ -15,6 +15,7 @@ use Spryker\Yves\Store\Plugin\Application\StoreApplicationPlugin;
 use Spryker\Yves\Twig\Plugin\Application\TwigApplicationPlugin;
 use SprykerShop\Yves\AgentWidget\Widget\AgentControlBarWidget;
 use SprykerShop\Yves\AvailabilityNotificationWidget\Widget\AvailabilityNotificationSubscriptionWidget;
+use SprykerShop\Yves\CartCodeWidget\Widget\CartCodeFormWidget;
 use SprykerShop\Yves\CartNoteWidget\Widget\CartItemNoteFormWidget;
 use SprykerShop\Yves\CartNoteWidget\Widget\CartNoteFormWidget;
 use SprykerShop\Yves\CategoryImageStorageWidget\Widget\CategoryImageStorageWidget;
@@ -71,6 +72,7 @@ class ShopApplicationDependencyProvider extends SprykerShopApplicationDependency
         return [
             AgentControlBarWidget::class,
             CartDiscountPromotionProductListWidget::class,
+            CartCodeFormWidget::class,
             CartItemNoteFormWidget::class,
             CartNoteFormWidget::class,
             CatalogPageProductWidget::class,
@@ -120,7 +122,7 @@ class ShopApplicationDependencyProvider extends SprykerShopApplicationDependency
     }
 
     /**
-     * @return array
+     * @return \Spryker\Shared\ApplicationExtension\Dependency\Plugin\ApplicationPluginInterface[]
      */
     protected function getApplicationPlugins(): array
     {

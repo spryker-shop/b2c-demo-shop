@@ -41,8 +41,8 @@
                                 data: {
                                     product: data.cart,
                                     productItem: cartItem,
-                                    attributes: data.attributes[cartItem.sku] | default([])
-                                }
+                                    attributes: data.attributes[cartItem.sku] | default([]),
+                                },
                             } only %}
                         {% endfor %}
                     </div>
@@ -53,17 +53,28 @@
             <div class="col col--sm-12 col--lg-4">
                 <div class="page-layout-cart__col page-layout-cart__col--sidebar">
                     <h3 class="cart-box">{{ 'cart.title_sidebar' | trans }}</h3>
+
                     <div class="cart-box cart-box--voucher cart-box--reset-spacing">
                         {% if not is_granted('IS_AUTHENTICATED_FULLY') or can('WriteSharedCartPermissionPlugin', data.cart.idQuote) %}
-                            {% widget 'DiscountVoucherFormWidget' only %}{% endwidget %}
+                            {% widget 'CartCodeFormWidget' args [data.cart] only %}
+                                {% block body %}
+                                    {{ parent() }}
+                                    <hr>
+                                {% endblock %}
+                            {% elsewidget 'DiscountVoucherFormWidget' only %}
+                                {% block body %}
+                                    {{ parent() }}
+                                    <hr>
+                                {% endblock %}
+                            {% endwidget %}
                         {% endif %}
                     </div>
                     {% include molecule('cart-summary', 'CartPage') with {
                         data: {
                             cart: data.cart,
                             isQuoteValid: data.isQuoteValid,
-                            isQuoteEditable: data.isQuoteEditable
-                        }
+                            isQuoteEditable: data.isQuoteEditable,
+                        },
                     } only %}
                 </div>
             </div>
