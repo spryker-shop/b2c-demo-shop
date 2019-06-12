@@ -9,10 +9,11 @@ namespace Pyz\Glue\GlueApplication;
 
 use Spryker\Glue\AlternativeProductsRestApi\Plugin\GlueApplication\AbstractAlternativeProductsResourceRoutePlugin;
 use Spryker\Glue\AlternativeProductsRestApi\Plugin\GlueApplication\ConcreteAlternativeProductsResourceRoutePlugin;
+use Spryker\Glue\AuthRestApi\Plugin\AccessTokenRestRequestValidatorPlugin;
 use Spryker\Glue\AuthRestApi\Plugin\AccessTokensResourceRoutePlugin;
-use Spryker\Glue\AuthRestApi\Plugin\AccessTokenValidatorPlugin;
 use Spryker\Glue\AuthRestApi\Plugin\FormatAuthenticationErrorResponseHeadersPlugin;
 use Spryker\Glue\AuthRestApi\Plugin\RefreshTokensResourceRoutePlugin;
+use Spryker\Glue\AuthRestApi\Plugin\RestUserFinderByAccessTokenPlugin;
 use Spryker\Glue\CartItemsProductsRelationship\Plugin\CartItemsProductsRelationshipPlugin;
 use Spryker\Glue\CartsRestApi\CartsRestApiConfig;
 use Spryker\Glue\CartsRestApi\Plugin\ControllerBeforeAction\SetAnonymousCustomerIdControllerBeforeActionPlugin;
@@ -141,7 +142,6 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
     protected function getValidateRestRequestPlugins(): array
     {
         return [
-            new AccessTokenValidatorPlugin(),
             new AnonymousCustomerUniqueIdValidatorPlugin(),
         ];
     }
@@ -154,6 +154,7 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
     protected function getRestRequestValidatorPlugins(): array
     {
         return [
+            new AccessTokenRestRequestValidatorPlugin(),
             new ValidateRestRequestAttributesPlugin(),
             new CurrencyParameterValidatorPlugin(),
             new PriceModeParameterValidatorPlugin(),
@@ -268,5 +269,15 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
         );
 
         return $resourceRelationshipCollection;
+    }
+
+    /**
+     * @return \Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\RestUserFinderPluginInterface[]
+     */
+    protected function getRestUserFinderPlugins(): array
+    {
+        return [
+            new RestUserFinderByAccessTokenPlugin(),
+        ];
     }
 }

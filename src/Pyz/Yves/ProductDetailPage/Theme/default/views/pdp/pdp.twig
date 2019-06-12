@@ -3,6 +3,9 @@
 {% define data = {
     product: _view.product,
     productUrl: _view.productUrl,
+    minQuantity: _view.minQuantity,
+    maxQuantity: _view.maxQuantity,
+    quantityInterval: _view.quantityInterval,
 
     cart: _view.cart,
     isBundle: _view.product.attributes.bundled_product | default(null),
@@ -50,13 +53,17 @@
                 }
             } only %}
 
+
             <div class="col page-layout-main__sidebar-pdp">
                 {% include molecule('product-configurator', 'ProductDetailPage') with {
                     data: {
                         product: data.product,
                         isBundle: data.bundleItems,
-                        bundleItems: data.bundleItems
-                    }
+                        bundleItems: data.bundleItems,
+                        minQuantity: data.minQuantity,
+                        maxQuantity: data.maxQuantity,
+                        quantityInterval: data.quantityInterval,
+                    },
                 } only %}
             </div>
         </div>

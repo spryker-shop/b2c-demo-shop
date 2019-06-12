@@ -1,0 +1,44 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'cart-code-form',
+} %}
+
+{% define data = {
+    form: required,
+    isQuoteEditable: required,
+} %}
+
+{% block body %}
+    {% if data.isQuoteEditable %}
+        {% embed molecule('toggler-item') with {
+            modifiers: ['filter'],
+            data: {
+                title: 'cart.code.enter-code' | trans,
+                triggerClass: config.jsName ~ '__trigger',
+                targetClass: config.jsName ~ '__target',
+            },
+            embed: {
+                form: data.form,
+            },
+        } only %}
+            {% block contentText %}
+                {% include molecule('form') with {
+                    modifiers: ['inline'],
+                    data: {
+                        form: embed.form,
+                        submit: {
+                            enable: true,
+                            text: 'cart.voucher.redeem' | trans,
+                            icon: null,
+                            class: 'button button--combined',
+                        },
+                        options: {
+                            action: path('cart-code/code/add'),
+                        },
+                    },
+                } only %}
+            {% endblock %}
+        {% endembed %}
+    {% endif %}
+{% endblock %}

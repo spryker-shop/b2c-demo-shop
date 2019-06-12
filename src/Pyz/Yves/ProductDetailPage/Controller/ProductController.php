@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @method \Spryker\Client\Product\ProductClientInterface getClient()
+ * @method \Pyz\Yves\ProductDetailPage\ProductDetailPageFactory getFactory()
  */
 class ProductController extends SprykerShopProductController
 {
@@ -33,6 +34,8 @@ class ProductController extends SprykerShopProductController
         );
         $viewData['cart'] = $quoteTransfer;
 
-        return $viewData;
+        return $this->getFactory()
+            ->createQuantityRestrictionViewDataExpander()
+            ->expandProductDetailViewWithQuantityRestrictions($viewData);
     }
 }

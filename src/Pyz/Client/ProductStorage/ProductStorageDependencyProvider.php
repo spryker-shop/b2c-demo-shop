@@ -13,6 +13,7 @@ use Spryker\Client\PriceProductStorage\Plugin\ProductViewPriceExpanderPlugin;
 use Spryker\Client\ProductDiscontinuedStorage\Plugin\ProductStorage\ProductDiscontinuedProductAvailabilityExpanderPlugin;
 use Spryker\Client\ProductDiscontinuedStorage\Plugin\ProductStorage\ProductViewDiscontinuedOptionsExpanderPlugin;
 use Spryker\Client\ProductImageStorage\Plugin\ProductViewImageExpanderPlugin;
+use Spryker\Client\ProductQuantityStorage\Plugin\ProductStorage\ProductConcreteTransferQuantityRestrictionExpanderPlugin;
 use Spryker\Client\ProductStorage\Plugin\ProductViewVariantExpanderPlugin;
 use Spryker\Client\ProductStorage\ProductStorageDependencyProvider as SprykerProductStorageDependencyProvider;
 
@@ -35,5 +36,15 @@ class ProductStorageDependencyProvider extends SprykerProductStorageDependencyPr
         ];
 
         return $plugins;
+    }
+
+    /**
+     * @return \Spryker\Client\ProductStorageExtension\Dependency\Plugin\ProductConcreteExpanderPluginInterface[]
+     */
+    protected function getProductConcreteExpanderPlugins(): array
+    {
+        return [
+            new ProductConcreteTransferQuantityRestrictionExpanderPlugin(),
+        ];
     }
 }

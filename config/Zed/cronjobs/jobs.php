@@ -49,6 +49,16 @@ $jobs[] = [
     'stores' => $allStores,
 ];
 
+/* PriceProductSchedule */
+$jobs[] = [
+    'name' => 'apply-price-product-schedule',
+    'command' => '$PHP_BIN vendor/bin/console price-product-schedule:apply',
+    'schedule' => '0 6 * * *',
+    'enable' => true,
+    'run_on_non_production' => true,
+    'stores' => $allStores,
+];
+
 /* Oms */
 $jobs[] = [
     'name' => 'check-oms-conditions',

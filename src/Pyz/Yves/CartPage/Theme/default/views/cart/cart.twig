@@ -7,6 +7,7 @@
     isQuoteEditable: _view.isQuoteEditable,
     attributes: _view.attributes,
     request: app.request,
+    quantityRestrictionsBySku: _view.quantityRestrictionsBySku,
 
     title: 'cart.cart' | trans
 } %}
@@ -41,8 +42,11 @@
                                 data: {
                                     product: data.cart,
                                     productItem: cartItem,
-                                    attributes: data.attributes[cartItem.sku] | default([])
-                                }
+                                    attributes: data.attributes[cartItem.sku] | default([]),
+                                    minQuantity: data.quantityRestrictionsBySku[cartItem.sku].quantityMin ?? 1,
+                                    maxQuantity: data.quantityRestrictionsBySku[cartItem.sku].quantityMax,
+                                    quantityInterval: data.quantityRestrictionsBySku[cartItem.sku].quantityInterval ?? 1,
+                                },
                             } only %}
                         {% endfor %}
                     </div>
@@ -53,17 +57,28 @@
             <div class="col col--sm-12 col--lg-4">
                 <div class="page-layout-cart__col page-layout-cart__col--sidebar">
                     <h3 class="cart-box">{{ 'cart.title_sidebar' | trans }}</h3>
+
                     <div class="cart-box cart-box--voucher cart-box--reset-spacing">
                         {% if not is_granted('IS_AUTHENTICATED_FULLY') or can('WriteSharedCartPermissionPlugin', data.cart.idQuote) %}
-                            {% widget 'DiscountVoucherFormWidget' only %}{% endwidget %}
+                            {% widget 'CartCodeFormWidget' args [data.cart] only %}
+                                {% block body %}
+                                    {{ parent() }}
+                                    <hr>
+                                {% endblock %}
+                            {% elsewidget 'DiscountVoucherFormWidget' only %}
+                                {% block body %}
+                                    {{ parent() }}
+                                    <hr>
+                                {% endblock %}
+                            {% endwidget %}
                         {% endif %}
                     </div>
                     {% include molecule('cart-summary', 'CartPage') with {
                         data: {
                             cart: data.cart,
                             isQuoteValid: data.isQuoteValid,
-                            isQuoteEditable: data.isQuoteEditable
-                        }
+                            isQuoteEditable: data.isQuoteEditable,
+                        },
                     } only %}
                 </div>
             </div>
