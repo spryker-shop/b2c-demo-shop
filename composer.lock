@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9426644d38fa9e9ee1a62861bff65734",
+    "content-hash": "66498fbe73dac44ce344b7680ffd085e",
     "packages": [
         {
             "name": "codeitnowin/barcode",
@@ -2455,6 +2455,50 @@
             ],
             "description": "Content Based Shop Navigation [feature]",
             "time": "2019-05-13T14:22:45+00:00"
+        },
+        {
+            "name": "spryker-feature/content-item",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker-feature/content-item.git",
+                "reference": "90ead4c0e27b869586ff021936125db8c4e3d35c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker-feature/content-item/zipball/90ead4c0e27b869586ff021936125db8c4e3d35c",
+                "reference": "90ead4c0e27b869586ff021936125db8c4e3d35c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1",
+                "spryker-shop/content-banner-widget": "^0.2.0",
+                "spryker-shop/content-product-widget": "^0.2.0",
+                "spryker/content": "^2.0.0",
+                "spryker/content-banner": "^2.0.0",
+                "spryker/content-banner-data-import": "^0.2.0",
+                "spryker/content-banner-gui": "^2.0.0",
+                "spryker/content-gui": "^2.0.0",
+                "spryker/content-product": "^0.2.0",
+                "spryker/content-product-data-import": "^0.2.0",
+                "spryker/content-product-gui": "^0.2.0",
+                "spryker/content-product-set": "^0.1.0",
+                "spryker/content-product-set-data-import": "^0.2.0",
+                "spryker/content-product-set-gui": "^0.1.0",
+                "spryker/content-storage": "^2.0.0"
+            },
+            "type": "metapackage",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "201906.x-dev"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "Content Item [feature]",
+            "time": "2019-06-11T06:02:55+00:00"
         },
         {
             "name": "spryker-feature/customer-access",
@@ -4998,6 +5042,101 @@
             ],
             "description": "CmsSearchPage module",
             "time": "2019-03-04T16:59:14+00:00"
+        },
+        {
+            "name": "spryker-shop/content-banner-widget",
+            "version": "0.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker-shop/content-banner-widget.git",
+                "reference": "46463480aa51c36e62619b56b6517342feb752dc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker-shop/content-banner-widget/zipball/46463480aa51c36e62619b56b6517342feb752dc",
+                "reference": "46463480aa51c36e62619b56b6517342feb752dc",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1",
+                "spryker/content-banner": "^2.0.0",
+                "spryker/kernel": "^3.23.0",
+                "spryker/twig": "^3.5.0",
+                "spryker/twig-extension": "^1.0.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/container": "*",
+                "spryker/testify": "*"
+            },
+            "suggest": {
+                "spryker/container": "If you want to use Twig Plugin"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "SprykerShop\\": "src/SprykerShop/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "ContentBannerWidget module",
+            "time": "2019-06-06T14:06:58+00:00"
+        },
+        {
+            "name": "spryker-shop/content-product-widget",
+            "version": "0.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker-shop/content-product-widget.git",
+                "reference": "0c05b179059239fc6386047e64564506fdf4f901"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker-shop/content-product-widget/zipball/0c05b179059239fc6386047e64564506fdf4f901",
+                "reference": "0c05b179059239fc6386047e64564506fdf4f901",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1",
+                "spryker/content-product": "^0.2.0",
+                "spryker/kernel": "^3.24.0",
+                "spryker/product-storage": "^1.10.0",
+                "spryker/twig": "^3.5.0",
+                "spryker/twig-extension": "^1.0.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/container": "*",
+                "spryker/testify": "*"
+            },
+            "suggest": {
+                "spryker/container": "If you want to use Twig Plugins"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "SprykerShop\\": "src/SprykerShop/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "ContentProductWidget module",
+            "time": "2019-06-06T11:12:27+00:00"
         },
         {
             "name": "spryker-shop/currency-widget",
@@ -7820,11 +7959,19 @@
                     "Spryker": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-0": {
+                    "Unit": "tests/"
+                }
+            },
+            "notification-url": "https://code.foo.com/repo/private/downloads/",
             "license": [
                 "proprietary"
             ],
             "description": "Assertion bundle",
+            "support": {
+                "source": "https://github.com/spryker/Assertion/tree/3.0.0"
+            },
             "time": "2017-02-22T12:08:46+00:00"
         },
         {
@@ -8445,11 +8592,14 @@
                     "Spryker": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "notification-url": "https://code.foo.com/repo/private/downloads/",
             "license": [
                 "proprietary"
             ],
             "description": "Cache bundle",
+            "support": {
+                "source": "https://github.com/spryker/Cache/tree/3.1.0"
+            },
             "time": "2017-04-10T13:13:21+00:00"
         },
         {
@@ -9492,11 +9642,14 @@
                     "Spryker": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "notification-url": "https://code.foo.com/repo/private/downloads/",
             "license": [
                 "proprietary"
             ],
             "description": "CategoryExporter module",
+            "support": {
+                "source": "https://github.com/spryker/CategoryExporter/tree/3.0.2"
+            },
             "time": "2017-07-13T15:46:45+00:00"
         },
         {
@@ -11453,6 +11606,725 @@
             "time": "2019-03-26T15:19:37+00:00"
         },
         {
+            "name": "spryker/content",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/content.git",
+                "reference": "fb57942bab0825a3357e81ad0f0a986dc0870bc3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/content/zipball/fb57942bab0825a3357e81ad0f0a986dc0870bc3",
+                "reference": "fb57942bab0825a3357e81ad0f0a986dc0870bc3",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1",
+                "spryker/kernel": "^3.8.0",
+                "spryker/locale": "^3.0.0",
+                "spryker/symfony": "^3.0.0",
+                "spryker/util-uuid-generator": "^1.0.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/propel": "*",
+                "spryker/testify": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/",
+                    "SprykerTest\\Zed\\Content\\Helper\\": "tests/SprykerTest/Zed/Content/_support/Helper/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "Content module",
+            "time": "2019-06-07T09:03:43+00:00"
+        },
+        {
+            "name": "spryker/content-banner",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/content-banner.git",
+                "reference": "9d64b5e7f5ffd8695e7930c04dd1aff1611cc073"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/content-banner/zipball/9d64b5e7f5ffd8695e7930c04dd1aff1611cc073",
+                "reference": "9d64b5e7f5ffd8695e7930c04dd1aff1611cc073",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1",
+                "spryker/content-storage": "^2.0.0",
+                "spryker/kernel": "^3.8.0",
+                "spryker/symfony": "^3.0.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/propel": "*",
+                "spryker/testify": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/",
+                    "SprykerTest\\Zed\\ContentBanner\\Helper\\": "tests/SprykerTest/Zed/ContentBanner/_support/Helper/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "ContentBanner module",
+            "time": "2019-06-07T05:06:50+00:00"
+        },
+        {
+            "name": "spryker/content-banner-data-import",
+            "version": "0.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/content-banner-data-import.git",
+                "reference": "30413ac56ff5ab090054a395eb0440b2b1b0f77d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/content-banner-data-import/zipball/30413ac56ff5ab090054a395eb0440b2b1b0f77d",
+                "reference": "30413ac56ff5ab090054a395eb0440b2b1b0f77d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1",
+                "spryker/content": "^2.0.0",
+                "spryker/content-banner": "^1.1.0 || ^2.0.0",
+                "spryker/data-import": "^1.3.0",
+                "spryker/kernel": "^3.0.0",
+                "spryker/util-encoding": "^2.0.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/propel": "*",
+                "spryker/testify": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/",
+                    "SprykerTest\\Zed\\ContentBannerDataImport\\Helper\\": "tests/SprykerTest/Zed/ContentBannerDataImport/_support/Helper/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "ContentBannerDataImport module",
+            "time": "2019-06-07T08:18:24+00:00"
+        },
+        {
+            "name": "spryker/content-banner-gui",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/content-banner-gui.git",
+                "reference": "028b0248073fa7cd91c8639876a7a5390da69a06"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/content-banner-gui/zipball/028b0248073fa7cd91c8639876a7a5390da69a06",
+                "reference": "028b0248073fa7cd91c8639876a7a5390da69a06",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1",
+                "spryker/content-gui-extension": "^1.1.0",
+                "spryker/kernel": "^3.8.0",
+                "spryker/symfony": "^3.1.5"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/testify": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "ContentBannerGui module",
+            "time": "2019-06-07T09:49:25+00:00"
+        },
+        {
+            "name": "spryker/content-banners-rest-api",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/content-banners-rest-api.git",
+                "reference": "57414cf52311c474eb08e989df142f84cf86db6d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/content-banners-rest-api/zipball/57414cf52311c474eb08e989df142f84cf86db6d",
+                "reference": "57414cf52311c474eb08e989df142f84cf86db6d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1",
+                "spryker/content-banner": "^2.0.0",
+                "spryker/glue-application": "^1.8.0",
+                "spryker/glue-application-extension": "^1.0.0",
+                "spryker/kernel": "^3.22.0",
+                "spryker/symfony": "^3.0.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/testify": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "ContentBannersRestApi module",
+            "time": "2019-06-06T13:55:01+00:00"
+        },
+        {
+            "name": "spryker/content-gui",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/content-gui.git",
+                "reference": "9063cdd2d435fed8d28c342b56c34acdc400b5e0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/content-gui/zipball/9063cdd2d435fed8d28c342b56c34acdc400b5e0",
+                "reference": "9063cdd2d435fed8d28c342b56c34acdc400b5e0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1",
+                "spryker/content": "^2.0.0",
+                "spryker/content-gui-extension": "^1.1.0",
+                "spryker/gui": "^3.21.0",
+                "spryker/kernel": "^3.32.0",
+                "spryker/locale": "^3.2.0",
+                "spryker/symfony": "^3.2.0",
+                "spryker/util-encoding": "^2.1.0",
+                "spryker/util-text": "^1.2.1"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/testify": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "ContentGui module",
+            "time": "2019-06-07T09:39:10+00:00"
+        },
+        {
+            "name": "spryker/content-gui-extension",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/content-gui-extension.git",
+                "reference": "45653ab7080806e4ea7f5411022a2dbaf7059571"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/content-gui-extension/zipball/45653ab7080806e4ea7f5411022a2dbaf7059571",
+                "reference": "45653ab7080806e4ea7f5411022a2dbaf7059571",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/kernel": "*",
+                "spryker/testify": "*"
+            },
+            "suggest": {
+                "spryker/kernel": "If you want to use content plugin"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "ContentGuiExtension module",
+            "time": "2019-04-30T12:30:04+00:00"
+        },
+        {
+            "name": "spryker/content-product",
+            "version": "0.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/content-product.git",
+                "reference": "2e8d9dd5bcb9fb346af097a7bed81d344aa14eb1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/content-product/zipball/2e8d9dd5bcb9fb346af097a7bed81d344aa14eb1",
+                "reference": "2e8d9dd5bcb9fb346af097a7bed81d344aa14eb1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1",
+                "spryker/content-storage": "^2.0.0",
+                "spryker/kernel": "^3.32.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/testify": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "ContentProduct module",
+            "time": "2019-06-07T05:06:50+00:00"
+        },
+        {
+            "name": "spryker/content-product-abstract-lists-rest-api",
+            "version": "0.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/content-product-abstract-lists-rest-api.git",
+                "reference": "de1dab575e010c64bf413fe37e3320b1a9f80b9c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/content-product-abstract-lists-rest-api/zipball/de1dab575e010c64bf413fe37e3320b1a9f80b9c",
+                "reference": "de1dab575e010c64bf413fe37e3320b1a9f80b9c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1",
+                "spryker/content-product": "^0.2.0",
+                "spryker/glue-application": "^1.15.0",
+                "spryker/glue-application-extension": "^1.2.0",
+                "spryker/kernel": "^3.32.0",
+                "spryker/products-rest-api": "^2.4.0",
+                "spryker/symfony": "^3.2.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/testify": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "ContentProductAbstractListsRestApi module",
+            "time": "2019-06-06T14:03:52+00:00"
+        },
+        {
+            "name": "spryker/content-product-data-import",
+            "version": "0.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/content-product-data-import.git",
+                "reference": "4db22087545f64d719be03a2d575a3f966ca4ab6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/content-product-data-import/zipball/4db22087545f64d719be03a2d575a3f966ca4ab6",
+                "reference": "4db22087545f64d719be03a2d575a3f966ca4ab6",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1",
+                "spryker/content": "^2.0.0",
+                "spryker/content-product": "^0.2.0",
+                "spryker/data-import": "^1.4.0",
+                "spryker/kernel": "^3.32.0",
+                "spryker/product": "^6.0.0",
+                "spryker/util-encoding": "^1.0.0 || ^2.0.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/propel": "*",
+                "spryker/testify": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/",
+                    "SprykerTest\\Zed\\ContentProductDataImport\\Helper\\": "tests/SprykerTest/Zed/ContentProductDataImport/_support/Helper/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "ContentProductDataImport module",
+            "time": "2019-06-07T07:14:45+00:00"
+        },
+        {
+            "name": "spryker/content-product-gui",
+            "version": "0.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/content-product-gui.git",
+                "reference": "57cc0af938f7ec22e72eb2ae225f7da1c0db3142"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/content-product-gui/zipball/57cc0af938f7ec22e72eb2ae225f7da1c0db3142",
+                "reference": "57cc0af938f7ec22e72eb2ae225f7da1c0db3142",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1",
+                "spryker/content-gui-extension": "^1.1.0",
+                "spryker/content-product": "^0.2.0",
+                "spryker/gui": "^3.17.0",
+                "spryker/kernel": "^3.8.0",
+                "spryker/locale": "^3.0.0",
+                "spryker/product": "^6.0.0",
+                "spryker/product-image": "^3.3.0",
+                "spryker/symfony": "^3.1.5",
+                "spryker/util-text": "^1.2.1"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/testify": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "ContentProductGui module",
+            "time": "2019-06-07T08:34:26+00:00"
+        },
+        {
+            "name": "spryker/content-product-set",
+            "version": "0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/content-product-set.git",
+                "reference": "415e0bf1524bc3e9010824fcffb29117d0a5b76e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/content-product-set/zipball/415e0bf1524bc3e9010824fcffb29117d0a5b76e",
+                "reference": "415e0bf1524bc3e9010824fcffb29117d0a5b76e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1",
+                "spryker/kernel": "^3.33.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/testify": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "ContentProductSet module",
+            "time": "2019-05-13T06:51:05+00:00"
+        },
+        {
+            "name": "spryker/content-product-set-data-import",
+            "version": "0.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/content-product-set-data-import.git",
+                "reference": "7be2c5b6be74b584c22260f76a752b62b08c212c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/content-product-set-data-import/zipball/7be2c5b6be74b584c22260f76a752b62b08c212c",
+                "reference": "7be2c5b6be74b584c22260f76a752b62b08c212c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1",
+                "spryker/content": "^2.0.0",
+                "spryker/data-import": "^1.5.0",
+                "spryker/kernel": "^3.33.0",
+                "spryker/product-set": "^1.4.0",
+                "spryker/util-encoding": "^1.0.0 || ^2.0.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/propel": "*",
+                "spryker/testify": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/",
+                    "SprykerTest\\Zed\\ContentProductSetDataImport\\Helper\\": "tests/SprykerTest/Zed/ContentProductSetDataImport/_support/Helper/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "ContentProductSetDataImport module",
+            "time": "2019-06-07T10:54:06+00:00"
+        },
+        {
+            "name": "spryker/content-product-set-gui",
+            "version": "0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/content-product-set-gui.git",
+                "reference": "39d405b7ae3511f73072f1b108458228bc4b011b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/content-product-set-gui/zipball/39d405b7ae3511f73072f1b108458228bc4b011b",
+                "reference": "39d405b7ae3511f73072f1b108458228bc4b011b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1",
+                "spryker/content-gui-extension": "^1.1.0",
+                "spryker/gui": "^3.21.0",
+                "spryker/kernel": "^3.33.0",
+                "spryker/locale": "^3.2.0",
+                "spryker/product-set": "^1.4.0",
+                "spryker/symfony": "^3.2.2",
+                "spryker/util-text": "^1.2.1"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/testify": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "ContentProductSetGui module",
+            "time": "2019-05-16T09:56:32+00:00"
+        },
+        {
+            "name": "spryker/content-storage",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/content-storage.git",
+                "reference": "818b1b0facaf7999915683ae73b43fc7dfe66779"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/content-storage/zipball/818b1b0facaf7999915683ae73b43fc7dfe66779",
+                "reference": "818b1b0facaf7999915683ae73b43fc7dfe66779",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1",
+                "spryker/content": "^2.0.0",
+                "spryker/content-storage-extension": "^1.1.0",
+                "spryker/event-behavior": "^1.0.0",
+                "spryker/kernel": "^3.0.0",
+                "spryker/locale": "^3.0.0",
+                "spryker/propel-orm": "^1.0.0",
+                "spryker/storage": "^3.0.0",
+                "spryker/synchronization": "^1.0.0",
+                "spryker/synchronization-behavior": "^1.0.0",
+                "spryker/synchronization-extension": "^1.0.0",
+                "spryker/util-encoding": "^2.0.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/event": "*",
+                "spryker/propel": "*",
+                "spryker/queue": "*",
+                "spryker/testify": "*"
+            },
+            "suggest": {
+                "spryker/event": "If you want to use Event plugins, minimum required version: 2.1.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "ContentStorage module",
+            "time": "2019-06-07T07:03:29+00:00"
+        },
+        {
+            "name": "spryker/content-storage-extension",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/content-storage-extension.git",
+                "reference": "4bb0609b84915dda0f062852db55395dec6d11ab"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/content-storage-extension/zipball/4bb0609b84915dda0f062852db55395dec6d11ab",
+                "reference": "4bb0609b84915dda0f062852db55395dec6d11ab",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/testify": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "ContentStorageExtension module",
+            "time": "2019-03-28T11:02:59+00:00"
+        },
+        {
             "name": "spryker/country",
             "version": "3.2.0",
             "source": {
@@ -12807,11 +13679,14 @@
                     "dev-master": "1.0.x-dev"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "notification-url": "https://code.foo.com/repo/private/downloads/",
             "license": [
                 "proprietary"
             ],
             "description": "Egulias module",
+            "support": {
+                "source": "https://github.com/spryker/Egulias/tree/1.0.0"
+            },
             "time": "2017-11-09T13:55:22+00:00"
         },
         {
@@ -13859,11 +14734,19 @@
                     "Function": "tests/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-0": {
+                    "Unit": "tests/"
+                }
+            },
+            "notification-url": "https://code.foo.com/repo/private/downloads/",
             "license": [
                 "proprietary"
             ],
             "description": "Graph bundle",
+            "support": {
+                "source": "https://github.com/spryker/Graph/tree/3.0.0"
+            },
             "time": "2017-02-22T12:08:46+00:00"
         },
         {
@@ -13889,11 +14772,14 @@
                     "dev-master": "2.0.x-dev"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "notification-url": "https://code.foo.com/repo/private/downloads/",
             "license": [
                 "proprietary"
             ],
             "description": "Graphviz module",
+            "support": {
+                "source": "https://github.com/spryker/Graphviz/tree/2.0.1"
+            },
             "time": "2017-08-02T16:31:17+00:00"
         },
         {
@@ -14184,11 +15070,20 @@
                     "Spryker": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-0": {
+                    "Functional": "tests/",
+                    "Unit": "tests/"
+                }
+            },
+            "notification-url": "https://code.foo.com/repo/private/downloads/",
             "license": [
                 "proprietary"
             ],
             "description": "Invoice bundle",
+            "support": {
+                "source": "https://github.com/spryker/Invoice/tree/2.0.1"
+            },
             "time": "2017-02-22T11:53:10+00:00"
         },
         {
@@ -20737,11 +21632,14 @@
                     "dev-master": "2.0.x-dev"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "notification-url": "https://code.foo.com/repo/private/downloads/",
             "license": [
                 "proprietary"
             ],
             "description": "Redis bundle",
+            "support": {
+                "source": "https://github.com/spryker/Redis/tree/2.0.1"
+            },
             "time": "2017-04-26T15:15:36+00:00"
         },
         {
@@ -23897,11 +24795,19 @@
                     "Spryker\\": "src/Spryker/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "SprykerTest\\": "tests/SprykerTest/"
+                }
+            },
+            "notification-url": "https://code.foo.com/repo/private/downloads/",
             "license": [
                 "proprietary"
             ],
             "description": "UtilText module",
+            "support": {
+                "source": "https://github.com/spryker/UtilText/tree/master"
+            },
             "time": "2017-10-24T13:32:31+00:00"
         },
         {
@@ -23978,11 +24884,19 @@
                     "Spryker\\": "src/Spryker/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "SprykerTest\\": "tests/SprykerTest/"
+                }
+            },
+            "notification-url": "https://code.foo.com/repo/private/downloads/",
             "license": [
                 "proprietary"
             ],
             "description": "UtilValidate module",
+            "support": {
+                "source": "https://github.com/spryker/UtilValidate/tree/1.0.0"
+            },
             "time": "2017-11-09T13:55:22+00:00"
         },
         {
@@ -24390,11 +25304,14 @@
                     "dev-master": "2.0.x-dev"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "notification-url": "https://code.foo.com/repo/private/downloads/",
             "license": [
                 "proprietary"
             ],
             "description": "Zend module",
+            "support": {
+                "source": "https://github.com/spryker/Zend/tree/2.1.0"
+            },
             "time": "2017-08-02T16:31:17+00:00"
         },
         {
@@ -27640,7 +28557,7 @@
                     "homepage": "https://nette.org/contributors"
                 }
             ],
-            "description": "? Nette NEON: encodes and decodes NEON file format.",
+            "description": "🍸 Nette NEON: encodes and decodes NEON file format.",
             "homepage": "http://ne-on.org",
             "keywords": [
                 "export",
@@ -27703,7 +28620,7 @@
                     "homepage": "https://nette.org/contributors"
                 }
             ],
-            "description": "? Nette PHP Generator: generates neat PHP code for you. Supports new PHP 7.1 features.",
+            "description": "🐘 Nette PHP Generator: generates neat PHP code for you. Supports new PHP 7.1 features.",
             "homepage": "https://nette.org",
             "keywords": [
                 "code",

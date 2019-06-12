@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Copyright © 2016-present Spryker Systems GmbH. All rights reserved.
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * This file is part of the Spryker Commerce OS.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace Pyz\Yves\ContentProductWidget\Twig;
@@ -17,8 +17,8 @@ class ContentProductAbstractListTwigFunction extends SprykerContentProductAbstra
     protected const WIDGET_TEMPLATE_IDENTIFIER_BUTTON = 'with-button';
 
         /**
-     * @return array
-     */
+         * @return array
+         */
     protected function getAvailableTemplates(): array
     {
         return array_merge(

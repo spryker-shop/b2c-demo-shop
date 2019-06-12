@@ -4,10 +4,10 @@ use Propel\Generator\Manager\MigrationManager;
 
 /**
  * Data object containing the SQL and PHP code to migrate the database
- * up to version 1559912245.
- * Generated on 2019-06-07 12:57:25 by vagrant
+ * up to version 1560261233.
+ * Generated on 2019-06-11 13:53:53 by vagrant
  */
-class PropelMigration_1559912245
+class PropelMigration_1560261233
 {
     public $comment = '';
 
@@ -117,7 +117,7 @@ CREATE TABLE "spy_availability_abstract"
     "id_availability_abstract" INTEGER NOT NULL,
     "fk_store" INTEGER,
     "abstract_sku" VARCHAR(255) NOT NULL,
-    "quantity" INTEGER DEFAULT 0 NOT NULL,
+    "quantity" DOUBLE PRECISION DEFAULT 0 NOT NULL,
     PRIMARY KEY ("id_availability_abstract"),
     CONSTRAINT "spy_availability_abstract-sku" UNIQUE ("abstract_sku","fk_store")
 );
@@ -132,7 +132,7 @@ CREATE TABLE "spy_availability"
     "fk_availability_abstract" INTEGER NOT NULL,
     "fk_store" INTEGER,
     "is_never_out_of_stock" BOOLEAN DEFAULT \'f\',
-    "quantity" INTEGER NOT NULL,
+    "quantity" DOUBLE PRECISION NOT NULL,
     "sku" VARCHAR(255) NOT NULL,
     PRIMARY KEY ("id_availability"),
     CONSTRAINT "spy_availability-sku" UNIQUE ("sku","fk_store")
@@ -687,7 +687,7 @@ CREATE TABLE "spy_content"
     "content_term_key" VARCHAR(255) NOT NULL,
     "content_type_key" VARCHAR(255) NOT NULL,
     "description" TEXT,
-    "key" VARCHAR(255),
+    "key" VARCHAR(255) NOT NULL,
     "name" VARCHAR(255) NOT NULL,
     "created_at" TIMESTAMP,
     "updated_at" TIMESTAMP,
@@ -721,6 +721,7 @@ CREATE TABLE "spy_content_storage"
 (
     "id_content_storage" INTEGER NOT NULL,
     "fk_content" INTEGER NOT NULL,
+    "content_key" VARCHAR(255) NOT NULL,
     "data" TEXT,
     "locale" VARCHAR(16) NOT NULL,
     "key" VARCHAR,
@@ -729,6 +730,8 @@ CREATE TABLE "spy_content_storage"
     PRIMARY KEY ("id_content_storage"),
     CONSTRAINT "spy_content_storage-unique-key" UNIQUE ("key")
 );
+
+CREATE INDEX "spy_content_storage-content_key" ON "spy_content_storage" ("content_key");
 
 CREATE INDEX "spy_content_storage-fk_content" ON "spy_content_storage" ("fk_content");
 
@@ -910,7 +913,7 @@ CREATE TABLE "spy_discount"
     "display_name" VARCHAR(255) NOT NULL,
     "is_active" BOOLEAN DEFAULT \'f\',
     "is_exclusive" BOOLEAN DEFAULT \'f\',
-    "minimum_item_amount" INTEGER DEFAULT 1 NOT NULL,
+    "minimum_item_amount" DOUBLE PRECISION DEFAULT 1 NOT NULL,
     "valid_from" TIMESTAMP,
     "valid_to" TIMESTAMP,
     "created_at" TIMESTAMP,
@@ -998,7 +1001,7 @@ CREATE TABLE "spy_discount_promotion"
     "id_discount_promotion" INTEGER NOT NULL,
     "fk_discount" INTEGER NOT NULL,
     "abstract_sku" VARCHAR(255) NOT NULL,
-    "quantity" INTEGER NOT NULL,
+    "quantity" DOUBLE PRECISION NOT NULL,
     PRIMARY KEY ("id_discount_promotion")
 );
 
@@ -1425,6 +1428,17 @@ CREATE TABLE "spy_newsletter_subscription"
     PRIMARY KEY ("fk_newsletter_subscriber","fk_newsletter_type")
 );
 
+CREATE SEQUENCE "spy_nopayment_paid_pk_seq";
+
+CREATE TABLE "spy_nopayment_paid"
+(
+    "id_nopayment_paid" INTEGER NOT NULL,
+    "fk_sales_order_item" INTEGER NOT NULL,
+    "created_at" TIMESTAMP,
+    "updated_at" TIMESTAMP,
+    PRIMARY KEY ("id_nopayment_paid")
+);
+
 CREATE SEQUENCE "spy_oauth_access_token_pk_seq";
 
 CREATE TABLE "spy_oauth_access_token"
@@ -1484,7 +1498,7 @@ CREATE TABLE "spy_oms_transition_log"
     "locked" BOOLEAN,
     "params" TEXT,
     "path" VARCHAR(256),
-    "quantity" INTEGER,
+    "quantity" DOUBLE PRECISION,
     "source_state" VARCHAR(128),
     "target_state" VARCHAR(128),
     "created_at" TIMESTAMP,
@@ -1574,7 +1588,7 @@ CREATE TABLE "spy_oms_product_reservation"
 (
     "id_oms_product_reservation" INTEGER NOT NULL,
     "fk_store" INTEGER,
-    "reservation_quantity" INTEGER DEFAULT 0 NOT NULL,
+    "reservation_quantity" DOUBLE PRECISION DEFAULT 0 NOT NULL,
     "sku" VARCHAR(255) NOT NULL,
     PRIMARY KEY ("id_oms_product_reservation"),
     CONSTRAINT "spy_oms_product_reservation-sku" UNIQUE ("sku","fk_store")
@@ -1587,7 +1601,7 @@ CREATE SEQUENCE "spy_oms_product_reservation_store_pk_seq";
 CREATE TABLE "spy_oms_product_reservation_store"
 (
     "id_oms_product_reservation_store" INTEGER NOT NULL,
-    "reservation_quantity" INTEGER NOT NULL,
+    "reservation_quantity" DOUBLE PRECISION NOT NULL,
     "sku" VARCHAR(255) NOT NULL,
     "store" VARCHAR(255) NOT NULL,
     "version" INT8 NOT NULL,
@@ -2003,7 +2017,7 @@ CREATE TABLE "spy_product_bundle"
     "id_product_bundle" INTEGER NOT NULL,
     "fk_bundled_product" INTEGER NOT NULL,
     "fk_product" INTEGER NOT NULL,
-    "quantity" INTEGER DEFAULT 1 NOT NULL,
+    "quantity" DOUBLE PRECISION DEFAULT 1 NOT NULL,
     "created_at" TIMESTAMP,
     "updated_at" TIMESTAMP,
     PRIMARY KEY ("id_product_bundle")
@@ -2120,13 +2134,12 @@ CREATE TABLE "spy_product_discontinued_storage"
     "id_product_discontinued_storage" INTEGER NOT NULL,
     "fk_product_discontinued" INTEGER NOT NULL,
     "data" TEXT,
+    "key" VARCHAR(255) NOT NULL,
     "locale" VARCHAR NOT NULL,
     "sku" VARCHAR(255) NOT NULL,
-    "key" VARCHAR,
     "created_at" TIMESTAMP,
     "updated_at" TIMESTAMP,
-    PRIMARY KEY ("id_product_discontinued_storage"),
-    CONSTRAINT "spy_product_discontinued_storage-unique-key" UNIQUE ("key")
+    PRIMARY KEY ("id_product_discontinued_storage")
 );
 
 CREATE INDEX "spy_product_discontinued_storage-fk_product_discontinued" ON "spy_product_discontinued_storage" ("fk_product_discontinued");
@@ -2457,9 +2470,9 @@ CREATE TABLE "spy_product_quantity"
 (
     "id_product_quantity" INTEGER NOT NULL,
     "fk_product" INTEGER NOT NULL,
-    "quantity_interval" INTEGER NOT NULL,
-    "quantity_max" INTEGER,
-    "quantity_min" INTEGER NOT NULL,
+    "quantity_interval" DOUBLE PRECISION NOT NULL,
+    "quantity_max" DOUBLE PRECISION,
+    "quantity_min" DOUBLE PRECISION NOT NULL,
     "created_at" TIMESTAMP,
     "updated_at" TIMESTAMP,
     PRIMARY KEY ("id_product_quantity"),
@@ -2905,7 +2918,7 @@ CREATE TABLE "spy_sales_order_item"
     "price" INTEGER DEFAULT 0,
     "price_to_pay_aggregation" INTEGER DEFAULT 0,
     "product_option_price_aggregation" INTEGER DEFAULT 0,
-    "quantity" INTEGER DEFAULT 1 NOT NULL,
+    "quantity" DOUBLE PRECISION DEFAULT 1 NOT NULL,
     "refundable_amount" INTEGER DEFAULT 0,
     "sku" VARCHAR(255) NOT NULL,
     "subtotal_aggregation" INTEGER,
@@ -3538,7 +3551,7 @@ CREATE TABLE "spy_stock_product"
     "fk_product" INTEGER NOT NULL,
     "fk_stock" INTEGER NOT NULL,
     "is_never_out_of_stock" BOOLEAN DEFAULT \'f\',
-    "quantity" INTEGER DEFAULT 0,
+    "quantity" DOUBLE PRECISION DEFAULT 0,
     PRIMARY KEY ("id_stock_product"),
     CONSTRAINT "spy_stock_product-unique-fk_stock" UNIQUE ("fk_stock","fk_product")
 );
@@ -3699,12 +3712,11 @@ CREATE SEQUENCE "unauthenticated_customer_access_storage_pk_seq";
 CREATE TABLE "spy_unauthenticated_customer_access_storage"
 (
     "id_unauthenticated_customer_access_storage" INTEGER NOT NULL,
+    "key" VARCHAR(255) NOT NULL,
     "data" TEXT,
-    "key" VARCHAR,
     "created_at" TIMESTAMP,
     "updated_at" TIMESTAMP,
-    PRIMARY KEY ("id_unauthenticated_customer_access_storage"),
-    CONSTRAINT "spy_unauthenticated_customer_access_storage-unique-key" UNIQUE ("key")
+    PRIMARY KEY ("id_unauthenticated_customer_access_storage")
 );
 
 CREATE SEQUENCE "spy_url_pk_seq";
@@ -4322,6 +4334,10 @@ ALTER TABLE "spy_newsletter_subscription" ADD CONSTRAINT "spy_newsletter_subscri
 ALTER TABLE "spy_newsletter_subscription" ADD CONSTRAINT "spy_newsletter_subscription-fk_newsletter_type"
     FOREIGN KEY ("fk_newsletter_type")
     REFERENCES "spy_newsletter_type" ("id_newsletter_type");
+
+ALTER TABLE "spy_nopayment_paid" ADD CONSTRAINT "spy_nopayment_paid-fk_sales_order_item"
+    FOREIGN KEY ("fk_sales_order_item")
+    REFERENCES "spy_sales_order_item" ("id_sales_order_item");
 
 ALTER TABLE "spy_oauth_access_token" ADD CONSTRAINT "spy_oauth_access_token-identifier"
     FOREIGN KEY ("fk_oauth_client")
@@ -5287,6 +5303,10 @@ DROP TABLE IF EXISTS "spy_newsletter_type" CASCADE;
 DROP SEQUENCE "spy_newsletter_type_pk_seq";
 
 DROP TABLE IF EXISTS "spy_newsletter_subscription" CASCADE;
+
+DROP TABLE IF EXISTS "spy_nopayment_paid" CASCADE;
+
+DROP SEQUENCE "spy_nopayment_paid_pk_seq";
 
 DROP TABLE IF EXISTS "spy_oauth_access_token" CASCADE;
 
