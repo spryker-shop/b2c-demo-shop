@@ -55,7 +55,7 @@
                 {% block price %}
                     <div class="col col--md-4 col--sm-12">
                         {% include molecule('money-price') with {
-                            modifiers: ['small'],
+                            modifiers: ['product'],
                             data: {
                                 amount: data.price,
                                 originalAmount: data.originalPrice is empty ? null : data.originalPrice
@@ -72,6 +72,5 @@
             {% block detail %}{% endblock %}
 
         {% endblock %}
-
     </div>
 {% endblock %}

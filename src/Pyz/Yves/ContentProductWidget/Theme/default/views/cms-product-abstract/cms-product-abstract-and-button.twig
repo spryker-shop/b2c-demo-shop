@@ -3,12 +3,14 @@
 } %}
 
 {% block content %}
-    <div class="grid grid--stretch product-list">
+    <div class="grid product-list">
         {% for productAbstractView in data.productAbstractViewCollection  if productAbstractView.available%}
             {% embed molecule('product-card') with {
                 class: 'col col--sm-6 col--md-6 col--lg-3',
+                modifiers: ['cms'],
                 data: {
-                    name: productAbstractView.name,                abstractId: productAbstractView.idProductAbstract,
+                    name: productAbstractView.name,
+                    abstractId: productAbstractView.idProductAbstract,
                     url: productAbstractView.url,
                     imageUrl: productAbstractView.images is empty ? '' : productAbstractView.images.0.externalUrlSmall,
                     price: productAbstractView.prices.DEFAULT | default(null),
@@ -18,11 +20,14 @@
                     sku: productAbstractView.sku,
                 },
             } only %}
-                {% block content %}
+                {% block body %}
                     {{ parent() }}
-                    <a href="{{ path('cart/add', {sku: embed.sku}) }}" class="button button--expand js-product-set__add-to-cart">
-                        {{ 'page.detail.add-to-cart' | trans }}
-                    </a>
+
+                    <div class="{{config.name}}__actions-container">
+                        <a href="{{ path('cart/add', {sku: embed.sku}) }}" class="button button--expand spacing-top js-product-set__add-to-cart">
+                            {{ 'page.detail.add-to-cart' | trans }}
+                        </a>
+                    </div>
                 {% endblock %}
             {% endembed %}
         {% endfor %}

@@ -9,12 +9,14 @@
         }
 
         a {
-            @include helper-effect-transition(color);
-            text-decoration: underline;
-            color: $setting-color-black;
+            &:not(.button) {
+                @include helper-effect-transition(color);
+                text-decoration: underline;
+                color: $setting-color-black;
 
-            &:hover {
-                color: $setting-color-alt;
+                &:hover {
+                    color: $setting-color-alt;
+                }
             }
         }
 
