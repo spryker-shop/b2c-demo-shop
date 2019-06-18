@@ -29,6 +29,7 @@ class AvailabilityPresentationTester extends Actor
 {
     use _generated\AvailabilityPresentationTesterActions;
 
+    public const FUJITSU_PRODUCT_ID = 118;
     public const FUJITSU_PRODUCT_PAGE = '/en/fujitsu-esprimo-e420-118';
     public const FUJITSU2_PRODUCT_PAGE = '/en/fujitsu-esprimo-e920-119';
     public const ADD_FUJITSU2_PRODUCT_TO_CART_URL = '/cart/add/119_29804808';
