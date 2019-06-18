@@ -36,7 +36,7 @@ export default class QuantityCounter extends Component {
         const value: number = +this.quantityInput.value;
 
         if (value > this.minQuantity) {
-            this.quantityInput.value = (value - 1).toString();
+            this.quantityInput.value = this.subtractQuantities(value, this.interval).toString();
 
             this.autoUpdateOnChange();
             this.triggerInputEvent();
@@ -47,11 +47,38 @@ export default class QuantityCounter extends Component {
         const value: number = Number(this.quantityInput.value);
 
         if (value < this.maxQuantity) {
-            this.quantityInput.value = (value + 1).toString();
+            this.quantityInput.value = this.sumQuantities(value, this.interval).toString();
 
             this.autoUpdateOnChange();
             this.triggerInputEvent();
         }
+    }
+
+    protected sumQuantities(firstQuantity: number, secondQuantity: number): string {
+        const resultQuantity = firstQuantity + secondQuantity;
+
+        return resultQuantity.toFixed(this.getMaxPrecision(firstQuantity, secondQuantity));
+    }
+
+    protected subtractQuantities(firstQuantity: number, secondQuantity: number): string {
+        const resultQuantity = firstQuantity - secondQuantity;
+
+        return resultQuantity.toFixed(this.getMaxPrecision(firstQuantity, secondQuantity));
+    }
+
+    protected getMaxPrecision(firstQuantity: number, secondQuantity: number): number {
+        return Math.max(this.getQuantityPrecision(firstQuantity), this.getQuantityPrecision(secondQuantity));
+    }
+
+    protected getQuantityPrecision(quantity: number): number {
+        const stringQuantity = quantity.toString();
+        const indexOfDecimalDelimiter = stringQuantity.indexOf('.');
+
+        if (indexOfDecimalDelimiter === -1) {
+            return 0;
+        }
+
+        return stringQuantity.substring(indexOfDecimalDelimiter + 1).length;
     }
 
     protected autoUpdateOnChange(): void {
@@ -93,5 +120,9 @@ export default class QuantityCounter extends Component {
 
     get getValue(): number {
         return +this.quantityInput.value;
+    }
+
+    get interval(): number {
+        return +this.quantityInput.step;
     }
 }

@@ -37,6 +37,7 @@ use Spryker\Zed\ProductPageSearch\Communication\Plugin\Event\Subscriber\ProductC
 use Spryker\Zed\ProductPageSearch\Communication\Plugin\Event\Subscriber\ProductConcretePageSearchProductEventSubscriber;
 use Spryker\Zed\ProductPageSearch\Communication\Plugin\Event\Subscriber\ProductConcretePageSearchProductLocalizedAttributesEventSubscriber;
 use Spryker\Zed\ProductPageSearch\Communication\Plugin\Event\Subscriber\ProductPageSearchEventSubscriber;
+use Spryker\Zed\ProductQuantityStorage\Communication\Plugin\Event\Subscriber\ProductQuantityStorageEventSubscriber;
 use Spryker\Zed\ProductRelationStorage\Communication\Plugin\Event\Subscriber\ProductRelationStorageEventSubscriber;
 use Spryker\Zed\ProductReviewSearch\Communication\Plugin\Event\Subscriber\ProductReviewSearchEventSubscriber;
 use Spryker\Zed\ProductReviewStorage\Communication\Plugin\Event\Subscriber\ProductReviewStorageEventSubscriber;
@@ -98,6 +99,7 @@ class EventDependencyProvider extends SprykerEventDependencyProvider
         $eventSubscriberCollection->add(new TaxProductStorageSubscriber());
 
         $eventSubscriberCollection->add(new AvailabilityNotificationSubscriber());
+        $eventSubscriberCollection->add(new ProductQuantityStorageEventSubscriber());
 
         /**
          * Search Events
