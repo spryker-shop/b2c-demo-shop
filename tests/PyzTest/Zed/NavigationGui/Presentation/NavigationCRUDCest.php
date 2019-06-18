@@ -118,7 +118,7 @@ class NavigationCRUDCest
         $i->switchToIFrame('navigation-node-form-iframe');
         $i->waitForJS('return document.readyState == "complete"');
         $i->switchToIFrame();
-        $i->waitForElement(NavigationGuiPresentationTester::NAVIGATION_ROW_ACTIVE_LINK_SELECTOR,static::ELEMENT_TIMEOUT);
+        $i->waitForElement(NavigationGuiPresentationTester::NAVIGATION_ROW_ACTIVE_LINK_SELECTOR, static::ELEMENT_TIMEOUT);
         $i->activateFirstNavigationRow();
         $i->waitForElementVisible(NavigationPage::PAGE_LIST_TABLE_XPATH, static::ELEMENT_TIMEOUT);
         $i->seeSuccessMessage(NavigationStatusTogglePage::MESSAGE_ACTIVE_SUCCESS);
@@ -143,7 +143,7 @@ class NavigationCRUDCest
         $i->switchToIFrame('navigation-node-form-iframe');
         $i->waitForJS('return document.readyState == "complete"');
         $i->switchToIFrame();
-        $i->waitForElement(NavigationGuiPresentationTester::NAVIGATION_DELETE_FORM_SELECTOR,static::ELEMENT_TIMEOUT);
+        $i->waitForElement(NavigationGuiPresentationTester::NAVIGATION_DELETE_FORM_SELECTOR, static::ELEMENT_TIMEOUT);
         $i->deleteFirstNavigationRow();
         $i->seeSuccessMessage(NavigationDeletePage::MESSAGE_SUCCESS);
         $i->seeCurrentUrlEquals(NavigationPage::URL);
