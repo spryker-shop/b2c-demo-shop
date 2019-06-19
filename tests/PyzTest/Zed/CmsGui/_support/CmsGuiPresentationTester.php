@@ -108,7 +108,7 @@ class CmsGuiPresentationTester extends Actor
      */
     public function expandLocalizedUrlPane()
     {
-        $this->click('//*[@id="tab-content-general"]/div/div[6]/div[1]/a');
+        $this->click('//*[@id="tab-content-general"]/div/div[7]/div[1]/a');
 
         return $this;
     }
