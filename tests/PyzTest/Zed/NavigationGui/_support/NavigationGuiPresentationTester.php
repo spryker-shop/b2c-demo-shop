@@ -53,6 +53,9 @@ class NavigationGuiPresentationTester extends Actor
     public const SWEET_ALERT_SELECTOR = '.sweet-alert';
     public const SWEET_ALERT_CONFIRM_SELECTOR = '.sweet-alert button.confirm';
     public const NODE_FORM_SELECTOR = 'form';
+    public const FLASH_MESSAGES_SELECTOR = '//div[@class="flash-messages"]/div';
+    public const NAVIGATION_DELETE_FORM_SELECTOR = '//*[@id="navigation-table"]/tbody/tr/td[5]/form[1]';
+    public const NAVIGATION_ROW_ACTIVE_LINK_SELECTOR = '//*[@id="navigation-table"]/tbody/tr[1]/td[5]/a[2]';
 
     /**
      * @param \Codeception\Scenario $scenario
@@ -133,7 +136,8 @@ class NavigationGuiPresentationTester extends Actor
      */
     public function seeSuccessMessage($expectedMessagePattern)
     {
-        $successMessage = $this->grabTextFrom('//div[@class="flash-messages"]/div');
+        $this->waitForElement(static::FLASH_MESSAGES_SELECTOR, 30);
+        $successMessage = $this->grabTextFrom(static::FLASH_MESSAGES_SELECTOR);
         $this->seeMatches($expectedMessagePattern, $successMessage);
 
         preg_match($expectedMessagePattern, $successMessage, $matches);
@@ -146,7 +150,7 @@ class NavigationGuiPresentationTester extends Actor
      */
     public function activateFirstNavigationRow()
     {
-        $this->click('//*[@id="navigation-table"]/tbody/tr[1]/td[5]/a[2]');
+        $this->click(static::NAVIGATION_ROW_ACTIVE_LINK_SELECTOR);
     }
 
     /**
@@ -154,7 +158,7 @@ class NavigationGuiPresentationTester extends Actor
      */
     public function deleteFirstNavigationRow()
     {
-        $this->submitForm('//*[@id="navigation-table"]/tbody/tr/td[5]/form[1]', []);
+        $this->submitForm(static::NAVIGATION_DELETE_FORM_SELECTOR, []);
     }
 
     /**
