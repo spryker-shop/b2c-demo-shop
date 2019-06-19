@@ -5,25 +5,14 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-namespace Pyz\Yves\CartPage;
+namespace Pyz\Yves\ProductDetailPage;
 
 use Spryker\Yves\Kernel\Container;
-use SprykerShop\Yves\CartPage\CartPageDependencyProvider as SprykerCartPageDependencyProvider;
-use SprykerShop\Yves\ProductBundleWidget\Plugin\CartPage\ProductBundleCartItemTransformerPlugin;
+use SprykerShop\Yves\ProductDetailPage\ProductDetailPageDependencyProvider as SprykerProductDetailPageDependencyProvider;
 
-class CartPageDependencyProvider extends SprykerCartPageDependencyProvider
+class ProductDetailPageDependencyProvider extends SprykerProductDetailPageDependencyProvider
 {
     public const CLIENT_PRODUCT_QUANTITY_STORAGE = 'CLIENT_PRODUCT_QUANTITY_STORAGE';
-
-    /**
-     * @return \SprykerShop\Yves\CartPage\Dependency\Plugin\CartItemTransformerPluginInterface[]
-     */
-    protected function getCartItemTransformerPlugins(): array
-    {
-        return [
-            new ProductBundleCartItemTransformerPlugin(),
-        ];
-    }
 
     /**
      * @param \Spryker\Yves\Kernel\Container $container
