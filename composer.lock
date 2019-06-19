@@ -218,20 +218,23 @@
         },
         {
             "name": "doctrine/lexer",
-            "version": "v1.0.1",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/lexer.git",
-                "reference": "83893c552fd2045dd78aef794c31e694c37c0b8c"
+                "reference": "1febd6c3ef84253d7c815bed85fc622ad207a9f8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/lexer/zipball/83893c552fd2045dd78aef794c31e694c37c0b8c",
-                "reference": "83893c552fd2045dd78aef794c31e694c37c0b8c",
+                "url": "https://api.github.com/repos/doctrine/lexer/zipball/1febd6c3ef84253d7c815bed85fc622ad207a9f8",
+                "reference": "1febd6c3ef84253d7c815bed85fc622ad207a9f8",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.5"
             },
             "type": "library",
             "extra": {
@@ -240,8 +243,8 @@
                 }
             },
             "autoload": {
-                "psr-0": {
-                    "Doctrine\\Common\\Lexer\\": "lib/"
+                "psr-4": {
+                    "Doctrine\\Common\\Lexer\\": "lib/Doctrine/Common/Lexer"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -262,13 +265,16 @@
                     "email": "schmittjoh@gmail.com"
                 }
             ],
-            "description": "Base library for a lexer that can be used in Top-Down, Recursive Descent Parsers.",
-            "homepage": "http://www.doctrine-project.org",
+            "description": "PHP Doctrine Lexer parser library that can be used in Top-Down, Recursive Descent Parsers.",
+            "homepage": "https://www.doctrine-project.org/projects/lexer.html",
             "keywords": [
+                "annotations",
+                "docblock",
                 "lexer",
-                "parser"
+                "parser",
+                "php"
             ],
-            "time": "2014-09-09T13:34:57+00:00"
+            "time": "2019-06-08T11:03:04+00:00"
         },
         {
             "name": "egulias/email-validator",
@@ -2462,16 +2468,17 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker-feature/content-item.git",
-                "reference": "047b4d054f86b51aa288f62b5dde9ace2ee84c4e"
+                "reference": "8946930fd48501c56e202df06af7eeab770a8bcd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker-feature/content-item/zipball/047b4d054f86b51aa288f62b5dde9ace2ee84c4e",
-                "reference": "047b4d054f86b51aa288f62b5dde9ace2ee84c4e",
+                "url": "https://api.github.com/repos/spryker-feature/content-item/zipball/8946930fd48501c56e202df06af7eeab770a8bcd",
+                "reference": "8946930fd48501c56e202df06af7eeab770a8bcd",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.1",
+                "spryker-feature/spryker-core": "^201906.0",
                 "spryker-shop/content-banner-widget": "^0.2.0",
                 "spryker-shop/content-product-set-widget": "^1.0.0",
                 "spryker-shop/content-product-widget": "^0.2.0",
@@ -2499,7 +2506,7 @@
                 "proprietary"
             ],
             "description": "Content Item [feature]",
-            "time": "2019-06-12T10:22:45+00:00"
+            "time": "2019-06-14T15:37:44+00:00"
         },
         {
             "name": "spryker-feature/customer-access",
@@ -10547,21 +10554,22 @@
         },
         {
             "name": "spryker/cms-block-gui",
-            "version": "2.2.0",
+            "version": "2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/cms-block-gui.git",
-                "reference": "6340cae1824b75737dca622d6d8919951b1e1bab"
+                "reference": "bfd1b746e11b8d99e58fdb7b8801179053f2e5bf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/cms-block-gui/zipball/6340cae1824b75737dca622d6d8919951b1e1bab",
-                "reference": "6340cae1824b75737dca622d6d8919951b1e1bab",
+                "url": "https://api.github.com/repos/spryker/cms-block-gui/zipball/bfd1b746e11b8d99e58fdb7b8801179053f2e5bf",
+                "reference": "bfd1b746e11b8d99e58fdb7b8801179053f2e5bf",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.1",
                 "spryker/cms-block": "^2.0.0",
+                "spryker/cms-block-gui-extension": "^1.0.0",
                 "spryker/gui": "^3.21.0",
                 "spryker/kernel": "^3.13.0",
                 "spryker/locale": "^3.0.0",
@@ -10594,7 +10602,46 @@
                 "proprietary"
             ],
             "description": "CmsBlockGui module",
-            "time": "2019-05-07T15:17:18+00:00"
+            "time": "2019-06-12T11:58:53+00:00"
+        },
+        {
+            "name": "spryker/cms-block-gui-extension",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/cms-block-gui-extension.git",
+                "reference": "ddfae6b92a7272f179e6911d824807a4d0a85c6f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/cms-block-gui-extension/zipball/ddfae6b92a7272f179e6911d824807a4d0a85c6f",
+                "reference": "ddfae6b92a7272f179e6911d824807a4d0a85c6f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/testify": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "CmsBlockGuiExtension module",
+            "time": "2019-05-27T10:14:13+00:00"
         },
         {
             "name": "spryker/cms-block-product-connector",
@@ -11097,22 +11144,23 @@
         },
         {
             "name": "spryker/cms-gui",
-            "version": "5.3.0",
+            "version": "5.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/cms-gui.git",
-                "reference": "e19efdd9345b7a377137514222bc403e06b9987b"
+                "reference": "088d3d4c2a522732fbd4c448d5a668e4d4d26185"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/cms-gui/zipball/e19efdd9345b7a377137514222bc403e06b9987b",
-                "reference": "e19efdd9345b7a377137514222bc403e06b9987b",
+                "url": "https://api.github.com/repos/spryker/cms-gui/zipball/088d3d4c2a522732fbd4c448d5a668e4d4d26185",
+                "reference": "088d3d4c2a522732fbd4c448d5a668e4d4d26185",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.1",
                 "spryker/application": "^3.2.0",
                 "spryker/cms": "^7.0.0",
+                "spryker/cms-gui-extension": "^1.0.0",
                 "spryker/glossary": "^3.0.0",
                 "spryker/gui": "^3.21.0",
                 "spryker/kernel": "^3.28.0",
@@ -11146,7 +11194,46 @@
                 "proprietary"
             ],
             "description": "CmsGui module",
-            "time": "2019-05-07T15:17:18+00:00"
+            "time": "2019-05-28T13:18:22+00:00"
+        },
+        {
+            "name": "spryker/cms-gui-extension",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/cms-gui-extension.git",
+                "reference": "d0b4dd119c7508efb274fb3eb5307411eae19384"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/cms-gui-extension/zipball/d0b4dd119c7508efb274fb3eb5307411eae19384",
+                "reference": "d0b4dd119c7508efb274fb3eb5307411eae19384",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/testify": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "CmsGuiExtension module",
+            "time": "2019-05-27T10:14:13+00:00"
         },
         {
             "name": "spryker/cms-navigation-connector",
@@ -11870,31 +11957,36 @@
         },
         {
             "name": "spryker/content-gui",
-            "version": "2.0.0",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/content-gui.git",
-                "reference": "9063cdd2d435fed8d28c342b56c34acdc400b5e0"
+                "reference": "94da7182688a12371f438b9ba2073c61ba019f86"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/content-gui/zipball/9063cdd2d435fed8d28c342b56c34acdc400b5e0",
-                "reference": "9063cdd2d435fed8d28c342b56c34acdc400b5e0",
+                "url": "https://api.github.com/repos/spryker/content-gui/zipball/94da7182688a12371f438b9ba2073c61ba019f86",
+                "reference": "94da7182688a12371f438b9ba2073c61ba019f86",
                 "shasum": ""
             },
             "require": {
+                "ext-libxml": "*",
                 "php": ">=7.1",
+                "spryker/cms-block-gui-extension": "^1.0.0",
+                "spryker/cms-gui-extension": "^1.0.0",
                 "spryker/content": "^2.0.0",
                 "spryker/content-gui-extension": "^1.1.0",
                 "spryker/gui": "^3.21.0",
                 "spryker/kernel": "^3.32.0",
                 "spryker/locale": "^3.2.0",
                 "spryker/symfony": "^3.2.0",
+                "spryker/translator": "^1.1.0",
                 "spryker/util-encoding": "^2.1.0",
                 "spryker/util-text": "^1.2.1"
             },
             "require-dev": {
                 "spryker/code-sniffer": "*",
+                "spryker/propel": "*",
                 "spryker/testify": "*"
             },
             "type": "library",
@@ -11913,7 +12005,7 @@
                 "proprietary"
             ],
             "description": "ContentGui module",
-            "time": "2019-06-07T09:39:10+00:00"
+            "time": "2019-06-14T15:15:46+00:00"
         },
         {
             "name": "spryker/content-gui-extension",
@@ -12418,16 +12510,16 @@
         },
         {
             "name": "spryker/currency",
-            "version": "3.7.1",
+            "version": "3.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/currency.git",
-                "reference": "118220888f0e803ff54d16d7424ff9d7d060c76e"
+                "reference": "b434717d54a6d8200cc4b5a1f6d8dd3fae4bd3f9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/currency/zipball/118220888f0e803ff54d16d7424ff9d7d060c76e",
-                "reference": "118220888f0e803ff54d16d7424ff9d7d060c76e",
+                "url": "https://api.github.com/repos/spryker/currency/zipball/b434717d54a6d8200cc4b5a1f6d8dd3fae4bd3f9",
+                "reference": "b434717d54a6d8200cc4b5a1f6d8dd3fae4bd3f9",
                 "shasum": ""
             },
             "require": {
@@ -12474,7 +12566,7 @@
                 "proprietary"
             ],
             "description": "Currency module",
-            "time": "2019-05-30T12:49:50+00:00"
+            "time": "2019-06-12T13:57:04+00:00"
         },
         {
             "name": "spryker/currency-extension",
@@ -14813,16 +14905,16 @@
         },
         {
             "name": "spryker/gui",
-            "version": "3.21.0",
+            "version": "3.22.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/gui.git",
-                "reference": "7f1bc21f061a5771900c6c64b62b216fd17d7364"
+                "reference": "dc86034a042e6ffb7ed1d4fb998e15f413d70ffd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/gui/zipball/7f1bc21f061a5771900c6c64b62b216fd17d7364",
-                "reference": "7f1bc21f061a5771900c6c64b62b216fd17d7364",
+                "url": "https://api.github.com/repos/spryker/gui/zipball/dc86034a042e6ffb7ed1d4fb998e15f413d70ffd",
+                "reference": "dc86034a042e6ffb7ed1d4fb998e15f413d70ffd",
                 "shasum": ""
             },
             "require": {
@@ -14863,7 +14955,7 @@
                 "proprietary"
             ],
             "description": "Gui module",
-            "time": "2019-05-07T14:37:08+00:00"
+            "time": "2019-06-17T12:35:54+00:00"
         },
         {
             "name": "spryker/guzzle",
@@ -25051,16 +25143,16 @@
         },
         {
             "name": "spryker/util-text",
-            "version": "1.2.2",
+            "version": "1.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/util-text.git",
-                "reference": "66c41978d9a3daf19105ccc96e608733ebf4bf32"
+                "reference": "b7b7d3c87fec6270aa69a88dae9b2d1bf5d1213e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/util-text/zipball/66c41978d9a3daf19105ccc96e608733ebf4bf32",
-                "reference": "66c41978d9a3daf19105ccc96e608733ebf4bf32",
+                "url": "https://api.github.com/repos/spryker/util-text/zipball/b7b7d3c87fec6270aa69a88dae9b2d1bf5d1213e",
+                "reference": "b7b7d3c87fec6270aa69a88dae9b2d1bf5d1213e",
                 "shasum": ""
             },
             "require": {
@@ -25087,7 +25179,7 @@
                 "proprietary"
             ],
             "description": "UtilText module",
-            "time": "2019-02-22T13:42:25+00:00"
+            "time": "2019-06-04T10:09:31+00:00"
         },
         {
             "name": "spryker/util-uuid-generator",

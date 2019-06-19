@@ -14,7 +14,8 @@ use SprykerShop\Yves\ContentProductWidget\Twig\ContentProductAbstractListTwigFun
  */
 class ContentProductAbstractListTwigFunction extends SprykerContentProductAbstractListTwigFunction
 {
-    protected const WIDGET_TEMPLATE_IDENTIFIER_BUTTON = 'with-button';
+    protected const WIDGET_TEMPLATE_IDENTIFIER_SLIDER_WITH_BUTTON = 'slider-with-button';
+    protected const WIDGET_TEMPLATE_IDENTIFIER_SLIDER = 'slider';
 
         /**
          * @return array
@@ -24,7 +25,8 @@ class ContentProductAbstractListTwigFunction extends SprykerContentProductAbstra
         return array_merge(
             parent::getAvailableTemplates(),
             [
-                static::WIDGET_TEMPLATE_IDENTIFIER_BUTTON => '@ContentProductWidget/views/cms-product-abstract/cms-product-abstract-and-button.twig',
+                static::WIDGET_TEMPLATE_IDENTIFIER_SLIDER_WITH_BUTTON => '@ContentProductWidget/views/cms-product-abstract-and-button/cms-product-abstract-and-button.twig',
+                static::WIDGET_TEMPLATE_IDENTIFIER_SLIDER => '@ContentProductWidget/views/cms-product-abstract/cms-product-abstract.twig',
             ]
         );
     }
