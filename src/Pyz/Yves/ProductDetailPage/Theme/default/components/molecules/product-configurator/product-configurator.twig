@@ -88,9 +88,9 @@
                 data: {
                     title: 'cart.item_quantity' | trans,
                     isToggler: false,
-                    minQuantity: data.minQuantity,
-                    maxQuantity: data.maxQuantity,
-                    quantityInterval: data.quantityInterval,
+                    minQuantity: data.product.quantityMin ?? 1,
+                    maxQuantity: data.product.quantityMax,
+                    quantityInterval: data.product.quantityInterval ?? 1,
                     value: data.minQuantity,
                 }
             } only %}

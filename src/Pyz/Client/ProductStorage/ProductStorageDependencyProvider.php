@@ -14,6 +14,7 @@ use Spryker\Client\ProductDiscontinuedStorage\Plugin\ProductStorage\ProductDisco
 use Spryker\Client\ProductDiscontinuedStorage\Plugin\ProductStorage\ProductViewDiscontinuedOptionsExpanderPlugin;
 use Spryker\Client\ProductImageStorage\Plugin\ProductViewImageExpanderPlugin;
 use Spryker\Client\ProductQuantityStorage\Plugin\ProductStorage\ProductConcreteTransferQuantityRestrictionExpanderPlugin;
+use Spryker\Client\ProductQuantityStorage\Plugin\ProductStorage\ProductViewQuantityRestrictionExpanderPlugin;
 use Spryker\Client\ProductStorage\Plugin\ProductViewVariantExpanderPlugin;
 use Spryker\Client\ProductStorage\ProductStorageDependencyProvider as SprykerProductStorageDependencyProvider;
 
@@ -33,6 +34,7 @@ class ProductStorageDependencyProvider extends SprykerProductStorageDependencyPr
             new ProductViewImageExpanderPlugin(),
             new ProductDiscontinuedProductAvailabilityExpanderPlugin(),
             new BundleProductsExpanderPlugin(),
+            new ProductViewQuantityRestrictionExpanderPlugin(),
         ];
 
         return $plugins;
