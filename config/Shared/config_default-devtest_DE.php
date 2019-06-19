@@ -19,8 +19,10 @@ use Spryker\Shared\Search\SearchConstants;
 use Spryker\Shared\Session\SessionConstants;
 use Spryker\Shared\ZedRequest\ZedRequestConstants;
 
+$domain = getenv('VM_PROJECT') ?: 'suite';
+
 // ---------- Yves host
-$config[ApplicationConstants::HOST_YVES] = 'www-test.de.suite.local';
+$config[ApplicationConstants::HOST_YVES] = sprintf('www-test.de.%s.local', $domain);
 $config[ApplicationConstants::PORT_YVES] = '';
 $config[ApplicationConstants::PORT_SSL_YVES] = '';
 $config[ApplicationConstants::BASE_URL_YVES] = sprintf(
@@ -38,7 +40,7 @@ $config[NewsletterConstants::BASE_URL_YVES] = $config[ApplicationConstants::BASE
 $config[CustomerConstants::BASE_URL_YVES] = $config[ApplicationConstants::BASE_URL_YVES];
 
 // ---------- Zed host
-$config[ApplicationConstants::HOST_ZED] = 'zed-test.de.suite.local';
+$config[ApplicationConstants::HOST_ZED] = sprintf('zed-test.de.%s.local', $domain);
 $config[ApplicationConstants::PORT_ZED] = '';
 $config[ApplicationConstants::PORT_SSL_ZED] = '';
 $config[ApplicationConstants::BASE_URL_ZED] = sprintf(
