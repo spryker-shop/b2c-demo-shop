@@ -118,16 +118,14 @@ class DataImportBusinessFactory extends SprykerDataImportBusinessFactory
             ->addDataImporter($this->createProductSearchAttributeImporter())
             ->addDataImporter($this->createCmsTemplateImporter())
             ->addDataImporter($this->createCmsBlockImporter())
+            ->addDataImporter($this->createCmsBlockStoreImporter())
+            ->addDataImporter($this->createCmsBlockCategoryPositionImporter())
+            ->addDataImporter($this->createCmsBlockCategoryImporter())
             ->addDataImporter($this->createDiscountAmountImporter())
             ->addDataImporter($this->createAbstractGiftCardConfigurationImporter())
             ->addDataImporter($this->createConcreteGiftCardConfigurationImporter());
 
         $dataImporterCollection->addDataImporterPlugins($this->getDataImporterPlugins());
-
-        $dataImporterCollection->addDataImporter($this->createCmsBlockImporter())
-            ->addDataImporter($this->createCmsBlockStoreImporter())
-            ->addDataImporter($this->createCmsBlockCategoryPositionImporter())
-            ->addDataImporter($this->createCmsBlockCategoryImporter());
 
         $dataImporterCollection
             ->addDataImporter($this->createNavigationImporter())
@@ -252,6 +250,7 @@ class DataImportBusinessFactory extends SprykerDataImportBusinessFactory
             ->addStep($this->createLocalizedAttributesExtractorStep([
                 CmsBlockWriterStep::KEY_PLACEHOLDER_TITLE,
                 CmsBlockWriterStep::KEY_PLACEHOLDER_DESCRIPTION,
+                CmsBlockWriterStep::KEY_PLACEHOLDER_CONTENT,
                 CmsBlockWriterStep::KEY_PLACEHOLDER_LINK,
             ]))
             ->addStep(new CmsBlockWriterStep(

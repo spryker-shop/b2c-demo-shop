@@ -9,6 +9,8 @@ namespace Pyz\Zed\ContentGui;
 
 use Spryker\Zed\ContentBannerGui\Communication\Plugin\ContentGui\ContentBannerContentGuiEditorPlugin;
 use Spryker\Zed\ContentBannerGui\Communication\Plugin\ContentGui\ContentBannerFormPlugin;
+use Spryker\Zed\ContentFileGui\Communication\Plugin\ContentGui\ContentFileListContentGuiEditorPlugin;
+use Spryker\Zed\ContentFileGui\Communication\Plugin\ContentGui\ContentFileListFormPlugin;
 use Spryker\Zed\ContentGui\ContentGuiDependencyProvider as SprykerContentGuiDependencyProvider;
 use Spryker\Zed\ContentProductGui\Communication\Plugin\ContentGui\ContentProductContentGuiEditorPlugin;
 use Spryker\Zed\ContentProductGui\Communication\Plugin\ContentGui\ProductAbstractListFormPlugin;
@@ -26,6 +28,7 @@ class ContentGuiDependencyProvider extends SprykerContentGuiDependencyProvider
             new ContentBannerFormPlugin(),
             new ProductAbstractListFormPlugin(),
             new ProductSetFormPlugin(),
+            new ContentFileListFormPlugin(),
         ];
     }
 
@@ -38,6 +41,7 @@ class ContentGuiDependencyProvider extends SprykerContentGuiDependencyProvider
             new ContentBannerContentGuiEditorPlugin(),
             new ContentProductContentGuiEditorPlugin(),
             new ContentProductSetGuiEditorPlugin(),
+            new ContentFileListContentGuiEditorPlugin(),
         ];
     }
 }
