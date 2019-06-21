@@ -105,10 +105,9 @@
 
     <div class="container__inner">
         {% include molecule('product-cms-block', 'CmsBlockWidget') ignore missing with {
-            class: 'box',
             data: {
-                idProductAbstract: data.product.idProductAbstract
-            }
+                idProductAbstract: data.product.idProductAbstract,
+            },
         } only %}
     </div>
 {% endblock %}

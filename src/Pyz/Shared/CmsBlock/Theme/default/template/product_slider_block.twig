@@ -2,22 +2,19 @@
     <!-- CMS_BLOCK_PLACEHOLDER : "title" -->
     <!-- CMS_BLOCK_PLACEHOLDER : "content" -->
     <!-- CMS_BLOCK_PLACEHOLDER : "link" -->
+
+    {% set link = spyCmsBlockPlaceholder('link') %}
+
     <div class="container">
-        <div class="title title--h2 title--regular">
-            <div class="product-slider-title">
-                <h1 class="title title--h2 title--regular">{{ spyCmsBlockPlaceholder('title') | raw }}</h1>
-                {% set link = spyCmsBlockPlaceholder('link') %}
-                {% if link %}
+        <div class="product-slider-title">
+            <h1 class="title title--h2 title--regular">{{ spyCmsBlockPlaceholder('title') | raw }}</h1>
+            {% if link %}
                 <div class="product-slider-title__sub-col is-hidden-sm-md">{{ link | raw }}</div>
-                {% endif %}
-            </div>
+            {% endif %}
         </div>
-    </div>
-    <div class="container">
+
         <div class="grid grid--justify">
             {{ spyCmsBlockPlaceholder('content') | raw }}
         </div>
     </div>
-
 {% endblock %}
-

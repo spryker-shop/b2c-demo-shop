@@ -1,10 +1,12 @@
 {% block content %}
     <!-- CMS_BLOCK_PLACEHOLDER : "title" -->
     <!-- CMS_BLOCK_PLACEHOLDER : "content" -->
+
+    {% set title = spyCmsBlockPlaceholder('title') %}
+
     {% if title %}
         <h5 class="title title--catalog-cms title--medium">{{ title | raw }}</h5>
     {% endif %}
     {{ spyCmsBlockPlaceholder('content') | raw }}
-
 {% endblock %}
 
