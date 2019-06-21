@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<transfers xmlns="spryker:transfer-01"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="spryker:transfer-01 http://static.spryker.com/transfer-01.xsd">
+
+    <transfer name="QuoteUpdateRequestAttributes">
+        <property name="isLocked" type="bool"/>
+        <property name="voucherDiscounts" type="Discount[]" singular="voucherDiscount"/>
+        <property name="expenses" type="Expense[]" singular="expense"/>
+        <property name="promotionItems" type="PromotionItem[]" singular="promotionItem"/>
+        <property name="totals" type="Totals" />
+    </transfer>
+
+    <transfer name="Discount">
+        <property name="idDiscount" type="int" />
+    </transfer>
+
+    <transfer name="Expense">
+        <property name="idSalesExpense" type="int" />
+    </transfer>
+
+    <transfer name="PromotionItem">
+        <property name="idDiscountPromotion" type="int" />
+    </transfer>
+
+    <transfer name="Totals">
+        <property name="grandTotal" type="int" />
+    </transfer>
+
+</transfers>

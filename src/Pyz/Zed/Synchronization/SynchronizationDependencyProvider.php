@@ -45,6 +45,8 @@ use Spryker\Zed\ProductSetStorage\Communication\Plugin\Synchronization\ProductSe
 use Spryker\Zed\ProductStorage\Communication\Plugin\Synchronization\ProductAbstractSynchronizationDataPlugin;
 use Spryker\Zed\ProductStorage\Communication\Plugin\Synchronization\ProductConcreteSynchronizationDataPlugin;
 use Spryker\Zed\Synchronization\SynchronizationDependencyProvider as SprykerSynchronizationDependencyProvider;
+use Spryker\Zed\TaxProductStorage\Communication\Plugin\Synchronization\TaxProductSynchronizationDataPlugin;
+use Spryker\Zed\TaxStorage\Communication\Plugin\Synchronization\TaxSynchronizationDataPlugin;
 use Spryker\Zed\UrlStorage\Communication\Plugin\Synchronization\UrlRedirectSynchronizationDataPlugin;
 use Spryker\Zed\UrlStorage\Communication\Plugin\Synchronization\UrlSynchronizationDataPlugin;
 
@@ -95,6 +97,8 @@ class SynchronizationDependencyProvider extends SprykerSynchronizationDependency
             new ProductConcretePageSynchronizationDataPlugin(),
             new ProductAlternativeSynchronizationDataPlugin(),
             new ProductReplacementForSynchronizationDataPlugin(),
+            new TaxSynchronizationDataPlugin(),
+            new TaxProductSynchronizationDataPlugin(),
         ];
     }
 }

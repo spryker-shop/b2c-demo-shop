@@ -25,6 +25,8 @@ use Spryker\Shared\Log\LogConstants;
 use Spryker\Shared\PriceProductStorage\PriceProductStorageConstants;
 use Spryker\Shared\ProductPageSearch\ProductPageSearchConstants;
 use Spryker\Shared\ProductStorage\ProductStorageConstants;
+use Spryker\Shared\TaxProductStorage\TaxProductStorageConfig;
+use Spryker\Shared\TaxStorage\TaxStorageConfig;
 use Spryker\Shared\UrlStorage\UrlStorageConstants;
 
 class RabbitMqConfig extends SprykerRabbitMqConfig
@@ -50,6 +52,8 @@ class RabbitMqConfig extends SprykerRabbitMqConfig
         $queueOptionCollection->append($this->createQueueOption(CmsPageSearchConstants::CMS_SYNC_SEARCH_QUEUE, CmsPageSearchConstants::CMS_SYNC_SEARCH_ERROR_QUEUE));
         $queueOptionCollection->append($this->createQueueOption(ProductPageSearchConstants::PRODUCT_SYNC_SEARCH_QUEUE, ProductPageSearchConstants::PRODUCT_SYNC_SEARCH_ERROR_QUEUE));
         $queueOptionCollection->append($this->createQueueOption(FileManagerStorageConstants::FILE_SYNC_STORAGE_QUEUE, FileManagerStorageConstants::FILE_SYNC_STORAGE_ERROR_QUEUE));
+        $queueOptionCollection->append($this->createQueueOption(TaxStorageConfig::TAX_SET_SYNC_STORAGE_QUEUE, TaxStorageConfig::TAX_SET_SYNC_STORAGE_ERROR_QUEUE));
+        $queueOptionCollection->append($this->createQueueOption(TaxProductStorageConfig::PRODUCT_ABSTRACT_TAX_SET_SYNC_STORAGE_QUEUE, TaxProductStorageConfig::PRODUCT_ABSTRACT_TAX_SET_SYNC_STORAGE_ERROR_QUEUE));
 
         $queueOptionCollection->append(
             $this->createQueueOption(
