@@ -17,10 +17,13 @@ use Spryker\Shared\Queue\QueueConstants;
 use Spryker\Shared\RabbitMq\RabbitMqEnv;
 use Spryker\Shared\Search\SearchConstants;
 use Spryker\Shared\Session\SessionConstants;
+use Spryker\Shared\SessionRedis\SessionRedisConstants;
 use Spryker\Shared\ZedRequest\ZedRequestConstants;
 
+$domain = getenv('VM_PROJECT') ?: 'suite';
+
 // ---------- Yves host
-$config[ApplicationConstants::HOST_YVES] = 'www-test.de.suite.local';
+$config[ApplicationConstants::HOST_YVES] = sprintf('www-test.de.%s.local', $domain);
 $config[ApplicationConstants::PORT_YVES] = '';
 $config[ApplicationConstants::PORT_SSL_YVES] = '';
 $config[ApplicationConstants::BASE_URL_YVES] = sprintf(
@@ -38,7 +41,7 @@ $config[NewsletterConstants::BASE_URL_YVES] = $config[ApplicationConstants::BASE
 $config[CustomerConstants::BASE_URL_YVES] = $config[ApplicationConstants::BASE_URL_YVES];
 
 // ---------- Zed host
-$config[ApplicationConstants::HOST_ZED] = 'zed-test.de.suite.local';
+$config[ApplicationConstants::HOST_ZED] = sprintf('zed-test.de.%s.local', $domain);
 $config[ApplicationConstants::PORT_ZED] = '';
 $config[ApplicationConstants::PORT_SSL_ZED] = '';
 $config[ApplicationConstants::BASE_URL_ZED] = sprintf(
@@ -119,4 +122,5 @@ $config[EventConstants::EVENT_CHUNK] = 5000;
 // ---------- Session
 $config[SessionConstants::YVES_SESSION_COOKIE_DOMAIN] = $config[ApplicationConstants::HOST_YVES];
 $config[SessionConstants::ZED_SESSION_COOKIE_NAME] = $config[ApplicationConstants::HOST_ZED];
-$config[SessionConstants::YVES_SESSION_REDIS_DATABASE] = 5;
+$config[SessionRedisConstants::YVES_SESSION_REDIS_DATABASE] = 5;
+$config[SessionRedisConstants::ZED_SESSION_REDIS_DATABASE] = $config[SessionRedisConstants::YVES_SESSION_REDIS_DATABASE];

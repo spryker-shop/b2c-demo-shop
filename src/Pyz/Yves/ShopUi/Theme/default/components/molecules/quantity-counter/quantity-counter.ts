@@ -93,7 +93,7 @@ export default class QuantityCounter extends Component {
 
     protected timer(): void {
         clearTimeout(this.timeout);
-        this.timeout = setTimeout(() => {
+        this.timeout = window.setTimeout(() => {
             if (this.value !== this.getValue) {
                 this.quantityInput.form.submit();
             }

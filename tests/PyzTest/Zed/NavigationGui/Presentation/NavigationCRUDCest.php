@@ -7,6 +7,7 @@
 
 namespace PyzTest\Zed\NavigationGui\Presentation;
 
+use Facebook\WebDriver\Remote\RemoteWebElement;
 use PyzTest\Zed\NavigationGui\NavigationGuiPresentationTester;
 use PyzTest\Zed\NavigationGui\PageObject\NavigationCreatePage;
 use PyzTest\Zed\NavigationGui\PageObject\NavigationDeletePage;
@@ -25,6 +26,8 @@ use PyzTest\Zed\NavigationGui\PageObject\NavigationUpdatePage;
  */
 class NavigationCRUDCest
 {
+    public const ELEMENT_TIMEOUT = 5;
+
     /**
      * @param \PyzTest\Zed\NavigationGui\NavigationGuiPresentationTester $i
      *
@@ -76,7 +79,7 @@ class NavigationCRUDCest
         $i->wantTo('See navigation list.');
         $i->expect('Navigation table is shown and not empty');
 
-        $i->waitForElementVisible(NavigationPage::PAGE_LIST_TABLE_XPATH, 5);
+        $i->waitForElementVisible(NavigationPage::PAGE_LIST_TABLE_XPATH, static::ELEMENT_TIMEOUT);
     }
 
     /**
@@ -107,10 +110,17 @@ class NavigationCRUDCest
     {
         $i->wantTo('Activate navigation.');
         $i->expect('New navigation status persisted in Zed.');
-
         $i->amOnPage(NavigationPage::URL);
-        $i->waitForElementVisible(NavigationPage::PAGE_LIST_TABLE_XPATH, 5);
+        $i->waitForElementVisible(NavigationPage::PAGE_LIST_TABLE_XPATH, static::ELEMENT_TIMEOUT);
+        $i->waitForElementChange('html', function (RemoteWebElement $el) {
+            return $el->getText();
+        });
+        $i->switchToIFrame('navigation-node-form-iframe');
+        $i->waitForJS('return document.readyState == "complete"');
+        $i->switchToIFrame();
+        $i->waitForElement(NavigationGuiPresentationTester::NAVIGATION_ROW_ACTIVE_LINK_SELECTOR, static::ELEMENT_TIMEOUT);
         $i->activateFirstNavigationRow();
+        $i->waitForElementVisible(NavigationPage::PAGE_LIST_TABLE_XPATH, static::ELEMENT_TIMEOUT);
         $i->seeSuccessMessage(NavigationStatusTogglePage::MESSAGE_ACTIVE_SUCCESS);
         $i->seeCurrentUrlEquals(NavigationPage::URL);
     }
@@ -126,8 +136,14 @@ class NavigationCRUDCest
         $i->expect('Navigation is removed from Zed.');
 
         $i->amOnPage(NavigationPage::URL);
-        $i->waitForElementVisible(NavigationPage::PAGE_LIST_TABLE_XPATH, 5);
-        $i->wait(1); // TODO: remove "wait" once flash messages show up consistently.
+        $i->waitForElementVisible(NavigationPage::PAGE_LIST_TABLE_XPATH, static::ELEMENT_TIMEOUT);
+        $i->waitForElementChange('html', function (RemoteWebElement $el) {
+            return $el->getText();
+        });
+        $i->switchToIFrame('navigation-node-form-iframe');
+        $i->waitForJS('return document.readyState == "complete"');
+        $i->switchToIFrame();
+        $i->waitForElement(NavigationGuiPresentationTester::NAVIGATION_DELETE_FORM_SELECTOR, static::ELEMENT_TIMEOUT);
         $i->deleteFirstNavigationRow();
         $i->seeSuccessMessage(NavigationDeletePage::MESSAGE_SUCCESS);
         $i->seeCurrentUrlEquals(NavigationPage::URL);
