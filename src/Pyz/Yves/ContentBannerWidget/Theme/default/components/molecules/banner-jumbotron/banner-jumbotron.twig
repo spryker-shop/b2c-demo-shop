@@ -7,24 +7,19 @@
 
 {% define data = {
     banner: banner,
+    isBannerClickable: isBannerClickable | default(true),
 } %}
 
 {% block body %}
-    <pre>{{ dump(data.banner.clickUrl) }}</pre>
     {% set backgroundImage = data.banner.imageUrl ? 'background-image: url(' ~ data.banner.imageUrl ~ ');' %}
 
     <div class="{{ config.name }}__container grid grid--center grid--middle" style="{{ backgroundImage }}">
-        {% if data.banner.clickUrl is defined %}
+        {% if data.isBannerClickable is defined %}
             <a href="{{ data.banner.clickUrl }}" class="{{ config.name }}__link"></a>
         {% endif %}
         <div class="col col--sm-12">
-            <div class="{{ config.name }}__title">
-                <h1>{{ data.banner.title | raw }}</h1>
-            </div>
-
-            <div class="{{ config.name }}__text">
-                <p>{{ data.banner.subtitle | raw }}</p>
-            </div>
+            <h1 class="{{ config.name }}__title">{{ data.banner.title | raw }}</h1>
+            <p class="{{ config.name }}__text">{{ data.banner.subtitle | raw }}</p>
         </div>
     </div>
 {% endblock %}

@@ -1,12 +1,12 @@
 {% define data = {
     banner: banner,
 } %}
-{% block content %}
+
+{% block body %}
     {% include molecule('banner-jumbotron', 'ContentBannerWidget') with {
-        banner: {
-            imageUrl: data.banner.imageUrl,
-            title: data.banner.title,
-            subtitle: data.banner.subtitle
-        }
+        data: {
+            banner: data.banner,
+            isBannerClickable: false,
+        },
     } only %}
 {% endblock %}
