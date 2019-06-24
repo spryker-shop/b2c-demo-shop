@@ -13,10 +13,10 @@
                 name: productAbstractView.name,
                 abstractId: productAbstractView.idProductAbstract,
                 url: productAbstractView.url,
-                imageUrl: productAbstractView.images is empty ? '' : productAbstractView.images.0.externalUrlSmall,
+                imageUrl: productAbstractView.images ? productAbstractView.images.0.externalUrlSmall,
                 price: productAbstractView.prices.DEFAULT | default(null),
-                originalPrice: productAbstractView.prices.ORIGINAL is defined ? productAbstractView.prices.ORIGINAL : null
-            }
+                originalPrice: productAbstractView.prices.ORIGINAL is defined ? productAbstractView.prices.ORIGINAL : null,
+            },
         } only %}
     {% endfor %}
     </div>
