@@ -12,20 +12,20 @@
             name: data.productSet.name,
             description: data.productSet.description,
             images: data.productSet.imageSets.0.images | default([]),
-        }
+        },
     } only %}
         {% block header %}
             {% block title %}
                 {% include molecule('product-slider-title') with {
                     modifiers: ['set'],
                     data: {
-                        title: data.name
-                    }
+                        title: data.name,
+                    },
                 } only %}
             {% endblock %}
 
             {% block description %}
-                {% if data.description is not empty %}
+                {% if data.description %}
                     <p>{{ data.description }}</p>
                 {% endif %}
             {% endblock %}
@@ -39,9 +39,9 @@
                     },
                     attributes: {
                         'data-json': data.sliderConfig,
-                        'custom-select-selector': '.custom-select'
+                        'custom-select-selector': '.custom-select',
                     },
-                    modifiers: ['product-set', 'product-set-secondary']
+                    modifiers: ['product-set', 'product-set-secondary'],
                 } only %}
 
                     {% block slides %}
@@ -49,17 +49,16 @@
                             {% embed molecule('product-card') with {
                                 modifiers: ['stretch', 'product-set', 'widget'],
                                 data: {
-                                    product: product,
                                     name: product.name,
                                     abstractId: product.idProductAbstract,
                                     url: product.url,
                                     imageUrl: product.images.0.externalUrlSmall | default,
                                     price: product.price,
-                                    originalPrice: product.prices['ORIGINAL'] | default
+                                    originalPrice: product.prices['ORIGINAL'] | default,
                                 },
                                 embed: {
-                                    product: product
-                                }
+                                    product: product,
+                                },
                             } only %}
                                 {% block content %}
                                     {{parent()}}
@@ -70,9 +69,9 @@
                                             superAttributes: embed.product.attributeMap.superAttributes,
                                             selectedAttributes: embed.product.selectedAttributes,
                                             availableAttributes: embed.product.availableAttributes,
-                                            useExternalForm: true
+                                            useExternalForm: true,
                                         },
-                                        embed: embed
+                                        embed: embed,
                                     } only %}
                                         {% block variant %}
                                             {% include molecule('variant', 'ProductDetailPage') with {
@@ -83,8 +82,8 @@
                                                     selectedValue: selectedValue,
                                                     label: ('product.attribute.' ~ name) | trans,
                                                     isAvailable: isAvailable,
-                                                    autoInitSelect: true
-                                                }
+                                                    autoInitSelect: true,
+                                                },
                                             } only %}
                                         {% endblock %}
                                     {% endembed %}
@@ -96,8 +95,8 @@
             </form>
             {% include molecule('action-single-click-enforcer') with {
                 attributes: {
-                    'target-selector': '.js-product-set__add-to-cart'
-                }
+                    'target-selector': '.js-product-set__add-to-cart',
+                },
             } only %}
             <form method="POST" action="{{ path('cart/add-items') }}">
                 {% set isDisabled = false %}
@@ -105,8 +104,8 @@
                 {% for product in data.products %}
                     {% if product.idProductConcrete is not empty %}
                         {% if product.available %}
-                            <input type="hidden" name="items[{{ loop.index }}][sku]" value="{{ product.sku }}" />
-                            <input type="hidden" name="items[{{ loop.index }}][quantity]" value="1" />
+                            <input type="hidden" name="items[{{ loop.index }}][sku]" value="{{ product.sku }}">
+                            <input type="hidden" name="items[{{ loop.index }}][quantity]" value="1">
                         {% endif %}
                     {% else %}
                         {% set isDisabled = true %}
@@ -116,10 +115,8 @@
                 <button type="submit" class="button button--expand" data-init-single-click {% if isDisabled %}disabled{% endif %}>
                     {{ 'product.set.detail.add-all-to-cart' | trans }}
                 </button>
-
             </form>
-            <hr />
+            <hr>
         {% endblock %}
-
     {% endembed %}
 {% endblock %}

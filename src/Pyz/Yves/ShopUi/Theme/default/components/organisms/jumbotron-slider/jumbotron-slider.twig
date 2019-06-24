@@ -13,38 +13,35 @@
 } %}
 
 {% block body %}
-
     {% embed molecule('slick-carousel') with {
         attributes: {
             'data-json': '{
-                            "slidesToShow": 1,
-                            "dots": true,
-                            "autoplay": true,
-                            "nextArrow": false,
-                            "prevArrow": false,
-                            "autoplaySpeed": 4000,
-                            "centerMode": true,
-                            "centerPadding": "120px",
-                            "responsive": [{
-                                "breakpoint": 1240,
-                                "settings": {
-                                    "centerPadding": "40px"
-                                }
-                            },
-                            {
-                                "breakpoint": 770,
-                                "settings": {
-                                    "centerPadding": "12px",
-                                    "autoplay": false
-                                }
-                            }
+                "slidesToShow": 1,
+                "dots": true,
+                "autoplay": true,
+                "nextArrow": false,
+                "prevArrow": false,
+                "autoplaySpeed": 4000,
+                "centerMode": true,
+                "centerPadding": "120px",
+                "responsive": [{
+                    "breakpoint": 1240,
+                    "settings": {
+                        "centerPadding": "40px"
+                    }
+                },
+                {
+                    "breakpoint": 770,
+                    "settings": {
+                        "centerPadding": "12px",
+                        "autoplay": false
+                    }
+                }
             ]}'
         }
     } only %}
-
         {% block slides %}
             {{ spyCmsBlock({name: 'Homepage Top Banners Carousel'}) }}
         {% endblock %}
     {% endembed %}
-
 {% endblock %}

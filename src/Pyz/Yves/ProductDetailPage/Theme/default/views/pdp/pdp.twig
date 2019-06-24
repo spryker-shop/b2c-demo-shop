@@ -14,7 +14,7 @@
     title: product.metaTitle | default(_view.product.name),
     metaTitle: product.metaTitle | default(_view.product.name),
     metaDescription: _view.product.metaDescription | default,
-    metaKeywords: _view.product.metaKeywords | default
+    metaKeywords: _view.product.metaKeywords | default,
 } %}
 
 {% block headStyles %}
@@ -28,8 +28,8 @@
                 {% include atom('icon') with {
                     modifiers: ['big'],
                     data: {
-                        name: 'bars'
-                    }
+                        name: 'bars',
+                    },
                 } only %}
             </a>
         {% endblock %}
@@ -49,10 +49,9 @@
             {% include molecule('product-carousel', 'ProductDetailPage') with {
                 class: 'col page-layout-main__content-pdp',
                 data: {
-                    product: data.product
-                }
+                    product: data.product,
+                },
             } only %}
-
 
             <div class="col page-layout-main__sidebar-pdp">
                 {% include molecule('product-configurator', 'ProductDetailPage') with {
@@ -76,21 +75,19 @@
             data: {
                 description: data.product.description,
                 attributes: data.product.attributes,
-                sku: data.product.sku
-            }
+                sku: data.product.sku,
+            },
         } only %}
     </div>
     {% if data.bundleItems %}
         {% include molecule('product-bundle', 'ProductDetailPage') with {
             data: {
-                bundleItems: data.bundleItems
-            }
+                bundleItems: data.bundleItems,
+            },
         } only %}
     {% endif %}
 
-    {% widget 'ProductReplacementForListWidget' args [data.product.sku] only %}
-    {% elsewidget 'ProductReplacementForWidgetPlugin' args [data.product.sku] only %} {# @deprecated Use ProductReplacementForListWidget instead. #}
-    {% endwidget %}
+    {% widget 'ProductReplacementForListWidget' args [data.product.sku] only %}{% endwidget %}
 
     <div class="container__inner">
         {% widget 'ProductDetailPageReviewWidget' args [data.product.idProductAbstract] only %}{% endwidget %}
