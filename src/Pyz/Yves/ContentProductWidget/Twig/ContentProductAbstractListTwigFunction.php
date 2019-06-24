@@ -16,6 +16,7 @@ class ContentProductAbstractListTwigFunction extends SprykerContentProductAbstra
 {
     protected const WIDGET_TEMPLATE_IDENTIFIER_SLIDER_WITH_BUTTON = 'slider-with-button';
     protected const WIDGET_TEMPLATE_IDENTIFIER_SLIDER = 'slider';
+    protected const WIDGET_TEMPLATE_IDENTIFIER_SLIDER_NOT_INCLUDE_GROUP = 'slider-not-include-group';
 
         /**
          * @return array
@@ -27,6 +28,7 @@ class ContentProductAbstractListTwigFunction extends SprykerContentProductAbstra
             [
                 static::WIDGET_TEMPLATE_IDENTIFIER_SLIDER_WITH_BUTTON => '@ContentProductWidget/views/cms-product-abstract-and-button/cms-product-abstract-and-button.twig',
                 static::WIDGET_TEMPLATE_IDENTIFIER_SLIDER => '@ContentProductWidget/views/cms-product-abstract/cms-product-abstract.twig',
+                static::WIDGET_TEMPLATE_IDENTIFIER_SLIDER_NOT_INCLUDE_GROUP => '@ContentProductWidget/views/cms-product-abstract-not-include-group/cms-product-abstract-not-include-group.twig',
             ]
         );
     }
