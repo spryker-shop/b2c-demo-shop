@@ -124,14 +124,6 @@ sections:
 
 
     database-migrate:
-        propel-config:
-            command: "vendor/bin/console propel:config:convert"
-            stores:
-                - US
-                - DE
-            groups:
-                - propel
-
         propel-create:
             command: "vendor/bin/console propel:database:create"
             stores:
