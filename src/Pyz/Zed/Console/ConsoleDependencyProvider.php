@@ -81,6 +81,11 @@ use Spryker\Zed\RabbitMq\Communication\Console\DeleteAllQueuesConsole;
 use Spryker\Zed\RabbitMq\Communication\Console\PurgeAllQueuesConsole;
 use Spryker\Zed\RabbitMq\Communication\Console\SetUserPermissionsConsole;
 use Spryker\Zed\RestRequestValidator\Communication\Console\BuildValidationCacheConsole;
+use Spryker\Zed\Scheduler\Communication\Console\SchedulerCleanConsole;
+use Spryker\Zed\Scheduler\Communication\Console\SchedulerResumeConsole;
+use Spryker\Zed\Scheduler\Communication\Console\SchedulerSetupConsole;
+use Spryker\Zed\Scheduler\Communication\Console\SchedulerSuspendConsole;
+use Spryker\Zed\Scheduler\Communication\Plugin\ServiceProvider\SchedulerTwigServiceProvider;
 use Spryker\Zed\Search\Communication\Console\GenerateIndexMapConsole;
 use Spryker\Zed\Search\Communication\Console\SearchCloseIndexConsole;
 use Spryker\Zed\Search\Communication\Console\SearchConsole;
@@ -95,9 +100,6 @@ use Spryker\Zed\Session\Communication\Console\SessionRemoveLockConsole;
 use Spryker\Zed\Setup\Communication\Console\DeployPreparePropelConsole;
 use Spryker\Zed\Setup\Communication\Console\EmptyGeneratedDirectoryConsole;
 use Spryker\Zed\Setup\Communication\Console\InstallConsole;
-use Spryker\Zed\Setup\Communication\Console\JenkinsDisableConsole;
-use Spryker\Zed\Setup\Communication\Console\JenkinsEnableConsole;
-use Spryker\Zed\Setup\Communication\Console\JenkinsGenerateConsole;
 use Spryker\Zed\Setup\Communication\Console\Npm\RunnerConsole;
 use Spryker\Zed\SetupFrontend\Communication\Console\CleanUpDependenciesConsole;
 use Spryker\Zed\SetupFrontend\Communication\Console\InstallPackageManagerConsole;
@@ -218,9 +220,6 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
             new RunnerConsole(),
             new EmptyGeneratedDirectoryConsole(),
             new InstallConsole(),
-            new JenkinsEnableConsole(),
-            new JenkinsDisableConsole(),
-            new JenkinsGenerateConsole(),
             new DeployPreparePropelConsole(),
 
             new DatabaseDropConsole(),
@@ -277,6 +276,11 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
 
             new PriceProductScheduleApplyConsole(),
             new PriceProductScheduleCleanupConsole(),
+
+            new SchedulerSetupConsole(),
+            new SchedulerCleanConsole(),
+            new SchedulerSuspendConsole(),
+            new SchedulerResumeConsole(),
         ];
 
         $propelCommands = $container->getLocator()->propel()->facade()->getConsoleCommands();
@@ -359,6 +363,7 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
         $serviceProviders[] = new SilexTwigServiceProvider();
         $serviceProviders[] = new SprykerTwigServiceProvider();
         $serviceProviders[] = new TwigMoneyServiceProvider();
+        $serviceProviders[] = new SchedulerTwigServiceProvider();
 
         return $serviceProviders;
     }
