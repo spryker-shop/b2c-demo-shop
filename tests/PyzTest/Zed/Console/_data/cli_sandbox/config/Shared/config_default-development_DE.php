@@ -11,7 +11,6 @@ use Spryker\Shared\Queue\QueueConstants;
 use Spryker\Shared\RabbitMq\RabbitMqEnv;
 use Spryker\Shared\Search\SearchConstants;
 use Spryker\Shared\Session\SessionConstants;
-use Spryker\Shared\Setup\SetupConstants;
 use Spryker\Shared\ZedRequest\ZedRequestConstants;
 
 $config[PropelConstants::ZED_DB_USERNAME] = 'development';
@@ -48,7 +47,6 @@ $config[SessionConstants::ZED_SESSION_COOKIE_SECURE] = false;
 $config[ApplicationConstants::CLOUD_CDN_STATIC_MEDIA_HTTP] = 'http://static.project.local';
 $config[ApplicationConstants::CLOUD_CDN_STATIC_MEDIA_HTTPS] = 'https://static.project.local';
 
-$config[SetupConstants::JENKINS_BASE_URL] = 'http://localhost:10007/';
 $config[MailConstants::MAILCATCHER_GUI] = 'http://' . $config[ApplicationConstants::HOST_ZED_GUI] . ':1080';
 
 /* Elasticsearch */
