@@ -8,7 +8,6 @@ use Spryker\Shared\Newsletter\NewsletterConstants;
 use Spryker\Shared\ProductManagement\ProductManagementConstants;
 use Spryker\Shared\Search\SearchConstants;
 use Spryker\Shared\Session\SessionConstants;
-use Spryker\Shared\Setup\SetupConstants;
 use Spryker\Shared\ZedRequest\ZedRequestConstants;
 
 // ---------- Yves host
@@ -62,9 +61,6 @@ $config[ApplicationConstants::BASE_URL_SSL_STATIC_MEDIA] = $config[ApplicationCo
 // ---------- Session
 $config[SessionConstants::YVES_SESSION_COOKIE_DOMAIN] = $config[ApplicationConstants::HOST_YVES];
 $config[SessionConstants::ZED_SESSION_COOKIE_NAME] = $config[ApplicationConstants::HOST_ZED];
-
-// ---------- Jenkins
-$config[SetupConstants::JENKINS_BASE_URL] = 'http://localhost:10007/';
 
 // ---------- Elasticsearch
 $ELASTICA_INDEX_NAME = 'de_search';
