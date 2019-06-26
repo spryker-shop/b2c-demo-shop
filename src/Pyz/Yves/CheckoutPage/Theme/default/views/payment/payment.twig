@@ -37,15 +37,17 @@
         {% block fieldset %}
 
             {% for name, choices in data.form.paymentSelection.vars.choices %}
+                {% set paymentProviderIndex = loop.index0 %}
                 <ul class="list-switches list-switches--register-type">
                     {% for key, choice in choices %}
+                        {% set paymentMethodIndex = loop.index ~ '-' ~ paymentProviderIndex %}
                         <li class="list-switches__item">
                             {% if key == 0 %}
                                 {{ form_row(data.form.paymentSelection[key], {
                                     required: false,
                                     component: molecule('toggler-radio'),
                                     attributes: {
-                                        'target-selector': '.js-payment-method-' ~ loop.index,
+                                        'target-selector': '.js-payment-method-' ~ paymentMethodIndex,
                                         'class-to-toggle': 'is-hidden',
                                         'checked': 'checked'
                                     },
@@ -62,7 +64,7 @@
                                     required: false,
                                     component: molecule('toggler-radio'),
                                     attributes: {
-                                        'target-selector': '.js-payment-method-' ~ loop.index,
+                                        'target-selector': '.js-payment-method-' ~ paymentMethodIndex,
                                         'class-to-toggle': 'is-hidden'
                                     },
                                     rowAttr: {class: 'toggler-radio--with-bg'},
@@ -90,7 +92,7 @@
                             }
                         },
                         embed: {
-                            index: loop.index,
+                            index: loop.index ~ '-' ~ paymentProviderIndex,
                             toggler: data.form.paymentSelection[key]
                         }
                     } only %}
