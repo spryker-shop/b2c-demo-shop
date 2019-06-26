@@ -39,6 +39,8 @@ use Spryker\Glue\CustomersRestApi\Plugin\CustomerRestorePasswordResourceRoutePlu
 use Spryker\Glue\CustomersRestApi\Plugin\CustomersResourceRoutePlugin;
 use Spryker\Glue\CustomersRestApi\Plugin\CustomersToAddressesRelationshipPlugin;
 use Spryker\Glue\CustomersRestApi\Plugin\SetCustomerBeforeActionPlugin;
+use Spryker\Glue\EntityTagsRestApi\Plugin\GlueApplication\EntityTagFormatResponseHeadersPlugin;
+use Spryker\Glue\EntityTagsRestApi\Plugin\GlueApplication\EntityTagRestRequestValidatorPlugin;
 use Spryker\Glue\GlueApplication\GlueApplicationDependencyProvider as SprykerGlueApplicationDependencyProvider;
 use Spryker\Glue\GlueApplication\Plugin\Rest\SetStoreCurrentLocaleBeforeActionPlugin;
 use Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\ResourceRelationshipCollectionInterface;
@@ -161,6 +163,7 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
             new ValidateRestRequestAttributesPlugin(),
             new CurrencyParameterValidatorPlugin(),
             new PriceModeParameterValidatorPlugin(),
+            new EntityTagRestRequestValidatorPlugin(),
         ];
     }
 
@@ -173,6 +176,7 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
     {
         return [
             new FormatAuthenticationErrorResponseHeadersPlugin(),
+            new EntityTagFormatResponseHeadersPlugin(),
         ];
     }
 
