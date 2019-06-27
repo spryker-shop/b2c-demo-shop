@@ -4,6 +4,7 @@
  * This is the global runtime configuration for Yves and Generated_Yves_Zed in a development environment.
  */
 
+use Pyz\Shared\Console\ConsoleConstants;
 use Spryker\Shared\Acl\AclConstants;
 use Spryker\Shared\Application\ApplicationConstants;
 use Spryker\Shared\ErrorHandler\ErrorHandlerConstants;
@@ -64,3 +65,5 @@ $config[TwigConstants::YVES_PATH_CACHE_FILE] = APPLICATION_ROOT_DIR . '/data/' .
 $config[TwigConstants::ZED_PATH_CACHE_FILE] = APPLICATION_ROOT_DIR . '/data/' . Store::getInstance()->getStoreName() . '/cache/Zed/twig/.pathCache';
 
 $config[ApplicationConstants::ZED_SSL_ENABLED] = false;
+
+$config[ConsoleConstants::ENABLE_DEVELOPMENT_CONSOLE_COMMANDS] = true;

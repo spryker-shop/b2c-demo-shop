@@ -74,10 +74,6 @@ class ApplicationDependencyProvider extends SprykerApplicationDependencyProvider
             new SaveSessionServiceProvider(),
         ];
 
-        if (Environment::isDevelopment()) {
-            array_unshift($providers, new AssertUrlConfigurationServiceProvider());
-        }
-
         $providers = array_merge($providers, $coreProviders);
 
         return $providers;
@@ -100,7 +96,7 @@ class ApplicationDependencyProvider extends SprykerApplicationDependencyProvider
             new EventBehaviorServiceProvider(),
         ];
 
-        if (Environment::isDevelopment()) {
+        if ($this->getConfig()->isPrettyErrorHandlerEnabled()) {
             $providers[] = new WhoopsErrorHandlerServiceProvider();
         }
 
