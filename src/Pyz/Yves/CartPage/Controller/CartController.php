@@ -12,7 +12,7 @@ use SprykerShop\Yves\CartPage\Plugin\Provider\CartControllerProvider;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * @method \Pyz\Yves\CartPage\CartPageFactory getFactory()
+ * @method \SprykerShop\Yves\CartPage\CartPageFactory getFactory()
  */
 class CartController extends SprykerCartController
 {
@@ -20,7 +20,7 @@ class CartController extends SprykerCartController
 
     /**
      * @param string $sku
-     * @param float $quantity
+     * @param int $quantity
      * @param array $optionValueIds
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
@@ -31,23 +31,6 @@ class CartController extends SprykerCartController
         parent::addAction($sku, $quantity, $optionValueIds, $request);
 
         return $this->redirect($request);
-    }
-
-    /**
-     * @param array|null $selectedAttributes
-     *
-     * @return array
-     */
-    protected function executeIndexAction(?array $selectedAttributes): array
-    {
-        $viewData = parent::executeIndexAction($selectedAttributes);
-        $itemTransfers = $viewData['cartItems'];
-
-        $viewData['quantityRestrictionsBySku'] = $this->getFactory()
-            ->createQuantityRestrictionsSetter()
-            ->setQuantityRestrictions($itemTransfers);
-
-        return $viewData;
     }
 
     /**

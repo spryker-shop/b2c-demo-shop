@@ -8,10 +8,9 @@
     label: 'cart.item_quantity' | trans,
     maxQuantity: null,
     minQuantity: 1,
-    quantityInterval: 1,
     value: 1,
     readOnly: false,
-    hasUpdateButton: true,
+    hasUpdateButton: true
 } %}
 
 {% block body %}
@@ -27,10 +26,9 @@
                 data: {
                     maxQuantity: data.maxQuantity,
                     minQuantity: data.minQuantity,
-                    quantityInterval: data.quantityInterval,
                     value: data.value,
                     readOnly: data.readOnly,
-                    autoUpdate: data.hasUpdateButton,
+                    autoUpdate: data.hasUpdateButton
                 }
             } only %}
         {% endblock %}

@@ -7,19 +7,25 @@
 
 {% define data = {
     product: required,
-    minQuantity: 1,
-    maxQuantity: null,
-    quantityInterval: 1,
+    maxQuantity: 10,
     isBundle: null,
-    bundleItems: [],
+    bundleItems: []
 } %}
 
+{% set options = [] %}
 {% set productName = data.product.name | default %}
 {% set sku = data.product.sku %}
 {% set availabilityWidget = '' %}
 {% set isProductConcrete = data.product.idProductConcrete is not empty %}
 {% set isDisabled = data.product.idProductConcrete is empty or data.product.price is empty %}
 {% set isProductAvailable = true %}
+
+{% for index in 1..data.maxQuantity %}
+    {% set options = options | merge([{
+        label: index,
+        value: index
+    }]) %}
+{% endfor %}
 
 {% set isAvailable = data.product.idProductConcrete and data.product.available %}
 {% set isDisabled = not isAvailable or isDisabled %}
@@ -88,21 +94,13 @@
                 data: {
                     title: 'cart.item_quantity' | trans,
                     isToggler: false,
-                    minQuantity: data.minQuantity,
-                    maxQuantity: data.maxQuantity,
-                    quantityInterval: data.quantityInterval,
-                    value: data.minQuantity,
                 }
             } only %}
                 {% block contentText %}
                     {% include molecule('quantity-counter') with {
                         modifiers: ['quantity-large', 'no-spacing'],
                         data: {
-                            readOnly: true,
-                            minQuantity: data.minQuantity,
-                            maxQuantity: data.maxQuantity,
-                            quantityInterval: data.quantityInterval,
-                            value: data.minQuantity,
+                            readOnly: true
                         }
                     } only %}
                 {% endblock %}

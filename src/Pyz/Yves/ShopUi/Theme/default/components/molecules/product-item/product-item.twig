@@ -11,16 +11,13 @@
     attributes: [],
     options: [],
     idQuote: data.product.idQuote | default(null),
-    isPromotionItem: false,
-    minQuantity: 1,
-    maxQuantity: null,
-    quantityInterval: 1,
+    isPromotionItem: false
 } %}
 
 {% set canEditCart = (not is_granted('IS_AUTHENTICATED_FULLY') or can('WriteSharedCartPermissionPlugin', data.idQuote)) %}
 {% set productItemBox = (data.productItem.productOptions is defined and data.productItem.productOptions is empty) ? '' : config.name ~ '__box--with-options' %}
 {% set price = data.productItem.unitPrice is defined ? data.productItem.unitPrice : data.productItem.price %}
-{% set productItemSubTotal = data.productItem.sumPrice is not empty ? data.productItem.sumPrice : price %}
+{% set productItemSubTotal = data.productItem.quantity is not empty ? data.productItem.quantity * price : price %}
 
 {% block body %}
     <div class="{{ component.renderClass(config.name ~ '__box', modifiers) }} {{ productItemBox }}">
@@ -77,9 +74,7 @@
                                 <form method="POST" action="{{ path('cart/change/quantity', {'sku': data.productItem.sku }) }}">
                                     {% include molecule('product-quantity-input') with {
                                         data: {
-                                            maxQuantity: data.maxQuantity,
-                                            minQuantity: data.minQuantity,
-                                            quantityInterval: data.quantityInterval,
+                                            maxQuantity: data.productItem.maxQuantity,
                                             value: data.productItem.quantity
                                         }
                                     } only %}

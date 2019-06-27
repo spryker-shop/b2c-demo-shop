@@ -8,7 +8,6 @@
 {% define data = {
     maxQuantity: null,
     minQuantity: 1,
-    quantityInterval: 1,
     value: 1,
     readOnly: false,
     autoUpdate: false
@@ -29,7 +28,6 @@
                 value="{{ data.value }}"
                 name="quantity"
                 min="{{ data.minQuantity }}"
-                step="{{ data.quantityInterval }}"
                 {{ qa('quantity-input') }}
                 {% if maxQuantity is not empty %}max="{{ maxQuantity }}"{% endif %}
                 {% if data.readOnly %}readonly{% endif %}
