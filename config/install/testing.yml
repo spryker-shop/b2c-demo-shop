@@ -50,9 +50,6 @@ sections:
 
 
     database-migrate:
-        propel-config:
-            command: "vendor/bin/console propel:config:convert"
-
         propel-create:
             command: "vendor/bin/console propel:database:create"
 
@@ -106,25 +103,11 @@ sections:
         update-product-labels:
             command: "vendor/bin/console product-label:relations:update"
 
-    backup:
-        backup-database:
-            command: "vendor/bin/console propel:database:export data/db.backup"
+
 
     queue:
         run-worker:
             command: "vendor/bin/console queue:worker:start"
-
-
-    restore:
-        excluded: true
-        drop-database:
-            command: "vendor/bin/console propel:database:drop"
-
-        create-database:
-            command: "vendor/bin/console propel:database:create"
-
-        restore-database:
-            command: "vendor/bin/console propel:database:import data/db.backup"
 
 
     frontend:

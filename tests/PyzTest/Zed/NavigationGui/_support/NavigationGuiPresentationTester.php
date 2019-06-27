@@ -15,6 +15,7 @@ use Generated\Shared\Transfer\NavigationTransfer;
 use Generated\Shared\Transfer\NavigationTreeNodeTransfer;
 use Generated\Shared\Transfer\NavigationTreeTransfer;
 use Orm\Zed\Navigation\Persistence\SpyNavigation;
+use Orm\Zed\Navigation\Persistence\SpyNavigationQuery;
 use PyzTest\Zed\NavigationGui\PageObject\NavigationNodeCreatePage;
 use PyzTest\Zed\NavigationGui\PageObject\NavigationNodeUpdatePage;
 use PyzTest\Zed\NavigationGui\PageObject\NavigationPage;
@@ -693,5 +694,47 @@ class NavigationGuiPresentationTester extends Actor
     public function getIdLocale($locale)
     {
         return $this->getLocator()->locale()->facade()->getLocale($locale)->getIdLocale();
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\NavigationTreeTransfer $navigationTreeTransfer
+     *
+     * @return void
+     */
+    public function cleanUpNavigationTree(NavigationTreeTransfer $navigationTreeTransfer): void
+    {
+        $navigationEntity = $this->findNavigationByName($navigationTreeTransfer->getNavigation());
+
+        if (!$navigationEntity) {
+            return;
+        }
+
+        $navigationNodeEntities = $navigationEntity->getSpyNavigationNodes();
+
+        foreach ($navigationNodeEntities as $navigationNodeEntity) {
+            $navigationNodeEntity->getSpyNavigationNodeLocalizedAttributess()->delete();
+        }
+
+        $navigationNodeEntities->delete();
+        $navigationEntity->delete();
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\NavigationTransfer $navigationTransfer
+     *
+     * @return \Orm\Zed\Navigation\Persistence\SpyNavigation|null
+     */
+    protected function findNavigationByName(NavigationTransfer $navigationTransfer): ?SpyNavigation
+    {
+        $navigationEntity = (new SpyNavigationQuery())
+            ->joinWithSpyNavigationNode()
+            ->useSpyNavigationNodeQuery()
+            ->joinWithSpyNavigationNodeLocalizedAttributes()
+            ->endUse()
+            ->findByName(
+                $navigationTransfer->getName()
+            )->getFirst();
+
+        return $navigationEntity;
     }
 }

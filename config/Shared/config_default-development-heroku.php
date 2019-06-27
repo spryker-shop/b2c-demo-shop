@@ -4,15 +4,18 @@
  * This is the global runtime configuration for Yves and Generated_Yves_Zed in a development environment.
  */
 
+use Pyz\Shared\Scheduler\SchedulerConfig;
 use Spryker\Shared\Acl\AclConstants;
 use Spryker\Shared\Application\ApplicationConstants;
 use Spryker\Shared\ErrorHandler\ErrorHandlerConstants;
 use Spryker\Shared\Kernel\KernelConstants;
 use Spryker\Shared\Propel\PropelConstants;
 use Spryker\Shared\PropelOrm\PropelOrmConstants;
+use Spryker\Shared\Scheduler\SchedulerConstants;
+use Spryker\Shared\SchedulerJenkins\SchedulerJenkinsConfig;
+use Spryker\Shared\SchedulerJenkins\SchedulerJenkinsConstants;
 use Spryker\Shared\Search\SearchConstants;
 use Spryker\Shared\Session\SessionConstants;
-use Spryker\Shared\Setup\SetupConstants;
 use Spryker\Shared\StorageRedis\StorageRedisConstants;
 use Spryker\Shared\ZedNavigation\ZedNavigationConstants;
 use Spryker\Shared\ZedRequest\ZedRequestConstants;
@@ -65,8 +68,16 @@ $config[SearchConstants::ELASTICA_PARAMETER__HOST] = $ENV_ELASTICA_CONNECTION_DA
 $config[SearchConstants::ELASTICA_PARAMETER__TRANSPORT] = $ENV_ELASTICA_CONNECTION_DATA['scheme'];
 $config[SearchConstants::ELASTICA_PARAMETER__PORT] = $ELASTICA_PORT;
 
-// ---------- Jenkins
-$config[SetupConstants::JENKINS_DIRECTORY] = '/data/shop/development/shared/data/common/jenkins';
+// ---------- Scheduler
+$config[SchedulerConstants::ENABLED_SCHEDULERS] = [
+    SchedulerConfig::SCHEDULER_JENKINS,
+];
+
+$config[SchedulerJenkinsConstants::JENKINS_CONFIGURATION] = [
+    SchedulerConfig::SCHEDULER_JENKINS => [
+        SchedulerJenkinsConfig::SCHEDULER_JENKINS_BASE_URL => 'http://localhost:10007/',
+    ],
+];
 
 // ---------- Zed request
 $config[ZedRequestConstants::TRANSFER_DEBUG_SESSION_FORWARD_ENABLED] = false;
