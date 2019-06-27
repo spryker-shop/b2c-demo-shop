@@ -1,0 +1,17 @@
+@include shop-ui-money-price {
+    $name: '.money-price';
+
+    &__amount {
+        font-size: inherit;
+
+        &--original {
+            font-size: rem(14);
+        }
+    }
+
+    &--align-right {
+        @include helper-breakpoint-media-min($md-min) {
+            text-align: right;
+        }
+    }
+}

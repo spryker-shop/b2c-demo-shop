@@ -1,13 +1,11 @@
 {% block content %}
-    <!-- CMS_BLOCK_PLACEHOLDER : "title" -->
-    <!-- CMS_BLOCK_PLACEHOLDER : "description" -->
-    <div class="jumbotron-slider-item__title">
-        {{ spyCmsBlockPlaceholder('title') | raw }}
-    </div>
+    <!-- CMS_BLOCK_PLACEHOLDER : "content" -->
 
-    <div class="jumbotron-slider-item__text">
-        {{ spyCmsBlockPlaceholder('description') | raw }}
-    </div>
+    {% set title = spyCmsBlockPlaceholder('title') %}
 
+    {% if title %}
+        <h5 class="title title--catalog-cms title--medium">{{ title | raw }}</h5>
+    {% endif %}
+    {{ spyCmsBlockPlaceholder('content') | raw }}
 {% endblock %}
 
