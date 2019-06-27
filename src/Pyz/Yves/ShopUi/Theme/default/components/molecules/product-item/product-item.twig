@@ -74,27 +74,18 @@
 
                         {% block quantity %}
                             {% if canEditCart %}
-                                {% widget 'ProductQuantityWidget' args [data.productItem.quantity, data.productItem.id, data.productItem.sku, data.productItem.groupKey] only %}
-                                    {% block body %}
-                                        <form method="POST" action="{{ path('cart/change/quantity', {'sku': data.sku }) }}">
-                                            {{ parent() }}
-                                            <input type="hidden" value="{{ data.groupKey }}" name="groupKey" />
-                                        </form>
-                                    {% endblock %}
-                                {% nowidget %}
-                                    <form method="POST" action="{{ path('cart/change/quantity', {'sku': data.productItem.sku }) }}">
-                                        {% include molecule('product-quantity-input') with {
-                                            data: {
-                                                maxQuantity: null,
-                                                minQuantity: 1,
-                                                quantityInterval: 1,
-                                                value: 1
-                                            }
-                                        } only %}
+                                <form method="POST" action="{{ path('cart/change/quantity', {'sku': data.productItem.sku }) }}">
+                                    {% include molecule('product-quantity-input') with {
+                                        data: {
+                                            maxQuantity: data.maxQuantity,
+                                            minQuantity: data.minQuantity,
+                                            quantityInterval: data.quantityInterval,
+                                            value: data.productItem.quantity
+                                        }
+                                    } only %}
 
-                                        <input type="hidden" value="{{ data.productItem.groupKey }}" name="groupKey" />
-                                    </form>
-                                {% endwidget %}
+                                    <input type="hidden" value="{{ data.productItem.groupKey }}" name="groupKey" />
+                                </form>
                             {% else %}
                                 {{ 'cart.item_quantity' | trans }}: {{ productItem.quantity }}
                             {% endif %}
