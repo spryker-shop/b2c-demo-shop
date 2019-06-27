@@ -1,6 +1,6 @@
 const path = require('path');
 const { Linter, Configuration } = require('tslint');
-const appSettings = require('../settings');
+const { globalSettings } = require('../settings');
 const colors = require('colors');
 
 /**
@@ -19,8 +19,8 @@ const linterOptions = {
 };
 
 const runTSLint = () => {
-    const program = Linter.createProgram('tsconfig.json', appSettings.context);
-    const configurationFilename = path.join(appSettings.context, 'tslint.json');
+    const program = Linter.createProgram('tsconfig.json', globalSettings.context);
+    const configurationFilename = path.join(globalSettings.context, 'tslint.json');
     const linter = new Linter(linterOptions, program);
     const files = Linter.getFileNames(program);
 
