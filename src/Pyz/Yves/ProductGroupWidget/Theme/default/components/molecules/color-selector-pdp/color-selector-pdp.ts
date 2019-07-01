@@ -6,7 +6,7 @@ export default class ColorSelectorPdp extends Component {
 
     protected readyCallback(): void {
         this.colors = <HTMLAnchorElement[]>Array.from(this.getElementsByClassName(`${this.jsName}__color`));
-        this.images = <HTMLImageElement[]>Array.from(document.querySelectorAll(this.targetImageSelector));
+        this.images = <HTMLImageElement[]>Array.from(document.getElementsByClassName(this.targetImageSelector));
         this.mapEvents();
     }
 
@@ -66,7 +66,7 @@ export default class ColorSelectorPdp extends Component {
         });
     }
 
-    get targetImageSelector(): string {
+    protected get targetImageSelector(): string {
         return this.getAttribute('target-image-selector');
     }
 }

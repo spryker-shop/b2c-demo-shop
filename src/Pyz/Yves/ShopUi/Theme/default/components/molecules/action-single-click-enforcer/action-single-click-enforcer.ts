@@ -5,7 +5,7 @@ export default class ActionSingleClickEnforcer extends Component {
 
     constructor() {
         super();
-        this.targets = <HTMLElement[]>Array.from(document.querySelectorAll(this.targetSelector));
+        this.targets = <HTMLElement[]>Array.from(document.getElementsByClassName(this.targetSelector));
     }
 
     protected readyCallback(): void {
@@ -39,7 +39,7 @@ export default class ActionSingleClickEnforcer extends Component {
         targetElement.setAttribute('disabled', 'disabled');
     }
 
-    get targetSelector(): string {
+    protected get targetSelector(): string {
         return this.getAttribute('target-selector');
     }
 }

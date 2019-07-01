@@ -4,7 +4,7 @@ export default class LanguageSwitcher extends Component {
     protected select: HTMLSelectElement;
 
     protected readyCallback(): void {
-        this.select = this.querySelector(`.${this.jsName}__select`);
+        this.select = <HTMLSelectElement>this.getElementsByClassName(`${this.jsName}__select`)[0];
         this.mapEvents();
     }
 

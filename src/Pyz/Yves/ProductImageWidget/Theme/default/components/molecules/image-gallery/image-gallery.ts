@@ -9,9 +9,9 @@ export default class ImageGallery extends Component {
 
     constructor() {
         super();
-        this.galleryItems = <HTMLElement[]>Array.from(this.querySelectorAll(`.${this.jsName}__item`));
-        this.thumbnail = this.querySelector(`.${this.jsName}-thumbnail`);
-        this.thumbnailItems = <HTMLElement[]>Array.from(this.querySelectorAll(`.${this.jsName}-thumbnail__item`));
+        this.galleryItems = <HTMLElement[]>Array.from(this.getElementsByClassName(`${this.jsName}__item`));
+        this.thumbnail = <HTMLElement>this.getElementsByClassName(`${this.jsName}-thumbnail`)[0];
+        this.thumbnailItems = <HTMLElement[]>Array.from(this.getElementsByClassName(`${this.jsName}-thumbnail__item`));
     }
 
     protected readyCallback(): void {
@@ -53,15 +53,15 @@ export default class ImageGallery extends Component {
         this.galleryItems[activeItemIndex].classList.add(this.activeClass);
     }
 
-    get activeClass(): string {
+    protected get activeClass(): string {
         return this.getAttribute('active-class');
     }
 
-    get thumbnailSliderConfig(): object {
+    protected get thumbnailSliderConfig(): object {
         return JSON.parse(this.getAttribute('slider-config'));
     }
 
-    get thumbnailActiveClass(): string {
+    protected get thumbnailActiveClass(): string {
         return this.getAttribute('thumbnail-active-class');
     }
 }

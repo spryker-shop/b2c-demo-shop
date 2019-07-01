@@ -6,14 +6,14 @@ export default class AutocompleteFormExtended extends AutocompleteForm {
 
     protected readyCallback(): void {
         if (this.wrapSelector){
-            this.parentWrap = <HTMLElement> document.querySelector(`.${this.wrapSelector}`);
+            this.parentWrap = <HTMLElement>document.getElementsByClassName(`${this.wrapSelector}`)[0];
         }
-        this.textInput = <HTMLInputElement>this.querySelector(`.${this.jsName}__input`);
+        this.textInput = <HTMLInputElement>this.getElementsByClassName(`${this.jsName}__input`)[0];
         if (this.textInput) {
-            this.ajaxProvider = <AjaxProvider>this.querySelector(`.${this.jsName}__provider`);
-            this.valueInput = <HTMLInputElement>this.querySelector(`.${this.jsName}__input-hidden`);
-            this.suggestionsContainer = <HTMLElement>this.querySelector(`.${this.jsName}__container`);
-            this.cleanButton = <HTMLButtonElement>this.querySelector(`.${this.jsName}__clean-button`);
+            this.ajaxProvider = <AjaxProvider>this.getElementsByClassName(`${this.jsName}__provider`)[0];
+            this.valueInput = <HTMLInputElement>this.getElementsByClassName(`${this.jsName}__input-hidden`)[0];
+            this.suggestionsContainer = <HTMLElement>this.getElementsByClassName(`${this.jsName}__container`)[0];
+            this.cleanButton = <HTMLButtonElement>this.getElementsByClassName(`${this.jsName}__clean-button`)[0];
             this.mapEvents();
         } else super.readyCallback();
     }
@@ -40,7 +40,7 @@ export default class AutocompleteFormExtended extends AutocompleteForm {
         this.parentWrap.classList.remove('active');
     }
 
-    get wrapSelector(): string {
+    protected get wrapSelector(): string {
         return this.getAttribute('parent-wrap-selector');
     }
 }

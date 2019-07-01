@@ -73,8 +73,8 @@
 
                             {% include molecule('action-single-click-enforcer') with {
                                 attributes: {
-                                    'target-selector': '.' ~ config.jsName ~ '__button-' ~ embed.sku
-                                }
+                                    'target-selector': config.jsName ~ '__button-' ~ embed.sku,
+                                },
                             } only %}
                         </div>
                     </form>
