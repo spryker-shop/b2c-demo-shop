@@ -15,6 +15,7 @@ use Generated\Shared\Transfer\NavigationTransfer;
 use Generated\Shared\Transfer\NavigationTreeNodeTransfer;
 use Generated\Shared\Transfer\NavigationTreeTransfer;
 use Orm\Zed\Navigation\Persistence\SpyNavigation;
+use Orm\Zed\Navigation\Persistence\SpyNavigationQuery;
 use PyzTest\Zed\NavigationGui\PageObject\NavigationNodeCreatePage;
 use PyzTest\Zed\NavigationGui\PageObject\NavigationNodeUpdatePage;
 use PyzTest\Zed\NavigationGui\PageObject\NavigationPage;
@@ -54,6 +55,8 @@ class NavigationGuiPresentationTester extends Actor
     public const SWEET_ALERT_CONFIRM_SELECTOR = '.sweet-alert button.confirm';
     public const NODE_FORM_SELECTOR = 'form';
     public const FLASH_MESSAGES_SELECTOR = '//div[@class="flash-messages"]/div';
+    public const NAVIGATION_DELETE_FORM_SELECTOR = '//*[@id="navigation-table"]/tbody/tr/td[5]/form[1]';
+    public const NAVIGATION_ROW_ACTIVE_LINK_SELECTOR = '//*[@id="navigation-table"]/tbody/tr[1]/td[5]/a[2]';
 
     /**
      * @param \Codeception\Scenario $scenario
@@ -148,7 +151,7 @@ class NavigationGuiPresentationTester extends Actor
      */
     public function activateFirstNavigationRow()
     {
-        $this->click('//*[@id="navigation-table"]/tbody/tr[1]/td[5]/a[2]');
+        $this->click(static::NAVIGATION_ROW_ACTIVE_LINK_SELECTOR);
     }
 
     /**
@@ -156,7 +159,7 @@ class NavigationGuiPresentationTester extends Actor
      */
     public function deleteFirstNavigationRow()
     {
-        $this->submitForm('//*[@id="navigation-table"]/tbody/tr/td[5]/form[1]', []);
+        $this->submitForm(static::NAVIGATION_DELETE_FORM_SELECTOR, []);
     }
 
     /**
@@ -691,5 +694,47 @@ class NavigationGuiPresentationTester extends Actor
     public function getIdLocale($locale)
     {
         return $this->getLocator()->locale()->facade()->getLocale($locale)->getIdLocale();
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\NavigationTreeTransfer $navigationTreeTransfer
+     *
+     * @return void
+     */
+    public function cleanUpNavigationTree(NavigationTreeTransfer $navigationTreeTransfer): void
+    {
+        $navigationEntity = $this->findNavigationByName($navigationTreeTransfer->getNavigation());
+
+        if (!$navigationEntity) {
+            return;
+        }
+
+        $navigationNodeEntities = $navigationEntity->getSpyNavigationNodes();
+
+        foreach ($navigationNodeEntities as $navigationNodeEntity) {
+            $navigationNodeEntity->getSpyNavigationNodeLocalizedAttributess()->delete();
+        }
+
+        $navigationNodeEntities->delete();
+        $navigationEntity->delete();
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\NavigationTransfer $navigationTransfer
+     *
+     * @return \Orm\Zed\Navigation\Persistence\SpyNavigation|null
+     */
+    protected function findNavigationByName(NavigationTransfer $navigationTransfer): ?SpyNavigation
+    {
+        $navigationEntity = (new SpyNavigationQuery())
+            ->joinWithSpyNavigationNode()
+            ->useSpyNavigationNodeQuery()
+            ->joinWithSpyNavigationNodeLocalizedAttributes()
+            ->endUse()
+            ->findByName(
+                $navigationTransfer->getName()
+            )->getFirst();
+
+        return $navigationEntity;
     }
 }

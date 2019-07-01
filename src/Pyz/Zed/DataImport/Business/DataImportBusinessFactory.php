@@ -122,7 +122,6 @@ class DataImportBusinessFactory extends SprykerDataImportBusinessFactory
             ->addDataImporter($this->createCmsBlockCategoryPositionImporter())
             ->addDataImporter($this->createCmsBlockCategoryImporter())
             ->addDataImporter($this->createDiscountAmountImporter())
-            ->addDataImporter($this->createDiscountAmountImporter())
             ->addDataImporter($this->createAbstractGiftCardConfigurationImporter())
             ->addDataImporter($this->createConcreteGiftCardConfigurationImporter());
 
@@ -251,6 +250,8 @@ class DataImportBusinessFactory extends SprykerDataImportBusinessFactory
             ->addStep($this->createLocalizedAttributesExtractorStep([
                 CmsBlockWriterStep::KEY_PLACEHOLDER_TITLE,
                 CmsBlockWriterStep::KEY_PLACEHOLDER_DESCRIPTION,
+                CmsBlockWriterStep::KEY_PLACEHOLDER_CONTENT,
+                CmsBlockWriterStep::KEY_PLACEHOLDER_LINK,
             ]))
             ->addStep(new CmsBlockWriterStep(
                 $this->createCategoryRepository(),

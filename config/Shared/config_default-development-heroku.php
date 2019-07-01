@@ -4,17 +4,19 @@
  * This is the global runtime configuration for Yves and Generated_Yves_Zed in a development environment.
  */
 
+use Pyz\Shared\Scheduler\SchedulerConfig;
 use Spryker\Shared\Acl\AclConstants;
 use Spryker\Shared\Application\ApplicationConstants;
 use Spryker\Shared\ErrorHandler\ErrorHandlerConstants;
 use Spryker\Shared\Kernel\KernelConstants;
 use Spryker\Shared\Propel\PropelConstants;
 use Spryker\Shared\PropelOrm\PropelOrmConstants;
+use Spryker\Shared\Scheduler\SchedulerConstants;
+use Spryker\Shared\SchedulerJenkins\SchedulerJenkinsConfig;
+use Spryker\Shared\SchedulerJenkins\SchedulerJenkinsConstants;
 use Spryker\Shared\Search\SearchConstants;
-use Spryker\Shared\Session\SessionConfig;
 use Spryker\Shared\Session\SessionConstants;
-use Spryker\Shared\Setup\SetupConstants;
-use Spryker\Shared\Storage\StorageConstants;
+use Spryker\Shared\StorageRedis\StorageRedisConstants;
 use Spryker\Shared\ZedNavigation\ZedNavigationConstants;
 use Spryker\Shared\ZedRequest\ZedRequestConstants;
 
@@ -38,10 +40,10 @@ $config[PropelConstants::ZED_DB_PORT] = isset($ENV_DB_CONNECTION_DATA['port']) ?
 
 // ---------- Redis
 $ENV_REDIS_CONNECTION_DATA = parse_url(getenv(getenv('REDIS_URL_NAME') ?: 'REDIS_URL'));
-$config[StorageConstants::STORAGE_REDIS_PROTOCOL] = $ENV_REDIS_CONNECTION_DATA['scheme'];
-$config[StorageConstants::STORAGE_REDIS_HOST] = $ENV_REDIS_CONNECTION_DATA['host'];
-$config[StorageConstants::STORAGE_REDIS_PORT] = $ENV_REDIS_CONNECTION_DATA['port'];
-$config[StorageConstants::STORAGE_REDIS_PASSWORD] = $ENV_REDIS_CONNECTION_DATA['pass'];
+$config[StorageRedisConstants::STORAGE_REDIS_PROTOCOL] = $ENV_REDIS_CONNECTION_DATA['scheme'];
+$config[StorageRedisConstants::STORAGE_REDIS_HOST] = $ENV_REDIS_CONNECTION_DATA['host'];
+$config[StorageRedisConstants::STORAGE_REDIS_PORT] = $ENV_REDIS_CONNECTION_DATA['port'];
+$config[StorageRedisConstants::STORAGE_REDIS_PASSWORD] = $ENV_REDIS_CONNECTION_DATA['pass'];
 
 // ---------- RabbitMQ
 $config[ApplicationConstants::ZED_RABBITMQ_HOST] = 'localhost';
@@ -49,17 +51,7 @@ $config[ApplicationConstants::ZED_RABBITMQ_PORT] = '5672';
 
 // ---------- Session
 $config[SessionConstants::YVES_SESSION_COOKIE_SECURE] = false;
-$config[SessionConstants::YVES_SESSION_SAVE_HANDLER] = SessionConfig::SESSION_HANDLER_REDIS_LOCKING;
-$config[SessionConstants::YVES_SESSION_REDIS_PROTOCOL] = $config[StorageConstants::STORAGE_REDIS_PROTOCOL];
-$config[SessionConstants::YVES_SESSION_REDIS_HOST] = $config[StorageConstants::STORAGE_REDIS_HOST];
-$config[SessionConstants::YVES_SESSION_REDIS_PORT] = $config[StorageConstants::STORAGE_REDIS_PORT];
-$config[SessionConstants::YVES_SESSION_REDIS_PASSWORD] = $config[StorageConstants::STORAGE_REDIS_PASSWORD];
 $config[SessionConstants::ZED_SESSION_COOKIE_SECURE] = false;
-$config[SessionConstants::ZED_SESSION_SAVE_HANDLER] = SessionConfig::SESSION_HANDLER_REDIS;
-$config[SessionConstants::ZED_SESSION_REDIS_PROTOCOL] = $config[SessionConstants::YVES_SESSION_REDIS_PROTOCOL];
-$config[SessionConstants::ZED_SESSION_REDIS_HOST] = $config[SessionConstants::YVES_SESSION_REDIS_HOST];
-$config[SessionConstants::ZED_SESSION_REDIS_PORT] = $config[SessionConstants::YVES_SESSION_REDIS_PORT];
-$config[SessionConstants::ZED_SESSION_REDIS_PASSWORD] = $config[SessionConstants::YVES_SESSION_REDIS_PASSWORD];
 
 // ---------- Elasticsearch
 $ENV_ELASTICA_CONNECTION_DATA = parse_url(getenv(getenv('ELASTIC_SEARCH_URL_NAME') ?: 'ELASTIC_SEARCH_URL'));
@@ -76,8 +68,16 @@ $config[SearchConstants::ELASTICA_PARAMETER__HOST] = $ENV_ELASTICA_CONNECTION_DA
 $config[SearchConstants::ELASTICA_PARAMETER__TRANSPORT] = $ENV_ELASTICA_CONNECTION_DATA['scheme'];
 $config[SearchConstants::ELASTICA_PARAMETER__PORT] = $ELASTICA_PORT;
 
-// ---------- Jenkins
-$config[SetupConstants::JENKINS_DIRECTORY] = '/data/shop/development/shared/data/common/jenkins';
+// ---------- Scheduler
+$config[SchedulerConstants::ENABLED_SCHEDULERS] = [
+    SchedulerConfig::SCHEDULER_JENKINS,
+];
+
+$config[SchedulerJenkinsConstants::JENKINS_CONFIGURATION] = [
+    SchedulerConfig::SCHEDULER_JENKINS => [
+        SchedulerJenkinsConfig::SCHEDULER_JENKINS_BASE_URL => 'http://localhost:10007/',
+    ],
+];
 
 // ---------- Zed request
 $config[ZedRequestConstants::TRANSFER_DEBUG_SESSION_FORWARD_ENABLED] = false;

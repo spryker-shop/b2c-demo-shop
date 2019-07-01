@@ -44,6 +44,7 @@ use SprykerShop\Yves\ProductGroupWidget\Widget\ProductGroupWidget;
 use SprykerShop\Yves\ProductLabelWidget\Widget\ProductAbstractLabelWidget;
 use SprykerShop\Yves\ProductLabelWidget\Widget\ProductConcreteLabelWidget;
 use SprykerShop\Yves\ProductOptionWidget\Widget\ProductOptionConfiguratorWidget;
+use SprykerShop\Yves\ProductQuantityWidget\Widget\ProductQuantityWidget;
 use SprykerShop\Yves\ProductRelationWidget\Widget\SimilarProductsWidget;
 use SprykerShop\Yves\ProductReplacementForWidget\Widget\ProductReplacementForListWidget;
 use SprykerShop\Yves\ProductReviewWidget\Widget\DisplayProductAbstractReviewWidget;
@@ -118,6 +119,7 @@ class ShopApplicationDependencyProvider extends SprykerShopApplicationDependency
             CategoryImageStorageWidget::class,
             FullTextSearchTabsWidget::class,
             AvailabilityNotificationSubscriptionWidget::class,
+            ProductQuantityWidget::class,
         ];
     }
 
