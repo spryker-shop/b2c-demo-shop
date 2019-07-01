@@ -18,7 +18,7 @@
             options: {
                 attr: {
                     id: 'payment-form',
-                }
+                },
             },
             submit: {
                 enable: true,
@@ -32,7 +32,7 @@
                 class: 'form__action--checkout button button--hollow button--expand',
             },
             customForms: data.customForms,
-        }
+        },
     } only %}
         {% block fieldset %}
 
@@ -89,12 +89,12 @@
                                 'card_expires_month': 'col col--sm-3 col--bottom',
                                 'card_expires_year': 'col col--sm-3 col--bottom',
                                 'card_security_code': 'col col--sm-6 col--bottom',
-                            }
+                            },
                         },
                         embed: {
                             index: loop.index ~ '-' ~ paymentProviderIndex,
                             toggler: data.form.paymentSelection[key],
-                        }
+                        },
                     } only %}
 
                         {% block fieldset %}
