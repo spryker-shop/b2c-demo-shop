@@ -54,8 +54,8 @@
                     <input name="selectedAttributes[{{ attributeName }}]" type="hidden" />
                     {% include molecule('form-submitter') with {
                         attributes: {
-                            'trigger-selector': '.' ~ config.jsName ~ '__select-trigger'
-                        }
+                            'trigger-selector': config.jsName ~ '__select-trigger',
+                        },
                     } only %}
                 </li>
             {% endfor %}

@@ -14,7 +14,7 @@ export default class BreakpointDependentBlockPlacer extends Component {
     protected timeout: number = 300;
 
     protected readyCallback(): void {
-        this.blocks = <HTMLElement[]>Array.from(document.querySelectorAll(this.blockSelector));
+        this.blocks = <HTMLElement[]>Array.from(document.getElementsByClassName(this.blockSelector));
 
         this.data = this.blocks.map((block: HTMLElement) => {
             return {
@@ -53,7 +53,7 @@ export default class BreakpointDependentBlockPlacer extends Component {
         });
     }
 
-    get blockSelector(): string {
+    protected get blockSelector(): string {
         return this.getAttribute('block-selector');
     }
 

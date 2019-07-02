@@ -19,8 +19,8 @@ export default class RangeSlider extends Component {
     protected valueTarget: HTMLElement[];
 
     protected readyCallback(): void {
-        this.wrap = <HTMLElement>document.querySelector(this.wrapSelector);
-        this.targetSelectors = <HTMLInputElement[]>Array.from(document.querySelectorAll(this.targetSelector));
+        this.wrap = <HTMLElement>document.getElementsByClassName(this.wrapSelector)[0];
+        this.targetSelectors = <HTMLInputElement[]>Array.from(document.getElementsByClassName(this.targetSelector));
         this.sliderConfig = {
             start: [ this.valueCurrentMin, this.valueCurrentMax ],
             step: this.stepAttribute,
@@ -39,7 +39,7 @@ export default class RangeSlider extends Component {
         this.updateValues(this.wrap, this.targetSelectors);
 
         if (this.valueSelector !== '') {
-            this.valueTarget = <HTMLElement[]>Array.from(document.querySelectorAll(this.valueSelector));
+            this.valueTarget = <HTMLElement[]>Array.from(document.getElementsByClassName(this.valueSelector));
             this.updateSelectors(this.wrap, this.valueTarget);
         }
     }
@@ -61,43 +61,43 @@ export default class RangeSlider extends Component {
         wrap.noUiSlider.on('update', update);
     }
 
-    get wrapSelector(): string {
+    protected get wrapSelector(): string {
         return this.getAttribute('wrap-selector');
     }
 
-    get valueSelector(): string {
+    protected get valueSelector(): string {
         return this.getAttribute('value-selector');
     }
 
-    get valueMin(): string {
+    protected get valueMin(): string {
         return this.getAttribute('value-min');
     }
 
-    get valueMax(): string {
+    protected get valueMax(): string {
         return this.getAttribute('value-max');
     }
 
-    get valueCurrentMin(): string {
+    protected get valueCurrentMin(): string {
         return this.getAttribute('active-min');
     }
 
-    get targetSelector(): string {
+    protected get targetSelector(): string {
         return this.getAttribute('target-selector');
     }
 
-    get valueCurrentMax(): string {
+    protected get valueCurrentMax(): string {
         return this.getAttribute('active-max');
     }
 
-    get stepAttribute(): number {
+    protected get stepAttribute(): number {
         return parseInt(this.getAttribute('step'));
     }
 
-    get connectAttribute(): boolean {
+    protected get connectAttribute(): boolean {
         return Boolean(this.getAttribute('connect'));
     }
 
-    get marginAttribute(): number {
+    protected get marginAttribute(): number {
         return parseInt(this.getAttribute('margin'));
     }
 }

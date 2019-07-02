@@ -112,12 +112,12 @@
             {% embed molecule('slick-carousel') with {
                 modifiers: ['align-left'],
                 data: {
-                    slides: data.products
+                    slides: data.products,
                 },
                 attributes: {
                     'data-json': data.sliderConfig,
-                    'custom-select-selector': '.custom-select'
-                }
+                    'custom-select-class-name': 'custom-select',
+                },
             } only %}
                 {% block slides %}
                     {% for product in data.slides %}

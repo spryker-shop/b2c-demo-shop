@@ -27,15 +27,15 @@
                         modifiers: ['hollow'],
                         attributes: {
                             name: 'ipp',
-                            'config-theme': 'secondary'
+                            'config-theme': 'secondary',
                         },
                         embed: {
                             pagination: data.pagination,
-                            jsName: config.jsName
-                        }
+                            jsName: config.jsName,
+                        },
                     } only %}
                         {% block selectClass -%}
-                            {{ parent() }} {{ embed.jsName }}__per-page-select-trigger
+                            {{ parent() }} {{ embed.jsName }}__select-trigger
                         {%- endblock %}
 
                         {% block options %}
@@ -53,12 +53,12 @@
                         modifiers: ['hollow'],
                         attributes: {
                             name: 'sort',
-                            'config-theme': 'secondary'
+                            'config-theme': 'secondary',
                         },
                         embed: {
                             sort: _view.sort,
-                            jsName: config.jsName
-                        }
+                            jsName: config.jsName,
+                        },
                     } only %}
                         {% block selectClass -%}
                             {{ parent() }} {{ embed.jsName }}__select-trigger
@@ -85,7 +85,7 @@
 
     {% include molecule('form-submitter') with {
         attributes: {
-            'trigger-selector': '.' ~ config.jsName ~ '__select-trigger, .' ~ config.jsName ~ '__per-page-select-trigger'
-        }
+            'trigger-selector': config.jsName ~ '__select-trigger',
+        },
     } only %}
 {% endblock %}

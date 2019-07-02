@@ -6,18 +6,13 @@ export default class SuggestSearchExtended extends SuggestSearch {
     searchOverlay: HTMLElement;
     overlayOpenButtons: HTMLElement[];
     overlayCloseTriggers: HTMLElement[];
-    focusTimeout: number;
+    focusTimeout: number = 0;
     protected timeout: number = 400;
 
-    constructor() {
-        super();
-        this.focusTimeout = 0;
-    }
-
     protected readyCallback(): void {
-        this.searchOverlay = <HTMLElement>document.querySelector(`.${this.jsName}__overlay`);
-        this.overlayOpenButtons = <HTMLElement[]>Array.from(document.querySelectorAll(`.${this.jsName}__show`));
-        this.overlayCloseTriggers = <HTMLElement[]>Array.from(document.querySelectorAll(`.${this.jsName}__hide`));
+        this.searchOverlay = <HTMLElement>document.getElementsByClassName(`${this.jsName}__overlay`)[0];
+        this.overlayOpenButtons = <HTMLElement[]>Array.from(document.getElementsByClassName(`${this.jsName}__show`));
+        this.overlayCloseTriggers = <HTMLElement[]>Array.from(document.getElementsByClassName(`${this.jsName}__hide`));
         super.readyCallback();
     }
 

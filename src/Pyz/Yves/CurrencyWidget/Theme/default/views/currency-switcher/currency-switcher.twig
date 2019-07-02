@@ -39,8 +39,8 @@
         <input type="hidden" name="referrer-url" value="{{ app.request.requestUri }}"/>
         {% include molecule('form-submitter') with {
             attributes: {
-                'trigger-selector': '.js-currency__select-trigger'
-            }
+                'trigger-selector': 'js-currency__select-trigger',
+            },
         } only %}
     </form>
 {% endblock %}

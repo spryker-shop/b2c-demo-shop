@@ -16,8 +16,8 @@ export default class ScrollParallax extends Component {
     initialized: boolean = false;
 
     readyCallback(): void {
-        this.wrapper = <HTMLElement>document.querySelector(this.wrapperSelector);
-        this.target = <HTMLElement>this.wrapper.querySelector(this.targetSelector);
+        this.wrapper = <HTMLElement>document.getElementsByClassName(this.wrapperSelector)[0];
+        this.target = <HTMLElement>this.wrapper.getElementsByClassName(this.targetSelector)[0];
         this.defineDimensions();
 
         this.mapEvents();
@@ -87,27 +87,27 @@ export default class ScrollParallax extends Component {
         return yPosition;
     }
 
-    get targetSelector(): string {
+    protected get targetSelector(): string {
         return this.getAttribute('target-selector');
     }
 
-    get wrapperSelector(): string {
+    protected get wrapperSelector(): string {
         return this.getAttribute('wrapper-selector');
     }
 
-    get motionRatio(): number {
+    protected get motionRatio(): number {
         return +this.getAttribute('motion-ratio');
     }
 
-    get motionDirection(): string {
+    protected get motionDirection(): string {
         return this.getAttribute('motion-direction');
     }
 
-    get minBreakPoint(): number {
+    protected get minBreakPoint(): number {
         return +this.getAttribute('breakpoint-min');
     }
 
-    get maxBreakPoint(): number {
+    protected get maxBreakPoint(): number {
         return +this.getAttribute('breakpoint-max');
     }
 }

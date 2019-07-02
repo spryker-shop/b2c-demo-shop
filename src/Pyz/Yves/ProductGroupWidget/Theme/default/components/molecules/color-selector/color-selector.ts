@@ -1,9 +1,9 @@
 import Component from 'ShopUi/models/component';
 
 export default class ColorSelector extends Component {
-    colors: HTMLAnchorElement[];
-    image: HTMLImageElement;
-    link: HTMLAnchorElement;
+    protected colors: HTMLAnchorElement[];
+    protected image: HTMLImageElement;
+    protected link: HTMLAnchorElement;
 
     protected readyCallback(): void {
         this.colors = <HTMLAnchorElement[]>Array.from(this.getElementsByClassName(`${this.jsName}__color`));

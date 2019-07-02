@@ -16,9 +16,9 @@ export default class QuantityCounter extends Component {
     }
 
     protected readyCallback(): void {
-        this.quantityInput = <HTMLInputElement>this.querySelector(`.${this.jsName}__input`);
-        this.decrButton = <HTMLButtonElement>this.querySelector(`.${this.jsName}__decr`);
-        this.incrButton = <HTMLButtonElement>this.querySelector(`.${this.jsName}__incr`);
+        this.quantityInput = <HTMLInputElement>this.getElementsByClassName(`${this.jsName}__input`)[0];
+        this.decrButton = <HTMLButtonElement>this.getElementsByClassName(`${this.jsName}__decr`)[0];
+        this.incrButton = <HTMLButtonElement>this.getElementsByClassName(`${this.jsName}__incr`)[0];
         this.value = this.getValue;
 
         this.mapEvents();
@@ -106,23 +106,23 @@ export default class QuantityCounter extends Component {
         }
     }
 
-    get maxQuantity(): number {
+    protected get maxQuantity(): number {
         return +this.quantityInput.getAttribute('data-max-quantity');
     }
 
-    get minQuantity(): number {
+    protected get minQuantity(): number {
         return +this.quantityInput.getAttribute('data-min-quantity');
     }
 
-    get autoUpdate(): string {
+    protected get autoUpdate(): string {
         return this.quantityInput.getAttribute('data-auto-update');
     }
 
-    get getValue(): number {
+    protected get getValue(): number {
         return +this.quantityInput.value;
     }
 
-    get interval(): number {
+    protected get interval(): number {
         return +this.quantityInput.step;
     }
 }

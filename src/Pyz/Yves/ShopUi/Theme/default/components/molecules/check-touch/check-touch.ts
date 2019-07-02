@@ -13,10 +13,9 @@ export default class CheckTouch extends Component {
         }
     }
 
-    get isTouchDevice(): boolean {
+    protected get isTouchDevice(): boolean {
         return (('ontouchstart' in window)
             || (navigator.maxTouchPoints > 0)
             || (navigator.msMaxTouchPoints > 0));
     }
-
 }
