@@ -20,7 +20,7 @@ class CartController extends SprykerCartController
 
     /**
      * @param string $sku
-     * @param float $quantity
+     * @param int $quantity
      * @param array $optionValueIds
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
