@@ -7,7 +7,6 @@
     isQuoteEditable: _view.isQuoteEditable,
     attributes: _view.attributes,
     request: app.request,
-    quantityRestrictionsBySku: _view.quantityRestrictionsBySku,
 
     title: 'cart.cart' | trans
 } %}
@@ -43,9 +42,6 @@
                                     product: data.cart,
                                     productItem: cartItem,
                                     attributes: data.attributes[cartItem.sku] | default([]),
-                                    minQuantity: data.quantityRestrictionsBySku[cartItem.sku].quantityMin ?? 1,
-                                    maxQuantity: data.quantityRestrictionsBySku[cartItem.sku].quantityMax,
-                                    quantityInterval: data.quantityRestrictionsBySku[cartItem.sku].quantityInterval ?? 1,
                                 },
                             } only %}
                         {% endfor %}

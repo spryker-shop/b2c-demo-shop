@@ -117,9 +117,15 @@ class ProductRelationPresentationTester extends Actor
     {
         $ruleSelectorBaseId = sprintf('[@id="builder_rule_%d"]', $this->numberOfRulesSelected);
 
-        $this->selectOption(sprintf('//*%s/div[3]/select', $ruleSelectorBaseId), $ruleName);
-        $this->selectOption(sprintf('//*%s/div[4]/select', $ruleSelectorBaseId), $operator);
-        $this->fillField(sprintf('//*%s/div[5]/input', $ruleSelectorBaseId), $value);
+        $selectProductRule = sprintf('//*%s/div[3]/select', $ruleSelectorBaseId);
+        $this->waitForElement($selectProductRule);
+        $this->selectOption($selectProductRule, $ruleName);
+        $selectProductOperator = sprintf('//*%s/div[4]/select', $ruleSelectorBaseId);
+        $this->waitForElement($selectProductOperator);
+        $this->selectOption($selectProductOperator, $operator);
+        $selectProductValue = sprintf('//*%s/div[5]/input', $ruleSelectorBaseId);
+        $this->waitForElement($selectProductValue);
+        $this->fillField($selectProductValue, $value);
 
         $this->numberOfRulesSelected++;
 
