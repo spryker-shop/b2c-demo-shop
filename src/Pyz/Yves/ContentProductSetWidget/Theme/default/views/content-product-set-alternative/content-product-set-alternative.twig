@@ -136,7 +136,7 @@
             </div>
 
             <div class="grid grid--center">
-                <div class="col col--md-6">
+                <div class="col">
                     <form method="POST" action="{{ path('cart/add-items') }}">
                         {% set isDisabled = false %}
 
@@ -151,7 +151,7 @@
                             {% endif %}
                         {% endfor %}
 
-                        <button type="submit" class="button button--expand" data-init-single-click {% if isDisabled %}disabled{% endif %}>
+                        <button type="submit" class="button" data-init-single-click {% if isDisabled %}disabled{% endif %}>
                             {{ 'product.set.detail.add-all-to-cart' | trans }}
                         </button>
                     </form>
