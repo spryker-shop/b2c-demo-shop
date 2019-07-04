@@ -42,7 +42,7 @@ export default class CustomSelect extends Component {
     }
 
     protected removeAttributeTitle(): void {
-        this.querySelector('.select2-selection__rendered').removeAttribute('title');
+        this.getElementsByClassName('select2-selection__rendered')[0].removeAttribute('title');
     }
 
     protected closeHandler(event: Event): void {

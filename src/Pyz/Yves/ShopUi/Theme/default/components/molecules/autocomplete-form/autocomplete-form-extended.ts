@@ -5,8 +5,8 @@ export default class AutocompleteFormExtended extends AutocompleteForm {
     parentWrap: HTMLElement;
 
     protected readyCallback(): void {
-        if (this.wrapSelector){
-            this.parentWrap = <HTMLElement>document.getElementsByClassName(`${this.wrapSelector}`)[0];
+        if (this.parentWrapClassName){
+            this.parentWrap = <HTMLElement>document.getElementsByClassName(`${this.parentWrapClassName}`)[0];
         }
         this.textInput = <HTMLInputElement>this.getElementsByClassName(`${this.jsName}__input`)[0];
         if (this.textInput) {
@@ -20,13 +20,13 @@ export default class AutocompleteFormExtended extends AutocompleteForm {
 
     protected onBlur(): void {
         super.onBlur();
-        if (this.wrapSelector) {
+        if (this.parentWrapClassName) {
             this.hideOverlay();
         }
     }
 
     protected onFocus(): void {
-        if (this.wrapSelector) {
+        if (this.parentWrapClassName) {
             this.showOverlay();
         }
         super.onFocus();
@@ -40,7 +40,7 @@ export default class AutocompleteFormExtended extends AutocompleteForm {
         this.parentWrap.classList.remove('active');
     }
 
-    protected get wrapSelector(): string {
-        return this.getAttribute('parent-wrap-selector');
+    protected get parentWrapClassName(): string {
+        return this.getAttribute('parent-wrap-class-name');
     }
 }

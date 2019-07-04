@@ -7,7 +7,7 @@ export default class FormSubmitter extends Component {
     constructor() {
         super();
         this.event = <string>this.getAttribute('event');
-        this.triggers = <HTMLElement[]>Array.from(document.getElementsByClassName(this.triggerSelector));
+        this.triggers = <HTMLElement[]>Array.from(document.getElementsByClassName(this.triggerClassName));
     }
 
     protected readyCallback(): void {
@@ -27,7 +27,7 @@ export default class FormSubmitter extends Component {
         form.submit();
     }
 
-    protected get triggerSelector(): string {
-        return this.getAttribute('trigger-selector');
+    protected get triggerClassName(): string {
+        return this.getAttribute('trigger-class-name');
     }
 }

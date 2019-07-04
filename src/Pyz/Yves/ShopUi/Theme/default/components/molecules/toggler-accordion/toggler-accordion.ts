@@ -13,7 +13,9 @@ export default class TogglerAccordion extends Component {
     }
 
     protected triggerHandler(trigger: HTMLElement): void {
-        const togglerContent = document.getElementsByClassName(trigger.getAttribute('data-toggle-target-class-name'))[0];
+        const togglerContent = document.getElementsByClassName(
+            trigger.getAttribute('data-toggle-target-class-name')
+        )[0];
         trigger.classList.toggle(this.activeClass);
         togglerContent.classList.toggle(this.toggleClass);
     }

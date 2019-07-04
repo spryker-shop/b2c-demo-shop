@@ -16,8 +16,8 @@ export default class ScrollParallax extends Component {
     initialized: boolean = false;
 
     readyCallback(): void {
-        this.wrapper = <HTMLElement>document.getElementsByClassName(this.wrapperSelector)[0];
-        this.target = <HTMLElement>this.wrapper.getElementsByClassName(this.targetSelector)[0];
+        this.wrapper = <HTMLElement>document.getElementsByClassName(this.wrapperClassName)[0];
+        this.target = <HTMLElement>this.wrapper.getElementsByClassName(this.targetClassName)[0];
         this.defineDimensions();
 
         this.mapEvents();
@@ -59,10 +59,10 @@ export default class ScrollParallax extends Component {
 
         if (scrollHeight > this.distanceToWrapper) {
             if (this.motionDirection === DIRECTIONS.TOP) {
-                targetOffset = `-${this.getTargetOffest(scrollHeight)}`;
+                targetOffset = `-${this.getTargetOffset(scrollHeight)}`;
             }
             if (this.motionDirection === DIRECTIONS.DOWN) {
-                targetOffset = this.getTargetOffest(scrollHeight);
+                targetOffset = this.getTargetOffset(scrollHeight);
             }
             if (targetOffset !== '') {
                 this.target.style.transform = `translateY(${targetOffset})`;
@@ -71,7 +71,7 @@ export default class ScrollParallax extends Component {
         }
     }
 
-    protected getTargetOffest(scrollHeight: number): string {
+    protected getTargetOffset(scrollHeight: number): string {
         return `${(scrollHeight - this.distanceToWrapper) / this.motionRatio}px`;
     }
 
@@ -87,12 +87,12 @@ export default class ScrollParallax extends Component {
         return yPosition;
     }
 
-    protected get targetSelector(): string {
-        return this.getAttribute('target-selector');
+    protected get wrapperClassName(): string {
+        return this.getAttribute('wrapper-class-name');
     }
 
-    protected get wrapperSelector(): string {
-        return this.getAttribute('wrapper-selector');
+    protected get targetClassName(): string {
+        return this.getAttribute('target-class-name');
     }
 
     protected get motionRatio(): number {

@@ -2,7 +2,7 @@ import Component from 'ShopUi/models/component';
 
 interface BlockMovingInterface {
     breakpoint: number;
-    selectorBlockToMove: string;
+    classNameBlockToMove: string;
     node: HTMLElement;
     parentNode: HTMLElement;
     isMoved: boolean;
@@ -14,15 +14,15 @@ export default class BreakpointDependentBlockPlacer extends Component {
     protected timeout: number = 300;
 
     protected readyCallback(): void {
-        this.blocks = <HTMLElement[]>Array.from(document.getElementsByClassName(this.blockSelector));
+        this.blocks = <HTMLElement[]>Array.from(document.getElementsByClassName(this.blockClassName));
 
         this.data = this.blocks.map((block: HTMLElement) => {
             return {
                 isMoved: false,
                 node: block,
                 parentNode: block.parentElement,
-                breakpoint: +this.getDataAttribute(block, 'data-breackpoint'),
-                selectorBlockToMove: this.getDataAttribute(block, 'data-block-to')
+                breakpoint: +this.getDataAttribute(block, 'data-breakpoint'),
+                classNameBlockToMove: this.getDataAttribute(block, 'data-block-to')
             };
         });
 
@@ -39,8 +39,8 @@ export default class BreakpointDependentBlockPlacer extends Component {
     protected initBlockMoving(): void {
         this.data.forEach((item: BlockMovingInterface) => {
             if (window.innerWidth < item.breakpoint && !item.isMoved) {
-                const {selectorBlockToMove, node} = item;
-                const blockToMove = document.querySelector(selectorBlockToMove);
+                const {classNameBlockToMove, node} = item;
+                const blockToMove = document.getElementsByClassName(classNameBlockToMove)[0];
 
                 item.isMoved = true;
                 blockToMove.appendChild(node);
@@ -53,11 +53,11 @@ export default class BreakpointDependentBlockPlacer extends Component {
         });
     }
 
-    protected get blockSelector(): string {
-        return this.getAttribute('block-selector');
-    }
-
     protected getDataAttribute(block: HTMLElement, attr: string): string {
         return block.getAttribute(attr);
+    }
+
+    protected get blockClassName(): string {
+        return this.getAttribute('block-class-name');
     }
 }

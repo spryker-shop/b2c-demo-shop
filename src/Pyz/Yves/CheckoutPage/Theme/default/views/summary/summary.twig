@@ -181,9 +181,7 @@
             </div>
             <div class="summary-item__wrap">
                 <h2 class="title title--checkout">{{ 'checkout.step.summary.total' | trans }}</h2>
-                {% widget 'CartCodeFormWidget' args [data.transfer] only %}
-                {% elsewidget 'CheckoutVoucherFormWidget' args [data.transfer] only %} {# @deprecated Use CartCodeFormWidget instead. #}
-                {% endwidget %}
+                {% widget 'CartCodeFormWidget' args [data.transfer] only %}{% endwidget %}
 
                 {% embed molecule('summary-overview', 'CheckoutPage') with {
                     data: data.overview,

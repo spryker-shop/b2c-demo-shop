@@ -50,13 +50,13 @@
 
         {% include molecule('range-slider') with {
             attributes: {
-                'wrap-selector': config.jsName ~ '__range-slider',
-                'value-selector': config.jsName ~ '__value',
+                'wrap-class-name': config.jsName ~ '__range-slider',
+                'value-class-name': config.jsName ~ '__value',
+                'target-class-name': config.jsName ~ '__input',
                 'value-min': data.min,
                 'value-max': data.max,
                 'active-min': data.activeMin,
                 'active-max': data.activeMax,
-                'target-selector': config.jsName ~ '__input',
             },
         } only %}
     {% endif %}

@@ -19,8 +19,8 @@ export default class RangeSlider extends Component {
     protected valueTarget: HTMLElement[];
 
     protected readyCallback(): void {
-        this.wrap = <HTMLElement>document.getElementsByClassName(this.wrapSelector)[0];
-        this.targetSelectors = <HTMLInputElement[]>Array.from(document.getElementsByClassName(this.targetSelector));
+        this.wrap = <HTMLElement>document.getElementsByClassName(this.wrapClassName)[0];
+        this.targetSelectors = <HTMLInputElement[]>Array.from(document.getElementsByClassName(this.targetClassName));
         this.sliderConfig = {
             start: [ this.valueCurrentMin, this.valueCurrentMax ],
             step: this.stepAttribute,
@@ -38,8 +38,8 @@ export default class RangeSlider extends Component {
         noUiSlider.create(this.wrap, this.sliderConfig);
         this.updateValues(this.wrap, this.targetSelectors);
 
-        if (this.valueSelector !== '') {
-            this.valueTarget = <HTMLElement[]>Array.from(document.getElementsByClassName(this.valueSelector));
+        if (this.valueClassName !== '') {
+            this.valueTarget = <HTMLElement[]>Array.from(document.getElementsByClassName(this.valueClassName));
             this.updateSelectors(this.wrap, this.valueTarget);
         }
     }
@@ -61,12 +61,16 @@ export default class RangeSlider extends Component {
         wrap.noUiSlider.on('update', update);
     }
 
-    protected get wrapSelector(): string {
-        return this.getAttribute('wrap-selector');
+    protected get wrapClassName(): string {
+        return this.getAttribute('wrap-class-name');
     }
 
-    protected get valueSelector(): string {
-        return this.getAttribute('value-selector');
+    protected get valueClassName(): string {
+        return this.getAttribute('value-class-name');
+    }
+
+    protected get targetClassName(): string {
+        return this.getAttribute('target-class-name');
     }
 
     protected get valueMin(): string {
@@ -79,10 +83,6 @@ export default class RangeSlider extends Component {
 
     protected get valueCurrentMin(): string {
         return this.getAttribute('active-min');
-    }
-
-    protected get targetSelector(): string {
-        return this.getAttribute('target-selector');
     }
 
     protected get valueCurrentMax(): string {

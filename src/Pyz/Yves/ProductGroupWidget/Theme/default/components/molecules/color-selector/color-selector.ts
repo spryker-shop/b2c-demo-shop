@@ -7,7 +7,7 @@ export default class ColorSelector extends Component {
 
     protected readyCallback(): void {
         this.colors = <HTMLAnchorElement[]>Array.from(this.getElementsByClassName(`${this.jsName}__color`));
-        this.link = <HTMLAnchorElement>document.getElementsByClassName(this.targetLinkSelector)[0];
+        this.link = <HTMLAnchorElement>document.getElementsByClassName(this.targetLinkClassName)[0];
         this.image = <HTMLImageElement>this.link.getElementsByTagName('img')[0];
         this.mapEvents();
     }
@@ -48,7 +48,7 @@ export default class ColorSelector extends Component {
         }
     }
 
-    protected get targetLinkSelector(): string {
-        return this.getAttribute('target-link-selector');
+    protected get targetLinkClassName(): string {
+        return this.getAttribute('target-link-class-name');
     }
 }

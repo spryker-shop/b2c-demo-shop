@@ -9,7 +9,7 @@ export default class NavOverlay extends Component {
     protected savedIndex: number = 0;
 
     readyCallback(): void {
-        this.triggers = <HTMLElement[]>Array.from(document.getElementsByClassName(this.triggerOpenSelector));
+        this.triggers = <HTMLElement[]>Array.from(document.getElementsByClassName(this.triggerOpenClassName));
         this.triggerClose = <HTMLElement>this.getElementsByClassName(`${this.jsName}__shadow`)[0];
         this.blocks = <HTMLElement[]>Array.from(this.getElementsByClassName(`${this.jsName}__drop-down-block`));
 
@@ -54,8 +54,8 @@ export default class NavOverlay extends Component {
         this.resetTriggersActiveClass();
     }
 
-    protected get triggerOpenSelector(): string {
-        return this.getAttribute('trigger-open');
+    protected get triggerOpenClassName(): string {
+        return this.getAttribute('trigger-open-class-name');
     }
 
     protected get activeTriggerClass(): string {
