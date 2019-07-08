@@ -50,6 +50,11 @@
                 },
             } only %}
 
+            <li class="{{ config.name }}__item {{ config.name }}__total spacing-y spacing-y--bigger">
+                <strong>{{ 'cart.price.grand.total' | trans }}</strong>
+                <strong class="float-right">{{ data.cart.totals.grandTotal | money }}</strong>
+            </li>
+            
             {% include molecule('gift-card-payment-summary', 'GiftCardWidget') ignore missing with {
                 class: 'list spacing-y',
                 data: {
@@ -57,15 +62,6 @@
                     isQuoteEditable: data.isQuoteEditable,
                 },
             } only %}
-
-            <li class="{{ config.name }}__item {{ config.name }}__total spacing-y spacing-y--bigger">
-                <strong>{{ 'cart.price.grand.total' | trans }}</strong>
-                {% if data.cart.totals.grandTotal != data.cart.totals.priceToPay %}
-                    <strong class="float-right">{{ data.cart.totals.priceToPay | money }}</strong>
-                {% else %}
-                    <strong class="float-right">{{ data.cart.totals.grandTotal | money }}</strong>
-                {% endif %}
-            </li>
         </ul>
     </div>
 
