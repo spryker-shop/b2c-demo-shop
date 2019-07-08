@@ -156,7 +156,7 @@ class NavigationGuiPresentationTester extends Actor
     {
         $this->submitForm(static::NAVIGATION_DELETE_FORM_SELECTOR, []);
     }
-    
+
     /**
      * @return int
      */
