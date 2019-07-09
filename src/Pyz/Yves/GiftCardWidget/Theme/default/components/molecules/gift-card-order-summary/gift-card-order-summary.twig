@@ -12,13 +12,13 @@
 {% block body %}
     {% for payment in data.order.payments %}
         {% if payment.giftCard is defined and payment.giftCard %}
-            <li class="{{ config.name }}__list-item">
+            <li>
                 {{ 'customer.profile.order_details.giftcard.label' | trans }}:&nbsp;{{ payment.giftCard.code }}
                 <span class="float-right">- {{ payment.amount | money }}</span>
             </li>
         {% else %}
-            <li class="{{ config.name }}__list-item">
-                {{ payment.paymentMethod }}:&nbsp;<span class="float-right">- {{ payment.amount | money }}</span>
+            <li>
+                {{ payment.paymentMethod | capitalize }}:&nbsp;<span class="float-right">- {{ payment.amount | money }}</span>
             </li>
         {% endif %}
     {% endfor %}
