@@ -1,0 +1,139 @@
+env:
+    APPLICATION_ENV: docker
+
+stores:
+  - DE
+  - AT
+  - US
+
+sections:
+    build:
+        generate-transfers:
+            command: "vendor/bin/console transfer:generate"
+
+        twig-cache-warmup:
+            command: "vendor/bin/console twig:cache:warmer"
+
+        navigation-cache-warmup:
+            command: "vendor/bin/console navigation:build-cache"
+
+        rest-request-validation-cache-warmup:
+            command: "vendor/bin/console glue:rest:build-request-validation-cache"
+
+        propel-copy-schema:
+            command: "vendor/bin/console propel:schema:copy"
+
+        propel-build:
+            command: "vendor/bin/console propel:model:build"
+
+        generate-entity-transfer:
+            command: "vendor/bin/console transfer:generate"
+
+        generate-page-index-map:
+            command: "vendor/bin/console search:setup:index-map"
+
+        translator-generate-cache:
+            command: "vendor/bin/console translator:generate-cache"
+
+    build-development:
+        generate-transfer-databuilders:
+            command: "vendor/bin/console transfer:databuilder:generate"
+
+        generate-auto-completion:
+            command: "vendor/bin/console dev:ide:generate-auto-completion"
+
+#        rest-api-generate-documentation:
+#            command: "vendor/bin/console rest-api:generate:documentation"
+
+    build-static:
+        dependencies-install:
+            command: "vendor/bin/console frontend:project:install-dependencies"
+
+        yves-install-dependencies:
+            command: "vendor/bin/console frontend:yves:install-dependencies"
+
+        yves-build-frontend:
+            command: "vendor/bin/console frontend:yves:build"
+
+        zed-install-dependencies:
+            command: "vendor/bin/console frontend:zed:install-dependencies"
+
+        zed-build-frontend:
+            command: "vendor/bin/console frontend:zed:build"
+
+    scheduler-setup:
+        jenkins-generate:
+            command: "vendor/bin/console scheduler:setup"
+            stores: true
+
+    scheduler-clean:
+        jenkins-generate:
+            command: "vendor/bin/console scheduler:clean"
+            stores: true
+
+    init-storages-per-store:
+        setup-search:
+            command: "vendor/bin/console setup:search"
+
+    init-storages-per-region:
+        propel-copy-schema:
+            command: "vendor/bin/console propel:schema:copy"
+
+        propel-postgres-compatibility:
+            command: "vendor/bin/console propel:pg-sql-compat"
+
+        propel-migration-delete:
+            command: "vendor/bin/console propel:migration:delete"
+
+        propel-diff:
+            command: "vendor/bin/console propel:diff"
+
+        propel-migrate:
+            command: "vendor/bin/console propel:migrate"
+
+        init-database:
+            command: "vendor/bin/console setup:init-db"
+
+    demodata:
+        import:
+            command: "vendor/bin/console data:import"
+
+        update-product-labels:
+            command: "vendor/bin/console product-label:relations:update"
+
+    sync:
+        run-worker:
+            command: "vendor/bin/console queue:worker:start"
+
+    cleanup:
+        excluded: true
+        set-permissions:
+            command: "vendor/bin/console queue:permission:set"
+            stores: true
+
+        purge-all-queues:
+            command: "vendor/bin/console queue:queue:purge-all"
+            stores: true
+
+        delete-all-queues:
+            command: "vendor/bin/console queue:queue:delete-all"
+            stores: true
+
+        delete-all-exchanges:
+            command: "vendor/bin/console queue:exchanges:delete-all"
+            stores: true
+
+        drop-tables:
+            command: "vendor/bin/console propel:tables:drop"
+
+        delete-elastic-search-index:
+            command: "vendor/bin/console search:index:delete"
+
+        delete-storage:
+            command: "vendor/bin/console storage:delete"
+
+        delete-migration-files:
+            command: "vendor/bin/console propel:migration:delete"
+
+        remove-logs:
+            command: "vendor/bin/console log:clear"
