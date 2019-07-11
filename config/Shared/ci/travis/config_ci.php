@@ -158,7 +158,7 @@ $config[RabbitMqEnv::RABBITMQ_CONNECTIONS] = [
 $config[LogConstants::LOG_LEVEL] = Logger::CRITICAL;
 
 // ---------- EventBehavior
-$config[EventBehaviorConstants::EVENT_BEHAVIOR_TRIGGERING_ACTIVE] = getenv('TEST_GROUP') === 'acceptance';
+$config[EventBehaviorConstants::EVENT_BEHAVIOR_TRIGGERING_ACTIVE] = false;
 
 // ---------- Trusted hosts
 $config[ApplicationConstants::YVES_TRUSTED_HOSTS] = [
