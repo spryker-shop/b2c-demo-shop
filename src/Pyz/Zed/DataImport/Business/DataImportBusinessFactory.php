@@ -440,8 +440,8 @@ class DataImportBusinessFactory extends SprykerDataImportBusinessFactory
                 $this->getProductBundleFacade()
             ));
 
-        $dataImporter->addDataSetStepBroker($dataSetStepBroker)
-            ->addAfterImportHook($this->createProductStockAfterImportPublishHook());
+        $dataImporter->addDataSetStepBroker($dataSetStepBroker);
+        $dataImporter->addAfterImportHook($this->createProductStockAfterImportPublishHook());
 
         return $dataImporter;
     }
@@ -849,9 +849,8 @@ class DataImportBusinessFactory extends SprykerDataImportBusinessFactory
             ->addStep($this->createLocalizedAttributesExtractorStep(['name']))
             ->addStep(new ProductLabelWriterStep());
 
-        $dataImporter
-            ->addDataSetStepBroker($dataSetStepBroker)
-            ->addAfterImportHook($this->createProductLabelAfterImportPublishHook());
+        $dataImporter->addDataSetStepBroker($dataSetStepBroker);
+        $dataImporter->addAfterImportHook($this->createProductLabelAfterImportPublishHook());
 
         return $dataImporter;
     }
