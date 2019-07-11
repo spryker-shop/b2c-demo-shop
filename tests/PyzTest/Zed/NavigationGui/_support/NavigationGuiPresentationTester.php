@@ -507,6 +507,7 @@ class NavigationGuiPresentationTester extends Actor
             $localePrefix = substr($localeTransfer->getLocaleName(), 0, 2);
             $localeUrls[] = sprintf('/%s/%s', $localePrefix, $localizedSlugs[$localeTransfer->getLocaleName()] ?? $defaultSlug);
         }
+
         return $localeUrls;
     }
 }
