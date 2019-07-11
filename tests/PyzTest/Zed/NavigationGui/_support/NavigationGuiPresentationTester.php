@@ -9,16 +9,11 @@ namespace PyzTest\Zed\NavigationGui;
 
 use Codeception\Actor;
 use Codeception\Scenario;
-use Generated\Shared\Transfer\NavigationNodeLocalizedAttributesTransfer;
-use Generated\Shared\Transfer\NavigationNodeTransfer;
 use Generated\Shared\Transfer\NavigationTransfer;
 use Generated\Shared\Transfer\NavigationTreeNodeTransfer;
 use Generated\Shared\Transfer\NavigationTreeTransfer;
 use Orm\Zed\Navigation\Persistence\SpyNavigation;
 use Orm\Zed\Navigation\Persistence\SpyNavigationQuery;
-use PyzTest\Zed\NavigationGui\PageObject\NavigationNodeCreatePage;
-use PyzTest\Zed\NavigationGui\PageObject\NavigationNodeUpdatePage;
-use PyzTest\Zed\NavigationGui\PageObject\NavigationPage;
 
 /**
  * Inherited Methods
@@ -160,266 +155,6 @@ class NavigationGuiPresentationTester extends Actor
     public function deleteFirstNavigationRow()
     {
         $this->submitForm(static::NAVIGATION_DELETE_FORM_SELECTOR, []);
-    }
-
-    /**
-     * @return void
-     */
-    public function testSeeEmptyNavigationTree()
-    {
-        $i = $this;
-        $i->wantTo('See navigation tree.');
-        $i->expect('Empty navigation tree displayed.');
-
-        $i->amLoggedInUser();
-        $i->prepareTestNavigationTreeEntities((new NavigationTreeTransfer())
-            ->setNavigation((new NavigationTransfer())
-                ->setName('Create child node without type test')
-                ->setKey('Create child node without type test')
-                ->setIsActive(true)));
-        $i->amOnPage(NavigationPage::URL);
-
-        $i->waitForNavigationTree();
-        $i->seeNumberOfNavigationNodes(1);
-    }
-
-    /**
-     * @return void
-     */
-    public function testCreateChildNodeWithoutType()
-    {
-        $i = $this;
-        $i->wantTo('Create child node without type.');
-        $i->expect('Navigation should have a root node persisted.');
-
-        $i->amLoggedInUser();
-        $i->prepareTestNavigationTreeEntities((new NavigationTreeTransfer())
-            ->setNavigation((new NavigationTransfer())
-                ->setName('Create child node without type test')
-                ->setKey('Create child node without type test')
-                ->setIsActive(true)));
-        $i->amOnPage(NavigationPage::URL);
-
-        $i->waitForNavigationTree();
-        $i->switchToNodeForm();
-        $i->see('Create child node');
-        $i->submitCreateNodeFormWithoutType('Child 1');
-
-        $i->seeSuccessMessage(NavigationNodeCreatePage::MESSAGE_SUCCESS);
-
-        $i->switchToNavigationTree();
-        $i->seeNumberOfNavigationNodes(2);
-    }
-
-    /**
-     * @return void
-     */
-    public function testCreateChildNodeWithExternalUrlType()
-    {
-        $i = $this;
-        $i->wantTo('Create external URL child node.');
-        $i->expect('Navigation should have a root node persisted.');
-
-        $i->amLoggedInUser();
-        $i->prepareTestNavigationTreeEntities((new NavigationTreeTransfer())
-            ->setNavigation((new NavigationTransfer())
-                ->setName('Create child node with external URL type test')
-                ->setKey('Create child node with external URL type test')
-                ->setIsActive(true))
-            ->addNode((new NavigationTreeNodeTransfer())
-                ->setNavigationNode((new NavigationNodeTransfer())
-                    ->addNavigationNodeLocalizedAttribute((new NavigationNodeLocalizedAttributesTransfer())
-                        ->setFkLocale($i->getIdLocale('en_US'))
-                        ->setTitle('foo')))));
-        $i->amOnPage(NavigationPage::URL);
-
-        $i->waitForNavigationTree();
-        $i->switchToNodeForm();
-        $i->see('Create child node');
-        $i->submitCreateNodeFormWithExternalUrlType('Child 2', 'http://google.com');
-
-        $i->seeSuccessMessage(NavigationNodeCreatePage::MESSAGE_SUCCESS);
-
-        $i->switchToNavigationTree();
-        $i->seeNumberOfNavigationNodes(3);
-    }
-
-    /**
-     * @return void
-     */
-    public function testUpdateNodeToCategoryType()
-    {
-        $i = $this;
-        $i->wantTo('Update child node to category type.');
-        $i->expect('Node changes should persist in Zed.');
-
-        $i->amLoggedInUser();
-        $navigationTreeTransfer = $i->prepareTestNavigationTreeEntities((new NavigationTreeTransfer())
-            ->setNavigation((new NavigationTransfer())
-                ->setName('Update child node to category type test')
-                ->setKey('Update child node to category type test')
-                ->setIsActive(true))
-            ->addNode((new NavigationTreeNodeTransfer())
-                ->setNavigationNode((new NavigationNodeTransfer())
-                    ->addNavigationNodeLocalizedAttribute((new NavigationNodeLocalizedAttributesTransfer())
-                        ->setFkLocale($i->getIdLocale('en_US'))
-                        ->setTitle('foo'))
-                    ->addNavigationNodeLocalizedAttribute((new NavigationNodeLocalizedAttributesTransfer())
-                        ->setFkLocale($i->getIdLocale('de_DE'))
-                        ->setTitle('foo')))));
-        $i->amOnPage(NavigationPage::URL);
-
-        $idNavigationNode = $navigationTreeTransfer->getNodes()[0]->getNavigationNode()->getIdNavigationNode();
-
-        $i->waitForNavigationTree();
-        $i->clickNode($idNavigationNode);
-        $i->switchToNodeForm();
-        $i->see('Update node');
-        $i->submitUpdateNodeToCategoryType('/en/computer', '/de/computer');
-
-        $i->seeSuccessMessage(NavigationNodeUpdatePage::MESSAGE_SUCCESS);
-        $i->switchToNavigationTree();
-        $i->seeNumberOfNavigationNodes(2);
-    }
-
-    /**
-     * @return void
-     */
-    public function testCreateChildNodeWithCmsPageType()
-    {
-        $i = $this;
-        $i->wantTo('Create CMS page child node.');
-        $i->expect('Navigation should have a new child node persisted.');
-
-        $i->amLoggedInUser();
-        $navigationTreeTransfer = $i->prepareTestNavigationTreeEntities((new NavigationTreeTransfer())
-            ->setNavigation((new NavigationTransfer())
-                ->setName('Create child node with CMS page type test')
-                ->setKey('Create child node with CMS page type test')
-                ->setIsActive(true))
-            ->addNode((new NavigationTreeNodeTransfer())
-                ->setNavigationNode((new NavigationNodeTransfer())
-                    ->addNavigationNodeLocalizedAttribute((new NavigationNodeLocalizedAttributesTransfer())
-                        ->setFkLocale($i->getIdLocale('en_US'))
-                        ->setTitle('foo'))
-                    ->addNavigationNodeLocalizedAttribute((new NavigationNodeLocalizedAttributesTransfer())
-                        ->setFkLocale($i->getIdLocale('de_DE'))
-                        ->setTitle('foo')))));
-        $i->amOnPage(NavigationPage::URL);
-
-        $idNavigationNode = $navigationTreeTransfer->getNodes()[0]->getNavigationNode()->getIdNavigationNode();
-
-        $i->waitForNavigationTree();
-        $i->clickNode($idNavigationNode);
-        $i->switchToNodeForm();
-        $i->clickAddChildNodeButton();
-        $i->see('Create child node');
-        $i->submitCreateNodeFormWithCmsPageType('Child 1.1', '/en/imprint', '/de/impressum');
-
-        $idChildNavigationNode = $i->seeSuccessMessage(NavigationNodeCreatePage::MESSAGE_SUCCESS);
-        $i->switchToNavigationTree();
-        $i->seeNumberOfNavigationNodes(3);
-        $i->seeNavigationNodeHierarchy($idNavigationNode, $idChildNavigationNode);
-    }
-
-    /**
-     * @return void
-     */
-    public function testChangeNavigationTreeStructure()
-    {
-        $i = $this;
-        $i->wantTo('Change tree structure and save.');
-        $i->expect('Updated navigation tree structure should have persisted.');
-
-        $i->amLoggedInUser();
-        $navigationTreeTransfer = $i->prepareTestNavigationTreeEntities((new NavigationTreeTransfer())
-            ->setNavigation((new NavigationTransfer())
-                ->setName('Create child node with CMS page type test')
-                ->setKey('Create child node with CMS page type test')
-                ->setIsActive(true))
-            ->addNode((new NavigationTreeNodeTransfer())
-                ->setNavigationNode((new NavigationNodeTransfer())
-                    ->addNavigationNodeLocalizedAttribute((new NavigationNodeLocalizedAttributesTransfer())
-                        ->setFkLocale($i->getIdLocale('en_US'))
-                        ->setTitle('node_1'))
-                    ->addNavigationNodeLocalizedAttribute((new NavigationNodeLocalizedAttributesTransfer())
-                        ->setFkLocale($i->getIdLocale('de_DE'))
-                        ->setTitle('node_1')))
-                ->addChild((new NavigationTreeNodeTransfer())
-                    ->setNavigationNode((new NavigationNodeTransfer())
-                        ->addNavigationNodeLocalizedAttribute((new NavigationNodeLocalizedAttributesTransfer())
-                            ->setFkLocale($i->getIdLocale('en_US'))
-                            ->setTitle('node_1.1'))
-                        ->addNavigationNodeLocalizedAttribute((new NavigationNodeLocalizedAttributesTransfer())
-                            ->setFkLocale($i->getIdLocale('de_DE'))
-                            ->setTitle('node_1.1')))))
-            ->addNode((new NavigationTreeNodeTransfer())
-                ->setNavigationNode((new NavigationNodeTransfer())
-                    ->addNavigationNodeLocalizedAttribute((new NavigationNodeLocalizedAttributesTransfer())
-                        ->setFkLocale($i->getIdLocale('en_US'))
-                        ->setTitle('node_2'))
-                    ->addNavigationNodeLocalizedAttribute((new NavigationNodeLocalizedAttributesTransfer())
-                        ->setFkLocale($i->getIdLocale('de_DE'))
-                        ->setTitle('node_2')))));
-        $i->amOnPage(NavigationPage::URL);
-
-        $idNavigationNode = $navigationTreeTransfer->getNodes()[0]
-            ->getChildren()[0]
-            ->getNavigationNode()
-            ->getIdNavigationNode();
-        $idTargetNavigationNode = $navigationTreeTransfer->getNodes()[1]
-            ->getNavigationNode()
-            ->getIdNavigationNode();
-
-        $i->waitForNavigationTree();
-        $i->moveNavigationNode($idNavigationNode, $idTargetNavigationNode);
-        $i->seeNavigationNodeHierarchy($idTargetNavigationNode, $idNavigationNode);
-        $i->saveNavigationTreeOrder();
-        $i->seeSuccessfulOrderSaveMessage(NavigationPage::MESSAGE_TREE_UPDATE_SUCCESS);
-    }
-
-    /**
-     * @return void
-     */
-    public function testDeleteNavigationNode()
-    {
-        $i = $this;
-        /**
-         * Test skipped because popup confirmation is not working as expected under phantomjs.
-         * TODO: once we have Selenium, enable this test case.
-         */
-        return;
-//        $i->wantTo('Remove child node.');
-//        $i->expect('Node should be removed from Zed.');
-//
-//        $i->amLoggedInUser();
-//        $navigationTreeTransfer = $i->prepareTestNavigationTreeEntities((new NavigationTreeTransfer())
-//            ->setNavigation((new NavigationTransfer())
-//                ->setName('Delete navigation node')
-//                ->setKey('Delete navigation node')
-//                ->setIsActive(true))
-//            ->addNode((new NavigationTreeNodeTransfer())
-//                ->setNavigationNode((new NavigationNodeTransfer())
-//                    ->addNavigationNodeLocalizedAttribute((new NavigationNodeLocalizedAttributesTransfer())
-//                        ->setFkLocale($i->getIdLocale('en_US'))
-//                        ->setTitle('foo'))
-//                    ->addNavigationNodeLocalizedAttribute((new NavigationNodeLocalizedAttributesTransfer())
-//                        ->setFkLocale($i->getIdLocale('de_DE'))
-//                        ->setTitle('foo')))));
-//        $i->amOnPage(NavigationPage::URL);
-//
-//        $idNavigationNode = $navigationTreeTransfer->getNodes()[0]->getNavigationNode()->getIdNavigationNode();
-//
-//        $i->waitForNavigationTree();
-//        $i->clickNode($idNavigationNode);
-//        $i->switchToNodeForm();
-//        $i->clickRemoveNodeButton();
-//        $i->canSeeInPopup('Are you sure you remove the selected node and all its children?');
-//        $i->acceptPopup();
-//
-//        $i->seeSuccessMessage(NavigationNodeDeletePage::MESSAGE_SUCCESS);
-//        $i->switchToNavigationTree();
-//        $i->seeNumberOfNavigationNodes(1);
     }
 
     /**
@@ -736,5 +471,42 @@ class NavigationGuiPresentationTester extends Actor
             )->getFirst();
 
         return $navigationEntity;
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return void
+     */
+    public function submitCreateNodeFormWithCmsPageTypeWithFormData(array $data): void
+    {
+        $formData = [
+            'navigation_node[node_type]' => 'cms_page',
+            'navigation_node[is_active]' => true,
+        ];
+        foreach ($data as $index => $localizedData) {
+            $titleKey = sprintf('navigation_node[navigation_node_localized_attributes][%s][title]', $index);
+            $urlKey = sprintf('navigation_node[navigation_node_localized_attributes][%s][cms_page_url]', $index);
+            $formData[$titleKey] = $localizedData['title'];
+            $formData[$urlKey] = $localizedData['url'];
+        }
+        $this->submitForm(static::NODE_FORM_SELECTOR, $formData);
+    }
+
+    /**
+     * @param string $defaultSlug
+     * @param string[] $localizedSlugs
+     *
+     * @return array
+     */
+    public function generateUrlByAvailableLocaleTransfers(string $defaultSlug, array $localizedSlugs): array
+    {
+        $localeTransfers = $this->getLocator()->locale()->facade()->getLocaleCollection();
+        $localeUrls = [];
+        foreach ($localeTransfers as $localeTransfer) {
+            $localePrefix = substr($localeTransfer->getLocaleName(), 0, 2);
+            $localeUrls[] = sprintf('/%s/%s', $localePrefix, $localizedSlugs[$localeTransfer->getLocaleName()] ?? $defaultSlug);
+        }
+        return $localeUrls;
     }
 }
