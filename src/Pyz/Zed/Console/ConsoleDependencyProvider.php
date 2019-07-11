@@ -23,7 +23,6 @@ use Spryker\Zed\CodeGenerator\Communication\Console\BundleYvesCodeGeneratorConso
 use Spryker\Zed\CodeGenerator\Communication\Console\BundleZedCodeGeneratorConsole;
 use Spryker\Zed\Console\Communication\Plugin\ConsoleLogPlugin;
 use Spryker\Zed\Console\ConsoleDependencyProvider as SprykerConsoleDependencyProvider;
-use Spryker\Zed\CustomersRestApi\Communication\Console\CustomerAddressesUuidWriterConsole;
 use Spryker\Zed\DataImport\Communication\Console\DataImportConsole;
 use Spryker\Zed\DataImport\Communication\Console\DataImportDumpConsole;
 use Spryker\Zed\Development\Communication\Console\CodeArchitectureSnifferConsole;
@@ -125,7 +124,6 @@ use Spryker\Zed\Translator\Communication\Console\GenerateTranslationCacheConsole
 use Spryker\Zed\Twig\Communication\Console\CacheWarmerConsole;
 use Spryker\Zed\Twig\Communication\Plugin\ServiceProvider\TwigServiceProvider as SprykerTwigServiceProvider;
 use Spryker\Zed\Uuid\Communication\Console\UuidGeneratorConsole;
-use Spryker\Zed\WishlistsRestApi\Communication\Console\WishlistsUuidWriterConsole;
 use Spryker\Zed\ZedNavigation\Communication\Console\BuildNavigationConsole;
 use Stecman\Component\Symfony\Console\BashCompletion\CompletionCommand;
 
@@ -264,9 +262,7 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
 
             new PriceProductStoreOptimizeConsole(),
 
-            new CustomerAddressesUuidWriterConsole(),
             new UuidGeneratorConsole(),
-            new WishlistsUuidWriterConsole(),
             new DeleteExpiredGuestQuoteConsole(),
             new BuildValidationCacheConsole(),
 

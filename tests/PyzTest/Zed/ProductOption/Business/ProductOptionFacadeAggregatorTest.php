@@ -229,6 +229,7 @@ class ProductOptionFacadeAggregatorTest extends Test
         $itemTransfer->addProductOption($productOptionTransfer);
 
         $orderTransfer->addItem($itemTransfer);
+
         return $orderTransfer;
     }
 }

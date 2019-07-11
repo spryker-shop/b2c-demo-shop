@@ -7,6 +7,7 @@
 
 namespace Pyz\Zed\EventDispatcher;
 
+use Spryker\Zed\Application\Communication\Plugin\EventDispatcher\HeadersSecurityEventDispatcherPlugin;
 use Spryker\Zed\EventDispatcher\EventDispatcherDependencyProvider as SprykerEventDispatcherDependencyProvider;
 use Spryker\Zed\Locale\Communication\Plugin\EventDispatcher\LocaleEventDispatcherPlugin;
 use Spryker\Zed\Router\Communication\Plugin\EventDispatcher\RouterLocaleEventDispatcherPlugin;
@@ -23,6 +24,7 @@ class EventDispatcherDependencyProvider extends SprykerEventDispatcherDependency
             new TwigEventDispatcherPlugin(),
             new LocaleEventDispatcherPlugin(),
             new RouterLocaleEventDispatcherPlugin(),
+            new HeadersSecurityEventDispatcherPlugin(),
         ];
     }
 }

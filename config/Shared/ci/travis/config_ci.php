@@ -9,6 +9,7 @@ use Spryker\Shared\Collector\CollectorConstants;
 use Spryker\Shared\Config\ConfigConstants;
 use Spryker\Shared\Customer\CustomerConstants;
 use Spryker\Shared\EventBehavior\EventBehaviorConstants;
+use Spryker\Shared\GlueApplication\GlueApplicationConstants;
 use Spryker\Shared\Kernel\KernelConstants;
 use Spryker\Shared\Kernel\Store;
 use Spryker\Shared\Log\LogConstants;
@@ -157,7 +158,7 @@ $config[RabbitMqEnv::RABBITMQ_CONNECTIONS] = [
 $config[LogConstants::LOG_LEVEL] = Logger::CRITICAL;
 
 // ---------- EventBehavior
-$config[EventBehaviorConstants::EVENT_BEHAVIOR_TRIGGERING_ACTIVE] = false;
+$config[EventBehaviorConstants::EVENT_BEHAVIOR_TRIGGERING_ACTIVE] = getenv('TEST_GROUP') === 'acceptance';
 
 // ---------- Trusted hosts
 $config[ApplicationConstants::YVES_TRUSTED_HOSTS] = [
@@ -170,6 +171,11 @@ $config[ApplicationConstants::YVES_TRUSTED_HOSTS] = [
 $config[QuoteConstants::GUEST_QUOTE_LIFETIME] = 'P01M';
 
 $config[MailConstants::SMTP_PORT] = 1025;
+
+// ----------- Glue Application
+$config[GlueApplicationConstants::GLUE_APPLICATION_DOMAIN] = 'http://glue.de.spryker.test';
+$config[TestifyConstants::GLUE_APPLICATION_DOMAIN] = $config[GlueApplicationConstants::GLUE_APPLICATION_DOMAIN];
+$config[TestifyConstants::GLUE_OPEN_API_SCHEMA] = APPLICATION_SOURCE_DIR . '/Generated/Glue/Specification/spryker_rest_api.schema.yml';
 
 // ---------- Kernel
 $config[KernelConstants::ENABLE_CONTAINER_OVERRIDING] = true;

@@ -22,6 +22,11 @@ if (file_exists($codeceptionShimFilePath)) {
     require_once($codeceptionShimFilePath);
 }
 
+$manualAutoload = APPLICATION_VENDOR_DIR . '/squizlabs/php_codesniffer/autoload.php';
+if (!class_exists(\PHP_CodeSniffer\Config::class) && file_exists($manualAutoload)) {
+    require $manualAutoload;
+}
+
 // Shim to not throw "Function opcache_invalidate not found" error when opcache is not enabled
 if (!function_exists('opcache_invalidate')) {
     /**
