@@ -8,6 +8,8 @@
 namespace Pyz\Zed\Console;
 
 use Pyz\Zed\DataImport\DataImportConfig;
+use Pyz\Zed\Development\Communication\Console\AcceptanceCodeTestConsole;
+use Pyz\Zed\Development\Communication\Console\FunctionalCodeTestConsole;
 use Pyz\Zed\PriceProductScheduleDataImport\PriceProductScheduleDataImportConfig;
 use Silex\Provider\TwigServiceProvider as SilexTwigServiceProvider;
 use Spryker\Shared\Config\Environment;
@@ -283,6 +285,8 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
             $commands[] = new CodeTestConsole();
             $commands[] = new CodeStyleSnifferConsole();
             $commands[] = new CodeArchitectureSnifferConsole();
+            $commands[] = new AcceptanceCodeTestConsole();
+            $commands[] = new FunctionalCodeTestConsole();
             $commands[] = new CodePhpstanConsole();
             $commands[] = new CodePhpMessDetectorConsole();
             $commands[] = new ValidatorConsole();
