@@ -114,7 +114,12 @@
                     </div>
                 {% endif %}
                 <ul class="list">
-                    <li class="list__item">{{data.payment.paymentSelection | trans}}</li>
+                    {% if data.payment.paymentSelection == 'Nopayment' %}
+                        <li class="list__item">{{ 'payment.Nopayment' | trans }}</li>
+                    {% else %}
+                        <li class="list__item">{{ data.payment.paymentSelection | trans }}</li>
+                    {% endif %}
+
                     {% if data.payment.paymentSelection == 'dummyPaymentCreditCard' %}
                         {% set partOfCardNumder = data.payment.dummyPayment.cardNumber[(data.payment.dummyPayment.cardNumber | length)-3:] %}
                         <li class="list__item">{{ 'dummyPaymentCreditCard.card_type' | trans }}: {{ data.payment.dummyPayment.cardType }}</li>
