@@ -6,6 +6,8 @@
 
 {% block body %}
     {% include molecule('banner-jumbotron', 'ContentBannerWidget') with {
-        banner: data.banner
+        data: {
+            banner: data.banner
+        },
     } only %}
 {% endblock %}

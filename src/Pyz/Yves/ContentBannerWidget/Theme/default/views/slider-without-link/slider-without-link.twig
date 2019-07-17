@@ -6,7 +6,9 @@
 
 {% block body %}
     {% include molecule('banner-jumbotron', 'ContentBannerWidget') with {
-        banner: data.banner,
-        isBannerClickable: false,
+        data: {
+            banner: data.banner,
+            isBannerClickable: false,
+        },
     } only %}
 {% endblock %}
