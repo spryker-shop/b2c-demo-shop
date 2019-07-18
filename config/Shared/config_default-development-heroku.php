@@ -19,10 +19,13 @@ use Spryker\Shared\Session\SessionConstants;
 use Spryker\Shared\StorageRedis\StorageRedisConstants;
 use Spryker\Shared\ZedNavigation\ZedNavigationConstants;
 use Spryker\Shared\ZedRequest\ZedRequestConstants;
+use SprykerShop\Shared\ShopApplication\ShopApplicationConstants;
 
 // ---------- General
 $config[KernelConstants::SPRYKER_ROOT] = APPLICATION_ROOT_DIR . '/vendor/spryker';
-$config[ApplicationConstants::ENABLE_APPLICATION_DEBUG] = false;
+$config[ApplicationConstants::ENABLE_APPLICATION_DEBUG]
+    = $config[ShopApplicationConstants::ENABLE_APPLICATION_DEBUG]
+    = false;
 $config[ZedRequestConstants::SET_REPEAT_DATA] = false;
 $config[KernelConstants::STORE_PREFIX] = 'DEV';
 
@@ -72,7 +75,6 @@ $config[SearchConstants::ELASTICA_PARAMETER__PORT] = $ELASTICA_PORT;
 $config[SchedulerConstants::ENABLED_SCHEDULERS] = [
     SchedulerConfig::SCHEDULER_JENKINS,
 ];
-
 $config[SchedulerJenkinsConstants::JENKINS_CONFIGURATION] = [
     SchedulerConfig::SCHEDULER_JENKINS => [
         SchedulerJenkinsConfig::SCHEDULER_JENKINS_BASE_URL => 'http://localhost:10007/',
