@@ -48,7 +48,7 @@
                             {% endif %}
                         {% endfor %}
 
-                        <button type="submit" class="button" data-init-single-click {% if isDisabled %}disabled{% endif %}>
+                        <button type="submit" class="button" data-init-single-click {{ isDisabled ? 'disabled' }}>
                             {{ 'product.set.detail.add-all-to-cart' | trans }}
                         </button>
                     </form>

@@ -13,9 +13,9 @@
                     name: productAbstractView.name,
                     abstractId: productAbstractView.idProductAbstract,
                     url: productAbstractView.url,
-                    imageUrl: productAbstractView.images is empty ? '' : productAbstractView.images.0.externalUrlSmall,
+                    imageUrl: productAbstractView.images ? productAbstractView.images.0.externalUrlSmall,
                     price: productAbstractView.prices.DEFAULT | default(null),
-                    originalPrice: productAbstractView.prices.ORIGINAL is defined ? productAbstractView.prices.ORIGINAL : null
+                    originalPrice: productAbstractView.prices.ORIGINAL ?? null,
                 },
                 embed: {
                     sku: productAbstractView.sku,
@@ -37,8 +37,8 @@
                                             modifiers: ['align-right'],
                                             data: {
                                                 amount: data.price,
-                                                originalAmount: data.originalPrice is empty ? null : data.originalPrice
-                                            }
+                                                originalAmount: data.originalPrice is empty ? null : data.originalPrice,
+                                            },
                                         } only %}
                                     </div>
                                 {% endblock %}
@@ -60,8 +60,8 @@
                                         attributes: {
                                             alt: data.name,
                                             src: data.imageUrl,
-                                            title: data.name
-                                        }
+                                            title: data.name,
+                                        },
                                     } only %}
                                 </a>
                             {% endblock %}
