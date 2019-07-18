@@ -37,7 +37,7 @@
                                             modifiers: ['align-right'],
                                             data: {
                                                 amount: data.price,
-                                                originalAmount: data.originalPrice is empty ? null : data.originalPrice,
+                                                originalAmount: data.originalPrice ?: null,
                                             },
                                         } only %}
                                     </div>
