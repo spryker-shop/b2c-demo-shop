@@ -14,7 +14,7 @@
     {% if data.formName is not null and data.selectedValue is not null %}
         {% block selectedValue %}
             {{ data.selectedValue }}
-            <button class="spacing-left {{ config.name }}__trigger {{ config.jsName }}__trigger">
+            <button class="spacing-left {{ config.name }}__button {{ config.jsName }}__trigger">
                 {%- include atom('icon') with {
                     modifiers: ['secondary'],
                     data: {
