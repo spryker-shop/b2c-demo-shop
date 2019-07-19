@@ -60,6 +60,7 @@ class CmsBlockStoreWriterStep extends PublishAwareStep implements DataImportStep
             static::$idCmsBlockBuffer[$cmsBlockName] =
                 SpyCmsBlockQuery::create()->findOneByName($cmsBlockName)->getIdCmsBlock();
         }
+
         return static::$idCmsBlockBuffer[$cmsBlockName];
     }
 
@@ -74,6 +75,7 @@ class CmsBlockStoreWriterStep extends PublishAwareStep implements DataImportStep
             static::$idStoreBuffer[$storeName] =
                 SpyStoreQuery::create()->findOneByName($storeName)->getIdStore();
         }
+
         return static::$idStoreBuffer[$storeName];
     }
 }

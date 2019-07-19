@@ -20,6 +20,7 @@ class MessengerDependencyProvider extends SprykerMessengerDependencyProvider
     {
         return [
             new GlossaryTranslationPlugin(),
+
             /**
              * TranslationPlugin needs to be after other translator plugins.
              */

@@ -21,14 +21,13 @@ settings:
 coverage:
     enabled: true
     remote: true
-    c3_url: 'http://zed.de.suite.local'
+    c3_url: 'http://zed.de.shop-suite.local'
     whitelist: { include: ['src/Pyz/*.php'] }
 
 extensions:
-    commands:
-        - \SprykerTest\Shared\Testify\Fixtures\FixturesCommand
     enabled:
         - \SprykerTest\Shared\Testify\Helper\WebDriverHelper
+        - \SprykerTest\Shared\Testify\Helper\SuiteFilterHelper
     config:
         \SprykerTest\Shared\Testify\Helper\WebDriverHelper:
             suites: ['Presentation']
@@ -37,6 +36,9 @@ extensions:
             remote-enable: "%SPRYKER_TESTING_ENABLED%"
             host: "%SPRYKER_TEST_WEB_DRIVER_HOST%"
             browser: "%SPRYKER_TEST_IN_BROWSER%"
+        \SprykerTest\Shared\Testify\Helper\SuiteFilterHelper:
+            inclusive:
+                - Presentation
 
 params:
     - tests/default.yml

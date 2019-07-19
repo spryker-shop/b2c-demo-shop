@@ -21,7 +21,7 @@ use Codeception\Scenario;
  * @method void am($role)
  * @method void lookForwardTo($achieveValue)
  * @method void comment($description)
- * @method \Codeception\Lib\Friend haveFriend($name, $actorClass = NULL)
+ * @method \Codeception\Lib\Friend haveFriend($name, $actorClass = null)
  *
  * @SuppressWarnings(PHPMD)
  */
@@ -118,13 +118,13 @@ class ProductRelationPresentationTester extends Actor
         $ruleSelectorBaseId = sprintf('[@id="builder_rule_%d"]', $this->numberOfRulesSelected);
 
         $selectProductRule = sprintf('//*%s/div[3]/select', $ruleSelectorBaseId);
-        $this->waitForElement($selectProductRule);
+        $this->waitForElement($selectProductRule, static::ELEMENT_TIMEOUT);
         $this->selectOption($selectProductRule, $ruleName);
         $selectProductOperator = sprintf('//*%s/div[4]/select', $ruleSelectorBaseId);
-        $this->waitForElement($selectProductOperator);
+        $this->waitForElement($selectProductOperator, static::ELEMENT_TIMEOUT);
         $this->selectOption($selectProductOperator, $operator);
         $selectProductValue = sprintf('//*%s/div[5]/input', $ruleSelectorBaseId);
-        $this->waitForElement($selectProductValue);
+        $this->waitForElement($selectProductValue, static::ELEMENT_TIMEOUT);
         $this->fillField($selectProductValue, $value);
 
         $this->numberOfRulesSelected++;

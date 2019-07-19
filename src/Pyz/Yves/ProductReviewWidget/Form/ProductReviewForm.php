@@ -59,7 +59,6 @@ class ProductReviewForm extends SprykerShopProductReviewForm
             ChoiceType::class,
             [
                 'choices' => array_flip($this->getRatingFieldChoices()),
-                'choices_as_values' => true,
                 'label' => 'product_review.submit.rating',
                 'required' => true,
                 'expanded' => false,
