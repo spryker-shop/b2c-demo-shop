@@ -1,0 +1,27 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'variant-resetter',
+    tag: 'variant-resetter',
+} %}
+
+{% define data = {
+    formName: null,
+    selectedValue: null,
+} %}
+
+{% block body %}
+    {% block selectedValue %}
+        {{ data.selectedValue }}
+        <a href="?" class="spacing-left {{ config.jsName }}__trigger">
+            {%- include atom('icon') with {
+                modifiers: ['secondary'],
+                data: {
+                    name: 'close',
+                },
+            } only -%}
+        </a>
+    {% endblock %}
+
+    <input type="hidden" class="{{ config.jsName }}__target" name="{{ data.formName }}" value="{{ data.selectedValue }}">
+{% endblock %}
