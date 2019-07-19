@@ -11,17 +11,19 @@
 } %}
 
 {% block body %}
-    {% block selectedValue %}
-        {{ data.selectedValue }}
-        <a href="?" class="spacing-left {{ config.jsName }}__trigger">
-            {%- include atom('icon') with {
-                modifiers: ['secondary'],
-                data: {
-                    name: 'close',
-                },
-            } only -%}
-        </a>
-    {% endblock %}
+    {% if data.formName is not null and data.selectedValue is not null %}
+        {% block selectedValue %}
+            {{ data.selectedValue }}
+            <button class="spacing-left {{ config.name }}__trigger {{ config.jsName }}__trigger">
+                {%- include atom('icon') with {
+                    modifiers: ['secondary'],
+                    data: {
+                        name: 'close',
+                    },
+                } only -%}
+            </button>
+        {% endblock %}
 
-    <input type="hidden" class="{{ config.jsName }}__target" name="{{ data.formName }}" value="{{ data.selectedValue }}">
+        <input type="hidden" class="{{ config.jsName }}__target" name="{{ data.formName }}" value="{{ data.selectedValue }}">
+    {% endif %}
 {% endblock %}
