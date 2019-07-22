@@ -59,6 +59,7 @@ class CartDependencyProvider extends SprykerCartDependencyProvider
             new IsQuantitySplittableItemExpanderPlugin(),
             new CartItemPricePlugin(),
             new CartItemProductOptionPlugin(),
+            new ProductUrlCartExpanderPlugin(),
             new ExpandBundleItemsPlugin(),
             new ExpandBundleItemsWithImagesPlugin(),
             new SkuGroupKeyPlugin(),
@@ -67,7 +68,6 @@ class CartDependencyProvider extends SprykerCartDependencyProvider
             new ProductImageCartPlugin(),
             new CartGroupPromotionItems(),
             new CartShipmentExpanderPlugin(),
-            new ProductUrlCartExpanderPlugin(),
             new GiftCardMetadataExpanderPlugin(), #GiftCardFeature
         ];
     }
