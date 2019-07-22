@@ -1,4 +1,4 @@
-@mixin catalog-page-cms-block ($name: '.catalog-cms-block') {
+@mixin catalog-page-catalog-cms-block($name: '.catalog-cms-block') {
     #{$name} {
         font-size: rem(14);
         line-height: rem(21);
@@ -9,18 +9,22 @@
         }
 
         a {
-            @include helper-effect-transition(color);
-            text-decoration: underline;
-            color: $setting-color-black;
+            &:not(.button) {
+                @include helper-effect-transition(color);
+                text-decoration: underline;
+                color: $setting-color-black;
 
-            &:hover {
-                color: $setting-color-alt;
+                &:hover {
+                    color: $setting-color-alt;
+                }
             }
         }
 
-        &--top &__inner {
-            padding-top: rem(10);
-            margin-bottom: rem(-11);
+        &--top {
+            #{$name}__inner {
+                padding-top: rem(10);
+                margin-bottom: rem(-11);
+            }
         }
 
         &--middle {
@@ -35,14 +39,16 @@
             }
         }
 
-        &--bottom &__inner {
-            padding-bottom: rem(100);
+        &--bottom {
+            #{$name}__inner {
+                padding-bottom: rem(100);
 
-            @include helper-breakpoint-media-max($lg-max) {
-                padding-bottom: rem(50);
+                @include helper-breakpoint-media-max($lg-max) {
+                    padding-bottom: rem(50);
+                }
             }
         }
     }
 }
 
-@include catalog-page-cms-block();
+@include catalog-page-catalog-cms-block();

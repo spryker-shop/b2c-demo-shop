@@ -7,6 +7,7 @@
 
 namespace Pyz\Yves\EventDispatcher;
 
+use Spryker\Yves\Application\Communication\Plugin\EventDispatcher\HeadersSecurityEventDispatcherPlugin;
 use Spryker\Yves\EventDispatcher\EventDispatcherDependencyProvider as SprykerEventDispatcherDependencyProvider;
 use Spryker\Yves\Locale\Plugin\EventDispatcher\LocaleEventDispatcherPlugin;
 use Spryker\Yves\Router\Plugin\EventDispatcher\RouterLocaleEventDispatcherPlugin;
@@ -23,6 +24,7 @@ class EventDispatcherDependencyProvider extends SprykerEventDispatcherDependency
             new ShopApplicationEventDispatcherPlugin(),
             new LocaleEventDispatcherPlugin(),
             new RouterLocaleEventDispatcherPlugin(),
+            new HeadersSecurityEventDispatcherPlugin(),
         ];
     }
 }

@@ -5,6 +5,8 @@
  */
 
 use Monolog\Logger;
+use Pyz\Shared\Console\ConsoleConstants;
+use Pyz\Shared\Scheduler\SchedulerConfig;
 use Pyz\Yves\ShopApplication\YvesBootstrap;
 use Pyz\Zed\Application\Communication\ZedBootstrap;
 use Spryker\Shared\Application\Log\Config\SprykerLoggerConfig;
@@ -16,14 +18,15 @@ use Spryker\Shared\GlueApplication\GlueApplicationConstants;
 use Spryker\Shared\Kernel\KernelConstants;
 use Spryker\Shared\Log\LogConstants;
 use Spryker\Shared\Oauth\OauthConstants;
-use Spryker\Shared\OauthCustomerConnector\OauthCustomerConnectorConstants;
 use Spryker\Shared\Propel\PropelConstants;
 use Spryker\Shared\Queue\QueueConstants;
 use Spryker\Shared\RabbitMq\RabbitMqEnv;
+use Spryker\Shared\Scheduler\SchedulerConstants;
+use Spryker\Shared\SchedulerJenkins\SchedulerJenkinsConstants;
 use Spryker\Shared\Search\SearchConstants;
 use Spryker\Shared\Session\SessionConstants;
 use Spryker\Shared\SessionRedis\SessionRedisConfig;
-use Spryker\Shared\Setup\SetupConstants;
+use Spryker\Shared\StorageRedis\StorageRedisConstants;
 use Spryker\Shared\Testify\TestifyConstants;
 use Spryker\Shared\Twig\TwigConstants;
 use Spryker\Shared\WebProfiler\WebProfilerConstants;
@@ -39,6 +42,9 @@ $config[TestifyConstants::BOOTSTRAP_CLASS_ZED] = ZedBootstrap::class;
 $config[PropelConstants::ZED_DB_ENGINE] = $config[PropelConstants::ZED_DB_ENGINE_PGSQL];
 $config[PropelConstants::ZED_DB_HOST] = '127.0.0.1';
 $config[PropelConstants::ZED_DB_PORT] = 5432;
+
+// ---------- Redis
+$config[StorageRedisConstants::STORAGE_REDIS_DATABASE] = 3;
 
 // ---------- Session
 $config[SessionConstants::SESSION_IS_TEST] = (bool)getenv("SESSION_IS_TEST");
@@ -65,9 +71,15 @@ $config[TwigConstants::YVES_TWIG_OPTIONS] = [
 // ---------- Logging
 $config[LogConstants::LOG_FILE_PATH] = APPLICATION_ROOT_DIR . '/data/logs';
 
-// ---------- Jenkins
-$config[SetupConstants::JENKINS_BASE_URL] = 'http://localhost:10007/';
-$config[SetupConstants::JENKINS_DIRECTORY] = '/data/shop/development/shared/data/common/jenkins';
+// ---------- Scheduler
+$config[SchedulerConstants::ENABLED_SCHEDULERS] = [
+    SchedulerConfig::SCHEDULER_JENKINS,
+];
+$config[SchedulerJenkinsConstants::JENKINS_CONFIGURATION] = [
+    SchedulerConfig::SCHEDULER_JENKINS => [
+        'host' => 'http://localhost:10007/',
+    ],
+];
 
 // ---------- ErrorHandler
 $config[ErrorHandlerConstants::ERROR_RENDERER] = WebExceptionErrorRenderer::class;
@@ -86,13 +98,17 @@ $config[GlueApplicationConstants::GLUE_APPLICATION_REST_DEBUG] = true;
 $config[OauthConstants::PRIVATE_KEY_PATH] = 'file://' . APPLICATION_ROOT_DIR . '/config/Zed/dev_only_private.key';
 $config[OauthConstants::PUBLIC_KEY_PATH] = 'file://' . APPLICATION_ROOT_DIR . '/config/Zed/dev_only_public.key';
 $config[OauthConstants::ENCRYPTION_KEY] = 'lxZFUEsBCJ2Yb14IF2ygAHI5N4+ZAUXXaSeeJm6+twsUmIen';
-
-// ----------- AuthRestApi
-$config[OauthCustomerConnectorConstants::OAUTH_CLIENT_IDENTIFIER] = 'frontend';
-$config[OauthCustomerConnectorConstants::OAUTH_CLIENT_SECRET] = 'abc123';
+$config[OauthConstants::OAUTH_CLIENT_IDENTIFIER] = 'frontend';
+$config[OauthConstants::OAUTH_CLIENT_SECRET] = 'abc123';
 
 // ----------- Queue
 $config[QueueConstants::QUEUE_WORKER_LOOP] = true;
 
 // ---------- Event
 $config[EventConstants::EVENT_CHUNK] = 5000;
+
+// ---------- Kernel
+$config[KernelConstants::ENABLE_CONTAINER_OVERRIDING] = true;
+
+// ---------- Console
+$config[ConsoleConstants::ENABLE_DEVELOPMENT_CONSOLE_COMMANDS] = true;

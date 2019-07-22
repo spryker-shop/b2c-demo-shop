@@ -1,11 +1,13 @@
 {% extends template('widget') %}
 
 {% define data = {
-    product: product | default(_widget.product.idProductAbstract)
+    product: product | default(_widget.product.idProductAbstract),
 } %}
 
 {% block body %}
-    <div class="pdp-cms-block">
-        {{ spyCmsBlock({ product: data.product }) }}
-    </div>
+    {% include molecule('product-cms-block', 'CmsBlockWidget') with {
+        data: {
+            idProductAbstract: data.product,
+        },
+    } only %}
 {% endblock %}

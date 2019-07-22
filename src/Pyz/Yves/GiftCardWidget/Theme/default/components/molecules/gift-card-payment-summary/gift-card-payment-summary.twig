@@ -31,4 +31,10 @@
             </li>
         {% endif %}
     {% endfor %}
+
+    {% if data.cart.totals.grandTotal != data.cart.totals.priceToPay %}
+        <li class="{{ config.name }}__list-item">
+            {{ 'cart.total.price_to_pay' | trans }}<strong class="float-right">{{ data.cart.totals.priceToPay | money }}</strong>
+        </li>
+    {% endif %}
 {% endblock %}
