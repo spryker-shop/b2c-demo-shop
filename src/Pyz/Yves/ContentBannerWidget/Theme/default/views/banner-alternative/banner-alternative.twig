@@ -5,27 +5,12 @@
 } %}
 
 {% block body %}
-    {% embed molecule('banner') with {
+    {% embed molecule('banner-jumbotron', 'ContentBannerWidget') with {
         data: {
-            imageUrl: data.banner.imageUrl,
-            title: data.banner.title,
-            subtitle: data.banner.subtitle,
-            clickUrl: data.banner.clickUrl,
-            altText: data.banner.altText,
+            banner: data.banner,
+            isBannerClickable: banner.clickUrl,
         },
     } only %}
-        {% block content %}
-            {% block title %}
-                {{ parent() }}
-            {% endblock %}
-
-            {% block image %}
-                {{ parent() }}
-            {% endblock %}
-
-            {% block subtitle %}
-                {{ parent() }}
-            {% endblock %}
-        {% endblock %}
+        {% block bannerTextPosition %}{% endblock %}
     {% endembed %}
 {% endblock %}

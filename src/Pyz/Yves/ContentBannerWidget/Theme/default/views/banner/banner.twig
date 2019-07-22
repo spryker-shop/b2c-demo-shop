@@ -5,13 +5,12 @@
 } %}
 
 {% block body %}
-    {% include molecule('banner') with {
+    {% embed molecule('banner-jumbotron', 'ContentBannerWidget') with {
         data: {
-            imageUrl: data.banner.imageUrl,
-            title: data.banner.title,
-            subtitle: data.banner.subtitle,
-            clickUrl: data.banner.clickUrl,
-            altText: data.banner.altText,
+            banner: data.banner,
+            isBannerClickable: banner.clickUrl,
         },
     } only %}
+        {% block bannerTextPosition %}grid--bottom{% endblock %}
+    {% endembed %}
 {% endblock %}

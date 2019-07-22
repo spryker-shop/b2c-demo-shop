@@ -43,7 +43,7 @@
                                 'data-json': '{
                                     "slidesToShow": 1,
                                     "dots": true,
-                                    "arrows": false,
+                                    "arrows": false
                                 }',
                             },
                             modifiers: ['product-set'],
@@ -66,65 +66,12 @@
                 <div class="col col--sm-12 col--lg-7 product-set-slider product-set-slider--hide-prev-btn product-set-slider--multiple">
                     {% block productSet %}
                         <form method="GET">
-                            {% embed molecule('slick-carousel') with {
+                            {% include molecule('product-set-slider', 'ProductSetWidget') with {
                                 data: {
-                                    slides: data.products,
+                                    products: data.products,
+                                    sliderConfig: data.sliderConfig
                                 },
-                                attributes: {
-                                    'data-json': data.sliderConfig,
-                                    'custom-select-selector': '.custom-select',
-                                },
-                                modifiers: ['product-set', 'product-set-secondary'],
                             } only %}
-
-                                {% block slides %}
-                                    {% for product in data.slides %}
-                                        {% embed molecule('product-card') with {
-                                            modifiers: ['stretch', 'product-set', 'widget'],
-                                            data: {
-                                                name: product.name,
-                                                abstractId: product.idProductAbstract,
-                                                url: product.url,
-                                                imageUrl: product.images.0.externalUrlSmall | default,
-                                                price: product.price,
-                                                originalPrice: product.prices['ORIGINAL'] | default,
-                                            },
-                                            embed: {
-                                                product: product,
-                                            },
-                                        } only %}
-                                            {% block content %}
-                                                {{parent()}}
-                                                {% set isNotAvailable = embed.product.idProductConcrete and not embed.product.available %}
-
-                                                {% embed molecule('variant-configurator', 'ProductDetailPage') with {
-                                                    data: {
-                                                        superAttributes: embed.product.attributeMap.superAttributes,
-                                                        selectedAttributes: embed.product.selectedAttributes,
-                                                        availableAttributes: embed.product.availableAttributes,
-                                                        useExternalForm: true,
-                                                    },
-                                                    embed: embed,
-                                                } only %}
-                                                    {% block variant %}
-                                                        {% include molecule('variant', 'ProductDetailPage') with {
-                                                            data: {
-                                                                name: name,
-                                                                formName: 'attributes[' ~ embed.product.idProductAbstract ~ '][' ~ name ~ ']',
-                                                                values: values,
-                                                                selectedValue: selectedValue,
-                                                                label: ('product.attribute.' ~ name) | trans,
-                                                                isAvailable: isAvailable,
-                                                                autoInitSelect: true,
-                                                            },
-                                                        } only %}
-                                                    {% endblock %}
-                                                {% endembed %}
-                                            {% endblock %}
-                                        {% endembed %}
-                                    {% endfor %}
-                                {% endblock %}
-                            {% endembed %}
                         </form>
                         {% include molecule('action-single-click-enforcer') with {
                             attributes: {
@@ -137,7 +84,7 @@
 
             <div class="grid grid--center">
                 <div class="col">
-                    <form method="POST" action="{{ path('cart/add-items') }}">
+                    <form class="spacing-top spacing-top--bigger" method="POST" action="{{ path('cart/add-items') }}">
                         {% set isDisabled = false %}
 
                         {% for product in data.products %}
