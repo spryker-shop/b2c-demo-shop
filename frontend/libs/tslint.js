@@ -28,7 +28,7 @@ const runTSLint = () => {
 };
 
 const lintFiles = (program, configurationFilename, linter, files) => {
-    files.forEach((file) => {
+    files.forEach(file => {
         const fileContents = program.getSourceFile(file).getFullText();
         const configuration = Configuration.findConfiguration(configurationFilename, file).results;
         linter.lint(file, fileContents, configuration);
@@ -37,7 +37,7 @@ const lintFiles = (program, configurationFilename, linter, files) => {
     showLintOutput(linter);
 };
 
-const showLintOutput = (linter) => {
+const showLintOutput = linter => {
     const lintingResult = linter.getResult();
 
     console.log(
@@ -48,7 +48,7 @@ const showLintOutput = (linter) => {
     exitProcess(lintingResult.errorCount);
 };
 
-const exitProcess = (errorCount) => {
+const exitProcess = errorCount => {
     if (errorCount > 0 && process.env.NODE_ENV !== 'development') {
         process.exit(1);
     }

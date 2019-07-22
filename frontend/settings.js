@@ -5,9 +5,19 @@ const globalSettings = {
     // define the current context (root)
     context: process.cwd(),
 
+    // build modes
+    modes: {
+        dev: 'development',
+        watch: 'development-watch',
+        prod: 'production'
+    },
+
     paths: {
         // locate the typescript configuration json file
         tsConfig: './tsconfig.json',
+
+        // locate the typescript configuration json file
+        namespaceConfig: './config/Yves/frontend-build-config.json',
 
         // core folders
         core: './vendor/spryker-shop',
@@ -16,13 +26,11 @@ const globalSettings = {
         eco: './vendor/spryker-eco',
 
         // project folders
-        project: './src/Pyz/Yves',
-
-        publicAssets: './public/Yves/assets'
+        project: './src/Pyz/Yves'
     }
 };
 
-const getAppSettingsByStore = store => {
+const getAppSettingsByTheme = (namespaceConfig, theme, pathToConfig) => {
     const entryPointsParts = [
         'components/atoms/*/index.ts',
         'components/molecules/*/index.ts',
@@ -31,51 +39,45 @@ const getAppSettingsByStore = store => {
         'views/*/index.ts'
     ];
 
+    // getting collection of entry points by pattern
+    const entryPointsCollection = pathPattern => entryPointsParts.map(element => `${pathPattern}/${element}`);
+
+    // define the applicatin name
+    // important: the name must be normalized
+    const name = 'yves_default';
+
+    // get namespace config
+    const namespaceJson = require(pathToConfig);
+
+    // get public url path according to pattern from config
+    const getPublicUrl = () => (
+        namespaceJson.path
+            .replace(/%namespace%/gi, namespaceConfig.namespace)
+            .replace(/%theme%/gi, theme)
+    );
+
+    const getAllModuleSuffixes = () => namespaceJson.namespaces.map(namespace => namespace.moduleSuffix);
+
+    const ignoreModulesCollection = () => {
+        return getAllModuleSuffixes()
+                    .filter(suffix => suffix !== namespaceConfig.moduleSuffix)
+                    .map(suffix => `!**/*${suffix}/Theme/**`);
+    };
+
     const ignoreFiles = [
         '!config',
         '!data',
         '!deploy',
         '!node_modules',
         '!public',
-        '!test'
+        '!test',
+        ...ignoreModulesCollection()
     ];
-
-    // getting collection of entry points by pattern
-    const entryPointsCollection = (pathPattern) => entryPointsParts.map((element) => `${pathPattern}/${element}`);
-
-    // define current theme
-    const currentTheme = store.currentTheme || store.defaultTheme;
-
-    // define if current theme is empty
-    const isCurrentThemeEmpty = currentTheme !== store.currentTheme;
-
-    // define the applicatin name
-    // important: the name must be normalized
-    const name = 'yves_default';
 
     // define relative urls to site host (/)
     const urls = {
         // assets base url
-        defaultAssets: join('/assets', store.name, store.defaultTheme),
-        currentAssets: join('/assets', store.name, currentTheme)
-    };
-
-    // getting assets paths collection
-    const assetPaths = () => {
-        const assetPathsCollection = {
-            // global assets folder
-            globalAssets: `./frontend/assets/global/${isCurrentThemeEmpty ? store.defaultTheme : currentTheme}`,
-
-            // assets folder for current theme in store
-            defaultAssets: join('./frontend', urls.defaultAssets),
-        };
-
-        if (!isCurrentThemeEmpty) {
-            // assets folder for current theme in store
-            assetPathsCollection.currentAssets = join('./frontend', urls.currentAssets);
-        }
-
-        return assetPathsCollection;
+        assets: getPublicUrl()
     };
 
     // define project relative paths to context
@@ -83,13 +85,17 @@ const getAppSettingsByStore = store => {
         // locate the typescript configuration json file
         tsConfig: globalSettings.paths.tsConfig,
 
-        assets: assetPaths(),
+        // getting assets paths collection
+        assets: {
+            // global assets folder
+            globalAssets: `./frontend/assets/global/${theme}`,
 
-        // public folder with all assets
-        publicAll: globalSettings.paths.publicAll,
+            // assets folder for current theme into namespace
+            currentAssets: join('./frontend/assets', namespaceConfig.namespace, theme)
+        },
 
-        // current store and theme public assets folder
-        public: join('./public/Yves', urls.currentAssets),
+        // current namespace and theme public assets folder
+        public: join('./public/Yves', urls.assets),
 
         // core folders
         core: globalSettings.paths.core,
@@ -101,29 +107,32 @@ const getAppSettingsByStore = store => {
         project: globalSettings.paths.project
     };
 
-    const isThemeCurrentAndNotEmpty = isThemeCurrent => isThemeCurrent && isCurrentThemeEmpty;
-    const getThemeName = isThemeCurrent => isThemeCurrent ? currentTheme : store.defaultTheme;
+    // define if current theme is empty
+    const isDefaultTheme = theme === namespaceConfig.defaultTheme;
+    const getThemeName = isFallbackPattern => isFallbackPattern ? namespaceConfig.defaultTheme : theme;
+    const isFallbackPatternAndDefaultTheme = isFallbackPattern => (isFallbackPattern && isDefaultTheme);
 
     // define entry point patterns for current theme, if current theme is defined
-    const customThemeEntryPointPatterns = (isThemeCurrent = false) => (
-        isThemeCurrentAndNotEmpty(isThemeCurrent) ? [] : [
-            ...entryPointsCollection(`**/Theme/${getThemeName(isThemeCurrent)}`),
-            ...entryPointsCollection(`**/*${store.name}/Theme/${getThemeName(isThemeCurrent)}`),
+    const customThemeEntryPointPatterns = (isFallbackPattern = false) => {
+        return isFallbackPatternAndDefaultTheme(isFallbackPattern) ? [] : [
+            ...entryPointsCollection(`**/Theme/${getThemeName(isFallbackPattern)}`),
+            ...entryPointsCollection(`**/*${namespaceConfig.moduleSuffix}/Theme/${getThemeName(isFallbackPattern)}`),
             ...ignoreFiles
         ]
-    );
+    };
 
-    const shopUiEntryPointsPattern = (isThemeCurrent = false) => (
-        isThemeCurrentAndNotEmpty(isThemeCurrent) ? [] : [
-            `./ShopUi/Theme/${getThemeName(isThemeCurrent)}`,
-            `./ShopUi${store.name}/Theme/${getThemeName(isThemeCurrent)}`
+    const shopUiEntryPointsPattern = (isFallbackPattern = false) => (
+        isFallbackPatternAndDefaultTheme(isFallbackPattern) ? [] : [
+            `./ShopUi/Theme/${getThemeName(isFallbackPattern)}`,
+            `./ShopUi${namespaceConfig.moduleSuffix}/Theme/${getThemeName(isFallbackPattern)}`
         ]
     );
 
     // return settings
     return {
         name,
-        store,
+        namespaceConfig,
+        theme,
         paths,
         urls,
 
@@ -140,8 +149,8 @@ const getAppSettingsByStore = store => {
                     join(globalSettings.context, paths.project)
                 ],
                 // files/dirs patterns
-                patterns: customThemeEntryPointPatterns(true),
-                fallbackPatterns: customThemeEntryPointPatterns()
+                patterns: customThemeEntryPointPatterns(),
+                fallbackPatterns: customThemeEntryPointPatterns(true)
             },
 
             // core component styles finder settings
@@ -154,12 +163,12 @@ const getAppSettingsByStore = store => {
                 ],
                 // files/dirs patterns
                 patterns: [
-                    `**/Theme/${store.defaultTheme}/components/atoms/*/*.scss`,
-                    `**/Theme/${store.defaultTheme}/components/molecules/*/*.scss`,
-                    `**/Theme/${store.defaultTheme}/components/organisms/*/*.scss`,
-                    `**/Theme/${store.defaultTheme}/templates/*/*.scss`,
-                    `**/Theme/${store.defaultTheme}/views/*/*.scss`,
-                    `!**/Theme/${store.defaultTheme}/**/style.scss`,
+                    `**/Theme/${namespaceConfig.defaultTheme}/components/atoms/*/*.scss`,
+                    `**/Theme/${namespaceConfig.defaultTheme}/components/molecules/*/*.scss`,
+                    `**/Theme/${namespaceConfig.defaultTheme}/components/organisms/*/*.scss`,
+                    `**/Theme/${namespaceConfig.defaultTheme}/templates/*/*.scss`,
+                    `**/Theme/${namespaceConfig.defaultTheme}/views/*/*.scss`,
+                    `!**/Theme/${namespaceConfig.defaultTheme}/**/style.scss`,
                     ...ignoreFiles
                 ]
             },
@@ -169,18 +178,27 @@ const getAppSettingsByStore = store => {
                     join(globalSettings.context, paths.project)
                 ],
                 patterns: [
-                    ...shopUiEntryPointsPattern(true)
-
+                    ...shopUiEntryPointsPattern()
                 ],
                 fallbackPatterns: [
-                    ...shopUiEntryPointsPattern()
+                    ...shopUiEntryPointsPattern(true)
                 ]
             }
         }
     }
 };
 
+const getAppSettings = (namespaceConfigList, pathToConfig) => {
+    let appSettings = [];
+    namespaceConfigList.forEach(namespaceConfig => {
+        namespaceConfig.themes.forEach(theme => {
+            appSettings.push(getAppSettingsByTheme(namespaceConfig, theme, pathToConfig));
+        })
+    });
+    return appSettings;
+};
+
 module.exports = {
     globalSettings,
-    getAppSettingsByStore
+    getAppSettings
 };

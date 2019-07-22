@@ -3,14 +3,14 @@ const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { findComponentEntryPoints, findComponentStyles, findAppEntryPoint } = require('../libs/finder');
-const { getAliasFromTsConfig } = require('../libs/alias');
-const { getAssetsConfig } = require('../libs/asset-manager');
+const { getAliasList } = require('../libs/alias');
+const { getAssetsConfig } = require('../libs/assets-configurator');
 
-const getConfiguration = async (appSettings) => {
+const getConfiguration = async appSettings => {
     const componentEntryPointsPromise = findComponentEntryPoints(appSettings.find.componentEntryPoints);
     const stylesPromise = findComponentStyles(appSettings.find.componentStyles);
     const [componentEntryPoints, styles] = await Promise.all([componentEntryPointsPromise, stylesPromise]);
-    const alias = getAliasFromTsConfig(appSettings);
+    const alias = getAliasList(appSettings);
 
     const vendorTs = await findAppEntryPoint(appSettings.find.shopUiEntryPoints, './vendor.ts');
     const appTs = await findAppEntryPoint(appSettings.find.shopUiEntryPoints, './app.ts');
@@ -19,7 +19,8 @@ const getConfiguration = async (appSettings) => {
     const sharedScss = await findAppEntryPoint(appSettings.find.shopUiEntryPoints, './styles/shared.scss');
 
     return {
-        storeName: appSettings.store.name,
+        namespace: appSettings.namespaceConfig.namespace,
+        theme: appSettings.theme,
         componentEntryPointsLength: componentEntryPoints.length,
         stylesLength: styles.length,
         webpack: {
@@ -48,7 +49,7 @@ const getConfiguration = async (appSettings) => {
 
             output: {
                 path: join(appSettings.context, appSettings.paths.public),
-                publicPath: `${appSettings.urls.currentAssets}/`,
+                publicPath: `/${appSettings.urls.assets}/`,
                 filename: `./js/${appSettings.name}.[name].js`,
                 jsonpFunction: `webpackJsonp_${appSettings.name.replace(/(-|\W)+/gi, '_')}`
             },
@@ -78,7 +79,8 @@ const getConfiguration = async (appSettings) => {
                             MiniCssExtractPlugin.loader, {
                                 loader: 'css-loader',
                                 options: {
-                                    importLoaders: 1
+                                    importLoaders: 1,
+                                    url: false,
                                 }
                             }, {
                                 loader: 'postcss-loader',
@@ -131,14 +133,14 @@ const getConfiguration = async (appSettings) => {
                     filename: `./css/${appSettings.name}.[name].css`,
                 }),
 
-                (compiler) => compiler.hooks.done.tap('webpack', compilationParams => {
+                compiler => compiler.hooks.done.tap('webpack', compilationParams => {
                     if (process.env.npm_lifecycle_event === 'yves:watch') {
                         return;
                     }
 
                     const { errors } = compilationParams.compilation;
 
-                    if (!errors || errors.length === 0) {
+                    if (!errors || !errors.length) {
                         return;
                     }
 
