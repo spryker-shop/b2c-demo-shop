@@ -1,15 +1,13 @@
 <?php
+
 /**
- * Created by PhpStorm.
- * User: kravchenko
- * Date: 2019-07-23
- * Time: 14:52
+ * This file is part of the Spryker Commerce OS.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace Pyz\Zed\ProductQuantityDataImport;
 
 use Spryker\Zed\ProductQuantityDataImport\ProductQuantityDataImportConfig as SprykerProductQuantityDataImportConfig;
-
 
 class ProductQuantityDataImportConfig extends SprykerProductQuantityDataImportConfig
 {
