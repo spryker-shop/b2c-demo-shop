@@ -1,11 +1,20 @@
-// get the webpack compiler
+// get arguments from command line (mode, namespace list, theme list and path to config JSON file
+const requestedArguments = require('./libs/command-line-parser');
+const { getFilteredNamespaceConfigList } = require('./libs/namespace-config-parser');
+const { getAppSettings } = require('./settings');
 const compiler = require('./libs/compiler');
 
-// get the mode arg from `npm run xxx` script defined in package.json
-const [mode] = process.argv.slice(2);
-
 // get the webpack configuration associated with the provided mode
-const config = require(`./configs/${mode}`);
+const getConfiguration = require(`./configs/${requestedArguments.mode}`);
+
+// get array of filtered namespace config
+const namespaceConfigList = getFilteredNamespaceConfigList(requestedArguments);
+
+// get the promise for each namespace webpack configuration
+const configurationPromises = getAppSettings(namespaceConfigList, requestedArguments.pathToConfig)
+    .map(getConfiguration);
 
 // build the project
-compiler.compile(config);
+Promise.all(configurationPromises)
+    .then(configs => compiler.multiCompile(configs))
+    .catch(error => console.error('An error occur while creating configuration', error));

@@ -83,7 +83,7 @@
                 {% set shipmentMethodName = data.forms.summary.vars.value.shipment.method.carrierName %}
 
                 <div class="heading__logo heading__logo--indent">
-                    <img src="/assets/images/shipment-{{ shipmentMethodName | replace({' ': ''}) }}.png" width="65" alt="{{ shipmentMethodName }}">
+                    <img src="{{ publicPath('images/shipment-' ~ shipmentMethodName | replace({' ': ''}) ~ '.png') }}" width="65" alt="{{ shipmentMethodName }}">
                 </div>
 
                 <ul class="list">
