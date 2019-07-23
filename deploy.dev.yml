@@ -4,7 +4,7 @@ namespace: spryker_b2c_dev
 tag: 'dev'
 
 environment: docker
-php: 7.2
+image: spryker/php:7.2
 
 regions:
     EU:
@@ -52,7 +52,7 @@ groups:
         applications:
             yves_eu:
                 application: yves
-                domain:
+                endpoints:
                     yves.de.demo-spryker.com:
                         store: DE
                         services:
@@ -65,14 +65,14 @@ groups:
                                 namespace: 2
             glue_eu:
                 application: glue
-                domain:
+                endpoints:
                     glue.de.demo-spryker.com:
                         store: DE
                     glue.at.demo-spryker.com:
                         store: AT
             zed_eu:
                 application: zed
-                domain:
+                endpoints:
                     zed.de.demo-spryker.com:
                         store: DE
                         services:
@@ -88,7 +88,7 @@ groups:
         applications:
             yves_us:
                 application: yves
-                domain:
+                endpoints:
                     yves.us.demo-spryker.com:
                         store: US
                         services:
@@ -96,12 +96,12 @@ groups:
                                 namespace: 5
             glue_us:
                 application: glue
-                domain:
+                endpoints:
                     glue.us.demo-spryker.com:
                         store: US
             zed_us:
                 application: zed
-                domain:
+                endpoints:
                     zed.us.demo-spryker.com:
                         store: US
                         services:
@@ -113,12 +113,15 @@ services:
         root:
             username: "root"
             password: "secret"
+        endpoints:
+            localhost:5432:
+                protocol: tcp
     broker:
         engine: rabbitmq
         api:
             username: "spryker"
             password: "secret"
-        domain:
+        endpoints:
             queue.demo-spryker.com:
     session:
         engine: redis
@@ -128,11 +131,11 @@ services:
         engine: elastic
     scheduler:
         engine: jenkins
-        domain:
+        endpoints:
             scheduler.demo-spryker.com:
     mail_catcher:
         engine: mailhog
-        domain:
+        endpoints:
             mail.demo-spryker.com:
 
 docker:
