@@ -1,0 +1,35 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'banner',
+} %}
+
+{% define data = {
+    imageUrl: required,
+    clickUrl: required,
+    title: '',
+    subtitle: '',
+    altText: '',
+} %}
+
+{% block body %}
+    <a class="{{ config.name }}__link" href="{{ data.clickUrl }}">
+        {% block content %}
+            {% block image %}
+                <img src="{{ data.imageUrl }}" alt="{{ data.altText | escape }}">
+            {% endblock %}
+
+            {% block title %}
+                {% if data.title %}
+                    <h5 class="title title--h4">{{ data.title | escape }}</h5>
+                {% endif %}
+            {% endblock %}
+
+            {% block subtitle %}
+                {% if data.subtitle %}
+                    <p>{{ data.subtitle | escape }}</p>
+                {% endif %}
+            {% endblock %}
+        {% endblock %}
+    </a>
+{% endblock %}
