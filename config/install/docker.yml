@@ -1,11 +1,6 @@
 env:
     APPLICATION_ENV: docker
 
-stores:
-  - DE
-  - AT
-  - US
-
 sections:
     build:
         generate-transfers:
@@ -61,12 +56,6 @@ sections:
     scheduler-setup:
         jenkins-generate:
             command: "vendor/bin/console scheduler:setup"
-            stores: true
-
-    scheduler-clean:
-        jenkins-generate:
-            command: "vendor/bin/console scheduler:clean"
-            stores: true
 
     init-storages-per-store:
         setup-search:
@@ -97,40 +86,3 @@ sections:
 
         update-product-labels:
             command: "vendor/bin/console product-label:relations:update"
-
-    sync:
-        run-worker:
-            command: "vendor/bin/console queue:worker:start"
-
-    cleanup:
-        excluded: true
-        set-permissions:
-            command: "vendor/bin/console queue:permission:set"
-            stores: true
-
-        purge-all-queues:
-            command: "vendor/bin/console queue:queue:purge-all"
-            stores: true
-
-        delete-all-queues:
-            command: "vendor/bin/console queue:queue:delete-all"
-            stores: true
-
-        delete-all-exchanges:
-            command: "vendor/bin/console queue:exchanges:delete-all"
-            stores: true
-
-        drop-tables:
-            command: "vendor/bin/console propel:tables:drop"
-
-        delete-elastic-search-index:
-            command: "vendor/bin/console search:index:delete"
-
-        delete-storage:
-            command: "vendor/bin/console storage:delete"
-
-        delete-migration-files:
-            command: "vendor/bin/console propel:migration:delete"
-
-        remove-logs:
-            command: "vendor/bin/console log:clear"

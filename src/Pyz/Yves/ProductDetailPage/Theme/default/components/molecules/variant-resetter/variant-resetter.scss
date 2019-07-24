@@ -1,0 +1,15 @@
+@mixin product-detail-page-variant-resetter($name: '.variant-resetter') {
+    #{$name} {
+        &__button {
+            cursor: pointer;
+
+            &:hover {
+                color: $setting-color-alt;
+            }
+        }
+
+        @content;
+    }
+}
+
+@include product-detail-page-variant-resetter();

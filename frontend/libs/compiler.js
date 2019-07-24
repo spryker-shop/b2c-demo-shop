@@ -1,15 +1,24 @@
 const webpack = require('webpack');
+const rimraf = require('rimraf');
+const { globalSettings } = require('../settings');
 
-// execute webpack compiler
+// execute webpack compiler on array of configurations
 // and nicely handle the console output
-function compile(config) {
-    console.log(`Building for ${config.mode}...`);
-
-    if (config.watch) {
-        console.log('Watch mode: ON');
+const multiCompile = configs => {
+    if (!configs || !configs.length) {
+        return console.error('Nothing to build. Build aborted.');
     }
 
-    webpack(config, (err, stats) => {
+    configs.forEach(config => {
+        console.log(`${config.namespace} (${config.theme}) building for ${config.webpack.mode}...`);
+
+        if (config.webpack.watch) {
+            console.log(`${config.namespace} (${config.theme}) watch mode: ON`);
+        }
+    });
+
+    const webpackConfigs = configs.map(item => item.webpack);
+    webpack(webpackConfigs, (err, multiStats) => {
         if (err) {
             console.error(err.stack || err);
 
@@ -20,10 +29,18 @@ function compile(config) {
             return;
         }
 
-        console.log(stats.toString(config.stats), '\n');
+        multiStats.stats.forEach(
+            (stat, index) => {
+                console.log(`${configs[index].namespace} namespace building statistics:`);
+                console.log(`Theme: ${configs[index].theme}`);
+                console.log(`Components entry points: ${configs[index].componentEntryPointsLength}`);
+                console.log(`Components styles: ${configs[index].stylesLength}`);
+                console.log(stat.toString(webpackConfigs[index].stats), '\n')
+            }
+        );
     });
-}
+};
 
 module.exports = {
-    compile
-}
+    multiCompile
+};

@@ -1,154 +1,155 @@
-const path = require('path');
+const { join } = require('path');
 const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const appSettings = require('../settings');
-const finder = require('../libs/finder');
-const alias = require('../libs/alias');
+const { findComponentEntryPoints, findComponentStyles, findAppEntryPoint } = require('../libs/finder');
+const { getAliasList } = require('../libs/alias');
+const { getAssetsConfig } = require('../libs/assets-configurator');
 
-module.exports = {
-    context: appSettings.context,
-    mode: 'development',
-    devtool: 'inline-source-map',
+const getConfiguration = async appSettings => {
+    const componentEntryPointsPromise = findComponentEntryPoints(appSettings.find.componentEntryPoints);
+    const stylesPromise = findComponentStyles(appSettings.find.componentStyles);
+    const [componentEntryPoints, styles] = await Promise.all([componentEntryPointsPromise, stylesPromise]);
+    const alias = getAliasList(appSettings);
 
-    stats: {
-        colors: true,
-        chunks: false,
-        chunkModules: false,
-        chunkOrigins: false,
-        modules: false,
-        entrypoints: false
-    },
+    const vendorTs = await findAppEntryPoint(appSettings.find.shopUiEntryPoints, './vendor.ts');
+    const appTs = await findAppEntryPoint(appSettings.find.shopUiEntryPoints, './app.ts');
+    const basicScss = await findAppEntryPoint(appSettings.find.shopUiEntryPoints, './styles/basic.scss');
+    const utilScss = await findAppEntryPoint(appSettings.find.shopUiEntryPoints, './styles/util.scss');
+    const sharedScss = await findAppEntryPoint(appSettings.find.shopUiEntryPoints, './styles/shared.scss');
 
-    entry: {
-        'es6-polyfill': path.join(appSettings.context, appSettings.paths.project.shopUiModule, './es6-polyfill.ts'),
-        'vendor': path.join(appSettings.context, appSettings.paths.project.shopUiModule, './vendor.ts'),
-        'app': [
-            path.join(appSettings.context, appSettings.paths.project.shopUiModule, './app.ts'),
-            path.join(appSettings.context, appSettings.paths.project.shopUiModule, './styles/basic.scss'),
-            ...finder.findComponentEntryPoints(),
-            path.join(appSettings.context, appSettings.paths.project.shopUiModule, './styles/util.scss')
-        ]
-    },
+    return {
+        namespace: appSettings.namespaceConfig.namespace,
+        theme: appSettings.theme,
+        componentEntryPointsLength: componentEntryPoints.length,
+        stylesLength: styles.length,
+        webpack: {
+            context: appSettings.context,
+            mode: 'development',
+            devtool: 'inline-source-map',
 
-    output: {
-        path: path.join(appSettings.context, appSettings.paths.public),
-        publicPath: `${appSettings.urls.assets}/`,
-        filename: `./js/${appSettings.name}.[name].js`,
-        jsonpFunction: `webpackJsonp_${appSettings.name}`
-    },
+            stats: {
+                colors: true,
+                chunks: false,
+                chunkModules: false,
+                chunkOrigins: false,
+                modules: false,
+                entrypoints: false
+            },
 
-    resolve: {
-        extensions: ['.ts', '.js', '.json', '.css', '.scss'],
-        alias: alias.getFromTsConfig()
-    },
+            entry: {
+                'vendor': vendorTs,
+                'app': [
+                    appTs,
+                    basicScss,
+                    ...componentEntryPoints,
+                    utilScss,
+                ]
+            },
 
-    module: {
-        rules: [
-            {
-                test: /\.ts$/,
-                loader: 'ts-loader',
-                options: {
-                    context: appSettings.context,
-                    configFile: path.join(appSettings.context, appSettings.paths.tsConfig),
-                    compilerOptions: {
-                        baseUrl: appSettings.context,
-                        outDir: appSettings.paths.public
+            output: {
+                path: join(appSettings.context, appSettings.paths.public),
+                publicPath: `/${appSettings.urls.assets}/`,
+                filename: `./js/${appSettings.name}.[name].js`,
+                jsonpFunction: `webpackJsonp_${appSettings.name.replace(/(-|\W)+/gi, '_')}`
+            },
+
+            resolve: {
+                extensions: ['.ts', '.js', '.json', '.css', '.scss'],
+                alias
+            },
+
+            module: {
+                rules: [
+                    {
+                        test: /\.ts$/,
+                        loader: 'ts-loader',
+                        options: {
+                            context: appSettings.context,
+                            configFile: join(appSettings.context, appSettings.paths.tsConfig),
+                            compilerOptions: {
+                                baseUrl: appSettings.context,
+                                outDir: appSettings.paths.public
+                            }
+                        }
+                    },
+                    {
+                        test: /\.(scss|css)/i,
+                        use: [
+                            MiniCssExtractPlugin.loader, {
+                                loader: 'css-loader',
+                                options: {
+                                    importLoaders: 1,
+                                    url: false,
+                                }
+                            }, {
+                                loader: 'postcss-loader',
+                                options: {
+                                    ident: 'postcss',
+                                    plugins: [
+                                        autoprefixer({
+                                            'browsers': ['> 1%', 'last 2 versions']
+                                        })
+                                    ]
+                                }
+                            }, {
+                                loader: 'sass-loader'
+                            }, {
+                                loader: 'sass-resources-loader',
+                                options: {
+                                    resources: [
+                                        sharedScss,
+                                        ...styles
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
+
+            optimization: {
+                runtimeChunk: 'single',
+                concatenateModules: false,
+                splitChunks: {
+                    chunks: 'initial',
+                    minChunks: 1,
+                    cacheGroups: {
+                        default: false,
+                        vendors: false
                     }
                 }
             },
-            {
-                test: /\.(scss|css)/i,
-                use: [
-                    MiniCssExtractPlugin.loader, {
-                        loader: 'css-loader',
-                        options: {
-                            importLoaders: 1
-                        }
-                    }, {
-                        loader: 'postcss-loader',
-                        options: {
-                            ident: 'postcss',
-                            plugins: [
-                                autoprefixer({
-                                    'browsers': ['> 1%', 'last 2 versions']
-                                })
-                            ]
-                        }
-                    }, {
-                        loader: 'sass-loader'
-                    }, {
-                        loader: 'sass-resources-loader',
-                        options: {
-                            resources: [
-                                path.join(appSettings.context, appSettings.paths.project.shopUiModule, './styles/shared.scss'),
-                                ...finder.findComponentStyles()
-                            ]
-                        }
+
+            plugins: [
+                new webpack.DefinePlugin({
+                    __NAME__: `'${appSettings.name}'`,
+                    __PRODUCTION__: false
+                }),
+
+                ...getAssetsConfig(appSettings),
+
+                new MiniCssExtractPlugin({
+                    filename: `./css/${appSettings.name}.[name].css`,
+                }),
+
+                compiler => compiler.hooks.done.tap('webpack', compilationParams => {
+                    if (process.env.npm_lifecycle_event === 'yves:watch') {
+                        return;
                     }
-                ]
-            }
-        ]
-    },
 
-    optimization: {
-        runtimeChunk: 'single',
-        concatenateModules: false,
-        splitChunks: {
-            chunks: 'initial',
-            minChunks: 1,
-            cacheGroups: {
-                default: false,
-                vendors: false
-            }
-        }
-    },
+                    const { errors } = compilationParams.compilation;
 
-    plugins: [
-        new webpack.DefinePlugin({
-            __NAME__: `'${appSettings.name}'`,
-            __PRODUCTION__: false
-        }),
+                    if (!errors || !errors.length) {
+                        return;
+                    }
 
-        new CleanWebpackPlugin([
-            'js',
-            'css',
-            'images',
-            'fonts'
-        ], {
-            root: path.join(appSettings.context, appSettings.paths.public),
-            verbose: true,
-            beforeEmit: true
-        }),
-
-        new CopyWebpackPlugin([
-            {
-                from: `${appSettings.paths.assets}/images/*`,
-                to: './images/[name].[ext]',
-                ignore: ['*.gitkeep']
-            }, {
-                from: `${appSettings.paths.assets}/fonts/*`,
-                to: './fonts/[name].[ext]',
-                ignore: ['*.gitkeep']
-            }
-        ], {
-            context: appSettings.context
-        }),
-
-        new MiniCssExtractPlugin({
-            filename: `./css/${appSettings.name}.[name].css`,
-        }),
-
-        (compiler) => {
-            compiler.hooks.done.tap('webpack', compilationParams => {
-                if (compilationParams.compilation.errors && compilationParams.compilation.errors.length &&
-                    process.env.npm_lifecycle_event !== 'yves:watch') {
-                    compilationParams.compilation.errors.forEach(error => console.log(error.message));
+                    errors.forEach(error => console.log(error.message));
                     process.exit(1);
-                }
-            });
+                })
+            ]
         }
-    ]
+    };
 };
+
+module.exports = getConfiguration;
