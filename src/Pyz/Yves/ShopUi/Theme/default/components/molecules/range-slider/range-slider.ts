@@ -31,10 +31,10 @@ export default class RangeSlider extends Component {
                 max: Number(this.valueMax)
             }
         };
-        this.init();
+        this.initialize();
     }
 
-    protected init(): void {
+    protected initialize(): void {
         noUiSlider.create(this.wrap, this.sliderConfig);
         this.updateValues(this.wrap, this.targetSelectors);
 
