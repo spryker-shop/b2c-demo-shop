@@ -115,7 +115,15 @@
                 {% endif %}
                 <ul class="list">
                     {% if data.payment.paymentSelection == 'Nopayment' %}
-                        <li class="list__item">{{ 'payment.nopayment' | trans }}</li>
+                        {% for payment in data.cart.payments %}
+                            <li class="list-item">
+                                {% if payment.giftCard is defined and payment.giftCard %}
+                                    {{ 'cart.giftcard.label' | trans }}
+                                {% else %}
+                                    {{ payment.paymentMethod }} <span class="float-right"></span>
+                                {% endif %}
+                            </li>
+                        {% endfor %}
                     {% else %}
                         <li class="list__item">{{ data.payment.paymentSelection | trans }}</li>
                     {% endif %}
