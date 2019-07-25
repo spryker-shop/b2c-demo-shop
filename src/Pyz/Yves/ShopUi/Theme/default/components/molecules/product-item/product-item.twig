@@ -45,7 +45,7 @@
                     {% endblock %}
 
                     {% block price %}
-                        {% if can('SeePricePermissionPlugin') and data.productItem.prices %}
+                        {% if can('SeePricePermissionPlugin') %}
                             {% include molecule('money-price') with {
                                 modifiers: ['small'],
                                 class: component.renderClass(config.name ~ '__price', modifiers) ~ ' col col--lg-4 col--sm-12',
