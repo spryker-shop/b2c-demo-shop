@@ -15,10 +15,10 @@ export default class SlickCarousel extends Component {
             this.customSelects = <CustomSelect[]>Array.from(this.querySelectorAll(this.customSelectSelector));
         }
 
-        this.init();
+        this.initialize();
     }
 
-    protected init(): void {
+    protected initialize(): void {
         this.container.on('init', () => {
             if (this.customSelects) {
                 this.customSelects.forEach((select: CustomSelect) => {
