@@ -31,6 +31,7 @@ use Spryker\Zed\ProductImage\Communication\Plugin\ProductConcreteReadPlugin as I
 use Spryker\Zed\ProductSearch\Communication\Plugin\ProductConcrete\ProductSearchProductConcreteAfterCreatePlugin;
 use Spryker\Zed\ProductSearch\Communication\Plugin\ProductConcrete\ProductSearchProductConcreteAfterUpdatePlugin;
 use Spryker\Zed\ProductSearch\Communication\Plugin\ProductConcrete\ProductSearchProductConcreteReadPlugin;
+use Spryker\Zed\ProductValidity\Communication\Plugin\ProductValidityCreatePlugin;
 use Spryker\Zed\ProductValidity\Communication\Plugin\ProductValidityReadPlugin;
 use Spryker\Zed\ProductValidity\Communication\Plugin\ProductValidityUpdatePlugin;
 use Spryker\Zed\Stock\Communication\Plugin\ProductConcreteAfterCreatePlugin as StockProductConcreteAfterCreatePlugin;
@@ -117,6 +118,7 @@ class ProductDependencyProvider extends SprykerProductDependencyProvider
             new PriceProductConcreteAfterCreatePlugin(),
             new ProductSearchProductConcreteAfterCreatePlugin(),
             new ProductBundleProductConcreteAfterCreatePlugin(),
+            new ProductValidityCreatePlugin(),
             new DiscontinuedProductConcreteAfterCreatePlugin(),
         ];
     }
