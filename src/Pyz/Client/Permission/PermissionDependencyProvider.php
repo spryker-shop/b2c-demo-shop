@@ -7,15 +7,25 @@
 
 namespace Pyz\Client\Permission;
 
+use Spryker\Client\CustomerAccessPermission\Plugin\CustomerAccessPermissionStoragePlugin;
 use Spryker\Client\CustomerAccessPermission\Plugin\SeeAddToCartPermissionPlugin;
 use Spryker\Client\CustomerAccessPermission\Plugin\SeeOrderPlaceSubmitPermissionPlugin;
 use Spryker\Client\CustomerAccessPermission\Plugin\SeePricePermissionPlugin;
-use Spryker\Client\CustomerAccessPermission\Plugin\SeeShoppingListPermissionPlugin;
 use Spryker\Client\CustomerAccessPermission\Plugin\SeeWishlistPermissionPlugin;
 use Spryker\Client\Permission\PermissionDependencyProvider as SprykerPermissionDependencyProvider;
 
 class PermissionDependencyProvider extends SprykerPermissionDependencyProvider
 {
+    /**
+     * @return \Spryker\Client\PermissionExtension\Dependency\Plugin\PermissionStoragePluginInterface[]
+     */
+    protected function getPermissionStoragePlugins(): array
+    {
+        return [
+            new CustomerAccessPermissionStoragePlugin(), #CustomerAccessFeature
+        ];
+    }
+
     /**
      * @return \Spryker\Shared\PermissionExtension\Dependency\Plugin\PermissionPluginInterface[]
      */
@@ -26,7 +36,6 @@ class PermissionDependencyProvider extends SprykerPermissionDependencyProvider
             new SeeOrderPlaceSubmitPermissionPlugin(),
             new SeeAddToCartPermissionPlugin(),
             new SeeWishlistPermissionPlugin(),
-            new SeeShoppingListPermissionPlugin(),
         ];
     }
 }
