@@ -101,12 +101,12 @@
                 <h2 class="title title--checkout">{{ 'checkout.step.summary.payment' | trans }}</h2>
                 {% if data.paymentMethodName == 'Visa' %}
                     <div class="heading__logo heading__logo--indent">
-                        <img class="heading__logo--img" src="/assets/images/logo-visa.png" width="50" height="18" alt="Visa">
+                        <img class="heading__logo--img" src="{{ publicPath('images/logo-visa.png') }}" width="50" height="18" alt="Visa">
                     </div>
                 {% endif %}
                 {% if data.paymentMethodName == 'Master Card' %}
                     <div class="heading__logo heading__logo--indent">
-                        <img class="heading__logo--img" src="/assets/images/logo-mastercard.png" width="29" height="22" alt="Mastercard">
+                        <img class="heading__logo--img" src="{{ publicPath('images/logo-mastercard.png') }}" width="29" height="22" alt="Master card">
                     </div>
                 {% endif %}
                 <ul class="list">
