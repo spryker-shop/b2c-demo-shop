@@ -19,4 +19,5 @@ if (hasNativeCustomElements) {
 /* tslint:disable: no-var-requires no-require-imports */
 require('@webcomponents/webcomponentsjs/webcomponents-bundle');
 /* tslint:enable */
-import 'element-closest';
+import elementClosestPolyfill from 'element-closest';
+elementClosestPolyfill(window);
