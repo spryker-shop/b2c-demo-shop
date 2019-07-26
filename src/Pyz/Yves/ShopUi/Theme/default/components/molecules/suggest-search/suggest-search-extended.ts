@@ -30,7 +30,7 @@ export default class SuggestSearchExtended extends SuggestSearch {
             }, this.throttleDelay));
         this.searchInput.addEventListener('focus', () => this.onInputFocusIn());
         this.searchInput.addEventListener('click', () => this.onInputClick());
-        this.searchInput.addEventListener('input', () => this.onInputPaste());
+        this.searchInput.addEventListener('input', () => this.onInputValueChange());
         this.overlayOpenButtons.forEach(button => {
             button.addEventListener('click', () => this.openSearchLayout());
         });
@@ -44,7 +44,7 @@ export default class SuggestSearchExtended extends SuggestSearch {
         super.onInputKeyDown(event);
     }
 
-    protected onInputPaste(): void {
+    protected onInputValueChange(): void {
         this.onInputKeyUp();
     }
 
