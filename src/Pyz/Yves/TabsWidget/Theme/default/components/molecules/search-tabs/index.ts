@@ -1,0 +1,1 @@
+import './search-tabs.scss';
