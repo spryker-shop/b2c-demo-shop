@@ -7,7 +7,8 @@ import 'core-js/fn/promise';
 import 'core-js/fn/array';
 import 'core-js/fn/set';
 import 'core-js/fn/map';
-import 'element-closest';
+import elementClosestPolyfill from 'element-closest';
+elementClosestPolyfill(window);
 
 // then load a shim for es5 transpilers (typescript or babel)
 // https://github.com/webcomponents/webcomponentsjs#custom-elements-es5-adapterjs

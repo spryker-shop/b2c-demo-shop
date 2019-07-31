@@ -49,7 +49,7 @@ export default class CustomSelect extends Component {
     protected closeHandler(event: Event): void {
         const eventTarget = <HTMLElement>event.target;
 
-        if (eventTarget.classList.contains('select2-container--open')) {
+        if ($(eventTarget).hasClass('select2-container--open')) {
             this.$select.select2('close');
         }
     }
