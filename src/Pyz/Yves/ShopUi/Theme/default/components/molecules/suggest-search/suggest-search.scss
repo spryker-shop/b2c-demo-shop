@@ -1,6 +1,3 @@
-$search-placeholder-color: $setting-color-text;
-$search-placeholder-opacity: 0.25;
-
 @mixin shop-ui-suggest-search($name: '.suggest-search') {
     #{$name} {
         &__container {
@@ -19,19 +16,9 @@ $search-placeholder-opacity: 0.25;
                 font-size: rem(20);
             }
 
-            &::-webkit-input-placeholder {
-                color: $search-placeholder-color;
-                opacity: $search-placeholder-opacity;
-            }
-
-            &::-moz-placeholder {
-                color: $search-placeholder-color;
-                opacity: $search-placeholder-opacity;
-            }
-
-            &:-ms-input-placeholder {
-                color: $search-placeholder-color;
-                opacity: $search-placeholder-opacity;
+            @include helper-input-placeholder() {
+                color: $setting-color-text;
+                opacity: 0.25;
             }
 
             &::-ms-clear {
