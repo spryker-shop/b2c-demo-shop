@@ -1,0 +1,15 @@
+@mixin search-form($name: '.search-form') {
+    #{$name} {
+        &__button-hidden {
+            position: absolute;
+            width: 0;
+            height: 0;
+            pointer-events: none;
+            opacity: 0;
+        }
+
+        @content;
+    }
+}
+
+@include search-form();
