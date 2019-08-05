@@ -9,8 +9,13 @@ namespace Pyz\Yves\ShopApplication;
 
 use Pyz\Yves\ProductRelationWidget\Widget\UpSellingProductsWidget;
 use Pyz\Yves\ProductSetWidget\Widget\ProductSetIdsWidget;
+use Spryker\Yves\EventDispatcher\Plugin\Application\EventDispatcherApplicationPlugin;
+use Spryker\Yves\Locale\Plugin\Application\LocaleApplicationPlugin;
+use Spryker\Yves\Store\Plugin\Application\StoreApplicationPlugin;
+use Spryker\Yves\Twig\Plugin\Application\TwigApplicationPlugin;
 use SprykerShop\Yves\AgentWidget\Widget\AgentControlBarWidget;
 use SprykerShop\Yves\AvailabilityNotificationWidget\Widget\AvailabilityNotificationSubscriptionWidget;
+use SprykerShop\Yves\CartCodeWidget\Widget\CartCodeFormWidget;
 use SprykerShop\Yves\CartNoteWidget\Widget\CartItemNoteFormWidget;
 use SprykerShop\Yves\CartNoteWidget\Widget\CartNoteFormWidget;
 use SprykerShop\Yves\CategoryImageStorageWidget\Widget\CategoryImageStorageWidget;
@@ -52,6 +57,7 @@ use SprykerShop\Yves\ProductWidget\Widget\PdpProductRelationWidget;
 use SprykerShop\Yves\ProductWidget\Widget\PdpProductReplacementForListWidget;
 use SprykerShop\Yves\ProductWidget\Widget\ProductAlternativeWidget;
 use SprykerShop\Yves\SalesOrderThresholdWidget\Widget\SalesOrderThresholdWidget;
+use SprykerShop\Yves\ShopApplication\Plugin\Application\ShopApplicationApplicationPlugin;
 use SprykerShop\Yves\ShopApplication\ShopApplicationDependencyProvider as SprykerShopApplicationDependencyProvider;
 use SprykerShop\Yves\TabsWidget\Widget\FullTextSearchTabsWidget;
 use SprykerShop\Yves\WishlistWidget\Widget\WishlistMenuItemWidget;
@@ -66,6 +72,7 @@ class ShopApplicationDependencyProvider extends SprykerShopApplicationDependency
         return [
             AgentControlBarWidget::class,
             CartDiscountPromotionProductListWidget::class,
+            CartCodeFormWidget::class,
             CartItemNoteFormWidget::class,
             CartNoteFormWidget::class,
             CatalogPageProductWidget::class,
@@ -111,6 +118,20 @@ class ShopApplicationDependencyProvider extends SprykerShopApplicationDependency
             CategoryImageStorageWidget::class,
             FullTextSearchTabsWidget::class,
             AvailabilityNotificationSubscriptionWidget::class,
+        ];
+    }
+
+    /**
+     * @return \Spryker\Shared\ApplicationExtension\Dependency\Plugin\ApplicationPluginInterface[]
+     */
+    protected function getApplicationPlugins(): array
+    {
+        return [
+            new TwigApplicationPlugin(),
+            new EventDispatcherApplicationPlugin(),
+            new ShopApplicationApplicationPlugin(),
+            new StoreApplicationPlugin(),
+            new LocaleApplicationPlugin(),
         ];
     }
 }

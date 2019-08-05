@@ -15,7 +15,7 @@
             {{- data.pagination.numFound }} {{ 'catalog.itemsFound' | trans -}}
         </div>
 
-        <div class="col is-hidden-sm-md">
+        <div class="col col--lg-8 col--xl-6 is-hidden-sm-md">
             <div class="grid grid--middle">
                 {% block selects %}
                     <div class="col col--sm-3 col--md-5 {{config.jsName}}__filter-per-page" data-block-to=".js-filter-section__sorting" data-breackpoint="769">
@@ -49,7 +49,8 @@
                             modifiers: ['hollow'],
                             attributes: {
                                 name: 'sort',
-                                'config-theme': 'secondary'
+                                'config-theme': 'secondary',
+                                'config-width': '100%'
                             },
                             embed: {
                                 sort: _view.sort,

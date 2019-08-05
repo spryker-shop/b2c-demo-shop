@@ -14,7 +14,7 @@ export default class ScrollParallax extends Component {
     wrapperHeight: number;
     distanceToWrapper: number;
     initialized: boolean = false;
-    
+
     readyCallback(): void {
         this.wrapper = <HTMLElement>document.querySelector(this.wrapperSelector);
         this.target = <HTMLElement>this.wrapper.querySelector(this.targetSelector);
@@ -36,9 +36,10 @@ export default class ScrollParallax extends Component {
     }
 
     protected checkBreakpointsToScroll(): void {
-        if(this.minBreakPoint !== NaN && this.maxBreakPoint !== NaN) {
-            if(this.minBreakPoint < this.windowWidth && this.maxBreakPoint > this.windowWidth) {
+        if (!isNaN(this.minBreakPoint) && !isNaN(this.maxBreakPoint)) {
+            if (this.minBreakPoint < this.windowWidth && this.maxBreakPoint > this.windowWidth) {
                 this.moveTarget();
+
                 return;
             }
             this.cleanOffset();
@@ -46,17 +47,17 @@ export default class ScrollParallax extends Component {
     }
 
     protected cleanOffset(): void {
-        if(this.initialized) {
+        if (this.initialized) {
             this.initialized = false;
             this.target.removeAttribute('style');
         }
     }
 
     protected moveTarget(): void {
-        let scrollHeight: number = window.scrollY + this.windowHeight;
-        let targetOffset: string = '';
+        const scrollHeight: number = window.scrollY + this.windowHeight;
+        let targetOffset = '';
 
-        if(scrollHeight > this.distanceToWrapper) {
+        if (scrollHeight > this.distanceToWrapper) {
             if (this.motionDirection === DIRECTIONS.TOP) {
                 targetOffset = `-${this.getTargetOffest(scrollHeight)}`;
             }
@@ -70,18 +71,19 @@ export default class ScrollParallax extends Component {
         }
     }
 
-    protected getTargetOffest(scrollHeight): string {
-        return (scrollHeight - this.distanceToWrapper) / this.motionRatio + 'px';
+    protected getTargetOffest(scrollHeight: number): string {
+        return `${(scrollHeight - this.distanceToWrapper) / this.motionRatio}px`;
     }
 
     protected getDistanceToWrapper(): number {
         let wrapper: HTMLElement = this.wrapper;
-        let yPosition: number  = 0;
+        let yPosition = 0;
 
-        while(wrapper) {
+        while (wrapper) {
             yPosition += (wrapper.offsetTop - wrapper.scrollTop + wrapper.clientTop);
             wrapper = <HTMLElement>wrapper.offsetParent;
         }
+
         return yPosition;
     }
 

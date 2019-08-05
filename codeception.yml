@@ -25,8 +25,19 @@ coverage:
     whitelist: { include: ['src/Pyz/*.php'] }
 
 extensions:
+    commands:
+        - \SprykerTest\Shared\Testify\Fixtures\FixturesCommand
     enabled:
-        - Codeception\Extension\Phantoman
+        - \SprykerTest\Shared\Testify\Helper\WebDriverHelper
     config:
-        Codeception\Extension\Phantoman:
+        \SprykerTest\Shared\Testify\Helper\WebDriverHelper:
             suites: ['Presentation']
+            loadImages: false
+            diskCache: true
+            remote-enable: "%SPRYKER_TESTING_ENABLED%"
+            host: "%SPRYKER_TEST_WEB_DRIVER_HOST%"
+            browser: "%SPRYKER_TEST_IN_BROWSER%"
+
+params:
+    - tests/default.yml
+    - env

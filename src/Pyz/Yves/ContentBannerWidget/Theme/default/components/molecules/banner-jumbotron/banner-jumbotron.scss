@@ -1,0 +1,62 @@
+@mixin content-banner-widget-banner-jumbotron($name: '.banner-jumbotron') {
+    #{$name} {
+        border-radius: rem(4);
+        overflow: hidden;
+
+        &__container {
+            height: rem(160);
+            background: linear-gradient(to left top, $setting-color-gray-3, $setting-color-gray-4) no-repeat center / cover;
+            text-align: center;
+            position: relative;
+
+            @include helper-breakpoint(md) {
+                height: rem(240);
+            }
+
+            @include helper-breakpoint(xl) {
+                height: rem(400);
+            }
+        }
+
+        &__link {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            top: 0;
+            z-index: $setting-zi-element + 1;
+        }
+
+        &__title {
+            color: $setting-color-white;
+            font: fw(bold) rem(23)/1.5 $setting-font-family-additional;
+            letter-spacing: rem(-0.8);
+
+            @include helper-breakpoint-media-min($lg-min) {
+                font-size: rem(34);
+            }
+
+            @include helper-breakpoint-media-min($xl-min) {
+                font-size: rem(57);
+            }
+        }
+
+        &__text {
+            color: $setting-color-white;
+            font: fw(light) rem(11) $setting-font-family;
+            letter-spacing: rem(0.2);
+
+            @include helper-breakpoint-media-min($lg-min) {
+                font-size: rem(16);
+            }
+
+            @include helper-breakpoint-media-min($xl-min) {
+                font-size: rem(26);
+            }
+        }
+
+        @content;
+    }
+}
+
+@include content-banner-widget-banner-jumbotron();

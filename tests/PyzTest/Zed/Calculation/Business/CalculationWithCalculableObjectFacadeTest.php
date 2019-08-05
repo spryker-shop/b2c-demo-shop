@@ -627,6 +627,7 @@ class CalculationWithCalculableObjectFacadeTest extends Test
         $taxSetEntity = new SpyTaxSet();
         $taxSetEntity->setName('name of tax set');
         $taxSetEntity->save();
+
         return $taxSetEntity;
     }
 

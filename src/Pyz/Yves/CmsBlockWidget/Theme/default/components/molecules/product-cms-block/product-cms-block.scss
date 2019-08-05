@@ -1,0 +1,35 @@
+@mixin cms-block-widget-product-cms-block($name: '.product-cms-block') {
+    #{$name} {
+        font-size: rem(14);
+        line-height: rem(21);
+        color: $setting-color-black;
+
+        & > h1 {
+            font: fw(medium) rem(15)/1.33 $setting-font-family-additional;
+            padding: rem(50) 0 rem(11);
+            border-top: rem(1) dotted $setting-color-gray-3;
+        }
+
+        p {
+            margin: 0 0 rem(11);
+
+            &:last-child {
+                margin-bottom: rem(50);
+            }
+        }
+
+        a {
+            @include helper-effect-transition(color);
+            text-decoration: underline;
+            color: $setting-color-black;
+
+            &:hover {
+                color: $setting-color-alt;
+            }
+        }
+    }
+
+    @content;
+}
+
+@include cms-block-widget-product-cms-block();

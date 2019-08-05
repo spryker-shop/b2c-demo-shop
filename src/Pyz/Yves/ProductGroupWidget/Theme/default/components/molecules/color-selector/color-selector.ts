@@ -1,9 +1,9 @@
 import Component from 'ShopUi/models/component';
 
 export default class ColorSelector extends Component {
-    colors: HTMLAnchorElement[]
-    images: HTMLImageElement[]
-    links: HTMLElement[]
+    colors: HTMLAnchorElement[];
+    images: HTMLImageElement[];
+    links: HTMLElement[];
 
     protected readyCallback(): void {
         this.colors = <HTMLAnchorElement[]>Array.from(this.getElementsByClassName(`${this.jsName}__color`));
@@ -38,7 +38,6 @@ export default class ColorSelector extends Component {
 
     changeImage(newImageSrc: string): void {
         this.images.forEach((image: HTMLImageElement) => {
-            console.log(newImageSrc);
             if (image.src !== newImageSrc) {
                 image.src = newImageSrc;
             }

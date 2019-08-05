@@ -1,0 +1,42 @@
+$search-tab-border: rem(1) solid $setting-color-lighter;
+
+@mixin tabs-widget-search-tabs($name: '.search-tabs') {
+    #{$name} {
+        text-align: center;
+        border-left: $search-tab-border;
+        border-bottom: $search-tab-border;
+
+        &__item {
+            display: block;
+            border-top: $search-tab-border;
+            border-right: $search-tab-border;
+
+            @include helper-breakpoint-media-min($md-min) {
+                display: inline-block;
+                padding: rem(12) rem(32);
+                width: auto;
+                min-width: auto;
+            }
+
+            &--active {
+                position: relative;
+                background-color: $setting-color-white;
+
+                &::after {
+                    content: '';
+                    position: absolute;
+                    bottom: rem(-1);
+                    left: 0;
+                    display: block;
+                    width: 100%;
+                    height: rem(1);
+                    background-color: $setting-color-white;
+                }
+            }
+        }
+
+        @content;
+    }
+}
+
+@include tabs-widget-search-tabs();

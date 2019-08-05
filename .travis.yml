@@ -1,5 +1,8 @@
 language: php
 
+git:
+  depth: 3
+
 env:
   global:
     - APPLICATION_ENV=devtest
@@ -36,6 +39,7 @@ addons:
 cache:
   directories:
     - $HOME/.composer/cache
+    - /home/travis/.rvm/gems # Mailcatcher is a ruby gem, takes 5 minutes to install.
 
 services:
   - postgresql
@@ -101,11 +105,12 @@ script:
   - if [[ $VALIDATION == 1 ]] ; then vendor/bin/console code:sniff:style ; fi
   - if [[ $VALIDATION == 1 ]] ; then vendor/bin/phpmd src/ text vendor/spryker/architecture-sniffer/src/ruleset.xml --minimumpriority 2 ; fi
 
-  - timeout 45m bash -c "vendor/bin/phantomjs --webdriver=4444" &
+  - timeout 45m bash -c "vendor/bin/phantomjs --webdriver=4444 --disk-cache=true --load-images=false" &
   - if [[ $TEST_GROUP == 'without-acceptance' ]] ; then vendor/bin/codecept run -x Presentation ; fi
   - if [[ $TEST_GROUP == 'acceptance' ]] ; then vendor/bin/codecept run -g Presentation ; fi
 
-  - if [[ $VALIDATION == 1 ]] ; then npm run yves:lint ; fi
+  - if [[ $VALIDATION == 1 ]] ; then node ./frontend/libs/stylelint ; fi
+  - if [[ $VALIDATION == 1 ]] ; then node ./frontend/libs/tslint stylish ; fi
 
 notifications:
   email: false

@@ -10,14 +10,19 @@ namespace Pyz\Zed\DataImport;
 use Spryker\Zed\CategoryDataImport\Communication\Plugin\CategoryDataImportPlugin;
 use Spryker\Zed\CmsPageDataImport\Communication\Plugin\CmsPageDataImportPlugin;
 use Spryker\Zed\CmsPageDataImport\Communication\Plugin\CmsPageStoreDataImportPlugin;
+use Spryker\Zed\ContentBannerDataImport\Communication\Plugin\ContentBannerDataImportPlugin;
+use Spryker\Zed\ContentProductDataImport\Communication\Plugin\ContentProductAbstractListDataImportPlugin;
+use Spryker\Zed\ContentProductSetDataImport\Communication\Plugin\ContentProductSetDataImportPlugin;
 use Spryker\Zed\DataImport\Communication\Plugin\DataImportEventBehaviorPlugin;
 use Spryker\Zed\DataImport\Communication\Plugin\DataImportPublisherPlugin;
 use Spryker\Zed\DataImport\DataImportDependencyProvider as SprykerDataImportDependencyProvider;
 use Spryker\Zed\FileManagerDataImport\Communication\Plugin\FileManagerDataImportPlugin;
 use Spryker\Zed\Kernel\Container;
 use Spryker\Zed\PriceProductDataImport\Communication\Plugin\PriceProductDataImportPlugin;
+use Spryker\Zed\PriceProductScheduleDataImport\Communication\Plugin\PriceProductScheduleDataImportPlugin;
 use Spryker\Zed\ProductAlternativeDataImport\Communication\Plugin\ProductAlternativeDataImportPlugin;
 use Spryker\Zed\ProductDiscontinuedDataImport\Communication\Plugin\ProductDiscontinuedDataImportPlugin;
+use Spryker\Zed\ProductQuantityDataImport\Communication\Plugin\ProductQuantityDataImportPlugin;
 use Spryker\Zed\SalesOrderThresholdDataImport\Communication\Plugin\DataImport\SalesOrderThresholdDataImportPlugin;
 
 class DataImportDependencyProvider extends SprykerDataImportDependencyProvider
@@ -123,6 +128,9 @@ class DataImportDependencyProvider extends SprykerDataImportDependencyProvider
     {
         return [
             [new CategoryDataImportPlugin(), DataImportConfig::IMPORT_TYPE_CATEGORY_TEMPLATE],
+            new ContentBannerDataImportPlugin(),
+            new ContentProductAbstractListDataImportPlugin(),
+            new ContentProductSetDataImportPlugin(),
             new CmsPageDataImportPlugin(),
             new CmsPageStoreDataImportPlugin(),
             new PriceProductDataImportPlugin(),
@@ -130,6 +138,8 @@ class DataImportDependencyProvider extends SprykerDataImportDependencyProvider
             new ProductAlternativeDataImportPlugin(),
             new SalesOrderThresholdDataImportPlugin(),
             new FileManagerDataImportPlugin(),
+            new PriceProductScheduleDataImportPlugin(),
+            new ProductQuantityDataImportPlugin(),
         ];
     }
 

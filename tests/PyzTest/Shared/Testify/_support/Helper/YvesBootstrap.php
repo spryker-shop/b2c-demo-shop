@@ -47,7 +47,7 @@ class YvesBootstrap extends Framework
         $this->yvesBootstrap = new PyzYvesBootstrap();
 
         if (!isset($this->yvesBootstrap)) {
-            throw new ModuleConfigException(__CLASS__, 'Application instance was not received from bootstrap file');
+            throw new ModuleConfigException(self::class, 'Application instance was not received from bootstrap file');
         }
     }
 }
