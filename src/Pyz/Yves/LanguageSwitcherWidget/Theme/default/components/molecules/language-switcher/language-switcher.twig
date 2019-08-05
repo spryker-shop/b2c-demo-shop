@@ -9,15 +9,16 @@
     languages: required,
     currentLanguage: required,
     getSchemeAndHttpHost: app.request.getSchemeAndHttpHost(),
-    additionalModifiers: required
+    additionalModifiers: required,
+    additionalClassName: '',
 } %}
 
 {% block body %}
-
     {% embed molecule('custom-select') with {
         modifiers: data.additionalModifiers,
         attributes: {
-            'config-theme': 'secondary'
+            'config-theme': 'secondary',
+            'additional-class-name': data.additionalClassName,
         },
         embed: {
             jsName: config.jsName ~ '__select',

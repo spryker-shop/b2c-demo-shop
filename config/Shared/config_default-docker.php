@@ -136,7 +136,7 @@ $config[ApplicationConstants::ZED_HTTP_STRICT_TRANSPORT_SECURITY_CONFIG] = $HSTS
 
 $config[ZedRequestConstants::ZED_API_SSL_ENABLED] = false;
 $config[ApplicationConstants::ZED_SSL_ENABLED] = false;
-$config[SessionConstants::ZED_SSL_ENABLED] = (bool)getenv('SPRYKER_SSL_ENABLE', false);
+$config[SessionConstants::ZED_SSL_ENABLED] = (bool)getenv('SPRYKER_SSL_ENABLE');
 $config[ApplicationConstants::ZED_SSL_EXCLUDED] = ['heartbeat/index'];
 
 $config[ErrorHandlerConstants::DISPLAY_ERRORS] = true;
@@ -389,8 +389,8 @@ $config[ApplicationConstants::ZED_HTTP_STRICT_TRANSPORT_SECURITY_CONFIG] = $HSTS
 $config[ApplicationConstants::YVES_HTTP_STRICT_TRANSPORT_SECURITY_CONFIG] = $HSTS_CONFIG;
 
 $config[SessionConstants::YVES_SSL_ENABLED] = false;
-$config[ApplicationConstants::YVES_SSL_ENABLED] = (bool)getenv('SPRYKER_SSL_ENABLE', false);
-$config[SessionConstants::YVES_SSL_ENABLED] = (bool)getenv('SPRYKER_SSL_ENABLE', false);
+$config[ApplicationConstants::YVES_SSL_ENABLED] = (bool)getenv('SPRYKER_SSL_ENABLE');
+$config[SessionConstants::YVES_SSL_ENABLED] = (bool)getenv('SPRYKER_SSL_ENABLE');
 $config[ApplicationConstants::YVES_SSL_EXCLUDED] = [
     'heartbeat' => '/heartbeat',
 ];
@@ -420,10 +420,14 @@ $config[ApplicationConstants::BASE_URL_SSL_STATIC_MEDIA] = $config[ApplicationCo
 /* End Yves */
 
 /* Glue */
+$protocol = getenv('SPRYKER_SSL_ENABLE') ? 'https' : 'http';
+$glueHost = getenv('SPRYKER_API_HOST') ?: 'localhost';
+$gluePort = (int)(getenv('SPRYKER_API_PORT') ?: 80);
 $config[GlueApplicationConstants::GLUE_APPLICATION_DOMAIN] = sprintf(
-    '%s:%d',
-    getenv('SPRYKER_API_HOST') ?: 'localhost', // TODO: refactor GlueControllerFilterPluginTest to avoid the knowledge of GLUE_APPLICATION_DOMAIN in Zed
-    getenv('SPRYKER_API_PORT') ?: 80
+    '%s://%s%s',
+    $protocol,
+    $glueHost, // TODO: refactor GlueControllerFilterPluginTest to avoid the knowledge of GLUE_APPLICATION_DOMAIN in Zed
+    $gluePort !== 80 ? ':' . $gluePort : ''
 );
 $config[GlueApplicationConstants::GLUE_APPLICATION_REST_DEBUG] = false;
 

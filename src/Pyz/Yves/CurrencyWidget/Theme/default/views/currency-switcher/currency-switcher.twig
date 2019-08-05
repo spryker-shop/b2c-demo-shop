@@ -3,7 +3,8 @@
 {% define data = {
     currencies: _widget.currencies,
     currentCurrency: _widget.currentCurrency,
-    additionalModifiers: ['hollow', 'header']
+    additionalModifiers: ['hollow', 'header'],
+    additionalClassName: '',
 } %}
 
 {% block template %}
@@ -18,7 +19,8 @@
             modifiers: data.additionalModifiers,
             attributes: {
                 name: 'currency-iso-code',
-                'config-theme': 'secondary'
+                'config-theme': 'secondary',
+                'additional-class-name': data.additionalClassName,
             },
             embed: {
                 currencies: data.currencies,
