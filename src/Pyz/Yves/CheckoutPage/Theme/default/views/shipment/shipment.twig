@@ -21,7 +21,7 @@
             },
             submit: {
                 enable: true,
-                text: 'checkout.step.payment' | trans,
+                text: 'general.next.button' | trans,
                 class: 'form__action--checkout button  button--large button--expand'
             },
             cancel: {
@@ -39,7 +39,7 @@
                     <div class="heading">
                         <h2 class="title title--checkout title--shipment">{{name | trans}}</h2>
                         <div class="heading__logo">
-                            <img src="/assets/images/shipment-{{ name }}.png" width="65" height="10" alt="{{ name }}">
+                            <img src="{{ publicPath('images/shipment-' ~ name | replace({' ': ''}) ~ '.png') }}" width="65" alt="{{ name }}">
                         </div>
                     </div>
 

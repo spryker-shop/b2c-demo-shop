@@ -3,7 +3,8 @@
 {% define data = {
     languages: _widget.languages,
     currentLanguage: _widget.currentLanguage,
-    additionalModifiers: ['hollow', 'header']
+    additionalModifiers: ['hollow', 'header'],
+    additionalClassName: '',
 } %}
 
 {% block body %}
@@ -13,8 +14,9 @@
                 data: {
                     languages: data.languages,
                     currentLanguage: data.currentLanguage,
-                    additionalModifiers: data.additionalModifiers
-                }
+                    additionalModifiers: data.additionalModifiers,
+                    additionalClassName: data.additionalClassName,
+                },
             } only %}
         </form>
     {% endif %}

@@ -3,8 +3,8 @@
 {% define data = {
     idProductAbstract: _widget.idProductAbstract,
     form: _widget.form,
-    showSuccessMessage: false,
-    action: 'product-review/submit',
+    showSuccessMessage: true,
+    action: 'product-review/create',
     reviews: _widget.productReviews,
     summary: _widget.summary,
     ratingMaxValue: _widget.maximumRating,
@@ -65,7 +65,7 @@
         } only %}
 
         {% if is_granted('ROLE_USER') %}
-            <div class="is-hidden js-review__new-review-form-target">
+            <div class="is-hidden js-new-review-form__target">
                 {% if data.showSuccessMessage %}
                     <div class="box box--success">
                         {{ 'product_review.submit.success' | trans }}

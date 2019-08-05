@@ -38,7 +38,7 @@ class NavigationTreeCest
         $i->expect('Empty navigation tree displayed.');
 
         $i->amLoggedInUser();
-        $i->prepareTestNavigationTreeEntities((new NavigationTreeTransfer())
+        $navigationTreeTransfer = $i->prepareTestNavigationTreeEntities((new NavigationTreeTransfer())
             ->setNavigation((new NavigationTransfer())
                 ->setName('Create child node without type test 1')
                 ->setKey('Create child node without type test 1')
@@ -47,6 +47,8 @@ class NavigationTreeCest
 
         $i->waitForNavigationTree();
         $i->seeNumberOfNavigationNodes(1);
+
+        $i->cleanUpNavigationTree($navigationTreeTransfer);
     }
 
     /**
@@ -60,7 +62,7 @@ class NavigationTreeCest
         $i->expect('Navigation should have a root node persisted.');
 
         $i->amLoggedInUser();
-        $i->prepareTestNavigationTreeEntities((new NavigationTreeTransfer())
+        $navigationTreeTransfer = $i->prepareTestNavigationTreeEntities((new NavigationTreeTransfer())
             ->setNavigation((new NavigationTransfer())
                 ->setName('Create child node without type test 2')
                 ->setKey('Create child node without type test 2')
@@ -76,6 +78,8 @@ class NavigationTreeCest
 
         $i->switchToNavigationTree();
         $i->seeNumberOfNavigationNodes(2);
+
+        $i->cleanUpNavigationTree($navigationTreeTransfer);
     }
 
     /**
@@ -89,7 +93,7 @@ class NavigationTreeCest
         $i->expect('Navigation should have a root node persisted.');
 
         $i->amLoggedInUser();
-        $i->prepareTestNavigationTreeEntities((new NavigationTreeTransfer())
+        $navigationTreeTransfer = $i->prepareTestNavigationTreeEntities((new NavigationTreeTransfer())
             ->setNavigation((new NavigationTransfer())
                 ->setName('Create child node with external URL type test 3')
                 ->setKey('Create child node with external URL type test 3')
@@ -110,6 +114,8 @@ class NavigationTreeCest
 
         $i->switchToNavigationTree();
         $i->seeNumberOfNavigationNodes(3);
+
+        $i->cleanUpNavigationTree($navigationTreeTransfer);
     }
 
     /**
@@ -119,32 +125,40 @@ class NavigationTreeCest
      */
     public function testCreateChildNodeWithCmsPageType(NavigationGuiPresentationTester $i)
     {
-        $i->wantTo('Create external URL child node.');
-        $i->expect('Navigation should have a root node persisted.');
-
+        $i->wantTo('Create CMS page child node.');
+        $i->expect('Navigation should have a new child node persisted.');
         $i->amLoggedInUser();
-
-        $i->prepareTestNavigationTreeEntities((new NavigationTreeTransfer())
+        $navigationTreeTransfer = $i->prepareTestNavigationTreeEntities((new NavigationTreeTransfer())
             ->setNavigation((new NavigationTransfer())
-                ->setName('Create child node with external URL type test 3')
-                ->setKey('Create child node with external URL type test 3')
+                ->setName('Create child node with CMS page type test 5')
+                ->setKey('Create child node with CMS page type test 5')
                 ->setIsActive(true))
             ->addNode((new NavigationTreeNodeTransfer())
                 ->setNavigationNode((new NavigationNodeTransfer())
                     ->addNavigationNodeLocalizedAttribute((new NavigationNodeLocalizedAttributesTransfer())
                         ->setFkLocale($i->getIdLocale('en_US'))
+                        ->setTitle('foo'))
+                    ->addNavigationNodeLocalizedAttribute((new NavigationNodeLocalizedAttributesTransfer())
+                        ->setFkLocale($i->getIdLocale('de_DE'))
                         ->setTitle('foo')))));
         $i->amOnPage(NavigationPage::URL);
-
+        $idNavigationNode = $navigationTreeTransfer->getNodes()[0]->getNavigationNode()->getIdNavigationNode();
         $i->waitForNavigationTree();
+        $i->clickNode($idNavigationNode);
         $i->switchToNodeForm();
+        $i->clickAddChildNodeButton();
         $i->see('Create child node');
-        $i->submitCreateNodeFormWithExternalUrlType('Child 2', 'http://google.com');
-
-        $i->seeSuccessMessage(NavigationNodeCreatePage::MESSAGE_SUCCESS);
-
+        $data = [];
+        $urls = $i->generateUrlByAvailableLocaleTransfers('imprint', ['de_DE' => 'impressum']);
+        foreach ($urls as $url) {
+            $data[] = ['title' => 'Child 1.1', 'url' => $url];
+        }
+        $i->submitCreateNodeFormWithCmsPageTypeWithFormData($data);
+        $childNavigationNodeName = $i->seeSuccessMessage(NavigationNodeCreatePage::MESSAGE_SUCCESS);
         $i->switchToNavigationTree();
         $i->seeNumberOfNavigationNodes(3);
+        $i->seeNavigationNodeHierarchyByChildNodeName($idNavigationNode, $childNavigationNodeName);
+        $i->cleanUpNavigationTree($navigationTreeTransfer);
     }
 
     /**
@@ -204,6 +218,8 @@ class NavigationTreeCest
         $i->seeNavigationNodeHierarchy($idTargetNavigationNode, $idNavigationNode);
         $i->saveNavigationTreeOrder();
         $i->seeSuccessfulOrderSaveMessage(NavigationPage::MESSAGE_TREE_UPDATE_SUCCESS);
+
+        $i->cleanUpNavigationTree($navigationTreeTransfer);
     }
 
     /**

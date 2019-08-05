@@ -1,21 +1,24 @@
-.page-layout-customer {
-    margin-bottom: rem(75);
+@mixin customer-page-layout-customer($name: '.page-layout-customer') {
+    #{$name} {
+        margin-bottom: rem(75);
 
-    &__form-wrap {
-        padding-left: rem(16);
-        padding-right: rem(16);
-        max-width: rem(570);
-        overflow: hidden;
-        margin-left: auto;
-        margin-right: auto;
+        &__form-wrap {
+            padding-left: rem(16);
+            padding-right: rem(16);
+            max-width: rem(570);
+            margin-left: auto;
+            margin-right: auto;
 
-        @include helper-breakpoint-media-min($md-min) {
-            padding-left: 0;
-            padding-right: 0;
+            @include helper-breakpoint-media-min($md-min) {
+                padding-left: 0;
+                padding-right: 0;
+            }
+        }
+
+        &--login-wrap {
+            margin-top: rem(40);
         }
     }
-
-    &--login-wrap {
-        margin-top: rem(40);
-    }
 }
+
+@include customer-page-layout-customer();

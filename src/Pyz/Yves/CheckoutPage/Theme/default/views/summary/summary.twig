@@ -9,7 +9,8 @@
     shipmentMethod: _view.quoteTransfer.shipment.method,
     shipmentMethodName: _view.quoteTransfer.shipment.method.carrierName | trans,
     payment: _view.quoteTransfer.payment,
-    paymentMethodName: _view.quoteTransfer.payment.dummyPayment.cardType,
+    cart: _view.quoteTransfer,
+    paymentMethodName: _view.quoteTransfer.payment.dummyPayment.cardType | default(null),
 
     forms: {
         summary: _view.summaryForm
@@ -26,11 +27,12 @@
             storeCurrency: _view.quoteTransfer.shipment.method.storeCurrencyPrice,
             grandTotal: _view.quoteTransfer.totals.grandtotal,
             tax: _view.quoteTransfer.totals.taxtotal.amount,
-            discountTotal: _view.quoteTransfer.totals.discounttotal | default(null)
+            discountTotal: _view.quoteTransfer.totals.discounttotal | default(null),
+            priceToPay: _view.quoteTransfer.totals.priceToPay | default(null),
         }
     },
 
-    title: null
+    title: null,
 } %}
 
 {% block contentClass %}
@@ -48,8 +50,8 @@
                         {% include molecule('display-address', 'CheckoutPage') with {
                             class: 'text-small',
                             data: {
-                                address: data.shippingAddress
-                            }
+                                address: data.shippingAddress,
+                            },
                         } only %}
 
                         {% for step in data.breadcrumbs %}
@@ -64,8 +66,8 @@
                         {% include molecule('display-address', 'CheckoutPage') with {
                             class: 'text-small',
                             data: {
-                                address: data.billingAddress
-                            }
+                                address: data.billingAddress,
+                            },
                         } only %}
 
                         {% for step in data.breadcrumbs %}
@@ -78,16 +80,12 @@
             </div>
             <div class="summary-item__wrap">
                 <h2 class="title title--checkout">{{ 'checkout.step.summary.shipping' | trans }}</h2>
-                {% if data.shipmentMethodName == 'DHL' %}
-                    <div class="heading__logo heading__logo--indent">
-                        <img class="heading__logo--img" src="/assets/images/shipment-checkout.step.shipment.provider.a.png" width="65" height="10" alt="DHL">
-                    </div>
-                {% endif %}
-                {% if data.shipmentMethodName == 'Hermes' %}
-                    <div class="heading__logo heading__logo--indent">
-                        <img class="heading__logo--img" src="/assets/images/shipment-checkout.step.shipment.provider.b.png" width="65" height="10" alt="Hermes">
-                    </div>
-                {% endif %}
+                {% set shipmentMethodName = data.forms.summary.vars.value.shipment.method.carrierName %}
+
+                <div class="heading__logo heading__logo--indent">
+                    <img src="{{ publicPath('images/shipment-' ~ shipmentMethodName | replace({' ': ''}) ~ '.png') }}" width="65" alt="{{ shipmentMethodName }}">
+                </div>
+
                 <ul class="list">
                     <li class="list__item">{{ data.shipmentMethod.carrierName | trans }}</li>
                     <li class="list__item">{{ data.shipmentMethod.name }} {{ data.shipmentMethod.storeCurrencyPrice | money }}</li>
@@ -103,16 +101,29 @@
                 <h2 class="title title--checkout">{{ 'checkout.step.summary.payment' | trans }}</h2>
                 {% if data.paymentMethodName == 'Visa' %}
                     <div class="heading__logo heading__logo--indent">
-                        <img class="heading__logo--img" src="/assets/images/logo-visa.png" width="50" height="18" alt="Visa">
+                        <img class="heading__logo--img" src="{{ publicPath('images/logo-visa.png') }}" width="50" height="18" alt="Visa">
                     </div>
                 {% endif %}
                 {% if data.paymentMethodName == 'Master Card' %}
                     <div class="heading__logo heading__logo--indent">
-                        <img class="heading__logo--img" src="/assets/images/logo-mastercard.png" width="29" height="22" alt="Mastercard">
+                        <img class="heading__logo--img" src="{{ publicPath('images/logo-mastercard.png') }}" width="29" height="22" alt="Master card">
                     </div>
                 {% endif %}
                 <ul class="list">
-                    <li class="list__item">{{data.payment.paymentSelection | trans}}</li>
+                    {% if data.payment.paymentSelection == 'Nopayment' %}
+                        {% for payment in data.cart.payments %}
+                            <li class="list-item">
+                                {% if payment.giftCard is defined and payment.giftCard %}
+                                    {{ 'cart.giftcard.label' | trans }}
+                                {% else %}
+                                    {{ payment.paymentMethod }} <span class="float-right"></span>
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                    {% else %}
+                        <li class="list__item">{{ data.payment.paymentSelection | trans }}</li>
+                    {% endif %}
+
                     {% if data.payment.paymentSelection == 'dummyPaymentCreditCard' %}
                         {% set partOfCardNumder = data.payment.dummyPayment.cardNumber[(data.payment.dummyPayment.cardNumber | length)-3:] %}
                         <li class="list__item">{{ 'dummyPaymentCreditCard.card_type' | trans }}: {{ data.payment.dummyPayment.cardType }}</li>
@@ -142,8 +153,8 @@
                             data: {
                                 productItem: item,
                                 options: item.productOptions | default([]),
-                                product: data.transfer
-                            }
+                                product: data.transfer,
+                            },
                         } only %}
                             {% block options %}
                                 {% if data.productItem.concreteAttributes is not empty %}
@@ -167,8 +178,8 @@
                                         {% include molecule('product-item-summary') with {
                                             class: 'col',
                                             data: {
-                                                options: data.options
-                                            }
+                                                options: data.options,
+                                            },
                                         } only %}
                                     </div>
                                 {% endif %}
@@ -179,11 +190,24 @@
             </div>
             <div class="summary-item__wrap">
                 <h2 class="title title--checkout">{{ 'checkout.step.summary.total' | trans }}</h2>
-                {% widget 'CheckoutVoucherFormWidget' args [data.transfer] only %}{% endwidget %}
+                {% widget 'CartCodeFormWidget' args [data.transfer] only %}
+                {% elsewidget 'CheckoutVoucherFormWidget' args [data.transfer] only %} {# @deprecated Use CartCodeFormWidget instead. #}
+                {% endwidget %}
 
-                {% include molecule('summary-overview', 'CheckoutPage') with {
-                    data: data.overview
+                {% embed molecule('summary-overview', 'CheckoutPage') with {
+                    data: data.overview,
+                    embed: {
+                        cart: data.cart,
+                    },
                 } only %}
+                    {% block giftCard %}
+                        {% include molecule('gift-card-payment-summary', 'GiftCardWidget') ignore missing with {
+                            data: {
+                                cart: embed.cart,
+                            },
+                        } only %}
+                    {% endblock %}
+                {% endembed %}
 
                 {% include molecule('form') with {
                     class: 'checkout-buttons',
@@ -192,10 +216,10 @@
                         submit: {
                             enable: true,
                             text: 'checkout.step.place.order' | trans,
-                            class: 'form__action--checkout button  button--large button--expand'
-                        }
+                            class: 'form__action--checkout button  button--large button--expand',
+                        },
                     },
-                    modifiers: ['checkout-form-elements']
+                    modifiers: ['checkout-form-elements'],
                 } only %}
             </div>
         </div>

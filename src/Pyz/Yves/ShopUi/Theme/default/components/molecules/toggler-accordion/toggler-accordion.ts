@@ -2,7 +2,7 @@ import Component from 'ShopUi/models/component';
 
 export default class TogglerAccordion extends Component {
     protected triggers: HTMLElement[];
-    
+
     readyCallback(): void {
         this.triggers = <HTMLElement[]>Array.from(document.querySelectorAll(this.triggerSelector));
         this.mapEvents();
@@ -12,7 +12,7 @@ export default class TogglerAccordion extends Component {
         this.triggers.forEach(trigger => trigger.addEventListener('click', this.triggerHandler.bind(this, trigger)));
     }
 
-    protected triggerHandler(trigger): void {
+    protected triggerHandler(trigger: HTMLElement): void {
         const togglerContent = document.querySelector(trigger.getAttribute('data-toggle-target'));
         trigger.classList.toggle(this.activeClass);
         togglerContent.classList.toggle(this.toggleClass);

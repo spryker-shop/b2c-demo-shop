@@ -21,13 +21,20 @@ use Codeception\Scenario;
  * @method void am($role)
  * @method void lookForwardTo($achieveValue)
  * @method void comment($description)
- * @method \Codeception\Lib\Friend haveFriend($name, $actorClass = NULL)
+ * @method \Codeception\Lib\Friend haveFriend($name, $actorClass = null)
  *
  * @SuppressWarnings(PHPMD)
  */
 class ProductRelationPresentationTester extends Actor
 {
     use _generated\ProductRelationPresentationTesterActions;
+
+    public const ELEMENT_TIMEOUT = 30;
+    public const PRODUCT_RELATION_TYPE_SELECTOR = '//*[@id="product_relation_productRelationType"]';
+    public const PRODUCT_TABLE_FILTER_LABEL_INPUT_SELECTOR = '//*[@id="product-table_filter"]/label/input';
+    public const PRODUCT_TAB_SELECTOR = '//*[@id="form-product-relation"]/div/ul/li[2]/a';
+    public const SUBMIT_RELATION_BUTTON_SELECTOR = '//*[@id="submit-relation"]';
+    public const ACTIVATE_RELATION_BUTTON_SELECTOR = '//*[@id="activate-relation"]';
 
     /**
      * @var int
@@ -52,7 +59,8 @@ class ProductRelationPresentationTester extends Actor
      */
     public function selectRelationType($type)
     {
-        $this->selectOption('//*[@id="product_relation_productRelationType"]', $type);
+        $this->waitForElement(static::PRODUCT_RELATION_TYPE_SELECTOR, static::ELEMENT_TIMEOUT);
+        $this->selectOption(static::PRODUCT_RELATION_TYPE_SELECTOR, $type);
 
         return $this;
     }
@@ -64,7 +72,8 @@ class ProductRelationPresentationTester extends Actor
      */
     public function filterProductsByName($name)
     {
-        $this->fillField('//*[@id="product-table_filter"]/label/input', $name);
+        $this->waitForElement(static::PRODUCT_TABLE_FILTER_LABEL_INPUT_SELECTOR, static::ELEMENT_TIMEOUT);
+        $this->fillField(static::PRODUCT_TABLE_FILTER_LABEL_INPUT_SELECTOR, $name);
 
         return $this;
     }
@@ -78,8 +87,8 @@ class ProductRelationPresentationTester extends Actor
     {
         $buttonElementId = sprintf('//*[@id="select-product-%s"]', $sku);
 
-        $this->waitForElementNotVisible('//*[@id="product-table_processing"]', 5);
-        $this->waitForElement($buttonElementId, 5);
+        $this->waitForElementNotVisible('//*[@id="product-table_processing"]', self::ELEMENT_TIMEOUT);
+        $this->waitForElement($buttonElementId, self::ELEMENT_TIMEOUT);
 
         $this->click($buttonElementId);
 
@@ -91,7 +100,8 @@ class ProductRelationPresentationTester extends Actor
      */
     public function switchToAssignProductsTab()
     {
-        $this->click('//*[@id="form-product-relation"]/div/ul/li[2]/a');
+        $this->waitForElement(static::PRODUCT_TAB_SELECTOR, static::ELEMENT_TIMEOUT);
+        $this->click(static::PRODUCT_TAB_SELECTOR);
 
         return $this;
     }
@@ -107,9 +117,15 @@ class ProductRelationPresentationTester extends Actor
     {
         $ruleSelectorBaseId = sprintf('[@id="builder_rule_%d"]', $this->numberOfRulesSelected);
 
-        $this->selectOption(sprintf('//*%s/div[3]/select', $ruleSelectorBaseId), $ruleName);
-        $this->selectOption(sprintf('//*%s/div[4]/select', $ruleSelectorBaseId), $operator);
-        $this->fillField(sprintf('//*%s/div[5]/input', $ruleSelectorBaseId), $value);
+        $selectProductRule = sprintf('//*%s/div[3]/select', $ruleSelectorBaseId);
+        $this->waitForElement($selectProductRule, static::ELEMENT_TIMEOUT);
+        $this->selectOption($selectProductRule, $ruleName);
+        $selectProductOperator = sprintf('//*%s/div[4]/select', $ruleSelectorBaseId);
+        $this->waitForElement($selectProductOperator, static::ELEMENT_TIMEOUT);
+        $this->selectOption($selectProductOperator, $operator);
+        $selectProductValue = sprintf('//*%s/div[5]/input', $ruleSelectorBaseId);
+        $this->waitForElement($selectProductValue, static::ELEMENT_TIMEOUT);
+        $this->fillField($selectProductValue, $value);
 
         $this->numberOfRulesSelected++;
 
@@ -121,7 +137,8 @@ class ProductRelationPresentationTester extends Actor
      */
     public function clickSaveButton()
     {
-        $this->click('//*[@id="submit-relation"]');
+        $this->waitForElement(static::SUBMIT_RELATION_BUTTON_SELECTOR, static::ELEMENT_TIMEOUT);
+        $this->click(static::SUBMIT_RELATION_BUTTON_SELECTOR);
 
         return $this;
     }
@@ -131,7 +148,8 @@ class ProductRelationPresentationTester extends Actor
      */
     public function activateRelation()
     {
-        $this->click('//*[@id="activate-relation"]');
+        $this->waitForElement(static::ACTIVATE_RELATION_BUTTON_SELECTOR, static::ELEMENT_TIMEOUT);
+        $this->click(static::ACTIVATE_RELATION_BUTTON_SELECTOR);
 
         return $this;
     }

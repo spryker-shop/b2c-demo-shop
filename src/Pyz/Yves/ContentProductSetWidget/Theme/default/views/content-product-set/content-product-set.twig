@@ -1,0 +1,75 @@
+{% extends template('widget') %}
+
+{% define data = {
+    productViews: productViews,
+    productSet: productSet,
+} %}
+
+{% block body %}
+    {% embed organism('product-set-cms-content', 'ProductSetWidget') ignore missing with {
+        data: {
+            products: data.productViews,
+            name: data.productSet.name,
+            description: data.productSet.description,
+            images: data.productSet.imageSets.0.images | default([]),
+        },
+    } only %}
+        {% block header %}
+            {% block title %}
+                {% include molecule('product-slider-title') with {
+                    modifiers: ['set'],
+                    data: {
+                        title: data.name,
+                    },
+                } only %}
+            {% endblock %}
+
+            <div class="grid grid--middle grid--justify spacing-bottom spacing-bottom--bigger">
+                {% block description %}
+                    {% if data.description %}
+                        <div class="col">
+                            <p>{{ data.description }}</p>
+                        </div>
+                    {% endif %}
+                {% endblock %}
+
+                <div class="col">
+                    <form method="POST" action="{{ path('cart/add-items') }}">
+                        {% set isDisabled = false %}
+
+                        {% for product in data.products %}
+                            {% if product.idProductConcrete is not empty %}
+                                {% if product.available %}
+                                    <input type="hidden" name="items[{{ loop.index }}][sku]" value="{{ product.sku }}">
+                                    <input type="hidden" name="items[{{ loop.index }}][quantity]" value="1">
+                                {% endif %}
+                            {% else %}
+                                {% set isDisabled = true %}
+                            {% endif %}
+                        {% endfor %}
+
+                        <button type="submit" class="button" data-init-single-click {{ isDisabled ? 'disabled' }}>
+                            {{ 'product.set.detail.add-all-to-cart' | trans }}
+                        </button>
+                    </form>
+                </div>
+            </div>
+        {% endblock %}
+
+        {% block productSet %}
+            <form method="GET">
+                {% include molecule('product-set-slider', 'ProductSetWidget') with {
+                    data: {
+                        products: data.products,
+                        sliderConfig: data.sliderConfig
+                    },
+                } only %}
+            </form>
+            {% include molecule('action-single-click-enforcer') with {
+                attributes: {
+                    'target-selector': '.js-product-set__add-to-cart',
+                },
+            } only %}
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

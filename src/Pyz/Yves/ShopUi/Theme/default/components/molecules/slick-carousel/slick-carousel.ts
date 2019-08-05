@@ -3,7 +3,6 @@ import CustomSelect from '../custom-select/custom-select';
 import $ from 'jquery/dist/jquery';
 import 'slick-carousel';
 
-
 export default class SlickCarousel extends Component {
     protected container: $;
     protected sliderConfig: Object;
@@ -16,10 +15,10 @@ export default class SlickCarousel extends Component {
             this.customSelects = <CustomSelect[]>Array.from(this.querySelectorAll(this.customSelectSelector));
         }
 
-        this.init();
+        this.initialize();
     }
 
-    protected init(): void {
+    protected initialize(): void {
         this.container.on('init', () => {
             if (this.customSelects) {
                 this.customSelects.forEach((select: CustomSelect) => {
@@ -33,7 +32,7 @@ export default class SlickCarousel extends Component {
             this.sliderConfig
         );
 
-        if ("ontouchstart" in document.documentElement){
+        if ('ontouchstart' in document.documentElement){
             this.container.slick('slickPause');
         }
     }

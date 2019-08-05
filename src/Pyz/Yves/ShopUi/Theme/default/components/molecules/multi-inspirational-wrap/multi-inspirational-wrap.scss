@@ -9,7 +9,10 @@
         &__holder {
             &--parallax-to-bottom {
                 position: relative;
-                bottom: rem(-60);
+
+                @include helper-breakpoint-media-min($lg-min) {
+                    bottom: rem(-60);
+                }
             }
         }
 

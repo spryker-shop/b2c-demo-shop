@@ -1,0 +1,45 @@
+namespace: PyzTest
+actor: Tester
+
+include:
+    - tests/PyzTest/*/*
+
+paths:
+    tests: tests
+    log: tests/_output
+    data: tests/_data
+    support: tests/_support
+    envs: tests/_envs
+
+settings:
+    bootstrap: _bootstrap.php
+    suite_class: \PHPUnit_Framework_TestSuite
+    colors: true
+    memory_limit: 1024M
+    log: true
+
+coverage:
+    enabled: true
+    remote: true
+    c3_url: 'http://zed.de.shop-suite.local'
+    whitelist: { include: ['src/Pyz/*.php'] }
+
+extensions:
+    enabled:
+        - \SprykerTest\Shared\Testify\Helper\WebDriverHelper
+        - \SprykerTest\Shared\Testify\Helper\SuiteFilterHelper
+    config:
+        \SprykerTest\Shared\Testify\Helper\WebDriverHelper:
+            suites: ['Presentation']
+            loadImages: false
+            diskCache: true
+            remote-enable: "%SPRYKER_TESTING_ENABLED%"
+            host: "%SPRYKER_TEST_WEB_DRIVER_HOST%"
+            browser: "%SPRYKER_TEST_IN_BROWSER%"
+        \SprykerTest\Shared\Testify\Helper\SuiteFilterHelper:
+            inclusive:
+                - Presentation
+
+params:
+    - tests/default.yml
+    - env

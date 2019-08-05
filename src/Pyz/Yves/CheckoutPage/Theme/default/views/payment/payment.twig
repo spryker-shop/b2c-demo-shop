@@ -53,8 +53,8 @@
                                 }) }}
 
                                 <div class="list-switches__img-wrap">
-                                    <img class="list-switches__img" src="/assets/images/logo-visa.png" alt="Visa">
-                                    <img class="list-switches__img" src="/assets/images/logo-mastercard.png" alt="Mastercard">
+                                    <img class="list-switches__img" src="{{ publicPath('images/logo-visa.png') }}" alt="Visa">
+                                    <img class="list-switches__img" src="{{ publicPath('images/logo-mastercard.png') }}" alt="Mastercard">
                                 </div>
 
                             {% else %}
@@ -96,7 +96,7 @@
                     } only %}
 
                         {% block fieldset %}
-                            <div class="js-payment-method-{{embed.index}} {% if embed.index != 1 %} is-hidden{% endif %}">
+                            <div class="js-payment-method-{{ embed.index }} {% if embed.index == 1 %} is-hidden{% endif %}">
                                 <h2 class="title title--checkout">{{ embed.toggler.vars.label | trans }}</h2>
                                 {% if data.customForms[data.form.vars.template_path] is not defined %}
                                     {{ parent() }}

@@ -1,7 +1,7 @@
 import Component from 'ShopUi/models/component';
 
 export default class ActionSingleClickEnforcer extends Component {
-    readonly targets: HTMLElement[]
+    readonly targets: HTMLElement[];
 
     constructor() {
         super();
@@ -25,6 +25,7 @@ export default class ActionSingleClickEnforcer extends Component {
 
         if (isDisabled) {
             event.preventDefault();
+
             return;
         }
 
@@ -39,6 +40,6 @@ export default class ActionSingleClickEnforcer extends Component {
     }
 
     get targetSelector(): string {
-        return this.getAttribute('target-selector') || '';
+        return this.getAttribute('target-selector');
     }
 }

@@ -1,19 +1,18 @@
 import Component from 'ShopUi/models/component';
-import $ from 'jquery';
-import select from 'select2';
+import $ from 'jquery/dist/jquery';
+import 'select2/dist/js/select2.full';
 
 export default class CustomSelect extends Component {
     select: HTMLSelectElement;
     $select: $;
 
     protected readyCallback(): void {
-        const select2 = select;
         this.select = <HTMLSelectElement>this.querySelector(`.${this.jsName}`);
         this.$select = $(this.select);
 
         this.mapEvents();
 
-        if(document.body.classList.contains('no-touch') && this.autoInit) {
+        if (document.body.classList.contains('no-touch') && this.autoInit) {
             this.initSelect();
             this.removeAttributeTitle();
         }
@@ -21,7 +20,7 @@ export default class CustomSelect extends Component {
 
     protected mapEvents(): void {
         this.changeSelectEvent();
-        document.body.addEventListener('click', (event) => this.closeHandler(event));
+        document.body.addEventListener('click', (event: Event) => this.closeHandler(event));
     }
 
     protected onChangeSelect(): void {
@@ -38,7 +37,8 @@ export default class CustomSelect extends Component {
         this.$select.select2({
             minimumResultsForSearch: Infinity,
             width: this.configWidth,
-            theme: this.configTheme
+            theme: this.configTheme,
+            dropdownCssClass: this.additionalClassName ? `select2-dropdown--${this.additionalClassName}` : ''
         });
     }
 
@@ -46,10 +46,10 @@ export default class CustomSelect extends Component {
         this.querySelector('.select2-selection__rendered').removeAttribute('title');
     }
 
-    protected closeHandler(event): void {
+    protected closeHandler(event: Event): void {
         const eventTarget = <HTMLElement>event.target;
 
-        if (eventTarget.classList.contains('select2-container--open')) {
+        if ($(eventTarget).hasClass('select2-container--open')) {
             this.$select.select2('close');
         }
     }
@@ -64,5 +64,9 @@ export default class CustomSelect extends Component {
 
     get autoInit(): boolean {
         return !this.select.hasAttribute('auto-init');
+    }
+
+    protected get additionalClassName(): string {
+        return this.select.getAttribute('additional-class-name');
     }
 }

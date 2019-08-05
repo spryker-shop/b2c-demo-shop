@@ -16,9 +16,11 @@ use Orm\Zed\Tax\Persistence\SpyTaxSetTaxQuery;
 use Propel\Runtime\ActiveQuery\Criteria;
 use Pyz\Zed\DataImport\Business\Model\Country\Repository\CountryRepositoryInterface;
 use Spryker\Zed\DataImport\Business\Model\DataImportStep\DataImportStepInterface;
+use Spryker\Zed\DataImport\Business\Model\DataImportStep\PublishAwareStep;
 use Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface;
+use Spryker\Zed\Tax\Dependency\TaxEvents;
 
-class TaxWriterStep implements DataImportStepInterface
+class TaxWriterStep extends PublishAwareStep implements DataImportStepInterface
 {
     public const BULK_SIZE = 100;
 
@@ -66,6 +68,8 @@ class TaxWriterStep implements DataImportStepInterface
         $this->findOrCreateTaxSetTax($taxRateEntity, $taxSetEntity);
 
         $this->addShipmentTax($taxSetEntity);
+
+        $this->addPublishEvents(TaxEvents::TAX_SET_PUBLISH, $taxSetEntity->getIdTaxSet());
     }
 
     /**

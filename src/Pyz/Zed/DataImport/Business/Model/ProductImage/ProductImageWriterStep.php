@@ -30,6 +30,7 @@ class ProductImageWriterStep extends PublishAwareStep implements DataImportStepI
     public const KEY_CONCRETE_SKU = 'concrete_sku';
     public const KEY_EXTERNAL_URL_LARGE = 'external_url_large';
     public const KEY_EXTERNAL_URL_SMALL = 'external_url_small';
+    public const KEY_SORT_ORDER = 'sort_order';
     public const DEFAULT_IMAGE_SORT_ORDER = 0;
 
     /**
@@ -59,10 +60,10 @@ class ProductImageWriterStep extends PublishAwareStep implements DataImportStepI
      */
     public function execute(DataSetInterface $dataSet)
     {
-        $imageSetEntity = $this->findOrCreateImageSet($dataSet);
-        $productImageEntity = $this->findOrCreateImage($dataSet);
+        $productImageSetEntity = $this->findOrCreateImageSet($dataSet);
+        $productImageEntity = $this->findOrCreateImage($dataSet, $productImageSetEntity);
 
-        $this->updateOrCreateImageToImageSetRelation($imageSetEntity, $productImageEntity);
+        $this->updateOrCreateImageToImageSetRelation($productImageSetEntity, $productImageEntity, $dataSet);
     }
 
     /**
@@ -118,10 +119,11 @@ class ProductImageWriterStep extends PublishAwareStep implements DataImportStepI
      * We expect that the large URL is the unique identifier for an image.
      *
      * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
+     * @param \Orm\Zed\ProductImage\Persistence\SpyProductImageSet $productImageSetEntity
      *
      * @return \Orm\Zed\ProductImage\Persistence\SpyProductImage
      */
-    protected function findOrCreateImage(DataSetInterface $dataSet)
+    protected function findOrCreateImage(DataSetInterface $dataSet, SpyProductImageSet $productImageSetEntity)
     {
         $productImageEntity = SpyProductImageQuery::create()
             ->filterByExternalUrlLarge($dataSet[static::KEY_EXTERNAL_URL_LARGE])
@@ -132,29 +134,37 @@ class ProductImageWriterStep extends PublishAwareStep implements DataImportStepI
 
         if ($productImageEntity->isNew() || $productImageEntity->isModified()) {
             $productImageEntity->save();
+
+            $this->addImagePublishEvents($productImageSetEntity);
         }
 
         return $productImageEntity;
     }
 
     /**
-     * @param \Orm\Zed\ProductImage\Persistence\SpyProductImageSet $imageSetEntity
+     * @param \Orm\Zed\ProductImage\Persistence\SpyProductImageSet $productImageSetEntity
      * @param \Orm\Zed\ProductImage\Persistence\SpyProductImage $productImageEntity
+     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
      *
      * @return void
      */
-    protected function updateOrCreateImageToImageSetRelation(SpyProductImageSet $imageSetEntity, SpyProductImage $productImageEntity)
-    {
+    protected function updateOrCreateImageToImageSetRelation(
+        SpyProductImageSet $productImageSetEntity,
+        SpyProductImage $productImageEntity,
+        DataSetInterface $dataSet
+    ) {
         $productImageSetToProductImageEntity = SpyProductImageSetToProductImageQuery::create()
-            ->filterByFkProductImageSet($imageSetEntity->getIdProductImageSet())
+            ->filterByFkProductImageSet($productImageSetEntity->getIdProductImageSet())
             ->filterByFkProductImage($productImageEntity->getIdProductImage())
             ->findOneOrCreate();
 
         $productImageSetToProductImageEntity
-            ->setSortOrder(static::DEFAULT_IMAGE_SORT_ORDER);
+            ->setSortOrder($this->getSortOrder($dataSet));
 
         if ($productImageSetToProductImageEntity->isNew() || $productImageSetToProductImageEntity->isModified()) {
             $productImageSetToProductImageEntity->save();
+
+            $this->addImagePublishEvents($productImageSetEntity);
         }
     }
 
@@ -171,5 +181,19 @@ class ProductImageWriterStep extends PublishAwareStep implements DataImportStepI
         } elseif ($productImageSetEntity->getFkProduct()) {
             $this->addPublishEvents(ProductImageEvents::PRODUCT_IMAGE_PRODUCT_CONCRETE_PUBLISH, $productImageSetEntity->getFkProduct());
         }
+    }
+
+    /**
+     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
+     *
+     * @return int
+     */
+    protected function getSortOrder(DataSetInterface $dataSet): int
+    {
+        if (isset($dataSet[static::KEY_SORT_ORDER]) && $dataSet[static::KEY_SORT_ORDER] >= 0) {
+            return (int)$dataSet[static::KEY_SORT_ORDER];
+        }
+
+        return static::DEFAULT_IMAGE_SORT_ORDER;
     }
 }

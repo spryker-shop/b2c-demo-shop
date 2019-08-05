@@ -10,14 +10,13 @@
     expenses: [],
     voucherDiscounts: [],
     cartRuleDiscounts: [],
-
     prices: {
         subTotal: required,
         storeCurrency: required,
         tax: required,
         grandTotal: required,
-        discountTotal: null
-    }
+        discountTotal: null,
+    },
 } %}
 
 {% block body %}
@@ -71,6 +70,8 @@
             <strong>{{ 'checkout.step.summary.grand_total' | trans }}</strong>
             <strong class="float-right">{{ data.prices.grandTotal | money }}</strong>
         </li>
+
+        {% block giftCard %}{% endblock %}
 
     </ul>
 {% endblock %}

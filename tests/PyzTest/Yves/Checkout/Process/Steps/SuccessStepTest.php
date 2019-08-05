@@ -125,6 +125,7 @@ class SuccessStepTest extends Unit
     {
         $checkoutPageConfigMock = $this->getMockBuilder(CheckoutPageConfig::class)->setMethods(['cleanCartAfterOrderCreation'])->getMock();
         $checkoutPageConfigMock->method('cleanCartAfterOrderCreation')->willReturn(true);
+
         return $checkoutPageConfigMock;
     }
 }

@@ -54,6 +54,7 @@ class DiscountStoreWriterStep implements DataImportStepInterface
             static::$idDiscountBuffer[$discountKey] =
                 SpyDiscountQuery::create()->findOneByDiscountKey($discountKey)->getIdDiscount();
         }
+
         return static::$idDiscountBuffer[$discountKey];
     }
 
@@ -68,6 +69,7 @@ class DiscountStoreWriterStep implements DataImportStepInterface
             static::$idStoreBuffer[$storeName] =
                 SpyStoreQuery::create()->findOneByName($storeName)->getIdStore();
         }
+
         return static::$idStoreBuffer[$storeName];
     }
 }
