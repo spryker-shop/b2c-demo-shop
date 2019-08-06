@@ -1,0 +1,10 @@
+@mixin helper-input-placeholder($selector: '&') {
+    /* autoprefixer: ignore next */
+    #{$selector}:-ms-input-placeholder {
+        @content;
+    }
+
+    #{$selector}::placeholder {
+        @content;
+    }
+}
