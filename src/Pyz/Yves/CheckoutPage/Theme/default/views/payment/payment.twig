@@ -3,11 +3,11 @@
 {% define data = {
     backUrl: _view.previousStepUrl,
     forms: {
-        payment: _view.paymentForm
+        payment: _view.paymentForm,
     },
 
     title: null,
-    customForms: {}
+    customForms: {},
 } %}
 
 {% block content %}
@@ -17,37 +17,39 @@
             form: data.forms.payment,
             options: {
                 attr: {
-                    id: 'payment-form'
-                }
+                    id: 'payment-form',
+                },
             },
             submit: {
                 enable: true,
                 text: 'checkout.step.summary' | trans,
-                class: 'form__action--checkout button  button--large button--expand'
+                class: 'form__action--checkout button  button--large button--expand',
             },
             cancel: {
                 enable: true,
                 url: data.backUrl,
                 text: 'general.back.button' | trans,
-                class: 'form__action--checkout button button--hollow button--expand'
+                class: 'form__action--checkout button button--hollow button--expand',
             },
-            customForms: data.customForms
-        }
+            customForms: data.customForms,
+        },
     } only %}
         {% block fieldset %}
 
             {% for name, choices in data.form.paymentSelection.vars.choices %}
+                {% set paymentProviderIndex = loop.index0 %}
                 <ul class="list-switches list-switches--register-type">
                     {% for key, choice in choices %}
+                        {% set paymentMethodIndex = loop.index ~ '-' ~ paymentProviderIndex %}
                         <li class="list-switches__item">
                             {% if key == 0 %}
                                 {{ form_row(data.form.paymentSelection[key], {
                                     required: false,
                                     component: molecule('toggler-radio'),
                                     attributes: {
-                                        'target-selector': '.js-payment-method-' ~ loop.index,
+                                        'target-selector': '.js-payment-method-' ~ paymentMethodIndex,
                                         'class-to-toggle': 'is-hidden',
-                                        'checked': 'checked'
+                                        'checked': 'checked',
                                     },
                                     rowAttr: {class: 'toggler-radio--with-bg'},
                                 }) }}
@@ -62,11 +64,11 @@
                                     required: false,
                                     component: molecule('toggler-radio'),
                                     attributes: {
-                                        'target-selector': '.js-payment-method-' ~ loop.index,
-                                        'class-to-toggle': 'is-hidden'
+                                        'target-selector': '.js-payment-method-' ~ paymentMethodIndex,
+                                        'class-to-toggle': 'is-hidden',
                                     },
                                     rowAttr: {class: 'toggler-radio--with-bg'},
-                            }) }}
+                                }) }}
                             {% endif %}
                         </li>
                     {% endfor %}
@@ -86,17 +88,17 @@
                                 'name_on_card': 'col col--sm-6',
                                 'card_expires_month': 'col col--sm-3 col--bottom',
                                 'card_expires_year': 'col col--sm-3 col--bottom',
-                                'card_security_code': 'col col--sm-6 col--bottom'
-                            }
+                                'card_security_code': 'col col--sm-6 col--bottom',
+                            },
                         },
                         embed: {
-                            index: loop.index,
-                            toggler: data.form.paymentSelection[key]
-                        }
+                            index: loop.index ~ '-' ~ paymentProviderIndex,
+                            toggler: data.form.paymentSelection[key],
+                        },
                     } only %}
 
                         {% block fieldset %}
-                            <div class="js-payment-method-{{ embed.index }} {% if embed.index == 1 %} is-hidden{% endif %}">
+                            <div class="js-payment-method-{{embed.index}} {% if embed.index != '1-0' %} is-hidden{% endif %}">
                                 <h2 class="title title--checkout">{{ embed.toggler.vars.label | trans }}</h2>
                                 {% if data.customForms[data.form.vars.template_path] is not defined %}
                                     {{ parent() }}
@@ -104,7 +106,7 @@
                                     {% set viewName = data.customForms[data.form.vars.template_path] | first %}
                                     {% set moduleName = data.customForms[data.form.vars.template_path] | last %}
                                     {% include view(viewName, moduleName) ignore missing with {
-                                        form: data.form.parent
+                                        form: data.form.parent,
                                     } only %}
                                 {% endif %}
                             </div>
