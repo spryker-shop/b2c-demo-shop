@@ -133,11 +133,11 @@
                                     url: product.url,
                                     imageUrl: product.images.0.externalUrlSmall | default,
                                     price: product.price,
-                                    originalPrice: product.prices['ORIGINAL'] | default
+                                    originalPrice: product.prices['ORIGINAL'] | default,
                                 },
                                 embed: {
-                                    product: product
-                                }
+                                    product: product,
+                                },
                             } only %}
                                 {% block content %}
                                     {{parent()}}
@@ -149,9 +149,9 @@
                                             superAttributes: embed.product.attributeMap.superAttributes,
                                             selectedAttributes: embed.product.selectedAttributes,
                                             availableAttributes: embed.product.availableAttributes,
-                                            useExternalForm: true
+                                            useExternalForm: true,
                                         },
-                                        embed: embed
+                                        embed: embed,
                                     } only %}
                                         {% block variant %}
                                             <li class="list__item">
@@ -164,8 +164,8 @@
                                                         selectedValue: selectedValue,
                                                         label: ('product.attribute.' ~ name) | trans,
                                                         isAvailable: isAvailable,
-                                                        autoInitSelect: true
-                                                    }
+                                                        autoInitSelect: true,
+                                                    },
                                                 } only %}
                                             </li>
                                         {% endblock %}
