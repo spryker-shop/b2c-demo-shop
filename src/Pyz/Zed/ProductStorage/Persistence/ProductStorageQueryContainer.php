@@ -22,7 +22,7 @@ class ProductStorageQueryContainer extends SprykerProductStorageQueryContainer
      *
      * @param array $productAbstractIds
      *
-     * @return \Orm\Zed\Product\Persistence\SpyProductAbstractLocalizedAttributesQuery
+     * @return \Propel\Runtime\ActiveQuery\ModelCriteria
      */
     public function queryProductAbstractByIds(array $productAbstractIds)
     {

@@ -62,16 +62,12 @@
                     {{ 'product.attribute.not_available' | trans }}
                 {% endif %}
             {% else %}
-                {{embed.selectedValue}}
-                <a href="?" class="spacing-left">
-                    {%- include atom('icon') with {
-                        modifiers: ['secondary'],
-                        data: {
-                            name: 'close'
-                        }
-                    } only -%}
-                </a>
-                <input type="hidden" name="{{embed.formName}}" value="{{embed.selectedValue}}" />
+                {% include molecule('variant-resetter', 'ProductDetailPage') with {
+                    data: {
+                        formName: embed.formName,
+                        selectedValue: embed.selectedValue,
+                    },
+                } only %}
             {% endif %}
         {% endblock %}
     {% endembed %}

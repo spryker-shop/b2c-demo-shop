@@ -8,7 +8,11 @@
 namespace Pyz\Zed\Console;
 
 use Pyz\Zed\DataImport\DataImportConfig;
+use Pyz\Zed\Development\Communication\Console\AcceptanceCodeTestConsole;
+use Pyz\Zed\Development\Communication\Console\ApiCodeTestConsole;
+use Pyz\Zed\Development\Communication\Console\FunctionalCodeTestConsole;
 use Pyz\Zed\PriceProductScheduleDataImport\PriceProductScheduleDataImportConfig;
+use Pyz\Zed\ProductQuantityDataImport\ProductQuantityDataImportConfig;
 use Silex\Provider\TwigServiceProvider as SilexTwigServiceProvider;
 use Spryker\Shared\Config\Environment;
 use Spryker\Zed\Cache\Communication\Console\EmptyAllCachesConsole;
@@ -21,10 +25,10 @@ use Spryker\Zed\CodeGenerator\Communication\Console\BundleYvesCodeGeneratorConso
 use Spryker\Zed\CodeGenerator\Communication\Console\BundleZedCodeGeneratorConsole;
 use Spryker\Zed\Console\Communication\Plugin\ConsoleLogPlugin;
 use Spryker\Zed\Console\ConsoleDependencyProvider as SprykerConsoleDependencyProvider;
-use Spryker\Zed\CustomersRestApi\Communication\Console\CustomerAddressesUuidWriterConsole;
 use Spryker\Zed\DataImport\Communication\Console\DataImportConsole;
 use Spryker\Zed\DataImport\Communication\Console\DataImportDumpConsole;
 use Spryker\Zed\Development\Communication\Console\CodeArchitectureSnifferConsole;
+use Spryker\Zed\Development\Communication\Console\CodeFixturesConsole;
 use Spryker\Zed\Development\Communication\Console\CodePhpMessDetectorConsole;
 use Spryker\Zed\Development\Communication\Console\CodePhpstanConsole;
 use Spryker\Zed\Development\Communication\Console\CodeStyleSnifferConsole;
@@ -123,7 +127,6 @@ use Spryker\Zed\Translator\Communication\Console\GenerateTranslationCacheConsole
 use Spryker\Zed\Twig\Communication\Console\CacheWarmerConsole;
 use Spryker\Zed\Twig\Communication\Plugin\ServiceProvider\TwigServiceProvider as SprykerTwigServiceProvider;
 use Spryker\Zed\Uuid\Communication\Console\UuidGeneratorConsole;
-use Spryker\Zed\WishlistsRestApi\Communication\Console\WishlistsUuidWriterConsole;
 use Spryker\Zed\ZedNavigation\Communication\Console\BuildNavigationConsole;
 use Stecman\Component\Symfony\Console\BashCompletion\CompletionCommand;
 
@@ -208,6 +211,7 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
 
             //core data importers
             new DataImportConsole(DataImportConsole::DEFAULT_NAME . ':' . PriceProductDataImportConfig::IMPORT_TYPE_PRODUCT_PRICE),
+            new DataImportConsole(DataImportConsole::DEFAULT_NAME . ':' . ProductQuantityDataImportConfig::IMPORT_TYPE_PRODUCT_QUANTITY),
 
             // Publish and Synchronization
             new EventBehaviorTriggerTimeoutConsole(),
@@ -262,9 +266,7 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
 
             new PriceProductStoreOptimizeConsole(),
 
-            new CustomerAddressesUuidWriterConsole(),
             new UuidGeneratorConsole(),
-            new WishlistsUuidWriterConsole(),
             new DeleteExpiredGuestQuoteConsole(),
             new BuildValidationCacheConsole(),
 
@@ -287,6 +289,10 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
             $commands[] = new CodeTestConsole();
             $commands[] = new CodeStyleSnifferConsole();
             $commands[] = new CodeArchitectureSnifferConsole();
+            $commands[] = new AcceptanceCodeTestConsole();
+            $commands[] = new FunctionalCodeTestConsole();
+            $commands[] = new ApiCodeTestConsole();
+            $commands[] = new CodeFixturesConsole();
             $commands[] = new CodePhpstanConsole();
             $commands[] = new CodePhpMessDetectorConsole();
             $commands[] = new ValidatorConsole();

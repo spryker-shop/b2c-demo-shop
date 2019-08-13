@@ -53,15 +53,19 @@
                 {% endblock %}
 
                 {% block price %}
-                    <div class="col col--md-4 col--sm-12">
-                        {% include molecule('money-price') with {
-                            modifiers: ['align-right'],
-                            data: {
-                                amount: data.price,
-                                originalAmount: data.originalPrice is empty ? null : data.originalPrice
-                            }
-                        } only %}
-                    </div>
+                    {% if can('SeePricePermissionPlugin') %}
+                        <div class="col col--md-4 col--sm-12">
+                            {% include molecule('money-price') with {
+                                modifiers: ['align-right'],
+                                data: {
+                                    amount: data.price,
+                                    originalAmount: data.originalPrice is empty ? null : data.originalPrice
+                                }
+                            } only %}
+                        </div>
+                    {% else %}
+                        {{ 'customer.access.cannot_see_price' | trans }}
+                    {% endif %}
                 {% endblock %}
             </a>
 

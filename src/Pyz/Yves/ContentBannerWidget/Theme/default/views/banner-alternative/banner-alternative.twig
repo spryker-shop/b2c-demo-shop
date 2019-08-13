@@ -1,0 +1,16 @@
+{% extends template('widget') %}
+
+{% define data = {
+    banner: banner,
+} %}
+
+{% block body %}
+    {% embed molecule('banner-jumbotron', 'ContentBannerWidget') with {
+        data: {
+            banner: data.banner,
+            isBannerClickable: banner.clickUrl,
+        },
+    } only %}
+        {% block bannerTextPosition %}{% endblock %}
+    {% endembed %}
+{% endblock %}

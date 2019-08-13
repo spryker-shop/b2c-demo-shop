@@ -1,5 +1,5 @@
 @mixin shop-ui-image-banner($name: '.image-banner') {
-    $images-folder-path: '/assets/images/';
+    $images-folder-path: '../images/';
 
     #{$name} {
         margin: rem(80) 0 rem(132);
@@ -39,7 +39,7 @@
                 height: rem(32);
                 bottom: rem(20);
                 right: rem(24);
-                background: url('#{$images-folder-path}spryker-logo@2x.png') center no-repeat / contain;
+                background: url('#{$images-folder-path}spryker-logo@2x.png') center/contain no-repeat;
 
                 @include helper-breakpoint-media-min($lg-min) {
                     width: rem(130);

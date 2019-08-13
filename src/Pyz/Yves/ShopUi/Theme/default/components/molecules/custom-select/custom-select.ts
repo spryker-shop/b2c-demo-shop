@@ -1,6 +1,6 @@
 import Component from 'ShopUi/models/component';
 import $ from 'jquery/dist/jquery';
-import 'select2';
+import 'select2/dist/js/select2.full';
 
 export default class CustomSelect extends Component {
     select: HTMLSelectElement;
@@ -37,7 +37,8 @@ export default class CustomSelect extends Component {
         this.$select.select2({
             minimumResultsForSearch: Infinity,
             width: this.configWidth,
-            theme: this.configTheme
+            theme: this.configTheme,
+            dropdownCssClass: this.additionalClassName ? `select2-dropdown--${this.additionalClassName}` : ''
         });
     }
 
@@ -48,7 +49,7 @@ export default class CustomSelect extends Component {
     protected closeHandler(event: Event): void {
         const eventTarget = <HTMLElement>event.target;
 
-        if (eventTarget.classList.contains('select2-container--open')) {
+        if ($(eventTarget).hasClass('select2-container--open')) {
             this.$select.select2('close');
         }
     }
@@ -63,5 +64,9 @@ export default class CustomSelect extends Component {
 
     protected get autoInit(): boolean {
         return !this.select.hasAttribute('auto-init');
+    }
+
+    protected get additionalClassName(): string {
+        return this.select.getAttribute('additional-class-name');
     }
 }
