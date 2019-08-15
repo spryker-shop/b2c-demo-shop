@@ -181,7 +181,7 @@
                                         {% if isDisabled %}
                                             <button type="button" class="button button--expand" disabled>{{ 'page.detail.add-to-cart' | trans }}</button>
                                         {% else %}
-                                            <a href="{{ path('cart/add', {sku: embed.product.sku}) }}" class="button button--expand js-product-set__add-to-cart">
+                                            <a href="{{ path('cart/add', {sku: embed.product.sku}) }}" class="button button--expand" data-init-single-click>
                                                 {{ 'page.detail.add-to-cart' | trans }}
                                             </a>
                                         {% endif %}
@@ -199,10 +199,5 @@
                 </p>
             </div>
         {% endif %}
-        {% include molecule('action-single-click-enforcer') with {
-            attributes: {
-                'target-class-name': 'js-product-set__add-to-cart',
-            },
-        } only %}
     {% endblock %}
 {% endblock %}

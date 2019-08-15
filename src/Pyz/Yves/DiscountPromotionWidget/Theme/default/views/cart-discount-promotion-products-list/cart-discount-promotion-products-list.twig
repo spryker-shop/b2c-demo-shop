@@ -67,15 +67,9 @@
                             <input type="hidden" value="{{ embed.sku }}" name="groupKey">
                             <input type="hidden" value="{{ embed.promotionDiscount.id }}" name="idDiscountPromotion">
 
-                            <button type="submit" class="button button--hollow button--promotion-item {{ config.jsName ~ '__button-' ~ embed.sku }}" {{ disabled ? 'disabled' : '' }}>
+                            <button type="submit" class="button button--hollow button--promotion-item" {{ disabled ? 'disabled' : '' }} data-init-single-click>
                                 {{ 'page.detail.add-to-cart' | trans }}
                             </button>
-
-                            {% include molecule('action-single-click-enforcer') with {
-                                attributes: {
-                                    'target-class-name': config.jsName ~ '__button-' ~ embed.sku,
-                                },
-                            } only %}
                         </div>
                     </form>
                 {% endblock %}

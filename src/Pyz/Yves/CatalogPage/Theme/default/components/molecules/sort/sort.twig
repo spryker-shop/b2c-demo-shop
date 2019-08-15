@@ -27,15 +27,12 @@
                             attributes: {
                                 name: 'ipp',
                                 'config-theme': 'secondary',
+                                'data-form-submitter': '',
                             },
                             embed: {
                                 pagination: data.pagination,
-                                jsClass: config.jsName ~ '__select-trigger',
                             },
                         } only %}
-                            {% block selectClass -%}
-                                {{ parent() }} {{ embed.jsClass }}
-                            {%- endblock %}
                             {% block options %}
                                 {% for limit in embed.pagination.config.validItemsPerPageOptions %}
                                     <option value="{{ limit }}" {% if limit == embed.pagination.currentItemsPerPage %}selected{% endif %}>{{ limit }}</option>
@@ -50,16 +47,13 @@
                             attributes: {
                                 name: 'sort',
                                 'config-theme': 'secondary',
-                                'config-width': '100%'
+                                'config-width': '100%',
+                                'data-form-submitter': '',
                             },
                             embed: {
                                 sort: _view.sort,
-                                jsClass: config.jsName ~ '__select-trigger'
-                            }
+                            },
                         } only %}
-                            {% block selectClass -%}
-                                {{ parent() }} {{ embed.jsClass }}
-                            {%- endblock %}
                             {% block options %}
                                 <option value="">
                                     {{ 'catalog.sort.relevance' | trans }}
@@ -85,12 +79,6 @@
     {% include molecule('breakpoint-dependent-block-placer') with {
         attributes: {
             'block-class-name': config.jsName ~ '__filter',
-        },
-    } only %}
-
-    {% include molecule('form-submitter') with {
-        attributes: {
-            'trigger-class-name': config.jsName ~ '__select-trigger',
         },
     } only %}
 {% endblock %}

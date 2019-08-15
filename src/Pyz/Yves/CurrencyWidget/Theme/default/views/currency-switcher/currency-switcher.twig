@@ -21,16 +21,13 @@
                 name: 'currency-iso-code',
                 'config-theme': 'secondary',
                 'additional-class-name': data.additionalClassName,
+                'data-form-submitter': '',
             },
             embed: {
                 currencies: data.currencies,
-                currentCurrency: data.currentCurrency
-            }
+                currentCurrency: data.currentCurrency,
+            },
         } only %}
-            {% block selectClass -%}
-                {{ parent() }}
-                js-currency__select-trigger
-            {%- endblock %}
             {% block options %}
                 {% for currency in embed.currencies %}
                     <option value="{{ currency.code }}" {{ (currency.code == embed.currentCurrency) ? 'selected' : ''}}>{{ currency.code | trans }}</option>
@@ -39,10 +36,5 @@
         {% endembed %}
 
         <input type="hidden" name="referrer-url" value="{{ app.request.requestUri }}"/>
-        {% include molecule('form-submitter') with {
-            attributes: {
-                'trigger-class-name': 'js-currency__select-trigger',
-            },
-        } only %}
     </form>
 {% endblock %}

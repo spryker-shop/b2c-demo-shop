@@ -28,16 +28,12 @@
                         attributes: {
                             name: 'ipp',
                             'config-theme': 'secondary',
+                            'data-form-submitter': '',
                         },
                         embed: {
                             pagination: data.pagination,
-                            jsName: config.jsName,
                         },
                     } only %}
-                        {% block selectClass -%}
-                            {{ parent() }} {{ embed.jsName }}__select-trigger
-                        {%- endblock %}
-
                         {% block options %}
                             {% for limit in embed.pagination.config.validItemsPerPageOptions %}
                                 <option value="{{ limit }}" {% if limit == embed.pagination.currentItemsPerPage %}selected{% endif %}>
@@ -54,16 +50,12 @@
                         attributes: {
                             name: 'sort',
                             'config-theme': 'secondary',
+                            'data-form-submitter': '',
                         },
                         embed: {
                             sort: _view.sort,
-                            jsName: config.jsName,
                         },
                     } only %}
-                        {% block selectClass -%}
-                            {{ parent() }} {{ embed.jsName }}__select-trigger
-                        {%- endblock %}
-
                         {% block options %}
                             <option value="">
                                 {{ 'cms.page.sort.relevance' | trans }}
@@ -82,10 +74,4 @@
             {% endblock %}
         </div>
     </div>
-
-    {% include molecule('form-submitter') with {
-        attributes: {
-            'trigger-class-name': config.jsName ~ '__select-trigger',
-        },
-    } only %}
 {% endblock %}

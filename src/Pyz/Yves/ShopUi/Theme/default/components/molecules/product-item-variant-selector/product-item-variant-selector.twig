@@ -32,31 +32,20 @@
                 <li class="list__item">
                     <label class="{{ config.name }}__label">
                         <strong class="{{ config.name }}__title">{{ ('product.attribute.' ~ attributeName) | trans }}:</strong>
-                        {% embed molecule('custom-select') with {
+                        {% include molecule('custom-select') with {
                             modifiers: ['hollow'],
                             data: {
                                 label: ('product.attribute.' ~ attributeName) | trans,
-                                options: options
+                                options: options,
                             },
                             attributes: {
                                 name: 'preselectedAttributes[' ~ attributeName ~ ']',
-                                'config-theme': 'small'
+                                'config-theme': 'small',
+                                'data-form-submitter': '',
                             },
-                            embed: {
-                                jsClass: config.jsName ~ '__select-trigger'
-                            }
                         } only %}
-                            {% block selectClass -%}
-                                {{ parent() }} {{ embed.jsClass }}
-                            {%- endblock %}
-                        {% endembed %}
                     </label>
                     <input name="selectedAttributes[{{ attributeName }}]" type="hidden" />
-                    {% include molecule('form-submitter') with {
-                        attributes: {
-                            'trigger-class-name': config.jsName ~ '__select-trigger',
-                        },
-                    } only %}
                 </li>
             {% endfor %}
         </ul>

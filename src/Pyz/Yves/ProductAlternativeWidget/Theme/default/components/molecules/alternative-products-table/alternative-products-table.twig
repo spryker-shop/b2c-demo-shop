@@ -86,10 +86,9 @@
             </tr>
             {% include molecule('toggler-click') with {
                 attributes: {
-                    'trigger-selector': '.' ~ config.jsName ~ '-' ~ idShoppingListItem ~ '__show-all-trigger',
-                    'target-selector': '.' ~ config.jsName ~ '-' ~ idShoppingListItem ~ '__show-all-target',
-                    'class-to-toggle': 'is-hidden'
-                }
+                    'trigger-class-name': config.jsName ~ '-' ~ idShoppingListItem ~ '__show-all-trigger',
+                    'target-class-name': config.jsName ~ '-' ~ idShoppingListItem ~ '__show-all-target',
+                },
             } only %}
         {% endif %}
     {% endfor %}

@@ -93,11 +93,6 @@
                     {% endblock %}
                 {% endembed %}
             </form>
-            {% include molecule('action-single-click-enforcer') with {
-                attributes: {
-                    'target-class-name': 'js-product-set__add-to-cart',
-                },
-            } only %}
             <form method="POST" action="{{ path('cart/add-items') }}">
                 {% set isDisabled = false %}
 
