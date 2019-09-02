@@ -17,7 +17,7 @@
 
 {% block body %}
     {% set activeClass = config.name ~ '__title--active' %}
-    {% set togglerClass = data.isToggler and data.isActive ? activeClass : data.hiddenClass %}
+    {% set togglerClass = data.isToggler ? (data.isActive ? activeClass : data.hiddenClass) %}
     {% set titleActiveClass = data.isActive ? activeClass %}
     {% set titleReadOnlyClass = not data.isToggler ? config.name ~ '__title--read-only' %}
     {% set targetAttribute = data.targetClass ? 'data-toggle-target=.' ~ data.targetClass %}
