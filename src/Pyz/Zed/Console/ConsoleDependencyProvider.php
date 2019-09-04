@@ -52,7 +52,6 @@ use Spryker\Zed\Kernel\Container;
 use Spryker\Zed\Log\Communication\Console\DeleteLogFilesConsole;
 use Spryker\Zed\Maintenance\Communication\Console\MaintenanceDisableConsole;
 use Spryker\Zed\Maintenance\Communication\Console\MaintenanceEnableConsole;
-use Spryker\Zed\Money\Communication\Plugin\ServiceProvider\TwigMoneyServiceProvider;
 use Spryker\Zed\Monitoring\Communication\Plugin\MonitoringConsolePlugin;
 use Spryker\Zed\Oms\Communication\Console\CheckConditionConsole as OmsCheckConditionConsole;
 use Spryker\Zed\Oms\Communication\Console\CheckTimeoutConsole as OmsCheckTimeoutConsole;
@@ -74,7 +73,6 @@ use Spryker\Zed\Propel\Communication\Console\DeleteMigrationFilesConsole;
 use Spryker\Zed\Propel\Communication\Console\PropelSchemaValidatorConsole;
 use Spryker\Zed\Propel\Communication\Console\PropelSchemaXmlNameValidatorConsole;
 use Spryker\Zed\Propel\Communication\Plugin\Application\PropelApplicationPlugin;
-use Spryker\Zed\Propel\Communication\Plugin\ServiceProvider\PropelServiceProvider;
 use Spryker\Zed\Queue\Communication\Console\QueueDumpConsole;
 use Spryker\Zed\Queue\Communication\Console\QueueTaskConsole;
 use Spryker\Zed\Queue\Communication\Console\QueueWorkerConsole;
@@ -88,7 +86,6 @@ use Spryker\Zed\Scheduler\Communication\Console\SchedulerCleanConsole;
 use Spryker\Zed\Scheduler\Communication\Console\SchedulerResumeConsole;
 use Spryker\Zed\Scheduler\Communication\Console\SchedulerSetupConsole;
 use Spryker\Zed\Scheduler\Communication\Console\SchedulerSuspendConsole;
-use Spryker\Zed\Scheduler\Communication\Plugin\ServiceProvider\SchedulerTwigServiceProvider;
 use Spryker\Zed\Search\Communication\Console\GenerateIndexMapConsole;
 use Spryker\Zed\Search\Communication\Console\SearchCloseIndexConsole;
 use Spryker\Zed\Search\Communication\Console\SearchConsole;
@@ -127,7 +124,6 @@ use Spryker\Zed\Translator\Communication\Console\CleanTranslationCacheConsole;
 use Spryker\Zed\Translator\Communication\Console\GenerateTranslationCacheConsole;
 use Spryker\Zed\Twig\Communication\Console\CacheWarmerConsole;
 use Spryker\Zed\Twig\Communication\Plugin\Application\TwigApplicationPlugin;
-use Spryker\Zed\Twig\Communication\Plugin\ServiceProvider\TwigServiceProvider as SprykerTwigServiceProvider;
 use Spryker\Zed\Uuid\Communication\Console\UuidGeneratorConsole;
 use Spryker\Zed\ZedNavigation\Communication\Console\BuildNavigationConsole;
 use Stecman\Component\Symfony\Console\BashCompletion\CompletionCommand;
@@ -379,7 +375,7 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
         $applicationPlugins = parent::getApplicationPlugins($container);
         $applicationPlugins[] = new PropelApplicationPlugin();
         $applicationPlugins[] = new TwigApplicationPlugin();
-        
+
         return $applicationPlugins;
     }
 }
