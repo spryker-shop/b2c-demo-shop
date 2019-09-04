@@ -38,7 +38,7 @@ export default class RangeSlider extends Component {
         noUiSlider.create(this.wrap, this.sliderConfig);
         this.updateValues(this.wrap, this.targetSelectors);
 
-        if (this.valueClassName !== '') {
+        if (this.valueClassName) {
             this.valueTarget = <HTMLElement[]>Array.from(document.getElementsByClassName(this.valueClassName));
             this.updateSelectors(this.wrap, this.valueTarget);
         }

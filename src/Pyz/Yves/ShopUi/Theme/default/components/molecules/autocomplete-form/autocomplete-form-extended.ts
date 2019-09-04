@@ -8,14 +8,20 @@ export default class AutocompleteFormExtended extends AutocompleteForm {
         if (this.parentWrapClassName){
             this.parentWrap = <HTMLElement>document.getElementsByClassName(`${this.parentWrapClassName}`)[0];
         }
+
         this.textInput = <HTMLInputElement>this.getElementsByClassName(`${this.jsName}__input`)[0];
+
         if (this.textInput) {
             this.ajaxProvider = <AjaxProvider>this.getElementsByClassName(`${this.jsName}__provider`)[0];
             this.valueInput = <HTMLInputElement>this.getElementsByClassName(`${this.jsName}__input-hidden`)[0];
             this.suggestionsContainer = <HTMLElement>this.getElementsByClassName(`${this.jsName}__container`)[0];
             this.cleanButton = <HTMLButtonElement>this.getElementsByClassName(`${this.jsName}__clean-button`)[0];
             this.mapEvents();
-        } else super.readyCallback();
+        }
+
+        if (!this.textInput) {
+            super.readyCallback();
+        }
     }
 
     protected onBlur(): void {

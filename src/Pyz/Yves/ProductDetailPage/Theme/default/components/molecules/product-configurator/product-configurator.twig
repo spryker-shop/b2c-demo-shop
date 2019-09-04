@@ -120,7 +120,7 @@
 
         {% if can('SeeAddToCartPermissionPlugin') %}
             <div class="{{ config.name }}__button-wrap">
-                <button type="submit" class="button button--large button--expand" {{ isDisabled ? 'disabled' : '' }} {{qa('add-to-cart-button')}} data-init-single-click>
+                <button type="submit" class="button button--large button--expand" {{ isDisabled ? 'disabled' }} {{ qa('add-to-cart-button') }} data-init-single-click>
                     {{ 'page.detail.add-to-cart' | trans }}
                 </button>
             </div>
