@@ -357,7 +357,7 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
      *
      * @return \Silex\ServiceProviderInterface[]
      */
-    public function getServiceProviders(Container $container)
+    protected function getServiceProviders(Container $container)
     {
         $serviceProviders = parent::getServiceProviders($container);
         $serviceProviders[] = new SilexTwigServiceProvider();

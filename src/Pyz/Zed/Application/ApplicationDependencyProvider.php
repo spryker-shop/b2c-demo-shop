@@ -33,7 +33,6 @@ use Spryker\Zed\Locale\Communication\Plugin\Application\LocaleApplicationPlugin;
 use Spryker\Zed\Messenger\Communication\Plugin\ServiceProvider\MessengerServiceProvider;
 use Spryker\Zed\Monitoring\Communication\Plugin\ServiceProvider\MonitoringRequestTransactionServiceProvider;
 use Spryker\Zed\Propel\Communication\Plugin\Application\PropelApplicationPlugin;
-use Spryker\Zed\Propel\Communication\Plugin\ServiceProvider\PropelServiceProvider;
 use Spryker\Zed\Session\Communication\Plugin\ServiceProvider\SessionServiceProvider as SprykerSessionServiceProvider;
 use Spryker\Zed\Translator\Communication\Plugin\Application\TranslatorApplicationPlugin;
 use Spryker\Zed\Twig\Communication\Plugin\Application\TwigApplicationPlugin;
