@@ -357,7 +357,7 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
      *
      * @return \Silex\ServiceProviderInterface[]
      */
-    protected function getServiceProviders(Container $container)
+    public function getServiceProviders(Container $container)
     {
         $serviceProviders = parent::getServiceProviders($container);
         $serviceProviders[] = new SilexTwigServiceProvider();
@@ -370,7 +370,7 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
      *
      * @return \Spryker\Shared\ApplicationExtension\Dependency\Plugin\ApplicationPluginInterface[]
      */
-    public function getApplicationPlugins(Container $container): array
+    protected function getApplicationPlugins(Container $container): array
     {
         $applicationPlugins = parent::getApplicationPlugins($container);
         $applicationPlugins[] = new PropelApplicationPlugin();
