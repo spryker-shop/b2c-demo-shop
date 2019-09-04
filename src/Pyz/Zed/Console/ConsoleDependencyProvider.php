@@ -73,6 +73,7 @@ use Spryker\Zed\Propel\Communication\Console\DatabaseDropTablesConsole;
 use Spryker\Zed\Propel\Communication\Console\DeleteMigrationFilesConsole;
 use Spryker\Zed\Propel\Communication\Console\PropelSchemaValidatorConsole;
 use Spryker\Zed\Propel\Communication\Console\PropelSchemaXmlNameValidatorConsole;
+use Spryker\Zed\Propel\Communication\Plugin\Application\PropelApplicationPlugin;
 use Spryker\Zed\Propel\Communication\Plugin\ServiceProvider\PropelServiceProvider;
 use Spryker\Zed\Queue\Communication\Console\QueueDumpConsole;
 use Spryker\Zed\Queue\Communication\Console\QueueTaskConsole;
@@ -125,6 +126,7 @@ use Spryker\Zed\Transfer\Communication\Console\ValidatorConsole;
 use Spryker\Zed\Translator\Communication\Console\CleanTranslationCacheConsole;
 use Spryker\Zed\Translator\Communication\Console\GenerateTranslationCacheConsole;
 use Spryker\Zed\Twig\Communication\Console\CacheWarmerConsole;
+use Spryker\Zed\Twig\Communication\Plugin\Application\TwigApplicationPlugin;
 use Spryker\Zed\Twig\Communication\Plugin\ServiceProvider\TwigServiceProvider as SprykerTwigServiceProvider;
 use Spryker\Zed\Uuid\Communication\Console\UuidGeneratorConsole;
 use Spryker\Zed\ZedNavigation\Communication\Console\BuildNavigationConsole;
@@ -362,12 +364,21 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
     public function getServiceProviders(Container $container)
     {
         $serviceProviders = parent::getServiceProviders($container);
-        $serviceProviders[] = new PropelServiceProvider();
         $serviceProviders[] = new SilexTwigServiceProvider();
-        $serviceProviders[] = new SprykerTwigServiceProvider();
-        $serviceProviders[] = new TwigMoneyServiceProvider();
-        $serviceProviders[] = new SchedulerTwigServiceProvider();
 
         return $serviceProviders;
+    }
+
+    /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Shared\ApplicationExtension\Dependency\Plugin\ApplicationPluginInterface[]
+     */
+    public function getApplicationPlugins(Container $container): array
+    {
+        $applicationPlugins = parent::getApplicationPlugins($container);
+        $applicationPlugins[] = new PropelApplicationPlugin();
+        $applicationPlugins[] = new TwigApplicationPlugin();
+        return $applicationPlugins;
     }
 }
