@@ -3,10 +3,12 @@ import $ from 'jquery/dist/jquery';
 import 'select2/dist/js/select2.full';
 
 export default class CustomSelect extends Component {
-    select: HTMLSelectElement;
-    $select: $;
+    protected select: HTMLSelectElement;
+    protected $select: $;
 
-    protected readyCallback(): void {
+    protected readyCallback(): void {}
+
+    protected init(): void {
         this.select = <HTMLSelectElement>this.getElementsByClassName(`${this.jsName}`)[0];
         this.$select = $(this.select);
 

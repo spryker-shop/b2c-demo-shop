@@ -1,21 +1,17 @@
 import Component from 'ShopUi/models/component';
 
 export default class QuantityCounter extends Component {
-    quantityInput: HTMLInputElement;
-    decrButton: HTMLButtonElement;
-    incrButton: HTMLButtonElement;
-    value: number;
-    readonly duration: number = 1000;
-    timeout: number;
-    inputChange: Event;
+    protected quantityInput: HTMLInputElement;
+    protected decrButton: HTMLButtonElement;
+    protected incrButton: HTMLButtonElement;
+    protected value: number;
+    protected duration: number = 1000;
+    protected timeout: number = 0;
+    protected inputChange: Event = new Event('change');
 
-    constructor() {
-        super();
-        this.timeout = 0;
-        this.inputChange = new Event('change');
-    }
+    protected readyCallback(): void {}
 
-    protected readyCallback(): void {
+    protected init(): void {
         this.quantityInput = <HTMLInputElement>this.getElementsByClassName(`${this.jsName}__input`)[0];
         this.decrButton = <HTMLButtonElement>this.getElementsByClassName(`${this.jsName}__decr`)[0];
         this.incrButton = <HTMLButtonElement>this.getElementsByClassName(`${this.jsName}__incr`)[0];

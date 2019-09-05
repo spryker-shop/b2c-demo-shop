@@ -9,17 +9,18 @@ const THROTTLE_DURATION = 300;
 export default class ScrollParallax extends Component {
     protected target: HTMLElement;
     protected wrapper: HTMLElement;
-    windowHeight: number;
-    windowWidth: number;
-    wrapperHeight: number;
-    distanceToWrapper: number;
-    initialized: boolean = false;
+    protected windowHeight: number;
+    protected windowWidth: number;
+    protected wrapperHeight: number;
+    protected distanceToWrapper: number;
+    protected initialized: boolean = false;
 
-    readyCallback(): void {
+    protected readyCallback(): void {}
+
+    protected init(): void {
         this.wrapper = <HTMLElement>document.getElementsByClassName(this.wrapperClassName)[0];
         this.target = <HTMLElement>this.wrapper.getElementsByClassName(this.targetClassName)[0];
         this.defineDimensions();
-
         this.mapEvents();
     }
 

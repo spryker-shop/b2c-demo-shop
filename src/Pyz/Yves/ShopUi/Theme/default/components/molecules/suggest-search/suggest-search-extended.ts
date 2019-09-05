@@ -3,13 +3,15 @@ import debounce from 'lodash-es/debounce';
 import throttle from 'lodash-es/throttle';
 
 export default class SuggestSearchExtended extends SuggestSearch {
-    searchOverlay: HTMLElement;
-    overlayOpenButtons: HTMLElement[];
-    overlayCloseTriggers: HTMLElement[];
-    focusTimeout: number = 0;
+    protected searchOverlay: HTMLElement;
+    protected overlayOpenButtons: HTMLElement[];
+    protected overlayCloseTriggers: HTMLElement[];
+    protected focusTimeout: number = 0;
     protected timeout: number = 400;
 
-    protected readyCallback(): void {
+    protected readyCallback(): void {}
+
+    protected init(): void {
         this.searchOverlay = <HTMLElement>document.getElementsByClassName(`${this.jsName}__overlay`)[0];
         this.overlayOpenButtons = <HTMLElement[]>Array.from(document.getElementsByClassName(`${this.jsName}__show`));
         this.overlayCloseTriggers = <HTMLElement[]>Array.from(document.getElementsByClassName(`${this.jsName}__hide`));

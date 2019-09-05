@@ -1,11 +1,13 @@
 import Component from 'ShopUi/models/component';
 
 export default class ColorSelectorPdp extends Component {
-    container: HTMLElement;
-    colors: HTMLAnchorElement[];
-    image: HTMLImageElement;
+    protected container: HTMLElement;
+    protected colors: HTMLAnchorElement[];
+    protected image: HTMLImageElement;
 
-    protected readyCallback(): void {
+    protected readyCallback(): void {}
+
+    protected init(): void {
         this.colors = <HTMLAnchorElement[]>Array.from(this.getElementsByClassName(`${this.jsName}__color`));
         this.container = <HTMLImageElement>document.getElementsByClassName(`${this.jsName}__image-container`)[0];
         this.image = <HTMLImageElement>this.container.getElementsByTagName('img')[0];

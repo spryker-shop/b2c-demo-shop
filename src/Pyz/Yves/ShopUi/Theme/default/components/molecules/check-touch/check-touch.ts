@@ -1,7 +1,9 @@
 import Component from 'ShopUi/models/component';
 
 export default class CheckTouch extends Component {
-    readyCallback(): void {
+    protected readyCallback(): void {}
+
+    protected init(): void {
         this.addTouchClass();
     }
 

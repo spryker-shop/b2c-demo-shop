@@ -3,18 +3,17 @@ import $ from 'jquery/dist/jquery';
 import 'slick-carousel';
 
 export default class ImageGallery extends Component {
-    readonly galleryItems: HTMLElement[];
-    readonly thumbnail: HTMLElement;
-    readonly thumbnailItems: HTMLElement[];
+    protected galleryItems: HTMLElement[];
+    protected thumbnail: HTMLElement;
+    protected thumbnailItems: HTMLElement[];
 
-    constructor() {
-        super();
+    protected readyCallback(): void {}
+
+    protected init(): void {
         this.galleryItems = <HTMLElement[]>Array.from(this.getElementsByClassName(`${this.jsName}__item`));
         this.thumbnail = <HTMLElement>this.getElementsByClassName(`${this.jsName}-thumbnail`)[0];
         this.thumbnailItems = <HTMLElement[]>Array.from(this.getElementsByClassName(`${this.jsName}-thumbnail__item`));
-    }
 
-    protected readyCallback(): void {
         this.initSlider();
         this.mapEvents();
     }

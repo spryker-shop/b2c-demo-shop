@@ -8,7 +8,9 @@ export default class SlickCarousel extends Component {
     protected $container: $;
     protected customSelects: CustomSelect[];
 
-    readyCallback(): void {
+    protected readyCallback(): void {}
+
+    protected init(): void {
         this.container = <HTMLElement>this.getElementsByClassName(`${this.jsName}__container`)[0];
         this.$container = $(this.container);
 

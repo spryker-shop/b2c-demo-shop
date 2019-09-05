@@ -18,7 +18,9 @@ export default class RangeSlider extends Component {
     protected targetSelectors: HTMLInputElement[];
     protected valueTarget: HTMLElement[];
 
-    protected readyCallback(): void {
+    protected readyCallback(): void {}
+
+    protected init(): void {
         this.wrap = <HTMLElement>document.getElementsByClassName(this.wrapClassName)[0];
         this.targetSelectors = <HTMLInputElement[]>Array.from(document.getElementsByClassName(this.targetClassName));
         this.sliderConfig = {

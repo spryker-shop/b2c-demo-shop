@@ -13,7 +13,9 @@ export default class BreakpointDependentBlockPlacer extends Component {
     protected blocks: HTMLElement[];
     protected timeout: number = 300;
 
-    protected readyCallback(): void {
+    protected readyCallback(): void {}
+
+    protected init(): void {
         this.blocks = <HTMLElement[]>Array.from(document.getElementsByClassName(this.blockClassName));
 
         this.data = this.blocks.map((block: HTMLElement) => {

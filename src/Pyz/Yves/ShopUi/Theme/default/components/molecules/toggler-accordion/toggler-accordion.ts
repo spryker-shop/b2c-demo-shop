@@ -3,7 +3,9 @@ import Component from 'ShopUi/models/component';
 export default class TogglerAccordion extends Component {
     protected triggers: HTMLElement[];
 
-    readyCallback(): void {
+    protected readyCallback(): void {}
+
+    protected init(): void {
         this.triggers = <HTMLElement[]>Array.from(document.getElementsByClassName(this.triggerClassName));
         this.mapEvents();
     }
