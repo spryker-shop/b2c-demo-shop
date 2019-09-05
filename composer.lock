@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "97ad00189841c195aff9edd7731eab64",
+    "content-hash": "8933945d4d0fc0aee0121d8351a59833",
     "packages": [
         {
             "name": "codeitnowin/barcode",
@@ -2748,16 +2748,16 @@
         },
         {
             "name": "spryker-feature/inventory-management",
-            "version": "201907.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker-feature/inventory-management.git",
-                "reference": "c13fa4054c4b717d3a6e501d735edf4e439a93ae"
+                "reference": "d90588bb2c2016a6ee88df61437c10189eabf817"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker-feature/inventory-management/zipball/c13fa4054c4b717d3a6e501d735edf4e439a93ae",
-                "reference": "c13fa4054c4b717d3a6e501d735edf4e439a93ae",
+                "url": "https://api.github.com/repos/spryker-feature/inventory-management/zipball/d90588bb2c2016a6ee88df61437c10189eabf817",
+                "reference": "d90588bb2c2016a6ee88df61437c10189eabf817",
                 "shasum": ""
             },
             "require": {
@@ -2767,12 +2767,13 @@
                 "spryker/availability-data-feed": "^0.1.3",
                 "spryker/availability-gui": "^5.0.0",
                 "spryker/availability-storage": "^1.5.0",
-                "spryker/stock": "^7.0.0"
+                "spryker/stock": "^7.0.0",
+                "spryker/stock-gui": "^1.0.0"
             },
             "type": "metapackage",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "201907.x-dev"
+                    "dev-master": "201910.x-dev"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -2780,7 +2781,7 @@
                 "proprietary"
             ],
             "description": "Inventory Management [feature]",
-            "time": "2019-08-01T16:13:18+00:00"
+            "time": "2019-08-29T09:00:16+00:00"
         },
         {
             "name": "spryker-feature/invoice",
@@ -3667,16 +3668,16 @@
         },
         {
             "name": "spryker-feature/spryker-core",
-            "version": "201907.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker-feature/spryker-core.git",
-                "reference": "114f223204d5510c18958cddc458f936212f97ec"
+                "reference": "a0c7fb6cd5a416ba83901e2c743d145921896591"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker-feature/spryker-core/zipball/114f223204d5510c18958cddc458f936212f97ec",
-                "reference": "114f223204d5510c18958cddc458f936212f97ec",
+                "url": "https://api.github.com/repos/spryker-feature/spryker-core/zipball/a0c7fb6cd5a416ba83901e2c743d145921896591",
+                "reference": "a0c7fb6cd5a416ba83901e2c743d145921896591",
                 "shasum": ""
             },
             "require": {
@@ -3720,6 +3721,7 @@
                 "spryker/storage": "^3.8.0",
                 "spryker/storage-redis": "^1.0.0",
                 "spryker/store": "^1.12.0",
+                "spryker/store-gui": "^1.0.0",
                 "spryker/synchronization": "^1.6.0",
                 "spryker/synchronization-behavior": "^1.3.0",
                 "spryker/translator": "^1.1.0",
@@ -3732,7 +3734,7 @@
             "type": "metapackage",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "201907.x-dev"
+                    "dev-master": "201910.x-dev"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -3740,7 +3742,7 @@
                 "proprietary"
             ],
             "description": "Spryker Core [feature]",
-            "time": "2019-08-01T16:13:47+00:00"
+            "time": "2019-09-04T14:54:00+00:00"
         },
         {
             "name": "spryker-feature/spryker-core-back-office",
@@ -23812,6 +23814,49 @@
             "time": "2019-06-27T10:59:33+00:00"
         },
         {
+            "name": "spryker/stock-gui",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/stock-gui.git",
+                "reference": "b200de594972fa3312a375dd04d1c4560ff8b163"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/stock-gui/zipball/b200de594972fa3312a375dd04d1c4560ff8b163",
+                "reference": "b200de594972fa3312a375dd04d1c4560ff8b163",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1",
+                "spryker/gui": "^3.0.0",
+                "spryker/kernel": "^3.33.0",
+                "spryker/stock": "^7.0.0",
+                "spryker/symfony": "^3.0.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/testify": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "StockGui module",
+            "time": "2019-08-29T14:57:31+00:00"
+        },
+        {
             "name": "spryker/stock-sales-connector",
             "version": "5.0.0",
             "source": {
@@ -24035,6 +24080,49 @@
             ],
             "description": "Store module",
             "time": "2019-07-09T12:37:23+00:00"
+        },
+        {
+            "name": "spryker/store-gui",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/store-gui.git",
+                "reference": "65d0a42da91afe7c93fddcedb5bfe8a31ee7090f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/store-gui/zipball/65d0a42da91afe7c93fddcedb5bfe8a31ee7090f",
+                "reference": "65d0a42da91afe7c93fddcedb5bfe8a31ee7090f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1",
+                "spryker/gui": "^3.0.0",
+                "spryker/kernel": "^3.33.0",
+                "spryker/store": "^1.0.0",
+                "spryker/symfony": "^3.0.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/testify": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "StoreGui module",
+            "time": "2019-08-27T08:34:53+00:00"
         },
         {
             "name": "spryker/stores-rest-api",
@@ -29275,7 +29363,7 @@
             "time": "2019-03-25T16:59:23+00:00"
         },
         {
-            "name": "mikey179/vfsstream",
+            "name": "mikey179/vfsStream",
             "version": "v1.6.6",
             "source": {
                 "type": "git",
@@ -29626,7 +29714,7 @@
                     "homepage": "https://nette.org/contributors"
                 }
             ],
-            "description": "🍸 Nette NEON: encodes and decodes NEON file format.",
+            "description": "? Nette NEON: encodes and decodes NEON file format.",
             "homepage": "http://ne-on.org",
             "keywords": [
                 "export",
@@ -33041,11 +33129,25 @@
             "alias_normalized": "1.0.0.0",
             "version": "9999999-dev",
             "package": "spryker-eco/loggly"
+        },
+        {
+            "alias": "201911.0",
+            "alias_normalized": "201911.0",
+            "version": "9999999-dev",
+            "package": "spryker-feature/inventory-management"
+        },
+        {
+            "alias": "201911.0",
+            "alias_normalized": "201911.0",
+            "version": "9999999-dev",
+            "package": "spryker-feature/spryker-core"
         }
     ],
     "minimum-stability": "dev",
     "stability-flags": {
-        "spryker-eco/loggly": 20
+        "spryker-eco/loggly": 20,
+        "spryker-feature/inventory-management": 20,
+        "spryker-feature/spryker-core": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
