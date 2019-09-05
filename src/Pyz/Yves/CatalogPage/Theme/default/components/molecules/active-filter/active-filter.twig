@@ -1,24 +1,4 @@
-{% extends model('component') %}
-
-{% define config = {
-    name: 'active-filter',
-    tag: 'a'
-} %}
-
-{% define data = {
-    filter: required,
-    value: null
-} %}
-
-{% define attributes = {
-    href: (data.value is not empty) ? generateUrlWithoutActiveSearchFilter(data.filter, data.value) : null
-} %}
-
-{% block component %}
-    {% if data.value is not empty %}
-        {{parent()}}
-    {% endif %}
-{% endblock %}
+{% extends molecule('active-filter', '@SprykerShop:CatalogPage') %}
 
 {% block class %}
     {{parent()}}
