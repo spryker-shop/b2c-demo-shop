@@ -1,17 +1,12 @@
-{% extends template('widget') %}
-
-{% define data = {
-    productViews: productViews,
-    productSet: productSet,
-} %}
+{% extends view('content-product-set', '@SprykerShop:ContentProductSetWidget') %}
 
 {% block body %}
     {% embed organism('product-set-cms-content', 'ProductSetWidget') ignore missing with {
         data: {
-            products: data.productViews,
-            name: data.productSet.name,
-            description: data.productSet.description,
-            images: data.productSet.imageSets.0.images | default([]),
+            products: data.products,
+            name: data.name,
+            description: data.description,
+            images: data.images,
         },
     } only %}
         {% block header %}
