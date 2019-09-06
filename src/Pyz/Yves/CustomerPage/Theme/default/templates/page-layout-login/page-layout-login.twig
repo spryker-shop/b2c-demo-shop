@@ -1,14 +1,6 @@
-{% extends template('page-layout-main') %}
+{% extends template('page-layout-login', '@SprykerShop:CustomerPage') %}
 
-{% define data = {
-    forms: {
-        register: _view.registerForm,
-        login: _view.loginForm,
-        isLogin: false
-    }
-} %}
-
-{% block pageInfo %}{% endblock %}
+{% set isLogin = true %}
 
 {% block content %}
     <div class="page-layout-customer page-layout-customer--login-wrap">
@@ -21,7 +13,7 @@
                         },
                         attributes: {
                             id: 'register',
-                            checked: not data.forms.isLogin,
+                            checked: not isLogin,
                             name: 'accountLoginSwitcher',
                             'target-selector': '.js-customer-page-login-register',
                             'class-to-toggle': 'is-hidden'
@@ -37,7 +29,7 @@
                         },
                         attributes: {
                             id: 'login',
-                            checked: data.forms.isLogin,
+                            checked: isLogin,
                             name: 'accountLoginSwitcher',
                             'target-selector': '.js-customer-page-login',
                             'class-to-toggle': 'is-hidden'
@@ -47,7 +39,7 @@
                 </li>
             </ul>
 
-            <div class="js-customer-page-login-register {{ data.forms.isLogin ? ' is-hidden' : '' }}">
+            <div class="js-customer-page-login-register {{ isLogin ? ' is-hidden' : '' }}">
                 {% include molecule('form') with {
                     data: {
                         title: 'checkout.customer.auth_as_user' | trans,
@@ -72,7 +64,7 @@
                 } only %}
             </div>
 
-            <div class="js-customer-page-login {{ data.forms.isLogin ? '' : ' is-hidden' }}">
+            <div class="js-customer-page-login {{ isLogin ? '' : ' is-hidden' }}">
                 {% embed molecule('form') with {
                     data: {
                         title: 'checkout.customer.auth_as_login' | trans,
