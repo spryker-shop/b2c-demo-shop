@@ -1,13 +1,4 @@
-{% extends template('page-layout-checkout', 'CheckoutPage') %}
-
-{% define data = {
-    backUrl: _view.previousStepUrl,
-    forms: {
-        shipment: _view.shipmentForm
-    },
-
-    title: 'checkout.step.shipment.title' | trans
-} %}
+{% extends view('shipment', '@SprykerShop:CheckoutPage') %}
 
 {% block content %}
     {% embed molecule('form') with {

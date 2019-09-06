@@ -1,10 +1,4 @@
-{% extends template('page-layout-main') %}
-
-{% define data = {
-    breadcrumbs: _view.stepBreadcrumbs.breadcrumbs | default([])
-} %}
-
-{% block sidebar %}{% endblock %}
+{% extends template('page-layout-checkout', '@SprykerShop:CheckoutPage') %}
 
 {% block header %}
     {% embed organism('header') with {
@@ -34,12 +28,7 @@
         <div class="container__inner">
             {% block pageInfo %}
                 {% block breadcrumbs %}
-                    {% include view('cart-checkout-breadcrumb', 'CheckoutWidget') with {
-                        data: {
-                            isCartPage: false,
-                            checkoutBreadcrumbs: data.breadcrumbs
-                        }
-                    } only %}
+                    {{ parent() }}
                 {% endblock %}
             {% endblock %}
 
