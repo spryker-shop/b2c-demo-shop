@@ -1,11 +1,4 @@
-{% extends template('page-layout-customer', 'CustomerPage') %}
-
-{% define data = {
-    form: _view.form,
-    
-    title: 'customer.account.newsletter' | trans,
-    activePage: 'newsletter'
-} %}
+{% extends view('newsletter', '@SprykerShop:NewsletterPage') %}
 
 {% block customerContent %}
     <div class="box">
