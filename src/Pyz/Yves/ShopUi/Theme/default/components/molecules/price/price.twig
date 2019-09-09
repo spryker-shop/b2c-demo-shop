@@ -1,14 +1,4 @@
-{% extends model('component') %}
-
-{% define config = {
-    name: 'price',
-    tag: 'span'
-} %}
-
-{% define data = {
-    amount: required,
-    originalAmount: null
-} %}
+{% extends molecule('price', '@SprykerShop:ShopUi') %}
 
 {% block body %}
     <span class="{{ component.renderClass(config.name ~ '__amount', modifiers) }}">
