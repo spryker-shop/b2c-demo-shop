@@ -6,16 +6,16 @@
         data: {
             showSearchForm: false,
             showNavigation: false,
-            showLangCurrencySwitches: false
-        }
+            showLangCurrencySwitches: false,
+        },
     } only %}
         {% block additionalLink %}
             <a class="{{ config.name }}__back-link" href="{{ url('cart') }}">
                 {% include atom('icon') with {
                     modifiers: ['medium-up', 'to-cart'],
                     data: {
-                        name: 'arrow-left'
-                    }
+                        name: 'arrow-left',
+                    },
                 } only %}
                 {{ 'cart.cart' | trans }}
             </a>

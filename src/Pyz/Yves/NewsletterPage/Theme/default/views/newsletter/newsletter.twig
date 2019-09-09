@@ -4,8 +4,8 @@
     <div class="box">
         {% include molecule('title-box', 'CustomerPage') with {
             data: {
-                title: 'customer.newsletter.subscription' | trans
-            }
+                title: 'customer.newsletter.subscription' | trans,
+            },
         } only %}
 
         <p>{{ 'account.newsletter.text' | trans }}</p>
@@ -16,8 +16,8 @@
             data: {
                 form: data.form,
                 submit: {
-                    enable: true
-                }
+                    enable: true,
+                },
             }
         } only %}
     </div>

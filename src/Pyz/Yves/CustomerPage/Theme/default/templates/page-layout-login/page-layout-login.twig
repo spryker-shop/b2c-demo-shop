@@ -9,32 +9,32 @@
                 <li class="list-switches__item">
                     {% include molecule('toggler-radio') with {
                         data: {
-                            label: 'checkout.customer.auth_as_user' | trans
+                            label: 'checkout.customer.auth_as_user' | trans,
                         },
                         attributes: {
                             id: 'register',
                             checked: not isLogin,
                             name: 'accountLoginSwitcher',
                             'target-selector': '.js-customer-page-login-register',
-                            'class-to-toggle': 'is-hidden'
+                            'class-to-toggle': 'is-hidden',
                         },
-                        class: 'toggler-radio--with-bg'
+                        class: 'toggler-radio--with-bg',
                     } only %}
                 </li>
 
                 <li class="list-switches__item">
                     {% include molecule('toggler-radio') with {
                         data: {
-                            label: 'checkout.customer.auth_as_login' | trans
+                            label: 'checkout.customer.auth_as_login' | trans,
                         },
                         attributes: {
                             id: 'login',
                             checked: isLogin,
                             name: 'accountLoginSwitcher',
                             'target-selector': '.js-customer-page-login',
-                            'class-to-toggle': 'is-hidden'
+                            'class-to-toggle': 'is-hidden',
                         },
-                        class: 'toggler-radio--with-bg'
+                        class: 'toggler-radio--with-bg',
                     } only %}
                 </li>
             </ul>
@@ -48,19 +48,19 @@
                             salutation: 'col col--sm-12 col--md-3',
                             first_name: 'col col--sm-12 col--md-4',
                             last_name: 'col col--sm-12 col--md-5',
-                            password: 'col col--sm-12 col--md-6'
+                            password: 'col col--sm-12 col--md-6',
                         },
                         options: {
-                            action: url('register')
+                            action: url('register'),
                         },
                         submit: {
                             enable: true,
                             text: 'checkout.customer.auth_as_user' | trans,
-                            class: 'form__action--login button  button--large button--expand'
-                        }
+                            class: 'form__action--login button  button--large button--expand',
+                        },
                     },
                     modifiers: ['grid-indent', 'login', 'checkout-actions'],
-                    qa: 'register-form'
+                    qa: 'register-form',
                 } only %}
             </div>
 
@@ -71,19 +71,19 @@
                         form: data.forms.login,
                         layout: {
                             email: 'col col--sm-12 col--md-6',
-                            password: 'col col--sm-12 col--md-6'
+                            password: 'col col--sm-12 col--md-6',
                         },
                         submit: {
                             enable: true,
                             text: 'forms.submit.login' | trans,
-                            class: 'form__action--login button  button--large button--expand'
+                            class: 'form__action--login button  button--large button--expand',
                         },
                         cancel: {
                             enable: true,
-                            qa: 'customer-forgot-password-link'
+                            qa: 'customer-forgot-password-link',
                         }
                     },
-                    modifiers: ['grid-indent', 'login', 'checkout-actions']
+                    modifiers: ['grid-indent', 'login', 'checkout-actions'],
                 } only %}
                     {% block cancel %}
                         <a href="{{ url('password/forgotten') }}" class="link link--darkest link--login-forgot-password" {{qa('customer-forgot-password-link')}}>

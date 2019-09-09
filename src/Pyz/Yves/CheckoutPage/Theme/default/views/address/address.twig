@@ -8,16 +8,16 @@
             submit: {
                 enable: true,
                 text: 'general.next.button' | trans,
-                class: 'form__action--checkout button  button--large button--expand'
-            }
+                class: 'form__action--checkout button  button--large button--expand',
+            },
         },
         embed: {
             parentJsClass: 'js-address',
             forms: {
                 shipping: data.forms.shipping,
-                billing: data.forms.billing
-            }
-        }
+                billing: data.forms.billing,
+            },
+        },
     } only %}
         {% block fields %}
             <h2 class="title title--checkout">{{ 'page.checkout.address.shipping-address' | trans }}</h2>
@@ -56,14 +56,14 @@
                         address2: 'col col--md-4',
                         zip_code: 'col col--md-3',
                         city: 'col col--md-5',
-                        iso2_code: 'col col--md-4'
+                        iso2_code: 'col col--md-4',
                     },
                     submit: {
-                        enable: false
+                        enable: false,
                     },
                     cancel: {
-                        enable: false
-                    }
+                        enable: false,
+                    },
                 }
             } only %}
 
@@ -75,9 +75,9 @@
                         attributes: {
                             'target-selector': '.' ~ embed.parentJsClass ~ '__billing-same-as-shipping',
                             'class-to-toggle': 'is-hidden',
-                            'add-class-when-checked': true
+                            'add-class-when-checked': true,
                         },
-                        'label': 'page.checkout.address.billing-same-as-shipping' | trans
+                        'label': 'page.checkout.address.billing-same-as-shipping' | trans,
                     })}}
 
                     {% embed molecule('form') with {
@@ -95,18 +95,18 @@
                                 address2: 'col col--md-4',
                                 zip_code: 'col col--md-3',
                                 city: 'col col--md-5',
-                                iso2_code: 'col col--md-4'
+                                iso2_code: 'col col--md-4',
                             },
                             submit: {
-                                enable: false
+                                enable: false,
                             },
                             cancel: {
-                                enable: false
-                            }
+                                enable: false,
+                            },
                         },
                         embed: {
-                            parentJsClass: embed.parentJsClass ~ '__billing'
-                        }
+                            parentJsClass: embed.parentJsClass ~ '__billing',
+                        },
                     } only %}
                         {% block fields %}
                             {% set hasBillingAddresses = data.form.id_customer_address is defined %}
@@ -154,8 +154,8 @@
                                 'trigger-selector': existingShippingAddressSelectSelector | default(''),
                                 'target-selector': '.js-address__shipping',
                                 'class-to-toggle': 'is-hidden',
-                                'has-company-business-unit-address': hasCompanyBusinessUnitAddress ? 'true' : 'false'
-                            }
+                                'has-company-business-unit-address': hasCompanyBusinessUnitAddress ? 'true' : 'false',
+                            },
                         } only %}
 
                         {% include molecule('address-form-toggler', 'CustomerPage') ignore missing with {
@@ -163,14 +163,14 @@
                                 'trigger-selector': existingBillingAddressSelectSelector | default(''),
                                 'target-selector': '.js-address__billing',
                                 'class-to-toggle': 'is-hidden',
-                                'has-company-business-unit-address': hasCompanyBusinessUnitAddress ? 'true' : 'false'
-                            }
+                                'has-company-business-unit-address': hasCompanyBusinessUnitAddress ? 'true' : 'false',
+                            },
                         } only %}
 
                         {% include molecule('save-new-address', 'CustomerPage') ignore missing with {
                             class: 'col is-hidden',
                             data: {
-                                form: data.form
+                                form: data.form,
                             },
                             attributes: {
                                 'shipping-address-toggler-selector': embed.forms.shipping.id_customer_address is defined ? '[name="' ~ embed.forms.shipping.id_customer_address.vars.full_name ~ '"]' : '',
@@ -178,8 +178,8 @@
                                 'billing-same-as-shipping-toggler-selector': '[name="' ~ data.form.billingSameAsShipping.vars.full_name ~ '"]',
                                 'save-address-toggler-selector': '[name="' ~ data.form.isAddressSavingSkipped.vars.full_name ~ '"]',
                                 'add-new-shipping-address-selector': '.js-form-add-new-address__shippingAddress' | default (''),
-                                'add-new-billing-address-selector': '.js-form-add-new-address__billingAddress' | default ('')
-                            }
+                                'add-new-billing-address-selector': '.js-form-add-new-address__billingAddress' | default (''),
+                            },
                         } only %}
                     {% endif %}
                 </div>
