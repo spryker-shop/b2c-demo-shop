@@ -1,8 +1,4 @@
-{% extends template('widget') %}
-
-{% define data = {
-    products: _widget.products
-} %}
+{% extends view('product-alternative-list', '@SprykerShop:ProductAlternativeWidget') %}
 
 {% block body %}
     {% if data.products is not empty %}
