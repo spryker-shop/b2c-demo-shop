@@ -1,11 +1,4 @@
-{% extends template('page-layout-customer', 'CustomerPage') %}
-
-{% define data = {
-    wishlists: required,
-    title: 'customer.account.wishlist' | trans,
-    activePage: 'wishlist',
-    activeWishlistId: null
-} %}
+{% extends template('page-layout-wishlist', '@SprykerShop:WishlistPage') %}
 
 {% block customerNavigation %}
     <div class="box">
