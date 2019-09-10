@@ -1,7 +1,7 @@
 {% extends molecule('product-list-item', '@SprykerShop:ShopUi') %}
 
 {% define config = {
-    tag: 'article'
+    tag: 'article',
 } %}
 
 {% block class -%}
@@ -42,7 +42,7 @@
         </div>
     {% endblock %}
 
-    <a class="col col--sm-8 col--md-7 {{ config.name }}__col {{ config.name }}__col-name" href="{{ data.url }}">
+    <a class="{{ config.name }}__col {{ config.name }}__col-name col col--sm-8 col--md-7" href="{{ data.url }}">
         {% block name %}
             <span class="title title--medium">{{ data.name }}</span>
         {% endblock %}
@@ -53,7 +53,7 @@
     </a>
 
     {% block actionsContainer %}
-        <a class="col col--sm-4 col--md-2 col--xl-2 text-right {{ config.name }}__col {{ config.name }}__col-price" href="{{ data.url }}">
+        <a class="{{ config.name }}__col {{ config.name }}__col-price col col--sm-4 col--md-2 col--xl-2 text-right" href="{{ data.url }}">
             {% block price %}
                 {{ parent() }}
             {% endblock %}

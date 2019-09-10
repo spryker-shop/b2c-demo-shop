@@ -1,11 +1,11 @@
 {% extends molecule('product-card', '@SprykerShop:ShopUi') %}
 
 {% block body %}
-    <div class="{{config.name}}__container">
+    <div class="{{ config.name }}__container">
         <div class="{{ config.name }}__image-wrap">
             {% block image %}
                 <a
-                    href="{{data.url}}"
+                    href="{{ data.url }}"
                     class="{{ config.name }}__overlay js-product-color-group__image-{{ data.abstractId }}"
                 >
                     {% include atom('thumbnail') with {
@@ -29,7 +29,7 @@
         </div>
 
         {% block content %}
-            <a href="{{data.url}}" class="{{ config.name }}__info grid grid--justify grid--top grid--no-wrap">
+            <a href="{{ data.url }}" class="{{ config.name }}__info grid grid--justify grid--top grid--no-wrap">
                 {% block name %}
                     <div class="col col--md-8 col--sm-12">
                         {{ data.name }}
@@ -43,7 +43,7 @@
                                 modifiers: ['align-right'],
                                 data: {
                                     amount: data.price,
-                                    originalAmount: data.originalPrice is empty ? null : data.originalPrice,
+                                    originalAmount: data.originalPrice is not empty ? data.originalPrice : null,
                                 },
                             } only %}
                         </div>
