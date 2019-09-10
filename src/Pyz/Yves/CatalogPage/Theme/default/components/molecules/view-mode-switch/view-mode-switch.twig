@@ -4,8 +4,11 @@
     viewMode: '',
 } %}
 
+{% set gridViewActiveClass = data.viewMode == 'grid' ? config.name ~ '__link--active' %}
+{% set listViewActiveClass = data.viewMode != 'grid' ? config.name ~ '__link--active' %}
+
 {% block body %}
-    <a class="{{ config.name }}__link {% if data.viewMode == 'grid' %} {{ config.name }}__link--active {% endif %}" href="{{gridHref}}">
+    <a class="{{ config.name }}__link {{ gridViewActiveClass }}" href="{{ gridHref }}">
         {% include atom('icon') with {
             class: 'spacing-right',
             modifiers: ['grid'],
@@ -15,7 +18,7 @@
         } only %}
         {{ 'catalog.view.mode.grid' | trans }}
     </a>
-    <a class="{{ config.name }}__link {% if data.viewMode != 'grid' %} {{ config.name }}__link--active {% endif %}" href="{{listHref}}">
+    <a class="{{ config.name }}__link {{ listViewActiveClass }}" href="{{ listHref }}">
         {% include atom('icon') with {
             class: 'spacing-right',
             data: {

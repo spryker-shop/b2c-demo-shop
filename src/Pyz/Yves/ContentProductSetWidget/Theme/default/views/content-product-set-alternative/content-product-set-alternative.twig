@@ -83,12 +83,11 @@
                         {% set isDisabled = false %}
 
                         {% for product in data.products %}
-                            {% if product.idProductConcrete is not empty %}
-                                {% if product.available %}
-                                    <input type="hidden" name="items[{{ loop.index }}][sku]" value="{{ product.sku }}">
-                                    <input type="hidden" name="items[{{ loop.index }}][quantity]" value="1">
-                                {% endif %}
-                            {% else %}
+                            {% if product.idProductConcrete is not empty and product.available %}
+                                <input type="hidden" name="items[{{ loop.index }}][sku]" value="{{ product.sku }}">
+                                <input type="hidden" name="items[{{ loop.index }}][quantity]" value="1">
+                            {% endif %}
+                            {% if product.idProductConcrete is empty %}
                                 {% set isDisabled = true %}
                             {% endif %}
                         {% endfor %}

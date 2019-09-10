@@ -1,12 +1,12 @@
 {% extends molecule('active-filter', '@SprykerShop:CatalogPage') %}
 
 {% block class %}
-    {{parent()}}
+    {{ parent() }}
     {{ config.name }}__item
 {% endblock %}
 
 {% block body %}
-    {{data.value}}
+    {{ data.value }}
     {% include atom('icon') with {
         modifiers: ['medium', 'close-filter'],
         data: {

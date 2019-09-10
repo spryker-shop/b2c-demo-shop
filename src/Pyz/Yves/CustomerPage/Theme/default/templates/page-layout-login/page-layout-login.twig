@@ -1,6 +1,8 @@
 {% extends template('page-layout-login', '@SprykerShop:CustomerPage') %}
 
-{% set isLogin = true %}
+{% define data = {
+    isLogin: false,
+} %}
 
 {% block content %}
     <div class="page-layout-customer page-layout-customer--login-wrap">
@@ -13,12 +15,12 @@
                         },
                         attributes: {
                             id: 'register',
-                            checked: not isLogin,
+                            checked: not data.isLogin,
                             name: 'accountLoginSwitcher',
                             'target-selector': '.js-customer-page-login-register',
                             'class-to-toggle': 'is-hidden',
                         },
-                        class: 'toggler-radio--with-bg',
+                        modifiers: ['with-bg'],
                     } only %}
                 </li>
 
@@ -29,17 +31,17 @@
                         },
                         attributes: {
                             id: 'login',
-                            checked: isLogin,
+                            checked: data.isLogin,
                             name: 'accountLoginSwitcher',
                             'target-selector': '.js-customer-page-login',
                             'class-to-toggle': 'is-hidden',
                         },
-                        class: 'toggler-radio--with-bg',
+                        modifiers: ['with-bg'],
                     } only %}
                 </li>
             </ul>
 
-            <div class="js-customer-page-login-register {{ isLogin ? ' is-hidden' : '' }}">
+            <div class="js-customer-page-login-register {{ data.isLogin ? ' is-hidden' : '' }}">
                 {% include molecule('form') with {
                     data: {
                         title: 'checkout.customer.auth_as_user' | trans,
@@ -56,7 +58,7 @@
                         submit: {
                             enable: true,
                             text: 'checkout.customer.auth_as_user' | trans,
-                            class: 'form__action--login button  button--large button--expand',
+                            class: 'form__action--login button button--large button--expand',
                         },
                     },
                     modifiers: ['grid-indent', 'login', 'checkout-actions'],
@@ -64,7 +66,7 @@
                 } only %}
             </div>
 
-            <div class="js-customer-page-login {{ isLogin ? '' : ' is-hidden' }}">
+            <div class="js-customer-page-login {{ data.isLogin ? '' : ' is-hidden' }}">
                 {% embed molecule('form') with {
                     data: {
                         title: 'checkout.customer.auth_as_login' | trans,
@@ -76,7 +78,7 @@
                         submit: {
                             enable: true,
                             text: 'forms.submit.login' | trans,
-                            class: 'form__action--login button  button--large button--expand',
+                            class: 'form__action--login button button--large button--expand',
                         },
                         cancel: {
                             enable: true,
