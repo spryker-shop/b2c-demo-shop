@@ -4,22 +4,25 @@ import $ from 'jquery/dist/jquery';
 import 'slick-carousel';
 
 export default class SlickCarousel extends Component {
-    protected container: $;
-    protected sliderConfig: Object;
+    protected container: HTMLElement;
+    protected $container: $;
     protected customSelects: CustomSelect[];
 
-    readyCallback(): void {
-        this.container = $(this).find(`.${this.name}__container`);
-        this.sliderConfig = JSON.parse(this.getAttribute('data-json'));
-        if (this.customSelectSelector) {
-            this.customSelects = <CustomSelect[]>Array.from(this.querySelectorAll(this.customSelectSelector));
+    protected readyCallback(): void {}
+
+    protected init(): void {
+        this.container = <HTMLElement>this.getElementsByClassName(`${this.jsName}__container`)[0];
+        this.$container = $(this.container);
+
+        if (this.customSelectClassName) {
+            this.customSelects = <CustomSelect[]>Array.from(this.getElementsByClassName(this.customSelectClassName));
         }
 
         this.initialize();
     }
 
     protected initialize(): void {
-        this.container.on('init', () => {
+        this.$container.on('init', () => {
             if (this.customSelects) {
                 this.customSelects.forEach((select: CustomSelect) => {
                     select.initSelect();
@@ -28,16 +31,20 @@ export default class SlickCarousel extends Component {
             }
         });
 
-        this.container.slick(
+        this.$container.slick(
             this.sliderConfig
         );
 
         if ('ontouchstart' in document.documentElement){
-            this.container.slick('slickPause');
+            this.$container.slick('slickPause');
         }
     }
 
-    get customSelectSelector(): string {
-        return this.getAttribute('custom-select-selector');
+    protected get customSelectClassName(): string {
+        return this.getAttribute('custom-select-class-name');
+    }
+
+    protected get sliderConfig(): object {
+        return JSON.parse(this.getAttribute('data-json'));
     }
 }
