@@ -37,7 +37,7 @@
         {% endfor %}
 
         {% if firstImage is not empty %}
-            <div class="{{config.name}}__item {{ 'js-pdp-color-group__image-' ~ data.idProductAbstract }}">
+            <div class="{{config.name}}__item js-color-selector-pdp__image-container">
                 {% if firstImage.externalUrlLarge is not empty %}
                     <img class="{{config.name}}__image" src="{{ firstImage.externalUrlLarge }}" alt="{{ 'page.product.details.slider_image' | trans }}">
                 {% endif %}

@@ -25,11 +25,11 @@
         {% include molecule('ajax-loader') with {
             modifiers: ['solid-bg'],
             data: {
-                showSpinnerOnLoad: true
+                showSpinnerOnLoad: true,
             },
             attributes: {
-                'provider-selector': '.' ~ config.jsName ~ '__provider'
-            }
+                'provider-class-name': config.jsName ~ '__provider',
+            },
         } only %}
     {% endif %}
 
@@ -38,8 +38,8 @@
             {% if isUserLoggedIn %}
                 {% include molecule('ajax-renderer') with {
                     attributes: {
-                        'provider-selector': '.' ~ config.jsName ~ '__provider'
-                    }
+                        'provider-class-name': config.jsName ~ '__provider',
+                    },
                 } only %}
             {% endif %}
 

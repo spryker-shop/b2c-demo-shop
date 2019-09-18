@@ -3,8 +3,10 @@ import Component from 'ShopUi/models/component';
 export default class TogglerAccordion extends Component {
     protected triggers: HTMLElement[];
 
-    readyCallback(): void {
-        this.triggers = <HTMLElement[]>Array.from(document.querySelectorAll(this.triggerSelector));
+    protected readyCallback(): void {}
+
+    protected init(): void {
+        this.triggers = <HTMLElement[]>Array.from(document.getElementsByClassName(this.triggerClassName));
         this.mapEvents();
     }
 
@@ -13,20 +15,22 @@ export default class TogglerAccordion extends Component {
     }
 
     protected triggerHandler(trigger: HTMLElement): void {
-        const togglerContent = document.querySelector(trigger.getAttribute('data-toggle-target'));
+        const togglerContent = document.getElementsByClassName(
+            trigger.getAttribute('data-toggle-target-class-name')
+        )[0];
         trigger.classList.toggle(this.activeClass);
         togglerContent.classList.toggle(this.toggleClass);
     }
 
-    get triggerSelector(): string {
-        return this.getAttribute('trigger');
+    protected get triggerClassName(): string {
+        return this.getAttribute('trigger-class-name');
     }
 
-    get toggleClass(): string {
+    protected get toggleClass(): string {
         return this.getAttribute('class-to-toggle');
     }
 
-    get activeClass(): string {
-        return this.getAttribute('activeClass');
+    protected get activeClass(): string {
+        return this.getAttribute('active-class');
     }
 }

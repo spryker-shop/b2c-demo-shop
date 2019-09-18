@@ -1,24 +1,20 @@
 import Component from 'ShopUi/models/component';
 
 export default class QuantityCounter extends Component {
-    quantityInput: HTMLInputElement;
-    decrButton: HTMLButtonElement;
-    incrButton: HTMLButtonElement;
-    value: number;
-    readonly duration: number = 1000;
-    timeout: number;
-    inputChange: Event;
+    protected quantityInput: HTMLInputElement;
+    protected decrButton: HTMLButtonElement;
+    protected incrButton: HTMLButtonElement;
+    protected value: number;
+    protected duration: number = 1000;
+    protected timeout: number = 0;
+    protected inputChange: Event = new Event('change');
 
-    constructor() {
-        super();
-        this.timeout = 0;
-        this.inputChange = new Event('change');
-    }
+    protected readyCallback(): void {}
 
-    protected readyCallback(): void {
-        this.quantityInput = <HTMLInputElement>this.querySelector(`.${this.jsName}__input`);
-        this.decrButton = <HTMLButtonElement>this.querySelector(`.${this.jsName}__decr`);
-        this.incrButton = <HTMLButtonElement>this.querySelector(`.${this.jsName}__incr`);
+    protected init(): void {
+        this.quantityInput = <HTMLInputElement>this.getElementsByClassName(`${this.jsName}__input`)[0];
+        this.decrButton = <HTMLButtonElement>this.getElementsByClassName(`${this.jsName}__decr`)[0];
+        this.incrButton = <HTMLButtonElement>this.getElementsByClassName(`${this.jsName}__incr`)[0];
         this.value = this.getValue;
 
         this.mapEvents();
@@ -79,19 +75,19 @@ export default class QuantityCounter extends Component {
         }
     }
 
-    get maxQuantity(): number {
+    protected get maxQuantity(): number {
         return +this.quantityInput.getAttribute('data-max-quantity');
     }
 
-    get minQuantity(): number {
+    protected get minQuantity(): number {
         return +this.quantityInput.getAttribute('data-min-quantity');
     }
 
-    get autoUpdate(): string {
+    protected get autoUpdate(): string {
         return this.quantityInput.getAttribute('data-auto-update');
     }
 
-    get getValue(): number {
+    protected get getValue(): number {
         return +this.quantityInput.value;
     }
 }

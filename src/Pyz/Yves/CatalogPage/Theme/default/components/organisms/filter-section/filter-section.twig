@@ -72,8 +72,8 @@
 
     {% include molecule('toggler-accordion') with {
         attributes: {
-            trigger: '.' ~ config.jsName ~ '__trigger',
-        }
+            'trigger-class-name': config.jsName ~ '__trigger',
+        },
     } only %}
 
     {% block actions %}

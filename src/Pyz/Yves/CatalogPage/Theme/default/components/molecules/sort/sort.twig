@@ -18,7 +18,7 @@
         <div class="col col--lg-8 col--xl-6 is-hidden-sm-md">
             <div class="grid grid--middle">
                 {% block selects %}
-                    <div class="col col--sm-3 col--md-5 {{config.jsName}}__filter-per-page" data-block-to=".js-filter-section__sorting" data-breackpoint="769">
+                    <div class="col col--sm-3 col--md-5 {{config.jsName}}__filter" data-block-to="js-filter-section__sorting" data-breakpoint="769">
                         {% block label %}
                             <label class="{{ config.name }}__label is-hidden-sm-md">{{ 'catalog.filter.per' | trans }}:</label>
                         {% endblock %}
@@ -26,16 +26,13 @@
                             modifiers: ['hollow'],
                             attributes: {
                                 name: 'ipp',
-                                'config-theme': 'secondary'
+                                'config-theme': 'secondary',
+                                'data-form-submitter': '',
                             },
                             embed: {
                                 pagination: data.pagination,
-                                jsClass: config.jsName ~ '__per-page-select-trigger'
-                            }
+                            },
                         } only %}
-                            {% block selectClass -%}
-                                {{ parent() }} {{ embed.jsClass }}
-                            {%- endblock %}
                             {% block options %}
                                 {% for limit in embed.pagination.config.validItemsPerPageOptions %}
                                     <option value="{{ limit }}" {% if limit == embed.pagination.currentItemsPerPage %}selected{% endif %}>{{ limit }}</option>
@@ -43,23 +40,20 @@
                             {% endblock %}
                         {% endembed %}
                     </div>
-                    <div class="col col--sm-9 col--md-7 {{config.jsName}}__filter-sort" data-block-to=".js-filter-section__sorting" data-breackpoint="769">
+                    <div class="col col--sm-9 col--md-7 {{config.jsName}}__filter" data-block-to="js-filter-section__sorting" data-breakpoint="769">
                         {% embed molecule('custom-select') with {
                             class: 'float-right',
                             modifiers: ['hollow'],
                             attributes: {
                                 name: 'sort',
                                 'config-theme': 'secondary',
-                                'config-width': '100%'
+                                'config-width': '100%',
+                                'data-form-submitter': '',
                             },
                             embed: {
                                 sort: _view.sort,
-                                jsClass: config.jsName ~ '__select-trigger'
-                            }
+                            },
                         } only %}
-                            {% block selectClass -%}
-                                {{ parent() }} {{ embed.jsClass }}
-                            {%- endblock %}
                             {% block options %}
                                 <option value="">
                                     {{ 'catalog.sort.relevance' | trans }}
@@ -84,13 +78,7 @@
 
     {% include molecule('breakpoint-dependent-block-placer') with {
         attributes: {
-            'block-selector': '.' ~ config.jsName ~ '__filter-per-page, .' ~ config.jsName ~ '__filter-sort'
-        }
-    } only %}
-
-    {% include molecule('form-submitter') with {
-        attributes: {
-            'trigger-selector': '.' ~ config.jsName ~ '__select-trigger, .' ~ config.jsName ~ '__per-page-select-trigger'
-        }
+            'block-class-name': config.jsName ~ '__filter',
+        },
     } only %}
 {% endblock %}

@@ -22,11 +22,8 @@
             {% block contentText %}
                 {% include molecule('color-selector-pdp', 'ProductGroupWidget') with {
                     data: {
-                        items: embed.items
+                        items: embed.items,
                     },
-                    attributes: {
-                        'target-image-selector': '.js-pdp-color-group__image-' ~ embed.idProductAbstract ~ ' > img'
-                    }
                 } only %}
             {% endblock %}
         {% endembed %}

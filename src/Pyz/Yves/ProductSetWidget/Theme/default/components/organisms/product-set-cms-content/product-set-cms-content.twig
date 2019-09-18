@@ -124,7 +124,7 @@
                         },
                         attributes: {
                             'data-json': data.sliderConfig,
-                            'custom-select-selector': '.custom-select',
+                            'custom-select-class-name': 'custom-select',
                         },
                         modifiers: ['product-set', 'product-set-secondary'],
                     } only %}
@@ -183,7 +183,7 @@
                                             {% if isDisabled %}
                                                 <button type="button" class="button button--expand" disabled>{{ 'page.detail.add-to-cart' | trans }}</button>
                                             {% else %}
-                                                <a href="{{ path('cart/add', {sku: embed.product.sku}) }}" class="button button--expand js-product-set__add-to-cart">
+                                                <a href="{{ path('cart/add', {sku: embed.product.sku}) }}" class="button button--expand" data-init-single-click>
                                                     {{ 'page.detail.add-to-cart' | trans }}
                                                 </a>
                                             {% endif %}
@@ -194,11 +194,6 @@
                         {% endblock %}
                     {% endembed %}
                 </form>
-                {% include molecule('action-single-click-enforcer') with {
-                    attributes: {
-                        'target-selector': '.js-product-set__add-to-cart',
-                    },
-                } only %}
             {% endblock %}
         </div>
     </div>
