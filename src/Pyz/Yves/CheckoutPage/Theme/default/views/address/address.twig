@@ -67,8 +67,7 @@
                     {{form_row(data.form.billingSameAsShipping, {
                         component: molecule('toggler-checkbox'),
                         attributes: {
-                            'target-selector': '.' ~ embed.parentJsClass ~ '__billing-same-as-shipping',
-                            'class-to-toggle': 'is-hidden',
+                            'target-class-name': embed.parentJsClass ~ '__billing-same-as-shipping',
                             'add-class-when-checked': true,
                         },
                         'label': 'page.checkout.address.billing-same-as-shipping' | trans,

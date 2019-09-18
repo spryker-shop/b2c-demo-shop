@@ -27,17 +27,13 @@
                         modifiers: ['hollow'],
                         attributes: {
                             name: 'ipp',
-                            'config-theme': 'secondary'
+                            'config-theme': 'secondary',
+                            'data-form-submitter': '',
                         },
                         embed: {
                             pagination: data.pagination,
-                            jsName: config.jsName
-                        }
+                        },
                     } only %}
-                        {% block selectClass -%}
-                            {{ parent() }} {{ embed.jsName }}__per-page-select-trigger
-                        {%- endblock %}
-
                         {% block options %}
                             {% for limit in embed.pagination.config.validItemsPerPageOptions %}
                                 <option value="{{ limit }}" {% if limit == embed.pagination.currentItemsPerPage %}selected{% endif %}>
@@ -53,17 +49,13 @@
                         modifiers: ['hollow'],
                         attributes: {
                             name: 'sort',
-                            'config-theme': 'secondary'
+                            'config-theme': 'secondary',
+                            'data-form-submitter': '',
                         },
                         embed: {
                             sort: _view.sort,
-                            jsName: config.jsName
-                        }
+                        },
                     } only %}
-                        {% block selectClass -%}
-                            {{ parent() }} {{ embed.jsName }}__select-trigger
-                        {%- endblock %}
-
                         {% block options %}
                             <option value="">
                                 {{ 'cms.page.sort.relevance' | trans }}
@@ -82,10 +74,4 @@
             {% endblock %}
         </div>
     </div>
-
-    {% include molecule('form-submitter') with {
-        attributes: {
-            'trigger-selector': '.' ~ config.jsName ~ '__select-trigger, .' ~ config.jsName ~ '__per-page-select-trigger'
-        }
-    } only %}
 {% endblock %}

@@ -1,9 +1,5 @@
 {% extends template('page-layout-login', '@SprykerShop:CustomerPage') %}
 
-{% define data = {
-    isLogin: false,
-} %}
-
 {% block content %}
     <div class="page-layout-customer page-layout-customer--login-wrap">
         <div class="page-layout-customer__form-wrap">
@@ -17,8 +13,7 @@
                             id: 'register',
                             checked: not data.isLogin,
                             name: 'accountLoginSwitcher',
-                            'target-selector': '.js-customer-page-login-register',
-                            'class-to-toggle': 'is-hidden',
+                            'target-class-name': 'js-customer-page-login-register',
                         },
                         modifiers: ['with-bg'],
                     } only %}
@@ -33,8 +28,7 @@
                             id: 'login',
                             checked: data.isLogin,
                             name: 'accountLoginSwitcher',
-                            'target-selector': '.js-customer-page-login',
-                            'class-to-toggle': 'is-hidden',
+                            'target-class-name': 'js-customer-page-login',
                         },
                         modifiers: ['with-bg'],
                     } only %}

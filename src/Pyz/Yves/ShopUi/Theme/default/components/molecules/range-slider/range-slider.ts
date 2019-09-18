@@ -18,9 +18,11 @@ export default class RangeSlider extends Component {
     protected targetSelectors: HTMLInputElement[];
     protected valueTarget: HTMLElement[];
 
-    protected readyCallback(): void {
-        this.wrap = <HTMLElement>document.querySelector(this.wrapSelector);
-        this.targetSelectors = <HTMLInputElement[]>Array.from(document.querySelectorAll(this.targetSelector));
+    protected readyCallback(): void {}
+
+    protected init(): void {
+        this.wrap = <HTMLElement>document.getElementsByClassName(this.wrapClassName)[0];
+        this.targetSelectors = <HTMLInputElement[]>Array.from(document.getElementsByClassName(this.targetClassName));
         this.sliderConfig = {
             start: [ this.valueCurrentMin, this.valueCurrentMax ],
             step: this.stepAttribute,
@@ -38,8 +40,8 @@ export default class RangeSlider extends Component {
         noUiSlider.create(this.wrap, this.sliderConfig);
         this.updateValues(this.wrap, this.targetSelectors);
 
-        if (this.valueSelector !== '') {
-            this.valueTarget = <HTMLElement[]>Array.from(document.querySelectorAll(this.valueSelector));
+        if (this.valueClassName) {
+            this.valueTarget = <HTMLElement[]>Array.from(document.getElementsByClassName(this.valueClassName));
             this.updateSelectors(this.wrap, this.valueTarget);
         }
     }
@@ -61,43 +63,43 @@ export default class RangeSlider extends Component {
         wrap.noUiSlider.on('update', update);
     }
 
-    get wrapSelector(): string {
-        return this.getAttribute('wrap-selector');
+    protected get wrapClassName(): string {
+        return this.getAttribute('wrap-class-name');
     }
 
-    get valueSelector(): string {
-        return this.getAttribute('value-selector');
+    protected get valueClassName(): string {
+        return this.getAttribute('value-class-name');
     }
 
-    get valueMin(): string {
+    protected get targetClassName(): string {
+        return this.getAttribute('target-class-name');
+    }
+
+    protected get valueMin(): string {
         return this.getAttribute('value-min');
     }
 
-    get valueMax(): string {
+    protected get valueMax(): string {
         return this.getAttribute('value-max');
     }
 
-    get valueCurrentMin(): string {
+    protected get valueCurrentMin(): string {
         return this.getAttribute('active-min');
     }
 
-    get targetSelector(): string {
-        return this.getAttribute('target-selector');
-    }
-
-    get valueCurrentMax(): string {
+    protected get valueCurrentMax(): string {
         return this.getAttribute('active-max');
     }
 
-    get stepAttribute(): number {
+    protected get stepAttribute(): number {
         return parseInt(this.getAttribute('step'));
     }
 
-    get connectAttribute(): boolean {
+    protected get connectAttribute(): boolean {
         return Boolean(this.getAttribute('connect'));
     }
 
-    get marginAttribute(): number {
+    protected get marginAttribute(): number {
         return parseInt(this.getAttribute('margin'));
     }
 }

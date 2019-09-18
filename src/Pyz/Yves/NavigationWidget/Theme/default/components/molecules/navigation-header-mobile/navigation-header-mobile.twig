@@ -21,9 +21,9 @@
     {% endfor %}
     {% include molecule('toggler-accordion') with {
         attributes: {
-            trigger: '.js-navigation-multilevel-node__trigger',
+            'trigger-class-name': 'js-navigation-multilevel-node__trigger',
             'class-to-toggle': 'navigation-multilevel-node__menu--hidden',
-            activeClass: 'navigation-multilevel-node__icon--active'
-        }
+            'active-class': 'navigation-multilevel-node__icon--active',
+        },
     } only %}
 {% endblock %}
