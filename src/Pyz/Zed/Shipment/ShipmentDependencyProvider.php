@@ -7,7 +7,7 @@
 
 namespace Pyz\Zed\Shipment;
 
-use Spryker\Zed\GiftCard\Communication\Plugin\OnlyGiftCardShipmentMethodFilterPlugin;
+use Spryker\Zed\GiftCard\Communication\Plugin\Shipment\GiftCardShipmentGroupMethodFilterPlugin;
 use Spryker\Zed\Kernel\Container;
 use Spryker\Zed\Money\Communication\Plugin\Form\MoneyCollectionFormTypePlugin;
 use Spryker\Zed\Shipment\ShipmentDependencyProvider as SprykerShipmentDependencyProvider;
@@ -62,7 +62,7 @@ class ShipmentDependencyProvider extends SprykerShipmentDependencyProvider
     protected function getMethodFilterPlugins(Container $container)
     {
         return [
-            new OnlyGiftCardShipmentMethodFilterPlugin(),
+            new GiftCardShipmentGroupMethodFilterPlugin(),
         ];
     }
 }
