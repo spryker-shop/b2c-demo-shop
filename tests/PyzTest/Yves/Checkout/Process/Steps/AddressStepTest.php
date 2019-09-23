@@ -8,13 +8,27 @@
 namespace PyzTest\Yves\Checkout\Process\Steps;
 
 use Codeception\Test\Unit;
+use Generated\Shared\DataBuilder\AddressBuilder;
+use Generated\Shared\DataBuilder\ItemBuilder;
+use Generated\Shared\DataBuilder\QuoteBuilder;
+use Generated\Shared\DataBuilder\ShipmentBuilder;
 use Generated\Shared\Transfer\AddressesTransfer;
 use Generated\Shared\Transfer\AddressTransfer;
 use Generated\Shared\Transfer\CustomerTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
+use SprykerShop\Yves\CheckoutPage\CheckoutPageConfig;
 use SprykerShop\Yves\CheckoutPage\Dependency\Client\CheckoutPageToCalculationClientInterface;
 use SprykerShop\Yves\CheckoutPage\Dependency\Client\CheckoutPageToCustomerClientInterface;
+use SprykerShop\Yves\CheckoutPage\Dependency\Service\CheckoutPageToCustomerServiceBridge;
+use SprykerShop\Yves\CheckoutPage\Dependency\Service\CheckoutPageToCustomerServiceInterface;
 use SprykerShop\Yves\CheckoutPage\Process\Steps\AddressStep;
+use SprykerShop\Yves\CheckoutPage\Process\Steps\AddressStep\AddressStepExecutor;
+use SprykerShop\Yves\CheckoutPage\Process\Steps\AddressStep\PostConditionChecker;
+use SprykerShop\Yves\CheckoutPage\Process\Steps\PostConditionCheckerInterface;
+use SprykerShop\Yves\CheckoutPage\Process\Steps\StepExecutorInterface;
+use SprykerShop\Yves\CheckoutPageExtension\Dependency\Plugin\AddressTransferExpanderPluginInterface;
+use SprykerShop\Yves\CompanyPage\Plugin\CheckoutPage\CompanyUnitAddressExpanderPlugin;
+use SprykerShop\Yves\CustomerPage\Plugin\CheckoutPage\CustomerAddressExpanderPlugin;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -29,6 +43,11 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class AddressStepTest extends Unit
 {
+    /**
+     * @var \PyzTest\Yves\Checkout\CheckoutBusinessTester
+     */
+    public $tester;
+
     /**
      * @return void
      */
@@ -46,6 +65,28 @@ class AddressStepTest extends Unit
         $addressStep->execute($this->createRequest(), $quoteTransfer);
 
         $this->assertEquals($addressTransfer->getAddress1(), $quoteTransfer->getShippingAddress()->getAddress1());
+        $this->assertEquals($addressTransfer->getAddress1(), $quoteTransfer->getBillingAddress()->getAddress1());
+    }
+
+    /**
+     * @return void
+     */
+    public function testExecuteAddressStepWhenGuestIsSubmittedShouldUseDataFromAddressFromFormWithItemLevelShippingAddresses()
+    {
+        $addressStep = $this->createAddressStep();
+
+        $addressTransfer = (new AddressBuilder([AddressTransfer::ADDRESS1 => 'add1']))->build();
+
+        $quoteTransfer = (new QuoteBuilder())
+            ->withItem((new ItemBuilder())->withShipment())
+            ->build();
+
+        $quoteTransfer->getItems()[0]->getShipment()->setShippingAddress($addressTransfer);
+        $quoteTransfer->setBillingAddress(clone $addressTransfer);
+
+        $addressStep->execute($this->createRequest(), $quoteTransfer);
+
+        $this->assertEquals($addressTransfer->getAddress1(), $quoteTransfer->getItems()[0]->getShipment()->getShippingAddress()->getAddress1());
         $this->assertEquals($addressTransfer->getAddress1(), $quoteTransfer->getBillingAddress()->getAddress1());
     }
 
@@ -92,6 +133,45 @@ class AddressStepTest extends Unit
     /**
      * @return void
      */
+    public function testExecuteAddressStepWhenLoggedInUserCreatesNewAddressWithItemLevelShippingAddresses()
+    {
+        $addressTransfer = new AddressTransfer();
+        $addressTransfer->setIdCustomerAddress(1);
+        $addressTransfer->setAddress1('add1');
+
+        $customerTransfer = new CustomerTransfer();
+        $customerTransfer->addBillingAddress($addressTransfer);
+        $shippingAddress = clone $addressTransfer;
+        $shippingAddress->setIdCustomerAddress(2);
+
+        $addressesTransfer = new AddressesTransfer();
+        $addressesTransfer->addAddress($addressTransfer);
+        $addressesTransfer->addAddress($shippingAddress);
+        $customerTransfer->setAddresses($addressesTransfer);
+
+        $customerClientMock = $this->createCustomerClientMock();
+        $customerClientMock->expects($this->once())->method('getCustomer')->willReturn($customerTransfer);
+
+        $addressStep = $this->createAddressStep($customerClientMock);
+        $shipmentBuilder = (new ShipmentBuilder())
+            ->withShippingAddress(new AddressBuilder([AddressTransfer::ID_CUSTOMER_ADDRESS => 1]));
+        $itemBuilder = (new ItemBuilder())
+            ->withShipment($shipmentBuilder);
+        $addressBuilder = new AddressBuilder([AddressTransfer::ID_CUSTOMER_ADDRESS => 1]);
+        $quoteTransfer = (new QuoteBuilder())
+            ->withBillingAddress($addressBuilder)
+            ->withItem($itemBuilder)
+            ->build();
+
+        $addressStep->execute($this->createRequest(), $quoteTransfer);
+
+        $this->assertEquals($shippingAddress->getAddress1(), $quoteTransfer->getItems()[0]->getShipment()->getShippingAddress()->getAddress1());
+        $this->assertEquals($addressTransfer->getAddress1(), $quoteTransfer->getBillingAddress()->getAddress1());
+    }
+
+    /**
+     * @return void
+     */
     public function testExecuteWhenBillingAddressSameAsShippingSelectedShouldCopyShipmentIntoBilling()
     {
         $addressTransfer = new AddressTransfer();
@@ -118,6 +198,41 @@ class AddressStepTest extends Unit
         $addressStep->execute($this->createRequest(), $quoteTransfer);
 
         $this->assertEquals($addressTransfer->getAddress1(), $quoteTransfer->getShippingAddress()->getAddress1());
+        $this->assertEquals($addressTransfer->getAddress1(), $quoteTransfer->getBillingAddress()->getAddress1());
+    }
+
+    /**
+     * @return void
+     */
+    public function testExecuteWhenBillingAddressSameAsShippingSelectedShouldCopyShipmentIntoBillingWithItemLevelShippingAddresses()
+    {
+        $addressTransfer = (new AddressBuilder([
+            AddressTransfer::ID_CUSTOMER_ADDRESS => 1,
+            AddressTransfer::ADDRESS1 => 'add1',
+        ]))->build();
+
+        $customerTransfer = new CustomerTransfer();
+        $addressesTransfer = new AddressesTransfer();
+        $addressesTransfer->addAddress($addressTransfer);
+        $customerTransfer->setAddresses($addressesTransfer);
+
+        $customerClientMock = $this->createCustomerClientMock();
+        $customerClientMock->expects($this->once())->method('getCustomer')->willReturn($customerTransfer);
+
+        $addressStep = $this->createAddressStep($customerClientMock);
+
+        $addressBuilder = new AddressBuilder([AddressTransfer::ID_CUSTOMER_ADDRESS => 1]);
+        $shipmentBuilder = (new ShipmentBuilder())
+            ->withShippingAddress($addressBuilder);
+        $itemBuilder = (new ItemBuilder())
+            ->withShipment($shipmentBuilder);
+        $quoteTransfer = (new QuoteBuilder([QuoteTransfer::BILLING_SAME_AS_SHIPPING => true]))
+            ->withItem($itemBuilder)
+            ->build();
+
+        $addressStep->execute($this->createRequest(), $quoteTransfer);
+
+        $this->assertEquals($addressTransfer->getAddress1(), $quoteTransfer->getItems()[0]->getShipment()->getShippingAddress()->getAddress1());
         $this->assertEquals($addressTransfer->getAddress1(), $quoteTransfer->getBillingAddress()->getAddress1());
     }
 
@@ -157,14 +272,81 @@ class AddressStepTest extends Unit
     /**
      * @return void
      */
-    public function testPostConditionIfAddressesIsSetShouldReturnTrue()
+    public function testPostConditionIfBillingIsEmptyShouldReturnFalseWithItemLevelShippingAddresses()
     {
+        $addressStep = $this->createAddressStep();
+
+        $shipmentBuilder = (new ShipmentBuilder())
+            ->withShippingAddress();
+        $itemBuilder = (new ItemBuilder())
+            ->withShipment($shipmentBuilder);
+        $quoteTransfer = (new QuoteBuilder())
+            ->withItem($itemBuilder)
+            ->build();
+
+        $this->assertFalse($addressStep->postCondition($quoteTransfer));
+    }
+
+    /**
+     * @return void
+     */
+    public function testPostConditionIfEmptyAddressesIsSetShouldReturnFalse()
+    {
+        // Arrange
         $addressStep = $this->createAddressStep();
         $quoteTransfer = new QuoteTransfer();
         $quoteTransfer->setShippingAddress(new AddressTransfer());
         $quoteTransfer->setBillingAddress(new AddressTransfer());
 
-        $this->assertFalse($addressStep->postCondition($quoteTransfer));
+        // Act
+        $result = $addressStep->postCondition($quoteTransfer);
+
+        // Assert
+        $this->assertFalse($result);
+    }
+
+    /**
+     * @return void
+     */
+    public function testPostConditionIfNotEmptyAddressesIsSetShouldReturnTrue()
+    {
+        // Arrange
+        $addressStep = $this->createAddressStep();
+
+        $quoteTransfer = (new QuoteBuilder())
+            ->withShippingAddress()
+            ->withAnotherBillingAddress()
+            ->build();
+
+        // Act
+        $result = $addressStep->postCondition($quoteTransfer);
+
+        // Assert
+        $this->assertTrue($result);
+    }
+
+    /**
+     * @return void
+     */
+    public function testPostConditionIfAddressesIsSetShouldReturnTrueWithItemLevelShippingAddresses()
+    {
+        // Arrange
+        $addressStep = $this->createAddressStep();
+
+        $shipmentBuilder = (new ShipmentBuilder())
+            ->withShippingAddress();
+        $itemBuilder = (new ItemBuilder())
+            ->withShipment($shipmentBuilder);
+        $quoteTransfer = (new QuoteBuilder())
+            ->withBillingAddress()
+            ->withItem($itemBuilder)
+            ->build();
+
+        // Act
+        $result = $addressStep->postCondition($quoteTransfer);
+
+        // Assert
+        $this->assertTrue($result);
     }
 
     /**
@@ -187,11 +369,16 @@ class AddressStepTest extends Unit
             $customerClientMock = $this->createCustomerClientMock();
         }
 
-        $calculationClientMock = $this->createCalculationClientMock();
-
         $addressStepMock = $this->getMockBuilder(AddressStep::class)
             ->setMethods(['getDataClass'])
-            ->setConstructorArgs([$customerClientMock, $calculationClientMock, 'address_step', 'escape_route'])
+            ->setConstructorArgs([
+                $this->createCalculationClientMock(),
+                $this->createAddressStepExecutorMock($customerClientMock),
+                $this->createAddressStepPostConditionCheckerMock(),
+                $this->createConfigMock(),
+                'address_step',
+                'escape_route',
+            ])
             ->getMock();
 
         $addressStepMock->method('getDataClass')->willReturn(new QuoteTransfer());
@@ -210,6 +397,42 @@ class AddressStepTest extends Unit
     }
 
     /**
+     * @param \SprykerShop\Yves\CheckoutPage\Dependency\Client\CheckoutPageToCustomerClientInterface|\PHPUnit_Framework_MockObject_MockObject|null $customerClientMock
+     *
+     * @return \PHPUnit_Framework_MockObject_MockObject|\SprykerShop\Yves\CheckoutPage\Process\Steps\StepExecutorInterface
+     */
+    protected function createAddressStepExecutorMock($customerClientMock): StepExecutorInterface
+    {
+        return $this->getMockBuilder(AddressStepExecutor::class)
+            ->setConstructorArgs([
+                $this->createCustomerServiceMock(),
+                $customerClientMock,
+                $this->getShoppingListItemExpanderPlugins(),
+            ])
+            ->enableProxyingToOriginalMethods()
+            ->getMock();
+    }
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject|\SprykerShop\Yves\CheckoutPage\Process\Steps\PostConditionCheckerInterface
+     */
+    protected function createAddressStepPostConditionCheckerMock(): PostConditionCheckerInterface
+    {
+        return $this->getMockBuilder(PostConditionChecker::class)
+            ->setConstructorArgs([$this->createCustomerServiceMock()])
+            ->enableProxyingToOriginalMethods()
+            ->getMock();
+    }
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject|\SprykerShop\Yves\CheckoutPage\CheckoutPageConfig
+     */
+    protected function createConfigMock(): CheckoutPageConfig
+    {
+        return $this->getMockBuilder(CheckoutPageConfig::class)->getMock();
+    }
+
+    /**
      * @return \Symfony\Component\HttpFoundation\Request
      */
     protected function createRequest()
@@ -223,5 +446,36 @@ class AddressStepTest extends Unit
     protected function createCustomerClientMock()
     {
         return $this->getMockBuilder(CheckoutPageToCustomerClientInterface::class)->getMock();
+    }
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject|\SprykerShop\Yves\CheckoutPage\Dependency\Service\CheckoutPageToCustomerServiceInterface
+     */
+    protected function createCustomerServiceMock(): CheckoutPageToCustomerServiceInterface
+    {
+        return $this->getMockBuilder(CheckoutPageToCustomerServiceBridge::class)
+            ->setConstructorArgs([$this->tester->getCustomerService()])
+            ->enableProxyingToOriginalMethods()
+            ->getMock();
+    }
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject|\SprykerShop\Yves\CheckoutPageExtension\Dependency\Plugin\AddressTransferExpanderPluginInterface
+     */
+    protected function createCustomerAddressExpanderPluginMock(): AddressTransferExpanderPluginInterface
+    {
+        return $this->getMockBuilder(CustomerAddressExpanderPlugin::class)
+            ->enableProxyingToOriginalMethods()
+            ->getMock();
+    }
+
+    /**
+     * @return \SprykerShop\Yves\CheckoutPageExtension\Dependency\Plugin\AddressTransferExpanderPluginInterface[]
+     */
+    public function getShoppingListItemExpanderPlugins(): array
+    {
+        return [
+            $this->createCustomerAddressExpanderPluginMock(),
+        ];
     }
 }
