@@ -1,13 +1,4 @@
-{% extends template('page-layout-checkout', 'CheckoutPage') %}
-
-{% define data = {
-    backUrl: _view.previousStepUrl,
-    forms: {
-        shipment: _view.shipmentForm
-    },
-
-    title: 'checkout.step.shipment.title' | trans
-} %}
+{% extends view('shipment', '@SprykerShop:CheckoutPage') %}
 
 {% block content %}
     {% embed molecule('form') with {
@@ -16,21 +7,21 @@
             form: data.forms.shipment,
             options: {
                 attr: { 
-                    id: 'payment-form' 
-                }
+                    id: 'payment-form',
+                },
             },
             submit: {
                 enable: true,
                 text: 'general.next.button' | trans,
-                class: 'form__action--checkout button  button--large button--expand'
+                class: 'form__action--checkout button button--large button--expand',
             },
             cancel: {
                 enable: true,
                 url: data.backUrl,
                 text: 'general.back.button' | trans,
-                class: 'form__action--checkout button button--hollow button--expand'
-            }
-        }
+                class: 'form__action--checkout button button--hollow button--expand',
+            },
+        },
     } only %}
         {% block fields %}
             {% for name, choices in data.form.idShipmentMethod.vars.choices %}
@@ -52,15 +43,16 @@
                                         label: data.form.idShipmentMethod[key].vars.label,
                                         rowAttr: {class: 'radio--with-bg-wrap'},
                                         attributes: {
-                                            'checked': 'checked'
+                                            'checked': 'checked',
                                         },
-                                        errors: data.form.idShipmentMethod.vars.errors
+                                        errors: data.form.idShipmentMethod.vars.errors,
                                     }) }}
-                                {% else %}
+                                {% endif %}
+                                {% if choice.value != 1 %}
                                     {{ form_row(data.form.idShipmentMethod[key], {
                                         label: data.form.idShipmentMethod[key].vars.label,
                                         rowAttr: {class: 'radio--with-bg-wrap'},
-                                        errors: data.form.idShipmentMethod.vars.errors
+                                        errors: data.form.idShipmentMethod.vars.errors,
                                     }) }}
                                 {% endif %}
                             </li>
