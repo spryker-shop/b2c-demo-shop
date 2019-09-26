@@ -19,30 +19,27 @@ class CartController extends SprykerCartController
     public const REQUEST_HEADER_REFERER = 'referer';
 
     /**
-     * @param string $sku
-     * @param int $quantity
-     * @param array $optionValueIds
      * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param string $sku
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function addAction($sku, $quantity, array $optionValueIds, Request $request)
+    public function addAction(Request $request, $sku)
     {
-        parent::addAction($sku, $quantity, $optionValueIds, $request);
+        parent::addAction($request, $sku);
 
         return $this->redirect($request);
     }
 
     /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
      * @param string $sku
-     * @param string|null $groupKey
-     * @param \Symfony\Component\HttpFoundation\Request|null $request
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function removeAction($sku, $groupKey = null, ?Request $request = null)
+    public function removeAction(Request $request, $sku)
     {
-        parent::removeAction($sku, $groupKey);
+        parent::removeAction($request, $sku);
 
         return $this->redirect($request);
     }
