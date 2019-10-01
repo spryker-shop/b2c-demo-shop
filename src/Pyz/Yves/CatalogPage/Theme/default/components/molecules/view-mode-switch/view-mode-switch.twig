@@ -4,10 +4,10 @@
     viewMode: '',
 } %}
 
-{% set gridViewActiveClass = data.viewMode == 'grid' ? config.name ~ '__link--active' %}
-{% set listViewActiveClass = data.viewMode != 'grid' ? config.name ~ '__link--active' %}
-
 {% block body %}
+    {% set gridViewActiveClass = data.viewMode == 'grid' ? config.name ~ '__link--active' %}
+    {% set listViewActiveClass = data.viewMode != 'grid' ? config.name ~ '__link--active' %}
+
     <a class="{{ config.name }}__link {{ gridViewActiveClass }}" href="{{ gridHref }}">
         {% include atom('icon') with {
             class: 'spacing-right',
