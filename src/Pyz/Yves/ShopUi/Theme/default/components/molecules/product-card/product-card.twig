@@ -24,7 +24,7 @@
             {% endblock %}
 
             {% block groups %}
-                {{ parent() }}
+                {% widget 'ProductGroupWidget' args [data.abstractId] use view('product-color-selector', 'ProductGroupWidget') only %}{% endwidget %}
             {% endblock %}
         </div>
 
