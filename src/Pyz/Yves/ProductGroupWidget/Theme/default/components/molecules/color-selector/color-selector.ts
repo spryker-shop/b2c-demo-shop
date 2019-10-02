@@ -1,14 +1,16 @@
 import Component from 'ShopUi/models/component';
 
 export default class ColorSelector extends Component {
-    colors: HTMLAnchorElement[];
-    images: HTMLImageElement[];
-    links: HTMLElement[];
+    protected colors: HTMLAnchorElement[];
+    protected image: HTMLImageElement;
+    protected link: HTMLAnchorElement;
 
-    protected readyCallback(): void {
+    protected readyCallback(): void {}
+
+    protected init(): void {
         this.colors = <HTMLAnchorElement[]>Array.from(this.getElementsByClassName(`${this.jsName}__color`));
-        this.links = <HTMLElement[]>Array.from(document.querySelectorAll(this.targetLinkSelector));
-        this.images = <HTMLImageElement[]>Array.from(document.querySelectorAll(`${this.targetLinkSelector} img`));
+        this.link = <HTMLAnchorElement>document.getElementsByClassName(this.targetLinkClassName)[0];
+        this.image = <HTMLImageElement>this.link.getElementsByTagName('img')[0];
         this.mapEvents();
     }
 
@@ -37,22 +39,18 @@ export default class ColorSelector extends Component {
     }
 
     changeImage(newImageSrc: string): void {
-        this.images.forEach((image: HTMLImageElement) => {
-            if (image.src !== newImageSrc) {
-                image.src = newImageSrc;
-            }
-        });
+        if (this.image.src !== newImageSrc) {
+            this.image.src = newImageSrc;
+        }
     }
 
     changeProductUrl(url: string): void {
-        this.links.forEach((link: HTMLElement) => {
-            if (link.getAttribute('href') !== url) {
-                link.setAttribute('href', url);
-            }
-        });
+        if (this.link.getAttribute('href') !== url) {
+            this.link.setAttribute('href', url);
+        }
     }
 
-    get targetLinkSelector(): string {
-        return this.getAttribute('target-image-selector');
+    protected get targetLinkClassName(): string {
+        return this.getAttribute('target-link-class-name');
     }
 }

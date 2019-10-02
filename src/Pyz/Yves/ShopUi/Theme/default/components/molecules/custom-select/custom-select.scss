@@ -87,8 +87,6 @@
     }
 
     .select2-container {
-        z-index: $setting-zi-select;
-
         .select2-results {
             border-radius: rem(4);
             background-color: $setting-color-white;
@@ -164,6 +162,7 @@
                 background: none;
                 margin: rem(12) 0;
                 text-align: left;
+                z-index: $setting-zi-select;
 
                 &::before {
                     content: '';
@@ -173,6 +172,10 @@
                     border: rem(6) solid $setting-color-transparent;
                     border-bottom-color: $setting-color-white;
                     z-index: $setting-zi-element + 1;
+                }
+
+                &--header {
+                    z-index: $setting-zi-header + 2;
                 }
             }
 
