@@ -1,14 +1,15 @@
 import Component from 'ShopUi/models/component';
 import $ from 'jquery/dist/jquery';
-import select from 'select2';
+import 'select2/dist/js/select2.full';
 
 export default class CustomSelect extends Component {
-    select: HTMLSelectElement;
-    $select: $;
+    protected select: HTMLSelectElement;
+    protected $select: $;
 
-    protected readyCallback(): void {
-        const select2 = select;
-        this.select = <HTMLSelectElement>this.querySelector(`.${this.jsName}`);
+    protected readyCallback(): void {}
+
+    protected init(): void {
+        this.select = <HTMLSelectElement>this.getElementsByClassName(`${this.jsName}`)[0];
         this.$select = $(this.select);
 
         this.mapEvents();
@@ -38,12 +39,13 @@ export default class CustomSelect extends Component {
         this.$select.select2({
             minimumResultsForSearch: Infinity,
             width: this.configWidth,
-            theme: this.configTheme
+            theme: this.configTheme,
+            dropdownCssClass: this.additionalClassName ? `select2-dropdown--${this.additionalClassName}` : ''
         });
     }
 
     protected removeAttributeTitle(): void {
-        this.querySelector('.select2-selection__rendered').removeAttribute('title');
+        this.getElementsByClassName('select2-selection__rendered')[0].removeAttribute('title');
     }
 
     protected closeHandler(event: Event): void {
@@ -54,15 +56,19 @@ export default class CustomSelect extends Component {
         }
     }
 
-    get configWidth(): string {
+    protected get configWidth(): string {
         return this.select.getAttribute('config-width');
     }
 
-    get configTheme(): string {
+    protected get configTheme(): string {
         return this.select.getAttribute('config-theme');
     }
 
-    get autoInit(): boolean {
+    protected get autoInit(): boolean {
         return !this.select.hasAttribute('auto-init');
+    }
+
+    protected get additionalClassName(): string {
+        return this.select.getAttribute('additional-class-name');
     }
 }

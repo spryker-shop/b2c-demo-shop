@@ -16,9 +16,13 @@
                 font-size: rem(20);
             }
 
-            &::placeholder {
+            @include helper-input-placeholder() {
                 color: $setting-color-text;
                 opacity: 0.25;
+            }
+
+            &::-ms-clear {
+                display: none;
             }
 
             &--transparent {

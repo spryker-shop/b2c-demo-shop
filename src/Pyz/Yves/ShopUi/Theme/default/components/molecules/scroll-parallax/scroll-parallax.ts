@@ -9,17 +9,18 @@ const THROTTLE_DURATION = 300;
 export default class ScrollParallax extends Component {
     protected target: HTMLElement;
     protected wrapper: HTMLElement;
-    windowHeight: number;
-    windowWidth: number;
-    wrapperHeight: number;
-    distanceToWrapper: number;
-    initialized: boolean = false;
+    protected windowHeight: number;
+    protected windowWidth: number;
+    protected wrapperHeight: number;
+    protected distanceToWrapper: number;
+    protected initialized: boolean = false;
 
-    readyCallback(): void {
-        this.wrapper = <HTMLElement>document.querySelector(this.wrapperSelector);
-        this.target = <HTMLElement>this.wrapper.querySelector(this.targetSelector);
+    protected readyCallback(): void {}
+
+    protected init(): void {
+        this.wrapper = <HTMLElement>document.getElementsByClassName(this.wrapperClassName)[0];
+        this.target = <HTMLElement>this.wrapper.getElementsByClassName(this.targetClassName)[0];
         this.defineDimensions();
-
         this.mapEvents();
     }
 
@@ -59,10 +60,10 @@ export default class ScrollParallax extends Component {
 
         if (scrollHeight > this.distanceToWrapper) {
             if (this.motionDirection === DIRECTIONS.TOP) {
-                targetOffset = `-${this.getTargetOffest(scrollHeight)}`;
+                targetOffset = `-${this.getTargetOffset(scrollHeight)}`;
             }
             if (this.motionDirection === DIRECTIONS.DOWN) {
-                targetOffset = this.getTargetOffest(scrollHeight);
+                targetOffset = this.getTargetOffset(scrollHeight);
             }
             if (targetOffset !== '') {
                 this.target.style.transform = `translateY(${targetOffset})`;
@@ -71,7 +72,7 @@ export default class ScrollParallax extends Component {
         }
     }
 
-    protected getTargetOffest(scrollHeight: number): string {
+    protected getTargetOffset(scrollHeight: number): string {
         return `${(scrollHeight - this.distanceToWrapper) / this.motionRatio}px`;
     }
 
@@ -87,27 +88,27 @@ export default class ScrollParallax extends Component {
         return yPosition;
     }
 
-    get targetSelector(): string {
-        return this.getAttribute('target-selector');
+    protected get wrapperClassName(): string {
+        return this.getAttribute('wrapper-class-name');
     }
 
-    get wrapperSelector(): string {
-        return this.getAttribute('wrapper-selector');
+    protected get targetClassName(): string {
+        return this.getAttribute('target-class-name');
     }
 
-    get motionRatio(): number {
+    protected get motionRatio(): number {
         return +this.getAttribute('motion-ratio');
     }
 
-    get motionDirection(): string {
+    protected get motionDirection(): string {
         return this.getAttribute('motion-direction');
     }
 
-    get minBreakPoint(): number {
+    protected get minBreakPoint(): number {
         return +this.getAttribute('breakpoint-min');
     }
 
-    get maxBreakPoint(): number {
+    protected get maxBreakPoint(): number {
         return +this.getAttribute('breakpoint-max');
     }
 }

@@ -22,8 +22,8 @@
             {% include molecule('panel-info') with {
                 class: 'grid grid--justify',
                 data: {
-                    info: benefits
-                }
+                    info: benefits,
+                },
             } only %}
 
             <div class="col {{ config.name }}__currency-lang">
@@ -32,11 +32,19 @@
                         app.request.pathInfo,
                         app.request.queryString,
                         app.request.requestUri
-                    ] only %}{% endwidget %}
+                    ] with {
+                        data: {
+                            additionalClassName: config.name,
+                        },
+                    } only %}{% endwidget %}
                 </div>
 
                 <div class="{{ config.name }}__select">
-                    {%- widget 'CurrencyWidget' only -%}{%- endwidget -%}
+                    {%- widget 'CurrencyWidget' with {
+                        data: {
+                            additionalClassName: config.name,
+                        },
+                    } only -%}{%- endwidget -%}
                 </div>
             </div>
         </div>
