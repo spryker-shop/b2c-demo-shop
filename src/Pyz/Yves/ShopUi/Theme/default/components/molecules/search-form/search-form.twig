@@ -17,7 +17,7 @@
     <form action="{{data.searchUrl}}">
         <div class="grid">
             <div class="col col--sm-10">
-                <input name="q" type="text" class="input input--expand suggest-search__input {{ config.jsName }}__input" placeholder="{{ 'global.search' | trans }}" value="{{data.searchValue}}" autofocus="autofocus" autocomplete="off">
+                <input name="q" type="text" class="input input--expand suggest-search__input {{ config.jsName }}__input--{{ attributes['data-search-id'] }}" placeholder="{{ 'global.search' | trans }}" value="{{data.searchValue}}" autofocus="autofocus" autocomplete="off">
             </div>
         </div>
 
@@ -25,8 +25,8 @@
             attributes: {
                 'suggestion-url': path('search/suggestion'),
                 'base-suggest-url': path('search/suggestion'),
-                'input-selector': '[data-search-id="' ~ attributes['data-search-id'] ~ '"] .' ~ config.jsName ~ '__input'
-            }
+                'input-class-name': config.jsName ~ '__input--' ~ attributes['data-search-id'],
+            },
         } only %}
 
         <button type="submit" class="{{ config.name }}__button-hidden"></button>

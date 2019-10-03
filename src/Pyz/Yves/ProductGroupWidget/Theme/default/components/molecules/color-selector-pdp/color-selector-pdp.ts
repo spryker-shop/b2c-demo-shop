@@ -1,12 +1,17 @@
 import Component from 'ShopUi/models/component';
 
 export default class ColorSelectorPdp extends Component {
-    colors: HTMLAnchorElement[];
-    images: HTMLImageElement[];
+    protected container: HTMLElement;
+    protected colors: HTMLAnchorElement[];
+    protected image: HTMLImageElement;
 
-    protected readyCallback(): void {
+    protected readyCallback(): void {}
+
+    protected init(): void {
         this.colors = <HTMLAnchorElement[]>Array.from(this.getElementsByClassName(`${this.jsName}__color`));
-        this.images = <HTMLImageElement[]>Array.from(document.querySelectorAll(this.targetImageSelector));
+        this.container = <HTMLImageElement>document.getElementsByClassName(`${this.jsName}__image-container`)[0];
+        this.image = <HTMLImageElement>this.container.getElementsByTagName('img')[0];
+
         this.mapEvents();
     }
 
@@ -24,7 +29,13 @@ export default class ColorSelectorPdp extends Component {
         const color = <HTMLAnchorElement>event.currentTarget;
         const imageSrc = color.getAttribute('data-image-src');
         this.changeActiveColor(color);
-        this.changeImage(imageSrc);
+        this.setActiveImage(imageSrc);
+    }
+
+    protected onColorUnselection(event: Event): void {
+        event.preventDefault();
+        this.changeActiveColor(this.colors[0]);
+        this.resetActiveImage();
     }
 
     changeActiveColor(newColor: HTMLAnchorElement): void {
@@ -35,38 +46,16 @@ export default class ColorSelectorPdp extends Component {
         newColor.classList.add(`${this.name}__color--active`);
     }
 
-    changeImage(newImageSrc: string): void {
-        this.images.forEach((image: HTMLImageElement) => {
-            const imgWrapper = <HTMLElement>image.parentNode;
-            if (image.src !== newImageSrc) {
-                image.src = newImageSrc;
-                imgWrapper.classList.add(`${imgWrapper.classList[0]}--active`);
-            }
-        });
+    setActiveImage(newImageSrc: string): void {
+        if (this.image.src === newImageSrc) {
+            return;
+        }
+
+        this.image.src = newImageSrc;
+        this.container.classList.add(`${this.container.classList[0]}--active`);
     }
 
-    protected onColorUnselection(event: Event): void {
-        event.preventDefault();
-        this.removeActiveColor();
-        this.removeImage();
-    }
-
-    removeActiveColor(): void {
-        this.colors.forEach((color: HTMLAnchorElement) => {
-            color.classList.remove(`${this.name}__color--active`);
-        });
-
-        this.colors[0].classList.add(`${this.name}__color--active`);
-    }
-
-    removeImage(): void {
-        this.images.forEach((image: HTMLImageElement) => {
-            const imgWrapper = <HTMLElement>image.parentNode;
-            imgWrapper.classList.remove(`${imgWrapper.classList[0]}--active`);
-        });
-    }
-
-    get targetImageSelector(): string {
-        return this.getAttribute('target-image-selector');
+    resetActiveImage(): void {
+        this.container.classList.remove(`${this.container.classList[0]}--active`);
     }
 }

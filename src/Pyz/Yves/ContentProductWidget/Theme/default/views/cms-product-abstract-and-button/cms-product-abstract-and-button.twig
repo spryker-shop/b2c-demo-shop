@@ -26,7 +26,7 @@
                     {{ parent() }}
 
                     <div class="{{config.name}}__actions-container">
-                        <a href="{{ path('cart/add', {sku: embed.sku}) }}" class="button button--expand spacing-top js-product-set__add-to-cart">
+                        <a href="{{ path('cart/add', {sku: embed.sku}) }}" class="button button--expand spacing-top" data-init-single-click>
                             {{ 'page.detail.add-to-cart' | trans }}
                         </a>
                     </div>

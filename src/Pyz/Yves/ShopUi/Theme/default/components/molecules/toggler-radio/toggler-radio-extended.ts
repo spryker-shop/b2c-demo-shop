@@ -1,7 +1,9 @@
 import TogglerRadio from 'ShopUi/components/molecules/toggler-radio/toggler-radio';
 
 export default class TogglerRadioExtended extends TogglerRadio {
-    protected readyCallback(): void {
+    protected readyCallback(): void {}
+
+    protected init(): void {
         super.readyCallback();
     }
 

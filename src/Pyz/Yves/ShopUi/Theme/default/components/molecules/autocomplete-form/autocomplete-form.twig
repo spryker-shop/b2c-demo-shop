@@ -2,27 +2,24 @@
 
 {% define config = {
     name: 'autocomplete-form',
-    tag: 'autocomplete-form'
+    tag: 'autocomplete-form',
 } %}
 
 {% define data = {
     id: required,
-    value: ''
+    value: '',
 } %}
 
 {% define attributes = {
     'suggestion-url': required,
     'debounce-delay': 500,
     'min-letters': 3,
-    'query-param-name': 'query',
-    'query-string': attributes['query-param-name'] is defined ? attributes['query-param-name'] : 'query',
+    'query-string': 'query',
     'selected-value-key': '',
-    'value-data-attribute': 'data-value',
-    'value-attribute-name': attributes['value-data-attribute'] is defined ? attributes['value-data-attribute'] : 'data-value',
-    'item-selector': '',
-    'suggested-item-selector': attributes['item-selector'] is defined ? attributes['item-selector'] : '',
+    'value-attribute-name': 'data-value',
+    'suggested-item-class-name': '',
     'show-clean-button': false,
-    'parent-wrap-selector': ''
+    'parent-wrap-class-name': '',
 } %}
 
 {% block body %}
@@ -30,14 +27,14 @@
         class: config.jsName ~ '__provider ' ~ config.jsName ~ '__provider-' ~ data.id,
         attributes: {
             method: 'GET',
-            url: attributes['suggestion-url']
-        }
+            url: attributes['suggestion-url'],
+        },
     } only %}
 
     {% include molecule('ajax-loader') with {
         attributes: {
-            'provider-selector': '.' ~ config.jsName ~ '__provider-' ~ data.id
-        }
+            'provider-class-name': config.jsName ~ '__provider-' ~ data.id,
+        },
     } only %}
 
     {% block input %}
@@ -69,10 +66,10 @@
         <div class="is-hidden {{ config.jsName }}__container {{ config.name }}__suggestion {{ config.name }}__suggestions {{ config.jsName }}__suggestions {{ config.jsName }}__suggestions-{{ data.id }}">
             {% include molecule('ajax-renderer') with {
                 attributes: {
-                    'provider-selector': '.' ~ config.jsName ~ '__provider-' ~ data.id,
-                    'target-selector': '.' ~ config.jsName ~ '__suggestions-' ~ data.id,
-                    'render-if-response-is-empty': true
-                }
+                    'provider-class-name': config.jsName ~ '__provider-' ~ data.id,
+                    'target-class-name': config.jsName ~ '__suggestions-' ~ data.id,
+                    'render-if-response-is-empty': true,
+                },
             } only %}
         </div>
     {% endblock %}
