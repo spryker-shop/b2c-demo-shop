@@ -64,4 +64,17 @@
             color: $setting-color-alt;
         }
     }
+
+    &--secondary {
+        @include helper-effect-transition(color);
+        font: fw(medium) rem(16) $setting-font-family;
+        color: $setting-color-gray-7;
+        letter-spacing: normal;
+
+        &:hover,
+        &:focus {
+            text-decoration: none;
+            color: $setting-color-gray-6;
+        }
+    }
 }
