@@ -12,6 +12,7 @@ use Orm\Zed\Touch\Persistence\SpyTouchQuery;
 
 /**
  * Auto-generated group annotations
+ *
  * @group PyzTest
  * @group Zed
  * @group Touch

@@ -12,7 +12,7 @@ use Spryker\Zed\Customer\CustomerConfig as SprykerCustomerConfig;
 class CustomerConfig extends SprykerCustomerConfig
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @return array
      */

@@ -17,6 +17,7 @@ use PyzTest\Zed\Sales\PageObject\OrderListPage;
 
 /**
  * Auto-generated group annotations
+ *
  * @group PyzTest
  * @group Yves
  * @group Availability

@@ -15,6 +15,7 @@ use Generated\Shared\Transfer\StockProductTransfer;
 
 /**
  * Auto-generated group annotations
+ *
  * @group PyzTest
  * @group Zed
  * @group Product

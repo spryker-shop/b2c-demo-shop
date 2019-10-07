@@ -12,6 +12,7 @@ use PyzTest\Yves\Customer\PageObject\CustomerRegistrationPage;
 
 /**
  * Auto-generated group annotations
+ *
  * @group PyzTest
  * @group Yves
  * @group Customer

@@ -14,6 +14,7 @@ use Generated\Shared\Transfer\ProductImageTransfer;
 
 /**
  * Auto-generated group annotations
+ *
  * @group PyzTest
  * @group Zed
  * @group Product
