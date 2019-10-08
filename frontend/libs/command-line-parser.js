@@ -63,14 +63,14 @@ const isCommand = (allowedFlagsData, args, index) => {
 
     if (isFlag || isFlagValue) {
         return false;
-    };
+    }
 
     if (isValidCommand) {
         return true;
-    };
+    }
 
     throw new Error(`Command "${args[index]}" is not available`);
-}
+};
 
 const validateParameters = env => {
     if (!env || !env.npm_config_argv) {
@@ -103,7 +103,7 @@ commandLineParser
         argv.forEach((arg, index) => {
             if (index <= modeIndexInArgs) {
                 return;
-            };
+            }
 
             validateMode(modeValue);
             validateFlag(arg, allowedFlagsData);
@@ -139,5 +139,5 @@ module.exports = {
     mode,
     namespaces,
     themes,
-    pathToConfig
+    pathToConfig,
 };
