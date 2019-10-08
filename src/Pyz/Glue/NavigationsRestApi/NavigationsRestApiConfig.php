@@ -12,7 +12,7 @@ use Spryker\Glue\NavigationsRestApi\NavigationsRestApiConfig as SprykerNavigatio
 class NavigationsRestApiConfig extends SprykerNavigationsRestApiConfig
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @return array
      */

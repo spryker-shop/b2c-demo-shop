@@ -14,6 +14,7 @@ use PyzTest\Zed\CmsGui\PageObject\CmsEditPage;
 
 /**
  * Auto-generated group annotations
+ *
  * @group PyzTest
  * @group Zed
  * @group CmsGui

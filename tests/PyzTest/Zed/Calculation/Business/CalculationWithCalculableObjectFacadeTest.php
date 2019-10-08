@@ -37,6 +37,7 @@ use Spryker\Zed\Discount\DiscountDependencyProvider;
 
 /**
  * Auto-generated group annotations
+ *
  * @group PyzTest
  * @group Zed
  * @group Calculation

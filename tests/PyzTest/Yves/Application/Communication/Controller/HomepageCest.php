@@ -12,6 +12,7 @@ use PyzTest\Yves\Application\PageObject\Homepage;
 
 /**
  * Auto-generated group annotations
+ *
  * @group PyzTest
  * @group Yves
  * @group Application

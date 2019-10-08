@@ -20,7 +20,7 @@ use Spryker\Client\ProductStorage\ProductStorageConfig;
 class BundleProductsExpanderPlugin extends AbstractPlugin implements ProductViewExpanderPluginInterface
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *

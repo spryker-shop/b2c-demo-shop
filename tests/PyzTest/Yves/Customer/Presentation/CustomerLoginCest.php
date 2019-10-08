@@ -14,6 +14,7 @@ use PyzTest\Yves\Customer\PageObject\CustomerPasswordForgottenPage;
 
 /**
  * Auto-generated group annotations
+ *
  * @group PyzTest
  * @group Yves
  * @group Customer
