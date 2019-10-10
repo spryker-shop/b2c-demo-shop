@@ -567,3 +567,6 @@ $config[ApplicationConstants::ENABLE_PRETTY_ERROR_HANDLER] = false;
 
 // ----------- Yves assets
 $config[ShopUiConstants::YVES_ASSETS_URL_PATTERN] = sprintf('/assets/%s/%s/', $CURRENT_STORE, '%theme%');
+
+// ----------- HTTP Security
+$config[KernelConstants::STRICT_DOMAIN_REDIRECT] = true;
