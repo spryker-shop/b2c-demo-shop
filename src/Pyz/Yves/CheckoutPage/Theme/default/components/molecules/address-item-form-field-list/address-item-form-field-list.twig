@@ -1,0 +1,97 @@
+{% extends molecule('address-item-form-field-list', '@SprykerShop:CheckoutPage') %}
+
+{% block body %}
+    {% for item in data.items %}
+        <div class="grid grid--stretch grid--top {{ config.jsName }}__item-shipping-{{ loop.index }}">
+            {% set hasShippingAddresses = item.shippingAddress.id_customer_address is defined %}
+            {% set itemName = item.vars.data.name | default %}
+            {% set itemQuantity = item.vars.data.quantity | default %}
+            {% set imageUrl = item.vars.data.images[0].externalUrlSmall ?? '' %}
+
+            {% embed molecule('product-item') with {
+                class: 'col col--sm-12 col--lg-6',
+                modifiers: ['checkout'],
+                data: {
+                    product: data.shippingForm,
+                    productItem: item.vars.data,
+                    canEditCart: false,
+                },
+            } only %}
+                {% block image %}
+                    <div class="{{ component.renderClass(config.name ~ '__image', modifiers) }} col">
+                        {% include molecule('product-image') with {
+                            data: {
+                                name: data.productItem.name,
+                                image: data.productItem.images[0],
+                            },
+                        } only %}
+                    </div>
+                {% endblock %}
+
+                {% block title %}
+                    <div class="{{ component.renderClass(config.name ~ '__title', modifiers) }} col col--lg-8 col--sm-12">
+                        {{ data.productItem.name }}
+                    </div>
+                {% endblock %}
+
+                {% block bundles %}{% endblock %}
+            {% endembed %}
+
+            {% if hasShippingAddresses %}
+                <div class="col col--sm-12 col--lg-6 spacing-left spacing-left--inner">
+                    {{ form_row(item.shippingAddress.id_customer_address, {
+                        label: 'page.checkout.address.delivery.address_select' | trans,
+                        attr: {
+                            'multi-shipping-addresses-form-select': '',
+                        },
+                    }) }}
+                </div>
+            {% endif %}
+
+            <div class="col col--sm-12">
+                {% include molecule('form') with {
+                    class: config.jsName ~ '__item-shipping ' ~ (hasShippingAddresses ? ' is-hidden ') ~ config.jsName ~ '__item-shipping--' ~ loop.index,
+                    data: {
+                        form: item.shippingAddress,
+                        enableStart: false,
+                        enableEnd: false,
+                        layout: {
+                            salutation: 'col col--sm-12 col--lg-3',
+                            first_name: 'col col--sm-12 col--lg-4',
+                            last_name: 'col col--sm-12 col--lg-5',
+                            address1: 'col col--sm-12 col--md-8 col--lg-9',
+                            address2: 'col col--sm-12 col--md-4 col--lg-3',
+                            zip_code: 'col col--sm-12 col--lg-3',
+                            city: 'col col--sm-12 col--lg-5',
+                            iso2_code: 'col col--sm-12 col--lg-4',
+                        },
+                    },
+                } only %}
+
+                {% include molecule('address-form-toggler', 'CustomerPage') ignore missing with {
+                    attributes: {
+                        'trigger-selector': '[name="' ~ item.shippingAddress.id_customer_address.vars.full_name ~ '"]',
+                        'target-selector': '.' ~ config.jsName ~ '__item-shipping--' ~ loop.index,
+                    },
+                } only %}
+            </div>
+        </div>
+    {% endfor %}
+
+    {% include molecule('is-next-checkout-step-enabled', 'CheckoutPage') with {
+        attributes: {
+            'trigger-selector': '[name="' ~ data.shippingForm.id_customer_address.vars.full_name ~ '"]',
+            'target-selector': '.' ~ config.jsName ~ '__validate-next-checkout-step',
+        },
+    } only %}
+
+    {% include molecule('validate-next-checkout-step', 'CheckoutPage') with {
+        class: config.jsName ~ '__validate-next-checkout-step',
+        attributes: {
+            'container-selector': '.' ~ config.jsName ~ '__item-shipping',
+            'target-selector': '.' ~ data.jsAddressClass ~ '__form-submit',
+            'dropdown-trigger-selector': '[multi-shipping-addresses-form-select]',
+            'is-enable': false,
+        },
+    } only %}
+{% endblock %}
