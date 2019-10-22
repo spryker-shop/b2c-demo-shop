@@ -36,7 +36,7 @@
             </h2>
 
             {% if hasShippingAddresses %}
-                <div class="col col--sm-12">
+                <div class="col col--sm-12 spacing-bottom spacing-bottom--small">
                     {{ form_row(embed.forms.shipping.id_customer_address, {
                         label: 'page.checkout.address.delivery.address_select' | trans,
                     }) }}
@@ -115,7 +115,7 @@
                         {% set hasBillingAddresses = data.form.id_customer_address is defined %}
 
                         {% if hasBillingAddresses %}
-                            <div class="col col--sm-12">
+                            <div class="col col--sm-12 spacing-bottom spacing-bottom--small">
                                 {{ form_row(data.form.id_customer_address, {
                                     label: 'page.checkout.address.billing.address_select' | trans,
                                 }) }}

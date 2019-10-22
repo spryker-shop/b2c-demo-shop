@@ -1,6 +1,12 @@
 {% extends molecule('address-item-form', '@SprykerShop:CheckoutPage') %}
 
 {% block body %}
+    {% block title %}
+        <h5 class="title title--checkout-secondary">
+            {{ 'page.checkout.address.multi_shipment.title' | trans }}
+        </h5>
+    {% endblock %}
+
     {% embed molecule('form') with {
         data: {
             form: data.form,

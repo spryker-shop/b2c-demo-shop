@@ -13,6 +13,8 @@
     idQuote: data.product.idQuote | default(null),
     isPromotionItem: false,
     canEditCart: true,
+    additionalContainerClass: 'grid--middle grid--justify',
+    productOptionsModifiers: [],
 } %}
 
 {% set canEditCart = (not is_granted('IS_AUTHENTICATED_FULLY') or can('WriteSharedCartPermissionPlugin', data.idQuote)) and data.canEditCart %}
@@ -20,7 +22,7 @@
 
 {% block body %}
     <div class="{{ component.renderClass(config.name ~ '__box', modifiers) }} {{ productItemBox }}">
-        <div class="grid grid--middle grid--justify grid--no-wrap">
+        <div class="grid grid--no-wrap {{ data.additionalContainerClass }}">
             {% block image %}
                 <a href="{{ data.productItem.url }}" class="{{ component.renderClass(config.name ~ '__image', modifiers) }} col">
                     {% include molecule('product-image') with {
@@ -63,7 +65,7 @@
                 </div>
 
                 {% if not data.isPromotionItem %}
-                    <div class="{{ config.name }}__options">
+                    <div class="{{ component.renderClass(config.name ~ '__options', modifiers) }}">
                         {% block options %}
                             {% if data.attributes is not empty %}
                                 {% include molecule('product-item-variant-selector') with {
@@ -103,6 +105,8 @@
                 {% block content %}{% endblock %}
                 {% block actions %}{% endblock %}
             </div>
+
+            {% block additionalInfo %}{% endblock %}
         </div>
 
         {% block bundles %}
@@ -114,6 +118,7 @@
                 <div class="grid grid--right">
                     {% include molecule('product-item-summary') with {
                         class: 'col',
+                        modifiers: data.productOptionsModifiers,
                         data: {
                             productItem: data.productItem
                         }
