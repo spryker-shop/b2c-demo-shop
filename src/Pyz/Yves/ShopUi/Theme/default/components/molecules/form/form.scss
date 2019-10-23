@@ -1,7 +1,8 @@
-@mixin shop-ui-form($name: '.form') {
-    $shop-ui-form-field-margin: rem(8);
-    $review-rating-field-width: rem(154);
+$shop-ui-form-field-margin: rem(8);
+$review-rating-field-width: rem(154);
+$address-form-width: rem(600);
 
+@mixin shop-ui-form($name: '.form') {
     #{$name} {
         &__field {
             padding: 0 rem(16) rem(16);
@@ -82,6 +83,30 @@
                 padding-bottom: 0;
                 padding-right: 0;
             }
+        }
+
+        &__checkout-sub-form,
+        &--checkout-form {
+            border-radius: rem(3);
+            background-color: $setting-color-gray-1;
+            margin: rem(-25) 0 rem(32);
+
+            #{$name}__container {
+                max-width: $address-form-width;
+                margin: 0 auto;
+                padding-top: rem(20);
+            }
+        }
+
+        &__checkout-sub-form {
+            width: 100%;
+            margin: rem(5) 0 0;
+        }
+
+        &__checkout-sub-form-content {
+            max-width: $address-form-width;
+            margin: 0 auto;
+            padding-top: rem(20);
         }
 
         &--checkout-actions {

@@ -60,6 +60,7 @@
             <div class="col col--sm-12">
                 {% include molecule('form') with {
                     class: config.jsName ~ '__item-shipping ' ~ (hasShippingAddresses ? ' is-hidden ') ~ config.jsName ~ '__item-shipping--' ~ loop.index,
+                    modifiers: ['checkout-form'],
                     data: {
                         form: item.shippingAddress,
                         enableStart: false,

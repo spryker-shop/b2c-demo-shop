@@ -36,7 +36,7 @@
             </h2>
 
             {% if hasShippingAddresses %}
-                <div class="col col--sm-12 spacing-bottom spacing-bottom--small">
+                <div class="col col--sm-12 spacing-bottom spacing-bottom--biggest">
                     {{ form_row(embed.forms.shipping.id_customer_address, {
                         label: 'page.checkout.address.delivery.address_select' | trans,
                     }) }}
@@ -45,7 +45,7 @@
 
             {% include molecule('form') with {
                 class: embed.jsAddressClass ~ '__shipping' ~ (hasShippingAddresses ? ' is-hidden ') ~ 'col col--sm-12',
-                modifiers: ['checkout-form-elements'],
+                modifiers: ['checkout-form', 'checkout-form-elements'],
                 data: {
                     form: embed.forms.shipping,
                     enableStart: false,
@@ -65,7 +65,7 @@
 
             {% if embed.isMultipleShipmentEnabled %}
                 {% include molecule('address-item-form', 'CheckoutPage') with {
-                    class: 'col col--sm-12 is-hidden ' ~ embed.jsAddressClass ~ '__items-target',
+                    class: 'col col--sm-12 is-hidden spacing-bottom ' ~ embed.jsAddressClass ~ '__items-target',
                     data: {
                         form: embed.forms.items,
                         shippingForm: embed.forms.shipping,
@@ -122,8 +122,10 @@
                             </div>
                         {% endif %}
 
-                        <div class="{{ embed.jsAddressClass }}__billing {{ hasBillingAddresses ? 'is-hidden' }}">
-                            {{ parent() }}
+                        <div class="{{ config.name }}__checkout-sub-form">
+                            <div class="{{ config.name }}__checkout-sub-form-content {{ embed.jsAddressClass }}__billing {{ hasBillingAddresses ? 'is-hidden' }}">
+                                {{ parent() }}
+                            </div>
                         </div>
                     {% endblock %}
                 {% endembed %}

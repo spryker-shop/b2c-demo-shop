@@ -1,4 +1,8 @@
 @mixin shop-ui-product-item($name: '.product-item') {
+    $image-width: rem(120);
+    $image-small-width: rem(100);
+    $additional-info-width: rem(360);
+
     #{$name} {
         &__title {
             font: fw(medium) rem(17)/rem(23) $setting-font-family-additional;
@@ -27,23 +31,24 @@
 
         &__content {
             padding: 0 0 rem(5) rem(24);
-            width: calc(100% - #{rem(120)});
+            width: calc(100% - #{$image-width});
 
             &--mini-cart {
-                width: calc(100% - #{rem(100)});
+                width: calc(100% - #{$image-small-width});
             }
 
             &--checkout {
                 width: auto;
+                flex-grow: 1;
                 padding: 0 0 0 rem(20);
             }
         }
 
         &__image {
-            width: rem(120);
+            width: $image-width;
 
             &--mini-cart {
-                width: rem(100);
+                width: $image-small-width;
 
                 .thumbnail {
                     height: rem(60);
@@ -51,8 +56,8 @@
             }
 
             &--checkout {
-                width: rem(100);
-                min-width: rem(100);
+                width: $image-small-width;
+                min-width: $image-small-width;
             }
 
             &--readonly {
@@ -114,13 +119,15 @@
         }
 
         &__additional-info {
-            max-width: rem(360);
+            max-width: $additional-info-width;
             padding-left: rem(15);
         }
 
         &--expand {
             width: 100%;
         }
+
+        @content;
     }
 }
 
