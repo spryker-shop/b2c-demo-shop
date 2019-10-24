@@ -1,21 +1,17 @@
-{% extends template('widget') %}
-
-{% define data = {
-    products: _widget.products
-} %}
+{% extends view('product-alternative-list', '@SprykerShop:ProductAlternativeWidget') %}
 
 {% block body %}
     {% if data.products is not empty %}
         {% include molecule('product-slider-title') with {
             data: {
                 title: 'product_alternative_widget.product_alternative' | trans,
-            }
+            },
         } only %}
 
         {% embed molecule('slick-carousel') with {
             modifiers: ['align-left'],
             data: {
-                slides: data.products
+                slides: data.products,
             },
             attributes: {
                 'data-json': '{
@@ -33,8 +29,8 @@
                         "slidesToShow": 2
                     }
                 }
-            ]}'
-            }
+            ]}',
+            },
         } only %}
             {% block slides %}
                 {% for slide in data.slides %}

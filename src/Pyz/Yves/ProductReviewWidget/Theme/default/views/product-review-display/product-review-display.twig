@@ -1,9 +1,4 @@
-{% extends template('widget') %}
-
-{% define data = {
-    value: _widget.rating | default(0),
-    maxValue: _widget.maximumRating
-} %}
+{% extends view('product-review-display', '@SprykerShop:ProductReviewWidget') %}
 
 {% block body %}
     {% include molecule('rating-selector', 'ProductReviewWidget') with {
@@ -11,10 +6,10 @@
         data: {
             value: data.value,
             maxValue: data.maxValue,
-            useHalfSteps: true
+            useHalfSteps: true,
         },
         attributes: {
-            readonly: true
-        }
+            readonly: true,
+        },
     } only %}
 {% endblock %}
