@@ -1,8 +1,4 @@
-{% extends template('widget') %}
-
-{% define data = {
-    banner: banner,
-} %}
+{% extends view('banner', '@SprykerShop:ContentBannerWidget') %}
 
 {% block body %}
     {% embed molecule('banner-jumbotron', 'ContentBannerWidget') with {
