@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "405ee297ae8209f2200dc675a14e2359",
+    "content-hash": "e61d2ac4f6898e164ab751f3ee484f6f",
     "packages": [
         {
             "name": "codeitnowin/barcode",
@@ -32478,28 +32478,30 @@
         },
         {
             "name": "spryker-feature/development-tools",
-            "version": "201907.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker-feature/development-tools.git",
-                "reference": "06c776839fcfd98ec39a6cc0155964154f8c51b4"
+                "reference": "729ac58f3b21b374c2560a291c388ca77ce655cd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker-feature/development-tools/zipball/06c776839fcfd98ec39a6cc0155964154f8c51b4",
-                "reference": "06c776839fcfd98ec39a6cc0155964154f8c51b4",
+                "url": "https://api.github.com/repos/spryker-feature/development-tools/zipball/729ac58f3b21b374c2560a291c388ca77ce655cd",
+                "reference": "729ac58f3b21b374c2560a291c388ca77ce655cd",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.1",
+                "spryker-sdk/composer-constrainer": "^0.1.0",
                 "spryker-shop/web-profiler-widget": "^1.1.0",
                 "spryker/code-generator": "^0.3.7",
-                "spryker/development": "^3.21.0"
+                "spryker/development": "^3.21.0",
+                "spryker/web-profiler": "^1.5.0"
             },
             "type": "metapackage",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "201907.x-dev"
+                    "dev-master": "201910.x-dev"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -32507,7 +32509,51 @@
                 "proprietary"
             ],
             "description": "Development tools [feature]",
-            "time": "2019-08-01T16:12:55+00:00"
+            "time": "2019-10-10T14:06:20+00:00"
+        },
+        {
+            "name": "spryker-sdk/composer-constrainer",
+            "version": "0.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker-sdk/composer-constrainer.git",
+                "reference": "618fb2adb6974e6cf0f71ff5499b352d5cbdb6ef"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker-sdk/composer-constrainer/zipball/618fb2adb6974e6cf0f71ff5499b352d5cbdb6ef",
+                "reference": "618fb2adb6974e6cf0f71ff5499b352d5cbdb6ef",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1",
+                "spryker/kernel": "^3.33.0",
+                "spryker/symfony": "^3.2.2",
+                "spryker/zend": "^2.1.0"
+            },
+            "require-dev": {
+                "sllh/composer-versions-check": "^2.0.2",
+                "spryker/code-sniffer": "*",
+                "spryker/console": "*",
+                "spryker/testify": "^3.15.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "SprykerSdk\\": "src/SprykerSdk/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "ComposerConstrainer module",
+            "time": "2019-08-27T12:18:42+00:00"
         },
         {
             "name": "spryker-sdk/phpstan-spryker",
@@ -33037,6 +33083,62 @@
             ],
             "description": "Testify module",
             "time": "2019-10-11T04:49:09+00:00"
+        },
+        {
+            "name": "spryker/web-profiler",
+            "version": "1.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/web-profiler.git",
+                "reference": "fad7148d260c636c4b1df7839369a2b537b3af87"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/web-profiler/zipball/fad7148d260c636c4b1df7839369a2b537b3af87",
+                "reference": "fad7148d260c636c4b1df7839369a2b537b3af87",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1",
+                "spryker/application-extension": "^1.0.0",
+                "spryker/kernel": "^3.30.0",
+                "spryker/symfony": "^3.2.0",
+                "spryker/twig": "^3.4.0",
+                "spryker/twig-extension": "^1.0.0",
+                "spryker/web-profiler-extension": "^1.0.0",
+                "symfony/web-profiler-bundle": "^3.0.0 || ^4.0.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/config": "^3.0.0",
+                "spryker/container": "*",
+                "spryker/event-dispatcher": "*",
+                "spryker/silex": "*",
+                "spryker/testify": "*"
+            },
+            "suggest": {
+                "spryker/config": "If you want to use ServiceProvider plugins.",
+                "spryker/container": "If you want to use the Router module.",
+                "spryker/event-dispatcher": "If you want to use the EventDispatcher module.",
+                "spryker/silex": "If you want to use ServiceProvider plugins."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "WebProfiler module",
+            "time": "2019-10-09T04:54:17+00:00"
         },
         {
             "name": "squizlabs/php_codesniffer",
@@ -33832,6 +33934,12 @@
             "alias_normalized": "201910.0",
             "version": "9999999-dev",
             "package": "spryker-feature/wishlist"
+        },
+        {
+            "alias": "201910.0",
+            "alias_normalized": "201910.0",
+            "version": "9999999-dev",
+            "package": "spryker-feature/development-tools"
         }
     ],
     "minimum-stability": "dev",
@@ -33852,7 +33960,8 @@
         "spryker-feature/scheduled-prices": 20,
         "spryker-feature/shipment": 20,
         "spryker-feature/spryker-core": 20,
-        "spryker-feature/wishlist": 20
+        "spryker-feature/wishlist": 20,
+        "spryker-feature/development-tools": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
