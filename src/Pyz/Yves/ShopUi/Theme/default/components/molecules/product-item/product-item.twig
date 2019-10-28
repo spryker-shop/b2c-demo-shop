@@ -13,7 +13,7 @@
     idQuote: data.product.idQuote | default(null),
     isPromotionItem: false,
     canEditCart: true,
-    additionalContainerClass: 'grid--middle grid--justify',
+    additionalContainerClass: 'grid--middle grid--justify grid--no-wrap',
     productOptionsModifiers: [],
 } %}
 
@@ -22,7 +22,7 @@
 
 {% block body %}
     <div class="{{ component.renderClass(config.name ~ '__box', modifiers) }} {{ productItemBox }}">
-        <div class="grid grid--no-wrap {{ data.additionalContainerClass }}">
+        <div class="grid {{ data.additionalContainerClass }}">
             {% block image %}
                 <a href="{{ data.productItem.url }}" class="{{ component.renderClass(config.name ~ '__image', modifiers) }} col">
                     {% include molecule('product-image') with {

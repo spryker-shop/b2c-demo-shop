@@ -89,24 +89,39 @@ $address-form-width: rem(600);
         &--checkout-form {
             border-radius: rem(3);
             background-color: $setting-color-gray-1;
-            margin: rem(-25) 0 rem(32);
+            margin: rem(-20) rem(-16) rem(32);
+
+            @include helper-breakpoint-media-min($lg-min) {
+                margin: rem(-20) 0 rem(32);
+            }
 
             #{$name}__container {
-                max-width: $address-form-width;
-                margin: 0 auto;
                 padding-top: rem(20);
+
+                @include helper-breakpoint-media-min($lg-min) {
+                    max-width: $address-form-width;
+                    margin: 0 auto;
+                }
             }
         }
 
         &__checkout-sub-form {
-            width: 100%;
-            margin: rem(5) 0 0;
+            width: auto;
+            margin: rem(8) rem(-16) 0;
+
+            @include helper-breakpoint-media-min($lg-min) {
+                margin: rem(8) 0 0;
+                width: 100%;
+            }
         }
 
         &__checkout-sub-form-content {
-            max-width: $address-form-width;
-            margin: 0 auto;
             padding-top: rem(20);
+
+            @include helper-breakpoint-media-min($lg-min) {
+                max-width: $address-form-width;
+                margin: 0 auto;
+            }
         }
 
         &--checkout-actions {
@@ -115,24 +130,20 @@ $address-form-width: rem(600);
                 display: flex;
                 flex-direction: column-reverse;
                 align-items: flex-end;
+
                 @include helper-breakpoint-media-min($md-min) {
                     padding-top: rem(29);
                 }
             }
         }
 
-        &--checkout-address-step,
-        &--checkout-payment-step {
-            .col {
-                @include helper-breakpoint-media-max($sm-max) {
-                    width: 100%;
-                }
-            }
-        }
-
         &--login,
         &--checkout-form-elements {
-            width: 100%;
+            width: auto;
+
+            @include helper-breakpoint-media-min($lg-min) {
+                width: 100%;
+            }
 
             label,
             .label {

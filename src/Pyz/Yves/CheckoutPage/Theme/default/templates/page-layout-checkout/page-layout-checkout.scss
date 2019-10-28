@@ -5,11 +5,14 @@ $layout-checkout-width: rem(730);
         max-width: $layout-checkout-width;
         margin: 0 auto;
         padding-bottom: rem(60);
-        overflow: hidden;
         display: block;
 
         @include helper-breakpoint-media-min($md-min) {
             padding-top: rem(40);
+        }
+
+        @include helper-breakpoint-media-min($lg-min) {
+            overflow: hidden;
         }
 
         &--full-width {

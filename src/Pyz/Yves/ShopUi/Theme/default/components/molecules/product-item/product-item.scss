@@ -1,7 +1,7 @@
 @mixin shop-ui-product-item($name: '.product-item') {
     $image-width: rem(120);
     $image-small-width: rem(100);
-    $additional-info-width: rem(360);
+    $additional-info-width: rem(350);
 
     #{$name} {
         &__title {
@@ -38,9 +38,11 @@
             }
 
             &--checkout {
-                width: auto;
-                flex-grow: 1;
                 padding: 0 0 0 rem(20);
+
+                @include helper-breakpoint-media-min($lg-min) {
+                    width: calc(100% - #{$image-width} - #{$additional-info-width});
+                }
             }
         }
 
@@ -53,11 +55,6 @@
                 .thumbnail {
                     height: rem(60);
                 }
-            }
-
-            &--checkout {
-                width: $image-small-width;
-                min-width: $image-small-width;
             }
 
             &--readonly {
@@ -119,8 +116,14 @@
         }
 
         &__additional-info {
-            max-width: $additional-info-width;
-            padding-left: rem(15);
+            width: 100%;
+            padding-top: rem(15);
+
+            @include helper-breakpoint-media-min($lg-min) {
+                padding-left: rem(15);
+                padding-top: 0;
+                max-width: $additional-info-width;
+            }
         }
 
         &--expand {

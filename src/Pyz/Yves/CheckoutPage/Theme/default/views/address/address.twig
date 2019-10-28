@@ -4,7 +4,7 @@
     {% set jsAddressClass = 'js-address' %}
 
     {% embed molecule('form') with {
-        modifiers: ['checkout-address-step', 'checkout-actions', 'checkout-form-elements'],
+        modifiers: ['checkout-actions', 'checkout-form-elements'],
         data: {
             form: data.forms.address,
             submit: {
@@ -27,9 +27,9 @@
             {% set hasShippingAddresses = data.form.shippingAddress.id_customer_address is defined %}
 
             <h2 class="title title--checkout col col--sm-12 grid grid--baseline">
-                <span class="col col--sm-6 col--lg-8">{{ 'page.checkout.address.shipping-address' | trans }}</span>
+                <span class="col col--sm-12 col--md-8">{{ 'page.checkout.address.shipping-address' | trans }}</span>
                 {% if is_granted('ROLE_USER') %}
-                    <a class="link link--secondary text-right col col--sm-6 col--lg-4" href="{{ url('customer/address') }}">
+                    <a class="link link--secondary link--align-right-from-tablet spacing-top col col--sm-12 col--md-4" href="{{ url('customer/address') }}">
                         {{ 'page.checkout.address.manage_your_addresses' | trans }}
                     </a>
                 {% endif %}
