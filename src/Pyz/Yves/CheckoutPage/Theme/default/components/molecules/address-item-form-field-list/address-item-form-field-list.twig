@@ -79,9 +79,11 @@
                 } only %}
 
                 {% include molecule('address-form-toggler', 'CustomerPage') ignore missing with {
+                    class: config.jsName ~ '__toggler',
                     attributes: {
                         'trigger-selector': '[name="' ~ item.shippingAddress.id_customer_address.vars.full_name ~ '"]',
                         'target-selector': '.' ~ config.jsName ~ '__item-shipping--' ~ loop.index,
+                        'parent-target-class-name': config.jsName,
                     },
                 } only %}
             </div>
@@ -101,6 +103,7 @@
             'container-selector': '.' ~ config.jsName ~ '__item-shipping',
             'target-selector': '.' ~ data.jsAddressClass ~ '__form-submit',
             'dropdown-trigger-selector': '[multi-shipping-addresses-form-select]',
+            'parent-target-class-name': config.jsName,
             'is-enable': false,
         },
     } only %}
