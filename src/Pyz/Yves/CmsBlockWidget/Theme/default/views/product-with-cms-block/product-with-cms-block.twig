@@ -1,8 +1,4 @@
-{% extends template('widget') %}
-
-{% define data = {
-    product: product | default(_widget.product.idProductAbstract),
-} %}
+{% extends view('product-with-cms-block', '@SprykerShop:CmsBlockWidget') %}
 
 {% block body %}
     {% include molecule('product-cms-block', 'CmsBlockWidget') with {

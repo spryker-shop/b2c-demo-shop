@@ -1,9 +1,6 @@
-{% extends template('product-set', 'ProductSetWidget') %}
+{% extends view('product-set-page', '@SprykerShop:ProductSetWidget') %}
 
 {% define data = {
-    products: _widget.productViews,
-    description: _widget.productSet.description,
-    images: _widget.productSet.imageSets.0.images | default([]),
     sliderConfig: '{
         "slidesToShow": 1,
         "dots": false,
@@ -31,25 +28,8 @@
             }
         }]
     }',
-    addAllSetButton: true
+    addAllSetButton: true,
 } %}
-
-{% block carousel %}
-    <div class="box">
-        {{parent()}}
-    </div>
-{% endblock %}
-
-{% block header %}
-    <div class="box">
-        {{parent()}}
-    </div>
-{% endblock %}
-
-{% block description %}
-    <hr />
-    {{parent()}}
-{% endblock %}
 
 {% block productSet %}
     <div class="box product-set-slider product-set-slider--hide-prev-btn">

@@ -17,6 +17,7 @@ use Orm\Zed\Navigation\Persistence\SpyNavigationQuery;
 
 /**
  * Inherited Methods
+ *
  * @method void wantToTest($text)
  * @method void wantTo($text)
  * @method void execute($callable)

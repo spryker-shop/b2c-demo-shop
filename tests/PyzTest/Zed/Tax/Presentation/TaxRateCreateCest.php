@@ -13,6 +13,7 @@ use PyzTest\Zed\Tax\TaxPresentationTester;
 
 /**
  * Auto-generated group annotations
+ *
  * @group PyzTest
  * @group Zed
  * @group Tax

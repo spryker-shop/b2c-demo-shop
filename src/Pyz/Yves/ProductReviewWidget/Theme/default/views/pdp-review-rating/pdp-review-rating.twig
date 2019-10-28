@@ -1,8 +1,4 @@
-{% extends template('widget') %}
-
-{% define data = {
-    idProductAbstract: _widget.idProductAbstract
-} %}
+{% extends view('pdp-review-rating', '@SprykerShop:ProductReviewWidget') %}
 
 {% block body %}
     {% include molecule('rating-selector', 'ProductReviewWidget') with {
@@ -10,10 +6,10 @@
         modifiers: ['expand'],
         data: {
             value: _widget.productReviewStorageTransfer.averageRating | default(0),
-            maxValue: _widget.maximumRating
+            maxValue: _widget.maximumRating,
         },
         attributes: {
-            readonly: true
-        }
+            readonly: true,
+        },
     } only %}
 {% endblock %}

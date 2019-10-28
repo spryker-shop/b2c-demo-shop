@@ -26,6 +26,7 @@ use Spryker\Zed\ProductOption\Business\ProductOptionFacade;
 
 /**
  * Auto-generated group annotations
+ *
  * @group PyzTest
  * @group Zed
  * @group ProductOption

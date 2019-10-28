@@ -13,7 +13,7 @@ use Spryker\Zed\CustomerAccess\CustomerAccessConfig as SprykerCustomerAccessConf
 class CustomerAccessConfig extends SprykerCustomerAccessConfig
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @return array
      */

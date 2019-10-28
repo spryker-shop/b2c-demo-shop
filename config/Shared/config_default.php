@@ -445,7 +445,6 @@ $config[QueueConstants::QUEUE_WORKER_INTERVAL_MILLISECONDS] = 1000;
 $config[QueueConstants::QUEUE_PROCESS_TRIGGER_INTERVAL_MICROSECONDS] = 1001;
 $config[QueueConstants::QUEUE_WORKER_MAX_THRESHOLD_SECONDS] = 59;
 $config[QueueConstants::QUEUE_WORKER_LOG_ACTIVE] = false;
-$config[QueueConstants::QUEUE_WORKER_LOOP] = false;
 
 /*
  * Queues can have different adapters and maximum worker number
@@ -567,3 +566,6 @@ $config[ApplicationConstants::ENABLE_PRETTY_ERROR_HANDLER] = false;
 
 // ----------- Yves assets
 $config[ShopUiConstants::YVES_ASSETS_URL_PATTERN] = sprintf('/assets/%s/%s/', $CURRENT_STORE, '%theme%');
+
+// ----------- HTTP Security
+$config[KernelConstants::STRICT_DOMAIN_REDIRECT] = true;

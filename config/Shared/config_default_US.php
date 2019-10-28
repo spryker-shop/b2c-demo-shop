@@ -4,6 +4,7 @@ use Spryker\Shared\Application\ApplicationConstants;
 use Spryker\Shared\Customer\CustomerConstants;
 use Spryker\Shared\Event\EventConstants;
 use Spryker\Shared\GlueApplication\GlueApplicationConstants;
+use Spryker\Shared\Kernel\KernelConstants;
 use Spryker\Shared\Newsletter\NewsletterConstants;
 use Spryker\Shared\ProductManagement\ProductManagementConstants;
 use Spryker\Shared\RabbitMq\RabbitMqEnv;
@@ -100,4 +101,10 @@ $config[RabbitMqEnv::RABBITMQ_CONNECTIONS] = [
         RabbitMqEnv::RABBITMQ_STORE_NAMES => ['US'],
         RabbitMqEnv::RABBITMQ_DEFAULT_CONNECTION => true,
     ],
+];
+
+// ----------- HTTP Security
+$config[KernelConstants::DOMAIN_WHITELIST] = [
+    $config[ApplicationConstants::HOST_YVES],
+    $config[ApplicationConstants::HOST_ZED],
 ];

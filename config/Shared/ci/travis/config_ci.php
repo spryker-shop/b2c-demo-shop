@@ -186,3 +186,9 @@ $config[ShopApplicationConstants::TWIG_ENVIRONMENT_NAME] = APPLICATION_ENV;
 
 // ---------- Console
 $config[ConsoleConstants::ENABLE_DEVELOPMENT_CONSOLE_COMMANDS] = true;
+
+// ----------- HTTP Security
+$config[KernelConstants::DOMAIN_WHITELIST] = [
+    $config[ApplicationConstants::HOST_YVES],
+    $config[ApplicationConstants::HOST_ZED],
+];
