@@ -51,12 +51,19 @@ $address-form-width: rem(600);
             margin-top: $shop-ui-form-field-margin;
             margin-left: $shop-ui-form-field-margin;
 
-            &--checkout,
             &--login {
                 margin: 0;
 
                 &:not(:last-child) {
                     margin-top: rem(30);
+                }
+            }
+
+            &--checkout {
+                margin: 0;
+
+                &:not(:last-child) {
+                    margin-top: rem(12);
                 }
             }
         }
@@ -126,14 +133,9 @@ $address-form-width: rem(600);
 
         &--checkout-actions {
             #{$name}__actions {
-                padding-top: rem(15);
                 display: flex;
                 flex-direction: column-reverse;
                 align-items: flex-end;
-
-                @include helper-breakpoint-media-min($md-min) {
-                    padding-top: rem(29);
-                }
             }
         }
 

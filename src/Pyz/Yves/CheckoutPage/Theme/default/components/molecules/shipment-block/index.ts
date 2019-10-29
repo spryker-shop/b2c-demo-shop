@@ -1,0 +1,1 @@
+import './shipment-block.scss';

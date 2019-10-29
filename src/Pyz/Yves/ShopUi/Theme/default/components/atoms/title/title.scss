@@ -43,10 +43,19 @@
             }
         }
 
-        &--shipment {
-            margin: 0 rem(10) 0 0;
-            border: none;
-            padding: 0;
+        &--checkout-shipment {
+            font: fw(bold) rem(25)/rem(30) $setting-font-family-additional;
+            border-bottom: dotted rem(1) $setting-color-gray-3;
+            padding-bottom: rem(8);
+            margin-bottom: rem(16);
+            letter-spacing: 0;
+
+            @include helper-breakpoint-media-min($lg-min) {
+                font: fw(medium) rem(21)/rem(25);
+                border: none;
+                padding: 0;
+                letter-spacing: rem(-0.24);
+            }
         }
 
         &--account-main {

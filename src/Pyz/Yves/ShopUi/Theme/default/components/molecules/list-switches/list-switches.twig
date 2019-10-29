@@ -1,0 +1,27 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'list-switches',
+    tag: 'ul',
+} %}
+
+{% define data = {
+    form: required,
+    choices: required,
+} %}
+
+{% block body %}
+    {% for key, choice in data.choices %}
+        <li class="{{ component.renderClass(config.name ~ '__item', modifiers) }}">
+            {{ form_row(data.form[key], {
+                label: data.form[key].vars.label,
+                rowAttr: {
+                    class: 'radio--with-bg-wrap',
+                },
+                attributes: {
+                    checked: choice.value == 1,
+                },
+            }) }}
+        </li>
+    {% endfor %}
+{% endblock %}

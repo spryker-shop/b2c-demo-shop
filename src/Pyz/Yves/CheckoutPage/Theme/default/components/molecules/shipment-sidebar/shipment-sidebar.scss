@@ -1,0 +1,54 @@
+@mixin checkout-page-shipment-sidebar($name: '.shipment-sidebar') {
+    #{$name} {
+        margin-top: rem(-19);
+
+        @include helper-breakpoint-media-min($lg-min) {
+            margin-top: 0;
+        }
+
+        &__item {
+            background-color: $setting-color-gray-1;
+            margin: 0 rem(-15) rem(10);
+            padding: rem(20);
+
+            @include helper-breakpoint-media-min($lg-min) {
+                margin: 0 0 rem(20);
+            }
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+
+        &__title {
+            font: fw(bold) rem(15)/rem(17) $setting-font-family-additional;
+            margin-bottom: rem(13);
+            letter-spacing: rem(-0.17);
+
+            &--with-logo {
+                margin: rem(12) 0 rem(7);
+            }
+        }
+
+        &__text {
+            font-weight: fw(light);
+            letter-spacing: rem(-0.18);
+            margin: 0;
+        }
+
+        &__logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0;
+            width: rem(93);
+            height: rem(36);
+            border-radius: rem(2);
+            border: solid rem(1) $setting-color-input-border;
+        }
+
+        @content;
+    }
+}
+
+@include checkout-page-shipment-sidebar();

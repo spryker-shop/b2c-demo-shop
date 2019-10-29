@@ -46,8 +46,15 @@
                 height: 100%;
                 z-index: $setting-zi-underside;
                 border: rem(1) solid $setting-color-input-border;
+                background-color: $setting-color-white;
                 border-radius: rem(3);
             }
+        }
+
+        #{$name}__check {
+            pointer-events: none;
+            visibility: hidden;
+            opacity: 0;
         }
 
         &:hover,

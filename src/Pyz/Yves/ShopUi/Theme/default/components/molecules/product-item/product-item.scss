@@ -37,7 +37,11 @@ $additional-info-width: rem(350);
                 width: calc(100% - #{$image-small-width});
             }
 
-            &--checkout {
+            &--checkout-shipment {
+                padding: 0 0 0 rem(20);
+            }
+
+            &--checkout-additional-info {
                 padding: 0 0 0 rem(20);
 
                 @include helper-breakpoint-media-min($lg-min) {
@@ -76,11 +80,21 @@ $additional-info-width: rem(350);
                 align-self: flex-start;
             }
 
-            &--checkout {
+            &--checkout,
+            &--checkout-shipment {
                 text-align: left;
-                font: fw(medium) rem(16)/rem(22) $setting-font-family;
+                font: fw(medium) rem(15)/rem(17) $setting-font-family;
                 width: 100%;
                 margin-bottom: rem(5);
+            }
+
+            &--checkout-shipment {
+                @include helper-breakpoint-media-min($lg-min) {
+                    text-align: right;
+                    width: auto;
+                    margin: rem(10) 0;
+                    align-self: flex-start;
+                }
             }
         }
 
@@ -110,8 +124,12 @@ $additional-info-width: rem(350);
 
         &__options {
             &--checkout {
-                font: fw(medium) rem(16)/rem(22) $setting-font-family;
+                font: fw(medium) rem(13)/rem(15) $setting-font-family-additional;
                 margin-bottom: rem(5);
+
+                @include helper-breakpoint-media-min($lg-min) {
+                    font: fw(medium) rem(16)/rem(22) $setting-font-family;
+                }
             }
         }
 
@@ -128,6 +146,12 @@ $additional-info-width: rem(350);
 
         &--expand {
             width: 100%;
+        }
+
+        &--right-indent-from-tablet {
+            @include helper-breakpoint-media-min($lg-min) {
+                padding-right: rem(20);
+            }
         }
 
         @content;

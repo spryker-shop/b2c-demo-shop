@@ -1,14 +1,15 @@
 @mixin shop-ui-list-switches($name: '.list-switches') {
     #{$name} {
+        position: relative;
+        z-index: $setting-zi-element;
+
         @include helper-breakpoint-media-min($md-min) {
             display: flex;
             justify-content: space-between;
         }
 
-        &--two-colums {
-            @include helper-breakpoint-media-min($md-min) {
-                flex-wrap: wrap;
-            }
+        &--one-column {
+            display: block;
         }
 
         &--register-type {
@@ -36,11 +37,11 @@
                 min-width: rem(170);
             }
 
-            &--half-width {
-                @include helper-breakpoint-media-min($md-min) {
-                    min-width: calc(50% - #{rem(15)});
-                    flex-grow: 0;
-                    margin: 0 0 rem(30);
+            &--one-column {
+                margin: 0 0 rem(5);
+
+                &:last-child {
+                    margin: 0;
                 }
             }
         }
