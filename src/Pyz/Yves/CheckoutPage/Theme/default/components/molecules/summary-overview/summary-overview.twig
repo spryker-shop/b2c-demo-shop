@@ -1,22 +1,7 @@
-{% extends model('component') %}
+{% extends molecule('summary-overview', '@SprykerShop:CheckoutPage') %}
 
 {% define config = {
-    name: 'summary-overview',
-    tag: 'div'
-} %}
-
-{% define data = {
-    shipmentMethod: required,
-    expenses: [],
-    voucherDiscounts: [],
-    cartRuleDiscounts: [],
-    prices: {
-        subTotal: required,
-        storeCurrency: required,
-        tax: required,
-        grandTotal: required,
-        discountTotal: null,
-    },
+    tag: 'div',
 } %}
 
 {% block body %}

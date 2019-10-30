@@ -1,4 +1,4 @@
-@mixin checkout-page-shipment-sidebar($name: '.shipment-sidebar') {
+@mixin checkout-page-summary-sidebar($name: '.summary-sidebar') {
     #{$name} {
         margin-top: rem(-19);
 
@@ -26,13 +26,14 @@
             letter-spacing: rem(-0.17);
 
             &--with-logo {
-                margin: rem(12) 0 rem(7);
+                margin: 0 0 rem(5);
             }
         }
 
         &__text {
             font-weight: fw(light);
             letter-spacing: rem(-0.18);
+            margin-bottom: rem(15);
         }
 
         &__logo {
@@ -50,4 +51,4 @@
     }
 }
 
-@include checkout-page-shipment-sidebar();
+@include checkout-page-summary-sidebar();

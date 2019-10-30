@@ -29,9 +29,9 @@
                         {% do shipmentGroupForm.hash.setRendered %}
                     {% endif %}
 
-                    <article class="shipment-block col col--sm-12">
+                    <article class="checkout-block {{ loop.last ? 'checkout-block--last' }} grid col col--sm-12">
                         <div class="col col--sm-12 col--lg-7">
-                            <h3 class="title title--checkout-shipment">
+                            <h3 class="title title--checkout-block">
                                 {{ 'page.checkout.shipment.shipment_group_heading' | trans({
                                     '%current%': loop.index,
                                     '%total%': loop.length

@@ -44,12 +44,6 @@
                 }
             }
 
-            #{$name}__check {
-                pointer-events: none;
-                visibility: hidden;
-                opacity: 0;
-            }
-
             &:hover,
             &:focus {
                 #{$name}__box::before {
@@ -68,6 +62,12 @@
                         border: none;
                         background-color: $setting-color-alpha-9;
                     }
+                }
+
+                & ~ #{$name}__check {
+                    pointer-events: none;
+                    visibility: hidden;
+                    opacity: 0;
                 }
             }
 
