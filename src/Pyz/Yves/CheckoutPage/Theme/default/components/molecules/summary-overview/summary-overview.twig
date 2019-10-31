@@ -4,39 +4,50 @@
     tag: 'div',
 } %}
 
+{% macro itemDiscounts(discounts, title, configName) %}
+    {% if discounts | length %}
+        <li class="{{ configName }}__list-item">
+            <span>{{ title | trans }}</span>
+
+            <div class="spacing-top">
+                {% for discount in discounts %}
+                    <div class="grid grid--justify">
+                        <span class="col col--sm-8 col--lg-10 text-secondary">{{ discount.displayName }}</span>
+                        <span class="col col--expand text-right">- {{ discount.amount | money }}</span>
+                    </div>
+                {% endfor %}
+            </div>
+        </li>
+    {% endif %}
+{% endmacro %}
+
 {% block body %}
     <ul class="{{ config.name }}__list">
-
-        <li>
-            {{ 'checkout.step.summary.sub_total' | trans }}
+        <li class="{{ config.name }}__list-item">
             <span class="float-right">{{ data.prices.subTotal | money }}</span>
+            <span>{{ 'checkout.step.summary.sub_total' | trans }}</span>
+        </li>
+
+        <li class="{{ config.name }}__list-item">
+            <span class="float-right">{{ data.totalCosts | money }}</span>
+            <span>{{ 'checkout.step.summary.shipment_costs_total' | trans }}</span>
+
+            <div class="spacing-top">
+                {% for shipmentGroup in data.shipmentGroups %}
+                    {% set shippingMethod = shipmentGroup.shipment.method %}
+
+                    <div class="grid grid--justify">
+                        <span class="col col--sm-8 col--lg-10 text-secondary">{{ shippingMethod.carrierName | trans }} - {{ shippingMethod.name }}</span>
+                        <span class="col col--expand text-right">{{ shippingMethod.storeCurrencyPrice | money }}</span>
+                    </div>
+                {% endfor %}
+            </div>
         </li>
 
         {% if data.prices.discountTotal %}
-            {% if data.voucherDiscounts is not empty %}
-                {% for voucherDiscount in data.voucherDiscounts %}
-                    <li class="{{ config.name }}__list-item">
-                        {{ voucherDiscount.displayName }}
-                        <span class="float-right">{{ voucherDiscount.amount | money }}</span>
-                    </li>
-                {% endfor %}
-            {% endif %}
-
-            {% if data.cartRuleDiscounts|length %}
-                {% for ruleDiscount in data.cartRuleDiscounts %}
-                    <li class="{{ config.name }}__list-item">
-                        {{ ruleDiscount.displayName }}
-                        <span class="float-right">- {{ ruleDiscount.amount | money }}</span>
-                    </li>
-                {% endfor %}
-            {% endif %}
+            {{ _self.itemDiscounts(data.voucherDiscounts, 'cart.vouchers', config.name) }}
+            {{ _self.itemDiscounts(data.cartRuleDiscounts, 'cart.discounts', config.name) }}
         {% endif %}
-
-        <li class="{{ config.name }}__list-item">
-            <strong>{{ 'checkout.step.summary.shipping' | trans }}</strong>
-            {{ data.shipmentMethod }}
-            <span class="float-right">{{ data.prices.storeCurrency | money }}</span>
-        </li>
 
         {% widget 'SalesOrderThresholdWidgetPlugin' args [data.expenses] with {config: config} only %}
             {% block expenseItems %}
@@ -47,8 +58,8 @@
         {% endwidget %}
 
         <li class="{{ config.name }}__list-item">
-            {{ 'checkout.step.summary.tax' | trans }}
             <span class="float-right">{{ data.prices.tax | money }}</span>
+            <span>{{ 'checkout.step.summary.tax' | trans }}</span>
         </li>
 
         <li class="{{ config.name }}__list-item {{ config.name }}__list-item--total">
@@ -57,6 +68,5 @@
         </li>
 
         {% block giftCard %}{% endblock %}
-
     </ul>
 {% endblock %}

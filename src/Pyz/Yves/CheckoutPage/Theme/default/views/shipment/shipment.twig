@@ -44,7 +44,6 @@
                                 {% embed molecule('product-item') with {
                                     modifiers: ['expand', 'checkout', 'checkout-shipment', 'right-indent-from-tablet'],
                                     data: {
-                                        product: shipmentGroupForm.vars.data.items,
                                         productItem: item,
                                         canEditCart: false,
                                         additionalContainerClass: '',
@@ -67,6 +66,16 @@
                                         <div class="{{ component.renderClass(config.name ~ '__title', modifiers) }} col col--sm-12 col--lg-8">
                                             {{ data.productItem.name }}
                                         </div>
+                                    {% endblock %}
+
+                                    {% block options %}
+                                        {% if data.productItem.concreteAttributes is not empty %}
+                                            <ul>
+                                                {% for key, item in data.productItem.concreteAttributes %}
+                                                    <li>{{ ('product.attribute.' ~ key) | trans }}: {{ item }}</li>
+                                                {% endfor %}
+                                            </ul>
+                                        {% endif %}
                                     {% endblock %}
 
                                     {% block bundles %}{% endblock %}

@@ -12,7 +12,6 @@
                 class: 'col col--sm-12 col--lg-6',
                 modifiers: ['expand', 'checkout', 'checkout-additional-info'],
                 data: {
-                    product: data.shippingForm,
                     productItem: item.vars.data,
                     canEditCart: false,
                     additionalContainerClass: '',
@@ -39,6 +38,16 @@
                     <div class="{{ component.renderClass(config.name ~ '__title', modifiers) }} col">
                         {{ data.productItem.name }}
                     </div>
+                {% endblock %}
+
+                {% block options %}
+                    {% if data.productItem.concreteAttributes is not empty %}
+                        <ul>
+                            {% for key, item in data.productItem.concreteAttributes %}
+                                <li>{{ ('product.attribute.' ~ key) | trans }}: {{ item }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
                 {% endblock %}
 
                 {% block additionalInfo %}
