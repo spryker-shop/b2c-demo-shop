@@ -7,6 +7,7 @@
 
 {% define data = {
     address: required,
+    showAddressLabel: false,
 } %}
 
 {% block body %}
@@ -22,5 +23,17 @@
 
     {% if data.address.phone is not empty %}
         <li class="{{ config.name }}__item">{{ data.address.phone }}</li>
+    {% endif %}
+
+    {% if data.showAddressLabel %}
+        <li class="{{ config.name }}__item">
+            {% if data.address.isDefaultBilling %}
+                <span class="badge badge--success spacing-right spacing-y">{{'customer.order.billing_address' | trans}}</span>
+            {% endif %}
+
+            {% if data.address.isDefaultShipping %}
+                <span class="badge badge--success spacing-y">{{'customer.order.shipping_address' | trans}}</span>
+            {% endif %}
+        </li>
     {% endif %}
 {% endblock %}

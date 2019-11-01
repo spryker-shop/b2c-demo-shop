@@ -13,11 +13,14 @@
     {% set noPayment = 'Nopayment' %}
     {% set dummyPayment = 'dummyPaymentCreditCard' %}
 
-    <h4 class="title title--checkout-small grid grid--middle">
+    <h4 class="title title--secondary-small grid grid--middle">
         <span class="spacing-right spacing-right--big">{{ data.payment.paymentMethod | capitalize }}</span>
-        <span class="{{ config.name }}__logo">
-            <img src="{{ publicPath('images/logo-' ~ data.payment.dummyPayment.cardType | replace({' ': ''}) | lower ~ '.png') }}" height="20" alt="{{ data.payment.dummyPayment.cardType }}">
-        </span>
+
+        {% if data.payment.dummyPayment.cardType %}
+            <span class="{{ config.name }}__logo">
+                <img src="{{ publicPath('images/logo-' ~ data.payment.dummyPayment.cardType | replace({' ': ''}) | lower ~ '.png') }}" height="20" alt="{{ data.payment.dummyPayment.cardType }}">
+            </span>
+        {% endif %}
     </h4>
     <ul class="spacing-bottom">
         {% if data.payment.paymentSelection == noPayment %}

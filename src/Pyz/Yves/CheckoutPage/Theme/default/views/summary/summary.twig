@@ -8,12 +8,12 @@
     {% set isGiftCardExists = null %}
 
     <div class="grid">
-        <h2 class="title title--checkout col col--sm-12">{{ 'checkout.step.summary.title' | trans }}</h2>
+        <h2 class="title title--primary col col--sm-12">{{ 'checkout.step.summary.title' | trans }}</h2>
 
         {% for shipmentGroup in data.shipmentGroups %}
             <article class="checkout-block grid col col--sm-12">
                 <div class="col col--sm-12 col--lg-7">
-                    <h3 class="title title--checkout-block">
+                    <h3 class="title title--secondary-box">
                         {{ 'page.checkout.shipment.shipment_group_heading' | trans({
                             '%current%': loop.index,
                             '%total%': loop.length
@@ -25,12 +25,12 @@
                         {% set item = item.bundleProduct ?? item %}
 
                         {% embed molecule('product-item') with {
-                            modifiers: ['expand', 'checkout', 'checkout-shipment', 'right-indent-from-tablet'],
+                            modifiers: ['expand', 'secondary', 'alternative', 'right-indent-from-tablet'],
                             data: {
                                 productItem: item,
                                 canEditCart: false,
                                 additionalContainerClass: '',
-                                productOptionsModifiers: ['checkout'],
+                                productOptionsModifiers: ['alternative'],
                             },
                         } only %}
                             {% block image %}
@@ -39,7 +39,7 @@
                                         modifiers: ['no-side-indent'],
                                         data: {
                                             name: data.productItem.name,
-                                            image: data.productItem.images[0],
+                                            image: data.productItem.images[0].externalUrlLarge,
                                         },
                                     } only %}
                                 </div>
@@ -71,6 +71,7 @@
                         data: {
                             shipment: shipmentGroup.shipment,
                             isGiftCardExists: isGiftCardExists,
+                            canEdit: true,
                         },
                     } only %}
                 </div>
@@ -79,7 +80,7 @@
     </div>
 
     <div class="checkout-block">
-        <h3 class="title title--checkout-block">{{ 'checkout.step.summary.payment' | trans }}</h3>
+        <h3 class="title title--secondary-box">{{ 'checkout.step.summary.payment' | trans }}</h3>
         <div class="grid grid--justify grid--baseline">
             <div class="col col--sm-12 col--md-5">
                 {% include molecule('payment-card-information', 'CheckoutPage') with {
@@ -90,8 +91,8 @@
                 } only %}
             </div>
             <div class="col col--sm-12 col--md-5">
-                <h4 class="title title--checkout-small">{{ 'checkout.step.summary.billing_address' | trans }}</h4>
-                {% include molecule('display-address', 'CheckoutPage') with {
+                <h4 class="title title--secondary-small">{{ 'checkout.step.summary.billing_address' | trans }}</h4>
+                {% include molecule('display-address') with {
                     class: 'spacing-bottom',
                     data: {
                         address: data.billingAddress,
@@ -103,7 +104,7 @@
     </div>
 
     <div class="grid">
-        <h3 class="col col--sm-12 title title--checkout-block spacing-bottom spacing-bottom--reset spacing-top spacing-top-bigger">
+        <h3 class="col col--sm-12 title title--secondary-box spacing-bottom spacing-bottom--reset spacing-top spacing-top-bigger">
             {{ 'checkout.step.summary.total' | trans }}
         </h3>
         <div class="col col--sm-12">

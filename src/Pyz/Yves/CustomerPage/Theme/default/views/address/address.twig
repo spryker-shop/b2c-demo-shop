@@ -38,11 +38,12 @@
                         {% endblock %}
                     {% endembed %}
 
-                    {% include molecule('display-address', 'CustomerPage') with {
+                    {% include molecule('display-address') with {
                         class: 'menu menu--customer-account',
                         data: {
-                            address: address
-                        }
+                            address: address,
+                            showAddressLabel: true,
+                        },
                     } only %}
                 </div>
             </div>

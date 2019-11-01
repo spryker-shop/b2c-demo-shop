@@ -7,6 +7,7 @@
 {% define data = {
     shipment: required,
     isGiftCardExists: false,
+    canEdit: false,
 } %}
 
 {% block body %}
@@ -16,29 +17,38 @@
         shippingAddress.zipCode ~ ' ' ~ shippingAddress.city %}
 
     <div class="{{ config.name }}__item">
-        <h4 class="title title--checkout-small">{{ 'checkout.step.summary.delivery_address' | trans }}</h4>
+        <h4 class="title title--secondary-small">{{ 'checkout.step.summary.delivery_address' | trans }}</h4>
         <div class="{{ config.name }}__text">{{ fullShippingAddress }}</div>
-        <a class="link link--secondary" href="{{ url('checkout-address') }}">{{ 'general.edit.button' | trans }}</a>
+
+        {% if data.canEdit %}
+            <a class="link link--secondary spacing-top spacing-top--big" href="{{ url('checkout-address') }}">{{ 'general.edit.button' | trans }}</a>
+        {% endif %}
     </div>
 
     {% if not data.isGiftCardExists %}
         <div class="{{ config.name }}__item">
-            <h4 class="title title--checkout-small">{{ 'checkout.step.summary.delivery_method' | trans }}</h4>
-            <h4 class="title title--checkout-small spacing-bottom grid grid--justify grid--middle">
+            <h4 class="title title--secondary-small">{{ 'checkout.step.summary.delivery_method' | trans }}</h4>
+            <h4 class="title title--secondary-small spacing-bottom grid grid--justify grid--middle">
                 <span class="col col--sm-7">{{ data.shipment.method.carrierName | trans }}</span>
                 <span class="{{ config.name }}__logo col">
                     <img src="{{ publicPath('images/shipment-' ~ data.shipment.method.carrierName | replace({' ': ''}) ~ '.png') }}" width="65" alt="{{ data.shipment.method.carrierName }}">
                 </span>
             </h4>
             <div class="{{ config.name }}__text">{{ data.shipment.method.name }}: {{ data.shipment.method.storeCurrencyPrice | money(true, data.shipment.method.currencyIsoCode) }}</div>
-            <a class="link link--secondary" href="{{ url('checkout-shipment') }}">{{ 'general.edit.button' | trans }}</a>
+
+            {% if data.canEdit %}
+                <a class="link link--secondary spacing-top spacing-top--big" href="{{ url('checkout-shipment') }}">{{ 'general.edit.button' | trans }}</a>
+            {% endif %}
         </div>
 
         {% if data.shipment.requestedDeliveryDate %}
             <div class="{{ config.name }}__item">
-                <h4 class="title title--checkout-small">{{ 'checkout.step.summary.requested_delivery_date' | trans }}</h4>
-                <div class="title title--checkout-small">{{ data.shipment.requestedDeliveryDate }}</div>
-                <a class="link link--secondary" href="{{ url('checkout-shipment') }}">{{ 'general.edit.button' | trans }}</a>
+                <h4 class="title title--secondary-small">{{ 'checkout.step.summary.requested_delivery_date' | trans }}</h4>
+                <div class="{{ config.name }}__text">{{ data.shipment.requestedDeliveryDate | formatDate }}</div>
+
+                {% if data.canEdit %}
+                    <a class="link link--secondary spacing-top spacing-top--big" href="{{ url('checkout-shipment') }}">{{ 'general.edit.button' | trans }}</a>
+                {% endif %}
             </div>
         {% endif %}
     {% endif %}

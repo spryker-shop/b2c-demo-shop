@@ -18,7 +18,7 @@ $additional-info-width: rem(350);
                 margin-bottom: rem(5);
             }
 
-            &--checkout {
+            &--secondary {
                 font-size: rem(15);
                 line-height: rem(18);
                 margin: rem(10) 0;
@@ -37,11 +37,11 @@ $additional-info-width: rem(350);
                 width: calc(100% - #{$image-small-width});
             }
 
-            &--checkout-shipment {
+            &--alternative {
                 padding: 0 0 0 rem(20);
             }
 
-            &--checkout-additional-info {
+            &--additional-info {
                 padding: 0 0 0 rem(20);
 
                 @include helper-breakpoint-media-min($lg-min) {
@@ -80,15 +80,15 @@ $additional-info-width: rem(350);
                 align-self: flex-start;
             }
 
-            &--checkout,
-            &--checkout-shipment {
+            &--secondary,
+            &--alternative {
                 text-align: left;
                 font: fw(medium) rem(15)/rem(17) $setting-font-family;
                 width: 100%;
                 margin-bottom: rem(5);
             }
 
-            &--checkout-shipment {
+            &--alternative {
                 @include helper-breakpoint-media-min($lg-min) {
                     text-align: right;
                     width: auto;
@@ -123,7 +123,7 @@ $additional-info-width: rem(350);
         }
 
         &__options {
-            &--checkout {
+            &--secondary {
                 font: fw(medium) rem(13)/rem(15) $setting-font-family-additional;
                 margin-bottom: rem(5);
 

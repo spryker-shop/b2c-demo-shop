@@ -26,7 +26,7 @@
         {% block fields %}
             {% set hasShippingAddresses = data.form.shippingAddress.id_customer_address is defined %}
 
-            <h2 class="title title--checkout col col--sm-12 grid grid--baseline">
+            <h2 class="title title--primary col col--sm-12 grid grid--baseline">
                 <span class="col col--sm-12 col--md-8">{{ 'page.checkout.address.shipping-address' | trans }}</span>
                 {% if is_granted('ROLE_USER') %}
                     <a class="link link--secondary link--align-right-from-tablet spacing-top col col--sm-12 col--md-4" href="{{ url('customer/address') }}">
@@ -75,7 +75,7 @@
             {% endif %}
 
             <div class="grid grid--expand col col--sm-12 spacing-bottom spacing-bottom--biggest">
-                <h2 class="title title--checkout col col--sm-12">{{ 'page.checkout.address.billing-address' | trans }}</h2>
+                <h2 class="title title--primary col col--sm-12">{{ 'page.checkout.address.billing-address' | trans }}</h2>
 
                 <div class="col col--sm-12 {{ embed.jsAddressClass }}__billing-same-as-shipping">
                     {{ form_row(data.form.billingSameAsShipping, {

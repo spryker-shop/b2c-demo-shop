@@ -27,9 +27,9 @@
                 <a href="{{ data.productItem.url }}" class="{{ component.renderClass(config.name ~ '__image', modifiers) }} col">
                     {% include molecule('product-image') with {
                         data: {
-                            name: data.productItem.name | default(''),
-                            image: data.productItem.images is empty ? null : (data.productItem.images | first)
-                        }
+                            name: data.productItem.name | default,
+                            image: data.productItem.images[0].externalUrlLarge | default(null),
+                        },
                     } only %}
 
                     {% block labels %}{% endblock %}

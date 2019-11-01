@@ -22,7 +22,7 @@
             {% set shipmentGroupCollectionForm = data.form.shipmentGroups | default %}
 
             <div class="grid">
-                <h2 class="title title--checkout col col--sm-12">{{ 'checkout.step.shipment.title' | trans }}</h2>
+                <h2 class="title title--primary col col--sm-12">{{ 'checkout.step.shipment.title' | trans }}</h2>
 
                 {% for shipmentGroupForm in shipmentGroupCollectionForm %}
                     {% if shipmentGroupForm.hash is defined %}
@@ -31,7 +31,7 @@
 
                     <article class="checkout-block {{ loop.last ? 'checkout-block--last' }} grid col col--sm-12">
                         <div class="col col--sm-12 col--lg-7">
-                            <h3 class="title title--checkout-block">
+                            <h3 class="title title--secondary-box">
                                 {{ 'page.checkout.shipment.shipment_group_heading' | trans({
                                     '%current%': loop.index,
                                     '%total%': loop.length
@@ -42,12 +42,12 @@
                                 {% set item = item.bundleProduct ?? item %}
 
                                 {% embed molecule('product-item') with {
-                                    modifiers: ['expand', 'checkout', 'checkout-shipment', 'right-indent-from-tablet'],
+                                    modifiers: ['expand', 'secondary', 'alternative', 'right-indent-from-tablet'],
                                     data: {
                                         productItem: item,
                                         canEditCart: false,
                                         additionalContainerClass: '',
-                                        productOptionsModifiers: ['checkout'],
+                                        productOptionsModifiers: ['alternative'],
                                     },
                                 } only %}
                                     {% block image %}
@@ -56,7 +56,7 @@
                                                 modifiers: ['no-side-indent'],
                                                 data: {
                                                     name: data.productItem.name,
-                                                    image: data.productItem.images[0],
+                                                    image: data.productItem.images[0].externalUrlLarge,
                                                 },
                                             } only %}
                                         </div>

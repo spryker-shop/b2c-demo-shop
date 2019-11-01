@@ -10,12 +10,12 @@
 
             {% embed molecule('product-item') with {
                 class: 'col col--sm-12 col--lg-6',
-                modifiers: ['expand', 'checkout', 'checkout-additional-info'],
+                modifiers: ['expand', 'secondary', 'additional-info'],
                 data: {
                     productItem: item.vars.data,
                     canEditCart: false,
                     additionalContainerClass: '',
-                    productOptionsModifiers: ['checkout'],
+                    productOptionsModifiers: ['alternative'],
                 },
                 embed: {
                     item: item,
@@ -28,7 +28,7 @@
                             modifiers: ['no-side-indent'],
                             data: {
                                 name: data.productItem.name,
-                                image: data.productItem.images[0],
+                                image: data.productItem.images[0].externalUrlLarge,
                             },
                         } only %}
                     </div>
