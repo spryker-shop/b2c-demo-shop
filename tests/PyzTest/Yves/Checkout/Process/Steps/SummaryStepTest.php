@@ -13,6 +13,7 @@ use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Generated\Shared\Transfer\ShipmentTransfer;
 use SprykerShop\Yves\CheckoutPage\CheckoutPageConfig;
+use SprykerShop\Yves\CheckoutPage\Dependency\Client\CheckoutPageToCheckoutClientInterface;
 use SprykerShop\Yves\CheckoutPage\Dependency\Client\CheckoutPageToProductBundleClientInterface;
 use SprykerShop\Yves\CheckoutPage\Dependency\Service\CheckoutPageToShipmentServiceBridge;
 use SprykerShop\Yves\CheckoutPage\Dependency\Service\CheckoutPageToShipmentServiceInterface;
@@ -78,7 +79,8 @@ class SummaryStepTest extends Unit
             $this->createShipmentServiceMock(),
             $this->createConfigMock(),
             'shipment',
-            'escape_route'
+            'escape_route',
+            $this->getCheckoutClientMock()
         );
     }
 
@@ -115,5 +117,13 @@ class SummaryStepTest extends Unit
     protected function createConfigMock(): CheckoutPageConfig
     {
         return $this->getMockBuilder(CheckoutPageConfig::class)->getMock();
+    }
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject|\SprykerShop\Yves\CheckoutPage\Dependency\Client\CheckoutPageToCheckoutClientInterface
+     */
+    public function getCheckoutClientMock(): CheckoutPageToCheckoutClientInterface
+    {
+        return $this->getMockBuilder(CheckoutPageToCheckoutClientInterface::class)->getMock();
     }
 }
