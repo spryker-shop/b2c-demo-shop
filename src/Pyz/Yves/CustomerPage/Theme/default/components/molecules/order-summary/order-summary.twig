@@ -1,44 +1,65 @@
-{% extends model('component') %}
+{% extends molecule('order-summary', '@SprykerShop:CustomerPage') %}
 
 {% define config = {
-    name: 'order-summary',
-    tag: 'ul'
-} %}
-
-{% define data = {
-    order: required
+    tag: 'div',
 } %}
 
 {% block body %}
-    <li class="menu__item">
-        {{ 'customer.order.subTotal' | trans }}: 
-        {{ data.order.totals.subtotal | money(true, data.order.currencyIsoCode) }}
-    </li>
-    {% for expense in data.order.expenses %}
-        <li class="menu__item">
-        {% if expense.type == 'SHIPMENT_EXPENSE_TYPE' %}{{ 'customer.order.shipment' | trans }} {% endif %}{{ expense.name | trans }}:
-            {{ expense.unitPrice | money(true, data.order.currencyIsoCode) }}
+    <ul class="{{ config.name }}__list">
+        <li class="{{ config.name }}__item">
+            <span class="float-right">{{ data.order.totals.subtotal | money(true, data.order.currencyIsoCode) }}</span>
+            {{ 'customer.order.subTotal' | trans }}
         </li>
-    {% endfor %}
-    <li class="menu__item">
-        {{ 'customer.order.discount.total' | trans }}: 
-        - {{ data.order.totals.discountTotal | money(true, data.order.currencyIsoCode) }}
-    </li>
-    <li class="menu__item">
-        {% if data.order.totals.canceledTotal %}
-            {{ 'customer.order.canceledTotal' | trans }}: 
-            - {{ data.order.totals.canceledTotal | money(true, data.order.currencyIsoCode) }}
-        {% endif %}
-    </li>
-    <li class="menu__item">
-        <strong>{{ 'customer.order.grandTotal' | trans }}: 
-        {{ data.order.totals.grandTotal | money(true, data.order.currencyIsoCode) }}</strong>
-    </li>
-    <li class="menu__item">
-        {% include molecule('gift-card-order-summary', 'GiftCardWidget') ignore missing with {
-            data: {
-                order: data.order,
-            },
-        } only %}
-    </li>
+
+        <li class="{{ config.name }}__item">
+            {{ 'customer.order.expenseTotal' | trans }}
+
+            <div class="spacing-top">
+                {% for expense in data.order.expenses %}
+                    <div class="grid grid--justify">
+                        <span class="col col--sm-8 col--lg-10 text-secondary">{% if expense.type == 'SHIPMENT_EXPENSE_TYPE' %}{{ 'customer.order.shipment' | trans }} {% endif %}{{ expense.name | trans }}</span>
+                        <span class="col col--expand text-right">- {{ expense.unitPrice | money(true, data.order.currencyIsoCode) }}</span>
+                    </div>
+                {% endfor %}
+            </div>
+        </li>
+
+        <li class="{{ config.name }}__item">
+            {{ 'cart.discounts' | trans }}
+
+            <div class="spacing-top">
+                {% for discount in data.order.calculatedDiscounts %}
+                    <div class="grid grid--justify">
+                        <span class="col col--sm-8 col--lg-10 text-secondary">{{ discount.displayName | trans }}</span>
+                        <span class="col col--expand text-right">- {{ discount.sumAmount | money(true, data.order.currencyIsoCode) }}</span>
+                    </div>
+                {% endfor %}
+            </div>
+        </li>
+
+        <li class="{{ config.name }}__item">
+            {% if data.order.totals.canceledTotal %}
+                <span class="float-right">{{ data.order.totals.canceledTotal | money(true, data.order.currencyIsoCode) }}</span>
+                {{ 'customer.order.canceledTotal' | trans }}
+            {% endif %}
+        </li>
+
+        <li class="{{ config.name }}__item">
+            <span class="float-right">{{ data.order.totals.taxTotal.amount | money(true, data.order.currencyIsoCode) }}</span>
+            {{ 'customer.order.taxTotal' | trans }}
+        </li>
+
+        <li class="{{ config.name }}__item {{ config.name }}__item--total">
+            <strong class="float-right">{{ data.order.totals.grandTotal | money(true, data.order.currencyIsoCode) }}</strong>
+            <strong>{{ 'customer.order.grandTotal' | trans }}</strong>
+        </li>
+
+        <li class="{{ config.name }}__item">
+            {% include molecule('gift-card-order-summary', 'GiftCardWidget') ignore missing with {
+                data: {
+                    order: data.order,
+                },
+            } only %}
+        </li>
+    </ul>
 {% endblock %}

@@ -133,20 +133,12 @@
                 },
             } only %}
                 {% block body %}
-                    {% embed molecule('summary-overview', 'CheckoutPage') with {
+                    {% include molecule('summary-overview', 'CheckoutPage') with {
                         data: embed.overview,
                         embed: {
                             cart: embed.cart,
                         },
                     } only %}
-                        {% block giftCard %}
-                            {% include molecule('gift-card-payment-summary', 'GiftCardWidget') ignore missing with {
-                                data: {
-                                    cart: embed.cart,
-                                },
-                            } only %}
-                        {% endblock %}
-                    {% endembed %}
 
                     {{ parent() }}
                 {% endblock %}

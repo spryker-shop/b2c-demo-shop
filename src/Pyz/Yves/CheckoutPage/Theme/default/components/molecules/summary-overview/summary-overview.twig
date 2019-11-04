@@ -67,6 +67,12 @@
             <strong class="float-right">{{ data.prices.grandTotal | money }}</strong>
         </li>
 
-        {% block giftCard %}{% endblock %}
+        <li class="{{ config.name }}__list-item">
+            {% include molecule('gift-card-payment-summary', 'GiftCardWidget') ignore missing with {
+                data: {
+                    cart: embed.cart,
+                },
+            } only %}
+        </li>
     </ul>
 {% endblock %}

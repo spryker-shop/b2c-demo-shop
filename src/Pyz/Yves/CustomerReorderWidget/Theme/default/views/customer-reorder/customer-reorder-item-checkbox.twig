@@ -1,0 +1,26 @@
+{% extends template('widget') %}
+
+{% define data = {
+    availability: _widget.availability,
+    idSalesOrderItem: _widget.item.idSalesOrderItem,
+    checkboxClasses: 'js-customer-reorder-form__selection',
+    additionalModifiers: [],
+} %}
+
+{% block body %}
+    {% embed atom('checkbox') with {
+        modifiers: data.additionalModifiers,
+        attributes: {
+            name: 'items[]',
+            disabled: not data.availability,
+            value: data.idSalesOrderItem,
+        },
+        embed: {
+            checkboxClasses: data.checkboxClasses,
+        },
+    } only %}
+        {%- block inputClass -%}
+            {{ embed.checkboxClasses }}
+        {%- endblock -%}
+    {% endembed %}
+{% endblock %}

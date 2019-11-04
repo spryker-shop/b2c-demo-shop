@@ -1,4 +1,5 @@
 $image-width: rem(120);
+$image-width-with-checkbox: rem(158);
 $image-small-width: rem(100);
 $additional-info-width: rem(350);
 
@@ -47,6 +48,10 @@ $additional-info-width: rem(350);
                 @include helper-breakpoint-media-min($lg-min) {
                     width: calc(100% - #{$image-width} - #{$additional-info-width});
                 }
+            }
+
+            &--with-checkbox {
+                width: calc(100% - #{$image-width-with-checkbox});
             }
         }
 
