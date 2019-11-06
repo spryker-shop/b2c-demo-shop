@@ -123,6 +123,8 @@ services:
             password: "secret"
         endpoints:
             queue.spryker.local:
+            locahost:5672:
+                protocol: tcp
     session:
         engine: redis
     key_value_store:
@@ -132,6 +134,9 @@ services:
                 protocol: tcp
     search:
         engine: elastic
+        endpoints:
+            localhost:9200:
+                protocol: tcp
     scheduler:
         engine: jenkins
         endpoints:
