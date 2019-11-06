@@ -31,7 +31,7 @@
             <h4 class="title title--secondary-small spacing-bottom grid grid--justify grid--middle">
                 <span class="col col--sm-7">{{ data.shipment.method.carrierName | trans }}</span>
                 <span class="{{ config.name }}__logo col">
-                    <img src="{{ publicPath('images/shipment-' ~ data.shipment.method.carrierName | replace({' ': ''}) ~ '.png') }}" width="65" alt="{{ data.shipment.method.carrierName }}">
+                    <img class="{{ config.name }}__logo-image" src="{{ publicPath('images/shipment-' ~ data.shipment.method.carrierName | replace({' ': ''}) ~ '.png') }}" alt="{{ data.shipment.method.carrierName }}">
                 </span>
             </h4>
             <div class="{{ config.name }}__text">{{ data.shipment.method.name }}: {{ data.shipment.method.storeCurrencyPrice | money(true, data.shipment.method.currencyIsoCode) }}</div>
