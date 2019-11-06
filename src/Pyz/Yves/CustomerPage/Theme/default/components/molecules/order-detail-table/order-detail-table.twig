@@ -9,7 +9,7 @@
                 <h3 class="title title--secondary-box">
                     {{ 'page.checkout.shipment.shipment_group_heading' | trans({
                         '%current%': loop.index,
-                        '%total%': loop.length
+                        '%total%': loop.length,
                     }) }}
                 </h3>
 
@@ -33,12 +33,12 @@
                             <div class="grid grid--middle col">
                                 {% if embed.order is not empty %}
                                     <span class="spacing-right">
-                                    {% widget 'CustomerReorderItemCheckboxWidget' args [data.productItem] with {
-                                        data: {
-                                            additionalModifiers: ['big'],
-                                        },
-                                    } only %}{% endwidget %}
-                                </span>
+                                        {% widget 'CustomerReorderItemCheckboxWidget' args [data.productItem] with {
+                                            data: {
+                                                additionalModifiers: ['big'],
+                                            },
+                                        } only %}{% endwidget %}
+                                    </span>
                                 {% endif %}
 
                                 <div class="{{ component.renderClass(config.name ~ '__image', modifiers) }} col">

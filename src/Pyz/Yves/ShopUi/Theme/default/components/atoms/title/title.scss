@@ -17,6 +17,27 @@
             margin-bottom: rem(40);
         }
 
+        &--checkout {
+            width: 100%;
+            margin-bottom: rem(32);
+            padding-bottom: rem(10);
+            border-bottom: dotted rem(1) $setting-color-gray-3;
+
+            @include helper-breakpoint-media-min($md-min) {
+                margin-bottom: rem(58);
+            }
+
+            &:not(:first-of-type) {
+                margin-top: rem(42);
+            }
+        }
+
+        &--shipment {
+            margin: 0 rem(10) 0 0;
+            border: none;
+            padding: 0;
+        }
+
         &--primary {
             width: 100%;
             margin-bottom: rem(20);

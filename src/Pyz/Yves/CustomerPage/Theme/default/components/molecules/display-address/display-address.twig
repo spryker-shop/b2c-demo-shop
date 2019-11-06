@@ -1,0 +1,39 @@
+{# @deprecated This component is deprecated. Use molecule('display-address') instead. #}
+{% extends model('component') %}
+
+{% define config = {
+    name: 'display-address',
+    tag: 'ul'
+} %}
+
+{% define data = {
+    address: required
+} %}
+
+{% block body %}
+    <li class="menu__item">{{ data.address.salutation }} <strong>{{ data.address.firstName }} {{ data.address.lastName }}</strong></li>
+
+    {% if data.address.company is not empty %}
+        <li class="menu__item">{{ data.address.company }}</li>
+    {% endif %}
+
+    <li class="menu__item">{{ data.address.address1 }} {{ data.address.address2 }}</li>
+    <li class="menu__item">{{ data.address.address3 }}</li>
+    <li class="menu__item">{{ data.address.zipCode }} {{ data.address.city }}, {{ ('countries.iso.' ~ data.address.iso2code) | trans }}</li>
+
+    {% if data.address.phone is not empty %}
+        <li class="menu__item">{{ data.address.phone }}</li>
+    {% endif %}
+    {% if data.address.isDefaultBilling or data.address.isDefaultShipping %}
+        <li class="menu__item spacing-y">
+            {% if data.address.isDefaultBilling %}
+                <span class="badge badge--success spacing-right">{{'customer.order.billing_address' | trans}}</span>
+            {% endif %}
+
+            {% if data.address.isDefaultShipping %}
+                <span class="badge badge--success">{{'customer.order.shipping_address' | trans}}</span>
+            {% endif %}
+        </li>
+    {% endif %}
+
+{% endblock %}

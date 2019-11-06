@@ -14,26 +14,28 @@
 } %}
 
 {% block body %}
-    {% for key, choice in data.choices %}
-        <li class="{{ component.renderClass(config.name ~ '__item', modifiers) }}">
-            {% set fullIndex = loop.index ~ '-' ~ data.providerIndex %}
+    {% if data.choices %}
+        {% for key, choice in data.choices %}
+            <li class="{{ component.renderClass(config.name ~ '__item', modifiers) }}">
+                {% set fullIndex = loop.index ~ '-' ~ data.providerIndex %}
 
-            {{ form_row(data.form[key], {
-                label: data.form[key].vars.label,
-                required: false,
-                component: data.targetClassName ? molecule('toggler-radio'),
-                rowAttr: {
-                    class: data.rowAttrClass,
-                },
-                attributes: {
-                    'target-class-name': data.targetClassName ? data.targetClassName ~ fullIndex,
-                    checked: key == 0,
-                },
-            }) }}
+                {{ form_row(data.form[key], {
+                    label: data.form[key].vars.label,
+                    required: false,
+                    component: data.targetClassName ? molecule('toggler-radio'),
+                    rowAttr: {
+                        class: data.rowAttrClass,
+                    },
+                    attributes: {
+                        'target-class-name': data.targetClassName ? data.targetClassName ~ fullIndex,
+                        checked: key == 0,
+                    },
+                }) }}
 
-            {% if key == 0 %}
-                {% block firstItemImages %}{% endblock %}
-            {% endif %}
-        </li>
-    {% endfor %}
+                {% if key == 0 %}
+                    {% block firstItemImages %}{% endblock %}
+                {% endif %}
+            </li>
+        {% endfor %}
+    {% endif %}
 {% endblock %}
