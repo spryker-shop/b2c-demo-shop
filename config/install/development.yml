@@ -199,11 +199,18 @@ sections:
                 - US
                 - DE
 
-        setup-search:
-            command: "vendor/bin/console setup:search"
+        setup-search-create-indexes:
+            command: "vendor/bin/console search:setup:indexes"
             stores: true
             groups:
                 - elastic
+
+        setup-seach-create-index-map:
+            command: "vendor/bin/console search:setup:index-map"
+            stores: true
+            groups:
+                - elastic
+
 
     demodata:
         import:
