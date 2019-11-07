@@ -16,10 +16,27 @@ use Spryker\Shared\Twig\Plugin\RuntimeLoaderTwigPlugin;
 use Spryker\Shared\Twig\Plugin\SecurityTwigPlugin;
 use Spryker\Shared\Twig\Plugin\TranslationTwigPlugin;
 use Spryker\Zed\Application\Communication\Plugin\Twig\ApplicationTwigPlugin;
-use Spryker\Zed\Chart\Communication\Plugin\Twig\ChartTwigPlugin;
+use Spryker\Zed\ChartGui\Communication\Plugin\Twig\Chart\ChartGuiTwigPlugin;
 use Spryker\Zed\Currency\Communication\Plugin\Twig\CurrencyTwigPlugin;
+use Spryker\Zed\Gui\Communication\Plugin\Twig\AssetsPathTwigPlugin;
+use Spryker\Zed\Gui\Communication\Plugin\Twig\Buttons\Action\BackActionButtonTwigPlugin;
+use Spryker\Zed\Gui\Communication\Plugin\Twig\Buttons\Action\CreateActionButtonTwigPlugin;
+use Spryker\Zed\Gui\Communication\Plugin\Twig\Buttons\Action\EditActionButtonTwigPlugin;
+use Spryker\Zed\Gui\Communication\Plugin\Twig\Buttons\Action\RemoveActionButtonTwigPlugin;
+use Spryker\Zed\Gui\Communication\Plugin\Twig\Buttons\Action\ViewActionButtonTwigPlugin;
+use Spryker\Zed\Gui\Communication\Plugin\Twig\Buttons\ButtonGroupTwigPlugin;
+use Spryker\Zed\Gui\Communication\Plugin\Twig\Buttons\Form\SubmitButtonTwigPlugin;
+use Spryker\Zed\Gui\Communication\Plugin\Twig\Buttons\Table\BackTableButtonTwigPlugin;
+use Spryker\Zed\Gui\Communication\Plugin\Twig\Buttons\Table\CreateTableButtonTwigPlugin;
+use Spryker\Zed\Gui\Communication\Plugin\Twig\Buttons\Table\EditTableButtonTwigPlugin;
+use Spryker\Zed\Gui\Communication\Plugin\Twig\Buttons\Table\RemoveTableButtonTwigPlugin;
+use Spryker\Zed\Gui\Communication\Plugin\Twig\Buttons\Table\ViewTableButtonTwigPlugin;
 use Spryker\Zed\Gui\Communication\Plugin\Twig\FormRuntimeLoaderTwigPlugin;
+use Spryker\Zed\Gui\Communication\Plugin\Twig\GuiFilterTwigPlugin;
 use Spryker\Zed\Gui\Communication\Plugin\Twig\GuiTwigLoaderPlugin;
+use Spryker\Zed\Gui\Communication\Plugin\Twig\TabsTwigPlugin;
+use Spryker\Zed\Gui\Communication\Plugin\Twig\UrlDecodeTwigPlugin;
+use Spryker\Zed\Gui\Communication\Plugin\Twig\UrlTwigPlugin;
 use Spryker\Zed\Money\Communication\Plugin\Twig\MoneyTwigPlugin;
 use Spryker\Zed\Scheduler\Communication\Plugin\Twig\SchedulerTwigPlugin;
 use Spryker\Zed\Translator\Communication\Plugin\Twig\TranslatorTwigPlugin;
@@ -47,7 +64,7 @@ class TwigDependencyProvider extends SprykerTwigDependencyProvider
             new RuntimeLoaderTwigPlugin(),
             new FormRuntimeLoaderTwigPlugin(),
             new ApplicationTwigPlugin(),
-            new ChartTwigPlugin(),
+            new ChartGuiTwigPlugin(),
             new UserTwigPlugin(),
             new MoneyTwigPlugin(),
             new CurrencyTwigPlugin(),
@@ -55,6 +72,27 @@ class TwigDependencyProvider extends SprykerTwigDependencyProvider
             new TranslatorTwigPlugin(),
             new DateTimeFormatterTwigPlugin(),
             new SchedulerTwigPlugin(),
+
+            new AssetsPathTwigPlugin(),
+            new TabsTwigPlugin(),
+            new UrlTwigPlugin(),
+            new UrlDecodeTwigPlugin(),
+            // navigation buttons
+            new ButtonGroupTwigPlugin(),
+            new BackActionButtonTwigPlugin(),
+            new CreateActionButtonTwigPlugin(),
+            new ViewActionButtonTwigPlugin(),
+            new EditActionButtonTwigPlugin(),
+            new RemoveActionButtonTwigPlugin(),
+            // table row buttons
+            new EditTableButtonTwigPlugin(),
+            new BackTableButtonTwigPlugin(),
+            new CreateTableButtonTwigPlugin(),
+            new ViewTableButtonTwigPlugin(),
+            new RemoveTableButtonTwigPlugin(),
+            // Form buttons
+            new SubmitButtonTwigPlugin(),
+            new GuiFilterTwigPlugin(),
         ];
     }
 
