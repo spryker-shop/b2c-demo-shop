@@ -33,7 +33,6 @@ class SalesDependencyProvider extends SprykerSalesDependencyProvider
         return [
             new ProductIdHydratorPlugin(),
             new ProductOptionOrderHydratePlugin(),
-            new ProductOptionSortHydratePlugin(),
             new ProductBundleOrderHydratePlugin(),
             new DiscountOrderHydratePlugin(),
             new ShipmentOrderHydratePlugin(),
