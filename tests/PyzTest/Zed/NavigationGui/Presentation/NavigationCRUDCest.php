@@ -61,7 +61,7 @@ class NavigationCRUDCest
         $i->expect('Navigation is persisted in Zed.');
 
         $i->setNameField('Acceptance navigation (1)');
-        $i->setKeyField('acceptance1');
+        $i->setKeyField(Factory::create()->slug);
         $i->checkIsActiveField(true);
         $i->submitNavigationForm();
         $i->seeCurrentUrlEquals(NavigationPage::URL);
