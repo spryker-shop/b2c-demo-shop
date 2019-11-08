@@ -4,9 +4,16 @@
         "at-rule-empty-line-before": [
             "always",
             {
+                "except": [
+                    "first-nested"
+                ],
                 "ignore": [
-                    "inside-block",
-                    "blockless-after-blockless"
+                    "after-comment",
+                    "blockless-after-blockless",
+                    "blockless-after-same-name-blockless"
+                ],
+                "ignoreAtRules": [
+                    "else"
                 ]
             }
         ],
@@ -31,6 +38,9 @@
             {
                 "except": [
                     "first-nested"
+                ],
+                "ignore": [
+                    "stylelint-commands"
                 ]
             }
         ],
@@ -47,13 +57,14 @@
         "declaration-block-trailing-semicolon": "always",
         "declaration-colon-space-after": "always",
         "declaration-colon-space-before": "never",
+        "declaration-empty-line-before": "never",
         "font-family-name-quotes": "always-where-recommended",
         "font-family-no-duplicate-names": true,
         "font-family-no-missing-generic-family-keyword": true,
         "function-calc-no-unspaced-operator": true,
         "function-comma-newline-before": "never-multi-line",
         "function-comma-newline-after": "never-multi-line",
-        "function-comma-space-after": "always",
+        "function-comma-space-after": "always-single-line",
         "function-comma-space-before": "never",
         "function-linear-gradient-no-nonstandard-direction": true,
         "function-max-empty-lines": 0,
@@ -61,11 +72,14 @@
         "function-parentheses-newline-inside": "never-multi-line",
         "function-parentheses-space-inside": "never",
         "function-url-quotes": "always",
-        "function-url-scheme-blacklist": [
-            "ftp"
-        ],
+        "function-url-scheme-blacklist": "ftp",
         "function-whitespace-after": "always",
-        "indentation": 4,
+        "indentation": [
+            4,
+            {
+                "indentInsideParens": "once-at-root-twice-in-block"
+            }
+        ],
         "keyframe-declaration-no-important": true,
         "keyframes-name-pattern": "",
         "length-zero-no-unit": true,
@@ -85,10 +99,13 @@
         "no-descending-specificity": true,
         "no-duplicate-at-import-rules": true,
         "no-duplicate-selectors": true,
+        "no-empty-first-line": true,
+        "no-empty-source": true,
+        "no-eol-whitespace": true,
         "no-extra-semicolons": true,
         "no-missing-end-of-source-newline": true,
         "number-leading-zero": "always",
-        "number-max-precision": 3,
+        "number-max-precision": 4,
         "number-no-trailing-zeros": true,
         "property-case": "lower",
         "property-no-unknown": true,
@@ -97,7 +114,8 @@
             "always",
             {
                 "ignore": [
-                    "inside-block"
+                    "after-comment",
+                    "first-nested"
                 ]
             }
         ],
@@ -137,17 +155,13 @@
         "selector-type-no-unknown": [
             true,
             {
-                "ignore": [
-                    "custom-elements"
-                ]
+                "ignore": "custom-elements"
             }
         ],
         "shorthand-property-no-redundant-values": true,
         "string-no-newline": true,
         "string-quotes": "single",
-        "unit-blacklist": [
-            "pt"
-        ],
+        "unit-blacklist": "pt",
         "unit-case": "lower",
         "unit-no-unknown": true,
         "value-keyword-case": "lower",

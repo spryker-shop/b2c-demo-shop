@@ -5,23 +5,23 @@
 } %}
 
 {% define data = {
-    options: null
+    options: null,
 } %}
 
 {% block component %}
     {% if data.options is not empty %}
-        {{parent()}}
+        {{ parent() }}
     {% endif %}
 {% endblock %}
 
 {% block body %}
-    <ul class="list list--expand list--plus">
+    <ul>
         {% for option in data.options %}
-            <li class="list__item {{ config.name }}__item">
-                {{ option.value | trans }}
+            <li class="{{ config.name }}__item grid">
+                <span class="col col--sm-9">+ {{ option.value | trans }}</span>
 
                 {% if can('SeePricePermissionPlugin') %}
-                    <span class="float-right">{{ option.unitPrice | money }}</span>
+                    <span class="spacing-left spacing-left--inner text-right col col--sm-3">{{ option.unitPrice | money }}</span>
                 {% endif %}
             </li>
         {% endfor %}

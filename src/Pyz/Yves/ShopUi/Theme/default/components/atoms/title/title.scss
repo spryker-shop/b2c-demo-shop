@@ -21,7 +21,7 @@
             width: 100%;
             margin-bottom: rem(32);
             padding-bottom: rem(10);
-            border-bottom: dotted rem(1) $setting-color-gray-3;
+            border-bottom: rem(1) dotted $setting-color-gray-3;
 
             @include helper-breakpoint-media-min($md-min) {
                 margin-bottom: rem(58);
@@ -36,6 +36,53 @@
             margin: 0 rem(10) 0 0;
             border: none;
             padding: 0;
+        }
+
+        &--primary {
+            width: 100%;
+            margin-bottom: rem(20);
+            padding-bottom: rem(10);
+            border-bottom: rem(1) dotted $setting-color-gray-3;
+            font-size: rem(32);
+
+            @include helper-breakpoint-media-min($lg-min) {
+                font-size: rem(34);
+            }
+        }
+
+        &--secondary {
+            font: fw(bold) rem(25)/rem(30) $setting-font-family-additional;
+            border-bottom: rem(1) dotted $setting-color-gray-3;
+            padding-bottom: rem(7);
+            margin-bottom: rem(20);
+            letter-spacing: 0;
+
+            @include helper-breakpoint-media-min($lg-min) {
+                padding-bottom: rem(15);
+                letter-spacing: rem(-0.3);
+                font: fw(medium) rem(28)/rem(34);
+            }
+        }
+
+        &--secondary-box {
+            font: fw(bold) rem(25)/rem(30) $setting-font-family-additional;
+            border-bottom: rem(1) dotted $setting-color-gray-3;
+            padding-bottom: rem(8);
+            margin-bottom: rem(16);
+            letter-spacing: 0;
+
+            @include helper-breakpoint-media-min($lg-min) {
+                font: fw(medium) rem(21)/rem(25);
+                border: none;
+                padding: 0;
+                letter-spacing: rem(-0.24);
+            }
+        }
+
+        &--secondary-small {
+            font: fw(bold) rem(15)/rem(17) $setting-font-family-additional;
+            margin-bottom: rem(13);
+            letter-spacing: rem(-0.17);
         }
 
         &--account-main {
@@ -69,7 +116,7 @@
         }
 
         &--review-summary {
-            border-bottom: dotted rem(1) $setting-color-gray-3;
+            border-bottom: rem(1) dotted $setting-color-gray-3;
             padding-bottom: rem(6);
             margin-bottom: rem(29);
             letter-spacing: rem(-0.3);
@@ -178,7 +225,7 @@
         }
 
         &--with-border {
-            border-bottom: dotted rem(1) $setting-color-gray-3;
+            border-bottom: rem(1) dotted $setting-color-gray-3;
         }
 
         &--mobile-size {

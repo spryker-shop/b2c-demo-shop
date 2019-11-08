@@ -1,25 +1,10 @@
-{% extends template('page-layout-checkout', 'CheckoutPage') %}
-
-{% define data = {
-    backUrl: _view.previousStepUrl,
-    forms: {
-        payment: _view.paymentForm,
-    },
-
-    title: 'checkout.step.payment.title' | trans,
-    customForms: {},
-} %}
+{% extends view('payment', '@SprykerShop:CheckoutPage') %}
 
 {% block content %}
     {% embed molecule('form') with {
-        modifiers: ['checkout-payment-step', 'checkout-actions', 'checkout-form-elements'],
+        modifiers: ['checkout-actions', 'checkout-form-elements'],
         data: {
             form: data.forms.payment,
-            options: {
-                attr: {
-                    id: 'payment-form',
-                },
-            },
             submit: {
                 enable: true,
                 text: 'checkout.step.summary' | trans,
@@ -31,62 +16,48 @@
                 text: 'general.back.button' | trans,
                 class: 'form__action--checkout button button--hollow button--expand',
             },
-            customForms: data.customForms,
         },
     } only %}
         {% block fieldset %}
-
             {% for name, choices in data.form.paymentSelection.vars.choices %}
                 {% set paymentProviderIndex = loop.index0 %}
-                <ul class="list-switches list-switches--register-type">
-                    {% for key, choice in choices %}
-                        {% set paymentMethodIndex = loop.index ~ '-' ~ paymentProviderIndex %}
-                        <li class="list-switches__item">
-                            {% if key == 0 %}
-                                {{ form_row(data.form.paymentSelection[key], {
-                                    required: false,
-                                    component: molecule('toggler-radio'),
-                                    attributes: {
-                                        'target-class-name': 'js-payment-method-' ~ paymentMethodIndex,
-                                        'checked': 'checked',
-                                    },
-                                    rowAttr: {class: 'toggler-radio--with-bg'},
-                                }) }}
 
-                                <div class="list-switches__img-wrap">
-                                    <img class="list-switches__img" src="{{ publicPath('images/logo-visa.png') }}" alt="Visa">
-                                    <img class="list-switches__img" src="{{ publicPath('images/logo-mastercard.png') }}" alt="Mastercard">
-                                </div>
+                {% embed molecule('list-switches') with {
+                    modifiers: ['register-type', 'layout-width'],
+                    data: {
+                        form: data.form.paymentSelection,
+                        choices: choices,
+                        rowAttrClass: 'toggler-radio--with-bg',
+                        targetClassName: 'js-payment-method-',
+                        providerIndex: paymentProviderIndex,
+                    },
+                } only %}
+                    {% block item %}
+                        {{ parent() }}
 
-                            {% else %}
-                                {{ form_row(data.form.paymentSelection[key], {
-                                    required: false,
-                                    component: molecule('toggler-radio'),
-                                    attributes: {
-                                        'target-class-name': 'js-payment-method-' ~ paymentMethodIndex,
-                                    },
-                                    rowAttr: {class: 'toggler-radio--with-bg'},
-                                }) }}
-                            {% endif %}
-                        </li>
-                    {% endfor %}
-                </ul>
+                        {% if key == 0 %}
+                            <div class="{{ config.name }}__img-wrap">
+                                <img class="{{ config.name }}__img" src="{{ publicPath('images/logo-visa.png') }}" alt="Visa">
+                                <img class="{{ config.name }}__img" src="{{ publicPath('images/logo-mastercard.png') }}" alt="Mastercard">
+                            </div>
+                        {% endif %}
+                    {% endblock %}
+                {% endembed %}
 
                 {% for key, choice in choices %}
                     {% embed molecule('form') with {
-                        class: 'payment-form-indent',
+                        class: 'spacing-bottom spacing-bottom--bigger',
                         modifiers: ['grid-indent', 'checkout-form-elements'],
                         data: {
                             form: data.form[data.form.paymentSelection[key].vars.value],
                             enableStart: false,
                             enableEnd: false,
-                            customForms: data.customForms,
                             layout: {
-                                'card_number': 'col col--sm-6',
-                                'name_on_card': 'col col--sm-6',
-                                'card_expires_month': 'col col--sm-3 col--bottom',
-                                'card_expires_year': 'col col--sm-3 col--bottom',
-                                'card_security_code': 'col col--sm-6 col--bottom',
+                                'card_number': 'col col--sm-12 col--lg-6',
+                                'name_on_card': 'col col--sm-12 col--lg-6',
+                                'card_expires_month': 'col col--sm-12 col--md-6 col--lg-3 col--bottom',
+                                'card_expires_year': 'col col--sm-12 col--md-6 col--lg-3 col--bottom',
+                                'card_security_code': 'col col--sm-12 col--lg-6 col--bottom',
                             },
                         },
                         embed: {
@@ -94,25 +65,14 @@
                             toggler: data.form.paymentSelection[key],
                         },
                     } only %}
-
                         {% block fieldset %}
-                            <div class="js-payment-method-{{embed.index}} {% if embed.index != '1-0' %} is-hidden{% endif %}">
-                                <h2 class="title title--checkout">{{ embed.toggler.vars.label | trans }}</h2>
-                                {% if data.customForms[data.form.vars.template_path] is not defined %}
-                                    {{ parent() }}
-                                {% else %}
-                                    {% set viewName = data.customForms[data.form.vars.template_path] | first %}
-                                    {% set moduleName = data.customForms[data.form.vars.template_path] | last %}
-                                    {% include view(viewName, moduleName) ignore missing with {
-                                        form: data.form.parent,
-                                    } only %}
-                                {% endif %}
+                            <div class="js-payment-method-{{ embed.index }} {% if embed.index != '1-0' %} is-hidden{% endif %}">
+                                <h2 class="title title--primary">{{ embed.toggler.vars.label | trans }}</h2>
+                                {{ parent() }}
                             </div>
                         {% endblock %}
-
                     {% endembed %}
                 {% endfor %}
-
             {% endfor %}
         {% endblock %}
     {% endembed %}

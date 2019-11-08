@@ -1,21 +1,22 @@
 @mixin checkout-page-summary-overview($name: '.summary-overview') {
     #{$name} {
-        margin: rem(56) 0 rem(50);
-        border-top: dotted rem(1) $setting-color-gray-3;
-        border-bottom: dotted rem(1) $setting-color-gray-3;
+        margin: rem(20) 0 rem(30);
+        border-top: rem(1) dotted $setting-color-gray-3;
+        border-bottom: rem(1) dotted $setting-color-gray-3;
 
-        &__list,
-        &__list-item {
-            margin: rem(24) 0;
+        @include helper-breakpoint-media-min($lg-min) {
+            margin: rem(30) 0 rem(40);
         }
 
         &__list-item {
-            font: 400 rem(14) $setting-font-family-additional;
+            font: fw(regular) rem(14)/rem(18) $setting-font-family-additional;
+            margin: rem(24) 0;
 
             &--total {
-                font-size: rem(17);
+                font-size: rem(15);
                 text-transform: uppercase;
-                font-weight: bold;
+                font-weight: fw(bold);
+                letter-spacing: rem(0.8);
             }
         }
 

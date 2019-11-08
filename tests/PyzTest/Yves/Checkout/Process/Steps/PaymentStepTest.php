@@ -182,7 +182,8 @@ class PaymentStepTest extends Unit
             'payment',
             'escape_route',
             $this->getFlashMessengerMock(),
-            $this->getCalculationClientMock()
+            $this->getCalculationClientMock(),
+            $this->getCheckoutPaymentStepEnterPreCheckPlugins()
         );
     }
 
@@ -241,5 +242,13 @@ class PaymentStepTest extends Unit
     protected function getFlashMessengerMock()
     {
         return $this->getMockBuilder(FlashMessengerInterface::class)->getMock();
+    }
+
+    /**
+     * @return \SprykerShop\Yves\CheckoutPageExtension\Dependency\Plugin\CheckoutPaymentStepEnterPreCheckPluginInterface[]
+     */
+    public function getCheckoutPaymentStepEnterPreCheckPlugins(): array
+    {
+        return [];
     }
 }

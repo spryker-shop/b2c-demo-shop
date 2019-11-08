@@ -1,19 +1,4 @@
-{% extends model('component') %}
-
-{% define config = {
-    name: 'availability-product'
-} %}
-
-{% define data = {
-    idProductConcrete: null,
-    isAvailable: false
-} %}
-
-{% block component %}
-    {% if data.idProductConcrete is not empty and not data.isAvailable %}
-        {{parent()}}
-    {% endif %}
-{% endblock %}
+{% extends molecule('availability-product', '@SprykerShop:AvailabilityWidget') %}
 
 {% block body %}
     {% embed molecule('toggler-item') with {
@@ -21,10 +6,10 @@
         data: {
             title: 'cart.item_quantity' | trans,
             isToggler: false,
-        }
+        },
     } only %}
         {% block contentText -%}
-            <span class="text-alt js-volume-price__quantity">{{ "product.detail.out_of_stock" | trans }}</span>
+            <span class="text-alt js-volume-price__quantity">{{ 'product.detail.out_of_stock' | trans }}</span>
         {%- endblock %}
     {% endembed %}
 {% endblock %}
