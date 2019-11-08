@@ -12,8 +12,11 @@ use Generated\Shared\Transfer\AddressTransfer;
 use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Generated\Shared\Transfer\ShipmentTransfer;
-use Spryker\Yves\StepEngine\Dependency\Plugin\Handler\StepHandlerPluginInterface;
+use SprykerShop\Yves\CheckoutPage\CheckoutPageConfig;
+use SprykerShop\Yves\CheckoutPage\Dependency\Client\CheckoutPageToCheckoutClientInterface;
 use SprykerShop\Yves\CheckoutPage\Dependency\Client\CheckoutPageToProductBundleClientInterface;
+use SprykerShop\Yves\CheckoutPage\Dependency\Service\CheckoutPageToShipmentServiceBridge;
+use SprykerShop\Yves\CheckoutPage\Dependency\Service\CheckoutPageToShipmentServiceInterface;
 use SprykerShop\Yves\CheckoutPage\Process\Steps\SummaryStep;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -30,6 +33,11 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class SummaryStepTest extends Unit
 {
+    /**
+     * @var \PyzTest\Yves\Checkout\CheckoutBusinessTester
+     */
+    public $tester;
+
     /**
      * @return void
      */
@@ -68,8 +76,11 @@ class SummaryStepTest extends Unit
 
         return new SummaryStep(
             $productBundleClient,
+            $this->createShipmentServiceMock(),
+            $this->createConfigMock(),
             'shipment',
-            'escape_route'
+            'escape_route',
+            $this->getCheckoutClientMock()
         );
     }
 
@@ -90,10 +101,29 @@ class SummaryStepTest extends Unit
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Spryker\Yves\StepEngine\Dependency\Plugin\Handler\StepHandlerPluginInterface
+     * @return \PHPUnit_Framework_MockObject_MockObject|\SprykerShop\Yves\CheckoutPage\Dependency\Service\CheckoutPageToShipmentServiceInterface
      */
-    protected function createShipmentMock()
+    protected function createShipmentServiceMock(): CheckoutPageToShipmentServiceInterface
     {
-        return $this->getMockBuilder(StepHandlerPluginInterface::class)->getMock();
+        return $this->getMockBuilder(CheckoutPageToShipmentServiceBridge::class)
+            ->setConstructorArgs([$this->tester->getShipmentService()])
+            ->enableProxyingToOriginalMethods()
+            ->getMock();
+    }
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject|\SprykerShop\Yves\CheckoutPage\CheckoutPageConfig
+     */
+    protected function createConfigMock(): CheckoutPageConfig
+    {
+        return $this->getMockBuilder(CheckoutPageConfig::class)->getMock();
+    }
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject|\SprykerShop\Yves\CheckoutPage\Dependency\Client\CheckoutPageToCheckoutClientInterface
+     */
+    public function getCheckoutClientMock(): CheckoutPageToCheckoutClientInterface
+    {
+        return $this->getMockBuilder(CheckoutPageToCheckoutClientInterface::class)->getMock();
     }
 }

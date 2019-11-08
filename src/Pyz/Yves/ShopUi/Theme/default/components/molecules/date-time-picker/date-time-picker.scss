@@ -1,0 +1,36 @@
+@mixin shop-ui-date-time-picker($name: '.date-time-picker') {
+    #{$name} {
+        &__content {
+            position: relative;
+        }
+
+        &__icon {
+            fill: $setting-color-black;
+            width: rem(18);
+            height: rem(16);
+            position: absolute;
+            bottom: rem(16);
+            right: rem(16);
+        }
+
+        .input {
+            font: fw(medium) rem(15)/rem(17) $setting-font-family;
+            height: rem(48);
+            padding: rem(10) rem(20);
+
+            &::-ms-clear {
+                display: none;
+            }
+        }
+
+        &--with-icon {
+            .input {
+                padding-right: rem(40);
+            }
+        }
+
+        @content;
+    }
+}
+
+@include shop-ui-date-time-picker();

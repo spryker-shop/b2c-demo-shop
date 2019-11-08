@@ -1,0 +1,7 @@
+{% extends molecule('order-payment', '@SprykerShop:CustomerPage') %}
+
+{% block body %}
+    <li class="{{ config.name }}__item">{{ data.payments[0].paymentProvider | trans }}</li>
+    <li class="{{ config.name }}__item">{{ 'customer.order.payment_method' | trans }}: {{ data.payments[0].paymentMethod | trans | capitalize }}</li>
+    <li class="{{ config.name }}__item">{{ data.payments[0].amount | money(true, data.currencyIsoCode) }}</li>
+{% endblock %}

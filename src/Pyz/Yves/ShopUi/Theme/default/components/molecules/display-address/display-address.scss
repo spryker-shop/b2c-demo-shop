@@ -1,0 +1,13 @@
+@mixin checkout-page-display-address($name: '.display-address') {
+    #{$name} {
+        &__item {
+            font-weight: fw(light);
+            line-height: rem(28);
+            letter-spacing: rem(-0.18);
+        }
+
+        @content;
+    }
+}
+
+@include checkout-page-display-address();
