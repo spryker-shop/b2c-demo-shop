@@ -1,77 +1,72 @@
-{% extends model('component') %}
+{% extends molecule('summary-overview', '@SprykerShop:CheckoutPage') %}
 
-{% define config = {
-    name: 'summary-overview',
-    tag: 'div'
-} %}
+{% macro itemDiscounts(discounts, title, configName) %}
+    {% if discounts | length %}
+        <li class="{{ configName }}__list-item">
+            <span>{{ title | trans }}</span>
 
-{% define data = {
-    shipmentMethod: required,
-    expenses: [],
-    voucherDiscounts: [],
-    cartRuleDiscounts: [],
-    prices: {
-        subTotal: required,
-        storeCurrency: required,
-        tax: required,
-        grandTotal: required,
-        discountTotal: null,
-    },
-} %}
+            <div class="spacing-top">
+                {% for discount in discounts %}
+                    <div class="grid grid--justify">
+                        <span class="col col--sm-8 col--lg-10 text-secondary">{{ discount.displayName }}</span>
+                        <span class="col col--expand text-right">- {{ discount.amount | money }}</span>
+                    </div>
+                {% endfor %}
+            </div>
+        </li>
+    {% endif %}
+{% endmacro %}
 
 {% block body %}
-    <ul class="{{ config.name }}__list">
+    <li class="{{ config.name }}__list-item">
+        <span class="float-right">{{ data.prices.subTotal | money }}</span>
+        <span>{{ 'checkout.step.summary.sub_total' | trans }}</span>
+    </li>
 
-        <li>
-            {{ 'checkout.step.summary.sub_total' | trans }}
-            <span class="float-right">{{ data.prices.subTotal | money }}</span>
-        </li>
+    <li class="{{ config.name }}__list-item">
+        <span class="float-right">{{ data.totalCosts | money }}</span>
+        <span>{{ 'checkout.step.summary.shipment_costs_total' | trans }}</span>
 
-        {% if data.prices.discountTotal %}
-            {% if data.voucherDiscounts is not empty %}
-                {% for voucherDiscount in data.voucherDiscounts %}
-                    <li class="{{ config.name }}__list-item">
-                        {{ voucherDiscount.displayName }}
-                        <span class="float-right">{{ voucherDiscount.amount | money }}</span>
-                    </li>
-                {% endfor %}
-            {% endif %}
+        <div class="spacing-top">
+            {% for shipmentGroup in data.shipmentGroups %}
+                {% set shippingMethod = shipmentGroup.shipment.method %}
 
-            {% if data.cartRuleDiscounts|length %}
-                {% for ruleDiscount in data.cartRuleDiscounts %}
-                    <li class="{{ config.name }}__list-item">
-                        {{ ruleDiscount.displayName }}
-                        <span class="float-right">- {{ ruleDiscount.amount | money }}</span>
-                    </li>
-                {% endfor %}
-            {% endif %}
-        {% endif %}
+                <div class="grid grid--justify">
+                    <span class="col col--sm-8 col--lg-10 text-secondary">{{ shippingMethod.carrierName | trans }} - {{ shippingMethod.name }}</span>
+                    <span class="col col--expand text-right">{{ shippingMethod.storeCurrencyPrice | money }}</span>
+                </div>
+            {% endfor %}
+        </div>
+    </li>
 
-        <li class="{{ config.name }}__list-item">
-            <strong>{{ 'checkout.step.summary.shipping' | trans }}</strong>
-            {{ data.shipmentMethod }}
-            <span class="float-right">{{ data.prices.storeCurrency | money }}</span>
-        </li>
+    {% if data.prices.discountTotal %}
+        {{ _self.itemDiscounts(data.voucherDiscounts, 'cart.vouchers', config.name) }}
+        {{ _self.itemDiscounts(data.cartRuleDiscounts, 'cart.discounts', config.name) }}
+    {% endif %}
 
-        {% widget 'SalesOrderThresholdWidgetPlugin' args [data.expenses] with {config: config} only %}
-            {% block expenseItems %}
-                <li class="{{ config.name }}__list-item">
-                    {{ parent() }}
-                </li>
-            {% endblock %}
-        {% endwidget %}
+    {% widget 'SalesOrderThresholdWidgetPlugin' args [data.expenses] with {config: config} only %}
+        {% block expenseItems %}
+            <li class="{{ config.name }}__list-item">
+                {{ parent() }}
+            </li>
+        {% endblock %}
+    {% endwidget %}
 
-        <li class="{{ config.name }}__list-item">
-            {{ 'checkout.step.summary.tax' | trans }}
-            <span class="float-right">{{ data.prices.tax | money }}</span>
-        </li>
+    <li class="{{ config.name }}__list-item">
+        <span class="float-right">{{ data.prices.tax | money }}</span>
+        <span>{{ 'checkout.step.summary.tax' | trans }}</span>
+    </li>
 
-        <li class="{{ config.name }}__list-item {{ config.name }}__list-item--total">
-            <strong>{{ 'checkout.step.summary.grand_total' | trans }}</strong>
-            <strong class="float-right">{{ data.prices.grandTotal | money }}</strong>
-        </li>
+    <li class="{{ config.name }}__list-item {{ config.name }}__list-item--total">
+        <strong>{{ 'checkout.step.summary.grand_total' | trans }}</strong>
+        <strong class="float-right">{{ data.prices.grandTotal | money }}</strong>
+    </li>
 
-        {% block giftCard %}{% endblock %}
-
-    </ul>
+    <li class="{{ config.name }}__list-item">
+        {% include molecule('gift-card-payment-summary', 'GiftCardWidget') ignore missing with {
+            data: {
+                cart: embed.cart,
+            },
+        } only %}
+    </li>
 {% endblock %}

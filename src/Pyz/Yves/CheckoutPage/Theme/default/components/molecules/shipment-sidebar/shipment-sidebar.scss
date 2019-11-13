@@ -1,0 +1,47 @@
+@mixin checkout-page-shipment-sidebar($name: '.shipment-sidebar') {
+    #{$name} {
+        margin-top: rem(-19);
+
+        @include helper-breakpoint-media-min($lg-min) {
+            margin-top: 0;
+        }
+
+        &__item {
+            background-color: $setting-color-gray-1;
+            margin: 0 rem(-15) rem(10);
+            padding: rem(20);
+
+            @include helper-breakpoint-media-min($lg-min) {
+                margin: 0 0 rem(20);
+            }
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+
+        &__text {
+            font-weight: fw(light);
+            letter-spacing: rem(-0.18);
+        }
+
+        &__logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0;
+            width: rem(93);
+            height: rem(36);
+            border-radius: rem(2);
+            border: rem(1) solid $setting-color-input-border;
+        }
+
+        &__logo-image {
+            width: rem(65);
+        }
+
+        @content;
+    }
+}
+
+@include checkout-page-shipment-sidebar();

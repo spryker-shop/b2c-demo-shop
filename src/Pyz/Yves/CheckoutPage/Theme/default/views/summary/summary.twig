@@ -1,225 +1,148 @@
-{% extends template('page-layout-checkout', 'CheckoutPage') %}
+{% extends view('summary', '@SprykerShop:CheckoutPage') %}
 
 {% define data = {
-    breadcrumbs: _view.stepBreadcrumbs.breadcrumbs | default([]),
-    transfer: _view.quoteTransfer,
-    cartItems: _view.cartItems,
-    shippingAddress: _view.quoteTransfer.shippingAddress,
-    billingAddress: _view.quoteTransfer.billingAddress,
-    shipmentMethod: _view.quoteTransfer.shipment.method,
-    shipmentMethodName: _view.quoteTransfer.shipment.method.carrierName | trans,
     payment: _view.quoteTransfer.payment,
-    cart: _view.quoteTransfer,
-    paymentMethodName: _view.quoteTransfer.payment.dummyPayment.cardType | default(null),
-
-    forms: {
-        summary: _view.summaryForm
-    },
-
-    overview: {
-        shipmentMethod: _view.quoteTransfer.shipment.method.name,
-        expenses: _view.quoteTransfer.expenses,
-        voucherDiscounts: _view.quoteTransfer.voucherDiscounts,
-        cartRuleDiscounts: _view.quoteTransfer.cartRuleDiscounts,
-
-        prices: {
-            subTotal: _view.quoteTransfer.totals.subtotal,
-            storeCurrency: _view.quoteTransfer.shipment.method.storeCurrencyPrice,
-            grandTotal: _view.quoteTransfer.totals.grandtotal,
-            tax: _view.quoteTransfer.totals.taxtotal.amount,
-            discountTotal: _view.quoteTransfer.totals.discounttotal | default(null),
-            priceToPay: _view.quoteTransfer.totals.priceToPay | default(null),
-        }
-    },
-
-    title: 'checkout.step.summary.title' | trans,
 } %}
 
-{% block contentClass %}
-    page-layout-checkout--full-width summary-page
-{% endblock %}
-
 {% block content %}
-    <div class="grid summary-item">
-        <div class="col col--sm-12 col--lg-6 summary-page__col">
-            <div class="summary-item__wrap">
-                <h2 class="title title--checkout">{{ 'checkout.step.address.title' | trans }}</h2>
-                <div class="grid">
-                    <div class="col col--sm-12 col--md-6">
-                        <strong>{{ 'page.checkout.summary.shipping' | trans }}</strong>
-                        {% include molecule('display-address', 'CheckoutPage') with {
-                            class: 'text-small',
-                            data: {
-                                address: data.shippingAddress,
-                            },
-                        } only %}
+    {% set isGiftCardExists = null %}
 
-                        {% for step in data.breadcrumbs %}
-                            {% if step.title == 'checkout.step.address.title' %}
-                                <a href="{{url(step.route)}}" class="link link--darkest link--edit spacing-top spacing-top--big">{{ 'general.edit.button' | trans }}</a>
-                            {% endif %}
-                        {% endfor %}
+    <div class="grid">
+        <h2 class="title title--primary col col--sm-12">{{ 'checkout.step.summary.title' | trans }}</h2>
 
-                    </div>
-                    <div class="summary-page__address-indent col col--sm-12 col--md-6">
-                        <strong>{{ 'page.checkout.address.billing-address' | trans }}</strong>
-                        {% include molecule('display-address', 'CheckoutPage') with {
-                            class: 'text-small',
-                            data: {
-                                address: data.billingAddress,
-                            },
-                        } only %}
+        {% for shipmentGroup in data.shipmentGroups %}
+            <article class="checkout-block grid col col--sm-12">
+                <div class="col col--sm-12 col--lg-7">
+                    <h3 class="title title--secondary-box">
+                        {{ 'page.checkout.shipment.shipment_group_heading' | trans({
+                            '%current%': loop.index,
+                            '%total%': loop.length
+                        }) }}
+                    </h3>
 
-                        {% for step in data.breadcrumbs %}
-                            {% if step.title == 'checkout.step.address.title' %}
-                                <a href="{{url(step.route)}}" class="link link--darkest link--edit spacing-top spacing-top--big">{{ 'general.edit.button' | trans }}</a>
-                            {% endif %}
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-            <div class="summary-item__wrap">
-                <h2 class="title title--checkout">{{ 'checkout.step.summary.shipping' | trans }}</h2>
-                {% set shipmentMethodName = data.forms.summary.vars.value.shipment.method.carrierName %}
-
-                <div class="heading__logo heading__logo--indent">
-                    <img src="{{ publicPath('images/shipment-' ~ shipmentMethodName | replace({' ': ''}) ~ '.png') }}" width="65" alt="{{ shipmentMethodName }}">
-                </div>
-
-                <ul class="list">
-                    <li class="list__item">{{ data.shipmentMethod.carrierName | trans }}</li>
-                    <li class="list__item">{{ data.shipmentMethod.name }} {{ data.shipmentMethod.storeCurrencyPrice | money }}</li>
-                </ul>
-
-                {% for step in data.breadcrumbs %}
-                    {% if step.title == 'checkout.step.shipment.title' %}
-                        <a href="{{url(step.route)}}" class="link link--darkest link--edit spacing-top spacing-top--big">{{ 'general.edit.button' | trans }}</a>
-                    {% endif %}
-                {% endfor %}
-            </div>
-            <div class="summary-item__wrap">
-                <h2 class="title title--checkout">{{ 'checkout.step.summary.payment' | trans }}</h2>
-                {% if data.paymentMethodName == 'Visa' %}
-                    <div class="heading__logo heading__logo--indent">
-                        <img class="heading__logo--img" src="{{ publicPath('images/logo-visa.png') }}" width="50" height="18" alt="Visa">
-                    </div>
-                {% endif %}
-                {% if data.paymentMethodName == 'Master Card' %}
-                    <div class="heading__logo heading__logo--indent">
-                        <img class="heading__logo--img" src="{{ publicPath('images/logo-mastercard.png') }}" width="29" height="22" alt="Master card">
-                    </div>
-                {% endif %}
-                <ul class="list">
-                    {% if data.payment.paymentSelection == 'Nopayment' %}
-                        {% for payment in data.cart.payments %}
-                            <li class="list-item">
-                                {% if payment.giftCard is defined and payment.giftCard %}
-                                    {{ 'cart.giftcard.label' | trans }}
-                                {% else %}
-                                    {{ payment.paymentMethod }} <span class="float-right"></span>
-                                {% endif %}
-                            </li>
-                        {% endfor %}
-                    {% else %}
-                        <li class="list__item">{{ data.payment.paymentSelection | trans }}</li>
-                    {% endif %}
-
-                    {% if data.payment.paymentSelection == 'dummyPaymentCreditCard' %}
-                        {% set partOfCardNumder = data.payment.dummyPayment.cardNumber[(data.payment.dummyPayment.cardNumber | length)-3:] %}
-                        <li class="list__item">{{ 'dummyPaymentCreditCard.card_type' | trans }}: {{ data.payment.dummyPayment.cardType }}</li>
-                        <li class="list__item">{{ 'dummyPaymentCreditCard.card_number' | trans }}: *********{{ partOfCardNumder }}</li>
-                        <li class="list__item">{{ 'dummyPaymentCreditCard.name_on_card' | trans }}: {{ data.payment.dummyPayment.nameOnCard }}</li>
-                        <li class="list__item">{{ 'dummyPaymentCreditCard.card_expires' | trans }}: {{ data.payment.dummyPayment.cardExpiresMonth }}, {{ data.payment.dummyPayment.cardExpiresYear }}</li>
-                    {% endif %}
-                </ul>
-
-                {% for step in data.breadcrumbs %}
-                    {% if step.title == 'checkout.step.payment.title' %}
-                        <a href="{{url(step.route)}}" class="link link--darkest link--edit spacing-top spacing-top--big">{{ 'general.edit.button' | trans }}</a>
-                    {% endif %}
-                {% endfor %}
-            </div>
-        </div>
-
-        <div class="col col--sm-12 col--lg-6 summary-page__col">
-            <div class="summary-item__wrap">
-                <h2 class="title title--checkout"> {{ 'page.checkout.summary.products' | trans }}</h2>
-                <div class="summary-item__product-list">
-                    {% for item in data.cartItems %}
-                        {% set item = item.bundleProduct is defined ? item.bundleProduct : item %}
-                        {% set firstImage = item.images | first %}
+                    {% for item in shipmentGroup.items %}
+                        {% set isGiftCardExists = item.giftCardMetadata is not null and item.giftCardMetadata.isGiftCard %}
+                        {% set item = item.bundleProduct ?? item %}
 
                         {% embed molecule('product-item') with {
+                            modifiers: ['expand', 'secondary', 'alternative', 'right-indent-from-tablet'],
                             data: {
                                 productItem: item,
-                                options: item.productOptions | default([]),
-                                product: data.transfer,
+                                canEditCart: false,
+                                additionalContainerClass: '',
+                                productOptionsModifiers: ['alternative'],
                             },
                         } only %}
+                            {% block image %}
+                                <div class="{{ component.renderClass(config.name ~ '__image', modifiers) }} col">
+                                    {% include molecule('product-image') with {
+                                        modifiers: ['no-side-indent'],
+                                        data: {
+                                            name: data.productItem.name,
+                                            image: data.productItem.images[0].externalUrlLarge,
+                                        },
+                                    } only %}
+                                </div>
+                            {% endblock %}
+
+                            {% block title %}
+                                <div class="{{ component.renderClass(config.name ~ '__title', modifiers) }} col col--sm-12 col--lg-8">
+                                    {{ data.productItem.name }}
+                                </div>
+                            {% endblock %}
+
                             {% block options %}
                                 {% if data.productItem.concreteAttributes is not empty %}
                                     <ul>
                                         {% for key, item in data.productItem.concreteAttributes %}
-                                            <li> {{ ('product.attribute.' ~ key) | trans }}: {{ item }}</li>
+                                            <li>{{ ('product.attribute.' ~ key) | trans }}: {{ item }}</li>
                                         {% endfor %}
                                     </ul>
                                 {% endif %}
                             {% endblock %}
 
-                            {% block quantity %}
-                                <div>
-                                    {{ 'cart.item_quantity' | trans }}: {{ data.productItem.quantity }}
-                                </div>
-                            {% endblock %}
-
-                            {% block summary %}
-                                {% if data.options is defined and data.options is not empty %}
-                                    <div class="grid grid--right">
-                                        {% include molecule('product-item-summary') with {
-                                            class: 'col',
-                                            data: {
-                                                options: data.options,
-                                            },
-                                        } only %}
-                                    </div>
-                                {% endif %}
-                            {% endblock %}
+                            {% block bundles %}{% endblock %}
                         {% endembed %}
                     {% endfor %}
                 </div>
-            </div>
-            <div class="summary-item__wrap">
-                <h2 class="title title--checkout">{{ 'checkout.step.summary.total' | trans }}</h2>
-                {% widget 'CartCodeFormWidget' args [data.transfer] only %}{% endwidget %}
 
-                {% embed molecule('summary-overview', 'CheckoutPage') with {
-                    data: data.overview,
-                    embed: {
+                <div class="col col--sm-12 col--lg-5">
+                    {% include molecule('summary-sidebar', 'CheckoutPage') with {
+                        data: {
+                            shipment: shipmentGroup.shipment,
+                            isGiftCardExists: isGiftCardExists,
+                            canEdit: true,
+                        },
+                    } only %}
+                </div>
+            </article>
+        {% endfor %}
+    </div>
+
+    <div class="checkout-block">
+        <h3 class="title title--secondary-box">{{ 'checkout.step.summary.payment' | trans }}</h3>
+        <div class="grid grid--justify grid--baseline">
+            <div class="col col--sm-12 col--md-5">
+                {% include molecule('payment-card-information', 'CheckoutPage') with {
+                    data: {
+                        payment: data.payment,
                         cart: data.cart,
                     },
                 } only %}
-                    {% block giftCard %}
-                        {% include molecule('gift-card-payment-summary', 'GiftCardWidget') ignore missing with {
-                            data: {
-                                cart: embed.cart,
-                            },
-                        } only %}
-                    {% endblock %}
-                {% endembed %}
-
-                {% include molecule('form') with {
-                    class: 'checkout-buttons',
-                    data: {
-                        form: data.forms.summary,
-                        submit: {
-                            enable: true,
-                            text: 'checkout.step.place.order' | trans,
-                            class: 'form__action--checkout button  button--large button--expand',
-                        },
-                    },
-                    modifiers: ['checkout-form-elements'],
-                } only %}
             </div>
+            <div class="col col--sm-12 col--md-5">
+                <h4 class="title title--secondary-small">{{ 'checkout.step.summary.billing_address' | trans }}</h4>
+                {% include molecule('display-address') with {
+                    class: 'spacing-bottom',
+                    data: {
+                        address: data.billingAddress,
+                    },
+                } only %}
+                <a class="link link--secondary" href="{{ url('checkout-address') }}">{{ 'general.edit.button' | trans }}</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid">
+        <h3 class="col col--sm-12 title title--secondary-box spacing-bottom spacing-bottom--reset spacing-top spacing-top-bigger">
+            {{ 'checkout.step.summary.total' | trans }}
+        </h3>
+        <div class="col col--sm-12">
+            {% widget 'CartCodeFormWidget' args [data.transfer] only %}{% endwidget %}
+
+            {% embed molecule('form') with {
+                modifiers: ['checkout-actions'],
+                data: {
+                    form: data.forms.summary,
+                    submit: {
+                        enable: true,
+                        text: 'checkout.step.place.order' | trans,
+                        class: 'form__action--checkout button button--large button--expand',
+                    },
+                    cancel: {
+                        enable: true,
+                        url: data.backUrl,
+                        text: 'general.back.button' | trans,
+                        icon: '',
+                        class: 'form__action--checkout button button--hollow button--expand',
+                    },
+                },
+                embed: {
+                    overview: data.overview,
+                    cart: data.cart,
+                },
+            } only %}
+                {% block body %}
+                    {% include molecule('summary-overview', 'CheckoutPage') with {
+                        data: embed.overview,
+                        embed: {
+                            cart: embed.cart,
+                        },
+                    } only %}
+
+                    {{ parent() }}
+                {% endblock %}
+            {% endembed %}
         </div>
     </div>
 {% endblock %}

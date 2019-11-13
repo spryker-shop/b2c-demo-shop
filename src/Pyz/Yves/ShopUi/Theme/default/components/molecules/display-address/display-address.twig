@@ -1,0 +1,39 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'display-address',
+    tag: 'ul',
+} %}
+
+{% define data = {
+    address: required,
+    showAddressLabel: false,
+} %}
+
+{% block body %}
+    <li class="{{ config.name }}__item">{{ data.address.salutation }} {{ data.address.firstName }} {{ data.address.lastName }}</li>
+
+    {% if data.address.company is not empty %}
+        <li class="{{ config.name }}__item">{{ data.address.company }}</li>
+    {% endif %}
+
+    <li class="{{ config.name }}__item">{{ data.address.address1 }} {{ data.address.address2 }}</li>
+    <li class="{{ config.name }}__item">{{ data.address.address3 }}</li>
+    <li class="{{ config.name }}__item">{{ data.address.zipCode }} {{ data.address.city }}, {{ ('countries.iso.' ~ data.address.iso2code) | trans }}</li>
+
+    {% if data.address.phone is not empty %}
+        <li class="{{ config.name }}__item">{{ data.address.phone }}</li>
+    {% endif %}
+
+    {% if data.showAddressLabel %}
+        <li class="{{ config.name }}__item">
+            {% if data.address.isDefaultBilling %}
+                <span class="badge badge--success spacing-right spacing-y">{{'customer.order.billing_address' | trans}}</span>
+            {% endif %}
+
+            {% if data.address.isDefaultShipping %}
+                <span class="badge badge--success spacing-y">{{'customer.order.shipping_address' | trans}}</span>
+            {% endif %}
+        </li>
+    {% endif %}
+{% endblock %}

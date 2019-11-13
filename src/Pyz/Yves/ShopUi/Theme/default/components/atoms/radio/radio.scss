@@ -46,6 +46,7 @@
                 height: 100%;
                 z-index: $setting-zi-underside;
                 border: rem(1) solid $setting-color-input-border;
+                background-color: $setting-color-white;
                 border-radius: rem(3);
             }
         }
@@ -64,14 +65,22 @@
             }
         }
 
-        #{$name}__input:checked + #{$name}__box {
-            border: rem(3) solid $setting-color-white;
-            background-color: $setting-color-black;
-            box-shadow: 0 0 0 rem(1) $setting-color-input-border;
+        #{$name}__input:checked {
+            & + #{$name}__box {
+                border: rem(3) solid $setting-color-white;
+                background-color: $setting-color-black;
+                box-shadow: 0 0 0 rem(1) $setting-color-input-border;
 
-            &::before {
-                border: none;
-                background-color: $setting-color-alpha-9;
+                &::before {
+                    border: none;
+                    background-color: $setting-color-alpha-9;
+                }
+            }
+
+            & ~ #{$name}__check {
+                pointer-events: none;
+                visibility: hidden;
+                opacity: 0;
             }
         }
 

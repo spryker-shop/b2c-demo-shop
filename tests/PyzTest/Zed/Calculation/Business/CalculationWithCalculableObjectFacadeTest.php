@@ -71,7 +71,7 @@ class CalculationWithCalculableObjectFacadeTest extends Test
 
         $itemTransfer = $recalculatedQuoteTransfer->getItems()[0];
 
-        $this->assertSame(19, $itemTransfer->getTaxRate());
+        $this->assertSame(19.00, $itemTransfer->getTaxRate());
         $this->assertSame(16, $itemTransfer->getUnitTaxAmount());
         $this->assertSame(32, $itemTransfer->getSumTaxAmount());
         $this->assertSame(20, $itemTransfer->getUnitTaxAmountFullAggregation());
@@ -140,7 +140,7 @@ class CalculationWithCalculableObjectFacadeTest extends Test
         //item totals
         $itemTransfer = $recalculatedQuoteTransfer->getItems()[0];
 
-        $this->assertSame(19, $itemTransfer->getTaxRate());
+        $this->assertSame(19.00, $itemTransfer->getTaxRate());
         $this->assertSame(14, $itemTransfer->getUnitTaxAmount());
         $this->assertSame(29, $itemTransfer->getSumTaxAmount());
         $this->assertSame(18, $itemTransfer->getUnitTaxAmountFullAggregation());
@@ -204,7 +204,7 @@ class CalculationWithCalculableObjectFacadeTest extends Test
 
         $itemTransfer = $recalculatedQuoteTransfer->getItems()[0];
 
-        $this->assertSame(19, $itemTransfer->getTaxRate());
+        $this->assertSame(19.00, $itemTransfer->getTaxRate());
         $this->assertSame(13, $itemTransfer->getUnitTaxAmount());
         $this->assertSame(27, $itemTransfer->getSumTaxAmount());
         $this->assertSame(17, $itemTransfer->getUnitTaxAmountFullAggregation());
@@ -265,7 +265,7 @@ class CalculationWithCalculableObjectFacadeTest extends Test
 
         $itemTransfer = $recalculatedQuoteTransfer->getItems()[0];
 
-        $this->assertSame(19, $itemTransfer->getTaxRate());
+        $this->assertSame(19.00, $itemTransfer->getTaxRate());
         $this->assertSame(15, $itemTransfer->getUnitTaxAmount());
         $this->assertSame(30, $itemTransfer->getSumTaxAmount());
         $this->assertSame(19, $itemTransfer->getUnitTaxAmountFullAggregation());

@@ -1,0 +1,26 @@
+@mixin customer-page-order-summary($name: '.order-summary') {
+    #{$name} {
+        margin: rem(10) 0 rem(30);
+        border-bottom: rem(1) dotted $setting-color-gray-3;
+
+        @include helper-breakpoint-media-min($lg-min) {
+            margin-bottom: rem(40);
+        }
+
+        &__item {
+            font: fw(regular) rem(14)/rem(18) $setting-font-family-additional;
+            margin: rem(24) 0;
+
+            &--total {
+                font-size: rem(15);
+                text-transform: uppercase;
+                font-weight: fw(bold);
+                letter-spacing: rem(0.8);
+            }
+        }
+
+        @content;
+    }
+}
+
+@include customer-page-order-summary();
