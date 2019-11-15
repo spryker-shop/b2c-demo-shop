@@ -189,6 +189,7 @@ class CmsGuiPresentationTester extends Actor
 
         return $this->localizedFakeData;
     }
+
     /**
      * @param string $locale
      *
@@ -200,6 +201,7 @@ class CmsGuiPresentationTester extends Actor
 
         return $localizedFakeData[$locale]['name'];
     }
+
     /**
      * @param string $locale
      *
