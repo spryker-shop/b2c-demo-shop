@@ -143,7 +143,6 @@ class DataImportDependencyProvider extends SprykerDataImportDependencyProvider
             new FileManagerDataImportPlugin(),
             new PriceProductScheduleDataImportPlugin(),
             new ProductQuantityDataImportPlugin(),
-
             new ShipmentDataImportPlugin(),
             new ShipmentMethodPriceDataImportPlugin(),
             new ShipmentMethodStoreDataImportPlugin(),
