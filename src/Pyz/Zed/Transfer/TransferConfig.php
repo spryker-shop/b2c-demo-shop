@@ -20,4 +20,13 @@ class TransferConfig extends SprykerTransferConfig
             APPLICATION_SOURCE_DIR . '/Orm/Propel/*/Schema/',
         ];
     }
+
+    protected function getCoreSourceDirectoryGlobPatterns()
+    {
+        return [
+            APPLICATION_VENDOR_DIR . '/*/*/src/*/Shared/*/Transfer/',
+            APPLICATION_VENDOR_DIR . '/spryker/spryker/Bundles/CmsSlot*/src/Spryker/Shared/*/Transfer/',
+            APPLICATION_VENDOR_DIR . '/spryker/spryker-shop/Bundles/ShopCmsSlot*/src/SprykerShop/Shared/*/Transfer/',
+        ];
+    }
 }

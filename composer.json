@@ -24,7 +24,7 @@
     "spryker-feature/category-image": "^201907.0",
     "spryker-feature/category-management": "^201907.0",
     "spryker-feature/checkout": "dev-master as 201910.0",
-    "spryker-feature/cms": "^201907.0",
+    "spryker-feature/cms": "dev-master as 201910.0",
     "spryker-feature/content-based-shop-navigation": "^201907.0",
     "spryker-feature/content-item": "^201907.0",
     "spryker-feature/customer-access": "^201907.0",
@@ -89,15 +89,15 @@
     "spryker/chart-gui": "^1.0",
     "spryker/checkout-rest-api": "^2.0.0",
     "spryker/checkout-rest-api-extension": "^1.0.0",
-    "spryker/cms-block-category-connector": "^2.1.4",
-    "spryker/cms-block-product-connector": "^1.1.4",
-    "spryker/cms-content-widget-cms-block-connector": "^1.0.0",
-    "spryker/cms-content-widget-product-connector": "^1.0.3",
-    "spryker/cms-content-widget-product-group-connector": "^1.0.0",
-    "spryker/cms-content-widget-product-search-connector": "^1.0.1",
-    "spryker/cms-content-widget-product-set-connector": "^1.0.3",
-    "spryker/cms-navigation-connector": "^1.0.0",
-    "spryker/cms-user-connector": "^1.0",
+    "spryker/cms-block-category-connector": "^2.3.0",
+    "spryker/cms-block-product-connector": "^1.3.0",
+    "spryker/cms-content-widget-cms-block-connector": "^1.2.0",
+    "spryker/cms-content-widget-product-connector": "^1.1.0",
+    "spryker/cms-content-widget-product-group-connector": "^1.1.0",
+    "spryker/cms-content-widget-product-search-connector": "^1.0.2",
+    "spryker/cms-content-widget-product-set-connector": "^1.1.0",
+    "spryker/cms-navigation-connector": "^1.1.0",
+    "spryker/cms-user-connector": "^1.1.0",
     "spryker/code-it-now": "^1.0",
     "spryker/content-banners-rest-api": "^2.0.0",
     "spryker/content-product-abstract-lists-rest-api": "^1.0.0",
@@ -161,7 +161,10 @@
     "spryker/urls-rest-api": "^1.0.0",
     "spryker/uuid": "^1.0",
     "spryker/wishlists-rest-api": "^1.0.0",
-    "swiftmailer/swiftmailer": "^5.4.5"
+    "swiftmailer/swiftmailer": "^5.4.5",
+
+    "spryker/spryker": "dev-feature/cms-2467/dev-integration",
+    "spryker/spryker-shop": "dev-feature/cms-2467/dev-integration"
   },
   "require-dev": {
     "codeception/codeception": "^2.3.8",
@@ -187,12 +190,45 @@
     "roave/better-reflection": "~3.3.0",
     "spryker-feature/development-tools": "dev-master as 201910.0"
   },
+  "repositories": [
+    {
+      "type": "git",
+      "url": "git@github.com:spryker/spryker.git"
+    },
+    {
+      "type": "git",
+      "url": "git@github.com:spryker/spryker-shop.git"
+    }
+  ],
   "autoload": {
     "psr-4": {
       "Generated\\": "src/Generated/",
       "Orm\\": "src/Orm/",
       "Pyz\\": "src/Pyz/",
-      "Install\\": "src/Install/"
+      "Install\\": "src/Install/",
+      "Spryker\\": [
+        "vendor/spryker/spryker/Bundles/CmsSlot/",
+        "vendor/spryker/spryker/Bundles/CmsSlotBlock/",
+        "vendor/spryker/spryker/Bundles/CmsSlotBlockCategoryConnector/",
+        "vendor/spryker/spryker/Bundles/CmsSlotBlockCategoryGui/",
+        "vendor/spryker/spryker/Bundles/CmsSlotBlockCmsConnector/",
+        "vendor/spryker/spryker/Bundles/CmsSlotBlockCmsGui/",
+        "vendor/spryker/spryker/Bundles/CmsSlotBlockExtension/",
+        "vendor/spryker/spryker/Bundles/CmsSlotBlockGui/",
+        "vendor/spryker/spryker/Bundles/CmsSlotBlockGuiExtension/",
+        "vendor/spryker/spryker/Bundles/CmsSlotBlockProductCategoryConnector/",
+        "vendor/spryker/spryker/Bundles/CmsSlotBlockProductCategoryGui/",
+        "vendor/spryker/spryker/Bundles/CmsSlotBlockStorage/",
+        "vendor/spryker/spryker/Bundles/CmsSlotDataImport/",
+        "vendor/spryker/spryker/Bundles/CmsSlotExtension/",
+        "vendor/spryker/spryker/Bundles/CmsSlotGui/",
+        "vendor/spryker/spryker/Bundles/CmsSlotStorage/"
+      ],
+      "SprykerShop\\": [
+        "vendor/spryker/spryker-shop/Bundles/ShopCmsSlot/",
+        "vendor/spryker/spryker-shop/Bundles/ShopCmsSlotExtension/",
+        "vendor/spryker/spryker-shop/Bundles/ShopCmsSlotBlockWidget/"
+      ]
     }
   },
   "autoload-dev": {
@@ -212,7 +248,7 @@
   "config": {
     "preferred-install": "dist",
     "platform": {
-      "php": "7.1.11"
+      "php": "7.2.24"
     },
     "use-include-path": true,
     "sort-packages": true,
