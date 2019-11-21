@@ -49,7 +49,7 @@ class CheckoutDependencyProvider extends SprykerCheckoutDependencyProvider
             new ProductDiscontinuedCheckoutPreConditionPlugin(), #ProductDiscontinuedFeature
             new SalesOrderThresholdCheckoutPreConditionPlugin(), #SalesOrderThresholdFeature
             new VoucherDiscountMaxUsageCheckoutPreConditionPlugin(),
-            new ShipmentCheckoutPreCheckPlugin()
+            new ShipmentCheckoutPreCheckPlugin(),
         ];
     }
 
