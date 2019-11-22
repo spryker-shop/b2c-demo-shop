@@ -24,6 +24,9 @@ use Spryker\Zed\ProductAlternativeDataImport\Communication\Plugin\ProductAlterna
 use Spryker\Zed\ProductDiscontinuedDataImport\Communication\Plugin\ProductDiscontinuedDataImportPlugin;
 use Spryker\Zed\ProductQuantityDataImport\Communication\Plugin\ProductQuantityDataImportPlugin;
 use Spryker\Zed\SalesOrderThresholdDataImport\Communication\Plugin\DataImport\SalesOrderThresholdDataImportPlugin;
+use Spryker\Zed\ShipmentDataImport\Communication\Plugin\ShipmentDataImportPlugin;
+use Spryker\Zed\ShipmentDataImport\Communication\Plugin\ShipmentMethodPriceDataImportPlugin;
+use Spryker\Zed\ShipmentDataImport\Communication\Plugin\ShipmentMethodStoreDataImportPlugin;
 
 class DataImportDependencyProvider extends SprykerDataImportDependencyProvider
 {
@@ -140,6 +143,9 @@ class DataImportDependencyProvider extends SprykerDataImportDependencyProvider
             new FileManagerDataImportPlugin(),
             new PriceProductScheduleDataImportPlugin(),
             new ProductQuantityDataImportPlugin(),
+            new ShipmentDataImportPlugin(),
+            new ShipmentMethodPriceDataImportPlugin(),
+            new ShipmentMethodStoreDataImportPlugin(),
         ];
     }
 
