@@ -21,9 +21,13 @@
         <tr>
             <td class="{{ config.name }}__cell">
                 {{ rating }}
-                {% transchoice rating %}
-                    product_review.summary.star | product_review.summary.stars
-                {% endtranschoice %}
+
+                {% set amount = rating > 1 ? 'multiple' : rating %}
+
+                {{ amount | trans({
+                    '1' : 'product_review.summary.star' | trans,
+                    'multiple': 'product_review.summary.stars' | trans,
+                }) }}
             </td>
             <td class="{{ config.name }}__cell">
                 <div class="{{ config.name }}__progress" max="{{ data.summary.totalReview }}" value="{{ ratingReview }}">
