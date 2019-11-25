@@ -95,10 +95,10 @@
     {% widget 'SimilarProductsWidget' args [data.product] only %}{% endwidget %}
 
     <div class="container__inner">
-        {% include molecule('product-cms-block', 'CmsBlockWidget') ignore missing with {
-            data: {
-                idProductAbstract: data.product.idProductAbstract,
-            },
-        } only %}
+        <div class="product-cms-block">
+            {% cms_slot "slt-7" with {
+                idProductAbstract: data.product.idProductAbstract
+            } %}
+        </div>
     </div>
 {% endblock %}

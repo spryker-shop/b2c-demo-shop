@@ -38,7 +38,7 @@ class CmsGuiCreatePageCest
 
         $i->amLoggedInUser();
         $i->amOnPage(CmsCreatePage::URL);
-        $i->selectOption('//*[@id="cms_page_fkTemplate"]', 'static full page');
+        $i->selectOption('//*[@id="cms_page_fkTemplate"]', 'Placeholders Title & Content');
         $i->setValidFrom('1985-07-01');
         $i->setValidTo('2050-07-01');
         $i->setIsSearchable();

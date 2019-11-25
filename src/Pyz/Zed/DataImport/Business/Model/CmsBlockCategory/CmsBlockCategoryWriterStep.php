@@ -9,6 +9,7 @@ namespace Pyz\Zed\DataImport\Business\Model\CmsBlockCategory;
 
 use Orm\Zed\Category\Persistence\SpyCategoryQuery;
 use Orm\Zed\Category\Persistence\SpyCategoryTemplateQuery;
+use Orm\Zed\CmsBlock\Persistence\SpyCmsBlock;
 use Orm\Zed\CmsBlock\Persistence\SpyCmsBlockQuery;
 use Orm\Zed\CmsBlockCategoryConnector\Persistence\SpyCmsBlockCategoryConnectorQuery;
 use Orm\Zed\CmsBlockCategoryConnector\Persistence\SpyCmsBlockCategoryPositionQuery;
@@ -20,10 +21,15 @@ use Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface;
 
 class CmsBlockCategoryWriterStep extends PublishAwareStep implements DataImportStepInterface
 {
-    public const KEY_BLOCK_NAME = 'block_name';
+    public const KEY_BLOCK_KEY = 'block_key';
     public const KEY_CATEGORY_KEY = 'category_key';
-    public const KEY_CATEGORY_TEMPLATE_NAME = 'template_name';
+    public const KEY_CATEGORY_TEMPLATE_NAME = 'category_template_name';
     public const KEY_CMS_BLOCK_CATEGORY_POSITION_NAME = 'cms_block_category_position_name';
+
+    /**
+     * @var \Orm\Zed\CmsBlock\Persistence\SpyCmsBlock[]
+     */
+    protected static $cmsBlockBuffer = [];
 
     /**
      * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
@@ -32,12 +38,9 @@ class CmsBlockCategoryWriterStep extends PublishAwareStep implements DataImportS
      *
      * @return void
      */
-    public function execute(DataSetInterface $dataSet)
+    public function execute(DataSetInterface $dataSet): void
     {
-        $cmsBlockEntity = SpyCmsBlockQuery::create()->findOneByName($dataSet[static::KEY_BLOCK_NAME]);
-        if (!$cmsBlockEntity) {
-              throw new EntityNotFoundException(sprintf('CmsBlock not found by block name "%s"', $dataSet[static::KEY_BLOCK_NAME]));
-        }
+        $cmsBlockEntity = $this->getCmsBlockById($dataSet[static::KEY_BLOCK_KEY]);
 
         $categoryEntity = SpyCategoryQuery::create()->findOneByCategoryKey($dataSet[static::KEY_CATEGORY_KEY]);
         if (!$categoryEntity) {
@@ -66,5 +69,29 @@ class CmsBlockCategoryWriterStep extends PublishAwareStep implements DataImportS
 
             $this->addPublishEvents(CmsBlockCategoryConnectorEvents::CMS_BLOCK_CATEGORY_CONNECTOR_PUBLISH, $cmsBlockCategoryConnectorEntity->getFkCategory());
         }
+    }
+
+    /**
+     * @param string $cmsBlockKey
+     *
+     * @throws \Spryker\Zed\DataImport\Business\Exception\EntityNotFoundException
+     *
+     * @return \Orm\Zed\CmsBlock\Persistence\SpyCmsBlock
+     */
+    protected function getCmsBlockById(string $cmsBlockKey): SpyCmsBlock
+    {
+        if (isset(static::$cmsBlockBuffer[$cmsBlockKey])) {
+            return static::$cmsBlockBuffer[$cmsBlockKey];
+        }
+
+        $cmsBlockEntity = SpyCmsBlockQuery::create()->findOneByKey($cmsBlockKey);
+
+        if (!$cmsBlockEntity) {
+            throw new EntityNotFoundException(sprintf('CmsBlock not found by block key "%s"', $cmsBlockKey));
+        }
+
+        static::$cmsBlockBuffer[$cmsBlockKey] = $cmsBlockEntity;
+
+        return static::$cmsBlockBuffer[$cmsBlockKey];
     }
 }

@@ -36,8 +36,7 @@ class CmsBlockWriterStep extends PublishAwareStep implements DataImportStepInter
     public const BULK_SIZE = 100;
 
     public const KEY_BLOCK_NAME = 'block_name';
-    public const KEY_BLOCK_TYPE = 'type';
-    public const KEY_BLOCK_VALUE = 'value';
+    public const KEY_BLOCK_KEY = 'block_key';
     public const KEY_TEMPLATE_NAME = 'template_name';
     public const KEY_TEMPLATE_PATH = 'template_path';
     public const KEY_CATEGORIES = 'categories';
@@ -73,7 +72,7 @@ class CmsBlockWriterStep extends PublishAwareStep implements DataImportStepInter
      *
      * @return void
      */
-    public function execute(DataSetInterface $dataSet)
+    public function execute(DataSetInterface $dataSet): void
     {
         $templateEntity = $this->findOrCreateCmsBlockTemplate($dataSet);
         $cmsBlockEntity = $this->findOrCreateCmsBlock($dataSet, $templateEntity);
@@ -90,7 +89,7 @@ class CmsBlockWriterStep extends PublishAwareStep implements DataImportStepInter
      *
      * @return \Orm\Zed\CmsBlock\Persistence\SpyCmsBlockTemplate
      */
-    protected function findOrCreateCmsBlockTemplate(DataSetInterface $dataSet)
+    protected function findOrCreateCmsBlockTemplate(DataSetInterface $dataSet): SpyCmsBlockTemplate
     {
         $templateEntity = SpyCmsBlockTemplateQuery::create()
             ->filterByTemplateName($dataSet[static::KEY_TEMPLATE_NAME])
@@ -111,10 +110,11 @@ class CmsBlockWriterStep extends PublishAwareStep implements DataImportStepInter
      *
      * @return \Orm\Zed\CmsBlock\Persistence\SpyCmsBlock
      */
-    protected function findOrCreateCmsBlock(DataSetInterface $dataSet, SpyCmsBlockTemplate $templateEntity)
+    protected function findOrCreateCmsBlock(DataSetInterface $dataSet, SpyCmsBlockTemplate $templateEntity): SpyCmsBlock
     {
         $cmsBlockEntity = SpyCmsBlockQuery::create()
             ->filterByFkTemplate($templateEntity->getIdCmsBlockTemplate())
+            ->filterByKey($dataSet[static::KEY_BLOCK_KEY])
             ->filterByName($dataSet[static::KEY_BLOCK_NAME])
             ->findOneOrCreate();
 
@@ -133,7 +133,7 @@ class CmsBlockWriterStep extends PublishAwareStep implements DataImportStepInter
      *
      * @return void
      */
-    protected function findOrCreateCmsBlockToCategoryRelation(DataSetInterface $dataSet, SpyCmsBlock $cmsBlockEntity)
+    protected function findOrCreateCmsBlockToCategoryRelation(DataSetInterface $dataSet, SpyCmsBlock $cmsBlockEntity): void
     {
         if (empty($dataSet[static::KEY_CATEGORIES])) {
             return;
@@ -160,7 +160,7 @@ class CmsBlockWriterStep extends PublishAwareStep implements DataImportStepInter
      *
      * @return void
      */
-    protected function findOrCreateCmsBlockToProductRelation(DataSetInterface $dataSet, SpyCmsBlock $cmsBlockEntity)
+    protected function findOrCreateCmsBlockToProductRelation(DataSetInterface $dataSet, SpyCmsBlock $cmsBlockEntity): void
     {
         if (empty($dataSet[static::KEY_PRODUCTS])) {
             return;
