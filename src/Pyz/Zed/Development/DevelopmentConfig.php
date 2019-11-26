@@ -12,6 +12,19 @@ use Spryker\Zed\Development\DevelopmentConfig as SprykerDevelopmentConfig;
 class DevelopmentConfig extends SprykerDevelopmentConfig
 {
     /**
+     * @project Only needed in Project, not in demoshop
+     *
+     * @return array
+     */
+    public function getIdeAutoCompletionSourceDirectoryGlobPatterns()
+    {
+        $globPatterns = parent::getIdeAutoCompletionSourceDirectoryGlobPatterns();
+        $globPatterns[APPLICATION_VENDOR_DIR . '/spryker/spryker/Bundles/CmsSlot*/src/'] = 'Spryker/*/';
+
+        return $globPatterns;
+    }
+
+    /**
      * @return string
      */
     public function getCodingStandard()
