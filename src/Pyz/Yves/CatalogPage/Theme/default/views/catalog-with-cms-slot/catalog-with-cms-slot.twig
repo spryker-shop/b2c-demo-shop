@@ -26,31 +26,31 @@
 } %}
 
 {% block filterSection %}
-    {{parent()}}
+    {{ parent() }}
 
     {% if data.categoryId %}
         <div class="catalog-cms-block catalog-cms-block--middle">
-            {% cms_slot "slt-5" with {
-                idCategory: data.categoryId
+            {% cms_slot 'slt-5' with {
+                idCategory: data.categoryId,
             } %}
         </div>
     {% endif %}
 {% endblock %}
 
 {% block filterBar %}
-    {{parent()}}
+    {{ parent() }}
 
     {% if data.categoryId %}
         <div class="box">
-            {% cms_slot "slt-5" with {
-                idCategory: data.categoryId
+            {% cms_slot 'slt-5' with {
+                idCategory: data.categoryId,
             } %}
         </div>
     {% endif %}
 {% endblock %}
 
 {% block form %}
-    {{parent()}}
+    {{ parent() }}
 
     {% if data.searchString is not empty %}
         <input type="hidden" name="q" value="{{ data.searchString }}" />
@@ -60,18 +60,18 @@
 {% block catalogContent %}
     {% if data.categoryId %}
         <div class="catalog-cms-block catalog-cms-block--top">
-            {% cms_slot "slt-4" with {
-                idCategory: data.categoryId
+            {% cms_slot 'slt-4' with {
+                idCategory: data.categoryId,
             } %}
         </div>
     {% endif %}
 
-    {{parent()}}
+    {{ parent() }}
 
     {% if data.categoryId %}
         <div class="catalog-cms-block catalog-cms-block--bottom">
-            {% cms_slot "slt-6" with {
-                idCategory: data.categoryId
+            {% cms_slot 'slt-6' with {
+                idCategory: data.categoryId,
             } %}
         </div>
     {% endif %}
