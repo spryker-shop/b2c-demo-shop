@@ -63,7 +63,6 @@ use SprykerShop\Yves\ShopApplication\Plugin\Provider\YvesSecurityServiceProvider
 use SprykerShop\Yves\ShopApplication\YvesBootstrap as SprykerYvesBootstrap;
 use SprykerShop\Yves\ShopRouter\Plugin\Router\SilexRouter;
 use SprykerShop\Yves\ShopRouter\Plugin\Router\StorageRouter;
-use SprykerShop\Yves\ShopTranslator\Plugin\Provider\TranslationServiceProvider;
 use SprykerShop\Yves\WebProfilerWidget\Plugin\ServiceProvider\WebProfilerWidgetServiceProvider;
 use SprykerShop\Yves\WishlistPage\Plugin\Provider\WishlistPageControllerProvider;
 
