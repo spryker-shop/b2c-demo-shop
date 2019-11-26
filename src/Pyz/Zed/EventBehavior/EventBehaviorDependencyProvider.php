@@ -11,8 +11,6 @@ use Spryker\Zed\AvailabilityStorage\Communication\Plugin\Event\AvailabilityEvent
 use Spryker\Zed\CategoryPageSearch\Communication\Plugin\Event\CategoryPageEventResourceQueryContainerPlugin;
 use Spryker\Zed\CategoryStorage\Communication\Plugin\Event\CategoryNodeEventResourceQueryContainerPlugin;
 use Spryker\Zed\CategoryStorage\Communication\Plugin\Event\CategoryTreeEventResourceQueryContainerPlugin;
-use Spryker\Zed\CmsBlockCategoryStorage\Communication\Plugin\Event\CmsBlockCategoryEventResourceQueryContainerPlugin;
-use Spryker\Zed\CmsBlockProductStorage\Communication\Plugin\Event\CmsBlockProductEventResourceQueryContainerPlugin;
 use Spryker\Zed\CmsBlockStorage\Communication\Plugin\Event\CmsBlockEventResourceQueryContainerPlugin;
 use Spryker\Zed\CmsPageSearch\Communication\Plugin\Event\CmsPageEventResourceQueryContainerPlugin;
 use Spryker\Zed\CmsSlotBlockStorage\Communication\Plugin\EventBehavior\CmsSlotBlockEventResourceBulkRepositoryPlugin;
@@ -62,8 +60,6 @@ class EventBehaviorDependencyProvider extends SprykerEventBehaviorDependencyProv
             new AvailabilityEventResourceQueryContainerPlugin(),
             new CategoryTreeEventResourceQueryContainerPlugin(),
             new CategoryNodeEventResourceQueryContainerPlugin(),
-            new CmsBlockCategoryEventResourceQueryContainerPlugin(),
-            new CmsBlockProductEventResourceQueryContainerPlugin(),
             new CmsBlockEventResourceQueryContainerPlugin(),
             new CmsEventResourceQueryContainerPlugin(),
             new GlossaryEventResourceQueryContainerPlugin(),

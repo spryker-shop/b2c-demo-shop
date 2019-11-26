@@ -301,22 +301,6 @@ class DataImportConfig extends SprykerDataImportConfig
     /**
      * @return \Generated\Shared\Transfer\DataImporterConfigurationTransfer
      */
-    public function getCmsBlockCategoryPositionDataImporterConfiguration()
-    {
-        return $this->buildImporterConfiguration('cms_block_category_position.csv', static::IMPORT_TYPE_CMS_BLOCK_CATEGORY_POSITION);
-    }
-
-    /**
-     * @return \Generated\Shared\Transfer\DataImporterConfigurationTransfer
-     */
-    public function getCmsBlockCategoryDataImporterConfiguration()
-    {
-        return $this->buildImporterConfiguration('cms_block_category.csv', static::IMPORT_TYPE_CMS_BLOCK_CATEGORY);
-    }
-
-    /**
-     * @return \Generated\Shared\Transfer\DataImporterConfigurationTransfer
-     */
     public function getDiscountDataImporterConfiguration()
     {
         return $this->buildImporterConfiguration('discount.csv', static::IMPORT_TYPE_DISCOUNT);

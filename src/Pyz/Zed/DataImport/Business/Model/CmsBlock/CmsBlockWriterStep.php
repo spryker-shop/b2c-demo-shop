@@ -12,16 +12,12 @@ use Orm\Zed\CmsBlock\Persistence\SpyCmsBlockGlossaryKeyMappingQuery;
 use Orm\Zed\CmsBlock\Persistence\SpyCmsBlockQuery;
 use Orm\Zed\CmsBlock\Persistence\SpyCmsBlockTemplate;
 use Orm\Zed\CmsBlock\Persistence\SpyCmsBlockTemplateQuery;
-use Orm\Zed\CmsBlockCategoryConnector\Persistence\SpyCmsBlockCategoryConnectorQuery;
-use Orm\Zed\CmsBlockProductConnector\Persistence\SpyCmsBlockProductConnectorQuery;
 use Orm\Zed\Glossary\Persistence\SpyGlossaryKeyQuery;
 use Orm\Zed\Glossary\Persistence\SpyGlossaryTranslationQuery;
 use Pyz\Zed\DataImport\Business\Model\CmsBlock\Category\Repository\CategoryRepositoryInterface;
 use Pyz\Zed\DataImport\Business\Model\Product\Repository\ProductRepositoryInterface;
 use Spryker\Zed\CmsBlock\Business\Model\CmsBlockGlossaryKeyGenerator;
 use Spryker\Zed\CmsBlock\Dependency\CmsBlockEvents;
-use Spryker\Zed\CmsBlockCategoryConnector\Dependency\CmsBlockCategoryConnectorEvents;
-use Spryker\Zed\CmsBlockProductConnector\Dependency\CmsBlockProductConnectorEvents;
 use Spryker\Zed\DataImport\Business\Model\DataImportStep\DataImportStepInterface;
 use Spryker\Zed\DataImport\Business\Model\DataImportStep\LocalizedAttributesExtractorStep;
 use Spryker\Zed\DataImport\Business\Model\DataImportStep\PublishAwareStep;
@@ -77,9 +73,6 @@ class CmsBlockWriterStep extends PublishAwareStep implements DataImportStepInter
         $templateEntity = $this->findOrCreateCmsBlockTemplate($dataSet);
         $cmsBlockEntity = $this->findOrCreateCmsBlock($dataSet, $templateEntity);
 
-        $this->findOrCreateCmsBlockToCategoryRelation($dataSet, $cmsBlockEntity);
-        $this->findOrCreateCmsBlockToProductRelation($dataSet, $cmsBlockEntity);
-
         $this->findOrCreateCmsBlockPlaceholderTranslation($dataSet, $cmsBlockEntity);
         $this->addPublishEvents(CmsBlockEvents::CMS_BLOCK_PUBLISH, $cmsBlockEntity->getIdCmsBlock());
     }
@@ -125,61 +118,6 @@ class CmsBlockWriterStep extends PublishAwareStep implements DataImportStepInter
         }
 
         return $cmsBlockEntity;
-    }
-
-    /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     * @param \Orm\Zed\CmsBlock\Persistence\SpyCmsBlock $cmsBlockEntity
-     *
-     * @return void
-     */
-    protected function findOrCreateCmsBlockToCategoryRelation(DataSetInterface $dataSet, SpyCmsBlock $cmsBlockEntity): void
-    {
-        if (empty($dataSet[static::KEY_CATEGORIES])) {
-            return;
-        }
-        $categoryKeys = explode(',', $dataSet[static::KEY_CATEGORIES]);
-        foreach ($categoryKeys as $categoryKey) {
-            $idCategory = $this->categoryRepository->getIdCategoryByCategoryKey(trim($categoryKey));
-            $cmsBlockCategoryConnectorEntity = SpyCmsBlockCategoryConnectorQuery::create()
-                ->filterByFkCmsBlock($cmsBlockEntity->getIdCmsBlock())
-                ->filterByFkCategory($idCategory)
-                ->findOneOrCreate();
-
-            if ($cmsBlockCategoryConnectorEntity->isNew() || $cmsBlockCategoryConnectorEntity->isModified()) {
-                $cmsBlockCategoryConnectorEntity->save();
-
-                $this->addPublishEvents(CmsBlockCategoryConnectorEvents::CMS_BLOCK_CATEGORY_CONNECTOR_PUBLISH, $idCategory);
-            }
-        }
-    }
-
-    /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     * @param \Orm\Zed\CmsBlock\Persistence\SpyCmsBlock $cmsBlockEntity
-     *
-     * @return void
-     */
-    protected function findOrCreateCmsBlockToProductRelation(DataSetInterface $dataSet, SpyCmsBlock $cmsBlockEntity): void
-    {
-        if (empty($dataSet[static::KEY_PRODUCTS])) {
-            return;
-        }
-
-        $productAbstractSkus = explode(',', $dataSet[static::KEY_PRODUCTS]);
-        foreach ($productAbstractSkus as $productAbstractSku) {
-            $idProductAbstract = $this->productRepository->getIdProductAbstractByAbstractSku(trim($productAbstractSku));
-            $cmsBlockProductConnectorEntity = SpyCmsBlockProductConnectorQuery::create()
-                ->filterByFkCmsBlock($cmsBlockEntity->getIdCmsBlock())
-                ->filterByFkProductAbstract($idProductAbstract)
-                ->findOneOrCreate();
-
-            if ($cmsBlockProductConnectorEntity->isNew() || $cmsBlockProductConnectorEntity->isModified()) {
-                $cmsBlockProductConnectorEntity->save();
-
-                $this->addPublishEvents(CmsBlockProductConnectorEvents::CMS_BLOCK_PRODUCT_CONNECTOR_PUBLISH, $idProductAbstract);
-            }
-        }
     }
 
     /**
