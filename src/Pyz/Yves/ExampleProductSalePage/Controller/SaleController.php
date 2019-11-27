@@ -8,6 +8,7 @@
 namespace Pyz\Yves\ExampleProductSalePage\Controller;
 
 use Pyz\Yves\ExampleProductSalePage\Plugin\Provider\ExampleProductSaleControllerProvider;
+use Pyz\Yves\ExampleProductSalePage\Plugin\Router\ExampleProductSaleRouteProviderPlugin;
 use Spryker\Yves\Kernel\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -40,7 +41,7 @@ class SaleController extends AbstractController
             ->saleSearch($parameters);
 
         $searchResults['category'] = $categoryNode;
-        $searchResults['filterPath'] = ExampleProductSaleControllerProvider::ROUTE_SALE;
+        $searchResults['filterPath'] = ExampleProductSaleRouteProviderPlugin::ROUTE_SALE;
         $searchResults['viewMode'] = $this->getFactory()
             ->getCatalogClient()
             ->getCatalogViewMode($request);
