@@ -108,7 +108,6 @@ class CategoryDependencyProvider extends SprykerDependencyProvider
          * @var \Spryker\Zed\Category\Dependency\Plugin\CategoryFormPluginInterface[] $formPlugins
          */
         $formPlugins = [
-            new CategoryFormPlugin(),
             new CategoryImageFormPlugin(),
         ];
 

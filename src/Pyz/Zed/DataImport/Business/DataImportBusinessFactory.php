@@ -8,7 +8,6 @@
 namespace Pyz\Zed\DataImport\Business;
 
 use Pyz\Zed\DataImport\Business\Model\CategoryTemplate\CategoryTemplateWriterStep;
-use Pyz\Zed\DataImport\Business\Model\CmsBlock\Category\Repository\CategoryRepository;
 use Pyz\Zed\DataImport\Business\Model\CmsBlock\CmsBlockWriterStep;
 use Pyz\Zed\DataImport\Business\Model\CmsBlockStore\CmsBlockStoreWriterStep;
 use Pyz\Zed\DataImport\Business\Model\CmsTemplate\CmsTemplateWriterStep;
@@ -249,22 +248,11 @@ class DataImportBusinessFactory extends SprykerDataImportBusinessFactory
                 CmsBlockWriterStep::KEY_PLACEHOLDER_CONTENT,
                 CmsBlockWriterStep::KEY_PLACEHOLDER_LINK,
             ]))
-            ->addStep(new CmsBlockWriterStep(
-                $this->createCategoryRepository(),
-                $this->createProductRepository()
-            ));
+            ->addStep(new CmsBlockWriterStep());
 
         $dataImporter->addDataSetStepBroker($dataSetStepBroker);
 
         return $dataImporter;
-    }
-
-    /**
-     * @return \Pyz\Zed\DataImport\Business\Model\CmsBlock\Category\Repository\CategoryRepositoryInterface
-     */
-    protected function createCategoryRepository()
-    {
-        return new CategoryRepository();
     }
 
     /**

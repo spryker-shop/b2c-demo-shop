@@ -14,8 +14,6 @@ use Orm\Zed\CmsBlock\Persistence\SpyCmsBlockTemplate;
 use Orm\Zed\CmsBlock\Persistence\SpyCmsBlockTemplateQuery;
 use Orm\Zed\Glossary\Persistence\SpyGlossaryKeyQuery;
 use Orm\Zed\Glossary\Persistence\SpyGlossaryTranslationQuery;
-use Pyz\Zed\DataImport\Business\Model\CmsBlock\Category\Repository\CategoryRepositoryInterface;
-use Pyz\Zed\DataImport\Business\Model\Product\Repository\ProductRepositoryInterface;
 use Spryker\Zed\CmsBlock\Business\Model\CmsBlockGlossaryKeyGenerator;
 use Spryker\Zed\CmsBlock\Dependency\CmsBlockEvents;
 use Spryker\Zed\DataImport\Business\Model\DataImportStep\DataImportStepInterface;
@@ -35,33 +33,11 @@ class CmsBlockWriterStep extends PublishAwareStep implements DataImportStepInter
     public const KEY_BLOCK_KEY = 'block_key';
     public const KEY_TEMPLATE_NAME = 'template_name';
     public const KEY_TEMPLATE_PATH = 'template_path';
-    public const KEY_CATEGORIES = 'categories';
-    public const KEY_PRODUCTS = 'products';
     public const KEY_ACTIVE = 'active';
     public const KEY_PLACEHOLDER_TITLE = 'placeholder.title';
     public const KEY_PLACEHOLDER_DESCRIPTION = 'placeholder.description';
     public const KEY_PLACEHOLDER_CONTENT = 'placeholder.content';
     public const KEY_PLACEHOLDER_LINK = 'placeholder.link';
-
-    /**
-     * @var \Pyz\Zed\DataImport\Business\Model\CmsBlock\Category\Repository\CategoryRepositoryInterface
-     */
-    protected $categoryRepository;
-
-    /**
-     * @var \Pyz\Zed\DataImport\Business\Model\Product\Repository\ProductRepositoryInterface
-     */
-    protected $productRepository;
-
-    /**
-     * @param \Pyz\Zed\DataImport\Business\Model\CmsBlock\Category\Repository\CategoryRepositoryInterface $categoryRepository
-     * @param \Pyz\Zed\DataImport\Business\Model\Product\Repository\ProductRepositoryInterface $productRepository
-     */
-    public function __construct(CategoryRepositoryInterface $categoryRepository, ProductRepositoryInterface $productRepository)
-    {
-        $this->categoryRepository = $categoryRepository;
-        $this->productRepository = $productRepository;
-    }
 
     /**
      * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
