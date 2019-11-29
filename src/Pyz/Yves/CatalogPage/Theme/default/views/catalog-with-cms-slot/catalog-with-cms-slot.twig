@@ -30,7 +30,7 @@
 
     {% if data.categoryId %}
         <div class="catalog-cms-block catalog-cms-block--middle">
-            {% cms_slot 'slt-5' with {
+            {% cms_slot 'slt-5' required ['idCategory'] with {
                 idCategory: data.categoryId,
             } %}
         </div>
@@ -42,7 +42,7 @@
 
     {% if data.categoryId %}
         <div class="box">
-            {% cms_slot 'slt-5' with {
+            {% cms_slot 'slt-5' required ['idCategory'] with {
                 idCategory: data.categoryId,
             } %}
         </div>
@@ -60,7 +60,7 @@
 {% block catalogContent %}
     {% if data.categoryId %}
         <div class="catalog-cms-block catalog-cms-block--top">
-            {% cms_slot 'slt-4' with {
+            {% cms_slot 'slt-4' required ['idCategory'] with {
                 idCategory: data.categoryId,
             } %}
         </div>
@@ -70,7 +70,7 @@
 
     {% if data.categoryId %}
         <div class="catalog-cms-block catalog-cms-block--bottom">
-            {% cms_slot 'slt-6' with {
+            {% cms_slot 'slt-6' required ['idCategory'] with {
                 idCategory: data.categoryId,
             } %}
         </div>
