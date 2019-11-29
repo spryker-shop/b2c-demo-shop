@@ -95,10 +95,16 @@
     {% widget 'SimilarProductsWidget' args [data.product] only %}{% endwidget %}
 
     <div class="container__inner">
-        <div class="product-cms-block">
-            {% cms_slot 'slt-7' required ['idProductAbstract'] with {
+        {% embed molecule('product-cms-block', 'CmsBlockWidget') ignore missing with {
+            data: {
                 idProductAbstract: data.product.idProductAbstract,
-            } %}
-        </div>
+            }
+        } only %}
+            {% block body %}
+                {% cms_slot 'slt-7' required ['idProductAbstract'] with {
+                    idProductAbstract: data.idProductAbstract,
+                } %}
+            {% endblock %}
+        {% endembed %}
     </div>
 {% endblock %}
