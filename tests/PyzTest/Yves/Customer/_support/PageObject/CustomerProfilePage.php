@@ -9,7 +9,7 @@ namespace PyzTest\Yves\Customer\PageObject;
 
 class CustomerProfilePage extends Customer
 {
-    public const URL = '/customer/profile';
+    public const URL = '/en/customer/profile';
 
     public const FORM_FIELD_SELECTOR_SALUTATION = 'profileForm[salutation]';
     public const FORM_FIELD_SELECTOR_FIRST_NAME = 'profileForm[first_name]';
