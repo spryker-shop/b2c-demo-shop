@@ -6,7 +6,6 @@ use Pyz\Yves\ShopApplication\YvesBootstrap;
 use Pyz\Zed\Application\Communication\ZedBootstrap;
 use Spryker\Shared\Application\ApplicationConstants;
 use Spryker\Shared\Collector\CollectorConstants;
-use Spryker\Shared\Config\ConfigConstants;
 use Spryker\Shared\Customer\CustomerConstants;
 use Spryker\Shared\EventBehavior\EventBehaviorConstants;
 use Spryker\Shared\GlueApplication\GlueApplicationConstants;
@@ -27,7 +26,6 @@ use Spryker\Shared\SessionRedis\SessionRedisConstants;
 use Spryker\Shared\StorageRedis\StorageRedisConstants;
 use Spryker\Shared\Testify\TestifyConstants;
 use Spryker\Shared\Twig\TwigConstants;
-use Spryker\Shared\WebProfiler\WebProfilerConstants;
 use Spryker\Shared\ZedRequest\ZedRequestConstants;
 use SprykerShop\Shared\ShopApplication\ShopApplicationConstants;
 
@@ -35,9 +33,6 @@ $CURRENT_STORE = Store::getInstance()->getStoreName();
 
 // ---------- General
 $config[KernelConstants::SPRYKER_ROOT] = APPLICATION_ROOT_DIR . '/vendor/spryker';
-$config[WebProfilerConstants::ENABLE_WEB_PROFILER]
-    = $config[ConfigConstants::ENABLE_WEB_PROFILER]
-    = false;
 
 // ---------- Yves host
 $config[ApplicationConstants::HOST_YVES] = 'www.de.spryker.test';
@@ -121,13 +116,13 @@ $config[SessionRedisConstants::ZED_SESSION_REDIS_DATABASE] = 2;
 // ---------- Twig
 $config[TwigConstants::YVES_PATH_CACHE_ENABLED] = true;
 $config[TwigConstants::YVES_PATH_CACHE_FILE] = sprintf(
-    '%s/data/%s/cache/Yves/twig/.pathCache',
+    '%s/data/%s/cache/YVES/twig/.pathCache',
     APPLICATION_ROOT_DIR,
     $CURRENT_STORE
 );
-$config[TwigConstants::ZED_PATH_CACHE_ENABLED] = true;
+
 $config[TwigConstants::ZED_PATH_CACHE_FILE] = sprintf(
-    '%s/data/%s/cache/Zed/twig/.pathCache',
+    '%s/data/%s/cache/ZED/twig/.pathCache',
     APPLICATION_ROOT_DIR,
     $CURRENT_STORE
 );

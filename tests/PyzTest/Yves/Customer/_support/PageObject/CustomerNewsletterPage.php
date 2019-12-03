@@ -9,7 +9,7 @@ namespace PyzTest\Yves\Customer\PageObject;
 
 class CustomerNewsletterPage extends Customer
 {
-    public const URL = '/customer/newsletter';
+    public const URL = '/en/customer/newsletter';
 
     public const FORM_FIELD_SELECTOR_NEWSLETTER_SUBSCRIPTION = '[data-qa*="newsletterSubscriptionForm_subscribe"] label';
     public const FORM_FIELD_SELECTOR_NEWSLETTER_SUBSCRIPTION_INPUT = '[data-qa*="newsletterSubscriptionForm_subscribe"] input';
