@@ -25,7 +25,6 @@ class GlueBootstrap extends AbstractGlueBootstrap
         $this->application
             ->register(new GlueResourceBuilderService())
             ->register(new GlueApplicationServiceProvider())
-            ->register(new SessionServiceProvider())
             ->register(new ServiceControllerServiceProvider())
             ->register(new GlueServiceProviderPlugin())
             ->register(new GlueRoutingServiceProvider());

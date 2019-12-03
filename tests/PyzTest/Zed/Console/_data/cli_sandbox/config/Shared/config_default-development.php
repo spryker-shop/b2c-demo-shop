@@ -52,7 +52,6 @@ $config[ZedRequestConstants::SET_REPEAT_DATA] = true;
 $config[KernelConstants::STORE_PREFIX] = 'DEV';
 
 $config[ApplicationConstants::ENABLE_WEB_PROFILER] = true;
-$config[KernelConstants::AUTO_LOADER_UNRESOLVABLE_CACHE_ENABLED] = false;
 
 $config[KernelConstants::SPRYKER_ROOT] = APPLICATION_ROOT_DIR . '/vendor/spryker/spryker/Bundles';
 

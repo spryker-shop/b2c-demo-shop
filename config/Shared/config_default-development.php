@@ -103,9 +103,6 @@ $config[AclConstants::ACL_USER_RULE_WHITELIST][] = [
     'type' => 'allow',
 ];
 
-// ---------- Auto-loader
-$config[KernelConstants::AUTO_LOADER_UNRESOLVABLE_CACHE_ENABLED] = false;
-
 // ---------- Logging
 $config[LogConstants::LOG_LEVEL] = Logger::INFO;
 

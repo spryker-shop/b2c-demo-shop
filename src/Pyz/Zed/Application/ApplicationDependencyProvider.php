@@ -28,6 +28,7 @@ use Spryker\Zed\Auth\Communication\Plugin\ServiceProvider\RedirectAfterLoginProv
 use Spryker\Zed\EventBehavior\Communication\Plugin\ServiceProvider\EventBehaviorServiceProvider;
 use Spryker\Zed\EventDispatcher\Communication\Plugin\Application\EventDispatcherApplicationPlugin;
 use Spryker\Zed\Gui\Communication\Plugin\ServiceProvider\FormTypeExtensionServiceProvider;
+use Spryker\Zed\Http\Communication\Plugin\Application\HttpApplicationPlugin;
 use Spryker\Zed\Kernel\Container;
 use Spryker\Zed\Locale\Communication\Plugin\Application\LocaleApplicationPlugin;
 use Spryker\Zed\Messenger\Communication\Plugin\Application\MessengerApplicationPlugin;
@@ -54,16 +55,9 @@ class ApplicationDependencyProvider extends SprykerApplicationDependencyProvider
             new SessionServiceProvider(),
             new SprykerSessionServiceProvider(),
             new SslServiceProvider(),
-            new AuthBootstrapProvider(),
-            new AclBootstrapProvider(),
-            new GatewayServiceProviderPlugin(),
             new AssertionServiceProvider(),
             new SubRequestServiceProvider(),
-            new WebProfilerServiceProvider(),
-            new ZedHstsServiceProvider(),
             new FormFactoryServiceProvider(),
-            new MonitoringRequestTransactionServiceProvider(),
-            new RedirectAfterLoginProvider(),
             new EventBehaviorServiceProvider(),
             new SaveSessionServiceProvider(),
             new FormTypeExtensionServiceProvider(),
@@ -113,7 +107,6 @@ class ApplicationDependencyProvider extends SprykerApplicationDependencyProvider
             new SilexRoutingServiceProvider(),
             new GatewayServiceProviderPlugin(),
             new MonitoringRequestTransactionServiceProvider(),
-            new HttpFragmentServiceProvider(),
             new SubRequestServiceProvider(),
             new EventBehaviorServiceProvider(),
         ];
@@ -131,22 +124,17 @@ class ApplicationDependencyProvider extends SprykerApplicationDependencyProvider
             new SessionServiceProvider(),
             new SprykerSessionServiceProvider(),
             new SslServiceProvider(),
-            new AuthBootstrapProvider(),
-            new AclBootstrapProvider(),
             new ServiceControllerServiceProvider(),
             new RoutingServiceProvider(),
             new MvcRoutingServiceProvider(),
             new SilexRoutingServiceProvider(),
-            new GatewayServiceProviderPlugin(),
-            new MonitoringRequestTransactionServiceProvider(),
-            new HttpFragmentServiceProvider(),
             new SubRequestServiceProvider(),
             new EventBehaviorServiceProvider(),
         ];
     }
 
     /**
-     * @return array
+     * @return \Spryker\Shared\ApplicationExtension\Dependency\Plugin\ApplicationPluginInterface[]
      */
     protected function getApplicationPlugins(): array
     {
@@ -157,6 +145,7 @@ class ApplicationDependencyProvider extends SprykerApplicationDependencyProvider
             new TranslatorApplicationPlugin(),
             new PropelApplicationPlugin(),
             new MessengerApplicationPlugin(),
+            new HttpApplicationPlugin(),
         ];
     }
 }

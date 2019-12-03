@@ -75,30 +75,19 @@ class YvesBootstrap extends SprykerYvesBootstrap
     protected function registerServiceProviders()
     {
         $this->application->register(new SslServiceProvider());
-        $this->application->register(new StorageCacheServiceProvider());
         $this->application->register(new KernelLogServiceProvider());
         $this->application->register(new ZedRequestHeaderServiceProvider());
-        $this->application->register(new ShopControllerEventServiceProvider());
         $this->application->register(new SessionServiceProvider());
         $this->application->register(new SprykerSessionServiceProvider());
         $this->application->register(new SecurityServiceProvider());
         $this->application->register(new CustomerSecurityServiceProvider());
         $this->application->register(new YvesSecurityServiceProvider());
-        $this->application->register(new YvesExceptionServiceProvider());
-        $this->application->register(new ErrorPageServiceProvider());
-        $this->application->register(new MonitoringRequestTransactionServiceProvider());
-        $this->application->register(new CookieServiceProvider());
-        $this->application->register(new UrlGeneratorServiceProvider());
         $this->application->register(new RememberMeServiceProvider());
         $this->application->register(new RoutingServiceProvider());
-        $this->application->register(new TranslationServiceProvider());
         $this->application->register(new ValidatorServiceProvider());
         $this->application->register(new FormServiceProvider());
-        $this->application->register(new HttpFragmentServiceProvider());
         $this->application->register(new FlashMessengerServiceProvider());
         $this->application->register(new WebProfilerWidgetServiceProvider());
-        $this->application->register(new AutoloaderCacheServiceProvider());
-        $this->application->register(new YvesHstsServiceProvider());
         $this->application->register(new CartServiceProvider());
         $this->application->register(new FormFactoryServiceProvider());
         $this->application->register(new AgentPageSecurityServiceProvider()); # AgentFeature
