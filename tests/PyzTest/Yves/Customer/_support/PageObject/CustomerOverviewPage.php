@@ -9,7 +9,7 @@ namespace PyzTest\Yves\Customer\PageObject;
 
 class CustomerOverviewPage extends Customer
 {
-    public const URL = '/customer/overview';
+    public const URL = '/en/customer/overview';
 
     public const BOX_HEADLINE_ORDERS = 'Last orders';
     public const BOX_HEADLINE_PROFILE = 'Profile';

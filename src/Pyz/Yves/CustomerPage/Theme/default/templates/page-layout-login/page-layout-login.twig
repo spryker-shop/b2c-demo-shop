@@ -1,14 +1,8 @@
-{% extends template('page-layout-main') %}
+{% extends template('page-layout-login', '@SprykerShop:CustomerPage') %}
 
 {% define data = {
-    forms: {
-        register: _view.registerForm,
-        login: _view.loginForm,
-        isLogin: false
-    }
+    isLogin: false,
 } %}
-
-{% block pageInfo %}{% endblock %}
 
 {% block content %}
     <div class="page-layout-customer page-layout-customer--login-wrap">
@@ -17,35 +11,35 @@
                 <li class="list-switches__item">
                     {% include molecule('toggler-radio') with {
                         data: {
-                            label: 'checkout.customer.auth_as_user' | trans
+                            label: 'checkout.customer.auth_as_user' | trans,
                         },
                         attributes: {
                             id: 'register',
-                            checked: not data.forms.isLogin,
+                            checked: not data.isLogin,
                             name: 'accountLoginSwitcher',
                             'target-class-name': 'js-customer-page-login-register',
                         },
-                        class: 'toggler-radio--with-bg'
+                        modifiers: ['with-bg'],
                     } only %}
                 </li>
 
                 <li class="list-switches__item">
                     {% include molecule('toggler-radio') with {
                         data: {
-                            label: 'checkout.customer.auth_as_login' | trans
+                            label: 'checkout.customer.auth_as_login' | trans,
                         },
                         attributes: {
                             id: 'login',
-                            checked: data.forms.isLogin,
+                            checked: data.isLogin,
                             name: 'accountLoginSwitcher',
                             'target-class-name': 'js-customer-page-login',
                         },
-                        class: 'toggler-radio--with-bg'
+                        modifiers: ['with-bg'],
                     } only %}
                 </li>
             </ul>
 
-            <div class="js-customer-page-login-register {{ data.forms.isLogin ? ' is-hidden' : '' }}">
+            <div class="js-customer-page-login-register {{ data.isLogin ? ' is-hidden' }}">
                 {% include molecule('form') with {
                     data: {
                         title: 'checkout.customer.auth_as_user' | trans,
@@ -54,42 +48,42 @@
                             salutation: 'col col--sm-12 col--md-3',
                             first_name: 'col col--sm-12 col--md-4',
                             last_name: 'col col--sm-12 col--md-5',
-                            password: 'col col--sm-12 col--md-6'
+                            password: 'col col--sm-12 col--md-6',
                         },
                         options: {
-                            action: url('register')
+                            action: url('register'),
                         },
                         submit: {
                             enable: true,
                             text: 'checkout.customer.auth_as_user' | trans,
-                            class: 'form__action--login button  button--large button--expand'
-                        }
+                            class: 'form__action--login button button--large button--expand',
+                        },
                     },
                     modifiers: ['grid-indent', 'login', 'checkout-actions'],
-                    qa: 'register-form'
+                    qa: 'register-form',
                 } only %}
             </div>
 
-            <div class="js-customer-page-login {{ data.forms.isLogin ? '' : ' is-hidden' }}">
+            <div class="js-customer-page-login {{ not data.isLogin ? 'is-hidden' }}">
                 {% embed molecule('form') with {
                     data: {
                         title: 'checkout.customer.auth_as_login' | trans,
                         form: data.forms.login,
                         layout: {
                             email: 'col col--sm-12 col--md-6',
-                            password: 'col col--sm-12 col--md-6'
+                            password: 'col col--sm-12 col--md-6',
                         },
                         submit: {
                             enable: true,
                             text: 'forms.submit.login' | trans,
-                            class: 'form__action--login button  button--large button--expand'
+                            class: 'form__action--login button button--large button--expand',
                         },
                         cancel: {
                             enable: true,
-                            qa: 'customer-forgot-password-link'
-                        }
+                            qa: 'customer-forgot-password-link',
+                        },
                     },
-                    modifiers: ['grid-indent', 'login', 'checkout-actions']
+                    modifiers: ['grid-indent', 'login', 'checkout-actions'],
                 } only %}
                     {% block cancel %}
                         <a href="{{ url('password/forgotten') }}" class="link link--darkest link--login-forgot-password" {{qa('customer-forgot-password-link')}}>

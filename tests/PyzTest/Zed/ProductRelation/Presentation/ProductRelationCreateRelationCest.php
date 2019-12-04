@@ -13,6 +13,7 @@ use Spryker\Shared\ProductRelation\ProductRelationTypes;
 
 /**
  * Auto-generated group annotations
+ *
  * @group PyzTest
  * @group Zed
  * @group ProductRelation

@@ -1,0 +1,32 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'date-time-picker',
+    tag: 'date-time-picker',
+} %}
+
+{% define data = {
+    field: required,
+    hasIcon: false,
+} %}
+
+{% define attributes = {
+    language: required,
+    'parent-id': '.' ~ config.name,
+    config: '{}',
+} %}
+
+{% block body %}
+    <div class="{{ config.name }}__content">
+        {{ form_row(data.field) }}
+
+        {% if data.hasIcon %}
+            {% include atom('icon') with {
+                class: config.name ~ '__icon',
+                data: {
+                    name: 'calendar',
+                },
+            } only %}
+        {% endif %}
+    </div>
+{% endblock %}

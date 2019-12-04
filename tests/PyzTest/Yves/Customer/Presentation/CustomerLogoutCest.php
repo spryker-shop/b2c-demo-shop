@@ -14,6 +14,7 @@ use PyzTest\Yves\Customer\PageObject\CustomerOverviewPage;
 
 /**
  * Auto-generated group annotations
+ *
  * @group PyzTest
  * @group Yves
  * @group Customer
@@ -37,6 +38,6 @@ class CustomerLogoutCest
 
         $i->amOnPage(CustomerLogoutPage::URL);
 
-        $i->seeCurrentUrlEquals('/');
+        $i->seeCurrentUrlEquals('/en');
     }
 }

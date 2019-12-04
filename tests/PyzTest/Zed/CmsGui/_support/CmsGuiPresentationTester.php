@@ -9,9 +9,11 @@ namespace PyzTest\Zed\CmsGui;
 
 use Codeception\Actor;
 use Codeception\Scenario;
+use Faker\Factory;
 
 /**
  * Inherited Methods
+ *
  * @method void wantToTest($text)
  * @method void wantTo($text)
  * @method void execute($callable)
@@ -28,6 +30,11 @@ use Codeception\Scenario;
 class CmsGuiPresentationTester extends Actor
 {
     use _generated\CmsGuiPresentationTesterActions;
+
+    /**
+     * @var array|null
+     */
+    protected $localizedFakeData;
 
     /**
      * @param \Codeception\Scenario $scenario
@@ -83,8 +90,12 @@ class CmsGuiPresentationTester extends Actor
      */
     public function fillLocalizedUrlForm($formIndex, $name, $url)
     {
-        $this->fillField('//*[@id="cms_page_pageAttributes_' . $formIndex . '_name"]', $name);
-        $this->fillField('//*[@id="cms_page_pageAttributes_' . $formIndex . '_url"]', $url);
+        $nameFieldIdentifier = sprintf('//*[@id="cms_page_pageAttributes_%s_name"]', $formIndex);
+        $this->waitForElementVisible($nameFieldIdentifier);
+        $this->fillField($nameFieldIdentifier, $name);
+        $urlFieldIdentifier = sprintf('//*[@id="cms_page_pageAttributes_%s_url"]', $formIndex);
+        $this->waitForElementVisible($urlFieldIdentifier);
+        $this->fillField($urlFieldIdentifier, $url);
 
         return $this;
     }
@@ -157,5 +168,49 @@ class CmsGuiPresentationTester extends Actor
     public function grabCmsPageId()
     {
         return $this->grabFromCurrentUrl('/id-cms-page=(\d+)/');
+    }
+
+    /**
+     * @return array
+     */
+    protected function getLocalizedFakeData(): array
+    {
+        if (!$this->localizedFakeData) {
+            $this->localizedFakeData = [];
+            $locales = ['de' => 'de_DE', 'en' => 'en_US'];
+            foreach ($locales as $country => $locale) {
+                $faker = Factory::create($locale);
+                $this->localizedFakeData[$country] = [
+                    'name' => $faker->name,
+                    'url' => sprintf('/%s/%s', $country, $faker->slug),
+                ];
+            }
+        }
+
+        return $this->localizedFakeData;
+    }
+
+    /**
+     * @param string $locale
+     *
+     * @return string
+     */
+    public function getLocalizedName(string $locale): string
+    {
+        $localizedFakeData = $this->getLocalizedFakeData();
+
+        return $localizedFakeData[$locale]['name'];
+    }
+
+    /**
+     * @param string $locale
+     *
+     * @return string
+     */
+    public function getLocalizedUrl(string $locale): string
+    {
+        $localizedFakeData = $this->getLocalizedFakeData();
+
+        return $localizedFakeData[$locale]['url'];
     }
 }

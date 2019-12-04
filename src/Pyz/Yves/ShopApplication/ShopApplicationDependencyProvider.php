@@ -11,7 +11,9 @@ use Pyz\Yves\ProductRelationWidget\Widget\UpSellingProductsWidget;
 use Pyz\Yves\ProductSetWidget\Widget\ProductSetIdsWidget;
 use Spryker\Yves\EventDispatcher\Plugin\Application\EventDispatcherApplicationPlugin;
 use Spryker\Yves\Locale\Plugin\Application\LocaleApplicationPlugin;
+use Spryker\Yves\Router\Plugin\Application\RouterApplicationPlugin;
 use Spryker\Yves\Store\Plugin\Application\StoreApplicationPlugin;
+use Spryker\Yves\Translator\Plugin\Application\TranslatorApplicationPlugin;
 use Spryker\Yves\Twig\Plugin\Application\TwigApplicationPlugin;
 use SprykerShop\Yves\AgentWidget\Widget\AgentControlBarWidget;
 use SprykerShop\Yves\AvailabilityNotificationWidget\Widget\AvailabilityNotificationSubscriptionWidget;
@@ -22,6 +24,7 @@ use SprykerShop\Yves\CategoryImageStorageWidget\Widget\CategoryImageStorageWidge
 use SprykerShop\Yves\CheckoutWidget\Widget\CheckoutBreadcrumbWidget;
 use SprykerShop\Yves\CurrencyWidget\Widget\CurrencyWidget;
 use SprykerShop\Yves\CustomerPage\Widget\CustomerNavigationWidget;
+use SprykerShop\Yves\CustomerReorderWidget\Plugin\CustomerPage\CustomerReorderItemCheckboxWidget;
 use SprykerShop\Yves\DiscountPromotionWidget\Widget\CartDiscountPromotionProductListWidget;
 use SprykerShop\Yves\DiscountWidget\Widget\CheckoutVoucherFormWidget;
 use SprykerShop\Yves\DiscountWidget\Widget\DiscountVoucherFormWidget;
@@ -81,6 +84,7 @@ class ShopApplicationDependencyProvider extends SprykerShopApplicationDependency
             CmsProductGroupWidget::class,
             CurrencyWidget::class,
             CustomerNavigationWidget::class,
+            CustomerReorderItemCheckboxWidget::class,
             DisplayProductAbstractReviewWidget::class,
             LanguageSwitcherWidget::class,
             NavigationWidget::class,
@@ -132,6 +136,8 @@ class ShopApplicationDependencyProvider extends SprykerShopApplicationDependency
             new ShopApplicationApplicationPlugin(),
             new StoreApplicationPlugin(),
             new LocaleApplicationPlugin(),
+            new TranslatorApplicationPlugin(),
+            new RouterApplicationPlugin(),
         ];
     }
 }

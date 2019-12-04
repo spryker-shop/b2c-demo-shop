@@ -20,7 +20,6 @@ class DataImportConfig extends SprykerDataImportConfig
     public const IMPORT_TYPE_GLOSSARY = 'glossary';
     public const IMPORT_TYPE_NAVIGATION = 'navigation';
     public const IMPORT_TYPE_NAVIGATION_NODE = 'navigation-node';
-    public const IMPORT_TYPE_PRODUCT_PRICE = 'product-price';
     public const IMPORT_TYPE_PRODUCT_STOCK = 'product-stock';
     public const IMPORT_TYPE_PRODUCT_ABSTRACT = 'product-abstract';
     public const IMPORT_TYPE_PRODUCT_ABSTRACT_STORE = 'product-abstract-store';
@@ -40,15 +39,12 @@ class DataImportConfig extends SprykerDataImportConfig
     public const IMPORT_TYPE_CMS_TEMPLATE = 'cms-template';
     public const IMPORT_TYPE_CMS_BLOCK = 'cms-block';
     public const IMPORT_TYPE_CMS_BLOCK_STORE = 'cms-block-store';
-    public const IMPORT_TYPE_CMS_BLOCK_CATEGORY_POSITION = 'cms-block-category-position';
-    public const IMPORT_TYPE_CMS_BLOCK_CATEGORY = 'cms-block-category';
     public const IMPORT_TYPE_DISCOUNT = 'discount';
     public const IMPORT_TYPE_DISCOUNT_STORE = 'discount-store';
     public const IMPORT_TYPE_DISCOUNT_AMOUNT = 'discount-amount';
     public const IMPORT_TYPE_DISCOUNT_VOUCHER = 'discount-voucher';
     public const IMPORT_TYPE_SHIPMENT = 'shipment';
     public const IMPORT_TYPE_SHIPMENT_PRICE = 'shipment-price';
-    public const IMPORT_TYPE_STOCK = 'stock';
     public const IMPORT_TYPE_TAX = 'tax';
     public const IMPORT_TYPE_CURRENCY = 'currency';
     public const IMPORT_TYPE_STORE = 'store';
@@ -110,14 +106,6 @@ class DataImportConfig extends SprykerDataImportConfig
     public function getProductStockDataImporterConfiguration()
     {
         return $this->buildImporterConfiguration('product_stock.csv', static::IMPORT_TYPE_PRODUCT_STOCK);
-    }
-
-    /**
-     * @return \Generated\Shared\Transfer\DataImporterConfigurationTransfer
-     */
-    public function getStockDataImporterConfiguration()
-    {
-        return $this->buildImporterConfiguration('stock.csv', static::IMPORT_TYPE_STOCK);
     }
 
     /**
@@ -296,22 +284,6 @@ class DataImportConfig extends SprykerDataImportConfig
     public function getCmsBlockStoreDataImporterConfiguration()
     {
         return $this->buildImporterConfiguration('cms_block_store.csv', static::IMPORT_TYPE_CMS_BLOCK_STORE);
-    }
-
-    /**
-     * @return \Generated\Shared\Transfer\DataImporterConfigurationTransfer
-     */
-    public function getCmsBlockCategoryPositionDataImporterConfiguration()
-    {
-        return $this->buildImporterConfiguration('cms_block_category_position.csv', static::IMPORT_TYPE_CMS_BLOCK_CATEGORY_POSITION);
-    }
-
-    /**
-     * @return \Generated\Shared\Transfer\DataImporterConfigurationTransfer
-     */
-    public function getCmsBlockCategoryDataImporterConfiguration()
-    {
-        return $this->buildImporterConfiguration('cms_block_category.csv', static::IMPORT_TYPE_CMS_BLOCK_CATEGORY);
     }
 
     /**

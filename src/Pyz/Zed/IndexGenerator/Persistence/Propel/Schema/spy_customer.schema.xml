@@ -1,6 +1,9 @@
 <?xml version="1.0"?>
 <database xmlns="spryker:schema-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\Customer\Persistence" package="src.Orm.Zed.Customer.Persistence">
   <table name="spy_customer">
+    <index name="index-spy_customer-fk_user">
+      <index-column name="fk_user"/>
+    </index>
     <index name="index-spy_customer-default_billing_address">
       <index-column name="default_billing_address"/>
     </index>
@@ -9,9 +12,6 @@
     </index>
     <index name="index-spy_customer-fk_locale">
       <index-column name="fk_locale"/>
-    </index>
-    <index name="index-spy_customer-fk_user">
-      <index-column name="fk_user"/>
     </index>
   </table>
   <table name="spy_customer_address">

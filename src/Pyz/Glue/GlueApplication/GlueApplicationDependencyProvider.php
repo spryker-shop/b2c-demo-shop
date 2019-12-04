@@ -33,6 +33,8 @@ use Spryker\Glue\CheckoutRestApi\Plugin\GlueApplication\CheckoutDataResourcePlug
 use Spryker\Glue\CheckoutRestApi\Plugin\GlueApplication\CheckoutResourcePlugin;
 use Spryker\Glue\ContentBannersRestApi\Plugin\ContentBannerResourceRoutePlugin;
 use Spryker\Glue\ContentProductAbstractListsRestApi\Plugin\ContentProductAbstractListRoutePlugin;
+use Spryker\Glue\CustomerAccessRestApi\Plugin\GlueApplication\CustomerAccessFormatRequestPlugin;
+use Spryker\Glue\CustomerAccessRestApi\Plugin\GlueApplication\CustomerAccessResourceRoutePlugin;
 use Spryker\Glue\CustomersRestApi\CustomersRestApiConfig;
 use Spryker\Glue\CustomersRestApi\Plugin\AddressesResourceRoutePlugin;
 use Spryker\Glue\CustomersRestApi\Plugin\CustomerForgottenPasswordResourceRoutePlugin;
@@ -95,7 +97,7 @@ use Spryker\Glue\WishlistsRestApi\WishlistsRestApiConfig;
 class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependencyProvider
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @return \Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\ResourceRoutePluginInterface[]
      */
@@ -143,11 +145,12 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
             new ContentBannerResourceRoutePlugin(),
             new ContentProductAbstractListRoutePlugin(),
             new UrlResolverResourceRoutePlugin(),
+            new CustomerAccessResourceRoutePlugin(),
         ];
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @return \Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\ValidateHttpRequestPluginInterface[]
      */
@@ -159,7 +162,19 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
+     *
+     * @return \Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\FormatRequestPluginInterface[]
+     */
+    protected function getFormatRequestPlugins(): array
+    {
+        return [
+            new CustomerAccessFormatRequestPlugin(),
+        ];
+    }
+
+    /**
+     * {@inheritDoc}
      *
      * @return \Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\ValidateRestRequestPluginInterface[]
      */
@@ -171,7 +186,7 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @return \Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\RestRequestValidatorPluginInterface[]
      */
@@ -187,7 +202,7 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @return \Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\FormatResponseHeadersPluginInterface[]
      */
@@ -200,7 +215,7 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @return \Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\ControllerBeforeActionPluginInterface[]
      */
@@ -216,7 +231,7 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @param \Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\ResourceRelationshipCollectionInterface $resourceRelationshipCollection
      *

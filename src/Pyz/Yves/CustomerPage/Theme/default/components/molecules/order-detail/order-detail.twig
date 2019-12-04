@@ -1,0 +1,52 @@
+{% extends molecule('order-detail', '@SprykerShop:CustomerPage') %}
+
+{% block body %}
+    <h2 class="title title--primary">{{ 'customer.profile.order_details' | trans }}</h2>
+
+    {% include molecule('order-detail-header', 'CustomerPage') with {
+        data: {
+            orderReference: data.order.orderReference,
+            createdAt: data.order.createdAt,
+        },
+    } only %}
+
+    {% include molecule('order-detail-table', 'CustomerPage') with {
+        data: {
+            shipmentGroups: data.shipmentGroups,
+            orderShipmentExpenses: data.orderShipmentExpenses,
+            currencyIsoCode: data.order.currencyIsoCode,
+            order: data.order,
+        },
+    } only %}
+
+    <div class="order-detail-block">
+        <h3 class="title title--secondary-box">{{ 'customer.order.payment' | trans }}</h3>
+        <div class="grid grid--justify grid--baseline">
+            <div class="col col--sm-12 col--md-5 col--lg-4">
+                <h4 class="title title--secondary-small">{{ data.order.payments[0].paymentMethod | trans | capitalize }}</h4>
+                {% include molecule('order-payment', 'CustomerPage') with {
+                    data: {
+                        payments: data.order.payments,
+                        currencyIsoCode: data.order.currencyIsoCode,
+                    },
+                } only %}
+            </div>
+            <div class="col col--sm-12 col--md-5 col--lg-7">
+                <h4 class="title title--secondary-small">{{ 'customer.order.billing_address' | trans }}</h4>
+                {% include molecule('display-address') with {
+                    class: 'spacing-bottom',
+                    data: {
+                        address: data.order.billingAddress,
+                    },
+                } only %}
+            </div>
+        </div>
+    </div>
+
+    <h3 class="title title--secondary-box">{{ 'customer.order.grandTotal' | trans }}</h3>
+    {% include molecule('order-summary', 'CustomerPage') with {
+        data: {
+            order: data.order,
+        },
+    } only %}
+{% endblock %}

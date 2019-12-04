@@ -48,13 +48,8 @@ $config[KernelConstants::CORE_NAMESPACES] = [
 $config[ApplicationConstants::PROJECT_TIMEZONE] = 'UTC';
 $config[KernelConstants::PROJECT_NAMESPACE] = 'Pyz';
 
-$config[TwigConstants::ZED_TWIG_OPTIONS] = [
-    'cache' => APPLICATION_ROOT_DIR . '/data/' . Store::getInstance()->getStoreName() . '/cache/Zed/twig',
-];
-
-$config[TwigConstants::YVES_TWIG_OPTIONS] = [
-    'cache' => APPLICATION_ROOT_DIR . '/data/' . Store::getInstance()->getStoreName() . '/cache/Yves/twig',
-];
+$config[TwigConstants::YVES_PATH_CACHE_FILE] = sprintf('%s/data/%s/cache/YVES/twig/.pathCache', APPLICATION_ROOT_DIR, APPLICATION_STORE);
+$config[TwigConstants::ZED_PATH_CACHE_FILE] = sprintf('%s/data/%s/cache/ZED/twig/.pathCache', APPLICATION_ROOT_DIR, APPLICATION_STORE);
 
 $config[TwigConstants::YVES_PATH_CACHE_FILE] = APPLICATION_ROOT_DIR . '/data/' . Store::getInstance()->getStoreName() . '/cache/Yves/twig/.pathCache';
 $config[TwigConstants::ZED_PATH_CACHE_FILE] = APPLICATION_ROOT_DIR . '/data/' . Store::getInstance()->getStoreName() . '/cache/Zed/twig/.pathCache';
@@ -211,7 +206,9 @@ $config[UserConstants::USER_SYSTEM_USERS] = [
     'yves_system',
 ];
 
-/** For a better performance you can turn off Zed authentication */
+/**
+ * For a better performance you can turn off Zed authentication
+ */
 $config[AuthConstants::AUTH_ZED_ENABLED]
     = $config[ZedRequestConstants::AUTH_ZED_ENABLED] = true;
 

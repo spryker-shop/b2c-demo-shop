@@ -43,6 +43,7 @@ use Spryker\Shared\Queue\QueueConfig;
 use Spryker\Shared\Queue\QueueConstants;
 use Spryker\Shared\Quote\QuoteConstants;
 use Spryker\Shared\RabbitMq\RabbitMqEnv;
+use Spryker\Shared\Router\RouterConstants;
 use Spryker\Shared\Sales\SalesConstants;
 use Spryker\Shared\Scheduler\SchedulerConstants;
 use Spryker\Shared\SchedulerJenkins\SchedulerJenkinsConfig;
@@ -69,6 +70,7 @@ use Spryker\Zed\Propel\PropelConfig;
 use SprykerEco\Shared\Loggly\LogglyConstants;
 use SprykerShop\Shared\CalculationPage\CalculationPageConstants;
 use SprykerShop\Shared\ErrorPage\ErrorPageConstants;
+use Twig\Cache\FilesystemCache;
 
 $CURRENT_STORE = Store::getInstance()->getStoreName();
 
@@ -103,17 +105,17 @@ $config[ZedRequestConstants::BASE_URL_SSL_ZED_API] = sprintf(
 );
 
 $config[TwigConstants::ZED_TWIG_OPTIONS] = [
-    'cache' => new Twig_Cache_Filesystem(
+    'cache' => new FilesystemCache(
         sprintf(
             '%s/data/%s/cache/Zed/twig',
             APPLICATION_ROOT_DIR,
             $CURRENT_STORE
         ),
-        Twig_Cache_Filesystem::FORCE_BYTECODE_INVALIDATION
+        FilesystemCache::FORCE_BYTECODE_INVALIDATION
     ),
 ];
 $config[TwigConstants::ZED_PATH_CACHE_FILE] = sprintf(
-    '%s/data/%s/cache/Zed/twig/.pathCache',
+    '%s/data/%s/cache/ZED/twig/.pathCache',
     APPLICATION_ROOT_DIR,
     $CURRENT_STORE
 );
@@ -155,6 +157,10 @@ $config[KernelConstants::DEPENDENCY_INJECTOR_ZED] = [
 ];
 /* End ZED */
 
+// ---------- Routing
+$config[RouterConstants::YVES_IS_SSL_ENABLED] = (bool)getenv('SPRYKER_SSL_ENABLE');
+$config[RouterConstants::ZED_IS_SSL_ENABLED] = (bool)getenv('SPRYKER_SSL_ENABLE');
+
 /* Backend */
 $config[KernelConstants::SPRYKER_ROOT] = APPLICATION_ROOT_DIR . '/vendor/spryker';
 $config[ApplicationConstants::PROJECT_TIMEZONE] = 'UTC';
@@ -177,6 +183,7 @@ $config[KernelConstants::CORE_NAMESPACES] = [
     'SprykerShop',
     'SprykerEco',
     'Spryker',
+    'SprykerSdk',
 ];
 
 $config[UserConstants::USER_SYSTEM_USERS] = [
@@ -302,9 +309,6 @@ $config[EventConstants::LOGGER_ACTIVE] = true;
 
 $config[EventBehaviorConstants::EVENT_BEHAVIOR_TRIGGERING_ACTIVE] = true;
 
-$config[CustomerConstants::CUSTOMER_SECURED_PATTERN] = '(^/login_check$|^(/en|/de)?/customer|^(/en|/de)?/wishlist|^(/en|/de)?/shopping-list|^(/en|/de)?/company(?!/register)|^(/en|/de)?/multi-cart|^(/en|/de)?/shared-cart)';
-$config[CustomerConstants::CUSTOMER_ANONYMOUS_PATTERN] = '^/.*';
-
 $config[TaxConstants::DEFAULT_TAX_RATE] = 19;
 
 $config[FileSystemConstants::FILESYSTEM_SERVICE] = [];
@@ -358,17 +362,17 @@ $config[NewsletterConstants::BASE_URL_YVES] = $config[ApplicationConstants::BASE
 $config[CustomerConstants::BASE_URL_YVES] = $config[ApplicationConstants::BASE_URL_YVES];
 
 $config[TwigConstants::YVES_TWIG_OPTIONS] = [
-    'cache' => new Twig_Cache_Filesystem(
+    'cache' => new FilesystemCache(
         sprintf(
             '%s/data/%s/cache/Yves/twig',
             APPLICATION_ROOT_DIR,
             $CURRENT_STORE
         ),
-        Twig_Cache_Filesystem::FORCE_BYTECODE_INVALIDATION
+        FilesystemCache::FORCE_BYTECODE_INVALIDATION
     ),
 ];
 $config[TwigConstants::YVES_PATH_CACHE_FILE] = sprintf(
-    '%s/data/%s/cache/Yves/twig/.pathCache',
+    '%s/data/%s/cache/YVES/twig/.pathCache',
     APPLICATION_ROOT_DIR,
     $CURRENT_STORE
 );
@@ -431,6 +435,7 @@ $config[GlueApplicationConstants::GLUE_APPLICATION_DOMAIN] = sprintf(
     $gluePort !== 80 ? ':' . $gluePort : ''
 );
 $config[GlueApplicationConstants::GLUE_APPLICATION_REST_DEBUG] = false;
+$config[GlueApplicationConstants::GLUE_APPLICATION_CORS_ALLOW_ORIGIN] = getenv('SPRYKER_GLUE_APPLICATION_CORS_ALLOW_ORIGIN') ?: '';
 
 $config[TestifyConstants::GLUE_APPLICATION_DOMAIN] = $config[GlueApplicationConstants::GLUE_APPLICATION_DOMAIN];
 $config[TestifyConstants::GLUE_OPEN_API_SCHEMA] = APPLICATION_SOURCE_DIR . '/Generated/Glue/Specification/spryker_rest_api.schema.yml';
@@ -661,3 +666,9 @@ $config[ConsoleConstants::ENABLE_DEVELOPMENT_CONSOLE_COMMANDS] = (bool)getenv('D
 
 // ----------- Documentation generator
 $config[DocumentationGeneratorRestApiConstants::ENABLE_REST_API_DOCUMENTATION_GENERATION] = true;
+
+// ----------- HTTP Security
+$config[KernelConstants::DOMAIN_WHITELIST] = [
+    $config[ApplicationConstants::HOST_YVES],
+    $config[ApplicationConstants::HOST_ZED],
+];

@@ -18,9 +18,9 @@ use SprykerShop\Shared\FileManagerWidget\CmsContentWidgetConfigurationProvider\F
 class CmsContentWidgetConfig extends SprykerCmsContentConfig
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
-     * @return array|\Spryker\Shared\CmsContentWidget\Dependency\CmsContentWidgetConfigurationProviderInterface[]
+     * @return \Spryker\Shared\CmsContentWidget\Dependency\CmsContentWidgetConfigurationProviderInterface[]
      */
     public function getCmsContentWidgetConfigurationProviders()
     {

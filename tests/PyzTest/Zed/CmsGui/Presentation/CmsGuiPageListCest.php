@@ -12,6 +12,7 @@ use PyzTest\Zed\CmsGui\PageObject\CmsListPage;
 
 /**
  * Auto-generated group annotations
+ *
  * @group PyzTest
  * @group Zed
  * @group CmsGui

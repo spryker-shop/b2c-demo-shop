@@ -10,6 +10,9 @@ namespace Pyz\Zed\DataImport;
 use Spryker\Zed\CategoryDataImport\Communication\Plugin\CategoryDataImportPlugin;
 use Spryker\Zed\CmsPageDataImport\Communication\Plugin\CmsPageDataImportPlugin;
 use Spryker\Zed\CmsPageDataImport\Communication\Plugin\CmsPageStoreDataImportPlugin;
+use Spryker\Zed\CmsSlotBlockDataImport\Communication\Plugin\CmsSlotBlockDataImportPlugin;
+use Spryker\Zed\CmsSlotDataImport\Communication\Plugin\CmsSlotDataImportPlugin;
+use Spryker\Zed\CmsSlotDataImport\Communication\Plugin\CmsSlotTemplateDataImportPlugin;
 use Spryker\Zed\ContentBannerDataImport\Communication\Plugin\ContentBannerDataImportPlugin;
 use Spryker\Zed\ContentProductDataImport\Communication\Plugin\ContentProductAbstractListDataImportPlugin;
 use Spryker\Zed\ContentProductSetDataImport\Communication\Plugin\ContentProductSetDataImportPlugin;
@@ -24,6 +27,11 @@ use Spryker\Zed\ProductAlternativeDataImport\Communication\Plugin\ProductAlterna
 use Spryker\Zed\ProductDiscontinuedDataImport\Communication\Plugin\ProductDiscontinuedDataImportPlugin;
 use Spryker\Zed\ProductQuantityDataImport\Communication\Plugin\ProductQuantityDataImportPlugin;
 use Spryker\Zed\SalesOrderThresholdDataImport\Communication\Plugin\DataImport\SalesOrderThresholdDataImportPlugin;
+use Spryker\Zed\ShipmentDataImport\Communication\Plugin\ShipmentDataImportPlugin;
+use Spryker\Zed\ShipmentDataImport\Communication\Plugin\ShipmentMethodPriceDataImportPlugin;
+use Spryker\Zed\ShipmentDataImport\Communication\Plugin\ShipmentMethodStoreDataImportPlugin;
+use Spryker\Zed\StockDataImport\Communication\Plugin\StockDataImportPlugin;
+use Spryker\Zed\StockDataImport\Communication\Plugin\StockStoreDataImportPlugin;
 
 class DataImportDependencyProvider extends SprykerDataImportDependencyProvider
 {
@@ -140,6 +148,14 @@ class DataImportDependencyProvider extends SprykerDataImportDependencyProvider
             new FileManagerDataImportPlugin(),
             new PriceProductScheduleDataImportPlugin(),
             new ProductQuantityDataImportPlugin(),
+            new CmsSlotTemplateDataImportPlugin(),
+            new CmsSlotDataImportPlugin(),
+            new CmsSlotBlockDataImportPlugin(),
+            new ShipmentDataImportPlugin(),
+            new ShipmentMethodPriceDataImportPlugin(),
+            new ShipmentMethodStoreDataImportPlugin(),
+            new StockDataImportPlugin(),
+            new StockStoreDataImportPlugin(),
         ];
     }
 

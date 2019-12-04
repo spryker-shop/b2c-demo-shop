@@ -1,0 +1,29 @@
+{% extends template('page-layout-main') %}
+
+{% define data = {
+    idCmsPage: _view.idCmsPage,
+    title: _view.pageTitle | default('global.spryker.shop' | trans),
+    metaTitle: _view.pageTitle | default('global.spryker.shop' | trans),
+    metaDescription: _view.pageDescription | default,
+    metaKeywords: _view.pageKeywords | default,
+} %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block title %}
+    <!-- CMS_PLACEHOLDER : "title" -->
+    <div class="cms-page__title">{{ spyCms('title') | raw }}</div>
+{% endblock %}
+
+{% block content %}
+    <!-- CMS_PLACEHOLDER : "content" -->
+    <div class="cms-page__content">
+        {{ spyCms('content') | raw }}
+    </div>
+
+    <div class="box">
+        {% cms_slot 'slt-8' with {
+            idCmsPage: data.idCmsPage,
+        } %}
+    </div>
+{% endblock %}

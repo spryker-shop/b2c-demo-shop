@@ -1,5 +1,10 @@
 <?xml version="1.0"?>
 <database xmlns="spryker:schema-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\Cms\Persistence" package="src.Orm.Zed.Cms.Persistence">
+  <table name="spy_cms_version">
+    <index name="index-spy_cms_version-fk_user">
+      <index-column name="fk_user"/>
+    </index>
+  </table>
   <table name="spy_cms_page">
     <index name="index-spy_cms_page-fk_template">
       <index-column name="fk_template"/>
@@ -16,11 +21,6 @@
   <table name="spy_cms_glossary_key_mapping">
     <index name="index-spy_cms_glossary_key_mapping-fk_glossary_key">
       <index-column name="fk_glossary_key"/>
-    </index>
-  </table>
-  <table name="spy_cms_version">
-    <index name="index-spy_cms_version-fk_user">
-      <index-column name="fk_user"/>
     </index>
   </table>
   <table name="spy_cms_page_store">
