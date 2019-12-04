@@ -12,8 +12,7 @@
 
 {% set canProceedToCheckout = data.cart.items is not empty
     and data.isQuoteValid
-    and (not is_granted('IS_AUTHENTICATED_FULLY') or can('WriteSharedCartPermissionPlugin', data.cart.idQuote))
-%}
+    and (not is_granted('IS_AUTHENTICATED_FULLY') or can('WriteSharedCartPermissionPlugin', data.cart.idQuote)) %}
 
 {% block body %}
     <div class="{{ config.name }}__inner">
@@ -33,12 +32,13 @@
                 {{ 'cart.total.tax_total' | trans }}
                 <span class="float-right">{{ data.cart.totals.taxTotal.amount | money }}</span>
             </li>
-            {% if data.cart.totals.expenseTotal > 0 %}
+
+            {% for expense in data.cart.expenses if expense.type == 'THRESHOLD_EXPENSE_TYPE' %}
                 <li class="{{ config.name }}__item spacing-y spacing-y--bigger">
                     {{ 'sales-order-threshold.strategy.soft-minimum-threshold-fixed-fee' | trans }}
-                    <span class="float-right">{{ data.cart.totals.expenseTotal | money }}</span>
+                    <span class="float-right">{{ expense.sumPrice | money }}</span>
                 </li>
-            {% endif %}
+            {% endfor %}
 
             {% include molecule('cart-discount-summary', 'DiscountWidget') ignore missing with {
                 class: config.name ~ '__item spacing-y spacing-y--bigger',
@@ -54,7 +54,7 @@
                 <strong>{{ 'cart.price.grand.total' | trans }}</strong>
                 <strong class="float-right">{{ data.cart.totals.grandTotal | money }}</strong>
             </li>
-            
+
             {% include molecule('gift-card-payment-summary', 'GiftCardWidget') ignore missing with {
                 class: 'list spacing-y',
                 data: {
@@ -66,7 +66,8 @@
     </div>
 
     {% if canProceedToCheckout %}
-        <a class="button button--expand button--large" href="{{ url('checkout-index') }}" {{qa('cart-go-to-checkout')}}>
+        <a class="button button--expand button--large"
+           href="{{ url('checkout-index') }}" {{ qa('cart-go-to-checkout') }}>
             {{ 'cart.checkout' | trans }}
         </a>
     {% endif %}
