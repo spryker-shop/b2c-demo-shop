@@ -9,39 +9,38 @@
 } %}
 
 {% define attributes = {
-    'data-json': ''
+    'data-json': '{
+        "slidesToShow": 1,
+        "dots": true,
+        "autoplay": true,
+        "nextArrow": false,
+        "prevArrow": false,
+        "autoplaySpeed": 4000,
+        "centerMode": true,
+        "centerPadding": "120px",
+        "responsive": [{
+            "breakpoint": 1240,
+            "settings": {
+                "centerPadding": "40px"
+            }
+        },
+        {
+            "breakpoint": 770,
+            "settings": {
+                "centerPadding": "12px",
+                "autoplay": false
+            }
+        }
+    ]}'
 } %}
 
 {% block body %}
-    {% embed molecule('slick-carousel') with {
+    {% include molecule('slick-carousel') with {
+        data: {
+            slides: data.slides | default([]),
+        },
         attributes: {
-            'data-json': '{
-                "slidesToShow": 1,
-                "dots": true,
-                "autoplay": true,
-                "nextArrow": false,
-                "prevArrow": false,
-                "autoplaySpeed": 4000,
-                "centerMode": true,
-                "centerPadding": "120px",
-                "responsive": [{
-                    "breakpoint": 1240,
-                    "settings": {
-                        "centerPadding": "40px"
-                    }
-                },
-                {
-                    "breakpoint": 770,
-                    "settings": {
-                        "centerPadding": "12px",
-                        "autoplay": false
-                    }
-                }
-            ]}'
-        }
+            'data-json': attributes['data-json'],
+        },
     } only %}
-        {% block slides %}
-            {{ spyCmsBlock({name: 'Homepage Top Banners Carousel'}) }}
-        {% endblock %}
-    {% endembed %}
 {% endblock %}

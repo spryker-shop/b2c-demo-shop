@@ -1,0 +1,78 @@
+{% extends template('page-layout-catalog', 'CatalogPage') %}
+
+{% define data = {
+    products: _view.products,
+    facets: _view.facets,
+    searchString: _view.searchString | default,
+    category: _view.category | default,
+    categories: categories | default([]),
+    categoryId: _view.idCategory | default,
+    isEmptyCategoryFilterValueVisible: _view.isEmptyCategoryFilterValueVisible | default,
+    filterPath: _view.filterPath | default,
+    viewMode: _view.viewMode | default,
+
+    title: _view.category.name | default,
+    metaTitle: _view.pageTitle | default(_view.category.name | default),
+    metaDescription: _view.pageDescription | default,
+    metaKeywords: _view.pageKeywords | default,
+
+    pagination: {
+        parameters: app.request.query.all(),
+        currentPage: _view.pagination.currentPage,
+        paginationPath: app.request.getPathInfo(),
+        maxPage: _view.pagination.maxPage,
+        showAlwaysFirstAndLast: true
+    }
+} %}
+
+{% block filterSection %}
+    {{ parent() }}
+
+    {% if data.categoryId %}
+        <div class="catalog-cms-block catalog-cms-block--middle">
+            {% cms_slot 'slt-5' required ['idCategory'] with {
+                idCategory: data.categoryId,
+            } %}
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block filterBar %}
+    {{ parent() }}
+
+    {% if data.categoryId %}
+        <div class="box">
+            {% cms_slot 'slt-5' required ['idCategory'] with {
+                idCategory: data.categoryId,
+            } %}
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block form %}
+    {{ parent() }}
+
+    {% if data.searchString is not empty %}
+        <input type="hidden" name="q" value="{{ data.searchString }}" />
+    {% endif %}
+{% endblock %}
+
+{% block catalogContent %}
+    {% if data.categoryId %}
+        <div class="catalog-cms-block catalog-cms-block--top">
+            {% cms_slot 'slt-4' required ['idCategory'] with {
+                idCategory: data.categoryId,
+            } %}
+        </div>
+    {% endif %}
+
+    {{ parent() }}
+
+    {% if data.categoryId %}
+        <div class="catalog-cms-block catalog-cms-block--bottom">
+            {% cms_slot 'slt-6' required ['idCategory'] with {
+                idCategory: data.categoryId,
+            } %}
+        </div>
+    {% endif %}
+{% endblock %}

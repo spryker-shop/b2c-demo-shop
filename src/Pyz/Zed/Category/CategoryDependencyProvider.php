@@ -16,8 +16,6 @@ use Spryker\Zed\CategoryImage\Communication\Plugin\RemoveCategoryImageSetRelatio
 use Spryker\Zed\CategoryImageGui\Communication\Plugin\CategoryImageFormPlugin;
 use Spryker\Zed\CategoryImageGui\Communication\Plugin\CategoryImageFormTabExpanderPlugin;
 use Spryker\Zed\CategoryNavigationConnector\Communication\Plugin\UpdateNavigationRelationPlugin;
-use Spryker\Zed\CmsBlockCategoryConnector\Communication\Plugin\CategoryFormPlugin;
-use Spryker\Zed\CmsBlockCategoryConnector\Communication\Plugin\ReadCmsBlockCategoryRelationsPlugin;
 use Spryker\Zed\ProductCategory\Communication\Plugin\ReadProductCategoryRelationPlugin;
 use Spryker\Zed\ProductCategory\Communication\Plugin\RemoveProductCategoryRelationPlugin;
 use Spryker\Zed\ProductCategory\Communication\Plugin\UpdateProductCategoryRelationPlugin;
@@ -47,7 +45,6 @@ class CategoryDependencyProvider extends SprykerDependencyProvider
     {
         return [
             new UpdateProductCategoryRelationPlugin(),
-            new CategoryFormPlugin(),
             new UpdateNavigationRelationPlugin(),
         ];
     }
@@ -59,7 +56,6 @@ class CategoryDependencyProvider extends SprykerDependencyProvider
     {
         return [
            new ReadProductCategoryRelationPlugin(),
-           new ReadCmsBlockCategoryRelationsPlugin(),
         ];
     }
 
@@ -112,7 +108,6 @@ class CategoryDependencyProvider extends SprykerDependencyProvider
          * @var \Spryker\Zed\Category\Dependency\Plugin\CategoryFormPluginInterface[] $formPlugins
          */
         $formPlugins = [
-            new CategoryFormPlugin(),
             new CategoryImageFormPlugin(),
         ];
 
