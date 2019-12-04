@@ -15,7 +15,7 @@ class CmsBlockStorageDependencyProvider extends SprykerCmsBlockStorageDependency
     /**
      * @return \Spryker\Zed\CmsBlockStorage\Dependency\Plugin\CmsBlockStorageDataExpanderPluginInterface[]
      */
-    protected function getContentWidgetDataExpanderPlugins()
+    protected function getContentWidgetDataExpanderPlugins(): array
     {
         return [
             new CmsBlockStorageStorageParameterMapExpanderPlugin(),
