@@ -9,5 +9,5 @@ namespace PyzTest\Yves\Customer\PageObject;
 
 class CustomerLogoutPage extends Customer
 {
-    public const URL = '/logout';
+    public const URL = '/en/logout';
 }

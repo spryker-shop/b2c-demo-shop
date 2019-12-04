@@ -11,7 +11,7 @@ use Generated\Shared\Transfer\AddressTransfer;
 
 class CustomerAddressesPage extends Customer
 {
-    public const URL = '/customer/address';
+    public const URL = '/en/customer/address';
 
     public const ADD_ADDRESS_LINK = '[data-qa="customer-add-new-address"]';
 

@@ -21,6 +21,7 @@ use Spryker\Shared\Propel\PropelConstants;
 use Spryker\Shared\PropelOrm\PropelOrmConstants;
 use Spryker\Shared\PropelQueryBuilder\PropelQueryBuilderConstants;
 use Spryker\Shared\RabbitMq\RabbitMqEnv;
+use Spryker\Shared\Router\RouterConstants;
 use Spryker\Shared\Scheduler\SchedulerConstants;
 use Spryker\Shared\SchedulerJenkins\SchedulerJenkinsConfig;
 use Spryker\Shared\SchedulerJenkins\SchedulerJenkinsConstants;
@@ -47,8 +48,12 @@ $config[WebProfilerConstants::ENABLE_WEB_PROFILER]
     = $config[ConfigConstants::ENABLE_WEB_PROFILER]
     = true;
 
-$config[ApplicationConstants::ZED_SSL_ENABLED] = false;
-$config[ApplicationConstants::YVES_SSL_ENABLED] = false;
+$config[ApplicationConstants::ZED_SSL_ENABLED]
+    = $config[RouterConstants::ZED_IS_SSL_ENABLED]
+    = false;
+$config[ApplicationConstants::YVES_SSL_ENABLED]
+    = $config[RouterConstants::YVES_IS_SSL_ENABLED]
+    = false;
 
 // ---------- Propel
 $config[PropelConstants::PROPEL_DEBUG] = false;
