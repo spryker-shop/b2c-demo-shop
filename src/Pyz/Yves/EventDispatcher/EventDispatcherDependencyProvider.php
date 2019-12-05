@@ -19,6 +19,7 @@ use Spryker\Yves\Router\Plugin\EventDispatcher\RouterListenerEventDispatcherPlug
 use Spryker\Yves\Monitoring\Plugin\EventDispatcher\MonitoringRequestTransactionEventDispatcherPlugin;
 use Spryker\Yves\Router\Plugin\EventDispatcher\RouterLocaleEventDispatcherPlugin;
 use Spryker\Yves\Router\Plugin\EventDispatcher\RouterSslRedirectEventDispatcherPlugin;
+use Spryker\Yves\Session\Plugin\EventDispatcher\SessionEventDispatcherPlugin;
 use Spryker\Yves\Storage\Plugin\EventDispatcher\StorageCacheEventDispatcherPlugin;
 use SprykerShop\Yves\ErrorPage\Plugin\EventDispatcher\ErrorPageEventDispatcherPlugin;
 use SprykerShop\Yves\ShopApplication\Plugin\EventDispatcher\ShopApplicationEventDispatcherPlugin;
@@ -49,6 +50,7 @@ class EventDispatcherDependencyProvider extends SprykerEventDispatcherDependency
             new HstsHeaderEventDispatcher(),
             new RouterListenerEventDispatcherPlugin(),
             new RouterSslRedirectEventDispatcherPlugin(),
+            new SessionEventDispatcherPlugin(),
         ];
     }
 }

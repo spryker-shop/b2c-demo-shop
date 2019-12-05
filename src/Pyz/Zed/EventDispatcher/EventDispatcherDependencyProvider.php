@@ -22,6 +22,8 @@ use Spryker\Zed\Router\Communication\Plugin\EventDispatcher\RouterListenerEventD
 use Spryker\Zed\Monitoring\Communication\Plugin\EventDispatcher\MonitoringRequestTransactionEventDispatcherPlugin;
 use Spryker\Zed\Router\Communication\Plugin\EventDispatcher\RouterLocaleEventDispatcherPlugin;
 use Spryker\Zed\Router\Communication\Plugin\EventDispatcher\RouterSslRedirectEventDispatcherPlugin;
+use Spryker\Zed\Session\Communication\Plugin\EventDispatcher\SaveSessionEventDispatcherPlugin;
+use Spryker\Zed\Session\Communication\Plugin\EventDispatcher\SessionEventDispatcherPlugin;
 use Spryker\Zed\Twig\Communication\Plugin\EventDispatcher\TwigEventDispatcherPlugin;
 use Spryker\Zed\ZedRequest\Communication\Plugin\EventDispatcher\GatewayControllerEventDispatcherPlugin;
 
@@ -49,6 +51,8 @@ class EventDispatcherDependencyProvider extends SprykerEventDispatcherDependency
             new HstsHeaderEventDispatcher(),
             new RouterListenerEventDispatcherPlugin(),
             new RouterSslRedirectEventDispatcherPlugin(),
+            new SessionEventDispatcherPlugin(),
+            new SaveSessionEventDispatcherPlugin(),
         ];
     }
 }
