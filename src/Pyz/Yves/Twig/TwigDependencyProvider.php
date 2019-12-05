@@ -36,6 +36,7 @@ use SprykerShop\Yves\ShopApplication\Plugin\Twig\ShopApplicationTwigPlugin;
 use SprykerShop\Yves\ShopApplication\Plugin\Twig\WidgetTagTwigPlugin;
 use SprykerShop\Yves\ShopApplication\Plugin\Twig\WidgetTwigPlugin;
 use SprykerShop\Yves\ShopApplication\Plugin\TwigFormRuntimeLoaderPlugin;
+use SprykerShop\Yves\ShopCmsSlot\Plugin\Twig\ShopCmsSlotTwigPlugin;
 use SprykerShop\Yves\ShopPermission\Plugin\Twig\ShopPermissionTwigPlugin;
 use SprykerShop\Yves\ShopUi\Plugin\Twig\ShopUiTwigPlugin;
 use SprykerShop\Yves\WebProfilerWidget\Plugin\Twig\WebProfilerTwigLoaderPlugin;
@@ -77,6 +78,7 @@ class TwigDependencyProvider extends SprykerTwigDependencyProvider
             new ContentProductAbstractListTwigPlugin(),
             new ContentProductSetTwigPlugin(),
             new ContentFileListTwigPlugin(),
+            new ShopCmsSlotTwigPlugin(),
             new TranslatorTwigPlugin(),
         ];
     }

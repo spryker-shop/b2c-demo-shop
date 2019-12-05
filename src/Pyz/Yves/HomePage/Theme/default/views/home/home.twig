@@ -20,38 +20,26 @@
 {% block pageInfo %}{% endblock %}
 
 {% block container %}
-    {% include organism('jumbotron-slider') only %}
+    {% embed organism('jumbotron-slider') only %}
+        {% block body %}
+            {% embed molecule('slick-carousel') with {
+                attributes: {
+                    'data-json': attributes['data-json'],
+                },
+            } only %}
+                {% block slides %}
+                    {% cms_slot 'slt-2' %}
+                {% endblock %}
+            {% endembed %}
+        {% endblock %}
+    {% endembed %}
+
 
     <div class="container container--home-page">
         <main>
             {% block content %}
-                {{ spyCmsBlock({
-                    name: 'Inspirational block for Cameras'
-                }) }}
 
-                {{ spyCmsBlock({
-                    name: 'Inspirational block for Accessories 1'
-                }) }}
-
-                {{ spyCmsBlock({
-                    name: 'Homepage Top Sellers Promotion'
-                }) }}
-
-                {{ spyCmsBlock({
-                    name: 'Inspirational block for Samsung'
-                }) }}
-
-                {{ spyCmsBlock({
-                    name: 'Inspirational block for Accessories 2'
-                }) }}
-
-                {{ spyCmsBlock({
-                    name: 'Teaser with img home page'
-                }) }}
-
-                {{ spyCmsBlock({
-                    name: 'Homepage Smartphone promotion'
-                }) }}
+                {% cms_slot 'slt-3' %}
 
             {% endblock %}
         </main>
