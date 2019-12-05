@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of the Spryker Commerce OS.
+ * This file is part of the Spryker Suite.
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
@@ -11,6 +11,8 @@ use Spryker\Client\Catalog\Plugin\Config\CatalogSearchConfigBuilder;
 use Spryker\Client\Kernel\Container;
 use Spryker\Client\ProductSearchConfigStorage\Plugin\Config\ProductSearchConfigExpanderPlugin;
 use Spryker\Client\Search\SearchDependencyProvider as SprykerSearchDependencyProvider;
+use Spryker\Client\SearchElasticsearch\Plugin\ElasticsearchSearchAdapterPlugin;
+use Spryker\Client\SearchElasticsearch\Plugin\ElasticsearchSearchContextExpanderPlugin;
 
 class SearchDependencyProvider extends SprykerSearchDependencyProvider
 {
@@ -36,5 +38,25 @@ class SearchDependencyProvider extends SprykerSearchDependencyProvider
         $searchConfigExpanderPlugins[] = new ProductSearchConfigExpanderPlugin();
 
         return $searchConfigExpanderPlugins;
+    }
+
+    /**
+     * @return \Spryker\Client\SearchExtension\Dependency\Plugin\SearchAdapterPluginInterface[]
+     */
+    protected function getClientAdapterPlugins(): array
+    {
+        return [
+            new ElasticsearchSearchAdapterPlugin(),
+        ];
+    }
+
+    /**
+     * @return \Spryker\Client\SearchExtension\Dependency\Plugin\SearchContextExpanderPluginInterface[]
+     */
+    protected function getSearchContextExpanderPlugins(): array
+    {
+        return [
+            new ElasticsearchSearchContextExpanderPlugin(),
+        ];
     }
 }

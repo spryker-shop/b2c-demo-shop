@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of the Spryker Commerce OS.
+ * This file is part of the Spryker Suite.
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
@@ -13,19 +13,28 @@ use Elastica\Query\BoolQuery;
 use Elastica\Query\Nested;
 use Elastica\Query\Term;
 use Generated\Shared\Search\PageIndexMap;
+use Generated\Shared\Transfer\SearchContextTransfer;
 use Spryker\Client\Kernel\AbstractPlugin;
 use Spryker\Client\ProductLabel\Plugin\ProductLabelFacetConfigTransferBuilderPlugin;
 use Spryker\Client\Search\Dependency\Plugin\QueryInterface;
+use Spryker\Client\SearchExtension\Dependency\Plugin\SearchContextAwareQueryInterface;
 
 /**
  * @method \Pyz\Client\ExampleProductSalePage\ExampleProductSalePageFactory getFactory()
  */
-class SaleSearchQueryPlugin extends AbstractPlugin implements QueryInterface
+class SaleSearchQueryPlugin extends AbstractPlugin implements QueryInterface, SearchContextAwareQueryInterface
 {
+    protected const SOURCE_IDENTIFIER = 'page';
+
     /**
      * @var \Elastica\Query
      */
     protected $query;
+
+    /**
+     * @var \Generated\Shared\Transfer\SearchContextTransfer
+     */
+    protected $searchContextTransfer;
 
     public function __construct()
     {
@@ -33,11 +42,59 @@ class SaleSearchQueryPlugin extends AbstractPlugin implements QueryInterface
     }
 
     /**
+     * {@inheritDoc}
+     * - Returns a query object for sale search.
+     *
+     * @api
+     *
      * @return \Elastica\Query
      */
     public function getSearchQuery()
     {
         return $this->query;
+    }
+
+    /**
+     * {@inheritDoc}
+     * - Defines a context for sale search.
+     *
+     * @api
+     *
+     * @return \Generated\Shared\Transfer\SearchContextTransfer
+     */
+    public function getSearchContext(): SearchContextTransfer
+    {
+        if (!$this->hasSearchContext()) {
+            $this->setupDefaultSearchContext();
+        }
+
+        return $this->searchContextTransfer;
+    }
+
+    /**
+     * {@inheritDoc}
+     * - Sets a context for sale search.
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\SearchContextTransfer $searchContextTransfer
+     *
+     * @return void
+     */
+    public function setSearchContext(SearchContextTransfer $searchContextTransfer): void
+    {
+        $this->searchContextTransfer = $searchContextTransfer;
+    }
+
+    /**
+     * @return void
+     */
+    protected function setupDefaultSearchContext(): void
+    {
+        $searchContextTransfer = new SearchContextTransfer();
+        $searchContextTransfer->setSourceIdentifier(static::SOURCE_IDENTIFIER);
+
+        $this->searchContextTransfer = $searchContextTransfer;
     }
 
     /**
@@ -137,5 +194,13 @@ class SaleSearchQueryPlugin extends AbstractPlugin implements QueryInterface
             ->setSource([PageIndexMap::SEARCH_RESULT_DATA]);
 
         return $query;
+    }
+
+    /**
+     * @return bool
+     */
+    protected function hasSearchContext(): bool
+    {
+        return (bool)$this->searchContextTransfer;
     }
 }

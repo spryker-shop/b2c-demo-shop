@@ -49,6 +49,7 @@ use Spryker\Shared\Scheduler\SchedulerConstants;
 use Spryker\Shared\SchedulerJenkins\SchedulerJenkinsConfig;
 use Spryker\Shared\SchedulerJenkins\SchedulerJenkinsConstants;
 use Spryker\Shared\Search\SearchConstants;
+use Spryker\Shared\SearchElasticsearch\SearchElasticsearchConstants;
 use Spryker\Shared\SequenceNumber\SequenceNumberConstants;
 use Spryker\Shared\Session\SessionConfig;
 use Spryker\Shared\Session\SessionConstants;
@@ -531,22 +532,24 @@ foreach ($rabbitConnections as $key => $connection) {
 /* End Broker */
 
 /* Search service */
-$config[SearchConstants::ELASTICA_PARAMETER__HOST] = getenv('SPRYKER_SEARCH_HOST');
+$config[SearchConstants::ELASTICA_PARAMETER__HOST]
+    = $config[SearchElasticsearchConstants::HOST] = getenv('SPRYKER_SEARCH_HOST');
 $ELASTICA_TRANSPORT_PROTOCOL = 'http';
-$config[SearchConstants::ELASTICA_PARAMETER__TRANSPORT] = $ELASTICA_TRANSPORT_PROTOCOL;
-$config[SearchConstants::ELASTICA_PARAMETER__PORT] = getenv('SPRYKER_SEARCH_PORT');
+$config[SearchConstants::ELASTICA_PARAMETER__TRANSPORT]
+    = $config[SearchElasticsearchConstants::TRANSPORT] = $ELASTICA_TRANSPORT_PROTOCOL;
+$config[SearchConstants::ELASTICA_PARAMETER__PORT]
+    = $config[SearchElasticsearchConstants::PORT] = getenv('SPRYKER_SEARCH_PORT');
 $ELASTICA_AUTH_HEADER = null;
-$config[SearchConstants::ELASTICA_PARAMETER__AUTH_HEADER] = $ELASTICA_AUTH_HEADER;
-$config[SearchConstants::ELASTICA_PARAMETER__INDEX_NAME] = getenv('SPRYKER_SEARCH_NAMESPACE');
+$config[SearchConstants::ELASTICA_PARAMETER__AUTH_HEADER]
+    = $config[SearchElasticsearchConstants::AUTH_HEADER] = $ELASTICA_AUTH_HEADER;
 $config[CollectorConstants::ELASTICA_PARAMETER__INDEX_NAME] = getenv('SPRYKER_SEARCH_NAMESPACE');
 $ELASTICA_DOCUMENT_TYPE = 'page';
-$config[SearchConstants::ELASTICA_PARAMETER__DOCUMENT_TYPE] = $ELASTICA_DOCUMENT_TYPE;
 $config[CollectorConstants::ELASTICA_PARAMETER__DOCUMENT_TYPE] = $ELASTICA_DOCUMENT_TYPE;
 $ELASTICA_PARAMETER__EXTRA = [];
-$config[SearchConstants::ELASTICA_PARAMETER__EXTRA] = $ELASTICA_PARAMETER__EXTRA;
-
-$config[SearchConstants::FULL_TEXT_BOOSTED_BOOSTING_VALUE] = 3;
-$config[SearchConstants::SEARCH_INDEX_NAME_SUFFIX] = '';
+$config[SearchConstants::ELASTICA_PARAMETER__EXTRA]
+    = $config[SearchElasticsearchConstants::EXTRA] = $ELASTICA_PARAMETER__EXTRA;
+$config[SearchConstants::FULL_TEXT_BOOSTED_BOOSTING_VALUE]
+    = $config[SearchElasticsearchConstants::FULL_TEXT_BOOSTED_BOOSTING_VALUE] = 3;
 /* End Search service */
 
 // ---------- KV storage

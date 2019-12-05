@@ -19,6 +19,7 @@ use Spryker\Shared\Propel\PropelConstants;
 use Spryker\Shared\Queue\QueueConstants;
 use Spryker\Shared\Sales\SalesConstants;
 use Spryker\Shared\Search\SearchConstants;
+use Spryker\Shared\SearchElasticsearch\SearchElasticsearchConstants;
 use Spryker\Shared\SequenceNumber\SequenceNumberConstants;
 use Spryker\Shared\Session\SessionConfig;
 use Spryker\Shared\Session\SessionConstants;
@@ -65,31 +66,29 @@ $config[PropelConstants::ZED_DB_SUPPORTED_ENGINES] = [
  * Elasticsearch settings
  */
 $config[ApplicationConstants::ELASTICA_PARAMETER__HOST]
-    = $config[SearchConstants::ELASTICA_PARAMETER__HOST]
+    = $config[SearchElasticsearchConstants::HOST]
     = 'localhost';
 $config[ApplicationConstants::ELASTICA_PARAMETER__TRANSPORT]
-    = $config[SearchConstants::ELASTICA_PARAMETER__TRANSPORT]
+    = $config[SearchElasticsearchConstants::TRANSPORT]
     = 'http';
 $config[ApplicationConstants::ELASTICA_PARAMETER__PORT]
-    = $config[SearchConstants::ELASTICA_PARAMETER__PORT]
+    = $config[SearchElasticsearchConstants::PORT]
     = '10005';
 $config[ApplicationConstants::ELASTICA_PARAMETER__AUTH_HEADER]
-    = $config[SearchConstants::ELASTICA_PARAMETER__AUTH_HEADER]
+    = $config[SearchElasticsearchConstants::AUTH_HEADER]
     = '';
 $config[ApplicationConstants::ELASTICA_PARAMETER__INDEX_NAME]
     = $config[CollectorConstants::ELASTICA_PARAMETER__INDEX_NAME]
-    = $config[SearchConstants::ELASTICA_PARAMETER__INDEX_NAME]
     = null; // Store related config
 $config[ApplicationConstants::ELASTICA_PARAMETER__DOCUMENT_TYPE]
     = $config[CollectorConstants::ELASTICA_PARAMETER__DOCUMENT_TYPE]
-    = $config[SearchConstants::ELASTICA_PARAMETER__DOCUMENT_TYPE]
     = 'page';
 
 /**
  * Page search settings
  */
-$config[SearchConstants::FULL_TEXT_BOOSTED_BOOSTING_VALUE] = 3;
-$config[SearchConstants::SEARCH_INDEX_NAME_SUFFIX] = '';
+$config[SearchConstants::FULL_TEXT_BOOSTED_BOOSTING_VALUE]
+    = $config[SearchElasticsearchConstants::FULL_TEXT_BOOSTED_BOOSTING_VALUE] = 3;
 
 /**
  * Hostname(s) for Yves - Shop frontend
