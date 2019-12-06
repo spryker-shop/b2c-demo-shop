@@ -10,12 +10,12 @@ namespace Pyz\Yves\Twig;
 use Spryker\Service\UtilDateTime\Plugin\Twig\DateTimeFormatterTwigPlugin;
 use Spryker\Shared\Twig\Plugin\DebugTwigPlugin;
 use Spryker\Shared\Twig\Plugin\FormTwigPlugin;
-use Spryker\Shared\Twig\Plugin\HttpKernelTwigPlugin;
 use Spryker\Shared\Twig\Plugin\RoutingTwigPlugin;
-use Spryker\Shared\Twig\Plugin\RuntimeLoaderTwigPlugin;
 use Spryker\Shared\Twig\Plugin\SecurityTwigPlugin;
-use Spryker\Shared\Twig\Plugin\TranslationTwigPlugin;
 use Spryker\Yves\CmsContentWidget\Plugin\Twig\CmsContentWidgetTwigPlugin;
+use Spryker\Yves\Http\Plugin\Twig\HttpKernelTwigPlugin;
+use Spryker\Yves\Http\Plugin\Twig\RuntimeLoaderTwigPlugin;
+use Spryker\Yves\Translator\Plugin\Twig\TranslatorTwigPlugin;
 use Spryker\Yves\Twig\Plugin\FilesystemTwigLoaderPlugin;
 use Spryker\Yves\Twig\Plugin\FormFilesystemTwigLoaderPlugin;
 use Spryker\Yves\Twig\TwigDependencyProvider as SprykerTwigDependencyProvider;
@@ -57,7 +57,6 @@ class TwigDependencyProvider extends SprykerTwigDependencyProvider
             new HttpKernelTwigPlugin(),
             new RoutingTwigPlugin(),
             new SecurityTwigPlugin(),
-            new TranslationTwigPlugin(),
             new RuntimeLoaderTwigPlugin(),
             new ShopApplicationTwigPlugin(),
             new TwigFormRuntimeLoaderPlugin(),
@@ -80,6 +79,7 @@ class TwigDependencyProvider extends SprykerTwigDependencyProvider
             new ContentProductSetTwigPlugin(),
             new ContentFileListTwigPlugin(),
             new ShopCmsSlotTwigPlugin(),
+            new TranslatorTwigPlugin(),
         ];
     }
 
