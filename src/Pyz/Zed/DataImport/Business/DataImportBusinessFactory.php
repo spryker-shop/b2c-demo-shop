@@ -1035,6 +1035,7 @@ class DataImportBusinessFactory extends SprykerDataImportBusinessFactory
             $this->getStockFacade()
         );
     }
+
     /**
      * @return \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetWriterInterface
      */

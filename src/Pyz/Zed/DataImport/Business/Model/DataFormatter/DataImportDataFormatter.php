@@ -1,13 +1,11 @@
 <?php
+
 /**
- * Created by PhpStorm.
- * User: kravchenko
- * Date: 2019-12-06
- * Time: 11:59
+ * This file is part of the Spryker Commerce OS.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace Pyz\Zed\DataImport\Business\Model\DataFormatter;
-
 
 use Spryker\Zed\DataImport\Dependency\Service\DataImportToUtilEncodingServiceInterface;
 
@@ -51,6 +49,7 @@ class DataImportDataFormatter implements DataImportDataFormatterInterface
         $values = array_map(function ($value) {
             return ($value === null || $value === "") ? "NULL" : $value;
         }, $values);
+
         return sprintf(
             '{%s}',
             pg_escape_string(implode(',', $values))
@@ -80,6 +79,7 @@ class DataImportDataFormatter implements DataImportDataFormatterInterface
         $values = array_map(function ($value) {
             return $value ? 'true' : 'false';
         }, $values);
+
         return sprintf(
             '{%s}',
             pg_escape_string(implode(',', $values))
@@ -120,6 +120,7 @@ class DataImportDataFormatter implements DataImportDataFormatterInterface
         $priceData = array_map(function ($price) {
             return $price ?: null;
         }, $priceData);
+
         return pg_escape_string($this->utilEncodingService->encodeJson($priceData));
     }
 }

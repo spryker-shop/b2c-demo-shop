@@ -1,13 +1,11 @@
 <?php
+
 /**
- * Created by PhpStorm.
- * User: kravchenko
- * Date: 2019-12-06
- * Time: 12:04
+ * This file is part of the Spryker Commerce OS.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace Pyz\Zed\DataImport\Business\Model\ProductStock\Writer\Sql;
-
 
 class ProductStockSql implements ProductStockSqlInterface
 {
@@ -48,6 +46,7 @@ class ProductStockSql implements ProductStockSqlInterface
     ) RETURNING id_stock
   )
 SELECT updated.idStock FROM updated UNION ALL SELECT inserted.id_stock FROM inserted;";
+
         return $sql;
     }
 
@@ -107,6 +106,7 @@ SELECT updated.idStock FROM updated UNION ALL SELECT inserted.id_stock FROM inse
     ) RETURNING id_stock_product
   )
 SELECT updated.idStockProduct FROM updated UNION ALL SELECT inserted.id_stock_product FROM inserted;";
+
         return $sql;
     }
 
@@ -155,6 +155,7 @@ SELECT updated.idStockProduct FROM updated UNION ALL SELECT inserted.id_stock_pr
     ) RETURNING id_availability_abstract
   )
 SELECT updated.idAvailabilityAbstract FROM updated UNION ALL SELECT inserted.id_availability_abstract FROM inserted;";
+
         return $sql;
     }
 
@@ -214,6 +215,7 @@ SELECT updated.idAvailabilityAbstract FROM updated UNION ALL SELECT inserted.id_
     ) RETURNING id_availability
   )
 SELECT updated.idAvailability FROM updated UNION ALL SELECT inserted.id_availability FROM inserted;";
+
         return $sql;
     }
 }

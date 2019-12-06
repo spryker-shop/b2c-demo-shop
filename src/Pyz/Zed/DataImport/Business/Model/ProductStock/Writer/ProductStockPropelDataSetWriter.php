@@ -1,13 +1,11 @@
 <?php
+
 /**
- * Created by PhpStorm.
- * User: kravchenko
- * Date: 2019-12-06
- * Time: 12:13
+ * This file is part of the Spryker Commerce OS.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace Pyz\Zed\DataImport\Business\Model\ProductStock\Writer;
-
 
 use Generated\Shared\Transfer\StoreTransfer;
 use Orm\Zed\Availability\Persistence\Map\SpyAvailabilityAbstractTableMap;
@@ -45,7 +43,7 @@ class ProductStockPropelDataSetWriter implements DataSetWriterInterface
     protected const COL_STOCK_PRODUCT_TOTAL_QUANTITY = 'stockProductTotalQuantity';
 
     /**
-     * @var string[]
+     * @var array
      */
     protected static $productAbstractSkus = [];
 
@@ -128,6 +126,7 @@ class ProductStockPropelDataSetWriter implements DataSetWriterInterface
             ->findOneOrCreate();
         $stockEntity->fromArray($stockTransfer->modifiedToArray());
         $stockEntity->save();
+
         return $stockEntity;
     }
 
@@ -177,6 +176,7 @@ class ProductStockPropelDataSetWriter implements DataSetWriterInterface
     protected function getAvailabilityAbstractIdsForCollectedAbstractSkus(): array
     {
         $storeIds = $this->getStoreIds();
+
         return SpyAvailabilityAbstractQuery::create()
             ->joinWithSpyAvailability()
             ->useSpyAvailabilityQuery()
@@ -201,6 +201,7 @@ class ProductStockPropelDataSetWriter implements DataSetWriterInterface
             $storeTransfer = $this->storeFacade->getStoreByName($storeName);
             $storeIds[] = $storeTransfer->getIdStore();
         }
+
         return $storeIds;
     }
 
@@ -253,6 +254,7 @@ class ProductStockPropelDataSetWriter implements DataSetWriterInterface
         $physicalItems = $this->calculateProductStockForSkuAndStore($concreteSku, $storeTransfer);
         $reservedItems = $this->getReservationQuantityForStore($concreteSku, $storeTransfer);
         $stockProductQuantity = $physicalItems->subtract($reservedItems);
+
         return $stockProductQuantity->greatherThanOrEquals(0) ? $stockProductQuantity : new Decimal(0);
     }
 
@@ -266,6 +268,7 @@ class ProductStockPropelDataSetWriter implements DataSetWriterInterface
     {
         $idProductConcrete = $this->productRepository->getIdProductByConcreteSku($concreteSku);
         $stockNames = $this->getStoreWarehouses($storeTransfer->getName());
+
         return $this->getStockProductQuantityByIdProductAndStockNames($idProductConcrete, $stockNames);
     }
 
@@ -295,6 +298,7 @@ class ProductStockPropelDataSetWriter implements DataSetWriterInterface
             ->withColumn(sprintf('SUM(%s)', SpyStockProductTableMap::COL_QUANTITY), static::COL_STOCK_PRODUCT_TOTAL_QUANTITY)
             ->select([static::COL_STOCK_PRODUCT_TOTAL_QUANTITY])
             ->findOne();
+
         return new Decimal($stockProductTotalQuantity ?? 0);
     }
 
@@ -320,6 +324,7 @@ class ProductStockPropelDataSetWriter implements DataSetWriterInterface
             $reservationQuantity = $reservationQuantity->add($reservation[SpyOmsProductReservationTableMap::COL_RESERVATION_QUANTITY]);
         }
         $reservationQuantity = $reservationQuantity->add($this->getReservationsFromOtherStores($sku, $storeTransfer));
+
         return $reservationQuantity;
     }
 
@@ -341,6 +346,7 @@ class ProductStockPropelDataSetWriter implements DataSetWriterInterface
             }
             $reservationQuantity = $reservationQuantity->add($omsProductReservationStoreEntity->getReservationQuantity());
         }
+
         return $reservationQuantity;
     }
 
@@ -357,6 +363,7 @@ class ProductStockPropelDataSetWriter implements DataSetWriterInterface
                 ->getIdStore();
             $storeTransfer->setIdStore($idStore);
         }
+
         return $storeTransfer->getIdStore();
     }
 
@@ -392,6 +399,7 @@ class ProductStockPropelDataSetWriter implements DataSetWriterInterface
         if ($availabilityAbstractEntity !== null) {
             return $availabilityAbstractEntity;
         }
+
         return $this->createAvailabilityAbstract($abstractSku, $idStore);
     }
 
@@ -407,6 +415,7 @@ class ProductStockPropelDataSetWriter implements DataSetWriterInterface
             ->setAbstractSku($abstractSku)
             ->setFkStore($idStore);
         $availableAbstractEntity->save();
+
         return $availableAbstractEntity;
     }
 
@@ -427,6 +436,7 @@ class ProductStockPropelDataSetWriter implements DataSetWriterInterface
         $availabilityAbstractEntity->setFkStore($idStore);
         $availabilityAbstractEntity->setQuantity($sumQuantity);
         $availabilityAbstractEntity->save();
+
         return $availabilityAbstractEntity;
     }
 }

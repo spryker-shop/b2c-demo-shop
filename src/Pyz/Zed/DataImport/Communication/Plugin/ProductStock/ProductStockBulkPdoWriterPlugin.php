@@ -1,13 +1,11 @@
 <?php
+
 /**
- * Created by PhpStorm.
- * User: kravchenko
- * Date: 2019-12-06
- * Time: 12:53
+ * This file is part of the Spryker Commerce OS.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace Pyz\Zed\DataImport\Communication\Plugin\ProductStock;
-
 
 use Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface;
 use Spryker\Zed\DataImportExtension\Dependency\Plugin\DataSetWriterPluginInterface;

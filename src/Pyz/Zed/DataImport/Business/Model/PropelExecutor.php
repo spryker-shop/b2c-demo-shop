@@ -1,13 +1,11 @@
 <?php
+
 /**
- * Created by PhpStorm.
- * User: kravchenko
- * Date: 2019-12-06
- * Time: 11:56
+ * This file is part of the Spryker Commerce OS.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace Pyz\Zed\DataImport\Business\Model;
-
 
 use PDO;
 use Propel\Runtime\Connection\ConnectionInterface;
@@ -26,8 +24,10 @@ class PropelExecutor implements PropelExecutorInterface
         $connection = $this->getConnection();
         $stmt = $connection->prepare($sql);
         $stmt->execute($parameters);
+
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
     /**
      * @return \Propel\Runtime\Connection\ConnectionInterface
      */

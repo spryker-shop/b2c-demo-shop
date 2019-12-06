@@ -1,13 +1,11 @@
 <?php
+
 /**
- * Created by PhpStorm.
- * User: kravchenko
- * Date: 2019-12-06
- * Time: 11:24
+ * This file is part of the Spryker Commerce OS.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace Pyz\Zed\DataImport\Business\Model\ProductStock\Writer;
-
 
 use Generated\Shared\Transfer\StoreTransfer;
 use Orm\Zed\Availability\Persistence\Map\SpyAvailabilityAbstractTableMap;
@@ -93,6 +91,7 @@ class ProductStockBulkPdoDataSetWriter implements DataSetWriterInterface
      * @var int[]
      */
     protected $availabilityAbstractIds = [];
+
     /**
      * @param \Spryker\Zed\Stock\Business\StockFacadeInterface $stockFacade
      * @param \Spryker\Zed\ProductBundle\Business\ProductBundleFacadeInterface $productBundleFacade
@@ -270,6 +269,7 @@ class ProductStockBulkPdoDataSetWriter implements DataSetWriterInterface
             ])
             ->find()
             ->toArray();
+
         return $this->mapStockProducts($stockProducts, $storeTransfer);
     }
 
@@ -293,6 +293,7 @@ class ProductStockBulkPdoDataSetWriter implements DataSetWriterInterface
             }
             $result[$sku][static::KEY_QUANTITY] = $quantity;
         }
+
         return $result;
     }
 
@@ -315,6 +316,7 @@ class ProductStockBulkPdoDataSetWriter implements DataSetWriterInterface
         foreach ($reservations as $reservation) {
             $result[$reservation[SpyOmsProductReservationTableMap::COL_SKU]] = (new Decimal($result[$reservation[SpyOmsProductReservationTableMap::COL_SKU]] ?? '0'))->add($reservation[SpyOmsProductReservationTableMap::COL_RESERVATION_QUANTITY]);
         }
+
         return $result;
     }
 
@@ -332,6 +334,7 @@ class ProductStockBulkPdoDataSetWriter implements DataSetWriterInterface
             ->select([SpyProductTableMap::COL_SKU, SpyProductAbstractTableMap::COL_SKU])
             ->find()
             ->toArray();
+
         return array_combine(
             array_column($abstractProducts, SpyProductTableMap::COL_SKU),
             array_column($abstractProducts, SpyProductAbstractTableMap::COL_SKU)
@@ -351,6 +354,7 @@ class ProductStockBulkPdoDataSetWriter implements DataSetWriterInterface
             $quantity = (new Decimal($stock[static::KEY_QUANTITY]))->subtract($reservations[$sku] ?? 0);
             $stockProducts[$sku][static::KEY_QUANTITY] = $quantity->greatherThanOrEquals(0) ? $quantity : new Decimal(0);
         }
+
         return $stockProducts;
     }
 
@@ -371,6 +375,7 @@ class ProductStockBulkPdoDataSetWriter implements DataSetWriterInterface
             $abstractAvailabilityData[$abstractSku][static::KEY_SKU] = $abstractSku;
             $abstractAvailabilityData[$abstractSku][static::KEY_QUANTITY] = (new Decimal($abstractAvailabilityData[$abstractSku][static::KEY_QUANTITY] ?? 0))->add($concreteAvailability[static::KEY_QUANTITY]);
         }
+
         return $abstractAvailabilityData;
     }
 
@@ -426,6 +431,7 @@ class ProductStockBulkPdoDataSetWriter implements DataSetWriterInterface
             }
             static::$storeToStock = $storeToWarehouse;
         }
+
         return static::$storeToStock;
     }
 
