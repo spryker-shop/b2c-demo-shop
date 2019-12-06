@@ -10,6 +10,7 @@ use Spryker\Shared\Collector\CollectorConstants;
 use Spryker\Shared\Customer\CustomerConstants;
 use Spryker\Shared\Event\EventConstants;
 use Spryker\Shared\GlueApplication\GlueApplicationConstants;
+use Spryker\Shared\Http\HttpConstants;
 use Spryker\Shared\Newsletter\NewsletterConstants;
 use Spryker\Shared\ProductManagement\ProductManagementConstants;
 use Spryker\Shared\Propel\PropelConstants;
@@ -61,11 +62,13 @@ $config[ZedRequestConstants::BASE_URL_ZED_API] = $config[ApplicationConstants::B
 $config[ZedRequestConstants::BASE_URL_SSL_ZED_API] = $config[ApplicationConstants::BASE_URL_SSL_ZED];
 
 // ---------- Trusted hosts
-$config[ApplicationConstants::YVES_TRUSTED_HOSTS] = [
-    $config[ApplicationConstants::HOST_YVES],
-    $config[ApplicationConstants::HOST_ZED],
-    'localhost',
-];
+$config[ApplicationConstants::YVES_TRUSTED_HOSTS]
+    = $config[HttpConstants::YVES_TRUSTED_HOSTS]
+    = [
+        $config[ApplicationConstants::HOST_YVES],
+        $config[ApplicationConstants::HOST_ZED],
+        'localhost',
+    ];
 
 // ---------- Propel
 $config[PropelConstants::ZED_DB_USERNAME] = 'devtest';

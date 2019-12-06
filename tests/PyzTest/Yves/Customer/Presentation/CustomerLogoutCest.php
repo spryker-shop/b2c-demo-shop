@@ -38,6 +38,6 @@ class CustomerLogoutCest
 
         $i->amOnPage(CustomerLogoutPage::URL);
 
-        $i->seeCurrentUrlEquals('/en');
+        $i->seeCurrentUrlEquals('/en/');
     }
 }
