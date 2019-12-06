@@ -149,12 +149,12 @@ class ShopApplicationDependencyProvider extends SprykerShopApplicationDependency
             new TranslatorApplicationPlugin(),
             new HttpApplicationPlugin(),
             new SessionApplicationPlugin(),
-            new WebProfilerApplicationPlugin(),
             new SecurityApplicationPlugin(),
             new FormApplicationPlugin(),
             new ValidatorApplicationPlugin(),
             new FlashMessengerApplicationPlugin(),
             new ErrorHandlerApplicationPlugin(),
+            new WebProfilerApplicationPlugin(),
         ];
     }
 }
