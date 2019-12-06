@@ -10,11 +10,8 @@ namespace Pyz\Zed\Twig;
 use Spryker\Service\UtilDateTime\Plugin\Twig\DateTimeFormatterTwigPlugin;
 use Spryker\Shared\Twig\Plugin\DebugTwigPlugin;
 use Spryker\Shared\Twig\Plugin\FormTwigPlugin;
-use Spryker\Shared\Twig\Plugin\HttpKernelTwigPlugin;
 use Spryker\Shared\Twig\Plugin\RoutingTwigPlugin;
-use Spryker\Shared\Twig\Plugin\RuntimeLoaderTwigPlugin;
 use Spryker\Shared\Twig\Plugin\SecurityTwigPlugin;
-use Spryker\Shared\Twig\Plugin\TranslationTwigPlugin;
 use Spryker\Zed\Application\Communication\Plugin\Twig\ApplicationTwigPlugin;
 use Spryker\Zed\ChartGui\Communication\Plugin\Twig\Chart\ChartGuiTwigPlugin;
 use Spryker\Zed\Currency\Communication\Plugin\Twig\CurrencyTwigPlugin;
@@ -37,6 +34,8 @@ use Spryker\Zed\Gui\Communication\Plugin\Twig\GuiTwigLoaderPlugin;
 use Spryker\Zed\Gui\Communication\Plugin\Twig\TabsTwigPlugin;
 use Spryker\Zed\Gui\Communication\Plugin\Twig\UrlDecodeTwigPlugin;
 use Spryker\Zed\Gui\Communication\Plugin\Twig\UrlTwigPlugin;
+use Spryker\Zed\Http\Communication\Plugin\Twig\HttpKernelTwigPlugin;
+use Spryker\Zed\Http\Communication\Plugin\Twig\RuntimeLoaderTwigPlugin;
 use Spryker\Zed\Money\Communication\Plugin\Twig\MoneyTwigPlugin;
 use Spryker\Zed\Scheduler\Communication\Plugin\Twig\SchedulerTwigPlugin;
 use Spryker\Zed\Translator\Communication\Plugin\Twig\TranslatorTwigPlugin;
@@ -60,7 +59,6 @@ class TwigDependencyProvider extends SprykerTwigDependencyProvider
             new HttpKernelTwigPlugin(),
             new RoutingTwigPlugin(),
             new SecurityTwigPlugin(),
-            new TranslationTwigPlugin(),
             new RuntimeLoaderTwigPlugin(),
             new FormRuntimeLoaderTwigPlugin(),
             new ApplicationTwigPlugin(),
