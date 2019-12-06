@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of the Spryker Suite.
+ * This file is part of the Spryker Commerce OS.
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
@@ -9,7 +9,7 @@ namespace Pyz\Glue\CartsRestApi;
 
 use Spryker\Glue\CartsRestApi\CartsRestApiDependencyProvider as SprykerCartsRestApiDependencyProvider;
 use Spryker\Glue\ProductOptionsRestApi\Plugin\CartsRestApi\ProductOptionCartItemExpanderPlugin;
-use Spryker\Glue\ProductOptionsRestApi\Plugin\CartsRestApiExtension\ProductOptionRestCartItemsAttributesMapperPlugin;
+use Spryker\Glue\ProductOptionsRestApi\Plugin\CartsRestApi\ProductOptionRestCartItemsAttributesMapperPlugin;
 
 class CartsRestApiDependencyProvider extends SprykerCartsRestApiDependencyProvider
 {
