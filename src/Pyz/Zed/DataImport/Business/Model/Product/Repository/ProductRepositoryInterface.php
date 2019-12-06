@@ -47,4 +47,9 @@ interface ProductRepositoryInterface
      * @return void
      */
     public function addProductConcrete(SpyProduct $productEntity, $abstractSku = null);
+
+    /**
+     * @return void
+     */
+    public function flush(): void;
 }
