@@ -359,9 +359,9 @@ class AddressStepTest extends Unit
     }
 
     /**
-     * @param \SprykerShop\Yves\CheckoutPage\Dependency\Client\CheckoutPageToCustomerClientInterface|\PHPUnit_Framework_MockObject_MockObject|null $customerClientMock
+     * @param \SprykerShop\Yves\CheckoutPage\Dependency\Client\CheckoutPageToCustomerClientInterface|\PHPUnit\Framework\MockObject\MockObject|null $customerClientMock
      *
-     * @return \SprykerShop\Yves\CheckoutPage\Process\Steps\AddressStep|\PHPUnit_Framework_MockObject_MockObject
+     * @return \SprykerShop\Yves\CheckoutPage\Process\Steps\AddressStep|\PHPUnit\Framework\MockObject\MockObject
      */
     protected function createAddressStep($customerClientMock = null)
     {
@@ -388,7 +388,7 @@ class AddressStepTest extends Unit
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\SprykerShop\Yves\CheckoutPage\Dependency\Client\CheckoutPageToCalculationClientInterface
+     * @return \PHPUnit\Framework\MockObject\MockObject|\SprykerShop\Yves\CheckoutPage\Dependency\Client\CheckoutPageToCalculationClientInterface
      */
     protected function createCalculationClientMock()
     {
@@ -398,9 +398,9 @@ class AddressStepTest extends Unit
     }
 
     /**
-     * @param \SprykerShop\Yves\CheckoutPage\Dependency\Client\CheckoutPageToCustomerClientInterface|\PHPUnit_Framework_MockObject_MockObject|null $customerClientMock
+     * @param \SprykerShop\Yves\CheckoutPage\Dependency\Client\CheckoutPageToCustomerClientInterface|\PHPUnit\Framework\MockObject\MockObject|null $customerClientMock
      *
-     * @return \PHPUnit_Framework_MockObject_MockObject|\SprykerShop\Yves\CheckoutPage\Process\Steps\StepExecutorInterface
+     * @return \PHPUnit\Framework\MockObject\MockObject|\SprykerShop\Yves\CheckoutPage\Process\Steps\StepExecutorInterface
      */
     protected function createAddressStepExecutorMock($customerClientMock): StepExecutorInterface
     {
@@ -415,7 +415,7 @@ class AddressStepTest extends Unit
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\SprykerShop\Yves\CheckoutPage\Process\Steps\PostConditionCheckerInterface
+     * @return \PHPUnit\Framework\MockObject\MockObject|\SprykerShop\Yves\CheckoutPage\Process\Steps\PostConditionCheckerInterface
      */
     protected function createAddressStepPostConditionCheckerMock(): PostConditionCheckerInterface
     {
@@ -426,7 +426,7 @@ class AddressStepTest extends Unit
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\SprykerShop\Yves\CheckoutPage\CheckoutPageConfig
+     * @return \PHPUnit\Framework\MockObject\MockObject|\SprykerShop\Yves\CheckoutPage\CheckoutPageConfig
      */
     protected function createConfigMock(): CheckoutPageConfig
     {
@@ -442,7 +442,7 @@ class AddressStepTest extends Unit
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\SprykerShop\Yves\CheckoutPage\Dependency\Client\CheckoutPageToCustomerClientInterface
+     * @return \PHPUnit\Framework\MockObject\MockObject|\SprykerShop\Yves\CheckoutPage\Dependency\Client\CheckoutPageToCustomerClientInterface
      */
     protected function createCustomerClientMock()
     {
@@ -450,7 +450,7 @@ class AddressStepTest extends Unit
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\SprykerShop\Yves\CheckoutPage\Dependency\Service\CheckoutPageToCustomerServiceInterface
+     * @return \PHPUnit\Framework\MockObject\MockObject|\SprykerShop\Yves\CheckoutPage\Dependency\Service\CheckoutPageToCustomerServiceInterface
      */
     protected function createCustomerServiceMock(): CheckoutPageToCustomerServiceInterface
     {
@@ -461,7 +461,7 @@ class AddressStepTest extends Unit
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\SprykerShop\Yves\CheckoutPageExtension\Dependency\Plugin\AddressTransferExpanderPluginInterface
+     * @return \PHPUnit\Framework\MockObject\MockObject|\SprykerShop\Yves\CheckoutPageExtension\Dependency\Plugin\AddressTransferExpanderPluginInterface
      */
     protected function createCustomerAddressExpanderPluginMock(): AddressTransferExpanderPluginInterface
     {
