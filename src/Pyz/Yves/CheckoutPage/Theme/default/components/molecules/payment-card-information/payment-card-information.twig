@@ -16,7 +16,7 @@
     <h4 class="title title--secondary-small grid grid--middle">
         <span class="spacing-right spacing-right--big">{{ data.payment.paymentMethod | capitalize }}</span>
 
-        {% if data.payment.dummyPayment.cardType %}
+        {% if data.payment.dummyPayment and data.payment.dummyPayment.cardType %}
             <span class="{{ config.name }}__logo">
                 <img  class="{{ config.name }}__logo-image" src="{{ publicPath('images/logo-' ~ data.payment.dummyPayment.cardType | replace({' ': ''}) | lower ~ '.png') }}" alt="{{ data.payment.dummyPayment.cardType }}">
             </span>
