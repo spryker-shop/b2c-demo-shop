@@ -15,7 +15,7 @@ class CategoryImageStorageConfig extends SprykerCategoryImageConfig
     /**
      * @return string|null
      */
-    public function getProductImageSynchronizationPoolName(): ?string
+    public function getCategoryImageSynchronizationPoolName(): ?string
     {
         return SynchronizationConfig::DEFAULT_SYNCHRONIZATION_POOL_NAME;
     }
