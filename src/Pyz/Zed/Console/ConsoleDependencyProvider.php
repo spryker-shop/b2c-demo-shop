@@ -83,6 +83,7 @@ use Spryker\Zed\RabbitMq\Communication\Console\DeleteAllQueuesConsole;
 use Spryker\Zed\RabbitMq\Communication\Console\PurgeAllQueuesConsole;
 use Spryker\Zed\RabbitMq\Communication\Console\SetUserPermissionsConsole;
 use Spryker\Zed\RestRequestValidator\Communication\Console\BuildValidationCacheConsole;
+use Spryker\Zed\Router\Communication\Plugin\Console\RouterCacheWarmUpConsole;
 use Spryker\Zed\Scheduler\Communication\Console\SchedulerCleanConsole;
 use Spryker\Zed\Scheduler\Communication\Console\SchedulerResumeConsole;
 use Spryker\Zed\Scheduler\Communication\Console\SchedulerSetupConsole;
@@ -120,7 +121,7 @@ use Spryker\Zed\StorageRedis\Communication\Console\StorageRedisExportRdbConsole;
 use Spryker\Zed\StorageRedis\Communication\Console\StorageRedisImportRdbConsole;
 use Spryker\Zed\Synchronization\Communication\Console\ExportSynchronizedDataConsole;
 use Spryker\Zed\Transfer\Communication\Console\DataBuilderGeneratorConsole;
-use Spryker\Zed\Transfer\Communication\Console\GeneratorConsole;
+use Spryker\Zed\Transfer\Communication\Console\TransferGeneratorConsole;
 use Spryker\Zed\Transfer\Communication\Console\ValidatorConsole;
 use Spryker\Zed\Translator\Communication\Console\CleanTranslationCacheConsole;
 use Spryker\Zed\Translator\Communication\Console\GenerateTranslationCacheConsole;
@@ -128,6 +129,10 @@ use Spryker\Zed\Twig\Communication\Console\CacheWarmerConsole;
 use Spryker\Zed\Twig\Communication\Plugin\Application\TwigApplicationPlugin;
 use Spryker\Zed\Uuid\Communication\Console\UuidGeneratorConsole;
 use Spryker\Zed\ZedNavigation\Communication\Console\BuildNavigationConsole;
+use SprykerSdk\Spryk\Console\SprykBuildConsole;
+use SprykerSdk\Spryk\Console\SprykDumpConsole;
+use SprykerSdk\Spryk\Console\SprykRunConsole;
+use SprykerSdk\Zed\ComposerConstrainer\Communication\Console\ComposerConstraintConsole;
 use Stecman\Component\Symfony\Console\BashCompletion\CompletionCommand;
 
 /**
@@ -147,9 +152,9 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
             new CacheWarmerConsole(),
             new BuildNavigationConsole(),
             new BuildValidationCacheConsole(),
-            new EntityTransferGeneratorConsole(),
             new EmptyAllCachesConsole(),
-            new GeneratorConsole(),
+            new TransferGeneratorConsole(),
+            new EntityTransferGeneratorConsole(),
             new InitializeDatabaseConsole(),
             new SearchConsole(),
             new GenerateIndexMapConsole(),
@@ -285,6 +290,8 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
             new SchedulerCleanConsole(),
             new SchedulerSuspendConsole(),
             new SchedulerResumeConsole(),
+
+            new RouterCacheWarmUpConsole(),
         ];
 
         $propelCommands = $container->getLocator()->propel()->facade()->getConsoleCommands();
@@ -292,12 +299,12 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
 
         if ($this->getConfig()->isDevelopmentConsoleCommandsEnabled()) {
             $commands[] = new CodeTestConsole();
-            $commands[] = new CodeStyleSnifferConsole();
-            $commands[] = new CodeArchitectureSnifferConsole();
+            $commands[] = new CodeFixturesConsole();
             $commands[] = new AcceptanceCodeTestConsole();
             $commands[] = new FunctionalCodeTestConsole();
             $commands[] = new ApiCodeTestConsole();
-            $commands[] = new CodeFixturesConsole();
+            $commands[] = new CodeStyleSnifferConsole();
+            $commands[] = new CodeArchitectureSnifferConsole();
             $commands[] = new CodePhpstanConsole();
             $commands[] = new CodePhpMessDetectorConsole();
             $commands[] = new ValidatorConsole();
@@ -325,6 +332,11 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
             $commands[] = new GenerateRestApiDocumentationConsole();
             $commands[] = new QueueDumpConsole();
             $commands[] = new EventTriggerListenerConsole();
+
+            $commands[] = new SprykRunConsole();
+            $commands[] = new SprykDumpConsole();
+            $commands[] = new SprykBuildConsole();
+            $commands[] = new ComposerConstraintConsole();
         }
 
         return $commands;
