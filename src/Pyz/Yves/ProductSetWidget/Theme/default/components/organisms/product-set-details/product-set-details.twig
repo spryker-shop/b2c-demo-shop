@@ -18,14 +18,14 @@
         "responsive": [{
             "breakpoint": 375,
             "settings": {
-                "slidesToShow": 2
-                }
+                "slidesToShow": 2,
+                },
         },
         {
             "breakpoint": 768,
             "settings": {
-                "slidesToShow": 4
-            }
+                "slidesToShow": 4,
+            },
         }]
     }',
 } %}
@@ -42,7 +42,7 @@
                     'data-json': '{
                         "slidesToShow": 1,
                         "dots": true,
-                        "arrows": false
+                        "arrows": false,
                     }'
                 },
                 modifiers: ['product-set']
@@ -54,8 +54,8 @@
                             modifiers: ['bigger', 'no-margin'],
                             attributes: {
                                 itemprop: 'image',
-                                src: slide.externalUrlLarge
-                            }
+                                src: slide.externalUrlLarge,
+                            },
                         } only %}
                     {% endfor %}
                 {% endblock %}
@@ -69,11 +69,9 @@
                 {% set isDisabled = false %}
 
                 {% for product in data.products %}
-                    {% if product.idProductConcrete is not empty %}
-                        {% if product.available %}
-                            <input type="hidden" name="items[{{ loop.index }}][sku]" value="{{ product.sku }}" />
-                            <input type="hidden" name="items[{{ loop.index }}][quantity]" value="1" />
-                        {% endif %}
+                    {% if product.idProductConcrete is not empty and product.available %}
+                        <input type="hidden" name="items[{{ loop.index }}][sku]" value="{{ product.sku }}">
+                        <input type="hidden" name="items[{{ loop.index }}][quantity]" value="1">
                     {% else %}
                         {% set isDisabled = true %}
                     {% endif %}
