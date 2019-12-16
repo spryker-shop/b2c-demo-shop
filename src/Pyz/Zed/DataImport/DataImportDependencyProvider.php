@@ -21,6 +21,8 @@ use Spryker\Zed\DataImport\Communication\Plugin\DataImportPublisherPlugin;
 use Spryker\Zed\DataImport\DataImportDependencyProvider as SprykerDataImportDependencyProvider;
 use Spryker\Zed\FileManagerDataImport\Communication\Plugin\FileManagerDataImportPlugin;
 use Spryker\Zed\Kernel\Container;
+use Spryker\Zed\PaymentDataImport\Communication\Plugin\PaymentMethodDataImportPlugin;
+use Spryker\Zed\PaymentDataImport\Communication\Plugin\PaymentMethodStoreDataImportPlugin;
 use Spryker\Zed\PriceProductDataImport\Communication\Plugin\PriceProductDataImportPlugin;
 use Spryker\Zed\PriceProductScheduleDataImport\Communication\Plugin\PriceProductScheduleDataImportPlugin;
 use Spryker\Zed\ProductAlternativeDataImport\Communication\Plugin\ProductAlternativeDataImportPlugin;
@@ -40,6 +42,8 @@ class DataImportDependencyProvider extends SprykerDataImportDependencyProvider
     public const FACADE_PRODUCT_BUNDLE = 'product bundle facade';
     public const FACADE_PRODUCT_RELATION = 'product relation facade';
     public const FACADE_PRODUCT_SEARCH = 'product search facade';
+    public const FACADE_STORE = 'FACADE_STORE';
+    public const FACADE_STOCK = 'FACADE_STOCK';
 
     /**
      * @param \Spryker\Zed\Kernel\Container $container
@@ -55,6 +59,36 @@ class DataImportDependencyProvider extends SprykerDataImportDependencyProvider
         $container = $this->addProductBundleFacade($container);
         $container = $this->addProductRelationFacade($container);
         $container = $this->addProductSearchFacade($container);
+        $container = $this->addStoreFacade($container);
+        $container = $this->addStockFacade($container);
+
+        return $container;
+    }
+
+    /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Zed\Kernel\Container
+     */
+    protected function addStockFacade(Container $container): Container
+    {
+        $container->set(static::FACADE_STOCK, function (Container $container) {
+            return $container->getLocator()->stock()->facade();
+        });
+
+        return $container;
+    }
+
+    /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Zed\Kernel\Container
+     */
+    protected function addStoreFacade(Container $container): Container
+    {
+        $container->set(static::FACADE_STORE, function (Container $container) {
+            return $container->getLocator()->store()->facade();
+        });
 
         return $container;
     }
@@ -156,6 +190,8 @@ class DataImportDependencyProvider extends SprykerDataImportDependencyProvider
             new ShipmentMethodStoreDataImportPlugin(),
             new StockDataImportPlugin(),
             new StockStoreDataImportPlugin(),
+            new PaymentMethodDataImportPlugin(),
+            new PaymentMethodStoreDataImportPlugin(),
         ];
     }
 

@@ -36,7 +36,7 @@ class CheckoutBusinessTester extends Actor
     */
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Spryker\Service\Customer\CustomerServiceInterface
+     * @return \PHPUnit\Framework\MockObject\MockObject|\Spryker\Service\Customer\CustomerServiceInterface
      */
     public function getCustomerService(): CustomerServiceInterface
     {
@@ -44,7 +44,7 @@ class CheckoutBusinessTester extends Actor
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Spryker\Service\Shipment\ShipmentServiceInterface
+     * @return \PHPUnit\Framework\MockObject\MockObject|\Spryker\Service\Shipment\ShipmentServiceInterface
      */
     public function getShipmentService(): ShipmentServiceInterface
     {

@@ -11,7 +11,6 @@ use Pyz\Yves\ShopApplication\YvesBootstrap;
 use Pyz\Zed\Application\Communication\ZedBootstrap;
 use Spryker\Shared\Application\ApplicationConstants;
 use Spryker\Shared\Application\Log\Config\SprykerLoggerConfig;
-use Spryker\Shared\Config\ConfigConstants;
 use Spryker\Shared\ErrorHandler\ErrorHandlerConstants;
 use Spryker\Shared\ErrorHandler\ErrorRenderer\WebExceptionErrorRenderer;
 use Spryker\Shared\Event\EventConstants;
@@ -28,7 +27,6 @@ use Spryker\Shared\Session\SessionConstants;
 use Spryker\Shared\SessionRedis\SessionRedisConfig;
 use Spryker\Shared\StorageRedis\StorageRedisConstants;
 use Spryker\Shared\Testify\TestifyConstants;
-use Spryker\Shared\WebProfiler\WebProfilerConstants;
 use Spryker\Shared\ZedRequest\ZedRequestConstants;
 
 // ---------- General
@@ -82,10 +80,6 @@ $config[ErrorHandlerConstants::ERROR_RENDERER] = WebExceptionErrorRenderer::clas
 // ---------- Logging
 $config[LogConstants::LOG_LEVEL] = Logger::CRITICAL;
 $config[LogConstants::LOGGER_CONFIG] = SprykerLoggerConfig::class;
-
-$config[WebProfilerConstants::ENABLE_WEB_PROFILER]
-    = $config[ConfigConstants::ENABLE_WEB_PROFILER]
-    = false;
 
 $config[GlueApplicationConstants::GLUE_APPLICATION_REST_DEBUG] = true;
 

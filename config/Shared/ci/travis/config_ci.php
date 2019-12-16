@@ -9,6 +9,7 @@ use Spryker\Shared\Collector\CollectorConstants;
 use Spryker\Shared\Customer\CustomerConstants;
 use Spryker\Shared\EventBehavior\EventBehaviorConstants;
 use Spryker\Shared\GlueApplication\GlueApplicationConstants;
+use Spryker\Shared\Http\HttpConstants;
 use Spryker\Shared\Kernel\KernelConstants;
 use Spryker\Shared\Kernel\Store;
 use Spryker\Shared\Log\LogConstants;
@@ -156,11 +157,13 @@ $config[LogConstants::LOG_LEVEL] = Logger::CRITICAL;
 $config[EventBehaviorConstants::EVENT_BEHAVIOR_TRIGGERING_ACTIVE] = getenv('TEST_GROUP') === 'acceptance';
 
 // ---------- Trusted hosts
-$config[ApplicationConstants::YVES_TRUSTED_HOSTS] = [
-    $config[ApplicationConstants::HOST_YVES],
-    $config[ApplicationConstants::HOST_ZED],
-    'localhost',
-];
+$config[ApplicationConstants::YVES_TRUSTED_HOSTS]
+    = $config[HttpConstants::YVES_TRUSTED_HOSTS]
+    = [
+        $config[ApplicationConstants::HOST_YVES],
+        $config[ApplicationConstants::HOST_ZED],
+        'localhost',
+    ];
 
 // ---------- Guest cart
 $config[QuoteConstants::GUEST_QUOTE_LIFETIME] = 'P01M';
