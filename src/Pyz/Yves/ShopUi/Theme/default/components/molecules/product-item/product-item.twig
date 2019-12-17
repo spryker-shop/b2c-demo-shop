@@ -54,7 +54,7 @@
                                 modifiers: ['small'],
                                 class: component.renderClass(config.name ~ '__price', modifiers) ~ ' col col--lg-4 col--sm-12',
                                 data: {
-                                    amount: productItemSubTotal,
+                                    amount: productItemSubTotal | default(null),
                                     originalAmount: data.productItem.prices.ORIGINAL is not defined or data.productItem.prices.ORIGINAL is empty ? null : data.productItem.prices.ORIGINAL
                                 },
                             } only %}

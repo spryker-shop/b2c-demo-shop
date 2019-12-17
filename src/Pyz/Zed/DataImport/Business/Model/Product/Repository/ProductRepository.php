@@ -135,4 +135,12 @@ class ProductRepository implements ProductRepositoryInterface
             static::ABSTRACT_SKU => ($abstractSku) ? $abstractSku : $productEntity->getSpyProductAbstract()->getSku(),
         ];
     }
+
+    /**
+     * @return void
+     */
+    public function flush(): void
+    {
+        static::$resolved = [];
+    }
 }

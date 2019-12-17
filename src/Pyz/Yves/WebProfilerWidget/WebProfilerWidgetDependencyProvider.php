@@ -7,20 +7,38 @@
 
 namespace Pyz\Yves\WebProfilerWidget;
 
-use Spryker\Shared\WebProfiler\Plugin\ServiceProvider\WebProfilerServiceProvider;
-use Spryker\Yves\Config\Plugin\ServiceProvider\ConfigProfilerServiceProvider;
+use SprykerShop\Yves\WebProfilerWidget\Plugin\WebProfiler\WebProfilerAjaxDataCollectorPlugin;
+use SprykerShop\Yves\WebProfilerWidget\Plugin\WebProfiler\WebProfilerConfigDataCollectorPlugin;
+use SprykerShop\Yves\WebProfilerWidget\Plugin\WebProfiler\WebProfilerConfigDataCollectorPlugin as SymfonyWebProfilerConfigDataCollectorPlugin;
+use SprykerShop\Yves\WebProfilerWidget\Plugin\WebProfiler\WebProfilerEventsDataCollectorPlugin;
+use SprykerShop\Yves\WebProfilerWidget\Plugin\WebProfiler\WebProfilerExceptionDataCollectorPlugin;
+use SprykerShop\Yves\WebProfilerWidget\Plugin\WebProfiler\WebProfilerLoggerDataCollectorPlugin;
+use SprykerShop\Yves\WebProfilerWidget\Plugin\WebProfiler\WebProfilerMemoryDataCollectorPlugin;
+use SprykerShop\Yves\WebProfilerWidget\Plugin\WebProfiler\WebProfilerRequestDataCollectorPlugin;
+use SprykerShop\Yves\WebProfilerWidget\Plugin\WebProfiler\WebProfilerRouterDataCollectorPlugin;
+use SprykerShop\Yves\WebProfilerWidget\Plugin\WebProfiler\WebProfilerTimeDataCollectorPlugin;
+use SprykerShop\Yves\WebProfilerWidget\Plugin\WebProfiler\WebProfilerTwigDataCollectorPlugin;
 use SprykerShop\Yves\WebProfilerWidget\WebProfilerWidgetDependencyProvider as SprykerWebProfilerDependencyProvider;
 
 class WebProfilerWidgetDependencyProvider extends SprykerWebProfilerDependencyProvider
 {
     /**
-     * @return array
+     * @return \Spryker\Shared\WebProfilerExtension\Dependency\Plugin\WebProfilerDataCollectorPluginInterface[]
      */
-    protected function getWebProfilerPlugins()
+    public function getDataCollectorPlugins()
     {
         return [
-            new WebProfilerServiceProvider(),
-            new ConfigProfilerServiceProvider(),
+            new WebProfilerRequestDataCollectorPlugin(),
+            new WebProfilerRouterDataCollectorPlugin(),
+            new WebProfilerAjaxDataCollectorPlugin(),
+            new SymfonyWebProfilerConfigDataCollectorPlugin(),
+            new WebProfilerConfigDataCollectorPlugin(),
+            new WebProfilerEventsDataCollectorPlugin(),
+            new WebProfilerExceptionDataCollectorPlugin(),
+            new WebProfilerLoggerDataCollectorPlugin(),
+            new WebProfilerMemoryDataCollectorPlugin(),
+            new WebProfilerTimeDataCollectorPlugin(),
+            new WebProfilerTwigDataCollectorPlugin(),
         ];
     }
 }
