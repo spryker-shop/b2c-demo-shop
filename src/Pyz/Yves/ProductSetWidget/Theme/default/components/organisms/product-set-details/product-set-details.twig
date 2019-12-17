@@ -69,7 +69,7 @@
                 {% set isDisabled = false %}
 
                 {% for product in data.products %}
-                    {% if product.idProductConcrete is not empty and product.available %}
+                    {% if product.idProductConcrete and product.available %}
                         <input type="hidden" name="items[{{ loop.index }}][sku]" value="{{ product.sku }}">
                         <input type="hidden" name="items[{{ loop.index }}][quantity]" value="1">
                     {% else %}
