@@ -17,10 +17,8 @@ const configurationProdMode = async appSettings => mergeWithStrategy(await getCo
                 new UglifyJsPlugin({
                     cache: true,
                     parallel: true,
-                    sourceMap: false,
                     uglifyOptions: {
                         output: {
-                            comments: false,
                             beautify: false
                         }
                     }
