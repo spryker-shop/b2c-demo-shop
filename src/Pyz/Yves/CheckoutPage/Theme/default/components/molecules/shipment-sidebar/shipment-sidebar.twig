@@ -24,6 +24,8 @@
         <h4 class="title title--secondary-small">{{ 'page.checkout.shipment.shipping_method_heading' | trans }}</h4>
 
         {% for name, choices in shipmentSelection.vars.choices %}
+            {% set shipmentSelectionIndex = shipmentSelection.vars.value %}
+
             <h4 class="title title--secondary-small spacing-bottom grid grid--justify grid--middle">
                 <span class="col col--sm-7">{{ name | trans }}</span>
                 <span class="{{ config.name }}__logo col">
@@ -36,6 +38,7 @@
                 data: {
                     form: shipmentSelection,
                     choices: choices,
+                    providerIndex: shipmentSelectionIndex,
                 },
             } only %}
         {% endfor %}
