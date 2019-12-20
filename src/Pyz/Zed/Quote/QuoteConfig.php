@@ -21,7 +21,7 @@ class QuoteConfig extends SprykerQuoteConfig
             QuoteTransfer::BUNDLE_ITEMS,
             QuoteTransfer::CART_NOTE, #CartNoteFeature
             QuoteTransfer::VOUCHER_DISCOUNTS,
-            QuoteTransfer::CART_RULE_DISCOUNTS
+            QuoteTransfer::CART_RULE_DISCOUNTS,
         ]);
     }
 }
