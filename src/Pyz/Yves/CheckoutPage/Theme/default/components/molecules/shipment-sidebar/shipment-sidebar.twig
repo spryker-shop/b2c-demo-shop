@@ -12,6 +12,7 @@
     {% set shippingAddress = data.shipment.vars.data.shippingAddress %}
     {% set shipmentSelection = data.shipment.shipmentSelection %}
     {% set requestedDeliveryDate = data.shipment.requestedDeliveryDate %}
+    {% set shipmentSelectionIndex = shipmentSelection.vars.value %}
 
     <div class="{{ config.name }}__item">
         <h4 class="title title--secondary-small">{{ 'page.checkout.shipment.shipping_address.title' | trans }}</h4>
@@ -24,8 +25,6 @@
         <h4 class="title title--secondary-small">{{ 'page.checkout.shipment.shipping_method_heading' | trans }}</h4>
 
         {% for name, choices in shipmentSelection.vars.choices %}
-            {% set shipmentSelectionIndex = shipmentSelection.vars.value %}
-
             <h4 class="title title--secondary-small spacing-bottom grid grid--justify grid--middle">
                 <span class="col col--sm-7">{{ name | trans }}</span>
                 <span class="{{ config.name }}__logo col">
