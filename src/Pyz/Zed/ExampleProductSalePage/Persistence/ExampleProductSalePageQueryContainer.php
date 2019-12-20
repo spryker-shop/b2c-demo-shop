@@ -41,7 +41,6 @@ class ExampleProductSalePageQueryContainer extends AbstractQueryContainer implem
      */
     public function queryRelationsBecomingInactive($idProductLabel)
     {
-
         return $this->getFactory()
             ->getProductLabelQueryContainer()
             ->queryProductAbstractRelationsByIdProductLabel($idProductLabel)
@@ -103,7 +102,6 @@ class ExampleProductSalePageQueryContainer extends AbstractQueryContainer implem
      */
     public function queryRelationsBecomingActive($idProductLabel)
     {
-
         return $this->getFactory()
             ->getProductQueryContainer()
             ->queryProductAbstract()
