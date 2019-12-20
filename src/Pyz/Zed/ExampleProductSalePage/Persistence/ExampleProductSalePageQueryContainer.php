@@ -19,11 +19,11 @@ class ExampleProductSalePageQueryContainer extends AbstractQueryContainer implem
     protected const PRICE_TYPE_DEFAULT = 'DEFAULT';
 
     /**
+     * @api
+     *
      * @param string $labelName
      *
      * @return \Orm\Zed\ProductLabel\Persistence\SpyProductLabelQuery
-     * @api
-     *
      */
     public function queryProductLabelByName($labelName)
     {
@@ -33,11 +33,11 @@ class ExampleProductSalePageQueryContainer extends AbstractQueryContainer implem
     }
 
     /**
+     * @api
+     *
      * @param int $idProductLabel
      *
      * @return \Orm\Zed\ProductLabel\Persistence\SpyProductLabelProductAbstractQuery
-     * @api
-     *
      */
     public function queryRelationsBecomingInactive($idProductLabel)
     {
@@ -95,11 +95,11 @@ class ExampleProductSalePageQueryContainer extends AbstractQueryContainer implem
     }
 
     /**
+     * @api
+     *
      * @param int $idProductLabel
      *
      * @return \Orm\Zed\Product\Persistence\SpyProductAbstractQuery
-     * @api
-     *
      */
     public function queryRelationsBecomingActive($idProductLabel)
     {
