@@ -1,0 +1,21 @@
+<VirtualHost *:80>
+
+  DocumentRoot %TRAVIS_BUILD_DIR%/public/Glue
+  ServerName glue.de.spryker.test
+  SetEnv APPLICATION_ENV devtest
+
+  ErrorLog /tmp/glue-error.log
+
+  <Directory "%TRAVIS_BUILD_DIR%">
+      Options Indexes FollowSymLinks MultiViews ExecCGI
+      AllowOverride All
+      Order allow,deny
+      allow from all
+      Require all granted
+  </Directory>
+
+  AddHandler php7-fcgi .php
+  Action php7-fcgi /php7-fcgi-glue virtual
+  Alias /php7-fcgi-glue /usr/lib/cgi-bin/php7-fcgi-glue
+  FastCgiExternalServer /usr/lib/cgi-bin/php7-fcgi-glue -host 127.0.0.1:9002 -pass-header Authorization
+</VirtualHost>

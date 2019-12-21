@@ -30,7 +30,7 @@ use Spryker\Zed\ProductImageStorage\Communication\Plugin\Event\ProductConcreteIm
 use Spryker\Zed\ProductLabelStorage\Communication\Plugin\Event\ProductAbstractLabelEventResourceQueryContainerPlugin;
 use Spryker\Zed\ProductLabelStorage\Communication\Plugin\Event\ProductLabelDictionaryEventResourceQueryContainerPlugin;
 use Spryker\Zed\ProductOptionStorage\Communication\Plugin\Event\ProductOptionEventResourceQueryContainerPlugin;
-use Spryker\Zed\ProductPageSearch\Communication\Plugin\Event\ProductConcretePageSearchEventResourceRepositoryPlugin;
+use Spryker\Zed\ProductPageSearch\Communication\Plugin\Event\ProductConcretePageSearchEventResourceBulkRepositoryPlugin;
 use Spryker\Zed\ProductPageSearch\Communication\Plugin\Event\ProductPageEventResourceQueryContainerPlugin;
 use Spryker\Zed\ProductQuantityStorage\Communication\Plugin\Event\ProductQuantityEventResourceBulkRepositoryPlugin;
 use Spryker\Zed\ProductRelationStorage\Communication\Plugin\Event\ProductRelationEventResourceQueryContainerPlugin;
@@ -40,7 +40,6 @@ use Spryker\Zed\ProductSearchConfigStorage\Communication\Plugin\Event\ProductSea
 use Spryker\Zed\ProductSetPageSearch\Communication\Plugin\Event\ProductSetEventResourceQueryContainerPlugin as ProductSetPageSearchEventResourceQueryContainerPlugin;
 use Spryker\Zed\ProductSetStorage\Communication\Plugin\Event\ProductSetEventResourceQueryContainerPlugin;
 use Spryker\Zed\ProductStorage\Communication\Plugin\Event\ProductAbstractEventResourceQueryContainerPlugin;
-use Spryker\Zed\ProductStorage\Communication\Plugin\Event\ProductConcreteEventResourceQueryContainerPlugin;
 use Spryker\Zed\UrlStorage\Communication\Plugin\Event\RedirectEventResourceQueryContainerPlugin;
 use Spryker\Zed\UrlStorage\Communication\Plugin\Event\UrlEventResourceQueryContainerPlugin;
 
@@ -79,11 +78,10 @@ class EventBehaviorDependencyProvider extends SprykerEventBehaviorDependencyProv
             new ProductSearchConfigEventResourceQueryContainerPlugin(),
             new ProductSetEventResourceQueryContainerPlugin(),
             new ProductAbstractEventResourceQueryContainerPlugin(),
-            new ProductConcreteEventResourceQueryContainerPlugin(),
             new UrlEventResourceQueryContainerPlugin(),
             new RedirectEventResourceQueryContainerPlugin(),
             new ProductQuantityEventResourceBulkRepositoryPlugin(),
-            new ProductConcretePageSearchEventResourceRepositoryPlugin(),
+            new ProductConcretePageSearchEventResourceBulkRepositoryPlugin(),
             new ContentStorageEventResourceRepositoryPlugin(),
             new CmsSlotEventResourceBulkRepositoryPlugin(),
             new CmsSlotBlockEventResourceBulkRepositoryPlugin(),
