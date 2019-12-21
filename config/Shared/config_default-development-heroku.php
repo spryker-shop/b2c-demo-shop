@@ -68,13 +68,17 @@ $ELASTICA_AUTH_HEADER = str_pad(
 );
 $ELASTICA_PORT = ($ENV_ELASTICA_CONNECTION_DATA['scheme'] == 'https' ? 443 : 80);
 $config[SearchConstants::ELASTICA_PARAMETER__AUTH_HEADER]
-    = $config[SearchElasticsearchConstants::AUTH_HEADER] = $ELASTICA_AUTH_HEADER;
+    = $config[SearchElasticsearchConstants::AUTH_HEADER]
+    = $ELASTICA_AUTH_HEADER;
 $config[SearchConstants::ELASTICA_PARAMETER__HOST]
-    = $config[SearchElasticsearchConstants::HOST] = $ENV_ELASTICA_CONNECTION_DATA['host'];
+    = $config[SearchElasticsearchConstants::HOST]
+    = $ENV_ELASTICA_CONNECTION_DATA['host'];
 $config[SearchConstants::ELASTICA_PARAMETER__TRANSPORT]
-    = $config[SearchElasticsearchConstants::TRANSPORT] = $ENV_ELASTICA_CONNECTION_DATA['scheme'];
+    = $config[SearchElasticsearchConstants::TRANSPORT]
+    = $ENV_ELASTICA_CONNECTION_DATA['scheme'];
 $config[SearchConstants::ELASTICA_PARAMETER__PORT]
-    = $config[SearchElasticsearchConstants::PORT] = $ELASTICA_PORT;
+    = $config[SearchElasticsearchConstants::PORT]
+    = $ELASTICA_PORT;
 
 // ---------- Scheduler
 $config[SchedulerConstants::ENABLED_SCHEDULERS] = [

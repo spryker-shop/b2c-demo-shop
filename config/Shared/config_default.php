@@ -208,15 +208,20 @@ $ELASTICA_INDEX_NAME = null;// Store related config
 $ELASTICA_DOCUMENT_TYPE = 'page';
 $ELASTICA_PARAMETER__EXTRA = [];
 $config[SearchConstants::ELASTICA_PARAMETER__HOST]
-    = $config[SearchElasticsearchConstants::HOST] = $ELASTICA_HOST;
+    = $config[SearchElasticsearchConstants::HOST]
+    = $ELASTICA_HOST;
 $config[SearchConstants::ELASTICA_PARAMETER__TRANSPORT]
-    = $config[SearchElasticsearchConstants::TRANSPORT] = $ELASTICA_TRANSPORT_PROTOCOL;
+    = $config[SearchElasticsearchConstants::TRANSPORT]
+    = $ELASTICA_TRANSPORT_PROTOCOL;
 $config[SearchConstants::ELASTICA_PARAMETER__PORT]
-    = $config[SearchElasticsearchConstants::PORT] = $ELASTICA_PORT;
+    = $config[SearchElasticsearchConstants::PORT]
+    = $ELASTICA_PORT;
 $config[SearchConstants::ELASTICA_PARAMETER__AUTH_HEADER]
-    = $config[SearchElasticsearchConstants::AUTH_HEADER] = $ELASTICA_AUTH_HEADER;
+    = $config[SearchElasticsearchConstants::AUTH_HEADER]
+    = $ELASTICA_AUTH_HEADER;
 $config[SearchConstants::ELASTICA_PARAMETER__EXTRA]
-    = $config[SearchElasticsearchConstants::EXTRA] = $ELASTICA_PARAMETER__EXTRA;
+    = $config[SearchElasticsearchConstants::EXTRA]
+    = $ELASTICA_PARAMETER__EXTRA;
 $config[CollectorConstants::ELASTICA_PARAMETER__INDEX_NAME] = $ELASTICA_INDEX_NAME;
 $config[CollectorConstants::ELASTICA_PARAMETER__DOCUMENT_TYPE] = $ELASTICA_DOCUMENT_TYPE;
 
