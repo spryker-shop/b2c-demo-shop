@@ -13,17 +13,17 @@ use Spryker\Zed\ProductAlternativeStorage\ProductAlternativeStorageConfig as Spr
 class ProductAlternativeStorageConfig extends SprykerProductAlternativeStorageConfig
 {
     /**
-     * @return string
+     * @return string|null
      */
-    public function getProductAlternativeSynchronizationPoolName(): string
+    public function getProductAlternativeSynchronizationPoolName(): ?string
     {
         return SynchronizationConfig::DEFAULT_SYNCHRONIZATION_POOL_NAME;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getProductReplacementForSynchronizationPoolName(): string
+    public function getProductReplacementForSynchronizationPoolName(): ?string
     {
         return SynchronizationConfig::DEFAULT_SYNCHRONIZATION_POOL_NAME;
     }

@@ -13,9 +13,9 @@ use Spryker\Zed\ProductDiscontinuedStorage\ProductDiscontinuedStorageConfig as S
 class ProductDiscontinuedStorageConfig extends SprykerProductDiscontinuedStorageConfig
 {
     /**
-     * @return string
+     * @return string|null
      */
-    public function getProductDiscontinuedSynchronizationPoolName(): string
+    public function getProductDiscontinuedSynchronizationPoolName(): ?string
     {
         return SynchronizationConfig::DEFAULT_SYNCHRONIZATION_POOL_NAME;
     }

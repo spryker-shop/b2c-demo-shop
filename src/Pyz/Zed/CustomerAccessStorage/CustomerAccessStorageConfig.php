@@ -13,9 +13,9 @@ use Spryker\Zed\CustomerAccessStorage\CustomerAccessStorageConfig as SprykerCust
 class CustomerAccessStorageConfig extends SprykerCustomerAccessStorageConfig
 {
     /**
-     * @return string
+     * @return string|null
      */
-    public function getSynchronizationPoolName(): string
+    public function getSynchronizationPoolName(): ?string
     {
         return SynchronizationConfig::DEFAULT_SYNCHRONIZATION_POOL_NAME;
     }
