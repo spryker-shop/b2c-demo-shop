@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c2a0a1516f4673510e65bb62b59c492a",
+    "content-hash": "d73dc4deb61d83d7d979c77d13d4a0b5",
     "packages": [
         {
             "name": "codeitnowin/barcode",
@@ -17081,6 +17081,94 @@
             "time": "2019-11-19T10:06:34+00:00"
         },
         {
+            "name": "spryker/health-check",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/health-check.git",
+                "reference": "2f817e278bc882a3c7f72f9dbb3d52b1f7b0171f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/health-check/zipball/2f817e278bc882a3c7f72f9dbb3d52b1f7b0171f",
+                "reference": "2f817e278bc882a3c7f72f9dbb3d52b1f7b0171f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2",
+                "spryker/glue-application": "^1.22.0",
+                "spryker/glue-application-extension": "^1.0.0",
+                "spryker/health-check-extension": "^1.0.0",
+                "spryker/kernel": "^3.30.0",
+                "spryker/symfony": "^3.0.0"
+            },
+            "require-dev": {
+                "spryker/application": "*",
+                "spryker/code-sniffer": "*",
+                "spryker/router": "*",
+                "spryker/testify": "*"
+            },
+            "suggest": {
+                "spryker/router": "Use this module when you want to use the Router."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "HealthCheck module",
+            "time": "2019-12-19T16:49:51+00:00"
+        },
+        {
+            "name": "spryker/health-check-extension",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/health-check-extension.git",
+                "reference": "a0cbb0f7d1c99da303f0f71eb060003563752cde"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/health-check-extension/zipball/a0cbb0f7d1c99da303f0f71eb060003563752cde",
+                "reference": "a0cbb0f7d1c99da303f0f71eb060003563752cde",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/testify": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "HealthCheckExtension module",
+            "time": "2019-12-19T16:49:51+00:00"
+        },
+        {
             "name": "spryker/heartbeat",
             "version": "3.3.0",
             "source": {
@@ -23808,22 +23896,23 @@
         },
         {
             "name": "spryker/propel",
-            "version": "3.16.1",
+            "version": "3.17.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/propel.git",
-                "reference": "348b0b33ed2a08fc8960f57061d483c4360d178d"
+                "reference": "4ffa8c9214f3423e29966cb1d2d0a9c17210cdea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/propel/zipball/348b0b33ed2a08fc8960f57061d483c4360d178d",
-                "reference": "348b0b33ed2a08fc8960f57061d483c4360d178d",
+                "url": "https://api.github.com/repos/spryker/propel/zipball/4ffa8c9214f3423e29966cb1d2d0a9c17210cdea",
+                "reference": "4ffa8c9214f3423e29966cb1d2d0a9c17210cdea",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.1",
+                "php": ">=7.2",
                 "spryker/application-extension": "^1.0.0",
                 "spryker/config": "^3.0.0",
+                "spryker/health-check-extension": "^1.0.0",
                 "spryker/kernel": "^3.30.0",
                 "spryker/log": "^3.0.0",
                 "spryker/monolog": "^2.0.0",
@@ -23860,7 +23949,7 @@
                 "proprietary"
             ],
             "description": "Propel module",
-            "time": "2019-10-22T09:47:32+00:00"
+            "time": "2019-12-19T16:49:51+00:00"
         },
         {
             "name": "spryker/propel-orm",
@@ -25281,16 +25370,16 @@
         },
         {
             "name": "spryker/search",
-            "version": "8.10.0",
+            "version": "8.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/search.git",
-                "reference": "a6e008f7e1d97aa68e51e9368439cb11dc217cd9"
+                "reference": "54fbf584574870e719543f67f6e86466ca1743a0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/search/zipball/a6e008f7e1d97aa68e51e9368439cb11dc217cd9",
-                "reference": "a6e008f7e1d97aa68e51e9368439cb11dc217cd9",
+                "url": "https://api.github.com/repos/spryker/search/zipball/54fbf584574870e719543f67f6e86466ca1743a0",
+                "reference": "54fbf584574870e719543f67f6e86466ca1743a0",
                 "shasum": ""
             },
             "require": {
@@ -25299,6 +25388,7 @@
                 "spryker/elastica": "^4.0.0 || ^5.0.0",
                 "spryker/gui": "^3.0.0",
                 "spryker/guzzle": "^2.0.0",
+                "spryker/health-check-extension": "^1.0.0",
                 "spryker/kernel": "^3.30.0",
                 "spryker/log": "^3.0.0",
                 "spryker/money": "^2.0.0",
@@ -25333,7 +25423,7 @@
                 "proprietary"
             ],
             "description": "Search module",
-            "time": "2019-12-09T11:42:08+00:00"
+            "time": "2019-12-19T16:49:51+00:00"
         },
         {
             "name": "spryker/search-extension",
@@ -25523,16 +25613,16 @@
         },
         {
             "name": "spryker/session",
-            "version": "4.5.1",
+            "version": "4.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/session.git",
-                "reference": "0c29a16c0dbf7b51a25798fb3312c9fb1183e3a3"
+                "reference": "eec6470fc288b37edfe0e73d6e6aa0e59a6ee33f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/session/zipball/0c29a16c0dbf7b51a25798fb3312c9fb1183e3a3",
-                "reference": "0c29a16c0dbf7b51a25798fb3312c9fb1183e3a3",
+                "url": "https://api.github.com/repos/spryker/session/zipball/eec6470fc288b37edfe0e73d6e6aa0e59a6ee33f",
+                "reference": "eec6470fc288b37edfe0e73d6e6aa0e59a6ee33f",
                 "shasum": ""
             },
             "require": {
@@ -25540,6 +25630,7 @@
                 "spryker/application-extension": "^1.0.0",
                 "spryker/config": "^3.0.0",
                 "spryker/event-dispatcher-extension": "^1.0.0",
+                "spryker/health-check-extension": "^1.0.0",
                 "spryker/kernel": "^3.33.0",
                 "spryker/monitoring": "^1.0.0 || ^2.0.0",
                 "spryker/redis": "^2.0.0",
@@ -25549,6 +25640,7 @@
             },
             "require-dev": {
                 "spryker/application": "*",
+                "spryker/code-sniffer": "*",
                 "spryker/container": "*",
                 "spryker/event-dispatcher": "*",
                 "spryker/propel": "*",
@@ -25576,7 +25668,7 @@
                 "proprietary"
             ],
             "description": "Session module",
-            "time": "2019-12-04T18:39:21+00:00"
+            "time": "2019-12-19T16:49:51+00:00"
         },
         {
             "name": "spryker/session-extension",
@@ -26629,16 +26721,16 @@
         },
         {
             "name": "spryker/storage",
-            "version": "3.13.0",
+            "version": "3.14.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/storage.git",
-                "reference": "07f94b6c52dc30641bbb1143a9e0a12f47be30f5"
+                "reference": "fec86867a1133c904ba240f53fa3fcf1479c7e32"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/storage/zipball/07f94b6c52dc30641bbb1143a9e0a12f47be30f5",
-                "reference": "07f94b6c52dc30641bbb1143a9e0a12f47be30f5",
+                "url": "https://api.github.com/repos/spryker/storage/zipball/fec86867a1133c904ba240f53fa3fcf1479c7e32",
+                "reference": "fec86867a1133c904ba240f53fa3fcf1479c7e32",
                 "shasum": ""
             },
             "require": {
@@ -26646,6 +26738,7 @@
                 "spryker/config": "^3.0.0",
                 "spryker/event-dispatcher-extension": "^1.0.0",
                 "spryker/gui": "^3.0.0",
+                "spryker/health-check-extension": "^1.0.0",
                 "spryker/kernel": "^3.41.0",
                 "spryker/locale": "^3.0.0",
                 "spryker/redis": "^2.2.0",
@@ -26684,7 +26777,7 @@
                 "proprietary"
             ],
             "description": "Storage module",
-            "time": "2019-12-03T22:33:53+00:00"
+            "time": "2019-12-19T16:49:51+00:00"
         },
         {
             "name": "spryker/storage-database",
@@ -29044,16 +29137,16 @@
         },
         {
             "name": "spryker/zed-request",
-            "version": "3.11.0",
+            "version": "3.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/zed-request.git",
-                "reference": "b3e934daa1476df90835fd1ea6ff5b3bfaad9f8f"
+                "reference": "18d28fe8d7e3ddf31cbbfab7d2cd43dc1204bc6f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/zed-request/zipball/b3e934daa1476df90835fd1ea6ff5b3bfaad9f8f",
-                "reference": "b3e934daa1476df90835fd1ea6ff5b3bfaad9f8f",
+                "url": "https://api.github.com/repos/spryker/zed-request/zipball/18d28fe8d7e3ddf31cbbfab7d2cd43dc1204bc6f",
+                "reference": "18d28fe8d7e3ddf31cbbfab7d2cd43dc1204bc6f",
                 "shasum": ""
             },
             "require": {
@@ -29062,6 +29155,7 @@
                 "spryker/config": "^3.0.0",
                 "spryker/event-dispatcher-extension": "^1.0.0",
                 "spryker/guzzle": "^2.1.0",
+                "spryker/health-check-extension": "^1.0.0",
                 "spryker/kernel": "^3.30.0",
                 "spryker/messenger": "^3.0.0",
                 "spryker/silex": "^2.0.0",
@@ -29070,6 +29164,7 @@
                 "spryker/util-text": "^1.1.0"
             },
             "require-dev": {
+                "spryker/code-sniffer": "*",
                 "spryker/container": "*",
                 "spryker/event-dispatcher": "*",
                 "spryker/log": "*",
@@ -29098,7 +29193,7 @@
                 "proprietary"
             ],
             "description": "ZedRequest module",
-            "time": "2019-11-26T06:15:05+00:00"
+            "time": "2019-12-19T16:49:51+00:00"
         },
         {
             "name": "spryker/zend",
@@ -32778,7 +32873,7 @@
                     "homepage": "https://nette.org/contributors"
                 }
             ],
-            "description": "? Nette NEON: encodes and decodes NEON file format.",
+            "description": "🍸 Nette NEON: encodes and decodes NEON file format.",
             "homepage": "http://ne-on.org",
             "keywords": [
                 "export",
