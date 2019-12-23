@@ -21,6 +21,7 @@ use Spryker\Shared\Quote\QuoteConstants;
 use Spryker\Shared\RabbitMq\RabbitMqEnv;
 use Spryker\Shared\Scheduler\SchedulerConstants;
 use Spryker\Shared\Search\SearchConstants;
+use Spryker\Shared\SearchElasticsearch\SearchElasticsearchConstants;
 use Spryker\Shared\Session\SessionConstants;
 use Spryker\Shared\SessionRedis\SessionRedisConstants;
 use Spryker\Shared\StorageRedis\StorageRedisConstants;
@@ -91,9 +92,8 @@ $config[StorageRedisConstants::STORAGE_REDIS_DATABASE] = 3;
 $ELASTICA_INDEX_NAME = 'de_search_devtest';
 $ELASTICA_DOCUMENT_TYPE = 'page';
 $ELASTICA_PORT = '9200';
-$config[SearchConstants::ELASTICA_PARAMETER__INDEX_NAME] = $ELASTICA_INDEX_NAME;
-$config[SearchConstants::ELASTICA_PARAMETER__DOCUMENT_TYPE] = $ELASTICA_DOCUMENT_TYPE;
-$config[SearchConstants::ELASTICA_PARAMETER__PORT] = $ELASTICA_PORT;
+$config[SearchConstants::ELASTICA_PARAMETER__PORT]
+    = $config[SearchElasticsearchConstants::PORT] = $ELASTICA_PORT;
 $config[CollectorConstants::ELASTICA_PARAMETER__INDEX_NAME] = $ELASTICA_INDEX_NAME;
 $config[CollectorConstants::ELASTICA_PARAMETER__DOCUMENT_TYPE] = $ELASTICA_DOCUMENT_TYPE;
 

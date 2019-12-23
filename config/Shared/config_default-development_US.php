@@ -8,7 +8,6 @@ use Spryker\Shared\Propel\PropelConstants;
 use Spryker\Shared\Queue\QueueConfig;
 use Spryker\Shared\Queue\QueueConstants;
 use Spryker\Shared\RabbitMq\RabbitMqEnv;
-use Spryker\Shared\Search\SearchConstants;
 
 // ---------- Propel
 $config[PropelConstants::ZED_DB_DATABASE] = 'US_development_zed';
@@ -18,7 +17,6 @@ $config[MailConstants::MAILCATCHER_GUI] = sprintf('http://%s:1080', $config[Appl
 
 // ---------- Elasticsearch
 $ELASTICA_INDEX_NAME = 'us_search';
-$config[SearchConstants::ELASTICA_PARAMETER__INDEX_NAME] = $ELASTICA_INDEX_NAME;
 $config[CollectorConstants::ELASTICA_PARAMETER__INDEX_NAME] = $ELASTICA_INDEX_NAME;
 
 // ---------- Queue
