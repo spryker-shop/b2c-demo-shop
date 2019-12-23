@@ -71,7 +71,7 @@ class ExampleProductSalePageFactory extends AbstractFactory
     }
 
     /**
-     * @return \Spryker\Client\Search\Dependency\Plugin\ResultFormatterPluginInterface[]
+     * @return \Spryker\Client\SearchExtension\Dependency\Plugin\ResultFormatterPluginInterface[]
      */
     public function getSaleSearchResultFormatterPlugins()
     {
