@@ -552,7 +552,7 @@ $config[TranslatorConstants::TRANSLATION_ZED_FALLBACK_LOCALES] = [
 ];
 
 $config[TranslatorConstants::TRANSLATION_ZED_CACHE_DIRECTORY] = sprintf(
-    '%s/data/%s/cache/Zed/translation',
+    '%s/data/%s/cache/ZED/translation',
     APPLICATION_ROOT_DIR,
     $CURRENT_STORE
 );
