@@ -1,12 +1,8 @@
-{% extends model('component') %}
-
-{% define config = {
-    name: 'sort'
-} %}
+{% extends molecule('sort', '@SprykerShop:CatalogPage') %}
 
 {% define data = {
-    pagination: _view.pagination,
-
+    pagination: {},
+    sort: {},
 } %}
 
 {% block body %}
@@ -18,10 +14,11 @@
         <div class="col col--lg-8 col--xl-6 is-hidden-sm-md">
             <div class="grid grid--middle">
                 {% block selects %}
-                    <div class="col col--sm-3 col--md-5 {{config.jsName}}__filter" data-block-to="js-filter-section__sorting" data-breakpoint="769">
+                    <div class="col col--sm-3 col--md-5 {{ config.jsName }}__filter" data-block-to="js-filter-section__sorting" data-breakpoint="769">
                         {% block label %}
                             <label class="{{ config.name }}__label is-hidden-sm-md">{{ 'catalog.filter.per' | trans }}:</label>
                         {% endblock %}
+
                         {% embed molecule('custom-select') with {
                             modifiers: ['hollow'],
                             attributes: {
@@ -31,16 +28,22 @@
                             },
                             embed: {
                                 pagination: data.pagination,
+                                parentJsName: data.parentJsName,
                             },
                         } only %}
+                            {% block selectClass %}{{ parent() }} {{ embed.parentJsName ? embed.parentJsName ~ '__sort-trigger' }}{% endblock %}
+
                             {% block options %}
                                 {% for limit in embed.pagination.config.validItemsPerPageOptions %}
-                                    <option value="{{ limit }}" {% if limit == embed.pagination.currentItemsPerPage %}selected{% endif %}>{{ limit }}</option>
+                                    {% set selectedAttribute = (limit == embed.pagination.currentItemsPerPage) ? 'selected' %}
+
+                                    <option value="{{ limit }}" {{ selectedAttribute }}>{{ limit }}</option>
                                 {% endfor %}
                             {% endblock %}
                         {% endembed %}
                     </div>
-                    <div class="col col--sm-9 col--md-7 {{config.jsName}}__filter" data-block-to="js-filter-section__sorting" data-breakpoint="769">
+
+                    <div class="col col--sm-9 col--md-7 {{ config.jsName }}__filter" data-block-to="js-filter-section__sorting" data-breakpoint="769">
                         {% embed molecule('custom-select') with {
                             class: 'float-right',
                             modifiers: ['hollow'],
@@ -51,20 +54,19 @@
                                 'data-form-submitter': '',
                             },
                             embed: {
-                                sort: _view.sort,
+                                sort: data.sort,
+                                parentJsName: data.parentJsName,
                             },
                         } only %}
+                            {% block selectClass %}{{ parent() }} {{ embed.parentJsName ? embed.parentJsName ~ '__sort-trigger' }}{% endblock %}
+
                             {% block options %}
-                                <option value="">
-                                    {{ 'catalog.sort.relevance' | trans }}
-                                </option>
+                                <option value="">{{ 'catalog.sort.relevance' | trans }}</option>
 
                                 {% for sortParamName in embed.sort.sortParamNames %}
-                                    {% set isSelected = sortParamName == embed.sort.currentSortParam %}
-                                    <option
-                                        value="{{ sortParamName }}"
-                                        {% if isSelected %}selected{% endif %}
-                                    >
+                                    {% set selectedAttribute = (sortParamName == embed.sort.currentSortParam) ? 'selected' %}
+
+                                    <option value="{{ sortParamName }}" {{ selectedAttribute }}>
                                         {{ ('catalog.sort.' ~ sortParamName) | trans }}
                                     </option>
                                 {% endfor %}

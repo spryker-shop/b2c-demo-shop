@@ -2,19 +2,8 @@
 
 {% define data = {
     products: [],
-    facets: _view.facets,
-    category: _view.category | default,
-    categories: categories | default([]),
-    isEmptyCategoryFilterValueVisible: _view.isEmptyCategoryFilterValueVisible | default,
-    viewMode: _view.viewMode | default,
     children: _view.category.children | default([]),
-
-    title: _view.category.name | default,
-    metaTitle: _view.pageTitle | default(_view.category.name | default),
-    metaDescription: _view.pageDescription | default,
-    metaKeywords: _view.pageKeywords | default,
-
-    pagination: null
+    pagination: null,
 } %}
 
 {% set categoryTemplate = molecule('category-card', 'CatalogPage') %}
