@@ -14,4 +14,8 @@
       Require all granted
   </Directory>
 
+  AddHandler php7-fcgi .php
+  Action php7-fcgi /php7-fcgi-zed virtual
+  Alias /php7-fcgi-zed /usr/lib/cgi-bin/php7-fcgi-zed
+  FastCgiExternalServer /usr/lib/cgi-bin/php7-fcgi-zed -host 127.0.0.1:9003 -pass-header Authorization
 </VirtualHost>

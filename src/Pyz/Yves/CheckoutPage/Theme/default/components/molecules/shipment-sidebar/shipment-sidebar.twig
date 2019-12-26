@@ -12,6 +12,7 @@
     {% set shippingAddress = data.shipment.vars.data.shippingAddress %}
     {% set shipmentSelection = data.shipment.shipmentSelection %}
     {% set requestedDeliveryDate = data.shipment.requestedDeliveryDate %}
+    {% set shipmentSelectionIndex = shipmentSelection.vars.value %}
 
     <div class="{{ config.name }}__item">
         <h4 class="title title--secondary-small">{{ 'page.checkout.shipment.shipping_address.title' | trans }}</h4>
@@ -36,6 +37,7 @@
                 data: {
                     form: shipmentSelection,
                     choices: choices,
+                    providerIndex: shipmentSelectionIndex,
                 },
             } only %}
         {% endfor %}

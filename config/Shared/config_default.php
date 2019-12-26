@@ -38,6 +38,7 @@ use Spryker\Shared\Quote\QuoteConstants;
 use Spryker\Shared\Router\RouterConstants;
 use Spryker\Shared\Sales\SalesConstants;
 use Spryker\Shared\Search\SearchConstants;
+use Spryker\Shared\SearchElasticsearch\SearchElasticsearchConstants;
 use Spryker\Shared\SequenceNumber\SequenceNumberConstants;
 use Spryker\Shared\Session\SessionConfig;
 use Spryker\Shared\Session\SessionConstants;
@@ -200,25 +201,33 @@ $config[AclConstants::ACL_DEFAULT_CREDENTIALS] = [
 
 // ---------- Elasticsearch
 $ELASTICA_HOST = 'localhost';
-$config[SearchConstants::ELASTICA_PARAMETER__HOST] = $ELASTICA_HOST;
 $ELASTICA_TRANSPORT_PROTOCOL = 'http';
-$config[SearchConstants::ELASTICA_PARAMETER__TRANSPORT] = $ELASTICA_TRANSPORT_PROTOCOL;
 $ELASTICA_PORT = '10005';
-$config[SearchConstants::ELASTICA_PARAMETER__PORT] = $ELASTICA_PORT;
 $ELASTICA_AUTH_HEADER = null;
-$config[SearchConstants::ELASTICA_PARAMETER__AUTH_HEADER] = $ELASTICA_AUTH_HEADER;
 $ELASTICA_INDEX_NAME = null;// Store related config
-$config[SearchConstants::ELASTICA_PARAMETER__INDEX_NAME] = $ELASTICA_INDEX_NAME;
-$config[CollectorConstants::ELASTICA_PARAMETER__INDEX_NAME] = $ELASTICA_INDEX_NAME;
 $ELASTICA_DOCUMENT_TYPE = 'page';
-$config[SearchConstants::ELASTICA_PARAMETER__DOCUMENT_TYPE] = $ELASTICA_DOCUMENT_TYPE;
-$config[CollectorConstants::ELASTICA_PARAMETER__DOCUMENT_TYPE] = $ELASTICA_DOCUMENT_TYPE;
 $ELASTICA_PARAMETER__EXTRA = [];
-$config[SearchConstants::ELASTICA_PARAMETER__EXTRA] = $ELASTICA_PARAMETER__EXTRA;
+$config[SearchConstants::ELASTICA_PARAMETER__HOST]
+    = $config[SearchElasticsearchConstants::HOST]
+    = $ELASTICA_HOST;
+$config[SearchConstants::ELASTICA_PARAMETER__TRANSPORT]
+    = $config[SearchElasticsearchConstants::TRANSPORT]
+    = $ELASTICA_TRANSPORT_PROTOCOL;
+$config[SearchConstants::ELASTICA_PARAMETER__PORT]
+    = $config[SearchElasticsearchConstants::PORT]
+    = $ELASTICA_PORT;
+$config[SearchConstants::ELASTICA_PARAMETER__AUTH_HEADER]
+    = $config[SearchElasticsearchConstants::AUTH_HEADER]
+    = $ELASTICA_AUTH_HEADER;
+$config[SearchConstants::ELASTICA_PARAMETER__EXTRA]
+    = $config[SearchElasticsearchConstants::EXTRA]
+    = $ELASTICA_PARAMETER__EXTRA;
+$config[CollectorConstants::ELASTICA_PARAMETER__INDEX_NAME] = $ELASTICA_INDEX_NAME;
+$config[CollectorConstants::ELASTICA_PARAMETER__DOCUMENT_TYPE] = $ELASTICA_DOCUMENT_TYPE;
 
 // ---------- Page search
-$config[SearchConstants::FULL_TEXT_BOOSTED_BOOSTING_VALUE] = 3;
-$config[SearchConstants::SEARCH_INDEX_NAME_SUFFIX] = '';
+$config[SearchConstants::FULL_TEXT_BOOSTED_BOOSTING_VALUE]
+    = $config[SearchElasticsearchConstants::FULL_TEXT_BOOSTED_BOOSTING_VALUE] = 3;
 
 // ---------- Twig
 $config[TwigConstants::YVES_TWIG_OPTIONS] = [
@@ -543,7 +552,7 @@ $config[TranslatorConstants::TRANSLATION_ZED_FALLBACK_LOCALES] = [
 ];
 
 $config[TranslatorConstants::TRANSLATION_ZED_CACHE_DIRECTORY] = sprintf(
-    '%s/data/%s/cache/Zed/translation',
+    '%s/data/%s/cache/ZED/translation',
     APPLICATION_ROOT_DIR,
     $CURRENT_STORE
 );
