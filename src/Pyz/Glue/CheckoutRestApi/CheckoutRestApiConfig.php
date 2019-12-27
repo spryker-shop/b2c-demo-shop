@@ -48,6 +48,8 @@ class CheckoutRestApiConfig extends SprykerCheckoutRestApiConfig
      */
     protected const PAYMENT_METHOD_CREDIT_CARD = 'dummyPaymentCreditCard';
 
+    protected const IS_PAYMENT_PROVIDER_METHOD_TO_STATE_MACHINE_MAPPING_ENABLED = false;
+
     /**
      * @return array
      */
