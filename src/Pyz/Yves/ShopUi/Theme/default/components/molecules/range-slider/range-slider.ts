@@ -47,7 +47,13 @@ export default class RangeSlider extends Component {
     }
 
     protected updateValues(wrap: noUiSlider, target: HTMLInputElement[]): void {
-        const update = (values, handle) => target[handle].value = `${Number(values[handle])}`;
+        const update = (values, handle) => {
+            if (Number(values[handle]) === Number(this.sliderConfig.start[handle])) {
+                return;
+            }
+
+            target[handle].value = `${Number(values[handle])}`;
+        };
 
         wrap.noUiSlider.on('update', update);
     }
