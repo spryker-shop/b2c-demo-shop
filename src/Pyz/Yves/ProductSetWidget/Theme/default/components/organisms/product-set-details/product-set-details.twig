@@ -36,7 +36,7 @@
             {% embed molecule('slick-carousel') with {
                 data: {
                     slides: data.images,
-                    containerClass: 'product-set-slider'
+                    containerClass: 'product-set-slider',
                 },
                 attributes: {
                     'data-json': '{
@@ -45,7 +45,7 @@
                         "arrows": false
                     }'
                 },
-                modifiers: ['product-set']
+                modifiers: ['product-set'],
             } only %}
 
                 {% block slides %}
@@ -54,8 +54,8 @@
                             modifiers: ['bigger', 'no-margin'],
                             attributes: {
                                 itemprop: 'image',
-                                src: slide.externalUrlLarge
-                            }
+                                src: slide.externalUrlLarge,
+                            },
                         } only %}
                     {% endfor %}
                 {% endblock %}
@@ -69,11 +69,9 @@
                 {% set isDisabled = false %}
 
                 {% for product in data.products %}
-                    {% if product.idProductConcrete is not empty %}
-                        {% if product.available %}
-                            <input type="hidden" name="items[{{ loop.index }}][sku]" value="{{ product.sku }}" />
-                            <input type="hidden" name="items[{{ loop.index }}][quantity]" value="1" />
-                        {% endif %}
+                    {% if product.idProductConcrete and product.available %}
+                        <input type="hidden" name="items[{{ loop.index }}][sku]" value="{{ product.sku }}">
+                        <input type="hidden" name="items[{{ loop.index }}][quantity]" value="1">
                     {% else %}
                         {% set isDisabled = true %}
                     {% endif %}

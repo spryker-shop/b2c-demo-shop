@@ -30,8 +30,8 @@ sections:
         generate-entity-transfer:
             command: "vendor/bin/console transfer:entity:generate"
 
-        generate-page-index-map:
-            command: "vendor/bin/console search:setup:index-map"
+        generate-page-source-map:
+            command: "vendor/bin/console search:setup:source-map"
 
         translator-generate-cache:
             command: "vendor/bin/console translator:generate-cache"
@@ -67,8 +67,8 @@ sections:
             command: "vendor/bin/console scheduler:setup"
 
     init-storages-per-store:
-        setup-search-create-indexes:
-            command: "vendor/bin/console search:setup:indexes"
+        setup-search-create-sources:
+            command: "vendor/bin/console search:setup:sources"
 
     init-storages-per-region:
         propel-copy-schema:
