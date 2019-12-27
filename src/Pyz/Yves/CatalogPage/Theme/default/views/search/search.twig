@@ -2,6 +2,7 @@
 
 {% define data = {
     suggestion: _view.spellingSuggestion,
+    searchString: _view.searchString | default,
     title: ('global.search.results' | trans) ~ ' ' ~ _view.searchString,
     pagination: {
         paginationPath: app.request.attributes.get('_route'),

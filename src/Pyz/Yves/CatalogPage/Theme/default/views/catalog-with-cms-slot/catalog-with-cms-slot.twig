@@ -1,5 +1,10 @@
 {% extends template('page-layout-catalog', 'CatalogPage') %}
 
+{% define data = {
+    searchString: _view.searchString | default,
+    categoryId: _view.idCategory | default,
+} %}
+
 {% block filterSection %}
     {{ parent() }}
 
