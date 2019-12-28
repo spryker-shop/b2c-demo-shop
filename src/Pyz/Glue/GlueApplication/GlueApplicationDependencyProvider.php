@@ -14,8 +14,13 @@ use Spryker\Glue\AuthRestApi\Plugin\AccessTokensResourceRoutePlugin;
 use Spryker\Glue\AuthRestApi\Plugin\FormatAuthenticationErrorResponseHeadersPlugin;
 use Spryker\Glue\AuthRestApi\Plugin\RefreshTokensResourceRoutePlugin;
 use Spryker\Glue\AuthRestApi\Plugin\RestUserFinderByAccessTokenPlugin;
+use Spryker\Glue\CartCodesRestApi\Plugin\GlueApplication\CartRuleByQuoteResourceRelationshipPlugin;
+use Spryker\Glue\CartCodesRestApi\Plugin\GlueApplication\CartVouchersResourceRoutePlugin;
+use Spryker\Glue\CartCodesRestApi\Plugin\GlueApplication\GuestCartVouchersResourceRoutePlugin;
+use Spryker\Glue\CartCodesRestApi\Plugin\GlueApplication\VoucherByQuoteResourceRelationshipPlugin;
 use Spryker\Glue\CartsRestApi\CartsRestApiConfig;
 use Spryker\Glue\CartsRestApi\Plugin\ControllerBeforeAction\SetAnonymousCustomerIdControllerBeforeActionPlugin;
+use Spryker\Glue\CartsRestApi\Plugin\GlueApplication\CartItemsByQuoteResourceRelationshipPlugin;
 use Spryker\Glue\CartsRestApi\Plugin\ResourceRoute\CartItemsResourceRoutePlugin;
 use Spryker\Glue\CartsRestApi\Plugin\ResourceRoute\CartsResourceRoutePlugin;
 use Spryker\Glue\CartsRestApi\Plugin\ResourceRoute\GuestCartItemsResourceRoutePlugin;
@@ -51,6 +56,7 @@ use Spryker\Glue\GlueApplication\Plugin\Application\GlueApplicationApplicationPl
 use Spryker\Glue\GlueApplication\Plugin\GlueApplication\PaginationParametersValidateHttpRequestPlugin;
 use Spryker\Glue\GlueApplication\Plugin\Rest\SetStoreCurrentLocaleBeforeActionPlugin;
 use Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\ResourceRelationshipCollectionInterface;
+use Spryker\Glue\HealthCheck\Plugin\HealthCheckResourceRoutePlugin;
 use Spryker\Glue\NavigationsCategoryNodesResourceRelationship\Plugin\GlueApplication\CategoryNodeByResourceIdResourceRelationshipPlugin;
 use Spryker\Glue\NavigationsRestApi\NavigationsRestApiConfig;
 use Spryker\Glue\NavigationsRestApi\Plugin\ResourceRoute\NavigationsResourceRoutePlugin;
@@ -65,6 +71,7 @@ use Spryker\Glue\ProductImageSetsRestApi\Plugin\AbstractProductImageSetsRoutePlu
 use Spryker\Glue\ProductImageSetsRestApi\Plugin\ConcreteProductImageSetsRoutePlugin;
 use Spryker\Glue\ProductImageSetsRestApi\Plugin\Relationship\AbstractProductsProductImageSetsResourceRelationshipPlugin;
 use Spryker\Glue\ProductImageSetsRestApi\Plugin\Relationship\ConcreteProductsProductImageSetsResourceRelationshipPlugin;
+use Spryker\Glue\ProductLabelsRestApi\Plugin\GlueApplication\ProductLabelByProductConcreteSkuResourceRelationshipPlugin;
 use Spryker\Glue\ProductLabelsRestApi\Plugin\GlueApplication\ProductLabelsRelationshipByResourceIdPlugin;
 use Spryker\Glue\ProductLabelsRestApi\Plugin\GlueApplication\ProductLabelsResourceRoutePlugin;
 use Spryker\Glue\ProductOptionsRestApi\Plugin\GlueApplication\ProductOptionsByProductAbstractSkuResourceRelationshipPlugin;
@@ -156,6 +163,9 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
             new UrlResolverResourceRoutePlugin(),
             new CustomerAccessResourceRoutePlugin(),
             new AbstractProductsProductReviewsResourceRoutePlugin(),
+            new HealthCheckResourceRoutePlugin(),
+            new CartVouchersResourceRoutePlugin(),
+            new GuestCartVouchersResourceRoutePlugin(),
         ];
     }
 
@@ -303,6 +313,10 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
             new ProductLabelsRelationshipByResourceIdPlugin()
         );
         $resourceRelationshipCollection->addRelationship(
+            ProductsRestApiConfig::RESOURCE_CONCRETE_PRODUCTS,
+            new ProductLabelByProductConcreteSkuResourceRelationshipPlugin()
+        );
+        $resourceRelationshipCollection->addRelationship(
             CheckoutRestApiConfig::RESOURCE_CHECKOUT,
             new OrderRelationshipByOrderReferencePlugin()
         );
@@ -337,6 +351,26 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
         $resourceRelationshipCollection->addRelationship(
             ProductsRestApiConfig::RESOURCE_CONCRETE_PRODUCTS,
             new ProductOptionsByProductConcreteSkuResourceRelationshipPlugin()
+        );
+        $resourceRelationshipCollection->addRelationship(
+            CartsRestApiConfig::RESOURCE_CARTS,
+            new VoucherByQuoteResourceRelationshipPlugin()
+        );
+        $resourceRelationshipCollection->addRelationship(
+            CartsRestApiConfig::RESOURCE_GUEST_CARTS,
+            new VoucherByQuoteResourceRelationshipPlugin()
+        );
+        $resourceRelationshipCollection->addRelationship(
+            CartsRestApiConfig::RESOURCE_CARTS,
+            new CartRuleByQuoteResourceRelationshipPlugin()
+        );
+        $resourceRelationshipCollection->addRelationship(
+            CartsRestApiConfig::RESOURCE_GUEST_CARTS,
+            new CartRuleByQuoteResourceRelationshipPlugin()
+        );
+        $resourceRelationshipCollection->addRelationship(
+            CartsRestApiConfig::RESOURCE_CARTS,
+            new CartItemsByQuoteResourceRelationshipPlugin()
         );
 
         return $resourceRelationshipCollection;

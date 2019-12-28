@@ -13,11 +13,14 @@
 } %}
 
 {% block body %}
+    {% set activeMin = (data.activeMin != data.min) ? data.activeMin %}
+    {% set activeMax = (data.activeMax != data.max) ? data.activeMax %}
+
     <input
         class="{{ config.jsName }}__input"
         type="hidden"
         name="{{ data.parameter }}[min]"
-        value="{{ data.activeMin }}"
+        value="{{ activeMin }}"
         required="required"
         min="{{ data.min }}"
         max="{{ data.max }}"
@@ -28,7 +31,7 @@
         class="{{ config.jsName }}__input"
         type="hidden"
         name="{{ data.parameter }}[max]"
-        value="{{ data.activeMax }}"
+        value="{{ activeMax }}"
         required="required"
         min="{{ data.min }}"
         max="{{ data.max }}"

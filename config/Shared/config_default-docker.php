@@ -50,6 +50,7 @@ use Spryker\Shared\Scheduler\SchedulerConstants;
 use Spryker\Shared\SchedulerJenkins\SchedulerJenkinsConfig;
 use Spryker\Shared\SchedulerJenkins\SchedulerJenkinsConstants;
 use Spryker\Shared\Search\SearchConstants;
+use Spryker\Shared\SearchElasticsearch\SearchElasticsearchConstants;
 use Spryker\Shared\SequenceNumber\SequenceNumberConstants;
 use Spryker\Shared\Session\SessionConfig;
 use Spryker\Shared\Session\SessionConstants;
@@ -110,7 +111,7 @@ $config[ZedRequestConstants::BASE_URL_SSL_ZED_API] = sprintf(
 $config[TwigConstants::ZED_TWIG_OPTIONS] = [
     'cache' => new FilesystemCache(
         sprintf(
-            '%s/data/%s/cache/Zed/twig',
+            '%s/data/%s/cache/ZED/twig',
             APPLICATION_ROOT_DIR,
             $CURRENT_STORE
         ),
@@ -134,7 +135,7 @@ $config[ZedRequestConstants::YVES_REQUEST_REPEAT_DATA_PATH] = APPLICATION_ROOT_D
 $config[ZedRequestConstants::ZED_API_SSL_ENABLED] = false;
 $config[ApplicationConstants::ZED_SSL_ENABLED] = false;
 $config[SessionConstants::ZED_SSL_ENABLED] = (bool)getenv('SPRYKER_SSL_ENABLE');
-$config[ApplicationConstants::ZED_SSL_EXCLUDED] = ['heartbeat/index'];
+$config[ApplicationConstants::ZED_SSL_EXCLUDED] = ['health-check/index'];
 
 $config[ErrorHandlerConstants::DISPLAY_ERRORS] = true;
 $config[ErrorHandlerConstants::ZED_ERROR_PAGE] = APPLICATION_ROOT_DIR . '/public/Zed/errorpage/error.html';
@@ -231,7 +232,7 @@ $config[AclConstants::ACL_DEFAULT_RULES] = [
         'type' => 'allow',
     ],
     [
-        'bundle' => 'heartbeat',
+        'bundle' => 'healthCheck',
         'controller' => 'index',
         'action' => 'index',
         'type' => 'allow',
@@ -258,8 +259,8 @@ $config[AclConstants::ACL_USER_RULE_WHITELIST] = [
         'type' => 'allow',
     ],
     [
-        'bundle' => 'heartbeat',
-        'controller' => 'heartbeat',
+        'bundle' => 'healthCheck',
+        'controller' => 'index',
         'action' => 'index',
         'type' => 'allow',
     ],
@@ -356,7 +357,7 @@ $config[CustomerConstants::BASE_URL_YVES] = $config[ApplicationConstants::BASE_U
 $config[TwigConstants::YVES_TWIG_OPTIONS] = [
     'cache' => new FilesystemCache(
         sprintf(
-            '%s/data/%s/cache/Yves/twig',
+            '%s/data/%s/cache/YVES/twig',
             APPLICATION_ROOT_DIR,
             $CURRENT_STORE
         ),
@@ -397,7 +398,7 @@ $config[SessionConstants::YVES_SSL_ENABLED] = false;
 $config[ApplicationConstants::YVES_SSL_ENABLED] = (bool)getenv('SPRYKER_SSL_ENABLE');
 $config[SessionConstants::YVES_SSL_ENABLED] = (bool)getenv('SPRYKER_SSL_ENABLE');
 $config[ApplicationConstants::YVES_SSL_EXCLUDED] = [
-    'heartbeat' => '/heartbeat',
+    'healthcheck' => '/health-check',
 ];
 
 $YVES_THEME = 'default';
@@ -531,22 +532,30 @@ foreach ($rabbitConnections as $key => $connection) {
 /* End Broker */
 
 /* Search service */
-$config[SearchConstants::ELASTICA_PARAMETER__HOST] = getenv('SPRYKER_SEARCH_HOST');
+$config[SearchConstants::ELASTICA_PARAMETER__HOST]
+    = $config[SearchElasticsearchConstants::HOST]
+    = getenv('SPRYKER_SEARCH_HOST');
 $ELASTICA_TRANSPORT_PROTOCOL = 'http';
-$config[SearchConstants::ELASTICA_PARAMETER__TRANSPORT] = $ELASTICA_TRANSPORT_PROTOCOL;
-$config[SearchConstants::ELASTICA_PARAMETER__PORT] = getenv('SPRYKER_SEARCH_PORT');
+$config[SearchConstants::ELASTICA_PARAMETER__TRANSPORT]
+    = $config[SearchElasticsearchConstants::TRANSPORT]
+    = $ELASTICA_TRANSPORT_PROTOCOL;
+$config[SearchConstants::ELASTICA_PARAMETER__PORT]
+    = $config[SearchElasticsearchConstants::PORT]
+    = getenv('SPRYKER_SEARCH_PORT');
 $ELASTICA_AUTH_HEADER = null;
-$config[SearchConstants::ELASTICA_PARAMETER__AUTH_HEADER] = $ELASTICA_AUTH_HEADER;
-$config[SearchConstants::ELASTICA_PARAMETER__INDEX_NAME] = getenv('SPRYKER_SEARCH_NAMESPACE');
+$config[SearchConstants::ELASTICA_PARAMETER__AUTH_HEADER]
+    = $config[SearchElasticsearchConstants::AUTH_HEADER]
+    = $ELASTICA_AUTH_HEADER;
 $config[CollectorConstants::ELASTICA_PARAMETER__INDEX_NAME] = getenv('SPRYKER_SEARCH_NAMESPACE');
 $ELASTICA_DOCUMENT_TYPE = 'page';
-$config[SearchConstants::ELASTICA_PARAMETER__DOCUMENT_TYPE] = $ELASTICA_DOCUMENT_TYPE;
 $config[CollectorConstants::ELASTICA_PARAMETER__DOCUMENT_TYPE] = $ELASTICA_DOCUMENT_TYPE;
 $ELASTICA_PARAMETER__EXTRA = [];
-$config[SearchConstants::ELASTICA_PARAMETER__EXTRA] = $ELASTICA_PARAMETER__EXTRA;
-
-$config[SearchConstants::FULL_TEXT_BOOSTED_BOOSTING_VALUE] = 3;
-$config[SearchConstants::SEARCH_INDEX_NAME_SUFFIX] = '';
+$config[SearchConstants::ELASTICA_PARAMETER__EXTRA]
+    = $config[SearchElasticsearchConstants::EXTRA]
+    = $ELASTICA_PARAMETER__EXTRA;
+$config[SearchConstants::FULL_TEXT_BOOSTED_BOOSTING_VALUE]
+    = $config[SearchElasticsearchConstants::FULL_TEXT_BOOSTED_BOOSTING_VALUE]
+    = 3;
 /* End Search service */
 
 // ---------- KV storage
