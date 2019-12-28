@@ -21,6 +21,7 @@
             },
             isMultipleShipmentEnabled: data.isMultipleShipmentEnabled,
             jsAddressClass: jsAddressClass,
+            isBillingSameAsShippingChecked: data.forms.billing.id_customer_address.vars.choices is empty,
         },
     } only %}
         {% block fields %}
@@ -84,7 +85,7 @@
                         attributes: {
                             'target-class-name': embed.jsAddressClass ~ '__billing-address',
                             'add-class-when-checked': true,
-                            'checked': true,
+                            'checked': embed.isBillingSameAsShippingChecked,
                         },
                     }) }}
                 </div>
