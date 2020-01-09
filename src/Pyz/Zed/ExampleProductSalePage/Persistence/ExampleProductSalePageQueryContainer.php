@@ -42,7 +42,7 @@ class ExampleProductSalePageQueryContainer extends AbstractQueryContainer implem
      */
     public function queryRelationsBecomingInactive($idProductLabel)
     {
-        $criteria = $this->getFactory()
+        $productLabelProductAbstractQuery = $this->getFactory()
             ->getProductLabelQueryContainer()
             ->queryProductAbstractRelationsByIdProductLabel($idProductLabel)
             ->distinct()
@@ -78,24 +78,24 @@ class ExampleProductSalePageQueryContainer extends AbstractQueryContainer implem
             ->addJoinCondition('priceProductStoreDefault', 'priceProductStoreOrigin.fk_currency = priceProductStoreDefault.fk_currency');
 
         $orCriterion = new BasicModelCriterion(
-            $criteria,
+            $productLabelProductAbstractQuery,
             'priceProductStoreOrigin.gross_price < priceProductStoreDefault.gross_price',
             'priceProductStoreOrigin.gross_price'
         );
-        $orCriterion->addOr($criteria->getNewCriterion('priceProductStoreOrigin.gross_price', null, Criteria::ISNULL));
-        $orCriterion->addOr($criteria->getNewCriterion('priceProductStoreOrigin.net_price', null, Criteria::ISNULL));
+        $orCriterion->addOr($productLabelProductAbstractQuery->getNewCriterion('priceProductStoreOrigin.gross_price', null, Criteria::ISNULL));
+        $orCriterion->addOr($productLabelProductAbstractQuery->getNewCriterion('priceProductStoreOrigin.net_price', null, Criteria::ISNULL));
         $orCriterion->addOr(
             new BasicModelCriterion(
-                $criteria,
+                $productLabelProductAbstractQuery,
                 'priceProductStoreOrigin.net_price < priceProductStoreDefault.net_price',
                 'priceProductStoreOrigin.net_price'
             )
         );
-        $orCriterion->addOr($criteria->getNewCriterion('priceProductStoreDefault.gross_price', null, Criteria::ISNULL));
-        $orCriterion->addOr($criteria->getNewCriterion('priceProductStoreDefault.net_price', null, Criteria::ISNULL));
-        $criteria->addAnd($orCriterion);
+        $orCriterion->addOr($productLabelProductAbstractQuery->getNewCriterion('priceProductStoreDefault.gross_price', null, Criteria::ISNULL));
+        $orCriterion->addOr($productLabelProductAbstractQuery->getNewCriterion('priceProductStoreDefault.net_price', null, Criteria::ISNULL));
+        $productLabelProductAbstractQuery->addAnd($orCriterion);
 
-        return $criteria;
+        return $productLabelProductAbstractQuery;
     }
 
     /**
