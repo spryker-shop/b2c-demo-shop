@@ -1,9 +1,12 @@
 <?php
 
+/**
+ * This file is part of the Spryker Commerce OS.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
+ */
 
 namespace Pyz\Yves\CustomerPage;
 
-use Spryker\Shared\Kernel\Store;
 use SprykerShop\Yves\CustomerPage\CustomerPageConfig as SprykerCustomerPageConfig;
 
 class CustomerPageConfig extends SprykerCustomerPageConfig
@@ -19,5 +22,4 @@ class CustomerPageConfig extends SprykerCustomerPageConfig
     {
         return static::LOGIN_FAILURE_REDIRECT_URL;
     }
-
 }
