@@ -77,7 +77,7 @@ class ExampleProductSalePageQueryContainer extends AbstractQueryContainer implem
             ->addJoinCondition('priceProductStoreDefault', 'priceProductStoreOrigin.fk_store = priceProductStoreDefault.fk_store')
             ->addJoinCondition('priceProductStoreDefault', 'priceProductStoreOrigin.fk_currency = priceProductStoreDefault.fk_currency');
 
-        $orCriterion = new BasicModelCriterion(
+        $orCriterion = $this->getBasicModelCriterion(
             $productLabelProductAbstractQuery,
             'priceProductStoreOrigin.gross_price < priceProductStoreDefault.gross_price',
             'priceProductStoreOrigin.gross_price'
@@ -85,7 +85,7 @@ class ExampleProductSalePageQueryContainer extends AbstractQueryContainer implem
         $orCriterion->addOr($productLabelProductAbstractQuery->getNewCriterion('priceProductStoreOrigin.gross_price', null, Criteria::ISNULL));
         $orCriterion->addOr($productLabelProductAbstractQuery->getNewCriterion('priceProductStoreOrigin.net_price', null, Criteria::ISNULL));
         $orCriterion->addOr(
-            new BasicModelCriterion(
+            $this->getBasicModelCriterion(
                 $productLabelProductAbstractQuery,
                 'priceProductStoreOrigin.net_price < priceProductStoreDefault.net_price',
                 'priceProductStoreOrigin.net_price'
@@ -96,6 +96,18 @@ class ExampleProductSalePageQueryContainer extends AbstractQueryContainer implem
         $productLabelProductAbstractQuery->addAnd($orCriterion);
 
         return $productLabelProductAbstractQuery;
+    }
+
+    /**
+     * @param \Propel\Runtime\ActiveQuery\Criteria $criteria
+     * @param string $clause
+     * @param \Propel\Runtime\Map\ColumnMap|string $column
+     *
+     * @return \Propel\Runtime\ActiveQuery\Criterion\BasicModelCriterion
+     */
+    protected function getBasicModelCriterion(Criteria $criteria, string $clause, $column): BasicModelCriterion
+    {
+        return new BasicModelCriterion($criteria, $clause, $column);
     }
 
     /**
