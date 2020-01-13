@@ -168,6 +168,7 @@ class ProductDependencyProvider extends SprykerProductDependencyProvider
             new ProductValidityUpdatePlugin(),
             new SaveDiscontinuedNotesProductConcretePluginUpdate(),
             new DiscontinuedProductConcreteAfterUpdatePlugin(),
+            new ProductBundleDeactivatorProductConcreteAfterUpdatePlugin(),
         ];
     }
 }
