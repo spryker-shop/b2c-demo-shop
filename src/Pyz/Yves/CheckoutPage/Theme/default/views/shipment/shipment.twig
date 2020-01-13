@@ -38,12 +38,13 @@
                                 }) }}
                             </h3>
 
-                            {% for item in shipmentGroupForm.vars.data.items %}
+                            {% for item in shipmentGroupForm.vars.data.cartItems %}
                                 {% set item = item.bundleProduct ?? item %}
 
                                 {% embed molecule('product-item') with {
                                     modifiers: ['expand', 'secondary', 'alternative', 'right-indent-from-tablet'],
                                     data: {
+                                        product: shipmentGroupForm.vars.data.cartItems,
                                         productItem: item,
                                         canEditCart: false,
                                         additionalContainerClass: '',
@@ -77,8 +78,6 @@
                                             </ul>
                                         {% endif %}
                                     {% endblock %}
-
-                                    {% block bundles %}{% endblock %}
                                 {% endembed %}
                             {% endfor %}
                         </div>

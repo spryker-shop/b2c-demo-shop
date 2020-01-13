@@ -13,13 +13,14 @@
                     }) }}
                 </h3>
 
-                {% for item in shipmentGroup.items %}
-                    {% set isGiftCardExists = item.giftCardMetadata is not null and item.giftCardMetadata.isGiftCard %}
+                {% for item in shipmentGroup.cartItems %}
                     {% set item = item.bundleProduct ?? item %}
+                    {% set isGiftCardExists = item.giftCardMetadata is not null and item.giftCardMetadata.isGiftCard %}
 
                     {% embed molecule('product-item') with {
                         modifiers: ['expand', 'secondary', 'alternative', 'right-indent-from-tablet', 'with-checkbox'],
                         data: {
+                            product: shipmentGroup.cartItems,
                             productItem: item,
                             canEditCart: false,
                             additionalContainerClass: '',
@@ -68,8 +69,6 @@
                                 </ul>
                             {% endif %}
                         {% endblock %}
-
-                        {% block bundles %}{% endblock %}
                     {% endembed %}
                 {% endfor %}
             </div>
