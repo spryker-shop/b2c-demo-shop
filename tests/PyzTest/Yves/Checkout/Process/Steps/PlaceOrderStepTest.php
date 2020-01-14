@@ -173,7 +173,7 @@ class PlaceOrderStepTest extends Unit
     /**
      * @return \PHPUnit\Framework\MockObject\MockObject|\Spryker\Yves\Messenger\FlashMessenger\FlashMessengerInterface
      */
-    protected function createFlashMessengerMock()
+    protected function createFlashMessengerMock(): FlashMessengerInterface
     {
         return $this->getMockBuilder(FlashMessengerInterface::class)->getMock();
     }
@@ -181,7 +181,7 @@ class PlaceOrderStepTest extends Unit
     /**
      * @return \PHPUnit\Framework\MockObject\MockObject|\SprykerShop\Yves\CheckoutPage\Dependency\Client\CheckoutPageToCheckoutClientInterface
      */
-    protected function createCheckoutClientMock()
+    protected function createCheckoutClientMock(): CheckoutPageToCheckoutClientInterface
     {
         return $this->getMockBuilder(CheckoutPageToCheckoutClientInterface::class)->getMock();
     }
@@ -189,7 +189,7 @@ class PlaceOrderStepTest extends Unit
     /**
      * @return \PHPUnit\Framework\MockObject\MockObject|\Spryker\Yves\StepEngine\Dependency\Plugin\Handler\StepHandlerPluginInterface
      */
-    protected function createShipmentMock()
+    protected function createShipmentMock(): StepHandlerPluginInterface
     {
         return $this->getMockBuilder(StepHandlerPluginInterface::class)->getMock();
     }

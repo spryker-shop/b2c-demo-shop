@@ -6,14 +6,6 @@
     pagination: null,
 } %}
 
-{% set categoryTemplate = molecule('category-card', 'CatalogPage') %}
-{% set cardClass = 'col col--sm-6 col--xl-4' %}
-
-{% if data.viewMode == 'list' %}
-    {% set categoryTemplate = molecule('category-list-item', 'CatalogPage') %}
-    {% set cardClass = 'col col--sm-12' %}
-{% endif %}
-
 {% block filterSection %}
     {% embed organism('filter-section', 'CatalogPage') with {
         data: {
@@ -50,6 +42,14 @@
         </div>
     </div>
     <div class="grid {% if data.viewMode != 'list' %}product-list{% endif %}">
+        {% set categoryTemplate = molecule('category-card', 'CatalogPage') %}
+        {% set cardClass = 'col col--sm-6 col--xl-4' %}
+
+        {% if data.viewMode == 'list' %}
+            {% set categoryTemplate = molecule('category-list-item', 'CatalogPage') %}
+            {% set cardClass = 'col col--sm-12' %}
+        {% endif %}
+
         {% for childCategory in data.children %}
             {% include categoryTemplate with {
                 class: cardClass,

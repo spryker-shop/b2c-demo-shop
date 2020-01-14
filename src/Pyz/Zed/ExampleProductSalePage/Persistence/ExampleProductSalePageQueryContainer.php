@@ -8,6 +8,7 @@
 namespace Pyz\Zed\ExampleProductSalePage\Persistence;
 
 use Propel\Runtime\ActiveQuery\Criteria;
+use Propel\Runtime\ActiveQuery\Criterion\BasicModelCriterion;
 use Spryker\Zed\Kernel\Persistence\AbstractQueryContainer;
 
 /**
@@ -41,7 +42,7 @@ class ExampleProductSalePageQueryContainer extends AbstractQueryContainer implem
      */
     public function queryRelationsBecomingInactive($idProductLabel)
     {
-        return $this->getFactory()
+        $productLabelProductAbstractQuery = $this->getFactory()
             ->getProductLabelQueryContainer()
             ->queryProductAbstractRelationsByIdProductLabel($idProductLabel)
             ->distinct()
@@ -73,24 +74,40 @@ class ExampleProductSalePageQueryContainer extends AbstractQueryContainer implem
             ->endUse()
             ->addAnd('priceProductDefaultOriginal.id_price_product_default', null, Criteria::ISNOTNULL)
             ->addAnd('priceProductDefaultDefault.id_price_product_default', null, Criteria::ISNOTNULL)
-            ->condition('equalStore', 'priceProductStoreOrigin.fk_store = priceProductStoreDefault.fk_store')
-            ->condition('equalCurrency', 'priceProductStoreOrigin.fk_currency = priceProductStoreDefault.fk_currency')
-            ->condition('originGrossPriceLessThanDefaultPrice', 'priceProductStoreOrigin.gross_price < priceProductStoreDefault.gross_price')
-            ->condition('isNullOriginGrossPrice', 'priceProductStoreOrigin.gross_price  ' . Criteria::ISNULL)
-            ->condition('isNullOriginNetPrice', 'priceProductStoreOrigin.net_price  ' . Criteria::ISNULL)
-            ->condition('originNetPriceLessThanDefaultPrice', 'priceProductStoreOrigin.net_price < priceProductStoreDefault.net_price')
-            ->condition('isNullDefaultNetPrice', 'priceProductStoreDefault.net_price  ' . Criteria::ISNULL)
-            ->condition('isNullDefaultGrossPrice', 'priceProductStoreDefault.gross_price  ' . Criteria::ISNULL)
-            ->combine([
-                'originGrossPriceLessThanDefaultPrice',
-                'originNetPriceLessThanDefaultPrice',
-                'isNullOriginGrossPrice',
-                'isNullOriginNetPrice',
-                'isNullDefaultNetPrice',
-                'isNullDefaultGrossPrice',
-            ], Criteria::LOGICAL_OR, 'condOr')
-            ->combine(['equalStore', 'equalCurrency'], Criteria::LOGICAL_AND, 'condAnd')
-            ->where(['condOr', 'condAnd'], Criteria::LOGICAL_AND);
+            ->addJoinCondition('priceProductStoreDefault', 'priceProductStoreOrigin.fk_store = priceProductStoreDefault.fk_store')
+            ->addJoinCondition('priceProductStoreDefault', 'priceProductStoreOrigin.fk_currency = priceProductStoreDefault.fk_currency');
+
+        $orCriterion = $this->getBasicModelCriterion(
+            $productLabelProductAbstractQuery,
+            'priceProductStoreOrigin.gross_price < priceProductStoreDefault.gross_price',
+            'priceProductStoreOrigin.gross_price'
+        );
+        $orCriterion->addOr($productLabelProductAbstractQuery->getNewCriterion('priceProductStoreOrigin.gross_price', null, Criteria::ISNULL));
+        $orCriterion->addOr($productLabelProductAbstractQuery->getNewCriterion('priceProductStoreOrigin.net_price', null, Criteria::ISNULL));
+        $orCriterion->addOr(
+            $this->getBasicModelCriterion(
+                $productLabelProductAbstractQuery,
+                'priceProductStoreOrigin.net_price < priceProductStoreDefault.net_price',
+                'priceProductStoreOrigin.net_price'
+            )
+        );
+        $orCriterion->addOr($productLabelProductAbstractQuery->getNewCriterion('priceProductStoreDefault.gross_price', null, Criteria::ISNULL));
+        $orCriterion->addOr($productLabelProductAbstractQuery->getNewCriterion('priceProductStoreDefault.net_price', null, Criteria::ISNULL));
+        $productLabelProductAbstractQuery->addAnd($orCriterion);
+
+        return $productLabelProductAbstractQuery;
+    }
+
+    /**
+     * @param \Propel\Runtime\ActiveQuery\Criteria $criteria
+     * @param string $clause
+     * @param \Propel\Runtime\Map\ColumnMap|string $column
+     *
+     * @return \Propel\Runtime\ActiveQuery\Criterion\BasicModelCriterion
+     */
+    protected function getBasicModelCriterion(Criteria $criteria, string $clause, $column): BasicModelCriterion
+    {
+        return new BasicModelCriterion($criteria, $clause, $column);
     }
 
     /**
@@ -139,15 +156,9 @@ class ExampleProductSalePageQueryContainer extends AbstractQueryContainer implem
             ->addAnd('priceProductDefaultDefault.id_price_product_default', null, Criteria::ISNOTNULL)
             ->addAnd('priceProductStoreOrigin.gross_price', null, Criteria::ISNOTNULL)
             ->addAnd('priceProductStoreOrigin.net_price', null, Criteria::ISNOTNULL)
-            ->condition('equalStore', 'priceProductStoreOrigin.fk_store = priceProductStoreDefault.fk_store')
-            ->condition('equalCurrency', 'priceProductStoreOrigin.fk_currency = priceProductStoreDefault.fk_currency')
-            ->condition('originGrossPriceMoreThanDefaultPrice', 'priceProductStoreOrigin.gross_price > priceProductStoreDefault.gross_price')
-            ->condition('originNetPriceMoreThanDefaultPrice', 'priceProductStoreOrigin.net_price > priceProductStoreDefault.net_price')
-            ->where([
-                'equalStore',
-                'equalCurrency',
-                'originGrossPriceMoreThanDefaultPrice',
-                'originNetPriceMoreThanDefaultPrice',
-            ], Criteria::LOGICAL_AND);
+            ->addJoinCondition('priceProductStoreDefault', 'priceProductStoreOrigin.fk_store = priceProductStoreDefault.fk_store')
+            ->addJoinCondition('priceProductStoreDefault', 'priceProductStoreOrigin.fk_currency = priceProductStoreDefault.fk_currency')
+            ->addJoinCondition('priceProductStoreDefault', 'priceProductStoreOrigin.gross_price > priceProductStoreDefault.gross_price')
+            ->addJoinCondition('priceProductStoreDefault', 'priceProductStoreOrigin.net_price > priceProductStoreDefault.net_price');
     }
 }
