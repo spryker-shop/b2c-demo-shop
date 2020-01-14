@@ -18,6 +18,7 @@
                 shipping: data.forms.shipping,
                 billing: data.forms.billing,
                 items: data.forms.items,
+                bundleItems: data.forms.bundleItems,
             },
             isMultipleShipmentEnabled: data.isMultipleShipmentEnabled,
             jsAddressClass: jsAddressClass,
@@ -69,6 +70,7 @@
                     class: 'col col--sm-12 is-hidden spacing-bottom ' ~ embed.jsAddressClass ~ '__items-target',
                     data: {
                         form: embed.forms.items,
+                        formBundle: embed.forms.bundleItems,
                         shippingForm: embed.forms.shipping,
                         jsAddressClass: embed.jsAddressClass,
                     },
