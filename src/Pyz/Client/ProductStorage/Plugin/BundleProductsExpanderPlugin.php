@@ -19,6 +19,8 @@ use Spryker\Client\ProductStorage\ProductStorageConfig;
  */
 class BundleProductsExpanderPlugin extends AbstractPlugin implements ProductViewExpanderPluginInterface
 {
+    protected const KEY_SKU = 'sku';
+
     /**
      * {@inheritDoc}
      *
@@ -35,6 +37,10 @@ class BundleProductsExpanderPlugin extends AbstractPlugin implements ProductView
         foreach ($productViewTransfer->getBundledProductIds() as $productId => $quantity) {
             $bundledProduct = $this->getClient()->findProductConcreteStorageData($productId, $localeName);
             $bundledProduct[ProductStorageConfig::RESOURCE_TYPE_ATTRIBUTE_MAP] = (new AttributeMapStorageTransfer())->toArray();
+            if (!isset($bundledProduct[static::KEY_SKU])) {
+                continue;
+            }
+
             $bundledProductView = $this->getClient()->mapProductStorageData($bundledProduct, $localeName);
             $bundledProductView->setQuantity($quantity);
             $productViewTransfer->addBundledProduct($bundledProductView);
