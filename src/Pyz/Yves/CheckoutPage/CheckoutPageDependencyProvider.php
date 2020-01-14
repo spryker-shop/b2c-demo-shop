@@ -139,7 +139,7 @@ class CheckoutPageDependencyProvider extends SprykerShopCheckoutPageDependencyPr
      *
      * @return \SprykerShop\Yves\CheckoutPage\Dependency\Client\CheckoutPageToProductBundleClientInterface
      */
-    public function getProductBundleClient(Container $container): CheckoutPageToProductBundleClientInterface
+    protected function getProductBundleClient(Container $container): CheckoutPageToProductBundleClientInterface
     {
         return $container->get(static::CLIENT_PRODUCT_BUNDLE);
     }
