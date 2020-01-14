@@ -87,7 +87,7 @@ class SummaryStepTest extends Unit
     /**
      * @return \PHPUnit\Framework\MockObject\MockObject|\SprykerShop\Yves\CheckoutPage\Dependency\Client\CheckoutPageToProductBundleClientInterface
      */
-    protected function createProductBundleClient()
+    protected function createProductBundleClient(): CheckoutPageToProductBundleClientInterface
     {
         return $this->getMockBuilder(CheckoutPageToProductBundleClientInterface::class)->getMock();
     }
