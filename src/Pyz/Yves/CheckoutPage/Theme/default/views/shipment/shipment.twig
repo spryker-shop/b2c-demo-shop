@@ -39,16 +39,18 @@
                             </h3>
 
                             {% for item in shipmentGroupForm.vars.data.cartItems %}
-                                {% set item = item.bundleProduct ?? item %}
+                                {% set cartItem = item.bundleProduct ?? item %}
 
                                 {% embed molecule('product-item') with {
                                     modifiers: ['expand', 'secondary', 'alternative', 'right-indent-from-tablet'],
                                     data: {
-                                        product: shipmentGroupForm.vars.data.cartItems,
-                                        productItem: item,
+                                        productItem: cartItem,
                                         canEditCart: false,
                                         additionalContainerClass: '',
                                         productOptionsModifiers: ['alternative'],
+                                    },
+                                    embed: {
+                                        bundleItems: item.bundleItems | default([]),
                                     },
                                 } only %}
                                     {% block image %}
@@ -77,6 +79,14 @@
                                                 {% endfor %}
                                             </ul>
                                         {% endif %}
+                                    {% endblock %}
+
+                                    {% block bundles %}
+                                        {% include molecule('cart-bundle-list', 'ProductBundleWidget') ignore missing with {
+                                            data: {
+                                                items: embed.bundleItems,
+                                            },
+                                        } only %}
                                     {% endblock %}
                                 {% endembed %}
                             {% endfor %}

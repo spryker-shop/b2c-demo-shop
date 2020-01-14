@@ -11,7 +11,9 @@ use Spryker\Zed\Customer\Communication\Plugin\Sales\CustomerOrderHydratePlugin;
 use Spryker\Zed\Discount\Communication\Plugin\Sales\DiscountOrderHydratePlugin;
 use Spryker\Zed\Payment\Communication\Plugin\Sales\PaymentOrderHydratePlugin;
 use Spryker\Zed\ProductBundle\Communication\Plugin\Sales\ProductBundleIdHydratorPlugin;
+use Spryker\Zed\ProductBundle\Communication\Plugin\Sales\ProductBundleOptionOrderExpanderPlugin;
 use Spryker\Zed\ProductBundle\Communication\Plugin\Sales\ProductBundleOrderHydratePlugin;
+use Spryker\Zed\ProductBundle\Communication\Plugin\Sales\UniqueOrderBundleItemsExpanderPlugin;
 use Spryker\Zed\ProductOption\Communication\Plugin\Sales\ProductOptionGroupIdHydratorPlugin;
 use Spryker\Zed\ProductOption\Communication\Plugin\Sales\ProductOptionOrderHydratePlugin;
 use Spryker\Zed\Sales\SalesDependencyProvider as SprykerSalesDependencyProvider;
@@ -40,6 +42,7 @@ class SalesDependencyProvider extends SprykerSalesDependencyProvider
             new ItemMetadataHydratorPlugin(),
             new ProductBundleIdHydratorPlugin(),
             new ProductOptionGroupIdHydratorPlugin(),
+            new ProductBundleOptionOrderExpanderPlugin(),
         ];
     }
 
@@ -70,6 +73,16 @@ class SalesDependencyProvider extends SprykerSalesDependencyProvider
     {
         return [
             new ReclamationSalesTablePlugin(),
+        ];
+    }
+
+    /**
+     * @return \Spryker\Zed\SalesExtension\Dependency\Plugin\UniqueOrderItemsExpanderPluginInterface[]
+     */
+    protected function getUniqueOrderItemsExpanderPlugins(): array
+    {
+        return [
+            new UniqueOrderBundleItemsExpanderPlugin(),
         ];
     }
 }

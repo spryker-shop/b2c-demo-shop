@@ -21,17 +21,19 @@
                     </h3>
 
                     {% for item in shipmentGroup.cartItems %}
-                        {% set isGiftCardExists = item.giftCardMetadata is not null and item.giftCardMetadata.isGiftCard %}
-                        {% set item = item.bundleProduct ?? item %}
+                        {% set cartItem = item.bundleProduct ?? item %}
+                        {% set isGiftCardExists = cartItem.giftCardMetadata is not null and cartItem.giftCardMetadata.isGiftCard %}
 
                         {% embed molecule('product-item') with {
                             modifiers: ['expand', 'secondary', 'alternative', 'right-indent-from-tablet'],
                             data: {
-                                product: shipmentGroup.cartItems,
-                                productItem: item,
+                                productItem: cartItem,
                                 canEditCart: false,
                                 additionalContainerClass: '',
                                 productOptionsModifiers: ['alternative'],
+                            },
+                            embed: {
+                                bundleItems: item.bundleItems | default([]),
                             },
                         } only %}
                             {% block image %}
@@ -60,6 +62,14 @@
                                         {% endfor %}
                                     </ul>
                                 {% endif %}
+                            {% endblock %}
+
+                            {% block bundles %}
+                                {% include molecule('cart-bundle-list', 'ProductBundleWidget') ignore missing with {
+                                    data: {
+                                        items: embed.bundleItems,
+                                    },
+                                } only %}
                             {% endblock %}
                         {% endembed %}
                     {% endfor %}
