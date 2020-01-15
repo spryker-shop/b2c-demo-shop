@@ -12,6 +12,7 @@ use PyzTest\Zed\Console\Helper\ConsoleHelper;
 
 /**
  * Auto-generated group annotations
+ *
  * @group PyzTest
  * @group Zed
  * @group Console

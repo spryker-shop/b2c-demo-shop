@@ -4,6 +4,8 @@ use Spryker\Shared\Application\ApplicationConstants;
 use Spryker\Shared\Customer\CustomerConstants;
 use Spryker\Shared\Event\EventConstants;
 use Spryker\Shared\GlueApplication\GlueApplicationConstants;
+use Spryker\Shared\Http\HttpConstants;
+use Spryker\Shared\Kernel\KernelConstants;
 use Spryker\Shared\Newsletter\NewsletterConstants;
 use Spryker\Shared\ProductManagement\ProductManagementConstants;
 use Spryker\Shared\RabbitMq\RabbitMqEnv;
@@ -49,9 +51,11 @@ $config[ZedRequestConstants::BASE_URL_ZED_API] = $config[ApplicationConstants::B
 $config[ZedRequestConstants::BASE_URL_SSL_ZED_API] = $config[ApplicationConstants::BASE_URL_SSL_ZED];
 
 // ---------- Trusted hosts
-$config[ApplicationConstants::YVES_TRUSTED_HOSTS] = [
-    $config[ApplicationConstants::HOST_YVES],
-];
+$config[ApplicationConstants::YVES_TRUSTED_HOSTS]
+    = $config[HttpConstants::YVES_TRUSTED_HOSTS]
+    = [
+        $config[ApplicationConstants::HOST_YVES],
+    ];
 
 // ---------- Assets / Media
 $config[ApplicationConstants::BASE_URL_STATIC_ASSETS] = $config[ApplicationConstants::BASE_URL_YVES];
@@ -102,4 +106,10 @@ $config[RabbitMqEnv::RABBITMQ_CONNECTIONS] = [
         RabbitMqEnv::RABBITMQ_VIRTUAL_HOST => '/US_development_zed',
         RabbitMqEnv::RABBITMQ_STORE_NAMES => ['US'],
     ],
+];
+
+// ----------- HTTP Security
+$config[KernelConstants::DOMAIN_WHITELIST] = [
+    $config[ApplicationConstants::HOST_YVES],
+    $config[ApplicationConstants::HOST_ZED],
 ];

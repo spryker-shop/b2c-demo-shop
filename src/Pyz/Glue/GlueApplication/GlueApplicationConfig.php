@@ -22,4 +22,12 @@ class GlueApplicationConfig extends SprykerGlueApplicationConfig
             [CartsRestApiConfig::HEADER_ANONYMOUS_CUSTOMER_UNIQUE_ID]
         );
     }
+
+    /**
+     * @return bool
+     */
+    public function isEagerRelationshipsLoadingEnabled(): bool
+    {
+        return false;
+    }
 }

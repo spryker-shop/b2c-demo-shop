@@ -1,17 +1,12 @@
-{% extends template('widget') %}
-
-{% define data = {
-    productViews: productViews,
-    productSet: productSet,
-} %}
+{% extends view('content-product-set', '@SprykerShop:ContentProductSetWidget') %}
 
 {% block body %}
     {% embed organism('product-set-cms-content', 'ProductSetWidget') ignore missing with {
         data: {
-            products: data.productViews,
-            name: data.productSet.name,
-            description: data.productSet.description,
-            images: data.productSet.imageSets.0.images | default([]),
+            products: data.products,
+            name: data.name,
+            description: data.description,
+            images: data.images,
         },
     } only %}
         {% block header %}
@@ -38,12 +33,11 @@
                         {% set isDisabled = false %}
 
                         {% for product in data.products %}
-                            {% if product.idProductConcrete is not empty %}
-                                {% if product.available %}
-                                    <input type="hidden" name="items[{{ loop.index }}][sku]" value="{{ product.sku }}">
-                                    <input type="hidden" name="items[{{ loop.index }}][quantity]" value="1">
-                                {% endif %}
-                            {% else %}
+                            {% if product.idProductConcrete is not empty and product.available %}
+                                <input type="hidden" name="items[{{ loop.index }}][sku]" value="{{ product.sku }}">
+                                <input type="hidden" name="items[{{ loop.index }}][quantity]" value="1">
+                            {% endif %}
+                            {% if product.idProductConcrete is empty %}
                                 {% set isDisabled = true %}
                             {% endif %}
                         {% endfor %}
@@ -61,15 +55,10 @@
                 {% include molecule('product-set-slider', 'ProductSetWidget') with {
                     data: {
                         products: data.products,
-                        sliderConfig: data.sliderConfig
+                        sliderConfig: data.sliderConfig,
                     },
                 } only %}
             </form>
-            {% include molecule('action-single-click-enforcer') with {
-                attributes: {
-                    'target-selector': '.js-product-set__add-to-cart',
-                },
-            } only %}
         {% endblock %}
     {% endembed %}
 {% endblock %}

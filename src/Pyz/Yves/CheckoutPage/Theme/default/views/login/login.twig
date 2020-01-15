@@ -9,7 +9,8 @@
         guest: _view.guestForm,
         customerGuest: _view.guestForm.customer,
         login: _view.loginForm
-    }
+    },
+    title: 'global.login' | trans
 } %}
 
 {% block title %}
@@ -24,8 +25,7 @@
                     id: 'register',
                     checked: not data.isGuest and not data.isLogin,
                     name: 'checkoutProceedAs',
-                    'target-selector': '.js-login__register',
-                    'class-to-toggle': 'is-hidden'
+                    'target-class-name': 'js-login__register',
                 },
                 class: 'toggler-radio--with-bg'
             } only %}
@@ -40,8 +40,7 @@
                     id: 'guest',
                     checked: data.isGuest,
                     name: 'checkoutProceedAs',
-                    'target-selector': '.js-login__guest',
-                    'class-to-toggle': 'is-hidden'
+                    'target-class-name': 'js-login__guest',
                 },
                 class: 'toggler-radio--with-bg'
             } only %}
@@ -56,8 +55,7 @@
                     id: 'login',
                     checked: data.isLogin,
                     name: 'checkoutProceedAs',
-                    'target-selector': '.js-login__login',
-                    'class-to-toggle': 'is-hidden'
+                    'target-class-name': 'js-login__login',
                 },
                 class: 'toggler-radio--with-bg'
             } only %}

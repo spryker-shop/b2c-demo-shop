@@ -10,13 +10,13 @@ use Spryker\Shared\Collector\CollectorConstants;
 use Spryker\Shared\Customer\CustomerConstants;
 use Spryker\Shared\Event\EventConstants;
 use Spryker\Shared\GlueApplication\GlueApplicationConstants;
+use Spryker\Shared\Http\HttpConstants;
 use Spryker\Shared\Newsletter\NewsletterConstants;
 use Spryker\Shared\ProductManagement\ProductManagementConstants;
 use Spryker\Shared\Propel\PropelConstants;
 use Spryker\Shared\Queue\QueueConfig;
 use Spryker\Shared\Queue\QueueConstants;
 use Spryker\Shared\RabbitMq\RabbitMqEnv;
-use Spryker\Shared\Search\SearchConstants;
 use Spryker\Shared\Session\SessionConstants;
 use Spryker\Shared\SessionRedis\SessionRedisConstants;
 use Spryker\Shared\Testify\TestifyConstants;
@@ -61,11 +61,13 @@ $config[ZedRequestConstants::BASE_URL_ZED_API] = $config[ApplicationConstants::B
 $config[ZedRequestConstants::BASE_URL_SSL_ZED_API] = $config[ApplicationConstants::BASE_URL_SSL_ZED];
 
 // ---------- Trusted hosts
-$config[ApplicationConstants::YVES_TRUSTED_HOSTS] = [
-    $config[ApplicationConstants::HOST_YVES],
-    $config[ApplicationConstants::HOST_ZED],
-    'localhost',
-];
+$config[ApplicationConstants::YVES_TRUSTED_HOSTS]
+    = $config[HttpConstants::YVES_TRUSTED_HOSTS]
+    = [
+        $config[ApplicationConstants::HOST_YVES],
+        $config[ApplicationConstants::HOST_ZED],
+        'localhost',
+    ];
 
 // ---------- Propel
 $config[PropelConstants::ZED_DB_USERNAME] = 'devtest';
@@ -73,8 +75,7 @@ $config[PropelConstants::ZED_DB_PASSWORD] = 'mate20mg';
 $config[PropelConstants::ZED_DB_DATABASE] = 'DE_devtest_zed';
 
 // ---------- Elasticsearch
-$config[SearchConstants::ELASTICA_PARAMETER__INDEX_NAME]
-    = $config[CollectorConstants::ELASTICA_PARAMETER__INDEX_NAME]
+$config[CollectorConstants::ELASTICA_PARAMETER__INDEX_NAME]
     = 'de_search_devtest';
 
 // ---------- RabbitMq

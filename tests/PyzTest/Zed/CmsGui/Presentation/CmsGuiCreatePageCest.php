@@ -14,6 +14,7 @@ use PyzTest\Zed\CmsGui\PageObject\CmsEditPage;
 
 /**
  * Auto-generated group annotations
+ *
  * @group PyzTest
  * @group Zed
  * @group CmsGui
@@ -33,18 +34,18 @@ class CmsGuiCreatePageCest
     public function testICanCreateCmsPageWithTranslatedPlaceholders(CmsGuiPresentationTester $i)
     {
         $i->wantTo('Create cms page with multiple translations');
-        $i->expect('Page is persisted in Zed, exported to Yves and is accesible.');
+        $i->expect('Page is persisted in Zed, exported to Yves and is accessible.');
 
         $i->amLoggedInUser();
         $i->amOnPage(CmsCreatePage::URL);
-        $i->selectOption('//*[@id="cms_page_fkTemplate"]', 'static full page');
+        $i->selectOption('//*[@id="cms_page_fkTemplate"]', 'Placeholders Title & Content');
         $i->setValidFrom('1985-07-01');
         $i->setValidTo('2050-07-01');
         $i->setIsSearchable();
 
-        $i->fillLocalizedUrlForm(0, CmsCreatePage::getLocalizedName('en'), CmsCreatePage::getLocalizedUrl('en'));
+        $i->fillLocalizedUrlForm(0, $i->getLocalizedName('en'), $i->getLocalizedUrl('en'));
         $i->expandLocalizedUrlPane();
-        $i->fillLocalizedUrlForm(1, CmsCreatePage::getLocalizedName('de'), CmsCreatePage::getLocalizedUrl('de'));
+        $i->fillLocalizedUrlForm(1, $i->getLocalizedName('de'), $i->getLocalizedUrl('de'));
         $i->clickSubmit();
 
         $i->see(CmsCreatePage::PAGE_CREATED_SUCCESS_MESSAGE);

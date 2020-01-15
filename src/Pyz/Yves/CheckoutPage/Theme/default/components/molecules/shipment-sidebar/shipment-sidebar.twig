@@ -1,0 +1,75 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'shipment-sidebar',
+} %}
+
+{% define data = {
+    shipment: required,
+} %}
+
+{% block body %}
+    {% set shippingAddress = data.shipment.vars.data.shippingAddress %}
+    {% set shipmentSelection = data.shipment.shipmentSelection %}
+    {% set requestedDeliveryDate = data.shipment.requestedDeliveryDate %}
+    {% set shipmentSelectionIndex = shipmentSelection.vars.value %}
+
+    <div class="{{ config.name }}__item">
+        <h4 class="title title--secondary-small">{{ 'page.checkout.shipment.shipping_address.title' | trans }}</h4>
+        <div class="{{ config.name }}__text">{{ data.shipment.vars.label }}</div>
+    </div>
+
+    <div class="{{ config.name }}__item">
+        {{ form_errors(shipmentSelection) }}
+
+        <h4 class="title title--secondary-small">{{ 'page.checkout.shipment.shipping_method_heading' | trans }}</h4>
+
+        {% for name, choices in shipmentSelection.vars.choices %}
+            <h4 class="title title--secondary-small spacing-bottom grid grid--justify grid--middle">
+                <span class="col col--sm-7">{{ name | trans }}</span>
+                <span class="{{ config.name }}__logo col">
+                    <img class="{{ config.name }}__logo-image" src="{{ publicPath('images/shipment-' ~ name | replace({' ': ''}) ~ '.png') }}" alt="{{ name }}">
+                </span>
+            </h4>
+
+            {% include molecule('list-switches') with {
+                modifiers: ['one-column'],
+                data: {
+                    form: shipmentSelection,
+                    choices: choices,
+                    providerIndex: shipmentSelectionIndex,
+                },
+            } only %}
+        {% endfor %}
+    </div>
+
+    <div class="{{ config.name }}__item">
+        <h4 class="title title--secondary-small">{{ 'page.checkout.shipment.requested_delivery_date.title' | trans }}</h4>
+
+        {% widget 'LanguageSwitcherWidget' args [app.request.pathInfo, app.request.queryString, app.request.requestUri] with {
+            data: {
+                field: requestedDeliveryDate,
+            },
+        } only %}
+            {% block body %}
+                {% include molecule('date-time-picker') with {
+                    modifiers: ['with-icon'],
+                    data: {
+                        field: data.field,
+                        hasIcon: true,
+                    },
+                    attributes: {
+                        language: data.currentLanguage,
+                        config: '{
+                            "format": "Y-m-d",
+                            "timepicker": false,
+                            "minDate": 0,
+                            "scrollInput": false,
+                            "scrollMonth": false
+                        }',
+                    },
+                } only %}
+            {% endblock %}
+        {% endwidget %}
+    </div>
+{% endblock %}

@@ -64,4 +64,23 @@
             color: $setting-color-alt;
         }
     }
+
+    &--secondary {
+        @include helper-effect-transition(color);
+        font: fw(medium) rem(16) $setting-font-family;
+        color: $setting-color-alpha-5;
+        letter-spacing: normal;
+
+        &:hover,
+        &:focus {
+            text-decoration: none;
+            color: $setting-color-gray-6;
+        }
+    }
+
+    &--align-right-from-tablet {
+        @include helper-breakpoint-media-min($md-min) {
+            text-align: right;
+        }
+    }
 }

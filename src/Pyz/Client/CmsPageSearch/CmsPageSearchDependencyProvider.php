@@ -13,27 +13,15 @@ use Spryker\Client\CmsPageSearch\Plugin\Elasticsearch\QueryExpander\SortedCmsPag
 use Spryker\Client\CmsPageSearch\Plugin\Elasticsearch\ResultFormatter\PaginatedCmsPageResultFormatterPlugin;
 use Spryker\Client\CmsPageSearch\Plugin\Elasticsearch\ResultFormatter\RawCmsPageSearchResultFormatterPlugin;
 use Spryker\Client\CmsPageSearch\Plugin\Elasticsearch\ResultFormatter\SortedCmsPageSearchResultFormatterPlugin;
-use Spryker\Client\Search\Plugin\Elasticsearch\QueryExpander\IsActiveInDateRangeQueryExpanderPlugin;
-use Spryker\Client\Search\Plugin\Elasticsearch\QueryExpander\IsActiveQueryExpanderPlugin;
-use Spryker\Client\Search\Plugin\Elasticsearch\QueryExpander\LocalizedQueryExpanderPlugin;
-use Spryker\Client\Search\Plugin\Elasticsearch\QueryExpander\StoreQueryExpanderPlugin;
+use Spryker\Client\SearchElasticsearch\Plugin\QueryExpander\IsActiveInDateRangeQueryExpanderPlugin;
+use Spryker\Client\SearchElasticsearch\Plugin\QueryExpander\IsActiveQueryExpanderPlugin;
+use Spryker\Client\SearchElasticsearch\Plugin\QueryExpander\LocalizedQueryExpanderPlugin;
+use Spryker\Client\SearchElasticsearch\Plugin\QueryExpander\StoreQueryExpanderPlugin;
 
 class CmsPageSearchDependencyProvider extends SprykerCmsPageSearchDependencyProvider
 {
     /**
-     * @return \Spryker\Client\Search\Dependency\Plugin\ResultFormatterPluginInterface[]
-     */
-    protected function createCmsPageSearchResultFormatterPlugins(): array
-    {
-        return [
-            new SortedCmsPageSearchResultFormatterPlugin(),
-            new PaginatedCmsPageResultFormatterPlugin(),
-            new RawCmsPageSearchResultFormatterPlugin(),
-        ];
-    }
-
-    /**
-     * @return \Spryker\Client\Search\Dependency\Plugin\QueryExpanderPluginInterface[]
+     * @return \Spryker\Client\SearchExtension\Dependency\Plugin\QueryExpanderPluginInterface[]
      */
     protected function createCmsPageSearchQueryExpanderPlugins(): array
     {
@@ -48,7 +36,19 @@ class CmsPageSearchDependencyProvider extends SprykerCmsPageSearchDependencyProv
     }
 
     /**
-     * @return \Spryker\Client\Search\Dependency\Plugin\QueryExpanderPluginInterface[]
+     * @return \Spryker\Client\SearchExtension\Dependency\Plugin\ResultFormatterPluginInterface[]
+     */
+    protected function createCmsPageSearchResultFormatterPlugins(): array
+    {
+        return [
+            new SortedCmsPageSearchResultFormatterPlugin(),
+            new PaginatedCmsPageResultFormatterPlugin(),
+            new RawCmsPageSearchResultFormatterPlugin(),
+        ];
+    }
+
+    /**
+     * @return \Spryker\Client\SearchExtension\Dependency\Plugin\QueryExpanderPluginInterface[]
      */
     protected function createCmsPageSearchCountQueryExpanderPlugins(): array
     {

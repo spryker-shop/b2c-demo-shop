@@ -39,7 +39,7 @@
                     },
                     attributes: {
                         'data-json': data.sliderConfig,
-                        'custom-select-selector': '.custom-select',
+                        'custom-select-class-name': 'custom-select',
                     },
                     modifiers: ['product-set', 'product-set-secondary'],
                 } only %}
@@ -93,11 +93,6 @@
                     {% endblock %}
                 {% endembed %}
             </form>
-            {% include molecule('action-single-click-enforcer') with {
-                attributes: {
-                    'target-selector': '.js-product-set__add-to-cart',
-                },
-            } only %}
             <form method="POST" action="{{ path('cart/add-items') }}">
                 {% set isDisabled = false %}
 

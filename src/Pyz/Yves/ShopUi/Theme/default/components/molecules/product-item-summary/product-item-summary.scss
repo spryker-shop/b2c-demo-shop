@@ -1,6 +1,6 @@
-@mixin shop-ui-product-item-summary($name: '.product-item-summary') {
-    $image-width-with-spacing: rem(144);
+$image-width-with-spacing: rem(144);
 
+@mixin shop-ui-product-item-summary($name: '.product-item-summary') {
     #{$name} {
         width: 100%;
         margin: 0;
@@ -33,6 +33,18 @@
                 padding-top: rem(18);
             }
         }
+
+        &--alternative {
+            margin-bottom: rem(32);
+            padding-top: rem(7);
+            width: 100%;
+
+            @include helper-breakpoint-media-min($lg-min) {
+                padding-top: rem(10);
+            }
+        }
+
+        @content;
     }
 }
 

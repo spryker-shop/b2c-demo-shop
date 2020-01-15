@@ -13,8 +13,16 @@ sections:
         generate-ide-auto-completion:
             command: "vendor/bin/console dev:ide:generate-auto-completion"
 
+        rest-api-generate-documentation:
+            command: "vendor/bin/console rest-api:generate:documentation"
 
     cache:
+        router-cache-warmup-yves:
+            command: "vendor/bin/yves router:cache:warm-up"
+
+        router-cache-warmup-zed:
+            command: "vendor/bin/console router:cache:warm-up"
+
         twig-cache-warmup:
             command: "vendor/bin/console twig:cache:warmer"
 
@@ -78,14 +86,16 @@ sections:
             command: "vendor/bin/console propel:migrate"
 
         generate-entity-transfer:
-            command: "vendor/bin/console transfer:generate"
-
+            command: "vendor/bin/console transfer:entity:generate"
 
         init-database:
             command: "vendor/bin/console setup:init-db"
 
-        setup-search:
-            command: "vendor/bin/console setup:search"
+        setup-search-create-sources:
+            command: "vendor/bin/console search:setup:sources"
+
+        setup-seach-create-source-map:
+            command: "vendor/bin/console search:setup:source-map"
 
 
     setup-test:
@@ -95,7 +105,6 @@ sections:
         databuilder-generate:
             command: "vendor/bin/console transfer:databuilder:generate"
 
-
     demodata:
         import:
             command: "vendor/bin/console data:import"
@@ -103,11 +112,13 @@ sections:
         update-product-labels:
             command: "vendor/bin/console product-label:relations:update"
 
-
+    fixtures:
+        fixtures:
+            command: 'vendor/bin/console code:fixtures'
 
     queue:
         run-worker:
-            command: "vendor/bin/console queue:worker:start"
+            command: "vendor/bin/console queue:worker:start --stop-when-empty"
 
 
     frontend:

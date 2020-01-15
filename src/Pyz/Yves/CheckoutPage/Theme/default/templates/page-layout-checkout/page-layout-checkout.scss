@@ -1,18 +1,25 @@
+$layout-checkout-width: rem(730);
+
 @mixin checkout-page-layout-checkout($name: '.page-layout-checkout') {
     #{$name} {
-        max-width: rem(570);
+        max-width: $layout-checkout-width;
         margin: 0 auto;
         padding-bottom: rem(60);
-        overflow: hidden;
         display: block;
 
         @include helper-breakpoint-media-min($md-min) {
-            padding-top: rem(80);
+            padding-top: rem(40);
+        }
+
+        @include helper-breakpoint-media-min($lg-min) {
+            overflow: hidden;
         }
 
         &--full-width {
             max-width: 100%;
         }
+
+        @content;
     }
 }
 

@@ -9,8 +9,8 @@ use Pyz\Shared\Console\ConsoleConstants;
 use Pyz\Shared\Scheduler\SchedulerConfig;
 use Pyz\Yves\ShopApplication\YvesBootstrap;
 use Pyz\Zed\Application\Communication\ZedBootstrap;
+use Spryker\Shared\Application\ApplicationConstants;
 use Spryker\Shared\Application\Log\Config\SprykerLoggerConfig;
-use Spryker\Shared\Config\ConfigConstants;
 use Spryker\Shared\ErrorHandler\ErrorHandlerConstants;
 use Spryker\Shared\ErrorHandler\ErrorRenderer\WebExceptionErrorRenderer;
 use Spryker\Shared\Event\EventConstants;
@@ -19,20 +19,23 @@ use Spryker\Shared\Kernel\KernelConstants;
 use Spryker\Shared\Log\LogConstants;
 use Spryker\Shared\Oauth\OauthConstants;
 use Spryker\Shared\Propel\PropelConstants;
-use Spryker\Shared\Queue\QueueConstants;
 use Spryker\Shared\RabbitMq\RabbitMqEnv;
+use Spryker\Shared\Router\RouterConstants;
 use Spryker\Shared\Scheduler\SchedulerConstants;
 use Spryker\Shared\SchedulerJenkins\SchedulerJenkinsConstants;
-use Spryker\Shared\Search\SearchConstants;
 use Spryker\Shared\Session\SessionConstants;
 use Spryker\Shared\SessionRedis\SessionRedisConfig;
 use Spryker\Shared\StorageRedis\StorageRedisConstants;
 use Spryker\Shared\Testify\TestifyConstants;
-use Spryker\Shared\Twig\TwigConstants;
-use Spryker\Shared\WebProfiler\WebProfilerConstants;
+use Spryker\Shared\ZedRequest\ZedRequestConstants;
 
 // ---------- General
 $config[KernelConstants::SPRYKER_ROOT] = APPLICATION_ROOT_DIR . '/vendor/spryker';
+
+// ---------- ZedRequest
+$config[ZedRequestConstants::TRANSFER_DEBUG_SESSION_FORWARD_ENABLED] = true;
+$config[ZedRequestConstants::SET_REPEAT_DATA] = true;
+$config[ZedRequestConstants::YVES_REQUEST_REPEAT_DATA_PATH] = APPLICATION_ROOT_DIR . '/data/' . APPLICATION_STORE . '/' . APPLICATION_ENV . '/yves-requests';
 
 // ---------- Testify
 $config[TestifyConstants::BOOTSTRAP_CLASS_YVES] = YvesBootstrap::class;
@@ -52,21 +55,11 @@ $config[SessionConstants::YVES_SESSION_SAVE_HANDLER] = SessionRedisConfig::SESSI
 $config[SessionConstants::ZED_SESSION_COOKIE_SECURE] = false;
 $config[SessionConstants::ZED_SESSION_SAVE_HANDLER] = SessionRedisConfig::SESSION_HANDLER_REDIS;
 
-// ---------- Elasticsearch
-$config[SearchConstants::SEARCH_INDEX_NAME_SUFFIX] = '_devtest';
-
+// ---------- Queue
 $config[RabbitMqEnv::RABBITMQ_API_HOST] = 'localhost';
 $config[RabbitMqEnv::RABBITMQ_API_PORT] = '15672';
 $config[RabbitMqEnv::RABBITMQ_API_USERNAME] = 'admin';
 $config[RabbitMqEnv::RABBITMQ_API_PASSWORD] = 'mate20mg';
-
-// ---------- Twig
-$config[TwigConstants::ZED_TWIG_OPTIONS] = [
-    'cache' => false,
-];
-$config[TwigConstants::YVES_TWIG_OPTIONS] = [
-    'cache' => false,
-];
 
 // ---------- Logging
 $config[LogConstants::LOG_FILE_PATH] = APPLICATION_ROOT_DIR . '/data/logs';
@@ -88,10 +81,6 @@ $config[ErrorHandlerConstants::ERROR_RENDERER] = WebExceptionErrorRenderer::clas
 $config[LogConstants::LOG_LEVEL] = Logger::CRITICAL;
 $config[LogConstants::LOGGER_CONFIG] = SprykerLoggerConfig::class;
 
-$config[WebProfilerConstants::ENABLE_WEB_PROFILER]
-    = $config[ConfigConstants::ENABLE_WEB_PROFILER]
-    = false;
-
 $config[GlueApplicationConstants::GLUE_APPLICATION_REST_DEBUG] = true;
 
 // ----------- OAUTH
@@ -101,9 +90,6 @@ $config[OauthConstants::ENCRYPTION_KEY] = 'lxZFUEsBCJ2Yb14IF2ygAHI5N4+ZAUXXaSeeJ
 $config[OauthConstants::OAUTH_CLIENT_IDENTIFIER] = 'frontend';
 $config[OauthConstants::OAUTH_CLIENT_SECRET] = 'abc123';
 
-// ----------- Queue
-$config[QueueConstants::QUEUE_WORKER_LOOP] = true;
-
 // ---------- Event
 $config[EventConstants::EVENT_CHUNK] = 5000;
 
@@ -112,3 +98,9 @@ $config[KernelConstants::ENABLE_CONTAINER_OVERRIDING] = true;
 
 // ---------- Console
 $config[ConsoleConstants::ENABLE_DEVELOPMENT_CONSOLE_COMMANDS] = true;
+
+// ---------- Routing
+$config[ApplicationConstants::YVES_SSL_ENABLED] = false;
+$config[ApplicationConstants::ZED_SSL_ENABLED] = false;
+$config[RouterConstants::YVES_IS_SSL_ENABLED] = false;
+$config[RouterConstants::ZED_IS_SSL_ENABLED] = false;

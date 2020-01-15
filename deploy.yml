@@ -53,12 +53,12 @@ groups:
             yves_eu:
                 application: yves
                 endpoints:
-                    yves.de.demo-spryker.com:
+                    yves.de.spryker.local:
                         store: DE
                         services:
                             session:
                                 namespace: 1
-                    yves.at.demo-spryker.com:
+                    yves.at.spryker.local:
                         store: AT
                         services:
                             session:
@@ -66,19 +66,19 @@ groups:
             glue_eu:
                 application: glue
                 endpoints:
-                    glue.de.demo-spryker.com:
+                    glue.de.spryker.local:
                         store: DE
-                    glue.at.demo-spryker.com:
+                    glue.at.spryker.local:
                         store: AT
             zed_eu:
                 application: zed
                 endpoints:
-                    zed.de.demo-spryker.com:
+                    zed.de.spryker.local:
                         store: DE
                         services:
                             session:
                                 namespace: 3
-                    zed.at.demo-spryker.com:
+                    zed.at.spryker.local:
                         store: AT
                         services:
                             session:
@@ -89,7 +89,7 @@ groups:
             yves_us:
                 application: yves
                 endpoints:
-                    yves.us.demo-spryker.com:
+                    yves.us.spryker.local:
                         store: US
                         services:
                             session:
@@ -97,12 +97,12 @@ groups:
             glue_us:
                 application: glue
                 endpoints:
-                    glue.us.demo-spryker.com:
+                    glue.us.spryker.local:
                         store: US
             zed_us:
                 application: zed
                 endpoints:
-                    zed.us.demo-spryker.com:
+                    zed.us.spryker.local:
                         store: US
                         services:
                             session:
@@ -119,7 +119,7 @@ services:
             username: "spryker"
             password: "secret"
         endpoints:
-            queue.demo-spryker.com:
+            queue.spryker.local:
     session:
         engine: redis
     key_value_store:
@@ -129,11 +129,11 @@ services:
     scheduler:
         engine: jenkins
         endpoints:
-            scheduler.demo-spryker.com:
+            scheduler.spryker.local:
     mail_catcher:
         engine: mailhog
         endpoints:
-            mail.demo-spryker.com:
+            mail.spryker.local:
 
 docker:
 

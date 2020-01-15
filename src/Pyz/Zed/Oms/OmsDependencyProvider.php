@@ -18,6 +18,8 @@ use Spryker\Zed\Oms\Dependency\Plugin\Command\CommandCollectionInterface;
 use Spryker\Zed\Oms\Dependency\Plugin\Condition\ConditionCollectionInterface;
 use Spryker\Zed\Oms\OmsDependencyProvider as SprykerOmsDependencyProvider;
 use Spryker\Zed\ProductBundle\Communication\Plugin\Oms\ProductBundleAvailabilityHandlerPlugin;
+use Spryker\Zed\Shipment\Dependency\Plugin\Oms\ShipmentManualEventGrouperPlugin;
+use Spryker\Zed\Shipment\Dependency\Plugin\Oms\ShipmentOrderMailExpanderPlugin;
 
 class OmsDependencyProvider extends SprykerOmsDependencyProvider
 {
@@ -81,6 +83,30 @@ class OmsDependencyProvider extends SprykerOmsDependencyProvider
         return [
             new AvailabilityHandlerPlugin(),
             new ProductBundleAvailabilityHandlerPlugin(),
+        ];
+    }
+
+    /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Zed\OmsExtension\Dependency\Plugin\OmsOrderMailExpanderPluginInterface[]
+     */
+    protected function getOmsOrderMailExpanderPlugins(Container $container)
+    {
+        return [
+            new ShipmentOrderMailExpanderPlugin(),
+        ];
+    }
+
+    /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Zed\OmsExtension\Dependency\Plugin\OmsManualEventGrouperPluginInterface[]
+     */
+    protected function getOmsManualEventGrouperPlugins(Container $container)
+    {
+        return [
+            new ShipmentManualEventGrouperPlugin(),
         ];
     }
 }

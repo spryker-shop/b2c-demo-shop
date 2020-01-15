@@ -36,7 +36,7 @@
             {% embed molecule('slick-carousel') with {
                 data: {
                     slides: data.images,
-                    containerClass: 'product-set-slider'
+                    containerClass: 'product-set-slider',
                 },
                 attributes: {
                     'data-json': '{
@@ -45,7 +45,7 @@
                         "arrows": false
                     }'
                 },
-                modifiers: ['product-set']
+                modifiers: ['product-set'],
             } only %}
 
                 {% block slides %}
@@ -54,8 +54,8 @@
                             modifiers: ['bigger', 'no-margin'],
                             attributes: {
                                 itemprop: 'image',
-                                src: slide.externalUrlLarge
-                            }
+                                src: slide.externalUrlLarge,
+                            },
                         } only %}
                     {% endfor %}
                 {% endblock %}
@@ -69,11 +69,9 @@
                 {% set isDisabled = false %}
 
                 {% for product in data.products %}
-                    {% if product.idProductConcrete is not empty %}
-                        {% if product.available %}
-                            <input type="hidden" name="items[{{ loop.index }}][sku]" value="{{ product.sku }}" />
-                            <input type="hidden" name="items[{{ loop.index }}][quantity]" value="1" />
-                        {% endif %}
+                    {% if product.idProductConcrete and product.available %}
+                        <input type="hidden" name="items[{{ loop.index }}][sku]" value="{{ product.sku }}">
+                        <input type="hidden" name="items[{{ loop.index }}][quantity]" value="1">
                     {% else %}
                         {% set isDisabled = true %}
                     {% endif %}
@@ -83,11 +81,11 @@
                     modifiers: ['set'],
                     data: {
                         title: 'product.set.detail.set-contents' | trans,
-                        productsCount: data.products | length
+                        productsCount: data.products | length,
                     },
                     embed: {
-                        isDisabled: isDisabled
-                    }
+                        isDisabled: isDisabled,
+                    },
                 } only %}
                     {% block subContent %}
                         <div class="{{ config.name }}__sub-col">
@@ -116,12 +114,12 @@
                 {% embed molecule('slick-carousel') with {
                     modifiers: ['align-left'],
                     data: {
-                        slides: data.products
+                        slides: data.products,
                     },
                     attributes: {
                         'data-json': data.sliderConfig,
-                        'custom-select-selector': '.custom-select'
-                    }
+                        'custom-select-class-name': 'custom-select',
+                    },
                 } only %}
                     {% block slides %}
                         {% for product in data.slides %}
@@ -133,11 +131,11 @@
                                     url: product.url,
                                     imageUrl: product.images.0.externalUrlSmall | default,
                                     price: product.price,
-                                    originalPrice: product.prices['ORIGINAL'] | default
+                                    originalPrice: product.prices['ORIGINAL'] | default,
                                 },
                                 embed: {
-                                    product: product
-                                }
+                                    product: product,
+                                },
                             } only %}
                                 {% block content %}
                                     {{parent()}}
@@ -149,9 +147,9 @@
                                             superAttributes: embed.product.attributeMap.superAttributes,
                                             selectedAttributes: embed.product.selectedAttributes,
                                             availableAttributes: embed.product.availableAttributes,
-                                            useExternalForm: true
+                                            useExternalForm: true,
                                         },
-                                        embed: embed
+                                        embed: embed,
                                     } only %}
                                         {% block variant %}
                                             <li class="list__item">
@@ -164,8 +162,8 @@
                                                         selectedValue: selectedValue,
                                                         label: ('product.attribute.' ~ name) | trans,
                                                         isAvailable: isAvailable,
-                                                        autoInitSelect: true
-                                                    }
+                                                        autoInitSelect: true,
+                                                    },
                                                 } only %}
                                             </li>
                                         {% endblock %}
@@ -181,7 +179,7 @@
                                         {% if isDisabled %}
                                             <button type="button" class="button button--expand" disabled>{{ 'page.detail.add-to-cart' | trans }}</button>
                                         {% else %}
-                                            <a href="{{ path('cart/add', {sku: embed.product.sku}) }}" class="button button--expand js-product-set__add-to-cart">
+                                            <a href="{{ path('cart/add', {sku: embed.product.sku}) }}" class="button button--expand" data-init-single-click>
                                                 {{ 'page.detail.add-to-cart' | trans }}
                                             </a>
                                         {% endif %}
@@ -199,10 +197,5 @@
                 </p>
             </div>
         {% endif %}
-        {% include molecule('action-single-click-enforcer') with {
-            attributes: {
-                'target-selector': '.js-product-set__add-to-cart'
-            }
-        } only %}
     {% endblock %}
 {% endblock %}

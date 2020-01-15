@@ -15,12 +15,14 @@ use Spryker\Yves\Messenger\FlashMessenger\FlashMessengerInterface;
 use Spryker\Yves\StepEngine\Dependency\Plugin\Handler\StepHandlerPluginCollection;
 use Spryker\Yves\StepEngine\Dependency\Plugin\Handler\StepHandlerPluginInterface;
 use SprykerShop\Yves\CheckoutPage\Dependency\Client\CheckoutPageToCalculationClientBridge;
+use SprykerShop\Yves\CheckoutPage\Dependency\Client\CheckoutPageToCalculationClientInterface;
 use SprykerShop\Yves\CheckoutPage\Dependency\Client\CheckoutPageToPaymentClientInterface;
 use SprykerShop\Yves\CheckoutPage\Process\Steps\PaymentStep;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Auto-generated group annotations
+ *
  * @group PyzTest
  * @group Yves
  * @group Checkout
@@ -181,12 +183,13 @@ class PaymentStepTest extends Unit
             'payment',
             'escape_route',
             $this->getFlashMessengerMock(),
-            $this->getCalculationClientMock()
+            $this->getCalculationClientMock(),
+            $this->getCheckoutPaymentStepEnterPreCheckPlugins()
         );
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\SprykerShop\Yves\CheckoutPage\Dependency\Client\CheckoutPageToPaymentClientInterface
+     * @return \PHPUnit\Framework\MockObject\MockObject|\SprykerShop\Yves\CheckoutPage\Dependency\Client\CheckoutPageToPaymentClientInterface
      */
     public function getPaymentClientMock(): CheckoutPageToPaymentClientInterface
     {
@@ -217,17 +220,17 @@ class PaymentStepTest extends Unit
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Spryker\Yves\StepEngine\Dependency\Plugin\Handler\StepHandlerPluginInterface
+     * @return \PHPUnit\Framework\MockObject\MockObject|\Spryker\Yves\StepEngine\Dependency\Plugin\Handler\StepHandlerPluginInterface
      */
-    protected function createPaymentPluginMock()
+    protected function createPaymentPluginMock(): StepHandlerPluginInterface
     {
         return $this->getMockBuilder(StepHandlerPluginInterface::class)->getMock();
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\SprykerShop\Yves\CheckoutPage\Dependency\Client\CheckoutPageToCalculationClientInterface
+     * @return \PHPUnit\Framework\MockObject\MockObject|\SprykerShop\Yves\CheckoutPage\Dependency\Client\CheckoutPageToCalculationClientInterface
      */
-    protected function getCalculationClientMock()
+    protected function getCalculationClientMock(): CheckoutPageToCalculationClientInterface
     {
         return $this->getMockBuilder(CheckoutPageToCalculationClientBridge::class)
             ->disableOriginalConstructor()
@@ -235,10 +238,18 @@ class PaymentStepTest extends Unit
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Spryker\Yves\Messenger\FlashMessenger\FlashMessengerInterface
+     * @return \PHPUnit\Framework\MockObject\MockObject|\Spryker\Yves\Messenger\FlashMessenger\FlashMessengerInterface
      */
-    protected function getFlashMessengerMock()
+    protected function getFlashMessengerMock(): FlashMessengerInterface
     {
         return $this->getMockBuilder(FlashMessengerInterface::class)->getMock();
+    }
+
+    /**
+     * @return \SprykerShop\Yves\CheckoutPageExtension\Dependency\Plugin\CheckoutPaymentStepEnterPreCheckPluginInterface[]
+     */
+    public function getCheckoutPaymentStepEnterPreCheckPlugins(): array
+    {
+        return [];
     }
 }

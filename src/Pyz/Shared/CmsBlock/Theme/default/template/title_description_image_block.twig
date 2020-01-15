@@ -3,7 +3,7 @@
     <!-- CMS_BLOCK_PLACEHOLDER : "description" -->
     <div class="grid grid--center grid--middle image-banner js-image-banner">
         <div class="image-banner__bg-wrap">
-            <video class="image-banner__video" preload="none" autoplay="autoplay" loop="loop" muted="muted">
+            <video class="image-banner__video" autoplay="autoplay" loop="loop" muted="muted">
                 <source src="{{ publicPath('images/spryker-video.mp4') }}" type="video/mp4">
             </video>
         </div>
@@ -17,10 +17,10 @@
 
     {% include molecule('scroll-parallax') with {
         attributes: {
-            'wrapper-selector': '.js-image-banner',
-            'target-selector': '.js-image-banner__text',
-            'motion-ratio': '2.8'
-        }
+            'wrapper-class-name': 'js-image-banner',
+            'target-class-name': 'js-image-banner__text',
+            'motion-ratio': '2.8',
+        },
     } only %}
 
 {% endblock %}

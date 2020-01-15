@@ -9,5 +9,5 @@ namespace PyzTest\Yves\Customer\PageObject;
 
 class CustomerOrdersPage extends Customer
 {
-    public const URL = '/customer/orders';
+    public const URL = '/en/customer/orders';
 }

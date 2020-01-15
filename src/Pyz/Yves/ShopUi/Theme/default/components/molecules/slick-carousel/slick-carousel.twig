@@ -2,26 +2,24 @@
 
 {% define config = {
     name: 'slick-carousel',
-    tag: 'slick-carousel'
+    tag: 'slick-carousel',
 } %}
 
 {% define data = {
     slides: [],
-    containerClass: ''
+    containerClass: '',
 } %}
 
 {% define attributes = {
-    'data-json': ''
+    'data-json': '',
 } %}
 
 {% block body %}
-
-    <div class="{{config.name}}__container {{ data.containerClass }}">
+    <div class="{{ config.name }}__container {{ config.jsName }}__container {{ data.containerClass }}">
         {% block slides %}
             {% for slide in data.slides %}
-                    {{ slide }}
+                {{ slide }}
             {% endfor %}
         {% endblock %}
     </div>
-
 {% endblock %}

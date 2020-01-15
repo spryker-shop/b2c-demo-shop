@@ -1,0 +1,19 @@
+@mixin customer-page-order-payment($name: '.order-payment') {
+    #{$name} {
+        margin-bottom: rem(20);
+
+        @include helper-breakpoint-media-min($md-min) {
+            margin-bottom: 0;
+        }
+
+        &__item {
+            font-weight: fw(light);
+            line-height: rem(28);
+            letter-spacing: rem(-0.18);
+        }
+
+        @content;
+    }
+}
+
+@include customer-page-order-payment();

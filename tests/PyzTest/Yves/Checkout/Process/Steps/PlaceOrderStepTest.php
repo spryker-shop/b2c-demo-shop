@@ -21,6 +21,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Auto-generated group annotations
+ *
  * @group PyzTest
  * @group Yves
  * @group Checkout
@@ -132,8 +133,8 @@ class PlaceOrderStepTest extends Unit
     }
 
     /**
-     * @param \SprykerShop\Yves\CheckoutPage\Dependency\Client\CheckoutPageToCheckoutClientInterface|\PHPUnit_Framework_MockObject_MockObject $checkoutClientMock
-     * @param \Spryker\Yves\Messenger\FlashMessenger\FlashMessengerInterface|\PHPUnit_Framework_MockObject_MockObject|null $flashMessengerMock
+     * @param \SprykerShop\Yves\CheckoutPage\Dependency\Client\CheckoutPageToCheckoutClientInterface|\PHPUnit\Framework\MockObject\MockObject $checkoutClientMock
+     * @param \Spryker\Yves\Messenger\FlashMessenger\FlashMessengerInterface|\PHPUnit\Framework\MockObject\MockObject|null $flashMessengerMock
      *
      * @return \SprykerShop\Yves\CheckoutPage\Process\Steps\PlaceOrderStep
      */
@@ -154,7 +155,7 @@ class PlaceOrderStepTest extends Unit
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\SprykerShop\Yves\CheckoutPage\Dependency\Client\CheckoutPageToGlossaryStorageClientInterface
+     * @return \PHPUnit\Framework\MockObject\MockObject|\SprykerShop\Yves\CheckoutPage\Dependency\Client\CheckoutPageToGlossaryStorageClientInterface
      */
     protected function createGlossaryStorageClientMock(): CheckoutPageToGlossaryStorageClientInterface
     {
@@ -170,25 +171,25 @@ class PlaceOrderStepTest extends Unit
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Spryker\Yves\Messenger\FlashMessenger\FlashMessengerInterface
+     * @return \PHPUnit\Framework\MockObject\MockObject|\Spryker\Yves\Messenger\FlashMessenger\FlashMessengerInterface
      */
-    protected function createFlashMessengerMock()
+    protected function createFlashMessengerMock(): FlashMessengerInterface
     {
         return $this->getMockBuilder(FlashMessengerInterface::class)->getMock();
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\SprykerShop\Yves\CheckoutPage\Dependency\Client\CheckoutPageToCheckoutClientInterface
+     * @return \PHPUnit\Framework\MockObject\MockObject|\SprykerShop\Yves\CheckoutPage\Dependency\Client\CheckoutPageToCheckoutClientInterface
      */
-    protected function createCheckoutClientMock()
+    protected function createCheckoutClientMock(): CheckoutPageToCheckoutClientInterface
     {
         return $this->getMockBuilder(CheckoutPageToCheckoutClientInterface::class)->getMock();
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Spryker\Yves\StepEngine\Dependency\Plugin\Handler\StepHandlerPluginInterface
+     * @return \PHPUnit\Framework\MockObject\MockObject|\Spryker\Yves\StepEngine\Dependency\Plugin\Handler\StepHandlerPluginInterface
      */
-    protected function createShipmentMock()
+    protected function createShipmentMock(): StepHandlerPluginInterface
     {
         return $this->getMockBuilder(StepHandlerPluginInterface::class)->getMock();
     }

@@ -1,0 +1,22 @@
+@mixin checkout-page-checkout-block($name: '.checkout-block') {
+    #{$name} {
+        padding-bottom: rem(15);
+        margin-bottom: rem(15);
+
+        @include helper-breakpoint-media-min($lg-min) {
+            padding-bottom: rem(20);
+            margin-bottom: rem(20);
+            border-bottom: rem(1) dotted $setting-color-gray-3;
+        }
+
+        &--border-bottom-less {
+            @include helper-breakpoint-media-min($lg-min) {
+                border-bottom: none;
+            }
+        }
+
+        @content;
+    }
+}
+
+@include checkout-page-checkout-block();

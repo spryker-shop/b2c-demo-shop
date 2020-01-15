@@ -84,11 +84,12 @@
                         {% endblock %}
                     {% endembed %}
 
-                    {% include molecule('display-address', 'CustomerPage') with {
+                    {% include molecule('display-address') with {
                         class: 'menu menu--customer-account',
                         data: {
-                            address: data.billingAddress
-                        }
+                            address: data.billingAddress,
+                            showAddressLabel: true,
+                        },
                     } only %}
 
                 </div>
@@ -113,11 +114,12 @@
                         {% endblock %}
                     {% endembed %}
 
-                    {% include molecule('display-address', 'CustomerPage') with {
+                    {% include molecule('display-address') with {
                         class: 'menu menu--customer-account',
                         data: {
-                            address: data.shippingAddress
-                        }
+                            address: data.shippingAddress,
+                            showAddressLabel: true,
+                        },
                     } only %}
 
                 </div>
