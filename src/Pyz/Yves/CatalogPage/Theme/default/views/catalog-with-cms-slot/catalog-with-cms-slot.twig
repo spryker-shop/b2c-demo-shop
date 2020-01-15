@@ -1,0 +1,58 @@
+{% extends template('page-layout-catalog', 'CatalogPage') %}
+
+{% define data = {
+    searchString: _view.searchString | default,
+    categoryId: _view.idCategory | default,
+} %}
+
+{% block filterSection %}
+    {{ parent() }}
+
+    {% if data.categoryId %}
+        <div class="catalog-cms-block catalog-cms-block--middle">
+            {% cms_slot 'slt-5' required ['idCategory'] with {
+                idCategory: data.categoryId,
+            } %}
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block filterBar %}
+    {{ parent() }}
+
+    {% if data.categoryId %}
+        <div class="box">
+            {% cms_slot 'slt-5' required ['idCategory'] with {
+                idCategory: data.categoryId,
+            } %}
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block form %}
+    {{ parent() }}
+
+    {% if data.searchString is not empty %}
+        <input type="hidden" name="q" value="{{ data.searchString }}" />
+    {% endif %}
+{% endblock %}
+
+{% block catalogContent %}
+    {% if data.categoryId %}
+        <div class="catalog-cms-block catalog-cms-block--top">
+            {% cms_slot 'slt-4' required ['idCategory'] with {
+                idCategory: data.categoryId,
+            } %}
+        </div>
+    {% endif %}
+
+    {{ parent() }}
+
+    {% if data.categoryId %}
+        <div class="catalog-cms-block catalog-cms-block--bottom">
+            {% cms_slot 'slt-6' required ['idCategory'] with {
+                idCategory: data.categoryId,
+            } %}
+        </div>
+    {% endif %}
+{% endblock %}

@@ -1,18 +1,11 @@
-{% extends template('page-layout-customer', 'CustomerPage') %}
-
-{% define data = {
-    form: _view.form,
-    
-    title: 'customer.account.newsletter' | trans,
-    activePage: 'newsletter'
-} %}
+{% extends view('newsletter', '@SprykerShop:NewsletterPage') %}
 
 {% block customerContent %}
     <div class="box">
         {% include molecule('title-box', 'CustomerPage') with {
             data: {
-                title: 'customer.newsletter.subscription' | trans
-            }
+                title: 'customer.newsletter.subscription' | trans,
+            },
         } only %}
 
         <p>{{ 'account.newsletter.text' | trans }}</p>
@@ -23,9 +16,9 @@
             data: {
                 form: data.form,
                 submit: {
-                    enable: true
-                }
-            }
+                    enable: true,
+                },
+            },
         } only %}
     </div>
 {% endblock %}

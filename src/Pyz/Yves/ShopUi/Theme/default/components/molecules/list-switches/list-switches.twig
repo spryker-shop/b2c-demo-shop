@@ -1,0 +1,43 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'list-switches',
+    tag: 'ul',
+} %}
+
+{% define data = {
+    form: required,
+    choices: required,
+    rowAttrClass: 'radio--with-bg-wrap',
+    targetClassName: '',
+    providerIndex: '',
+} %}
+
+{% block component %}
+    {% if data.choices is not empty %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    {% for key, choice in data.choices %}
+        <li class="{{ component.renderClass(config.name ~ '__item', modifiers) }}">
+            {% block item %}
+                {% set fullIndex = loop.index ~ '-' ~ data.providerIndex %}
+
+                {{ form_row(data.form[key], {
+                    label: data.form[key].vars.label,
+                    required: false,
+                    component: data.targetClassName ? molecule('toggler-radio'),
+                    rowAttr: {
+                        class: data.rowAttrClass,
+                    },
+                    attributes: {
+                        'target-class-name': data.targetClassName ? data.targetClassName ~ fullIndex,
+                        checked: choice.value == data.providerIndex,
+                    },
+                }) }}
+            {% endblock %}
+        </li>
+    {% endfor %}
+{% endblock %}

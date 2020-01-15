@@ -9,7 +9,7 @@ namespace PyzTest\Yves\Customer\PageObject;
 
 class CustomerAddressPage extends Customer
 {
-    public const URL = '/customer/address/new';
+    public const URL = '/en/customer/address/new';
 
     public const FORM_FIELD_SELECTOR_SALUTATION = 'addressForm[salutation]';
     public const FORM_FIELD_SELECTOR_FIRST_NAME = 'addressForm[first_name]';

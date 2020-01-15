@@ -1,75 +1,107 @@
-{% extends template('page-layout-checkout', 'CheckoutPage') %}
-
-{% define data = {
-    backUrl: _view.previousStepUrl,
-    forms: {
-        shipment: _view.shipmentForm
-    },
-    
-    title: null
-} %}
+{% extends view('shipment', '@SprykerShop:CheckoutPage') %}
 
 {% block content %}
     {% embed molecule('form') with {
-        modifiers: ['checkout-shipment-step', 'checkout-actions', 'checkout-form-elements'],
+        modifiers: ['checkout-actions', 'checkout-form-elements'],
         data: {
             form: data.forms.shipment,
-            options: {
-                attr: { 
-                    id: 'payment-form' 
-                }
-            },
             submit: {
                 enable: true,
                 text: 'general.next.button' | trans,
-                class: 'form__action--checkout button  button--large button--expand'
+                class: 'form__action--checkout button button--large button--expand',
             },
             cancel: {
                 enable: true,
                 url: data.backUrl,
                 text: 'general.back.button' | trans,
-                class: 'form__action--checkout button button--hollow button--expand'
-            }
-        }
+                class: 'form__action--checkout button button--hollow button--expand',
+            },
+        },
     } only %}
-        {% block fields %}
-            {% for name, choices in data.form.idShipmentMethod.vars.choices %}
-                <div class="col col--sm-12 {{ config.name }}__shipment-item">
+        {% block fieldset %}
+            {% set shipmentGroupCollectionForm = data.form.shipmentGroups | default %}
 
-                    <div class="heading">
-                        <h2 class="title title--checkout title--shipment">{{name | trans}}</h2>
-                        <div class="heading__logo">
-                            <img src="{{ publicPath('images/shipment-' ~ name | replace({' ': ''}) ~ '.png') }}" width="65" alt="{{ name }}">
+            <div class="grid">
+                <h2 class="title title--primary col col--sm-12">{{ 'checkout.step.shipment.title' | trans }}</h2>
+
+                {% for shipmentGroupForm in shipmentGroupCollectionForm %}
+                    {% if shipmentGroupForm.hash is defined %}
+                        {% do shipmentGroupForm.hash.setRendered %}
+                    {% endif %}
+
+                    <article class="checkout-block {{ loop.last ? 'checkout-block--border-bottom-less' }} grid col col--sm-12">
+                        <div class="col col--sm-12 col--lg-7">
+                            <h3 class="title title--secondary-box">
+                                {{ 'page.checkout.shipment.shipment_group_heading' | trans({
+                                    '%current%': loop.index,
+                                    '%total%': loop.length
+                                }) }}
+                            </h3>
+
+                            {% for item in shipmentGroupForm.vars.data.cartItems %}
+                                {% set cartItem = item.bundleProduct ?? item %}
+
+                                {% embed molecule('product-item') with {
+                                    modifiers: ['expand', 'secondary', 'alternative', 'right-indent-from-tablet'],
+                                    data: {
+                                        productItem: cartItem,
+                                        canEditCart: false,
+                                        additionalContainerClass: '',
+                                        productOptionsModifiers: ['alternative'],
+                                    },
+                                    embed: {
+                                        bundleItems: item.bundleItems | default([]),
+                                    },
+                                } only %}
+                                    {% block image %}
+                                        <div class="{{ component.renderClass(config.name ~ '__image', modifiers) }} col">
+                                            {% include molecule('product-image') with {
+                                                modifiers: ['no-side-indent'],
+                                                data: {
+                                                    name: data.productItem.name,
+                                                    image: data.productItem.images[0].externalUrlLarge ?? null,
+                                                },
+                                            } only %}
+                                        </div>
+                                    {% endblock %}
+
+                                    {% block title %}
+                                        <div class="{{ component.renderClass(config.name ~ '__title', modifiers) }} col col--sm-12 col--lg-8">
+                                            {{ data.productItem.name }}
+                                        </div>
+                                    {% endblock %}
+
+                                    {% block options %}
+                                        {% if data.productItem.concreteAttributes is not empty %}
+                                            <ul>
+                                                {% for key, item in data.productItem.concreteAttributes %}
+                                                    <li>{{ ('product.attribute.' ~ key) | trans }}: {{ item }}</li>
+                                                {% endfor %}
+                                            </ul>
+                                        {% endif %}
+                                    {% endblock %}
+
+                                    {% block bundles %}
+                                        {% include molecule('cart-bundle-list', 'ProductBundleWidget') ignore missing with {
+                                            data: {
+                                                items: embed.bundleItems,
+                                            },
+                                        } only %}
+                                    {% endblock %}
+                                {% endembed %}
+                            {% endfor %}
                         </div>
-                    </div>
 
-                    <ul class="list-switches list-switches--two-colums">
-
-                        {% for key, choice in choices %}
-                            <li class="list-switches__item list-switches__item--half-width">
-                                {% if choice.value == 1 %}
-                                    {{ form_row(data.form.idShipmentMethod[key], {
-                                        label: data.form.idShipmentMethod[key].vars.label,
-                                        rowAttr: {class: 'radio--with-bg-wrap'},
-                                        attributes: {
-                                            'checked': 'checked'
-                                        },
-                                        errors: data.form.idShipmentMethod.vars.errors
-                                    }) }}
-                                {% else %}
-                                    {{ form_row(data.form.idShipmentMethod[key], {
-                                        label: data.form.idShipmentMethod[key].vars.label,
-                                        rowAttr: {class: 'radio--with-bg-wrap'},
-                                        errors: data.form.idShipmentMethod.vars.errors
-                                    }) }}
-                                {% endif %}
-                            </li>
-                        {% endfor %}
-
-                    </ul>
-                </div>
-            {% endfor %}
-
+                        <div class="col col--sm-12 col--lg-5">
+                            {% include molecule('shipment-sidebar', 'CheckoutPage') with {
+                                data: {
+                                    shipment: shipmentGroupForm.shipment,
+                                },
+                            } only %}
+                        </div>
+                    </article>
+                {% endfor %}
+            </div>
         {% endblock %}
     {% endembed %}
 {% endblock %}

@@ -18,6 +18,7 @@ use PyzTest\Zed\NavigationGui\PageObject\NavigationPage;
 
 /**
  * Auto-generated group annotations
+ *
  * @group PyzTest
  * @group Zed
  * @group NavigationGui

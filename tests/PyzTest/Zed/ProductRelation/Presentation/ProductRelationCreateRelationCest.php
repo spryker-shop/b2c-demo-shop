@@ -13,6 +13,7 @@ use Spryker\Shared\ProductRelation\ProductRelationTypes;
 
 /**
  * Auto-generated group annotations
+ *
  * @group PyzTest
  * @group Zed
  * @group ProductRelation
@@ -38,6 +39,7 @@ class ProductRelationCreateRelationCest
 
         $i->selectRelationType(ProductRelationTypes::TYPE_RELATED_PRODUCTS);
         $i->filterProductsByName('Samsung Bundle');
+        $i->wait(5);
         $i->selectProduct(214);
 
         $i->switchToAssignProductsTab();
@@ -47,16 +49,5 @@ class ProductRelationCreateRelationCest
         $i->clickSaveButton();
 
         $i->see(ProductRelationCreatePage::PRODUCT_SUCCESS_FULLY_CREATED_MESSAGE);
-
-        //$i->activateRelation();
-
-        // TODO re-enable
-        //$i->runCollectors();
-        //$i->wait(5);
-
-        //$i->amYves();
-        //$i->amOnPage('/en/samsung-bundle-214');
-        //$i->canSee('Similar products');
-        //$i->canSee('HP EliteDesk 800 G2');
     }
 }

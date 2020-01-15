@@ -1,0 +1,63 @@
+{% extends molecule('address-item-form', '@SprykerShop:CheckoutPage') %}
+
+{% block body %}
+    {% block title %}
+        <h5 class="title title--secondary">
+            {{ 'page.checkout.address.multi_shipment.title' | trans }}
+        </h5>
+    {% endblock %}
+
+    {% set items = data.form.vars.data | filter(item => not item.relatedBundleItemIdentifier) %}
+
+    {% if items | length %}
+        {% embed molecule('form') with {
+            data: {
+                form: data.form,
+                enableStart: false,
+                enableEnd: false,
+            },
+            embed: {
+                shippingForm: data.shippingForm,
+                jsAddressClass: data.jsAddressClass,
+            },
+        } only %}
+            {% block fields %}
+                <div class="col col--sm-12">
+                    {% include molecule('address-item-form-field-list', 'CheckoutPage') with {
+                        data: {
+                            items: data.form,
+                            shippingForm: embed.shippingForm,
+                            jsAddressClass: embed.jsAddressClass,
+                        },
+                    } only %}
+                </div>
+            {% endblock %}
+        {% endembed %}
+    {% endif %}
+
+    {% if data.formBundle and data.formBundle.vars.data | length %}
+        {% embed molecule('form') with {
+            data: {
+                form: data.formBundle,
+                enableStart: false,
+                enableEnd: false,
+            },
+            embed: {
+                shippingForm: data.shippingForm,
+                jsAddressClass: data.jsAddressClass,
+            },
+        } only %}
+            {% block fields %}
+                <div class="col col--sm-12">
+                    {% include molecule('address-bundle-item-form-field-list', 'CheckoutPage') with {
+                        data: {
+                            items: data.form,
+                            shippingForm: embed.shippingForm,
+                            jsAddressClass: embed.jsAddressClass,
+                        },
+                    } only %}
+                </div>
+            {% endblock %}
+        {% endembed %}
+    {% endif %}
+{% endblock %}

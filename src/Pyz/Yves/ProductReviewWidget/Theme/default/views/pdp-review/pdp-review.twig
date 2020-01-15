@@ -58,10 +58,9 @@
 
         {% include molecule('toggler-click') with {
             attributes: {
-                'trigger-selector': '.js-new-review-form__trigger',
-                'target-selector': '.js-new-review-form__target',
-                'class-to-toggle': 'is-hidden'
-            }
+                'trigger-class-name': 'js-new-review-form__trigger',
+                'target-class-name': 'js-new-review-form__target',
+            },
         } only %}
 
         {% if is_granted('ROLE_USER') %}

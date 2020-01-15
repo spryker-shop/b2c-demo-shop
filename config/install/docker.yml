@@ -6,6 +6,12 @@ sections:
         generate-transfers:
             command: "vendor/bin/console transfer:generate"
 
+        router-cache-warmup-yves:
+            command: "vendor/bin/yves router:cache:warm-up"
+
+        router-cache-warmup-zed:
+            command: "vendor/bin/console router:cache:warm-up"
+
         twig-cache-warmup:
             command: "vendor/bin/console twig:cache:warmer"
 
@@ -22,10 +28,10 @@ sections:
             command: "vendor/bin/console propel:model:build"
 
         generate-entity-transfer:
-            command: "vendor/bin/console transfer:generate"
+            command: "vendor/bin/console transfer:entity:generate"
 
-        generate-page-index-map:
-            command: "vendor/bin/console search:setup:index-map"
+        generate-page-source-map:
+            command: "vendor/bin/console search:setup:source-map"
 
         translator-generate-cache:
             command: "vendor/bin/console translator:generate-cache"
@@ -36,6 +42,9 @@ sections:
 
         generate-auto-completion:
             command: "vendor/bin/console dev:ide:generate-auto-completion"
+
+        rest-api-generate-documentation:
+            command: "vendor/bin/console rest-api:generate:documentation"
 
     build-static:
         dependencies-install:
@@ -58,8 +67,8 @@ sections:
             command: "vendor/bin/console scheduler:setup"
 
     init-storages-per-store:
-        setup-search:
-            command: "vendor/bin/console setup:search"
+        setup-search-create-sources:
+            command: "vendor/bin/console search:setup:sources"
 
     init-storages-per-region:
         propel-copy-schema:

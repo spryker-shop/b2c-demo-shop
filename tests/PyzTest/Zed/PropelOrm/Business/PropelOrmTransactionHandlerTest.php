@@ -16,6 +16,7 @@ use Throwable;
 
 /**
  * Auto-generated group annotations
+ *
  * @group PyzTest
  * @group Zed
  * @group PropelOrm
@@ -46,7 +47,7 @@ class PropelOrmTransactionHandlerTest extends Unit
     /**
      * @return void
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 

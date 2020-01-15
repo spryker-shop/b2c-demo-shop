@@ -9,6 +9,7 @@ namespace Pyz\Zed\Cms;
 
 use Spryker\Zed\Cms\CmsDependencyProvider as SprykerCmsDependencyProvider;
 use Spryker\Zed\CmsContentWidget\Communication\Plugin\CmsPageDataExpander\CmsPageParameterMapExpanderPlugin;
+use Spryker\Zed\CmsNavigationConnector\Communication\Plugin\CmsPageBeforeDeleteNavigationPlugin;
 use Spryker\Zed\CmsNavigationConnector\Communication\Plugin\PostCmsPageActivatorNavigationPlugin;
 use Spryker\Zed\CmsUserConnector\Communication\Plugin\UserCmsVersionPostSavePlugin;
 use Spryker\Zed\CmsUserConnector\Communication\Plugin\UserCmsVersionTransferExpanderPlugin;
@@ -57,6 +58,16 @@ class CmsDependencyProvider extends SprykerCmsDependencyProvider
     {
         return [
             new PostCmsPageActivatorNavigationPlugin(),
+        ];
+    }
+
+    /**
+     * @return \Spryker\Zed\CmsExtension\Dependency\Plugin\CmsPageBeforeDeletePluginInterface[]
+     */
+    protected function getCmsPageBeforeDeletePlugins(): array
+    {
+        return [
+            new CmsPageBeforeDeleteNavigationPlugin(),
         ];
     }
 }

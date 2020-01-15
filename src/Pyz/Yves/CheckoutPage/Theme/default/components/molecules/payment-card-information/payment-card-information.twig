@@ -1,0 +1,48 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'payment-card-information',
+} %}
+
+{% define data = {
+    payment: required,
+    cart: required,
+} %}
+
+{% block body %}
+    {% set noPayment = 'Nopayment' %}
+    {% set dummyPayment = 'dummyPaymentCreditCard' %}
+
+    <h4 class="title title--secondary-small grid grid--middle">
+        <span class="spacing-right spacing-right--big">{{ data.payment.paymentMethod | capitalize }}</span>
+
+        {% if data.payment.dummyPayment and data.payment.dummyPayment.cardType %}
+            <span class="{{ config.name }}__logo">
+                <img  class="{{ config.name }}__logo-image" src="{{ publicPath('images/logo-' ~ data.payment.dummyPayment.cardType | replace({' ': ''}) | lower ~ '.png') }}" alt="{{ data.payment.dummyPayment.cardType }}">
+            </span>
+        {% endif %}
+    </h4>
+    <ul class="spacing-bottom">
+        {% if data.payment.paymentSelection == noPayment %}
+            {% for payment in data.cart.payments %}
+                <li class="{{ config.name }}__item">
+                    {% if payment.giftCard is defined and payment.giftCard %}
+                        {{ 'cart.giftcard.label' | trans }}
+                    {% else %}
+                        {{ payment.paymentMethod }}
+                    {% endif %}
+                </li>
+            {% endfor %}
+        {% endif %}
+
+        {% if data.payment.paymentSelection == dummyPayment %}
+            {% set partOfCardNumder = data.payment.dummyPayment.cardNumber[ (data.payment.dummyPayment.cardNumber | length) -3 :] %}
+
+            <li class="{{ config.name }}__item">{{ 'dummyPaymentCreditCard.card_type' | trans }}: {{ data.payment.dummyPayment.cardType }}</li>
+            <li class="{{ config.name }}__item">{{ 'dummyPaymentCreditCard.card_number' | trans }}: {{ 'dummyPaymentCreditCard.hidden_numbers' | trans }}{{ partOfCardNumder }}</li>
+            <li class="{{ config.name }}__item">{{ 'dummyPaymentCreditCard.name_on_card' | trans }}: {{ data.payment.dummyPayment.nameOnCard }}</li>
+            <li class="{{ config.name }}__item">{{ 'dummyPaymentCreditCard.card_expires' | trans }}: {{ data.payment.dummyPayment.cardExpiresMonth }}, {{ data.payment.dummyPayment.cardExpiresYear }}</li>
+        {% endif %}
+    </ul>
+    <a class="link link--secondary" href="{{ url('checkout-payment') }}">{{ 'general.edit.button' | trans }}</a>
+{% endblock %}

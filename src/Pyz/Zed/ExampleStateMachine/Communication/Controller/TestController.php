@@ -15,7 +15,6 @@ use Symfony\Component\HttpFoundation\Request;
  * @method \Pyz\Zed\ExampleStateMachine\Communication\ExampleStateMachineCommunicationFactory getFactory()
  * @method \Pyz\Zed\ExampleStateMachine\Business\ExampleStateMachineFacade getFacade()
  * @method \Pyz\Zed\ExampleStateMachine\Persistence\ExampleStateMachineQueryContainerInterface getQueryContainer()
- *
  */
 class TestController extends AbstractController
 {

@@ -1,10 +1,4 @@
-{% extends template('page-layout-main') %}
-
-{% define data = {
-    breadcrumbs: _view.stepBreadcrumbs.breadcrumbs | default([])
-} %}
-
-{% block sidebar %}{% endblock %}
+{% extends template('page-layout-checkout', '@SprykerShop:CheckoutPage') %}
 
 {% block header %}
     {% embed organism('header') with {
@@ -12,16 +6,16 @@
         data: {
             showSearchForm: false,
             showNavigation: false,
-            showLangCurrencySwitches: false
-        }
+            showLangCurrencySwitches: false,
+        },
     } only %}
         {% block additionalLink %}
             <a class="{{ config.name }}__back-link" href="{{ url('cart') }}">
                 {% include atom('icon') with {
                     modifiers: ['medium-up', 'to-cart'],
                     data: {
-                        name: 'arrow-left'
-                    }
+                        name: 'arrow-left',
+                    },
                 } only %}
                 {{ 'cart.cart' | trans }}
             </a>
@@ -34,21 +28,12 @@
         <div class="container__inner">
             {% block pageInfo %}
                 {% block breadcrumbs %}
-                    {% include view('cart-checkout-breadcrumb', 'CheckoutWidget') with {
-                        data: {
-                            isCartPage: false,
-                            checkoutBreadcrumbs: data.breadcrumbs
-                        }
-                    } only %}
+                    {{ parent() }}
                 {% endblock %}
             {% endblock %}
 
             <main class="page-layout-checkout {% block contentClass %}{% endblock %}">
-                {% block title %}
-                    {% if data.title is not empty %}
-                        <h1 class="title title--main title--with-border title--medium">{{data.title}}</h1>
-                    {% endif %}
-                {% endblock %}
+                {% block title %}{% endblock %}
 
                 {% block content %}{% endblock %}
             </main>

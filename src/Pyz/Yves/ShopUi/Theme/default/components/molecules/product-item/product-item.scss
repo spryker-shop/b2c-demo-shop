@@ -1,3 +1,8 @@
+$image-width: rem(120);
+$image-width-with-checkbox: rem(158);
+$image-small-width: rem(100);
+$additional-info-width: rem(350);
+
 @mixin shop-ui-product-item($name: '.product-item') {
     #{$name} {
         &__title {
@@ -14,6 +19,12 @@
                 margin-bottom: rem(5);
             }
 
+            &--secondary {
+                font-size: rem(15);
+                line-height: rem(18);
+                margin: rem(10) 0;
+            }
+
             &--readonly {
                 pointer-events: none;
             }
@@ -21,18 +32,34 @@
 
         &__content {
             padding: 0 0 rem(5) rem(24);
-            width: calc(100% - #{rem(120)});
+            width: calc(100% - #{$image-width});
 
             &--mini-cart {
-                width: calc(100% - #{rem(100)});
+                width: calc(100% - #{$image-small-width});
+            }
+
+            &--alternative {
+                padding: 0 0 0 rem(20);
+            }
+
+            &--additional-info {
+                padding: 0 0 0 rem(20);
+
+                @include helper-breakpoint-media-min($lg-min) {
+                    width: calc(100% - #{$image-width} - #{$additional-info-width});
+                }
+            }
+
+            &--with-checkbox {
+                width: calc(100% - #{$image-width-with-checkbox});
             }
         }
 
         &__image {
-            width: rem(120);
+            width: $image-width;
 
             &--mini-cart {
-                width: rem(100);
+                width: $image-small-width;
 
                 .thumbnail {
                     height: rem(60);
@@ -56,6 +83,23 @@
                 font-size: rem(15);
                 line-height: rem(20);
                 align-self: flex-start;
+            }
+
+            &--secondary,
+            &--alternative {
+                text-align: left;
+                font: fw(medium) rem(15)/rem(17) $setting-font-family;
+                width: 100%;
+                margin-bottom: rem(5);
+            }
+
+            &--alternative {
+                @include helper-breakpoint-media-min($lg-min) {
+                    text-align: right;
+                    width: auto;
+                    margin: rem(10) 0;
+                    align-self: flex-start;
+                }
             }
         }
 
@@ -82,6 +126,38 @@
                 margin: 0;
             }
         }
+
+        &__options {
+            font: fw(medium) rem(13)/rem(15) $setting-font-family-additional;
+            margin-bottom: rem(5);
+
+            @include helper-breakpoint-media-min($lg-min) {
+                font: fw(medium) rem(16)/rem(22) $setting-font-family;
+            }
+        }
+
+        &__additional-info {
+            width: 100%;
+            padding-top: rem(15);
+
+            @include helper-breakpoint-media-min($lg-min) {
+                padding-left: rem(15);
+                padding-top: 0;
+                max-width: $additional-info-width;
+            }
+        }
+
+        &--expand {
+            width: 100%;
+        }
+
+        &--right-indent-from-tablet {
+            @include helper-breakpoint-media-min($lg-min) {
+                padding-right: rem(20);
+            }
+        }
+
+        @content;
     }
 }
 

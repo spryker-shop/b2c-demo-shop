@@ -2,7 +2,7 @@ const stylelint = require('stylelint');
 const { globalSettings } = require('../settings');
 
 stylelint.lint({
-    files: [`${globalSettings.paths.core}/**/*.scss`, `${globalSettings.paths.project}/**/*.scss`],
+    files: [`${globalSettings.paths.project}/**/*.scss`],
     syntax: "scss",
     formatter: "string",
 }).then(function(data) {

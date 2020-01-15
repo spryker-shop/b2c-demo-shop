@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Auto-generated group annotations
+ *
  * @group PyzTest
  * @group Yves
  * @group Checkout
@@ -95,9 +96,9 @@ class SuccessStepTest extends Unit
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\SprykerShop\Yves\CheckoutPage\Dependency\Client\CheckoutPageToCartClientInterface
+     * @return \PHPUnit\Framework\MockObject\MockObject|\SprykerShop\Yves\CheckoutPage\Dependency\Client\CheckoutPageToCartClientInterface
      */
-    protected function createCartClientMock()
+    protected function createCartClientMock(): CheckoutPageToCartClientInterface
     {
         return $this->getMockBuilder(CheckoutPageToCartClientInterface::class)->getMock();
     }
@@ -111,9 +112,9 @@ class SuccessStepTest extends Unit
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\SprykerShop\Yves\CheckoutPage\Dependency\Client\CheckoutPageToCustomerClientInterface
+     * @return \PHPUnit\Framework\MockObject\MockObject|\SprykerShop\Yves\CheckoutPage\Dependency\Client\CheckoutPageToCustomerClientInterface
      */
-    protected function createCustomerClientMock()
+    protected function createCustomerClientMock(): CheckoutPageToCustomerClientInterface
     {
         return $this->getMockBuilder(CheckoutPageToCustomerClientInterface::class)->getMock();
     }
@@ -121,7 +122,7 @@ class SuccessStepTest extends Unit
     /**
      * @return \PHPUnit\Framework\MockObject\MockObject|\SprykerShop\Yves\CheckoutPage\CheckoutPageConfig
      */
-    protected function createCheckoutPageConfigMock()
+    protected function createCheckoutPageConfigMock(): CheckoutPageConfig
     {
         $checkoutPageConfigMock = $this->getMockBuilder(CheckoutPageConfig::class)->setMethods(['cleanCartAfterOrderCreation'])->getMock();
         $checkoutPageConfigMock->method('cleanCartAfterOrderCreation')->willReturn(true);

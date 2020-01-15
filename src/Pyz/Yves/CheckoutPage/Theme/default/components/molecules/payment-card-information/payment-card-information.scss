@@ -1,0 +1,34 @@
+@mixin checkout-page-payment-card-information($name: '.payment-card-information') {
+    #{$name} {
+        margin-bottom: rem(20);
+
+        @include helper-breakpoint-media-min($md-min) {
+            margin-bottom: 0;
+        }
+
+        &__item {
+            font-weight: fw(light);
+            line-height: rem(28);
+            letter-spacing: rem(-0.18);
+        }
+
+        &__logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0;
+            width: rem(93);
+            height: rem(36);
+            border-radius: rem(2);
+            border: rem(1) solid $setting-color-input-border;
+        }
+
+        &__logo-image {
+            height: rem(20);
+        }
+
+        @content;
+    }
+}
+
+@include checkout-page-payment-card-information();

@@ -38,11 +38,12 @@
                         {% endblock %}
                     {% endembed %}
 
-                    {% include molecule('display-address', 'CustomerPage') with {
+                    {% include molecule('display-address') with {
                         class: 'menu menu--customer-account',
                         data: {
-                            address: address
-                        }
+                            address: address,
+                            showAddressLabel: true,
+                        },
                     } only %}
                 </div>
             </div>
@@ -50,6 +51,6 @@
     </div>
 
     <div class="box">
-        <a class="button " href="{{url('customer/address/new')}}" {{qa('customer-add-new-address')}}>{{ 'customer.account.add_new_address' | trans }}</a>
+        <a class="button" href="{{ url('customer/address/new') }}" {{ qa('customer-add-new-address') }}>{{ 'customer.account.button.add_new_address' | trans }}</a>
     </div>
 {% endblock %}

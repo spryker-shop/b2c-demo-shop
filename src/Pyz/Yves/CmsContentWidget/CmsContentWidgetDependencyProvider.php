@@ -21,7 +21,7 @@ use SprykerShop\Yves\FileManagerWidget\Plugin\CmsContentWidget\FileManagerWidget
 class CmsContentWidgetDependencyProvider extends SprykerCmsContentWidgetDependencyProvider
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @return \Spryker\Yves\CmsContentWidget\Dependency\CmsContentWidgetPluginInterface[]
      */

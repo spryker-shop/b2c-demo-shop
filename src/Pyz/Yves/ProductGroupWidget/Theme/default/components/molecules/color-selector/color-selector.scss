@@ -28,7 +28,6 @@ $selector-border-size: 2;
             width: rem($color-selector-size);
             height: rem($color-selector-size);
             border-radius: 100%;
-            border: rem($selector-border-size) solid $setting-color-white;
             vertical-align: middle;
             position: relative;
 
@@ -45,13 +44,27 @@ $selector-border-size: 2;
                 visibility: hidden;
             }
 
+            &::after {
+                content: '';
+                position: absolute;
+                left: rem(-1);
+                top: rem(-1);
+                width: rem($color-selector-size + 2);
+                height: rem($color-selector-size + 2);
+                border-radius: 100%;
+                border: rem($selector-border-size + 1) solid $setting-color-white;
+            }
+
             &:not(:last-child) {
                 margin-right: rem(4);
             }
 
             &:hover,
             &--active {
-                border: unset;
+                &::after {
+                    visibility: hidden;
+                }
+
                 &::before {
                     visibility: visible;
                 }

@@ -12,16 +12,23 @@ use Generated\Shared\DataBuilder\QuoteBuilder;
 use Generated\Shared\Transfer\ExpenseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Generated\Shared\Transfer\ShipmentTransfer;
-use Spryker\Shared\Shipment\ShipmentConstants;
+use Spryker\Shared\Shipment\ShipmentConfig;
 use Spryker\Yves\StepEngine\Dependency\Plugin\Handler\StepHandlerPluginCollection;
 use Spryker\Yves\StepEngine\Dependency\Plugin\Handler\StepHandlerPluginInterface;
 use SprykerShop\Yves\CheckoutPage\CheckoutPageDependencyProvider;
 use SprykerShop\Yves\CheckoutPage\Dependency\Client\CheckoutPageToCalculationClientInterface;
+use SprykerShop\Yves\CheckoutPage\Dependency\Service\CheckoutPageToShipmentServiceBridge;
+use SprykerShop\Yves\CheckoutPage\Dependency\Service\CheckoutPageToShipmentServiceInterface;
+use SprykerShop\Yves\CheckoutPage\GiftCard\GiftCardItemsChecker;
+use SprykerShop\Yves\CheckoutPage\GiftCard\GiftCardItemsCheckerInterface;
+use SprykerShop\Yves\CheckoutPage\Process\Steps\PostConditionCheckerInterface;
 use SprykerShop\Yves\CheckoutPage\Process\Steps\ShipmentStep;
+use SprykerShop\Yves\CheckoutPage\Process\Steps\ShipmentStep\PostConditionChecker;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Auto-generated group annotations
+ *
  * @group PyzTest
  * @group Yves
  * @group Checkout
@@ -32,6 +39,11 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class ShipmentStepTest extends Unit
 {
+    /**
+     * @var \PyzTest\Yves\Checkout\CheckoutBusinessTester
+     */
+    public $tester;
+
     /**
      * @return void
      */
@@ -60,7 +72,7 @@ class ShipmentStepTest extends Unit
     {
         $quoteTransfer = new QuoteTransfer();
         $expenseTransfer = new ExpenseTransfer();
-        $expenseTransfer->setType(ShipmentConstants::SHIPMENT_EXPENSE_TYPE);
+        $expenseTransfer->setType(ShipmentConfig::SHIPMENT_EXPENSE_TYPE);
         $quoteTransfer->addExpense($expenseTransfer);
 
         $shipmentStep = $this->createShipmentStep(new StepHandlerPluginCollection());
@@ -91,8 +103,11 @@ class ShipmentStepTest extends Unit
         return new ShipmentStep(
             $this->createCalculationClientMock(),
             $shipmentPlugins,
+            $this->createPostConditionChecker(),
+            $this->createGiftCardItemsChecker(),
             CheckoutPageDependencyProvider::PLUGIN_SHIPMENT_STEP_HANDLER,
-            'escape_route'
+            'escape_route',
+            $this->getCheckoutShipmentStepEnterPreCheckPlugins()
         );
     }
 
@@ -105,9 +120,9 @@ class ShipmentStepTest extends Unit
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\SprykerShop\Yves\CheckoutPage\Dependency\Client\CheckoutPageToCalculationClientInterface
+     * @return \PHPUnit\Framework\MockObject\MockObject|\SprykerShop\Yves\CheckoutPage\Dependency\Client\CheckoutPageToCalculationClientInterface
      */
-    protected function createCalculationClientMock()
+    protected function createCalculationClientMock(): CheckoutPageToCalculationClientInterface
     {
         $calculationMock = $this->getMockBuilder(CheckoutPageToCalculationClientInterface::class)->getMock();
         $calculationMock->method('recalculate')->willReturnArgument(0);
@@ -116,10 +131,50 @@ class ShipmentStepTest extends Unit
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Spryker\Yves\StepEngine\Dependency\Plugin\Handler\StepHandlerPluginInterface
+     * @return \PHPUnit\Framework\MockObject\MockObject|\SprykerShop\Yves\CheckoutPage\Process\Steps\PostConditionCheckerInterface
      */
-    protected function createShipmentMock()
+    protected function createPostConditionChecker(): PostConditionCheckerInterface
+    {
+        return $this->getMockBuilder(PostConditionChecker::class)
+            ->setConstructorArgs([$this->createShipmentServiceMock(), $this->createGiftCardItemsChecker()])
+            ->enableProxyingToOriginalMethods()
+            ->getMock();
+    }
+
+    /**
+     * @return \PHPUnit\Framework\MockObject\MockObject|\SprykerShop\Yves\CheckoutPage\GiftCard\GiftCardItemsCheckerInterface
+     */
+    protected function createGiftCardItemsChecker(): GiftCardItemsCheckerInterface
+    {
+        return $this->getMockBuilder(GiftCardItemsChecker::class)
+            ->enableProxyingToOriginalMethods()
+            ->getMock();
+    }
+
+    /**
+     * @return \PHPUnit\Framework\MockObject\MockObject|\Spryker\Yves\StepEngine\Dependency\Plugin\Handler\StepHandlerPluginInterface
+     */
+    protected function createShipmentMock(): StepHandlerPluginInterface
     {
         return $this->getMockBuilder(StepHandlerPluginInterface::class)->getMock();
+    }
+
+    /**
+     * @return \PHPUnit\Framework\MockObject\MockObject|\SprykerShop\Yves\CheckoutPage\Dependency\Service\CheckoutPageToShipmentServiceInterface
+     */
+    protected function createShipmentServiceMock(): CheckoutPageToShipmentServiceInterface
+    {
+        return $this->getMockBuilder(CheckoutPageToShipmentServiceBridge::class)
+            ->setConstructorArgs([$this->tester->getShipmentService()])
+            ->enableProxyingToOriginalMethods()
+            ->getMock();
+    }
+
+    /**
+     * @return \SprykerShop\Yves\CheckoutPageExtension\Dependency\Plugin\CheckoutShipmentStepEnterPreCheckPluginInterface[]
+     */
+    public function getCheckoutShipmentStepEnterPreCheckPlugins(): array
+    {
+        return [];
     }
 }

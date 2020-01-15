@@ -31,10 +31,9 @@
                         </tr>
                         {% include molecule('toggler-click') with {
                             attributes: {
-                                'trigger-selector': '.js-product-alternative-' ~ wishlistItemSku ~ '__show-all-trigger',
-                                'target-selector': '.js-product-alternative-' ~ wishlistItemSku ~ '__show-all-target',
-                                'class-to-toggle': 'is-hidden'
-                            }
+                                'trigger-class-name': 'js-product-alternative-' ~ wishlistItemSku ~ '__show-all-trigger',
+                                'target-class-name': 'js-product-alternative-' ~ wishlistItemSku ~ '__show-all-target',
+                            },
                         } only %}
                     {% endif %}
                     <tr class="{{ loop.index > 3 ? 'js-product-alternative-' ~ wishlistItemSku ~ '__show-all-target is-hidden' : '' }}">

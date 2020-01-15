@@ -1,33 +1,23 @@
-import Component from 'ShopUi/models/component';
+import FormSubmitterCore from 'ShopUi/components/molecules/form-submitter/form-submitter';
 
-export default class FormSubmitter extends Component {
-    readonly event: string;
-    readonly triggers: HTMLElement[];
+const TAG_NAME = 'form';
 
-    constructor() {
-        super();
-        this.event = <string>this.getAttribute('event');
-        this.triggers = <HTMLElement[]>Array.from(document.querySelectorAll(this.triggerSelector));
-    }
+export default class FormSubmitter extends FormSubmitterCore {
+    protected onEvent(event: Event): void {
+        const trigger = <HTMLFormElement>event.currentTarget;
+        const form = <HTMLFormElement>trigger.closest(TAG_NAME);
 
-    protected readyCallback(): void {
-        this.mapEvents();
-    }
+        if (!form) {
+            return;
+        }
 
-    protected mapEvents(): void {
-        this.triggers.forEach((trigger: HTMLElement) => {
-            trigger.addEventListener(this.event, (event: Event) => this.onTriggerEvent(event));
-        });
-    }
+        const submit = <HTMLButtonElement | HTMLInputElement>form.querySelector('[type="submit"]')
+            || <HTMLButtonElement>form.querySelector('button:not([type="button"])');
 
-    protected onTriggerEvent(event: Event): void {
-        event.preventDefault();
-        const trigger = <HTMLElement>event.target;
-        const form = <HTMLFormElement>trigger.closest('form');
+        if (submit) {
+            submit.click();
+        }
+
         form.submit();
-    }
-
-    get triggerSelector(): string {
-        return this.getAttribute('trigger-selector');
     }
 }

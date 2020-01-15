@@ -1,13 +1,4 @@
-{% extends model('component') %}
-
-{% define config = {
-    name: 'new-review-form'
-} %}
-
-{% define data = {
-    form: required,
-    action: required
-} %}
+{% extends molecule('new-review-form', '@SprykerShop:ProductReviewWidget') %}
 
 {% block body %}
     <div class="popup popup--new-review is-hidden {{ config.jsName }}__target">
@@ -18,22 +9,22 @@
                 data: {
                     form: data.form,
                     options: {
-                        action: data.action
+                        action: data.action,
                     },
                     layout: {
                         'summary': 'col col--sm-12 col-md-10 form__field--review form__field--review-summary',
                         'description': 'col col--sm-12 form__field--review',
-                        'nickname': 'col col--sm-12 form__field--review'
+                        'nickname': 'col col--sm-12 form__field--review',
                     },
                     submit: {
                         enable: true,
-                        class: 'button  button--send-review'
-                    }
+                        class: 'button button--send-review',
+                    },
                 },
                 embed: {
                     title: 'product_review.submit.add_a_review' | trans,
-                    jsName: config.jsName
-                }
+                    jsName: config.jsName,
+                },
             } only %}
                 {% block title %}
                     <div class="popup__top popup__top--bottom-indent">
@@ -43,8 +34,8 @@
                         {% include atom('icon') with {
                             class: 'popup__close ' ~ embed.jsName ~ '__trigger',
                             data: {
-                                name: 'close'
-                            }
+                                name: 'close',
+                            },
                         } only %}
                     </div>
                 {% endblock %}
@@ -60,8 +51,8 @@
                                     data: {
                                         maxValue: (field.vars.choices | length) - 1,
                                         inputId: 'productReviewForm_rating',
-                                        inputName: 'productReviewForm[rating]'
-                                    }
+                                        inputName: 'productReviewForm[rating]',
+                                    },
                                 } only %}
                                 {{form_errors(field)}}
                             </label>
