@@ -79,26 +79,26 @@
 
                         {% block quantity %}
                             {% if canEditCart %}
-                                <form method="POST" action="{{ path('cart/change/quantity', {'sku': data.productItem.sku }) }}">
-                                    {% include molecule('product-quantity-input') with {
-                                        data: {
-                                            maxQuantity: data.productItem.maxQuantity,
-                                            value: data.productItem.quantity,
-                                        },
-                                    } only %}
+{#                                <form method="POST" action="{{ path('cart/change/quantity', {'sku': data.productItem.sku }) }}">#}
+{#                                    {% include molecule('product-quantity-input') with {#}
+{#                                        data: {#}
+{#                                            maxQuantity: data.productItem.maxQuantity,#}
+{#                                            value: data.productItem.quantity,#}
+{#                                        },#}
+{#                                    } only %}#}
 
-                                    <input type="hidden" value="{{ data.productItem.groupKey }}" name="groupKey" />
-                                </form>
+{#                                    <input type="hidden" value="{{ data.productItem.groupKey }}" name="groupKey" />#}
+{#                                </form>#}
                             {% else %}
                                 {{ 'cart.item_quantity' | trans }}: {{ data.productItem.quantity }}
                             {% endif %}
                         {% endblock %}
 
-                        {% if canEditCart %}
-                            <a class="link link--darkest link--edit" href="{{ path('cart/remove', {'sku': data.productItem.sku, 'groupKey': data.productItem.groupKey }) }}">
-                                {{ 'remove' | trans }}
-                            </a>
-                        {% endif %}
+{#                        {% if canEditCart %}#}
+{#                            <a class="link link--darkest link--edit" href="{{ path('cart/remove', {'sku': data.productItem.sku, 'groupKey': data.productItem.groupKey }) }}">#}
+{#                                {{ 'remove' | trans }}#}
+{#                            </a>#}
+{#                        {% endif %}#}
                     </div>
                 {% endif %}
 
@@ -109,9 +109,9 @@
             {% block additionalInfo %}{% endblock %}
         </div>
 
-        {% block bundles %}
-            {% widget 'ProductBundleCartItemsListWidget' args [data.productItem, data.product] only %}{% endwidget %}
-        {% endblock %}
+{#        {% block bundles %}#}
+{#            {% widget 'ProductBundleCartItemsListWidget' args [data.productItem, data.product] only %}{% endwidget %}#}
+{#        {% endblock %}#}
 
         {% block summary %}
             {% if data.productItem.productOptions is defined and data.productItem.productOptions is not empty %}
