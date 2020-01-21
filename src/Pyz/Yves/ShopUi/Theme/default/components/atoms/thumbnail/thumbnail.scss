@@ -1,4 +1,6 @@
 @include shop-ui-thumbnail {
+    $name: '.thumbnail';
+
     &--no-margin {
         margin: 0;
     }
@@ -61,6 +63,16 @@
     &--product-list-item {
         @include helper-breakpoint-media-min($md-min) {
             height: 5rem;
+        }
+    }
+
+    &--bundle-list {
+        height: auto;
+        margin: 0;
+
+        #{$name}__image {
+            position: relative;
+            vertical-align: top;
         }
     }
 }

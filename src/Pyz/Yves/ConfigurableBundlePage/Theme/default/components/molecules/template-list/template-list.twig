@@ -1,0 +1,31 @@
+{% extends molecule('template-list', '@SprykerShop:ConfigurableBundlePage') %}
+
+{% block item %}
+    {% set listItemClasses = 'col col--sm-12 col--md-6 col--lg-4 col--xl-3 spacing spacing--inner spacing--big' %}
+
+    {{ parent() }}
+{% endblock %}
+
+{% block template %}
+    {% block templateTitle %}{{ parent() }}{% endblock %}
+{% endblock %}
+
+{% block templateTitleItem %}
+    {% set titleClasses = config.name ~ '__item-title' %}
+
+    {{ parent() }}
+{% endblock %}
+
+{% block templateTitleImage %}
+    {% set imageModifiers = imageModifiers | merge(['bundle-list']) %}
+
+    {% include atom('thumbnail') with {
+        modifiers: imageModifiers,
+        attributes: {
+            src: template.images.0.externalUrlSmall,
+            alt: template.name | trans,
+        },
+    } only %}
+{% endblock %}
+
+{% block button %}{% endblock %}
