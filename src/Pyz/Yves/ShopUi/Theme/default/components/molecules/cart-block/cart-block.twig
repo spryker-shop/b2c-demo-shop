@@ -15,7 +15,7 @@
         {% set optionPrice = 0 %}
 
         {% for item in data.cartItems %}
-            {% embed molecule('product-item') with {
+            {% embed molecule('product-card-item') with {
                 modifiers: ['mini-cart', 'readonly'],
                 data: {
                     productItem: item

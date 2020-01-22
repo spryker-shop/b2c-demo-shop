@@ -11,7 +11,7 @@
                 {% set itemQuantity = item.vars.data.quantity | default %}
                 {% set imageUrl = item.vars.data.images[0].externalUrlSmall ?? '' %}
 
-                {% embed molecule('product-item') with {
+                {% embed molecule('product-card-item') with {
                     class: 'col col--sm-12 col--lg-6',
                     modifiers: ['expand', 'secondary', 'additional-info'],
                     data: {
