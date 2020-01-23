@@ -1,0 +1,38 @@
+@mixin configurable-bundle-widget-configured-bundle($name: '.configured-bundle') {
+    #{$name} {
+        padding-bottom: rem(20);
+        margin-bottom: rem(20);
+        border-bottom: rem(1) dotted $setting-color-gray-3;
+        @include helper-ui-clearfix;
+
+        &__container {
+            padding: rem(8) rem(15);
+            background: $setting-color-gray-1;
+            margin-bottom: rem(21);
+        }
+
+        &__information-item {
+            width: 100%;
+            justify-content: flex-start;
+            margin-left: rem(-16);
+
+            @include helper-breakpoint-media-min($xxl-min) {
+                width: 50%;
+                justify-content: flex-end;
+                margin-left: 0;
+            }
+        }
+
+        &__total {
+            font: fw(medium) $setting-font-size-base $setting-font-family-additional;
+
+            @include helper-breakpoint-media-min($xxl-min) {
+                text-align: right;
+            }
+        }
+
+        @content;
+    }
+}
+
+@include configurable-bundle-widget-configured-bundle;

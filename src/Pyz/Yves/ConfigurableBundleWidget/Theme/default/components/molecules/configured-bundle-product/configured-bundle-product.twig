@@ -1,0 +1,64 @@
+{% extends molecule('configured-bundle-product', '@SprykerShop:ConfigurableBundleWidget') %}
+
+{%- block extraClass %} grid{% endblock -%}
+
+{% block body %}
+    <div class="col col--sm-6 col--md-3 grid">
+        <div class="col col--sm-12">
+            {%- block thumbnailWrapper -%}
+                {{ parent() }}
+            {%- endblock -%}
+        </div>
+    </div>
+
+    <div class="col col--sm-6 col--md-9">
+        <div class="col col--sm-12 col--md-4 spacing-x spacing-x--big spacing-x--inner">
+            {%- block generalInformation -%}
+                {{ parent() }}
+            {%- endblock -%}
+        </div>
+
+        {%- block priceInformation -%}
+            <div class="col col--sm-12 col--md-8">
+                {% block priceInformationInner %}
+                    {{ parent() }}
+                {% endblock %}
+            </div>
+        {%- endblock -%}
+    </div>
+{% endblock -%}
+
+{%- block imageContainer -%}
+    {% include molecule('product-image') with {
+        data: {
+            name: data.name,
+            image: data.image,
+        },
+    } only %}
+{% endblock -%}
+
+{% block name -%}
+    <strong class="{{ config.name }}__title">{{ data.name }}</strong>
+{%- endblock %}
+
+{% block priceCol %}
+    <div class="{{ config.name }}__col col col--sm-4 text-center">
+        {% block price %}
+            {{ parent() }}
+        {% endblock %}
+    </div>
+{% endblock %}
+
+{%- block priceTitle %}{% endblock -%}
+
+{% block quantityCol %}
+    <div class="{{ config.name }}__col col col--sm-4 text-center">
+        {% block quantity %}
+            <span class="{{ config.name }}__text {{ config.name }}__text--secondary">
+                {{ 'configured_bundle.multiplier' | trans }} {{ data.quantity }}
+            </span>
+        {% endblock %}
+    </div>
+{% endblock %}
+
+{%- block totalTitle %}{% endblock -%}
