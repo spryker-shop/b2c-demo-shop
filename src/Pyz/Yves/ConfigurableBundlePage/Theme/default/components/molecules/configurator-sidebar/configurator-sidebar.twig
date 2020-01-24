@@ -1,0 +1,21 @@
+{% extends molecule('configurator-sidebar', '@SprykerShop:ConfigurableBundlePage') %}
+
+{%- block extraClass %} grid{% endblock -%}
+
+{% block slotItem %}
+    {% set slotClasses = config.name ~ '__item' %}
+
+    {{ parent() }}
+{% endblock %}
+
+{% block summaryItem %}
+    {% set summaryClasses = config.name ~ '__item' %}
+
+    {{ parent() }}
+{% endblock %}
+
+{% block summaryItemAction %}
+    {% set buttonModifiers = buttonModifiers | merge(data.isSeparateItemActive ? ['active'] : ['summary']) %}
+
+    {{ parent() }}
+{% endblock %}

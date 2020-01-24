@@ -41,7 +41,7 @@
                             {% for item in shipmentGroupForm.vars.data.cartItems %}
                                 {% set cartItem = item.bundleProduct ?? item %}
 
-                                {% embed molecule('product-item') with {
+                                {% embed molecule('product-card-item') with {
                                     modifiers: ['expand', 'secondary', 'alternative', 'right-indent-from-tablet'],
                                     data: {
                                         productItem: cartItem,

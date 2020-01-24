@@ -24,7 +24,7 @@
                         {% set cartItem = item.bundleProduct ?? item %}
                         {% set isGiftCardExists = cartItem.giftCardMetadata is not null and cartItem.giftCardMetadata.isGiftCard %}
 
-                        {% embed molecule('product-item') with {
+                        {% embed molecule('product-card-item') with {
                             modifiers: ['expand', 'secondary', 'alternative', 'right-indent-from-tablet'],
                             data: {
                                 productItem: cartItem,

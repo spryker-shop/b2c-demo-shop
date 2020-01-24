@@ -9,7 +9,7 @@
         <h4 class="title title--promotion title--medium title--with-border">{{ 'cart.promotion.items' | trans }}</h4>
 
         {% for product in data.promotionProducts %}
-            {% embed molecule('product-item') with {
+            {% embed molecule('product-card-item') with {
                 data: {
                     productItem: product,
                     isPromotionItem: true
