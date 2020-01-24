@@ -1,0 +1,67 @@
+@include configurable-bundle-page-configurator-product {
+    $name: '.configurator-product';
+
+    margin: 0 0 rem(10);
+    flex-direction: column;
+
+    @include helper-breakpoint-media-min($md-min) {
+        padding-right: rem(20);
+        background-color: $setting-color-alpha-1;
+        flex-direction: row;
+    }
+
+    @include helper-breakpoint-media-min($xl-min) {
+        @include helper-effect-transition(box-shadow);
+        padding-right: rem(40);
+
+        &:hover {
+            box-shadow: rem(2) rem(10) rem(30) 0 $setting-color-gray-3;
+        }
+    }
+
+    &__col {
+        padding: rem(24) 0;
+
+        &:last-child {
+            margin: 0 rem(30);
+
+            @include helper-breakpoint-media-min($md-min) {
+                margin: 0;
+            }
+        }
+
+        &--image-container {
+            position: relative;
+            background-color: $setting-color-white;
+            padding: 0;
+
+            &::before {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                background: $setting-color-alpha-1;
+                z-index: $setting-zi-element;
+            }
+        }
+
+        &--description {
+            padding-left: rem(30);
+            padding-right: rem(30);
+
+            @include helper-breakpoint-media-min($xl-min) {
+                padding-right: rem(150);
+            }
+        }
+    }
+
+    &__sku {
+        display: block;
+        color: $setting-color-gray-3;
+        font-size: map_get($setting-font-size, small);
+        line-height: rem(18);
+        text-transform: uppercase;
+    }
+}
