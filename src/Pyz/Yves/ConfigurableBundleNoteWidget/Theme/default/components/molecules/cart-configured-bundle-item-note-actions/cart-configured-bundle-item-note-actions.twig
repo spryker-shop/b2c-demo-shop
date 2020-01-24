@@ -1,0 +1,19 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'cart-configured-bundle-item-note-actions',
+} %}
+
+{% define data = {
+    buttons: required,
+} %}
+
+{% block body %}
+    <div class="grid {{ config.name }}">
+        {% for button in data.buttons %}
+            <button class="{{ config.name }}__item {{ button.class }}">
+                {{ button.text }}
+            </button>
+        {% endfor %}
+    </div>
+{% endblock %}

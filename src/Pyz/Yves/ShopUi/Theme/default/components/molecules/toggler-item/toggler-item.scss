@@ -55,6 +55,17 @@
                         transform: translateX(rem(-11));
                     }
                 }
+
+                &-note {
+                    padding: 0 rem(20) 0 0;
+                    font: fw(light) map-get($setting-font-size, small) $setting-font-family;
+                    color: $setting-color-text;
+                    letter-spacing: 0;
+
+                    @include helper-breakpoint-media-min($xxl-min) {
+                        font-size: $setting-font-size-base;
+                    }
+                }
             }
 
             &--mobile {
@@ -103,6 +114,10 @@
             &--bundle {
                 padding-left: rem(11);
                 padding-right: rem(11);
+
+                &-note {
+                    padding: rem(15) 0 0;
+                }
             }
 
             &--filter {

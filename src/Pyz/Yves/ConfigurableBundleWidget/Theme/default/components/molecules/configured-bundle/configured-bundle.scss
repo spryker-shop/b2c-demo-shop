@@ -3,7 +3,6 @@
         padding-bottom: rem(20);
         margin-bottom: rem(20);
         border-bottom: rem(1) dotted $setting-color-gray-3;
-        @include helper-ui-clearfix;
 
         &__container {
             padding: rem(8) rem(15);
@@ -29,6 +28,10 @@
             @include helper-breakpoint-media-min($xxl-min) {
                 text-align: right;
             }
+        }
+
+        &__action {
+            color: $setting-color-gray-4;
         }
 
         @content;
