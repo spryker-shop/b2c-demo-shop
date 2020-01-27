@@ -1,0 +1,49 @@
+{% extends view('summary', '@SprykerShop:ConfigurableBundlePage') %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+    <div class="configurator">
+        <h3 class="spacing-bottom spacing-bottom--big">{{ data.title }}</h3>
+        <a href="{{ path('configurable-bundle/configurator/template-selection') }}" class="button button--hollow spacing-bottom spacing-bottom--big">
+            {{ 'configurable_bundle_page.configurator.slot_page.back_link' | trans }}
+        </a>
+        <div class="grid configurator__content">
+            {% block summaryContentInner %}{{ parent() }}{% endblock %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block summarySidebar %}
+    <div class="col col--sm-12">
+        {% block summarySidebarInner %}{{ parent() }}{% endblock %}
+    </div>
+{% endblock %}
+
+{% block summaryProducts %}
+    <div class="grid spacing-x spacing-x--big">
+        {% block summaryProductsInner %}
+            {% include molecule('selected-product-list', 'ConfigurableBundlePage') with {
+                class: 'col col--sm-12 col--xl-8',
+                data: {
+                    form: data.form,
+                    products: data.products,
+                    configurableBundleTemplateStorage: data.configurableBundleTemplateStorage,
+                },
+            } only %}
+
+            <div class="col col--expand">
+                {% block bundleTotal %}{{ parent() }}{% endblock %}
+
+                {% block summaryForm %}
+                    {% block form %}
+                        {% set formClasses = '' %}
+                        {% set buttonModifiers = ['big', 'expand'] %}
+
+                        {{ parent() }}
+                    {% endblock %}
+                {% endblock %}
+            </div>
+        {% endblock %}
+    </div>
+{% endblock %}

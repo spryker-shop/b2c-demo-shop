@@ -3,9 +3,12 @@
         padding: rem(20) 0 rem(70);
 
         &__content {
-            padding-bottom: rem(30);
             border-radius: rem(4);
             border: rem(1) solid $setting-color-gray-3;
+
+            @include helper-breakpoint-media-min($md-min) {
+                padding-bottom: rem(30);
+            }
         }
 
         @content;

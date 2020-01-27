@@ -1,14 +1,26 @@
 @include configurable-bundle-page-configurator-button() {
+    @include helper-effect-transition(all);
+    @include configurable-bundle-page-configurator-button-state($setting-color-black, $setting-color-white, $setting-color-transparent);
+    padding: rem(15) rem(16);
+    border: none;
+    border-radius: rem(2);
+    text-align: center;
+    font: fw(bold) rem(15)/rem(18) $setting-font-family-additional;
+
+    &:hover,
+    &:focus,
+    &--success {
+        @include configurable-bundle-page-configurator-button-state($setting-color-alt, $setting-color-white, $setting-color-transparent);
+    }
+
     &--additional-indention {
-        @include helper-effect-transition(color background);
+        @include configurable-bundle-page-configurator-button-state($setting-color-transparent, $setting-color-alpha-8, $setting-color-transparent);
         padding: rem(16);
         font-weight: fw(medium);
         font-size: rem(13);
         letter-spacing: rem(2.2);
         text-transform: uppercase;
         margin: 0;
-
-        @include configurable-bundle-page-configurator-button-state($setting-color-transparent, $setting-color-alpha-8, $setting-color-transparent);
 
         &:hover,
         &:active,
