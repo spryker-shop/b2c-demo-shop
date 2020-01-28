@@ -18,9 +18,10 @@
             {% block body %}
                 {{ data.text }}
                 {% include atom('icon') with {
+                    class: 'spacing-left spacing-left--small',
                     modifiers: ['progress-check'],
                     data: {
-                        name: 'check',
+                        name: 'check-additional',
                     },
                 } only %}
             {% endblock %}

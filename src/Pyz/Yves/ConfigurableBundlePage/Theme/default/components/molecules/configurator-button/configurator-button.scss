@@ -30,12 +30,26 @@
         }
     }
 
+    &--link {
+        padding: 0;
+        background: none;
+        font: fw(regular) rem(16)/rem(18) $setting-font-family;
+        color: $setting-color-alpha-8;
+
+        &:hover,
+        &:focus {
+            background: none;
+            color: $setting-color-alpha-8;
+            text-decoration: underline;
+        }
+    }
+
     &--active {
         @include configurable-bundle-page-configurator-button-state($setting-color-gray-1, $setting-color-black, $setting-color-transparent);
     }
 
     &--selected {
-        @include configurable-bundle-page-configurator-button-state($setting-color-alpha-7, $setting-color-black, $setting-color-transparent);
+        @include configurable-bundle-page-configurator-button-state($setting-color-alpha-2, $setting-color-main, $setting-color-transparent);
     }
 
     &--summary {
