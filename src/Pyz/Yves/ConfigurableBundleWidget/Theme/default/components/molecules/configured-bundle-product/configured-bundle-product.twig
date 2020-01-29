@@ -11,15 +11,15 @@
         </div>
     </div>
 
-    <div class="col col--sm-6 col--md-9">
-        <div class="col col--sm-12 col--md-4 spacing-x spacing-x--big spacing-x--inner">
+    <div class="col col--sm-6 col--md-9 spacing-top">
+        <div class="spacing-left spacing-left--big spacing-left--inner">
             {%- block generalInformation -%}
                 {{ parent() }}
             {%- endblock -%}
         </div>
 
         {%- block priceInformation -%}
-            <div class="col col--sm-12 col--md-8">
+            <div class="grid spacing-left spacing-left--big spacing-left--inner">
                 {% block priceInformationInner %}
                     {{ parent() }}
                 {% endblock %}
@@ -30,6 +30,7 @@
 
 {%- block imageContainer -%}
     {% include molecule('product-image') with {
+        modifiers: ['no-indent'],
         data: {
             name: data.name,
             image: data.image,
@@ -41,8 +42,14 @@
     <strong class="{{ config.name }}__title">{{ data.name }}</strong>
 {%- endblock %}
 
+{% block sku -%}
+    <small class="{{ config.name }}__sku">
+        {{- 'configured_bundle.item_sku' | trans }} {{ data.sku -}}
+    </small>
+{%- endblock %}
+
 {% block priceCol %}
-    <div class="{{ config.name }}__col col col--sm-4 text-center">
+    <div class="{{ config.name }}__col col col--sm-4">
         {% block price %}
             {{ parent() }}
         {% endblock %}

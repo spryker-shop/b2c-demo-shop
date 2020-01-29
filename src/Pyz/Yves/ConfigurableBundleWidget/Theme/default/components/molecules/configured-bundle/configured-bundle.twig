@@ -8,7 +8,7 @@
             {%- block bundleInner -%}
                 <div class="col col--sm-12 col--lg-6">
                     {%- block bundleName -%}
-                        <h4 class="spacing-right">
+                        <h4 class="{{ config.name }}__title spacing-right">
                             {%- block bundleNameText -%}
                                 {{ parent() }}
                             {%- endblock -%}
@@ -17,11 +17,15 @@
                 </div>
                 <div class="{{ config.name }}__information-item col col--sm-12 col--lg-6 grid grid--middle">
                     {%- block bundleQuantity -%}
-                        {{ parent() }}
+                        <div class="col col--lg-6">
+                            {% block bundleQuantityInner %}
+                                {{ parent() }}
+                            {% endblock %}
+                        </div>
                     {%- endblock -%}
 
                     {%- block bundlePriceInformation -%}
-                        <strong class="col col--md-4 {{ config.name }}__total">
+                        <strong class="col col--sm-12 col--lg-6 {{ config.name }}__total">
                             {%- block bundleTotalInner -%}
                                 {{ parent() }}
                             {%- endblock -%}
@@ -46,6 +50,15 @@
         {% endblock -%}
     </div>
 {%- endblock -%}
+
+{% block notEditableConfigurableBundleNote %}
+    {% include molecule('cart-configured-bundle-item-note', 'ConfigurableBundleNoteWidget') ignore missing with {
+        data: {
+            canWrite: false,
+            note: data.bundle.note,
+        },
+    } only %}
+{% endblock %}
 
 {%- block bundleTotalTitle %}{% endblock -%}
 
