@@ -5,6 +5,10 @@
         &__title {
             display: block;
             font: fw(regular) map-get($setting-font-size, default) $setting-font-family-additional;
+
+            &--bold {
+                font-weight: fw(medium);
+            }
         }
 
         &__sku {
@@ -12,11 +16,31 @@
             color: $setting-color-gray-4;
         }
 
+        &__prices {
+            padding-left: rem(16);
+
+            @include helper-breakpoint-media-min($xxl-min) {
+                padding-left: 0;
+            }
+        }
+
+        &__col {
+            &--text-center {
+                @include helper-breakpoint-media-min($xxl-min) {
+                    text-align: center;
+                }
+            }
+        }
+
         &__text {
             font: fw(regular) $setting-font-size-base $setting-font-family-additional;
 
             &--secondary {
                 color: $setting-color-gray-3;
+            }
+
+            &--bold {
+                font-weight: fw(medium);
             }
         }
 

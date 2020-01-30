@@ -1,39 +1,37 @@
-{% extends molecule('configured-bundle-product', '@SprykerShop:ConfigurableBundleWidget') %}
+{% extends molecule('ordered-configured-bundle-product', '@SprykerShop:SalesConfigurableBundleWidget') %}
 
 {%- block extraClass %} grid{% endblock -%}
 
 {% block body %}
     <div class="col col--sm-6 col--md-3 grid">
-        <div class="col col--sm-12">
-            {%- block thumbnailWrapper -%}
-                {{ parent() }}
-            {%- endblock -%}
+        <div class="col col--sm-12 grid grid--middle">
+            <div class="col">
+                {% widget 'CustomerReorderItemCheckboxWidget' args [data.product] only %}{% endwidget %}
+            </div>
+
+            <div class="col col--expand">
+                {%- block thumbnailWrapper -%}
+                    {{ parent() }}
+                {%- endblock -%}
+            </div>
         </div>
     </div>
 
-    {% set productTextInformationClasses = 'col col--sm-6 col--md-9 spacing-top' %}
-    {% set titleProductBlockClasses = 'spacing-left spacing-left--big spacing-left--inner' %}
-    {% set priceInformationClasses = 'grid spacing-left spacing-left--big spacing-left--inner' %}
-
-    {%- block productTextInformation -%}
-        <div class="{{ productTextInformationClasses }}">
-            {%- block titleProductBlock -%}
-                <div class="{{ titleProductBlockClasses }}">
-                    {%- block generalInformation -%}
-                        {{ parent() }}
-                    {%- endblock -%}
-                </div>
-            {%- endblock -%}
-
-            {%- block priceInformation -%}
-                <div class="{{ priceInformationClasses }}">
-                    {% block priceInformationInner %}
-                        {{ parent() }}
-                    {% endblock %}
-                </div>
+    <div class="col col--sm-6 col--md-9 spacing-top">
+        <div class="spacing-left spacing-left--big spacing-left--inner">
+            {%- block generalInformation -%}
+                {{ parent() }}
             {%- endblock -%}
         </div>
-    {%- endblock -%}
+
+        {%- block priceInformation -%}
+            <div class="grid spacing-left spacing-left--big spacing-left--inner">
+                {% block priceInformationInner %}
+                    {{ parent() }}
+                {% endblock %}
+            </div>
+        {%- endblock -%}
+    </div>
 {% endblock -%}
 
 {%- block imageContainer -%}

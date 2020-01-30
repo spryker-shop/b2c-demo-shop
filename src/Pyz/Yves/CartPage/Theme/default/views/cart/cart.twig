@@ -44,6 +44,20 @@
                                 isEditable: data.isQuoteEditable,
                             },
                         } only %}
+                            {% block bundleItem %}
+                                {% include molecule('configured-bundle-secondary', 'ConfigurableBundleWidget') with {
+                                    data: {
+                                        bundle: bundle,
+                                        items: data.items,
+                                        currencyIsoCode: data.currencyIsoCode,
+                                        priceMode: data.priceMode,
+                                        isQuantityChangeable: data.isQuantityChangeable,
+                                        isEditable: data.isEditable,
+                                        isQuantitySummaryVisible: data.isQuantitySummaryVisible,
+                                        quote: data.quote,
+                                    },
+                                } only %}
+                            {% endblock %}
                         {% endwidget %}
 
                         {% for cartItem in transformedCartItems if not cartItem.configuredBundleItem %}
