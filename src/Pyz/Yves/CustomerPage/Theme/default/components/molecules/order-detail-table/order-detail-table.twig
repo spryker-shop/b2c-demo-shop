@@ -12,8 +12,12 @@
                         '%total%': loop.length,
                     }) }}
                 </h3>
+                {% widget 'OrderConfiguredBundleWidget' args [data.order, shipmentGroup.items] only %}
+                {% endwidget %}
 
-                {% for item in shipmentGroup.cartItems %}
+                {% set itemsExceptConfiguredBundles = shipmentGroup.items | filter(item => item.salesOrderConfiguredBundleItem is not defined or item.salesOrderConfiguredBundleItem is empty) %}
+
+                {% for item in itemsExceptConfiguredBundles %}
                     {% set cartItem = item.bundleProduct ?? item %}
                     {% set isGiftCardExists = cartItem.giftCardMetadata is not null and cartItem.giftCardMetadata.isGiftCard %}
 

@@ -17,6 +17,9 @@
                 class: 'form__action--checkout button button--hollow button--expand',
             },
         },
+        embed: {
+            cart: data.forms.shipment.vars.data,
+        },
     } only %}
         {% block fieldset %}
             {% set shipmentGroupCollectionForm = data.form.shipmentGroups | default %}
@@ -38,7 +41,18 @@
                                 }) }}
                             </h3>
 
-                            {% for item in shipmentGroupForm.vars.data.cartItems %}
+                            {% set cartItems = shipmentGroupForm.vars.data.cartItems %}
+                            {% set itemsExceptConfiguredBundles = cartItems | filter(item => item.configuredBundleItem is not defined or item.configuredBundleItem is empty) %}
+
+                            {% widget 'QuoteConfiguredBundleWidget' args [embed.cart, cartItems] with {
+                                data: {
+                                    isEditable: false,
+                                    isQuantityVisible: true,
+                                },
+                            } only %}
+                            {% endwidget %}
+
+                            {% for item in itemsExceptConfiguredBundles %}
                                 {% set cartItem = item.bundleProduct ?? item %}
 
                                 {% embed molecule('product-card-item') with {
