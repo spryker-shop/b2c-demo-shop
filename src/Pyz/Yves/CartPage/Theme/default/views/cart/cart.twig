@@ -44,19 +44,28 @@
                                 isEditable: data.isQuoteEditable,
                             },
                         } only %}
-                            {% block bundleItem %}
-                                {% include molecule('configured-bundle-secondary', 'ConfigurableBundleWidget') with {
-                                    data: {
-                                        bundle: bundle,
-                                        items: data.items,
-                                        currencyIsoCode: data.currencyIsoCode,
-                                        priceMode: data.priceMode,
-                                        isQuantityChangeable: data.isQuantityChangeable,
-                                        isEditable: data.isEditable,
-                                        isQuantitySummaryVisible: data.isQuantitySummaryVisible,
-                                        quote: data.quote,
-                                    },
-                                } only %}
+                            {% block body %}
+                                {% set configuredBundleListNumber = 0 %}
+
+                                {% for bundle in data.configuredBundles %}
+                                    {% set configuredBundleListNumber = configuredBundleListNumber + 1 %}
+
+                                    {% block bundleItem %}
+                                        {% include molecule('configured-bundle-secondary', 'ConfigurableBundleWidget') with {
+                                            data: {
+                                                bundle: bundle,
+                                                items: data.items,
+                                                currencyIsoCode: data.currencyIsoCode,
+                                                priceMode: data.priceMode,
+                                                isQuantityChangeable: data.isQuantityChangeable,
+                                                isEditable: data.isEditable,
+                                                isQuantitySummaryVisible: data.isQuantitySummaryVisible,
+                                                quote: data.quote,
+                                                configuredBundleListNumber: configuredBundleListNumber,
+                                            },
+                                        } only %}
+                                    {% endblock %}
+                                {% endfor %}
                             {% endblock %}
                         {% endwidget %}
 

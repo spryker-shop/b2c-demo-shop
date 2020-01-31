@@ -12,6 +12,7 @@
 
         &__container {
             display: flex;
+            flex-wrap: wrap;
             align-items: center;
             padding: rem(8) rem(15);
             background: $setting-color-gray-1;
@@ -19,22 +20,10 @@
             border-bottom: rem(1) dotted $setting-color-gray-3;
         }
 
-        &__information-item {
-            width: 100%;
-            justify-content: flex-start;
-            margin-left: rem(-16);
-
-            @include helper-breakpoint-media-min($xxl-min) {
-                width: 50%;
-                justify-content: flex-end;
-                margin-left: 0;
-            }
-        }
-
         &__total {
             font: fw(regular) $setting-font-size-base $setting-font-family-additional;
 
-            @include helper-breakpoint-media-min($xxl-min) {
+            @include helper-breakpoint-media-min($lg-min) {
                 text-align: right;
             }
         }

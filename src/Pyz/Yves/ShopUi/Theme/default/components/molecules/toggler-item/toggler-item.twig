@@ -20,7 +20,7 @@
     {% set togglerClass = data.isToggler ? (data.isActive ? activeClass : data.hiddenClass) %}
     {% set titleActiveClass = data.isActive ? activeClass %}
     {% set titleReadOnlyClass = not data.isToggler ? config.name ~ '__title--read-only' %}
-    {% set targetAttribute = data.targetClass ? 'data-toggle-target-class-name=' ~ data.targetClass %}
+    {% set targetAttribute = data.targetClass ? 'data-toggle-target-class-name=' ~ data.targetClass%}
 
     {% block title %}
         <h4 class="title title--h6 title--uppercase text-break {{ component.renderClass(config.name ~ '__title', modifiers) }} {{ data.triggerClass }} {{ titleActiveClass }} {{ titleReadOnlyClass }}" {{ targetAttribute }}>{{ data.title }}</h4>

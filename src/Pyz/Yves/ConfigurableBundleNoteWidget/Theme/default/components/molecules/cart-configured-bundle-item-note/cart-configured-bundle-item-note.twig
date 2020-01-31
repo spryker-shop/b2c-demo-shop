@@ -10,6 +10,7 @@
     canWrite: required,
     label: '',
     note: '',
+    configuredBundleListNumber: '',
 } %}
 
 {% define attributes = {
@@ -61,7 +62,7 @@
                                     data: {
                                         title: 'configurable_bundle_note.enter_note' | trans,
                                         triggerClass: config.jsName ~ '__trigger',
-                                        targetClass: config.jsName ~ '__target',
+                                        targetClass: config.jsName ~ '__target' ~ data.configuredBundleListNumber,
                                     },
                                     embed: {
                                         form: data.form,
