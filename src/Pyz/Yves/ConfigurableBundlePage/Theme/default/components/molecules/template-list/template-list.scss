@@ -1,4 +1,6 @@
 @mixin configurable-bundle-page-template-list($name: '.template-list') {
+    $border-radius: rem(4);
+
     #{$name} {
         &__list {
             max-width: none;
@@ -12,7 +14,7 @@
             flex-direction: column;
             position: relative;
             height: 100%;
-            border-radius: rem(4);
+            border-radius: $border-radius;
             box-shadow: 0 0 0 $setting-color-transparent;
             background-color: $setting-color-alpha-1;
             overflow: hidden;

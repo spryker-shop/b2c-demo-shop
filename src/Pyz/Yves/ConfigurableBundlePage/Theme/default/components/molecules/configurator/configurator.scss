@@ -1,9 +1,11 @@
 @mixin configurable-bundle-page-configurator($name: '.configurator') {
+    $border-radius: rem(4);
+
     #{$name} {
         padding: rem(20) 0 rem(70);
 
         &__content {
-            border-radius: rem(4);
+            border-radius: $border-radius;
             border: rem(1) solid $setting-color-gray-3;
 
             @include helper-breakpoint-media-min($md-min) {
