@@ -1,0 +1,32 @@
+{% extends molecule('slot-page-redirect-form', '@SprykerShop:ConfigurableBundlePage') %}
+
+{% block action %}
+    {% set extraModifier = isActive ? 'active' %}
+    {% set buttonModifiers = data.submitButtonModifiers | merge([extraModifier]) %}
+
+    {% if isSelectedProduct %}
+        {% set extraModifier = 'selected' %}
+        {% set buttonModifiers = data.submitButtonModifiers | merge([extraModifier]) %}
+
+        {% embed molecule('configurator-button', 'ConfigurableBundlePage') with {
+            modifiers: buttonModifiers,
+            attributes: buttonAttributes,
+            data: {
+                text: data.submitButtonText,
+            },
+        } only %}
+            {% block body %}
+                {{ data.text }}
+                {% include atom('icon') with {
+                    class: 'spacing-left spacing-left--small',
+                    modifiers: ['progress-check'],
+                    data: {
+                        name: 'check-additional',
+                    },
+                } only %}
+            {% endblock %}
+        {% endembed %}
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
