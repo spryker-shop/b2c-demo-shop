@@ -37,6 +37,9 @@ sections:
             command: "vendor/bin/console translator:generate-cache"
 
     build-development:
+        generate-transfers:
+            command: "vendor/bin/console transfer:generate"
+
         generate-transfer-databuilders:
             command: "vendor/bin/console transfer:databuilder:generate"
 
