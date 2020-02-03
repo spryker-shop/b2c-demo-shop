@@ -13,7 +13,6 @@ use Spryker\Shared\Auth\AuthConstants;
 use Spryker\Shared\Cms\CmsConstants;
 use Spryker\Shared\CmsGui\CmsGuiConstants;
 use Spryker\Shared\Collector\CollectorConstants;
-use Spryker\Shared\Config\ConfigConstants;
 use Spryker\Shared\Customer\CustomerConstants;
 use Spryker\Shared\DocumentationGeneratorRestApi\DocumentationGeneratorRestApiConstants;
 use Spryker\Shared\DummyPayment\DummyPaymentConfig;
@@ -72,6 +71,7 @@ use Spryker\Zed\Propel\PropelConfig;
 use SprykerEco\Shared\Loggly\LogglyConstants;
 use SprykerShop\Shared\CalculationPage\CalculationPageConstants;
 use SprykerShop\Shared\ErrorPage\ErrorPageConstants;
+use SprykerShop\Shared\WebProfilerWidget\WebProfilerWidgetConstants;
 use Twig\Cache\FilesystemCache;
 
 $CURRENT_STORE = Store::getInstance()->getStoreName();
@@ -162,9 +162,10 @@ $config[ApplicationConstants::PROJECT_TIMEZONE] = 'UTC';
 $config[ApplicationConstants::ENABLE_WEB_PROFILER] = false;
 $config[KernelConstants::STORE_PREFIX] = 'DEV';
 $config[ApplicationConstants::ENABLE_APPLICATION_DEBUG] = true;
-$config[WebProfilerConstants::ENABLE_WEB_PROFILER]
-    = $config[ConfigConstants::ENABLE_WEB_PROFILER]
-    = true;
+
+$config[WebProfilerConstants::IS_WEB_PROFILER_ENABLED]
+    = $config[WebProfilerWidgetConstants::IS_WEB_PROFILER_ENABLED]
+    = getenv('SPRYKER_DEBUG_ENABLED') && !getenv('SPRYKER_TESTING_ENABLED');
 
 $ENVIRONMENT_PREFIX = '';
 $config[SequenceNumberConstants::ENVIRONMENT_PREFIX] = $ENVIRONMENT_PREFIX;
@@ -232,7 +233,7 @@ $config[AclConstants::ACL_DEFAULT_RULES] = [
         'type' => 'allow',
     ],
     [
-        'bundle' => 'healthCheck',
+        'bundle' => 'health-check',
         'controller' => 'index',
         'action' => 'index',
         'type' => 'allow',
@@ -259,7 +260,7 @@ $config[AclConstants::ACL_USER_RULE_WHITELIST] = [
         'type' => 'allow',
     ],
     [
-        'bundle' => 'healthCheck',
+        'bundle' => 'health-check',
         'controller' => 'index',
         'action' => 'index',
         'type' => 'allow',
@@ -677,7 +678,5 @@ $config[ConsoleConstants::ENABLE_DEVELOPMENT_CONSOLE_COMMANDS] = (bool)getenv('D
 $config[DocumentationGeneratorRestApiConstants::ENABLE_REST_API_DOCUMENTATION_GENERATION] = true;
 
 // ----------- HTTP Security
-$config[KernelConstants::DOMAIN_WHITELIST] = [
-    $config[ApplicationConstants::HOST_YVES],
-    $config[ApplicationConstants::HOST_ZED],
-];
+$config[KernelConstants::STRICT_DOMAIN_REDIRECT] = false;
+$config[KernelConstants::DOMAIN_WHITELIST] = [];
