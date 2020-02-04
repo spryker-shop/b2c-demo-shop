@@ -31,7 +31,15 @@
         }
 
         &__action {
-            color: $setting-color-gray-4;
+            color: $setting-color-black;
+            opacity: 0.4;
+
+            &:hover,
+            &:focus {
+                text-decoration: none;
+                color: inherit;
+                opacity: 1;
+            }
         }
 
         @content;

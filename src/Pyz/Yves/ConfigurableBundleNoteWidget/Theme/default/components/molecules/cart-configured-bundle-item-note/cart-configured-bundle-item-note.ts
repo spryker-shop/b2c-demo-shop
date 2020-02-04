@@ -18,31 +18,25 @@ export default class CartConfiguredBundleItemNote extends Component {
     }
 
     protected mapEvents(): void {
-        this.addEventListener('click', (event: Event) => this.onTriggerClick(event));
+        if (this.editButton) {
+            this.editButton.addEventListener('click', () => this.onEventButtonClick());
+        }
+
+        if (this.removeButton) {
+            this.removeButton.addEventListener('click', () => this.onRemoveButtonClick());
+        }
     }
 
-    protected onTriggerClick(event: Event): void {
-        let target = <HTMLElement>event.target;
+    protected onEventButtonClick(): void {
+        this.classToggle(this.formTarget);
+        this.classToggle(this.textTarget);
+    }
 
-        while (target !== this) {
-            if (target === this.editButton) {
-                event.preventDefault();
-                this.classToggle(this.formTarget);
-                this.classToggle(this.textTarget);
-
-                return;
-            }
-            if (target === this.removeButton) {
-                event.preventDefault();
-                const form = <HTMLFormElement>this.formTarget.getElementsByTagName('form')[0];
-                const textarea = <HTMLTextAreaElement>form.getElementsByTagName('textarea')[0];
-                textarea.value = '';
-                form.submit();
-
-                return;
-            }
-            target = <HTMLElement>target.parentNode;
-        }
+    protected onRemoveButtonClick(): void {
+        const form = <HTMLFormElement>this.formTarget.getElementsByTagName('form')[0];
+        const textarea = <HTMLTextAreaElement>form.getElementsByTagName('textarea')[0];
+        textarea.value = '';
+        form.submit();
     }
 
     protected classToggle(activeTrigger: HTMLElement): void {

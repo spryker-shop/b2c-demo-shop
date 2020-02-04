@@ -36,13 +36,6 @@
         flex-shrink: 0;
     }
 
-    &__image {
-        &--cart-bundle {
-            max-height: calc(100% - #{rem(10)});
-            max-width: calc(100% - #{rem(10)});
-        }
-    }
-
     &--product-set {
         height: rem(208);
         margin-left: 0;
@@ -69,8 +62,15 @@
     &--bundle-list {
         height: auto;
         margin: 0;
+    }
 
-        #{$name}__image {
+    &__image {
+        &--cart-bundle {
+            max-height: calc(100% - #{rem(10)});
+            max-width: calc(100% - #{rem(10)});
+        }
+
+        &--bundle-list {
             position: relative;
             vertical-align: top;
         }

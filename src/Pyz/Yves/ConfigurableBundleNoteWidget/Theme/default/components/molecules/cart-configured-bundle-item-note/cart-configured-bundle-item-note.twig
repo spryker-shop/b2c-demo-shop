@@ -51,17 +51,16 @@
                     {% endif %}
                     {% block form %}
                         {% if data.canWrite %}
-                            {% set jsModifier = data.form.vars.value.groupKey | replace({"." : ""}) %}
                             {% set hiddenWrapperClass = isNoteNotEmpty ? 'is-hidden' %}
                             {% set hiddenContentClass = not isNoteNotEmpty ? 'is-hidden' %}
                             {% set activeClass = isNoteNotEmpty ? 'active' %}
 
-                            <div class="{{ config.name }}__form {{ config.jsName }}__form {{ config.jsName }}__form--{{ jsModifier }} {{ hiddenWrapperClass }}">
+                            <div class="{{ config.name }}__form {{ config.jsName }}__form {{ hiddenWrapperClass }}">
                                 {% embed molecule('toggler-item') with {
                                     modifiers: ['bundle-note'],
                                     data: {
                                         title: 'configurable_bundle_note.enter_note' | trans,
-                                        triggerClass: config.jsName ~ '__trigger',
+                                        triggerClass: config.jsName ~ '__trigger--' ~ data.configuredBundleListNumber,
                                         targetClass: config.jsName ~ '__target' ~ data.configuredBundleListNumber,
                                     },
                                     embed: {
@@ -69,7 +68,8 @@
                                     }
                                 } only %}
                                     {% block title %}
-                                        <h4 class="text-break {{ component.renderClass(config.name ~ '__title', modifiers) }} {{ data.triggerClass }} {{ titleActiveClass }} {{ titleReadOnlyClass }}" {{ targetAttribute }}>{{ data.title }}</h4>
+                                        {% set titleClasses = 'text-break' %}
+                                        {{ parent() }}
                                     {% endblock %}
 
                                     {% block contentText %}

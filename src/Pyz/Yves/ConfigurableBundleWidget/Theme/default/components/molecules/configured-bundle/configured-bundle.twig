@@ -40,7 +40,7 @@
         {{ parent() }}
     {% endblock %}
 
-    <div class="grid grid--justify grid--bottom">
+    <div class="grid grid--right grid--bottom">
         {% block configurableBundleNote %}
             {{ parent() }}
         {% endblock -%}
@@ -63,7 +63,7 @@
 {%- block bundleTotalTitle %}{% endblock -%}
 
 {%- block bundleActionsInner %}
-    {% set bundleActionClassName = config.name ~ '__action spacing-x spacing-top spacing-x--big spacing-top--big' %}
+    {% set bundleActionClassName = config.name ~ '__action spacing-x spacing-x--big' %}
 
     {{ parent() }}
 {% endblock -%}

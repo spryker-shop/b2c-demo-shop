@@ -8,12 +8,16 @@
     buttons: required,
 } %}
 
+{%- block extraClass -%}
+    {{ parent() }} grid
+{%- endblock -%}
+
 {% block body %}
-    <div class="grid {{ config.name }}">
-        {% for button in data.buttons %}
-            <button class="{{ config.name }}__item {{ button.class }}">
+    {% for button in data.buttons %}
+        {% if button.text %}
+            <button class="{{ config.name }}__item {{ button.class | default }}">
                 {{ button.text }}
             </button>
-        {% endfor %}
-    </div>
+        {% endif %}
+    {% endfor %}
 {% endblock %}

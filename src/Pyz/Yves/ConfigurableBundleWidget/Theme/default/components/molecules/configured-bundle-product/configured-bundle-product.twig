@@ -3,22 +3,20 @@
 {%- block extraClass %} grid{% endblock -%}
 
 {% block body %}
-    <div class="col col--sm-6 col--md-3 grid">
-        <div class="col col--sm-12">
-            {%- block thumbnailWrapper -%}
-                {{ parent() }}
-            {%- endblock -%}
-        </div>
+    <div class="col col--sm-6 col--md-3">
+        {%- block thumbnailWrapper -%}
+            {{ parent() }}
+        {%- endblock -%}
     </div>
 
     {% set productTextInformationClasses = 'col col--sm-6 col--md-9 spacing-top' %}
-    {% set titleProductBlockClasses = 'spacing-left spacing-left--big spacing-left--inner' %}
+    {% set titleProductClasses = 'spacing-left spacing-left--big spacing-left--inner' %}
     {% set priceInformationClasses = 'grid spacing-left spacing-left--big spacing-left--inner' %}
 
     {%- block productTextInformation -%}
         <div class="{{ productTextInformationClasses }}">
-            {%- block titleProductBlock -%}
-                <div class="{{ titleProductBlockClasses }}">
+            {%- block titleProduct -%}
+                <div class="{{ titleProductClasses }}">
                     {%- block generalInformation -%}
                         {{ parent() }}
                     {%- endblock -%}

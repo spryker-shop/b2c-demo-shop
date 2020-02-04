@@ -29,7 +29,6 @@ use SprykerShop\Yves\CartNoteWidget\Widget\CartItemNoteFormWidget;
 use SprykerShop\Yves\CartNoteWidget\Widget\CartNoteFormWidget;
 use SprykerShop\Yves\CategoryImageStorageWidget\Widget\CategoryImageStorageWidget;
 use SprykerShop\Yves\CheckoutWidget\Widget\CheckoutBreadcrumbWidget;
-use SprykerShop\Yves\ConfigurableBundleNoteWidget\Widget\ConfiguredBundleNoteWidget;
 use SprykerShop\Yves\ConfigurableBundleWidget\Widget\QuoteConfiguredBundleWidget;
 use SprykerShop\Yves\CurrencyWidget\Widget\CurrencyWidget;
 use SprykerShop\Yves\CustomerPage\Widget\CustomerNavigationWidget;
@@ -137,7 +136,6 @@ class ShopApplicationDependencyProvider extends SprykerShopApplicationDependency
             AvailabilityNotificationSubscriptionWidget::class,
             QuoteConfiguredBundleWidget::class,
             OrderConfiguredBundleWidget::class,
-            ConfiguredBundleNoteWidget::class,
             ProductConcreteSearchGridWidget::class,
             PriceProductWidget::class,
         ];
