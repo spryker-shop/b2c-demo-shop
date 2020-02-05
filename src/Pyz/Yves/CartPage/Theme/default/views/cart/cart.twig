@@ -36,35 +36,14 @@
                         <span class="cart-box__quantity col">{{ app['cart.quantity'] }} {{ 'item' | trans }}</span>
                     </div>
                     <div class="page-layout-cart__items-wrap">
-                        {% widget 'QuoteConfiguredBundleWidget' args [data.cart] with {
-                            data: {
-                                isEditable: data.isQuoteEditable,
-                            },
-                        } only %}
-                            {% block body %}
-                                {% set configuredBundleListNumber = 0 %}
-
-                                {% for bundle in data.configuredBundles %}
-                                    {% set configuredBundleListNumber = configuredBundleListNumber + 1 %}
-
-                                    {% block bundleItem %}
-                                        {% include molecule('configured-bundle-secondary', 'ConfigurableBundleWidget') with {
-                                            data: {
-                                                bundle: bundle,
-                                                items: data.items,
-                                                currencyIsoCode: data.currencyIsoCode,
-                                                priceMode: data.priceMode,
-                                                isQuantityChangeable: data.isQuantityChangeable,
-                                                isEditable: data.isEditable,
-                                                isQuantitySummaryVisible: data.isQuantitySummaryVisible,
-                                                quote: data.quote,
-                                                configuredBundleListNumber: configuredBundleListNumber,
-                                            },
-                                        } only %}
-                                    {% endblock %}
-                                {% endfor %}
-                            {% endblock %}
-                        {% endwidget %}
+                        {% widget 'QuoteConfiguredBundleWidget'
+                            args [data.cart]
+                            use view('quote-configured-bundle-alternative', 'ConfigurableBundleWidget')
+                            with {
+                                data: {
+                                    isEditable: data.isQuoteEditable,
+                                },
+                        } only %}{% endwidget %}
 
                         {% set productBundleItemCounterWidget = findWidget('ProductBundleItemCounterWidget', [data.cart]) %}
                         {% set transformedCartItems = productBundleItemCounterWidget.items | default(data.cartItems) %}
