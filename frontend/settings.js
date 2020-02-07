@@ -128,6 +128,19 @@ const getAppSettingsByTheme = (namespaceConfig, theme, pathToConfig) => {
         ]
     );
 
+    // define if current mode is production
+    const isProductionMode = () => {
+        const { argv } = process;
+        const currentMode = argv[argv.length - 1];
+        const isValidMode = Object.values(globalSettings.modes).find(mode => mode === currentMode);
+
+        if (!isValidMode) {
+            throw new Error(`Mode "${currentMode}" is not available`);
+        }
+
+        return currentMode === globalSettings.modes.prod;
+    };
+
     // return settings
     return {
         name,
@@ -137,6 +150,8 @@ const getAppSettingsByTheme = (namespaceConfig, theme, pathToConfig) => {
         urls,
 
         context: globalSettings.context,
+
+        isProductionMode: isProductionMode(),
 
         // define settings for suite-frontend-builder finder
         find: {

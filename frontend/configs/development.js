@@ -124,7 +124,7 @@ const getConfiguration = async appSettings => {
             plugins: [
                 new webpack.DefinePlugin({
                     __NAME__: `'${appSettings.name}'`,
-                    __PRODUCTION__: false
+                    __PRODUCTION__: appSettings.isProductionMode
                 }),
 
                 ...getAssetsConfig(appSettings),
