@@ -27,7 +27,7 @@
             {% block contentInner %}
                 <div class="{{ config.name }}__container">
                     {% if isNoteNotEmpty %}
-                        <div class="{{ config.name }}__text-wrap {{ config.jsName }}__text-wrap">
+                        <div class="{{ config.jsName }}__text-wrap">
                             <div class="{{ config.name }}__text">{{ note | nl2br }}</div>
                             {% if data.canWrite %}
                                 {% block cartItemNoteActions %}
@@ -55,7 +55,7 @@
                             {% set hiddenContentClass = not isNoteNotEmpty ? 'is-hidden' %}
                             {% set activeClass = isNoteNotEmpty ? 'active' %}
 
-                            <div class="{{ config.name }}__form {{ config.jsName }}__form {{ hiddenWrapperClass }}">
+                            <div class="{{ config.jsName }}__form {{ hiddenWrapperClass }}">
                                 {% embed molecule('toggler-item') with {
                                     modifiers: ['bundle-note'],
                                     data: {
@@ -65,7 +65,7 @@
                                     },
                                     embed: {
                                         form: data.form,
-                                    }
+                                    },
                                 } only %}
                                     {% block title %}
                                         {% set titleClasses = 'text-break' %}
@@ -89,7 +89,7 @@
                                             {% block field %}
                                                 {{ form_row(field, {
                                                     rowAttr: {
-                                                        class: config.name ~ '__field ' ~ fieldLayoutClass
+                                                        class: config.name ~ '__field ' ~ fieldLayoutClass,
                                                     },
                                                     'label':false,
                                                 }) }}

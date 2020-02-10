@@ -19,7 +19,7 @@ export default class CartConfiguredBundleItemNote extends Component {
 
     protected mapEvents(): void {
         if (this.editButton) {
-            this.editButton.addEventListener('click', () => this.onEventButtonClick());
+            this.editButton.addEventListener('click', () => this.onEditButtonClick());
         }
 
         if (this.removeButton) {
@@ -27,7 +27,7 @@ export default class CartConfiguredBundleItemNote extends Component {
         }
     }
 
-    protected onEventButtonClick(): void {
+    protected onEditButtonClick(): void {
         this.classToggle(this.formTarget);
         this.classToggle(this.textTarget);
     }
