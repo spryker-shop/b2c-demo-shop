@@ -1,0 +1,13 @@
+@mixin shop-ui-toggler-accordion($name: '.toggler-accordion') {
+    #{$name} {
+        &--active {
+            &::after {
+                display: none;
+            }
+        }
+
+        @content;
+    }
+}
+
+@include shop-ui-toggler-accordion();
