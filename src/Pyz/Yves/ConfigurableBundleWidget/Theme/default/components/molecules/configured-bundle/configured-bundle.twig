@@ -5,6 +5,7 @@
 {%- block body -%}
     {%- block bundle -%}
         <div class="{{ config.name }}__container grid grid--middle">
+            {% set classBundleTotal = '' %}
             {%- block bundleInner -%}
                 <div class="col col--sm-12 col--lg-6">
                     {%- block bundleName -%}
@@ -15,7 +16,7 @@
                         </h4>
                     {%- endblock -%}
                 </div>
-                <div class="{{ config.name }}__information-item col col--sm-12 col--lg-6 grid grid--middle">
+                <div class="col col--sm-12 col--lg-6 grid grid--middle {{ classBundleTotal }}">
                     {%- block bundleQuantity -%}
                         <div class="col col--lg-6 {{ config.name }}__quantity">
                             {% block bundleQuantityInner %}
