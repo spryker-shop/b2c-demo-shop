@@ -3,13 +3,13 @@
 {%- block extraClass %} grid{% endblock -%}
 
 {% block body %}
-    <div class="col col--sm-6 col--md-3 grid">
+    <div class="col grid">
         <div class="col col--sm-12 grid grid--middle">
             <div class="col">
                 {% widget 'CustomerReorderItemCheckboxWidget' args [data.product] only %}{% endwidget %}
             </div>
 
-            <div class="col col--expand">
+            <div class="col {{ config.name }}__thumbnail-wrapper">
                 {%- block thumbnailWrapper -%}
                     {{ parent() }}
                 {%- endblock -%}
@@ -17,7 +17,7 @@
         </div>
     </div>
 
-    <div class="col col--sm-6 col--md-9 spacing-top">
+    <div class="col col--expand spacing-top">
         <div class="spacing-left spacing-left--big spacing-left--inner">
             {%- block generalInformation -%}
                 {{ parent() }}
