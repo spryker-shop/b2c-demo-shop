@@ -2,6 +2,14 @@
     #{$name} {
         padding: 0 rem(15) rem(21) 0;
 
+        &--mini-cart {
+            padding-left: rem(20);
+
+            &:last-child {
+                padding-bottom: 0;
+            }
+        }
+
         &__title {
             display: block;
             font: fw(regular) map-get($setting-font-size, default) $setting-font-family-additional;
@@ -33,6 +41,11 @@
 
             &--bold {
                 font-weight: fw(bold);
+            }
+
+            &--mini-cart {
+                color: $setting-color-black;
+                font-weight: fw(light);
             }
         }
 

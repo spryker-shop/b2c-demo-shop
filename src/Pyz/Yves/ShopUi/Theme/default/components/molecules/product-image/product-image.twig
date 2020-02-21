@@ -12,7 +12,7 @@
 {% block body %}
     {% if data.image is not empty %}
         {% include atom('thumbnail') with {
-            modifiers: ['small'],
+            modifiers: ['small'] | merge(modifiers),
             attributes: {
                 alt: data.name,
                 src: data.image,

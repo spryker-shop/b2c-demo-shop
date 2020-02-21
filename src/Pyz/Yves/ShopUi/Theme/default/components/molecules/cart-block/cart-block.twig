@@ -16,10 +16,10 @@
 
         {% widget 'QuoteConfiguredBundleWidget'
             args [data.quote]
-            use view('quote-configured-bundle-alternative', 'ConfigurableBundleWidget')
+            use view('quote-configured-bundle-mini-cart', 'ConfigurableBundleWidget')
             with {
             data: {
-                isEditable: false
+                isEditable: true,
             },
         } only %}{% endwidget %}
 
