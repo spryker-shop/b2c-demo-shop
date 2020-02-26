@@ -16,16 +16,4 @@
     {{ parent() }}
 {% endblock %}
 
-{% block templateTitleImage %}
-    {% set imageModifiers = imageModifiers | merge(['bundle-list']) %}
-
-    {% include atom('thumbnail') with {
-        modifiers: imageModifiers,
-        attributes: {
-            src: template.images.0.externalUrlSmall,
-            alt: template.name | trans,
-        },
-    } only %}
-{% endblock %}
-
 {% block button %}{% endblock %}
