@@ -11,31 +11,21 @@
 {%- block bundleInner -%}
     <div class="col col--sm-12 col--lg-7">
         {%- block bundleName -%}
-            <h4 class="{{ config.name }}__title spacing-right">
-                {%- block bundleNameText -%}
-                    {{ parent() }}
-                {%- endblock -%}
-            </h4>
+            {{ parent() }}
         {%- endblock -%}
     </div>
     <div class="col col--sm-12 col--lg-5 grid grid--middle {{ classBundleTotal }}">
-        {%- block bundleQuantity -%}
-            <div class="col col--lg-6 {{ config.name }}__quantity">
-                {% include molecule('configured-bundle-quantity', 'ConfigurableBundleWidget') with {
-                    data: {
-                        configuredBundle: data.bundle,
-                        readOnly: true,
-                    },
-                } only %}
-            </div>
+        {%- block bundleQuantityInner -%}
+            {% include molecule('configured-bundle-quantity', 'ConfigurableBundleWidget') with {
+                data: {
+                    configuredBundle: data.bundle,
+                    readOnly: true,
+                },
+            } only %}
         {%- endblock -%}
 
         {%- block bundlePriceInformation -%}
-            <strong class="col col--sm-12 col--lg-6 {{ config.name }}__total">
-                {%- block bundleTotalInner -%}
-                    {{ parent() }}
-                {%- endblock -%}
-            </strong>
+            {{ parent() }}
         {%- endblock -%}
     </div>
 {%- endblock -%}
