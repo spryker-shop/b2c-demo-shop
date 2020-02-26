@@ -15,19 +15,23 @@
         {%- endblock -%}
     </div>
     <div class="col col--sm-12 col--lg-5 grid grid--middle {{ classBundleTotal }}">
-        {%- block bundleQuantityInner -%}
-            {% include molecule('configured-bundle-quantity', 'ConfigurableBundleWidget') with {
-                data: {
-                    configuredBundle: data.bundle,
-                    readOnly: true,
-                },
-            } only %}
+        {%- block bundleQuantity -%}
+            {{ parent() }}
         {%- endblock -%}
 
         {%- block bundlePriceInformation -%}
             {{ parent() }}
         {%- endblock -%}
     </div>
+{%- endblock -%}
+
+{%- block bundleQuantityInner -%}
+    {% include molecule('configured-bundle-quantity', 'ConfigurableBundleWidget') with {
+        data: {
+            configuredBundle: data.bundle,
+            readOnly: true,
+        },
+    } only %}
 {%- endblock -%}
 
 {% block bundleProductItem %}
