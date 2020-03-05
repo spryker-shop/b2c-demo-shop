@@ -85,11 +85,11 @@ class CartDependencyProvider extends SprykerCartDependencyProvider
     /**
      * @param \Spryker\Zed\Kernel\Container $container
      *
-     * @return \Spryker\Zed\Cart\Dependency\CartPreCheckPluginInterface[]
+     * @return \Spryker\Zed\CartExtension\Dependency\Plugin\CartPreCheckPluginInterface[]
      */
     protected function getCartPreCheckPlugins(Container $container)
     {
-        /** @var \Spryker\Zed\Cart\Dependency\CartPreCheckPluginInterface[] $cartPreCheckPlugins */
+        /** @var \Spryker\Zed\CartExtension\Dependency\Plugin\CartPreCheckPluginInterface[] $cartPreCheckPlugins */
         $cartPreCheckPlugins = [
             new ProductExistsCartPreCheckPlugin(),
             new CartItemPricePreCheckPlugin(),
@@ -126,11 +126,11 @@ class CartDependencyProvider extends SprykerCartDependencyProvider
     /**
      * @param \Spryker\Zed\Kernel\Container $container
      *
-     * @return \Spryker\Zed\Cart\Dependency\PreReloadItemsPluginInterface[]
+     * @return \Spryker\Zed\CartExtension\Dependency\Plugin\PreReloadItemsPluginInterface[]
      */
     protected function getPreReloadPlugins(Container $container)
     {
-        /** @var \Spryker\Zed\Cart\Dependency\PreReloadItemsPluginInterface[] $preReloadPlugins */
+        /** @var \Spryker\Zed\CartExtension\Dependency\Plugin\PreReloadItemsPluginInterface[] $preReloadPlugins */
         $preReloadPlugins = [
             new CartConfigurableBundlePreReloadPlugin(),
             new CartBundleItemsPreReloadPlugin(),
