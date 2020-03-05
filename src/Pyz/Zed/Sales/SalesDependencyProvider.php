@@ -17,6 +17,9 @@ use Spryker\Zed\ProductBundle\Communication\Plugin\Sales\UniqueOrderBundleItemsE
 use Spryker\Zed\ProductOption\Communication\Plugin\Sales\ProductOptionGroupIdHydratorPlugin;
 use Spryker\Zed\ProductOption\Communication\Plugin\Sales\ProductOptionOrderHydratePlugin;
 use Spryker\Zed\Sales\SalesDependencyProvider as SprykerSalesDependencyProvider;
+use Spryker\Zed\SalesConfigurableBundle\Communication\Plugin\Sales\ConfiguredBundleItemPreTransformerPlugin;
+use Spryker\Zed\SalesConfigurableBundle\Communication\Plugin\Sales\ConfiguredBundleOrderExpanderPlugin;
+use Spryker\Zed\SalesConfigurableBundle\Communication\Plugin\Sales\ConfiguredBundlesOrderPostSavePlugin;
 use Spryker\Zed\SalesProductConnector\Communication\Plugin\Sales\ItemMetadataHydratorPlugin;
 use Spryker\Zed\SalesProductConnector\Communication\Plugin\Sales\ProductIdHydratorPlugin;
 use Spryker\Zed\SalesQuantity\Communication\Plugin\SalesExtension\IsQuantitySplittableOrderItemExpanderPreSavePlugin;
@@ -43,6 +46,7 @@ class SalesDependencyProvider extends SprykerSalesDependencyProvider
             new ProductBundleIdHydratorPlugin(),
             new ProductOptionGroupIdHydratorPlugin(),
             new ProductBundleOptionOrderExpanderPlugin(),
+            new ConfiguredBundleOrderExpanderPlugin(),
         ];
     }
 
@@ -83,6 +87,26 @@ class SalesDependencyProvider extends SprykerSalesDependencyProvider
     {
         return [
             new UniqueOrderBundleItemsExpanderPlugin(),
+        ];
+    }
+
+    /**
+     * @return \Spryker\Zed\SalesExtension\Dependency\Plugin\OrderPostSavePluginInterface[]
+     */
+    protected function getOrderPostSavePlugins()
+    {
+        return [
+            new ConfiguredBundlesOrderPostSavePlugin(),
+        ];
+    }
+
+    /**
+     * @return \Spryker\Zed\SalesExtension\Dependency\Plugin\ItemPreTransformerPluginInterface[]
+     */
+    protected function getItemPreTransformerPlugins(): array
+    {
+        return [
+            new ConfiguredBundleItemPreTransformerPlugin(),
         ];
     }
 }

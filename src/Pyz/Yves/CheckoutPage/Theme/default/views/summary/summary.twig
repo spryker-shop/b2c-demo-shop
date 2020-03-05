@@ -19,12 +19,21 @@
                             '%total%': loop.length
                         }) }}
                     </h3>
+                    {% widget 'QuoteConfiguredBundleWidget' args [data.cart, shipmentGroup.items] with {
+                        data: {
+                            isEditable: false,
+                            isQuantityVisible: true,
+                        },
+                    } only %}
+                    {% endwidget %}
 
-                    {% for item in shipmentGroup.cartItems %}
+                    {% set itemsExceptConfiguredBundles = shipmentGroup.cartItems | filter(item => item.configuredBundleItem is not defined or item.configuredBundleItem is empty) %}
+
+                    {% for item in itemsExceptConfiguredBundles %}
                         {% set cartItem = item.bundleProduct ?? item %}
                         {% set isGiftCardExists = cartItem.giftCardMetadata is not null and cartItem.giftCardMetadata.isGiftCard %}
 
-                        {% embed molecule('product-item') with {
+                        {% embed molecule('product-card-item') with {
                             modifiers: ['expand', 'secondary', 'alternative', 'right-indent-from-tablet'],
                             data: {
                                 productItem: cartItem,

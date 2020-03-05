@@ -29,6 +29,9 @@ use SprykerShop\Yves\CatalogPage\Plugin\Router\CatalogPageRouteProviderPlugin;
 use SprykerShop\Yves\CheckoutPage\Plugin\Router\CheckoutPageRouteProviderPlugin;
 use SprykerShop\Yves\CmsPage\Plugin\Router\CmsPageRouteProviderPlugin;
 use SprykerShop\Yves\CmsSearchPage\Plugin\Router\CmsSearchPageRouteProviderPlugin;
+use SprykerShop\Yves\ConfigurableBundleNoteWidget\Plugin\Router\ConfigurableBundleNoteWidgetRouteProviderPlugin;
+use SprykerShop\Yves\ConfigurableBundlePage\Plugin\Router\ConfigurableBundlePageRouteProviderPlugin;
+use SprykerShop\Yves\ConfigurableBundleWidget\Plugin\Router\ConfigurableBundleWidgetRouteProviderPlugin;
 use SprykerShop\Yves\CurrencyWidget\Plugin\Router\CurrencyWidgetRouteProviderPlugin;
 use SprykerShop\Yves\CustomerPage\Plugin\Router\CustomerPageRouteProviderPlugin;
 use SprykerShop\Yves\CustomerReorderWidget\Plugin\Router\CustomerReorderWidgetRouteProviderPlugin;
@@ -96,6 +99,9 @@ class RouterDependencyProvider extends SprykerRouterDependencyProvider
             new ProductSearchWidgetRouteProviderPlugin(),
             new AvailabilityNotificationWidgetRouteProviderPlugin(),
             new AvailabilityNotificationPageRouteProviderPlugin(),
+            new ConfigurableBundleWidgetRouteProviderPlugin(),
+            new ConfigurableBundleNoteWidgetRouteProviderPlugin(),
+            new ConfigurableBundlePageRouteProviderPlugin(),
         ];
     }
 

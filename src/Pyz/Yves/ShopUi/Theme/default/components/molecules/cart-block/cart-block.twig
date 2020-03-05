@@ -14,8 +14,20 @@
     {% if data.cartItems is not empty %}
         {% set optionPrice = 0 %}
 
-        {% for item in data.cartItems %}
-            {% embed molecule('product-item') with {
+        {% widget 'QuoteConfiguredBundleWidget'
+            args [data.quote]
+            use view('quote-configured-bundle-mini-cart', 'ConfigurableBundleWidget')
+            with {
+            data: {
+                isEditable: true,
+            },
+        } only %}{% endwidget %}
+
+        {% set productBundleItemCounterWidget = findWidget('ProductBundleItemCounterWidget', [data.quote]) %}
+        {% set transformedCartItems = productBundleItemCounterWidget.items | default(data.cartItems) %}
+
+        {% for item in transformedCartItems if not item.configuredBundleItem %}
+            {% embed molecule('product-card-item') with {
                 modifiers: ['mini-cart', 'readonly'],
                 data: {
                     productItem: item

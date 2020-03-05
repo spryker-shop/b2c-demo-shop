@@ -31,6 +31,7 @@ class ProductImageWriterStep extends PublishAwareStep implements DataImportStepI
     public const KEY_EXTERNAL_URL_LARGE = 'external_url_large';
     public const KEY_EXTERNAL_URL_SMALL = 'external_url_small';
     public const KEY_SORT_ORDER = 'sort_order';
+    public const KEY_PRODUCT_IMAGE_SET_KEY = 'product_image_set_key';
     public const DEFAULT_IMAGE_SORT_ORDER = 0;
 
     /**
@@ -87,6 +88,10 @@ class ProductImageWriterStep extends PublishAwareStep implements DataImportStepI
         if (!empty($dataSet[static::KEY_CONCRETE_SKU])) {
             $idProduct = $this->productRepository->getIdProductByConcreteSku($dataSet[static::KEY_CONCRETE_SKU]);
             $query->filterByFkProduct($idProduct);
+        }
+
+        if (!empty($dataSet[static::KEY_PRODUCT_IMAGE_SET_KEY])) {
+            $query->filterByProductImageSetKey($dataSet[static::KEY_PRODUCT_IMAGE_SET_KEY]);
         }
 
         $productImageSetEntity = $query->findOneOrCreate();

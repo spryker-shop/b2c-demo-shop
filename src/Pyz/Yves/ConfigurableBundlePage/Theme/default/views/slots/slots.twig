@@ -1,0 +1,66 @@
+{% extends view('slots', '@SprykerShop:ConfigurableBundlePage') %}
+
+{% block title %}{% endblock %}
+
+{% block breadcrumbs %}
+    <div class="container__inner">{{ parent() }}</div>
+{% endblock %}
+
+{% block contentClass %}container__inner{% endblock %}
+
+{% block content %}
+    <div class="configurator">
+        <a href="{{ path('configurable-bundle/configurator/template-selection') }}" class="button button--hollow spacing-bottom spacing-bottom--big">
+            {{ 'configurable_bundle_page.configurator.slot_page.back_link' | trans }}
+        </a>
+        <div class="grid configurator__content">
+            {% block configuratorContent %}{{ parent() }}{% endblock %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block configuratorSidebar %}
+    <div class="col col--sm-12">
+        {% block configuratorSidebarInner %}{{ parent() }}{% endblock %}
+    </div>
+{% endblock %}
+
+{% block configuratorProductsInner %}
+    {% set wrapperClasses = 'grid grid--center grid--expand spacing-x spacing-x--big' %}
+
+    {{ parent() }}
+{% endblock %}
+
+{% block configuratorSelectedItem %}
+    {% include molecule('configurator-product', 'ConfigurableBundlePage') with {
+        class: 'col col--sm-12 col--xl-9',
+        modifiers: ['selected'],
+        data: {
+            product: data.selectedProduct,
+            form: data.form.createView,
+            selectedSlotId: data.selectedSlotId,
+            isSelected: true,
+        },
+    } only %}
+{% endblock %}
+
+{% block configuratorUnselectedProducts %}
+    {% widget 'ProductConcreteSearchGridWidget' args [data.productConcreteCriteriaFilter] %}
+        {% block body %}
+            {% for product in data.products %}
+                {% include molecule('configurator-product', 'ConfigurableBundlePage') with {
+                    class: 'col col--sm-12 col--xl-9',
+                    data: {
+                        product: product,
+                        form: data.form.createView,
+                        selectedSlotId: data.selectedSlotId,
+                    },
+                } only %}
+            {% endfor %}
+
+            {% if data.products is empty %}
+                <p class="spacing-x">{{ 'product_search_widget.search.no_results' | trans }}</p>
+            {% endif %}
+        {% endblock %}
+    {% endwidget %}
+{% endblock %}

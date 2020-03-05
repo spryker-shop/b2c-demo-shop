@@ -1,0 +1,90 @@
+{% extends molecule('configured-bundle', 'ConfigurableBundleWidget') %}
+
+{% define config = {
+    name: 'configured-bundle-secondary',
+} %}
+
+{% define data = {
+    configuredBundleListNumber: '',
+} %}
+
+{%- block bundleInner -%}
+    {% set classBundleTotal = config.name ~ '__bundle-total'  %}
+    {{ parent() }}
+{%- endblock -%}
+
+{%- block bundleQuantity -%}
+    <div class="{{ config.name }}__col col col--lg-4 grid">
+        {% block bundleQuantityInner %}
+            {{ parent() }}
+        {% endblock %}
+    </div>
+{%- endblock -%}
+
+{%- block bundlePriceInformation -%}
+    <strong class="col col--md-4 {{ config.name }}__total">
+        {%- block bundleTotalInner -%}
+            {{ parent() }}
+        {%- endblock -%}
+    </strong>
+{%- endblock -%}
+
+{% block bundleProductItem %}
+    {% embed molecule('configured-bundle-product', 'ConfigurableBundleWidget') with {
+        data: {
+            product: item,
+            currencyIsoCode: data.currencyIsoCode,
+            priceMode: data.priceMode,
+        },
+    } only %}
+        {%- block productTextInformation -%}
+            {% set titleProductClasses = 'col col--sm-12 col--md-4 spacing-x spacing-x--big spacing-x--inner' %}
+            {% set priceInformationClasses = config.name ~ '__prices col col--sm-12 col--md-8' %}
+
+            {{ parent() }}
+        {%- endblock -%}
+
+        {% block name -%}
+            <strong class="{{ config.name }}__title {{ config.name }}__title--bold">{{ data.name }}</strong>
+        {%- endblock %}
+
+        {% block priceCol %}
+            <div class="{{ config.name }}__col col col--sm-4 text-center">
+                {% block price %}
+                    <span class="{{ config.name }}__text {{ config.name }}__text--bold">
+                        {% block priceInner %}
+                            {{ parent() }}
+                        {% endblock %}
+                    </span>
+                {% endblock %}
+            </div>
+        {% endblock %}
+
+        {% block total %}
+            <strong class="{{ config.name }}__text {{ config.name }}__text--bold">
+                {% block totalInner %}
+                    {{ parent() }}
+                {% endblock %}
+            </strong>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
+
+{% block editableConfigurableBundleNote %}
+    {% widget 'ConfiguredBundleNoteWidget' args [data.bundle, data.quote] with {
+        embed: {
+            configuredBundleListNumber: data.configuredBundleListNumber,
+        },
+    } only %}
+        {% block configuredBundleNote %}
+            {% include molecule('cart-configured-bundle-item-note', 'ConfigurableBundleNoteWidget') with {
+                class: 'col col--sm-12 col--md-6',
+                data: {
+                    form: data.form,
+                    canWrite: canWrite,
+                    configuredBundleListNumber: embed.configuredBundleListNumber,
+                },
+            } only %}
+        {% endblock %}
+    {% endwidget %}
+{% endblock %}
