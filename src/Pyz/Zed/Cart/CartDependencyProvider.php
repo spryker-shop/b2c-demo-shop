@@ -12,6 +12,13 @@ use Spryker\Zed\AvailabilityCartConnector\Communication\Plugin\CheckAvailability
 use Spryker\Zed\Cart\CartDependencyProvider as SprykerCartDependencyProvider;
 use Spryker\Zed\Cart\Communication\Plugin\CleanUpItemsPreReloadPlugin;
 use Spryker\Zed\Cart\Communication\Plugin\SkuGroupKeyPlugin;
+use Spryker\Zed\ConfigurableBundle\Communication\Plugin\Cart\CartConfigurableBundlePreReloadPlugin;
+use Spryker\Zed\ConfigurableBundleCart\Communication\Plugin\Cart\ConfiguredBundleGroupKeyItemExpanderPlugin;
+use Spryker\Zed\ConfigurableBundleCart\Communication\Plugin\Cart\ConfiguredBundleQuantityCartTerminationPlugin;
+use Spryker\Zed\ConfigurableBundleCart\Communication\Plugin\Cart\ConfiguredBundleQuantityPerSlotItemExpanderPlugin;
+use Spryker\Zed\ConfigurableBundleCart\Communication\Plugin\Cart\ConfiguredBundleQuantityPerSlotPreReloadItemsPlugin;
+use Spryker\Zed\ConfigurableBundleCart\Communication\Plugin\Cart\ConfiguredBundleQuantityPostSavePlugin;
+use Spryker\Zed\ConfigurableBundleCart\Communication\Plugin\Cart\ConfiguredBundleTemplateSlotCombinationPreCheckPlugin;
 use Spryker\Zed\Discount\Communication\Plugin\Cart\DiscountQuoteChangeObserverPlugin;
 use Spryker\Zed\DiscountPromotion\Communication\Plugin\Cart\CartGroupPromotionItems;
 use Spryker\Zed\GiftCard\Communication\Plugin\GiftCardMetadataExpanderPlugin;
@@ -51,7 +58,7 @@ class CartDependencyProvider extends SprykerCartDependencyProvider
     /**
      * @param \Spryker\Zed\Kernel\Container $container
      *
-     * @return \Spryker\Zed\Cart\Dependency\ItemExpanderPluginInterface[]
+     * @return \Spryker\Zed\CartExtension\Dependency\Plugin\ItemExpanderPluginInterface[]
      */
     protected function getExpanderPlugins(Container $container)
     {
@@ -70,17 +77,19 @@ class CartDependencyProvider extends SprykerCartDependencyProvider
             new CartGroupPromotionItems(),
             new CartShipmentExpanderPlugin(),
             new GiftCardMetadataExpanderPlugin(), #GiftCardFeature
+            new ConfiguredBundleQuantityPerSlotItemExpanderPlugin(),
+            new ConfiguredBundleGroupKeyItemExpanderPlugin(),
         ];
     }
 
     /**
      * @param \Spryker\Zed\Kernel\Container $container
      *
-     * @return \Spryker\Zed\Cart\Dependency\CartPreCheckPluginInterface[]
+     * @return \Spryker\Zed\CartExtension\Dependency\Plugin\CartPreCheckPluginInterface[]
      */
     protected function getCartPreCheckPlugins(Container $container)
     {
-        /** @var \Spryker\Zed\Cart\Dependency\CartPreCheckPluginInterface[] $cartPreCheckPlugins */
+        /** @var \Spryker\Zed\CartExtension\Dependency\Plugin\CartPreCheckPluginInterface[] $cartPreCheckPlugins */
         $cartPreCheckPlugins = [
             new ProductExistsCartPreCheckPlugin(),
             new CartItemPricePreCheckPlugin(),
@@ -93,6 +102,7 @@ class CartDependencyProvider extends SprykerCartDependencyProvider
             new ProductQuantityRestrictionCartPreCheckPlugin(),
             new ProductDiscontinuedCartPreCheckPlugin(),
             new CheckAvailabilityPlugin(),
+            new ConfiguredBundleTemplateSlotCombinationPreCheckPlugin(),
         ];
 
         return $cartPreCheckPlugins;
@@ -101,7 +111,7 @@ class CartDependencyProvider extends SprykerCartDependencyProvider
     /**
      * @param \Spryker\Zed\Kernel\Container $container
      *
-     * @return \Spryker\Zed\Cart\Dependency\PostSavePluginInterface[]
+     * @return \Spryker\Zed\CartExtension\Dependency\Plugin\CartOperationPostSavePluginInterface[]
      */
     protected function getPostSavePlugins(Container $container)
     {
@@ -109,22 +119,25 @@ class CartDependencyProvider extends SprykerCartDependencyProvider
             new ChangeProductOptionQuantityPlugin(),
             new CartPostSaveUpdateBundlesPlugin(),
             new RemovePaymentCartPostSavePlugin(),
+            new ConfiguredBundleQuantityPostSavePlugin(),
         ];
     }
 
     /**
      * @param \Spryker\Zed\Kernel\Container $container
      *
-     * @return \Spryker\Zed\Cart\Dependency\PreReloadItemsPluginInterface[]
+     * @return \Spryker\Zed\CartExtension\Dependency\Plugin\PreReloadItemsPluginInterface[]
      */
     protected function getPreReloadPlugins(Container $container)
     {
-        /** @var \Spryker\Zed\Cart\Dependency\PreReloadItemsPluginInterface[] $preReloadPlugins */
+        /** @var \Spryker\Zed\CartExtension\Dependency\Plugin\PreReloadItemsPluginInterface[] $preReloadPlugins */
         $preReloadPlugins = [
+            new CartConfigurableBundlePreReloadPlugin(),
             new CartBundleItemsPreReloadPlugin(),
             new RemoveInactiveItemsPreReloadPlugin(),
             new CleanUpItemsPreReloadPlugin(),
             new FilterItemsWithoutPricePlugin(),
+            new ConfiguredBundleQuantityPerSlotPreReloadItemsPlugin(),
         ];
 
         return $preReloadPlugins;
@@ -164,6 +177,18 @@ class CartDependencyProvider extends SprykerCartDependencyProvider
         return [
             new DiscountQuoteChangeObserverPlugin(),
             new BundleItemPriceQuoteChangeObserverPlugin(),
+        ];
+    }
+
+    /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Zed\CartExtension\Dependency\Plugin\CartTerminationPluginInterface[]
+     */
+    protected function getTerminationPlugins(Container $container)
+    {
+        return [
+            new ConfiguredBundleQuantityCartTerminationPlugin(),
         ];
     }
 }

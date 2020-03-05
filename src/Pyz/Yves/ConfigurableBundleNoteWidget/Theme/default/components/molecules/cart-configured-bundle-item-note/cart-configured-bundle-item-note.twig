@@ -1,0 +1,107 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'cart-configured-bundle-item-note',
+    tag: 'cart-configured-bundle-item-note',
+} %}
+
+{% define data = {
+    form: {},
+    canWrite: required,
+    label: '',
+    note: '',
+    configuredBundleListNumber: '',
+} %}
+
+{% define attributes = {
+    'class-to-toggle': 'is-hidden',
+} %}
+
+{% block body %}
+    {% set formNote = data.form.vars is defined ? data.form.vars.value.note %}
+    {% set note = data.note ?: formNote %}
+    {% set isNoteNotEmpty = note is not empty %}
+
+    {% block content %}
+        {% if data.canWrite or isNoteNotEmpty %}
+            {% block contentInner %}
+                <div class="{{ config.name }}__container">
+                    {% if isNoteNotEmpty %}
+                        <div class="{{ config.jsName }}__text-wrap">
+                            <div class="{{ config.name }}__text">{{ note | nl2br }}</div>
+                            {% if data.canWrite %}
+                                {% block cartItemNoteActions %}
+                                    {% include molecule('cart-configured-bundle-item-note-actions', 'ConfigurableBundleNoteWidget') with {
+                                        data: {
+                                            buttons: [
+                                                {
+                                                    class: config.jsName ~ '__edit',
+                                                    text: 'configured_bundle_note_widget.edit_note' | trans,
+                                                },
+                                                {
+                                                    class: config.jsName ~ '__remove',
+                                                    text: 'configured_bundle_note_widget.remove_note' | trans,
+                                                },
+                                            ],
+                                        },
+                                    } only %}
+                                {% endblock %}
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                    {% block form %}
+                        {% if data.canWrite %}
+                            {% set hiddenWrapperClass = isNoteNotEmpty ? 'is-hidden' %}
+                            {% set hiddenContentClass = not isNoteNotEmpty ? 'is-hidden' %}
+                            {% set activeClass = isNoteNotEmpty ? 'active' %}
+
+                            <div class="{{ config.jsName }}__form {{ hiddenWrapperClass }}">
+                                {% embed molecule('toggler-item') with {
+                                    modifiers: ['bundle-note'],
+                                    data: {
+                                        title: 'configurable_bundle_note.enter_note' | trans,
+                                        triggerClass: config.jsName ~ '__trigger--' ~ data.configuredBundleListNumber,
+                                        targetClass: config.jsName ~ '__target' ~ data.configuredBundleListNumber,
+                                    },
+                                    embed: {
+                                        form: data.form,
+                                    },
+                                } only %}
+                                    {% block title %}
+                                        {% set titleClasses = 'text-break' %}
+                                        {{ parent() }}
+                                    {% endblock %}
+
+                                    {% block contentText %}
+                                        {% embed molecule('form') with {
+                                            modifiers: ['note'],
+                                            data: {
+                                                form: embed.form,
+                                                options: {
+                                                    action: url('configurable-bundle-note/add'),
+                                                },
+                                                submit: {
+                                                    enable: true,
+                                                    text: 'configurable_bundle_note.form.save' | trans,
+                                                },
+                                            },
+                                        } only %}
+                                            {% block field %}
+                                                {{ form_row(field, {
+                                                    rowAttr: {
+                                                        class: config.name ~ '__field ' ~ fieldLayoutClass,
+                                                    },
+                                                    'label':false,
+                                                }) }}
+                                            {% endblock %}
+                                        {% endembed %}
+                                    {% endblock %}
+                                {% endembed %}
+                            </div>
+                        {% endif %}
+                    {% endblock %}
+                </div>
+            {% endblock %}
+        {% endif %}
+    {% endblock %}
+{% endblock %}

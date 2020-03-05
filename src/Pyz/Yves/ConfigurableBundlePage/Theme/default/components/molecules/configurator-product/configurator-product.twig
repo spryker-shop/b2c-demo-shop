@@ -1,0 +1,57 @@
+{% extends molecule('configurator-product', '@SprykerShop:ConfigurableBundlePage') %}
+
+{% block extraClass %}{% endblock %}
+
+{% block imageContainer %}
+    <div class="{{ config.name }}__col {{ config.name }}__col--image-container col col--sm-12 col--md-4 col--xl-3 col--middle">
+        {% block image %}{{ parent() }}{% endblock %}
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="{{ config.name }}__col {{ config.name }}__col--description col col--sm-12 col--md-6 col--xl-7">
+        {% block name %}{{ parent() }}{% endblock %}
+
+        {% block sku %}
+            {% if data.sku %}
+                <span class="{{ config.name }}__sku">{{ 'configurable_bundle_page.configurator.sku' | trans }} {{ data.sku }}</span>
+            {% endif %}
+        {% endblock %}
+    </div>
+{% endblock %}
+
+{% block actionsContainer %}
+    <div class="{{ config.name }}__col col col--md-2">
+        <div class="{{ config.name }}__actions">
+            {% block price %}
+                {% if can('SeePricePermissionPlugin') %}
+                    {% widget 'PriceProductWidget' args [data.product] with {
+                        embed: {
+                            currencyIsoCode: data.currencyIsoCode,
+                            configName: config.name,
+                        },
+                    } only %}
+                        {% block body %}
+                            {% if data.currentProductPrice.prices %}
+                                {% include molecule('money-price') with {
+                                    class: embed.configName ~ '__price',
+                                    data: {
+                                        amount: data.currentProductPrice.prices.DEFAULT | default(null),
+                                        originalAmount: data.currentProductPrice.prices.ORIGINAL | default(null),
+                                        currencyIsoCode: embed.currencyIsoCode,
+                                    },
+                                } only %}
+                            {% endif %}
+                        {% endblock %}
+                    {% endwidget %}
+                {% endif %}
+            {% endblock %}
+
+            {% block action %}
+                {% if data.isActionActive %}
+                    {{ parent() }}
+                {% endif %}
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}

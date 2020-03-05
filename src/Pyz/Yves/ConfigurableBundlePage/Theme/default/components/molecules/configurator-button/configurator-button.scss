@@ -1,0 +1,76 @@
+@mixin configurable-bundle-page-configurator-button($name: '.configurator-button') {
+    @include shop-ui-button($name) {
+        @include helper-effect-transition(all);
+        @include configurable-bundle-page-configurator-button-state($setting-color-black, $setting-color-white, $setting-color-transparent);
+        padding: rem(15) rem(16);
+        border: none;
+        border-radius: rem(2);
+        text-align: center;
+        font: fw(bold) rem(15)/rem(18) $setting-font-family-additional;
+
+        &:hover,
+        &:focus,
+        &--success {
+            @include configurable-bundle-page-configurator-button-state($setting-color-alt, $setting-color-white, $setting-color-transparent);
+        }
+
+        &--additional-indention {
+            @include configurable-bundle-page-configurator-button-state($setting-color-transparent, $setting-color-alpha-8, $setting-color-transparent);
+            padding: rem(16);
+            font-weight: fw(medium);
+            font-size: rem(13);
+            letter-spacing: rem(2.2);
+            text-transform: uppercase;
+            margin: 0;
+
+            &:hover,
+            &:active,
+            &:focus {
+                @include configurable-bundle-page-configurator-button-state($setting-color-gray-1, $setting-color-black, $setting-color-transparent);
+                box-shadow: none;
+            }
+        }
+
+        &--link {
+            padding: 0;
+            background: none;
+            font: fw(regular) rem(16)/rem(18) $setting-font-family;
+            color: $setting-color-alpha-8;
+
+            &:hover,
+            &:focus {
+                background: none;
+                color: $setting-color-alpha-8;
+                text-decoration: underline;
+            }
+        }
+
+        &--active {
+            @include configurable-bundle-page-configurator-button-state($setting-color-gray-1, $setting-color-black, $setting-color-transparent);
+        }
+
+        &--selected {
+            @include configurable-bundle-page-configurator-button-state($setting-color-alpha-2, $setting-color-main, $setting-color-transparent);
+        }
+
+        &--summary {
+            @include configurable-bundle-page-configurator-button-state($setting-color-black, $setting-color-white, $setting-color-transparent);
+
+            &:hover {
+                @include configurable-bundle-page-configurator-button-state($setting-color-alt, $setting-color-white, $setting-color-transparent);
+            }
+        }
+
+        &[disabled] {
+            @include configurable-bundle-page-configurator-button-state($setting-color-gray-3, $setting-color-white, $setting-color-transparent);
+
+            &:hover {
+                @include configurable-bundle-page-configurator-button-state($setting-color-gray-3, $setting-color-white, $setting-color-transparent);
+            }
+        }
+
+        @content;
+    }
+}
+
+@include configurable-bundle-page-configurator-button();
