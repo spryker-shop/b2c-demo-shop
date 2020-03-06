@@ -1,0 +1,53 @@
+{% extends molecule('product-item', '@SprykerShop:ShopUi') %}
+
+{%- block extraClass %} {{ config.jsName }}{% endblock -%}
+
+{% block body %}
+    <div class="{{ config.name }}__container">
+        <div class="{{ config.name }}__image-wrap">
+            {% block image %}
+                {% block productThumbnail %}
+                    {% set extraClass = '' %}
+                    {% set modifiers = ['no-margin', 'product-card'] %}
+
+                    <a class="{{ config.name }}__overlay {{ config.jsName }}__link-detail-page" href="{{ path(data.url) }}">
+                        {{ parent() }}
+                    </a>
+                {% endblock %}
+            {% endblock %}
+
+            {% block labels %}
+                {{ parent() }}
+            {% endblock %}
+
+            {% block colors %}
+                {% widget 'ProductGroupColorWidget' args [data.idProductAbstract, data.product.selectedAttributes ?? []] use view('product-item-color-selector', 'ProductGroupWidget') with {
+                    data: {
+                        parentJsName: config.jsName,
+                        parentName: config.name,
+                    },
+                } only %}{% endwidget %}
+            {% endblock %}
+        </div>
+
+        {% block content %}
+            <a href="{{ data.url }}" class="{{ config.name }}__info {{ config.jsName }}__link-detail-page grid grid--justify grid--top grid--no-wrap">
+                {% block title %}
+                    <div class="col col--sm-12 col--md-8">
+                        {{ parent() }}
+                    </div>
+                {% endblock %}
+
+                {% block price %}
+                    <div class="col col--sm-12 col--md-4 text-right">
+                        {{ parent() }}
+                    </div>
+                {% endblock %}
+            </a>
+
+            {% block rating %}
+                {{ parent() }}
+            {% endblock %}
+        {% endblock %}
+    </div>
+{% endblock %}
