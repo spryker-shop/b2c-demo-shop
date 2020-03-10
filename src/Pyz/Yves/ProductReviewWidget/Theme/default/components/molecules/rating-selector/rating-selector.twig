@@ -1,13 +1,15 @@
 {% extends molecule('rating-selector', '@SprykerShop:ProductReviewWidget') %}
 
 {% define data = {
-    reviewCount: '',
+    reviewCount: 0,
 } %}
 
 {% block body %}
     {{ parent() }}
 
-    {% if data.reviewCount %}
-        <span class="{{ config.name }}__review-count">{{ data.reviewCount }}</span>
+    {% if data.reviewCount is not empty %}
+        {% set reviewCountJsName = data.parentJsName ? data.parentJsName ~ '__review-count' %}
+
+        <span class="{{ config.name }}__review-count {{ config.jsName }}__review-count {{ reviewCountJsName }}">{{ data.reviewCount }}</span>
     {% endif %}
 {% endblock %}

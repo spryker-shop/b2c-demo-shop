@@ -1,0 +1,39 @@
+{% extends molecule('color-selector', 'ProductGroupWidget') %}
+
+{% define config = {
+    name: 'product-item-color-selector',
+    tag: 'product-item-color-selector',
+} %}
+
+{% define data = {
+    parentJsName: required,
+} %}
+
+{% define attributes = {
+    'product-item-class-name': data.parentJsName,
+} %}
+
+{% block selection %}
+    {% set labels = labels | default([]) %}
+
+    {% for label in item.labels %}
+        {% set labels = labels | merge([{
+            text: label.key | default,
+            type: (label.frontEndReference | lower | replace(' ', '-')) | default,
+        }]) %}
+    {% endfor %}
+
+    {% set dataAttributesList = {
+        type: 'button',
+        'data-product-image-src': item.images ? item.images[0].externalUrlSmall,
+        'data-product-labels': labels | json_encode,
+        'data-product-name': item.name ? item.name,
+        'data-product-rating': item.rating ? item.rating.averageRating,
+        'data-product-default-price': item.prices['DEFAULT'] is defined ? (item.prices['DEFAULT'] | money),
+        'data-product-original-price': item.prices['ORIGINAL'] is defined ? (item.prices['ORIGINAL'] | money),
+        'data-product-detail-page-url': item.url ? item.url,
+        'data-product-add-to-cart-url': item.sku ? path('cart/add', {sku: item.sku}),
+    } %}
+
+    {{ parent() }}
+{% endblock %}
