@@ -25,133 +25,133 @@ matrix:
       env:
         - VALIDATION=1
 
-    -   name: Docker / Alpine /PHP 7.3 / PostgreSQL / Functional
-        os:
-            - linux
-        dist: bionic
-        language: minimal
-        env:
-            - PROGRESS_TYPE=plain
-            - SPRYKER_PLATFORM_IMAGE=spryker/php:7.3
-            - SPRYKER_DB_ENGINE=PGSQL
-            - SPRYKER_TEST_IN_BROWSER=phantomjs
-            - TRAVIS=1
-        addons:
-            hosts:
-                - yves.de.spryker.local
-                - zed.de.spryker.local
-                - glue.de.spryker.local
-            apt:
-                packages:
-                    - apache2-utils
-                    - apt-transport-https
-                    - ca-certificates
-                    - curl
-                    - gnupg-agent
-                    - pigz
-                    - software-properties-common
-                sources:
-                    -   sourceline: "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-                        key_url: https://download.docker.com/linux/ubuntu/gpg
-        install:
-            - echo eyAiZXhwZXJpbWVudGFsIiA6IHRydWUsICJmZWF0dXJlcyIgOiB7ICJidWlsZGtpdCI6IHRydWUgfSB9Cg==|base64 -d|sudo tee /etc/docker/daemon.json
-            - sudo apt-get install --only-upgrade docker-ce -y
-            - sudo curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-            - sudo chmod +x /usr/local/bin/docker-compose
-        script:
-            - git clone https://github.com/spryker/docker-sdk.git --single-branch --branch master ./docker
-            - docker/sdk boot deploy.ci.yml
-            - docker/sdk build images
-            - docker/sdk demo-data -t
-            - 'docker/sdk testing codecept run -c codeception.functional.yml -o "\"extensions: config: \SprykerTest\Shared\Testify\Helper\SuiteFilterHelper: inclusive: [PyzTest]\"" -o "\"extensions: config: \SprykerTest\Shared\Testify\Helper\SuiteFilterHelper: exclusive: [Api, Glue]\""'
-        before_install: skip
-        before_script: skip
-        after_script: skip
-
-  -   name: Docker / Debian /PHP 7.3 / PostgreSQL / Functional
+    - name: Docker / Alpine /PHP 7.3 / PostgreSQL / Functional
       os:
-          - linux
+        - linux
       dist: bionic
       language: minimal
       env:
-          - PROGRESS_TYPE=plain
-          - SPRYKER_PLATFORM_IMAGE=spryker/php:7.3-debian
-          - SPRYKER_DB_ENGINE=PGSQL
-          - SPRYKER_TEST_IN_BROWSER=phantomjs
-          - TRAVIS=1
+        - PROGRESS_TYPE=plain
+        - SPRYKER_PLATFORM_IMAGE=spryker/php:7.3
+        - SPRYKER_DB_ENGINE=PGSQL
+        - SPRYKER_TEST_IN_BROWSER=phantomjs
+        - TRAVIS=1
+       addons:
+         hosts:
+           - yves.de.spryker.local
+           - zed.de.spryker.local
+           - glue.de.spryker.local
+         apt:
+           packages:
+             - apache2-utils
+             - apt-transport-https
+             - ca-certificates
+             - curl
+             - gnupg-agent
+             - pigz
+             - software-properties-common
+           sources:
+             - sourceline: "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+               key_url: https://download.docker.com/linux/ubuntu/gpg
+       install:
+         - echo eyAiZXhwZXJpbWVudGFsIiA6IHRydWUsICJmZWF0dXJlcyIgOiB7ICJidWlsZGtpdCI6IHRydWUgfSB9Cg==|base64 -d|sudo tee /etc/docker/daemon.json
+         - sudo apt-get install --only-upgrade docker-ce -y
+         - sudo curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+         - sudo chmod +x /usr/local/bin/docker-compose
+       script:
+         - git clone https://github.com/spryker/docker-sdk.git --single-branch --branch master ./docker
+         - docker/sdk boot deploy.ci.yml
+         - docker/sdk build images
+         - docker/sdk demo-data -t
+         - 'docker/sdk testing codecept run -c codeception.functional.yml -o "\"extensions: config: \SprykerTest\Shared\Testify\Helper\SuiteFilterHelper: inclusive: [PyzTest]\"" -o "\"extensions: config: \SprykerTest\Shared\Testify\Helper\SuiteFilterHelper: exclusive: [Api, Glue]\""'
+       before_install: skip
+       before_script: skip
+       after_script: skip
+
+  -   name: Docker / Debian /PHP 7.3 / PostgreSQL / Functional
+      os:
+        - linux
+      dist: bionic
+      language: minimal
+      env:
+        - PROGRESS_TYPE=plain
+        - SPRYKER_PLATFORM_IMAGE=spryker/php:7.3-debian
+        - SPRYKER_DB_ENGINE=PGSQL
+        - SPRYKER_TEST_IN_BROWSER=phantomjs
+        - TRAVIS=1
       addons:
-          hosts:
-              - yves.de.spryker.local
-              - zed.de.spryker.local
-              - glue.de.spryker.local
-          apt:
-              packages:
-                  - apache2-utils
-                  - apt-transport-https
-                  - ca-certificates
-                  - curl
-                  - gnupg-agent
-                  - pigz
-                  - software-properties-common
-              sources:
-                  -   sourceline: "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-                      key_url: https://download.docker.com/linux/ubuntu/gpg
+        hosts:
+          - yves.de.spryker.local
+          - zed.de.spryker.local
+          - glue.de.spryker.local
+        apt:
+          packages:
+            - apache2-utils
+            - apt-transport-https
+            - ca-certificates
+            - curl
+            - gnupg-agent
+            - pigz
+            - software-properties-common
+          sources:
+             - sourceline: "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+               key_url: https://download.docker.com/linux/ubuntu/gpg
       install:
-          - echo eyAiZXhwZXJpbWVudGFsIiA6IHRydWUsICJmZWF0dXJlcyIgOiB7ICJidWlsZGtpdCI6IHRydWUgfSB9Cg==|base64 -d|sudo tee /etc/docker/daemon.json
-          - sudo apt-get install --only-upgrade docker-ce -y
-          - sudo curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-          - sudo chmod +x /usr/local/bin/docker-compose
+        - echo eyAiZXhwZXJpbWVudGFsIiA6IHRydWUsICJmZWF0dXJlcyIgOiB7ICJidWlsZGtpdCI6IHRydWUgfSB9Cg==|base64 -d|sudo tee /etc/docker/daemon.json
+        - sudo apt-get install --only-upgrade docker-ce -y
+        - sudo curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+        - sudo chmod +x /usr/local/bin/docker-compose
       script:
-          - git clone https://github.com/spryker/docker-sdk.git --single-branch --branch master ./docker
-          - docker/sdk boot deploy.ci.yml
-          - docker/sdk build images
-          - docker/sdk demo-data -t
-          - 'docker/sdk testing codecept run -c codeception.functional.yml -o "\"extensions: config: \SprykerTest\Shared\Testify\Helper\SuiteFilterHelper: inclusive: [PyzTest]\"" -o "\"extensions: config: \SprykerTest\Shared\Testify\Helper\SuiteFilterHelper: exclusive: [Api, Glue]\""'
+        - git clone https://github.com/spryker/docker-sdk.git --single-branch --branch master ./docker
+        - docker/sdk boot deploy.ci.yml
+        - docker/sdk build images
+        - docker/sdk demo-data -t
+        - 'docker/sdk testing codecept run -c codeception.functional.yml -o "\"extensions: config: \SprykerTest\Shared\Testify\Helper\SuiteFilterHelper: inclusive: [PyzTest]\"" -o "\"extensions: config: \SprykerTest\Shared\Testify\Helper\SuiteFilterHelper: exclusive: [Api, Glue]\""'
       before_install: skip
       before_script: skip
       after_script: skip
 
-    -   name: Docker / Alpine / PHP 7.3 / PostgreSQL / Glue
-        os:
-            - linux
-        dist: bionic
-        language: minimal
-        env:
-            - PROGRESS_TYPE=plain
-            - SPRYKER_PLATFORM_IMAGE=spryker/php:7.3
-            - SPRYKER_DB_ENGINE=PGSQL
-            - SPRYKER_TEST_IN_BROWSER=phantomjs
-            - TRAVIS=1
-        addons:
-            hosts:
-                - yves.de.spryker.local
-                - zed.de.spryker.local
-                - glue.de.spryker.local
-            apt:
-                packages:
-                    - apache2-utils
-                    - apt-transport-https
-                    - ca-certificates
-                    - curl
-                    - gnupg-agent
-                    - pigz
-                    - software-properties-common
-                sources:
-                    -   sourceline: "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-                        key_url: https://download.docker.com/linux/ubuntu/gpg
+    - name: Docker / Alpine / PHP 7.3 / PostgreSQL / Glue
+      os:
+        - linux
+      dist: bionic
+      language: minimal
+      env:
+        - PROGRESS_TYPE=plain
+        - SPRYKER_PLATFORM_IMAGE=spryker/php:7.3
+        - SPRYKER_DB_ENGINE=PGSQL
+        - SPRYKER_TEST_IN_BROWSER=phantomjs
+        - TRAVIS=1
+      addons:
+        hosts:
+          - yves.de.spryker.local
+          - zed.de.spryker.local
+          - glue.de.spryker.local
+        apt:
+          packages:
+            - apache2-utils
+            - apt-transport-https
+            - ca-certificates
+            - curl
+            - gnupg-agent
+            - pigz
+            - software-properties-common
+          sources:
+            - sourceline: "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+              key_url: https://download.docker.com/linux/ubuntu/gpg
         install:
-            - echo eyAiZXhwZXJpbWVudGFsIiA6IHRydWUsICJmZWF0dXJlcyIgOiB7ICJidWlsZGtpdCI6IHRydWUgfSB9Cg==|base64 -d|sudo tee /etc/docker/daemon.json
-            - sudo apt-get install --only-upgrade docker-ce -y
-            - sudo curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-            - sudo chmod +x /usr/local/bin/docker-compose
+          - echo eyAiZXhwZXJpbWVudGFsIiA6IHRydWUsICJmZWF0dXJlcyIgOiB7ICJidWlsZGtpdCI6IHRydWUgfSB9Cg==|base64 -d|sudo tee /etc/docker/daemon.json
+          - sudo apt-get install --only-upgrade docker-ce -y
+          - sudo curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+          - sudo chmod +x /usr/local/bin/docker-compose
         script:
-            - git clone https://github.com/spryker/docker-sdk.git --single-branch --branch master ./docker
-            - docker/sdk boot deploy.ci.yml
-            - docker/sdk build -t images
-            - docker/sdk demo-data -t demo-minimal
-            - docker/sdk testing codecept fixtures
-            - docker/sdk testing console queue:worker:start --stop-when-empty
-            - docker/sdk testing codecept run -c codeception.api.yml
+          - git clone https://github.com/spryker/docker-sdk.git --single-branch --branch master ./docker
+          - docker/sdk boot deploy.ci.yml
+          - docker/sdk build -t images
+          - docker/sdk demo-data -t demo-minimal
+          - docker/sdk testing codecept fixtures
+          - docker/sdk testing console queue:worker:start --stop-when-empty
+          - docker/sdk testing codecept run -c codeception.api.yml
         before_install: skip
         before_script: skip
         after_script: skip
