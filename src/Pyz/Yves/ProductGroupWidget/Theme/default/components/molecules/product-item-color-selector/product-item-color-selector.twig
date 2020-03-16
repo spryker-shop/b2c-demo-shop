@@ -33,6 +33,7 @@
         'data-product-original-price': item.prices['ORIGINAL'] is defined ? (item.prices['ORIGINAL'] | money),
         'data-product-detail-page-url': item.url ? item.url,
         'data-product-add-to-cart-url': item.sku ? path('cart/add', {sku: item.sku}),
+        'data-product-review-count': item.rating ? item.rating.totalReview,
     } %}
 
     {{ parent() }}

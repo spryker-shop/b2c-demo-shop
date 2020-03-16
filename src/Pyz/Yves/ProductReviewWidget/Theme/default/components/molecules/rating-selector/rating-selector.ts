@@ -1,5 +1,5 @@
 import RatingSelectorCore from 'ProductReviewWidget/components/molecules/rating-selector/rating-selector';
-import { EVENT_UPDATE_RATING } from 'ShopUi/components/molecules/product-item/product-item';
+import { EVENT_UPDATE_REVIEW_COUNT } from 'ShopUiProject/components/molecules/product-item/product-item';
 
 export default class RatingSelector extends RatingSelectorCore {
     protected reviewCount: HTMLElement;
@@ -12,20 +12,22 @@ export default class RatingSelector extends RatingSelectorCore {
 
     protected mapUpdateRatingEvents(): void {
         super.mapUpdateRatingEvents();
-        // this.mapProductItemUpdateReviewCountCustomEvent();
+        this.mapProductItemUpdateReviewCountCustomEvent();
     }
 
     protected mapProductItemUpdateReviewCountCustomEvent() {
-        this.productItem.addEventListener(EVENT_UPDATE_RATING, (event: Event) => {
+        if (!this.productItem) {
+            return;
+        }
+
+        this.productItem.addEventListener(EVENT_UPDATE_REVIEW_COUNT, (event: Event) => {
             this.updateReviewCount((<CustomEvent>event).detail.reviewCount);
         });
     }
 
     protected updateReviewCount(value: number): void {
-        if (!this.reviewCount) {
-            return;
+        if (this.reviewCount) {
+            this.reviewCount.innerText = `${value}`;
         }
-
-        this.reviewCount.innerText = `${value}`;
     }
 }

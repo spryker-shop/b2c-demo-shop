@@ -5,6 +5,19 @@
         class: 'col col--sm-6 col--lg-3',
         data: {
             product: data.product,
+            sku: '',
         },
     } only %}
+
+    {#{% include molecule('product-card') with {#}
+        {#class: 'col col--sm-6 col--lg-3',#}
+        {#data: {#}
+            {#name: data.product.name,#}
+            {#abstractId: data.product.idProductAbstract,#}
+            {#url: data.product.url,#}
+            {#imageUrl: data.product.images is not empty ? data.product.images.0.externalUrlSmall,#}
+            {#price: data.product.prices.DEFAULT | default(null),#}
+            {#originalPrice: data.product.prices.ORIGINAL ?? null,#}
+        {#},#}
+    {#} only %}#}
 {% endblock %}
