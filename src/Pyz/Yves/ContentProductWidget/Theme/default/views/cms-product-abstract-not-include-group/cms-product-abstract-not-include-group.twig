@@ -1,24 +1,15 @@
-{% extends template('widget') %}
-
-{% define data = {
-    productAbstractViewCollection: productAbstractViewCollection,
-} %}
+{% extends view('cms-product-abstract-not-include-group', '@SprykerShop:ContentProductWidget') %}
 
 {% block body %}
     <div class="grid grid--stretch product-list">
-    {% for productAbstractView in data.productAbstractViewCollection  if productAbstractView.available%}
-        {% embed molecule('product-card') with {
-            class: 'col col--sm-6 col--md-6 col--lg-3',
+    {% for productAbstractView in data.productAbstractViewCollection if productAbstractView.available %}
+        {% embed molecule('product-item') with {
+            class: 'col col--sm-6 col--lg-3',
             data: {
-                name: productAbstractView.name,
-                abstractId: productAbstractView.idProductAbstract,
-                url: productAbstractView.url,
-                imageUrl: productAbstractView.images ? productAbstractView.images.0.externalUrlSmall,
-                price: productAbstractView.prices.DEFAULT | default(null),
-                originalPrice: productAbstractView.prices.ORIGINAL is defined ? productAbstractView.prices.ORIGINAL : null,
+                product: productAbstractView,
             },
         } only %}
-            {% block groups %}{% endblock %}
+            {% block colors %}{% endblock %}
         {% endembed %}
     {% endfor %}
     </div>

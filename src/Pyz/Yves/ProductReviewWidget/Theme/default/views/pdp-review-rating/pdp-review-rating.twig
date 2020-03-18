@@ -1,12 +1,20 @@
 {% extends view('pdp-review-rating', '@SprykerShop:ProductReviewWidget') %}
 
+{% define data = {
+    value: _widget.productReviewStorageTransfer.averageRating | default(0),
+    reviewCount: _widget.productReviewStorageTransfer.reviewCount | default(0),
+    maxValue: _widget.maximumRating,
+} %}
+
 {% block body %}
     {% include molecule('rating-selector', 'ProductReviewWidget') with {
         class: 'col col--expand',
         modifiers: ['expand'],
         data: {
-            value: _widget.productReviewStorageTransfer.averageRating | default(0),
-            maxValue: _widget.maximumRating,
+            value: data.value,
+            reviewCount: data.reviewCount,
+            maxValue: data.maxValue,
+            useHalfSteps: true,
         },
         attributes: {
             readonly: true,

@@ -46,32 +46,26 @@
 
                     {% block slides %}
                         {% for product in data.slides %}
-                            {% embed molecule('product-card') with {
+                            {% embed molecule('product-item') with {
                                 modifiers: ['stretch', 'product-set', 'widget'],
                                 data: {
-                                    name: product.name,
-                                    abstractId: product.idProductAbstract,
-                                    url: product.url,
-                                    imageUrl: product.images.0.externalUrlSmall | default,
-                                    price: product.price,
-                                    originalPrice: product.prices['ORIGINAL'] | default,
-                                },
-                                embed: {
                                     product: product,
                                 },
                             } only %}
                                 {% block content %}
-                                    {{parent()}}
-                                    {% set isNotAvailable = embed.product.idProductConcrete and not embed.product.available %}
+                                    {{ parent() }}
+                                    {% set isNotAvailable = data.product.idProductConcrete and not data.product.available %}
 
                                     {% embed molecule('variant-configurator', 'ProductDetailPage') with {
                                         data: {
-                                            superAttributes: embed.product.attributeMap.superAttributes,
-                                            selectedAttributes: embed.product.selectedAttributes,
-                                            availableAttributes: embed.product.availableAttributes,
+                                            superAttributes: data.product.attributeMap.superAttributes,
+                                            selectedAttributes: data.product.selectedAttributes,
+                                            availableAttributes: data.product.availableAttributes,
                                             useExternalForm: true,
                                         },
-                                        embed: embed,
+                                        embed: {
+                                            product: data.product,
+                                        },
                                     } only %}
                                         {% block variant %}
                                             {% include molecule('variant', 'ProductDetailPage') with {

@@ -6,10 +6,10 @@
     <div class="{{ config.name }}__container">
         <div class="{{ config.name }}__image-wrap">
             {% block image %}
-                {% block productThumbnail %}
-                    {% set extraClass = '' %}
-                    {% set modifiers = ['no-margin', 'product-card'] %}
+                {% set extraClass = '' %}
+                {% set modifiers = ['no-margin'] %}
 
+                {% block productThumbnail %}
                     <a class="{{ config.name }}__overlay {{ config.jsName }}__link-detail-page" href="{{ path(data.url) }}">
                         {{ parent() }}
                     </a>
@@ -46,7 +46,9 @@
             </a>
 
             {% block rating %}
-                {{ parent() }}
+                <div class="{{ config.name }}__review">
+                    {{ parent() }}
+                </div>
             {% endblock %}
         {% endblock %}
     </div>

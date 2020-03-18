@@ -6,27 +6,19 @@
 
 {% block body %}
     <div class="grid product-list">
-        {% for productAbstractView in data.productAbstractViewCollection  if productAbstractView.available%}
-            {% embed molecule('product-card') with {
-                class: 'col col--sm-6 col--md-6 col--lg-3',
+        {% for productAbstractView in data.productAbstractViewCollection if productAbstractView.available %}
+            {% embed molecule('product-item') with {
+                class: 'col col--sm-6 col--lg-3',
                 modifiers: ['cms'],
                 data: {
-                    name: productAbstractView.name,
-                    abstractId: productAbstractView.idProductAbstract,
-                    url: productAbstractView.url,
-                    imageUrl: productAbstractView.images is empty ? '' : productAbstractView.images.0.externalUrlSmall,
-                    price: productAbstractView.prices.DEFAULT | default(null),
-                    originalPrice: productAbstractView.prices.ORIGINAL is defined ? productAbstractView.prices.ORIGINAL : null
-                },
-                embed: {
-                    sku: productAbstractView.sku,
+                    product: productAbstractView,
                 },
             } only %}
                 {% block body %}
                     {{ parent() }}
 
-                    <div class="{{config.name}}__actions-container">
-                        <a href="{{ path('cart/add', {sku: embed.sku}) }}" class="button button--expand spacing-top" data-init-single-click>
+                    <div class="{{ config.name }}__actions-container">
+                        <a href="{{ path('cart/add', {sku: data.product.sku}) }}" class="button button--expand spacing-top" data-init-single-click>
                             {{ 'page.detail.add-to-cart' | trans }}
                         </a>
                     </div>
