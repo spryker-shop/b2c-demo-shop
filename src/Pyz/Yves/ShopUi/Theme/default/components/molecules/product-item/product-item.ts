@@ -16,8 +16,8 @@ export default class ProductItem extends ProductItemCore {
     }
 
     updateProductItemData(data: ProductItemData): void {
-        this.reviewCount = data.reviewCount;
         super.updateProductItemData(data);
+        this.reviewCount = data.reviewCount;
     }
 
     protected set reviewCount(reviewCount: number) {

@@ -18,7 +18,7 @@
                     {{ parent() }}
 
                     <div class="{{ config.name }}__actions-container">
-                        <a href="{{ path('cart/add', {sku: data.product.sku}) }}" class="button button--expand spacing-top" data-init-single-click>
+                        <a href="{{ path('cart/add', {sku: data.product.sku}) }}" class="button button--expand spacing-top {{ config.jsName }}__link-add-to-cart" data-init-single-click>
                             {{ 'page.detail.add-to-cart' | trans }}
                         </a>
                     </div>
