@@ -1,4 +1,8 @@
-{% extends view('cms-product-abstract-list', '@SprykerShop:ContentProductWidget') %}
+{% extends template('widget') %}
+
+{% define data = {
+    productAbstractViewCollection: productAbstractViewCollection,
+} %}
 
 {% block body %}
     <div class="grid grid--stretch product-list">
