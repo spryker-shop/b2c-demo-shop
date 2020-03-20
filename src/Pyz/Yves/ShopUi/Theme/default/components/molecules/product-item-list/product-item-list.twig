@@ -4,9 +4,9 @@
     tag: 'product-item-list',
 } %}
 
-{% block class -%}
+{% block extraClass %}
     grid grid--stretch {{ parent() }}
-{%- endblock %}
+{% endblock %}
 
 {% block body %}
     {% block imageContainer %}
@@ -48,22 +48,16 @@
             <span class="title title--medium">{{ data.name }}</span>
         {% endblock %}
 
-        {% block rating %}
-            {{ parent() }}
-        {% endblock %}
+        {{ block('rating') }}
     </a>
 
     {% block actionsContainer %}
         <a class="{{ config.name }}__col {{ config.name }}__col-price {{ config.jsName }}__link-detail-page col col--sm-4 col--md-2 text-right" href="{{ data.url }}">
-            {% block price %}
-                {{ parent() }}
-            {% endblock %}
+            {{ block('price') }}
         </a>
     {% endblock %}
 
     <div class="{{ config.name }}__labels-wrap">
-        {% block labels %}
-            {{ parent() }}
-        {% endblock %}
+        {{ block('labels') }}
     </div>
 {% endblock %}

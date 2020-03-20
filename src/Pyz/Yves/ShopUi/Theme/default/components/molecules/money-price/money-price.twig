@@ -1,17 +1,9 @@
 {% extends molecule('money-price', '@SprykerShop:ShopUi') %}
 
-{% block body %}
-    {% block defaultPriceInner %}
-        {% set defaultPriceJsName = data.parentJsName ? data.parentJsName ~ '__default-price' %}
+{% block defaultPriceInner %}
+    {% set defaultPriceJsName = data.parentJsName ? data.parentJsName ~ '__default-price' %}
 
-        <span class="{{ config.name }}__amount">
-            <span class="{{ defaultPriceJsName }}">
-                {{- data.amount | money(true, data.currencyIsoCode) -}}
-            </span>
-        </span>
-    {% endblock %}
-
-    {% block originalPrice %}
-        {{ parent() }}
-    {% endblock %}
+    <span class="{{ config.name }}__amount {{ defaultPriceJsName }}">
+        {{- data.amount | money(true, data.currencyIsoCode) -}}
+    </span>
 {% endblock %}

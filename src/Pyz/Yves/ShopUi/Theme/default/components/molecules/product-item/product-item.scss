@@ -1,19 +1,10 @@
 @mixin shop-ui-product-item($name: '.product-item') {
     #{$name} {
         position: relative;
-        padding: 0 rem(15) rem(50);
+        padding: 0 rem(5) rem(32);
 
-        @include helper-breakpoint-media-max($sm-max) {
-            padding: 0 rem(5) rem(32);
-        }
-
-        &--stretch {
-            height: 100%;
-        }
-
-        &--slider {
-            display: inline-block;
-            width: 25%;
+        @include helper-breakpoint-media-max($md-min) {
+            padding: 0 rem(15) rem(50);
         }
 
         &__image-wrap {
@@ -130,6 +121,15 @@
         &__review {
             display: flex;
             margin-top: rem(7);
+        }
+
+        &--stretch {
+            height: 100%;
+        }
+
+        &--slider {
+            display: inline-block;
+            width: 25%;
         }
 
         &--product-set {
