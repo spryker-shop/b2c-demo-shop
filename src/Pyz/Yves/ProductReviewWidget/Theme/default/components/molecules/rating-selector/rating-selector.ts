@@ -26,8 +26,10 @@ export default class RatingSelector extends RatingSelectorCore {
     }
 
     protected updateReviewCount(value: number): void {
-        if (this.reviewCount) {
-            this.reviewCount.innerText = `${value}`;
+        if (!this.reviewCount) {
+            return;
         }
+
+        this.reviewCount.innerText = `${value}`;
     }
 }

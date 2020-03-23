@@ -101,20 +101,20 @@
 
         &__info {
             display: block;
-            margin: 0 rem(11);
-            font: 500 rem(16) $setting-font-family-additional;
+            margin: 0 rem(10) rem(3);
+            font: fw(medium) rem(13) $setting-font-family-additional;
             letter-spacing: rem(0.3);
             color: $setting-color-black;
+            flex-wrap: wrap;
 
             &:hover {
                 color: $setting-color-black;
                 text-decoration: none;
             }
 
-            @include helper-breakpoint-media-max($sm-max) {
-                font-size: rem(13);
-                margin: 0 rem(10) rem(3);
-                flex-wrap: wrap;
+            @include helper-breakpoint-media-max($md-min) {
+                font-size: rem(16);
+                margin: 0 rem(11);
             }
         }
 
@@ -134,9 +134,12 @@
 
         &--product-set {
             #{$name}__overlay {
-                @include helper-breakpoint-media-max($md-max) {
-                    padding-top: rem(20);
-                    padding-bottom: rem(20);
+                padding-top: rem(20);
+                padding-bottom: rem(20);
+
+                @include helper-breakpoint-media-max($lg-min) {
+                    padding-top: 0;
+                    padding-bottom: 0;
                 }
             }
 
