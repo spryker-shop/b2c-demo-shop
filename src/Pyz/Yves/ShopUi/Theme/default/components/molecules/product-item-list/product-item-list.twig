@@ -12,7 +12,7 @@
     {% block imageContainer %}
         <div class="{{ config.name }}__col {{ config.name }}__col-image col col--sm-12 col--md-3">
             {% block productThumbnail %}
-                <a class="{{ config.name }}__overlay {{ config.jsName }}__link-detail-page" href="{{ path(data.url) }}">
+                <a class="{{ config.name }}__overlay {{ config.jsName }}__link-detail-page" href="{{ data.url }}">
                     {% embed atom('thumbnail') with {
                         modifiers: ['product-list-item'],
                         attributes: {
@@ -48,7 +48,9 @@
             <span class="title title--medium">{{ data.name }}</span>
         {% endblock %}
 
-        {{ block('rating') }}
+        <div class="{{ config.name }}__review">
+            {{ block('rating') }}
+        </div>
     </a>
 
     {% block actionsContainer %}

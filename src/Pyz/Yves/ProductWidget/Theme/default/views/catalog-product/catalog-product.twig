@@ -30,14 +30,12 @@
         {% endblock %}
 
         {% block rating %}
-            <div class="{{ config.name }}__review">
-                {% widget 'ProductReviewDisplayWidget' args [data.product.rating | default(0)] with {
-                    data: {
-                        parentJsName: config.jsName,
-                        reviewCount: data.product.review_count | default(0),
-                    },
-                } only %}{% endwidget %}
-            </div>
+            {% widget 'ProductReviewDisplayWidget' args [data.product.rating | default(0)] with {
+                data: {
+                    parentJsName: config.jsName,
+                    reviewCount: data.product.review_count | default(0),
+                },
+            } only %}{% endwidget %}
         {% endblock %}
     {% endembed %}
 {% endblock %}
