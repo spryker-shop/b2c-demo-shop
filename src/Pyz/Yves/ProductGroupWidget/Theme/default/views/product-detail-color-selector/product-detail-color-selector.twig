@@ -1,8 +1,4 @@
-{% extends template('widget') %}
-
-{% define data = {
-    items: _widget.productGroupItems | default([]),
-} %}
+{% extends view('product-detail-color-selector', '@SprykerShop:ProductGroupWidget') %}
 
 {% block body %}
     {% if data.items | length > 1 %}

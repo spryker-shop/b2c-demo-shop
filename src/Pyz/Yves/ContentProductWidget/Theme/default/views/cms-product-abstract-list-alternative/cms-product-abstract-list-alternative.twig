@@ -19,9 +19,7 @@
                             <a href="{{ data.url }}" class="{{ config.name }}__info {{ config.jsName }}__link-detail-page grid grid--justify grid--top grid--no-wrap">
                                 {% block name %}
                                     <div class="col col--md-8 col--sm-12">
-                                        {% block title %}
-                                            {{ parent() }}
-                                        {% endblock %}
+                                        {{ block('title') }}
                                     </div>
                                 {% endblock %}
 
@@ -40,17 +38,9 @@
                             </a>
 
                             <div class="{{ config.name }}__image-wrap">
-                                {% block image %}
-                                    {{ parent() }}
-                                {% endblock %}
-
-                                {% block labels %}
-                                    {{ parent() }}
-                                {% endblock %}
-
-                                {% block colors %}
-                                    {{ parent() }}
-                                {% endblock %}
+                                {{ block('image') }}
+                                {{ block('labels') }}
+                                {{ block('colors') }}
                             </div>
                         {% endblock %}
 
