@@ -11,7 +11,7 @@
 } %}
 
 {% define attributes = {
-    'active-class': '',
+    'active-class': config.name ~ '__item--active',
     'slider-config': '{}',
 } %}
 
@@ -35,7 +35,7 @@
 
     <div class="{{ config.name }}__container {{ singleImageClass }}">
         {% for image in data.images %}
-            {% set activeItemClass = loop.first ? config.name ~ '__item--active' %}
+            {% set activeItemClass = loop.first ? attributes['active-class'] %}
 
             <div class="{{ config.name }}__item {{ config.jsName }}__item {{ activeItemClass }}">
                 {% if image.externalUrlLarge is not empty %}
