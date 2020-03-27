@@ -21,8 +21,8 @@ export default class RangeSlider extends Component {
     protected readyCallback(): void {}
 
     protected init(): void {
-        this.wrap = <HTMLElement>document.getElementsByClassName(this.wrapClassName)[0];
-        this.targetSelectors = <HTMLInputElement[]>Array.from(document.getElementsByClassName(this.targetClassName));
+        this.wrap = <HTMLElement>this.getElementsByClassName(this.wrapClassName)[0];
+        this.targetSelectors = <HTMLInputElement[]>Array.from(this.getElementsByClassName(this.targetClassName));
         this.sliderConfig = {
             start: [ this.valueCurrentMin, this.valueCurrentMax ],
             step: this.stepAttribute,
@@ -41,7 +41,9 @@ export default class RangeSlider extends Component {
         this.updateValues(this.wrap, this.targetSelectors);
 
         if (this.valueClassName) {
-            this.valueTarget = <HTMLElement[]>Array.from(document.getElementsByClassName(this.valueClassName));
+            this.valueTarget = <HTMLElement[]>Array.from(this.getElementsByClassName(this.valueClassName));
+            console.log(this.valueClassName);
+            console.log(this.valueTarget);
             this.updateSelectors(this.wrap, this.valueTarget);
         }
     }

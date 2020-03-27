@@ -5,10 +5,13 @@
     tag: 'range-slider',
 } %}
 
+{% define data = {
+    'parameter': required,
+} %}
 
 {% define attributes = {
-    'wrap-class-name': required,
-    'target-class-name': required,
+    'wrap-class-name': 'js-' ~ config.name ~ '__range-slider',
+    'target-class-name': 'js-' ~ config.name ~ '__input',
     'value-class-name': '',
     'value-min': required,
     'value-max': required,
@@ -18,3 +21,40 @@
     'connect': 'true',
     'margin': 1,
 } %}
+
+
+{% block body %}
+    {% set activeMin = (attributes['active-min'] != attributes['value-min']) ? attributes['active-min'] %}
+    {% set activeMax = (attributes['active-max'] != attributes['value-max']) ? attributes['active-max'] %}
+
+    <input
+            class="{{ config.jsName }}__input"
+            type="hidden"
+            name="{{ data.parameter }}[min]"
+            value="{{ activeMin }}"
+            required="required"
+            min="{{ attributes['value-min'] }}"
+            max="{{ attributes['value-max'] }}"
+            data-default-value="{{ attributes['value-min'] }}"
+    >
+    <input
+            class="{{ config.jsName }}__input"
+            type="hidden"
+            name="{{ data.parameter }}[max]"
+            value="{{ activeMax }}"
+            required="required"
+            min="{{ attributes['value-min'] }}"
+            max="{{ attributes['value-max'] }}"
+            data-default-value="{{ attributes['value-max'] }}"
+    >
+    <div class="range-slider range-slider--horizontal {{ config.jsName }}__range-slider">
+        <div class="range-slider__values">
+            <span class="range-slider__values-item {{ config.jsName }}__value">
+                {{- attributes['active-min'] | money -}}
+            </span>
+            <span class="range-slider__values-item {{ config.jsName }}__value">
+                {{- attributes['active-max'] | money -}}
+            </span>
+        </div>
+    </div>
+{% endblock %}
