@@ -42,8 +42,6 @@ export default class RangeSlider extends Component {
 
         if (this.valueClassName) {
             this.valueTarget = <HTMLElement[]>Array.from(this.getElementsByClassName(this.valueClassName));
-            console.log(this.valueClassName);
-            console.log(this.valueTarget);
             this.updateSelectors(this.wrap, this.valueTarget);
         }
     }

@@ -12,7 +12,7 @@
 {% define attributes = {
     'wrap-class-name': 'js-' ~ config.name ~ '__range-slider',
     'target-class-name': 'js-' ~ config.name ~ '__input',
-    'value-class-name': 'js-' ~ config.name ~ '__input',
+    'value-class-name': 'js-' ~ config.name ~ '__values-item',
     'value-min': required,
     'value-max': required,
     'active-min': required,
@@ -49,10 +49,10 @@
     >
     <div class="{{ config.name }} {{ config.name }}--horizontal {{ config.jsName }}__range-slider">
         <div class="{{ config.name }}__values">
-            <span class="{{ config.name }}__values-item {{ config.jsName }}__value">
+            <span class="{{ config.name }}__values-item {{ config.jsName }}__values-item">
                 {{- attributes['active-min'] | money -}}
             </span>
-            <span class="{{ config.name }}__values-item {{ config.jsName }}__value">
+            <span class="{{ config.name }}__values-item {{ config.jsName }}__values-item">
                 {{- attributes['active-max'] | money -}}
             </span>
         </div>
