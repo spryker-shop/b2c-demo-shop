@@ -68,7 +68,7 @@ class CheckoutRestApiConfig extends SprykerCheckoutRestApiConfig
      */
     public function isShipmentMethodsMappedToAttributes(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -76,6 +76,6 @@ class CheckoutRestApiConfig extends SprykerCheckoutRestApiConfig
      */
     public function isPaymentProvidersMappedToAttributes(): bool
     {
-        return true;
+        return false;
     }
 }
