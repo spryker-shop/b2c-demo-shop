@@ -10,7 +10,7 @@
 } %}
 
 {% define attributes = {
-    'wrap-class-name': 'js-' ~ config.name ~ '__range-slider',
+    'wrap-class-name': 'js-' ~ config.name ~ '__slider-content',
     'target-class-name': 'js-' ~ config.name ~ '__input',
     'value-class-name': 'js-' ~ config.name ~ '__values-item',
     'value-min': required,
@@ -49,7 +49,7 @@
     {{ _self.renderInput(config.jsName ~ '__input', data.parameter ~ '[min]', activeMin, attributes['value-min'], attributes['value-max'], attributes['value-min'] ) }}
     {{ _self.renderInput(config.jsName ~ '__input', data.parameter ~ '[max]', activeMax, attributes['value-min'], attributes['value-max'], attributes['value-max'] ) }}
 
-    <div class="{{ component.renderClass(config.name ~ '__range-slider', modifiers) }} {{ config.jsName }}__range-slider">
+    <div class="{{ component.renderClass(config.name ~ '__slider-content', modifiers) }} {{ config.jsName }}__slider-content">
         <div class="{{ config.name }}__values">
             {{ _self.renderValueItem(config.name, config.jsName, attributes['active-min'] | money) }}
             {{ _self.renderValueItem(config.name, config.jsName, attributes['active-max'] | money) }}
