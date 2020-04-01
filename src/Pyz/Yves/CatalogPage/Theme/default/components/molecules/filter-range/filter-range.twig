@@ -16,6 +16,7 @@
     {% set filtersEqual = data.max is same as(data.min)%}
     {% if not filtersEqual %}
         {% include molecule('range-slider') with {
+            modifiers: ['horizontal'],
             data: {
                 parameter: data.parameter,
             },
