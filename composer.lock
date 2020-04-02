@@ -8539,29 +8539,32 @@
         },
         {
             "name": "spryker/acl",
-            "version": "3.3.2",
+            "version": "3.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/acl.git",
-                "reference": "e993731a72c8d779535b489728e131c2c3b94313"
+                "reference": "b8c9a93ab9ce89fc899540620276796370440c60"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/acl/zipball/e993731a72c8d779535b489728e131c2c3b94313",
-                "reference": "e993731a72c8d779535b489728e131c2c3b94313",
+                "url": "https://api.github.com/repos/spryker/acl/zipball/b8c9a93ab9ce89fc899540620276796370440c60",
+                "reference": "b8c9a93ab9ce89fc899540620276796370440c60",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.2",
+                "spryker/acl-extension": "^1.0.0",
                 "spryker/config": "^3.0.0",
                 "spryker/event-dispatcher-extension": "^1.0.0",
                 "spryker/gui": "^3.0.0",
                 "spryker/kernel": "^3.30.0",
                 "spryker/propel-orm": "^1.0.0",
                 "spryker/symfony": "^3.0.0",
+                "spryker/transfer": "^3.8.0",
                 "spryker/user": "^3.0.0",
                 "spryker/util-date-time": "^1.0.0",
-                "spryker/util-text": "^1.1.0"
+                "spryker/util-text": "^1.1.0",
+                "spryker/zed-navigation-extension": "^1.1.0"
             },
             "require-dev": {
                 "spryker/application": "*",
@@ -8588,7 +8591,8 @@
             },
             "autoload": {
                 "psr-4": {
-                    "Spryker\\": "src/Spryker/"
+                    "Spryker\\": "src/Spryker/",
+                    "SprykerTest\\Zed\\Acl\\Helper\\": "tests/SprykerTest/Zed/Acl/_support/Helper/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -8596,7 +8600,45 @@
                 "proprietary"
             ],
             "description": "Acl module",
-            "time": "2019-12-21T16:01:40+00:00"
+            "time": "2020-03-23T14:26:56+00:00"
+        },
+        {
+            "name": "spryker/acl-extension",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/acl-extension.git",
+                "reference": "335412ee87fcc8dc7cbdcdc70fd982c6ea814772"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/acl-extension/zipball/335412ee87fcc8dc7cbdcdc70fd982c6ea814772",
+                "reference": "335412ee87fcc8dc7cbdcdc70fd982c6ea814772",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "AclExtension module",
+            "time": "2020-02-04T11:54:50+00:00"
         },
         {
             "name": "spryker/agent",
@@ -30435,16 +30477,16 @@
         },
         {
             "name": "spryker/zed-navigation",
-            "version": "1.4.0",
+            "version": "1.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/zed-navigation.git",
-                "reference": "9e23df40431500dd36445471edc41a9d8077f9d3"
+                "reference": "73f14dd9a2429182128be5be20fe8cb3e347b452"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/zed-navigation/zipball/9e23df40431500dd36445471edc41a9d8077f9d3",
-                "reference": "9e23df40431500dd36445471edc41a9d8077f9d3",
+                "url": "https://api.github.com/repos/spryker/zed-navigation/zipball/73f14dd9a2429182128be5be20fe8cb3e347b452",
+                "reference": "73f14dd9a2429182128be5be20fe8cb3e347b452",
                 "shasum": ""
             },
             "require": {
@@ -30452,9 +30494,11 @@
                 "spryker/kernel": "^3.30.0",
                 "spryker/log": "^2.0.0 || ^3.0.0",
                 "spryker/symfony": "^3.0.0",
+                "spryker/transfer": "^3.8.0",
                 "spryker/twig-extension": "^1.0.0",
                 "spryker/url": "^3.0.0",
                 "spryker/util-encoding": "^2.0.0",
+                "spryker/zed-navigation-extension": "^1.1.0",
                 "spryker/zend": "^2.0.0"
             },
             "require-dev": {
@@ -30487,7 +30531,45 @@
                 "proprietary"
             ],
             "description": "ZedNavigation module",
-            "time": "2019-11-19T10:17:28+00:00"
+            "time": "2020-03-23T14:26:56+00:00"
+        },
+        {
+            "name": "spryker/zed-navigation-extension",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/zed-navigation-extension.git",
+                "reference": "69c50153d22ce1684e624d8f3039106132ad8711"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/zed-navigation-extension/zipball/69c50153d22ce1684e624d8f3039106132ad8711",
+                "reference": "69c50153d22ce1684e624d8f3039106132ad8711",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "ZedNavigationExtension module",
+            "time": "2020-03-20T13:33:12+00:00"
         },
         {
             "name": "spryker/zed-request",
@@ -38570,5 +38652,6 @@
     "platform-dev": [],
     "platform-overrides": {
         "php": "7.2.24"
-    }
+    },
+    "plugin-api-version": "1.1.0"
 }
