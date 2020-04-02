@@ -37,6 +37,7 @@ use Pyz\Zed\DataImport\Business\Model\ProductAbstract\ProductAbstractWriterStep;
 use Pyz\Zed\DataImport\Business\Model\ProductAbstractStore\ProductAbstractStoreWriterStep;
 use Pyz\Zed\DataImport\Business\Model\ProductAttributeKey\AddProductAttributeKeysStep;
 use Pyz\Zed\DataImport\Business\Model\ProductAttributeKey\ProductAttributeKeyWriter;
+use Pyz\Zed\DataImport\Business\Model\ProductConcrete\ProductConcreteAttributesUniqueCheckStep;
 use Pyz\Zed\DataImport\Business\Model\ProductConcrete\ProductConcreteWriter;
 use Pyz\Zed\DataImport\Business\Model\ProductGroup\ProductGroupWriter;
 use Pyz\Zed\DataImport\Business\Model\ProductImage\ProductImageWriterStep;
@@ -622,6 +623,7 @@ class DataImportBusinessFactory extends SprykerDataImportBusinessFactory
         $dataSetStepBroker
             ->addStep($this->createAddLocalesStep())
             ->addStep($this->createAttributesExtractorStep())
+            ->addStep($this->createProductConcreteAttributesUniqueCheckStep())
             ->addStep($this->createProductLocalizedAttributesExtractorStep([
                 ProductConcreteWriter::KEY_NAME,
                 ProductConcreteWriter::KEY_DESCRIPTION,
@@ -634,6 +636,17 @@ class DataImportBusinessFactory extends SprykerDataImportBusinessFactory
         $dataImporter->addDataSetStepBroker($dataSetStepBroker);
 
         return $dataImporter;
+    }
+
+    /**
+     * @return \Spryker\Zed\DataImport\Business\Model\DataImportStep\DataImportStepInterface
+     */
+    public function createProductConcreteAttributesUniqueCheckStep(): DataImportStepInterface
+    {
+        return new ProductConcreteAttributesUniqueCheckStep(
+            $this->createProductRepository(),
+            $this->getUtilEncodingService()
+        );
     }
 
     /**

@@ -7,10 +7,13 @@
 
 namespace Pyz\Zed\DataImport\Business\Model\Product\Repository;
 
+use Orm\Zed\Product\Persistence\Map\SpyProductAbstractTableMap;
+use Orm\Zed\Product\Persistence\Map\SpyProductTableMap;
 use Orm\Zed\Product\Persistence\SpyProduct;
 use Orm\Zed\Product\Persistence\SpyProductAbstract;
 use Orm\Zed\Product\Persistence\SpyProductAbstractQuery;
 use Orm\Zed\Product\Persistence\SpyProductQuery;
+use Propel\Runtime\Collection\ArrayCollection;
 use Pyz\Zed\DataImport\Business\Exception\EntityNotFoundException;
 
 class ProductRepository implements ProductRepositoryInterface
@@ -64,6 +67,17 @@ class ProductRepository implements ProductRepositoryInterface
         }
 
         return static::$resolved[$sku][static::ID_PRODUCT_ABSTRACT];
+    }
+
+    /**
+     * @return \Propel\Runtime\Collection\ArrayCollection
+     */
+    public function getProductConcreteAttributesCollection(): ArrayCollection
+    {
+        return SpyProductQuery::create()
+            ->joinWithSpyProductAbstract()
+            ->select([SpyProductTableMap::COL_ATTRIBUTES, SpyProductTableMap::COL_SKU, SpyProductAbstractTableMap::COL_SKU])
+            ->find();
     }
 
     /**

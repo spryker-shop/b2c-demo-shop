@@ -9,6 +9,7 @@ namespace Pyz\Zed\DataImport\Business\Model\Product\Repository;
 
 use Orm\Zed\Product\Persistence\SpyProduct;
 use Orm\Zed\Product\Persistence\SpyProductAbstract;
+use Propel\Runtime\Collection\ArrayCollection;
 
 interface ProductRepositoryInterface
 {
@@ -32,6 +33,11 @@ interface ProductRepositoryInterface
      * @return int
      */
     public function getIdProductAbstractByAbstractSku($sku);
+
+    /**
+     * @return \Propel\Runtime\Collection\ArrayCollection
+     */
+    public function getProductConcreteAttributesCollection(): ArrayCollection;
 
     /**
      * @param \Orm\Zed\Product\Persistence\SpyProductAbstract $productAbstractEntity
