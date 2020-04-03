@@ -1,0 +1,46 @@
+# Example of a B2C demo shop 'Merchandising category' data import.
+version: 0
+actions:
+  # B2C Merchandising category includes sub-categories:
+  #    - Product Merchandising
+  #    - Product List
+  #    - Discounts
+  #
+  - data_entity: discount
+    source: data/import/discount.csv
+  - data_entity: discount-store
+    source: data/import/discount_store.csv
+  - data_entity: discount-voucher
+    source: data/import/discount_voucher.csv
+  - data_entity: product-group
+    source: data/import/product_group.csv
+  - data_entity: product-relation
+    source: data/import/product_relation.csv
+  - data_entity: product-review
+    source: data/import/product_review.csv
+  - data_entity: product-label
+    source: data/import/product_label.csv
+  - data_entity: product-set
+    source: data/import/icecat_biz_data/product_set.csv
+  - data_entity: product-search-attribute-map
+    source: data/import/product_search_attribute_map.csv
+  - data_entity: product-search-attribute
+    source: data/import/product_search_attribute.csv
+  - data_entity: discount-amount
+    source: data/import/discount_amount.csv
+  - data_entity: product-discontinued
+  - data_entity: product-alternative
+  - data_entity: product-quantity
+    source: data/import/product_quantity.csv
+  - data_entity: product-list
+    source: data/import/product_list.csv
+  - data_entity: product-list-category
+    source: data/import/product_list_to_category.csv
+  - data_entity: product-list-product-concrete
+    source: data/import/product_list_to_concrete_product.csv
+  - data_entity: configurable-bundle-template
+    source: data/import/configurable_bundle_template.csv
+  - data_entity: configurable-bundle-template-slot
+    source: data/import/configurable_bundle_template_slot.csv
+  - data_entity: configurable-bundle-template-image
+    source: data/import/configurable_bundle_template_image.csv

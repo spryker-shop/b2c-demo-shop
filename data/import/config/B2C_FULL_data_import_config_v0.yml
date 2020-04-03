@@ -1,0 +1,151 @@
+# Example of a B2C demo shop 'full' data import (all categories).
+version: 0
+
+actions:
+#1. Commerce Setup import
+  - data_entity: store
+  - data_entity: currency
+    source: data/import/currency.csv
+  - data_entity: customer
+    source: data/import/customer.csv
+  - data_entity: glossary
+    source: data/import/glossary.csv
+  - data_entity: tax
+    source: data/import/tax.csv
+  - data_entity: shipment
+    source: data/import/shipment.csv
+  - data_entity: shipment-price
+    source: data/import/shipment_price.csv
+  - data_entity: sales-order-threshold
+    source: data/import/sales_order_threshold.csv
+  - data_entity: shipment-method-store
+  - data_entity: stock
+  - data_entity: stock-store
+  - data_entity: payment-method
+    source: data/import/payment_method.csv
+  - data_entity: payment-method-store
+    source: data/import/payment_method_store.csv
+
+
+#2. Catalog Setup import
+      # B2C Catalog Setup category includes sub-categories:
+      #    - Categories
+      #    - Products
+      #    - Pricing
+      #    - Stocks
+  - data_entity: category-template
+    source: data/import/category_template.csv
+  - data_entity: category
+    source: data/import/category.csv
+  - data_entity: product-attribute-key
+    source: data/import/product_attribute_key.csv
+  - data_entity: product-management-attribute
+    source: data/import/product_management_attribute.csv
+  - data_entity: product-abstract
+    source: data/import/icecat_biz_data/product_abstract.csv
+  - data_entity: product-abstract-store
+    source: data/import/icecat_biz_data/product_abstract_store.csv
+  - data_entity: product-concrete
+    source: data/import/icecat_biz_data/product_concrete.csv
+  - data_entity: product-image
+    source: data/import/icecat_biz_data/product_image_internal.csv
+  - data_entity: product-price
+    source: data/import/product_price.csv
+  - data_entity: product-price-schedule
+    source: data/import/product_price_schedule.csv
+  - data_entity: product-stock
+    source: data/import/product_stock.csv
+
+
+#3. Merchandising Setup import
+  - data_entity: discount
+    source: data/import/discount.csv
+  - data_entity: discount-store
+    source: data/import/discount_store.csv
+  - data_entity: discount-voucher
+    source: data/import/discount_voucher.csv
+  - data_entity: product-group
+    source: data/import/product_group.csv
+  - data_entity: product-relation
+    source: data/import/product_relation.csv
+  - data_entity: product-review
+    source: data/import/product_review.csv
+  - data_entity: product-label
+    source: data/import/product_label.csv
+  - data_entity: product-set
+    source: data/import/icecat_biz_data/product_set.csv
+  - data_entity: product-search-attribute-map
+    source: data/import/product_search_attribute_map.csv
+  - data_entity: product-search-attribute
+    source: data/import/product_search_attribute.csv
+  - data_entity: discount-amount
+    source: data/import/discount_amount.csv
+  - data_entity: product-discontinued
+  - data_entity: product-alternative
+  - data_entity: product-quantity
+    source: data/import/product_quantity.csv
+  - data_entity: product-list
+    source: data/import/product_list.csv
+  - data_entity: product-list-category
+    source: data/import/product_list_to_category.csv
+  - data_entity: product-list-product-concrete
+    source: data/import/product_list_to_concrete_product.csv
+  - data_entity: configurable-bundle-template
+    source: data/import/configurable_bundle_template.csv
+  - data_entity: configurable-bundle-template-slot
+    source: data/import/configurable_bundle_template_slot.csv
+  - data_entity: configurable-bundle-template-image
+    source: data/import/configurable_bundle_template_image.csv
+
+
+#4. Special Product Types Setup import
+# B2C Special Product Types category includes sub-categories:
+    #    - Product Options
+    #    - Measurements
+    #    - Product Bundles
+    #    - Gift Cards
+    #
+  - data_entity: product-option
+    source: data/import/product_option.csv
+  - data_entity: product-option-price
+    source: data/import/product_option_price.csv
+  - data_entity: gift-card-abstract-configuration
+    source: data/import/gift_card_abstract_configuration.csv
+  - data_entity: gift-card-concrete-configuration
+    source: data/import/gift_card_concrete_configuration.csv
+
+
+#5. Content Management Setup import
+  - data_entity: cms-template
+    source: data/import/cms_template.csv
+  - data_entity: cms-block
+    source: data/import/cms_block.csv
+  - data_entity: cms-block-store
+    source: data/import/cms_block_store.csv
+  - data_entity: content-banner
+    source: data/import/content_banner.csv
+  - data_entity: content-product-abstract-list
+    source: data/import/content_product_abstract_list.csv
+  - data_entity: content-product-set
+    source: data/import/content_product_set.csv
+  - data_entity: cms-page
+    source: data/import/cms_page.csv
+  - data_entity: cms-page-store
+    source: data/import/cms_page_store.csv
+  - data_entity: cms-slot-template
+    source: data/import/cms_slot_template.csv
+  - data_entity: cms-slot
+    source: data/import/cms_slot.csv
+  - data_entity: cms-slot-block
+    source: data/import/cms_slot_block.csv
+
+
+#6. Miscellaneous Setup import
+  - data_entity: mime-type
+
+
+#7. Navigation Setup import
+  - data_entity: navigation
+    source: data/import/navigation.csv
+  - data_entity: navigation-node
+    source: data/import/navigation_node.csv

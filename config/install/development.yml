@@ -215,8 +215,44 @@ sections:
                 - elastic
 
     demodata:
-        import:
-            command: "vendor/bin/console data:import"
+        import-commerce-setup:
+            command: "vendor/bin/console data:import --config=data/import/config/B2C_Commerce_Setup_import_config_v0.yml"
+            stores:
+                - US
+                - DE
+
+        import-catalog-setup:
+            command: "vendor/bin/console data:import --config=data/import/config/B2C_Catalog_Setup_import_config_v0.yml"
+            stores:
+                - US
+                - DE
+
+        import-special-product-types-setup:
+            command: "vendor/bin/console data:import --config=data/import/config/B2C_Special_Product_Types_import_config_v0.yml"
+            stores:
+                - US
+                - DE
+
+        import-merchandising-setup:
+            command: "vendor/bin/console data:import --config=data/import/config/B2C_Merchandising_import_config_v0.yml"
+            stores:
+                - US
+                - DE
+
+        import-navigation-setup:
+            command: "vendor/bin/console data:import --config=data/import/config/B2C_Navigation_import_config_v0.yml"
+            stores:
+                - US
+                - DE
+
+        import-content-management-setup:
+            command: "vendor/bin/console data:import --config=data/import/config/B2C_Content_Management_import_config_v0.yml"
+            stores:
+                - US
+                - DE
+
+        import-miscellaneous-setup:
+            command: "vendor/bin/console data:import --config=data/import/config/B2C_Miscellaneous_import_config_v0.yml"
             stores:
                 - US
                 - DE
