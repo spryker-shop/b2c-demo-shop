@@ -1,0 +1,16 @@
+{% extends molecule('active-filter-price-range', '@SprykerShop:CatalogPage') %}
+
+{% define config = {
+    name: 'active-filter-range',
+} %}
+
+{% block component %}
+    {% if app.request.query.has(data.filter.config.parameterName) %}
+        {% include molecule('active-filter', 'CatalogPage') with {
+            data: {
+                filter: data.filter,
+                value: data.activeMin ~ ' - ' ~ data.activeMax,
+            },
+        } only %}
+    {% endif %}
+{% endblock %}
