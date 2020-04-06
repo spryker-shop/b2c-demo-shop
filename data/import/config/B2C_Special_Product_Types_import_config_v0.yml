@@ -1,0 +1,17 @@
+# Example of a B2C demo shop 'Special Product Types category' data import.
+version: 0
+actions:
+  # B2C Special Product Types category includes sub-categories:
+  #    - Product Options
+  #    - Measurements
+  #    - Product Bundles
+  #    - Gift Cards
+  #
+  - data_entity: product-option
+    source: data/import/product_option.csv
+  - data_entity: product-option-price
+    source: data/import/product_option_price.csv
+  - data_entity: gift-card-abstract-configuration
+    source: data/import/gift_card_abstract_configuration.csv
+  - data_entity: gift-card-concrete-configuration
+    source: data/import/gift_card_concrete_configuration.csv
