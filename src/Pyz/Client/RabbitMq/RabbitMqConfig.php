@@ -7,9 +7,6 @@
 
 namespace Pyz\Client\RabbitMq;
 
-use ArrayObject;
-use Generated\Shared\Transfer\RabbitMqOptionTransfer;
-use Spryker\Client\RabbitMq\Model\Connection\Connection;
 use Spryker\Client\RabbitMq\RabbitMqConfig as SprykerRabbitMqConfig;
 use Spryker\Shared\AvailabilityStorage\AvailabilityStorageConstants;
 use Spryker\Shared\CategoryPageSearch\CategoryPageSearchConstants;
