@@ -138,7 +138,7 @@
                                             useExternalForm: true,
                                         },
                                         embed: {
-                                            product: data.product,
+                                            idProductAbstract: data.idProductAbstract,
                                         },
                                     } only %}
                                         {% block variant %}
@@ -147,7 +147,7 @@
                                                     modifiers: ['bundle'],
                                                     data: {
                                                         name: name,
-                                                        formName: 'attributes[' ~ embed.product.idProductAbstract ~ '][' ~ name ~ ']',
+                                                        formName: 'attributes[' ~ embed.idProductAbstract ~ '][' ~ name ~ ']',
                                                         values: values,
                                                         selectedValue: selectedValue,
                                                         label: ('product.attribute.' ~ name) | trans,
@@ -167,7 +167,7 @@
                                         {% if isDisabled %}
                                             <button type="button" class="button button--expand" disabled>{{ 'page.detail.add-to-cart' | trans }}</button>
                                         {% else %}
-                                            <a href="{{ path('cart/add', {sku: data.product.sku}) }}" class="button button--expand {{ config.jsName }}__link-add-to-cart" data-init-single-click>
+                                            <a href="{{ path('cart/add', {sku: data.sku}) }}" class="button button--expand {{ config.jsName }}__link-add-to-cart" data-init-single-click>
                                                 {{ 'page.detail.add-to-cart' | trans }}
                                             </a>
                                         {% endif %}

@@ -68,9 +68,9 @@ export default class ImageGallery extends Component {
     }
 
     protected getCurrentSlideImage(): void {
-        const currentSlide = this.galleryItems.filter((element: HTMLElement) => {
-            return element.classList.contains(this.activeClass);
-        })[0];
+        const currentSlide = this.galleryItems.filter((element: HTMLElement) => (
+            element.classList.contains(this.activeClass)
+        ))[0];
         this.currentSlideImage = currentSlide.getElementsByTagName('img')[0];
     }
 

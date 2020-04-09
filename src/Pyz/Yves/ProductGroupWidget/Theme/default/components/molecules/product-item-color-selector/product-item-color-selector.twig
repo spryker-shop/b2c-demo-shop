@@ -14,7 +14,7 @@
 } %}
 
 {% block selection %}
-    {% set labels = labels | default([]) %}
+    {% set labels = [] %}
 
     {% for label in item.labels %}
         {% set labels = labels | merge([{
@@ -27,7 +27,7 @@
         type: 'button',
         'data-product-image-src': item.images ? item.images[0].externalUrlSmall,
         'data-product-labels': labels | json_encode,
-        'data-product-name': item.name ? item.name,
+        'data-product-name': item.name ?: '',
         'data-product-rating': item.rating ? item.rating.averageRating,
         'data-product-default-price': item.prices['DEFAULT'] is defined ? (item.prices['DEFAULT'] | money),
         'data-product-original-price': item.prices['ORIGINAL'] is defined ? (item.prices['ORIGINAL'] | money),
