@@ -43,7 +43,7 @@
                             } only %}
                         </div>
 
-                        <form method="POST" action="/cart/add/{{ data.product.sku }}" class="grid grid--bottom grid--justify">
+                        <form method="POST" action="/cart/add/{{ data.sku }}" class="grid grid--bottom grid--justify">
                             {% set disabledAttribute = data.product.idProductConcrete is empty ? 'disabled' %}
 
                             {% include molecule('product-quantity-input') with {
@@ -54,7 +54,7 @@
                             } only %}
 
                             <div class="col col--sm-12 col--md-4 text-right">
-                                <input type="hidden" value="{{ data.product.sku }}" name="groupKey">
+                                <input type="hidden" value="{{ data.sku }}" name="groupKey">
                                 <input type="hidden" value="{{ embed.promotionDiscount.id }}" name="idDiscountPromotion">
 
                                 <button class="button button--hollow button--promotion-item" {{ disabledAttribute }} data-init-single-click>
