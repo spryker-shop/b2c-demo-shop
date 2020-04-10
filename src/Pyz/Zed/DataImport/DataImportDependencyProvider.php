@@ -34,6 +34,8 @@ use Spryker\Zed\ProductListDataImport\Communication\Plugin\ProductListCategoryDa
 use Spryker\Zed\ProductListDataImport\Communication\Plugin\ProductListDataImportPlugin;
 use Spryker\Zed\ProductListDataImport\Communication\Plugin\ProductListProductConcreteDataImportPlugin;
 use Spryker\Zed\ProductQuantityDataImport\Communication\Plugin\ProductQuantityDataImportPlugin;
+use Spryker\Zed\ProductRelationDataImport\Communication\Plugin\ProductRelationDataImportPlugin;
+use Spryker\Zed\ProductRelationDataImport\Communication\Plugin\ProductRelationStoreDataImportPlugin;
 use Spryker\Zed\SalesOrderThresholdDataImport\Communication\Plugin\DataImport\SalesOrderThresholdDataImportPlugin;
 use Spryker\Zed\ShipmentDataImport\Communication\Plugin\ShipmentDataImportPlugin;
 use Spryker\Zed\ShipmentDataImport\Communication\Plugin\ShipmentMethodPriceDataImportPlugin;
@@ -172,6 +174,8 @@ class DataImportDependencyProvider extends SprykerDataImportDependencyProvider
             new ConfigurableBundleTemplateDataImportPlugin(),
             new ConfigurableBundleTemplateSlotDataImportPlugin(),
             new ConfigurableBundleTemplateImageDataImportPlugin(),
+            new ProductRelationDataImportPlugin(),
+            new ProductRelationStoreDataImportPlugin(),
         ];
     }
 
