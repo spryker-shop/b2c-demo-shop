@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "30ab481d84e4edd88a932c5e272ec2f4",
+    "content-hash": "817b909cda3a013338de1ce80cd2e3fd",
     "packages": [
         {
             "name": "codeitnowin/barcode",
@@ -19284,31 +19284,35 @@
         },
         {
             "name": "spryker/oauth",
-            "version": "1.5.1",
+            "version": "1.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/oauth.git",
-                "reference": "9f822f404f31da66f7ccba1fca6b7e19dc96156e"
+                "reference": "b668b02d259d67dc90fbde4325203b14975624fc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/oauth/zipball/9f822f404f31da66f7ccba1fca6b7e19dc96156e",
-                "reference": "9f822f404f31da66f7ccba1fca6b7e19dc96156e",
+                "url": "https://api.github.com/repos/spryker/oauth/zipball/b668b02d259d67dc90fbde4325203b14975624fc",
+                "reference": "b668b02d259d67dc90fbde4325203b14975624fc",
                 "shasum": ""
             },
             "require": {
                 "league/oauth2-server": "^7.1",
-                "php": ">=7.1",
+                "php": ">=7.2",
                 "spryker/config": "^3.0.0",
                 "spryker/guzzle": "^2.0.0",
-                "spryker/kernel": "^3.0.0",
-                "spryker/oauth-extension": "^1.2.0",
+                "spryker/kernel": "^3.30.0",
+                "spryker/oauth-extension": "^1.3.0",
+                "spryker/symfony": "^3.0.0",
                 "spryker/util-encoding": "^2.0.0",
                 "spryker/zed-request": "^3.0.0"
             },
             "require-dev": {
+                "spryker/auth-rest-api": "*",
                 "spryker/code-sniffer": "*",
+                "spryker/customer": "*",
                 "spryker/installer": "*",
+                "spryker/oauth-revoke": "*",
                 "spryker/propel": "*",
                 "spryker/testify": "*"
             },
@@ -19331,7 +19335,7 @@
                 "proprietary"
             ],
             "description": "Oauth module",
-            "time": "2019-06-26T06:21:59+00:00"
+            "time": "2020-04-09T15:07:25+00:00"
         },
         {
             "name": "spryker/oauth-customer-connector",
@@ -19424,24 +19428,23 @@
         },
         {
             "name": "spryker/oauth-extension",
-            "version": "1.2.0",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/oauth-extension.git",
-                "reference": "447bb927a44a16515de67e80b136ca516d6f390e"
+                "reference": "c2da3df530a599e2c1abc80f8582d3bf41838145"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/oauth-extension/zipball/447bb927a44a16515de67e80b136ca516d6f390e",
-                "reference": "447bb927a44a16515de67e80b136ca516d6f390e",
+                "url": "https://api.github.com/repos/spryker/oauth-extension/zipball/c2da3df530a599e2c1abc80f8582d3bf41838145",
+                "reference": "c2da3df530a599e2c1abc80f8582d3bf41838145",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.1"
+                "php": ">=7.2"
             },
             "require-dev": {
-                "spryker/code-sniffer": "*",
-                "spryker/testify": "*"
+                "spryker/code-sniffer": "*"
             },
             "type": "library",
             "extra": {
@@ -19459,7 +19462,52 @@
                 "proprietary"
             ],
             "description": "OauthExtension module",
-            "time": "2019-06-03T13:04:46+00:00"
+            "time": "2020-04-09T15:07:25+00:00"
+        },
+        {
+            "name": "spryker/oauth-revoke",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/oauth-revoke.git",
+                "reference": "b9a326d05b9bdb85cb4b5a9f12fa54ac6efcdc01"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/oauth-revoke/zipball/b9a326d05b9bdb85cb4b5a9f12fa54ac6efcdc01",
+                "reference": "b9a326d05b9bdb85cb4b5a9f12fa54ac6efcdc01",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2",
+                "spryker/kernel": "^3.30.0",
+                "spryker/oauth": "^1.6.0",
+                "spryker/oauth-extension": "^1.3.0",
+                "spryker/propel-orm": "^1.0.0",
+                "spryker/util-encoding": "^2.0.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/propel": "*",
+                "spryker/testify": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "OauthRevoke module",
+            "time": "2020-04-09T15:07:25+00:00"
         },
         {
             "name": "spryker/oms",
