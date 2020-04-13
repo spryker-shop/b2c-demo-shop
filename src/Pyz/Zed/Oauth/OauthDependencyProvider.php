@@ -39,8 +39,7 @@ class OauthDependencyProvider extends SprykerOauthDependencyProvider
             new CustomerOauthScopeProviderPlugin(),
         ];
     }
-
-
+    
     /**
      * @return \Spryker\Zed\OauthExtension\Dependency\Plugin\OauthRefreshTokenRevokerPluginInterface[]
      */
