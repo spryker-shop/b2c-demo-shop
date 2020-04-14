@@ -111,22 +111,6 @@ class CheckoutPageDependencyProvider extends SprykerShopCheckoutPageDependencyPr
     /**
      * @param \Spryker\Yves\Kernel\Container $container
      *
-     * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface|null
-     */
-    protected function getAddressStepFormDataProvider(Container $container)
-    {
-        return new CheckoutAddressFormDataProvider(
-            $this->getCustomerClient($container),
-            $this->getStore(),
-            $this->getCustomerService($container),
-            $this->getShipmentClient($container),
-            $this->getProductBundleClient($container)
-        );
-    }
-
-    /**
-     * @param \Spryker\Yves\Kernel\Container $container
-     *
      * @return \SprykerShop\Yves\CheckoutPage\Dependency\Client\CheckoutPageToShipmentClientInterface
      */
     public function getShipmentClient(Container $container): CheckoutPageToShipmentClientInterface
