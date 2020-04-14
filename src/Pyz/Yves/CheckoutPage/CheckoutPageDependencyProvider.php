@@ -32,7 +32,7 @@ class CheckoutPageDependencyProvider extends SprykerShopCheckoutPageDependencyPr
      *
      * @return \Spryker\Yves\Kernel\Container
      */
-    public function provideDependencies(Container $container)
+    public function provideDependencies(Container $container): Container
     {
         $container = parent::provideDependencies($container);
         $container = $this->extendPaymentMethodHandler($container);
@@ -53,7 +53,7 @@ class CheckoutPageDependencyProvider extends SprykerShopCheckoutPageDependencyPr
     /**
      * @return mixed[]
      */
-    protected function getCustomerStepSubForms()
+    protected function getCustomerStepSubForms(): array
     {
         return [
             LoginForm::class,
@@ -101,7 +101,7 @@ class CheckoutPageDependencyProvider extends SprykerShopCheckoutPageDependencyPr
     /**
      * @return string[]
      */
-    protected function getAddressStepSubForms()
+    protected function getAddressStepSubForms(): array
     {
         return [
             CheckoutAddressCollectionForm::class,
