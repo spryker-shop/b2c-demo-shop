@@ -1,16 +1,4 @@
-{% extends model('component') %}
-
-{% define config = {
-    name: 'filter-range',
-} %}
-
-{% define data = {
-    parameter: required,
-    min: required,
-    activeMin: required,
-    max: required,
-    activeMax: required,
-} %}
+{% extends molecule('filter-range', '@SprykerShop:CatalogPage') %}
 
 {% block body %}
     {% set filtersEqual = data.max is same as(data.min)%}
