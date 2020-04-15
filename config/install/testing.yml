@@ -106,8 +106,26 @@ sections:
             command: "vendor/bin/console transfer:databuilder:generate"
 
     demodata:
-        import:
-            command: "vendor/bin/console data:import"
+        import-commerce-setup:
+            command: "vendor/bin/console data:import --config=data/import/config/B2C_Commerce_Setup_import_config_v0.yml"
+
+        import-catalog-setup:
+            command: "vendor/bin/console data:import --config=data/import/config/B2C_Catalog_Setup_import_config_v0.yml"
+
+        import-special-product-types-setup:
+            command: "vendor/bin/console data:import --config=data/import/config/B2C_Special_Product_Types_import_config_v0.yml"
+
+        import-merchandising-setup:
+            command: "vendor/bin/console data:import --config=data/import/config/B2C_Merchandising_import_config_v0.yml"
+
+        import-navigation-setup:
+            command: "vendor/bin/console data:import --config=data/import/config/B2C_Navigation_import_config_v0.yml"
+
+        import-content-management-setup:
+            command: "vendor/bin/console data:import --config=data/import/config/B2C_Content_Management_import_config_v0.yml"
+
+        import-miscellaneous-setup:
+            command: "vendor/bin/console data:import --config=data/import/config/B2C_Miscellaneous_import_config_v0.yml"
 
         update-product-labels:
             command: "vendor/bin/console product-label:relations:update"

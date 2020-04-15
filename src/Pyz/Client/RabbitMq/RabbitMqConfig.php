@@ -7,9 +7,6 @@
 
 namespace Pyz\Client\RabbitMq;
 
-use ArrayObject;
-use Generated\Shared\Transfer\RabbitMqOptionTransfer;
-use Spryker\Client\RabbitMq\Model\Connection\Connection;
 use Spryker\Client\RabbitMq\RabbitMqConfig as SprykerRabbitMqConfig;
 use Spryker\Shared\AvailabilityStorage\AvailabilityStorageConstants;
 use Spryker\Shared\CategoryPageSearch\CategoryPageSearchConstants;
@@ -35,95 +32,48 @@ use Spryker\Shared\UrlStorage\UrlStorageConstants;
 class RabbitMqConfig extends SprykerRabbitMqConfig
 {
     /**
-     * @return \ArrayObject
+     *  QueueNameFoo, // Queue => QueueNameFoo, (Queue and error queue will be created: QueueNameFoo and QueueNameFoo.error)
+     *  QueueNameBar => [
+     *       RoutingKeyFoo => QueueNameBaz, // (Additional queues can be defined by several routing keys)
+     *   ],
+     *
+     * @see https://www.rabbitmq.com/tutorials/amqp-concepts.html
+     *
+     * @return array
      */
-    protected function getQueueOptions()
+    protected function getQueueConfiguration(): array
     {
-        $queueOptionCollection = new ArrayObject();
-        $queueOptionCollection->append($this->createQueueOption(EventConstants::EVENT_QUEUE, EventConstants::EVENT_QUEUE_RETRY, EventConfig::EVENT_ROUTING_KEY_RETRY));
-        $queueOptionCollection->append($this->createQueueOption(EventConstants::EVENT_QUEUE, EventConstants::EVENT_QUEUE_ERROR, EventConfig::EVENT_ROUTING_KEY_ERROR));
-        $queueOptionCollection->append($this->createQueueOption(GlossaryStorageConstants::SYNC_STORAGE_QUEUE, GlossaryStorageConstants::SYNC_STORAGE_ERROR_QUEUE));
-        $queueOptionCollection->append($this->createQueueOption(UrlStorageConstants::URL_SYNC_STORAGE_QUEUE, UrlStorageConstants::URL_SYNC_STORAGE_ERROR_QUEUE));
-        $queueOptionCollection->append($this->createQueueOption(AvailabilityStorageConstants::AVAILABILITY_SYNC_STORAGE_QUEUE, AvailabilityStorageConstants::AVAILABILITY_SYNC_STORAGE_ERROR_QUEUE));
-        $queueOptionCollection->append($this->createQueueOption(CustomerAccessStorageConstants::CUSTOMER_ACCESS_SYNC_STORAGE_QUEUE, CustomerAccessStorageConstants::CUSTOMER_ACCESS_SYNC_STORAGE_ERROR_QUEUE));
-        $queueOptionCollection->append($this->createQueueOption(CategoryStorageConstants::CATEGORY_SYNC_STORAGE_QUEUE, CategoryStorageConstants::CATEGORY_SYNC_STORAGE_ERROR_QUEUE));
-        $queueOptionCollection->append($this->createQueueOption(FileManagerStorageConstants::FILE_SYNC_STORAGE_QUEUE, FileManagerStorageConstants::FILE_SYNC_STORAGE_ERROR_QUEUE));
-        $queueOptionCollection->append($this->createQueueOption(ProductStorageConstants::PRODUCT_SYNC_STORAGE_QUEUE, ProductStorageConstants::PRODUCT_SYNC_STORAGE_ERROR_QUEUE));
-        $queueOptionCollection->append($this->createQueueOption(PriceProductStorageConstants::PRICE_SYNC_STORAGE_QUEUE, PriceProductStorageConstants::PRICE_SYNC_STORAGE_ERROR_QUEUE));
-        $queueOptionCollection->append($this->createQueueOption(CmsStorageConstants::CMS_SYNC_STORAGE_QUEUE, CmsStorageConstants::CMS_SYNC_STORAGE_ERROR_QUEUE));
-        $queueOptionCollection->append($this->createQueueOption(CategoryPageSearchConstants::CATEGORY_SYNC_SEARCH_QUEUE, CategoryPageSearchConstants::CATEGORY_SYNC_SEARCH_ERROR_QUEUE));
-        $queueOptionCollection->append($this->createQueueOption(CmsPageSearchConstants::CMS_SYNC_SEARCH_QUEUE, CmsPageSearchConstants::CMS_SYNC_SEARCH_ERROR_QUEUE));
-        $queueOptionCollection->append($this->createQueueOption(ProductPageSearchConstants::PRODUCT_SYNC_SEARCH_QUEUE, ProductPageSearchConstants::PRODUCT_SYNC_SEARCH_ERROR_QUEUE));
-        $queueOptionCollection->append($this->createQueueOption(FileManagerStorageConstants::FILE_SYNC_STORAGE_QUEUE, FileManagerStorageConstants::FILE_SYNC_STORAGE_ERROR_QUEUE));
-        $queueOptionCollection->append($this->createQueueOption(TaxStorageConfig::TAX_SET_SYNC_STORAGE_QUEUE, TaxStorageConfig::TAX_SET_SYNC_STORAGE_ERROR_QUEUE));
-        $queueOptionCollection->append($this->createQueueOption(TaxProductStorageConfig::PRODUCT_ABSTRACT_TAX_SET_SYNC_STORAGE_QUEUE, TaxProductStorageConfig::PRODUCT_ABSTRACT_TAX_SET_SYNC_STORAGE_ERROR_QUEUE));
-        $queueOptionCollection->append($this->createQueueOption(ContentStorageConfig::CONTENT_SYNC_STORAGE_QUEUE, ContentStorageConfig::CONTENT_SYNC_STORAGE_ERROR_QUEUE));
-        $queueOptionCollection->append($this->createQueueOption(ConfigurableBundleStorageConfig::CONFIGURABLE_BUNDLE_SYNC_STORAGE_QUEUE, ConfigurableBundleStorageConfig::CONFIGURABLE_BUNDLE_SYNC_STORAGE_ERROR_QUEUE));
-        $queueOptionCollection->append($this->createQueueOption(ConfigurableBundlePageSearchConfig::CONFIGURABLE_BUNDLE_SEARCH_QUEUE, ConfigurableBundlePageSearchConfig::CONFIGURABLE_BUNDLE_SEARCH_ERROR_QUEUE));
-
-        $queueOptionCollection->append(
-            $this->createQueueOption(
-                $this->get(LogConstants::LOG_QUEUE_NAME),
-                $this->get(LogConstants::LOG_ERROR_QUEUE_NAME)
-            )
-        );
-
-        return $queueOptionCollection;
+        return [
+            EventConstants::EVENT_QUEUE => [
+                EventConfig::EVENT_ROUTING_KEY_RETRY => EventConstants::EVENT_QUEUE_RETRY,
+                EventConfig::EVENT_ROUTING_KEY_ERROR => EventConstants::EVENT_QUEUE_ERROR,
+            ],
+            GlossaryStorageConstants::SYNC_STORAGE_QUEUE,
+            UrlStorageConstants::URL_SYNC_STORAGE_QUEUE,
+            AvailabilityStorageConstants::AVAILABILITY_SYNC_STORAGE_QUEUE,
+            CustomerAccessStorageConstants::CUSTOMER_ACCESS_SYNC_STORAGE_QUEUE,
+            CategoryStorageConstants::CATEGORY_SYNC_STORAGE_QUEUE,
+            ProductStorageConstants::PRODUCT_SYNC_STORAGE_QUEUE,
+            PriceProductStorageConstants::PRICE_SYNC_STORAGE_QUEUE,
+            ConfigurableBundleStorageConfig::CONFIGURABLE_BUNDLE_SYNC_STORAGE_QUEUE,
+            ConfigurableBundlePageSearchConfig::CONFIGURABLE_BUNDLE_SEARCH_QUEUE,
+            CmsStorageConstants::CMS_SYNC_STORAGE_QUEUE,
+            CategoryPageSearchConstants::CATEGORY_SYNC_SEARCH_QUEUE,
+            CmsPageSearchConstants::CMS_SYNC_SEARCH_QUEUE,
+            ProductPageSearchConstants::PRODUCT_SYNC_SEARCH_QUEUE,
+            FileManagerStorageConstants::FILE_SYNC_STORAGE_QUEUE,
+            ContentStorageConfig::CONTENT_SYNC_STORAGE_QUEUE,
+            TaxProductStorageConfig::PRODUCT_ABSTRACT_TAX_SET_SYNC_STORAGE_QUEUE,
+            TaxStorageConfig::TAX_SET_SYNC_STORAGE_QUEUE,
+            $this->get(LogConstants::LOG_QUEUE_NAME),
+        ];
     }
 
     /**
-     * @param string $queueName
-     * @param string $errorQueueName
-     * @param string $routingKey
-     *
-     * @return \Generated\Shared\Transfer\RabbitMqOptionTransfer
+     * @return string
      */
-    protected function createQueueOption($queueName, $errorQueueName, $routingKey = 'error')
+    protected function getDefaultBoundQueueNamePrefix(): string
     {
-        $queueOptionTransfer = new RabbitMqOptionTransfer();
-        $queueOptionTransfer
-            ->setQueueName($queueName)
-            ->setDurable(true)
-            ->setType('direct')
-            ->setDeclarationType(Connection::RABBIT_MQ_EXCHANGE)
-            ->addBindingQueueItem($this->createQueueBinding($queueName))
-            ->addBindingQueueItem($this->createErrorQueueBinding($errorQueueName, $routingKey));
-
-        return $queueOptionTransfer;
-    }
-
-    /**
-     * @param string $queueName
-     *
-     * @return \Generated\Shared\Transfer\RabbitMqOptionTransfer
-     */
-    protected function createQueueBinding($queueName)
-    {
-        $queueOptionTransfer = new RabbitMqOptionTransfer();
-        $queueOptionTransfer
-            ->setQueueName($queueName)
-            ->setDurable(true)
-            ->setNoWait(false)
-            ->addRoutingKey('');
-
-        return $queueOptionTransfer;
-    }
-
-    /**
-     * @param string $errorQueueName
-     * @param string $routingKey
-     *
-     * @return \Generated\Shared\Transfer\RabbitMqOptionTransfer
-     */
-    protected function createErrorQueueBinding($errorQueueName, $routingKey)
-    {
-        $queueOptionTransfer = new RabbitMqOptionTransfer();
-        $queueOptionTransfer
-            ->setQueueName($errorQueueName)
-            ->setDurable(true)
-            ->setNoWait(false)
-            ->addRoutingKey($routingKey);
-
-        return $queueOptionTransfer;
+        return 'error';
     }
 }

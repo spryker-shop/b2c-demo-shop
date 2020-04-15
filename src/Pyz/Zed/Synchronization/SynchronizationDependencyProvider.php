@@ -40,7 +40,7 @@ use Spryker\Zed\ProductOptionStorage\Communication\Plugin\Synchronization\Produc
 use Spryker\Zed\ProductPageSearch\Communication\Plugin\Synchronization\ProductConcretePageSynchronizationDataBulkPlugin;
 use Spryker\Zed\ProductPageSearch\Communication\Plugin\Synchronization\ProductPageSynchronizationDataPlugin;
 use Spryker\Zed\ProductQuantityStorage\Communication\Plugin\Synchronization\ProductQuantitySynchronizationDataBulkPlugin;
-use Spryker\Zed\ProductRelationStorage\Communication\Plugin\Synchronization\ProductRelationSynchronizationDataPlugin;
+use Spryker\Zed\ProductRelationStorage\Communication\Plugin\Synchronization\ProductRelationSynchronizationDataRepositoryPlugin;
 use Spryker\Zed\ProductReviewSearch\Communication\Plugin\Synchronization\ProductReviewSynchronizationDataPlugin as ProductReviewSearchSynchronizationDataPlugin;
 use Spryker\Zed\ProductReviewStorage\Communication\Plugin\Synchronization\ProductReviewSynchronizationDataPlugin;
 use Spryker\Zed\ProductSearchConfigStorage\Communication\Plugin\Synchronization\ProductSearchConfigSynchronizationDataPlugin;
@@ -86,7 +86,7 @@ class SynchronizationDependencyProvider extends SprykerSynchronizationDependency
             new ProductLabelDictionarySynchronizationDataPlugin(),
             new ProductQuantitySynchronizationDataBulkPlugin(),
             new ProductOptionSynchronizationDataPlugin(),
-            new ProductRelationSynchronizationDataPlugin(),
+            new ProductRelationSynchronizationDataRepositoryPlugin(),
             new ProductReviewSynchronizationDataPlugin(),
             new ProductSearchConfigSynchronizationDataPlugin(),
             new ProductSetSynchronizationDataPlugin(),
