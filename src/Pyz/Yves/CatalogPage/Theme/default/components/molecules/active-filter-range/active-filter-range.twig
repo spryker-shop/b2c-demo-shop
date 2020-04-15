@@ -5,12 +5,7 @@
 } %}
 
 {% block component %}
-    {% if app.request.query.has(data.filter.config.parameterName) %}
-        {% include molecule('active-filter', 'CatalogPage') with {
-            data: {
-                filter: data.filter,
-                value: data.activeMin ~ ' - ' ~ data.activeMax,
-            },
-        } only %}
-    {% endif %}
+    {% set currentValue = data.activeMin  ~ ' - ' ~ data.activeMax %}
+
+    {{ parent() }}
 {% endblock %}
