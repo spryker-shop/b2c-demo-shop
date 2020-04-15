@@ -77,7 +77,11 @@
             {% endblock %}
         {% endembed %}
     {% endif %}
-    {% widget 'ProductGroupWidget' args [data.product.idProductAbstract] use view('pdp-color-selector', 'ProductGroupWidget') only %}{% endwidget %}
+
+    {% block colors %}
+        {% widget 'ProductGroupColorWidget' args [data.product.idProductAbstract, data.product.selectedAttributes ?? []] use view('product-detail-color-selector', 'ProductGroupWidget') only %}{% endwidget %}
+    {% endblock %}
+
     {% include molecule('variant-configurator', 'ProductDetailPage') with {
         data: {
             superAttributes: data.product.attributeMap.superAttributes,

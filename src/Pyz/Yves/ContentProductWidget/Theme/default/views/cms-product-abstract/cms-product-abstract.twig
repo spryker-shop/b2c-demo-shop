@@ -6,18 +6,28 @@
 
 {% block body %}
     <div class="grid grid--stretch product-list">
-        {% for productAbstractView in data.productAbstractViewCollection  if productAbstractView.available%}
-            {% include molecule('product-card') with {
-                class: 'col col--sm-6 col--md-6 col--lg-3',
+        {% for productAbstractView in data.productAbstractViewCollection if productAbstractView.available %}
+            {% embed molecule('product-item') with {
+                class: 'col col--sm-6 col--lg-3',
                 data: {
-                    name: productAbstractView.name,
-                    abstractId: productAbstractView.idProductAbstract,
-                    url: productAbstractView.url,
-                    imageUrl: productAbstractView.images ? productAbstractView.images.0.externalUrlSmall,
-                    price: productAbstractView.prices.DEFAULT | default(null),
-                    originalPrice: productAbstractView.prices.ORIGINAL ?? null,
+                    product: productAbstractView,
                 },
             } only %}
+                {% block rating %}
+                    {% include molecule('rating-selector', 'ProductReviewWidget') ignore missing with {
+                        modifiers: ['small'],
+                        data: {
+                            value: data.product.rating.averageRating | default(0),
+                            reviewCount:  data.product.rating.totalReview | default(0),
+                            useHalfSteps: true,
+                            parentJsName: config.jsName,
+                        },
+                        attributes: {
+                            readonly: true,
+                        },
+                    } only %}
+                {% endblock %}
+            {% endembed %}
         {% endfor %}
     </div>
 {% endblock %}
