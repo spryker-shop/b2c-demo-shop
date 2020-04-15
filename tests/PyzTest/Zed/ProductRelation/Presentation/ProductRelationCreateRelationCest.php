@@ -37,6 +37,7 @@ class ProductRelationCreateRelationCest
 
         $i->amOnPage(ProductRelationCreatePage::URL);
 
+        $i->fillField('//*[@id="product_relation_productRelationKey"]', uniqid('key-', false));
         $i->selectRelationType(ProductRelationTypes::TYPE_RELATED_PRODUCTS);
         $i->filterProductsByName('Samsung Bundle');
         $i->wait(5);

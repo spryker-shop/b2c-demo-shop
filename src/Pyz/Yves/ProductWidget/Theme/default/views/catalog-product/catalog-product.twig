@@ -1,46 +1,41 @@
-{% extends template('widget') %}
-
-{% define data = {
-    product: _widget.product,
-    viewMode: _widget.viewMode
-} %}
+{% extends view('catalog-product', '@SprykerShop:ProductWidget') %}
 
 {% block body %}
-    {% set productTemplate = molecule('product-card') %}
+    {% set productTemplate = molecule('product-item') %}
     {% set class = 'col col--sm-6 col--lg-4' %}
 
     {% if data.viewMode == 'list' %}
-        {% set productTemplate = molecule('product-list-item') %}
+        {% set productTemplate = molecule('product-item-list') %}
         {% set class = 'col col--sm-12' %}
     {% endif %}
 
-    {% set image = data.product.images| last %}
+    {% set image = data.product.images | last %}
+
     {% embed productTemplate with {
-        _widget: _widget,
         productTemplate: productTemplate,
         class: class,
         data: {
+            product: data.product,
+            image: image.external_url_small,
             name: data.product.abstract_name,
-            abstractId: data.product.id_product_abstract,
-            url: data.product.url,
-            imageUrl: data.product.images is empty ? '' : image.external_url_small,
-            price: data.product.prices.DEFAULT is defined ? data.product.prices.DEFAULT : null,
-            originalPrice: data.product.prices.ORIGINAL is defined ? data.product.prices.ORIGINAL : null
-        }
+            idProductAbstract: data.product.id_product_abstract,
+        },
     } only %}
         {% block labels %}
-            {% widget 'ProductConcreteLabelWidget' args [_widget.product.id_product_labels] only %}{% endwidget %}
+            {% widget 'ProductConcreteLabelWidget' args [data.product.id_product_labels] with {
+                data: {
+                    parentJsName: config.jsName,
+                },
+            } only %}{% endwidget %}
         {% endblock %}
 
         {% block rating %}
-            {% if _widget.product.rating is defined %}
-                <div class="{{ config.name }}__review">
-                    {% widget 'ProductReviewDisplayWidget' args [_widget.product.rating] only %}{% endwidget %}
-                    <span class="{{ config.name }}__review-count">
-                        {{ _widget.product.review_count }}
-                    </span>
-                </div>
-            {% endif %}
+            {% widget 'ProductReviewDisplayWidget' args [data.product.rating | default(0)] with {
+                data: {
+                    parentJsName: config.jsName,
+                    reviewCount: data.product.review_count | default(0),
+                },
+            } only %}{% endwidget %}
         {% endblock %}
     {% endembed %}
 {% endblock %}
