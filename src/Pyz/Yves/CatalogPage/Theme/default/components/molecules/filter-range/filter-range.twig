@@ -1,61 +1,14 @@
-{% extends model('component') %}
-
-{% define config = {
-    name: 'filter-range',
-} %}
-
-{% define data = {
-    parameter: required,
-    min: required,
-    activeMin: required,
-    max: required,
-    activeMax: required,
-} %}
+{% extends molecule('filter-range', '@SprykerShop:CatalogPage') %}
 
 {% block body %}
-    {% set activeMin = (data.activeMin != data.min) ? data.activeMin %}
-    {% set activeMax = (data.activeMax != data.max) ? data.activeMax %}
-
-    <input
-        class="{{ config.jsName }}__input"
-        type="hidden"
-        name="{{ data.parameter }}[min]"
-        value="{{ activeMin }}"
-        required="required"
-        min="{{ data.min }}"
-        max="{{ data.max }}"
-        data-default-value="{{ data.min }}"
-    >
-
-    <input
-        class="{{ config.jsName }}__input"
-        type="hidden"
-        name="{{ data.parameter }}[max]"
-        value="{{ activeMax }}"
-        required="required"
-        min="{{ data.min }}"
-        max="{{ data.max }}"
-        data-default-value="{{ data.max }}"
-    >
-
     {% set filtersEqual = data.max is same as(data.min)%}
     {% if not filtersEqual %}
-        <div class="range-slider range-slider--horizontal {{ config.jsName }}__range-slider">
-            <div class="range-slider__values">
-                <span class="range-slider__values-item {{ config.jsName }}__value">
-                    {{- data.activeMin | money -}}
-                </span>
-                <span class="range-slider__values-item {{ config.jsName }}__value">
-                    {{- data.activeMax | money -}}
-                </span>
-            </div>
-        </div>
-
         {% include molecule('range-slider') with {
+            modifiers: ['horizontal'],
+            data: {
+                parameter: data.parameter,
+            },
             attributes: {
-                'wrap-class-name': config.jsName ~ '__range-slider',
-                'value-class-name': config.jsName ~ '__value',
-                'target-class-name': config.jsName ~ '__input',
                 'value-min': data.min,
                 'value-max': data.max,
                 'active-min': data.activeMin,
@@ -63,5 +16,4 @@
             },
         } only %}
     {% endif %}
-
 {% endblock %}
