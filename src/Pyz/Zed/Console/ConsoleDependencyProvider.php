@@ -49,6 +49,7 @@ use Spryker\Zed\Log\Communication\Console\DeleteLogFilesConsole;
 use Spryker\Zed\Maintenance\Communication\Console\MaintenanceDisableConsole;
 use Spryker\Zed\Maintenance\Communication\Console\MaintenanceEnableConsole;
 use Spryker\Zed\Monitoring\Communication\Plugin\MonitoringConsolePlugin;
+use Spryker\Zed\Oauth\Communication\Console\OauthTokenConsole;
 use Spryker\Zed\Oms\Communication\Console\CheckConditionConsole as OmsCheckConditionConsole;
 use Spryker\Zed\Oms\Communication\Console\CheckTimeoutConsole as OmsCheckTimeoutConsole;
 use Spryker\Zed\Oms\Communication\Console\ClearLocksConsole as OmsClearLocksConsole;
@@ -173,6 +174,7 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
             new ProductLabelValidityConsole(),
             new ProductLabelRelationUpdaterConsole(),
             new ProductValidityConsole(),
+            new OauthTokenConsole(),
             new DataImportConsole(),
             new DataImportConsole(DataImportConsole::DEFAULT_NAME . ':' . DataImportConfig::IMPORT_TYPE_STORE),
             new DataImportConsole(DataImportConsole::DEFAULT_NAME . ':' . DataImportConfig::IMPORT_TYPE_CURRENCY),
