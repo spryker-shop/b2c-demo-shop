@@ -37,6 +37,12 @@ use Spryker\Zed\Development\Communication\Console\GenerateServiceIdeAutoCompleti
 use Spryker\Zed\Development\Communication\Console\GenerateYvesIdeAutoCompletionConsole;
 use Spryker\Zed\Development\Communication\Console\GenerateZedIdeAutoCompletionConsole;
 use Spryker\Zed\Development\Communication\Console\PluginUsageFinderConsole;
+use Spryker\Zed\Development\Communication\Console\RemoveClientIdeAutoCompletionConsole;
+use Spryker\Zed\Development\Communication\Console\RemoveGlueIdeAutoCompletionConsole;
+use Spryker\Zed\Development\Communication\Console\RemoveIdeAutoCompletionConsole;
+use Spryker\Zed\Development\Communication\Console\RemoveServiceIdeAutoCompletionConsole;
+use Spryker\Zed\Development\Communication\Console\RemoveYvesIdeAutoCompletionConsole;
+use Spryker\Zed\Development\Communication\Console\RemoveZedIdeAutoCompletionConsole;
 use Spryker\Zed\DocumentationGeneratorRestApi\Communication\Console\GenerateRestApiDocumentationConsole;
 use Spryker\Zed\EventBehavior\Communication\Console\EventBehaviorTriggerTimeoutConsole;
 use Spryker\Zed\EventBehavior\Communication\Console\EventTriggerListenerConsole;
@@ -71,9 +77,11 @@ use Spryker\Zed\ProductValidity\Communication\Console\ProductValidityConsole;
 use Spryker\Zed\Propel\Communication\Console\DatabaseDropConsole;
 use Spryker\Zed\Propel\Communication\Console\DatabaseDropTablesConsole;
 use Spryker\Zed\Propel\Communication\Console\DeleteMigrationFilesConsole;
+use Spryker\Zed\Propel\Communication\Console\DeployPreparePropelConsole;
 use Spryker\Zed\Propel\Communication\Console\EntityTransferGeneratorConsole;
 use Spryker\Zed\Propel\Communication\Console\PropelSchemaValidatorConsole;
 use Spryker\Zed\Propel\Communication\Console\PropelSchemaXmlNameValidatorConsole;
+use Spryker\Zed\Propel\Communication\Console\RemoveEntityTransferConsole;
 use Spryker\Zed\Propel\Communication\Plugin\Application\PropelApplicationPlugin;
 use Spryker\Zed\Publisher\Communication\Console\PublisherTriggerEventsConsole;
 use Spryker\Zed\Queue\Communication\Console\QueueDumpConsole;
@@ -85,12 +93,14 @@ use Spryker\Zed\RabbitMq\Communication\Console\DeleteAllQueuesConsole;
 use Spryker\Zed\RabbitMq\Communication\Console\PurgeAllQueuesConsole;
 use Spryker\Zed\RabbitMq\Communication\Console\SetUserPermissionsConsole;
 use Spryker\Zed\RestRequestValidator\Communication\Console\BuildValidationCacheConsole;
+use Spryker\Zed\RestRequestValidator\Communication\Console\RemoveValidationCacheConsole;
 use Spryker\Zed\Router\Communication\Plugin\Console\RouterCacheWarmUpConsole;
 use Spryker\Zed\Scheduler\Communication\Console\SchedulerCleanConsole;
 use Spryker\Zed\Scheduler\Communication\Console\SchedulerResumeConsole;
 use Spryker\Zed\Scheduler\Communication\Console\SchedulerSetupConsole;
 use Spryker\Zed\Scheduler\Communication\Console\SchedulerSuspendConsole;
 use Spryker\Zed\Search\Communication\Console\GenerateSourceMapConsole;
+use Spryker\Zed\Search\Communication\Console\RemoveSourceMapConsole;
 use Spryker\Zed\Search\Communication\Console\SearchConsole;
 use Spryker\Zed\Search\Communication\Console\SearchSetupSourcesConsole;
 use Spryker\Zed\SearchElasticsearch\Communication\Console\ElasticsearchCloseIndexConsole;
@@ -102,13 +112,10 @@ use Spryker\Zed\SearchElasticsearch\Communication\Console\ElasticsearchSnapshotD
 use Spryker\Zed\SearchElasticsearch\Communication\Console\ElasticsearchSnapshotRegisterRepositoryConsole;
 use Spryker\Zed\SearchElasticsearch\Communication\Console\ElasticsearchSnapshotRestoreConsole;
 use Spryker\Zed\Session\Communication\Console\SessionRemoveLockConsole;
-use Spryker\Zed\Setup\Communication\Console\DeployPreparePropelConsole;
-use Spryker\Zed\Setup\Communication\Console\EmptyGeneratedDirectoryConsole;
-use Spryker\Zed\Setup\Communication\Console\InstallConsole;
-use Spryker\Zed\Setup\Communication\Console\Npm\RunnerConsole;
 use Spryker\Zed\SetupFrontend\Communication\Console\CleanUpDependenciesConsole;
 use Spryker\Zed\SetupFrontend\Communication\Console\InstallPackageManagerConsole;
 use Spryker\Zed\SetupFrontend\Communication\Console\InstallProjectDependenciesConsole;
+use Spryker\Zed\SetupFrontend\Communication\Console\Npm\RunnerConsole;
 use Spryker\Zed\SetupFrontend\Communication\Console\YvesBuildFrontendConsole;
 use Spryker\Zed\SetupFrontend\Communication\Console\YvesInstallDependenciesConsole;
 use Spryker\Zed\SetupFrontend\Communication\Console\ZedBuildFrontendConsole;
@@ -123,6 +130,8 @@ use Spryker\Zed\StorageRedis\Communication\Console\StorageRedisExportRdbConsole;
 use Spryker\Zed\StorageRedis\Communication\Console\StorageRedisImportRdbConsole;
 use Spryker\Zed\Synchronization\Communication\Console\ExportSynchronizedDataConsole;
 use Spryker\Zed\Transfer\Communication\Console\DataBuilderGeneratorConsole;
+use Spryker\Zed\Transfer\Communication\Console\RemoveDataBuilderConsole;
+use Spryker\Zed\Transfer\Communication\Console\RemoveTransferConsole;
 use Spryker\Zed\Transfer\Communication\Console\TransferGeneratorConsole;
 use Spryker\Zed\Transfer\Communication\Console\ValidatorConsole;
 use Spryker\Zed\Translator\Communication\Console\CleanTranslationCacheConsole;
@@ -131,6 +140,7 @@ use Spryker\Zed\Twig\Communication\Console\CacheWarmerConsole;
 use Spryker\Zed\Twig\Communication\Plugin\Application\TwigApplicationPlugin;
 use Spryker\Zed\Uuid\Communication\Console\UuidGeneratorConsole;
 use Spryker\Zed\ZedNavigation\Communication\Console\BuildNavigationConsole;
+use Spryker\Zed\ZedNavigation\Communication\Console\RemoveNavigationCacheConsole;
 use SprykerSdk\Spryk\Console\SprykBuildConsole;
 use SprykerSdk\Spryk\Console\SprykDumpConsole;
 use SprykerSdk\Spryk\Console\SprykRunConsole;
@@ -153,13 +163,18 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
         $commands = [
             new CacheWarmerConsole(),
             new BuildNavigationConsole(),
+            new RemoveNavigationCacheConsole(),
             new BuildValidationCacheConsole(),
+            new RemoveValidationCacheConsole(),
             new EmptyAllCachesConsole(),
             new TransferGeneratorConsole(),
+            new RemoveTransferConsole(),
             new EntityTransferGeneratorConsole(),
+            new RemoveEntityTransferConsole(),
             new InitializeDatabaseConsole(),
             new SearchConsole(),
             new GenerateSourceMapConsole(),
+            new RemoveSourceMapConsole(),
             new SearchSetupSourcesConsole(),
             new OmsCheckConditionConsole(),
             new OmsCheckTimeoutConsole(),
@@ -236,8 +251,6 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
 
             // Setup commands
             new RunnerConsole(),
-            new EmptyGeneratedDirectoryConsole(),
-            new InstallConsole(),
             new DeployPreparePropelConsole(),
 
             new DatabaseDropConsole(),
@@ -319,17 +332,24 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
             $commands[] = new BundleSharedCodeGeneratorConsole();
             $commands[] = new BundleClientCodeGeneratorConsole();
             $commands[] = new GenerateZedIdeAutoCompletionConsole();
+            $commands[] = new RemoveZedIdeAutoCompletionConsole();
             $commands[] = new GenerateClientIdeAutoCompletionConsole();
+            $commands[] = new RemoveClientIdeAutoCompletionConsole();
             $commands[] = new GenerateServiceIdeAutoCompletionConsole();
+            $commands[] = new RemoveServiceIdeAutoCompletionConsole();
             $commands[] = new GenerateYvesIdeAutoCompletionConsole();
+            $commands[] = new RemoveYvesIdeAutoCompletionConsole();
             $commands[] = new GenerateIdeAutoCompletionConsole();
+            $commands[] = new RemoveIdeAutoCompletionConsole();
             $commands[] = new DataBuilderGeneratorConsole();
+            $commands[] = new RemoveDataBuilderConsole();
             $commands[] = new CompletionCommand();
             $commands[] = new DataBuilderGeneratorConsole();
             $commands[] = new PropelSchemaValidatorConsole();
             $commands[] = new PropelSchemaXmlNameValidatorConsole();
             $commands[] = new DataImportDumpConsole();
             $commands[] = new GenerateGlueIdeAutoCompletionConsole();
+            $commands[] = new RemoveGlueIdeAutoCompletionConsole();
             $commands[] = new PluginUsageFinderConsole();
             $commands[] = new PostgresIndexGeneratorConsole();
             $commands[] = new PostgresIndexRemoverConsole();
