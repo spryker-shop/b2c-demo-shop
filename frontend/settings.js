@@ -130,14 +130,7 @@ const getAppSettingsByTheme = (namespaceConfig, theme, pathToConfig) => {
 
     // define if current mode is production
     const isProductionMode = () => {
-        const { argv } = process;
-        const currentMode = argv[argv.length - 1];
-        const isValidMode = Object.values(globalSettings.modes).find(mode => mode === currentMode);
-
-        if (!isValidMode) {
-            throw new Error(`Mode "${currentMode}" is not available`);
-        }
-
+        const currentMode = process.argv.slice(2)[0];
         return currentMode === globalSettings.modes.prod;
     };
 
