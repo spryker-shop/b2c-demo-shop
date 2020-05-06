@@ -43,8 +43,27 @@ sections:
         remove-cache:
             command: "vendor/bin/console cache:empty-all"
 
-        remove-generated-files:
-            command: "vendor/bin/console setup:empty-generated-directory"
+        remove-auto-completion:
+            command: "vendor/bin/console dev:ide-auto-completion:remove"
+
+        remove-request-validation-cache:
+            command: "vendor/bin/console glue:rest-request-validation-cache:remove"
+
+        remove-navigation-cache:
+            command: "vendor/bin/console navigation:cache:remove"
+
+        remove-source-map:
+            command: "vendor/bin/console search:source-map:remove"
+
+        remove-databuilder:
+            command: "vendor/bin/console transfer:databuilder:remove"
+
+        remove-entity-transfer:
+            command: "vendor/bin/console transfer:entity:remove"
+
+        remove-transfer:
+            command: "vendor/bin/console transfer:remove"
+
 
     generate:
         generate-transfers:
@@ -54,7 +73,7 @@ sections:
             command: "vendor/bin/console transfer:databuilder:generate"
 
         generate-ide-auto-completion:
-            command: "vendor/bin/console dev:ide:generate-auto-completion"
+            command: "vendor/bin/console dev:ide-auto-completion:generate"
 
     jenkins-down:
         jenkins-stop:
