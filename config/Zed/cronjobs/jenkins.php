@@ -30,7 +30,7 @@ $jobs[] = [
 ];
 $jobs[] = [
     'name' => 'update-product-label-relations',
-    'command' => '$PHP_BIN vendor/bin/console product-label:relations:update -vvv',
+    'command' => '$PHP_BIN vendor/bin/console product-label:relations:update -vvv --no-touch',
     'schedule' => '* * * * *',
     'enable' => true,
     'stores' => $allStores,
