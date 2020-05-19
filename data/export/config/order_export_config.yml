@@ -1,0 +1,42 @@
+version: 1
+
+defaults:
+    filter_criteria: &default_filter_criteria
+        order_created_at:
+            type: between
+            from: '2020-05-01 00:00:00'
+            to: '2020-12-31 23:59:59'
+
+actions:
+    - data_entity: order-expense
+      destination: '{data_entity}s_DE_{timestamp}.{extension}'
+      filter_criteria:
+          <<: *default_filter_criteria
+          store_name: [DE]
+    - data_entity: order-expense
+      destination: '{data_entity}s_AT_{timestamp}.{extension}'
+      filter_criteria:
+          <<: *default_filter_criteria
+          store_name: [AT]
+
+    - data_entity: order-item
+      destination: '{data_entity}s_DE_{timestamp}.{extension}'
+      filter_criteria:
+          <<: *default_filter_criteria
+          store_name: [DE]
+    - data_entity: order-item
+      destination: '{data_entity}s_AT_{timestamp}.{extension}'
+      filter_criteria:
+          <<: *default_filter_criteria
+          store_name: [AT]
+
+    - data_entity: order
+      destination: '{data_entity}s_DE_{timestamp}.{extension}'
+      filter_criteria:
+          <<: *default_filter_criteria
+          store_name: [DE]
+    - data_entity: order
+      destination: '{data_entity}s_AT_{timestamp}.{extension}'
+      filter_criteria:
+          <<: *default_filter_criteria
+          store_name: [AT]
