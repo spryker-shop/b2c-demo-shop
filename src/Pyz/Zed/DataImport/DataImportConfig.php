@@ -27,7 +27,6 @@ class DataImportConfig extends SprykerDataImportConfig
     public const IMPORT_TYPE_PRODUCT_ATTRIBUTE_KEY = 'product-attribute-key';
     public const IMPORT_TYPE_PRODUCT_MANAGEMENT_ATTRIBUTE = 'product-management-attribute';
     public const IMPORT_TYPE_PRODUCT_REVIEW = 'product-review';
-    public const IMPORT_TYPE_PRODUCT_LABEL = 'product-label';
     public const IMPORT_TYPE_PRODUCT_SET = 'product-set';
     public const IMPORT_TYPE_PRODUCT_GROUP = 'product-group';
     public const IMPORT_TYPE_PRODUCT_OPTION = 'product-option';
