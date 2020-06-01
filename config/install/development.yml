@@ -30,6 +30,9 @@ sections:
         maintenance-yves-off:
             command: "vendor/bin/console maintenance:disable yves"
 
+    composer:
+        composer-autoloader:
+            command: "composer dumpautoload --apcu"
 
     environment:
         console-environment:
@@ -72,6 +75,9 @@ sections:
         generate-transfer-databuilders:
             command: "vendor/bin/console transfer:databuilder:generate"
 
+        generate-entity-transfer:
+            command: "vendor/bin/console transfer:entity:generate"
+
         generate-ide-auto-completion:
             command: "vendor/bin/console dev:ide-auto-completion:generate"
 
@@ -95,6 +101,9 @@ sections:
 
         rest-request-validation-cache-warmup:
             command: "vendor/bin/console glue:rest:build-request-validation-cache"
+
+        class-resolver-build:
+            command: "vendor/bin/console cache:class-resolver:build"
 
 
     queue-flush:
@@ -211,9 +220,6 @@ sections:
         maintenance-page-disable:
             command: "vendor/bin/console maintenance:disable"
             stores: true
-
-        generate-entity-transfer:
-            command: "vendor/bin/console transfer:entity:generate"
 
         init-database:
             command: "vendor/bin/console setup:init-db"
