@@ -35,8 +35,6 @@ use Spryker\Zed\ProductCategoryStorage\Communication\Plugin\Event\Subscriber\Pro
 use Spryker\Zed\ProductDiscontinuedStorage\Communication\Plugin\Event\Subscriber\ProductDiscontinuedStorageEventSubscriber;
 use Spryker\Zed\ProductGroupStorage\Communication\Plugin\Event\Subscriber\ProductGroupStorageEventSubscriber;
 use Spryker\Zed\ProductImageStorage\Communication\Plugin\Event\Subscriber\ProductImageStorageEventSubscriber;
-use Spryker\Zed\ProductLabelSearch\Communication\Plugin\Event\Subscriber\ProductLabelSearchEventSubscriber;
-use Spryker\Zed\ProductLabelStorage\Communication\Plugin\Event\Subscriber\ProductLabelStorageEventSubscriber;
 use Spryker\Zed\ProductListSearch\Communication\Plugin\Event\Subscriber\ProductListSearchEventSubscriber;
 use Spryker\Zed\ProductListStorage\Communication\Plugin\Event\Subscriber\ProductListStorageEventSubscriber;
 use Spryker\Zed\ProductOptionStorage\Communication\Plugin\Event\Subscriber\ProductOptionStorageEventSubscriber;
@@ -92,7 +90,6 @@ class EventDependencyProvider extends SprykerEventDependencyProvider
         $eventSubscriberCollection->add(new ProductGroupStorageEventSubscriber());
         $eventSubscriberCollection->add(new ProductOptionStorageEventSubscriber());
         $eventSubscriberCollection->add(new ProductReviewStorageEventSubscriber());
-        $eventSubscriberCollection->add(new ProductLabelStorageEventSubscriber());
         $eventSubscriberCollection->add(new ProductSetStorageEventSubscriber());
         $eventSubscriberCollection->add(new FileManagerStorageSubscriber());
         $eventSubscriberCollection->add(new ProductSearchConfigStorageEventSubscriber());
@@ -124,7 +121,6 @@ class EventDependencyProvider extends SprykerEventDependencyProvider
         $eventSubscriberCollection->add(new ProductReviewSearchEventSubscriber());
         $eventSubscriberCollection->add(new ProductSetPageSearchEventSubscriber());
         $eventSubscriberCollection->add(new ProductPageSearchEventSubscriber());
-        $eventSubscriberCollection->add(new ProductLabelSearchEventSubscriber());
         $eventSubscriberCollection->add(new ProductConcretePageSearchProductAbstractEventSubscriber());
         $eventSubscriberCollection->add(new ProductConcretePageSearchProductEventSubscriber());
         $eventSubscriberCollection->add(new ProductConcretePageSearchProductLocalizedAttributesEventSubscriber());

@@ -30,6 +30,8 @@ use Spryker\Zed\PriceProductDataImport\Communication\Plugin\PriceProductDataImpo
 use Spryker\Zed\PriceProductScheduleDataImport\Communication\Plugin\PriceProductScheduleDataImportPlugin;
 use Spryker\Zed\ProductAlternativeDataImport\Communication\Plugin\ProductAlternativeDataImportPlugin;
 use Spryker\Zed\ProductDiscontinuedDataImport\Communication\Plugin\ProductDiscontinuedDataImportPlugin;
+use Spryker\Zed\ProductLabelDataImport\Communication\Plugin\ProductLabelDataImportPlugin;
+use Spryker\Zed\ProductLabelDataImport\Communication\Plugin\ProductLabelStoreDataImportPlugin;
 use Spryker\Zed\ProductListDataImport\Communication\Plugin\ProductListCategoryDataImportPlugin;
 use Spryker\Zed\ProductListDataImport\Communication\Plugin\ProductListDataImportPlugin;
 use Spryker\Zed\ProductListDataImport\Communication\Plugin\ProductListProductConcreteDataImportPlugin;
@@ -176,6 +178,8 @@ class DataImportDependencyProvider extends SprykerDataImportDependencyProvider
             new ConfigurableBundleTemplateImageDataImportPlugin(),
             new ProductRelationDataImportPlugin(),
             new ProductRelationStoreDataImportPlugin(),
+            new ProductLabelDataImportPlugin(),
+            new ProductLabelStoreDataImportPlugin(),
         ];
     }
 

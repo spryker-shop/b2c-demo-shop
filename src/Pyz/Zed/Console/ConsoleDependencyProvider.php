@@ -51,6 +51,7 @@ use Spryker\Zed\EventBehavior\Communication\Plugin\Console\EventBehaviorPostHook
 use Spryker\Zed\IndexGenerator\Communication\Console\PostgresIndexGeneratorConsole;
 use Spryker\Zed\IndexGenerator\Communication\Console\PostgresIndexRemoverConsole;
 use Spryker\Zed\Installer\Communication\Console\InitializeDatabaseConsole;
+use Spryker\Zed\Kernel\Communication\Console\ResolvableClassCacheConsole;
 use Spryker\Zed\Kernel\Container;
 use Spryker\Zed\Log\Communication\Console\DeleteLogFilesConsole;
 use Spryker\Zed\Maintenance\Communication\Console\MaintenanceDisableConsole;
@@ -71,6 +72,7 @@ use Spryker\Zed\ProductDiscontinued\Communication\Console\DeactivateDiscontinued
 use Spryker\Zed\ProductDiscontinuedDataImport\ProductDiscontinuedDataImportConfig;
 use Spryker\Zed\ProductLabel\Communication\Console\ProductLabelRelationUpdaterConsole;
 use Spryker\Zed\ProductLabel\Communication\Console\ProductLabelValidityConsole;
+use Spryker\Zed\ProductLabelDataImport\ProductLabelDataImportConfig;
 use Spryker\Zed\ProductQuantityDataImport\ProductQuantityDataImportConfig;
 use Spryker\Zed\ProductRelation\Communication\Console\ProductRelationUpdaterConsole;
 use Spryker\Zed\ProductRelationDataImport\ProductRelationDataImportConfig;
@@ -217,7 +219,8 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
             new DataImportConsole(DataImportConsole::DEFAULT_NAME . ':' . DataImportConfig::IMPORT_TYPE_PRODUCT_OPTION),
             new DataImportConsole(DataImportConsole::DEFAULT_NAME . ':' . DataImportConfig::IMPORT_TYPE_PRODUCT_OPTION_PRICE),
             new DataImportConsole(DataImportConsole::DEFAULT_NAME . ':' . DataImportConfig::IMPORT_TYPE_PRODUCT_REVIEW),
-            new DataImportConsole(DataImportConsole::DEFAULT_NAME . ':' . DataImportConfig::IMPORT_TYPE_PRODUCT_LABEL),
+            new DataImportConsole(DataImportConsole::DEFAULT_NAME . ':' . ProductLabelDataImportConfig::IMPORT_TYPE_PRODUCT_LABEL),
+            new DataImportConsole(DataImportConsole::DEFAULT_NAME . ':' . ProductLabelDataImportConfig::IMPORT_TYPE_PRODUCT_LABEL_STORE),
             new DataImportConsole(DataImportConsole::DEFAULT_NAME . ':' . DataImportConfig::IMPORT_TYPE_PRODUCT_SET),
             new DataImportConsole(DataImportConsole::DEFAULT_NAME . ':' . DataImportConfig::IMPORT_TYPE_PRODUCT_SEARCH_ATTRIBUTE_MAP),
             new DataImportConsole(DataImportConsole::DEFAULT_NAME . ':' . DataImportConfig::IMPORT_TYPE_PRODUCT_SEARCH_ATTRIBUTE),
@@ -310,6 +313,8 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
             new SchedulerResumeConsole(),
 
             new RouterCacheWarmUpConsole(),
+
+            new ResolvableClassCacheConsole(),
 
             new DataExportConsole(),
         ];
