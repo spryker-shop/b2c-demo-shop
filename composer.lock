@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8ba390457a11034175e13af90f58b718",
+    "content-hash": "ff264e93918b553f2af4794643e791c9",
     "packages": [
         {
             "name": "codeitnowin/barcode",
@@ -1024,6 +1024,77 @@
                 "jwt"
             ],
             "time": "2019-05-24T18:30:49+00:00"
+        },
+        {
+            "name": "league/csv",
+            "version": "9.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thephpleague/csv.git",
+                "reference": "7351a74625601914409b42b32cabb91a93773b7b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thephpleague/csv/zipball/7351a74625601914409b42b32cabb91a93773b7b",
+                "reference": "7351a74625601914409b42b32cabb91a93773b7b",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "php": "^7.2.5"
+            },
+            "require-dev": {
+                "ext-curl": "*",
+                "friendsofphp/php-cs-fixer": "^2.16",
+                "phpstan/phpstan": "^0.12.0",
+                "phpstan/phpstan-phpunit": "^0.12.0",
+                "phpstan/phpstan-strict-rules": "^0.12.0",
+                "phpunit/phpunit": "^8.0"
+            },
+            "suggest": {
+                "ext-dom": "Required to use the XMLConverter and or the HTMLConverter classes",
+                "ext-iconv": "Needed to ease transcoding CSV using iconv stream filters"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "9.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "League\\Csv\\": "src"
+                },
+                "files": [
+                    "src/functions_include.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ignace Nyamagana Butera",
+                    "email": "nyamsprod@gmail.com",
+                    "homepage": "https://github.com/nyamsprod/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "CSV data manipulation made easy in PHP",
+            "homepage": "http://csv.thephpleague.com",
+            "keywords": [
+                "convert",
+                "csv",
+                "export",
+                "filter",
+                "import",
+                "read",
+                "transform",
+                "write"
+            ],
+            "time": "2020-03-17T15:15:35+00:00"
         },
         {
             "name": "league/event",
@@ -15177,6 +15248,42 @@
             "time": "2019-10-14T10:22:10+00:00"
         },
         {
+            "name": "spryker/csv",
+            "version": "3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/csv.git",
+                "reference": "d91fcc6cdcb3b727e17f0ce85e67610db6e57351"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/csv/zipball/d91fcc6cdcb3b727e17f0ce85e67610db6e57351",
+                "reference": "d91fcc6cdcb3b727e17f0ce85e67610db6e57351",
+                "shasum": ""
+            },
+            "require": {
+                "league/csv": "^9.1",
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/testify": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0.x-dev"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "Csv module",
+            "abandoned": true,
+            "time": "2018-06-20T12:42:41+00:00"
+        },
+        {
             "name": "spryker/currency",
             "version": "3.11.2",
             "source": {
@@ -16017,6 +16124,90 @@
             ],
             "description": "Dashboard module",
             "time": "2019-01-28T15:17:37+00:00"
+        },
+        {
+            "name": "spryker/data-export",
+            "version": "0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/data-export.git",
+                "reference": "612e56b7c7c171d0f85ad88b798bb83521b3dac4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/data-export/zipball/612e56b7c7c171d0f85ad88b798bb83521b3dac4",
+                "reference": "612e56b7c7c171d0f85ad88b798bb83521b3dac4",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2",
+                "spryker/csv": "^3.0.0",
+                "spryker/data-export-extension": "^0.1.0",
+                "spryker/kernel": "^3.30.0",
+                "spryker/symfony": "^3.0.0",
+                "spryker/transfer": "^3.8.0",
+                "spryker/util-data-reader": "^1.1.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/testify": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "DataExport module",
+            "time": "2020-05-15T10:02:44+00:00"
+        },
+        {
+            "name": "spryker/data-export-extension",
+            "version": "0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/data-export-extension.git",
+                "reference": "3a5992460db1aa67a7eb07a0050c3c9364b736b2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/data-export-extension/zipball/3a5992460db1aa67a7eb07a0050c3c9364b736b2",
+                "reference": "3a5992460db1aa67a7eb07a0050c3c9364b736b2",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/testify": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "DataExportExtension module",
+            "time": "2020-05-15T10:02:44+00:00"
         },
         {
             "name": "spryker/data-import",
@@ -26308,6 +26499,57 @@
             "time": "2019-12-02T14:13:45+00:00"
         },
         {
+            "name": "spryker/sales-data-export",
+            "version": "0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/sales-data-export.git",
+                "reference": "f64be25ab014b361be0f430b5f3f6b6c966fdef7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/sales-data-export/zipball/f64be25ab014b361be0f430b5f3f6b6c966fdef7",
+                "reference": "f64be25ab014b361be0f430b5f3f6b6c966fdef7",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2",
+                "spryker/country": "^3.0.0",
+                "spryker/data-export": "^0.1.0",
+                "spryker/data-export-extension": "^0.1.0",
+                "spryker/kernel": "^3.30.0",
+                "spryker/locale": "^3.0.0",
+                "spryker/oms": "^1.0.0 || ^2.0.0 || ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0 || ^10.0.0 || ^11.0.0",
+                "spryker/propel-orm": "^1.0.0",
+                "spryker/sales": "^8.0.0 || ^10.0.0 || ^11.0.0",
+                "spryker/shipment": "^7.0.0 || ^8.0.0",
+                "spryker/transfer": "^3.8.0",
+                "spryker/util-encoding": "^1.0.0 || ^2.0.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/propel": "*",
+                "spryker/testify": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "SalesDataExport module",
+            "time": "2020-05-15T11:17:53+00:00"
+        },
+        {
             "name": "spryker/sales-extension",
             "version": "1.5.0",
             "source": {
@@ -35137,12 +35379,12 @@
             "version": "1.7.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/php-webdriver/php-webdriver-archive.git",
+                "url": "https://github.com/php-webdriver/php-webdriver.git",
                 "reference": "e43de70f3c7166169d0f14a374505392734160e5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-webdriver/php-webdriver-archive/zipball/e43de70f3c7166169d0f14a374505392734160e5",
+                "url": "https://api.github.com/repos/php-webdriver/php-webdriver/zipball/e43de70f3c7166169d0f14a374505392734160e5",
                 "reference": "e43de70f3c7166169d0f14a374505392734160e5",
                 "shasum": ""
             },
@@ -39725,6 +39967,5 @@
     "platform-dev": [],
     "platform-overrides": {
         "php": "7.2.24"
-    },
-    "plugin-api-version": "1.1.0"
+    }
 }
