@@ -30,8 +30,6 @@ use Spryker\Zed\ProductCategoryStorage\Communication\Plugin\Event\ProductCategor
 use Spryker\Zed\ProductGroupStorage\Communication\Plugin\Event\ProductGroupEventResourceQueryContainerPlugin;
 use Spryker\Zed\ProductImageStorage\Communication\Plugin\Event\ProductAbstractImageEventResourceQueryContainerPlugin;
 use Spryker\Zed\ProductImageStorage\Communication\Plugin\Event\ProductConcreteImageEventResourceQueryContainerPlugin;
-use Spryker\Zed\ProductLabelStorage\Communication\Plugin\Event\ProductAbstractLabelEventResourceQueryContainerPlugin;
-use Spryker\Zed\ProductLabelStorage\Communication\Plugin\Event\ProductLabelDictionaryEventResourceQueryContainerPlugin;
 use Spryker\Zed\ProductOptionStorage\Communication\Plugin\Event\ProductOptionEventResourceQueryContainerPlugin;
 use Spryker\Zed\ProductPageSearch\Communication\Plugin\Event\ProductConcretePageSearchEventResourceBulkRepositoryPlugin;
 use Spryker\Zed\ProductPageSearch\Communication\Plugin\Event\ProductPageEventResourceQueryContainerPlugin;
@@ -72,8 +70,6 @@ class EventBehaviorDependencyProvider extends SprykerEventBehaviorDependencyProv
             new ProductGroupEventResourceQueryContainerPlugin(),
             new ProductAbstractImageEventResourceQueryContainerPlugin(),
             new ProductConcreteImageEventResourceQueryContainerPlugin(),
-            new ProductLabelDictionaryEventResourceQueryContainerPlugin(),
-            new ProductAbstractLabelEventResourceQueryContainerPlugin(),
             new ProductOptionEventResourceQueryContainerPlugin(),
             new ProductReviewEventResourceQueryContainerPlugin(),
             new ProductSearchConfigEventResourceQueryContainerPlugin(),
