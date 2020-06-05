@@ -34,6 +34,23 @@
             <a class="{{ component.renderClass('menu__link', modifiers) }}" href="{{ path('customer/order') }}"
                data-id="sidebar-order">{{ 'customer.account.order_history' | trans }}</a>
         </li>
+
+        {% embed molecule('return-list-link', 'SalesReturnPage') ignore missing with {
+            class: _self.isActive('return/list', data.activePage),
+            data: {
+                activePage: data.activePage,
+            },
+            embed: {
+                activeClass: _self.isActive('return/list', data.activePage),
+            },
+        } only %}
+            {% block component %}
+                <li class="menu__item {{ embed.activeClass }}">
+                    {{ parent() }}
+                </li>
+            {% endblock %}
+        {% endembed %}
+
         <li class="{{ component.renderClass('menu__item', modifiers) }} {{macros.isActive('newsletter', data.activePage)}}">
             <a class="{{ component.renderClass('menu__link', modifiers) }}" href="{{ path('customer/newsletter') }}"
                data-id="sidebar-newsletter">{{ 'customer.account.newsletter' | trans }}</a>
