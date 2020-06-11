@@ -33,9 +33,16 @@
     </li>
 
     <li class="{{ config.name }}__item">
+        {% if data.order.totals.remunerationTotal %}
+            <span class="float-right">{{ data.order.totals.remunerationTotal | money(true, data.order.currencyIsoCode) }}</span>
+            {{ 'customer.order.remunerationTotal' | trans }}
+        {% endif %}
+    </li>
+
+    <li class="{{ config.name }}__item">
         {% if data.order.totals.canceledTotal %}
             <span class="float-right">{{ data.order.totals.canceledTotal | money(true, data.order.currencyIsoCode) }}</span>
-            {{ 'customer.order.canceledTotal' | trans }}
+            {{ 'customer.order.refundTotal' | trans }}
         {% endif %}
     </li>
 
