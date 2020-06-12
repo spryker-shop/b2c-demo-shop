@@ -42,12 +42,16 @@
                         'custom-select-class-name': 'custom-select',
                     },
                     modifiers: ['product-set', 'product-set-secondary'],
+                    embed: {
+                        jsName: config.jsName,
+                    },
                 } only %}
 
                     {% block slides %}
                         {% for product in data.slides %}
                             {% embed molecule('product-item') with {
                                 modifiers: ['stretch', 'product-set', 'widget'],
+                                class: embed.jsName ~ '__product-item',
                                 data: {
                                     product: product,
                                 },
@@ -93,7 +97,7 @@
                 {% for product in data.products %}
                     {% if product.idProductConcrete is not empty %}
                         {% if product.available %}
-                            <input type="hidden" name="items[{{ loop.index }}][sku]" value="{{ product.sku }}">
+                            <input type="hidden" name="items[{{ loop.index }}][sku]" class="{{ config.jsName }}__product-sku-hidden-input" value="{{ product.sku }}">
                             <input type="hidden" name="items[{{ loop.index }}][quantity]" value="1">
                         {% endif %}
                     {% else %}
