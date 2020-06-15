@@ -3,17 +3,95 @@
 {% block breadcrumbs %}{% endblock %}
 
 {% block salesReturnContentHeader %}
-    <div class="return-title-block grid grid--middle">
-        <div class="col col--expand">
-            <h2 class="title spacing-right spacing-bottom spacing-bottom--small">{{ 'return_page.return.title' | trans }}</h2>
-        </div>
-        <div class="col">
-            {% include molecule('order-detail-link', 'CustomerPage') ignore missing with {
-                class: 'button button--hollow button--medium button--expand-mobile spacing-bottom spacing-bottom--small',
+    {% include molecule('return-title-block', 'SalesReturnPage') with {
+        data: {
+            idSalesOrder: data.order.idSalesOrder,
+        },
+    } only %}
+{% endblock %}
+
+{% block salesReturnOrderInfo %}
+    {% include molecule('return-header-information', 'SalesReturnPage') with {
+        data: {
+            orderReference: data.order.orderReference,
+            createdAt: data.order.createdAt,
+        },
+    } only %}
+{% endblock %}
+
+{% block salesReturnOrderInfoSeparator %}{% endblock %}
+
+{% block salesReturnProducts %}
+    {% set salesReturnProductItemClass = 'grid grid--justify' %}
+
+    {{ parent() }}
+{% endblock %}
+
+{% block checkbox %}{% endblock %}
+
+{% block salesReturnProductItemInfo %}
+    {% embed molecule('return-product-item', 'SalesReturnPage') with {
+        class: 'grid col col--expand',
+        modifiers: [orderItem.productOptions is not empty ? 'with-options'],
+        data: {
+            item: orderItem,
+        },
+        embed: {
+            returnItem: returnItem,
+        },
+    } only %}
+        {% block checkboxColumn %}
+            <div class="grid grid--no-wrap col">
+                <div class="col col--middle spacing-right spacing-right--inner">
+                    {{ form_row(embed.returnItem.isReturnable, {
+                        label: ' ',
+                        attr: {
+                            class: 'js-return-create__trigger-state-toggler',
+                        },
+                        disabled: not data.item.isReturnable,
+                        attributes: {
+                            additionalModifier: 'big',
+                        },
+                    }) }}
+                </div>
+
+                {{ parent() }}
+            </div>
+        {% endblock %}
+
+        {% block productItemInfoInner %}
+            <div class="spacing-bottom">
+                {% for returnPolicyMessage in data.item.returnPolicyMessages %}
+                    <div class="badge badge--hollow">
+                        {{ returnPolicyMessage.value | trans(returnPolicyMessage.parameters) }}
+                    </div>
+                {% endfor %}
+
+                {% if not data.item.isReturnable %}
+                    <div class="badge badge--hollow">
+                        {{ 'return_page.returnable_state' | trans }}
+                    </div>
+                {% endif %}
+            </div>
+
+            {{ parent() }}
+
+            {% include molecule('return-product-reason', 'SalesReturnPage') with {
                 data: {
-                    idSalesOrder: data.order.idSalesOrder,
+                    returnItem: embed.returnItem,
+                    isReturnable: embed.returnItem.vars.value.orderItem.isReturnable,
                 },
             } only %}
-        </div>
-    </div>
+        {% endblock %}
+    {% endembed %}
+
+    {% if orderItem.productOptions is not empty %}
+        {% include molecule('product-item-summary') with {
+            modifiers: ['alternative'],
+            class: 'col',
+            data: {
+                productItem: orderItem,
+            },
+        } only %}
+    {% endif %}
 {% endblock %}

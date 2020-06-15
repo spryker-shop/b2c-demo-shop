@@ -10,7 +10,8 @@
 } %}
 
 {% define data = {
-    label: ''
+    label: '',
+    inputClass: '',
 } %}
 
 {% set disabled = attributes['disabled'] | default(false) %}
@@ -21,7 +22,7 @@
 
 {% block body %}
     <label class="{{ config.name }}__container" {{ qa('label') }}>
-        <input class="{{ config.name }}__input {% block inputClass %}{% endblock %}" {{ block('attributes') }}/>
+        <input class="{{ config.name }}__input {% block inputClass %} {{- data.inputClass -}} {% endblock %}" {{ block('attributes') }}/>
         <span class="{{ config.name }}__box"></span>
         {% include atom('icon') with {
             class: config.name ~ '__check',

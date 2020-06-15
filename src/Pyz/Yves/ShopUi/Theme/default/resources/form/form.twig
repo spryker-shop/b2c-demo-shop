@@ -44,12 +44,17 @@
             preferred_choices: preferred_choices,
             choices: choices,
             separator: separator,
-            choice_translation_domain: choice_translation_domain
-        }
+            choice_translation_domain: choice_translation_domain,
+            class: attr.class ?? '',
+        },
     } only %}
         {% block selectAttributes %}
-            {{parent()}}
-            {{embed.attributes | raw}}
+            {{ parent() }}
+            {{ embed.attributes | raw }}
+        {% endblock %}
+
+        {% block selectClass %}
+            {{ parent() }} {{ embed.class }}
         {% endblock %}
 
         {% block options %}
@@ -94,6 +99,7 @@
     {%- set component = component | default(atom(type)) -%}
     {%- set label = label | default(name | humanize) | trans -%}
     {%- set modifiers = errors is empty ? ['expand'] : ['expand', 'error'] -%}
+    {%- set inputClass = attr.class | default() -%}
 
     {% define attributes = {
         id: id,
@@ -101,15 +107,19 @@
         checked: checked | default(false),
         required: required | default(false),
         disabled: disabled | default(false),
-        value: value | default()
+        value: value | default(),
+        additionalModifier: '',
     } %}
+
+    {%- set modifiers = modifiers | merge([attributes.additionalModifier]) -%}
 
     {% include component with {
         modifiers: modifiers,
         data: {
-            label: label
+            label: label,
+            inputClass: inputClass,
         },
-        attributes: attributes
+        attributes: attributes,
     } only %}
 {%- endblock -%}
 
