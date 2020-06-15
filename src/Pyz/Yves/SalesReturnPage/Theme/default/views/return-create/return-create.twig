@@ -1,0 +1,19 @@
+{% extends view('return-create', '@SprykerShop:SalesReturnPage') %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block salesReturnContentHeader %}
+    <div class="return-title-block grid grid--middle">
+        <div class="col col--expand">
+            <h2 class="title spacing-right spacing-bottom spacing-bottom--small">{{ 'return_page.return.title' | trans }}</h2>
+        </div>
+        <div class="col">
+            {% include molecule('order-detail-link', 'CustomerPage') ignore missing with {
+                class: 'button button--hollow button--medium button--expand-mobile spacing-bottom spacing-bottom--small',
+                data: {
+                    idSalesOrder: data.order.idSalesOrder,
+                },
+            } only %}
+        </div>
+    </div>
+{% endblock %}

@@ -36,16 +36,17 @@
         </li>
 
         {% embed molecule('return-list-link', 'SalesReturnPage') ignore missing with {
-            class: _self.isActive('return/list', data.activePage),
+            class: component.renderClass('menu__link', modifiers),
             data: {
                 activePage: data.activePage,
             },
             embed: {
                 activeClass: _self.isActive('return/list', data.activePage),
+                modifiers: modifiers,
             },
         } only %}
             {% block component %}
-                <li class="menu__item {{ embed.activeClass }}">
+                <li class="{{ component.renderClass('menu__item', embed.modifiers) }} {{ embed.activeClass }}">
                     {{ parent() }}
                 </li>
             {% endblock %}
