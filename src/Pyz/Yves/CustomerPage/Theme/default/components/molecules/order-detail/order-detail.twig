@@ -1,34 +1,21 @@
 {% extends molecule('order-detail', '@SprykerShop:CustomerPage') %}
 
 {% block body %}
-    <div class="order-detail-block grid grid--middle">
-        <div class="col col--expand">
-            <h2 class="title spacing-right spacing-bottom spacing-bottom--small">{{ 'customer.profile.order_details' | trans }}</h2>
-        </div>
-        <div class="col">
-            <a href="{{ url('customer/order') }}" class="button button--hollow button--medium button--expand-mobile spacing-right spacing-bottom spacing-bottom--small">
-                {{ 'general.back.button' | trans }}
-            </a>
+    <div class="order-detail-block text-right">
+        <a href="{{ url('customer/order') }}" class="button button--hollow button--medium button--expand-mobile spacing-right spacing-bottom spacing-bottom--small">
+            {{ 'general.back.button' | trans }}
+        </a>
 
-            {% include molecule('return-create-link', 'SalesReturnPage') ignore missing with {
-                class: config.jsName ~ '__target-state-toggler button button--medium button--expand-mobile spacing-right spacing-bottom spacing-bottom--small',
-                data: {
-                    orderReference: data.order.orderReference,
-                },
-            } only %}
+        {% include molecule('return-create-link', 'SalesReturnPage') ignore missing with {
+            class: config.jsName ~ '__target-state-toggler button button--medium button--expand-mobile spacing-right spacing-bottom spacing-bottom--small',
+            data: {
+                orderReference: data.order.orderReference,
+            },
+        } only %}
 
-            <button class="js-customer-reorder-form__trigger button button--medium button--expand-mobile spacing-right spacing-bottom spacing-bottom--small" disabled>
-                {{ 'customer.order.reorder_selected' | trans }}
-            </button>
-
-            {% widget 'CustomerReorderFormWidget' args [data.order] only %}
-                {% block embeddedData %}
-                    <button class="button button--medium button--expand-mobile spacing-bottom spacing-bottom--small">
-                        {{ 'customer.order.reorder_all' | trans }}
-                    </button>
-                {% endblock %}
-            {% endwidget %}
-        </div>
+        <button class="js-customer-reorder-form__trigger button button--medium button--expand-mobile spacing-bottom spacing-bottom--small" disabled>
+            {{ 'customer.order.reorder_selected' | trans }}
+        </button>
     </div>
 
     {% include molecule('order-detail-header', 'CustomerPage') with {

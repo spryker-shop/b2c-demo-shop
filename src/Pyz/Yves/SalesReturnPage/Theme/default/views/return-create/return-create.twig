@@ -24,6 +24,16 @@
 {% block salesReturnProducts %}
     {% set salesReturnProductItemClass = 'grid grid--justify' %}
 
+    {% include molecule('checkbox-select-all') with {
+        modifiers: ['big'],
+        data: {
+            label: 'return_page.create_return.select_all_checkbox' | trans,
+        },
+        attributes: {
+            'target-class-name': 'js-return-create__trigger-state-toggler',
+        },
+    } only %}
+
     {{ parent() }}
 {% endblock %}
 

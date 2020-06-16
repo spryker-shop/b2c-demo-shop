@@ -24,12 +24,15 @@
     <label class="{{ config.name }}__container" {{ qa('label') }}>
         <input class="{{ config.name }}__input {% block inputClass %} {{- data.inputClass -}} {% endblock %}" {{ block('attributes') }}/>
         <span class="{{ config.name }}__box"></span>
-        {% include atom('icon') with {
-            class: config.name ~ '__check',
-            data: {
-                name: 'check'
-            }
-        } only %}
+        {% block icon %}
+            {% include atom('icon') with {
+                class: config.name ~ '__check',
+                data: {
+                    name: 'check'
+                }
+            } only %}
+        {% endblock %}
+
         {%- block labelContainer -%}    
             <span class="{{ config.name }}__label {% block labelClass %}{% endblock %}">
                 {%- block label -%}{{ data.label }}{%- endblock -%}
