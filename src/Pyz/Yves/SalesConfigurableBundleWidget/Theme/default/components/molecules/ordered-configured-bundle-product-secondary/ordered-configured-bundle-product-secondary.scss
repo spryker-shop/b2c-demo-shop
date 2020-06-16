@@ -1,26 +1,24 @@
 $image-width: rem(120);
 
-@mixin sales-return-page-return-product-item($name: '.return-product-item') {
+@mixin sales-configurable-bundle-widget-ordered-configured-bundle-product-secondary($name: '.ordered-configured-bundle-product-secondary') {
     #{$name} {
-        border-bottom: rem(1) dotted $setting-color-gray-3;
-        padding-bottom: rem(18);
-        margin-bottom: rem(18);
+        padding: rem(10) rem(10) rem(20) rem(10);
 
-        &__image {
-            width: $image-width;
+        @include helper-breakpoint-media-min($md-min) {
+            padding-right: rem(15);
         }
 
         &__content {
-            padding-top: rem(15);
-            width: 100%;
+            padding-top: rem(10);
 
             @include helper-breakpoint-media-min($md-min) {
-                padding-left: rem(20);
+                padding-left: rem(16);
                 padding-top: 0;
-                width: auto;
-                flex-grow: 1;
-                flex-basis: 0;
             }
+        }
+
+        &__thumbnail-wrapper {
+            width: $image-width;
         }
 
         &__info {
@@ -31,15 +29,15 @@ $image-width: rem(120);
             }
         }
 
-        &__name {
-            font: fw(medium) rem(16)/rem(18) $setting-font-family-additional;
+        &__title {
+            display: block;
+            font: fw(medium) rem(15) $setting-font-family-additional;
         }
 
         &__sku,
         &__quantity {
+            font: fw(light) $setting-font-size-base $setting-font-family;
             color: $setting-color-gray-4;
-            font: fw(light) rem(16)/rem(18) $setting-font-family;
-            letter-spacing: rem(0.2);
         }
 
         &__status {
@@ -65,14 +63,8 @@ $image-width: rem(120);
             }
         }
 
-        &--with-options {
-            border-bottom: none;
-            padding-bottom: rem(10);
-            margin-bottom: 0;
-        }
-
         @content;
     }
 }
 
-@include sales-return-page-return-product-item();
+@include sales-configurable-bundle-widget-ordered-configured-bundle-product-secondary();

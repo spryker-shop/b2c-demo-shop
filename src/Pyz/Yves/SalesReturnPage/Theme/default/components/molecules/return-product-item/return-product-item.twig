@@ -11,8 +11,8 @@
     {% set productInfoColumnClass = config.name ~ '__info col col--sm-12 col--xl-4' %}
     {% set productStatusColumnClass = config.name ~ '__status col col--sm-12 col--xl-2' %}
     {% set productPriceColumnClass = config.name ~ '__price col col--sm-4 col--xl-2' %}
-    {% set productQuantityColumnClass = '__quantity col col--sm-4 col--xl-2' %}
-    {% set productPriceTotalColumnClass = '__total-price col col--sm-4 col--xl-2' %}
+    {% set productQuantityColumnClass = config.name ~ '__quantity col col--sm-4 col--xl-2' %}
+    {% set productPriceTotalColumnClass = config.name ~ '__total-price col col--sm-4 col--xl-2' %}
 
     {{ parent() }}
 {% endblock %}
