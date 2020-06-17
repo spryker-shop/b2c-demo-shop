@@ -1,5 +1,9 @@
 {% extends molecule('customer-reorder-form', '@SprykerShop:CustomerReorderWidget') %}
 
+{% define data = {
+    order: required,
+} %}
+
 {% block body %}
     <h2 class="title spacing-bottom spacing-bottom--big">{{ 'customer.profile.order_details' | trans }}</h2>
     <div class="text-right">
