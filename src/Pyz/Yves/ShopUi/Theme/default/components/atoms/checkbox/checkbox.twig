@@ -21,15 +21,17 @@
 {% endblock %}
 
 {% block body %}
+    {% set iconName = 'check' %}
+
     <label class="{{ config.name }}__container" {{ qa('label') }}>
         <input class="{{ config.name }}__input {% block inputClass %} {{- data.inputClass -}} {% endblock %}" {{ block('attributes') }}/>
         <span class="{{ config.name }}__box"></span>
         {% block icon %}
             {% include atom('icon') with {
-                class: config.name ~ '__check',
+                class: config.name ~ '__' ~ iconName,
                 data: {
-                    name: 'check'
-                }
+                    name: iconName,
+                },
             } only %}
         {% endblock %}
 

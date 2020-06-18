@@ -13,12 +13,9 @@
 {% block inputClass %}{{ config.jsName }}__input{% endblock %}
 
 {% block icon %}
-    {% include atom('icon') with {
-        class: config.name ~ '__collapse',
-        data: {
-            name: 'minus',
-        },
-    } only %}
+    {{ parent() }}
+
+    {% set iconName = 'minus' %}
 
     {{ parent() }}
 {% endblock %}

@@ -19,7 +19,7 @@
 {% block salesReturnProductItemInner %}
     {% embed molecule('return-product-item', 'SalesReturnPage') with {
         class: productItemReturnClass,
-        modifiers: [orderItem.productOptions is not empty ? 'with-options'],
+        modifiers: [orderItem.productOptions ? 'with-options'],
         data: {
             item: orderItem,
         },
@@ -36,7 +36,7 @@
         {% endblock %}
     {% endembed %}
 
-    {% if orderItem.productOptions is not empty %}
+    {% if orderItem.productOptions %}
         {% include molecule('product-item-summary') with {
             modifiers: ['alternative'],
             data: {
@@ -55,7 +55,7 @@
         {% block bundle %}
             {% embed molecule('ordered-product-bundle', 'SalesProductBundleWidget') with {
                 class: 'grid',
-                modifiers: [productBundle.bundleProduct.productOptions is not empty ? 'with-options'],
+                modifiers: [productBundle.bundleProduct.productOptions ? 'with-options'],
                 data: {
                     productBundle: productBundle,
                 },
@@ -76,7 +76,7 @@
                 {% endblock %}
             {% endembed %}
 
-            {% if productBundle.bundleProduct.productOptions is not empty %}
+            {% if productBundle.bundleProduct.productOptions %}
                 {% include molecule('product-item-summary') with {
                     modifiers: ['alternative'],
                     data: {
@@ -99,7 +99,7 @@
     } only %}
         {% block bundleItem %}
             {% embed molecule('ordered-configured-bundle', 'SalesConfigurableBundleWidget') ignore missing with {
-                modifiers: ['right-margin-less'],
+                class: 'spacing-right spacing-right--reset',
                 data: {
                     bundle: bundle,
                     items: data.items,

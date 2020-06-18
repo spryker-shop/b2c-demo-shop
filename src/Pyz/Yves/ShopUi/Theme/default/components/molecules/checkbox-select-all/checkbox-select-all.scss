@@ -13,7 +13,7 @@
             position: relative;
         }
 
-        &__collapse {
+        &__minus {
             @include helper-visibility-invisible;
             @include helper-effect-transition;
             opacity: 0;
@@ -35,7 +35,7 @@
                     @include helper-visibility-visible;
                 }
 
-                & ~ #{$name}__collapse {
+                & ~ #{$name}__minus {
                     display: none;
                 }
             }
@@ -44,7 +44,7 @@
                 border: rem(1) solid $setting-color-main;
                 background-color: $setting-color-main;
 
-                & ~ #{$name}__collapse {
+                & ~ #{$name}__minus {
                     @include helper-visibility-visible;
                 }
 
