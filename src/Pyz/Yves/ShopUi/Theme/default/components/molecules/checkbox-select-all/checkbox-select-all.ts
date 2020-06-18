@@ -68,7 +68,6 @@ export default class CheckboxSelectAll extends Component {
     }
 
     toggleTargets(): void {
-        console.log(111);
         const triggerState = this.trigger.checked;
 
         this.targets.forEach((target: HTMLInputElement) => {
