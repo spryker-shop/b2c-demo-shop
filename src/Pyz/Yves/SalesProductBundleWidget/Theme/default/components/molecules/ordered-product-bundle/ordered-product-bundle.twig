@@ -37,12 +37,14 @@
     </div>
 {% endblock %}
 
-{% block quantityTitle %}x {% endblock %}
+{% block quantityTitle %}{{ 'return_page.quantity_symbol' | trans }} {% endblock %}
 
 {% block productOptions %}{% endblock %}
 
 {% block separator %}{% endblock %}
 
 {% block items %}
-    <div class="{{ config.name }}__items">{{ parent() }}</div>
+    {% if data.productBundle.bundleItems %}
+        <div class="{{ config.name }}__items">{{ parent() }}</div>
+    {% endif %}
 {% endblock %}

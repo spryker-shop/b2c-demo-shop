@@ -78,13 +78,13 @@
         {% block productItemInfoInner %}
             <div class="spacing-bottom">
                 {% for returnPolicyMessage in data.item.returnPolicyMessages %}
-                    <div class="badge badge--hollow spacing-bottom spacing-bottom--small">
+                    <div class="badge spacing-bottom spacing-bottom--small">
                         {{ returnPolicyMessage.value | trans(returnPolicyMessage.parameters) }}
                     </div>
                 {% endfor %}
 
                 {% if not data.item.isReturnable %}
-                    <div class="badge badge--hollow">
+                    <div class="badge">
                         {{ 'return_page.returnable_state' | trans }}
                     </div>
                 {% endif %}
@@ -162,14 +162,14 @@
                     {% set bundleItem = data.productBundle.bundleItems | first %}
 
                     <div class="spacing-bottom">
-                        <div class="badge badge--hollow spacing-bottom spacing-bottom--small">
+                        <div class="badge spacing-bottom spacing-bottom--small">
                             {% for returnPolicyMessage in bundleItem.returnPolicyMessages %}
                                 {{ returnPolicyMessage.value | trans(returnPolicyMessage.parameters) }}
                             {% endfor %}
                         </div>
 
                         {% if not isReturnable %}
-                            <div class="badge badge--hollow">
+                            <div class="badge">
                                 {{- 'sales_product_bundle_widget.returnable_state' | trans -}}
                             </div>
                         {% endif %}
@@ -250,13 +250,13 @@
                          {% block generalInformation %}
                              <div class="spacing-bottom">
                                  {% for returnPolicyMessage in data.product.returnPolicyMessages %}
-                                     <div class="badge badge--hollow spacing-bottom spacing-bottom--small">
+                                     <div class="badge spacing-bottom spacing-bottom--small">
                                          {{ returnPolicyMessage.value | trans(returnPolicyMessage.parameters) }}
                                      </div>
                                  {% endfor %}
 
                                  {% if not data.product.isReturnable %}
-                                     <div class="badge badge--hollow">
+                                     <div class="badge">
                                          {{ 'sales_configured_bundle_widget.returnable_state' | trans }}
                                      </div>
                                  {% endif %}

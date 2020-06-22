@@ -12,15 +12,6 @@
     {{ parent() }}
 {% endblock %}
 
-{% block salesReturnTableHeaderCells %}
-    <th>{{ 'return_page.return.return_ref' | trans }}</th>
-    <th>{{ 'return_page.return.order_ref' | trans }}</th>
-    <th>{{ 'return_page.return.number_of_items' | trans }}</th>
-    <th>{{ 'return_page.return.date' | trans }}</th>
-    <th>{{ 'return_page.return.items_state' | trans }}</th>
-    <th></th>
-{% endblock %}
-
 {% block salesReturnTableBody %}
     <tbody>
         {% for return in data.returns %}

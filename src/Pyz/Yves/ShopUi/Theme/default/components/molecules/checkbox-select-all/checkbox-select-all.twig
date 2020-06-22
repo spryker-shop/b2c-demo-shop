@@ -10,6 +10,10 @@
     'class-to-toggle': config.name ~ '__input--item-selected',
 } %}
 
+{% block attributes %}
+    {{ component.renderAttributes(attributes) }}
+{% endblock %}
+
 {% block inputClass %}{{ config.jsName }}__input{% endblock %}
 
 {% block icon %}
