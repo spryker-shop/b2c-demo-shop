@@ -38,7 +38,13 @@
 
                                 {% if widgetExists('CustomerReorderWidgetPlugin') %}
                                     <li class="menu__item">
-                                        {{ widgetBlock('CustomerReorderWidgetPlugin', 'reorderAction', order) }}
+                                        {% widget 'CustomerReorderFormWidget'  args [order] only %}
+                                            {% block embeddedData %}
+                                                <button class="menu__button">
+                                                    {{- 'customer.order.reorder' | trans -}}
+                                                </button>
+                                            {% endblock %}
+                                        {% endwidget %}
                                     </li>
                                 {% endif %}
 
