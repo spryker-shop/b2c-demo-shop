@@ -7,15 +7,8 @@
 {% block body %}
     <div class="{{ config.name }}__container">
         <div class="{{ config.name }}__image-wrap">
-            {% block image %}
-                {% set extraClass = '' %}
-                {% set modifiers = ['no-margin'] %}
-
-                {% block productThumbnail %}
-                    <a class="{{ config.name }}__overlay {{ config.jsName }}__link-detail-page" href="{{ data.url }}">
-                        {{ parent() }}
-                    </a>
-                {% endblock %}
+            {% block imageContainer %}
+                {{ parent() }}
             {% endblock %}
 
             {{ block('labels') }}
@@ -48,4 +41,15 @@
             </div>
         {% endblock %}
     </div>
+{% endblock %}
+
+{% block image %}
+  {% set extraClass = '' %}
+  {% set modifiers = ['no-margin'] %}
+
+  {% block productThumbnail %}
+      <a class="{{ config.name }}__overlay {{ config.jsName }}__link-detail-page" href="{{ data.url }}">
+          {{ parent() }}
+      </a>
+  {% endblock %}
 {% endblock %}
