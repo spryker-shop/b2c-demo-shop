@@ -133,7 +133,6 @@
 
                             {% for returnItem in embed.returnItems if returnItem.orderItem.IdSalesOrderItem == data.product.IdSalesOrderItem %}
                                 {% include molecule('return-reason', 'SalesReturnPage') with {
-                                    class: 'spacing-y',
                                     data: {
                                         returnReason: (returnItem.reason ?: 'return_page.return_reasons.empty') | trans,
                                     },
