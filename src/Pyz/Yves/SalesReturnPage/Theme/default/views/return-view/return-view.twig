@@ -31,7 +31,6 @@
             {{ parent() }}
 
             {% include molecule('return-reason', 'SalesReturnPage') with {
-                class: 'spacing-y',
                 data: {
                     returnReason: (embed.returnItem.reason ?: 'return_page.return_reasons.empty') | trans,
                 },
