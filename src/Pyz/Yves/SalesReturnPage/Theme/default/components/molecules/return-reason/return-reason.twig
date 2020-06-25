@@ -1,0 +1,14 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'return-reason',
+} %}
+
+{% define data = {
+    returnReason: required,
+    returnReasonTitle: 'return_page.return_reasons.title' | trans,
+} %}
+
+{% block body %}
+    <p>{{ data.returnReasonTitle }} {{ data.returnReason }}</p>
+{% endblock %}
