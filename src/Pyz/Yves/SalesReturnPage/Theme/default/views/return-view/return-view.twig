@@ -30,9 +30,11 @@
         {% block productItemInfoInner %}
             {{ parent() }}
 
-            {% if embed.returnItem.reason is not null %}
-                <p>{{ 'return_page.return_reasons.title' | trans }} {{ embed.returnItem.reason | trans }}</p>
-            {% endif %}
+            {% include molecule('return-reason', 'SalesReturnPage') with {
+                data: {
+                    returnReason: (embed.returnItem.reason ?: 'return_page.return_reasons.empty') | trans,
+                },
+            } only %}
         {% endblock %}
     {% endembed %}
 
@@ -66,13 +68,17 @@
                 {% block bundleInfoInner %}
                     {{ parent() }}
 
-                    {% for returnItem in embed.returnItems %}
-                        {% set hasReason = returnItem.orderItem.IdSalesOrderItem == data.productBundle.bundleProduct.bundleItemIdentifier and returnItem.reason is not null %}
+                    {% set returnReason = '' %}
 
-                        {% if hasReason %}
-                            <p>{{ 'return_page.return_reasons.title' | trans }} {{ returnItem.reason | trans }}</p>
-                        {% endif %}
+                    {% for returnItem in embed.returnItems if returnItem.orderItem.productBundle and returnItem.orderItem.productBundle.bundleItemIdentifier == data.productBundle.bundleProduct.bundleItemIdentifier %}
+                        {% set returnReason = returnItem.reason %}
                     {% endfor %}
+
+                    {% include molecule('return-reason', 'SalesReturnPage') with {
+                        data: {
+                            returnReason: (returnReason ?: 'return_page.return_reasons.empty') | trans,
+                        },
+                    } only %}
                 {% endblock %}
             {% endembed %}
 
@@ -125,12 +131,12 @@
                         {% block generalInformation %}
                             {{ parent() }}
 
-                            {% for returnItem in embed.returnItems %}
-                                {% set hasReason = returnItem.orderItem.IdSalesOrderItem == data.product.IdSalesOrderItem and returnItem.reason is not null %}
-
-                                {% if hasReason %}
-                                    <p>{{ 'return_page.return_reasons.title' | trans }} {{ returnItem.reason | trans }}</p>
-                                {% endif %}
+                            {% for returnItem in embed.returnItems if returnItem.orderItem.IdSalesOrderItem == data.product.IdSalesOrderItem %}
+                                {% include molecule('return-reason', 'SalesReturnPage') with {
+                                    data: {
+                                        returnReason: (returnItem.reason ?: 'return_page.return_reasons.empty') | trans,
+                                    },
+                                } only %}
                             {% endfor %}
                         {% endblock %}
                     {% endembed %}
