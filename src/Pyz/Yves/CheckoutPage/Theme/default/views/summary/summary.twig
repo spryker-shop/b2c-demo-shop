@@ -132,6 +132,7 @@
                 modifiers: ['checkout-actions'],
                 data: {
                     form: data.forms.summary,
+                    acceptTermsFieldName: data.acceptTermsFieldName,
                     submit: {
                         enable: true,
                         text: 'checkout.step.place.order' | trans,
@@ -150,6 +151,23 @@
                     cart: data.cart,
                 },
             } only %}
+                {% block field %}
+                    {% if fieldName == data.acceptTermsFieldName %}
+                        {{ form_row(field, {
+                            component: molecule('accept-terms-checkbox', 'CheckoutPage'),
+                            label: field.vars.label,
+                            rowAttr: {
+                                class: config.name ~ '__field ' ~ fieldLayoutClass,
+                            },
+                            attributes: {
+                                'target-class-name': 'form__action form__action--checkout button button--large button--expand',
+                            },
+                        }) }}
+                    {% else %}
+                        {{ parent() }}
+                    {% endif %}
+                {% endblock %}
+
                 {% block body %}
                     {% include molecule('summary-overview', 'CheckoutPage') with {
                         data: embed.overview,
