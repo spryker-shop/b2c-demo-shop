@@ -76,10 +76,9 @@
                             {{ product.sumSubtotalAggregation | money(true, product.currencyIsoCode) }}
                         </td>
                         <td class="no-top-border {{ noBottomBorderClass }}">
-                            {% set reasonText = 'return_page.return.no_reason_text' | trans %}
+                            {% set reasonText = 'return_page.return_reasons.empty' | trans %}
                             {% for returnItem in embed.returnItems if returnItem.orderItem.IdSalesOrderItem == item.IdSalesOrderItem and returnItem.reason %}
-                                    {% set reasonText = returnItem.reason | trans %}
-                                {% endif %}
+                                {% set reasonText = returnItem.reason | trans %}
                             {% endfor %}
                             {{ reasonText }}
                         </td>
