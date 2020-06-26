@@ -132,11 +132,10 @@
                 modifiers: ['checkout-actions'],
                 data: {
                     form: data.forms.summary,
-                    acceptTermsFieldName: data.acceptTermsFieldName,
                     submit: {
                         enable: true,
                         text: 'checkout.step.place.order' | trans,
-                        class: 'form__action--checkout button button--large button--expand',
+                        class: 'form__action--checkout button button--large button--expand js-form__submit-button',
                     },
                     cancel: {
                         enable: true,
@@ -149,10 +148,11 @@
                 embed: {
                     overview: data.overview,
                     cart: data.cart,
+                    acceptTermsFieldName: data.acceptTermsFieldName,
                 },
             } only %}
                 {% block field %}
-                    {% if fieldName == data.acceptTermsFieldName %}
+                    {% if fieldName == embed.acceptTermsFieldName %}
                         {{ form_row(field, {
                             component: molecule('accept-terms-checkbox', 'CheckoutPage'),
                             label: field.vars.label,
@@ -160,7 +160,7 @@
                                 class: config.name ~ '__field ' ~ fieldLayoutClass,
                             },
                             attributes: {
-                                'target-class-name': 'form__action form__action--checkout button button--large button--expand',
+                                'target-class-name': 'js-form__submit-button',
                             },
                         }) }}
                     {% else %}
