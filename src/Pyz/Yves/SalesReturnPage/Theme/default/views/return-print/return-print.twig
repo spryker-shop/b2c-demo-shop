@@ -32,7 +32,7 @@
                 {% if data.items[item.IdSalesOrderItem] is defined %}
                     {% set product = data.items[item.IdSalesOrderItem] %}
                     {% set noBottomBorderClass = not loop.last ? 'no-bottom-border' %}
-                    {% set isConfiguredBundleDiscount = product.sumDiscountAmountFullAggregation is defined and product.sumDiscountAmountFullAggregation is not null %}
+                    {% set isConfiguredBundleDiscount = product.sumDiscountAmountFullAggregation ?? false %}
                     <tr>
                         <td class="no-top-border {{ noBottomBorderClass }}">
                             {% widget 'BarcodeWidget' args [product.sku] only %}
