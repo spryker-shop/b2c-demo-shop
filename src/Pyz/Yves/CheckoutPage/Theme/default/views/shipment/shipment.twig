@@ -44,7 +44,7 @@
                             {% set cartItems = shipmentGroupForm.vars.data.cartItems %}
                             {% set itemsExceptConfiguredBundles = cartItems | filter(item => item.configuredBundleItem is not defined or item.configuredBundleItem is empty) %}
 
-                            {% widget 'QuoteConfiguredBundleWidget' args [embed.cart, cartItems] with {
+                            {% widget 'QuoteConfiguredBundleWidget' args [embed.cart] with {
                                 data: {
                                     isEditable: false,
                                     isQuantityVisible: true,
