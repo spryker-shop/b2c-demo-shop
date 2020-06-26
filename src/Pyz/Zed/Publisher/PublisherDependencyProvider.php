@@ -7,6 +7,15 @@
 
 namespace Pyz\Zed\Publisher;
 
+use Spryker\Zed\ProductLabelSearch\Communication\Plugin\Publisher\ProductLabel\ProductLabelWritePublisherPlugin as ProductLabelSearchWritePublisherPlugin;
+use Spryker\Zed\ProductLabelSearch\Communication\Plugin\Publisher\ProductLabelProductAbstract\ProductLabelProductAbstractWritePublisherPlugin as ProductLabelProductAbstractSearchWritePublisherPlugin;
+use Spryker\Zed\ProductLabelSearch\Communication\Plugin\Publisher\ProductLabelStore\ProductLabelStoreWritePublisherPlugin as ProductLabelStoreSearchWritePublisherPlugin;
+use Spryker\Zed\ProductLabelStorage\Communication\Plugin\Publisher\ProductAbstractLabel\ProductAbstractLabelWritePublisherPlugin as ProductAbstractLabelStorageWritePublisherPlugin;
+use Spryker\Zed\ProductLabelStorage\Communication\Plugin\Publisher\ProductAbstractLabelPublisherTriggerPlugin;
+use Spryker\Zed\ProductLabelStorage\Communication\Plugin\Publisher\ProductLabelDictionary\ProductLabelDictionaryDeletePublisherPlugin as ProductLabelDictionaryStorageDeletePublisherPlugin;
+use Spryker\Zed\ProductLabelStorage\Communication\Plugin\Publisher\ProductLabelDictionary\ProductLabelDictionaryWritePublisherPlugin as ProductLabelDictionaryStorageWritePublisherPlugin;
+use Spryker\Zed\ProductLabelStorage\Communication\Plugin\Publisher\ProductLabelDictionaryPublisherTriggerPlugin;
+use Spryker\Zed\ProductLabelStorage\Communication\Plugin\Publisher\ProductLabelProductAbstract\ProductLabelProductAbstractWritePublisherPlugin as ProductLabelProductAbstractStorageWritePublisherPlugin;
 use Spryker\Zed\ProductRelationStorage\Communication\Plugin\Publisher\ProductRelation\ProductRelationWriteForPublishingPublisherPlugin;
 use Spryker\Zed\ProductRelationStorage\Communication\Plugin\Publisher\ProductRelation\ProductRelationWritePublisherPlugin;
 use Spryker\Zed\ProductRelationStorage\Communication\Plugin\Publisher\ProductRelationProductAbstract\ProductRelationProductAbstractWritePublisherPlugin;
@@ -22,7 +31,9 @@ class PublisherDependencyProvider extends SprykerPublisherDependencyProvider
     protected function getPublisherPlugins(): array
     {
         return array_merge(
-            $this->getProductRelationStoragePlugins()
+            $this->getProductRelationStoragePlugins(),
+            $this->getProductLabelStoragePlugins(),
+            $this->getProductLabelSearchPlugins()
         );
     }
 
@@ -33,6 +44,8 @@ class PublisherDependencyProvider extends SprykerPublisherDependencyProvider
     {
         return [
             new ProductRelationPublisherTriggerPlugin(),
+            new ProductAbstractLabelPublisherTriggerPlugin(),
+            new ProductLabelDictionaryPublisherTriggerPlugin(),
         ];
     }
 
@@ -46,6 +59,31 @@ class PublisherDependencyProvider extends SprykerPublisherDependencyProvider
             new ProductRelationWriteForPublishingPublisherPlugin(),
             new ProductRelationProductAbstractWritePublisherPlugin(),
             new ProductRelationStoreWritePublisherPlugin(),
+        ];
+    }
+
+    /**
+     * @return \Spryker\Zed\PublisherExtension\Dependency\Plugin\PublisherPluginInterface[]
+     */
+    protected function getProductLabelStoragePlugins(): array
+    {
+        return [
+            new ProductAbstractLabelStorageWritePublisherPlugin(),
+            new ProductLabelProductAbstractStorageWritePublisherPlugin(),
+            new ProductLabelDictionaryStorageWritePublisherPlugin(),
+            new ProductLabelDictionaryStorageDeletePublisherPlugin(),
+        ];
+    }
+
+    /**
+     * @return \Spryker\Zed\PublisherExtension\Dependency\Plugin\PublisherPluginInterface[]
+     */
+    protected function getProductLabelSearchPlugins(): array
+    {
+        return [
+            new ProductLabelSearchWritePublisherPlugin(),
+            new ProductLabelProductAbstractSearchWritePublisherPlugin(),
+            new ProductLabelStoreSearchWritePublisherPlugin(),
         ];
     }
 }
