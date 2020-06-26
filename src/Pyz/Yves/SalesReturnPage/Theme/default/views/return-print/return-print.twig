@@ -49,7 +49,7 @@
                             {{ product.name }}
                         </td>
                         <td class="no-top-border {{ noBottomBorderClass }}">
-                            {% if isConfiguredBundleDiscount -%}
+                            {% if isConfiguredBundleDiscount %}
                                 {% block currentProductItemPrice %}
                                     <div>
                                         {{ product.unitPriceToPayAggregation | money(true, product.currencyIsoCode) }}
