@@ -7,6 +7,7 @@
 
 namespace Pyz\Zed\Oms;
 
+use Pyz\Zed\Oms\Communication\Plugin\Oms\InitiationTimeoutProcessorPlugin;
 use Spryker\Zed\Availability\Communication\Plugin\AvailabilityHandlerPlugin;
 use Spryker\Zed\GiftCard\Communication\Plugin\Oms\Command\CreateGiftCardCommandPlugin;
 use Spryker\Zed\GiftCard\Communication\Plugin\Oms\Condition\IsGiftCardConditionPlugin;
@@ -23,6 +24,8 @@ use Spryker\Zed\Shipment\Dependency\Plugin\Oms\ShipmentOrderMailExpanderPlugin;
 
 class OmsDependencyProvider extends SprykerOmsDependencyProvider
 {
+    public const FACADE_TRANSLATOR = 'FACADE_TRANSLATOR';
+
     /**
      * @param \Spryker\Zed\Kernel\Container $container
      *
@@ -33,6 +36,33 @@ class OmsDependencyProvider extends SprykerOmsDependencyProvider
         $container = parent::provideBusinessLayerDependencies($container);
         $container = $this->extendCommandPlugins($container);
         $container = $this->extendConditionPlugins($container);
+
+        return $container;
+    }
+
+    /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Zed\Kernel\Container
+     */
+    public function provideCommunicationLayerDependencies(Container $container): Container
+    {
+        $container = parent::provideCommunicationLayerDependencies($container);
+        $container = $this->addTranslatorFacade($container);
+
+        return $container;
+    }
+
+    /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Zed\Kernel\Container
+     */
+    protected function addTranslatorFacade(Container $container): Container
+    {
+        $container->set(static::FACADE_TRANSLATOR, function (Container $container) {
+            return $container->getLocator()->translator()->facade();
+        });
 
         return $container;
     }
@@ -107,6 +137,16 @@ class OmsDependencyProvider extends SprykerOmsDependencyProvider
     {
         return [
             new ShipmentManualEventGrouperPlugin(),
+        ];
+    }
+
+    /**
+     * @return \Spryker\Zed\OmsExtension\Dependency\Plugin\TimeoutProcessorPluginInterface[]
+     */
+    protected function getTimeoutProcessorPlugins(): array
+    {
+        return [
+            new InitiationTimeoutProcessorPlugin(),
         ];
     }
 }
