@@ -31,28 +31,27 @@
                 {% endif %}
                 <tr>
                     <td class="is-hidden-sm-only">
-                        {% set imageUrl = item.images[0].externalUrlSmall %}
+                        {% set imageUrl = item.images.0.externalUrlSmall ?? '' %}
+
                         {% if imageUrl %}
-                            {% include atom('thumbnail') with {
-                                modifiers: ['min-size', 'wishlist'],
-                                attributes: {
-                                    alt: item.name,
-                                    src: imageUrl,
-                                    title: item.name,
-                                }
+                            {% include molecule('lazy-image') with {
+                                modifiers: ['thumbnail', 'min-size', 'wishlist'],
+                                data: {
+                                    imageSrc: imageUrl,
+                                    imageTitle: item.name,
+                                },
                             } only %}
                         {% endif %}
                     </td>
                     <td>
                         {% if imageUrl %}
-                            {% include atom('thumbnail') with {
+                            {% include molecule('lazy-image') with {
                                 class: 'is-hidden-md-xl',
-                                modifiers: ['min-size', 'wishlist'],
-                                attributes: {
-                                    alt: item.name,
-                                    src: imageUrl,
-                                    title: item.name,
-                                }
+                                modifiers: ['thumbnail', 'min-size', 'wishlist'],
+                                data: {
+                                    imageSrc: imageUrl,
+                                    imageTitle: item.name,
+                                },
                             } only %}
                         {% endif %}
                         <ul class="menu menu--inline menu--middle">

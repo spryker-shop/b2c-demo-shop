@@ -42,11 +42,13 @@
 
                 {% block slides %}
                     {% for slide in data.slides %}
-                        {% include atom('thumbnail') with {
-                            modifiers: ['bigger', 'no-margin'],
-                            attributes: {
-                                itemprop: 'image',
-                                src: slide.externalUrlLarge,
+                        {% include molecule('lazy-image') with {
+                            modifiers: ['thumbnail', 'spaceless', 'bigger'],
+                            data: {
+                                imageSrc: slide.externalUrlLarge,
+                                extraAttributes: {
+                                    itemprop: 'image',
+                                },
                             },
                         } only %}
                     {% endfor %}
