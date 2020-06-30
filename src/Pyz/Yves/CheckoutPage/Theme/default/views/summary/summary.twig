@@ -135,7 +135,7 @@
                     submit: {
                         enable: true,
                         text: 'checkout.step.place.order' | trans,
-                        class: 'form__action--checkout button button--large button--expand',
+                        class: 'form__action--checkout button button--large button--expand js-form__submit-button',
                     },
                     cancel: {
                         enable: true,
@@ -148,8 +148,26 @@
                 embed: {
                     overview: data.overview,
                     cart: data.cart,
+                    acceptTermsFieldName: data.acceptTermsFieldName,
                 },
             } only %}
+                {% block field %}
+                    {% if fieldName == embed.acceptTermsFieldName %}
+                        {{ form_row(field, {
+                            component: molecule('accept-terms-checkbox', 'CheckoutPage'),
+                            label: field.vars.label,
+                            rowAttr: {
+                                class: config.name ~ '__field ' ~ fieldLayoutClass,
+                            },
+                            attributes: {
+                                'target-class-name': config.jsName ~ '__submit-button',
+                            },
+                        }) }}
+                    {% else %}
+                        {{ parent() }}
+                    {% endif %}
+                {% endblock %}
+
                 {% block body %}
                     {% include molecule('summary-overview', 'CheckoutPage') with {
                         data: embed.overview,
