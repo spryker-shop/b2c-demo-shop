@@ -12,6 +12,12 @@ const globalSettings = {
         prod: 'production'
     },
 
+    // build modules
+    buildVariants: {
+        esm: 'esm',
+        legacy: 'legacy',
+    },
+
     paths: {
         // locate the typescript configuration json file
         tsConfig: './tsconfig.json',
@@ -28,6 +34,14 @@ const globalSettings = {
         // project folders
         project: './src/Pyz/Yves'
     }
+};
+
+const buildVariantArray = process.argv.filter(argv => argv.includes('module'));
+const buildVariant = buildVariantArray.length ? buildVariantArray[0].replace('module:', '') : '';
+
+const buildVariantSettings = {
+    buildVariant,
+    isES6Module: buildVariant === globalSettings.buildVariants.esm,
 };
 
 const getAppSettingsByTheme = (namespaceConfig, theme, pathToConfig) => {
@@ -52,15 +66,16 @@ const getAppSettingsByTheme = (namespaceConfig, theme, pathToConfig) => {
     // get public url path according to pattern from config
     const getPublicUrl = () => (
         namespaceJson.path
+            .replace(/%SPRYKER_BUILD_HASH%/gi, process.env.SPRYKER_BUILD_HASH || 'current')
             .replace(/%namespace%/gi, namespaceConfig.namespace)
             .replace(/%theme%/gi, theme)
     );
 
-    const getAllModuleSuffixes = () => namespaceJson.namespaces.map(namespace => namespace.moduleSuffix);
+    const getAllModuleSuffixes = () => namespaceJson.namespaces.map(namespace => namespace.codeBucket);
 
     const ignoreModulesCollection = () => {
         return getAllModuleSuffixes()
-                    .filter(suffix => suffix !== namespaceConfig.moduleSuffix)
+                    .filter(suffix => suffix !== namespaceConfig.codeBucket)
                     .map(suffix => `!**/*${suffix}/Theme/**`);
     };
 
@@ -94,6 +109,9 @@ const getAppSettingsByTheme = (namespaceConfig, theme, pathToConfig) => {
             currentAssets: join('./frontend/assets', namespaceConfig.namespace, theme)
         },
 
+        // public folder with all assets
+        publicAll: globalSettings.paths.publicAll,
+
         // current namespace and theme public assets folder
         public: join('./public/Yves', urls.assets),
 
@@ -116,7 +134,7 @@ const getAppSettingsByTheme = (namespaceConfig, theme, pathToConfig) => {
     const customThemeEntryPointPatterns = (isFallbackPattern = false) => {
         return isFallbackPatternAndDefaultTheme(isFallbackPattern) ? [] : [
             ...entryPointsCollection(`**/Theme/${getThemeName(isFallbackPattern)}`),
-            ...entryPointsCollection(`**/*${namespaceConfig.moduleSuffix}/Theme/${getThemeName(isFallbackPattern)}`),
+            ...entryPointsCollection(`**/*${namespaceConfig.codeBucket}/Theme/${getThemeName(isFallbackPattern)}`),
             ...ignoreFiles
         ]
     };
@@ -124,13 +142,13 @@ const getAppSettingsByTheme = (namespaceConfig, theme, pathToConfig) => {
     const shopUiEntryPointsPattern = (isFallbackPattern = false) => (
         isFallbackPatternAndDefaultTheme(isFallbackPattern) ? [] : [
             `./ShopUi/Theme/${getThemeName(isFallbackPattern)}`,
-            `./ShopUi${namespaceConfig.moduleSuffix}/Theme/${getThemeName(isFallbackPattern)}`
+            `./ShopUi${namespaceConfig.codeBucket}/Theme/${getThemeName(isFallbackPattern)}`
         ]
     );
 
     // define if current mode is production
     const isProductionMode = () => {
-        const currentMode = process.argv.slice(2)[0];
+        const currentMode = process.argv.slice(globalSettings.expectedModeArgument)[0];
         return currentMode === globalSettings.modes.prod;
     };
 
@@ -208,5 +226,6 @@ const getAppSettings = (namespaceConfigList, pathToConfig) => {
 
 module.exports = {
     globalSettings,
-    getAppSettings
+    getAppSettings,
+    buildVariantSettings,
 };
