@@ -9,6 +9,8 @@ namespace Pyz\Zed\Sales;
 
 use Spryker\Zed\Customer\Communication\Plugin\Sales\CustomerOrderHydratePlugin;
 use Spryker\Zed\Discount\Communication\Plugin\Sales\DiscountOrderHydratePlugin;
+use Spryker\Zed\Oms\Communication\Plugin\Sales\IsCancellableOrderExpanderPlugin;
+use Spryker\Zed\Oms\Communication\Plugin\Sales\IsCancellableSearchOrderExpanderPlugin;
 use Spryker\Zed\Payment\Communication\Plugin\Sales\PaymentOrderHydratePlugin;
 use Spryker\Zed\ProductBundle\Communication\Plugin\Sales\ProductBundleIdHydratorPlugin;
 use Spryker\Zed\ProductBundle\Communication\Plugin\Sales\ProductBundleOptionOrderExpanderPlugin;
@@ -47,6 +49,7 @@ class SalesDependencyProvider extends SprykerSalesDependencyProvider
             new ProductOptionGroupIdHydratorPlugin(),
             new ProductBundleOptionOrderExpanderPlugin(),
             new ConfiguredBundleOrderExpanderPlugin(),
+            new IsCancellableOrderExpanderPlugin(),
         ];
     }
 
@@ -107,6 +110,16 @@ class SalesDependencyProvider extends SprykerSalesDependencyProvider
     {
         return [
             new ConfiguredBundleItemPreTransformerPlugin(),
+        ];
+    }
+
+    /**
+     * @return \Spryker\Zed\SalesExtension\Dependency\Plugin\SearchOrderExpanderPluginInterface[]
+     */
+    protected function getSearchOrderExpanderPlugins(): array
+    {
+        return [
+            new IsCancellableSearchOrderExpanderPlugin(),
         ];
     }
 }

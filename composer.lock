@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0e13390b856ca3c3957c068728757e04",
+    "content-hash": "703a919eb091f4779e4c05e9d8ab1488",
     "packages": [
         {
             "name": "codeitnowin/barcode",
@@ -3163,29 +3163,31 @@
         },
         {
             "name": "spryker-feature/order-management",
-            "version": "202001.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker-feature/order-management.git",
-                "reference": "2ae34fdab4b0c10dc00aa4f39d5ebaaf075409d5"
+                "reference": "d45ba5311e42d9751cf360c02ee6900f140d3825"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker-feature/order-management/zipball/2ae34fdab4b0c10dc00aa4f39d5ebaaf075409d5",
-                "reference": "2ae34fdab4b0c10dc00aa4f39d5ebaaf075409d5",
+                "url": "https://api.github.com/repos/spryker-feature/order-management/zipball/d45ba5311e42d9751cf360c02ee6900f140d3825",
+                "reference": "d45ba5311e42d9751cf360c02ee6900f140d3825",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.2",
+                "spryker-shop/order-cancel-widget": "^1.0.0",
                 "spryker/oms": "^11.0.0",
                 "spryker/sales": "^11.0.0",
+                "spryker/sales-data-export": "^0.1.0",
                 "spryker/sales-quantity": "^3.0.0",
                 "spryker/sales-split": "^5.0.0"
             },
             "type": "metapackage",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "202001.x-dev"
+                    "dev-master": "202006.x-dev"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -3193,7 +3195,7 @@
                 "proprietary"
             ],
             "description": "Order Management [feature]",
-            "time": "2019-12-06T10:57:47+00:00"
+            "time": "2020-06-19T09:28:54+00:00"
         },
         {
             "name": "spryker-feature/order-threshold",
@@ -6696,6 +6698,57 @@
             ],
             "description": "NewsletterWidget module",
             "time": "2019-10-28T09:50:23+00:00"
+        },
+        {
+            "name": "spryker-shop/order-cancel-widget",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker-shop/order-cancel-widget.git",
+                "reference": "3e1fc18d70f1dc95707b79fa5837c1f684c962a8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker-shop/order-cancel-widget/zipball/3e1fc18d70f1dc95707b79fa5837c1f684c962a8",
+                "reference": "3e1fc18d70f1dc95707b79fa5837c1f684c962a8",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2",
+                "spryker-shop/shop-application": "^1.2.0",
+                "spryker-shop/shop-ui": "^1.0.0",
+                "spryker/application": "^3.8.0",
+                "spryker/customer": "^7.0.0",
+                "spryker/kernel": "^3.30.0",
+                "spryker/oms": "^11.8.0",
+                "spryker/sales": "^11.10.0",
+                "spryker/symfony": "^3.1.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/router": "*"
+            },
+            "suggest": {
+                "spryker/router": "Use this module if you want use the RouterProviderPlugin.",
+                "spryker/silex": "Use this module when using plugins that need Silex dependencies."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "SprykerShop\\": "src/SprykerShop/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "OrderCancelWidget module",
+            "time": "2020-06-18T10:19:06+00:00"
         },
         {
             "name": "spryker-shop/price-product-volume-widget",
@@ -15425,16 +15478,16 @@
         },
         {
             "name": "spryker/customer",
-            "version": "7.29.0",
+            "version": "7.29.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/customer.git",
-                "reference": "32f322ab0482c7c703764d2019ac33a7d50d68c4"
+                "reference": "6e23072167cb77c233b4780182bcdfb6286101d8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/customer/zipball/32f322ab0482c7c703764d2019ac33a7d50d68c4",
-                "reference": "32f322ab0482c7c703764d2019ac33a7d50d68c4",
+                "url": "https://api.github.com/repos/spryker/customer/zipball/6e23072167cb77c233b4780182bcdfb6286101d8",
+                "reference": "6e23072167cb77c233b4780182bcdfb6286101d8",
                 "shasum": ""
             },
             "require": {
@@ -15486,7 +15539,7 @@
                 "proprietary"
             ],
             "description": "Customer module",
-            "time": "2020-06-18T07:18:18+00:00"
+            "time": "2020-06-23T15:47:40+00:00"
         },
         {
             "name": "spryker/customer-access",
@@ -17856,16 +17909,16 @@
         },
         {
             "name": "spryker/glossary",
-            "version": "3.9.3",
+            "version": "3.9.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/glossary.git",
-                "reference": "8cf1a47db2c8b2dbb8c4bb76a08f67477d460d04"
+                "reference": "926cd891103bcdebdf97ffa02cfe204f4771cabd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/glossary/zipball/8cf1a47db2c8b2dbb8c4bb76a08f67477d460d04",
-                "reference": "8cf1a47db2c8b2dbb8c4bb76a08f67477d460d04",
+                "url": "https://api.github.com/repos/spryker/glossary/zipball/926cd891103bcdebdf97ffa02cfe204f4771cabd",
+                "reference": "926cd891103bcdebdf97ffa02cfe204f4771cabd",
                 "shasum": ""
             },
             "require": {
@@ -17912,7 +17965,7 @@
                 "proprietary"
             ],
             "description": "Glossary module",
-            "time": "2020-06-18T14:04:08+00:00"
+            "time": "2020-06-22T21:24:21+00:00"
         },
         {
             "name": "spryker/glossary-storage",
@@ -19855,16 +19908,16 @@
         },
         {
             "name": "spryker/oms",
-            "version": "11.8.0",
+            "version": "11.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/oms.git",
-                "reference": "7fe57853d256be7e34f54243a79268cda8c70f46"
+                "reference": "f4421d1eb53b02cca26d5306bea409226ed626d4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/oms/zipball/7fe57853d256be7e34f54243a79268cda8c70f46",
-                "reference": "7fe57853d256be7e34f54243a79268cda8c70f46",
+                "url": "https://api.github.com/repos/spryker/oms/zipball/f4421d1eb53b02cca26d5306bea409226ed626d4",
+                "reference": "f4421d1eb53b02cca26d5306bea409226ed626d4",
                 "shasum": ""
             },
             "require": {
@@ -19875,7 +19928,7 @@
                 "spryker/gui": "^3.0.0",
                 "spryker/kernel": "^3.33.0",
                 "spryker/mail": "^4.0.0",
-                "spryker/oms-extension": "^1.2.0",
+                "spryker/oms-extension": "^1.3.0",
                 "spryker/propel-orm": "^1.0.0",
                 "spryker/sales": "^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0 || ^10.0.0 || ^11.0.0",
                 "spryker/sales-extension": "^1.7.0",
@@ -19915,7 +19968,7 @@
                 "proprietary"
             ],
             "description": "Oms module",
-            "time": "2020-06-18T10:32:07+00:00"
+            "time": "2020-06-25T13:28:20+00:00"
         },
         {
             "name": "spryker/oms-discount-connector",
@@ -19964,16 +20017,16 @@
         },
         {
             "name": "spryker/oms-extension",
-            "version": "1.2.0",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/oms-extension.git",
-                "reference": "c13ecddec2912f1bb5b332895e910a9a0f339fb6"
+                "reference": "5351c4b6f3772cc01eea83816a69515ea320c2ab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/oms-extension/zipball/c13ecddec2912f1bb5b332895e910a9a0f339fb6",
-                "reference": "c13ecddec2912f1bb5b332895e910a9a0f339fb6",
+                "url": "https://api.github.com/repos/spryker/oms-extension/zipball/5351c4b6f3772cc01eea83816a69515ea320c2ab",
+                "reference": "5351c4b6f3772cc01eea83816a69515ea320c2ab",
                 "shasum": ""
             },
             "require": {
@@ -19999,7 +20052,7 @@
                 "proprietary"
             ],
             "description": "OmsExtension module",
-            "time": "2020-06-11T15:54:58+00:00"
+            "time": "2020-06-23T16:50:44+00:00"
         },
         {
             "name": "spryker/order-payments-rest-api",
@@ -25867,16 +25920,16 @@
         },
         {
             "name": "spryker/queue",
-            "version": "1.7.2",
+            "version": "1.7.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/queue.git",
-                "reference": "a1cff82dfb31f9fa40d26212540f82099daba96a"
+                "reference": "dcc6a190036d9789abbfc65bccdecb6416866778"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/queue/zipball/a1cff82dfb31f9fa40d26212540f82099daba96a",
-                "reference": "a1cff82dfb31f9fa40d26212540f82099daba96a",
+                "url": "https://api.github.com/repos/spryker/queue/zipball/dcc6a190036d9789abbfc65bccdecb6416866778",
+                "reference": "dcc6a190036d9789abbfc65bccdecb6416866778",
                 "shasum": ""
             },
             "require": {
@@ -25911,7 +25964,7 @@
                 "proprietary"
             ],
             "description": "Queue module",
-            "time": "2020-05-29T13:08:37+00:00"
+            "time": "2020-06-24T09:30:35+00:00"
         },
         {
             "name": "spryker/quick-order-extension",
@@ -26926,16 +26979,16 @@
         },
         {
             "name": "spryker/sales-quantity",
-            "version": "3.1.0",
+            "version": "3.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/sales-quantity.git",
-                "reference": "bc9d9c0788a4e1b4aed8c58a3118eb044f88b0e0"
+                "reference": "0905957d6bc74fef42600e10fedcdd7959fa2633"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/sales-quantity/zipball/bc9d9c0788a4e1b4aed8c58a3118eb044f88b0e0",
-                "reference": "bc9d9c0788a4e1b4aed8c58a3118eb044f88b0e0",
+                "url": "https://api.github.com/repos/spryker/sales-quantity/zipball/0905957d6bc74fef42600e10fedcdd7959fa2633",
+                "reference": "0905957d6bc74fef42600e10fedcdd7959fa2633",
                 "shasum": ""
             },
             "require": {
@@ -26970,7 +27023,7 @@
                 "proprietary"
             ],
             "description": "SalesQuantity module",
-            "time": "2020-03-25T11:33:23+00:00"
+            "time": "2020-06-16T13:43:22+00:00"
         },
         {
             "name": "spryker/sales-reclamation",
@@ -40546,6 +40599,12 @@
             "alias": "202006.0",
             "alias_normalized": "202006.0",
             "version": "9999999-dev",
+            "package": "spryker-feature/order-management"
+        },
+        {
+            "alias": "202006.0",
+            "alias_normalized": "202006.0",
+            "version": "9999999-dev",
             "package": "spryker-feature/product-labels"
         },
         {
@@ -40577,6 +40636,7 @@
     "stability-flags": {
         "spryker-feature/checkout": 20,
         "spryker-feature/customer-account-management": 20,
+        "spryker-feature/order-management": 20,
         "spryker-feature/product-labels": 20,
         "spryker-feature/product-relations": 20,
         "spryker-feature/promotions-discounts": 20,

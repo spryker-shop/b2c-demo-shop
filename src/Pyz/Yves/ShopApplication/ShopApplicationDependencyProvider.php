@@ -39,6 +39,7 @@ use SprykerShop\Yves\DiscountWidget\Widget\DiscountVoucherFormWidget;
 use SprykerShop\Yves\LanguageSwitcherWidget\Widget\LanguageSwitcherWidget;
 use SprykerShop\Yves\NavigationWidget\Widget\NavigationWidget;
 use SprykerShop\Yves\NewsletterWidget\Widget\NewsletterSubscriptionSummaryWidget;
+use SprykerShop\Yves\OrderCancelWidget\Widget\OrderCancelButtonWidget;
 use SprykerShop\Yves\PriceProductVolumeWidget\Widget\ProductPriceVolumeWidget;
 use SprykerShop\Yves\PriceProductWidget\Widget\PriceProductWidget;
 use SprykerShop\Yves\PriceWidget\Widget\PriceModeSwitcherWidget;
@@ -140,6 +141,7 @@ class ShopApplicationDependencyProvider extends SprykerShopApplicationDependency
             ProductConcreteSearchGridWidget::class,
             PriceProductWidget::class,
             ProductGroupColorWidget::class,
+            OrderCancelButtonWidget::class,
         ];
     }
 
