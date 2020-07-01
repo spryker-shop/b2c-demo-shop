@@ -40,6 +40,15 @@
                                         {{ widgetBlock('CustomerReorderWidgetPlugin', 'reorderAction', order) }}
                                     </li>
                                 {% endif %}
+
+                                {% widget 'OrderCancelButtonWidget'  args [order, app.request.requestUri] only %}
+                                    {% block formContent %}
+                                        {% set buttonClasses = 'menu__link' %}
+                                        <li class="menu__item">
+                                            {{ parent() }}
+                                        </li>
+                                    {% endblock %}
+                                {% endwidget %}
                             </ul>
                         </td>
                     </tr>
