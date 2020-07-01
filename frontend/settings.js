@@ -9,7 +9,7 @@ const globalSettings = {
     modes: {
         dev: 'development',
         watch: 'development-watch',
-        prod: 'production'
+        prod: 'production',
     },
 
     // build modules
@@ -32,8 +32,38 @@ const globalSettings = {
         eco: './vendor/spryker-eco',
 
         // project folders
-        project: './src/Pyz/Yves'
-    }
+        project: './src/Pyz/Yves',
+    },
+
+    expectedModeArgument: 2,
+};
+
+const imageOptimizationOptions = {
+    enabledInModes: {
+        'development': false,
+        'development-watch': false,
+        'production': false,
+    },
+
+    // available options https://github.com/imagemin/imagemin-mozjpeg#api
+    jpg: {
+        quality: 60,
+    },
+
+    // available options https://github.com/imagemin/imagemin-pngquant#api
+    png: {
+        quality: [0.6, 0.7],
+    },
+
+    // available options https://github.com/svg/svgo#what-it-can-do
+    svg: {
+        removeViewBox: false,
+    },
+
+    // available options https://github.com/imagemin/imagemin-gifsicle#api
+    gif: {
+        optimizationLevel: 2,
+    },
 };
 
 const buildVariantArray = process.argv.filter(argv => argv.includes('module'));
@@ -159,6 +189,7 @@ const getAppSettingsByTheme = (namespaceConfig, theme, pathToConfig) => {
         theme,
         paths,
         urls,
+        imageOptimizationOptions,
 
         context: globalSettings.context,
 
