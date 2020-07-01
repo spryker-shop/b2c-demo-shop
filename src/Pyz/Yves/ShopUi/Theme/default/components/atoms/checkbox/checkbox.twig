@@ -1,35 +1,21 @@
-{% extends model('component') %}
-
-{% define config = {
-    name: 'checkbox',
-    tag: 'span'
-} %}
-
-{% define attributes = {
-    type: 'checkbox'
-} %}
-
-{% define data = {
-    label: ''
-} %}
-
-{% set disabled = attributes['disabled'] | default(false) %}
-
-{% block extraAttributes %}
-    {%- if disabled %}disabled{% endif -%}
-{% endblock %}
+{% extends atom('checkbox', '@SprykerShop:ShopUi') %}
 
 {% block body %}
+    {% set iconName = 'check' %}
+
     <label class="{{ config.name }}__container" {{ qa('label') }}>
-        <input class="{{ config.name }}__input {% block inputClass %}{% endblock %}" {{ block('attributes') }}/>
+        <input class="{{ config.name }}__input {% block inputClass %} {{- data.inputClass -}} {% endblock %}" {{ component.renderAttributes(attributes) }}>
         <span class="{{ config.name }}__box"></span>
-        {% include atom('icon') with {
-            class: config.name ~ '__check',
-            data: {
-                name: 'check'
-            }
-        } only %}
-        {%- block labelContainer -%}    
+        {% block icon %}
+            {% include atom('icon') with {
+                class: config.name ~ '__' ~ iconName,
+                data: {
+                    name: iconName,
+                },
+            } only %}
+        {% endblock %}
+
+        {%- block labelContainer -%}
             <span class="{{ config.name }}__label {% block labelClass %}{% endblock %}">
                 {%- block label -%}{{ data.label }}{%- endblock -%}
             </span>
