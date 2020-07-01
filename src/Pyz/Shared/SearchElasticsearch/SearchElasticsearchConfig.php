@@ -14,5 +14,6 @@ class SearchElasticsearchConfig extends SprykerSearchElasticsearchConfig
     protected const SUPPORTED_SOURCE_IDENTIFIERS = [
         'page',
         'product-review',
+        'return_reason',
     ];
 }
