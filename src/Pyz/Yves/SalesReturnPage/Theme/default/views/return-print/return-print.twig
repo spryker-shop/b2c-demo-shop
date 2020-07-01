@@ -88,3 +88,14 @@
         {% endblock %}
     {% endwidget %}
 {% endblock %}
+
+{% block headStyles %}
+    {{ parent() }}
+
+    <style>
+        .order-item-image {
+            width: auto;
+            display: block;
+        }
+    </style>
+{% endblock %}

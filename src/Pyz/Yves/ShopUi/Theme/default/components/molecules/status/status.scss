@@ -1,3 +1,46 @@
 @include shop-ui-status() {
     border-radius: rem(4);
+
+    &--in-progress,
+    &--refunded {
+        background-color: map-get($setting-color-statuses, 'bg-color-4');
+        color: map-get($setting-color-statuses, 'color-4');
+    }
+
+    &--ready,
+    &--paid,
+    &--delivered {
+        background-color: map-get($setting-color-statuses, 'bg-color-1');
+        color: map-get($setting-color-statuses, 'color-1');
+    }
+
+    &--waiting,
+    &--payment-pending,
+    &--confirmed,
+    &--sent-to-merchant,
+    &--shipped-to-customer,
+    &--shipped-by-merchant,
+    &--exported {
+        background-color: map-get($setting-color-statuses, 'bg-color-2');
+        color: map-get($setting-color-statuses, 'color-2');
+    }
+
+    &--closed {
+        background-color: map-get($setting-color-statuses, 'bg-color-5');
+        color: map-get($setting-color-statuses, 'color-5');
+    }
+
+    &--canceled,
+    &--ready-for-return,
+    &--returned,
+    &--waiting-for-return,
+    &--return-canceled {
+        background-color: map-get($setting-color-statuses, 'bg-color-3');
+        color: map-get($setting-color-statuses, 'color-3');
+    }
+
+    &--draft {
+        background-color: map-get($setting-color-statuses, 'bg-color-1');
+        color: map-get($setting-color-statuses, 'color-1');
+    }
 }
