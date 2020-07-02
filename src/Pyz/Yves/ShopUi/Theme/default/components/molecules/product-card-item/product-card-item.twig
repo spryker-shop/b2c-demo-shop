@@ -95,7 +95,7 @@
                         {% endblock %}
 
                         {% if canEditCart %}
-                            {% widget 'RemoveFromCartFormWidget' args [data.productItem] only %}
+                            {% widget 'RemoveFromCartFormWidget' args [data.productItem, random()] only %}
                                 {% block embeddedData %}
                                     <button class="link link--darkest link--edit" data-init-single-click {{ qa('add-to-cart-button') }}>
                                         {{ 'remove' | trans }}
