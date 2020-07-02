@@ -127,6 +127,23 @@
                     text-decoration: underline;
                 }
             }
+
+            #{$name}__button {
+                letter-spacing: rem(0.2);
+                font: fw(light) rem(14) $setting-font-family;
+                color: $setting-color-text;
+                background: $setting-color-transparent;
+
+                &:hover {
+                    cursor: pointer;
+                    color: $setting-color-alt;
+                    text-decoration: underline;
+                }
+
+                @include helper-breakpoint-media-min($md-min) {
+                    font-size: rem(16);
+                }
+            }
         }
 
         &--order-summary {

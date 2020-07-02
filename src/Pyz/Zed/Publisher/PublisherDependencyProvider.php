@@ -22,6 +22,9 @@ use Spryker\Zed\ProductRelationStorage\Communication\Plugin\Publisher\ProductRel
 use Spryker\Zed\ProductRelationStorage\Communication\Plugin\Publisher\ProductRelationPublisherTriggerPlugin;
 use Spryker\Zed\ProductRelationStorage\Communication\Plugin\Publisher\ProductRelationStore\ProductRelationStoreWritePublisherPlugin;
 use Spryker\Zed\Publisher\PublisherDependencyProvider as SprykerPublisherDependencyProvider;
+use Spryker\Zed\SalesReturnSearch\Communication\Plugin\Publisher\ReturnReason\ReturnReasonDeletePublisherPlugin;
+use Spryker\Zed\SalesReturnSearch\Communication\Plugin\Publisher\ReturnReason\ReturnReasonWritePublisherPlugin;
+use Spryker\Zed\SalesReturnSearch\Communication\Plugin\Publisher\ReturnReasonPublisherTriggerPlugin;
 
 class PublisherDependencyProvider extends SprykerPublisherDependencyProvider
 {
@@ -33,7 +36,8 @@ class PublisherDependencyProvider extends SprykerPublisherDependencyProvider
         return array_merge(
             $this->getProductRelationStoragePlugins(),
             $this->getProductLabelStoragePlugins(),
-            $this->getProductLabelSearchPlugins()
+            $this->getProductLabelSearchPlugins(),
+            $this->getReturnReasonSearchPlugins()
         );
     }
 
@@ -46,6 +50,7 @@ class PublisherDependencyProvider extends SprykerPublisherDependencyProvider
             new ProductRelationPublisherTriggerPlugin(),
             new ProductAbstractLabelPublisherTriggerPlugin(),
             new ProductLabelDictionaryPublisherTriggerPlugin(),
+            new ReturnReasonPublisherTriggerPlugin(),
         ];
     }
 
@@ -84,6 +89,17 @@ class PublisherDependencyProvider extends SprykerPublisherDependencyProvider
             new ProductLabelSearchWritePublisherPlugin(),
             new ProductLabelProductAbstractSearchWritePublisherPlugin(),
             new ProductLabelStoreSearchWritePublisherPlugin(),
+        ];
+    }
+
+    /**
+     * @return \Spryker\Zed\PublisherExtension\Dependency\Plugin\PublisherPluginInterface[]
+     */
+    protected function getReturnReasonSearchPlugins(): array
+    {
+        return [
+            new ReturnReasonWritePublisherPlugin(),
+            new ReturnReasonDeletePublisherPlugin(),
         ];
     }
 }

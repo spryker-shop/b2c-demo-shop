@@ -35,11 +35,32 @@
                                         {{ 'customer.order.view_order' | trans }}
                                     </a>
                                 </li>
+
                                 {% if widgetExists('CustomerReorderWidgetPlugin') %}
                                     <li class="menu__item">
-                                        {{ widgetBlock('CustomerReorderWidgetPlugin', 'reorderAction', order) }}
+                                        {% widget 'CustomerReorderFormWidget'  args [order] only %}
+                                            {% block embeddedData %}
+                                                <button class="menu__button">
+                                                    {{- 'customer.order.reorder' | trans -}}
+                                                </button>
+                                            {% endblock %}
+                                        {% endwidget %}
                                     </li>
                                 {% endif %}
+
+                                {% embed molecule('return-create-link', 'SalesReturnPage') ignore missing with {
+                                    data: {
+                                        orderReference: order.orderReference,
+                                    },
+                                } only %}
+                                    {%- block extraClass %} menu__link{% endblock -%}
+
+                                    {% block component %}
+                                        <li class="menu__item">
+                                            {{ parent() }}
+                                        </li>
+                                    {% endblock %}
+                                {% endembed %}
 
                                 {% widget 'OrderCancelButtonWidget'  args [order, app.request.requestUri] only %}
                                     {% block formContent %}

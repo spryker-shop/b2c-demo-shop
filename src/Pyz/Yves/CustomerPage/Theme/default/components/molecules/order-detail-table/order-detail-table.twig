@@ -12,8 +12,6 @@
                         '%total%': loop.length,
                     }) }}
                 </h3>
-                {% widget 'OrderConfiguredBundleWidget' args [data.order, shipmentGroup.items] only %}
-                {% endwidget %}
 
                 {% set itemsExceptConfiguredBundles = shipmentGroup.items | filter(item => item.salesOrderConfiguredBundleItem is not defined or item.salesOrderConfiguredBundleItem is empty) %}
 
@@ -83,6 +81,9 @@
                         {% endblock %}
                     {% endembed %}
                 {% endfor %}
+
+                {% widget 'OrderItemsConfiguredBundleWidget' args [shipmentGroup.items] only %}
+                {% endwidget %}
             </div>
 
             <div class="col col--sm-12 col--xl-4">
