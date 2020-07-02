@@ -9,6 +9,7 @@ namespace PyzTest\Yves\Availability\Presentation;
 
 use PyzTest\Yves\Availability\AvailabilityPresentationTester;
 use PyzTest\Yves\Cart\PageObject\CartListPage;
+use PyzTest\Yves\Product\PageObject\ProductDetailPage;
 
 /**
  * Auto-generated group annotations
@@ -34,7 +35,9 @@ class AvailabilityAddToCartCest
 
         $i->amLoggedInCustomer();
 
-        $i->amOnPage(AvailabilityPresentationTester::ADD_FUJITSU2_PRODUCT_TO_CART_URL);
+        $i->amOnPage(AvailabilityPresentationTester::FUJITSU2_PRODUCT_PAGE);
+
+        $i->click(ProductDetailPage::ADD_TO_CART_XPATH);
 
         $i->see(CartListPage::CART_HEADER);
 
