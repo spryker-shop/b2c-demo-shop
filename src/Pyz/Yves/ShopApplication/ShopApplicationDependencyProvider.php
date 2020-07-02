@@ -31,6 +31,7 @@ use SprykerShop\Yves\CartNoteWidget\Widget\CartNoteFormWidget;
 use SprykerShop\Yves\CartPage\Widget\AddItemsFormWidget;
 use SprykerShop\Yves\CartPage\Widget\AddToCartFormWidget;
 use SprykerShop\Yves\CartPage\Widget\CartChangeQuantityFormWidget;
+use SprykerShop\Yves\CartPage\Widget\RemoveFromCartFormWidget;
 use SprykerShop\Yves\CategoryImageStorageWidget\Widget\CategoryImageStorageWidget;
 use SprykerShop\Yves\CheckoutWidget\Widget\CheckoutBreadcrumbWidget;
 use SprykerShop\Yves\ConfigurableBundleWidget\Widget\QuoteConfiguredBundleWidget;
@@ -154,6 +155,7 @@ class ShopApplicationDependencyProvider extends SprykerShopApplicationDependency
             AddToCartFormWidget::class,
             AddItemsFormWidget::class,
             CartChangeQuantityFormWidget::class,
+            RemoveFromCartFormWidget::class,
         ];
     }
 

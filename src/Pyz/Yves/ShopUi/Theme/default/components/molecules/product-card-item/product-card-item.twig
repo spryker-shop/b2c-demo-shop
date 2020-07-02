@@ -95,9 +95,13 @@
                         {% endblock %}
 
                         {% if canEditCart %}
-                            <a class="link link--darkest link--edit" href="{{ path('cart/remove', {'sku': data.productItem.sku, 'groupKey': data.productItem.groupKey }) }}">
-                                {{ 'remove' | trans }}
-                            </a>
+                            {% widget 'RemoveFromCartFormWidget' args [data.productItem] only %}
+                                {% block embeddedData %}
+                                    <button class="link link--darkest link--edit" data-init-single-click {{ qa('add-to-cart-button') }}>
+                                        {{ 'remove' | trans }}
+                                    </button>
+                                {% endblock %}
+                            {% endwidget %}
                         {% endif %}
                     </div>
                 {% endif %}
