@@ -3,18 +3,20 @@
 {% define data = {
     order: required,
     idSalesOrder: '',
+    requestUri: app.request.requestUri,
 } %}
 
 {% block body %}
     <h2 class="title spacing-bottom spacing-bottom--big">{{ 'customer.profile.order_details' | trans }}</h2>
 
     <div class="grid grid--right">
-        {% widget 'OrderCancelButtonWidget' args [data.order, app.request.requestUri] only %}
+        {% widget 'OrderCancelButtonWidget' args [data.order, data.requestUri] only %}
             {% block formContent %}
                 {% set buttonClasses = 'button button--hollow-alert spacing-right' %}
                 {{ parent() }}
             {% endblock %}
         {% endwidget %}
+
         {% widget 'CustomerReorderFormWidget' args [data.order] only %}
             {% block embeddedData %}
                 <button class="button button--medium button--expand-mobile spacing-bottom spacing-bottom--small">

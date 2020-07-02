@@ -6,7 +6,8 @@
 } %}
 
 {% define data = {
-    orders: required
+    orders: required,
+    requestUri: app.request.requestUri,
 } %}
 
 {% block body %}
@@ -62,7 +63,7 @@
                                     {% endblock %}
                                 {% endembed %}
 
-                                {% widget 'OrderCancelButtonWidget'  args [order, app.request.requestUri] only %}
+                                {% widget 'OrderCancelButtonWidget' args [order, data.requestUri] only %}
                                     {% block formContent %}
                                         {% set buttonClasses = 'menu__link' %}
                                         <li class="menu__item">
