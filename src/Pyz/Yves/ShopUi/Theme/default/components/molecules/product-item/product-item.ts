@@ -4,13 +4,16 @@ export const EVENT_UPDATE_REVIEW_COUNT = 'updateReviewCount';
 
 export interface ProductItemData extends ProductItemDataCore {
     reviewCount: number;
+    formAddToCartAction: string;
 }
 
 export default class ProductItem extends ProductItemCore {
     protected productReviewCount: HTMLElement;
+    protected productFormAddToCart: HTMLFormElement;
 
     protected init(): void {
         this.productReviewCount = <HTMLElement>this.getElementsByClassName(`${this.jsName}__review-count`)[0];
+        this.productFormAddToCart = <HTMLFormElement>this.getElementsByClassName(`${this.jsName}__form-add-to-cart`)[0];
 
         super.init();
     }
@@ -18,9 +21,22 @@ export default class ProductItem extends ProductItemCore {
     updateProductItemData(data: ProductItemData): void {
         super.updateProductItemData(data);
         this.reviewCount = data.reviewCount;
+        this.formAddToCartAction = data.formAddToCartAction;
     }
 
     protected set reviewCount(reviewCount: number) {
         this.dispatchCustomEvent(EVENT_UPDATE_REVIEW_COUNT, {reviewCount});
+    }
+
+    protected set formAddToCartAction(formAddToCartAction: string) {
+        if (this.productFormAddToCart) {
+            this.productFormAddToCart.action = formAddToCartAction;
+        }
+    }
+
+    protected get formAddToCartAction(): string {
+        if (this.productFormAddToCart) {
+            return this.productFormAddToCart.action;
+        }
     }
 }
