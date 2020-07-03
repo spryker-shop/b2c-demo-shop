@@ -24,6 +24,7 @@ matrix:
       dist: trusty
       env:
         - VALIDATION=1
+
     - name: Docker / Alpine /PHP 7.3 / PostgreSQL / Functional
       os:
         - linux
@@ -66,6 +67,7 @@ matrix:
       before_install: skip
       before_script: skip
       after_script: skip
+
     - name: Docker / Debian /PHP 7.3 / PostgreSQL / Functional
       os:
         - linux
@@ -108,6 +110,7 @@ matrix:
       before_install: skip
       before_script: skip
       after_script: skip
+
     - name: Docker / Alpine / PHP 7.3 / PostgreSQL / Glue
       os:
         - linux
@@ -153,9 +156,51 @@ matrix:
       before_script: skip
       after_script: skip
 
+    - name: Docker / Alpine / PHP 7.3 / MySQL / Functional
+      os:
+          - linux
+      dist: bionic
+      language: minimal
+      env:
+          - PROGRESS_TYPE=plain
+          - SPRYKER_PLATFORM_IMAGE=spryker/php:7.3
+          - SPRYKER_DB_ENGINE=MYSQL
+          - SPRYKER_TEST_IN_BROWSER=phantomjs
+          - TRAVIS=1
+      addons:
+          hosts:
+              - yves.de.spryker.local
+              - zed.de.spryker.local
+              - glue.de.spryker.local
+          apt:
+              packages:
+                  - apache2-utils
+                  - apt-transport-https
+                  - ca-certificates
+                  - curl
+                  - gnupg-agent
+                  - pigz
+                  - software-properties-common
+              sources:
+                  -   sourceline: "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+                      key_url: https://download.docker.com/linux/ubuntu/gpg
+      install:
+          - echo eyAiZXhwZXJpbWVudGFsIiA6IHRydWUsICJmZWF0dXJlcyIgOiB7ICJidWlsZGtpdCI6IHRydWUgfSB9Cg==|base64 -d|sudo tee /etc/docker/daemon.json
+          - sudo apt-get install --only-upgrade docker-ce -y
+          - sudo curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+          - sudo chmod +x /usr/local/bin/docker-compose
+      script:
+          - docker/sdk boot deploy.ci.mysql.yml
+          - docker/sdk build images
+          - docker/sdk demo-data -t
+          - 'docker/sdk testing codecept run -c codeception.functional.yml -o "\"extensions: config: \SprykerTest\Shared\Testify\Helper\SuiteFilterHelper: inclusive: [PyzTest]\"" -o "\"extensions: config: \SprykerTest\Shared\Testify\Helper\SuiteFilterHelper: exclusive: [Api, Glue]\""'
+      before_install: skip
+      before_script: skip
+      after_script: skip
+
 addons:
   postgresql: 9.6
-  mysql: 5.7
+  mariadb: 10.3
 
   apt:
     packages:
@@ -172,7 +217,7 @@ cache:
 
 services:
   - postgresql
-  - mysql
+  - mariadb
   - redis
   - rabbitmq
 
@@ -181,8 +226,6 @@ sudo: required
 before_install:
   - echo "extension = redis.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
   - phpenv config-rm xdebug.ini
-  - if [[ $DB == 'mysql' ]]; then chmod +x ./config/Shared/ci/travis/mysql/* ; fi
-  - if [[ $DB == 'mysql' ]]; then ./config/Shared/ci/travis/mysql/travis_mysql_5.7.sh ; fi
   - ( awk '1;/@hook travis-ci/{exit}' config/Shared/stores.php ; awk 'NR>1' config/Shared/ci/travis/stores.php ; awk '/@hook travis-ci/,0' config/Shared/stores.php ) > config/Shared/stores_tmp.php ; mv config/Shared/stores_tmp.php config/Shared/stores.php
 
 install:
@@ -207,9 +250,6 @@ before_script:
   - if [[ $DB == 'mysql' ]] ; then cat config/Shared/ci/travis/mysql_ci.config >> config/Shared/ci/travis/config_ci.php ; fi
 
   - cp config/Shared/ci/travis/config_ci.php config/Shared/config_local.php
-
-  - if [[ $DB == 'mysql' ]] ; then sudo cp config/Shared/ci/travis/mysql/my.cnf /etc/ ; fi
-  - if [[ $DB == 'mysql' ]] ; then sudo service mysql restart ; fi
 
   - if [[ $TEST_GROUP == 'acceptance' ]] ; then config/Shared/ci/travis/acceptance_env.sh ; fi
   - if [[ $TEST_GROUP == 'acceptance' ]] ; then vendor/bin/install DE -r testing -v; fi

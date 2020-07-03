@@ -1,10 +1,14 @@
 version: "0.1"
 
-namespace: spryker_b2c_dev
-tag: 'dev'
+namespace: spryker_ci
+tag: '1.0'
 
 environment: docker
 image: spryker/php:7.2
+
+composer:
+    mode: --no-dev
+    autoload: --classmap-authoritative
 
 regions:
     EU:
@@ -23,6 +27,8 @@ regions:
                         namespace: 1
                     search:
                         namespace: de_search
+                    session:
+                        namespace: 1
             AT:
                 services:
                     broker:
@@ -31,21 +37,8 @@ regions:
                         namespace: 2
                     search:
                         namespace: at_search
-    US:
-        services:
-            database:
-                database: us-docker
-                username: spryker
-                password: secret
-        stores:
-            US:
-                services:
-                    broker:
-                        namespace: us-docker
-                    key_value_store:
-                        namespace: 3
-                    search:
-                        namespace: us_search
+                    session:
+                        namespace: 1
 groups:
     EU:
         region: EU
@@ -83,75 +76,30 @@ groups:
                         services:
                             session:
                                 namespace: 4
-    US:
-        region: US
-        applications:
-            yves_us:
-                application: yves
-                endpoints:
-                    yves.us.spryker.local:
-                        store: US
-                        services:
-                            session:
-                                namespace: 5
-            glue_us:
-                application: glue
-                endpoints:
-                    glue.us.spryker.local:
-                        store: US
-            zed_us:
-                application: zed
-                endpoints:
-                    zed.us.spryker.local:
-                        store: US
-                        services:
-                            session:
-                                namespace: 6
+
 services:
     database:
         engine: mysql
-        version: mariadb-10.3
+        version: mariadb-10.4
         root:
             username: "root"
             password: "secret"
-        endpoints:
-            localhost:3306:
-                protocol: tcp
     broker:
         engine: rabbitmq
         api:
             username: "spryker"
             password: "secret"
-        endpoints:
-            queue.spryker.local:
-            locahost:5672:
-                protocol: tcp
     session:
         engine: redis
     key_value_store:
         engine: redis
-        endpoints:
-            localhost:16379:
-                protocol: tcp
     search:
         engine: elastic
         version: 6.8
-        endpoints:
-            localhost:9200:
-                protocol: tcp
     scheduler:
         engine: jenkins
-        endpoints:
-            scheduler.spryker.local:
     mail_catcher:
         engine: mailhog
-        endpoints:
-            mail.spryker.local:
-    swagger:
-        engine: swagger-ui
-        endpoints:
-            swagger.spryker.local:
-
 
 docker:
 
@@ -161,15 +109,5 @@ docker:
     testing:
         store: DE
 
-    debug:
-        enabled: true
-
     mount:
-        native:
-            platforms:
-                - linux
-
-        docker-sync:
-            platforms:
-                - macos
-                - windows
+        baked:
