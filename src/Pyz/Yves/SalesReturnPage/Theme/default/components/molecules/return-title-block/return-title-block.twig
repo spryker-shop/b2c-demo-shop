@@ -1,0 +1,27 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'return-title-block',
+} %}
+
+{% define data = {
+    idSalesOrder: required,
+} %}
+
+{% block extraClass %}
+    grid grid--middle
+{% endblock %}
+
+{% block body %}
+    <div class="col col--sm-12 col--md-6">
+        <h2 class="title spacing-right spacing-bottom spacing-bottom--small">{{ 'return_page.return.title' | trans }}</h2>
+    </div>
+    <div class="col col col--sm-12 col--md-6 text-right">
+        {% include molecule('order-detail-link', 'CustomerPage') ignore missing with {
+            class: 'button button--hollow button--medium button--expand-mobile spacing-bottom spacing-bottom--small',
+            data: {
+                idSalesOrder: data.idSalesOrder,
+            },
+        } only %}
+    </div>
+{% endblock %}

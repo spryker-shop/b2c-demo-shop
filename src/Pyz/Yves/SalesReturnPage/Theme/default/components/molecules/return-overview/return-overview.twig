@@ -1,0 +1,78 @@
+{% extends molecule('return-overview', '@SprykerShop:SalesReturnPage') %}
+
+{% block headline %}
+    {% set headlineClass = config.name ~ '__title-block grid grid--middle' %}
+    {% set backToListLinkClass = 'button button--hollow button--medium button--expand-mobile spacing-right spacing-bottom spacing-bottom--small' %}
+    {% set printSlipLinkClass = 'button button--medium button--expand-mobile spacing-bottom spacing-bottom--small' %}
+
+    {{ parent() }}
+{% endblock %}
+
+{% block title %}
+    <div class="col col--sm-12 col--md-6">
+        <h2 class="title spacing-right spacing-bottom spacing-bottom--small">{{ 'return_page.details.page_title' | trans }}</h2>
+    </div>
+{% endblock %}
+
+{% block actions %}
+    <div class="col col col--sm-12 col--md-6 text-right">
+        {% block backToListLink %}
+            {{ parent() }}
+        {% endblock %}
+
+        {% block printSlipLink %}
+            {{ parent() }}
+        {% endblock %}
+    </div>
+{% endblock %}
+
+{% block separator %}{% endblock %}
+
+{% block info %}
+    {% set infoClass = config.name ~ '__overview-info' %}
+
+    {{ parent() }}
+{% endblock %}
+
+{% block orderRef %}
+    {% set itemClass = config.name ~ '__item' %}
+
+    {{ parent() }}
+{% endblock %}
+
+{% block returnRef %}
+    {% set itemClass = config.name ~ '__item' %}
+
+    {{ parent() }}
+{% endblock %}
+
+{% block createdAt %}
+    {% set itemClass = config.name ~ '__item' %}
+
+    {{ parent() }}
+{% endblock %}
+
+{% block orderRefInner %}
+    <div class="{{ config.name }}__name">{{ 'return_page.order_reference' | trans }}</div>
+    <span class="{{ config.name }}__text">
+        {% for idSalesOrder, orderReference in data.uniqueOrderReferences %}
+            {% include molecule('order-detail-link', 'CustomerPage') ignore missing with {
+                data: {
+                    idSalesOrder: idSalesOrder,
+                    text: orderReference,
+                },
+            } only %}
+            {%- if not loop.last -%},&nbsp;{%- endif -%}
+        {% endfor %}
+    </span>
+{% endblock %}
+
+{% block returnRefInner %}
+    <div class="{{ config.name }}__name">{{ 'return_page.return_reference' | trans }}</div>
+    <span class="{{ config.name }}__text">{{ data.returnReference }}</span>
+{% endblock %}
+
+{% block createdAtInner %}
+    <div class="{{ config.name }}__name">{{ 'return_page.return_date' | trans }}</div>
+    <span class="{{ config.name }}__text">{{ data.createdAt | formatDateTime }}</span>
+{% endblock %}

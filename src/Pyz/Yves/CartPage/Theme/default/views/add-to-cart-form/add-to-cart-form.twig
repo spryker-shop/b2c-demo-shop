@@ -1,0 +1,15 @@
+{% extends view('add-to-cart-form', '@SprykerShop:CartPage') %}
+
+{% block body %}
+    {% set formClass = data.config.jsName ~ '__form-add-to-cart' %}
+
+    {% block form %}
+        {{ form_start(data.form, {
+            'action': path('cart/add', {'sku': data.product.sku}),
+            'name': 'addToCartForm_' ~ data.product.sku,
+            attr: { class: formClass },
+        }) }}
+            {% block embeddedData %}{% endblock %}
+        {{ form_end(data.form) }}
+    {% endblock %}
+{% endblock %}

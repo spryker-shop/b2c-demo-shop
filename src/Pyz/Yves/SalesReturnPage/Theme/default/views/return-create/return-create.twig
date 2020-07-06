@@ -1,0 +1,287 @@
+{% extends view('return-create', '@SprykerShop:SalesReturnPage') %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block salesReturnContent %}
+    {% set contentWrapperClass = 'box spacing-top spacing-top--big' %}
+
+    {{ parent() }}
+{% endblock %}
+
+{% block salesReturnContentHeader %}
+    {% include molecule('return-title-block', 'SalesReturnPage') with {
+        data: {
+            idSalesOrder: data.order.idSalesOrder,
+        },
+    } only %}
+{% endblock %}
+
+{% block salesReturnOrderInfo %}
+    {% include molecule('return-header-information', 'SalesReturnPage') with {
+        data: {
+            orderReference: data.order.orderReference,
+            createdAt: data.order.createdAt,
+        },
+    } only %}
+{% endblock %}
+
+{% block salesReturnOrderInfoSeparator %}{% endblock %}
+
+{% block salesReturnProducts %}
+    {% set salesReturnProductItemClass = 'grid grid--justify' %}
+
+    {% include molecule('checkbox-select-all') with {
+        modifiers: ['big'],
+        data: {
+            label: 'return_page.create_return.select_all_checkbox' | trans,
+        },
+        attributes: {
+            'target-class-name': 'js-return-create__trigger-state-toggler',
+        },
+    } only %}
+
+    {{ parent() }}
+{% endblock %}
+
+{% block checkbox %}{% endblock %}
+
+{% block salesReturnProductItemInfo %}
+    {% embed molecule('return-product-item', 'SalesReturnPage') with {
+        class: 'grid col col--expand',
+        modifiers: [orderItem.productOptions ? 'with-options'],
+        data: {
+            item: orderItem,
+        },
+        embed: {
+            returnItem: returnItem,
+        },
+    } only %}
+        {% block checkboxColumn %}
+            <div class="grid grid--no-wrap col">
+                <div class="col col--middle spacing-right spacing-right--inner">
+                    {{ form_row(embed.returnItem.isReturnable, {
+                        label: ' ',
+                        attr: {
+                            class: 'js-return-create__trigger-state-toggler',
+                        },
+                        disabled: not data.item.isReturnable,
+                        attributes: {
+                            additionalModifier: 'big',
+                        },
+                    }) }}
+                </div>
+
+                {{ parent() }}
+            </div>
+        {% endblock %}
+
+        {% block productItemInfoInner %}
+            <div class="spacing-bottom">
+                {% for returnPolicyMessage in data.item.returnPolicyMessages %}
+                    <div class="badge spacing-bottom spacing-bottom--small">
+                        {{ returnPolicyMessage.value | trans(returnPolicyMessage.parameters) }}
+                    </div>
+                {% endfor %}
+
+                {% if not data.item.isReturnable %}
+                    <div class="badge">
+                        {{ 'return_page.returnable_state' | trans }}
+                    </div>
+                {% endif %}
+            </div>
+
+            {{ parent() }}
+
+            {% include molecule('return-product-reason', 'SalesReturnPage') with {
+                data: {
+                    returnItem: embed.returnItem,
+                    isReturnable: embed.returnItem.vars.value.orderItem.isReturnable,
+                },
+            } only %}
+        {% endblock %}
+    {% endembed %}
+
+    {% if orderItem.productOptions %}
+        {% include molecule('product-item-summary') with {
+            modifiers: ['alternative'],
+            data: {
+                productItem: orderItem,
+            },
+        } only %}
+    {% endif %}
+{% endblock %}
+
+{% block productBundle %}
+    {% widget 'OrderItemsProductBundleWidget' args [data.form.vars.value.productBundleItems] with {
+        embed: {
+            form: data.form,
+        },
+    } only %}
+        {% block bundle %}
+            {% embed molecule('ordered-product-bundle', 'SalesProductBundleWidget') with {
+                class: 'grid',
+                modifiers: [productBundle.bundleProduct.productOptions ? 'with-options'],
+                data: {
+                    productBundle: productBundle,
+                },
+                embed: {
+                    form: embed.form,
+                },
+            } only %}
+                {% block contentWrapper %}
+                    {% set isReturnable = true %}
+                    {% for bundleItem in data.productBundle.bundleItems if bundleItem.isReturnable == false %}
+                        {% set isReturnable = false %}
+                    {% endfor %}
+
+                    {{ parent() }}
+                {% endblock %}
+
+                {% block imageWrapper %}
+                    <div class="grid grid--no-wrap col">
+                        <div class="col col--middle spacing-right spacing-right--inner">
+                            {% for key, productBundle in embed.form.productBundles if key == data.productBundle.bundleProduct.bundleItemIdentifier %}
+                                {{ form_row(productBundle.isReturnable, {
+                                    label: ' ',
+                                    attr: {
+                                        class: 'js-return-create__trigger-state-toggler',
+                                    },
+                                    disabled: not isReturnable,
+                                    attributes: {
+                                        additionalModifier: 'big',
+                                    },
+                                }) }}
+                            {% endfor %}
+                        </div>
+
+                        {{ parent() }}
+                    </div>
+                {% endblock %}
+
+                {% block bundleInfoInner %}
+                    {% set bundleItem = data.productBundle.bundleItems | first %}
+
+                    <div class="spacing-bottom">
+                        <div class="badge spacing-bottom spacing-bottom--small">
+                            {% for returnPolicyMessage in bundleItem.returnPolicyMessages %}
+                                {{ returnPolicyMessage.value | trans(returnPolicyMessage.parameters) }}
+                            {% endfor %}
+                        </div>
+
+                        {% if not isReturnable %}
+                            <div class="badge">
+                                {{- 'sales_product_bundle_widget.returnable_state' | trans -}}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    {{ parent() }}
+
+                    {% for key, productBundle in embed.form.productBundles if key == data.productBundle.bundleProduct.bundleItemIdentifier %}
+                        {% include molecule('return-product-reason', 'SalesReturnPage') with {
+                            data: {
+                                returnItem: productBundle,
+                                isReturnable: isReturnable,
+                            },
+                        } only %}
+                    {% endfor %}
+                {% endblock %}
+            {% endembed %}
+
+            {% if productBundle.bundleProduct.productOptions %}
+                {% include molecule('product-item-summary') with {
+                    modifiers: ['alternative'],
+                    data: {
+                        productItem: productBundle.bundleProduct,
+                    },
+                } only %}
+            {% endif %}
+        {% endblock %}
+    {% endwidget %}
+{% endblock %}
+
+ {% block configurableBundle %}
+     {% widget 'OrderItemsConfiguredBundleWidget'
+         args [orderItems]
+         use view('order-returnable-items-configured-bundle-widget', 'SalesConfigurableBundleWidget')
+         with {
+         embed: {
+             form: data.form,
+         },
+     } only %}
+         {% block bundleItem %}
+             {% embed molecule('ordered-configured-bundle', 'SalesConfigurableBundleWidget') ignore missing with {
+                 class: 'spacing-right spacing-right--reset',
+                 data: {
+                     bundle: bundle,
+                     items: data.items,
+                 },
+                 embed: {
+                     form: embed.form,
+                 },
+             } only %}
+                 {% block bundleProductItem %}
+                     {% embed molecule('ordered-configured-bundle-product-secondary', 'SalesConfigurableBundleWidget') with {
+                         class: 'grid',
+                         data: {
+                             product: data.items[item.IdSalesOrderItem],
+                             currencyIsoCode: item.currencyIsoCode ?? data.currencyIsoCode,
+                             image: data.items[item.IdSalesOrderItem].metadata.image,
+                         },
+                         embed: {
+                             form: embed.form,
+                         },
+                     } only %}
+                         {% block checkbox %}
+                             {% for returnItem in embed.form.returnItems if returnItem.vars.value.orderItem.IdSalesOrderItem == data.product.IdSalesOrderItem %}
+                                 {{ form_row(returnItem.isReturnable, {
+                                     label: ' ',
+                                     attr: {
+                                         class: 'js-return-create__trigger-state-toggler',
+                                     },
+                                     disabled: not data.product.isReturnable,
+                                     attributes: {
+                                         additionalModifier: 'big',
+                                     },
+                                 }) }}
+                             {% endfor %}
+                         {% endblock %}
+
+                         {% block generalInformation %}
+                             <div class="spacing-bottom">
+                                 {% for returnPolicyMessage in data.product.returnPolicyMessages %}
+                                     <div class="badge spacing-bottom spacing-bottom--small">
+                                         {{ returnPolicyMessage.value | trans(returnPolicyMessage.parameters) }}
+                                     </div>
+                                 {% endfor %}
+
+                                 {% if not data.product.isReturnable %}
+                                     <div class="badge">
+                                         {{ 'sales_configured_bundle_widget.returnable_state' | trans }}
+                                     </div>
+                                 {% endif %}
+                             </div>
+
+                             {{ parent() }}
+
+                             {% for returnItem in embed.form.returnItems if returnItem.vars.value.orderItem.IdSalesOrderItem == data.product.IdSalesOrderItem %}
+                                 {% include molecule('return-product-reason', 'SalesReturnPage') with {
+                                     data: {
+                                         returnItem: returnItem,
+                                         isReturnable: returnItem.vars.value.orderItem.isReturnable,
+                                     },
+                                 } only %}
+                             {% endfor %}
+                         {% endblock %}
+                     {% endembed %}
+                 {% endblock %}
+             {% endembed %}
+         {% endblock %}
+     {% endwidget %}
+ {% endblock %}
+
+{% block salesReturnPageActions %}
+    {% set salesReturnSaveActionClass = 'button spacing-top spacing-top--big js-return-create__target-state-toggler' %}
+
+    {{ parent() }}
+{% endblock %}

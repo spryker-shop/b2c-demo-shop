@@ -1,0 +1,19 @@
+@mixin sales-return-page-return-total($name: '.return-total') {
+    #{$name} {
+        margin: rem(20) 0 rem(30);
+        border-bottom: rem(1) dotted $setting-color-gray-3;
+
+        @include helper-breakpoint-media-min($lg-min) {
+            margin-bottom: rem(40);
+        }
+
+        &__item {
+            font: fw(regular) rem(14)/rem(18) $setting-font-family-additional;
+            margin: rem(24) 0;
+        }
+
+        @content;
+    }
+}
+
+@include sales-return-page-return-total();
