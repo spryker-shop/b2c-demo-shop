@@ -1,0 +1,22 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'action-bar',
+    tag: 'div',
+} %}
+
+{% define data = {
+    title: '',
+    titleClass: 'title title--secondary-box',
+} %}
+
+{% block body %}
+    <h2 class="{{ data.titleClass }} {{ component.renderClass(config.name ~ '__title', modifiers, class) }}">
+        {{ data.title }}
+    </h2>
+
+    <div class="{{ config.name }}__actions">
+        {% block actions %}
+        {% endblock %}
+    </div>
+{% endblock %}
