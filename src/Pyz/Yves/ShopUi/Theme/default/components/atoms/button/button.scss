@@ -7,7 +7,6 @@
         display: inline-block;
         padding: rem(15) rem(16);
         background-color: $setting-color-black;
-        border: rem(1) solid $setting-color-black;
         border-radius: rem(2);
         min-width: $button-min-width/1.3;
         color: $setting-color-white;
@@ -112,14 +111,12 @@
 
         &[disabled],
         &--disabled {
-            border-color: $setting-color-gray-3;
             background-color: $setting-color-gray-3;
             cursor: not-allowed;
 
             &:hover,
             &:focus,
             &:active {
-                border-color: $setting-color-gray-3;
                 background-color: $setting-color-gray-3;
             }
         }
@@ -141,6 +138,11 @@
                 &:active {
                     background-color: $setting-color-white;
                 }
+            }
+
+            &#{$name}--small {
+                padding-top: rem(10);
+                padding-bottom: rem(10);
             }
         }
 
@@ -178,7 +180,6 @@
         }
 
         &--combined {
-            border: none;
             border-radius: 0 rem(2) rem(2) 0;
             min-width: rem(113);
             font-weight: fw(regular);
@@ -232,14 +233,19 @@
 
         &--small {
             min-width: rem(100);
-            padding-top: rem(10);
-            padding-bottom: rem(10);
+            padding-top: rem(11);
+            padding-bottom: rem(11);
         }
 
         &--hollow-alert {
             background-color: $setting-color-transparent;
             border: rem(1) solid $setting-color-alt;
             color: $setting-color-alt;
+
+            &#{$name}--small {
+                padding-top: rem(10);
+                padding-bottom: rem(10);
+            }
         }
 
         @content;
