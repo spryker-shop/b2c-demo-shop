@@ -6,17 +6,6 @@
 } %}
 
 {% block body %}
-    <h2 class="title spacing-bottom spacing-bottom--big">{{ 'customer.profile.order_details' | trans }}</h2>
-    <div class="text-right">
-        {% widget 'CustomerReorderFormWidget' args [data.order] only %}
-            {% block embeddedData %}
-                <button class="button button--medium button--expand-mobile spacing-bottom spacing-bottom--small">
-                    {{ 'customer.order.reorder_all' | trans }}
-                </button>
-            {% endblock %}
-        {% endwidget %}
-    </div>
-
     {% widget 'CustomerReorderItemsFormWidget'  args [data.order, config] with {
         embed: {
             formContent: block('formContent'),
