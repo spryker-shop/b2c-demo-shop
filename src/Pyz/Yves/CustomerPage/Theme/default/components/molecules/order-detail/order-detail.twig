@@ -9,11 +9,12 @@
         {% embed molecule('action-bar') with {
             data: {
                 title: 'customer.profile.order_details' | trans,
+                titleClass: 'title title--secondary-box',
             },
             embed: {
                 order: data.order,
                 requestUri: data.requestUri,
-            }
+            },
         } only %}
             {% block actions %}
                 {% set buttonClasses = 'button button--small button--expand-mobile spacing-bottom spacing-bottom--small spacing-right' %}
@@ -34,7 +35,7 @@
                         buttonClasses: buttonClasses,
                     },
                 } only %}
-                    {% block body %}
+                    {% block formContent %}
                         {% include molecule('remote-form-submit') with {
                             class: 'button--expand-mobile',
                             data: {
