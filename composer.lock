@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "180cee7e5eb01cd1de0939ca64414cf8",
+    "content-hash": "7c30d483b836dc6c59496bb8bddb8a62",
     "packages": [
         {
             "name": "brick/math",
@@ -3139,16 +3139,16 @@
         },
         {
             "name": "spryker-feature/mailing-notifications",
-            "version": "202001.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker-feature/mailing-notifications.git",
-                "reference": "48fc54c01d845c30fea04ff0695dd616ddcdb36e"
+                "reference": "1e3d1affcfda533f2803092bd9173e1a2fa778f0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker-feature/mailing-notifications/zipball/48fc54c01d845c30fea04ff0695dd616ddcdb36e",
-                "reference": "48fc54c01d845c30fea04ff0695dd616ddcdb36e",
+                "url": "https://api.github.com/repos/spryker-feature/mailing-notifications/zipball/1e3d1affcfda533f2803092bd9173e1a2fa778f0",
+                "reference": "1e3d1affcfda533f2803092bd9173e1a2fa778f0",
                 "shasum": ""
             },
             "require": {
@@ -3161,7 +3161,7 @@
             "type": "metapackage",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "202001.x-dev"
+                    "dev-master": "202006.x-dev"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -3169,7 +3169,7 @@
                 "proprietary"
             ],
             "description": "Mailing & Notifications [feature]",
-            "time": "2020-01-15T18:37:20+00:00"
+            "time": "2020-04-06T12:55:46+00:00"
         },
         {
             "name": "spryker-feature/navigation",
@@ -3239,29 +3239,32 @@
         },
         {
             "name": "spryker-feature/order-management",
-            "version": "202001.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker-feature/order-management.git",
-                "reference": "2ae34fdab4b0c10dc00aa4f39d5ebaaf075409d5"
+                "reference": "90b743376ba04af04f2fbeb775fa008ee594a68a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker-feature/order-management/zipball/2ae34fdab4b0c10dc00aa4f39d5ebaaf075409d5",
-                "reference": "2ae34fdab4b0c10dc00aa4f39d5ebaaf075409d5",
+                "url": "https://api.github.com/repos/spryker-feature/order-management/zipball/90b743376ba04af04f2fbeb775fa008ee594a68a",
+                "reference": "90b743376ba04af04f2fbeb775fa008ee594a68a",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.2",
+                "spryker-shop/order-cancel-widget": "^1.0.0",
                 "spryker/oms": "^11.0.0",
                 "spryker/sales": "^11.0.0",
+                "spryker/sales-data-export": "^0.1.0",
+                "spryker/sales-invoice": "^1.0.0",
                 "spryker/sales-quantity": "^3.0.0",
                 "spryker/sales-split": "^5.0.0"
             },
             "type": "metapackage",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "202001.x-dev"
+                    "dev-master": "202006.x-dev"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -3269,7 +3272,7 @@
                 "proprietary"
             ],
             "description": "Order Management [feature]",
-            "time": "2019-12-06T10:57:47+00:00"
+            "time": "2020-07-02T13:53:18+00:00"
         },
         {
             "name": "spryker-feature/order-threshold",
@@ -6856,6 +6859,57 @@
             ],
             "description": "NewsletterWidget module",
             "time": "2020-06-15T13:37:36+00:00"
+        },
+        {
+            "name": "spryker-shop/order-cancel-widget",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker-shop/order-cancel-widget.git",
+                "reference": "3e1fc18d70f1dc95707b79fa5837c1f684c962a8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker-shop/order-cancel-widget/zipball/3e1fc18d70f1dc95707b79fa5837c1f684c962a8",
+                "reference": "3e1fc18d70f1dc95707b79fa5837c1f684c962a8",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2",
+                "spryker-shop/shop-application": "^1.2.0",
+                "spryker-shop/shop-ui": "^1.0.0",
+                "spryker/application": "^3.8.0",
+                "spryker/customer": "^7.0.0",
+                "spryker/kernel": "^3.30.0",
+                "spryker/oms": "^11.8.0",
+                "spryker/sales": "^11.10.0",
+                "spryker/symfony": "^3.1.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/router": "*"
+            },
+            "suggest": {
+                "spryker/router": "Use this module if you want use the RouterProviderPlugin.",
+                "spryker/silex": "Use this module when using plugins that need Silex dependencies."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "SprykerShop\\": "src/SprykerShop/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "OrderCancelWidget module",
+            "time": "2020-06-18T10:19:06+00:00"
         },
         {
             "name": "spryker-shop/price-product-volume-widget",
@@ -26760,16 +26814,16 @@
         },
         {
             "name": "spryker/sales",
-            "version": "11.11.0",
+            "version": "11.13.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/sales.git",
-                "reference": "5a881158ba81c92a05d469aa8d9efc855b5c8a5c"
+                "reference": "a3b59acaad045a7de7f98da0978f8a3a3e8ff97d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/sales/zipball/5a881158ba81c92a05d469aa8d9efc855b5c8a5c",
-                "reference": "5a881158ba81c92a05d469aa8d9efc855b5c8a5c",
+                "url": "https://api.github.com/repos/spryker/sales/zipball/a3b59acaad045a7de7f98da0978f8a3a3e8ff97d",
+                "reference": "a3b59acaad045a7de7f98da0978f8a3a3e8ff97d",
                 "shasum": ""
             },
             "require": {
@@ -26828,7 +26882,7 @@
                 "proprietary"
             ],
             "description": "Sales module",
-            "time": "2020-07-02T07:50:45+00:00"
+            "time": "2020-07-06T13:07:59+00:00"
         },
         {
             "name": "spryker/sales-configurable-bundle",
@@ -26965,6 +27019,99 @@
             ],
             "description": "SalesExtension module",
             "time": "2020-04-23T10:38:06+00:00"
+        },
+        {
+            "name": "spryker/sales-invoice",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/sales-invoice.git",
+                "reference": "db9bce3bfb3c56615ca0d0f8e8e08860d0e05b57"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/sales-invoice/zipball/db9bce3bfb3c56615ca0d0f8e8e08860d0e05b57",
+                "reference": "db9bce3bfb3c56615ca0d0f8e8e08860d0e05b57",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2",
+                "spryker/glossary": "^3.0.0",
+                "spryker/kernel": "^3.30.0",
+                "spryker/mail": "^4.3.0",
+                "spryker/propel-orm": "^1.0.0",
+                "spryker/sales": "^11.11.0",
+                "spryker/sales-invoice-extension": "^1.0.0",
+                "spryker/sequence-number": "^3.0.0",
+                "spryker/symfony": "^3.0.0",
+                "spryker/twig": "^3.0.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/customer": "*",
+                "spryker/oms": "*",
+                "spryker/propel": "*",
+                "spryker/testify": "*"
+            },
+            "suggest": {
+                "spryker/oms": "If you want to use GenerateOrderInvoiceCommandPlugin plugin"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/",
+                    "SprykerTest\\Shared\\SalesInvoice\\Helper\\": "tests/SprykerTest/Shared/SalesInvoice/_support/Helper/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "SalesInvoice module",
+            "time": "2020-07-03T11:39:16+00:00"
+        },
+        {
+            "name": "spryker/sales-invoice-extension",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/sales-invoice-extension.git",
+                "reference": "9472ae6a878a487acf51ae937fcb972ef80c4e1b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/sales-invoice-extension/zipball/9472ae6a878a487acf51ae937fcb972ef80c4e1b",
+                "reference": "9472ae6a878a487acf51ae937fcb972ef80c4e1b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "SalesInvoiceExtension module",
+            "time": "2020-06-29T08:34:25+00:00"
         },
         {
             "name": "spryker/sales-order-threshold",
@@ -40748,6 +40895,18 @@
             "alias": "202006.0",
             "alias_normalized": "202006.0",
             "version": "9999999-dev",
+            "package": "spryker-feature/mailing-notifications"
+        },
+        {
+            "alias": "202006.0",
+            "alias_normalized": "202006.0",
+            "version": "9999999-dev",
+            "package": "spryker-feature/order-management"
+        },
+        {
+            "alias": "202006.0",
+            "alias_normalized": "202006.0",
+            "version": "9999999-dev",
             "package": "spryker-feature/order-threshold"
         },
         {
@@ -40826,6 +40985,8 @@
         "spryker-feature/checkout": 20,
         "spryker-feature/configurable-bundle": 20,
         "spryker-feature/customer-account-management": 20,
+        "spryker-feature/mailing-notifications": 20,
+        "spryker-feature/order-management": 20,
         "spryker-feature/order-threshold": 20,
         "spryker-feature/product": 20,
         "spryker-feature/product-barcode": 20,

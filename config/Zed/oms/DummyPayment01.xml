@@ -9,6 +9,7 @@
             <process>DummyRefund</process>
             <process>DummyReturn</process>
             <process>CreateGiftCard</process>
+            <process>DummyInvoice</process>
         </subprocesses>
 
         <states>
@@ -60,13 +61,13 @@
             </transition>
 
             <transition happy="true">
-                <source>confirmed</source>
+                <source>invoice generated</source>
                 <target>exported</target>
                 <event>check giftcard purchase</event>
             </transition>
 
             <transition happy="true" condition="GiftCard/IsGiftCard">
-                <source>confirmed</source>
+                <source>invoice generated</source>
                 <target>gift card purchased</target>
                 <event>check giftcard purchase</event>
             </transition>
@@ -111,5 +112,6 @@
     <process name="DummyRefund" file="DummySubprocess/DummyRefund01.xml"/>
     <process name="DummyReturn" file="DummySubprocess/DummyReturn01.xml"/>
     <process name="CreateGiftCard" file="GiftCardSubprocess/CreateGiftCard01.xml"/>
+    <process name="DummyInvoice" file="DummySubprocess/DummyInvoice01.xml"/>
 
 </statemachine>
