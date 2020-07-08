@@ -153,7 +153,7 @@ class ShopApplicationDependencyProvider extends SprykerShopApplicationDependency
             OrderItemsProductBundleWidget::class,
             CustomerReorderItemsFormWidget::class,
             CustomerReorderFormWidget::class,
-            OrderCancelButtonWidget::class
+            OrderCancelButtonWidget::class,
             AddToCartFormWidget::class,
             AddItemsFormWidget::class,
             CartChangeQuantityFormWidget::class,
