@@ -12,17 +12,26 @@
         </subprocesses>
 
         <states>
-            <state name="new" reserved="true"/>
-            <state name="payment pending" reserved="true"/>
+            <state name="new" reserved="true">
+                <flag>cancellable</flag>
+            </state>
+            <state name="payment pending" reserved="true">
+                <flag>cancellable</flag>
+            </state>
             <state name="invalid">
                 <flag>exclude from customer</flag>
             </state>
             <state name="cancelled">
                 <flag>exclude from customer</flag>
             </state>
-            <state name="paid" reserved="true"/>
+            <state name="paid" reserved="true">
+                <flag>cancellable</flag>
+            </state>
+            <state name="confirmed" reserved="true">
+                <flag>cancellable</flag>
+            </state>
+            <state name="waiting" reserved="true"/>
             <state name="exported" reserved="true"/>
-            <state name="confirmed" reserved="true"/>
             <state name="shipped" reserved="true"/>
             <state name="delivered"/>
             <state name="closed"/>
@@ -41,6 +50,12 @@
                 <event>authorize</event>
             </transition>
 
+            <transition>
+                <source>new</source>
+                <target>cancelled</target>
+                <event>cancel</event>
+            </transition>
+
             <transition happy="true" condition="DummyPayment/IsPayed">
                 <source>payment pending</source>
                 <target>paid</target>
@@ -53,6 +68,12 @@
                 <event>pay</event>
             </transition>
 
+            <transition>
+                <source>payment pending</source>
+                <target>cancelled</target>
+                <event>cancel</event>
+            </transition>
+
             <transition happy="true">
                 <source>paid</source>
                 <target>confirmed</target>
@@ -61,12 +82,24 @@
 
             <transition happy="true">
                 <source>confirmed</source>
+                <target>waiting</target>
+                <event>skip timeout</event>
+            </transition>
+
+            <transition>
+                <source>confirmed</source>
+                <target>cancelled</target>
+                <event>cancel</event>
+            </transition>
+
+            <transition happy="true">
+                <source>waiting</source>
                 <target>exported</target>
                 <event>check giftcard purchase</event>
             </transition>
 
             <transition happy="true" condition="GiftCard/IsGiftCard">
-                <source>confirmed</source>
+                <source>waiting</source>
                 <target>gift card purchased</target>
                 <event>check giftcard purchase</event>
             </transition>
@@ -101,6 +134,8 @@
             <event name="authorize" onEnter="true"/>
             <event name="pay" manual="true" timeout="1 hour" command="DummyPayment/Pay"/>
             <event name="confirm" onEnter="true" manual="true" command="Oms/SendOrderConfirmation"/>
+            <event name="skip timeout" manual="true" timeout="30 minute"/>
+            <event name="cancel" manual="true"/>
             <event name="export" onEnter="true" manual="true" command="Oms/SendOrderShipped"/>
             <event name="ship" manual="true" command="Oms/SendOrderShipped"/>
             <event name="stock-update" manual="true"/>

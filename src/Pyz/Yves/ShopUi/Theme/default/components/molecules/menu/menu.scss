@@ -116,7 +116,15 @@
             }
 
             #{$name}__link {
-                font-weight: fw(light);
+                background: none;
+                color: $setting-color-black;
+                font: fw(light) rem(16) $setting-font-family;
+                cursor: pointer;
+
+                &:hover {
+                    color: $setting-color-alt;
+                    text-decoration: underline;
+                }
             }
 
             #{$name}__button {
