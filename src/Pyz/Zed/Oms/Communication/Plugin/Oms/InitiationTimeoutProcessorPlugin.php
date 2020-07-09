@@ -51,7 +51,7 @@ class InitiationTimeoutProcessorPlugin extends AbstractPlugin implements Timeout
     /**
      * {@inheritDoc}
      * - Calculates the timeout based on the current time + the defined timeout.
-     * - Returns `TimeoutProcessorTimeoutRequestTransfer` with timestamp when event should be triggered.
+     * - Returns `TimeoutProcessorTimeoutResponseTransfer` with timestamp when event should be triggered.
      *
      * @api
      *
