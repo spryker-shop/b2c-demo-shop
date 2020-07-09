@@ -53,7 +53,7 @@ class SalesDependencyProvider extends SprykerSalesDependencyProvider
             new ProductOptionGroupIdHydratorPlugin(),
             new ProductBundleOptionOrderExpanderPlugin(),
             new RemunerationTotalOrderExpanderPlugin(),
-            new IsCancellableOrderExpanderPlugin()
+            new IsCancellableOrderExpanderPlugin(),
         ];
     }
 
@@ -142,7 +142,7 @@ class SalesDependencyProvider extends SprykerSalesDependencyProvider
     protected function getSearchOrderExpanderPlugins(): array
     {
         return [
-            new IsCancellableSearchOrderExpanderPlugin()
+            new IsCancellableSearchOrderExpanderPlugin(),
         ];
     }
 }
