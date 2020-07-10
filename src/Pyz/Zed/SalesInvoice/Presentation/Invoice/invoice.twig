@@ -195,6 +195,15 @@
         <td class="text-center">{{ order.totals.discountTotal | money(true, order.currencyIsoCode) }}</td>
     </tr>
 
+    {% for rate, tax in taxes %}
+        <tr>
+            <td colspan="2">{{ 'order_invoice.invoice_template.table.tax.included' | trans({ '%tax_rate%': rate | number_format }) }}</td>
+            <td class="text-center">{{ (itemSumByTaxes[rate] - tax) | money(true, order.currencyIsoCode) }}</td>
+            <td class="text-center">{{ 'order_invoice.invoice_template.table.tax.name' | trans }}</td>
+            <td class="text-center">{{ tax | money(true, order.currencyIsoCode) }}</td>
+        </tr>
+    {% endfor %}
+
     <tr class="background-gray">
         <td colspan="3"></td>
         <td><strong>{{ 'order_invoice.invoice_template.table.grandtotal' | trans }}</strong></td>
