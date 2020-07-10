@@ -1,0 +1,38 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'remote-form-submit',
+    tag: 'remote-form-submit',
+} %}
+
+{% define data = {
+    label: '',
+    buttonClass: 'button button--alert',
+} %}
+
+{% define attributes = {
+    'form-name': required,
+    'form-action': required,
+    'field-id': '',
+    'field-name': '',
+    'field-value': '',
+    'form-holder-class-name': '',
+} %}
+
+{% block body %}
+    {% block container %}
+        <div class="{{ config.jsName }}__container">
+            {% block fields %}
+                <input id="{{ attributes['field-id'] }}" name="{{ attributes['field-name'] }}" type="hidden" value="{{ attributes['field-value'] }}">
+            {% endblock %}
+        </div>
+    {% endblock %}
+
+    {% block submitAction %}
+        <button type="button" class="{{ data.buttonClass }} {{ config.jsName }}__submit">
+            {% block innerSubmitActionContent %}
+                {{ data.label }}
+            {% endblock %}
+        </button>
+    {% endblock %}
+{% endblock %}
