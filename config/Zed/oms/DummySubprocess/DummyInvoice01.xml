@@ -18,12 +18,13 @@
             <transition>
                 <source>invoice generated</source>
                 <target>waiting</target>
-                <target>invoice-generated</target>
+                <event>invoice-generated</event>
             </transition>
         </transitions>
 
         <events>
             <event name="invoice-generate" manual="true" command="Invoice/Generate"/>
+            <event name="invoice-generated" onEnter="true"/>
         </events>
     </process>
 
