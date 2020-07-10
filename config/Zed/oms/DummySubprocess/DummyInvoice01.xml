@@ -11,9 +11,14 @@
 
         <transitions>
             <transition>
-                <source>waiting</source>
+                <source>confirmed</source>
                 <target>invoice generated</target>
                 <event>invoice-generate</event>
+            </transition>
+            <transition>
+                <source>invoice generated</source>
+                <target>waiting</target>
+                <target>invoice-generated</target>
             </transition>
         </transitions>
 
