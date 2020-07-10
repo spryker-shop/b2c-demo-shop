@@ -94,13 +94,13 @@
             </transition>
 
             <transition happy="true">
-                <source>invoice generated</source>
+                <source>waiting</source>
                 <target>exported</target>
                 <event>check giftcard purchase</event>
             </transition>
 
             <transition happy="true" condition="GiftCard/IsGiftCard">
-                <source>invoice generated</source>
+                <source>waiting</source>
                 <target>gift card purchased</target>
                 <event>check giftcard purchase</event>
             </transition>
