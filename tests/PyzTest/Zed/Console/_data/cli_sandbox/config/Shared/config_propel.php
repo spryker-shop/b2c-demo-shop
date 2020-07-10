@@ -21,6 +21,7 @@ $connections = [
         'user' => $config[PropelConstants::ZED_DB_USERNAME],
         'password' => $config[PropelConstants::ZED_DB_PASSWORD],
         'settings' => [],
+        'slaves' => [],
     ],
     'mysql' => [
         'adapter' => PropelConfig::DB_ENGINE_MYSQL,
@@ -33,6 +34,7 @@ $connections = [
                 'utf8' => 'SET NAMES utf8 COLLATE utf8_unicode_ci, COLLATION_CONNECTION = utf8_unicode_ci, COLLATION_DATABASE = utf8_unicode_ci, COLLATION_SERVER = utf8_unicode_ci',
             ],
         ],
+        'slaves' => [],
     ],
 ];
 
