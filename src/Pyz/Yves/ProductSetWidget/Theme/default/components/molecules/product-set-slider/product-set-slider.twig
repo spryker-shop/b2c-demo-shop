@@ -37,7 +37,6 @@
                                 superAttributes: data.product.attributeMap.superAttributes,
                                 selectedAttributes: data.product.selectedAttributes,
                                 availableAttributes: data.product.availableAttributes,
-                                useExternalForm: true,
                             },
                             embed: {
                                 product: data.product,
@@ -65,9 +64,13 @@
                                 {{ 'page.detail.add-to-cart' | trans }}
                             </button>
                         {% else %}
-                            <a href="{{ path('cart/add', {sku: data.sku}) }}" class="button button--expand {{ config.jsName }}__link-add-to-cart" data-init-single-click>
-                                {{ 'page.detail.add-to-cart' | trans }}
-                            </a>
+                            {% widget 'AddToCartFormWidget'  args [config, data.product, isDisabled] only %}
+                                {% block embeddedData %}
+                                    <button class="button button--expand" data-init-single-click {{ qa('add-to-cart-button') }}>
+                                        {{- 'page.detail.add-to-cart' | trans -}}
+                                    </button>
+                                {% endblock %}
+                            {% endwidget %}
                         {% endif %}
                     {% endblock %}
                 {% endembed %}

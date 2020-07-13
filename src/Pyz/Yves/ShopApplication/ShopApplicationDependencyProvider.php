@@ -28,6 +28,10 @@ use SprykerShop\Yves\BarcodeWidget\Widget\BarcodeWidget;
 use SprykerShop\Yves\CartCodeWidget\Widget\CartCodeFormWidget;
 use SprykerShop\Yves\CartNoteWidget\Widget\CartItemNoteFormWidget;
 use SprykerShop\Yves\CartNoteWidget\Widget\CartNoteFormWidget;
+use SprykerShop\Yves\CartPage\Widget\AddItemsFormWidget;
+use SprykerShop\Yves\CartPage\Widget\AddToCartFormWidget;
+use SprykerShop\Yves\CartPage\Widget\CartChangeQuantityFormWidget;
+use SprykerShop\Yves\CartPage\Widget\RemoveFromCartFormWidget;
 use SprykerShop\Yves\CategoryImageStorageWidget\Widget\CategoryImageStorageWidget;
 use SprykerShop\Yves\CheckoutWidget\Widget\CheckoutBreadcrumbWidget;
 use SprykerShop\Yves\ConfigurableBundleWidget\Widget\QuoteConfiguredBundleWidget;
@@ -149,7 +153,11 @@ class ShopApplicationDependencyProvider extends SprykerShopApplicationDependency
             OrderItemsProductBundleWidget::class,
             CustomerReorderItemsFormWidget::class,
             CustomerReorderFormWidget::class,
-            OrderCancelButtonWidget::class
+            OrderCancelButtonWidget::class,
+            AddToCartFormWidget::class,
+            AddItemsFormWidget::class,
+            CartChangeQuantityFormWidget::class,
+            RemoveFromCartFormWidget::class,
         ];
     }
 

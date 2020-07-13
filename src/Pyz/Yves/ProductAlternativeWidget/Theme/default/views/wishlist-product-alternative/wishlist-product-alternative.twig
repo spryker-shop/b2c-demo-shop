@@ -36,16 +36,17 @@
                             },
                         } only %}
                     {% endif %}
-                    <tr class="{{ loop.index > 3 ? 'js-product-alternative-' ~ wishlistItemSku ~ '__show-all-target is-hidden' : '' }}">
+                    <tr class="{{ loop.index > 3 ? 'js-product-alternative-' ~ wishlistItemSku ~ '__show-all-target is-hidden' }}">
                         <td>
-                            {% if item.images is defined and item.images is not empty %}
-                                {% include atom('thumbnail') with {
-                                    modifiers: ['min-size', 'wishlist'],
-                                    attributes: {
-                                        alt: item.name,
-                                        src: item.images.0.externalUrlSmall,
-                                        title: item.name
-                                    }
+                            {% set imageUrl = item.images.0.externalUrlSmall ?? '' %}
+
+                            {% if imageUrl %}
+                                {% include molecule('lazy-image') with {
+                                    modifiers: ['thumbnail', 'min-size', 'wishlist'],
+                                    data: {
+                                        imageSrc: imageUrl,
+                                        imageTitle: item.name,
+                                    },
                                 } only %}
                             {% endif %}
                         </td>

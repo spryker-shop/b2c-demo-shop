@@ -40,7 +40,14 @@
 
             <div class="{{ config.name }}__item {{ config.jsName }}__item {{ activeItemClass }}">
                 {% if image.externalUrlLarge is not empty %}
-                    <img class="{{ config.name }}__image" src="{{ image.externalUrlLarge }}" alt="{{ 'page.product.details.slider_image' | trans }}">
+                    {% include molecule('lazy-image') with {
+                        class: config.name ~ '__image',
+                        modifiers: ['full-height'],
+                        data: {
+                            imageSrc: image.externalUrlLarge,
+                            imageTitle: 'page.product.details.slider_image' | trans,
+                        },
+                    } only %}
                 {% endif %}
             </div>
         {% endfor %}
