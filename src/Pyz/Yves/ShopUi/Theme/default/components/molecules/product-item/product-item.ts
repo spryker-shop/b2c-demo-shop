@@ -1,6 +1,7 @@
 import ProductItemCore, { ProductItemData as ProductItemDataCore } from 'ShopUi/components/molecules/product-item/product-item';
 
 export const EVENT_UPDATE_REVIEW_COUNT = 'updateReviewCount';
+export const EVENT_UPDATE_AJAX_ADD_TO_CART_URL = 'updateAjaxAddToCartUrl';
 
 export interface ProductItemData extends ProductItemDataCore {
     reviewCount: number;
@@ -38,5 +39,18 @@ export default class ProductItem extends ProductItemCore {
         if (this.productFormAddToCart) {
             return this.productFormAddToCart.action;
         }
+    }
+
+    set ajaxAddToCartUrl(ajaxAddToCartUrl: string) {
+        if (this.productAjaxButtonAddToCart) {
+            this.productAjaxButtonAddToCart.disabled = !ajaxAddToCartUrl;
+            this.productAjaxButtonAddToCart.dataset.url = ajaxAddToCartUrl;
+        }
+
+        if (!ajaxAddToCartUrl) {
+            return;
+        }
+
+        this.dispatchCustomEvent(EVENT_UPDATE_AJAX_ADD_TO_CART_URL, {sku: ajaxAddToCartUrl.split('/').pop()});
     }
 }
