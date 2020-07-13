@@ -34,7 +34,7 @@ x-frontend-auth: &frontend-auth
         exclude:
             - '${ALLOWED_IP}' # AWS gateway
             - 185.60.20.0/24 # PayOne
-namespace: spryker-ntt # INIT_IMAGE_PREFIX 
+namespace: spryker-customer # INIT_IMAGE_PREFIX 
 tag: '1.0'
 environment: docker
 image: spryker/php:7.3-DRAFT-new-relic  # Last actual image 
@@ -54,7 +54,7 @@ regions:
     DE:
         services:
             database:
-                database: CHANGE_ME
+                database: CHANGE_ME #Example: customer_staging
                 username: spryker
                 password: secret
         stores:
