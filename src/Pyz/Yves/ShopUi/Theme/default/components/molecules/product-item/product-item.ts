@@ -41,6 +41,9 @@ export default class ProductItem extends ProductItemCore {
         }
     }
 
+    /**
+     * Todo: Remove ajaxAddToCartUrl() with integration ajaxAddToCar button
+     */
     set ajaxAddToCartUrl(ajaxAddToCartUrl: string) {
         if (this.productAjaxButtonAddToCart) {
             this.productAjaxButtonAddToCart.disabled = !ajaxAddToCartUrl;
