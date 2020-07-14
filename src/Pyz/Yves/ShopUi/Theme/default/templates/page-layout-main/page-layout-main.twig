@@ -1,4 +1,4 @@
-{% extends template('page-blank') %}
+{% extends template('page-layout-main', '@SprykerShop:ShopUi') %}
 
 {% define data = {
     activePage: ''
@@ -8,13 +8,17 @@
 
 {% block body %}
     {% block sidebar %}
-        {% include organism('side-drawer') with {
+        {% embed organism('side-drawer') with {
             class: 'is-hidden-lg-xl',
             attributes: {
                 'container-selector': 'js-page-layout-main__side-drawer-container',
                 'trigger-selector': 'js-page-layout-main__side-drawer-trigger'
             }
         } only %}
+            {% block mobileNavigation %}
+                {% cms_slot 'slt-mobile-header' %}
+            {% endblock %}
+        {% endembed %}
     {% endblock %}
 
     {% block accountSidebar %}
@@ -66,6 +70,10 @@
 
     {% block header %}
         {% embed organism('header') only %}
+            {% block mainNavigation %}
+                {% cms_slot 'slt-desktop-header' %}
+            {% endblock %}
+
             {% block mobile %}
                 <a href="#" class="link link--alt js-page-layout-main__side-drawer-trigger">
                     {% include atom('icon') with {
@@ -116,7 +124,13 @@
     {% block footer %}
         {% cms_slot 'slt-1' %}
 
-        {% include organism('footer') only %}
+        {% embed organism('footer') only %}
+            {% block footerNavigation %}
+                <div class="box">
+                    {% cms_slot 'slt-footer' %}
+                </div>
+            {% endblock %}
+        {% endembed %}
     {% endblock %}
 
     {% block icons %}
