@@ -149,7 +149,7 @@ class ShopApplicationDependencyProvider extends SprykerShopApplicationDependency
             OrderItemsProductBundleWidget::class,
             CustomerReorderItemsFormWidget::class,
             CustomerReorderFormWidget::class,
-            OrderCancelButtonWidget::class
+            OrderCancelButtonWidget::class,
         ];
     }
 
