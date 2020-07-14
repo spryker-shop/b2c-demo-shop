@@ -11,12 +11,7 @@
     } only %}
         {% block header %}
             {% block title %}
-                {% include molecule('product-slider-title') with {
-                    modifiers: ['set'],
-                    data: {
-                        title: data.name,
-                    },
-                } only %}
+                {{ parent() }}
             {% endblock %}
 
             <div class="grid grid--middle grid--justify spacing-bottom spacing-bottom--bigger">
@@ -29,36 +24,20 @@
                 {% endblock %}
 
                 <div class="col">
-                    <form method="POST" action="{{ path('cart/add-items') }}">
-                        {% set isDisabled = false %}
+                    {% set generalAddToCartButtonClass = '' %}
 
-                        {% for product in data.products %}
-                            {% if product.idProductConcrete is not empty and product.available %}
-                                <input type="hidden" name="items[{{ loop.index }}][sku]" value="{{ product.sku }}">
-                                <input type="hidden" name="items[{{ loop.index }}][quantity]" value="1">
-                            {% endif %}
-                            {% if product.idProductConcrete is empty %}
-                                {% set isDisabled = true %}
-                            {% endif %}
-                        {% endfor %}
-
-                        <button type="submit" class="button" data-init-single-click {{ isDisabled ? 'disabled' }}>
-                            {{ 'product.set.detail.add-all-to-cart' | trans }}
-                        </button>
-                    </form>
+                    {{ block('generalAddToCart') }}
                 </div>
             </div>
         {% endblock %}
 
         {% block productSet %}
-            <form method="GET">
-                {% include molecule('product-set-slider', 'ProductSetWidget') with {
-                    data: {
-                        products: data.products,
-                        sliderConfig: data.sliderConfig,
-                    },
-                } only %}
-            </form>
+            {% include molecule('product-set-slider', 'ProductSetWidget') with {
+                data: {
+                    products: data.products,
+                    sliderConfig: data.sliderConfig,
+                },
+            } only %}
         {% endblock %}
     {% endembed %}
 {% endblock %}

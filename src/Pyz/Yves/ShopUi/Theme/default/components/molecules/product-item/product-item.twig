@@ -44,12 +44,12 @@
 {% endblock %}
 
 {% block image %}
-  {% set extraClass = '' %}
-  {% set modifiers = ['no-margin'] %}
+    {% set extraClass = '' %}
+    {% set modifiers = ['no-margin'] %}
 
-  {% block productThumbnail %}
-      <a class="{{ config.name }}__overlay {{ config.jsName }}__link-detail-page" href="{{ data.url }}">
-          {{ parent() }}
-      </a>
-  {% endblock %}
+    {% block productThumbnail %}
+        <a class="{{ config.name }}__overlay {{ config.jsName }}__link-detail-page" href="{{ data.url }}">
+            {{ parent() }}
+        </a>
+    {% endblock %}
 {% endblock %}

@@ -8,7 +8,7 @@ const getCopyConfig = appSettings =>
             copyConfig.push({
                 from: assetsPath,
                 to: '.',
-                ignore: ['*.gitkeep']
+                ignore: ['*.gitkeep'],
             });
         }
         return copyConfig;
@@ -19,12 +19,12 @@ const getAssetsConfig = appSettings => [
         {
             root: appSettings.context,
             verbose: true,
-            beforeEmit: true
+            beforeEmit: true,
         }
     ),
 
     new CopyWebpackPlugin(getCopyConfig(appSettings), {
-        context: appSettings.context
+        context: appSettings.context,
     }),
 ];
 

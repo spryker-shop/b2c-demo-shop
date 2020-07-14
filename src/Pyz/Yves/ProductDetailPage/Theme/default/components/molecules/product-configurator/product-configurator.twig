@@ -90,46 +90,49 @@
         }
     } only %}
 
-    <form method="POST" action="{{ path("cart/add", {"sku": sku}) }}">
-        {% widget 'ProductOptionConfiguratorWidget' args [data.product] only %}{% endwidget %}
-        {% if not isDisabled and can('SeeAddToCartPermissionPlugin') %}
-            {% embed molecule('toggler-item') with {
-                modifiers: ['with-top-border', 'option'],
+    {% widget 'AddToCartFormWidget'  args [config, data.product, isDisabled, options] only %}
+        {% block embeddedData %}
+            {% widget 'ProductOptionConfiguratorWidget' args [data.product] only %}{% endwidget %}
+
+            {% if not data.isDisabled and can('SeeAddToCartPermissionPlugin') %}
+                {% embed molecule('toggler-item') with {
+                    modifiers: ['with-top-border', 'option'],
+                    data: {
+                        title: 'cart.item_quantity' | trans,
+                        isToggler: false,
+                    },
+                } only %}
+                    {% block contentText %}
+                        {% include molecule('quantity-counter') with {
+                            modifiers: ['quantity-large', 'no-spacing'],
+                            data: {
+                                readOnly: true,
+                            },
+                        } only %}
+                    {% endblock %}
+                {% endembed %}
+            {% else %}
+                <input type="hidden" class="js-volume-price__quantity">
+            {% endif %}
+
+            {% include molecule('availability-product', 'AvailabilityWidget') ignore missing with {
                 data: {
-                    title: 'cart.item_quantity' | trans,
-                    isToggler: false,
-                }
+                    idProductConcrete: data.product.idProductConcrete,
+                    isAvailable: data.product.available,
+                },
             } only %}
-                {% block contentText %}
-                    {% include molecule('quantity-counter') with {
-                        modifiers: ['quantity-large', 'no-spacing'],
-                        data: {
-                            readOnly: true
-                        }
-                    } only %}
-                {% endblock %}
-            {% endembed %}
-        {% else %}
-            <input type="hidden" class="js-volume-price__quantity"/>
-        {% endif %}
 
-        {% include molecule('availability-product', 'AvailabilityWidget') ignore missing with {
-            data: {
-                idProductConcrete: data.product.idProductConcrete,
-                isAvailable: data.product.available
-            }
-        } only %}
+            {% widget 'ProductDiscontinuedNoteWidget' args [data.product.sku] only %}{% endwidget %}
 
-        {% widget 'ProductDiscontinuedNoteWidget' args [data.product.sku] only %}{% endwidget %}
-
-        {% if can('SeeAddToCartPermissionPlugin') %}
-            <div class="{{ config.name }}__button-wrap">
-                <button type="submit" class="button button--large button--expand" {{ isDisabled ? 'disabled' }} {{ qa('add-to-cart-button') }} data-init-single-click>
-                    {{ 'page.detail.add-to-cart' | trans }}
-                </button>
-            </div>
-        {% endif %}
-    </form>
+            {% if can('SeeAddToCartPermissionPlugin') %}
+                <div class="{{ data.config.name }}__button-wrap">
+                    <button class="button button--large button--expand" {{ data.isDisabled ? 'disabled' }} {{ qa('add-to-cart-button') }} data-init-single-click>
+                        {{ 'page.detail.add-to-cart' | trans }}
+                    </button>
+                </div>
+            {% endif %}
+        {% endblock %}
+    {% endwidget %}
 
     {% if not isAvailable and isProductConcrete %}
         {% widget 'AvailabilityNotificationSubscriptionWidget' args [data.product] only %}{% endwidget %}

@@ -2,13 +2,14 @@ const path = require('path');
 const { Linter, Configuration } = require('tslint');
 const { globalSettings } = require('../settings');
 const colors = require('colors');
+const expectedFormatterArgument = 2;
 
 /**
  * List of output formatters for the tslint.
  * https://palantir.github.io/tslint/formatters/
  */
 const outputFormatter = () => {
-    const formatterName = process.argv.slice(2)[0];
+    const formatterName = process.argv.slice(expectedFormatterArgument)[0];
     const defaultFormatter = 'codeFrame';
     return formatterName ? formatterName : defaultFormatter;
 };

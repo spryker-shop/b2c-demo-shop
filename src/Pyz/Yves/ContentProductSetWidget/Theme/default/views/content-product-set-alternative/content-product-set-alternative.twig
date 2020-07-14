@@ -12,12 +12,7 @@
         {% block body %}
             {% block header %}
                 {% block title %}
-                    {% include molecule('product-slider-title') with {
-                        modifiers: ['set'],
-                        data: {
-                            title: data.name,
-                        },
-                    } only %}
+                    {{ parent() }}
                 {% endblock %}
 
                 {% block description %}
@@ -43,14 +38,15 @@
                             },
                             modifiers: ['product-set'],
                         } only %}
-
                             {% block slides %}
                                 {% for slide in data.slides %}
-                                    {% include atom('thumbnail') with {
-                                        modifiers: ['bigger', 'no-margin', 'product-set'],
-                                        attributes: {
-                                            itemprop: 'image',
-                                            src: slide.externalUrlLarge,
+                                    {% include molecule('lazy-image') with {
+                                        modifiers: ['thumbnail', 'spaceless', 'product-set'],
+                                        data: {
+                                            imageSrc: slide.externalUrlLarge,
+                                            extraAttributes: {
+                                                itemprop: 'image',
+                                            },
                                         },
                                     } only %}
                                 {% endfor %}
@@ -60,37 +56,21 @@
                 </div>
                 <div class="col col--sm-12 col--lg-7 product-set-slider product-set-slider--hide-prev-btn product-set-slider--multiple">
                     {% block productSet %}
-                        <form method="GET">
-                            {% include molecule('product-set-slider', 'ProductSetWidget') with {
-                                data: {
-                                    products: data.products,
-                                    sliderConfig: data.sliderConfig,
-                                },
-                            } only %}
-                        </form>
+                        {% include molecule('product-set-slider', 'ProductSetWidget') with {
+                            data: {
+                                products: data.products,
+                                sliderConfig: data.sliderConfig,
+                            },
+                        } only %}
                     {% endblock %}
                 </div>
             </div>
 
             <div class="grid grid--center">
                 <div class="col">
-                    <form class="spacing-top spacing-top--bigger" method="POST" action="{{ path('cart/add-items') }}">
-                        {% set isDisabled = false %}
+                    {% set generalAddToCartButtonClass = '' %}
 
-                        {% for product in data.products %}
-                            {% if product.idProductConcrete is not empty and product.available %}
-                                <input type="hidden" name="items[{{ loop.index }}][sku]" value="{{ product.sku }}">
-                                <input type="hidden" name="items[{{ loop.index }}][quantity]" value="1">
-                            {% endif %}
-                            {% if product.idProductConcrete is empty %}
-                                {% set isDisabled = true %}
-                            {% endif %}
-                        {% endfor %}
-
-                        <button type="submit" class="button" data-init-single-click {% if isDisabled %}disabled{% endif %}>
-                            {{ 'product.set.detail.add-all-to-cart' | trans }}
-                        </button>
-                    </form>
+                    {{ block('generalAddToCart') }}
                 </div>
             </div>
             <hr>

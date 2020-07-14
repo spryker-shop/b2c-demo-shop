@@ -18,18 +18,21 @@
 {% block body %}
     {% for item in data.items %}
         <li class="{{ config.name }}__item">
-            {% if (item.images|first).externalUrlSmall is defined %}
-                {% include atom('thumbnail') with {
-                    modifiers: ['cart-bundle', 'with-overlay'],
-                    attributes: {
-                        alt: item.name,
-                        src: (item.images|first).externalUrlSmall,
-                        title: item.name
-                    }
+            {% set imageUrl = item.images.0.externalUrlSmall ?? '' %}
+            {% set itemName = item.name %}
+
+            {% if imageUrl %}
+                {% include molecule('lazy-image') with {
+                    modifiers: ['thumbnail', 'with-overlay', 'cart-bundle'],
+                    data: {
+                        imageSrc: imageUrl,
+                        imageTitle: itemName,
+                    },
                 } only %}
             {% endif %}
+
             <p class="{{ config.name }}__title">
-                {{ item.name }}
+                {{ itemName }}
                 <span class="{{ config.name }}__quantity">{{ item.quantity }}x </span>
             </p>
         </li>
