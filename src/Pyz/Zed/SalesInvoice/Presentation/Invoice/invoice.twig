@@ -1,0 +1,215 @@
+{# @var order \Generated\Shared\Transfer\OrderTransfer #}
+{# @var invoice \Generated\Shared\Transfer\OrderInvoiceTransfer #}
+
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 " />
+    <title></title>
+
+    <style type="text/css">
+        body {
+            margin: 0;
+            padding: 0;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        table {
+            max-width: 600px;
+            margin: 0 auto;
+            border-collapse: collapse;
+        }
+        .products-table {
+            border: 1px solid #000;
+        }
+        .products-table td,
+        .products-table th {
+            padding: 5px 10px;
+        }
+        .background-gray {
+            background: #e6e6e6;
+        }
+        .text-small {
+            font-size: 13px;
+        }
+        .spacing-bottom {
+            padding-bottom: 15px;
+        }
+        .spacing-right {
+            padding-right: 15px;
+        }
+        .align-top {
+            vertical-align: top;
+        }
+        .text-left {
+            text-align: left;
+        }
+        .text-center {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<table>
+    <tr>
+        <td width="300" class="align-top">
+            <img src="data:image/png;base64,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" width="200" alt="Logo">
+        </td>
+        <td width="300">
+            <strong>{{ 'order_invoice.invoice_template.company.name' | trans }}</strong>
+            <div class="spacing-bottom text-small">{{ 'order_invoice.invoice_template.company.group' | trans }}</div>
+            <div class="spacing-bottom text-small">{{ 'order_invoice.invoice_template.company.address' | trans | raw }}</div>
+        </td>
+    </tr>
+    <tr>
+        <td width="300">
+            <div class="spacing-bottom spacing-right">
+                <strong>{{ 'order_invoice.invoice_template.merchant.name' | trans }}</strong>
+                <div class="text-small">{{ 'order_invoice.invoice_template.merchant.address' | trans }}</div>
+            </div>
+            <div class="spacing-bottom">
+                {{ order.billingAddress.firstName }} {{ order.billingAddress.lastName }}<br>
+                {{ order.billingAddress.address1 }} {{ order.billingAddress.address2 }} {{ order.billingAddress.address3 }}<br>
+                {{ order.billingAddress.zipcode }} {{ order.billingAddress.city }}<br>
+                {{ order.billingAddress.region }}
+            </div>
+        </td>
+        <td width="300" class="align-top">
+            <div class="spacing-bottom">{{ invoice.issueDate | date('d. M Y') }}</div>
+        </td>
+    </tr>
+</table>
+
+<table>
+    <tr>
+        <td width="600">
+            <div class="spacing-bottom">
+                <strong>{{ 'order_invoice.invoice_template.reference' | trans }} {{ invoice.reference }}</strong>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td width="600">
+            <div class="spacing-bottom">{{ 'order_invoice.invoice_template.introduction' | trans }}</div>
+        </td>
+    </tr>
+</table>
+
+<table class="products-table">
+    <thead>
+    <tr class="background-gray">
+        <th width="75"><strong>{{ 'order_invoice.invoice_template.table.number' | trans }}</strong></th>
+        <th width="75"><strong>{{ 'order_invoice.invoice_template.table.quantity' | trans }}</strong></th>
+        <th width="275" class="text-left"><strong>{{ 'order_invoice.invoice_template.table.name' | trans }}</strong></th>
+        <th width="100"><strong>{{ 'order_invoice.invoice_template.table.tax' | trans }}</strong></th>
+        <th width="75"><strong>{{ 'order_invoice.invoice_template.table.price' | trans | raw }}</strong></th>
+    </tr>
+    </thead>
+    <tbody>
+    {% set linenumber = 0 %}
+    {% set renderedBundles = [] %}
+    {% set taxes = {} %}
+    {% set itemSumByTaxes = {} %}
+
+    {% for item in order.items %}
+        {# @var item \Generated\Shared\Transfer\ItemTransfer #}
+
+        {% set taxRate = item.taxRate %}
+        {% set rateSum = taxes[item.taxRate] | default(0) + item.sumTaxAmountFullAggregation %}
+        {% set taxes = taxes | merge({ (taxRate): rateSum }) %}
+        {% set rateItemSum = itemSumByTaxes[taxRate] | default(0) + item.sumPriceToPayAggregation %}
+        {% set itemSumByTaxes = itemSumByTaxes | merge({ (taxRate): rateItemSum }) %}
+
+        {% if item.productBundle is not defined or item.productBundle is null %}
+            {% set linenumber = linenumber + 1 %}
+
+            <tr>
+                <td class="text-center">{{ linenumber }}</td>
+                <td class="text-center">{{ item.quantity }}</td>
+                <td>{{ item.name }}</td>
+                <td class="text-center">{{ item.taxRate | number_format }}%</td>
+                <td class="text-center">{{ item.sumPriceToPayAggregation | money(true, order.currencyIsoCode) }}</td>
+            </tr>
+        {% endif %}
+
+        {% if item.productBundle is defined and item.productBundle is not null %}
+            {% if item.relatedBundleItemIdentifier not in renderedBundles %}
+                {# @var productBundle \Generated\Shared\Transfer\ItemTransfer #}
+
+                {% set linenumber = linenumber + 1 %}
+
+                {% set productBundle = item.productBundle %}
+
+                <tr>
+                    <td class="text-center">{{ linenumber }}</td>
+                    <td class="text-center">{{ productBundle.quantity }}</td>
+                    <td>{{ productBundle.name }}</td>
+                    <td class="text-center">{{ productBundle.taxRate | number_format }}%</td>
+                    <td class="text-center">{{ productBundle.sumPriceToPayAggregation | money(true, order.currencyIsoCode) }}</td>
+                </tr>
+
+                {% for bundleditem in order.items %}
+                    {% if item.relatedBundleItemIdentifier == bundleditem.relatedBundleItemIdentifier %}
+                        <tr>
+                            <td></td>
+                            <td class="text-center">{{ bundleditem.quantity }}</td>
+                            <td>{{ bundleditem.name }}</td>
+                            <td class="text-center">{{ bundleditem.taxRate | number_format }}%</td>
+                            <td class="text-center">{{ bundleditem.sumPriceToPayAggregation | money(true, order.currencyIsoCode) }}</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+
+                {% set renderedBundles = renderedBundles | merge([item.relatedBundleItemIdentifier]) %}
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+
+    {% for expense in order.expenses %}
+        {% set linenumber = linenumber + 1 %}
+        {% set taxRate = expense.taxRate %}
+        {% set rateSum = taxes[expense.taxRate] | default(0) + expense.sumTaxAmount %}
+        {% set taxes = taxes | merge({ (taxRate): rateSum }) %}
+        {% set rateItemSum = itemSumByTaxes[taxRate] | default(0) + expense.sumPriceToPayAggregation %}
+        {% set itemSumByTaxes = itemSumByTaxes | merge({ (taxRate): rateItemSum }) %}
+
+        <tr>
+            <td class="text-center">{{ linenumber }}</td>
+            <td></td>
+            <td>{{ expense.name }}</td>
+            <td class="text-center">{{ expense.taxRate | number_format }}%</td>
+            <td class="text-center">{{ expense.sumPrice | money(true, order.currencyIsoCode) }}</td>
+        </tr>
+    {% endfor %}
+
+    <tr class="background-gray">
+        <td colspan="3"></td>
+        <td>{{ 'order_invoice.invoice_template.table.subtotal' | trans }}</td>
+        <td class="text-center">{{ order.totals.subtotal | money(true, order.currencyIsoCode) }}</td>
+    </tr>
+    <tr class="background-gray">
+        <td colspan="3"></td>
+        <td>{{ 'order_invoice.invoice_template.table.discount' | trans }}</td>
+        <td class="text-center">{{ order.totals.discountTotal | money(true, order.currencyIsoCode) }}</td>
+    </tr>
+
+    {% for rate, tax in taxes %}
+        <tr>
+            <td colspan="2">{{ 'order_invoice.invoice_template.table.tax.included' | trans({ '%tax_rate%': rate | number_format }) }}</td>
+            <td class="text-center">{{ (itemSumByTaxes[rate] - tax) | money(true, order.currencyIsoCode) }}</td>
+            <td class="text-center">{{ 'order_invoice.invoice_template.table.tax.name' | trans }}</td>
+            <td class="text-center">{{ tax | money(true, order.currencyIsoCode) }}</td>
+        </tr>
+    {% endfor %}
+
+    <tr class="background-gray">
+        <td colspan="3"></td>
+        <td><strong>{{ 'order_invoice.invoice_template.table.grandtotal' | trans }}</strong></td>
+        <td class="text-center">{{ order.totals.grandTotal | money(true, order.currencyIsoCode) }}</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

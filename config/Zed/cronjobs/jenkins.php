@@ -146,3 +146,11 @@ $jobs[] = [
     'enable' => true,
     'stores' => $allStores,
 ];
+
+$jobs[] = [
+    'name' => 'order-invoice-send',
+    'command' => '$PHP_BIN vendor/bin/console order:invoice:send',
+    'schedule' => '*/5 * * * *',
+    'enable' => true,
+    'stores' => $allStores,
+];
