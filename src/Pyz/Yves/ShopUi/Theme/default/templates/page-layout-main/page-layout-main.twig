@@ -16,7 +16,9 @@
             }
         } only %}
             {% block mobileNavigation %}
-                {% cms_slot 'slt-mobile-header' %}
+                <div class="{{ config.name }}__navigation">
+                    {% cms_slot 'slt-mobile-header' %}
+                </div>
             {% endblock %}
         {% endembed %}
     {% endblock %}

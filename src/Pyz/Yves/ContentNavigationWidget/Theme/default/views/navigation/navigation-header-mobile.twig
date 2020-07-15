@@ -5,11 +5,11 @@
 } %}
 
 {% block body %}
-    {% include molecule('navigation-header-mobile', 'NavigationWidget') with {
+    {% include molecule('navigation-header-mobile', 'ContentNavigationWidget') with {
         data: {
             nodes: data.navigation.nodes,
             menuInline: false,
-            menuDropdown: true
-        }
+            menuDropdown: true,
+        },
     } only %}
 {% endblock %}

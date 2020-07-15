@@ -1,0 +1,30 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'navigation-header-mobile',
+    tag: 'ul',
+} %}
+
+{% define data = {
+    nodes: [],
+} %}
+
+{% block body %}
+    {% for node in data.nodes %}
+        {% include molecule('navigation-multilevel-node') with {
+            modifiers: ['side-drawer'],
+            data: {
+                node: node,
+                itemId: loop.index,
+            },
+        } only %}
+    {% endfor %}
+
+    {% include molecule('toggler-accordion') with {
+        attributes: {
+            'trigger-class-name': 'js-navigation-multilevel-node__trigger',
+            'class-to-toggle': 'navigation-multilevel-node__menu--hidden',
+            'active-class': 'navigation-multilevel-node__icon--active',
+        },
+    } only %}
+{% endblock %}
