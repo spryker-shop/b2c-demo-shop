@@ -52,6 +52,22 @@ sections:
         rest-api-generate-documentation:
             command: "vendor/bin/console rest-api:generate:documentation"
 
+    build-static:
+        dependencies-install:
+            command: "vendor/bin/console frontend:project:install-dependencies"
+
+        yves-install-dependencies:
+            command: "vendor/bin/console frontend:yves:install-dependencies"
+
+        yves-build-frontend:
+            command: "vendor/bin/console frontend:yves:build"
+
+        zed-install-dependencies:
+            command: "vendor/bin/console frontend:zed:install-dependencies"
+
+        zed-build-frontend:
+            command: "vendor/bin/console frontend:zed:build"
+
     scheduler-setup:
         jenkins-generate:
             command: "vendor/bin/console scheduler:setup"
