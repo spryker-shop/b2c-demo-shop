@@ -109,6 +109,7 @@ class ShopApplicationDependencyProvider extends SprykerShopApplicationDependency
             CustomerReorderItemCheckboxWidget::class,
             DisplayProductAbstractReviewWidget::class,
             LanguageSwitcherWidget::class,
+            NavigationWidget::class,
             NewsletterSubscriptionSummaryWidget::class,
             PdpProductRelationWidget::class,
             PdpProductReplacementForListWidget::class,

@@ -113,7 +113,7 @@
     {% if data.showNavigation %}
         <div class="{{ config.name }}__row {{ config.name }}__navigation-main is-hidden-sm-md">
             {% block mainNavigation %}
-                {{ content_navigation('navigation-main-desktop', 'tree-inline') }}
+                {% widget 'NavigationWidget' args ['MAIN_NAVIGATION_DESKTOP', 'navigation-header'] %}{% endwidget %}
             {% endblock %}
         </div>
     {% endif %}
