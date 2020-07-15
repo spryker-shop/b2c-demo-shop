@@ -128,7 +128,9 @@
 
         {% embed organism('footer') only %}
             {% block footerNavigation %}
-                {% cms_slot 'slt-footer' %}
+                <div class="{{ config.name }}__navigation navigation-footer">
+                    {% cms_slot 'slt-footer' %}
+                </div>
             {% endblock %}
         {% endembed %}
     {% endblock %}
