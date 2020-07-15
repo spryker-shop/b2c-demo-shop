@@ -139,7 +139,7 @@ class CmsGuiPresentationTester extends Actor
      */
     public function clickPublishButton()
     {
-        $this->click('//*[@id="page-wrapper"]/div[2]/div[2]/div/a[1]');
+        $this->click('//*[@id="page-wrapper"]/div[2]/div[2]/div/form/button');
 
         return $this;
     }
