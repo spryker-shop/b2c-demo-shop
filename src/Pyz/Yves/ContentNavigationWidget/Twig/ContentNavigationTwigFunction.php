@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * This file is part of the Spryker Commerce OS.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
+ */
+
 namespace Pyz\Yves\ContentBannerWidget\Twig;
 
 use SprykerShop\Yves\ContentNavigationWidget\Twig\ContentNavigationTwigFunction as SprykerShopContentNavigationTwigFunction;
@@ -7,14 +12,19 @@ use SprykerShop\Yves\ContentNavigationWidget\Twig\ContentNavigationTwigFunction 
 class ContentNavigationTwigFunction extends SprykerShopContentNavigationTwigFunction
 {
     /**
-     * @uses \Pyz\Shared\ContentNavigation\ContentNavigationConfig::WIDGET_TEMPLATE_IDENTIFIER_LIST
+     * @uses \Pyz\Shared\ContentNavigation\ContentNavigationConfig::WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_HEADER
      */
-    protected const WIDGET_TEMPLATE_IDENTIFIER_LIST_FOOTER_SIMPLE = 'list-footer-simple';
+    protected const WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_HEADER = 'navigation-header';
 
     /**
-     * @uses \Pyz\Shared\ContentNavigation\ContentNavigationConfig::WIDGET_TEMPLATE_IDENTIFIER_LIST_FOOTER_ICON
+     * @uses \Pyz\Shared\ContentNavigation\ContentNavigationConfig::WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_HEADER_MOBILE
      */
-    public const WIDGET_TEMPLATE_IDENTIFIER_LIST_FOOTER_ICON = 'list-footer-icon';
+    protected const WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_HEADER_MOBILE = 'navigation-header-mobile';
+
+    /**
+     * @uses \Pyz\Shared\ContentNavigation\ContentNavigationConfig::WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_FOOTER
+     */
+    protected const WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_FOOTER = 'navigation-footer';
 
     /**
      * @param string $templateIdentifier
@@ -28,8 +38,9 @@ class ContentNavigationTwigFunction extends SprykerShopContentNavigationTwigFunc
             static::WIDGET_TEMPLATE_IDENTIFIER_TREE => '@ContentNavigationWidget/views/navigation/tree.twig',
             static::WIDGET_TEMPLATE_IDENTIFIER_LIST_INLINE => '@ContentNavigationWidget/views/navigation/list-inline.twig',
             static::WIDGET_TEMPLATE_IDENTIFIER_LIST => '@ContentNavigationWidget/views/navigation/list.twig',
-            static::WIDGET_TEMPLATE_IDENTIFIER_LIST_FOOTER_SIMPLE => '@ContentNavigationWidget/views/navigation/list-footer-simple.twig',
-            static::WIDGET_TEMPLATE_IDENTIFIER_LIST_FOOTER_ICON => '@ContentNavigationWidget/views/navigation/list-footer-icon.twig',
+            static::WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_HEADER => '@ContentNavigationWidget/views/navigation/navigation-header.twig',
+            static::WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_HEADER_MOBILE => '@ContentNavigationWidget/views/navigation/navigation-header-mobile.twig',
+            static::WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_FOOTER => '@ContentNavigationWidget/views/navigation/navigation-footer.twig',
         ];
 
         return $availableTemplates[$templateIdentifier] ?? null;

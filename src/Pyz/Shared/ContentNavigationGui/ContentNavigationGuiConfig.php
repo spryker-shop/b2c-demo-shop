@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * This file is part of the Spryker Commerce OS.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
+ */
+
 namespace Pyz\Shared\ContentNavigationGui;
 
 use Spryker\Shared\ContentNavigationGui\ContentNavigationGuiConfig as SprykerContentNavigationGuiConfig;
@@ -7,28 +12,40 @@ use Spryker\Shared\ContentNavigationGui\ContentNavigationGuiConfig as SprykerCon
 class ContentNavigationGuiConfig extends SprykerContentNavigationGuiConfig
 {
     /**
-     * Content item navigation list footer simple template name.
-     */
-    public const WIDGET_TEMPLATE_DISPLAY_NAME_LIST_FOOTER_SIMPLE = 'Footer Simple List';
-
-    /**
-     * @uses \Pyz\Shared\ContentNavigation\ContentNavigationConfig::WIDGET_TEMPLATE_IDENTIFIER_LIST_FOOTER_SIMPLE
+     * @uses \Pyz\Shared\ContentNavigation\ContentNavigationConfig::WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_HEADER
      *
-     * Content item navigation list footer simple template identifier.
+     * Content item navigation header template identifier.
      */
-    public const WIDGET_TEMPLATE_IDENTIFIER_LIST_FOOTER_SIMPLE = 'list-footer-simple';
+    protected const WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_HEADER = 'navigation-header';
 
     /**
-     * Content item navigation list footer icon template name.
-     */
-    public const WIDGET_TEMPLATE_DISPLAY_NAME_LIST_FOOTER_ICON = 'Footer Icon List';
-
-    /**
-     * @uses \Pyz\Shared\ContentNavigation\ContentNavigationConfig::WIDGET_TEMPLATE_IDENTIFIER_LIST_FOOTER_ICON
+     * @uses \Pyz\Shared\ContentNavigation\ContentNavigationConfig::WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_HEADER_MOBILE
      *
-     * Content item navigation list footer icon template identifier.
+     * Content item navigation header mobile template identifier.
      */
-    public const WIDGET_TEMPLATE_IDENTIFIER_LIST_FOOTER_ICON = 'list-footer-icon';
+    protected const WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_HEADER_MOBILE = 'navigation-header-mobile';
+
+    /**
+     * @uses \Pyz\Shared\ContentNavigation\ContentNavigationConfig::WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_FOOTER
+     *
+     * Content item navigation footer template identifier.
+     */
+    protected const WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_FOOTER = 'navigation-footer';
+
+    /**
+     * Content item navigation header template name.
+     */
+    protected const WIDGET_TEMPLATE_DISPLAY_NAME_LIST_NAVIGATION_HEADER = 'Navigation Header';
+
+    /**
+     * Content item navigation header mobile template name.
+     */
+    protected const WIDGET_TEMPLATE_DISPLAY_NAME_LIST_NAVIGATION_HEADER_MOBILE = 'Navigation Header Mobile';
+
+    /**
+     * Content item navigation footer template name.
+     */
+    protected const WIDGET_TEMPLATE_DISPLAY_NAME_LIST_NAVIGATION_FOOTER = 'Navigation Footer';
 
     /**
      * @api
@@ -39,8 +56,9 @@ class ContentNavigationGuiConfig extends SprykerContentNavigationGuiConfig
     {
         $contentWidgetTemplates = parent::getContentWidgetTemplates();
         $contentWidgetTemplates += [
-            static::WIDGET_TEMPLATE_IDENTIFIER_LIST_FOOTER_SIMPLE => static::WIDGET_TEMPLATE_DISPLAY_NAME_LIST_FOOTER_SIMPLE,
-            static::WIDGET_TEMPLATE_IDENTIFIER_LIST_FOOTER_ICON => static::WIDGET_TEMPLATE_DISPLAY_NAME_LIST_FOOTER_ICON,
+            static::WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_HEADER => static::WIDGET_TEMPLATE_DISPLAY_NAME_LIST_NAVIGATION_HEADER,
+            static::WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_HEADER_MOBILE => static::WIDGET_TEMPLATE_DISPLAY_NAME_LIST_NAVIGATION_HEADER_MOBILE,
+            static::WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_FOOTER => static::WIDGET_TEMPLATE_DISPLAY_NAME_LIST_NAVIGATION_FOOTER,
         ];
 
         return $contentWidgetTemplates;
