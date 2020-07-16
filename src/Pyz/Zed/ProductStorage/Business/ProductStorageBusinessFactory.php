@@ -29,7 +29,8 @@ class ProductStorageBusinessFactory extends SprykerProductStorageBusinessFactory
             $this->createAttributeMap(),
             $this->getQueryContainer(),
             $this->getStoreFacade(),
-            $this->getConfig()->isSendingToQueue()
+            $this->getConfig()->isSendingToQueue(),
+            $this->getProductAbstractStorageExpanderPlugins()
         );
     }
 

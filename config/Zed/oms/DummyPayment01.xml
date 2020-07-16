@@ -9,6 +9,7 @@
             <process>DummyRefund</process>
             <process>DummyReturn</process>
             <process>CreateGiftCard</process>
+            <process>DummyInvoice</process>
         </subprocesses>
 
         <states>
@@ -132,7 +133,7 @@
 
         <events>
             <event name="authorize" onEnter="true"/>
-            <event name="pay" manual="true" timeout="1 hour" command="DummyPayment/Pay"/>
+            <event name="pay" manual="true" timeout="1 hour" timeoutProcessor="OmsTimeout/Initiation" command="DummyPayment/Pay"/>
             <event name="confirm" onEnter="true" manual="true" command="Oms/SendOrderConfirmation"/>
             <event name="skip timeout" manual="true" timeout="30 minute"/>
             <event name="cancel" manual="true"/>
@@ -146,5 +147,6 @@
     <process name="DummyRefund" file="DummySubprocess/DummyRefund01.xml"/>
     <process name="DummyReturn" file="DummySubprocess/DummyReturn01.xml"/>
     <process name="CreateGiftCard" file="GiftCardSubprocess/CreateGiftCard01.xml"/>
+    <process name="DummyInvoice" file="DummySubprocess/DummyInvoice01.xml"/>
 
 </statemachine>
