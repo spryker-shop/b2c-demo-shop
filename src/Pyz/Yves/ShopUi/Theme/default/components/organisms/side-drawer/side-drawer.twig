@@ -11,11 +11,10 @@
 } %}
 
 {% block body %}
-    <div class="{{config.name}}__overlay {{attributes['trigger-selector']}}"></div>
+    <div class="{{ config.name }}__overlay {{ attributes['trigger-selector'] }}"></div>
 
     <aside class="{{ component.renderClass(config.name ~ '__drawer', modifiers) }}">
-
-        <div class="{{config.name}}__top-bar grid grid--justify">
+        <div class="{{ config.name }}__top-bar grid grid--justify">
             {% block topBar %}
                 <div class="col grid">
                     <div class="col">
@@ -44,13 +43,14 @@
                     </div>
                 </div>
             {% endblock %}
+
             {% block close %}
-                <button class="col link {{ config.name }}__close {{attributes['trigger-selector']}}">
+                <button class="col link {{ config.name }}__close {{ attributes['trigger-selector'] }}">
                     {% include atom('icon') with {
                         modifiers: ['medium-up'],
                         data: {
-                            name: 'close'
-                        }
+                            name: 'close',
+                        },
                     } only %}
                 </button>
             {% endblock %}
@@ -58,17 +58,16 @@
 
         {% block content %}
             {% block mobileNavigation %}
-                <div class="{{config.name}}__navigation">
+                <div class="{{ config.name }}__navigation">
                     {% widget 'NavigationWidget' args ['MAIN_NAVIGATION', 'navigation-header-mobile'] %}{% endwidget %}
                 </div>
             {% endblock %}
         {% endblock %}
 
         {% block bottomBar %}
-            <div class="{{config.name}}__bottom-bar">
+            <div class="{{ config.name }}__bottom-bar">
                 <a href="{{ url('logout') }}" class="button button--hollow button--expand">{{ 'customer.logout' | trans }}</a>
             </div>
         {% endblock %}
-
     </aside>
 {% endblock %}

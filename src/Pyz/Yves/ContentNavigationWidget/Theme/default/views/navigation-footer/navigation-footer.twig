@@ -9,19 +9,21 @@
     {% set title = '' %}
 
     {% for node in data.navigation.nodes %}
-        {% if node.nodeType == 'category' %}
+        {% set nodeType = node.nodeType %}
+
+        {% if nodeType == 'category' %}
             {% set title = 'navigation.menu.categories' | trans %}
         {% endif %}
 
-        {% if node.nodeType == 'cms_page' %}
+        {% if nodeType == 'cms_page' %}
             {% set title = 'global.company' | trans %}
         {% endif %}
 
-        {% if node.nodeType == 'external_url' %}
+        {% if nodeType == 'external_url' %}
             {% set title = 'global.social' | trans %}
         {% endif %}
 
-        {% if node.nodeType == 'label' %}
+        {% if nodeType == 'label' %}
             {% set hasIcons = true %}
             {% set title = 'global.partners' | trans %}
         {% endif %}
@@ -39,7 +41,6 @@
             title: title,
             triggerClass: triggerClass,
             targetClass: targetClass,
-            isTogglerIncluded: true,
             hiddenClass: itemContentHiddenClass,
         },
         embed: {

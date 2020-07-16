@@ -19,11 +19,11 @@
                     title: 'global.newsletter' | trans,
                     triggerClass: config.jsName ~ '__trigger-subscription',
                     targetClass: config.jsName ~ '__target-subscription',
-                    hiddenClass: 'is-hidden-sm-only'
+                    hiddenClass: 'is-hidden-sm-only',
                 },
                 embed: {
-                   footerName : config.name
-                }
+                   footerName : config.name,
+                },
             } only %}
                 {% block contentText %}
                     <span class="{{ embed.footerName }}__subscription-text">
@@ -34,6 +34,7 @@
                     </div>
                 {% endblock %}
             {% endembed %}
+
             {% block footerNavigation %}
                 {% include molecule('navigation-footer') with {
                     class: config.name ~ '__navigation',
