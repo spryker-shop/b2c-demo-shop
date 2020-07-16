@@ -128,9 +128,14 @@
 
         {% embed organism('footer') only %}
             {% block footerNavigation %}
-                <div class="{{ config.name }}__navigation navigation-footer navigation-footer--content-item">
-                    {% cms_slot 'slt-footer' %}
-                </div>
+                {% embed molecule('navigation-footer') with {
+                    class: config.name ~ '__navigation',
+                    modifiers: ['content-item'],
+                } only %}
+                    {% block body %}
+                        {% cms_slot 'slt-footer' %}
+                    {% endblock %}
+                {% endembed %}
             {% endblock %}
         {% endembed %}
     {% endblock %}
