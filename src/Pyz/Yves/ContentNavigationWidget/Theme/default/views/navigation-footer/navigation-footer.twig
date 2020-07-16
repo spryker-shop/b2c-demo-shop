@@ -27,36 +27,49 @@
         {% endif %}
     {% endfor %}
 
-    {% if not hasIcons %}
-        {% embed molecule('toggler-item') with {
-            modifiers: ['mobile'],
-            class: 'navigation-footer__col',
-            data: {
-                title: title,
-                triggerClass: 'js-navigation-footer__trigger',
-                targetClass: 'js-navigation-footer__target--' ~ title | lower | replace(' ', '-'),
-                isTogglerIncluded: true,
-                hiddenClass: 'is-hidden-sm-only',
-            },
-            embed: {
-                nodes: data.navigation.nodes,
-            },
-        } only %}
-            {% block contentText %}
+    {% set triggerClass = 'js-navigation-footer__trigger--' ~ title | lower | replace(' ', '-') %}
+    {% set targetClass = 'js-navigation-footer__target--' ~ title | lower | replace(' ', '-') %}
+    {% set itemClass = 'navigation-footer__col' %}
+    {% set itemContentHiddenClass = 'is-hidden-sm-only' %}
+
+    {% embed molecule('toggler-item') with {
+        modifiers: ['mobile'],
+        class: itemClass,
+        data: {
+            title: title,
+            triggerClass: triggerClass,
+            targetClass: targetClass,
+            isTogglerIncluded: true,
+            hiddenClass: itemContentHiddenClass,
+        },
+        embed: {
+            nodes: data.navigation.nodes,
+            hasIcons: hasIcons,
+        },
+    } only %}
+        {% block contentText %}
+            {% if not embed.hasIcons %}
                 {% include molecule('navigation-list') with {
+                    modifiers: ['footer'],
                     data: {
                         nodes: embed.nodes,
                     },
                 } only %}
-            {% endblock %}
-        {% endembed %}
-    {% endif %}
+            {% endif %}
 
-    {% if hasIcons %}
-        {% include molecule('navigation-icon-list') with {
-            data: {
-                nodes: data.navigation.nodes,
-            },
-        } only %}
-    {% endif %}
+            {% if embed.hasIcons %}
+                {% embed molecule('navigation-icon-list') with {
+                    data: {
+                        nodes: embed.nodes,
+                    },
+                } only %}
+                    {% block body %}
+                        {% set menuClass = 'menu' %}
+
+                        {{ parent() }}
+                    {% endblock %}
+                {% endembed %}
+            {% endif %}
+        {% endblock %}
+    {% endembed %}
 {% endblock %}
