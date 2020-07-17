@@ -44,9 +44,15 @@ class DataImportConfig extends SprykerDataImportConfig
     public const IMPORT_TYPE_TAX = 'tax';
     public const IMPORT_TYPE_CURRENCY = 'currency';
     public const IMPORT_TYPE_STORE = 'store';
-
     public const IMPORT_TYPE_ABSTRACT_GIFT_CARD_CONFIGURATION = 'gift-card-abstract-configuration';
     public const IMPORT_TYPE_CONCRETE_GIFT_CARD_CONFIGURATION = 'gift-card-concrete-configuration';
+    public const IMPORT_TYPE_COMBINED_PRODUCT_ABSTRACT = 'combined-product-abstract';
+    public const IMPORT_TYPE_COMBINED_PRODUCT_ABSTRACT_STORE = 'combined-product-abstract-store';
+    public const IMPORT_TYPE_COMBINED_PRODUCT_CONCRETE = 'combined-product-concrete';
+    public const IMPORT_TYPE_COMBINED_PRODUCT_IMAGE = 'combined-product-image';
+    public const IMPORT_TYPE_COMBINED_PRODUCT_PRICE = 'combined-product-price';
+    public const IMPORT_TYPE_COMBINED_PRODUCT_STOCK = 'combined-product-stock';
+    public const IMPORT_TYPE_COMBINED_PRODUCT_GROUP = 'combined-product-group';
 
     /**
      * @return string|null

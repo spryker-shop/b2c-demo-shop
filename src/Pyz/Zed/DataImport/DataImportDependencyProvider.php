@@ -54,6 +54,10 @@ class DataImportDependencyProvider extends SprykerDataImportDependencyProvider
     public const FACADE_PRODUCT_BUNDLE = 'product bundle facade';
     public const FACADE_PRODUCT_RELATION = 'product relation facade';
     public const FACADE_PRODUCT_SEARCH = 'product search facade';
+    public const FACADE_CURRENCY = 'FACADE_CURRENCY';
+    public const FACADE_PRICE_PRODUCT = 'FACADE_PRICE_PRODUCT';
+    public const FACADE_STOCK = 'FACADE_STOCK';
+    public const FACADE_STORE = 'FACADE_STORE';
 
     /**
      * @param \Spryker\Zed\Kernel\Container $container
@@ -69,6 +73,10 @@ class DataImportDependencyProvider extends SprykerDataImportDependencyProvider
         $container = $this->addProductBundleFacade($container);
         $container = $this->addProductRelationFacade($container);
         $container = $this->addProductSearchFacade($container);
+        $container = $this->addCurrencyFacade($container);
+        $container = $this->addPriceProductFacade($container);
+        $container = $this->addStockFacade($container);
+        $container = $this->addStoreFacade($container);
 
         return $container;
     }
@@ -139,6 +147,62 @@ class DataImportDependencyProvider extends SprykerDataImportDependencyProvider
         $container[static::FACADE_PRODUCT_RELATION] = function (Container $container) {
             return $container->getLocator()->productRelation()->facade();
         };
+
+        return $container;
+    }
+
+    /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Zed\Kernel\Container
+     */
+    protected function addCurrencyFacade(Container $container): Container
+    {
+        $container->set(static::FACADE_CURRENCY, function (Container $container) {
+            return $container->getLocator()->currency()->facade();
+        });
+
+        return $container;
+    }
+
+    /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Zed\Kernel\Container
+     */
+    protected function addPriceProductFacade(Container $container): Container
+    {
+        $container->set(static::FACADE_PRICE_PRODUCT, function (Container $container) {
+            return $container->getLocator()->priceProduct()->facade();
+        });
+
+        return $container;
+    }
+
+    /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Zed\Kernel\Container
+     */
+    protected function addStockFacade(Container $container): Container
+    {
+        $container->set(static::FACADE_STOCK, function (Container $container) {
+            return $container->getLocator()->stock()->facade();
+        });
+
+        return $container;
+    }
+
+    /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Zed\Kernel\Container
+     */
+    protected function addStoreFacade(Container $container): Container
+    {
+        $container->set(static::FACADE_STORE, function (Container $container) {
+            return $container->getLocator()->store()->facade();
+        });
 
         return $container;
     }
