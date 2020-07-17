@@ -55,6 +55,10 @@ sales-order-threshold.hard-minimum-threshold.de.eur.message,"You should add item
 sales-order-threshold.hard-minimum-threshold.de.eur.message,"Du sollst Waren im Wert von {{threshold}} dem Warenkorb hinzufügen, um die empfohlene Schwelle zu erreichen. Du kannst nicht mit der Bestellung fortfahren",de_DE
 sales-order-threshold.hard-minimum-threshold.de.chf.message,"You should add items for {{threshold}} to pass a recommended threshold. You can't proceed with checkout",en_US
 sales-order-threshold.hard-minimum-threshold.de.chf.message,"Du sollst Waren im Wert von {{threshold}} dem Warenkorb hinzufügen, um die empfohlene Schwelle zu erreichen. Du kannst nicht mit der Bestellung fortfahren",de_DE
+sales-order-threshold.hard-maximum-threshold.de.eur.message,The cart value cannot be higher than {{threshold}}. Please remove some items to proceed with the order,en_US
+sales-order-threshold.hard-maximum-threshold.de.eur.message,"Der Warenkorbwert darf nicht höher als {{threshold}} sein. Bitte entfernen Sie einige Artikel, um mit der Bestellung fortzufahren",de_DE
+sales-order-threshold.hard-maximum-threshold.de.chf.message,The cart value cannot be higher than {{threshold}}. Please remove some items to proceed with the order,en_US
+sales-order-threshold.hard-maximum-threshold.de.chf.message,"Der Warenkorbwert darf nicht höher als {{threshold}} sein. Bitte entfernen Sie einige Artikel, um mit der Bestellung fortzufahren",de_DE
 sales-order-threshold.soft-minimum-threshold.de.eur.message,"You need to add items for {{threshold}} to pass a recommended threshold, but if you want can proceed to checkout.",en_US
 sales-order-threshold.soft-minimum-threshold.de.eur.message,"Du sollst Waren im Wert von {{threshold}} dem Warenkorb hinzufügen, um die empfohlene Schwelle zu erreichen. Du kannst trotzdem weiter zur Kasse.",de_DE
 sales-order-threshold.soft-minimum-threshold.de.chf.message,"You need to add items for {{threshold}} to pass a recommended threshold, but if you want can proceed to checkout.",en_US
@@ -1059,6 +1063,8 @@ mail.company.status.text,"Your company has changed status to: ",en_US
 mail.company.status.text,"Deine Firma hat den Status geändert zu: ",de_DE
 mail.company.status.approved,"Approved ",en_US
 mail.company.status.approved,"Bestätigt",de_DE
+mail.company.status.pending,Waiting for Approval,en_US
+mail.company.status.pending,Warten auf die Bestätigung,de_DE
 mail.company.status.denied,"Denied",en_US
 mail.company.status.denied,"Abgelehnt",de_DE
 mail.customer.registration.subject,Vielen Dank für deine Anmeldung bei Spryker Shop!,de_DE
@@ -1145,6 +1151,8 @@ mail.order.shipped.footer.text_line_1,Viele Grüße,de_DE
 mail.order.shipped.footer.text_line_1,Have a great day!,en_US
 mail.order.shipped.footer.text_line_2,Dein Spryker Shop,de_DE
 mail.order.shipped.footer.text_line_2,Your Spryker Shop,en_US
+mail.order_invoice.subject,"Invoice: %invoiceReference%",en_US
+mail.order_invoice.subject,"Rechnung: %invoiceReference%",de_DE
 cart.item.remove.confirm,Are you sure that you want to remove this item?,en_US
 cart.item.remove.confirm,"Bist du sicher, dass du diesen Artikel entfernen möchtest?",de_DE
 cart.voucher.remove,Remove,en_US
@@ -2492,6 +2500,40 @@ return_page.return_reasons.empty,—,en_US
 return_page.return_reasons.empty,—,de_DE
 return.return_policy.returnable_till.message,Returnable till: %date%,en_US
 return.return_policy.returnable_till.message,Retournierbar bis: %date%,de_DE
+order_invoice.invoice_template.table.number,Pos.,en_US
+order_invoice.invoice_template.table.number,Pos.,de_DE
+order_invoice.invoice_template.table.quantity,Quantity,en_US
+order_invoice.invoice_template.table.quantity,Menge,de_DE
+order_invoice.invoice_template.table.name,Item,en_US
+order_invoice.invoice_template.table.name,Artikelbezeihnung,de_DE
+order_invoice.invoice_template.table.tax,Tax rate,en_US
+order_invoice.invoice_template.table.tax,Steuersatz,de_DE
+order_invoice.invoice_template.table.price,Price,en_US
+order_invoice.invoice_template.table.price,Preis,de_DE
+order_invoice.invoice_template.table.subtotal,Subtotal,en_US
+order_invoice.invoice_template.table.subtotal,Zwischensumme,de_DE
+order_invoice.invoice_template.table.discount,Discount,en_US
+order_invoice.invoice_template.table.discount,Rabatt,de_DE
+order_invoice.invoice_template.table.tax.included,this includes %tax_rate%% VAT net,en_US
+order_invoice.invoice_template.table.tax.included,darin enthalten %tax_rate%% MwSt. Netto,de_DE
+order_invoice.invoice_template.table.tax.name,VAT,en_US
+order_invoice.invoice_template.table.tax.name,MwSt.,de_DE
+order_invoice.invoice_template.table.grandtotal,Grand total,en_US
+order_invoice.invoice_template.table.grandtotal,Summe,de_DE
+order_invoice.invoice_template.reference,Invoice number:,en_US
+order_invoice.invoice_template.reference,Rechnungsnummer:,de_DE
+order_invoice.invoice_template.introduction,We hereby charge you for the following goods:,en_US
+order_invoice.invoice_template.introduction,Hiermit berechnen wir Ihnen folgende Ware:,de_DE
+order_invoice.invoice_template.company.name,Spryker Systems GmbH Berlin,en_US
+order_invoice.invoice_template.company.name,Spryker Systems GmbH Berlin,de_DE
+order_invoice.invoice_template.company.address,Julie-Wolfthorn-Straße 1<br>10115 Berlin <br> Germany,en_US
+order_invoice.invoice_template.company.address,Julie-Wolfthorn-Straße 1<br>10115 Berlin <br> Germany,de_DE
+order_invoice.invoice_template.company.group,Unternehmensgruppe Spryker Systems GmbH	,en_US
+order_invoice.invoice_template.company.group,Spryker Systems GmbH Group,de_DE
+order_invoice.invoice_template.merchant.name,Spryker Systems GmbH Berlin,en_US
+order_invoice.invoice_template.merchant.name,Spryker Systems GmbH Berlin,de_DE
+order_invoice.invoice_template.merchant.address,Julie-Wolfthorn-Straße 1 + 10115 Berlin,en_US
+order_invoice.invoice_template.merchant.address,Julie-Wolfthorn-Straße 1 + 10115 Berlin,de_DE
 return_page.list.title,Returns,en_US
 return_page.list.title,Retouren,de_DE
 return_page.account.no_return,No returns at the moment,en_US
@@ -2656,3 +2698,119 @@ product_cart_item.remove,"× entfernen",de_DE
 product_cart_item.remove,"× remove",en_US
 form.csrf.error.text,Something went wrong. Sorry.,en_US
 form.csrf.error.text,Leider ging etwas schief. Tut uns leid.,de_DE
+mail.trans.availability_notification.subtitle,The wait is over! Add this product to your cart now.,en_US
+mail.trans.availability_notification.subtitle,Das Warten hat ein Ende! Du kannst diesen Artikel jetzt in deinen Warenkorb legen.,de_DE
+mail.trans.availability_notification.title.part2,is available again!,en_US
+mail.trans.availability_notification.title.part2,wieder verfügbar!,de_DE
+mail.trans.availability_notification_subscription.subtitle,You will receive an email when the product is available again.,en_US
+mail.trans.availability_notification_subscription.subtitle,"Du erhälst eine E-Mail, sobald der Artikel wieder verfügbar ist.",de_DE
+mail.trans.availability_notification_subscription.title,We just informed our purchase team about your subscription!,en_US
+mail.trans.availability_notification_subscription.title,Unser Einkaufsteam wurde über deine Anfrage informiert.,de_DE
+mail.trans.availability_notification_unsubscribed.subtitle,You will not be notified when the product is available again.,en_US
+mail.trans.availability_notification_unsubscribed.subtitle,"Du wirst keine Benachrichtigung erhalten, wenn der Artikel wieder verfügbar ist.",de_DE
+mail.trans.availability_notification_unsubscribed.title.part1,Your subscription to,en_US
+mail.trans.availability_notification_unsubscribed.title.part1,Deine Anfrage zu,de_DE
+mail.trans.availability_notification_unsubscribed.title.part2,was canceled,en_US
+mail.trans.availability_notification_unsubscribed.title.part2,wurde gelöscht.,de_DE
+mail.trans.common.go_to_shop,Go to shop,en_US
+mail.trans.common.go_to_shop,Zum Shop,de_DE
+mail.trans.common.hello_for_first_name,Hello,en_US
+mail.trans.common.hello_for_first_name,Hallo,de_DE
+mail.trans.common.my_account,My Account,en_US
+mail.trans.common.my_account,Mein Konto,de_DE
+mail.trans.customer_registration.change_info,"You can change your info (delivery address, email address, password etc.) in My Account",en_US
+mail.trans.customer_registration.change_info,"Du kannst deine Angaben (Lieferadresse, E-Mail, Passwort usw.) hier ändern: Mein Konto",de_DE
+mail.trans.customer_registration.registration_success,Your registration to the Spryker Shop was successful!,en_US
+mail.trans.customer_registration.registration_success,Die Registrierung im Spryker Shop war erfolgreich!,de_DE
+mail.trans.customer_registration.title,Thank you for signing up with Spryker Shop!,en_US
+mail.trans.customer_registration.title,Vielen Dank für deine Registrierung im Spryker Shop,de_DE
+mail.trans.customer_restored_password_confirmation.title,Your password was changed successfully,en_US
+mail.trans.customer_restored_password_confirmation.title,Dein Passwort wurde erfolgreich geändert,de_DE
+mail.trans.customer_restore_password.change_password,Change password,en_US
+mail.trans.customer_restore_password.change_password,Passwort ändern,de_DE
+mail.trans.customer_restore_password.subtitle,"Somebody has requested a new password for your Spryker Shop account. If this was not you, please ignore this email. If it was you, please follow the instructions in the button below.",en_US
+mail.trans.customer_restore_password.subtitle,"Es wurde ein neues Passwort für dein Spryker Shop-Konto angefordert. Wenn du es nicht warst, kannst du diese E-Mail ignorieren. Wenn du es warst, klicke bitte den Knopf unten an:",de_DE
+mail.trans.customer_restore_password.title,New password for your Spryker Shop account,en_US
+mail.trans.customer_restore_password.title,Neues Passwort für dein Spryker Shop-Konto,de_DE
+mail.trans.footer.contact_email_address,info@spryker.com,en_US
+mail.trans.footer.contact_email_address,info@spryker.com,de_DE
+mail.trans.footer.if_you_have_further_questions,"If you have any further questions, please contact our customer service at",en_US
+mail.trans.footer.if_you_have_further_questions,"Wenn du weitere Fragen hast, wende dich bitte an unseren Kundenservice unter",de_DE
+mail.trans.footer.shop_address,Julie-Wolfthorn-Strasse 1,en_US
+mail.trans.footer.shop_address,Julie-Wolfthorn-Straße 2,de_DE
+mail.trans.footer.shop_city,Berlin,en_US
+mail.trans.footer.shop_city,Berlin,de_DE
+mail.trans.footer.shop_name,Spryker Systems GmbH,en_US
+mail.trans.footer.shop_name,Spryker Systems GmbH,de_DE
+mail.trans.footer.shop_phone,+49 (0) 30 208 498 350,en_US
+mail.trans.footer.shop_phone,+49 (0) 30 208 498 351,de_DE
+mail.trans.footer.shopping_experience,Enjoy your shopping experience.,en_US
+mail.trans.footer.shopping_experience,Genieße das Shopping mit uns.,de_DE
+mail.trans.footer.shop_zip_code,10115,en_US
+mail.trans.footer.shop_zip_code,10115,de_DE
+mail.trans.footer.your_team,Your Spryker team!,en_US
+mail.trans.footer.your_team,Dein Spryker Team!,de_DE
+mail.trans.gift_card_delivery.subtitle,Your gift card code is,en_US
+mail.trans.gift_card_delivery.subtitle,Dein Geschenkgutschein-Code lautet,de_DE
+mail.trans.gift_card_delivery.title,"Dear customer, thank you for purchasing a gift card in our shop.",en_US
+mail.trans.gift_card_delivery.title,Hallo! Vielen Dank für den Kauf eines Geschenkgutscheins in unserem Shop.,de_DE
+mail.trans.gift_card_usage.subtitle,Your gift card code is,en_US
+mail.trans.gift_card_usage.subtitle,Dein Geschenkgutschein-Code lautet,de_DE
+mail.trans.gift_card_usage.title,You just used a gift card!,en_US
+mail.trans.gift_card_usage.title,Geschenkgutschein wurde gerade benutzt!,de_DE
+mail.trans.header.shop_name,Spryker Shop,en_US
+mail.trans.header.shop_name,Spryker Shop,de_DE
+mail.trans.newsletter_subscribed.subtitle,We will do our best to deliver the most relevant and exciting news and updates.,en_US
+mail.trans.newsletter_subscribed.subtitle,"Wir werden unser Bestes tun, um dir die relevantesten und aufregendsten Nachrichten und Updates zu liefern.",de_DE
+mail.trans.newsletter_subscribed.title,We are thrilled you have signed up for our newsletter.,en_US
+mail.trans.newsletter_subscribed.title,"Wir freuen uns, dass du dich für unseren Newsletter angemeldet hast.",de_DE
+mail.trans.newsletter_unsubscribed.subtitle,Your email address has been unsubscribed from Spryker Shop newsletter. You can always manage your subscription in your customer profile.,en_US
+mail.trans.newsletter_unsubscribed.subtitle,"Deine E-Mail-Adresse wurde vom Spryker Shop Newsletter abgemeldet, aber du kannst dein Abo jederzeit in deinem Konto verwalten.",de_DE
+mail.trans.newsletter_unsubscribed.title,Sorry to see you go...,en_US
+mail.trans.newsletter_unsubscribed.title,"Es ist schade, dass du gehst...",de_DE
+mail.trans.order.billing_address,Billing address,en_US
+mail.trans.order.billing_address,Rechnungsadresse,de_DE
+mail.trans.order.delivery_address,Delivery address,en_US
+mail.trans.order.delivery_address,Lieferadresse,de_DE
+mail.trans.order.delivery_method,Shipment method,en_US
+mail.trans.order.delivery_method,Versandart,de_DE
+mail.trans.order.discounts_total,Discounts,en_US
+mail.trans.order.discounts_total,Rabatt,de_DE
+mail.trans.order.grand_total,Grand Total,en_US
+mail.trans.order.grand_total,Gesamtsumme,de_DE
+mail.trans.order.order_date,Order date,en_US
+mail.trans.order.order_date,Bestelldatum,de_DE
+mail.trans.order.order_details,Order details,en_US
+mail.trans.order.order_details,Bestellung,de_DE
+mail.trans.order.order_reference,Order reference,en_US
+mail.trans.order.order_reference,Bestellnummer,de_DE
+mail.trans.order.quantity,Qty,en_US
+mail.trans.order.quantity,Anzahl,de_DE
+mail.trans.order.requested_delivery_date,Requested delivery date,en_US
+mail.trans.order.requested_delivery_date,Gewünschtes Lieferdatum,de_DE
+mail.trans.order.shipment_costs_total,Shipment costs (total),en_US
+mail.trans.order.shipment_costs_total,Lieferkosten (gesamt),de_DE
+mail.trans.order.shipment_for_number.part1,Shipment,en_US
+mail.trans.order.shipment_for_number.part1,Lieferung,de_DE
+mail.trans.order.shipment_for_number.part2,of,en_US
+mail.trans.order.shipment_for_number.part2,von,de_DE
+mail.trans.order.subtotal,Subtotal,en_US
+mail.trans.order.subtotal,Zwischensumme,de_DE
+mail.trans.order.taxes,Taxes,en_US
+mail.trans.order.taxes,Steuern,de_DE
+mail.trans.order_confirmation.subtitle,"We are writing to let you know that we recieved your order. You can expect a shipping confirmation by e-mail as soon as the order has been sent. We hope you like your order, but if you change your mind, please return it within 14 days.",en_US
+mail.trans.order_confirmation.subtitle,"Wir haben deine Bestellung erhalten. Du erhälst von uns eine Versandbestätigung per E-Mail, sobald die Bestellung verschickt wurde. Wir hoffen, dass dir deine Bestellung gefällt. Falls du deine Meinung änderst, kannst du deine Artikel innerhalb von 14 Tagen zurückschicken.",de_DE
+mail.trans.order_confirmation.title,Thank you for shopping at Spryker Shop!,en_US
+mail.trans.order_confirmation.title,Vielen Dank für deinen Einkauf im Spryker Shop!,de_DE
+mail.trans.restore_password.change_password,Change password,en_US
+mail.trans.restore_password.change_password,Passwort ändern,de_DE
+mail.trans.restore_password.subtitle,"Somebody has requested a new password for your Spryker Back Office account. If it was not you, please ignore this email. If it was you, please follow the instructions in  the button bellow",en_US
+mail.trans.restore_password.subtitle,"Es wurde ein neues Passwort für dein Spryker Shop-Konto angefordert. Wenn du es nicht warst, kannst du diese E-Mail ignorieren. Wenn du es warst, klicke bitte den Knopf unten an:",de_DE
+mail.trans.restore_password.title,New password for your Spryker Back Office account,en_US
+mail.trans.restore_password.title,Neues Passwort für dein Spryker Back Office-Konto,de_DE
+mail.trans.order_shipped.title,Your order is on its way!,en_US
+mail.trans.order_shipped.title,Deine Bestellung ist unterwegs!,de_DE
+mail.trans.company_status.title,The status of your company has been changed to,en_US
+mail.trans.company_status.title,Der Status deines Unternehmens wurde geändert auf,de_DE
+mail.trans.customer_registration.confirmation_link,Validate your email address,en_US
+mail.trans.customer_registration.confirmation_link,Bestätigen Sie Ihre E-Mail-Adresse,de_DE
