@@ -11,12 +11,13 @@
         </subprocesses>
 
         <states>
-            <state name="new" reserved="true"/>
-            <state name="paid" reserved="true"/>
-            <state name="exported" reserved="true"/>
-            <state name="shipped" reserved="true"/>
-            <state name="delivered"/>
-            <state name="closed"/>
+            <state name="new" reserved="true" display="oms.state.new"/>
+            <state name="paid" reserved="true" display="oms.state.paid"/>
+            <state name="exported" reserved="true" display="oms.state.in-progress"/>
+            <state name="waiting for conformation" reserved="true" display="oms.state.in-progress"/>
+            <state name="shipped" reserved="true" display="oms.state.shipped"/>
+            <state name="delivered" display="oms.state.delivered"/>
+            <state name="closed" display="oms.state.closed"/>
         </states>
 
         <transitions>
@@ -34,6 +35,12 @@
 
             <transition happy="true">
                 <source>exported</source>
+                <target>waiting for conformation</target>
+                <event>confirmation</event>
+            </transition>
+
+            <transition happy="true">
+                <source>waiting for conformation</source>
                 <target>shipped</target>
                 <event>ship</event>
             </transition>
@@ -58,6 +65,7 @@
             <event name="ship" manual="true" command="Oms/SendOrderShipped"/>
             <event name="stock-update" manual="true"/>
             <event name="close" manual="true" timeout="1 hour"/>
+            <event name="confirmation" manual="true" timeout="1 minute"/>
         </events>
     </process>
 

@@ -13,29 +13,29 @@
         </subprocesses>
 
         <states>
-            <state name="new" reserved="true">
+            <state name="new" reserved="true" display="oms.state.new">
                 <flag>cancellable</flag>
             </state>
-            <state name="payment pending" reserved="true">
+            <state name="payment pending" reserved="true" display="oms.state.payment-pending">
                 <flag>cancellable</flag>
             </state>
-            <state name="invalid">
+            <state name="invalid" display="oms.state.invalid">
                 <flag>exclude from customer</flag>
             </state>
-            <state name="cancelled">
+            <state name="cancelled" display="oms.state.canceled">
                 <flag>exclude from customer</flag>
             </state>
-            <state name="paid" reserved="true">
+            <state name="paid" reserved="true" display="oms.state.paid">
                 <flag>cancellable</flag>
             </state>
-            <state name="confirmed" reserved="true">
+            <state name="waiting" reserved="true" display="oms.state.waiting"/>
+            <state name="exported" reserved="true" display="oms.state.exported"/>
+            <state name="confirmed" reserved="true" display="oms.state.confirmed">
                 <flag>cancellable</flag>
             </state>
-            <state name="waiting" reserved="true"/>
-            <state name="exported" reserved="true"/>
-            <state name="shipped" reserved="true"/>
-            <state name="delivered"/>
-            <state name="closed"/>
+            <state name="shipped" reserved="true" display="oms.state.shipped"/>
+            <state name="delivered" display="oms.state.delivered"/>
+            <state name="closed" display="oms.state.closed"/>
         </states>
 
         <transitions>
