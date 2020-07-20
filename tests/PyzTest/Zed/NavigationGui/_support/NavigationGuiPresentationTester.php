@@ -368,7 +368,7 @@ class NavigationGuiPresentationTester extends Actor
      */
     public function submitUpdateNodeToCategoryType($categoryUrl_en_US, $categoryUrl_de_DE)
     {
-        $this->submitForm(self::NODE_UPDATE_FORM_SELECTOR, [
+        $this->submitForm(static::NODE_UPDATE_FORM_SELECTOR, [
             'navigation_node[node_type]' => 'category',
             'navigation_node[navigation_node_localized_attributes][0][category_url]' => $categoryUrl_en_US,
             'navigation_node[navigation_node_localized_attributes][1][category_url]' => $categoryUrl_de_DE,
