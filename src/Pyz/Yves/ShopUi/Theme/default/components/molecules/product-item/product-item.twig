@@ -23,6 +23,17 @@
             {% endblock %}
         </div>
 
+        {% block ajaxAddToCart %}
+            {% if data.product is iterable and can('SeeAddToCartPermissionPlugin') %}
+                {% widget 'ProductAbstractAddToCartButtonWidget' args [data.product] with {
+                    data: {
+                        buttonExtraClasses: config.jsName ~ '__ajax-button-add-to-cart',
+                    },
+                } only %}
+                {% endwidget %}
+            {% endif %}
+        {% endblock %}
+
         {% block content %}
             <a href="{{ data.url }}" class="{{ config.name }}__info {{ config.jsName }}__link-detail-page grid grid--justify grid--top grid--no-wrap">
                 {% if data.name %}
