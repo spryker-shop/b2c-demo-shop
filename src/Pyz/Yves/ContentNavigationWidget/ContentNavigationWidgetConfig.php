@@ -5,11 +5,11 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-namespace Pyz\Yves\ContentBannerWidget\Twig;
+namespace Pyz\Yves\ContentNavigationWidget;
 
-use SprykerShop\Yves\ContentNavigationWidget\Twig\ContentNavigationTwigFunction as SprykerShopContentNavigationTwigFunction;
+use SprykerShop\Yves\ContentNavigationWidget\ContentNavigationWidgetConfig as SprykerContentNavigationWidget;
 
-class ContentNavigationTwigFunction extends SprykerShopContentNavigationTwigFunction
+class ContentNavigationWidgetConfig extends SprykerContentNavigationWidget
 {
     /**
      * @uses \Pyz\Shared\ContentNavigation\ContentNavigationConfig::WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_HEADER
@@ -27,22 +27,19 @@ class ContentNavigationTwigFunction extends SprykerShopContentNavigationTwigFunc
     protected const WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_FOOTER = 'navigation-footer';
 
     /**
-     * @param string $templateIdentifier
+     * @api
      *
-     * @return string|null
+     * @return string[]
      */
-    protected function findTemplate(string $templateIdentifier): ?string
+    public function getAvailableTemplateList(): array
     {
-        $availableTemplates = [
-            static::WIDGET_TEMPLATE_IDENTIFIER_TREE_INLINE => '@ContentNavigationWidget/views/navigation/tree-inline.twig',
-            static::WIDGET_TEMPLATE_IDENTIFIER_TREE => '@ContentNavigationWidget/views/navigation/tree.twig',
-            static::WIDGET_TEMPLATE_IDENTIFIER_LIST_INLINE => '@ContentNavigationWidget/views/navigation/list-inline.twig',
-            static::WIDGET_TEMPLATE_IDENTIFIER_LIST => '@ContentNavigationWidget/views/navigation/list.twig',
+        $availableTemplates = parent::getAvailableTemplateList();
+        $availableTemplates += [
             static::WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_HEADER => '@ContentNavigationWidget/views/navigation-header/navigation-header.twig',
             static::WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_HEADER_MOBILE => '@ContentNavigationWidget/views/navigation-header-mobile/navigation-header-mobile.twig',
             static::WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_FOOTER => '@ContentNavigationWidget/views/navigation-footer/navigation-footer.twig',
         ];
 
-        return $availableTemplates[$templateIdentifier] ?? null;
+        return $availableTemplates;
     }
 }
