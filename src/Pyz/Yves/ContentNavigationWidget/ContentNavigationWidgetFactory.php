@@ -7,7 +7,7 @@
 
 namespace Pyz\Yves\ContentNavigationWidget;
 
-use Pyz\Yves\ContentBannerWidget\Twig\ContentNavigationTwigFunction as SprykerShopContentNavigationTwigFunction;
+use Pyz\Yves\ContentNavigationWidget\Twig\ContentNavigationTwigFunction as SprykerShopContentNavigationTwigFunction;
 use SprykerShop\Yves\ContentNavigationWidget\ContentNavigationWidgetFactory as SprykerShopContentNavigationWidgetFactory;
 use SprykerShop\Yves\ContentNavigationWidget\Twig\ContentNavigationTwigFunction;
 use Twig\Environment;
