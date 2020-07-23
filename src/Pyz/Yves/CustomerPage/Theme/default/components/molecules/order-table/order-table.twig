@@ -7,6 +7,7 @@
 
 {% define data = {
     orders: required,
+    ordersAggregatedItemStateDisplayNames: [],
     requestUri: app.request.requestUri,
 } %}
 
@@ -20,6 +21,7 @@
                     <th>{{ 'customer.order.order_id' | trans }}</th>
                     <th>{{ 'customer.order.date' | trans }}</th>
                     <th>{{ 'customer.order.total' | trans }}</th>
+                    <th>{{ 'customer.order.items_state' | trans }}</th>
                     <th></th>
                 </tr>
             </thead>
@@ -29,6 +31,22 @@
                         <td>{{ order.orderReference }}</td>
                         <td>{{ date(order.createdAt) | formatDateTime }}</td>
                         <td>{{ order.totals.grandTotal | default(0) | money(true, order.currencyIsoCode) }}</td>
+                        <td>
+                            {% block stateWrapper %}
+                                {% if order.orderReference and data.ordersAggregatedItemStateDisplayNames[order.orderReference] %}
+                                    {% for displayName, stateNames in data.ordersAggregatedItemStateDisplayNames[order.orderReference] %}
+                                        {% block state %}
+                                            {% include molecule('status') with {
+                                                data: {
+                                                    label: displayName | trans,
+                                                    status: stateNames | first | replace({' ': '-'}) | lower,
+                                                },
+                                            } only %}
+                                        {% endblock %}
+                                    {% endfor %}
+                                {% endif %}
+                            {% endblock %}
+                        </td>
                         <td class="text-right">
                             <ul class="menu menu--inline menu--customer-account menu--actions">
                                 <li class="menu__item">
