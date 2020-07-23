@@ -5,6 +5,7 @@
         <span class="col">
             {% if data.image %}
                 {% block image %}
+                    {% set imageClasses = '' %}
                     {% set imageModifiers = ['thumbnail', 'with-overlay', 'catalog'] %}
 
                     {{ parent() }}

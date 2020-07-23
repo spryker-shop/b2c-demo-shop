@@ -2,12 +2,14 @@
 
 {% define data = {
     addresses: _view.addresses,
+    customerDeleteFormClone: _view.customerDeleteFormCloner,
 
     title: 'customer.account.address' | trans,
-    activePage: 'address'
+    activePage: 'address',
 } %}
 
 {% block customerContent %}
+    {% set deleteAddressForm = data.customerDeleteFormClone.getForm.createView %}
 
     <div class="grid grid-justify">
         {% for address in data.addresses %}
@@ -18,21 +20,26 @@
                             title: data.activePage ~ loop.index
                         },
                         embed: {
-                            address: address
-                        }
+                            address: address,
+                            deleteAddressForm: deleteAddressForm,
+                        },
                     } only %}
                         {% block additionalContent %}
+                            {% set idCustomerAddress = embed.address.idCustomerAddress %}
+
                             <ul class="menu menu--inline menu--customer-account float-right">
                                 <li class="menu__item">
-                                    <a href="{{ url('customer/address/update', {'id': embed.address.idCustomerAddress }) }}">
+                                    <a href="{{ url('customer/address/update', {'id': idCustomerAddress }) }}">
                                         {{ "customer.profile.address.edit" | trans }}
                                     </a>
                                 </li>
 
                                 <li class="menu__item">
-                                    <a href="{{ url('customer/address/delete', {'id': embed.address.idCustomerAddress }) }}">
-                                        {{ "customer.profile.address.delete" | trans }}
-                                    </a>
+                                    {% set deleteForm = embed.deleteAddressForm %}
+
+                                    {{ form_start(deleteForm, {'action': path('customer/address/delete', {'id': idCustomerAddress}) }) }}
+                                        <button class="link link--darkest" data-init-single-click>{{ "customer.profile.address.delete" | trans }}</button>
+                                    {{ form_end(deleteForm) }}
                                 </li>
                             </ul>
                         {% endblock %}

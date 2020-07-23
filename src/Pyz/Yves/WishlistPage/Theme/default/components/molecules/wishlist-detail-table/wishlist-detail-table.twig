@@ -1,12 +1,7 @@
-{% extends model('component') %}
+{% extends molecule('wishlist-detail-table', '@SprykerShop:WishlistPage') %}
 
 {% define config = {
-    name: 'wishlist-detail-table'
-} %}
-
-{% define data = {
-    wishlistItems: required,
-    wishlistName: required
+    name: 'wishlist-detail-table',
 } %}
 
 {% block body %}
@@ -91,25 +86,53 @@
                         <ul class="menu menu--inline menu--actions float-right">
                             {% if isItemAvailable %}
                                 <li class="menu__item">
-                                    <form id="addToCart_{{ loop.index }}"
-                                        method="POST"
-                                        action="{{ path('wishlist/move-to-cart', {sku: item.sku, 'wishlist-name': data.wishlistName}) }}"
-                                    >
-                                        <button type="submit" class="link link--user-account" title="{{ 'customer.account.wishlist.add-to-cart' | trans }}">
-                                            {{ 'customer.account.wishlist.add-to-cart' | trans }}
-                                        </button>
-                                    </form>
+                                    {% set addToCartFormName = 'addToCart_' ~ loop.index %}
+
+                                    {% if data.wishlistMoveToCartFormClone %}
+                                        {% set wishlistMoveToCartForm = data.wishlistMoveToCartFormClone.getForm.createView %}
+
+                                        {{ form_start(wishlistMoveToCartForm, { 'action': path('wishlist/move-to-cart', {sku: item.sku, 'wishlist-name': data.wishlistName}), 'name': addToCartFormName, 'attr': {'id': addToCartFormName}}) }}
+                                            <button class="link link--user-account">
+                                                {{ 'customer.account.wishlist.add-to-cart' | trans }}
+                                            </button>
+                                        {{ form_end(wishlistMoveToCartForm) }}
+                                    {% else %}
+                                        <form id="{{ addToCartFormName }}" name="{{ addToCartFormName }}" method="POST" action="{{ path('wishlist/move-to-cart', {sku: item.sku, 'wishlist-name': data.wishlistName}) }}">
+                                            <input type="hidden" name="wishlist_move_to_cart_form[_token]" value="{{ csrf_token('wishlist_move_to_cart_form') }}">
+                                            <button class="link link--user-account">
+                                                {{ 'customer.account.wishlist.add-to-cart' | trans }}
+                                            </button>
+                                        </form>
+                                    {% endif %}
                                 </li>
                             {% endif %}
                             <li class="menu__item float-right spacing-y">
-                                <form id="deleteWishlistItem_{{ loop.index }}"
-                                    method="POST"
-                                    action="{{ path('wishlist/remove-item', {sku: item.sku, 'wishlist-name': data.wishlistName}) }}"
-                                >
-                                    <button type="submit" class="link link--user-account" title="{{ 'customer.account.wishlist.remove' | trans }}">
-                                        {{ 'customer.account.wishlist.remove' | trans }}
-                                    </button>
-                                </form>
+                                {% set deleteFormName = 'deleteWishlistItem_' ~ loop.index %}
+
+                                {% if data.wishlistRemoveItemFormClone %}
+                                    {% set wishlistRemoveItemForm = data.wishlistRemoveItemFormClone.getForm.createView %}
+
+                                    {{ form_start(wishlistRemoveItemForm, {'action':path('wishlist/remove-item', {sku: item.sku, 'wishlist-name': data.wishlistName}), 'name': deleteFormName, 'attr': {'id': deleteFormName}}) }}
+                                        <button class="link link--user-account">
+                                            {{ 'customer.account.wishlist.remove' | trans }}
+                                        </button>
+                                    {{ form_end(wishlistRemoveItemForm) }}
+                                {% else %}
+                                    {% include molecule('single-button-form') with {
+                                        data: {
+                                            formAction: path('wishlist/remove-item', {sku: item.sku, 'wishlist-name': data.wishlistName}),
+                                            buttonText: 'customer.account.wishlist.remove' | trans,
+                                            iconName: '',
+                                            buttonClass: 'link link--user-account',
+                                            fieldName: 'wishlist_remove_item_form[_token]',
+                                            fieldValue: csrf_token('wishlist_remove_item_form'),
+                                            formAttributes: {
+                                                'name': deleteFormName,
+                                                'id': deleteFormName,
+                                            },
+                                        },
+                                    } only %}
+                                {% endif %}
                             </li>
                         </ul>
                     </td>

@@ -1,37 +1,30 @@
-{% extends model('component') %}
+{% extends molecule('breadcrumb-step', '@SprykerShop:ShopUi') %}
 
-{% define config = {
-    name: 'breadcrumb-step',
-    tag: 'li'
-} %}
-
-{% define data = {
-    url: null,
-    label: null,
-    itemProp: null,
-    withChevron: true
-} %}
-
-{% set isLink = data.url is not empty %}
+{% block label %}
+    {%- if data.itemProp -%}
+        <span class="{{ config.name }}__prop" itemprop="{{- data.itemProp -}}">{{- data.label -}}</span>
+    {%- else -%}
+        {{- data.label -}}
+    {%- endif -%}
+{% endblock %}
 
 {% block body %}
     {%- if isLink -%}
-        <a class="{{ config.name }}__link" href="{{ data.url }}">
+        <a class="{{ config.name }}__link" href="{{ data.url }}">{{- data.label -}}</a>
     {%- endif -%}
 
-        {%- if data.itemProp -%}
-            <span class="{{ config.name }}__prop" itemprop="{{-data.itemProp-}}">
-        {%- endif -%}
-
-            {{- data.label -}}
-
-        {%- if data.itemProp -%}
-            </span>
-        {%- endif -%}
-
-    {%- if isLink -%}
-        </a>
+    {%- if isFormElement -%}
+        {% block form %}
+            <form class="{{ config.name }}__form" name="{{ data.formName }}" method="post" action="{{ data.url }}">
+                <input name="{{ data.tokenFieldName }}" type="hidden" value="{{ csrf_token(data.formName) }}">
+                <button class="{{ config.name }}__link">{{ block('label') }}</button>
+            </form>
+        {% endblock %}
     {%- endif -%}
+
+    {% if not isLink and not isFormElement %}
+        {{ block('label') }}
+    {% endif %}
 
     {% if data.withChevron %}
         <span class="{{ config.name }}__separator"></span>

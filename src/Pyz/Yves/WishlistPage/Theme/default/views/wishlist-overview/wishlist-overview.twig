@@ -2,21 +2,22 @@
 
 {% define data = {
     wishlists: _view.wishlistCollection.wishlists,
-    wishlistForm: _view.wishlistForm
+    wishlistForm: _view.wishlistForm,
+    wishlistDeleteFormClone: _view.wishlistDeleteFormCloner,
 } %}
 
 {% block customerContent %}
     <div class="box">
         {% include molecule('title-box', 'CustomerPage') with {
             data: {
-                title: 'customer.account.wishlist.overview.title' | trans
-            }
+                title: 'customer.account.wishlist.overview.title' | trans,
+            },
         } only %}
 
         {% include molecule('add-wishlist', 'WishlistPage') with {
             data: {
-                wishlistForm: data.wishlistForm
-            }
+                wishlistForm: data.wishlistForm,
+            },
         }  only %}
     </div>
 
@@ -28,8 +29,9 @@
         {% else %}
             {% include molecule('wishlist-overview-table', 'WishlistPage') with {
                 data: {
-                    wishlists: data.wishlists
-                }
+                    wishlists: data.wishlists,
+                    wishlistDeleteFormClone: data.wishlistDeleteFormClone,
+                },
             } only %}
         {% endif %}
     </div>
