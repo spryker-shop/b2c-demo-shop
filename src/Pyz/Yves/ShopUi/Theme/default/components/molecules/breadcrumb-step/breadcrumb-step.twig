@@ -1,16 +1,18 @@
 {% extends molecule('breadcrumb-step', '@SprykerShop:ShopUi') %}
 
 {% block label %}
+    {% set label = data.label %}
+
     {%- if data.itemProp -%}
-        <span class="{{ config.name }}__prop" itemprop="{{- data.itemProp -}}">{{- data.label -}}</span>
+        <span class="{{ config.name }}__prop" itemprop="{{- data.itemProp -}}">{{- label -}}</span>
     {%- else -%}
-        {{- data.label -}}
+        {{- label -}}
     {%- endif -%}
 {% endblock %}
 
 {% block body %}
     {%- if isLink -%}
-        <a class="{{ config.name }}__link" href="{{ data.url }}">{{- data.label -}}</a>
+        <a class="{{ config.name }}__link" href="{{ data.url }}">{{ block('label') }}</a>
     {%- endif -%}
 
     {%- if isFormElement -%}
