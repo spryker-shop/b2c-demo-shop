@@ -13,26 +13,47 @@
 
             {{ block('labels') }}
 
-            {% block colors %}
-                {% widget 'ProductGroupColorWidget' args [data.idProductAbstract, data.product.selectedAttributes ?? []] use view('product-item-color-selector', 'ProductGroupWidget') with {
-                    data: {
-                        parentJsName: config.jsName,
-                        parentName: config.name,
-                    },
-                } only %}{% endwidget %}
-            {% endblock %}
-        </div>
+            <div class="{{ config.name }}__overlay-container">
+                {% block colors %}
+                    {% widget 'ProductGroupColorWidget' args [data.idProductAbstract, data.product.selectedAttributes ?? []] use view('product-item-color-selector', 'ProductGroupWidget') with {
+                        data: {
+                            parentJsName: config.jsName,
+                            parentName: config.name,
+                        },
+                    } only %}{% endwidget %}
+                {% endblock %}
 
-        {% block ajaxAddToCart %}
-            {% if data.product is iterable and can('SeeAddToCartPermissionPlugin') %}
-                {% widget 'ProductAbstractAddToCartButtonWidget' args [data.product] with {
-                    data: {
-                        buttonExtraClasses: config.jsName ~ '__ajax-button-add-to-cart',
-                    },
-                } only %}
-                {% endwidget %}
-            {% endif %}
-        {% endblock %}
+                {% set isColorSelectorExist = block('colors') | spaceless %}
+
+                {% block ajaxAddToCart %}
+                    {% if data.product is iterable and can('SeeAddToCartPermissionPlugin') %}
+                        {% set isColorSelectorExist = isColorSelectorExist ?? false %}
+                        {% set ajaxButtonClasses = 'button button--expand button--large button--reset-min-width button--reset-border-radius' %}
+                        {% set ajaxButtonExtraAttributes = {} %}
+                        {% set ajaxAddToCartExtraClasses = not isColorSelectorExist ? config.name ~ '__overlay-container-col' %}
+
+                        {% block ajaxAddToCartInner %}
+                            {% widget 'ProductAbstractAddToCartButtonWidget' args [data.product] with {
+                                data: {
+                                    buttonClasses: ajaxButtonClasses,
+                                    buttonExtraClasses: config.jsName ~ '__ajax-button-add-to-cart js-node-animator__trigger',
+                                    isTextHidden: isColorSelectorExist,
+                                    extraAttributes: ajaxButtonExtraAttributes,
+                                },
+                                embed: {
+                                    ajaxAddToCartExtraClasses: ajaxAddToCartExtraClasses,
+                                },
+                            } only %}
+                                {% block ajaxButton %}
+                                    {% set extraClasses = embed.ajaxAddToCartExtraClasses %}
+                                    {{ parent() }}
+                                {% endblock %}
+                            {% endwidget %}
+                        {% endblock %}
+                    {% endif %}
+                {% endblock %}
+            </div>
+        </div>
 
         {% block content %}
             <a href="{{ data.url }}" class="{{ config.name }}__info {{ config.jsName }}__link-detail-page grid grid--justify grid--top grid--no-wrap">
@@ -56,7 +77,7 @@
 
 {% block image %}
     {% set extraClass = '' %}
-    {% set modifiers = ['no-margin'] %}
+    {% set modifiers = ['spaceless'] %}
 
     {% block productThumbnail %}
         <a class="{{ config.name }}__overlay {{ config.jsName }}__link-detail-page" href="{{ data.url }}">

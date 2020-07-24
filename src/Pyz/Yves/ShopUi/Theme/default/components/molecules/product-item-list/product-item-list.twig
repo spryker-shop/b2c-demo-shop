@@ -57,20 +57,23 @@
         <a class="{{ config.name }}__col {{ config.name }}__col-price {{ config.jsName }}__link-detail-page col col--sm-4 col--md-2 text-right" href="{{ data.url }}">
             {{ block('price') }}
         </a>
-
-        {% block ajaxAddToCart %}
-            {% if data.product is iterable and can('SeeAddToCartPermissionPlugin') %}
-                {% widget 'ProductAbstractAddToCartButtonWidget' args [data.product] with {
-                    data: {
-                        buttonExtraClasses: config.jsName ~ '__ajax-button-add-to-cart',
-                    },
-                } only %}
-                {% endwidget %}
-            {% endif %}
-        {% endblock %}
     {% endblock %}
 
     <div class="{{ config.name }}__labels-wrap">
         {{ block('labels') }}
     </div>
+
+    {% block ajaxAddToCart %}
+        {{ parent() }}
+    {% endblock %}
+{% endblock %}
+
+{% block ajaxAddToCartInner %}
+    {% set ajaxButtonClasses = 'button button--expand button--list-item button--reset-border-radius' %}
+    {% set ajaxButtonExtraAttributes = {
+        'data-node-animator-wrapper-class-name': config.jsName,
+    } %}
+    {% set ajaxAddToCartExtraClasses = config.name ~ '__button' %}
+
+    {{ parent() }}
 {% endblock %}
