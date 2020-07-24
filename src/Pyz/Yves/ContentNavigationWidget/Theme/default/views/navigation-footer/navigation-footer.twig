@@ -1,0 +1,76 @@
+{% extends template('widget') %}
+
+{% define data = {
+    navigation: navigation,
+} %}
+
+{% block body %}
+    {% set hasIcons = false %}
+    {% set title = '' %}
+
+    {% for node in data.navigation.nodes %}
+        {% set nodeType = node.nodeType %}
+
+        {% if nodeType == 'category' %}
+            {% set title = 'navigation.menu.categories' | trans %}
+        {% endif %}
+
+        {% if nodeType == 'cms_page' %}
+            {% set title = 'global.company' | trans %}
+        {% endif %}
+
+        {% if nodeType == 'external_url' %}
+            {% set title = 'global.social' | trans %}
+        {% endif %}
+
+        {% if nodeType == 'label' %}
+            {% set hasIcons = true %}
+            {% set title = 'global.partners' | trans %}
+        {% endif %}
+    {% endfor %}
+
+    {% set triggerClass = 'js-navigation-footer__trigger--' ~ title | lower | replace(' ', '-') %}
+    {% set targetClass = 'js-navigation-footer__target--' ~ title | lower | replace(' ', '-') %}
+    {% set itemClass = 'navigation-footer__col' %}
+    {% set itemContentHiddenClass = 'is-hidden-sm-only' %}
+
+    {% embed molecule('toggler-item') with {
+        modifiers: ['mobile'],
+        class: itemClass,
+        data: {
+            title: title,
+            triggerClass: triggerClass,
+            targetClass: targetClass,
+            hiddenClass: itemContentHiddenClass,
+        },
+        embed: {
+            nodes: data.navigation.nodes,
+            hasIcons: hasIcons,
+        },
+    } only %}
+        {% block contentText %}
+            {% if not embed.hasIcons %}
+                {% include molecule('navigation-list') with {
+                    modifiers: ['footer'],
+                    data: {
+                        nodes: embed.nodes,
+                    },
+                } only %}
+            {% endif %}
+
+            {% if embed.hasIcons %}
+                {% embed molecule('navigation-icon-list') with {
+                    data: {
+                        nodes: embed.nodes,
+                    },
+                } only %}
+                    {% block body %}
+                        {% set menuClass = 'menu' %}
+
+                        {{ parent() }}
+                    {% endblock %}
+                {% endembed %}
+            {% endif %}
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

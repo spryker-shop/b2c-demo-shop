@@ -1,48 +1,513 @@
 <?xml version="1.0"?>
 <config>
     <!-- You can control navigation order here and add your custom navigation entries -->
-    <dashboard/>
+    <dashboard>
+        <label>Dashboard</label>
+        <title>Dashboard</title>
+        <bundle>dashboard</bundle>
+        <controller>index</controller>
+        <action>index</action>
+        <icon>fa-th-large</icon>
+    </dashboard>
     <sales>
+        <label>Sales</label>
+        <uri>/sales</uri>
+        <title>Sales</title>
+        <icon>fa-shopping-cart</icon>
         <pages>
-            <order-list/>
-            <order-matrix/>
-            <sales-reclamations/>
-            <table/>
-            <returns/>
+            <order-matrix>
+                <label>Order Matrix</label>
+                <title>Order Matrix</title>
+                <bundle>sales</bundle>
+                <controller>matrix</controller>
+                <action>index</action>
+                <visible>1</visible>
+            </order-matrix>
+            <order-list>
+                <label>Orders</label>
+                <title>Orders</title>
+                <bundle>sales</bundle>
+                <controller>index</controller>
+                <action>index</action>
+                <visible>1</visible>
+            </order-list>
+            <sales-reclamations>
+                <label>Reclamations</label>
+                <title>Reclamations</title>
+                <bundle>sales-reclamation-gui</bundle>
+                <controller>index</controller>
+                <action>index</action>
+                <visible>1</visible>
+            </sales-reclamations>
+            <returns>
+                <label>Returns</label>
+                <title>Returns</title>
+                <bundle>sales-return-gui</bundle>
+                <controller>index</controller>
+                <action>index</action>
+                <visible>1</visible>
+            </returns>
+            <table>
+                <label>Refunds</label>
+                <title>Refunds</title>
+                <bundle>refund</bundle>
+                <controller>table</controller>
+                <action>index</action>
+            </table>
+            <gift-card>
+                <label>Gift Card Balance</label>
+                <title>Gift Card Balance</title>
+                <bundle>gift-card-balance</bundle>
+                <controller>index</controller>
+                <action>index</action>
+            </gift-card>
         </pages>
     </sales>
-    <customer/>
-    <category>
-        <label>Category</label>
-        <title>Category</title>
-        <bundle>category-gui</bundle>
-        <controller>list</controller>
-        <action>index</action>
-        <order>0</order>
-        <shortcut>c</shortcut>
-        <icon>fa-sitemap</icon>
-    </category>
-    <cms-gui/>
-    <glossary/>
-    <product>
+    <customer>
+        <label>Customers</label>
+        <title>Customers</title>
+        <icon>fa-users</icon>
         <pages>
-            <AvailabilityGui/>
-            <products/>
-            <attributes/>
-            <product-barcode/>
-            <product-label-gui/>
-            <product-list/>
-            <product_options/>
-            <product-relation-gui/>
-            <reviews/>
-            <sets/>
-            <configurable-bundle-templates/>
+            <customer>
+                <label>Customers</label>
+                <title>Customers</title>
+                <bundle>customer</bundle>
+                <controller>index</controller>
+                <action>index</action>
+                <visible>1</visible>
+            </customer>
+            <group>
+                <label>Customer Groups</label>
+                <title>Customer Groups</title>
+                <bundle>customer-group</bundle>
+                <controller>index</controller>
+                <action>index</action>
+                <visible>1</visible>
+            </group>
+            <customer-access>
+                <label>Customer Access</label>
+                <title>Customer Access</title>
+                <bundle>customer-access-gui</bundle>
+                <controller>index</controller>
+                <action>index</action>
+            </customer-access>
         </pages>
-    </product>
-    <search-and-filters/>
-    <discount/>
-    <navigation/>
-    <tax/>
-    <acl/>
-    <maintenance/>
+    </customer>
+    <catalog>
+        <label>Catalog</label>
+        <title>Catalog</title>
+        <icon>fa-book</icon>
+        <uri>#</uri>
+        <pages>
+            <products>
+                <label>Products</label>
+                <title>Products</title>
+                <bundle>product-management</bundle>
+                <controller>index</controller>
+                <action>index</action>
+            </products>
+            <category>
+                <label>Category</label>
+                <title>Category</title>
+                <bundle>category</bundle>
+                <controller>root</controller>
+                <action>index</action>
+            </category>
+            <attributes>
+                <label>Attributes</label>
+                <title>Attributes</title>
+                <bundle>product-attribute-gui</bundle>
+                <controller>attribute</controller>
+                <action>index</action>
+            </attributes>
+            <AvailabilityGui>
+                <label>Availability</label>
+                <title>Availability</title>
+                <bundle>availability-gui</bundle>
+                <controller>index</controller>
+                <action>index</action>
+            </AvailabilityGui>
+            <reviews>
+                <label>Product Reviews</label>
+                <title>Product Reviews</title>
+                <bundle>product-review-gui</bundle>
+                <controller>index</controller>
+                <action>index</action>
+            </reviews>
+            <product_options>
+                <label>Product Options</label>
+                <title>Product Options</title>
+                <bundle>product-option</bundle>
+                <controller>list</controller>
+                <action>index</action>
+                <visible>2</visible>
+            </product_options>
+            <product-list>
+                <label>Product Lists</label>
+                <title>Product Lists</title>
+                <bundle>product-list-gui</bundle>
+                <controller>index</controller>
+                <action>index</action>
+                <visible>1</visible>
+            </product-list>
+            <product-barcode>
+                <label>Product Barcodes</label>
+                <title>Product Barcodes</title>
+                <bundle>product-barcode-gui</bundle>
+                <controller>product-barcode</controller>
+                <action>index</action>
+                <visible>1</visible>
+            </product-barcode>
+            <price-product-schedule>
+                <label>Scheduled Prices</label>
+                <title>Scheduled Prices</title>
+                <bundle>price-product-schedule-gui</bundle>
+                <controller>import</controller>
+                <action>index</action>
+            </price-product-schedule>
+        </pages>
+    </catalog>
+    <content>
+        <label>Content</label>
+        <title>Content</title>
+        <icon>fa-file-text</icon>
+        <uri>#</uri>
+        <pages>
+            <content-items>
+                <label>Content Items</label>
+                <title>Content Items</title>
+                <bundle>content-gui</bundle>
+                <controller>list-content</controller>
+                <action>index</action>
+            </content-items>
+            <block>
+                <label>Blocks</label>
+                <title>Blocks</title>
+                <bundle>cms-block-gui</bundle>
+                <controller>list-block</controller>
+                <action>index</action>
+            </block>
+            <page>
+                <label>Pages</label>
+                <title>Pages</title>
+                <bundle>cms-gui</bundle>
+                <controller>list-page</controller>
+                <action>index</action>
+            </page>
+            <slots>
+                <label>Slots</label>
+                <title>Slots</title>
+                <bundle>cms-slot-gui</bundle>
+                <controller>template-list</controller>
+                <action>index</action>
+            </slots>
+            <navigation>
+                <label>Navigation</label>
+                <title>Navigation</title>
+                <bundle>navigation-gui</bundle>
+                <controller>index</controller>
+                <action>index</action>
+            </navigation>
+            <redirects>
+                <label>Redirects</label>
+                <title>Redirects</title>
+                <bundle>cms</bundle>
+                <controller>redirect</controller>
+                <action>index</action>
+            </redirects>
+            <list>
+                <label>File List</label>
+                <title>File List</title>
+                <bundle>file-manager-gui</bundle>
+                <controller>index</controller>
+                <action>index</action>
+                <visible>1</visible>
+            </list>
+            <tree>
+                <label>File Tree</label>
+                <title>File Tree</title>
+                <bundle>file-manager-gui</bundle>
+                <controller>directories-tree</controller>
+                <action>index</action>
+                <visible>1</visible>
+            </tree>
+        </pages>
+    </content>
+    <merchandising>
+        <label>Merchandising</label>
+        <title>Merchandising</title>
+        <icon>fa-tags</icon>
+        <uri>#</uri>
+        <pages>
+            <discount>
+                <label>Discount</label>
+                <title>Discount</title>
+                <bundle>discount</bundle>
+                <controller>index</controller>
+                <action>list</action>
+            </discount>
+            <product-label-gui>
+                <label>Product Labels</label>
+                <title>Product Labels</title>
+                <bundle>product-label-gui</bundle>
+                <controller>index</controller>
+                <action>index</action>
+            </product-label-gui>
+            <product-relation-gui>
+                <label>Product Relations</label>
+                <title>Product Relations</title>
+                <bundle>product-relation-gui</bundle>
+                <controller>list</controller>
+                <action>index</action>
+                <visible>2</visible>
+            </product-relation-gui>
+            <sets>
+                <label>Product Sets</label>
+                <title>Product Sets</title>
+                <bundle>product-set-gui</bundle>
+                <controller>index</controller>
+                <action>index</action>
+            </sets>
+            <configurable-bundle-templates>
+                <label>Configurable Bundle Templates</label>
+                <title>Configurable Bundle Templates</title>
+                <bundle>configurable-bundle-gui</bundle>
+                <controller>template</controller>
+                <action>index</action>
+                <visible>1</visible>
+            </configurable-bundle-templates>
+            <search-preferences>
+                <label>Search Preferences</label>
+                <title>Search Preferences</title>
+                <bundle>product-search</bundle>
+                <controller>search-preferences</controller>
+                <action>index</action>
+            </search-preferences>
+            <filter-preferences>
+                <label>Filter Preferences</label>
+                <title>Filter Preferences</title>
+                <bundle>product-search</bundle>
+                <controller>filter-preferences</controller>
+                <action>index</action>
+            </filter-preferences>
+            <category-filters>
+                <label>Category Filters</label>
+                <title>Category Filters</title>
+                <bundle>product-category-filter-gui</bundle>
+                <controller>index</controller>
+                <action>index</action>
+            </category-filters>
+        </pages>
+    </merchandising>
+    <users>
+        <label>Users</label>
+        <title>Users</title>
+        <icon>fa-user</icon>
+        <pages>
+            <user>
+                <label>Users</label>
+                <title>Users</title>
+                <bundle>user</bundle>
+                <controller>index</controller>
+                <action>index</action>
+            </user>
+            <roles>
+                <label>User Roles</label>
+                <title>Roles</title>
+                <bundle>acl</bundle>
+                <controller>role</controller>
+                <action>index</action>
+            </roles>
+            <groups>
+                <label>User Groups</label>
+                <title>Groups</title>
+                <bundle>acl</bundle>
+                <controller>group</controller>
+                <action>index</action>
+            </groups>
+        </pages>
+    </users>
+    <administration>
+        <label>Administration</label>
+        <title>Administration</title>
+        <icon>fa-user-secret</icon>
+        <pages>
+            <stores>
+                <label>Stores</label>
+                <title>Stores</title>
+                <bundle>store-gui</bundle>
+                <controller>list</controller>
+                <action>index</action>
+            </stores>
+            <warehouses>
+                <label>Warehouses</label>
+                <title>Warehouses</title>
+                <bundle>stock-gui</bundle>
+                <controller>warehouse</controller>
+                <action>list</action>
+            </warehouses>
+            <payment-method>
+                <label>Payment Methods</label>
+                <title>Payment Methods</title>
+                <bundle>payment-gui</bundle>
+                <controller>payment-method</controller>
+                <action>index</action>
+            </payment-method>
+            <shipment-method>
+                <label>Delivery Methods</label>
+                <title>Delivery Methods</title>
+                <bundle>shipment-gui</bundle>
+                <controller>shipment-method</controller>
+                <action>index</action>
+            </shipment-method>
+            <glossary>
+                <label>Glossary</label>
+                <title>Glossary</title>
+                <bundle>glossary</bundle>
+                <uri>/glossary</uri>
+            </glossary>
+            <tax-rates>
+                <label>Tax Rates</label>
+                <title>Tax Rates</title>
+                <bundle>tax</bundle>
+                <controller>rate</controller>
+                <action>list</action>
+            </tax-rates>
+            <tax-sets>
+                <label>Tax Sets</label>
+                <title>Tax Sets</title>
+                <bundle>tax</bundle>
+                <controller>set</controller>
+                <action>list</action>
+            </tax-sets>
+            <sales-order-threshold-global>
+                <label>Global Threshold</label>
+                <title>Global Threshold</title>
+                <bundle>sales-order-threshold-gui</bundle>
+                <controller>global</controller>
+                <action>index</action>
+            </sales-order-threshold-global>
+            <sales-order-threshold-settings>
+                <label>Threshold Settings</label>
+                <title>Threshold Settings</title>
+                <bundle>sales-order-threshold-gui</bundle>
+                <controller>settings</controller>
+                <action>index</action>
+            </sales-order-threshold-settings>
+            <settings>
+                <label>MIME Type Settings</label>
+                <title>MIME Type Settings</title>
+                <bundle>file-manager-gui</bundle>
+                <controller>mime-type</controller>
+                <action>index</action>
+                <visible>1</visible>
+            </settings>
+            <oms>
+                <label>OMS</label>
+                <title>Order Management System</title>
+                <bundle>oms</bundle>
+                <controller>index</controller>
+                <action>index</action>
+            </oms>
+            <statemachines-index>
+                <label>State Machine</label>
+                <title>State Machine</title>
+                <bundle>state-machine</bundle>
+                <controller>list</controller>
+                <action>index</action>
+            </statemachines-index>
+        </pages>
+    </administration>
+    <maintenance>
+        <label>Maintenance</label>
+        <title>Maintenance</title>
+        <icon>fa-wrench</icon>
+        <pages>
+            <module-overview>
+                <label>Module Overview</label>
+                <title>Module Overview</title>
+                <bundle>development</bundle>
+                <controller>module-overview</controller>
+                <action>index</action>
+            </module-overview>
+            <dependencies>
+                <label>Dependencies</label>
+                <title>Bundle dependencies</title>
+                <bundle>development</bundle>
+                <controller>dependency</controller>
+                <action>index</action>
+            </dependencies>
+            <stability>
+                <label>Stability</label>
+                <title>Bundles stability</title>
+                <bundle>development</bundle>
+                <controller>dependency</controller>
+                <action>stability</action>
+            </stability>
+            <phpinfo>
+                <label>PHP Info</label>
+                <title>PHP Info</title>
+                <bundle>maintenance</bundle>
+                <controller>php-info</controller>
+                <action>index</action>
+            </phpinfo>
+            <integration>
+                <label>Used Plugins</label>
+                <title>Used Plugins</title>
+                <bundle>development</bundle>
+                <controller>dependency-provider-plugin-usage</controller>
+                <action>index</action>
+            </integration>
+            <permission>
+                <label>Sync Permissions</label>
+                <title>Sync Permissions</title>
+                <bundle>permission</bundle>
+                <controller>index</controller>
+                <action>sync</action>
+            </permission>
+            <index>
+                <label>System Info</label>
+                <title>Maintenance</title>
+                <bundle>maintenance</bundle>
+                <controller>index</controller>
+                <action>index</action>
+            </index>
+            <architecture-sniffer>
+                <label>Architecture Sniffers</label>
+                <title>Architecture Sniffers</title>
+                <bundle>development</bundle>
+                <controller>architecture</controller>
+                <action>index</action>
+            </architecture-sniffer>
+            <elasticsearch>
+                <label>Elastic Search</label>
+                <title>Elastic Search</title>
+                <bundle>search-elasticsearch-gui</bundle>
+                <controller>maintenance</controller>
+                <action>list-indexes</action>
+            </elasticsearch>
+            <queue>
+                <label>Queue Processes</label>
+                <title>Queue Processes</title>
+                <bundle>queue</bundle>
+                <controller>index</controller>
+                <action>index</action>
+                <visible>1</visible>
+            </queue>
+            <spryk-gui>
+                <label>SprykGui</label>
+                <title>SprykGui</title>
+                <bundle>spryk-gui</bundle>
+                <controller>list</controller>
+                <action>index</action>
+            </spryk-gui>
+            <storage>
+                <label>Storage</label>
+                <title>Storage index</title>
+                <bundle>storage</bundle>
+                <controller>maintenance</controller>
+                <action>index</action>
+            </storage>
+        </pages>
+    </maintenance>
 </config>

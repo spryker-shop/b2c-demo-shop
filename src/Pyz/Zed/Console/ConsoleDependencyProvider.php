@@ -22,6 +22,7 @@ use Spryker\Zed\CodeGenerator\Communication\Console\BundleYvesCodeGeneratorConso
 use Spryker\Zed\CodeGenerator\Communication\Console\BundleZedCodeGeneratorConsole;
 use Spryker\Zed\Console\Communication\Plugin\ConsoleLogPlugin;
 use Spryker\Zed\Console\ConsoleDependencyProvider as SprykerConsoleDependencyProvider;
+use Spryker\Zed\ContentNavigationDataImport\ContentNavigationDataImportConfig;
 use Spryker\Zed\Customer\Communication\Console\CustomerPasswordResetConsole;
 use Spryker\Zed\Customer\Communication\Console\CustomerPasswordSetConsole;
 use Spryker\Zed\DataExport\Communication\Console\DataExportConsole;
@@ -242,6 +243,7 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
             new DataImportConsole(DataImportConsole::DEFAULT_NAME . ':' . ShipmentDataImportConfig::IMPORT_TYPE_SHIPMENT_METHOD_STORE),
             new DataImportConsole(DataImportConsole::DEFAULT_NAME . ':' . StockDataImportConfig::IMPORT_TYPE_STOCK),
             new DataImportConsole(DataImportConsole::DEFAULT_NAME . ':' . StockDataImportConfig::IMPORT_TYPE_STOCK_STORE),
+            new DataImportConsole(DataImportConsole::DEFAULT_NAME . ':' . ContentNavigationDataImportConfig::IMPORT_TYPE_CONTENT_NAVIGATION),
             new DataImportConsole(DataImportConsole::DEFAULT_NAME . ':' . PaymentDataImportConfig::IMPORT_TYPE_PAYMENT_METHOD),
             new DataImportConsole(DataImportConsole::DEFAULT_NAME . ':' . PaymentDataImportConfig::IMPORT_TYPE_PAYMENT_METHOD_STORE),
 
