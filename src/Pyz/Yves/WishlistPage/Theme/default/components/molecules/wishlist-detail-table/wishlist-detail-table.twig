@@ -4,12 +4,6 @@
     name: 'wishlist-detail-table',
 } %}
 
-{% block addToCartButton %}
-    <button class="link link--user-account">
-        {{ 'customer.account.wishlist.add-to-cart' | trans }}
-    </button>
-{% endblock %}
-
 {% block body %}
     <div class="is-scrollable-x">
         <table class="table table--expand table--wishlist">
@@ -99,7 +93,11 @@
                                         {% set wishlistMoveToCartForm = data.wishlistMoveToCartFormClone.getForm.createView %}
 
                                         {{ form_start(wishlistMoveToCartForm, { 'action': moveToCartActionPath, 'name': addToCartFormName, 'attr': {'id': addToCartFormName}}) }}
-                                            {{ block('addToCartButton') }}
+                                            {% block addToCartButton %}
+                                                <button class="link link--user-account">
+                                                    {{ 'customer.account.wishlist.add-to-cart' | trans }}
+                                                </button>
+                                            {% endblock %}
                                         {{ form_end(wishlistMoveToCartForm) }}
                                     {% else %}
                                         <form id="{{ addToCartFormName }}" name="{{ addToCartFormName }}" method="POST" action="{{ moveToCartActionPath }}">
