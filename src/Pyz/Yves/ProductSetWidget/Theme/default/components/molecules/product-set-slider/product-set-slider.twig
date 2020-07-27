@@ -37,6 +37,7 @@
                                 superAttributes: data.product.attributeMap.superAttributes,
                                 selectedAttributes: data.product.selectedAttributes,
                                 availableAttributes: data.product.availableAttributes,
+                                useExternalForm: true,
                             },
                             embed: {
                                 product: data.product,
@@ -65,10 +66,28 @@
                             </button>
                         {% else %}
                             {% widget 'AddToCartFormWidget'  args [config, data.product, isDisabled] only %}
-                                {% block embeddedData %}
-                                    <button class="button button--expand" data-init-single-click {{ qa('add-to-cart-button') }}>
-                                        {{- 'page.detail.add-to-cart' | trans -}}
-                                    </button>
+                                {% block body %}
+                                    {% set productSku = data.product.sku %}
+                                    {% set formAction = path('cart/add', {'sku': productSku}) %}
+                                    {% set tokenField = data.form._token.vars %}
+
+                                    {% include molecule('remote-form-submit') with {
+                                        data: {
+                                            label: 'page.detail.add-to-cart' | trans,
+                                            buttonClass: 'button button--expand ' ~ data.config.jsName ~ '__button-add-to-cart',
+                                            buttonExtraAttributes: {
+                                                'data-form-action': formAction,
+                                                'data-init-single-click': true,
+                                                'data-qa': 'add-to-cart-button',
+                                            },
+                                        },
+                                        attributes: {
+                                            'form-name': 'addToCartForm_' ~ productSku,
+                                            'form-action': formAction,
+                                            'field-name': tokenField.full_name,
+                                            'field-value': tokenField.value,
+                                        },
+                                    } only %}
                                 {% endblock %}
                             {% endwidget %}
                         {% endif %}

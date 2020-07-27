@@ -56,12 +56,14 @@
                 </div>
                 <div class="col col--sm-12 col--lg-7 product-set-slider product-set-slider--hide-prev-btn product-set-slider--multiple">
                     {% block productSet %}
-                        {% include molecule('product-set-slider', 'ProductSetWidget') with {
-                            data: {
-                                products: data.products,
-                                sliderConfig: data.sliderConfig,
-                            },
-                        } only %}
+                        <form method="GET">
+                            {% include molecule('product-set-slider', 'ProductSetWidget') with {
+                                data: {
+                                    products: data.products,
+                                    sliderConfig: data.sliderConfig,
+                                },
+                            } only %}
+                        </form>
                     {% endblock %}
                 </div>
             </div>
