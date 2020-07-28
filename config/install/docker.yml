@@ -1,5 +1,5 @@
 env:
-    APPLICATION_ENV: docker
+    NEW_RELIC_ENABLED: 0
 
 sections:
     build:
@@ -36,8 +36,10 @@ sections:
         translator-generate-cache:
             command: "vendor/bin/console translator:generate-cache"
 
-        class-resolver-build:
-            command: "vendor/bin/console cache:class-resolver:build"
+    build-production:
+        excluded: true
+        cache-class-resolver-build:
+            command: 'vendor/bin/console cache:class-resolver:build'
 
     build-development:
         generate-transfers:
@@ -59,18 +61,37 @@ sections:
         yves-install-dependencies:
             command: "vendor/bin/console frontend:yves:install-dependencies"
 
-        yves-build-frontend:
-            command: "vendor/bin/console frontend:yves:build"
-
         zed-install-dependencies:
             command: "vendor/bin/console frontend:zed:install-dependencies"
 
         zed-build-frontend:
             command: "vendor/bin/console frontend:zed:build"
 
+    build-static-production:
+        excluded: true
+        yves-build-frontend:
+            command: "vendor/bin/console frontend:yves:build -e production"
+
+        zed-build-frontend:
+            command: "vendor/bin/console frontend:zed:build -e production"
+
+    build-static-development:
+        yves-build-frontend:
+            command: "vendor/bin/console frontend:yves:build"
+
     scheduler-setup:
-        jenkins-generate:
+        jenkins-setup:
             command: "vendor/bin/console scheduler:setup"
+
+    scheduler-suspend:
+        excluded: true
+        jenkins-suspend:
+            command: "vendor/bin/console scheduler:suspend"
+
+    scheduler-clean:
+        excluded: true
+        jenkins-clean:
+            command: "vendor/bin/console scheduler:clean"
 
     init-storages-per-store:
         setup-search-create-sources:

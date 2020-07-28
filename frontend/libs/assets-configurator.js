@@ -14,8 +14,23 @@ const getCopyConfig = appSettings =>
         return copyConfig;
     },[]);
 
+const getCopyStaticConfig = appSettings => {
+    const staticAssetsPath = appSettings.paths.assets.staticAssets;
+    if (fs.existsSync(staticAssetsPath)) {
+        return [{
+            from: staticAssetsPath,
+            to: appSettings.paths.publicStatic,
+        }];
+    }
+    return [];
+};
+
 const getAssetsConfig = appSettings => [
-    new CleanWebpackPlugin([appSettings.paths.public],
+    new CleanWebpackPlugin(
+        [
+            appSettings.paths.public,
+            appSettings.paths.publicStatic,
+        ],
         {
             root: appSettings.context,
             verbose: true,
@@ -24,6 +39,10 @@ const getAssetsConfig = appSettings => [
     ),
 
     new CopyWebpackPlugin(getCopyConfig(appSettings), {
+        context: appSettings.context,
+    }),
+
+    new CopyWebpackPlugin(getCopyStaticConfig(appSettings), {
         context: appSettings.context,
     }),
 ];
