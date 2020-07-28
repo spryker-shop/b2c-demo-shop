@@ -1,23 +1,26 @@
 import Component from 'ShopUi/models/component';
 
 const DIRECTIONS = {
-    top: 'top',
-    right: 'right',
-    bottom: 'bottom',
-    left: 'left',
+    TOP: 'top',
+    RIGHT: 'right',
+    BOTTOM: 'bottom',
+    LEFT: 'left',
 };
 
-const PROPORTIONS = {
-    width: 'width',
-    height: 'height',
+const DIMENSIONS = {
+    WIDTH: 'width',
+    HEIGHT: 'height',
 };
+
+const PERCENT = 100;
+const EXPONENT = 2;
 
 interface ClonedElement {
     element: HTMLElement;
     coordinates: DOMRect;
     pageXScroll: number;
     pageYScroll: number;
-    animationStarted: number;
+    animationStartTime: number;
 }
 
 export default class NodeAnimator extends Component {
@@ -26,8 +29,6 @@ export default class NodeAnimator extends Component {
     protected targetCoordinates: DOMRect;
     protected clonedElements: ClonedElement[] = [];
     protected animationDuration: number;
-    protected percent: number = 100;
-    protected exponent: number = 2;
     protected observer: IntersectionObserver;
     protected viewportOptions: IntersectionObserverInit = {
         rootMargin: '0px',
@@ -46,12 +47,12 @@ export default class NodeAnimator extends Component {
             return;
         }
 
-        this.observer = this.observerInit();
-        this.observerSubscriber();
+        this.observer = this.initObserver();
+        this.subscribeToObserver();
         this.mapEvents();
     }
 
-    protected observerInit(): IntersectionObserver {
+    protected initObserver(): IntersectionObserver {
         return new IntersectionObserver(
             this.observerCallback(),
             this.viewportOptions,
@@ -66,7 +67,7 @@ export default class NodeAnimator extends Component {
         };
     }
 
-    protected observerSubscriber(): void {
+    protected subscribeToObserver(): void {
         this.observer.observe(this.target);
     }
 
@@ -107,6 +108,7 @@ export default class NodeAnimator extends Component {
 
     protected onClick(trigger: HTMLElement): void {
         this.cloneElement(trigger);
+        this.startAnimation();
     }
 
     protected cloneElement(trigger: HTMLElement): void {
@@ -130,10 +132,9 @@ export default class NodeAnimator extends Component {
             coordinates: elementCoordinates,
             pageXScroll: pageXOffset,
             pageYScroll: pageYOffset,
-            animationStarted: performance.now(),
+            animationStartTime: performance.now(),
         });
         document.body.appendChild(clonedNode);
-        this.startAnimation();
     }
 
     protected startAnimation(): void {
@@ -151,23 +152,23 @@ export default class NodeAnimator extends Component {
 
     protected moveElements(time: number): void {
         this.clonedElements.forEach((item: ClonedElement) => {
-            const timeFraction = (time - item.animationStarted) / this.animationDuration;
-            const progress = Math.pow(timeFraction, this.exponent);
-            const percentageProgress = progress * this.percent;
+            const timeFraction = (time - item.animationStartTime) / this.animationDuration;
+            const progress = Math.pow(timeFraction, EXPONENT);
+            const percentageProgress = progress * PERCENT;
 
             if (this.isTargetInViewport) {
                 this.validateTarget();
             }
 
             const sides = [
-                DIRECTIONS.top,
-                DIRECTIONS.left,
-                PROPORTIONS.width,
-                PROPORTIONS.height,
+                DIRECTIONS.TOP,
+                DIRECTIONS.LEFT,
+                DIMENSIONS.WIDTH,
+                DIMENSIONS.HEIGHT,
             ];
             this.setAnimationDistance(sides, item, percentageProgress);
 
-            if (percentageProgress <= this.percent) {
+            if (percentageProgress <= PERCENT) {
                 return;
             }
 
@@ -181,19 +182,19 @@ export default class NodeAnimator extends Component {
             let pageOffset = 0;
             let initialPageOffset = 0;
 
-            if (side === DIRECTIONS.left || side === DIRECTIONS.right) {
+            if (side === DIRECTIONS.LEFT || side === DIRECTIONS.RIGHT) {
                 initialPageOffset = element.pageXScroll;
                 pageOffset = pageXOffset;
             }
 
-            if (side === DIRECTIONS.top || side === DIRECTIONS.bottom) {
+            if (side === DIRECTIONS.TOP || side === DIRECTIONS.BOTTOM) {
                 initialPageOffset = element.pageYScroll;
                 pageOffset = pageYOffset;
             }
 
             const elementCoordinates = Number(element.coordinates[side]) + initialPageOffset;
             const distance = elementCoordinates - (Number(this.targetCoordinates[side]) + pageOffset);
-            const progressDistance = (distance * percentageProgress) / this.percent;
+            const progressDistance = (distance * percentageProgress) / PERCENT;
 
             const newDistance = elementCoordinates - progressDistance;
             element.element.style[side] = `${newDistance}px`;

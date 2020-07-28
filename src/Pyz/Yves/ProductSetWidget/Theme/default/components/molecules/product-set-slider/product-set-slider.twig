@@ -61,11 +61,11 @@
                         {% set isDisabled = not data.product.idProductConcrete or not data.product.available %}
 
                         {% if isDisabled %}
-                            <button type="button" class="button button--expand" disabled>
+                            <button class="button button--expand" disabled>
                                 {{ 'page.detail.add-to-cart' | trans }}
                             </button>
                         {% else %}
-                            {% widget 'AddToCartFormWidget'  args [config, data.product, isDisabled] only %}
+                            {% widget 'AddToCartFormWidget' args [config, data.product, isDisabled] only %}
                                 {% block body %}
                                     {% set productSku = data.product.sku %}
                                     {% set formAction = path('cart/add', {'sku': productSku}) %}
