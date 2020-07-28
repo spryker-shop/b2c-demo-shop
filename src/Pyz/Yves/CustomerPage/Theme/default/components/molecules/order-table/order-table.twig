@@ -1,13 +1,6 @@
-{% extends model('component') %}
-
-{% define config = {
-    name: 'order-table',
-    tag: 'div'
-} %}
+{% extends molecule('order-table', '@SprykerShop:CustomerPage') %}
 
 {% define data = {
-    orders: required,
-    ordersAggregatedItemStateDisplayNames: [],
     requestUri: app.request.requestUri,
 } %}
 
@@ -33,8 +26,10 @@
                         <td>{{ order.totals.grandTotal | default(0) | money(true, order.currencyIsoCode) }}</td>
                         <td>
                             {% block stateWrapper %}
-                                {% if order.orderReference and data.ordersAggregatedItemStateDisplayNames[order.orderReference] %}
-                                    {% for displayName, stateNames in data.ordersAggregatedItemStateDisplayNames[order.orderReference] %}
+                                {% set stateCollection = data.ordersAggregatedItemStateDisplayNames[order.orderReference] %}
+
+                                {% if order.orderReference and stateCollection %}
+                                    {% for displayName, stateNames in stateCollection %}
                                         {% block state %}
                                             {% include molecule('status') with {
                                                 data: {
