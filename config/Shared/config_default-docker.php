@@ -119,11 +119,12 @@ $config[ApplicationConstants::ENABLE_APPLICATION_DEBUG]
     = $config[ShopApplicationConstants::ENABLE_APPLICATION_DEBUG]
     = (bool)getenv('SPRYKER_DEBUG_ENABLED');
 
-if (class_exists(WebProfilerConstants::class)) {
-    $config[WebProfilerConstants::IS_WEB_PROFILER_ENABLED]
-        = $config[WebProfilerWidgetConstants::IS_WEB_PROFILER_ENABLED]
-        = getenv('SPRYKER_DEBUG_ENABLED') && !getenv('SPRYKER_TESTING_ENABLED');
-    $config[WebProfilerConstants::PROFILER_CACHE_DIRECTORY] = '/tmp/webprofiler';
+if (interface_exists(WebProfilerConstants::class)) {
+    $config[WebProfilerConstants::IS_WEB_PROFILER_ENABLED] = getenv('SPRYKER_DEBUG_ENABLED') && !getenv('SPRYKER_TESTING_ENABLED');
+}
+
+if (interface_exists(WebProfilerWidgetConstants::class)) {
+    $config[WebProfilerWidgetConstants::IS_WEB_PROFILER_ENABLED] = getenv('SPRYKER_DEBUG_ENABLED') && !getenv('SPRYKER_TESTING_ENABLED');
 }
 
 $config[AclConstants::ACL_USER_RULE_WHITELIST][] = [
