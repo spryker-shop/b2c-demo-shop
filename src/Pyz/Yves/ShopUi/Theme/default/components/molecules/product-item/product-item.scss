@@ -47,18 +47,27 @@
             }
         }
 
-        &__colors {
+        &__overlay-container {
             @include helper-effect-transition(transform);
             background: $setting-color-white;
             position: absolute;
             left: 0;
             bottom: 0;
             z-index: $setting-zi-header;
-            text-align: center;
             width: 100%;
             border-radius: 0 0 rem(4) rem(4);
-            padding: rem(16) 0;
             transform: translateY(100%);
+            display: flex;
+        }
+
+        &__overlay-container-col {
+            flex-grow: 1;
+        }
+
+        &__colors {
+            padding: rem(18) 0;
+            text-align: center;
+            flex-grow: 1;
         }
 
         &__container {
@@ -85,7 +94,7 @@
                     opacity: 0.09;
                 }
 
-                #{$name}__colors {
+                #{$name}__overlay-container {
                     transform: translateY(0);
                 }
             }

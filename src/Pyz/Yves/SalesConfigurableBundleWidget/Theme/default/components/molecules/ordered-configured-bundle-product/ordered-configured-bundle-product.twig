@@ -20,7 +20,16 @@
     <div class="col col--expand spacing-top">
         <div class="spacing-left spacing-left--big spacing-left--inner">
             {%- block generalInformation -%}
-                {{ parent() }}
+                <div class="grid grid--justify grid--middle">
+                    <div class="col">
+                        {{ block('name') }}
+                    </div>
+                    <div class="col">
+                        {{ block('stateWrapper') }}
+                    </div>
+                </div>
+
+                {{ block('sku') }}
             {%- endblock -%}
         </div>
 

@@ -41,7 +41,7 @@
     {% block header %}
         {% if data.addAllSetButton %}
             {% block generalAddToCart %}
-                {% widget 'AddItemsFormWidget'  args [config, data, data.products] with {
+                {% widget 'AddItemsFormWidget' args [config, data, data.products] with {
                     embed: {
                         jsName: config.jsName,
                         generalAddToCartButtonClass: generalAddToCartButtonClass,
@@ -122,79 +122,100 @@
         </div>
         <div class="col col--sm-12 col--lg-7 product-set-slider product-set-slider--hide-prev-btn product-set-slider--multiple">
             {% block productSet %}
-                {% embed molecule('slick-carousel') with {
-                    data: {
-                        slides: data.products,
-                    },
-                    attributes: {
-                        'data-json': data.sliderConfig,
-                        'custom-select-class-name': 'custom-select',
-                    },
-                    modifiers: ['product-set', 'product-set-secondary'],
-                    embed: {
-                        jsName: config.jsName,
-                    },
-                } only %}
-                    {% block slides %}
-                        {% for product in data.slides %}
-                            {% embed molecule('product-item') with {
-                                modifiers: ['stretch', 'product-set', 'widget'],
-                                class: embed.jsName ~ '__product-item',
-                                data: {
-                                    product: product,
-                                },
-                            } only %}
-                                {% block content %}
-                                    {{ parent() }}
-                                    {% set isNotAvailable = data.product.idProductConcrete and not data.product.available %}
+                <form method="GET">
+                    {% embed molecule('slick-carousel') with {
+                        data: {
+                            slides: data.products,
+                        },
+                        attributes: {
+                            'data-json': data.sliderConfig,
+                            'custom-select-class-name': 'custom-select',
+                        },
+                        modifiers: ['product-set', 'product-set-secondary'],
+                        embed: {
+                            jsName: config.jsName,
+                        },
+                    } only %}
+                        {% block slides %}
+                            {% for product in data.slides %}
+                                {% embed molecule('product-item') with {
+                                    modifiers: ['stretch', 'product-set', 'widget'],
+                                    class: embed.jsName ~ '__product-item',
+                                    data: {
+                                        product: product,
+                                    },
+                                } only %}
+                                    {% block content %}
+                                        {{ parent() }}
+                                        {% set isNotAvailable = data.product.idProductConcrete and not data.product.available %}
 
-                                    {% embed molecule('variant-configurator', 'ProductDetailPage') with {
-                                        data: {
-                                            superAttributes: data.product.attributeMap.superAttributes,
-                                            selectedAttributes: data.product.selectedAttributes,
-                                            availableAttributes: data.product.availableAttributes,
-                                        },
-                                        embed: {
-                                            idProductAbstract: data.idProductAbstract,
-                                        },
-                                    } only %}
-                                        {% block variant %}
-                                            {% include molecule('variant', 'ProductDetailPage') with {
-                                                data: {
-                                                    name: name,
-                                                    formName: 'attributes[' ~ embed.idProductAbstract ~ '][' ~ name ~ ']',
-                                                    values: values,
-                                                    selectedValue: selectedValue,
-                                                    label: ('product.attribute.' ~ name) | trans,
-                                                    isAvailable: isAvailable,
-                                                    autoInitSelect: true,
-                                                },
-                                            } only %}
-                                        {% endblock %}
-                                    {% endembed %}
+                                        {% embed molecule('variant-configurator', 'ProductDetailPage') with {
+                                            data: {
+                                                superAttributes: data.product.attributeMap.superAttributes,
+                                                selectedAttributes: data.product.selectedAttributes,
+                                                availableAttributes: data.product.availableAttributes,
+                                                useExternalForm: true,
+                                            },
+                                            embed: {
+                                                idProductAbstract: data.idProductAbstract,
+                                            },
+                                        } only %}
+                                            {% block variant %}
+                                                {% include molecule('variant', 'ProductDetailPage') with {
+                                                    data: {
+                                                        name: name,
+                                                        formName: 'attributes[' ~ embed.idProductAbstract ~ '][' ~ name ~ ']',
+                                                        values: values,
+                                                        selectedValue: selectedValue,
+                                                        label: ('product.attribute.' ~ name) | trans,
+                                                        isAvailable: isAvailable,
+                                                        autoInitSelect: true,
+                                                    },
+                                                } only %}
+                                            {% endblock %}
+                                        {% endembed %}
 
-                                    {% if isNotAvailable %}
-                                        <p><strong>{{ 'product.detail.out_of_stock' | trans }}</strong></p>
-                                    {% else %}
-                                        {% set isDisabled = not data.product.idProductConcrete or not data.product.available %}
-
-                                        {% if isDisabled %}
-                                            <button type="button" class="button button--expand" disabled>{{ 'page.detail.add-to-cart' | trans }}</button>
+                                        {% if isNotAvailable %}
+                                            <p><strong>{{ 'product.detail.out_of_stock' | trans }}</strong></p>
                                         {% else %}
-                                            {% widget 'AddToCartFormWidget'  args [config, data.product, isDisabled] only %}
-                                                {% block embeddedData %}
-                                                    <button class="button button--expand" data-init-single-click {{ qa('add-to-cart-button') }}>
-                                                        {{- 'page.detail.add-to-cart' | trans -}}
-                                                    </button>
-                                                {% endblock %}
-                                            {% endwidget %}
+                                            {% set isDisabled = not data.product.idProductConcrete or not data.product.available %}
+
+                                            {% if isDisabled %}
+                                                <button class="button button--expand" disabled>{{ 'page.detail.add-to-cart' | trans }}</button>
+                                            {% else %}
+                                                {% widget 'AddToCartFormWidget' args [config, data.product, isDisabled] only %}
+                                                    {% block body %}
+                                                        {% set productSku = data.product.sku %}
+                                                        {% set formAction = path('cart/add', {'sku': productSku}) %}
+                                                        {% set tokenField = data.form._token.vars %}
+
+                                                        {% include molecule('remote-form-submit') with {
+                                                            data: {
+                                                                label: 'page.detail.add-to-cart' | trans,
+                                                                buttonClass: 'button button--expand ' ~ data.config.jsName ~ '__button-add-to-cart',
+                                                                buttonExtraAttributes: {
+                                                                    'data-form-action': formAction,
+                                                                    'data-init-single-click': true,
+                                                                    'data-qa': 'add-to-cart-button',
+                                                                },
+                                                            },
+                                                            attributes: {
+                                                                'form-name': 'addToCartForm_' ~ productSku,
+                                                                'form-action': formAction,
+                                                                'field-name': tokenField.full_name,
+                                                                'field-value': tokenField.value,
+                                                            },
+                                                        } only %}
+                                                    {% endblock %}
+                                                {% endwidget %}
+                                            {% endif %}
                                         {% endif %}
-                                    {% endif %}
-                                {% endblock %}
-                            {% endembed %}
-                        {% endfor %}
-                    {% endblock %}
-                {% endembed %}
+                                    {% endblock %}
+                                {% endembed %}
+                            {% endfor %}
+                        {% endblock %}
+                    {% endembed %}
+                </form>
             {% endblock %}
         </div>
     </div>

@@ -138,6 +138,7 @@ class CustomerHelper extends Module
         $mailMock = new CustomerToMailBridge($this->getMailMock());
         $this->setDependency(CustomerDependencyProvider::FACADE_MAIL, $mailMock);
         $this->getFacade()->registerCustomer($customerTransfer);
+        $this->getFacade()->confirmCustomerRegistration($customerTransfer);
 
         $customerTransfer->setPassword($password);
 
