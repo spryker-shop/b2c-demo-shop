@@ -1,16 +1,4 @@
-@mixin product-label-widget-label-group($name: '.label-group') {
-    #{$name} {
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        max-height: 100%;
-        pointer-events: none;
-        z-index: $setting-zi-element-floating;
-        padding: rem(16);
-        font-family: $setting-font-family;
-
-        @content;
-    }
+@include product-label-widget-label-group() {
+    padding: rem(16);
+    font-family: $setting-font-family;
 }
-
-@include product-label-widget-label-group();
