@@ -7,8 +7,13 @@
 use Pyz\Shared\Scheduler\SchedulerConfig;
 use Spryker\Shared\Acl\AclConstants;
 use Spryker\Shared\Application\ApplicationConstants;
+use Spryker\Shared\Collector\CollectorConstants;
+use Spryker\Shared\Customer\CustomerConstants;
 use Spryker\Shared\ErrorHandler\ErrorHandlerConstants;
 use Spryker\Shared\Kernel\KernelConstants;
+use Spryker\Shared\Mail\MailConstants;
+use Spryker\Shared\Newsletter\NewsletterConstants;
+use Spryker\Shared\ProductManagement\ProductManagementConstants;
 use Spryker\Shared\Propel\PropelConstants;
 use Spryker\Shared\PropelOrm\PropelOrmConstants;
 use Spryker\Shared\Scheduler\SchedulerConstants;
@@ -21,6 +26,8 @@ use Spryker\Shared\StorageRedis\StorageRedisConstants;
 use Spryker\Shared\ZedNavigation\ZedNavigationConstants;
 use Spryker\Shared\ZedRequest\ZedRequestConstants;
 use SprykerShop\Shared\ShopApplication\ShopApplicationConstants;
+
+$storeLowerCase = strtolower(APPLICATION_STORE);
 
 // ---------- General
 $config[KernelConstants::SPRYKER_ROOT] = APPLICATION_ROOT_DIR . '/vendor/spryker';
@@ -108,3 +115,68 @@ $config[AclConstants::ACL_USER_RULE_WHITELIST][] = [
 $config[ErrorHandlerConstants::DISPLAY_ERRORS] = true;
 
 $config[PropelConstants::USE_SUDO_TO_MANAGE_DATABASE] = false;
+
+// ---------- Yves host
+$ENV_PROTOCOL_YVES = getenv('YVES_HOST_PROTOCOL');
+$ENV_HOST_YVES = getenv('YVES_HOST');
+$config[ApplicationConstants::HOST_YVES] = $ENV_HOST_YVES;
+$config[ApplicationConstants::PORT_YVES] = '';
+$config[ApplicationConstants::PORT_SSL_YVES] = '';
+$config[ApplicationConstants::BASE_URL_YVES] = sprintf(
+    '%s%s%s',
+    $ENV_PROTOCOL_YVES,
+    $config[ApplicationConstants::HOST_YVES],
+    $config[ApplicationConstants::PORT_YVES]
+);
+$config[ApplicationConstants::BASE_URL_SSL_YVES] = sprintf(
+    'https://%s%s',
+    $config[ApplicationConstants::HOST_YVES],
+    $config[ApplicationConstants::PORT_SSL_YVES]
+);
+$config[ProductManagementConstants::BASE_URL_YVES] = $config[ApplicationConstants::BASE_URL_YVES];
+$config[NewsletterConstants::BASE_URL_YVES] = $config[ApplicationConstants::BASE_URL_YVES];
+$config[CustomerConstants::BASE_URL_YVES] = $config[ApplicationConstants::BASE_URL_YVES];
+
+// ---------- Zed host
+$ENV_PROTOCOL_ZED = getenv('ZED_HOST_PROTOCOL');
+$ENV_HOST_ZED = getenv('ZED_HOST');
+$config[ApplicationConstants::HOST_ZED] = $ENV_HOST_ZED;
+$config[ApplicationConstants::PORT_ZED] = '';
+$config[ApplicationConstants::PORT_SSL_ZED] = '';
+$config[ZedRequestConstants::HOST_ZED_API] = $ENV_HOST_ZED;
+$config[ApplicationConstants::BASE_URL_ZED] = sprintf(
+    '%s%s%s',
+    $ENV_PROTOCOL_ZED,
+    $config[ApplicationConstants::HOST_ZED],
+    $config[ApplicationConstants::PORT_ZED]
+);
+$config[ApplicationConstants::BASE_URL_SSL_ZED] = sprintf(
+    'https://%s%s',
+    $config[ApplicationConstants::HOST_ZED],
+    $config[ApplicationConstants::PORT_SSL_ZED]
+);
+$config[ZedRequestConstants::BASE_URL_ZED_API] = $config[ApplicationConstants::BASE_URL_ZED];
+$config[ZedRequestConstants::BASE_URL_SSL_ZED_API] = $config[ApplicationConstants::BASE_URL_SSL_ZED];
+
+// ---------- Assets
+$config[ApplicationConstants::BASE_URL_STATIC_ASSETS] = $config[ApplicationConstants::BASE_URL_YVES];
+$config[ApplicationConstants::BASE_URL_STATIC_MEDIA] = $config[ApplicationConstants::BASE_URL_YVES];
+$config[ApplicationConstants::BASE_URL_SSL_STATIC_ASSETS] = $config[ApplicationConstants::BASE_URL_SSL_YVES];
+$config[ApplicationConstants::BASE_URL_SSL_STATIC_MEDIA] = $config[ApplicationConstants::BASE_URL_SSL_YVES];
+
+// ---------- Session
+$config[SessionConstants::YVES_SESSION_COOKIE_DOMAIN] = $config[ApplicationConstants::HOST_YVES];
+$config[SessionConstants::ZED_SESSION_COOKIE_NAME] = $config[ApplicationConstants::HOST_ZED];
+
+// ---------- Elasticsearch
+$ELASTICA_INDEX_NAME = sprintf('%s_search', $storeLowerCase);
+$config[SearchConstants::ELASTICA_PARAMETER__INDEX_NAME] = $ELASTICA_INDEX_NAME;
+$config[CollectorConstants::ELASTICA_PARAMETER__INDEX_NAME] = $ELASTICA_INDEX_NAME;
+
+// ---------- Email
+$config[MailConstants::MAILCATCHER_GUI] = 'http://' . $config[ApplicationConstants::HOST_ZED] . ':1080';
+
+// ---------- RabbitMQ
+$config[ApplicationConstants::ZED_RABBITMQ_USERNAME] = sprintf('%s_development', APPLICATION_STORE);
+$config[ApplicationConstants::ZED_RABBITMQ_PASSWORD] = 'mate20mg';
+$config[ApplicationConstants::ZED_RABBITMQ_VHOST] = sprintf('/%s_development_zed', APPLICATION_STORE);

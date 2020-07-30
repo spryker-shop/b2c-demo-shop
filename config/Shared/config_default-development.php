@@ -13,8 +13,8 @@ use Spryker\Shared\ErrorHandler\ErrorHandlerConstants;
 use Spryker\Shared\ErrorHandler\ErrorRenderer\WebExceptionErrorRenderer;
 use Spryker\Shared\GlueApplication\GlueApplicationConstants;
 use Spryker\Shared\Kernel\KernelConstants;
-use Spryker\Shared\Kernel\Store;
 use Spryker\Shared\Log\LogConstants;
+use Spryker\Shared\Mail\MailConstants;
 use Spryker\Shared\Oauth\OauthConstants;
 use Spryker\Shared\Propel\PropelConstants;
 use Spryker\Shared\PropelOrm\PropelOrmConstants;
@@ -35,8 +35,6 @@ use SprykerShop\Shared\CalculationPage\CalculationPageConstants;
 use SprykerShop\Shared\ErrorPage\ErrorPageConstants;
 use SprykerShop\Shared\ShopApplication\ShopApplicationConstants;
 use SprykerShop\Shared\WebProfilerWidget\WebProfilerWidgetConstants;
-
-$CURRENT_STORE = Store::getInstance()->getStoreName();
 
 // ---------- General environment
 $config[KernelConstants::SPRYKER_ROOT] = APPLICATION_ROOT_DIR . '/vendor/spryker';
@@ -65,10 +63,21 @@ $config[PropelConstants::ZED_DB_ENGINE] = $config[PropelConstants::ZED_DB_ENGINE
 $config[PropelQueryBuilderConstants::ZED_DB_ENGINE] = $config[PropelConstants::ZED_DB_ENGINE_PGSQL];
 
 // ---------- RabbitMQ
+$config[RabbitMqEnv::RABBITMQ_API_VIRTUAL_HOST] = sprintf('/%s_development_zed', APPLICATION_STORE);
+$config[RabbitMqEnv::RABBITMQ_VIRTUAL_HOST] = sprintf('/%s_development_zed', APPLICATION_STORE);
+$config[RabbitMqEnv::RABBITMQ_USERNAME] = sprintf('%s_development', APPLICATION_STORE);
 $config[RabbitMqEnv::RABBITMQ_API_HOST] = 'localhost';
 $config[RabbitMqEnv::RABBITMQ_API_PORT] = '15672';
 $config[RabbitMqEnv::RABBITMQ_API_USERNAME] = 'admin';
 $config[RabbitMqEnv::RABBITMQ_API_PASSWORD] = 'mate20mg';
+$config[RabbitMqEnv::RABBITMQ_CONNECTIONS]['DE'][RabbitMqEnv::RABBITMQ_USERNAME] = 'DE_development';
+$config[RabbitMqEnv::RABBITMQ_CONNECTIONS]['DE'][RabbitMqEnv::RABBITMQ_VIRTUAL_HOST] = '/DE_development_zed';
+
+$config[RabbitMqEnv::RABBITMQ_CONNECTIONS]['AT'][RabbitMqEnv::RABBITMQ_USERNAME] = 'AT_development';
+$config[RabbitMqEnv::RABBITMQ_CONNECTIONS]['AT'][RabbitMqEnv::RABBITMQ_VIRTUAL_HOST] = '/AT_development_zed';
+
+$config[RabbitMqEnv::RABBITMQ_CONNECTIONS]['US'][RabbitMqEnv::RABBITMQ_USERNAME] = 'US_development';
+$config[RabbitMqEnv::RABBITMQ_CONNECTIONS]['US'][RabbitMqEnv::RABBITMQ_VIRTUAL_HOST] = '/US_development_zed';
 
 // ---------- Session
 $config[SessionConstants::YVES_SESSION_COOKIE_SECURE] = false;
@@ -90,7 +99,6 @@ $config[SchedulerJenkinsConstants::JENKINS_CONFIGURATION] = [
 // ---------- Zed request
 $config[ZedRequestConstants::TRANSFER_DEBUG_SESSION_FORWARD_ENABLED] = true;
 $config[ZedRequestConstants::SET_REPEAT_DATA] = true;
-$config[ZedRequestConstants::YVES_REQUEST_REPEAT_DATA_PATH] = APPLICATION_ROOT_DIR . '/data/' . Store::getInstance()->getStoreName() . '/' . APPLICATION_ENV . '/yves-requests';
 
 // ---------- Navigation
 $config[ZedNavigationConstants::ZED_NAVIGATION_CACHE_ENABLED] = true;
@@ -110,7 +118,7 @@ $config[AclConstants::ACL_USER_RULE_WHITELIST][] = [
 // ---------- Logging
 $config[LogConstants::LOG_LEVEL] = Logger::INFO;
 
-$baseLogFilePath = sprintf('%s/data/%s/logs', APPLICATION_ROOT_DIR, $CURRENT_STORE);
+$baseLogFilePath = sprintf('%s/data/logs', APPLICATION_ROOT_DIR);
 
 $config[LogConstants::EXCEPTION_LOG_FILE_PATH_YVES] = $baseLogFilePath . '/YVES/exception.log';
 $config[LogConstants::EXCEPTION_LOG_FILE_PATH_ZED] = $baseLogFilePath . '/ZED/exception.log';
@@ -136,3 +144,9 @@ $config[ApplicationConstants::ENABLE_PRETTY_ERROR_HANDLER] = true;
 
 // ---------- Console
 $config[ConsoleConstants::ENABLE_DEVELOPMENT_CONSOLE_COMMANDS] = true;
+
+// ---------- Propel
+$config[PropelConstants::ZED_DB_DATABASE] = sprintf('%s_development_zed', APPLICATION_CODE_BUCKET);
+
+// ---------- MailCatcher
+$config[MailConstants::MAILCATCHER_GUI] = sprintf('http://%s:1080', $config[ApplicationConstants::HOST_ZED]);

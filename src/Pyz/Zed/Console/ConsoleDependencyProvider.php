@@ -98,8 +98,8 @@ use Spryker\Zed\RabbitMq\Communication\Console\DeleteAllExchangesConsole;
 use Spryker\Zed\RabbitMq\Communication\Console\DeleteAllQueuesConsole;
 use Spryker\Zed\RabbitMq\Communication\Console\PurgeAllQueuesConsole;
 use Spryker\Zed\RabbitMq\Communication\Console\SetUserPermissionsConsole;
-use Spryker\Zed\RestRequestValidator\Communication\Console\BuildValidationCacheConsole;
-use Spryker\Zed\RestRequestValidator\Communication\Console\RemoveValidationCacheConsole;
+use Spryker\Zed\RestRequestValidator\Communication\Console\BuildRestApiValidationCacheConsole;
+use Spryker\Zed\RestRequestValidator\Communication\Console\RemoveRestApiValidationCacheConsole;
 use Spryker\Zed\Router\Communication\Plugin\Console\RouterCacheWarmUpConsole;
 use Spryker\Zed\SalesInvoice\Communication\Console\OrderInvoiceSendConsole;
 use Spryker\Zed\Scheduler\Communication\Console\SchedulerCleanConsole;
@@ -171,8 +171,6 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
             new CacheWarmerConsole(),
             new BuildNavigationConsole(),
             new RemoveNavigationCacheConsole(),
-            new BuildValidationCacheConsole(),
-            new RemoveValidationCacheConsole(),
             new EmptyAllCachesConsole(),
             new TransferGeneratorConsole(),
             new RemoveTransferConsole(),
@@ -304,7 +302,8 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
 
             new UuidGeneratorConsole(),
             new DeleteExpiredGuestQuoteConsole(),
-            new BuildValidationCacheConsole(),
+            new BuildRestApiValidationCacheConsole(),
+            new RemoveRestApiValidationCacheConsole(),
 
             new CleanTranslationCacheConsole(),
             new GenerateTranslationCacheConsole(),
