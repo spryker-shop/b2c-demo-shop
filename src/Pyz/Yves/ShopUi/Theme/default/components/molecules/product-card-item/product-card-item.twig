@@ -99,21 +99,7 @@
                                 {% endblock %}
                             </div>
 
-                            {% block state %}
-                                {% set stateName = data.productItem.state.name ?? '' %}
-
-                                {% if stateName %}
-                                    {% set state = stateName | replace({' ': '-'}) | lower %}
-
-                                    {% include molecule('status') with {
-                                        class: 'col',
-                                        data: {
-                                            label: stateName | capitalize,
-                                            status: state,
-                                        },
-                                    } only %}
-                                {% endif %}
-                            {% endblock %}
+                            {% block state %}{% endblock %}
                         </div>
 
                         {% if canEditCart %}
