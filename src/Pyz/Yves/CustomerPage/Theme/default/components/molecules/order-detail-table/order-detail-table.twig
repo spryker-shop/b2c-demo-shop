@@ -72,6 +72,22 @@
                             {% endif %}
                         {% endblock %}
 
+                        {% block state %}
+                            {% set stateName = data.productItem.state.name ?? '' %}
+
+                            {% if stateName %}
+                                {% set state = stateName | replace({' ': '-'}) | lower %}
+
+                                {% include molecule('status') with {
+                                    class: 'col',
+                                    data: {
+                                        label: stateName | capitalize,
+                                        status: state,
+                                    },
+                                } only %}
+                            {% endif %}
+                        {% endblock %}
+
                         {% block bundles %}
                             {% include molecule('cart-bundle-list', 'ProductBundleWidget') ignore missing with {
                                 data: {

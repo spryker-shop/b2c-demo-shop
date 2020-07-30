@@ -32,12 +32,14 @@
         {% endblock %}
 
         {% block productSet %}
-            {% include molecule('product-set-slider', 'ProductSetWidget') with {
-                data: {
-                    products: data.products,
-                    sliderConfig: data.sliderConfig,
-                },
-            } only %}
+            <form method="GET">
+                {% include molecule('product-set-slider', 'ProductSetWidget') with {
+                    data: {
+                        products: data.products,
+                        sliderConfig: data.sliderConfig,
+                    },
+                } only %}
+            </form>
         {% endblock %}
     {% endembed %}
 {% endblock %}

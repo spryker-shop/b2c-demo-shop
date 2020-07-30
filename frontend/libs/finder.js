@@ -71,11 +71,11 @@ const findAppEntryPoint = async (settings, file) => {
     config.fallbackPatterns = updatePatterns(config.fallbackPatterns);
 
     const entryPoint = await findEntryPoints(config);
-    return entryPoint[0];
+    return entryPoint[entryPoint.length - 1];
 };
 
 module.exports = {
     findComponentEntryPoints,
     findComponentStyles,
-    findAppEntryPoint
+    findAppEntryPoint,
 };
