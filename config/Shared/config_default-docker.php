@@ -15,7 +15,6 @@ use Spryker\Shared\Event\EventConstants;
 use Spryker\Shared\GlueApplication\GlueApplicationConstants;
 use Spryker\Shared\Http\HttpConstants;
 use Spryker\Shared\Kernel\KernelConstants;
-use Spryker\Shared\Kernel\Store;
 use Spryker\Shared\Log\LogConstants;
 use Spryker\Shared\Mail\MailConstants;
 use Spryker\Shared\Newsletter\NewsletterConstants;
@@ -48,9 +47,6 @@ use SprykerShop\Shared\CalculationPage\CalculationPageConstants;
 use SprykerShop\Shared\ErrorPage\ErrorPageConstants;
 use SprykerShop\Shared\ShopApplication\ShopApplicationConstants;
 use SprykerShop\Shared\WebProfilerWidget\WebProfilerWidgetConstants;
-use Twig\Cache\FilesystemCache;
-
-$CURRENT_STORE = Store::getInstance()->getStoreName();
 
 /* ZED */
 $config[ApplicationConstants::HOST_ZED] = getenv('SPRYKER_ZED_HOST');
@@ -88,20 +84,8 @@ $config[ZedRequestConstants::BASE_URL_SSL_ZED_API] = sprintf(
     $config[ZedRequestConstants::HOST_ZED_API]
 );
 
-$config[TwigConstants::ZED_TWIG_OPTIONS] = [
-    'cache' => new FilesystemCache(
-        sprintf(
-            '%s/data/%s/cache/ZED/twig',
-            APPLICATION_ROOT_DIR,
-            $CURRENT_STORE
-        ),
-        FilesystemCache::FORCE_BYTECODE_INVALIDATION
-    ),
-];
-
 $config[ZedRequestConstants::TRANSFER_DEBUG_SESSION_FORWARD_ENABLED] = true;
 $config[ZedRequestConstants::SET_REPEAT_DATA] = true;
-$config[ZedRequestConstants::YVES_REQUEST_REPEAT_DATA_PATH] = APPLICATION_ROOT_DIR . '/data/' . Store::getInstance()->getStoreName() . '/' . APPLICATION_ENV . '/yves-requests';
 
 $config[ApplicationConstants::ZED_SSL_ENABLED] = false;
 $config[SessionConstants::ZED_SSL_ENABLED] = (bool)getenv('SPRYKER_SSL_ENABLE');
@@ -177,17 +161,6 @@ $config[ApplicationConstants::BASE_URL_SSL_YVES] = sprintf(
 $config[ProductManagementConstants::BASE_URL_YVES] = $config[ApplicationConstants::BASE_URL_YVES];
 $config[NewsletterConstants::BASE_URL_YVES] = $config[ApplicationConstants::BASE_URL_YVES];
 $config[CustomerConstants::BASE_URL_YVES] = $config[ApplicationConstants::BASE_URL_YVES];
-
-$config[TwigConstants::YVES_TWIG_OPTIONS] = [
-    'cache' => new FilesystemCache(
-        sprintf(
-            '%s/data/%s/cache/YVES/twig',
-            APPLICATION_ROOT_DIR,
-            $CURRENT_STORE
-        ),
-        FilesystemCache::FORCE_BYTECODE_INVALIDATION
-    ),
-];
 
 $config[ApplicationConstants::YVES_SSL_ENABLED] = (bool)getenv('SPRYKER_SSL_ENABLE');
 $config[SessionConstants::YVES_SSL_ENABLED] = (bool)getenv('SPRYKER_SSL_ENABLE');
