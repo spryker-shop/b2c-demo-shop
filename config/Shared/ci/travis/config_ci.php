@@ -115,17 +115,6 @@ $config[SessionRedisConstants::ZED_SESSION_REDIS_DATABASE] = 2;
 
 // ---------- Twig
 $config[TwigConstants::YVES_PATH_CACHE_ENABLED] = true;
-$config[TwigConstants::YVES_PATH_CACHE_FILE] = sprintf(
-    '%s/data/%s/cache/YVES/twig/.pathCache',
-    APPLICATION_ROOT_DIR,
-    $CURRENT_STORE
-);
-
-$config[TwigConstants::ZED_PATH_CACHE_FILE] = sprintf(
-    '%s/data/%s/cache/ZED/twig/.pathCache',
-    APPLICATION_ROOT_DIR,
-    $CURRENT_STORE
-);
 
 // ---------- Scheduler
 $config[SchedulerConstants::ENABLED_SCHEDULERS] = [];

@@ -103,10 +103,10 @@ const getAppSettingsByTheme = (namespaceConfig, theme, pathToConfig) => {
 
     const getPublicStaticUrl = () => namespaceJson.staticPath;
 
-    const getAllModuleSuffixes = () => namespaceJson.namespaces.map(namespace => namespace.codeBucket);
+    const getAllCodeBuckets = () => namespaceJson.namespaces.map(namespace => namespace.codeBucket);
 
     const ignoreModulesCollection = () => {
-        return getAllModuleSuffixes()
+        return getAllCodeBuckets()
                     .filter(suffix => suffix !== namespaceConfig.codeBucket)
                     .map(suffix => `!**/*${suffix}/Theme/**`);
     };
