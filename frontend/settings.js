@@ -1,4 +1,4 @@
-const { join } = require('path');
+const { join, resolve } = require('path');
 
 // define global settings
 const globalSettings = {
@@ -101,6 +101,8 @@ const getAppSettingsByTheme = (namespaceConfig, theme, pathToConfig) => {
             .replace(/%theme%/gi, theme)
     );
 
+    const getPublicStaticUrl = () => namespaceJson.staticPath;
+
     const getAllModuleSuffixes = () => namespaceJson.namespaces.map(namespace => namespace.codeBucket);
 
     const ignoreModulesCollection = () => {
@@ -122,7 +124,9 @@ const getAppSettingsByTheme = (namespaceConfig, theme, pathToConfig) => {
     // define relative urls to site host (/)
     const urls = {
         // assets base url
-        assets: getPublicUrl()
+        assets: getPublicUrl(),
+        // static assets base url
+        staticAssets: getPublicStaticUrl(),
     };
 
     // define project relative paths to context
@@ -135,6 +139,9 @@ const getAppSettingsByTheme = (namespaceConfig, theme, pathToConfig) => {
             // global assets folder
             globalAssets: `./frontend/assets/global/${theme}`,
 
+            // static assets source folder
+            staticAssets: `./frontend/static`,
+
             // assets folder for current theme into namespace
             currentAssets: join('./frontend/assets', namespaceConfig.namespace, theme)
         },
@@ -144,6 +151,8 @@ const getAppSettingsByTheme = (namespaceConfig, theme, pathToConfig) => {
 
         // current namespace and theme public assets folder
         public: join('./public/Yves', urls.assets),
+
+        publicStatic: resolve('./public/Yves', urls.staticAssets),
 
         // core folders
         core: globalSettings.paths.core,
