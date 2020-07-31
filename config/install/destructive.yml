@@ -66,33 +66,8 @@ sections:
                 - DE
 
     demodata:
-        import-commerce-setup:
-            command: "vendor/bin/console data:import --config=data/import/config/b2c_commerce_setup_import_config_v0.yml -vvv --no-ansi || true"
-            stores:
-                - DE
-
-        import-catalog-setup:
-            command: "vendor/bin/console data:import --config=data/import/config/b2c_catalog_setup_import_config_v0.yml -vvv --no-ansi || true"
-            stores:
-                - DE
-
-        import-special-product-types-setup:
-            command: "vendor/bin/console data:import --config=data/import/config/b2c_special_product_types_import_config_v0.yml -vvv --no-ansi || true"
-            stores:
-                - DE
-
-        import-merchandising-setup:
-            command: "vendor/bin/console data:import --config=data/import/config/b2c_merchandising_import_config_v0.yml -vvv --no-ansi || true"
-            stores:
-                - DE
-
-        import-content-management-setup:
-            command: "vendor/bin/console data:import --config=data/import/config/b2c_content_management_import_config_v0.yml -vvv --no-ansi || true"
-            stores:
-                - DE
-
-        import-miscellaneous-setup:
-            command: "vendor/bin/console data:import --config=data/import/config/b2c_miscellaneous_import_config_v0.yml -vvv --no-ansi || true"
+        import-eu-region-demodata:
+            command: "vendor/bin/console data:import --config=data/import/local/full_EU.yml"
             stores:
                 - DE
 
