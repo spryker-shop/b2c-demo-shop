@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+<database xmlns="spryker:schema-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\StateMachine\Persistence" package="src.Orm.Zed.StateMachine.Persistence">
+    <table name="spy_state_machine_transition_log" identifierQuoting="true">
+        <column name="id_state_machine_transition_log" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_state_machine_process" type="INTEGER" required="true"/>
+        <column name="command" type="VARCHAR" required="false"/>
+        <column name="condition" type="VARCHAR" required="false"/>
+        <column name="error_message" type="LONGVARCHAR" required="false"/>
+        <column name="event" required="false" size="100" type="VARCHAR"/>
+        <column name="hostname" type="VARCHAR" size="128" required="true"/>
+        <column name="identifier" type="INTEGER" required="true"/>
+        <column name="is_error" type="BOOLEAN" required="false"/>
+        <column name="locked" type="BOOLEAN" required="false"/>
+        <column name="params" type="ARRAY" required="false"/>
+        <column name="path" type="VARCHAR" size="256" required="false"/>
+        <column name="source_state" type="VARCHAR" size="128" required="false"/>
+        <column name="target_state" type="VARCHAR" size="128" required="false"/>
+        <foreign-key name="spy_state_machine_transition_log-fk_state_machine_process" foreignTable="spy_state_machine_process" phpName="Process" refPhpName="TransitionLog">
+            <reference local="fk_state_machine_process" foreign="id_state_machine_process"/>
+        </foreign-key>
+        <index name="index-spy_state_machine_transition_log-fk_state_machine_process">
+            <index-column name="fk_state_machine_process"/>
+        </index>
+        <id-method-parameter value="spy_state_machine_transition_log_pk_seq"/>
+        <behavior name="timestampable">
+            <parameter name="disable_updated_at" value="true"/>
+        </behavior>
+    </table>
+    <table name="spy_state_machine_process" identifierQuoting="true">
+        <column name="id_state_machine_process" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="name" type="VARCHAR" size="255" required="true"/>
+        <column name="state_machine_name" type="VARCHAR" size="255" required="true"/>
+        <index name="spy_state_machine_process-state_machine_name">
+            <index-column name="state_machine_name"/>
+        </index>
+        <unique name="spy_state_machine_process-name">
+            <unique-column name="name"/>
+            <unique-column name="state_machine_name"/>
+        </unique>
+        <id-method-parameter value="spy_state_machine_process_pk_seq"/>
+        <behavior name="timestampable"/>
+    </table>
+    <table name="spy_state_machine_lock" identifierQuoting="true">
+        <column name="id_state_machine_lock" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="expires" type="TIMESTAMP" required="true"/>
+        <column name="identifier" type="VARCHAR" size="255" required="true"/>
+        <unique name="spy_state_machine_lock-identifier">
+            <unique-column name="identifier"/>
+        </unique>
+        <id-method-parameter value="spy_state_machine_lock_pk_seq"/>
+        <behavior name="timestampable"/>
+    </table>
+    <table name="spy_state_machine_item_state" identifierQuoting="true">
+        <column name="id_state_machine_item_state" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_state_machine_process" type="INTEGER" required="true"/>
+        <column name="description" type="VARCHAR" size="255" required="false" default="NULL"/>
+        <column name="name" type="VARCHAR" size="255" required="true"/>
+        <foreign-key name="spy_state_machine_item_state-fk_state_machine_process" foreignTable="spy_state_machine_process" phpName="Process" refPhpName="StateMachineProcess">
+            <reference local="fk_state_machine_process" foreign="id_state_machine_process"/>
+        </foreign-key>
+        <index name="index-spy_state_machine_item_state-fk_state_machine_process">
+            <index-column name="fk_state_machine_process"/>
+        </index>
+        <unique name="spy_state_machine_item_state-name">
+            <unique-column name="name"/>
+            <unique-column name="fk_state_machine_process"/>
+        </unique>
+        <id-method-parameter value="spy_state_machine_item_state_pk_seq"/>
+    </table>
+    <table name="spy_state_machine_item_state_history" identifierQuoting="true">
+        <column name="id_state_machine_item_state_history" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_state_machine_item_state" type="INTEGER" required="true"/>
+        <column name="identifier" type="INTEGER" required="true"/>
+        <foreign-key name="spy_state_machine_item_state_h-fk_state_machine_item_state" foreignTable="spy_state_machine_item_state" phpName="State" refPhpName="StateHistory">
+            <reference local="fk_state_machine_item_state" foreign="id_state_machine_item_state"/>
+        </foreign-key>
+        <index name="spy_state_machine_item_state_history-identifier">
+            <index-column name="identifier"/>
+        </index>
+        <index name="index-spy_state_machine_item_state_history-fk_stat-86748ef1e826">
+            <index-column name="fk_state_machine_item_state"/>
+        </index>
+        <id-method-parameter value="spy_state_machine_item_state_history_pk_seq"/>
+        <behavior name="timestampable">
+            <parameter name="disable_updated_at" value="true"/>
+        </behavior>
+    </table>
+    <table name="spy_state_machine_event_timeout" identifierQuoting="true">
+        <column name="id_state_machine_event_timeout" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_state_machine_item_state" type="INTEGER" required="true"/>
+        <column name="fk_state_machine_process" type="INTEGER" required="true"/>
+        <column name="event" type="VARCHAR" size="255" required="true"/>
+        <column name="identifier" type="INTEGER" required="true"/>
+        <column name="timeout" type="TIMESTAMP" required="true"/>
+        <foreign-key name="spy_state_machine_event_timeout-fk_state_machine_item_state" foreignTable="spy_state_machine_item_state" phpName="State" refPhpName="EventTimeout">
+            <reference local="fk_state_machine_item_state" foreign="id_state_machine_item_state"/>
+        </foreign-key>
+        <foreign-key name="spy_state_machine_event_timeout-fk_state_machine_process" foreignTable="spy_state_machine_process" phpName="Process" refPhpName="StateMachineProcessTimeout">
+            <reference local="fk_state_machine_process" foreign="id_state_machine_process"/>
+        </foreign-key>
+        <index name="spy_state_machine_event_timeout-timeout">
+            <index-column name="timeout"/>
+        </index>
+        <index name="index-spy_state_machine_event_timeout-fk_state_mac-d2bb0e7f2734">
+            <index-column name="fk_state_machine_item_state"/>
+        </index>
+        <index name="index-spy_state_machine_event_timeout-fk_state_machine_process">
+            <index-column name="fk_state_machine_process"/>
+        </index>
+        <unique name="spy_state_machine_item_state-unique-identifier">
+            <unique-column name="identifier"/>
+            <unique-column name="fk_state_machine_item_state"/>
+        </unique>
+        <id-method-parameter value="spy_state_machine_event_timeout_pk_seq"/>
+        <behavior name="timestampable"/>
+    </table>
+</database>

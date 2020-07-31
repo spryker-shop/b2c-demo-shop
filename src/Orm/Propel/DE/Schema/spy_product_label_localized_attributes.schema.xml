@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<database xmlns="spryker:schema-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\ProductLabel\Persistence" package="src.Orm.Zed.ProductLabel.Persistence">
+    <table name="spy_product_label_localized_attributes" idMethod="native" identifierQuoting="true" phpName="SpyProductLabelLocalizedAttributes">
+        <column name="id_product_label_localized_attributes" type="INTEGER" required="true" primaryKey="true" autoIncrement="true"/>
+        <column name="fk_locale" type="INTEGER" required="true"/>
+        <column name="fk_product_label" type="INTEGER" required="true"/>
+        <column name="name" type="VARCHAR" required="false"/>
+        <foreign-key foreignTable="spy_product_label" phpName="SpyProductLabel" refPhpName="SpyProductLabelLocalizedAttributes">
+            <reference local="fk_product_label" foreign="id_product_label"/>
+        </foreign-key>
+        <foreign-key foreignTable="spy_locale" phpName="SpyLocale" refPhpName="SpyProductLabelLocalizedAttributes">
+            <reference local="fk_locale" foreign="id_locale"/>
+        </foreign-key>
+        <index name="index-spy_product_label_localized_attributes-fk_locale">
+            <index-column name="fk_locale"/>
+        </index>
+        <unique name="spy_product_label_localized_attributes-fk_product_label-fk_loc">
+            <unique-column name="fk_product_label"/>
+            <unique-column name="fk_locale"/>
+        </unique>
+        <id-method-parameter value="spy_product_label_localized_attributes_pk_seq"/>
+        <behavior name="event">
+            <parameter name="spy_product_label_localized_attributes_all" column="*"/>
+        </behavior>
+    </table>
+</database>

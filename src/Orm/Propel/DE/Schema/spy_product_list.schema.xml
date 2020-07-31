@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<database xmlns="spryker:schema-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\ProductList\Persistence" package="src.Orm.Zed.ProductList.Persistence">
+    <table name="spy_product_list" identifierQuoting="true">
+        <column name="id_product_list" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="key" type="VARCHAR" size="255"/>
+        <column name="title" type="VARCHAR" size="255"/>
+        <column name="type" required="true" size="16" type="ENUM" valueSet="blacklist,whitelist"/>
+        <index name="spy_product_list-type">
+            <index-column name="type"/>
+        </index>
+        <unique name="spy_product_list-unique-key">
+            <unique-column name="key"/>
+        </unique>
+        <id-method-parameter value="spy_product_list_pk_seq"/>
+        <behavior name="timestampable"/>
+        <behavior name="event">
+            <parameter name="spy_product_list_all" column="*"/>
+        </behavior>
+    </table>
+    <table name="spy_product_list_product_concrete" isCrossRef="true">
+        <column name="fk_product" type="integer" primaryKey="true"/>
+        <column name="fk_product_list" type="integer" primaryKey="true"/>
+        <foreign-key name="spy_product_list_product_concrete-fk_product_list" foreignTable="spy_product_list" onDelete="CASCADE">
+            <reference local="fk_product_list" foreign="id_product_list"/>
+        </foreign-key>
+        <foreign-key name="spy_product_list_product_concrete-fk_product" foreignTable="spy_product" onDelete="CASCADE">
+            <reference local="fk_product" foreign="id_product"/>
+        </foreign-key>
+        <index name="spy_product_list_product_concrete-fk_product_list">
+            <index-column name="fk_product_list"/>
+        </index>
+        <index name="spy_product_list_product_concrete-fk_product">
+            <index-column name="fk_product"/>
+        </index>
+        <behavior name="event">
+            <parameter name="spy_product_list_product_concrete_all" column="*"/>
+        </behavior>
+    </table>
+    <table name="spy_product_list_category" isCrossRef="true">
+        <column name="fk_category" type="integer" primaryKey="true"/>
+        <column name="fk_product_list" type="integer" primaryKey="true"/>
+        <foreign-key name="spy_product_list_category-fk_product_list" foreignTable="spy_product_list" onDelete="CASCADE">
+            <reference local="fk_product_list" foreign="id_product_list"/>
+        </foreign-key>
+        <foreign-key name="spy_product_list_category-fk_category" foreignTable="spy_category" onDelete="CASCADE">
+            <reference local="fk_category" foreign="id_category"/>
+        </foreign-key>
+        <index name="spy_product_list_category-fk_product_list">
+            <index-column name="fk_product_list"/>
+        </index>
+        <index name="spy_product_list_category-fk_category">
+            <index-column name="fk_category"/>
+        </index>
+        <behavior name="event">
+            <parameter name="spy_product_list_category_all" column="*"/>
+        </behavior>
+    </table>
+</database>

@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<database xmlns="spryker:schema-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\Glossary\Persistence" package="src.Orm.Zed.Glossary.Persistence">
+    <table name="spy_glossary_key" identifierQuoting="true">
+        <column name="id_glossary_key" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="is_active" type="BOOLEAN" default="true" required="true"/>
+        <column name="key" type="VARCHAR" size="255" required="true"/>
+        <index name="spy_glossary_key-index-key">
+            <index-column name="key"/>
+        </index>
+        <index name="spy_glossary_key-is_active">
+            <index-column name="is_active"/>
+        </index>
+        <unique name="spy_glossary_key-unique-key">
+            <unique-column name="key"/>
+        </unique>
+        <id-method-parameter value="spy_glossary_key_pk_seq"/>
+        <behavior name="event">
+            <parameter name="spy_glossary_key-key" column="key"/>
+            <parameter name="spy_glossary_key-is_active" column="is_active"/>
+        </behavior>
+    </table>
+    <table name="spy_glossary_translation" identifierQuoting="true">
+        <column name="id_glossary_translation" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_glossary_key" type="INTEGER" required="true"/>
+        <column name="fk_locale" type="INTEGER" required="true"/>
+        <column name="is_active" type="BOOLEAN" default="true" required="true"/>
+        <column name="value" type="LONGVARCHAR" required="true"/>
+        <foreign-key name="spy_glossary_translation-fk_glossary_key" foreignTable="spy_glossary_key" phpName="GlossaryKey" onDelete="CASCADE">
+            <reference foreign="id_glossary_key" local="fk_glossary_key"/>
+        </foreign-key>
+        <foreign-key name="spy_glossary_translation-fk_locale" foreignTable="spy_locale" phpName="Locale" onDelete="CASCADE">
+            <reference foreign="id_locale" local="fk_locale"/>
+        </foreign-key>
+        <index name="spy_glossary_translation-index-fk_locale">
+            <index-column name="fk_locale"/>
+        </index>
+        <index name="spy_glossary_translation-is_active">
+            <index-column name="is_active"/>
+        </index>
+        <unique name="spy_glossary_translation-unique-fk_glossary_key">
+            <unique-column name="fk_glossary_key"/>
+            <unique-column name="fk_locale"/>
+        </unique>
+        <id-method-parameter value="spy_glossary_translation_pk_seq"/>
+        <behavior name="event">
+            <parameter name="spy_glossary_translation-value" column="value"/>
+        </behavior>
+    </table>
+</database>

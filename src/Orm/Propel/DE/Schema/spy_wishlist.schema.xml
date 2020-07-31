@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<database xmlns="spryker:schema-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\Wishlist\Persistence" package="src.Orm.Zed.Wishlist.Persistence">
+    <table name="spy_wishlist">
+        <column name="id_wishlist" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_customer" required="true" type="INTEGER"/>
+        <column name="name" required="true" type="VARCHAR" size="255"/>
+        <foreign-key name="spy_wishlist-fk_customer" foreignTable="spy_customer">
+            <reference local="fk_customer" foreign="id_customer"/>
+        </foreign-key>
+        <unique name="spy_wishlist-unique-fk_customer-name">
+            <unique-column name="fk_customer"/>
+            <unique-column name="name"/>
+        </unique>
+        <id-method-parameter value="spy_wishlist_pk_seq"/>
+        <behavior name="timestampable"/>
+        <behavior name="uuid">
+            <parameter name="key_columns" value="fk_customer.id_wishlist"/>
+        </behavior>
+    </table>
+    <table name="spy_wishlist_item">
+        <column name="id_wishlist_item" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_wishlist" required="true" type="INTEGER"/>
+        <column name="sku" required="true" type="VARCHAR" size="255"/>
+        <foreign-key name="spy_wishlist_item-fk_wishlist" foreignTable="spy_wishlist">
+            <reference local="fk_wishlist" foreign="id_wishlist"/>
+        </foreign-key>
+        <foreign-key name="spy_wishlist_item-sku" foreignTable="spy_product">
+            <reference local="sku" foreign="sku"/>
+        </foreign-key>
+        <index name="index-spy_wishlist_item-fk_wishlist">
+            <index-column name="fk_wishlist"/>
+        </index>
+        <index name="index-spy_wishlist_item-sku">
+            <index-column name="sku"/>
+        </index>
+        <id-method-parameter value="spy_wishlist_item_pk_seq"/>
+        <behavior name="timestampable"/>
+    </table>
+</database>

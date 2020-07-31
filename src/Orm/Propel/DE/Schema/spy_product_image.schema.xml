@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<database xmlns="spryker:schema-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\ProductImage\Persistence" package="src.Orm.Zed.ProductImage.Persistence">
+    <table name="spy_product_image_set" idMethod="native" allowPkInsert="true">
+        <column name="id_product_image_set" type="INTEGER" primaryKey="true" autoIncrement="true"/>
+        <column name="fk_locale" type="INTEGER" required="false"/>
+        <column name="fk_product" type="INTEGER" required="false"/>
+        <column name="fk_product_abstract" type="INTEGER" required="false"/>
+        <column name="fk_resource_configurable_bundle_template" type="INTEGER" required="false"/>
+        <column name="fk_resource_product_set" type="INTEGER" required="false"/>
+        <column name="name" type="VARCHAR" size="255"/>
+        <column name="product_image_set_key" type="VARCHAR" size="32" required="false"/>
+        <foreign-key name="spy_product_image_set-fk_resource_c_b_t" foreignTable="spy_configurable_bundle_template">
+            <reference local="fk_resource_configurable_bundle_template" foreign="id_configurable_bundle_template"/>
+        </foreign-key>
+        <foreign-key name="spy_product_image_set-fk_locale" foreignTable="spy_locale">
+            <reference local="fk_locale" foreign="id_locale"/>
+        </foreign-key>
+        <foreign-key name="spy_product_image_set-fk_product" foreignTable="spy_product">
+            <reference local="fk_product" foreign="id_product"/>
+        </foreign-key>
+        <foreign-key name="spy_product_image_set-fk_product_abstract" foreignTable="spy_product_abstract">
+            <reference local="fk_product_abstract" foreign="id_product_abstract"/>
+        </foreign-key>
+        <foreign-key name="spy_product_image_set-fk_resource_product_set" foreignTable="spy_product_set">
+            <reference local="fk_resource_product_set" foreign="id_product_set"/>
+        </foreign-key>
+        <index name="spy_product_image_set-fk_resource_configurable_bundle_template">
+            <index-column name="fk_resource_configurable_bundle_template"/>
+        </index>
+        <index name="spy_product_image_set-index-fk_product">
+            <index-column name="fk_product"/>
+        </index>
+        <index name="spy_product_image_set-index-fk_product_abstract">
+            <index-column name="fk_product_abstract"/>
+        </index>
+        <index name="spy_product_image_set-fk_resource_product_set">
+            <index-column name="fk_resource_product_set"/>
+        </index>
+        <index>
+            <index-column name="product_image_set_key"/>
+        </index>
+        <unique name="fk_locale-fk_product-fk_product_abstract">
+            <unique-column name="fk_locale"/>
+            <unique-column name="fk_product"/>
+            <unique-column name="fk_product_abstract"/>
+        </unique>
+        <id-method-parameter value="spy_product_image_set_pk_seq"/>
+        <behavior name="timestampable"/>
+        <behavior name="event">
+            <parameter name="spy_product_image_set_all" column="*"/>
+        </behavior>
+    </table>
+    <table name="spy_product_image" idMethod="native" allowPkInsert="true">
+        <column name="id_product_image" type="INTEGER" primaryKey="true" autoIncrement="true"/>
+        <column name="external_url_large" type="VARCHAR" size="2048"/>
+        <column name="external_url_small" type="VARCHAR" size="2048"/>
+        <id-method-parameter value="spy_product_image_pk_seq"/>
+        <behavior name="timestampable"/>
+        <behavior name="event">
+            <parameter name="spy_product_image_all" column="*"/>
+        </behavior>
+    </table>
+    <table name="spy_product_image_set_to_product_image" idMethod="native" allowPkInsert="true">
+        <column name="id_product_image_set_to_product_image" type="INTEGER" primaryKey="true" autoIncrement="true"/>
+        <column name="fk_product_image" type="INTEGER" required="true"/>
+        <column name="fk_product_image_set" type="INTEGER" required="true"/>
+        <column name="sort_order" type="INTEGER" required="true"/>
+        <foreign-key name="spy_product_image_set_to_product_image-fk_product_image_set" foreignTable="spy_product_image_set">
+            <reference local="fk_product_image_set" foreign="id_product_image_set"/>
+        </foreign-key>
+        <foreign-key name="spy_product_image_set_to_product_image-fk_product_image" foreignTable="spy_product_image">
+            <reference local="fk_product_image" foreign="id_product_image"/>
+        </foreign-key>
+        <index name="index-spy_product_image_set_to_product_image-fk_pr-73c1243c19c1">
+            <index-column name="fk_product_image_set"/>
+        </index>
+        <index name="index-spy_product_image_set_to_product_image-fk_product_image">
+            <index-column name="fk_product_image"/>
+        </index>
+        <unique name="fk_product_image_set-fk_product_image">
+            <unique-column name="fk_product_image_set"/>
+            <unique-column name="fk_product_image"/>
+        </unique>
+        <id-method-parameter value="spy_product_image_set_to_product_image_pk_seq"/>
+        <behavior name="event">
+            <parameter name="spy_product_image_set_to_product_image_all" column="*"/>
+        </behavior>
+    </table>
+</database>

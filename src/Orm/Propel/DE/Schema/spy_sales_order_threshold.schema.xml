@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<database xmlns="spryker:schema-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\SalesOrderThreshold\Persistence" package="src.Orm.Zed.SalesOrderThreshold.Persistence">
+    <table name="spy_sales_order_threshold" idMethod="native" allowPkInsert="true" identifierQuoting="true" phpName="SpySalesOrderThreshold">
+        <column name="id_sales_order_threshold" required="true" type="INTEGER" primaryKey="true" autoIncrement="true"/>
+        <column name="fk_currency" type="INTEGER" required="true"/>
+        <column name="fk_sales_order_threshold_type" type="INTEGER" required="true"/>
+        <column name="fk_store" type="INTEGER" required="true"/>
+        <column name="fee" type="INTEGER" required="false"/>
+        <column name="message_glossary_key" type="VARCHAR" required="true"/>
+        <column name="threshold" type="INTEGER" required="true"/>
+        <foreign-key name="spy_sales_order_threshold-fk_sales_order_threshold_type" foreignTable="spy_sales_order_threshold_type" phpName="SalesOrderThresholdType">
+            <reference local="fk_sales_order_threshold_type" foreign="id_sales_order_threshold_type"/>
+        </foreign-key>
+        <foreign-key name="spy_sales_order_threshold-fk_currency" foreignTable="spy_currency" phpName="Currency">
+            <reference local="fk_currency" foreign="id_currency"/>
+        </foreign-key>
+        <foreign-key name="spy_sales_order_threshold-fk_store" foreignTable="spy_store" phpName="Store">
+            <reference local="fk_store" foreign="id_store"/>
+        </foreign-key>
+        <index name="index-spy_sales_order_threshold-fk_sales_order_threshold_type">
+            <index-column name="fk_sales_order_threshold_type"/>
+        </index>
+        <index name="index-spy_sales_order_threshold-fk_currency">
+            <index-column name="fk_currency"/>
+        </index>
+        <index name="index-spy_sales_order_threshold-fk_store">
+            <index-column name="fk_store"/>
+        </index>
+        <id-method-parameter value="id_sales_order_threshold_pk_seq"/>
+        <behavior name="timestampable"/>
+    </table>
+</database>

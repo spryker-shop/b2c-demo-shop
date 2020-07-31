@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<database xmlns="spryker:schema-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\Refund\Persistence" package="src.Orm.Zed.Refund.Persistence">
+    <table name="spy_refund">
+        <column name="id_refund" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_sales_order" required="true" type="INTEGER"/>
+        <column name="amount" required="true" type="INTEGER"/>
+        <column name="comment" type="VARCHAR"/>
+        <foreign-key name="spy_refund-fk_sales_order" foreignTable="spy_sales_order">
+            <reference foreign="id_sales_order" local="fk_sales_order"/>
+        </foreign-key>
+        <index name="index-spy_refund-fk_sales_order">
+            <index-column name="fk_sales_order"/>
+        </index>
+        <id-method-parameter value="spy_refund_pk_seq"/>
+        <behavior name="timestampable">
+            <parameter name="disable_updated_at" value="true"/>
+        </behavior>
+    </table>
+</database>

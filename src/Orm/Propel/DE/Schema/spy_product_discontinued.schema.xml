@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<database xmlns="spryker:schema-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\ProductDiscontinued\Persistence" package="src.Orm.Zed.ProductDiscontinued.Persistence">
+    <table name="spy_product_discontinued" idMethod="native" allowPkInsert="true" phpName="SpyProductDiscontinued">
+        <column name="id_product_discontinued" type="INTEGER" required="true" primaryKey="true" autoIncrement="true"/>
+        <column name="fk_product" type="INTEGER" required="true"/>
+        <column name="active_until" type="DATE" required="true"/>
+        <foreign-key name="spy_product_discontinued-fk_product" foreignTable="spy_product" phpName="Product">
+            <reference local="fk_product" foreign="id_product"/>
+        </foreign-key>
+        <index name="index-spy_product_discontinued-fk_product">
+            <index-column name="fk_product"/>
+        </index>
+        <id-method-parameter value="id_product_discontinued_pk_seq"/>
+        <behavior name="timestampable">
+            <parameter name="create_column" value="discontinued_on"/>
+        </behavior>
+        <behavior name="event">
+            <parameter name="spy_product_discontinued_all" column="*"/>
+        </behavior>
+    </table>
+    <table name="spy_product_discontinued_note" idMethod="native" allowPkInsert="true" phpName="SpyProductDiscontinuedNote">
+        <column name="id_product_discontinued_note" type="INTEGER" required="true" primaryKey="true" autoIncrement="true"/>
+        <column name="fk_locale" type="INTEGER" required="true"/>
+        <column name="fk_product_discontinued" type="INTEGER" required="true"/>
+        <column name="note" type="VARCHAR" required="false"/>
+        <foreign-key name="spy_product_discontinued_note-fk_product_discontinued" foreignTable="spy_product_discontinued" phpName="ProductDiscontinued">
+            <reference local="fk_product_discontinued" foreign="id_product_discontinued"/>
+        </foreign-key>
+        <foreign-key name="spy_product_discontinued_note-fk_locale" foreignTable="spy_locale" phpName="Locale">
+            <reference local="fk_locale" foreign="id_locale"/>
+        </foreign-key>
+        <index name="index-spy_product_discontinued_note-fk_locale">
+            <index-column name="fk_locale"/>
+        </index>
+        <unique name="spy_product_discontinued_note-unique-fk_product_discontinued">
+            <unique-column name="fk_product_discontinued"/>
+            <unique-column name="fk_locale"/>
+        </unique>
+        <id-method-parameter value="id_product_discontinued_note_pk_seq"/>
+        <behavior name="timestampable"/>
+        <behavior name="event">
+            <parameter name="spy_product_discontinued_all" column="*"/>
+        </behavior>
+    </table>
+</database>

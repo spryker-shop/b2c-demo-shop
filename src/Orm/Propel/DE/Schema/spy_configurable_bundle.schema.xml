@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<database xmlns="spryker:schema-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\ConfigurableBundle\Persistence" package="src.Orm.Zed.ConfigurableBundle.Persistence">
+    <table name="spy_configurable_bundle_template" phpName="SpyConfigurableBundleTemplate" identifierQuoting="true">
+        <column name="id_configurable_bundle_template" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="is_active" required="true" default="false" type="BOOLEAN"/>
+        <column name="key" type="VARCHAR" size="255" description="Key is an identifier for existing entities. This should never be changed."/>
+        <column name="name" required="true" type="VARCHAR" size="255"/>
+        <column name="uuid" required="false" type="VARCHAR" size="255"/>
+        <index name="index-spy_configurable_bundle_template-name">
+            <index-column name="name"/>
+        </index>
+        <unique name="spy_configurable_bundle_template-unique-key">
+            <unique-column name="key"/>
+        </unique>
+        <unique name="spy_configurable_bundle_template-uuid">
+            <unique-column name="uuid"/>
+        </unique>
+        <id-method-parameter value="spy_configurable_bundle_template_pk_seq"/>
+        <behavior name="uuid">
+            <parameter name="key_columns" value="id_configurable_bundle_template"/>
+        </behavior>
+        <behavior name="timestampable"/>
+        <behavior name="event">
+            <parameter name="spy_configurable_bundle_template_all" column="*"/>
+        </behavior>
+    </table>
+    <table name="spy_configurable_bundle_template_slot" phpName="SpyConfigurableBundleTemplateSlot" identifierQuoting="true">
+        <column name="id_configurable_bundle_template_slot" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_configurable_bundle_template" type="INTEGER" required="true"/>
+        <column name="fk_product_list" type="INTEGER"/>
+        <column name="key" type="VARCHAR" size="255" description="Key is an identifier for existing entities. This should never be changed."/>
+        <column name="name" required="true" type="VARCHAR" size="255"/>
+        <column name="uuid" required="false" type="VARCHAR" size="255"/>
+        <foreign-key name="spy_conf_bundle_template_slot-fk_conf_bundle_template" foreignTable="spy_configurable_bundle_template">
+            <reference foreign="id_configurable_bundle_template" local="fk_configurable_bundle_template"/>
+        </foreign-key>
+        <foreign-key name="spy_configurable_bundle_template_slot-fk_product_list" foreignTable="spy_product_list">
+            <reference foreign="id_product_list" local="fk_product_list"/>
+        </foreign-key>
+        <index name="spy_conf_bundle_template_slot-fk_conf_bundle_template">
+            <index-column name="fk_configurable_bundle_template"/>
+        </index>
+        <index name="spy_configurable_bundle_template_slot-fk_product_list">
+            <index-column name="fk_product_list"/>
+        </index>
+        <index name="index-spy_configurable_bundle_template_slot-name">
+            <index-column name="name"/>
+        </index>
+        <unique name="spy_configurable_bundle_template_slot-unique-key">
+            <unique-column name="key"/>
+        </unique>
+        <id-method-parameter value="spy_configurable_bundle_template_slot_pk_seq"/>
+        <behavior name="uuid">
+            <parameter name="key_columns" value="id_configurable_bundle_template_slot"/>
+        </behavior>
+        <behavior name="timestampable"/>
+        <behavior name="event">
+            <parameter name="spy_configurable_bundle_template_slot_all" column="*"/>
+        </behavior>
+    </table>
+</database>

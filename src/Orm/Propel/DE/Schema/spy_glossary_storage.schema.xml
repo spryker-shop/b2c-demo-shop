@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<database xmlns="spryker:schema-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\GlossaryStorage\Persistence" package="src.Orm.Zed.GlossaryStorage.Persistence">
+    <table name="spy_glossary_storage" identifierQuoting="true">
+        <column name="id_glossary_storage" type="BIGINT" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_glossary_key" type="INTEGER" required="true"/>
+        <column name="data" type="LONGVARCHAR" required="false"/>
+        <column name="glossary_key" type="VARCHAR" required="true"/>
+        <column name="key" type="VARCHAR" required="true"/>
+        <column name="locale" type="VARCHAR" required="true"/>
+        <index name="spy_glossary_storage-fk_glossary_key">
+            <index-column name="fk_glossary_key"/>
+        </index>
+        <id-method-parameter value="spy_glossary_storage_pk_seq"/>
+        <behavior name="synchronization">
+            <parameter name="resource" value="translation"/>
+            <parameter name="locale" required="true"/>
+            <parameter name="key_suffix_column" value="glossary_key"/>
+            <parameter name="queue_group" value="sync.storage.translation"/>
+            <parameter name="queue_pool" value="synchronizationPool"/>
+        </behavior>
+        <behavior name="timestampable"/>
+    </table>
+</database>

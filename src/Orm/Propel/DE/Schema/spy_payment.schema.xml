@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<database xmlns="spryker:schema-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\Payment\Persistence" package="src.Orm.Zed.Payment.Persistence">
+    <table name="spy_payment_provider" identifierQuoting="true">
+        <column name="id_payment_provider" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="name" required="true" size="255" type="VARCHAR"/>
+        <column name="payment_provider_key" required="true" size="255" type="VARCHAR"/>
+        <unique name="spy_payment_provider-unique-payment_provider_key">
+            <unique-column name="payment_provider_key"/>
+        </unique>
+        <id-method-parameter value="spy_payment_provider_pk_seq"/>
+    </table>
+    <table name="spy_payment_method" identifierQuoting="true">
+        <column name="id_payment_method" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_payment_provider" type="INTEGER" required="true"/>
+        <column name="is_active" type="BOOLEAN" default="true" required="true"/>
+        <column name="name" required="true" size="255" type="VARCHAR"/>
+        <column name="payment_method_key" required="true" size="255" type="VARCHAR"/>
+        <foreign-key name="spy_payment_method-fk_payment_provider" foreignTable="spy_payment_provider">
+            <reference local="fk_payment_provider" foreign="id_payment_provider"/>
+        </foreign-key>
+        <index name="spy_payment_method-is_active">
+            <index-column name="is_active"/>
+        </index>
+        <unique name="spy_payment_method-unique-payment_method_key">
+            <unique-column name="payment_method_key"/>
+        </unique>
+        <id-method-parameter value="spy_payment_method_pk_seq"/>
+    </table>
+    <table name="spy_payment_method_store" identifierQuoting="true">
+        <column name="id_payment_method_store" type="INTEGER" required="true" primaryKey="true" autoIncrement="true"/>
+        <column name="fk_payment_method" type="INTEGER" required="true"/>
+        <column name="fk_store" type="INTEGER" required="true"/>
+        <foreign-key name="spy_payment_method_store-fk_payment_method" foreignTable="spy_payment_method">
+            <reference local="fk_payment_method" foreign="id_payment_method"/>
+        </foreign-key>
+        <foreign-key name="spy_payment_method_store-fk_store" foreignTable="spy_store">
+            <reference local="fk_store" foreign="id_store"/>
+        </foreign-key>
+        <index name="index-payment_method_store-fk_store">
+            <index-column name="fk_store"/>
+        </index>
+        <unique name="spy_payment_method_store-unique-payment_method">
+            <unique-column name="fk_payment_method"/>
+            <unique-column name="fk_store"/>
+        </unique>
+        <id-method-parameter value="spy_payment_method_store_pk_seq"/>
+    </table>
+</database>

@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<database xmlns="spryker:schema-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\SalesConfigurableBundle\Persistence" package="src.Orm.Zed.SalesConfigurableBundle.Persistence">
+    <table name="spy_sales_order_configured_bundle">
+        <column name="id_sales_order_configured_bundle" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="configurable_bundle_template_uuid" required="true" type="VARCHAR" size="255"/>
+        <column name="name" required="true" type="VARCHAR"/>
+        <column name="note" required="false" size="255" type="VARCHAR"/>
+        <column name="quantity" required="true" type="INTEGER" default="1"/>
+        <id-method-parameter value="spy_sales_order_configured_bundle_pk_seq"/>
+        <behavior name="timestampable"/>
+    </table>
+    <table name="spy_sales_order_configured_bundle_item">
+        <column name="id_sales_order_configured_bundle_item" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_sales_order_configured_bundle" type="INTEGER" required="true"/>
+        <column name="fk_sales_order_item" type="INTEGER" required="true"/>
+        <column name="configurable_bundle_template_slot_uuid" required="true" type="VARCHAR" size="255"/>
+        <foreign-key name="spy_sales_order_conf_bundle_item-fk_sales_order_conf_bundle" foreignTable="spy_sales_order_configured_bundle">
+            <reference foreign="id_sales_order_configured_bundle" local="fk_sales_order_configured_bundle"/>
+        </foreign-key>
+        <foreign-key name="spy_sales_order_configured_bundle_item-fk_sales_order_item" foreignTable="spy_sales_order_item">
+            <reference foreign="id_sales_order_item" local="fk_sales_order_item"/>
+        </foreign-key>
+        <index name="spy_sales_order_conf_bundle_item-fk_sales_order_conf_bundle">
+            <index-column name="fk_sales_order_configured_bundle"/>
+        </index>
+        <unique name="spy_sales_order_conf_bundle_item-unique-fk_sales_order_item">
+            <unique-column name="fk_sales_order_item"/>
+        </unique>
+        <id-method-parameter value="spy_sales_order_configured_bundle_item_pk_seq"/>
+        <behavior name="timestampable"/>
+    </table>
+</database>

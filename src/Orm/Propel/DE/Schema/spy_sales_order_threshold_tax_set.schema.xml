@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<database xmlns="spryker:schema-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\SalesOrderThreshold\Persistence" package="src.Orm.Zed.SalesOrderThreshold.Persistence">
+    <table name="spy_sales_order_threshold_tax_set" idMethod="native" allowPkInsert="true" identifierQuoting="true" phpName="SpySalesOrderThresholdTaxSet">
+        <column name="id_sales_order_threshold_tax_set" required="true" type="INTEGER" primaryKey="true" autoIncrement="true"/>
+        <column name="fk_tax_set" type="INTEGER" required="true"/>
+        <foreign-key name="spy_sales_order_threshold_tax_set-fk_tax_set" foreignTable="spy_tax_set" phpName="TaxSet">
+            <reference local="fk_tax_set" foreign="id_tax_set"/>
+        </foreign-key>
+        <index name="index-spy_sales_order_threshold_tax_set-fk_tax_set">
+            <index-column name="fk_tax_set"/>
+        </index>
+        <id-method-parameter value="id_sales_order_threshold_tax_set_pk_seq"/>
+        <behavior name="timestampable"/>
+    </table>
+</database>

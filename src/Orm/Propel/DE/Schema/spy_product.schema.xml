@@ -1,0 +1,141 @@
+<?xml version="1.0"?>
+<database xmlns="spryker:schema-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\Product\Persistence" package="src.Orm.Zed.Product.Persistence">
+    <table name="spy_product_abstract" idMethod="native" allowPkInsert="true" phpName="SpyProductAbstract">
+        <column name="id_product_abstract" required="true" type="INTEGER" primaryKey="true" autoIncrement="true"/>
+        <column name="fk_tax_set" type="INTEGER" required="false"/>
+        <column name="attributes" required="true" type="LONGVARCHAR"/>
+        <column name="color_code" required="false" type="VARCHAR" default="NULL" size="8"/>
+        <column name="new_from" type="TIMESTAMP" required="false"/>
+        <column name="new_to" type="TIMESTAMP" required="false"/>
+        <column name="sku" required="true" type="VARCHAR" size="255"/>
+        <foreign-key name="spy_product_abstract-fk_tax_set" foreignTable="spy_tax_set">
+            <reference local="fk_tax_set" foreign="id_tax_set"/>
+        </foreign-key>
+        <index name="index-spy_product_abstract-fk_tax_set">
+            <index-column name="fk_tax_set"/>
+        </index>
+        <unique name="spy_product_abstract-sku">
+            <unique-column name="sku"/>
+        </unique>
+        <id-method-parameter value="spy_product_abstract_pk_seq"/>
+        <behavior name="timestampable"/>
+        <behavior name="event">
+            <parameter name="spy_product_abstract_all" column="*"/>
+        </behavior>
+    </table>
+    <table name="spy_product_abstract_localized_attributes" idMethod="native" allowPkInsert="true" identifierQuoting="true">
+        <column name="id_abstract_attributes" required="true" type="INTEGER" primaryKey="true" autoIncrement="true"/>
+        <column name="fk_locale" required="true" type="INTEGER"/>
+        <column name="fk_product_abstract" required="true" type="INTEGER"/>
+        <column name="attributes" required="true" type="LONGVARCHAR"/>
+        <column name="description" required="false" type="LONGVARCHAR" default="NULL"/>
+        <column name="meta_description" required="false" type="LONGVARCHAR" default="NULL"/>
+        <column name="meta_keywords" required="false" type="LONGVARCHAR" default="NULL"/>
+        <column name="meta_title" required="false" type="VARCHAR" default="NULL" size="255"/>
+        <column name="name" required="true" type="VARCHAR"/>
+        <foreign-key name="spy_product_abstract_localized_attributes-fk_product_abstract" foreignTable="spy_product_abstract" onDelete="CASCADE" onUpdate="CASCADE">
+            <reference local="fk_product_abstract" foreign="id_product_abstract"/>
+        </foreign-key>
+        <foreign-key name="spy_product_abstract_localized_attributes-fk_locale" foreignTable="spy_locale" phpName="Locale">
+            <reference local="fk_locale" foreign="id_locale"/>
+        </foreign-key>
+        <index name="index-spy_product_abstract_localized_attributes-fk-a7603b3c2144">
+            <index-column name="fk_product_abstract"/>
+        </index>
+        <index name="index-spy_product_abstract_localized_attributes-fk_locale">
+            <index-column name="fk_locale"/>
+        </index>
+        <unique name="spy_product_abstract_localized_attributes-unique-fk_pa">
+            <unique-column name="fk_product_abstract"/>
+            <unique-column name="fk_locale"/>
+        </unique>
+        <id-method-parameter value="spy_product_abstract_localized_attributes_pk_seq"/>
+        <behavior name="timestampable"/>
+        <behavior name="event">
+            <parameter name="spy_product_abstract_localized_attributes_all" column="*"/>
+        </behavior>
+    </table>
+    <table name="spy_product_abstract_store" idMethod="native" allowPkInsert="true" identifierQuoting="true">
+        <column name="id_product_abstract_store" required="true" type="INTEGER" primaryKey="true" autoIncrement="true"/>
+        <column name="fk_product_abstract" required="true" type="INTEGER"/>
+        <column name="fk_store" required="true" type="INTEGER"/>
+        <foreign-key name="spy_product_abstract_store-fk_product" foreignTable="spy_product_abstract">
+            <reference local="fk_product_abstract" foreign="id_product_abstract"/>
+        </foreign-key>
+        <foreign-key name="spy_product_abstract_store-fk_store" foreignTable="spy_store">
+            <reference local="fk_store" foreign="id_store"/>
+        </foreign-key>
+        <index name="index-spy_product_abstract_store-fk_store">
+            <index-column name="fk_store"/>
+        </index>
+        <unique name="spy_product_abstract_store-fk_product_abstract-fk_store">
+            <unique-column name="fk_product_abstract"/>
+            <unique-column name="fk_store"/>
+        </unique>
+        <id-method-parameter value="id_product_abstract_store_pk_seq"/>
+        <behavior name="event">
+            <parameter name="spy_product_abstract_store_all" column="*"/>
+        </behavior>
+    </table>
+    <table name="spy_product" idMethod="native" allowPkInsert="true" identifierQuoting="true">
+        <column name="id_product" required="true" type="INTEGER" primaryKey="true" autoIncrement="true"/>
+        <column name="fk_product_abstract" required="true" type="INTEGER"/>
+        <column name="attributes" required="true" type="LONGVARCHAR"/>
+        <column name="is_active" required="true" defaultValue="true" type="BOOLEAN"/>
+        <column name="is_quantity_splittable" required="true" type="BOOLEAN" defaultValue="true"/>
+        <column name="sku" required="true" type="VARCHAR" size="255"/>
+        <foreign-key name="spy_product-fk_product_abstract" foreignTable="spy_product_abstract">
+            <reference local="fk_product_abstract" foreign="id_product_abstract"/>
+        </foreign-key>
+        <index name="index-spy_product-fk_product_abstract">
+            <index-column name="fk_product_abstract"/>
+        </index>
+        <unique name="spy_product-sku">
+            <unique-column name="sku"/>
+        </unique>
+        <id-method-parameter value="spy_product_pk_seq"/>
+        <behavior name="timestampable"/>
+        <behavior name="event">
+            <parameter name="spy_product_all" column="*"/>
+        </behavior>
+    </table>
+    <table name="spy_product_localized_attributes" idMethod="native" allowPkInsert="true" identifierQuoting="true">
+        <column name="id_product_attributes" required="true" type="INTEGER" primaryKey="true" autoIncrement="true"/>
+        <column name="fk_locale" required="true" type="INTEGER"/>
+        <column name="fk_product" required="true" type="INTEGER"/>
+        <column name="attributes" required="true" type="LONGVARCHAR"/>
+        <column name="description" required="false" type="LONGVARCHAR" default="NULL"/>
+        <column name="is_complete" required="false" defaultValue="true" type="BOOLEAN"/>
+        <column name="name" required="true" type="VARCHAR"/>
+        <foreign-key name="spy_product_localized_attributes-fk_product" foreignTable="spy_product" onDelete="CASCADE" onUpdate="CASCADE">
+            <reference local="fk_product" foreign="id_product"/>
+        </foreign-key>
+        <foreign-key name="spy_product_localized_attributes-fk_locale" foreignTable="spy_locale" phpName="Locale">
+            <reference local="fk_locale" foreign="id_locale"/>
+        </foreign-key>
+        <index name="index-spy_product_localized_attributes-fk_locale">
+            <index-column name="fk_locale"/>
+        </index>
+        <unique name="spy_product_localized_attributes-unique-fk_product">
+            <unique-column name="fk_product"/>
+            <unique-column name="fk_locale"/>
+        </unique>
+        <id-method-parameter value="spy_product_localized_attributes_pk_seq"/>
+        <behavior name="timestampable"/>
+        <behavior name="event">
+            <parameter name="spy_product_localized_attributes_all" column="*"/>
+        </behavior>
+    </table>
+    <table name="spy_product_attribute_key" idMethod="native" allowPkInsert="true" identifierQuoting="true">
+        <column name="id_product_attribute_key" primaryKey="true" type="INTEGER" autoIncrement="true"/>
+        <column name="is_super" type="BOOLEAN" required="true" defaultValue="false"/>
+        <column name="key" required="true" type="VARCHAR"/>
+        <unique name="spy_product_attribute_key-unique-key">
+            <unique-column name="key"/>
+        </unique>
+        <id-method-parameter value="spy_product_attribute_key_pk_seq"/>
+        <behavior name="event">
+            <parameter name="spy_product_attribute_key_all" column="*"/>
+        </behavior>
+    </table>
+</database>

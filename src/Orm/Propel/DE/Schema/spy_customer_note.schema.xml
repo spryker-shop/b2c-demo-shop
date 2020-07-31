@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<database xmlns="spryker:schema-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\CustomerNote\Persistence" package="src.Orm.Zed.CustomerNote.Persistence">
+    <table name="spy_customer_note" idMethod="native" phpName="SpyCustomerNote">
+        <column name="id_customer_note" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_customer" type="INTEGER" required="true"/>
+        <column name="fk_user" type="INTEGER" required="true"/>
+        <column name="created_at" type="TIMESTAMP"/>
+        <column name="message" type="LONGVARCHAR" required="true"/>
+        <column name="updated_at" type="TIMESTAMP"/>
+        <column name="username" type="VARCHAR" required="false" default="NULL"/>
+        <foreign-key name="spy_customer_note-fk_customer" foreignTable="spy_customer" phpName="Customer" refPhpName="CustomerNote">
+            <reference local="fk_customer" foreign="id_customer"/>
+        </foreign-key>
+        <foreign-key name="spy_customer_note-fk_user" foreignTable="spy_user" phpName="User" refPhpName="CustomerNote">
+            <reference local="fk_user" foreign="id_user"/>
+        </foreign-key>
+        <index name="index-spy_customer_note-fk_customer">
+            <index-column name="fk_customer"/>
+        </index>
+        <index name="index-spy_customer_note-fk_user">
+            <index-column name="fk_user"/>
+        </index>
+        <id-method-parameter value="spy_customer_note_pk_seq"/>
+        <behavior name="timestampable"/>
+    </table>
+</database>

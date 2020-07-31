@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<database xmlns="spryker:schema-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\ProductDiscontinuedStorage\Persistence" package="src.Orm.Zed.ProductDiscontinuedStorage.Persistence">
+    <table name="spy_product_discontinued_storage" identifierQuoting="true">
+        <column name="id_product_discontinued_storage" type="integer" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_product_discontinued" type="integer" required="true"/>
+        <column name="data" type="LONGVARCHAR" required="false"/>
+        <column name="key" type="VARCHAR" size="255" required="true"/>
+        <column name="locale" type="VARCHAR" required="true"/>
+        <column name="sku" type="VARCHAR" size="255" required="true"/>
+        <index name="spy_product_discontinued_storage-fk_product_discontinued">
+            <index-column name="fk_product_discontinued"/>
+        </index>
+        <id-method-parameter value="id_product_discontinued_storage_pk_seq"/>
+        <behavior name="synchronization">
+            <parameter name="resource" value="product_discontinued"/>
+            <parameter name="locale" required="true"/>
+            <parameter name="key_suffix_column" value="sku"/>
+            <parameter name="queue_group" value="sync.storage.product"/>
+            <parameter name="queue_pool" value="synchronizationPool"/>
+        </behavior>
+        <behavior name="timestampable"/>
+    </table>
+</database>
