@@ -27,61 +27,64 @@
         {% endblock %}
 
         {% block productSet %}
-            {% embed molecule('slick-carousel') with {
-                data: {
-                    slides: data.products,
-                },
-                attributes: {
-                    'data-json': data.sliderConfig,
-                    'custom-select-class-name': 'custom-select',
-                },
-                modifiers: ['product-set', 'product-set-secondary'],
-                embed: {
-                    jsName: config.jsName,
-                },
-            } only %}
-                {% block slides %}
-                    {% for product in data.slides %}
-                        {% embed molecule('product-item') with {
-                            modifiers: ['stretch', 'product-set', 'widget'],
-                            class: embed.jsName ~ '__product-item',
-                            data: {
-                                product: product,
-                            },
-                        } only %}
-                            {% block content %}
-                                {{ parent() }}
-                                {% set isNotAvailable = data.product.idProductConcrete and not data.product.available %}
+            <form method="GET">
+                {% embed molecule('slick-carousel') with {
+                    data: {
+                        slides: data.products,
+                    },
+                    attributes: {
+                        'data-json': data.sliderConfig,
+                        'custom-select-class-name': 'custom-select',
+                    },
+                    modifiers: ['product-set', 'product-set-secondary'],
+                    embed: {
+                        jsName: config.jsName,
+                    },
+                } only %}
+                    {% block slides %}
+                        {% for product in data.slides %}
+                            {% embed molecule('product-item') with {
+                                modifiers: ['stretch', 'product-set', 'widget'],
+                                class: embed.jsName ~ '__product-item',
+                                data: {
+                                    product: product,
+                                },
+                            } only %}
+                                {% block content %}
+                                    {{ parent() }}
+                                    {% set isNotAvailable = data.product.idProductConcrete and not data.product.available %}
 
-                                {% embed molecule('variant-configurator', 'ProductDetailPage') with {
-                                    data: {
-                                        superAttributes: data.product.attributeMap.superAttributes,
-                                        selectedAttributes: data.product.selectedAttributes,
-                                        availableAttributes: data.product.availableAttributes,
-                                    },
-                                    embed: {
-                                        idProductAbstract: data.idProductAbstract,
-                                    },
-                                } only %}
-                                    {% block variant %}
-                                        {% include molecule('variant', 'ProductDetailPage') with {
-                                            data: {
-                                                name: name,
-                                                formName: 'attributes[' ~ embed.idProductAbstract ~ '][' ~ name ~ ']',
-                                                values: values,
-                                                selectedValue: selectedValue,
-                                                label: ('product.attribute.' ~ name) | trans,
-                                                isAvailable: isAvailable,
-                                                autoInitSelect: true,
-                                            },
-                                        } only %}
-                                    {% endblock %}
-                                {% endembed %}
-                            {% endblock %}
-                        {% endembed %}
-                    {% endfor %}
-                {% endblock %}
-            {% endembed %}
+                                    {% embed molecule('variant-configurator', 'ProductDetailPage') with {
+                                        data: {
+                                            superAttributes: data.product.attributeMap.superAttributes,
+                                            selectedAttributes: data.product.selectedAttributes,
+                                            availableAttributes: data.product.availableAttributes,
+                                            useExternalForm: true,
+                                        },
+                                        embed: {
+                                            idProductAbstract: data.idProductAbstract,
+                                        },
+                                    } only %}
+                                        {% block variant %}
+                                            {% include molecule('variant', 'ProductDetailPage') with {
+                                                data: {
+                                                    name: name,
+                                                    formName: 'attributes[' ~ embed.idProductAbstract ~ '][' ~ name ~ ']',
+                                                    values: values,
+                                                    selectedValue: selectedValue,
+                                                    label: ('product.attribute.' ~ name) | trans,
+                                                    isAvailable: isAvailable,
+                                                    autoInitSelect: true,
+                                                },
+                                            } only %}
+                                        {% endblock %}
+                                    {% endembed %}
+                                {% endblock %}
+                            {% endembed %}
+                        {% endfor %}
+                    {% endblock %}
+                {% endembed %}
+            </form>
             {% set generalAddToCartButtonClass = 'button--expand' %}
 
             {{ block('generalAddToCart') }}

@@ -1,0 +1,186 @@
+version: "0.1"
+
+x-frontend-auth: &frontend-auth
+  auth:
+    engine: basic
+    users:
+      - username: cloud
+        password: cloud
+
+namespace: spryker-cloud
+tag: '1.0'
+
+environment: docker
+image:
+  tag: spryker/php:7.3-alpine3.12
+  php:
+    enabled-extensions:
+      - blackfire
+      - newrelic
+
+composer:
+  mode: --no-dev
+  autoload: --classmap-authoritative
+
+assets:
+  image: fholzer/nginx-brotli:v1.18.0
+  mode: production
+  compression:
+    brotli:
+      static: only
+    gzip:
+      static: true
+      level: 5
+
+regions:
+  DE:
+    services:
+      database:
+        database: spryker_staging
+        username: spryker
+        password: secret
+
+    stores:
+      DE:
+        services:
+          broker:
+            namespace: de_queue
+          key_value_store:
+            namespace: 1
+          search:
+            namespace: de_search
+          session:
+            namespace: 2
+      AT:
+        services:
+          broker:
+            namespace: at_queue
+          key_value_store:
+            namespace: 1
+          search:
+            namespace: at_search
+          session:
+            namespace: 2
+      US:
+        services:
+          broker:
+            namespace: us_queue
+          key_value_store:
+            namespace: 1
+          search:
+            namespace: us_search
+          session:
+            namespace: 2
+
+groups:
+  DE-1:
+    region: DE
+    applications:
+      Redirects:
+        application: static
+        endpoints:
+          de.b2c.demo-spryker.com:
+            store: DE
+            redirect:
+              type: 302
+              url: www.de.b2c.demo-spryker.com
+          at.b2c.demo-spryker.com:
+            store: AT
+            redirect:
+              code: 302
+              url: www.at.b2c.demo-spryker.com
+          us.b2c.demo-spryker.com:
+            store: US
+            redirect:
+              code: 302
+              url: www.us.b2c.demo-spryker.com
+      Yves:
+        application: yves
+        endpoints:
+          www.de.b2c.demo-spryker.com:
+            store: DE
+          www.at.b2c.demo-spryker.com:
+            store: AT
+          www.us.b2c.demo-spryker.com:
+            store: US
+      Zed:
+        application: zed
+        endpoints:
+          os.de.b2c.demo-spryker.com:
+            store: DE
+            <<: *frontend-auth
+          os.at.b2c.demo-spryker.com:
+            store: AT
+            <<: *frontend-auth
+          os.us.b2c.demo-spryker.com:
+            store: US
+            <<: *frontend-auth
+      Glue:
+        application: glue
+        endpoints:
+          glue.de.b2c.demo-spryker.com:
+            store: DE
+          glue.at.b2c.demo-spryker.com:
+            store: AT
+          glue.us.b2c.demo-spryker.com:
+            store: US
+services:
+  database:
+    engine: mysql
+    version: mariadb-10.4
+    root:
+      username: "root"
+      password: "secret"
+    endpoints:
+      localhost:3306:
+        protocol: tcp
+  broker:
+    engine: rabbitmq
+    api:
+      username: "spryker"
+      password: "secret"
+    endpoints:
+      queue.b2c.demo-spryker.com:
+      localhost:5672:
+        protocol: tcp
+  session:
+    engine: redis
+  key_value_store:
+    engine: redis
+    endpoints:
+      localhost:16379:
+        protocol: tcp
+  search:
+    engine: elastic
+    version: 6.8
+    endpoints:
+      localhost:9200:
+        protocol: tcp
+  scheduler:
+    engine: jenkins
+    endpoints:
+      scheduler.b2c.demo-spryker.com:
+  mail_catcher:
+    engine: mailhog
+    endpoints:
+      mail.b2c.demo-spryker.com:
+
+docker:
+
+  blackfire:
+    enabled: true
+
+  ssl:
+    enabled: true
+    redirect: true
+
+  debug:
+    enabled: false
+    xdebug:
+      enabled: false
+
+  testing:
+    store: DE
+
+  mount:
+    baked:

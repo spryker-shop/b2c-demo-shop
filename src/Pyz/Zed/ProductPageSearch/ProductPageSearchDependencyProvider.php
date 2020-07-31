@@ -10,6 +10,7 @@ namespace Pyz\Zed\ProductPageSearch;
 use Spryker\Shared\ProductLabelSearch\ProductLabelSearchConfig;
 use Spryker\Shared\ProductPageSearch\ProductPageSearchConfig;
 use Spryker\Shared\ProductReviewSearch\ProductReviewSearchConfig;
+use Spryker\Zed\Availability\Communication\Plugin\ProductPageSearch\AvailabilityProductAbstractAddToCartPlugin;
 use Spryker\Zed\ProductLabelSearch\Communication\Plugin\PageDataExpander\ProductLabelDataLoaderExpanderPlugin;
 use Spryker\Zed\ProductLabelSearch\Communication\Plugin\PageDataLoader\ProductLabelDataLoaderPlugin;
 use Spryker\Zed\ProductLabelSearch\Communication\Plugin\ProductPageSearch\Elasticsearch\ProductLabelMapExpanderPlugin;
@@ -98,6 +99,16 @@ class ProductPageSearchDependencyProvider extends SprykerProductPageSearchDepend
         return [
             new ProductConcreteProductListPageDataExpanderPlugin(),
             new ProductImageProductConcretePageDataExpanderPlugin(),
+        ];
+    }
+
+    /**
+     * @return \Spryker\Zed\ProductPageSearchExtension\Dependency\Plugin\ProductAbstractAddToCartPluginInterface[]
+     */
+    protected function getProductAbstractAddToCartPlugins(): array
+    {
+        return [
+            new AvailabilityProductAbstractAddToCartPlugin(),
         ];
     }
 }
