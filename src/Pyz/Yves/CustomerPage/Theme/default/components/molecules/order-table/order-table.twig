@@ -52,14 +52,26 @@
 
                                 {% if widgetExists('CustomerReorderWidgetPlugin') %}
                                     <li class="menu__item">
-                                        {% widget 'CustomerReorderFormWidget' args [order] only %}
-                                            {% block embeddedData %}
-                                                <button class="menu__button">
-                                                    {{- 'customer.order.reorder' | trans -}}
-                                                </button>
-                                            {% endblock %}
-                                        {% endwidget %}
+                                        {% include molecule('remote-form-submit') with {
+                                            data: {
+                                                label: 'customer.order.reorder' | trans,
+                                                buttonClass: 'menu__link',
+                                            },
+                                            attributes: {
+                                                'form-name': 'customerReorderWidgetForm_' ~ order.idSalesOrder,
+                                                'form-action': path('customer/order/reorder', {'idSalesOrder': order.idSalesOrder}),
+                                                'field-id': 'customerReorderWidgetForm__token_' ~ order.idSalesOrder,
+                                                'field-name': 'customerReorderWidgetForm[_token]',
+                                                'field-value': csrf_token('customerReorderWidgetForm'),
+                                            },
+                                        } only %}
                                     </li>
+                                {% else %}
+                                    {% include molecule('customer-reorder-link', 'CustomerReorderWidget') ignore missing with {
+                                        data: {
+                                            idSalesOrder: order.idSalesOrder,
+                                        },
+                                    } only %}
                                 {% endif %}
 
                                 {% embed molecule('return-create-link', 'SalesReturnPage') ignore missing with {

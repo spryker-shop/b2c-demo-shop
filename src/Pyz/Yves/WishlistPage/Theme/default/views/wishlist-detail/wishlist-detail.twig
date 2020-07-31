@@ -6,6 +6,8 @@
     wishlistItems: _view.wishlistItems,
     addAllProductsToCart: _view.addAllAvailableProductsToCartForm,
     activeWishlistId: _view.wishlistOverview.wishlist.idWishlist,
+    wishlistRemoveItemFormClone: _view.wishlistRemoveItemFormCloner,
+    wishlistMoveToCartFormClone: _view.wishlistMoveToCartFormCloner,
 
     pagination: {
         currentPage: _view.currentPage,
@@ -13,17 +15,17 @@
         paginationPath: 'wishlist/details',
         showAlwaysFirstAndLast: true,
         parameters: {
-            wishlistName: _view.wishlistName
-        }
-    }
+            wishlistName: _view.wishlistName,
+        },
+    },
 } %}
 
 {% block customerContent %}
     <div class="box">
         {% include molecule('title-box', 'CustomerPage') with {
             data: {
-                title: data.wishlistName
-            }
+                title: data.wishlistName,
+            },
         } only %}
 
         {% if data.wishlistItems is empty %}
@@ -34,12 +36,14 @@
             {% include molecule('wishlist-detail-table', 'WishlistPage') with {
                 data: {
                     wishlistItems: data.wishlistItems,
-                    wishlistName: data.wishlistName
-                }
+                    wishlistName: data.wishlistName,
+                    wishlistRemoveItemFormClone: data.wishlistRemoveItemFormClone,
+                    wishlistMoveToCartFormClone: data.wishlistMoveToCartFormClone,
+                },
             } only %}
 
             {% include molecule('pagination') with {
-                data: data.pagination
+                data: data.pagination,
             } only %}
         {% endif %}
     </div>
@@ -50,7 +54,7 @@
                 {% if data.wishlistItems is not empty %}
                     {{ form_start(data.addAllProductsToCart, {
                         action: path('wishlist/move-all-available-to-cart', { wishlistName: data.wishlistName }),
-                        attr: { class: '' }
+                        attr: { class: '' },
                     }) }}
 
                     <button type="submit" class="button button--expand-mobile">
