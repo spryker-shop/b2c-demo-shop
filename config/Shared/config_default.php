@@ -639,4 +639,3 @@ $config[KernelConstants::DOMAIN_WHITELIST] = [
     $config[ApplicationConstants::HOST_YVES],
     $config[ApplicationConstants::HOST_ZED],
 ];
-
