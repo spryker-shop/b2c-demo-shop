@@ -1,0 +1,22 @@
+# Example of a B2C demo shop 'API CI' minimal data import.
+version: 0
+
+actions:
+#1. Commerce Setup data import
+    - data_entity: store
+# Cannot have a source because we use store.php
+    - data_entity: currency
+      source: data/import/common/common/currency.csv
+    - data_entity: customer
+      source: data/import/common/common/customer.csv
+    - data_entity: glossary
+      source: data/import/common/common/glossary.csv
+    - data_entity: shipment
+      source: data/import/common/common/shipment.csv
+    - data_entity: payment-method
+      source: data/import/common/common/payment_method.csv
+#2. Catalog Setup data import
+    - data_entity: category-template
+      source: data/import/common/common/category_template.csv
+    - data_entity: category
+      source: data/import/common/common/category.csv

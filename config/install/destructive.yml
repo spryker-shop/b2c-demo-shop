@@ -6,7 +6,6 @@ command-timeout: 7200
 stores:
     - DE
     - AT
-    - US
 
 sections:
 
@@ -26,8 +25,6 @@ sections:
 
         clean-db:
             command: "vendor/bin/console propel:tables:drop -vvv --no-ansi"
-            stores:
-                - DE
 
     init-storage:
         setup-search-create-sources:
@@ -46,60 +43,25 @@ sections:
 
         propel-tables-drop:
             command: "vendor/bin/console propel:tables:drop -vvv --no-ansi"
-            stores:
-                - DE
 
         propel-diff:
             command: "vendor/bin/console propel:diff -vvv --no-ansi"
 
         propel-migrate:
             command: "vendor/bin/console propel:migrate -vvv --no-ansi"
-            stores:
-                - DE
 
         propel-migration-cleanup:
             command: "vendor/bin/console propel:migration:delete -vvv --no-ansi"
 
         init-database:
             command: "vendor/bin/console setup:init-db -vvv --no-ansi"
-            stores:
-                - DE
 
     demodata:
-        import-commerce-setup:
-            command: "vendor/bin/console data:import --config=data/import/config/b2c_commerce_setup_import_config_v0.yml -vvv --no-ansi || true"
-            stores:
-                - DE
-
-        import-catalog-setup:
-            command: "vendor/bin/console data:import --config=data/import/config/b2c_catalog_setup_import_config_v0.yml -vvv --no-ansi || true"
-            stores:
-                - DE
-
-        import-special-product-types-setup:
-            command: "vendor/bin/console data:import --config=data/import/config/b2c_special_product_types_import_config_v0.yml -vvv --no-ansi || true"
-            stores:
-                - DE
-
-        import-merchandising-setup:
-            command: "vendor/bin/console data:import --config=data/import/config/b2c_merchandising_import_config_v0.yml -vvv --no-ansi || true"
-            stores:
-                - DE
-
-        import-content-management-setup:
-            command: "vendor/bin/console data:import --config=data/import/config/b2c_content_management_import_config_v0.yml -vvv --no-ansi || true"
-            stores:
-                - DE
-
-        import-miscellaneous-setup:
-            command: "vendor/bin/console data:import --config=data/import/config/b2c_miscellaneous_import_config_v0.yml -vvv --no-ansi || true"
-            stores:
-                - DE
+        import-eu-region-demodata:
+            command: "vendor/bin/console data:import --config=data/import/local/full_EU.yml"
 
         update-product-labels:
             command: "vendor/bin/console product-label:relations:update -vvv --no-ansi"
-            stores:
-                - DE
 
         check-product-validity:
             command: "vendor/bin/console product:check-validity"
