@@ -66,7 +66,7 @@ use SprykerShop\Shared\ShopUi\ShopUiConstants;
 // ------------------------------ CODEBASE: TO REMOVE -------------------------
 // ----------------------------------------------------------------------------
 
-$config[KernelConstants::SPRYKER_ROOT] = APPLICATION_ROOT_DIR . '/vendor/spryker/spryker/Bundles';
+$config[KernelConstants::SPRYKER_ROOT] = APPLICATION_ROOT_DIR . '/vendor/spryker';
 
 $config[KernelConstants::RESOLVABLE_CLASS_NAMES_CACHE_ENABLED] = true;
 $config[KernelConstants::RESOLVED_INSTANCE_CACHE_ENABLED] = true;
