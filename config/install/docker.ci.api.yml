@@ -68,26 +68,5 @@ sections:
             command: "vendor/bin/console setup:init-db"
 
     demodata:
-        store-import:
-            command: "vendor/bin/console data:import:store"
-
-        currency-import:
-            command: "vendor/bin/console data:import:currency"
-
-        category-template-import:
-            command: "vendor/bin/console data:import category-template"
-
-        category-import:
-            command: "vendor/bin/console data:import category"
-
-        customer-import:
-            command: "vendor/bin/console data:import:customer"
-
-        glossary-import:
-            command: "vendor/bin/console data:import:glossary"
-
-        shipment-import:
-            command: "vendor/bin/console data:import:shipment"
-
-        payment-import:
-            command: "vendor/bin/console data:import:payment-method"
+        import-demodata:
+            command: "vendor/bin/console data:import --config=data/import/common/minimal.yml"

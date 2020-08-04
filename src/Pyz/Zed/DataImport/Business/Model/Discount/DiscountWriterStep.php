@@ -101,7 +101,7 @@ class DiscountWriterStep implements DataImportStepInterface
 
         foreach ($shipmentConditionValues as $shipmentConditionValue) {
             $shipmentMethodEntity = $this->findShipmentMethodByConditionValue($shipmentConditionValue);
-            $queryString = str_replace($shipmentConditionValue, $shipmentMethodEntity->getIdShipmentMethod(), $queryString);
+            $queryString = str_replace($shipmentConditionValue, (string)$shipmentMethodEntity->getIdShipmentMethod(), $queryString);
         }
 
         return $queryString;

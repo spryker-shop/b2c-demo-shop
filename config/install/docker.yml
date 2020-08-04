@@ -123,23 +123,5 @@ sections:
             command: "vendor/bin/console setup:init-db"
 
     demodata:
-        import-commerce-setup:
-            command: "vendor/bin/console data:import --config=data/import/config/b2c_commerce_setup_import_config_v0.yml"
-
-        import-catalog-setup:
-            command: "vendor/bin/console data:import --config=data/import/config/b2c_catalog_setup_import_config_v0.yml"
-
-        import-special-product-types-setup:
-            command: "vendor/bin/console data:import --config=data/import/config/b2c_special_product_types_import_config_v0.yml"
-
-        import-merchandising-setup:
-            command: "vendor/bin/console data:import --config=data/import/config/b2c_merchandising_import_config_v0.yml"
-
-        import-content-management-setup:
-            command: "vendor/bin/console data:import --config=data/import/config/b2c_content_management_import_config_v0.yml"
-
-        import-miscellaneous-setup:
-            command: "vendor/bin/console data:import --config=data/import/config/b2c_miscellaneous_import_config_v0.yml"
-
-        update-product-labels:
-            command: "vendor/bin/console product-label:relations:update"
+        import-demodata:
+            command: "vendor/bin/console data:import --config=data/import/local/full_${SPRYKER_REGION}.yml"
