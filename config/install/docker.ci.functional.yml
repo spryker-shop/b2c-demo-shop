@@ -62,8 +62,8 @@ sections:
             command: "vendor/bin/console setup:init-db"
 
     demodata:
-        import-eu-region-demodata:
+        import-demodata:
             command: "vendor/bin/console data:import --config=data/import/local/full_EU.yml"
 
-    update-product-labels:
-        command: "vendor/bin/console product-label:relations:update -vvv --no-ansi"
+        update-product-labels:
+            command: "vendor/bin/console product-label:relations:update -vvv --no-ansi"
