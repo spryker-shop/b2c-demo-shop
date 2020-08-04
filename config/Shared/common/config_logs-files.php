@@ -25,3 +25,6 @@ $config[EventConstants::LOG_FILE_PATH] = $baseLogFilePath . '/application_events
 $config[QueueConstants::QUEUE_WORKER_OUTPUT_FILE_NAME] = $baseLogFilePath . '/ZED/queue.out';
 
 $config[PropelConstants::LOG_FILE_PATH] = $baseLogFilePath . '/ZED/propel.log';
+
+$config[LogConstants::LOG_FILE_PATH] = $baseLogFilePath . '/application.log';
+$config[LogConstants::EXCEPTION_LOG_FILE_PATH] = $baseLogFilePath . '/exception.log';
