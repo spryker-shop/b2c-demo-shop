@@ -65,6 +65,8 @@ $config[SessionConstants::ZED_SSL_ENABLED]
     = $config[RouterConstants::ZED_IS_SSL_ENABLED]
     = $config[HttpConstants::ZED_HTTP_STRICT_TRANSPORT_SECURITY_ENABLED]
     = $config[HttpConstants::YVES_HTTP_STRICT_TRANSPORT_SECURITY_ENABLED]
+    = $config[ApplicationConstants::ZED_SSL_ENABLED]
+    = $config[ApplicationConstants::YVES_SSL_ENABLED]
     = false;
 
 $trustedHosts

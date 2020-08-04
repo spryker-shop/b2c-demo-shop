@@ -99,6 +99,8 @@ if (!getenv('SPRYKER_SSL_ENABLE')) {
         = $config[SessionConstants::YVES_SSL_ENABLED]
         = $config[RouterConstants::YVES_IS_SSL_ENABLED]
         = $config[RouterConstants::ZED_IS_SSL_ENABLED]
+        = $config[ApplicationConstants::ZED_SSL_ENABLED]
+        = $config[ApplicationConstants::YVES_SSL_ENABLED]
         = false;
 
 // ----------------------------------------------------------------------------
