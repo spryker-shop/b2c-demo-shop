@@ -339,11 +339,13 @@ $config[PropelConstants::LOG_FILE_PATH]
     = $config[LogConstants::LOG_FILE_PATH_YVES]
     = $config[LogConstants::LOG_FILE_PATH_ZED]
     = $config[LogConstants::LOG_FILE_PATH_GLUE]
+    = $config[LogConstants::LOG_FILE_PATH]
     = $config[QueueConstants::QUEUE_WORKER_OUTPUT_FILE_NAME]
     = getenv('SPRYKER_LOG_STDOUT') ?: 'php://stderr';
 $config[LogConstants::EXCEPTION_LOG_FILE_PATH_YVES]
     = $config[LogConstants::EXCEPTION_LOG_FILE_PATH_ZED]
     = $config[LogConstants::EXCEPTION_LOG_FILE_PATH_GLUE]
+    = $config[LogConstants::EXCEPTION_LOG_FILE_PATH]
     = getenv('SPRYKER_LOG_STDERR') ?: 'php://stderr';
 
 // >>> QUEUE
