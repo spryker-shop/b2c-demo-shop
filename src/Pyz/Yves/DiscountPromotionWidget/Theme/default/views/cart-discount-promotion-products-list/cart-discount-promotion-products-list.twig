@@ -35,7 +35,7 @@
 
                         {% set isDisabled = not data.product.idProductConcrete or not data.product.available %}
 
-                        {% widget 'AddToCartFormWidget'  args [config, data.product, isDisabled] only %}
+                        {% widget 'AddToCartFormWidget' args [config, data.product, isDisabled] only %}
                             {% block embeddedData %}
                                 {% set disabledAttribute = data.isDisabled ? 'disabled' %}
 

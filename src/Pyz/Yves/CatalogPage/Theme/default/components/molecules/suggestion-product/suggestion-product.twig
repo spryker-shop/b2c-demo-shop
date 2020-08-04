@@ -4,7 +4,10 @@
     <a class="container grid grid--middle link link--without-underline link--darkest js-suggest-search__item--navigable js-suggest-search__product-item--navigable" href="{{ data.url }}">
         <span class="col">
             {% if data.image %}
+                {% set imageClasses = '' %}
+
                 {% block image %}
+                    {% set imageClasses = '' %}
                     {% set imageModifiers = ['thumbnail', 'with-overlay', 'catalog'] %}
 
                     {{ parent() }}

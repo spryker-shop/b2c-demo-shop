@@ -30,7 +30,7 @@ sections:
             command: "vendor/bin/console navigation:build-cache"
 
         rest-request-validation-cache-warmup:
-            command: "vendor/bin/console glue:rest:build-request-validation-cache"
+            command: "vendor/bin/console rest-api:build-request-validation-cache"
 
         class-resolver-build:
             command: "vendor/bin/console cache:class-resolver:build"
@@ -109,23 +109,8 @@ sections:
             command: "vendor/bin/console transfer:databuilder:generate"
 
     demodata:
-        import-commerce-setup:
-            command: "vendor/bin/console data:import --config=data/import/config/b2c_commerce_setup_import_config_v0.yml"
-
-        import-catalog-setup:
-            command: "vendor/bin/console data:import --config=data/import/config/b2c_catalog_setup_import_config_v0.yml"
-
-        import-special-product-types-setup:
-            command: "vendor/bin/console data:import --config=data/import/config/b2c_special_product_types_import_config_v0.yml"
-
-        import-merchandising-setup:
-            command: "vendor/bin/console data:import --config=data/import/config/b2c_merchandising_import_config_v0.yml"
-
-        import-content-management-setup:
-            command: "vendor/bin/console data:import --config=data/import/config/b2c_content_management_import_config_v0.yml"
-
-        import-miscellaneous-setup:
-            command: "vendor/bin/console data:import --config=data/import/config/b2c_miscellaneous_import_config_v0.yml"
+        import-eu-region-demodata:
+            command: "vendor/bin/console data:import --config=data/import/local/full_EU.yml"
 
         update-product-labels:
             command: "vendor/bin/console product-label:relations:update"

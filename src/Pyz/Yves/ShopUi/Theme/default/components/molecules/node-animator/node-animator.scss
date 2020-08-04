@@ -1,0 +1,12 @@
+@mixin shop-ui-node-animator($name: '.node-animator') {
+    #{$name} {
+        &__image {
+            position: absolute;
+            z-index: $setting-zi-side-drawer;
+            pointer-events: none;
+            overflow: hidden;
+        }
+    }
+}
+
+@include shop-ui-node-animator();

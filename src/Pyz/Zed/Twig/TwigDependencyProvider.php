@@ -104,12 +104,17 @@ class TwigDependencyProvider extends SprykerTwigDependencyProvider
      */
     protected function getTwigLoaderPlugins(): array
     {
-        return [
+        $plugins = [
             new FilesystemTwigLoaderPlugin(),
             new FormFilesystemTwigLoaderPlugin(),
-            new WebProfilerTwigLoaderPlugin(),
             new GuiTwigLoaderPlugin(),
             new CmsBlockTemplateTwigLoaderPlugin(),
         ];
+
+        if (class_exists(WebProfilerTwigLoaderPlugin::class)) {
+            $plugins[] = new WebProfilerTwigLoaderPlugin();
+        }
+
+        return $plugins;
     }
 }

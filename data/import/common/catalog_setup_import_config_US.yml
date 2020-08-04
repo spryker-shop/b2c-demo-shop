@@ -1,0 +1,26 @@
+# Example of a B2C demo shop 'Catalog Setup category' data import.
+version: 0
+actions:
+  - data_entity: category-template
+    source: data/import/common/common/category_template.csv
+  - data_entity: category
+    source: data/import/common/common/category.csv
+  - data_entity: product-attribute-key
+    source: data/import/common/common/product_attribute_key.csv
+  - data_entity: product-management-attribute
+    source: data/import/common/common/product_management_attribute.csv
+  - data_entity: product-abstract
+    source: data/import/common/common/product_abstract.csv
+  - data_entity: product-concrete
+    source: data/import/common/common/product_concrete.csv
+  - data_entity: product-image
+    source: data/import/common/common/product_image.csv
+  - data_entity: product-price
+    source: data/import/common/US/product_price.csv
+  - data_entity: product-price-schedule
+    source: data/import/common/US/product_price_schedule.csv
+  - data_entity: product-stock
+    source: data/import/common/common/product_stock.csv
+  # Store relation
+  - data_entity: product-abstract-store
+    source: data/import/common/US/product_abstract_store.csv

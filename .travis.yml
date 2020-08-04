@@ -25,16 +25,14 @@ matrix:
       env:
         - VALIDATION=1
 
-    - name: Docker / Alpine /PHP 7.3 / PostgreSQL / Functional
+    - name: Docker / Alpine / PHP 7.3 / PostgreSQL / Functional
       os:
         - linux
       dist: bionic
       language: minimal
       env:
         - PROGRESS_TYPE=plain
-        - SPRYKER_PLATFORM_IMAGE=spryker/php:7.3
-        - SPRYKER_DB_ENGINE=PGSQL
-        - SPRYKER_TEST_IN_BROWSER=phantomjs
+        - SPRYKER_PLATFORM_IMAGE=spryker/php:7.3-alpine3.12
         - TRAVIS=1
       addons:
         hosts:
@@ -60,24 +58,21 @@ matrix:
         - sudo chmod +x /usr/local/bin/docker-compose
       script:
         - git clone https://github.com/spryker/docker-sdk.git --single-branch --branch master ./docker
-        - docker/sdk boot deploy.ci.yml
-        - docker/sdk build images
-        - docker/sdk demo-data -t
-        - 'docker/sdk testing codecept run -c codeception.functional.yml -o "\"extensions: config: \SprykerTest\Shared\Testify\Helper\SuiteFilterHelper: inclusive: [PyzTest]\"" -o "\"extensions: config: \SprykerTest\Shared\Testify\Helper\SuiteFilterHelper: exclusive: [Api, Glue]\""'
+        - docker/sdk boot deploy.ci.functional.yml -v
+        - docker/sdk up -t -v
+        - docker/sdk testing codecept run -c codeception.functional.yml
       before_install: skip
       before_script: skip
       after_script: skip
 
-    - name: Docker / Debian /PHP 7.3 / PostgreSQL / Functional
+    - name: Docker / Debian / PHP 7.4 / PostgreSQL / Functional
       os:
         - linux
       dist: bionic
       language: minimal
       env:
         - PROGRESS_TYPE=plain
-        - SPRYKER_PLATFORM_IMAGE=spryker/php:7.3-debian
-        - SPRYKER_DB_ENGINE=PGSQL
-        - SPRYKER_TEST_IN_BROWSER=phantomjs
+        - SPRYKER_PLATFORM_IMAGE=spryker/php:7.4-alpine3.12
         - TRAVIS=1
       addons:
         hosts:
@@ -94,8 +89,8 @@ matrix:
             - pigz
             - software-properties-common
           sources:
-             - sourceline: "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-               key_url: https://download.docker.com/linux/ubuntu/gpg
+            - sourceline: "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+              key_url: https://download.docker.com/linux/ubuntu/gpg
       install:
         - echo eyAiZXhwZXJpbWVudGFsIiA6IHRydWUsICJmZWF0dXJlcyIgOiB7ICJidWlsZGtpdCI6IHRydWUgfSB9Cg==|base64 -d|sudo tee /etc/docker/daemon.json
         - sudo apt-get install --only-upgrade docker-ce -y
@@ -103,10 +98,49 @@ matrix:
         - sudo chmod +x /usr/local/bin/docker-compose
       script:
         - git clone https://github.com/spryker/docker-sdk.git --single-branch --branch master ./docker
-        - docker/sdk boot deploy.ci.yml
-        - docker/sdk build images
-        - docker/sdk demo-data -t
-        - 'docker/sdk testing codecept run -c codeception.functional.yml -o "\"extensions: config: \SprykerTest\Shared\Testify\Helper\SuiteFilterHelper: inclusive: [PyzTest]\"" -o "\"extensions: config: \SprykerTest\Shared\Testify\Helper\SuiteFilterHelper: exclusive: [Api, Glue]\""'
+        - docker/sdk boot deploy.ci.functional.yml -v
+        - docker/sdk up -t -v
+        - docker/sdk testing codecept run -c codeception.functional.yml
+      before_install: skip
+      before_script: skip
+      after_script: skip
+
+    - name: Docker / Alpine / PHP 7.3 / MariaDB / Functional
+      os:
+        - linux
+      dist: bionic
+      language: minimal
+      env:
+        - PROGRESS_TYPE=plain
+        - SPRYKER_PLATFORM_IMAGE=spryker/php:7.3-alpine3.12
+        - TRAVIS=1
+      addons:
+        hosts:
+          - yves.de.spryker.local
+          - zed.de.spryker.local
+          - glue.de.spryker.local
+        apt:
+          packages:
+            - apache2-utils
+            - apt-transport-https
+            - ca-certificates
+            - curl
+            - gnupg-agent
+            - pigz
+            - software-properties-common
+          sources:
+            - sourceline: "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+              key_url: https://download.docker.com/linux/ubuntu/gpg
+      install:
+        - echo eyAiZXhwZXJpbWVudGFsIiA6IHRydWUsICJmZWF0dXJlcyIgOiB7ICJidWlsZGtpdCI6IHRydWUgfSB9Cg==|base64 -d|sudo tee /etc/docker/daemon.json
+        - sudo apt-get install --only-upgrade docker-ce -y
+        - sudo curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+        - sudo chmod +x /usr/local/bin/docker-compose
+      script:
+        - git clone https://github.com/spryker/docker-sdk.git --single-branch --branch master ./docker
+        - docker/sdk boot deploy.ci.functional.mariadb.yml -v
+        - docker/sdk up -t -v
+        - docker/sdk testing codecept run -c codeception.functional.yml
       before_install: skip
       before_script: skip
       after_script: skip
@@ -118,7 +152,7 @@ matrix:
       language: minimal
       env:
         - PROGRESS_TYPE=plain
-        - SPRYKER_PLATFORM_IMAGE=spryker/php:7.3
+        - SPRYKER_PLATFORM_IMAGE=spryker/php:7.3-alpine3.12
         - SPRYKER_DB_ENGINE=PGSQL
         - SPRYKER_TEST_IN_BROWSER=phantomjs
         - TRAVIS=1
@@ -146,9 +180,8 @@ matrix:
         - sudo chmod +x /usr/local/bin/docker-compose
       script:
         - git clone https://github.com/spryker/docker-sdk.git --single-branch --branch master ./docker
-        - docker/sdk boot deploy.ci.yml
-        - docker/sdk build -t images
-        - docker/sdk demo-data -t demo-minimal
+        - docker/sdk boot deploy.ci.api.yml -v
+        - docker/sdk up -t -v
         - docker/sdk testing codecept fixtures
         - docker/sdk testing console queue:worker:start --stop-when-empty
         - docker/sdk testing codecept run -c codeception.api.yml
@@ -156,16 +189,13 @@ matrix:
       before_script: skip
       after_script: skip
 
-    - name: Docker / Alpine / PHP 7.3 / MySQL / Functional
-      os:
-        - linux
+    - name: Docker / Alpine / PHP 7.4 / Frontend & Assets
+      os: linux
       dist: bionic
-      language: minimal
+      language: shell
       env:
         - PROGRESS_TYPE=plain
-        - SPRYKER_PLATFORM_IMAGE=spryker/php:7.3
-        - SPRYKER_DB_ENGINE=MYSQL
-        - SPRYKER_TEST_IN_BROWSER=phantomjs
+        - SPRYKER_PLATFORM_IMAGE=spryker/php:7.4-alpine3.12
         - TRAVIS=1
       addons:
         hosts:
@@ -191,17 +221,18 @@ matrix:
         - sudo chmod +x /usr/local/bin/docker-compose
       script:
         - git clone https://github.com/spryker/docker-sdk.git --single-branch --branch master ./docker
-        - docker/sdk boot deploy.ci.mysql.yml
-        - docker/sdk build images
-        - docker/sdk demo-data -t
-        - 'docker/sdk testing codecept run -c codeception.functional.yml -o "\"extensions: config: \SprykerTest\Shared\Testify\Helper\SuiteFilterHelper: inclusive: [PyzTest]\"" -o "\"extensions: config: \SprykerTest\Shared\Testify\Helper\SuiteFilterHelper: exclusive: [Api, Glue]\""'
+        - docker/sdk boot deploy.yml
+        - SPRYKER_BUILD_HASH=myhash docker/sdk export images
+        - docker run -it --rm -e SPRYKER_NGINX_CGI_HOST_YVES_EU=localhost -e SPRYKER_NGINX_CGI_HOST_ZED_EU=localhost -e SPRYKER_NGINX_CGI_HOST_GLUE_EU=localhost -e SPRYKER_NGINX_CGI_HOST_YVES_US=localhost -e SPRYKER_NGINX_CGI_HOST_GLUE_US=localhost -e SPRYKER_NGINX_CGI_HOST_ZED_US=localhost -e ALLOWED_IP=127.0.0.1 spryker_b2c_frontend:1.0-frontend nginx -t
+        - docker run -it --rm --entrypoint='' spryker_b2c_frontend:1.0-frontend ls -al /data/public/Yves/assets/myhash
+        - docker run -it --rm --entrypoint='' spryker_b2c_frontend:1.0-frontend ls -al /data/public/Zed/assets/
       before_install: skip
       before_script: skip
       after_script: skip
 
 addons:
-  postgresql: 9.6
-  mariadb: 10.3
+  postgresql: "9.6"
+  mariadb: "10.3"
 
   apt:
     packages:
@@ -215,6 +246,7 @@ cache:
   directories:
     - $HOME/.composer/cache
     - /home/travis/.rvm/gems # Mailcatcher is a ruby gem, takes 5 minutes to install.
+    - ./node_modules
 
 services:
   - postgresql
@@ -227,6 +259,7 @@ sudo: required
 before_install:
   - echo "extension = redis.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
   - phpenv config-rm xdebug.ini
+  - composer global require hirak/prestissimo
   - ( awk '1;/@hook travis-ci/{exit}' config/Shared/stores.php ; awk 'NR>1' config/Shared/ci/travis/stores.php ; awk '/@hook travis-ci/,0' config/Shared/stores.php ) > config/Shared/stores_tmp.php ; mv config/Shared/stores_tmp.php config/Shared/stores.php
 
 install:
@@ -240,9 +273,7 @@ before_script:
 
   - mkdir -p shared/data/common/jenkins
   - mkdir -p shared/data/common/jenkins/jobs
-  - mkdir -p data/DE/cache/Yves/twig -m 0777
-  - mkdir -p data/DE/cache/Zed/twig -m 0777
-  - mkdir -p data/DE/logs -m 0777
+  - mkdir -p data/logs -m 0777
   - chmod -R 777 data/
   - chmod -R 660 config/Zed/dev_only_private.key
   - chmod -R 660 config/Zed/dev_only_public.key

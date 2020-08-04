@@ -50,7 +50,8 @@ sections:
             command: "vendor/bin/console dev:ide-auto-completion:remove"
 
         remove-request-validation-cache:
-            command: "vendor/bin/console glue:rest-request-validation-cache:remove"
+            command: "vendor/bin/console rest-api:remove-validation-cache"
+            stores: true
 
         remove-navigation-cache:
             command: "vendor/bin/console navigation:cache:remove"
@@ -100,7 +101,8 @@ sections:
             command: "vendor/bin/console navigation:build-cache"
 
         rest-request-validation-cache-warmup:
-            command: "vendor/bin/console glue:rest:build-request-validation-cache"
+            command: "vendor/bin/console rest-api:build-request-validation-cache"
+            stores: true
 
         class-resolver-build:
             command: "vendor/bin/console cache:class-resolver:build"
@@ -148,9 +150,6 @@ sections:
 
         delete-migration-files:
             command: "vendor/bin/console propel:migration:delete"
-            stores:
-                - US
-                - DE
             groups:
                 - propel
 
@@ -187,9 +186,6 @@ sections:
 
         propel-diff:
             command: "vendor/bin/console propel:diff"
-            stores:
-                - US
-                - DE
             groups:
                 - propel
 
@@ -240,41 +236,15 @@ sections:
                 - elastic
 
     demodata:
-        import-commerce-setup:
-            command: "vendor/bin/console data:import --config=data/import/config/b2c_commerce_setup_import_config_v0.yml"
+        import-eu-region-demodata:
+            command: "vendor/bin/console data:import --config=data/import/local/full_EU.yml"
             stores:
-                - US
                 - DE
 
-        import-catalog-setup:
-            command: "vendor/bin/console data:import --config=data/import/config/b2c_catalog_setup_import_config_v0.yml"
+        import-us-region-demodata:
+            command: "vendor/bin/console data:import --config=data/import/local/full_US.yml"
             stores:
                 - US
-                - DE
-
-        import-special-product-types-setup:
-            command: "vendor/bin/console data:import --config=data/import/config/b2c_special_product_types_import_config_v0.yml"
-            stores:
-                - US
-                - DE
-
-        import-merchandising-setup:
-            command: "vendor/bin/console data:import --config=data/import/config/b2c_merchandising_import_config_v0.yml"
-            stores:
-                - US
-                - DE
-
-        import-content-management-setup:
-            command: "vendor/bin/console data:import --config=data/import/config/b2c_content_management_import_config_v0.yml"
-            stores:
-                - US
-                - DE
-
-        import-miscellaneous-setup:
-            command: "vendor/bin/console data:import --config=data/import/config/b2c_miscellaneous_import_config_v0.yml"
-            stores:
-                - US
-                - DE
 
         update-product-labels:
             command: "vendor/bin/console product-label:relations:update"

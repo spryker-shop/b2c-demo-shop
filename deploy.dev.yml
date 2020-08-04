@@ -4,7 +4,16 @@ namespace: spryker_b2c_dev
 tag: 'dev'
 
 environment: docker
-image: spryker/php:7.2
+image:
+    tag: spryker/php:7.3-alpine3.12
+    php:
+        enabled-extensions:
+            - blackfire
+composer:
+    mode: ''
+    autoload: ''
+assets:
+    mode: development
 
 regions:
     EU:
@@ -123,7 +132,7 @@ services:
             password: "secret"
         endpoints:
             queue.spryker.local:
-            locahost:5672:
+            localhost:5672:
                 protocol: tcp
     session:
         engine: redis
@@ -153,19 +162,21 @@ services:
     redis-gui:
         engine: redis-commander
         endpoints:
-            redis-commander.spryker.local:        
-
+            redis-commander.spryker.local:
 
 docker:
 
     ssl:
         enabled: false
+        redirect: true
 
     testing:
         store: DE
 
     debug:
         enabled: true
+        xdebug:
+            enabled: true
 
     mount:
         native:

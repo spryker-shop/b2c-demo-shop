@@ -16,6 +16,7 @@ use Spryker\Zed\OmsExtension\Dependency\Plugin\TimeoutProcessorPluginInterface;
 /**
  * @method \Pyz\Zed\Oms\Business\OmsFacadeInterface getFacade()
  * @method \Pyz\Zed\Oms\Communication\OmsCommunicationFactory getFactory()
+ * @method \Pyz\Zed\Oms\OmsConfig getConfig()
  */
 class InitiationTimeoutProcessorPlugin extends AbstractPlugin implements TimeoutProcessorPluginInterface
 {

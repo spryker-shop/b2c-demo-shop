@@ -1,12 +1,4 @@
-{% extends template('widget') %}
-
-{% define data = {
-    item: _widget.item,
-    wishlistName: _widget.wishlistName,
-    products: _widget.products
-} %}
-
-{% set wishlistItemSku = data.item.sku %}
+{% extends view('wishlist-product-alternative', '@SprykerShop:ProductAlternativeWidget') %}
 
 {% block body %}
     {% if data.products is not empty %}
@@ -75,9 +67,22 @@
                             {% endif %}
                         </td>
                         <td>
-                            <a class="link link--user-account float-right" href="{{ url('wishlist/add-item', {sku: item.sku, 'product-id': item.idProductConcrete, 'wishlist-name': data.wishlistName}) }}">
-                                {{ 'product_alternative_widget.add_to_wishlist' | trans}}
-                            </a>
+                            {% set idProductConcrete = item.idProductConcrete %}
+
+                            {% include molecule('single-button-form') with {
+                                class: 'float-right',
+                                data: {
+                                    formAction: path('wishlist/add-item', { sku: item.sku, 'product-id': idProductConcrete, 'wishlist-name': data.wishlistName }),
+                                    buttonText: 'product_alternative_widget.add_to_wishlist' | trans,
+                                    iconName: '',
+                                    buttonClass: 'link link--user-account',
+                                    fieldName: 'wishlist_add_item_form[_token]',
+                                    fieldValue: csrf_token('wishlist_add_item_form'),
+                                    buttonAttributes: {
+                                        disabled: idProductConcrete is empty,
+                                    },
+                                },
+                            } only %}
                         </td>
                     </tr>
                 {% endfor %}

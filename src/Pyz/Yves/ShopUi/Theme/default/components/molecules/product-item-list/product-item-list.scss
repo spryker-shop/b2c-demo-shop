@@ -33,7 +33,8 @@
             }
         }
 
-        &__col-name {
+        &__col-name,
+        &__col-price {
             &:hover {
                 text-decoration: none;
                 cursor: pointer;
@@ -55,10 +56,6 @@
         &__col-price {
             @include helper-breakpoint-media-min($md-min) {
                 padding-right: rem(38);
-            }
-
-            &:hover {
-                text-decoration: none;
             }
         }
 
@@ -105,6 +102,12 @@
         &__review-count {
             font-size: rem(15);
             color: $setting-color-gray-3;
+        }
+
+        &__button {
+            position: absolute;
+            right: 0;
+            bottom: 0;
         }
 
         .no-touch &:hover {

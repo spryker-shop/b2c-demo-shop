@@ -1,0 +1,70 @@
+{% extends molecule('label-group', '@SprykerShop:ProductLabelWidget') %}
+
+{% block body %}
+    {% set leftColumnComponents = [] %}
+    {% set rightColumnComponents = [] %}
+    {% set labelTagType = 'template:tag' %}
+
+    {% for label in data.labels %}
+        {% set componentName = 'flag' %}
+        {% set componentModifiers = [label.type] %}
+        {% set labelJsClass = config.jsName ~ '__label-flag' %}
+        {% set labelTextJsClass = config.jsName ~ '__label-flag-text' %}
+
+        {% if label.type == labelTagType %}
+            {% set componentName = 'tag' %}
+            {% set componentModifiers = [] %}
+            {% set labelJsClass = config.jsName ~ '__label-tag' %}
+            {% set labelTextJsClass = config.jsName ~ '__label-tag-text' %}
+        {% endif %}
+
+        {% set component = include(
+            [
+                molecule(componentName, 'ProductLabelWidget')
+            ],
+            {
+                class: labelJsClass,
+                modifiers: componentModifiers,
+                data: {
+                    text: label.text,
+                    textClass: labelTextJsClass,
+                },
+                attributes: {
+                    'data-label-tag-type': label.type == labelTagType ? labelTagType,
+                },
+            },
+            with_context = false
+        ) %}
+
+        {% if label.type == labelTagType %}
+            {% set leftColumnComponents = leftColumnComponents | merge([component]) %}
+        {% else %}
+            {% set rightColumnComponents = rightColumnComponents | merge([component]) %}
+        {% endif %}
+    {% endfor %}
+
+    {% if leftColumnComponents %}
+        {{ leftColumnComponents | join | raw }}
+    {% else %}
+        {% include molecule('tag', 'ProductLabelWidget') with {
+            class: config.jsName ~ '__label-tag is-hidden',
+            data: {
+                textClass: config.jsName ~ '__label-tag-text',
+            },
+            attributes: {
+                'data-label-tag-type': labelTagType,
+            },
+        } only %}
+    {% endif %}
+
+    {% if rightColumnComponents %}
+        {{ rightColumnComponents | join | raw }}
+    {% else %}
+        {% include molecule('flag', 'ProductLabelWidget') with {
+            class: config.jsName ~ '__label-flag is-hidden',
+            data: {
+                textClass: config.jsName ~ '__label-flag-text',
+            },
+        } only %}
+    {% endif %}
+{% endblock %}

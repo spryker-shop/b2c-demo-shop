@@ -11,6 +11,8 @@ use Spryker\Zed\Customer\Communication\Plugin\Sales\CustomerOrderHydratePlugin;
 use Spryker\Zed\Discount\Communication\Plugin\Sales\DiscountOrderHydratePlugin;
 use Spryker\Zed\Oms\Communication\Plugin\Sales\IsCancellableOrderExpanderPlugin;
 use Spryker\Zed\Oms\Communication\Plugin\Sales\IsCancellableSearchOrderExpanderPlugin;
+use Spryker\Zed\Oms\Communication\Plugin\Sales\ItemStateOrderItemExpanderPlugin;
+use Spryker\Zed\Oms\Communication\Plugin\Sales\OrderAggregatedItemStateSearchOrderExpanderPlugin;
 use Spryker\Zed\Oms\Communication\Plugin\Sales\StateHistoryOrderItemExpanderPlugin;
 use Spryker\Zed\Payment\Communication\Plugin\Sales\PaymentOrderHydratePlugin;
 use Spryker\Zed\ProductBundle\Communication\Plugin\Sales\ProductBundleIdHydratorPlugin;
@@ -133,6 +135,7 @@ class SalesDependencyProvider extends SprykerSalesDependencyProvider
             new ConfiguredBundleOrderItemExpanderPlugin(),
             new ProductBundleOrderItemExpanderPlugin(),
             new ProductBundleOptionItemExpanderPlugin(),
+            new ItemStateOrderItemExpanderPlugin(),
         ];
     }
 
@@ -142,6 +145,7 @@ class SalesDependencyProvider extends SprykerSalesDependencyProvider
     protected function getSearchOrderExpanderPlugins(): array
     {
         return [
+            new OrderAggregatedItemStateSearchOrderExpanderPlugin(),
             new IsCancellableSearchOrderExpanderPlugin(),
         ];
     }
