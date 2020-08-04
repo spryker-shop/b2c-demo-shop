@@ -276,25 +276,6 @@ jobs:
       after_script: skip
 
 addons:
-  apt:
-    update: false
-    sources:
-      - sourceline: ppa:chris-lea/redis-server
-      - sourceline: deb http://dl.bintray.com/rabbitmq-erlang/debian bionic erlang
-        key_url: https://github.com/rabbitmq/signing-keys/releases/download/2.0/rabbitmq-release-signing-key.asc
-      - sourceline: deb https://dl.bintray.com/rabbitmq/debian bionic main
-        key_url: https://github.com/rabbitmq/signing-keys/releases/download/2.0/rabbitmq-release-signing-key.asc
-      - sourceline: ppa:ondrej/php
-    packages:
-      - redis-tools
-      - redis-server
-      - rabbitmq-server
-      - graphviz
-      - libzip-dev
-      - postgresql-12
-      - postgresql-client-12
-      - postgresql-server-dev-12
-      - rabbitmq-server
   postgresql: "12"
   mariadb: "10.3"
 
