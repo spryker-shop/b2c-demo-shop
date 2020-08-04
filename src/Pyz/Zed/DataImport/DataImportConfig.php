@@ -61,12 +61,4 @@ class DataImportConfig extends SprykerDataImportConfig
     {
         return APPLICATION_ROOT_DIR . DIRECTORY_SEPARATOR . 'data/import/config/b2c_full_data_import_config_v0.yml';
     }
-
-    /**
-     * @return bool
-     */
-    public function isInternal()
-    {
-        return ($this->getConfig()->get(DataImportConstants::IS_ENABLE_INTERNAL_IMAGE)) ? true : false;
-    }
 }

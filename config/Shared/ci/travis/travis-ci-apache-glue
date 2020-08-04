@@ -2,7 +2,8 @@
 
   DocumentRoot %TRAVIS_BUILD_DIR%/public/Glue
   ServerName glue.de.spryker.test
-  SetEnv APPLICATION_ENV devtest
+  SetEnv APPLICATION_ENV %APPLICATION_ENV%
+  SetEnv SPRYKER_TESTING_ENABLED 1
 
   ErrorLog /tmp/glue-error.log
 
