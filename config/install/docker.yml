@@ -125,3 +125,6 @@ sections:
     demodata:
         import-demodata:
             command: "vendor/bin/console data:import --config=data/import/local/full_${SPRYKER_REGION}.yml"
+
+        update-product-labels:
+            command: "vendor/bin/console product-label:relations:update -vvv --no-ansi"
