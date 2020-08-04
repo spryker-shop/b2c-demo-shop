@@ -3,7 +3,6 @@
 use Spryker\Shared\Application\ApplicationConstants;
 use Spryker\Shared\Collector\CollectorConstants;
 use Spryker\Shared\Customer\CustomerConstants;
-use Spryker\Shared\Mail\MailConstants;
 use Spryker\Shared\Newsletter\NewsletterConstants;
 use Spryker\Shared\Propel\PropelConstants;
 use Spryker\Shared\PropelQueryBuilder\PropelQueryBuilderConstants;

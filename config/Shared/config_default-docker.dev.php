@@ -2,7 +2,6 @@
 
 use Monolog\Logger;
 use Pyz\Shared\Console\ConsoleConstants;
-use Spryker\Shared\Api\ApiConstants;
 use Spryker\Shared\Application\ApplicationConstants;
 use Spryker\Shared\Customer\CustomerConstants;
 use Spryker\Shared\DocumentationGeneratorRestApi\DocumentationGeneratorRestApiConstants;

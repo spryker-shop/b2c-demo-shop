@@ -7,7 +7,6 @@
 
 namespace Pyz\Zed\DataImport;
 
-use Pyz\Shared\DataImport\DataImportConstants;
 use Spryker\Zed\DataImport\DataImportConfig as SprykerDataImportConfig;
 
 /**

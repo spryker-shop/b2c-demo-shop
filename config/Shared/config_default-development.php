@@ -2,7 +2,6 @@
 
 use Monolog\Logger;
 use Pyz\Shared\Console\ConsoleConstants;
-use Spryker\Shared\Api\ApiConstants;
 use Spryker\Shared\Application\ApplicationConstants;
 use Spryker\Shared\Customer\CustomerConstants;
 use Spryker\Shared\DocumentationGeneratorRestApi\DocumentationGeneratorRestApiConstants;
@@ -51,7 +50,6 @@ $config[KernelConstants::STORE_PREFIX] = 'DEV';
 
 // >>> Debug
 $config[ApplicationConstants::ENABLE_APPLICATION_DEBUG]
-    = $config[ApiConstants::ENABLE_API_DEBUG]
     = $config[CalculationPageConstants::ENABLE_CART_DEBUG]
     = $config[ShopApplicationConstants::ENABLE_APPLICATION_DEBUG]
     = $config[GlueApplicationConstants::GLUE_APPLICATION_REST_DEBUG]

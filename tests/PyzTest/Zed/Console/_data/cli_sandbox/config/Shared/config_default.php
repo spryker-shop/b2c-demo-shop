@@ -28,13 +28,11 @@ use Spryker\Shared\SessionRedis\SessionRedisConfig;
 use Spryker\Shared\SessionRedis\SessionRedisConstants;
 use Spryker\Shared\Storage\StorageConstants;
 use Spryker\Shared\StorageRedis\StorageRedisConstants;
-use Spryker\Shared\Tax\TaxConstants;
 use Spryker\Shared\Twig\TwigConstants;
 use Spryker\Shared\User\UserConstants;
 use Spryker\Shared\ZedNavigation\ZedNavigationConstants;
 use Spryker\Shared\ZedRequest\ZedRequestConstants;
 use Spryker\Zed\Oms\OmsConfig;
-use Spryker\Zed\Propel\PropelConfig;
 
 $config[KernelConstants::PROJECT_NAMESPACES] = [
     'Pyz',
