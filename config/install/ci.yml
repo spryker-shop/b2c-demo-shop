@@ -1,6 +1,3 @@
-env:
-    APPLICATION_ENV: devtest
-
 sections:
     generate:
         generate-transfers:
@@ -33,31 +30,6 @@ sections:
 
         resolvable-class-cache-warmup:
             command: "vendor/bin/console cache:class-resolver:build"
-
-    queue-flush:
-        set-permissions:
-            command: "vendor/bin/console queue:permission:set"
-            stores: true
-
-        purge-all-queues:
-            command: "vendor/bin/console queue:queue:purge-all"
-            stores: true
-
-        delete-all-queues:
-            command: "vendor/bin/console queue:queue:delete-all"
-            stores: true
-
-        delete-all-exchanges:
-            command: "vendor/bin/console queue:exchanges:delete-all"
-            stores: true
-
-
-    database-flush:
-        drop-database:
-            command: "vendor/bin/console propel:database:drop"
-        delete-migration-files:
-            command: "vendor/bin/console propel:migration:delete"
-
 
     database-migrate:
         propel-create:

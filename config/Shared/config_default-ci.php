@@ -8,60 +8,44 @@ use Spryker\Shared\DocumentationGeneratorRestApi\DocumentationGeneratorRestApiCo
 use Spryker\Shared\ErrorHandler\ErrorHandlerConstants;
 use Spryker\Shared\ErrorHandler\ErrorRenderer\WebExceptionErrorRenderer;
 use Spryker\Shared\Event\EventConstants;
+use Spryker\Shared\EventBehavior\EventBehaviorConstants;
 use Spryker\Shared\GlueApplication\GlueApplicationConstants;
 use Spryker\Shared\Http\HttpConstants;
 use Spryker\Shared\Kernel\KernelConstants;
 use Spryker\Shared\Kernel\Store;
 use Spryker\Shared\Log\LogConstants;
+use Spryker\Shared\Mail\MailConstants;
 use Spryker\Shared\Newsletter\NewsletterConstants;
 use Spryker\Shared\ProductManagement\ProductManagementConstants;
-use Spryker\Shared\Propel\PropelConstants;
-use Spryker\Shared\PropelOrm\PropelOrmConstants;
+use Spryker\Shared\Queue\QueueConfig;
+use Spryker\Shared\Queue\QueueConstants;
 use Spryker\Shared\RabbitMq\RabbitMqEnv;
 use Spryker\Shared\Router\RouterConstants;
-use Spryker\Shared\Session\SessionConfig;
+use Spryker\Shared\Scheduler\SchedulerConstants;
+use Spryker\Shared\SearchElasticsearch\SearchElasticsearchConstants;
 use Spryker\Shared\Session\SessionConstants;
-use Spryker\Shared\SessionFile\SessionFileConstants;
 use Spryker\Shared\SessionRedis\SessionRedisConstants;
+use Spryker\Shared\StorageDatabase\StorageDatabaseConstants;
+use Spryker\Shared\StorageRedis\StorageRedisConstants;
 use Spryker\Shared\Testify\TestifyConstants;
-use Spryker\Shared\WebProfiler\WebProfilerConstants;
 use Spryker\Shared\ZedRequest\ZedRequestConstants;
-use SprykerShop\Shared\CalculationPage\CalculationPageConstants;
 use SprykerShop\Shared\ErrorPage\ErrorPageConstants;
-use SprykerShop\Shared\ShopApplication\ShopApplicationConstants;
-use SprykerShop\Shared\WebProfilerWidget\WebProfilerWidgetConstants;
 
 // ############################################################################
-// ############################## DEVELOPMENT IN DEVVM ########################
+// ############################## TESTING IN CI ###############################
 // ############################################################################
 
-$domain = getenv('VM_PROJECT') ?: 'suite-nonsplit';
-$storeLowerCase = strtolower(APPLICATION_STORE);
 $stores = array_combine(Store::getInstance()->getAllowedStores(), Store::getInstance()->getAllowedStores());
-$yvesHost = sprintf('www.%s.%s.local', $storeLowerCase, $domain);
-$glueHost = sprintf('glue.de.%s.local', $domain);
-$zedHost = sprintf('zed.%s.%s.local', $storeLowerCase, $domain);
+$yvesHost = 'www.de.spryker.test';
+$glueHost = 'glue.de.spryker.test';
+$zedHost = 'zed.de.spryker.test';
 
 // ----------------------------------------------------------------------------
 // ------------------------------ CODEBASE ------------------------------------
 // ----------------------------------------------------------------------------
 
-$config[KernelConstants::STORE_PREFIX] = 'DEV';
-
-// >>> Debug
-$config[ApplicationConstants::ENABLE_APPLICATION_DEBUG]
-    = $config[CalculationPageConstants::ENABLE_CART_DEBUG]
-    = $config[ShopApplicationConstants::ENABLE_APPLICATION_DEBUG]
-    = $config[GlueApplicationConstants::GLUE_APPLICATION_REST_DEBUG]
-    = true;
-
 // >>> Dev tools
-if (interface_exists(WebProfilerConstants::class)) {
-    $config[WebProfilerConstants::IS_WEB_PROFILER_ENABLED] = true;
-}
-if (interface_exists(WebProfilerWidgetConstants::class)) {
-    $config[WebProfilerWidgetConstants::IS_WEB_PROFILER_ENABLED] = true;
-}
+$config[KernelConstants::ENABLE_CONTAINER_OVERRIDING] = true;
 $config[ConsoleConstants::ENABLE_DEVELOPMENT_CONSOLE_COMMANDS] = true;
 $config[DocumentationGeneratorRestApiConstants::ENABLE_REST_API_DOCUMENTATION_GENERATION] = true;
 
@@ -91,6 +75,7 @@ $trustedHosts
     = [
     $yvesHost,
     $zedHost,
+    'localhost',
 ];
 
 $config[KernelConstants::DOMAIN_WHITELIST] = array_merge($trustedHosts, $config[KernelConstants::DOMAIN_WHITELIST]);
@@ -105,45 +90,81 @@ require 'common/config_oauth-development.php';
 // ------------------------------ SERVICES ------------------------------------
 // ----------------------------------------------------------------------------
 
-require 'common/config_services-devvm.php';
 require 'common/config_logs-files.php';
 
 // >>> DATABASE
-$config[PropelConstants::ZED_DB_USERNAME] = 'development';
-$config[PropelConstants::ZED_DB_PASSWORD] = 'mate20mg';
-$config[PropelConstants::ZED_DB_DATABASE] = ''; // Specified in codebucket specific configs: config_default-development_*.php
+// Look at:
+// config_default-ci.mysql.php
+// config_default-ci.pgsql.php
+
+// >>> SEARCH
+
+$config[SearchElasticsearchConstants::HOST] = 'localhost';
+$config[SearchElasticsearchConstants::TRANSPORT] = 'http';
+$config[SearchElasticsearchConstants::PORT] = 9200;
+
+// >>> STORAGE
+
+$config[StorageRedisConstants::STORAGE_REDIS_PERSISTENT_CONNECTION] = true;
+$config[StorageRedisConstants::STORAGE_REDIS_PROTOCOL] = 'tcp';
+$config[StorageRedisConstants::STORAGE_REDIS_HOST] = '127.0.0.1';
+$config[StorageRedisConstants::STORAGE_REDIS_PORT] = 6379;
+$config[StorageRedisConstants::STORAGE_REDIS_PASSWORD] = false;
+$config[StorageRedisConstants::STORAGE_REDIS_DATABASE] = 3;
+
+$config[StorageDatabaseConstants::DB_DEBUG] = false;
+$config[StorageDatabaseConstants::DB_DATABASE] = 'DE_test_zed';
+$config[StorageDatabaseConstants::DB_HOST] = '127.0.0.1';
+$config[StorageDatabaseConstants::DB_PASSWORD] = '';
+// Look also at:
+// config_default-ci.mysql.php
+// config_default-ci.pgsql.php
 
 // >>> SESSION
-$config[SessionConstants::ZED_SESSION_TIME_TO_LIVE]
-    = $config[SessionRedisConstants::ZED_SESSION_TIME_TO_LIVE]
-    = $config[SessionFileConstants::ZED_SESSION_TIME_TO_LIVE] = SessionConfig::SESSION_LIFETIME_1_YEAR;
+
+$config[SessionRedisConstants::YVES_SESSION_REDIS_PROTOCOL] = $config[StorageRedisConstants::STORAGE_REDIS_PROTOCOL];
+$config[SessionRedisConstants::YVES_SESSION_REDIS_HOST] = $config[StorageRedisConstants::STORAGE_REDIS_HOST];
+$config[SessionRedisConstants::YVES_SESSION_REDIS_PORT] = $config[StorageRedisConstants::STORAGE_REDIS_PORT];
+$config[SessionRedisConstants::YVES_SESSION_REDIS_PASSWORD] = $config[StorageRedisConstants::STORAGE_REDIS_PASSWORD];
+$config[SessionRedisConstants::YVES_SESSION_REDIS_DATABASE] = 1;
+
+$config[SessionRedisConstants::ZED_SESSION_REDIS_PROTOCOL] = $config[StorageRedisConstants::STORAGE_REDIS_PROTOCOL];
+$config[SessionRedisConstants::ZED_SESSION_REDIS_HOST] = $config[StorageRedisConstants::STORAGE_REDIS_HOST];
+$config[SessionRedisConstants::ZED_SESSION_REDIS_PORT] = $config[StorageRedisConstants::STORAGE_REDIS_PORT];
+$config[SessionRedisConstants::ZED_SESSION_REDIS_PASSWORD] = $config[StorageRedisConstants::STORAGE_REDIS_PASSWORD];
+$config[SessionRedisConstants::ZED_SESSION_REDIS_DATABASE] = 2;
+
+// >>> SCHEDULER
+
+$config[SchedulerConstants::ENABLED_SCHEDULERS] = [];
 
 // >>> QUEUE
 
-$config[RabbitMqEnv::RABBITMQ_API_VIRTUAL_HOST]
-    = $config[RabbitMqEnv::RABBITMQ_VIRTUAL_HOST]
-    = sprintf('/%s_development_zed', APPLICATION_STORE);
-$config[RabbitMqEnv::RABBITMQ_USERNAME] = sprintf('%s_development', APPLICATION_STORE);
+$config[EventConstants::EVENT_CHUNK] = 5000;
+$config[QueueConstants::QUEUE_ADAPTER_CONFIGURATION][EventConstants::EVENT_QUEUE][QueueConfig::CONFIG_MAX_WORKER_NUMBER] = 1;
+
+$config[EventBehaviorConstants::EVENT_BEHAVIOR_TRIGGERING_ACTIVE] = getenv('TEST_GROUP') === 'acceptance';
 
 $config[RabbitMqEnv::RABBITMQ_CONNECTIONS] = array_map(static function ($storeName) {
     return [
         RabbitMqEnv::RABBITMQ_CONNECTION_NAME => $storeName . '-connection',
         RabbitMqEnv::RABBITMQ_HOST => 'localhost',
         RabbitMqEnv::RABBITMQ_PORT => '5672',
-        RabbitMqEnv::RABBITMQ_PASSWORD => 'mate20mg',
-        RabbitMqEnv::RABBITMQ_USERNAME => $storeName . '_development',
-        RabbitMqEnv::RABBITMQ_VIRTUAL_HOST => '/' . $storeName . '_development_zed',
+        RabbitMqEnv::RABBITMQ_PASSWORD => 'guest',
+        RabbitMqEnv::RABBITMQ_USERNAME => 'guest',
+        RabbitMqEnv::RABBITMQ_VIRTUAL_HOST => '/',
         RabbitMqEnv::RABBITMQ_STORE_NAMES => [$storeName],
         RabbitMqEnv::RABBITMQ_DEFAULT_CONNECTION => $storeName === APPLICATION_STORE,
     ];
-}, $stores);
+}, Store::getInstance()->getAllowedStores());
 
 // ---------- LOGGER
 
-$config[EventConstants::LOGGER_ACTIVE] = true;
-$config[PropelOrmConstants::PROPEL_SHOW_EXTENDED_EXCEPTION] = true;
+$config[LogConstants::LOG_LEVEL] = Logger::CRITICAL;
 
-$config[LogConstants::LOG_LEVEL] = Logger::INFO;
+// >>> EMAIL
+
+$config[MailConstants::SMTP_PORT] = 1025;
 
 // ----------------------------------------------------------------------------
 // ------------------------------ ZED -----------------------------------------

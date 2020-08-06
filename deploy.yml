@@ -3,7 +3,7 @@ version: "0.1"
 namespace: spryker_b2c
 tag: '1.0'
 
-environment: docker
+environment: docker.dev
 image:
     tag: spryker/php:7.3-alpine3.12
 
@@ -162,6 +162,10 @@ services:
         engine: swagger-ui
         endpoints:
             swagger.spryker.local:
+    dashboard:
+        engine: dashboard
+        endpoints:
+            spryker.local:
 
 docker:
 

@@ -3,7 +3,7 @@ version: "0.1"
 namespace: spryker_b2c_dev
 tag: 'dev'
 
-environment: docker
+environment: docker.dev
 image:
     tag: spryker/php:7.3-alpine3.12
     php:
@@ -163,6 +163,10 @@ services:
         engine: redis-commander
         endpoints:
             redis-commander.spryker.local:
+    dashboard:
+        engine: dashboard
+        endpoints:
+            spryker.local:
 
 docker:
 
