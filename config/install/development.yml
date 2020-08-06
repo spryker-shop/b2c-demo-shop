@@ -76,9 +76,6 @@ sections:
         generate-transfer-databuilders:
             command: "vendor/bin/console transfer:databuilder:generate"
 
-        generate-entity-transfer:
-            command: "vendor/bin/console transfer:entity:generate"
-
         generate-ide-auto-completion:
             command: "vendor/bin/console dev:ide-auto-completion:generate"
 
@@ -216,6 +213,9 @@ sections:
         maintenance-page-disable:
             command: "vendor/bin/console maintenance:disable"
             stores: true
+
+        generate-entity-transfer:
+            command: "vendor/bin/console transfer:entity:generate"
 
         init-database:
             command: "vendor/bin/console setup:init-db"

@@ -35,7 +35,7 @@ use SprykerShop\Shared\WebProfilerWidget\WebProfilerWidgetConstants;
 // ############################## DEVELOPMENT IN DEVVM ########################
 // ############################################################################
 
-$domain = getenv('VM_PROJECT') ?: 'suite-nonsplit';
+$domain = getenv('VM_PROJECT') ?: 'suite';
 $storeLowerCase = strtolower(APPLICATION_STORE);
 $stores = array_combine(Store::getInstance()->getAllowedStores(), Store::getInstance()->getAllowedStores());
 $yvesHost = sprintf('www.%s.%s.local', $storeLowerCase, $domain);
