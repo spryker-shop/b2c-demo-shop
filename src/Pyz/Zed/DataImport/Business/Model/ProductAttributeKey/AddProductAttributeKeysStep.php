@@ -37,7 +37,9 @@ class AddProductAttributeKeysStep implements DataImportStepInterface
                 ])
                 ->setFormatter(new SimpleArrayFormatter());
 
-            foreach ($query->find() as $productAttributeKey) {
+            /** @var array $productAttributeKeys */
+            $productAttributeKeys = $query->find();
+            foreach ($productAttributeKeys as $productAttributeKey) {
                 $key = $productAttributeKey[SpyProductAttributeKeyTableMap::COL_KEY];
                 $value = $productAttributeKey[SpyProductAttributeKeyTableMap::COL_ID_PRODUCT_ATTRIBUTE_KEY];
 
