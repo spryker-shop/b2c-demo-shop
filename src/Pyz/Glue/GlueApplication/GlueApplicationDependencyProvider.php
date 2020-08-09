@@ -39,8 +39,16 @@ use Spryker\Glue\CategoriesRestApi\Plugin\CategoryResourceRoutePlugin;
 use Spryker\Glue\CheckoutRestApi\CheckoutRestApiConfig;
 use Spryker\Glue\CheckoutRestApi\Plugin\GlueApplication\CheckoutDataResourcePlugin;
 use Spryker\Glue\CheckoutRestApi\Plugin\GlueApplication\CheckoutResourcePlugin;
+use Spryker\Glue\CmsPagesContentBannersResourceRelationship\Plugin\GlueApplication\ContentBannerByCmsPageResourceRelationshipPlugin;
+use Spryker\Glue\CmsPagesContentProductAbstractListsResourceRelationship\Plugin\GlueApplication\ContentProductAbstractListByCmsPageResourceRelationshipPlugin;
+use Spryker\Glue\CmsPagesRestApi\CmsPagesRestApiConfig;
+use Spryker\Glue\CmsPagesRestApi\Plugin\GlueApplication\CmsPagesResourceRoutePlugin;
 use Spryker\Glue\ContentBannersRestApi\Plugin\ContentBannerResourceRoutePlugin;
+use Spryker\Glue\ContentProductAbstractListsRestApi\ContentProductAbstractListsRestApiConfig;
 use Spryker\Glue\ContentProductAbstractListsRestApi\Plugin\ContentProductAbstractListRoutePlugin;
+use Spryker\Glue\ContentProductAbstractListsRestApi\Plugin\GlueApplication\AbstractProductsResourceRoutePlugin as ContentProductAbstractListAbstractProductsResourceRoutePlugin;
+use Spryker\Glue\ContentProductAbstractListsRestApi\Plugin\GlueApplication\ContentProductAbstractListsResourceRoutePlugin;
+use Spryker\Glue\ContentProductAbstractListsRestApi\Plugin\GlueApplication\ProductAbstractByContentProductAbstractListResourceRelationshipPlugin;
 use Spryker\Glue\CustomerAccessRestApi\Plugin\GlueApplication\CustomerAccessFormatRequestPlugin;
 use Spryker\Glue\CustomerAccessRestApi\Plugin\GlueApplication\CustomerAccessResourceRoutePlugin;
 use Spryker\Glue\CustomersRestApi\CustomersRestApiConfig;
@@ -173,7 +181,7 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
             new ProductTaxSetsResourceRoutePlugin(),
             new OrderPaymentsResourceRoutePlugin(),
             new ContentBannerResourceRoutePlugin(),
-            new ContentProductAbstractListRoutePlugin(),
+            new ContentProductAbstractListAbstractProductsResourceRoutePlugin(),
             new UrlResolverResourceRoutePlugin(),
             new CustomerAccessResourceRoutePlugin(),
             new AbstractProductsProductReviewsResourceRoutePlugin(),
@@ -184,6 +192,8 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
             new ReturnsResourceRoutePlugin(),
             new CartCodesResourceRoutePlugin(),
             new GuestCartCodesResourceRoutePlugin(),
+            new CmsPagesResourceRoutePlugin(),
+            new ContentProductAbstractListsResourceRoutePlugin(),
         ];
     }
 
@@ -426,6 +436,18 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
         $resourceRelationshipCollection->addRelationship(
             CartsRestApiConfig::RESOURCE_GUEST_CARTS,
             new GiftCardByQuoteResourceRelationshipPlugin()
+        );
+        $resourceRelationshipCollection->addRelationship(
+            CmsPagesRestApiConfig::RESOURCE_CMS_PAGES,
+            new ContentBannerByCmsPageResourceRelationshipPlugin()
+        );
+        $resourceRelationshipCollection->addRelationship(
+            CmsPagesRestApiConfig::RESOURCE_CMS_PAGES,
+            new ContentProductAbstractListByCmsPageResourceRelationshipPlugin()
+        );
+        $resourceRelationshipCollection->addRelationship(
+            ContentProductAbstractListsRestApiConfig::RESOURCE_CONTENT_PRODUCT_ABSTRACT_LISTS,
+            new ProductAbstractByContentProductAbstractListResourceRelationshipPlugin()
         );
 
         return $resourceRelationshipCollection;
