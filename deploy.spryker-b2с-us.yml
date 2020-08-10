@@ -73,7 +73,7 @@ regions:
   US:
     services:
       database:
-        database: spryker_b2b_us
+        database: spryker_b2c_us
         username: spryker
         password: secret
 
@@ -96,19 +96,19 @@ groups:
       Yves:
         application: yves
         endpoints:
-          www.b2b-staging-us.cloud.spryker.toys:
+          www.b2c-staging-us.cloud.spryker.toys:
             store: US
             <<: *frontend-auth
       Zed:
         application: zed
         endpoints:
-          zed.b2b-staging-us.cloud.spryker.toys:
+          zed.b2c-staging-us.cloud.spryker.toys:
             store: US
             <<: *frontend-auth
       Glue:
         application: glue
         endpoints:
-          glue.b2b-staging-us.cloud.spryker.toys:
+          glue.b2c-staging-us.cloud.spryker.toys:
             store: US
 
 services:
@@ -127,7 +127,7 @@ services:
       username: "spryker"
       password: "secret"
     endpoints:
-      queue.b2b-staging-us.cloud.spryker.toys:
+      queue.b2c-staging-us.cloud.spryker.toys:
       localhost:5672:
         protocol: tcp
   session:
@@ -146,11 +146,11 @@ services:
   scheduler:
     engine: jenkins
     endpoints:
-      scheduler.b2b-staging-us.cloud.spryker.toys:
+      scheduler.b2c-staging-us.cloud.spryker.toys:
   mail_catcher:
     engine: mailhog
     endpoints:
-      mail.b2b-staging-us.cloud.spryker.toys:
+      mail.b2c-staging-us.cloud.spryker.toys:
 
 docker:
 
