@@ -10,7 +10,10 @@ namespace Pyz\Zed\CmsContentWidget;
 use Spryker\Shared\CmsContentWidgetProductConnector\ContentWidgetConfigurationProvider\CmsProductContentWidgetConfigurationProvider;
 use Spryker\Shared\CmsContentWidgetProductGroupConnector\ContentWidgetConfigurationProvider\CmsProductGroupContentWidgetConfigurationProvider;
 use Spryker\Shared\CmsContentWidgetProductSetConnector\ContentWidgetConfigurationProvider\CmsProductSetContentWidgetConfigurationProvider;
+use Spryker\Shared\ContentBanner\ContentBannerConfig;
+use Spryker\Shared\ContentProduct\ContentProductConfig;
 use Spryker\Zed\CmsContentWidget\CmsContentWidgetDependencyProvider as SprykerCmsContentWidgetDependencyProvider;
+use Spryker\Zed\CmsContentWidgetContentConnector\Communication\Plugin\Cms\CmsContentItemKeyMapperPlugin;
 use Spryker\Zed\CmsContentWidgetProductConnector\Communication\Plugin\Cms\CmsProductSkuMapperPlugin;
 use Spryker\Zed\CmsContentWidgetProductSetConnector\Communication\Plugin\Cms\CmsProductSetKeyMapperPlugin;
 use Spryker\Zed\Kernel\Container;
@@ -30,6 +33,8 @@ class CmsContentWidgetDependencyProvider extends SprykerCmsContentWidgetDependen
             CmsProductContentWidgetConfigurationProvider::FUNCTION_NAME => new CmsProductSkuMapperPlugin(),
             CmsProductSetContentWidgetConfigurationProvider::FUNCTION_NAME => new CmsProductSetKeyMapperPlugin(),
             CmsProductGroupContentWidgetConfigurationProvider::FUNCTION_NAME => new CmsProductSkuMapperPlugin(),
+            ContentBannerConfig::TWIG_FUNCTION_NAME => new CmsContentItemKeyMapperPlugin(),
+            ContentProductConfig::TWIG_FUNCTION_NAME => new CmsContentItemKeyMapperPlugin(),
         ];
     }
 }
