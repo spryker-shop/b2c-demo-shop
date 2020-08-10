@@ -3,39 +3,39 @@ version: "0.1"
 x-real-ip: &real-ip
   real-ip:
     from:
-#      - 10.0.0.0/8 # AWS VPC network
-#      - 103.21.244.0/22 # Cloudflare
-#      - 103.22.200.0/22 # Cloudflare
-#      - 103.31.4.0/22 # Cloudflare
-#      - 104.16.0.0/12 # Cloudflare
-#      - 108.162.192.0/18 # Cloudflare
-#      - 131.0.72.0/22 # Cloudflare
-#      - 141.101.64.0/18 # Cloudflare
-#      - 162.158.0.0/15 # Cloudflare
-#      - 172.64.0.0/13 # Cloudflare
-#      - 173.245.48.0/20 # Cloudflare
-#      - 188.114.96.0/20 # Cloudflare
-#      - 190.93.240.0/20 # Cloudflare
-#      - 197.234.240.0/22 # Cloudflare
-#      - 198.41.128.0/17 # Cloudflare
-#      - 2400:cb00::/32 # Cloudflare
-#      - 2606:4700::/32 # Cloudflare
-#      - 2803:f800::/32 # Cloudflare
-#      - 2405:b500::/32 # Cloudflare
-#      - 2405:8100::/32 # Cloudflare
-#      - 2c0f:f248::/32 # Cloudflare
-#      - 2a06:98c0::/29 # Cloudflare
+      - 10.0.0.0/8 # AWS VPC network
+      - 103.21.244.0/22 # Cloudflare
+      - 103.22.200.0/22 # Cloudflare
+      - 103.31.4.0/22 # Cloudflare
+      - 104.16.0.0/12 # Cloudflare
+      - 108.162.192.0/18 # Cloudflare
+      - 131.0.72.0/22 # Cloudflare
+      - 141.101.64.0/18 # Cloudflare
+      - 162.158.0.0/15 # Cloudflare
+      - 172.64.0.0/13 # Cloudflare
+      - 173.245.48.0/20 # Cloudflare
+      - 188.114.96.0/20 # Cloudflare
+      - 190.93.240.0/20 # Cloudflare
+      - 197.234.240.0/22 # Cloudflare
+      - 198.41.128.0/17 # Cloudflare
+      - 2400:cb00::/32 # Cloudflare
+      - 2606:4700::/32 # Cloudflare
+      - 2803:f800::/32 # Cloudflare
+      - 2405:b500::/32 # Cloudflare
+      - 2405:8100::/32 # Cloudflare
+      - 2c0f:f248::/32 # Cloudflare
+      - 2a06:98c0::/29 # Cloudflare
 
 x-frontend-auth: &frontend-auth
   <<: *real-ip
-#  auth:
-#    engine: basic
-#    users:
-#      - username: cloud
-#        password: cloud
-#    exclude:
-#      - '${ALLOWED_IP}' # AWS gateway
-#      - 185.60.20.0/24 # PayOne
+  auth:
+    engine: basic
+    users:
+      - username: cloud
+        password: cloud
+    exclude:
+      - '${ALLOWED_IP}' # AWS gateway
+      - 185.60.20.0/24 # PayOne
 
 namespace: spryker-cloud
 tag: '1.0'
