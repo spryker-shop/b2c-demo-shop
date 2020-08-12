@@ -1,0 +1,173 @@
+version: "0.1"
+
+x-real-ip: &real-ip
+  real-ip:
+    from:
+      - 10.0.0.0/8 # AWS VPC network
+      - 103.21.244.0/22 # Cloudflare
+      - 103.22.200.0/22 # Cloudflare
+      - 103.31.4.0/22 # Cloudflare
+      - 104.16.0.0/12 # Cloudflare
+      - 108.162.192.0/18 # Cloudflare
+      - 131.0.72.0/22 # Cloudflare
+      - 141.101.64.0/18 # Cloudflare
+      - 162.158.0.0/15 # Cloudflare
+      - 172.64.0.0/13 # Cloudflare
+      - 173.245.48.0/20 # Cloudflare
+      - 188.114.96.0/20 # Cloudflare
+      - 190.93.240.0/20 # Cloudflare
+      - 197.234.240.0/22 # Cloudflare
+      - 198.41.128.0/17 # Cloudflare
+      - 2400:cb00::/32 # Cloudflare
+      - 2606:4700::/32 # Cloudflare
+      - 2803:f800::/32 # Cloudflare
+      - 2405:b500::/32 # Cloudflare
+      - 2405:8100::/32 # Cloudflare
+      - 2c0f:f248::/32 # Cloudflare
+      - 2a06:98c0::/29 # Cloudflare
+
+x-frontend-auth: &frontend-auth
+  <<: *real-ip
+  auth:
+    engine: basic
+    users:
+      - username: cloud
+        password: cloud
+    exclude:
+      - '${ALLOWED_IP}' # AWS gateway
+      - 185.60.20.0/24 # PayOne
+
+namespace: spryker-cloud
+tag: '1.0'
+
+environment: docker.demo
+image:
+  tag: spryker/php:7.3-alpine3.12
+  environment:
+    SPRYKER_DEFAULT_STORE: "US"
+    SPRYKER_ACTIVE_STORES: "US"
+    SPRYKER_HOOK_BEFORE_DEPLOY: "vendor/bin/install -r US/pre-deploy -vvv"
+    SPRYKER_HOOK_AFTER_DEPLOY: "true"
+    SPRYKER_HOOK_INSTALL: "vendor/bin/install -r US/production --no-ansi -vvv"
+    SPRYKER_HOOK_DESTRUCTIVE_INSTALL: "vendor/bin/install -r US/destructive --no-ansi -vvv"
+  php:
+    enabled-extensions:
+      - blackfire
+      - newrelic
+
+composer:
+  mode: --no-dev
+  autoload: --classmap-authoritative
+
+assets:
+  image: fholzer/nginx-brotli:v1.18.0
+  mode: production
+  compression:
+    brotli:
+      static: only
+    gzip:
+      static: true
+      level: 5
+
+regions:
+  US:
+    services:
+      database:
+        database: spryker_b2c_us
+        username: spryker
+        password: secret
+
+    stores:
+      US:
+        services:
+          broker:
+            namespace: us_queue
+          key_value_store:
+            namespace: 1
+          search:
+            namespace: us_search
+          session:
+            namespace: 2
+
+groups:
+  US:
+    region: US
+    applications:
+      Yves:
+        application: yves
+        endpoints:
+          www.b2c-staging-us.cloud.spryker.toys:
+            store: US
+            <<: *frontend-auth
+      Zed:
+        application: zed
+        endpoints:
+          zed.b2c-staging-us.cloud.spryker.toys:
+            store: US
+            <<: *frontend-auth
+      Glue:
+        application: glue
+        endpoints:
+          glue.b2c-staging-us.cloud.spryker.toys:
+            store: US
+
+services:
+  database:
+    engine: mysql
+    version: mariadb-10.4
+    root:
+      username: "root"
+      password: "secret"
+    endpoints:
+      localhost:3306:
+        protocol: tcp
+  broker:
+    engine: rabbitmq
+    api:
+      username: "spryker"
+      password: "secret"
+    endpoints:
+      queue.b2c-staging-us.cloud.spryker.toys:
+      localhost:5672:
+        protocol: tcp
+  session:
+    engine: redis
+  key_value_store:
+    engine: redis
+    endpoints:
+      localhost:16379:
+        protocol: tcp
+  search:
+    engine: elastic
+    version: 6.8
+    endpoints:
+      localhost:9200:
+        protocol: tcp
+  scheduler:
+    engine: jenkins
+    endpoints:
+      scheduler.b2c-staging-us.cloud.spryker.toys:
+  mail_catcher:
+    engine: mailhog
+    endpoints:
+      mail.b2c-staging-us.cloud.spryker.toys:
+
+docker:
+
+  blackfire:
+    enabled: true
+
+  ssl:
+    enabled: true
+    redirect: true
+
+  debug:
+    enabled: false
+    xdebug:
+      enabled: false
+
+  testing:
+    store: US
+
+  mount:
+    baked:
