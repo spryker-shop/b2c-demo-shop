@@ -75,7 +75,6 @@ class PublisherDependencyProvider extends SprykerPublisherDependencyProvider
         ];
     }
 
-
     /**
      * @return \Spryker\Zed\PublisherExtension\Dependency\Plugin\PublisherPluginInterface[]
      */
