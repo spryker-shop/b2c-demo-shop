@@ -7,6 +7,7 @@
 
 namespace Pyz\Yves\EventDispatcher;
 
+use Spryker\Yves\Application\Communication\Plugin\EventDispatcher\HeadersSecurityEventDispatcherPlugin;
 use Spryker\Yves\EventDispatcher\EventDispatcherDependencyProvider as SprykerEventDispatcherDependencyProvider;
 use Spryker\Yves\Http\Plugin\EventDispatcher\CookieEventDispatcherPlugin;
 use Spryker\Yves\Http\Plugin\EventDispatcher\FragmentEventDispatcherPlugin;
@@ -40,6 +41,7 @@ class EventDispatcherDependencyProvider extends SprykerEventDispatcherDependency
             new ShopApplicationEventDispatcherPlugin(),
             new LocaleEventDispatcherPlugin(),
             new RouterLocaleEventDispatcherPlugin(),
+            new HeadersSecurityEventDispatcherPlugin(),
             new StorageCacheEventDispatcherPlugin(),
             new MonitoringRequestTransactionEventDispatcherPlugin(),
             new AutoloaderCacheEventDispatcherPlugin(),
