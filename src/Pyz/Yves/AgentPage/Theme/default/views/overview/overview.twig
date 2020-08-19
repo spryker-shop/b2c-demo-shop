@@ -1,0 +1,16 @@
+{% extends template('page-layout-agent', 'AgentPage') %}
+
+{% define data = {
+    title: 'agent.account.overview' | trans,
+    agent: _view.agent,
+} %}
+
+{% block customerContent %}
+    <h3>{{- 'agent.account.overview' | trans -}}</h3>
+
+    {% include molecule('overview-info', 'AgentPage') with {
+        data: {
+            agent: data.agent,
+        },
+    } only %}
+{% endblock %}

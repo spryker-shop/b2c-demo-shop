@@ -1,0 +1,19 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'action-card-grid',
+} %}
+
+{% define data = {
+    cards: required,
+} %}
+
+{% block body %}
+    {% for card in data.cards %}
+        {% if card.content is not empty %}
+            <div class="{{ config.name }}__card">
+                {{ card.content}}
+            </div>
+        {% endif %}
+    {% endfor %}
+{% endblock %}

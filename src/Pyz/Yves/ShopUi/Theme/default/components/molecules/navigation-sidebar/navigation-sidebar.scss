@@ -1,0 +1,24 @@
+@mixin shop-ui-navigation-sidebar($name: '.navigation-sidebar') {
+    #{$name} {
+        border: rem(1) solid $setting-color-gray-1;
+
+        &--account {
+            border: 0;
+            padding: 0;
+            margin: 0;
+        }
+
+        &__list {
+            list-style: none;
+            padding: rem(16) 0 rem(16) rem(8);
+            border-radius: rem(2);
+
+            &--account {
+                padding: 0;
+                border-radius: 0;
+            }
+        }
+    }
+}
+
+@include shop-ui-navigation-sidebar();

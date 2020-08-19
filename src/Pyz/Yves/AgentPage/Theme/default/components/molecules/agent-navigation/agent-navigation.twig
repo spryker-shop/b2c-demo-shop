@@ -1,0 +1,16 @@
+{% extends molecule('navigation-sidebar') %}
+
+{% define config = {
+    name: 'agent-navigation',
+} %}
+
+{% define data = {
+    items: [
+        {
+            name: 'overview',
+            url: url('agent/overview'),
+            label: 'customer.account.overview' | trans,
+            icon: 'page',
+        },
+    ],
+} %}

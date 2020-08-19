@@ -1,0 +1,23 @@
+@mixin shop-ui-overlay-block($name: '.overlay-block') {
+    #{$name} {
+        @include helper-visibility-invisible;
+        @include helper-effect-transition;
+        background: $setting-color-overlay;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: $setting-zi-element-floating;
+
+        &--is-shown {
+            @include helper-visibility-visible;
+        }
+
+        &--no-agent-user {
+            z-index: $setting-zi-search-suggestions - 1;
+        }
+    }
+}
+
+@include shop-ui-overlay-block()

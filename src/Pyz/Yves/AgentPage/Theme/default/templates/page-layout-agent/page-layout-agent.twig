@@ -1,0 +1,35 @@
+{% extends template('page-layout-customer', 'CustomerPage') %}
+
+{% define data = {
+    activePage: 'overview',
+    currentBreadcrumb: 'agent.account.overview',
+} %}
+
+{% block breadcrumbs %}
+    {% include molecule('breadcrumb') with {
+        data: {
+            steps: [
+                {
+                    label: 'agent.account.page_title' | trans,
+                    url: url('agent/overview'),
+                },
+                {
+                    label: data.currentBreadcrumb | trans,
+                },
+            ],
+        },
+    } only %}
+{% endblock %}
+
+{% block content %}
+    {% set customerNavigation %}
+        {% block customerNavigation %}
+            {% include molecule('agent-navigation', 'AgentPage') with {
+                data: {
+                    activePage: data.activePage,
+                },
+            } only %}
+        {% endblock %}
+    {% endset %}
+    {{ parent() }}
+{% endblock %}

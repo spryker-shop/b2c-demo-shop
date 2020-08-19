@@ -1,0 +1,32 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'navigation-sidebar',
+    tag: 'nav'
+} %}
+
+{% define data = {
+    activePage: required,
+    items: [],
+} %}
+
+
+{% block body %}
+    <ul class="{{ component.renderClass(config.name ~ '__list', modifiers) }}">
+        {% for item in data.items %}
+            {% set isActiveItem = item.isActiveItem ?? item.name == data.activePage %}
+
+            {% include molecule('navigation-sidebar-item') with {
+                data: {
+                    url: item.url,
+                    icon: item.icon,
+                    label: item.label,
+                    name: item.name
+                },
+                modifiers: isActiveItem ? ['active'] | merge(modifiers) : modifiers,
+            } only %}
+        {% endfor %}
+
+        {% block postContent %}{% endblock %}
+    </ul>
+{% endblock %}

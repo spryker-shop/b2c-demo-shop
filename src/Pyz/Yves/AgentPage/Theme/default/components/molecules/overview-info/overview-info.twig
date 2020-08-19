@@ -1,0 +1,43 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'overview-info',
+} %}
+
+{% define data = {
+    agent: required,
+} %}
+
+{% macro agent(data) %}
+    {% embed molecule('action-card') with {
+        data: {
+            title: 'agent.account.profile_data' | trans,
+        },
+        embed: {
+            agent: data.agent,
+        },
+    } only %}
+        {% block content %}
+            <ul>
+                <li>{{ embed.agent.firstName ~ ' ' ~ embed.agent.lastName }}</li>
+                <li><a class="link link--alt" href="mailto:{{ embed.agent.username }}">{{ embed.agent.username }}</a></li>
+            </ul>
+        {% endblock %}
+    {% endembed %}
+{% endmacro %}
+
+{% block body %}
+    {% include molecule('action-bar') with {
+        modifiers: ['small'],
+        data: {
+            title: 'agent.account.profile_data' | trans,
+        },
+    } only %}
+    {% include molecule('action-card-grid') with {
+        data: {
+            cards: [
+                { content: _self.agent(data) },
+            ],
+        },
+    } only %}
+{% endblock %}

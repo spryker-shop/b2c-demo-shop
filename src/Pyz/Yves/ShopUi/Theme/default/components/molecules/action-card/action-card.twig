@@ -1,0 +1,42 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'action-card'
+} %}
+
+{% define data = {
+    title: '',
+    actions: []
+} %}
+
+{% block body %}
+    <div class="{{ config.name }}__header">
+        <h4 class="{{ config.name }}__title">
+            {{- data.title -}}
+        </h4>
+
+        <div class="{{ config.name }}__actions grid">
+            {% block actions %}
+                {% for action in data.actions %}
+                    <a class="link link--alt link--action spacing-left col"
+                        href="{{ action.url }}"
+                        >
+                        {% if action.icon | default(false) %}
+                            {% include molecule('icon-tooltip') with {
+                                modifiers: ['big'],
+                                data: {
+                                    icon: action.icon,
+                                    text: action.title
+                                }
+                            } only %}
+                        {% endif %}
+                    </a>
+                {% endfor %}
+            {% endblock %}
+        </div>
+    </div>
+
+    <div class="{{ config.name }}__content">
+        {%- block content %}{% endblock -%}
+    </div>
+{% endblock %}

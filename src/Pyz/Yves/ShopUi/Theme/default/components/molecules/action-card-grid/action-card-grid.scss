@@ -1,0 +1,24 @@
+@mixin shop-ui-action-card-grid($name: '.action-card-grid') {
+    #{$name} {
+        display: flex;
+        flex-wrap: wrap;
+        margin: -0.5rem;
+        width: calc(100% + 1rem);
+
+        @include helper-breakpoint-media-min($lg-max) {
+            justify-content: flex-start;
+        }
+
+        &__card {
+            width: 100%;
+            padding: 0.5rem;
+            display: flex;
+
+            @include helper-breakpoint-media-min($lg-max) {
+                width: 50%;
+            }
+        }
+    }
+}
+
+@include shop-ui-action-card-grid();

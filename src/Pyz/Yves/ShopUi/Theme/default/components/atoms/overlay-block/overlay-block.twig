@@ -1,0 +1,11 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'overlay-block',
+    tag: 'overlay-block'
+} %}
+
+{%- block class -%}
+    {{parent()}} {{ config.jsName }}
+{%- endblock -%}
+

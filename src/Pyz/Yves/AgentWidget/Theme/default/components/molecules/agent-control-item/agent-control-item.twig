@@ -1,0 +1,25 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'agent-control-item'
+} %}
+
+{% define data = {
+    title: required,
+    buttonLink: required,
+    buttonName: required,
+    firstName: '',
+    lastName: '',
+} %}
+
+{% block body %}
+    <div class="col {{ config.name }}__info">
+        {{ data.title }}
+        <div>
+            <a href="{{ path('agent/overview') }}" class="{{ config.name }}__name">{{ data.firstName }} {{ data.lastName }}</a>
+        </div>
+    </div>
+    <div class="col {{ config.name }}__button-wrap">
+        <a href="{{ data.buttonLink }}" class="button button--hollow button--big">{{ data.buttonName }}</a>
+    </div>
+{% endblock %}
