@@ -17,7 +17,6 @@ class PriceProductStorageConfig extends SprykerPriceProductStorageConfig
      */
     public function getPriceProductAbstractEventQueueName(): ?string
     {
-
         return PublisherConfig::PUBLISH_QUEUE;
     }
 
@@ -26,7 +25,6 @@ class PriceProductStorageConfig extends SprykerPriceProductStorageConfig
      */
     public function getPriceProductConcreteEventQueueName(): ?string
     {
-
         return PublisherConfig::PUBLISH_QUEUE;
     }
 }
