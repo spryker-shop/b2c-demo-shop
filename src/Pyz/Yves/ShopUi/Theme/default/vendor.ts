@@ -7,6 +7,7 @@ import 'core-js/features/promise';
 import 'core-js/features/array';
 import 'core-js/features/set';
 import 'core-js/features/map';
+import 'whatwg-fetch';
 import 'classlist-polyfill';
 import 'string.prototype.startswith';
 import 'intersection-observer';
