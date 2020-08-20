@@ -1,7 +1,7 @@
-import AutocompleteForm from 'ShopUi/components/molecules/autocomplete-form/autocomplete-form';
+import AutocompleteFormCore from 'ShopUi/components/molecules/autocomplete-form/autocomplete-form';
 import AjaxProvider from 'ShopUi/components/molecules/ajax-provider/ajax-provider';
 
-export default class AutocompleteFormExtended extends AutocompleteForm {
+export default class AutocompleteForm extends AutocompleteFormCore {
     protected parentWrap: HTMLElement;
 
     protected readyCallback(): void {}
