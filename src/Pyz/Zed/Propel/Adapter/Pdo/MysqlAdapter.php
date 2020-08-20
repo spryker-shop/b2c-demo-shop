@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * This file is part of the Spryker Commerce OS.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
+ */
+
 namespace Pyz\Zed\Propel\Adapter\Pdo;
 
 use Propel\Runtime\ActiveQuery\Criteria;
@@ -26,7 +31,8 @@ class MysqlAdapter extends PropelMysqlAdapter
             foreach ($selected as $colName) {
                 if (!in_array($colName, $groupBy)) {
                     // is a alias there that is grouped?
-                    if ($alias = array_search($colName, $asSelects)) {
+                    $alias = array_search($colName, $asSelects);
+                    if ($alias) {
                         if (in_array($alias, $groupBy)) {
                             continue; //yes, alias is selected.
                         }
