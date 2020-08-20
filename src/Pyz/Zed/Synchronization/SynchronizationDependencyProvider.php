@@ -22,7 +22,7 @@ use Spryker\Zed\ConfigurableBundleStorage\Communication\Plugin\Synchronization\C
 use Spryker\Zed\ConfigurableBundleStorage\Communication\Plugin\Synchronization\ConfigurableBundleTemplateSynchronizationDataBulkPlugin;
 use Spryker\Zed\ContentStorage\Communication\Plugin\Synchronization\ContentStorageSynchronizationDataPlugin;
 use Spryker\Zed\CustomerAccessStorage\Communication\Plugin\Synchronization\CustomerAccessSynchronizationDataBulkPlugin;
-use Spryker\Zed\GlossaryStorage\Communication\Plugin\Synchronization\GlossarySynchronizationDataPlugin;
+use Spryker\Zed\GlossaryStorage\Communication\Plugin\Synchronization\GlossarySynchronizationDataRepositoryPlugin;
 use Spryker\Zed\NavigationStorage\Communication\Plugin\Synchronization\NavigationSynchronizationDataPlugin;
 use Spryker\Zed\PriceProductStorage\Communication\Plugin\Synchronization\PriceProductAbstractSynchronizationDataPlugin;
 use Spryker\Zed\PriceProductStorage\Communication\Plugin\Synchronization\PriceProductConcreteSynchronizationDataPlugin;
@@ -76,7 +76,7 @@ class SynchronizationDependencyProvider extends SprykerSynchronizationDependency
             new CmsBlockSynchronizationDataPlugin(),
             new CmsSynchronizationDataPlugin(),
             new NavigationSynchronizationDataPlugin(),
-            new GlossarySynchronizationDataPlugin(),
+            new GlossarySynchronizationDataRepositoryPlugin(),
             new PriceProductConcreteSynchronizationDataPlugin(),
             new PriceProductAbstractSynchronizationDataPlugin(),
             new ProductCategoryFilterSynchronizationDataPlugin(),
