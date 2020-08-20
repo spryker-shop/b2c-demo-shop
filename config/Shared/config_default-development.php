@@ -57,7 +57,7 @@ $config[ApplicationConstants::ENABLE_APPLICATION_DEBUG]
 
 // >>> Dev tools
 if (interface_exists(WebProfilerConstants::class)) {
-    $config[WebProfilerConstants::IS_WEB_PROFILER_ENABLED] = true;
+    $config[WebProfilerConstants::IS_WEB_PROFILER_ENABLED] = false;
 }
 if (interface_exists(WebProfilerWidgetConstants::class)) {
     $config[WebProfilerWidgetConstants::IS_WEB_PROFILER_ENABLED] = false;
