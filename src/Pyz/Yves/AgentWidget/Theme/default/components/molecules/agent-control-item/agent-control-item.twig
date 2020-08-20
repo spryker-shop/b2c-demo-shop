@@ -13,13 +13,17 @@
 } %}
 
 {% block body %}
-    <div class="col {{ config.name }}__info">
-        {{ data.title }}
-        <div>
-            <a href="{{ path('agent/overview') }}" class="{{ config.name }}__name">{{ data.firstName }} {{ data.lastName }}</a>
+    <div class="grid grid--gap grid--inline grid--middle">
+        <div class="col {{ config.name }}__info">
+            <div>
+                {{ data.title }}
+            </div>
+            {% if data.firstName or data.lastName %}
+                <a href="{{ path('agent/overview') }}" class="{{ config.name }}__name">{{ data.firstName }} {{ data.lastName }}</a>
+            {% endif %}
         </div>
-    </div>
-    <div class="col {{ config.name }}__button-wrap spacing-left spacing-left--inner">
-        <a href="{{ data.buttonLink }}" class="button button--agent button--hollow button--big">{{ data.buttonName }}</a>
+        <div class="col {{ config.name }}__button-wrap">
+            <a href="{{ data.buttonLink }}" class="button button--agent button--hollow button--big">{{ data.buttonName }}</a>
+        </div>
     </div>
 {% endblock %}

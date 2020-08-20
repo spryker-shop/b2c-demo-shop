@@ -11,7 +11,6 @@
                                 {% set customer = data.customer %}
 
                                 {% include molecule('agent-control-item', 'AgentWidget') with {
-                                    class: 'grid grid--gap grid--inline grid--middle',
                                     data: {
                                         title: 'agent.control_bar.customer_name' | trans,
                                         buttonLink: '/?_switch_user=_exit',
@@ -42,7 +41,7 @@
                                     </div>
 
                                     <div class="col">
-                                        <button type="submit" class="button button--agent button--success button--big">
+                                        <button class="button button--agent button--success button--big">
                                             {{ 'agent.confirm_user_selection' | trans }}
                                         </button>
                                     </div>
@@ -57,11 +56,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="col col--sm-12 col--md-3 text-right">
+                <div class="col col--sm-12 col--md-3 text-right spacing-left spacing-left--inner">
                     {% set agent = data.agent %}
 
                     {% include molecule('agent-control-item', 'AgentWidget') with {
-                        class: 'grid grid--gap grid--inline grid--middle grid--right',
                         data: {
                             title: 'agent.control_bar.username' | trans,
                             buttonLink: path('agent_logout'),

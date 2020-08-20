@@ -21,16 +21,11 @@
     } only %}
 {% endblock %}
 
-{% block content %}
-    {% set customerNavigation %}
-        {% block customerNavigation %}
-            {% include molecule('agent-navigation', 'AgentPage') with {
-                modifiers: ['customer-navigation'],
-                data: {
-                    activePage: data.activePage,
-                },
-            } only %}
-        {% endblock %}
-    {% endset %}
-    {{ parent() }}
+{% block customerNavigation %}
+    {% include molecule('agent-navigation', 'AgentPage') with {
+        modifiers: ['customer-navigation'],
+        data: {
+            activePage: data.activePage,
+        },
+    } only %}
 {% endblock %}

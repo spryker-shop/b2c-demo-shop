@@ -1,9 +1,4 @@
-{% extends template('page-layout-agent', 'AgentPage') %}
-
-{% define data = {
-    title: 'agent.account.overview' | trans,
-    agent: _view.agent,
-} %}
+{% extends view('overview', '@SprykerShop:AgentPage') %}
 
 {% block customerContent %}
     {% include molecule('overview-info', 'AgentPage') with {
