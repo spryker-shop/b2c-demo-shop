@@ -28,9 +28,15 @@ export default class ImageGallery extends Component {
 
     protected initSlider(): void {
         const imagesQuantity = this.galleryItems.length;
+
+        if (!imagesQuantity) {
+            return;
+        }
+
         if (imagesQuantity > 1) {
             $(this.thumbnail).slick(this.thumbnailSliderConfig);
         }
+
         this.getCurrentSlideImage();
         this.setDefaultImageUrl();
 
@@ -71,19 +77,10 @@ export default class ImageGallery extends Component {
         const currentSlide = this.galleryItems.filter((element: HTMLElement) => (
             element.classList.contains(this.activeClass)
         ))[0];
-
-        if (!currentSlide) {
-            return;
-        }
-
         this.currentSlideImage = currentSlide.getElementsByTagName('img')[0];
     }
 
     protected setDefaultImageUrl(): void {
-        if (!this.currentSlideImage) {
-            return;
-        }
-
         this.defaultImageUrl = this.currentSlideImage.dataset.src || this.currentSlideImage.src;
     }
 
