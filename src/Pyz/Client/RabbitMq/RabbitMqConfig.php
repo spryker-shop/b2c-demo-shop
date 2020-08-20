@@ -20,11 +20,12 @@ use Spryker\Shared\CustomerAccessStorage\CustomerAccessStorageConstants;
 use Spryker\Shared\Event\EventConfig;
 use Spryker\Shared\Event\EventConstants;
 use Spryker\Shared\FileManagerStorage\FileManagerStorageConstants;
-use Spryker\Shared\GlossaryStorage\GlossaryStorageConstants;
+use Spryker\Shared\GlossaryStorage\GlossaryStorageConfig;
 use Spryker\Shared\Log\LogConstants;
 use Spryker\Shared\PriceProductStorage\PriceProductStorageConstants;
 use Spryker\Shared\ProductPageSearch\ProductPageSearchConstants;
 use Spryker\Shared\ProductStorage\ProductStorageConstants;
+use Spryker\Shared\Publisher\PublisherConfig;
 use Spryker\Shared\SalesReturnSearch\SalesReturnSearchConfig;
 use Spryker\Shared\TaxProductStorage\TaxProductStorageConfig;
 use Spryker\Shared\TaxStorage\TaxStorageConfig;
@@ -44,12 +45,40 @@ class RabbitMqConfig extends SprykerRabbitMqConfig
      */
     protected function getQueueConfiguration(): array
     {
-        return [
-            EventConstants::EVENT_QUEUE => [
-                EventConfig::EVENT_ROUTING_KEY_RETRY => EventConstants::EVENT_QUEUE_RETRY,
-                EventConfig::EVENT_ROUTING_KEY_ERROR => EventConstants::EVENT_QUEUE_ERROR,
+        return array_merge(
+            [
+                EventConstants::EVENT_QUEUE => [
+                    EventConfig::EVENT_ROUTING_KEY_RETRY => EventConstants::EVENT_QUEUE_RETRY,
+                    EventConfig::EVENT_ROUTING_KEY_ERROR => EventConstants::EVENT_QUEUE_ERROR,
+                ],
+                $this->get(LogConstants::LOG_QUEUE_NAME),
             ],
-            GlossaryStorageConstants::SYNC_STORAGE_QUEUE,
+            $this->getPublishQueueConfiguration(),
+            $this->getSynchronizationQueueConfiguration()
+        );
+    }
+
+    /**
+     * @return array
+     */
+    protected function getPublishQueueConfiguration(): array
+    {
+        return [
+            PublisherConfig::PUBLISH_QUEUE => [
+                PublisherConfig::PUBLISH_ROUTING_KEY_RETRY => PublisherConfig::PUBLISH_RETRY_QUEUE,
+                PublisherConfig::PUBLISH_ROUTING_KEY_ERROR => PublisherConfig::PUBLISH_ERROR_QUEUE,
+            ],
+            GlossaryStorageConfig::PUBLISH_TRANSLATION,
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    protected function getSynchronizationQueueConfiguration(): array
+    {
+        return [
+            GlossaryStorageConfig::SYNC_STORAGE_TRANSLATION,
             UrlStorageConstants::URL_SYNC_STORAGE_QUEUE,
             AvailabilityStorageConstants::AVAILABILITY_SYNC_STORAGE_QUEUE,
             CustomerAccessStorageConstants::CUSTOMER_ACCESS_SYNC_STORAGE_QUEUE,
@@ -67,7 +96,6 @@ class RabbitMqConfig extends SprykerRabbitMqConfig
             TaxProductStorageConfig::PRODUCT_ABSTRACT_TAX_SET_SYNC_STORAGE_QUEUE,
             TaxStorageConfig::TAX_SET_SYNC_STORAGE_QUEUE,
             SalesReturnSearchConfig::SYNC_SEARCH_RETURN,
-            $this->get(LogConstants::LOG_QUEUE_NAME),
         ];
     }
 
