@@ -25,6 +25,7 @@
     {% set customerNavigation %}
         {% block customerNavigation %}
             {% include molecule('agent-navigation', 'AgentPage') with {
+                modifiers: ['customer-navigation'],
                 data: {
                     activePage: data.activePage,
                 },

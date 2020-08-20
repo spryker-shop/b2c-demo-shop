@@ -1,7 +1,7 @@
 {% extends model('component') %}
 
 {% define config = {
-    name: 'agent-control-item'
+    name: 'agent-control-item',
 } %}
 
 {% define data = {
@@ -19,7 +19,7 @@
             <a href="{{ path('agent/overview') }}" class="{{ config.name }}__name">{{ data.firstName }} {{ data.lastName }}</a>
         </div>
     </div>
-    <div class="col {{ config.name }}__button-wrap">
-        <a href="{{ data.buttonLink }}" class="button button--hollow button--big">{{ data.buttonName }}</a>
+    <div class="col {{ config.name }}__button-wrap spacing-left spacing-left--inner">
+        <a href="{{ data.buttonLink }}" class="button button--agent button--hollow button--big">{{ data.buttonName }}</a>
     </div>
 {% endblock %}
