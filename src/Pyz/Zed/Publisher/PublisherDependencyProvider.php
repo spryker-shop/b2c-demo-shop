@@ -7,6 +7,11 @@
 
 namespace Pyz\Zed\Publisher;
 
+use Spryker\Shared\GlossaryStorage\GlossaryStorageConfig;
+use Spryker\Zed\GlossaryStorage\Communication\Plugin\Publisher\GlossaryKey\GlossaryDeletePublisherPlugin as GlossaryKeyDeletePublisherPlugin;
+use Spryker\Zed\GlossaryStorage\Communication\Plugin\Publisher\GlossaryKey\GlossaryWritePublisherPlugin as GlossaryKeyWriterPublisherPlugin;
+use Spryker\Zed\GlossaryStorage\Communication\Plugin\Publisher\GlossaryPublisherTriggerPlugin;
+use Spryker\Zed\GlossaryStorage\Communication\Plugin\Publisher\GlossaryTranslation\GlossaryWritePublisherPlugin as GlossaryTranslationWritePublisherPlugin;
 use Spryker\Zed\ProductLabelSearch\Communication\Plugin\Publisher\ProductLabel\ProductLabelWritePublisherPlugin as ProductLabelSearchWritePublisherPlugin;
 use Spryker\Zed\ProductLabelSearch\Communication\Plugin\Publisher\ProductLabelProductAbstract\ProductLabelProductAbstractWritePublisherPlugin as ProductLabelProductAbstractSearchWritePublisherPlugin;
 use Spryker\Zed\ProductLabelSearch\Communication\Plugin\Publisher\ProductLabelStore\ProductLabelStoreWritePublisherPlugin as ProductLabelStoreSearchWritePublisherPlugin;
@@ -34,6 +39,7 @@ class PublisherDependencyProvider extends SprykerPublisherDependencyProvider
     protected function getPublisherPlugins(): array
     {
         return array_merge(
+            $this->getGlossaryStoragePlugins(),
             $this->getProductRelationStoragePlugins(),
             $this->getProductLabelStoragePlugins(),
             $this->getProductLabelSearchPlugins(),
@@ -47,10 +53,25 @@ class PublisherDependencyProvider extends SprykerPublisherDependencyProvider
     protected function getPublisherTriggerPlugins(): array
     {
         return [
+            new GlossaryPublisherTriggerPlugin(),
             new ProductRelationPublisherTriggerPlugin(),
             new ProductAbstractLabelPublisherTriggerPlugin(),
             new ProductLabelDictionaryPublisherTriggerPlugin(),
             new ReturnReasonPublisherTriggerPlugin(),
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    protected function getGlossaryStoragePlugins(): array
+    {
+        return [
+            GlossaryStorageConfig::PUBLISH_TRANSLATION => [
+                new GlossaryKeyDeletePublisherPlugin(),
+                new GlossaryKeyWriterPublisherPlugin(),
+                new GlossaryTranslationWritePublisherPlugin(),
+            ],
         ];
     }
 

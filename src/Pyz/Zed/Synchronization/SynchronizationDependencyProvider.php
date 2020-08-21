@@ -22,7 +22,7 @@ use Spryker\Zed\ConfigurableBundleStorage\Communication\Plugin\Synchronization\C
 use Spryker\Zed\ConfigurableBundleStorage\Communication\Plugin\Synchronization\ConfigurableBundleTemplateSynchronizationDataBulkPlugin;
 use Spryker\Zed\ContentStorage\Communication\Plugin\Synchronization\ContentStorageSynchronizationDataPlugin;
 use Spryker\Zed\CustomerAccessStorage\Communication\Plugin\Synchronization\CustomerAccessSynchronizationDataBulkPlugin;
-use Spryker\Zed\GlossaryStorage\Communication\Plugin\Synchronization\GlossarySynchronizationDataPlugin;
+use Spryker\Zed\GlossaryStorage\Communication\Plugin\Synchronization\GlossarySynchronizationDataRepositoryPlugin;
 use Spryker\Zed\NavigationStorage\Communication\Plugin\Synchronization\NavigationSynchronizationDataPlugin;
 use Spryker\Zed\PriceProductStorage\Communication\Plugin\Synchronization\PriceProductAbstractSynchronizationDataPlugin;
 use Spryker\Zed\PriceProductStorage\Communication\Plugin\Synchronization\PriceProductConcreteSynchronizationDataPlugin;
@@ -36,6 +36,8 @@ use Spryker\Zed\ProductImageStorage\Communication\Plugin\Synchronization\Product
 use Spryker\Zed\ProductImageStorage\Communication\Plugin\Synchronization\ProductConcreteImageSynchronizationDataPlugin;
 use Spryker\Zed\ProductLabelStorage\Communication\Plugin\Synchronization\ProductAbstractLabelSynchronizationDataRepositoryPlugin;
 use Spryker\Zed\ProductLabelStorage\Communication\Plugin\Synchronization\ProductLabelDictionarySynchronizationDataRepositoryPlugin;
+use Spryker\Zed\ProductListStorage\Communication\Plugin\Synchronization\ProductAbstractProductListSynchronizationDataBulkPlugin;
+use Spryker\Zed\ProductListStorage\Communication\Plugin\Synchronization\ProductConcreteProductListSynchronizationDataBulkPlugin;
 use Spryker\Zed\ProductOptionStorage\Communication\Plugin\Synchronization\ProductOptionSynchronizationDataPlugin;
 use Spryker\Zed\ProductPageSearch\Communication\Plugin\Synchronization\ProductConcretePageSynchronizationDataBulkPlugin;
 use Spryker\Zed\ProductPageSearch\Communication\Plugin\Synchronization\ProductPageSynchronizationDataPlugin;
@@ -74,7 +76,7 @@ class SynchronizationDependencyProvider extends SprykerSynchronizationDependency
             new CmsBlockSynchronizationDataPlugin(),
             new CmsSynchronizationDataPlugin(),
             new NavigationSynchronizationDataPlugin(),
-            new GlossarySynchronizationDataPlugin(),
+            new GlossarySynchronizationDataRepositoryPlugin(),
             new PriceProductConcreteSynchronizationDataPlugin(),
             new PriceProductAbstractSynchronizationDataPlugin(),
             new ProductCategoryFilterSynchronizationDataPlugin(),
@@ -109,6 +111,8 @@ class SynchronizationDependencyProvider extends SprykerSynchronizationDependency
             new ConfigurableBundleTemplateImageSynchronizationDataBulkPlugin(),
             new ConfigurableBundleTemplatePageSynchronizationDataBulkPlugin(),
             new ReturnReasonSynchronizationDataBulkRepositoryPlugin(),
+            new ProductAbstractProductListSynchronizationDataBulkPlugin(),
+            new ProductConcreteProductListSynchronizationDataBulkPlugin(),
         ];
     }
 }
