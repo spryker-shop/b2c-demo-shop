@@ -1,0 +1,30 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'agent-control-item',
+} %}
+
+{% define data = {
+    title: required,
+    buttonLink: required,
+    buttonName: required,
+    firstName: '',
+    lastName: '',
+} %}
+{% block extraClass %}
+    grid grid--gap grid--inline grid--middle
+{% endblock %}
+
+{% block body %}
+    <div class="col {{ config.name }}__info">
+        <div>
+            {{ data.title }}
+        </div>
+        {% if data.firstName or data.lastName %}
+            <a href="{{ path('agent/overview') }}" class="{{ config.name }}__name">{{ data.firstName }} {{ data.lastName }}</a>
+        {% endif %}
+    </div>
+    <div class="col {{ config.name }}__button-wrap">
+        <a href="{{ data.buttonLink }}" class="button button--agent button--hollow button--big">{{ data.buttonName }}</a>
+    </div>
+{% endblock %}
