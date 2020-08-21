@@ -57,10 +57,10 @@ $config[ApplicationConstants::ENABLE_APPLICATION_DEBUG]
 
 // >>> Dev tools
 if (interface_exists(WebProfilerConstants::class)) {
-    $config[WebProfilerConstants::IS_WEB_PROFILER_ENABLED] = true;
+    $config[WebProfilerConstants::IS_WEB_PROFILER_ENABLED] = false;
 }
 if (interface_exists(WebProfilerWidgetConstants::class)) {
-    $config[WebProfilerWidgetConstants::IS_WEB_PROFILER_ENABLED] = true;
+    $config[WebProfilerWidgetConstants::IS_WEB_PROFILER_ENABLED] = false;
 }
 $config[ConsoleConstants::ENABLE_DEVELOPMENT_CONSOLE_COMMANDS] = true;
 $config[DocumentationGeneratorRestApiConstants::ENABLE_REST_API_DOCUMENTATION_GENERATION] = true;

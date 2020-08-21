@@ -1,0 +1,9 @@
+{% extends view('overview', '@SprykerShop:AgentPage') %}
+
+{% block customerContent %}
+    {% include molecule('overview-info', 'AgentPage') with {
+        data: {
+            agent: data.agent,
+        },
+    } only %}
+{% endblock %}

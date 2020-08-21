@@ -442,7 +442,7 @@ $zedPort = ((int)getenv('SPRYKER_ZED_PORT')) ?: $zedDefaultPort;
 $config[ZedRequestConstants::HOST_ZED_API] = sprintf(
     '%s%s',
     getenv('SPRYKER_ZED_HOST') ?: 'not-configured-host',
-    $zedPort === $zedDefaultPort ? ':' . $zedPort : ''
+    $zedPort !== $zedDefaultPort ? ':' . $zedPort : ''
 );
 $config[ZedRequestConstants::BASE_URL_ZED_API] = sprintf(
     'http://%s',
