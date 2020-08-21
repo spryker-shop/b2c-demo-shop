@@ -1,0 +1,11 @@
+{% extends molecule('agent-navigation', '@SprykerShop:AgentPage') %}
+
+{% block body %}
+    <ul class="{{ component.renderClass('menu', modifiers) }}">
+        <li class="{{ component.renderClass('menu__item', modifiers) }} {{ macros.isActive('overview', data.activePage) }}">
+            <a class="{{ component.renderClass('menu__link', modifiers) }}" href="{{ path('agent/overview') }}">
+                {{ 'agent.account.overview' | trans }}
+            </a>
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<database xmlns="spryker:schema-01"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          name="zed"
+          xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd"
+          namespace="Orm\Zed\ProductListStorage\Persistence"
+          package="src.Orm.Zed.ProductListStorage.Persistence">
+
+    <table name="spy_product_abstract_product_list_storage">
+        <behavior name="synchronization">
+            <parameter name="queue_pool" value="synchronizationPool"/>
+        </behavior>
+    </table>
+
+    <table name="spy_product_concrete_product_list_storage">
+        <behavior name="synchronization">
+            <parameter name="queue_pool" value="synchronizationPool"/>
+        </behavior>
+    </table>
+
+</database>

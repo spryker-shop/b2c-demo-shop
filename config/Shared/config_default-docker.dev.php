@@ -51,7 +51,7 @@ $config[GlueApplicationConstants::GLUE_APPLICATION_REST_DEBUG] = (bool)getenv('S
 if (interface_exists(WebProfilerConstants::class, true)) {
     $config[WebProfilerConstants::IS_WEB_PROFILER_ENABLED]
         = $config[WebProfilerWidgetConstants::IS_WEB_PROFILER_ENABLED]
-        = (getenv('SPRYKER_DEBUG_ENABLED') && !getenv('SPRYKER_TESTING_ENABLED'));
+        = false;
 }
 $config[KernelConstants::ENABLE_CONTAINER_OVERRIDING] = (bool)getenv('SPRYKER_TESTING_ENABLED');
 $config[DocumentationGeneratorRestApiConstants::ENABLE_REST_API_DOCUMENTATION_GENERATION] = true;
