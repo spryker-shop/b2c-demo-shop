@@ -1,0 +1,27 @@
+@mixin agent-widget-agent-control-item($name: '.agent-control-item') {
+    #{$name} {
+        &__info {
+            margin-top: rem(8);
+            margin-bottom: rem(8);
+            font-size: rem(14);
+            line-height: normal;
+        }
+
+        &__button-wrap {
+            margin: rem(8) 0 rem(8) rem(8);
+        }
+
+        &__name {
+            font-weight: fw(medium);
+            color: $setting-color-gray-4;
+
+            &:hover {
+                color: $setting-color-gray-3;
+            }
+        }
+
+        @content;
+    }
+}
+
+@include agent-widget-agent-control-item();
