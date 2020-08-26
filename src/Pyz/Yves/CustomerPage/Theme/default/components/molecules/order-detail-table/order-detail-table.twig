@@ -13,7 +13,7 @@
                     }) }}
                 </h3>
 
-                {% set itemsExceptConfiguredBundles = shipmentGroup.items | filter(item => item.salesOrderConfiguredBundleItem is not defined or item.salesOrderConfiguredBundleItem is empty) %}
+                {% set itemsExceptConfiguredBundles = shipmentGroup.cartItems | filter(item => item.salesOrderConfiguredBundleItem is not defined or item.salesOrderConfiguredBundleItem is empty) %}
 
                 {% for item in itemsExceptConfiguredBundles %}
                     {% set cartItem = item.bundleProduct ?? item %}
