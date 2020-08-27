@@ -22,7 +22,7 @@
                     {% set orderReferences = orderReferences | merge([returnItem.orderItem.orderReference]) %}
                 {% endif %}
                 {% if returnItem.orderItem.state.name not in itemStates %}
-                    {% set itemStates = itemStates | merge([returnItem.orderItem.state.name]) %}
+                    {% set itemStates = itemStates | merge({(returnItem.orderItem.state.displayName): returnItem.orderItem.state.name}) %}
                 {% endif %}
             {% endfor %}
 
@@ -36,12 +36,12 @@
                 <td class="transform-cell" data-content="{{ 'return_page.return.number_of_items' | trans }}">{{ return.returnItems| length }}</td>
                 <td class="transform-cell" data-content="{{ 'return_page.return.date' | trans }}">{{ date(return.createdAt) | formatDateTime }}</td>
                 <td class="transform-cell transform-cell--spacing-bottom" data-content="{{ 'return_page.return.items_state' | trans }}">
-                    {% for itemState in itemStates %}
+                    {% for displayName, itemState in itemStates %}
                         {% set state = itemState | replace({' ': '-'}) | lower %}
 
                         {% include molecule('status') with {
                             data: {
-                                label: ('oms.state.' ~ state) | trans,
+                                label: displayName | trans,
                                 status: state,
                             },
                         } only %}
