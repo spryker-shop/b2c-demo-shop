@@ -16,13 +16,20 @@
     <tbody>
         {% for return in data.returns %}
             {% set orderReferences = [] %}
-            {% set itemStates = [] %}
+            {% set uniqueItemStates = [] %}
+            {% set itemStates = {} %}
+
             {% for returnItem in return.returnItems %}
                 {% if returnItem.orderItem.orderReference not in orderReferences %}
                     {% set orderReferences = orderReferences | merge([returnItem.orderItem.orderReference]) %}
                 {% endif %}
-                {% if returnItem.orderItem.state.name not in itemStates %}
-                    {% set itemStates = itemStates | merge([returnItem.orderItem.state.name]) %}
+                {% if returnItem.orderItem.state.name not in uniqueItemStates %}
+                    {% set uniqueItemStates = uniqueItemStates | merge([returnItem.orderItem.state.name]) %}
+
+                    {% set itemStates = itemStates | merge([{
+                        'status': returnItem.orderItem.state.name,
+                        'label': returnItem.orderItem.state.displayName ?? ('oms.state.' ~ returnItem.orderItem.state.name),
+                    }]) %}
                 {% endif %}
             {% endfor %}
 
@@ -36,15 +43,17 @@
                 <td class="transform-cell" data-content="{{ 'return_page.return.number_of_items' | trans }}">{{ return.returnItems| length }}</td>
                 <td class="transform-cell" data-content="{{ 'return_page.return.date' | trans }}">{{ date(return.createdAt) | formatDateTime }}</td>
                 <td class="transform-cell transform-cell--spacing-bottom" data-content="{{ 'return_page.return.items_state' | trans }}">
-                    {% for itemState in itemStates %}
-                        {% set state = itemState | replace({' ': '-'}) | lower %}
+                    {% for state in itemStates %}
+                        {% set stateName = state.status | replace({' ': '-'}) | lower %}
 
-                        {% include molecule('status') with {
-                            data: {
-                                label: ('oms.state.' ~ state) | trans,
-                                status: state,
-                            },
-                        } only %}
+                        {% block state %}
+                            {% include molecule('status') with {
+                                data: {
+                                    label: state.label | trans,
+                                    status: stateName,
+                                },
+                            } only %}
+                        {% endblock %}
                     {% endfor %}
                 </td>
                 <td class="text-right">
