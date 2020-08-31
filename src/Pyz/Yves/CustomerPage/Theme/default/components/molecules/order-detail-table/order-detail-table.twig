@@ -73,14 +73,18 @@
                         {% endblock %}
 
                         {% block state %}
-                            {% set state = data.productItem.state %}
-                            {% if state is not empty %}
-                                    {% include molecule('status') with {
-                                        data: {
-                                            label: state.displayName | trans,
-                                            status: state.name | replace({' ': '-'}) | lower,
-                                        },
-                                    } only %}
+                            {% set itemState = data.productItem.state ?? {} %}
+
+                            {% if itemState %}
+                                {% set state = itemState.name | replace({' ': '-'}) | lower %}
+                                {% set stateLabel = itemState.displayName ?? ('oms.state.' ~ state) %}
+
+                                {% include molecule('status') with {
+                                    data: {
+                                        label: stateLabel | trans,
+                                        status: state,
+                                    },
+                                } only %}
                             {% endif %}
                         {% endblock %}
 
