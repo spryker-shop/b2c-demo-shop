@@ -73,18 +73,14 @@
                         {% endblock %}
 
                         {% block state %}
-                            {% set stateName = data.productItem.state.name ?? '' %}
-
-                            {% if stateName %}
-                                {% set state = stateName | replace({' ': '-'}) | lower %}
-
-                                {% include molecule('status') with {
-                                    class: 'col',
-                                    data: {
-                                        label: stateName | capitalize,
-                                        status: state,
-                                    },
-                                } only %}
+                            {% set state = data.productItem.state %}
+                            {% if state is not empty %}
+                                    {% include molecule('status') with {
+                                        data: {
+                                            label: state.displayName | trans,
+                                            status: state.name | replace({' ': '-'}) | lower,
+                                        },
+                                    } only %}
                             {% endif %}
                         {% endblock %}
 
