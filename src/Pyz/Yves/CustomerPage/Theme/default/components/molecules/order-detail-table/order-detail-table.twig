@@ -73,15 +73,15 @@
                         {% endblock %}
 
                         {% block state %}
-                            {% set stateName = data.productItem.state.name ?? '' %}
+                            {% set itemState = data.productItem.state ?? {} %}
 
-                            {% if stateName %}
-                                {% set state = stateName | replace({' ': '-'}) | lower %}
+                            {% if itemState %}
+                                {% set state = itemState.name | replace({' ': '-'}) | lower %}
+                                {% set stateLabel = itemState.displayName ?? ('oms.state.' ~ state) %}
 
                                 {% include molecule('status') with {
-                                    class: 'col',
                                     data: {
-                                        label: stateName | capitalize,
+                                        label: stateLabel | trans,
                                         status: state,
                                     },
                                 } only %}
