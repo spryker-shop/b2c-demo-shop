@@ -1,0 +1,100 @@
+{% extends view('return-print', '@SprykerShop:SalesReturnPage') %}
+
+{% block configuredBundle %}
+    {% widget 'OrderItemsConfiguredBundleWidget' args [orderItems] with {
+        embed: {
+            returnItems: data.return.returnItems,
+        },
+    } only %}
+        {% block bundleItem %}
+            <tr>
+                <td class="no-bottom-border"></td>
+                <td class="no-bottom-border"></td>
+                <td class="no-bottom-border"><strong>{{ bundle.name | trans }}</strong></td>
+                <td class="no-bottom-border"></td>
+                <td class="no-bottom-border">{{ bundle.quantity }}</td>
+                <td class="no-bottom-border">
+                    {% set bundleSumPriceToPayAggregation = 0 %}
+                    {% set currencyIsoCode = null %}
+
+                    {% for item in bundle.salesOrderConfiguredBundleItems if data.items[item.IdSalesOrderItem] is defined %}
+                        {% set product = data.items[item.IdSalesOrderItem] %}
+                        {% set currencyIsoCode = product.currencyIsoCode %}
+                        {% set bundleSumPriceToPayAggregation = bundleSumPriceToPayAggregation + product.sumPriceToPayAggregation %}
+                    {% endfor %}
+
+                    {{ bundleSumPriceToPayAggregation | money(true, currencyIsoCode) }}
+                </td>
+                <td class="no-bottom-border"></td>
+            </tr>
+
+            {% for item in bundle.salesOrderConfiguredBundleItems %}
+                {% if data.items[item.IdSalesOrderItem] is defined %}
+                    {% set product = data.items[item.IdSalesOrderItem] %}
+                    {% set noBottomBorderClass = not loop.last ? 'no-bottom-border' %}
+                    {% set isConfiguredBundleDiscount = product.sumDiscountAmountFullAggregation ?? false %}
+                    <tr>
+                        <td class="no-top-border {{ noBottomBorderClass }}">
+                            {% widget 'BarcodeWidget' args [product.sku] only %}
+                                {% block body %}
+                                    {% set imageClass = 'order-item-image' %}
+                                    {{ parent() }}
+                                {% endblock %}
+                            {% endwidget %}
+                        </td>
+                        <td class="no-top-border {{ noBottomBorderClass }}">
+                            {{ product.sku }}
+                        </td>
+                        <td class="no-top-border {{ noBottomBorderClass }}">
+                            {{ product.name }}
+                        </td>
+                        <td class="no-top-border {{ noBottomBorderClass }}">
+                            {% if isConfiguredBundleDiscount %}
+                                {% block currentProductItemPrice %}
+                                    <div>
+                                        {{ product.unitPriceToPayAggregation | money(true, product.currencyIsoCode) }}
+                                    </div>
+                                {% endblock %}
+
+                                {% block oldProductItemPrice %}
+                                    <div>
+                                        <del class="text-secondary">{{ product.unitSubtotalAggregation | money(true, product.currencyIsoCode) }}</del>
+                                    </div>
+                                {% endblock %}
+                            {% else %}
+                                {% block originalProductItemPrice %}
+                                    <div>
+                                        {{ product.unitSubtotalAggregation | money(true, product.currencyIsoCode) }}
+                                    </div>
+                                {% endblock %}
+                            {% endif %}
+                        </td>
+                        <td class="no-top-border {{ noBottomBorderClass }}">
+                            {{ product.quantity }}
+                        </td>
+                        <td class="no-top-border {{ noBottomBorderClass }}">
+                            {{ product.sumSubtotalAggregation | money(true, product.currencyIsoCode) }}
+                        </td>
+                        <td class="no-top-border {{ noBottomBorderClass }}">
+                            {% set reasonText = 'return_page.return_reasons.empty' | trans %}
+                            {% for returnItem in embed.returnItems if returnItem.orderItem.IdSalesOrderItem == item.IdSalesOrderItem and returnItem.reason %}
+                                {% set reasonText = returnItem.reason | trans %}
+                            {% endfor %}
+                            {{ reasonText }}
+                        </td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        {% endblock %}
+    {% endwidget %}
+{% endblock %}
+
+{% block headStyles %}
+    {{ parent() }}
+
+    <style>
+        .order-item-image {
+            width: auto;
+        }
+    </style>
+{% endblock %}

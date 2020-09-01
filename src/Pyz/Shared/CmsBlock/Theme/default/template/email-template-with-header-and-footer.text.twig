@@ -1,0 +1,30 @@
+{% if mail is not defined %}
+    <!-- CMS_BLOCK_PLACEHOLDER : "content" -->
+{% endif %}
+/////////////////////////////////////////
+// {{ 'mail.trans.header.shop_name' | trans }}                        //
+/////////////////////////////////////////
+
+
+{% block content %}
+    {{ placeholders.content | raw }}
+{% endblock %}
+
+===========================================
+===========================================
+
+{{ 'mail.trans.footer.if_you_have_further_questions' | trans }} {{ 'mail.trans.footer.contact_email_address' | trans }} (mailto:{{ 'mail.trans.footer.contact_email_address' | trans }})
+
+{{ 'mail.trans.footer.shopping_experience' | trans }}
+
+{{ 'mail.trans.footer.your_team' | trans }}
+
+-------------------------------------------
+
+{{ 'mail.trans.footer.shop_name' | trans }}
+
+{{ 'mail.trans.footer.shop_address' | trans }} {{ 'mail.trans.footer.shop_zip_code' | trans }} {{ 'mail.trans.footer.shop_city' | trans }}
+
+{{ 'mail.trans.footer.shop_phone' | trans }}
+
+{{ 'mail.trans.footer.contact_email_address' | trans }}

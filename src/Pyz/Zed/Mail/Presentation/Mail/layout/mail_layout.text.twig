@@ -1,0 +1,5 @@
+{% for template in mail.templates %}
+    {%- if not template.isHtml -%}
+        {% include "@" ~ template.name with {mail: mail} %}
+    {% endif %}
+{% endfor %}

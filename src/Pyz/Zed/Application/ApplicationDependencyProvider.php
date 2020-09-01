@@ -7,6 +7,7 @@
 
 namespace Pyz\Zed\Application;
 
+use Pyz\Zed\Propel\Communication\Plugin\Application\PropelApplicationPlugin;
 use Spryker\Zed\Application\ApplicationDependencyProvider as SprykerApplicationDependencyProvider;
 use Spryker\Zed\ErrorHandler\Communication\Plugin\Application\ErrorHandlerApplicationPlugin;
 use Spryker\Zed\EventDispatcher\Communication\Plugin\Application\EventDispatcherApplicationPlugin;
@@ -14,7 +15,6 @@ use Spryker\Zed\Form\Communication\Plugin\Application\FormApplicationPlugin;
 use Spryker\Zed\Http\Communication\Plugin\Application\HttpApplicationPlugin;
 use Spryker\Zed\Locale\Communication\Plugin\Application\LocaleApplicationPlugin;
 use Spryker\Zed\Messenger\Communication\Plugin\Application\MessengerApplicationPlugin;
-use Spryker\Zed\Propel\Communication\Plugin\Application\PropelApplicationPlugin;
 use Spryker\Zed\Router\Communication\Plugin\Application\RouterApplicationPlugin;
 use Spryker\Zed\Session\Communication\Plugin\Application\SessionApplicationPlugin;
 use Spryker\Zed\Translator\Communication\Plugin\Application\TranslatorApplicationPlugin;
@@ -29,7 +29,7 @@ class ApplicationDependencyProvider extends SprykerApplicationDependencyProvider
      */
     protected function getApplicationPlugins(): array
     {
-        return [
+        $plugins = [
             new TwigApplicationPlugin(),
             new EventDispatcherApplicationPlugin(),
             new LocaleApplicationPlugin(),
@@ -37,12 +37,17 @@ class ApplicationDependencyProvider extends SprykerApplicationDependencyProvider
             new MessengerApplicationPlugin(),
             new PropelApplicationPlugin(),
             new RouterApplicationPlugin(),
-            new WebProfilerApplicationPlugin(),
             new HttpApplicationPlugin(),
             new SessionApplicationPlugin(),
             new ErrorHandlerApplicationPlugin(),
             new FormApplicationPlugin(),
             new ValidatorApplicationPlugin(),
         ];
+
+        if (class_exists(WebProfilerApplicationPlugin::class)) {
+            $plugins[] = new WebProfilerApplicationPlugin();
+        }
+
+        return $plugins;
     }
 }

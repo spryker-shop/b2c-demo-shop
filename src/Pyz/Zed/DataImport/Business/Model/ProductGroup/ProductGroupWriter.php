@@ -19,9 +19,9 @@ class ProductGroupWriter extends PublishAwareStep implements DataImportStepInter
 {
     public const BULK_SIZE = 100;
 
-    public const KEY_ABSTRACT_SKU = 'abstract_sku';
-    public const KEY_PRODUCT_GROUP_KEY = 'group_key';
-    public const KEY_POSITION = 'position';
+    public const COLUMN_ABSTRACT_SKU = 'abstract_sku';
+    public const COLUMN_PRODUCT_GROUP_KEY = 'group_key';
+    public const COLUMN_POSITION = 'position';
 
     /**
      * @var \Pyz\Zed\DataImport\Business\Model\Product\Repository\ProductRepository
@@ -44,12 +44,12 @@ class ProductGroupWriter extends PublishAwareStep implements DataImportStepInter
     public function execute(DataSetInterface $dataSet)
     {
         $productGroupEntity = SpyProductGroupQuery::create()
-            ->filterByProductGroupKey($dataSet[static::KEY_PRODUCT_GROUP_KEY])
+            ->filterByProductGroupKey($dataSet[static::COLUMN_PRODUCT_GROUP_KEY])
             ->findOneOrCreate();
 
         $productGroupEntity->save();
 
-        $idProductAbstract = $this->productRepository->getIdProductAbstractByAbstractSku($dataSet[static::KEY_ABSTRACT_SKU]);
+        $idProductAbstract = $this->productRepository->getIdProductAbstractByAbstractSku($dataSet[static::COLUMN_ABSTRACT_SKU]);
 
         $productAbstractGroup = SpyProductAbstractGroupQuery::create()
             ->filterByFkProductAbstract($idProductAbstract)
@@ -57,7 +57,7 @@ class ProductGroupWriter extends PublishAwareStep implements DataImportStepInter
             ->findOneOrCreate();
 
         $productAbstractGroup
-            ->setPosition($dataSet[static::KEY_POSITION])
+            ->setPosition($dataSet[static::COLUMN_POSITION])
             ->save();
 
         $this->addPublishEvents(ProductGroupEvents::PRODUCT_GROUP_PUBLISH, $productAbstractGroup->getFkProductAbstract());

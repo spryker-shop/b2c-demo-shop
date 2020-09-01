@@ -1,0 +1,119 @@
+version: "0.1"
+
+namespace: spryker_ci
+tag: '1.0'
+
+environment: docker.ci
+pipeline: docker.ci.api
+image:
+    tag: spryker/php:7.4-alpine3.12
+
+composer:
+    mode: --no-dev
+    autoload: --classmap-authoritative
+
+regions:
+    EU:
+        services:
+            database:
+                database: eu-docker
+                username: spryker
+                password: secret
+
+        stores:
+            DE:
+                services:
+                    broker:
+                        namespace: de-docker
+                    key_value_store:
+                        namespace: 1
+                    search:
+                        namespace: de_search
+                    session:
+                        namespace: 1
+            AT:
+                services:
+                    broker:
+                        namespace: at-docker
+                    key_value_store:
+                        namespace: 2
+                    search:
+                        namespace: at_search
+                    session:
+                        namespace: 1
+groups:
+    EU:
+        region: EU
+        applications:
+            yves_eu:
+                application: yves
+                endpoints:
+                    yves.de.spryker.local:
+                        store: DE
+                        services:
+                            session:
+                                namespace: 1
+                    yves.at.spryker.local:
+                        store: AT
+                        services:
+                            session:
+                                namespace: 2
+            glue_eu:
+                application: glue
+                endpoints:
+                    glue.de.spryker.local:
+                        store: DE
+                    glue.at.spryker.local:
+                        store: AT
+            zed_eu:
+                application: zed
+                endpoints:
+                    zed.de.spryker.local:
+                        store: DE
+                        services:
+                            session:
+                                namespace: 3
+                    zed.at.spryker.local:
+                        store: AT
+                        services:
+                            session:
+                                namespace: 4
+
+services:
+    database:
+        engine: postgres
+        root:
+            username: "root"
+            password: "secret"
+    broker:
+        engine: rabbitmq
+        api:
+            username: "spryker"
+            password: "secret"
+    session:
+        engine: redis
+    key_value_store:
+        engine: redis
+    search:
+        engine: elastic
+        version: 6.8
+    scheduler:
+        engine: jenkins
+    mail_catcher:
+        engine: mailhog
+
+docker:
+
+    ssl:
+        enabled: false
+
+    debug:
+        enabled: false
+        xdebug:
+            enabled: false
+
+    testing:
+        store: DE
+
+    mount:
+        baked:

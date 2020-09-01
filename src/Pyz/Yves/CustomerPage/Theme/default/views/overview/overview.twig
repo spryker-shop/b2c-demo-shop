@@ -1,15 +1,4 @@
-{% extends template('page-layout-customer', 'CustomerPage') %}
-
-{% define data = {
-    orders: _view.orderList,
-    customer: _view.customer,
-    billingAddress: _view.addresses.billing | default,
-    shippingAddress: _view.addresses.shipping | default,
-    billingAddressId: _view.addresses.billing.idCustomerAddress | default(''),
-    shippingAddressId: _view.addresses.shipping.idCustomerAddress | default(''),
-
-    title: 'customer.account.overview' | trans
-} %}
+{% extends view('overview', '@SprykerShop:CustomerPage') %}
 
 {% block customerContent %}
     <div class="box">
@@ -18,8 +7,8 @@
                 title: 'customer.account.last_orders' | trans,
             },
             embed: {
-                orders: data.orders
-            }
+                orders: data.orders,
+            },
         } only %}
             {% if embed.orders is not empty %}
                 {% block additionalContent %}
@@ -32,8 +21,9 @@
 
         {% include molecule('order-table', 'CustomerPage') with {
             data: {
-                orders: data.orders
-            }
+                orders: data.orders,
+                ordersAggregatedItemStateDisplayNames: data.ordersAggregatedItemStateDisplayNames,
+            },
         } only %}
 
     </div>

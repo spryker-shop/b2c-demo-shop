@@ -1,0 +1,11 @@
+{% extends molecule('cart-counter', '@SprykerShop:ShopUi') %}
+
+{% define data = {
+    label: '',
+    iconName: 'cart',
+} %}
+
+{% block content %}
+    {% set iconModifiers = ['big'] %}
+    {{ parent() }}
+{% endblock %}

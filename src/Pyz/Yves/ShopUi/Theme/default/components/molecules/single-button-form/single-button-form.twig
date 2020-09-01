@@ -1,0 +1,33 @@
+{% extends molecule('single-button-form', '@SprykerShop:ShopUi') %}
+
+{% define data = {
+    formAttributes: {},
+    buttonAttributes: {},
+} %}
+
+{% block body %}
+    <form
+        method="POST"
+        action="{{ data.formAction }}"
+        {{ component.renderAttributes(data.formAttributes) }}
+    >
+        {% block button %}
+            <button
+                class="{{ data.buttonClass }}"
+                {{ component.renderAttributes(data.buttonAttributes) }}
+            >
+                {% block icon %}
+                    {{ parent() }}
+                {% endblock %}
+
+                {% block text %}
+                    {{ parent() }}
+                {% endblock %}
+            </button>
+        {% endblock %}
+
+        {% block field %}
+            {{ parent() }}
+        {% endblock %}
+    </form>
+{% endblock %}

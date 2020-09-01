@@ -1,130 +1,87 @@
-{% extends model('component') %}
+{% extends molecule('product-item', '@SprykerShop:ShopUi') %}
 
-{% define config = {
-    name: 'product-item',
-    tag: 'article'
-} %}
-
-{% define data = {
-    product: {},
-    productItem: required,
-    attributes: [],
-    options: [],
-    idQuote: data.product.idQuote | default(null),
-    isPromotionItem: false,
-    canEditCart: true,
-    additionalContainerClass: 'grid--middle grid--justify grid--no-wrap',
-    productOptionsModifiers: [],
-} %}
-
-{% set canEditCart = (not is_granted('IS_AUTHENTICATED_FULLY') or can('WriteSharedCartPermissionPlugin', data.idQuote)) and data.canEditCart %}
-{% set productItemBox = (data.productItem.productOptions is defined and data.productItem.productOptions is empty) ? '' : config.name ~ '__box--with-options' %}
+{% block extraClass %}
+    {{ config.jsName }}
+{% endblock %}
 
 {% block body %}
-    <div class="{{ component.renderClass(config.name ~ '__box', modifiers) }} {{ productItemBox }}">
-        <div class="grid {{ data.additionalContainerClass }}">
-            {% block image %}
-                <a href="{{ data.productItem.url }}" class="{{ component.renderClass(config.name ~ '__image', modifiers) }} col">
-                    {% include molecule('product-image') with {
-                        data: {
-                            name: data.productItem.name | default,
-                            image: data.productItem.images[0].externalUrlLarge | default(null),
-                        },
-                    } only %}
-
-                    {% block labels %}{% endblock %}
-                    {% block groups %}{% endblock %}
-                </a>
+    <div class="{{ config.name }}__container">
+        <div class="{{ config.name }}__image-wrap">
+            {% block imageContainer %}
+                {{ parent() }}
             {% endblock %}
 
-            <div class="{{ component.renderClass(config.name ~ '__content', modifiers) }} col">
-                <div class="grid grid--justify grid--middle">
-                    {% block title %}
-                        <a href="{{ data.productItem.url }}" class="{{ component.renderClass(config.name ~ '__title', modifiers) }} col col--lg-8 col--sm-12">
-                            {{ data.productItem.name }}
-                        </a>
-                    {% endblock %}
+            {{ block('labels') }}
 
-                    {% block price %}
-                        {% set price = data.productItem.unitPrice is defined ? data.productItem.unitPrice : data.productItem.price %}
-                        {% set productItemSubTotal = data.productItem.quantity is not empty ? data.productItem.quantity * price : price %}
+            <div class="{{ config.name }}__overlay-container">
+                {% block colors %}
+                    {% widget 'ProductGroupColorWidget' args [data.idProductAbstract, data.product.selectedAttributes ?? []] use view('product-item-color-selector', 'ProductGroupWidget') with {
+                        data: {
+                            parentJsName: config.jsName,
+                            parentName: config.name,
+                        },
+                    } only %}{% endwidget %}
+                {% endblock %}
 
-                        {% if can('SeePricePermissionPlugin') %}
-                            {% include molecule('money-price') with {
-                                modifiers: ['small'],
-                                class: component.renderClass(config.name ~ '__price', modifiers) ~ ' col col--lg-4 col--sm-12',
+                {% set isColorSelectorExist = block('colors') | spaceless %}
+
+                {% block ajaxAddToCart %}
+                    {% if data.product is iterable and can('SeeAddToCartPermissionPlugin') %}
+                        {% set isColorSelectorExist = isColorSelectorExist ?? false %}
+                        {% set ajaxButtonClasses = 'button button--expand button--large button--reset-min-width button--reset-border-radius' %}
+                        {% set ajaxButtonExtraAttributes = {} %}
+                        {% set ajaxAddToCartExtraClasses = not isColorSelectorExist ? config.name ~ '__overlay-container-col' %}
+
+                        {% block ajaxAddToCartInner %}
+                            {% widget 'ProductAbstractAddToCartButtonWidget' args [data.product] with {
                                 data: {
-                                    amount: productItemSubTotal | default(null),
-                                    originalAmount: data.productItem.prices.ORIGINAL is not defined or data.productItem.prices.ORIGINAL is empty ? null : data.productItem.prices.ORIGINAL
+                                    buttonClasses: ajaxButtonClasses,
+                                    buttonExtraClasses: config.jsName ~ '__ajax-button-add-to-cart js-node-animator__trigger',
+                                    isTextHidden: isColorSelectorExist,
+                                    extraAttributes: ajaxButtonExtraAttributes,
+                                },
+                                embed: {
+                                    ajaxAddToCartExtraClasses: ajaxAddToCartExtraClasses,
                                 },
                             } only %}
-                        {% else %}
-                            {{ 'customer.access.cannot_see_price' | trans }}
-                        {% endif %}
-                    {% endblock %}
-                </div>
-
-                {% if not data.isPromotionItem %}
-                    <div class="{{ component.renderClass(config.name ~ '__options', modifiers) }}">
-                        {% block options %}
-                            {% if data.attributes is not empty %}
-                                {% include molecule('product-item-variant-selector') with {
-                                    data: {
-                                        productItem: data.productItem,
-                                        productItemAttributes: data.attributes
-                                    }
-                                } only %}
-                            {% endif %}
+                                {% block ajaxButton %}
+                                    {% set extraClasses = embed.ajaxAddToCartExtraClasses %}
+                                    {{ parent() }}
+                                {% endblock %}
+                            {% endwidget %}
                         {% endblock %}
+                    {% endif %}
+                {% endblock %}
+            </div>
+        </div>
 
-                        {% block quantity %}
-                            {% if canEditCart %}
-                                <form method="POST" action="{{ path('cart/change/quantity', {'sku': data.productItem.sku }) }}">
-                                    {% include molecule('product-quantity-input') with {
-                                        data: {
-                                            maxQuantity: data.productItem.maxQuantity,
-                                            value: data.productItem.quantity,
-                                        },
-                                    } only %}
-
-                                    <input type="hidden" value="{{ data.productItem.groupKey }}" name="groupKey" />
-                                </form>
-                            {% else %}
-                                {{ 'cart.item_quantity' | trans }}: {{ data.productItem.quantity }}
-                            {% endif %}
-                        {% endblock %}
-
-                        {% if canEditCart %}
-                            <a class="link link--darkest link--edit" href="{{ path('cart/remove', {'sku': data.productItem.sku, 'groupKey': data.productItem.groupKey }) }}">
-                                {{ 'remove' | trans }}
-                            </a>
-                        {% endif %}
+        {% block content %}
+            <a href="{{ data.url }}" class="{{ config.name }}__info {{ config.jsName }}__link-detail-page grid grid--justify grid--top grid--no-wrap">
+                {% if data.name %}
+                    <div class="col col--sm-12 col--md-8">
+                        {{ block('title') }}
                     </div>
                 {% endif %}
 
-                {% block content %}{% endblock %}
-                {% block actions %}{% endblock %}
-            </div>
-
-            {% block additionalInfo %}{% endblock %}
-        </div>
-
-        {% block bundles %}
-            {% widget 'ProductBundleCartItemsListWidget' args [data.productItem, data.product] only %}{% endwidget %}
-        {% endblock %}
-
-        {% block summary %}
-            {% if data.productItem.productOptions is defined and data.productItem.productOptions is not empty %}
-                <div class="grid grid--right">
-                    {% include molecule('product-item-summary') with {
-                        class: 'col',
-                        modifiers: data.productOptionsModifiers,
-                        data: {
-                            productItem: data.productItem,
-                        },
-                    } only %}
+                <div class="col col--sm-12 col--md-4 text-right">
+                    {{ block('price') }}
                 </div>
-            {% endif %}
+            </a>
+
+            <div class="{{ config.name }}__review">
+                {{ block('rating') }}
+            </div>
         {% endblock %}
     </div>
+{% endblock %}
+
+{% block image %}
+    {% set extraClass = '' %}
+    {% set modifiers = ['spaceless'] %}
+
+    {% block productThumbnail %}
+        <a class="{{ config.name }}__overlay {{ config.jsName }}__link-detail-page" href="{{ data.url }}">
+            {{ parent() }}
+        </a>
+    {% endblock %}
 {% endblock %}

@@ -1,31 +1,26 @@
-{% extends model('component') %}
+{% extends molecule('cart-discount-summary', '@SprykerShop:DiscountWidget') %}
 
 {% define config = {
-    name: 'cart-discount-summary',
-    tag: 'li'
+    tag: 'li',
 } %}
-
-{% define data = {
-    voucherDiscounts: null,
-    ruleDiscounts: null,
-    discountTotal: null,
-    isQuoteEditable: false
-} %}
-
-{% block component %}
-    {% if data.discountTotal and (data.voucherDiscounts is not empty or data.ruleDiscounts is not empty) %}
-        {{ parent() }}
-    {% endif %}
-{% endblock %}
 
 {% block body %}
     {% if data.voucherDiscounts is not empty %}
         <strong>
             {{ 'cart.vouchers' | trans }}
+
             {% if data.isQuoteEditable %}
-                <a class="float-right link link--darkest link--edit" href="{{ url('discount/voucher/clear') }}">
-                    {{ 'cart.vouchers.clear-all' | trans }}
-                </a>
+                {% include molecule('single-button-form') with {
+                    class: 'float-right text-small',
+                    data: {
+                        formAction: url('cart-code/code/clear'),
+                        buttonText: 'cart.vouchers.clear-all' | trans,
+                        iconName: '',
+                        buttonClass: 'link link--darkest link--edit',
+                        fieldName: 'cart_code_clear_form[_token]',
+                        fieldValue: csrf_token('cart_code_clear_form'),
+                    },
+                } only %}
             {% endif %}
         </strong>
         <ul>
@@ -35,9 +30,16 @@
                         {{ voucherDiscount.displayName }}
                         {% if data.isQuoteEditable %}
                             <br/>
-                            <a class="link link--darkest link--edit" href="{{ url('discount/voucher/remove', {'code': voucherDiscount.voucherCode}) }}">
-                                {{ 'cart.voucher.remove' | trans }}
-                            </a>
+                            {% include molecule('single-button-form') with {
+                                data: {
+                                    formAction: url('cart-code/code/remove', {'code': voucherDiscount.voucherCode}),
+                                    buttonText: 'cart.voucher.remove' | trans,
+                                    iconName: '',
+                                    fieldName: 'cart_code_remove_form[_token]',
+                                    buttonClass: 'link link--darkest link--edit',
+                                    fieldValue: csrf_token('cart_code_remove_form'),
+                                },
+                            } only %}
                         {% endif %}
                     </span>
                     <span class="col col--expand text-right">- {{ voucherDiscount.amount | money }}</span>

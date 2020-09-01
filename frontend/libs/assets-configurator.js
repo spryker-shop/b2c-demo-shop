@@ -8,23 +8,42 @@ const getCopyConfig = appSettings =>
             copyConfig.push({
                 from: assetsPath,
                 to: '.',
-                ignore: ['*.gitkeep']
+                ignore: ['*.gitkeep'],
             });
         }
         return copyConfig;
     },[]);
 
+const getCopyStaticConfig = appSettings => {
+    const staticAssetsPath = appSettings.paths.assets.staticAssets;
+    if (fs.existsSync(staticAssetsPath)) {
+        return [{
+            from: staticAssetsPath,
+            to: appSettings.paths.publicStatic,
+        }];
+    }
+    return [];
+};
+
 const getAssetsConfig = appSettings => [
-    new CleanWebpackPlugin([appSettings.paths.public],
+    new CleanWebpackPlugin(
+        [
+            appSettings.paths.public,
+            appSettings.paths.publicStatic,
+        ],
         {
             root: appSettings.context,
             verbose: true,
-            beforeEmit: true
+            beforeEmit: true,
         }
     ),
 
     new CopyWebpackPlugin(getCopyConfig(appSettings), {
-        context: appSettings.context
+        context: appSettings.context,
+    }),
+
+    new CopyWebpackPlugin(getCopyStaticConfig(appSettings), {
+        context: appSettings.context,
     }),
 ];
 

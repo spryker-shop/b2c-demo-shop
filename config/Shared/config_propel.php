@@ -1,6 +1,5 @@
 <?php
 
-use Spryker\Shared\Kernel\Store;
 use Spryker\Shared\Propel\PropelConstants;
 use Spryker\Zed\Propel\PropelConfig;
 use Spryker\Zed\PropelOrm\Business\Builder\ExtensionObjectBuilder;
@@ -8,28 +7,46 @@ use Spryker\Zed\PropelOrm\Business\Builder\ExtensionQueryBuilder;
 use Spryker\Zed\PropelOrm\Business\Builder\ObjectBuilder;
 use Spryker\Zed\PropelOrm\Business\Builder\QueryBuilder;
 
-$CURRENT_STORE = Store::getInstance()->getStoreName();
-$DSN = sprintf(
-    '%s:host=%s;port=%d;dbname=%s',
+$placeholder = '%s:host=%s;port=%d;dbname=%s';
+
+$dsn = sprintf(
+    $placeholder,
     $config[PropelConstants::ZED_DB_ENGINE],
     $config[PropelConstants::ZED_DB_HOST],
     $config[PropelConstants::ZED_DB_PORT],
     $config[PropelConstants::ZED_DB_DATABASE]
 );
 
+$slaves = [];
+foreach ($config[PropelConstants::ZED_DB_REPLICAS] ?? [] as $slaveData) {
+    $slaves[] = [
+        'dsn' => sprintf(
+            $placeholder,
+            $config[PropelConstants::ZED_DB_ENGINE],
+            $slaveData[PropelConstants::ZED_DB_HOST],
+            $slaveData[PropelConstants::ZED_DB_PORT],
+            $config[PropelConstants::ZED_DB_DATABASE]
+        ),
+        'user' => $config[PropelConstants::ZED_DB_USERNAME],
+        'password' => $config[PropelConstants::ZED_DB_PASSWORD],
+    ];
+}
+
 $connections = [
     'pgsql' => [
         'adapter' => PropelConfig::DB_ENGINE_PGSQL,
-        'dsn' => $DSN,
+        'dsn' => $dsn,
         'user' => $config[PropelConstants::ZED_DB_USERNAME],
         'password' => $config[PropelConstants::ZED_DB_PASSWORD],
+        'slaves' => $slaves,
         'settings' => [],
     ],
     'mysql' => [
         'adapter' => PropelConfig::DB_ENGINE_MYSQL,
-        'dsn' => $DSN,
+        'dsn' => $dsn,
         'user' => $config[PropelConstants::ZED_DB_USERNAME],
         'password' => $config[PropelConstants::ZED_DB_PASSWORD],
+        'slaves' => $slaves,
         'settings' => [
             'charset' => 'utf8',
             'queries' => [
@@ -64,10 +81,9 @@ $config[PropelConstants::PROPEL] = [
     ],
     'paths' => [
         'phpDir' => APPLICATION_ROOT_DIR,
-        'sqlDir' => APPLICATION_ROOT_DIR . '/src/Orm/Propel/' . $CURRENT_STORE . '/Sql',
-        'migrationDir' => APPLICATION_ROOT_DIR . '/src/Orm/Propel/' . $CURRENT_STORE . '/Migration_' . $config[PropelConstants::ZED_DB_ENGINE],
-        'schemaDir' => APPLICATION_ROOT_DIR . '/src/Orm/Propel/' . $CURRENT_STORE . '/Schema',
-        'phpConfDir' => APPLICATION_ROOT_DIR . '/src/Orm/Propel/' . $CURRENT_STORE . '/Config/' . APPLICATION_ENV . '/',
+        'sqlDir' => APPLICATION_ROOT_DIR . '/src/Orm/Propel/Sql',
+        'migrationDir' => APPLICATION_ROOT_DIR . '/src/Orm/Propel/Migration_' . $config[PropelConstants::ZED_DB_ENGINE],
+        'schemaDir' => APPLICATION_ROOT_DIR . '/src/Orm/Propel/Schema',
     ],
 ];
 

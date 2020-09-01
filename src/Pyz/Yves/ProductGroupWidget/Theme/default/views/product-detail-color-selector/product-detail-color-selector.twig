@@ -1,0 +1,28 @@
+{% extends view('product-detail-color-selector', '@SprykerShop:ProductGroupWidget') %}
+
+{% block body %}
+    {% if data.items | length > 1 %}
+        {% embed molecule('toggler-item') with {
+            modifiers: ['with-top-border', 'filter'],
+            data: {
+                title: 'product.attribute.color' | trans,
+                isToggler: false,
+            },
+            embed: {
+                items: data.items,
+            },
+        } only %}
+            {% block contentText %}
+                {% include molecule('product-detail-color-selector', 'ProductGroupWidget') with {
+                    data: {
+                        items: embed.items,
+                        selectionTag: 'a',
+                    },
+                    attributes: {
+                        'image-carousel-class-name': 'js-image-gallery',
+                    },
+                } only %}
+            {% endblock %}
+        {% endembed %}
+    {% endif %}
+{% endblock %}

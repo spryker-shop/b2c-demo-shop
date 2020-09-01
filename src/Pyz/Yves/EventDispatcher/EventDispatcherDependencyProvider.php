@@ -14,6 +14,7 @@ use Spryker\Yves\Http\Plugin\EventDispatcher\FragmentEventDispatcherPlugin;
 use Spryker\Yves\Http\Plugin\EventDispatcher\HeaderEventDispatcherPlugin;
 use Spryker\Yves\Http\Plugin\EventDispatcher\HstsHeaderEventDispatcher;
 use Spryker\Yves\Kernel\Plugin\EventDispatcher\AutoloaderCacheEventDispatcherPlugin;
+use Spryker\Yves\Kernel\Plugin\EventDispatcher\RedirectUrlValidationEventDispatcherPlugin;
 use Spryker\Yves\Locale\Plugin\EventDispatcher\LocaleEventDispatcherPlugin;
 use Spryker\Yves\Monitoring\Plugin\EventDispatcher\MonitoringRequestTransactionEventDispatcherPlugin;
 use Spryker\Yves\Router\Plugin\EventDispatcher\RouterListenerEventDispatcherPlugin;
@@ -51,6 +52,7 @@ class EventDispatcherDependencyProvider extends SprykerEventDispatcherDependency
             new RouterListenerEventDispatcherPlugin(),
             new RouterSslRedirectEventDispatcherPlugin(),
             new SessionEventDispatcherPlugin(),
+            new RedirectUrlValidationEventDispatcherPlugin(),
         ];
     }
 }

@@ -5,16 +5,56 @@
     tag: 'range-slider',
 } %}
 
+{% define data = {
+    parameter: required,
+} %}
 
 {% define attributes = {
-    'wrap-class-name': required,
-    'target-class-name': required,
-    'value-class-name': '',
+    'wrap-class-name': 'js-' ~ config.name ~ '__slider-content',
+    'target-class-name': 'js-' ~ config.name ~ '__input',
+    'value-class-name': 'js-' ~ config.name ~ '__values-item',
     'value-min': required,
     'value-max': required,
     'active-min': required,
     'active-max': required,
-    'step': 1,
-    'connect': 'true',
-    'margin': 1,
+    step: 1,
+    connect: 'true',
+    margin: 1,
 } %}
+
+
+{% block body %}
+    {% set activeMin = (attributes['active-min'] != attributes['value-min']) ? attributes['active-min'] %}
+    {% set activeMax = (attributes['active-max'] != attributes['value-max']) ? attributes['active-max'] %}
+
+    {% macro renderInput(class, name, value, min, max, defaultValue) %}
+        <input
+                class="{{ class }}"
+                type="hidden"
+                name="{{ name }}"
+                value="{{ value }}"
+                required="required"
+                min="{{ min }}"
+                max="{{ max }}"
+                data-default-value="{{ defaultValue }}"
+        >
+    {% endmacro %}
+
+    {% macro renderValueItem(name, jsName, value, parameter) %}
+        {% set valueText = 'price' in parameter ? value | money : value %}
+
+        <span class="{{ name }}__values-item {{ jsName }}__values-item">
+            {{- valueText -}}
+        </span>
+    {% endmacro %}
+
+    {{ _self.renderInput(config.jsName ~ '__input', data.parameter ~ '[min]', activeMin, attributes['value-min'], attributes['value-max'], attributes['value-min'] ) }}
+    {{ _self.renderInput(config.jsName ~ '__input', data.parameter ~ '[max]', activeMax, attributes['value-min'], attributes['value-max'], attributes['value-max'] ) }}
+
+    <div class="{{ component.renderClass(config.name ~ '__slider-content', modifiers) }} {{ config.jsName }}__slider-content">
+        <div class="{{ config.name }}__values">
+            {{ _self.renderValueItem(config.name, config.jsName, attributes['active-min'], data.parameter) }}
+            {{ _self.renderValueItem(config.name, config.jsName, attributes['active-max'], data.parameter) }}
+        </div>
+    </div>
+{% endblock %}

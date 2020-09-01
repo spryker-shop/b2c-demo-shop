@@ -13,11 +13,13 @@
                     }) }}
                 </h3>
 
-                {% for item in shipmentGroup.cartItems %}
+                {% set itemsExceptConfiguredBundles = shipmentGroup.cartItems | filter(item => item.salesOrderConfiguredBundleItem is not defined or item.salesOrderConfiguredBundleItem is empty) %}
+
+                {% for item in itemsExceptConfiguredBundles %}
                     {% set cartItem = item.bundleProduct ?? item %}
                     {% set isGiftCardExists = cartItem.giftCardMetadata is not null and cartItem.giftCardMetadata.isGiftCard %}
 
-                    {% embed molecule('product-item') with {
+                    {% embed molecule('product-card-item') with {
                         modifiers: ['expand', 'secondary', 'alternative', 'right-indent-from-tablet', 'with-checkbox'],
                         data: {
                             productItem: cartItem,
@@ -70,6 +72,22 @@
                             {% endif %}
                         {% endblock %}
 
+                        {% block state %}
+                            {% set itemState = data.productItem.state ?? {} %}
+
+                            {% if itemState %}
+                                {% set state = itemState.name | replace({' ': '-'}) | lower %}
+                                {% set stateLabel = itemState.displayName ?? ('oms.state.' ~ state) %}
+
+                                {% include molecule('status') with {
+                                    data: {
+                                        label: stateLabel | trans,
+                                        status: state,
+                                    },
+                                } only %}
+                            {% endif %}
+                        {% endblock %}
+
                         {% block bundles %}
                             {% include molecule('cart-bundle-list', 'ProductBundleWidget') ignore missing with {
                                 data: {
@@ -79,6 +97,9 @@
                         {% endblock %}
                     {% endembed %}
                 {% endfor %}
+
+                {% widget 'OrderItemsConfiguredBundleWidget' args [shipmentGroup.items] only %}
+                {% endwidget %}
             </div>
 
             <div class="col col--sm-12 col--xl-4">

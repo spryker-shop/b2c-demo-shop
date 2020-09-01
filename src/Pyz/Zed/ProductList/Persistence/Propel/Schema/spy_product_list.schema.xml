@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<database xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        name="zed"
+        xsi:noNamespaceSchemaLocation="http://static.spryker.com/schema-01.xsd"
+        namespace="Orm\Zed\ProductList\Persistence"
+        package="src.Orm.Zed.ProductList.Persistence">
+
+    <table name="spy_product_list" identifierQuoting="true">
+        <behavior name="event">
+            <parameter name="spy_product_list_all" column="*"/>
+        </behavior>
+    </table>
+
+    <table name="spy_product_list_product_concrete" isCrossRef="true">
+        <behavior name="event">
+            <parameter name="spy_product_list_product_concrete_all" column="*"/>
+        </behavior>
+    </table>
+
+    <table name="spy_product_list_category" isCrossRef="true">
+        <behavior name="event">
+            <parameter name="spy_product_list_category_all" column="*"/>
+        </behavior>
+    </table>
+
+</database>

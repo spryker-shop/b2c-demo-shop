@@ -1,0 +1,17 @@
+{% extends molecule('return-total', '@SprykerShop:SalesReturnPage') %}
+
+{% block separatorTop %}{% endblock %}
+
+{% block itemsToReturn %}
+    {% set itemsToReturnClass = config.name ~ '__item grid grid--justify' %}
+
+    {{ parent() }}
+{% endblock %}
+
+{% block separatorMiddle %}{% endblock %}
+
+{% block remunerationTotal %}
+    {% set remunerationTotalClass = config.name ~ '__item grid grid--justify' %}
+
+    {{ parent() }}
+{% endblock %}

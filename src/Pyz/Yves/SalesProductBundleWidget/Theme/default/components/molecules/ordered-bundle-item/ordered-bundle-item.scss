@@ -1,0 +1,39 @@
+@mixin sales-product-bundle-widget-ordered-bundle-item($name: '.ordered-bundle-item') {
+    $image-width: rem(70);
+    $image-height: rem(70);
+
+    #{$name} {
+        margin-bottom: rem(15);
+
+        &__image {
+            width: $image-width;
+            height: $image-height;
+        }
+
+        &__content {
+            padding-left: rem(20);
+        }
+
+        &__name {
+            font: fw(medium) rem(16)/rem(18) $setting-font-family-additional;
+        }
+
+        &__quantity {
+            color: $setting-color-gray-4;
+            font: fw(light) rem(16)/rem(18) $setting-font-family;
+            letter-spacing: rem(0.2);
+        }
+
+        &__status,
+        &__quantity {
+            @include helper-breakpoint-media-min($xl-min) {
+                padding: 0 rem(5);
+                text-align: center;
+            }
+        }
+
+        @content;
+    }
+}
+
+@include sales-product-bundle-widget-ordered-bundle-item();

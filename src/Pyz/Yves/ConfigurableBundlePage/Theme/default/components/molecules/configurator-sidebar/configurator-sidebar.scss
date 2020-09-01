@@ -1,0 +1,26 @@
+@mixin configurable-bundle-page-configurator-sidebar($name: '.configurator-sidebar') {
+    #{$name} {
+        margin: 0 0 rem(40);
+
+        &__item {
+            width: 100%;
+            border-bottom: rem(1) solid $setting-color-gray-3;
+
+            @include helper-breakpoint-media-min($xl-min) {
+                width: auto;
+                flex-grow: 1;
+                border-left: rem(1) solid $setting-color-gray-3;
+            }
+
+            &:first-child {
+                @include helper-breakpoint-media-min($xl-min) {
+                    border-left: 0;
+                }
+            }
+        }
+
+        @content;
+    }
+}
+
+@include configurable-bundle-page-configurator-sidebar();

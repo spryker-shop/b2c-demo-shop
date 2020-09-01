@@ -1,0 +1,25 @@
+@mixin configurable-bundle-page-configurator($name: '.configurator') {
+    $border-radius: rem(4);
+
+    #{$name} {
+        padding: rem(20) 0 rem(70);
+
+        &__content {
+            border-radius: $border-radius;
+            border: rem(1) solid $setting-color-gray-3;
+
+            @include helper-breakpoint-media-min($md-min) {
+                padding-bottom: rem(30);
+            }
+        }
+
+        &__summary-actions {
+            padding: 0 rem(20) rem(20);
+            background-color: $setting-color-lighter;
+        }
+
+        @content;
+    }
+}
+
+@include configurable-bundle-page-configurator();

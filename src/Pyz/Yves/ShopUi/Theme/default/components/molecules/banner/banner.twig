@@ -1,22 +1,15 @@
-{% extends model('component') %}
-
-{% define config = {
-    name: 'banner',
-} %}
-
-{% define data = {
-    imageUrl: required,
-    clickUrl: required,
-    title: '',
-    subtitle: '',
-    altText: '',
-} %}
+{% extends molecule('banner', '@SprykerShop:ShopUi') %}
 
 {% block body %}
     <a class="{{ config.name }}__link" href="{{ data.clickUrl }}">
         {% block content %}
             {% block image %}
-                <img src="{{ data.imageUrl }}" alt="{{ data.altText | escape }}">
+                {% include molecule('lazy-image') with {
+                    data: {
+                        imageSrc: data.imageUrl,
+                        imageTitle: data.altText | escape,
+                    },
+                } only %}
             {% endblock %}
 
             {% block title %}
@@ -26,9 +19,7 @@
             {% endblock %}
 
             {% block subtitle %}
-                {% if data.subtitle %}
-                    <p>{{ data.subtitle | escape }}</p>
-                {% endif %}
+                {{ parent() }}
             {% endblock %}
         {% endblock %}
     </a>

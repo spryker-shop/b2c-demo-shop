@@ -1,0 +1,55 @@
+{% extends molecule('ordered-configured-bundle', '@SprykerShop:SalesConfigurableBundleWidget') %}
+
+{% block bundleInner %}
+    <div class="col col--sm-12 col--lg-6">
+        <h4 class="{{ config.name }}__title spacing-right">
+            {%- block bundleNameText -%}
+                {{ parent() }}
+            {%- endblock -%}
+        </h4>
+    </div>
+
+    <div class="col col--sm-12 col--lg-6 grid grid--middle">
+        {% block bundleQuantity %}
+            <div class="col col--lg-6">
+                {% block bundleQuantityInner %}
+                    {{ parent() }}
+                {% endblock %}
+            </div>
+        {% endblock %}
+
+        {% block bundleTotal %}
+            <strong class="{{ config.name }}__total col col--sm-12 col--lg-6">
+                {%- block bundleTotalInner -%}
+                    {{ parent() }}
+                {%- endblock -%}
+            </strong>
+        {% endblock %}
+    </div>
+{% endblock %}
+
+{%- block bundleTotalTitle -%}{%- endblock %}
+
+{% block bundleProductListInner %}
+    {% for item in data.bundle.salesOrderConfiguredBundleItems if data.items[item.IdSalesOrderItem] is defined %}
+        {% block bundleProductItem %}
+            {% include molecule('ordered-configured-bundle-product', 'SalesConfigurableBundleWidget') with {
+                data: {
+                    product: data.items[item.IdSalesOrderItem],
+                    currencyIsoCode: data.currencyIsoCode,
+                    image: data.items[item.IdSalesOrderItem].metadata.image,
+                },
+            } only %}
+        {% endblock %}
+    {% endfor %}
+{% endblock %}
+
+{% block configurableBundleNote %}
+    {% include molecule('cart-configured-bundle-item-note', 'ConfigurableBundleNoteWidget') ignore missing with {
+        class: 'col col--sm-12 col--lg-6',
+        data: {
+            canWrite: false,
+            note: data.bundle.note,
+        },
+    } only %}
+{% endblock %}

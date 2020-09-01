@@ -24,11 +24,11 @@ class AttributesExtractorStep implements DataImportStepInterface
         $keysToUnset = [];
         $attributes = [];
         foreach ($dataSet as $key => $value) {
-            if (!preg_match('/^attribute_key_(\d+)$/', $key, $match)) {
+            if (!preg_match('/^' . $this->getAttributeKeyPrefix() . '(\d+)$/', $key, $match)) {
                 continue;
             }
 
-            $attributeValueKey = 'value_' . $match[1];
+            $attributeValueKey = $this->getAttributeValuePrefix() . $match[1];
             $attributeKey = trim($value);
             $attributeValue = trim($dataSet[$attributeValueKey]);
 
@@ -45,5 +45,21 @@ class AttributesExtractorStep implements DataImportStepInterface
         }
 
         $dataSet[static::KEY_ATTRIBUTES] = $attributes;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getAttributeKeyPrefix(): string
+    {
+        return 'attribute_key_';
+    }
+
+    /**
+     * @return string
+     */
+    protected function getAttributeValuePrefix(): string
+    {
+        return 'value_';
     }
 }

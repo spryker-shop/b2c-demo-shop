@@ -36,8 +36,20 @@
                         <span class="cart-box__quantity col">{{ app['cart.quantity'] }} {{ 'item' | trans }}</span>
                     </div>
                     <div class="page-layout-cart__items-wrap">
-                        {% for cartItem in data.cartItems %}
-                            {% include molecule('product-item') with {
+                        {% widget 'QuoteConfiguredBundleWidget'
+                            args [data.cart]
+                            use view('quote-configured-bundle-alternative', 'ConfigurableBundleWidget')
+                            with {
+                                data: {
+                                    isEditable: data.isQuoteEditable,
+                                },
+                        } only %}{% endwidget %}
+
+                        {% set productBundleItemCounterWidget = findWidget('ProductBundleItemCounterWidget', [data.cart]) %}
+                        {% set transformedCartItems = productBundleItemCounterWidget.items | default(data.cartItems) %}
+
+                        {% for cartItem in transformedCartItems if not cartItem.configuredBundleItem %}
+                            {% include molecule('product-card-item') with {
                                 data: {
                                     product: data.cart,
                                     productItem: cartItem,

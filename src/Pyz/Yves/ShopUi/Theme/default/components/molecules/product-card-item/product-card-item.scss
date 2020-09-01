@@ -1,0 +1,164 @@
+@mixin shop-ui-product-card-item($name: '.product-card-item') {
+    $image-width: rem(120);
+    $image-width-with-checkbox: rem(158);
+    $image-small-width: rem(100);
+    $additional-info-width: rem(350);
+
+    #{$name} {
+        &__title {
+            font: fw(medium) rem(17)/rem(23) $setting-font-family-additional;
+
+            &:hover {
+                text-decoration: none;
+                color: inherit;
+            }
+
+            &--mini-cart {
+                font-size: rem(15);
+                line-height: rem(20);
+                margin-bottom: rem(5);
+            }
+
+            &--secondary {
+                font-size: rem(15);
+                line-height: rem(18);
+                margin: rem(10) 0;
+            }
+
+            &--readonly {
+                pointer-events: none;
+            }
+        }
+
+        &__content {
+            padding: 0 0 rem(5) rem(24);
+            width: calc(100% - #{$image-width});
+
+            &--mini-cart {
+                width: calc(100% - #{$image-small-width});
+            }
+
+            &--alternative {
+                padding: 0 0 0 rem(20);
+            }
+
+            &--additional-info {
+                padding: 0 0 0 rem(20);
+
+                @include helper-breakpoint-media-min($lg-min) {
+                    width: calc(100% - #{$image-width} - #{$additional-info-width});
+                }
+            }
+
+            &--with-checkbox {
+                width: calc(100% - #{$image-width-with-checkbox});
+            }
+        }
+
+        &__image {
+            width: $image-width;
+
+            &--mini-cart {
+                width: $image-small-width;
+
+                .thumbnail {
+                    height: rem(60);
+                }
+            }
+
+            &--readonly {
+                pointer-events: none;
+            }
+        }
+
+        &__price {
+            font: fw(medium) rem(17)/rem(23) $setting-font-family-additional;
+            text-align: left;
+
+            @include helper-breakpoint-media-min($lg-min) {
+                text-align: right;
+            }
+
+            &--mini-cart {
+                font-size: rem(15);
+                line-height: rem(20);
+                align-self: flex-start;
+            }
+
+            &--secondary,
+            &--alternative {
+                text-align: left;
+                font: fw(medium) rem(15)/rem(17) $setting-font-family;
+                width: 100%;
+                margin-bottom: rem(5);
+            }
+
+            &--alternative {
+                @include helper-breakpoint-media-min($lg-min) {
+                    text-align: right;
+                    width: auto;
+                    margin: rem(10) 0;
+                    align-self: flex-start;
+                }
+            }
+        }
+
+        &__option {
+            &--mini-cart {
+                font: fw(regular) rem(13)/rem(17) $setting-font-family-additional;
+            }
+        }
+
+        &__box {
+            border-bottom: rem(1) dotted $setting-color-gray-3;
+            padding-bottom: rem(18);
+            margin-bottom: rem(18);
+
+            &--with-options {
+                border-bottom: none;
+                padding-bottom: 0;
+                margin-bottom: 0;
+            }
+
+            &--mini-cart {
+                border-bottom: rem(1) dotted $setting-color-gray-3;
+                padding: rem(18) 0;
+                margin: 0;
+            }
+        }
+
+        &__options {
+            font: fw(medium) rem(13)/rem(15) $setting-font-family-additional;
+            margin-bottom: rem(5);
+
+            @include helper-breakpoint-media-min($lg-min) {
+                font: fw(medium) rem(16)/rem(22) $setting-font-family;
+            }
+        }
+
+        &__additional-info {
+            width: 100%;
+            padding-top: rem(15);
+
+            @include helper-breakpoint-media-min($lg-min) {
+                padding-left: rem(15);
+                padding-top: 0;
+                max-width: $additional-info-width;
+            }
+        }
+
+        &--expand {
+            width: 100%;
+        }
+
+        &--right-indent-from-tablet {
+            @include helper-breakpoint-media-min($lg-min) {
+                padding-right: rem(20);
+            }
+        }
+
+        @content;
+    }
+}
+
+@include shop-ui-product-card-item();

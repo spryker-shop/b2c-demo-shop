@@ -1,5 +1,5 @@
 env:
-    APPLICATION_ENV: development
+    NEW_RELIC_ENABLED: 0
 
 command-timeout: 3600
 
@@ -11,7 +11,7 @@ sections:
         generate-transfer-databuilders:
             command: "vendor/bin/console transfer:databuilder:generate"
         generate-ide-auto-completion:
-            command: "vendor/bin/console dev:ide:generate-auto-completion"
+            command: "vendor/bin/console dev:ide-auto-completion:generate"
 
     sniff:
         phpstan:

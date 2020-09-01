@@ -22,4 +22,14 @@ class CustomerPageConfig extends SprykerCustomerPageConfig
     {
         return static::LOGIN_FAILURE_REDIRECT_URL;
     }
+
+    /**
+     * @api
+     *
+     * @return bool
+     */
+    public function isDoubleOptInEnabled(): bool
+    {
+        return true;
+    }
 }

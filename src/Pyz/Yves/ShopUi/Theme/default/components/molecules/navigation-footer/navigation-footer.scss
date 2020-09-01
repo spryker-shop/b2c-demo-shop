@@ -22,6 +22,19 @@
             }
         }
 
+        &--content-item {
+            #{$name}__col {
+                @include helper-breakpoint-media-min($md-min) {
+                    width: 50%;
+                }
+
+                @include helper-breakpoint-media-min($lg-min) {
+                    width: 25%;
+                    padding-right: 5%;
+                }
+            }
+        }
+
         @content;
     }
 }

@@ -1,0 +1,125 @@
+@mixin configurable-bundle-page-configurator-product($name: '.configurator-product') {
+    @include shop-ui-product-item-list($name) {
+        @include helper-effect-transition(box-shadow);
+        margin: 0 0 rem(10);
+        flex-direction: column;
+        z-index: $setting-zi-element;
+
+        .no-touch & {
+            &::before {
+                @include helper-effect-transition(opacity);
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: linear-gradient(to bottom, $setting-color-black, $setting-color-alpha-1);
+                opacity: 0;
+                z-index: $setting-zi-element;
+            }
+
+            &:hover {
+                box-shadow: rem(2) rem(10) rem(30) 0 $setting-color-shadow;
+                z-index: $setting-zi-element + 1;
+
+                &::before {
+                    opacity: 0.05;
+                    z-index: $setting-zi-element + 1;
+                }
+            }
+        }
+
+        @include helper-breakpoint-media-min($md-min) {
+            padding-right: rem(20);
+            background-color: $setting-color-alpha-1;
+            flex-direction: row;
+        }
+
+        @include helper-breakpoint-media-min($xl-min) {
+            padding-right: rem(40);
+        }
+
+        &__col {
+            padding: rem(24) 0;
+            position: relative;
+
+            &:not(&--image-container) {
+                z-index: $setting-zi-element + 2;
+
+                @include helper-breakpoint-media-min($md-min) {
+                    padding-top: rem(35);
+                }
+            }
+
+            &--image-container {
+                position: relative;
+                background-color: $setting-color-white;
+                padding: 0;
+
+                &::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background-color: $setting-color-alpha-1;
+                    z-index: $setting-zi-element;
+                }
+            }
+
+            &--description {
+                padding: rem(15) rem(15) 0;
+
+                @include helper-breakpoint-media-min($md-min) {
+                    padding: 0 rem(30);
+                }
+            }
+        }
+
+        &__name {
+            font-weight: fw(medium);
+            font-family: $setting-font-family-additional;
+            margin-bottom: rem(8);
+            display: inline-block;
+        }
+
+        &__sku {
+            display: block;
+            color: $setting-color-gray-4;
+            font-weight: fw(light);
+            line-height: rem(18);
+            text-transform: uppercase;
+            letter-spacing: rem(0.27);
+        }
+
+        &__price {
+            margin-bottom: rem(30);
+            font: fw(light) rem(18) $setting-font-family-additional;
+            letter-spacing: rem(0.3);
+            color: $setting-color-gray-6;
+
+            @include helper-breakpoint-media-min($md-min) {
+                text-align: right;
+            }
+        }
+
+        &__actions {
+            margin: 0;
+            padding: 0 rem(15);
+
+            @include helper-breakpoint-media-min($md-min) {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                height: 100%;
+                padding: 0;
+            }
+        }
+
+        @content;
+    }
+}
+
+@include configurable-bundle-page-configurator-product();

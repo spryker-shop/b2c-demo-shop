@@ -39,11 +39,11 @@ class ProductLocalizedAttributesExtractorStep implements DataImportStepInterface
         foreach ($dataSet['locales'] as $localeName => $idLocale) {
             $attributes = [];
             foreach ($dataSet as $key => $value) {
-                if (!preg_match('/^attribute_key_(\d+).' . $localeName . '$/', $key, $match)) {
+                if (!preg_match('/^' . $this->getAttributeKeyPrefix() . '(\d+).' . $localeName . '$/', $key, $match)) {
                     continue;
                 }
 
-                $attributeValueKey = 'value_' . $match[1] . '.' . $localeName;
+                $attributeValueKey = $this->getAttributeValuePrefix() . $match[1] . '.' . $localeName;
                 $attributeKey = trim($value);
                 $attributeValue = trim($dataSet[$attributeValueKey]);
 
@@ -71,5 +71,21 @@ class ProductLocalizedAttributesExtractorStep implements DataImportStepInterface
         }
 
         $dataSet[static::KEY_LOCALIZED_ATTRIBUTES] = $localizedAttributes;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getAttributeKeyPrefix(): string
+    {
+        return 'attribute_key_';
+    }
+
+    /**
+     * @return string
+     */
+    protected function getAttributeValuePrefix(): string
+    {
+        return 'value_';
     }
 }

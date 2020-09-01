@@ -1,0 +1,46 @@
+@mixin configurable-bundle-page-template-list($name: '.template-list') {
+    $border-radius: rem(4);
+
+    #{$name} {
+        &__list {
+            max-width: none;
+            margin: 0 -#{map-get($setting-spacing, 'big')} #{map-get($setting-spacing, 'biggest')};
+            align-items: stretch;
+        }
+
+        &__item-title {
+            @include helper-effect-transition(box-shadow background-color);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            height: 100%;
+            border-radius: $border-radius;
+            box-shadow: 0 0 0 $setting-color-transparent;
+            background-color: $setting-color-alpha-1;
+            overflow: hidden;
+
+            &:hover {
+                box-shadow: 0 rem(2) rem(23) 0 $setting-color-alpha-6;
+                text-decoration: none;
+                background-color: $setting-color-transparent;
+            }
+        }
+
+        &__item-name {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            flex-grow: 1;
+            padding: rem(20);
+            min-height: rem(104);
+            font-size: rem(22);
+            font-weight: fw(light);
+            color: $setting-color-black;
+        }
+
+        @content;
+    }
+}
+
+@include configurable-bundle-page-template-list();
