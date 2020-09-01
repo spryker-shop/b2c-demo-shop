@@ -13,7 +13,7 @@
                     }) }}
                 </h3>
 
-                {% set itemsExceptConfiguredBundles = shipmentGroup.items | filter(item => item.salesOrderConfiguredBundleItem is not defined or item.salesOrderConfiguredBundleItem is empty) %}
+                {% set itemsExceptConfiguredBundles = shipmentGroup.cartItems | filter(item => item.salesOrderConfiguredBundleItem is not defined or item.salesOrderConfiguredBundleItem is empty) %}
 
                 {% for item in itemsExceptConfiguredBundles %}
                     {% set cartItem = item.bundleProduct ?? item %}
@@ -73,15 +73,15 @@
                         {% endblock %}
 
                         {% block state %}
-                            {% set stateName = data.productItem.state.name ?? '' %}
+                            {% set itemState = data.productItem.state ?? {} %}
 
-                            {% if stateName %}
-                                {% set state = stateName | replace({' ': '-'}) | lower %}
+                            {% if itemState %}
+                                {% set state = itemState.name | replace({' ': '-'}) | lower %}
+                                {% set stateLabel = itemState.displayName ?? ('oms.state.' ~ state) %}
 
                                 {% include molecule('status') with {
-                                    class: 'col',
                                     data: {
-                                        label: stateName | capitalize,
+                                        label: stateLabel | trans,
                                         status: state,
                                     },
                                 } only %}
