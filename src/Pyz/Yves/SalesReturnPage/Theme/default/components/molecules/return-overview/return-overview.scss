@@ -1,0 +1,43 @@
+@mixin sales-return-page-return-overview($name: '.return-overview') {
+    #{$name} {
+        &__title-block {
+            padding-bottom: rem(15);
+            margin-bottom: rem(15);
+
+            @include helper-breakpoint-media-min($lg-min) {
+                padding-bottom: rem(20);
+                margin-bottom: rem(20);
+                border-bottom: rem(1) dotted $setting-color-gray-3;
+            }
+        }
+
+        &__overview-info {
+            list-style: none;
+            margin-bottom: rem(20);
+            padding-bottom: rem(5);
+            border-bottom: rem(1) dotted $setting-color-gray-3;
+        }
+
+        &__item {
+            margin-bottom: rem(15);
+        }
+
+        &__name {
+            font: fw(bold) rem(15) $setting-font-family-additional;
+            letter-spacing: rem(-0.17);
+            padding-right: rem(10);
+            width: rem(100);
+            display: inline-block;
+            vertical-align: baseline;
+        }
+
+        &__text {
+            font-weight: fw(light);
+            letter-spacing: rem(-0.18);
+        }
+
+        @content;
+    }
+}
+
+@include sales-return-page-return-overview();

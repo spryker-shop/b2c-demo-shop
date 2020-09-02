@@ -1,7 +1,14 @@
 @include shop-ui-link {
+    font: map-get($setting-font-size, default) $setting-font-family;
+
     &--darkest {
         @include helper-effect-transition(all);
         color: $setting-color-black;
+
+        &:hover,
+        &:focus {
+            color: $setting-color-alt;
+        }
     }
 
     &--without-underline {

@@ -3,7 +3,6 @@
 use Spryker\Shared\Application\ApplicationConstants;
 use Spryker\Shared\Collector\CollectorConstants;
 use Spryker\Shared\Customer\CustomerConstants;
-use Spryker\Shared\Mail\MailConstants;
 use Spryker\Shared\Newsletter\NewsletterConstants;
 use Spryker\Shared\Propel\PropelConstants;
 use Spryker\Shared\PropelQueryBuilder\PropelQueryBuilderConstants;
@@ -11,6 +10,7 @@ use Spryker\Shared\Queue\QueueConstants;
 use Spryker\Shared\RabbitMq\RabbitMqEnv;
 use Spryker\Shared\Session\SessionConstants;
 use Spryker\Shared\ZedRequest\ZedRequestConstants;
+use Spryker\Zed\Propel\PropelConfig;
 
 $config[PropelConstants::ZED_DB_USERNAME] = 'development';
 $config[PropelConstants::ZED_DB_PASSWORD] = 'mate20mg';
@@ -19,7 +19,7 @@ $config[PropelConstants::ZED_DB_HOST] = '127.0.0.1';
 $config[PropelConstants::ZED_DB_PORT] = 5432;
 $config[PropelConstants::ZED_DB_ENGINE]
     = $config[PropelQueryBuilderConstants::ZED_DB_ENGINE]
-    = $config[PropelConstants::ZED_DB_ENGINE_PGSQL];
+    = PropelConfig::DB_ENGINE_PGSQL;
 
 $yvesHost = 'www.de.project.local';
 $config[ApplicationConstants::HOST_YVES]
@@ -45,8 +45,6 @@ $config[SessionConstants::ZED_SESSION_COOKIE_SECURE] = false;
 
 $config[ApplicationConstants::CLOUD_CDN_STATIC_MEDIA_HTTP] = 'http://static.project.local';
 $config[ApplicationConstants::CLOUD_CDN_STATIC_MEDIA_HTTPS] = 'https://static.project.local';
-
-$config[MailConstants::MAILCATCHER_GUI] = 'http://' . $config[ApplicationConstants::HOST_ZED_GUI] . ':1080';
 
 /* Elasticsearch */
 $config[ApplicationConstants::ELASTICA_PARAMETER__INDEX_NAME]

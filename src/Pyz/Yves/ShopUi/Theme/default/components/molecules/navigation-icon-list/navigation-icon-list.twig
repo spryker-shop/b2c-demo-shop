@@ -9,8 +9,10 @@
     nodes: []
 } %}
 
+{% set menuClass = 'menu menu--inline' %}
+
 {% block body %}
-    <ul class="menu menu--inline">
+    <ul class="{{ menuClass }}">
         {% for node in data.nodes %}
             {% embed atom('node') with {
                 class: 'menu__item' ~ (node.url ? '' : ' ' ~ node.cssClass),

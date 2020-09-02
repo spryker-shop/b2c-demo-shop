@@ -12,6 +12,8 @@ use Spryker\Zed\ContentBannerGui\Communication\Plugin\ContentGui\ContentBannerFo
 use Spryker\Zed\ContentFileGui\Communication\Plugin\ContentGui\ContentFileListContentGuiEditorPlugin;
 use Spryker\Zed\ContentFileGui\Communication\Plugin\ContentGui\ContentFileListFormPlugin;
 use Spryker\Zed\ContentGui\ContentGuiDependencyProvider as SprykerContentGuiDependencyProvider;
+use Spryker\Zed\ContentNavigationGui\Communication\Plugin\ContentGui\ContentNavigationContentGuiEditorPlugin;
+use Spryker\Zed\ContentNavigationGui\Communication\Plugin\ContentGui\NavigationFormContentPlugin;
 use Spryker\Zed\ContentProductGui\Communication\Plugin\ContentGui\ContentProductContentGuiEditorPlugin;
 use Spryker\Zed\ContentProductGui\Communication\Plugin\ContentGui\ProductAbstractListFormPlugin;
 use Spryker\Zed\ContentProductSetGui\Communication\Plugin\ContentGui\ContentProductSetGuiEditorPlugin;
@@ -29,6 +31,7 @@ class ContentGuiDependencyProvider extends SprykerContentGuiDependencyProvider
             new ProductAbstractListFormPlugin(),
             new ProductSetFormPlugin(),
             new ContentFileListFormPlugin(),
+            new NavigationFormContentPlugin(),
         ];
     }
 
@@ -42,6 +45,7 @@ class ContentGuiDependencyProvider extends SprykerContentGuiDependencyProvider
             new ContentProductContentGuiEditorPlugin(),
             new ContentProductSetGuiEditorPlugin(),
             new ContentFileListContentGuiEditorPlugin(),
+            new ContentNavigationContentGuiEditorPlugin(),
         ];
     }
 }

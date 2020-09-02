@@ -1,0 +1,79 @@
+{% extends molecule('configured-bundle-product', '@SprykerShop:ConfigurableBundleWidget') %}
+
+{%- block extraClass %} grid{% endblock -%}
+
+{% block body %}
+    {% set productModifiers = modifiers %}
+
+    <div class="col col--sm-6 col--md-3">
+        {%- block thumbnailWrapper -%}
+            {{ parent() }}
+        {%- endblock -%}
+    </div>
+
+    {% set productTextInformationClasses = 'col col--sm-6 col--md-9 spacing-top' %}
+    {% set titleProductClasses = 'spacing-left spacing-left--big spacing-left--inner' %}
+    {% set priceInformationClasses = 'grid spacing-left spacing-left--big spacing-left--inner' %}
+
+    {%- block productTextInformation -%}
+        <div class="{{ productTextInformationClasses }}">
+            {%- block titleProduct -%}
+                <div class="{{ titleProductClasses }}">
+                    {%- block generalInformation -%}
+                        {{ parent() }}
+                    {%- endblock -%}
+                </div>
+            {%- endblock -%}
+
+            {%- block priceInformation -%}
+                <div class="{{ priceInformationClasses }}">
+                    {% block priceInformationInner %}
+                        {{ parent() }}
+                    {% endblock %}
+                </div>
+            {%- endblock -%}
+        </div>
+    {%- endblock -%}
+{% endblock -%}
+
+{%- block imageContainer -%}
+    {% include molecule('product-image') with {
+        modifiers: ['no-indent'] | merge(productModifiers),
+        data: {
+            name: data.name,
+            image: data.image,
+        },
+    } only %}
+{% endblock -%}
+
+{% block name -%}
+    <strong class="{{ component.renderClass(config.name ~ '__title', modifiers) }}">{{ data.name }}</strong>
+{%- endblock %}
+
+{% block sku -%}
+    <small class="{{ config.name }}__sku">
+        {{- 'configured_bundle.item_sku' | trans }} {{ data.sku -}}
+    </small>
+{%- endblock %}
+
+{% block priceCol %}
+    <div class="{{ config.name }}__col col col--sm-4">
+        {% block price %}
+            {{ parent() }}
+        {% endblock %}
+    </div>
+{% endblock %}
+
+{%- block priceTitle %}{% endblock -%}
+
+{% block quantityCol %}
+    <div class="{{ config.name }}__col col col--sm-4 text-center">
+        {% block quantity %}
+            <span class="{{ component.renderClass(config.name ~ '__text', ['secondary'] | merge(modifiers)) }}">
+                {{ 'configured_bundle_widget.multiplier' | trans }} {{ data.quantity }}
+            </span>
+        {% endblock %}
+    </div>
+{% endblock %}
+
+{%- block totalTitle %}{% endblock -%}

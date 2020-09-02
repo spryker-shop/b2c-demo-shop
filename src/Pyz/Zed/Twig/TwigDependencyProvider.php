@@ -13,7 +13,10 @@ use Spryker\Shared\Twig\Plugin\FormTwigPlugin;
 use Spryker\Shared\Twig\Plugin\RoutingTwigPlugin;
 use Spryker\Shared\Twig\Plugin\SecurityTwigPlugin;
 use Spryker\Zed\Application\Communication\Plugin\Twig\ApplicationTwigPlugin;
+use Spryker\Zed\Barcode\Plugin\Twig\BarcodeTwigPlugin;
 use Spryker\Zed\ChartGui\Communication\Plugin\Twig\Chart\ChartGuiTwigPlugin;
+use Spryker\Zed\CmsBlock\Communication\Plugin\Twig\CmsBlockTemplateTwigLoaderPlugin;
+use Spryker\Zed\CmsBlock\Communication\Plugin\Twig\CmsBlockTwigExtensionPlugin;
 use Spryker\Zed\Currency\Communication\Plugin\Twig\CurrencyTwigPlugin;
 use Spryker\Zed\Gui\Communication\Plugin\Twig\AssetsPathTwigPlugin;
 use Spryker\Zed\Gui\Communication\Plugin\Twig\Buttons\Action\BackActionButtonTwigPlugin;
@@ -70,6 +73,8 @@ class TwigDependencyProvider extends SprykerTwigDependencyProvider
             new TranslatorTwigPlugin(),
             new DateTimeFormatterTwigPlugin(),
             new SchedulerTwigPlugin(),
+            new BarcodeTwigPlugin(),
+            new CmsBlockTwigExtensionPlugin(),
 
             new AssetsPathTwigPlugin(),
             new TabsTwigPlugin(),
@@ -99,11 +104,17 @@ class TwigDependencyProvider extends SprykerTwigDependencyProvider
      */
     protected function getTwigLoaderPlugins(): array
     {
-        return [
+        $plugins = [
             new FilesystemTwigLoaderPlugin(),
             new FormFilesystemTwigLoaderPlugin(),
-            new WebProfilerTwigLoaderPlugin(),
             new GuiTwigLoaderPlugin(),
+            new CmsBlockTemplateTwigLoaderPlugin(),
         ];
+
+        if (class_exists(WebProfilerTwigLoaderPlugin::class)) {
+            $plugins[] = new WebProfilerTwigLoaderPlugin();
+        }
+
+        return $plugins;
     }
 }

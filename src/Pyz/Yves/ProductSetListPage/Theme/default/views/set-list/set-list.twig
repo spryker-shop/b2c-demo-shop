@@ -19,24 +19,23 @@
                         data: {
                             name: productSet.name,
                             url: productSet.url,
-                            imageUrl: imageUrl
-                        }
+                            imageUrl: imageUrl,
+                        },
                     } only %}
                         {% block image %}
-                            <a href="{{data.url}}">
-                                {% include atom('thumbnail') with {
-                                    modifiers: ['product-set'],
-                                    attributes: {
-                                        alt: data.name,
-                                        src: data.imageUrl,
-                                        title: data.name
-                                    }
+                            <a href="{{ data.url }}">
+                                {% include molecule('lazy-image') with {
+                                    modifiers: ['thumbnail', 'product-set'],
+                                    data: {
+                                        imageSrc: data.imageUrl,
+                                        imageTitle: data.name,
+                                    },
                                 } only %}
                             </a>
                         {% endblock %}
 
                         {% block name %}
-                            <h3 class="title title--h4 title--medium title--mobile-size spacing-bottom">{{data.name}}</h3>
+                            <h3 class="title title--h4 title--medium title--mobile-size spacing-bottom">{{ data.name }}</h3>
                         {% endblock %}
                     {% endembed %}
                 </div>

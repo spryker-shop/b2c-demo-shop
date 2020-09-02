@@ -1,4 +1,4 @@
-{% extends template('page-blank') %}
+{% extends template('page-layout-main', '@SprykerShop:ShopUi') %}
 
 {% define data = {
     activePage: ''
@@ -8,13 +8,19 @@
 
 {% block body %}
     {% block sidebar %}
-        {% include organism('side-drawer') with {
+        {% embed organism('side-drawer') with {
             class: 'is-hidden-lg-xl',
             attributes: {
                 'container-selector': 'js-page-layout-main__side-drawer-container',
                 'trigger-selector': 'js-page-layout-main__side-drawer-trigger'
             }
         } only %}
+            {% block mobileNavigation %}
+                <div class="{{ config.name }}__navigation">
+                    {% cms_slot 'slt-mobile-header' %}
+                </div>
+            {% endblock %}
+        {% endembed %}
     {% endblock %}
 
     {% block accountSidebar %}
@@ -66,6 +72,10 @@
 
     {% block header %}
         {% embed organism('header') only %}
+            {% block mainNavigation %}
+                {% cms_slot 'slt-desktop-header' %}
+            {% endblock %}
+
             {% block mobile %}
                 <a href="#" class="link link--alt js-page-layout-main__side-drawer-trigger">
                     {% include atom('icon') with {
@@ -109,12 +119,27 @@
                 'trigger-selector': '[data-form-submitter]',
             },
         } only %}
+
+        {% include molecule('viewport-intersection-observer') only %}
+
+        {% include molecule('node-animator') only %}
     {% endblock %}
 
     {% block footer %}
         {% cms_slot 'slt-1' %}
 
-        {% include organism('footer') only %}
+        {% embed organism('footer') only %}
+            {% block footerNavigation %}
+                {% embed molecule('navigation-footer') with {
+                    class: config.name ~ '__navigation',
+                    modifiers: ['content-item'],
+                } only %}
+                    {% block body %}
+                        {% cms_slot 'slt-footer' %}
+                    {% endblock %}
+                {% endembed %}
+            {% endblock %}
+        {% endembed %}
     {% endblock %}
 
     {% block icons %}

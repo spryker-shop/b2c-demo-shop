@@ -1,0 +1,56 @@
+@mixin configurable-bundle-widget-configured-bundle-product($name: '.configured-bundle-product') {
+    #{$name} {
+        padding: 0 rem(15) rem(21) 0;
+
+        &--mini-cart {
+            padding-left: rem(20);
+
+            &:last-child {
+                padding-bottom: 0;
+            }
+        }
+
+        &__title {
+            display: block;
+            font: fw(regular) map-get($setting-font-size, default) $setting-font-family-additional;
+
+            &--bold {
+                font-weight: fw(bold);
+            }
+        }
+
+        &__sku {
+            font: fw(light) $setting-font-size-base $setting-font-family;
+            color: $setting-color-gray-4;
+        }
+
+        &__prices {
+            padding-left: rem(16);
+
+            @include helper-breakpoint-media-min($xxl-min) {
+                padding-left: 0;
+            }
+        }
+
+        &__text {
+            font: fw(regular) $setting-font-size-base $setting-font-family-additional;
+
+            &--secondary {
+                color: $setting-color-gray-3;
+            }
+
+            &--bold {
+                font-weight: fw(bold);
+            }
+
+            &--mini-cart {
+                color: $setting-color-black;
+                font-weight: fw(light);
+            }
+        }
+
+        @content;
+    }
+}
+
+@include configurable-bundle-widget-configured-bundle-product;

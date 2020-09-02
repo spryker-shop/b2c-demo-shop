@@ -1,0 +1,76 @@
+@mixin sales-product-bundle-widget-ordered-product-bundle($name: '.ordered-product-bundle') {
+    $image-width: rem(120);
+
+    #{$name} {
+        border-bottom: rem(1) dotted $setting-color-gray-3;
+        padding-bottom: rem(18);
+        margin-bottom: rem(18);
+
+        &__image {
+            width: $image-width;
+        }
+
+        &__content {
+            padding-top: rem(15);
+            width: 100%;
+
+            @include helper-breakpoint-media-min($md-min) {
+                padding-left: rem(20);
+                padding-top: 0;
+                width: auto;
+                flex-grow: 1;
+                flex-basis: 0;
+            }
+        }
+
+        &__info {
+            margin-bottom: rem(10);
+
+            @include helper-breakpoint-media-min($xl-min) {
+                margin-bottom: 0;
+            }
+        }
+
+        &__name {
+            font: fw(medium) rem(16)/rem(18) $setting-font-family-additional;
+        }
+
+        &__sku,
+        &__quantity {
+            color: $setting-color-gray-4;
+            font: fw(light) rem(16)/rem(18) $setting-font-family;
+            letter-spacing: rem(0.2);
+        }
+
+        &__price,
+        &__quantity {
+            @include helper-breakpoint-media-min($xl-min) {
+                padding: 0 rem(5);
+                text-align: center;
+            }
+        }
+
+        &__total-price {
+            @include helper-breakpoint-media-min($xl-min) {
+                text-align: right;
+            }
+        }
+
+        &__items {
+            border-top: rem(1) dotted $setting-color-gray-3;
+            padding-top: rem(15);
+            margin-top: rem(15);
+            width: 100%;
+        }
+
+        &--with-options {
+            border-bottom: none;
+            padding-bottom: rem(10);
+            margin-bottom: 0;
+        }
+
+        @content;
+    }
+}
+
+@include sales-product-bundle-widget-ordered-product-bundle();

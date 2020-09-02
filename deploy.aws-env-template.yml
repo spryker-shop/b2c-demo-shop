@@ -1,0 +1,146 @@
+version: "0.1"
+x-real-ip: &real-ip
+    real-ip:
+        from:
+            - 10.0.0.0/8 # AWS VPC network
+            - 103.21.244.0/22 # Cloudflare
+            - 103.22.200.0/22 # Cloudflare
+            - 103.31.4.0/22 # Cloudflare
+            - 104.16.0.0/12 # Cloudflare
+            - 108.162.192.0/18 # Cloudflare
+            - 131.0.72.0/22 # Cloudflare
+            - 141.101.64.0/18 # Cloudflare
+            - 162.158.0.0/15 # Cloudflare
+            - 172.64.0.0/13 # Cloudflare
+            - 173.245.48.0/20 # Cloudflare
+            - 188.114.96.0/20 # Cloudflare
+            - 190.93.240.0/20 # Cloudflare
+            - 197.234.240.0/22 # Cloudflare
+            - 198.41.128.0/17 # Cloudflare
+            - 2400:cb00::/32 # Cloudflare
+            - 2606:4700::/32 # Cloudflare
+            - 2803:f800::/32 # Cloudflare
+            - 2405:b500::/32 # Cloudflare
+            - 2405:8100::/32 # Cloudflare
+            - 2c0f:f248::/32 # Cloudflare
+            - 2a06:98c0::/29 # Cloudflare
+x-frontend-auth: &frontend-auth
+    <<: *real-ip
+    auth:
+        engine: basic
+        users:
+            - username: CHANGE_ME
+              password: CHANGE_ME
+        exclude:
+            - '${ALLOWED_IP}' # AWS gateway
+            - 185.60.20.0/24 # PayOne
+namespace: spryker-customer # INIT_IMAGE_PREFIX 
+tag: '1.0'
+environment: docker
+image: spryker/php:7.3-DRAFT-new-relic  # Last actual image 
+composer:
+    mode: --no-dev
+    autoload: --classmap-authoritative
+assets:
+    image: fholzer/nginx-brotli:v1.18.0
+    mode: production
+    compression:
+        brotli:
+            static: only
+        gzip:
+            static: true
+            level: 5
+regions:
+    DE:
+        services:
+            database:
+                database: CHANGE_ME #Example: customer_staging
+                username: spryker
+                password: secret
+        stores:
+            DE:
+                services:
+                    broker:
+                        namespace: de_queue
+                    key_value_store:
+                        namespace: 1
+                    search:
+                        namespace: de_search
+                    session:
+                        namespace: 2
+groups:
+    DE-1:
+        region: DE
+        applications:
+            Yves:
+                application: yves
+                endpoints:
+                    www.de.example.demo-spryker.com:
+                        store: DE
+                        <<: *frontend-auth
+                    de.example.demo-spryker.com:
+                        store: DE
+                        <<: *frontend-auth
+            Zed:
+                application: zed
+                endpoints:
+                    zed.de.example.demo-spryker.com:
+                        store: DE
+                        primal: true
+            Glue:
+                application: glue
+                endpoints:
+                    glue.de.example.demo-spryker.com:
+                        store: DE
+                        primal: true
+services:
+    database:
+        engine: mysql
+        version: mariadb-10.4
+        root:
+            username: "root"
+            password: "secret"
+        endpoints:
+            localhost:3306:
+                protocol: tcp
+    broker:
+        engine: rabbitmq
+        api:
+            username: "spryker"
+            password: "secret"
+        endpoints:
+            queue.example.demo-spryker.com:
+            localhost:5672:
+                protocol: tcp
+    session:
+        engine: redis
+    key_value_store:
+        engine: redis
+        endpoints:
+            localhost:16379:
+                protocol: tcp
+    search:
+        engine: elastic
+        version: 6.8
+        endpoints:
+            localhost:9200:
+                protocol: tcp
+    scheduler:
+        engine: jenkins
+        endpoints:
+            scheduler.example.demo-spryker.com:
+    mail_catcher:
+        engine: mailhog
+        endpoints:
+            mail.example.demo-spryker.com:
+docker:
+    blackfire:
+        enabled: true
+    ssl:
+        enabled: true
+    testing:
+        store: DE
+    debug:
+        enabled: true
+    mount:
+        baked:

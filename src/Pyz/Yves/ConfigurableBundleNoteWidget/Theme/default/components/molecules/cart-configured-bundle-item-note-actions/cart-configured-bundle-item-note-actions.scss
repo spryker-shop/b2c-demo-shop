@@ -1,0 +1,21 @@
+@mixin configurable-bundle-note-widget-cart-configured-bundle-item-note-actions($name: '.cart-configured-bundle-item-note-actions') {
+    #{$name} {
+        margin-top: rem(15);
+
+        &__item {
+            margin: 0 rem(27) rem(5) 0;
+            font: fw(regular) $setting-font-size-base $setting-font-family;
+            background: $setting-color-transparent;
+            color: $setting-color-gray-4;
+            cursor: pointer;
+
+            @include helper-breakpoint-media-min($xxl-min) {
+                margin-bottom: 0;
+            }
+        }
+
+        @content;
+    }
+}
+
+@include configurable-bundle-note-widget-cart-configured-bundle-item-note-actions;

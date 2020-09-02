@@ -1,0 +1,70 @@
+{% extends molecule('configured-bundle', '@SprykerShop:ConfigurableBundleWidget') %}
+
+{%- block extraClass %}{% endblock -%}
+
+{%- block body -%}
+    {%- block bundle -%}
+        <div class="{{ config.name }}__container grid grid--middle">
+            {% set classBundleTotal = '' %}
+            {%- block bundleInner -%}
+                <div class="col col--sm-12 col--lg-6">
+                    {%- block bundleName -%}
+                        <h4 class="{{ config.name }}__title spacing-right">
+                            {%- block bundleNameText -%}
+                                {{ parent() }}
+                            {%- endblock -%}
+                        </h4>
+                    {%- endblock -%}
+                </div>
+                <div class="col col--sm-12 col--lg-6 grid grid--middle {{ classBundleTotal }}">
+                    {%- block bundleQuantity -%}
+                        <div class="col col--lg-6 {{ config.name }}__quantity">
+                            {% block bundleQuantityInner %}
+                                {{ parent() }}
+                            {% endblock %}
+                        </div>
+                    {%- endblock -%}
+
+                    {%- block bundlePriceInformation -%}
+                        <strong class="col col--sm-12 col--lg-6 {{ config.name }}__total">
+                            {%- block bundleTotalInner -%}
+                                {{ parent() }}
+                            {%- endblock -%}
+                        </strong>
+                    {%- endblock -%}
+                </div>
+            {%- endblock -%}
+        </div>
+    {%- endblock -%}
+
+    {% block bundleProductList %}
+        {{ parent() }}
+    {% endblock %}
+
+    <div class="grid grid--right grid--bottom">
+        {% block configurableBundleNote %}
+            {{ parent() }}
+        {% endblock -%}
+
+        {%- block bundleActions %}
+            {{ parent() }}
+        {% endblock -%}
+    </div>
+{%- endblock -%}
+
+{% block notEditableConfigurableBundleNote %}
+    {% include molecule('cart-configured-bundle-item-note', 'ConfigurableBundleNoteWidget') ignore missing with {
+        data: {
+            canWrite: false,
+            note: data.bundle.note,
+        },
+    } only %}
+{% endblock %}
+
+{%- block bundleTotalTitle %}{% endblock -%}
+
+{%- block bundleActionsInner %}
+    {% set bundleActionClassName = config.name ~ '__action spacing-x spacing-x--big' %}
+
+    {{ parent() }}
+{% endblock -%}

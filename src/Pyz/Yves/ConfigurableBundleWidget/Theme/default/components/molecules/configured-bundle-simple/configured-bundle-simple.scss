@@ -1,0 +1,17 @@
+@import '../configured-bundle/configured-bundle';
+
+@mixin configurable-bundle-widget-configured-bundle-simple($name: '.configured-bundle-simple') {
+    @include configurable-bundle-widget-configured-bundle($name) {
+        margin-right: 0;
+        margin-bottom: 0;
+        padding-bottom: rem(10);
+
+        &__title {
+            font-size: map-get($setting-font-size, default);
+        }
+
+        @content;
+    }
+}
+
+@include configurable-bundle-widget-configured-bundle-simple();

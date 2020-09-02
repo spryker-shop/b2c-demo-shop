@@ -1,0 +1,16 @@
+{% extends template('widget') %}
+
+{% define data = {
+    navigation: navigation,
+} %}
+
+{% block body %}
+    {% include molecule('navigation-header') with {
+        class: 'grid grid--middle grid--center',
+        data: {
+            nodes: data.navigation.nodes,
+            menuInline: false,
+            menuDropdown: true,
+        },
+    } only %}
+{% endblock %}

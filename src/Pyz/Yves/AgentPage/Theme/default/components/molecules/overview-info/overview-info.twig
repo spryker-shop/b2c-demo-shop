@@ -1,0 +1,16 @@
+{% extends molecule('overview-info', '@SprykerShop:AgentPage') %}
+
+{% block body %}
+    <div class="box">
+        {% include molecule('title-box', 'CustomerPage') with {
+            data: {
+                title: 'agent.account.profile_data' | trans,
+            },
+        } only %}
+
+        <ul class="menu menu--customer-account">
+            <li class="menu__item">{{ data.agent.firstName }} {{ data.agent.lastName }}</li>
+            <li class="menu__item"><a class="menu__link" href="mailto:{{ data.agent.username }}">{{ data.agent.username }}</a></li>
+        </ul>
+    </div>
+{% endblock %}

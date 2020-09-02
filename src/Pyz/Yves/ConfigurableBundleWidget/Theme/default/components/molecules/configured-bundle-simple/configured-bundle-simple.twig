@@ -1,0 +1,75 @@
+{% extends molecule('configured-bundle', 'ConfigurableBundleWidget') %}
+
+{% define config = {
+    name: 'configured-bundle-simple',
+} %}
+
+{% define data = {
+    configuredBundleListNumber: '',
+} %}
+
+{%- block bundleInner -%}
+    <div class="col col--sm-12 col--lg-7">
+        {%- block bundleName -%}
+            {{ parent() }}
+        {%- endblock -%}
+    </div>
+    <div class="col col--sm-12 col--lg-5 grid grid--middle {{ classBundleTotal }}">
+        {%- block bundleQuantity -%}
+            {{ parent() }}
+        {%- endblock -%}
+
+        {%- block bundlePriceInformation -%}
+            {{ parent() }}
+        {%- endblock -%}
+    </div>
+{%- endblock -%}
+
+{%- block bundleQuantityInner -%}
+    {% include molecule('configured-bundle-quantity', 'ConfigurableBundleWidget') with {
+        data: {
+            configuredBundle: data.bundle,
+            readOnly: true,
+        },
+    } only %}
+{%- endblock -%}
+
+{% block bundleProductItem %}
+    {% embed molecule('configured-bundle-product', 'ConfigurableBundleWidget') with {
+        modifiers: ['mini-cart'],
+        data: {
+            product: item,
+            currencyIsoCode: data.currencyIsoCode,
+            priceMode: data.priceMode,
+        },
+    } only %}
+        {%- block productTextInformation -%}
+            {% set productTextInformationClasses = 'col col--sm-6 col--md-9 spacing-top grid grid--no-wrap' %}
+            {% set titleProductClasses = 'spacing-x spacing-x--big spacing-x--inner col col--expand' %}
+            {% set priceInformationClasses = 'col text-right' %}
+
+            {{ parent() }}
+        {% endblock %}
+
+        {%- block imageContainer -%}
+            {% include molecule('product-image') with {
+                modifiers: productModifiers,
+                data: {
+                    name: data.name,
+                    image: data.image,
+                },
+            } only %}
+        {% endblock -%}
+
+        {% block generalInformation %}
+            {{ block('name') }}
+            {{ block('quantity') }}
+        {% endblock %}
+
+        {% block priceInformationInner %}
+            {{ block('totalInner') }}
+        {%- endblock -%}
+    {% endembed %}
+{% endblock %}
+
+{% block editableConfigurableBundleNote %}{% endblock %}

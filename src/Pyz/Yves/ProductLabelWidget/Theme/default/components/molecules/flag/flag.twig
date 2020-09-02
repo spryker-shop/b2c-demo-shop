@@ -1,16 +1,5 @@
-{% extends model('component') %}
-
-{% define config = {
-    name: 'flag',
-    tag: 'span'
-} %}
-
-{% define data = {
-    text: ''
-} %}
+{% extends molecule('flag', '@SprykerShop:ProductLabelWidget') %}
 
 {% block body %}
-    <span class="{{ component.renderClass(config.name ~ '__text', modifiers) }}">
-        {{data.text}}
-    </span>
+    <span class="{{ data.textClass }}">{{ data.text }}</span>
 {% endblock %}

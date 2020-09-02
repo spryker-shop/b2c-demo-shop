@@ -1,13 +1,4 @@
-{% extends model('component') %}
-
-{% define config = {
-    name: 'wishlist-overview-table'
-} %}
-
-{% define data = {
-    wishlists: required,
-    wishlistForm: null
-} %}
+{% extends molecule('wishlist-overview-table', '@SprykerShop:WishlistPage') %}
 
 {% block body %}
     <div class="is-scrollable-x">
@@ -55,11 +46,32 @@
                                 </li>
                             {% endif %}
                             <li class="menu__item">
-                                <form method="POST" action="{{ path('wishlist/delete', {wishlistName: wishlist.name}) }}">
-                                    <button type="submit" class="link link--user-account" title="{{ 'customer.account.wishlist.overview.delete' | trans }}">
-                                        {{ 'customer.account.wishlist.overview.delete' | trans }}
-                                    </button>
-                                </form>
+                                {% if data.wishlistDeleteFormClone %}
+                                    {% set wishlistDeleteForm = data.wishlistDeleteFormClone.getForm.createView %}
+
+                                    {{ form_start(wishlistDeleteForm, {'action': path('wishlist/delete', {'wishlistName': wishlist.name}), 'name': 'wishlistDeleteForm_' ~ wishlist.name }) }}
+                                        <button data-init-single-click class="link link--user-account" title="{{ 'customer.account.wishlist.overview.delete' | trans }}">
+                                            {{ 'customer.account.wishlist.overview.delete' | trans }}
+                                        </button>
+                                    {{ form_end(wishlistDeleteForm) }}
+                                {% else %}
+                                    {% set formName = 'wishlistDeleteForm_' ~ loop.index %}
+
+                                    {% include molecule('single-button-form') with {
+                                        data: {
+                                            formAction: path('wishlist/delete', {'wishlistName': wishlist.name}),
+                                            buttonText: 'customer.account.wishlist.overview.delete' | trans,
+                                            iconName: '',
+                                            buttonClass: 'link link--user-account',
+                                            fieldName: 'wishlist_delete_form[_token]',
+                                            fieldValue: csrf_token('wishlist_delete_form'),
+                                            formAttributes: {
+                                                'name': formName,
+                                                'id': formName,
+                                            },
+                                        },
+                                    } only %}
+                                {% endif %}
                             </li>
                         </ul>
                     </td>

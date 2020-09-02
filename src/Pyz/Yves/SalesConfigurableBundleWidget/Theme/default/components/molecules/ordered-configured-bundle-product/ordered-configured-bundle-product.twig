@@ -1,0 +1,86 @@
+{% extends molecule('ordered-configured-bundle-product', '@SprykerShop:SalesConfigurableBundleWidget') %}
+
+{%- block extraClass %} grid{% endblock -%}
+
+{% block body %}
+    <div class="col grid">
+        <div class="col col--sm-12 grid grid--middle">
+            <div class="col">
+                {% widget 'CustomerReorderItemCheckboxWidget' args [data.product] only %}{% endwidget %}
+            </div>
+
+            <div class="col {{ config.name }}__thumbnail-wrapper">
+                {%- block thumbnailWrapper -%}
+                    {{ parent() }}
+                {%- endblock -%}
+            </div>
+        </div>
+    </div>
+
+    <div class="col col--expand spacing-top">
+        <div class="spacing-left spacing-left--big spacing-left--inner">
+            {%- block generalInformation -%}
+                <div class="grid grid--justify grid--middle">
+                    <div class="col">
+                        {{ block('name') }}
+                    </div>
+                    <div class="col">
+                        {{ block('stateWrapper') }}
+                    </div>
+                </div>
+
+                {{ block('sku') }}
+            {%- endblock -%}
+        </div>
+
+        {%- block priceInformation -%}
+            <div class="grid spacing-left spacing-left--big spacing-left--inner">
+                {% block priceInformationInner %}
+                    {{ parent() }}
+                {% endblock %}
+            </div>
+        {%- endblock -%}
+    </div>
+{% endblock -%}
+
+{%- block imageContainer -%}
+    {% include molecule('product-image') with {
+        modifiers: ['no-indent'],
+        data: {
+            name: data.name,
+            image: data.image,
+        },
+    } only %}
+{% endblock -%}
+
+{% block name -%}
+    <strong class="{{ config.name }}__title">{{ data.name }}</strong>
+{%- endblock %}
+
+{% block sku -%}
+    <small class="{{ config.name }}__sku">
+        {{- 'configured_bundle.item_sku' | trans }} {{ data.sku -}}
+    </small>
+{%- endblock %}
+
+{% block priceCol %}
+    <div class="{{ config.name }}__col col col--sm-4">
+        {% block price %}
+            {{ parent() }}
+        {% endblock %}
+    </div>
+{% endblock %}
+
+{%- block priceTitle %}{% endblock -%}
+
+{% block quantityCol %}
+    <div class="{{ config.name }}__col col col--sm-4 text-center">
+        {% block quantity %}
+            <span class="{{ config.name }}__text {{ config.name }}__text--secondary">
+                {{ 'configured_bundle_widget.multiplier' | trans }} {{ data.quantity }}
+            </span>
+        {% endblock %}
+    </div>
+{% endblock %}
+
+{%- block totalTitle %}{% endblock -%}

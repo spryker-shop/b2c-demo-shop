@@ -18,12 +18,20 @@
             text-align: center;
             border: none;
 
+            /* stylelint-disable property-no-vendor-prefix */
+            -moz-appearance: textfield;
+            /* stylelint-enable */
+
             &::-webkit-inner-spin-button {
                 appearance: none;
             }
 
             &--quantity-large {
                 font-size: rem(15);
+            }
+
+            &--transparent {
+                background: $setting-color-transparent;
             }
         }
 
