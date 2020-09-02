@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d7962fdd787a137e0b56182010241130",
+    "content-hash": "07d1cd29117d9122931cfa5f6bcc5b1a",
     "packages": [
         {
             "name": "brick/math",
@@ -2960,6 +2960,38 @@
             "time": "2020-09-02T09:32:50+00:00"
         },
         {
+            "name": "spryker-feature/configurable-bundle-note",
+            "version": "202009.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker-feature/configurable-bundle-note.git",
+                "reference": "2f51ee07bcc4ceddd39e35fd61a5f3cbc9c79f07"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker-feature/configurable-bundle-note/zipball/2f51ee07bcc4ceddd39e35fd61a5f3cbc9c79f07",
+                "reference": "2f51ee07bcc4ceddd39e35fd61a5f3cbc9c79f07",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2",
+                "spryker-shop/configurable-bundle-note-widget": "^1.0.0",
+                "spryker/configurable-bundle-note": "^1.0.0"
+            },
+            "type": "metapackage",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "202009.x-dev"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "Configurable Bundle Note [feature]",
+            "time": "2020-09-01T12:13:38+00:00"
+        },
+        {
             "name": "spryker-feature/content-item",
             "version": "202009.0",
             "source": {
@@ -5906,6 +5938,55 @@
             ],
             "description": "CommentWidgetExtension module",
             "time": "2019-07-01T13:37:43+00:00"
+        },
+        {
+            "name": "spryker-shop/configurable-bundle-note-widget",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker-shop/configurable-bundle-note-widget.git",
+                "reference": "e76daac9140bee820b8853fb8655ddb5fe5a7e13"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker-shop/configurable-bundle-note-widget/zipball/e76daac9140bee820b8853fb8655ddb5fe5a7e13",
+                "reference": "e76daac9140bee820b8853fb8655ddb5fe5a7e13",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2",
+                "spryker-shop/shop-ui": "^1.0.0",
+                "spryker/application": "^3.8.0",
+                "spryker/configurable-bundle-note": "^1.0.0",
+                "spryker/glossary-storage": "^1.0.0",
+                "spryker/kernel": "^3.52.0",
+                "spryker/quote": "^2.0.0",
+                "spryker/symfony": "^3.1.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/router": "*"
+            },
+            "suggest": {
+                "spryker/router": "Use this module when using plugins that need Router dependencies."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "SprykerShop\\": "src/SprykerShop/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "ConfigurableBundleNoteWidget module",
+            "time": "2020-07-24T04:43:12+00:00"
         },
         {
             "name": "spryker-shop/configurable-bundle-page",
@@ -14746,6 +14827,51 @@
             ],
             "description": "ConfigurableBundleGuiExtension module",
             "time": "2019-11-28T12:02:34+00:00"
+        },
+        {
+            "name": "spryker/configurable-bundle-note",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/configurable-bundle-note.git",
+                "reference": "4740b0bd9ecfb834a673a07ba86d624d7d1a7331"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/configurable-bundle-note/zipball/4740b0bd9ecfb834a673a07ba86d624d7d1a7331",
+                "reference": "4740b0bd9ecfb834a673a07ba86d624d7d1a7331",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2",
+                "spryker/configurable-bundle": "^1.0.0 || ^2.0.0",
+                "spryker/kernel": "^3.33.0",
+                "spryker/quote": "^2.0.0",
+                "spryker/sales-configurable-bundle": "^1.0.0",
+                "spryker/zed-request": "^3.0.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/propel": "*",
+                "spryker/testify": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "ConfigurableBundleNote module",
+            "time": "2019-12-03T10:47:36+00:00"
         },
         {
             "name": "spryker/configurable-bundle-page-search",
@@ -41496,55 +41622,6 @@
             "time": "2019-10-07T07:45:13+00:00"
         },
         {
-            "name": "spryker-shop/configurable-bundle-note-widget",
-            "version": "1.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/spryker-shop/configurable-bundle-note-widget.git",
-                "reference": "e76daac9140bee820b8853fb8655ddb5fe5a7e13"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/spryker-shop/configurable-bundle-note-widget/zipball/e76daac9140bee820b8853fb8655ddb5fe5a7e13",
-                "reference": "e76daac9140bee820b8853fb8655ddb5fe5a7e13",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.2",
-                "spryker-shop/shop-ui": "^1.0.0",
-                "spryker/application": "^3.8.0",
-                "spryker/configurable-bundle-note": "^1.0.0",
-                "spryker/glossary-storage": "^1.0.0",
-                "spryker/kernel": "^3.52.0",
-                "spryker/quote": "^2.0.0",
-                "spryker/symfony": "^3.1.0"
-            },
-            "require-dev": {
-                "spryker/code-sniffer": "*",
-                "spryker/router": "*"
-            },
-            "suggest": {
-                "spryker/router": "Use this module when using plugins that need Router dependencies."
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "SprykerShop\\": "src/SprykerShop/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "proprietary"
-            ],
-            "description": "ConfigurableBundleNoteWidget module",
-            "time": "2020-07-24T04:43:12+00:00"
-        },
-        {
             "name": "spryker-shop/web-profiler-widget",
             "version": "1.4.1",
             "source": {
@@ -41749,51 +41826,6 @@
                 "standards"
             ],
             "time": "2020-01-10T16:05:13+00:00"
-        },
-        {
-            "name": "spryker/configurable-bundle-note",
-            "version": "1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/spryker/configurable-bundle-note.git",
-                "reference": "4740b0bd9ecfb834a673a07ba86d624d7d1a7331"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/spryker/configurable-bundle-note/zipball/4740b0bd9ecfb834a673a07ba86d624d7d1a7331",
-                "reference": "4740b0bd9ecfb834a673a07ba86d624d7d1a7331",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.2",
-                "spryker/configurable-bundle": "^1.0.0 || ^2.0.0",
-                "spryker/kernel": "^3.33.0",
-                "spryker/quote": "^2.0.0",
-                "spryker/sales-configurable-bundle": "^1.0.0",
-                "spryker/zed-request": "^3.0.0"
-            },
-            "require-dev": {
-                "spryker/code-sniffer": "*",
-                "spryker/propel": "*",
-                "spryker/testify": "*"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Spryker\\": "src/Spryker/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "proprietary"
-            ],
-            "description": "ConfigurableBundleNote module",
-            "time": "2019-12-03T10:47:36+00:00"
         },
         {
             "name": "spryker/development",
