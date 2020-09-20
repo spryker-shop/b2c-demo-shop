@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0ffe25aef5ca75cd5e9c147836746f2a",
+    "content-hash": "8cdcbffa50bb7360bf8f92352d01a04b",
     "packages": [
         {
             "name": "brick/math",
@@ -385,33 +385,33 @@
         },
         {
             "name": "elasticsearch/elasticsearch",
-            "version": "v6.7.2",
+            "version": "v7.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/elastic/elasticsearch-php.git",
-                "reference": "9ba89f905ebf699e72dacffa410331c7fecc8255"
+                "reference": "1380925ccd276ab897c76596cf3705cb9714a78c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/elastic/elasticsearch-php/zipball/9ba89f905ebf699e72dacffa410331c7fecc8255",
-                "reference": "9ba89f905ebf699e72dacffa410331c7fecc8255",
+                "url": "https://api.github.com/repos/elastic/elasticsearch-php/zipball/1380925ccd276ab897c76596cf3705cb9714a78c",
+                "reference": "1380925ccd276ab897c76596cf3705cb9714a78c",
                 "shasum": ""
             },
             "require": {
                 "ext-json": ">=1.3.7",
-                "guzzlehttp/ringphp": "~1.0",
-                "php": "^7.0",
+                "ezimuel/ringphp": "^1.1.2",
+                "php": "^7.1",
                 "psr/log": "~1.0"
             },
             "require-dev": {
-                "cpliakas/git-wrapper": "^1.7 || ^2.1",
-                "doctrine/inflector": "^1.1",
+                "cpliakas/git-wrapper": "~2.0",
+                "doctrine/inflector": "^1.3",
                 "mockery/mockery": "^1.2",
-                "phpstan/phpstan-shim": "^0.9 || ^0.11",
-                "phpunit/phpunit": "^5.7 || ^6.5",
+                "phpstan/phpstan": "^0.12",
+                "phpunit/phpunit": "^7.5",
                 "squizlabs/php_codesniffer": "^3.4",
-                "symfony/finder": "^2.8",
-                "symfony/yaml": "^2.8"
+                "symfony/finder": "~4.0",
+                "symfony/yaml": "~4.0"
             },
             "suggest": {
                 "ext-curl": "*",
@@ -419,6 +419,9 @@
             },
             "type": "library",
             "autoload": {
+                "files": [
+                    "src/autoload.php"
+                ],
                 "psr-4": {
                     "Elasticsearch\\": "src/Elasticsearch/"
                 }
@@ -441,7 +444,7 @@
                 "elasticsearch",
                 "search"
             ],
-            "time": "2019-07-19T14:48:24+00:00"
+            "time": "2020-08-18T13:44:18+00:00"
         },
         {
             "name": "everon/collection",
@@ -614,6 +617,107 @@
             "time": "2016-03-20T14:52:54+00:00"
         },
         {
+            "name": "ezimuel/guzzlestreams",
+            "version": "3.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ezimuel/guzzlestreams.git",
+                "reference": "abe3791d231167f14eb80d413420d1eab91163a8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ezimuel/guzzlestreams/zipball/abe3791d231167f14eb80d413420d1eab91163a8",
+                "reference": "abe3791d231167f14eb80d413420d1eab91163a8",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "GuzzleHttp\\Stream\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                }
+            ],
+            "description": "Fork of guzzle/streams (abandoned) to be used with elasticsearch-php",
+            "homepage": "http://guzzlephp.org/",
+            "keywords": [
+                "Guzzle",
+                "stream"
+            ],
+            "time": "2020-02-14T23:11:50+00:00"
+        },
+        {
+            "name": "ezimuel/ringphp",
+            "version": "1.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ezimuel/ringphp.git",
+                "reference": "0b78f89d8e0bb9e380046c31adfa40347e9f663b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ezimuel/ringphp/zipball/0b78f89d8e0bb9e380046c31adfa40347e9f663b",
+                "reference": "0b78f89d8e0bb9e380046c31adfa40347e9f663b",
+                "shasum": ""
+            },
+            "require": {
+                "ezimuel/guzzlestreams": "^3.0.1",
+                "php": ">=5.4.0",
+                "react/promise": "~2.0"
+            },
+            "require-dev": {
+                "ext-curl": "*",
+                "phpunit/phpunit": "~4.0"
+            },
+            "suggest": {
+                "ext-curl": "Guzzle will use specific adapters if cURL is present"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "GuzzleHttp\\Ring\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                }
+            ],
+            "description": "Fork of guzzle/RingPHP (abandoned) to be used with elasticsearch-php",
+            "time": "2020-02-14T23:51:21+00:00"
+        },
+        {
             "name": "filp/whoops",
             "version": "2.7.3",
             "source": {
@@ -726,16 +830,16 @@
         },
         {
             "name": "guzzlehttp/guzzle",
-            "version": "7.0.1",
+            "version": "7.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "2d9d3c186a6637a43193e66b097c50e4451eaab2"
+                "reference": "7edeaa528fbb57123028bd5a76b9ce9540194e26"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/2d9d3c186a6637a43193e66b097c50e4451eaab2",
-                "reference": "2d9d3c186a6637a43193e66b097c50e4451eaab2",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/7edeaa528fbb57123028bd5a76b9ce9540194e26",
+                "reference": "7edeaa528fbb57123028bd5a76b9ce9540194e26",
                 "shasum": ""
             },
             "require": {
@@ -749,7 +853,6 @@
                 "psr/http-client-implementation": "1.0"
             },
             "require-dev": {
-                "ergebnis/composer-normalize": "^2.0",
                 "ext-curl": "*",
                 "php-http/client-integration-tests": "dev-phpunit8",
                 "phpunit/phpunit": "^8.5.5",
@@ -763,7 +866,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "7.0-dev"
+                    "dev-master": "7.1-dev"
                 }
             },
             "autoload": {
@@ -803,7 +906,25 @@
                 "rest",
                 "web service"
             ],
-            "time": "2020-06-27T10:33:25+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/GrahamCampbell",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/Nyholm",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/alexeyshockov",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/gmponos",
+                    "type": "github"
+                }
+            ],
+            "time": "2020-09-22T09:10:04+00:00"
         },
         {
             "name": "guzzlehttp/promises",
@@ -928,109 +1049,6 @@
             "time": "2019-07-01T23:21:34+00:00"
         },
         {
-            "name": "guzzlehttp/ringphp",
-            "version": "1.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/guzzle/RingPHP.git",
-                "reference": "5e2a174052995663dd68e6b5ad838afd47dd615b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/RingPHP/zipball/5e2a174052995663dd68e6b5ad838afd47dd615b",
-                "reference": "5e2a174052995663dd68e6b5ad838afd47dd615b",
-                "shasum": ""
-            },
-            "require": {
-                "guzzlehttp/streams": "~3.0",
-                "php": ">=5.4.0",
-                "react/promise": "~2.0"
-            },
-            "require-dev": {
-                "ext-curl": "*",
-                "phpunit/phpunit": "~4.0"
-            },
-            "suggest": {
-                "ext-curl": "Guzzle will use specific adapters if cURL is present"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.1-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "GuzzleHttp\\Ring\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Michael Dowling",
-                    "email": "mtdowling@gmail.com",
-                    "homepage": "https://github.com/mtdowling"
-                }
-            ],
-            "description": "Provides a simple API and specification that abstracts away the details of HTTP into a single PHP function.",
-            "abandoned": true,
-            "time": "2018-07-31T13:22:33+00:00"
-        },
-        {
-            "name": "guzzlehttp/streams",
-            "version": "3.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/guzzle/streams.git",
-                "reference": "47aaa48e27dae43d39fc1cea0ccf0d84ac1a2ba5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/streams/zipball/47aaa48e27dae43d39fc1cea0ccf0d84ac1a2ba5",
-                "reference": "47aaa48e27dae43d39fc1cea0ccf0d84ac1a2ba5",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.0-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "GuzzleHttp\\Stream\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Michael Dowling",
-                    "email": "mtdowling@gmail.com",
-                    "homepage": "https://github.com/mtdowling"
-                }
-            ],
-            "description": "Provides a simple abstraction over streams of data",
-            "homepage": "http://guzzlephp.org/",
-            "keywords": [
-                "Guzzle",
-                "stream"
-            ],
-            "abandoned": true,
-            "time": "2014-10-12T19:18:40+00:00"
-        },
-        {
             "name": "lcobucci/jwt",
             "version": "3.3.2",
             "source": {
@@ -1082,6 +1100,16 @@
             "keywords": [
                 "JWS",
                 "jwt"
+            ],
+            "funding": [
+                {
+                    "url": "https://github.com/lcobucci",
+                    "type": "github"
+                },
+                {
+                    "url": "https://www.patreon.com/lcobucci",
+                    "type": "patreon"
+                }
             ],
             "time": "2020-05-22T08:21:12+00:00"
         },
@@ -1787,16 +1815,16 @@
         },
         {
             "name": "predis/predis",
-            "version": "v1.1.4",
+            "version": "v1.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/predis/predis.git",
-                "reference": "8be2418f0116572f1937083daf5cceb1bddc9f0d"
+                "reference": "9930e933c67446962997b05201c69c2319bf26de"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/predis/predis/zipball/8be2418f0116572f1937083daf5cceb1bddc9f0d",
-                "reference": "8be2418f0116572f1937083daf5cceb1bddc9f0d",
+                "url": "https://api.github.com/repos/predis/predis/zipball/9930e933c67446962997b05201c69c2319bf26de",
+                "reference": "9930e933c67446962997b05201c69c2319bf26de",
                 "shasum": ""
             },
             "require": {
@@ -1858,7 +1886,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-08-29T22:15:08+00:00"
+            "time": "2020-09-11T19:18:05+00:00"
         },
         {
             "name": "propel/propel",
@@ -2354,26 +2382,27 @@
         },
         {
             "name": "ruflin/elastica",
-            "version": "6.1.1",
+            "version": "7.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ruflin/Elastica.git",
-                "reference": "333dff62346adf835c0a0fd198e8c9f9ec8da65a"
+                "reference": "d9a079c682405514deb6902a71f35ad19e252acd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ruflin/Elastica/zipball/333dff62346adf835c0a0fd198e8c9f9ec8da65a",
-                "reference": "333dff62346adf835c0a0fd198e8c9f9ec8da65a",
+                "url": "https://api.github.com/repos/ruflin/Elastica/zipball/d9a079c682405514deb6902a71f35ad19e252acd",
+                "reference": "d9a079c682405514deb6902a71f35ad19e252acd",
                 "shasum": ""
             },
             "require": {
-                "elasticsearch/elasticsearch": "^6.0",
-                "php": "^7.0",
-                "psr/log": "~1.0"
+                "elasticsearch/elasticsearch": "^7.1.1 !=7.4.0",
+                "ext-json": "*",
+                "php": "^7.2",
+                "psr/log": "^1.0"
             },
             "require-dev": {
-                "aws/aws-sdk-php": "~3.0",
-                "guzzlehttp/guzzle": "~6.0"
+                "aws/aws-sdk-php": "^3.0",
+                "guzzlehttp/guzzle": "^6.3"
             },
             "suggest": {
                 "aws/aws-sdk-php": "Allow using IAM authentication with Amazon ElasticSearch Service",
@@ -2384,12 +2413,12 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "6.0.x-dev"
+                    "dev-master": "7.0.x-dev"
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "Elastica\\": "lib/Elastica/"
+                    "Elastica\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -2408,7 +2437,7 @@
                 "client",
                 "search"
             ],
-            "time": "2019-01-29T09:38:03+00:00"
+            "time": "2020-06-10T12:07:24+00:00"
         },
         {
             "name": "spryker-eco/loggly",
@@ -4236,17 +4265,17 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker-feature/search.git",
-                "reference": "a8b9d9ed48ca88b2a0199e7cf12035b43c898dce"
+                "reference": "6821d149abae1e38e5491a06552c723dfc7f70e5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker-feature/search/zipball/a8b9d9ed48ca88b2a0199e7cf12035b43c898dce",
-                "reference": "a8b9d9ed48ca88b2a0199e7cf12035b43c898dce",
+                "url": "https://api.github.com/repos/spryker-feature/search/zipball/6821d149abae1e38e5491a06552c723dfc7f70e5",
+                "reference": "6821d149abae1e38e5491a06552c723dfc7f70e5",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.2",
-                "spryker/elastica": "^5.0.0",
+                "spryker/elastica": "^6.0.0",
                 "spryker/search": "^8.15.0",
                 "spryker/search-elasticsearch": "^1.5.0",
                 "spryker/search-elasticsearch-gui": "^1.0.0"
@@ -4262,7 +4291,7 @@
                 "proprietary"
             ],
             "description": "Search [feature]",
-            "time": "2020-09-02T09:34:31+00:00"
+            "time": "2020-09-21T12:52:53+00:00"
         },
         {
             "name": "spryker-feature/shipment",
@@ -16155,25 +16184,26 @@
         },
         {
             "name": "spryker/currency",
-            "version": "3.11.3",
+            "version": "3.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/currency.git",
-                "reference": "6167fe956d9886d16d085f8d2bdf993b958fb456"
+                "reference": "d9b8529f6661fe6a61cbfa565ff3f3b570b7106b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/currency/zipball/6167fe956d9886d16d085f8d2bdf993b958fb456",
-                "reference": "6167fe956d9886d16d085f8d2bdf993b958fb456",
+                "url": "https://api.github.com/repos/spryker/currency/zipball/d9b8529f6661fe6a61cbfa565ff3f3b570b7106b",
+                "reference": "d9b8529f6661fe6a61cbfa565ff3f3b570b7106b",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.2",
                 "spryker/currency-extension": "^1.0.0",
-                "spryker/kernel": "^3.30.0",
+                "spryker/kernel": "^3.52.0",
                 "spryker/messenger": "^3.1.0",
                 "spryker/propel-orm": "^1.0.0",
                 "spryker/quote-extension": "^1.5.0",
+                "spryker/sales-extension": "^1.3.0",
                 "spryker/session": "^3.0.0 || ^4.0.0",
                 "spryker/store": "^1.11.0",
                 "spryker/symfony": "^3.0.0",
@@ -16211,7 +16241,7 @@
                 "proprietary"
             ],
             "description": "Currency module",
-            "time": "2020-05-29T13:08:37+00:00"
+            "time": "2020-09-09T10:48:04+00:00"
         },
         {
             "name": "spryker/currency-extension",
@@ -17699,26 +17729,26 @@
         },
         {
             "name": "spryker/elastica",
-            "version": "5.0.0",
+            "version": "6.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/elastica.git",
-                "reference": "2fe486fe0c3e0c3fcc10d13256b3109121706866"
+                "reference": "ca7af5125daa70c1255639aac620609258519cc3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/elastica/zipball/2fe486fe0c3e0c3fcc10d13256b3109121706866",
-                "reference": "2fe486fe0c3e0c3fcc10d13256b3109121706866",
+                "url": "https://api.github.com/repos/spryker/elastica/zipball/ca7af5125daa70c1255639aac620609258519cc3",
+                "reference": "ca7af5125daa70c1255639aac620609258519cc3",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.2",
-                "ruflin/elastica": "^6.0.0"
+                "ruflin/elastica": "^7.0.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "5.0.x-dev"
+                    "dev-master": "6.0.x-dev"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -17726,7 +17756,7 @@
                 "proprietary"
             ],
             "description": "Elastica module",
-            "time": "2019-12-09T12:25:16+00:00"
+            "time": "2020-07-28T05:37:45+00:00"
         },
         {
             "name": "spryker/entity-tag",
@@ -28798,16 +28828,16 @@
         },
         {
             "name": "spryker/search",
-            "version": "8.15.1",
+            "version": "8.16.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/search.git",
-                "reference": "c839a2e6165415b30a47fcb5c96cfe2e6cc29a36"
+                "reference": "632b8d53593cfc87e68e7a6e4fb72d02172e9937"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/search/zipball/c839a2e6165415b30a47fcb5c96cfe2e6cc29a36",
-                "reference": "c839a2e6165415b30a47fcb5c96cfe2e6cc29a36",
+                "url": "https://api.github.com/repos/spryker/search/zipball/632b8d53593cfc87e68e7a6e4fb72d02172e9937",
+                "reference": "632b8d53593cfc87e68e7a6e4fb72d02172e9937",
                 "shasum": ""
             },
             "require": {
@@ -28855,20 +28885,20 @@
                 "proprietary"
             ],
             "description": "Search module",
-            "time": "2020-08-07T11:40:30+00:00"
+            "time": "2020-09-03T10:56:47+00:00"
         },
         {
             "name": "spryker/search-elasticsearch",
-            "version": "1.5.0",
+            "version": "1.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/search-elasticsearch.git",
-                "reference": "54b652b89ba0bb89a30f5dab211b847afffbcd62"
+                "reference": "593851b03ccdb32e131804acddfd4da232c932f4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/search-elasticsearch/zipball/54b652b89ba0bb89a30f5dab211b847afffbcd62",
-                "reference": "54b652b89ba0bb89a30f5dab211b847afffbcd62",
+                "url": "https://api.github.com/repos/spryker/search-elasticsearch/zipball/593851b03ccdb32e131804acddfd4da232c932f4",
+                "reference": "593851b03ccdb32e131804acddfd4da232c932f4",
                 "shasum": ""
             },
             "require": {
@@ -28909,7 +28939,7 @@
                 "proprietary"
             ],
             "description": "SearchElasticsearch module",
-            "time": "2020-07-28T11:18:20+00:00"
+            "time": "2020-09-02T16:42:51+00:00"
         },
         {
             "name": "spryker/search-elasticsearch-gui",
@@ -28961,16 +28991,16 @@
         },
         {
             "name": "spryker/search-extension",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/search-extension.git",
-                "reference": "13dfedd9dacff3884a4fffac4f03651f06f78f6b"
+                "reference": "b84c15c11ed716b2b335d7d05ddd1f4f121c1d81"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/search-extension/zipball/13dfedd9dacff3884a4fffac4f03651f06f78f6b",
-                "reference": "13dfedd9dacff3884a4fffac4f03651f06f78f6b",
+                "url": "https://api.github.com/repos/spryker/search-extension/zipball/b84c15c11ed716b2b335d7d05ddd1f4f121c1d81",
+                "reference": "b84c15c11ed716b2b335d7d05ddd1f4f121c1d81",
                 "shasum": ""
             },
             "require": {
@@ -28978,8 +29008,7 @@
             },
             "require-dev": {
                 "spryker/code-sniffer": "*",
-                "spryker/log": "*",
-                "spryker/testify": "*"
+                "spryker/log": "*"
             },
             "suggest": {
                 "spryker/elastica": "If you want to use Elasticsearch as the search engine.",
@@ -29001,7 +29030,7 @@
                 "proprietary"
             ],
             "description": "SearchExtension module",
-            "time": "2019-12-06T17:23:26+00:00"
+            "time": "2020-09-03T10:54:44+00:00"
         },
         {
             "name": "spryker/security",
@@ -37625,107 +37654,6 @@
             "time": "2020-05-29T17:27:14+00:00"
         },
         {
-            "name": "ezimuel/guzzlestreams",
-            "version": "3.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ezimuel/guzzlestreams.git",
-                "reference": "abe3791d231167f14eb80d413420d1eab91163a8"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ezimuel/guzzlestreams/zipball/abe3791d231167f14eb80d413420d1eab91163a8",
-                "reference": "abe3791d231167f14eb80d413420d1eab91163a8",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.0-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "GuzzleHttp\\Stream\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Michael Dowling",
-                    "email": "mtdowling@gmail.com",
-                    "homepage": "https://github.com/mtdowling"
-                }
-            ],
-            "description": "Fork of guzzle/streams (abandoned) to be used with elasticsearch-php",
-            "homepage": "http://guzzlephp.org/",
-            "keywords": [
-                "Guzzle",
-                "stream"
-            ],
-            "time": "2020-02-14T23:11:50+00:00"
-        },
-        {
-            "name": "ezimuel/ringphp",
-            "version": "1.1.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ezimuel/ringphp.git",
-                "reference": "0b78f89d8e0bb9e380046c31adfa40347e9f663b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ezimuel/ringphp/zipball/0b78f89d8e0bb9e380046c31adfa40347e9f663b",
-                "reference": "0b78f89d8e0bb9e380046c31adfa40347e9f663b",
-                "shasum": ""
-            },
-            "require": {
-                "ezimuel/guzzlestreams": "^3.0.1",
-                "php": ">=5.4.0",
-                "react/promise": "~2.0"
-            },
-            "require-dev": {
-                "ext-curl": "*",
-                "phpunit/phpunit": "~4.0"
-            },
-            "suggest": {
-                "ext-curl": "Guzzle will use specific adapters if cURL is present"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.1-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "GuzzleHttp\\Ring\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Michael Dowling",
-                    "email": "mtdowling@gmail.com",
-                    "homepage": "https://github.com/mtdowling"
-                }
-            ],
-            "description": "Fork of guzzle/RingPHP (abandoned) to be used with elasticsearch-php",
-            "time": "2020-02-14T23:51:21+00:00"
-        },
-        {
             "name": "flow/jsonpath",
             "version": "0.5.0",
             "source": {
@@ -42556,7 +42484,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "spryker-feature/search": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
