@@ -10,13 +10,13 @@
                 orders: data.orders,
             },
         } only %}
-            {% if embed.orders is not empty %}
-                {% block additionalContent %}
+            {% block additionalContent %}
+                {% if embed.orders is not empty %}
                     <a href="{{url('customer/order')}}" class="col">
                         {{ 'customer.order.view_all' | trans }}
                     </a>
-                {% endblock %}
-            {% endif %}
+                {% endif %}
+            {% endblock %}
         {% endembed %}
 
         {% include molecule('order-table', 'CustomerPage') with {
