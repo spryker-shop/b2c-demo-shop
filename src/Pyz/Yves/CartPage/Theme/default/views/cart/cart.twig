@@ -48,14 +48,16 @@
                         {% set productBundleItemCounterWidget = findWidget('ProductBundleItemCounterWidget', [data.cart]) %}
                         {% set transformedCartItems = productBundleItemCounterWidget.items | default(data.cartItems) %}
 
-                        {% for cartItem in transformedCartItems if not cartItem.configuredBundleItem %}
-                            {% include molecule('product-card-item') with {
-                                data: {
-                                    product: data.cart,
-                                    productItem: cartItem,
-                                    attributes: data.attributes[cartItem.sku] | default([]),
-                                },
-                            } only %}
+                        {% for cartItem in transformedCartItems %}
+                            {% if not cartItem.configuredBundleItem %}
+                                {% include molecule('product-card-item') with {
+                                    data: {
+                                        product: data.cart,
+                                        productItem: cartItem,
+                                        attributes: data.attributes[cartItem.sku] | default([]),
+                                    },
+                                } only %}
+                            {% endif %}
                         {% endfor %}
                     </div>
                     {% widget 'CartDiscountPromotionProductListWidget' args [data.cart, data.request] only %}{% endwidget %}

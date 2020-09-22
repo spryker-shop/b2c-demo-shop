@@ -130,8 +130,10 @@
             } only %}
                 {% block contentWrapper %}
                     {% set isReturnable = true %}
-                    {% for bundleItem in data.productBundle.bundleItems if bundleItem.isReturnable == false %}
-                        {% set isReturnable = false %}
+                    {% for bundleItem in data.productBundle.bundleItems %}
+                        {% if bundleItem.isReturnable == false %}
+                            {% set isReturnable = false %}
+                        {% endif %}
                     {% endfor %}
 
                     {{ parent() }}
@@ -140,17 +142,19 @@
                 {% block imageWrapper %}
                     <div class="grid grid--no-wrap col">
                         <div class="col col--middle spacing-right spacing-right--inner">
-                            {% for key, productBundle in embed.form.productBundles if key == data.productBundle.bundleProduct.bundleItemIdentifier %}
-                                {{ form_row(productBundle.isReturnable, {
-                                    label: ' ',
-                                    attr: {
-                                        class: 'js-return-create__trigger-state-toggler',
-                                    },
-                                    disabled: not isReturnable,
-                                    attributes: {
-                                        additionalModifier: 'big',
-                                    },
-                                }) }}
+                            {% for key, productBundle in embed.form.productBundles %}
+                                {% if key == data.productBundle.bundleProduct.bundleItemIdentifier %}
+                                    {{ form_row(productBundle.isReturnable, {
+                                        label: ' ',
+                                        attr: {
+                                            class: 'js-return-create__trigger-state-toggler',
+                                        },
+                                        disabled: not isReturnable,
+                                        attributes: {
+                                            additionalModifier: 'big',
+                                        },
+                                    }) }}
+                                {% endif %}
                             {% endfor %}
                         </div>
 
@@ -177,13 +181,15 @@
 
                     {{ parent() }}
 
-                    {% for key, productBundle in embed.form.productBundles if key == data.productBundle.bundleProduct.bundleItemIdentifier %}
-                        {% include molecule('return-product-reason', 'SalesReturnPage') with {
-                            data: {
-                                returnItem: productBundle,
-                                isReturnable: isReturnable,
-                            },
-                        } only %}
+                    {% for key, productBundle in embed.form.productBundles %}
+                        {% if key == data.productBundle.bundleProduct.bundleItemIdentifier %}
+                            {% include molecule('return-product-reason', 'SalesReturnPage') with {
+                                data: {
+                                    returnItem: productBundle,
+                                    isReturnable: isReturnable,
+                                },
+                            } only %}
+                        {% endif %}
                     {% endfor %}
                 {% endblock %}
             {% endembed %}
@@ -233,17 +239,19 @@
                          },
                      } only %}
                          {% block checkbox %}
-                             {% for returnItem in embed.form.returnItems if returnItem.vars.value.orderItem.IdSalesOrderItem == data.product.IdSalesOrderItem %}
-                                 {{ form_row(returnItem.isReturnable, {
-                                     label: ' ',
-                                     attr: {
-                                         class: 'js-return-create__trigger-state-toggler',
-                                     },
-                                     disabled: not data.product.isReturnable,
-                                     attributes: {
-                                         additionalModifier: 'big',
-                                     },
-                                 }) }}
+                             {% for returnItem in embed.form.returnItems %}
+                                 {% if returnItem.vars.value.orderItem.IdSalesOrderItem == data.product.IdSalesOrderItem %}
+                                     {{ form_row(returnItem.isReturnable, {
+                                         label: ' ',
+                                         attr: {
+                                             class: 'js-return-create__trigger-state-toggler',
+                                         },
+                                         disabled: not data.product.isReturnable,
+                                         attributes: {
+                                             additionalModifier: 'big',
+                                         },
+                                     }) }}
+                                 {% endif %}
                              {% endfor %}
                          {% endblock %}
 
@@ -264,13 +272,15 @@
 
                              {{ parent() }}
 
-                             {% for returnItem in embed.form.returnItems if returnItem.vars.value.orderItem.IdSalesOrderItem == data.product.IdSalesOrderItem %}
-                                 {% include molecule('return-product-reason', 'SalesReturnPage') with {
-                                     data: {
-                                         returnItem: returnItem,
-                                         isReturnable: returnItem.vars.value.orderItem.isReturnable,
-                                     },
-                                 } only %}
+                             {% for returnItem in embed.form.returnItems %}
+                                 {% if returnItem.vars.value.orderItem.IdSalesOrderItem == data.product.IdSalesOrderItem %}
+                                     {% include molecule('return-product-reason', 'SalesReturnPage') with {
+                                         data: {
+                                             returnItem: returnItem,
+                                             isReturnable: returnItem.vars.value.orderItem.isReturnable,
+                                         },
+                                     } only %}
+                                 {% endif %}
                              {% endfor %}
                          {% endblock %}
                      {% endembed %}
