@@ -1,5 +1,4 @@
 {% extends molecule('order-detail-table', '@SprykerShop:CustomerPage') %}
-{% import _self as component %}
 
 {% block body %}
     {% set isGiftCardExists = null %}
@@ -33,6 +32,7 @@
                             bundleItems: item.bundleItems | default([]),
                         },
                     } only %}
+                        {% import _self as component %}
                         {% block image %}
                             <div class="grid grid--middle col">
                                 {% if embed.order is not empty %}

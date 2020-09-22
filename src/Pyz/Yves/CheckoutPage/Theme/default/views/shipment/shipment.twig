@@ -1,5 +1,4 @@
 {% extends view('shipment', '@SprykerShop:CheckoutPage') %}
-{% import _self as component %}
 
 {% block content %}
     {% embed molecule('form') with {
@@ -68,6 +67,7 @@
                                         bundleItems: item.bundleItems | default([]),
                                     },
                                 } only %}
+                                    {% import _self as component %}
                                     {% block image %}
                                         <div class="{{ component.renderClass(config.name ~ '__image', modifiers) }} col">
                                             {% include molecule('product-image') with {
