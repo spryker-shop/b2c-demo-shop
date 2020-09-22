@@ -1,5 +1,4 @@
 {% extends model('component') %}
-{% import _self as component %}
 
 {% define config = {
     name: 'cart-block'
@@ -35,6 +34,7 @@
                         productItem: item,
                     },
                 } only %}
+                    {% import _self as component %}
                     {% block options %}
                         {% set optionPrice = 0 %}
 
