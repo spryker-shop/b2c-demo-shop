@@ -6,15 +6,17 @@
 
 {% block body %}
     <div class="grid grid--stretch product-list">
-    {% for productAbstractView in data.productAbstractViewCollection if productAbstractView.available %}
-        {% embed molecule('product-item') with {
-            class: 'col col--sm-6 col--lg-3',
-            data: {
-                product: productAbstractView,
-            },
-        } only %}
-            {% block colors %}{% endblock %}
-        {% endembed %}
+    {% for productAbstractView in data.productAbstractViewCollection %}
+        {% if productAbstractView.available %}
+            {% embed molecule('product-item') with {
+                class: 'col col--sm-6 col--lg-3',
+                data: {
+                    product: productAbstractView,
+                },
+            } only %}
+                {% block colors %}{% endblock %}
+            {% endembed %}
+        {% endif %}
     {% endfor %}
     </div>
 {% endblock %}

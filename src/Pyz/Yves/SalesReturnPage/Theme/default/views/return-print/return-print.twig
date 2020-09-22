@@ -17,10 +17,12 @@
                     {% set bundleSumPriceToPayAggregation = 0 %}
                     {% set currencyIsoCode = null %}
 
-                    {% for item in bundle.salesOrderConfiguredBundleItems if data.items[item.IdSalesOrderItem] is defined %}
-                        {% set product = data.items[item.IdSalesOrderItem] %}
-                        {% set currencyIsoCode = product.currencyIsoCode %}
-                        {% set bundleSumPriceToPayAggregation = bundleSumPriceToPayAggregation + product.sumPriceToPayAggregation %}
+                    {% for item in bundle.salesOrderConfiguredBundleItems %}
+                        {% if data.items[item.IdSalesOrderItem] is defined %}
+                            {% set product = data.items[item.IdSalesOrderItem] %}
+                            {% set currencyIsoCode = product.currencyIsoCode %}
+                            {% set bundleSumPriceToPayAggregation = bundleSumPriceToPayAggregation + product.sumPriceToPayAggregation %}
+                        {% endif %}
                     {% endfor %}
 
                     {{ bundleSumPriceToPayAggregation | money(true, currencyIsoCode) }}
@@ -77,8 +79,10 @@
                         </td>
                         <td class="no-top-border {{ noBottomBorderClass }}">
                             {% set reasonText = 'return_page.return_reasons.empty' | trans %}
-                            {% for returnItem in embed.returnItems if returnItem.orderItem.IdSalesOrderItem == item.IdSalesOrderItem and returnItem.reason %}
-                                {% set reasonText = returnItem.reason | trans %}
+                            {% for returnItem in embed.returnItems %}
+                                {% if returnItem.orderItem.IdSalesOrderItem == item.IdSalesOrderItem and returnItem.reason %}
+                                    {% set reasonText = returnItem.reason | trans %}
+                                {% endif %}
                             {% endfor %}
                             {{ reasonText }}
                         </td>

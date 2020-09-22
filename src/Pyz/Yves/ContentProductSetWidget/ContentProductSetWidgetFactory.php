@@ -7,9 +7,9 @@
 
 namespace Pyz\Yves\ContentProductSetWidget;
 
-use Pyz\Yves\ContentProductSetWidget\Twig\ContentProductSetTwigFunction;
+use Pyz\Yves\ContentProductSetWidget\Twig\ContentProductSetTwigFunctionProvider;
+use Spryker\Shared\Twig\TwigFunctionProvider;
 use SprykerShop\Yves\ContentProductSetWidget\ContentProductSetWidgetFactory as SprykerContentProductSetWidgetFactory;
-use SprykerShop\Yves\ContentProductSetWidget\Twig\ContentProductSetTwigFunction as SprykerContentProductSetTwigFunction;
 use Twig\Environment;
 
 class ContentProductSetWidgetFactory extends SprykerContentProductSetWidgetFactory
@@ -18,13 +18,13 @@ class ContentProductSetWidgetFactory extends SprykerContentProductSetWidgetFacto
      * @param \Twig\Environment $twig
      * @param string $localeName
      *
-     * @return \SprykerShop\Yves\ContentProductSetWidget\Twig\ContentProductSetTwigFunction
+     * @return \Spryker\Shared\Twig\TwigFunctionProvider
      */
-    public function createContentProductSetTwigFunction(
+    public function createContentProductSetTwigFunctionProvider(
         Environment $twig,
         string $localeName
-    ): SprykerContentProductSetTwigFunction {
-        return new ContentProductSetTwigFunction(
+    ): TwigFunctionProvider {
+        return new ContentProductSetTwigFunctionProvider(
             $twig,
             $localeName,
             $this->createContentProductSetReader(),
