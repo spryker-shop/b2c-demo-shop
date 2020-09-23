@@ -188,13 +188,13 @@
 {# errors #}
 
 {% block form_errors %}
-    {% spaceless %}
-        {% if errors | length > 0 %}
+    {% apply spaceless %}
+        {% if errors | length %}
             <ul class="list list--bullet list--alert">
                 {% for error in errors %}
                     <li class="list__item">{{ error.message | trans }}</li>
                 {% endfor %}
             </ul>
         {% endif %}
-    {% endspaceless %}
+    {% endapply %}
 {% endblock %}
