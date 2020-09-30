@@ -11,7 +11,7 @@ use Spryker\Zed\Form\Communication\Plugin\Form\CsrfFormPlugin;
 use Spryker\Zed\Form\FormDependencyProvider as SprykerFormDependencyProvider;
 use Spryker\Zed\Gui\Communication\Plugin\Form\NoValidateFormTypeExtensionFormPlugin;
 use Spryker\Zed\Gui\Communication\Plugin\Form\SanitizeXssTypeExtensionFormPlugin;
-use Spryker\Zed\Http\Communication\Pluign\Form\HttpFoundationFormPlugin;
+use Spryker\Zed\Http\Communication\Plugin\Form\HttpFoundationFormPlugin;
 use Spryker\Zed\Validator\Communication\Plugin\Form\ValidatorFormPlugin;
 use Spryker\Zed\WebProfiler\Communication\Plugin\Form\WebProfilerFormPlugin;
 

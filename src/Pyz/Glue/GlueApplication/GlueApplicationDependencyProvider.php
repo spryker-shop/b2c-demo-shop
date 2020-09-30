@@ -69,6 +69,7 @@ use Spryker\Glue\GlueApplication\Plugin\GlueApplication\PaginationParametersVali
 use Spryker\Glue\GlueApplication\Plugin\Rest\SetStoreCurrentLocaleBeforeActionPlugin;
 use Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\ResourceRelationshipCollectionInterface;
 use Spryker\Glue\HealthCheck\Plugin\HealthCheckResourceRoutePlugin;
+use Spryker\Glue\Http\Plugin\Application\HttpApplicationPlugin;
 use Spryker\Glue\NavigationsCategoryNodesResourceRelationship\Plugin\GlueApplication\CategoryNodeByResourceIdResourceRelationshipPlugin;
 use Spryker\Glue\NavigationsRestApi\NavigationsRestApiConfig;
 use Spryker\Glue\NavigationsRestApi\Plugin\ResourceRoute\NavigationsResourceRoutePlugin;
@@ -468,6 +469,7 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
     protected function getApplicationPlugins(): array
     {
         return [
+            new HttpApplicationPlugin(),
             new SessionApplicationPlugin(),
             new EventDispatcherApplicationPlugin(),
             new GlueApplicationApplicationPlugin(),
