@@ -191,6 +191,13 @@ const getAppSettingsByTheme = (namespaceConfig, theme, pathToConfig) => {
         return currentMode === globalSettings.modes.prod;
     };
 
+    const criticalPatterns = [
+        '**/ShopUi/**',
+        '**/CatalogPage/**',
+        '**/HomePage/**',
+        '**/ProductDetailPage/**'
+    ];
+
     // return settings
     return {
         name,
@@ -199,6 +206,7 @@ const getAppSettingsByTheme = (namespaceConfig, theme, pathToConfig) => {
         paths,
         urls,
         imageOptimizationOptions,
+        criticalPatterns,
 
         context: globalSettings.context,
 
@@ -217,6 +225,31 @@ const getAppSettingsByTheme = (namespaceConfig, theme, pathToConfig) => {
                 // files/dirs patterns
                 patterns: customThemeEntryPointPatterns(),
                 fallbackPatterns: customThemeEntryPointPatterns(true)
+            },
+
+            // style  entry point patterns (components)
+            stylesEntryPoints: {
+                core: {
+                    // absolute dirs in which look for
+                    dirs: [
+                        join(globalSettings.context, paths.core),
+                    ],
+                    // files/dirs patterns
+                    patterns: [`**/Theme/${namespaceConfig.defaultTheme}/**/style.scss`],
+                },
+                nonCore: {
+                    // absolute dirs in which look for
+                    dirs: [
+                        join(globalSettings.context, paths.eco),
+                        join(globalSettings.context, paths.project),
+                    ],
+                    // files/dirs patterns
+                    patterns: [
+                        `**/Theme/${namespaceConfig.defaultTheme}/components/**/*.scss`,
+                        `**/Theme/${namespaceConfig.defaultTheme}/templates/**/*.scss`,
+                        `**/Theme/${namespaceConfig.defaultTheme}/views/**/*.scss`,
+                    ],
+                },
             },
 
             // core component styles finder settings

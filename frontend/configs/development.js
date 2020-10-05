@@ -2,7 +2,8 @@ const { join } = require('path');
 const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const { findComponentEntryPoints, findComponentStyles, findAppEntryPoint } = require('../libs/finder');
+const filePathFilter = require('@jsdevtools/file-path-filter');
+const { findComponentEntryPoints, findStyleEntryPoints, findComponentStyles, findAppEntryPoint } = require('../libs/finder');
 const { getAliasList } = require('../libs/alias');
 const { getAssetsConfig } = require('../libs/assets-configurator');
 const { buildVariantSettings } = require('../settings');
@@ -20,8 +21,9 @@ try {
 const getConfiguration = async appSettings => {
     const { buildVariant, isES6Module } = buildVariantSettings;
     const componentEntryPointsPromise = findComponentEntryPoints(appSettings.find.componentEntryPoints);
+    const styleEntryPointsPromise = findStyleEntryPoints(appSettings.find.stylesEntryPoints);
     const stylesPromise = findComponentStyles(appSettings.find.componentStyles);
-    const [componentEntryPoints, styles] = await Promise.all([componentEntryPointsPromise, stylesPromise]);
+    const [componentEntryPoints, styleEntryPoints, styles] = await Promise.all([componentEntryPointsPromise, styleEntryPointsPromise, stylesPromise]);
     const alias = getAliasList(appSettings);
 
     const vendorTs = await findAppEntryPoint(appSettings.find.shopUiEntryPoints, './vendor.ts');
@@ -30,6 +32,14 @@ const getConfiguration = async appSettings => {
     const basicScss = await findAppEntryPoint(appSettings.find.shopUiEntryPoints, './styles/basic.scss');
     const utilScss = await findAppEntryPoint(appSettings.find.shopUiEntryPoints, './styles/util.scss');
     const sharedScss = await findAppEntryPoint(appSettings.find.shopUiEntryPoints, './styles/shared.scss');
+
+    const criticalEntryPoints = styleEntryPoints.filter(filePathFilter({
+        include: appSettings.criticalPatterns,
+    }));
+
+    const nonCriticalEntryPoints = styleEntryPoints.filter(filePathFilter({
+        exclude: appSettings.criticalPatterns,
+    }));
 
     return {
         namespace: appSettings.namespaceConfig.namespace,
@@ -55,10 +65,17 @@ const getConfiguration = async appSettings => {
                 'es6-polyfill': es6PolyfillTs,
                 'app': [
                     appTs,
-                    basicScss,
                     ...componentEntryPoints,
+                ],
+                'critical': [
+                    basicScss,
+                    ...criticalEntryPoints,
+                ],
+                'non-critical': [
+                    ...nonCriticalEntryPoints,
                     utilScss,
-                ]
+                ],
+                'util': utilScss,
             },
 
             output: {
@@ -79,6 +96,7 @@ const getConfiguration = async appSettings => {
                         test: /\.ts$/,
                         loader: 'babel-loader',
                         options: {
+                            cacheDirectory: true,
                             presets: [
                                 ['@babel/env', {
                                     loose: true,

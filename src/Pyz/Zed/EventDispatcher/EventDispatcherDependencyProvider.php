@@ -7,6 +7,7 @@
 
 namespace Pyz\Zed\EventDispatcher;
 
+use Spryker\Shared\Http\Plugin\EventDispatcher\ResponseListenerEventDispatcherPlugin;
 use Spryker\Zed\Acl\Communication\Plugin\EventDispatcher\AccessControlEventDispatcherPlugin;
 use Spryker\Zed\Application\Communication\Plugin\EventDispatcher\HeadersSecurityEventDispatcherPlugin;
 use Spryker\Zed\Auth\Communication\Plugin\EventDispatcher\AuthorizationEventDispatcherPlugin;
@@ -20,6 +21,7 @@ use Spryker\Zed\Http\Communication\Plugin\EventDispatcher\HstsHeaderEventDispatc
 use Spryker\Zed\Kernel\Communication\Plugin\AutoloaderCacheEventDispatcherPlugin;
 use Spryker\Zed\Locale\Communication\Plugin\EventDispatcher\LocaleEventDispatcherPlugin;
 use Spryker\Zed\Monitoring\Communication\Plugin\EventDispatcher\MonitoringRequestTransactionEventDispatcherPlugin;
+use Spryker\Zed\Router\Communication\Plugin\EventDispatcher\RequestAttributesEventDispatcherPlugin;
 use Spryker\Zed\Router\Communication\Plugin\EventDispatcher\RouterListenerEventDispatcherPlugin;
 use Spryker\Zed\Router\Communication\Plugin\EventDispatcher\RouterLocaleEventDispatcherPlugin;
 use Spryker\Zed\Router\Communication\Plugin\EventDispatcher\RouterSslRedirectEventDispatcherPlugin;
@@ -55,6 +57,8 @@ class EventDispatcherDependencyProvider extends SprykerEventDispatcherDependency
             new SessionEventDispatcherPlugin(),
             new SaveSessionEventDispatcherPlugin(),
             new AutoloaderCacheEventDispatcherPlugin(),
+            new RequestAttributesEventDispatcherPlugin(),
+            new ResponseListenerEventDispatcherPlugin(),
         ];
     }
 }

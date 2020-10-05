@@ -8,13 +8,19 @@
 namespace Pyz\Zed\Oauth;
 
 use Spryker\Zed\Oauth\OauthDependencyProvider as SprykerOauthDependencyProvider;
+use Spryker\Zed\OauthAgentConnector\Communication\Plugin\Oauth\AgentCredentialsOauthGrantTypeConfigurationProviderPlugin;
+use Spryker\Zed\OauthAgentConnector\Communication\Plugin\Oauth\AgentOauthScopeProviderPlugin;
+use Spryker\Zed\OauthAgentConnector\Communication\Plugin\Oauth\AgentOauthUserProviderPlugin;
+use Spryker\Zed\OauthCustomerConnector\Communication\Plugin\Oauth\CustomerImpersonationOauthGrantTypeConfigurationProviderPlugin;
+use Spryker\Zed\OauthCustomerConnector\Communication\Plugin\Oauth\CustomerImpersonationOauthScopeProviderPlugin;
+use Spryker\Zed\OauthCustomerConnector\Communication\Plugin\Oauth\CustomerImpersonationOauthUserProviderPlugin;
 use Spryker\Zed\OauthCustomerConnector\Communication\Plugin\Oauth\CustomerOauthScopeProviderPlugin;
 use Spryker\Zed\OauthCustomerConnector\Communication\Plugin\Oauth\CustomerOauthUserProviderPlugin;
 use Spryker\Zed\OauthRevoke\Communication\Plugin\Oauth\OauthExpiredRefreshTokenRemoverPlugin;
 use Spryker\Zed\OauthRevoke\Communication\Plugin\Oauth\OauthRefreshTokenCheckerPlugin;
+use Spryker\Zed\OauthRevoke\Communication\Plugin\Oauth\OauthRefreshTokenPersistencePlugin;
 use Spryker\Zed\OauthRevoke\Communication\Plugin\Oauth\OauthRefreshTokenReaderPlugin;
 use Spryker\Zed\OauthRevoke\Communication\Plugin\Oauth\OauthRefreshTokenRevokerPlugin;
-use Spryker\Zed\OauthRevoke\Communication\Plugin\Oauth\OauthRefreshTokenSaverPlugin;
 use Spryker\Zed\OauthRevoke\Communication\Plugin\Oauth\OauthRefreshTokensReaderPlugin;
 use Spryker\Zed\OauthRevoke\Communication\Plugin\Oauth\OauthRefreshTokensRevokerPlugin;
 
@@ -27,6 +33,8 @@ class OauthDependencyProvider extends SprykerOauthDependencyProvider
     {
         return [
             new CustomerOauthUserProviderPlugin(),
+            new AgentOauthUserProviderPlugin(),
+            new CustomerImpersonationOauthUserProviderPlugin(),
         ];
     }
 
@@ -37,7 +45,20 @@ class OauthDependencyProvider extends SprykerOauthDependencyProvider
     {
         return [
             new CustomerOauthScopeProviderPlugin(),
+            new AgentOauthScopeProviderPlugin(),
+            new CustomerImpersonationOauthScopeProviderPlugin(),
         ];
+    }
+
+    /**
+     * @return \Spryker\Zed\OauthExtension\Dependency\Plugin\OauthGrantTypeConfigurationProviderPluginInterface[]
+     */
+    protected function getGrantTypeConfigurationProviderPlugins(): array
+    {
+        return array_merge(parent::getGrantTypeConfigurationProviderPlugins(), [
+            new AgentCredentialsOauthGrantTypeConfigurationProviderPlugin(),
+            new CustomerImpersonationOauthGrantTypeConfigurationProviderPlugin(),
+        ]);
     }
 
     /**
@@ -61,12 +82,12 @@ class OauthDependencyProvider extends SprykerOauthDependencyProvider
     }
 
     /**
-     * @return \Spryker\Zed\OauthExtension\Dependency\Plugin\OauthRefreshTokenSaverPluginInterface[]
+     * @return \Spryker\Zed\OauthExtension\Dependency\Plugin\OauthRefreshTokenPersistencePluginInterface[]
      */
-    protected function getOauthRefreshTokenSaverPlugins(): array
+    protected function getOauthRefreshTokenPersistencePlugins(): array
     {
         return [
-            new OauthRefreshTokenSaverPlugin(),
+            new OauthRefreshTokenPersistencePlugin(),
         ];
     }
 

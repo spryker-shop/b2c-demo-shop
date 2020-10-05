@@ -14,6 +14,7 @@ use Spryker\Zed\Oms\Communication\Plugin\Sales\IsCancellableSearchOrderExpanderP
 use Spryker\Zed\Oms\Communication\Plugin\Sales\ItemStateOrderItemExpanderPlugin;
 use Spryker\Zed\Oms\Communication\Plugin\Sales\OrderAggregatedItemStateSearchOrderExpanderPlugin;
 use Spryker\Zed\Oms\Communication\Plugin\Sales\StateHistoryOrderItemExpanderPlugin;
+use Spryker\Zed\OmsMultiThread\Communication\Plugin\Sales\OmsMultiThreadProcessorIdentifierOrderExpanderPreSavePlugin;
 use Spryker\Zed\Payment\Communication\Plugin\Sales\PaymentOrderHydratePlugin;
 use Spryker\Zed\ProductBundle\Communication\Plugin\Sales\ProductBundleIdHydratorPlugin;
 use Spryker\Zed\ProductBundle\Communication\Plugin\Sales\ProductBundleOptionItemExpanderPlugin;
@@ -147,6 +148,16 @@ class SalesDependencyProvider extends SprykerSalesDependencyProvider
         return [
             new OrderAggregatedItemStateSearchOrderExpanderPlugin(),
             new IsCancellableSearchOrderExpanderPlugin(),
+        ];
+    }
+
+    /**
+     * @return \Spryker\Zed\Sales\Dependency\Plugin\OrderExpanderPreSavePluginInterface[]
+     */
+    protected function getOrderExpanderPreSavePlugins()
+    {
+        return [
+            new OmsMultiThreadProcessorIdentifierOrderExpanderPreSavePlugin(),
         ];
     }
 }
