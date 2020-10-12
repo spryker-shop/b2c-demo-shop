@@ -159,7 +159,6 @@ $config[CustomerConstants::CUSTOMER_ANONYMOUS_PATTERN] = '^/.*';
 $config[CustomerPageConstants::CUSTOMER_REMEMBER_ME_SECRET] = 'hundnase';
 $config[CustomerPageConstants::CUSTOMER_REMEMBER_ME_LIFETIME] = 31536000;
 
-
 $config[LogConstants::LOG_SANITIZE_FIELDS] = [
     'password',
 ];
