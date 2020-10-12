@@ -77,13 +77,17 @@
 
         {% block productItemInfoInner %}
             <div class="spacing-bottom">
-                {% for returnPolicyMessage in data.item.returnPolicyMessages %}
-                    <div class="badge spacing-bottom spacing-bottom--small">
-                        {{ returnPolicyMessage.value | trans(returnPolicyMessage.parameters) }}
-                    </div>
-                {% endfor %}
+                {% set isItemReturnable = data.item.isReturnable %}
 
-                {% if not data.item.isReturnable %}
+                {% if isItemReturnable %}
+                    {% for returnPolicyMessage in data.item.returnPolicyMessages %}
+                        <div class="badge spacing-bottom spacing-bottom--small">
+                            {{ returnPolicyMessage.value | trans(returnPolicyMessage.parameters) }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
+                {% if not isItemReturnable %}
                     <div class="badge">
                         {{ 'return_page.returnable_state' | trans }}
                     </div>

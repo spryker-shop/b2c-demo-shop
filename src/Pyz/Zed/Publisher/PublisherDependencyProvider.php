@@ -12,6 +12,10 @@ use Spryker\Zed\GlossaryStorage\Communication\Plugin\Publisher\GlossaryKey\Gloss
 use Spryker\Zed\GlossaryStorage\Communication\Plugin\Publisher\GlossaryKey\GlossaryWritePublisherPlugin as GlossaryKeyWriterPublisherPlugin;
 use Spryker\Zed\GlossaryStorage\Communication\Plugin\Publisher\GlossaryPublisherTriggerPlugin;
 use Spryker\Zed\GlossaryStorage\Communication\Plugin\Publisher\GlossaryTranslation\GlossaryWritePublisherPlugin as GlossaryTranslationWritePublisherPlugin;
+use Spryker\Zed\ProductBundleStorage\Communication\Plugin\Publisher\ProductBundle\ProductBundlePublishWritePublisherPlugin;
+use Spryker\Zed\ProductBundleStorage\Communication\Plugin\Publisher\ProductBundle\ProductBundleWritePublisherPlugin;
+use Spryker\Zed\ProductBundleStorage\Communication\Plugin\Publisher\ProductBundlePublisherTriggerPlugin;
+use Spryker\Zed\ProductBundleStorage\Communication\Plugin\Publisher\ProductConcrete\ProductBundleWritePublisherPlugin as ProductConcreteProductBundleWritePublisherPlugin;
 use Spryker\Zed\ProductLabelSearch\Communication\Plugin\Publisher\ProductLabel\ProductLabelWritePublisherPlugin as ProductLabelSearchWritePublisherPlugin;
 use Spryker\Zed\ProductLabelSearch\Communication\Plugin\Publisher\ProductLabelProductAbstract\ProductLabelProductAbstractWritePublisherPlugin as ProductLabelProductAbstractSearchWritePublisherPlugin;
 use Spryker\Zed\ProductLabelSearch\Communication\Plugin\Publisher\ProductLabelStore\ProductLabelStoreWritePublisherPlugin as ProductLabelStoreSearchWritePublisherPlugin;
@@ -43,7 +47,8 @@ class PublisherDependencyProvider extends SprykerPublisherDependencyProvider
             $this->getProductRelationStoragePlugins(),
             $this->getProductLabelStoragePlugins(),
             $this->getProductLabelSearchPlugins(),
-            $this->getReturnReasonSearchPlugins()
+            $this->getReturnReasonSearchPlugins(),
+            $this->getProductBundleStoragePlugins()
         );
     }
 
@@ -58,6 +63,7 @@ class PublisherDependencyProvider extends SprykerPublisherDependencyProvider
             new ProductAbstractLabelPublisherTriggerPlugin(),
             new ProductLabelDictionaryPublisherTriggerPlugin(),
             new ReturnReasonPublisherTriggerPlugin(),
+            new ProductBundlePublisherTriggerPlugin(),
         ];
     }
 
@@ -121,6 +127,18 @@ class PublisherDependencyProvider extends SprykerPublisherDependencyProvider
         return [
             new ReturnReasonWritePublisherPlugin(),
             new ReturnReasonDeletePublisherPlugin(),
+        ];
+    }
+
+    /**
+     * @return \Spryker\Zed\PublisherExtension\Dependency\Plugin\PublisherPluginInterface[]
+     */
+    protected function getProductBundleStoragePlugins(): array
+    {
+        return [
+            new ProductBundlePublishWritePublisherPlugin(),
+            new ProductBundleWritePublisherPlugin(),
+            new ProductConcreteProductBundleWritePublisherPlugin(),
         ];
     }
 }
