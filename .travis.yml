@@ -291,6 +291,7 @@ cache:
     - /tmp/pear/cache/
     - $HOME/.yarn/cache
     - ./node_modules
+    - $HOME/chromium-ecosystem
 
 services:
   - postgresql
@@ -301,6 +302,13 @@ before_install:
   - echo "extension = redis.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
   - phpenv config-rm xdebug.ini
   - composer global require hirak/prestissimo
+  # Chromedriver section
+  - curl -L "https://github.com/spryker/docker-chromedriver/archive/master.zip" -o $HOME/chromium-ecosystem/docker-chromedriver.zip
+  - rm -rf $HOME/chromium-ecosystem/docker-chromedriver-master
+  - unzip -o $HOME/chromium-ecosystem/docker-chromedriver.zip -d $HOME/chromium-ecosystem/
+  - rm -rf $HOME/chromium-ecosystem/*.zip
+  - export CHROMEDRIVER_REVISION=814168
+  - export COMPOSER_IGNORE_CHROMEDRIVER=1
 
 install:
   - chmod -R a+x config/Shared/ci/travis/
@@ -308,6 +316,8 @@ install:
   - config/Shared/ci/travis/install_elasticsearch_6_8.sh
   - config/Shared/ci/travis/install_mailcatcher.sh
   - if [[ -z $MP_TEST ]] ; then config/Shared/ci/travis/configure_postgres.sh ; fi
+  # Exposes ${CHROMEDRIVER_BINARY} and ${CHROMIUM_BINARY}
+  - . $HOME/chromium-ecosystem/docker-chromedriver-master/chromium-installer $CHROMEDRIVER_REVISION $HOME/chromium-ecosystem false
 
 before_script:
   - nvm install 8 > /dev/null
@@ -344,12 +354,16 @@ script:
   - if [[ $VALIDATION == 1 ]] ; then vendor/bin/phpmd src/ text vendor/spryker/architecture-sniffer/src/ruleset.xml --minimumpriority 2 ; fi
   - if [[ $VALIDATION == 1 ]] ; then vendor/bin/phpstan analyze -c phpstan.neon src/ -l 4 ; fi
 
-  - timeout 45m bash -c "vendor/bin/phantomjs --webdriver=4444 --disk-cache=true --load-images=false --webdriver-logfile=/tmp/phantomjs.log --webdriver-loglevel=DEBUG">/dev/null &
+  - timeout 45m bash -c "${CHROMEDRIVER_BINARY} --port=4444 --whitelisted-ips= --url-base=/wd/hub --log-path=/tmp/chromedriver.log --log-level=DEBUG">/dev/null &
   - if [[ $TEST_GROUP == 'without-acceptance' ]] ; then vendor/bin/codecept run -x EndToEnd -x Presentation --ext DotReporter ; fi
   - if [[ $TEST_GROUP == 'acceptance' ]] ; then vendor/bin/codecept run -g EndToEnd -g Presentation -x DockerOnly --ext DotReporter ; fi
 
   - if [[ $VALIDATION == 1 ]] ; then node ./frontend/libs/stylelint ; fi
   - if [[ $VALIDATION == 1 ]] ; then node ./frontend/libs/tslint stylish ; fi
+
+after_script:
+    - if [[ $TRAVIS_TEST_RESULT == 0 ]] ; then rm /tmp/chromedriver.log ; fi
+    - if [[ $TRAVIS_TEST_RESULT == 1 ]] ; then gzip --best /tmp/chromedriver.log ; fi
 
 notifications:
   email: false

@@ -248,7 +248,8 @@
     "github-protocols": [
       "https"
     ],
-    "process-timeout": 900
+    "process-timeout": 900,
+    "chromium-revision": 814168
   },
   "scripts": {
     "compile": [
@@ -257,10 +258,10 @@
       "./deploy/heroku/run.sh"
     ],
     "post-install-cmd": [
-      "PhantomInstaller\\Installer::installPhantomJS"
+      "ChromedriverInstaller\\Installer::installChromedriver"
     ],
     "post-update-cmd": [
-      "PhantomInstaller\\Installer::installPhantomJS"
+      "ChromedriverInstaller\\Installer::installChromedriver"
     ],
     "phpstan": [
       "php -d memory_limit=1024M vendor/bin/phpstan analyze -c phpstan.neon src/ -l 5"

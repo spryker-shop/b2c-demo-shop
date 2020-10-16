@@ -31,11 +31,17 @@ extensions:
     config:
         \SprykerTest\Shared\Testify\Helper\WebDriverHelper:
             suites: ['Presentation']
-            loadImages: false
-            diskCache: true
+            path: "%SPRYKER_TEST_WEB_DRIVER_BIN%"
+            whitelisted-ips: ''
+            webdriver-port: "%SPRYKER_TEST_WEB_DRIVER_PORT%"
+            url-base: "/wd/hub"
             remote-enable: "%SPRYKER_TESTING_ENABLED%"
             host: "%SPRYKER_TEST_WEB_DRIVER_HOST%"
             browser: "%SPRYKER_TEST_IN_BROWSER%"
+            capabilities:
+                "goog:chromeOptions":
+                    args: ["--headless", "--no-sandbox", "--disable-dev-shm-usage"]
+                    binary: "%SPRYKER_TEST_BROWSER_BIN%"
         \SprykerTest\Shared\Testify\Helper\SuiteFilterHelper:
             inclusive:
                 - Presentation
