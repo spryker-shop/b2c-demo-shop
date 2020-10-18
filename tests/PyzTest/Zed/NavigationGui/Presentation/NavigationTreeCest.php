@@ -171,6 +171,8 @@ class NavigationTreeCest
      */
     public function testChangeNavigationTreeStructure(NavigationGuiPresentationTester $i)
     {
+        $i->markTestSkipped('Need to fix drag and drop function in this test.');
+
         $i->wantTo('Change tree structure and save.');
         $i->expect('Updated navigation tree structure should have persisted.');
 
