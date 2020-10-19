@@ -35,8 +35,6 @@ class CmsGuiCreatePageCest
      */
     public function testICanCreateCmsPageWithTranslatedPlaceholders(CmsGuiPresentationTester $i, Scenario $scenario)
     {
-        $scenario->skip('Skip this test until BrowserHelper contain adaptDateInputForBrowser method.');
-
         $i->wantTo('Create cms page with multiple translations');
         $i->expect('Page is persisted in Zed, exported to Yves and is accessible.');
 
