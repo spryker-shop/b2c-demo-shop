@@ -47,22 +47,37 @@ const find = async (globDirs, globPatterns, globFallbackPatterns, globSettings =
 const findEntryPoints = async settings => {
     const files = await find(settings.dirs, settings.patterns,  settings.fallbackPatterns, settings.globSettings);
 
-    return Object.values(files.reduce((map, file) => {
-        const dir = path.dirname(file);
-        const name = path.basename(dir);
-        const type = path.basename(path.dirname(dir));
-        map[`${type}/${name}`] = file;
-        return map;
-    }, {}));
+    return mergeEntryPoints(files);
 };
+
+// merge entry points
+const mergeEntryPoints = async files => Object.values(files.reduce((map, file) => {
+    const dir = path.dirname(file);
+    const name = path.basename(dir);
+    const type = path.basename(path.dirname(dir));
+
+    map[`${type}/${name}`] = file;
+
+    return map;
+}, {}));
 
 // find components entry points
 const findComponentEntryPoints = async settings => await findEntryPoints(settings);
+
+// find style entry points
+const findStyleEntryPoints = async settings => {
+    const coreFiles = await find(settings.core.dirs, settings.core.patterns,  [], settings.globSettings);
+    const nonCoreFiles = await find(settings.nonCore.dirs, settings.nonCore.patterns,  [], settings.globSettings);
+    const files = [...coreFiles, ...nonCoreFiles];
+
+    return mergeEntryPoints(files);
+};
 
 // find component styles
 const findComponentStyles = async settings =>
     await find(settings.dirs, settings.patterns, [], settings.globSettings);
 
+// find application entry points
 const findAppEntryPoint = async (settings, file) => {
     const config = Object.assign({}, settings);
     const updatePatterns = patternCollection => patternCollection.map(pattern => path.join(pattern, file));
@@ -71,11 +86,13 @@ const findAppEntryPoint = async (settings, file) => {
     config.fallbackPatterns = updatePatterns(config.fallbackPatterns);
 
     const entryPoint = await findEntryPoints(config);
+
     return entryPoint[entryPoint.length - 1];
 };
 
 module.exports = {
     findComponentEntryPoints,
+    findStyleEntryPoints,
     findComponentStyles,
     findAppEntryPoint,
 };

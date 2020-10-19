@@ -7,9 +7,9 @@
 
 namespace Pyz\Yves\WishlistPage\Controller;
 
-use SprykerShop\Yves\CustomerPage\Plugin\Provider\CustomerPageControllerProvider;
+use SprykerShop\Yves\CustomerPage\Plugin\Router\CustomerPageRouteProviderPlugin;
 use SprykerShop\Yves\WishlistPage\Controller\WishlistController as SprykerWishlistController;
-use SprykerShop\Yves\WishlistPage\Plugin\Provider\WishlistPageControllerProvider;
+use SprykerShop\Yves\WishlistPage\Plugin\Router\WishlistPageRouteProviderPlugin;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -28,7 +28,7 @@ class WishlistController extends SprykerWishlistController
     {
         $wishlistItemTransfer = $this->getWishlistItemTransferFromRequest($request);
         if (!$wishlistItemTransfer) {
-            return $this->redirectResponseInternal(CustomerPageControllerProvider::ROUTE_LOGIN);
+            return $this->redirectResponseInternal(CustomerPageRouteProviderPlugin::ROUTE_NAME_LOGIN);
         }
 
         $wishlistItemTransfer = $this->getFactory()
@@ -44,7 +44,7 @@ class WishlistController extends SprykerWishlistController
             return $this->redirectResponseExternal($request->headers->get(static::REQUEST_HEADER_REFERER));
         }
 
-        return $this->redirectResponseInternal(WishlistPageControllerProvider::ROUTE_WISHLIST_DETAILS, [
+        return $this->redirectResponseInternal(WishlistPageRouteProviderPlugin::ROUTE_NAME_WISHLIST_DETAILS, [
             'wishlistName' => $wishlistItemTransfer->getWishlistName(),
         ]);
     }

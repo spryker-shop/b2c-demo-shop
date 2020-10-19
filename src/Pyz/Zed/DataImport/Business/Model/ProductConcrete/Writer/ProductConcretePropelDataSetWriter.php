@@ -23,6 +23,11 @@ use Spryker\Zed\Product\Dependency\ProductEvents;
 
 class ProductConcretePropelDataSetWriter implements DataSetWriterInterface
 {
+    /**
+     * @uses \Spryker\Shared\ProductBundleStorage\ProductBundleStorageConfig::PRODUCT_BUNDLE_PUBLISH
+     */
+    protected const PRODUCT_BUNDLE_PUBLISH = 'ProductBundle.product_bundle.publish.write';
+
     protected const COLUMN_ABSTRACT_SKU = ProductConcreteHydratorStep::COLUMN_ABSTRACT_SKU;
 
     /**
@@ -115,6 +120,10 @@ class ProductConcretePropelDataSetWriter implements DataSetWriterInterface
             if ($productBundleEntity->isNew() || $productBundleEntity->isModified()) {
                 $productBundleEntity->save();
             }
+        }
+
+        if ($productBundleData) {
+            DataImporterPublisher::addEvent(static::PRODUCT_BUNDLE_PUBLISH, $idProduct);
         }
     }
 

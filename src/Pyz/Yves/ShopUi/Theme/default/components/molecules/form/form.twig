@@ -57,19 +57,22 @@
                 {% block fields %}
                     {% for fieldName in data.form.children | keys %}
                         {% set field = attribute(data.form.children, fieldName) %}
-                        {% set fieldLayoutClass = 'col col--sm-12' %}
 
-                        {% if fieldName in data.layout | keys %}
-                            {% set fieldLayoutClass = attribute(data.layout, fieldName) %}
+                        {% if not field.isRendered %}
+                            {% set fieldLayoutClass = 'col col--sm-12' %}
+
+                            {% if fieldName in data.layout | keys %}
+                                {% set fieldLayoutClass = attribute(data.layout, fieldName) %}
+                            {% endif %}
+
+                            {% block field %}
+                                {{ form_row(field, {
+                                    rowAttr: {
+                                        class: config.name ~ '__field ' ~ fieldLayoutClass
+                                    }
+                                }) }}
+                            {% endblock %}
                         {% endif %}
-
-                        {% block field %}
-                            {{ form_row(field, {
-                                rowAttr: {
-                                    class: config.name ~ '__field ' ~ fieldLayoutClass
-                                }
-                            }) }}
-                        {% endblock %}
                     {% endfor %}
                 {% endblock %}
             </div>
