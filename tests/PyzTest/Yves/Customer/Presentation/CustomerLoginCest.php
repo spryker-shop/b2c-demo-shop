@@ -7,6 +7,7 @@
 
 namespace PyzTest\Yves\Customer\Presentation;
 
+use Codeception\Scenario;
 use PyzTest\Yves\Customer\CustomerPresentationTester;
 use PyzTest\Yves\Customer\PageObject\CustomerLoginPage;
 use PyzTest\Yves\Customer\PageObject\CustomerOverviewPage;
@@ -40,8 +41,10 @@ class CustomerLoginCest
      *
      * @return void
      */
-    public function testICanOpenForgotPasswordPage(CustomerPresentationTester $i)
+    public function testICanOpenForgotPasswordPage(CustomerPresentationTester $i, Scenario $scenario)
     {
+        $scenario->skip('Test is outdated and needs to be actualized.');
+
         $i->amOnPage(CustomerLoginPage::URL);
         $i->click(CustomerLoginPage::FORGOT_PASSWORD_LINK);
         $i->seeCurrentUrlEquals(CustomerPasswordForgottenPage::URL);
