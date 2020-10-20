@@ -361,9 +361,5 @@ script:
   - if [[ $VALIDATION == 1 ]] ; then node ./frontend/libs/stylelint ; fi
   - if [[ $VALIDATION == 1 ]] ; then node ./frontend/libs/tslint stylish ; fi
 
-after_script:
-    - if [[ $TRAVIS_TEST_RESULT == 0 ]] ; then rm /tmp/chromedriver.log ; fi
-    - if [[ $TRAVIS_TEST_RESULT == 1 ]] ; then gzip --best /tmp/chromedriver.log ; fi
-
 notifications:
   email: false
