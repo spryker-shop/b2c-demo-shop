@@ -38,6 +38,7 @@ class CustomerLoginCest
 
     /**
      * @param \PyzTest\Yves\Customer\CustomerPresentationTester $i
+     * @param \Codeception\Scenario $scenario
      *
      * @return void
      */
