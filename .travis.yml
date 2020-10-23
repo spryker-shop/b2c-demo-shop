@@ -56,6 +56,22 @@ jobs:
         - DB_ENGINE=mysql
         - APPLICATION_ENV=ci.mysql
 
+    - php: "7.2"
+      dist: bionic
+      env:
+        - TEST_GROUP=acceptance
+        - ON_EVENTS=push,cron
+        - DB_ENGINE=mysql
+        - PREFER_LOWEST=1
+
+    - php: "7.2"
+      dist: bionic
+      env:
+        - TEST_GROUP=without-acceptance
+        - ON_EVENTS=cron,push
+        - DB_ENGINE=mysql
+        - PREFER_LOWEST=1
+
     - name: Docker / Alpine / PHP 7.4 / PostgreSQL / Functional
       os: linux
       dist: bionic
@@ -305,7 +321,8 @@ before_install:
 install:
   - chmod -R a+x config/Shared/ci/travis/
   - composer install --optimize-autoloader --no-interaction
-  - config/Shared/ci/travis/install_elasticsearch_6_8.sh
+  - if [[ $PREFER_LOWEST == 1 ]] ; then composer require "spryker-feature/search:202009.0" --update-with-dependencies --optimize-autoloader ; fi
+  - if [[ $PREFER_LOWEST == 1 ]] ; then config/Shared/ci/travis/install_elasticsearch_6_8.sh ; else config/Shared/ci/travis/install_elasticsearch_7_6.sh ; fi
   - config/Shared/ci/travis/install_mailcatcher.sh
   - if [[ -z $MP_TEST ]] ; then config/Shared/ci/travis/configure_postgres.sh ; fi
 
