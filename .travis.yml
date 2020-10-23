@@ -32,6 +32,12 @@ jobs:
       env:
         - VALIDATION=1
 
+    - php: "7.2"
+      dist: bionic
+      env:
+        - VALIDATION=1
+        - PREFER_LOWEST=1
+
     - php: "7.4"
       dist: bionic
       env:
@@ -40,7 +46,19 @@ jobs:
     - php: "7.4"
       dist: bionic
       env:
+        - TEST_GROUP=acceptance
+        - PREFER_MID=1
+
+    - php: "7.4"
+      dist: bionic
+      env:
         - TEST_GROUP=without-acceptance
+
+    - php: "7.4"
+      dist: bionic
+      env:
+        - TEST_GROUP=without-acceptance
+        - PREFER_MID=1
 
     - php: "7.2"
       dist: bionic
@@ -331,6 +349,7 @@ install:
   - composer install --optimize-autoloader --no-interaction
   - if [[ $PREFER_LOWEST == 1 ]] ; then composer require "spryker-feature/search:202009.0" --update-with-dependencies --optimize-autoloader ; fi
   - if [[ $PREFER_LOWEST == 1 ]] ; then config/Shared/ci/travis/install_elasticsearch_6_8.sh ; else config/Shared/ci/travis/install_elasticsearch_7_6.sh ; fi
+  - if [[ $PREFER_MID == 1 ]] ; then composer prefer-mid ; fi
   - config/Shared/ci/travis/install_mailcatcher.sh
   - if [[ -z $MP_TEST ]] ; then config/Shared/ci/travis/configure_postgres.sh ; fi
   # Exposes ${CHROMEDRIVER_BINARY} and ${CHROMIUM_BINARY}
