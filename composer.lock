@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "422a8cc0abb6313fcbb3e53a469ac6a5",
+    "content-hash": "73e85e3515019c1ba74282e0f0f1a192",
     "packages": [
         {
             "name": "brick/math",
@@ -433,33 +433,34 @@
         },
         {
             "name": "elasticsearch/elasticsearch",
-            "version": "v6.7.2",
+            "version": "v7.9.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/elastic/elasticsearch-php.git",
-                "reference": "9ba89f905ebf699e72dacffa410331c7fecc8255"
+                "reference": "38e821f37491bd91fe06b18b88613128950a11bb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/elastic/elasticsearch-php/zipball/9ba89f905ebf699e72dacffa410331c7fecc8255",
-                "reference": "9ba89f905ebf699e72dacffa410331c7fecc8255",
+                "url": "https://api.github.com/repos/elastic/elasticsearch-php/zipball/38e821f37491bd91fe06b18b88613128950a11bb",
+                "reference": "38e821f37491bd91fe06b18b88613128950a11bb",
                 "shasum": ""
             },
             "require": {
                 "ext-json": ">=1.3.7",
-                "guzzlehttp/ringphp": "~1.0",
-                "php": "^7.0",
+                "ezimuel/ringphp": "^1.1.2",
+                "php": "^7.1",
                 "psr/log": "~1.0"
             },
             "require-dev": {
-                "cpliakas/git-wrapper": "^1.7 || ^2.1",
-                "doctrine/inflector": "^1.1",
+                "cpliakas/git-wrapper": "~2.0",
+                "doctrine/inflector": "^1.3",
+                "ext-yaml": "*",
                 "mockery/mockery": "^1.2",
-                "phpstan/phpstan-shim": "^0.9 || ^0.11",
-                "phpunit/phpunit": "^5.7 || ^6.5",
+                "phpstan/phpstan": "^0.12",
+                "phpunit/phpunit": "^7.5",
                 "squizlabs/php_codesniffer": "^3.4",
-                "symfony/finder": "^2.8",
-                "symfony/yaml": "^2.8"
+                "symfony/finder": "~4.0",
+                "symfony/yaml": "~4.0"
             },
             "suggest": {
                 "ext-curl": "*",
@@ -467,6 +468,9 @@
             },
             "type": "library",
             "autoload": {
+                "files": [
+                    "src/autoload.php"
+                ],
                 "psr-4": {
                     "Elasticsearch\\": "src/Elasticsearch/"
                 }
@@ -491,9 +495,9 @@
             ],
             "support": {
                 "issues": "https://github.com/elastic/elasticsearch-php/issues",
-                "source": "https://github.com/elastic/elasticsearch-php/tree/6.7.x"
+                "source": "https://github.com/elastic/elasticsearch-php/tree/v7.9.1"
             },
-            "time": "2019-07-19T14:48:24+00:00"
+            "time": "2020-10-06T13:03:50+00:00"
         },
         {
             "name": "everon/collection",
@@ -680,6 +684,113 @@
                 "source": "https://github.com/oliwierptak/everon-utils/tree/master"
             },
             "time": "2016-03-20T14:52:54+00:00"
+        },
+        {
+            "name": "ezimuel/guzzlestreams",
+            "version": "3.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ezimuel/guzzlestreams.git",
+                "reference": "abe3791d231167f14eb80d413420d1eab91163a8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ezimuel/guzzlestreams/zipball/abe3791d231167f14eb80d413420d1eab91163a8",
+                "reference": "abe3791d231167f14eb80d413420d1eab91163a8",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "GuzzleHttp\\Stream\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                }
+            ],
+            "description": "Fork of guzzle/streams (abandoned) to be used with elasticsearch-php",
+            "homepage": "http://guzzlephp.org/",
+            "keywords": [
+                "Guzzle",
+                "stream"
+            ],
+            "support": {
+                "source": "https://github.com/ezimuel/guzzlestreams/tree/3.0.1"
+            },
+            "time": "2020-02-14T23:11:50+00:00"
+        },
+        {
+            "name": "ezimuel/ringphp",
+            "version": "1.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ezimuel/ringphp.git",
+                "reference": "0b78f89d8e0bb9e380046c31adfa40347e9f663b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ezimuel/ringphp/zipball/0b78f89d8e0bb9e380046c31adfa40347e9f663b",
+                "reference": "0b78f89d8e0bb9e380046c31adfa40347e9f663b",
+                "shasum": ""
+            },
+            "require": {
+                "ezimuel/guzzlestreams": "^3.0.1",
+                "php": ">=5.4.0",
+                "react/promise": "~2.0"
+            },
+            "require-dev": {
+                "ext-curl": "*",
+                "phpunit/phpunit": "~4.0"
+            },
+            "suggest": {
+                "ext-curl": "Guzzle will use specific adapters if cURL is present"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "GuzzleHttp\\Ring\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                }
+            ],
+            "description": "Fork of guzzle/RingPHP (abandoned) to be used with elasticsearch-php",
+            "support": {
+                "source": "https://github.com/ezimuel/ringphp/tree/1.1.2"
+            },
+            "time": "2020-02-14T23:51:21+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -912,117 +1023,6 @@
                 "source": "https://github.com/guzzle/psr7/tree/1.7.0"
             },
             "time": "2020-09-30T07:37:11+00:00"
-        },
-        {
-            "name": "guzzlehttp/ringphp",
-            "version": "1.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/guzzle/RingPHP.git",
-                "reference": "5e2a174052995663dd68e6b5ad838afd47dd615b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/RingPHP/zipball/5e2a174052995663dd68e6b5ad838afd47dd615b",
-                "reference": "5e2a174052995663dd68e6b5ad838afd47dd615b",
-                "shasum": ""
-            },
-            "require": {
-                "guzzlehttp/streams": "~3.0",
-                "php": ">=5.4.0",
-                "react/promise": "~2.0"
-            },
-            "require-dev": {
-                "ext-curl": "*",
-                "phpunit/phpunit": "~4.0"
-            },
-            "suggest": {
-                "ext-curl": "Guzzle will use specific adapters if cURL is present"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.1-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "GuzzleHttp\\Ring\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Michael Dowling",
-                    "email": "mtdowling@gmail.com",
-                    "homepage": "https://github.com/mtdowling"
-                }
-            ],
-            "description": "Provides a simple API and specification that abstracts away the details of HTTP into a single PHP function.",
-            "support": {
-                "issues": "https://github.com/guzzle/RingPHP/issues",
-                "source": "https://github.com/guzzle/RingPHP/tree/1.1.1"
-            },
-            "abandoned": true,
-            "time": "2018-07-31T13:22:33+00:00"
-        },
-        {
-            "name": "guzzlehttp/streams",
-            "version": "3.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/guzzle/streams.git",
-                "reference": "47aaa48e27dae43d39fc1cea0ccf0d84ac1a2ba5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/streams/zipball/47aaa48e27dae43d39fc1cea0ccf0d84ac1a2ba5",
-                "reference": "47aaa48e27dae43d39fc1cea0ccf0d84ac1a2ba5",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.0-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "GuzzleHttp\\Stream\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Michael Dowling",
-                    "email": "mtdowling@gmail.com",
-                    "homepage": "https://github.com/mtdowling"
-                }
-            ],
-            "description": "Provides a simple abstraction over streams of data",
-            "homepage": "http://guzzlephp.org/",
-            "keywords": [
-                "Guzzle",
-                "stream"
-            ],
-            "support": {
-                "issues": "https://github.com/guzzle/streams/issues",
-                "source": "https://github.com/guzzle/streams/tree/master"
-            },
-            "abandoned": true,
-            "time": "2014-10-12T19:18:40+00:00"
         },
         {
             "name": "lcobucci/jwt",
@@ -1365,6 +1365,10 @@
                 }
             ],
             "description": "Mime-type detection for Flysystem",
+            "support": {
+                "issues": "https://github.com/thephpleague/mime-type-detection/issues",
+                "source": "https://github.com/thephpleague/mime-type-detection/tree/1.5.1"
+            },
             "funding": [
                 {
                     "url": "https://github.com/frankdejonge",
@@ -1688,6 +1692,11 @@
                 "pseudorandom",
                 "random"
             ],
+            "support": {
+                "email": "info@paragonie.com",
+                "issues": "https://github.com/paragonie/random_compat/issues",
+                "source": "https://github.com/paragonie/random_compat"
+            },
             "time": "2020-10-15T08:29:30+00:00"
         },
         {
@@ -2596,26 +2605,27 @@
         },
         {
             "name": "ruflin/elastica",
-            "version": "6.1.1",
+            "version": "7.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ruflin/Elastica.git",
-                "reference": "333dff62346adf835c0a0fd198e8c9f9ec8da65a"
+                "reference": "d9a079c682405514deb6902a71f35ad19e252acd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ruflin/Elastica/zipball/333dff62346adf835c0a0fd198e8c9f9ec8da65a",
-                "reference": "333dff62346adf835c0a0fd198e8c9f9ec8da65a",
+                "url": "https://api.github.com/repos/ruflin/Elastica/zipball/d9a079c682405514deb6902a71f35ad19e252acd",
+                "reference": "d9a079c682405514deb6902a71f35ad19e252acd",
                 "shasum": ""
             },
             "require": {
-                "elasticsearch/elasticsearch": "^6.0",
-                "php": "^7.0",
-                "psr/log": "~1.0"
+                "elasticsearch/elasticsearch": "^7.1.1 !=7.4.0",
+                "ext-json": "*",
+                "php": "^7.2",
+                "psr/log": "^1.0"
             },
             "require-dev": {
-                "aws/aws-sdk-php": "~3.0",
-                "guzzlehttp/guzzle": "~6.0"
+                "aws/aws-sdk-php": "^3.0",
+                "guzzlehttp/guzzle": "^6.3"
             },
             "suggest": {
                 "aws/aws-sdk-php": "Allow using IAM authentication with Amazon ElasticSearch Service",
@@ -2626,12 +2636,12 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "6.0.x-dev"
+                    "dev-master": "7.0.x-dev"
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "Elastica\\": "lib/Elastica/"
+                    "Elastica\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -2654,7 +2664,7 @@
                 "issues": "https://github.com/ruflin/Elastica/issues",
                 "source": "https://github.com/ruflin/Elastica/tree/master"
             },
-            "time": "2019-01-29T09:38:03+00:00"
+            "time": "2020-06-10T12:07:24+00:00"
         },
         {
             "name": "spryker-eco/loggly",
@@ -4613,25 +4623,26 @@
         },
         {
             "name": "spryker-feature/search",
-            "version": "202009.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker-feature/search.git",
-                "reference": "a8b9d9ed48ca88b2a0199e7cf12035b43c898dce"
+                "reference": "6821d149abae1e38e5491a06552c723dfc7f70e5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker-feature/search/zipball/a8b9d9ed48ca88b2a0199e7cf12035b43c898dce",
-                "reference": "a8b9d9ed48ca88b2a0199e7cf12035b43c898dce",
+                "url": "https://api.github.com/repos/spryker-feature/search/zipball/6821d149abae1e38e5491a06552c723dfc7f70e5",
+                "reference": "6821d149abae1e38e5491a06552c723dfc7f70e5",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.2",
-                "spryker/elastica": "^5.0.0",
+                "spryker/elastica": "^6.0.0",
                 "spryker/search": "^8.15.0",
                 "spryker/search-elasticsearch": "^1.5.0",
                 "spryker/search-elasticsearch-gui": "^1.0.0"
             },
+            "default-branch": true,
             "type": "metapackage",
             "extra": {
                 "branch-alias": {
@@ -4646,7 +4657,7 @@
             "support": {
                 "source": "https://github.com/spryker-feature/search/tree/master"
             },
-            "time": "2020-09-02T09:34:31+00:00"
+            "time": "2020-09-21T12:52:53+00:00"
         },
         {
             "name": "spryker-feature/shipment",
@@ -12099,6 +12110,9 @@
                 "proprietary"
             ],
             "description": "Catalog module",
+            "support": {
+                "source": "https://github.com/spryker/catalog/tree/5.6.3"
+            },
             "time": "2020-09-29T11:51:26+00:00"
         },
         {
@@ -14514,16 +14528,16 @@
         },
         {
             "name": "spryker/cms-slot-block",
-            "version": "1.0.0",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/cms-slot-block.git",
-                "reference": "4c925b61c4887a0c5555424164eefb300887ea2f"
+                "reference": "174fde58289760b4b77bc112e551105400544aed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/cms-slot-block/zipball/4c925b61c4887a0c5555424164eefb300887ea2f",
-                "reference": "4c925b61c4887a0c5555424164eefb300887ea2f",
+                "url": "https://api.github.com/repos/spryker/cms-slot-block/zipball/174fde58289760b4b77bc112e551105400544aed",
+                "reference": "174fde58289760b4b77bc112e551105400544aed",
                 "shasum": ""
             },
             "require": {
@@ -14561,9 +14575,9 @@
             ],
             "description": "CmsSlotBlock module",
             "support": {
-                "source": "https://github.com/spryker/cms-slot-block/tree/1.0.0"
+                "source": "https://github.com/spryker/cms-slot-block/tree/1.1.0"
             },
-            "time": "2019-12-03T14:33:53+00:00"
+            "time": "2020-10-07T09:34:24+00:00"
         },
         {
             "name": "spryker/cms-slot-block-category-connector",
@@ -14855,23 +14869,23 @@
         },
         {
             "name": "spryker/cms-slot-block-gui",
-            "version": "1.0.3",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/cms-slot-block-gui.git",
-                "reference": "891048af6d110dad962035abdbea0bccba1ac2d6"
+                "reference": "7acc6b1783ce67854e9efae4f5fd9fe9a46a775a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/cms-slot-block-gui/zipball/891048af6d110dad962035abdbea0bccba1ac2d6",
-                "reference": "891048af6d110dad962035abdbea0bccba1ac2d6",
+                "url": "https://api.github.com/repos/spryker/cms-slot-block-gui/zipball/7acc6b1783ce67854e9efae4f5fd9fe9a46a775a",
+                "reference": "7acc6b1783ce67854e9efae4f5fd9fe9a46a775a",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.2",
                 "spryker/cms-block": "^1.0.0 || ^2.0.0 || ^3.0.0",
                 "spryker/cms-slot": "^1.0.0",
-                "spryker/cms-slot-block": "^1.0.0",
+                "spryker/cms-slot-block": "^1.1.0",
                 "spryker/cms-slot-block-gui-extension": "^1.0.0",
                 "spryker/gui": "^3.0.0",
                 "spryker/kernel": "^3.33.0",
@@ -14899,9 +14913,9 @@
             ],
             "description": "CmsSlotBlockGui module",
             "support": {
-                "source": "https://github.com/spryker/cms-slot-block-gui/tree/1.0.3"
+                "source": "https://github.com/spryker/cms-slot-block-gui/tree/1.1.0"
             },
-            "time": "2020-08-27T11:27:40+00:00"
+            "time": "2020-10-09T08:59:22+00:00"
         },
         {
             "name": "spryker/cms-slot-block-gui-extension",
@@ -15760,6 +15774,9 @@
                 "proprietary"
             ],
             "description": "ConfigurableBundleCart module",
+            "support": {
+                "source": "https://github.com/spryker/configurable-bundle-cart/tree/1.3.0"
+            },
             "time": "2020-10-07T07:20:47+00:00"
         },
         {
@@ -16121,6 +16138,9 @@
                 "proprietary"
             ],
             "description": "ConfigurableBundleStorage module",
+            "support": {
+                "source": "https://github.com/spryker/configurable-bundle-storage/tree/2.5.0"
+            },
             "time": "2020-09-30T14:57:41+00:00"
         },
         {
@@ -18990,26 +19010,26 @@
         },
         {
             "name": "spryker/elastica",
-            "version": "5.0.0",
+            "version": "6.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/elastica.git",
-                "reference": "2fe486fe0c3e0c3fcc10d13256b3109121706866"
+                "reference": "ca7af5125daa70c1255639aac620609258519cc3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/elastica/zipball/2fe486fe0c3e0c3fcc10d13256b3109121706866",
-                "reference": "2fe486fe0c3e0c3fcc10d13256b3109121706866",
+                "url": "https://api.github.com/repos/spryker/elastica/zipball/ca7af5125daa70c1255639aac620609258519cc3",
+                "reference": "ca7af5125daa70c1255639aac620609258519cc3",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.2",
-                "ruflin/elastica": "^6.0.0"
+                "ruflin/elastica": "^7.0.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "5.0.x-dev"
+                    "dev-master": "6.0.x-dev"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -19020,7 +19040,7 @@
             "support": {
                 "source": "https://github.com/spryker/elastica/tree/master"
             },
-            "time": "2019-12-09T12:25:16+00:00"
+            "time": "2020-07-28T05:37:45+00:00"
         },
         {
             "name": "spryker/entity-tag",
@@ -19281,6 +19301,9 @@
                 "proprietary"
             ],
             "description": "EventBehavior module",
+            "support": {
+                "source": "https://github.com/spryker/event-behavior"
+            },
             "time": "2020-10-20T14:19:10+00:00"
         },
         {
@@ -20464,6 +20487,9 @@
                 "proprietary"
             ],
             "description": "Gui module",
+            "support": {
+                "source": "https://github.com/spryker/gui/tree/3.37.0"
+            },
             "time": "2020-10-15T14:36:45+00:00"
         },
         {
@@ -24373,6 +24399,9 @@
                 "proprietary"
             ],
             "description": "ProductAttribute module",
+            "support": {
+                "source": "https://github.com/spryker/product-attribute/tree/1.8.0"
+            },
             "time": "2020-10-12T09:13:01+00:00"
         },
         {
@@ -24469,6 +24498,10 @@
                 "proprietary"
             ],
             "description": "ProductAttributesRestApi module",
+            "support": {
+                "issues": "https://github.com/spryker/product-attributes-rest-api/issues",
+                "source": "https://github.com/spryker/product-attributes-rest-api/tree/1.0.0"
+            },
             "time": "2020-10-05T14:05:22+00:00"
         },
         {
@@ -27401,6 +27434,9 @@
                 "proprietary"
             ],
             "description": "ProductQuantity module",
+            "support": {
+                "source": "https://github.com/spryker/product-quantity/tree/3.1.2"
+            },
             "time": "2020-10-06T07:30:11+00:00"
         },
         {
@@ -28499,6 +28535,9 @@
                 "proprietary"
             ],
             "description": "ProductStorage module",
+            "support": {
+                "source": "https://github.com/spryker/product-storage/tree/1.29.0"
+            },
             "time": "2020-10-07T07:20:47+00:00"
         },
         {
@@ -28731,6 +28770,9 @@
                 "proprietary"
             ],
             "description": "ProductsRestApi module",
+            "support": {
+                "source": "https://github.com/spryker/products-rest-api/tree/2.12.0"
+            },
             "time": "2020-09-29T10:06:13+00:00"
         },
         {
@@ -29699,6 +29741,9 @@
                 "proprietary"
             ],
             "description": "Sales module",
+            "support": {
+                "source": "https://github.com/spryker/sales/tree/11.19.0"
+            },
             "time": "2020-10-13T08:13:30+00:00"
         },
         {
@@ -31126,6 +31171,9 @@
                 "proprietary"
             ],
             "description": "SearchElasticsearch module",
+            "support": {
+                "source": "https://github.com/spryker/search-elasticsearch/tree/1.6.0"
+            },
             "time": "2020-10-15T15:11:29+00:00"
         },
         {
@@ -31434,6 +31482,9 @@
                 "proprietary"
             ],
             "description": "Session module",
+            "support": {
+                "source": "https://github.com/spryker/session/tree/4.8.1"
+            },
             "time": "2020-10-19T12:42:15+00:00"
         },
         {
@@ -33695,6 +33746,9 @@
                 "proprietary"
             ],
             "description": "Twig module",
+            "support": {
+                "source": "https://github.com/spryker/twig/tree/3.13.4"
+            },
             "time": "2020-10-13T10:19:48+00:00"
         },
         {
@@ -36364,6 +36418,9 @@
                 "interoperability",
                 "standards"
             ],
+            "support": {
+                "source": "https://github.com/symfony/http-client-contracts/tree/v2.3.1"
+            },
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -39291,16 +39348,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v3.0.5",
+            "version": "v3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "9b76b1535483cdf4edf01bb787b0217b62bd68a5"
+                "reference": "9a29e1fa7b5431969f96878b8662e3fcb18601b7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/9b76b1535483cdf4edf01bb787b0217b62bd68a5",
-                "reference": "9b76b1535483cdf4edf01bb787b0217b62bd68a5",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/9a29e1fa7b5431969f96878b8662e3fcb18601b7",
+                "reference": "9a29e1fa7b5431969f96878b8662e3fcb18601b7",
                 "shasum": ""
             },
             "require": {
@@ -39315,7 +39372,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.0-dev"
+                    "dev-master": "3.1-dev"
                 }
             },
             "autoload": {
@@ -39351,7 +39408,7 @@
             ],
             "support": {
                 "issues": "https://github.com/twigphp/Twig/issues",
-                "source": "https://github.com/twigphp/Twig/tree/v3.0.5"
+                "source": "https://github.com/twigphp/Twig/tree/v3.1.0"
             },
             "funding": [
                 {
@@ -39363,7 +39420,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-08-05T15:13:19+00:00"
+            "time": "2020-10-21T12:45:34+00:00"
         },
         {
             "name": "voku/anti-xss",
@@ -40334,22 +40391,22 @@
         },
         {
             "name": "codeception/lib-asserts",
-            "version": "1.13.1",
+            "version": "1.13.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Codeception/lib-asserts.git",
-                "reference": "263ef0b7eff80643e82f4cf55351eca553a09a10"
+                "reference": "184231d5eab66bc69afd6b9429344d80c67a33b6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Codeception/lib-asserts/zipball/263ef0b7eff80643e82f4cf55351eca553a09a10",
-                "reference": "263ef0b7eff80643e82f4cf55351eca553a09a10",
+                "url": "https://api.github.com/repos/Codeception/lib-asserts/zipball/184231d5eab66bc69afd6b9429344d80c67a33b6",
+                "reference": "184231d5eab66bc69afd6b9429344d80c67a33b6",
                 "shasum": ""
             },
             "require": {
                 "codeception/phpunit-wrapper": ">6.0.15 <6.1.0 | ^6.6.1 | ^7.7.1 | ^8.0.3 | ^9.0",
                 "ext-dom": "*",
-                "php": ">=5.6.0 <8.0"
+                "php": ">=5.6.0 <9.0"
             },
             "type": "library",
             "autoload": {
@@ -40382,9 +40439,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Codeception/lib-asserts/issues",
-                "source": "https://github.com/Codeception/lib-asserts/tree/1.13.1"
+                "source": "https://github.com/Codeception/lib-asserts/tree/1.13.2"
             },
-            "time": "2020-08-28T07:49:36+00:00"
+            "time": "2020-10-21T16:26:20+00:00"
         },
         {
             "name": "codeception/lib-innerbrowser",
@@ -40451,28 +40508,25 @@
         },
         {
             "name": "codeception/module-asserts",
-            "version": "1.3.0",
+            "version": "1.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Codeception/module-asserts.git",
-                "reference": "32e5be519faaeb60ed3692383dcd1b3390ec2667"
+                "reference": "59374f2fef0cabb9e8ddb53277e85cdca74328de"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Codeception/module-asserts/zipball/32e5be519faaeb60ed3692383dcd1b3390ec2667",
-                "reference": "32e5be519faaeb60ed3692383dcd1b3390ec2667",
+                "url": "https://api.github.com/repos/Codeception/module-asserts/zipball/59374f2fef0cabb9e8ddb53277e85cdca74328de",
+                "reference": "59374f2fef0cabb9e8ddb53277e85cdca74328de",
                 "shasum": ""
             },
             "require": {
                 "codeception/codeception": "*@dev",
                 "codeception/lib-asserts": "^1.13.1",
-                "php": ">=5.6.0 <8.0"
+                "php": ">=5.6.0 <9.0"
             },
             "conflict": {
                 "codeception/codeception": "<4.0"
-            },
-            "require-dev": {
-                "codeception/util-robohelpers": "dev-master"
             },
             "type": "library",
             "autoload": {
@@ -40505,9 +40559,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Codeception/module-asserts/issues",
-                "source": "https://github.com/Codeception/module-asserts/tree/master"
+                "source": "https://github.com/Codeception/module-asserts/tree/1.3.1"
             },
-            "time": "2020-08-28T08:06:29+00:00"
+            "time": "2020-10-21T16:48:15+00:00"
         },
         {
             "name": "codeception/module-cli",
@@ -40831,6 +40885,10 @@
                 }
             ],
             "description": "PHPUnit classes used by Codeception",
+            "support": {
+                "issues": "https://github.com/Codeception/phpunit-wrapper/issues",
+                "source": "https://github.com/Codeception/phpunit-wrapper/tree/8.1.3"
+            },
             "time": "2020-10-11T18:16:48+00:00"
         },
         {
@@ -40861,6 +40919,10 @@
                 "MIT"
             ],
             "description": "Flexible Stub wrapper for PHPUnit's Mock Builder",
+            "support": {
+                "issues": "https://github.com/Codeception/Stub/issues",
+                "source": "https://github.com/Codeception/Stub/tree/3.7.0"
+            },
             "time": "2020-07-03T15:54:43+00:00"
         },
         {
@@ -41038,6 +41100,10 @@
                 }
             ],
             "description": "This package provides Array Subset and related asserts once depracated in PHPunit 8",
+            "support": {
+                "issues": "https://github.com/rdohms/phpunit-arraysubset-asserts/issues",
+                "source": "https://github.com/rdohms/phpunit-arraysubset-asserts/tree/compat/phpunit8"
+            },
             "time": "2020-02-18T21:20:04+00:00"
         },
         {
@@ -41247,6 +41313,10 @@
                 "throwable",
                 "whoops"
             ],
+            "support": {
+                "issues": "https://github.com/filp/whoops/issues",
+                "source": "https://github.com/filp/whoops/tree/2.9.0"
+            },
             "time": "2020-10-20T12:00:00+00:00"
         },
         {
@@ -41603,6 +41673,10 @@
             "keywords": [
                 "functional"
             ],
+            "support": {
+                "issues": "https://github.com/lstrojny/functional-php/issues",
+                "source": "https://github.com/lstrojny/functional-php/tree/1.14.1"
+            },
             "time": "2020-10-12T09:48:50+00:00"
         },
         {
@@ -41702,6 +41776,10 @@
                 "object",
                 "object graph"
             ],
+            "support": {
+                "issues": "https://github.com/myclabs/DeepCopy/issues",
+                "source": "https://github.com/myclabs/DeepCopy/tree/1.x"
+            },
             "funding": [
                 {
                     "url": "https://tidelift.com/funding/github/packagist/myclabs/deep-copy",
@@ -43075,6 +43153,10 @@
                 "MIT"
             ],
             "description": "PHPStan - PHP Static Analysis Tool",
+            "support": {
+                "issues": "https://github.com/phpstan/phpstan/issues",
+                "source": "https://github.com/phpstan/phpstan/tree/0.12.50"
+            },
             "funding": [
                 {
                     "url": "https://github.com/ondrejmirtes",
@@ -43152,6 +43234,10 @@
                 "testing",
                 "xunit"
             ],
+            "support": {
+                "issues": "https://github.com/sebastianbergmann/php-code-coverage/issues",
+                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/7.0.10"
+            },
             "time": "2019-11-20T13:55:58+00:00"
         },
         {
@@ -43441,6 +43527,10 @@
                 "testing",
                 "xunit"
             ],
+            "support": {
+                "issues": "https://github.com/sebastianbergmann/phpunit/issues",
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/8.5"
+            },
             "funding": [
                 {
                     "url": "https://phpunit.de/donate.html",
@@ -43577,25 +43667,26 @@
         },
         {
             "name": "roave/signature",
-            "version": "1.1.0",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/Signature.git",
-                "reference": "c4e8a59946bad694ab5682a76e7884a9157a8a2c"
+                "reference": "bbbcc317dfe3a750e27231c5d2130153aa4c41b3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/Signature/zipball/c4e8a59946bad694ab5682a76e7884a9157a8a2c",
-                "reference": "c4e8a59946bad694ab5682a76e7884a9157a8a2c",
+                "url": "https://api.github.com/repos/Roave/Signature/zipball/bbbcc317dfe3a750e27231c5d2130153aa4c41b3",
+                "reference": "bbbcc317dfe3a750e27231c5d2130153aa4c41b3",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.1 || ^7.2"
+                "php": "7.4.*"
             },
             "require-dev": {
-                "infection/infection": "^0.7.1",
-                "phpunit/phpunit": "^7.0",
-                "squizlabs/php_codesniffer": "^3.2"
+                "doctrine/coding-standard": "^8.1",
+                "infection/infection": "^0.17.5",
+                "phpunit/phpunit": "^9.3",
+                "vimeo/psalm": "^3.16"
             },
             "type": "library",
             "autoload": {
@@ -43610,9 +43701,9 @@
             "description": "Sign and verify stuff",
             "support": {
                 "issues": "https://github.com/Roave/Signature/issues",
-                "source": "https://github.com/Roave/Signature/tree/1.1.0"
+                "source": "https://github.com/Roave/Signature/tree/1.3.0"
             },
-            "time": "2020-10-01T07:27:11+00:00"
+            "time": "2020-10-01T08:35:57+00:00"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",
@@ -44021,6 +44112,10 @@
             "keywords": [
                 "global state"
             ],
+            "support": {
+                "issues": "https://github.com/sebastianbergmann/global-state/issues",
+                "source": "https://github.com/sebastianbergmann/global-state/tree/master"
+            },
             "time": "2019-02-01T05:30:01+00:00"
         },
         {
@@ -44270,6 +44365,10 @@
             ],
             "description": "Collection of value objects that represent the types of the PHP type system",
             "homepage": "https://github.com/sebastianbergmann/type",
+            "support": {
+                "issues": "https://github.com/sebastianbergmann/type/issues",
+                "source": "https://github.com/sebastianbergmann/type/tree/master"
+            },
             "time": "2019-07-02T08:10:15+00:00"
         },
         {
@@ -45143,6 +45242,7 @@
                 "reference": "acc17f3698859e4f0e0d9191fdbd2cef30460acd",
                 "shasum": ""
             },
+            "default-branch": true,
             "type": "custom-installer",
             "autoload": {
                 "psr-4": {
@@ -45160,6 +45260,10 @@
                 }
             ],
             "description": "Source of Chromedriver with Chromium for building Docker containers and integrated usage.",
+            "support": {
+                "issues": "https://github.com/spryker/docker-chromedriver/issues",
+                "source": "https://github.com/spryker/docker-chromedriver/tree/master"
+            },
             "time": "2020-10-07T09:58:21+00:00"
         },
         {
@@ -45274,6 +45378,9 @@
                 "proprietary"
             ],
             "description": "Testify module",
+            "support": {
+                "source": "https://github.com/spryker/testify/tree/3.33.0"
+            },
             "time": "2020-10-16T07:26:06+00:00"
         },
         {
@@ -45337,16 +45444,16 @@
         },
         {
             "name": "squizlabs/php_codesniffer",
-            "version": "3.5.6",
+            "version": "3.5.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "e97627871a7eab2f70e59166072a6b767d5834e0"
+                "reference": "9d583721a7157ee997f235f327de038e7ea6dac4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/e97627871a7eab2f70e59166072a6b767d5834e0",
-                "reference": "e97627871a7eab2f70e59166072a6b767d5834e0",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/9d583721a7157ee997f235f327de038e7ea6dac4",
+                "reference": "9d583721a7157ee997f235f327de038e7ea6dac4",
                 "shasum": ""
             },
             "require": {
@@ -45389,7 +45496,7 @@
                 "source": "https://github.com/squizlabs/PHP_CodeSniffer",
                 "wiki": "https://github.com/squizlabs/PHP_CodeSniffer/wiki"
             },
-            "time": "2020-08-10T04:50:15+00:00"
+            "time": "2020-10-23T02:01:07+00:00"
         },
         {
             "name": "stecman/symfony-console-completion",
@@ -46478,6 +46585,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "spryker-feature/search": 20,
         "spryker/docker-chromedriver": 20
     },
     "prefer-stable": true,
@@ -46499,5 +46607,5 @@
     "platform-overrides": {
         "php": "7.2.24"
     },
-    "plugin-api-version": "1.1.0"
+    "plugin-api-version": "2.0.0"
 }
