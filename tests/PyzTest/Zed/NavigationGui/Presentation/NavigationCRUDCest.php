@@ -43,6 +43,8 @@ class NavigationCRUDCest
 
         $this->update($i, $idNavigation);
 
+        $i->wait(1);
+
         $this->delete($i, $idNavigation);
     }
 
