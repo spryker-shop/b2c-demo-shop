@@ -36,7 +36,7 @@ class AvailabilityAddToCartCest
 
         $i->amOnPage(AvailabilityPresentationTester::ADD_FUJITSU2_PRODUCT_TO_CART_URL);
 
-        $i->seeInTitle(CartListPage::CART_HEADER);
+        $i->see(CartListPage::CART_HEADER);
 
 //        $i->fillField(CartListPage::FIRST_CART_ITEM_QUANTITY_INPUT_XPATH, 50);
 //        $i->click(CartListPage::FIRST_CART_ITEM_CHANGE_QUANTITY_BUTTON_XPATH);
