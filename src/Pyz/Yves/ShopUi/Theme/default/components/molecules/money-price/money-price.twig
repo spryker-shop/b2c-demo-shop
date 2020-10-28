@@ -3,7 +3,8 @@
 {% block defaultPriceInner %}
     {% set defaultPriceJsName = data.parentJsName ? data.parentJsName ~ '__default-price' %}
 
-    <span class="{{ config.name }}__amount {{ defaultPriceJsName }}">
+    <span itemprop="price" content="{{ data.amount | moneyRaw }}" class="{{ config.name }}__amount {{ defaultPriceJsName }}">
+        <meta itemprop="priceCurrency" content="{{ currencyIsoCode() }}">
         {{- data.amount | money(true, data.currencyIsoCode) -}}
     </span>
 {% endblock %}
