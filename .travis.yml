@@ -306,6 +306,9 @@ jobs:
           - docker/sdk up -t
           - docker/sdk testing console queue:worker:start --stop-when-empty
           - docker/sdk testing codecept run -c codeception.acceptance.yml
+      before_install: skip
+      before_script: skip
+      after_script: skip    
 
     - name: Docker / Alpine / PHP 7.4 / Frontend & Assets
       os: linux
