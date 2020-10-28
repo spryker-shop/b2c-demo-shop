@@ -317,7 +317,6 @@ before_install:
   - phpenv config-add config/Shared/ci/travis/travis.php.ini
   - echo "extension = redis.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
   - phpenv config-rm xdebug.ini
-  - composer global require hirak/prestissimo
   # Chromedriver section
   - curl -L "https://github.com/spryker/docker-chromedriver/archive/master.zip" -o $HOME/chromium-ecosystem/docker-chromedriver.zip
   - rm -rf $HOME/chromium-ecosystem/docker-chromedriver-master
