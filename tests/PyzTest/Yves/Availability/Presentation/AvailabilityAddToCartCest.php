@@ -34,6 +34,7 @@ class AvailabilityAddToCartCest
         $scenario->skip('This test needs to be refactored since we can not use add to cart URL directly.');
         
         $i->wantTo('Open product page, and add item to cart with larger quantity than available');
+        
         $i->expectTo('Display error message');
 
         $i->amLoggedInCustomer();
