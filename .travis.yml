@@ -32,6 +32,12 @@ jobs:
       env:
         - VALIDATION=1
 
+    - php: "7.3"
+      dist: bionic
+      env:
+        - VALIDATION=1
+        - PREFER_LOWEST=1
+
     - php: "7.4"
       dist: bionic
       env:
@@ -40,23 +46,35 @@ jobs:
     - php: "7.4"
       dist: bionic
       env:
+        - TEST_GROUP=acceptance
+        - PREFER_MID=1
+
+    - php: "7.4"
+      dist: bionic
+      env:
         - TEST_GROUP=without-acceptance
 
-    - php: "7.2"
+    - php: "7.4"
+      dist: bionic
+      env:
+        - TEST_GROUP=without-acceptance
+        - PREFER_MID=1
+
+    - php: "7.3"
       dist: bionic
       env:
         - TEST_GROUP=acceptance
         - DB_ENGINE=mysql
         - APPLICATION_ENV=ci.mysql
 
-    - php: "7.2"
+    - php: "7.3"
       dist: bionic
       env:
         - TEST_GROUP=without-acceptance
         - DB_ENGINE=mysql
         - APPLICATION_ENV=ci.mysql
 
-    - php: "7.2"
+    - php: "7.3"
       dist: bionic
       env:
         - TEST_GROUP=acceptance
@@ -64,7 +82,7 @@ jobs:
         - DB_ENGINE=mysql
         - PREFER_LOWEST=1
 
-    - php: "7.2"
+    - php: "7.3"
       dist: bionic
       env:
         - TEST_GROUP=without-acceptance
@@ -152,7 +170,7 @@ jobs:
       before_script: skip
       after_script: skip
 
-    - name: Docker / Alpine / PHP 7.2 / MariaDB / Functional
+    - name: Docker / Alpine / PHP 7.3 / MariaDB / Functional
       os: linux
       dist: bionic
       language: shell
@@ -229,6 +247,86 @@ jobs:
       before_install: skip
       before_script: skip
       after_script: skip
+
+    - name: Docker / Alpine / PHP 7.3 / MariaDB / Acceptance
+      os: linux
+      dist: bionic
+      language: shell
+      env:
+        - PROGRESS_TYPE=plain
+        - SPRYKER_PLATFORM_IMAGE=spryker/php:7.3
+        - TRAVIS=1
+      addons:
+        hosts:
+          - yves.de.spryker.local
+          - zed.de.spryker.local
+          - glue.de.spryker.local
+        apt:
+          packages:
+            - apache2-utils
+            - apt-transport-https
+            - ca-certificates
+            - curl
+            - gnupg-agent
+            - pigz
+            - software-properties-common
+          sources:
+            - sourceline: "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+              key_url: https://download.docker.com/linux/ubuntu/gpg
+      install:
+          - echo eyAiZXhwZXJpbWVudGFsIiA6IHRydWUsICJmZWF0dXJlcyIgOiB7ICJidWlsZGtpdCI6IHRydWUgfSB9Cg==|base64 -d|sudo tee /etc/docker/daemon.json
+          - sudo apt-get install --only-upgrade docker-ce -y
+          - sudo curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+          - sudo chmod +x /usr/local/bin/docker-compose
+      script:
+          - git clone https://github.com/spryker/docker-sdk.git --single-branch --branch master ./docker
+          - docker/sdk boot -v deploy.ci.acceptance.mariadb.yml
+          - docker/sdk up -t
+          - docker/sdk testing console queue:worker:start --stop-when-empty
+          - docker/sdk testing codecept run -c codeception.acceptance.yml
+      before_install: skip
+      before_script: skip
+      after_script: skip
+
+    - name: Docker / Alpine / PHP 7.4 / PostgreSQL / Acceptance
+      os: linux
+      dist: bionic
+      language: shell
+      env:
+        - PROGRESS_TYPE=plain
+        - SPRYKER_PLATFORM_IMAGE=spryker/php:7.4
+        - TRAVIS=1
+      addons:
+        hosts:
+          - yves.de.spryker.local
+          - zed.de.spryker.local
+          - glue.de.spryker.local
+        apt:
+          packages:
+            - apache2-utils
+            - apt-transport-https
+            - ca-certificates
+            - curl
+            - gnupg-agent
+            - pigz
+            - software-properties-common
+          sources:
+            - sourceline: "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+              key_url: https://download.docker.com/linux/ubuntu/gpg
+      install:
+          - echo eyAiZXhwZXJpbWVudGFsIiA6IHRydWUsICJmZWF0dXJlcyIgOiB7ICJidWlsZGtpdCI6IHRydWUgfSB9Cg==|base64 -d|sudo tee /etc/docker/daemon.json
+          - sudo apt-get install --only-upgrade docker-ce -y
+          - sudo curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+          - sudo chmod +x /usr/local/bin/docker-compose
+      script:
+          - git clone https://github.com/spryker/docker-sdk.git --single-branch --branch master ./docker
+          - docker/sdk boot -v deploy.ci.acceptance.yml
+          - docker/sdk up -t
+          - docker/sdk testing console queue:worker:start --stop-when-empty
+          - docker/sdk testing codecept run -c codeception.acceptance.yml
+      before_install: skip
+      before_script: skip
+      after_script: skip    
 
     - name: Docker / Alpine / PHP 7.4 / Frontend & Assets
       os: linux
@@ -330,6 +428,7 @@ install:
   - composer install --optimize-autoloader --no-interaction
   - if [[ $PREFER_LOWEST == 1 ]] ; then composer require "spryker-feature/search:202009.0" --with-all-dependencies --optimize-autoloader ; fi
   - if [[ $PREFER_LOWEST == 1 ]] ; then config/Shared/ci/travis/install_elasticsearch_6_8.sh ; else config/Shared/ci/travis/install_elasticsearch_7_6.sh ; fi
+  - if [[ $PREFER_MID == 1 ]] ; then composer prefer-mid ; fi
   - config/Shared/ci/travis/install_mailcatcher.sh
   - if [[ -z $MP_TEST ]] ; then config/Shared/ci/travis/configure_postgres.sh ; fi
   # Exposes ${CHROMEDRIVER_BINARY} and ${CHROMIUM_BINARY}
