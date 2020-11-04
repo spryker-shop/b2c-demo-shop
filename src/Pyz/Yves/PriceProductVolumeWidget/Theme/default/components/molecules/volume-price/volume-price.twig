@@ -12,7 +12,8 @@
 
 {% block body %}
     <span class="{{ config.name }}__amount">
-        <span class="{{ config.jsName }}__price {{ config.name }}__price">
+        <meta itemprop="priceCurrency" content="{{ currencyIsoCode() }}">
+        <span itemprop="price" content="{{ data.amount | moneyRaw }}" class="{{ config.jsName }}__price {{ config.name }}__price">
             {{ data.amount | money }}
         </span>
     </span>
