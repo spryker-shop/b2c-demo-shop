@@ -377,6 +377,9 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
             $commands[] = new SprykDumpConsole();
             $commands[] = new SprykBuildConsole();
             $commands[] = new ComposerConstraintConsole();
+
+            $commands[] = new \SprykerSdk\Zed\Integrator\Communication\Console\ModuleInstallerConsole();
+            $commands[] = new \SprykerSdk\Zed\Integrator\Communication\Console\ManifestGeneratorConsole();
         }
 
         return $commands;
