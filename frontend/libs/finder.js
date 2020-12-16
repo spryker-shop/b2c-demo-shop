@@ -6,7 +6,7 @@ const defaultGlobSettings = {
     followSymlinkedDirectories: false,
     absolute: true,
     onlyFiles: true,
-    onlyDirectories: false
+    onlyDirectories: false,
 };
 
 // perform a search in a list of directories
@@ -25,7 +25,7 @@ const findFiles = (globDirs, globPatterns, globSettings) => (
         const rootConfiguration = {
             ...defaultGlobSettings,
             ...globSettings,
-            cwd: dir
+            cwd: dir,
         };
 
         const results = await resultsPromise;
