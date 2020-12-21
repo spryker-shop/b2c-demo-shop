@@ -1,0 +1,46 @@
+{
+  "SprykerShop.CatalogPage": {
+    "wire-plugin": {
+      "cfecb5a72dda82e1f1e03fed32136607cbf24209": {
+        "target": "\\Spryker\\Yves\\Twig\\TwigDependencyProvider::getTwigPlugins",
+        "source": "\\SprykerShop\\Yves\\CatalogPage\\Plugin\\Twig\\CategoryFilterTwigPlugin"
+      }
+    }
+  },
+  "Spryker.Redis": {
+    "wire-plugin": {
+      "699085dbe2f7f93a59ff8a20d4a0f5fad18c302b": {
+        "target": "\\SprykerShop\\Yves\\WebProfilerWidget\\WebProfilerWidgetDependencyProvider::getDataCollectorPlugins",
+        "source": "\\Spryker\\Yves\\Redis\\Plugin\\WebProfiler\\WebProfilerRedisDataCollectorPlugin"
+      }
+    }
+  },
+  "Spryker.ZedRequest": {
+    "wire-plugin": {
+      "79d9d400079eceaf17bbbeb306401bcfa1f9838a": {
+        "target": "\\Spryker\\Client\\ZedRequest\\ZedRequestDependencyProvider::getHeaderExpanderPlugins",
+        "source": "\\Spryker\\Client\\ZedRequest\\Plugin\\AcceptEncodingHeaderExpanderPlugin"
+      },
+      "c88394bbe6b399a0388d9527da54cbcc99bdca1e": {
+        "target": "\\Spryker\\Client\\ZedRequest\\ZedRequestDependencyProvider::getHeaderExpanderPlugins",
+        "source": "\\Spryker\\Client\\ZedRequest\\Plugin\\AuthTokenHeaderExpanderPlugin"
+      },
+      "14d3a0b60154852fd16c1e2914c321aceca5335c": {
+        "target": "\\Spryker\\Client\\ZedRequest\\ZedRequestDependencyProvider::getHeaderExpanderPlugins",
+        "source": "\\Spryker\\Client\\ZedRequest\\Plugin\\RequestIdHeaderExpanderPlugin"
+      },
+      "8d256de1a92485b82e83fd6a65e6bd90fb6be552": {
+        "target": "\\SprykerShop\\Yves\\WebProfilerWidget\\WebProfilerWidgetDependencyProvider::getDataCollectorPlugins",
+        "source": "\\Spryker\\Yves\\ZedRequest\\Plugin\\WebProfiler\\WebProfilerZedRequestDataCollectorPlugin"
+      }
+    }
+  },
+  "Spryker.SearchElasticsearch": {
+    "wire-plugin": {
+      "41caee6a4f3abe8bdad9c4a55db2aa65980285ae": {
+        "target": "\\SprykerShop\\Yves\\WebProfilerWidget\\WebProfilerWidgetDependencyProvider::getDataCollectorPlugins",
+        "source": "\\Spryker\\Yves\\SearchElasticsearch\\Plugin\\WebProfiler\\WebProfilerElasticsearchDataCollectorPlugin"
+      }
+    }
+  }
+}
