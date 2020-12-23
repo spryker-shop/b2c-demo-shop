@@ -171,15 +171,15 @@ $config[LogConstants::LOG_SANITIZE_FIELDS] = [
 // >>> OAUTH
 
 $config[OauthConstants::PRIVATE_KEY_PATH] = str_replace(
-    ['__LINE__', '\/'],
-    [PHP_EOL, '/'],
+    '__LINE__',
+    PHP_EOL,
     getenv('SPRYKER_OAUTH_KEY_PRIVATE') ?: ''
 ) ?: null;
 $config[OauthConstants::PUBLIC_KEY_PATH]
     = $config[OauthCryptographyConstants::PUBLIC_KEY_PATH]
     = str_replace(
-    ['__LINE__', '\/'],
-    [PHP_EOL, '/'],
+    '__LINE__',
+    PHP_EOL,
     getenv('SPRYKER_OAUTH_KEY_PUBLIC') ?: ''
 ) ?: null;
 $config[OauthConstants::ENCRYPTION_KEY] = getenv('SPRYKER_OAUTH_ENCRYPTION_KEY') ?: null;
