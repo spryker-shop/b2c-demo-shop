@@ -11,7 +11,6 @@ use Spryker\Service\FlysystemLocalFileSystem\Plugin\Flysystem\LocalFilesystemBui
 use Spryker\Shared\Acl\AclConstants;
 use Spryker\Shared\Application\ApplicationConstants;
 use Spryker\Shared\Application\Log\Config\SprykerLoggerConfig;
-use Spryker\Shared\Auth\AuthConstants;
 use Spryker\Shared\CmsGui\CmsGuiConstants;
 use Spryker\Shared\Customer\CustomerConstants;
 use Spryker\Shared\ErrorHandler\ErrorHandlerConstants;
@@ -42,6 +41,7 @@ use Spryker\Shared\Scheduler\SchedulerConstants;
 use Spryker\Shared\SchedulerJenkins\SchedulerJenkinsConfig;
 use Spryker\Shared\SchedulerJenkins\SchedulerJenkinsConstants;
 use Spryker\Shared\SearchElasticsearch\SearchElasticsearchConstants;
+use Spryker\Shared\SecuritySystemUser\SecuritySystemUserConstants;
 use Spryker\Shared\Session\SessionConfig;
 use Spryker\Shared\Session\SessionConstants;
 use Spryker\Shared\SessionRedis\SessionRedisConfig;
@@ -180,15 +180,8 @@ $config[OauthConstants::OAUTH_CLIENT_SECRET] = getenv('SPRYKER_OAUTH_CLIENT_SECR
 $config[UserConstants::USER_SYSTEM_USERS] = [
     'yves_system',
 ];
-$config[AuthConstants::AUTH_DEFAULT_CREDENTIALS] = [
+$config[SecuritySystemUserConstants::AUTH_DEFAULT_CREDENTIALS] = [
     'yves_system' => [
-        'rules' => [
-            [
-                'bundle' => '*',
-                'controller' => 'gateway',
-                'action' => '*',
-            ],
-        ],
         'token' => getenv('SPRYKER_ZED_REQUEST_TOKEN') ?: '',
     ],
 ];
@@ -212,13 +205,13 @@ $config[AclConstants::ACL_DEFAULT_CREDENTIALS] = [
 // ACL: Allow or disallow of urls for Zed Admin GUI for ALL users
 $config[AclConstants::ACL_DEFAULT_RULES] = [
     [
-        'bundle' => 'authentication-merchant-portal-gui',
+        'bundle' => 'security-merchant-portal-gui',
         'controller' => 'login',
         'action' => 'index',
         'type' => 'allow',
     ],
     [
-        'bundle' => 'auth',
+        'bundle' => 'security-gui',
         'controller' => '*',
         'action' => '*',
         'type' => 'allow',
@@ -284,7 +277,7 @@ $config[StorageRedisConstants::STORAGE_REDIS_DATABASE] = getenv('SPRYKER_KEY_VAL
 
 // >>> SESSION
 
-$config[AuthConstants::SYSTEM_USER_SESSION_REDIS_LIFE_TIME] = 20;
+$config[SecuritySystemUserConstants::SYSTEM_USER_SESSION_REDIS_LIFE_TIME] = 20;
 $config[SessionRedisConstants::LOCKING_TIMEOUT_MILLISECONDS] = 0;
 $config[SessionRedisConstants::LOCKING_RETRY_DELAY_MICROSECONDS] = 0;
 $config[SessionRedisConstants::LOCKING_LOCK_TTL_MILLISECONDS] = 0;

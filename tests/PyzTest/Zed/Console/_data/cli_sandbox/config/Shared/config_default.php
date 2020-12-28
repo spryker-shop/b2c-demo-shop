@@ -3,7 +3,6 @@
 use Monolog\Logger;
 use Spryker\Shared\Acl\AclConstants;
 use Spryker\Shared\Application\ApplicationConstants;
-use Spryker\Shared\Auth\AuthConstants;
 use Spryker\Shared\Cms\CmsConstants;
 use Spryker\Shared\Collector\CollectorConstants;
 use Spryker\Shared\Customer\CustomerConstants;
@@ -20,6 +19,7 @@ use Spryker\Shared\Queue\QueueConstants;
 use Spryker\Shared\Sales\SalesConstants;
 use Spryker\Shared\Search\SearchConstants;
 use Spryker\Shared\SearchElasticsearch\SearchElasticsearchConstants;
+use Spryker\Shared\SecuritySystemUser\SecuritySystemUserConstants;
 use Spryker\Shared\SequenceNumber\SequenceNumberConstants;
 use Spryker\Shared\Session\SessionConfig;
 use Spryker\Shared\Session\SessionConstants;
@@ -198,18 +198,11 @@ $config[UserConstants::USER_SYSTEM_USERS] = [
 /**
  * For a better performance you can turn off Zed authentication
  */
-$config[AuthConstants::AUTH_ZED_ENABLED]
+$config[ZedRequestConstants::AUTH_ZED_ENABLED]
     = $config[ZedRequestConstants::AUTH_ZED_ENABLED] = true;
 
-$config[AuthConstants::AUTH_DEFAULT_CREDENTIALS] = [
+$config[SecuritySystemUserConstants::AUTH_DEFAULT_CREDENTIALS] = [
     'yves_system' => [
-        'rules' => [
-            [
-                'bundle' => '*',
-                'controller' => 'gateway',
-                'action' => '*',
-            ],
-        ],
         'token' => 'JDJ5JDEwJFE0cXBwYnVVTTV6YVZXSnVmM2l1UWVhRE94WkQ4UjBUeHBEWTNHZlFRTEd4U2F6QVBqejQ2', // Please replace this token for your project
     ],
 ];
@@ -285,14 +278,7 @@ $config[AclConstants::ACL_USER_RULE_WHITELIST] = [
  */
 $config[AclConstants::ACL_DEFAULT_CREDENTIALS] = [
     'yves_system' => [
-        'rules' => [
-            [
-                'bundle' => '*',
-                'controller' => 'gateway',
-                'action' => '*',
-                'type' => 'allow',
-            ],
-        ],
+        'rules' => [],
     ],
 ];
 
