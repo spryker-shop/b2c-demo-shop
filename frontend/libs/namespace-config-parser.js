@@ -50,5 +50,5 @@ const getFilteredNamespaceConfigList = requestedArguments => {
 };
 
 module.exports = {
-    getFilteredNamespaceConfigList
+    getFilteredNamespaceConfigList,
 };
