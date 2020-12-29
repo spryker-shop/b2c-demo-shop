@@ -212,27 +212,9 @@ $config[SecuritySystemUserConstants::AUTH_DEFAULT_CREDENTIALS] = [
  */
 $config[AclConstants::ACL_DEFAULT_RULES] = [
     [
-        'bundle' => 'auth',
-        'controller' => 'login',
-        'action' => 'index',
-        'type' => 'allow',
-    ],
-    [
-        'bundle' => 'auth',
-        'controller' => 'login',
-        'action' => 'check',
-        'type' => 'allow',
-    ],
-    [
-        'bundle' => 'auth',
-        'controller' => 'password',
-        'action' => 'reset',
-        'type' => 'allow',
-    ],
-    [
-        'bundle' => 'auth',
-        'controller' => 'password',
-        'action' => 'reset-request',
+        'bundle' => 'security-gui',
+        'controller' => '*',
+        'action' => '*',
         'type' => 'allow',
     ],
     [
@@ -242,7 +224,7 @@ $config[AclConstants::ACL_DEFAULT_RULES] = [
         'type' => 'allow',
     ],
     [
-        'bundle' => 'heartbeat',
+        'bundle' => 'health-check',
         'controller' => 'index',
         'action' => 'index',
         'type' => 'allow',
@@ -257,18 +239,6 @@ $config[AclConstants::ACL_USER_RULE_WHITELIST] = [
         'bundle' => 'application',
         'controller' => '*',
         'action' => '*',
-        'type' => 'allow',
-    ],
-    [
-        'bundle' => 'auth',
-        'controller' => '*',
-        'action' => '*',
-        'type' => 'allow',
-    ],
-    [
-        'bundle' => 'heartbeat',
-        'controller' => 'heartbeat',
-        'action' => 'index',
         'type' => 'allow',
     ],
 ];
