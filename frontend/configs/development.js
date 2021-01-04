@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const filePathFilter = require('@jsdevtools/file-path-filter');
-const { findComponentEntryPoints, findStyleEntryPoints, findComponentStyles, findAppEntryPoint } = require('../libs/finder');
+const { findComponentEntryPoints, findComponentStyles, findAppEntryPoint } = require('../libs/finder');
 const { getAliasList } = require('../libs/alias');
 const { getAssetsConfig } = require('../libs/assets-configurator');
 const { buildVariantSettings } = require('../settings');
@@ -21,9 +21,8 @@ try {
 const getConfiguration = async appSettings => {
     const { buildVariant, isES6Module } = buildVariantSettings;
     const componentEntryPointsPromise = findComponentEntryPoints(appSettings.find.componentEntryPoints);
-    const styleEntryPointsPromise = findStyleEntryPoints(appSettings.find.stylesEntryPoints);
     const stylesPromise = findComponentStyles(appSettings.find.componentStyles);
-    const [componentEntryPoints, styleEntryPoints, styles] = await Promise.all([componentEntryPointsPromise, styleEntryPointsPromise, stylesPromise]);
+    const [componentEntryPoints, styles] = await Promise.all([componentEntryPointsPromise, stylesPromise]);
     const alias = getAliasList(appSettings);
 
     const vendorTs = await findAppEntryPoint(appSettings.find.shopUiEntryPoints, './vendor.ts');
@@ -33,11 +32,11 @@ const getConfiguration = async appSettings => {
     const utilScss = await findAppEntryPoint(appSettings.find.shopUiEntryPoints, './styles/util.scss');
     const sharedScss = await findAppEntryPoint(appSettings.find.shopUiEntryPoints, './styles/shared.scss');
 
-    const criticalEntryPoints = styleEntryPoints.filter(filePathFilter({
+    const criticalEntryPoints = componentEntryPoints.filter(filePathFilter({
         include: appSettings.criticalPatterns,
     }));
 
-    const nonCriticalEntryPoints = styleEntryPoints.filter(filePathFilter({
+    const nonCriticalEntryPoints = componentEntryPoints.filter(filePathFilter({
         exclude: appSettings.criticalPatterns,
     }));
 
@@ -144,7 +143,7 @@ const getConfiguration = async appSettings => {
                                 options: {
                                     resources: [
                                         sharedScss,
-                                        ...styles
+                                        ...styles,
                                     ]
                                 }
                             }

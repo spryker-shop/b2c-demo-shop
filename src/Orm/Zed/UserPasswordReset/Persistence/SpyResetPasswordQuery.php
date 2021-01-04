@@ -5,12 +5,12 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-namespace Orm\Zed\Auth\Persistence;
+namespace Orm\Zed\UserPasswordReset\Persistence;
 
-use Spryker\Zed\Auth\Persistence\Propel\AbstractSpyAuthResetPasswordArchive as BaseSpyAuthResetPasswordArchive;
+use Spryker\Zed\UserPasswordReset\Persistence\Propel\AbstractSpyResetPasswordQuery as BaseSpyResetPasswordQuery;
 
 /**
- * Skeleton subclass for representing a row from the 'spy_auth_reset_password_archive' table.
+ * Skeleton subclass for performing query and update operations on the 'spy_auth_reset_password' table.
  *
  *
  *
@@ -18,6 +18,6 @@ use Spryker\Zed\Auth\Persistence\Propel\AbstractSpyAuthResetPasswordArchive as B
  * application requirements. This class will only be generated as
  * long as it does not already exist in the output directory.
  */
-class SpyAuthResetPasswordArchive extends BaseSpyAuthResetPasswordArchive
+class SpyResetPasswordQuery extends BaseSpyResetPasswordQuery
 {
 }

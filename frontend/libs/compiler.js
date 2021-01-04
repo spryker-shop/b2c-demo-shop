@@ -43,5 +43,5 @@ const multiCompile = configs => {
 };
 
 module.exports = {
-    multiCompile
+    multiCompile,
 };
