@@ -1,18 +1,22 @@
 {
     "compilerOptions": {
-        "baseUrl": ".",
         "sourceMap": true,
         "noImplicitAny": false,
-        "module": "esnext",
+        "declaration": false,
         "moduleResolution": "node",
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "noEmitHelpers": true,
+        "importHelpers": true,
+        "skipLibCheck": true,
+        "skipDefaultLibCheck": true,
+        "target": "es2015",
+        "module": "esnext",
+        "typeRoots": ["node_modules/@types"],
+        "lib": ["dom", "esnext"],
+        "baseUrl": ".",
         "removeComments": true,
-        "target": "es5",
-        "lib": [
-            "dom",
-            "es5",
-            "es6",
-            "es7"
-        ],
+        "rootDir": ".",
         "paths": {
             "*": [
                 "*"
