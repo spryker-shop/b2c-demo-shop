@@ -40,7 +40,7 @@ export default class CustomSelect extends Component {
             minimumResultsForSearch: Infinity,
             width: this.configWidth,
             theme: this.configTheme,
-            dropdownCssClass: this.additionalClassName ? `select2-dropdown--${this.additionalClassName}` : ''
+            dropdownCssClass: this.additionalClassName ? `select2-dropdown--${this.additionalClassName}` : '',
         });
     }
 

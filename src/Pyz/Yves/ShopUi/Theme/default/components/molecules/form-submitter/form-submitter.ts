@@ -11,8 +11,9 @@ export default class FormSubmitter extends FormSubmitterCore {
             return;
         }
 
-        const submit = <HTMLButtonElement | HTMLInputElement>form.querySelector('[type="submit"]')
-            || <HTMLButtonElement>form.querySelector('button:not([type="button"])');
+        const submit =
+            <HTMLButtonElement | HTMLInputElement>form.querySelector('[type="submit"]') ||
+            <HTMLButtonElement>form.querySelector('button:not([type="button"])');
 
         if (submit) {
             submit.click();
