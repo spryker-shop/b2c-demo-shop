@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "888d8279a379c9e6d4557865c8d8f265",
+    "content-hash": "68cb41b357f8d14367f11374f86cab4b",
     "packages": [
         {
             "name": "brick/math",
@@ -22541,20 +22541,20 @@
         },
         {
             "name": "spryker/price-product",
-            "version": "4.19.1",
+            "version": "4.19.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/price-product.git",
-                "reference": "6abb9152a1014735e2c5b60298a7fa807df8790e"
+                "reference": "22a816c32eda93703117cfc3c88b245734ae8b54"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/price-product/zipball/6abb9152a1014735e2c5b60298a7fa807df8790e",
-                "reference": "6abb9152a1014735e2c5b60298a7fa807df8790e",
+                "url": "https://api.github.com/repos/spryker/price-product/zipball/22a816c32eda93703117cfc3c88b245734ae8b54",
+                "reference": "22a816c32eda93703117cfc3c88b245734ae8b54",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.2",
+                "php": ">=7.3",
                 "spryker/currency": "^3.10.0",
                 "spryker/kernel": "^3.33.0",
                 "spryker/log": "^3.7.0",
@@ -22595,7 +22595,10 @@
                 "proprietary"
             ],
             "description": "PriceProduct module",
-            "time": "2020-10-08T14:51:25+00:00"
+            "support": {
+                "source": "https://github.com/spryker/price-product/tree/4.19.2"
+            },
+            "time": "2020-11-20T12:45:18+00:00"
         },
         {
             "name": "spryker/price-product-data-import",
@@ -23020,6 +23023,51 @@
             ],
             "description": "PriceProductVolumeGui module",
             "time": "2020-07-03T08:13:47+00:00"
+        },
+        {
+            "name": "spryker/price-product-volumes-rest-api",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/price-product-volumes-rest-api.git",
+                "reference": "7ae95f9cf464128d65d6dc538d4c7c38ef4cfc65"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/price-product-volumes-rest-api/zipball/7ae95f9cf464128d65d6dc538d4c7c38ef4cfc65",
+                "reference": "7ae95f9cf464128d65d6dc538d4c7c38ef4cfc65",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.3",
+                "spryker/kernel": "^3.30.0",
+                "spryker/price-product-volume": "^3.0.0",
+                "spryker/product-prices-rest-api-extension": "^1.0.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/testify": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "PriceProductVolumesRestApi module",
+            "support": {
+                "source": "https://github.com/spryker/price-product-volumes-rest-api/tree/1.0.0"
+            },
+            "time": "2020-11-26T09:07:40+00:00"
         },
         {
             "name": "spryker/product",
@@ -26277,27 +26325,28 @@
         },
         {
             "name": "spryker/product-prices-rest-api",
-            "version": "1.4.2",
+            "version": "1.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/product-prices-rest-api.git",
-                "reference": "e9d2c2789a52e3501d2d98e0f77a61f834740d78"
+                "reference": "02173ff630a806f2dbb4b65ce174d5a761a8596e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/product-prices-rest-api/zipball/e9d2c2789a52e3501d2d98e0f77a61f834740d78",
-                "reference": "e9d2c2789a52e3501d2d98e0f77a61f834740d78",
+                "url": "https://api.github.com/repos/spryker/product-prices-rest-api/zipball/02173ff630a806f2dbb4b65ce174d5a761a8596e",
+                "reference": "02173ff630a806f2dbb4b65ce174d5a761a8596e",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.2",
+                "php": ">=7.3",
                 "spryker/currency": "^3.4.0",
                 "spryker/glue-application": "^1.8.0",
                 "spryker/glue-application-extension": "^1.0.0",
                 "spryker/kernel": "^3.30.0",
                 "spryker/price": "^5.0.0",
                 "spryker/price-product": "^2.0.0 || ^4.0.0",
-                "spryker/price-product-storage": "^2.2.0 || ^4.0.0",
+                "spryker/price-product-storage": "^2.3.0 || ^4.0.0",
+                "spryker/product-prices-rest-api-extension": "^1.0.0",
                 "spryker/product-storage": "^1.2.0",
                 "spryker/products-rest-api": "^2.0.0",
                 "spryker/store": "^1.4.0",
@@ -26322,7 +26371,51 @@
                 "proprietary"
             ],
             "description": "ProductPricesRestApi module",
-            "time": "2020-05-29T13:08:37+00:00"
+            "support": {
+                "source": "https://github.com/spryker/product-prices-rest-api/tree/1.5.0"
+            },
+            "time": "2020-11-26T07:32:41+00:00"
+        },
+        {
+            "name": "spryker/product-prices-rest-api-extension",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/product-prices-rest-api-extension.git",
+                "reference": "3843ecc9f244b0e9eb9bfbe42db0194cbc83541a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/product-prices-rest-api-extension/zipball/3843ecc9f244b0e9eb9bfbe42db0194cbc83541a",
+                "reference": "3843ecc9f244b0e9eb9bfbe42db0194cbc83541a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.3"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "ProductPricesRestApiExtension module",
+            "support": {
+                "source": "https://github.com/spryker/product-prices-rest-api-extension/tree/1.0.0"
+            },
+            "time": "2020-11-26T07:32:41+00:00"
         },
         {
             "name": "spryker/product-quantity",
@@ -44193,5 +44286,5 @@
     "platform-overrides": {
         "php": "7.3.15"
     },
-    "plugin-api-version": "1.1.0"
+    "plugin-api-version": "2.0.0"
 }
