@@ -42,6 +42,7 @@ use Spryker\Shared\Scheduler\SchedulerConstants;
 use Spryker\Shared\SchedulerJenkins\SchedulerJenkinsConfig;
 use Spryker\Shared\SchedulerJenkins\SchedulerJenkinsConstants;
 use Spryker\Shared\SearchElasticsearch\SearchElasticsearchConstants;
+use Spryker\Shared\SecurityBlocker\SecurityBlockerConstants;
 use Spryker\Shared\SecuritySystemUser\SecuritySystemUserConstants;
 use Spryker\Shared\Session\SessionConfig;
 use Spryker\Shared\Session\SessionConstants;
@@ -323,6 +324,20 @@ $config[SessionConstants::ZED_SESSION_TIME_TO_LIVE]
     = $config[SessionRedisConstants::ZED_SESSION_TIME_TO_LIVE]
     = SessionConfig::SESSION_LIFETIME_1_HOUR;
 $config[SessionConstants::ZED_SESSION_COOKIE_TIME_TO_LIVE] = SessionConfig::SESSION_LIFETIME_BROWSER_SESSION;
+
+$config[SecurityBlockerConstants::SECURITY_BLOCKER_REDIS_PERSISTENT_CONNECTION] = true;
+$config[SecurityBlockerConstants::SECURITY_BLOCKER_REDIS_PROTOCOL] = getenv('SPRYKER_KEY_VALUE_STORE_PROTOCOL') ?: 'tcp';
+$config[SecurityBlockerConstants::SECURITY_BLOCKER_REDIS_HOST] = getenv('SPRYKER_KEY_VALUE_STORE_HOST');
+$config[SecurityBlockerConstants::SECURITY_BLOCKER_REDIS_PORT] = getenv('SPRYKER_KEY_VALUE_STORE_PORT');
+$config[SecurityBlockerConstants::SECURITY_BLOCKER_REDIS_PASSWORD] = getenv('SPRYKER_KEY_VALUE_STORE_PASSWORD');
+$config[SecurityBlockerConstants::SECURITY_BLOCKER_REDIS_DATABASE] = 7;
+
+$config[SecurityBlockerConstants::SECURITY_BLOCKER_BLOCKING_TTL] = 600;
+$config[SecurityBlockerConstants::SECURITY_BLOCKER_BLOCK_FOR] = 300;
+$config[SecurityBlockerConstants::SECURITY_BLOCKER_BLOCKING_NUMBER_OF_ATTEMPTS] = 10;
+
+$config[SecurityBlockerConstants::SECURITY_BLOCKER_AGENT_BLOCK_FOR] = 360;
+$config[SecurityBlockerConstants::SECURITY_BLOCKER_AGENT_BLOCKING_NUMBER_OF_ATTEMPTS] = 9;
 
 // >>> LOGGING
 
