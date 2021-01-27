@@ -90,6 +90,13 @@ jobs:
         - DB_ENGINE=mysql
         - PREFER_LOWEST=1
 
+    - name: Security check
+      php: "7.4"
+      os: linux
+      dist: bionic
+      script:
+        - vendor/bin/console security:check
+
     - name: Docker / Alpine / PHP 7.4 / PostgreSQL / Functional
       os: linux
       dist: bionic
