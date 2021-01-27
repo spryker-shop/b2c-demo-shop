@@ -16,7 +16,7 @@ class AgentPageConfig extends SprykerAgentPageConfig
      *
      * @api
      *
-     * @deprecated Will be removed without replacement. If the future the locale-specific URL will be used.
+     * @deprecated Will be removed without replacement. In the future the locale-specific URL will be used.
      *
      * @return bool
      */
