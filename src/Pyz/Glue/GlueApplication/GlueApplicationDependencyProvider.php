@@ -15,9 +15,9 @@ use Spryker\Glue\AgentAuthRestApi\Plugin\GlueApplication\AgentCustomerSearchReso
 use Spryker\Glue\AgentAuthRestApi\Plugin\GlueApplication\AgentRestUserValidatorPlugin;
 use Spryker\Glue\AlternativeProductsRestApi\Plugin\GlueApplication\AbstractAlternativeProductsResourceRoutePlugin;
 use Spryker\Glue\AlternativeProductsRestApi\Plugin\GlueApplication\ConcreteAlternativeProductsResourceRoutePlugin;
-use Spryker\Glue\AuthRestApi\Plugin\AccessTokenRestRequestValidatorPlugin;
 use Spryker\Glue\AuthRestApi\Plugin\AccessTokensResourceRoutePlugin;
 use Spryker\Glue\AuthRestApi\Plugin\FormatAuthenticationErrorResponseHeadersPlugin;
+use Spryker\Glue\AuthRestApi\Plugin\GlueApplication\AccessTokenRestRequestValidatorPlugin;
 use Spryker\Glue\AuthRestApi\Plugin\GlueApplication\SimultaneousAuthenticationRestRequestValidatorPlugin;
 use Spryker\Glue\AuthRestApi\Plugin\RefreshTokensResourceRoutePlugin;
 use Spryker\Glue\AuthRestApi\Plugin\RestUserFinderByAccessTokenPlugin;
@@ -57,6 +57,7 @@ use Spryker\Glue\CustomersRestApi\Plugin\CustomerPasswordResourceRoutePlugin;
 use Spryker\Glue\CustomersRestApi\Plugin\CustomerRestorePasswordResourceRoutePlugin;
 use Spryker\Glue\CustomersRestApi\Plugin\CustomersResourceRoutePlugin;
 use Spryker\Glue\CustomersRestApi\Plugin\CustomersToAddressesRelationshipPlugin;
+use Spryker\Glue\CustomersRestApi\Plugin\GlueApplication\AddressByCheckoutDataResourceRelationshipPlugin;
 use Spryker\Glue\CustomersRestApi\Plugin\GlueApplication\CustomerConfirmationResourceRoutePlugin;
 use Spryker\Glue\CustomersRestApi\Plugin\SetCustomerBeforeActionPlugin;
 use Spryker\Glue\DiscountPromotionsRestApi\DiscountPromotionsRestApiConfig;
@@ -76,6 +77,7 @@ use Spryker\Glue\NavigationsCategoryNodesResourceRelationship\Plugin\GlueApplica
 use Spryker\Glue\NavigationsRestApi\NavigationsRestApiConfig;
 use Spryker\Glue\NavigationsRestApi\Plugin\ResourceRoute\NavigationsResourceRoutePlugin;
 use Spryker\Glue\OrderPaymentsRestApi\Plugin\OrderPaymentsResourceRoutePlugin;
+use Spryker\Glue\OrdersRestApi\OrdersRestApiConfig;
 use Spryker\Glue\OrdersRestApi\Plugin\OrderItemByResourceIdResourceRelationshipPlugin;
 use Spryker\Glue\OrdersRestApi\Plugin\OrderRelationshipByOrderReferencePlugin;
 use Spryker\Glue\OrdersRestApi\Plugin\OrdersResourceRoutePlugin;
@@ -128,8 +130,15 @@ use Spryker\Glue\SalesReturnsRestApi\Plugin\ReturnItemByReturnResourceRelationsh
 use Spryker\Glue\SalesReturnsRestApi\Plugin\ReturnReasonsResourceRoutePlugin;
 use Spryker\Glue\SalesReturnsRestApi\Plugin\ReturnsResourceRoutePlugin;
 use Spryker\Glue\SalesReturnsRestApi\SalesReturnsRestApiConfig;
+use Spryker\Glue\SecurityBlockerRestApi\Plugin\GlueApplication\SecurityBlockerAgentControllerAfterActionPlugin;
+use Spryker\Glue\SecurityBlockerRestApi\Plugin\GlueApplication\SecurityBlockerAgentRestRequestValidatorPlugin;
+use Spryker\Glue\SecurityBlockerRestApi\Plugin\GlueApplication\SecurityBlockerCustomerControllerAfterActionPlugin;
+use Spryker\Glue\SecurityBlockerRestApi\Plugin\GlueApplication\SecurityBlockerCustomerRestRequestValidatorPlugin;
 use Spryker\Glue\Session\Plugin\Application\SessionApplicationPlugin;
-use Spryker\Glue\ShipmentsRestApi\Plugin\GlueApplication\ShipmentMethodsByCheckoutDataResourceRelationshipPlugin;
+use Spryker\Glue\ShipmentsRestApi\Plugin\GlueApplication\OrderShipmentByOrderResourceRelationshipPlugin;
+use Spryker\Glue\ShipmentsRestApi\Plugin\GlueApplication\ShipmentMethodsByShipmentResourceRelationshipPlugin;
+use Spryker\Glue\ShipmentsRestApi\Plugin\GlueApplication\ShipmentsByCheckoutDataResourceRelationshipPlugin;
+use Spryker\Glue\ShipmentsRestApi\ShipmentsRestApiConfig;
 use Spryker\Glue\StoresRestApi\Plugin\StoresResourceRoutePlugin;
 use Spryker\Glue\UpSellingProductsRestApi\Plugin\GlueApplication\CartUpSellingProductsResourceRoutePlugin;
 use Spryker\Glue\UpSellingProductsRestApi\Plugin\GlueApplication\GuestCartUpSellingProductsResourceRoutePlugin;
@@ -265,6 +274,8 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
     protected function getRestRequestValidatorPlugins(): array
     {
         return [
+            new SecurityBlockerCustomerRestRequestValidatorPlugin(),
+            new SecurityBlockerAgentRestRequestValidatorPlugin(),
             new AccessTokenRestRequestValidatorPlugin(),
             new AgentAccessTokenRestRequestValidatorPlugin(),
             new SimultaneousAuthenticationRestRequestValidatorPlugin(),
@@ -301,6 +312,17 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
             new SetCustomerBeforeActionPlugin(),
             new SetCurrencyBeforeActionPlugin(),
             new SetPriceModeBeforeActionPlugin(),
+        ];
+    }
+
+    /**
+     * @return \Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\ControllerAfterActionPluginInterface[]
+     */
+    protected function getControllerAfterActionPlugins(): array
+    {
+        return [
+            new SecurityBlockerCustomerControllerAfterActionPlugin(),
+            new SecurityBlockerAgentControllerAfterActionPlugin(),
         ];
     }
 
@@ -440,15 +462,27 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
         );
         $resourceRelationshipCollection->addRelationship(
             CheckoutRestApiConfig::RESOURCE_CHECKOUT_DATA,
-            new ShipmentMethodsByCheckoutDataResourceRelationshipPlugin()
+            new ShipmentsByCheckoutDataResourceRelationshipPlugin()
+        );
+        $resourceRelationshipCollection->addRelationship(
+            ShipmentsRestApiConfig::RESOURCE_SHIPMENTS,
+            new ShipmentMethodsByShipmentResourceRelationshipPlugin()
         );
         $resourceRelationshipCollection->addRelationship(
             CheckoutRestApiConfig::RESOURCE_CHECKOUT_DATA,
             new PaymentMethodsByCheckoutDataResourceRelationshipPlugin()
         );
         $resourceRelationshipCollection->addRelationship(
+            CheckoutRestApiConfig::RESOURCE_CHECKOUT_DATA,
+            new AddressByCheckoutDataResourceRelationshipPlugin()
+        );
+        $resourceRelationshipCollection->addRelationship(
             SalesReturnsRestApiConfig::RESOURCE_RETURNS,
             new ReturnItemByReturnResourceRelationshipPlugin()
+        );
+        $resourceRelationshipCollection->addRelationship(
+            OrdersRestApiConfig::RESOURCE_ORDERS,
+            new OrderShipmentByOrderResourceRelationshipPlugin()
         );
         $resourceRelationshipCollection->addRelationship(
             SalesReturnsRestApiConfig::RESOURCE_RETURN_ITEMS,
