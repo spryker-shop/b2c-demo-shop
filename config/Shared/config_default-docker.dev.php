@@ -64,12 +64,6 @@ $config[ErrorHandlerConstants::IS_PRETTY_ERROR_HANDLER_ENABLED] = (bool)getenv('
 $config[ErrorHandlerConstants::ERROR_LEVEL] = getenv('SPRYKER_DEBUG_DEPRECATIONS_ENABLED') ? E_ALL : $config[ErrorHandlerConstants::ERROR_LEVEL];
 
 // ----------------------------------------------------------------------------
-// ------------------------------ AUTHENTICATION ------------------------------
-// ----------------------------------------------------------------------------
-
-require 'common/config_oauth-devvm.php';
-
-// ----------------------------------------------------------------------------
 // ------------------------------ SERVICES ------------------------------------
 // ----------------------------------------------------------------------------
 
