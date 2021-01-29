@@ -67,7 +67,7 @@ $config[ErrorHandlerConstants::ERROR_LEVEL] = getenv('SPRYKER_DEBUG_DEPRECATIONS
 // ------------------------------ AUTHENTICATION ------------------------------
 // ----------------------------------------------------------------------------
 
-require 'common/config_oauth-development.php';
+require 'common/config_oauth-devvm.php';
 
 // ----------------------------------------------------------------------------
 // ------------------------------ SERVICES ------------------------------------
