@@ -14,6 +14,16 @@ class CustomerPageConfig extends SprykerCustomerPageConfig
     protected const LOGIN_FAILURE_REDIRECT_URL = '/login';
 
     /**
+     * @uses \Pyz\Zed\Customer\CustomerConfig::MIN_LENGTH_CUSTOMER_PASSWORD
+     */
+    protected const MIN_LENGTH_CUSTOMER_PASSWORD = 8;
+
+    /**
+     * @uses \Pyz\Zed\Customer\CustomerConfig::MAX_LENGTH_CUSTOMER_PASSWORD
+     */
+    protected const MAX_LENGTH_CUSTOMER_PASSWORD = 64;
+
+    /**
      * {@inheritDoc}
      *
      * @return string|null
@@ -29,6 +39,20 @@ class CustomerPageConfig extends SprykerCustomerPageConfig
      * @return bool
      */
     public function isDoubleOptInEnabled(): bool
+    {
+        return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @api
+     *
+     * @deprecated Will be removed without replacement. In the future the locale-specific URL will be used.
+     *
+     * @return bool
+     */
+    public function isLocaleInLoginCheckPath(): bool
     {
         return true;
     }
