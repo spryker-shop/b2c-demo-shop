@@ -65,7 +65,7 @@ $config[SessionRedisConstants::ZED_SESSION_REDIS_DATABASE] = 2;
 $config[SecurityBlockerConstants::SECURITY_BLOCKER_REDIS_PERSISTENT_CONNECTION] = true;
 $config[SecurityBlockerConstants::SECURITY_BLOCKER_REDIS_PROTOCOL] = 'tcp';
 $config[SecurityBlockerConstants::SECURITY_BLOCKER_REDIS_HOST] = '127.0.0.1';
-$config[SecurityBlockerConstants::SECURITY_BLOCKER_REDIS_PORT] = 6379;
+$config[SecurityBlockerConstants::SECURITY_BLOCKER_REDIS_PORT] = 10009;
 $config[SecurityBlockerConstants::SECURITY_BLOCKER_REDIS_PASSWORD] = false;
 $config[SecurityBlockerConstants::SECURITY_BLOCKER_REDIS_DATABASE] = 7;
 
