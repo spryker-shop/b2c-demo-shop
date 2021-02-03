@@ -39,20 +39,19 @@ export default class ImageGallery extends Component {
 
         this.getCurrentSlideImage();
         this.setDefaultImageUrl();
-
     }
 
     protected onThumbnailHover(event: Event): void {
-        const thumbnail = <HTMLElement> event.target;
+        const thumbnail = <HTMLElement>event.target;
         if (thumbnail.classList.contains(`${this.jsName}-thumbnail__item`)) {
-           this.thumbnailChange(thumbnail);
+            this.thumbnailChange(thumbnail);
         }
     }
 
     protected thumbnailChange(thumbnail: HTMLElement): void {
         const index = Number(thumbnail.dataset.thumbnailIndex);
         if (!thumbnail.classList.contains(this.thumbnailActiveClass)) {
-            this.thumbnailItems.forEach(thumbnailItem => thumbnailItem.classList.remove(this.thumbnailActiveClass));
+            this.thumbnailItems.forEach((thumbnailItem) => thumbnailItem.classList.remove(this.thumbnailActiveClass));
             thumbnail.classList.add(this.thumbnailActiveClass);
             this.setActiveImage(index);
             this.getCurrentSlideImage();
@@ -61,7 +60,7 @@ export default class ImageGallery extends Component {
     }
 
     setActiveImage(activeItemIndex: number): void {
-        this.galleryItems.forEach(galleryItem => galleryItem.classList.remove(this.activeClass));
+        this.galleryItems.forEach((galleryItem) => galleryItem.classList.remove(this.activeClass));
         this.galleryItems[activeItemIndex].classList.add(this.activeClass);
     }
 
@@ -74,9 +73,9 @@ export default class ImageGallery extends Component {
     }
 
     protected getCurrentSlideImage(): void {
-        const currentSlide = this.galleryItems.filter((element: HTMLElement) => (
-            element.classList.contains(this.activeClass)
-        ))[0];
+        const currentSlide = this.galleryItems.filter((element: HTMLElement) =>
+            element.classList.contains(this.activeClass),
+        )[0];
         this.currentSlideImage = currentSlide.getElementsByTagName('img')[0];
     }
 

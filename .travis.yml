@@ -481,7 +481,8 @@ script:
   - if [[ $TEST_GROUP == 'acceptance' ]] ; then vendor/bin/codecept run -g EndToEnd -g Presentation -x DockerOnly --ext DotReporter ; fi
 
   - if [[ $VALIDATION == 1 ]] ; then node ./frontend/libs/stylelint ; fi
-  - if [[ $VALIDATION == 1 ]] ; then node ./frontend/libs/tslint stylish ; fi
+  - if [[ $VALIDATION == 1 ]] ; then node ./frontend/libs/tslint --format stylish ; fi
+  - if [[ $VALIDATION == 1 ]] ; then node ./frontend/libs/formatter ; fi
 
 notifications:
   email: false
