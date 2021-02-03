@@ -9,6 +9,7 @@ use Spryker\Shared\RabbitMq\RabbitMqEnv;
 use Spryker\Shared\SchedulerJenkins\SchedulerJenkinsConfig;
 use Spryker\Shared\SchedulerJenkins\SchedulerJenkinsConstants;
 use Spryker\Shared\SearchElasticsearch\SearchElasticsearchConstants;
+use Spryker\Shared\SecurityBlocker\SecurityBlockerConstants;
 use Spryker\Shared\Session\SessionConstants;
 use Spryker\Shared\SessionRedis\SessionRedisConstants;
 use Spryker\Shared\StorageRedis\StorageRedisConstants;
@@ -58,6 +59,22 @@ $config[SessionRedisConstants::ZED_SESSION_REDIS_HOST] = $config[StorageRedisCon
 $config[SessionRedisConstants::ZED_SESSION_REDIS_PORT] = $config[StorageRedisConstants::STORAGE_REDIS_PORT];
 $config[SessionRedisConstants::ZED_SESSION_REDIS_PASSWORD] = $config[StorageRedisConstants::STORAGE_REDIS_PASSWORD];
 $config[SessionRedisConstants::ZED_SESSION_REDIS_DATABASE] = 2;
+
+// >>> SECURITY BLOCKER
+
+$config[SecurityBlockerConstants::SECURITY_BLOCKER_REDIS_PERSISTENT_CONNECTION] = true;
+$config[SecurityBlockerConstants::SECURITY_BLOCKER_REDIS_PROTOCOL] = 'tcp';
+$config[SecurityBlockerConstants::SECURITY_BLOCKER_REDIS_HOST] = '127.0.0.1';
+$config[SecurityBlockerConstants::SECURITY_BLOCKER_REDIS_PORT] = 6379;
+$config[SecurityBlockerConstants::SECURITY_BLOCKER_REDIS_PASSWORD] = false;
+$config[SecurityBlockerConstants::SECURITY_BLOCKER_REDIS_DATABASE] = 7;
+
+$config[SecurityBlockerConstants::SECURITY_BLOCKER_BLOCKING_TTL] = 600;
+$config[SecurityBlockerConstants::SECURITY_BLOCKER_BLOCK_FOR] = 300;
+$config[SecurityBlockerConstants::SECURITY_BLOCKER_BLOCKING_NUMBER_OF_ATTEMPTS] = 10;
+
+$config[SecurityBlockerConstants::SECURITY_BLOCKER_AGENT_BLOCK_FOR] = 360;
+$config[SecurityBlockerConstants::SECURITY_BLOCKER_AGENT_BLOCKING_NUMBER_OF_ATTEMPTS] = 9;
 
 // >>> QUEUE
 
