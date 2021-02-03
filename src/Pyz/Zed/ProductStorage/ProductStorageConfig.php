@@ -44,4 +44,12 @@ class ProductStorageConfig extends SprykerProductStorageConfig
     {
         return PublisherConfig::PUBLISH_QUEUE;
     }
+
+    /**
+     * @return bool
+     */
+    public function isProductAttributesWithSingleValueIncluded(): bool
+    {
+        return false;
+    }
 }
