@@ -300,7 +300,6 @@ before_install:
   - phpenv config-add config/Shared/ci/travis/travis.php.ini
   - echo "extension = redis.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
   - phpenv config-rm xdebug.ini
-  - composer global require hirak/prestissimo
 
 install:
   - chmod -R a+x config/Shared/ci/travis/
