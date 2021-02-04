@@ -1,5 +1,9 @@
 {% extends view('payment', '@SprykerShop:CheckoutPage') %}
 
+{% define data = {
+    customForms: {},
+} %}
+
 {% block content %}
     {% embed molecule('form') with {
         modifiers: ['checkout-actions', 'checkout-form-elements'],
@@ -16,6 +20,9 @@
                 text: 'general.back.button' | trans,
                 class: 'form__action--checkout button button--hollow button--expand',
             },
+        },
+        embed: {
+            customForms: data.customForms,
         },
     } only %}
         {% block fieldset %}
@@ -61,6 +68,7 @@
                             },
                         },
                         embed: {
+                            customForms: embed.customForms,
                             index: loop.index ~ '-' ~ paymentProviderIndex,
                             toggler: data.form.paymentSelection[key],
                         },
@@ -68,7 +76,16 @@
                         {% block fieldset %}
                             <div class="js-payment-method-{{ embed.index }} {% if embed.index != '1-0' %} is-hidden{% endif %}">
                                 <h2 class="title title--primary">{{ embed.toggler.vars.label | trans }}</h2>
-                                {{ parent() }}
+
+                                {% if embed.customForms[data.form.vars.template_path] is not defined %}	                                {{ parent() }}
+                                    {{ parent() }}
+                                {% else %}
+                                    {% set viewName = embed.customForms[data.form.vars.template_path] | first %}
+                                    {% set moduleName = embed.customForms[data.form.vars.template_path] | last %}
+                                    {% include view(viewName, moduleName) ignore missing with {
+                                        form: data.form.parent,
+                                    } only %}
+                                {% endif %}
                             </div>
                         {% endblock %}
                     {% endembed %}
