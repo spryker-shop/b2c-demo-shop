@@ -1,5 +1,6 @@
 {% extends view('payment', '@SprykerShop:CheckoutPage') %}
 
+{# customForms data property is necessary for Eco custom payments integrations #}
 {% define data = {
     customForms: {},
 } %}
@@ -77,7 +78,7 @@
                             <div class="js-payment-method-{{ embed.index }} {% if embed.index != '1-0' %} is-hidden{% endif %}">
                                 <h2 class="title title--primary">{{ embed.toggler.vars.label | trans }}</h2>
 
-                                {% if embed.customForms[data.form.vars.template_path] is not defined %}	                                {{ parent() }}
+                                {% if embed.customForms[data.form.vars.template_path] is not defined %}
                                     {{ parent() }}
                                 {% else %}
                                     {% set viewName = embed.customForms[data.form.vars.template_path] | first %}
