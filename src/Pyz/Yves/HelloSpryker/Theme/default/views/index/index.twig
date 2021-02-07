@@ -1,0 +1,19 @@
+{% extends template('page-layout-main') %}
+
+{% define data = {
+    contactUsForm: _view.contactUsForm
+} %}
+
+
+{% block content %}
+
+    {{ form_start(data.contactUsForm) }}
+    {{ form_label(data.contactUsForm.name) }}
+    {{ form_widget(data.contactUsForm.name) }}
+    {{ form_label(data.contactUsForm.message) }}
+    {{ form_widget(data.contactUsForm.message) }}
+    <input type="submit" value="Contact us"
+           onclick="this.disabled=true;this.value='Sending, please wait...';this.form.submit();"/>
+    {{ form_end(data.contactUsForm) }}
+
+{% endblock %}

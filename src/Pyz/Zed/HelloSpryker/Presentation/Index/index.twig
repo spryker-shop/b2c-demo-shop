@@ -1,0 +1,51 @@
+{% extends '@Gui/Layout/layout.twig' %}
+
+
+{% block section_title %}
+    {{ 'Contact us messages' | trans }}
+{% endblock %}
+
+{% block content %}
+    <table>
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>name</th>
+            <th>message</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for contactUsDataItem in contactUsData %}
+            <tr>
+                <td>{{ contactUsDataItem['IdMessage'] }}</td>
+                <td>{{ contactUsDataItem['Name'] }}</td>
+                <td>{{ contactUsDataItem['Message'] }}</td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+
+    <style>
+        table,
+        td {
+            border: 1px solid #333;
+        }
+
+        thead,
+        tfoot {
+            background-color: #333;
+            color: #fff;
+        }
+
+        table {
+            width: 100%;
+
+        }
+        th,table{
+            text-align: center;
+        }
+
+    </style>
+
+{% endblock %}
