@@ -8,23 +8,21 @@
 {% define data = {
     formName: null,
     selectedValue: null,
-    showButton: true,
 } %}
 
 {% block body %}
     {% if data.formName is not null and data.selectedValue is not null %}
         {% block selectedValue %}
             {{ data.selectedValue }}
-            {% if data.showButton %}
-                <button type="button" class="spacing-left {{ config.name }}__button {{ config.jsName }}__trigger">
-                    {%- include atom('icon') with {
-                        modifiers: ['secondary'],
-                        data: {
-                            name: 'close',
-                        },
-                    } only -%}
-                </button>
-            {% endif %}
+
+            <button type="button" class="spacing-left {{ config.name }}__button {{ config.jsName }}__trigger">
+                {%- include atom('icon') with {
+                    modifiers: ['secondary'],
+                    data: {
+                        name: 'close',
+                    },
+                } only -%}
+            </button>
         {% endblock %}
 
         <input type="hidden" class="{{ config.jsName }}__target" name="{{ data.formName }}" value="{{ data.selectedValue }}">
