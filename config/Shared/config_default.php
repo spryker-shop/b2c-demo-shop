@@ -29,6 +29,7 @@ use Spryker\Shared\Mail\MailConstants;
 use Spryker\Shared\Monitoring\MonitoringConstants;
 use Spryker\Shared\Newsletter\NewsletterConstants;
 use Spryker\Shared\Oauth\OauthConstants;
+use Spryker\Shared\OauthCryptography\OauthCryptographyConstants;
 use Spryker\Shared\Oms\OmsConstants;
 use Spryker\Shared\ProductManagement\ProductManagementConstants;
 use Spryker\Shared\Propel\PropelConstants;
@@ -166,8 +167,18 @@ $config[LogConstants::LOG_SANITIZE_FIELDS] = [
 
 // >>> OAUTH
 
-$config[OauthConstants::PRIVATE_KEY_PATH] = getenv('SPRYKER_OAUTH_KEY_PRIVATE') ?: null;
-$config[OauthConstants::PUBLIC_KEY_PATH] = getenv('SPRYKER_OAUTH_KEY_PUBLIC') ?: null;
+$config[OauthConstants::PRIVATE_KEY_PATH] = str_replace(
+    '__LINE__',
+    PHP_EOL,
+    getenv('SPRYKER_OAUTH_KEY_PRIVATE') ?: ''
+) ?: null;
+$config[OauthConstants::PUBLIC_KEY_PATH]
+    = $config[OauthCryptographyConstants::PUBLIC_KEY_PATH]
+    = str_replace(
+        '__LINE__',
+        PHP_EOL,
+        getenv('SPRYKER_OAUTH_KEY_PUBLIC') ?: ''
+    ) ?: null;
 $config[OauthConstants::ENCRYPTION_KEY] = getenv('SPRYKER_OAUTH_ENCRYPTION_KEY') ?: null;
 $config[OauthConstants::OAUTH_CLIENT_IDENTIFIER] = getenv('SPRYKER_OAUTH_CLIENT_IDENTIFIER') ?: null;
 $config[OauthConstants::OAUTH_CLIENT_SECRET] = getenv('SPRYKER_OAUTH_CLIENT_SECRET') ?: null;
