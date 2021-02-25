@@ -8,7 +8,6 @@
 namespace Pyz\Yves\HelloSpryker;
 
 use Pyz\Yves\HelloSpryker\Form\ContactUsFormType;
-use Pyz\Zed\HelloSpryker\Business\HelloSprykerFacadeInterface;
 use Spryker\Shared\Application\ApplicationConstants;
 use Spryker\Yves\Kernel\AbstractFactory;
 use Symfony\Component\Form\FormFactory;
@@ -29,13 +28,5 @@ class HelloSprykerFactory extends AbstractFactory
     public function getFormFactory(): FormFactory
     {
         return $this->getProvidedDependency(ApplicationConstants::FORM_FACTORY);
-    }
-
-    /**
-     * @return \Pyz\Zed\HelloSpryker\Business\HelloSprykerFacadeInterface
-     */
-    public function getHelloSprykerFacade(): HelloSprykerFacadeInterface
-    {
-        return $this->getProvidedDependency(HelloSprykerDependencyProvider::FACADE_HELLO_SPRYKER);
     }
 }

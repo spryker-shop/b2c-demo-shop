@@ -28,8 +28,8 @@ class IndexController extends AbstractController
      */
     public function indexAction(Request $request)
     {
-        $entity = $this->getFacade()->getContactUsData();
+        $contactUsData = $this->getFacade()->getContactUsData();
 
-        return ['contactUsData' => $entity->virtualProperties()];
+        return ['contactUsData' => $contactUsData];
     }
 }

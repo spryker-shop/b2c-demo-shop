@@ -7,8 +7,9 @@
 
 namespace Pyz\Client\HelloSpryker;
 
-use Generated\Shared\Transfer\PyzContactUsEntityTransfer;
+use Generated\Shared\Transfer\ContactUsTransfer;
 use Spryker\Client\Kernel\AbstractClient;
+use Spryker\Shared\Kernel\Transfer\TransferInterface;
 
 /**
  * @method \Pyz\Client\HelloSpryker\HelloSprykerFactory getFactory()
@@ -16,24 +17,21 @@ use Spryker\Client\Kernel\AbstractClient;
 class HelloSprykerClient extends AbstractClient implements HelloSprykerClientInterface
 {
     /**
-     * @return \Pyz\Client\HelloSpryker\Zed\HelloSprykerStubInterface
+     * @return \Generated\Shared\Transfer\ContactUsTransfer
      */
-    protected function getZedStub()
-    {
-        return $this->getFactory()->createZedHelloSprykerStub();
-    }
-
-    /**
-     * @return \Generated\Shared\Transfer\PyzContactUsEntityTransfer
-     */
-    public function getContactUsData()
+    public function getContactUsData(): ContactUsTransfer
     {
         return $this->getFactory()
             ->createZedHelloSprykerStub()
             ->getContactUsData();
     }
 
-    public function saveContactUsData(PyzContactUsEntityTransfer $contactUsEntityTransfer)
+    /**
+     * @param \Generated\Shared\Transfer\ContactUsTransfer $contactUsEntityTransfer
+     *
+     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
+     */
+    public function saveContactUsData(ContactUsTransfer $contactUsEntityTransfer): TransferInterface
     {
         return $this->getFactory()
             ->createZedHelloSprykerStub()

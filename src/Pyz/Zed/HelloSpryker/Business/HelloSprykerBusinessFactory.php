@@ -8,8 +8,6 @@
 namespace Pyz\Zed\HelloSpryker\Business;
 
 use Pyz\Zed\HelloSpryker\Business\Model\ContactUsReader;
-use Pyz\Zed\HelloSpryker\Business\Model\ContactUsWriter;
-use Pyz\Zed\HelloSpryker\Business\Model\ContactUsWriterInterface;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 
 /**
@@ -25,17 +23,6 @@ class HelloSprykerBusinessFactory extends AbstractBusinessFactory
      */
     public function createContactUsReader(): ContactUsReader
     {
-        return new ContactUsReader($this->getQueryContainer());
-    }
-
-    /**
-     * @return \Pyz\Zed\HelloSpryker\Business\Model\ContactUsWriterInterface
-     */
-    public function createContactUsWriter(): ContactUsWriterInterface
-    {
-        return new ContactUsWriter(
-            $this->getEntityManager(),
-            $this->createContactUsReader()
-        );
+        return new ContactUsReader($this->getRepository());
     }
 }

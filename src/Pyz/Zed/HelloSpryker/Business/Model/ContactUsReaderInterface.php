@@ -7,8 +7,6 @@
 
 namespace Pyz\Zed\HelloSpryker\Business\Model;
 
-use Generated\Shared\Transfer\PyzContactUsEntityTransfer;
-
 /**
  * Class StringReader
  *
@@ -17,7 +15,7 @@ use Generated\Shared\Transfer\PyzContactUsEntityTransfer;
 interface ContactUsReaderInterface
 {
     /**
-     * @return \Generated\Shared\Transfer\PyzContactUsEntityTransfer
+     * @return \Generated\Shared\Transfer\ContactUsTransfer[]
      */
-    public function getContactUsData(): PyzContactUsEntityTransfer;
+    public function getContactUsData(): array;
 }

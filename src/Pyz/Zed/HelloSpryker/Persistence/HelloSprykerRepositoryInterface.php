@@ -9,8 +9,10 @@ namespace Pyz\Zed\HelloSpryker\Persistence;
 
 interface HelloSprykerRepositoryInterface
 {
-    /**
-     * @return \Generated\Shared\Transfer\PyzContactUsEntityTransfer
-     */
     public function all();
+
+    /**
+     * @return \Generated\Shared\Transfer\ContactUsTransfer[]
+     */
+    public function getContactUsDataSet();
 }

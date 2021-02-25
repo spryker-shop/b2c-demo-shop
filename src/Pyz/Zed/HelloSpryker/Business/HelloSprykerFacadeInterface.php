@@ -7,19 +7,19 @@
 
 namespace Pyz\Zed\HelloSpryker\Business;
 
-use Generated\Shared\Transfer\PyzContactUsEntityTransfer;
+use Generated\Shared\Transfer\ContactUsTransfer;
 
 interface HelloSprykerFacadeInterface
 {
     /**
-     * @return \Generated\Shared\Transfer\PyzContactUsEntityTransfer
+     * @return \Generated\Shared\Transfer\ContactUsTransfer[]
      */
-    public function getContactUsData();
+    public function getContactUsData(): array;
 
     /**
-     * @param \Generated\Shared\Transfer\PyzContactUsEntityTransfer $contactUsEntityTransfer
+     * @param \Generated\Shared\Transfer\ContactUsTransfer $contactUsEntityTransfer
      *
      * @return void
      */
-    public function saveContactUsData(PyzContactUsEntityTransfer $contactUsEntityTransfer);
+    public function saveContactUsData(ContactUsTransfer $contactUsEntityTransfer);
 }

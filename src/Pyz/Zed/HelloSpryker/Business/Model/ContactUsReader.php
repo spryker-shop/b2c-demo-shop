@@ -7,8 +7,7 @@
 
 namespace Pyz\Zed\HelloSpryker\Business\Model;
 
-use Generated\Shared\Transfer\PyzContactUsEntityTransfer;
-use Pyz\Zed\HelloSpryker\Persistence\HelloSprykerQueryContainerInterface;
+use Pyz\Zed\HelloSpryker\Persistence\HelloSprykerRepositoryInterface;
 
 /**
  * Class StringReader
@@ -18,30 +17,24 @@ use Pyz\Zed\HelloSpryker\Persistence\HelloSprykerQueryContainerInterface;
 class ContactUsReader implements ContactUsReaderInterface
 {
     /**
-     * @var \Pyz\Zed\HelloSpryker\Persistence\HelloSprykerQueryContainerInterface
+     * @var \Pyz\Zed\HelloSpryker\Persistence\HelloSprykerRepositoryInterface
      */
-    private $queryContainer;
+    protected $repository;
 
     /**
-     * @param \Pyz\Zed\HelloSpryker\Persistence\HelloSprykerQueryContainerInterface $queryContainer
+     * @param \Pyz\Zed\HelloSpryker\Persistence\HelloSprykerRepositoryInterface $repository
      */
-    public function __construct(HelloSprykerQueryContainerInterface $queryContainer)
+    public function __construct(HelloSprykerRepositoryInterface $repository)
     {
-        $this->queryContainer = $queryContainer;
+        $this->repository = $repository;
     }
 
     /**
-     * @return \Generated\Shared\Transfer\PyzContactUsEntityTransfer
+     * @return \Generated\Shared\Transfer\ContactUsTransfer[]
      */
-    public function getContactUsData(): PyzContactUsEntityTransfer
+    public function getContactUsData(): array
     {
-        $contactUsEntity = $this->queryContainer
-            ->queryContactUs()
-            ->find();
-
-        $contactUsTransfer = new PyzContactUsEntityTransfer();
-        $contactUsTransfer->fromArray($contactUsEntity->toArray(), true);
-
-        return $contactUsTransfer;
+        return $this->repository
+            ->getContactUsDataSet();
     }
 }

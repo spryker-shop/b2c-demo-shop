@@ -7,7 +7,7 @@
 
 namespace Pyz\Zed\HelloSpryker\Communication\Controller;
 
-use Generated\Shared\Transfer\PyzContactUsEntityTransfer;
+use Generated\Shared\Transfer\ContactUsTransfer;
 use Spryker\Zed\Kernel\Communication\Controller\AbstractGatewayController;
 
 /**
@@ -22,11 +22,11 @@ class GatewayController extends AbstractGatewayController
     }
 
     /**
-     * @param \Generated\Shared\Transfer\PyzContactUsEntityTransfer $contactUsEntityTransfer
+     * @param \Generated\Shared\Transfer\ContactUsTransfer $contactUsEntityTransfer
      *
-     * @return \Generated\Shared\Transfer\PyzContactUsEntityTransfer
+     * @return \Generated\Shared\Transfer\ContactUsTransfer
      */
-    public function saveContactUsDataAction(PyzContactUsEntityTransfer $contactUsEntityTransfer): PyzContactUsEntityTransfer
+    public function saveContactUsDataAction(ContactUsTransfer $contactUsEntityTransfer): ContactUsTransfer
     {
         return $this->getFacade()->saveContactUsData($contactUsEntityTransfer);
     }
