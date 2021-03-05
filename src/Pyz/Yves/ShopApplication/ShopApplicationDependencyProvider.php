@@ -194,10 +194,11 @@ class ShopApplicationDependencyProvider extends SprykerShopApplicationDependency
 
         return $plugins;
     }
+
     /**
      * @return \SprykerShop\Yves\ShopApplicationExtension\Dependency\Plugin\WidgetCacheKeyGeneratorStrategyPluginInterface[]
      */
-    protected function getWidgetCacheKeyGeneratorStrategyPlugins() : array
+    protected function getWidgetCacheKeyGeneratorStrategyPlugins(): array
     {
         return [
             new CartItemNoteFormWidgetCacheKeyGeneratorStrategyPlugin(),
