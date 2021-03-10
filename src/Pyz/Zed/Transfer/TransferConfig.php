@@ -20,4 +20,16 @@ class TransferConfig extends SprykerTransferConfig
             APPLICATION_SOURCE_DIR . '/Orm/Propel/*/Schema/',
         ];
     }
+    /**
+     * Specification:
+     * - When enabled, all the available transfer XML files will be checked for validity during transfer validation.
+     *
+     * @api
+     *
+     * @return bool
+     */
+    public function isTransferXmlValidationEnabled() : bool
+    {
+        return true;
+    }
 }
