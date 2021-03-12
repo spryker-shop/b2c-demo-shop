@@ -1,0 +1,39 @@
+{% extends molecule('ordered-configured-bundle-product-secondary', '@SprykerShop:SalesConfigurableBundleWidget') %}
+
+{% block extraClass %}{% endblock %}
+
+{% block body %}
+    {% set productItemColumnClass = config.name ~ '__content grid col col--expand' %}
+    {% set productInfoColumnClass = config.name ~ '__info col col--sm-12 col--xl-4' %}
+    {% set productStatusColumnClass = config.name ~ '__status col col--sm-12 col--xl-2' %}
+    {% set productPriceColumnClass = config.name ~ '__price col col--sm-4 col--xl-2' %}
+    {% set productPriceTotalColumnClass = config.name ~ '__total-price col col--sm-4 col--xl-2' %}
+
+    <div class="col grid">
+        <div class="col col--sm-12 grid grid--middle">
+            <div class="col">
+                {% block checkbox %}
+                    {% widget 'CustomerReorderItemCheckboxWidget' args [data.product] only %}{% endwidget %}
+                {% endblock %}
+            </div>
+
+            <div class="col {{ config.name }}__thumbnail-wrapper">
+                {% include molecule('product-image') with {
+                    modifiers: ['no-indent'],
+                    data: {
+                        name: data.name,
+                        image: data.image,
+                    },
+                } only %}
+            </div>
+        </div>
+    </div>
+
+    {{ block('productItemColumn') }}
+{% endblock %}
+
+{% block quantity %}
+    <div class="{{ config.name }}__quantity col col--sm-4 col--xl-2">
+        {{ 'global.quantity_symbol' | trans }} {{ data.product.quantity }}
+    </div>
+{% endblock %}

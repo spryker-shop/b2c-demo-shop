@@ -8,11 +8,16 @@
 namespace Pyz\Zed\ProductPageSearch;
 
 use Spryker\Shared\ProductLabelSearch\ProductLabelSearchConfig;
+use Spryker\Shared\ProductListSearch\ProductListSearchConfig;
 use Spryker\Shared\ProductPageSearch\ProductPageSearchConfig;
 use Spryker\Shared\ProductReviewSearch\ProductReviewSearchConfig;
+use Spryker\Zed\Availability\Communication\Plugin\ProductPageSearch\AvailabilityProductAbstractAddToCartPlugin;
 use Spryker\Zed\ProductLabelSearch\Communication\Plugin\PageDataExpander\ProductLabelDataLoaderExpanderPlugin;
 use Spryker\Zed\ProductLabelSearch\Communication\Plugin\PageDataLoader\ProductLabelDataLoaderPlugin;
 use Spryker\Zed\ProductLabelSearch\Communication\Plugin\ProductPageSearch\Elasticsearch\ProductLabelMapExpanderPlugin;
+use Spryker\Zed\ProductListSearch\Communication\Plugin\ProductPageSearch\DataExpander\ProductListDataLoadExpanderPlugin;
+use Spryker\Zed\ProductListSearch\Communication\Plugin\ProductPageSearch\DataLoader\ProductListDataLoaderPlugin;
+use Spryker\Zed\ProductListSearch\Communication\Plugin\ProductPageSearch\Elasticsearch\ProductListMapExpanderPlugin;
 use Spryker\Zed\ProductListSearch\Communication\Plugin\ProductPageSearch\ProductConcreteProductListPageDataExpanderPlugin;
 use Spryker\Zed\ProductListSearch\Communication\Plugin\ProductPageSearch\ProductConcreteProductListPageMapExpanderPlugin;
 use Spryker\Zed\ProductPageSearch\Communication\Plugin\PageDataExpander\PricePageDataLoaderExpanderPlugin;
@@ -44,6 +49,7 @@ class ProductPageSearchDependencyProvider extends SprykerProductPageSearchDepend
 
         $dataExpanderPlugins[ProductLabelSearchConfig::PLUGIN_PRODUCT_LABEL_DATA] = new ProductLabelDataLoaderExpanderPlugin();
         $dataExpanderPlugins[ProductReviewSearchConfig::PLUGIN_PRODUCT_PAGE_RATING_DATA] = new ProductReviewDataLoaderExpanderPlugin();
+        $dataExpanderPlugins[ProductListSearchConfig::PLUGIN_PRODUCT_LIST_DATA] = new ProductListDataLoadExpanderPlugin();
         $dataExpanderPlugins[ProductPageSearchConfig::PLUGIN_PRODUCT_CATEGORY_PAGE_DATA] = new ProductCategoryPageDataLoaderExpanderPlugin();
         $dataExpanderPlugins[ProductPageSearchConfig::PLUGIN_PRODUCT_PRICE_PAGE_DATA] = new PricePageDataLoaderExpanderPlugin();
         $dataExpanderPlugins[ProductPageSearchConfig::PLUGIN_PRODUCT_IMAGE_PAGE_DATA] = new ProductImagePageDataLoaderExpanderPlugin();
@@ -62,6 +68,7 @@ class ProductPageSearchDependencyProvider extends SprykerProductPageSearchDepend
             new PriceProductPageDataLoaderPlugin(),
             new ProductLabelDataLoaderPlugin(),
             new ProductReviewPageDataLoaderPlugin(),
+            new ProductListDataLoaderPlugin(),
         ];
     }
 
@@ -76,6 +83,7 @@ class ProductPageSearchDependencyProvider extends SprykerProductPageSearchDepend
             new ProductImageMapExpanderPlugin(),
             new ProductLabelMapExpanderPlugin(),
             new ProductReviewMapExpanderPlugin(),
+            new ProductListMapExpanderPlugin(),
         ];
     }
 
@@ -98,6 +106,16 @@ class ProductPageSearchDependencyProvider extends SprykerProductPageSearchDepend
         return [
             new ProductConcreteProductListPageDataExpanderPlugin(),
             new ProductImageProductConcretePageDataExpanderPlugin(),
+        ];
+    }
+
+    /**
+     * @return \Spryker\Zed\ProductPageSearchExtension\Dependency\Plugin\ProductAbstractAddToCartPluginInterface[]
+     */
+    protected function getProductAbstractAddToCartPlugins(): array
+    {
+        return [
+            new AvailabilityProductAbstractAddToCartPlugin(),
         ];
     }
 }

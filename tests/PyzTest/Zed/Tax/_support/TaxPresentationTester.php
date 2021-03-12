@@ -69,7 +69,7 @@ class TaxPresentationTester extends Actor
         $i->amLoggedInUser();
         $i->amOnPage(TaxRateCreatePage::URL);
 
-        $i->wait(4);
+        $i->disableBrowserNativeValidation('form');
 
         $i->fillField(TaxRateCreatePage::SELECTOR_NAME, TaxRateCreatePage::$taxRateData[$taxRateName]['name']);
         $i->selectOption(TaxRateCreatePage::SELECTOR_COUNTRY, TaxRateCreatePage::$taxRateData[$taxRateName]['country']);

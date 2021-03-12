@@ -12,6 +12,7 @@ use Spryker\Glue\GlueApplication\Plugin\EventDispatcher\GlueRestControllerListen
 use Spryker\Glue\Kernel\Plugin\EventDispatcher\AutoloaderCacheEventDispatcherPlugin;
 use Spryker\Glue\Router\Plugin\EventDispatcher\RouterListenerEventDispatcherPlugin;
 use Spryker\Glue\Storage\Plugin\EventDispatcher\StorageKeyCacheEventDispatcherPlugin;
+use Spryker\Shared\Http\Plugin\EventDispatcher\ResponseListenerEventDispatcherPlugin;
 
 class EventDispatcherDependencyProvider extends SprykerEventDispatcherDependencyProvider
 {
@@ -25,6 +26,7 @@ class EventDispatcherDependencyProvider extends SprykerEventDispatcherDependency
             new StorageKeyCacheEventDispatcherPlugin(),
             new AutoloaderCacheEventDispatcherPlugin(),
             new RouterListenerEventDispatcherPlugin(),
+            new ResponseListenerEventDispatcherPlugin(),
         ];
     }
 }

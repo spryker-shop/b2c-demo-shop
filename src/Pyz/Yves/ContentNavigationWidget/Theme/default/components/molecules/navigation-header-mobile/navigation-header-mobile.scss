@@ -1,0 +1,10 @@
+@mixin content-navigation-widget-navigation-header-mobile($name: '.navigation-header-mobile') {
+    #{$name} {
+        position: relative;
+        border-bottom: rem(1) dotted $setting-color-gray-3;
+
+        @content;
+    }
+}
+
+@include content-navigation-widget-navigation-header-mobile();

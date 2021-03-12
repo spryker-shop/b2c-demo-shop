@@ -29,7 +29,8 @@ class ProductStorageBusinessFactory extends SprykerProductStorageBusinessFactory
             $this->createAttributeMap(),
             $this->getQueryContainer(),
             $this->getStoreFacade(),
-            $this->getConfig()->isSendingToQueue()
+            $this->getConfig()->isSendingToQueue(),
+            $this->getProductAbstractStorageExpanderPlugins()
         );
     }
 
@@ -52,7 +53,9 @@ class ProductStorageBusinessFactory extends SprykerProductStorageBusinessFactory
     {
         return new AttributeMap(
             $this->getProductFacade(),
-            $this->getQueryContainer()
+            $this->getQueryContainer(),
+            $this->getConfig(),
+            $this->createSingleValueSuperAttributeFilter()
         );
     }
 

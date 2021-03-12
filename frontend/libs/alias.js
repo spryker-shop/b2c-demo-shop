@@ -20,5 +20,5 @@ const getAliasList = appSettings => {
 };
 
 module.exports = {
-    getAliasList
+    getAliasList,
 };

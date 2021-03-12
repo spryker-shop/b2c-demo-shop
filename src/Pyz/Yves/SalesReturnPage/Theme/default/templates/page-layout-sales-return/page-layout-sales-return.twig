@@ -1,0 +1,35 @@
+{% extends template('page-layout-sales-return', '@SprykerShop:SalesReturnPage') %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block title %}
+    <h1 class="title title--account-main title--medium">{{ data.title }}</h1>
+{% endblock %}
+
+{% block content %}
+    {% set wrapperClass = 'grid page-layout-sales-return' %}
+
+    {{ parent() }}
+
+{% endblock %}
+
+ {% block contentInner %}
+     {% set sidebarClass = 'col col--sm-12 col--lg-3 is-hidden-sm-md' %}
+     {% set contentClass = 'col col--sm-12 col--lg-9' %}
+
+     {{ parent() }}
+ {% endblock %}
+
+{% block customerNavigation %}
+    <div class="box">
+        {% widget 'CustomerNavigationWidget' args [data.activePage] with {
+            data: {
+                modifiers: ['customer-navigation'],
+            },
+        } only %}{% endwidget %}
+    </div>
+{% endblock %}
+
+{% block footer %}
+    {% include organism('footer') only %}
+{% endblock %}

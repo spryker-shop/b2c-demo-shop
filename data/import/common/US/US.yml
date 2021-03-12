@@ -1,0 +1,54 @@
+# Example of a B2C demo shop 'STORE SPECIFIC' data import for 'US' store.
+version: 0
+
+actions:
+  # Store relation
+  # CMS pages
+  - data_entity: cms-block-store
+    source: data/import/common/US/cms_block_store.csv
+  - data_entity: cms-page-store
+    source: data/import/common/US/cms_page_store.csv
+  - data_entity: product-option-price
+    source: data/import/common/US/product_option_price.csv
+  # Combined product
+  - data_entity: combined-product-abstract
+    source: data/import/common/US/combined_product.csv
+  - data_entity: combined-product-abstract-store
+    source: data/import/common/US/combined_product.csv
+  - data_entity: combined-product-concrete
+    source: data/import/common/US/combined_product.csv
+  - data_entity: combined-product-image
+    source: data/import/common/US/combined_product.csv
+  - data_entity: combined-product-price
+    source: data/import/common/US/combined_product.csv
+  - data_entity: combined-product-stock
+    source: data/import/common/US/combined_product.csv
+  - data_entity: combined-product-group
+    source: data/import/common/US/combined_product.csv
+  # Discounts
+  - data_entity: discount-amount
+    source: data/import/common/US/discount_amount.csv
+  - data_entity: discount-store
+    source: data/import/common/US/discount_store.csv
+  # Payment methods
+  - data_entity: payment-method-store
+    source: data/import/common/US/payment_method_store.csv
+  # Product
+  - data_entity: product-abstract-store
+    source: data/import/common/US/product_abstract_store.csv
+  - data_entity: product-price
+    source: data/import/common/US/product_price.csv
+  - data_entity: product-price-schedule
+    source: data/import/common/US/product_price_schedule.csv
+  - data_entity: product-label-store
+    source: data/import/common/US/product_label_store.csv
+  - data_entity: product-relation-store
+    source: data/import/common/US/product_relation_store.csv
+  # Shipment methods
+  - data_entity: shipment-method-store
+    source: data/import/common/US/shipment_method_store.csv
+  - data_entity: shipment-price
+    source: data/import/common/US/shipment_price.csv
+  # Stock
+  - data_entity: stock-store
+    source: data/import/common/US/warehouse_store.csv

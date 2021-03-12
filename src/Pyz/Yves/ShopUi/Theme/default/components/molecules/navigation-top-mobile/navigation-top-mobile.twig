@@ -8,7 +8,7 @@
 {% define data = {
     url: '/',
     searchUrl: path('search'),
-    cartQuantity: app['cart.quantity']
+    cartQuantity: getCartQuantity()
 } %}
 
 {% block body %}
@@ -55,14 +55,11 @@
                 } only %}
                     {% block button %}
                         {% if embed.item.isCart is defined %}
-                            {% include atom('cart-link') with {
+                            {% include molecule('cart-counter') with {
                                 modifiers: ['mobile'],
                                 data: {
-                                    cartQuantity: embed.cartQuantity,
+                                    quantity: embed.cartQuantity,
                                 },
-                                attributes: {
-                                    href: url('cart'),
-                                }
                             } only %}
                         {% endif %}
                     {% endblock %}

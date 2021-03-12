@@ -1,15 +1,32 @@
+@import '~nouislider/distribute/nouislider.min.css';
+
 @mixin range-slider($name: '.range-slider') {
     $width-handle: rem(24);
     $width-slider-line: calc(100% + #{rem(24)});
 
     #{$name} {
-        display: flex;
-        flex-direction: column-reverse;
-        border: none;
-        background: none;
-        height: auto;
-        box-shadow: none;
-        margin: 0 calc(#{$width-handle} / 2);
+        padding: 0 calc(#{$width-handle} / 2);
+
+        &__slider-content {
+            display: flex;
+            flex-direction: column-reverse;
+            border: none;
+            background: none;
+            height: auto;
+            box-shadow: none;
+            padding: 0 calc(#{$width-handle} / 2);
+
+            &--horizontal {
+                .noUi-handle {
+                    top: 0;
+
+                    html:not([dir='rtl']) & {
+                        right: 0;
+                        margin-right: calc(-#{$width-handle} / 2);
+                    }
+                }
+            }
+        }
 
         &__values {
             position: relative;
@@ -73,17 +90,6 @@
 
         .noUi-connect {
             background-color: $setting-color-gray-5;
-        }
-
-        &--horizontal {
-            .noUi-handle {
-                top: 0;
-
-                html:not([dir='rtl']) & {
-                    right: 0;
-                    margin-right: calc(-#{$width-handle} / 2);
-                }
-            }
         }
     }
 }

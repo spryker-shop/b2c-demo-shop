@@ -12,7 +12,7 @@ use Spryker\Yves\Router\Route\RouteCollection;
 
 class ExampleProductSaleRouteProviderPlugin extends AbstractRouteProviderPlugin
 {
-    public const ROUTE_SALE = 'sale';
+    public const ROUTE_NAME_SALE = 'sale';
 
     /**
      * @param \Spryker\Yves\Router\Route\RouteCollection $routeCollection
@@ -25,7 +25,7 @@ class ExampleProductSaleRouteProviderPlugin extends AbstractRouteProviderPlugin
         $route = $route->setRequirement('categoryPath', '\/.+');
         $route = $route->setDefault('categoryPath', null);
 
-        $routeCollection->add(static::ROUTE_SALE, $route);
+        $routeCollection->add(static::ROUTE_NAME_SALE, $route);
 
         return $routeCollection;
     }

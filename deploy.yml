@@ -3,8 +3,20 @@ version: "0.1"
 namespace: spryker_b2c
 tag: '1.0'
 
-environment: docker
-image: spryker/php:7.2
+environment: docker.dev
+image:
+    tag: spryker/php:7.3-alpine3.12
+
+composer:
+    mode: --no-dev
+    autoload: --classmap-authoritative
+
+assets:
+    mode: production
+    compression:
+        gzip:
+            static: true
+            level: 5
 
 regions:
     EU:
@@ -109,10 +121,14 @@ groups:
                                 namespace: 6
 services:
     database:
-        engine: postgres
+        engine: mysql
+        version: mariadb-10.4
         root:
             username: "root"
             password: "secret"
+        endpoints:
+            localhost:3306:
+                protocol: tcp
     broker:
         engine: rabbitmq
         api:
@@ -120,13 +136,21 @@ services:
             password: "secret"
         endpoints:
             queue.spryker.local:
+            localhost:5672:
+                protocol: tcp
     session:
         engine: redis
     key_value_store:
         engine: redis
+        endpoints:
+            localhost:16379:
+                protocol: tcp
     search:
         engine: elastic
-        version: 6.8
+        version: 7.6
+        endpoints:
+            localhost:9200:
+                protocol: tcp
     scheduler:
         engine: jenkins
         endpoints:
@@ -135,11 +159,25 @@ services:
         engine: mailhog
         endpoints:
             mail.spryker.local:
+    swagger:
+        engine: swagger-ui
+        endpoints:
+            swagger.spryker.local:
+    dashboard:
+        engine: dashboard
+        endpoints:
+            spryker.local:
 
 docker:
 
     ssl:
         enabled: false
+        redirect: true
+
+    debug:
+        enabled: false
+        xdebug:
+            enabled: false
 
     testing:
         store: DE

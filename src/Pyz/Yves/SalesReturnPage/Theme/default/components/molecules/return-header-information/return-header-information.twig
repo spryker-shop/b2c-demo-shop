@@ -1,0 +1,22 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'return-header-information',
+    tag: 'ul',
+} %}
+
+{% define data = {
+    orderReference: required,
+    createdAt: required,
+} %}
+
+{% block body %}
+    <li class="{{ config.name }}__item">
+        <div class="{{ config.name }}__name">{{ 'return_page.order_reference' | trans }}</div>
+        <span class="{{ config.name }}__text">{{ data.orderReference }}</span>
+    </li>
+    <li class="{{ config.name }}__item">
+        <div class="{{ config.name }}__name">{{ 'return_page.order_date' | trans }}</div>
+        <span class="{{ config.name }}__text">{{ data.createdAt | formatDateTime }}</span>
+    </li>
+{% endblock %}

@@ -1,31 +1,17 @@
-{% extends model('component') %}
-
-{% define config = {
-    name: 'suggestion-product'
-} %}
-
-{% define data = {
-    product: required,
-    price: required,
-    url: '',
-    image: null,
-    alt: '',
-    title: '',
-    originalPrice: required
-} %}
+{% extends molecule('suggestion-product', '@SprykerShop:CatalogPage') %}
 
 {% block body %}
-    <a class="container grid grid--middle link link--without-underline link--darkest js-suggest-search__item--navigable js-suggest-search__product-item--navigable"  href="{{ data.url }}">
+    <a class="container grid grid--middle link link--without-underline link--darkest js-suggest-search__item--navigable js-suggest-search__product-item--navigable" href="{{ data.url }}">
         <span class="col">
             {% if data.image %}
-                {% include atom('thumbnail') with {
-                    modifiers: ['catalog', 'with-overlay'],
-                    attributes: {
-                        alt: data.alt,
-                        src: data.image.external_url_small,
-                        title: data.title
-                    },
-                } only %}
+                {% set imageClasses = '' %}
+
+                {% block image %}
+                    {% set imageClasses = '' %}
+                    {% set imageModifiers = ['thumbnail', 'with-overlay', 'catalog'] %}
+
+                    {{ parent() }}
+                {% endblock %}
             {% endif %}
        </span>
 
@@ -36,8 +22,8 @@
                     modifiers: ['suggestion-product'],
                     data: {
                         amount: data.price,
-                        originalAmount: data.originalPrice is empty ? null : (data.originalPrice)
-                    }
+                        originalAmount: data.originalPrice ?? null,
+                    },
                 } only %}
             {% else %}
                 {{ 'customer.access.cannot_see_price' | trans }}

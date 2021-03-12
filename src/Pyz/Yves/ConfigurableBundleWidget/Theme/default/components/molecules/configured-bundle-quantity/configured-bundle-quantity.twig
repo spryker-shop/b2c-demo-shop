@@ -17,5 +17,6 @@
                 value: data.configuredBundle.quantity,
             },
         } only %}
+        <input type="hidden" name="change_configured_bundle_quantity_form[_token]" value="{{ csrf_token('change_configured_bundle_quantity_form') }}">
     </form>
 {% endblock %}

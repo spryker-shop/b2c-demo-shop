@@ -17,6 +17,7 @@ use Spryker\Zed\Discount\Communication\Plugin\Checkout\VoucherDiscountMaxUsageCh
 use Spryker\Zed\GiftCard\Communication\Plugin\GiftCardOrderItemSaverPlugin;
 use Spryker\Zed\GiftCardMailConnector\Communication\Plugin\Checkout\SendEmailToGiftCardUser;
 use Spryker\Zed\Kernel\Container;
+use Spryker\Zed\Payment\Communication\Plugin\Checkout\PaymentMethodValidityCheckoutPreConditionPlugin;
 use Spryker\Zed\Payment\Communication\Plugin\Checkout\PaymentOrderSaverPlugin;
 use Spryker\Zed\Payment\Communication\Plugin\Checkout\PaymentPostCheckPlugin;
 use Spryker\Zed\Payment\Communication\Plugin\Checkout\PaymentPreCheckPlugin;
@@ -37,7 +38,7 @@ class CheckoutDependencyProvider extends SprykerCheckoutDependencyProvider
     /**
      * @param \Spryker\Zed\Kernel\Container $container ’
      *
-     * @return \Spryker\Zed\Checkout\Dependency\Plugin\CheckoutPreConditionInterface[]
+     * @return \Spryker\Zed\CheckoutExtension\Dependency\Plugin\CheckoutPreConditionPluginInterface[]
      */
     protected function getCheckoutPreConditions(Container $container)
     {
@@ -50,6 +51,7 @@ class CheckoutDependencyProvider extends SprykerCheckoutDependencyProvider
             new SalesOrderThresholdCheckoutPreConditionPlugin(), #SalesOrderThresholdFeature
             new VoucherDiscountMaxUsageCheckoutPreConditionPlugin(),
             new ShipmentCheckoutPreCheckPlugin(),
+            new PaymentMethodValidityCheckoutPreConditionPlugin(),
         ];
     }
 

@@ -21,7 +21,7 @@ use Spryker\Zed\ConfigurableBundleStorage\Communication\Plugin\Event\Configurabl
 use Spryker\Zed\ConfigurableBundleStorage\Communication\Plugin\Event\ConfigurableBundleTemplateImageEventResourceBulkRepositoryPlugin;
 use Spryker\Zed\ContentStorage\Communication\Plugin\Event\ContentStorageEventResourceBulkRepositoryPlugin;
 use Spryker\Zed\EventBehavior\EventBehaviorDependencyProvider as SprykerEventBehaviorDependencyProvider;
-use Spryker\Zed\GlossaryStorage\Communication\Plugin\Event\GlossaryEventResourceQueryContainerPlugin;
+use Spryker\Zed\GlossaryStorage\Communication\Plugin\Publisher\GlossaryPublisherTriggerPlugin;
 use Spryker\Zed\NavigationStorage\Communication\Plugin\Event\NavigationEventResourceQueryContainerPlugin;
 use Spryker\Zed\PriceProductStorage\Communication\Plugin\Event\PriceProductAbstractEventResourceQueryContainerPlugin;
 use Spryker\Zed\PriceProductStorage\Communication\Plugin\Event\PriceProductConcreteEventResourceQueryContainerPlugin;
@@ -30,8 +30,6 @@ use Spryker\Zed\ProductCategoryStorage\Communication\Plugin\Event\ProductCategor
 use Spryker\Zed\ProductGroupStorage\Communication\Plugin\Event\ProductGroupEventResourceQueryContainerPlugin;
 use Spryker\Zed\ProductImageStorage\Communication\Plugin\Event\ProductAbstractImageEventResourceQueryContainerPlugin;
 use Spryker\Zed\ProductImageStorage\Communication\Plugin\Event\ProductConcreteImageEventResourceQueryContainerPlugin;
-use Spryker\Zed\ProductLabelStorage\Communication\Plugin\Event\ProductAbstractLabelEventResourceQueryContainerPlugin;
-use Spryker\Zed\ProductLabelStorage\Communication\Plugin\Event\ProductLabelDictionaryEventResourceQueryContainerPlugin;
 use Spryker\Zed\ProductOptionStorage\Communication\Plugin\Event\ProductOptionEventResourceQueryContainerPlugin;
 use Spryker\Zed\ProductPageSearch\Communication\Plugin\Event\ProductConcretePageSearchEventResourceBulkRepositoryPlugin;
 use Spryker\Zed\ProductPageSearch\Communication\Plugin\Event\ProductPageEventResourceQueryContainerPlugin;
@@ -63,7 +61,6 @@ class EventBehaviorDependencyProvider extends SprykerEventBehaviorDependencyProv
             new CategoryNodeEventResourceQueryContainerPlugin(),
             new CmsBlockEventResourceQueryContainerPlugin(),
             new CmsEventResourceQueryContainerPlugin(),
-            new GlossaryEventResourceQueryContainerPlugin(),
             new NavigationEventResourceQueryContainerPlugin(),
             new PriceProductConcreteEventResourceQueryContainerPlugin(),
             new PriceProductAbstractEventResourceQueryContainerPlugin(),
@@ -72,8 +69,6 @@ class EventBehaviorDependencyProvider extends SprykerEventBehaviorDependencyProv
             new ProductGroupEventResourceQueryContainerPlugin(),
             new ProductAbstractImageEventResourceQueryContainerPlugin(),
             new ProductConcreteImageEventResourceQueryContainerPlugin(),
-            new ProductLabelDictionaryEventResourceQueryContainerPlugin(),
-            new ProductAbstractLabelEventResourceQueryContainerPlugin(),
             new ProductOptionEventResourceQueryContainerPlugin(),
             new ProductReviewEventResourceQueryContainerPlugin(),
             new ProductSearchConfigEventResourceQueryContainerPlugin(),
@@ -89,6 +84,7 @@ class EventBehaviorDependencyProvider extends SprykerEventBehaviorDependencyProv
             new ConfigurableBundleTemplateEventResourceBulkRepositoryPlugin(),
             new ConfigurableBundleTemplateImageEventResourceBulkRepositoryPlugin(),
             new ConfigurableBundleTemplatePageSearchEventResourceBulkRepositoryPlugin(),
+            new GlossaryPublisherTriggerPlugin(),
         ];
     }
 }

@@ -11,32 +11,31 @@
 
 {% block body %}
     <div class="container">
+        <div class="{{ config.name }}__top">
+            {% embed molecule('toggler-item') with {
+                modifiers: ['mobile'],
+                class: config.name ~ '__subscription',
+                data: {
+                    title: 'global.newsletter' | trans,
+                    triggerClass: config.jsName ~ '__trigger-subscription',
+                    targetClass: config.jsName ~ '__target-subscription',
+                    hiddenClass: 'is-hidden-sm-only',
+                },
+                embed: {
+                   footerName : config.name,
+                },
+            } only %}
+                {% block contentText %}
+                    <span class="{{ embed.footerName }}__subscription-text">
+                        {{- 'footer_subscribe.subscription_text' | trans -}}
+                    </span>
+                    <div class="spacing-bottom spacing-bottom--big">
+                        {{- render(path('newsletter/subscribe')) -}}
+                    </div>
+                {% endblock %}
+            {% endembed %}
 
-        {% block footerTop %}
-            <div class="{{ config.name }}__top">
-                {% embed molecule('toggler-item') with {
-                    modifiers: ['mobile'],
-                    class: config.name ~ '__subscription',
-                    data: {
-                        title: 'global.newsletter' | trans,
-                        triggerClass: config.jsName ~ '__trigger-subscription',
-                        targetClass: config.jsName ~ '__target-subscription',
-                        hiddenClass: 'is-hidden-sm-only'
-                    },
-                    embed: {
-                       footerName : config.name
-                    }
-                } only %}
-                    {% block contentText %}
-                        <span class="{{ embed.footerName }}__subscription-text">
-                            {{- 'footer_subscribe.subscription_text' | trans -}}
-                        </span>
-                        <div class="spacing-bottom spacing-bottom--big">
-                            {{- render(path('newsletter/subscribe')) -}}
-                        </div>
-                    {% endblock %}
-                {% endembed %}
-
+            {% block footerNavigation %}
                 {% include molecule('navigation-footer') with {
                     class: config.name ~ '__navigation',
                     data: {
@@ -88,8 +87,8 @@
                         ]
                     }
                 } only %}
-            </div>
-        {% endblock %}
+            {% endblock %}
+        </div>
 
         <div class="grid grid--middle {{ config.name }}__bottom">
 
@@ -123,16 +122,6 @@
                     </a>
                 </div>
             </div>
-            <div class="col {{ config.name }}__icon-lists is-hidden-sm-only">
-                <div class="{{ config.name }}__icon-list">
-                    {% widget 'NavigationWidget' args ['PAYMENT_PROVIDERS', 'navigation-providers-payment'] %}{% endwidget %}
-                </div>
-
-                <div class="{{ config.name }}__icon-list">
-                    {% widget 'NavigationWidget' args ['SHIPMENT_PROVIDERS', 'navigation-providers-shipment'] %}{% endwidget %}
-                </div>
-            </div>
-
         </div>
 
     </div>

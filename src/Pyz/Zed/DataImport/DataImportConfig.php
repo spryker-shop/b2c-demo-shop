@@ -7,7 +7,6 @@
 
 namespace Pyz\Zed\DataImport;
 
-use Pyz\Shared\DataImport\DataImportConstants;
 use Spryker\Zed\DataImport\DataImportConfig as SprykerDataImportConfig;
 
 /**
@@ -27,7 +26,6 @@ class DataImportConfig extends SprykerDataImportConfig
     public const IMPORT_TYPE_PRODUCT_ATTRIBUTE_KEY = 'product-attribute-key';
     public const IMPORT_TYPE_PRODUCT_MANAGEMENT_ATTRIBUTE = 'product-management-attribute';
     public const IMPORT_TYPE_PRODUCT_REVIEW = 'product-review';
-    public const IMPORT_TYPE_PRODUCT_LABEL = 'product-label';
     public const IMPORT_TYPE_PRODUCT_SET = 'product-set';
     public const IMPORT_TYPE_PRODUCT_GROUP = 'product-group';
     public const IMPORT_TYPE_PRODUCT_OPTION = 'product-option';
@@ -45,23 +43,21 @@ class DataImportConfig extends SprykerDataImportConfig
     public const IMPORT_TYPE_TAX = 'tax';
     public const IMPORT_TYPE_CURRENCY = 'currency';
     public const IMPORT_TYPE_STORE = 'store';
-
     public const IMPORT_TYPE_ABSTRACT_GIFT_CARD_CONFIGURATION = 'gift-card-abstract-configuration';
     public const IMPORT_TYPE_CONCRETE_GIFT_CARD_CONFIGURATION = 'gift-card-concrete-configuration';
+    public const IMPORT_TYPE_COMBINED_PRODUCT_ABSTRACT = 'combined-product-abstract';
+    public const IMPORT_TYPE_COMBINED_PRODUCT_ABSTRACT_STORE = 'combined-product-abstract-store';
+    public const IMPORT_TYPE_COMBINED_PRODUCT_CONCRETE = 'combined-product-concrete';
+    public const IMPORT_TYPE_COMBINED_PRODUCT_IMAGE = 'combined-product-image';
+    public const IMPORT_TYPE_COMBINED_PRODUCT_PRICE = 'combined-product-price';
+    public const IMPORT_TYPE_COMBINED_PRODUCT_STOCK = 'combined-product-stock';
+    public const IMPORT_TYPE_COMBINED_PRODUCT_GROUP = 'combined-product-group';
 
     /**
      * @return string|null
      */
     public function getDefaultYamlConfigPath(): ?string
     {
-        return APPLICATION_ROOT_DIR . DIRECTORY_SEPARATOR . 'data/import/config/B2C_FULL_data_import_config_v0.yml';
-    }
-
-    /**
-     * @return bool
-     */
-    public function isInternal()
-    {
-        return ($this->getConfig()->get(DataImportConstants::IS_ENABLE_INTERNAL_IMAGE)) ? true : false;
+        return APPLICATION_ROOT_DIR . DIRECTORY_SEPARATOR . 'data/import/local/full_EU.yml';
     }
 }
