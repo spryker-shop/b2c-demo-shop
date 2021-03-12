@@ -2,14 +2,16 @@
 
 {% define data = {
     product: product | default,
-    products: products | default([])
+    products: products | default([]),
+    isUnavailableProductsDisplayed: isUnavailableProductsDisplayed | default(false),
 } %}
 
 {% block body %}
     <div class="grid grid--stretch product-list">
-        {% for availableProduct in data.products %}
-            {% if availableProduct.available %}
-                {% widget 'CmsProductGroupWidget' args [availableProduct] only %}{% endwidget %}
+        {% for product in data.products %}
+            {% if data.isUnavailableProductsDisplayed or product.available %}
+                {% widget 'CmsProductGroupWidget' args [product] only %}
+                {% endwidget %}
             {% endif %}
         {% endfor %}
     </div>
