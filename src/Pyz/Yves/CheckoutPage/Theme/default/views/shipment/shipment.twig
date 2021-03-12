@@ -17,6 +17,9 @@
                 class: 'form__action--checkout button button--hollow button--expand',
             },
         },
+        embed: {
+            cart: data.forms.shipment.vars.data,
+        },
     } only %}
         {% block fieldset %}
             {% set shipmentGroupCollectionForm = data.form.shipmentGroups | default %}
@@ -38,18 +41,33 @@
                                 }) }}
                             </h3>
 
-                            {% for item in shipmentGroupForm.vars.data.items %}
-                                {% set item = item.bundleProduct ?? item %}
+                            {% set cartItems = shipmentGroupForm.vars.data.cartItems %}
+                            {% set itemsExceptConfiguredBundles = cartItems | filter(item => item.configuredBundleItem is not defined or item.configuredBundleItem is empty) %}
 
-                                {% embed molecule('product-item') with {
+                            {% widget 'QuoteConfiguredBundleWidget' args [embed.cart] with {
+                                data: {
+                                    isEditable: false,
+                                    isQuantityVisible: true,
+                                },
+                            } only %}
+                            {% endwidget %}
+
+                            {% for item in itemsExceptConfiguredBundles %}
+                                {% set cartItem = item.bundleProduct ?? item %}
+
+                                {% embed molecule('product-card-item') with {
                                     modifiers: ['expand', 'secondary', 'alternative', 'right-indent-from-tablet'],
                                     data: {
-                                        productItem: item,
+                                        productItem: cartItem,
                                         canEditCart: false,
                                         additionalContainerClass: '',
                                         productOptionsModifiers: ['alternative'],
                                     },
+                                    embed: {
+                                        bundleItems: item.bundleItems | default([]),
+                                    },
                                 } only %}
+                                    {% import _self as component %}
                                     {% block image %}
                                         <div class="{{ component.renderClass(config.name ~ '__image', modifiers) }} col">
                                             {% include molecule('product-image') with {
@@ -78,7 +96,13 @@
                                         {% endif %}
                                     {% endblock %}
 
-                                    {% block bundles %}{% endblock %}
+                                    {% block bundles %}
+                                        {% include molecule('cart-bundle-list', 'ProductBundleWidget') ignore missing with {
+                                            data: {
+                                                items: embed.bundleItems,
+                                            },
+                                        } only %}
+                                    {% endblock %}
                                 {% endembed %}
                             {% endfor %}
                         </div>

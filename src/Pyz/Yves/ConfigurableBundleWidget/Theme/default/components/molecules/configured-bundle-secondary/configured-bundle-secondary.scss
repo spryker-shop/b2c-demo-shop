@@ -1,0 +1,49 @@
+@import '../configured-bundle/configured-bundle';
+
+@mixin configurable-bundle-widget-configured-bundle-secondary($name: '.configured-bundle-secondary') {
+    @include configurable-bundle-widget-configured-bundle($name) {
+        margin-right: 0;
+
+        &__title {
+            font-size: map-get($setting-font-size, big);
+        }
+
+        &__bundle-total {
+            width: 100%;
+            justify-content: flex-start;
+            margin-left: rem(-16);
+
+            @include helper-breakpoint-media-min($xxl-min) {
+                width: 50%;
+                justify-content: flex-end;
+                margin-left: 0;
+            }
+        }
+
+        &__col {
+            justify-content: flex-start;
+            margin-left: rem(5);
+
+            @include helper-breakpoint-media-min($xxl-min) {
+                justify-content: center;
+                margin-left: 0;
+            }
+        }
+
+        &__quantity {
+            display: flex;
+
+            @include helper-breakpoint-media-min($xxl-min) {
+                justify-content: center;
+            }
+        }
+
+        &__tolal {
+            font-weight: fw(medium);
+        }
+
+        @content;
+    }
+}
+
+@include configurable-bundle-widget-configured-bundle-secondary();

@@ -25,23 +25,30 @@ const getFilteredNamespaceConfigList = requestedArguments => {
         .filter(requestedNamespace => !namespaceMap.has(requestedNamespace))
         .map(printWrongNamespaceMessage);
 
+    const generateNamespaceConfig = requestedNamespace => {
+        const namespaceConfig = Object.assign(namespaceMap.get(requestedNamespace));
+        namespaceConfig.themes.push(namespaceConfig.defaultTheme);
+
+        if (!requestedArguments.themes.length) {
+            return namespaceConfig;
+        }
+
+        requestedArguments.themes.map(theme => {
+            if (!namespaceConfig.themes.includes(theme)) {
+                console.warn(`Theme "${theme}" does not exist in "${requestedNamespace}" namespace.`);
+            }
+        });
+
+        namespaceConfig.themes = namespaceConfig.themes.filter(namespaceTheme => requestedArguments.themes.includes(namespaceTheme));
+
+        return namespaceConfig;
+    };
+
     return requestedArguments.namespaces
         .filter(requestedNamespace => namespaceMap.has(requestedNamespace))
-        .map(requestedNamespace => {
-            const namespaceConfig = Object.assign(namespaceMap.get(requestedNamespace));
-            namespaceConfig.themes.push(namespaceConfig.defaultTheme);
-            if (requestedArguments.themes.length) {
-                requestedArguments.themes.map(theme => {
-                    if(!namespaceConfig.themes.includes(theme)){
-                        console.warn(`Theme "${theme}" does not exist in "${requestedNamespace}" namespace.`)
-                    }
-                });
-                namespaceConfig.themes = namespaceConfig.themes.filter(namespaceTheme => requestedArguments.themes.includes(namespaceTheme));
-            }
-            return namespaceConfig;
-        });
+        .map(requestedNamespace => generateNamespaceConfig(requestedNamespace));
 };
 
 module.exports = {
-    getFilteredNamespaceConfigList
+    getFilteredNamespaceConfigList,
 };

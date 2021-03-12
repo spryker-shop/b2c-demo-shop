@@ -1,3 +1,4 @@
+{# @deprecated Use molecule 'product-item' instead. #}
 {% extends molecule('product-card', '@SprykerShop:ShopUi') %}
 
 {% block body %}
@@ -8,12 +9,11 @@
                     href="{{ data.url }}"
                     class="{{ config.name }}__overlay js-product-color-group__image-{{ data.abstractId }}"
                 >
-                    {% include atom('thumbnail') with {
-                        modifiers: ['no-margin', 'product-card'],
-                        attributes: {
-                            alt: data.name,
-                            src: data.imageUrl,
-                            title: data.name,
+                    {% include molecule('lazy-image') with {
+                        modifiers: ['thumbnail', 'spaceless'],
+                        data: {
+                            imageSrc: data.imageUrl,
+                            imageTitle: data.name,
                         },
                     } only %}
                 </a>

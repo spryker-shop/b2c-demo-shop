@@ -31,11 +31,9 @@ export default class SlickCarousel extends Component {
             }
         });
 
-        this.$container.slick(
-            this.sliderConfig
-        );
+        this.$container.slick(this.sliderConfig);
 
-        if ('ontouchstart' in document.documentElement){
+        if ('ontouchstart' in document.documentElement) {
             this.$container.slick('slickPause');
         }
     }

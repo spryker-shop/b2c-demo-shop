@@ -20,6 +20,10 @@ class QuoteConfig extends SprykerQuoteConfig
         return array_merge(parent::getQuoteFieldsAllowedForSaving(), [
             QuoteTransfer::BUNDLE_ITEMS,
             QuoteTransfer::CART_NOTE, #CartNoteFeature
+            QuoteTransfer::VOUCHER_DISCOUNTS, #PromotionsDiscountsFeature
+            QuoteTransfer::CART_RULE_DISCOUNTS, #PromotionsDiscountsFeature
+            QuoteTransfer::PROMOTION_ITEMS, #PromotionsDiscountsFeature
+            QuoteTransfer::GIFT_CARDS, #GiftCardFeature
         ]);
     }
 }

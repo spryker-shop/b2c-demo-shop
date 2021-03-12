@@ -154,7 +154,7 @@ class CustomerStepTest extends Unit
     /**
      * @return \PHPUnit\Framework\MockObject\MockObject|\Spryker\Yves\StepEngine\Dependency\Plugin\Handler\StepHandlerPluginInterface
      */
-    protected function createAuthHandlerMock()
+    protected function createAuthHandlerMock(): StepHandlerPluginInterface
     {
         return $this->getMockBuilder(StepHandlerPluginInterface::class)->getMock();
     }
@@ -170,7 +170,7 @@ class CustomerStepTest extends Unit
     /**
      * @return \PHPUnit\Framework\MockObject\MockObject|\SprykerShop\Yves\CheckoutPage\Dependency\Client\CheckoutPageToCustomerClientInterface
      */
-    protected function createCustomerClientMock()
+    protected function createCustomerClientMock(): CheckoutPageToCustomerClientInterface
     {
         return $this->getMockBuilder(CheckoutPageToCustomerClientInterface::class)->getMock();
     }

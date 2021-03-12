@@ -1,29 +1,30 @@
-{% extends model('component') %}
-
-{% define config = {
-    name: 'gift-card-payment-summary',
-    tag: 'ul',
-} %}
-
-{% define data = {
-    cart: required,
-    isQuoteEditable: false,
-} %}
+{% extends molecule('gift-card-payment-summary', '@SprykerShop:GiftCardWidget') %}
 
 {% block body %}
     {% for payment in data.cart.payments %}
-        {% if payment.giftCard is defined and payment.giftCard %}
-            <li class="{{ config.name }}__list-item">
-                {{ 'cart.giftcard.label' | trans }}: {{ payment.giftCard.code }}
+        {% if payment.giftCard ?? false %}
+            <li class="{{ config.name }}__list-item grid">
+                <div class="grid col">
+                    <div class="col">
+                        {{ 'cart.giftcard.label' | trans }}: {{ payment.giftCard.code }}
+                    </div>
+                    {% if data.isQuoteEditable %}
+                        <div class="col spacing-left">
+                            {% include molecule('single-button-form') with {
+                                data: {
+                                    formAction: url('cart-code/code/remove', {'code': payment.giftCard.code}),
+                                    buttonText: 'cart.voucher.remove' | trans,
+                                    buttonClass: 'link link--darkest text-small',
+                                    iconName: '',
+                                    fieldName: 'cart_code_remove_form[_token]',
+                                    fieldValue: csrf_token('cart_code_remove_form'),
+                                },
+                            } only %}
+                        </div>
+                    {% endif %}
+                </div>
 
-                {% include molecule('cart-code-remove-link', 'CartCodeWidget') ignore missing with {
-                    class: 'text-small',
-                    data: {
-                        isQuoteEditable: data.isQuoteEditable,
-                        code: payment.giftCard.code,
-                    },
-                } only %}
-                <span class="float-right">- {{ payment.amount | money }}</span>
+                <span class="col col--right">- {{ payment.amount | money }}</span>
             </li>
         {% else %}
             <li class="{{ config.name }}__list-item">

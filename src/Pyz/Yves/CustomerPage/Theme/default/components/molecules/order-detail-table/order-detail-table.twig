@@ -13,22 +13,26 @@
                     }) }}
                 </h3>
 
-                {% for item in shipmentGroup.items %}
-                    {% set isGiftCardExists = item.giftCardMetadata is not null and item.giftCardMetadata.isGiftCard %}
-                    {% set item = item.bundleProduct ?? item %}
+                {% set itemsExceptConfiguredBundles = shipmentGroup.cartItems | filter(item => item.salesOrderConfiguredBundleItem is not defined or item.salesOrderConfiguredBundleItem is empty) %}
 
-                    {% embed molecule('product-item') with {
+                {% for item in itemsExceptConfiguredBundles %}
+                    {% set cartItem = item.bundleProduct ?? item %}
+                    {% set isGiftCardExists = cartItem.giftCardMetadata is not null and cartItem.giftCardMetadata.isGiftCard %}
+
+                    {% embed molecule('product-card-item') with {
                         modifiers: ['expand', 'secondary', 'alternative', 'right-indent-from-tablet', 'with-checkbox'],
                         data: {
-                            productItem: item,
+                            productItem: cartItem,
                             canEditCart: false,
                             additionalContainerClass: '',
                             productOptionsModifiers: ['alternative'],
                         },
                         embed: {
                             order: data.order,
+                            bundleItems: item.bundleItems | default([]),
                         },
                     } only %}
+                        {% import _self as component %}
                         {% block image %}
                             <div class="grid grid--middle col">
                                 {% if embed.order is not empty %}
@@ -69,9 +73,34 @@
                             {% endif %}
                         {% endblock %}
 
-                        {% block bundles %}{% endblock %}
+                        {% block state %}
+                            {% set itemState = data.productItem.state ?? {} %}
+
+                            {% if itemState %}
+                                {% set state = itemState.name | replace({' ': '-'}) | lower %}
+                                {% set stateLabel = itemState.displayName ?? ('oms.state.' ~ state) %}
+
+                                {% include molecule('status') with {
+                                    data: {
+                                        label: stateLabel | trans,
+                                        status: state,
+                                    },
+                                } only %}
+                            {% endif %}
+                        {% endblock %}
+
+                        {% block bundles %}
+                            {% include molecule('cart-bundle-list', 'ProductBundleWidget') ignore missing with {
+                                data: {
+                                    items: embed.bundleItems,
+                                },
+                            } only %}
+                        {% endblock %}
                     {% endembed %}
                 {% endfor %}
+
+                {% widget 'OrderItemsConfiguredBundleWidget' args [shipmentGroup.items] only %}
+                {% endwidget %}
             </div>
 
             <div class="col col--sm-12 col--xl-4">

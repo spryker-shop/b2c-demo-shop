@@ -2,37 +2,39 @@
 
 {% define data = {
     orders: _view.orderList,
+    ordersAggregatedItemStateDisplayNames: _view.ordersAggregatedItemStateDisplayNames | default([]),
 
     pagination: {
         parameters: {},
         currentPage: _view.pagination.page,
         paginationPath: 'customer/order',
         maxPage: _view.pagination.lastPage,
-        showAlwaysFirstAndLast: true
+        showAlwaysFirstAndLast: true,
     },
 
     title: 'customer.account.order_history' | trans,
-    activePage: 'order'
+    activePage: 'order',
 } %}
 
 {% block customerContent %}
     <div class="box">
         {% include molecule('title-box', 'CustomerPage') with {
             data: {
-                title: 'customer.order.all_orders' | trans
-            }
+                title: 'customer.order.all_orders' | trans,
+            },
         } only %}
 
         {% include molecule('order-table', 'CustomerPage') with {
             data: {
-                orders: data.orders
-            }
+                orders: data.orders,
+                ordersAggregatedItemStateDisplayNames: data.ordersAggregatedItemStateDisplayNames,
+            },
         } only %}
 
         <hr>
 
         {% include molecule('pagination') with {
-            data: data.pagination
+            data: data.pagination,
         } only %}
     </div>
 {% endblock %}

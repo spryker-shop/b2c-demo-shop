@@ -1,0 +1,18 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'return-reason',
+} %}
+
+{% define data = {
+    returnReason: required,
+    returnReasonTitle: 'return_page.return_reasons.title' | trans,
+} %}
+
+{% block extraClass %}
+    spacing-y
+{% endblock %}
+
+{% block body %}
+    {{ data.returnReasonTitle }} {{ data.returnReason }}
+{% endblock %}

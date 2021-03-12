@@ -30,6 +30,9 @@ sections:
         maintenance-yves-off:
             command: "vendor/bin/console maintenance:disable yves"
 
+    composer:
+        composer-autoloader:
+            command: "composer dumpautoload --apcu"
 
     environment:
         console-environment:
@@ -43,8 +46,28 @@ sections:
         remove-cache:
             command: "vendor/bin/console cache:empty-all"
 
-        remove-generated-files:
-            command: "vendor/bin/console setup:empty-generated-directory"
+        remove-auto-completion:
+            command: "vendor/bin/console dev:ide-auto-completion:remove"
+
+        remove-request-validation-cache:
+            command: "vendor/bin/console rest-api:remove-validation-cache"
+            stores: true
+
+        remove-navigation-cache:
+            command: "vendor/bin/console navigation:cache:remove"
+
+        remove-source-map:
+            command: "vendor/bin/console search:source-map:remove"
+
+        remove-databuilder:
+            command: "vendor/bin/console transfer:databuilder:remove"
+
+        remove-entity-transfer:
+            command: "vendor/bin/console transfer:entity:remove"
+
+        remove-transfer:
+            command: "vendor/bin/console transfer:remove"
+
 
     generate:
         generate-transfers:
@@ -54,7 +77,7 @@ sections:
             command: "vendor/bin/console transfer:databuilder:generate"
 
         generate-ide-auto-completion:
-            command: "vendor/bin/console dev:ide:generate-auto-completion"
+            command: "vendor/bin/console dev:ide-auto-completion:generate"
 
     jenkins-down:
         jenkins-stop:
@@ -75,7 +98,11 @@ sections:
             command: "vendor/bin/console navigation:build-cache"
 
         rest-request-validation-cache-warmup:
-            command: "vendor/bin/console glue:rest:build-request-validation-cache"
+            command: "vendor/bin/console rest-api:build-request-validation-cache"
+            stores: true
+
+        class-resolver-build:
+            command: "vendor/bin/console cache:class-resolver:build"
 
 
     queue-flush:
@@ -120,9 +147,6 @@ sections:
 
         delete-migration-files:
             command: "vendor/bin/console propel:migration:delete"
-            stores:
-                - US
-                - DE
             groups:
                 - propel
 
@@ -159,9 +183,6 @@ sections:
 
         propel-diff:
             command: "vendor/bin/console propel:diff"
-            stores:
-                - US
-                - DE
             groups:
                 - propel
 
@@ -215,11 +236,15 @@ sections:
                 - elastic
 
     demodata:
-        import:
-            command: "vendor/bin/console data:import"
+        import-eu-region-demodata:
+            command: "vendor/bin/console data:import --config=data/import/local/full_EU.yml"
+            stores:
+                - DE
+
+        import-us-region-demodata:
+            command: "vendor/bin/console data:import --config=data/import/local/full_US.yml"
             stores:
                 - US
-                - DE
 
         update-product-labels:
             command: "vendor/bin/console product-label:relations:update"

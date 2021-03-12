@@ -1,0 +1,101 @@
+sections:
+    generate:
+        generate-transfers:
+            command: "vendor/bin/console transfer:generate"
+
+        generate-transfer-databuilders:
+            command: "vendor/bin/console transfer:databuilder:generate"
+
+        generate-ide-auto-completion:
+            command: "vendor/bin/console dev:ide-auto-completion:generate"
+
+        rest-api-generate-documentation:
+            command: "vendor/bin/console rest-api:generate:documentation"
+
+    cache:
+        router-cache-warmup-yves:
+            command: "vendor/bin/yves router:cache:warm-up"
+
+        router-cache-warmup-zed:
+            command: "vendor/bin/console router:cache:warm-up"
+
+        twig-cache-warmup:
+            command: "vendor/bin/console twig:cache:warmer"
+
+        navigation-cache-warmup:
+            command: "vendor/bin/console navigation:build-cache"
+
+        rest-request-validation-cache-warmup:
+            command: "vendor/bin/console rest-api:build-request-validation-cache"
+
+        resolvable-class-cache-warmup:
+            command: "vendor/bin/console cache:class-resolver:build"
+
+    database-migrate:
+        propel-create:
+            command: "vendor/bin/console propel:database:create"
+
+        propel-postgres-compatibility:
+            command: "vendor/bin/console propel:pg-sql-compat"
+
+        propel-copy-schema:
+            command: "vendor/bin/console propel:schema:copy"
+
+        propel-build:
+            command: "vendor/bin/console propel:model:build"
+
+        propel-diff:
+            command: "vendor/bin/console propel:diff"
+
+        propel-migrate:
+            command: "vendor/bin/console propel:migrate"
+
+        generate-entity-transfer:
+            command: "vendor/bin/console transfer:entity:generate"
+
+        init-database:
+            command: "vendor/bin/console setup:init-db"
+
+        setup-search-create-sources:
+            command: "vendor/bin/console search:setup:sources"
+
+        setup-seach-create-source-map:
+            command: "vendor/bin/console search:setup:source-map"
+
+    setup-test:
+        codeception-build:
+            command: "vendor/bin/codecept build --ansi"
+
+        databuilder-generate:
+            command: "vendor/bin/console transfer:databuilder:generate"
+
+    demodata:
+        import-eu-region-demodata:
+            command: "vendor/bin/console data:import --config=data/import/local/full_EU.yml"
+
+        update-product-labels:
+            command: "vendor/bin/console product-label:relations:update"
+
+    fixtures:
+        fixtures:
+            command: "vendor/bin/console code:fixtures"
+
+    queue:
+        run-worker:
+            command: "vendor/bin/console queue:worker:start --stop-when-empty"
+
+    frontend:
+        dependencies-install:
+            command: "vendor/bin/console frontend:project:install-dependencies"
+
+        yves-install-dependencies:
+            command: "vendor/bin/console frontend:yves:install-dependencies"
+
+        yves-build-frontend:
+            command: "vendor/bin/console frontend:yves:build"
+
+        zed-install-dependencies:
+            command: "vendor/bin/console frontend:zed:install-dependencies"
+
+        zed-build-frontend:
+            command: "vendor/bin/console frontend:zed:build"

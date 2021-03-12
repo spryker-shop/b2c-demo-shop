@@ -12,11 +12,15 @@
             margin: 0;
             padding: 0;
             display: block;
-            font: fw(light) rem(13)/rem(31) $setting-font-family-additional;
+            font: fw(light) rem(13) / rem(31) $setting-font-family-additional;
             width: rem(30);
             height: rem(30);
             text-align: center;
             border: none;
+
+            /* stylelint-disable property-no-vendor-prefix */
+            -moz-appearance: textfield;
+            /* stylelint-enable */
 
             &::-webkit-inner-spin-button {
                 appearance: none;
@@ -24,6 +28,10 @@
 
             &--quantity-large {
                 font-size: rem(15);
+            }
+
+            &--transparent {
+                background: $setting-color-transparent;
             }
         }
 

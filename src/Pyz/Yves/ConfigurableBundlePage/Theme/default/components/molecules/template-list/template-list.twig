@@ -1,0 +1,19 @@
+{% extends molecule('template-list', '@SprykerShop:ConfigurableBundlePage') %}
+
+{% block item %}
+    {% set listItemClasses = 'col col--sm-12 col--md-6 col--lg-4 col--xl-3 spacing spacing--inner spacing--big' %}
+
+    {{ parent() }}
+{% endblock %}
+
+{% block template %}
+    {% block templateTitle %}{{ parent() }}{% endblock %}
+{% endblock %}
+
+{% block templateTitleItem %}
+    {% set titleClasses = config.name ~ '__item-title' %}
+
+    {{ parent() }}
+{% endblock %}
+
+{% block button %}{% endblock %}

@@ -1,26 +1,10 @@
-{% extends model('component') %}
+{% extends molecule('money-price', '@SprykerShop:ShopUi') %}
 
-{% define config = {
-    name: 'money-price',
-    tag: 'span'
-} %}
+{% block defaultPriceInner %}
+    {% set defaultPriceJsName = data.parentJsName ? data.parentJsName ~ '__default-price' %}
 
-{% define data = {
-    amount: required,
-    originalAmount: null,
-    noPriceText: '---',
-} %}
-
-{% block body %}
-    {% if data.amount is empty -%}
-        {{ data.noPriceText }}
-    {%- else -%}
-        <span class="{{config.name}}__amount">
-            {{ data.amount | money }}
-        </span>
-    {%- endif -%}
-
-    {% if data.originalAmount is not empty and data.originalAmount > data.amount -%}
-        <span class="{{ config.name }}__amount {{ config.name }}__amount--original">{{ data.originalAmount | money }}</span>
-    {%- endif -%}
+    <span itemprop="price" content="{{ data.amount | moneyRaw }}" class="{{ config.name }}__amount {{ defaultPriceJsName }}">
+        <meta itemprop="priceCurrency" content="{{ currencyIsoCode() }}">
+        {{- data.amount | money(true, data.currencyIsoCode) -}}
+    </span>
 {% endblock %}

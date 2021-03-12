@@ -2,6 +2,12 @@
 <database xmlns="spryker:schema-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\ProductImage\Persistence" package="src.Orm.Zed.ProductImage.Persistence">
 
     <table name="spy_product_image_set">
+        <column name="product_image_set_key" type="VARCHAR" size="32" required="false"/>
+
+        <index>
+            <index-column name="product_image_set_key"/>
+        </index>
+
         <behavior name="event">
             <parameter name="spy_product_image_set_all" column="*"/>
         </behavior>

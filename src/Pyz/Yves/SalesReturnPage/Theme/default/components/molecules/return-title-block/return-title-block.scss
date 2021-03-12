@@ -1,0 +1,16 @@
+@mixin sales-return-page-return-title-block($name: '.return-title-block') {
+    #{$name} {
+        padding-bottom: rem(15);
+        margin-bottom: rem(15);
+
+        @include helper-breakpoint-media-min($lg-min) {
+            padding-bottom: rem(20);
+            margin-bottom: rem(20);
+            border-bottom: rem(1) dotted $setting-color-gray-3;
+        }
+
+        @content;
+    }
+}
+
+@include sales-return-page-return-title-block();

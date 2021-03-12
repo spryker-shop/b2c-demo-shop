@@ -1,0 +1,11 @@
+{% extends molecule('active-filter-price-range', '@SprykerShop:CatalogPage') %}
+
+{% define config = {
+    name: 'active-filter-range',
+} %}
+
+{% block component %}
+    {% set currentValue = data.activeMin  ~ ' - ' ~ data.activeMax %}
+
+    {{ parent() }}
+{% endblock %}

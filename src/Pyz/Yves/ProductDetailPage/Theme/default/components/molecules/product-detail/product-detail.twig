@@ -33,9 +33,9 @@
     } only %}
         {% block contentText %}
             {% if embed.description is not empty %}
-                {{ embed.description }}
+                <span itemprop="description">{{ embed.description }}</span>
             {% endif %}
-            <div class="spacing-top spacing-top--bigger">{{ 'product.attribute.sku' | trans }}: {{ embed.sku }}</div>
+            <div class="spacing-top spacing-top--bigger">{{ 'product.attribute.sku' | trans }}: <span itemprop="sku">{{ embed.sku }}</span></div>
         {% endblock %}
     {% endembed %}
 

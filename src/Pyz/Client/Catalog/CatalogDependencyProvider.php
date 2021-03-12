@@ -21,7 +21,9 @@ use Spryker\Client\CatalogPriceProductConnector\Plugin\ConfigTransferBuilder\Pri
 use Spryker\Client\CatalogPriceProductConnector\Plugin\CurrencyAwareCatalogSearchResultFormatterPlugin;
 use Spryker\Client\CatalogPriceProductConnector\Plugin\CurrencyAwareSuggestionByTypeResultFormatter;
 use Spryker\Client\CatalogPriceProductConnector\Plugin\ProductPriceQueryExpanderPlugin;
+use Spryker\Client\CategoryStorage\Plugin\Elasticsearch\ResultFormatter\CategoryTreeFilterPageSearchResultFormatterPlugin;
 use Spryker\Client\ProductLabelStorage\Plugin\ProductLabelFacetConfigTransferBuilderPlugin;
+use Spryker\Client\ProductListSearch\Plugin\Search\ProductListQueryExpanderPlugin;
 use Spryker\Client\ProductReview\Plugin\RatingFacetConfigTransferBuilderPlugin;
 use Spryker\Client\ProductReview\Plugin\RatingSortConfigTransferBuilderPlugin;
 use Spryker\Client\SearchElasticsearch\Plugin\QueryExpander\CompletionQueryExpanderPlugin;
@@ -115,6 +117,7 @@ class CatalogDependencyProvider extends SprykerCatalogDependencyProvider
                 new RawCatalogSearchResultFormatterPlugin()
             ),
             new SpellingSuggestionResultFormatterPlugin(),
+            new CategoryTreeFilterPageSearchResultFormatterPlugin(),
         ];
     }
 
@@ -177,6 +180,7 @@ class CatalogDependencyProvider extends SprykerCatalogDependencyProvider
         return [
             new LocalizedQueryExpanderPlugin(),
             new PaginatedProductConcreteCatalogSearchQueryExpanderPlugin(),
+            new ProductListQueryExpanderPlugin(),
         ];
     }
 }

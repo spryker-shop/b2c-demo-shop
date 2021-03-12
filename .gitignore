@@ -37,6 +37,7 @@ FOSS.md
 /data/*
 !/data/import/
 !/data/translation/
+!/data/export
 
 # grunt stuff
 .grunt
@@ -57,6 +58,7 @@ Vagrantfile
 /docker/
 /.docker-sync/
 /.unison*
+/deploy.local.yml
 
 # profiling
 /profiler
@@ -69,6 +71,7 @@ npm-debug.log
 !/tests/_output/.gitkeep
 /tests/_support/_generated/*
 !/tests/_support/_generated/.gitkeep
+/codeception.local.yml
 
 /tests/PyzTest/*/*/_output/*
 /tests/PyzTest/*/*/_support/_generated/*
@@ -81,8 +84,10 @@ npm-debug.log
 /src/Orm/Zed/*/Persistence/Map
 
 # propel config
-/src/Orm/Propel/*/Schema
-/src/Orm/Propel/*/Sql
+/src/Orm/Propel/Schema
+/src/Orm/Propel/Sql
+/src/Orm/Propel/Migration_pgsql/
+/src/Orm/Propel/Migration_mysql/
 
 # tools
 composer.phar

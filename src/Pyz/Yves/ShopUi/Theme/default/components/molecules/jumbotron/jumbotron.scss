@@ -2,7 +2,6 @@
     #{$name} {
         height: rem(256);
         background: linear-gradient(to left top, $setting-color-gray-3, $setting-color-gray-4) no-repeat center;
-        background-size: cover;
         text-align: center;
         position: relative;
 
@@ -16,11 +15,12 @@
 
         &--category {
             background: $setting-color-white;
-            background-size: cover;
             height: auto;
         }
 
         &__inner {
+            position: relative;
+
             &--category {
                 flex-direction: column;
                 margin: 0 rem(16);
@@ -69,7 +69,7 @@
         }
 
         &__headline {
-            font: fw(bold) rem(32)/1.5 $setting-font-family-additional;
+            font: fw(bold) rem(32) / 1.5 $setting-font-family-additional;
 
             @include helper-breakpoint-media-min($lg-min) {
                 font-size: rem(48);

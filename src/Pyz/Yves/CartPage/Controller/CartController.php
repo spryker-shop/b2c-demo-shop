@@ -8,7 +8,7 @@
 namespace Pyz\Yves\CartPage\Controller;
 
 use SprykerShop\Yves\CartPage\Controller\CartController as SprykerCartController;
-use SprykerShop\Yves\CartPage\Plugin\Provider\CartControllerProvider;
+use SprykerShop\Yves\CartPage\Plugin\Router\CartPageRouteProviderPlugin;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -55,6 +55,6 @@ class CartController extends SprykerCartController
             return $this->redirectResponseExternal($request->headers->get(static::REQUEST_HEADER_REFERER));
         }
 
-        return $this->redirectResponseInternal(CartControllerProvider::ROUTE_CART);
+        return $this->redirectResponseInternal(CartPageRouteProviderPlugin::ROUTE_NAME_CART);
     }
 }

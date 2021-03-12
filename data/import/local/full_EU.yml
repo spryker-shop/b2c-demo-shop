@@ -1,0 +1,185 @@
+# Example of a B2C demo shop 'full' data import (all categories).
+version: 0
+
+actions:
+#1. Commerce Setup import
+  - data_entity: store
+    # Cannot have a source because we use store.php
+  - data_entity: currency
+    source: data/import/common/common/currency.csv
+  - data_entity: customer
+    source: data/import/common/common/customer.csv
+  - data_entity: glossary
+    source: data/import/common/common/glossary.csv
+  - data_entity: tax
+    source: data/import/common/common/tax.csv
+  - data_entity: shipment
+    source: data/import/common/common/shipment.csv
+  - data_entity: shipment-price
+    source: data/import/common/AT/shipment_price.csv
+  - data_entity: shipment-price
+    source: data/import/common/DE/shipment_price.csv
+  - data_entity: sales-order-threshold
+    source: data/import/common/AT/sales_order_threshold.csv
+  - data_entity: sales-order-threshold
+    source: data/import/common/DE/sales_order_threshold.csv
+  - data_entity: stock
+    source: data/import/common/common/warehouse.csv
+  - data_entity: payment-method
+    source: data/import/common/common/payment_method.csv
+  - data_entity: return-reason
+    source: data/import/common/common/return_reason.csv
+    # Store relation
+  - data_entity: shipment-method-store
+    source: data/import/common/AT/shipment_method_store.csv
+  - data_entity: shipment-method-store
+    source: data/import/common/DE/shipment_method_store.csv
+  - data_entity: stock-store
+    source: data/import/common/AT/warehouse_store.csv
+  - data_entity: stock-store
+    source: data/import/common/DE/warehouse_store.csv
+  - data_entity: payment-method-store
+    source: data/import/common/AT/payment_method_store.csv
+  - data_entity: payment-method-store
+    source: data/import/common/DE/payment_method_store.csv
+
+
+#2. Catalog Setup import
+  - data_entity: category-template
+    source: data/import/common/common/category_template.csv
+  - data_entity: category
+    source: data/import/common/common/category.csv
+  - data_entity: product-attribute-key
+    source: data/import/common/common/product_attribute_key.csv
+  - data_entity: product-management-attribute
+    source: data/import/common/common/product_management_attribute.csv
+  - data_entity: product-abstract
+    source: data/import/common/common/product_abstract.csv
+  - data_entity: product-concrete
+    source: data/import/common/common/product_concrete.csv
+  - data_entity: product-image
+    source: data/import/common/common/product_image.csv
+  - data_entity: product-price
+    source: data/import/common/AT/product_price.csv
+  - data_entity: product-price
+    source: data/import/common/DE/product_price.csv
+  - data_entity: product-price-schedule
+    source: data/import/common/AT/product_price_schedule.csv
+  - data_entity: product-price-schedule
+    source: data/import/common/DE/product_price_schedule.csv
+  - data_entity: product-stock
+    source: data/import/common/common/product_stock.csv
+  # Store relation
+  - data_entity: product-abstract-store
+    source: data/import/common/AT/product_abstract_store.csv
+  - data_entity: product-abstract-store
+    source: data/import/common/DE/product_abstract_store.csv
+
+
+#3. Merchandising Setup import
+  - data_entity: discount
+    source: data/import/common/common/discount.csv
+  - data_entity: discount-voucher
+    source: data/import/common/common/discount_voucher.csv
+  - data_entity: product-group
+    source: data/import/common/common/product_group.csv
+  - data_entity: product-relation
+    source: data/import/common/common/product_relation.csv
+  - data_entity: product-review
+    source: data/import/common/common/product_review.csv
+  - data_entity: product-label
+    source: data/import/common/common/product_label.csv
+  - data_entity: product-set
+    source: data/import/common/common/product_set.csv
+  - data_entity: product-search-attribute-map
+    source: data/import/common/common/product_search_attribute_map.csv
+  - data_entity: product-search-attribute
+    source: data/import/common/common/product_search_attribute.csv
+  - data_entity: discount-amount
+    source: data/import/common/AT/discount_amount.csv
+  - data_entity: discount-amount
+    source: data/import/common/DE/discount_amount.csv
+  - data_entity: product-discontinued
+    source: data/import/common/common/product_discontinued.csv
+  - data_entity: product-alternative
+    source: data/import/common/common/product_alternative.csv
+  - data_entity: product-quantity
+    source: data/import/common/common/product_quantity.csv
+  # Store relation
+  - data_entity: discount-store
+    source: data/import/common/AT/discount_store.csv
+  - data_entity: discount-store
+    source: data/import/common/DE/discount_store.csv
+  - data_entity: product-relation-store
+    source: data/import/common/AT/product_relation_store.csv
+  - data_entity: product-relation-store
+    source: data/import/common/DE/product_relation_store.csv
+  - data_entity: product-label-store
+    source: data/import/common/AT/product_label_store.csv
+  - data_entity: product-label-store
+    source: data/import/common/DE/product_label_store.csv
+
+
+#4. Special Product Types Setup import
+  - data_entity: product-option
+    source: data/import/common/common/product_option.csv
+  - data_entity: product-option-price
+    source: data/import/common/AT/product_option_price.csv
+  - data_entity: product-option-price
+    source: data/import/common/DE/product_option_price.csv
+  - data_entity: gift-card-abstract-configuration
+    source: data/import/common/common/gift_card_abstract_configuration.csv
+  - data_entity: gift-card-concrete-configuration
+    source: data/import/common/common/gift_card_concrete_configuration.csv
+  - data_entity: product-list
+    source: data/import/common/common/product_list.csv
+  - data_entity: product-list-category
+    source: data/import/common/common/product_list_to_category.csv
+  - data_entity: product-list-product-concrete
+    source: data/import/common/common/product_list_to_concrete_product.csv
+  - data_entity: configurable-bundle-template
+    source: data/import/common/common/configurable_bundle_template.csv
+  - data_entity: configurable-bundle-template-slot
+    source: data/import/common/common/configurable_bundle_template_slot.csv
+  - data_entity: configurable-bundle-template-image
+    source: data/import/common/common/configurable_bundle_template_image.csv
+
+
+#5. Content Management Setup import
+  - data_entity: navigation
+    source: data/import/common/common/navigation.csv
+  - data_entity: content-banner
+    source: data/import/common/common/content_banner.csv
+  - data_entity: content-product-abstract-list
+    source: data/import/common/common/content_product_abstract_list.csv
+  - data_entity: content-product-set
+    source: data/import/common/common/content_product_set.csv
+  - data_entity: cms-template
+    source: data/import/common/common/cms_template.csv
+  - data_entity: cms-block
+    source: data/import/common/common/cms_block.csv
+  - data_entity: cms-page
+    source: data/import/common/common/cms_page.csv
+  - data_entity: cms-slot-template
+    source: data/import/common/common/cms_slot_template.csv
+  - data_entity: cms-slot
+    source: data/import/common/common/cms_slot.csv
+  - data_entity: cms-slot-block
+    source: data/import/common/common/cms_slot_block.csv
+  - data_entity: cms-page-store
+    source: data/import/common/AT/cms_page_store.csv
+  - data_entity: cms-page-store
+    source: data/import/common/DE/cms_page_store.csv
+  - data_entity: cms-block-store
+    source: data/import/common/AT/cms_block_store.csv
+  - data_entity: cms-block-store
+    source: data/import/common/DE/cms_block_store.csv
+  - data_entity: content-navigation
+    source: data/import/common/common/content_navigation.csv
+  - data_entity: navigation-node
+    source: data/import/common/common/navigation_node.csv
+
+
+#6. Miscellaneous Setup import
+  - data_entity: mime-type
+    source: data/import/common/common/mime_type.csv

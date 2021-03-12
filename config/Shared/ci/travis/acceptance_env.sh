@@ -17,7 +17,9 @@
 # FE_ZED_SCRIPT='zed'
 # FE_ZED_BUNDLE_PKGJSON_PATTERN=".+/assets/Zed/package.json$"
 
-sudo apt-get -qqy install apache2 libapache2-mod-fastcgi
+sudo apt-get -qqy install apache2
+
+config/Shared/ci/travis/install_mod_fastcgi.sh
 
 sudo chmod -R 755 $HOME
 sudo chmod 600 config/Zed/dev_only_private.key
@@ -41,6 +43,10 @@ sudo cp -f config/Shared/ci/travis/travis-ci-apache-glue /etc/apache2/sites-avai
 sudo sed -e "s?%TRAVIS_BUILD_DIR%?$(pwd)?g" --in-place /etc/apache2/sites-available/yves.conf
 sudo sed -e "s?%TRAVIS_BUILD_DIR%?$(pwd)?g" --in-place /etc/apache2/sites-available/zed.conf
 sudo sed -e "s?%TRAVIS_BUILD_DIR%?$(pwd)?g" --in-place /etc/apache2/sites-available/glue.conf
+sudo sed -e "s?%APPLICATION_ENV%?$APPLICATION_ENV?g" --in-place /etc/apache2/sites-available/yves.conf
+sudo sed -e "s?%APPLICATION_ENV%?$APPLICATION_ENV?g" --in-place /etc/apache2/sites-available/zed.conf
+sudo sed -e "s?%APPLICATION_ENV%?$APPLICATION_ENV?g" --in-place /etc/apache2/sites-available/glue.conf
+sudo sed -e "s?%POSTGRES_PORT%?$POSTGRES_PORT?g" --in-place /etc/apache2/sites-available/zed.conf
 sudo ln -s /etc/apache2/sites-available/yves.conf /etc/apache2/sites-enabled/yves.conf
 sudo ln -s /etc/apache2/sites-available/zed.conf /etc/apache2/sites-enabled/zed.conf
 sudo ln -s /etc/apache2/sites-available/glue.conf /etc/apache2/sites-enabled/glue.conf
@@ -51,6 +57,9 @@ sudo cp -f config/Shared/ci/travis/php7-fpm.conf /etc/apache2/conf-enabled/php7-
 # apache: check configuration and start service
 sudo apachectl configtest
 sudo service apache2 restart
+
+# install Chromium and Chromedriver symlinks
+sudo ln -s -f "$CHROMIUM_BINARY" /usr/local/bin/chrome
 
 # node.js is required - it is installed by '- nvm install (...)' in .travis.yml
 

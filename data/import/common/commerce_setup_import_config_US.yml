@@ -1,0 +1,33 @@
+# Example of a B2C demo shop 'Commerce Setup' data import.
+version: 0
+actions:
+  - data_entity: store
+    # Cannot have a source because we use store.php
+  - data_entity: currency
+    source: data/import/common/common/currency.csv
+  - data_entity: customer
+    source: data/import/common/common/customer.csv
+  - data_entity: glossary
+    source: data/import/common/common/glossary.csv
+  - data_entity: tax
+    source: data/import/common/common/tax.csv
+  - data_entity: shipment
+    source: data/import/common/common/shipment.csv
+  - data_entity: shipment-price
+    source: data/import/common/US/shipment_price.csv
+  - data_entity: sales-order-threshold
+    source: data/import/common/US/sales_order_threshold.csv
+  - data_entity: stock
+    source: data/import/common/common/warehouse.csv
+  - data_entity: payment-method
+    source: data/import/common/common/payment_method.csv
+  - data_entity: return-reason
+    source: data/import/common/common/return_reason.csv
+
+    # Store relation
+  - data_entity: shipment-method-store
+    source: data/import/common/US/shipment_method_store.csv
+  - data_entity: stock-store
+    source: data/import/common/US/warehouse_store.csv
+  - data_entity: payment-method-store
+    source: data/import/common/US/payment_method_store.csv

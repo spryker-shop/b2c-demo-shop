@@ -2,5 +2,5 @@
 
 set -e
 
-gem install mailcatcher --no-document
-mailcatcher
+gem install mailcatcher --no-document > /dev/null
+mailcatcher > /dev/null

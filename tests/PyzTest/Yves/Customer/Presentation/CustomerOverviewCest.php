@@ -36,9 +36,9 @@ class CustomerOverviewCest
         $i->amLoggedInCustomer();
         $i->amOnPage(CustomerOverviewPage::URL);
 
-        $i->see(CustomerOverviewPage::BOX_HEADLINE_ORDERS, 'h5');
-        $i->see(CustomerOverviewPage::BOX_HEADLINE_PROFILE, 'h5');
-        $i->see(CustomerOverviewPage::BOX_HEADLINE_NEWSLETTER, 'h5');
+        $i->see(CustomerOverviewPage::BOX_HEADLINE_ORDERS, 'h2');
+        $i->see(CustomerOverviewPage::BOX_HEADLINE_PROFILE, 'h2');
+        $i->see(CustomerOverviewPage::BOX_HEADLINE_NEWSLETTER, 'h2');
     }
 
     /**
