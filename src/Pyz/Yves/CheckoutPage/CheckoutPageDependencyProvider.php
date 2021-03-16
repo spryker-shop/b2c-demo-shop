@@ -12,14 +12,18 @@ use Spryker\Shared\Nopayment\NopaymentConfig;
 use Spryker\Yves\Kernel\Container;
 use Spryker\Yves\Nopayment\Plugin\NopaymentHandlerPlugin;
 use Spryker\Yves\Payment\Plugin\PaymentFormFilterPlugin;
+use Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface;
 use Spryker\Yves\StepEngine\Dependency\Plugin\Handler\StepHandlerPluginCollection;
+use Spryker\Yves\StepEngine\Dependency\Plugin\Handler\StepHandlerPluginInterface;
 use SprykerShop\Yves\CheckoutPage\CheckoutPageDependencyProvider as SprykerShopCheckoutPageDependencyProvider;
 use SprykerShop\Yves\CustomerPage\Form\CheckoutAddressCollectionForm;
 use SprykerShop\Yves\CustomerPage\Form\CustomerCheckoutForm;
 use SprykerShop\Yves\CustomerPage\Form\GuestForm;
 use SprykerShop\Yves\CustomerPage\Form\LoginForm;
 use SprykerShop\Yves\CustomerPage\Form\RegisterForm;
+use SprykerShop\Yves\CustomerPage\Plugin\CheckoutPage\CheckoutAddressFormDataProviderPlugin;
 use SprykerShop\Yves\CustomerPage\Plugin\CheckoutPage\CustomerAddressExpanderPlugin;
+use SprykerShop\Yves\CustomerPage\Plugin\CustomerStepHandler;
 use SprykerShop\Yves\SalesOrderThresholdWidget\Plugin\CheckoutPage\SalesOrderThresholdWidgetPlugin;
 use Symfony\Component\Form\FormFactory;
 
@@ -133,5 +137,21 @@ class CheckoutPageDependencyProvider extends SprykerShopCheckoutPageDependencyPr
         return [
             new CustomerAddressExpanderPlugin(),
         ];
+    }
+
+    /**
+     * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
+     */
+    protected function getCheckoutAddressFormDataProviderPlugin(): StepEngineFormDataProviderInterface
+    {
+        return new CheckoutAddressFormDataProviderPlugin();
+    }
+
+    /**
+     * @return \Spryker\Yves\StepEngine\Dependency\Plugin\Handler\StepHandlerPluginInterface
+     */
+    protected function getCustomerStepHandler(): StepHandlerPluginInterface
+    {
+        return new CustomerStepHandler();
     }
 }
