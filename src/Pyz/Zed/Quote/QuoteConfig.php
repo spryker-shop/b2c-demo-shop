@@ -24,6 +24,7 @@ class QuoteConfig extends SprykerQuoteConfig
             QuoteTransfer::CART_RULE_DISCOUNTS, #PromotionsDiscountsFeature
             QuoteTransfer::PROMOTION_ITEMS, #PromotionsDiscountsFeature
             QuoteTransfer::GIFT_CARDS, #GiftCardFeature
+            QuoteTransfer::IS_ORDER_PLACED_SUCCESSFULLY,
         ]);
     }
 }
