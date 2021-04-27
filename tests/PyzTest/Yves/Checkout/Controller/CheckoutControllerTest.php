@@ -101,8 +101,8 @@ class CheckoutControllerTest extends Unit
      */
     protected function skipIfCi()
     {
-        if (getenv('CIRCLECI') || getenv('TRAVIS')) {
-            $this->markTestSkipped('CircleCi/Travis not set up properly');
+        if (getenv('CIRCLECI')) {
+            $this->markTestSkipped('CircleCi not set up properly');
         }
     }
 
