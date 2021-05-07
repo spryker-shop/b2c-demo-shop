@@ -44,6 +44,7 @@ use Spryker\Zed\SalesReturnDataImport\Communication\Plugin\ReturnReasonDataImpor
 use Spryker\Zed\ShipmentDataImport\Communication\Plugin\ShipmentDataImportPlugin;
 use Spryker\Zed\ShipmentDataImport\Communication\Plugin\ShipmentMethodPriceDataImportPlugin;
 use Spryker\Zed\ShipmentDataImport\Communication\Plugin\ShipmentMethodStoreDataImportPlugin;
+use Spryker\Zed\StockAddressDataImport\Communication\Plugin\DataImport\StockAddressDataImportPlugin;
 use Spryker\Zed\StockDataImport\Communication\Plugin\StockDataImportPlugin;
 use Spryker\Zed\StockDataImport\Communication\Plugin\StockStoreDataImportPlugin;
 
@@ -248,6 +249,7 @@ class DataImportDependencyProvider extends SprykerDataImportDependencyProvider
             new ProductLabelStoreDataImportPlugin(),
             new ReturnReasonDataImportPlugin(),
             new ContentNavigationDataImportPlugin(),
+            new StockAddressDataImportPlugin(),
         ];
     }
 

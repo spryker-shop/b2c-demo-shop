@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "81c6e41f0ad4d2c199966e4edb04590b",
+    "content-hash": "64fc012d32436b58637948b033475bd0",
     "packages": [
         {
             "name": "brick/math",
@@ -3895,36 +3895,39 @@
         },
         {
             "name": "spryker-feature/inventory-management",
-            "version": "202009.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker-feature/inventory-management.git",
-                "reference": "1e7b88e652084d2892e61225ce57d9064604fd82"
+                "reference": "767500aaa992712a91a44e6f6768a1a90bbb1f11"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker-feature/inventory-management/zipball/1e7b88e652084d2892e61225ce57d9064604fd82",
-                "reference": "1e7b88e652084d2892e61225ce57d9064604fd82",
+                "url": "https://api.github.com/repos/spryker-feature/inventory-management/zipball/767500aaa992712a91a44e6f6768a1a90bbb1f11",
+                "reference": "767500aaa992712a91a44e6f6768a1a90bbb1f11",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.2",
+                "php": ">=7.3",
                 "spryker-shop/availability-widget": "^1.1.0",
                 "spryker/availability": "^9.4.0",
                 "spryker/availability-data-feed": "^0.1.3",
                 "spryker/availability-gui": "^6.3.0",
                 "spryker/availability-storage": "^2.4.0",
                 "spryker/stock": "^8.0.0",
+                "spryker/stock-address": "^1.0.0",
+                "spryker/stock-address-data-import": "^0.1.0",
                 "spryker/stock-data-import": "^1.1.0",
                 "spryker/stock-gui": "^2.0.0"
             },
             "suggest": {
                 "spryker-feature/product": "Recommended feature dependency."
             },
+            "default-branch": true,
             "type": "metapackage",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "202009.x-dev"
+                    "dev-master": "202107.x-dev"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -3932,7 +3935,10 @@
                 "proprietary"
             ],
             "description": "Inventory Management [feature]",
-            "time": "2020-09-02T09:33:56+00:00"
+            "support": {
+                "source": "https://github.com/spryker-feature/inventory-management/tree/master"
+            },
+            "time": "2021-04-08T15:30:46+00:00"
         },
         {
             "name": "spryker-feature/invoice",
@@ -31871,16 +31877,16 @@
         },
         {
             "name": "spryker/stock",
-            "version": "8.1.0",
+            "version": "8.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/stock.git",
-                "reference": "b036ae2f3b7c29c5524d18315cfccccf73545dbe"
+                "reference": "46e4a90f4263c6d7dce779e1baba536f9c718108"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/stock/zipball/b036ae2f3b7c29c5524d18315cfccccf73545dbe",
-                "reference": "b036ae2f3b7c29c5524d18315cfccccf73545dbe",
+                "url": "https://api.github.com/repos/spryker/stock/zipball/46e4a90f4263c6d7dce779e1baba536f9c718108",
+                "reference": "46e4a90f4263c6d7dce779e1baba536f9c718108",
                 "shasum": ""
             },
             "require": {
@@ -31889,7 +31895,7 @@
                 "spryker/kernel": "^3.30.0",
                 "spryker/product": "^5.0.0 || ^6.0.0",
                 "spryker/propel-orm": "^1.0.0",
-                "spryker/stock-extension": "^1.0.0",
+                "spryker/stock-extension": "^1.1.0",
                 "spryker/store": "^1.5.0",
                 "spryker/touch": "^3.0.0 || ^4.0.0",
                 "spryker/transfer": "^3.18.0"
@@ -31917,9 +31923,107 @@
             ],
             "description": "Stock module",
             "support": {
-                "source": "https://github.com/spryker/stock/tree/8.1.0"
+                "source": "https://github.com/spryker/stock/tree/8.2.0"
             },
-            "time": "2020-10-29T08:43:55+00:00"
+            "time": "2021-04-08T12:48:27+00:00"
+        },
+        {
+            "name": "spryker/stock-address",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/stock-address.git",
+                "reference": "2ef6d67e883876d3a50ae0b1df8d2710fd18f7c0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/stock-address/zipball/2ef6d67e883876d3a50ae0b1df8d2710fd18f7c0",
+                "reference": "2ef6d67e883876d3a50ae0b1df8d2710fd18f7c0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.3",
+                "spryker/country": "^3.0.0",
+                "spryker/kernel": "^3.30.0",
+                "spryker/propel-orm": "^1.0.0",
+                "spryker/stock": "^8.2.0",
+                "spryker/stock-extension": "^1.1.0",
+                "spryker/transfer": "^3.25.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/propel": "*",
+                "spryker/testify": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/",
+                    "SprykerTest\\Shared\\StockAddress\\Helper\\": "tests/SprykerTest/Shared/StockAddress/_support/Helper/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "StockAddress module",
+            "support": {
+                "source": "https://github.com/spryker/stock-address/tree/1.0.0"
+            },
+            "time": "2021-04-08T12:48:27+00:00"
+        },
+        {
+            "name": "spryker/stock-address-data-import",
+            "version": "0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/stock-address-data-import.git",
+                "reference": "a39c042007b21045c9535a13f89092631fd1408a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/stock-address-data-import/zipball/a39c042007b21045c9535a13f89092631fd1408a",
+                "reference": "a39c042007b21045c9535a13f89092631fd1408a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.3",
+                "spryker/country": "^3.0.0",
+                "spryker/data-import": "^1.4.3",
+                "spryker/kernel": "^3.33.0",
+                "spryker/stock": "^8.0.0",
+                "spryker/stock-address": "^1.0.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/propel": "*",
+                "spryker/testify": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "StockAddressDataImport module",
+            "support": {
+                "source": "https://github.com/spryker/stock-address-data-import/tree/0.1.0"
+            },
+            "time": "2021-04-08T12:48:27+00:00"
         },
         {
             "name": "spryker/stock-data-import",
@@ -31967,24 +32071,23 @@
         },
         {
             "name": "spryker/stock-extension",
-            "version": "1.0.0",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/stock-extension.git",
-                "reference": "9007ffa17b734bed2601cc902d2128f14a24efb1"
+                "reference": "684513603e134775a6e723ca6934820c12ff465b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/stock-extension/zipball/9007ffa17b734bed2601cc902d2128f14a24efb1",
-                "reference": "9007ffa17b734bed2601cc902d2128f14a24efb1",
+                "url": "https://api.github.com/repos/spryker/stock-extension/zipball/684513603e134775a6e723ca6934820c12ff465b",
+                "reference": "684513603e134775a6e723ca6934820c12ff465b",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.2"
+                "php": ">=7.3"
             },
             "require-dev": {
-                "spryker/code-sniffer": "*",
-                "spryker/testify": "*"
+                "spryker/code-sniffer": "*"
             },
             "type": "library",
             "extra": {
@@ -32003,9 +32106,9 @@
             ],
             "description": "StockExtension module",
             "support": {
-                "source": "https://github.com/spryker/stock-extension/tree/master"
+                "source": "https://github.com/spryker/stock-extension/tree/1.1.0"
             },
-            "time": "2019-11-15T11:22:58+00:00"
+            "time": "2021-03-24T12:07:10+00:00"
         },
         {
             "name": "spryker/stock-gui",
@@ -45751,6 +45854,7 @@
     "stability-flags": {
         "spryker-feature/agent-assist": 20,
         "spryker-feature/customer-account-management": 20,
+        "spryker-feature/inventory-management": 20,
         "spryker-feature/search": 20,
         "spryker-feature/spryker-core": 20,
         "spryker-feature/spryker-core-back-office": 20,
