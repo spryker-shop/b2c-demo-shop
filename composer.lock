@@ -7394,20 +7394,22 @@
         },
         {
             "name": "spryker-shop/error-page",
-            "version": "1.8.0",
+            "version": "1.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker-shop/error-page.git",
-                "reference": "e3234b512c226ab5c55c14a3340919faec659eaa"
+                "reference": "6faa54f595482e0d29a17505bc6087747491a5e6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker-shop/error-page/zipball/e3234b512c226ab5c55c14a3340919faec659eaa",
-                "reference": "e3234b512c226ab5c55c14a3340919faec659eaa",
+                "url": "https://api.github.com/repos/spryker-shop/error-page/zipball/6faa54f595482e0d29a17505bc6087747491a5e6",
+                "reference": "6faa54f595482e0d29a17505bc6087747491a5e6",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.3",
+                "spryker-shop/error-page-extension": "^1.0.0",
+                "spryker-shop/shop-application": "^1.0.0",
                 "spryker-shop/shop-ui": "^1.0.0",
                 "spryker/event-dispatcher-extension": "^1.0.0",
                 "spryker/kernel": "^3.52.0",
@@ -7415,14 +7417,12 @@
                 "spryker/symfony": "^3.5.0"
             },
             "require-dev": {
-                "spryker-shop/shop-application": "*",
                 "spryker/code-sniffer": "*",
                 "spryker/container": "*",
                 "spryker/event-dispatcher": "*",
                 "spryker/silex": "*"
             },
             "suggest": {
-                "spryker-shop/shop-application": "Use this module when using plugins that need ShopApplication dependencies.",
                 "spryker/container": "Use this module when you want to use the ErrorPageEventDispatcherPlugin.",
                 "spryker/event-dispatcher": "Use this module when you want to use the ErrorPageEventDispatcherPlugin.",
                 "spryker/silex": "Use this module when using plugins that need Silex dependencies."
@@ -7444,9 +7444,51 @@
             ],
             "description": "ErrorPage module",
             "support": {
-                "source": "https://github.com/spryker-shop/error-page/tree/1.8.0"
+                "source": "https://github.com/spryker-shop/error-page/tree/1.9.0"
             },
-            "time": "2020-12-22T19:30:31+00:00"
+            "time": "2021-04-27T14:16:04+00:00"
+        },
+        {
+            "name": "spryker-shop/error-page-extension",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker-shop/error-page-extension.git",
+                "reference": "6d1f328f9098e8381af4a8d95511c1653281c78f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker-shop/error-page-extension/zipball/6d1f328f9098e8381af4a8d95511c1653281c78f",
+                "reference": "6d1f328f9098e8381af4a8d95511c1653281c78f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.3",
+                "spryker/symfony": "^3.5.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "SprykerShop\\": "src/SprykerShop/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "ErrorPageExtension module",
+            "support": {
+                "source": "https://github.com/spryker-shop/error-page-extension/tree/1.0.0"
+            },
+            "time": "2021-04-27T14:16:04+00:00"
         },
         {
             "name": "spryker-shop/file-manager-widget",
