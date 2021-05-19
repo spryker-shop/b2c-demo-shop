@@ -69,7 +69,7 @@ use Spryker\Glue\GiftCardsRestApi\Plugin\GlueApplication\GiftCardByQuoteResource
 use Spryker\Glue\GlueApplication\GlueApplicationDependencyProvider as SprykerGlueApplicationDependencyProvider;
 use Spryker\Glue\GlueApplication\Plugin\Application\GlueApplicationApplicationPlugin;
 use Spryker\Glue\GlueApplication\Plugin\GlueApplication\HeadersValidateHttpRequestPlugin;
-use Spryker\Glue\GlueApplication\Plugin \GlueApplication\PaginationParametersValidateHttpRequestPlugin;
+use Spryker\Glue\GlueApplication\Plugin\GlueApplication\PaginationParametersValidateHttpRequestPlugin;
 use Spryker\Glue\GlueApplication\Plugin\Rest\SetStoreCurrentLocaleBeforeActionPlugin;
 use Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\ResourceRelationshipCollectionInterface;
 use Spryker\Glue\HealthCheck\Plugin\HealthCheckResourceRoutePlugin;
