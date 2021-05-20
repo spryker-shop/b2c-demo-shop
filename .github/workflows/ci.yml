@@ -112,7 +112,7 @@ jobs:
       - name: 'Run phantomjs'
         run: timeout 45m bash -c "vendor/bin/phantomjs --webdriver=4444 --disk-cache=true --load-images=false --webdriver-logfile=/tmp/phantomjs.log --webdriver-loglevel=DEBUG">/dev/null &
       - name: 'Run tests'
-        run: vendor/bin/codecept run -g EndToEnd -g Presentation -x DockerOnly --ext DotReporter || cat /home/runner/work/b2c-demo-shop/b2c-demo-shop/tests/PyzTest/Yves/Newsletter/_output/PyzTest.Yves.Newsletter.Presentation.NewsletterSubscriptionCest.iCanSubscribeWithAnUnsubscribedEmail.fail.html
+        run: vendor/bin/codecept run -g EndToEnd -g Presentation -x DockerOnly --ext DotReporter
 
   without-acceptance-7-4:
     name: 'Without acceptance tests / PostgreSQL / PHP 7.4'
@@ -211,7 +211,7 @@ jobs:
       - name: 'Run phantomjs'
         run: timeout 45m bash -c "vendor/bin/phantomjs --webdriver=4444 --disk-cache=true --load-images=false --webdriver-logfile=/tmp/phantomjs.log --webdriver-loglevel=DEBUG">/dev/null &
       - name: 'Run tests'
-        run: vendor/bin/codecept run -g EndToEnd -g Presentation -x DockerOnly --ext DotReporter || cat /home/runner/work/b2c-demo-shop/b2c-demo-shop/tests/PyzTest/Yves/Newsletter/_output/PyzTest.Yves.Newsletter.Presentation.NewsletterSubscriptionCest.iCanSubscribeWithAnUnsubscribedEmail.fail.html
+        run: vendor/bin/codecept run -g EndToEnd -g Presentation -x DockerOnly --ext DotReporter
 
   without-acceptance-7-2-mariadb:
     name: 'Without acceptance tests / PHP 7.2'
