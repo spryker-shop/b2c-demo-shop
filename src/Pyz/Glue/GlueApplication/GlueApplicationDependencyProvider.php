@@ -68,6 +68,7 @@ use Spryker\Glue\EventDispatcher\Plugin\Application\EventDispatcherApplicationPl
 use Spryker\Glue\GiftCardsRestApi\Plugin\GlueApplication\GiftCardByQuoteResourceRelationshipPlugin;
 use Spryker\Glue\GlueApplication\GlueApplicationDependencyProvider as SprykerGlueApplicationDependencyProvider;
 use Spryker\Glue\GlueApplication\Plugin\Application\GlueApplicationApplicationPlugin;
+use Spryker\Glue\GlueApplication\Plugin\GlueApplication\HeadersValidateHttpRequestPlugin;
 use Spryker\Glue\GlueApplication\Plugin\GlueApplication\PaginationParametersValidateHttpRequestPlugin;
 use Spryker\Glue\GlueApplication\Plugin\Rest\SetStoreCurrentLocaleBeforeActionPlugin;
 use Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\ResourceRelationshipCollectionInterface;
@@ -229,6 +230,7 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
     {
         return [
             new PaginationParametersValidateHttpRequestPlugin(),
+            new HeadersValidateHttpRequestPlugin(),
         ];
     }
 
