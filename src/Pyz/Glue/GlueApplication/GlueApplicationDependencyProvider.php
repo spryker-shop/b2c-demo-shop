@@ -35,6 +35,7 @@ use Spryker\Glue\CartsRestApi\Plugin\GlueApplication\CartItemsByQuoteResourceRel
 use Spryker\Glue\CartsRestApi\Plugin\GlueApplication\GuestCartItemsByQuoteResourceRelationshipPlugin;
 use Spryker\Glue\CartsRestApi\Plugin\ResourceRoute\CartItemsResourceRoutePlugin;
 use Spryker\Glue\CartsRestApi\Plugin\ResourceRoute\CartsResourceRoutePlugin;
+use Spryker\Glue\CartsRestApi\Plugin\ResourceRoute\CustomerCartsResourceRoutePlugin;
 use Spryker\Glue\CartsRestApi\Plugin\ResourceRoute\GuestCartItemsResourceRoutePlugin;
 use Spryker\Glue\CartsRestApi\Plugin\ResourceRoute\GuestCartsResourceRoutePlugin;
 use Spryker\Glue\CartsRestApi\Plugin\Validator\AnonymousCustomerUniqueIdValidatorPlugin;
@@ -223,6 +224,7 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
             new CustomerConfirmationResourceRoutePlugin(),
             new TokenResourceRoutePlugin(),
             new CustomerOrdersResourceRoutePlugin(),
+            new CustomerCartsResourceRoutePlugin(),
         ];
     }
 
