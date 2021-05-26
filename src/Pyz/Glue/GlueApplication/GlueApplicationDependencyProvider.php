@@ -18,6 +18,7 @@ use Spryker\Glue\AlternativeProductsRestApi\Plugin\GlueApplication\ConcreteAlter
 use Spryker\Glue\AuthRestApi\Plugin\AccessTokensResourceRoutePlugin;
 use Spryker\Glue\AuthRestApi\Plugin\FormatAuthenticationErrorResponseHeadersPlugin;
 use Spryker\Glue\AuthRestApi\Plugin\GlueApplication\AccessTokenRestRequestValidatorPlugin;
+use Spryker\Glue\AuthRestApi\Plugin\GlueApplication\FormattedControllerBeforeActionValidateAccessTokenPlugin;
 use Spryker\Glue\AuthRestApi\Plugin\GlueApplication\SimultaneousAuthenticationRestRequestValidatorPlugin;
 use Spryker\Glue\AuthRestApi\Plugin\GlueApplication\TokenResourceRoutePlugin;
 use Spryker\Glue\AuthRestApi\Plugin\RefreshTokensResourceRoutePlugin;
@@ -237,6 +238,18 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
         return [
             new PaginationParametersValidateHttpRequestPlugin(),
             new HeadersValidateHttpRequestPlugin(),
+        ];
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @return \Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\FormattedControllerBeforeActionPluginInterface[]
+     */
+    protected function getFormattedControllerBeforeActionTerminatePlugins(): array
+    {
+        return [
+            new FormattedControllerBeforeActionValidateAccessTokenPlugin(),
         ];
     }
 
