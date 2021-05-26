@@ -23,6 +23,9 @@ use Spryker\Glue\AuthRestApi\Plugin\GlueApplication\SimultaneousAuthenticationRe
 use Spryker\Glue\AuthRestApi\Plugin\GlueApplication\TokenResourceRoutePlugin;
 use Spryker\Glue\AuthRestApi\Plugin\RefreshTokensResourceRoutePlugin;
 use Spryker\Glue\AuthRestApi\Plugin\RestUserFinderByAccessTokenPlugin;
+use Spryker\Glue\AvailabilityNotificationsRestApi\Plugin\GlueApplication\AvailabilityNotificationsResourceRoutePlugin;
+use Spryker\Glue\AvailabilityNotificationsRestApi\Plugin\GlueApplication\CustomerAvailabilityNotificationsResourceRoutePlugin;
+use Spryker\Glue\AvailabilityNotificationsRestApi\Plugin\GlueApplication\MyAvailabilityNotificationsResourceRoutePlugin;
 use Spryker\Glue\CartCodesRestApi\Plugin\GlueApplication\CartCodesResourceRoutePlugin;
 use Spryker\Glue\CartCodesRestApi\Plugin\GlueApplication\CartRuleByQuoteResourceRelationshipPlugin;
 use Spryker\Glue\CartCodesRestApi\Plugin\GlueApplication\CartVouchersResourceRoutePlugin;
@@ -225,6 +228,9 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
             new TokenResourceRoutePlugin(),
             new CustomerOrdersResourceRoutePlugin(),
             new CustomerCartsResourceRoutePlugin(),
+            new AvailabilityNotificationsResourceRoutePlugin(),
+            new CustomerAvailabilityNotificationsResourceRoutePlugin(),
+            new MyAvailabilityNotificationsResourceRoutePlugin(),
         ];
     }
 
