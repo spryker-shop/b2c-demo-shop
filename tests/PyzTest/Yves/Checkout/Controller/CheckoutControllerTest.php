@@ -89,21 +89,10 @@ class CheckoutControllerTest extends Unit
      */
     protected function setUp(): void
     {
-        $this->skipIfCi();
         $this->controller = new CheckoutController();
 
         $sessionClient = new SessionClient();
         $sessionClient->setContainer(new Session(new MockArraySessionStorage()));
-    }
-
-    /**
-     * @return void
-     */
-    protected function skipIfCi()
-    {
-        if (getenv('CIRCLECI')) {
-            $this->markTestSkipped('CircleCi not set up properly');
-        }
     }
 
     /**
