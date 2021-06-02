@@ -8,6 +8,7 @@
 namespace Pyz\Zed\Category;
 
 use Spryker\Zed\Category\CategoryConfig as SprykerCategoryConfig;
+use Spryker\Zed\CmsBlockCategoryConnector\CmsBlockCategoryConnectorConfig;
 
 class CategoryConfig extends SprykerCategoryConfig
 {
@@ -17,7 +18,8 @@ class CategoryConfig extends SprykerCategoryConfig
     public function getTemplateList()
     {
         $templateList = [
-            'Catalog + CMS Slot' => '@CatalogPage/views/catalog-with-cms-block/catalog-with-cms-slot.twig',
+            CmsBlockCategoryConnectorConfig::CATEGORY_TEMPLATE_ONLY_CMS_BLOCK => '@CatalogPage/views/simple-cms-block/simple-cms-block.twig',
+            CmsBlockCategoryConnectorConfig::CATEGORY_TEMPLATE_WITH_CMS_BLOCK => '@CatalogPage/views/catalog-with-cms-block/catalog-with-cms-block.twig',
         ];
         $templateList += parent::getTemplateList();
 
