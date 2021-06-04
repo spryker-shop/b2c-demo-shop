@@ -388,6 +388,9 @@ chdir = /
 ;
 
 [yves]
+user = runner
+group = docker
+
 listen = 127.0.0.1:9001
 pm = static
 pm.max_children = 1
@@ -400,6 +403,9 @@ pm.min_spare_servers = 0
 pm.max_spare_servers = 0
 
 [glue]
+user = runner
+group = docker
+
 listen = 127.0.0.1:9002
 pm = static
 pm.max_children = 1
@@ -412,6 +418,9 @@ pm.min_spare_servers = 0
 pm.max_spare_servers = 0
 
 [zed]
+user = runner
+group = docker
+
 listen = 127.0.0.1:9003
 pm = static
 pm.max_children = 1
