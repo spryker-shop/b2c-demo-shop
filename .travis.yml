@@ -425,10 +425,11 @@ before_install:
   - rm -rf $HOME/chromium-ecosystem/*.zip
   - export CHROMEDRIVER_REVISION=814168
   - export COMPOSER_IGNORE_CHROMEDRIVER=1
+  - nvm use 12
 
 install:
   - chmod -R a+x config/Shared/ci/travis/
-  - composer install --optimize-autoloader --no-interaction
+  - composer install --optimize-autoloader --no-interaction --prefer-install=auto
   - if [[ $PREFER_LOWEST == 1 ]] ; then composer require "spryker-feature/search:202009.0" --with-all-dependencies --optimize-autoloader ; fi
   - if [[ $PREFER_LOWEST == 1 ]] ; then config/Shared/ci/travis/install_elasticsearch_6_8.sh ; else config/Shared/ci/travis/install_elasticsearch_7_6.sh ; fi
   - if [[ $PREFER_MID == 1 ]] ; then composer prefer-mid ; fi
@@ -438,8 +439,6 @@ install:
   - . $HOME/chromium-ecosystem/docker-chromedriver-master/chromium-installer $CHROMEDRIVER_REVISION $HOME/chromium-ecosystem false
 
 before_script:
-  - nvm install 12 > /dev/null
-
   - mkdir -p shared/data/common/jenkins
   - mkdir -p shared/data/common/jenkins/jobs
   - mkdir -p data/cache -m 0777
@@ -472,7 +471,7 @@ script:
   - if [[ $VALIDATION == 1 ]] ; then vendor/bin/phpmd src/ text vendor/spryker/architecture-sniffer/src/ruleset.xml --minimumpriority 2 ; fi
   - if [[ $VALIDATION == 1 ]] ; then vendor/bin/phpstan analyze -c phpstan.neon src/ -l 4 ; fi
 
-  - timeout 45m bash -c "${CHROMEDRIVER_BINARY} --port=4444 --whitelisted-ips= --url-base=/wd/hub --log-path=/tmp/chromedriver.log --log-level=DEBUG">/dev/null &
+  - if [[ $TEST_GROUP == 'acceptance' ]] ; then timeout 45m bash -c "${CHROMEDRIVER_BINARY} --port=4444 --whitelisted-ips= --url-base=/wd/hub --log-path=/tmp/chromedriver.log --log-level=DEBUG">/dev/null & ; fi
   - if [[ $TEST_GROUP == 'without-acceptance' ]] ; then vendor/bin/codecept run -x EndToEnd -x Presentation --ext DotReporter ; fi
   - if [[ $TEST_GROUP == 'acceptance' ]] ; then vendor/bin/codecept run -g EndToEnd -g Presentation -x DockerOnly --ext DotReporter ; fi
 
