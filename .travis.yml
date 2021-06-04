@@ -471,7 +471,7 @@ script:
   - if [[ $VALIDATION == 1 ]] ; then vendor/bin/phpmd src/ text vendor/spryker/architecture-sniffer/src/ruleset.xml --minimumpriority 2 ; fi
   - if [[ $VALIDATION == 1 ]] ; then vendor/bin/phpstan analyze -c phpstan.neon src/ -l 4 ; fi
 
-  - if [[ $TEST_GROUP == 'acceptance' ]] ; then timeout 45m bash -c "${CHROMEDRIVER_BINARY} --port=4444 --whitelisted-ips= --url-base=/wd/hub --log-path=/tmp/chromedriver.log --log-level=DEBUG">/dev/null & ; fi
+  - timeout 45m bash -c "${CHROMEDRIVER_BINARY} --port=4444 --whitelisted-ips= --url-base=/wd/hub --log-path=/tmp/chromedriver.log --log-level=DEBUG">/dev/null &
   - if [[ $TEST_GROUP == 'without-acceptance' ]] ; then vendor/bin/codecept run -x EndToEnd -x Presentation --ext DotReporter ; fi
   - if [[ $TEST_GROUP == 'acceptance' ]] ; then vendor/bin/codecept run -g EndToEnd -g Presentation -x DockerOnly --ext DotReporter ; fi
 
