@@ -84,27 +84,6 @@ sections:
             command: "vendor/bin/console scheduler:clean"
             stores: true
 
-    cache:
-        router-cache-warmup-yves:
-            command: "vendor/bin/yves router:cache:warm-up"
-
-        router-cache-warmup-zed:
-            command: "vendor/bin/console router:cache:warm-up"
-
-        twig-cache-warmup:
-            command: "vendor/bin/console twig:cache:warmer"
-
-        navigation-cache-warmup:
-            command: "vendor/bin/console navigation:build-cache"
-
-        rest-request-validation-cache-warmup:
-            command: "vendor/bin/console rest-api:build-request-validation-cache"
-            stores: true
-
-        class-resolver-build:
-            command: "vendor/bin/console cache:class-resolver:build"
-
-
     queue-flush:
         set-permissions:
             command: "vendor/bin/console queue:permission:set"
@@ -234,6 +213,29 @@ sections:
             stores: true
             groups:
                 - elastic
+
+    performance:
+        composer-autoloader:
+            command: 'composer dumpautoload -a -o --classmap-authoritative'
+
+        class-resolver-build:
+            command: 'vendor/bin/console cache:class-resolver:build'
+
+        router-cache-warmup-yves:
+            command: 'vendor/bin/yves router:cache:warm-up'
+
+        router-cache-warmup-zed:
+            command: 'vendor/bin/console router:cache:warm-up'
+
+        twig-cache-warmup:
+            command: 'vendor/bin/console twig:cache:warmer'
+
+        navigation-cache-warmup:
+            command: 'vendor/bin/console navigation:build-cache'
+
+        rest-request-validation-cache-warmup:
+            command: 'vendor/bin/console rest-api:build-request-validation-cache'
+            stores: true
 
     demodata:
         import-eu-region-demodata:
