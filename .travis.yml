@@ -333,7 +333,7 @@ jobs:
           - docker/sdk testing codecept run -c codeception.acceptance.yml
       before_install: skip
       before_script: skip
-      after_script: skip    
+      after_script: skip
 
     - name: Docker / Alpine / PHP 7.4 / Frontend & Assets
       os: linux
@@ -381,10 +381,6 @@ addons:
     update: false
     sources:
       - sourceline: ppa:chris-lea/redis-server
-      - sourceline: deb http://dl.bintray.com/rabbitmq-erlang/debian bionic erlang
-        key_url: https://github.com/rabbitmq/signing-keys/releases/download/2.0/rabbitmq-release-signing-key.asc
-      - sourceline: deb https://dl.bintray.com/rabbitmq/debian bionic main
-        key_url: https://github.com/rabbitmq/signing-keys/releases/download/2.0/rabbitmq-release-signing-key.asc
       - sourceline: ppa:ondrej/php
     packages:
       - redis-tools
