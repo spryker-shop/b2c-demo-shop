@@ -26,14 +26,12 @@ use Spryker\Zed\ProductBundle\Communication\Plugin\Checkout\ProductBundleOrderSa
 use Spryker\Zed\ProductDiscontinued\Communication\Plugin\Checkout\ProductDiscontinuedCheckoutPreConditionPlugin;
 use Spryker\Zed\ProductOption\Communication\Plugin\Checkout\ProductOptionOrderSaverPlugin;
 use Spryker\Zed\Sales\Communication\Plugin\Checkout\DuplicateOrderCheckoutPreConditionPlugin;
-use Spryker\Zed\Sales\Communication\Plugin\Checkout\OrderItemsSaverPlugin;
-use Spryker\Zed\Sales\Communication\Plugin\Checkout\OrderSaverPlugin;
-use Spryker\Zed\Sales\Communication\Plugin\Checkout\OrderTotalsSaverPlugin;
+use Spryker\Zed\Sales\Communication\Plugin\Checkout\SalesOrderSaverPlugin;
 use Spryker\Zed\Sales\Communication\Plugin\SalesOrderExpanderPlugin;
 use Spryker\Zed\SalesOrderThreshold\Communication\Plugin\Checkout\SalesOrderThresholdCheckoutPreConditionPlugin;
 use Spryker\Zed\SalesOrderThreshold\Communication\Plugin\Checkout\SalesOrderThresholdExpenseSavePlugin;
 use Spryker\Zed\SalesProductConnector\Communication\Plugin\Checkout\ItemMetadataSaverPlugin;
-use Spryker\Zed\Shipment\Communication\Plugin\Checkout\SalesOrderShipmentSavePlugin;
+use Spryker\Zed\Shipment\Communication\Plugin\Checkout\OrderShipmentSavePlugin;
 use Spryker\Zed\ShipmentCheckoutConnector\Communication\Plugin\Checkout\ShipmentCheckoutPreCheckPlugin;
 
 class CheckoutDependencyProvider extends SprykerCheckoutDependencyProvider
@@ -69,18 +67,16 @@ class CheckoutDependencyProvider extends SprykerCheckoutDependencyProvider
         /** @var \Spryker\Zed\Checkout\Dependency\Plugin\CheckoutSaveOrderInterface[] $plugins */
         $plugins = [
             new CustomerOrderSavePlugin(),
+            new SalesOrderSaverPlugin(),
             new CartNoteSaverPlugin(), #CartNoteFeature
             new ProductOptionOrderSaverPlugin(),
+            new GiftCardOrderItemSaverPlugin(), #GiftCardFeature
+            new OrderShipmentSavePlugin(),
             new ItemMetadataSaverPlugin(),
-            new GiftCardOrderItemSaverPlugin(),
             new DiscountOrderSavePlugin(),
             new ProductBundleOrderSaverPlugin(),
             new PaymentOrderSaverPlugin(),
-            new SalesOrderThresholdExpenseSavePlugin(),
-            new OrderSaverPlugin(),
-            new OrderTotalsSaverPlugin(),
-            new OrderItemsSaverPlugin(),
-            new SalesOrderShipmentSavePlugin(), #SalesOrderThresholdFeature
+            new SalesOrderThresholdExpenseSavePlugin(), #SalesOrderThresholdFeature
         ];
 
         return $plugins;
