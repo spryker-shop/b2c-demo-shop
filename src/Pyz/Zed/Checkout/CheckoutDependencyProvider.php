@@ -70,9 +70,9 @@ class CheckoutDependencyProvider extends SprykerCheckoutDependencyProvider
             new SalesOrderSaverPlugin(),
             new CartNoteSaverPlugin(), #CartNoteFeature
             new ProductOptionOrderSaverPlugin(),
+            new ItemMetadataSaverPlugin(),
             new GiftCardOrderItemSaverPlugin(), #GiftCardFeature
             new OrderShipmentSavePlugin(),
-            new ItemMetadataSaverPlugin(),
             new DiscountOrderSavePlugin(),
             new ProductBundleOrderSaverPlugin(),
             new PaymentOrderSaverPlugin(),
