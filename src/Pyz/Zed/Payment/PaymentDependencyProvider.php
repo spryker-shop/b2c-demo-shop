@@ -36,7 +36,7 @@ class PaymentDependencyProvider extends SprykerPaymentDependencyProvider
     /**
      * @return \Spryker\Zed\Payment\Dependency\Plugin\Payment\PaymentMethodFilterPluginInterface[]
      */
-    protected function getPaymentMethodFilterPlugins()
+    protected function getPaymentMethodFilterPlugins(): array
     {
         return [
             new PriceToPayPaymentMethodFilterPlugin(),
