@@ -71,7 +71,7 @@ class CheckoutDependencyProvider extends SprykerCheckoutDependencyProvider
             new CustomerOrderSavePlugin(),
             new OrderSaverPlugin(),
             new OrderTotalsSaverPlugin(),
-            new SalesOrderShipmentSavePlugin(), #SalesOrderThresholdFeature
+            new SalesOrderShipmentSavePlugin(),
             new OrderItemsSaverPlugin(),
             new CartNoteSaverPlugin(), #CartNoteFeature
             new ProductOptionOrderSaverPlugin(),
@@ -80,7 +80,7 @@ class CheckoutDependencyProvider extends SprykerCheckoutDependencyProvider
             new DiscountOrderSavePlugin(),
             new ProductBundleOrderSaverPlugin(),
             new PaymentOrderSaverPlugin(),
-            new SalesOrderThresholdExpenseSavePlugin(),
+            new SalesOrderThresholdExpenseSavePlugin(), #SalesOrderThresholdFeature
         ];
 
         return $plugins;
