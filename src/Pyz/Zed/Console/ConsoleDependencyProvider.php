@@ -126,7 +126,9 @@ use Spryker\Zed\SetupFrontend\Communication\Console\InstallPackageManagerConsole
 use Spryker\Zed\SetupFrontend\Communication\Console\InstallProjectDependenciesConsole;
 use Spryker\Zed\SetupFrontend\Communication\Console\Npm\RunnerConsole;
 use Spryker\Zed\SetupFrontend\Communication\Console\YvesBuildFrontendConsole;
+use Spryker\Zed\SetupFrontend\Communication\Console\YvesInstallDependenciesConsole;
 use Spryker\Zed\SetupFrontend\Communication\Console\ZedBuildFrontendConsole;
+use Spryker\Zed\SetupFrontend\Communication\Console\ZedInstallDependenciesConsole;
 use Spryker\Zed\ShipmentDataImport\ShipmentDataImportConfig;
 use Spryker\Zed\StateMachine\Communication\Console\CheckConditionConsole as StateMachineCheckConditionConsole;
 use Spryker\Zed\StateMachine\Communication\Console\CheckTimeoutConsole as StateMachineCheckTimeoutConsole;
@@ -289,8 +291,10 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
             new CleanUpDependenciesConsole(),
             new InstallProjectDependenciesConsole(),
 
+            new YvesInstallDependenciesConsole(),
             new YvesBuildFrontendConsole(),
 
+            new ZedInstallDependenciesConsole(),
             new ZedBuildFrontendConsole(),
 
             new DeleteAllQueuesConsole(),
