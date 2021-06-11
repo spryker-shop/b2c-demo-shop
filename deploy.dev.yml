@@ -118,12 +118,13 @@ groups:
                                 namespace: 6
 services:
     database:
-        engine: postgres
+        engine: mysql
+        version: mariadb-10.4
         root:
             username: "root"
             password: "secret"
         endpoints:
-            localhost:5432:
+            localhost:3306:
                 protocol: tcp
     broker:
         engine: rabbitmq
@@ -143,7 +144,7 @@ services:
                 protocol: tcp
     search:
         engine: elastic
-        version: 6.8
+        version: 7.6
         endpoints:
             localhost:9200:
                 protocol: tcp
@@ -189,5 +190,8 @@ docker:
 
         docker-sync:
             platforms:
-                - macos
                 - windows
+                
+        mutagen:
+            platforms:
+                - macos

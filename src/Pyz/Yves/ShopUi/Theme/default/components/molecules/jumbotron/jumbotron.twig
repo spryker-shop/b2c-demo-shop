@@ -1,4 +1,5 @@
 {% extends molecule('jumbotron', '@SprykerShop:ShopUi') %}
+{% import _self as component %}
 
 {% block body %}
     {% set backgroundImage = data.imageUrl ?? '' %}
@@ -19,7 +20,7 @@
     <div class="container">
         <div class="{{ component.renderClass(config.name ~ '__inner', modifiers) }} grid grid--center grid--middle" style="{{ textColor }}">
             <h1 class="{{ component.renderClass(config.name ~ '__headline', modifiers) }}">{{ data.headline }}</h1>
-            <h4 class="{{ component.renderClass(config.name ~ '__sub-headline', modifiers) }}">{{ data.subHeadline }}</h4>
+            <h2 class="{{ component.renderClass(config.name ~ '__sub-headline', modifiers) }} title title--h4">{{ data.subHeadline }}</h2>
         </div>
     </div>
 {% endblock %}

@@ -41,6 +41,7 @@ use Spryker\Zed\SalesOrderThreshold\Communication\Plugin\Calculation\AddSalesOrd
 use Spryker\Zed\SalesOrderThreshold\Communication\Plugin\Calculation\RemoveSalesOrderThresholdExpenseCalculatorPlugin;
 use Spryker\Zed\Shipment\Communication\Plugin\Calculation\FilterObsoleteShipmentExpensesCalculatorPlugin;
 use Spryker\Zed\Shipment\Communication\Plugin\Calculation\ShipmentTaxRateCalculatorPlugin;
+use Spryker\Zed\Shipment\Communication\Plugin\Calculation\ShipmentTotalCalculatorPlugin;
 use Spryker\Zed\Tax\Communication\Plugin\Calculator\TaxAmountAfterCancellationCalculatorPlugin;
 use Spryker\Zed\Tax\Communication\Plugin\Calculator\TaxAmountCalculatorPlugin;
 use Spryker\Zed\Tax\Communication\Plugin\Calculator\TaxRateAverageAggregatorPlugin;
@@ -148,7 +149,7 @@ class CalculationDependencyProvider extends SprykerCalculationDependencyProvider
      *    - Item.refundableAmount
      *    - Expense.refundableAmount
      *
-     * CalculateBundlePricePlugin - Calculate bundle item total, from bundled items
+     * CalculateBundlePricesPlugin - Calculate bundle item total, from bundled items
      *    - BundledItem.unitPrice
      *    - BundledItem.sumPrice
      *    - BundledItem.unitGrossPrice
@@ -222,6 +223,7 @@ class CalculationDependencyProvider extends SprykerCalculationDependencyProvider
 
             new CalculateBundlePricesPlugin(),
 
+            new ShipmentTotalCalculatorPlugin(),
             new ExpenseTotalCalculatorPlugin(),
             new DiscountTotalCalculatorPlugin(),
             new RefundTotalCalculatorPlugin(),

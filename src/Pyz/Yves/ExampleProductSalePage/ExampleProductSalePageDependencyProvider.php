@@ -16,6 +16,7 @@ class ExampleProductSalePageDependencyProvider extends AbstractBundleDependencyP
     public const CLIENT_SEARCH = 'CLIENT_SEARCH';
     public const CLIENT_URL_STORAGE = 'CLIENT_URL_STORAGE';
     public const STORE = 'STORE';
+    public const PLUGIN_PRODUCT_SALE_PAGE_WIDGETS = 'PLUGIN_PRODUCT_SALE_PAGE_WIDGETS';
     public const CLIENT_CATALOG = 'CLIENT_CATALOG';
 
     /**
@@ -28,6 +29,7 @@ class ExampleProductSalePageDependencyProvider extends AbstractBundleDependencyP
         $container = $this->addSearchClient($container);
         $container = $this->addUrlStorageClient($container);
         $container = $this->addStore($container);
+        $container = $this->addProductSalePageWidgetPlugins($container);
         $container = $this->addCatalogClient($container);
 
         return $container;
@@ -40,9 +42,9 @@ class ExampleProductSalePageDependencyProvider extends AbstractBundleDependencyP
      */
     protected function addSearchClient(Container $container)
     {
-        $container[self::CLIENT_SEARCH] = function (Container $container) {
+        $container->set(static::CLIENT_SEARCH, function (Container $container) {
             return $container->getLocator()->search()->client();
-        };
+        });
 
         return $container;
     }
@@ -54,9 +56,9 @@ class ExampleProductSalePageDependencyProvider extends AbstractBundleDependencyP
      */
     protected function addUrlStorageClient(Container $container)
     {
-        $container[self::CLIENT_URL_STORAGE] = function (Container $container) {
+        $container->set(static::CLIENT_URL_STORAGE, function (Container $container) {
             return $container->getLocator()->urlStorage()->client();
-        };
+        });
 
         return $container;
     }
@@ -68,9 +70,9 @@ class ExampleProductSalePageDependencyProvider extends AbstractBundleDependencyP
      */
     protected function addStore($container)
     {
-        $container[self::STORE] = function () {
+        $container->set(static::STORE, function () {
             return Store::getInstance();
-        };
+        });
 
         return $container;
     }
@@ -82,9 +84,23 @@ class ExampleProductSalePageDependencyProvider extends AbstractBundleDependencyP
      */
     protected function addCatalogClient(Container $container)
     {
-        $container[self::CLIENT_CATALOG] = function (Container $container) {
+        $container->set(static::CLIENT_CATALOG, function (Container $container) {
             return $container->getLocator()->catalog()->client();
-        };
+        });
+
+        return $container;
+    }
+
+    /**
+     * @param \Spryker\Yves\Kernel\Container $container
+     *
+     * @return \Spryker\Yves\Kernel\Container
+     */
+    protected function addProductSalePageWidgetPlugins($container)
+    {
+        $container->set(static::PLUGIN_PRODUCT_SALE_PAGE_WIDGETS, function () {
+            return [];
+        });
 
         return $container;
     }

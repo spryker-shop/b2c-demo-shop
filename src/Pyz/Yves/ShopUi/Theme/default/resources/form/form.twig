@@ -128,6 +128,39 @@
     {{block('checkbox_widget')}}
 {%- endblock -%}
 
+{%- block password_widget -%}
+    {%- set attr = attr | merge({
+        id: id | default(false),
+        placeholder: attr.placeholder | default(label) | trans(attr_translation_parameters, translation_domain),
+        name: full_name,
+        disabled: disabled | default(false),
+        required: required | default(false),
+    }) -%}
+
+    {% if attr.title | default %}
+        {%- set attr = attr | merge({
+            title: attr.title | trans(attr_translation_parameters, translation_domain),
+        }) -%}
+    {% endif %}
+
+    {% set inputComplexityJsCLass = 'js-password-complexity-indicator__' ~ attr.name %}
+
+    {% include molecule('password-field') with {
+        data: {
+            inputAttributes: attr,
+            inputExtraClasses: ('input input--expand ' ~ (errors is not empty ? ' input--error ') ~ (attr.class | default) ~ inputComplexityJsCLass) | trim,
+        },
+    } only %}
+
+    {% if attr.password_complexity_indicator | default %}
+        {% include molecule('password-complexity-indicator') with {
+            attributes: {
+                'input-class-name': inputComplexityJsCLass,
+            },
+        } only %}
+    {% endif %}
+{%- endblock password_widget -%}
+
 {# rows #}
 
 {%- block form_row -%}
@@ -188,13 +221,13 @@
 {# errors #}
 
 {% block form_errors %}
-    {% spaceless %}
-        {% if errors | length > 0 %}
+    {% apply spaceless %}
+        {% if errors | length %}
             <ul class="list list--bullet list--alert">
                 {% for error in errors %}
                     <li class="list__item">{{ error.message | trans }}</li>
                 {% endfor %}
             </ul>
         {% endif %}
-    {% endspaceless %}
+    {% endapply %}
 {% endblock %}

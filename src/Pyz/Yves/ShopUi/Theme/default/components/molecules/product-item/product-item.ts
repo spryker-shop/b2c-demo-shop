@@ -1,4 +1,6 @@
-import ProductItemCore, { ProductItemData as ProductItemDataCore } from 'ShopUi/components/molecules/product-item/product-item';
+import ProductItemCore, {
+    ProductItemData as ProductItemDataCore,
+} from 'ShopUi/components/molecules/product-item/product-item';
 
 export const EVENT_UPDATE_REVIEW_COUNT = 'updateReviewCount';
 
@@ -21,6 +23,6 @@ export default class ProductItem extends ProductItemCore {
     }
 
     protected set reviewCount(reviewCount: number) {
-        this.dispatchCustomEvent(EVENT_UPDATE_REVIEW_COUNT, {reviewCount});
+        this.dispatchCustomEvent(EVENT_UPDATE_REVIEW_COUNT, { reviewCount });
     }
 }

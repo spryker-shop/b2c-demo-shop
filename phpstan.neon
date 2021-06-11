@@ -6,7 +6,8 @@ parameters:
         - %rootDir%/../../../src/Generated/*
         - %rootDir%/../../../src/Orm/*
 
-    bootstrap: %rootDir%/../../../phpstan-bootstrap.php
+    bootstrapFiles:
+        - %rootDir%/../../../phpstan-bootstrap.php
 
     ignoreErrors:
         - '#Call to an undefined method .+Criteria::.+\(\).#'

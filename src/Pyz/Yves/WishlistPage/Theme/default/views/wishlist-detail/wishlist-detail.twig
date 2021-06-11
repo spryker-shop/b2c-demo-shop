@@ -30,7 +30,7 @@
 
         {% if data.wishlistItems is empty %}
             <div class="text-center">
-                <h6>{{ 'customer.account.wishlist.empty' | trans }}</h6>
+                <span class="title title--h6">{{ 'customer.account.wishlist.empty' | trans }}</span>
             </div>
         {% else %}
             {% include molecule('wishlist-detail-table', 'WishlistPage') with {
