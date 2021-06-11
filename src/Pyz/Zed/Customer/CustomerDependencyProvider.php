@@ -30,13 +30,13 @@ class CustomerDependencyProvider extends SprykerCustomerDependencyProvider
     {
         $container = parent::provideCommunicationLayerDependencies($container);
 
-        $container[self::SALES_FACADE] = function (Container $container) {
+        $container->set(static::SALES_FACADE, function (Container $container) {
             return $container->getLocator()->sales()->facade();
-        };
+        });
 
-        $container[self::NEWSLETTER_FACADE] = function (Container $container) {
+        $container->set(static::NEWSLETTER_FACADE, function (Container $container) {
             return $container->getLocator()->newsletter()->facade();
-        };
+        });
 
         return $container;
     }

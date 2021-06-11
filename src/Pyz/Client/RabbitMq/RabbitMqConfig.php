@@ -8,6 +8,7 @@
 namespace Pyz\Client\RabbitMq;
 
 use Spryker\Client\RabbitMq\RabbitMqConfig as SprykerRabbitMqConfig;
+use Spryker\Shared\AvailabilityStorage\AvailabilityStorageConfig;
 use Spryker\Shared\AvailabilityStorage\AvailabilityStorageConstants;
 use Spryker\Shared\CategoryPageSearch\CategoryPageSearchConstants;
 use Spryker\Shared\CategoryStorage\CategoryStorageConstants;
@@ -22,15 +23,26 @@ use Spryker\Shared\Event\EventConstants;
 use Spryker\Shared\FileManagerStorage\FileManagerStorageConstants;
 use Spryker\Shared\GlossaryStorage\GlossaryStorageConfig;
 use Spryker\Shared\Log\LogConstants;
+use Spryker\Shared\PriceProductStorage\PriceProductStorageConfig;
 use Spryker\Shared\PriceProductStorage\PriceProductStorageConstants;
+use Spryker\Shared\ProductImageStorage\ProductImageStorageConfig;
+use Spryker\Shared\ProductPageSearch\ProductPageSearchConfig;
 use Spryker\Shared\ProductPageSearch\ProductPageSearchConstants;
+use Spryker\Shared\ProductStorage\ProductStorageConfig;
 use Spryker\Shared\ProductStorage\ProductStorageConstants;
+use Spryker\Shared\PublishAndSynchronizeHealthCheck\PublishAndSynchronizeHealthCheckConfig;
+use Spryker\Shared\PublishAndSynchronizeHealthCheckSearch\PublishAndSynchronizeHealthCheckSearchConfig;
+use Spryker\Shared\PublishAndSynchronizeHealthCheckStorage\PublishAndSynchronizeHealthCheckStorageConfig;
 use Spryker\Shared\Publisher\PublisherConfig;
 use Spryker\Shared\SalesReturnSearch\SalesReturnSearchConfig;
 use Spryker\Shared\TaxProductStorage\TaxProductStorageConfig;
 use Spryker\Shared\TaxStorage\TaxStorageConfig;
+use Spryker\Shared\UrlStorage\UrlStorageConfig;
 use Spryker\Shared\UrlStorage\UrlStorageConstants;
 
+/**
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+ */
 class RabbitMqConfig extends SprykerRabbitMqConfig
 {
     /**
@@ -69,6 +81,17 @@ class RabbitMqConfig extends SprykerRabbitMqConfig
                 PublisherConfig::PUBLISH_ROUTING_KEY_ERROR => PublisherConfig::PUBLISH_ERROR_QUEUE,
             ],
             GlossaryStorageConfig::PUBLISH_TRANSLATION,
+            PublishAndSynchronizeHealthCheckConfig::PUBLISH_PUBLISH_AND_SYNCHRONIZE_HEALTH_CHECK,
+            UrlStorageConfig::PUBLISH_URL,
+            AvailabilityStorageConfig::PUBLISH_AVAILABILITY,
+            PriceProductStorageConfig::PUBLISH_PRICE_PRODUCT_ABSTRACT,
+            PriceProductStorageConfig::PUBLISH_PRICE_PRODUCT_CONCRETE,
+            ProductImageStorageConfig::PUBLISH_PRODUCT_ABSTRACT_IMAGE,
+            ProductImageStorageConfig::PUBLISH_PRODUCT_CONCRETE_IMAGE,
+            ProductPageSearchConfig::PUBLISH_PRODUCT_ABSTRACT_PAGE,
+            ProductPageSearchConfig::PUBLISH_PRODUCT_CONCRETE_PAGE,
+            ProductStorageConfig::PUBLISH_PRODUCT_ABSTRACT,
+            ProductStorageConfig::PUBLISH_PRODUCT_CONCRETE,
         ];
     }
 
@@ -78,6 +101,8 @@ class RabbitMqConfig extends SprykerRabbitMqConfig
     protected function getSynchronizationQueueConfiguration(): array
     {
         return [
+            PublishAndSynchronizeHealthCheckSearchConfig::SYNC_SEARCH_PUBLISH_AND_SYNCHRONIZE_HEALTH_CHECK,
+            PublishAndSynchronizeHealthCheckStorageConfig::SYNC_STORAGE_PUBLISH_AND_SYNCHRONIZE_HEALTH_CHECK,
             GlossaryStorageConfig::SYNC_STORAGE_TRANSLATION,
             UrlStorageConstants::URL_SYNC_STORAGE_QUEUE,
             AvailabilityStorageConstants::AVAILABILITY_SYNC_STORAGE_QUEUE,
