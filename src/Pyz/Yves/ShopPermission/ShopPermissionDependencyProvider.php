@@ -15,7 +15,7 @@ class ShopPermissionDependencyProvider extends SprykerShopPermissionDependencyPr
     /**
      * @return \SprykerShop\Yves\ShopApplication\Plugin\AbstractTwigExtensionPlugin[]
      */
-    protected function getPermissionTwigExtensionPlugins(): array
+    protected function getPermissionTwigExtensionPlugins()
     {
         return [
             new PermissionTwigExtensionPlugin(),

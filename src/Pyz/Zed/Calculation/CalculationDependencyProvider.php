@@ -29,7 +29,7 @@ use Spryker\Zed\Calculation\Communication\Plugin\Calculator\RemoveCanceledAmount
 use Spryker\Zed\Calculation\Communication\Plugin\Calculator\RemoveTotalsCalculatorPlugin;
 use Spryker\Zed\Calculation\Communication\Plugin\Calculator\SubtotalCalculatorPlugin;
 use Spryker\Zed\Calculation\Communication\Plugin\Calculator\TaxTotalCalculatorPlugin;
-use Spryker\Zed\DiscountCalculationConnector\Communication\Plugin\DiscountCalculatorPlugin;
+use Spryker\Zed\DiscountCalculationConnector\Communication\Plugin\Calculation\DiscountCalculationPlugin;
 use Spryker\Zed\DiscountPromotion\Communication\Plugin\Calculation\RemovePromotionItemsCalculatorPlugin;
 use Spryker\Zed\GiftCard\Communication\Plugin\GiftCardCalculatorPlugin;
 use Spryker\Zed\Kernel\Container;
@@ -41,6 +41,7 @@ use Spryker\Zed\SalesOrderThreshold\Communication\Plugin\Calculation\AddSalesOrd
 use Spryker\Zed\SalesOrderThreshold\Communication\Plugin\Calculation\RemoveSalesOrderThresholdExpenseCalculatorPlugin;
 use Spryker\Zed\Shipment\Communication\Plugin\Calculation\FilterObsoleteShipmentExpensesCalculatorPlugin;
 use Spryker\Zed\Shipment\Communication\Plugin\Calculation\ShipmentTaxRateCalculatorPlugin;
+use Spryker\Zed\Shipment\Communication\Plugin\Calculation\ShipmentTotalCalculatorPlugin;
 use Spryker\Zed\Tax\Communication\Plugin\Calculator\TaxAmountAfterCancellationCalculatorPlugin;
 use Spryker\Zed\Tax\Communication\Plugin\Calculator\TaxAmountCalculatorPlugin;
 use Spryker\Zed\Tax\Communication\Plugin\Calculator\TaxRateAverageAggregatorPlugin;
@@ -90,7 +91,7 @@ class CalculationDependencyProvider extends SprykerCalculationDependencyProvider
      * SubtotalCalculatorPlugin - Sum of item sumAggregation
      *    - Total.subtotal
      *
-     * DiscountCalculatorPlugin - Discount bundle calculator, runs cart rules/applies voucher codes.
+     * DiscountCalculationPlugin - Discount bundle calculator, runs cart/order rules/applies voucher codes.
      *    - Item.calculatedDiscounts[].unitGrossAmount
      *    - Item.productOptions.calculatedDiscounts[].unitGrossAmount
      *    - Expense.calculatedDiscounts[].unitGrossAmount
@@ -148,7 +149,7 @@ class CalculationDependencyProvider extends SprykerCalculationDependencyProvider
      *    - Item.refundableAmount
      *    - Expense.refundableAmount
      *
-     * CalculateBundlePricePlugin - Calculate bundle item total, from bundled items
+     * CalculateBundlePricesPlugin - Calculate bundle item total, from bundled items
      *    - BundledItem.unitPrice
      *    - BundledItem.sumPrice
      *    - BundledItem.unitGrossPrice
@@ -207,7 +208,7 @@ class CalculationDependencyProvider extends SprykerCalculationDependencyProvider
             new GiftCardCalculatorPlugin(), #GiftCardFeature
 
             new InitialGrandTotalCalculatorPlugin(),
-            new DiscountCalculatorPlugin(),
+            new DiscountCalculationPlugin(),
             new DiscountAmountAggregatorForGenericAmountPlugin(),
             new ItemDiscountAmountFullAggregatorPlugin(),
 
@@ -222,6 +223,7 @@ class CalculationDependencyProvider extends SprykerCalculationDependencyProvider
 
             new CalculateBundlePricesPlugin(),
 
+            new ShipmentTotalCalculatorPlugin(),
             new ExpenseTotalCalculatorPlugin(),
             new DiscountTotalCalculatorPlugin(),
             new RefundTotalCalculatorPlugin(),
@@ -251,6 +253,8 @@ class CalculationDependencyProvider extends SprykerCalculationDependencyProvider
             new ItemSubtotalAggregatorPlugin(),
 
             new SubtotalCalculatorPlugin(),
+
+            new DiscountCalculationPlugin(),
 
             new DiscountAmountAggregatorForGenericAmountPlugin(),
             new ItemDiscountAmountFullAggregatorPlugin(),
