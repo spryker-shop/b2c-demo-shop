@@ -48,5 +48,5 @@ const getAssetsConfig = appSettings => [
 ];
 
 module.exports = {
-    getAssetsConfig
+    getAssetsConfig,
 };

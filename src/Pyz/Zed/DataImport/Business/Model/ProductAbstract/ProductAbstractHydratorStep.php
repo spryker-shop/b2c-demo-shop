@@ -134,7 +134,7 @@ class ProductAbstractHydratorStep implements DataImportStepInterface
                 throw new DataKeyNotFoundInDataSetException(sprintf(
                     'The category with key "%s" was not found in categoryKeys. Maybe there is a typo. Given Categories: "%s"',
                     $categoryKey,
-                    implode(array_values($dataSet[static::COLUMN_CATEGORY_KEYS]))
+                    implode('', array_values($dataSet[static::COLUMN_CATEGORY_KEYS]))
                 ));
             }
 

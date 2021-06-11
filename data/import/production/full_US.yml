@@ -18,9 +18,11 @@ actions:
   - data_entity: shipment-price
     source: data/import/common/US/shipment_price.csv
   - data_entity: sales-order-threshold
-    source: data/import/common/common/sales_order_threshold.csv
+    source: data/import/common/US/sales_order_threshold.csv
   - data_entity: stock
     source: data/import/common/common/warehouse.csv
+  - data_entity: stock-address
+    source: data/import/common/common/warehouse_address.csv
   - data_entity: payment-method
     source: data/import/common/common/payment_method.csv
   - data_entity: return-reason
@@ -32,6 +34,8 @@ actions:
     source: data/import/common/US/warehouse_store.csv
   - data_entity: payment-method-store
     source: data/import/common/US/payment_method_store.csv
+  - data_entity: category-store
+    source: data/import/common/US/category_store.csv
 
 
 #2. Catalog Setup import
@@ -128,10 +132,6 @@ actions:
     source: data/import/common/common/content_product_abstract_list.csv
   - data_entity: content-product-set
     source: data/import/common/common/content_product_set.csv
-  - data_entity: content-navigation
-    source: data/import/common/common/content_navigation.csv
-  - data_entity: navigation-node
-    source: data/import/common/common/navigation_node.csv
   - data_entity: cms-template
     source: data/import/common/common/cms_template.csv
   - data_entity: cms-block
@@ -148,6 +148,10 @@ actions:
     source: data/import/common/US/cms_page_store.csv
   - data_entity: cms-block-store
     source: data/import/common/US/cms_block_store.csv
+  - data_entity: content-navigation
+    source: data/import/common/common/content_navigation.csv
+  - data_entity: navigation-node
+    source: data/import/common/common/navigation_node.csv
 
 
 #6. Miscellaneous Setup import

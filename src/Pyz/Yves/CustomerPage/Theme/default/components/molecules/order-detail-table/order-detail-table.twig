@@ -13,7 +13,7 @@
                     }) }}
                 </h3>
 
-                {% set itemsExceptConfiguredBundles = shipmentGroup.items | filter(item => item.salesOrderConfiguredBundleItem is not defined or item.salesOrderConfiguredBundleItem is empty) %}
+                {% set itemsExceptConfiguredBundles = shipmentGroup.cartItems | filter(item => item.salesOrderConfiguredBundleItem is not defined or item.salesOrderConfiguredBundleItem is empty) %}
 
                 {% for item in itemsExceptConfiguredBundles %}
                     {% set cartItem = item.bundleProduct ?? item %}
@@ -32,6 +32,7 @@
                             bundleItems: item.bundleItems | default([]),
                         },
                     } only %}
+                        {% import _self as component %}
                         {% block image %}
                             <div class="grid grid--middle col">
                                 {% if embed.order is not empty %}
@@ -73,15 +74,15 @@
                         {% endblock %}
 
                         {% block state %}
-                            {% set stateName = data.productItem.state.name ?? '' %}
+                            {% set itemState = data.productItem.state ?? {} %}
 
-                            {% if stateName %}
-                                {% set state = stateName | replace({' ': '-'}) | lower %}
+                            {% if itemState %}
+                                {% set state = itemState.name | replace({' ': '-'}) | lower %}
+                                {% set stateLabel = itemState.displayName ?? ('oms.state.' ~ state) %}
 
                                 {% include molecule('status') with {
-                                    class: 'col',
                                     data: {
-                                        label: stateName | capitalize,
+                                        label: stateLabel | trans,
                                         status: state,
                                     },
                                 } only %}

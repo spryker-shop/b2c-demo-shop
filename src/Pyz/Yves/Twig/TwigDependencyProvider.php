@@ -8,6 +8,7 @@
 namespace Pyz\Yves\Twig;
 
 use Pyz\Yves\CartPage\Plugin\Twig\QuoteTwigPlugin;
+use Pyz\Yves\CartPage\Plugin\Twig\CartTwigPlugin;
 use Spryker\Service\UtilDateTime\Plugin\Twig\DateTimeFormatterTwigPlugin;
 use Spryker\Shared\Twig\Plugin\DebugTwigPlugin;
 use Spryker\Shared\Twig\Plugin\FormTwigPlugin;
@@ -20,8 +21,8 @@ use Spryker\Yves\Translator\Plugin\Twig\TranslatorTwigPlugin;
 use Spryker\Yves\Twig\Plugin\FilesystemTwigLoaderPlugin;
 use Spryker\Yves\Twig\Plugin\FormFilesystemTwigLoaderPlugin;
 use Spryker\Yves\Twig\TwigDependencyProvider as SprykerTwigDependencyProvider;
-use SprykerShop\Yves\CartPage\Plugin\Twig\CartTwigPlugin;
 use SprykerShop\Yves\CatalogPage\Plugin\Twig\CatalogPageTwigPlugin;
+use SprykerShop\Yves\CatalogPage\Plugin\Twig\CategoryFilterTwigPlugin;
 use SprykerShop\Yves\CategoryWidget\Plugin\Twig\CategoryTwigPlugin;
 use SprykerShop\Yves\ChartWidget\Plugin\Twig\ChartTwigPlugin;
 use SprykerShop\Yves\CmsBlockWidget\Plugin\Twig\CmsBlockTwigPlugin;
@@ -44,9 +45,6 @@ use SprykerShop\Yves\ShopUi\Plugin\Twig\FunctionTwigPlugin;
 use SprykerShop\Yves\ShopUi\Plugin\Twig\ShopUiTwigPlugin;
 use SprykerShop\Yves\WebProfilerWidget\Plugin\Twig\WebProfilerTwigLoaderPlugin;
 
-/**
- * @method \Spryker\Yves\Twig\TwigConfig getConfig()
- */
 class TwigDependencyProvider extends SprykerTwigDependencyProvider
 {
     /**
@@ -76,6 +74,7 @@ class TwigDependencyProvider extends SprykerTwigDependencyProvider
             new CmsTwigPlugin(),
             new ShopUiTwigPlugin(),
             new CategoryTwigPlugin(),
+            new CategoryFilterTwigPlugin(),
             new DateTimeFormatterTwigPlugin(),
             new CustomerTwigPlugin(),
             new WidgetTagTwigPlugin(),
@@ -94,16 +93,16 @@ class TwigDependencyProvider extends SprykerTwigDependencyProvider
      */
     protected function getTwigLoaderPlugins(): array
     {
-        $plugins = [
+        $twigLoaderPlugins = [
             new FilesystemTwigLoaderPlugin(),
             new FormFilesystemTwigLoaderPlugin(),
             new ShopApplicationFormTwigLoaderPlugin(),
         ];
 
         if (class_exists(WebProfilerTwigLoaderPlugin::class)) {
-            $plugins[] = new WebProfilerTwigLoaderPlugin();
+            $twigLoaderPlugins[] = new WebProfilerTwigLoaderPlugin();
         }
 
-        return $plugins;
+        return $twigLoaderPlugins;
     }
 }

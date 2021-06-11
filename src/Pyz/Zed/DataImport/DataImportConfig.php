@@ -7,8 +7,8 @@
 
 namespace Pyz\Zed\DataImport;
 
-use Pyz\Shared\DataImport\DataImportConstants;
 use Spryker\Zed\DataImport\DataImportConfig as SprykerDataImportConfig;
+use Spryker\Zed\StockAddressDataImport\StockAddressDataImportConfig;
 
 /**
  * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
@@ -63,10 +63,14 @@ class DataImportConfig extends SprykerDataImportConfig
     }
 
     /**
-     * @return bool
+     * @return string[]
      */
-    public function isInternal()
+    public function getFullImportTypes(): array
     {
-        return ($this->getConfig()->get(DataImportConstants::IS_ENABLE_INTERNAL_IMAGE)) ? true : false;
+        $customImportTypes = [
+            StockAddressDataImportConfig::IMPORT_TYPE_STOCK_ADDRESS,
+        ];
+
+        return array_merge(parent::getFullImportTypes(), $customImportTypes);
     }
 }

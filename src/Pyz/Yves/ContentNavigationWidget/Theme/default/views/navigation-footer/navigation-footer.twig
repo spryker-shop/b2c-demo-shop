@@ -29,8 +29,8 @@
         {% endif %}
     {% endfor %}
 
-    {% set triggerClass = 'js-navigation-footer__trigger--' ~ title | lower | replace(' ', '-') %}
-    {% set targetClass = 'js-navigation-footer__target--' ~ title | lower | replace(' ', '-') %}
+    {% set triggerClass = 'js-navigation-footer__trigger--' ~ title | lower | replace({' ': '-'}) %}
+    {% set targetClass = 'js-navigation-footer__target--' ~ title | lower | replace({' ': '-'}) %}
     {% set itemClass = 'navigation-footer__col' %}
     {% set itemContentHiddenClass = 'is-hidden-sm-only' %}
 

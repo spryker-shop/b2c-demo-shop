@@ -10,7 +10,7 @@ x-frontend-auth: &frontend-auth
 namespace: spryker-cloud
 tag: '1.0'
 
-environment: docker
+environment: docker.staging
 image:
   tag: spryker/php:7.3-alpine3.12
   php:
@@ -155,7 +155,7 @@ services:
         protocol: tcp
   search:
     engine: elastic
-    version: 6.8
+    version: 7.6
     endpoints:
       localhost:9200:
         protocol: tcp

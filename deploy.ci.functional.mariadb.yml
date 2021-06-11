@@ -3,7 +3,7 @@ version: "0.1"
 namespace: spryker_ci
 tag: '1.0'
 
-environment: docker
+environment: docker.ci
 pipeline: docker.ci.functional
 image:
     tag: spryker/php:7.4-alpine3.12
@@ -97,7 +97,7 @@ services:
         engine: redis
     search:
         engine: elastic
-        version: 6.8
+        version: 7.6
     scheduler:
         engine: jenkins
     mail_catcher:

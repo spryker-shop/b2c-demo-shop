@@ -33,11 +33,13 @@
                 <span class="float-right">{{ data.cart.totals.taxTotal.amount | money }}</span>
             </li>
 
-            {% for expense in data.cart.expenses if expense.type == 'THRESHOLD_EXPENSE_TYPE' %}
-                <li class="{{ config.name }}__item spacing-y spacing-y--bigger">
-                    {{ 'sales-order-threshold.strategy.soft-minimum-threshold-fixed-fee' | trans }}
-                    <span class="float-right">{{ expense.sumPrice | money }}</span>
-                </li>
+            {% for expense in data.cart.expenses %}
+                {% if expense.type == 'THRESHOLD_EXPENSE_TYPE' %}
+                    <li class="{{ config.name }}__item spacing-y spacing-y--bigger">
+                        {{ 'sales-order-threshold.strategy.soft-minimum-threshold-fixed-fee' | trans }}
+                        <span class="float-right">{{ expense.sumPrice | money }}</span>
+                    </li>
+                {% endif %}
             {% endfor %}
 
             {% include molecule('cart-discount-summary', 'DiscountWidget') ignore missing with {

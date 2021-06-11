@@ -7,8 +7,8 @@ interface SliderConfig {
     connect: boolean;
     margin: number;
     range: {
-        'min': number,
-        'max': number
+        min: number;
+        max: number;
     };
 }
 
@@ -24,14 +24,14 @@ export default class RangeSlider extends Component {
         this.wrap = <HTMLElement>this.getElementsByClassName(this.wrapClassName)[0];
         this.targetSelectors = <HTMLInputElement[]>Array.from(this.getElementsByClassName(this.targetClassName));
         this.sliderConfig = {
-            start: [ this.valueCurrentMin, this.valueCurrentMax ],
+            start: [this.valueCurrentMin, this.valueCurrentMax],
             step: this.stepAttribute,
             connect: this.connectAttribute,
             margin: this.marginAttribute,
             range: {
                 min: Number(this.valueMin),
-                max: Number(this.valueMax)
-            }
+                max: Number(this.valueMax),
+            },
         };
         this.initialize();
     }
@@ -59,11 +59,11 @@ export default class RangeSlider extends Component {
     }
 
     protected updateSelectors(wrap: noUiSlider, target: HTMLElement[]): void {
-        const currency = (target[0].innerHTML).replace(/[0-9_,.]/g, '');
+        const currency = target[0].innerHTML.replace(/[0-9_,.]/g, '');
         const update = (values, handle) => {
-            currency.search(/&nbsp;/i) !== -1 ?
-                target[handle].innerHTML = `${Number(values[handle])}${currency}` :
-                target[handle].innerHTML = `${currency}${Number(values[handle])}`;
+            currency.search(/&nbsp;/i) !== -1
+                ? (target[handle].innerHTML = `${Number(values[handle])}${currency}`)
+                : (target[handle].innerHTML = `${currency}${Number(values[handle])}`);
         };
 
         wrap.noUiSlider.on('update', update);

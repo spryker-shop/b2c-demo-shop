@@ -23,7 +23,7 @@ class LogDependencyProvider extends SprykerLogDependencyProvider
     /**
      * @return \Spryker\Shared\Log\Dependency\Plugin\LogHandlerPluginInterface[]
      */
-    protected function getLogHandlers()
+    protected function getLogHandlers(): array
     {
         return [
             new StreamHandlerPlugin(),
@@ -34,7 +34,7 @@ class LogDependencyProvider extends SprykerLogDependencyProvider
     /**
      * @return \Spryker\Shared\Log\Dependency\Plugin\LogProcessorPluginInterface[]
      */
-    protected function getLogProcessors()
+    protected function getLogProcessors(): array
     {
         return [
             new PsrLogMessageProcessorPlugin(),
