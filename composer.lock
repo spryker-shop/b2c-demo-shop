@@ -5245,12 +5245,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker-feature/spryker-core-back-office.git",
-                "reference": "d99abb60fc39bbfef9a554dd444ab80330c47f9a"
+                "reference": "4207ea67ba1399583a07db28af68918f78a212cb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker-feature/spryker-core-back-office/zipball/d99abb60fc39bbfef9a554dd444ab80330c47f9a",
-                "reference": "d99abb60fc39bbfef9a554dd444ab80330c47f9a",
+                "url": "https://api.github.com/repos/spryker-feature/spryker-core-back-office/zipball/4207ea67ba1399583a07db28af68918f78a212cb",
+                "reference": "4207ea67ba1399583a07db28af68918f78a212cb",
                 "shasum": ""
             },
             "require": {
@@ -5258,19 +5258,21 @@
                 "spryker/acl": "^3.7.0",
                 "spryker/dashboard": "^1.1.0",
                 "spryker/gui": "^3.34.0",
-                "spryker/security-gui": "^0.1.0",
+                "spryker/security-gui": "^0.2.0",
+                "spryker/security-oauth-user": "^1.0.0",
                 "spryker/user": "^3.11.0",
                 "spryker/user-locale": "^1.1.0",
                 "spryker/user-locale-gui": "^1.0.0",
-                "spryker/user-password-reset": "^0.1.0",
-                "spryker/user-password-reset-mail": "^0.1.0",
+                "spryker/user-password-reset": "^0.2.0",
+                "spryker/user-password-reset-mail": "^0.2.0",
                 "spryker/zed-navigation": "^1.9.0",
-                "spryker/zed-ui": "^0.3.0"
+                "spryker/zed-ui": "^0.4.0"
             },
+            "default-branch": true,
             "type": "metapackage",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "202009.x-dev"
+                    "dev-master": "202107.x-dev"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -5278,7 +5280,10 @@
                 "proprietary"
             ],
             "description": "Spryker Core Back Office [feature]",
-            "time": "2020-12-03T12:10:03+00:00"
+            "support": {
+                "source": "https://github.com/spryker-feature/spryker-core-back-office/tree/master"
+            },
+            "time": "2021-04-29T18:12:43+00:00"
         },
         {
             "name": "spryker-feature/state-machine",
@@ -31802,16 +31807,16 @@
         },
         {
             "name": "spryker/security-gui",
-            "version": "0.1.0",
+            "version": "0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/security-gui.git",
-                "reference": "6fdf98a6f0e23f5382ebc9009b9eec9a9c644fa2"
+                "reference": "fbecb15d265049b03e9b49cfb2700f85ab233181"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/security-gui/zipball/6fdf98a6f0e23f5382ebc9009b9eec9a9c644fa2",
-                "reference": "6fdf98a6f0e23f5382ebc9009b9eec9a9c644fa2",
+                "url": "https://api.github.com/repos/spryker/security-gui/zipball/fbecb15d265049b03e9b49cfb2700f85ab233181",
+                "reference": "fbecb15d265049b03e9b49cfb2700f85ab233181",
                 "shasum": ""
             },
             "require": {
@@ -31820,9 +31825,10 @@
                 "spryker/messenger": "^3.0.0",
                 "spryker/security": "^1.3.0",
                 "spryker/security-extension": "^1.0.0",
+                "spryker/security-gui-extension": "^1.0.0",
                 "spryker/symfony": "^3.5.0",
                 "spryker/user": "^3.0.0",
-                "spryker/user-password-reset": "^0.1.0"
+                "spryker/user-password-reset": "^0.2.0"
             },
             "require-dev": {
                 "spryker/application": "*",
@@ -31857,7 +31863,153 @@
                 "proprietary"
             ],
             "description": "SecurityGui module",
-            "time": "2020-11-16T12:12:48+00:00"
+            "support": {
+                "source": "https://github.com/spryker/security-gui/tree/0.2.0"
+            },
+            "time": "2021-03-19T08:54:29+00:00"
+        },
+        {
+            "name": "spryker/security-gui-extension",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/security-gui-extension.git",
+                "reference": "f0041309dbfd705f083a3713f558e9d0802d27ab"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/security-gui-extension/zipball/f0041309dbfd705f083a3713f558e9d0802d27ab",
+                "reference": "f0041309dbfd705f083a3713f558e9d0802d27ab",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.3"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "SecurityGuiExtension module",
+            "support": {
+                "source": "https://github.com/spryker/security-gui-extension/tree/1.0.0"
+            },
+            "time": "2020-12-16T08:45:12+00:00"
+        },
+        {
+            "name": "spryker/security-oauth-user",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/security-oauth-user.git",
+                "reference": "c1bb77ca1fbd127ae1120910a96f75a640ee03b9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/security-oauth-user/zipball/c1bb77ca1fbd127ae1120910a96f75a640ee03b9",
+                "reference": "c1bb77ca1fbd127ae1120910a96f75a640ee03b9",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.3",
+                "spryker/acl": "^3.4.0",
+                "spryker/kernel": "^3.30.0",
+                "spryker/messenger": "^3.0.0",
+                "spryker/security-extension": "^1.0.0",
+                "spryker/security-oauth-user-extension": "^1.0.0",
+                "spryker/symfony": "^3.5.0",
+                "spryker/transfer": "^3.25.0",
+                "spryker/user": "^3.0.0",
+                "spryker/util-text": "^1.3.0"
+            },
+            "require-dev": {
+                "spryker/application": "*",
+                "spryker/code-sniffer": "*",
+                "spryker/container": "*",
+                "spryker/event-dispatcher": "*",
+                "spryker/propel": "*",
+                "spryker/router": "*",
+                "spryker/security": "*",
+                "spryker/session": "*",
+                "spryker/testify": "*"
+            },
+            "suggest": {
+                "spryker/container": "Add this module to use the Container."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "SecurityOauthUser module",
+            "support": {
+                "source": "https://github.com/spryker/security-oauth-user/tree/1.0.0"
+            },
+            "time": "2020-12-29T11:30:00+00:00"
+        },
+        {
+            "name": "spryker/security-oauth-user-extension",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/security-oauth-user-extension.git",
+                "reference": "8a081c79a6018e911f64e4d903b582a2dc292819"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/security-oauth-user-extension/zipball/8a081c79a6018e911f64e4d903b582a2dc292819",
+                "reference": "8a081c79a6018e911f64e4d903b582a2dc292819",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.3"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "SecurityOauthUserExtension module",
+            "support": {
+                "source": "https://github.com/spryker/security-oauth-user-extension/tree/1.0.0"
+            },
+            "time": "2020-12-03T13:12:06+00:00"
         },
         {
             "name": "spryker/security-system-user",
@@ -34907,23 +35059,23 @@
         },
         {
             "name": "spryker/user-password-reset",
-            "version": "0.1.0",
+            "version": "0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/user-password-reset.git",
-                "reference": "c20a765fab9fea669b5ea9e035a64093ead3204f"
+                "reference": "7817429179e186bf62bd395fb38fa372b8808fcc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/user-password-reset/zipball/c20a765fab9fea669b5ea9e035a64093ead3204f",
-                "reference": "c20a765fab9fea669b5ea9e035a64093ead3204f",
+                "url": "https://api.github.com/repos/spryker/user-password-reset/zipball/7817429179e186bf62bd395fb38fa372b8808fcc",
+                "reference": "7817429179e186bf62bd395fb38fa372b8808fcc",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.3",
                 "spryker/kernel": "^3.30.0",
                 "spryker/user": "^3.9.0",
-                "spryker/user-password-reset-extension": "^0.1.0",
+                "spryker/user-password-reset-extension": "^0.2.0",
                 "spryker/util-text": "^1.2.2"
             },
             "require-dev": {
@@ -34947,20 +35099,23 @@
                 "proprietary"
             ],
             "description": "UserPasswordReset module",
-            "time": "2020-11-16T13:21:01+00:00"
+            "support": {
+                "source": "https://github.com/spryker/user-password-reset/tree/0.2.0"
+            },
+            "time": "2021-03-19T12:56:21+00:00"
         },
         {
             "name": "spryker/user-password-reset-extension",
-            "version": "0.1.0",
+            "version": "0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/user-password-reset-extension.git",
-                "reference": "308f48f081661ce6b51034e30986f0c8d2466c0b"
+                "reference": "606b4a6c933357f142781aad70b0beaab080a431"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/user-password-reset-extension/zipball/308f48f081661ce6b51034e30986f0c8d2466c0b",
-                "reference": "308f48f081661ce6b51034e30986f0c8d2466c0b",
+                "url": "https://api.github.com/repos/spryker/user-password-reset-extension/zipball/606b4a6c933357f142781aad70b0beaab080a431",
+                "reference": "606b4a6c933357f142781aad70b0beaab080a431",
                 "shasum": ""
             },
             "require": {
@@ -34985,27 +35140,30 @@
                 "proprietary"
             ],
             "description": "UserPasswordResetExtension module",
-            "time": "2020-11-10T07:48:19+00:00"
+            "support": {
+                "source": "https://github.com/spryker/user-password-reset-extension/tree/0.2.0"
+            },
+            "time": "2021-03-11T08:39:27+00:00"
         },
         {
             "name": "spryker/user-password-reset-mail",
-            "version": "0.1.0",
+            "version": "0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/user-password-reset-mail.git",
-                "reference": "3dfeec6cd1d92566be3f1338d641b1e5a6e87b76"
+                "reference": "7b0c52774387a842327718303e8fc46ed23e26dd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/user-password-reset-mail/zipball/3dfeec6cd1d92566be3f1338d641b1e5a6e87b76",
-                "reference": "3dfeec6cd1d92566be3f1338d641b1e5a6e87b76",
+                "url": "https://api.github.com/repos/spryker/user-password-reset-mail/zipball/7b0c52774387a842327718303e8fc46ed23e26dd",
+                "reference": "7b0c52774387a842327718303e8fc46ed23e26dd",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.3",
                 "spryker/kernel": "^3.33.0",
                 "spryker/mail": "^4.6.0",
-                "spryker/user-password-reset-extension": "^0.1.0"
+                "spryker/user-password-reset-extension": "^0.2.0"
             },
             "require-dev": {
                 "spryker/code-sniffer": "*",
@@ -35029,7 +35187,10 @@
                 "proprietary"
             ],
             "description": "UserPasswordResetMail module",
-            "time": "2020-11-16T12:12:48+00:00"
+            "support": {
+                "source": "https://github.com/spryker/user-password-reset-mail/tree/0.2.0"
+            },
+            "time": "2021-03-19T08:54:29+00:00"
         },
         {
             "name": "spryker/util-csv",
@@ -36247,16 +36408,16 @@
         },
         {
             "name": "spryker/zed-ui",
-            "version": "0.3.11",
+            "version": "0.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/zed-ui.git",
-                "reference": "fdf29f71321735b89b51e9d67febf89551c89a15"
+                "reference": "cf00818a0b28f64a3699da0ecafd212075124463"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/zed-ui/zipball/fdf29f71321735b89b51e9d67febf89551c89a15",
-                "reference": "fdf29f71321735b89b51e9d67febf89551c89a15",
+                "url": "https://api.github.com/repos/spryker/zed-ui/zipball/cf00818a0b28f64a3699da0ecafd212075124463",
+                "reference": "cf00818a0b28f64a3699da0ecafd212075124463",
                 "shasum": ""
             },
             "require": {
@@ -36265,12 +36426,11 @@
                 "spryker/translator": "^1.1.0",
                 "spryker/twig": "^3.13.0",
                 "spryker/twig-extension": "^1.0.0",
-                "spryker/util-encoding": "^2.0.0"
+                "spryker/util-encoding": "^2.1.0"
             },
             "require-dev": {
                 "spryker/code-sniffer": "*",
-                "spryker/container": "*",
-                "spryker/testify": "*"
+                "spryker/container": "*"
             },
             "suggest": {
                 "spryker/container": "If you want to use Twig plugins",
@@ -36293,7 +36453,10 @@
                 "proprietary"
             ],
             "description": "ZedUi module",
-            "time": "2020-12-09T15:20:23+00:00"
+            "support": {
+                "source": "https://github.com/spryker/zed-ui/tree/0.4.1"
+            },
+            "time": "2021-05-12T08:39:04+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
