@@ -7,8 +7,8 @@
 
 namespace Pyz\Yves\Twig;
 
-use Pyz\Yves\CartPage\Plugin\Twig\QuoteTwigPlugin;
 use Pyz\Yves\CartPage\Plugin\Twig\CartTwigPlugin;
+use Pyz\Yves\CartPage\Plugin\Twig\QuoteTwigPlugin;
 use Spryker\Service\UtilDateTime\Plugin\Twig\DateTimeFormatterTwigPlugin;
 use Spryker\Shared\Twig\Plugin\DebugTwigPlugin;
 use Spryker\Shared\Twig\Plugin\FormTwigPlugin;
