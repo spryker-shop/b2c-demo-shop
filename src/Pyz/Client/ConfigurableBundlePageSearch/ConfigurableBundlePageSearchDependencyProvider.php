@@ -24,7 +24,7 @@ class ConfigurableBundlePageSearchDependencyProvider extends SprykerConfigurable
     }
 
     /**
-     * @return \Spryker\Client\Search\Dependency\Plugin\QueryExpanderPluginInterface[]
+     * @return \Spryker\Client\SearchExtension\Dependency\Plugin\QueryExpanderPluginInterface[]|\Spryker\Client\Search\Dependency\Plugin\QueryExpanderPluginInterface[]
      */
     protected function getConfigurableBundleTemplatePageSearchQueryExpanderPlugins(): array
     {
