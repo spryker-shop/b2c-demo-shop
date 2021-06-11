@@ -174,7 +174,8 @@ jobs:
         - docker/sdk testing console queue:worker:start --stop-when-empty
         - docker/sdk testing codecept run -c codeception.api.yml
       before_install: skip
-      before_script: skip
+      before_script:
+          - ./config/Shared/ci/travis/docker-credentials.sh
       after_script: skip
 
     - name: Docker / Alpine / PHP 7.3 / MariaDB / Functional
@@ -213,7 +214,8 @@ jobs:
         - docker/sdk up -t -v
         - docker/sdk testing codecept run -c codeception.ci.functional.yml
       before_install: skip
-      before_script: skip
+      before_script:
+          - ./config/Shared/ci/travis/docker-credentials.sh
       after_script: skip
 
     - name: Docker / Debian / PHP 7.3 / PostgreSQL / Functional
@@ -252,7 +254,8 @@ jobs:
         - docker/sdk up -t -v
         - docker/sdk testing codecept run -c codeception.ci.functional.yml
       before_install: skip
-      before_script: skip
+      before_script:
+          - ./config/Shared/ci/travis/docker-credentials.sh
       after_script: skip
 
     - name: Docker / Alpine / PHP 7.3 / MariaDB / Acceptance
@@ -292,7 +295,8 @@ jobs:
           - docker/sdk testing console queue:worker:start --stop-when-empty
           - docker/sdk testing codecept run -c codeception.acceptance.yml
       before_install: skip
-      before_script: skip
+      before_script:
+          - ./config/Shared/ci/travis/docker-credentials.sh
       after_script: skip
 
     - name: Docker / Alpine / PHP 7.4 / PostgreSQL / Acceptance
@@ -332,7 +336,8 @@ jobs:
           - docker/sdk testing console queue:worker:start --stop-when-empty
           - docker/sdk testing codecept run -c codeception.acceptance.yml
       before_install: skip
-      before_script: skip
+      before_script:
+          - ./config/Shared/ci/travis/docker-credentials.sh
       after_script: skip
 
     - name: Docker / Alpine / PHP 7.4 / Frontend & Assets
@@ -373,7 +378,8 @@ jobs:
         - docker run -it --rm --entrypoint='' spryker_b2c_frontend:1.0-frontend ls -al /data/public/Yves/assets/myhash
         - docker run -it --rm --entrypoint='' spryker_b2c_frontend:1.0-frontend ls -al /data/public/Zed/assets/
       before_install: skip
-      before_script: skip
+      before_script:
+          - ./config/Shared/ci/travis/docker-credentials.sh
       after_script: skip
 
 addons:
@@ -425,10 +431,11 @@ before_install:
   - rm -rf $HOME/chromium-ecosystem/*.zip
   - export CHROMEDRIVER_REVISION=814168
   - export COMPOSER_IGNORE_CHROMEDRIVER=1
+  - nvm use 12
 
 install:
   - chmod -R a+x config/Shared/ci/travis/
-  - composer install --optimize-autoloader --no-interaction
+  - composer install --optimize-autoloader --no-interaction --prefer-install=auto
   - if [[ $PREFER_LOWEST == 1 ]] ; then composer require "spryker-feature/search:202009.0" --with-all-dependencies --optimize-autoloader ; fi
   - if [[ $PREFER_LOWEST == 1 ]] ; then config/Shared/ci/travis/install_elasticsearch_6_8.sh ; else config/Shared/ci/travis/install_elasticsearch_7_6.sh ; fi
   - if [[ $PREFER_MID == 1 ]] ; then composer prefer-mid ; fi
@@ -438,8 +445,6 @@ install:
   - . $HOME/chromium-ecosystem/docker-chromedriver-master/chromium-installer $CHROMEDRIVER_REVISION $HOME/chromium-ecosystem false
 
 before_script:
-  - nvm install 12 > /dev/null
-
   - mkdir -p shared/data/common/jenkins
   - mkdir -p shared/data/common/jenkins/jobs
   - mkdir -p data/cache -m 0777

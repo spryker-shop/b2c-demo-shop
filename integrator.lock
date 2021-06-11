@@ -66,5 +66,52 @@
         "default": "true"
       }
     }
+  },
+  "Spryker.Sales": {
+    "wire-plugin": {
+      "8acd5b51dbce690ba44335f6e383095acc6e4b9e": {
+        "target": "\\Spryker\\Zed\\Checkout\\CheckoutDependencyProvider::getCheckoutOrderSavers",
+        "source": "\\Spryker\\Zed\\Sales\\Communication\\Plugin\\Checkout\\OrderSaverPlugin"
+      },
+      "529047d534207b1a4512794d4ed69d72ad800512": {
+        "target": "\\Spryker\\Zed\\Checkout\\CheckoutDependencyProvider::getCheckoutOrderSavers",
+        "source": "\\Spryker\\Zed\\Sales\\Communication\\Plugin\\Checkout\\OrderTotalsSaverPlugin",
+        "poistion": {
+          "before": "\\Spryker\\Zed\\Shipment\\Communication\\Plugin\\Checkout\\SalesOrderShipmentSavePlugin",
+          "after": "\\Spryker\\Zed\\Sales\\Communication\\Plugin\\Checkout\\OrderSaverPlugin"
+        }
+      },
+      "aa17d64d695cf74b2887af9c0701a12a9810e5c8": {
+        "target": "\\Spryker\\Zed\\Checkout\\CheckoutDependencyProvider::getCheckoutOrderSavers",
+        "source": "\\Spryker\\Zed\\Sales\\Communication\\Plugin\\Checkout\\OrderItemsSaverPlugin",
+        "poistion": {
+          "after": "\\Spryker\\Zed\\Shipment\\Communication\\Plugin\\Checkout\\SalesOrderShipmentSavePlugin"
+        }
+      }
+    },
+    "unwire-plugin": {
+      "f5ad68d52541dfe25a27c1adba51f8f281aeca6d": {
+        "target": "\\Spryker\\Zed\\Checkout\\CheckoutDependencyProvider::getCheckoutOrderSavers",
+        "source": "\\Spryker\\Zed\\Sales\\Communication\\Plugin\\Checkout\\SalesOrderSaverPlugin"
+      }
+    }
+  },
+  "Spryker.Shipment": {
+    "wire-plugin": {
+      "fc05c42e2dc332924dfdc4c1089ee24fae5cd908": {
+        "target": "\\Spryker\\Zed\\Checkout\\CheckoutDependencyProvider::getCheckoutOrderSavers",
+        "source": "\\Spryker\\Zed\\Shipment\\Communication\\Plugin\\Checkout\\SalesOrderShipmentSavePlugin",
+        "poistion": {
+          "before": "\\Spryker\\Zed\\Sales\\Communication\\Plugin\\Checkout\\OrderItemsSaverPlugin",
+          "after": "\\Spryker\\Zed\\Sales\\Communication\\Plugin\\Checkout\\OrderTotalsSaverPlugin"
+        }
+      }
+    },
+    "unwire-plugin": {
+      "0c9f39cebc63383a593f7f1bbd02ecc320b28e67": {
+        "target": "\\Spryker\\Zed\\Checkout\\CheckoutDependencyProvider::getCheckoutOrderSavers",
+        "source": "\\Spryker\\Zed\\Shipment\\Communication\\Plugin\\Checkout\\OrderShipmentSavePlugin"
+      }
+    }
   }
 }

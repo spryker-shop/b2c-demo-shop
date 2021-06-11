@@ -23,6 +23,8 @@ class CustomerPageConfig extends SprykerCustomerPageConfig
      */
     protected const MAX_LENGTH_CUSTOMER_PASSWORD = 64;
 
+    protected const IS_ORDER_HISTORY_SEARCH_ENABLED = true;
+
     /**
      * {@inheritDoc}
      *
@@ -48,7 +50,7 @@ class CustomerPageConfig extends SprykerCustomerPageConfig
      *
      * @api
      *
-     * @deprecated Will be removed without replacement. In the future the locale-specific URL will be used.
+     * @deprecated Will be removed without replacement. If the future the locale-specific URL will be used.
      *
      * @return bool
      */

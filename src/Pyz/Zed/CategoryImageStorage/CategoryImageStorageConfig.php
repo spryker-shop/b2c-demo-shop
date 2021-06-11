@@ -9,9 +9,9 @@ namespace Pyz\Zed\CategoryImageStorage;
 
 use Pyz\Zed\Synchronization\SynchronizationConfig;
 use Spryker\Shared\Publisher\PublisherConfig;
-use Spryker\Zed\CategoryImageStorage\CategoryImageStorageConfig as SprykerCategoryImageConfig;
+use Spryker\Zed\CategoryImageStorage\CategoryImageStorageConfig as SprykerCategoryImageStorageConfig;
 
-class CategoryImageStorageConfig extends SprykerCategoryImageConfig
+class CategoryImageStorageConfig extends SprykerCategoryImageStorageConfig
 {
     /**
      * @return string|null
