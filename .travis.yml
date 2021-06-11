@@ -333,7 +333,7 @@ jobs:
           - docker/sdk testing codecept run -c codeception.acceptance.yml
       before_install: skip
       before_script: skip
-      after_script: skip    
+      after_script: skip
 
     - name: Docker / Alpine / PHP 7.4 / Frontend & Assets
       os: linux
@@ -381,10 +381,6 @@ addons:
     update: false
     sources:
       - sourceline: ppa:chris-lea/redis-server
-      - sourceline: deb http://dl.bintray.com/rabbitmq-erlang/debian bionic erlang
-        key_url: https://github.com/rabbitmq/signing-keys/releases/download/2.0/rabbitmq-release-signing-key.asc
-      - sourceline: deb https://dl.bintray.com/rabbitmq/debian bionic main
-        key_url: https://github.com/rabbitmq/signing-keys/releases/download/2.0/rabbitmq-release-signing-key.asc
       - sourceline: ppa:ondrej/php
     packages:
       - redis-tools
@@ -429,10 +425,11 @@ before_install:
   - rm -rf $HOME/chromium-ecosystem/*.zip
   - export CHROMEDRIVER_REVISION=814168
   - export COMPOSER_IGNORE_CHROMEDRIVER=1
+  - nvm use 12
 
 install:
   - chmod -R a+x config/Shared/ci/travis/
-  - composer install --optimize-autoloader --no-interaction
+  - composer install --optimize-autoloader --no-interaction --prefer-install=auto
   - if [[ $PREFER_LOWEST == 1 ]] ; then composer require "spryker-feature/search:202009.0" --with-all-dependencies --optimize-autoloader ; fi
   - if [[ $PREFER_LOWEST == 1 ]] ; then config/Shared/ci/travis/install_elasticsearch_6_8.sh ; else config/Shared/ci/travis/install_elasticsearch_7_6.sh ; fi
   - if [[ $PREFER_MID == 1 ]] ; then composer prefer-mid ; fi
@@ -442,8 +439,6 @@ install:
   - . $HOME/chromium-ecosystem/docker-chromedriver-master/chromium-installer $CHROMEDRIVER_REVISION $HOME/chromium-ecosystem false
 
 before_script:
-  - nvm install 12 > /dev/null
-
   - mkdir -p shared/data/common/jenkins
   - mkdir -p shared/data/common/jenkins/jobs
   - mkdir -p data/cache -m 0777
@@ -481,7 +476,8 @@ script:
   - if [[ $TEST_GROUP == 'acceptance' ]] ; then vendor/bin/codecept run -g EndToEnd -g Presentation -x DockerOnly --ext DotReporter ; fi
 
   - if [[ $VALIDATION == 1 ]] ; then node ./frontend/libs/stylelint ; fi
-  - if [[ $VALIDATION == 1 ]] ; then node ./frontend/libs/tslint stylish ; fi
+  - if [[ $VALIDATION == 1 ]] ; then node ./frontend/libs/tslint --format stylish ; fi
+  - if [[ $VALIDATION == 1 ]] ; then node ./frontend/libs/formatter ; fi
 
 notifications:
   email: false

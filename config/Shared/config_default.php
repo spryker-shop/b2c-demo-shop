@@ -11,6 +11,7 @@ use Spryker\Service\FlysystemLocalFileSystem\Plugin\Flysystem\LocalFilesystemBui
 use Spryker\Shared\Acl\AclConstants;
 use Spryker\Shared\Application\ApplicationConstants;
 use Spryker\Shared\Application\Log\Config\SprykerLoggerConfig;
+use Spryker\Shared\Category\CategoryConstants;
 use Spryker\Shared\CmsGui\CmsGuiConstants;
 use Spryker\Shared\Customer\CustomerConstants;
 use Spryker\Shared\ErrorHandler\ErrorHandlerConstants;
@@ -31,6 +32,7 @@ use Spryker\Shared\Oauth\OauthConstants;
 use Spryker\Shared\OauthCryptography\OauthCryptographyConstants;
 use Spryker\Shared\Oms\OmsConstants;
 use Spryker\Shared\ProductManagement\ProductManagementConstants;
+use Spryker\Shared\ProductRelation\ProductRelationConstants;
 use Spryker\Shared\Propel\PropelConstants;
 use Spryker\Shared\PropelQueryBuilder\PropelQueryBuilderConstants;
 use Spryker\Shared\Queue\QueueConfig;
@@ -268,6 +270,7 @@ $config[SearchElasticsearchConstants::HOST] = getenv('SPRYKER_SEARCH_HOST');
 $config[SearchElasticsearchConstants::TRANSPORT] = getenv('SPRYKER_SEARCH_PROTOCOL') ?: 'http';
 $config[SearchElasticsearchConstants::PORT] = getenv('SPRYKER_SEARCH_PORT');
 $config[SearchElasticsearchConstants::AUTH_HEADER] = getenv('SPRYKER_SEARCH_BASIC_AUTH') ?: null;
+$config[SearchElasticsearchConstants::INDEX_PREFIX] = getenv('SPRYKER_SEARCH_INDEX_PREFIX') ?: '';
 
 $config[SearchElasticsearchConstants::FULL_TEXT_BOOSTED_BOOSTING_VALUE] = 3;
 
@@ -275,7 +278,7 @@ $config[SearchElasticsearchConstants::FULL_TEXT_BOOSTED_BOOSTING_VALUE] = 3;
 
 $config[StorageConstants::STORAGE_KV_SOURCE] = strtolower(getenv('SPRYKER_KEY_VALUE_STORE_ENGINE')) ?: 'redis';
 $config[StorageRedisConstants::STORAGE_REDIS_PERSISTENT_CONNECTION] = true;
-$config[StorageRedisConstants::STORAGE_REDIS_PROTOCOL] = getenv('SPRYKER_KEY_VALUE_STORE_PROTOCOL') ?: 'tcp';
+$config[StorageRedisConstants::STORAGE_REDIS_SCHEME] = getenv('SPRYKER_KEY_VALUE_STORE_PROTOCOL') ?: 'tcp';
 $config[StorageRedisConstants::STORAGE_REDIS_HOST] = getenv('SPRYKER_KEY_VALUE_STORE_HOST');
 $config[StorageRedisConstants::STORAGE_REDIS_PORT] = getenv('SPRYKER_KEY_VALUE_STORE_PORT');
 $config[StorageRedisConstants::STORAGE_REDIS_PASSWORD] = getenv('SPRYKER_KEY_VALUE_STORE_PASSWORD');
@@ -294,7 +297,7 @@ $config[SessionConstants::YVES_SESSION_COOKIE_NAME]
     = $config[SessionConstants::YVES_SESSION_COOKIE_DOMAIN]
     = getenv('SPRYKER_FE_HOST');
 $config[SessionConstants::YVES_SESSION_SAVE_HANDLER] = SessionRedisConfig::SESSION_HANDLER_REDIS_LOCKING;
-$config[SessionRedisConstants::YVES_SESSION_REDIS_PROTOCOL] = getenv('SPRYKER_SESSION_FE_PROTOCOL') ?: 'tcp';
+$config[SessionRedisConstants::YVES_SESSION_REDIS_SCHEME] = getenv('SPRYKER_SESSION_FE_PROTOCOL') ?: 'tcp';
 $config[SessionRedisConstants::YVES_SESSION_REDIS_HOST] = getenv('SPRYKER_SESSION_FE_HOST');
 $config[SessionRedisConstants::YVES_SESSION_REDIS_PORT] = getenv('SPRYKER_SESSION_FE_PORT');
 $config[SessionRedisConstants::YVES_SESSION_REDIS_PASSWORD] = getenv('SPRYKER_SESSION_FE_PASSWORD');
@@ -314,7 +317,7 @@ $config[SessionConstants::ZED_SESSION_COOKIE_NAME]
     = $config[SessionConstants::ZED_SESSION_COOKIE_DOMAIN]
     = getenv('SPRYKER_BE_HOST');
 $config[SessionConstants::ZED_SESSION_SAVE_HANDLER] = SessionRedisConfig::SESSION_HANDLER_REDIS;
-$config[SessionRedisConstants::ZED_SESSION_REDIS_PROTOCOL] = getenv('SPRYKER_SESSION_BE_PROTOCOL') ?: 'tcp';
+$config[SessionRedisConstants::ZED_SESSION_REDIS_SCHEME] = getenv('SPRYKER_SESSION_BE_PROTOCOL') ?: 'tcp';
 $config[SessionRedisConstants::ZED_SESSION_REDIS_HOST] = getenv('SPRYKER_SESSION_BE_HOST');
 $config[SessionRedisConstants::ZED_SESSION_REDIS_PORT] = getenv('SPRYKER_SESSION_BE_PORT');
 $config[SessionRedisConstants::ZED_SESSION_REDIS_PASSWORD] = getenv('SPRYKER_SESSION_BE_PASSWORD');
@@ -325,8 +328,12 @@ $config[SessionConstants::ZED_SESSION_TIME_TO_LIVE]
     = SessionConfig::SESSION_LIFETIME_1_HOUR;
 $config[SessionConstants::ZED_SESSION_COOKIE_TIME_TO_LIVE] = SessionConfig::SESSION_LIFETIME_BROWSER_SESSION;
 
+// >>> Product Relation
+$config[ProductRelationConstants::PRODUCT_RELATION_READ_CHUNK] = 1000;
+$config[ProductRelationConstants::PRODUCT_RELATION_UPDATE_CHUNK] = 1000;
+
 $config[SecurityBlockerConstants::SECURITY_BLOCKER_REDIS_PERSISTENT_CONNECTION] = true;
-$config[SecurityBlockerConstants::SECURITY_BLOCKER_REDIS_PROTOCOL] = getenv('SPRYKER_KEY_VALUE_STORE_PROTOCOL') ?: 'tcp';
+$config[SecurityBlockerConstants::SECURITY_BLOCKER_REDIS_SCHEME] = getenv('SPRYKER_KEY_VALUE_STORE_PROTOCOL') ?: 'tcp';
 $config[SecurityBlockerConstants::SECURITY_BLOCKER_REDIS_HOST] = getenv('SPRYKER_KEY_VALUE_STORE_HOST');
 $config[SecurityBlockerConstants::SECURITY_BLOCKER_REDIS_PORT] = getenv('SPRYKER_KEY_VALUE_STORE_PORT');
 $config[SecurityBlockerConstants::SECURITY_BLOCKER_REDIS_PASSWORD] = getenv('SPRYKER_KEY_VALUE_STORE_PASSWORD');
@@ -534,3 +541,7 @@ $config[SalesConstants::PAYMENT_METHOD_STATEMACHINE_MAPPING] = [];
 
 // >>> Taxes
 $config[TaxConstants::DEFAULT_TAX_RATE] = 19;
+
+// >>> Category
+$config[CategoryConstants::CATEGORY_READ_CHUNK] = 10000;
+$config[CategoryConstants::CATEGORY_IS_CLOSURE_TABLE_EVENTS_ENABLED] = false;

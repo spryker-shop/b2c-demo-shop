@@ -2,7 +2,7 @@ import Component from 'ShopUi/models/component';
 
 const DIRECTIONS = {
     TOP: 'top',
-    DOWN: 'down'
+    DOWN: 'down',
 };
 const THROTTLE_DURATION = 300;
 
@@ -81,7 +81,7 @@ export default class ScrollParallax extends Component {
         let yPosition = 0;
 
         while (wrapper) {
-            yPosition += (wrapper.offsetTop - wrapper.scrollTop + wrapper.clientTop);
+            yPosition += wrapper.offsetTop - wrapper.scrollTop + wrapper.clientTop;
             wrapper = <HTMLElement>wrapper.offsetParent;
         }
 

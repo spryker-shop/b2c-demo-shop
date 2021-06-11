@@ -53,10 +53,7 @@ export default class NodeAnimator extends Component {
     }
 
     protected initObserver(): IntersectionObserver {
-        return new IntersectionObserver(
-            this.observerCallback(),
-            this.viewportOptions,
-        );
+        return new IntersectionObserver(this.observerCallback(), this.viewportOptions);
     }
 
     protected observerCallback(): IntersectionObserverCallback {
@@ -73,8 +70,11 @@ export default class NodeAnimator extends Component {
 
     protected validateTarget(): void {
         if (!this.target || this.target.offsetParent === null) {
-            this.target = <HTMLElement>Array.from(document.getElementsByClassName(this.targetClassName))
-                .filter((target: HTMLElement) => target.offsetParent !== null)[0];
+            this.target = <HTMLElement>(
+                Array.from(document.getElementsByClassName(this.targetClassName)).filter(
+                    (target: HTMLElement) => target.offsetParent !== null,
+                )[0]
+            );
         }
 
         if (!this.target) {
@@ -120,7 +120,9 @@ export default class NodeAnimator extends Component {
         const elementCoordinates = <DOMRect>element.getBoundingClientRect();
 
         const clonedNode = <HTMLElement>element.cloneNode(true);
-        clonedNode.className = `${this.name}__image ${this.cloneNodeClassNames} ${trigger.dataset.cloneNodeClassNames ?? ''}`;
+        clonedNode.className = `${this.name}__image ${this.cloneNodeClassNames} ${
+            trigger.dataset.cloneNodeClassNames ?? ''
+        }`;
         clonedNode.style.cssText = `
             top: ${elementCoordinates.top + pageYOffset}px;
             left: ${elementCoordinates.left + pageXOffset}px;
@@ -160,12 +162,7 @@ export default class NodeAnimator extends Component {
                 this.validateTarget();
             }
 
-            const sides = [
-                DIRECTIONS.TOP,
-                DIRECTIONS.LEFT,
-                DIMENSIONS.WIDTH,
-                DIMENSIONS.HEIGHT,
-            ];
+            const sides = [DIRECTIONS.TOP, DIRECTIONS.LEFT, DIMENSIONS.WIDTH, DIMENSIONS.HEIGHT];
             this.setAnimationDistance(sides, item, percentageProgress);
 
             if (percentageProgress <= PERCENT) {

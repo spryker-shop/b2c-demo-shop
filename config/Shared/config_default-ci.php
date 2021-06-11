@@ -107,7 +107,7 @@ $config[SearchElasticsearchConstants::PORT] = 9200;
 // >>> STORAGE
 
 $config[StorageRedisConstants::STORAGE_REDIS_PERSISTENT_CONNECTION] = true;
-$config[StorageRedisConstants::STORAGE_REDIS_PROTOCOL] = 'tcp';
+$config[StorageRedisConstants::STORAGE_REDIS_SCHEME] = 'tcp';
 $config[StorageRedisConstants::STORAGE_REDIS_HOST] = '127.0.0.1';
 $config[StorageRedisConstants::STORAGE_REDIS_PORT] = 6379;
 $config[StorageRedisConstants::STORAGE_REDIS_PASSWORD] = false;
@@ -123,13 +123,13 @@ $config[StorageDatabaseConstants::DB_PASSWORD] = '';
 
 // >>> SESSION
 
-$config[SessionRedisConstants::YVES_SESSION_REDIS_PROTOCOL] = $config[StorageRedisConstants::STORAGE_REDIS_PROTOCOL];
+$config[SessionRedisConstants::YVES_SESSION_REDIS_SCHEME] = $config[StorageRedisConstants::STORAGE_REDIS_SCHEME];
 $config[SessionRedisConstants::YVES_SESSION_REDIS_HOST] = $config[StorageRedisConstants::STORAGE_REDIS_HOST];
 $config[SessionRedisConstants::YVES_SESSION_REDIS_PORT] = $config[StorageRedisConstants::STORAGE_REDIS_PORT];
 $config[SessionRedisConstants::YVES_SESSION_REDIS_PASSWORD] = $config[StorageRedisConstants::STORAGE_REDIS_PASSWORD];
 $config[SessionRedisConstants::YVES_SESSION_REDIS_DATABASE] = 1;
 
-$config[SessionRedisConstants::ZED_SESSION_REDIS_PROTOCOL] = $config[StorageRedisConstants::STORAGE_REDIS_PROTOCOL];
+$config[SessionRedisConstants::ZED_SESSION_REDIS_SCHEME] = $config[StorageRedisConstants::STORAGE_REDIS_SCHEME];
 $config[SessionRedisConstants::ZED_SESSION_REDIS_HOST] = $config[StorageRedisConstants::STORAGE_REDIS_HOST];
 $config[SessionRedisConstants::ZED_SESSION_REDIS_PORT] = $config[StorageRedisConstants::STORAGE_REDIS_PORT];
 $config[SessionRedisConstants::ZED_SESSION_REDIS_PASSWORD] = $config[StorageRedisConstants::STORAGE_REDIS_PASSWORD];
@@ -138,7 +138,7 @@ $config[SessionRedisConstants::ZED_SESSION_REDIS_DATABASE] = 2;
 // >>> SECURITY BLOCKER
 
 $config[SecurityBlockerConstants::SECURITY_BLOCKER_REDIS_PERSISTENT_CONNECTION] = true;
-$config[SecurityBlockerConstants::SECURITY_BLOCKER_REDIS_PROTOCOL] = 'tcp';
+$config[SecurityBlockerConstants::SECURITY_BLOCKER_REDIS_SCHEME] = 'tcp';
 $config[SecurityBlockerConstants::SECURITY_BLOCKER_REDIS_HOST] = '127.0.0.1';
 $config[SecurityBlockerConstants::SECURITY_BLOCKER_REDIS_PORT] = 6379;
 $config[SecurityBlockerConstants::SECURITY_BLOCKER_REDIS_PASSWORD] = false;
