@@ -24,7 +24,7 @@ export default class BreakpointDependentBlockPlacer extends Component {
                 node: block,
                 parentNode: block.parentElement,
                 breakpoint: +this.getDataAttribute(block, 'data-breakpoint'),
-                classNameBlockToMove: this.getDataAttribute(block, 'data-block-to')
+                classNameBlockToMove: this.getDataAttribute(block, 'data-block-to'),
             };
         });
 
@@ -41,13 +41,13 @@ export default class BreakpointDependentBlockPlacer extends Component {
     protected initBlockMoving(): void {
         this.data.forEach((item: BlockMovingInterface) => {
             if (window.innerWidth < item.breakpoint && !item.isMoved) {
-                const {classNameBlockToMove, node} = item;
+                const { classNameBlockToMove, node } = item;
                 const blockToMove = document.getElementsByClassName(classNameBlockToMove)[0];
 
                 item.isMoved = true;
                 blockToMove.appendChild(node);
             } else if (window.innerWidth >= item.breakpoint && item.isMoved) {
-                const {parentNode, node} = item;
+                const { parentNode, node } = item;
 
                 item.isMoved = false;
                 parentNode.appendChild(node);

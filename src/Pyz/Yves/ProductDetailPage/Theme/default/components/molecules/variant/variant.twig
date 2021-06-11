@@ -54,12 +54,18 @@
                     {{ 'product.attribute.not_available' | trans }}
                 {% endif %}
             {% else %}
-                {% include molecule('variant-resetter', 'ProductDetailPage') with {
-                    data: {
-                        formName: embed.formName,
-                        selectedValue: embed.selectedValue,
-                    },
-                } only %}
+                {% set isVariantsMultiple = embed.values | length > 1 %}
+
+                {% if isVariantsMultiple %}
+                    {% include molecule('variant-resetter', 'ProductDetailPage') with {
+                        data: {
+                            formName: embed.formName,
+                            selectedValue: embed.selectedValue,
+                        },
+                    } only %}
+                {% else %}
+                    {{ embed.selectedValue }}
+                {% endif %}
             {% endif %}
         {% endblock %}
     {% endembed %}

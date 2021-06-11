@@ -32,6 +32,12 @@ jobs:
       env:
         - VALIDATION=1
 
+    - php: "7.3"
+      dist: bionic
+      env:
+        - VALIDATION=1
+        - PREFER_LOWEST=1
+
     - php: "7.4"
       dist: bionic
       env:
@@ -40,21 +46,56 @@ jobs:
     - php: "7.4"
       dist: bionic
       env:
+        - TEST_GROUP=acceptance
+        - PREFER_MID=1
+
+    - php: "7.4"
+      dist: bionic
+      env:
         - TEST_GROUP=without-acceptance
 
-    - php: "7.2"
+    - php: "7.4"
+      dist: bionic
+      env:
+        - TEST_GROUP=without-acceptance
+        - PREFER_MID=1
+
+    - php: "7.3"
       dist: bionic
       env:
         - TEST_GROUP=acceptance
         - DB_ENGINE=mysql
         - APPLICATION_ENV=ci.mysql
 
-    - php: "7.2"
+    - php: "7.3"
       dist: bionic
       env:
         - TEST_GROUP=without-acceptance
         - DB_ENGINE=mysql
         - APPLICATION_ENV=ci.mysql
+
+    - php: "7.3"
+      dist: bionic
+      env:
+        - TEST_GROUP=acceptance
+        - ON_EVENTS=push,cron
+        - DB_ENGINE=mysql
+        - PREFER_LOWEST=1
+
+    - php: "7.3"
+      dist: bionic
+      env:
+        - TEST_GROUP=without-acceptance
+        - ON_EVENTS=cron,push
+        - DB_ENGINE=mysql
+        - PREFER_LOWEST=1
+
+    - name: Security check
+      php: "7.4"
+      os: linux
+      dist: bionic
+      script:
+        - vendor/bin/console security:check
 
     - name: Docker / Alpine / PHP 7.4 / PostgreSQL / Functional
       os: linux
@@ -133,10 +174,11 @@ jobs:
         - docker/sdk testing console queue:worker:start --stop-when-empty
         - docker/sdk testing codecept run -c codeception.api.yml
       before_install: skip
-      before_script: skip
+      before_script:
+          - ./config/Shared/ci/travis/docker-credentials.sh
       after_script: skip
 
-    - name: Docker / Alpine / PHP 7.2 / MariaDB / Functional
+    - name: Docker / Alpine / PHP 7.3 / MariaDB / Functional
       os: linux
       dist: bionic
       language: shell
@@ -172,7 +214,8 @@ jobs:
         - docker/sdk up -t -v
         - docker/sdk testing codecept run -c codeception.ci.functional.yml
       before_install: skip
-      before_script: skip
+      before_script:
+          - ./config/Shared/ci/travis/docker-credentials.sh
       after_script: skip
 
     - name: Docker / Debian / PHP 7.3 / PostgreSQL / Functional
@@ -211,7 +254,90 @@ jobs:
         - docker/sdk up -t -v
         - docker/sdk testing codecept run -c codeception.ci.functional.yml
       before_install: skip
-      before_script: skip
+      before_script:
+          - ./config/Shared/ci/travis/docker-credentials.sh
+      after_script: skip
+
+    - name: Docker / Alpine / PHP 7.3 / MariaDB / Acceptance
+      os: linux
+      dist: bionic
+      language: shell
+      env:
+        - PROGRESS_TYPE=plain
+        - SPRYKER_PLATFORM_IMAGE=spryker/php:7.3
+        - TRAVIS=1
+      addons:
+        hosts:
+          - yves.de.spryker.local
+          - zed.de.spryker.local
+          - glue.de.spryker.local
+        apt:
+          packages:
+            - apache2-utils
+            - apt-transport-https
+            - ca-certificates
+            - curl
+            - gnupg-agent
+            - pigz
+            - software-properties-common
+          sources:
+            - sourceline: "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+              key_url: https://download.docker.com/linux/ubuntu/gpg
+      install:
+          - echo eyAiZXhwZXJpbWVudGFsIiA6IHRydWUsICJmZWF0dXJlcyIgOiB7ICJidWlsZGtpdCI6IHRydWUgfSB9Cg==|base64 -d|sudo tee /etc/docker/daemon.json
+          - sudo apt-get install --only-upgrade docker-ce -y
+          - sudo curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+          - sudo chmod +x /usr/local/bin/docker-compose
+      script:
+          - git clone https://github.com/spryker/docker-sdk.git --single-branch --branch master ./docker
+          - docker/sdk boot -v deploy.ci.acceptance.mariadb.yml
+          - docker/sdk up -t
+          - docker/sdk testing console queue:worker:start --stop-when-empty
+          - docker/sdk testing codecept run -c codeception.acceptance.yml
+      before_install: skip
+      before_script:
+          - ./config/Shared/ci/travis/docker-credentials.sh
+      after_script: skip
+
+    - name: Docker / Alpine / PHP 7.4 / PostgreSQL / Acceptance
+      os: linux
+      dist: bionic
+      language: shell
+      env:
+        - PROGRESS_TYPE=plain
+        - SPRYKER_PLATFORM_IMAGE=spryker/php:7.4
+        - TRAVIS=1
+      addons:
+        hosts:
+          - yves.de.spryker.local
+          - zed.de.spryker.local
+          - glue.de.spryker.local
+        apt:
+          packages:
+            - apache2-utils
+            - apt-transport-https
+            - ca-certificates
+            - curl
+            - gnupg-agent
+            - pigz
+            - software-properties-common
+          sources:
+            - sourceline: "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+              key_url: https://download.docker.com/linux/ubuntu/gpg
+      install:
+          - echo eyAiZXhwZXJpbWVudGFsIiA6IHRydWUsICJmZWF0dXJlcyIgOiB7ICJidWlsZGtpdCI6IHRydWUgfSB9Cg==|base64 -d|sudo tee /etc/docker/daemon.json
+          - sudo apt-get install --only-upgrade docker-ce -y
+          - sudo curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+          - sudo chmod +x /usr/local/bin/docker-compose
+      script:
+          - git clone https://github.com/spryker/docker-sdk.git --single-branch --branch master ./docker
+          - docker/sdk boot -v deploy.ci.acceptance.yml
+          - docker/sdk up -t
+          - docker/sdk testing console queue:worker:start --stop-when-empty
+          - docker/sdk testing codecept run -c codeception.acceptance.yml
+      before_install: skip
+      before_script:
+          - ./config/Shared/ci/travis/docker-credentials.sh
       after_script: skip
 
     - name: Docker / Alpine / PHP 7.4 / Frontend & Assets
@@ -252,7 +378,8 @@ jobs:
         - docker run -it --rm --entrypoint='' spryker_b2c_frontend:1.0-frontend ls -al /data/public/Yves/assets/myhash
         - docker run -it --rm --entrypoint='' spryker_b2c_frontend:1.0-frontend ls -al /data/public/Zed/assets/
       before_install: skip
-      before_script: skip
+      before_script:
+          - ./config/Shared/ci/travis/docker-credentials.sh
       after_script: skip
 
 addons:
@@ -260,10 +387,6 @@ addons:
     update: false
     sources:
       - sourceline: ppa:chris-lea/redis-server
-      - sourceline: deb http://dl.bintray.com/rabbitmq-erlang/debian bionic erlang
-        key_url: https://github.com/rabbitmq/signing-keys/releases/download/2.0/rabbitmq-release-signing-key.asc
-      - sourceline: deb https://dl.bintray.com/rabbitmq/debian bionic main
-        key_url: https://github.com/rabbitmq/signing-keys/releases/download/2.0/rabbitmq-release-signing-key.asc
       - sourceline: ppa:ondrej/php
     packages:
       - redis-tools
@@ -291,6 +414,7 @@ cache:
     - /tmp/pear/cache/
     - $HOME/.yarn/cache
     - ./node_modules
+    - $HOME/chromium-ecosystem
 
 services:
   - postgresql
@@ -300,18 +424,27 @@ before_install:
   - phpenv config-add config/Shared/ci/travis/travis.php.ini
   - echo "extension = redis.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
   - phpenv config-rm xdebug.ini
-  - composer global require hirak/prestissimo
+  # Chromedriver section
+  - curl -L "https://github.com/spryker/docker-chromedriver/archive/master.zip" -o $HOME/chromium-ecosystem/docker-chromedriver.zip
+  - rm -rf $HOME/chromium-ecosystem/docker-chromedriver-master
+  - unzip -o $HOME/chromium-ecosystem/docker-chromedriver.zip -d $HOME/chromium-ecosystem/
+  - rm -rf $HOME/chromium-ecosystem/*.zip
+  - export CHROMEDRIVER_REVISION=814168
+  - export COMPOSER_IGNORE_CHROMEDRIVER=1
+  - nvm use 12
 
 install:
   - chmod -R a+x config/Shared/ci/travis/
-  - composer install --optimize-autoloader --no-interaction
-  - config/Shared/ci/travis/install_elasticsearch_6_8.sh
+  - composer install --optimize-autoloader --no-interaction --prefer-install=auto
+  - if [[ $PREFER_LOWEST == 1 ]] ; then composer require "spryker-feature/search:202009.0" --with-all-dependencies --optimize-autoloader ; fi
+  - if [[ $PREFER_LOWEST == 1 ]] ; then config/Shared/ci/travis/install_elasticsearch_6_8.sh ; else config/Shared/ci/travis/install_elasticsearch_7_6.sh ; fi
+  - if [[ $PREFER_MID == 1 ]] ; then composer prefer-mid ; fi
   - config/Shared/ci/travis/install_mailcatcher.sh
   - if [[ -z $MP_TEST ]] ; then config/Shared/ci/travis/configure_postgres.sh ; fi
+  # Exposes ${CHROMEDRIVER_BINARY} and ${CHROMIUM_BINARY}
+  - . $HOME/chromium-ecosystem/docker-chromedriver-master/chromium-installer $CHROMEDRIVER_REVISION $HOME/chromium-ecosystem false
 
 before_script:
-  - nvm install 8 > /dev/null
-
   - mkdir -p shared/data/common/jenkins
   - mkdir -p shared/data/common/jenkins/jobs
   - mkdir -p data/cache -m 0777
@@ -344,12 +477,13 @@ script:
   - if [[ $VALIDATION == 1 ]] ; then vendor/bin/phpmd src/ text vendor/spryker/architecture-sniffer/src/ruleset.xml --minimumpriority 2 ; fi
   - if [[ $VALIDATION == 1 ]] ; then vendor/bin/phpstan analyze -c phpstan.neon src/ -l 4 ; fi
 
-  - timeout 45m bash -c "vendor/bin/phantomjs --webdriver=4444 --disk-cache=true --load-images=false --webdriver-logfile=/tmp/phantomjs.log --webdriver-loglevel=DEBUG">/dev/null &
+  - timeout 45m bash -c "${CHROMEDRIVER_BINARY} --port=4444 --whitelisted-ips= --url-base=/wd/hub --log-path=/tmp/chromedriver.log --log-level=DEBUG">/dev/null &
   - if [[ $TEST_GROUP == 'without-acceptance' ]] ; then vendor/bin/codecept run -x EndToEnd -x Presentation --ext DotReporter ; fi
   - if [[ $TEST_GROUP == 'acceptance' ]] ; then vendor/bin/codecept run -g EndToEnd -g Presentation -x DockerOnly --ext DotReporter ; fi
 
   - if [[ $VALIDATION == 1 ]] ; then node ./frontend/libs/stylelint ; fi
-  - if [[ $VALIDATION == 1 ]] ; then node ./frontend/libs/tslint stylish ; fi
+  - if [[ $VALIDATION == 1 ]] ; then node ./frontend/libs/tslint --format stylish ; fi
+  - if [[ $VALIDATION == 1 ]] ; then node ./frontend/libs/formatter ; fi
 
 notifications:
   email: false

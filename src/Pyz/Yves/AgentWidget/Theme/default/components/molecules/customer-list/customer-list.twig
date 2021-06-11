@@ -1,0 +1,9 @@
+{% extends molecule('customer-list', '@SprykerShop:AgentWidget') %}
+
+{% block body %}
+    {% for customer in data.customers %}
+        <li class="{{ config.name }}__container-item {{ config.jsName }}__suggestions-item" data-value="{{ customer.email }}">
+            {{ customer.first_name }} {{ customer.last_name }}: {{ customer.email }}
+        </li>
+    {% endfor %}
+{% endblock %}

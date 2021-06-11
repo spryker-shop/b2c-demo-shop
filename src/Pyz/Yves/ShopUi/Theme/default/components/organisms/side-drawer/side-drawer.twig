@@ -1,4 +1,5 @@
 {% extends model('component') %}
+{% import _self as component %}
 
 {% define config = {
     name: 'side-drawer',
@@ -66,7 +67,11 @@
 
         {% block bottomBar %}
             <div class="{{ config.name }}__bottom-bar">
-                <a href="{{ url('logout') }}" class="button button--hollow button--expand">{{ 'customer.logout' | trans }}</a>
+                {% if is_granted('ROLE_USER') %}
+                    <a href="{{ url('logout') }}" class="button button--hollow button--expand">{{ 'customer.logout' | trans }}</a>
+                {% else %}
+                    <a href="{{ url('login') }}" class="button button--expand">{{ 'global.login' | trans }}</a>
+                {% endif %}
             </div>
         {% endblock %}
     </aside>

@@ -70,8 +70,10 @@
 
                     {% set returnReason = '' %}
 
-                    {% for returnItem in embed.returnItems if returnItem.orderItem.productBundle and returnItem.orderItem.productBundle.bundleItemIdentifier == data.productBundle.bundleProduct.bundleItemIdentifier %}
-                        {% set returnReason = returnItem.reason %}
+                    {% for returnItem in embed.returnItems %}
+                        {% if returnItem.orderItem.productBundle and returnItem.orderItem.productBundle.bundleItemIdentifier == data.productBundle.bundleProduct.bundleItemIdentifier %}
+                            {% set returnReason = returnItem.reason %}
+                        {% endif %}
                     {% endfor %}
 
                     {% include molecule('return-reason', 'SalesReturnPage') with {
@@ -131,12 +133,14 @@
                         {% block generalInformation %}
                             {{ parent() }}
 
-                            {% for returnItem in embed.returnItems if returnItem.orderItem.IdSalesOrderItem == data.product.IdSalesOrderItem %}
-                                {% include molecule('return-reason', 'SalesReturnPage') with {
-                                    data: {
-                                        returnReason: (returnItem.reason ?: 'return_page.return_reasons.empty') | trans,
-                                    },
-                                } only %}
+                            {% for returnItem in embed.returnItems %}
+                                {% if returnItem.orderItem.IdSalesOrderItem == data.product.IdSalesOrderItem %}
+                                    {% include molecule('return-reason', 'SalesReturnPage') with {
+                                        data: {
+                                            returnReason: (returnItem.reason ?: 'return_page.return_reasons.empty') | trans,
+                                        },
+                                    } only %}
+                                {% endif %}
                             {% endfor %}
                         {% endblock %}
                     {% endembed %}

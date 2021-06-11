@@ -96,10 +96,13 @@ class ProductRepository implements ProductRepositoryInterface
      */
     public function getProductConcreteAttributesCollection(): ArrayCollection
     {
-        return SpyProductQuery::create()
+        /** @var \Propel\Runtime\Collection\ArrayCollection $productData */
+        $productData = SpyProductQuery::create()
             ->joinWithSpyProductAbstract()
             ->select([SpyProductTableMap::COL_ATTRIBUTES, SpyProductTableMap::COL_SKU, SpyProductAbstractTableMap::COL_SKU])
             ->find();
+
+        return $productData;
     }
 
     /**

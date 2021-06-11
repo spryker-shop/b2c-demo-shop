@@ -1,0 +1,34 @@
+env:
+    NEW_RELIC_ENABLED: 0
+
+command-timeout: 1200
+
+stores:
+    - DE
+    - AT
+
+sections:
+    clean-oms:
+        clear-oms-locks:
+            command: "vendor/bin/console oms:clear-locks -vvv --no-ansi"
+
+    diff:
+        propel-migration-delete:
+            command: "vendor/bin/console propel:migration:delete -vvv --no-ansi"
+
+        propel-diff:
+            command: "vendor/bin/console propel:diff -vvv --no-ansi"
+
+        show_migrations:
+            command: "ls -al ./src/Orm/Propel/Migration_*/*.php 2>/dev/null || true"
+
+        propel-migrate:
+            command: "vendor/bin/console propel:migrate -vvv --no-ansi"
+
+        propel-migration-cleanup:
+            command: "vendor/bin/console propel:migration:delete -vvv --no-ansi"
+
+    scheduler-start:
+        scheduler-setup:
+            command: "vendor/bin/console scheduler:setup -vvv --no-ansi"
+            stores: true

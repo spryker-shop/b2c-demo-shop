@@ -40,14 +40,14 @@ class SaleController extends AbstractController
             ->saleSearch($parameters);
 
         $searchResults['category'] = $categoryNode;
-        $searchResults['filterPath'] = ExampleProductSaleRouteProviderPlugin::ROUTE_SALE;
+        $searchResults['filterPath'] = ExampleProductSaleRouteProviderPlugin::ROUTE_NAME_SALE;
         $searchResults['viewMode'] = $this->getFactory()
             ->getCatalogClient()
             ->getCatalogViewMode($request);
 
         return $this->view(
             $searchResults,
-            [],
+            $this->getFactory()->getExampleProductSalePageWidgetPlugins(),
             '@ExampleProductSalePage/views/sale-example/sale-example.twig'
         );
     }

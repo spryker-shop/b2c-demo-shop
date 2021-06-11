@@ -8,6 +8,7 @@
 namespace Pyz\Zed\ProductSearchConfigStorage;
 
 use Pyz\Zed\Synchronization\SynchronizationConfig;
+use Spryker\Shared\Publisher\PublisherConfig;
 use Spryker\Zed\ProductSearchConfigStorage\ProductSearchConfigStorageConfig as SprykerProductSearchConfigStorageConfig;
 
 class ProductSearchConfigStorageConfig extends SprykerProductSearchConfigStorageConfig
@@ -18,5 +19,13 @@ class ProductSearchConfigStorageConfig extends SprykerProductSearchConfigStorage
     public function getProductSearchConfigSynchronizationPoolName(): ?string
     {
         return SynchronizationConfig::DEFAULT_SYNCHRONIZATION_POOL_NAME;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getEventQueueName(): ?string
+    {
+        return PublisherConfig::PUBLISH_QUEUE;
     }
 }

@@ -11,8 +11,8 @@ use Pyz\Zed\ProductStorage\Communication\Plugin\Event\Subscriber\ProductStorageE
 use Spryker\Zed\AvailabilityNotification\Communication\Plugin\Event\Subscriber\AvailabilityNotificationSubscriber;
 use Spryker\Zed\AvailabilityStorage\Communication\Plugin\Event\Subscriber\AvailabilityStorageEventSubscriber;
 use Spryker\Zed\CategoryImageStorage\Communication\Plugin\Event\Subscriber\CategoryImageStorageEventSubscriber;
-use Spryker\Zed\CategoryPageSearch\Communication\Plugin\Event\Subscriber\CategoryPageSearchEventSubscriber;
-use Spryker\Zed\CategoryStorage\Communication\Plugin\Event\Subscriber\CategoryStorageEventSubscriber;
+use Spryker\Zed\CmsBlockCategoryStorage\Communication\Plugin\Event\Subscriber\CmsBlockCategoryStorageEventSubscriber;
+use Spryker\Zed\CmsBlockProductStorage\Communication\Plugin\Event\Subscriber\CmsBlockProductStorageEventSubscriber;
 use Spryker\Zed\CmsBlockStorage\Communication\Plugin\Event\Subscriber\CmsBlockStorageEventSubscriber;
 use Spryker\Zed\CmsPageSearch\Communication\Plugin\Event\Subscriber\CmsPageSearchEventSubscriber;
 use Spryker\Zed\CmsSlotBlockStorage\Communication\Plugin\Event\Subscriber\CmsSlotBlockStorageEventSubscriber;
@@ -26,12 +26,10 @@ use Spryker\Zed\ContentStorage\Communication\Plugin\Event\Subscriber\ContentStor
 use Spryker\Zed\CustomerAccessStorage\Communication\Plugin\Event\Subscriber\CustomerAccessStorageEventSubscriber;
 use Spryker\Zed\Event\EventDependencyProvider as SprykerEventDependencyProvider;
 use Spryker\Zed\FileManagerStorage\Communication\Plugin\Event\Subscriber\FileManagerStorageSubscriber;
-use Spryker\Zed\GlossaryStorage\Communication\Plugin\Event\Subscriber\GlossaryStorageEventSubscriber;
 use Spryker\Zed\NavigationStorage\Communication\Plugin\Event\Subscriber\NavigationStorageEventSubscriber;
 use Spryker\Zed\PriceProductStorage\Communication\Plugin\Event\Subscriber\PriceProductStorageEventSubscriber;
 use Spryker\Zed\ProductAlternativeStorage\Communication\Plugin\Event\Subscriber\ProductAlternativeStorageEventSubscriber;
 use Spryker\Zed\ProductCategoryFilterStorage\Communication\Plugin\Event\Subscriber\ProductCategoryFilterStorageEventSubscriber;
-use Spryker\Zed\ProductCategoryStorage\Communication\Plugin\Event\Subscriber\ProductCategoryStorageEventSubscriber;
 use Spryker\Zed\ProductDiscontinuedStorage\Communication\Plugin\Event\Subscriber\ProductDiscontinuedStorageEventSubscriber;
 use Spryker\Zed\ProductGroupStorage\Communication\Plugin\Event\Subscriber\ProductGroupStorageEventSubscriber;
 use Spryker\Zed\ProductImageStorage\Communication\Plugin\Event\Subscriber\ProductImageStorageEventSubscriber;
@@ -57,14 +55,6 @@ use Spryker\Zed\UrlStorage\Communication\Plugin\Event\Subscriber\UrlStorageEvent
 class EventDependencyProvider extends SprykerEventDependencyProvider
 {
     /**
-     * @return \Spryker\Zed\Event\Dependency\EventCollectionInterface
-     */
-    public function getEventListenerCollection()
-    {
-        return parent::getEventListenerCollection();
-    }
-
-    /**
      * @return \Spryker\Zed\Event\Dependency\EventSubscriberCollectionInterface
      */
     public function getEventSubscriberCollection()
@@ -74,16 +64,19 @@ class EventDependencyProvider extends SprykerEventDependencyProvider
         /**
          * Storage Events
          */
-        $eventSubscriberCollection->add(new GlossaryStorageEventSubscriber());
         $eventSubscriberCollection->add(new UrlStorageEventSubscriber());
         $eventSubscriberCollection->add(new AvailabilityStorageEventSubscriber());
-        $eventSubscriberCollection->add(new CategoryStorageEventSubscriber());
         $eventSubscriberCollection->add(new CmsStorageEventSubscriber());
         $eventSubscriberCollection->add(new CmsBlockStorageEventSubscriber());
+        $eventSubscriberCollection->add(new CmsBlockCategoryStorageEventSubscriber());
+        $eventSubscriberCollection->add(new CmsBlockProductStorageEventSubscriber());
+        $eventSubscriberCollection->add(new CmsSlotBlockStorageEventSubscriber());
+        $eventSubscriberCollection->add(new CmsSlotStorageEventSubscriber());
+        $eventSubscriberCollection->add(new ConfigurableBundleStorageEventSubscriber());
+        $eventSubscriberCollection->add(new ConfigurableBundleTemplateImageStorageEventSubscriber());
         $eventSubscriberCollection->add(new NavigationStorageEventSubscriber());
         $eventSubscriberCollection->add(new PriceProductStorageEventSubscriber());
         $eventSubscriberCollection->add(new ProductStorageEventSubscriber());
-        $eventSubscriberCollection->add(new ProductCategoryStorageEventSubscriber());
         $eventSubscriberCollection->add(new ProductCategoryFilterStorageEventSubscriber());
         $eventSubscriberCollection->add(new ProductImageStorageEventSubscriber());
         $eventSubscriberCollection->add(new CategoryImageStorageEventSubscriber());
@@ -95,36 +88,28 @@ class EventDependencyProvider extends SprykerEventDependencyProvider
         $eventSubscriberCollection->add(new ProductSearchConfigStorageEventSubscriber());
         $eventSubscriberCollection->add(new ProductDiscontinuedStorageEventSubscriber()); #ProductDiscontinuedFeature
         $eventSubscriberCollection->add(new ProductAlternativeStorageEventSubscriber()); #ProductAlternativeFeature
-        $eventSubscriberCollection->add(new FileManagerStorageSubscriber());
         $eventSubscriberCollection->add(new CustomerAccessStorageEventSubscriber());
         $eventSubscriberCollection->add(new TaxStorageSubscriber());
         $eventSubscriberCollection->add(new TaxProductStorageSubscriber());
-
         $eventSubscriberCollection->add(new AvailabilityNotificationSubscriber());
         $eventSubscriberCollection->add(new ProductQuantityStorageEventSubscriber());
-
         $eventSubscriberCollection->add(new ContentStorageEventSubscriber());
-        $eventSubscriberCollection->add(new CmsSlotStorageEventSubscriber());
-        $eventSubscriberCollection->add(new CmsSlotBlockStorageEventSubscriber());
-        $eventSubscriberCollection->add(new ConfigurableBundleStorageEventSubscriber());
-        $eventSubscriberCollection->add(new ConfigurableBundleTemplateImageStorageEventSubscriber());
-        $eventSubscriberCollection->add(new ProductConcretePageSearchProductImageEventSubscriber());
-        $eventSubscriberCollection->add(new ConfigurableBundleTemplatePageSearchEventSubscriber());
-        $eventSubscriberCollection->add(new ConfigurableBundleTemplateImagePageSearchEventSubscriber());
         $eventSubscriberCollection->add(new ProductListStorageEventSubscriber());
 
         /**
          * Search Events
          */
-        $eventSubscriberCollection->add(new CategoryPageSearchEventSubscriber());
         $eventSubscriberCollection->add(new CmsPageSearchEventSubscriber());
         $eventSubscriberCollection->add(new ProductReviewSearchEventSubscriber());
         $eventSubscriberCollection->add(new ProductSetPageSearchEventSubscriber());
         $eventSubscriberCollection->add(new ProductPageSearchEventSubscriber());
+        $eventSubscriberCollection->add(new ProductListSearchEventSubscriber());
         $eventSubscriberCollection->add(new ProductConcretePageSearchProductAbstractEventSubscriber());
         $eventSubscriberCollection->add(new ProductConcretePageSearchProductEventSubscriber());
         $eventSubscriberCollection->add(new ProductConcretePageSearchProductLocalizedAttributesEventSubscriber());
-        $eventSubscriberCollection->add(new ProductListSearchEventSubscriber());
+        $eventSubscriberCollection->add(new ProductConcretePageSearchProductImageEventSubscriber());
+        $eventSubscriberCollection->add(new ConfigurableBundleTemplatePageSearchEventSubscriber());
+        $eventSubscriberCollection->add(new ConfigurableBundleTemplateImagePageSearchEventSubscriber());
 
         $eventSubscriberCollection->add(new PublisherSubscriber());
 
