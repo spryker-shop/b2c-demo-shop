@@ -8,6 +8,8 @@
 namespace Pyz\Zed\EventBehavior;
 
 use Spryker\Zed\AvailabilityStorage\Communication\Plugin\Event\AvailabilityEventResourceQueryContainerPlugin;
+use Spryker\Zed\CmsBlockCategoryStorage\Communication\Plugin\Event\CmsBlockCategoryEventResourceQueryContainerPlugin;
+use Spryker\Zed\CmsBlockProductStorage\Communication\Plugin\Event\CmsBlockProductEventResourceQueryContainerPlugin;
 use Spryker\Zed\CmsBlockStorage\Communication\Plugin\Event\CmsBlockEventResourceQueryContainerPlugin;
 use Spryker\Zed\CmsPageSearch\Communication\Plugin\Event\CmsPageEventResourceQueryContainerPlugin;
 use Spryker\Zed\CmsSlotBlockStorage\Communication\Plugin\EventBehavior\CmsSlotBlockEventResourceBulkRepositoryPlugin;
@@ -52,6 +54,8 @@ class EventBehaviorDependencyProvider extends SprykerEventBehaviorDependencyProv
             new ProductSetPageSearchEventResourceQueryContainerPlugin(),
             new ProductReviewSearchEventResourceQueryContainerPlugin(),
             new AvailabilityEventResourceQueryContainerPlugin(),
+            new CmsBlockCategoryEventResourceQueryContainerPlugin(),
+            new CmsBlockProductEventResourceQueryContainerPlugin(),
             new CmsBlockEventResourceQueryContainerPlugin(),
             new CmsEventResourceQueryContainerPlugin(),
             new NavigationEventResourceQueryContainerPlugin(),

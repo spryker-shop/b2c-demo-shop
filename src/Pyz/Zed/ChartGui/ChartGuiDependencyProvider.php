@@ -9,7 +9,7 @@ namespace Pyz\Zed\ChartGui;
 
 use Pyz\Zed\ExampleChart\Plugin\ExampleChartPlugin;
 use Spryker\Zed\ChartGui\ChartGuiDependencyProvider as SprykerChartGuiDependencyProvider;
-use Spryker\Zed\ChartGui\Communication\Plugin\Twig\Chart\BartChartTwigPlugin;
+use Spryker\Zed\ChartGui\Communication\Plugin\Twig\Chart\BarChartTwigPlugin;
 use Spryker\Zed\ChartGui\Communication\Plugin\Twig\Chart\ChartTwigPlugin;
 use Spryker\Zed\ChartGui\Communication\Plugin\Twig\Chart\LineChartTwigPlugin;
 use Spryker\Zed\ChartGui\Communication\Plugin\Twig\Chart\PieChartTwigPlugin;
@@ -38,7 +38,7 @@ class ChartGuiDependencyProvider extends SprykerChartGuiDependencyProvider
     protected function getTwigChartFunctionPlugins(): array
     {
         return [
-            new BartChartTwigPlugin(),
+            new BarChartTwigPlugin(),
             new ChartTwigPlugin(),
             new LineChartTwigPlugin(),
             new PieChartTwigPlugin(),
