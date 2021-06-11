@@ -27,9 +27,9 @@ class UserDependencyProvider extends SprykerUserDependencyProvider
      */
     protected function addGroupPlugin(Container $container)
     {
-        $container[static::PLUGIN_GROUP] = function (Container $container) {
+        $container->set(static::PLUGIN_GROUP, function (Container $container) {
             return new GroupPlugin();
-        };
+        });
 
         return $container;
     }

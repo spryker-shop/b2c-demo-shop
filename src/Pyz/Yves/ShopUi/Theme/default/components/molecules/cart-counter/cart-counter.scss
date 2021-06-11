@@ -1,0 +1,20 @@
+@include shop-ui-cart-counter() {
+    &--mobile {
+        position: relative;
+    }
+
+    &__quantity {
+        position: absolute;
+        top: rem(-11);
+        right: rem(-11);
+        min-width: rem(18);
+        height: rem(18);
+        font-size: rem(12);
+        line-height: rem(18);
+
+        @include helper-breakpoint-media-min($lg-min) {
+            top: 0;
+            right: 0;
+        }
+    }
+}

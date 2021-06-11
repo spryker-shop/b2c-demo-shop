@@ -1,8 +1,4 @@
-{% extends template('widget') %}
-
-{% define data = {
-    promotionProducts: _widget.promotionProducts
-} %}
+{% extends view('cart-discount-promotion-products-list', '@SprykerShop:DiscountPromotionWidget') %}
 
 {% block body %}
     {% if data.promotionProducts is not empty %}
@@ -13,12 +9,6 @@
                 modifiers: ['promotional'],
                 data: {
                     product: product,
-                },
-                embed: {
-                    promotionDiscount: {
-                        id: product.promotionItem.discount.discountPromotion.idDiscountPromotion,
-                        maxQuantity: product.promotionItem.maxQuantity
-                    },
                 },
             } only %}
                 {% block productThumbnail %}
@@ -43,25 +33,28 @@
                             } only %}
                         </div>
 
-                        <form method="POST" action="/cart/add/{{ data.sku }}" class="grid grid--bottom grid--justify">
-                            {% set disabledAttribute = data.product.idProductConcrete is empty ? 'disabled' %}
+                        {% set isDisabled = not data.product.idProductConcrete or not data.product.available %}
 
-                            {% include molecule('product-quantity-input') with {
-                                data: {
-                                    maxQuantity: embed.promotionDiscount.maxQuantity,
-                                    hasUpdateButton: false,
-                                },
-                            } only %}
+                        {% widget 'AddToCartFormWidget' args [config, data.product, isDisabled] only %}
+                            {% block embeddedData %}
+                                {% set disabledAttribute = data.isDisabled ? 'disabled' %}
 
-                            <div class="col col--sm-12 col--md-4 text-right">
-                                <input type="hidden" value="{{ data.sku }}" name="groupKey">
-                                <input type="hidden" value="{{ embed.promotionDiscount.id }}" name="idDiscountPromotion">
+                                <div class="grid grid--bottom grid--justify">
+                                    {% include molecule('product-quantity-input') with {
+                                        data: {
+                                            maxQuantity: data.product.promotionItem.maxQuantity,
+                                            hasUpdateButton: false,
+                                        },
+                                    } only %}
 
-                                <button class="button button--hollow button--promotion-item" {{ disabledAttribute }} data-init-single-click>
-                                    {{ 'page.detail.add-to-cart' | trans }}
-                                </button>
-                            </div>
-                        </form>
+                                    <div class="col col--sm-12 col--md-4 text-right">
+                                        <button class="button button--hollow button--promotion-item" {{ disabledAttribute }} data-init-single-click {{ qa('add-to-cart-button') }}>
+                                            {{- 'page.detail.add-to-cart' | trans -}}
+                                        </button>
+                                    </div>
+                                </div>
+                            {% endblock %}
+                        {% endwidget %}
                     </div>
                 {% endblock %}
             {% endembed %}

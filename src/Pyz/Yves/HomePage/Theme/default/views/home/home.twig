@@ -1,22 +1,5 @@
 {% extends template('page-layout-main') %}
 
-{% block header %}
-    {% embed organism('header') with {
-        modifiers: ['border-less-bottom']
-    } only %}
-        {% block mobile %}
-            <a href="#" class="link link--alt js-page-layout-main__side-drawer-trigger">
-                {% include atom('icon') with {
-                    modifiers: ['big'],
-                    data: {
-                        name: 'bars'
-                    }
-                } only %}
-            </a>
-        {% endblock %}
-    {% endembed %}
-{% endblock %}
-
 {% block pageInfo %}{% endblock %}
 
 {% block container %}

@@ -1,3 +1,5 @@
+@import '~slick-carousel/slick/slick.scss';
+
 @mixin product-image-widget-image-gallery($name: '.image-gallery') {
     #{$name} {
         position: relative;
@@ -71,7 +73,8 @@
         }
 
         &__image {
-            max-width: 100%;
+            width: 100%;
+            text-align: center;
             max-height: rem(250);
 
             @include helper-breakpoint-media-min($lg-min) {

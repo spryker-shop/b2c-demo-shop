@@ -1,0 +1,21 @@
+@mixin shop-ui-action-bar($name: '.action-bar') {
+    #{$name} {
+        @include helper-breakpoint-media-min($lg-min) {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        &__actions {
+            margin-right: -8px;
+
+            @include helper-breakpoint-media-min($md-min) {
+                display: flex;
+                flex-wrap: wrap;
+                align-items: flex-start;
+            }
+        }
+    }
+}
+
+@include shop-ui-action-bar();

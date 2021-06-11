@@ -50,7 +50,8 @@ sections:
             command: "vendor/bin/console dev:ide-auto-completion:remove"
 
         remove-request-validation-cache:
-            command: "vendor/bin/console glue:rest-request-validation-cache:remove"
+            command: "vendor/bin/console rest-api:remove-validation-cache"
+            stores: true
 
         remove-navigation-cache:
             command: "vendor/bin/console navigation:cache:remove"
@@ -75,9 +76,6 @@ sections:
         generate-transfer-databuilders:
             command: "vendor/bin/console transfer:databuilder:generate"
 
-        generate-entity-transfer:
-            command: "vendor/bin/console transfer:entity:generate"
-
         generate-ide-auto-completion:
             command: "vendor/bin/console dev:ide-auto-completion:generate"
 
@@ -100,7 +98,8 @@ sections:
             command: "vendor/bin/console navigation:build-cache"
 
         rest-request-validation-cache-warmup:
-            command: "vendor/bin/console glue:rest:build-request-validation-cache"
+            command: "vendor/bin/console rest-api:build-request-validation-cache"
+            stores: true
 
         class-resolver-build:
             command: "vendor/bin/console cache:class-resolver:build"
@@ -148,9 +147,6 @@ sections:
 
         delete-migration-files:
             command: "vendor/bin/console propel:migration:delete"
-            stores:
-                - US
-                - DE
             groups:
                 - propel
 
@@ -187,9 +183,6 @@ sections:
 
         propel-diff:
             command: "vendor/bin/console propel:diff"
-            stores:
-                - US
-                - DE
             groups:
                 - propel
 
@@ -221,6 +214,9 @@ sections:
             command: "vendor/bin/console maintenance:disable"
             stores: true
 
+        generate-entity-transfer:
+            command: "vendor/bin/console transfer:entity:generate"
+
         init-database:
             command: "vendor/bin/console setup:init-db"
             stores:
@@ -240,47 +236,15 @@ sections:
                 - elastic
 
     demodata:
-        import-commerce-setup:
-            command: "vendor/bin/console data:import --config=data/import/config/B2C_Commerce_Setup_import_config_v0.yml"
+        import-eu-region-demodata:
+            command: "vendor/bin/console data:import --config=data/import/local/full_EU.yml"
             stores:
-                - US
                 - DE
 
-        import-catalog-setup:
-            command: "vendor/bin/console data:import --config=data/import/config/B2C_Catalog_Setup_import_config_v0.yml"
+        import-us-region-demodata:
+            command: "vendor/bin/console data:import --config=data/import/local/full_US.yml"
             stores:
                 - US
-                - DE
-
-        import-special-product-types-setup:
-            command: "vendor/bin/console data:import --config=data/import/config/B2C_Special_Product_Types_import_config_v0.yml"
-            stores:
-                - US
-                - DE
-
-        import-merchandising-setup:
-            command: "vendor/bin/console data:import --config=data/import/config/B2C_Merchandising_import_config_v0.yml"
-            stores:
-                - US
-                - DE
-
-        import-navigation-setup:
-            command: "vendor/bin/console data:import --config=data/import/config/B2C_Navigation_import_config_v0.yml"
-            stores:
-                - US
-                - DE
-
-        import-content-management-setup:
-            command: "vendor/bin/console data:import --config=data/import/config/B2C_Content_Management_import_config_v0.yml"
-            stores:
-                - US
-                - DE
-
-        import-miscellaneous-setup:
-            command: "vendor/bin/console data:import --config=data/import/config/B2C_Miscellaneous_import_config_v0.yml"
-            stores:
-                - US
-                - DE
 
         update-product-labels:
             command: "vendor/bin/console product-label:relations:update"

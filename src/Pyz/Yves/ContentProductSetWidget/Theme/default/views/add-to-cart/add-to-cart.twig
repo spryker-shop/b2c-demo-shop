@@ -16,12 +16,7 @@
     } only %}
         {% block header %}
             {% block title %}
-                {% include molecule('product-slider-title') with {
-                    modifiers: ['set'],
-                    data: {
-                        title: data.name,
-                    },
-                } only %}
+                {{ parent() }}
             {% endblock %}
 
             {% block description %}
@@ -46,7 +41,6 @@
                         jsName: config.jsName,
                     },
                 } only %}
-
                     {% block slides %}
                         {% for product in data.slides %}
                             {% embed molecule('product-item') with {
@@ -68,14 +62,14 @@
                                             useExternalForm: true,
                                         },
                                         embed: {
-                                            product: data.product,
+                                            idProductAbstract: data.idProductAbstract,
                                         },
                                     } only %}
                                         {% block variant %}
                                             {% include molecule('variant', 'ProductDetailPage') with {
                                                 data: {
                                                     name: name,
-                                                    formName: 'attributes[' ~ embed.product.idProductAbstract ~ '][' ~ name ~ ']',
+                                                    formName: 'attributes[' ~ embed.idProductAbstract ~ '][' ~ name ~ ']',
                                                     values: values,
                                                     selectedValue: selectedValue,
                                                     label: ('product.attribute.' ~ name) | trans,
@@ -91,24 +85,9 @@
                     {% endblock %}
                 {% endembed %}
             </form>
-            <form method="POST" action="{{ path('cart/add-items') }}">
-                {% set isDisabled = false %}
+            {% set generalAddToCartButtonClass = 'button--expand' %}
 
-                {% for product in data.products %}
-                    {% if product.idProductConcrete is not empty %}
-                        {% if product.available %}
-                            <input type="hidden" name="items[{{ loop.index }}][sku]" class="{{ config.jsName }}__product-sku-hidden-input" value="{{ product.sku }}">
-                            <input type="hidden" name="items[{{ loop.index }}][quantity]" value="1">
-                        {% endif %}
-                    {% else %}
-                        {% set isDisabled = true %}
-                    {% endif %}
-                {% endfor %}
-
-                <button type="submit" class="button button--expand" data-init-single-click {% if isDisabled %}disabled{% endif %}>
-                    {{ 'product.set.detail.add-all-to-cart' | trans }}
-                </button>
-            </form>
+            {{ block('generalAddToCart') }}
             <hr>
         {% endblock %}
     {% endembed %}

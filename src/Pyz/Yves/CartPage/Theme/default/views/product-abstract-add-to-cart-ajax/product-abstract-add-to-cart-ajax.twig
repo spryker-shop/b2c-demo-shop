@@ -1,0 +1,35 @@
+{% extends view('product-abstract-add-to-cart-ajax', '@SprykerShop:CartPage') %}
+
+{% define data = {
+    isTextHidden: false,
+    extraAttributes: {},
+} %}
+
+{% block body %}
+    {% set extraClasses = '' %}
+    {% set addToCartSku = data.productAbstract['add_to_cart_sku'] ?? '' %}
+
+    {% if addToCartSku %}
+        {% block ajaxButton %}
+            {% embed molecule('ajax-add-to-cart') with {
+                class: extraClasses,
+                data: {
+                    url: addToCartSku ? (path('cart/add-ajax', {'sku': addToCartSku})),
+                    csrfToken: csrf_token('add-to-cart-ajax'),
+                    iconName: 'cart-plus',
+                    buttonText: not data.isTextHidden ? 'global.add-to-cart' | trans,
+                    buttonClasses: data.buttonClasses,
+                    buttonExtraClasses: data.buttonExtraClasses,
+                    extraAttributes: data.extraAttributes | merge(not addToCartSku ? {disabled: true} : {}),
+                },
+            } only %}
+                {% block button %}
+                    {% set iconModifiers = ['cart-plus'] %}
+                    {% set buttonTextClasses = 'text-middle spacing-right' %}
+
+                    {{ parent() }}
+                {% endblock %}
+            {% endembed %}
+        {% endblock %}
+    {% endif %}
+{% endblock %}

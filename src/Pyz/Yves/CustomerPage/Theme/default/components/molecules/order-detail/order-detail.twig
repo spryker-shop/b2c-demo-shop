@@ -1,7 +1,87 @@
 {% extends molecule('order-detail', '@SprykerShop:CustomerPage') %}
 
+{% define data = {
+    requestUri: app.request.requestUri,
+} %}
+
 {% block body %}
-    <h2 class="title title--primary">{{ 'customer.profile.order_details' | trans }}</h2>
+    <div class="order-detail-block">
+        {% embed molecule('action-bar') with {
+            data: {
+                title: 'customer.profile.order_details' | trans,
+                titleClass: 'title title--secondary-box',
+            },
+            embed: {
+                order: data.order,
+                requestUri: data.requestUri,
+            },
+        } only %}
+            {% block actions %}
+                {% set buttonClasses = 'button button--small button--expand-mobile spacing-bottom spacing-bottom--small spacing-right' %}
+
+                <a href="{{ url('customer/order') }}" class="{{ buttonClasses }} button--hollow">
+                    {{ 'general.back.button' | trans }}
+                </a>
+
+                {% include molecule('return-create-link', 'SalesReturnPage') ignore missing with {
+                    class: config.jsName ~ '__target-state-toggler ' ~ buttonClasses,
+                    data: {
+                        orderReference: embed.order.orderReference,
+                    },
+                } only %}
+
+                {% widget 'OrderCancelButtonWidget' args [embed.order, embed.requestUri] with {
+                    embed: {
+                        buttonClasses: buttonClasses,
+                    },
+                } only %}
+                    {% block formContent %}
+                        {% include molecule('remote-form-submit') with {
+                            class: 'button--expand-mobile',
+                            data: {
+                                label: 'order_cancel_widget.cancel_order' | trans,
+                                buttonClass: embed.buttonClasses ~ ' button--hollow-alert',
+                            },
+                            attributes: {
+                                'form-name': 'orderCancelForm_' ~ data.order.idSalesOrder,
+                                'form-action': path('order/cancel', {'id-sales-order': data.order.idSalesOrder, 'return-url': data.returnUrl}),
+                                'field-id': 'orderCancelForm__token' ~ data.order.idSalesOrder,
+                                'field-name': 'orderCancelForm[_token]',
+                                'field-value': csrf_token('orderCancelForm'),
+                            },
+                        } only %}
+                    {% endblock %}
+                {% endwidget %}
+
+                <button class="js-customer-reorder-form__trigger {{ buttonClasses }}" disabled>
+                    {{ 'customer.order.reorder_selected' | trans }}
+                </button>
+
+                {% widget 'CustomerReorderFormWidget' args [embed.order] with {
+                    embed: {
+                        buttonClasses: buttonClasses,
+                    },
+                } only %}
+                    {% block body %}
+                        {% include molecule('remote-form-submit') with {
+                            class: 'button--expand-mobile',
+                            data: {
+                                label: 'customer.order.reorder_all' | trans,
+                                buttonClass: embed.buttonClasses,
+                            },
+                            attributes: {
+                                'form-name': 'customerReorderWidgetForm_' ~ data.order.idSalesOrder,
+                                'form-action': path('customer/order/reorder', {'idSalesOrder': data.order.idSalesOrder}),
+                                'field-id': 'customerReorderWidgetForm__token_' ~ data.order.idSalesOrder,
+                                'field-name': 'customerReorderWidgetForm[_token]',
+                                'field-value': csrf_token('customerReorderWidgetForm'),
+                            },
+                        } only %}
+                    {% endblock %}
+                {% endwidget %}
+            {% endblock %}
+        {% endembed %}
+    </div>
 
     {% include molecule('order-detail-header', 'CustomerPage') with {
         data: {
@@ -49,4 +129,15 @@
             order: data.order,
         },
     } only %}
+
+    {% block buttonsStateHandler %}
+        {% include molecule('order-buttons-disable-toggler', 'SalesReturnPage') ignore missing with {
+            attributes: {
+                'trigger-class-name': 'js-customer-reorder-form__selection',
+                'target-class-name': config.jsName ~ '__target-state-toggler',
+                'is-disabled-when-checked': 'false',
+                'disabled-class-name': 'button--disabled',
+            },
+        } only %}
+    {% endblock %}
 {% endblock %}

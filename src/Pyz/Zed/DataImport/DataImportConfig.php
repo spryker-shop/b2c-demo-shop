@@ -7,8 +7,8 @@
 
 namespace Pyz\Zed\DataImport;
 
-use Pyz\Shared\DataImport\DataImportConstants;
 use Spryker\Zed\DataImport\DataImportConfig as SprykerDataImportConfig;
+use Spryker\Zed\StockAddressDataImport\StockAddressDataImportConfig;
 
 /**
  * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
@@ -44,23 +44,33 @@ class DataImportConfig extends SprykerDataImportConfig
     public const IMPORT_TYPE_TAX = 'tax';
     public const IMPORT_TYPE_CURRENCY = 'currency';
     public const IMPORT_TYPE_STORE = 'store';
-
     public const IMPORT_TYPE_ABSTRACT_GIFT_CARD_CONFIGURATION = 'gift-card-abstract-configuration';
     public const IMPORT_TYPE_CONCRETE_GIFT_CARD_CONFIGURATION = 'gift-card-concrete-configuration';
+    public const IMPORT_TYPE_COMBINED_PRODUCT_ABSTRACT = 'combined-product-abstract';
+    public const IMPORT_TYPE_COMBINED_PRODUCT_ABSTRACT_STORE = 'combined-product-abstract-store';
+    public const IMPORT_TYPE_COMBINED_PRODUCT_CONCRETE = 'combined-product-concrete';
+    public const IMPORT_TYPE_COMBINED_PRODUCT_IMAGE = 'combined-product-image';
+    public const IMPORT_TYPE_COMBINED_PRODUCT_PRICE = 'combined-product-price';
+    public const IMPORT_TYPE_COMBINED_PRODUCT_STOCK = 'combined-product-stock';
+    public const IMPORT_TYPE_COMBINED_PRODUCT_GROUP = 'combined-product-group';
 
     /**
      * @return string|null
      */
     public function getDefaultYamlConfigPath(): ?string
     {
-        return APPLICATION_ROOT_DIR . DIRECTORY_SEPARATOR . 'data/import/config/B2C_FULL_data_import_config_v0.yml';
+        return APPLICATION_ROOT_DIR . DIRECTORY_SEPARATOR . 'data/import/local/full_EU.yml';
     }
 
     /**
-     * @return bool
+     * @return string[]
      */
-    public function isInternal()
+    public function getFullImportTypes(): array
     {
-        return ($this->getConfig()->get(DataImportConstants::IS_ENABLE_INTERNAL_IMAGE)) ? true : false;
+        $customImportTypes = [
+            StockAddressDataImportConfig::IMPORT_TYPE_STOCK_ADDRESS,
+        ];
+
+        return array_merge(parent::getFullImportTypes(), $customImportTypes);
     }
 }

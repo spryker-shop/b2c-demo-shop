@@ -8,6 +8,7 @@
 namespace Pyz\Zed\ConfigurableBundleStorage;
 
 use Pyz\Zed\Synchronization\SynchronizationConfig;
+use Spryker\Shared\Publisher\PublisherConfig;
 use Spryker\Zed\ConfigurableBundleStorage\ConfigurableBundleStorageConfig as SprykerConfigurableBundleStorageConfig;
 
 class ConfigurableBundleStorageConfig extends SprykerConfigurableBundleStorageConfig
@@ -18,5 +19,21 @@ class ConfigurableBundleStorageConfig extends SprykerConfigurableBundleStorageCo
     public function getConfigurableBundleTemplateSynchronizationPoolName(): ?string
     {
         return SynchronizationConfig::DEFAULT_SYNCHRONIZATION_POOL_NAME;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getConfigurableBundleTemplateEventQueueName(): ?string
+    {
+        return PublisherConfig::PUBLISH_QUEUE;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getConfigurableBundleTemplateImageEventQueueName(): ?string
+    {
+        return PublisherConfig::PUBLISH_QUEUE;
     }
 }

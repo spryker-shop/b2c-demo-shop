@@ -4,13 +4,20 @@
     <div class="container">
         <div class="grid grid--justify grid--middle grid--spaced-lg inspirational-block inspirational-block--right">
             <div class="col col--lg-6 col--md-12 col--sm-12">
-
                 <div class="inspirational-block__images inspirational-block__images--left js-inspirational-block__images--1">
                     <div class="inspirational-block__image inspirational-block__image-1">
-                        <img src="{{ publicPath('images/inspire1-bottom.jpg') }}" alt="">
+                        {% include molecule('lazy-image') with {
+                            data: {
+                                imageSrc: publicPath('images/inspire1-bottom.jpg'),
+                            },
+                        } only %}
                     </div>
                     <a href="{{ 'cameras.category.link' | trans }}" class="inspirational-block__image inspirational-block__image-2 inspirational-block__image-2--left js-inspirational-block__image-2--1">
-                        <img src="{{ publicPath('images/inspire1-main.jpg') }}" alt="">
+                        {% include molecule('lazy-image') with {
+                            data: {
+                                imageSrc: publicPath('images/inspire1-main.jpg'),
+                            },
+                        } only %}
                     </a>
                 </div>
 
@@ -21,19 +28,14 @@
                         'motion-direction': 'top',
                     },
                 } only %}
-
             </div>
             <div class="col col--lg-6 col--md-12 col--sm-12">
-
                 <div class="inspirational-block__content inspirational-block__content--right">
                     {{ spyCmsBlockPlaceholder('title') | raw }}
                     <p class="inspirational-block__text">{{ spyCmsBlockPlaceholder('description') | raw }}</p>
                     <a href='{{ 'cameras.category.link' | trans }}' class="button button--hollow button--inspirational button--expand-mobile">{{ 'cms-product-group.category.link.text' | trans }}</a>
                 </div>
-
             </div>
         </div>
     </div>
-
 {% endblock %}
-

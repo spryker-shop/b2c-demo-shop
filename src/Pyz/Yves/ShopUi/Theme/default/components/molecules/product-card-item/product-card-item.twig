@@ -1,4 +1,5 @@
 {% extends model('component') %}
+{% import _self as component %}
 
 {% define config = {
     name: 'product-card-item',
@@ -77,27 +78,39 @@
                             {% endif %}
                         {% endblock %}
 
-                        {% block quantity %}
-                            {% if canEditCart %}
-                                <form method="POST" action="{{ path('cart/change/quantity', {'sku': data.productItem.sku }) }}">
-                                    {% include molecule('product-quantity-input') with {
-                                        data: {
-                                            maxQuantity: data.productItem.maxQuantity,
-                                            value: data.productItem.quantity,
-                                        },
-                                    } only %}
+                        <div class="grid grid--justify grid--gap">
+                            <div class="col">
+                                {% block quantity %}
+                                    {% if canEditCart %}
+                                        {% widget 'CartChangeQuantityFormWidget' args [data.productItem, not canEditCart] only %}
+                                            {% block embeddedData %}
+                                                {% include molecule('product-quantity-input') with {
+                                                    data: {
+                                                        maxQuantity: data.cartItem.maxQuantity,
+                                                        value: data.cartItem.quantity,
+                                                    },
+                                                } only %}
 
-                                    <input type="hidden" value="{{ data.productItem.groupKey }}" name="groupKey" />
-                                </form>
-                            {% else %}
-                                {{ 'cart.item_quantity' | trans }}: {{ data.productItem.quantity }}
-                            {% endif %}
-                        {% endblock %}
+                                                <input type="hidden" value="{{ data.cartItem.groupKey }}" name="groupKey">
+                                            {% endblock %}
+                                        {% endwidget %}
+                                    {% else %}
+                                        {{ 'cart.item_quantity' | trans }}: {{ data.productItem.quantity }}
+                                    {% endif %}
+                                {% endblock %}
+                            </div>
+
+                            {% block state %}{% endblock %}
+                        </div>
 
                         {% if canEditCart %}
-                            <a class="link link--darkest link--edit" href="{{ path('cart/remove', {'sku': data.productItem.sku, 'groupKey': data.productItem.groupKey }) }}">
-                                {{ 'remove' | trans }}
-                            </a>
+                            {% widget 'RemoveFromCartFormWidget' args [data.productItem, random()] only %}
+                                {% block embeddedData %}
+                                    <button class="link link--darkest link--edit" data-init-single-click {{ qa('add-to-cart-button') }}>
+                                        {{- 'remove' | trans -}}
+                                    </button>
+                                {% endblock %}
+                            {% endwidget %}
                         {% endif %}
                     </div>
                 {% endif %}

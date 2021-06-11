@@ -6,28 +6,30 @@
 
 {% block body %}
     <div class="grid grid--stretch product-list">
-        {% for productAbstractView in data.productAbstractViewCollection if productAbstractView.available %}
-            {% embed molecule('product-item') with {
-                class: 'col col--sm-6 col--lg-3',
-                data: {
-                    product: productAbstractView,
-                },
-            } only %}
-                {% block rating %}
-                    {% include molecule('rating-selector', 'ProductReviewWidget') ignore missing with {
-                        modifiers: ['small'],
-                        data: {
-                            value: data.product.rating.averageRating | default(0),
-                            reviewCount:  data.product.rating.totalReview | default(0),
-                            useHalfSteps: true,
-                            parentJsName: config.jsName,
-                        },
-                        attributes: {
-                            readonly: true,
-                        },
-                    } only %}
-                {% endblock %}
-            {% endembed %}
+        {% for productAbstractView in data.productAbstractViewCollection %}
+            {% if productAbstractView.available %}
+                {% embed molecule('product-item') with {
+                    class: 'col col--sm-6 col--lg-3',
+                    data: {
+                        product: productAbstractView,
+                    },
+                } only %}
+                    {% block rating %}
+                        {% include molecule('rating-selector', 'ProductReviewWidget') ignore missing with {
+                            modifiers: ['small'],
+                            data: {
+                                value: data.product.rating.averageRating | default(0),
+                                reviewCount:  data.product.rating.totalReview | default(0),
+                                useHalfSteps: true,
+                                parentJsName: config.jsName,
+                            },
+                            attributes: {
+                                readonly: true,
+                            },
+                        } only %}
+                    {% endblock %}
+                {% endembed %}
+            {% endif %}
         {% endfor %}
     </div>
 {% endblock %}
