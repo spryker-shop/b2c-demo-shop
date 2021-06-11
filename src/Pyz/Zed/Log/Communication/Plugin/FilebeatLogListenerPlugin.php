@@ -21,7 +21,7 @@ class FilebeatLogListenerPlugin extends AbstractPlugin implements LogListenerInt
      */
     public function startListener()
     {
-        $process = new Process('sudo service filebeat start');
+        $process = new Process(['sudo service filebeat start']);
         $process->run();
     }
 
@@ -30,7 +30,7 @@ class FilebeatLogListenerPlugin extends AbstractPlugin implements LogListenerInt
      */
     public function stopListener()
     {
-        $process = new Process('sudo service filebeat stop');
+        $process = new Process(['sudo service filebeat stop']);
         $process->run();
     }
 }

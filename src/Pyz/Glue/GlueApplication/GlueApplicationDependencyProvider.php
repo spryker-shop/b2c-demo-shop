@@ -15,12 +15,17 @@ use Spryker\Glue\AgentAuthRestApi\Plugin\GlueApplication\AgentCustomerSearchReso
 use Spryker\Glue\AgentAuthRestApi\Plugin\GlueApplication\AgentRestUserValidatorPlugin;
 use Spryker\Glue\AlternativeProductsRestApi\Plugin\GlueApplication\AbstractAlternativeProductsResourceRoutePlugin;
 use Spryker\Glue\AlternativeProductsRestApi\Plugin\GlueApplication\ConcreteAlternativeProductsResourceRoutePlugin;
-use Spryker\Glue\AuthRestApi\Plugin\AccessTokenRestRequestValidatorPlugin;
 use Spryker\Glue\AuthRestApi\Plugin\AccessTokensResourceRoutePlugin;
 use Spryker\Glue\AuthRestApi\Plugin\FormatAuthenticationErrorResponseHeadersPlugin;
+use Spryker\Glue\AuthRestApi\Plugin\GlueApplication\AccessTokenRestRequestValidatorPlugin;
+use Spryker\Glue\AuthRestApi\Plugin\GlueApplication\FormattedControllerBeforeActionValidateAccessTokenPlugin;
 use Spryker\Glue\AuthRestApi\Plugin\GlueApplication\SimultaneousAuthenticationRestRequestValidatorPlugin;
+use Spryker\Glue\AuthRestApi\Plugin\GlueApplication\TokenResourceRoutePlugin;
 use Spryker\Glue\AuthRestApi\Plugin\RefreshTokensResourceRoutePlugin;
 use Spryker\Glue\AuthRestApi\Plugin\RestUserFinderByAccessTokenPlugin;
+use Spryker\Glue\AvailabilityNotificationsRestApi\Plugin\GlueApplication\AvailabilityNotificationsResourceRoutePlugin;
+use Spryker\Glue\AvailabilityNotificationsRestApi\Plugin\GlueApplication\CustomerAvailabilityNotificationsResourceRoutePlugin;
+use Spryker\Glue\AvailabilityNotificationsRestApi\Plugin\GlueApplication\MyAvailabilityNotificationsResourceRoutePlugin;
 use Spryker\Glue\CartCodesRestApi\Plugin\GlueApplication\CartCodesResourceRoutePlugin;
 use Spryker\Glue\CartCodesRestApi\Plugin\GlueApplication\CartRuleByQuoteResourceRelationshipPlugin;
 use Spryker\Glue\CartCodesRestApi\Plugin\GlueApplication\CartVouchersResourceRoutePlugin;
@@ -33,12 +38,14 @@ use Spryker\Glue\CartsRestApi\Plugin\GlueApplication\CartItemsByQuoteResourceRel
 use Spryker\Glue\CartsRestApi\Plugin\GlueApplication\GuestCartItemsByQuoteResourceRelationshipPlugin;
 use Spryker\Glue\CartsRestApi\Plugin\ResourceRoute\CartItemsResourceRoutePlugin;
 use Spryker\Glue\CartsRestApi\Plugin\ResourceRoute\CartsResourceRoutePlugin;
+use Spryker\Glue\CartsRestApi\Plugin\ResourceRoute\CustomerCartsResourceRoutePlugin;
 use Spryker\Glue\CartsRestApi\Plugin\ResourceRoute\GuestCartItemsResourceRoutePlugin;
 use Spryker\Glue\CartsRestApi\Plugin\ResourceRoute\GuestCartsResourceRoutePlugin;
 use Spryker\Glue\CartsRestApi\Plugin\Validator\AnonymousCustomerUniqueIdValidatorPlugin;
 use Spryker\Glue\CatalogSearchProductsResourceRelationship\Plugin\CatalogSearchAbstractProductsResourceRelationshipPlugin;
 use Spryker\Glue\CatalogSearchProductsResourceRelationship\Plugin\CatalogSearchSuggestionsAbstractProductsResourceRelationshipPlugin;
 use Spryker\Glue\CatalogSearchRestApi\CatalogSearchRestApiConfig;
+use Spryker\Glue\CatalogSearchRestApi\Plugin\CatalogSearchRequestParametersIntegerRestRequestValidatorPlugin;
 use Spryker\Glue\CatalogSearchRestApi\Plugin\CatalogSearchResourceRoutePlugin;
 use Spryker\Glue\CatalogSearchRestApi\Plugin\CatalogSearchSuggestionsResourceRoutePlugin;
 use Spryker\Glue\CategoriesRestApi\Plugin\CategoriesResourceRoutePlugin;
@@ -47,7 +54,7 @@ use Spryker\Glue\CheckoutRestApi\CheckoutRestApiConfig;
 use Spryker\Glue\CheckoutRestApi\Plugin\GlueApplication\CheckoutDataResourcePlugin;
 use Spryker\Glue\CheckoutRestApi\Plugin\GlueApplication\CheckoutResourcePlugin;
 use Spryker\Glue\ContentBannersRestApi\Plugin\ContentBannerResourceRoutePlugin;
-use Spryker\Glue\ContentProductAbstractListsRestApi\Plugin\ContentProductAbstractListRoutePlugin;
+use Spryker\Glue\ContentProductAbstractListsRestApi\Plugin\GlueApplication\AbstractProductsResourceRoutePlugin as ContentProductAbstractListAbstractProductsResourceRoutePlugin;
 use Spryker\Glue\CustomerAccessRestApi\Plugin\GlueApplication\CustomerAccessFormatRequestPlugin;
 use Spryker\Glue\CustomerAccessRestApi\Plugin\GlueApplication\CustomerAccessResourceRoutePlugin;
 use Spryker\Glue\CustomersRestApi\CustomersRestApiConfig;
@@ -58,6 +65,7 @@ use Spryker\Glue\CustomersRestApi\Plugin\CustomerRestorePasswordResourceRoutePlu
 use Spryker\Glue\CustomersRestApi\Plugin\CustomersResourceRoutePlugin;
 use Spryker\Glue\CustomersRestApi\Plugin\CustomersToAddressesRelationshipPlugin;
 use Spryker\Glue\CustomersRestApi\Plugin\GlueApplication\AddressByCheckoutDataResourceRelationshipPlugin;
+use Spryker\Glue\CustomersRestApi\Plugin\GlueApplication\CustomerConfirmationResourceRoutePlugin;
 use Spryker\Glue\CustomersRestApi\Plugin\SetCustomerBeforeActionPlugin;
 use Spryker\Glue\DiscountPromotionsRestApi\DiscountPromotionsRestApiConfig;
 use Spryker\Glue\DiscountPromotionsRestApi\Plugin\GlueApplication\PromotionItemByQuoteTransferResourceRelationshipPlugin;
@@ -67,6 +75,7 @@ use Spryker\Glue\EventDispatcher\Plugin\Application\EventDispatcherApplicationPl
 use Spryker\Glue\GiftCardsRestApi\Plugin\GlueApplication\GiftCardByQuoteResourceRelationshipPlugin;
 use Spryker\Glue\GlueApplication\GlueApplicationDependencyProvider as SprykerGlueApplicationDependencyProvider;
 use Spryker\Glue\GlueApplication\Plugin\Application\GlueApplicationApplicationPlugin;
+use Spryker\Glue\GlueApplication\Plugin\GlueApplication\HeadersValidateHttpRequestPlugin;
 use Spryker\Glue\GlueApplication\Plugin\GlueApplication\PaginationParametersValidateHttpRequestPlugin;
 use Spryker\Glue\GlueApplication\Plugin\Rest\SetStoreCurrentLocaleBeforeActionPlugin;
 use Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\ResourceRelationshipCollectionInterface;
@@ -77,6 +86,7 @@ use Spryker\Glue\NavigationsRestApi\NavigationsRestApiConfig;
 use Spryker\Glue\NavigationsRestApi\Plugin\ResourceRoute\NavigationsResourceRoutePlugin;
 use Spryker\Glue\OrderPaymentsRestApi\Plugin\OrderPaymentsResourceRoutePlugin;
 use Spryker\Glue\OrdersRestApi\OrdersRestApiConfig;
+use Spryker\Glue\OrdersRestApi\Plugin\CustomerOrdersResourceRoutePlugin;
 use Spryker\Glue\OrdersRestApi\Plugin\OrderItemByResourceIdResourceRelationshipPlugin;
 use Spryker\Glue\OrdersRestApi\Plugin\OrderRelationshipByOrderReferencePlugin;
 use Spryker\Glue\OrdersRestApi\Plugin\OrdersResourceRoutePlugin;
@@ -129,6 +139,10 @@ use Spryker\Glue\SalesReturnsRestApi\Plugin\ReturnItemByReturnResourceRelationsh
 use Spryker\Glue\SalesReturnsRestApi\Plugin\ReturnReasonsResourceRoutePlugin;
 use Spryker\Glue\SalesReturnsRestApi\Plugin\ReturnsResourceRoutePlugin;
 use Spryker\Glue\SalesReturnsRestApi\SalesReturnsRestApiConfig;
+use Spryker\Glue\SecurityBlockerRestApi\Plugin\GlueApplication\SecurityBlockerAgentControllerAfterActionPlugin;
+use Spryker\Glue\SecurityBlockerRestApi\Plugin\GlueApplication\SecurityBlockerAgentRestRequestValidatorPlugin;
+use Spryker\Glue\SecurityBlockerRestApi\Plugin\GlueApplication\SecurityBlockerCustomerControllerAfterActionPlugin;
+use Spryker\Glue\SecurityBlockerRestApi\Plugin\GlueApplication\SecurityBlockerCustomerRestRequestValidatorPlugin;
 use Spryker\Glue\Session\Plugin\Application\SessionApplicationPlugin;
 use Spryker\Glue\ShipmentsRestApi\Plugin\GlueApplication\OrderShipmentByOrderResourceRelationshipPlugin;
 use Spryker\Glue\ShipmentsRestApi\Plugin\GlueApplication\ShipmentMethodsByShipmentResourceRelationshipPlugin;
@@ -195,7 +209,7 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
             new ProductTaxSetsResourceRoutePlugin(),
             new OrderPaymentsResourceRoutePlugin(),
             new ContentBannerResourceRoutePlugin(),
-            new ContentProductAbstractListRoutePlugin(),
+            new ContentProductAbstractListAbstractProductsResourceRoutePlugin(),
             new UrlResolverResourceRoutePlugin(),
             new CustomerAccessResourceRoutePlugin(),
             new AbstractProductsProductReviewsResourceRoutePlugin(),
@@ -211,6 +225,13 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
             new AgentCustomerSearchResourceRoutePlugin(),
             new ConcreteProductsBundledProductsResourceRoutePlugin(),
             new ProductManagementAttributesResourceRoutePlugin(),
+            new CustomerConfirmationResourceRoutePlugin(),
+            new TokenResourceRoutePlugin(),
+            new CustomerOrdersResourceRoutePlugin(),
+            new CustomerCartsResourceRoutePlugin(),
+            new AvailabilityNotificationsResourceRoutePlugin(),
+            new MyAvailabilityNotificationsResourceRoutePlugin(),
+            new CustomerAvailabilityNotificationsResourceRoutePlugin(),
         ];
     }
 
@@ -223,6 +244,19 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
     {
         return [
             new PaginationParametersValidateHttpRequestPlugin(),
+            new HeadersValidateHttpRequestPlugin(),
+        ];
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @return \Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\FormattedControllerBeforeActionPluginInterface[]
+     */
+    protected function getFormattedControllerBeforeActionTerminatePlugins(): array
+    {
+        return [
+            new FormattedControllerBeforeActionValidateAccessTokenPlugin(),
         ];
     }
 
@@ -268,6 +302,8 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
     protected function getRestRequestValidatorPlugins(): array
     {
         return [
+            new SecurityBlockerCustomerRestRequestValidatorPlugin(),
+            new SecurityBlockerAgentRestRequestValidatorPlugin(),
             new AccessTokenRestRequestValidatorPlugin(),
             new AgentAccessTokenRestRequestValidatorPlugin(),
             new SimultaneousAuthenticationRestRequestValidatorPlugin(),
@@ -275,6 +311,7 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
             new CurrencyParameterValidatorPlugin(),
             new PriceModeParameterValidatorPlugin(),
             new EntityTagRestRequestValidatorPlugin(),
+            new CatalogSearchRequestParametersIntegerRestRequestValidatorPlugin(),
         ];
     }
 
@@ -304,6 +341,17 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
             new SetCustomerBeforeActionPlugin(),
             new SetCurrencyBeforeActionPlugin(),
             new SetPriceModeBeforeActionPlugin(),
+        ];
+    }
+
+    /**
+     * @return \Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\ControllerAfterActionPluginInterface[]
+     */
+    protected function getControllerAfterActionPlugins(): array
+    {
+        return [
+            new SecurityBlockerCustomerControllerAfterActionPlugin(),
+            new SecurityBlockerAgentControllerAfterActionPlugin(),
         ];
     }
 
