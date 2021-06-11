@@ -1,6 +1,7 @@
 <?php
 
 use Spryker\Shared\Oauth\OauthConstants;
+use Spryker\Shared\OauthCryptography\OauthCryptographyConstants;
 use Spryker\Shared\SecuritySystemUser\SecuritySystemUserConstants;
 
 // ----------------------------------------------------------------------------
