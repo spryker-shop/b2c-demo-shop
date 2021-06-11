@@ -29,8 +29,10 @@ class ProductAbstractRelationReader implements ProductAbstractRelationReaderInte
      * @param \Pyz\Zed\ExampleProductSalePage\Persistence\ExampleProductSalePageQueryContainerInterface $productSaleQueryContainer
      * @param \Pyz\Zed\ExampleProductSalePage\ExampleProductSalePageConfig $productSaleConfig
      */
-    public function __construct(ExampleProductSalePageQueryContainerInterface $productSaleQueryContainer, ExampleProductSalePageConfig $productSaleConfig)
-    {
+    public function __construct(
+        ExampleProductSalePageQueryContainerInterface $productSaleQueryContainer,
+        ExampleProductSalePageConfig $productSaleConfig
+    ) {
         $this->productSaleQueryContainer = $productSaleQueryContainer;
         $this->productSaleConfig = $productSaleConfig;
     }
@@ -52,6 +54,7 @@ class ProductAbstractRelationReader implements ProductAbstractRelationReaderInte
         $relationsToAssign = $this->findRelationsBecomingActive($productLabelNewEntity);
 
         $idProductLabels = array_keys($relationsToDeAssign) + array_keys($relationsToAssign);
+
         foreach ($idProductLabels as $idProductLabel) {
             $result[] = $this->mapRelationTransfer($idProductLabel, $relationsToAssign, $relationsToDeAssign);
         }

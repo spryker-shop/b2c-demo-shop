@@ -32,7 +32,6 @@ use Spryker\Zed\DataImport\Communication\Console\DataImportConsole;
 use Spryker\Zed\DataImport\Communication\Console\DataImportDumpConsole;
 use Spryker\Zed\Development\Communication\Console\CodeArchitectureSnifferConsole;
 use Spryker\Zed\Development\Communication\Console\CodeFixturesConsole;
-use Spryker\Zed\Development\Communication\Console\CodePhpMessDetectorConsole;
 use Spryker\Zed\Development\Communication\Console\CodePhpstanConsole;
 use Spryker\Zed\Development\Communication\Console\CodeStyleSnifferConsole;
 use Spryker\Zed\Development\Communication\Console\CodeTestConsole;
@@ -98,11 +97,13 @@ use Spryker\Zed\Quote\Communication\Console\DeleteExpiredGuestQuoteConsole;
 use Spryker\Zed\RabbitMq\Communication\Console\DeleteAllExchangesConsole;
 use Spryker\Zed\RabbitMq\Communication\Console\DeleteAllQueuesConsole;
 use Spryker\Zed\RabbitMq\Communication\Console\PurgeAllQueuesConsole;
+use Spryker\Zed\RabbitMq\Communication\Console\QueueSetupConsole;
 use Spryker\Zed\RabbitMq\Communication\Console\SetUserPermissionsConsole;
 use Spryker\Zed\RestRequestValidator\Communication\Console\BuildRestApiValidationCacheConsole;
 use Spryker\Zed\RestRequestValidator\Communication\Console\RemoveRestApiValidationCacheConsole;
 use Spryker\Zed\Router\Communication\Plugin\Console\RouterCacheWarmUpConsole;
 use Spryker\Zed\SalesInvoice\Communication\Console\OrderInvoiceSendConsole;
+use Spryker\Zed\SalesOms\Communication\Console\ImportOrderItemsStatusConsole;
 use Spryker\Zed\Scheduler\Communication\Console\SchedulerCleanConsole;
 use Spryker\Zed\Scheduler\Communication\Console\SchedulerResumeConsole;
 use Spryker\Zed\Scheduler\Communication\Console\SchedulerSetupConsole;
@@ -125,9 +126,7 @@ use Spryker\Zed\SetupFrontend\Communication\Console\InstallPackageManagerConsole
 use Spryker\Zed\SetupFrontend\Communication\Console\InstallProjectDependenciesConsole;
 use Spryker\Zed\SetupFrontend\Communication\Console\Npm\RunnerConsole;
 use Spryker\Zed\SetupFrontend\Communication\Console\YvesBuildFrontendConsole;
-use Spryker\Zed\SetupFrontend\Communication\Console\YvesInstallDependenciesConsole;
 use Spryker\Zed\SetupFrontend\Communication\Console\ZedBuildFrontendConsole;
-use Spryker\Zed\SetupFrontend\Communication\Console\ZedInstallDependenciesConsole;
 use Spryker\Zed\ShipmentDataImport\ShipmentDataImportConfig;
 use Spryker\Zed\StateMachine\Communication\Console\CheckConditionConsole as StateMachineCheckConditionConsole;
 use Spryker\Zed\StateMachine\Communication\Console\CheckTimeoutConsole as StateMachineCheckTimeoutConsole;
@@ -163,17 +162,21 @@ use Stecman\Component\Symfony\Console\BashCompletion\CompletionCommand;
  */
 class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
 {
+    protected const COMMAND_SEPARATOR = ':';
+
     /**
      * @param \Spryker\Zed\Kernel\Container $container
      *
      * @return \Symfony\Component\Console\Command\Command[]
      */
-    protected function getConsoleCommands(Container $container)
+    protected function getConsoleCommands(Container $container): array
     {
         $commands = [
             new CacheWarmerConsole(),
             new BuildNavigationConsole(),
             new RemoveNavigationCacheConsole(),
+            new BuildRestApiValidationCacheConsole(),
+            new RemoveRestApiValidationCacheConsole(),
             new EmptyAllCachesConsole(),
             new TransferGeneratorConsole(),
             new RemoveTransferConsole(),
@@ -190,6 +193,7 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
             new StateMachineCheckTimeoutConsole(),
             new StateMachineCheckConditionConsole(),
             new StateMachineClearLocksConsole(),
+            new ImportOrderItemsStatusConsole(),
             new SessionRemoveLockConsole(),
             new QueueTaskConsole(),
             new QueueWorkerConsole(),
@@ -202,6 +206,7 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
             new DataImportConsole(DataImportConsole::DEFAULT_NAME . ':' . DataImportConfig::IMPORT_TYPE_STORE),
             new DataImportConsole(DataImportConsole::DEFAULT_NAME . ':' . DataImportConfig::IMPORT_TYPE_CURRENCY),
             new DataImportConsole(DataImportConsole::DEFAULT_NAME . ':' . CategoryDataImportConfig::IMPORT_TYPE_CATEGORY),
+            new DataImportConsole(DataImportConsole::DEFAULT_NAME . static::COMMAND_SEPARATOR . CategoryDataImportConfig::IMPORT_TYPE_CATEGORY_STORE),
             new DataImportConsole(DataImportConsole::DEFAULT_NAME . ':' . DataImportConfig::IMPORT_TYPE_CATEGORY_TEMPLATE),
             new DataImportConsole(DataImportConsole::DEFAULT_NAME . ':' . DataImportConfig::IMPORT_TYPE_CUSTOMER),
             new DataImportConsole(DataImportConsole::DEFAULT_NAME . ':' . DataImportConfig::IMPORT_TYPE_GLOSSARY),
@@ -265,7 +270,6 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
 
             new DatabaseDropConsole(),
             new DatabaseDropTablesConsole(),
-
             new DeleteMigrationFilesConsole(),
 
             new DeleteLogFilesConsole(),
@@ -285,15 +289,14 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
             new CleanUpDependenciesConsole(),
             new InstallProjectDependenciesConsole(),
 
-            new YvesInstallDependenciesConsole(),
             new YvesBuildFrontendConsole(),
 
-            new ZedInstallDependenciesConsole(),
             new ZedBuildFrontendConsole(),
 
             new DeleteAllQueuesConsole(),
             new PurgeAllQueuesConsole(),
             new DeleteAllExchangesConsole(),
+            new QueueSetupConsole(),
             new SetUserPermissionsConsole(),
 
             new MaintenanceEnableConsole(),
@@ -342,7 +345,6 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
             $commands[] = new CodeStyleSnifferConsole();
             $commands[] = new CodeArchitectureSnifferConsole();
             $commands[] = new CodePhpstanConsole();
-            $commands[] = new CodePhpMessDetectorConsole();
             $commands[] = new ValidatorConsole();
             $commands[] = new BundleCodeGeneratorConsole();
             $commands[] = new BundleYvesCodeGeneratorConsole();
@@ -360,6 +362,8 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
             $commands[] = new RemoveYvesIdeAutoCompletionConsole();
             $commands[] = new GenerateIdeAutoCompletionConsole();
             $commands[] = new RemoveIdeAutoCompletionConsole();
+            $commands[] = new GenerateGlueIdeAutoCompletionConsole();
+            $commands[] = new RemoveGlueIdeAutoCompletionConsole();
             $commands[] = new DataBuilderGeneratorConsole();
             $commands[] = new RemoveDataBuilderConsole();
             $commands[] = new CompletionCommand();
@@ -395,23 +399,6 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
     /**
      * @param \Spryker\Zed\Kernel\Container $container
      *
-     * @return \Symfony\Component\EventDispatcher\EventSubscriberInterface[]
-     */
-    public function getEventSubscriber(Container $container)
-    {
-        $eventSubscriber = parent::getEventSubscriber($container);
-
-        if (!Environment::isDevelopment()) {
-            $eventSubscriber[] = new ConsoleLogPlugin();
-            $eventSubscriber[] = new MonitoringConsolePlugin();
-        }
-
-        return $eventSubscriber;
-    }
-
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
      * @return array
      */
     public function getConsolePostRunHookPlugins(Container $container)
@@ -426,12 +413,29 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
      *
      * @return \Spryker\Shared\ApplicationExtension\Dependency\Plugin\ApplicationPluginInterface[]
      */
-    protected function getApplicationPlugins(Container $container): array
+    public function getApplicationPlugins(Container $container): array
     {
         $applicationPlugins = parent::getApplicationPlugins($container);
         $applicationPlugins[] = new PropelApplicationPlugin();
         $applicationPlugins[] = new TwigApplicationPlugin();
 
         return $applicationPlugins;
+    }
+
+    /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Symfony\Component\EventDispatcher\EventSubscriberInterface[]
+     */
+    public function getEventSubscriber(Container $container): array
+    {
+        $eventSubscriber = parent::getEventSubscriber($container);
+
+        if (!Environment::isDevelopment()) {
+            $eventSubscriber[] = new ConsoleLogPlugin();
+            $eventSubscriber[] = new MonitoringConsolePlugin();
+        }
+
+        return $eventSubscriber;
     }
 }
