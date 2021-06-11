@@ -7,6 +7,7 @@
 
 namespace Pyz\Zed\Search;
 
+use Spryker\Zed\CategoryPageSearch\Communication\Plugin\Search\CategoryNodeDataPageMapBuilder;
 use Spryker\Zed\ConfigurableBundlePageSearch\Communication\Plugin\Search\ConfigurableBundleTemplatePageMapPlugin;
 use Spryker\Zed\Search\SearchDependencyProvider as SprykerSearchDependencyProvider;
 use Spryker\Zed\SearchElasticsearch\Communication\Plugin\Search\ElasticsearchIndexInstallerPlugin;
@@ -41,6 +42,7 @@ class SearchDependencyProvider extends SprykerSearchDependencyProvider
     {
         return [
             new ConfigurableBundleTemplatePageMapPlugin(),
+            new CategoryNodeDataPageMapBuilder(),
         ];
     }
 }
