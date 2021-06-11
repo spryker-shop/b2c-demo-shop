@@ -6,7 +6,7 @@
 } %}
 
 {% define data = {
-    cartQuantity: app['cart.quantity'] | default,
+    cartQuantity: getCartQuantity() | default,
     showUserMenu: true
 } %}
 
@@ -59,14 +59,11 @@
         {% endif %}
 
         <li class="{{ config.name }}__item">
-            {% include atom('cart-link') with {
+            {% include molecule('cart-counter') with {
                 class: config.jsName ~ '__trigger',
                 data: {
-                    cartQuantity: data.cartQuantity,
+                    quantity: data.cartQuantity,
                 },
-                attributes: {
-                    href: url('cart'),
-                }
             } only %}
         </li>
 

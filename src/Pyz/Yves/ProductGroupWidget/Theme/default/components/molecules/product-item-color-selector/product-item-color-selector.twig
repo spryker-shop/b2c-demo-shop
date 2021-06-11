@@ -1,0 +1,9 @@
+{% extends molecule('product-item-color-selector', '@SprykerShop:ProductGroupWidget') %}
+
+{% block selectionInner %}
+    {% set dataAttributesList = dataAttributesList | merge({
+        'data-product-review-count': item.rating ? item.rating.totalReview,
+    }) %}
+
+    {{ parent() }}
+{% endblock %}

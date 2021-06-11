@@ -1,0 +1,33 @@
+@mixin sales-configurable-bundle-widget-ordered-configured-bundle($name: '.ordered-configured-bundle') {
+    #{$name} {
+        @include helper-ui-clearfix;
+        margin: 0 rem(20) rem(20) 0;
+        border: rem(1) dotted $setting-color-gray-3;
+
+        &__title {
+            font-size: $setting-font-size-base;
+        }
+
+        &__container {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            padding: rem(8) rem(15);
+            background: $setting-color-gray-1;
+            margin-bottom: rem(13);
+            border-bottom: rem(1) dotted $setting-color-gray-3;
+        }
+
+        &__total {
+            font: fw(regular) $setting-font-size-base $setting-font-family-additional;
+
+            @include helper-breakpoint-media-min($lg-min) {
+                text-align: right;
+            }
+        }
+
+        @content;
+    }
+}
+
+@include sales-configurable-bundle-widget-ordered-configured-bundle();

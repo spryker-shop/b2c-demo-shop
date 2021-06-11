@@ -7,18 +7,19 @@
 
 namespace Pyz\Zed\EventDispatcher;
 
+use Spryker\Shared\Http\Plugin\EventDispatcher\ResponseListenerEventDispatcherPlugin;
 use Spryker\Zed\Acl\Communication\Plugin\EventDispatcher\AccessControlEventDispatcherPlugin;
 use Spryker\Zed\Application\Communication\Plugin\EventDispatcher\HeadersSecurityEventDispatcherPlugin;
-use Spryker\Zed\Auth\Communication\Plugin\EventDispatcher\AuthorizationEventDispatcherPlugin;
-use Spryker\Zed\Auth\Communication\Plugin\EventDispatcher\RedirectAfterLoginEventDispatcherPlugin;
 use Spryker\Zed\EventBehavior\Communication\Plugin\EventDispatcher\EventBehaviorEventDispatcherPlugin;
 use Spryker\Zed\EventDispatcher\EventDispatcherDependencyProvider as SprykerEventDispatcherDependencyProvider;
 use Spryker\Zed\Http\Communication\Plugin\EventDispatcher\CookieEventDispatcherPlugin;
 use Spryker\Zed\Http\Communication\Plugin\EventDispatcher\FragmentEventDispatcherPlugin;
 use Spryker\Zed\Http\Communication\Plugin\EventDispatcher\HeaderEventDispatcherPlugin;
 use Spryker\Zed\Http\Communication\Plugin\EventDispatcher\HstsHeaderEventDispatcher;
+use Spryker\Zed\Kernel\Communication\Plugin\AutoloaderCacheEventDispatcherPlugin;
 use Spryker\Zed\Locale\Communication\Plugin\EventDispatcher\LocaleEventDispatcherPlugin;
 use Spryker\Zed\Monitoring\Communication\Plugin\EventDispatcher\MonitoringRequestTransactionEventDispatcherPlugin;
+use Spryker\Zed\Router\Communication\Plugin\EventDispatcher\RequestAttributesEventDispatcherPlugin;
 use Spryker\Zed\Router\Communication\Plugin\EventDispatcher\RouterListenerEventDispatcherPlugin;
 use Spryker\Zed\Router\Communication\Plugin\EventDispatcher\RouterLocaleEventDispatcherPlugin;
 use Spryker\Zed\Router\Communication\Plugin\EventDispatcher\RouterSslRedirectEventDispatcherPlugin;
@@ -35,24 +36,25 @@ class EventDispatcherDependencyProvider extends SprykerEventDispatcherDependency
     protected function getEventDispatcherPlugins(): array
     {
         return [
-            new AuthorizationEventDispatcherPlugin(),
             new AccessControlEventDispatcherPlugin(),
             new EventBehaviorEventDispatcherPlugin(),
             new GatewayControllerEventDispatcherPlugin(),
-            new TwigEventDispatcherPlugin(),
-            new LocaleEventDispatcherPlugin(),
-            new RouterLocaleEventDispatcherPlugin(),
             new HeadersSecurityEventDispatcherPlugin(),
+            new LocaleEventDispatcherPlugin(),
             new MonitoringRequestTransactionEventDispatcherPlugin(),
-            new RedirectAfterLoginEventDispatcherPlugin(),
+            new RouterLocaleEventDispatcherPlugin(),
+            new RouterListenerEventDispatcherPlugin(),
+            new RouterSslRedirectEventDispatcherPlugin(),
             new CookieEventDispatcherPlugin(),
             new FragmentEventDispatcherPlugin(),
             new HeaderEventDispatcherPlugin(),
             new HstsHeaderEventDispatcher(),
-            new RouterListenerEventDispatcherPlugin(),
-            new RouterSslRedirectEventDispatcherPlugin(),
+            new TwigEventDispatcherPlugin(),
             new SessionEventDispatcherPlugin(),
             new SaveSessionEventDispatcherPlugin(),
+            new AutoloaderCacheEventDispatcherPlugin(),
+            new RequestAttributesEventDispatcherPlugin(),
+            new ResponseListenerEventDispatcherPlugin(),
         ];
     }
 }

@@ -18,9 +18,11 @@
                 shipping: data.forms.shipping,
                 billing: data.forms.billing,
                 items: data.forms.items,
+                bundleItems: data.forms.bundleItems,
             },
             isMultipleShipmentEnabled: data.isMultipleShipmentEnabled,
             jsAddressClass: jsAddressClass,
+            isBillingSameAsShippingChecked: data.forms.billing.id_customer_address.vars.choices is empty,
         },
     } only %}
         {% block fields %}
@@ -68,6 +70,7 @@
                     class: 'col col--sm-12 is-hidden spacing-bottom ' ~ embed.jsAddressClass ~ '__items-target',
                     data: {
                         form: embed.forms.items,
+                        formBundle: embed.forms.bundleItems,
                         shippingForm: embed.forms.shipping,
                         jsAddressClass: embed.jsAddressClass,
                     },
@@ -84,7 +87,7 @@
                         attributes: {
                             'target-class-name': embed.jsAddressClass ~ '__billing-address',
                             'add-class-when-checked': true,
-                            'checked': true,
+                            'checked': embed.isBillingSameAsShippingChecked,
                         },
                     }) }}
                 </div>

@@ -139,6 +139,20 @@ $address-form-width: rem(600);
             }
         }
 
+        &--note {
+            #{$name}__field {
+                padding: 0 0 rem(7);
+            }
+
+            #{$name}__actions {
+                text-align: left;
+            }
+
+            #{$name}__action {
+                margin-left: 0;
+            }
+        }
+
         &--login,
         &--checkout-form-elements {
             width: auto;
@@ -171,7 +185,7 @@ $address-form-width: rem(600);
             input[type='text'],
             textarea {
                 @include helper-effect-transition(all 0.4s ease);
-                font: fw(regular) rem(17)/rem(22) $setting-font-family;
+                font: fw(regular) rem(17) / rem(22) $setting-font-family;
                 color: $setting-color-gray-6;
                 padding: rem(10) rem(15);
 

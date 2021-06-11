@@ -42,14 +42,15 @@ class SalesConfig extends SprykerSalesConfig
      *    'discount' => '/discount/sales/index',
      * ]
      *
-     * @return array
+     * @return string[]
      */
     public function getSalesDetailExternalBlocksUrls()
     {
         $projectExternalBlocks = [
             'cart_note' => '/cart-note/sales/list', #CartNoteFeature
+            'return' => '/sales-return-gui/sales/list',
             'cart_note_bundle_items' => '/cart-note-product-bundle-connector/sales/list', #CartNoteFeature
-            'payments' => '/payment/sales/list',
+            'payments' => '/sales-payment-gui/sales/list',
             'giftCards' => '/gift-card/sales/list',
             'shipment' => '/shipment/sales/list',
             'discount' => '/discount/sales/list',
@@ -59,5 +60,15 @@ class SalesConfig extends SprykerSalesConfig
         $externalBlocks = parent::getSalesDetailExternalBlocksUrls();
 
         return array_merge($externalBlocks, $projectExternalBlocks);
+    }
+
+    /**
+     * @api
+     *
+     * @return bool
+     */
+    public function isHydrateOrderHistoryToItems(): bool
+    {
+        return false;
     }
 }

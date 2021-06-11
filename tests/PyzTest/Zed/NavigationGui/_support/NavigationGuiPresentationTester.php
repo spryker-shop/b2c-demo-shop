@@ -50,6 +50,7 @@ class NavigationGuiPresentationTester extends Actor
     public const SWEET_ALERT_SELECTOR = '.sweet-alert';
     public const SWEET_ALERT_CONFIRM_SELECTOR = '.sweet-alert button.confirm';
     public const NODE_FORM_SELECTOR = 'form';
+    public const NODE_UPDATE_FORM_SELECTOR = '//form[@name="navigation_node"]';
     public const FLASH_MESSAGES_SELECTOR = '//div[@class="flash-messages"]/div';
     public const NAVIGATION_DELETE_FORM_SELECTOR = '//*[@id="navigation-table"]/tbody/tr/td[5]/form[1]';
     public const NAVIGATION_ROW_ACTIVE_LINK_SELECTOR = '//*[@id="navigation-table"]/tbody/tr[1]/td[5]/a[2]';
@@ -105,6 +106,14 @@ class NavigationGuiPresentationTester extends Actor
     public function submitNavigationForm()
     {
         $this->click('//*[@id="navigation-save-btn"]');
+    }
+
+    /**
+     * @return void
+     */
+    public function submitDeleteNavigationForm(): void
+    {
+        $this->click('//*[@id="delete_navigation_form_submit"]');
     }
 
     /**
@@ -359,7 +368,7 @@ class NavigationGuiPresentationTester extends Actor
      */
     public function submitUpdateNodeToCategoryType($categoryUrl_en_US, $categoryUrl_de_DE)
     {
-        $this->submitForm(self::NODE_FORM_SELECTOR, [
+        $this->submitForm(static::NODE_UPDATE_FORM_SELECTOR, [
             'navigation_node[node_type]' => 'category',
             'navigation_node[navigation_node_localized_attributes][0][category_url]' => $categoryUrl_en_US,
             'navigation_node[navigation_node_localized_attributes][1][category_url]' => $categoryUrl_de_DE,

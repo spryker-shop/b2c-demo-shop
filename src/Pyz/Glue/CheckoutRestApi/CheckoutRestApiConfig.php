@@ -31,12 +31,12 @@ class CheckoutRestApiConfig extends SprykerCheckoutRestApiConfig
     /**
      * @uses \Spryker\Shared\DummyPayment\DummyPaymentConfig::PAYMENT_METHOD_NAME_INVOICE
      */
-    protected const DUMMY_PAYMENT_PAYMENT_METHOD_NAME_INVOICE = 'invoice';
+    protected const DUMMY_PAYMENT_PAYMENT_METHOD_NAME_INVOICE = 'Invoice';
 
     /**
      * @uses \Spryker\Shared\DummyPayment\DummyPaymentConfig::PAYMENT_METHOD_NAME_CREDIT_CARD
      */
-    protected const DUMMY_PAYMENT_PAYMENT_METHOD_NAME_CREDIT_CARD = 'credit card';
+    protected const DUMMY_PAYMENT_PAYMENT_METHOD_NAME_CREDIT_CARD = 'Credit Card';
 
     /**
      * @uses \Spryker\Shared\DummyPayment\DummyPaymentConfig::PAYMENT_METHOD_INVOICE
@@ -48,8 +48,10 @@ class CheckoutRestApiConfig extends SprykerCheckoutRestApiConfig
      */
     protected const PAYMENT_METHOD_CREDIT_CARD = 'dummyPaymentCreditCard';
 
+    protected const IS_PAYMENT_PROVIDER_METHOD_TO_STATE_MACHINE_MAPPING_ENABLED = false;
+
     /**
-     * @return array
+     * @return string[][]
      */
     public function getPaymentProviderMethodToStateMachineMapping(): array
     {
@@ -59,5 +61,29 @@ class CheckoutRestApiConfig extends SprykerCheckoutRestApiConfig
                 static::DUMMY_PAYMENT_PAYMENT_METHOD_NAME_INVOICE => static::PAYMENT_METHOD_INVOICE,
             ],
         ];
+    }
+
+    /**
+     * @return bool
+     */
+    public function isShipmentMethodsMappedToAttributes(): bool
+    {
+        return false;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isPaymentProvidersMappedToAttributes(): bool
+    {
+        return false;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAddressesMappedToAttributes(): bool
+    {
+        return false;
     }
 }

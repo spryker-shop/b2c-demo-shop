@@ -33,17 +33,31 @@
                 <div class="page-layout-cart__col page-layout-cart__col--content">
                     <div class="cart-box grid grid--middle grid--justify">
                         <h3 class="col">{{ 'cart.title_content' | trans }}</h3>
-                        <span class="cart-box__quantity col">{{ app['cart.quantity'] }} {{ 'item' | trans }}</span>
+                        <span class="cart-box__quantity col">{{ getCartQuantity() }} {{ 'item' | trans }}</span>
                     </div>
                     <div class="page-layout-cart__items-wrap">
-                        {% for cartItem in data.cartItems %}
-                            {% include molecule('product-item') with {
+                        {% widget 'QuoteConfiguredBundleWidget'
+                            args [data.cart]
+                            use view('quote-configured-bundle-alternative', 'ConfigurableBundleWidget')
+                            with {
                                 data: {
-                                    product: data.cart,
-                                    productItem: cartItem,
-                                    attributes: data.attributes[cartItem.sku] | default([]),
+                                    isEditable: data.isQuoteEditable,
                                 },
-                            } only %}
+                        } only %}{% endwidget %}
+
+                        {% set productBundleItemCounterWidget = findWidget('ProductBundleItemCounterWidget', [data.cart]) %}
+                        {% set transformedCartItems = productBundleItemCounterWidget.items | default(data.cartItems) %}
+
+                        {% for cartItem in transformedCartItems %}
+                            {% if not cartItem.configuredBundleItem %}
+                                {% include molecule('product-card-item') with {
+                                    data: {
+                                        product: data.cart,
+                                        productItem: cartItem,
+                                        attributes: data.attributes[cartItem.sku] | default([]),
+                                    },
+                                } only %}
+                            {% endif %}
                         {% endfor %}
                     </div>
                     {% widget 'CartDiscountPromotionProductListWidget' args [data.cart, data.request] only %}{% endwidget %}

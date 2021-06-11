@@ -1,25 +1,31 @@
-{% extends template('page-layout-main') %}
+{% extends template('page-layout-catalog', '@SprykerShop:CatalogPage') %}
 
 {% define data = {
-    products: required,
-    facets: required,
-    category: null,
-    categories: [],
-    categoryId: null,
-    filterPath: null,
-    viewMode: null,
+    products: _view.products,
+    facets: _view.facets,
+    category: _view.category | default,
+    categories: categories | default([]),
+    filterPath: _view.filterPath | default,
+    viewMode: _view.viewMode | default,
+    title: _view.category.name | default,
+    metaTitle: _view.pageTitle | default(_view.category.name | default),
+    metaDescription: _view.pageDescription | default,
+    metaKeywords: _view.pageKeywords | default,
+    sort: _view.sort,
 
     pagination: {
-        currentPage: required,
-        maxPage: required,
         parameters: app.request.query.all(),
+        currentPage: _view.pagination.currentPage,
         paginationPath: app.request.getPathInfo(),
-        showAlwaysFirstAndLast: true
-    }
+        maxPage: _view.pagination.maxPage,
+        showAlwaysFirstAndLast: true,
+        numFound: _view.pagination.numFound,
+        config: _view.pagination.config,
+        currentItemsPerPage: _view.pagination.currentItemsPerPage,
+    },
 } %}
 
 {% block container %}
-
     {% block breadcrumbs %}
         {% set breadcrumbSteps = _self.renderBreadcrumbSteps(data.category, false, data.filterPath) %}
         <div class="container">
@@ -64,7 +70,17 @@
     <div class="container">
         <main class="container__inner">
             {% block content %}
-                <form method="GET" class="grid js-catalog-filter-target js-form-input-default-value-disabler__catalog-form">
+                {% set catalogJsName = 'js-catalog' %}
+
+                {% include molecule('window-location-applicator', 'CatalogPage') with {
+                    attributes: {
+                        'form-class-name': catalogJsName ~ '__form',
+                        'trigger-class-name': catalogJsName ~ '__trigger',
+                        'sort-trigger-class-name': catalogJsName ~ '__sort-trigger',
+                    },
+                } only %}
+
+                <form method="GET" class="grid js-catalog-filter-target js-form-input-default-value-disabler__catalog-form {{ catalogJsName }}__form">
                     {% block form %}
                         <div class="col col--sm-12 col--xl-3 catalog-left-side">
                             {% include molecule('view-mode-switch', 'CatalogPage') with {
@@ -80,8 +96,9 @@
                                         facets: data.facets,
                                         filterPath: data.filterPath,
                                         categories: data.categories,
-                                        togglerClass: 'js-catalog-toggler-click__trigger'
-                                    }
+                                        togglerClass: 'js-catalog-toggler-click__trigger',
+                                        parentJsName: catalogJsName,
+                                    },
                                 } only %}
                             {% endblock %}
                         </div>
@@ -99,7 +116,13 @@
                             {% block catalogContent %}
                                 <div class="grid">
                                     <div class="col col--sm-12">
-                                        {% include molecule('sort', 'CatalogPage') only %}
+                                        {% include molecule('sort', 'CatalogPage') with {
+                                            data: {
+                                                pagination: data.pagination,
+                                                sort: data.sort,
+                                                parentJsName: catalogJsName,
+                                            },
+                                        } only %}
                                     </div>
                                     <div class="col col--sm-12">
                                         {% include organism('active-filter-section', 'CatalogPage') with {
@@ -119,9 +142,13 @@
                                 </div>
 
                                 <div class="grid {% if data.viewMode != 'list' %}grid--stretch product-list{% endif %}">
-                                    {% for product in data.products %}
-                                        {% widget 'CatalogPageProductWidget' args [product, data.viewMode] only %}{% endwidget %}
-                                    {% endfor %}
+                                    {% if data.products %}
+                                        {% for product in data.products %}
+                                            {% widget 'CatalogPageProductWidget' args [product, data.viewMode] only %}{% endwidget %}
+                                        {% endfor %}
+                                    {% else %}
+                                        {% block noResults %}{{ parent() }}{% endblock %}
+                                    {% endif %}
                                 </div>
 
                                 {% include molecule('pagination') with {
@@ -146,13 +173,12 @@
                         } only %}
                     {% endblock %}
                 </form>
-
             {% endblock %}
 
             {% macro renderBreadcrumbSteps(categoryNode, isLastLeaf, filterPath) %}
                 {% import _self as self %}
                 {% set categoryUrl = categoryNode.url | default %}
-                {% set categoryUrl = filterPath is not empty ? url(filterPath, {categoryPath: categoryUrl}) : categoryUrl %}
+                {% set categoryUrl = filterPath is not empty ? url(filterPath, {categoryPath: categoryUrl | trimLocale}) : categoryUrl %}
                 {% set categoryLabel = categoryNode.name | default %}
                 {% set categoryPatrentNodes = categoryNode.parents | default(null) %}
 

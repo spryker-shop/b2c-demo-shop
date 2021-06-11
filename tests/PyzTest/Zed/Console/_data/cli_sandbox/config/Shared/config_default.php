@@ -3,7 +3,6 @@
 use Monolog\Logger;
 use Spryker\Shared\Acl\AclConstants;
 use Spryker\Shared\Application\ApplicationConstants;
-use Spryker\Shared\Auth\AuthConstants;
 use Spryker\Shared\Cms\CmsConstants;
 use Spryker\Shared\Collector\CollectorConstants;
 use Spryker\Shared\Customer\CustomerConstants;
@@ -20,6 +19,7 @@ use Spryker\Shared\Queue\QueueConstants;
 use Spryker\Shared\Sales\SalesConstants;
 use Spryker\Shared\Search\SearchConstants;
 use Spryker\Shared\SearchElasticsearch\SearchElasticsearchConstants;
+use Spryker\Shared\SecuritySystemUser\SecuritySystemUserConstants;
 use Spryker\Shared\SequenceNumber\SequenceNumberConstants;
 use Spryker\Shared\Session\SessionConfig;
 use Spryker\Shared\Session\SessionConstants;
@@ -28,13 +28,11 @@ use Spryker\Shared\SessionRedis\SessionRedisConfig;
 use Spryker\Shared\SessionRedis\SessionRedisConstants;
 use Spryker\Shared\Storage\StorageConstants;
 use Spryker\Shared\StorageRedis\StorageRedisConstants;
-use Spryker\Shared\Tax\TaxConstants;
 use Spryker\Shared\Twig\TwigConstants;
 use Spryker\Shared\User\UserConstants;
 use Spryker\Shared\ZedNavigation\ZedNavigationConstants;
 use Spryker\Shared\ZedRequest\ZedRequestConstants;
 use Spryker\Zed\Oms\OmsConfig;
-use Spryker\Zed\Propel\PropelConfig;
 
 $config[KernelConstants::PROJECT_NAMESPACES] = [
     'Pyz',
@@ -46,7 +44,6 @@ $config[KernelConstants::CORE_NAMESPACES] = [
     'Spryker',
 ];
 
-$config[ApplicationConstants::PROJECT_TIMEZONE] = 'UTC';
 $config[KernelConstants::PROJECT_NAMESPACE] = 'Pyz';
 
 $config[TwigConstants::YVES_PATH_CACHE_FILE] = sprintf('%s/data/%s/cache/YVES/twig/.pathCache', APPLICATION_ROOT_DIR, APPLICATION_STORE);
@@ -54,13 +51,6 @@ $config[TwigConstants::ZED_PATH_CACHE_FILE] = sprintf('%s/data/%s/cache/ZED/twig
 
 $config[TwigConstants::YVES_PATH_CACHE_FILE] = APPLICATION_ROOT_DIR . '/data/' . Store::getInstance()->getStoreName() . '/cache/Yves/twig/.pathCache';
 $config[TwigConstants::ZED_PATH_CACHE_FILE] = APPLICATION_ROOT_DIR . '/data/' . Store::getInstance()->getStoreName() . '/cache/Zed/twig/.pathCache';
-
-$config[PropelConstants::ZED_DB_ENGINE_MYSQL] = PropelConfig::DB_ENGINE_MYSQL;
-$config[PropelConstants::ZED_DB_ENGINE_PGSQL] = PropelConfig::DB_ENGINE_PGSQL;
-$config[PropelConstants::ZED_DB_SUPPORTED_ENGINES] = [
-    PropelConfig::DB_ENGINE_MYSQL => 'MySql',
-    PropelConfig::DB_ENGINE_PGSQL => 'PostgreSql',
-];
 
 /**
  * Elasticsearch settings
@@ -136,7 +126,7 @@ $config[KernelConstants::SPRYKER_ROOT] = APPLICATION_ROOT_DIR . '/vendor/spryker
 
 $config[StorageConstants::STORAGE_KV_SOURCE] = 'redis';
 $config[StorageRedisConstants::STORAGE_REDIS_PERSISTENT_CONNECTION] = true;
-$config[StorageRedisConstants::STORAGE_REDIS_PROTOCOL] = 'tcp';
+$config[StorageRedisConstants::STORAGE_REDIS_SCHEME] = 'tcp';
 $config[StorageRedisConstants::STORAGE_REDIS_HOST] = '127.0.0.1';
 $config[StorageRedisConstants::STORAGE_REDIS_PORT] = 10009;
 $config[StorageRedisConstants::STORAGE_REDIS_PASSWORD] = false;
@@ -150,7 +140,7 @@ $config[SessionFileConstants::YVES_SESSION_FILE_PATH] = session_save_path();
 $config[SessionConstants::YVES_SESSION_COOKIE_NAME] = $config[ApplicationConstants::HOST_YVES];
 $config[SessionConstants::YVES_SESSION_COOKIE_DOMAIN] = $config[ApplicationConstants::HOST_YVES];
 $config[SessionConstants::YVES_SESSION_PERSISTENT_CONNECTION] = $config[StorageRedisConstants::STORAGE_REDIS_PERSISTENT_CONNECTION];
-$config[SessionRedisConstants::YVES_SESSION_REDIS_PROTOCOL] = $config[StorageRedisConstants::STORAGE_REDIS_PROTOCOL];
+$config[SessionRedisConstants::YVES_SESSION_REDIS_SCHEME] = $config[StorageRedisConstants::STORAGE_REDIS_SCHEME];
 $config[SessionRedisConstants::YVES_SESSION_REDIS_HOST] = $config[StorageRedisConstants::STORAGE_REDIS_HOST];
 $config[SessionRedisConstants::YVES_SESSION_REDIS_PORT] = $config[StorageRedisConstants::STORAGE_REDIS_PORT];
 $config[SessionRedisConstants::YVES_SESSION_REDIS_PASSWORD] = $config[StorageRedisConstants::STORAGE_REDIS_PASSWORD];
@@ -163,7 +153,7 @@ $config[SessionFileConstants::ZED_SESSION_TIME_TO_LIVE] = $config[SessionConstan
 $config[SessionFileConstants::ZED_SESSION_FILE_PATH] = session_save_path();
 $config[SessionConstants::ZED_SESSION_COOKIE_NAME] = $config[ApplicationConstants::HOST_ZED_GUI];
 $config[SessionConstants::ZED_SESSION_PERSISTENT_CONNECTION] = $config[StorageRedisConstants::STORAGE_REDIS_PERSISTENT_CONNECTION];
-$config[SessionRedisConstants::ZED_SESSION_REDIS_PROTOCOL] = $config[StorageRedisConstants::STORAGE_REDIS_PROTOCOL];
+$config[SessionRedisConstants::ZED_SESSION_REDIS_SCHEME] = $config[StorageRedisConstants::STORAGE_REDIS_SCHEME];
 $config[SessionRedisConstants::ZED_SESSION_REDIS_HOST] = $config[StorageRedisConstants::STORAGE_REDIS_HOST];
 $config[SessionRedisConstants::ZED_SESSION_REDIS_PORT] = $config[StorageRedisConstants::STORAGE_REDIS_PORT];
 $config[SessionRedisConstants::ZED_SESSION_REDIS_PASSWORD] = $config[StorageRedisConstants::STORAGE_REDIS_PASSWORD];
@@ -208,18 +198,11 @@ $config[UserConstants::USER_SYSTEM_USERS] = [
 /**
  * For a better performance you can turn off Zed authentication
  */
-$config[AuthConstants::AUTH_ZED_ENABLED]
+$config[ZedRequestConstants::AUTH_ZED_ENABLED]
     = $config[ZedRequestConstants::AUTH_ZED_ENABLED] = true;
 
-$config[AuthConstants::AUTH_DEFAULT_CREDENTIALS] = [
+$config[SecuritySystemUserConstants::AUTH_DEFAULT_CREDENTIALS] = [
     'yves_system' => [
-        'rules' => [
-            [
-                'bundle' => '*',
-                'controller' => 'gateway',
-                'action' => '*',
-            ],
-        ],
         'token' => 'JDJ5JDEwJFE0cXBwYnVVTTV6YVZXSnVmM2l1UWVhRE94WkQ4UjBUeHBEWTNHZlFRTEd4U2F6QVBqejQ2', // Please replace this token for your project
     ],
 ];
@@ -229,27 +212,9 @@ $config[AuthConstants::AUTH_DEFAULT_CREDENTIALS] = [
  */
 $config[AclConstants::ACL_DEFAULT_RULES] = [
     [
-        'bundle' => 'auth',
-        'controller' => 'login',
-        'action' => 'index',
-        'type' => 'allow',
-    ],
-    [
-        'bundle' => 'auth',
-        'controller' => 'login',
-        'action' => 'check',
-        'type' => 'allow',
-    ],
-    [
-        'bundle' => 'auth',
-        'controller' => 'password',
-        'action' => 'reset',
-        'type' => 'allow',
-    ],
-    [
-        'bundle' => 'auth',
-        'controller' => 'password',
-        'action' => 'reset-request',
+        'bundle' => 'security-gui',
+        'controller' => '*',
+        'action' => '*',
         'type' => 'allow',
     ],
     [
@@ -259,7 +224,7 @@ $config[AclConstants::ACL_DEFAULT_RULES] = [
         'type' => 'allow',
     ],
     [
-        'bundle' => 'heartbeat',
+        'bundle' => 'health-check',
         'controller' => 'index',
         'action' => 'index',
         'type' => 'allow',
@@ -276,18 +241,6 @@ $config[AclConstants::ACL_USER_RULE_WHITELIST] = [
         'action' => '*',
         'type' => 'allow',
     ],
-    [
-        'bundle' => 'auth',
-        'controller' => '*',
-        'action' => '*',
-        'type' => 'allow',
-    ],
-    [
-        'bundle' => 'heartbeat',
-        'controller' => 'heartbeat',
-        'action' => 'index',
-        'type' => 'allow',
-    ],
 ];
 
 /**
@@ -295,14 +248,7 @@ $config[AclConstants::ACL_USER_RULE_WHITELIST] = [
  */
 $config[AclConstants::ACL_DEFAULT_CREDENTIALS] = [
     'yves_system' => [
-        'rules' => [
-            [
-                'bundle' => '*',
-                'controller' => 'gateway',
-                'action' => '*',
-                'type' => 'allow',
-            ],
-        ],
+        'rules' => [],
     ],
 ];
 
@@ -324,16 +270,8 @@ $config[ErrorHandlerConstants::ERROR_LEVEL] = E_ALL & ~E_DEPRECATED & ~E_USER_DE
 //$config[ErrorHandlerConstants::ERROR_LEVEL] = E_ALL
 //$config[ErrorHandlerConstants::ERROR_LEVEL_LOG_ONLY] = E_DEPRECATED | E_USER_DEPRECATED;
 
-$config[KernelConstants::AUTO_LOADER_CACHE_FILE_NO_LOCK] = false;
-$config[KernelConstants::AUTO_LOADER_UNRESOLVABLE_CACHE_PROVIDER] = \Spryker\Shared\Kernel\ClassResolver\Cache\Provider\File::class;
 $config[ApplicationConstants::ENABLE_WEB_PROFILER] = false;
 
-$config[PropelConstants::ZED_DB_ENGINE_MYSQL] = PropelConfig::DB_ENGINE_MYSQL;
-$config[PropelConstants::ZED_DB_ENGINE_PGSQL] = PropelConfig::DB_ENGINE_PGSQL;
-$config[PropelConstants::ZED_DB_SUPPORTED_ENGINES] = [
-    PropelConfig::DB_ENGINE_MYSQL => 'MySql',
-    PropelConfig::DB_ENGINE_PGSQL => 'PostgreSql',
-];
 $config[PropelConstants::SCHEMA_FILE_PATH_PATTERN] = APPLICATION_VENDOR_DIR . '/*/*/src/*/Zed/*/Persistence/Propel/Schema/';
 
 $config[KernelConstants::DEPENDENCY_INJECTOR_YVES] = [
@@ -364,12 +302,6 @@ $config[SalesConstants::PAYMENT_METHOD_STATEMACHINE_MAPPING] = [
     DummyPaymentConfig::PAYMENT_METHOD_INVOICE => 'DummyPayment01',
     DummyPaymentConfig::PAYMENT_METHOD_CREDIT_CARD => 'DummyPayment01',
 ];
-
-$config[TaxConstants::DEFAULT_TAX_RATE] = 19;
-
-$config[QueueConstants::QUEUE_SERVER_ID] = (gethostname()) ?: php_uname('n');
-$config[QueueConstants::QUEUE_WORKER_INTERVAL_MILLISECONDS] = 1000;
-$config[QueueConstants::QUEUE_WORKER_MAX_THRESHOLD_SECONDS] = 59;
 
 /*
  * Queues can have different adapters and maximum worker number

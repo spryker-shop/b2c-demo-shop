@@ -1,0 +1,22 @@
+{% extends molecule('configured-bundle-quantity', '@SprykerShop:ConfigurableBundleWidget') %}
+
+{%- block extraClass %} col{% endblock -%}
+
+{% block quantity %}
+    <span class="{{ config.name }}__text">
+        {{ 'configured_bundle_widget.multiplier' | trans }} {{ data.configuredBundle.quantity }}
+    </span>
+{% endblock %}
+
+{% block form %}
+    <form method="POST" action="{{ path('cart/configured-bundle/change', {'configuredBundleGroupKey': data.configuredBundle.groupKey }) }}">
+        {% include molecule('quantity-counter') with {
+            modifiers: ['transparent'],
+            data: {
+                autoUpdate: true,
+                value: data.configuredBundle.quantity,
+            },
+        } only %}
+        <input type="hidden" name="change_configured_bundle_quantity_form[_token]" value="{{ csrf_token('change_configured_bundle_quantity_form') }}">
+    </form>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends molecule('ordered-product-bundle', '@SprykerShop:SalesProductBundleWidget') %}
+
+{% block body %}
+    {% set contentWrapperClass = 'grid col col--expand' %}
+    {% set imageColumnClass = 'col' %}
+    {% set bundleItemClass = 'grid grid--expand grid--justify' %}
+    {% set itemsClass = 'grid grid--expand grid--no-wrap col' %}
+    {% set bundlePriceQuantityColumnClass = 'col col--sm-12 col--xl-6' %}
+    {% set bundleItemColumnClass = config.name ~ '__content grid col' %}
+    {% set bundleInfoColumnClass = config.name ~ '__info col col--sm-12 col--xl-4' %}
+    {% set bundlePriceColumnClass = config.name ~ '__price col col--sm-4' %}
+    {% set bundleQuantityColumnClass = config.name ~ '__quantity col col--sm-4' %}
+    {% set bundlePriceTotalColumnClass = config.name ~ '__total-price col col--sm-4' %}
+
+    {{ parent() }}
+{% endblock %}
+
+{% block image %}
+    {% include molecule('product-image') with {
+        class: config.name ~ '__image',
+        data: {
+            name: data.name,
+            image: data.image,
+        },
+    } only %}
+{% endblock %}
+
+{% block sku %}
+    {% set skuClass = config.name ~ '__sku' %}
+
+    {{ parent() }}
+{% endblock %}
+
+{% block name %}
+    <div class="{{ config.name }}__name">
+        {{ data.name }}
+    </div>
+{% endblock %}
+
+{% block quantityTitle %}{{ 'global.quantity_symbol' | trans }} {% endblock %}
+
+{% block productOptions %}{% endblock %}
+
+{% block separator %}{% endblock %}
+
+{% block items %}
+    {% if data.productBundle.bundleItems %}
+        <div class="{{ config.name }}__items">{{ parent() }}</div>
+    {% endif %}
+{% endblock %}

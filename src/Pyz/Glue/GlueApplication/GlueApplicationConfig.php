@@ -12,8 +12,10 @@ use Spryker\Glue\GlueApplication\GlueApplicationConfig as SprykerGlueApplication
 
 class GlueApplicationConfig extends SprykerGlueApplicationConfig
 {
+    public const VALIDATE_REQUEST_HEADERS = false;
+
     /**
-     * @return array
+     * @return string[]
      */
     public function getCorsAllowedHeaders(): array
     {
@@ -21,5 +23,13 @@ class GlueApplicationConfig extends SprykerGlueApplicationConfig
             parent::getCorsAllowedHeaders(),
             [CartsRestApiConfig::HEADER_ANONYMOUS_CUSTOMER_UNIQUE_ID]
         );
+    }
+
+    /**
+     * @return bool
+     */
+    public function isEagerRelationshipsLoadingEnabled(): bool
+    {
+        return false;
     }
 }

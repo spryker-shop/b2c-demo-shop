@@ -1,15 +1,7 @@
-{% extends model('component') %}
-
-{% define config = {
-    name: 'filter-section',
-    tag: 'section'
-} %}
+{% extends organism('filter-section', '@SprykerShop:CatalogPage') %}
 
 {% define data = {
-    facets: [],
-    filterPath: null,
-    categories: [],
-    togglerClass: ''
+    togglerClass: '',
 } %}
 
 {% block body %}
@@ -39,13 +31,14 @@
                             triggerClass: loop.first ? config.jsName ~ '__trigger-category' : config.jsName ~ '__trigger',
                             targetClass: config.jsName ~ '__target--' ~ filter.name,
                             isTogglerIncluded: loop.first ? true : false,
-                            hiddenClass: loop.first ? 'is-hidden-sm-only' : 'is-hidden'
+                            hiddenClass: loop.first ? 'is-hidden-sm-only' : 'is-hidden',
                         },
                         embed: {
                             filterPath: data.filterPath,
                             categories: data.categories,
-                            filter: filter
-                        }
+                            filter: filter,
+                            parentJsName: data.parentJsName,
+                        },
                     } only %}
                         {% block contentText %}
                             {% include [
@@ -60,8 +53,9 @@
                                     min: embed.filter.min | default(0),
                                     max: embed.filter.max | default(0),
                                     activeMin: embed.filter.activeMin | default(0),
-                                    activeMax: embed.filter.activeMax | default(0)
-                                }
+                                    activeMax: embed.filter.activeMax | default(0),
+                                    parentJsName: embed.parentJsName,
+                                },
                             } only %}
                         {% endblock %}
                     {% endembed %}
@@ -77,8 +71,10 @@
     } only %}
 
     {% block actions %}
+        {% set triggerButtonJsName = data.parentJsName ? data.parentJsName ~ '__trigger' %}
+
         <div class="{{ config.name }}__actions">
-            <button type="submit" class="button button--large button--expand">
+            <button type="button" class="button button--large button--expand {{ triggerButtonJsName }}">
                 {{ 'catalog.filter.button' | trans }}
             </button>
         </div>

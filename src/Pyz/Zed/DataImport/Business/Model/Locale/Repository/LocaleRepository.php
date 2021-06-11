@@ -36,6 +36,7 @@ class LocaleRepository implements LocaleRepositoryInterface
      */
     private function loadLocaleMap()
     {
+        /** @var array $localeCollection */
         $localeCollection = SpyLocaleQuery::create()
             ->select([SpyLocaleTableMap::COL_ID_LOCALE, SpyLocaleTableMap::COL_LOCALE_NAME])
             ->find();

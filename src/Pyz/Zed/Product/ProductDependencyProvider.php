@@ -11,11 +11,12 @@ use Spryker\Zed\Kernel\Container;
 use Spryker\Zed\PriceProduct\Communication\Plugin\ProductAbstract\PriceProductAbstractAfterCreatePlugin;
 use Spryker\Zed\PriceProduct\Communication\Plugin\ProductAbstract\PriceProductAbstractAfterUpdatePlugin;
 use Spryker\Zed\PriceProduct\Communication\Plugin\ProductAbstract\PriceProductAbstractReadPlugin;
+use Spryker\Zed\PriceProduct\Communication\Plugin\ProductConcrete\ConcreteProductPriceProductConcreteReadPlugin;
 use Spryker\Zed\PriceProduct\Communication\Plugin\ProductConcrete\PriceProductConcreteAfterCreatePlugin;
 use Spryker\Zed\PriceProduct\Communication\Plugin\ProductConcrete\PriceProductConcreteAfterUpdatePlugin;
-use Spryker\Zed\PriceProduct\Communication\Plugin\ProductConcrete\PriceProductConcreteReadPlugin;
 use Spryker\Zed\Product\ProductDependencyProvider as SprykerProductDependencyProvider;
 use Spryker\Zed\ProductAlternativeGui\Communication\Plugin\Product\ProductConcretePluginUpdate as ProductAlternativeGuiProductConcretePluginUpdate;
+use Spryker\Zed\ProductBundle\Communication\Plugin\Product\ProductBundleDeactivatorProductConcreteAfterUpdatePlugin;
 use Spryker\Zed\ProductBundle\Communication\Plugin\Product\ProductBundleProductConcreteAfterCreatePlugin;
 use Spryker\Zed\ProductBundle\Communication\Plugin\Product\ProductBundleProductConcreteAfterUpdatePlugin;
 use Spryker\Zed\ProductBundle\Communication\Plugin\Product\ProductBundleProductConcreteReadPlugin;
@@ -48,7 +49,7 @@ class ProductDependencyProvider extends SprykerProductDependencyProvider
      *
      * @return \Spryker\Zed\Product\Dependency\Plugin\ProductAbstractPluginCreateInterface[]
      */
-    protected function getProductAbstractBeforeCreatePlugins(Container $container)
+    protected function getProductAbstractBeforeCreatePlugins(Container $container): array
     {
         return [];
     }
@@ -58,7 +59,7 @@ class ProductDependencyProvider extends SprykerProductDependencyProvider
      *
      * @return \Spryker\Zed\Product\Dependency\Plugin\ProductAbstractPluginCreateInterface[]
      */
-    protected function getProductAbstractAfterCreatePlugins(Container $container)
+    protected function getProductAbstractAfterCreatePlugins(Container $container): array
     {
         return [
             new ImageSetProductAbstractAfterCreatePlugin(),
@@ -72,7 +73,7 @@ class ProductDependencyProvider extends SprykerProductDependencyProvider
      *
      * @return \Spryker\Zed\Product\Dependency\Plugin\ProductAbstractPluginReadInterface[]
      */
-    protected function getProductAbstractReadPlugins(Container $container)
+    protected function getProductAbstractReadPlugins(Container $container): array
     {
         return [
             new ImageSetProductAbstractReadPlugin(),
@@ -86,7 +87,7 @@ class ProductDependencyProvider extends SprykerProductDependencyProvider
      *
      * @return \Spryker\Zed\Product\Dependency\Plugin\ProductAbstractPluginUpdateInterface[]
      */
-    protected function getProductAbstractBeforeUpdatePlugins(Container $container)
+    protected function getProductAbstractBeforeUpdatePlugins(Container $container): array
     {
         return [];
     }
@@ -96,7 +97,7 @@ class ProductDependencyProvider extends SprykerProductDependencyProvider
      *
      * @return \Spryker\Zed\Product\Dependency\Plugin\ProductAbstractPluginUpdateInterface[]
      */
-    protected function getProductAbstractAfterUpdatePlugins(Container $container)
+    protected function getProductAbstractAfterUpdatePlugins(Container $container): array
     {
         return [
             new ImageSetProductAbstractAfterUpdatePlugin(),
@@ -108,9 +109,9 @@ class ProductDependencyProvider extends SprykerProductDependencyProvider
     /**
      * @param \Spryker\Zed\Kernel\Container $container
      *
-     * @return \Spryker\Zed\Product\Dependency\Plugin\ProductConcretePluginCreateInterface[]
+     * @return \Spryker\Zed\ProductExtension\Dependency\Plugin\ProductConcreteCreatePluginInterface[]
      */
-    protected function getProductConcreteAfterCreatePlugins(Container $container)
+    protected function getProductConcreteAfterCreatePlugins(Container $container): array
     {
         return [
             new ImageSetProductConcreteAfterCreatePlugin(),
@@ -128,12 +129,12 @@ class ProductDependencyProvider extends SprykerProductDependencyProvider
      *
      * @return \Spryker\Zed\Product\Dependency\Plugin\ProductConcretePluginReadInterface[]
      */
-    protected function getProductConcreteReadPlugins(Container $container)
+    protected function getProductConcreteReadPlugins(Container $container): array
     {
         return [
             new ImageSetProductConcreteReadPlugin(),
             new StockProductConcreteReadPlugin(),
-            new PriceProductConcreteReadPlugin(),
+            new ConcreteProductPriceProductConcreteReadPlugin(),
             new ProductSearchProductConcreteReadPlugin(),
             new ProductBundleProductConcreteReadPlugin(),
             new ProductValidityReadPlugin(),
@@ -168,6 +169,7 @@ class ProductDependencyProvider extends SprykerProductDependencyProvider
             new ProductValidityUpdatePlugin(),
             new SaveDiscontinuedNotesProductConcretePluginUpdate(),
             new DiscontinuedProductConcreteAfterUpdatePlugin(),
+            new ProductBundleDeactivatorProductConcreteAfterUpdatePlugin(),
         ];
     }
 }

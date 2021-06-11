@@ -1,0 +1,31 @@
+@mixin configurable-bundle-widget-ordered-configured-bundle-product($name: '.ordered-configured-bundle-product') {
+    #{$name} {
+        padding: 0 rem(15) rem(21) rem(10);
+
+        &__thumbnail-wrapper {
+            width: rem(120);
+        }
+
+        &__title {
+            display: block;
+            font: fw(medium) rem(15) $setting-font-family-additional;
+        }
+
+        &__sku {
+            font: fw(light) $setting-font-size-base $setting-font-family;
+            color: $setting-color-gray-4;
+        }
+
+        &__text {
+            font: fw(regular) $setting-font-size-base $setting-font-family-additional;
+
+            &--secondary {
+                color: $setting-color-gray-3;
+            }
+        }
+
+        @content;
+    }
+}
+
+@include configurable-bundle-widget-ordered-configured-bundle-product;

@@ -7,7 +7,7 @@
 
 namespace Orm\Zed\ProductLabel\Persistence;
 
-use Spryker\Zed\ProductLabel\Persistence\Propel\SpyProductLabelProductAbstract as BaseSpyProductLabelProductAbstract;
+use Spryker\Zed\ProductLabel\Persistence\Propel\AbstractSpyProductLabelProductAbstract as BaseSpyProductLabelProductAbstract;
 
 /**
  * Skeleton subclass for representing a row from the 'spy_product_label_product_abstract' table.

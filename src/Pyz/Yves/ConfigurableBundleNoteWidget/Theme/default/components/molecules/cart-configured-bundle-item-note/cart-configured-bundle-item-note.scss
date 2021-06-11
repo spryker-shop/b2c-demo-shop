@@ -1,0 +1,23 @@
+@mixin configurable-bundle-note-widget-cart-configured-bundle-item-note($name: '.cart-configured-bundle-item-note') {
+    #{$name} {
+        position: relative;
+
+        &__container {
+            background-color: $setting-color-gray-1;
+            padding: rem(18) rem(15);
+        }
+
+        &__content {
+            margin-top: rem(17);
+        }
+
+        &__text {
+            font: fw(light) $setting-font-size-base $setting-font-family;
+            color: $setting-color-text;
+        }
+
+        @content;
+    }
+}
+
+@include configurable-bundle-note-widget-cart-configured-bundle-item-note;

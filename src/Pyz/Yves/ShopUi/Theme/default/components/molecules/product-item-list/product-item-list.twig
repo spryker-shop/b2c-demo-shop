@@ -1,0 +1,79 @@
+{% extends molecule('product-item-list', '@SprykerShop:ShopUi') %}
+
+{% define config = {
+    tag: 'product-item-list',
+} %}
+
+{% block extraClass %}
+    grid grid--stretch {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    {% block imageContainer %}
+        <div class="{{ config.name }}__col {{ config.name }}__col-image col col--sm-12 col--md-3">
+            {% block productThumbnail %}
+                <a class="{{ config.name }}__overlay {{ config.jsName }}__link-detail-page" href="{{ data.url }}">
+                    {% embed molecule('lazy-image') with {
+                        modifiers: ['thumbnail', 'product-list-item'],
+                        data: {
+                            imageSrc: data.image,
+                            imageTitle: data.name,
+                        },
+                        embed: {
+                            jsName: config.jsName,
+                        },
+                    } only %}
+                        {% block content %}
+                            {% set imageExtraClasses = embed.jsName ~ '__image' %}
+
+                            {{ parent() }}
+                        {% endblock %}
+                    {% endembed %}
+                </a>
+            {% endblock %}
+
+            {% block colors %}
+                {% widget 'ProductGroupColorWidget' args [data.idProductAbstract, data.product.selectedAttributes ?? []] use view('product-item-color-selector', 'ProductGroupWidget') with {
+                    data: {
+                        parentJsName: config.jsName,
+                        parentName: 'spacing-top spacing-top--small text-center ' ~ config.name,
+                    },
+                } only %}{% endwidget %}
+            {% endblock %}
+        </div>
+    {% endblock %}
+
+    <a class="{{ config.name }}__col {{ config.name }}__col-name {{ config.jsName }}__link-detail-page col col--sm-8 col--md-7" href="{{ data.url }}">
+        {% block name %}
+            <span class="{{ config.jsName }}__name title title--medium">{{ data.name }}</span>
+        {% endblock %}
+
+        <div class="{{ config.name }}__review">
+            {{ block('rating') }}
+        </div>
+    </a>
+
+    {% block actionsContainer %}
+        <a class="{{ config.name }}__col {{ config.name }}__col-price {{ config.jsName }}__link-detail-page col col--sm-4 col--md-2 text-right" href="{{ data.url }}">
+            {{ block('price') }}
+        </a>
+    {% endblock %}
+
+    <div class="{{ config.name }}__labels-wrap">
+        {{ block('labels') }}
+    </div>
+
+    {% block ajaxAddToCart %}
+        {{ parent() }}
+    {% endblock %}
+{% endblock %}
+
+{% block ajaxAddToCartInner %}
+    {% set ajaxButtonClasses = 'button button--expand button--list-item button--reset-border-radius' %}
+    {% set ajaxButtonExtraAttributes = {
+        'data-node-animator-wrapper-class-name': config.jsName,
+    } %}
+    {% set ajaxAddToCartExtraClasses = config.name ~ '__button' %}
+
+    {{ parent() }}
+{% endblock %}

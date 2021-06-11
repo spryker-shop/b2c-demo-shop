@@ -1,0 +1,7 @@
+{% extends molecule('ordered-configured-bundle-quantity', '@SprykerShop:SalesConfigurableBundleWidget') %}
+
+{% block quantity %}
+    <span>
+        {{ 'configured_bundle_widget.multiplier' | trans }} {{ data.quantity }}
+    </span>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends view('quote-configured-bundle-widget', 'ConfigurableBundleWidget') %}
+
+{% block body %}
+    {% set configuredBundleListNumber = 0 %}
+    {{ parent() }}
+{% endblock %}
+
+{% block bundleItem %}
+    {% set configuredBundleListNumber = configuredBundleListNumber + 1 %}
+
+    {% include molecule('configured-bundle-secondary', 'ConfigurableBundleWidget') with {
+        data: {
+            bundle: bundle,
+            items: data.items,
+            currencyIsoCode: data.currencyIsoCode,
+            priceMode: data.priceMode,
+            isQuantityChangeable: data.isQuantityChangeable,
+            isEditable: data.isEditable,
+            isQuantitySummaryVisible: data.isQuantitySummaryVisible,
+            quote: data.quote,
+            configuredBundleListNumber: configuredBundleListNumber,
+        },
+    } only %}
+{% endblock %}

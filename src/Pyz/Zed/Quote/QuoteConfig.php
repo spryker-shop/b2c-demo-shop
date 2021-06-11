@@ -13,15 +13,18 @@ use Spryker\Zed\Quote\QuoteConfig as SprykerQuoteConfig;
 class QuoteConfig extends SprykerQuoteConfig
 {
     /**
-     * @return array
+     * @return string[]
      */
     public function getQuoteFieldsAllowedForSaving()
     {
         return array_merge(parent::getQuoteFieldsAllowedForSaving(), [
             QuoteTransfer::BUNDLE_ITEMS,
             QuoteTransfer::CART_NOTE, #CartNoteFeature
-            QuoteTransfer::VOUCHER_DISCOUNTS,
-            QuoteTransfer::CART_RULE_DISCOUNTS,
+            QuoteTransfer::VOUCHER_DISCOUNTS, #PromotionsDiscountsFeature
+            QuoteTransfer::CART_RULE_DISCOUNTS, #PromotionsDiscountsFeature
+            QuoteTransfer::PROMOTION_ITEMS, #PromotionsDiscountsFeature
+            QuoteTransfer::GIFT_CARDS, #GiftCardFeature
+            QuoteTransfer::IS_ORDER_PLACED_SUCCESSFULLY,
         ]);
     }
 }
