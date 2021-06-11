@@ -32,7 +32,7 @@ class CategoryStorageConfig extends SprykerCategoryStorageConfig
     /**
      * @return string|null
      */
-    public function getCategoryTreeEventQueueName(): ?string
+    public function getCategoryNodeEventQueueName(): ?string
     {
         return PublisherConfig::PUBLISH_QUEUE;
     }
@@ -40,7 +40,7 @@ class CategoryStorageConfig extends SprykerCategoryStorageConfig
     /**
      * @return string|null
      */
-    public function getCategoryNodeEventQueueName(): ?string
+    public function getCategoryTreeEventQueueName(): ?string
     {
         return PublisherConfig::PUBLISH_QUEUE;
     }

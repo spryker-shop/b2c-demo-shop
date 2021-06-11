@@ -61,6 +61,16 @@ class CategoryDependencyProvider extends SprykerDependencyProvider
     }
 
     /**
+     * @return \Spryker\Zed\CategoryExtension\Dependency\Plugin\CategoryUrlPathPluginInterface[]
+     */
+    protected function getCategoryUrlPathPlugins(): array
+    {
+        return [
+            new CategoryUrlPathPrefixUpdaterPlugin(),
+        ];
+    }
+
+    /**
      * @return \Spryker\Zed\CategoryExtension\Dependency\Plugin\CategoryUpdateAfterPluginInterface[]
      */
     protected function getCategoryPostUpdatePlugins(): array
@@ -77,16 +87,6 @@ class CategoryDependencyProvider extends SprykerDependencyProvider
     {
         return [
             new CategoryImageSetCreatorPlugin(),
-        ];
-    }
-
-    /**
-     * @return \Spryker\Zed\CategoryExtension\Dependency\Plugin\CategoryUrlPathPluginInterface[]
-     */
-    protected function getCategoryUrlPathPlugins(): array
-    {
-        return [
-            new CategoryUrlPathPrefixUpdaterPlugin(),
         ];
     }
 
