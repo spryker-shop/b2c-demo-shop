@@ -60,4 +60,12 @@ class ProductStorageConfig extends SprykerProductStorageConfig
     {
         return true;
     }
+
+    /**
+     * @return bool
+     */
+    public function isProductAttributesWithSingleValueIncluded(): bool
+    {
+        return false;
+    }
 }
