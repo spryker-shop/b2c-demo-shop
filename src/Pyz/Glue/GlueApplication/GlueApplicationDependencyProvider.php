@@ -45,6 +45,7 @@ use Spryker\Glue\CartsRestApi\Plugin\Validator\AnonymousCustomerUniqueIdValidato
 use Spryker\Glue\CatalogSearchProductsResourceRelationship\Plugin\CatalogSearchAbstractProductsResourceRelationshipPlugin;
 use Spryker\Glue\CatalogSearchProductsResourceRelationship\Plugin\CatalogSearchSuggestionsAbstractProductsResourceRelationshipPlugin;
 use Spryker\Glue\CatalogSearchRestApi\CatalogSearchRestApiConfig;
+use Spryker\Glue\CatalogSearchRestApi\Plugin\CatalogSearchRequestParametersIntegerRestRequestValidatorPlugin;
 use Spryker\Glue\CatalogSearchRestApi\Plugin\CatalogSearchResourceRoutePlugin;
 use Spryker\Glue\CatalogSearchRestApi\Plugin\CatalogSearchSuggestionsResourceRoutePlugin;
 use Spryker\Glue\CategoriesRestApi\Plugin\CategoriesResourceRoutePlugin;
@@ -53,7 +54,7 @@ use Spryker\Glue\CheckoutRestApi\CheckoutRestApiConfig;
 use Spryker\Glue\CheckoutRestApi\Plugin\GlueApplication\CheckoutDataResourcePlugin;
 use Spryker\Glue\CheckoutRestApi\Plugin\GlueApplication\CheckoutResourcePlugin;
 use Spryker\Glue\ContentBannersRestApi\Plugin\ContentBannerResourceRoutePlugin;
-use Spryker\Glue\ContentProductAbstractListsRestApi\Plugin\ContentProductAbstractListRoutePlugin;
+use Spryker\Glue\ContentProductAbstractListsRestApi\Plugin\GlueApplication\AbstractProductsResourceRoutePlugin as ContentProductAbstractListAbstractProductsResourceRoutePlugin;
 use Spryker\Glue\CustomerAccessRestApi\Plugin\GlueApplication\CustomerAccessFormatRequestPlugin;
 use Spryker\Glue\CustomerAccessRestApi\Plugin\GlueApplication\CustomerAccessResourceRoutePlugin;
 use Spryker\Glue\CustomersRestApi\CustomersRestApiConfig;
@@ -208,7 +209,7 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
             new ProductTaxSetsResourceRoutePlugin(),
             new OrderPaymentsResourceRoutePlugin(),
             new ContentBannerResourceRoutePlugin(),
-            new ContentProductAbstractListRoutePlugin(),
+            new ContentProductAbstractListAbstractProductsResourceRoutePlugin(),
             new UrlResolverResourceRoutePlugin(),
             new CustomerAccessResourceRoutePlugin(),
             new AbstractProductsProductReviewsResourceRoutePlugin(),
@@ -310,6 +311,7 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
             new CurrencyParameterValidatorPlugin(),
             new PriceModeParameterValidatorPlugin(),
             new EntityTagRestRequestValidatorPlugin(),
+            new CatalogSearchRequestParametersIntegerRestRequestValidatorPlugin(),
         ];
     }
 
