@@ -57,6 +57,12 @@ use Spryker\Glue\CmsPagesContentBannersResourceRelationship\Plugin\GlueApplicati
 use Spryker\Glue\CmsPagesContentProductAbstractListsResourceRelationship\Plugin\GlueApplication\ContentProductAbstractListByCmsPageResourceRelationshipPlugin;
 use Spryker\Glue\CmsPagesRestApi\CmsPagesRestApiConfig;
 use Spryker\Glue\CmsPagesRestApi\Plugin\GlueApplication\CmsPagesResourceRoutePlugin;
+use Spryker\Glue\ConfigurableBundlesProductsResourceRelationship\ConfigurableBundlesProductsResourceRelationshipConfig;
+use Spryker\Glue\ConfigurableBundlesProductsResourceRelationship\Plugin\GlueApplication\ProductConcreteByConfigurableBundleTemplateSlotResourceRelationshipPlugin;
+use Spryker\Glue\ConfigurableBundlesRestApi\ConfigurableBundlesRestApiConfig;
+use Spryker\Glue\ConfigurableBundlesRestApi\Plugin\GlueApplication\ConfigurableBundleTemplateImageSetByConfigurableBundleTemplateResourceRelationshipPlugin;
+use Spryker\Glue\ConfigurableBundlesRestApi\Plugin\GlueApplication\ConfigurableBundleTemplateSlotByConfigurableBundleTemplateResourceRelationshipPlugin;
+use Spryker\Glue\ConfigurableBundlesRestApi\Plugin\GlueApplication\ConfigurableBundleTemplatesResourceRoutePlugin;
 use Spryker\Glue\ContentBannersRestApi\Plugin\ContentBannerResourceRoutePlugin;
 use Spryker\Glue\ContentProductAbstractListsRestApi\ContentProductAbstractListsRestApiConfig;
 use Spryker\Glue\ContentProductAbstractListsRestApi\Plugin\GlueApplication\AbstractProductsResourceRoutePlugin as ContentProductAbstractListAbstractProductsResourceRoutePlugin;
@@ -242,6 +248,7 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
             new AvailabilityNotificationsResourceRoutePlugin(),
             new MyAvailabilityNotificationsResourceRoutePlugin(),
             new CustomerAvailabilityNotificationsResourceRoutePlugin(),
+            new ConfigurableBundleTemplatesResourceRoutePlugin(),
         ];
     }
 
@@ -574,6 +581,20 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
         $resourceRelationshipCollection->addRelationship(
             CartsRestApiConfig::RESOURCE_GUEST_CARTS,
             new GuestCartItemsByQuoteResourceRelationshipPlugin()
+        );
+        $resourceRelationshipCollection->addRelationship(
+            ConfigurableBundlesRestApiConfig::RESOURCE_CONFIGURABLE_BUNDLE_TEMPLATES,
+            new ConfigurableBundleTemplateSlotByConfigurableBundleTemplateResourceRelationshipPlugin()
+        );
+
+        $resourceRelationshipCollection->addRelationship(
+            ConfigurableBundlesRestApiConfig::RESOURCE_CONFIGURABLE_BUNDLE_TEMPLATES,
+            new ConfigurableBundleTemplateImageSetByConfigurableBundleTemplateResourceRelationshipPlugin()
+        );
+
+        $resourceRelationshipCollection->addRelationship(
+            ConfigurableBundlesProductsResourceRelationshipConfig::RESOURCE_CONFIGURABLE_BUNDLE_TEMPLATE_SLOTS,
+            new ProductConcreteByConfigurableBundleTemplateSlotResourceRelationshipPlugin()
         );
         $resourceRelationshipCollection->addRelationship(
             CmsPagesRestApiConfig::RESOURCE_CMS_PAGES,
