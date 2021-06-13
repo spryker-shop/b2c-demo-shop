@@ -12,6 +12,10 @@ use Spryker\Yves\Router\Route\RouteCollection;
 
 class ExampleProductSaleRouteProviderPlugin extends AbstractRouteProviderPlugin
 {
+    /**
+     * @deprecated Use {@link \Pyz\Yves\ExampleProductSalePage\Plugin\Router\ExampleProductSaleRouteProviderPlugin::ROUTE_NAME_SALE} instead.
+     */
+    public const ROUTE_SALE = 'sale';
     public const ROUTE_NAME_SALE = 'sale';
 
     /**

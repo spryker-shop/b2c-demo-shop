@@ -27,12 +27,12 @@ class LogDependencyProvider extends SprykerLogDependencyProvider
      */
     protected function addLogHandlers(Container $container): Container
     {
-        $container[static::LOG_HANDLERS] = function () {
+        $container->set(static::LOG_HANDLERS, function () {
             return [
                 new StreamHandlerPlugin(),
                 new ExceptionStreamHandlerPlugin(),
             ];
-        };
+        });
 
         return $container;
     }
@@ -44,7 +44,7 @@ class LogDependencyProvider extends SprykerLogDependencyProvider
      */
     protected function addProcessors(Container $container): Container
     {
-        $container[static::LOG_PROCESSORS] = function () {
+        $container->set(static::LOG_PROCESSORS, function () {
             return [
                 new PsrLogMessageProcessorPlugin(),
                 new EnvironmentProcessorPlugin(),
@@ -53,7 +53,7 @@ class LogDependencyProvider extends SprykerLogDependencyProvider
                 new ResponseProcessorPlugin(),
                 new GuzzleBodyProcessorPlugin(),
             ];
-        };
+        });
 
         return $container;
     }
