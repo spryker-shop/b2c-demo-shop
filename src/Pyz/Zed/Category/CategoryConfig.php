@@ -12,7 +12,7 @@ use Spryker\Zed\Category\CategoryConfig as SprykerCategoryConfig;
 class CategoryConfig extends SprykerCategoryConfig
 {
     /**
-     * @return array
+     * @return string[]
      */
     public function getTemplateList()
     {

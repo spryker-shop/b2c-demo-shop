@@ -38,8 +38,6 @@ use Spryker\Zed\ProductReviewSearch\Communication\Plugin\ProductPageSearch\Elast
 
 class ProductPageSearchDependencyProvider extends SprykerProductPageSearchDependencyProvider
 {
-    public const PLUGIN_PRODUCT_LABEL_DATA = 'PLUGIN_PRODUCT_LABEL_DATA';
-
     /**
      * @return \Spryker\Zed\ProductPageSearch\Dependency\Plugin\ProductPageDataExpanderInterface[]
      */
@@ -73,21 +71,6 @@ class ProductPageSearchDependencyProvider extends SprykerProductPageSearchDepend
     }
 
     /**
-     * @return \Spryker\Zed\ProductPageSearchExtension\Dependency\Plugin\ProductAbstractMapExpanderPluginInterface[]
-     */
-    protected function getProductAbstractMapExpanderPlugins(): array
-    {
-        return [
-            new ProductPriceMapExpanderPlugin(),
-            new ProductCategoryMapExpanderPlugin(),
-            new ProductImageMapExpanderPlugin(),
-            new ProductLabelMapExpanderPlugin(),
-            new ProductReviewMapExpanderPlugin(),
-            new ProductListMapExpanderPlugin(),
-        ];
-    }
-
-    /**
      * @return \Spryker\Zed\ProductPageSearchExtension\Dependency\Plugin\ProductConcretePageMapExpanderPluginInterface[]
      */
     protected function getConcreteProductMapExpanderPlugins(): array
@@ -106,6 +89,21 @@ class ProductPageSearchDependencyProvider extends SprykerProductPageSearchDepend
         return [
             new ProductConcreteProductListPageDataExpanderPlugin(),
             new ProductImageProductConcretePageDataExpanderPlugin(),
+        ];
+    }
+
+    /**
+     * @return \Spryker\Zed\ProductPageSearchExtension\Dependency\Plugin\ProductAbstractMapExpanderPluginInterface[]
+     */
+    protected function getProductAbstractMapExpanderPlugins(): array
+    {
+        return [
+            new ProductPriceMapExpanderPlugin(),
+            new ProductCategoryMapExpanderPlugin(),
+            new ProductImageMapExpanderPlugin(),
+            new ProductLabelMapExpanderPlugin(),
+            new ProductReviewMapExpanderPlugin(),
+            new ProductListMapExpanderPlugin(),
         ];
     }
 
