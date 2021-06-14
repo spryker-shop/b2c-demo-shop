@@ -14,7 +14,7 @@ use Spryker\Zed\GiftCard\GiftCardConfig as SprykerGiftCardConfig;
 class GiftCardConfig extends SprykerGiftCardConfig
 {
     /**
-     * @return array
+     * @return string[]
      */
     public function getGiftCardPaymentMethodBlacklist(): array
     {
@@ -24,7 +24,7 @@ class GiftCardConfig extends SprykerGiftCardConfig
     }
 
     /**
-     * @return array
+     * @return string[]
      */
     public function getGiftCardOnlyShipmentMethods(): array
     {

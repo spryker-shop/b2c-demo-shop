@@ -7,20 +7,20 @@ sections:
     generate:
         excluded: true
         generate-transfers:
-            command: "vendor/bin/console transfer:generate"
+            command: 'vendor/bin/console transfer:generate'
         generate-transfer-databuilders:
-            command: "vendor/bin/console transfer:databuilder:generate"
+            command: 'vendor/bin/console transfer:databuilder:generate'
         generate-ide-auto-completion:
-            command: "vendor/bin/console dev:ide-auto-completion:generate"
+            command: 'vendor/bin/console dev:ide-auto-completion:generate'
 
     sniff:
         phpstan:
-            command: "php -d memory_limit=1024M vendor/bin/console code:phpstan"
+            command: 'php -d memory_limit=1024M vendor/bin/console code:phpstan'
         propel-schema-validate:
-            command: "vendor/bin/console propel:schema:validate"
+            command: 'vendor/bin/console propel:schema:validate'
         transfer-validate:
-            command: "vendor/bin/console transfer:validate"
+            command: 'vendor/bin/console transfer:validate'
         code-style-sniff:
-            command: "vendor/bin/console code:sniff:style"
+            command: 'vendor/bin/console code:sniff:style'
         architecture-sniff:
-            command: "vendor/bin/console code:sniff:architecture"
+            command: 'vendor/bin/console code:sniff:architecture'
