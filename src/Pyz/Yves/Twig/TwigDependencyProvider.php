@@ -8,6 +8,7 @@
 namespace Pyz\Yves\Twig;
 
 use Pyz\Yves\CartPage\Plugin\Twig\CartTwigPlugin;
+use Pyz\Yves\CartPage\Plugin\Twig\QuoteTwigPlugin;
 use Spryker\Service\UtilDateTime\Plugin\Twig\DateTimeFormatterTwigPlugin;
 use Spryker\Shared\Twig\Plugin\DebugTwigPlugin;
 use Spryker\Shared\Twig\Plugin\FormTwigPlugin;
@@ -67,6 +68,7 @@ class TwigDependencyProvider extends SprykerTwigDependencyProvider
             new MoneyTwigPlugin(),
             new WidgetTwigPlugin(),
             new CartTwigPlugin(),
+            new QuoteTwigPlugin(),
             new ShopPermissionTwigPlugin(),
             new CmsContentWidgetTwigPlugin(),
             new CmsTwigPlugin(),
