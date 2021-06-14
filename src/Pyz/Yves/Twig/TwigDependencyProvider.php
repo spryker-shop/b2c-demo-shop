@@ -8,6 +8,7 @@
 namespace Pyz\Yves\Twig;
 
 use Pyz\Yves\CartPage\Plugin\Twig\CartTwigPlugin;
+use Pyz\Yves\CartPage\Plugin\Twig\QuoteTwigPlugin;
 use Spryker\Service\UtilDateTime\Plugin\Twig\DateTimeFormatterTwigPlugin;
 use Spryker\Shared\Twig\Plugin\DebugTwigPlugin;
 use Spryker\Shared\Twig\Plugin\FormTwigPlugin;
@@ -44,9 +45,6 @@ use SprykerShop\Yves\ShopUi\Plugin\Twig\FunctionTwigPlugin;
 use SprykerShop\Yves\ShopUi\Plugin\Twig\ShopUiTwigPlugin;
 use SprykerShop\Yves\WebProfilerWidget\Plugin\Twig\WebProfilerTwigLoaderPlugin;
 
-/**
- * @method \Spryker\Yves\Twig\TwigConfig getConfig()
- */
 class TwigDependencyProvider extends SprykerTwigDependencyProvider
 {
     /**
@@ -70,11 +68,13 @@ class TwigDependencyProvider extends SprykerTwigDependencyProvider
             new MoneyTwigPlugin(),
             new WidgetTwigPlugin(),
             new CartTwigPlugin(),
+            new QuoteTwigPlugin(),
             new ShopPermissionTwigPlugin(),
             new CmsContentWidgetTwigPlugin(),
             new CmsTwigPlugin(),
             new ShopUiTwigPlugin(),
             new CategoryTwigPlugin(),
+            new CategoryFilterTwigPlugin(),
             new DateTimeFormatterTwigPlugin(),
             new CustomerTwigPlugin(),
             new WidgetTagTwigPlugin(),
@@ -85,7 +85,6 @@ class TwigDependencyProvider extends SprykerTwigDependencyProvider
             new FunctionTwigPlugin(),
             new ShopCmsSlotTwigPlugin(),
             new ContentNavigationTwigPlugin(),
-            new CategoryFilterTwigPlugin(),
         ];
     }
 
@@ -94,16 +93,16 @@ class TwigDependencyProvider extends SprykerTwigDependencyProvider
      */
     protected function getTwigLoaderPlugins(): array
     {
-        $plugins = [
+        $twigLoaderPlugins = [
             new FilesystemTwigLoaderPlugin(),
             new FormFilesystemTwigLoaderPlugin(),
             new ShopApplicationFormTwigLoaderPlugin(),
         ];
 
         if (class_exists(WebProfilerTwigLoaderPlugin::class)) {
-            $plugins[] = new WebProfilerTwigLoaderPlugin();
+            $twigLoaderPlugins[] = new WebProfilerTwigLoaderPlugin();
         }
 
-        return $plugins;
+        return $twigLoaderPlugins;
     }
 }

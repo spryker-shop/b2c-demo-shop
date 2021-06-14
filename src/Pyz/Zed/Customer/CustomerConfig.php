@@ -71,7 +71,7 @@ class CustomerConfig extends SprykerCustomerConfig
     /**
      * {@inheritDoc}
      *
-     * @return array
+     * @return string[]
      */
     public function getCustomerDetailExternalBlocksUrls()
     {

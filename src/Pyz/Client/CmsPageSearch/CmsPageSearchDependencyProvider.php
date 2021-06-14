@@ -21,7 +21,7 @@ use Spryker\Client\SearchElasticsearch\Plugin\QueryExpander\StoreQueryExpanderPl
 class CmsPageSearchDependencyProvider extends SprykerCmsPageSearchDependencyProvider
 {
     /**
-     * @return \Spryker\Client\SearchExtension\Dependency\Plugin\QueryExpanderPluginInterface[]
+     * @return \Spryker\Client\Search\Dependency\Plugin\QueryExpanderPluginInterface[]|\Spryker\Client\SearchExtension\Dependency\Plugin\QueryExpanderPluginInterface[]
      */
     protected function createCmsPageSearchQueryExpanderPlugins(): array
     {
@@ -36,7 +36,7 @@ class CmsPageSearchDependencyProvider extends SprykerCmsPageSearchDependencyProv
     }
 
     /**
-     * @return \Spryker\Client\SearchExtension\Dependency\Plugin\ResultFormatterPluginInterface[]
+     * @return \Spryker\Client\Search\Dependency\Plugin\ResultFormatterPluginInterface[]|\Spryker\Client\SearchExtension\Dependency\Plugin\ResultFormatterPluginInterface[]
      */
     protected function createCmsPageSearchResultFormatterPlugins(): array
     {
@@ -48,7 +48,7 @@ class CmsPageSearchDependencyProvider extends SprykerCmsPageSearchDependencyProv
     }
 
     /**
-     * @return \Spryker\Client\SearchExtension\Dependency\Plugin\QueryExpanderPluginInterface[]
+     * @return \Spryker\Client\Search\Dependency\Plugin\QueryExpanderPluginInterface[]|\Spryker\Client\SearchExtension\Dependency\Plugin\QueryExpanderPluginInterface[]
      */
     protected function createCmsPageSearchCountQueryExpanderPlugins(): array
     {

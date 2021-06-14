@@ -42,6 +42,7 @@ class ExampleProductSalePageQueryContainer extends AbstractQueryContainer implem
      */
     public function queryRelationsBecomingInactive($idProductLabel)
     {
+        /** @var \Orm\Zed\ProductLabel\Persistence\SpyProductLabelProductAbstractQuery $productLabelProductAbstractQuery */
         $productLabelProductAbstractQuery = $this->getFactory()
             ->getProductLabelQueryContainer()
             ->queryProductAbstractRelationsByIdProductLabel($idProductLabel)
@@ -83,7 +84,16 @@ class ExampleProductSalePageQueryContainer extends AbstractQueryContainer implem
             'priceProductStoreOrigin.gross_price'
         );
         $orCriterion->addOr($productLabelProductAbstractQuery->getNewCriterion('priceProductStoreOrigin.gross_price', null, Criteria::ISNULL));
+        $orCriterion->addOr($productLabelProductAbstractQuery->getNewCriterion('priceProductStoreOrigin.net_price', null, Criteria::ISNULL));
+        $orCriterion->addOr(
+            $this->getBasicModelCriterion(
+                $productLabelProductAbstractQuery,
+                'priceProductStoreOrigin.net_price < priceProductStoreDefault.net_price',
+                'priceProductStoreOrigin.net_price'
+            )
+        );
         $orCriterion->addOr($productLabelProductAbstractQuery->getNewCriterion('priceProductStoreDefault.gross_price', null, Criteria::ISNULL));
+        $orCriterion->addOr($productLabelProductAbstractQuery->getNewCriterion('priceProductStoreDefault.net_price', null, Criteria::ISNULL));
         $productLabelProductAbstractQuery->addAnd($orCriterion);
 
         return $productLabelProductAbstractQuery;
@@ -110,7 +120,8 @@ class ExampleProductSalePageQueryContainer extends AbstractQueryContainer implem
      */
     public function queryRelationsBecomingActive($idProductLabel)
     {
-        return $this->getFactory()
+        /** @var \Orm\Zed\Product\Persistence\SpyProductAbstractQuery $productAbstractQuery */
+        $productAbstractQuery = $this->getFactory()
             ->getProductQueryContainer()
             ->queryProductAbstract()
             ->distinct()
@@ -146,8 +157,12 @@ class ExampleProductSalePageQueryContainer extends AbstractQueryContainer implem
             ->addAnd('priceProductDefaultOriginal.id_price_product_default', null, Criteria::ISNOTNULL)
             ->addAnd('priceProductDefaultDefault.id_price_product_default', null, Criteria::ISNOTNULL)
             ->addAnd('priceProductStoreOrigin.gross_price', null, Criteria::ISNOTNULL)
+            ->addAnd('priceProductStoreOrigin.net_price', null, Criteria::ISNOTNULL)
             ->addJoinCondition('priceProductStoreDefault', 'priceProductStoreOrigin.fk_store = priceProductStoreDefault.fk_store')
             ->addJoinCondition('priceProductStoreDefault', 'priceProductStoreOrigin.fk_currency = priceProductStoreDefault.fk_currency')
-            ->addJoinCondition('priceProductStoreDefault', 'priceProductStoreOrigin.gross_price > priceProductStoreDefault.gross_price');
+            ->addJoinCondition('priceProductStoreDefault', 'priceProductStoreOrigin.gross_price > priceProductStoreDefault.gross_price')
+            ->addJoinCondition('priceProductStoreDefault', 'priceProductStoreOrigin.net_price > priceProductStoreDefault.net_price');
+
+        return $productAbstractQuery;
     }
 }

@@ -9,115 +9,110 @@ stores:
 command-timeout: 3600
 
 sections:
-
     hidden:
         excluded: true
         maintenance-all-on:
-            command: "vendor/bin/console maintenance:enable"
+            command: 'vendor/bin/console maintenance:enable'
 
         maintenance-all-off:
-            command: "vendor/bin/console maintenance:disable"
+            command: 'vendor/bin/console maintenance:disable'
 
         maintenance-zed-on:
-            command: "vendor/bin/console maintenance:enable zed"
+            command: 'vendor/bin/console maintenance:enable zed'
 
         maintenance-zed-off:
-            command: "vendor/bin/console maintenance:disable zed"
+            command: 'vendor/bin/console maintenance:disable zed'
 
         maintenance-yves-on:
-            command: "vendor/bin/console maintenance:enable yves"
+            command: 'vendor/bin/console maintenance:enable yves'
 
         maintenance-yves-off:
-            command: "vendor/bin/console maintenance:disable yves"
+            command: 'vendor/bin/console maintenance:disable yves'
 
     composer:
         composer-autoloader:
-            command: "composer dumpautoload --apcu"
+            command: 'composer dumpautoload --apcu'
 
     environment:
         console-environment:
-            command: "if [ ! -f ./config/Shared/console_env_local.php ]; then cp ./config/Shared/console_env_local.dist.php ./config/Shared/console_env_local.php ; fi"
-
+            command: 'if [ ! -f ./config/Shared/console_env_local.php ]; then cp ./config/Shared/console_env_local.dist.php ./config/Shared/console_env_local.php ; fi'
 
     clear:
         remove-logs:
-            command: "vendor/bin/console log:clear"
+            command: 'vendor/bin/console log:clear'
 
         remove-cache:
-            command: "vendor/bin/console cache:empty-all"
+            command: 'vendor/bin/console cache:empty-all'
 
         remove-auto-completion:
-            command: "vendor/bin/console dev:ide-auto-completion:remove"
+            command: 'vendor/bin/console dev:ide-auto-completion:remove'
 
         remove-request-validation-cache:
-            command: "vendor/bin/console rest-api:remove-validation-cache"
+            command: 'vendor/bin/console rest-api:remove-validation-cache'
             stores: true
 
         remove-navigation-cache:
-            command: "vendor/bin/console navigation:cache:remove"
+            command: 'vendor/bin/console navigation:cache:remove'
 
         remove-source-map:
-            command: "vendor/bin/console search:source-map:remove"
+            command: 'vendor/bin/console search:source-map:remove'
 
         remove-databuilder:
-            command: "vendor/bin/console transfer:databuilder:remove"
+            command: 'vendor/bin/console transfer:databuilder:remove'
 
         remove-entity-transfer:
-            command: "vendor/bin/console transfer:entity:remove"
+            command: 'vendor/bin/console transfer:entity:remove'
 
         remove-transfer:
-            command: "vendor/bin/console transfer:remove"
-
+            command: 'vendor/bin/console transfer:remove'
 
     generate:
         generate-transfers:
-            command: "vendor/bin/console transfer:generate"
+            command: 'vendor/bin/console transfer:generate'
 
         generate-transfer-databuilders:
-            command: "vendor/bin/console transfer:databuilder:generate"
+            command: 'vendor/bin/console transfer:databuilder:generate'
 
         generate-ide-auto-completion:
-            command: "vendor/bin/console dev:ide-auto-completion:generate"
+            command: 'vendor/bin/console dev:ide-auto-completion:generate'
 
     jenkins-down:
         jenkins-stop:
-            command: "vendor/bin/console scheduler:clean"
+            command: 'vendor/bin/console scheduler:clean'
             stores: true
-
     queue-flush:
         set-permissions:
-            command: "vendor/bin/console queue:permission:set"
+            command: 'vendor/bin/console queue:permission:set'
             stores: true
 
         purge-all-queues:
-            command: "vendor/bin/console queue:queue:purge-all"
+            command: 'vendor/bin/console queue:queue:purge-all'
             stores: true
 
         delete-all-queues:
-            command: "vendor/bin/console queue:queue:delete-all"
+            command: 'vendor/bin/console queue:queue:delete-all'
             stores: true
 
         delete-all-exchanges:
-            command: "vendor/bin/console queue:exchanges:delete-all"
+            command: 'vendor/bin/console queue:exchanges:delete-all'
             stores: true
-
 
     database-flush:
         delete-elastic-search-index:
-            command: "vendor/bin/console search:index:delete"
+            command: 'vendor/bin/console search:index:delete'
             stores: true
             groups:
                 - elastic
 
         delete-storage:
-            command: "vendor/bin/console storage:delete"
+            command: 'vendor/bin/console storage:delete'
             stores: true
             groups:
                 - redis
 
         drop-database:
-            command: "vendor/bin/console propel:database:drop"
-            pre: "hidden/maintenance-zed-on"
+            command: 'vendor/bin/console propel:database:drop'
+            pre: 'hidden/maintenance-zed-on'
             stores:
                 - US
                 - DE
@@ -125,14 +120,13 @@ sections:
                 - propel
 
         delete-migration-files:
-            command: "vendor/bin/console propel:migration:delete"
+            command: 'vendor/bin/console propel:migration:delete'
             groups:
                 - propel
 
-
     database-migrate:
         propel-create:
-            command: "vendor/bin/console propel:database:create"
+            command: 'vendor/bin/console propel:database:create'
             stores:
                 - US
                 - DE
@@ -140,7 +134,7 @@ sections:
                 - propel
 
         propel-postgres-compatibility:
-            command: "vendor/bin/console propel:pg-sql-compat"
+            command: 'vendor/bin/console propel:pg-sql-compat'
             stores:
                 - US
                 - DE
@@ -156,17 +150,17 @@ sections:
                 - propel
 
         propel-build:
-            command: "vendor/bin/console propel:model:build"
+            command: 'vendor/bin/console propel:model:build'
             groups:
                 - propel
 
         propel-diff:
-            command: "vendor/bin/console propel:diff"
+            command: 'vendor/bin/console propel:diff'
             groups:
                 - propel
 
         propel-migration-check:
-            command: "vendor/bin/console propel:migration:check"
+            command: 'vendor/bin/console propel:migration:check'
             breakOnFailure: false
             stores:
                 - US
@@ -175,14 +169,14 @@ sections:
                 - propel
 
         maintenance-page-enable:
-            command: "vendor/bin/console maintenance:enable"
+            command: 'vendor/bin/console maintenance:enable'
             stores: true
             condition:
-                command: "propel-migration-check"
+                command: 'propel-migration-check'
                 ifExitCode: 2
 
         propel-migrate:
-            command: "vendor/bin/console propel:migrate"
+            command: 'vendor/bin/console propel:migrate'
             stores:
                 - US
                 - DE
@@ -190,26 +184,30 @@ sections:
                 - propel
 
         maintenance-page-disable:
-            command: "vendor/bin/console maintenance:disable"
+            command: 'vendor/bin/console maintenance:disable'
             stores: true
 
         generate-entity-transfer:
-            command: "vendor/bin/console transfer:entity:generate"
+            command: 'vendor/bin/console transfer:entity:generate'
+
+        queue-setup:
+            command: 'vendor/bin/console queue:setup'
+            stores: true
 
         init-database:
-            command: "vendor/bin/console setup:init-db"
+            command: 'vendor/bin/console setup:init-db'
             stores:
                 - US
                 - DE
 
         setup-search-create-sources:
-            command: "vendor/bin/console search:setup:sources"
+            command: 'vendor/bin/console search:setup:sources'
             stores: true
             groups:
                 - elastic
 
         setup-seach-create-source-map:
-            command: "vendor/bin/console search:setup:source-map"
+            command: 'vendor/bin/console search:setup:source-map'
             stores: true
             groups:
                 - elastic
@@ -239,28 +237,28 @@ sections:
 
     demodata:
         import-eu-region-demodata:
-            command: "vendor/bin/console data:import --config=data/import/local/full_EU.yml"
+            command: 'vendor/bin/console data:import --config=data/import/local/full_EU.yml'
             stores:
                 - DE
 
         import-us-region-demodata:
-            command: "vendor/bin/console data:import --config=data/import/local/full_US.yml"
+            command: 'vendor/bin/console data:import --config=data/import/local/full_US.yml'
             stores:
                 - US
 
         update-product-labels:
-            command: "vendor/bin/console product-label:relations:update"
+            command: 'vendor/bin/console product-label:relations:update'
             stores:
                 - US
                 - DE
 
     jenkins-up:
         jenkins-generate:
-            command: "vendor/bin/console scheduler:setup"
+            command: 'vendor/bin/console scheduler:setup'
             stores: true
 
         jenkins-enable:
-            command: "vendor/bin/console scheduler:resume"
+            command: 'vendor/bin/console scheduler:resume'
             stores: true
 
     frontend:
@@ -280,11 +278,11 @@ sections:
                 - yves
 
         zed-install-dependencies:
-            command: "vendor/bin/console frontend:zed:install-dependencies -vvv"
+            command: 'vendor/bin/console frontend:zed:install-dependencies'
             groups:
                 - zed
 
         zed-build-frontend:
-            command: "vendor/bin/console frontend:zed:build"
+            command: 'vendor/bin/console frontend:zed:build'
             groups:
                 - zed

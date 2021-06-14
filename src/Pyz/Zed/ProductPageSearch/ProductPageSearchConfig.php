@@ -7,11 +7,27 @@
 
 namespace Pyz\Zed\ProductPageSearch;
 
-use Spryker\Shared\Publisher\PublisherConfig;
+use Spryker\Shared\ProductPageSearch\ProductPageSearchConfig as SprykerSharedProductPageSearchConfig;
 use Spryker\Zed\ProductPageSearch\ProductPageSearchConfig as SprykerProductPageSearchConfig;
 
 class ProductPageSearchConfig extends SprykerProductPageSearchConfig
 {
+    /**
+     * @return string|null
+     */
+    public function getProductPageEventQueueName(): ?string
+    {
+        return SprykerSharedProductPageSearchConfig::PUBLISH_PRODUCT_ABSTRACT_PAGE;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getProductConcretePageEventQueueName(): ?string
+    {
+        return SprykerSharedProductPageSearchConfig::PUBLISH_PRODUCT_CONCRETE_PAGE;
+    }
+
     /**
      * {@inheritDoc}
      *
@@ -22,25 +38,5 @@ class ProductPageSearchConfig extends SprykerProductPageSearchConfig
     public function isProductAbstractAddToCartEnabled(): bool
     {
         return true;
-    }
-
-    /**
-     * @api
-     *
-     * @return string|null
-     */
-    public function getProductPageEventQueueName(): ?string
-    {
-        return PublisherConfig::PUBLISH_QUEUE;
-    }
-
-    /**
-     * @api
-     *
-     * @return string|null
-     */
-    public function getProductConcretePageEventQueueName(): ?string
-    {
-        return PublisherConfig::PUBLISH_QUEUE;
     }
 }

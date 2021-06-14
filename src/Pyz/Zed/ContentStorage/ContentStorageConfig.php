@@ -22,8 +22,6 @@ class ContentStorageConfig extends SpykerContentStorageConfig
     }
 
     /**
-     * @api
-     *
      * @return string|null
      */
     public function getEventQueueName(): ?string

@@ -3,13 +3,14 @@
 {% define data = {
     product: product | default,
     products: products | default([]),
+    isUnavailableProductsDisplayed: isUnavailableProductsDisplayed | default(false),
 } %}
 
 {% block body %}
     <div class="grid grid--stretch product-list">
-        {% for availableProduct in data.products %}
-            {% if availableProduct.available  %}
-                {% widget 'CmsProductWidget' args [availableProduct] only %}{% endwidget %}
+        {% for product in data.products %}
+            {% if data.isUnavailableProductsDisplayed or product.available  %}
+                {% widget 'CmsProductWidget' args [product] use '@ProductWidget/views/cms-product-slider/cms-product-slider.twig' only %}{% endwidget %}
             {% endif %}
         {% endfor %}
     </div>

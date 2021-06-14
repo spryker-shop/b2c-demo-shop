@@ -10,8 +10,8 @@ namespace Pyz\Zed\ProductDiscontinued;
 use Spryker\Zed\ProductDiscontinued\ProductDiscontinuedDependencyProvider as SprykerProductDiscontinuedDependencyProvider;
 use Spryker\Zed\ProductDiscontinuedProductBundleConnector\Communication\Plugin\DiscontinueBundlePostProductDiscontinuePlugin;
 use Spryker\Zed\ProductDiscontinuedProductBundleConnector\Communication\Plugin\ProductDiscontinued\BundledProductsProductDiscontinuedPreDeleteCheckPlugin;
-use Spryker\Zed\ProductDiscontinuedProductLabelConnector\Communication\Plugin\PostDeleteProductDiscontinuedPlugin;
 use Spryker\Zed\ProductDiscontinuedProductLabelConnector\Communication\Plugin\PostProductDiscontinuedPlugin;
+use Spryker\Zed\ProductDiscontinuedProductLabelConnector\Communication\Plugin\ProductLabelRelationPostDeleteBulkProductDiscontinuedPlugin;
 
 class ProductDiscontinuedDependencyProvider extends SprykerProductDiscontinuedDependencyProvider
 {
@@ -27,12 +27,12 @@ class ProductDiscontinuedDependencyProvider extends SprykerProductDiscontinuedDe
     }
 
     /**
-     * @return \Spryker\Zed\ProductDiscontinuedExtension\Dependency\Plugin\PostDeleteProductDiscontinuedPluginInterface[]
+     * @return \Spryker\Zed\ProductDiscontinuedExtension\Dependency\Plugin\PostDeleteBulkProductDiscontinuedPluginInterface[]
      */
-    protected function getPostDeleteProductDiscontinuedPlugins(): array
+    protected function getPostDeleteBulkProductDiscontinuedPlugins(): array
     {
         return [
-            new PostDeleteProductDiscontinuedPlugin(),
+            new ProductLabelRelationPostDeleteBulkProductDiscontinuedPlugin(),
         ];
     }
 
