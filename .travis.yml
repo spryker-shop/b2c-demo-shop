@@ -453,7 +453,7 @@ before_install:
 install:
   - chmod -R a+x config/Shared/ci/travis/
   - composer install --optimize-autoloader --no-interaction --prefer-install=auto
-  - composer config github-oauth.github.com ${GITHUB_TOKEN}"
+  - composer config github-oauth.github.com ${GITHUB_TOKEN}
   - if [[ $PREFER_LOWEST == 1 ]] ; then composer require "spryker-feature/search:202009.0" "spryker/elastica:^5.0.0" "ruflin/elastica:^6.0.0" "elasticsearch/elasticsearch:^6.0.0" --with-all-dependencies --dev --optimize-autoloader ; fi
   - if [[ $PREFER_LOWEST == 1 ]] ; then config/Shared/ci/travis/install_elasticsearch_6_8.sh ; else config/Shared/ci/travis/install_elasticsearch_7_6.sh ; fi
   - if [[ $PREFER_MID == 1 ]] ; then composer prefer-mid ; fi
