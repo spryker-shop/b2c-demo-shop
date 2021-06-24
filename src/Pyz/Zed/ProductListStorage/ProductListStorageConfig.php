@@ -16,22 +16,6 @@ class ProductListStorageConfig extends SprykerProductListStorageConfig
     /**
      * @return string|null
      */
-    public function getProductAbstractProductListEventQueueName(): ?string
-    {
-        return PublisherConfig::PUBLISH_QUEUE;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getProductConcreteProductListEventQueueName(): ?string
-    {
-        return PublisherConfig::PUBLISH_QUEUE;
-    }
-
-    /**
-     * @return string|null
-     */
     public function getProductAbstractProductListSynchronizationPoolName(): ?string
     {
         return SynchronizationConfig::DEFAULT_SYNCHRONIZATION_POOL_NAME;
@@ -43,5 +27,21 @@ class ProductListStorageConfig extends SprykerProductListStorageConfig
     public function getProductConcreteProductListSynchronizationPoolName(): ?string
     {
         return SynchronizationConfig::DEFAULT_SYNCHRONIZATION_POOL_NAME;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getProductAbstractProductListEventQueueName(): ?string
+    {
+        return PublisherConfig::PUBLISH_QUEUE;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getProductConcreteProductListEventQueueName(): ?string
+    {
+        return PublisherConfig::PUBLISH_QUEUE;
     }
 }

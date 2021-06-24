@@ -15,7 +15,7 @@ class UrlDependencyProvider extends SprykerUrlDependencyProvider
     /**
      * @return \Spryker\Zed\Url\Dependency\Plugin\UrlDeletePluginInterface[]
      */
-    protected function getUrlBeforeDeletePlugins()
+    protected function getUrlBeforeDeletePlugins(): array
     {
         return [
             new DetachNavigationUrlAfterUrlDeletePlugin(),

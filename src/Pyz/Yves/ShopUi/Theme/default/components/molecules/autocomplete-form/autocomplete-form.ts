@@ -7,7 +7,7 @@ export default class AutocompleteForm extends AutocompleteFormCore {
     protected readyCallback(): void {}
 
     protected init(): void {
-        if (this.parentWrapClassName){
+        if (this.parentWrapClassName) {
             this.parentWrap = <HTMLElement>document.getElementsByClassName(`${this.parentWrapClassName}`)[0];
         }
 

@@ -35,9 +35,9 @@ class ExampleProductSalePageDependencyProvider extends AbstractBundleDependencyP
      */
     protected function addProductLabelQueryContainer(Container $container)
     {
-        $container[static::QUERY_CONTAINER_PRODUCT_LABEL] = function (Container $container) {
+        $container->set(static::QUERY_CONTAINER_PRODUCT_LABEL, function (Container $container) {
             return $container->getLocator()->productLabel()->queryContainer();
-        };
+        });
 
         return $container;
     }
@@ -49,9 +49,9 @@ class ExampleProductSalePageDependencyProvider extends AbstractBundleDependencyP
      */
     protected function addProductQueryContainer(Container $container)
     {
-        $container[static::QUERY_CONTAINER_PRODUCT] = function (Container $container) {
+        $container->set(static::QUERY_CONTAINER_PRODUCT, function (Container $container) {
             return $container->getLocator()->product()->queryContainer();
-        };
+        });
 
         return $container;
     }
