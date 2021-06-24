@@ -81,7 +81,9 @@
 
     {% block productThumbnail %}
         <a itemprop="url" class="{{ config.name }}__overlay {{ config.jsName }}__link-detail-page" href="{{ data.url }}">
+            {% if data.image %}
             {{ parent() }}
+            {% endif %}
         </a>
     {% endblock %}
 {% endblock %}
