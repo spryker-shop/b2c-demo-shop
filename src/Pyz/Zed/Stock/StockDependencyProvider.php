@@ -25,7 +25,6 @@ class StockDependencyProvider extends SprykerStockDependencyProvider
     protected function getStockUpdateHandlerPlugins(Container $container): array
     {
         return [
-            new AvailabilityHandlerPlugin(),
             new ProductBundleAvailabilityHandlerPlugin(),
         ];
     }
