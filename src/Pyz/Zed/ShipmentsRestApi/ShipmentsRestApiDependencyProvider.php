@@ -10,6 +10,9 @@ namespace Pyz\Zed\ShipmentsRestApi;
 use Spryker\Zed\CustomersRestApi\Communication\Plugin\ShipmentsRestApi\CustomerAddressProviderStrategyPlugin;
 use Spryker\Zed\ShipmentsRestApi\ShipmentsRestApiDependencyProvider as SprykerShipmentsRestApiDependencyProvider;
 
+/**
+ * @method \Spryker\Zed\ShipmentsRestApi\ShipmentsRestApiConfig getConfig()
+ */
 class ShipmentsRestApiDependencyProvider extends SprykerShipmentsRestApiDependencyProvider
 {
     /**

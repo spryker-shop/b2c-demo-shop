@@ -1,3 +1,12 @@
+_DOCKER_BEFORE_INSTALL: &DOCKER_BEFORE_INSTALL
+    - |
+        ./config/Shared/ci/travis/download-and-cache-file.sh  \
+          https://github.com/docker/docker-credential-helpers/releases/download/v0.6.3/docker-credential-pass-v0.6.3-amd64.tar.gz \
+          $HOME/other-download
+
+_DOCKER_BEFORE_SCRIPT: &DOCKER_BEFORE_SCRIPT
+    - ./config/Shared/ci/travis/docker-credentials.sh
+
 language: php
 
 git:
@@ -132,8 +141,10 @@ jobs:
         - docker/sdk boot deploy.ci.functional.yml -v
         - docker/sdk up -t -v
         - docker/sdk testing codecept run -c codeception.ci.functional.yml
-      before_install: skip
-      before_script: skip
+      before_install:
+          - *DOCKER_BEFORE_INSTALL
+      before_script:
+          - *DOCKER_BEFORE_SCRIPT
       after_script: skip
 
     - name: Docker / Alpine / PHP 7.3 / PostgreSQL / Glue
@@ -173,8 +184,10 @@ jobs:
         - docker/sdk testing codecept fixtures
         - docker/sdk testing console queue:worker:start --stop-when-empty
         - docker/sdk testing codecept run -c codeception.api.yml
-      before_install: skip
-      before_script: skip
+      before_install:
+          - *DOCKER_BEFORE_INSTALL
+      before_script:
+          - *DOCKER_BEFORE_SCRIPT
       after_script: skip
 
     - name: Docker / Alpine / PHP 7.3 / MariaDB / Functional
@@ -212,8 +225,10 @@ jobs:
         - docker/sdk boot deploy.ci.functional.mariadb.yml -v
         - docker/sdk up -t -v
         - docker/sdk testing codecept run -c codeception.ci.functional.yml
-      before_install: skip
-      before_script: skip
+      before_install:
+          - *DOCKER_BEFORE_INSTALL
+      before_script:
+          - *DOCKER_BEFORE_SCRIPT
       after_script: skip
 
     - name: Docker / Debian / PHP 7.3 / PostgreSQL / Functional
@@ -251,8 +266,10 @@ jobs:
         - docker/sdk boot deploy.ci.functional.yml -v
         - docker/sdk up -t -v
         - docker/sdk testing codecept run -c codeception.ci.functional.yml
-      before_install: skip
-      before_script: skip
+      before_install:
+          - *DOCKER_BEFORE_INSTALL
+      before_script:
+          - *DOCKER_BEFORE_SCRIPT
       after_script: skip
 
     - name: Docker / Alpine / PHP 7.3 / MariaDB / Acceptance
@@ -291,8 +308,10 @@ jobs:
           - docker/sdk up -t
           - docker/sdk testing console queue:worker:start --stop-when-empty
           - docker/sdk testing codecept run -c codeception.acceptance.yml
-      before_install: skip
-      before_script: skip
+      before_install:
+          - *DOCKER_BEFORE_INSTALL
+      before_script:
+          - *DOCKER_BEFORE_SCRIPT
       after_script: skip
 
     - name: Docker / Alpine / PHP 7.4 / PostgreSQL / Acceptance
@@ -331,8 +350,10 @@ jobs:
           - docker/sdk up -t
           - docker/sdk testing console queue:worker:start --stop-when-empty
           - docker/sdk testing codecept run -c codeception.acceptance.yml
-      before_install: skip
-      before_script: skip
+      before_install:
+          - *DOCKER_BEFORE_INSTALL
+      before_script:
+          - *DOCKER_BEFORE_SCRIPT
       after_script: skip
 
     - name: Docker / Alpine / PHP 7.4 / Frontend & Assets
@@ -372,8 +393,10 @@ jobs:
         - docker run -it --rm -e SPRYKER_NGINX_CGI_HOST_YVES_EU=localhost -e SPRYKER_NGINX_CGI_HOST_ZED_EU=localhost -e SPRYKER_NGINX_CGI_HOST_GLUE_EU=localhost -e SPRYKER_NGINX_CGI_HOST_YVES_US=localhost -e SPRYKER_NGINX_CGI_HOST_GLUE_US=localhost -e SPRYKER_NGINX_CGI_HOST_ZED_US=localhost -e ALLOWED_IP=127.0.0.1 spryker_b2c_frontend:1.0-frontend nginx -t
         - docker run -it --rm --entrypoint='' spryker_b2c_frontend:1.0-frontend ls -al /data/public/Yves/assets/myhash
         - docker run -it --rm --entrypoint='' spryker_b2c_frontend:1.0-frontend ls -al /data/public/Zed/assets/
-      before_install: skip
-      before_script: skip
+      before_install:
+          - *DOCKER_BEFORE_INSTALL
+      before_script:
+          - *DOCKER_BEFORE_SCRIPT
       after_script: skip
 
 addons:
@@ -425,11 +448,13 @@ before_install:
   - rm -rf $HOME/chromium-ecosystem/*.zip
   - export CHROMEDRIVER_REVISION=814168
   - export COMPOSER_IGNORE_CHROMEDRIVER=1
+  - nvm use 12
 
 install:
   - chmod -R a+x config/Shared/ci/travis/
-  - composer install --optimize-autoloader --no-interaction
-  - if [[ $PREFER_LOWEST == 1 ]] ; then composer require "spryker-feature/search:202009.0" --with-all-dependencies --optimize-autoloader ; fi
+  - composer install --optimize-autoloader --no-interaction --prefer-install=auto
+  - composer config github-oauth.github.com ${GITHUB_TOKEN}
+  - if [[ $PREFER_LOWEST == 1 ]] ; then composer require "spryker-feature/search:202009.0" "spryker/elastica:^5.0.0" "ruflin/elastica:^6.0.0" "elasticsearch/elasticsearch:^6.0.0" --with-all-dependencies --dev --optimize-autoloader ; fi
   - if [[ $PREFER_LOWEST == 1 ]] ; then config/Shared/ci/travis/install_elasticsearch_6_8.sh ; else config/Shared/ci/travis/install_elasticsearch_7_6.sh ; fi
   - if [[ $PREFER_MID == 1 ]] ; then composer prefer-mid ; fi
   - config/Shared/ci/travis/install_mailcatcher.sh
@@ -438,8 +463,6 @@ install:
   - . $HOME/chromium-ecosystem/docker-chromedriver-master/chromium-installer $CHROMEDRIVER_REVISION $HOME/chromium-ecosystem false
 
 before_script:
-  - nvm install 12 > /dev/null
-
   - mkdir -p shared/data/common/jenkins
   - mkdir -p shared/data/common/jenkins/jobs
   - mkdir -p data/cache -m 0777
@@ -462,6 +485,7 @@ before_script:
   - if [[ $VALIDATION == 1 ]] ; then vendor/bin/console rest-api:generate:documentation ; fi
   - if [[ $VALIDATION == 1 ]] ; then vendor/bin/console frontend:project:install-dependencies ; fi
   - if [[ $VALIDATION == 1 ]] ; then vendor/bin/console frontend:yves:install-dependencies ; fi
+  - composer dump-autoload -o -a
 
 script:
   - if [[ $VALIDATION == 1 ]] ; then vendor/bin/console propel:schema:validate ; fi

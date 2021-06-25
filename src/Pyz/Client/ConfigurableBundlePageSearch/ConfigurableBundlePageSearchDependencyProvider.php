@@ -9,7 +9,7 @@ namespace Pyz\Client\ConfigurableBundlePageSearch;
 
 use Spryker\Client\ConfigurableBundlePageSearch\ConfigurableBundlePageSearchDependencyProvider as SprykerConfigurableBundlePageSearchDependencyProvider;
 use Spryker\Client\ConfigurableBundlePageSearch\Plugin\Elasticsearch\ResultFormatter\ConfigurableBundleTemplatePageSearchResultFormatterPlugin;
-use Spryker\Client\Search\Plugin\Elasticsearch\QueryExpander\LocalizedQueryExpanderPlugin;
+use Spryker\Client\SearchElasticsearch\Plugin\QueryExpander\LocalizedQueryExpanderPlugin;
 
 class ConfigurableBundlePageSearchDependencyProvider extends SprykerConfigurableBundlePageSearchDependencyProvider
 {
@@ -24,7 +24,7 @@ class ConfigurableBundlePageSearchDependencyProvider extends SprykerConfigurable
     }
 
     /**
-     * @return \Spryker\Client\Search\Dependency\Plugin\QueryExpanderPluginInterface[]
+     * @return \Spryker\Client\SearchExtension\Dependency\Plugin\QueryExpanderPluginInterface[]|\Spryker\Client\Search\Dependency\Plugin\QueryExpanderPluginInterface[]
      */
     protected function getConfigurableBundleTemplatePageSearchQueryExpanderPlugins(): array
     {

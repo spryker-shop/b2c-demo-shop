@@ -15,7 +15,7 @@ class GlueApplicationConfig extends SprykerGlueApplicationConfig
     public const VALIDATE_REQUEST_HEADERS = false;
 
     /**
-     * @return array
+     * @return string[]
      */
     public function getCorsAllowedHeaders(): array
     {

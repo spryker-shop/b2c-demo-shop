@@ -16,7 +16,7 @@ use Generated\Shared\Search\PageIndexMap;
 use Generated\Shared\Transfer\SearchContextTransfer;
 use Spryker\Client\Kernel\AbstractPlugin;
 use Spryker\Client\ProductLabel\Plugin\ProductLabelFacetConfigTransferBuilderPlugin;
-use Spryker\Client\Search\Dependency\Plugin\QueryInterface;
+use Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface;
 use Spryker\Client\SearchExtension\Dependency\Plugin\SearchContextAwareQueryInterface;
 
 /**
@@ -130,16 +130,15 @@ class SaleSearchQueryPlugin extends AbstractPlugin implements QueryInterface, Se
      */
     protected function createSaleProductsQuery()
     {
-        $localeName = $this->getFactory()
-            ->getStore()
-            ->getCurrentLocale();
+        $store = $this->getFactory()->getStore();
+
         $labelName = $this->getFactory()
             ->getConfig()
             ->getLabelSaleName();
 
         $storageProductLabelTransfer = $this->getFactory()
             ->getProductLabelStorageClient()
-            ->findLabelByName($labelName, $localeName, APPLICATION_STORE);
+            ->findLabelByName($labelName, $store->getCurrentLocale(), $store->getStoreName());
 
         $labelId = $storageProductLabelTransfer ? $storageProductLabelTransfer->getIdProductLabel() : 0;
 
@@ -176,7 +175,7 @@ class SaleSearchQueryPlugin extends AbstractPlugin implements QueryInterface, Se
     protected function createStringFacetValueFilter($idProductLabel)
     {
         $termQuery = new Term();
-        $termQuery->setTerm(PageIndexMap::STRING_FACET_FACET_VALUE, $idProductLabel);
+        $termQuery->setTerm(PageIndexMap::STRING_FACET_FACET_VALUE, (string)$idProductLabel);
 
         return $termQuery;
     }

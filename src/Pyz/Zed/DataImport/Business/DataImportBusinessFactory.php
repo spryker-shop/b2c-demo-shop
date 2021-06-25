@@ -227,7 +227,7 @@ class DataImportBusinessFactory extends SprykerDataImportBusinessFactory
      */
     public function createDataImporterConditional($importType, DataReaderInterface $reader)
     {
-        return new DataImporterConditional($importType, $reader);
+        return new DataImporterConditional($importType, $reader, $this->getGracefulRunnerFacade());
     }
 
     /**
@@ -1378,7 +1378,7 @@ class DataImportBusinessFactory extends SprykerDataImportBusinessFactory
      */
     public function createDataImporterWriterAwareConditional($importType, DataReaderInterface $reader)
     {
-        return new DataImporterDataSetWriterAwareConditional($importType, $reader);
+        return new DataImporterDataSetWriterAwareConditional($importType, $reader, $this->getGracefulRunnerFacade());
     }
 
     /**
