@@ -116,8 +116,6 @@ class SalesDependencyProvider extends SprykerSalesDependencyProvider
     {
         return [
             new OrderCustomReferenceOrderPostSavePlugin(),
-            new ConfiguredBundlesOrderItemsPostSavePlugin(),
-            new ItemMetadataOrderItemsPostSavePlugin(),
         ];
     }
 
