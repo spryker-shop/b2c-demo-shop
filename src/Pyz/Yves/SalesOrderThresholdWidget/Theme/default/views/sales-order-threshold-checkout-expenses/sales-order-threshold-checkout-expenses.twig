@@ -4,6 +4,12 @@
     expenses: _widget.expenses | default,
 } %}
 
+{% block template %}
+    {% if data.expenses is not empty %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
 {% block body %}
     {% if data.expenses is not empty %}
         {% block expenseItems %}
