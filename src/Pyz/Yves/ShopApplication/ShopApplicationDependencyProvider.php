@@ -29,6 +29,7 @@ use SprykerShop\Yves\CartNoteWidget\Widget\CartItemNoteFormWidget;
 use SprykerShop\Yves\CartNoteWidget\Widget\CartNoteFormWidget;
 use SprykerShop\Yves\CartPage\Widget\AddItemsFormWidget;
 use SprykerShop\Yves\CartPage\Widget\AddToCartFormWidget;
+use SprykerShop\Yves\CartPage\Widget\CartAddProductAsSeparateItemWidget;
 use SprykerShop\Yves\CartPage\Widget\CartChangeQuantityFormWidget;
 use SprykerShop\Yves\CartPage\Widget\ProductAbstractAddToCartButtonWidget;
 use SprykerShop\Yves\CartPage\Widget\RemoveFromCartFormWidget;
@@ -174,6 +175,7 @@ class ShopApplicationDependencyProvider extends SprykerShopApplicationDependency
             RemoveFromCartFormWidget::class,
             ProductAbstractAddToCartButtonWidget::class,
             OrderCancelButtonWidget::class,
+            CartAddProductAsSeparateItemWidget::class,
         ];
     }
 
