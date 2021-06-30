@@ -30,9 +30,10 @@ use Spryker\Zed\Sales\Communication\Plugin\Sales\CurrencyIsoCodeOrderItemExpande
 use Spryker\Zed\Sales\SalesDependencyProvider as SprykerSalesDependencyProvider;
 use Spryker\Zed\SalesConfigurableBundle\Communication\Plugin\Sales\ConfiguredBundleItemPreTransformerPlugin;
 use Spryker\Zed\SalesConfigurableBundle\Communication\Plugin\Sales\ConfiguredBundleOrderItemExpanderPlugin;
-use Spryker\Zed\SalesConfigurableBundle\Communication\Plugin\Sales\ConfiguredBundlesOrderPostSavePlugin;
+use Spryker\Zed\SalesConfigurableBundle\Communication\Plugin\Sales\ConfiguredBundlesOrderItemsPostSavePlugin;
 use Spryker\Zed\SalesOms\Communication\Plugin\OrderItemReferenceExpanderPreSavePlugin;
 use Spryker\Zed\SalesPayment\Communication\Plugin\Sales\SalesPaymentOrderExpanderPlugin;
+use Spryker\Zed\SalesProductConnector\Communication\Plugin\Sales\ItemMetadataOrderItemsPostSavePlugin;
 use Spryker\Zed\SalesProductConnector\Communication\Plugin\Sales\ItemMetadataSearchOrderExpanderPlugin;
 use Spryker\Zed\SalesProductConnector\Communication\Plugin\Sales\MetadataOrderItemExpanderPlugin;
 use Spryker\Zed\SalesProductConnector\Communication\Plugin\Sales\ProductIdOrderItemExpanderPlugin;
@@ -114,7 +115,6 @@ class SalesDependencyProvider extends SprykerSalesDependencyProvider
     protected function getOrderPostSavePlugins(): array
     {
         return [
-            new ConfiguredBundlesOrderPostSavePlugin(),
             new OrderCustomReferenceOrderPostSavePlugin(),
         ];
     }
@@ -168,6 +168,17 @@ class SalesDependencyProvider extends SprykerSalesDependencyProvider
             new ItemMetadataSearchOrderExpanderPlugin(),
             new OrderAggregatedItemStateSearchOrderExpanderPlugin(),
             new IsCancellableSearchOrderExpanderPlugin(),
+        ];
+    }
+
+    /**
+     * @return \Spryker\Zed\SalesExtension\Dependency\Plugin\OrderItemsPostSavePluginInterface[]
+     */
+    protected function getOrderItemsPostSavePlugins(): array
+    {
+        return [
+            new ConfiguredBundlesOrderItemsPostSavePlugin(),
+            new ItemMetadataOrderItemsPostSavePlugin(),
         ];
     }
 }
