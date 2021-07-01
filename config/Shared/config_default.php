@@ -31,6 +31,7 @@ use Spryker\Shared\Newsletter\NewsletterConstants;
 use Spryker\Shared\Oauth\OauthConstants;
 use Spryker\Shared\OauthCryptography\OauthCryptographyConstants;
 use Spryker\Shared\Oms\OmsConstants;
+use Spryker\Shared\ProductLabel\ProductLabelConstants;
 use Spryker\Shared\ProductManagement\ProductManagementConstants;
 use Spryker\Shared\ProductRelation\ProductRelationConstants;
 use Spryker\Shared\Propel\PropelConstants;
@@ -255,7 +256,7 @@ $config[AclConstants::ACL_USER_RULE_WHITELIST] = [
 
 $config[PropelConstants::ZED_DB_ENGINE]
     = $config[PropelQueryBuilderConstants::ZED_DB_ENGINE]
-    = strtolower(getenv('SPRYKER_DB_ENGINE') ?: '') ?: PropelConfig::DB_ENGINE_PGSQL;
+    = strtolower(getenv('SPRYKER_DB_ENGINE') ?: '') ?: PropelConfig::DB_ENGINE_MYSQL;
 $config[PropelConstants::ZED_DB_HOST] = getenv('SPRYKER_DB_HOST');
 $config[PropelConstants::ZED_DB_PORT] = getenv('SPRYKER_DB_PORT');
 $config[PropelConstants::ZED_DB_USERNAME] = getenv('SPRYKER_DB_USERNAME');
@@ -547,3 +548,6 @@ $config[TaxConstants::DEFAULT_TAX_RATE] = 19;
 // >>> Category
 $config[CategoryConstants::CATEGORY_READ_CHUNK] = 10000;
 $config[CategoryConstants::CATEGORY_IS_CLOSURE_TABLE_EVENTS_ENABLED] = false;
+
+// >>> Product Label
+$config[ProductLabelConstants::PRODUCT_LABEL_TO_DE_ASSIGN_CHUNK_SIZE] = 1000;

@@ -99,6 +99,19 @@ class PublisherDependencyProvider extends SprykerPublisherDependencyProvider
     }
 
     /**
+     * @return array
+     */
+    protected function getPublishAndSynchronizeHealthCheckPlugins(): array
+    {
+        return [
+            PublishAndSynchronizeHealthCheckConfig::PUBLISH_PUBLISH_AND_SYNCHRONIZE_HEALTH_CHECK => [
+                new PublishAndSynchronizeHealthCheckStorageWritePublisherPlugin(),
+                new PublishAndSynchronizeHealthCheckSearchWritePublisherPlugin(),
+            ],
+        ];
+    }
+
+    /**
      * @return \Spryker\Zed\PublisherExtension\Dependency\Plugin\PublisherTriggerPluginInterface[]
      */
     protected function getPublisherTriggerPlugins(): array
@@ -127,19 +140,6 @@ class PublisherDependencyProvider extends SprykerPublisherDependencyProvider
                 new GlossaryKeyDeletePublisherPlugin(),
                 new GlossaryKeyWriterPublisherPlugin(),
                 new GlossaryTranslationWritePublisherPlugin(),
-            ],
-        ];
-    }
-
-    /**
-     * @return array
-     */
-    protected function getPublishAndSynchronizeHealthCheckPlugins(): array
-    {
-        return [
-            PublishAndSynchronizeHealthCheckConfig::PUBLISH_PUBLISH_AND_SYNCHRONIZE_HEALTH_CHECK => [
-                new PublishAndSynchronizeHealthCheckStorageWritePublisherPlugin(),
-                new PublishAndSynchronizeHealthCheckSearchWritePublisherPlugin(),
             ],
         ];
     }

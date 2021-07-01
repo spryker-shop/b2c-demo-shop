@@ -137,5 +137,19 @@
         "source": "\\Spryker\\Zed\\PublishAndSynchronizeHealthCheckStorage\\Communication\\Plugin\\HealthCheck\\PublishAndSynchronizeHealthCheckStoragePlugin"
       }
     }
+  },
+  "Spryker.AvailabilityCartConnector": {
+    "unwire-plugin": {
+      "f27630f5c511087abae38d9817466aa031273390": {
+        "target": "\\Spryker\\Zed\\Cart\\CartDependencyProvider::getCartPreCheckPlugins",
+        "source": "\\Spryker\\Zed\\AvailabilityCartConnector\\Communication\\Plugin\\CheckAvailabilityPlugin"
+      }
+    },
+    "wire-plugin": {
+      "ebd62cf7e537a34930afef20c97cb4b414715744": {
+        "target": "\\Spryker\\Zed\\Cart\\CartDependencyProvider::getCartPreCheckPlugins",
+        "source": "\\Spryker\\Zed\\AvailabilityCartConnector\\Communication\\Plugin\\Cart\\CheckAvailabilityPlugin"
+      }
+    }
   }
 }
