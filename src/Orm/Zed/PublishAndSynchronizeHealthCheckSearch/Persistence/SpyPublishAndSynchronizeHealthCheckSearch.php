@@ -7,7 +7,7 @@
 
 namespace Orm\Zed\PublishAndSynchronizeHealthCheckSearch\Persistence;
 
-use Spryker\Zed\PublishAndSynchronizeHealthCheckSearch\Persistence\Propel\AbstractSpyPublishAndSynchronizeHealthCheckSearch as BaseSpyPublishAndSynchronizeHealthCheckSearch;
+use Orm\Zed\PublishAndSynchronizeHealthCheckSearch\Persistence\Base\SpyPublishAndSynchronizeHealthCheckSearch as BaseSpyPublishAndSynchronizeHealthCheckSearch;
 
 /**
  * Skeleton subclass for representing a row from the 'spy_publish_and_synchronize_health_check_search' table.
