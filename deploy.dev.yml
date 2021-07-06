@@ -5,10 +5,14 @@ tag: 'dev'
 
 environment: docker.dev
 image:
-    tag: spryker/php:7.3-alpine3.12
+    tag: spryker/php:7.4-alpine3.12
     php:
         enabled-extensions:
             - blackfire
+    environment:
+        SPRYKER_DEFAULT_STORE: "CH"
+        SPRYKER_ACTIVE_STORES: "CH,KR"
+
 composer:
     mode: ''
     autoload: ''
@@ -16,109 +20,73 @@ assets:
     mode: development
 
 regions:
-    EU:
+    ASIA:
         services:
             database:
-                database: eu-docker
+                database: asia-docker
                 username: spryker
                 password: secret
 
         stores:
-            DE:
+            CH:
                 services:
                     broker:
-                        namespace: de-docker
+                        namespace: ch-docker
                     key_value_store:
                         namespace: 1
                     search:
-                        namespace: de_search
-            AT:
+                        namespace: ch_search
+            KR:
                 services:
                     broker:
-                        namespace: at-docker
+                        namespace: kr-docker
                     key_value_store:
                         namespace: 2
                     search:
-                        namespace: at_search
-    US:
-        services:
-            database:
-                database: us-docker
-                username: spryker
-                password: secret
-        stores:
-            US:
-                services:
-                    broker:
-                        namespace: us-docker
-                    key_value_store:
-                        namespace: 3
-                    search:
-                        namespace: us_search
+                        namespace: kr_search
+
 groups:
-    EU:
-        region: EU
+    ASIA:
+        region: ASIA
         applications:
             yves_eu:
                 application: yves
                 endpoints:
-                    yves.de.spryker.local:
-                        store: DE
+                    yves.ch.spryker.local:
+                        store: CH
                         services:
                             session:
                                 namespace: 1
-                    yves.at.spryker.local:
-                        store: AT
+                    yves.kr.spryker.local:
+                        store: KR
                         services:
                             session:
                                 namespace: 2
             glue_eu:
                 application: glue
                 endpoints:
-                    glue.de.spryker.local:
-                        store: DE
-                    glue.at.spryker.local:
-                        store: AT
+                    glue.ch.spryker.local:
+                        store: CH
+                    glue.kr.spryker.local:
+                        store: KR
             zed_eu:
                 application: zed
                 endpoints:
-                    zed.de.spryker.local:
-                        store: DE
+                    zed.ch.spryker.local:
+                        store: CH
                         services:
                             session:
                                 namespace: 3
-                    zed.at.spryker.local:
-                        store: AT
+                    zed.kr.spryker.local:
+                        store: KR
                         services:
                             session:
                                 namespace: 4
-    US:
-        region: US
-        applications:
-            yves_us:
-                application: yves
-                endpoints:
-                    yves.us.spryker.local:
-                        store: US
-                        services:
-                            session:
-                                namespace: 5
-            glue_us:
-                application: glue
-                endpoints:
-                    glue.us.spryker.local:
-                        store: US
-            zed_us:
-                application: zed
-                endpoints:
-                    zed.us.spryker.local:
-                        store: US
-                        services:
-                            session:
-                                namespace: 6
+
 services:
     database:
-        engine: postgres
+        engine: mysql
+        version: mariadb-10.4
         root:
             username: "root"
             password: "secret"
@@ -175,7 +143,7 @@ docker:
         redirect: true
 
     testing:
-        store: DE
+        store: CH
 
     debug:
         enabled: true
