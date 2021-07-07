@@ -387,38 +387,52 @@ chdir = /
 ; Start other pools
 ;
 
-[yves]
-listen = 127.0.0.1:9001
+[backendapi]
+listen = 127.0.0.1:9010
 pm = static
 pm.max_children = 1
 pm.start_servers = 1
 pm.process_idle_timeout = 2000s
 chdir = /
+pm.min_spare_servers = 0
+pm.max_spare_servers = 0
 
-; Note: Used only when pm is set to 'dynamic'
+[backendgateway]
+listen = 127.0.0.1:9020
+pm = static
+pm.max_children = 1
+pm.start_servers = 1
+pm.process_idle_timeout = 2000s
+chdir = /
+pm.min_spare_servers = 0
+pm.max_spare_servers = 0
+
+[backoffice]
+listen = 127.0.0.1:9030
+pm = static
+pm.max_children = 1
+pm.start_servers = 1
+pm.process_idle_timeout = 2000s
+chdir = /
 pm.min_spare_servers = 0
 pm.max_spare_servers = 0
 
 [glue]
-listen = 127.0.0.1:9002
+listen = 127.0.0.1:9040
 pm = static
 pm.max_children = 1
 pm.start_servers = 1
 pm.process_idle_timeout = 2000s
 chdir = /
-
-; Note: Used only when pm is set to 'dynamic'
 pm.min_spare_servers = 0
 pm.max_spare_servers = 0
 
-[zed]
-listen = 127.0.0.1:9003
+[yves]
+listen = 127.0.0.1:9050
 pm = static
 pm.max_children = 1
 pm.start_servers = 1
 pm.process_idle_timeout = 2000s
 chdir = /
-
-; Note: Used only when pm is set to 'dynamic'
 pm.min_spare_servers = 0
 pm.max_spare_servers = 0

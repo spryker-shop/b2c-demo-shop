@@ -39,8 +39,11 @@ $domain = getenv('VM_PROJECT') ?: 'suite';
 $storeLowerCase = strtolower(APPLICATION_STORE);
 $stores = array_combine(Store::getInstance()->getAllowedStores(), Store::getInstance()->getAllowedStores());
 $yvesHost = sprintf('www.%s.%s.local', $storeLowerCase, $domain);
-$glueHost = sprintf('glue.de.%s.local', $domain);
 $zedHost = sprintf('zed.%s.%s.local', $storeLowerCase, $domain);
+$glueHost = sprintf('glue.de.%s.local', $domain);
+$backofficeHost = sprintf('backoffice.%s.%s.local', $storeLowerCase, $domain);
+$backendApiHost = sprintf('backend-api.%s.%s.local', $storeLowerCase, $domain);
+$backendGatewayHost = sprintf('backend-gateway.%s.%s.local', $storeLowerCase, $domain);
 
 // ----------------------------------------------------------------------------
 // ------------------------------ CODEBASE ------------------------------------
@@ -89,8 +92,11 @@ $trustedHosts
     = $config[HttpConstants::ZED_TRUSTED_HOSTS]
     = $config[HttpConstants::YVES_TRUSTED_HOSTS]
     = [
-    $yvesHost,
     $zedHost,
+    $yvesHost,
+    $backofficeHost,
+    $backendApiHost,
+    $backendGatewayHost,
 ];
 
 $config[KernelConstants::DOMAIN_WHITELIST] = array_merge($trustedHosts, $config[KernelConstants::DOMAIN_WHITELIST]);
@@ -146,21 +152,23 @@ $config[PropelOrmConstants::PROPEL_SHOW_EXTENDED_EXCEPTION] = true;
 $config[LogConstants::LOG_LEVEL] = Logger::INFO;
 
 // ----------------------------------------------------------------------------
-// ------------------------------ ZED -----------------------------------------
+// ------------------------------ ZED (Gateway) -------------------------------
 // ----------------------------------------------------------------------------
 
 $config[ZedRequestConstants::ZED_API_SSL_ENABLED] = false;
 $config[ZedRequestConstants::HOST_ZED_API]
-    = $config[SessionConstants::ZED_SESSION_COOKIE_NAME]
+    = $backendGatewayHost;
+
+$config[SessionConstants::ZED_SESSION_COOKIE_NAME]
     = $config[SessionConstants::ZED_SESSION_COOKIE_DOMAIN]
-    = $zedHost;
+    = $backofficeHost;
 $config[ZedRequestConstants::BASE_URL_ZED_API] = sprintf(
     'http://%s',
-    $zedHost
+    $backendGatewayHost
 );
 $config[ZedRequestConstants::BASE_URL_SSL_ZED_API] = sprintf(
     'https://%s',
-    $zedHost
+    $backendGatewayHost
 );
 
 // ----------------------------------------------------------------------------
@@ -169,7 +177,7 @@ $config[ZedRequestConstants::BASE_URL_SSL_ZED_API] = sprintf(
 
 $config[ApplicationConstants::BASE_URL_ZED] = sprintf(
     'http://%s',
-    $zedHost
+    $backofficeHost
 );
 
 // ----------------------------------------------------------------------------

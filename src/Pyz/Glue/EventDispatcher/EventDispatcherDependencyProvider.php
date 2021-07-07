@@ -10,6 +10,7 @@ namespace Pyz\Glue\EventDispatcher;
 use Spryker\Glue\EventDispatcher\EventDispatcherDependencyProvider as SprykerEventDispatcherDependencyProvider;
 use Spryker\Glue\GlueApplication\Plugin\EventDispatcher\GlueRestControllerListenerEventDispatcherPlugin;
 use Spryker\Glue\Kernel\Plugin\EventDispatcher\AutoloaderCacheEventDispatcherPlugin;
+use Spryker\Zed\Monitoring\Communication\Plugin\EventDispatcher\GatewayMonitoringRequestTransactionEventDispatcherPlugin;
 use Spryker\Glue\Router\Plugin\EventDispatcher\RouterListenerEventDispatcherPlugin;
 use Spryker\Glue\Storage\Plugin\EventDispatcher\StorageKeyCacheEventDispatcherPlugin;
 use Spryker\Shared\Http\Plugin\EventDispatcher\ResponseListenerEventDispatcherPlugin;
@@ -27,6 +28,33 @@ class EventDispatcherDependencyProvider extends SprykerEventDispatcherDependency
             new AutoloaderCacheEventDispatcherPlugin(),
             new RouterListenerEventDispatcherPlugin(),
             new ResponseListenerEventDispatcherPlugin(),
+        ];
+    }
+
+    /**
+     * @return \Spryker\Shared\EventDispatcherExtension\Dependency\Plugin\EventDispatcherPluginInterface[]
+     */
+    protected function getBackendGatewayEventDispatcherPlugins(): array
+    {
+        return [
+            new GatewayMonitoringRequestTransactionEventDispatcherPlugin(),
+            new GatewayControllerEventDispatcherPlugin(),
+            new RouterListenerEventDispatcherPlugin(),
+            new ResponseListenerEventDispatcherPlugin(),
+            new AutoloaderCacheEventDispatcherPlugin(),
+        ];
+    }
+
+    /**
+     * @return \Spryker\Shared\EventDispatcherExtension\Dependency\Plugin\EventDispatcherPluginInterface[]
+     */
+    protected function getBackendApiEventDispatcherPlugins(): array
+    {
+        return [
+            new MonitoringRequestTransactionEventDispatcherPlugin(),
+            new RouterListenerEventDispatcherPlugin(),
+            new ResponseListenerEventDispatcherPlugin(),
+            new AutoloaderCacheEventDispatcherPlugin(),
         ];
     }
 }

@@ -11,5 +11,5 @@ use Spryker\Zed\SecurityGui\SecurityGuiConfig as SprykerSecurityGuiConfig;
 
 class SecurityGuiConfig extends SprykerSecurityGuiConfig
 {
-    protected const IGNORABLE_ROUTE_PATTERN = '^/(security-gui|health-check|_profiler/wdt)';
+    protected const IGNORABLE_ROUTE_PATTERN = '^/(security-gui|health-check|_profiler/wdt|api/rest/.+)';
 }

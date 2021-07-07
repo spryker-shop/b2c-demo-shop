@@ -7,9 +7,9 @@
 
 namespace Pyz\Zed\Router;
 
-use Spryker\Zed\Router\Communication\Plugin\Router\RouterEnhancer\BackwardsCompatibleUrlRouterEnhancerPlugin;
-use Spryker\Zed\Router\Communication\Plugin\Router\ZedDevelopmentRouterPlugin;
-use Spryker\Zed\Router\Communication\Plugin\Router\ZedRouterPlugin;
+use Spryker\Zed\Api\Communication\Plugin\Router\ApiRouterPlugin;
+use Spryker\Zed\Router\Communication\Plugin\Router\BackendGatewayRouterPlugin;
+use Spryker\Zed\Router\Communication\Plugin\Router\BackofficeRouterPlugin;
 use Spryker\Zed\Router\RouterDependencyProvider as SprykerRouterDependencyProvider;
 
 class RouterDependencyProvider extends SprykerRouterDependencyProvider
@@ -17,12 +17,30 @@ class RouterDependencyProvider extends SprykerRouterDependencyProvider
     /**
      * @return \Spryker\Zed\RouterExtension\Dependency\Plugin\RouterPluginInterface[]
      */
-    protected function getRouterPlugins(): array
+    protected function getBackofficeRouterPlugins(): array
     {
         return [
-            new ZedRouterPlugin(),
-            // This router will only be hit, when no other router was able to match/generate.
-            new ZedDevelopmentRouterPlugin(),
+            new BackofficeRouterPlugin(),
+        ];
+    }
+
+    /**
+     * @return \Spryker\Zed\RouterExtension\Dependency\Plugin\RouterPluginInterface[]
+     */
+    protected function getBackendGatewayRouterPlugins(): array
+    {
+        return [
+            new BackendGatewayRouterPlugin(),
+        ];
+    }
+
+    /**
+     * @return \Spryker\Zed\RouterExtension\Dependency\Plugin\RouterPluginInterface[]
+     */
+    protected function getBackendApiRouterPlugins(): array
+    {
+        return [
+            new ApiRouterPlugin(),
         ];
     }
 
