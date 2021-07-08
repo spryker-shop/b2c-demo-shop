@@ -58,7 +58,6 @@ class ApplicationDependencyProvider extends SprykerApplicationDependencyProvider
             new ErrorHandlerApplicationPlugin(),
             new FormApplicationPlugin(),
             new ValidatorApplicationPlugin(),
-            new GuiTableApplicationPlugin(),
             new SecurityApplicationPlugin(),
         ];
         if (class_exists(WebProfilerApplicationPlugin::class)) {
