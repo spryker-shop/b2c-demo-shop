@@ -7,9 +7,9 @@
 
 namespace Pyz\Zed\Router;
 
-use Spryker\Zed\Api\Communication\Plugin\Router\ApiRouterPlugin;
 use Spryker\Zed\Router\Communication\Plugin\Router\BackendGatewayRouterPlugin;
 use Spryker\Zed\Router\Communication\Plugin\Router\BackofficeRouterPlugin;
+use Spryker\Zed\Router\Communication\Plugin\Router\RouterEnhancer\BackwardsCompatibleUrlRouterEnhancerPlugin;
 use Spryker\Zed\Router\RouterDependencyProvider as SprykerRouterDependencyProvider;
 
 class RouterDependencyProvider extends SprykerRouterDependencyProvider
@@ -39,9 +39,7 @@ class RouterDependencyProvider extends SprykerRouterDependencyProvider
      */
     protected function getBackendApiRouterPlugins(): array
     {
-        return [
-            new ApiRouterPlugin(),
-        ];
+        return [];
     }
 
     /**
