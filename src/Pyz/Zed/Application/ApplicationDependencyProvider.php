@@ -20,7 +20,6 @@ use Spryker\Zed\Propel\Communication\Plugin\Application\PropelApplicationPlugin;
 use Spryker\Zed\Router\Communication\Plugin\Application\BackendApiRouterApplicationPlugin;
 use Spryker\Zed\Router\Communication\Plugin\Application\BackendGatewayRouterApplicationPlugin;
 use Spryker\Zed\Router\Communication\Plugin\Application\BackofficeRouterApplicationPlugin;
-use Spryker\Zed\Router\Communication\Plugin\Application\RouterApplicationPlugin;
 use Spryker\Zed\Security\Communication\Plugin\Application\SecurityApplicationPlugin;
 use Spryker\Zed\Session\Communication\Plugin\Application\MockArraySessionApplicationPlugin;
 use Spryker\Zed\Session\Communication\Plugin\Application\SessionApplicationPlugin;
