@@ -25,7 +25,6 @@
         <li class="{{ component.renderClass(config.name ~ '__item', modifiers) }}">
             {% block item %}
                 {% set fullIndex = loop.index ~ '-' ~ data.providerIndex %}
-
                 {{ form_row(data.form[key], {
                     label: data.form[key].vars.label,
                     required: false,
@@ -35,7 +34,6 @@
                     },
                     attributes: {
                         'target-class-name': data.targetClassName ? data.targetClassName ~ fullIndex,
-                        checked: choice.value == data.providerIndex,
                     },
                 }) }}
             {% endblock %}
