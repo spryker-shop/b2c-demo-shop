@@ -18,12 +18,14 @@
                     {% block body %}
                         {{ parent() }}
 
+                        {% set sku = data.sku %}
+
                         <div class="{{ config.name }}__actions-container">
                             {% include molecule('ajax-add-to-cart') with {
                                 data: {
-                                    url: data.sku ? (path('cart/add-ajax', {'sku': data.sku})),
+                                    url: sku ? (path('cart/add-ajax', {'sku': sku})),
                                     csrfToken: csrf_token('add-to-cart-ajax'),
-                                    extraAttributes: not data.sku ? {disabled: true},
+                                    extraAttributes: not sku ? {disabled: true},
                                     buttonText: 'page.detail.add-to-cart' | trans,
                                     iconName: '',
                                 },
