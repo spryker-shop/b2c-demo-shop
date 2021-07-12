@@ -214,7 +214,7 @@ $config[ZedRequestConstants::BASE_URL_SSL_ZED_API] = sprintf(
 
 $config[ApplicationConstants::BASE_URL_ZED] = sprintf(
     'http://%s',
-    $backendGatewayHost
+    $backofficeHost
 );
 
 // ----------------------------------------------------------------------------
