@@ -63,7 +63,6 @@ use Spryker\Zed\Log\Communication\Plugin\ZedLoggerConfigPlugin;
 use Spryker\Zed\Propel\PropelConfig;
 use SprykerShop\Shared\CustomerPage\CustomerPageConstants;
 use SprykerShop\Shared\ShopUi\ShopUiConstants;
-use Spryker\Shared\Agent\AgentConstants;
 
 // ############################################################################
 // ############################## PRODUCTION CONFIGURATION ####################
@@ -554,11 +553,6 @@ $config[TaxConstants::DEFAULT_TAX_RATE] = 19;
 // >>> Category
 $config[CategoryConstants::CATEGORY_READ_CHUNK] = 10000;
 $config[CategoryConstants::CATEGORY_IS_CLOSURE_TABLE_EVENTS_ENABLED] = false;
-
-// >>> Agent
-$config[AgentConstants::AGENT_ALLOWED_SECURED_PATTERN_LIST] = [
-    '|^(/en|/de)?/cart(?!/add)',
-];
 
 // >>> Product Label
 $config[ProductLabelConstants::PRODUCT_LABEL_TO_DE_ASSIGN_CHUNK_SIZE] = 1000;
