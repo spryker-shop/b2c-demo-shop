@@ -30,8 +30,15 @@
             <h4 class="title title--secondary-small">{{ 'checkout.step.summary.delivery_method' | trans }}</h4>
             <h4 class="title title--secondary-small spacing-bottom grid grid--justify grid--middle">
                 <span class="col col--sm-7">{{ data.shipment.method.carrierName | trans }}</span>
-                <span class="{{ config.name }}__logo col">
-                    <img class="{{ config.name }}__logo-image" src="{{ publicPath('images/shipment-' ~ data.shipment.method.carrierName | replace({' ': ''}) ~ '.png') }}" alt="{{ data.shipment.method.carrierName }}">
+                <span class="col">
+                    {% set deliveryLogoName =  data.shipment.method.carrierName | replace({' ': ''}) | lower ~ '-logo' %}
+                    {% include atom('icon') with {
+                        class: 'col',
+                        modifiers: [deliveryLogoName],
+                        data: {
+                            name: deliveryLogoName,
+                        },
+                    } only %}
                 </span>
             </h4>
             <div class="{{ config.name }}__text">{{ data.shipment.method.name }}: {{ data.shipment.method.storeCurrencyPrice | money(true, data.shipment.method.currencyIsoCode) }}</div>
