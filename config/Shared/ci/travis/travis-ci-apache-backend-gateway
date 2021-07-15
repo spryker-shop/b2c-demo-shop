@@ -1,0 +1,24 @@
+<VirtualHost *:80>
+
+  DocumentRoot %TRAVIS_BUILD_DIR%/public/BackendGateway
+  ServerName backend-gateway.de.spryker.test
+  SetEnv APPLICATION_ENV %APPLICATION_ENV%
+  SetEnv POSTGRES_PORT %POSTGRES_PORT%
+  SetEnv SPRYKER_TESTING_ENABLED 1
+
+  LogLevel debug
+  ErrorLog ${APACHE_LOG_DIR}/gateway-error.log
+
+  <Directory "%TRAVIS_BUILD_DIR%">
+      Options Indexes FollowSymLinks MultiViews ExecCGI
+      AllowOverride All
+      Order allow,deny
+      allow from all
+      Require all granted
+  </Directory>
+
+  AddHandler php7-fcgi .php
+  Action php7-fcgi /php7-fcgi-backend-gateway virtual
+  Alias /php7-fcgi-backend-gateway /usr/lib/cgi-bin/php7-fcgi-backend-gateway
+  FastCgiExternalServer /usr/lib/cgi-bin/php7-fcgi-backend-gateway -host 127.0.0.1:9020 -pass-header Authorization
+</VirtualHost>

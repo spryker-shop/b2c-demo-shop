@@ -107,7 +107,7 @@ $config[ConsoleConstants::ENABLE_DEVELOPMENT_CONSOLE_COMMANDS] = (bool)getenv('D
 // >>> ERROR HANDLING
 
 $config[ErrorHandlerConstants::YVES_ERROR_PAGE] = APPLICATION_ROOT_DIR . '/public/Yves/errorpage/5xx.html';
-$config[ErrorHandlerConstants::ZED_ERROR_PAGE] = APPLICATION_ROOT_DIR . '/public/Zed/errorpage/5xx.html';
+$config[ErrorHandlerConstants::ZED_ERROR_PAGE] = APPLICATION_ROOT_DIR . '/public/Backoffice/errorpage/5xx.html';
 $config[ErrorHandlerConstants::ERROR_RENDERER] = WebHtmlErrorRenderer::class;
 
 // >>> CMS
@@ -240,6 +240,12 @@ $config[AclConstants::ACL_DEFAULT_RULES] = [
         'bundle' => 'health-check',
         'controller' => 'index',
         'action' => 'index',
+        'type' => 'allow',
+    ],
+    [
+        'bundle' => 'api',
+        'controller' => 'rest',
+        'action' => '*',
         'type' => 'allow',
     ],
 ];
@@ -471,12 +477,12 @@ $config[FileManagerGuiConstants::DEFAULT_FILE_MAX_SIZE] = '10M';
 // ----------------------------------------------------------------------------
 
 $config[ZedRequestConstants::ZED_API_SSL_ENABLED] = (bool)getenv('SPRYKER_ZED_SSL_ENABLED');
-$zedDefaultPort = $config[ZedRequestConstants::ZED_API_SSL_ENABLED] ? 443 : 80;
-$zedPort = ((int)getenv('SPRYKER_ZED_PORT')) ?: $zedDefaultPort;
+$backofficeDefaultPort = $config[ZedRequestConstants::ZED_API_SSL_ENABLED] ? 443 : 80;
+$zedPort = ((int)getenv('SPRYKER_ZED_PORT')) ?: $backofficeDefaultPort;
 $config[ZedRequestConstants::HOST_ZED_API] = sprintf(
     '%s%s',
     getenv('SPRYKER_ZED_HOST') ?: 'not-configured-host',
-    $zedPort !== $zedDefaultPort ? ':' . $zedPort : ''
+    $zedPort !== $backofficeDefaultPort ? ':' . $zedPort : ''
 );
 $config[ZedRequestConstants::BASE_URL_ZED_API] = sprintf(
     'http://%s',
