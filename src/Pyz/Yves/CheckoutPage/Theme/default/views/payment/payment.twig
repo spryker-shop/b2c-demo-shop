@@ -27,6 +27,8 @@
         },
     } only %}
         {% block fieldset %}
+            {{ form_errors(data.form.paymentSelection) }}
+
             {% for name, choices in data.form.paymentSelection.vars.choices %}
                 {% set paymentProviderIndex = loop.index0 %}
 

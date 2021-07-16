@@ -48,6 +48,8 @@
                                     } only %}
 
                                     <div class="col col--sm-12 col--md-4 text-right">
+                                        <input type="hidden" value="{{ productSku }}" name="groupKey">
+                                        <input type="hidden" value="{{ data.product.promotionItem.discount.discountPromotion.idDiscountPromotion }}" name="idDiscountPromotion">
                                         <button class="button button--hollow button--promotion-item" {{ disabledAttribute }} data-init-single-click {{ qa('add-to-cart-button') }}>
                                             {{- 'page.detail.add-to-cart' | trans -}}
                                         </button>

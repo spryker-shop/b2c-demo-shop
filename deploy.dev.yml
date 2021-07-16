@@ -79,19 +79,37 @@ groups:
                         store: DE
                     glue.at.spryker.local:
                         store: AT
-            zed_eu:
-                application: zed
+            backoffice_eu:
+                application: backoffice
                 endpoints:
-                    zed.de.spryker.local:
+                    backoffice.de.spryker.local:
                         store: DE
                         services:
                             session:
                                 namespace: 3
-                    zed.at.spryker.local:
+                    backoffice.at.spryker.local:
                         store: AT
                         services:
                             session:
                                 namespace: 4
+            backend_gateway_eu:
+                application: backend-gateway
+                endpoints:
+                    backend-gateway.de.spryker.local:
+                        store: DE
+                        primal: true
+                    backend-gateway.at.spryker.local:
+                        store: AT
+                        primal: true
+            backend_api_eu:
+                application: zed
+                endpoints:
+                    backend-api.de.spryker.local:
+                        store: DE
+                        entry-point: BackendApi
+                    backend-api.at.spryker.local:
+                        store: AT
+                        entry-point: BackendApi
     US:
         region: US
         applications:
@@ -108,14 +126,24 @@ groups:
                 endpoints:
                     glue.us.spryker.local:
                         store: US
-            zed_us:
-                application: zed
+            backoffice_us:
+                application: backoffice
                 endpoints:
-                    zed.us.spryker.local:
+                    backoffice.us.spryker.local:
                         store: US
                         services:
                             session:
                                 namespace: 6
+            backend_gateway_us:
+                application: backend-gateway
+                endpoints:
+                    backend-gateway.us.spryker.local:
+                        store: US
+            backend_api_us:
+                application: zed
+                endpoints:
+                    backend-api.us.spryker.local:
+                        store: US
 services:
     database:
         engine: mysql
@@ -191,7 +219,7 @@ docker:
         docker-sync:
             platforms:
                 - windows
-                
+
         mutagen:
             platforms:
                 - macos
