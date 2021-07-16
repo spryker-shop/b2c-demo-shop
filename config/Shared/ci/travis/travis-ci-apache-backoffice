@@ -1,12 +1,13 @@
 <VirtualHost *:80>
 
-  DocumentRoot %TRAVIS_BUILD_DIR%/public/Zed
-  ServerName zed.de.spryker.test
+  DocumentRoot %TRAVIS_BUILD_DIR%/public/Backoffice
+  ServerName backoffice.de.spryker.test
   SetEnv APPLICATION_ENV %APPLICATION_ENV%
   SetEnv POSTGRES_PORT %POSTGRES_PORT%
   SetEnv SPRYKER_TESTING_ENABLED 1
 
-  ErrorLog /tmp/zed-error.log
+  LogLevel debug
+  ErrorLog ${APACHE_LOG_DIR}/zed-error.log
 
   <Directory "%TRAVIS_BUILD_DIR%">
       Options Indexes FollowSymLinks MultiViews ExecCGI
@@ -17,7 +18,7 @@
   </Directory>
 
   AddHandler php7-fcgi .php
-  Action php7-fcgi /php7-fcgi-zed virtual
-  Alias /php7-fcgi-zed /usr/lib/cgi-bin/php7-fcgi-zed
-  FastCgiExternalServer /usr/lib/cgi-bin/php7-fcgi-zed -host 127.0.0.1:9003 -pass-header Authorization
+  Action php7-fcgi /php7-fcgi-backoffice virtual
+  Alias /php7-fcgi-backoffice /usr/lib/cgi-bin/php7-fcgi-backoffice
+  FastCgiExternalServer /usr/lib/cgi-bin/php7-fcgi-backoffice -host 127.0.0.1:9030 -pass-header Authorization
 </VirtualHost>
