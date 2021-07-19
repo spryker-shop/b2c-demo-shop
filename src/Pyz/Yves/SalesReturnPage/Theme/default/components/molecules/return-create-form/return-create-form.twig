@@ -11,7 +11,7 @@
             label: 'return_page.create_return.select_all_checkbox' | trans,
         },
         attributes: {
-            'target-class-name': 'js-return-create__trigger-state-toggler',
+            'target-class-name': config.jsName ~ '__trigger-state-toggler',
         },
     } only %}
 
@@ -29,6 +29,7 @@
         },
         embed: {
             returnItem: returnItem,
+            parentJsName: config.jsName,
         },
     } only %}
         {% block checkboxColumn %}
@@ -37,7 +38,7 @@
                     {{ form_row(embed.returnItem.isReturnable, {
                         label: ' ',
                         attr: {
-                            class: 'js-return-create__trigger-state-toggler',
+                            class: embed.parentJsName ~ '__trigger-state-toggler',
                         },
                         disabled: not data.item.isReturnable,
                         attributes: {
@@ -190,9 +191,9 @@
          args [orderItems]
          use view('order-returnable-items-configured-bundle-widget', 'SalesConfigurableBundleWidget')
          with {
-         embed: {
-             form: data.form,
-         },
+           embed: {
+               form: data.form,
+           },
      } only %}
          {% block bundleItem %}
              {% embed molecule('ordered-configured-bundle', 'SalesConfigurableBundleWidget') ignore missing with {
