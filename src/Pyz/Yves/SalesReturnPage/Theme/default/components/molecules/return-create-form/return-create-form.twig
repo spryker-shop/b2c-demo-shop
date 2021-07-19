@@ -11,7 +11,7 @@
             label: 'return_page.create_return.select_all_checkbox' | trans,
         },
         attributes: {
-            'target-class-name': config.jsName ~ '__trigger-state-toggler',
+            'target-class-name': 'js-return-create__trigger-state-toggler',
         },
     } only %}
 
@@ -29,7 +29,6 @@
         },
         embed: {
             returnItem: returnItem,
-            parentJsName: config.jsName,
         },
     } only %}
         {% block checkboxColumn %}
@@ -38,7 +37,7 @@
                     {{ form_row(embed.returnItem.isReturnable, {
                         label: ' ',
                         attr: {
-                            class: embed.parentJsName ~ '__trigger-state-toggler',
+                            class: 'js-return-create__trigger-state-toggler',
                         },
                         disabled: not data.item.isReturnable,
                         attributes: {
