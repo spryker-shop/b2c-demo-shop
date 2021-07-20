@@ -8,6 +8,8 @@
     activePage: 'address',
 } %}
 
+{% set deleteAddressForm = data.customerDeleteFormClone %}
+
 {% block customerContent %}
 
     <div class="grid grid-justify">
@@ -20,7 +22,7 @@
                         },
                         embed: {
                             address: address,
-                            customerDeleteForm: data.customerDeleteFormClone
+                            customerDeleteForm: deleteAddressForm,
                         },
                     } only %}
                         {% block additionalContent %}
