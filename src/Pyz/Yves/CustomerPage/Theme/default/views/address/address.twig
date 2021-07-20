@@ -8,9 +8,9 @@
     activePage: 'address',
 } %}
 
-{% set deleteAddressForm = data.customerDeleteFormClone %}
 
 {% block customerContent %}
+    {% set deleteAddressForm = data.customerDeleteFormClone %}
 
     <div class="grid grid-justify">
         {% for address in data.addresses %}
@@ -18,7 +18,7 @@
                 <div class="box">
                     {% embed molecule('title-box', 'CustomerPage') with {
                         data: {
-                            title: data.activePage ~ loop.index
+                            title: data.activePage ~ loop.index,
                         },
                         embed: {
                             address: address,
