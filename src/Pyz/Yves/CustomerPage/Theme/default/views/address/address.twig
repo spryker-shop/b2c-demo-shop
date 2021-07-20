@@ -9,7 +9,6 @@
 } %}
 
 {% block customerContent %}
-    {% set deleteAddressForm = data.customerDeleteFormClone.getForm.createView %}
 
     <div class="grid grid-justify">
         {% for address in data.addresses %}
@@ -21,7 +20,7 @@
                         },
                         embed: {
                             address: address,
-                            deleteAddressForm: deleteAddressForm,
+                            customerDeleteForm: data.customerDeleteFormClone
                         },
                     } only %}
                         {% block additionalContent %}
@@ -35,7 +34,7 @@
                                 </li>
 
                                 <li class="menu__item">
-                                    {% set deleteForm = embed.deleteAddressForm %}
+                                    {% set deleteForm = embed.customerDeleteForm.getForm.createView %}
 
                                     {{ form_start(deleteForm, {'action': path('customer/address/delete', {'id': idCustomerAddress}) }) }}
                                         <button class="link link--darkest" data-init-single-click>{{ "customer.profile.address.delete" | trans }}</button>
