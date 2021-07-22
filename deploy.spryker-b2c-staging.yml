@@ -1,22 +1,11 @@
 version: "0.1"
 
-x-frontend-auth: &frontend-auth
-  auth:
-    engine: basic
-    users:
-      - username: cloud
-        password: cloud
-
-namespace: spryker-cloud
+namespace: beta-shop
 tag: '1.0'
 
 environment: docker.staging
 image:
-  tag: spryker/php:7.3-alpine3.12
-  php:
-    enabled-extensions:
-      - blackfire
-      - newrelic
+  tag: spryker/php:7.4-alpine3.13
 
 composer:
   mode: --no-dev
@@ -99,25 +88,19 @@ groups:
         endpoints:
           www.de.b2c.cloud.spryker.toys:
             store: DE
-            <<: *frontend-auth
           www.at.b2c.cloud.spryker.toys:
             store: AT
-            <<: *frontend-auth
           www.us.b2c.cloud.spryker.toys:
             store: US
-            <<: *frontend-auth
       Zed:
         application: zed
         endpoints:
           os.de.b2c.cloud.spryker.toys:
             store: DE
-            <<: *frontend-auth
           os.at.b2c.cloud.spryker.toys:
             store: AT
-            <<: *frontend-auth
           os.us.b2c.cloud.spryker.toys:
             store: US
-            <<: *frontend-auth
       Glue:
         application: glue
         endpoints:
@@ -129,13 +112,13 @@ groups:
             store: US
 services:
   database:
-    engine: mysql
-    version: mariadb-10.4
+    engine: postgres
+    version: 12
     root:
       username: "root"
       password: "secret"
     endpoints:
-      localhost:3306:
+      localhost:5432:
         protocol: tcp
   broker:
     engine: rabbitmq
@@ -159,6 +142,11 @@ services:
     endpoints:
       localhost:9200:
         protocol: tcp
+  kibana:
+    engine: kibana
+    version: 6.8
+    endpoints:
+      kibana.b2c.cloud.spryker.toys:
   scheduler:
     engine: jenkins
     endpoints:
@@ -171,11 +159,11 @@ services:
 docker:
 
   blackfire:
-    enabled: true
+    enabled: false
 
   ssl:
-    enabled: true
-    redirect: true
+    enabled: false
+    redirect: false
 
   debug:
     enabled: false
