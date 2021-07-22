@@ -396,7 +396,7 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
             if (class_exists(SecurityCheckerCommand::class)) {
                 $commands[] = new SecurityCheckerCommand();
             }
-            
+
             $commands[] = new MaintenanceEnableConsole();
             $commands[] = new MaintenanceDisableConsole();
         }
