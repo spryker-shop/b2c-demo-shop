@@ -1,0 +1,78 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "{{ .Values.components.cli.name }}"
+  labels:
+    heritage: {{ .Release.Service | quote }}
+    release: {{ .Release.Name | quote }}
+    chart: {{ template "spryker.chart" . }}
+    component: "{{ .Release.Name }}-{{ .Values.components.cli.name }}"
+spec:
+  replicas: 1
+  progressDeadlineSeconds: 60
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      release: {{ .Release.Name | quote }}
+      component: "{{ .Release.Name }}-{{ .Values.components.cli.name }}"
+
+  template:
+    metadata:
+      name: "{{ .Values.components.cli.name }}"
+      annotations:
+        rollme: {{ randAlphaNum 5 | quote }}
+      labels:
+        heritage: {{ .Release.Service | quote }}
+        release: {{ .Release.Name | quote }}
+        chart: {{ template "spryker.chart" . }}
+        component: "{{ .Release.Name }}-{{ .Values.components.cli.name }}"
+    spec:
+      containers:
+        - name: "{{ .Values.components.cli.name }}"
+          image: "{{ .Values.components.cli.container.image }}:{{ .Values.container.version }}"
+          imagePullPolicy: "{{ .Values.components.cli.container.imagePullPolicy }}"
+          command:
+            - node
+            - "/home/spryker/bin/cli-rpc.js"
+          ports:
+            - name: phpfpm
+              containerPort: {{ .Values.phpFpmPort }}
+          envFrom:
+            - configMapRef:
+                name: spryker-config-common
+            - secretRef:
+                name: spryker-zed-credentials
+          readinessProbe:
+            tcpSocket:
+              port: {{ .Values.phpFpmPort }}
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            failureThreshold: 6
+          livenessProbe:
+            tcpSocket:
+              port: {{ .Values.phpFpmPort }}
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            failureThreshold: 6
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: "{{ .Values.components.cli.name }}"
+  labels:
+    heritage: {{ .Release.Service | quote }}
+    release: {{ .Release.Name | quote }}
+    chart: {{ template "spryker.chart" . }}
+    component: "{{ .Release.Name }}-{{ .Values.components.cli.name }}"
+  annotations:
+    service.alpha.kubernetes.io/tolerate-unready-endpoints: "true"
+spec:
+  type: ClusterIP
+  ports:
+    - name: phpfpm-tcp
+      protocol: "TCP"
+      port: {{ .Values.phpFpmPort }}
+  selector:
+    component: "{{ .Release.Name }}-{{ .Values.components.cli.name }}"

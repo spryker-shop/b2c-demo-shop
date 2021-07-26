@@ -1,0 +1,35 @@
+apiVersion: v2
+name: Spryker
+version: "1.0.0"
+maintainers:
+  - name: Hieu Le
+    email: hieu.le@nfq.asia
+dependencies:
+  - name: redis
+    version: "10.6.12"
+    repository: "@bitnami"
+    alias: key-value-store
+  - name: redis
+    version: "10.6.12"
+    repository: "@bitnami"
+    alias: sessions
+  - name: postgresql
+    version: "10.6.0"
+    repository: "@bitnami"
+    alias: database
+  - name: pgadmin4
+    version: "1.7.0"
+    repository: "https://helm.runix.net"
+    alias: pgadmin
+  - name: rabbitmq
+    version: "8.18.1"
+    repository: "@bitnami"
+    alias: broker
+  - name: elasticsearch
+    version: "6.8.17"
+    repository: "https://helm.elastic.co"
+    alias: search
+  - name: kibana
+    version: "6.8.17"
+    repository: "https://helm.elastic.co"
+    alias: kibana

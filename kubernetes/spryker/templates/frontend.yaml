@@ -1,0 +1,141 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "{{ .Values.components.frontend.name }}"
+  labels:
+    heritage: {{ .Release.Service | quote }}
+    release: {{ .Release.Name | quote }}
+    chart: {{ template "spryker.chart" . }}
+    component: "{{ .Release.Name }}-{{ .Values.components.frontend.name }}"
+spec:
+  replicas: {{ .Values.components.frontend.replicas }}
+  progressDeadlineSeconds: 60
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      release: {{ .Release.Name | quote }}
+      component: "{{ .Release.Name }}-{{ .Values.components.frontend.name }}"
+
+  template:
+    metadata:
+      name: "{{ .Values.components.frontend.name }}"
+      annotations:
+        rollme: {{ randAlphaNum 5 | quote }}
+      labels:
+        heritage: {{ .Release.Service | quote }}
+        release: {{ .Release.Name | quote }}
+        chart: {{ template "spryker.chart" . }}
+        component: "{{ .Release.Name }}-{{ .Values.components.frontend.name }}"
+    spec:
+      containers:
+        - name: "{{ .Values.components.frontend.name }}"
+          image: "{{ .Values.components.frontend.container.image }}:{{ .Values.container.version }}"
+          imagePullPolicy: "{{ .Values.components.frontend.container.imagePullPolicy }}"
+          ports:
+            - name: http
+              containerPort: {{ .Values.components.frontend.container.port }}
+          resources:
+          {{- toYaml .Values.components.frontend.container.resources | nindent 12 }}
+          env:
+            - name: SPRYKER_NGINX_CGI_HOST_YVES_EU
+              value: "{{ .Values.components.yves.name }}"
+            - name: SPRYKER_NGINX_CGI_HOST_YVES_US
+              value: "{{ .Values.components.yves.name }}"
+            - name: SPRYKER_NGINX_CGI_HOST_GLUE_EU
+              value: "{{ .Values.components.yves.name }}"
+            - name: SPRYKER_NGINX_CGI_HOST_GLUE_US
+              value: "{{ .Values.components.yves.name }}"
+            - name: SPRYKER_NGINX_CGI_HOST_ZED_EU
+              value: "{{ .Values.components.zed.name }}"
+            - name: SPRYKER_NGINX_CGI_HOST_ZED_US
+              value: "{{ .Values.components.zed.name }}"
+            - name: SPRYKER_NGINX_CGI_HOST_BACKEND_GATEWAY_EU
+              value: "{{ .Values.components.yves.name }}"
+          # Use a readinessProbe to wait until nginx is ready to serve requests
+          readinessProbe:
+            httpGet:
+              scheme: HTTP
+              # Note: The path should not depend on any service.
+              # In this case, a 200 is returned directly when
+              # the Host header is omitted.
+              path: /
+              port: {{ .Values.components.frontend.container.port }}
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          # This check can be considered optional because it's very unlikely that nginx crashes.
+          livenessProbe:
+            httpGet:
+              scheme: HTTP
+              # Note: The path must NOT depend on any service.
+              # In this case, a 200 is returned directly when
+              # the Host header is omitted.
+              path: /
+              port: {{ .Values.components.frontend.container.port }}
+            initialDelaySeconds: 5
+            periodSeconds: 5
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: "{{ .Values.components.frontend.name }}-storefront"
+  labels:
+    heritage: {{ .Release.Service | quote }}
+    release: {{ .Release.Name | quote }}
+    chart: {{ template "spryker.chart" . }}
+    component: "{{ .Release.Name }}-{{ .Values.components.frontend.name }}"
+  annotations:
+    service.alpha.kubernetes.io/tolerate-unready-endpoints: "true"
+spec:
+  type: {{ .Values.components.frontend.service.type }}
+  ports:
+    - name: http
+      protocol: "TCP"
+      port: {{ .Values.components.frontend.container.port }}
+  selector:
+    component: "{{ .Release.Name }}-{{ .Values.components.frontend.name }}"
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: "{{ .Values.components.frontend.name }}-rpc"
+  labels:
+    heritage: {{ .Release.Service | quote }}
+    release: {{ .Release.Name | quote }}
+    chart: {{ template "spryker.chart" . }}
+    component: "{{ .Release.Name }}-{{ .Values.components.frontend.name }}"
+  annotations:
+    service.alpha.kubernetes.io/tolerate-unready-endpoints: "true"
+spec:
+  type: {{ .Values.components.frontend.service.type }}
+  ports:
+    - name: http
+      protocol: "TCP"
+      port: {{ .Values.components.frontend.container.port }}
+  selector:
+    component: "{{ .Release.Name }}-{{ .Values.components.frontend.name }}"
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: "{{ .Values.components.frontend.name }}-backoffice"
+  labels:
+    heritage: {{ .Release.Service | quote }}
+    release: {{ .Release.Name | quote }}
+    chart: {{ template "spryker.chart" . }}
+    component: "{{ .Release.Name }}-{{ .Values.components.frontend.name }}"
+  annotations:
+    service.alpha.kubernetes.io/tolerate-unready-endpoints: "true"
+spec:
+  type: {{ .Values.components.frontend.service.type }}
+  ports:
+    - name: http
+      protocol: "TCP"
+      port: {{ .Values.components.frontend.container.port }}
+  selector:
+    component: "{{ .Release.Name }}-{{ .Values.components.frontend.name }}"

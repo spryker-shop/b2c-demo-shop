@@ -1,0 +1,249 @@
+persistencePodsNodeSelector: &persistencePodsNodeSelector
+  kubernetes.io/hostname: beta
+
+global:
+  storageClass: &storageClass local-path
+  persistencePodsNodeSelector: *persistencePodsNodeSelector
+  stores:
+    - DE
+    - AT
+
+container:
+  # The version of spryker built containers
+  version: "1.0"
+
+# Port of php-fpm
+phpFpmPort: 9000
+
+ingressClassName: &ingressClassName traefik-lb
+
+components:
+  backendGateway:
+    # The name of the component
+    name: "backend-gateway"
+
+  broker:
+    name: &brokerName "broker"
+    host: *brokerName
+    port: "5672"
+    apiPort: "15672"
+
+  cli:
+    # The name of the component
+    name: "cli"
+    container:
+      # The container image for Yves
+      image: "registry.k8s.spryker-solution.nfq.internal/beta-shop_cli"
+      imagePullPolicy: "Always"
+      resources:
+        requests:
+          cpu: "250m"
+          memory: "128Mi"
+        limits:
+          memory: "256Mi"
+
+  database:
+    # The name of the component
+    name: &databaseName "database"
+
+  frontend:
+    # The name of the component
+    name: "frontend"
+    container:
+      image: "registry.k8s.spryker-solution.nfq.internal/beta-shop_frontend"
+      imagePullPolicy: "Always"
+      port: 80
+      resources:
+        requests:
+          cpu: "250m"
+          memory: "128Mi"
+        limits:
+          memory: "256Mi"
+    # The number of replicas for the deployment
+    replicas: 1
+    service:
+      type: ClusterIP
+
+  glue:
+    # The name of the component
+    name: "glue"
+
+  keyValueStore:
+    # The name of the component, as alias in the Chart file
+    name: &keyValueStoreName "key-value-store"
+
+  kibana:
+    name: &kibanaName "kibana"
+    endpoints:
+      - kibana.b2c.k8s.spryker-solution.nfq.internal
+
+  scheduler:
+    name: &schedulerName "scheduler"
+    port: "8080"
+    container:
+      image: "spryker/jenkins"
+      imageVersion: "2.176"
+      imagePullPolicy: "IfNotPresent"
+      resources:
+        requests:
+          cpu: "256m"
+          memory: "256Mi"
+        limits:
+          cpu: "1000m"
+          memory: "2Gi"
+    templatePath: "/home/spryker/jenkins.docker.xml.twig"
+    endpoints:
+      - scheduler.b2c.k8s.spryker-solution.nfq.internal
+    persistent:
+      size: 8Gi
+
+  search:
+    name: &searchName "search"
+
+  sessions:
+    # The name of the component, as alias in the Chart file
+    name: &sessionsName "sessions"
+
+  yves:
+    # The name of the component
+    name: "yves"
+    container:
+      # The container image for Yves
+      image: "registry.k8s.spryker-solution.nfq.internal/beta-shop_app"
+      imagePullPolicy: "Always"
+      resources:
+        requests:
+          cpu: "250m"
+          memory: "128Mi"
+        limits:
+          memory: "256Mi"
+    # The number of replicas for the deployment
+    replicas: 1
+    endpoints:
+      - www.de.b2c.k8s.spryker-solution.nfq.internal
+      - www.at.b2c.k8s.spryker-solution.nfq.internal
+
+  zed:
+    # The name of the component
+    name: "zed"
+    container:
+      # The container image for Yves
+      image: "registry.k8s.spryker-solution.nfq.internal/beta-shop_app"
+      imagePullPolicy: "Always"
+      resources:
+        requests:
+          cpu: "250m"
+          memory: "128Mi"
+        limits:
+          memory: "256Mi"
+    # The number of replicas for the deployment
+    replicas: 1
+    endpoints:
+      - os.de.b2c.k8s.spryker-solution.nfq.internal
+      - os.at.b2c.k8s.spryker-solution.nfq.internal
+
+credentials:
+  broker:
+    username: &brokerUsername spryker
+    password: &brokerPassword secret
+    apiUsername: *brokerUsername
+    apiPassword: *brokerPassword
+  database:
+    database: &databaseDbName eu-staging
+    username: &databaseUsername spryker
+    password: &databasePassword secret
+    rootUsername: &databaseRootUsername postgres
+    rootPassword: &databaseRootPassword secret
+
+key-value-store:
+  fullnameOverride: *keyValueStoreName
+  usePassword: false
+  cluster:
+    enabled: false
+  master:
+    nodeSelector: *persistencePodsNodeSelector
+
+sessions:
+  fullnameOverride: *sessionsName
+  usePassword: false
+  cluster:
+    enabled: false
+  master:
+    nodeSelector: *persistencePodsNodeSelector
+
+database:
+  fullnameOverride: *databaseName
+  postgresqlPostgresPassword: *databaseRootPassword
+  postgresqlUsername: *databaseUsername
+  postgresqlPassword: *databasePassword
+  primary:
+    nodeSelector: *persistencePodsNodeSelector
+
+pgadmin:
+  image:
+    tag: "5.5"
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: "traefik"
+      cert-manager.io/cluster-issuer: letsencrypt-prod
+    hosts:
+      - host: pgadmin.b2c.k8s.spryker-solution.nfq.internal
+        paths:
+          - path: "/"
+            pathType: Prefix
+    tls:
+      - hosts:
+          - pgadmin.b2c.k8s.spryker-solution.nfq.internal
+        secretName: pgadmin-beta-shop-tls
+  VolumePermissions:
+    enabled: true
+  persistentVolume:
+    enabled: false
+    size:  2Gi
+    storageClass: local-path
+  nodeSelector:
+    *persistencePodsNodeSelector
+
+broker:
+  fullnameOverride: *brokerName
+  nodeSelector: *persistencePodsNodeSelector
+  auth:
+    username: *brokerUsername
+    password: *brokerPassword
+    erlangCookie: "UvIcj2JH3ntFtUxoWomgOsNK0wAlVRmE"
+  replicaCount: 2
+  ingress:
+    enabled: true
+    hostname: broker.b2c.k8s.spryker-solution.nfq.internal
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-prod
+    ingressClassName: *ingressClassName
+    tls: true
+    certManager: true
+  extraEnvVarsSecret: rabbitmq-config
+  loadDefinition:
+    enabled: true
+    existingSecret: rabbitmq-config
+  extraConfiguration: |
+    load_definitions = /app/load_definition.json
+    log.connection.level = warning
+
+search:
+  fullnameOverride: *searchName
+  nodeSelector: *persistencePodsNodeSelector
+  replicas: 1
+  minimumMasterNodes: 1
+  persistence:
+    enabled: true
+  volumeClaimTemplate:
+    accessModes: [ "ReadWriteOnce" ]
+    storageClassName: *storageClass
+    resources:
+      requests:
+        storage: 30Gi
+
+kibana:
+  fullnameOverride: *kibanaName
+  elasticsearchHosts: "http://search:9200"
+

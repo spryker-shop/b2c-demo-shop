@@ -1,0 +1,110 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: jenkins-pvc
+spec:
+  storageClassName: {{ .Values.global.storageClass }}
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ .Values.components.scheduler.persistent.size }}
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "{{ .Values.components.scheduler.name }}"
+  labels:
+    heritage: {{ .Release.Service | quote }}
+    release: {{ .Release.Name | quote }}
+    chart: {{ template "spryker.chart" . }}
+    component: "{{ .Release.Name }}-{{ .Values.components.scheduler.name }}"
+spec:
+  replicas: 1
+  progressDeadlineSeconds: 60
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      release: {{ .Release.Name | quote }}
+      component: "{{ .Release.Name }}-{{ .Values.components.scheduler.name }}"
+
+  template:
+    metadata:
+      name: "{{ .Values.components.scheduler.name }}"
+      annotations:
+        rollme: {{ randAlphaNum 5 | quote }}
+      labels:
+        heritage: {{ .Release.Service | quote }}
+        release: {{ .Release.Name | quote }}
+        chart: {{ template "spryker.chart" . }}
+        component: "{{ .Release.Name }}-{{ .Values.components.scheduler.name }}"
+    spec:
+      nodeSelector: {{- toYaml .Values.global.persistencePodsNodeSelector | nindent 8 }}
+      containers:
+        - name: "{{ .Values.components.scheduler.name }}"
+          image: "{{ .Values.components.scheduler.container.image }}:{{ .Values.components.scheduler.container.imageVersion }}"
+          imagePullPolicy: "{{ .Values.components.scheduler.container.imagePullPolicy }}"
+          ports:
+            - name: jenkin
+              containerPort: {{ .Values.components.scheduler.port }}
+          volumeMounts:
+            - mountPath: /usr/bin/spryker.sh
+              name: spryker-entrypoint
+              subPath: spryker.sh
+            - mountPath: /var/jenkins_home
+              name: spryker-jenkins-data
+
+          resources:
+          {{- toYaml .Values.components.scheduler.container.resources | nindent 12 }}
+          readinessProbe:
+            tcpSocket:
+              port: {{ .Values.components.scheduler.port }}
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            failureThreshold: 6
+          livenessProbe:
+            tcpSocket:
+              port: {{ .Values.components.scheduler.port }}
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            failureThreshold: 6
+      initContainers:
+        - name: changeowner
+          image: bitnami/minideb:buster
+          command: ["sh", "-c", "chown -R 1000:1000 /data"]
+          volumeMounts:
+            - name: spryker-jenkins-data
+              mountPath: /data
+      volumes:
+        - name: spryker-entrypoint
+          configMap:
+            name: spryker-jenkins
+            items:
+              - key: spryker.sh
+                path: spryker.sh
+        - name: spryker-jenkins-data
+          persistentVolumeClaim:
+            claimName: jenkins-pvc
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: "{{ .Values.components.scheduler.name }}"
+  labels:
+    heritage: {{ .Release.Service | quote }}
+    release: {{ .Release.Name | quote }}
+    chart: {{ template "spryker.chart" . }}
+    component: "{{ .Release.Name }}-{{ .Values.components.scheduler.name }}"
+  annotations:
+    service.alpha.kubernetes.io/tolerate-unready-endpoints: "true"
+spec:
+  type: ClusterIP
+  ports:
+    - protocol: "TCP"
+      port: {{ .Values.components.scheduler.port }}
+  selector:
+    component: "{{ .Release.Name }}-{{ .Values.components.scheduler.name }}"

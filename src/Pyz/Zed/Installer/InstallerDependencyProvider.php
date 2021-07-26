@@ -43,8 +43,8 @@ class InstallerDependencyProvider extends SprykerInstallerDependencyProvider
             new ProductAlternativeProductLabelConnectorInstallerPlugin(), #ProductAlternativeFeature
             new ProductDiscontinuedProductLabelConnectorInstallerPlugin(), #ProductDiscontinuedFeature
             new SalesOrderThresholdTypeInstallerPlugin(), #SalesOrderThresholdFeature
-            new OauthClientInstallerPlugin(),
-            new OauthCustomerScopeInstallerPlugin(),
+//            new OauthClientInstallerPlugin(),
+//            new OauthCustomerScopeInstallerPlugin(),
         ];
     }
 }

@@ -6,6 +6,10 @@ tag: '1.0'
 environment: docker.staging
 image:
   tag: spryker/php:7.4-alpine3.13
+  php:
+    ini:
+      opcache.enable: 0
+      opcache.enable_cli: 0
 
 composer:
   mode: --no-dev
@@ -22,13 +26,12 @@ assets:
       level: 5
 
 regions:
-  DE:
+  EU:
     services:
       database:
-        database: spryker_staging
+        database: eu-staging
         username: spryker
         password: secret
-
     stores:
       DE:
         services:
@@ -50,66 +53,32 @@ regions:
             namespace: at_search
           session:
             namespace: 2
-      US:
-        services:
-          broker:
-            namespace: us_queue
-          key_value_store:
-            namespace: 1
-          search:
-            namespace: us_search
-          session:
-            namespace: 2
 
 groups:
-  DE-1:
-    region: DE
+  EU:
+    region: EU
     applications:
-      Redirects:
-        application: static
-        endpoints:
-          de.b2c.cloud.spryker.toys:
-            store: DE
-            redirect:
-              type: 302
-              url: www.de.b2c.cloud.spryker.toys
-          at.b2c.cloud.spryker.toys:
-            store: AT
-            redirect:
-              code: 302
-              url: www.at.b2c.cloud.spryker.toys
-          us.b2c.cloud.spryker.toys:
-            store: US
-            redirect:
-              code: 302
-              url: www.us.b2c.cloud.spryker.toys
-      Yves:
+      yves_eu:
         application: yves
         endpoints:
-          www.de.b2c.cloud.spryker.toys:
+          www.de.b2c.k8s.spryker-solution.nfq.internal:
             store: DE
-          www.at.b2c.cloud.spryker.toys:
+          www.at.b2c.k8s.spryker-solution.nfq.internal:
             store: AT
-          www.us.b2c.cloud.spryker.toys:
-            store: US
-      Zed:
+      zed_eu:
         application: zed
         endpoints:
-          os.de.b2c.cloud.spryker.toys:
+          os.de.b2c.k8s.spryker-solution.nfq.internal:
             store: DE
-          os.at.b2c.cloud.spryker.toys:
+          os.at.b2c.k8s.spryker-solution.nfq.internal:
             store: AT
-          os.us.b2c.cloud.spryker.toys:
-            store: US
-      Glue:
+      glue_eu:
         application: glue
         endpoints:
-          glue.de.b2c.cloud.spryker.toys:
+          glue.de.b2c.k8s.spryker-solution.nfq.internal:
             store: DE
-          glue.at.b2c.cloud.spryker.toys:
+          glue.at.b2c.k8s.spryker-solution.nfq.internal:
             store: AT
-          glue.us.b2c.cloud.spryker.toys:
-            store: US
 services:
   database:
     engine: postgres
@@ -126,7 +95,7 @@ services:
       username: "spryker"
       password: "secret"
     endpoints:
-      queue.b2c.cloud.spryker.toys:
+      queue.b2c.k8s.spryker-solution.nfq.internal:
       localhost:5672:
         protocol: tcp
   session:
@@ -146,15 +115,15 @@ services:
     engine: kibana
     version: 6.8
     endpoints:
-      kibana.b2c.cloud.spryker.toys:
+      kibana.b2c.k8s.spryker-solution.nfq.internal:
   scheduler:
     engine: jenkins
     endpoints:
-      scheduler.b2c.cloud.spryker.toys:
+      scheduler.b2c.k8s.spryker-solution.nfq.internal:
   mail_catcher:
     engine: mailhog
     endpoints:
-      mail.b2c.cloud.spryker.toys:
+      mail.b2c.k8s.spryker-solution.nfq.internal:
 
 docker:
 

@@ -1,0 +1,57 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: spryker-config-common
+data:
+  KUBE_NAMESPACE: "{{ .Release.Namespace }}"
+  SPRYKER_OAUTH_CLIENT_IDENTIFIER: "frontend"
+  SPRYKER_LOG_STDOUT: "php://stdout"
+  SPRYKER_LOG_STDERR: "php://stdout"
+  SPRYKER_BROKER_ENGINE: "rabbitmq"
+  SPRYKER_BROKER_API_HOST: {{ .Values.components.broker.host }}
+  SPRYKER_BROKER_API_PORT: {{ .Values.components.broker.apiPort | quote}}
+  SPRYKER_BROKER_HOST: {{ .Values.components.broker.host }}
+  SPRYKER_BROKER_PORT: {{ .Values.components.broker.port | quote }}
+  SPRYKER_KEY_VALUE_STORE_HOST: "{{ .Values.components.keyValueStore.name }}-master"
+  SPRYKER_KEY_VALUE_STORE_PORT: "6379"
+  SPRYKER_SEARCH_ENGINE: "ES"
+  SPRYKER_SEARCH_HOST: "search"
+  SPRYKER_SEARCH_PORT: "9200"
+  SPRYKER_SEARCH_INDEX_PREFIX: "beta-shop"
+  SPRYKER_SESSION_BE_HOST: "{{ .Values.components.sessions.name }}-master"
+  SPRYKER_SESSION_BE_PORT: "6379"
+  SPRYKER_DB_HOST: "{{ .Values.components.database.name }}"
+  SPRYKER_DB_PORT: "5432"
+  SPRYKER_DB_DATABASE: "eu-staging"
+  SPRYKER_DEBUG_ENABLED: "1"
+  SPRYKER_DEBUG_PROPEL_ENABLED: "1"
+  SPRYKER_SCHEDULER_HOST: {{ .Values.components.scheduler.name }}
+  SPRYKER_SCHEDULER_PORT: {{ .Values.components.scheduler.port | quote }}
+  SPRYKER_JENKINS_TEMPLATE_PATH: {{ .Values.components.scheduler.templatePath }}
+
+---
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: spryker-jenkins
+data:
+  spryker.sh: |-
+    #!/bin/bash
+
+    set -e
+
+    echo "> ${COMMAND}"
+
+    http_response=$(curl --request POST -LsS \
+    -o /dev/stderr \
+    -w "%{http_code}" \
+    --data "APPLICATION_STORE='${APPLICATION_STORE}' COMMAND='${COMMAND}' cli.sh" \
+    --max-time 1000 \
+    --url "http://cli:9000/console")
+
+    if [ "${http_response}" != "200" ]; then
+    exit 1
+    fi
+
+

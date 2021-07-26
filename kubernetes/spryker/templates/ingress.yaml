@@ -1,0 +1,72 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: spryker-ingress
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+spec:
+  ingressClassName: traefik-lb
+  tls:
+    - secretName: 'spryker-ingress-tls'
+      hosts:
+        {{- range .Values.components.yves.endpoints }}
+        - {{ . | quote }}
+        {{- end }}
+        {{- range .Values.components.zed.endpoints }}
+        - {{ . | quote }}
+        {{- end }}
+        {{- range .Values.components.kibana.endpoints }}
+        - {{ . | quote }}
+        {{- end }}
+        {{- range .Values.components.scheduler.endpoints }}
+        - {{ . | quote }}
+        {{- end }}
+  rules:
+    {{- range .Values.components.yves.endpoints }}
+    - host: {{ . | quote }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: "{{ $.Values.components.frontend.name }}-storefront"
+                port:
+                  number: 80
+    {{- end }}
+    {{- range .Values.components.zed.endpoints }}
+    - host: {{ . | quote }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: "{{ $.Values.components.frontend.name }}-backoffice"
+                port:
+                  number: 80
+    {{- end }}
+    {{- range .Values.components.kibana.endpoints }}
+    - host: {{ . | quote }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: "{{ $.Values.components.kibana.name }}"
+                port:
+                  number: 5601
+    {{- end }}
+    {{- range .Values.components.scheduler.endpoints }}
+    - host: {{ . | quote }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: "{{ $.Values.components.scheduler.name }}"
+                port:
+                  number: {{ $.Values.components.scheduler.port }}
+    {{- end }}
