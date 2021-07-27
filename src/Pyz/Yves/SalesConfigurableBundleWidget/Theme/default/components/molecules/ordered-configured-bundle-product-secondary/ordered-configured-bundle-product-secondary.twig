@@ -11,11 +11,13 @@
 
     <div class="col grid">
         <div class="col col--sm-12 grid grid--middle">
-            <div class="col">
-                {% block checkbox %}
-                    {% widget 'CustomerReorderItemCheckboxWidget' args [data.product] only %}{% endwidget %}
-                {% endblock %}
-            </div>
+            {% block imageContainer %}
+                <div class="col">
+                    {% block checkbox %}
+                        {% widget 'CustomerReorderItemCheckboxWidget' args [data.product] only %}{% endwidget %}
+                    {% endblock %}
+                </div>
+            {% endblock %}
 
             <div class="col {{ config.name }}__thumbnail-wrapper">
                 {% include molecule('product-image') with {
