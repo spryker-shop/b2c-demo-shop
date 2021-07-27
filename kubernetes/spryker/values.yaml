@@ -73,12 +73,24 @@ components:
     # The name of the component, as alias in the Chart file
     name: &keyValueStoreName "key-value-store"
     data:
-      namespace: "1"
+      namespace:
+        DE: 1
+        AT: 2
+
 
   kibana:
     name: &kibanaName "kibana"
     endpoints:
       - kibana.b2c.k8s.spryker-solution.nfq.internal
+
+  redisCommander:
+    name: &searchName "redis-commander"
+    port: 8081
+    container:
+      image: "rediscommander/redis-commander"
+      imageVersion: "latest"
+    endpoints:
+      - redis-commander.b2c.k8s.spryker-solution.nfq.internal
 
   scheduler:
     name: &schedulerName "scheduler"
@@ -107,7 +119,13 @@ components:
     # The name of the component, as alias in the Chart file
     name: &sessionsName "sessions"
     data:
-      namespace: "2"
+      namespace:
+        yves:
+          DE: 1
+          AT: 2
+        zed:
+          DE: 3
+          AT: 4
 
   yves:
     # The name of the component

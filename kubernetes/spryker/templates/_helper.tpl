@@ -158,3 +158,13 @@ SPRYKER_DB_PASSWORD: "{{ .Values.credentials.database.password }}"
 SPRYKER_DB_ROOT_USERNAME: "{{ .Values.credentials.database.rootUsername }}"
 SPRYKER_DB_ROOT_PASSWORD: "{{ .Values.credentials.database.rootPassword }}"
 {{- end -}}
+
+{{- define "redis-commander.hosts" -}}
+{{- $hosts := list -}}
+{{- range $store := .Values.global.stores -}}
+{{- $hosts = append $hosts (printf "kv-store-%s:%s-master:6379:%d" ( $store | lower) ($.Values.components.keyValueStore.name) (get $.Values.components.keyValueStore.data.namespace $store | int ) ) -}}
+{{- $hosts = append $hosts (printf "sessions-yves-%s:%s-master:6379:%d" ( $store | lower) ($.Values.components.sessions.name) (get $.Values.components.sessions.data.namespace.yves $store | int ) ) -}}
+{{- $hosts = append $hosts (printf "sessions-zed-%s:%s-master:6379:%d" ( $store | lower) ($.Values.components.sessions.name) (get $.Values.components.sessions.data.namespace.zed $store | int ) ) -}}
+{{- end -}}
+{{- $hosts | join "," -}}
+{{- end -}}

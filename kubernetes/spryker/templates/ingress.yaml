@@ -21,6 +21,9 @@ spec:
         {{- range .Values.components.scheduler.endpoints }}
         - {{ . | quote }}
         {{- end }}
+        {{- range .Values.components.redisCommander.endpoints }}
+        - {{ . | quote }}
+        {{- end }}
   rules:
     {{- range .Values.components.yves.endpoints }}
     - host: {{ . | quote }}
@@ -69,4 +72,16 @@ spec:
                 name: "{{ $.Values.components.scheduler.name }}"
                 port:
                   number: {{ $.Values.components.scheduler.port }}
+    {{- end }}
+    {{- range .Values.components.redisCommander.endpoints }}
+    - host: {{ . | quote }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: "{{ $.Values.components.redisCommander.name }}"
+                port:
+                  number: {{ $.Values.components.redisCommander.port }}
     {{- end }}

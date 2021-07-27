@@ -1,0 +1,74 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.components.redisCommander.name }}
+  labels:
+    heritage: {{ .Release.Service | quote }}
+    release: {{ .Release.Name | quote }}
+    chart: {{ template "spryker.chart" . }}
+    component: "{{ .Release.Name }}-{{ .Values.components.redisCommander.name }}"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      release: {{ .Release.Name | quote }}
+      component: "{{ .Release.Name }}-{{ .Values.components.redisCommander.name }}"
+  template:
+    metadata:
+      name: "{{ .Values.components.redisCommander.name }}"
+      annotations:
+        rollme: {{ randAlphaNum 5 | quote }}
+      labels:
+        heritage: {{ .Release.Service | quote }}
+        release: {{ .Release.Name | quote }}
+        chart: {{ template "spryker.chart" . }}
+        component: "{{ .Release.Name }}-{{ .Values.components.redisCommander.name }}"
+    spec:
+      containers:
+        - name: "{{ .Values.components.redisCommander.name }}"
+          image: "{{ .Values.components.redisCommander.container.image }}:{{ .Values.components.redisCommander.container.imageVersion }}"
+          imagePullPolicy: Always
+          env:
+            - name: REDIS_HOSTS
+              value: {{ include "redis-commander.hosts" . | quote }}
+            - name: K8S_SIGTERM
+              value: "1"
+          ports:
+            - name: redis-commander
+              containerPort: {{ .Values.components.redisCommander.port }}
+          livenessProbe:
+            httpGet:
+              path: /favicon.png
+              port: {{ .Values.components.redisCommander.port }}
+            initialDelaySeconds: 10
+            timeoutSeconds: 5
+          securityContext:
+            runAsNonRoot: true
+            readOnlyRootFilesystem: false
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: "{{ .Values.components.redisCommander.name }}"
+  labels:
+    heritage: {{ .Release.Service | quote }}
+    release: {{ .Release.Name | quote }}
+    chart: {{ template "spryker.chart" . }}
+    component: "{{ .Release.Name }}-{{ .Values.components.redisCommander.name }}"
+  annotations:
+    service.alpha.kubernetes.io/tolerate-unready-endpoints: "true"
+spec:
+  type: ClusterIP
+  ports:
+    - name: redis-commander
+      protocol: "TCP"
+      port: {{ .Values.components.redisCommander.port }}
+  selector:
+    component: "{{ .Release.Name }}-{{ .Values.components.redisCommander.name }}"

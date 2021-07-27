@@ -53,7 +53,8 @@ data:
     # Store specific variables
     APPLICATION_STORE={{- . }}
     SPRYKER_SEARCH_NAMESPACE={{- . | lower -}}_search
-    SPRYKER_KEY_VALUE_STORE_NAMESPACE={{- $.Values.components.keyValueStore.data.namespace | quote }}
+    SPRYKER_KEY_VALUE_STORE_NAMESPACE={{- get $.Values.components.keyValueStore.data.namespace . | quote }}
     SPRYKER_BROKER_NAMESPACE={{- . | lower -}}_queue
-    SPRYKER_SESSION_BE_NAMESPACE={{- $.Values.components.sessions.data.namespace | quote }}
+    SPRYKER_SESSION_BE_NAMESPACE={{- get $.Values.components.sessions.data.namespace.zed . | quote }}
+    SPRYKER_SESSION_FE_NAMESPACE={{- get $.Values.components.sessions.data.namespace.yves . | quote }}
   {{- end }}

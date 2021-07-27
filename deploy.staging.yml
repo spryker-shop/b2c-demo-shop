@@ -42,13 +42,13 @@ regions:
           search:
             namespace: de_search
           session:
-            namespace: 2
+            namespace: 1
       AT:
         services:
           broker:
             namespace: at_queue
           key_value_store:
-            namespace: 1
+            namespace: 2
           search:
             namespace: at_search
           session:
@@ -70,8 +70,14 @@ groups:
         endpoints:
           os.de.b2c.k8s.spryker-solution.nfq.internal:
             store: DE
+            services:
+              session:
+                namespace: 3
           os.at.b2c.k8s.spryker-solution.nfq.internal:
             store: AT
+            services:
+              session:
+                namespace: 4
       glue_eu:
         application: glue
         endpoints:

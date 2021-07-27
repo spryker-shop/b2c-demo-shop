@@ -8,7 +8,7 @@ CLI_POD=$(kubectl -n ${KUBE_NAMESPACE} get pod --selector component=spryker-cli 
 
 for STORE in "${STORES[@]}"
 do
-    kubectl -n ${KUBE_NAMESPACE} exec "${CLI_POD}" -- bash -c "APPLICATION_STORE=${STORE} vendor/bin/install -r ${SPRYKER_PIPELINE} -s init-storages"
+    kubectl -n ${KUBE_NAMESPACE} exec "${CLI_POD}" -- bash -c "APPLICATION_STORE=${STORE} vendor/bin/install -r ${SPRYKER_PIPELINE} -s init-storage"
 done
 
 STORE="${STORES[0]}"
