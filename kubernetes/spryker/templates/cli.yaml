@@ -40,8 +40,13 @@ spec:
           envFrom:
             - configMapRef:
                 name: spryker-config-common
+            - configMapRef:
+                name: spryker-config-cli
             - secretRef:
                 name: spryker-zed-credentials
+          volumeMounts:
+            - mountPath: /home/spryker/env
+              name: spryker-cli-env
           readinessProbe:
             tcpSocket:
               port: {{ .Values.phpFpmPort }}
@@ -54,6 +59,10 @@ spec:
             initialDelaySeconds: 10
             periodSeconds: 10
             failureThreshold: 6
+      volumes:
+        - name: spryker-cli-env
+          configMap:
+            name: spryker-cli-env
 
 ---
 

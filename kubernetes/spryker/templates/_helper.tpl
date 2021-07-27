@@ -116,3 +116,43 @@ Return the apiVersion of statefulset.
 app.gitlab.com/app: {{ .Values.global.GitLabAppName }}
 app.gitlab.com/env: {{ .Values.global.GitLabEnv }}
 {{- end -}}
+
+{{- define "env.common" -}}
+KUBE_NAMESPACE: "{{ .Release.Namespace }}"
+SPRYKER_OAUTH_CLIENT_IDENTIFIER: "frontend"
+SPRYKER_LOG_STDOUT: "php://stdout"
+SPRYKER_LOG_STDERR: "php://stdout"
+SPRYKER_BROKER_ENGINE: "rabbitmq"
+SPRYKER_BROKER_API_HOST: {{ .Values.components.broker.host }}
+SPRYKER_BROKER_API_PORT: {{ .Values.components.broker.apiPort | quote}}
+SPRYKER_BROKER_HOST: {{ .Values.components.broker.host }}
+SPRYKER_BROKER_PORT: {{ .Values.components.broker.port | quote }}
+SPRYKER_KEY_VALUE_STORE_HOST: "{{ .Values.components.keyValueStore.name }}-master"
+SPRYKER_KEY_VALUE_STORE_PORT: "6379"
+SPRYKER_SEARCH_ENGINE: "ES"
+SPRYKER_SEARCH_HOST: "search"
+SPRYKER_SEARCH_PORT: "9200"
+SPRYKER_SEARCH_INDEX_PREFIX: "beta-shop"
+SPRYKER_SESSION_BE_HOST: "{{ .Values.components.sessions.name }}-master"
+SPRYKER_SESSION_BE_PORT: "6379"
+SPRYKER_DB_HOST: "{{ .Values.components.database.name }}"
+SPRYKER_DB_PORT: "5432"
+SPRYKER_DB_DATABASE: "eu-staging"
+SPRYKER_DEBUG_ENABLED: "1"
+SPRYKER_DEBUG_PROPEL_ENABLED: "1"
+SPRYKER_SCHEDULER_HOST: {{ .Values.components.scheduler.name }}
+SPRYKER_SCHEDULER_PORT: {{ .Values.components.scheduler.port | quote }}
+SPRYKER_JENKINS_TEMPLATE_PATH: {{ .Values.components.scheduler.templatePath }}
+{{- end -}}
+
+{{- define "secrets.common" -}}
+SPRYKER_BROKER_CONNECTIONS: {{ include "brokerStoreEntries" . | quote }}
+SPRYKER_BROKER_API_USERNAME: {{ .Values.credentials.broker.apiUsername }}
+SPRYKER_BROKER_API_PASSWORD: {{ .Values.credentials.broker.password }}
+SPRYKER_BROKER_USERNAME: {{ .Values.credentials.broker.username }}
+SPRYKER_BROKER_PASSWORD: {{ .Values.credentials.broker.password }}
+SPRYKER_DB_USERNAME: "{{ .Values.credentials.database.username }}"
+SPRYKER_DB_PASSWORD: "{{ .Values.credentials.database.password }}"
+SPRYKER_DB_ROOT_USERNAME: "{{ .Values.credentials.database.rootUsername }}"
+SPRYKER_DB_ROOT_PASSWORD: "{{ .Values.credentials.database.rootPassword }}"
+{{- end -}}

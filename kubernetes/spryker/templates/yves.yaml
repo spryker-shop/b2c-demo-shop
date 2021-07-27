@@ -34,6 +34,9 @@ spec:
           ports:
             - name: phpfpm
               containerPort: {{ .Values.phpFpmPort }}
+          envFrom:
+            - configMapRef:
+                name: spryker-config-common
           resources:
           {{- toYaml .Values.components.yves.container.resources | nindent 12 }}
           readinessProbe:

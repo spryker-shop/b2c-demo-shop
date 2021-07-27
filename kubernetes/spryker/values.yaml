@@ -31,6 +31,7 @@ components:
   cli:
     # The name of the component
     name: "cli"
+    port: "9000"
     container:
       # The container image for Yves
       image: "registry.k8s.spryker-solution.nfq.internal/beta-shop_cli"
@@ -71,6 +72,8 @@ components:
   keyValueStore:
     # The name of the component, as alias in the Chart file
     name: &keyValueStoreName "key-value-store"
+    data:
+      namespace: "1"
 
   kibana:
     name: &kibanaName "kibana"
@@ -87,7 +90,7 @@ components:
       resources:
         requests:
           cpu: "256m"
-          memory: "256Mi"
+          memory: "512Mi"
         limits:
           cpu: "1000m"
           memory: "2Gi"
@@ -103,6 +106,8 @@ components:
   sessions:
     # The name of the component, as alias in the Chart file
     name: &sessionsName "sessions"
+    data:
+      namespace: "2"
 
   yves:
     # The name of the component
