@@ -6,13 +6,15 @@
 } %}
 
 {% define data = {
-    facets: []
+    facets: [],
+    filteredFacets: [],
 } %}
 
 {% block component %}
     {% set activeFilters = [] %}
+    {% set facets = data.filteredFacets is not empty ? data.filteredFacets : data.facets %}
 
-    {% for filter in data.facets %}
+    {% for filter in facets %}
         {% set activeFilter = include(
             [
                 molecule('active-filter-' ~ filter.config.name, 'CatalogPage'),
@@ -44,7 +46,7 @@
 
 {% block body %}
     <a class="{{ config.name }}__item {{ config.name }}__item--all" href="{{ generateUrlWithoutAllActiveSearchFilters(data.facets) }}">
-        {{ 'catalog.filter.resetAllFilters' | trans }} 
+        {{ 'catalog.filter.resetAllFilters' | trans }}
         {% include atom('icon') with {
             modifiers: ['medium', 'close-filter'],
             data: {

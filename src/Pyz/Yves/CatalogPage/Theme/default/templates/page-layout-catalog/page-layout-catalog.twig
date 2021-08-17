@@ -5,6 +5,7 @@
     facets: _view.facets,
     category: _view.category | default,
     categories: categories | default([]),
+    filteredFacets: _view.filteredFacets | default([]),
     filterPath: _view.filterPath | default,
     viewMode: _view.viewMode | default,
     title: _view.category.name | default,
@@ -94,6 +95,7 @@
                                 {% include organism('filter-section', 'CatalogPage') with {
                                     data: {
                                         facets: data.facets,
+                                        filteredFacets: data.filteredFacets,
                                         filterPath: data.filterPath,
                                         categories: data.categories,
                                         togglerClass: 'js-catalog-toggler-click__trigger',
@@ -127,7 +129,8 @@
                                     <div class="col col--sm-12">
                                         {% include organism('active-filter-section', 'CatalogPage') with {
                                             data: {
-                                                facets: data.facets
+                                                facets: data.facets,
+                                                filteredFacets: data.filteredFacets
                                             }
                                         } only %}
                                     </div>
