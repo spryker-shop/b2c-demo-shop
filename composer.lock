@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "74ab401524cb798208d21285386c225d",
+    "content-hash": "6ad8644118c3007ec0e18067ef59dd86",
     "packages": [
         {
             "name": "brick/math",
@@ -12512,16 +12512,16 @@
         },
         {
             "name": "spryker/carts-rest-api",
-            "version": "5.15.0",
+            "version": "5.17.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/carts-rest-api.git",
-                "reference": "482e37436a0e3caa04b013097025e295b24f6850"
+                "reference": "1812320b87365eaf561c5f1bbbb8a491bda9cd67"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/carts-rest-api/zipball/482e37436a0e3caa04b013097025e295b24f6850",
-                "reference": "482e37436a0e3caa04b013097025e295b24f6850",
+                "url": "https://api.github.com/repos/spryker/carts-rest-api/zipball/1812320b87365eaf561c5f1bbbb8a491bda9cd67",
+                "reference": "1812320b87365eaf561c5f1bbbb8a491bda9cd67",
                 "shasum": ""
             },
             "require": {
@@ -12531,6 +12531,7 @@
                 "spryker/carts-rest-api-extension": "^1.6.0",
                 "spryker/customers-rest-api-extension": "^1.2.0",
                 "spryker/glue-application": "^1.18.0",
+                "spryker/glue-application-authorization-connector-extension": "^1.0.0",
                 "spryker/glue-application-extension": "^1.0.0",
                 "spryker/kernel": "^3.30.0",
                 "spryker/persistent-cart": "^3.1.0",
@@ -12542,9 +12543,13 @@
                 "spryker/zed-request": "^3.6.0"
             },
             "require-dev": {
+                "spryker/calculation": "*",
                 "spryker/code-sniffer": "*",
                 "spryker/container": "*",
                 "spryker/customer": "*",
+                "spryker/price-cart-connector": "*",
+                "spryker/price-product": "*",
+                "spryker/product": "*",
                 "spryker/propel": "*",
                 "spryker/testify": "*"
             },
@@ -12570,9 +12575,9 @@
             ],
             "description": "CartsRestApi module",
             "support": {
-                "source": "https://github.com/spryker/carts-rest-api/tree/5.15.0"
+                "source": "https://github.com/spryker/carts-rest-api/tree/5.17.0"
             },
-            "time": "2021-05-28T14:12:02+00:00"
+            "time": "2021-08-12T15:14:01+00:00"
         },
         {
             "name": "spryker/carts-rest-api-extension",
@@ -21250,6 +21255,47 @@
                 "source": "https://github.com/spryker/glue-application/tree/1.33.0"
             },
             "time": "2021-06-24T12:53:04+00:00"
+        },
+        {
+            "name": "spryker/glue-application-authorization-connector-extension",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/glue-application-authorization-connector-extension.git",
+                "reference": "65313b896fdeccea2bdf3e517556586d694a7819"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/glue-application-authorization-connector-extension/zipball/65313b896fdeccea2bdf3e517556586d694a7819",
+                "reference": "65313b896fdeccea2bdf3e517556586d694a7819",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.3"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "GlueApplicationAuthorizationConnectorExtension module",
+            "support": {
+                "source": "https://github.com/spryker/glue-application-authorization-connector-extension/tree/1.0.0"
+            },
+            "time": "2021-08-06T12:09:29+00:00"
         },
         {
             "name": "spryker/glue-application-extension",
