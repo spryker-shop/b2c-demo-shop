@@ -217,8 +217,10 @@ class NavigationTreeCest
             ->getIdNavigationNode();
 
         $i->waitForNavigationTree();
-        $i->moveNavigationNode($idNavigationNode, $idTargetNavigationNode);
-        $i->seeNavigationNodeHierarchy($idTargetNavigationNode, $idNavigationNode);
+        $i->repeatUnstableActions(function () use ($i, $idNavigationNode, $idTargetNavigationNode) {
+            $i->moveNavigationNode($idNavigationNode, $idTargetNavigationNode);
+            $i->seeNavigationNodeHierarchy($idTargetNavigationNode, $idNavigationNode);
+        });
         $i->saveNavigationTreeOrder();
         $i->seeSuccessfulOrderSaveMessage(NavigationPage::MESSAGE_TREE_UPDATE_SUCCESS);
 
@@ -237,6 +239,7 @@ class NavigationTreeCest
          * TODO: once we have Selenium, enable this test case.
          */
         return;
+
 //        $i->wantTo('Remove child node.');
 //        $i->expect('Node should be removed from Zed.');
 //
