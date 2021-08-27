@@ -6,9 +6,8 @@ mailcatcher > /dev/null
 
 sudo apt-get -qqy install apache2 apache2-utils
 
-mkdir -p /tmp/ga/fastcgi && cd /tmp/ga/fastcgi
-wget http://mirrors.kernel.org/ubuntu/pool/multiverse/liba/libapache-mod-fastcgi/libapache2-mod-fastcgi_2.4.7~0910052141-1.2_amd64.deb
-sudo dpkg -i libapache2-mod-fastcgi_2.4.7~0910052141-1.2_amd64.deb
+sudo chmod u+x config/Shared/ci/travis/install_mod_fastcgi.sh
+config/Shared/ci/travis/install_mod_fastcgi.sh
 
 sudo chmod -R 755 $HOME
 sudo chmod 600 config/Zed/dev_only_private.key
