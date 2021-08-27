@@ -6,7 +6,6 @@ mailcatcher > /dev/null
 
 sudo apt-get -qqy install apache2 apache2-utils
 
-sudo chmod u+x config/Shared/ci/travis/install_mod_fastcgi.sh
 config/Shared/ci/travis/install_mod_fastcgi.sh
 
 sudo chmod -R 755 $HOME
