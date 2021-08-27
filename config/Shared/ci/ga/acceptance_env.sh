@@ -6,7 +6,7 @@ mailcatcher > /dev/null
 
 sudo apt-get -qqy install apache2 apache2-utils
 
-config/Shared/ci/travis/install_mod_fastcgi.sh
+config/Shared/ci/ga/install_mod_fastcgi.sh
 
 sudo chmod -R 755 $HOME
 sudo chmod 600 config/Zed/dev_only_private.key
