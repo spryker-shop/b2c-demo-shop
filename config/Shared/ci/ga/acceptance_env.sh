@@ -65,4 +65,4 @@ sudo apachectl configtest
 sudo service apache2 restart
 
 # install Chromium and Chromedriver symlinks
-sudo ln -s -f "$CHROMIUM_BINARY" /usr/local/bin/chrome
+sudo ln -s -f "$CHROMIUM_BINARY" /usr/local/bin/chromedriver
