@@ -1,4 +1,5 @@
 {% extends model('component') %}
+{% import _self as component %}
 
 {% define config = {
     name: 'customer-navigation',
@@ -45,6 +46,7 @@
                 modifiers: modifiers,
             },
         } only %}
+            {% import _self as component %}
             {% block component %}
                 <li class="{{ component.renderClass('menu__item', embed.modifiers) }} {{ embed.activeClass }}">
                     {{ parent() }}

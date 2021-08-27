@@ -13,9 +13,11 @@
 {%- endblock -%}
 
 {% block body %}
-    {% for button in data.buttons if button.text %}
-        <button class="{{ config.name }}__item {{ button.class | default }}">
-            {{ button.text }}
-        </button>
+    {% for button in data.buttons %}
+        {% if button.text %}
+            <button class="{{ config.name }}__item {{ button.class | default }}">
+                {{ button.text }}
+            </button>
+        {% endif %}
     {% endfor %}
 {% endblock %}

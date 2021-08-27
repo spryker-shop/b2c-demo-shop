@@ -6,7 +6,7 @@
 } %}
 
 {% define data = {
-    cartQuantity: app['cart.quantity'] | default,
+    cartQuantity: getCartQuantity() | default,
     showUserMenu: true
 } %}
 

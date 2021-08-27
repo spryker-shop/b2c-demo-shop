@@ -1,101 +1,113 @@
 sections:
     generate:
         generate-transfers:
-            command: "vendor/bin/console transfer:generate"
+            command: 'vendor/bin/console transfer:generate'
 
         generate-transfer-databuilders:
-            command: "vendor/bin/console transfer:databuilder:generate"
+            command: 'vendor/bin/console transfer:databuilder:generate'
 
         generate-ide-auto-completion:
-            command: "vendor/bin/console dev:ide-auto-completion:generate"
+            command: 'vendor/bin/console dev:ide-auto-completion:generate'
 
         rest-api-generate-documentation:
-            command: "vendor/bin/console rest-api:generate:documentation"
+            command: 'vendor/bin/console rest-api:generate:documentation'
 
     cache:
         router-cache-warmup-yves:
-            command: "vendor/bin/yves router:cache:warm-up"
+            command: 'vendor/bin/yves router:cache:warm-up'
 
-        router-cache-warmup-zed:
-            command: "vendor/bin/console router:cache:warm-up"
+        router-cache-warmup-backoffice:
+            command: 'vendor/bin/console router:cache:warm-up:backoffice'
+
+        router-cache-warmup-backend-gateway:
+            command: 'vendor/bin/console router:cache:warm-up:backend-gateway'
 
         twig-cache-warmup:
-            command: "vendor/bin/console twig:cache:warmer"
+            command: 'vendor/bin/console twig:cache:warmer'
 
         navigation-cache-warmup:
-            command: "vendor/bin/console navigation:build-cache"
+            command: 'vendor/bin/console navigation:build-cache'
 
         rest-request-validation-cache-warmup:
-            command: "vendor/bin/console rest-api:build-request-validation-cache"
+            command: 'vendor/bin/console rest-api:build-request-validation-cache'
 
-        resolvable-class-cache-warmup:
+        generate-page-source-map:
+            command: 'vendor/bin/console search:setup:source-map'
+
+        translator-generate-cache:
+            command: 'vendor/bin/console translator:generate-cache'
+
+        class-resolver-build:
             command: "vendor/bin/console cache:class-resolver:build"
 
     database-migrate:
+        queue-setup:
+            command: 'vendor/bin/console queue:setup'
+
         propel-create:
-            command: "vendor/bin/console propel:database:create"
+            command: 'vendor/bin/console propel:database:create'
 
         propel-postgres-compatibility:
-            command: "vendor/bin/console propel:pg-sql-compat"
+            command: 'vendor/bin/console propel:pg-sql-compat'
 
         propel-copy-schema:
-            command: "vendor/bin/console propel:schema:copy"
+            command: 'vendor/bin/console propel:schema:copy'
 
         propel-build:
-            command: "vendor/bin/console propel:model:build"
+            command: 'vendor/bin/console propel:model:build'
 
         propel-diff:
-            command: "vendor/bin/console propel:diff"
+            command: 'vendor/bin/console propel:diff'
 
         propel-migrate:
-            command: "vendor/bin/console propel:migrate"
+            command: 'vendor/bin/console propel:migrate'
 
         generate-entity-transfer:
-            command: "vendor/bin/console transfer:entity:generate"
+            command: 'vendor/bin/console transfer:entity:generate'
 
         init-database:
-            command: "vendor/bin/console setup:init-db"
+            command: 'vendor/bin/console setup:init-db'
 
         setup-search-create-sources:
-            command: "vendor/bin/console search:setup:sources"
+            command: 'vendor/bin/console search:setup:sources'
 
         setup-seach-create-source-map:
-            command: "vendor/bin/console search:setup:source-map"
+            command: 'vendor/bin/console search:setup:source-map'
 
     setup-test:
         codeception-build:
-            command: "vendor/bin/codecept build --ansi"
+            command: 'vendor/bin/codecept build --ansi'
 
         databuilder-generate:
-            command: "vendor/bin/console transfer:databuilder:generate"
+            command: 'vendor/bin/console transfer:databuilder:generate'
 
     demodata:
         import-eu-region-demodata:
-            command: "vendor/bin/console data:import --config=data/import/local/full_EU.yml"
+            command: 'vendor/bin/console data:import --config=data/import/local/full_EU.yml'
 
         update-product-labels:
-            command: "vendor/bin/console product-label:relations:update"
+            command: 'vendor/bin/console product-label:relations:update'
 
     fixtures:
         fixtures:
-            command: "vendor/bin/console code:fixtures"
+            command: 'vendor/bin/console code:fixtures'
 
     queue:
         run-worker:
-            command: "vendor/bin/console queue:worker:start --stop-when-empty"
+            command: 'vendor/bin/console queue:worker:start --stop-when-empty'
 
     frontend:
         dependencies-install:
-            command: "vendor/bin/console frontend:project:install-dependencies"
+            command: 'vendor/bin/console frontend:project:install-dependencies'
 
         yves-install-dependencies:
-            command: "vendor/bin/console frontend:yves:install-dependencies"
+            command: 'vendor/bin/console frontend:yves:install-dependencies'
 
         yves-build-frontend:
-            command: "vendor/bin/console frontend:yves:build"
+            command: 'vendor/bin/console frontend:yves:build'
 
         zed-install-dependencies:
-            command: "vendor/bin/console frontend:zed:install-dependencies"
+            command: 'vendor/bin/console frontend:zed:install-dependencies'
 
         zed-build-frontend:
-            command: "vendor/bin/console frontend:zed:build"
+            command: 'vendor/bin/console frontend:zed:build'

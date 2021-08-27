@@ -23,6 +23,7 @@ class SalesOrderThresholdGuiDependencyProvider extends SprykerSalesOrderThreshol
     {
         return [
             new GlobalHardThresholdFormExpanderPlugin(),
+            new GlobalHardMaximumThresholdFormExpanderPlugin(),
             new GlobalSoftThresholdWithMessageFormExpanderPlugin(),
             new GlobalSoftThresholdFixedFeeFormExpanderPlugin(),
             new GlobalSoftThresholdFlexibleFeeFormExpanderPlugin(),

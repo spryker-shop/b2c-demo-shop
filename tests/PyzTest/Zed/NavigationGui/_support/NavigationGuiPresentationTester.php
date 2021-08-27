@@ -9,6 +9,7 @@ namespace PyzTest\Zed\NavigationGui;
 
 use Codeception\Actor;
 use Codeception\Scenario;
+use Exception;
 use Generated\Shared\Transfer\NavigationTransfer;
 use Generated\Shared\Transfer\NavigationTreeNodeTransfer;
 use Generated\Shared\Transfer\NavigationTreeTransfer;
@@ -241,7 +242,7 @@ class NavigationGuiPresentationTester extends Actor
             self::NODE_CHILD_SELECTOR,
             $idParentNavigationNode,
             $idChildNavigationNode
-        ));
+        ), 1);
     }
 
     /**
@@ -519,5 +520,30 @@ class NavigationGuiPresentationTester extends Actor
         }
 
         return $localeUrls;
+    }
+
+    /**
+     * @param callable $callable
+     * @param int $maxCount
+     * @param bool $verbose
+     *
+     * @return void
+     */
+    public function repeatUnstableActions(callable $callable, int $maxCount = 10, bool $verbose = false): void
+    {
+        $count = 0;
+
+        while ($count < $maxCount) {
+            try {
+                $callable();
+
+                break;
+            } catch (Exception $exception) {
+                $count++;
+                if ($verbose) {
+                    echo "Try: {$count}: ";
+                }
+            }
+        }
     }
 }

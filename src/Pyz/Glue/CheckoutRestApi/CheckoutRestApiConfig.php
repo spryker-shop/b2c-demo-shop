@@ -28,8 +28,14 @@ class CheckoutRestApiConfig extends SprykerCheckoutRestApiConfig
      */
     protected const DUMMY_PAYMENT_PROVIDER_NAME = 'DummyPayment';
 
+    /**
+     * @uses \Spryker\Shared\DummyPayment\DummyPaymentConfig::PAYMENT_METHOD_NAME_INVOICE
+     */
     protected const DUMMY_PAYMENT_PAYMENT_METHOD_NAME_INVOICE = 'Invoice';
 
+    /**
+     * @uses \Spryker\Shared\DummyPayment\DummyPaymentConfig::PAYMENT_METHOD_NAME_CREDIT_CARD
+     */
     protected const DUMMY_PAYMENT_PAYMENT_METHOD_NAME_CREDIT_CARD = 'Credit Card';
 
     /**
@@ -45,7 +51,7 @@ class CheckoutRestApiConfig extends SprykerCheckoutRestApiConfig
     protected const IS_PAYMENT_PROVIDER_METHOD_TO_STATE_MACHINE_MAPPING_ENABLED = false;
 
     /**
-     * @return array
+     * @return string[][]
      */
     public function getPaymentProviderMethodToStateMachineMapping(): array
     {
@@ -69,6 +75,14 @@ class CheckoutRestApiConfig extends SprykerCheckoutRestApiConfig
      * @return bool
      */
     public function isPaymentProvidersMappedToAttributes(): bool
+    {
+        return false;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAddressesMappedToAttributes(): bool
     {
         return false;
     }

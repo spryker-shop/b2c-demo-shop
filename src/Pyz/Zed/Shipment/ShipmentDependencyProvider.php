@@ -16,9 +16,9 @@ class ShipmentDependencyProvider extends SprykerShipmentDependencyProvider
     /**
      * @param \Spryker\Zed\Kernel\Container $container
      *
-     * @return array
+     * @return \Spryker\Zed\ShipmentExtension\Dependency\Plugin\ShipmentMethodAvailabilityPluginInterface[]|\Spryker\Zed\Shipment\Communication\Plugin\ShipmentMethodAvailabilityPluginInterface[]
      */
-    protected function getAvailabilityPlugins(Container $container)
+    protected function getAvailabilityPlugins(Container $container): array
     {
         return [];
     }
@@ -26,9 +26,9 @@ class ShipmentDependencyProvider extends SprykerShipmentDependencyProvider
     /**
      * @param \Spryker\Zed\Kernel\Container $container
      *
-     * @return array
+     * @return \Spryker\Zed\ShipmentExtension\Dependency\Plugin\ShipmentMethodPricePluginInterface[]|\Spryker\Zed\Shipment\Communication\Plugin\ShipmentMethodPricePluginInterface[]
      */
-    protected function getPricePlugins(Container $container)
+    protected function getPricePlugins(Container $container): array
     {
         return [];
     }
@@ -36,9 +36,9 @@ class ShipmentDependencyProvider extends SprykerShipmentDependencyProvider
     /**
      * @param \Spryker\Zed\Kernel\Container $container
      *
-     * @return array
+     * @return \Spryker\Zed\ShipmentExtension\Dependency\Plugin\ShipmentMethodDeliveryTimePluginInterface[]|\Spryker\Zed\Shipment\Communication\Plugin\ShipmentMethodDeliveryTimePluginInterface[]
      */
-    protected function getDeliveryTimePlugins(Container $container)
+    protected function getDeliveryTimePlugins(Container $container): array
     {
         return [];
     }
@@ -48,7 +48,7 @@ class ShipmentDependencyProvider extends SprykerShipmentDependencyProvider
      *
      * @return \Spryker\Zed\ShipmentExtension\Dependency\Plugin\ShipmentMethodFilterPluginInterface[]
      */
-    protected function getMethodFilterPlugins(Container $container)
+    protected function getMethodFilterPlugins(Container $container): array
     {
         return [
             new GiftCardShipmentGroupMethodFilterPlugin(),

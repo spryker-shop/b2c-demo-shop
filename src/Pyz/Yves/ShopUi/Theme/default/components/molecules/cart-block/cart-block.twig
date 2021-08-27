@@ -5,8 +5,8 @@
 } %}
 
 {% define data = {
-    quote: app['quote'],
-    cartItems: app['cartItems'],
+    quote: getQuote(),
+    cartItems: getCartItems(),
 } %}
 
 {% block body %}
@@ -26,45 +26,48 @@
         {% set productBundleItemCounterWidget = findWidget('ProductBundleItemCounterWidget', [data.quote]) %}
         {% set transformedCartItems = productBundleItemCounterWidget.items | default(data.cartItems) %}
 
-        {% for item in transformedCartItems if not item.configuredBundleItem %}
-            {% embed molecule('product-card-item') with {
-                modifiers: ['mini-cart', 'readonly'],
-                data: {
-                    productItem: item
-                }
-            } only %}
-                {% block options %}
-                    {% set optionPrice = 0 %}
+        {% for item in transformedCartItems %}
+            {% if not item.configuredBundleItem %}
+                {% embed molecule('product-card-item') with {
+                    modifiers: ['mini-cart', 'readonly'],
+                    data: {
+                        productItem: item,
+                    },
+                } only %}
+                    {% import _self as component %}
+                    {% block options %}
+                        {% set optionPrice = 0 %}
 
-                    {% for option in data.productItem.productOptions %}
-                        {% set optionPrice = optionPrice + option.unitPrice %}
-                    {% endfor %}
+                        {% for option in data.productItem.productOptions %}
+                            {% set optionPrice = optionPrice + option.unitPrice %}
+                        {% endfor %}
 
-                    {% if optionPrice %}
-                        <div class="grid grid--middle grid--justify {{ component.renderClass(config.name ~ '__option', modifiers) }}">
-                            <span class="col">
-                                {{ 'cart.product-option' | trans }}:
-                            </span>
-                            <span class="col">{{ optionPrice | money }}</span>
-                        </div>
-                    {% endif %}
+                        {% if optionPrice %}
+                            <div class="grid grid--middle grid--justify {{ component.renderClass(config.name ~ '__option', modifiers) }}">
+                                <span class="col">
+                                    {{ 'cart.product-option' | trans }}:
+                                </span>
+                                <span class="col">{{ optionPrice | money }}</span>
+                            </div>
+                        {% endif %}
 
-                    {% for attributeName, attribute in data.productItem.concreteAttributes %}
+                        {% for attributeName, attribute in data.productItem.concreteAttributes %}
+                            <div class="{{ component.renderClass(config.name ~ '__option', modifiers) }}">
+                                {{ ('product.attribute.' ~ attributeName) | trans }}: {{ attribute }}
+                            </div>
+                        {% endfor %}
+                    {% endblock %}
+
+                    {% block quantity %}
                         <div class="{{ component.renderClass(config.name ~ '__option', modifiers) }}">
-                            {{ ('product.attribute.' ~ attributeName) | trans }}: {{ attribute }}
+                            {{ 'cart.item_quantity' | trans }}: {{ data.productItem.quantity }}
                         </div>
-                    {% endfor %}
-                {% endblock %}
+                    {% endblock %}
 
-                {% block quantity %}
-                    <div class="{{ component.renderClass(config.name ~ '__option', modifiers) }}">
-                        {{ 'cart.item_quantity' | trans }}: {{ data.productItem.quantity }}
-                    </div>
-                {% endblock %}
-
-                {% block bundles %}{% endblock %}
-                {% block summary %}{% endblock %}
-            {% endembed %}
+                    {% block bundles %}{% endblock %}
+                    {% block summary %}{% endblock %}
+                {% endembed %}
+            {% endif %}
         {% endfor %}
 
         {% if data.quote.totals.discounttotal %}

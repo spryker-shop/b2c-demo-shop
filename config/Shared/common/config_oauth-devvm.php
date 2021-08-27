@@ -1,7 +1,7 @@
 <?php
 
-use Spryker\Shared\Auth\AuthConstants;
 use Spryker\Shared\Oauth\OauthConstants;
+use Spryker\Shared\SecuritySystemUser\SecuritySystemUserConstants;
 
 // ----------------------------------------------------------------------------
 // ------------------------------ AUTHENTICATION ------------------------------
@@ -15,4 +15,4 @@ $config[OauthConstants::ENCRYPTION_KEY] = 'lxZFUEsBCJ2Yb14IF2ygAHI5N4+ZAUXXaSeeJ
 $config[OauthConstants::OAUTH_CLIENT_IDENTIFIER] = 'frontend';
 $config[OauthConstants::OAUTH_CLIENT_SECRET] = 'abc123';
 
-$config[AuthConstants::AUTH_DEFAULT_CREDENTIALS]['yves_system']['token'] = 'JDJ5JDEwJFE0cXBwYnVVTTV6YVZXSnVmM2l1UWVhRE94WkQ4UjBUeHBEWTNHZlFRTEd4U2F6QVBqejQ2';
+$config[SecuritySystemUserConstants::AUTH_DEFAULT_CREDENTIALS]['yves_system']['token'] = 'JDJ5JDEwJFE0cXBwYnVVTTV6YVZXSnVmM2l1UWVhRE94WkQ4UjBUeHBEWTNHZlFRTEd4U2F6QVBqejQ2';

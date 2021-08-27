@@ -1,5 +1,10 @@
 {% extends view('payment', '@SprykerShop:CheckoutPage') %}
 
+{# customForms data property is necessary for Eco payments integrations #}
+{% define data = {
+    customForms: {},
+} %}
+
 {% block content %}
     {% embed molecule('form') with {
         modifiers: ['checkout-actions', 'checkout-form-elements'],
@@ -17,8 +22,13 @@
                 class: 'form__action--checkout button button--hollow button--expand',
             },
         },
+        embed: {
+            customForms: data.customForms,
+        },
     } only %}
         {% block fieldset %}
+            {{ form_errors(data.form.paymentSelection) }}
+
             {% for name, choices in data.form.paymentSelection.vars.choices %}
                 {% set paymentProviderIndex = loop.index0 %}
 
@@ -61,6 +71,7 @@
                             },
                         },
                         embed: {
+                            customForms: embed.customForms,
                             index: loop.index ~ '-' ~ paymentProviderIndex,
                             toggler: data.form.paymentSelection[key],
                         },
@@ -68,7 +79,16 @@
                         {% block fieldset %}
                             <div class="js-payment-method-{{ embed.index }} {% if embed.index != '1-0' %} is-hidden{% endif %}">
                                 <h2 class="title title--primary">{{ embed.toggler.vars.label | trans }}</h2>
-                                {{ parent() }}
+
+                                {% if embed.customForms[data.form.vars.template_path] is not defined %}
+                                    {{ parent() }}
+                                {% else %}
+                                    {% set viewName = embed.customForms[data.form.vars.template_path] | first %}
+                                    {% set moduleName = embed.customForms[data.form.vars.template_path] | last %}
+                                    {% include view(viewName, moduleName) ignore missing with {
+                                        form: data.form.parent,
+                                    } only %}
+                                {% endif %}
                             </div>
                         {% endblock %}
                     {% endembed %}

@@ -32,10 +32,11 @@ use Spryker\Shared\ZedRequest\ZedRequestConstants;
 $domain = getenv('VM_PROJECT') ?: 'suite';
 $storeLowerCase = strtolower(APPLICATION_STORE);
 $stores = array_combine(Store::getInstance()->getAllowedStores(), Store::getInstance()->getAllowedStores());
-$yvesHost = sprintf('www-test.%s.%s.local', $storeLowerCase, $domain);
+$backendApiHost = sprintf('backend-api-test.%s.%s.local', $storeLowerCase, $domain);
+$backendGatewayHost = sprintf('backend-gateway-test.%s.%s.local', $storeLowerCase, $domain);
+$backofficeHost = sprintf('backoffice-test.%s.%s.local', $storeLowerCase, $domain);
 $glueHost = sprintf('glue-test.de.%s.local', $domain);
-$zedHost = sprintf('zed-test.%s.%s.local', $storeLowerCase, $domain);
-
+$yvesHost = sprintf('www-test.%s.%s.local', $storeLowerCase, $domain);
 // ----------------------------------------------------------------------------
 // ------------------------------ CODEBASE ------------------------------------
 // ----------------------------------------------------------------------------
@@ -74,7 +75,9 @@ $trustedHosts
     = $config[HttpConstants::YVES_TRUSTED_HOSTS]
     = [
     $yvesHost,
-    $zedHost,
+    $backofficeHost,
+    $backendGatewayHost,
+    $backendApiHost,
     'localhost',
 ];
 
@@ -134,21 +137,21 @@ $config[RabbitMqEnv::RABBITMQ_CONNECTIONS] = array_map(static function ($storeNa
 $config[LogConstants::LOG_LEVEL] = Logger::CRITICAL;
 
 // ----------------------------------------------------------------------------
-// ------------------------------ ZED -----------------------------------------
+// ------------------------------ ZED (Gateway)--------------------------------
 // ----------------------------------------------------------------------------
 
 $config[ZedRequestConstants::ZED_API_SSL_ENABLED] = false;
-$config[ZedRequestConstants::HOST_ZED_API]
-    = $config[SessionConstants::ZED_SESSION_COOKIE_NAME]
+$config[ZedRequestConstants::HOST_ZED_API] = $backendGatewayHost;
+$config[SessionConstants::ZED_SESSION_COOKIE_NAME]
     = $config[SessionConstants::ZED_SESSION_COOKIE_DOMAIN]
-    = $zedHost;
+    = $backofficeHost;
 $config[ZedRequestConstants::BASE_URL_ZED_API] = sprintf(
     'http://%s',
-    $zedHost
+    $backendGatewayHost
 );
 $config[ZedRequestConstants::BASE_URL_SSL_ZED_API] = sprintf(
     'https://%s',
-    $zedHost
+    $backendGatewayHost
 );
 
 // ----------------------------------------------------------------------------
@@ -157,7 +160,7 @@ $config[ZedRequestConstants::BASE_URL_SSL_ZED_API] = sprintf(
 
 $config[ApplicationConstants::BASE_URL_ZED] = sprintf(
     'http://%s',
-    $zedHost
+    $backofficeHost
 );
 
 // ----------------------------------------------------------------------------

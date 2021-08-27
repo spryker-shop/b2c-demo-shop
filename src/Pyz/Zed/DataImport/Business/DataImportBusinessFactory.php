@@ -227,7 +227,7 @@ class DataImportBusinessFactory extends SprykerDataImportBusinessFactory
      */
     public function createDataImporterConditional($importType, DataReaderInterface $reader)
     {
-        return new DataImporterConditional($importType, $reader);
+        return new DataImporterConditional($importType, $reader, $this->getGracefulRunnerFacade());
     }
 
     /**
@@ -692,8 +692,10 @@ class DataImportBusinessFactory extends SprykerDataImportBusinessFactory
      *
      * @return \Pyz\Zed\DataImport\Business\Model\Navigation\NavigationKeyToIdNavigationStep
      */
-    protected function createNavigationKeyToIdNavigationStep($source = NavigationKeyToIdNavigationStep::KEY_SOURCE, $target = NavigationKeyToIdNavigationStep::KEY_TARGET)
-    {
+    protected function createNavigationKeyToIdNavigationStep(
+        $source = NavigationKeyToIdNavigationStep::KEY_SOURCE,
+        $target = NavigationKeyToIdNavigationStep::KEY_TARGET
+    ) {
         return new NavigationKeyToIdNavigationStep($source, $target);
     }
 
@@ -1378,7 +1380,7 @@ class DataImportBusinessFactory extends SprykerDataImportBusinessFactory
      */
     public function createDataImporterWriterAwareConditional($importType, DataReaderInterface $reader)
     {
-        return new DataImporterDataSetWriterAwareConditional($importType, $reader);
+        return new DataImporterDataSetWriterAwareConditional($importType, $reader, $this->getGracefulRunnerFacade());
     }
 
     /**

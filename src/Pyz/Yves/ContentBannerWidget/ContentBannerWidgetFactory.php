@@ -7,9 +7,9 @@
 
 namespace Pyz\Yves\ContentBannerWidget;
 
-use Pyz\Yves\ContentBannerWidget\Twig\ContentBannerTwigFunction;
+use Pyz\Yves\ContentBannerWidget\Twig\ContentBannerTwigFunctionProvider;
+use Spryker\Shared\Twig\TwigFunctionProvider;
 use SprykerShop\Yves\ContentBannerWidget\ContentBannerWidgetFactory as SprykerContentBannerWidgetFactory;
-use SprykerShop\Yves\ContentBannerWidget\Twig\ContentBannerTwigFunction as SprykerShopContentBannerTwigFunction;
 use Twig\Environment;
 
 class ContentBannerWidgetFactory extends SprykerContentBannerWidgetFactory
@@ -18,11 +18,11 @@ class ContentBannerWidgetFactory extends SprykerContentBannerWidgetFactory
      * @param \Twig\Environment $twig
      * @param string $localeName
      *
-     * @return \Pyz\Yves\ContentBannerWidget\Twig\ContentBannerTwigFunction
+     * @return \Spryker\Shared\Twig\TwigFunctionProvider
      */
-    public function createContentBannerTwigFunction(Environment $twig, string $localeName): SprykerShopContentBannerTwigFunction
+    public function createContentBannerTwigFunctionProvider(Environment $twig, string $localeName): TwigFunctionProvider
     {
-        return new ContentBannerTwigFunction(
+        return new ContentBannerTwigFunctionProvider(
             $twig,
             $localeName,
             $this->getContentBannerClient()

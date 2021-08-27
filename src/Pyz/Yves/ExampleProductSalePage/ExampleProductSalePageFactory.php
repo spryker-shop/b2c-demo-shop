@@ -12,11 +12,11 @@ use Spryker\Yves\Kernel\AbstractFactory;
 class ExampleProductSalePageFactory extends AbstractFactory
 {
     /**
-     * @return \Spryker\Client\Search\SearchClientInterface
+     * @return string[]
      */
-    protected function getSearchClient()
+    public function getExampleProductSalePageWidgetPlugins(): array
     {
-        return $this->getProvidedDependency(ExampleProductSalePageDependencyProvider::CLIENT_SEARCH);
+        return $this->getProvidedDependency(ExampleProductSalePageDependencyProvider::PLUGIN_PRODUCT_SALE_PAGE_WIDGETS);
     }
 
     /**
