@@ -156,8 +156,6 @@ use SprykerSdk\Spryk\Console\SprykBuildConsole;
 use SprykerSdk\Spryk\Console\SprykDumpConsole;
 use SprykerSdk\Spryk\Console\SprykRunConsole;
 use SprykerSdk\Zed\ComposerConstrainer\Communication\Console\ComposerConstraintConsole;
-use SprykerSdk\Zed\Integrator\Communication\Console\ManifestGeneratorConsole;
-use SprykerSdk\Zed\Integrator\Communication\Console\ModuleInstallerConsole;
 use Stecman\Component\Symfony\Console\BashCompletion\CompletionCommand;
 
 /**
