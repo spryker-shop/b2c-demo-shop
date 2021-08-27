@@ -390,9 +390,6 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
             $commands[] = new SprykBuildConsole();
             $commands[] = new ComposerConstraintConsole();
 
-            $commands[] = new ModuleInstallerConsole();
-            $commands[] = new ManifestGeneratorConsole();
-
             if (class_exists(SecurityCheckerCommand::class)) {
                 $commands[] = new SecurityCheckerCommand();
             }
