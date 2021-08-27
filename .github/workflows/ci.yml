@@ -329,5 +329,5 @@ jobs:
             - run: docker/sdk boot deploy.yml
             - run: SPRYKER_BUILD_HASH=myhash docker/sdk export images
             - run: docker run -t --rm -e SPRYKER_NGINX_CGI_HOST_YVES_EU=localhost -e SPRYKER_NGINX_CGI_HOST_ZED_EU=localhost -e SPRYKER_NGINX_CGI_HOST_GLUE_EU=localhost -e SPRYKER_NGINX_CGI_HOST_YVES_US=localhost -e SPRYKER_NGINX_CGI_HOST_GLUE_US=localhost -e SPRYKER_NGINX_CGI_HOST_ZED_US=localhost -e ALLOWED_IP=127.0.0.1 spryker_b2c_frontend:1.0-frontend nginx -t
-            - run: docker run -t --rm --entrypoint='' spryker_b2b_frontend:1.0-frontend ls -al /data/public/Yves/assets/myhash
-            - run: docker run -t --rm --entrypoint='' spryker_b2b_frontend:1.0-frontend ls -al /data/public/Zed/assets/
+            - run: docker run -t --rm --entrypoint='' spryker_b2c_frontend:1.0-frontend ls -al /data/public/Yves/assets/myhash
+            - run: docker run -t --rm --entrypoint='' spryker_b2c_frontend:1.0-frontend ls -al /data/public/Zed/assets/
