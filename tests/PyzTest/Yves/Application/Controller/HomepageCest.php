@@ -5,9 +5,9 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-namespace PyzTest\Yves\Application\Communication\Controller;
+namespace PyzTest\Yves\Application\Controller;
 
-use PyzTest\Yves\Application\ApplicationCommunicationTester;
+use PyzTest\Yves\Application\ApplicationControllerTester;
 use PyzTest\Yves\Application\PageObject\Homepage;
 
 /**
@@ -16,7 +16,6 @@ use PyzTest\Yves\Application\PageObject\Homepage;
  * @group PyzTest
  * @group Yves
  * @group Application
- * @group Communication
  * @group Controller
  * @group HomepageCest
  * Add your own group annotations below this line
@@ -24,14 +23,14 @@ use PyzTest\Yves\Application\PageObject\Homepage;
 class HomepageCest
 {
     /**
-     * @param \PyzTest\Yves\Application\ApplicationCommunicationTester $i
+     * @param \PyzTest\Yves\Application\ApplicationControllerTester $i
      *
      * @return void
      */
-    public function testICanOpenHomepage(ApplicationCommunicationTester $i)
+    public function testICanOpenHomepage(ApplicationControllerTester $i)
     {
         $i->wantTo('See that i can open the homepage');
         $i->amOnPage(Homepage::URL);
-        $i->canSeeElement(['class' => '__page']);
+        $i->canSeeElement('[data-qa="page"]');
     }
 }

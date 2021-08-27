@@ -25,9 +25,9 @@ use Codeception\Actor;
  *
  * @SuppressWarnings(PHPMD)
  */
-class ApplicationCommunicationTester extends Actor
+class ApplicationControllerTester extends Actor
 {
-    use _generated\ApplicationCommunicationTesterActions;
+    use _generated\ApplicationControllerTesterActions;
 
    /**
     * Define custom actions here
