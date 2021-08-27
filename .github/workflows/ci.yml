@@ -88,6 +88,7 @@ jobs:
                     --health-retries 5
         steps:
             - uses: actions/checkout@v2
+            - uses: nanasess/setup-chromedriver@master
             - uses: shivammathur/setup-php@v2
               with:
                   php-version: '7.4'
@@ -109,8 +110,10 @@ jobs:
               run: config/Shared/ci/ga/acceptance_env.sh
             - name: 'Install project'
               run: vendor/bin/install DE -r ci
-            - name: 'Run phantomjs'
-              run: timeout 45m bash -c "vendor/bin/phantomjs --webdriver=4444 --disk-cache=true --load-images=false --webdriver-logfile=/tmp/phantomjs.log --webdriver-loglevel=DEBUG">/dev/null &
+            - run: |
+                  export DISPLAY=:99
+                  chromedriver --url-base=/wd/hub &
+                  sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & # optional
             - name: 'Run tests'
               env:
                   POSTGRES_PASSWORD: ${{ secrets.DB_PASSWORD }}
@@ -182,6 +185,7 @@ jobs:
                     - 6379:6379
         steps:
             - uses: actions/checkout@v2
+            - uses: nanasess/setup-chromedriver@master
             - uses: shivammathur/setup-php@v2
               with:
                   php-version: '7.3'
@@ -210,8 +214,10 @@ jobs:
               run: vendor/bin/install DE -r ci
             - name: 'Configure acceptance env'
               run: config/Shared/ci/ga/acceptance_env.sh
-            - name: 'Run phantomjs'
-              run: timeout 45m bash -c "vendor/bin/phantomjs --webdriver=4444 --disk-cache=true --load-images=false --webdriver-logfile=/tmp/phantomjs.log --webdriver-loglevel=DEBUG">/dev/null &
+            - run: |
+                export DISPLAY=:99
+                chromedriver --url-base=/wd/hub &
+                sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & # optional
             - name: 'Run tests'
               env:
                   MYSQL_PASSWORD: ${{ secrets.DB_PASSWORD }}

@@ -64,5 +64,5 @@ sudo apachectl configtest
 
 sudo service apache2 restart
 
-# codeception
-wget https://raw.github.com/Codeception/c3/2.0/c3.php > /dev/null
+# install Chromium and Chromedriver symlinks
+sudo ln -s -f "$CHROMIUM_BINARY" /usr/local/bin/chrome
