@@ -7,7 +7,6 @@
 
 namespace Pyz\Zed\Search;
 
-use Spryker\Zed\ConfigurableBundlePageSearch\Communication\Plugin\Search\ConfigurableBundleTemplatePageMapPlugin;
 use Spryker\Zed\Search\SearchDependencyProvider as SprykerSearchDependencyProvider;
 use Spryker\Zed\SearchElasticsearch\Communication\Plugin\Search\ElasticsearchIndexInstallerPlugin;
 use Spryker\Zed\SearchElasticsearch\Communication\Plugin\Search\ElasticsearchIndexMapInstallerPlugin;
@@ -31,16 +30,6 @@ class SearchDependencyProvider extends SprykerSearchDependencyProvider
     {
         return [
             new ElasticsearchIndexMapInstallerPlugin(),
-        ];
-    }
-
-    /**
-     * @return \Spryker\Zed\Search\Dependency\Plugin\PageMapInterface[]
-     */
-    protected function getSearchPageMapPlugins()
-    {
-        return [
-            new ConfigurableBundleTemplatePageMapPlugin(),
         ];
     }
 }

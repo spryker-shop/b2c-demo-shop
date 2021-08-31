@@ -20,7 +20,7 @@ class CmsGuiDependencyProvider extends SprykerCmsGuiDependencyProvider
     /**
      * @return \Spryker\Zed\CmsGui\Dependency\Plugin\CmsPageTableExpanderPluginInterface[]
      */
-    protected function getCmsPageTableExpanderPlugins()
+    protected function getCmsPageTableExpanderPlugins(): array
     {
         return [
             new CmsPageTableExpanderPlugin(),
@@ -30,7 +30,7 @@ class CmsGuiDependencyProvider extends SprykerCmsGuiDependencyProvider
     /**
      * @return \Spryker\Zed\CmsGui\Dependency\Plugin\CreateGlossaryExpanderPluginInterface[]
      */
-    protected function getCreateGlossaryExpanderPlugins()
+    protected function getCreateGlossaryExpanderPlugins(): array
     {
         return [
             new CreateGlossaryExpanderPlugin(),

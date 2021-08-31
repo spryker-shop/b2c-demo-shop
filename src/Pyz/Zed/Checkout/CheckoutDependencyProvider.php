@@ -14,29 +14,33 @@ use Spryker\Zed\Customer\Communication\Plugin\Checkout\CustomerOrderSavePlugin;
 use Spryker\Zed\Customer\Communication\Plugin\CustomerPreConditionCheckerPlugin;
 use Spryker\Zed\Discount\Communication\Plugin\Checkout\DiscountOrderSavePlugin;
 use Spryker\Zed\Discount\Communication\Plugin\Checkout\VoucherDiscountMaxUsageCheckoutPreConditionPlugin;
-use Spryker\Zed\GiftCard\Communication\Plugin\GiftCardOrderItemSaverPlugin;
+use Spryker\Zed\DummyPayment\Communication\Plugin\Checkout\DummyPaymentCheckoutPostSavePlugin;
+use Spryker\Zed\DummyPayment\Communication\Plugin\Checkout\DummyPaymentCheckoutPreConditionPlugin;
+use Spryker\Zed\GiftCard\Communication\Plugin\Checkout\GiftCardCheckoutDoSaveOrderPlugin;
+use Spryker\Zed\GiftCard\Communication\Plugin\Checkout\GiftCardCheckoutPreConditionPlugin;
 use Spryker\Zed\GiftCardMailConnector\Communication\Plugin\Checkout\SendEmailToGiftCardUser;
 use Spryker\Zed\Kernel\Container;
+use Spryker\Zed\Nopayment\Communication\Plugin\Checkout\NopaymentCheckoutPreConditionPlugin;
 use Spryker\Zed\Payment\Communication\Plugin\Checkout\PaymentMethodValidityCheckoutPreConditionPlugin;
-use Spryker\Zed\Payment\Communication\Plugin\Checkout\PaymentOrderSaverPlugin;
-use Spryker\Zed\Payment\Communication\Plugin\Checkout\PaymentPostCheckPlugin;
-use Spryker\Zed\Payment\Communication\Plugin\Checkout\PaymentPreCheckPlugin;
 use Spryker\Zed\ProductBundle\Communication\Plugin\Checkout\ProductBundleAvailabilityCheckoutPreConditionPlugin;
 use Spryker\Zed\ProductBundle\Communication\Plugin\Checkout\ProductBundleOrderSaverPlugin;
 use Spryker\Zed\ProductDiscontinued\Communication\Plugin\Checkout\ProductDiscontinuedCheckoutPreConditionPlugin;
 use Spryker\Zed\ProductOption\Communication\Plugin\Checkout\ProductOptionOrderSaverPlugin;
-use Spryker\Zed\Sales\Communication\Plugin\Checkout\SalesOrderSaverPlugin;
+use Spryker\Zed\Sales\Communication\Plugin\Checkout\DuplicateOrderCheckoutPreConditionPlugin;
+use Spryker\Zed\Sales\Communication\Plugin\Checkout\OrderItemsSaverPlugin;
+use Spryker\Zed\Sales\Communication\Plugin\Checkout\OrderSaverPlugin;
+use Spryker\Zed\Sales\Communication\Plugin\Checkout\OrderTotalsSaverPlugin;
 use Spryker\Zed\Sales\Communication\Plugin\SalesOrderExpanderPlugin;
 use Spryker\Zed\SalesOrderThreshold\Communication\Plugin\Checkout\SalesOrderThresholdCheckoutPreConditionPlugin;
 use Spryker\Zed\SalesOrderThreshold\Communication\Plugin\Checkout\SalesOrderThresholdExpenseSavePlugin;
-use Spryker\Zed\SalesProductConnector\Communication\Plugin\Checkout\ItemMetadataSaverPlugin;
-use Spryker\Zed\Shipment\Communication\Plugin\Checkout\OrderShipmentSavePlugin;
+use Spryker\Zed\SalesPayment\Communication\Plugin\Checkout\SalesPaymentCheckoutDoSaveOrderPlugin;
+use Spryker\Zed\Shipment\Communication\Plugin\Checkout\SalesOrderShipmentSavePlugin;
 use Spryker\Zed\ShipmentCheckoutConnector\Communication\Plugin\Checkout\ShipmentCheckoutPreCheckPlugin;
 
 class CheckoutDependencyProvider extends SprykerCheckoutDependencyProvider
 {
     /**
-     * @param \Spryker\Zed\Kernel\Container $container ’
+     * @param \Spryker\Zed\Kernel\Container $container
      *
      * @return \Spryker\Zed\CheckoutExtension\Dependency\Plugin\CheckoutPreConditionPluginInterface[]
      */
@@ -46,49 +50,60 @@ class CheckoutDependencyProvider extends SprykerCheckoutDependencyProvider
             new CustomerPreConditionCheckerPlugin(),
             new ProductsAvailableCheckoutPreConditionPlugin(),
             new ProductBundleAvailabilityCheckoutPreConditionPlugin(),
-            new PaymentPreCheckPlugin(),
+            new GiftCardCheckoutPreConditionPlugin(),
+            new NopaymentCheckoutPreConditionPlugin(),
+            new DummyPaymentCheckoutPreConditionPlugin(),
+            new ShipmentCheckoutPreCheckPlugin(),
             new ProductDiscontinuedCheckoutPreConditionPlugin(), #ProductDiscontinuedFeature
             new SalesOrderThresholdCheckoutPreConditionPlugin(), #SalesOrderThresholdFeature
             new VoucherDiscountMaxUsageCheckoutPreConditionPlugin(),
             new ShipmentCheckoutPreCheckPlugin(),
             new PaymentMethodValidityCheckoutPreConditionPlugin(),
+            new DuplicateOrderCheckoutPreConditionPlugin(),
         ];
     }
 
     /**
      * @param \Spryker\Zed\Kernel\Container $container
      *
-     * @return \Spryker\Zed\Checkout\Dependency\Plugin\CheckoutSaveOrderInterface[]
+     * @return \Spryker\Zed\Checkout\Dependency\Plugin\CheckoutSaveOrderInterface[]|\Spryker\Zed\CheckoutExtension\Dependency\Plugin\CheckoutDoSaveOrderInterface[]
      */
     protected function getCheckoutOrderSavers(Container $container)
     {
-        /** @var \Spryker\Zed\Checkout\Dependency\Plugin\CheckoutSaveOrderInterface[] $plugins */
-        $plugins = [
+        return [
             new CustomerOrderSavePlugin(),
-            new SalesOrderSaverPlugin(),
+            /**
+             * Plugins
+             * `OrderSaverPlugin`,
+             * `OrderTotalsSaverPlugin`,
+             * `SalesOrderShipmentSavePlugin`,
+             * `OrderItemsSaverPlugin`,
+             * `ProductConfigurationOrderSaverPlugin`
+             * must be enabled in the strict order.
+             */
+            new OrderSaverPlugin(),
+            new OrderTotalsSaverPlugin(),
+            new SalesOrderShipmentSavePlugin(),
+            new OrderItemsSaverPlugin(),
             new CartNoteSaverPlugin(), #CartNoteFeature
             new ProductOptionOrderSaverPlugin(),
-            new ItemMetadataSaverPlugin(),
-            new GiftCardOrderItemSaverPlugin(), #GiftCardFeature
-            new OrderShipmentSavePlugin(),
             new DiscountOrderSavePlugin(),
             new ProductBundleOrderSaverPlugin(),
-            new PaymentOrderSaverPlugin(),
+            new SalesPaymentCheckoutDoSaveOrderPlugin(),
+            new GiftCardCheckoutDoSaveOrderPlugin(),
             new SalesOrderThresholdExpenseSavePlugin(), #SalesOrderThresholdFeature
         ];
-
-        return $plugins;
     }
 
     /**
      * @param \Spryker\Zed\Kernel\Container $container
      *
-     * @return \Spryker\Zed\Checkout\Dependency\Plugin\CheckoutPostSaveHookInterface[]
+     * @return \Spryker\Zed\CheckoutExtension\Dependency\Plugin\CheckoutPostSaveInterface[]
      */
     protected function getCheckoutPostHooks(Container $container)
     {
         return [
-            new PaymentPostCheckPlugin(),
+            new DummyPaymentCheckoutPostSavePlugin(),
             new SendEmailToGiftCardUser(), #GiftCardFeature
         ];
     }

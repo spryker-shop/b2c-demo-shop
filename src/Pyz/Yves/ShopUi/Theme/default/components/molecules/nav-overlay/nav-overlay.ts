@@ -19,7 +19,7 @@ export default class NavOverlay extends Component {
     }
 
     protected hideBlocks(): void {
-        this.blocks.forEach(block => block.classList.add('is-hidden'));
+        this.blocks.forEach((block) => block.classList.add('is-hidden'));
     }
 
     protected mapEvents(): void {
@@ -30,7 +30,7 @@ export default class NavOverlay extends Component {
     }
 
     protected resetTriggersActiveClass(): void {
-        this.triggers.forEach(trigger => trigger.classList.remove(this.activeTriggerClass));
+        this.triggers.forEach((trigger) => trigger.classList.remove(this.activeTriggerClass));
     }
 
     protected triggersHandler(index: number, event: Event): void {

@@ -38,11 +38,14 @@
 
 {% block body %}
 
-    <h1 class="title title--product title--h2">{{productName}}</h1>
+    <h1 itemprop="name" class="title title--product title--h2">{{ productName }}</h1>
+    <link itemprop="url" href="{{ data.product.url }}">
 
     <div class="grid grid--justify spacing-bottom spacing-bottom--bigger">
         {% widget 'ProductDetailPageReviewWidget' args [data.product.idProductAbstract] use view('pdp-review-rating', 'ProductReviewWidget') only %}{% endwidget %}
-        {% widget 'ProductPriceVolumeWidget' args [data.product] only %}
+
+        {% widget 'CurrentProductPriceVolumeWidget' args [data.product.currentProductPrice] only %}
+        {% elsewidget 'ProductPriceVolumeWidget' args [data.product] only %} {# @deprecated Use CurrentProductPriceVolumeWidget instead. #}
         {% nowidget %}
             <div class="col text-right">
                 {% include molecule('money-price') with {
@@ -54,6 +57,7 @@
                 } only %}
             </div>
         {% endwidget %}
+        
     </div>
     {% if data.isBundle != null %}
         {% embed molecule('toggler-item') with {
@@ -131,6 +135,8 @@
                     </button>
                 </div>
             {% endif %}
+
+            {% widget 'CartAddProductAsSeparateItemWidget' only %}{% endwidget %}
         {% endblock %}
     {% endwidget %}
 

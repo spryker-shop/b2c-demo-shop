@@ -90,14 +90,14 @@
     {% endblock %}
 
     {% block container %}
-        <div class="container">
+        <div itemscope itemtype="https://schema.org/Product" class="container">
             {% block pageInfo %}
                 {% block breadcrumbs %}
                     {% include molecule('breadcrumb') only %}
                 {% endblock %}
 
                 {% block title %}
-                    <h1 class="title title--main title--with-border title--medium">{{data.title}}</h1>
+                    <h1 class="title title--main title--with-border title--medium">{{ data.title }}</h1>
                 {% endblock %}
             {% endblock %}
 

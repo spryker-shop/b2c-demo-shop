@@ -1,16 +1,10 @@
-{% extends template('widget') %}
-
-{% define data = {
-    expenses: _widget.expenses | default,
-} %}
+{% extends view('sales-order-threshold-checkout-expenses', '@SprykerShop:SalesOrderThresholdWidget') %}
 
 {% block body %}
-    {% if data.expenses is not empty %}
-        {% block expenseItems %}
-            {% for expense in data.expenses %}
-                {{ 'sales-order-threshold.strategy.soft-minimum-threshold-fixed-fee' | trans }}
-                <span class="float-right">{{ expense.sumPrice | money }}</span>
-            {% endfor %}
-        {% endblock %}
-    {% endif %}
+    {% block expenseItems %}
+        {% for expense in data.expenses %}
+            {{ 'sales-order-threshold.strategy.soft-minimum-threshold-fixed-fee' | trans }}
+            <span class="float-right">{{ expense.sumPrice | money }}</span>
+        {% endfor %}
+    {% endblock %}
 {% endblock %}

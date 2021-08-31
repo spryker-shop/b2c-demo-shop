@@ -2,6 +2,7 @@
 
 {% block content %}
     {% set jsAddressClass = 'js-address' %}
+    {% set billingSameAsShippingData = data.forms.billingSameAsShipping.vars.data %}
 
     {% embed molecule('form') with {
         modifiers: ['checkout-actions', 'checkout-form-elements'],
@@ -22,7 +23,7 @@
             },
             isMultipleShipmentEnabled: data.isMultipleShipmentEnabled,
             jsAddressClass: jsAddressClass,
-            isBillingSameAsShippingChecked: data.forms.billing.id_customer_address.vars.choices is empty,
+            isBillingSameAsShippingChecked: billingSameAsShippingData is not defined or billingSameAsShippingData,
         },
     } only %}
         {% block fields %}

@@ -7,9 +7,9 @@
 
 namespace Pyz\Yves\ConfigurableBundleWidget;
 
-use SprykerShop\Yves\ConfigurableBundleWidget\ConfigurableBundleWidgetConfig as SprykerConfigurableBundleWidgetConfig;
+use SprykerShop\Yves\ConfigurableBundleWidget\ConfigurableBundleWidgetConfig as SprykerShopConfigurableBundleWidgetConfig;
 
-class ConfigurableBundleWidgetConfig extends SprykerConfigurableBundleWidgetConfig
+class ConfigurableBundleWidgetConfig extends SprykerShopConfigurableBundleWidgetConfig
 {
     /**
      * @return bool

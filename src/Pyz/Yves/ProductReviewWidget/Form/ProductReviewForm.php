@@ -64,7 +64,10 @@ class ProductReviewForm extends SprykerShopProductReviewForm
                 'expanded' => false,
                 'multiple' => false,
                 'constraints' => [
-                    new GreaterThanOrEqual(['value' => static::MINIMUM_RATING]),
+                    new GreaterThanOrEqual([
+                        'value' => static::MINIMUM_RATING,
+                        'message' => $this->getConfig()->getInvalidRatingValidationMessageGlossaryKey(),
+                    ]),
                     new LessThanOrEqual(['value' => $this->getFactory()->getProductReviewClient()->getMaximumRating()]),
                 ],
             ]

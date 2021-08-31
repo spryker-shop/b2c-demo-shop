@@ -80,7 +80,7 @@
     {% set modifiers = ['spaceless'] %}
 
     {% block productThumbnail %}
-        <a class="{{ config.name }}__overlay {{ config.jsName }}__link-detail-page" href="{{ data.url }}">
+        <a itemprop="url" class="{{ config.name }}__overlay {{ config.jsName }}__link-detail-page" href="{{ data.url }}">
             {{ parent() }}
         </a>
     {% endblock %}

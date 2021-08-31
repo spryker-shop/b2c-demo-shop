@@ -6,7 +6,7 @@
 } %}
 
 {% define data = {
-    url: '/' ~ app.locale | slice(0, 2)
+    url: path('home')
 } %}
 
 {% define attributes = {
@@ -15,7 +15,7 @@
 } %}
 
 {% block body %}
-    <a href="{{ url(data.url) }}" class="{{ config.name }}__link">
+    <a href="{{ data.url }}" class="{{ config.name }}__link">
         <span class="grid grid--middle">
             {% if attributes.src is empty %}
                 <svg xmlns="http://www.w3.org/2000/svg" width="179" height="64" viewBox="0 0 179 64" class="is-hidden-sm-md">

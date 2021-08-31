@@ -14,7 +14,7 @@ class NavigationsRestApiConfig extends SprykerNavigationsRestApiConfig
     /**
      * {@inheritDoc}
      *
-     * @return array
+     * @return string[]
      */
     public function getNavigationTypeToUrlResourceIdFieldMapping(): array
     {

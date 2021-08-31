@@ -11,7 +11,7 @@ use Codeception\Exception\ModuleConfigException;
 use Codeception\Lib\Framework;
 use Pyz\Yves\ShopApplication\YvesBootstrap as PyzYvesBootstrap;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Client;
+use Symfony\Component\HttpKernel\HttpKernelBrowser;
 
 class YvesBootstrap extends Framework
 {
@@ -35,7 +35,7 @@ class YvesBootstrap extends Framework
      */
     public function _beforeSuite($settings = [])
     {
-        $this->client = new Client($this->yvesBootstrap->boot());
+        $this->client = new HttpKernelBrowser($this->yvesBootstrap->boot());
     }
 
     /**

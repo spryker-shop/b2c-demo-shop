@@ -7,6 +7,7 @@
 
 namespace PyzTest\Zed\CmsGui\Presentation;
 
+use Codeception\Scenario;
 use PyzTest\Zed\CmsGui\CmsGuiPresentationTester;
 use PyzTest\Zed\CmsGui\PageObject\CmsCreateGlossaryPage;
 use PyzTest\Zed\CmsGui\PageObject\CmsCreatePage;
@@ -28,10 +29,11 @@ class CmsGuiCreatePageCest
      * @todo Add P&S check after it is available
      *
      * @param \PyzTest\Zed\CmsGui\CmsGuiPresentationTester $i
+     * @param \Codeception\Scenario $scenario
      *
      * @return void
      */
-    public function testICanCreateCmsPageWithTranslatedPlaceholders(CmsGuiPresentationTester $i)
+    public function testICanCreateCmsPageWithTranslatedPlaceholders(CmsGuiPresentationTester $i, Scenario $scenario)
     {
         $i->wantTo('Create cms page with multiple translations');
         $i->expect('Page is persisted in Zed, exported to Yves and is accessible.');

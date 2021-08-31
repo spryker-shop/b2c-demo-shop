@@ -23,6 +23,7 @@ use Spryker\Shared\RabbitMq\RabbitMqEnv;
 use Spryker\Shared\Router\RouterConstants;
 use Spryker\Shared\Scheduler\SchedulerConstants;
 use Spryker\Shared\SearchElasticsearch\SearchElasticsearchConstants;
+use Spryker\Shared\SecurityBlocker\SecurityBlockerConstants;
 use Spryker\Shared\Session\SessionConstants;
 use Spryker\Shared\SessionRedis\SessionRedisConstants;
 use Spryker\Shared\StorageDatabase\StorageDatabaseConstants;
@@ -38,7 +39,9 @@ use SprykerShop\Shared\ErrorPage\ErrorPageConstants;
 $stores = array_combine(Store::getInstance()->getAllowedStores(), Store::getInstance()->getAllowedStores());
 $yvesHost = 'www.de.spryker.test';
 $glueHost = 'glue.de.spryker.test';
-$zedHost = 'zed.de.spryker.test';
+$backofficeHost = 'backoffice.de.spryker.test';
+$backendGatewayHost = 'backend-gateway.de.spryker.test';
+$backendApiHost = 'backend-api.de.spryker.test';
 
 // ----------------------------------------------------------------------------
 // ------------------------------ CODEBASE ------------------------------------
@@ -74,7 +77,10 @@ $trustedHosts
     = $config[HttpConstants::YVES_TRUSTED_HOSTS]
     = [
     $yvesHost,
-    $zedHost,
+    $glueHost,
+    $backofficeHost,
+    $backendGatewayHost,
+    $backendApiHost,
     'localhost',
 ];
 
@@ -106,7 +112,7 @@ $config[SearchElasticsearchConstants::PORT] = 9200;
 // >>> STORAGE
 
 $config[StorageRedisConstants::STORAGE_REDIS_PERSISTENT_CONNECTION] = true;
-$config[StorageRedisConstants::STORAGE_REDIS_PROTOCOL] = 'tcp';
+$config[StorageRedisConstants::STORAGE_REDIS_SCHEME] = 'tcp';
 $config[StorageRedisConstants::STORAGE_REDIS_HOST] = '127.0.0.1';
 $config[StorageRedisConstants::STORAGE_REDIS_PORT] = 6379;
 $config[StorageRedisConstants::STORAGE_REDIS_PASSWORD] = false;
@@ -122,17 +128,33 @@ $config[StorageDatabaseConstants::DB_PASSWORD] = '';
 
 // >>> SESSION
 
-$config[SessionRedisConstants::YVES_SESSION_REDIS_PROTOCOL] = $config[StorageRedisConstants::STORAGE_REDIS_PROTOCOL];
+$config[SessionRedisConstants::YVES_SESSION_REDIS_SCHEME] = $config[StorageRedisConstants::STORAGE_REDIS_SCHEME];
 $config[SessionRedisConstants::YVES_SESSION_REDIS_HOST] = $config[StorageRedisConstants::STORAGE_REDIS_HOST];
 $config[SessionRedisConstants::YVES_SESSION_REDIS_PORT] = $config[StorageRedisConstants::STORAGE_REDIS_PORT];
 $config[SessionRedisConstants::YVES_SESSION_REDIS_PASSWORD] = $config[StorageRedisConstants::STORAGE_REDIS_PASSWORD];
 $config[SessionRedisConstants::YVES_SESSION_REDIS_DATABASE] = 1;
 
-$config[SessionRedisConstants::ZED_SESSION_REDIS_PROTOCOL] = $config[StorageRedisConstants::STORAGE_REDIS_PROTOCOL];
+$config[SessionRedisConstants::ZED_SESSION_REDIS_SCHEME] = $config[StorageRedisConstants::STORAGE_REDIS_SCHEME];
 $config[SessionRedisConstants::ZED_SESSION_REDIS_HOST] = $config[StorageRedisConstants::STORAGE_REDIS_HOST];
 $config[SessionRedisConstants::ZED_SESSION_REDIS_PORT] = $config[StorageRedisConstants::STORAGE_REDIS_PORT];
 $config[SessionRedisConstants::ZED_SESSION_REDIS_PASSWORD] = $config[StorageRedisConstants::STORAGE_REDIS_PASSWORD];
 $config[SessionRedisConstants::ZED_SESSION_REDIS_DATABASE] = 2;
+
+// >>> SECURITY BLOCKER
+
+$config[SecurityBlockerConstants::SECURITY_BLOCKER_REDIS_PERSISTENT_CONNECTION] = true;
+$config[SecurityBlockerConstants::SECURITY_BLOCKER_REDIS_SCHEME] = 'tcp';
+$config[SecurityBlockerConstants::SECURITY_BLOCKER_REDIS_HOST] = '127.0.0.1';
+$config[SecurityBlockerConstants::SECURITY_BLOCKER_REDIS_PORT] = 6379;
+$config[SecurityBlockerConstants::SECURITY_BLOCKER_REDIS_PASSWORD] = false;
+$config[SecurityBlockerConstants::SECURITY_BLOCKER_REDIS_DATABASE] = 7;
+
+$config[SecurityBlockerConstants::SECURITY_BLOCKER_BLOCKING_TTL] = 600;
+$config[SecurityBlockerConstants::SECURITY_BLOCKER_BLOCK_FOR] = 300;
+$config[SecurityBlockerConstants::SECURITY_BLOCKER_BLOCKING_NUMBER_OF_ATTEMPTS] = 10;
+
+$config[SecurityBlockerConstants::SECURITY_BLOCKER_AGENT_BLOCK_FOR] = 360;
+$config[SecurityBlockerConstants::SECURITY_BLOCKER_AGENT_BLOCKING_NUMBER_OF_ATTEMPTS] = 9;
 
 // >>> SCHEDULER
 
@@ -167,21 +189,23 @@ $config[LogConstants::LOG_LEVEL] = Logger::CRITICAL;
 $config[MailConstants::SMTP_PORT] = 1025;
 
 // ----------------------------------------------------------------------------
-// ------------------------------ ZED -----------------------------------------
+// ------------------------------ ZED (Gateway) -------------------------------
 // ----------------------------------------------------------------------------
 
 $config[ZedRequestConstants::ZED_API_SSL_ENABLED] = false;
 $config[ZedRequestConstants::HOST_ZED_API]
-    = $config[SessionConstants::ZED_SESSION_COOKIE_NAME]
+    = $backendGatewayHost;
+
+$config[SessionConstants::ZED_SESSION_COOKIE_NAME]
     = $config[SessionConstants::ZED_SESSION_COOKIE_DOMAIN]
-    = $zedHost;
+    = $backofficeHost;
 $config[ZedRequestConstants::BASE_URL_ZED_API] = sprintf(
     'http://%s',
-    $zedHost
+    $backendGatewayHost
 );
 $config[ZedRequestConstants::BASE_URL_SSL_ZED_API] = sprintf(
     'https://%s',
-    $zedHost
+    $backendGatewayHost
 );
 
 // ----------------------------------------------------------------------------
@@ -190,7 +214,7 @@ $config[ZedRequestConstants::BASE_URL_SSL_ZED_API] = sprintf(
 
 $config[ApplicationConstants::BASE_URL_ZED] = sprintf(
     'http://%s',
-    $zedHost
+    $backofficeHost
 );
 
 // ----------------------------------------------------------------------------
