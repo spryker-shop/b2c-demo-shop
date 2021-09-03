@@ -88,33 +88,38 @@ groups:
             Redirects:
                 application: static
                 endpoints:
-                    backoffice.b2c-new.demo-spryker.com:
+                    b2c.demo-spryker.com:
                         store: DE
                         redirect:
                             code: 302
-                            url: backoffice.de.b2c-new.demo-spryker.com
-                    os.b2c-new.demo-spryker.com:
+                            url: de.b2c.demo-spryker.com
+                    backoffice.b2c.demo-spryker.com:
                         store: DE
                         redirect:
                             code: 302
-                            url: backoffice.de.b2c-new.demo-spryker.com
-                    os.de.b2c-new.demo-spryker.com:
+                            url: backoffice.de.b2c.demo-spryker.com
+                    os.b2c.demo-spryker.com:
                         store: DE
                         redirect:
                             code: 302
-                            url: backoffice.de.b2c-new.demo-spryker.com
+                            url: backoffice.de.b2c.demo-spryker.com
+                    os.de.b2c.demo-spryker.com:
+                        store: DE
+                        redirect:
+                            code: 302
+                            url: backoffice.de.b2c.demo-spryker.com
 
             yves:
                 application: yves
                 endpoints:
-                    date-time-configurator-example.b2c-new.demo-spryker.com:
+                    date-time-configurator-example.b2c.demo-spryker.com:
                         entry-point: Configurator
-                    www.de.b2c-new.demo-spryker.com:
+                    www.de.b2c.demo-spryker.com:
                         store: DE
                         services:
                             session:
                                 namespace: 1
-                    www.at.b2c-new.demo-spryker.com:
+                    www.at.b2c.demo-spryker.com:
                         store: AT
                         services:
                             session:
@@ -122,20 +127,20 @@ groups:
             glue:
                 application: glue
                 endpoints:
-                    glue.de.b2c-new.demo-spryker.com:
+                    glue.de.b2c.demo-spryker.com:
                         store: DE
-                    glue.at.b2c-new.demo-spryker.com:
+                    glue.at.b2c.demo-spryker.com:
                         store: AT
             boffice:
                 application: backoffice
                 endpoints:
-                    backoffice.de.b2c-new.demo-spryker.com:
+                    backoffice.de.b2c.demo-spryker.com:
                         store: DE
                         primal: true
                         services:
                             session:
                                 namespace: 3
-                    backoffice.at.b2c-new.demo-spryker.com:
+                    backoffice.at.b2c.demo-spryker.com:
                         store: AT
                         services:
                             session:
@@ -143,19 +148,19 @@ groups:
             backgw:
                 application: backend-gateway
                 endpoints:
-                    backend-gateway.de.b2c-new.demo-spryker.com:
+                    backend-gateway.de.b2c.demo-spryker.com:
                         store: DE
                         primal: true
-                    backend-gateway.at.b2c-new.demo-spryker.com:
+                    backend-gateway.at.b2c.demo-spryker.com:
                         store: AT
                         primal: true
             backapi:
                 application: zed
                 endpoints:
-                    backend-api.de.b2c-new.demo-spryker.com:
+                    backend-api.de.b2c.demo-spryker.com:
                         store: DE
                         entry-point: BackendApi
-                    backend-api.at.b2c-new.demo-spryker.com:
+                    backend-api.at.b2c.demo-spryker.com:
                         store: AT
                         entry-point: BackendApi
 services:
@@ -174,7 +179,7 @@ services:
       username: "spryker"
       password: "secret"
     endpoints:
-      queue.b2c-new.demo-spryker.com:
+      queue.b2c.demo-spryker.com:
       localhost:5672:
         protocol: tcp
   session:
@@ -193,11 +198,11 @@ services:
   scheduler:
     engine: jenkins
     endpoints:
-      scheduler.b2c-new.demo-spryker.com:
+      scheduler.b2c.demo-spryker.com:
   mail_catcher:
     engine: mailhog
     endpoints:
-      mail.b2c-new.demo-spryker.com:
+      mail.b2c.demo-spryker.com:
 
 docker:
 
