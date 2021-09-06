@@ -1,0 +1,30 @@
+{% extends template('page-layout-main') %}
+
+{% define data = {
+    contactUsForm: _view.contactUsForm
+} %}
+
+{% block content %}
+    <div class="row">
+        <div class="small-12 columns">
+            <h2>Contact Us</h2>
+            {{ form_start(data.contactUsForm) }}
+            <div class="form__field col col--sm-12 col--md-12">
+                <label for="contactUsForm_name" class="label label--required">Name</label>
+                {{ form_widget(data.contactUsForm.name) }}
+                {{ form_errors(data.contactUsForm.name) }}
+            </div>
+            <div class="form__field col col--sm-12 col--md-12">
+                <label for="contactUsForm_name" class="label label--required">Message</label>
+                {{ form_widget(data.contactUsForm.message) }}
+                {{ form_errors(data.contactUsForm.message) }}
+            </div>
+            <div class="form__actions">
+                <button type="submit" class="form__action button  button--large button--expand">
+                    Submit
+                </button>
+            </div>
+            {{ form_end(data.contactUsForm) }}
+        </div>
+    </div>
+{% endblock %}

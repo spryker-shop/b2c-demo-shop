@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<database xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          name="zed"
+          xsi:noNamespaceSchemaLocation="http://static.spryker.com/schema-01.xsd"
+          namespace="Orm\Zed\ContactUs\Persistence"
+          package="src.Orm.Zed.ContactUs.Persistence">
+
+    <table name="pyz_contact_us" idMethod="native" allowPkInsert="true" phpName="PyzContactUs">
+        <column name="id_contact_us" required="true" type="INTEGER" primaryKey="true" autoIncrement="true"/>
+        <column name="name" required="true" type="VARCHAR" size="255"/>
+        <column name="message" required="true" type="LONGVARCHAR"/>
+
+        <id-method-parameter value="pyz_contact_us_pk_seq"/>
+    </table>
+
+</database>
