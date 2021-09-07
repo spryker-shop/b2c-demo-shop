@@ -10,7 +10,7 @@ namespace Pyz\Yves\ProductGroupWidget;
 use SprykerShop\Yves\CartPage\Plugin\ProductGroupWidget\AddToCartUrlProductViewExpanderPlugin;
 use SprykerShop\Yves\ProductGroupWidget\ProductGroupWidgetDependencyProvider as SprykerShopProductGroupWidgetDependencyProvider;
 use SprykerShop\Yves\ProductLabelWidget\Plugin\ProductGroupWidget\ProductLabelProductViewExpanderPlugin;
-use SprykerShop\Yves\ProductReviewWidget\Plugin\ProductGroupWidget\ProductReviewSummaryProductViewExpanderPlugin;
+use SprykerShop\Yves\ProductReviewWidget\Plugin\ProductGroupWidget\ProductReviewSummaryProductViewBulkExpanderPlugin;
 
 class ProductGroupWidgetDependencyProvider extends SprykerShopProductGroupWidgetDependencyProvider
 {
@@ -21,8 +21,17 @@ class ProductGroupWidgetDependencyProvider extends SprykerShopProductGroupWidget
     {
         return [
             new AddToCartUrlProductViewExpanderPlugin(),
-            new ProductReviewSummaryProductViewExpanderPlugin(),
             new ProductLabelProductViewExpanderPlugin(),
+        ];
+    }
+
+    /**
+     * @return \SprykerShop\Yves\ProductGroupWidgetExtension\Dependency\Plugin\ProductViewBulkExpanderPluginInterface[]
+     */
+    protected function getProductViewBulkExpanderPlugins(): array
+    {
+        return [
+            new ProductReviewSummaryProductViewBulkExpanderPlugin(),
         ];
     }
 }
