@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6ad8644118c3007ec0e18067ef59dd86",
+    "content-hash": "a177c8049564eb1f2adca2de2ae6ba73",
     "packages": [
         {
             "name": "brick/math",
@@ -20077,37 +20077,42 @@
         },
         {
             "name": "spryker/error-handler",
-            "version": "2.5.0",
+            "version": "2.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/error-handler.git",
-                "reference": "8ffca20f44f77daa100a14d0e0a4b690594f7c6f"
+                "reference": "5014bdc7640f27c3506bff641ffe19b1cb8e0466"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/error-handler/zipball/8ffca20f44f77daa100a14d0e0a4b690594f7c6f",
-                "reference": "8ffca20f44f77daa100a14d0e0a4b690594f7c6f",
+                "url": "https://api.github.com/repos/spryker/error-handler/zipball/5014bdc7640f27c3506bff641ffe19b1cb8e0466",
+                "reference": "5014bdc7640f27c3506bff641ffe19b1cb8e0466",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.3",
                 "spryker/application-extension": "^1.0.0",
                 "spryker/config": "^3.0.0",
+                "spryker/error-handler-extension": "^1.0.0",
+                "spryker/event-dispatcher-extension": "^1.0.0",
                 "spryker/kernel": "^3.30.0",
                 "spryker/log": "^3.0.0",
                 "spryker/monitoring": "^1.0.0 || ^2.0.0",
+                "spryker/symfony": "^3.5.0",
                 "spryker/util-sanitize": "^2.3.0"
             },
             "require-dev": {
                 "filp/whoops": "^2.1",
                 "spryker/code-sniffer": "*",
                 "spryker/container": "*",
+                "spryker/event-dispatcher": "*",
                 "spryker/silex": "*",
                 "spryker/testify": "*"
             },
             "suggest": {
                 "filp/whoops": "When you want to use the ErrorHandler plugins.",
                 "spryker/container": "If you want to use Container.",
+                "spryker/event-dispatcher": "Use this module when you want to use the ErrorPageEventDispatcherPlugin.",
                 "spryker/silex": "If you want to use ServiceProvider."
             },
             "type": "library",
@@ -20127,9 +20132,54 @@
             ],
             "description": "ErrorHandler module",
             "support": {
-                "source": "https://github.com/spryker/error-handler/tree/2.5.0"
+                "source": "https://github.com/spryker/error-handler/tree/2.7.0"
             },
-            "time": "2021-04-23T07:34:06+00:00"
+            "time": "2021-09-03T16:43:04+00:00"
+        },
+        {
+            "name": "spryker/error-handler-extension",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/error-handler-extension.git",
+                "reference": "c72a2b915ec19999e78605c0a9c2882a8b5b05f5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/error-handler-extension/zipball/c72a2b915ec19999e78605c0a9c2882a8b5b05f5",
+                "reference": "c72a2b915ec19999e78605c0a9c2882a8b5b05f5",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.3"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/symfony": "*"
+            },
+            "suggest": {
+                "spryker/symfony": "If you want to use SubRequestExceptionHandlerStrategyPlugin."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "ErrorHandlerExtension module",
+            "support": {
+                "source": "https://github.com/spryker/error-handler-extension/tree/1.0.0"
+            },
+            "time": "2021-08-19T11:49:45+00:00"
         },
         {
             "name": "spryker/event",

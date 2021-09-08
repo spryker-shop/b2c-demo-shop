@@ -151,5 +151,17 @@
         "source": "\\Spryker\\Zed\\AvailabilityCartConnector\\Communication\\Plugin\\Cart\\CheckAvailabilityPlugin"
       }
     }
+  },
+  "Spryker.ErrorHandler": {
+    "wire-plugin": {
+      "e66a74375ab68f3bc8aba340a998b66816ce1f9d": {
+        "target": "\\Spryker\\Zed\\ErrorHandler\\ErrorHandlerDependencyProvider::getExceptionHandlerStrategyPlugins",
+        "source": "\\Spryker\\Zed\\ErrorHandler\\Communication\\Plugin\\ExceptionHandler\\SubRequestExceptionHandlerStrategyPlugin"
+      },
+      "ac16d0f9ac60968061a659e1f9df4ce34a0dc77b": {
+        "target": "\\Spryker\\Zed\\EventDispatcher\\EventDispatcherDependencyProvider::getEventDispatcherPlugins",
+        "source": "\\Spryker\\Zed\\ErrorHandler\\Communication\\Plugin\\EventDispatcher\\ErrorPageEventDispatcherPlugin"
+      }
+    }
   }
 }
