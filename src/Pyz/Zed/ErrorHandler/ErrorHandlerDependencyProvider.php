@@ -15,7 +15,7 @@ class ErrorHandlerDependencyProvider extends SprykerErrorHandlerDependencyProvid
     /**
      * @return \Spryker\Zed\ErrorHandlerExtension\Dependency\Plugin\ExceptionHandlerStrategyPluginInterface[]
      */
-    protected function getExceptionHandlerStrategyPlugins() : array
+    protected function getExceptionHandlerStrategyPlugins(): array
     {
         return [
             new SubRequestExceptionHandlerStrategyPlugin(),
