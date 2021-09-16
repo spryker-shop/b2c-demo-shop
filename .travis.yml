@@ -6,6 +6,7 @@ _DOCKER_BEFORE_INSTALL: &DOCKER_BEFORE_INSTALL
 
 _DOCKER_BEFORE_SCRIPT: &DOCKER_BEFORE_SCRIPT
     - ./config/Shared/ci/travis/docker-credentials.sh
+    - sudo systemctl start docker
 
 language: php
 
