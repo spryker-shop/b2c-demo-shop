@@ -4,6 +4,7 @@
 // ############################## CI CONFIGURATION ############################
 // ############################################################################
 
+
 use Monolog\Logger;
 use Spryker\Shared\Event\EventConstants;
 use Spryker\Shared\Log\LogConstants;

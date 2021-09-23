@@ -20,7 +20,7 @@ x-frontend-auth: &frontend-auth
 namespace: spryker-cloud
 tag: '1.0'
 
-environment: docker.dev
+environment: docker.production
 image:
     tag: spryker/php:7.3
     environment:
@@ -32,13 +32,15 @@ image:
         SPRYKER_HOOK_INSTALL: "vendor/bin/install -r EU/production --no-ansi -vvv"
         SPRYKER_HOOK_DESTRUCTIVE_INSTALL: "vendor/bin/install -r EU/destructive --no-ansi -vvv"
     php:
+        ini:
+            "opcache.revalidate_freq": 0
         enabled-extensions:
             - blackfire
             - newrelic
 
 composer:
-    mode: ''
-    autoload: ''
+    mode: '--no-dev'
+    autoload: ' --classmap-authoritative --optimize'
 
 assets:
     image: fholzer/nginx-brotli:v1.18.0
