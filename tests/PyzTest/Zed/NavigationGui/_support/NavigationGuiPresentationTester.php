@@ -539,10 +539,7 @@ class NavigationGuiPresentationTester extends Actor
 
                 break;
             } catch (Exception $exception) {
-                $count++;
-                if ($verbose) {
-                    echo "Try: {$count}: ";
-                }
+                codecept_debug(sprintf('Unstable action repeat count: %d', ++$count));
             }
         }
     }

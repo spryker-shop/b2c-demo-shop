@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "414334cdd97a34eec60a31c11e3b1e37",
+    "content-hash": "b5993ab03db616ea8ed05c7b9f7a4cbf",
     "packages": [
         {
             "name": "brick/math",
@@ -48034,6 +48034,57 @@
             "time": "2021-01-19T13:42:20+00:00"
         },
         {
+            "name": "spryker-sdk/integrator",
+            "version": "dev-feature/apps-79/dev-plug-and-play",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker-sdk/integrator.git",
+                "reference": "88e792e4d734f3dea71306c3ca03297afa39f332"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker-sdk/integrator/zipball/88e792e4d734f3dea71306c3ca03297afa39f332",
+                "reference": "88e792e4d734f3dea71306c3ca03297afa39f332",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.0 || ^2.0",
+                "nikic/php-parser": "^4.3.0",
+                "php": ">=7.3",
+                "sebastian/diff": "^3.0 || ^4.0.0",
+                "spryker/kernel": "^3.33.0",
+                "spryker/module-finder": "^1.0.0",
+                "spryker/util-text": "^1.1.0"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "^0.12",
+                "spryker/code-sniffer": "*",
+                "spryker/testify": "*"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                },
+                "class": "SprykerSdk\\Zed\\Integrator\\Communication\\Plugin\\Composer\\InstallerComposerPlugin"
+            },
+            "autoload": {
+                "psr-4": {
+                    "SprykerSdk\\": "src/SprykerSdk/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "Integrator module",
+            "support": {
+                "issues": "https://github.com/spryker-sdk/integrator/issues",
+                "source": "https://github.com/spryker-sdk/integrator/tree/feature/apps-79/dev-plug-and-play"
+            },
+            "time": "2021-08-02T15:02:14+00:00"
+        },
+        {
             "name": "spryker-sdk/phpstan-spryker",
             "version": "0.3.1",
             "source": {
@@ -49669,6 +49720,7 @@
     ],
     "minimum-stability": "dev",
     "stability-flags": {
+        "spryker-sdk/integrator": 20,
         "spryker/docker-chromedriver": 20
     },
     "prefer-stable": true,
