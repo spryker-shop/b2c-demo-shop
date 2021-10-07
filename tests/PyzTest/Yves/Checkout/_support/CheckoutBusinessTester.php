@@ -31,10 +31,6 @@ class CheckoutBusinessTester extends Actor
 {
     use _generated\CheckoutBusinessTesterActions;
 
-   /**
-    * Define custom actions here
-    */
-
     /**
      * @return \PHPUnit\Framework\MockObject\MockObject|\Spryker\Service\Customer\CustomerServiceInterface
      */
