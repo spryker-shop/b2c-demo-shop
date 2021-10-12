@@ -18,6 +18,7 @@ class GiftCardConcreteConfigurationWriterStep implements DataImportStepInterface
     public const BULK_SIZE = 100;
     public const COL_VALUE = 'value';
     public const COL_SKU = 'sku';
+
     /**
      * @var \Pyz\Zed\DataImport\Business\Model\Product\Repository\ProductRepositoryInterface
      */

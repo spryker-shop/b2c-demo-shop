@@ -59,7 +59,7 @@ class NavigationNodeValidityDatesStep implements DataImportStepInterface
             return;
         }
 
-        $dataSet[$key] = "";
+        $dataSet[$key] = '';
     }
 
     /**
@@ -72,7 +72,7 @@ class NavigationNodeValidityDatesStep implements DataImportStepInterface
      */
     protected function formatDate(DataSetInterface $dataSet, $key)
     {
-        if ($dataSet[$key] === "") {
+        if ($dataSet[$key] === '') {
             return;
         }
 
@@ -99,7 +99,7 @@ class NavigationNodeValidityDatesStep implements DataImportStepInterface
         $validFromDate = $dataSet[$this->keyValidFrom];
         $validToDate = $dataSet[$this->keyValidTo];
 
-        if ($validFromDate === "" || $validToDate === "") {
+        if ($validFromDate === '' || $validToDate === '') {
             return;
         }
 
