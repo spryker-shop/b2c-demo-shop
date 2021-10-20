@@ -1,0 +1,8 @@
+{% extends '@Application/Layout/layout.twig' %}
+
+{% block content %}
+    {% for contactUsEntity in contactUsEntities %}
+        <h5>{{ contactUsEntity.name }}</h5>
+        <p>{{ contactUsEntity.message }}</p>
+    {% endfor %}
+{% endblock %}
