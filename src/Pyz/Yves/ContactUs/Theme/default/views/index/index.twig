@@ -1,0 +1,20 @@
+{% extends template('page-layout-main') %}
+
+{% block content %}
+    {% include molecule('form') with {
+        class: 'box',
+        data: {
+            title: 'Contact Us',
+            form: _view.contactUsForm,
+            layout: {
+                email: 'col col--sm-6',
+                password: 'col col--sm-6'
+            },
+            submit: {
+                enable: true,
+                text: 'Submit',
+                class: 'form__action--checkout button  button--large button--expand'
+            }
+        }
+    } only %}
+{% endblock %}
