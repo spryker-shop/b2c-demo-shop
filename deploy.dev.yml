@@ -1,5 +1,12 @@
 version: "0.1"
 
+x-frontend-auth: &frontend-auth
+    auth:
+        engine: basic
+        users:
+            - username: admin@spryker.com
+              password: change123
+
 namespace: spryker_b2c_dev
 tag: 'dev'
 
@@ -64,11 +71,13 @@ groups:
                 endpoints:
                     yves.de.spryker.local:
                         store: DE
+                        <<: *frontend-auth
                         services:
                             session:
                                 namespace: 1
                     yves.at.spryker.local:
                         store: AT
+                        <<: *frontend-auth
                         services:
                             session:
                                 namespace: 2
@@ -77,18 +86,22 @@ groups:
                 endpoints:
                     glue.de.spryker.local:
                         store: DE
+                        <<: *frontend-auth
                     glue.at.spryker.local:
                         store: AT
+                        <<: *frontend-auth
             backoffice_eu:
                 application: backoffice
                 endpoints:
                     backoffice.de.spryker.local:
                         store: DE
+                        <<: *frontend-auth
                         services:
                             session:
                                 namespace: 3
                     backoffice.at.spryker.local:
                         store: AT
+                        <<: *frontend-auth
                         services:
                             session:
                                 namespace: 4
@@ -97,18 +110,22 @@ groups:
                 endpoints:
                     backend-gateway.de.spryker.local:
                         store: DE
+                        <<: *frontend-auth
                         primal: true
                     backend-gateway.at.spryker.local:
                         store: AT
+                        <<: *frontend-auth
                         primal: true
             backend_api_eu:
                 application: zed
                 endpoints:
                     backend-api.de.spryker.local:
                         store: DE
+                        <<: *frontend-auth
                         entry-point: BackendApi
                     backend-api.at.spryker.local:
                         store: AT
+                        <<: *frontend-auth
                         entry-point: BackendApi
     US:
         region: US
@@ -118,6 +135,7 @@ groups:
                 endpoints:
                     yves.us.spryker.local:
                         store: US
+                        <<: *frontend-auth
                         services:
                             session:
                                 namespace: 5
@@ -126,11 +144,13 @@ groups:
                 endpoints:
                     glue.us.spryker.local:
                         store: US
+                        <<: *frontend-auth
             backoffice_us:
                 application: backoffice
                 endpoints:
                     backoffice.us.spryker.local:
                         store: US
+                        <<: *frontend-auth
                         services:
                             session:
                                 namespace: 6
@@ -139,11 +159,13 @@ groups:
                 endpoints:
                     backend-gateway.us.spryker.local:
                         store: US
+                        <<: *frontend-auth
             backend_api_us:
                 application: zed
                 endpoints:
                     backend-api.us.spryker.local:
                         store: US
+                        <<: *frontend-auth
 services:
     database:
         engine: mysql

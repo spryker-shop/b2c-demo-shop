@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<database xmlns="spryker:schema-01"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd"
+          name="zed" namespace="Orm\Zed\ContactUs\Persistence"
+          package="src.Orm.Zed.ContactUs.Persistence">
+
+    <table name="pyz_contact_us" idMethod="native">
+        <column name="id_message" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="name" required="true" size="255" type="VARCHAR" />
+        <column name="message" required="true" size="500" type="VARCHAR"/>
+
+        <id-method-parameter value="pyz_contact_us_pk_seq"/>
+    </table>
+
+</database>

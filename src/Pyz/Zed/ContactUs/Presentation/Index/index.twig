@@ -1,0 +1,11 @@
+{% extends '@Gui/Layout/layout.twig' %}
+
+{% block content %}
+    <h3>Messages</h3>
+    {% for data in contactUsData %}
+        <div>
+            <h4>{{ data.name }}</h4>
+            <div>{{ data.message }}</div>
+        </div>
+    {% endfor %}
+{% endblock %}
