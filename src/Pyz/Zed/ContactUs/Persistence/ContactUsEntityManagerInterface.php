@@ -9,7 +9,8 @@ interface ContactUsEntityManagerInterface
     /**
      * @param \Generated\Shared\Transfer\ContactUsTransfer $contactUsTransfer
      *
-     * @return \Generated\Shared\Transfer\ContactUsTransfer
+     * Returns true if the message was saved
+     * @return bool
      */
-    public function saveContactUsEntity(ContactUsTransfer $contactUsTransfer): ContactUsTransfer;
+    public function saveContactUsEntity(ContactUsTransfer $contactUsTransfer): bool;
 }

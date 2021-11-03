@@ -110,22 +110,18 @@ groups:
                 endpoints:
                     backend-gateway.de.spryker.local:
                         store: DE
-                        <<: *frontend-auth
                         primal: true
                     backend-gateway.at.spryker.local:
                         store: AT
-                        <<: *frontend-auth
                         primal: true
             backend_api_eu:
                 application: zed
                 endpoints:
                     backend-api.de.spryker.local:
                         store: DE
-                        <<: *frontend-auth
                         entry-point: BackendApi
                     backend-api.at.spryker.local:
                         store: AT
-                        <<: *frontend-auth
                         entry-point: BackendApi
     US:
         region: US

@@ -14,21 +14,17 @@ use Generated\Shared\Transfer\ContactUsTransfer;
 class ContactUsFacade extends AbstractFacade implements ContactUsFacadeInterface
 {
     /**
-     *
      * @param \Generated\Shared\Transfer\ContactUsTransfer $contactUsTransfer
      *
-     * @return \Generated\Shared\Transfer\ContactUsTransfer
-     *
+     * @return bool
      */
-    public function saveContactUsData(ContactUsTransfer $contactUsTransfer): ContactUsTransfer
+    public function saveContactUsData(ContactUsTransfer $contactUsTransfer): bool
     {
         return $this->getEntityManager()->saveContactUsEntity($contactUsTransfer);
     }
 
     /**
-     *
      * @return array
-     *
      */
     public function getContactUsData(): array
     {

@@ -1,0 +1,26 @@
+{% extends template('page-layout-main') %}
+
+{% define data = {
+    contactUs: _view.contactUsForm,
+} %}
+
+{% block title %}
+    <h1 class="title title--main title--with-border title--medium">Contact Us</h1>
+{% endblock %}
+
+{% block content %}
+
+    <div class="grid grid--no-wrap">
+        {{ form_start(data.contactUs) }}
+        <div class="col col--expand">
+            {{ form_row(data.contactUs.name) }}
+
+            {{ form_row(data.contactUs.message) }}
+
+            <button type="submit" class="button button--large button--expand">Send</button>
+        </div>
+    </div>
+    {{ form_errors(data.contactUs) }}
+    {{ form_end(data.contactUs) }}
+
+{% endblock %}
