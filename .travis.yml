@@ -150,13 +150,13 @@ jobs:
           - *DOCKER_BEFORE_SCRIPT
       after_script: skip
 
-    - name: Docker / Alpine / PHP 7.3 / PostgreSQL / Glue
+    - name: Docker / Alpine / PHP 7.4 / PostgreSQL / Glue
       os: linux
       dist: bionic
       language: shell
       env:
         - PROGRESS_TYPE=plain
-        - SPRYKER_PLATFORM_IMAGE=spryker/php:7.3-alpine3.12
+        - SPRYKER_PLATFORM_IMAGE=spryker/php:7.4-alpine3.12
         - TRAVIS=1
       addons:
         hosts:
@@ -195,13 +195,13 @@ jobs:
           - *DOCKER_BEFORE_SCRIPT
       after_script: skip
 
-    - name: Docker / Alpine / PHP 7.3 / MariaDB / Functional
+    - name: Docker / Alpine / PHP 7.4 / MariaDB / Functional
       os: linux
       dist: bionic
       language: shell
       env:
         - PROGRESS_TYPE=plain
-        - SPRYKER_PLATFORM_IMAGE=spryker/php:7.3-alpine3.12
+        - SPRYKER_PLATFORM_IMAGE=spryker/php:7.4-alpine3.12
         - TRAVIS=1
       addons:
         hosts:
@@ -238,13 +238,13 @@ jobs:
           - *DOCKER_BEFORE_SCRIPT
       after_script: skip
 
-    - name: Docker / Debian / PHP 7.3 / PostgreSQL / Functional
+    - name: Docker / Debian / PHP 7.4 / PostgreSQL / Functional
       os: linux
       dist: bionic
       language: shell
       env:
         - PROGRESS_TYPE=plain
-        - SPRYKER_PLATFORM_IMAGE=spryker/php:7.3-debian
+        - SPRYKER_PLATFORM_IMAGE=spryker/php:7.4-debian
         - TRAVIS=1
       addons:
         hosts:
@@ -281,13 +281,13 @@ jobs:
           - *DOCKER_BEFORE_SCRIPT
       after_script: skip
 
-    - name: Docker / Alpine / PHP 7.3 / MariaDB / Acceptance
+    - name: Docker / Alpine / PHP 7.4 / MariaDB / Acceptance
       os: linux
       dist: bionic
       language: shell
       env:
         - PROGRESS_TYPE=plain
-        - SPRYKER_PLATFORM_IMAGE=spryker/php:7.3
+        - SPRYKER_PLATFORM_IMAGE=spryker/php:7.4
         - TRAVIS=1
       addons:
         hosts:
