@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * This file is part of the Spryker Commerce OS.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
+ */
+
 namespace Pyz\Yves\ContactUs\Form;
 
 use Symfony\Component\Form\AbstractType;
@@ -12,7 +17,6 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class ContactUsFormType extends AbstractType
 {
-
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options

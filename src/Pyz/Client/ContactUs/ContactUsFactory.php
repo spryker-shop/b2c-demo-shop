@@ -1,7 +1,11 @@
 <?php
 
-namespace Pyz\Client\ContactUs;
+/**
+ * This file is part of the Spryker Commerce OS.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
+ */
 
+namespace Pyz\Client\ContactUs;
 
 use Pyz\Client\ContactUs\Zed\ContactUsZedStub;
 use Pyz\Client\ContactUs\Zed\ContactUsZedStubInterface;

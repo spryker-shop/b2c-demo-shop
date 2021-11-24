@@ -1,8 +1,11 @@
 <?php
 
+/**
+ * This file is part of the Spryker Commerce OS.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
+ */
 
 namespace Pyz\Zed\ContactUs\Business\Reader;
-
 
 use Generated\Shared\Transfer\ContactUsTransfer;
 use Orm\Zed\ContactUs\Persistence\PyzContactUs;
@@ -11,13 +14,12 @@ use Pyz\Zed\ContactUs\Persistence\ContactUsRepositoryInterface;
 class ContactUsReader implements ContactUsReaderInterface
 {
     /**
-     * @var ContactUsRepositoryInterface
+     * @var \Pyz\Zed\ContactUs\Persistence\ContactUsRepositoryInterface
      */
     protected $contactUsRepository;
 
     /**
-     * ContactUsReader constructor.
-     * @param ContactUsRepositoryInterface $contactUsRepository
+     * @param \Pyz\Zed\ContactUs\Persistence\ContactUsRepositoryInterface $contactUsRepository
      */
     public function __construct(ContactUsRepositoryInterface $contactUsRepository)
     {
@@ -35,7 +37,7 @@ class ContactUsReader implements ContactUsReaderInterface
     {
         $contactUsEntity = $this->contactUsRepository->findContactUsById($contactUsId);
 
-        if (is_null($contactUsEntity)) {
+        if ($contactUsEntity === null) {
             return null;
         }
 

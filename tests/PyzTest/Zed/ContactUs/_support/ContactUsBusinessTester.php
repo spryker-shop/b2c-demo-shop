@@ -1,8 +1,17 @@
 <?php
+
+/**
+ * This file is part of the Spryker Commerce OS.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
+ */
+
 namespace PyzTest\Zed\ContactUs;
+
+use Codeception\Actor;
 
 /**
  * Inherited Methods
+ *
  * @method void wantToTest($text)
  * @method void wantTo($text)
  * @method void execute($callable)
@@ -15,8 +24,8 @@ namespace PyzTest\Zed\ContactUs;
  * @method void pause()
  *
  * @SuppressWarnings(PHPMD)
-*/
-class ContactUsBusinessTester extends \Codeception\Actor
+ */
+class ContactUsBusinessTester extends Actor
 {
     use _generated\ContactUsBusinessTesterActions;
 
