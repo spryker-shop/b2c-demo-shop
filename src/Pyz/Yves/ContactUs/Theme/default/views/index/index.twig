@@ -1,0 +1,16 @@
+{% extends template('page-blank') %}
+
+{% block body %}
+    <h2>Contact Us</h2>
+    {{ form_start(_view.contactUsForm) }}
+    {{ form_widget(_view.contactUsForm.fullName) }}
+    {{ form_errors(_view.contactUsForm.fullName) }}
+
+    {{ form_widget(_view.contactUsForm.email) }}
+    {{ form_errors(_view.contactUsForm.email) }}
+
+    {{ form_widget(_view.contactUsForm.message) }}
+    {{ form_errors(_view.contactUsForm.message) }}
+    <input type="submit" value="Submit" />
+    {{ form_end(_view.contactUsForm) }}
+{% endblock %}
