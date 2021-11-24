@@ -2,6 +2,8 @@
 
 namespace Pyz\Yves\ContactUs\Controller;
 
+use Generated\Shared\Transfer\ContactUsTransfer;
+use Pyz\Client\ContactUs\ContactUsClientInterface;
 use Pyz\Yves\ContactUs\ContactUsFactory;
 use Spryker\Yves\Kernel\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -11,6 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
  * @package Pyz\Yves\ContactUs\Controller
  *
  * @method ContactUsFactory getFactory()
+ * @method ContactUsClientInterface getClient()
  */
 class IndexController extends AbstractController
 {
@@ -22,7 +25,7 @@ class IndexController extends AbstractController
             ->handleRequest($request);
 
         if ($contactUsForm->isSubmitted() && $contactUsForm->isValid()) {
-
+            $this->getClient()->addContactUsFeedback((new ContactUsTransfer())->fromArray($contactUsForm->getData()));
 
             return $this->redirectResponseInternal('home');
         }

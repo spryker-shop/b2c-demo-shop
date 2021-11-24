@@ -18,6 +18,7 @@ class GatewayController extends AbstractGatewayController
 {
     public function addAction(ContactUsTransfer $contactUsTransfer)
     {
+        $contactUsTransfer->setIsProcessed(false);
         return $this->getFacade()->saveContactUs($contactUsTransfer);
     }
 }
