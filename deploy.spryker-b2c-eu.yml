@@ -103,7 +103,7 @@ groups:
   EU:
     region: EU
     applications:
-      Yves:
+      yves_eu:
         application: yves
         endpoints:
           www.de.b2c-staging-eu.cloud.spryker.toys:
@@ -112,7 +112,7 @@ groups:
           www.at.b2c-staging-eu.cloud.spryker.toys:
             store: AT
             <<: *frontend-auth
-      Zed:
+      backoffice_eu:
         application: backoffice
         endpoints:
           backoffice.de.b2c-staging-eu.cloud.spryker.toys:
@@ -121,7 +121,21 @@ groups:
           backoffice.at.b2c-staging-eu.cloud.spryker.toys:
             store: AT
             <<: *frontend-auth
-      Glue:
+      backend_gateway_eu:
+        application: backend-gateway
+        endpoints:
+          backend-gateway.de.b2c-staging-eu.cloud.spryker.toys:
+            store: DE
+          backend-gateway.at.b2c-staging-eu.cloud.spryker.toys:
+             store: AT
+      backend_api_eu:
+        application: zed
+        endpoints:
+          backend-api.de.b2c-staging-eu.cloud.spryker.toys:
+            store: DE
+          backend-api.at.b2c-staging-eu.cloud.spryker.toys:
+            store: AT
+      glue_eu:
         application: glue
         endpoints:
           glue.de.b2c-staging-eu.cloud.spryker.toys:

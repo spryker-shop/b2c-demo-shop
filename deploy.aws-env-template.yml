@@ -51,7 +51,7 @@ assets:
             static: true
             level: 5
 regions:
-    DE:
+    EU:
         services:
             database:
                 database: CHANGE_ME #Example: customer_staging
@@ -69,10 +69,10 @@ regions:
                     session:
                         namespace: 2
 groups:
-    DE-1:
-        region: DE
+    EU:
+        region: EU
         applications:
-            Yves:
+            yves_eu:
                 application: yves
                 endpoints:
                     www.de.example.demo-spryker.com:
@@ -81,13 +81,25 @@ groups:
                     de.example.demo-spryker.com:
                         store: DE
                         <<: *frontend-auth
-            Zed:
-                application: zed
+            backoffice_eu:
+                application: backoffice
                 endpoints:
                     backoffice.de.example.demo-spryker.com:
                         store: DE
                         primal: true
-            Glue:
+            backend_gateway_eu:
+                application: backend-gateway
+                endpoints:
+                    backend-gateway.de.example.demo-spryker.com:
+                        store: DE
+                        primal: true
+            backend_api_eu:
+                application: zed
+                endpoints:
+                    backend-api.de.example.demo-spryker.com:
+                        store: DE
+                        entry-point: BackendApi
+            glue_eu:
                 application: glue
                 endpoints:
                     glue.de.example.demo-spryker.com:

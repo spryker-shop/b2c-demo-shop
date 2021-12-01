@@ -33,7 +33,7 @@ assets:
       level: 5
 
 regions:
-  DE:
+  EU:
     services:
       database:
         database: spryker_staging
@@ -73,10 +73,10 @@ regions:
             namespace: 2
 
 groups:
-  DE-1:
-    region: DE
+  EU:
+    region: EU
     applications:
-      Redirects:
+      redirects_eu:
         application: static
         endpoints:
           de.b2c.demo-spryker.com:
@@ -94,7 +94,7 @@ groups:
             redirect:
               code: 302
               url: www.us.b2c.demo-spryker.com
-      Yves:
+      yves_eu:
         application: yves
         endpoints:
           www.de.b2c.demo-spryker.com:
@@ -103,19 +103,37 @@ groups:
             store: AT
           www.us.b2c.demo-spryker.com:
             store: US
-      Zed:
+      backoffice_eu:
+          application: backoffice
+          endpoints:
+            backoffice.de.b2c.demo-spryker.com:
+              store: DE
+              <<: *frontend-auth
+            backoffice.at.b2c.demo-spryker.com:
+              store: AT
+              <<: *frontend-auth
+            backoffice.us.b2c.demo-spryker.com:
+              store: US
+              <<: *frontend-auth
+      backend_gateway_eu:
+        application: backend-gateway
+        endpoints:
+          backend-gateway.de.b2c.demo-spryker.com:
+            store: DE
+          backend-gateway.at.b2c.demo-spryker.com:
+            store: AT
+          backend-gateway.us.b2c.demo-spryker.com:
+            store: US
+      backend_api_eu:
         application: zed
         endpoints:
-          os.de.b2c.demo-spryker.com:
+          backend-api.de.b2c.demo-spryker.com:
             store: DE
-            <<: *frontend-auth
-          os.at.b2c.demo-spryker.com:
+          backend-api.at.b2c.demo-spryker.com:
             store: AT
-            <<: *frontend-auth
-          os.us.b2c.demo-spryker.com:
+          backend-api.us.b2c.demo-spryker.com:
             store: US
-            <<: *frontend-auth
-      Glue:
+      glue_eu:
         application: glue
         endpoints:
           glue.de.b2c.demo-spryker.com:

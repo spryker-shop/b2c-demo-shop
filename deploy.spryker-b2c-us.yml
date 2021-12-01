@@ -93,19 +93,29 @@ groups:
   US:
     region: US
     applications:
-      Yves:
+      yves_us:
         application: yves
         endpoints:
           www.b2c-staging-us.cloud.spryker.toys:
             store: US
             <<: *frontend-auth
-      Zed:
+      backoffice_us:
         application: backoffice
         endpoints:
-            backoffice.b2c-staging-us.cloud.spryker.toys:
+          backoffice.b2c-staging-us.cloud.spryker.toys:
             store: US
             <<: *frontend-auth
-      Glue:
+      backend_gateway_us:
+        application: backend-gateway
+        endpoints:
+          backend-gateway.b2c-staging-us.cloud.spryker.toys:
+            store: US
+      backend_api_us:
+        application: zed
+        endpoints:
+          backend-api.b2c-staging-us.cloud.spryker.toys:
+            store: US
+      glue_us:
         application: glue
         endpoints:
           glue.b2c-staging-us.cloud.spryker.toys:

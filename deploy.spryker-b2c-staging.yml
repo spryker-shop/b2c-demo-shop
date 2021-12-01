@@ -33,7 +33,7 @@ assets:
       level: 5
 
 regions:
-  DE:
+  EU:
     services:
       database:
         database: spryker_staging
@@ -73,10 +73,10 @@ regions:
             namespace: 2
 
 groups:
-  DE-1:
-    region: DE
+  EU:
+    region: EU
     applications:
-      Redirects:
+      redirects_eu:
         application: static
         endpoints:
           de.b2c.cloud.spryker.toys:
@@ -94,7 +94,7 @@ groups:
             redirect:
               code: 302
               url: www.us.b2c.cloud.spryker.toys
-      Yves:
+      yves_eu:
         application: yves
         endpoints:
           www.de.b2c.cloud.spryker.toys:
@@ -106,19 +106,37 @@ groups:
           www.us.b2c.cloud.spryker.toys:
             store: US
             <<: *frontend-auth
-      Zed:
-        application: zed
+      backoffice_eu:
+        application: backoffice
         endpoints:
-          os.de.b2c.cloud.spryker.toys:
+          backoffice.de.b2c.cloud.spryker.toys:
             store: DE
             <<: *frontend-auth
-          os.at.b2c.cloud.spryker.toys:
+          backoffice.at.b2c.cloud.spryker.toys:
             store: AT
             <<: *frontend-auth
-          os.us.b2c.cloud.spryker.toys:
+          backoffice.us.b2c.cloud.spryker.toys:
             store: US
             <<: *frontend-auth
-      Glue:
+      backend_gateway_eu:
+        application: backend-gateway
+        endpoints:
+          backend-gateway.de.b2c.cloud.spryker.toys:
+            store: DE
+          backend-gateway.at.b2c.cloud.spryker.toys:
+            store: AT
+          backend-gateway.us.b2c.cloud.spryker.toys:
+            store: US
+      backend_api_eu:
+        application: zed
+        endpoints:
+          backend-api.de.b2c.cloud.spryker.toys:
+            store: DE
+          backend-api.at.b2c.cloud.spryker.toys:
+            store: AT
+          backend-api.us.b2c.cloud.spryker.toys:
+            store: US
+      glue_eu:
         application: glue
         endpoints:
           glue.de.b2c.cloud.spryker.toys:
