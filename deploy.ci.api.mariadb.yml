@@ -25,7 +25,7 @@ regions:
                 password: secret
 
         stores:
-            DE:
+            HR:
                 services:
                     broker:
                         namespace: de-docker
@@ -52,53 +52,35 @@ groups:
             yves_eu:
                 application: yves
                 endpoints:
-                    yves.de.spryker.local:
-                        store: DE
+                    yves.hr.spryker.local:
+                        store: HR
                         services:
                             session:
                                 namespace: 1
-                    yves.at.spryker.local:
-                        store: AT
-                        services:
-                            session:
-                                namespace: 2
             glue_eu:
                 application: glue
                 endpoints:
-                    glue.de.spryker.local:
-                        store: DE
-                    glue.at.spryker.local:
-                        store: AT
+                    glue.hr.spryker.local:
+                        store: HR
             backoffice_eu:
                 application: zed
                 endpoints:
-                    backoffice.de.spryker.local:
-                        store: DE
+                    backoffice.hr.spryker.local:
+                        store: HR
                         services:
                             session:
                                 namespace: 3
-                    backoffice.at.spryker.local:
-                        store: AT
-                        services:
-                            session:
-                                namespace: 4
             backend_gateway_eu:
                 application: backend-gateway
                 endpoints:
-                    backend-gateway.de.spryker.local:
-                        store: DE
-                        primal: true
-                    backend-gateway.at.spryker.local:
-                        store: AT
+                    backend-gateway.hr.spryker.local:
+                        store: HR
                         primal: true
             backend_api_eu:
                 application: zed
                 endpoints:
-                    backend-api.de.spryker.local:
-                        store: DE
-                        entry-point: BackendApi
-                    backend-api.at.spryker.local:
-                        store: AT
+                    backend-api.hr.spryker.local:
+                        store: HR
                         entry-point: BackendApi
 
 services:
@@ -136,7 +118,7 @@ docker:
             enabled: false
 
     testing:
-        store: DE
+        store: HR
 
     mount:
         baked:

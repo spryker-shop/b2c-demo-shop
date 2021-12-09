@@ -24,37 +24,15 @@ regions:
                 password: secret
 
         stores:
-            DE:
+            HR:
                 services:
                     broker:
-                        namespace: de-docker
+                        namespace: hr-docker
                     key_value_store:
                         namespace: 1
                     search:
-                        namespace: de_search
-            AT:
-                services:
-                    broker:
-                        namespace: at-docker
-                    key_value_store:
-                        namespace: 2
-                    search:
-                        namespace: at_search
-    US:
-        services:
-            database:
-                database: us-docker
-                username: spryker
-                password: secret
-        stores:
-            US:
-                services:
-                    broker:
-                        namespace: us-docker
-                    key_value_store:
-                        namespace: 3
-                    search:
-                        namespace: us_search
+                        namespace: hr_search
+
 groups:
     EU:
         region: EU
@@ -62,88 +40,36 @@ groups:
             yves_eu:
                 application: yves
                 endpoints:
-                    yves.de.spryker.local:
-                        store: DE
+                    yves.hr.spryker.local:
+                        store: HR
                         services:
                             session:
                                 namespace: 1
-                    yves.at.spryker.local:
-                        store: AT
-                        services:
-                            session:
-                                namespace: 2
             glue_eu:
                 application: glue
                 endpoints:
-                    glue.de.spryker.local:
-                        store: DE
-                    glue.at.spryker.local:
-                        store: AT
+                    glue.hr.spryker.local:
+                        store: HR
             backoffice_eu:
                 application: backoffice
                 endpoints:
-                    backoffice.de.spryker.local:
-                        store: DE
+                    backoffice.hr.spryker.local:
+                        store: HR
                         services:
                             session:
                                 namespace: 3
-                    backoffice.at.spryker.local:
-                        store: AT
-                        services:
-                            session:
-                                namespace: 4
             backend_gateway_eu:
                 application: backend-gateway
                 endpoints:
-                    backend-gateway.de.spryker.local:
-                        store: DE
-                        primal: true
-                    backend-gateway.at.spryker.local:
-                        store: AT
+                    backend-gateway.hr.spryker.local:
+                        store: HR
                         primal: true
             backend_api_eu:
                 application: zed
                 endpoints:
-                    backend-api.de.spryker.local:
-                        store: DE
+                    backend-api.hr.spryker.local:
+                        store: HR
                         entry-point: BackendApi
-                    backend-api.at.spryker.local:
-                        store: AT
-                        entry-point: BackendApi
-    US:
-        region: US
-        applications:
-            yves_us:
-                application: yves
-                endpoints:
-                    yves.us.spryker.local:
-                        store: US
-                        services:
-                            session:
-                                namespace: 5
-            glue_us:
-                application: glue
-                endpoints:
-                    glue.us.spryker.local:
-                        store: US
-            backoffice_us:
-                application: backoffice
-                endpoints:
-                    backoffice.us.spryker.local:
-                        store: US
-                        services:
-                            session:
-                                namespace: 6
-            backend_gateway_us:
-                application: backend-gateway
-                endpoints:
-                    backend-gateway.us.spryker.local:
-                        store: US
-            backend_api_us:
-                application: zed
-                endpoints:
-                    backend-api.us.spryker.local:
-                        store: US
 services:
     database:
         engine: mysql
@@ -204,7 +130,7 @@ docker:
         redirect: true
 
     testing:
-        store: DE
+        store: HR
 
     debug:
         enabled: true
