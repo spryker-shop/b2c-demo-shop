@@ -2,7 +2,7 @@
 
 $stores = [];
 
-if (!empty(getenv('SPRYKER_ACTIVE_STORES'))) {
+/*if (!empty(getenv('SPRYKER_ACTIVE_STORES'))) {
     $activeStores = array_map('trim', explode(',', getenv('SPRYKER_ACTIVE_STORES')));
 
     $template = [
@@ -36,7 +36,7 @@ if (!empty(getenv('SPRYKER_ACTIVE_STORES'))) {
             'de' => 'de_DE',
         ],
         // first entry is default
-        'countries' => ['DE', 'AT', 'NO', 'CH', 'ES', 'GB'],
+        'countries' => ['HR', 'AT', 'NO', 'CH', 'ES', 'GB'],
         // internal and shop
         'currencyIsoCode' => 'EUR',
         'currencyIsoCodes' => ['EUR', 'CHF'],
@@ -55,9 +55,9 @@ if (!empty(getenv('SPRYKER_ACTIVE_STORES'))) {
     }
 
     return $stores;
-}
+}*/
 
-$stores['DE'] = [
+$stores['HR'] = [
     // different contexts
     'contexts' => [
         // shared settings for all contexts
@@ -85,33 +85,19 @@ $stores['DE'] = [
     'locales' => [
         // first entry is default
         'en' => 'en_US',
-        'de' => 'de_DE',
+        'hr' => 'hr_HR',
     ],
     // first entry is default
-    'countries' => ['DE', 'AT', 'NO', 'CH', 'ES', 'GB'],
+    'countries' => ['HR'],
     // internal and shop
-    'currencyIsoCode' => 'EUR',
-    'currencyIsoCodes' => ['EUR', 'CHF'],
+    'currencyIsoCode' => 'HRK',
+    'currencyIsoCodes' => ['HRK', 'EUR'],
     'queuePools' => [
         'synchronizationPool' => [
-            'AT-connection',
-            'DE-connection',
+            'HR-connection'
         ],
     ],
-    'storesWithSharedPersistence' => ['AT'],
+    'storesWithSharedPersistence' => [],
 ];
-
-$stores['AT'] = [
-        'storesWithSharedPersistence' => ['DE'],
-    ] + $stores['DE'];
-
-$stores['US'] = [
-        'queuePools' => [
-            'synchronizationPool' => [
-                'US-connection',
-            ],
-        ],
-        'storesWithSharedPersistence' => [],
-    ] + $stores['DE'];
 
 return $stores;

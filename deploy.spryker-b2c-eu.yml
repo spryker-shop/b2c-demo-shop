@@ -44,8 +44,8 @@ environment: docker.demo
 image:
   tag: spryker/php:7.3-alpine3.12
   environment:
-    SPRYKER_DEFAULT_STORE: "DE"
-    SPRYKER_ACTIVE_STORES: "DE,AT"
+    SPRYKER_DEFAULT_STORE: "HR"
+    SPRYKER_ACTIVE_STORES: "HR"
     SPRYKER_HOOK_BEFORE_DEPLOY: "vendor/bin/install -r EU/pre-deploy -vvv"
     SPRYKER_HOOK_AFTER_DEPLOY: "true"
     SPRYKER_HOOK_INSTALL: "vendor/bin/install -r EU/production --no-ansi -vvv"
@@ -78,24 +78,14 @@ regions:
         password: secret
 
     stores:
-      DE:
+      HR:
         services:
           broker:
-            namespace: de_queue
+            namespace: hr_queue
           key_value_store:
             namespace: 1
           search:
-            namespace: de_search
-          session:
-            namespace: 2
-      AT:
-        services:
-          broker:
-            namespace: at_queue
-          key_value_store:
-            namespace: 1
-          search:
-            namespace: at_search
+            namespace: hr_search
           session:
             namespace: 2
 
@@ -106,28 +96,20 @@ groups:
       Yves:
         application: yves
         endpoints:
-          www.de.b2c-staging-eu.cloud.spryker.toys:
-            store: DE
-            <<: *frontend-auth
-          www.at.b2c-staging-eu.cloud.spryker.toys:
-            store: AT
+          www.hr.b2c-staging-eu.cloud.spryker.toys:
+            store: HR
             <<: *frontend-auth
       Zed:
         application: backoffice
         endpoints:
-          backoffice.de.b2c-staging-eu.cloud.spryker.toys:
-            store: DE
-            <<: *frontend-auth
-          backoffice.at.b2c-staging-eu.cloud.spryker.toys:
-            store: AT
+          backoffice.hr.b2c-staging-eu.cloud.spryker.toys:
+            store: HR
             <<: *frontend-auth
       Glue:
         application: glue
         endpoints:
-          glue.de.b2c-staging-eu.cloud.spryker.toys:
-            store: DE
-          glue.at.b2c-staging-eu.cloud.spryker.toys:
-            store: AT
+          glue.hr.b2c-staging-eu.cloud.spryker.toys:
+            store: HR
 
 services:
   database:
@@ -185,7 +167,7 @@ docker:
       enabled: false
 
   testing:
-    store: DE
+    store: HR
 
   mount:
     baked:

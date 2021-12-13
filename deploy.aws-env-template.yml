@@ -70,28 +70,28 @@ regions:
                         namespace: 2
 groups:
     DE-1:
-        region: DE
+        region: HR
         applications:
             Yves:
                 application: yves
                 endpoints:
                     www.de.example.demo-spryker.com:
-                        store: DE
+                        store: HR
                         <<: *frontend-auth
                     de.example.demo-spryker.com:
-                        store: DE
+                        store: HR
                         <<: *frontend-auth
             Zed:
                 application: zed
                 endpoints:
                     backoffice.de.example.demo-spryker.com:
-                        store: DE
+                        store: HR
                         primal: true
             Glue:
                 application: glue
                 endpoints:
                     glue.de.example.demo-spryker.com:
-                        store: DE
+                        store: HR
                         primal: true
 services:
     database:
@@ -139,7 +139,7 @@ docker:
     ssl:
         enabled: true
     testing:
-        store: DE
+        store: HR
     debug:
         enabled: true
     mount:

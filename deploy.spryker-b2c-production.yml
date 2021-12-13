@@ -33,7 +33,7 @@ assets:
       level: 5
 
 regions:
-  DE:
+  HR:
     services:
       database:
         database: spryker_staging
@@ -41,89 +41,45 @@ regions:
         password: secret
 
     stores:
-      DE:
+      HR:
         services:
           broker:
-            namespace: de_queue
+            namespace: hr_queue
           key_value_store:
             namespace: 1
           search:
-            namespace: de_search
-          session:
-            namespace: 2
-      AT:
-        services:
-          broker:
-            namespace: at_queue
-          key_value_store:
-            namespace: 1
-          search:
-            namespace: at_search
-          session:
-            namespace: 2
-      US:
-        services:
-          broker:
-            namespace: us_queue
-          key_value_store:
-            namespace: 1
-          search:
-            namespace: us_search
+            namespace: hr_search
           session:
             namespace: 2
 
 groups:
-  DE-1:
-    region: DE
+  HR-1:
+    region: HR
     applications:
       Redirects:
         application: static
         endpoints:
-          de.b2c.demo-spryker.com:
-            store: DE
+          hr.b2c.demo-spryker.com:
+            store: HR
             redirect:
               type: 302
-              url: www.de.b2c.demo-spryker.com
-          at.b2c.demo-spryker.com:
-            store: AT
-            redirect:
-              code: 302
-              url: www.at.b2c.demo-spryker.com
-          us.b2c.demo-spryker.com:
-            store: US
-            redirect:
-              code: 302
-              url: www.us.b2c.demo-spryker.com
+              url: www.hr.b2c.demo-spryker.com
       Yves:
         application: yves
         endpoints:
-          www.de.b2c.demo-spryker.com:
-            store: DE
-          www.at.b2c.demo-spryker.com:
-            store: AT
-          www.us.b2c.demo-spryker.com:
-            store: US
+          www.hr.b2c.demo-spryker.com:
+            store: HR
       Zed:
         application: zed
         endpoints:
-          os.de.b2c.demo-spryker.com:
-            store: DE
-            <<: *frontend-auth
-          os.at.b2c.demo-spryker.com:
-            store: AT
-            <<: *frontend-auth
-          os.us.b2c.demo-spryker.com:
-            store: US
+          os.hr.b2c.demo-spryker.com:
+            store: HR
             <<: *frontend-auth
       Glue:
         application: glue
         endpoints:
-          glue.de.b2c.demo-spryker.com:
-            store: DE
-          glue.at.b2c.demo-spryker.com:
-            store: AT
-          glue.us.b2c.demo-spryker.com:
-            store: US
+          glue.hr.b2c.demo-spryker.com:
+            store: HR
 services:
   database:
     engine: mysql
@@ -180,7 +136,7 @@ docker:
       enabled: false
 
   testing:
-    store: DE
+    store: HR
 
   mount:
     baked:

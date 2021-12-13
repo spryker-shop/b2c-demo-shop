@@ -118,7 +118,7 @@ $config[CmsGuiConstants::CMS_PAGE_PREVIEW_URI] = '/en/cms/preview/%d';
 // >>> TRANSLATOR
 
 $config[TranslatorConstants::TRANSLATION_ZED_FALLBACK_LOCALES] = [
-    'de_DE' => ['en_US'],
+    'hr_HR' => ['en_US'],
 ];
 
 // >>> MONITORING
@@ -465,7 +465,7 @@ $config[MailConstants::SENDER_NAME] = getenv('SPRYKER_MAIL_SENDER_NAME') ?: null
 $config[FileSystemConstants::FILESYSTEM_SERVICE] = [
     'files' => [
         'sprykerAdapterClass' => LocalFilesystemBuilderPlugin::class,
-        'root' => APPLICATION_ROOT_DIR . '/data/DE/media/',
+        'root' => APPLICATION_ROOT_DIR . '/data/HR/media/',
         'path' => 'files/',
     ],
 ];
