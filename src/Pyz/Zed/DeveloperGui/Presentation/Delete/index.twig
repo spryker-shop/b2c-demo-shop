@@ -1,0 +1,30 @@
+{% extends '@Gui/Layout/layout.twig' %}
+
+{% set widget_title = 'Developer deletion confirmation' %}
+
+{% block head_title %}
+    {{ widget_title | trans }}
+{% endblock %}
+{% block section_title %}
+    {{ widget_title | trans }}
+{% endblock %}
+
+{% block action %}
+    {{ backActionButton(app.request.headers.get('referer'), 'Back' | trans) }}
+{% endblock %}
+
+{% block content %}
+
+    {% embed '@Gui/Partials/widget.twig' %}
+
+        {% block widget_content %}
+            {{ form_start(form, {'action': url('/developer-gui/delete/confirm')}) }}
+            {{ form_widget(form.idDeveloper) }}
+
+            <button class="btn btn-danger safe-submit">{{ 'Delete developer' | trans}}</button>
+            {{ form_end(form) }}
+        {% endblock %}
+
+    {% endembed %}
+
+{% endblock %}

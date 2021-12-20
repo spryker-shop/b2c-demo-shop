@@ -1,0 +1,19 @@
+{% extends '@Gui/Layout/layout.twig' %}
+
+{% set widget_title = 'Developer' | trans %}
+{% block section_title %}{{ widget_title }}{% endblock %}
+
+{% block action %}
+    {{ createActionButton('/developer-gui/add', 'Create developer' | trans) }}
+{% endblock %}
+
+{% block content %}
+    {% embed '@Gui/Partials/widget.twig' with { widget_title: 'Developers' | trans } %}
+
+        {% block widget_content %}
+            {{ developerTable | raw }}
+        {% endblock %}
+
+    {% endembed %}
+
+{% endblock %}

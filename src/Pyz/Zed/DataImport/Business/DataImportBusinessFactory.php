@@ -41,6 +41,7 @@ use Pyz\Zed\DataImport\Business\Model\Customer\CustomerWriterStep;
 use Pyz\Zed\DataImport\Business\Model\DataImporterConditional;
 use Pyz\Zed\DataImport\Business\Model\DataImporterDataSetWriterAwareConditional;
 use Pyz\Zed\DataImport\Business\Model\DataSet\DataSetConditionInterface;
+use Pyz\Zed\DataImport\Business\Model\Developer\DeveloperWriterStep;
 use Pyz\Zed\DataImport\Business\Model\Discount\DiscountWriterStep;
 use Pyz\Zed\DataImport\Business\Model\DiscountAmount\DiscountAmountWriterStep;
 use Pyz\Zed\DataImport\Business\Model\DiscountStore\DiscountStoreWriterStep;
@@ -214,6 +215,8 @@ class DataImportBusinessFactory extends SprykerDataImportBusinessFactory
                 return $this->createNavigationImporter($dataImportConfigurationActionTransfer);
             case DataImportConfig::IMPORT_TYPE_NAVIGATION_NODE:
                 return $this->createNavigationNodeImporter($dataImportConfigurationActionTransfer);
+            case DataImportConfig::IMPORT_TYPE_DEVELOPER:
+                return $this->createDeveloperImport($dataImportConfigurationActionTransfer);
             default:
                 return null;
         }
@@ -1637,6 +1640,31 @@ class DataImportBusinessFactory extends SprykerDataImportBusinessFactory
         $dataImporter->setDataSetCondition($this->createCombinedProductAbstractStoreMandatoryColumnCondition());
         $dataImporter->addDataSetStepBroker($dataSetStepBroker);
         $dataImporter->setDataSetWriter($this->createCombinedProductAbstractStoreDataSetWriters());
+
+        return $dataImporter;
+    }
+
+    /**
+
+     * @param \Generated\Shared\Transfer\DataImportConfigurationActionTransfer $dataImportConfigurationActionTransfer
+
+     *
+
+     * @return \Spryker\Zed\DataImport\Business\Model\DataImporterInterface
+
+     */
+
+    public function createDeveloperImport(DataImportConfigurationActionTransfer $dataImportConfigurationActionTransfer): DataImporterInterface
+    {
+
+        $dataImporter = $this->getCsvDataImporterFromConfig(
+            $this->getConfig()->buildImporterConfigurationByDataImportConfigAction($dataImportConfigurationActionTransfer)
+        );
+
+        $dataSetStepBroker = $this->createDataSetStepBroker();
+        $dataSetStepBroker->addStep(new DeveloperWriterStep());
+
+        $dataImporter->addDataSetStepBroker($dataSetStepBroker);
 
         return $dataImporter;
     }

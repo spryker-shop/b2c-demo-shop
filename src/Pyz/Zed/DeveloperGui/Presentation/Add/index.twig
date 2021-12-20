@@ -1,0 +1,32 @@
+{% extends '@Gui/Layout/layout.twig' %}
+
+{% if widget_title is not defined %}
+    {% set widget_title = 'Create a Developer' | trans %}
+{% endif %}
+
+{% if submit_title is not defined %}
+    {% set submit_title = 'Save' | trans %}
+{% endif %}
+
+{% block section_title %}{{ widget_title }}{% endblock %}
+
+{% block action %}
+    {{ backActionButton('/developer-gui/index', 'List Developers' | trans) }}
+{% endblock %}
+
+{% block content %}
+
+    {% embed '@Gui/Partials/widget.twig' %}
+
+        {% block widget_content %}
+
+            {{ form_start(cartAddForm) }}
+            {{ form_widget(cartAddForm) }}
+
+            <input type="submit" class="btn btn-primary safe-submit" value="{{ 'Save' | trans }}" />
+            {{ form_end(cartAddForm) }}
+
+        {% endblock %}
+
+    {% endembed %}
+{% endblock %}

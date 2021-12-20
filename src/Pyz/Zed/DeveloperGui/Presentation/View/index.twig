@@ -1,0 +1,55 @@
+{% extends '@Gui/Layout/layout.twig' %}
+
+{% set widget_title = 'View Developer' %}
+
+{% block head_title %}
+    {{ widget_title | trans }}
+{% endblock %}
+{% block section_title %}
+    {{ widget_title | trans }}
+{% endblock %}
+
+{% block action %}
+    {{ backActionButton('/developer-gui', 'List Developers' | trans) }}
+    {{ removeActionButton(url('/developer-gui/delete', {'id-developer': developer.idDeveloper}), 'Delete' | trans) }}
+    {{ editActionButton('/developer-gui/edit?id-developer=' ~ developer.idDeveloper, 'Edit Developer' | trans) }}
+{% endblock %}
+
+{% block content %}
+
+    {% embed '@Gui/Partials/widget.twig' with { widget_title: 'Developer' } %}
+
+        {% block widget_content %}
+            <div class="row">
+                <table class="table">
+                    <thead></thead>
+                    <tbody>
+                    <tr>
+                        <th class="col-lg-2">{{ 'Name' | trans }}</th>
+                        <td>{{ developer.name }}</td>
+                    </tr>
+                    <tr>
+                        <th>{{ 'Surname' | trans }}</th>
+                        <td>{{ developer.surname }}</td>
+                    </tr>
+                    <tr>
+                        <th>{{ 'Proffesion' | trans }}</th>
+                        <td>{{ developer.profession }}</td>
+                    </tr>
+                    <tr>
+                        <th>{{ 'Status' | trans }}</th>
+                        <td>{{ translatedStatus }}</td>
+                    </tr>
+                    <tr>
+                        <th>{{ 'Description' | trans }}</th>
+                        <td>{{ developer.description | raw }}</td>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                </table>
+            </div>
+
+        {% endblock %}
+    {% endembed %}
+
+{% endblock %}

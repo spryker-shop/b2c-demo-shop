@@ -1,0 +1,34 @@
+{% extends '@Gui/Layout/layout.twig' %}
+
+{% set widget_title = 'Edit Developer' %}
+
+{% block head_title %}
+    {{ widget_title | trans }}
+{% endblock %}
+{% block section_title %}
+    {{ widget_title | trans }}
+{% endblock %}
+
+{% block action %}
+    {{ backActionButton(url('/developer-gui/index'), 'Back to Developers' | trans) }}
+    {{ removeActionButton(url('/developer-gui/delete', {'id-developer': idDeveloper}), 'Delete' | trans) }}
+    {{ viewActionButton(url('/developer-gui/view', {'id-developer': idDeveloper}), 'View' | trans) }}
+{% endblock %}
+
+{% block content %}
+
+    {% embed '@Gui/Partials/widget.twig' %}
+
+        {% block widget_content %}
+
+            {{ form_start(developerForm) }}
+            {{ tabs(developerFormTabs, {
+                'developerForm': developerForm
+            }) }}
+            {{ form_end(developerForm) }}
+
+        {% endblock %}
+
+    {% endembed %}
+
+{% endblock %}
