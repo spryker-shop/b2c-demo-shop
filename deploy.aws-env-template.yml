@@ -1,4 +1,5 @@
 version: "0.1"
+
 x-real-ip: &real-ip
     real-ip:
         from:
@@ -24,6 +25,7 @@ x-real-ip: &real-ip
             - 2405:8100::/32 # Cloudflare
             - 2c0f:f248::/32 # Cloudflare
             - 2a06:98c0::/29 # Cloudflare
+
 x-frontend-auth: &frontend-auth
     <<: *real-ip
     auth:
@@ -34,13 +36,17 @@ x-frontend-auth: &frontend-auth
         exclude:
             - '${ALLOWED_IP}' # AWS gateway
             - 185.60.20.0/24 # PayOne
+
 namespace: spryker-customer # INIT_IMAGE_PREFIX
 tag: '1.0'
+
 environment: docker
-image: spryker/php:7.3-DRAFT-new-relic  # Last actual image
+image:
+    tag: spryker/php:7.3  # Last actual image
 composer:
     mode: --no-dev
     autoload: --classmap-authoritative
+
 assets:
     image: fholzer/nginx-brotli:v1.18.0
     mode: production
@@ -51,7 +57,7 @@ assets:
             static: true
             level: 5
 regions:
-    DE:
+    EU:
         services:
             database:
                 database: CHANGE_ME #Example: customer_staging
@@ -69,10 +75,10 @@ regions:
                     session:
                         namespace: 2
 groups:
-    DE-1:
-        region: DE
+    EU:
+        region: EU
         applications:
-            Yves:
+            yves_eu:
                 application: yves
                 endpoints:
                     www.de.example.demo-spryker.com:
@@ -81,13 +87,25 @@ groups:
                     de.example.demo-spryker.com:
                         store: DE
                         <<: *frontend-auth
-            Zed:
-                application: zed
+            backoffice_eu:
+                application: backoffice
                 endpoints:
                     backoffice.de.example.demo-spryker.com:
                         store: DE
                         primal: true
-            Glue:
+            backend_gateway_eu:
+                application: backend-gateway
+                endpoints:
+                    backend-gateway.de.example.demo-spryker.com:
+                        store: DE
+                        primal: true
+            backend_api_eu:
+                application: zed
+                endpoints:
+                    backend-api.de.example.demo-spryker.com:
+                        store: DE
+                        entry-point: BackendApi
+            glue_eu:
                 application: glue
                 endpoints:
                     glue.de.example.demo-spryker.com:
@@ -133,14 +151,22 @@ services:
         engine: mailhog
         endpoints:
             mail.example.demo-spryker.com:
+
 docker:
     blackfire:
         enabled: true
+
     ssl:
         enabled: true
+        redirect: true
+
     testing:
         store: DE
+
     debug:
-        enabled: true
+        enabled: false
+        xdebug:
+            enabled: false
+
     mount:
         baked:
