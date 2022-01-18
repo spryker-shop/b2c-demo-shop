@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "23049f98719a5d92d05b83b90c2b15ca",
+    "content-hash": "bd98a49e41d574f02d35dd3f88d057ff",
     "packages": [
         {
             "name": "brick/math",
@@ -13252,6 +13252,57 @@
             "time": "2021-02-09T16:20:37+00:00"
         },
         {
+            "name": "spryker/category-discount-connector",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/category-discount-connector.git",
+                "reference": "d601f4021ac6229a0768bbdd52815da4d7613007"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/category-discount-connector/zipball/d601f4021ac6229a0768bbdd52815da4d7613007",
+                "reference": "d601f4021ac6229a0768bbdd52815da4d7613007",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.4",
+                "spryker/category": "^5.3.0",
+                "spryker/discount": "^9.0.0",
+                "spryker/discount-extension": "^1.2.0",
+                "spryker/kernel": "^3.30.0",
+                "spryker/locale": "^3.0.0",
+                "spryker/product-category": "^4.13.0",
+                "spryker/transfer": "^3.25.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/product": "*",
+                "spryker/propel": "*",
+                "spryker/testify": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "CategoryDiscountConnector module",
+            "support": {
+                "source": "https://github.com/spryker/category-discount-connector/tree/1.0.0"
+            },
+            "time": "2021-12-06T13:29:28+00:00"
+        },
+        {
             "name": "spryker/category-exporter",
             "version": "3.0.4",
             "source": {
@@ -19761,27 +19812,33 @@
         },
         {
             "name": "spryker/discount-calculation-connector",
-            "version": "5.2.0",
+            "version": "5.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/discount-calculation-connector.git",
-                "reference": "dbc7b5bd9613c6241fe628095b74519e78237ba4"
+                "reference": "f03859b254c4a5a5ba6793774255f3238a00feef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/discount-calculation-connector/zipball/dbc7b5bd9613c6241fe628095b74519e78237ba4",
-                "reference": "dbc7b5bd9613c6241fe628095b74519e78237ba4",
+                "url": "https://api.github.com/repos/spryker/discount-calculation-connector/zipball/f03859b254c4a5a5ba6793774255f3238a00feef",
+                "reference": "f03859b254c4a5a5ba6793774255f3238a00feef",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.2",
+                "php": ">=7.4",
                 "spryker/calculation-extension": "^1.0.0",
                 "spryker/discount": "^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^9.0.0",
-                "spryker/kernel": "^3.30.0"
+                "spryker/kernel": "^3.30.0",
+                "spryker/transfer": "^3.25.0"
             },
             "require-dev": {
                 "spryker/calculation": "*",
-                "spryker/code-sniffer": "*"
+                "spryker/code-sniffer": "*",
+                "spryker/currency": "*",
+                "spryker/product": "*",
+                "spryker/propel": "*",
+                "spryker/store": "*",
+                "spryker/testify": "*"
             },
             "suggest": {
                 "spryker/calculation": "If you want to use Calculation plugins."
@@ -19803,9 +19860,9 @@
             ],
             "description": "DiscountCalculationConnector module",
             "support": {
-                "source": "https://github.com/spryker/discount-calculation-connector/tree/5.2.0"
+                "source": "https://github.com/spryker/discount-calculation-connector/tree/5.3.0"
             },
-            "time": "2020-09-09T10:48:04+00:00"
+            "time": "2022-01-12T14:30:13+00:00"
         },
         {
             "name": "spryker/discount-extension",
