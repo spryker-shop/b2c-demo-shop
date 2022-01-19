@@ -91,7 +91,7 @@ class DiscountDependencyProvider extends SprykerDiscountDependencyProvider
     }
 
     /**
-     * @return array<\Spryker\Zed\DiscountExtension\Dependency\Plugin\CollectedDiscountGroupingStrategyPluginInterface>
+     * @return array<\Spryker\Zed\DiscountExtension\Dependency\Plugin\DiscountableItemTransformerStrategyPluginInterface>
      */
     protected function getDiscountableItemTransformerStrategyPlugins(): array
     {
@@ -172,7 +172,7 @@ class DiscountDependencyProvider extends SprykerDiscountDependencyProvider
     }
 
     /**
-     * array<\Spryker\Zed\Discount\Dependency\Plugin\DiscountApplicableFilterPluginInterface>
+     * @return array<\Spryker\Zed\Discount\Dependency\Plugin\DiscountApplicableFilterPluginInterface>
      */
     protected function getDiscountApplicableFilterPlugins()
     {
