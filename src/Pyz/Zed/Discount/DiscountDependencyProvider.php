@@ -39,7 +39,7 @@ class DiscountDependencyProvider extends SprykerDiscountDependencyProvider
     /**
      * @return array<\Spryker\Zed\DiscountExtension\Dependency\Plugin\DecisionRulePluginInterface>
      */
-    protected function getDecisionRulePlugins()
+    protected function getDecisionRulePlugins(): array
     {
         return array_merge(parent::getDecisionRulePlugins(), [
             new ShipmentCarrierDecisionRulePlugin(),
@@ -54,7 +54,7 @@ class DiscountDependencyProvider extends SprykerDiscountDependencyProvider
     /**
      * @return array<\Spryker\Zed\DiscountExtension\Dependency\Plugin\DiscountableItemCollectorPluginInterface>
      */
-    protected function getCollectorPlugins()
+    protected function getCollectorPlugins(): array
     {
         return array_merge(parent::getCollectorPlugins(), [
             new ProductLabelCollectorPlugin(),
