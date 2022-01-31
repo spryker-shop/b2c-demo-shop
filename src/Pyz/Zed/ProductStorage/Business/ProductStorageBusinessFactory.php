@@ -42,7 +42,8 @@ class ProductStorageBusinessFactory extends SprykerProductStorageBusinessFactory
         return new ProductConcreteStorageWriter(
             $this->getProductFacade(),
             $this->getQueryContainer(),
-            $this->getConfig()->isSendingToQueue()
+            $this->getConfig()->isSendingToQueue(),
+            $this->getProductConcreteStorageCollectionExpanderPlugins(),
         );
     }
 
