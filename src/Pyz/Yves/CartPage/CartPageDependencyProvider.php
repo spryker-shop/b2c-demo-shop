@@ -8,6 +8,7 @@
 namespace Pyz\Yves\CartPage;
 
 use SprykerShop\Yves\CartPage\CartPageDependencyProvider as SprykerCartPageDependencyProvider;
+use SprykerShop\Yves\DiscountPromotionWidget\Plugin\CartPage\DiscountPromotionAddToCartFormWidgetParameterExpanderPlugin;
 use SprykerShop\Yves\ProductBundleWidget\Plugin\CartPage\ProductBundleCartItemTransformerPlugin;
 
 class CartPageDependencyProvider extends SprykerCartPageDependencyProvider
@@ -19,6 +20,16 @@ class CartPageDependencyProvider extends SprykerCartPageDependencyProvider
     {
         return [
             new ProductBundleCartItemTransformerPlugin(),
+        ];
+    }
+
+    /**
+     * @return array<\SprykerShop\Yves\CartPageExtension\Dependency\Plugin\AddToCartFormWidgetParameterExpanderPluginInterface>
+     */
+    protected function getAddToCartFormWidgetParameterExpanderPlugins(): array
+    {
+        return [
+            new DiscountPromotionAddToCartFormWidgetParameterExpanderPlugin(),
         ];
     }
 }

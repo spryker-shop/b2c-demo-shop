@@ -11,6 +11,7 @@ use DateTime;
 use Orm\Zed\Discount\Persistence\SpyDiscount;
 use Orm\Zed\Discount\Persistence\SpyDiscountQuery;
 use Orm\Zed\Discount\Persistence\SpyDiscountVoucherPoolQuery;
+use Orm\Zed\DiscountPromotion\Persistence\SpyDiscountPromotion;
 use Orm\Zed\DiscountPromotion\Persistence\SpyDiscountPromotionQuery;
 use Orm\Zed\Shipment\Persistence\SpyShipmentCarrierQuery;
 use Orm\Zed\Shipment\Persistence\SpyShipmentMethodQuery;
@@ -194,6 +195,9 @@ class DiscountWriterStep implements DataImportStepInterface
             ->findOneOrCreate();
 
         $discountPromotion->setAbstractSku($dataSet[static::KEY_PROMOTION_SKU]);
+        if (property_exists(SpyDiscountPromotion::class, 'abstract_skus')) {
+            $discountPromotion->setAbstractSkus($dataSet[static::KEY_PROMOTION_SKU]);
+        }
         $discountPromotion->setQuantity($dataSet[static::KEY_PROMOTION_QUANTITY]);
         $discountPromotion->save();
     }
