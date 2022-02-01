@@ -11,9 +11,11 @@ use Spryker\Service\FlysystemLocalFileSystem\Plugin\Flysystem\LocalFilesystemBui
 use Spryker\Shared\Acl\AclConstants;
 use Spryker\Shared\Application\ApplicationConstants;
 use Spryker\Shared\Application\Log\Config\SprykerLoggerConfig;
+use Spryker\Shared\CartsRestApi\CartsRestApiConstants;
 use Spryker\Shared\Category\CategoryConstants;
 use Spryker\Shared\CmsGui\CmsGuiConstants;
 use Spryker\Shared\Customer\CustomerConstants;
+use Spryker\Shared\DocumentationGeneratorRestApi\DocumentationGeneratorRestApiConstants;
 use Spryker\Shared\ErrorHandler\ErrorHandlerConstants;
 use Spryker\Shared\ErrorHandler\ErrorRenderer\WebHtmlErrorRenderer;
 use Spryker\Shared\Event\EventConstants;
@@ -103,6 +105,7 @@ $config[RouterConstants::ZED_SSL_EXCLUDED_ROUTE_NAMES] = [
 // >>> DEV TOOLS
 
 $config[ConsoleConstants::ENABLE_DEVELOPMENT_CONSOLE_COMMANDS] = (bool)getenv('DEVELOPMENT_CONSOLE_COMMANDS');
+$config[DocumentationGeneratorRestApiConstants::ENABLE_REST_API_DOCUMENTATION_GENERATION] = true;
 
 // >>> ERROR HANDLING
 
@@ -562,3 +565,8 @@ $config[CategoryConstants::CATEGORY_IS_CLOSURE_TABLE_EVENTS_ENABLED] = false;
 
 // >>> Product Label
 $config[ProductLabelConstants::PRODUCT_LABEL_TO_DE_ASSIGN_CHUNK_SIZE] = 1000;
+
+// ----------------------------------------------------------------------------
+// ------------------------------ CART REST API -------------------------------
+// ----------------------------------------------------------------------------
+$config[CartsRestApiConstants::IS_QUOTE_RELOAD_ENABLED] = true;

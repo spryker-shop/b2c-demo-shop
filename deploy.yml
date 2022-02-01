@@ -3,9 +3,13 @@ version: "0.1"
 namespace: spryker_b2c
 tag: '1.0'
 
-environment: docker.dev
+environment: docker.production
 image:
-    tag: spryker/php:7.3-alpine3.12
+    tag: spryker/php:7.4-alpine3.12
+    php:
+        ini:
+            "opcache.revalidate_freq": 0
+            "opcache.validate_timestamps": 0
 
 composer:
     mode: --no-dev

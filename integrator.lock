@@ -151,5 +151,71 @@
         "source": "\\Spryker\\Zed\\AvailabilityCartConnector\\Communication\\Plugin\\Cart\\CheckAvailabilityPlugin"
       }
     }
+  },
+  "Spryker.ErrorHandler": {
+    "wire-plugin": {
+      "e66a74375ab68f3bc8aba340a998b66816ce1f9d": {
+        "target": "\\Spryker\\Zed\\ErrorHandler\\ErrorHandlerDependencyProvider::getExceptionHandlerStrategyPlugins",
+        "source": "\\Spryker\\Zed\\ErrorHandler\\Communication\\Plugin\\ExceptionHandler\\SubRequestExceptionHandlerStrategyPlugin"
+      },
+      "ac16d0f9ac60968061a659e1f9df4ce34a0dc77b": {
+        "target": "\\Spryker\\Zed\\EventDispatcher\\EventDispatcherDependencyProvider::getEventDispatcherPlugins",
+        "source": "\\Spryker\\Zed\\ErrorHandler\\Communication\\Plugin\\EventDispatcher\\ErrorPageEventDispatcherPlugin"
+      }
+    }
   }
+  "Spryker.ProductReview": {
+    "wire-plugin": {
+      "f27996f6982a0ed3eca3ac18c1fe1f9d44ebf935": {
+        "target": "\\Spryker\\Client\\ProductReview\\ProductReviewDependencyProvider::getProductReviewsBulkQueryExpanderPlugins",
+        "source": "\\Spryker\\Client\\ProductReview\\Plugin\\Elasticsearch\\QueryExpander\\PaginatedProductReviewsQueryExpanderPlugin"
+      },
+      "440494c0ba35dab83c7daabfcc14e9856d30aaf9": {
+        "target": "\\Spryker\\Client\\ProductReview\\ProductReviewDependencyProvider::getProductReviewsBulkQueryExpanderPlugins",
+        "source": "\\Spryker\\Client\\ProductReview\\Plugin\\Elasticsearch\\QueryExpander\\ProductRatingAggregationBulkQueryExpanderPlugin"
+        },
+        "a06d63bea0182c3df1396870d35ea9510e318016": {
+          "target": "\\Spryker\\Client\\ProductReview\\ProductReviewDependencyProvider::getProductReviewsBulkQueryExpanderPlugins",
+          "source": "\\Spryker\\Client\\ProductReview\\Plugin\\Elasticsearch\\QueryExpander\\SortByCreatedAtQueryExpanderPlugin"
+        },
+        "9b63bb9bb88015da8937d1303e7d4517e2f34ee5": {
+          "target": "\\Spryker\\Client\\ProductReview\\ProductReviewDependencyProvider::getProductReviewsBulkSearchResultFormatterPlugins",
+          "source": "\\Spryker\\Client\\ProductReview\\Plugin\\Elasticsearch\\ResultFormatter\\ProductReviewsResultFormatterPlugin"
+        },
+        "e829390c0d3e7082fb04ae9fb9e55dd33649f2de": {
+          "target": "\\Spryker\\Client\\ProductReview\\ProductReviewDependencyProvider::getProductReviewsBulkSearchResultFormatterPlugins",
+          "source": "\\Spryker\\Client\\ProductReview\\Plugin\\Elasticsearch\\ResultFormatter\\PaginatedProductReviewsResultFormatterPlugin"
+        },
+        "1223b9cc8b32c6ac324afd39bf5d01b37df60e40": {
+          "target": "\\Spryker\\Client\\ProductReview\\ProductReviewDependencyProvider::getProductReviewsBulkSearchResultFormatterPlugins",
+          "source": "\\Spryker\\Client\\ProductReview\\Plugin\\Elasticsearch\\ResultFormatter\\ProductRatingAggregationBulkResultFormatterPlugin"
+        }
+      }
+    },
+    "SprykerShop.CartPage": {
+      "configure-module": {
+        "e700340b159d4d3db250f3cdb22c1ad59b8c5844": {
+          "target": "\\SprykerShop\\Yves\\CartPage\\CartPageConfig::IS_CART_CART_ITEMS_VIA_AJAX_LOAD_ENABLED",
+          "default": "true"
+        },
+        "ea9556b31e89fb55cd8b1fd78f6a57cd0388b354": {
+          "target": "\\SprykerShop\\Yves\\CartPage\\CartPageConfig::IS_LOADING_UPSELLING_PRODUCTS_VIA_AJAX_ENABLED",
+          "default": "true"
+        }
+      }
+    },
+    "SprykerShop.ProductGroupWidget": {
+      "wire-plugin": {
+        "9015da332891be842d66fc2efa19a0a6f8cce817": {
+          "target": "\\SprykerShop\\Yves\\ProductGroupWidget\\ProductGroupWidgetDependencyProvider::getProductViewBulkExpanderPlugins",
+          "source": "\\SprykerShop\\Yves\\ProductReviewWidget\\Plugin\\ProductGroupWidget\\ProductReviewSummaryProductViewBulkExpanderPlugin"
+        }
+      },
+      "unwire-plugin": {
+        "b1054ad511ebe61009955b6963f256bec4d6c589": {
+          "target": "\\SprykerShop\\Yves\\ProductGroupWidget\\ProductGroupWidgetDependencyProvider::getProductViewExpanderPlugins",
+          "source": "\\SprykerShop\\Yves\\ProductReviewWidget\\Plugin\\ProductGroupWidget\\ProductReviewSummaryProductViewExpanderPlugin"
+        }
+      }
+    }
 }

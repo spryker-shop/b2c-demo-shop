@@ -6,6 +6,7 @@ _DOCKER_BEFORE_INSTALL: &DOCKER_BEFORE_INSTALL
 
 _DOCKER_BEFORE_SCRIPT: &DOCKER_BEFORE_SCRIPT
     - ./config/Shared/ci/travis/docker-credentials.sh
+    - sudo systemctl start docker
 
 language: php
 
@@ -41,7 +42,7 @@ jobs:
       env:
         - VALIDATION=1
 
-    - php: "7.3"
+    - php: "7.4"
       dist: bionic
       env:
         - VALIDATION=1
@@ -69,21 +70,21 @@ jobs:
         - TEST_GROUP=without-acceptance
         - PREFER_MID=1
 
-    - php: "7.3"
+    - php: "7.4"
       dist: bionic
       env:
         - TEST_GROUP=acceptance
         - DB_ENGINE=mysql
         - APPLICATION_ENV=ci.mysql
 
-    - php: "7.3"
+    - php: "7.4"
       dist: bionic
       env:
         - TEST_GROUP=without-acceptance
         - DB_ENGINE=mysql
         - APPLICATION_ENV=ci.mysql
 
-    - php: "7.3"
+    - php: "7.4"
       dist: bionic
       env:
         - TEST_GROUP=acceptance
@@ -91,7 +92,7 @@ jobs:
         - DB_ENGINE=mysql
         - PREFER_LOWEST=1
 
-    - php: "7.3"
+    - php: "7.4"
       dist: bionic
       env:
         - TEST_GROUP=without-acceptance
@@ -134,7 +135,7 @@ jobs:
             - sourceline: "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
               key_url: https://download.docker.com/linux/ubuntu/gpg
       install:
-        - echo eyAiZXhwZXJpbWVudGFsIiA6IHRydWUsICJmZWF0dXJlcyIgOiB7ICJidWlsZGtpdCI6IHRydWUgfSB9Cg==|base64 -d|sudo tee /etc/docker/daemon.json
+        - echo eyAiZXhwZXJpbWVudGFsIiA6IHRydWUsICJmZWF0dXJlcyIgOiB7ICJidWlsZGtpdCI6IHRydWUgfSwgImlwdjYiOiBmYWxzZSwgIm10dSI6IDE0NTB9|base64 -d|sudo tee /etc/docker/daemon.json
         - sudo apt-get install --only-upgrade docker-ce -y
         - sudo curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
         - sudo chmod +x /usr/local/bin/docker-compose
@@ -149,13 +150,13 @@ jobs:
           - *DOCKER_BEFORE_SCRIPT
       after_script: skip
 
-    - name: Docker / Alpine / PHP 7.3 / PostgreSQL / Glue
+    - name: Docker / Alpine / PHP 7.4 / PostgreSQL / Glue
       os: linux
       dist: bionic
       language: shell
       env:
         - PROGRESS_TYPE=plain
-        - SPRYKER_PLATFORM_IMAGE=spryker/php:7.3-alpine3.12
+        - SPRYKER_PLATFORM_IMAGE=spryker/php:7.4-alpine3.12
         - TRAVIS=1
       addons:
         hosts:
@@ -177,7 +178,7 @@ jobs:
             - sourceline: "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
               key_url: https://download.docker.com/linux/ubuntu/gpg
       install:
-        - echo eyAiZXhwZXJpbWVudGFsIiA6IHRydWUsICJmZWF0dXJlcyIgOiB7ICJidWlsZGtpdCI6IHRydWUgfSB9Cg==|base64 -d|sudo tee /etc/docker/daemon.json
+        - echo eyAiZXhwZXJpbWVudGFsIiA6IHRydWUsICJmZWF0dXJlcyIgOiB7ICJidWlsZGtpdCI6IHRydWUgfSwgImlwdjYiOiBmYWxzZSwgIm10dSI6IDE0NTB9|base64 -d|sudo tee /etc/docker/daemon.json
         - sudo apt-get install --only-upgrade docker-ce -y
         - sudo curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
         - sudo chmod +x /usr/local/bin/docker-compose
@@ -194,13 +195,13 @@ jobs:
           - *DOCKER_BEFORE_SCRIPT
       after_script: skip
 
-    - name: Docker / Alpine / PHP 7.3 / MariaDB / Functional
+    - name: Docker / Alpine / PHP 7.4 / MariaDB / Functional
       os: linux
       dist: bionic
       language: shell
       env:
         - PROGRESS_TYPE=plain
-        - SPRYKER_PLATFORM_IMAGE=spryker/php:7.3-alpine3.12
+        - SPRYKER_PLATFORM_IMAGE=spryker/php:7.4-alpine3.12
         - TRAVIS=1
       addons:
         hosts:
@@ -222,7 +223,7 @@ jobs:
             - sourceline: "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
               key_url: https://download.docker.com/linux/ubuntu/gpg
       install:
-        - echo eyAiZXhwZXJpbWVudGFsIiA6IHRydWUsICJmZWF0dXJlcyIgOiB7ICJidWlsZGtpdCI6IHRydWUgfSB9Cg==|base64 -d|sudo tee /etc/docker/daemon.json
+        - echo eyAiZXhwZXJpbWVudGFsIiA6IHRydWUsICJmZWF0dXJlcyIgOiB7ICJidWlsZGtpdCI6IHRydWUgfSwgImlwdjYiOiBmYWxzZSwgIm10dSI6IDE0NTB9|base64 -d|sudo tee /etc/docker/daemon.json
         - sudo apt-get install --only-upgrade docker-ce -y
         - sudo curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
         - sudo chmod +x /usr/local/bin/docker-compose
@@ -237,13 +238,13 @@ jobs:
           - *DOCKER_BEFORE_SCRIPT
       after_script: skip
 
-    - name: Docker / Debian / PHP 7.3 / PostgreSQL / Functional
+    - name: Docker / Debian / PHP 7.4 / PostgreSQL / Functional
       os: linux
       dist: bionic
       language: shell
       env:
         - PROGRESS_TYPE=plain
-        - SPRYKER_PLATFORM_IMAGE=spryker/php:7.3-debian
+        - SPRYKER_PLATFORM_IMAGE=spryker/php:7.4-debian
         - TRAVIS=1
       addons:
         hosts:
@@ -265,7 +266,7 @@ jobs:
             - sourceline: "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
               key_url: https://download.docker.com/linux/ubuntu/gpg
       install:
-        - echo eyAiZXhwZXJpbWVudGFsIiA6IHRydWUsICJmZWF0dXJlcyIgOiB7ICJidWlsZGtpdCI6IHRydWUgfSB9Cg==|base64 -d|sudo tee /etc/docker/daemon.json
+        - echo eyAiZXhwZXJpbWVudGFsIiA6IHRydWUsICJmZWF0dXJlcyIgOiB7ICJidWlsZGtpdCI6IHRydWUgfSwgImlwdjYiOiBmYWxzZSwgIm10dSI6IDE0NTB9|base64 -d|sudo tee /etc/docker/daemon.json
         - sudo apt-get install --only-upgrade docker-ce -y
         - sudo curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
         - sudo chmod +x /usr/local/bin/docker-compose
@@ -280,13 +281,13 @@ jobs:
           - *DOCKER_BEFORE_SCRIPT
       after_script: skip
 
-    - name: Docker / Alpine / PHP 7.3 / MariaDB / Acceptance
+    - name: Docker / Alpine / PHP 7.4 / MariaDB / Acceptance
       os: linux
       dist: bionic
       language: shell
       env:
         - PROGRESS_TYPE=plain
-        - SPRYKER_PLATFORM_IMAGE=spryker/php:7.3
+        - SPRYKER_PLATFORM_IMAGE=spryker/php:7.4
         - TRAVIS=1
       addons:
         hosts:
@@ -308,7 +309,7 @@ jobs:
             - sourceline: "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
               key_url: https://download.docker.com/linux/ubuntu/gpg
       install:
-          - echo eyAiZXhwZXJpbWVudGFsIiA6IHRydWUsICJmZWF0dXJlcyIgOiB7ICJidWlsZGtpdCI6IHRydWUgfSB9Cg==|base64 -d|sudo tee /etc/docker/daemon.json
+          - echo eyAiZXhwZXJpbWVudGFsIiA6IHRydWUsICJmZWF0dXJlcyIgOiB7ICJidWlsZGtpdCI6IHRydWUgfSwgImlwdjYiOiBmYWxzZSwgIm10dSI6IDE0NTB9|base64 -d|sudo tee /etc/docker/daemon.json
           - sudo apt-get install --only-upgrade docker-ce -y
           - sudo curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
           - sudo chmod +x /usr/local/bin/docker-compose
@@ -352,7 +353,7 @@ jobs:
             - sourceline: "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
               key_url: https://download.docker.com/linux/ubuntu/gpg
       install:
-          - echo eyAiZXhwZXJpbWVudGFsIiA6IHRydWUsICJmZWF0dXJlcyIgOiB7ICJidWlsZGtpdCI6IHRydWUgfSB9Cg==|base64 -d|sudo tee /etc/docker/daemon.json
+          - echo eyAiZXhwZXJpbWVudGFsIiA6IHRydWUsICJmZWF0dXJlcyIgOiB7ICJidWlsZGtpdCI6IHRydWUgfSwgImlwdjYiOiBmYWxzZSwgIm10dSI6IDE0NTB9|base64 -d|sudo tee /etc/docker/daemon.json
           - sudo apt-get install --only-upgrade docker-ce -y
           - sudo curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
           - sudo chmod +x /usr/local/bin/docker-compose
@@ -396,7 +397,7 @@ jobs:
             - sourceline: "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
               key_url: https://download.docker.com/linux/ubuntu/gpg
       install:
-        - echo eyAiZXhwZXJpbWVudGFsIiA6IHRydWUsICJmZWF0dXJlcyIgOiB7ICJidWlsZGtpdCI6IHRydWUgfSB9Cg==|base64 -d|sudo tee /etc/docker/daemon.json
+        - echo eyAiZXhwZXJpbWVudGFsIiA6IHRydWUsICJmZWF0dXJlcyIgOiB7ICJidWlsZGtpdCI6IHRydWUgfSwgImlwdjYiOiBmYWxzZSwgIm10dSI6IDE0NTB9|base64 -d|sudo tee /etc/docker/daemon.json
         - sudo apt-get install --only-upgrade docker-ce -y
         - sudo curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
         - sudo chmod +x /usr/local/bin/docker-compose
@@ -468,9 +469,10 @@ before_install:
 
 install:
   - chmod -R a+x config/Shared/ci/travis/
+  - composer self-update 2.1.14
   - composer install --optimize-autoloader --no-interaction --prefer-install=auto
   - composer config github-oauth.github.com ${GITHUB_TOKEN}
-  - if [[ $PREFER_LOWEST == 1 ]] ; then composer require "spryker-feature/search:202009.0" "spryker/elastica:^5.0.0" "ruflin/elastica:^6.0.0" "elasticsearch/elasticsearch:^6.0.0" --with-all-dependencies --dev --optimize-autoloader ; fi
+  - if [[ $PREFER_LOWEST == 1 ]] ; then composer require "spryker-feature/search:202009.0" "spryker/elastica:^5.0.0" "ruflin/elastica:^6.0.0" "elasticsearch/elasticsearch:^6.0.0" --with-dependencies --dev --optimize-autoloader ; fi
   - if [[ $PREFER_LOWEST == 1 ]] ; then config/Shared/ci/travis/install_elasticsearch_6_8.sh ; else config/Shared/ci/travis/install_elasticsearch_7_6.sh ; fi
   - if [[ $PREFER_MID == 1 ]] ; then composer prefer-mid ; fi
   - config/Shared/ci/travis/install_mailcatcher.sh

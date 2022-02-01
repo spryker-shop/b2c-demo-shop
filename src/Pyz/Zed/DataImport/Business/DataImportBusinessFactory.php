@@ -692,8 +692,10 @@ class DataImportBusinessFactory extends SprykerDataImportBusinessFactory
      *
      * @return \Pyz\Zed\DataImport\Business\Model\Navigation\NavigationKeyToIdNavigationStep
      */
-    protected function createNavigationKeyToIdNavigationStep($source = NavigationKeyToIdNavigationStep::KEY_SOURCE, $target = NavigationKeyToIdNavigationStep::KEY_TARGET)
-    {
+    protected function createNavigationKeyToIdNavigationStep(
+        $source = NavigationKeyToIdNavigationStep::KEY_SOURCE,
+        $target = NavigationKeyToIdNavigationStep::KEY_TARGET
+    ) {
         return new NavigationKeyToIdNavigationStep($source, $target);
     }
 
