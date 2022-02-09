@@ -14,7 +14,7 @@
 } %}
 
 {% block body %}
-    <strong class="{{ config.name }}__label">{{data.label}}:</strong>
+    <strong class="{{ config.name }}__label {{ config.name }}__label--block">{{data.label}}:</strong>
     {% if data.selectedValue is null %}
         {% if data.isAvailable %}
             {% embed molecule('custom-select') with {
