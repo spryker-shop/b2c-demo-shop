@@ -198,7 +198,7 @@
 
             &:hover {
                 &::before {
-                    background: transparent;
+                    background: $setting-color-transparent;
                 }
             }
 
@@ -210,9 +210,11 @@
                         box-shadow: none;
                     }
 
-                    #{$name}__overlay::before,
-                    #{$name}__overlay::after {
-                        background: transparent;
+                    #{$name}__overlay {
+                        &::before,
+                        &::after {
+                            background: $setting-color-transparent;
+                        }
                     }
                 }
             }
@@ -223,10 +225,6 @@
 
             #{$name}__info {
                 margin: 0;
-
-                @include helper-breakpoint-media-min($md-min) {
-                    margin: 0;
-                }
             }
 
             #{$name}__overlay {
