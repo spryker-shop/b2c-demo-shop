@@ -479,8 +479,6 @@ install:
   - if [[ -z $MP_TEST ]] ; then config/Shared/ci/travis/configure_postgres.sh ; fi
   # Exposes ${CHROMEDRIVER_BINARY} and ${CHROMIUM_BINARY}
   - . $HOME/chromium-ecosystem/docker-chromedriver-master/chromium-installer $CHROMEDRIVER_REVISION $HOME/chromium-ecosystem false
-  - git status
-  - git diff
 
 before_script:
   - mkdir -p shared/data/common/jenkins
