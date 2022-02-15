@@ -53,6 +53,8 @@
                             {{ parent() }}
                         {% endblock %}
 
+                        {% block colors %}{% endblock %}
+
                         {% block content %}
                             <a href="{{ data.url }}" class="{{ config.name }}__info {{ config.jsName }}__link-detail-page grid grid--justify grid--top grid--no-wrap">
                                 {% if data.name %}
