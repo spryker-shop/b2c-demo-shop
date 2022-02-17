@@ -462,23 +462,23 @@
         },
         {
             "name": "elasticsearch/elasticsearch",
-            "version": "v7.16.0",
+            "version": "v7.17.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/elastic/elasticsearch-php.git",
-                "reference": "f87f93f71f564d4bbdc5f008d296d1c37d828e10"
+                "reference": "1890f9d7fde076b5a3ddcf579a802af05b2e781b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/elastic/elasticsearch-php/zipball/f87f93f71f564d4bbdc5f008d296d1c37d828e10",
-                "reference": "f87f93f71f564d4bbdc5f008d296d1c37d828e10",
+                "url": "https://api.github.com/repos/elastic/elasticsearch-php/zipball/1890f9d7fde076b5a3ddcf579a802af05b2e781b",
+                "reference": "1890f9d7fde076b5a3ddcf579a802af05b2e781b",
                 "shasum": ""
             },
             "require": {
                 "ext-json": ">=1.3.7",
                 "ezimuel/ringphp": "^1.1.2",
                 "php": "^7.3 || ^8.0",
-                "psr/log": "^1|^2"
+                "psr/log": "^1|^2|^3"
             },
             "require-dev": {
                 "ext-yaml": "*",
@@ -523,9 +523,9 @@
             ],
             "support": {
                 "issues": "https://github.com/elastic/elasticsearch-php/issues",
-                "source": "https://github.com/elastic/elasticsearch-php/tree/v7.16.0"
+                "source": "https://github.com/elastic/elasticsearch-php/tree/v7.17.0"
             },
-            "time": "2021-12-09T20:04:01+00:00"
+            "time": "2022-02-03T13:40:04+00:00"
         },
         {
             "name": "everon/collection",
@@ -867,12 +867,12 @@
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "GuzzleHttp\\": "src/"
-                },
                 "files": [
                     "src/functions_include.php"
-                ]
+                ],
+                "psr-4": {
+                    "GuzzleHttp\\": "src/"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -1623,12 +1623,12 @@
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "League\\Csv\\": "src"
-                },
                 "files": [
                     "src/functions_include.php"
-                ]
+                ],
+                "psr-4": {
+                    "League\\Csv\\": "src"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -3238,32 +3238,32 @@
         },
         {
             "name": "react/promise",
-            "version": "v2.8.0",
+            "version": "v2.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/reactphp/promise.git",
-                "reference": "f3cff96a19736714524ca0dd1d4130de73dbbbc4"
+                "reference": "234f8fd1023c9158e2314fa9d7d0e6a83db42910"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/reactphp/promise/zipball/f3cff96a19736714524ca0dd1d4130de73dbbbc4",
-                "reference": "f3cff96a19736714524ca0dd1d4130de73dbbbc4",
+                "url": "https://api.github.com/repos/reactphp/promise/zipball/234f8fd1023c9158e2314fa9d7d0e6a83db42910",
+                "reference": "234f8fd1023c9158e2314fa9d7d0e6a83db42910",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.4.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^7.0 || ^6.5 || ^5.7 || ^4.8.36"
+                "phpunit/phpunit": "^9.3 || ^5.7 || ^4.8.36"
             },
             "type": "library",
             "autoload": {
-                "psr-4": {
-                    "React\\Promise\\": "src/"
-                },
                 "files": [
                     "src/functions_include.php"
-                ]
+                ],
+                "psr-4": {
+                    "React\\Promise\\": "src/"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -3272,7 +3272,23 @@
             "authors": [
                 {
                     "name": "Jan Sorgalla",
-                    "email": "jsorgalla@gmail.com"
+                    "email": "jsorgalla@gmail.com",
+                    "homepage": "https://sorgalla.com/"
+                },
+                {
+                    "name": "Christian Lück",
+                    "email": "christian@clue.engineering",
+                    "homepage": "https://clue.engineering/"
+                },
+                {
+                    "name": "Cees-Jan Kiewiet",
+                    "email": "reactphp@ceesjankiewiet.nl",
+                    "homepage": "https://wyrihaximus.net/"
+                },
+                {
+                    "name": "Chris Boden",
+                    "email": "cboden@gmail.com",
+                    "homepage": "https://cboden.dev/"
                 }
             ],
             "description": "A lightweight implementation of CommonJS Promises/A for PHP",
@@ -3282,22 +3298,32 @@
             ],
             "support": {
                 "issues": "https://github.com/reactphp/promise/issues",
-                "source": "https://github.com/reactphp/promise/tree/v2.8.0"
+                "source": "https://github.com/reactphp/promise/tree/v2.9.0"
             },
-            "time": "2020-05-12T15:16:56+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/WyriHaximus",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/clue",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-02-11T10:27:51+00:00"
         },
         {
             "name": "ruflin/elastica",
-            "version": "7.1.3",
+            "version": "7.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ruflin/Elastica.git",
-                "reference": "2ee1f63b9222eb56a1294288fde99089a86491c9"
+                "reference": "6594f0e4c27e3b1cc573ed6f83769d6d3b420cf3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ruflin/Elastica/zipball/2ee1f63b9222eb56a1294288fde99089a86491c9",
-                "reference": "2ee1f63b9222eb56a1294288fde99089a86491c9",
+                "url": "https://api.github.com/repos/ruflin/Elastica/zipball/6594f0e4c27e3b1cc573ed6f83769d6d3b420cf3",
+                "reference": "6594f0e4c27e3b1cc573ed6f83769d6d3b420cf3",
                 "shasum": ""
             },
             "require": {
@@ -3306,7 +3332,7 @@
                 "nyholm/dsn": "^2.0.0",
                 "php": "^7.2 || ^8.0",
                 "psr/log": "^1.0 || ^2.0 || ^3.0",
-                "symfony/deprecation-contracts": "^2.2",
+                "symfony/deprecation-contracts": "^2.2 || ^3.0",
                 "symfony/polyfill-php73": "^1.19"
             },
             "require-dev": {
@@ -3350,9 +3376,9 @@
             ],
             "support": {
                 "issues": "https://github.com/ruflin/Elastica/issues",
-                "source": "https://github.com/ruflin/Elastica/tree/7.1.3"
+                "source": "https://github.com/ruflin/Elastica/tree/7.1.4"
             },
-            "time": "2021-12-09T08:28:09+00:00"
+            "time": "2022-02-14T07:19:04+00:00"
         },
         {
             "name": "seld/signal-handler",
@@ -11113,9 +11139,9 @@
             "autoload": {
                 "psr-4": {
                     "Spryker\\": "src/Spryker/",
-                    "SprykerTest\\Shared\\Application\\Helper\\": "tests/SprykerTest/Shared/Application/_support/Helper/",
+                    "SprykerTest\\Zed\\Application\\Helper\\": "tests/SprykerTest/Zed/Application/_support/Helper/",
                     "SprykerTest\\Yves\\Application\\Helper\\": "tests/SprykerTest/Yves/Application/_support/Helper/",
-                    "SprykerTest\\Zed\\Application\\Helper\\": "tests/SprykerTest/Zed/Application/_support/Helper/"
+                    "SprykerTest\\Shared\\Application\\Helper\\": "tests/SprykerTest/Shared/Application/_support/Helper/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -12132,16 +12158,16 @@
         },
         {
             "name": "spryker/calculation",
-            "version": "4.11.0",
+            "version": "4.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/calculation.git",
-                "reference": "5eb48071e9e302129b3319747ede71e543208d28"
+                "reference": "c27fe745b95c5732799b54fa0c49fad7536aa81f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/calculation/zipball/5eb48071e9e302129b3319747ede71e543208d28",
-                "reference": "5eb48071e9e302129b3319747ede71e543208d28",
+                "url": "https://api.github.com/repos/spryker/calculation/zipball/c27fe745b95c5732799b54fa0c49fad7536aa81f",
+                "reference": "c27fe745b95c5732799b54fa0c49fad7536aa81f",
                 "shasum": ""
             },
             "require": {
@@ -12155,6 +12181,7 @@
                 "spryker/checkout": "*",
                 "spryker/code-sniffer": "*",
                 "spryker/propel": "*",
+                "spryker/store": "*",
                 "spryker/testify": "*"
             },
             "suggest": {
@@ -12177,9 +12204,9 @@
             ],
             "description": "Calculation module",
             "support": {
-                "source": "https://github.com/spryker/calculation/tree/4.11.0"
+                "source": "https://github.com/spryker/calculation/tree/4.12.0"
             },
-            "time": "2021-11-01T16:11:16+00:00"
+            "time": "2022-02-02T14:07:33+00:00"
         },
         {
             "name": "spryker/calculation-extension",
@@ -17442,12 +17469,12 @@
                 }
             },
             "autoload": {
+                "psr-0": {
+                    "Pimple": "src/Spryker"
+                },
                 "psr-4": {
                     "Spryker\\": "src/Spryker/",
                     "SprykerTest\\Service\\Container\\Helper\\": "tests/SprykerTest/Service/Container/_support/Helper/"
-                },
-                "psr-0": {
-                    "Pimple": "src/Spryker"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -19915,16 +19942,16 @@
         },
         {
             "name": "spryker/discount-promotion",
-            "version": "4.4.0",
+            "version": "4.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/discount-promotion.git",
-                "reference": "87353c2cb291dbd76387ee8612c1663f148bef08"
+                "reference": "d9db387a1d33d8b5a27a7e3fbcc2457a02e17c11"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/discount-promotion/zipball/87353c2cb291dbd76387ee8612c1663f148bef08",
-                "reference": "87353c2cb291dbd76387ee8612c1663f148bef08",
+                "url": "https://api.github.com/repos/spryker/discount-promotion/zipball/d9db387a1d33d8b5a27a7e3fbcc2457a02e17c11",
+                "reference": "d9db387a1d33d8b5a27a7e3fbcc2457a02e17c11",
                 "shasum": ""
             },
             "require": {
@@ -19973,9 +20000,9 @@
             ],
             "description": "DiscountPromotion module",
             "support": {
-                "source": "https://github.com/spryker/discount-promotion/tree/4.4.0"
+                "source": "https://github.com/spryker/discount-promotion/tree/4.6.0"
             },
-            "time": "2022-02-01T08:28:42+00:00"
+            "time": "2022-02-16T14:53:18+00:00"
         },
         {
             "name": "spryker/discount-promotions-rest-api",
@@ -22299,16 +22326,16 @@
         },
         {
             "name": "spryker/kernel",
-            "version": "3.64.1",
+            "version": "3.65.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/kernel.git",
-                "reference": "7709247abda61c70dc345813983db91291f538b9"
+                "reference": "42f404130739baaa66e496da52247a9dfbb87ca4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/kernel/zipball/7709247abda61c70dc345813983db91291f538b9",
-                "reference": "7709247abda61c70dc345813983db91291f538b9",
+                "url": "https://api.github.com/repos/spryker/kernel/zipball/42f404130739baaa66e496da52247a9dfbb87ca4",
+                "reference": "42f404130739baaa66e496da52247a9dfbb87ca4",
                 "shasum": ""
             },
             "require": {
@@ -22344,8 +22371,8 @@
             "autoload": {
                 "psr-4": {
                     "Spryker\\": "src/Spryker/",
-                    "SprykerTest\\Shared\\Kernel\\Helper\\": "tests/SprykerTest/Shared/Kernel/_support/Helper/",
-                    "SprykerTest\\Zed\\Kernel\\Helper\\": "tests/SprykerTest/Zed/Kernel/_support/Helper/"
+                    "SprykerTest\\Zed\\Kernel\\Helper\\": "tests/SprykerTest/Zed/Kernel/_support/Helper/",
+                    "SprykerTest\\Shared\\Kernel\\Helper\\": "tests/SprykerTest/Shared/Kernel/_support/Helper/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -22354,9 +22381,9 @@
             ],
             "description": "Kernel module",
             "support": {
-                "source": "https://github.com/spryker/kernel/tree/3.64.1"
+                "source": "https://github.com/spryker/kernel/tree/3.65.0"
             },
-            "time": "2022-01-04T20:07:41+00:00"
+            "time": "2022-02-15T16:01:27+00:00"
         },
         {
             "name": "spryker/key-builder",
@@ -22486,8 +22513,8 @@
             "autoload": {
                 "psr-4": {
                     "Spryker\\": "src/Spryker/",
-                    "SprykerTest\\Yves\\Locale\\Helper\\": "tests/SprykerTest/Yves/Locale/_support/Helper/",
-                    "SprykerTest\\Zed\\Locale\\Helper\\": "tests/SprykerTest/Zed/Locale/_support/Helper/"
+                    "SprykerTest\\Zed\\Locale\\Helper\\": "tests/SprykerTest/Zed/Locale/_support/Helper/",
+                    "SprykerTest\\Yves\\Locale\\Helper\\": "tests/SprykerTest/Yves/Locale/_support/Helper/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -24266,20 +24293,20 @@
         },
         {
             "name": "spryker/payment",
-            "version": "5.4.1",
+            "version": "5.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/payment.git",
-                "reference": "ed2617651b99f06d81a4f5429a906c83e1010347"
+                "reference": "aaefcca7a6612e3e84e536f36a227e717f8a4f04"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/payment/zipball/ed2617651b99f06d81a4f5429a906c83e1010347",
-                "reference": "ed2617651b99f06d81a4f5429a906c83e1010347",
+                "url": "https://api.github.com/repos/spryker/payment/zipball/aaefcca7a6612e3e84e536f36a227e717f8a4f04",
+                "reference": "aaefcca7a6612e3e84e536f36a227e717f8a4f04",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.3",
+                "php": ">=7.4",
                 "spryker/checkout-extension": "^1.2.0",
                 "spryker/kernel": "^3.30.0",
                 "spryker/payment-extension": "^1.0.0",
@@ -24320,9 +24347,9 @@
             ],
             "description": "Payment module",
             "support": {
-                "source": "https://github.com/spryker/payment/tree/5.4.1"
+                "source": "https://github.com/spryker/payment/tree/5.4.2"
             },
-            "time": "2021-06-29T09:34:47+00:00"
+            "time": "2022-02-02T14:07:33+00:00"
         },
         {
             "name": "spryker/payment-cart-connector",
@@ -25550,16 +25577,16 @@
         },
         {
             "name": "spryker/product",
-            "version": "6.26.0",
+            "version": "6.27.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/product.git",
-                "reference": "31f748278d1c77d75018551ee7757a2b86ced78b"
+                "reference": "1a9464a681e7b055217af8f5c21a8112df91d8fa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/product/zipball/31f748278d1c77d75018551ee7757a2b86ced78b",
-                "reference": "31f748278d1c77d75018551ee7757a2b86ced78b",
+                "url": "https://api.github.com/repos/spryker/product/zipball/1a9464a681e7b055217af8f5c21a8112df91d8fa",
+                "reference": "1a9464a681e7b055217af8f5c21a8112df91d8fa",
                 "shasum": ""
             },
             "require": {
@@ -25568,7 +25595,7 @@
                 "spryker/kernel": "^3.34.0",
                 "spryker/key-builder": "^1.0.0",
                 "spryker/locale": "^3.0.0",
-                "spryker/product-extension": "^1.1.0",
+                "spryker/product-extension": "^1.2.0",
                 "spryker/propel-orm": "^1.0.0",
                 "spryker/storage": "^3.0.0",
                 "spryker/store": "^1.1.0",
@@ -25602,9 +25629,9 @@
             ],
             "description": "Product module",
             "support": {
-                "source": "https://github.com/spryker/product/tree/6.26.0"
+                "source": "https://github.com/spryker/product/tree/6.27.0"
             },
-            "time": "2021-12-29T14:03:55+00:00"
+            "time": "2022-02-11T12:49:43+00:00"
         },
         {
             "name": "spryker/product-abstract-data-feed",
@@ -26304,16 +26331,16 @@
         },
         {
             "name": "spryker/product-bundle",
-            "version": "7.10.0",
+            "version": "7.10.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/product-bundle.git",
-                "reference": "5fb17a83d7cf64c1b1cc2e78f5f9aff4e6df5c1e"
+                "reference": "d28388bd40dd8533725e10060a58e414c23dcec6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/product-bundle/zipball/5fb17a83d7cf64c1b1cc2e78f5f9aff4e6df5c1e",
-                "reference": "5fb17a83d7cf64c1b1cc2e78f5f9aff4e6df5c1e",
+                "url": "https://api.github.com/repos/spryker/product-bundle/zipball/d28388bd40dd8533725e10060a58e414c23dcec6",
+                "reference": "d28388bd40dd8533725e10060a58e414c23dcec6",
                 "shasum": ""
             },
             "require": {
@@ -26376,9 +26403,9 @@
             ],
             "description": "ProductBundle module",
             "support": {
-                "source": "https://github.com/spryker/product-bundle/tree/7.10.0"
+                "source": "https://github.com/spryker/product-bundle/tree/7.10.1"
             },
-            "time": "2022-01-04T12:43:20+00:00"
+            "time": "2022-02-01T22:58:16+00:00"
         },
         {
             "name": "spryker/product-bundle-carts-rest-api",
@@ -27401,20 +27428,20 @@
         },
         {
             "name": "spryker/product-extension",
-            "version": "1.1.0",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/product-extension.git",
-                "reference": "5f4e2747407ca2370fca954a7db90047e38a9c22"
+                "reference": "5be1701ba4410f0fa2e9e7ab4bcc82a9231744f9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/product-extension/zipball/5f4e2747407ca2370fca954a7db90047e38a9c22",
-                "reference": "5f4e2747407ca2370fca954a7db90047e38a9c22",
+                "url": "https://api.github.com/repos/spryker/product-extension/zipball/5be1701ba4410f0fa2e9e7ab4bcc82a9231744f9",
+                "reference": "5be1701ba4410f0fa2e9e7ab4bcc82a9231744f9",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.3"
+                "php": ">=7.4"
             },
             "require-dev": {
                 "spryker/code-sniffer": "*"
@@ -27436,9 +27463,9 @@
             ],
             "description": "ProductExtension module",
             "support": {
-                "source": "https://github.com/spryker/product-extension/tree/1.1.0"
+                "source": "https://github.com/spryker/product-extension/tree/1.2.0"
             },
-            "time": "2021-06-14T20:32:55+00:00"
+            "time": "2022-02-11T12:49:43+00:00"
         },
         {
             "name": "spryker/product-group",
@@ -29147,20 +29174,20 @@
         },
         {
             "name": "spryker/product-page-search-extension",
-            "version": "1.5.0",
+            "version": "1.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/product-page-search-extension.git",
-                "reference": "1de028b5af52cb7b21aca317a5ba335826805223"
+                "reference": "84593c13c1fc21d28f0310d57504ea19c82b122c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/product-page-search-extension/zipball/1de028b5af52cb7b21aca317a5ba335826805223",
-                "reference": "1de028b5af52cb7b21aca317a5ba335826805223",
+                "url": "https://api.github.com/repos/spryker/product-page-search-extension/zipball/84593c13c1fc21d28f0310d57504ea19c82b122c",
+                "reference": "84593c13c1fc21d28f0310d57504ea19c82b122c",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.3"
+                "php": ">=7.4"
             },
             "require-dev": {
                 "spryker/code-sniffer": "*"
@@ -29185,9 +29212,9 @@
             ],
             "description": "ProductPageSearchExtension module",
             "support": {
-                "source": "https://github.com/spryker/product-page-search-extension/tree/1.5.0"
+                "source": "https://github.com/spryker/product-page-search-extension/tree/1.6.0"
             },
-            "time": "2021-07-16T12:46:59+00:00"
+            "time": "2022-02-11T12:49:43+00:00"
         },
         {
             "name": "spryker/product-prices-rest-api",
@@ -30383,16 +30410,16 @@
         },
         {
             "name": "spryker/product-storage",
-            "version": "1.34.0",
+            "version": "1.35.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/product-storage.git",
-                "reference": "c23fb6ee12c1748cb0d080453be6dda412886efd"
+                "reference": "bd4afbb7182ece35de46476e0eb51067645ff4af"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/product-storage/zipball/c23fb6ee12c1748cb0d080453be6dda412886efd",
-                "reference": "c23fb6ee12c1748cb0d080453be6dda412886efd",
+                "url": "https://api.github.com/repos/spryker/product-storage/zipball/bd4afbb7182ece35de46476e0eb51067645ff4af",
+                "reference": "bd4afbb7182ece35de46476e0eb51067645ff4af",
                 "shasum": ""
             },
             "require": {
@@ -30402,7 +30429,7 @@
                 "spryker/laminas": "^1.0.0",
                 "spryker/locale": "^3.1.0",
                 "spryker/product": "^5.5.0 || ^6.0.0",
-                "spryker/product-storage-extension": "^1.6.0",
+                "spryker/product-storage-extension": "^1.7.0",
                 "spryker/propel-orm": "^1.5.0",
                 "spryker/storage": "^3.4.0",
                 "spryker/store": "^1.7.0",
@@ -30444,22 +30471,22 @@
             ],
             "description": "ProductStorage module",
             "support": {
-                "source": "https://github.com/spryker/product-storage/tree/1.34.0"
+                "source": "https://github.com/spryker/product-storage/tree/1.35.0"
             },
-            "time": "2022-01-26T13:14:24+00:00"
+            "time": "2022-02-11T12:49:43+00:00"
         },
         {
             "name": "spryker/product-storage-extension",
-            "version": "1.6.0",
+            "version": "1.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/product-storage-extension.git",
-                "reference": "55b70d2c31657896e50ac4030c88e414969b7604"
+                "reference": "67ae7387e360f8c186227f5a26f1dab33371f97d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/product-storage-extension/zipball/55b70d2c31657896e50ac4030c88e414969b7604",
-                "reference": "55b70d2c31657896e50ac4030c88e414969b7604",
+                "url": "https://api.github.com/repos/spryker/product-storage-extension/zipball/67ae7387e360f8c186227f5a26f1dab33371f97d",
+                "reference": "67ae7387e360f8c186227f5a26f1dab33371f97d",
                 "shasum": ""
             },
             "require": {
@@ -30485,9 +30512,9 @@
             ],
             "description": "ProductStorageExtension module",
             "support": {
-                "source": "https://github.com/spryker/product-storage-extension/tree/1.6.0"
+                "source": "https://github.com/spryker/product-storage-extension/tree/1.7.0"
             },
-            "time": "2022-01-26T13:14:24+00:00"
+            "time": "2022-02-11T12:49:43+00:00"
         },
         {
             "name": "spryker/product-tax-sets-rest-api",
@@ -31731,8 +31758,8 @@
             "autoload": {
                 "psr-4": {
                     "Spryker\\": "src/Spryker/",
-                    "SprykerTest\\Yves\\Router\\Helper\\": "tests/SprykerTest/Yves/Router/_support/Helper/",
-                    "SprykerTest\\Zed\\Router\\Helper\\": "tests/SprykerTest/Zed/Router/_support/Helper/"
+                    "SprykerTest\\Zed\\Router\\Helper\\": "tests/SprykerTest/Zed/Router/_support/Helper/",
+                    "SprykerTest\\Yves\\Router\\Helper\\": "tests/SprykerTest/Yves/Router/_support/Helper/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -31857,8 +31884,8 @@
             "autoload": {
                 "psr-4": {
                     "Spryker\\": "src/Spryker/",
-                    "SprykerTest\\Shared\\Sales\\Helper\\": "tests/SprykerTest/Shared/Sales/_support/Helper/",
-                    "SprykerTest\\Zed\\Sales\\Helper\\": "tests/SprykerTest/Zed/Sales/_support/Helper/"
+                    "SprykerTest\\Zed\\Sales\\Helper\\": "tests/SprykerTest/Zed/Sales/_support/Helper/",
+                    "SprykerTest\\Shared\\Sales\\Helper\\": "tests/SprykerTest/Shared/Sales/_support/Helper/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -34248,9 +34275,9 @@
             "autoload": {
                 "psr-4": {
                     "Spryker\\": "src/Spryker/",
-                    "SprykerTest\\Shared\\Session\\Helper\\": "tests/SprykerTest/Shared/Session/_support/Helper/",
+                    "SprykerTest\\Zed\\Session\\Helper\\": "tests/SprykerTest/Zed/Session/_support/Helper/",
                     "SprykerTest\\Yves\\Session\\Helper\\": "tests/SprykerTest/Yves/Session/_support/Helper/",
-                    "SprykerTest\\Zed\\Session\\Helper\\": "tests/SprykerTest/Zed/Session/_support/Helper/"
+                    "SprykerTest\\Shared\\Session\\Helper\\": "tests/SprykerTest/Shared/Session/_support/Helper/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -40445,12 +40472,12 @@
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "Symfony\\Polyfill\\Iconv\\": ""
-                },
                 "files": [
                     "bootstrap.php"
-                ]
+                ],
+                "psr-4": {
+                    "Symfony\\Polyfill\\Iconv\\": ""
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -40525,12 +40552,12 @@
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "Symfony\\Polyfill\\Intl\\Grapheme\\": ""
-                },
                 "files": [
                     "bootstrap.php"
-                ]
+                ],
+                "psr-4": {
+                    "Symfony\\Polyfill\\Intl\\Grapheme\\": ""
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -40695,12 +40722,12 @@
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "Symfony\\Polyfill\\Intl\\Idn\\": ""
-                },
                 "files": [
                     "bootstrap.php"
-                ]
+                ],
+                "psr-4": {
+                    "Symfony\\Polyfill\\Intl\\Idn\\": ""
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -40780,12 +40807,12 @@
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "Symfony\\Polyfill\\Intl\\Normalizer\\": ""
-                },
                 "files": [
                     "bootstrap.php"
                 ],
+                "psr-4": {
+                    "Symfony\\Polyfill\\Intl\\Normalizer\\": ""
+                },
                 "classmap": [
                     "Resources/stubs"
                 ]
@@ -40867,12 +40894,12 @@
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "Symfony\\Polyfill\\Mbstring\\": ""
-                },
                 "files": [
                     "bootstrap.php"
-                ]
+                ],
+                "psr-4": {
+                    "Symfony\\Polyfill\\Mbstring\\": ""
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -40944,12 +40971,12 @@
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "Symfony\\Polyfill\\Php72\\": ""
-                },
                 "files": [
                     "bootstrap.php"
-                ]
+                ],
+                "psr-4": {
+                    "Symfony\\Polyfill\\Php72\\": ""
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -41020,12 +41047,12 @@
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "Symfony\\Polyfill\\Php73\\": ""
-                },
                 "files": [
                     "bootstrap.php"
                 ],
+                "psr-4": {
+                    "Symfony\\Polyfill\\Php73\\": ""
+                },
                 "classmap": [
                     "Resources/stubs"
                 ]
@@ -41099,12 +41126,12 @@
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "Symfony\\Polyfill\\Php80\\": ""
-                },
                 "files": [
                     "bootstrap.php"
                 ],
+                "psr-4": {
+                    "Symfony\\Polyfill\\Php80\\": ""
+                },
                 "classmap": [
                     "Resources/stubs"
                 ]
@@ -41182,12 +41209,12 @@
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "Symfony\\Polyfill\\Php81\\": ""
-                },
                 "files": [
                     "bootstrap.php"
                 ],
+                "psr-4": {
+                    "Symfony\\Polyfill\\Php81\\": ""
+                },
                 "classmap": [
                     "Resources/stubs"
                 ]
@@ -42783,16 +42810,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v3.3.7",
+            "version": "v3.3.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "8f168c6ffa3ce76d1786b3cd52275424a3fc675b"
+                "reference": "972d8604a92b7054828b539f2febb0211dd5945c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/8f168c6ffa3ce76d1786b3cd52275424a3fc675b",
-                "reference": "8f168c6ffa3ce76d1786b3cd52275424a3fc675b",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/972d8604a92b7054828b539f2febb0211dd5945c",
+                "reference": "972d8604a92b7054828b539f2febb0211dd5945c",
                 "shasum": ""
             },
             "require": {
@@ -42843,7 +42870,7 @@
             ],
             "support": {
                 "issues": "https://github.com/twigphp/Twig/issues",
-                "source": "https://github.com/twigphp/Twig/tree/v3.3.7"
+                "source": "https://github.com/twigphp/Twig/tree/v3.3.8"
             },
             "funding": [
                 {
@@ -42855,20 +42882,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-01-03T21:15:37+00:00"
+            "time": "2022-02-04T06:59:48+00:00"
         },
         {
             "name": "voku/anti-xss",
-            "version": "4.1.36",
+            "version": "4.1.37",
             "source": {
                 "type": "git",
                 "url": "https://github.com/voku/anti-xss.git",
-                "reference": "0d8f17f7298a6ffa7bc30b01e44f10e8a7460322"
+                "reference": "728e158427a263917f33b0a29eb75d866bd18d17"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/voku/anti-xss/zipball/0d8f17f7298a6ffa7bc30b01e44f10e8a7460322",
-                "reference": "0d8f17f7298a6ffa7bc30b01e44f10e8a7460322",
+                "url": "https://api.github.com/repos/voku/anti-xss/zipball/728e158427a263917f33b0a29eb75d866bd18d17",
+                "reference": "728e158427a263917f33b0a29eb75d866bd18d17",
                 "shasum": ""
             },
             "require": {
@@ -42914,7 +42941,7 @@
             ],
             "support": {
                 "issues": "https://github.com/voku/anti-xss/issues",
-                "source": "https://github.com/voku/anti-xss/tree/4.1.36"
+                "source": "https://github.com/voku/anti-xss/tree/4.1.37"
             },
             "funding": [
                 {
@@ -42938,7 +42965,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-01-27T07:19:19+00:00"
+            "time": "2022-02-15T01:57:51+00:00"
         },
         {
             "name": "voku/portable-ascii",
@@ -43050,12 +43077,12 @@
             },
             "type": "library",
             "autoload": {
-                "psr-4": {
-                    "voku\\": "src/voku/"
-                },
                 "files": [
                     "bootstrap.php"
-                ]
+                ],
+                "psr-4": {
+                    "voku\\": "src/voku/"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
