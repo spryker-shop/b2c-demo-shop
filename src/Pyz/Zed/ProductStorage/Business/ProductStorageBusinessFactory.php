@@ -30,7 +30,8 @@ class ProductStorageBusinessFactory extends SprykerProductStorageBusinessFactory
             $this->getQueryContainer(),
             $this->getStoreFacade(),
             $this->getConfig()->isSendingToQueue(),
-            $this->getProductAbstractStorageExpanderPlugins()
+            $this->getProductAbstractStorageExpanderPlugins(),
+            $this->getProductAbstractStorageCollectionFilterPlugins(),
         );
     }
 
@@ -42,7 +43,9 @@ class ProductStorageBusinessFactory extends SprykerProductStorageBusinessFactory
         return new ProductConcreteStorageWriter(
             $this->getProductFacade(),
             $this->getQueryContainer(),
-            $this->getConfig()->isSendingToQueue()
+            $this->getConfig()->isSendingToQueue(),
+            $this->getProductConcreteStorageCollectionExpanderPlugins(),
+            $this->getProductConcreteStorageCollectionFilterPlugins(),
         );
     }
 
