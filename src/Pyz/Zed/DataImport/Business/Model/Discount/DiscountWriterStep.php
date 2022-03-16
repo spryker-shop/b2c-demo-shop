@@ -21,21 +21,85 @@ use Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface;
 
 class DiscountWriterStep implements DataImportStepInterface
 {
+    /**
+     * @var int
+     */
     public const BULK_SIZE = 100;
+
+    /**
+     * @var string
+     */
     public const KEY_DISCOUNT_KEY = 'discount_key';
+
+    /**
+     * @var string
+     */
     public const KEY_DISPLAY_NAME = 'display_name';
+
+    /**
+     * @var string
+     */
     public const KEY_DESCRIPTION = 'description';
+
+    /**
+     * @var string
+     */
     public const KEY_AMOUNT = 'amount';
+
+    /**
+     * @var string
+     */
     public const KEY_IS_ACTIVE = 'is_active';
+
+    /**
+     * @var string
+     */
     public const KEY_IS_EXCLUSIVE = 'is_exclusive';
+
+    /**
+     * @var string
+     */
     public const KEY_VALID_FROM = 'valid_from';
+
+    /**
+     * @var string
+     */
     public const KEY_VALID_TO = 'valid_to';
+
+    /**
+     * @var string
+     */
     public const KEY_CALCULATOR_PLUGIN = 'calculator_plugin';
+
+    /**
+     * @var string
+     */
     public const KEY_DISCOUNT_TYPE = 'discount_type';
+
+    /**
+     * @var string
+     */
     public const KEY_DECISION_RULE_QUERY_STRING = 'decision_rule_query_string';
+
+    /**
+     * @var string
+     */
     public const KEY_COLLECTOR_QUERY_STRING = 'collector_query_string';
+
+    /**
+     * @var string
+     */
     public const KEY_PROMOTION_SKU = 'promotion_sku';
+
+    /**
+     * @var string
+     */
     public const KEY_PROMOTION_QUANTITY = 'promotion_quantity';
+
+    /**
+     * @var string
+     */
+    public const KEY_PRIORITY = 'priority';
 
     /**
      * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
@@ -59,6 +123,10 @@ class DiscountWriterStep implements DataImportStepInterface
             $discountVoucherPoolEntity->setIsActive($dataSet[static::KEY_IS_ACTIVE]);
 
             $discountEntity->setVoucherPool($discountVoucherPoolEntity);
+        }
+
+        if (property_exists(SpyDiscount::class, 'priority')) {
+            $discountEntity->setPriority($dataSet[static::KEY_PRIORITY]);
         }
 
         $discountEntity
