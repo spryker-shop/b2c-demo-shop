@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c58b7a2bf6c47814386292e80abe48e4",
+    "content-hash": "0ea1acefe56a1954010a6d91b02e3b3d",
     "packages": [
         {
             "name": "brick/math",
@@ -33722,16 +33722,16 @@
         },
         {
             "name": "spryker/security",
-            "version": "1.5.1",
+            "version": "1.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/security.git",
-                "reference": "d670c999258d8788dc89790ce7d2afa14ad1aae8"
+                "reference": "7afef265638194d5bfd8c50fe443d487a0952780"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/security/zipball/d670c999258d8788dc89790ce7d2afa14ad1aae8",
-                "reference": "d670c999258d8788dc89790ce7d2afa14ad1aae8",
+                "url": "https://api.github.com/repos/spryker/security/zipball/7afef265638194d5bfd8c50fe443d487a0952780",
+                "reference": "7afef265638194d5bfd8c50fe443d487a0952780",
                 "shasum": ""
             },
             "require": {
@@ -33739,7 +33739,7 @@
                 "spryker/application-extension": "^1.0.0",
                 "spryker/kernel": "^3.52.0",
                 "spryker/security-extension": "^1.0.0",
-                "spryker/symfony": "^3.6.0",
+                "spryker/symfony": "^3.8.0",
                 "spryker/validator-extension": "^1.0.0"
             },
             "require-dev": {
@@ -33768,8 +33768,8 @@
             "autoload": {
                 "psr-4": {
                     "Spryker\\": "src/Spryker/",
-                    "SprykerTest\\Yves\\Security\\Helper\\": "tests/SprykerTest/Yves/Security/_support/Helper/",
-                    "SprykerTest\\Zed\\Security\\Helper\\": "tests/SprykerTest/Zed/Security/_support/Helper/"
+                    "SprykerTest\\Zed\\Security\\Helper\\": "tests/SprykerTest/Zed/Security/_support/Helper/",
+                    "SprykerTest\\Yves\\Security\\Helper\\": "tests/SprykerTest/Yves/Security/_support/Helper/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -33778,9 +33778,9 @@
             ],
             "description": "Security module",
             "support": {
-                "source": "https://github.com/spryker/security/tree/1.5.1"
+                "source": "https://github.com/spryker/security/tree/1.6.0"
             },
-            "time": "2022-01-28T12:49:38+00:00"
+            "time": "2022-03-16T14:26:53+00:00"
         },
         {
             "name": "spryker/security-blocker",
@@ -34291,6 +34291,99 @@
             "time": "2022-01-04T12:43:20+00:00"
         },
         {
+            "name": "spryker/session-customer-validation",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/session-customer-validation.git",
+                "reference": "360576eff8fb55750640e92464d7b7a8b598d4b7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/session-customer-validation/zipball/360576eff8fb55750640e92464d7b7a8b598d4b7",
+                "reference": "360576eff8fb55750640e92464d7b7a8b598d4b7",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.4",
+                "spryker/customer": "^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0",
+                "spryker/kernel": "^3.30.0",
+                "spryker/security-extension": "^1.0.0",
+                "spryker/session-customer-validation-extension": "^1.0.0",
+                "spryker/symfony": "^3.8.0",
+                "spryker/transfer": "^3.25.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/container": "*"
+            },
+            "suggest": {
+                "spryker/container": "Add this module if you want to use security plugins.",
+                "spryker/event-dispatcher": "Add this module if you want to use security plugins."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "SessionCustomerValidation module",
+            "support": {
+                "source": "https://github.com/spryker/session-customer-validation/tree/1.0.0"
+            },
+            "time": "2022-03-16T14:26:53+00:00"
+        },
+        {
+            "name": "spryker/session-customer-validation-extension",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/session-customer-validation-extension.git",
+                "reference": "3f1744a6b39bc8af10b26dbeeaa904d90dfa506f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/session-customer-validation-extension/zipball/3f1744a6b39bc8af10b26dbeeaa904d90dfa506f",
+                "reference": "3f1744a6b39bc8af10b26dbeeaa904d90dfa506f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.4"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "SessionCustomerValidationExtension module",
+            "support": {
+                "source": "https://github.com/spryker/session-customer-validation-extension/tree/1.0.0"
+            },
+            "time": "2022-03-16T14:26:53+00:00"
+        },
+        {
             "name": "spryker/session-extension",
             "version": "1.0.0",
             "source": {
@@ -34380,27 +34473,29 @@
         },
         {
             "name": "spryker/session-redis",
-            "version": "1.5.0",
+            "version": "1.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/session-redis.git",
-                "reference": "714bab5c01cb41a0048ab19c3eb19ca75112aa6e"
+                "reference": "26e80e857e3de93a0fcdf67b5a938f926fe6d5b6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/session-redis/zipball/714bab5c01cb41a0048ab19c3eb19ca75112aa6e",
-                "reference": "714bab5c01cb41a0048ab19c3eb19ca75112aa6e",
+                "url": "https://api.github.com/repos/spryker/session-redis/zipball/26e80e857e3de93a0fcdf67b5a938f926fe6d5b6",
+                "reference": "26e80e857e3de93a0fcdf67b5a938f926fe6d5b6",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.3",
+                "php": ">=7.4",
                 "spryker/kernel": "^3.52.0",
                 "spryker/monitoring": "^1.0.0 || ^2.0.0",
                 "spryker/redis": "^2.1.0",
+                "spryker/session-customer-validation-extension": "^1.0.0",
                 "spryker/session-extension": "^1.0.0",
                 "spryker/session-redis-extension": "^1.1.0",
+                "spryker/session-user-validation-extension": "^1.0.0",
                 "spryker/symfony": "^3.0.0",
-                "spryker/transfer": "^3.8.0"
+                "spryker/transfer": "^3.25.0"
             },
             "require-dev": {
                 "spryker/code-sniffer": "*",
@@ -34423,9 +34518,9 @@
             ],
             "description": "SessionRedis module",
             "support": {
-                "source": "https://github.com/spryker/session-redis/tree/1.5.0"
+                "source": "https://github.com/spryker/session-redis/tree/1.6.0"
             },
-            "time": "2021-04-09T06:51:23+00:00"
+            "time": "2022-03-16T14:26:53+00:00"
         },
         {
             "name": "spryker/session-redis-extension",
@@ -34467,6 +34562,99 @@
                 "source": "https://github.com/spryker/session-redis-extension/tree/1.1.0"
             },
             "time": "2021-04-27T09:04:46+00:00"
+        },
+        {
+            "name": "spryker/session-user-validation",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/session-user-validation.git",
+                "reference": "83050007499fb2be1fcab9bbbd159a6411ece95a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/session-user-validation/zipball/83050007499fb2be1fcab9bbbd159a6411ece95a",
+                "reference": "83050007499fb2be1fcab9bbbd159a6411ece95a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.4",
+                "spryker/kernel": "^3.30.0",
+                "spryker/security-extension": "^1.0.0",
+                "spryker/session-user-validation-extension": "^1.0.0",
+                "spryker/symfony": "^3.8.0",
+                "spryker/transfer": "^3.25.0",
+                "spryker/user": "^3.0.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/container": "*"
+            },
+            "suggest": {
+                "spryker/container": "Add this module if you want to use security plugins.N",
+                "spryker/event-dispatcher": "Add this module if you want to use security plugins.N"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "SessionUserValidation module",
+            "support": {
+                "source": "https://github.com/spryker/session-user-validation/tree/1.0.0"
+            },
+            "time": "2022-03-16T14:26:53+00:00"
+        },
+        {
+            "name": "spryker/session-user-validation-extension",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/session-user-validation-extension.git",
+                "reference": "63c0bdf2da432149c347cd53a7dbe735ecdbfce0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/session-user-validation-extension/zipball/63c0bdf2da432149c347cd53a7dbe735ecdbfce0",
+                "reference": "63c0bdf2da432149c347cd53a7dbe735ecdbfce0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.4"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "SessionUserValidationExtension module",
+            "support": {
+                "source": "https://github.com/spryker/session-user-validation-extension/tree/1.0.0"
+            },
+            "time": "2022-03-16T14:26:53+00:00"
         },
         {
             "name": "spryker/setup",
@@ -35970,20 +36158,20 @@
         },
         {
             "name": "spryker/symfony",
-            "version": "3.7.0",
+            "version": "3.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/symfony.git",
-                "reference": "ff6e9ce399469986fd198445b1537774772a8265"
+                "reference": "633f2f7a9a22dca0fb4990df4b81d3faee3ee550"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/symfony/zipball/ff6e9ce399469986fd198445b1537774772a8265",
-                "reference": "ff6e9ce399469986fd198445b1537774772a8265",
+                "url": "https://api.github.com/repos/spryker/symfony/zipball/633f2f7a9a22dca0fb4990df4b81d3faee3ee550",
+                "reference": "633f2f7a9a22dca0fb4990df4b81d3faee3ee550",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.3",
+                "php": ">=7.4",
                 "symfony-cmf/routing": "^1.3.0 || ^2.0.0",
                 "symfony/config": "^3.4.0 || ^4.0.0 || ^5.0.0",
                 "symfony/console": "^3.4.0 || ^4.0.0 || ^5.0.0",
@@ -36002,10 +36190,10 @@
                 "symfony/process": "^3.4.0 || ^4.0.0 || ^5.0.0",
                 "symfony/property-access": "^3.4.0 || ^4.0.0 || ^5.0.0",
                 "symfony/routing": "^4.3.0 || ^5.0.0",
-                "symfony/security-core": "^4.4.13 || ^5.2.8",
-                "symfony/security-csrf": "^4.4.13 || ^5.0.0",
-                "symfony/security-guard": "^4.4.13 || ^5.2.8",
-                "symfony/security-http": "^4.4.13 || ^5.2.8",
+                "symfony/security-core": "^4.4.21 || ^5.2.8",
+                "symfony/security-csrf": "^4.4.21 || ^5.0.0",
+                "symfony/security-guard": "^4.4.21 || ^5.2.8",
+                "symfony/security-http": "^4.4.21 || ^5.2.8",
                 "symfony/serializer": "^3.4.0 || ^4.0.0 || ^5.0.0",
                 "symfony/stopwatch": "^3.4.0 || ^4.0.0 || ^5.0.0",
                 "symfony/translation": "^3.4.0 || ^4.4.0 || ^5.0.0",
@@ -36036,9 +36224,9 @@
             ],
             "description": "Symfony module",
             "support": {
-                "source": "https://github.com/spryker/symfony/tree/3.7.0"
+                "source": "https://github.com/spryker/symfony/tree/3.8.0"
             },
-            "time": "2021-05-18T12:25:33+00:00"
+            "time": "2022-03-16T14:26:53+00:00"
         },
         {
             "name": "spryker/synchronization",
