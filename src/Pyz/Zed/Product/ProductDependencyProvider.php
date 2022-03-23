@@ -127,16 +127,6 @@ class ProductDependencyProvider extends SprykerProductDependencyProvider
     /**
      * @param \Spryker\Zed\Kernel\Container $container
      *
-     * @return \Spryker\Zed\Product\Dependency\Plugin\ProductConcretePluginReadInterface[]
-     */
-    protected function getProductConcreteReadPlugins(Container $container): array
-    {
-        return [];
-    }
-
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
      * @return \Spryker\Zed\Product\Dependency\Plugin\ProductConcretePluginUpdateInterface[]
      */
     protected function getProductConcreteBeforeUpdatePlugins(Container $container)
