@@ -125,7 +125,7 @@ class DiscountWriterStep implements DataImportStepInterface
             $discountEntity->setVoucherPool($discountVoucherPoolEntity);
         }
 
-        if (property_exists(SpyDiscount::class, 'priority')) {
+        if ($dataSet[static::KEY_PRIORITY] && property_exists(SpyDiscount::class, 'priority')) {
             $discountEntity->setPriority($dataSet[static::KEY_PRIORITY]);
         }
 
