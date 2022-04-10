@@ -7,6 +7,8 @@
 
 namespace Pyz\Yves\ShopCmsSlot;
 
+use ESpirit\Yves\FirstSpiritPreviewSlotBlockWidget\FirstSpiritPreviewSlotBlockWidgetConfig;
+use ESpirit\Yves\FirstSpiritPreviewSlotBlockWidget\Plugin\FirstSpiritPreviewSlotBlockWidget\FirstSpiritPreviewSlotBlockWidgetCmsSlotContentPlugin;
 use Spryker\Shared\CmsSlotBlock\CmsSlotBlockConfig;
 use SprykerShop\Yves\CmsSlotBlockWidget\Plugin\ShopCmsSlot\CmsSlotBlockWidgetCmsSlotContentPlugin;
 use SprykerShop\Yves\ShopCmsSlot\ShopCmsSlotDependencyProvider as SprykerShopShopCmsSlotDependencyProvider;
@@ -20,6 +22,7 @@ class ShopCmsSlotDependencyProvider extends SprykerShopShopCmsSlotDependencyProv
     {
         return [
             CmsSlotBlockConfig::CMS_SLOT_CONTENT_PROVIDER_TYPE => new CmsSlotBlockWidgetCmsSlotContentPlugin(),
+            FirstSpiritPreviewSlotBlockWidgetConfig::FS_CMS_SLOT_CONTENT_PROVIDER_TYPE => new FirstSpiritPreviewSlotBlockWidgetCmsSlotContentPlugin(),
         ];
     }
 }

@@ -224,6 +224,7 @@ const getAppSettingsByTheme = (namespaceConfig, theme, pathToConfig) => {
                 // absolute dirs in which look for
                 dirs: [
                     join(globalSettings.context, paths.core),
+                    join(globalSettings.context, './vendor/dmiseev'),
                     join(globalSettings.context, paths.eco),
                     join(globalSettings.context, paths.project),
                 ],

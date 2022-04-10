@@ -38,5 +38,11 @@
                 } only %}
             {% endif %}
         {% endfor %}
+
+        {% if isFsPreview() %}
+            <li class="fs-navigation-extension"
+                style="padding-left: 1rem; transform: translate(0,15% );">
+            </li>
+        {% endif %}
     </ul>
 {% endblock %}

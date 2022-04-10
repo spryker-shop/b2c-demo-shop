@@ -7,6 +7,7 @@
 
 namespace Pyz\Yves\Twig;
 
+use ESpirit\Yves\FirstSpiritPreviewNavigationWidget\Plugin\Twig\FirstSpiritPreviewNavigationWidgetTwigPlugin;
 use Pyz\Yves\CartPage\Plugin\Twig\CartTwigPlugin;
 use Pyz\Yves\CartPage\Plugin\Twig\QuoteTwigPlugin;
 use Spryker\Service\UtilDateTime\Plugin\Twig\DateTimeFormatterTwigPlugin;
@@ -84,7 +85,8 @@ class TwigDependencyProvider extends SprykerTwigDependencyProvider
             new ContentFileListTwigPlugin(),
             new FunctionTwigPlugin(),
             new ShopCmsSlotTwigPlugin(),
-            new ContentNavigationTwigPlugin(),
+//            new ContentNavigationTwigPlugin(),
+            new FirstSpiritPreviewNavigationWidgetTwigPlugin(),
         ];
     }
 

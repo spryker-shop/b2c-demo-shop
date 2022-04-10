@@ -14,6 +14,16 @@
         "ext-pgsql": "*",
         "ext-readline": "*",
         "ext-redis": "*",
+        "dmiseev/firstspirit-caas": "dev-master",
+        "dmiseev/firstspirit-preview": "dev-master",
+        "dmiseev/firstspirit-preview-navigation": "dev-master",
+        "dmiseev/firstspirit-data-state-writer": "dev-master",
+        "dmiseev/firstspirit-data-cleanup": "dev-master",
+        "dmiseev/firstspirit-data-import": "dev-master",
+        "dmiseev/firstspirit-data-inconsistency-check": "dev-master",
+        "dmiseev/firstspirit-data-rest-api": "dev-master",
+        "dmiseev/firstspirit-cms-data-connector": "dev-master",
+        "dmiseev/firstspirit-cms-data-storage": "dev-master",
         "spryker-eco/loggly": "^0.1.0",
         "spryker-feature/agent-assist": "^202108.0",
         "spryker-feature/alternative-products": "^202108.0",
@@ -225,14 +235,57 @@
         {
             "type": "vcs",
             "url": "https://github.com/spryker-sdk/lib-innerbrowser.git"
+        },
+        {
+            "type": "vcs",
+            "url":  "git@github.com:dmiseev/firstspirit-caas.git"
+        },
+        {
+            "type": "vcs",
+            "url":  "git@github.com:dmiseev/firstspirit-cms-data-connector.git"
+        },
+        {
+            "type": "vcs",
+            "url":  "git@github.com:dmiseev/firstspirit-cms-data-storage.git"
+        },
+        {
+            "type": "vcs",
+            "url":  "git@github.com:dmiseev/firstspirit-data-cleanup.git"
+        },
+        {
+            "type": "vcs",
+            "url":  "git@github.com:dmiseev/firstspirit-data-import.git"
+        },
+        {
+            "type": "vcs",
+            "url":  "git@github.com:dmiseev/firstspirit-data-inconsistency-check.git"
+        },
+        {
+            "type": "vcs",
+            "url":  "git@github.com:dmiseev/firstspirit-data-rest-api.git"
+        },
+        {
+            "type": "vcs",
+            "url":  "git@github.com:dmiseev/firstspirit-data-state-writer.git"
+        },
+        {
+            "type": "vcs",
+            "url":  "git@github.com:dmiseev/firstspirit-preview.git"
+        },
+        {
+            "type": "vcs",
+            "url":  "git@github.com:dmiseev/firstspirit-preview-navigation.git"
         }
     ],
     "minimum-stability": "dev",
     "prefer-stable": true,
     "config": {
-        "preferred-install": "dist",
         "platform": {
             "php": "7.3.15"
+        },
+        "preferred-install": {
+            "dmiseev/*": "source",
+            "*": "dist"
         },
         "use-include-path": true,
         "sort-packages": true,
@@ -240,7 +293,11 @@
             "https"
         ],
         "process-timeout": 900,
-        "chromium-revision": 814168
+        "chromium-revision": 814168,
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "sllh/composer-versions-check": true
+        }
     },
     "scripts": {
         "compile": [

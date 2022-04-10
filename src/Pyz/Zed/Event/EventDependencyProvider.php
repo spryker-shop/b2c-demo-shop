@@ -7,6 +7,7 @@
 
 namespace Pyz\Zed\Event;
 
+use ESpirit\Zed\FirstSpiritCmsDataStorage\Communication\Plugin\Event\Subscriber\FirstSpiritCmsDataStorageEventSubscriber;
 use Pyz\Zed\ProductStorage\Communication\Plugin\Event\Subscriber\ProductStorageEventSubscriber;
 use Spryker\Zed\AvailabilityNotification\Communication\Plugin\Event\Subscriber\AvailabilityNotificationSubscriber;
 use Spryker\Zed\AvailabilityStorage\Communication\Plugin\Event\Subscriber\AvailabilityStorageEventSubscriber;
@@ -95,6 +96,7 @@ class EventDependencyProvider extends SprykerEventDependencyProvider
         $eventSubscriberCollection->add(new ProductQuantityStorageEventSubscriber());
         $eventSubscriberCollection->add(new ContentStorageEventSubscriber());
         $eventSubscriberCollection->add(new ProductListStorageEventSubscriber());
+        $eventSubscriberCollection->add(new FirstSpiritCmsDataStorageEventSubscriber());
 
         /**
          * Search Events

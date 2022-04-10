@@ -7,6 +7,7 @@
 
 namespace Pyz\Client\RabbitMq;
 
+use ESpirit\Shared\FirstSpiritCmsDataStorage\FirstSpiritCmsDataStorageConfig;
 use Spryker\Client\RabbitMq\RabbitMqConfig as SprykerRabbitMqConfig;
 use Spryker\Shared\AvailabilityStorage\AvailabilityStorageConfig;
 use Spryker\Shared\AvailabilityStorage\AvailabilityStorageConstants;
@@ -92,6 +93,7 @@ class RabbitMqConfig extends SprykerRabbitMqConfig
             ProductPageSearchConfig::PUBLISH_PRODUCT_CONCRETE_PAGE,
             ProductStorageConfig::PUBLISH_PRODUCT_ABSTRACT,
             ProductStorageConfig::PUBLISH_PRODUCT_CONCRETE,
+            FirstSpiritCmsDataStorageConfig::PUBLISH_CMS_PAGE_DATA_CONNECTOR,
         ];
     }
 
@@ -121,6 +123,7 @@ class RabbitMqConfig extends SprykerRabbitMqConfig
             TaxProductStorageConfig::PRODUCT_ABSTRACT_TAX_SET_SYNC_STORAGE_QUEUE,
             TaxStorageConfig::TAX_SET_SYNC_STORAGE_QUEUE,
             SalesReturnSearchConfig::SYNC_SEARCH_RETURN,
+            FirstSpiritCmsDataStorageConfig::CMS_PAGE_DATA_CONNECTOR_SYNC_STORAGE_QUEUE,
         ];
     }
 

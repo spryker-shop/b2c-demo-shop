@@ -7,6 +7,7 @@
 
 namespace Pyz\Zed\Queue;
 
+use ESpirit\Shared\FirstSpiritCmsDataStorage\FirstSpiritCmsDataStorageConfig;
 use Spryker\Shared\AvailabilityStorage\AvailabilityStorageConfig;
 use Spryker\Shared\AvailabilityStorage\AvailabilityStorageConstants;
 use Spryker\Shared\CategoryPageSearch\CategoryPageSearchConstants;
@@ -93,6 +94,8 @@ class QueueDependencyProvider extends SprykerDependencyProvider
             TaxProductStorageConfig::PRODUCT_ABSTRACT_TAX_SET_SYNC_STORAGE_QUEUE => new SynchronizationStorageQueueMessageProcessorPlugin(),
             TaxStorageConfig::TAX_SET_SYNC_STORAGE_QUEUE => new SynchronizationStorageQueueMessageProcessorPlugin(),
             SalesReturnSearchConfig::SYNC_SEARCH_RETURN => new SynchronizationSearchQueueMessageProcessorPlugin(),
+            FirstSpiritCmsDataStorageConfig::PUBLISH_CMS_PAGE_DATA_CONNECTOR => new EventQueueMessageProcessorPlugin(),
+            FirstSpiritCmsDataStorageConfig::CMS_PAGE_DATA_CONNECTOR_SYNC_STORAGE_QUEUE => new SynchronizationStorageQueueMessageProcessorPlugin(),
         ];
     }
 }

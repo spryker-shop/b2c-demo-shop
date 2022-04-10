@@ -7,6 +7,7 @@
 
 namespace Pyz\Yves\Router;
 
+use ESpirit\Yves\FirstSpiritPreview\Plugin\Route\FirstSpiritPreviewRoutePlugin;
 use Pyz\Yves\ExampleProductSalePage\Plugin\Router\ExampleProductSaleRouteProviderPlugin;
 use Spryker\Yves\HealthCheck\Plugin\Router\HealthCheckRouteProviderPlugin;
 use Spryker\Yves\Router\Plugin\RouteManipulator\LanguageDefaultPostAddRouteManipulatorPlugin;
@@ -108,6 +109,7 @@ class RouterDependencyProvider extends SprykerRouterDependencyProvider
             new OrderCustomReferenceWidgetRouteProviderPlugin(),
             new SalesReturnPageRouteProviderPlugin(),
             new OrderCancelWidgetRouteProviderPlugin(),
+            new FirstSpiritPreviewRoutePlugin(),
         ];
     }
 

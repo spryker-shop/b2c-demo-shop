@@ -7,6 +7,9 @@
 
 namespace Pyz\Glue\GlueApplication;
 
+use ESpirit\Glue\FirstSpiritDataRestApi\Plugin\FirstSpiritCmsPagesResourceRoutePlugin;
+use ESpirit\Glue\FirstSpiritDataRestApi\Plugin\FirstSpiritDataCleanupsResourceRoutePlugin;
+use ESpirit\Glue\FirstSpiritDataRestApi\Plugin\FirstSpiritDataImportsResourceRoutePlugin;
 use Spryker\Glue\AgentAuthRestApi\Plugin\GlueApplication\AgentAccessTokenRestRequestValidatorPlugin;
 use Spryker\Glue\AgentAuthRestApi\Plugin\GlueApplication\AgentAccessTokenRestUserFinderPlugin;
 use Spryker\Glue\AgentAuthRestApi\Plugin\GlueApplication\AgentAccessTokensResourceRoutePlugin;
@@ -249,6 +252,9 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
             new CustomerAvailabilityNotificationsResourceRoutePlugin(),
             new ConfigurableBundleTemplatesResourceRoutePlugin(),
             new MyAvailabilityNotificationsResourceRoutePlugin(),
+            new FirstSpiritDataImportsResourceRoutePlugin(),
+            new FirstSpiritDataCleanupsResourceRoutePlugin(),
+            new FirstSpiritCmsPagesResourceRoutePlugin(),
         ];
     }
 

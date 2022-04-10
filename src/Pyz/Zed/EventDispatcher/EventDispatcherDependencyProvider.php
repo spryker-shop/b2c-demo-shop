@@ -69,6 +69,7 @@ class EventDispatcherDependencyProvider extends SprykerEventDispatcherDependency
             new RouterListenerEventDispatcherPlugin(),
             new ResponseListenerEventDispatcherPlugin(),
             new AutoloaderCacheEventDispatcherPlugin(),
+            new EventBehaviorEventDispatcherPlugin(), // To enable trigger events from GLUE application
         ];
     }
 

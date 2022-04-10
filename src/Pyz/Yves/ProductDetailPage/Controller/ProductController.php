@@ -7,6 +7,7 @@
 
 namespace Pyz\Yves\ProductDetailPage\Controller;
 
+use ESpirit\Shared\FirstSpiritPreview\FirstSpiritPreviewConstants;
 use Generated\Shared\Transfer\ItemTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use SprykerShop\Yves\ProductDetailPage\Controller\ProductController as SprykerShopProductController;
@@ -32,6 +33,9 @@ class ProductController extends SprykerShopProductController
             (new ItemTransfer())->setIdProductAbstract($viewData['product']->getIdProductAbstract())
         );
         $viewData['cart'] = $quoteTransfer;
+
+        $viewData[FirstSpiritPreviewConstants::VIEW_DATA_PAGE_TYPE_KEY] = FirstSpiritPreviewConstants::PRODUCT_PAGE_TYPE;
+        $viewData[FirstSpiritPreviewConstants::VIEW_DATA_PAGE_ID_KEY] = $productData['sku'];
 
         return $viewData;
     }

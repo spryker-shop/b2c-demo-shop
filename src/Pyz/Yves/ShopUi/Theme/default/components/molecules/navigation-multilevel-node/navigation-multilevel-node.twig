@@ -124,3 +124,9 @@
 {% block other %}
     <span class="{{ component.renderClass(config.name ~ '__link', modifiers) }} {{ config.name }}__link--lvl-{{ data.levelMenu }}">{{ data.node.title }}</span>
 {% endblock %}
+
+{% block attributes %}
+    {% if isFsPreview() and data.node.previewId is defined and data.node.previewId is not empty %}
+        data-preview-id="{{ data.node.previewId }}" style="min-height: unset;"
+    {% endif %}
+{% endblock %}

@@ -7,6 +7,13 @@
 
 namespace Pyz\Yves\ShopApplication;
 
+use ESpirit\Yves\FirstSpiritPreview\Plugin\FsTwigExtensionPlugin;
+use ESpirit\Yves\FirstSpiritPreview\Plugin\HeadersSecurityExtensionPlugin;
+use ESpirit\Yves\FirstSpiritPreview\Widget\FirstSpiritCategoryLinkWidget;
+use ESpirit\Yves\FirstSpiritPreview\Widget\FirstSpiritContentLinkWidget;
+use ESpirit\Yves\FirstSpiritPreview\Widget\FirstSpiritExternalLinkWidget;
+use ESpirit\Yves\FirstSpiritPreview\Widget\FirstSpiritProductFlyoutWidget;
+use ESpirit\Yves\FirstSpiritPreview\Widget\FirstSpiritProductLinkWidget;
 use Spryker\Yves\ErrorHandler\Plugin\Application\ErrorHandlerApplicationPlugin;
 use Spryker\Yves\EventDispatcher\Plugin\Application\EventDispatcherApplicationPlugin;
 use Spryker\Yves\Form\Plugin\Application\FormApplicationPlugin;
@@ -176,6 +183,11 @@ class ShopApplicationDependencyProvider extends SprykerShopApplicationDependency
             ProductAbstractAddToCartButtonWidget::class,
             OrderCancelButtonWidget::class,
             CartAddProductAsSeparateItemWidget::class,
+            FirstSpiritCategoryLinkWidget::class,
+            FirstSpiritProductLinkWidget::class,
+            FirstSpiritContentLinkWidget::class,
+            FirstSpiritExternalLinkWidget::class,
+            FirstSpiritProductFlyoutWidget::class,
         ];
     }
 
@@ -211,6 +223,8 @@ class ShopApplicationDependencyProvider extends SprykerShopApplicationDependency
             new ValidatorApplicationPlugin(),
             new SecurityApplicationPlugin(),
             new CustomerConfirmationUserCheckerApplicationPlugin(),
+            new HeadersSecurityExtensionPlugin(),
+            new FsTwigExtensionPlugin(),
         ];
 
         if (class_exists(WebProfilerApplicationPlugin::class)) {
