@@ -1361,7 +1361,7 @@ class DataImportBusinessFactory extends SprykerDataImportBusinessFactory
      */
     protected function createAddLocalesStep(): DataImportStepInterface
     {
-        return new AddLocalesStep($this->getStore());
+        return new AddLocalesStep($this->getDataImportStoreFacade());
     }
 
     /**
