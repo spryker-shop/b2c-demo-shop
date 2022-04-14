@@ -12,8 +12,15 @@ use SprykerShop\Yves\ProductSetWidget\ProductSetWidgetDependencyProvider as Spry
 
 class ProductSetWidgetDependencyProvider extends SprykerProductSetWidgetDependencyProvider
 {
-    public const CLIENT_PRODUCT_SET_STORAGE = 'CLIENT_PRODUCT_SET_STORAGE';
-    public const CLIENT_PRODUCT_STORAGE = 'CLIENT_PRODUCT_STORAGE';
+    /**
+     * @var string
+     */
+    public const PYZ_CLIENT_PRODUCT_SET_STORAGE = 'PYZ_CLIENT_PRODUCT_SET_STORAGE';
+
+    /**
+     * @var string
+     */
+    public const PYZ_CLIENT_PRODUCT_STORAGE = 'PYZ_CLIENT_PRODUCT_STORAGE';
 
     /**
      * @param \Spryker\Yves\Kernel\Container $container
@@ -24,8 +31,8 @@ class ProductSetWidgetDependencyProvider extends SprykerProductSetWidgetDependen
     {
         $container = parent::provideDependencies($container);
 
-        $container = $this->addProductStorageClient($container);
-        $container = $this->addProductSetStorageClient($container);
+        $container = $this->addPyzProductStorageClient($container);
+        $container = $this->addPyzProductSetStorageClient($container);
 
         return $container;
     }
@@ -35,11 +42,11 @@ class ProductSetWidgetDependencyProvider extends SprykerProductSetWidgetDependen
      *
      * @return mixed
      */
-    protected function addProductStorageClient(Container $container)
+    protected function addPyzProductStorageClient(Container $container)
     {
-        $container[static::CLIENT_PRODUCT_STORAGE] = function (Container $container) {
+        $container->set(static::PYZ_CLIENT_PRODUCT_STORAGE, function (Container $container) {
             return $container->getLocator()->productStorage()->client();
-        };
+        });
 
         return $container;
     }
@@ -49,11 +56,11 @@ class ProductSetWidgetDependencyProvider extends SprykerProductSetWidgetDependen
      *
      * @return \Spryker\Yves\Kernel\Container
      */
-    protected function addProductSetStorageClient(Container $container): Container
+    protected function addPyzProductSetStorageClient(Container $container): Container
     {
-        $container[static::CLIENT_PRODUCT_SET_STORAGE] = function (Container $container) {
+        $container->set(static::PYZ_CLIENT_PRODUCT_SET_STORAGE, function (Container $container) {
             return $container->getLocator()->productSetStorage()->client();
-        };
+        });
 
         return $container;
     }

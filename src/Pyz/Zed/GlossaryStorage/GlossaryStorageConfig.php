@@ -17,6 +17,6 @@ class GlossaryStorageConfig extends SprykerGlossaryStorageConfig
      */
     public function getGlossarySynchronizationPoolName(): ?string
     {
-        return SynchronizationConfig::DEFAULT_SYNCHRONIZATION_POOL_NAME;
+        return SynchronizationConfig::PYZ_DEFAULT_SYNCHRONIZATION_POOL_NAME;
     }
 }

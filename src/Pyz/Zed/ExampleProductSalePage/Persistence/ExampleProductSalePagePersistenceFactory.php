@@ -19,16 +19,16 @@ class ExampleProductSalePagePersistenceFactory extends AbstractPersistenceFactor
     /**
      * @return \Spryker\Zed\ProductLabel\Persistence\ProductLabelQueryContainerInterface
      */
-    public function getProductLabelQueryContainer()
+    public function getPyzProductLabelQueryContainer()
     {
-        return $this->getProvidedDependency(ExampleProductSalePageDependencyProvider::QUERY_CONTAINER_PRODUCT_LABEL);
+        return $this->getProvidedDependency(ExampleProductSalePageDependencyProvider::PYZ_QUERY_CONTAINER_PRODUCT_LABEL);
     }
 
     /**
      * @return \Spryker\Zed\Product\Persistence\ProductQueryContainerInterface
      */
-    public function getProductQueryContainer()
+    public function getPyzProductQueryContainer()
     {
-        return $this->getProvidedDependency(ExampleProductSalePageDependencyProvider::QUERY_CONTAINER_PRODUCT);
+        return $this->getProvidedDependency(ExampleProductSalePageDependencyProvider::PYZ_QUERY_CONTAINER_PRODUCT);
     }
 }

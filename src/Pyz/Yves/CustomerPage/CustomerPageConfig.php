@@ -11,7 +11,10 @@ use SprykerShop\Yves\CustomerPage\CustomerPageConfig as SprykerCustomerPageConfi
 
 class CustomerPageConfig extends SprykerCustomerPageConfig
 {
-    protected const LOGIN_FAILURE_REDIRECT_URL = '/login';
+    /**
+     * @var string
+     */
+    protected const PYZ_LOGIN_FAILURE_REDIRECT_URL = '/login';
 
     /**
      * @uses \Pyz\Zed\Customer\CustomerConfig::MIN_LENGTH_CUSTOMER_PASSWORD
@@ -23,6 +26,9 @@ class CustomerPageConfig extends SprykerCustomerPageConfig
      */
     protected const MAX_LENGTH_CUSTOMER_PASSWORD = 64;
 
+    /**
+     * @var bool
+     */
     protected const IS_ORDER_HISTORY_SEARCH_ENABLED = true;
 
     /**
@@ -32,7 +38,7 @@ class CustomerPageConfig extends SprykerCustomerPageConfig
      */
     public function loginFailureRedirectUrl(): ?string
     {
-        return static::LOGIN_FAILURE_REDIRECT_URL;
+        return static::PYZ_LOGIN_FAILURE_REDIRECT_URL;
     }
 
     /**

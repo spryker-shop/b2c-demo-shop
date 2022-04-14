@@ -16,7 +16,7 @@ class OmsBusinessFactory extends SprykerOmsBusinessFactory
     /**
      * @return \Pyz\Zed\Oms\Business\Calculator\TimeoutProcessorTimeoutCalculatorInterface
      */
-    public function createInitiationTimeoutCalculator(): TimeoutProcessorTimeoutCalculatorInterface
+    public function createPyzInitiationTimeoutCalculator(): TimeoutProcessorTimeoutCalculatorInterface
     {
         return new InitiationTimeoutCalculator();
     }

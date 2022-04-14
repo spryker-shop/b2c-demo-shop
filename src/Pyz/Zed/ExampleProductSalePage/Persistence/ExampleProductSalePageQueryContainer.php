@@ -16,8 +16,15 @@ use Spryker\Zed\Kernel\Persistence\AbstractQueryContainer;
  */
 class ExampleProductSalePageQueryContainer extends AbstractQueryContainer implements ExampleProductSalePageQueryContainerInterface
 {
-    protected const PRICE_TYPE_ORIGINAL = 'ORIGINAL';
-    protected const PRICE_TYPE_DEFAULT = 'DEFAULT';
+    /**
+     * @var string
+     */
+    protected const PYZ_PRICE_TYPE_ORIGINAL = 'ORIGINAL';
+
+    /**
+     * @var string
+     */
+    protected const PYZ_PRICE_TYPE_DEFAULT = 'DEFAULT';
 
     /**
      * @api
@@ -26,10 +33,10 @@ class ExampleProductSalePageQueryContainer extends AbstractQueryContainer implem
      *
      * @return \Orm\Zed\ProductLabel\Persistence\SpyProductLabelQuery
      */
-    public function queryProductLabelByName($labelName)
+    public function queryPyzProductLabelByName($labelName)
     {
         return $this->getFactory()
-            ->getProductLabelQueryContainer()
+            ->getPyzProductLabelQueryContainer()
             ->queryProductLabelByName($labelName);
     }
 
@@ -40,45 +47,47 @@ class ExampleProductSalePageQueryContainer extends AbstractQueryContainer implem
      *
      * @return \Orm\Zed\ProductLabel\Persistence\SpyProductLabelProductAbstractQuery
      */
-    public function queryRelationsBecomingInactive($idProductLabel)
+    public function queryPyzRelationsBecomingInactive($idProductLabel)
     {
-        /** @var \Orm\Zed\ProductLabel\Persistence\SpyProductLabelProductAbstractQuery $productLabelProductAbstractQuery */
+        /**
+         * @var \Orm\Zed\ProductLabel\Persistence\SpyProductLabelProductAbstractQuery $productLabelProductAbstractQuery
+         */
         $productLabelProductAbstractQuery = $this->getFactory()
-            ->getProductLabelQueryContainer()
+            ->getPyzProductLabelQueryContainer()
             ->queryProductAbstractRelationsByIdProductLabel($idProductLabel)
             ->distinct()
             ->useSpyProductAbstractQuery(null, Criteria::LEFT_JOIN)
-                ->usePriceProductQuery('priceProductOrigin', Criteria::LEFT_JOIN)
-                    ->joinPriceType('priceTypeOrigin', Criteria::INNER_JOIN)
-                    ->addJoinCondition(
-                        'priceTypeOrigin',
-                        'priceTypeOrigin.name = ?',
-                        static::PRICE_TYPE_ORIGINAL
-                    )
-                    ->usePriceProductStoreQuery('priceProductStoreOrigin', Criteria::LEFT_JOIN)
-                        ->usePriceProductDefaultQuery('priceProductDefaultOriginal', Criteria::LEFT_JOIN)
-                        ->endUse()
-                    ->endUse()
-                ->endUse()
-                ->usePriceProductQuery('priceProductDefault', Criteria::LEFT_JOIN)
-                    ->joinPriceType('priceTypeDefault', Criteria::INNER_JOIN)
-                    ->addJoinCondition(
-                        'priceTypeDefault',
-                        'priceTypeDefault.name = ?',
-                        static::PRICE_TYPE_DEFAULT
-                    )
-                    ->usePriceProductStoreQuery('priceProductStoreDefault', Criteria::LEFT_JOIN)
-                        ->usePriceProductDefaultQuery('priceProductDefaultDefault', Criteria::LEFT_JOIN)
-                        ->endUse()
-                    ->endUse()
-                ->endUse()
+            ->usePriceProductQuery('priceProductOrigin', Criteria::LEFT_JOIN)
+            ->joinPriceType('priceTypeOrigin', Criteria::INNER_JOIN)
+            ->addJoinCondition(
+                'priceTypeOrigin',
+                'priceTypeOrigin.name = ?',
+                static::PYZ_PRICE_TYPE_ORIGINAL
+            )
+            ->usePriceProductStoreQuery('priceProductStoreOrigin', Criteria::LEFT_JOIN)
+            ->usePriceProductDefaultQuery('priceProductDefaultOriginal', Criteria::LEFT_JOIN)
+            ->endUse()
+            ->endUse()
+            ->endUse()
+            ->usePriceProductQuery('priceProductDefault', Criteria::LEFT_JOIN)
+            ->joinPriceType('priceTypeDefault', Criteria::INNER_JOIN)
+            ->addJoinCondition(
+                'priceTypeDefault',
+                'priceTypeDefault.name = ?',
+                static::PYZ_PRICE_TYPE_DEFAULT
+            )
+            ->usePriceProductStoreQuery('priceProductStoreDefault', Criteria::LEFT_JOIN)
+            ->usePriceProductDefaultQuery('priceProductDefaultDefault', Criteria::LEFT_JOIN)
+            ->endUse()
+            ->endUse()
+            ->endUse()
             ->endUse()
             ->addAnd('priceProductDefaultOriginal.id_price_product_default', null, Criteria::ISNOTNULL)
             ->addAnd('priceProductDefaultDefault.id_price_product_default', null, Criteria::ISNOTNULL)
             ->addJoinCondition('priceProductStoreDefault', 'priceProductStoreOrigin.fk_store = priceProductStoreDefault.fk_store')
             ->addJoinCondition('priceProductStoreDefault', 'priceProductStoreOrigin.fk_currency = priceProductStoreDefault.fk_currency');
 
-        $orCriterion = $this->getBasicModelCriterion(
+        $orCriterion = $this->getPyzBasicModelCriterion(
             $productLabelProductAbstractQuery,
             'priceProductStoreOrigin.gross_price < priceProductStoreDefault.gross_price',
             'priceProductStoreOrigin.gross_price'
@@ -86,7 +95,7 @@ class ExampleProductSalePageQueryContainer extends AbstractQueryContainer implem
         $orCriterion->addOr($productLabelProductAbstractQuery->getNewCriterion('priceProductStoreOrigin.gross_price', null, Criteria::ISNULL));
         $orCriterion->addOr($productLabelProductAbstractQuery->getNewCriterion('priceProductStoreOrigin.net_price', null, Criteria::ISNULL));
         $orCriterion->addOr(
-            $this->getBasicModelCriterion(
+            $this->getPyzBasicModelCriterion(
                 $productLabelProductAbstractQuery,
                 'priceProductStoreOrigin.net_price < priceProductStoreDefault.net_price',
                 'priceProductStoreOrigin.net_price'
@@ -100,57 +109,47 @@ class ExampleProductSalePageQueryContainer extends AbstractQueryContainer implem
     }
 
     /**
-     * @param \Propel\Runtime\ActiveQuery\Criteria $criteria
-     * @param string $clause
-     * @param \Propel\Runtime\Map\ColumnMap|string $column
-     *
-     * @return \Propel\Runtime\ActiveQuery\Criterion\BasicModelCriterion
-     */
-    protected function getBasicModelCriterion(Criteria $criteria, string $clause, $column): BasicModelCriterion
-    {
-        return new BasicModelCriterion($criteria, $clause, $column);
-    }
-
-    /**
      * @api
      *
      * @param int $idProductLabel
      *
      * @return \Orm\Zed\Product\Persistence\SpyProductAbstractQuery
      */
-    public function queryRelationsBecomingActive($idProductLabel)
+    public function queryPyzRelationsBecomingActive($idProductLabel)
     {
-        /** @var \Orm\Zed\Product\Persistence\SpyProductAbstractQuery $productAbstractQuery */
+        /**
+         * @var \Orm\Zed\Product\Persistence\SpyProductAbstractQuery $productAbstractQuery
+         */
         $productAbstractQuery = $this->getFactory()
-            ->getProductQueryContainer()
+            ->getPyzProductQueryContainer()
             ->queryProductAbstract()
             ->distinct()
             ->usePriceProductQuery('priceProductOrigin', Criteria::LEFT_JOIN)
-                ->joinPriceType('priceTypeOrigin', Criteria::INNER_JOIN)
-                ->addJoinCondition(
-                    'priceTypeOrigin',
-                    'priceTypeOrigin.name = ?',
-                    static::PRICE_TYPE_ORIGINAL
-                )
-                ->usePriceProductStoreQuery('priceProductStoreOrigin', Criteria::LEFT_JOIN)
-                    ->usePriceProductDefaultQuery('priceProductDefaultOriginal', Criteria::LEFT_JOIN)
-                    ->endUse()
-                ->endUse()
+            ->joinPriceType('priceTypeOrigin', Criteria::INNER_JOIN)
+            ->addJoinCondition(
+                'priceTypeOrigin',
+                'priceTypeOrigin.name = ?',
+                static::PYZ_PRICE_TYPE_ORIGINAL
+            )
+            ->usePriceProductStoreQuery('priceProductStoreOrigin', Criteria::LEFT_JOIN)
+            ->usePriceProductDefaultQuery('priceProductDefaultOriginal', Criteria::LEFT_JOIN)
+            ->endUse()
+            ->endUse()
             ->endUse()
             ->usePriceProductQuery('priceProductDefault', Criteria::LEFT_JOIN)
-                ->joinPriceType('priceTypeDefault', Criteria::INNER_JOIN)
-                ->addJoinCondition(
-                    'priceTypeDefault',
-                    'priceTypeDefault.name = ?',
-                    static::PRICE_TYPE_DEFAULT
-                )
-                ->usePriceProductStoreQuery('priceProductStoreDefault', Criteria::LEFT_JOIN)
-                    ->usePriceProductDefaultQuery('priceProductDefaultDefault', Criteria::LEFT_JOIN)
-                    ->endUse()
-                ->endUse()
+            ->joinPriceType('priceTypeDefault', Criteria::INNER_JOIN)
+            ->addJoinCondition(
+                'priceTypeDefault',
+                'priceTypeDefault.name = ?',
+                static::PYZ_PRICE_TYPE_DEFAULT
+            )
+            ->usePriceProductStoreQuery('priceProductStoreDefault', Criteria::LEFT_JOIN)
+            ->usePriceProductDefaultQuery('priceProductDefaultDefault', Criteria::LEFT_JOIN)
+            ->endUse()
+            ->endUse()
             ->endUse()
             ->useSpyProductLabelProductAbstractQuery('rel', Criteria::LEFT_JOIN)
-                ->filterByFkProductLabel(null, Criteria::ISNULL)
+            ->filterByFkProductLabel(null, Criteria::ISNULL)
             ->endUse()
             ->addJoinCondition('rel', sprintf('rel.fk_product_label = %d', $idProductLabel))
             ->addAnd('rel.fk_product_label', null, Criteria::ISNULL)
@@ -164,5 +163,17 @@ class ExampleProductSalePageQueryContainer extends AbstractQueryContainer implem
             ->addJoinCondition('priceProductStoreDefault', 'priceProductStoreOrigin.net_price > priceProductStoreDefault.net_price');
 
         return $productAbstractQuery;
+    }
+
+    /**
+     * @param \Propel\Runtime\ActiveQuery\Criteria $criteria
+     * @param string $clause
+     * @param \Propel\Runtime\Map\ColumnMap|string $column
+     *
+     * @return \Propel\Runtime\ActiveQuery\Criterion\BasicModelCriterion
+     */
+    protected function getPyzBasicModelCriterion(Criteria $criteria, string $clause, $column): BasicModelCriterion
+    {
+        return new BasicModelCriterion($criteria, $clause, $column);
     }
 }

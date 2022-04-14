@@ -22,6 +22,6 @@ class ExampleProductSalePageLabelUpdaterPlugin extends AbstractPlugin implements
      */
     public function findProductLabelProductAbstractRelationChanges()
     {
-        return $this->getFacade()->findProductLabelProductAbstractRelationChanges();
+        return $this->getFacade()->findPyzProductLabelProductAbstractRelationChanges();
     }
 }

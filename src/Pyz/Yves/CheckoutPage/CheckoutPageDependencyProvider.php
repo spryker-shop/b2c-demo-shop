@@ -31,7 +31,7 @@ class CheckoutPageDependencyProvider extends SprykerShopCheckoutPageDependencyPr
     /**
      * @uses \Spryker\Yves\Form\Plugin\Application\FormApplicationPlugin::SERVICE_FORM_FACTORY
      */
-    protected const SERVICE_FORM_FACTORY = 'form.factory';
+    protected const PYZ_SERVICE_FORM_FACTORY = 'form.factory';
 
     /**
      * @param \Spryker\Yves\Kernel\Container $container
@@ -41,7 +41,7 @@ class CheckoutPageDependencyProvider extends SprykerShopCheckoutPageDependencyPr
     public function provideDependencies(Container $container): Container
     {
         $container = parent::provideDependencies($container);
-        $container = $this->extendPaymentMethodHandler($container);
+        $container = $this->extendPyzPaymentMethodHandler($container);
 
         return $container;
     }
@@ -65,8 +65,8 @@ class CheckoutPageDependencyProvider extends SprykerShopCheckoutPageDependencyPr
     {
         return [
             LoginForm::class,
-            $this->getCustomerCheckoutForm(RegisterForm::class, RegisterForm::BLOCK_PREFIX),
-            $this->getCustomerCheckoutForm(GuestForm::class, GuestForm::BLOCK_PREFIX),
+            $this->getPyzCustomerCheckoutForm(RegisterForm::class, RegisterForm::BLOCK_PREFIX),
+            $this->getPyzCustomerCheckoutForm(GuestForm::class, GuestForm::BLOCK_PREFIX),
         ];
     }
 
@@ -76,9 +76,9 @@ class CheckoutPageDependencyProvider extends SprykerShopCheckoutPageDependencyPr
      *
      * @return \Symfony\Component\Form\FormInterface
      */
-    protected function getCustomerCheckoutForm($subForm, $blockPrefix)
+    protected function getPyzCustomerCheckoutForm($subForm, $blockPrefix)
     {
-        return $this->getFormFactory()->createNamed(
+        return $this->getPyzFormFactory()->createNamed(
             $blockPrefix,
             CustomerCheckoutForm::class,
             null,
@@ -89,9 +89,9 @@ class CheckoutPageDependencyProvider extends SprykerShopCheckoutPageDependencyPr
     /**
      * @return \Symfony\Component\Form\FormFactory
      */
-    protected function getFormFactory(): FormFactory
+    protected function getPyzFormFactory(): FormFactory
     {
-        return (new GlobalContainer())->get(static::SERVICE_FORM_FACTORY);
+        return (new GlobalContainer())->get(static::PYZ_SERVICE_FORM_FACTORY);
     }
 
     /**
@@ -109,7 +109,7 @@ class CheckoutPageDependencyProvider extends SprykerShopCheckoutPageDependencyPr
      *
      * @return \Spryker\Yves\Kernel\Container
      */
-    protected function extendPaymentMethodHandler(Container $container): Container
+    protected function extendPyzPaymentMethodHandler(Container $container): Container
     {
         $container->extend(static::PAYMENT_METHOD_HANDLER, function (StepHandlerPluginCollection $paymentMethodHandler) {
             $paymentMethodHandler->add(new NopaymentHandlerPlugin(), NopaymentConfig::PAYMENT_PROVIDER_NAME);

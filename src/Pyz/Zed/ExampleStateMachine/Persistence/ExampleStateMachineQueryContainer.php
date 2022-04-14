@@ -20,20 +20,20 @@ class ExampleStateMachineQueryContainer extends AbstractQueryContainer implement
      *
      * @return \Orm\Zed\ExampleStateMachine\Persistence\PyzExampleStateMachineItemQuery
      */
-    public function queryStateMachineItemsByStateIds(array $stateIds = [])
+    public function queryPyzStateMachineItemsByStateIds(array $stateIds = [])
     {
           return $this->getFactory()
-              ->createExampleStateMachineQuery()
+              ->createPyzExampleStateMachineQuery()
               ->filterByFkStateMachineItemState($stateIds, Criteria::IN);
     }
 
     /**
      * @return \Orm\Zed\ExampleStateMachine\Persistence\PyzExampleStateMachineItem[]|\Propel\Runtime\Collection\ObjectCollection
      */
-    public function queryAllStateMachineItems()
+    public function queryPyzAllStateMachineItems()
     {
          return $this->getFactory()
-             ->createExampleStateMachineQuery()
+             ->createPyzExampleStateMachineQuery()
              ->find();
     }
 
@@ -42,10 +42,10 @@ class ExampleStateMachineQueryContainer extends AbstractQueryContainer implement
      *
      * @return \Orm\Zed\ExampleStateMachine\Persistence\PyzExampleStateMachineItem[]|\Orm\Zed\ExampleStateMachine\Persistence\PyzExampleStateMachineItemQuery|\Propel\Runtime\Collection\ObjectCollection
      */
-    public function queryExampleStateMachineItemByIdStateMachineItem($idStateMachineItem)
+    public function queryPyzExampleStateMachineItemByIdStateMachineItem($idStateMachineItem)
     {
         return $this->getFactory()
-            ->createExampleStateMachineQuery()
+            ->createPyzExampleStateMachineQuery()
             ->filterByIdExampleStateMachineItem($idStateMachineItem);
     }
 }

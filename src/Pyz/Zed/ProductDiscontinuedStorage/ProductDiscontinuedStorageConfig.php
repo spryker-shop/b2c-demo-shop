@@ -18,7 +18,7 @@ class ProductDiscontinuedStorageConfig extends SprykerProductDiscontinuedStorage
      */
     public function getProductDiscontinuedSynchronizationPoolName(): ?string
     {
-        return SynchronizationConfig::DEFAULT_SYNCHRONIZATION_POOL_NAME;
+        return SynchronizationConfig::PYZ_DEFAULT_SYNCHRONIZATION_POOL_NAME;
     }
 
     /**

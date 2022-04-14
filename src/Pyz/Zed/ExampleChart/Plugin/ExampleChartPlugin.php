@@ -35,7 +35,7 @@ class ExampleChartPlugin implements ChartPluginInterface, ChartLayoutablePluginI
         $data = new ChartDataTransfer();
         $data->setTitle('test');
         $data->setKey('test');
-        $data->addTrace($this->getTrace());
+        $data->addTrace($this->getPyzTrace());
 
         return $data;
     }
@@ -51,7 +51,7 @@ class ExampleChartPlugin implements ChartPluginInterface, ChartLayoutablePluginI
     /**
      * @return \Generated\Shared\Transfer\ChartDataTraceTransfer
      */
-    protected function getTrace(): ChartDataTraceTransfer
+    protected function getPyzTrace(): ChartDataTraceTransfer
     {
         $trace = new ChartDataTraceTransfer();
         $trace->setValues([11, 23, 31]);

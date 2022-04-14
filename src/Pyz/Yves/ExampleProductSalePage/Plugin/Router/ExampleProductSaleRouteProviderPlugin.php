@@ -13,10 +13,14 @@ use Spryker\Yves\Router\Route\RouteCollection;
 class ExampleProductSaleRouteProviderPlugin extends AbstractRouteProviderPlugin
 {
     /**
-     * @deprecated Use {@link \Pyz\Yves\ExampleProductSalePage\Plugin\Router\ExampleProductSaleRouteProviderPlugin::ROUTE_NAME_SALE} instead.
+     * @deprecated Use {@link \Pyz\Yves\ExampleProductSalePage\Plugin\Router\ExampleProductSaleRouteProviderPlugin::PYZ_ROUTE_NAME_SALE} instead.
      */
-    public const ROUTE_SALE = 'sale';
-    public const ROUTE_NAME_SALE = 'sale';
+    public const PYZ_ROUTE_SALE = 'sale';
+
+    /**
+     * @var string
+     */
+    public const PYZ_ROUTE_NAME_SALE = 'sale';
 
     /**
      * @param \Spryker\Yves\Router\Route\RouteCollection $routeCollection
@@ -25,11 +29,11 @@ class ExampleProductSaleRouteProviderPlugin extends AbstractRouteProviderPlugin
      */
     public function addRoutes(RouteCollection $routeCollection): RouteCollection
     {
-        $route = $this->buildRoute('/outlet{categoryPath}', 'ExampleProductSalePage', 'Sale', 'indexAction');
+        $route = $this->buildRoute('/outlet{categoryPath}', 'ExampleProductSalePage', 'Sale', 'indexPyzAction');
         $route = $route->setRequirement('categoryPath', '\/.+');
         $route = $route->setDefault('categoryPath', null);
 
-        $routeCollection->add(static::ROUTE_NAME_SALE, $route);
+        $routeCollection->add(static::PYZ_ROUTE_NAME_SALE, $route);
 
         return $routeCollection;
     }

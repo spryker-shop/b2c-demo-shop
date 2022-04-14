@@ -44,7 +44,7 @@ class InitiationTimeoutProcessorPlugin extends AbstractPlugin implements Timeout
     public function getLabel(OmsEventTransfer $omsEventTransfer): string
     {
         return sprintf(
-            $this->getFactory()->getTranslatorFacade()->trans('Starts when defined timeout (%s) is over.'),
+            $this->getFactory()->getPyzTranslatorFacade()->trans('Starts when defined timeout (%s) is over.'),
             $omsEventTransfer->getTimeout()
         );
     }
@@ -62,6 +62,6 @@ class InitiationTimeoutProcessorPlugin extends AbstractPlugin implements Timeout
      */
     public function calculateTimeout(TimeoutProcessorTimeoutRequestTransfer $timeoutProcessorTimeoutRequestTransfer): TimeoutProcessorTimeoutResponseTransfer
     {
-        return $this->getFacade()->calculateInitiationTimeout($timeoutProcessorTimeoutRequestTransfer);
+        return $this->getFacade()->calculatePyzInitiationTimeout($timeoutProcessorTimeoutRequestTransfer);
     }
 }

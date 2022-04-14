@@ -17,6 +17,6 @@ class SalesReturnSearchConfig extends SprykerSalesReturnSearchConfig
      */
     public function getReturnReasonSearchSynchronizationPoolName(): ?string
     {
-        return SynchronizationConfig::DEFAULT_SYNCHRONIZATION_POOL_NAME;
+        return SynchronizationConfig::PYZ_DEFAULT_SYNCHRONIZATION_POOL_NAME;
     }
 }

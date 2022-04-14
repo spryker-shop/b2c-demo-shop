@@ -27,7 +27,10 @@ use Spryker\Zed\Shipment\Dependency\Plugin\Oms\ShipmentOrderMailExpanderPlugin;
 
 class OmsDependencyProvider extends SprykerOmsDependencyProvider
 {
-    public const FACADE_TRANSLATOR = 'FACADE_TRANSLATOR';
+    /**
+     * @var string
+     */
+    public const PYZ_FACADE_TRANSLATOR = 'PYZ_FACADE_TRANSLATOR';
 
     /**
      * @param \Spryker\Zed\Kernel\Container $container
@@ -51,7 +54,7 @@ class OmsDependencyProvider extends SprykerOmsDependencyProvider
     public function provideCommunicationLayerDependencies(Container $container): Container
     {
         $container = parent::provideCommunicationLayerDependencies($container);
-        $container = $this->addTranslatorFacade($container);
+        $container = $this->addPyzTranslatorFacade($container);
 
         return $container;
     }
@@ -61,9 +64,9 @@ class OmsDependencyProvider extends SprykerOmsDependencyProvider
      *
      * @return \Spryker\Zed\Kernel\Container
      */
-    protected function addTranslatorFacade(Container $container): Container
+    protected function addPyzTranslatorFacade(Container $container): Container
     {
-        $container->set(static::FACADE_TRANSLATOR, function (Container $container) {
+        $container->set(static::PYZ_FACADE_TRANSLATOR, function (Container $container) {
             return $container->getLocator()->translator()->facade();
         });
 
@@ -100,7 +103,7 @@ class OmsDependencyProvider extends SprykerOmsDependencyProvider
     {
         $container->extend(self::CONDITION_PLUGINS, function (ConditionCollectionInterface $conditionCollection) {
             $conditionCollection
-                ->add(new IsGiftCardConditionPlugin(), 'GiftCard/IsGiftCard');
+            ->add(new IsGiftCardConditionPlugin(), 'GiftCard/IsGiftCard');
 
             return $conditionCollection;
         });
