@@ -69,6 +69,9 @@ class DataImportConfig extends SprykerDataImportConfig
     {
         $customImportTypes = [
             StockAddressDataImportConfig::IMPORT_TYPE_STOCK_ADDRESS,
+            static::IMPORT_TYPE_CMS_PAGE,
+            static::IMPORT_TYPE_CMS_BLOCK,
+            static::IMPORT_TYPE_NAVIGATION,
         ];
 
         return array_merge(parent::getFullImportTypes(), $customImportTypes);
