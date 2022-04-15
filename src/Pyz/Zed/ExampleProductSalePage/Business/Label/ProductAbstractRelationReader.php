@@ -12,6 +12,8 @@ use Orm\Zed\ProductLabel\Persistence\SpyProductLabel;
 use Pyz\Zed\ExampleProductSalePage\Business\Exception\ProductLabelSaleNotFoundException;
 use Pyz\Zed\ExampleProductSalePage\ExampleProductSalePageConfig;
 use Pyz\Zed\ExampleProductSalePage\Persistence\ExampleProductSalePageQueryContainerInterface;
+use Spryker\Zed\Currency\Business\CurrencyFacadeInterface;
+use Spryker\Zed\Price\Business\PriceFacadeInterface;
 
 class ProductAbstractRelationReader implements ProductAbstractRelationReaderInterface
 {
@@ -26,15 +28,31 @@ class ProductAbstractRelationReader implements ProductAbstractRelationReaderInte
     protected $productSaleConfig;
 
     /**
+     * @var \Spryker\Zed\Currency\Business\CurrencyFacadeInterface
+     */
+    protected $currencyFacade;
+
+    /**
+     * @var \Spryker\Zed\Price\Business\PriceFacadeInterface
+     */
+    protected $priceFacade;
+
+    /**
      * @param \Pyz\Zed\ExampleProductSalePage\Persistence\ExampleProductSalePageQueryContainerInterface $productSaleQueryContainer
      * @param \Pyz\Zed\ExampleProductSalePage\ExampleProductSalePageConfig $productSaleConfig
+     * @param \Spryker\Zed\Currency\Business\CurrencyFacadeInterface $currencyFacade
+     * @param \Spryker\Zed\Price\Business\PriceFacadeInterface $priceFacade
      */
     public function __construct(
         ExampleProductSalePageQueryContainerInterface $productSaleQueryContainer,
-        ExampleProductSalePageConfig $productSaleConfig
+        ExampleProductSalePageConfig $productSaleConfig,
+        CurrencyFacadeInterface $currencyFacade,
+        PriceFacadeInterface $priceFacade
     ) {
         $this->productSaleQueryContainer = $productSaleQueryContainer;
         $this->productSaleConfig = $productSaleConfig;
+        $this->currencyFacade = $currencyFacade;
+        $this->priceFacade = $priceFacade;
     }
 
     /**
@@ -94,7 +112,10 @@ class ProductAbstractRelationReader implements ProductAbstractRelationReaderInte
         $relations = [];
 
         $productLabelProductAbstractEntities = $this->productSaleQueryContainer
-            ->queryPyzRelationsBecomingInactive($productLabelEntity->getIdProductLabel())
+            ->queryPyzRelationsBecomingInactive(
+                $productLabelEntity->getIdProductLabel(),
+                $this->priceFacade->getDefaultPriceMode(),
+            )
             ->find();
 
         foreach ($productLabelProductAbstractEntities as $productLabelProductAbstractEntity) {
@@ -114,7 +135,12 @@ class ProductAbstractRelationReader implements ProductAbstractRelationReaderInte
         $relations = [];
 
         $productAbstractEntities = $this->productSaleQueryContainer
-            ->queryPyzRelationsBecomingActive($productLabelEntity->getIdProductLabel())
+            ->queryPyzRelationsBecomingActive(
+                $productLabelEntity->getIdProductLabel(),
+                $this->currencyFacade->getCurrentStoreWithCurrencies()->getStore()->getIdStore(),
+                $this->currencyFacade->getDefaultCurrencyForCurrentStore()->getIdCurrency(),
+                $this->priceFacade->getDefaultPriceMode(),
+            )
             ->find();
 
         foreach ($productAbstractEntities as $productAbstractEntity) {
