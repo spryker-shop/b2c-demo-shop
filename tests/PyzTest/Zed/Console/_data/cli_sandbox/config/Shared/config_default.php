@@ -208,6 +208,8 @@ $config[SecuritySystemUserConstants::AUTH_DEFAULT_CREDENTIALS] = [
     ],
 ];
 
+$config[HttpConstants::URI_SIGNER_SECRET_KEY] = 'JDJ5JDEwJFE0cXBwYnVVTTV6YVZXSnVmM2l1UWVhRE94WkQ4UjBUeHBEWTNHZlFRTEd4U2F6QVBqejQ2';
+
 /**
  * ACL: Allow or disallow of urls for Zed Admin GUI for ALL users
  */
