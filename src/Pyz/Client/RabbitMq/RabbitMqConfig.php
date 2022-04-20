@@ -8,6 +8,7 @@
 namespace Pyz\Client\RabbitMq;
 
 use Spryker\Client\RabbitMq\RabbitMqConfig as SprykerRabbitMqConfig;
+use Spryker\Shared\AssetStorage\AssetStorageConfig;
 use Spryker\Shared\AvailabilityStorage\AvailabilityStorageConfig;
 use Spryker\Shared\AvailabilityStorage\AvailabilityStorageConstants;
 use Spryker\Shared\CategoryPageSearch\CategoryPageSearchConstants;
@@ -121,6 +122,7 @@ class RabbitMqConfig extends SprykerRabbitMqConfig
             TaxProductStorageConfig::PRODUCT_ABSTRACT_TAX_SET_SYNC_STORAGE_QUEUE,
             TaxStorageConfig::TAX_SET_SYNC_STORAGE_QUEUE,
             SalesReturnSearchConfig::SYNC_SEARCH_RETURN,
+            AssetStorageConfig::ASSET_SYNC_STORAGE_QUEUE,
         ];
     }
 

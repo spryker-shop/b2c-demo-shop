@@ -19,6 +19,9 @@ use Spryker\Zed\Oms\Communication\Plugin\Oms\ReservationHandler\ReservationVersi
 use Spryker\Zed\Oms\Dependency\Plugin\Command\CommandCollectionInterface;
 use Spryker\Zed\Oms\Dependency\Plugin\Condition\ConditionCollectionInterface;
 use Spryker\Zed\Oms\OmsDependencyProvider as SprykerOmsDependencyProvider;
+use Spryker\Zed\Payment\Communication\Plugin\Command\SendEventPaymentCancelReservationPendingPlugin;
+use Spryker\Zed\Payment\Communication\Plugin\Command\SendEventPaymentConfirmationPendingPlugin;
+use Spryker\Zed\Payment\Communication\Plugin\Command\SendEventPaymentRefundPendingPlugin;
 use Spryker\Zed\ProductBundle\Communication\Plugin\Oms\ProductBundleReservationPostSaveTerminationAwareStrategyPlugin;
 use Spryker\Zed\SalesInvoice\Communication\Plugin\Oms\GenerateOrderInvoiceCommandPlugin;
 use Spryker\Zed\SalesReturn\Communication\Plugin\Oms\Command\StartReturnCommandPlugin;
@@ -87,6 +90,9 @@ class OmsDependencyProvider extends SprykerOmsDependencyProvider
             $commandCollection->add(new CreateGiftCardCommandPlugin(), 'GiftCard/CreateGiftCard');
             $commandCollection->add(new StartReturnCommandPlugin(), 'Return/StartReturn');
             $commandCollection->add(new GenerateOrderInvoiceCommandPlugin(), 'Invoice/Generate');
+            $commandCollection->add(new SendEventPaymentConfirmationPendingPlugin(), 'Payment/SendEventPaymentConfirmationPending');
+            $commandCollection->add(new SendEventPaymentRefundPendingPlugin(), 'Payment/SendEventPaymentRefundPending');
+            $commandCollection->add(new SendEventPaymentCancelReservationPendingPlugin(), 'Payment/SendEventPaymentCancelReservationPending');
 
             return $commandCollection;
         });

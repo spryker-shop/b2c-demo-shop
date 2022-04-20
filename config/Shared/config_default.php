@@ -5,10 +5,12 @@ use Pyz\Shared\Console\ConsoleConstants;
 use Pyz\Shared\Scheduler\SchedulerConfig;
 use Pyz\Yves\ShopApplication\YvesBootstrap;
 use Pyz\Zed\Application\Communication\ZedBootstrap;
+use Pyz\Zed\Oms\OmsConfig;
 use Spryker\Client\RabbitMq\Model\RabbitMqAdapter;
 use Spryker\Glue\Log\Plugin\GlueLoggerConfigPlugin;
 use Spryker\Service\FlysystemLocalFileSystem\Plugin\Flysystem\LocalFilesystemBuilderPlugin;
 use Spryker\Shared\Acl\AclConstants;
+use Spryker\Shared\AppCatalogGui\AppCatalogGuiConstants;
 use Spryker\Shared\Application\ApplicationConstants;
 use Spryker\Shared\Application\Log\Config\SprykerLoggerConfig;
 use Spryker\Shared\CartsRestApi\CartsRestApiConstants;
@@ -55,6 +57,7 @@ use Spryker\Shared\SessionRedis\SessionRedisConfig;
 use Spryker\Shared\SessionRedis\SessionRedisConstants;
 use Spryker\Shared\Storage\StorageConstants;
 use Spryker\Shared\StorageRedis\StorageRedisConstants;
+use Spryker\Shared\StoreReference\StoreReferenceConstants;
 use Spryker\Shared\Tax\TaxConstants;
 use Spryker\Shared\Testify\TestifyConstants;
 use Spryker\Shared\Translator\TranslatorConstants;
@@ -62,6 +65,7 @@ use Spryker\Shared\User\UserConstants;
 use Spryker\Shared\ZedRequest\ZedRequestConstants;
 use Spryker\Yves\Log\Plugin\YvesLoggerConfigPlugin;
 use Spryker\Zed\Log\Communication\Plugin\ZedLoggerConfigPlugin;
+use Spryker\Zed\Payment\PaymentConfig;
 use Spryker\Zed\Propel\PropelConfig;
 use SprykerShop\Shared\CustomerPage\CustomerPageConstants;
 use SprykerShop\Shared\ShopUi\ShopUiConstants;
@@ -555,8 +559,14 @@ $config[GlueApplicationConstants::GLUE_APPLICATION_CORS_ALLOW_ORIGIN] = getenv('
 // ------------------------------ OMS -----------------------------------------
 // ----------------------------------------------------------------------------
 
+$config[OmsConstants::PROCESS_LOCATION] = [
+    OmsConfig::DEFAULT_PROCESS_LOCATION,
+    APPLICATION_ROOT_DIR . '/vendor/spryker/payment/config/Zed/Oms',
+];
 $config[OmsConstants::ACTIVE_PROCESSES] = [];
-$config[SalesConstants::PAYMENT_METHOD_STATEMACHINE_MAPPING] = [];
+$config[SalesConstants::PAYMENT_METHOD_STATEMACHINE_MAPPING] = [
+    PaymentConfig::PAYMENT_FOREIGN_PROVIDER => 'B2CStateMachine01',
+];
 
 // ----------------------------------------------------------------------------
 // ------------------------------ PAYMENTS ------------------------------------
@@ -576,3 +586,13 @@ $config[ProductLabelConstants::PRODUCT_LABEL_TO_DE_ASSIGN_CHUNK_SIZE] = 1000;
 // ------------------------------ CART REST API -------------------------------
 // ----------------------------------------------------------------------------
 $config[CartsRestApiConstants::IS_QUOTE_RELOAD_ENABLED] = true;
+
+// ----------------------------------------------------------------------------
+// ------------------------------ AOP -----------------------------------------
+// ----------------------------------------------------------------------------
+
+$config[StoreReferenceConstants::STORE_NAME_REFERENCE_MAP] = json_decode(
+    html_entity_decode(getenv('STORE_NAME_REFERENCE_MAP') ?: ''),
+    true,
+);
+$config[AppCatalogGuiConstants::APP_CATALOG_SCRIPT_URL] = (string)getenv('APP_CATALOG_SCRIPT_URL');
