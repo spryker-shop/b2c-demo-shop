@@ -28,12 +28,4 @@ class ProductRelationStorageConfig extends SprykerProductRelationStorageConfig
     {
         return PublisherConfig::PUBLISH_QUEUE;
     }
-
-    /**
-     * @return string|null
-     */
-    public function getProductRelationEventQueueName(): ?string
-    {
-        return PublisherConfig::PUBLISH_QUEUE;
-    }
 }

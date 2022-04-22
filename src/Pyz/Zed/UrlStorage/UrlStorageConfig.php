@@ -44,20 +44,4 @@ class UrlStorageConfig extends SprykerUrlStorageConfig
     {
         return SprykerSharedUrlStorageConfig::PUBLISH_URL;
     }
-
-    /**
-     * @return string|null
-     */
-    public function getUrlEventQueueName(): ?string
-    {
-        return SprykerSharedUrlStorageConfig::PUBLISH_URL;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getUrlRedirectEventQueueName(): ?string
-    {
-        return SprykerSharedUrlStorageConfig::PUBLISH_URL;
-    }
 }

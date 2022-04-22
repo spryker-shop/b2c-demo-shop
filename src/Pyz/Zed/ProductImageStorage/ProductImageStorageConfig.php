@@ -36,20 +36,4 @@ class ProductImageStorageConfig extends SprykerProductImageStorageConfig
     {
         return SprykerSharedProductImageStorageConfig::PUBLISH_PRODUCT_CONCRETE_IMAGE;
     }
-
-    /**
-     * @return string|null
-     */
-    public function getProductImageAbstractEventQueueName(): ?string
-    {
-        return SprykerSharedProductImageStorageConfig::PUBLISH_PRODUCT_ABSTRACT_IMAGE;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getProductImageConcreteEventQueueName(): ?string
-    {
-        return SprykerSharedProductImageStorageConfig::PUBLISH_PRODUCT_CONCRETE_IMAGE;
-    }
 }

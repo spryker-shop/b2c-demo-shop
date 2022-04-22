@@ -28,12 +28,4 @@ class ProductSetPageSearchConfig extends SprykerProductSetPageSearchConfig
     {
         return PublisherConfig::PUBLISH_QUEUE;
     }
-
-    /**
-     * @return string|null
-     */
-    public function getEventQueueName(): ?string
-    {
-        return PublisherConfig::PUBLISH_QUEUE;
-    }
 }
