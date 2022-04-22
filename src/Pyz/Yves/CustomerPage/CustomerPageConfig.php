@@ -11,7 +11,25 @@ use SprykerShop\Yves\CustomerPage\CustomerPageConfig as SprykerCustomerPageConfi
 
 class CustomerPageConfig extends SprykerCustomerPageConfig
 {
-    protected const LOGIN_FAILURE_REDIRECT_URL = '/login';
+    /**
+     * @var string
+     */
+    protected const PYZ_LOGIN_FAILURE_REDIRECT_URL = '/login';
+
+    /**
+     * @uses \Pyz\Zed\Customer\CustomerConfig::MIN_LENGTH_CUSTOMER_PASSWORD
+     */
+    protected const MIN_LENGTH_CUSTOMER_PASSWORD = 8;
+
+    /**
+     * @uses \Pyz\Zed\Customer\CustomerConfig::MAX_LENGTH_CUSTOMER_PASSWORD
+     */
+    protected const MAX_LENGTH_CUSTOMER_PASSWORD = 64;
+
+    /**
+     * @var bool
+     */
+    protected const IS_ORDER_HISTORY_SEARCH_ENABLED = true;
 
     /**
      * @uses \Pyz\Zed\Customer\CustomerConfig::MIN_LENGTH_CUSTOMER_PASSWORD
@@ -32,7 +50,31 @@ class CustomerPageConfig extends SprykerCustomerPageConfig
      */
     public function loginFailureRedirectUrl(): ?string
     {
-        return static::LOGIN_FAILURE_REDIRECT_URL;
+        return static::PYZ_LOGIN_FAILURE_REDIRECT_URL;
+    }
+
+    /**
+     * @api
+     *
+     * @return bool
+     */
+    public function isDoubleOptInEnabled(): bool
+    {
+        return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @api
+     *
+     * @deprecated Will be removed without replacement. If the future the locale-specific URL will be used.
+     *
+     * @return bool
+     */
+    public function isLocaleInLoginCheckPath(): bool
+    {
+        return true;
     }
 
     /**

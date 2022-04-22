@@ -23,8 +23,8 @@ class CombinedProductAbstractTypeDataSetCondition implements DataSetConditionInt
     public function hasData(DataSetInterface $dataSet): bool
     {
         if (
-            $dataSet[CombinedProductAbstractHydratorStep::COLUMN_ASSIGNED_PRODUCT_TYPE] == static::ASSIGNABLE_PRODUCT_TYPE_ABSTRACT
-            || $dataSet[CombinedProductAbstractHydratorStep::COLUMN_ASSIGNED_PRODUCT_TYPE] == static::ASSIGNABLE_PRODUCT_TYPE_BOTH
+            $dataSet[CombinedProductAbstractHydratorStep::COLUMN_ASSIGNED_PRODUCT_TYPE] === static::ASSIGNABLE_PRODUCT_TYPE_ABSTRACT
+            || $dataSet[CombinedProductAbstractHydratorStep::COLUMN_ASSIGNED_PRODUCT_TYPE] === static::ASSIGNABLE_PRODUCT_TYPE_BOTH
         ) {
             return true;
         }

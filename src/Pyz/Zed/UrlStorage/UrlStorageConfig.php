@@ -18,7 +18,7 @@ class UrlStorageConfig extends SprykerUrlStorageConfig
      */
     public function getUrlSynchronizationPoolName(): ?string
     {
-        return SynchronizationConfig::DEFAULT_SYNCHRONIZATION_POOL_NAME;
+        return SynchronizationConfig::PYZ_DEFAULT_SYNCHRONIZATION_POOL_NAME;
     }
 
     /**
@@ -26,7 +26,23 @@ class UrlStorageConfig extends SprykerUrlStorageConfig
      */
     public function getUrlRedirectSynchronizationPoolName(): ?string
     {
-        return SynchronizationConfig::DEFAULT_SYNCHRONIZATION_POOL_NAME;
+        return SynchronizationConfig::PYZ_DEFAULT_SYNCHRONIZATION_POOL_NAME;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getUrlEventQueueName(): ?string
+    {
+        return SprykerSharedUrlStorageConfig::PUBLISH_URL;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getUrlRedirectEventQueueName(): ?string
+    {
+        return SprykerSharedUrlStorageConfig::PUBLISH_URL;
     }
 
     /**

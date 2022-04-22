@@ -7,7 +7,7 @@
 
 namespace PyzTest\Zed\Touch\Business;
 
-use Codeception\TestCase\Test;
+use Codeception\Test\Unit;
 use Orm\Zed\Touch\Persistence\SpyTouchQuery;
 
 /**
@@ -20,7 +20,7 @@ use Orm\Zed\Touch\Persistence\SpyTouchQuery;
  * @group TouchTest
  * Add your own group annotations below this line
  */
-class TouchTest extends Test
+class TouchTest extends Unit
 {
     /**
      * @return void

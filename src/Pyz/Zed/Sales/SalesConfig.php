@@ -7,31 +7,10 @@
 
 namespace Pyz\Zed\Sales;
 
-use Generated\Shared\Transfer\ItemTransfer;
-use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Zed\Sales\SalesConfig as SprykerSalesConfig;
 
 class SalesConfig extends SprykerSalesConfig
 {
-    /**
-     * This method determines state machine process from the given quote transfer and order item.
-     *
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     * @param \Generated\Shared\Transfer\ItemTransfer $itemTransfer
-     *
-     * @return string
-     */
-    public function determineProcessForOrderItem(QuoteTransfer $quoteTransfer, ItemTransfer $itemTransfer)
-    {
-        $paymentMethodStatemachineMapping = $this->getPaymentMethodStatemachineMapping();
-
-        if (!array_key_exists($quoteTransfer->getPayment()->getPaymentSelection(), $paymentMethodStatemachineMapping)) {
-            return parent::determineProcessForOrderItem($quoteTransfer, $itemTransfer);
-        }
-
-        return $paymentMethodStatemachineMapping[$quoteTransfer->getPayment()->getPaymentSelection()];
-    }
-
     /**
      * This method provides list of urls to render blocks inside order detail page.
      * URL defines path to external bundle controller. For example: /discount/sales/list would call discount bundle, sales controller, list action.
@@ -68,6 +47,14 @@ class SalesConfig extends SprykerSalesConfig
      * @return bool
      */
     public function isHydrateOrderHistoryToItems(): bool
+    {
+        return false;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isOldDeterminationForOrderItemProcessEnabled(): bool
     {
         return false;
     }

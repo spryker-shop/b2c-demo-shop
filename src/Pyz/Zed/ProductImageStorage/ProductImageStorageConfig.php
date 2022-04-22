@@ -18,7 +18,23 @@ class ProductImageStorageConfig extends SprykerProductImageStorageConfig
      */
     public function getProductImageSynchronizationPoolName(): ?string
     {
-        return SynchronizationConfig::DEFAULT_SYNCHRONIZATION_POOL_NAME;
+        return SynchronizationConfig::PYZ_DEFAULT_SYNCHRONIZATION_POOL_NAME;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getProductImageAbstractEventQueueName(): ?string
+    {
+        return SprykerSharedProductImageStorageConfig::PUBLISH_PRODUCT_ABSTRACT_IMAGE;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getProductImageConcreteEventQueueName(): ?string
+    {
+        return SprykerSharedProductImageStorageConfig::PUBLISH_PRODUCT_CONCRETE_IMAGE;
     }
 
     /**

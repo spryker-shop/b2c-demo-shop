@@ -11,7 +11,10 @@ use SprykerShop\Shared\CmsContentWidgetProductConnector\ContentWidgetConfigurati
 
 class CmsProductGroupContentWidgetConfigurationProvider extends SprykerCmsProductGroupContentWidgetConfigurationProvider
 {
-    public const SLIDER_TEMPLATE_IDENTIFIER = 'slider';
+    /**
+     * @var string
+     */
+    protected const PYZ_SLIDER_TEMPLATE_IDENTIFIER = 'slider';
 
     /**
      * @return array
@@ -19,7 +22,7 @@ class CmsProductGroupContentWidgetConfigurationProvider extends SprykerCmsProduc
     public function getAvailableTemplates()
     {
         $availableTemplates = parent::getAvailableTemplates();
-        $availableTemplates[self::SLIDER_TEMPLATE_IDENTIFIER] = '@CmsContentWidgetProductConnector/views/cms-product-group/cms-product-group-slider.twig';
+        $availableTemplates[static::PYZ_SLIDER_TEMPLATE_IDENTIFIER] = '@CmsContentWidgetProductConnector/views/cms-product-group/cms-product-group-slider.twig';
 
         return $availableTemplates;
     }

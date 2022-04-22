@@ -33,7 +33,7 @@ class ExampleStateMachineItemReader
     public function getStateMachineItemTransferByItemStateIds(array $stateIds = [])
     {
         $exampleStateMachineItems = $this->exampleStateMachineQueryContainer
-            ->queryStateMachineItemsByStateIds($stateIds)
+            ->queryPyzStateMachineItemsByStateIds($stateIds)
             ->find();
 
         return $this->hydrateTransferFromPersistence($exampleStateMachineItems);
@@ -45,7 +45,7 @@ class ExampleStateMachineItemReader
     public function getStateMachineItems()
     {
         $exampleStateMachineItems = $this->exampleStateMachineQueryContainer
-            ->queryAllStateMachineItems();
+            ->queryPyzAllStateMachineItems();
 
         return $this->hydrateTransferFromPersistence($exampleStateMachineItems);
     }

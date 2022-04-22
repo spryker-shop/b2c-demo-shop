@@ -7,7 +7,7 @@
 
 namespace PyzTest\Zed\ProductOption\Business;
 
-use Codeception\TestCase\Test;
+use Codeception\Test\Unit;
 use DateTime;
 use Generated\Shared\Transfer\CheckoutResponseTransfer;
 use Generated\Shared\Transfer\ItemTransfer;
@@ -35,7 +35,7 @@ use Spryker\Zed\ProductOption\Business\ProductOptionFacade;
  * @group ProductOptionFacadeAggregatorTest
  * Add your own group annotations below this line
  */
-class ProductOptionFacadeAggregatorTest extends Test
+class ProductOptionFacadeAggregatorTest extends Unit
 {
     /**
      * @return void

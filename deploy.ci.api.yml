@@ -7,6 +7,8 @@ environment: docker.ci
 pipeline: docker.ci.api
 image:
     tag: spryker/php:7.4-alpine3.12
+    environment:
+        STORE_NAME_REFERENCE_MAP: '{"DE":"dev-DE","AT":"dev-AT","US":"dev-US"}'
 
 composer:
     mode: --no-dev
