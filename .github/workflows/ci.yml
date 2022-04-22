@@ -183,12 +183,12 @@ jobs:
                   docker/sdk testing console queue:worker:start --stop-when-empty
                   docker/sdk testing codecept run -c codeception.api.yml
 
-    php-73-postgresql-acceptance-alpine:
-        name: "PHP 7.3 / PostgreSQL / Acceptance / Alpine"
+    php-74-postgresql-acceptance-alpine:
+        name: "PHP 7.4 / PostgreSQL / Acceptance / Alpine"
         runs-on: ubuntu-18.04
         env:
             PROGRESS_TYPE: plain
-            SPRYKER_PLATFORM_IMAGE: spryker/php:7.3
+            SPRYKER_PLATFORM_IMAGE: spryker/php:7.4
             TRAVIS: 1
 
         steps:
@@ -212,12 +212,12 @@ jobs:
                   docker/sdk testing codecept run -c codeception.acceptance.yml
 
 
-    php-73-postgresql-functional-alpine:
-        name: "PHP 7.3 / PostgreSQL / Functional / Alpine"
+    php-74-postgresql-functional-alpine:
+        name: "PHP 7.4 / PostgreSQL / Functional / Alpine"
         runs-on: ubuntu-18.04
         env:
             PROGRESS_TYPE: plain
-            SPRYKER_PLATFORM_IMAGE: spryker/php:7.3
+            SPRYKER_PLATFORM_IMAGE: spryker/php:7.4
             TRAVIS: 1
 
         steps:
@@ -297,12 +297,12 @@ jobs:
                   docker/sdk testing codecept run -c codeception.functional.yml
 
 
-    php-73-postgres-functional-debian:
-        name: "PHP 7.3 / PostgreSQL / Functional / Debian"
+    php-74-postgres-functional-debian:
+        name: "PHP 7.4 / PostgreSQL / Functional / Debian"
         runs-on: ubuntu-18.04
         env:
             PROGRESS_TYPE: plain
-            SPRYKER_PLATFORM_IMAGE: spryker/php:7.3-debian
+            SPRYKER_PLATFORM_IMAGE: spryker/php:7.4-debian
             TRAVIS: 1
 
         steps:
@@ -329,7 +329,7 @@ jobs:
         runs-on: ubuntu-18.04
         env:
             PROGRESS_TYPE: plain
-            SPRYKER_PLATFORM_IMAGE: spryker/php:7.3-alpine3.12
+            SPRYKER_PLATFORM_IMAGE: spryker/php:7.4-alpine3.12
         steps:
             - uses: actions/checkout@v2
             - run: echo eyAiZXhwZXJpbWVudGFsIiA6IHRydWUsICJmZWF0dXJlcyIgOiB7ICJidWlsZGtpdCI6IHRydWUgfSB9Cg==|base64 -d|sudo tee /etc/docker/daemon.json
