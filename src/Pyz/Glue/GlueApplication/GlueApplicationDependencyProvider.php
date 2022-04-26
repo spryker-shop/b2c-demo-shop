@@ -10,6 +10,8 @@ namespace Pyz\Glue\GlueApplication;
 use ESpirit\Glue\FirstSpiritDataRestApi\Plugin\FirstSpiritCmsPagesResourceRoutePlugin;
 use ESpirit\Glue\FirstSpiritDataRestApi\Plugin\FirstSpiritDataCleanupsResourceRoutePlugin;
 use ESpirit\Glue\FirstSpiritDataRestApi\Plugin\FirstSpiritDataImportsResourceRoutePlugin;
+use ESpirit\Glue\FirstSpiritDataRestApi\Plugin\FirstSpiritDataInconsistencyCheckResourceRoutePlugin;
+use ESpirit\Glue\FirstSpiritDataRestApi\Plugin\FirstSpiritDataStateWriterResourceRoutePlugin;
 use Spryker\Glue\AgentAuthRestApi\Plugin\GlueApplication\AgentAccessTokenRestRequestValidatorPlugin;
 use Spryker\Glue\AgentAuthRestApi\Plugin\GlueApplication\AgentAccessTokenRestUserFinderPlugin;
 use Spryker\Glue\AgentAuthRestApi\Plugin\GlueApplication\AgentAccessTokensResourceRoutePlugin;
@@ -255,6 +257,8 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
             new FirstSpiritDataImportsResourceRoutePlugin(),
             new FirstSpiritDataCleanupsResourceRoutePlugin(),
             new FirstSpiritCmsPagesResourceRoutePlugin(),
+            new FirstSpiritDataStateWriterResourceRoutePlugin(),
+            new FirstSpiritDataInconsistencyCheckResourceRoutePlugin(),
         ];
     }
 

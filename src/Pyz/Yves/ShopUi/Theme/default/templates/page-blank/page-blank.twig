@@ -1,10 +1,12 @@
 {% extends template('page-blank', '@SprykerShop:ShopUi') %}
 
+{% block attributes %}
+    {{ fsIncludeDataAttributes() }}
+{% endblock %}
+
 {% block template %}
     {% set isNewFrontendBuildSupported = true %}
     {% set isCssLazyLoadSupported = true %}
-
-    {%- block attributes %} {{ fsIncludeDataAttributes() }} {% endblock -%}
 
     {{ parent() }}
 {% endblock %}

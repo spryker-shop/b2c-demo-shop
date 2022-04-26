@@ -59,6 +59,12 @@
                 sku: data.product.sku,
             },
         } only %}
+
+        {% include molecule('product-cms-block', 'CmsBlockWidget') ignore missing with {
+            data: {
+                idProductAbstract: data.product.idProductAbstract,
+            }
+        } only %}
     </div>
     {% if data.bundleItems %}
         {% include molecule('product-bundle', 'ProductDetailPage') with {
