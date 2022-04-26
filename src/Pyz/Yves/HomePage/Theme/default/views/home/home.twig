@@ -11,7 +11,9 @@
                 },
             } only %}
                 {% block slides %}
-                    {% cms_slot 'slt-2' %}
+                    {% cms_slot 'fs-slt-2' with{
+                        idCmsPage: 'static_homepage',
+                    }%}
                 {% endblock %}
             {% endembed %}
         {% endblock %}
@@ -22,7 +24,9 @@
         <main>
             {% block content %}
 
-                {% cms_slot 'slt-3' %}
+                {% cms_slot 'fs-slt-3' with{
+                    idCmsPage: 'static_homepage',
+                }%}
 
             {% endblock %}
         </main>

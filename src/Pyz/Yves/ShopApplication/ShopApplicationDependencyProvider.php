@@ -223,7 +223,7 @@ class ShopApplicationDependencyProvider extends SprykerShopApplicationDependency
             new ValidatorApplicationPlugin(),
             new SecurityApplicationPlugin(),
             new CustomerConfirmationUserCheckerApplicationPlugin(),
-            new HeadersSecurityExtensionPlugin(),
+//            new HeadersSecurityExtensionPlugin(),
             new FsTwigExtensionPlugin(),
         ];
 

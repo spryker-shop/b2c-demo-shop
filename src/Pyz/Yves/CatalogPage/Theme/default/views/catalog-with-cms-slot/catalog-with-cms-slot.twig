@@ -40,6 +40,7 @@
 {% block catalogContent %}
     {% if data.categoryId %}
         <div class="catalog-cms-block catalog-cms-block--top">
+            {{ fsSpyCmsBlock({category: data.categoryId, position: 'top'}) }}
             {% cms_slot 'slt-4' required ['idCategory'] with {
                 idCategory: data.categoryId,
             } %}
@@ -50,6 +51,7 @@
 
     {% if data.categoryId %}
         <div class="catalog-cms-block catalog-cms-block--bottom">
+            {{ fsSpyCmsBlock({category: data.categoryId, position: 'bottom'}) }}
             {% cms_slot 'slt-6' required ['idCategory'] with {
                 idCategory: data.categoryId,
             } %}

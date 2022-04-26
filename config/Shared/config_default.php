@@ -93,6 +93,8 @@ $config[KernelConstants::CORE_NAMESPACES] = [
     'ESpirit',
 ];
 
+$config[SessionConstants::YVES_SESSION_COOKIE_SAMESITE] = 'None';
+
 // >>> ROUTER
 
 $config[RouterConstants::YVES_SSL_EXCLUDED_ROUTE_NAMES] = [
@@ -153,6 +155,7 @@ $config[KernelConstants::DOMAIN_WHITELIST] = array_merge($trustedHosts, [
     $sprykerFrontendHost,
     'threedssvc.pay1.de', // trusted Payone domain
     'www.sofort.com', // trusted Payone domain
+    'demo-spryker.e-spirit.hosting',
 ]);
 $config[KernelConstants::STRICT_DOMAIN_REDIRECT] = true;
 
@@ -543,7 +546,8 @@ if (class_exists(TestifyConstants::class)) {
     $config[TestifyConstants::GLUE_APPLICATION_DOMAIN] = $config[GlueApplicationConstants::GLUE_APPLICATION_DOMAIN];
 }
 
-$config[GlueApplicationConstants::GLUE_APPLICATION_CORS_ALLOW_ORIGIN] = getenv('SPRYKER_GLUE_APPLICATION_CORS_ALLOW_ORIGIN') ?: '';
+//$config[GlueApplicationConstants::GLUE_APPLICATION_CORS_ALLOW_ORIGIN] = getenv('SPRYKER_GLUE_APPLICATION_CORS_ALLOW_ORIGIN') ?: '';
+$config[GlueApplicationConstants::GLUE_APPLICATION_CORS_ALLOW_ORIGIN] = '*';
 
 // ----------------------------------------------------------------------------
 // ------------------------------ OMS -----------------------------------------

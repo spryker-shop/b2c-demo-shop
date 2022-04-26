@@ -47,6 +47,7 @@
     {% endblock %}
 
     {% block title %}
+        {{ fsSpyCmsBlock({category:data.category.id_category, position: 'banner'}) }}
         {% if data.category.image is defined %}
             {% include molecule('jumbotron') with {
                 modifiers: ['category'],
