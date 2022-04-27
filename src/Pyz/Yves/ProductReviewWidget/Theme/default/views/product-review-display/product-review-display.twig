@@ -9,19 +9,19 @@
     <span itemscope itemprop="aggregateRating" itemtype="https://schema.org/AggregateRating">
         <meta itemprop="ratingValue" content="{{ data.value }}">
         <meta itemprop="bestRating" content="{{ data.maxValue }}">
-    </span>
 
-    {% include molecule('rating-selector', 'ProductReviewWidget') with {
-        modifiers: ['small'],
-        data: {
-            value: data.value,
-            maxValue: data.maxValue,
-            useHalfSteps: true,
-            parentJsName: data.parentJsName,
-            reviewCount: data.reviewCount,
-        },
-        attributes: {
-            readonly: true,
-        },
-    } only %}
+        {% include molecule('rating-selector', 'ProductReviewWidget') with {
+            modifiers: ['small'],
+            data: {
+                value: data.value,
+                maxValue: data.maxValue,
+                useHalfSteps: true,
+                parentJsName: data.parentJsName,
+                reviewCount: data.reviewCount,
+            },
+            attributes: {
+                readonly: true,
+            },
+        } only %}
+    </span>
 {% endblock %}
