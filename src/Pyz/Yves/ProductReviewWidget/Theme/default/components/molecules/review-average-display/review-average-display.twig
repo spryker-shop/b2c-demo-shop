@@ -21,12 +21,6 @@
     <meta itemprop="bestRating" content="{{ data.summary.maximumRating }}">
     <meta itemprop="reviewCount" content="{{ data.summary.totalReview }}">
 
-    <span itemscope itemprop="aggregateRating" itemtype="https://schema.org/AggregateRating">
-        <meta itemprop="ratingValue" content="{{ data.summary.averageRating }}">
-        <meta itemprop="bestRating" content="{{ data.summary.maximumRating }}">
-        <meta itemprop="reviewCount" content="{{ data.summary.totalReview }}">
-    </span>
-
     {% include molecule('rating-selector', 'ProductReviewWidget') with {
         modifiers: ['marginless'],
         data: {

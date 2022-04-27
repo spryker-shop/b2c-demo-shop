@@ -65,6 +65,7 @@ components:
         headers:
             type: object
             required:
+                - authorization
                 - timestamp
                 - correlationId
                 - storeReference
@@ -72,6 +73,9 @@ components:
                 - transferName
                 - publisher
             properties:
+                authorization:
+                    type: string
+                    description: 'Authorization header for requesting a protected resource.'
                 timestamp:
                     type: integer
                     description: 'Timestamp when this message was created (microtime).'

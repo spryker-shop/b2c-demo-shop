@@ -18,6 +18,7 @@ use Spryker\Zed\MessageBrokerAws\Communication\Plugin\MessageBroker\Receiver\Aws
 use Spryker\Zed\MessageBrokerAws\Communication\Plugin\MessageBroker\Sender\AwsSnsMessageSenderPlugin;
 use Spryker\Zed\MessageBrokerAws\Communication\Plugin\MessageBroker\Sender\AwsSqsMessageSenderPlugin;
 use Spryker\Zed\MessageBrokerAws\Communication\Plugin\MessageBroker\Sender\HttpMessageSenderPlugin;
+use Spryker\Zed\OauthClient\Communication\Plugin\MessageBroker\AccessTokenMessageAttributeProviderPlugin;
 use Spryker\Zed\Payment\Communication\Plugin\MessageBroker\PaymentCancelReservationFailedMessageHandlerPlugin;
 use Spryker\Zed\Payment\Communication\Plugin\MessageBroker\PaymentConfirmationFailedMessageHandlerPlugin;
 use Spryker\Zed\Payment\Communication\Plugin\MessageBroker\PaymentConfirmedMessageHandlerPlugin;
@@ -86,6 +87,7 @@ class MessageBrokerDependencyProvider extends SprykerMessageBrokerDependencyProv
             new CorrelationIdMessageAttributeProviderPlugin(),
             new TimestampMessageAttributeProviderPlugin(),
             new StoreReferenceMessageAttributeProviderPlugin(),
+            new AccessTokenMessageAttributeProviderPlugin(),
         ];
     }
 
