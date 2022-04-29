@@ -5,10 +5,13 @@ tag: 'dev'
 
 environment: docker.dev
 image:
-    tag: spryker/php:7.3-alpine3.12
+    tag: spryker/php:7.4-alpine3.12
     php:
         enabled-extensions:
             - blackfire
+    environment:
+        STORE_NAME_REFERENCE_MAP: '{"DE":"dev-DE","AT":"dev-AT","US":"dev-US"}'
+
 composer:
     mode: ''
     autoload: ''

@@ -11,5 +11,8 @@ use Spryker\Shared\Kernel\AbstractSharedConfig;
 
 class SchedulerConfig extends AbstractSharedConfig
 {
-    public const SCHEDULER_JENKINS = 'jenkins';
+    /**
+     * @var string
+     */
+    public const PYZ_SCHEDULER_JENKINS = 'jenkins';
 }

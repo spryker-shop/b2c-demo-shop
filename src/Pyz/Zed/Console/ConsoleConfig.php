@@ -15,7 +15,7 @@ class ConsoleConfig extends SprykerConsoleConfig
     /**
      * @return bool
      */
-    public function isDevelopmentConsoleCommandsEnabled(): bool
+    public function isPyzDevelopmentConsoleCommandsEnabled(): bool
     {
         return $this->get(ConsoleConstants::ENABLE_DEVELOPMENT_CONSOLE_COMMANDS, false);
     }

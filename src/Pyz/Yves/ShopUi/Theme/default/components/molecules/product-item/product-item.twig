@@ -71,16 +71,19 @@
             <div class="{{ config.name }}__review">
                 {{ block('rating') }}
             </div>
+
+            <meta class="{{ config.jsName }}__sku" itemprop="sku" content="{{ data.metaSku }}">
         {% endblock %}
     </div>
 {% endblock %}
 
 {% block image %}
     {% set extraClass = '' %}
+    {% set linkExtraClass = '' %}
     {% set modifiers = ['spaceless'] %}
 
     {% block productThumbnail %}
-        <a itemprop="url" class="{{ config.name }}__overlay {{ config.jsName }}__link-detail-page" href="{{ data.url }}">
+        <a itemprop="url" class="{{ config.name }}__overlay {{ config.jsName }}__link-detail-page {{ linkExtraClass }}" href="{{ data.url }}">
             {{ parent() }}
         </a>
     {% endblock %}

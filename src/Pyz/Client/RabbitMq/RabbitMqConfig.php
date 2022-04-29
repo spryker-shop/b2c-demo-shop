@@ -8,6 +8,7 @@
 namespace Pyz\Client\RabbitMq;
 
 use Spryker\Client\RabbitMq\RabbitMqConfig as SprykerRabbitMqConfig;
+use Spryker\Shared\AssetStorage\AssetStorageConfig;
 use Spryker\Shared\AvailabilityStorage\AvailabilityStorageConfig;
 use Spryker\Shared\AvailabilityStorage\AvailabilityStorageConstants;
 use Spryker\Shared\CategoryPageSearch\CategoryPageSearchConstants;
@@ -65,15 +66,15 @@ class RabbitMqConfig extends SprykerRabbitMqConfig
                 ],
                 $this->get(LogConstants::LOG_QUEUE_NAME),
             ],
-            $this->getPublishQueueConfiguration(),
-            $this->getSynchronizationQueueConfiguration()
+            $this->getPyzPublishQueueConfiguration(),
+            $this->getPyzSynchronizationQueueConfiguration()
         );
     }
 
     /**
      * @return array
      */
-    protected function getPublishQueueConfiguration(): array
+    protected function getPyzPublishQueueConfiguration(): array
     {
         return [
             PublisherConfig::PUBLISH_QUEUE => [
@@ -98,7 +99,7 @@ class RabbitMqConfig extends SprykerRabbitMqConfig
     /**
      * @return array
      */
-    protected function getSynchronizationQueueConfiguration(): array
+    protected function getPyzSynchronizationQueueConfiguration(): array
     {
         return [
             PublishAndSynchronizeHealthCheckSearchConfig::SYNC_SEARCH_PUBLISH_AND_SYNCHRONIZE_HEALTH_CHECK,
@@ -121,6 +122,7 @@ class RabbitMqConfig extends SprykerRabbitMqConfig
             TaxProductStorageConfig::PRODUCT_ABSTRACT_TAX_SET_SYNC_STORAGE_QUEUE,
             TaxStorageConfig::TAX_SET_SYNC_STORAGE_QUEUE,
             SalesReturnSearchConfig::SYNC_SEARCH_RETURN,
+            AssetStorageConfig::ASSET_SYNC_STORAGE_QUEUE,
         ];
     }
 

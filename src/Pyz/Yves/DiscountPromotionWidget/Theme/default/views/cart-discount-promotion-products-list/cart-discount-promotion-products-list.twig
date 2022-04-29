@@ -1,29 +1,79 @@
 {% extends view('cart-discount-promotion-products-list', '@SprykerShop:DiscountPromotionWidget') %}
 
 {% block body %}
-    {% if data.promotionProducts is not empty %}
-        <h4 class="title title--promotion title--medium title--with-border">{{ 'cart.promotion.items' | trans }}</h4>
+    {% set titleClassName = 'title title--h3 spacing-bottom spacing-bottom--big' %}
+    {% set promotionItemClassName = 'box box--darker box--wide spacing-bottom spacing-bottom--biger' %}
+    {% set promotionItemTitleClassName = 'title--h4 title--medium spacing-bottom spacing-bottom--biggest' %}
+    {{ parent() }}
+{% endblock %}
 
-        {% for product in data.promotionProducts %}
-            {% embed molecule('product-item') with {
-                modifiers: ['promotional'],
-                data: {
-                    product: product,
-                },
-            } only %}
-                {% block productThumbnail %}
-                    {% set modifiers = ['small'] %}
+{% block promotionProductSlider %}
+    {% embed molecule('slick-carousel') with {
+        modifiers: ['align-left', 'promotional'],
+        data: {
+            slides: data.abstractSkusGroupedByIdDiscount[discount.idDiscount],
+        },
+        embed: {
+            promotionProducts: data.promotionProducts,
+            idDiscountPromotion: discount.discountPromotion.idDiscountPromotion,
+        },
+        attributes: {
+            'data-json': '{
+                "slidesToShow": 3,
+                "dots": false,
+                "infinite": false,
+                "responsive": [{
+                        "breakpoint": 1023,
+                        "settings": {
+                            "slidesToShow": 2
+                        }
+                    },
+                    {
+                        "breakpoint": 520,
+                        "settings": {
+                            "slidesToShow": 1
+                        }
+                    }
+                ]}'
+        }
+    } only %}
+        {% block slides %}
+            {% for slide in data.slides %}
+                <div class="spacing-x spacing-x--inner">
+                    {% embed molecule('product-item') with {
+                        modifiers: ['promotional'],
+                        data: {
+                            product: embed.promotionProducts[slide ~ "-" ~ embed.idDiscountPromotion],
+                        },
+                    } only %}
+                        {% block productThumbnail %}
+                            {% set linkExtraClass = config.name ~ '__overlay--promotional' %}
+                            {% set modifiers = ['small'] %}
 
-                    {{ parent() }}
-                {% endblock %}
+                            {{ parent() }}
+                        {% endblock %}
 
-                {% block content %}
-                    <div class="col col--expand spacing-left spacing-left--inner spacing-left--big">
-                        {{ parent() }}
+                        {% block colors %}{% endblock %}
 
-                        <div class="grid">
+                        {% block content %}
+                            <a href="{{ data.url }}" class="{{ config.name }}__info {{ config.jsName }}__link-detail-page grid grid--justify grid--top grid--no-wrap">
+                                {% if data.name %}
+                                    <div class="col col--sm-8">
+                                        {{ block('title') }}
+                                    </div>
+                                {% endif %}
+
+                                <div class="col col--sm-4 text-right">
+                                    {{ block('price') }}
+                                </div>
+                            </a>
+
+                            <div class="{{ config.name }}__review">
+                                {{ block('rating') }}
+                            </div>
+
                             {% include molecule('variant-configurator', 'DiscountPromotionWidget') with {
-                                class: 'col col--lg-9 col--sm-12',
+                                class: 'spacing-y',
                                 data: {
                                     sku: data.sku,
                                     superAttributes: data.product.attributeMap.superAttributes,
@@ -31,35 +81,31 @@
                                     availableAttributes: data.product.availableAttributes,
                                 },
                             } only %}
-                        </div>
 
-                        {% set isDisabled = not data.product.idProductConcrete or not data.product.available %}
+                            {% set isDisabled = not data.product.idProductConcrete or not data.product.available %}
 
-                        {% widget 'AddToCartFormWidget' args [config, data.product, isDisabled] only %}
-                            {% block embeddedData %}
-                                {% set disabledAttribute = data.isDisabled ? 'disabled' %}
-
-                                <div class="grid grid--bottom grid--justify">
+                            {% widget 'AddToCartFormWidget' args [config, data.product, isDisabled] only %}
+                                {% block embeddedData %}
+                                    {% set disabledAttribute = data.isDisabled ? 'disabled' %}
                                     {% include molecule('product-quantity-input') with {
+                                        class: 'spacing-bottom--big',
                                         data: {
                                             maxQuantity: data.product.promotionItem.maxQuantity,
                                             hasUpdateButton: false,
                                         },
                                     } only %}
 
-                                    <div class="col col--sm-12 col--md-4 text-right">
-                                        <input type="hidden" value="{{ productSku }}" name="groupKey">
-                                        <input type="hidden" value="{{ data.product.promotionItem.discount.discountPromotion.idDiscountPromotion }}" name="idDiscountPromotion">
-                                        <button class="button button--hollow button--promotion-item" {{ disabledAttribute }} data-init-single-click {{ qa('add-to-cart-button') }}>
-                                            {{- 'page.detail.add-to-cart' | trans -}}
-                                        </button>
-                                    </div>
-                                </div>
-                            {% endblock %}
-                        {% endwidget %}
-                    </div>
-                {% endblock %}
-            {% endembed %}
-        {% endfor %}
-    {% endif %}
+                                    <input type="hidden" value="{{ productSku }}" name="groupKey">
+                                    <input type="hidden" value="{{ data.product.promotionItem.discount.discountPromotion.idDiscountPromotion }}" name="idDiscountPromotion">
+                                    <button class="button button--hollow button--expand button--small" {{ disabledAttribute }} data-init-single-click {{ qa('add-to-cart-button') }}>
+                                        {{- 'page.detail.add-to-cart' | trans -}}
+                                    </button>
+                                {% endblock %}
+                            {% endwidget %}
+                        {% endblock %}
+                    {% endembed %}
+                </div>
+            {% endfor %}
+        {% endblock %}
+    {% endembed %}
 {% endblock %}

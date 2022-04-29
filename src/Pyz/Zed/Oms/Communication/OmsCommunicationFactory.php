@@ -19,8 +19,8 @@ class OmsCommunicationFactory extends SprykerOmsCommunicationFactory
     /**
      * @return \Spryker\Zed\Translator\Business\TranslatorFacadeInterface
      */
-    public function getTranslatorFacade(): TranslatorFacadeInterface
+    public function getPyzTranslatorFacade(): TranslatorFacadeInterface
     {
-        return $this->getProvidedDependency(OmsDependencyProvider::FACADE_TRANSLATOR);
+        return $this->getProvidedDependency(OmsDependencyProvider::PYZ_FACADE_TRANSLATOR);
     }
 }

@@ -18,7 +18,7 @@ class CategoryStorageConfig extends SprykerCategoryStorageConfig
      */
     public function getCategoryTreeSynchronizationPoolName(): ?string
     {
-        return SynchronizationConfig::DEFAULT_SYNCHRONIZATION_POOL_NAME;
+        return SynchronizationConfig::PYZ_DEFAULT_SYNCHRONIZATION_POOL_NAME;
     }
 
     /**
@@ -26,7 +26,7 @@ class CategoryStorageConfig extends SprykerCategoryStorageConfig
      */
     public function getCategoryNodeSynchronizationPoolName(): ?string
     {
-        return SynchronizationConfig::DEFAULT_SYNCHRONIZATION_POOL_NAME;
+        return SynchronizationConfig::PYZ_DEFAULT_SYNCHRONIZATION_POOL_NAME;
     }
 
     /**

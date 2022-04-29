@@ -16,17 +16,39 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class ProductSetIdsWidget extends AbstractWidget
 {
-    public const NAME = 'ProductSetIdsWidget';
-    public const PARAM_ATTRIBUTE = 'attributes';
+    /**
+     * @var string
+     */
+    public const PYZ_NAME = 'ProductSetIdsWidget';
+
+    /**
+     * @var string
+     */
+    public const PYZ_PARAM_ATTRIBUTE = 'attributes';
+
+    /**
+     * @var string
+     */
+    protected const PYZ_PARAMETER_PRODUCT_SET_LIST = 'productSetList';
 
     /**
      * @param array $productSetIds
      */
     public function __construct(array $productSetIds)
     {
-        $productSetList = $this->getProductSetList($productSetIds);
+        $this->addPyzProductSetListParameter($productSetIds);
+    }
 
-        $this->addParameter('productSetList', $productSetList);
+    /**
+     * @param array $productSetIds
+     *
+     * @return void
+     */
+    protected function addPyzProductSetListParameter(array $productSetIds): void
+    {
+        $productSetList = $this->getPyzProductSetList($productSetIds);
+
+        $this->addParameter(self::PYZ_PARAMETER_PRODUCT_SET_LIST, $productSetList);
     }
 
     /**
@@ -34,7 +56,7 @@ class ProductSetIdsWidget extends AbstractWidget
      */
     public static function getName(): string
     {
-        return static::NAME;
+        return static::PYZ_NAME;
     }
 
     /**
@@ -50,11 +72,11 @@ class ProductSetIdsWidget extends AbstractWidget
      *
      * @return array
      */
-    protected function getProductSetList(array $productSetIds): array
+    protected function getPyzProductSetList(array $productSetIds): array
     {
         $productSets = [];
         foreach ($productSetIds as $productSetId) {
-            $productSet = $this->getSingleProductSet($productSetId);
+            $productSet = $this->getPyzSingleProductSet($productSetId);
             if (!isset($productSet['productSet'])) {
                 continue;
             }
@@ -70,9 +92,9 @@ class ProductSetIdsWidget extends AbstractWidget
      *
      * @return array
      */
-    protected function getSingleProductSet(int $productSetId): array
+    protected function getPyzSingleProductSet(int $productSetId): array
     {
-        $productSet = $this->getProductSetDataStorageTransfer($productSetId);
+        $productSet = $this->getPyzProductSetDataStorageTransfer($productSetId);
 
         if (!$productSet || !$productSet->getIsActive()) {
             return [];
@@ -80,7 +102,7 @@ class ProductSetIdsWidget extends AbstractWidget
 
         return [
             'productSet' => $productSet,
-            'productViews' => $this->mapProductViewTransfers($productSet),
+            'productViews' => $this->mapPyzProductViewTransfers($productSet),
         ];
     }
 
@@ -89,9 +111,9 @@ class ProductSetIdsWidget extends AbstractWidget
      *
      * @return \Generated\Shared\Transfer\ProductSetDataStorageTransfer|null
      */
-    protected function getProductSetDataStorageTransfer(int $idProductSet): ?ProductSetDataStorageTransfer
+    protected function getPyzProductSetDataStorageTransfer(int $idProductSet): ?ProductSetDataStorageTransfer
     {
-        return $this->getFactory()->getProductSetStorageClient()->getProductSetByIdProductSet($idProductSet, $this->getLocale());
+        return $this->getFactory()->getPyzProductSetStorageClient()->getProductSetByIdProductSet($idProductSet, $this->getLocale());
     }
 
     /**
@@ -99,15 +121,15 @@ class ProductSetIdsWidget extends AbstractWidget
      *
      * @return \Generated\Shared\Transfer\ProductViewTransfer[]
      */
-    protected function mapProductViewTransfers(ProductSetDataStorageTransfer $productSetDataStorageTransfer): array
+    protected function mapPyzProductViewTransfers(ProductSetDataStorageTransfer $productSetDataStorageTransfer): array
     {
         $productViewTransfers = [];
 
         foreach ($productSetDataStorageTransfer->getProductAbstractIds() as $idProductAbstract) {
-            $productViewTransfer = $this->getFactory()->getProductStorageClient()->findProductAbstractViewTransfer(
+            $productViewTransfer = $this->getFactory()->getPyzProductStorageClient()->findProductAbstractViewTransfer(
                 $idProductAbstract,
                 $this->getLocale(),
-                $this->getSelectedAttributes($idProductAbstract)
+                $this->getPyzSelectedAttributes($idProductAbstract)
             );
 
             if ($productViewTransfer === null) {
@@ -125,17 +147,17 @@ class ProductSetIdsWidget extends AbstractWidget
      *
      * @return array
      */
-    protected function getSelectedAttributes(int $idProductAbstract): array
+    protected function getPyzSelectedAttributes(int $idProductAbstract): array
     {
-        $attributes = $this->getRequest()->query->get(static::PARAM_ATTRIBUTE, []);
+        $attributes = $this->getPyzRequest()->query->get(static::PYZ_PARAM_ATTRIBUTE, null) ?? [];
 
-        return isset($attributes[$idProductAbstract]) ? array_filter($attributes[$idProductAbstract]) : [];
+        return isset($attributes[$idProductAbstract]) ? array_filter((array)$attributes[$idProductAbstract]) : [];
     }
 
     /**
      * @return \Symfony\Component\HttpFoundation\Request
      */
-    protected function getRequest(): Request
+    protected function getPyzRequest(): Request
     {
         return $this->getApplication()['request'];
     }

@@ -17,12 +17,9 @@
 
 {% block body %}
     <div class="{{ config.name }}__title">{{ 'product_review.average_ratings' | trans }}</div>
-
-    <span itemscope itemprop="aggregateRating" itemtype="https://schema.org/AggregateRating">
-        <meta itemprop="ratingValue" content="{{ data.summary.averageRating }}">
-        <meta itemprop="bestRating" content="{{ data.summary.maximumRating }}">
-        <meta itemprop="reviewCount" content="{{ data.summary.totalReview }}">
-    </span>
+    <meta itemprop="ratingValue" content="{{ data.summary.averageRating }}">
+    <meta itemprop="bestRating" content="{{ data.summary.maximumRating }}">
+    <meta itemprop="reviewCount" content="{{ data.summary.totalReview }}">
 
     {% include molecule('rating-selector', 'ProductReviewWidget') with {
         modifiers: ['marginless'],

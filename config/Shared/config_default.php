@@ -5,12 +5,15 @@ use Pyz\Shared\Console\ConsoleConstants;
 use Pyz\Shared\Scheduler\SchedulerConfig;
 use Pyz\Yves\ShopApplication\YvesBootstrap;
 use Pyz\Zed\Application\Communication\ZedBootstrap;
+use Pyz\Zed\Oms\OmsConfig;
 use Spryker\Client\RabbitMq\Model\RabbitMqAdapter;
 use Spryker\Glue\Log\Plugin\GlueLoggerConfigPlugin;
 use Spryker\Service\FlysystemLocalFileSystem\Plugin\Flysystem\LocalFilesystemBuilderPlugin;
 use Spryker\Shared\Acl\AclConstants;
+use Spryker\Shared\AppCatalogGui\AppCatalogGuiConstants;
 use Spryker\Shared\Application\ApplicationConstants;
 use Spryker\Shared\Application\Log\Config\SprykerLoggerConfig;
+use Spryker\Shared\CartsRestApi\CartsRestApiConstants;
 use Spryker\Shared\Category\CategoryConstants;
 use Spryker\Shared\CmsGui\CmsGuiConstants;
 use Spryker\Shared\Customer\CustomerConstants;
@@ -30,6 +33,8 @@ use Spryker\Shared\Mail\MailConstants;
 use Spryker\Shared\Monitoring\MonitoringConstants;
 use Spryker\Shared\Newsletter\NewsletterConstants;
 use Spryker\Shared\Oauth\OauthConstants;
+use Spryker\Shared\OauthAuth0\OauthAuth0Constants;
+use Spryker\Shared\OauthClient\OauthClientConstants;
 use Spryker\Shared\OauthCryptography\OauthCryptographyConstants;
 use Spryker\Shared\Oms\OmsConstants;
 use Spryker\Shared\ProductLabel\ProductLabelConstants;
@@ -54,6 +59,7 @@ use Spryker\Shared\SessionRedis\SessionRedisConfig;
 use Spryker\Shared\SessionRedis\SessionRedisConstants;
 use Spryker\Shared\Storage\StorageConstants;
 use Spryker\Shared\StorageRedis\StorageRedisConstants;
+use Spryker\Shared\StoreReference\StoreReferenceConstants;
 use Spryker\Shared\Tax\TaxConstants;
 use Spryker\Shared\Testify\TestifyConstants;
 use Spryker\Shared\Translator\TranslatorConstants;
@@ -61,6 +67,8 @@ use Spryker\Shared\User\UserConstants;
 use Spryker\Shared\ZedRequest\ZedRequestConstants;
 use Spryker\Yves\Log\Plugin\YvesLoggerConfigPlugin;
 use Spryker\Zed\Log\Communication\Plugin\ZedLoggerConfigPlugin;
+use Spryker\Zed\OauthAuth0\OauthAuth0Config;
+use Spryker\Zed\Payment\PaymentConfig;
 use Spryker\Zed\Propel\PropelConfig;
 use SprykerShop\Shared\CustomerPage\CustomerPageConstants;
 use SprykerShop\Shared\ShopUi\ShopUiConstants;
@@ -157,9 +165,11 @@ $config[KernelConstants::STRICT_DOMAIN_REDIRECT] = true;
 
 $config[HttpConstants::ZED_HTTP_STRICT_TRANSPORT_SECURITY_ENABLED]
     = $config[HttpConstants::YVES_HTTP_STRICT_TRANSPORT_SECURITY_ENABLED]
+    = $config[HttpConstants::GLUE_HTTP_STRICT_TRANSPORT_SECURITY_ENABLED]
     = true;
 $config[HttpConstants::ZED_HTTP_STRICT_TRANSPORT_SECURITY_CONFIG]
     = $config[HttpConstants::YVES_HTTP_STRICT_TRANSPORT_SECURITY_CONFIG]
+    = $config[HttpConstants::GLUE_HTTP_STRICT_TRANSPORT_SECURITY_CONFIG]
     = [
     'max_age' => 31536000,
     'include_sub_domains' => true,
@@ -207,6 +217,10 @@ $config[SecuritySystemUserConstants::AUTH_DEFAULT_CREDENTIALS] = [
         'token' => getenv('SPRYKER_ZED_REQUEST_TOKEN') ?: '',
     ],
 ];
+
+// >> URL Signer
+
+$config[HttpConstants::URI_SIGNER_SECRET_KEY] = getenv('SPRYKER_ZED_REQUEST_TOKEN') ?: null;
 
 // ACL: Special rules for specific users
 $config[AclConstants::ACL_DEFAULT_CREDENTIALS] = [
@@ -437,10 +451,10 @@ foreach ($rabbitConnections as $key => $connection) {
 
 // >>> SCHEDULER
 $config[SchedulerConstants::ENABLED_SCHEDULERS] = [
-    SchedulerConfig::SCHEDULER_JENKINS,
+    SchedulerConfig::PYZ_SCHEDULER_JENKINS,
 ];
 $config[SchedulerJenkinsConstants::JENKINS_CONFIGURATION] = [
-    SchedulerConfig::SCHEDULER_JENKINS => [
+    SchedulerConfig::PYZ_SCHEDULER_JENKINS => [
         SchedulerJenkinsConfig::SCHEDULER_JENKINS_BASE_URL => sprintf(
             '%s://%s:%s/',
             getenv('SPRYKER_SCHEDULER_PROTOCOL') ?: 'http',
@@ -548,8 +562,14 @@ $config[GlueApplicationConstants::GLUE_APPLICATION_CORS_ALLOW_ORIGIN] = getenv('
 // ------------------------------ OMS -----------------------------------------
 // ----------------------------------------------------------------------------
 
+$config[OmsConstants::PROCESS_LOCATION] = [
+    OmsConfig::DEFAULT_PROCESS_LOCATION,
+    APPLICATION_ROOT_DIR . '/vendor/spryker/payment/config/Zed/Oms',
+];
 $config[OmsConstants::ACTIVE_PROCESSES] = [];
-$config[SalesConstants::PAYMENT_METHOD_STATEMACHINE_MAPPING] = [];
+$config[SalesConstants::PAYMENT_METHOD_STATEMACHINE_MAPPING] = [
+    PaymentConfig::PAYMENT_FOREIGN_PROVIDER => 'B2CStateMachine01',
+];
 
 // ----------------------------------------------------------------------------
 // ------------------------------ PAYMENTS ------------------------------------
@@ -564,3 +584,37 @@ $config[CategoryConstants::CATEGORY_IS_CLOSURE_TABLE_EVENTS_ENABLED] = false;
 
 // >>> Product Label
 $config[ProductLabelConstants::PRODUCT_LABEL_TO_DE_ASSIGN_CHUNK_SIZE] = 1000;
+
+// ----------------------------------------------------------------------------
+// ------------------------------ CART REST API -------------------------------
+// ----------------------------------------------------------------------------
+$config[CartsRestApiConstants::IS_QUOTE_RELOAD_ENABLED] = true;
+
+// ----------------------------------------------------------------------------
+// ------------------------------ AOP -----------------------------------------
+// ----------------------------------------------------------------------------
+
+$config[StoreReferenceConstants::STORE_NAME_REFERENCE_MAP] = json_decode(
+    html_entity_decode(getenv('STORE_NAME_REFERENCE_MAP') ?: ''),
+    true,
+);
+$config[AppCatalogGuiConstants::APP_CATALOG_SCRIPT_URL] = (string)getenv('APP_CATALOG_SCRIPT_URL');
+
+// ----------------------------------------------------------------------------
+// ------------------------------ OAUTH ---------------------------------------
+// ----------------------------------------------------------------------------
+$config[OauthAuth0Constants::AUTH0_CLIENT_ID] = getenv('AUTH0_CLIENT_ID') ?: '';
+$config[OauthAuth0Constants::AUTH0_CLIENT_SECRET] = getenv('AUTH0_CLIENT_SECRET') ?: '';
+$config[OauthAuth0Constants::AUTH0_CUSTOM_DOMAIN] = getenv('AUTH0_CUSTOM_DOMAIN') ?: '';
+
+$config[OauthClientConstants::OAUTH_PROVIDER_NAME_FOR_MESSAGE_BROKER] = OauthAuth0Config::PROVIDER_NAME;
+$config[OauthClientConstants::OAUTH_GRANT_TYPE_FOR_MESSAGE_BROKER] = OauthAuth0Config::GRANT_TYPE_CLIENT_CREDENTIALS;
+$config[OauthClientConstants::OAUTH_OPTION_AUDIENCE_FOR_MESSAGE_BROKER] = 'aop-event-platform';
+
+$config[AppCatalogGuiConstants::OAUTH_PROVIDER_NAME] = OauthAuth0Config::PROVIDER_NAME;
+$config[AppCatalogGuiConstants::OAUTH_GRANT_TYPE] = OauthAuth0Config::GRANT_TYPE_CLIENT_CREDENTIALS;
+$config[AppCatalogGuiConstants::OAUTH_OPTION_AUDIENCE] = 'aop-atrs';
+
+$config[OauthClientConstants::OAUTH_PROVIDER_NAME_FOR_PAYMENT_AUTHORIZE] = OauthAuth0Config::PROVIDER_NAME;
+$config[OauthClientConstants::OAUTH_GRANT_TYPE_FOR_PAYMENT_AUTHORIZE] = OauthAuth0Config::GRANT_TYPE_CLIENT_CREDENTIALS;
+$config[OauthClientConstants::OAUTH_OPTION_AUDIENCE_FOR_PAYMENT_AUTHORIZE] = 'aop-app';
