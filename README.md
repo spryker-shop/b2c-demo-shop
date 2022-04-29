@@ -11,14 +11,14 @@ Spryker B2C Demo Shop is a collection of Spryker B2C-specific features. It suits
 
 This section describes how to get started with the B2C Demo Shop quickly.
 
-For detailed installation instructions, see [Installing Spryker with Docker](https://documentation.spryker.com/docs/installing-spryker-with-docker) or [Installing with Development Virtual Machine](https://documentation.spryker.com/docs/dev-getting-started#installing-spryker-with-development-virtual-machine).
+For detailed installation instructions, see [Installing Spryker with Docker](https://docs.spryker.com/docs/installing-spryker-with-docker) or [Installing with Development Virtual Machine](https://docs.spryker.com/docs/dev-getting-started#installing-spryker-with-development-virtual-machine).
 
 ### Prerequisites
 
 For full installation prerequisites, see one of the following:
-* [Installing Docker prerequisites on MacOS](https://documentation.spryker.com/docs/installing-docker-prerequisites-on-macos)
-* [Installing Docker prerequisites on Linux](https://documentation.spryker.com/docs/installing-docker-prerequisites-on-linux)
-* [Installing Docker prerequisites on Windows](https://documentation.spryker.com/docs/installing-docker-prerequisites-on-Windows)
+* [Installing Docker prerequisites on MacOS](https://docs.spryker.com/docs/installing-docker-prerequisites-on-macos)
+* [Installing Docker prerequisites on Linux](https://docs.spryker.com/docs/installing-docker-prerequisites-on-linux)
+* [Installing Docker prerequisites on Windows](https://docs.spryker.com/docs/installing-docker-prerequisites-on-windows)
 
 Recommended system requirements for MacOS:
 
@@ -129,7 +129,7 @@ You've set up your Spryker B2C Demo Shop and can access your applications.
 
 This section describes the most common issues related to the installation of the B2C Demo Shop.
 
-For a complete troubleshooting, see [Troubleshooting Spryker in Docker issues](https://documentation.spryker.com/docs/troubleshooting-spryker-in-docker-issues) or [Troubleshooting Spryker in Vagrant installation issues](https://documentation.spryker.com/docs/troubleshooting-spryker-in-vagrant-installation-issues).
+For a complete troubleshooting, see [Troubleshooting Spryker in Docker issues](https://docs.spryker.com/docs/troubleshooting-spryker-in-docker-issues) or [Troubleshooting Spryker in Vagrant installation issues](https://docs.spryker.com/docs/troubleshooting-spryker-in-vagrant-installation-issues).
 
 **when**
 
@@ -167,18 +167,18 @@ docker/sdk up --build --assets --data
 
 ## Installation of B2C Demo Shop with Docker
 
-For detailed installation instructions of Spryker with Docker, see [Installing Spryker with Docker](https://documentation.spryker.com/docs/installing-spryker-with-docker).
+For detailed installation instructions of Spryker with Docker, see [Installing Spryker with Docker](https://docs.spryker.com/docs/installing-spryker-with-docker).
 
 
 ## Installation of B2C Demo Shop with Vagrant
-For detailed installation instructions of Spryker with Vagrant, see [Installing with Development Virtual Machine](https://documentation.spryker.com/docs/dev-getting-started#installing-spryker-with-development-virtual-machine).
+For detailed installation instructions of Spryker with Vagrant, see [Installing with Development Virtual Machine](https://docs.spryker.com/docs/dev-getting-started#installing-spryker-with-development-virtual-machine).
 
 
 
 ## Glue API reference
 
-See Glue API reference at [REST API reference](https://documentation.spryker.com/docs/rest-api-reference#/rest-api-reference).
+See Glue API reference at [REST API reference](https://docs.spryker.com/docs/rest-api-reference#/rest-api-reference).
 
 ## Contributing to the repository
 
-For contribution guidelines, see [Code contribution guide](https://documentation.spryker.com/docs/code-contribution-guide#code-contribution-guide).
+For contribution guidelines, see [Code contribution guide](https://docs.spryker.com/docs/code-contribution-guide#code-contribution-guide).
