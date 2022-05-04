@@ -218,28 +218,3 @@ $config[GlueApplicationConstants::GLUE_APPLICATION_CORS_ALLOW_ORIGIN] = '*';
 // ----------------------------------------------------------------------------
 
 require 'common/config_oms-development.php';
-
-// ----------- FirstSpirit Preview Configurations
-//$config[FirstSpiritPreviewConstants::FIRSTSPIRIT_PREVIEW_AUTHENTICATION_INIT_TOKEN] = '<ADD TOKEN>';
-//$config[FirstSpiritPreviewConstants::FIRSTSPIRIT_PREVIEW_WEB_HOST] = '<ADD FS PREVIEW HOST>';
-//$config[FirstSpiritPreviewConstants::FIRSTSPIRIT_PREVIEW_CAAS_CONTENT_PAGE_COLLECTION] = '<CAAS COLLECTION>';
-//$config[FirstSpiritPreviewConstants::FIRSTSPIRIT_PREVIEW_CAAS_CATEGORY_PAGE_COLLECTION] = '<CAAS COLLECTION>';
-//$config[FirstSpiritPreviewConstants::FIRSTSPIRIT_PREVIEW_CAAS_PRODUCT_PAGE_COLLECTION] = '<CAAS COLLECTION>';
-//$config[FirstSpiritPreviewConstants::FIRSTSPIRIT_PREVIEW_DISPLAY_BLOCK_RENDER_ERRORS] = true;
-
-// ----------- FirstSpirit Data Import Configurations
-//$config[FirstSpiritDataImportConstants::FIRSTSPIRIT_DATA_IMPORT_BLOCK_DATA_CAAS_PATH] = '/_aggrs/blocks';
-//$config[FirstSpiritDataImportConstants::FIRSTSPIRIT_CAAS_REQUEST_PAGESIZE] = <VALUE>;
-//
-//// ----------- FirstSpirit CaaS Configurations
-//$config[FirstSpiritCaaSConstants::FIRSTSPIRIT_CAAS_HOSTNAME_PREVIEW] = '<ADD CAAS HOST>';
-//$config[FirstSpiritCaaSConstants::FIRSTSPIRIT_CAAS_PORT_PREVIEW] = '<ADD CAAS PORT>';
-//$config[FirstSpiritCaaSConstants::FIRSTSPIRIT_CAAS_SCHEME_PREVIEW] = '<ADD CAAS SCHEME>';
-//$config[FirstSpiritCaaSConstants::FIRSTSPIRIT_CAAS_APIKEY_PREVIEW] = '<ADD APIKEY>';
-//$config[FirstSpiritCaaSConstants::FIRSTSPIRIT_CAAS_DATABASE_PREVIEW] = '<ADD CAAS DATABASE>';
-//
-//$config[FirstSpiritCaaSConstants::FIRSTSPIRIT_CAAS_HOSTNAME_ONLINE] = '<ADD CAAS HOST>';
-//$config[FirstSpiritCaaSConstants::FIRSTSPIRIT_CAAS_PORT_ONLINE] = '<ADD CAAS PORT>';
-//$config[FirstSpiritCaaSConstants::FIRSTSPIRIT_CAAS_SCHEME_ONLINE] = '<ADD CAAS SCHEME>';
-//$config[FirstSpiritCaaSConstants::FIRSTSPIRIT_CAAS_APIKEY_ONLINE] = '<ADD APIKEY>';
-//$config[FirstSpiritCaaSConstants::FIRSTSPIRIT_CAAS_DATABASE_ONLINE] = '<ADD CAAS DATABASE>';
