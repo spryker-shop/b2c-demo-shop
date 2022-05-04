@@ -8,6 +8,7 @@
 namespace Pyz\Zed\Console;
 
 use ESpirit\Zed\FirstSpiritDataImport\Communication\Console\FsDataImportConsole;
+use ESpirit\Zed\FirstSpiritDataImport\Communication\Console\FsStoreDataImportConsole;
 use Pyz\Zed\DataImport\DataImportConfig;
 use Pyz\Zed\Development\Communication\Console\AcceptanceCodeTestConsole;
 use Pyz\Zed\Development\Communication\Console\ApiCodeTestConsole;
@@ -336,7 +337,8 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
 
             new OrderInvoiceSendConsole(),
             // FirstSpirit Data importers
-            new FsDataImportConsole(FsDataImportConsole::DEFAULT_NAME)
+            new FsDataImportConsole(FsDataImportConsole::DEFAULT_NAME),
+            new FsStoreDataImportConsole(FsStoreDataImportConsole::DEFAULT_NAME),
         ];
 
         $propelCommands = $container->getLocator()->propel()->facade()->getConsoleCommands();
