@@ -18,6 +18,7 @@ class BarcodeDependencyProvider extends SprykerDependencyProvider
     protected function getBarcodeGeneratorPlugins(): array
     {
         return [
+            // Barcode generator have been taking down due to DMCA and CodeItNow Module is depend on it...
 //            new Code128BarcodeGeneratorPlugin(), #ProductBarcodeFeature
         ];
     }
