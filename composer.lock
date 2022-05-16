@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f05b560f8e8d78edc08f32ba715de421",
+    "content-hash": "606a90d537c200a9ade915257b3c6dd0",
     "packages": [
         {
             "name": "async-aws/core",
@@ -1382,6 +1382,66 @@
             "time": "2022-03-20T21:55:58+00:00"
         },
         {
+            "name": "laminas/laminas-barcode",
+            "version": "2.11.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laminas/laminas-barcode.git",
+                "reference": "e2a4b56e2f6c800992fe1c7e7cc0da851dcfdfa0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laminas/laminas-barcode/zipball/e2a4b56e2f6c800992fe1c7e7cc0da851dcfdfa0",
+                "reference": "e2a4b56e2f6c800992fe1c7e7cc0da851dcfdfa0",
+                "shasum": ""
+            },
+            "require": {
+                "laminas/laminas-servicemanager": "^3.10.0",
+                "laminas/laminas-stdlib": "^3.6.0",
+                "laminas/laminas-validator": "^2.15.1",
+                "php": "~7.4.0 || ~8.0.0 || ~8.1.0"
+            },
+            "conflict": {
+                "zendframework/zend-barcode": "*"
+            },
+            "require-dev": {
+                "laminas/laminas-coding-standard": "~2.3.0",
+                "laminas/laminas-config": "^3.7.0",
+                "phpunit/phpunit": "^9.3.7"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Laminas\\Barcode\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "Programmatically create and render barcodes as images or in PDFs",
+            "homepage": "https://laminas.dev",
+            "keywords": [
+                "barcode",
+                "laminas"
+            ],
+            "support": {
+                "chat": "https://laminas.dev/chat",
+                "docs": "https://docs.laminas.dev/laminas-barcode/",
+                "forum": "https://discourse.laminas.dev",
+                "issues": "https://github.com/laminas/laminas-barcode/issues",
+                "rss": "https://github.com/laminas/laminas-barcode/releases.atom",
+                "source": "https://github.com/laminas/laminas-barcode"
+            },
+            "funding": [
+                {
+                    "url": "https://funding.communitybridge.org/projects/laminas-project",
+                    "type": "community_bridge"
+                }
+            ],
+            "time": "2022-01-04T14:26:00+00:00"
+        },
+        {
             "name": "laminas/laminas-config",
             "version": "3.5.1",
             "source": {
@@ -1684,6 +1744,96 @@
                 }
             ],
             "time": "2022-01-21T15:50:46+00:00"
+        },
+        {
+            "name": "laminas/laminas-validator",
+            "version": "2.17.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laminas/laminas-validator.git",
+                "reference": "bdd503adc83d814a5c94e598ea0eb9fc7ca56339"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laminas/laminas-validator/zipball/bdd503adc83d814a5c94e598ea0eb9fc7ca56339",
+                "reference": "bdd503adc83d814a5c94e598ea0eb9fc7ca56339",
+                "shasum": ""
+            },
+            "require": {
+                "container-interop/container-interop": "^1.1",
+                "laminas/laminas-stdlib": "^3.6",
+                "php": "^7.3 || ~8.0.0 || ~8.1.0"
+            },
+            "conflict": {
+                "zendframework/zend-validator": "*"
+            },
+            "require-dev": {
+                "laminas/laminas-cache": "^2.6.1",
+                "laminas/laminas-coding-standard": "~2.2.1",
+                "laminas/laminas-db": "^2.7",
+                "laminas/laminas-filter": "^2.6",
+                "laminas/laminas-http": "^2.14.2",
+                "laminas/laminas-i18n": "^2.6",
+                "laminas/laminas-math": "^2.6",
+                "laminas/laminas-servicemanager": "^2.7.11 || ^3.0.3",
+                "laminas/laminas-session": "^2.8",
+                "laminas/laminas-uri": "^2.7",
+                "phpspec/prophecy-phpunit": "^2.0",
+                "phpunit/phpunit": "^9.5.5",
+                "psalm/plugin-phpunit": "^0.15.0",
+                "psr/http-client": "^1.0",
+                "psr/http-factory": "^1.0",
+                "psr/http-message": "^1.0",
+                "vimeo/psalm": "^4.3"
+            },
+            "suggest": {
+                "laminas/laminas-db": "Laminas\\Db component, required by the (No)RecordExists validator",
+                "laminas/laminas-filter": "Laminas\\Filter component, required by the Digits validator",
+                "laminas/laminas-i18n": "Laminas\\I18n component to allow translation of validation error messages",
+                "laminas/laminas-i18n-resources": "Translations of validator messages",
+                "laminas/laminas-math": "Laminas\\Math component, required by the Csrf validator",
+                "laminas/laminas-servicemanager": "Laminas\\ServiceManager component to allow using the ValidatorPluginManager and validator chains",
+                "laminas/laminas-session": "Laminas\\Session component, ^2.8; required by the Csrf validator",
+                "laminas/laminas-uri": "Laminas\\Uri component, required by the Uri and Sitemap\\Loc validators",
+                "psr/http-message": "psr/http-message, required when validating PSR-7 UploadedFileInterface instances via the Upload and UploadFile validators"
+            },
+            "type": "library",
+            "extra": {
+                "laminas": {
+                    "component": "Laminas\\Validator",
+                    "config-provider": "Laminas\\Validator\\ConfigProvider"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laminas\\Validator\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "Validation classes for a wide range of domains, and the ability to chain validators to create complex validation criteria",
+            "homepage": "https://laminas.dev",
+            "keywords": [
+                "laminas",
+                "validator"
+            ],
+            "support": {
+                "chat": "https://laminas.dev/chat",
+                "docs": "https://docs.laminas.dev/laminas-validator/",
+                "forum": "https://discourse.laminas.dev",
+                "issues": "https://github.com/laminas/laminas-validator/issues",
+                "rss": "https://github.com/laminas/laminas-validator/releases.atom",
+                "source": "https://github.com/laminas/laminas-validator"
+            },
+            "funding": [
+                {
+                    "url": "https://funding.communitybridge.org/projects/laminas-project",
+                    "type": "community_bridge"
+                }
+            ],
+            "time": "2022-03-08T18:16:51+00:00"
         },
         {
             "name": "laminas/laminas-zendframework-bridge",
@@ -13022,6 +13172,52 @@
             "time": "2019-04-23T09:58:16+00:00"
         },
         {
+            "name": "spryker/barcode-laminas",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/barcode-laminas.git",
+                "reference": "5401ad3b262aee35290be345bc48e892e86f9dee"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/barcode-laminas/zipball/5401ad3b262aee35290be345bc48e892e86f9dee",
+                "reference": "5401ad3b262aee35290be345bc48e892e86f9dee",
+                "shasum": ""
+            },
+            "require": {
+                "laminas/laminas-barcode": "^2.8.0",
+                "php": ">=7.4",
+                "spryker/barcode-extension": "^1.0.0",
+                "spryker/kernel": "^3.30.0",
+                "spryker/transfer": "^3.25.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/testify": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "BarcodeLaminas module",
+            "support": {
+                "source": "https://github.com/spryker/barcode-laminas/tree/1.1.0"
+            },
+            "time": "2022-05-11T08:36:06+00:00"
+        },
+        {
             "name": "spryker/cache",
             "version": "3.5.0",
             "source": {
@@ -17553,54 +17749,6 @@
                 "source": "https://github.com/spryker/cms-user-connector/tree/1.1.1"
             },
             "time": "2020-05-29T13:08:37+00:00"
-        },
-        {
-            "name": "spryker/code-it-now",
-            "version": "1.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/spryker/code-it-now.git",
-                "reference": "5b640c417967df863f1537c1336e19d50c0df3c9"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/spryker/code-it-now/zipball/5b640c417967df863f1537c1336e19d50c0df3c9",
-                "reference": "5b640c417967df863f1537c1336e19d50c0df3c9",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.4",
-                "spryker/barcode-extension": "^1.0.0"
-            },
-            "require-dev": {
-                "spryker/code-sniffer": "*",
-                "spryker/kernel": "^3.1.0",
-                "spryker/testify": "*"
-            },
-            "suggest": {
-                "spryker/kernel": "for testing"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Spryker\\": "src/Spryker/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "proprietary"
-            ],
-            "description": "CodeItNow module",
-            "support": {
-                "source": "https://github.com/spryker/code-it-now/tree/1.0.1"
-            },
-            "abandoned": "spryker/barcode-laminas",
-            "time": "2022-04-21T13:32:43+00:00"
         },
         {
             "name": "spryker/collector",
@@ -52795,5 +52943,5 @@
     "platform-overrides": {
         "php": "7.4.20"
     },
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.2.0"
 }
