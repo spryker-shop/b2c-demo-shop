@@ -78,7 +78,7 @@
                         },
                     } only %}
                         {% block fieldset %}
-                            <div class="js-payment-method-{{ embed.index }} {% if embed.toggler.vars.value matches '#foreignPayments\[[a-zA-Z0-9_-]+\]#' %}} is-hidden{% endif %}">
+                            <div class="js-payment-method-{{ embed.index }} {% if embed.toggler.vars.value matches '#foreignPayments\[[a-zA-Z0-9_-]+\]#' %} is-hidden{% endif %}">
                                 <h2 class="title title--primary">{{ embed.toggler.vars.label | trans }}</h2>
                                 {% if embed.customForms[data.form.vars.template_path] is not defined %}
                                     {{ parent() }}
