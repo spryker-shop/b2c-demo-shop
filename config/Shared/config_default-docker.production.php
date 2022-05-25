@@ -62,6 +62,7 @@ $config[DocumentationGeneratorRestApiConstants::ENABLE_REST_API_DOCUMENTATION_GE
 
 // >>> Error handler
 
+$config[ErrorHandlerConstants::DISPLAY_ERRORS] = true;
 $config[ErrorHandlerConstants::ERROR_RENDERER] = getenv('SPRYKER_DEBUG_ENABLED') ? WebExceptionErrorRenderer::class : WebHtmlErrorRenderer::class;
 $config[ErrorHandlerConstants::IS_PRETTY_ERROR_HANDLER_ENABLED] = (bool)getenv('SPRYKER_DEBUG_ENABLED');
 $config[ErrorHandlerConstants::ERROR_LEVEL] = getenv('SPRYKER_DEBUG_DEPRECATIONS_ENABLED') ? E_ALL : $config[ErrorHandlerConstants::ERROR_LEVEL];
@@ -124,10 +125,10 @@ if (!getenv('SPRYKER_SSL_ENABLE')) {
         = $config[ProductManagementConstants::BASE_URL_YVES]
         = $config[NewsletterConstants::BASE_URL_YVES]
         = sprintf(
-            'http://%s%s',
-            $yvesHost,
-            $yvesPort !== 80 ? ':' . $yvesPort : ''
-        );
+        'http://%s%s',
+        $yvesHost,
+        $yvesPort !== 80 ? ':' . $yvesPort : ''
+    );
 
 // ----------------------------------------------------------------------------
 // ------------------------------ API -----------------------------------------
