@@ -18,7 +18,7 @@ class ProductReviewSearchConfig extends SprykerProductReviewSearchConfig
      */
     public function getProductReviewSynchronizationPoolName(): ?string
     {
-        return SynchronizationConfig::DEFAULT_SYNCHRONIZATION_POOL_NAME;
+        return SynchronizationConfig::PYZ_DEFAULT_SYNCHRONIZATION_POOL_NAME;
     }
 
     /**

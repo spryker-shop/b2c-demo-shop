@@ -14,16 +14,16 @@ class ProductSetWidgetFactory extends SprykerProductSetWidgetFactory
     /**
      * @return \Spryker\Client\ProductStorage\ProductStorageClientInterface
      */
-    public function getProductStorageClient()
+    public function getPyzProductStorageClient()
     {
-        return $this->getProvidedDependency(ProductSetWidgetDependencyProvider::CLIENT_PRODUCT_STORAGE);
+        return $this->getProvidedDependency(ProductSetWidgetDependencyProvider::PYZ_CLIENT_PRODUCT_STORAGE);
     }
 
     /**
      * @return \Spryker\Client\ProductSetStorage\ProductSetStorageClientInterface
      */
-    public function getProductSetStorageClient()
+    public function getPyzProductSetStorageClient()
     {
-        return $this->getProvidedDependency(ProductSetWidgetDependencyProvider::CLIENT_PRODUCT_SET_STORAGE);
+        return $this->getProvidedDependency(ProductSetWidgetDependencyProvider::PYZ_CLIENT_PRODUCT_SET_STORAGE);
     }
 }

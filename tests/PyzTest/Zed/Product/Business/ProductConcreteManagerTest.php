@@ -177,6 +177,8 @@ class ProductConcreteManagerTest extends ProductTestAbstract
         /** @var \Generated\Shared\Transfer\ProductImageSetTransfer $imageSet */
         $imageSetCollection = (array)$productConcreteTransfer->getImageSets();
         $this->assertNotEmpty($imageSetCollection);
+
+        /** @var \Generated\Shared\Transfer\ProductImageSetTransfer $imageSet */
         $imageSet = $imageSetCollection[0];
         $this->assertInstanceOf(ProductImageSetTransfer::class, $imageSet);
         $this->assertNotNull($imageSet->getIdProductImageSet());

@@ -19,8 +19,8 @@ class ExampleStateMachineCommunicationFactory extends AbstractCommunicationFacto
     /**
      * @return \Spryker\Zed\StateMachine\Business\StateMachineFacade
      */
-    public function getStateMachineFacade()
+    public function getPyzStateMachineFacade()
     {
-        return $this->getProvidedDependency(ExampleStateMachineDependencyProvider::FACADE_STATE_MACHINE);
+        return $this->getProvidedDependency(ExampleStateMachineDependencyProvider::PYZ_FACADE_STATE_MACHINE);
     }
 }

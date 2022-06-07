@@ -9,6 +9,9 @@ namespace Pyz\Client\ExampleProductSalePage;
 
 use Spryker\Client\Kernel\AbstractFactory;
 
+/**
+ * @method \Pyz\Client\ExampleProductSalePage\ExampleProductSalePageConfig getConfig()
+ */
 class ExampleProductSalePageFactory extends AbstractFactory
 {
     /**
@@ -16,11 +19,11 @@ class ExampleProductSalePageFactory extends AbstractFactory
      *
      * @return \Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface
      */
-    public function getSaleSearchQueryPlugin(array $requestParameters = [])
+    public function getPyzSaleSearchQueryPlugin(array $requestParameters = [])
     {
-        $saleQueryPlugin = $this->getProvidedDependency(ExampleProductSalePageDependencyProvider::SALE_SEARCH_QUERY_PLUGIN);
+        $saleQueryPlugin = $this->getProvidedDependency(ExampleProductSalePageDependencyProvider::PYZ_SALE_SEARCH_QUERY_PLUGIN);
 
-        return $this->getSearchClient()->expandQuery(
+        return $this->getPyzSearchClient()->expandQuery(
             $saleQueryPlugin,
             $this->getSaleSearchQueryExpanderPlugins(),
             $requestParameters
@@ -30,36 +33,25 @@ class ExampleProductSalePageFactory extends AbstractFactory
     /**
      * @return \Spryker\Client\ProductLabelStorage\ProductLabelStorageClientInterface
      */
-    public function getProductLabelStorageClient()
+    public function getPyzProductLabelStorageClient()
     {
-        return $this->getProvidedDependency(ExampleProductSalePageDependencyProvider::CLIENT_PRODUCT_LABEL_STORAGE);
+        return $this->getProvidedDependency(ExampleProductSalePageDependencyProvider::PYZ_CLIENT_PRODUCT_LABEL_STORAGE);
     }
 
     /**
      * @return \Spryker\Shared\Kernel\Store
      */
-    public function getStore()
+    public function getPyzStore()
     {
-        return $this->getProvidedDependency(ExampleProductSalePageDependencyProvider::STORE);
-    }
-
-    /**
-     * @return \Pyz\Client\ExampleProductSalePage\ExampleProductSalePageConfig
-     */
-    public function getConfig()
-    {
-        /** @var \Pyz\Client\ExampleProductSalePage\ExampleProductSalePageConfig $config */
-        $config = parent::getConfig();
-
-        return $config;
+        return $this->getProvidedDependency(ExampleProductSalePageDependencyProvider::PYZ_STORE);
     }
 
     /**
      * @return \Spryker\Client\Search\SearchClientInterface
      */
-    public function getSearchClient()
+    public function getPyzSearchClient()
     {
-        return $this->getProvidedDependency(ExampleProductSalePageDependencyProvider::CLIENT_SEARCH);
+        return $this->getProvidedDependency(ExampleProductSalePageDependencyProvider::PYZ_CLIENT_SEARCH);
     }
 
     /**
@@ -67,7 +59,7 @@ class ExampleProductSalePageFactory extends AbstractFactory
      */
     protected function getSaleSearchQueryExpanderPlugins()
     {
-        return $this->getProvidedDependency(ExampleProductSalePageDependencyProvider::SALE_SEARCH_QUERY_EXPANDER_PLUGINS);
+        return $this->getProvidedDependency(ExampleProductSalePageDependencyProvider::PYZ_SALE_SEARCH_QUERY_EXPANDER_PLUGINS);
     }
 
     /**
@@ -75,6 +67,6 @@ class ExampleProductSalePageFactory extends AbstractFactory
      */
     public function getSaleSearchResultFormatterPlugins()
     {
-        return $this->getProvidedDependency(ExampleProductSalePageDependencyProvider::SALE_SEARCH_RESULT_FORMATTER_PLUGINS);
+        return $this->getProvidedDependency(ExampleProductSalePageDependencyProvider::PYZ_SALE_SEARCH_RESULT_FORMATTER_PLUGINS);
     }
 }

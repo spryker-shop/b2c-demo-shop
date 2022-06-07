@@ -14,17 +14,17 @@ interface ExampleStateMachineQueryContainerInterface
      *
      * @return \Orm\Zed\ExampleStateMachine\Persistence\PyzExampleStateMachineItemQuery
      */
-    public function queryStateMachineItemsByStateIds(array $stateIds = []);
+    public function queryPyzStateMachineItemsByStateIds(array $stateIds = []);
 
     /**
      * @return \Orm\Zed\ExampleStateMachine\Persistence\PyzExampleStateMachineItem[]|\Propel\Runtime\Collection\ObjectCollection
      */
-    public function queryAllStateMachineItems();
+    public function queryPyzAllStateMachineItems();
 
     /**
      * @param int $idStateMachineItem
      *
      * @return \Orm\Zed\ExampleStateMachine\Persistence\PyzExampleStateMachineItem[]|\Orm\Zed\ExampleStateMachine\Persistence\PyzExampleStateMachineItemQuery|\Propel\Runtime\Collection\ObjectCollection
      */
-    public function queryExampleStateMachineItemByIdStateMachineItem($idStateMachineItem);
+    public function queryPyzExampleStateMachineItemByIdStateMachineItem($idStateMachineItem);
 }

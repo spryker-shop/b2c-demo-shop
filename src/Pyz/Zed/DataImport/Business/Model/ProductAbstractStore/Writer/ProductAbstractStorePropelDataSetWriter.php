@@ -7,7 +7,7 @@
 
 namespace Pyz\Zed\DataImport\Business\Model\ProductAbstractStore\Writer;
 
-use Generated\Shared\Transfer\ProductAbstractStoreTransfer;
+use Generated\Shared\Transfer\PyzProductAbstractStoreTransfer;
 use Orm\Zed\Product\Persistence\SpyProductAbstractQuery;
 use Orm\Zed\Product\Persistence\SpyProductAbstractStoreQuery;
 use Orm\Zed\Store\Persistence\SpyStoreQuery;
@@ -98,9 +98,9 @@ class ProductAbstractStorePropelDataSetWriter implements DataSetWriterInterface
     /**
      * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
      *
-     * @return \Generated\Shared\Transfer\ProductAbstractStoreTransfer
+     * @return \Generated\Shared\Transfer\PyzProductAbstractStoreTransfer
      */
-    protected function getProductAbstractStoreTransfers(DataSetInterface $dataSet): ProductAbstractStoreTransfer
+    protected function getProductAbstractStoreTransfers(DataSetInterface $dataSet): PyzProductAbstractStoreTransfer
     {
         return $dataSet[ProductAbstractStoreHydratorStep::DATA_PRODUCT_ABSTRACT_STORE_ENTITY_TRANSFER];
     }

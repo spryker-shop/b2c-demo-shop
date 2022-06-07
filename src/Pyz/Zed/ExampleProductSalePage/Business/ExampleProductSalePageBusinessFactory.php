@@ -8,7 +8,10 @@
 namespace Pyz\Zed\ExampleProductSalePage\Business;
 
 use Pyz\Zed\ExampleProductSalePage\Business\Label\ProductAbstractRelationReader;
+use Pyz\Zed\ExampleProductSalePage\ExampleProductSalePageDependencyProvider;
+use Spryker\Zed\Currency\Business\CurrencyFacadeInterface;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
+use Spryker\Zed\Price\Business\PriceFacadeInterface;
 
 /**
  * @method \Pyz\Zed\ExampleProductSalePage\Persistence\ExampleProductSalePageQueryContainer getQueryContainer()
@@ -19,8 +22,29 @@ class ExampleProductSalePageBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \Pyz\Zed\ExampleProductSalePage\Business\Label\ProductAbstractRelationReaderInterface
      */
-    public function createProductAbstractRelationReader()
+    public function createPyzProductAbstractRelationReader()
     {
-        return new ProductAbstractRelationReader($this->getQueryContainer(), $this->getConfig());
+        return new ProductAbstractRelationReader(
+            $this->getQueryContainer(),
+            $this->getConfig(),
+            $this->getPyzCurrencyFacade(),
+            $this->getPyzPriceFacade(),
+        );
+    }
+
+    /**
+     * @return \Spryker\Zed\Currency\Business\CurrencyFacadeInterface
+     */
+    protected function getPyzCurrencyFacade(): CurrencyFacadeInterface
+    {
+        return $this->getProvidedDependency(ExampleProductSalePageDependencyProvider::PYZ_FACADE_CURRENCY);
+    }
+
+    /**
+     * @return \Spryker\Zed\Price\Business\PriceFacadeInterface
+     */
+    protected function getPyzPriceFacade(): PriceFacadeInterface
+    {
+        return $this->getProvidedDependency(ExampleProductSalePageDependencyProvider::PYZ_FACADE_PRICE);
     }
 }

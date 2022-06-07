@@ -13,24 +13,43 @@ use Spryker\Yves\Kernel\Container;
 
 class ExampleProductSalePageDependencyProvider extends AbstractBundleDependencyProvider
 {
-    public const CLIENT_SEARCH = 'CLIENT_SEARCH';
-    public const CLIENT_URL_STORAGE = 'CLIENT_URL_STORAGE';
-    public const STORE = 'STORE';
-    public const PLUGIN_PRODUCT_SALE_PAGE_WIDGETS = 'PLUGIN_PRODUCT_SALE_PAGE_WIDGETS';
-    public const CLIENT_CATALOG = 'CLIENT_CATALOG';
+    /**
+     * @var string
+     */
+    public const PYZ_CLIENT_SEARCH = 'PYZ_CLIENT_SEARCH';
+
+    /**
+     * @var string
+     */
+    public const PYZ_CLIENT_URL_STORAGE = 'PYZ_CLIENT_URL_STORAGE';
+
+    /**
+     * @var string
+     */
+    public const PYZ_STORE = 'PYZ_STORE';
+
+    /**
+     * @var string
+     */
+    public const PYZ_PLUGIN_PRODUCT_SALE_PAGE_WIDGETS = 'PYZ_PLUGIN_PRODUCT_SALE_PAGE_WIDGETS';
+
+    /**
+     * @var string
+     */
+    public const PYZ_CLIENT_CATALOG = 'PYZ_CLIENT_CATALOG';
 
     /**
      * @param \Spryker\Yves\Kernel\Container $container
      *
      * @return \Spryker\Yves\Kernel\Container
      */
-    public function provideDependencies(Container $container)
+    public function provideDependencies(Container $container): Container
     {
-        $container = $this->addSearchClient($container);
-        $container = $this->addUrlStorageClient($container);
-        $container = $this->addStore($container);
+        $container = $this->addPyzSearchClient($container);
+        $container = $this->addPyzUrlStorageClient($container);
+        $container = $this->addPyzStore($container);
         $container = $this->addProductSalePageWidgetPlugins($container);
-        $container = $this->addCatalogClient($container);
+        $container = $this->addPyzCatalogClient($container);
 
         return $container;
     }
@@ -40,9 +59,9 @@ class ExampleProductSalePageDependencyProvider extends AbstractBundleDependencyP
      *
      * @return \Spryker\Yves\Kernel\Container
      */
-    protected function addSearchClient(Container $container)
+    protected function addPyzSearchClient(Container $container): Container
     {
-        $container->set(static::CLIENT_SEARCH, function (Container $container) {
+        $container->set(static::PYZ_CLIENT_SEARCH, function (Container $container) {
             return $container->getLocator()->search()->client();
         });
 
@@ -54,9 +73,9 @@ class ExampleProductSalePageDependencyProvider extends AbstractBundleDependencyP
      *
      * @return \Spryker\Yves\Kernel\Container
      */
-    protected function addUrlStorageClient(Container $container)
+    protected function addPyzUrlStorageClient(Container $container): Container
     {
-        $container->set(static::CLIENT_URL_STORAGE, function (Container $container) {
+        $container->set(static::PYZ_CLIENT_URL_STORAGE, function (Container $container) {
             return $container->getLocator()->urlStorage()->client();
         });
 
@@ -68,9 +87,9 @@ class ExampleProductSalePageDependencyProvider extends AbstractBundleDependencyP
      *
      * @return \Spryker\Yves\Kernel\Container
      */
-    protected function addStore($container)
+    protected function addPyzStore($container): Container
     {
-        $container->set(static::STORE, function () {
+        $container->set(static::PYZ_STORE, function () {
             return Store::getInstance();
         });
 
@@ -82,9 +101,9 @@ class ExampleProductSalePageDependencyProvider extends AbstractBundleDependencyP
      *
      * @return \Spryker\Yves\Kernel\Container
      */
-    protected function addCatalogClient(Container $container)
+    protected function addPyzCatalogClient(Container $container): Container
     {
-        $container->set(static::CLIENT_CATALOG, function (Container $container) {
+        $container->set(static::PYZ_CLIENT_CATALOG, function (Container $container) {
             return $container->getLocator()->catalog()->client();
         });
 
@@ -96,9 +115,9 @@ class ExampleProductSalePageDependencyProvider extends AbstractBundleDependencyP
      *
      * @return \Spryker\Yves\Kernel\Container
      */
-    protected function addProductSalePageWidgetPlugins($container)
+    protected function addProductSalePageWidgetPlugins($container): Container
     {
-        $container->set(static::PLUGIN_PRODUCT_SALE_PAGE_WIDGETS, function () {
+        $container->set(static::PYZ_PLUGIN_PRODUCT_SALE_PAGE_WIDGETS, function () {
             return [];
         });
 

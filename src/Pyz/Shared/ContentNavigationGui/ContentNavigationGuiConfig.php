@@ -12,40 +12,40 @@ use Spryker\Shared\ContentNavigationGui\ContentNavigationGuiConfig as SprykerCon
 class ContentNavigationGuiConfig extends SprykerContentNavigationGuiConfig
 {
     /**
-     * @uses \Pyz\Shared\ContentNavigation\ContentNavigationConfig::WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_HEADER
+     * @uses \Pyz\Shared\ContentNavigation\ContentNavigationConfig::PYZ_WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_HEADER
      *
      * Content item navigation header template identifier.
      */
-    protected const WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_HEADER = 'navigation-header';
+    protected const PYZ_WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_HEADER = 'navigation-header';
 
     /**
-     * @uses \Pyz\Shared\ContentNavigation\ContentNavigationConfig::WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_HEADER_MOBILE
+     * @uses \Pyz\Shared\ContentNavigation\ContentNavigationConfig::PYZ_WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_HEADER_MOBILE
      *
      * Content item navigation header mobile template identifier.
      */
-    protected const WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_HEADER_MOBILE = 'navigation-header-mobile';
+    protected const PYZ_WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_HEADER_MOBILE = 'navigation-header-mobile';
 
     /**
-     * @uses \Pyz\Shared\ContentNavigation\ContentNavigationConfig::WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_FOOTER
+     * @uses \Pyz\Shared\ContentNavigation\ContentNavigationConfig::PYZ_WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_FOOTER
      *
      * Content item navigation footer template identifier.
      */
-    protected const WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_FOOTER = 'navigation-footer';
+    protected const PYZ_WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_FOOTER = 'navigation-footer';
 
     /**
      * Content item navigation header template name.
      */
-    protected const WIDGET_TEMPLATE_DISPLAY_NAME_LIST_NAVIGATION_HEADER = 'Navigation Header';
+    protected const PYZ_WIDGET_TEMPLATE_DISPLAY_NAME_LIST_NAVIGATION_HEADER = 'Navigation Header';
 
     /**
      * Content item navigation header mobile template name.
      */
-    protected const WIDGET_TEMPLATE_DISPLAY_NAME_LIST_NAVIGATION_HEADER_MOBILE = 'Navigation Header Mobile';
+    protected const PYZ_WIDGET_TEMPLATE_DISPLAY_NAME_LIST_NAVIGATION_HEADER_MOBILE = 'Navigation Header Mobile';
 
     /**
      * Content item navigation footer template name.
      */
-    protected const WIDGET_TEMPLATE_DISPLAY_NAME_LIST_NAVIGATION_FOOTER = 'Navigation Footer';
+    protected const PYZ_WIDGET_TEMPLATE_DISPLAY_NAME_LIST_NAVIGATION_FOOTER = 'Navigation Footer';
 
     /**
      * @api
@@ -56,9 +56,9 @@ class ContentNavigationGuiConfig extends SprykerContentNavigationGuiConfig
     {
         $contentWidgetTemplates = parent::getContentWidgetTemplates();
         $contentWidgetTemplates += [
-            static::WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_HEADER => static::WIDGET_TEMPLATE_DISPLAY_NAME_LIST_NAVIGATION_HEADER,
-            static::WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_HEADER_MOBILE => static::WIDGET_TEMPLATE_DISPLAY_NAME_LIST_NAVIGATION_HEADER_MOBILE,
-            static::WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_FOOTER => static::WIDGET_TEMPLATE_DISPLAY_NAME_LIST_NAVIGATION_FOOTER,
+            static::PYZ_WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_HEADER => static::PYZ_WIDGET_TEMPLATE_DISPLAY_NAME_LIST_NAVIGATION_HEADER,
+            static::PYZ_WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_HEADER_MOBILE => static::PYZ_WIDGET_TEMPLATE_DISPLAY_NAME_LIST_NAVIGATION_HEADER_MOBILE,
+            static::PYZ_WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_FOOTER => static::PYZ_WIDGET_TEMPLATE_DISPLAY_NAME_LIST_NAVIGATION_FOOTER,
         ];
 
         return $contentWidgetTemplates;

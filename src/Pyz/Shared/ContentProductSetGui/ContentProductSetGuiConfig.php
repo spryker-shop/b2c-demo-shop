@@ -11,12 +11,15 @@ use Spryker\Shared\ContentProductSetGui\ContentProductSetGuiConfig as SprykerCon
 
 class ContentProductSetGuiConfig extends SprykerContentProductSetGuiConfig
 {
-    protected const WIDGET_TEMPLATE_IDENTIFIER_ADD_TO_CART = 'add-to-cart';
+    /**
+     * @var string
+     */
+    protected const PYZ_WIDGET_TEMPLATE_IDENTIFIER_ADD_TO_CART = 'add-to-cart';
 
     /**
      * Content item banner default template name
      */
-    protected const WIDGET_TEMPLATE_DISPLAY_NAME_ADD_TO_CART = 'content_product_set.template.add_to_cart';
+    protected const PYZ_WIDGET_TEMPLATE_DISPLAY_NAME_ADD_TO_CART = 'content_product_set.template.add_to_cart';
 
     /**
      * @return array
@@ -26,7 +29,7 @@ class ContentProductSetGuiConfig extends SprykerContentProductSetGuiConfig
         return array_merge(
             parent::getContentWidgetTemplates(),
             [
-                static::WIDGET_TEMPLATE_IDENTIFIER_ADD_TO_CART => static::WIDGET_TEMPLATE_DISPLAY_NAME_ADD_TO_CART,
+                static::PYZ_WIDGET_TEMPLATE_IDENTIFIER_ADD_TO_CART => static::PYZ_WIDGET_TEMPLATE_DISPLAY_NAME_ADD_TO_CART,
             ]
         );
     }
