@@ -187,6 +187,7 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
     protected function getResourceRoutePlugins(): array
     {
         return [
+            new ConcreteProductsResourceRoutePlugin(),
             new AccessTokensResourceRoutePlugin(),
             new RefreshTokensResourceRoutePlugin(),
             new CatalogSearchResourceRoutePlugin(),
@@ -200,7 +201,6 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
             new CustomerForgottenPasswordResourceRoutePlugin(),
             new CustomerRestorePasswordResourceRoutePlugin(),
             new AbstractProductsResourceRoutePlugin(),
-            new ConcreteProductsResourceRoutePlugin(),
             new AbstractProductPricesRoutePlugin(),
             new ConcreteProductPricesRoutePlugin(),
             new CartsResourceRoutePlugin(),
