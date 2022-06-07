@@ -18,7 +18,7 @@ interface ProductStorageQueryContainerInterface extends SprykerProductStorageQue
      *
      * @return \Orm\Zed\ProductBundle\Persistence\SpyProductBundleQuery
      */
-    public function queryBundledProductIdsByProductConcreteId($idProductConcrete);
+    public function queryPyzBundledProductIdsByProductConcreteId($idProductConcrete);
 
     /**
      * @api
@@ -27,5 +27,5 @@ interface ProductStorageQueryContainerInterface extends SprykerProductStorageQue
      *
      * @return \Orm\Zed\ProductBundle\Persistence\SpyProductBundleQuery
      */
-    public function queryBundleProduct($idProductConcrete);
+    public function queryPyzBundleProduct($idProductConcrete);
 }

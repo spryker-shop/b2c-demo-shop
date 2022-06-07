@@ -31,10 +31,10 @@ class ExampleStateMachineItemSaver
      *
      * @return bool
      */
-    public function itemStateUpdate(StateMachineItemTransfer $stateMachineItemTransfer)
+    public function updateItemState(StateMachineItemTransfer $stateMachineItemTransfer): bool
     {
         $exampleStateMachineItemEntity = $this->exampleStateMachineQueryContainer
-            ->queryExampleStateMachineItemByIdStateMachineItem($stateMachineItemTransfer->getIdentifier())
+            ->queryPyzExampleStateMachineItemByIdStateMachineItem($stateMachineItemTransfer->getIdentifier())
             ->findOne();
 
         $exampleStateMachineItemEntity->setFkStateMachineItemState($stateMachineItemTransfer->getIdItemState());
@@ -46,7 +46,7 @@ class ExampleStateMachineItemSaver
     /**
      * @return bool
      */
-    public function createExampleItem()
+    public function createExampleItem(): bool
     {
         $exampleStateMachineItemEntity = new PyzExampleStateMachineItem();
         $exampleStateMachineItemEntity->setName('Test item ' . rand(123, 321));

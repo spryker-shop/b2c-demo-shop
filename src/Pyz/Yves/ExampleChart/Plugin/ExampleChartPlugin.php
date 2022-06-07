@@ -16,14 +16,17 @@ use Spryker\Yves\Kernel\AbstractPlugin;
 
 class ExampleChartPlugin extends AbstractPlugin implements ChartPluginInterface, ChartLayoutablePluginInterface
 {
-    public const TEST_CHART = 'testChart';
+    /**
+     * @var string
+     */
+    public const PYZ_TEST_CHART = 'testChart';
 
     /**
      * @return string
      */
     public function getName(): string
     {
-        return static::TEST_CHART;
+        return static::PYZ_TEST_CHART;
     }
 
     /**

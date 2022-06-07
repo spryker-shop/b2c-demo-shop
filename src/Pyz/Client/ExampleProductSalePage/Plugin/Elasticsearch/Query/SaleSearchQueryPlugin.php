@@ -24,7 +24,10 @@ use Spryker\Client\SearchExtension\Dependency\Plugin\SearchContextAwareQueryInte
  */
 class SaleSearchQueryPlugin extends AbstractPlugin implements QueryInterface, SearchContextAwareQueryInterface
 {
-    protected const SOURCE_IDENTIFIER = 'page';
+    /**
+     * @var string
+     */
+    protected const PYZ_SOURCE_IDENTIFIER = 'page';
 
     /**
      * @var \Elastica\Query
@@ -92,7 +95,7 @@ class SaleSearchQueryPlugin extends AbstractPlugin implements QueryInterface, Se
     protected function setupDefaultSearchContext(): void
     {
         $searchContextTransfer = new SearchContextTransfer();
-        $searchContextTransfer->setSourceIdentifier(static::SOURCE_IDENTIFIER);
+        $searchContextTransfer->setSourceIdentifier(static::PYZ_SOURCE_IDENTIFIER);
 
         $this->searchContextTransfer = $searchContextTransfer;
     }
@@ -130,15 +133,15 @@ class SaleSearchQueryPlugin extends AbstractPlugin implements QueryInterface, Se
      */
     protected function createSaleProductsQuery()
     {
-        $store = $this->getFactory()->getStore();
+        $storeTransfer = $this->getFactory()->getPyzStore();
 
         $labelName = $this->getFactory()
             ->getConfig()
-            ->getLabelSaleName();
+            ->getPyzLabelSaleName();
 
         $storageProductLabelTransfer = $this->getFactory()
-            ->getProductLabelStorageClient()
-            ->findLabelByName($labelName, $store->getCurrentLocale(), $store->getStoreName());
+            ->getPyzProductLabelStorageClient()
+            ->findLabelByName($labelName, $storeTransfer->getCurrentLocale(), $storeTransfer->getStoreName());
 
         $labelId = $storageProductLabelTransfer ? $storageProductLabelTransfer->getIdProductLabel() : 0;
 

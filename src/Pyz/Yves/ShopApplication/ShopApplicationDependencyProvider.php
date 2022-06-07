@@ -7,6 +7,7 @@
 
 namespace Pyz\Yves\ShopApplication;
 
+use Pyz\Yves\ProductReviewWidget\Widget\ProductDetailPageReviewWidget;
 use Spryker\Yves\ErrorHandler\Plugin\Application\ErrorHandlerApplicationPlugin;
 use Spryker\Yves\EventDispatcher\Plugin\Application\EventDispatcherApplicationPlugin;
 use Spryker\Yves\Form\Plugin\Application\FormApplicationPlugin;
@@ -21,6 +22,7 @@ use Spryker\Yves\Translator\Plugin\Application\TranslatorApplicationPlugin;
 use Spryker\Yves\Twig\Plugin\Application\TwigApplicationPlugin;
 use Spryker\Yves\Validator\Plugin\Application\ValidatorApplicationPlugin;
 use SprykerShop\Yves\AgentWidget\Widget\AgentControlBarWidget;
+use SprykerShop\Yves\AssetWidget\Widget\AssetWidget;
 use SprykerShop\Yves\AvailabilityNotificationWidget\Widget\AvailabilityNotificationSubscriptionWidget;
 use SprykerShop\Yves\BarcodeWidget\Widget\BarcodeWidget;
 use SprykerShop\Yves\CartCodeWidget\Widget\CartCodeFormWidget;
@@ -64,6 +66,7 @@ use SprykerShop\Yves\ProductBundleWidget\Widget\ProductBundleItemCounterWidget;
 use SprykerShop\Yves\ProductBundleWidget\Widget\ProductBundleItemsMultiCartItemsListWidget;
 use SprykerShop\Yves\ProductBundleWidget\Widget\ProductBundleMultiCartItemsListWidget;
 use SprykerShop\Yves\ProductCategoryWidget\Widget\ProductBreadcrumbsWithCategoriesWidget;
+use SprykerShop\Yves\ProductCategoryWidget\Widget\ProductSchemaOrgCategoryWidget;
 use SprykerShop\Yves\ProductDiscontinuedWidget\Widget\ProductDiscontinuedNoteWidget;
 use SprykerShop\Yves\ProductDiscontinuedWidget\Widget\ProductDiscontinuedWidget;
 use SprykerShop\Yves\ProductGroupWidget\Widget\ProductGroupColorWidget;
@@ -75,7 +78,6 @@ use SprykerShop\Yves\ProductRelationWidget\Widget\SimilarProductsWidget;
 use SprykerShop\Yves\ProductRelationWidget\Widget\UpSellingProductsWidget;
 use SprykerShop\Yves\ProductReplacementForWidget\Widget\ProductReplacementForListWidget;
 use SprykerShop\Yves\ProductReviewWidget\Widget\DisplayProductAbstractReviewWidget;
-use SprykerShop\Yves\ProductReviewWidget\Widget\ProductDetailPageReviewWidget;
 use SprykerShop\Yves\ProductReviewWidget\Widget\ProductRatingFilterWidget;
 use SprykerShop\Yves\ProductReviewWidget\Widget\ProductReviewDisplayWidget;
 use SprykerShop\Yves\ProductSearchWidget\Widget\ProductConcreteAddWidget;
@@ -147,6 +149,7 @@ class ShopApplicationDependencyProvider extends SprykerShopApplicationDependency
             CurrentProductPriceVolumeWidget::class,
             ProductRatingFilterWidget::class,
             ProductReviewDisplayWidget::class,
+            ProductSchemaOrgCategoryWidget::class,
             SalesOrderThresholdWidget::class,
             ShoppingListProductAlternativeWidget::class,
             SimilarProductsWidget::class,
@@ -176,6 +179,7 @@ class ShopApplicationDependencyProvider extends SprykerShopApplicationDependency
             ProductAbstractAddToCartButtonWidget::class,
             OrderCancelButtonWidget::class,
             CartAddProductAsSeparateItemWidget::class,
+            AssetWidget::class,
         ];
     }
 

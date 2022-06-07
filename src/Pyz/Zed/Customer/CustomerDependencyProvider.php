@@ -18,8 +18,15 @@ use Spryker\Zed\Newsletter\Communication\Plugin\CustomerAnonymizer\CustomerUnsub
 
 class CustomerDependencyProvider extends SprykerCustomerDependencyProvider
 {
-    public const SALES_FACADE = 'sales facade';
-    public const NEWSLETTER_FACADE = 'newsletter facade';
+    /**
+     * @var string
+     */
+    public const PYZ_SALES_FACADE = 'sales facade';
+
+    /**
+     * @var string
+     */
+    public const PYZ_NEWSLETTER_FACADE = 'newsletter facade';
 
     /**
      * @param \Spryker\Zed\Kernel\Container $container
@@ -30,11 +37,11 @@ class CustomerDependencyProvider extends SprykerCustomerDependencyProvider
     {
         $container = parent::provideCommunicationLayerDependencies($container);
 
-        $container->set(static::SALES_FACADE, function (Container $container) {
+        $container->set(static::PYZ_SALES_FACADE, function (Container $container) {
             return $container->getLocator()->sales()->facade();
         });
 
-        $container->set(static::NEWSLETTER_FACADE, function (Container $container) {
+        $container->set(static::PYZ_NEWSLETTER_FACADE, function (Container $container) {
             return $container->getLocator()->newsletter()->facade();
         });
 

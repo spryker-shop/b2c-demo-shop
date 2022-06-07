@@ -31,6 +31,7 @@
 
             {% for name, choices in data.form.paymentSelection.vars.choices %}
                 {% set paymentProviderIndex = loop.index0 %}
+                <h5>{{ name | trans }}</h5>
 
                 {% embed molecule('list-switches') with {
                     modifiers: ['register-type', 'layout-width'],
@@ -59,7 +60,7 @@
                         class: 'spacing-bottom spacing-bottom--bigger',
                         modifiers: ['grid-indent', 'checkout-form-elements'],
                         data: {
-                            form: data.form[data.form.paymentSelection[key].vars.value],
+                            form: data.form[data.form.paymentSelection[key].vars.name],
                             enableStart: false,
                             enableEnd: false,
                             layout: {

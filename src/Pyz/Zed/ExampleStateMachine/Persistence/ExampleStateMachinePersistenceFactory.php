@@ -18,7 +18,7 @@ class ExampleStateMachinePersistenceFactory extends AbstractPersistenceFactory
     /**
      * @return \Orm\Zed\ExampleStateMachine\Persistence\PyzExampleStateMachineItemQuery
      */
-    public function createExampleStateMachineQuery()
+    public function createPyzExampleStateMachineQuery()
     {
         return PyzExampleStateMachineItemQuery::create();
     }

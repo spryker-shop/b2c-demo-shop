@@ -11,9 +11,9 @@ use Spryker\Shared\Shipment\ShipmentConfig as SprykerShipmentConfig;
 
 class ShipmentConfig extends SprykerShipmentConfig
 {
-   /**
-    * @return bool
-    */
+    /**
+     * @return bool
+     */
     public function isMultiShipmentSelectionEnabled(): bool
     {
         return true;

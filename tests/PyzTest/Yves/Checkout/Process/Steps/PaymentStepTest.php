@@ -10,6 +10,7 @@ namespace PyzTest\Yves\Checkout\Process\Steps;
 use Codeception\Test\Unit;
 use Generated\Shared\DataBuilder\PaymentMethodsBuilder;
 use Generated\Shared\DataBuilder\QuoteBuilder;
+use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Yves\Messenger\FlashMessenger\FlashMessengerInterface;
 use Spryker\Yves\StepEngine\Dependency\Plugin\Handler\StepHandlerPluginCollection;
@@ -17,6 +18,7 @@ use Spryker\Yves\StepEngine\Dependency\Plugin\Handler\StepHandlerPluginInterface
 use SprykerShop\Yves\CheckoutPage\Dependency\Client\CheckoutPageToCalculationClientBridge;
 use SprykerShop\Yves\CheckoutPage\Dependency\Client\CheckoutPageToCalculationClientInterface;
 use SprykerShop\Yves\CheckoutPage\Dependency\Client\CheckoutPageToPaymentClientInterface;
+use SprykerShop\Yves\CheckoutPage\Extractor\PaymentMethodKeyExtractor;
 use SprykerShop\Yves\CheckoutPage\Process\Steps\PaymentStep;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -112,11 +114,9 @@ class PaymentStepTest extends Unit
 
         $paymentStep = $this->createPaymentStep($stepHandlerPluginCollection);
 
-        $quoteTransfer = (new QuoteBuilder())
-            ->withPayment([
-                'paymentSelection' => 'test',
-            ])
-            ->build();
+        $paymentTransfer = (new PaymentTransfer())
+            ->setPaymentSelection('test');
+        $quoteTransfer = (new QuoteTransfer())->setPayment($paymentTransfer);
 
         return [$paymentStep, $quoteTransfer];
     }
@@ -184,7 +184,8 @@ class PaymentStepTest extends Unit
             'escape_route',
             $this->getFlashMessengerMock(),
             $this->getCalculationClientMock(),
-            $this->getCheckoutPaymentStepEnterPreCheckPlugins()
+            $this->getCheckoutPaymentStepEnterPreCheckPlugins(),
+            new PaymentMethodKeyExtractor()
         );
     }
 

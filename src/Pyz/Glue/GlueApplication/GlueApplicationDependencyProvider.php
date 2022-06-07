@@ -57,6 +57,8 @@ use Spryker\Glue\CmsPagesContentBannersResourceRelationship\Plugin\GlueApplicati
 use Spryker\Glue\CmsPagesContentProductAbstractListsResourceRelationship\Plugin\GlueApplication\ContentProductAbstractListByCmsPageResourceRelationshipPlugin;
 use Spryker\Glue\CmsPagesRestApi\CmsPagesRestApiConfig;
 use Spryker\Glue\CmsPagesRestApi\Plugin\GlueApplication\CmsPagesResourceRoutePlugin;
+use Spryker\Glue\ConfigurableBundleCartsRestApi\Plugin\GlueApplication\ConfiguredBundlesResourceRoutePlugin;
+use Spryker\Glue\ConfigurableBundleCartsRestApi\Plugin\GlueApplication\GuestConfiguredBundlesResourceRoutePlugin;
 use Spryker\Glue\ConfigurableBundlesProductsResourceRelationship\ConfigurableBundlesProductsResourceRelationshipConfig;
 use Spryker\Glue\ConfigurableBundlesProductsResourceRelationship\Plugin\GlueApplication\ProductConcreteByConfigurableBundleTemplateSlotResourceRelationshipPlugin;
 use Spryker\Glue\ConfigurableBundlesRestApi\ConfigurableBundlesRestApiConfig;
@@ -250,6 +252,8 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
             new CustomerAvailabilityNotificationsResourceRoutePlugin(),
             new ConfigurableBundleTemplatesResourceRoutePlugin(),
             new MyAvailabilityNotificationsResourceRoutePlugin(),
+            new ConfiguredBundlesResourceRoutePlugin(),
+            new GuestConfiguredBundlesResourceRoutePlugin(),
         ];
     }
 

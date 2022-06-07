@@ -1,0 +1,102 @@
+asyncapi: 2.2.0
+info:
+    title: 'Assets AsyncAPI definition.'
+    version: 0.1.0
+channels:
+    assets:
+        publish:
+            message:
+                oneOf:
+                    -
+                        $ref: '#/components/messages/AssetAdded'
+                    -
+                        $ref: '#/components/messages/AssetUpdated'
+                    -
+                        $ref: '#/components/messages/AssetDeleted'
+components:
+    messages:
+        AssetAdded:
+            name: AssetAdded
+            operationId: Asset
+            payload:
+                $ref: '#/components/schemas/AssetAdded'
+            headers:
+                $ref: '#/components/schemas/headers'
+        AssetUpdated:
+            name: AssetUpdated
+            operationId: Asset
+            payload:
+                $ref: '#/components/schemas/AssetUpdated'
+            headers:
+                $ref: '#/components/schemas/headers'
+        AssetDeleted:
+            name: AssetDeleted
+            operationId: Asset
+            payload:
+                $ref: '#/components/schemas/AssetDeleted'
+            headers:
+                $ref: '#/components/schemas/headers'
+
+    schemas:
+        AssetAdded:
+            $ref: '#/components/schemas/GenericAssetPayload'
+        AssetUpdated:
+            $ref: '#/components/schemas/GenericAssetPayload'
+        AssetDeleted:
+            $ref: '#/components/schemas/GenericAssetPayload'
+
+        GenericAssetPayload:
+            type: object
+            properties:
+                assetIdentifier:
+                    type: string
+                assetName:
+                    type: string
+                assetView:
+                    type: string
+                assetSlot:
+                    type: string
+            required:
+                - assetIdentifier
+                - assetName
+                - assetView
+                - assetSlot
+
+        headers:
+            type: object
+            required:
+                - authorization
+                - timestamp
+                - correlationId
+                - storeReference
+                - event
+                - transferName
+                - publisher
+            properties:
+                authorization:
+                    type: string
+                    description: 'Authorization header for requesting a protected resource.'
+                timestamp:
+                    type: integer
+                    description: 'Timestamp when this message was created (microtime).'
+                correlationId:
+                    type: string
+                    description: 'Identifier of the current process.'
+                storeReference:
+                    type: string
+                    description: 'Identifier of a store for the triggered event.'
+                event:
+                    type: string
+                    description: 'Name of the current event.'
+                transferName:
+                    type: string
+                    description: 'Transfer name of the current event.'
+                publisher:
+                    type: object
+                    properties:
+                        appIdentifier:
+                            type: string
+                            description: 'Identifier of the app that triggered the event.'
+                        storeReference:
+                            type: string
+                            description: 'Identifier of a store that triggered the event.'

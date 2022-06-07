@@ -19,22 +19,22 @@ interface ExampleStateMachineFacadeInterface
      *
      * @return bool
      */
-    public function itemStateUpdate(StateMachineItemTransfer $stateMachineItemTransfer);
+    public function updatePyzItemState(StateMachineItemTransfer $stateMachineItemTransfer): bool;
 
     /**
      * @param int[] $stateIds
      *
      * @return \Generated\Shared\Transfer\StateMachineItemTransfer[]
      */
-    public function getExampleStateMachineItemsByStateIds(array $stateIds = []);
+    public function getPyzExampleStateMachineItemsByStateIds(array $stateIds = []): array;
 
     /**
      * @return \Generated\Shared\Transfer\StateMachineItemTransfer[]
      */
-    public function getStateMachineItems();
+    public function getPyzStateMachineItems(): array;
 
     /**
      * @return bool
      */
-    public function createExampleItem();
+    public function createPyzExampleItem(): bool;
 }

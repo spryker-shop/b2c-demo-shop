@@ -18,7 +18,7 @@ class ProductRelationStorageConfig extends SprykerProductRelationStorageConfig
      */
     public function getProductAbstractRelationSynchronizationPoolName(): ?string
     {
-        return SynchronizationConfig::DEFAULT_SYNCHRONIZATION_POOL_NAME;
+        return SynchronizationConfig::PYZ_DEFAULT_SYNCHRONIZATION_POOL_NAME;
     }
 
     /**

@@ -18,7 +18,7 @@ class CmsStorageConfig extends SprykerCmsStorageConfig
      */
     public function getCmsPageSynchronizationPoolName(): ?string
     {
-        return SynchronizationConfig::DEFAULT_SYNCHRONIZATION_POOL_NAME;
+        return SynchronizationConfig::PYZ_DEFAULT_SYNCHRONIZATION_POOL_NAME;
     }
 
     /**
