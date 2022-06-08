@@ -68,10 +68,8 @@
                 </div>
             </a>
 
-            <div class="{{ config.name }}__review">
-                <section itemscope itemtype="http://schema.org/AggregateRating" itemprop="aggregateRating">
-                    {{ block('rating') }}
-                </section>
+            <div class="{{ config.name }}__review" itemscope itemtype="http://schema.org/AggregateRating" itemprop="aggregateRating">
+                {{ block('rating') }}
             </div>
 
             <meta class="{{ config.jsName }}__sku" itemprop="sku" content="{{ data.metaSku }}">
