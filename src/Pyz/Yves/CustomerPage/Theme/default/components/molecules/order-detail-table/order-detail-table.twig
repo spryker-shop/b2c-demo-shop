@@ -37,11 +37,19 @@
                                 <div class="grid grid--middle col">
                                     {% if embed.order is not empty %}
                                         <span class="spacing-right">
-                                            {% widget 'CustomerReorderItemCheckboxWidget' args [data.productItem] with {
-                                                data: {
-                                                    additionalModifiers: ['big'],
-                                                },
-                                            } only %}{% endwidget %}
+                                            {% if data.productItem.bundleItemIdentifier ?? false %}
+                                                {% widget 'CustomerReorderBundleItemCheckboxWidget' args [data.productItem] with {
+                                                    data: {
+                                                        additionalModifiers: ['big'],
+                                                    },
+                                                } only %}{% endwidget %}
+                                            {% else %}
+                                                {% widget 'CustomerReorderItemCheckboxWidget' args [data.productItem] with {
+                                                    data: {
+                                                        additionalModifiers: ['big'],
+                                                    },
+                                                } only %}{% endwidget %}
+                                            {% endif %}
                                         </span>
                                     {% endif %}
 
