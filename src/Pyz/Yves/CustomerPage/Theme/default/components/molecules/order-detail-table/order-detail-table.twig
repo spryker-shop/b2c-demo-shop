@@ -30,6 +30,7 @@
                             embed: {
                                 order: data.order,
                                 bundleItems: item.bundleItems | default([]),
+                                reorderSelectionClassName: data.reorderSelectionClassName,
                             },
                         } only %}
                             {% import _self as component %}
@@ -40,15 +41,19 @@
                                             {% if data.productItem.bundleItemIdentifier ?? false %}
                                                 {% widget 'CustomerReorderBundleItemCheckboxWidget' args [data.productItem] with {
                                                     data: {
+                                                        checkboxClasses: embed.reorderSelectionClassName,
                                                         additionalModifiers: ['big'],
                                                     },
-                                                } only %}{% endwidget %}
+                                                } only %}
+                                                {% endwidget %}
                                             {% else %}
                                                 {% widget 'CustomerReorderItemCheckboxWidget' args [data.productItem] with {
                                                     data: {
+                                                        checkboxClasses: embed.reorderSelectionClassName,
                                                         additionalModifiers: ['big'],
                                                     },
-                                                } only %}{% endwidget %}
+                                                } only %}
+                                                {% endwidget %}
                                             {% endif %}
                                         </span>
                                     {% endif %}
