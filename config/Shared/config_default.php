@@ -1,5 +1,22 @@
 <?php
 
+use Generated\Shared\Transfer\AssetAddedTransfer;
+use Generated\Shared\Transfer\AssetDeletedTransfer;
+use Generated\Shared\Transfer\AssetUpdatedTransfer;
+use Generated\Shared\Transfer\PaymentCancelReservationFailedTransfer;
+use Generated\Shared\Transfer\PaymentCancelReservationRequestedTransfer;
+use Generated\Shared\Transfer\PaymentConfirmationFailedTransfer;
+use Generated\Shared\Transfer\PaymentConfirmationRequestedTransfer;
+use Generated\Shared\Transfer\PaymentConfirmedTransfer;
+use Generated\Shared\Transfer\PaymentMethodAddedTransfer;
+use Generated\Shared\Transfer\PaymentMethodDeletedTransfer;
+use Generated\Shared\Transfer\PaymentMethodTransfer;
+use Generated\Shared\Transfer\PaymentPreauthorizationFailedTransfer;
+use Generated\Shared\Transfer\PaymentPreauthorizedTransfer;
+use Generated\Shared\Transfer\PaymentRefundedTransfer;
+use Generated\Shared\Transfer\PaymentRefundFailedTransfer;
+use Generated\Shared\Transfer\PaymentRefundRequestedTransfer;
+use Generated\Shared\Transfer\PaymentReservationCanceledTransfer;
 use Monolog\Logger;
 use Pyz\Shared\Console\ConsoleConstants;
 use Pyz\Shared\Scheduler\SchedulerConfig;
@@ -30,6 +47,8 @@ use Spryker\Shared\Http\HttpConstants;
 use Spryker\Shared\Kernel\KernelConstants;
 use Spryker\Shared\Log\LogConstants;
 use Spryker\Shared\Mail\MailConstants;
+use Spryker\Shared\MessageBroker\MessageBrokerConstants;
+use Spryker\Shared\MessageBrokerAws\MessageBrokerAwsConstants;
 use Spryker\Shared\Monitoring\MonitoringConstants;
 use Spryker\Shared\Newsletter\NewsletterConstants;
 use Spryker\Shared\Oauth\OauthConstants;
@@ -67,9 +86,11 @@ use Spryker\Shared\User\UserConstants;
 use Spryker\Shared\ZedRequest\ZedRequestConstants;
 use Spryker\Yves\Log\Plugin\YvesLoggerConfigPlugin;
 use Spryker\Zed\Log\Communication\Plugin\ZedLoggerConfigPlugin;
+use Spryker\Zed\MessageBrokerAws\MessageBrokerAwsConfig;
 use Spryker\Zed\OauthAuth0\OauthAuth0Config;
 use Spryker\Zed\Payment\PaymentConfig;
 use Spryker\Zed\Propel\PropelConfig;
+use Spryker\Shared\Quote\QuoteConstants;
 use SprykerShop\Shared\CustomerPage\CustomerPageConstants;
 use SprykerShop\Shared\ShopUi\ShopUiConstants;
 
@@ -461,6 +482,7 @@ $config[SchedulerJenkinsConstants::JENKINS_CONFIGURATION] = [
             getenv('SPRYKER_SCHEDULER_HOST'),
             getenv('SPRYKER_SCHEDULER_PORT')
         ),
+        SchedulerJenkinsConfig::SCHEDULER_JENKINS_CSRF_ENABLED => (bool)getenv('SPRYKER_JENKINS_CSRF_PROTECTION_ENABLED'),
     ],
 ];
 
@@ -571,9 +593,8 @@ $config[SalesConstants::PAYMENT_METHOD_STATEMACHINE_MAPPING] = [
     PaymentConfig::PAYMENT_FOREIGN_PROVIDER => 'B2CStateMachine01',
 ];
 
-// ----------------------------------------------------------------------------
-// ------------------------------ PAYMENTS ------------------------------------
-// ----------------------------------------------------------------------------
+// ---------- Guest cart
+$config[QuoteConstants::GUEST_QUOTE_LIFETIME] = 'P01M';
 
 // >>> Taxes
 $config[TaxConstants::DEFAULT_TAX_RATE] = 19;
@@ -593,20 +614,58 @@ $config[CartsRestApiConstants::IS_QUOTE_RELOAD_ENABLED] = true;
 // ----------------------------------------------------------------------------
 // ------------------------------ AOP -----------------------------------------
 // ----------------------------------------------------------------------------
-
-$config[StoreReferenceConstants::STORE_NAME_REFERENCE_MAP] = json_decode(
-    html_entity_decode(getenv('STORE_NAME_REFERENCE_MAP') ?: ''),
-    true,
+$aopApplicationConfiguration = json_decode(html_entity_decode((string)getenv('SPRYKER_AOP_APPLICATION')), true);
+$config[KernelConstants::DOMAIN_WHITELIST] = array_merge(
+    $config[KernelConstants::DOMAIN_WHITELIST],
+    $aopApplicationConfiguration['APP_DOMAINS'] ?? [],
 );
-$config[AppCatalogGuiConstants::APP_CATALOG_SCRIPT_URL] = (string)getenv('APP_CATALOG_SCRIPT_URL');
+$config[StoreReferenceConstants::STORE_NAME_REFERENCE_MAP] = $aopApplicationConfiguration['STORE_NAME_REFERENCE_MAP'] ?? [];
+$config[AppCatalogGuiConstants::APP_CATALOG_SCRIPT_URL] = $aopApplicationConfiguration['APP_CATALOG_SCRIPT_URL'] ?? '';
+
+$aopAuthenticationConfiguration = json_decode(html_entity_decode((string)getenv('SPRYKER_AOP_AUTHENTICATION')), true);
+$config[OauthAuth0Constants::AUTH0_CUSTOM_DOMAIN] = $aopAuthenticationConfiguration['AUTH0_CUSTOM_DOMAIN'] ?? '';
+$config[OauthAuth0Constants::AUTH0_CLIENT_ID] = $aopAuthenticationConfiguration['AUTH0_CLIENT_ID'] ?? '';
+$config[OauthAuth0Constants::AUTH0_CLIENT_SECRET] = $aopAuthenticationConfiguration['AUTH0_CLIENT_SECRET'] ?? '';
+
+$config[MessageBrokerConstants::MESSAGE_TO_CHANNEL_MAP] = [
+    PaymentMethodTransfer::class => 'payment',
+    PaymentMethodAddedTransfer::class => 'payment',
+    PaymentCancelReservationRequestedTransfer::class => 'payment',
+    PaymentConfirmationRequestedTransfer::class => 'payment',
+    PaymentRefundRequestedTransfer::class => 'payment',
+    PaymentMethodDeletedTransfer::class => 'payment',
+    PaymentPreauthorizedTransfer::class => 'payment',
+    PaymentPreauthorizationFailedTransfer::class => 'payment',
+    PaymentConfirmedTransfer::class => 'payment',
+    PaymentConfirmationFailedTransfer::class => 'payment',
+    PaymentRefundedTransfer::class => 'payment',
+    PaymentRefundFailedTransfer::class => 'payment',
+    PaymentReservationCanceledTransfer::class => 'payment',
+    PaymentCancelReservationFailedTransfer::class => 'payment',
+    AssetAddedTransfer::class => 'assets',
+    AssetUpdatedTransfer::class => 'assets',
+    AssetDeletedTransfer::class => 'assets',
+];
+
+$config[MessageBrokerConstants::CHANNEL_TO_TRANSPORT_MAP] =
+$config[MessageBrokerAwsConstants::CHANNEL_TO_RECEIVER_TRANSPORT_MAP] = [
+    'payment' => MessageBrokerAwsConfig::SQS_TRANSPORT,
+    'assets' => MessageBrokerAwsConfig::SQS_TRANSPORT,
+];
+
+$config[MessageBrokerAwsConstants::CHANNEL_TO_SENDER_TRANSPORT_MAP] = [
+    'payment' => 'http',
+    'assets' => 'http',
+];
+
+$aopInfrastructureConfiguration = json_decode(html_entity_decode((string)getenv('SPRYKER_AOP_INFRASTRUCTURE')), true);
+
+$config[MessageBrokerAwsConstants::SQS_RECEIVER_CONFIG] = json_encode($aopInfrastructureConfiguration['SPRYKER_MESSAGE_BROKER_SQS_RECEIVER_CONFIG'] ?? []);
+$config[MessageBrokerAwsConstants::HTTP_SENDER_CONFIG] = $aopInfrastructureConfiguration['SPRYKER_MESSAGE_BROKER_HTTP_SENDER_CONFIG'] ?? [];
 
 // ----------------------------------------------------------------------------
 // ------------------------------ OAUTH ---------------------------------------
 // ----------------------------------------------------------------------------
-$config[OauthAuth0Constants::AUTH0_CLIENT_ID] = getenv('AUTH0_CLIENT_ID') ?: '';
-$config[OauthAuth0Constants::AUTH0_CLIENT_SECRET] = getenv('AUTH0_CLIENT_SECRET') ?: '';
-$config[OauthAuth0Constants::AUTH0_CUSTOM_DOMAIN] = getenv('AUTH0_CUSTOM_DOMAIN') ?: '';
-
 $config[OauthClientConstants::OAUTH_PROVIDER_NAME_FOR_MESSAGE_BROKER] = OauthAuth0Config::PROVIDER_NAME;
 $config[OauthClientConstants::OAUTH_GRANT_TYPE_FOR_MESSAGE_BROKER] = OauthAuth0Config::GRANT_TYPE_CLIENT_CREDENTIALS;
 $config[OauthClientConstants::OAUTH_OPTION_AUDIENCE_FOR_MESSAGE_BROKER] = 'aop-event-platform';
