@@ -7,6 +7,9 @@
  * - jobs[]['role'] default value is 'admin'
  */
 
+use Spryker\Shared\Config\Config;
+use Spryker\Shared\MessageBrokerAws\MessageBrokerAwsConstants;
+
 $stores = require(APPLICATION_ROOT_DIR . '/config/Shared/stores.php');
 
 $allStores = array_keys($stores);
@@ -154,3 +157,14 @@ $jobs[] = [
     'enable' => true,
     'stores' => $allStores,
 ];
+
+/* Message broker */
+if (Config::get(MessageBrokerAwsConstants::SQS_RECEIVER_CONFIG)) {
+    $jobs[] = [
+        'name' => 'message-broker-consume-channels',
+        'command' => '$PHP_BIN vendor/bin/console message-broker:consume --time-limit=15',
+        'schedule' => '* * * * *',
+        'enable' => true,
+        'stores' => $allStores,
+    ];
+}

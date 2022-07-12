@@ -79,7 +79,10 @@
                     } only %}
                         {% block fieldset %}
                             <div class="js-payment-method-{{ embed.index }} {% if embed.index != '1-0' %} is-hidden{% endif %}">
-                                <h2 class="title title--primary">{{ embed.toggler.vars.label | trans }}</h2>
+                                {% set isForeignPayment = embed.toggler.vars.value matches '#foreignPayments\[[a-zA-Z0-9_-]+\]#' %}
+                                {% if not isForeignPayment %}
+                                    <h2 class="title title--primary">{{ embed.toggler.vars.label | trans }}</h2>
+                                {% endif %}
 
                                 {% if embed.customForms[data.form.vars.template_path] is not defined %}
                                     {{ parent() }}

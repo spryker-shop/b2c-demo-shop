@@ -8,7 +8,7 @@
 namespace Pyz\Service\Barcode;
 
 use Spryker\Service\Barcode\BarcodeDependencyProvider as SprykerDependencyProvider;
-use Spryker\Service\CodeItNow\Plugin\Code128BarcodeGeneratorPlugin;
+use Spryker\Service\BarcodeLaminas\Plugin\Code128BarcodeGeneratorPlugin;
 
 class BarcodeDependencyProvider extends SprykerDependencyProvider
 {
