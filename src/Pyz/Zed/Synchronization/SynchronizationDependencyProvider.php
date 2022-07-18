@@ -7,6 +7,7 @@
 
 namespace Pyz\Zed\Synchronization;
 
+use ESpirit\Zed\FirstSpiritCmsDataStorage\Communication\Plugin\Synchronization\FirstSpiritCmsBlockDataSynchronizationDataBulkPlugin;
 use ESpirit\Zed\FirstSpiritCmsDataStorage\Communication\Plugin\Synchronization\FirstSpiritCmsDataSynchronizationDataBulkPlugin;
 use Spryker\Zed\AvailabilityStorage\Communication\Plugin\Synchronization\AvailabilitySynchronizationDataPlugin;
 use Spryker\Zed\CategoryImageStorage\Communication\Plugin\Synchronization\CategoryImageSynchronizationDataBulkPlugin;
@@ -126,6 +127,7 @@ class SynchronizationDependencyProvider extends SprykerSynchronizationDependency
             new ReturnReasonSynchronizationDataBulkRepositoryPlugin(),
             new ProductBundleSynchronizationDataBulkRepositoryPlugin(),
             new FirstSpiritCmsDataSynchronizationDataBulkPlugin(),
+            new FirstSpiritCmsBlockDataSynchronizationDataBulkPlugin(),
         ];
     }
 

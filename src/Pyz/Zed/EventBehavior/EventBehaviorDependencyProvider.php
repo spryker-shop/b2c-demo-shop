@@ -7,6 +7,7 @@
 
 namespace Pyz\Zed\EventBehavior;
 
+use ESpirit\Zed\FirstSpiritCmsDataStorage\Communication\Plugin\Event\FirstSpiritCmsBlockDataEventResourceQueryContainerPlugin;
 use ESpirit\Zed\FirstSpiritCmsDataStorage\Communication\Plugin\Event\FirstSpiritCmsDataEventResourceQueryContainerPlugin;
 use Spryker\Zed\AvailabilityStorage\Communication\Plugin\Event\AvailabilityEventResourceQueryContainerPlugin;
 use Spryker\Zed\CmsBlockCategoryStorage\Communication\Plugin\Event\CmsBlockCategoryEventResourceQueryContainerPlugin;
@@ -83,6 +84,7 @@ class EventBehaviorDependencyProvider extends SprykerEventBehaviorDependencyProv
             new ConfigurableBundleTemplatePageSearchEventResourceBulkRepositoryPlugin(),
             new GlossaryPublisherTriggerPlugin(),
             new FirstSpiritCmsDataEventResourceQueryContainerPlugin(),
+            new FirstSpiritCmsBlockDataEventResourceQueryContainerPlugin(),
         ];
     }
 }

@@ -95,7 +95,9 @@ class QueueDependencyProvider extends SprykerDependencyProvider
             TaxStorageConfig::TAX_SET_SYNC_STORAGE_QUEUE => new SynchronizationStorageQueueMessageProcessorPlugin(),
             SalesReturnSearchConfig::SYNC_SEARCH_RETURN => new SynchronizationSearchQueueMessageProcessorPlugin(),
             FirstSpiritCmsDataStorageConfig::PUBLISH_CMS_PAGE_DATA_CONNECTOR => new EventQueueMessageProcessorPlugin(),
+            FirstSpiritCmsDataStorageConfig::PUBLISH_CMS_BLOCK_DATA_CONNECTOR => new EventQueueMessageProcessorPlugin(),
             FirstSpiritCmsDataStorageConfig::CMS_PAGE_DATA_CONNECTOR_SYNC_STORAGE_QUEUE => new SynchronizationStorageQueueMessageProcessorPlugin(),
+            FirstSpiritCmsDataStorageConfig::CMS_BLOCK_DATA_CONNECTOR_SYNC_STORAGE_QUEUE => new SynchronizationStorageQueueMessageProcessorPlugin(),
         ];
     }
 }

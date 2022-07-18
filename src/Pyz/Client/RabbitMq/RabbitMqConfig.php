@@ -94,6 +94,7 @@ class RabbitMqConfig extends SprykerRabbitMqConfig
             ProductStorageConfig::PUBLISH_PRODUCT_ABSTRACT,
             ProductStorageConfig::PUBLISH_PRODUCT_CONCRETE,
             FirstSpiritCmsDataStorageConfig::PUBLISH_CMS_PAGE_DATA_CONNECTOR,
+            FirstSpiritCmsDataStorageConfig::PUBLISH_CMS_BLOCK_DATA_CONNECTOR,
         ];
     }
 
@@ -124,6 +125,7 @@ class RabbitMqConfig extends SprykerRabbitMqConfig
             TaxStorageConfig::TAX_SET_SYNC_STORAGE_QUEUE,
             SalesReturnSearchConfig::SYNC_SEARCH_RETURN,
             FirstSpiritCmsDataStorageConfig::CMS_PAGE_DATA_CONNECTOR_SYNC_STORAGE_QUEUE,
+            FirstSpiritCmsDataStorageConfig::CMS_BLOCK_DATA_CONNECTOR_SYNC_STORAGE_QUEUE,
         ];
     }
 
