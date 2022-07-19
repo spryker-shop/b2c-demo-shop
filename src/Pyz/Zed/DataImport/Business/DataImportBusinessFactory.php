@@ -33,6 +33,7 @@ use Pyz\Zed\DataImport\Business\CombinedProduct\ProductStock\CombinedProductStoc
 use Pyz\Zed\DataImport\Business\CombinedProduct\ProductStock\Writer\CombinedProductStockPropelDataSetWriter;
 use Pyz\Zed\DataImport\Business\Model\CategoryTemplate\CategoryTemplateWriterStep;
 use Pyz\Zed\DataImport\Business\Model\CmsBlock\CmsBlockWriterStep;
+use Pyz\Zed\DataImport\Business\Model\CmsBlockCategoryPosition\CmsBlockCategoryPositionWriterStep;
 use Pyz\Zed\DataImport\Business\Model\CmsBlockStore\CmsBlockStoreWriterStep;
 use Pyz\Zed\DataImport\Business\Model\CmsTemplate\CmsTemplateWriterStep;
 use Pyz\Zed\DataImport\Business\Model\Country\Repository\CountryRepository;
@@ -202,6 +203,8 @@ class DataImportBusinessFactory extends SprykerDataImportBusinessFactory
                 return $this->createCmsBlockImporter($dataImportConfigurationActionTransfer);
             case DataImportConfig::IMPORT_TYPE_CMS_BLOCK_STORE:
                 return $this->createCmsBlockStoreImporter($dataImportConfigurationActionTransfer);
+            case DataImportConfig::IMPORT_TYPE_CMS_BLOCK_CATEGORY_POSITION:
+                return $this->createCmsBlockCategoryPositionImporter($dataImportConfigurationActionTransfer);
             case DataImportConfig::IMPORT_TYPE_DISCOUNT_AMOUNT:
                 return $this->createDiscountAmountImporter($dataImportConfigurationActionTransfer);
             case DataImportConfig::IMPORT_TYPE_ABSTRACT_GIFT_CARD_CONFIGURATION:
@@ -395,6 +398,24 @@ class DataImportBusinessFactory extends SprykerDataImportBusinessFactory
 
         $dataSetStepBroker = $this->createTransactionAwareDataSetStepBroker(CmsBlockStoreWriterStep::BULK_SIZE);
         $dataSetStepBroker->addStep(new CmsBlockStoreWriterStep());
+        $dataImporter->addDataSetStepBroker($dataSetStepBroker);
+
+        return $dataImporter;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\DataImportConfigurationActionTransfer $dataImportConfigurationActionTransfer
+     *
+     * @return \Spryker\Zed\DataImport\Business\Model\DataImporterInterface|\Spryker\Zed\DataImport\Business\Model\DataSet\DataSetStepBrokerAwareInterface
+     */
+    protected function createCmsBlockCategoryPositionImporter(DataImportConfigurationActionTransfer $dataImportConfigurationActionTransfer)
+    {
+        $dataImporter = $this->getCsvDataImporterFromConfig(
+            $this->getConfig()->buildImporterConfigurationByDataImportConfigAction($dataImportConfigurationActionTransfer)
+        );
+
+        $dataSetStepBroker = $this->createTransactionAwareDataSetStepBroker(CmsBlockCategoryPositionWriterStep::BULK_SIZE);
+        $dataSetStepBroker->addStep(new CmsBlockCategoryPositionWriterStep());
         $dataImporter->addDataSetStepBroker($dataSetStepBroker);
 
         return $dataImporter;

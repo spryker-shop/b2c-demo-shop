@@ -37,6 +37,7 @@ class DataImportConfig extends SprykerDataImportConfig
     public const IMPORT_TYPE_CMS_TEMPLATE = 'cms-template';
     public const IMPORT_TYPE_CMS_BLOCK = 'cms-block';
     public const IMPORT_TYPE_CMS_BLOCK_STORE = 'cms-block-store';
+    public const IMPORT_TYPE_CMS_BLOCK_CATEGORY_POSITION = 'cms-block-category-position';
     public const IMPORT_TYPE_DISCOUNT = 'discount';
     public const IMPORT_TYPE_DISCOUNT_STORE = 'discount-store';
     public const IMPORT_TYPE_DISCOUNT_AMOUNT = 'discount-amount';
