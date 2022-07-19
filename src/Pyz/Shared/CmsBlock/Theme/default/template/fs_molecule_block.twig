@@ -1,0 +1,15 @@
+{% define data = {
+    fsBlockData: fsBlockData()
+} %}
+
+{% block content %}
+    {% include molecule( data.fsBlockData.moleculename, 'FirstSpiritReferenceComponents') with{
+        data: {
+            fsBlockData: data.fsBlockData
+        },
+        attributes: {
+            'data-attributes': data.fsBlockData.attributes | default('') | json_encode
+        }
+    }only %}
+
+{% endblock %}

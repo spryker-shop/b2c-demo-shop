@@ -1,0 +1,23 @@
+{% extends template('widget') %}
+
+{% define data = {
+    navigation: navigation,
+} %}
+
+{% block body %}
+    {% if isFsPreview() and data.navigation.nodes is not empty %}
+        <div {% if data.navigation.previewId is not empty %} data-preview-id="{{ data.navigation.previewId }}" {% endif %} data-navigation-key="{{ data.navigation.key }}" data-navigation-widget-template="{{ data.navigation.templateName }}">
+    {% endif %}
+    {% include molecule('navigation-header') with {
+        class: 'grid grid--middle grid--center',
+        data: {
+            nodes: data.navigation.nodes,
+            menuInline: false,
+            menuDropdown: true,
+            navigation: data.navigation,
+        },
+    } only %}
+    {% if isFsPreview() and data.navigation.nodes is not empty %}
+        </div>
+    {% endif %}
+{% endblock %}
