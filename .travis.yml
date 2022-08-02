@@ -458,7 +458,6 @@ cache:
     - $HOME/.rvm/gems # Mailcatcher is a ruby gem, takes 5 minutes to install.
     - $HOME/.nvm/.cache
     - /tmp/pear/cache/
-    - $HOME/.yarn/cache
     - ./node_modules
     - $HOME/chromium-ecosystem
 
@@ -477,7 +476,8 @@ before_install:
   - rm -rf $HOME/chromium-ecosystem/*.zip
   - export CHROMEDRIVER_REVISION=814168
   - export COMPOSER_IGNORE_CHROMEDRIVER=1
-  - nvm use 12
+  - nvm install 16 > /dev/null
+  - nvm use 16
 
 install:
   - chmod -R a+x config/Shared/ci/travis/
@@ -514,7 +514,6 @@ before_script:
   - if [[ $VALIDATION == 1 ]] ; then vendor/bin/console setup:search ; fi
   - if [[ $VALIDATION == 1 ]] ; then vendor/bin/console rest-api:generate:documentation ; fi
   - if [[ $VALIDATION == 1 ]] ; then vendor/bin/console frontend:project:install-dependencies ; fi
-  - if [[ $VALIDATION == 1 ]] ; then vendor/bin/console frontend:yves:install-dependencies ; fi
   - composer dump-autoload -o -a
 
 script:
