@@ -30,7 +30,7 @@ class CmsBlockGuiDependencyProvider extends CmsBlockGuiCmsBlockGuiDependencyProv
     }
 
     /**
-     * @return array<string> $plugin
+     * @return array<string>
      */
     protected function getCmsBlockViewPlugins()
     {
