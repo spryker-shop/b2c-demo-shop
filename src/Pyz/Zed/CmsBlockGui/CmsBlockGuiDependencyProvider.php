@@ -35,12 +35,10 @@ class CmsBlockGuiDependencyProvider extends CmsBlockGuiCmsBlockGuiDependencyProv
      */
     protected function getCmsBlockViewPlugins()
     {
-        $plugins = array_merge(parent::getCmsBlockViewPlugins(), [
+        return array_merge(parent::getCmsBlockViewPlugins(), [
             new CmsBlockCategoryListViewPlugin(),
             new CmsBlockProductAbstractListViewPlugin(),
         ]);
-
-        return $plugins;
     }
 
     /**
