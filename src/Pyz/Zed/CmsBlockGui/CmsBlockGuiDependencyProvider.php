@@ -10,7 +10,6 @@ namespace Pyz\Zed\CmsBlockGui;
 use Spryker\Zed\CmsBlockCategoryConnector\Communication\Plugin\CmsBlockCategoryFormPlugin;
 use Spryker\Zed\CmsBlockCategoryConnector\Communication\Plugin\CmsBlockCategoryListViewPlugin;
 use Spryker\Zed\CmsBlockGui\CmsBlockGuiDependencyProvider as CmsBlockGuiCmsBlockGuiDependencyProvider;
-use Spryker\Zed\CmsBlockProductConnector\Communication\Plugin\CmsBlockProductAbstractListViewPlugin;
 use Spryker\Zed\ContentGui\Communication\Plugin\CmsBlockGui\HtmlToTwigExpressionsCmsBlockGlossaryBeforeSavePlugin;
 use Spryker\Zed\ContentGui\Communication\Plugin\CmsBlockGui\TwigExpressionsToHtmlCmsBlockGlossaryAfterFindPlugin;
 use Spryker\Zed\Store\Communication\Plugin\Form\StoreRelationToggleFormTypePlugin;
@@ -37,7 +36,6 @@ class CmsBlockGuiDependencyProvider extends CmsBlockGuiCmsBlockGuiDependencyProv
     {
         return array_merge(parent::getCmsBlockViewPlugins(), [
             new CmsBlockCategoryListViewPlugin(),
-            new CmsBlockProductAbstractListViewPlugin(),
         ]);
     }
 
