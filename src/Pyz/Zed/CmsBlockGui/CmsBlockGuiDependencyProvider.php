@@ -17,7 +17,7 @@ use Spryker\Zed\Store\Communication\Plugin\Form\StoreRelationToggleFormTypePlugi
 class CmsBlockGuiDependencyProvider extends CmsBlockGuiCmsBlockGuiDependencyProvider
 {
     /**
-     * @return array<string> $plugins
+     * @return array<string>
      */
     protected function getCmsBlockFormPlugins()
     {
