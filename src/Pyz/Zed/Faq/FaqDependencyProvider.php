@@ -3,12 +3,14 @@
 namespace Pyz\Zed\Faq;
 
 use Orm\Zed\Planet\Persistence\PyzFaqQuery;
+use Spryker\Zed\CmsGui\Dependency\Facade\CmsGuiToLocaleBridge;
 use Spryker\Zed\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Zed\Kernel\Container;
 
 class FaqDependencyProvider extends AbstractBundleDependencyProvider {
 
     public const QUERY_FAQ = 'QUERY_FAQ';
+    public const FACADE_LOCALE = 'FACADE_LOCALE';
 
     /**
      * @param \Spryker\Zed\Kernel\Container $container
@@ -40,6 +42,11 @@ class FaqDependencyProvider extends AbstractBundleDependencyProvider {
                 fn() => PyzFaqQuery::create()
             )
         );
+
+        $container->set(static::FACADE_LOCALE, function (Container $container) {
+            return $container->getLocator()->locale()->facade();
+        });
+
 
         return $container;
     }

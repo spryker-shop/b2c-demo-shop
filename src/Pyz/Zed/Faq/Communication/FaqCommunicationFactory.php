@@ -17,6 +17,7 @@ use Pyz\Zed\Planet\Communication\Table\MoonTable;
 use Pyz\Zed\Planet\Communication\Table\PlanetTable;
 use Pyz\Zed\Planet\PlanetDependencyProvider;
 use Spryker\Zed\Kernel\Communication\AbstractCommunicationFactory;
+use Spryker\Zed\Locale\Business\LocaleFacade;
 use Symfony\Component\Form\FormInterface;
 
 class FaqCommunicationFactory extends AbstractCommunicationFactory {
@@ -54,5 +55,10 @@ class FaqCommunicationFactory extends AbstractCommunicationFactory {
             $trans,
             $options
         );
+    }
+
+    public function getLocaleFacade(): LocaleFacade {
+
+        return $this->getProvidedDependency(FaqDependencyProvider::FACADE_LOCALE);
     }
 }
