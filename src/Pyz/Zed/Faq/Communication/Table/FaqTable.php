@@ -73,7 +73,7 @@ class FaqTable extends AbstractTable {
         $faqTableRows = [];
 
         foreach ($faqDataItems as $faqDataItem) {
-            $planetTableRows[] = [
+            $faqTableRows[] = [
                 PyzFaqTableMap::COL_ID_FAQ =>
                     $faqDataItem[PyzFaqTableMap::COL_ID_FAQ],
                 PyzFaqTableMap::COL_QUESTION =>
@@ -106,7 +106,7 @@ class FaqTable extends AbstractTable {
     protected function createEditButton(int $id): string {
         return $this->generateEditButton(
             Url::generate(
-                '/faq/faq-edit', [
+                '/faq/edit', [
                 'id-faq' => $id,
             ]),
             'Edit'
@@ -121,7 +121,7 @@ class FaqTable extends AbstractTable {
     protected function createDeleteButton(int $id): string {
         return $this->generateRemoveButton(
             Url::generate(
-                '/faq/faq-delete', [
+                '/faq/delete', [
                 'id-faq' => $id,
             ]),
             'Delete'

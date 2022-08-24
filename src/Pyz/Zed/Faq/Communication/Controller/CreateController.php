@@ -22,7 +22,7 @@ class CreateController extends AbstractController {
 
             $data = ($faqForm->getData());
 
-            //$transfer = $this->getFacade()->createPlanetEntity($data);
+            $this->getFacade()->createFaqEntity($data);
 
             $this->addSuccessMessage('Faq was created successfully');
             return $this->redirectResponse('/faq/list');

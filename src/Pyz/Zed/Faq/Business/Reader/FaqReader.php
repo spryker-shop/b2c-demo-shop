@@ -2,6 +2,7 @@
 
 namespace Pyz\Zed\Faq\Business\Reader;
 
+use Generated\Shared\Transfer\FaqTransfer;
 use Pyz\Zed\Faq\Persistence\FaqRepositoryInterface;
 
 class FaqReader implements FaqReaderInterface {
@@ -10,5 +11,10 @@ class FaqReader implements FaqReaderInterface {
 
     public function __construct(FaqRepositoryInterface $repo) {
         $this->repo = $repo;
+    }
+
+    public function findFaqEntityById(int $id): ?FaqTransfer {
+
+        return $this->repo->findFaqEntityById($id);
     }
 }

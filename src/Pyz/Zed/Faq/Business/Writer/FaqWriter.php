@@ -2,6 +2,7 @@
 
 namespace Pyz\Zed\Faq\Business\Writer;
 
+use Generated\Shared\Transfer\FaqTransfer;
 use Pyz\Zed\Faq\Persistence\FaqEntityManagerInterface;
 
 class FaqWriter implements FaqWriterInterface {
@@ -10,5 +11,11 @@ class FaqWriter implements FaqWriterInterface {
 
     public function __construct(FaqEntityManagerInterface $ent) {
         $this->ent = $ent;
+    }
+
+    public function createFaqEntity(FaqTransfer $faqTransfer): FaqTransfer {
+
+        return $this->ent
+            ->createFaqEntity($faqTransfer);
     }
 }

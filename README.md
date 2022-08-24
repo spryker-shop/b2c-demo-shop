@@ -1,5 +1,9 @@
 # Spryker B2C Self Assessment
 
+## Additional packages
+
+composer require friendsofsymfony/ckeditor-bundle
+
 ## Requirements
 
 US 1

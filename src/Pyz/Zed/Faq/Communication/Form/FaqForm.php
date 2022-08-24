@@ -2,10 +2,9 @@
 
 namespace Pyz\Zed\Faq\Communication\Form;
 
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Generated\Shared\Transfer\FaqTransfer;
-use Generated\Shared\Transfer\PlanetTransfer;
 use PHPStan\Type\BooleanType;
-use Pyz\Zed\Planet\Communication\Form\PlanetForm;
 use Spryker\Zed\Kernel\Communication\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -58,7 +57,7 @@ class FaqForm extends AbstractType {
 
     private function addQuestionField(FormBuilderInterface $builder): FaqForm
     {
-        $builder->add(static::FIELD_QUESTION, TextareaType::class, [
+        $builder->add(static::FIELD_QUESTION, TextType::class, [
             'constraints' => [
                 new NotBlank(),
             ]
@@ -73,7 +72,7 @@ class FaqForm extends AbstractType {
      */
     private function addAnswerField(FormBuilderInterface $builder): FaqForm
     {
-        $builder->add(static::FIELD_ANSWER, TextType::class, [
+        $builder->add(static::FIELD_ANSWER, TextareaType::class, [
             'constraints' => [
                 new NotBlank(),
             ]
@@ -90,9 +89,7 @@ class FaqForm extends AbstractType {
     {
         $builder->add(static::FIELD_ENABLED, CheckboxType::class, [
             'label' => 'Is enabled?',
-            'constraints' => [
-                new NotBlank()
-            ]
+            'required' => false,
         ]);
         return $this;
     }
