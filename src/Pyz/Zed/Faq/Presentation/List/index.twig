@@ -1,0 +1,23 @@
+{% extends '@Gui/Layout/layout.twig' %}
+
+{% set widget_title = 'Overview of FAQs' | trans %}
+
+{% block head_title widget_title %}
+
+
+{% block action %}
+    {{ createActionButton('/faq/create', 'Create new faq', []) }}
+{% endblock %}
+
+
+{% block section_title widget_title %}
+
+{% block content %}
+    {% embed '@Gui/Partials/widget.twig' with {
+        widget_title: 'List of faqs'
+    } %}
+        {% block widget_content %}
+            {{ faqTable | raw }}
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

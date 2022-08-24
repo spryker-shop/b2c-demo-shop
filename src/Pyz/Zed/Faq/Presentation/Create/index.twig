@@ -1,0 +1,17 @@
+{% extends '@Gui/Layout/layout.twig' %}
+{% set widget_title = 'Create a new faq entry' %}
+{% block head_title widget_title %}
+
+{% block action %}
+    {{ viewActionButton('/faq/list', 'Return', []) }}
+{% endblock %}
+
+
+{% block section_title widget_title %}
+{% block content %}
+    {% embed '@Gui/Partials/widget.twig' %}
+        {% block widget_content %}
+            {{ form(faqForm) }}
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
