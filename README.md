@@ -1,5 +1,9 @@
 # Spryker B2C Self Assessment
 
+Jakbyś był zainteresowany zrobieniem rest api by dostawać planety po id (...com/planets/1) to id możesz chwycić przez
+
+$restRequest->getResource()->getId()
+
 ## Additional packages
 
 composer require friendsofsymfony/ckeditor-bundle
