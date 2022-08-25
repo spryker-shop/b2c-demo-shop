@@ -7,6 +7,7 @@
 
 namespace Pyz\Glue\Router;
 
+use Pyz\Glue\FaqsRestApi\Plugin\FaqsResourceRoutePlugin;
 use Spryker\Glue\GlueApplication\Plugin\Rest\GlueRouterPlugin;
 use Spryker\Glue\Router\RouterDependencyProvider as SprykerRouterDependencyProvider;
 
@@ -19,6 +20,7 @@ class RouterDependencyProvider extends SprykerRouterDependencyProvider
     {
         return [
             new GlueRouterPlugin(),
+            //new FaqsResourceRoutePlugin(),
         ];
     }
 }
