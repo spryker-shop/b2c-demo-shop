@@ -45,6 +45,7 @@ use Pyz\Zed\DataImport\Business\Model\Discount\DiscountWriterStep;
 use Pyz\Zed\DataImport\Business\Model\DiscountAmount\DiscountAmountWriterStep;
 use Pyz\Zed\DataImport\Business\Model\DiscountStore\DiscountStoreWriterStep;
 use Pyz\Zed\DataImport\Business\Model\DiscountVoucher\DiscountVoucherWriterStep;
+use Pyz\Zed\DataImport\Business\Model\Faq\FaqWriterStep;
 use Pyz\Zed\DataImport\Business\Model\GiftCard\GiftCardAbstractConfigurationWriterStep;
 use Pyz\Zed\DataImport\Business\Model\GiftCard\GiftCardConcreteConfigurationWriterStep;
 use Pyz\Zed\DataImport\Business\Model\Glossary\GlossaryWriterStep;
@@ -214,6 +215,8 @@ class DataImportBusinessFactory extends SprykerDataImportBusinessFactory
                 return $this->createNavigationImporter($dataImportConfigurationActionTransfer);
             case DataImportConfig::IMPORT_TYPE_NAVIGATION_NODE:
                 return $this->createNavigationNodeImporter($dataImportConfigurationActionTransfer);
+            case DataImportConfig::IMPORT_TYPE_FAQ:
+                return $this->createFaqImporter($dataImportConfigurationActionTransfer);
             default:
                 return null;
         }
@@ -1815,4 +1818,26 @@ class DataImportBusinessFactory extends SprykerDataImportBusinessFactory
     {
         return new CombinedProductGroupMandatoryColumnCondition();
     }
+
+    /**
+     * @param \Generated\Shared\Transfer\DataImportConfigurationActionTransfer $dataImportConfigurationActionTransfer
+     *
+     * @return \Spryker\Zed\DataImport\Business\Model\DataImporterInterface|\Spryker\Zed\DataImport\Business\Model\DataSet\DataSetStepBrokerAwareInterface
+     */
+    protected function createFaqImporter(DataImportConfigurationActionTransfer $dataImportConfigurationActionTransfer)
+    {
+        $dataImporter = $this->getCsvDataImporterFromConfig(
+            $this->getConfig()->buildImporterConfigurationByDataImportConfigAction($dataImportConfigurationActionTransfer)
+        );
+
+        $dataSetStepBroker = $this->createTransactionAwareDataSetStepBroker();
+        $dataSetStepBroker
+            ->addStep(new FaqWriterStep());
+
+        $dataImporter->addDataSetStepBroker($dataSetStepBroker);
+
+        return $dataImporter;
+    }
+
+
 }
