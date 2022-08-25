@@ -32,4 +32,21 @@ class FaqsRestApiClient
             ->getFaqEntity($trans);
     }
 
+    public function createFaqEntity(FaqTransfer $trans): bool {
+        return $this->getFactory()
+            ->createFaqZedStub()
+            ->createFaqEntity($trans);
+    }
+
+    public function deleteFaqEntity(FaqTransfer $trans): bool {
+        return $this->getFactory()
+            ->createFaqZedStub()
+            ->deleteFaqEntity($trans);
+    }
+
+    public function updateFaqEntity(FaqTransfer $trans): bool {
+        return $this->getFactory()
+            ->createFaqZedStub()
+            ->updateFaqEntity($trans);
+    }
 }

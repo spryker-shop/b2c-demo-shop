@@ -72,8 +72,6 @@ class FaqsReader implements FaqsReaderInterface
                 (new FaqTransfer())->setIdFaq($id)
             );
 
-
-
         if($res === null) {
             $restResponse->addError((new RestErrorMessageTransfer())
                 ->setCode('Entity with given id not found')
@@ -81,7 +79,6 @@ class FaqsReader implements FaqsReaderInterface
 
             return $restResponse;
         }
-
 
         $restResource = $this->restResourceBuilder->createRestResource(
             FaqsRestApiConfig::RESOURCE_FAQS,

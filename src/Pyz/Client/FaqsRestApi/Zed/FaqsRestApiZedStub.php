@@ -55,4 +55,32 @@ class FaqsRestApiZedStub implements FaqsRestApiZedStubInterface {
 
         return $trans;
     }
+
+    protected function boolRequest(FaqTransfer $trans, string $endpoint): bool {
+        try {
+            /** @var null|\Generated\Shared\Transfer\FaqTransfer $trans */
+
+            $trans = $this->zedRequestClient->call(
+                $endpoint,
+                $trans
+            );
+        }
+        catch(\Exception $e) { // not found
+            return false;
+        }
+
+        return true;
+    }
+
+    public function createFaqEntity(FaqTransfer $trans): bool {
+        return $this->boolRequest($trans, '/faq/gateway/create-faq-entity');
+    }
+
+    public function deleteFaqEntity(FaqTransfer $trans): bool {
+        return $this->boolRequest($trans, '/faq/gateway/delete-faq-entity');
+    }
+
+    public function updateFaqEntity(FaqTransfer $trans): bool {
+        return $this->boolRequest($trans, '/faq/gateway/update-faq-entity');
+    }
 }

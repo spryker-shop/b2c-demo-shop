@@ -26,5 +26,23 @@ class GatewayController extends AbstractGatewayController {
 
     public function updateFaqEntityAction(FaqTransfer  $trans): FaqTransfer {
 
+        return $this->getFacade()
+            ->updateFaqEntity($trans);
+    }
+
+
+    public function deleteFaqEntityAction(FaqTransfer  $trans): FaqTransfer {
+
+        $this->getFacade()
+            ->deleteFaqEntity($trans);
+
+        return $trans;
+    }
+
+
+    public function createFaqEntityAction(FaqTransfer  $trans): FaqTransfer {
+
+        return $this->getFacade()
+            ->createFaqEntity($trans);
     }
 }
