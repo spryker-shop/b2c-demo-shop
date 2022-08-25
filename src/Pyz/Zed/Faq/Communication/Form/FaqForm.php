@@ -3,9 +3,12 @@
 namespace Pyz\Zed\Faq\Communication\Form;
 
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
+use Generated\Shared\Transfer\FaqLocalizedTransfer;
 use Generated\Shared\Transfer\FaqTransfer;
 use PHPStan\Type\BooleanType;
+use Pyz\Zed\Faq\FaqDependencyProvider;
 use Spryker\Zed\Kernel\Communication\Form\AbstractType;
+use Spryker\Zed\Locale\Business\LocaleFacade;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -21,6 +24,9 @@ class FaqForm extends AbstractType {
     private const FIELD_QUESTION = 'question';
     private const FIELD_ANSWER = 'answer';
     private const FIELD_ENABLED = 'enabled';
+
+    private const LIST_FAQ_LOCALIZED = 'faq_localized';
+
     private const BUTTON_SUBMIT = 'Submit';
 
     public function getBlockPrefix(): string {
@@ -46,6 +52,7 @@ class FaqForm extends AbstractType {
             ->addQuestionField($builder)
             ->addAnswerField($builder)
             ->addEnabledField($builder)
+            ->addStoreRelations($builder)
             ->addSubmitButton($builder);
     }
 
@@ -91,6 +98,19 @@ class FaqForm extends AbstractType {
             'label' => 'Is enabled?',
             'required' => false,
         ]);
+        return $this;
+    }
+
+    private function addStoreRelations(FormBuilderInterface $builder): FaqForm {
+
+        // TODO injectable
+        $locales = (new LocaleFacade())->getAvailableLocales();
+
+        foreach ($locales as $locale) {
+            $builder->add('translations', TranslationFormType::class,
+             []);
+        }
+
         return $this;
     }
 

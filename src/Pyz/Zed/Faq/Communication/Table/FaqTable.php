@@ -81,7 +81,8 @@ class FaqTable extends AbstractTable {
                 PyzFaqTableMap::COL_ANSWER =>
                     $faqDataItem[PyzFaqTableMap::COL_ANSWER],
                 PyzFaqTableMap::COL_ENABLED =>
-                    $faqDataItem[PyzFaqTableMap::COL_ENABLED],
+                    $this->generateStatusLabel(
+                        $faqDataItem[PyzFaqTableMap::COL_ENABLED]),
                 static::COL_ACTIONS =>
                     $this->generateActions($faqDataItem[PyzFaqTableMap::COL_ID_FAQ]),
             ];
@@ -126,5 +127,20 @@ class FaqTable extends AbstractTable {
             ]),
             'Delete'
         );
+    }
+
+    protected function generateLabels(array $values): string {
+        $res = '';
+
+        foreach ($values as $value) {
+            $res .= '<span class="label label-info">'.strval($value).'</span>';
+        }
+
+        return $res;
+    }
+
+    protected function generateStatusLabel(bool $isActive): string {
+
+        return $this->generateLabels([ $isActive ? 'Enabled' : 'Disabled' ]);
     }
 }

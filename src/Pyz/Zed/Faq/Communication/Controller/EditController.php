@@ -38,6 +38,8 @@ class EditController extends AbstractController {
 
         if($form->isSubmitted() && $form->isValid()) {
 
+            //var_dump($form->getData()); die();
+
             $this->getFacade()
                 ->updateFaqEntity(
                     $form->getData()
