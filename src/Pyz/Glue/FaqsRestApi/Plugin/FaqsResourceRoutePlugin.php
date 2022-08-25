@@ -26,8 +26,10 @@ class FaqsResourceRoutePlugin
             return $resourceRouteCollection;
         }
 
-        $resourceRouteCollection
-            ->addGet('get', false);
+        $resourceRouteCollection->addGet('get', false);
+        $resourceRouteCollection->addPost('post', false);
+        $resourceRouteCollection->addPatch('patch', false);
+        $resourceRouteCollection->addDelete('delete', false);
 
         return $resourceRouteCollection;
     }

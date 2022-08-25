@@ -3,6 +3,7 @@
 namespace Pyz\Client\FaqsRestApi;
 
 use Generated\Shared\Transfer\FaqCollectionTransfer;
+use Generated\Shared\Transfer\FaqTransfer;
 use Spryker\Client\Kernel\AbstractClient;
 
 /**
@@ -22,6 +23,13 @@ class FaqsRestApiClient
         return $this->getFactory()
             ->createFaqZedStub()
             ->getFaqCollection($faqCollectionTransfer);
+    }
+
+    public function getFaqEntity(FaqTransfer $trans): ?FaqTransfer {
+
+        return $this->getFactory()
+            ->createFaqZedStub()
+            ->getFaqEntity($trans);
     }
 
 }

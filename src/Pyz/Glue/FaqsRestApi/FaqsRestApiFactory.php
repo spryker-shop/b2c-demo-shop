@@ -3,8 +3,8 @@
 namespace Pyz\Glue\FaqsRestApi;
 
 
-use Pyz\Glue\FaqsRestApi\Processor\Planets\FaqsReader;
-use Pyz\Glue\FaqsRestApi\Processor\Planets\FaqsReaderInterface;
+use Pyz\Glue\FaqsRestApi\Processor\Faqs\Reader\FaqsReader;
+use Pyz\Glue\FaqsRestApi\Processor\Faqs\Reader\FaqsReaderInterface;
 use Pyz\Glue\FaqsRestApi\Processor\Mapper\FaqsResourceMapper;
 use Spryker\Glue\Kernel\AbstractFactory;
 

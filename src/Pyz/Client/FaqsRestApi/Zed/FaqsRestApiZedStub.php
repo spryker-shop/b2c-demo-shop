@@ -3,6 +3,7 @@
 namespace Pyz\Client\FaqsRestApi\Zed;
 
 use Generated\Shared\Transfer\FaqCollectionTransfer;
+use Generated\Shared\Transfer\FaqTransfer;
 use Spryker\Client\ZedRequest\ZedRequestClientInterface;
 
 class FaqsRestApiZedStub implements FaqsRestApiZedStubInterface {
@@ -36,5 +37,22 @@ class FaqsRestApiZedStub implements FaqsRestApiZedStubInterface {
         );
 
         return $faqCollectionTransfer;
+    }
+
+    public function getFaqEntity(FaqTransfer $trans): ?FaqTransfer {
+
+        try {
+            /** @var null|\Generated\Shared\Transfer\FaqTransfer $trans */
+
+            $trans = $this->zedRequestClient->call(
+                '/faq/gateway/get-faq-entity',
+                $trans
+            );
+        }
+        catch(\Exception $e) { // not found
+            return null;
+        }
+
+        return $trans;
     }
 }
