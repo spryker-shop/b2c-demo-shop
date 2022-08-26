@@ -10,4 +10,5 @@ interface FaqRepositoryInterface {
     public function findFaqEntityById(int $id): ?FaqTransfer;
 
     public function getFaqCollection(FaqCollectionTransfer $trans): FaqCollectionTransfer;
+    public function getFaqCollectionPaginated(int $limit, int $page): FaqCollectionTransfer;
 }

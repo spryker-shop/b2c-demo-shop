@@ -4,6 +4,7 @@ namespace Pyz\Zed\Faq\Business\Reader;
 
 use Generated\Shared\Transfer\FaqCollectionTransfer;
 use Generated\Shared\Transfer\FaqTransfer;
+use Generated\Shared\Transfer\PaginationTransfer;
 use Pyz\Zed\Faq\Persistence\FaqRepositoryInterface;
 
 class FaqReader implements FaqReaderInterface {
@@ -22,5 +23,13 @@ class FaqReader implements FaqReaderInterface {
     public function getFaqCollection(FaqCollectionTransfer $trans): FaqCollectionTransfer {
 
         return $this->repo->getFaqCollection($trans);
+    }
+
+    public function getFaqCollectionPaginated(PaginationTransfer $trans): FaqCollectionTransfer {
+
+        return $this->repo->getFaqCollectionPaginated(
+            $trans->getLimit(),
+            $trans->getPage(),
+        );
     }
 }

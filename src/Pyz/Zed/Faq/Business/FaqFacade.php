@@ -4,6 +4,7 @@ namespace Pyz\Zed\Faq\Business;
 
 use Generated\Shared\Transfer\FaqCollectionTransfer;
 use Generated\Shared\Transfer\FaqTransfer;
+use Generated\Shared\Transfer\PaginationTransfer;
 use Spryker\Zed\Kernel\Business\AbstractFacade;
 
 /**
@@ -45,6 +46,14 @@ class FaqFacade extends AbstractFacade implements FaqFacadeInterface {
             ->createFaqReader()
             ->getFaqCollection($trans);
     }
+
+    public function getFaqCollectionPaginated(PaginationTransfer $trans): FaqCollectionTransfer {
+
+        return $this->getFactory()
+            ->createFaqReader()
+            ->getFaqCollectionPaginated($trans);
+    }
+
 
     public function getFaqEntity(FaqTransfer $trans): ?FaqTransfer {
 

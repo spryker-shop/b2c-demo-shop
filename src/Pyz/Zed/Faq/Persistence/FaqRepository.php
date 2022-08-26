@@ -32,9 +32,30 @@ class FaqRepository extends AbstractRepository implements FaqRepositoryInterface
 
         $data = $this->getFactory()
             ->createFaqQuery()
+            ->filterByEnabled(true)
             ->find();
 
         foreach ($data->getData() as $faq) {
+            $faq = (new FaqTransfer())
+                ->fromArray($faq->toArray());
+
+            $trans->addFaq($faq);
+        }
+
+        return $trans;
+    }
+
+    public function getFaqCollectionPaginated(int $limit, int $page): FaqCollectionTransfer {
+        $data = $this->getFactory()
+            ->createFaqQuery()
+            ->filterByEnabled(true)
+            ->paginate($page, $limit)
+            ->getResults();
+
+
+        $trans = new FaqCollectionTransfer();
+
+        foreach ($data as $faq) {
             $faq = (new FaqTransfer())
                 ->fromArray($faq->toArray());
 

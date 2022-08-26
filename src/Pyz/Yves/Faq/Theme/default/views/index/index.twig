@@ -1,7 +1,11 @@
 {% extends template('page-layout-main') %}
 
 {% define data = {
-    questions: _view.questions
+    questions: _view.questions,
+    itemsPerPage: _view.itemsPerPage,
+    page: _view.page,
+    prevPage: _view.prevPage,
+    nextPage: _view.nextPage
 } %}
 
 {% block content %}
@@ -15,5 +19,13 @@
             </div>
             <br><br>
         {% endfor %}
+
+        Current page: {{ data.page  }}
+        <br>
+        <a href="/faq?items-per-page={{ data.itemsPerPage }}&page={{ data.prevPage }}">Previous Page</a>
+        <a href="/faq?items-per-page={{ data.itemsPerPage }}&page={{ data.nextPage }}">Next Page</a>
+
+        <br><br>
+
     </div>
 {% endblock %}
