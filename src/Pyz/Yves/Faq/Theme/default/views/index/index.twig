@@ -1,0 +1,19 @@
+{% extends template('page-layout-main') %}
+
+{% define data = {
+    questions: _view.questions
+} %}
+
+{% block content %}
+    <div style="margin-left:auto; margin-right: auto; width:70%">
+        <h2>Frequently asked questions</h2>
+        <br><br>
+        {% for question in data.questions %}
+            <div>
+                {{ question.question }} <br>
+                {{ question.answer }} <br>
+            </div>
+            <br><br>
+        {% endfor %}
+    </div>
+{% endblock %}
