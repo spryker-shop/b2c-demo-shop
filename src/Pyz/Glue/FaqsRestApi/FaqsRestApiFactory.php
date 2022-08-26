@@ -16,7 +16,7 @@ use Spryker\Glue\Kernel\AbstractFactory;
 
 
 /**
- * @method \Pyz\Client\FaqsRestApi\FaqsRestApiClientInterface getClient()
+ * @method \Pyz\Client\FaqsRestApi\FaqClientInterface getClient()
  */
 class FaqsRestApiFactory extends AbstractFactory{
 

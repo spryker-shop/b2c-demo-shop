@@ -1,11 +1,11 @@
 <?php
 
-namespace Pyz\Client\FaqsRestApi\Zed;
+namespace Pyz\Client\Faq\Zed;
 
 use Generated\Shared\Transfer\FaqCollectionTransfer;
 use Generated\Shared\Transfer\FaqTransfer;
 
-interface FaqsRestApiZedStubInterface {
+interface FaqZedStubInterface {
     public function getFaqCollection(FaqCollectionTransfer $faqCollectionTransfer): FaqCollectionTransfer;
 
     public function getFaqEntity(FaqTransfer $trans): ?FaqTransfer;
