@@ -6,7 +6,7 @@ use Generated\Shared\Transfer\FaqTransfer;
 use Generated\Shared\Transfer\ReservationRequestTransfer;
 use Generated\Shared\Transfer\ReservationResponseTransfer;
 use Generated\Shared\Transfer\RestErrorMessageTransfer;
-use Pyz\Client\FaqsRestApi\FaqClientInterface;
+use Pyz\Client\FaqsRestApi\FaqsRestApiClientInterface;
 use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceBuilderInterface;
 use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface;
 use Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface;
@@ -14,11 +14,11 @@ use Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface;
 class FaqsDeleter implements FaqsDeleterInterface {
 
 
-    protected FaqClientInterface $faqsRestApiClient;
+    protected FaqsRestApiClientInterface $faqsRestApiClient;
     protected RestResourceBuilderInterface $restResourceBuilder;
 
     public function __construct(
-        FaqClientInterface $faqsRestApiClient,
+        FaqsRestApiClientInterface $faqsRestApiClient,
         RestResourceBuilderInterface   $restResourceBuilder
     ){
 

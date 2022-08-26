@@ -1,12 +1,12 @@
 <?php
 
-namespace Pyz\Client\Faq;
+namespace Pyz\Client\FaqsRestApi;
 
 
 use Spryker\Client\Kernel\AbstractDependencyProvider;
 use Spryker\Client\Kernel\Container;
 
-class FaqDependencyProvider extends AbstractDependencyProvider {
+class FaqsRestApiDependencyProvider extends AbstractDependencyProvider {
 
     public const CLIENT_ZED_REQUEST = 'CLIENT_ZED_REQUEST';
 

@@ -5,7 +5,7 @@ namespace Pyz\Glue\FaqsRestApi\Processor\Faqs\Reader;
 use Generated\Shared\Transfer\FaqCollectionTransfer;
 use Generated\Shared\Transfer\FaqTransfer;
 use Generated\Shared\Transfer\RestErrorMessageTransfer;
-use Pyz\Client\FaqsRestApi\FaqClientInterface;
+use Pyz\Client\FaqsRestApi\FaqsRestApiClientInterface;
 use Pyz\Glue\FaqsRestApi\FaqsRestApiConfig;
 use Pyz\Glue\FaqsRestApi\Processor\Mapper\FaqsResourceMapper;
 use Pyz\Glue\FaqsRestApi\Processor\Mapper\FaqsResourceMapperInterface;
@@ -15,8 +15,8 @@ use Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface;
 
 class FaqsReader implements FaqsReaderInterface
 {
-    /** @var \Pyz\Client\FaqsRestApi\FaqClientInterface */
-    private FaqClientInterface $faqsRestApiClient;
+    /** @var \Pyz\Client\FaqsRestApi\FaqsRestApiClientInterface */
+    private FaqsRestApiClientInterface $faqsRestApiClient;
 
     /** @var \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceBuilderInterface */
     private RestResourceBuilderInterface $restResourceBuilder;
@@ -29,7 +29,7 @@ class FaqsReader implements FaqsReaderInterface
      * @param \Pyz\Glue\FaqsRestApi\Processor\Mapper\FaqsResourceMapperInterface $faqMapper
      */
     public function __construct(
-        FaqClientInterface $faqsRestApiClient,
+        FaqsRestApiClientInterface $faqsRestApiClient,
         RestResourceBuilderInterface   $restResourceBuilder,
         FaqsResourceMapperInterface $faqMapper
     )

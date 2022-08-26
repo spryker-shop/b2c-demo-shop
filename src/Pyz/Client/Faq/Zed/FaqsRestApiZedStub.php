@@ -1,12 +1,12 @@
 <?php
 
-namespace Pyz\Client\Faq\Zed;
+namespace Pyz\Client\FaqsRestApi\Zed;
 
 use Generated\Shared\Transfer\FaqCollectionTransfer;
 use Generated\Shared\Transfer\FaqTransfer;
 use Spryker\Client\ZedRequest\ZedRequestClientInterface;
 
-class FaqZedStub implements FaqZedStubInterface {
+class FaqsRestApiZedStub implements FaqsRestApiZedStubInterface {
 
     /**
      * @var \Spryker\Client\ZedRequest\ZedRequestClientInterface

@@ -4,18 +4,18 @@ namespace Pyz\Glue\FaqsRestApi\Processor\Faqs\Creator;
 
 use Generated\Shared\Transfer\FaqTransfer;
 use Generated\Shared\Transfer\RestErrorMessageTransfer;
-use Pyz\Client\FaqsRestApi\FaqClientInterface;
+use Pyz\Client\FaqsRestApi\FaqsRestApiClientInterface;
 use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceBuilderInterface;
 use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface;
 use Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface;
 
 class FaqsCreator implements FaqsCreatorInterface {
 
-    protected FaqClientInterface $faqsRestApiClient;
+    protected FaqsRestApiClientInterface $faqsRestApiClient;
     protected RestResourceBuilderInterface $restResourceBuilder;
 
     public function __construct(
-        FaqClientInterface $faqsRestApiClient,
+        FaqsRestApiClientInterface $faqsRestApiClient,
         RestResourceBuilderInterface   $restResourceBuilder
     ){
 

@@ -1,28 +1,28 @@
 <?php
 
-namespace Pyz\Client\Faq;
+namespace Pyz\Client\FaqsRestApi;
 
 use Generated\Shared\Transfer\FaqCollectionTransfer;
 use Generated\Shared\Transfer\FaqTransfer;
 use Spryker\Client\Kernel\AbstractClient;
 
 /**
- * @method \Pyz\Client\FaqsRestApi\FaqFactory getFactory()
+ * @method \Pyz\Client\FaqsRestApi\FaqsRestApiFactory getFactory()
  */
-class FaqClient
+class FaqsRestApiClient
     extends AbstractClient
-    implements FaqClientInterface {
+    implements FaqsRestApiClientInterface {
 
 
     /**
      * @api
      * @return \Generated\Shared\Transfer\FaqCollectionTransfer
      */
-    public function getFaqCollection(): FaqCollectionTransfer
+    public function getFaqCollection(FaqCollectionTransfer $faqCollectionTransfer): FaqCollectionTransfer
     {
         return $this->getFactory()
             ->createFaqZedStub()
-            ->getFaqCollection(new FaqCollectionTransfer());
+            ->getFaqCollection($faqCollectionTransfer);
     }
 
     public function getFaqEntity(FaqTransfer $trans): ?FaqTransfer {
