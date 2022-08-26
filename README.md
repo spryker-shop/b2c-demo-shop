@@ -14,10 +14,10 @@ US 1
 As a Zed User I want to have dedicated UI to manage FAQs.
 
 Acceptance Criteria:
-Module allows a User to create, remove, update and delete entities (CRUD)
-Module is available via left navigation
-FAQ are stored in database
-FAQ entity can be deactivated
+[Done] Module allows a User to create, remove, update and delete entities (CRUD)
+[Done] Module is available via left navigation
+[Done] FAQ are stored in database
+[Done] FAQ entity can be deactivated
 
 Challenge 1: Answer part is editable via WysiWyg.
 Challenge 2: FAQ is localized
@@ -26,10 +26,10 @@ US 2
 As a machine user I want to connect to the eCommerce to expose FAQ data to external applications.
 
 Acceptance Criteria:
-Module exposes REST API endpoints to fetch list of entities, and entity by identifier
-Module exposes REST API endpoints to create and remove, update, delete entities by identifier (CRUD)
+[Done] Module exposes REST API endpoints to fetch list of entities, and entity by identifier
+[Done] Module exposes REST API endpoints to create and remove, update, delete entities by identifier (CRUD)
 CRUD endpoints are available for logged in users
-Errors are properly handled
+[Done ig] Errors are properly handled
 
 Challenge 1: Each endpoint is available only if enabled in config file, if not 404 is returned.
 Challenge 2: FAQ data are localized when they’re returned.
@@ -38,7 +38,7 @@ US 3
 As a customer I want to easily navigate to FAQ page so that I don’t have to call support in case of problems.
 
 Acceptance Criteria:
-A FAQ page is available via Yves with list of active FAQ entities
+[Work in progress] A FAQ page is available via Yves with list of active FAQ entities
 Errors are properly handled
 
 Challenge: Pagination is provided
@@ -64,7 +64,7 @@ Errors are properly handled
 Challenge: A customer can add only one vote. After revoking a vote, he can vote again.
 
 US 6
-As a system owner I want to be able to batch import FAQ data to pre-populate database.
+[Done] As a system owner I want to be able to batch import FAQ data to pre-populate database.
 
 Acceptance Criteria:
 Import file with dummy data is created
