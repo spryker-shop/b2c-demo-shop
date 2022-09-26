@@ -23,6 +23,7 @@ class UserConfig extends SprykerUserConfig
                 'username' => 'admin@spryker.com',
                 'password' => 'change123',
                 'localeName' => 'en_US',
+                'isAgent' => 1,
             ],
             [
                 'firstName' => 'Admin',
