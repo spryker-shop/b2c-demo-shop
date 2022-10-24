@@ -32,59 +32,59 @@ jobs:
 
   include:
 
-    - php: "7.4"
+    - php: "8.0"
       dist: bionic
       env:
         - MP_TEST=1
 
-    - php: "7.4"
+    - php: "8.0"
       dist: bionic
       env:
         - VALIDATION=1
 
-    - php: "7.4"
+    - php: "8.0"
       dist: bionic
       env:
         - VALIDATION=1
         - PREFER_LOWEST=1
 
-    - php: "7.4"
+    - php: "8.0"
       dist: bionic
       env:
         - TEST_GROUP=acceptance
 
-    - php: "7.4"
+    - php: "8.0"
       dist: focal
       env:
         - TEST_GROUP=acceptance
         - PREFER_MID=1
 
-    - php: "7.4"
+    - php: "8.0"
       dist: bionic
       env:
         - TEST_GROUP=without-acceptance
 
-    - php: "7.4"
+    - php: "8.0"
       dist: focal
       env:
         - TEST_GROUP=without-acceptance
         - PREFER_MID=1
 
-    - php: "7.4"
+    - php: "8.0"
       dist: bionic
       env:
         - TEST_GROUP=acceptance
         - DB_ENGINE=mysql
         - APPLICATION_ENV=ci.mysql
 
-    - php: "7.4"
+    - php: "8.0"
       dist: bionic
       env:
         - TEST_GROUP=without-acceptance
         - DB_ENGINE=mysql
         - APPLICATION_ENV=ci.mysql
 
-    - php: "7.4"
+    - php: "8.0"
       dist: bionic
       env:
         - TEST_GROUP=acceptance
@@ -92,7 +92,7 @@ jobs:
         - DB_ENGINE=mysql
         - PREFER_LOWEST=1
 
-    - php: "7.4"
+    - php: "8.0"
       dist: bionic
       env:
         - TEST_GROUP=without-acceptance
@@ -101,7 +101,7 @@ jobs:
         - PREFER_LOWEST=1
 
     - name: Security check
-      php: "7.4"
+      php: "8.0"
       os: linux
       dist: bionic
       before_script:
@@ -110,7 +110,7 @@ jobs:
         - vendor/bin/console security:check
 
     - name: Upgradability check
-      php: "7.4"
+      php: "8.0"
       os: linux
       dist: bionic
       env:
@@ -119,13 +119,13 @@ jobs:
         - docker pull spryker/php-sdk
         - docker run -ti -v $PWD:/data/project --entrypoint bash spryker/php-sdk:test -c 'cd /data/project && if [[ ! -d reports ]]; then mkdir -p reports; fi && php -d memory_limit=2048M ../bin/console analyze:php:code-compliance --format=yaml || true && ../bin/console analyze:php:code-compliance-report && LINES_COUNT_IN_REPORT_FILE=$(cat reports/analyze\:php\:code-compliance.violations.yaml | wc -l) && [ $LINES_COUNT_IN_REPORT_FILE -eq 4 ] && exit 0 || exit 1'
 
-    - name: Docker / Alpine / PHP 7.4 / PostgreSQL / Functional
+    - name: Docker / Alpine / PHP 8.0 / PostgreSQL / Functional
       os: linux
       dist: bionic
       language: shell
       env:
         - PROGRESS_TYPE=plain
-        - SPRYKER_PLATFORM_IMAGE=spryker/php:7.4-alpine3.12
+        - SPRYKER_PLATFORM_IMAGE=spryker/php:8.0-alpine3.12
         - TRAVIS=1
       addons:
         hosts:
@@ -162,13 +162,13 @@ jobs:
           - *DOCKER_BEFORE_SCRIPT
       after_script: skip
 
-    - name: Docker / Alpine / PHP 7.4 / PostgreSQL / Glue
+    - name: Docker / Alpine / PHP 8.0 / PostgreSQL / Glue
       os: linux
       dist: bionic
       language: shell
       env:
         - PROGRESS_TYPE=plain
-        - SPRYKER_PLATFORM_IMAGE=spryker/php:7.4-alpine3.12
+        - SPRYKER_PLATFORM_IMAGE=spryker/php:8.0-alpine3.12
         - TRAVIS=1
       addons:
         hosts:
@@ -207,13 +207,13 @@ jobs:
           - *DOCKER_BEFORE_SCRIPT
       after_script: skip
 
-    - name: Docker / Alpine / PHP 7.4 / MariaDB / Functional
+    - name: Docker / Alpine / PHP 8.0 / MariaDB / Functional
       os: linux
       dist: bionic
       language: shell
       env:
         - PROGRESS_TYPE=plain
-        - SPRYKER_PLATFORM_IMAGE=spryker/php:7.4-alpine3.12
+        - SPRYKER_PLATFORM_IMAGE=spryker/php:8.0-alpine3.12
         - TRAVIS=1
       addons:
         hosts:
@@ -250,13 +250,13 @@ jobs:
           - *DOCKER_BEFORE_SCRIPT
       after_script: skip
 
-    - name: Docker / Debian / PHP 7.4 / PostgreSQL / Functional
+    - name: Docker / Debian / PHP 8.0 / PostgreSQL / Functional
       os: linux
       dist: bionic
       language: shell
       env:
         - PROGRESS_TYPE=plain
-        - SPRYKER_PLATFORM_IMAGE=spryker/php:7.4-debian
+        - SPRYKER_PLATFORM_IMAGE=spryker/php:8.0-debian
         - TRAVIS=1
       addons:
         hosts:
@@ -293,13 +293,13 @@ jobs:
           - *DOCKER_BEFORE_SCRIPT
       after_script: skip
 
-    - name: Docker / Alpine / PHP 7.4 / MariaDB / Acceptance
+    - name: Docker / Alpine / PHP 8.0 / MariaDB / Acceptance
       os: linux
       dist: bionic
       language: shell
       env:
         - PROGRESS_TYPE=plain
-        - SPRYKER_PLATFORM_IMAGE=spryker/php:7.4
+        - SPRYKER_PLATFORM_IMAGE=spryker/php:8.0
         - TRAVIS=1
       addons:
         hosts:
@@ -337,13 +337,13 @@ jobs:
           - *DOCKER_BEFORE_SCRIPT
       after_script: skip
 
-    - name: Docker / Alpine / PHP 7.4 / PostgreSQL / Acceptance
+    - name: Docker / Alpine / PHP 8.0 / PostgreSQL / Acceptance
       os: linux
       dist: bionic
       language: shell
       env:
         - PROGRESS_TYPE=plain
-        - SPRYKER_PLATFORM_IMAGE=spryker/php:7.4
+        - SPRYKER_PLATFORM_IMAGE=spryker/php:8.0
         - TRAVIS=1
       addons:
         hosts:
@@ -381,13 +381,13 @@ jobs:
           - *DOCKER_BEFORE_SCRIPT
       after_script: skip
 
-    - name: Docker / Alpine / PHP 7.4 / Frontend & Assets
+    - name: Docker / Alpine / PHP 8.0 / Frontend & Assets
       os: linux
       dist: bionic
       language: shell
       env:
         - PROGRESS_TYPE=plain
-        - SPRYKER_PLATFORM_IMAGE=spryker/php:7.4-alpine3.12
+        - SPRYKER_PLATFORM_IMAGE=spryker/php:8.0-alpine3.12
         - TRAVIS=1
       addons:
         hosts:
@@ -501,6 +501,7 @@ before_script:
   - chmod -R 660 config/Zed/dev_only_private.key
   - chmod -R 660 config/Zed/dev_only_public.key
   - if [[ $VALIDATION == 1 ]] ; then npm install speccy@0.11.0 -g ; fi
+  - if [[ $PREFER_LOWEST == 1 ]] ; then npm install ; fi
 
   - if [[ $TEST_GROUP == 'acceptance' || $TEST_GROUP == 'without-acceptance' ]] ; then config/Shared/ci/travis/acceptance_env.sh ; fi
   - if [[ $TEST_GROUP == 'acceptance' ]] ; then vendor/bin/install DE -r ci ; fi
