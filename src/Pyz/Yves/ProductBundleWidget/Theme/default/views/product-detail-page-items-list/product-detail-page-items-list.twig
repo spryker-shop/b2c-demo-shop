@@ -1,0 +1,22 @@
+{% extends view('product-detail-page-items-list', '@SprykerShop:ProductBundleWidget') %}
+
+{% block body %}
+    {% embed molecule('toggler-item') with {
+        modifiers: ['with-top-border', 'option'],
+        data: {
+            title: 'product_bundle_product_detail_page_items_list_widget.title.bundle_includes' | trans,
+            isToggler: false,
+        },
+        embed: {
+            bundleItems: data.items,
+        },
+    } only %}
+        {% block contentText %}
+            {% include molecule('bundle-items', 'ProductBundleWidget') with {
+                data: {
+                    items: embed.bundleItems,
+                },
+            } only %}
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
