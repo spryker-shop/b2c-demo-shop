@@ -22,7 +22,7 @@ class LocaleRepository implements LocaleRepositoryInterface
      *
      * @return int
      */
-    public function getIdLocaleByLocale($locale)
+    public function getIdLocaleByLocale($locale): int
     {
         if (!static::$localeMap) {
             $this->loadLocaleMap();

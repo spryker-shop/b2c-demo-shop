@@ -25,5 +25,5 @@ interface ExampleProductSalePageClientInterface
      *
      * @return array
      */
-    public function salePyzSearch(array $requestParameters);
+    public function salePyzSearch(array $requestParameters): array;
 }

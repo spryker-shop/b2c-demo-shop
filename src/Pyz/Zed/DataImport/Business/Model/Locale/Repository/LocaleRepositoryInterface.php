@@ -14,5 +14,5 @@ interface LocaleRepositoryInterface
      *
      * @return int
      */
-    public function getIdLocaleByLocale($locale);
+    public function getIdLocaleByLocale($locale): int;
 }
