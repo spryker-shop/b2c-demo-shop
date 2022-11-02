@@ -27,7 +27,7 @@ class CountryRepository implements CountryRepositoryInterface
      *
      * @return bool
      */
-    public function hasCountryByName($countryName)
+    public function hasCountryByName($countryName): bool
     {
         if ($this->countryIds->count() === 0) {
             $this->loadCountries();
@@ -41,7 +41,7 @@ class CountryRepository implements CountryRepositoryInterface
      *
      * @return int
      */
-    public function getIdCountryByName($countryName)
+    public function getIdCountryByName($countryName): int
     {
         if ($this->countryIds->count() === 0) {
             $this->loadCountries();
