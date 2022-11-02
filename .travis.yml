@@ -116,8 +116,8 @@ jobs:
       env:
         - VALIDATION=1
       script:
-        - docker pull spryker/php-sdk
-        - docker run -ti -v $PWD:/data/project --entrypoint bash spryker/php-sdk:test -c 'cd /data/project && if [[ ! -d reports ]]; then mkdir -p reports; fi && php -d memory_limit=2048M ../bin/console analyze:php:code-compliance --format=yaml || true && ../bin/console analyze:php:code-compliance-report && LINES_COUNT_IN_REPORT_FILE=$(cat reports/analyze\:php\:code-compliance.violations.yaml | wc -l) && [ $LINES_COUNT_IN_REPORT_FILE -eq 4 ] && exit 0 || exit 1'
+        - docker pull spryker/php-sdk:latest
+        - docker run -ti -v $PWD:/data/project --entrypoint bash spryker/php-sdk:latest -c 'cd /data/project && if [[ ! -d reports ]]; then mkdir -p reports; fi && php -d memory_limit=2048M /data/bin/console analyze:php:code-compliance'
 
     - name: Docker / Alpine / PHP 8.0 / PostgreSQL / Functional
       os: linux
