@@ -677,3 +677,33 @@ $config[AppCatalogGuiConstants::OAUTH_OPTION_AUDIENCE] = 'aop-atrs';
 $config[OauthClientConstants::OAUTH_PROVIDER_NAME_FOR_PAYMENT_AUTHORIZE] = OauthAuth0Config::PROVIDER_NAME;
 $config[OauthClientConstants::OAUTH_GRANT_TYPE_FOR_PAYMENT_AUTHORIZE] = OauthAuth0Config::GRANT_TYPE_CLIENT_CREDENTIALS;
 $config[OauthClientConstants::OAUTH_OPTION_AUDIENCE_FOR_PAYMENT_AUTHORIZE] = 'aop-app';
+
+$config[\Spryker\Shared\AppCatalogGui\AppCatalogGuiConstants::OAUTH_PROVIDER_NAME] = '\\Spryker\\Zed\\OauthAuth0\\OauthAuth0Config::PROVIDER_NAME';
+
+$config[\Spryker\Shared\AppCatalogGui\AppCatalogGuiConstants::OAUTH_GRANT_TYPE] = '\\Spryker\\Zed\\OauthAuth0\\OauthAuth0Config::GRANT_TYPE_CLIENT_CREDENTIALS';
+
+$config[\Spryker\Shared\AppCatalogGui\AppCatalogGuiConstants::OAUTH_OPTION_AUDIENCE] = 'aop-atrs';
+
+$config[\Spryker\Shared\Http\HttpConstants::URI_SIGNER_SECRET_KEY] = 'JDJ5JDEwJFE0cXBwYnVVTTV6YVZXSnVmM2l1UWVhRE94WkQ4UjBUeHBEWTNHZlFRTEd4U2F6QVBqejQ2';
+
+$config[\Spryker\Shared\OauthAuth0\OauthAuth0Constants::AUTH0_CLIENT_ID] = getenv('AUTH0_CLIENT_ID') ?: '';
+
+$config[\Spryker\Shared\OauthAuth0\OauthAuth0Constants::AUTH0_CLIENT_SECRET] = getenv('AUTH0_CLIENT_SECRET') ?: '';
+
+$config[\Spryker\Shared\OauthAuth0\OauthAuth0Constants::AUTH0_CUSTOM_DOMAIN] = getenv('AUTH0_CUSTOM_DOMAIN') ?: '';
+
+$config[\Spryker\Shared\OauthClient\OauthClientConstants::OAUTH_PROVIDER_NAME_FOR_MESSAGE_BROKER] = '\\Spryker\\Zed\\OauthAuth0\\OauthAuth0Config::PROVIDER_NAME';
+
+$config[\Spryker\Shared\OauthClient\OauthClientConstants::OAUTH_GRANT_TYPE_FOR_MESSAGE_BROKER] = '\\Spryker\\Zed\\OauthAuth0\\OauthAuth0Config::GRANT_TYPE_CLIENT_CREDENTIALS';
+
+$config[\Spryker\Shared\OauthClient\OauthClientConstants::OAUTH_OPTION_AUDIENCE_FOR_MESSAGE_BROKER] = 'aop-event-platform';
+
+$config[\Spryker\Shared\OauthClient\OauthClientConstants::OAUTH_PROVIDER_NAME_FOR_PAYMENT_AUTHORIZE] = '\\Spryker\\Zed\\OauthAuth0\\OauthAuth0Config::PROVIDER_NAME';
+
+$config[\Spryker\Shared\OauthClient\OauthClientConstants::OAUTH_GRANT_TYPE_FOR_PAYMENT_AUTHORIZE] = '\\Spryker\\Zed\\OauthAuth0\\OauthAuth0Config::GRANT_TYPE_CLIENT_CREDENTIALS';
+
+$config[\Spryker\Shared\OauthClient\OauthClientConstants::OAUTH_OPTION_AUDIENCE_FOR_PAYMENT_AUTHORIZE] = 'aop-app';
+
+$config[\Spryker\Shared\Oms\OmsConstants::PROCESS_LOCATION] = [
+    'APPLICATION_ROOT_DIR . '/vendor/spryker/payment/config/Zed/Oms',
+];

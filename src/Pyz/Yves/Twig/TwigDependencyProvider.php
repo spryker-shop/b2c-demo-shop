@@ -24,16 +24,20 @@ use Spryker\Yves\Translator\Plugin\Twig\TranslatorTwigPlugin;
 use Spryker\Yves\Twig\Plugin\FilesystemTwigLoaderPlugin;
 use Spryker\Yves\Twig\Plugin\FormFilesystemTwigLoaderPlugin;
 use Spryker\Yves\Twig\TwigDependencyProvider as SprykerTwigDependencyProvider;
+use SprykerShop\Yves\CartPage\Plugin\Twig\CartTwigPlugin;
 use SprykerShop\Yves\CatalogPage\Plugin\Twig\CatalogPageTwigPlugin;
 use SprykerShop\Yves\CatalogPage\Plugin\Twig\CategoryFilterTwigPlugin;
 use SprykerShop\Yves\CategoryWidget\Plugin\Twig\CategoryTwigPlugin;
 use SprykerShop\Yves\ChartWidget\Plugin\Twig\ChartTwigPlugin;
 use SprykerShop\Yves\CmsBlockWidget\Plugin\Twig\CmsBlockTwigPlugin;
 use SprykerShop\Yves\CmsPage\Plugin\Twig\CmsTwigPlugin;
+use SprykerShop\Yves\ContentBannerWidget\Plugin\Twig\ContentBannerTwigPlugin;
 use SprykerShop\Yves\ContentFileWidget\Plugin\Twig\ContentFileListTwigPlugin;
 use SprykerShop\Yves\ContentNavigationWidget\Plugin\Twig\ContentNavigationTwigPlugin;
+use SprykerShop\Yves\ContentProductSetWidget\Plugin\Twig\ContentProductSetTwigPlugin;
+use SprykerShop\Yves\ContentProductWidget\Plugin\Twig\ContentProductAbstractListTwigPlugin;
 use SprykerShop\Yves\CustomerPage\Plugin\Twig\CustomerTwigPlugin;
-use SprykerShop\Yves\MoneyWidget\Plugin\Twig\MoneyTwigPlugin;
+use SprykerShop\Yves\MoneyWidget\Plugin\Twig\MoneyWidgetTwigPlugin;
 use SprykerShop\Yves\ShopApplication\Plugin\Twig\ShopApplicationFormTwigLoaderPlugin;
 use SprykerShop\Yves\ShopApplication\Plugin\Twig\ShopApplicationTwigPlugin;
 use SprykerShop\Yves\ShopApplication\Plugin\Twig\WidgetTagTwigPlugin;
@@ -65,7 +69,6 @@ class TwigDependencyProvider extends SprykerTwigDependencyProvider
             new ChartTwigPlugin(),
             new CatalogPageTwigPlugin(),
             new CmsBlockTwigPlugin(),
-            new MoneyTwigPlugin(),
             new WidgetTwigPlugin(),
             new CartTwigPlugin(),
             new QuoteTwigPlugin(),
@@ -85,6 +88,11 @@ class TwigDependencyProvider extends SprykerTwigDependencyProvider
             new FunctionTwigPlugin(),
             new ShopCmsSlotTwigPlugin(),
             new ContentNavigationTwigPlugin(),
+            new CartTwigPlugin(),
+            new ContentBannerTwigPlugin(),
+            new ContentProductSetTwigPlugin(),
+            new ContentProductAbstractListTwigPlugin(),
+            new MoneyWidgetTwigPlugin(),
         ];
     }
 
