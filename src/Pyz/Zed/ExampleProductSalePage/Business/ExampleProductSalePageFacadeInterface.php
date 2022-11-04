@@ -10,7 +10,7 @@ namespace Pyz\Zed\ExampleProductSalePage\Business;
 interface ExampleProductSalePageFacadeInterface
 {
     /**
-     * @return \Generated\Shared\Transfer\ProductLabelProductAbstractRelationsTransfer[]
+     * @return array<\Generated\Shared\Transfer\ProductLabelProductAbstractRelationsTransfer>
      */
-    public function findPyzProductLabelProductAbstractRelationChanges();
+    public function findPyzProductLabelProductAbstractRelationChanges(): array;
 }

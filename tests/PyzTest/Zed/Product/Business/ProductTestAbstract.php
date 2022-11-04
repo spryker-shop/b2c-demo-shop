@@ -31,12 +31,8 @@ use Spryker\Zed\Locale\Business\LocaleFacade;
 use Spryker\Zed\PriceProduct\Business\PriceProductFacade;
 use Spryker\Zed\PriceProduct\Persistence\PriceProductQueryContainer;
 use Spryker\Zed\Product\Business\Product\ProductManager;
-use Spryker\Zed\Product\Business\Product\Url\ProductUrlManager;
 use Spryker\Zed\Product\Business\ProductBusinessFactory;
 use Spryker\Zed\Product\Business\ProductFacade;
-use Spryker\Zed\Product\Dependency\Facade\ProductToLocaleBridge;
-use Spryker\Zed\Product\Dependency\Facade\ProductToTouchBridge;
-use Spryker\Zed\Product\Dependency\Facade\ProductToUrlBridge;
 use Spryker\Zed\Product\Persistence\ProductQueryContainer;
 use Spryker\Zed\ProductImage\Persistence\ProductImageQueryContainer;
 use Spryker\Zed\Store\Business\StoreFacade;
@@ -152,11 +148,6 @@ abstract class ProductTestAbstract extends Unit
     protected $productConcreteManager;
 
     /**
-     * @var \Spryker\Zed\Product\Business\Product\Url\ProductUrlManagerInterface
-     */
-    protected $productUrlManager;
-
-    /**
      * @var \Generated\Shared\Transfer\ProductAbstractTransfer
      */
     protected $productAbstractTransfer;
@@ -212,22 +203,9 @@ abstract class ProductTestAbstract extends Unit
         $this->setupConcretePluginData();
 
         $productBusinessFactory = new ProductBusinessFactory();
-        $urlBridge = new ProductToUrlBridge($this->urlFacade);
-        $touchBridge = new ProductToTouchBridge($this->touchFacade);
-        $localeBridge = new ProductToLocaleBridge($this->localeFacade);
 
         $this->productConcreteManager = $productBusinessFactory->createProductConcreteManager();
         $this->productAbstractManager = $productBusinessFactory->createProductAbstractManager();
-
-        $urlGenerator = $productBusinessFactory->createProductUrlGenerator();
-
-        $this->productUrlManager = new ProductUrlManager(
-            $urlBridge,
-            $touchBridge,
-            $localeBridge,
-            $this->productQueryContainer,
-            $urlGenerator
-        );
 
         $this->productManager = new ProductManager(
             $this->productAbstractManager,
