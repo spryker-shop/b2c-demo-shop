@@ -19,7 +19,7 @@ class ShopCmsSlotDependencyProvider extends SprykerShopShopCmsSlotDependencyProv
     protected function getCmsSlotContentPlugins(): array
     {
         return [
-            CmsSlotBlockConfig::CMS_SLOT_CONTENT_PROVIDER_TYPE => new CmsSlotBlockWidgetCmsSlotContentPlugin(),
+            CmsSlotBlockConfig::CMS_SLOT_CONTENT_PROVIDER_TYPE => new CmsSlotBlockWidgetCmsSlotContentPlugin(), new CmsSlotBlockWidgetCmsSlotContentPlugin(),
         ];
     }
 }

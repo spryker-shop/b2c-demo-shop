@@ -10,6 +10,7 @@ namespace Pyz\Zed\OauthClient;
 use Spryker\Zed\OauthAuth0\Communication\Plugin\OauthClient\Auth0OauthAccessTokenProviderPlugin;
 use Spryker\Zed\OauthClient\OauthClientDependencyProvider as SprykerOauthClientDependencyProvider;
 use Spryker\Zed\OauthDummy\Communication\Plugin\OauthClient\DummyOauthAccessTokenProviderPlugin;
+use Spryker\Zed\Store\Communication\Plugin\OauthClient\CurrentStoreReferenceAccessTokenRequestExpanderPlugin;
 use Spryker\Zed\StoreReference\Communication\Plugin\OauthClient\StoreReferenceAccessTokenRequestExpanderPlugin;
 
 class OauthClientDependencyProvider extends SprykerOauthClientDependencyProvider
@@ -31,7 +32,7 @@ class OauthClientDependencyProvider extends SprykerOauthClientDependencyProvider
     protected function getAccessTokenRequestExpanderPlugins(): array
     {
         return [
-            new StoreReferenceAccessTokenRequestExpanderPlugin(),
+            new StoreReferenceAccessTokenRequestExpanderPlugin(), new CurrentStoreReferenceAccessTokenRequestExpanderPlugin(),
         ];
     }
 }
