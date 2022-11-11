@@ -1,0 +1,162 @@
+version: "0.1"
+
+namespace: spryker-cloud
+tag: '1.0'
+
+environment: docker.production
+image:
+    tag: spryker/php:7.4-alpine3.12
+    environment:
+        SPRYKER_DEFAULT_STORE: "DE"
+        SPRYKER_ACTIVE_STORES: "DE,AT"
+        SPRYKER_HOOK_BEFORE_DEPLOY: "vendor/bin/install -r EU/pre-deploy -vvv "
+        SPRYKER_HOOK_AFTER_DEPLOY: "true"
+        SPRYKER_HOOK_INSTALL: "vendor/bin/install -r EU/production --no-ansi -vvv"
+        SPRYKER_HOOK_DESTRUCTIVE_INSTALL: "vendor/bin/install -r EU/destructive --no-ansi -vvv"
+
+composer:
+    mode: --no-dev
+    autoload: --classmap-authoritative
+
+assets:
+    image: fholzer/nginx-brotli:v1.18.0
+    mode: production
+    compression:
+        brotli:
+            static: only
+        gzip:
+            static: true
+            level: 5
+
+regions:
+    EU:
+        services:
+            database:
+                database: spryker_dab2c #Example: environment_staging
+                username: spryker
+                password: secret
+
+        stores:
+            DE:
+                services:
+                    broker:
+                        namespace: de_queue
+                    key_value_store:
+                        namespace: 1
+                    search:
+                        namespace: de_search
+                    session:
+                        namespace: 2
+            AT:
+                services:
+                    broker:
+                        namespace: at_queue
+                    key_value_store:
+                        namespace: 1
+                    search:
+                        namespace: at_search
+                    session:
+                        namespace: 2
+
+groups:
+    EU:
+        region: EU
+        applications:
+            Yves:
+                application: yves
+                endpoints:
+                    www.de.dab2c.demo-spryker.com:
+                        store: DE
+                    www.at.dab2c.demo-spryker.com:
+                        store: AT
+
+            boffice:
+                application: backoffice
+                endpoints:
+                    backoffice.de.dab2c.demo-spryker.com:
+                        store: DE
+                    backoffice.at.dab2c.demo-spryker.com:
+                        store: AT
+            backgw:
+                application: backend-gateway
+                endpoints:
+                    backend-gateway.de.dab2c.demo-spryker.com:
+                        store: DE
+                    backend-gateway.at.dab2c.demo-spryker.com:
+                        store: AT
+            backapi:
+                application: zed
+                endpoints:
+                    backend-api.de.dab2c.demo-spryker.com:
+                        store: DE
+                        entry-point: BackendApi
+                    backend-api.at.dab2c.demo-spryker.com:
+                        store: AT
+                        entry-point: BackendApi
+            Glue:
+                application: glue
+                endpoints:
+                    glue.de.dab2c.demo-spryker.com:
+                        store: DE
+                    glue.at.dab2c.demo-spryker.com:
+                        store: AT
+services:
+    database:
+        engine: mysql
+        version: mariadb-10.4
+        root:
+            username: "root"
+            password: "secret"
+        endpoints:
+            localhost:3306:
+                protocol: tcp
+    broker:
+        engine: rabbitmq
+        version: '3.9'
+        api:
+            username: "spryker"
+            password: "secret"
+        endpoints:
+            queue.dab2c.demo-spryker.com:
+            localhost:5672:
+                protocol: tcp
+    session:
+        engine: redis
+    key_value_store:
+        engine: redis
+        endpoints:
+            localhost:16379:
+                protocol: tcp
+    search:
+        engine: elastic
+        version: 7.6
+        endpoints:
+            localhost:9200:
+                protocol: tcp
+    scheduler:
+        engine: jenkins
+        version: '2.324'
+        csrf-protection-enabled: true
+        endpoints:
+            scheduler.demo-spryker.com:
+    mail_catcher:
+        engine: mailhog
+        endpoints:
+            mail.demo-spryker.com:
+
+docker:
+
+    ssl:
+        enabled: true
+        redirect: true
+
+    debug:
+        enabled: false
+        xdebug:
+            enabled: false
+
+    testing:
+        store: DE
+
+    mount:
+        baked:
