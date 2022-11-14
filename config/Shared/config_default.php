@@ -3,6 +3,7 @@
 use Generated\Shared\Transfer\AssetAddedTransfer;
 use Generated\Shared\Transfer\AssetDeletedTransfer;
 use Generated\Shared\Transfer\AssetUpdatedTransfer;
+use Generated\Shared\Transfer\InitializeProductExportTransfer;
 use Generated\Shared\Transfer\PaymentCancelReservationFailedTransfer;
 use Generated\Shared\Transfer\PaymentCancelReservationRequestedTransfer;
 use Generated\Shared\Transfer\PaymentConfirmationFailedTransfer;
@@ -17,6 +18,10 @@ use Generated\Shared\Transfer\PaymentRefundedTransfer;
 use Generated\Shared\Transfer\PaymentRefundFailedTransfer;
 use Generated\Shared\Transfer\PaymentRefundRequestedTransfer;
 use Generated\Shared\Transfer\PaymentReservationCanceledTransfer;
+use Generated\Shared\Transfer\ProductCreatedTransfer;
+use Generated\Shared\Transfer\ProductDeletedTransfer;
+use Generated\Shared\Transfer\ProductExportedTransfer;
+use Generated\Shared\Transfer\ProductUpdatedTransfer;
 use Monolog\Logger;
 use Pyz\Shared\Console\ConsoleConstants;
 use Pyz\Shared\Scheduler\SchedulerConfig;
@@ -78,7 +83,7 @@ use Spryker\Shared\SessionRedis\SessionRedisConfig;
 use Spryker\Shared\SessionRedis\SessionRedisConstants;
 use Spryker\Shared\Storage\StorageConstants;
 use Spryker\Shared\StorageRedis\StorageRedisConstants;
-use Spryker\Shared\StoreReference\StoreReferenceConstants;
+use Spryker\Shared\Store\StoreConstants;
 use Spryker\Shared\Tax\TaxConstants;
 use Spryker\Shared\Testify\TestifyConstants;
 use Spryker\Shared\Translator\TranslatorConstants;
@@ -612,14 +617,14 @@ $config[ProductLabelConstants::PRODUCT_LABEL_TO_DE_ASSIGN_CHUNK_SIZE] = 1000;
 $config[CartsRestApiConstants::IS_QUOTE_RELOAD_ENABLED] = true;
 
 // ----------------------------------------------------------------------------
-// ------------------------------ AOP -----------------------------------------
+// ------------------------------ ACP -----------------------------------------
 // ----------------------------------------------------------------------------
 $aopApplicationConfiguration = json_decode(html_entity_decode((string)getenv('SPRYKER_AOP_APPLICATION')), true);
 $config[KernelConstants::DOMAIN_WHITELIST] = array_merge(
     $config[KernelConstants::DOMAIN_WHITELIST],
     $aopApplicationConfiguration['APP_DOMAINS'] ?? [],
 );
-$config[StoreReferenceConstants::STORE_NAME_REFERENCE_MAP] = $aopApplicationConfiguration['STORE_NAME_REFERENCE_MAP'] ?? [];
+$config[StoreConstants::STORE_NAME_REFERENCE_MAP] = $aopApplicationConfiguration['STORE_NAME_REFERENCE_MAP'] ?? [];
 $config[AppCatalogGuiConstants::APP_CATALOG_SCRIPT_URL] = $aopApplicationConfiguration['APP_CATALOG_SCRIPT_URL'] ?? '';
 
 $aopAuthenticationConfiguration = json_decode(html_entity_decode((string)getenv('SPRYKER_AOP_AUTHENTICATION')), true);
@@ -645,17 +650,24 @@ $config[MessageBrokerConstants::MESSAGE_TO_CHANNEL_MAP] = [
     AssetAddedTransfer::class => 'assets',
     AssetUpdatedTransfer::class => 'assets',
     AssetDeletedTransfer::class => 'assets',
+    ProductExportedTransfer::class => 'product',
+    ProductCreatedTransfer::class => 'product',
+    ProductUpdatedTransfer::class => 'product',
+    ProductDeletedTransfer::class => 'product',
+    InitializeProductExportTransfer::class => 'product',
 ];
 
 $config[MessageBrokerConstants::CHANNEL_TO_TRANSPORT_MAP] =
 $config[MessageBrokerAwsConstants::CHANNEL_TO_RECEIVER_TRANSPORT_MAP] = [
     'payment' => MessageBrokerAwsConfig::SQS_TRANSPORT,
     'assets' => MessageBrokerAwsConfig::SQS_TRANSPORT,
+    'product' => MessageBrokerAwsConfig::SQS_TRANSPORT,
 ];
 
 $config[MessageBrokerAwsConstants::CHANNEL_TO_SENDER_TRANSPORT_MAP] = [
     'payment' => 'http',
     'assets' => 'http',
+    'product' => 'http',
 ];
 
 $aopInfrastructureConfiguration = json_decode(html_entity_decode((string)getenv('SPRYKER_AOP_INFRASTRUCTURE')), true);
