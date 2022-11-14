@@ -42,7 +42,7 @@ tag: '1.0'
 
 environment: docker.demo
 image:
-    tag: spryker/php:7.4-alpine3.12
+    tag: spryker/php:8.0
     environment:
         SPRYKER_DEFAULT_STORE: "DE"
         SPRYKER_ACTIVE_STORES: "DE,AT"
@@ -63,13 +63,11 @@ composer:
     autoload: --classmap-authoritative
 
 assets:
-    image: fholzer/nginx-brotli:v1.18.0
+    image: spryker/nginx-brotli:latest
     mode: production
     compression:
         brotli:
-            static: only
-        gzip:
-            static: true
+            static: on
             level: 5
 
 regions:

@@ -5,7 +5,7 @@ tag: '1.0'
 
 environment: docker.production
 image:
-    tag: spryker/php:7.4-alpine3.12
+    tag: spryker/php:8.0
     php:
         ini:
             "opcache.revalidate_freq": 0
@@ -19,10 +19,11 @@ composer:
     autoload: --classmap-authoritative
 
 assets:
+    image: spryker/nginx-brotli:latest
     mode: production
     compression:
-        gzip:
-            static: true
+        brotli:
+            static: on
             level: 5
 
 regions:

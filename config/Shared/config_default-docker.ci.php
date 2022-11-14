@@ -7,6 +7,7 @@
 use Monolog\Logger;
 use Spryker\Shared\Event\EventConstants;
 use Spryker\Shared\Log\LogConstants;
+use Spryker\Shared\Product\ProductConstants;
 use Spryker\Shared\Propel\PropelConstants;
 use Spryker\Shared\Queue\QueueConstants;
 
@@ -26,3 +27,8 @@ $config[PropelConstants::LOG_FILE_PATH]
     = $config[LogConstants::LOG_FILE_PATH]
     = $config[QueueConstants::QUEUE_WORKER_OUTPUT_FILE_NAME]
     = getenv('SPRYKER_LOG_STDOUT') ?: '/dev/null';
+
+//-----------------------------------------------------------------------------
+//----------------------------------- ACP -------------------------------------
+//-----------------------------------------------------------------------------
+$config[ProductConstants::PUBLISHING_TO_MESSAGE_BROKER_ENABLED] = false;
