@@ -62,7 +62,7 @@ groups:
     EU:
         region: EU
         applications:
-            Yves:
+            yves:
                 application: yves
                 endpoints:
                     www.de.dab2c.demo-spryker.com:
@@ -93,7 +93,7 @@ groups:
                     backend-api.at.dab2c.demo-spryker.com:
                         store: AT
                         entry-point: BackendApi
-            Glue:
+            glue:
                 application: glue
                 endpoints:
                     glue.de.dab2c.demo-spryker.com:
@@ -112,7 +112,6 @@ services:
                 protocol: tcp
     broker:
         engine: rabbitmq
-        version: '3.9'
         api:
             username: "spryker"
             password: "secret"
@@ -135,14 +134,12 @@ services:
                 protocol: tcp
     scheduler:
         engine: jenkins
-        version: '2.324'
-        csrf-protection-enabled: true
         endpoints:
-            scheduler.demo-spryker.com:
+            scheduler.dab2c.demo-spryker.com:
     mail_catcher:
         engine: mailhog
         endpoints:
-            mail.demo-spryker.com:
+            mail.dab2c.demo-spryker.com:
 
 docker:
 
