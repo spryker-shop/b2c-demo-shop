@@ -329,6 +329,7 @@ jobs:
           - git clone https://github.com/spryker/docker-sdk.git --single-branch --branch master ./docker
           - docker/sdk boot -v deploy.ci.acceptance.mariadb.yml
           - docker/sdk up -t
+          - docker/sdk cli composer dumpautoload -a -o --classmap-authoritative
           - docker/sdk testing console queue:worker:start --stop-when-empty
           - docker/sdk testing codecept run -c codeception.acceptance.yml
       before_install:
@@ -373,6 +374,7 @@ jobs:
           - git clone https://github.com/spryker/docker-sdk.git --single-branch --branch master ./docker
           - docker/sdk boot -v deploy.ci.acceptance.yml
           - docker/sdk up -t
+          - docker/sdk cli composer dumpautoload -a -o --classmap-authoritative
           - docker/sdk testing console queue:worker:start --stop-when-empty
           - docker/sdk testing codecept run -c codeception.acceptance.yml
       before_install:
