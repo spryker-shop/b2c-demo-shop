@@ -23,7 +23,7 @@ class CustomerProfilePage extends Customer
     public const BUTTON_PROFILE_FORM_SUBMIT_TEXT = 'Submit';
 
     public const SUCCESS_MESSAGE = 'Profile was successfully saved';
-    public const ERROR_MESSAGE_EMAIL = 'Email already used';
+    public const ERROR_MESSAGE_EMAIL = 'If this E-mail address is already in use, you will receive a password reset link. Otherwise, you must first validate your E-mail address to finish registration. Please check your E-mail.';
 
     public const FORM_FIELD_CHANGE_PASSWORD_SELECTOR_PASSWORD = 'passwordForm[password]';
     public const FORM_FIELD_CHANGE_PASSWORD_SELECTOR_NEW_PASSWORD = 'passwordForm[new_password][password]';

@@ -12,11 +12,14 @@ tag: '1.0'
 
 environment: docker
 image:
-    tag: spryker/php:7.4-alpine3.12
+    tag: spryker/php:8.0
     php:
         enabled-extensions:
             - blackfire
             - newrelic
+    node:
+        version: 16
+        npm: 8
 
 composer:
     mode: --no-dev

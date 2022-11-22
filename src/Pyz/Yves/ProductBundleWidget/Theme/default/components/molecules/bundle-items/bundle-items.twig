@@ -1,0 +1,12 @@
+{% extends molecule('bundle-items', '@SprykerShop:ProductBundleWidget') %}
+
+{% block title %}{% endblock %}
+
+{% block itemList %}
+    {% set itemClassName = config.name ~ '__item' %}
+    {% set thumbnailClassName = '' %}
+    {% set thumbnailModifiers = ['with-overlay', 'pdp-bundle'] %}
+    {% set itemDetailsClassName = config.name ~ '__details' %}
+
+    {{ parent() }}
+{% endblock %}

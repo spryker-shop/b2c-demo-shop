@@ -36,24 +36,99 @@ class NavigationGuiPresentationTester extends Actor
 {
     use _generated\NavigationGuiPresentationTesterActions;
 
+    /**
+     * @var string
+     */
     public const ROOT_NODE_ANCHOR_SELECTOR = '#navigation-node-0_anchor';
+
+    /**
+     * @var string
+     */
     public const CHILD_NODE_ANCHOR_SELECTOR = '#navigation-node-%d_anchor';
+
+    /**
+     * @var string
+     */
     public const NAVIGATION_NODE_SELECTOR = '.jstree-node';
+
+    /**
+     * @var string
+     */
     public const NAVIGATION_TREE_SELECTOR = '#navigation-tree';
+
+    /**
+     * @var string
+     */
     public const NAVIGATION_TREE_SAVE_BUTTON_SELECTOR = '#navigation-tree-save-btn';
+
+    /**
+     * @var string
+     */
     public const REMOVE_NODE_BUTTON_SELECTOR = '#remove-selected-node-btn';
+
+    /**
+     * @var string
+     */
     public const ADD_CHILD_NODE_BUTTON_SELECTOR = '#add-child-node-btn';
+
+    /**
+     * @var string
+     */
     public const LOCALIZED_FORM_CONTAINER_SELECTOR = '#localized_attributes_container-%s .collapse-link';
+
+    /**
+     * @var string
+     */
     public const NODE_CHILD_SELECTOR = '#navigation-node-%d #navigation-node-%d';
+
+    /**
+     * @var string
+     */
     public const NODE_NAME_CHILD_SELECTOR = "//*[@id=\"navigation-node-%d\"]//*[text()[contains(.,'%s')]]";
+
+    /**
+     * @var string
+     */
     public const NODE_FORM_IFRAME_NAME = 'navigation-node-form-iframe';
+
+    /**
+     * @var string
+     */
     public const SUCCESS_MESSAGE_SELECTOR = '.flash-messages .alert-success';
+
+    /**
+     * @var string
+     */
     public const SWEET_ALERT_SELECTOR = '.sweet-alert';
+
+    /**
+     * @var string
+     */
     public const SWEET_ALERT_CONFIRM_SELECTOR = '.sweet-alert button.confirm';
+
+    /**
+     * @var string
+     */
     public const NODE_FORM_SELECTOR = 'form';
+
+    /**
+     * @var string
+     */
     public const NODE_UPDATE_FORM_SELECTOR = '//form[@name="navigation_node"]';
-    public const FLASH_MESSAGES_SELECTOR = '//div[@class="flash-messages"]/div';
+
+    /**
+     * @var string
+     */
+    public const FLASH_MESSAGE_TEXT_SELECTOR = '//div[@class="flash-messages"]/div';
+
+    /**
+     * @var string
+     */
     public const NAVIGATION_DELETE_FORM_SELECTOR = '//*[@id="navigation-table"]/tbody/tr/td[5]/form[1]';
+
+    /**
+     * @var string
+     */
     public const NAVIGATION_ROW_ACTIVE_LINK_SELECTOR = '//*[@id="navigation-table"]/tbody/tr[1]/td[5]/a[2]';
 
     /**
@@ -72,7 +147,7 @@ class NavigationGuiPresentationTester extends Actor
      *
      * @return void
      */
-    public function setNameField($value)
+    public function setNameField($value): void
     {
         $this->fillField('//*[@id="navigation_name"]', $value);
     }
@@ -82,7 +157,7 @@ class NavigationGuiPresentationTester extends Actor
      *
      * @return void
      */
-    public function setKeyField($value)
+    public function setKeyField($value): void
     {
         $this->fillField('//*[@id="navigation_key"]', $value);
     }
@@ -92,7 +167,7 @@ class NavigationGuiPresentationTester extends Actor
      *
      * @return void
      */
-    public function checkIsActiveField($checked)
+    public function checkIsActiveField($checked): void
     {
         if ($checked) {
             $this->checkOption('//*[@id="navigation_is_active"]');
@@ -104,7 +179,7 @@ class NavigationGuiPresentationTester extends Actor
     /**
      * @return void
      */
-    public function submitNavigationForm()
+    public function submitNavigationForm(): void
     {
         $this->click('//*[@id="navigation-save-btn"]');
     }
@@ -123,7 +198,7 @@ class NavigationGuiPresentationTester extends Actor
      *
      * @return void
      */
-    public function seeMatches($pattern, $value)
+    public function seeMatches($pattern, $value): void
     {
         $this->assertRegExp($pattern, $value);
     }
@@ -131,7 +206,7 @@ class NavigationGuiPresentationTester extends Actor
     /**
      * @return void
      */
-    public function clickEditFirstRowInList()
+    public function clickEditFirstRowInList(): void
     {
         $this->click('//*[@id="navigation-table"]/tbody/tr[1]/td[5]/a');
     }
@@ -139,12 +214,12 @@ class NavigationGuiPresentationTester extends Actor
     /**
      * @param string $expectedMessagePattern
      *
-     * @return int
+     * @return string
      */
-    public function seeSuccessMessage($expectedMessagePattern)
+    public function seeSuccessMessage($expectedMessagePattern): string
     {
-        $this->waitForElement(static::FLASH_MESSAGES_SELECTOR, 30);
-        $successMessage = $this->grabTextFrom(static::FLASH_MESSAGES_SELECTOR);
+        $this->waitForElementVisible(static::FLASH_MESSAGE_TEXT_SELECTOR, 90);
+        $successMessage = $this->grabTextFrom(static::FLASH_MESSAGE_TEXT_SELECTOR);
         $this->seeMatches($expectedMessagePattern, $successMessage);
 
         preg_match($expectedMessagePattern, $successMessage, $matches);
@@ -155,7 +230,7 @@ class NavigationGuiPresentationTester extends Actor
     /**
      * @return void
      */
-    public function activateFirstNavigationRow()
+    public function activateFirstNavigationRow(): void
     {
         $this->click(static::NAVIGATION_ROW_ACTIVE_LINK_SELECTOR);
     }
@@ -163,7 +238,7 @@ class NavigationGuiPresentationTester extends Actor
     /**
      * @return void
      */
-    public function deleteFirstNavigationRow()
+    public function deleteFirstNavigationRow(): void
     {
         $this->submitForm(static::NAVIGATION_DELETE_FORM_SELECTOR, []);
     }
@@ -171,7 +246,7 @@ class NavigationGuiPresentationTester extends Actor
     /**
      * @return int
      */
-    public function prepareTestNavigationEntity()
+    public function prepareTestNavigationEntity(): int
     {
         $navigationEntity = new SpyNavigation();
         $navigationEntity
@@ -188,7 +263,7 @@ class NavigationGuiPresentationTester extends Actor
      *
      * @return void
      */
-    public function expandLocalizedForm($localeName)
+    public function expandLocalizedForm($localeName): void
     {
         $this->click(sprintf(self::LOCALIZED_FORM_CONTAINER_SELECTOR, $localeName));
     }
@@ -196,7 +271,7 @@ class NavigationGuiPresentationTester extends Actor
     /**
      * @return void
      */
-    public function clickRootNode()
+    public function clickRootNode(): void
     {
         $this->click(self::ROOT_NODE_ANCHOR_SELECTOR);
     }
@@ -206,7 +281,7 @@ class NavigationGuiPresentationTester extends Actor
      *
      * @return void
      */
-    public function clickNode($idNavigationNode)
+    public function clickNode($idNavigationNode): void
     {
         $this->click(sprintf(self::CHILD_NODE_ANCHOR_SELECTOR, $idNavigationNode));
     }
@@ -214,7 +289,7 @@ class NavigationGuiPresentationTester extends Actor
     /**
      * @return void
      */
-    public function waitForNavigationTree()
+    public function waitForNavigationTree(): void
     {
         $this->waitForElement(self::NAVIGATION_TREE_SELECTOR);
         $this->wait(5);
@@ -251,12 +326,12 @@ class NavigationGuiPresentationTester extends Actor
      *
      * @return void
      */
-    public function seeNavigationNodeHierarchyByChildNodeName($idParentNavigationNode, $childNavigationNodeName)
+    public function seeNavigationNodeHierarchyByChildNodeName($idParentNavigationNode, $childNavigationNodeName): void
     {
         $this->seeElement(sprintf(
             self::NODE_NAME_CHILD_SELECTOR,
             $idParentNavigationNode,
-            $childNavigationNodeName
+            $childNavigationNodeName,
         ));
     }
 
@@ -266,18 +341,18 @@ class NavigationGuiPresentationTester extends Actor
      *
      * @return void
      */
-    public function moveNavigationNode($idNavigationNode, $idTargetNavigationNode)
+    public function moveNavigationNode($idNavigationNode, $idTargetNavigationNode): void
     {
         $this->dragAndDrop(
             sprintf(self::CHILD_NODE_ANCHOR_SELECTOR, $idNavigationNode),
-            sprintf(self::CHILD_NODE_ANCHOR_SELECTOR, $idTargetNavigationNode)
+            sprintf(self::CHILD_NODE_ANCHOR_SELECTOR, $idTargetNavigationNode),
         );
     }
 
     /**
      * @return void
      */
-    public function saveNavigationTreeOrder()
+    public function saveNavigationTreeOrder(): void
     {
         $this->click(self::NAVIGATION_TREE_SAVE_BUTTON_SELECTOR);
     }
@@ -287,7 +362,7 @@ class NavigationGuiPresentationTester extends Actor
      *
      * @return void
      */
-    public function seeSuccessfulOrderSaveMessage($message)
+    public function seeSuccessfulOrderSaveMessage($message): void
     {
         $this->waitForElement(self::SWEET_ALERT_SELECTOR, 5);
         $this->wait(1);
@@ -298,7 +373,7 @@ class NavigationGuiPresentationTester extends Actor
     /**
      * @return void
      */
-    public function switchToNodeForm()
+    public function switchToNodeForm(): void
     {
         $this->switchToIFrame(self::NODE_FORM_IFRAME_NAME);
         $this->waitForElement(self::NODE_FORM_SELECTOR, 5);
@@ -307,7 +382,7 @@ class NavigationGuiPresentationTester extends Actor
     /**
      * @return void
      */
-    public function switchToNavigationTree()
+    public function switchToNavigationTree(): void
     {
         $this->switchToIFrame();
         $this->waitForNavigationTree();
@@ -316,7 +391,7 @@ class NavigationGuiPresentationTester extends Actor
     /**
      * @return void
      */
-    public function clickRemoveNodeButton()
+    public function clickRemoveNodeButton(): void
     {
         $this->click(self::REMOVE_NODE_BUTTON_SELECTOR);
     }
@@ -324,7 +399,7 @@ class NavigationGuiPresentationTester extends Actor
     /**
      * @return void
      */
-    public function clickAddChildNodeButton()
+    public function clickAddChildNodeButton(): void
     {
         $this->click(self::ADD_CHILD_NODE_BUTTON_SELECTOR);
     }
@@ -334,7 +409,7 @@ class NavigationGuiPresentationTester extends Actor
      *
      * @return void
      */
-    public function submitCreateNodeFormWithoutType($title)
+    public function submitCreateNodeFormWithoutType($title): void
     {
         $this->submitForm(self::NODE_FORM_SELECTOR, [
             'navigation_node[navigation_node_localized_attributes][0][title]' => $title,
@@ -349,7 +424,7 @@ class NavigationGuiPresentationTester extends Actor
      *
      * @return void
      */
-    public function submitCreateNodeFormWithExternalUrlType($title, $externalUrl)
+    public function submitCreateNodeFormWithExternalUrlType($title, $externalUrl): void
     {
         $this->submitForm(self::NODE_FORM_SELECTOR, [
             'navigation_node[node_type]' => 'external_url',
@@ -367,7 +442,7 @@ class NavigationGuiPresentationTester extends Actor
      *
      * @return void
      */
-    public function submitUpdateNodeToCategoryType($categoryUrl_en_US, $categoryUrl_de_DE)
+    public function submitUpdateNodeToCategoryType($categoryUrl_en_US, $categoryUrl_de_DE): void
     {
         $this->submitForm(static::NODE_UPDATE_FORM_SELECTOR, [
             'navigation_node[node_type]' => 'category',
@@ -383,7 +458,7 @@ class NavigationGuiPresentationTester extends Actor
      *
      * @return void
      */
-    public function submitCreateNodeFormWithCmsPageType($title, $cmsPageUrl_en_US, $cmsPageUrl_de_DE)
+    public function submitCreateNodeFormWithCmsPageType($title, $cmsPageUrl_en_US, $cmsPageUrl_de_DE): void
     {
         $this->submitForm(self::NODE_FORM_SELECTOR, [
             'navigation_node[node_type]' => 'cms_page',
@@ -400,7 +475,7 @@ class NavigationGuiPresentationTester extends Actor
      *
      * @return \Generated\Shared\Transfer\NavigationTreeTransfer
      */
-    public function prepareTestNavigationTreeEntities(NavigationTreeTransfer $navigationTreeTransfer)
+    public function prepareTestNavigationTreeEntities(NavigationTreeTransfer $navigationTreeTransfer): NavigationTreeTransfer
     {
         $navigationTransfer = $this->getLocator()->navigation()->facade()->createNavigation($navigationTreeTransfer->getNavigation());
 
@@ -418,8 +493,11 @@ class NavigationGuiPresentationTester extends Actor
      *
      * @return void
      */
-    protected function createNavigationNodesRecursively(NavigationTreeNodeTransfer $navigationTreeNodeTransfer, $idNavigation, $idParentNavigationNode = null)
-    {
+    protected function createNavigationNodesRecursively(
+        NavigationTreeNodeTransfer $navigationTreeNodeTransfer,
+        $idNavigation,
+        $idParentNavigationNode = null
+    ): void {
         $navigationNodeTransfer = $navigationTreeNodeTransfer->getNavigationNode();
         $navigationNodeTransfer
             ->setFkNavigation($idNavigation)
@@ -437,7 +515,7 @@ class NavigationGuiPresentationTester extends Actor
      *
      * @return int
      */
-    public function getIdLocale($locale)
+    public function getIdLocale($locale): int
     {
         return $this->getLocator()->locale()->facade()->getLocale($locale)->getIdLocale();
     }
@@ -474,11 +552,11 @@ class NavigationGuiPresentationTester extends Actor
     {
         $navigationEntity = (new SpyNavigationQuery())
             ->joinWithSpyNavigationNode()
-            ->useSpyNavigationNodeQuery()
-            ->joinWithSpyNavigationNodeLocalizedAttributes()
-            ->endUse()
+                ->useSpyNavigationNodeQuery()
+                    ->joinWithSpyNavigationNodeLocalizedAttributes()
+                ->endUse()
             ->findByName(
-                $navigationTransfer->getName()
+                $navigationTransfer->getName(),
             )->getFirst();
 
         return $navigationEntity;
@@ -513,6 +591,7 @@ class NavigationGuiPresentationTester extends Actor
     public function generateUrlByAvailableLocaleTransfers(string $defaultSlug, array $localizedSlugs): array
     {
         $localeTransfers = $this->getLocator()->locale()->facade()->getLocaleCollection();
+
         $localeUrls = [];
         foreach ($localeTransfers as $localeTransfer) {
             $localePrefix = substr($localeTransfer->getLocaleName(), 0, 2);
@@ -539,7 +618,10 @@ class NavigationGuiPresentationTester extends Actor
 
                 break;
             } catch (Exception $exception) {
-                codecept_debug(sprintf('Unstable action repeat count: %d', ++$count));
+                $count++;
+                if ($verbose) {
+                    echo "Try: {$count}: ";
+                }
             }
         }
     }
