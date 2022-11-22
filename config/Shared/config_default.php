@@ -591,11 +591,13 @@ $config[GlueApplicationConstants::GLUE_APPLICATION_CORS_ALLOW_ORIGIN] = getenv('
 
 $config[OmsConstants::PROCESS_LOCATION] = [
     OmsConfig::DEFAULT_PROCESS_LOCATION,
-    APPLICATION_ROOT_DIR . '/vendor/spryker/payment/config/Zed/Oms',
+    APPLICATION_ROOT_DIR . '/vendor/spryker/sales-payment/config/Zed/Oms',
 ];
-$config[OmsConstants::ACTIVE_PROCESSES] = [];
+$config[OmsConstants::ACTIVE_PROCESSES] = [
+    'ForeignPaymentB2CStateMachine01',
+];
 $config[SalesConstants::PAYMENT_METHOD_STATEMACHINE_MAPPING] = [
-    PaymentConfig::PAYMENT_FOREIGN_PROVIDER => 'B2CStateMachine01',
+    PaymentConfig::PAYMENT_FOREIGN_PROVIDER => 'ForeignPaymentB2CStateMachine01',
 ];
 
 // ---------- Guest cart

@@ -16,6 +16,8 @@ use Spryker\Shared\Kernel\KernelConstants;
 use Spryker\Shared\Kernel\Store;
 use Spryker\Shared\Log\LogConstants;
 use Spryker\Shared\Mail\MailConstants;
+use Spryker\Shared\MessageBroker\MessageBrokerConstants;
+use Spryker\Shared\MessageBrokerAws\MessageBrokerAwsConstants;
 use Spryker\Shared\Newsletter\NewsletterConstants;
 use Spryker\Shared\OauthClient\OauthClientConstants;
 use Spryker\Shared\Product\ProductConstants;
@@ -271,3 +273,13 @@ $config[AppCatalogGuiConstants::OAUTH_PROVIDER_NAME] = OauthDummyConfig::PROVIDE
 //----------------------------------- ACP -------------------------------------
 //-----------------------------------------------------------------------------
 $config[ProductConstants::PUBLISHING_TO_MESSAGE_BROKER_ENABLED] = false;
+
+// ----------------------------------------------------------------------------
+// ------------------------------ MessageBroker -----------------------------------------
+// ----------------------------------------------------------------------------
+$config[MessageBrokerConstants::CHANNEL_TO_TRANSPORT_MAP] =
+$config[MessageBrokerAwsConstants::CHANNEL_TO_RECEIVER_TRANSPORT_MAP] = [
+    'payment' => 'in-memory',
+    'assets' => 'in-memory',
+    'product' => 'in-memory',
+];
