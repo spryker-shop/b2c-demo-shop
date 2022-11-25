@@ -14,12 +14,12 @@ interface CountryRepositoryInterface
      *
      * @return bool
      */
-    public function hasCountryByName($countryName);
+    public function hasCountryByName($countryName): bool;
 
     /**
      * @param string $countryName
      *
      * @return int
      */
-    public function getIdCountryByName($countryName);
+    public function getIdCountryByName($countryName): int;
 }

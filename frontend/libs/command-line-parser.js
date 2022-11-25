@@ -98,7 +98,6 @@ const parseCommandLine = () => (
         .option('-i, --info', 'information about all namespaces and available themes')
         .option('-c, --config <path>', 'path to JSON file with namespace config', globalSettings.paths.namespaceConfig)
         .option('-r, --replace', 'replace optimized images')
-        .option('-m, --module <module>', 'build determined module version', globalSettings.buildVariants)
         .arguments('<mode>')
         .action(function (modeValue) {
             const { argv, env } = process;

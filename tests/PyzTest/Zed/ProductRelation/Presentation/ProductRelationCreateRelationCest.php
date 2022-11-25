@@ -33,14 +33,12 @@ class ProductRelationCreateRelationCest
         $i->wantTo('I want to create up selling relation');
         $i->expect('relation is persisted, exported to yves and carousel component is visible');
 
-        $i->amLoggedInUser();
-
         $i->amOnPage(ProductRelationCreatePage::URL);
 
+        $i->waitForElement('//*[@id="product_relation_productRelationKey"]');
         $i->fillField('//*[@id="product_relation_productRelationKey"]', uniqid('key-', false));
         $i->selectRelationType(ProductRelationTypes::TYPE_RELATED_PRODUCTS);
         $i->filterProductsByName('Samsung Bundle');
-        $i->wait(20);
         $i->selectProduct(214);
 
         $i->switchToAssignProductsTab();
