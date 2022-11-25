@@ -50,7 +50,7 @@ jobs:
 
             - uses: actions/setup-node@v1
               with:
-                  node-version: '12'
+                  node-version: '16'
 
             - name: NPM cache
               uses: actions/cache@v2
@@ -115,8 +115,7 @@ jobs:
 
             - name: Frontend install-dependencies
               run: |
-                  vendor/bin/console frontend:project:install-dependencies
-                  vendor/bin/console frontend:yves:install-dependencies
+                  vendor/bin/console frontend:project:install-dependencies -vvv
 
             - name: Install NPM packages
               run: |
