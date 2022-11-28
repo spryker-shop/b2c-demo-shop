@@ -14,7 +14,9 @@ use Spryker\Client\SearchElasticsearch\Plugin\QueryExpander\LocalizedQueryExpand
 class ConfigurableBundlePageSearchDependencyProvider extends SprykerConfigurableBundlePageSearchDependencyProvider
 {
     /**
-     * @return \Spryker\Client\Search\Dependency\Plugin\ResultFormatterPluginInterface[]
+     * @phpstan-return array<\Spryker\Client\SearchExtension\Dependency\Plugin\ResultFormatterPluginInterface>
+     *
+     * @return array<\Spryker\Client\Search\Dependency\Plugin\ResultFormatterPluginInterface>
      */
     protected function getConfigurableBundleTemplatePageSearchResultFormatterPlugins(): array
     {
