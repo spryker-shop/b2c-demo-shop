@@ -148,12 +148,15 @@ class ExampleProductSalePageDependencyProvider extends AbstractDependencyProvide
     protected function addSaleSearchResultFormatterPlugins(Container $container)
     {
         $container->set(static::PYZ_SALE_SEARCH_RESULT_FORMATTER_PLUGINS, function () {
+            /** @phpstan-var \Spryker\Client\SearchExtension\Dependency\Plugin\ResultFormatterPluginInterface $rawCatalogSearchResultFormatterPlugin */
+            $rawCatalogSearchResultFormatterPlugin = new RawCatalogSearchResultFormatterPlugin();
+
             return [
                 new FacetResultFormatterPlugin(),
                 new SortedResultFormatterPlugin(),
                 new PaginatedResultFormatterPlugin(),
                 new CurrencyAwareCatalogSearchResultFormatterPlugin(
-                    new RawCatalogSearchResultFormatterPlugin()
+                    $rawCatalogSearchResultFormatterPlugin,
                 ),
             ];
         });

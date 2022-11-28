@@ -17,7 +17,7 @@ use Spryker\Zed\Store\Communication\Plugin\Form\StoreRelationToggleFormTypePlugi
 class CmsBlockGuiDependencyProvider extends CmsBlockGuiCmsBlockGuiDependencyProvider
 {
     /**
-     * @return array<string>
+     * @return array<\Spryker\Zed\CmsBlockGui\Communication\Plugin\CmsBlockFormPluginInterface>
      */
     protected function getCmsBlockFormPlugins()
     {
@@ -30,7 +30,7 @@ class CmsBlockGuiDependencyProvider extends CmsBlockGuiCmsBlockGuiDependencyProv
     }
 
     /**
-     * @return array<string>
+     * @return array<\Spryker\Zed\CmsBlockGui\Communication\Plugin\CmsBlockViewPluginInterface>
      */
     protected function getCmsBlockViewPlugins()
     {
@@ -48,7 +48,7 @@ class CmsBlockGuiDependencyProvider extends CmsBlockGuiCmsBlockGuiDependencyProv
     }
 
     /**
-     * @return \Spryker\Zed\CmsBlockGuiExtension\Dependency\Plugin\CmsBlockGlossaryAfterFindPluginInterface[]
+     * @return array<\Spryker\Zed\CmsBlockGuiExtension\Dependency\Plugin\CmsBlockGlossaryAfterFindPluginInterface>
      */
     protected function getCmsBlockGlossaryAfterFindPlugins(): array
     {
@@ -58,7 +58,7 @@ class CmsBlockGuiDependencyProvider extends CmsBlockGuiCmsBlockGuiDependencyProv
     }
 
     /**
-     * @return \Spryker\Zed\CmsBlockGuiExtension\Dependency\Plugin\CmsBlockGlossaryBeforeSavePluginInterface[]
+     * @return array<\Spryker\Zed\CmsBlockGuiExtension\Dependency\Plugin\CmsBlockGlossaryBeforeSavePluginInterface>
      */
     protected function getCmsBlockGlossaryBeforeSavePlugins(): array
     {

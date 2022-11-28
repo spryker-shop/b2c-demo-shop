@@ -7,6 +7,7 @@
 
 namespace PyzTest\Zed\NavigationGui\Presentation;
 
+use Faker\Factory;
 use PyzTest\Zed\NavigationGui\NavigationGuiPresentationTester;
 use PyzTest\Zed\NavigationGui\PageObject\NavigationCreatePage;
 use PyzTest\Zed\NavigationGui\PageObject\NavigationDeletePage;
@@ -25,6 +26,9 @@ use PyzTest\Zed\NavigationGui\PageObject\NavigationUpdatePage;
  */
 class NavigationCRUDCest
 {
+    /**
+     * @var int
+     */
     public const ELEMENT_TIMEOUT = 5;
 
     /**
@@ -32,9 +36,8 @@ class NavigationCRUDCest
      *
      * @return void
      */
-    public function testICanCreateReadUpdateAndDeleteNavigation(NavigationGuiPresentationTester $i)
+    public function testICanCreateReadUpdateAndDeleteNavigation(NavigationGuiPresentationTester $i): void
     {
-        $i->amLoggedInUser();
         $i->amOnPage(NavigationCreatePage::URL);
 
         $idNavigation = $this->create($i);
@@ -43,7 +46,8 @@ class NavigationCRUDCest
 
         $this->update($i, $idNavigation);
 
-        $i->wait(1);
+        # Somehow $this->update() influences on this $this->delete() so the test becomes flickery.
+        $i->wait(5);
 
         $this->delete($i, $idNavigation);
     }
@@ -53,13 +57,13 @@ class NavigationCRUDCest
      *
      * @return int
      */
-    protected function create(NavigationGuiPresentationTester $i)
+    protected function create(NavigationGuiPresentationTester $i): int
     {
         $i->wantTo('Create navigation.');
         $i->expect('Navigation is persisted in Zed.');
 
         $i->setNameField('Acceptance navigation (1)');
-        $i->setKeyField('acceptance1');
+        $i->setKeyField(Factory::create()->slug);
         $i->checkIsActiveField(true);
         $i->submitNavigationForm();
         $i->seeCurrentUrlEquals(NavigationPage::URL);
@@ -73,7 +77,7 @@ class NavigationCRUDCest
      *
      * @return void
      */
-    protected function read(NavigationGuiPresentationTester $i)
+    protected function read(NavigationGuiPresentationTester $i): void
     {
         $i->wantTo('See navigation list.');
         $i->expect('Navigation table is shown and not empty');
@@ -87,7 +91,7 @@ class NavigationCRUDCest
      *
      * @return void
      */
-    protected function update(NavigationGuiPresentationTester $i, $idNavigation)
+    protected function update(NavigationGuiPresentationTester $i, $idNavigation): void
     {
         $i->wantTo('Update existing navigation.');
         $i->expect('Navigation is persisted in Zed');
@@ -106,7 +110,7 @@ class NavigationCRUDCest
      *
      * @return void
      */
-    protected function delete(NavigationGuiPresentationTester $i, int $idNavigation)
+    protected function delete(NavigationGuiPresentationTester $i, int $idNavigation): void
     {
         $i->wantTo('Delete navigation.');
         $i->expect('Navigation is removed from Zed.');
