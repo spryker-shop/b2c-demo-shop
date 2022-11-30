@@ -18,6 +18,7 @@ use Spryker\Zed\Http\Communication\Plugin\EventDispatcher\FragmentEventDispatche
 use Spryker\Zed\Http\Communication\Plugin\EventDispatcher\HeaderEventDispatcherPlugin;
 use Spryker\Zed\Http\Communication\Plugin\EventDispatcher\HstsHeaderEventDispatcher;
 use Spryker\Zed\Kernel\Communication\Plugin\AutoloaderCacheEventDispatcherPlugin;
+use Spryker\Zed\Kernel\Communication\Plugin\EventDispatcher\RedirectUrlValidationEventDispatcherPlugin;
 use Spryker\Zed\Locale\Communication\Plugin\EventDispatcher\LocaleEventDispatcherPlugin;
 use Spryker\Zed\Monitoring\Communication\Plugin\EventDispatcher\GatewayMonitoringRequestTransactionEventDispatcherPlugin;
 use Spryker\Zed\Monitoring\Communication\Plugin\EventDispatcher\MonitoringRequestTransactionEventDispatcherPlugin;
@@ -57,6 +58,7 @@ class EventDispatcherDependencyProvider extends SprykerEventDispatcherDependency
             new RequestAttributesEventDispatcherPlugin(),
             new ResponseListenerEventDispatcherPlugin(),
             new ErrorPageEventDispatcherPlugin(),
+            new RedirectUrlValidationEventDispatcherPlugin(),
         ];
     }
 
