@@ -109,15 +109,15 @@ jobs:
       script:
         - vendor/bin/console security:check
 
-    - name: Upgradability check
-      php: "8.0"
-      os: linux
-      dist: bionic
-      env:
-        - VALIDATION=1
-      script:
-        - docker pull spryker/php-sdk:latest
-        - docker run -ti -v $PWD:/data/project --entrypoint bash spryker/php-sdk:latest -c 'cd /data/project && if [[ ! -d reports ]]; then mkdir -p reports; fi && php -d memory_limit=2048M /data/bin/console analyze:php:code-compliance'
+#    - name: Upgradability check
+#      php: "8.0"
+#      os: linux
+#      dist: bionic
+#      env:
+#        - VALIDATION=1
+#      script:
+#        - docker pull spryker/php-sdk:latest
+#        - docker run -ti -v $PWD:/data/project --entrypoint bash spryker/php-sdk:latest -c 'cd /data/project && if [[ ! -d reports ]]; then mkdir -p reports; fi && php -d memory_limit=2048M /data/bin/console analyze:php:code-compliance'
 
     - name: Docker / Alpine / PHP 8.0 / PostgreSQL / Functional
       os: linux
