@@ -163,15 +163,6 @@ $config[OauthClientConstants::OAUTH_PROVIDER_NAME_FOR_PAYMENT_AUTHORIZE] = Oauth
 $config[AppCatalogGuiConstants::OAUTH_PROVIDER_NAME] = OauthDummyConfig::PROVIDER_NAME;
 
 // ----------------------------------------------------------------------------
-// ------------------------------ ACP -----------------------------------------
-// ----------------------------------------------------------------------------
-$config[StoreConstants::STORE_NAME_REFERENCE_MAP] = [
-    'DE' => 'dev-DE',
-    'AT' => 'dev-AT',
-    'US' => 'dev-US',
-];
-
-// ----------------------------------------------------------------------------
 // ------------------------------ MessageBroker -----------------------------------------
 // ----------------------------------------------------------------------------
 $messageBrokerTransport = getenv('SPRYKER_TESTING_ENABLED') ? 'in-memory' : MessageBrokerAwsConfig::SQS_TRANSPORT;
