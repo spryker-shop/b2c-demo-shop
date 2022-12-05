@@ -33,7 +33,7 @@
 
             <p class="{{ config.name }}__title">
                 {{ itemName }}
-                <span class="{{ config.name }}__quantity">{{ item.quantity }}x </span>
+                <span class="{{ config.name }}__quantity">{{ item.quantity | executeFilterIfExists('formatInt', app.locale) }}x </span>
             </p>
         </li>
     {% endfor %}
