@@ -40,7 +40,7 @@
                         {{ orderReference }}
                     {% endfor %}
                 </td>
-                <td class="transform-cell" data-content="{{ 'return_page.return.number_of_items' | trans }}">{{ return.returnItems| length }}</td>
+                <td class="transform-cell" data-content="{{ 'return_page.return.number_of_items' | trans }}">{{ return.returnItems| length | executeFilterIfExists('formatInt', app.locale) }}</td>
                 <td class="transform-cell" data-content="{{ 'return_page.return.date' | trans }}">{{ date(return.createdAt) | formatDateTime }}</td>
                 <td class="transform-cell transform-cell--spacing-bottom" data-content="{{ 'return_page.return.items_state' | trans }}">
                     {% for state in itemStates %}

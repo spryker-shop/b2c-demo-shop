@@ -8,7 +8,7 @@
 {% block body %}
     <div class="grid grid--justify grid--middle">
         <div class="{{ config.name }}__results col">
-            {{- data.pagination.numFound }} {{ 'catalog.itemsFound' | trans -}}
+            {{- data.pagination.numFound | default(0) | executeFilterIfExists('formatInt', app.locale) }} {{ 'catalog.itemsFound' | trans -}}
         </div>
 
         <div class="col col--lg-8 col--xl-6 is-hidden-sm-md">
@@ -36,7 +36,7 @@
                                 {% for limit in embed.pagination.config.validItemsPerPageOptions %}
                                     {% set selectedAttribute = (limit == embed.pagination.currentItemsPerPage) ? 'selected' %}
 
-                                    <option value="{{ limit }}" {{ selectedAttribute }}>{{ limit }}</option>
+                                    <option value="{{ limit }}" {{ selectedAttribute }}>{{ limit | executeFilterIfExists('formatInt', app.locale) }}</option>
                                 {% endfor %}
                             {% endblock %}
                         {% endembed %}

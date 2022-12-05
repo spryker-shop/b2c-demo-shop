@@ -8,7 +8,7 @@
 namespace Pyz\Zed\ProductOption;
 
 use Spryker\Zed\Kernel\Container;
-use Spryker\Zed\Money\Communication\Plugin\Form\MoneyCollectionFormTypePlugin;
+use Spryker\Zed\MoneyGui\Communication\Plugin\Form\MoneyCollectionFormTypePlugin;
 use Spryker\Zed\ProductOption\ProductOptionDependencyProvider as SprykerProductOptionDependencyProvider;
 
 class ProductOptionDependencyProvider extends SprykerProductOptionDependencyProvider
