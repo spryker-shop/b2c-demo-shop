@@ -84,6 +84,8 @@ image:
         enabled-extensions:
             - blackfire
             - newrelic
+        ini:
+            opcache.enable: 0
     node:
         version: 16
         npm: 8
@@ -138,6 +140,8 @@ groups:
         applications:
             Yves:
                 application: yves
+                limits:
+                    workers: 1
                 endpoints:
                     date-time-configurator-example.aop-b2c.demo-spryker.com:
                         entry-point: Configurator
@@ -155,6 +159,8 @@ groups:
                                 namespace: 2
             Glue:
                 application: glue
+                limits:
+                    workers: 1
                 endpoints:
                     glue.de.aop-b2c.demo-spryker.com:
                         store: DE
@@ -162,6 +168,8 @@ groups:
                         store: AT
             boffice:
                 application: backoffice
+                limits:
+                    workers: 1
                 endpoints:
                     backoffice.de.aop-b2c.demo-spryker.com:
                         store: DE
@@ -178,6 +186,8 @@ groups:
                                 namespace: 4
             backgw:
                 application: backend-gateway
+                limits:
+                    workers: 1
                 endpoints:
                     backend-gateway.de.aop-b2c.demo-spryker.com:
                         store: DE
@@ -187,6 +197,8 @@ groups:
                         primal: true
             backapi:
                 application: zed
+                limits:
+                    workers: 1
                 endpoints:
                     backend-api.de.aop-b2c.demo-spryker.com:
                         store: DE
