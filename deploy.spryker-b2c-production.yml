@@ -20,6 +20,9 @@ image:
     node:
         version: 16
         npm: 8
+    environment:
+        SPRYKER_PRODUCT_CONFIGURATOR_HOST: date-time-configurator.b2c.demo-spryker.com
+        SPRYKER_PRODUCT_CONFIGURATOR_PORT: 443
 
 composer:
     mode: --no-dev
@@ -98,6 +101,8 @@ groups:
             Yves:
                 application: yves
                 endpoints:
+                    date-time-configurator.b2c.demo-spryker.com:
+                        entry-point: Configurator
                     www.de.b2c.demo-spryker.com:
                         store: DE
                     www.at.b2c.demo-spryker.com:

@@ -14,7 +14,7 @@
     idQuote: data.product.idQuote | default(null),
     isPromotionItem: false,
     canEditCart: true,
-    additionalContainerClass: 'grid--middle grid--justify grid--no-wrap',
+    additionalContainerClass: 'grid--justify grid--no-wrap',
     productOptionsModifiers: [],
 } %}
 
@@ -38,58 +38,74 @@
                 </a>
             {% endblock %}
 
-            <div class="{{ component.renderClass(config.name ~ '__content', modifiers) }} col">
-                <div class="grid grid--justify grid--middle">
-                    {% block title %}
-                        <a href="{{ data.productItem.url }}" class="{{ component.renderClass(config.name ~ '__title', modifiers) }} col col--lg-8 col--sm-12">
-                            {{ data.productItem.name }}
-                        </a>
-                    {% endblock %}
-
-                    {% block price %}
-                        {% set price = data.productItem.unitPrice is defined ? data.productItem.unitPrice : data.productItem.price %}
-                        {% set productItemSubTotal = data.productItem.quantity is not empty ? data.productItem.quantity * price : price %}
-
-                        {% if can('SeePricePermissionPlugin') %}
-                            {% include molecule('money-price') with {
-                                modifiers: ['small'],
-                                class: component.renderClass(config.name ~ '__price', modifiers) ~ ' col col--lg-4 col--sm-12',
-                                data: {
-                                    amount: productItemSubTotal | default(null),
-                                    originalAmount: data.productItem.prices.ORIGINAL is not defined or data.productItem.prices.ORIGINAL is empty ? null : data.productItem.prices.ORIGINAL
-                                },
-                            } only %}
-                        {% else %}
-                            {{ 'customer.access.cannot_see_price' | trans }}
-                        {% endif %}
-                    {% endblock %}
-                </div>
-
-                {% if not data.isPromotionItem %}
-                    <div class="{{ component.renderClass(config.name ~ '__options', modifiers) }}">
-                        {% block options %}
-                            {% if data.attributes is not empty %}
-                                {% include molecule('product-item-variant-selector') with {
-                                    data: {
-                                        productItem: data.productItem,
-                                        productItemAttributes: data.attributes
-                                    }
-                                } only %}
-                            {% endif %}
+            <div class="{{ component.renderClass(config.name ~ '__content-wrapper', modifiers) }} col">
+                <div class="{{ component.renderClass(config.name ~ '__content', modifiers) }} col">
+                    <div class="grid grid--justify grid--middle">
+                        {% block title %}
+                            <a href="{{ data.productItem.url }}" class="{{ component.renderClass(config.name ~ '__title', modifiers) }} col col--lg-8 col--sm-12">
+                                {{ data.productItem.name }}
+                            </a>
                         {% endblock %}
 
-                        <div class="grid grid--justify grid--gap">
-                            <div class="col">
-                                {% block quantity %}
-                                    {% if canEditCart %}
-                                        {% widget 'CartChangeQuantityFormWidget' args [data.productItem, not canEditCart] only %}
-                                            {% block embeddedData %}
-                                                {% include molecule('product-quantity-input') with {
-                                                    data: {
-                                                        maxQuantity: data.cartItem.maxQuantity,
-                                                        value: data.cartItem.quantity,
-                                                    },
-                                                } only %}
+                        {% block price %}
+                            {% set price = data.productItem.unitPrice is defined ? data.productItem.unitPrice : data.productItem.price %}
+                            {% set productItemSubTotal = data.productItem.quantity is not empty ? data.productItem.quantity * price : price %}
+
+                            {% if can('SeePricePermissionPlugin') %}
+                                {% include molecule('money-price') with {
+                                    modifiers: ['small'],
+                                    class: component.renderClass(config.name ~ '__price', modifiers) ~ ' col col--lg-4 col--sm-12',
+                                    data: {
+                                        amount: productItemSubTotal | default(null),
+                                        originalAmount: data.productItem.prices.ORIGINAL is not defined or data.productItem.prices.ORIGINAL is empty ? null : data.productItem.prices.ORIGINAL
+                                    },
+                                } only %}
+                            {% else %}
+                                {{ 'customer.access.cannot_see_price' | trans }}
+                            {% endif %}
+                        {% endblock %}
+                    </div>
+
+                    {% if not data.isPromotionItem %}
+                        <div class="{{ component.renderClass(config.name ~ '__options', modifiers) }}">
+                            {% block options %}
+                                {% if data.attributes is not empty %}
+                                    {% include molecule('product-item-variant-selector') with {
+                                        data: {
+                                            productItem: data.productItem,
+                                            productItemAttributes: data.attributes
+                                        }
+                                    } only %}
+                                {% endif %}
+                            {% endblock %}
+
+                            {% block productConfiguration %}
+                                <div class="{{ component.renderClass(config.name ~ '__product-configuration', modifiers) }}">
+                                    {% widget 'ProductConfigurationCartItemDisplayWidget'
+                                        args [data.productItem]
+                                        with {
+                                        data: {
+                                            wrapperClassName: config.name ~ '__product-configuration-options',
+                                        },
+                                    } only %}
+                                    {% endwidget %}
+                                    {% widget 'ProductConfigurationCartPageButtonWidget' args [data.productItem] only %}
+                                    {% endwidget %}
+                                </div>
+                            {% endblock %}
+
+                            <div class="grid grid--justify grid--gap">
+                                <div class="col">
+                                    {% block quantity %}
+                                        {% if canEditCart %}
+                                            {% widget 'CartChangeQuantityFormWidget' args [data.productItem, not canEditCart] only %}
+                                                {% block embeddedData %}
+                                                    {% include molecule('product-quantity-input') with {
+                                                        data: {
+                                                            maxQuantity: data.cartItem.maxQuantity,
+                                                            value: data.cartItem.quantity,
+                                                        },
+                                                    } only %}
 
                                                 <input type="hidden" value="{{ data.cartItem.groupKey }}" name="groupKey">
                                             {% endblock %}
@@ -100,26 +116,27 @@
                                 {% endblock %}
                             </div>
 
-                            {% block state %}{% endblock %}
+                                {% block state %}{% endblock %}
+                            </div>
+
+                            {% if canEditCart %}
+                                {% widget 'RemoveFromCartFormWidget' args [data.productItem, random()] only %}
+                                    {% block embeddedData %}
+                                        <button class="link link--darkest link--edit" data-init-single-click {{ qa('add-to-cart-button') }}>
+                                            {{- 'remove' | trans -}}
+                                        </button>
+                                    {% endblock %}
+                                {% endwidget %}
+                            {% endif %}
                         </div>
+                    {% endif %}
 
-                        {% if canEditCart %}
-                            {% widget 'RemoveFromCartFormWidget' args [data.productItem, random()] only %}
-                                {% block embeddedData %}
-                                    <button class="link link--darkest link--edit" data-init-single-click {{ qa('add-to-cart-button') }}>
-                                        {{- 'remove' | trans -}}
-                                    </button>
-                                {% endblock %}
-                            {% endwidget %}
-                        {% endif %}
-                    </div>
-                {% endif %}
+                    {% block content %}{% endblock %}
+                    {% block actions %}{% endblock %}
+                </div>
 
-                {% block content %}{% endblock %}
-                {% block actions %}{% endblock %}
+                {% block additionalInfo %}{% endblock %}
             </div>
-
-            {% block additionalInfo %}{% endblock %}
         </div>
 
         {% block bundles %}

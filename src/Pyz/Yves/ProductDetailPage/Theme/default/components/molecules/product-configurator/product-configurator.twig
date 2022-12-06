@@ -36,6 +36,12 @@
         }
     } only %}
 
+    {% widget 'ProductConfigurationProductViewDisplayWidget' args [data.product] only %}{% endwidget %}
+
+    {% widget 'ProductConfigurationProductDetailPageButtonWidget' args [data.product] only %}{% endwidget %}
+
+    <hr>
+
     {% widget 'AddToCartFormWidget' args [config, data.product, isDisabled, options] only %}
         {% block embeddedData %}
             {% widget 'ProductOptionConfiguratorWidget' args [data.product] only %}{% endwidget %}
