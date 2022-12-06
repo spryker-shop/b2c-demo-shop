@@ -133,4 +133,18 @@ class RabbitMqConfig extends SprykerRabbitMqConfig
     {
         return 'error';
     }
+    /**
+     * @return string
+     */
+    public function getPublishQueueConfiguration() : string
+    {
+        return PublishAndSynchronizeHealthCheckConfig::PUBLISH_PUBLISH_AND_SYNCHRONIZE_HEALTH_CHECK;
+    }
+    /**
+     * @return string
+     */
+    public function getSynchronizationQueueConfiguration() : string
+    {
+        return PublishAndSynchronizeHealthCheckStorageConfig::SYNC_STORAGE_PUBLISH_AND_SYNCHRONIZE_HEALTH_CHECK;
+    }
 }
