@@ -6,6 +6,12 @@ jobs:
     horusec-security:
         name: horusec-security
         runs-on: ubuntu-latest
+        
+        strategy:
+            fail-fast: false
+            matrix:
+                php-version: ['8.0']
+
         env:
             APPLICATION_ENV: devtest
             APPLICATION_STORE: DE
