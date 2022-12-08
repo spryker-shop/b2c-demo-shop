@@ -52,14 +52,41 @@ use Spryker\Zed\StockDataImport\Communication\Plugin\StockStoreDataImportPlugin;
 
 class DataImportDependencyProvider extends SprykerDataImportDependencyProvider
 {
+    /**
+     * @var string
+     */
     public const FACADE_AVAILABILITY = 'availability facade';
+    /**
+     * @var string
+     */
     public const FACADE_CATEGORY = 'category facade';
+    /**
+     * @var string
+     */
     public const FACADE_PRODUCT_BUNDLE = 'product bundle facade';
+    /**
+     * @var string
+     */
     public const FACADE_PRODUCT_RELATION = 'product relation facade';
+    /**
+     * @var string
+     */
     public const FACADE_PRODUCT_SEARCH = 'product search facade';
+    /**
+     * @var string
+     */
     public const FACADE_CURRENCY = 'FACADE_CURRENCY';
+    /**
+     * @var string
+     */
     public const FACADE_PRICE_PRODUCT = 'FACADE_PRICE_PRODUCT';
+    /**
+     * @var string
+     */
     public const FACADE_STOCK = 'FACADE_STOCK';
+    /**
+     * @var string
+     */
     public const FACADE_STORE = 'FACADE_STORE';
 
     /**

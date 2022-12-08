@@ -47,36 +47,111 @@ use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
  */
 class CheckoutControllerTest extends Unit
 {
+    /**
+     * @var string
+     */
     public const CUSTOMER_URL = '/checkout/customer';
+    /**
+     * @var string
+     */
     public const CUSTOMER_ACTION = 'customerAction';
+    /**
+     * @var string
+     */
     public const CUSTOMER_ROUTE = 'checkout-customer';
+    /**
+     * @var string
+     */
     public const GUEST_FORM = 'guestForm';
+    /**
+     * @var string
+     */
     public const CUSTOMER_EMAIL = 'hans@muster.de';
 
+    /**
+     * @var string
+     */
     public const ADDRESS_URL = '/checkout/address';
+    /**
+     * @var string
+     */
     public const ADDRESS_ACTION = 'addressAction';
+    /**
+     * @var string
+     */
     public const ADDRESS_ROUTE = 'checkout-address';
+    /**
+     * @var string
+     */
     public const ADDRESS_FORM = 'addressesForm';
 
+    /**
+     * @var string
+     */
     public const SHIPMENT_URL = '/checkout/shipment';
+    /**
+     * @var string
+     */
     public const SHIPMENT_ACTION = 'shipmentAction';
+    /**
+     * @var string
+     */
     public const SHIPMENT_ROUTE = 'checkout-shipment';
+    /**
+     * @var string
+     */
     public const SHIPMENT_FORM = 'shipmentForm';
 
+    /**
+     * @var string
+     */
     public const PAYMENT_URL = '/checkout/payment';
+    /**
+     * @var string
+     */
     public const PAYMENT_ACTION = 'paymentAction';
+    /**
+     * @var string
+     */
     public const PAYMENT_ROUTE = 'checkout-payment';
+    /**
+     * @var string
+     */
     public const PAYMENT_FORM = 'paymentForm';
 
+    /**
+     * @var string
+     */
     public const SUMMARY_URL = '/checkout/summary';
+    /**
+     * @var string
+     */
     public const SUMMARY_ACTION = 'summaryAction';
+    /**
+     * @var string
+     */
     public const SUMMARY_ROUTE = 'checkout-summary';
+    /**
+     * @var string
+     */
     public const SUMMARY_FORM = 'summaryForm';
 
+    /**
+     * @var string
+     */
     public const PLACE_ORDER_URL = '/checkout/place-order';
+    /**
+     * @var string
+     */
     public const PLACE_ORDER_ACTION = 'placeOrderAction';
+    /**
+     * @var string
+     */
     public const PLACE_ORDER_ROUTE = 'checkout-place-order';
 
+    /**
+     * @var string
+     */
     public const SUCCESS_URL = '/checkout/success';
 
     /**

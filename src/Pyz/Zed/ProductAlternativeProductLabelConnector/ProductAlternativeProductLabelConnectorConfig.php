@@ -11,5 +11,8 @@ use Spryker\Zed\ProductAlternativeProductLabelConnector\ProductAlternativeProduc
 
 class ProductAlternativeProductLabelConnectorConfig extends SprykerProductAlternativeProductLabelConnectorConfig
 {
+    /**
+     * @var int
+     */
     protected const PRODUCT_LABEL_DEFAULT_POSITION = 5;
 }
