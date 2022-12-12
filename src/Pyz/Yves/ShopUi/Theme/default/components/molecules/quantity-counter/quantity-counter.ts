@@ -2,6 +2,7 @@ import Component from 'ShopUi/models/component';
 
 export default class QuantityCounter extends Component {
     protected quantityInput: HTMLInputElement;
+    protected quantityHiddenInput: HTMLInputElement;
     protected decrButton: HTMLButtonElement;
     protected incrButton: HTMLButtonElement;
     protected value: number;
@@ -13,6 +14,7 @@ export default class QuantityCounter extends Component {
 
     protected init(): void {
         this.quantityInput = <HTMLInputElement>this.getElementsByClassName(`${this.jsName}__input`)[0];
+        this.quantityHiddenInput = <HTMLInputElement>this.getElementsByClassName(`${this.jsName}__input-hidden`)[0];
         this.decrButton = <HTMLButtonElement>this.getElementsByClassName(`${this.jsName}__decr`)[0];
         this.incrButton = <HTMLButtonElement>this.getElementsByClassName(`${this.jsName}__incr`)[0];
         this.value = this.getValue;
@@ -22,14 +24,18 @@ export default class QuantityCounter extends Component {
     }
 
     protected mapEvents(): void {
-        this.quantityInput.addEventListener('input', (event: Event) => this.triggerInputEvent());
+        this.quantityInput.addEventListener('input', () => this.triggerInputEvent());
         this.quantityInput.addEventListener('change', () => this.autoUpdateOnChange());
         this.decrButton.addEventListener('click', () => this.onDecrementButtonClick());
         this.incrButton.addEventListener('click', () => this.onIncrementButtonClick());
     }
 
     protected onDecrementButtonClick(): void {
-        const value: number = +this.quantityInput.value;
+        if (this.isDisabled) {
+            return;
+        }
+
+        const value = Number(this.quantityHiddenInput.value);
 
         if (value > this.minQuantity) {
             this.quantityInput.value = (value - 1).toString();
@@ -40,7 +46,11 @@ export default class QuantityCounter extends Component {
     }
 
     protected onIncrementButtonClick(): void {
-        const value: number = Number(this.quantityInput.value);
+        if (this.isDisabled) {
+            return;
+        }
+
+        const value = Number(this.quantityHiddenInput.value);
 
         if (value < this.maxQuantity) {
             this.quantityInput.value = (value + 1).toString();
@@ -83,8 +93,12 @@ export default class QuantityCounter extends Component {
         return +this.quantityInput.getAttribute('data-min-quantity');
     }
 
-    protected get autoUpdate(): string {
-        return this.quantityInput.getAttribute('data-auto-update');
+    protected get autoUpdate(): boolean {
+        return this.quantityInput.hasAttribute('data-auto-update');
+    }
+
+    protected get isDisabled(): boolean {
+        return this.quantityInput.hasAttribute('disabled');
     }
 
     protected get getValue(): number {
