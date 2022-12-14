@@ -52,13 +52,13 @@
         {% block input %}
             <div class="col">
                 {% include molecule('formatted-number-input') with {
+                    class: config.jsName ~ '__formatted-input',
                     data: {
                         inputName: data.inputAttributes.name,
                         inputExtraClasses: inputClassName,
                         inputValue: data.value,
                         inputAttributes: inputAttributes,
                         hiddenInputAttributes: hiddenInputAttributes,
-                        hiddenInputExtraClasses: config.jsName ~ '__input-hidden',
                     },
                     attributes: formatAttributes,
                 } only %}
