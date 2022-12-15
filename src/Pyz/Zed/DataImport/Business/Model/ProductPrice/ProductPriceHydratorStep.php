@@ -14,6 +14,7 @@ use Generated\Shared\Transfer\SpyPriceTypeEntityTransfer;
 use Generated\Shared\Transfer\SpyProductAbstractEntityTransfer;
 use Generated\Shared\Transfer\SpyProductEntityTransfer;
 use Generated\Shared\Transfer\SpyStoreEntityTransfer;
+use Orm\Zed\PriceProduct\Persistence\Map\SpyPriceTypeTableMap;
 use Pyz\Zed\DataImport\Business\Exception\InvalidPriceDataKeyException;
 use Spryker\Zed\DataImport\Business\Exception\DataKeyNotFoundInDataSetException;
 use Spryker\Zed\DataImport\Business\Model\DataImportStep\DataImportStepInterface;
@@ -86,9 +87,9 @@ class ProductPriceHydratorStep implements DataImportStepInterface
      */
     public const KEY_PRICE_MODE_CONFIGURATION = 'price_mode_configuration';
     /**
-     * @var int
+     * @var string
      */
-    public const KEY_DEFAULT_PRICE_MODE_CONFIGURATION = 2;
+    public const KEY_DEFAULT_PRICE_MODE_CONFIGURATION = SpyPriceTypeTableMap::COL_PRICE_MODE_CONFIGURATION_BOTH;
     /**
      * @var string
      */
