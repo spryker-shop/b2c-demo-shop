@@ -1,0 +1,801 @@
+asyncapi: 2.2.0
+info:
+    title: 'Product AsyncAPI definition.'
+    version: 0.1.0
+channels:
+    product:
+        subscribe:
+            message:
+                oneOf:
+                    -
+                        $ref: '#/components/messages/ProductExported'
+                    -
+                        $ref: '#/components/messages/ProductCreated'
+                    -
+                        $ref: '#/components/messages/ProductUpdated'
+                    -
+                        $ref: '#/components/messages/ProductDeleted'
+        publish:
+            message:
+                oneOf:
+                    -
+                        $ref: '#/components/messages/InitializeProductExport'
+
+components:
+    messages:
+        ProductExported:
+            name: ProductExported
+            operationId: Product
+            summary: 'A new product has been exported.'
+            payload:
+                $ref: '#/components/schemas/ProductExported'
+            headers:
+                $ref: '#/components/schemas/headers'
+
+        ProductCreated:
+            name: ProductCreated
+            operationId: Product
+            summary: 'A new product has been created.'
+            payload:
+                $ref: '#/components/schemas/ProductCreated'
+            headers:
+                $ref: '#/components/schemas/headers'
+
+        ProductUpdated:
+            name: ProductUpdated
+            operationId: Product
+            summary: 'A product has been updated.'
+            payload:
+                $ref: '#/components/schemas/ProductUpdated'
+            headers:
+                $ref: '#/components/schemas/headers'
+
+        ProductDeleted:
+            name: ProductDeleted
+            operationId: Product
+            summary: 'A product has been deleted.'
+            payload:
+                $ref: '#/components/schemas/ProductDeleted'
+            headers:
+                $ref: '#/components/schemas/headers'
+
+        InitializeProductExport:
+            name: InitializeProductExport
+            operationId: Product
+            summary: 'Initialize a product export.'
+            headers:
+                $ref: '#/components/schemas/headers'
+    schemas:
+        ProductExported:
+            $ref: '#/components/schemas/GenericProduct'
+
+        ProductCreated:
+            $ref: '#/components/schemas/GenericProduct'
+
+        ProductUpdated:
+            $ref: '#/components/schemas/GenericProduct'
+
+        ProductDeleted:
+            type: object
+            properties:
+                sku:
+                    type: string
+            required:
+                - sku
+
+        GenericProduct:
+            type: object
+            properties:
+                productsConcrete:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/ProductConcrete'
+            required:
+                - productsConcrete
+
+        ProductConcrete:
+            type: object
+            properties:
+                sku:
+                    type: string
+                attributes:
+                    type: object
+                    nullable: true
+                is_active:
+                    type: boolean
+                    nullable: true
+                abstract_sku:
+                    type: string
+                    nullable: true
+                tax_rate:
+                    type: string
+                    nullable: true
+                valid_from:
+                    type: string
+                    format: date-time
+                    nullable: true
+                valid_to:
+                    type: string
+                    format: date-time
+                    nullable: true
+                name:
+                    type: string
+                    nullable: true
+                number_of_offers:
+                    type: integer
+                    nullable: true
+                is_quantity_splittable:
+                    type: boolean
+                    nullable: true
+                product_bundle:
+                    nullable: true
+                    $ref: '#/components/schemas/ProductBundle'
+                product_discontinued:
+                    nullable: true
+                    $ref: '#/components/schemas/ProductDiscontinued'
+                base_measurement_unit:
+                    nullable: true
+                    $ref: '#/components/schemas/ProductMeasurementUnit'
+                product_offer_stock:
+                    nullable: true
+                    $ref: '#/components/schemas/ProductOfferStock'
+                image_sets:
+                    nullable: true
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/ProductImageSet'
+                localized_attributes:
+                    nullable: true
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/LocalizedAttributes'
+                company_suppliers:
+                    nullable: true
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/CompanySupplier'
+                prices:
+                    nullable: true
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/PriceProduct'
+                stores:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Store'
+                product_categories:
+                    nullable: true
+                    type: array
+                    items:
+                        type: object
+                        properties:
+                            product_order:
+                                nullable: true
+                                type: integer
+                            category:
+                                nullable: true
+                                $ref: '#/components/schemas/Category'
+                product_alternative_create_requests:
+                    nullable: true
+                    type: array
+                    items:
+                        type: object
+                        properties:
+                            alternative_sku:
+                                nullable: true
+                                type: string
+                stocks:
+                    nullable: true
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/StockProduct'
+                discontinued_notes:
+                    nullable: true
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/ProductDiscontinuedNote'
+                url:
+                    nullable: true
+                    $ref: '#/components/schemas/ProductUrl'
+                rating:
+                    nullable: true
+                    type: number
+                offers:
+                    nullable: true
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/ProductOffer'
+            required:
+                - sku
+                - stores
+
+        ProductBundle:
+            type: object
+            properties:
+                availability:
+                    type: number
+                    nullable: true
+                is_never_out_of_stock:
+                    type: boolean
+                    nullable: true
+                bundles_to_remove:
+                    type: array
+                    nullable: true
+                    items:
+                        type: string
+                bundled_products:
+                    nullable: true
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/ProductForBundle'
+
+        ProductForBundle:
+            type: object
+            properties:
+                quantity:
+                    type: integer
+                    nullable: true
+                sku:
+                    type: string
+                    nullable: true
+                is_active:
+                    type: boolean
+                    nullable: true
+                bundle_sku:
+                    nullable: true
+                    type: string
+
+        ProductDiscontinued:
+            type: object
+            properties:
+                sku:
+                    type: string
+                    nullable: true
+                active_until:
+                    type: string
+                    nullable: true
+                discontinued_on:
+                    type: string
+                    nullable: true
+                product_discontinued_notes:
+                    nullable: true
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/ProductDiscontinuedNote'
+
+        ProductDiscontinuedNote:
+            type: object
+            properties:
+                note:
+                    type: string
+                    nullable: true
+
+        ProductMeasurementUnit:
+            type: object
+            properties:
+                name:
+                    type: string
+                    nullable: true
+                code:
+                    type: string
+                    nullable: true
+                default_precision:
+                    type: string
+                    nullable: true
+
+        ProductOfferStock:
+            type: object
+            properties:
+                quantity:
+                    type: number
+                    nullable: true
+                stock:
+                    nullable: true
+                    $ref: '#/components/schemas/StockProduct'
+                is_never_out_of_stock:
+                    type: boolean
+                    nullable: true
+                product_offer_reference:
+                    type: string
+                    nullable: true
+
+        Company:
+            type: object
+            properties:
+                is_active:
+                    type: boolean
+                    nullable: true
+                name:
+                    nullable: true
+                    type: string
+                status:
+                    type: string
+                    nullable: true
+                uuid:
+                    type: string
+                    nullable: true
+                store_relation:
+                    type: object
+                    nullable: true
+                    properties:
+                        stores:
+                            nullable: true
+                            type: array
+                            items:
+                                $ref: '#/components/schemas/Store'
+
+        ProductImageSet:
+            type: object
+            properties:
+                product_image_set_key:
+                    type: string
+                    nullable: true
+                name:
+                    type: string
+                    nullable: true
+                locale:
+                    nullable: true
+                    $ref: '#/components/schemas/Locale'
+                product_images:
+                    nullable: true
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/ProductImage'
+
+        Locale:
+            type: object
+            properties:
+                locale_name:
+                    type: string
+                    nullable: true
+                name:
+                    type: string
+                    nullable: true
+                is_active:
+                    type: boolean
+                    nullable: true
+
+        ProductImage:
+            type: object
+            properties:
+                external_url_large:
+                    type: string
+                    nullable: true
+                sort_order:
+                    type: integer
+                    nullable: true
+                external_url_small:
+                    type: string
+                    nullable: true
+
+        LocalizedAttributes:
+            type: object
+            properties:
+                name:
+                    type: string
+                    nullable: true
+                description:
+                    type: string
+                    nullable: true
+                meta_title:
+                    type: string
+                    nullable: true
+                meta_description:
+                    type: string
+                    nullable: true
+                meta_keywords:
+                    type: string
+                    nullable: true
+                attributes:
+                    type: object
+                    nullable: true
+                is_searchable:
+                    type: boolean
+                    nullable: true
+                locale:
+                    nullable: true
+                    $ref: '#/components/schemas/Locale'
+
+        CompanySupplier:
+            type: object
+            properties:
+                is_active:
+                    type: boolean
+                    nullable: true
+                key:
+                    type: string
+                    nullable: true
+                name:
+                    type: string
+                    nullable: true
+                status:
+                    type: string
+                    nullable: true
+                uuid:
+                    type: string
+                    nullable: true
+                company_type:
+                    type: string
+                    nullable: true
+
+        Store:
+            type: object
+            properties:
+                name:
+                    type: string
+                    nullable: true
+                store_reference:
+                    type: string
+                    nullable: true
+                selected_currency_iso_code:
+                    type: string
+                    nullable: true
+                default_currency_iso_code:
+                    type: string
+                    nullable: true
+                available_currency_iso_codes:
+                    type: array
+                    nullable: true
+                    items:
+                        type: string
+                available_locale_iso_codes:
+                    type: array
+                    nullable: true
+                    items:
+                        type: string
+                queue_pools:
+                    type: array
+                    nullable: true
+                    items:
+                        type: string
+                stores_with_shared_persistence:
+                    type: array
+                    nullable: true
+                    items:
+                        type: string
+                countries:
+                    type: array
+                    nullable: true
+                    items:
+                        type: string
+                timezone:
+                    type: string
+                    nullable: true
+
+        ProductUrl:
+            type: object
+            properties:
+                urls:
+                    type: array
+                    nullable: true
+                    items:
+                        type: object
+                        properties:
+                            url:
+                                type: string
+                                nullable: true
+                            locale:
+                                nullable: true
+                                $ref: '#/components/schemas/Locale'
+                abstract_sku:
+                    type: boolean
+                    nullable: true
+
+        PriceProduct:
+            type: object
+            properties:
+                sku_product:
+                    type: string
+                    nullable: true
+                is_active:
+                    type: boolean
+                    nullable: true
+                price_type_name:
+                    type: string
+                    nullable: true
+                sku_product_abstract:
+                    type: string
+                    nullable: true
+                group_key:
+                    type: string
+                    nullable: true
+                is_mergeable:
+                    type: boolean
+                    nullable: true
+                concrete_sku:
+                    type: string
+                    nullable: true
+                volume_quantity:
+                    type: integer
+                    nullable: true
+                price_dimension:
+                    type: object
+                    nullable: true
+                money_value:
+                    nullable: true
+                    $ref: '#/components/schemas/MoneyValue'
+                price_type:
+                    nullable: true
+                    type: object
+                    properties:
+                        name:
+                            type: string
+                            nullable: true
+                        price_mode_configuration:
+                            type: string
+                            nullable: true
+
+        MoneyValue:
+            type: object
+            properties:
+                net_amount:
+                    type: integer
+                    nullable: true
+                gross_amount:
+                    type: integer
+                    nullable: true
+                price_data:
+                    type: string
+                    nullable: true
+                price_data_checksum:
+                    type: string
+                    nullable: true
+                price_data_by_price_type:
+                    nullable: true
+                    type: array
+                    items:
+                        type: string
+                currency:
+                    nullable: true
+                    $ref: '#/components/schemas/Currency'
+                store:
+                    nullable: true
+                    $ref: '#/components/schemas/Store'
+
+        Currency:
+            type: object
+            properties:
+                code:
+                    type: string
+                    nullable: true
+                symbol:
+                    type: string
+                    nullable: true
+                name:
+                    type: string
+                    nullable: true
+                fraction_digits:
+                    type: integer
+                    nullable: true
+
+        StockProduct:
+            type: object
+            properties:
+                sku:
+                    type: string
+                    nullable: true
+                is_never_out_of_stock:
+                    type: boolean
+                    nullable: true
+                stock_type:
+                    type: string
+                    nullable: true
+                quantity:
+                    type: string
+                    nullable: true
+
+        Category:
+            type: object
+            properties:
+                category_key:
+                    type: string
+                    nullable: true
+                is_active:
+                    type: boolean
+                    nullable: true
+                is_in_menu:
+                    type: boolean
+                    nullable: true
+                is_clickable:
+                    type: boolean
+                    nullable: true
+                is_searchable:
+                    type: boolean
+                    nullable: true
+                name:
+                    type: string
+                    nullable: true
+                url:
+                    nullable: true
+                    type: string
+                image_name:
+                    nullable: true
+                    type: string
+                category_image_name:
+                    nullable: true
+                    type: string
+                meta_title:
+                    nullable: true
+                    type: string
+                meta_description:
+                    nullable: true
+                    type: string
+                meta_keywords:
+                    nullable: true
+                    type: string
+                category_node:
+                    nullable: true
+                    type: object
+                node_collection:
+                    nullable: true
+                    type: object
+                parent_category_node:
+                    nullable: true
+                    type: object
+                category_template:
+                    nullable: true
+                    type: object
+                store_relation:
+                    nullable: true
+                    type: object
+                localized_attributes:
+                    nullable: true
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/CategoryLocalizedAttributes'
+                extra_parents:
+                    nullable: true
+                    type: array
+                    items:
+                        type: object
+                image_sets:
+                    nullable: true
+                    type: array
+                    items:
+                        type: object
+
+        CategoryLocalizedAttributes:
+            type: object
+            properties:
+                name:
+                    type: string
+                    nullable: true
+                url:
+                    type: string
+                    nullable: true
+                meta_title:
+                    type: string
+                    nullable: true
+                meta_description:
+                    type: string
+                    nullable: true
+                meta_keywords:
+                    type: string
+                    nullable: true
+                image:
+                    type: object
+                    nullable: true
+                locale:
+                    nullable: true
+                    $ref: '#/components/schemas/Locale'
+
+        ProductOffer:
+            type: object
+            properties:
+                merchant_reference:
+                    type: string
+                    nullable: true
+                merchant_sku:
+                    type: string
+                    nullable: true
+                product_offer_reference:
+                    type: string
+                    nullable: true
+                approval_status:
+                    type: string
+                    nullable: true
+                is_active:
+                    type: boolean
+                    nullable: true
+                concrete_sku:
+                    type: string
+                    nullable: true
+                product_attributes:
+                    type: array
+                    nullable: true
+                    items:
+                        type: string
+                created_at:
+                    type: string
+                    nullable: true
+                updated_at:
+                    type: string
+                    nullable: true
+                merchant_name:
+                    type: string
+                    nullable: true
+                product_offer_validity:
+                    type: object
+                    nullable: true
+                    properties:
+                        validTo:
+                            type: string
+                            nullable: true
+                        validFrom:
+                            type: string
+                            nullable: true
+                prices:
+                    nullable: true
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/PriceProduct'
+                stores:
+                    nullable: true
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Store'
+                product_images:
+                    type: array
+                    nullable: true
+                    items:
+                        $ref: '#/components/schemas/ProductImage'
+                product_localized_attributes:
+                    type: array
+                    nullable: true
+                    items:
+                        $ref: '#/components/schemas/LocalizedAttributes'
+                product_offer_stocks:
+                    type: array
+                    nullable: true
+                    items:
+                        quantity:
+                            type: number
+                            nullable: true
+                        is_never_out_of_stock:
+                            type: boolean
+                            nullable: true
+                        product_offer_reference:
+                            type: string
+                            nullable: true
+                        stock:
+                            type: object
+                            nullable: true
+
+        headers:
+            type: object
+            required:
+                - authorization
+                - timestamp
+                - correlationId
+                - storeReference
+                - event
+                - transferName
+                - publisher
+            properties:
+                authorization:
+                    type: string
+                    description: 'Authorization header for requesting a protected resource.'
+                timestamp:
+                    type: integer
+                    description: 'Timestamp when this message was created (microtime).'
+                correlationId:
+                    type: string
+                    description: 'Identifier of the current process.'
+                storeReference:
+                    type: string
+                    description: 'Identifier of a store for the triggered event.'
+                event:
+                    type: string
+                    description: 'Name of the current event.'
+                transferName:
+                    type: string
+                    description: 'Transfer name of the current event.'
+                publisher:
+                    type: object
+                    properties:
+                        appIdentifier:
+                            type: string
+                            description: 'Identifier of the app that triggered the event.'
+                        storeReference:
+                            type: string
+                            description: 'Identifier of a store that triggered the event.'

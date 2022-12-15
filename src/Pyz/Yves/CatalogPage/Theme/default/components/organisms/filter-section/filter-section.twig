@@ -39,6 +39,7 @@
                             categories: data.categories,
                             filter: filter,
                             parentJsName: data.parentJsName,
+                            numberFormatConfig: data.numberFormatConfig,
                         },
                     } only %}
                         {% block contentText %}
@@ -56,6 +57,7 @@
                                     activeMin: embed.filter.activeMin | default(0),
                                     activeMax: embed.filter.activeMax | default(0),
                                     parentJsName: embed.parentJsName,
+                                    numberFormatConfig: embed.numberFormatConfig,
                                 },
                             } only %}
                         {% endblock %}

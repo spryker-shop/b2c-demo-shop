@@ -31,6 +31,7 @@ use Spryker\Zed\PaymentDataImport\Communication\Plugin\PaymentMethodStoreDataImp
 use Spryker\Zed\PriceProductDataImport\Communication\Plugin\PriceProductDataImportPlugin;
 use Spryker\Zed\PriceProductScheduleDataImport\Communication\Plugin\PriceProductScheduleDataImportPlugin;
 use Spryker\Zed\ProductAlternativeDataImport\Communication\Plugin\ProductAlternativeDataImportPlugin;
+use Spryker\Zed\ProductConfigurationDataImport\Communication\Plugin\ProductConfigurationDataImportPlugin;
 use Spryker\Zed\ProductDiscontinuedDataImport\Communication\Plugin\ProductDiscontinuedDataImportPlugin;
 use Spryker\Zed\ProductLabelDataImport\Communication\Plugin\ProductLabelDataImportPlugin;
 use Spryker\Zed\ProductLabelDataImport\Communication\Plugin\ProductLabelStoreDataImportPlugin;
@@ -51,14 +52,41 @@ use Spryker\Zed\StockDataImport\Communication\Plugin\StockStoreDataImportPlugin;
 
 class DataImportDependencyProvider extends SprykerDataImportDependencyProvider
 {
+    /**
+     * @var string
+     */
     public const FACADE_AVAILABILITY = 'availability facade';
+    /**
+     * @var string
+     */
     public const FACADE_CATEGORY = 'category facade';
+    /**
+     * @var string
+     */
     public const FACADE_PRODUCT_BUNDLE = 'product bundle facade';
+    /**
+     * @var string
+     */
     public const FACADE_PRODUCT_RELATION = 'product relation facade';
+    /**
+     * @var string
+     */
     public const FACADE_PRODUCT_SEARCH = 'product search facade';
+    /**
+     * @var string
+     */
     public const FACADE_CURRENCY = 'FACADE_CURRENCY';
+    /**
+     * @var string
+     */
     public const FACADE_PRICE_PRODUCT = 'FACADE_PRICE_PRODUCT';
+    /**
+     * @var string
+     */
     public const FACADE_STOCK = 'FACADE_STOCK';
+    /**
+     * @var string
+     */
     public const FACADE_STORE = 'FACADE_STORE';
 
     /**
@@ -252,6 +280,7 @@ class DataImportDependencyProvider extends SprykerDataImportDependencyProvider
             new ContentNavigationDataImportPlugin(),
             new StockAddressDataImportPlugin(),
             new CategoryStoreDataImportPlugin(),
+            new ProductConfigurationDataImportPlugin(),
         ];
     }
 

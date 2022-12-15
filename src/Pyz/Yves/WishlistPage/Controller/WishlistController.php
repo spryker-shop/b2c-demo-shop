@@ -7,6 +7,8 @@
 
 namespace Pyz\Yves\WishlistPage\Controller;
 
+use Generated\Shared\Transfer\WishlistResponseTransfer;
+use Generated\Shared\Transfer\WishlistTransfer;
 use SprykerShop\Yves\CustomerPage\Plugin\Router\CustomerPageRouteProviderPlugin;
 use SprykerShop\Yves\WishlistPage\Controller\WishlistController as SprykerWishlistController;
 use SprykerShop\Yves\WishlistPage\Plugin\Router\WishlistPageRouteProviderPlugin;
@@ -34,24 +36,47 @@ class WishlistController extends SprykerWishlistController
             return $this->redirectResponseInternal(CustomerPageRouteProviderPlugin::ROUTE_NAME_LOGIN);
         }
 
+        $wishlistAddItemForm = $this->getFactory()->getWishlistAddItemForm()->handleRequest($request);
+
+        if (!$wishlistAddItemForm->isSubmitted() || !$wishlistAddItemForm->isValid()) {
+            $this->addErrorMessage(static::MESSAGE_FORM_CSRF_VALIDATION_ERROR);
+
+            return $this->redirectResponseInternal(WishlistPageRouteProviderPlugin::ROUTE_NAME_WISHLIST_DETAILS, [
+                'wishlistName' => $wishlistItemTransfer->getWishlistName(),
+            ]);
+        }
+
+        $wishlistResponseTransfer = new WishlistResponseTransfer();
+        if ($wishlistItemTransfer->getWishlistName() === static::DEFAULT_NAME) {
+            $wishlistResponseTransfer = $this->getFactory()->getWishlistClient()->validateAndCreateWishlist(
+                (new WishlistTransfer())
+                    ->setName(static::DEFAULT_NAME)
+                    ->setFkCustomer($wishlistItemTransfer->getFkCustomer()),
+            );
+        }
+
         $wishlistItemTransfer = $this->getFactory()
             ->getWishlistClient()
             ->addItem($wishlistItemTransfer);
+
         if (!$wishlistItemTransfer->getIdWishlistItem()) {
+            if ($wishlistResponseTransfer->getWishlist()) {
+                $this->getFactory()->getWishlistClient()->removeWishlistByName($wishlistResponseTransfer->getWishlist());
+            }
+
             $this->addErrorMessage('customer.account.wishlist.item.not_added');
-        } else {
-            $this->addSuccessMessage('cart.add.items.success');
+
+            return $this->redirectResponseInternal(WishlistPageRouteProviderPlugin::ROUTE_NAME_WISHLIST_OVERVIEW, [
+                'wishlistName' => $wishlistItemTransfer->getWishlistName(),
+            ]);
         }
 
         if ($request->headers->has(static::PYZ_REQUEST_HEADER_REFERER)) {
             return $this->redirectResponseExternal($request->headers->get(static::PYZ_REQUEST_HEADER_REFERER));
         }
 
-        return $this->redirectResponseInternal(
-            WishlistPageRouteProviderPlugin::ROUTE_NAME_WISHLIST_DETAILS,
-            [
+        return $this->redirectResponseInternal(WishlistPageRouteProviderPlugin::ROUTE_NAME_WISHLIST_DETAILS, [
             'wishlistName' => $wishlistItemTransfer->getWishlistName(),
-            ]
-        );
+        ]);
     }
 }

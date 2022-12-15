@@ -9,5 +9,8 @@ namespace PyzTest\Yves\Product\PageObject;
 
 class ProductDetailPage
 {
+    /**
+     * @var string
+     */
     public const ADD_TO_CART_XPATH = '[data-qa*="add-to-cart-button"]';
 }

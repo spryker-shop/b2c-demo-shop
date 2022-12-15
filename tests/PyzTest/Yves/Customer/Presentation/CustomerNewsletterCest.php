@@ -7,7 +7,7 @@
 
 namespace PyzTest\Yves\Customer\Presentation;
 
-use Codeception\Util\Stub;
+use Codeception\Stub;
 use PyzTest\Yves\Customer\CustomerPresentationTester;
 use PyzTest\Yves\Customer\PageObject\CustomerNewsletterPage;
 use Spryker\Zed\Newsletter\Dependency\Facade\NewsletterToMailInterface;

@@ -18,6 +18,8 @@ class ContentProductSetGuiConfig extends SprykerContentProductSetGuiConfig
 
     /**
      * Content item banner default template name
+     *
+     * @var string
      */
     protected const PYZ_WIDGET_TEMPLATE_DISPLAY_NAME_ADD_TO_CART = 'content_product_set.template.add_to_cart';
 

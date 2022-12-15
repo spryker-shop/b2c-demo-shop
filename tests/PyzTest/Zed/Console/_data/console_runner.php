@@ -1,6 +1,12 @@
 <?php
 
+/**
+ * @var string
+ */
 const APPLICATION_ENV = 'development';
+/**
+ * @var string
+ */
 const APPLICATION_STORE = 'DE';
 const APPLICATION_ROOT_DIR = __DIR__ . '/cli_sandbox';
 const APPLICATION_VENDOR_DIR = __DIR__ . '/../../../../../vendor';

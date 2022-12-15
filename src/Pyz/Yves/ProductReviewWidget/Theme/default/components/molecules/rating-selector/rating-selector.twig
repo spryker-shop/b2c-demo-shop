@@ -10,6 +10,6 @@
     {% if data.reviewCount is not empty %}
         {% set reviewCountJsName = data.parentJsName ? data.parentJsName ~ '__review-count' %}
 
-        <span class="{{ config.name }}__review-count {{ config.jsName }}__review-count {{ reviewCountJsName }}">{{ data.reviewCount | default(0) }}</span>
+        <span class="{{ config.name }}__review-count {{ config.jsName }}__review-count {{ reviewCountJsName }}">{{ data.reviewCount | default(0) | executeFilterIfExists('formatInt', app.locale) }}</span>
     {% endif %}
 {% endblock %}

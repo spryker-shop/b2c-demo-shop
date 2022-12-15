@@ -33,7 +33,7 @@
                 <div class="page-layout-cart__col page-layout-cart__col--content">
                     <div class="cart-box grid grid--middle grid--justify">
                         <h3 class="col">{{ 'cart.title_content' | trans }}</h3>
-                        <span class="cart-box__quantity col">{{ getCartQuantity() }} {{ 'item' | trans }}</span>
+                        <span class="cart-box__quantity col">{{ getCartQuantity() | executeFilterIfExists('formatInt', app.locale) }} {{ 'item' | trans }}</span>
                     </div>
                     <div class="page-layout-cart__items-wrap">
                         {% widget 'QuoteConfiguredBundleWidget'

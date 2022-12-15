@@ -12,7 +12,13 @@ use Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface;
 
 class CombinedProductConcreteTypeDataSetCondition implements DataSetConditionInterface
 {
+    /**
+     * @var string
+     */
     protected const ASSIGNABLE_PRODUCT_TYPE_CONCRETE = 'concrete';
+    /**
+     * @var string
+     */
     protected const ASSIGNABLE_PRODUCT_TYPE_BOTH = 'both';
 
     /**

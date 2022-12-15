@@ -15,11 +15,26 @@ use Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface;
 
 class DiscountAmountWriterStep implements DataImportStepInterface
 {
+    /**
+     * @var int
+     */
     public const BULK_SIZE = 100;
 
+    /**
+     * @var string
+     */
     public const KEY_DISCOUNT_KEY = 'discount_key';
+    /**
+     * @var string
+     */
     public const KEY_CURRENCY = 'currency';
+    /**
+     * @var string
+     */
     public const KEY_VALUE_NET = 'value_net';
+    /**
+     * @var string
+     */
     public const KEY_VALUE_GROSS = 'value_gross';
 
     /**

@@ -8,8 +8,8 @@
 namespace PyzTest\Yves\Customer\Helper;
 
 use Codeception\Module;
+use Codeception\Stub;
 use Codeception\TestInterface;
-use Codeception\Util\Stub;
 use Generated\Shared\DataBuilder\CustomerBuilder;
 use Generated\Shared\Transfer\NewsletterSubscriberTransfer;
 use Generated\Shared\Transfer\NewsletterSubscriptionRequestTransfer;

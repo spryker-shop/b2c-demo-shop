@@ -13,7 +13,7 @@ use Spryker\Client\ProductStorage\ProductStorageClientInterface;
 class ContentProductAbstractReader implements ContentProductAbstractReaderInterface
 {
     /**
-     * @var \Spryker\Client\ContentProduct\ContentProductClientInterface $contentProductClient
+     * @var \Spryker\Client\ContentProduct\ContentProductClientInterface
      */
     protected $contentProductClient;
 

@@ -10,10 +10,10 @@
 
         &__input {
             margin: 0;
-            padding: 0;
+            padding: 0 rem(2);
             display: block;
             font: fw(light) rem(13) / rem(31) $setting-font-family-additional;
-            width: rem(30);
+            width: rem(40);
             height: rem(30);
             text-align: center;
             border: none;
@@ -28,9 +28,11 @@
 
             &--quantity-large {
                 font-size: rem(15);
+                width: rem(50);
             }
 
-            &--transparent {
+            &--transparent,
+            &[disabled] {
                 background: $setting-color-transparent;
             }
         }
