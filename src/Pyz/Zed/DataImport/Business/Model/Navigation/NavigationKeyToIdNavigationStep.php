@@ -15,7 +15,13 @@ use Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface;
 
 class NavigationKeyToIdNavigationStep implements DataImportStepInterface
 {
+    /**
+     * @var string
+     */
     public const KEY_SOURCE = 'navigationKey';
+    /**
+     * @var string
+     */
     public const KEY_TARGET = 'idNavigation';
 
     /**

@@ -1,0 +1,18 @@
+{% extends view('product-detail-configuration', 'SprykerShop:ProductConfigurationWidget') %}
+
+{% block body %}
+    {% embed molecule('toggler-item') with {
+        modifiers: ['with-top-border', 'filter'],
+        data: {
+            title: 'Configurations' | trans,
+            isToggler: false,
+        },
+        embed: {
+            content: parent(),
+        },
+    } only %}
+        {% block contentText %}
+            {{ embed.content | raw }}
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

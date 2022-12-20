@@ -1,12 +1,10 @@
 const { join } = require('path');
 const webpack = require('webpack');
-const autoprefixer = require('autoprefixer');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const filePathFilter = require('@jsdevtools/file-path-filter');
 const { findComponentEntryPoints, findComponentStyles, findAppEntryPoint } = require('../libs/finder');
 const { getAliasList } = require('../libs/alias');
 const { getAssetsConfig } = require('../libs/assets-configurator');
-const { buildVariantSettings } = require('../settings');
 
 let isImagesOptimizationEnabled = false;
 let imagesOptimization = null;
@@ -19,14 +17,12 @@ try {
 }
 
 const getConfiguration = async appSettings => {
-    const { buildVariant, isES6Module } = buildVariantSettings;
     const componentEntryPointsPromise = findComponentEntryPoints(appSettings.find.componentEntryPoints);
     const stylesPromise = findComponentStyles(appSettings.find.componentStyles);
     const [componentEntryPoints, styles] = await Promise.all([componentEntryPointsPromise, stylesPromise]);
     const alias = getAliasList(appSettings);
 
     const vendorTs = await findAppEntryPoint(appSettings.find.shopUiEntryPoints, './vendor.ts');
-    const es6PolyfillTs = await findAppEntryPoint(appSettings.find.shopUiEntryPoints, './es6-polyfill.ts');
     const appTs = await findAppEntryPoint(appSettings.find.shopUiEntryPoints, './app.ts');
     const basicScss = await findAppEntryPoint(appSettings.find.shopUiEntryPoints, './styles/basic.scss');
     const utilScss = await findAppEntryPoint(appSettings.find.shopUiEntryPoints, './styles/util.scss');
@@ -61,7 +57,6 @@ const getConfiguration = async appSettings => {
 
             entry: {
                 'vendor': vendorTs,
-                'es6-polyfill': es6PolyfillTs,
                 'app': [
                     appTs,
                     ...componentEntryPoints,
@@ -80,7 +75,7 @@ const getConfiguration = async appSettings => {
             output: {
                 path: join(appSettings.context, appSettings.paths.public),
                 publicPath: `/${appSettings.urls.assets}/`,
-                filename: isES6Module ? `./js/${appSettings.name}.[name].js` : `./js/${appSettings.name}.[name].${buildVariant}.js`,
+                filename: `./js/${appSettings.name}.[name].js`,
                 jsonpFunction: `webpackJsonp_${appSettings.name.replace(/(-|\W)+/gi, '_')}`
             },
 
@@ -101,18 +96,14 @@ const getConfiguration = async appSettings => {
                                     loose: true,
                                     modules: false,
                                     targets: {
-                                        esmodules: isES6Module,
-                                        browsers: [
-                                            '> 1%',
-                                            'ie >= 11',
-                                        ],
+                                        esmodules: true,
                                     },
                                     useBuiltIns: false,
                                 }],
                                 '@babel/preset-typescript'
                             ],
                             plugins: [
-                                ...(!isES6Module ? ['@babel/plugin-transform-runtime'] : []),
+                                ['@babel/plugin-transform-runtime'],
                                 ['@babel/plugin-proposal-class-properties', {
                                     loose: true,
                                 }],
@@ -132,11 +123,7 @@ const getConfiguration = async appSettings => {
                                 loader: 'postcss-loader',
                                 options: {
                                     ident: 'postcss',
-                                    plugins: [
-                                        autoprefixer({
-                                            'browsers': ['> 1%', 'last 2 versions']
-                                        })
-                                    ]
+                                    plugins: [require('autoprefixer')]
                                 }
                             }, {
                                 loader: 'sass-loader',
@@ -176,7 +163,7 @@ const getConfiguration = async appSettings => {
                     __PRODUCTION__: appSettings.isProductionMode
                 }),
 
-                ...(isES6Module ? getAssetsConfig(appSettings) : []),
+                ...getAssetsConfig(appSettings),
 
                 new MiniCssExtractPlugin({
                     filename: `./css/${appSettings.name}.[name].css`,
@@ -189,7 +176,7 @@ const getConfiguration = async appSettings => {
                 }),
 
                 compiler => compiler.hooks.done.tap('webpack', compilationParams => {
-                    const watchLifecycleEventNames = ['yves:watch:esm', 'yves:watch:legacy'];
+                    const watchLifecycleEventNames = ['yves:watch'];
 
                     if (watchLifecycleEventNames.includes(process.env.npm_lifecycle_event)) {
                         return;

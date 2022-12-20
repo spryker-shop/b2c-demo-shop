@@ -35,7 +35,7 @@
                         buttonClasses: buttonClasses,
                     },
                 } only %}
-                    {% block formContent %}
+                    {% block body %}
                         {% include molecule('remote-form-submit') with {
                             class: 'button--expand-mobile',
                             data: {
@@ -96,6 +96,7 @@
             orderShipmentExpenses: data.orderShipmentExpenses,
             currencyIsoCode: data.order.currencyIsoCode,
             order: data.order,
+            reorderSelectionClassName: data.reorderSelectionClassName,
         },
     } only %}
 

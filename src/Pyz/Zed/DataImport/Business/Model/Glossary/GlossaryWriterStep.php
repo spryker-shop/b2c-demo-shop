@@ -16,11 +16,26 @@ use Spryker\Zed\Glossary\Dependency\GlossaryEvents;
 
 class GlossaryWriterStep extends PublishAwareStep implements DataImportStepInterface
 {
+    /**
+     * @var int
+     */
     public const BULK_SIZE = 100;
 
+    /**
+     * @var string
+     */
     public const KEY_KEY = 'key';
+    /**
+     * @var string
+     */
     public const KEY_TRANSLATION = 'translation';
+    /**
+     * @var string
+     */
     public const KEY_ID_LOCALE = 'idLocale';
+    /**
+     * @var string
+     */
     public const KEY_LOCALE = 'locale';
 
     /**

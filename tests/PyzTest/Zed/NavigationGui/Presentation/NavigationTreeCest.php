@@ -234,7 +234,7 @@ class NavigationTreeCest
      */
     public function testDeleteNavigationNode(NavigationGuiPresentationTester $i)
     {
-        /**
+        /*
          * Test skipped because popup confirmation is not working as expected under phantomjs.
          * TODO: once we have Selenium, enable this test case.
          */

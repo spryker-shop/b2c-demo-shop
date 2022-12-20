@@ -23,11 +23,15 @@ class ContentBannerGuiConfig extends SprykerContentBannerGuiConfig
 
     /**
      * Content item banner default template name
+     *
+     * @var string
      */
     protected const PYZ_WIDGET_TEMPLATE_DISPLAY_NAME_SLIDER = 'content_banner.template.slider';
 
     /**
      * Content item banner top-title template name
+     *
+     * @var string
      */
     protected const PYZ_WIDGET_TEMPLATE_DISPLAY_NAME_SLIDER_WITHOUT_LINK = 'content_banner.template.slider-without-link';
 

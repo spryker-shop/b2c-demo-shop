@@ -11,6 +11,9 @@ use Spryker\Glue\CheckoutRestApi\CheckoutRestApiConfig as SprykerCheckoutRestApi
 
 class CheckoutRestApiConfig extends SprykerCheckoutRestApiConfig
 {
+    /**
+     * @var array<string, array<string>>
+     */
     protected const PAYMENT_METHOD_REQUIRED_FIELDS = [
         'dummyPaymentInvoice' => ['dummyPaymentInvoice.dateOfBirth'],
         'dummyPaymentCreditCard' => [
@@ -25,29 +28,42 @@ class CheckoutRestApiConfig extends SprykerCheckoutRestApiConfig
 
     /**
      * @uses \Spryker\Shared\DummyPayment\DummyPaymentConfig::PROVIDER_NAME
+     *
+     * @var string
      */
     protected const PYZ_DUMMY_PAYMENT_PROVIDER_NAME = 'DummyPayment';
 
     /**
      * @uses \Spryker\Shared\DummyPayment\DummyPaymentConfig::PAYMENT_METHOD_NAME_INVOICE
+     *
+     * @var string
      */
     protected const PYZ_DUMMY_PAYMENT_PAYMENT_METHOD_NAME_INVOICE = 'Invoice';
 
     /**
      * @uses \Spryker\Shared\DummyPayment\DummyPaymentConfig::PAYMENT_METHOD_NAME_CREDIT_CARD
+     *
+     * @var string
      */
     protected const PYZ_DUMMY_PAYMENT_PAYMENT_METHOD_NAME_CREDIT_CARD = 'Credit Card';
 
     /**
      * @uses \Spryker\Shared\DummyPayment\DummyPaymentConfig::PAYMENT_METHOD_INVOICE
+     *
+     * @var string
      */
     protected const PYZ_PAYMENT_METHOD_INVOICE = 'dummyPaymentInvoice';
 
     /**
      * @uses \Spryker\Shared\DummyPayment\DummyPaymentConfig::PAYMENT_METHOD_CREDIT_CARD
+     *
+     * @var string
      */
     protected const PYZ_PAYMENT_METHOD_CREDIT_CARD = 'dummyPaymentCreditCard';
 
+    /**
+     * @var bool
+     */
     protected const IS_PAYMENT_PROVIDER_METHOD_TO_STATE_MACHINE_MAPPING_ENABLED = false;
 
     /**

@@ -11,6 +11,9 @@ use Spryker\Zed\Development\Communication\Console\CodeTestConsole;
 
 class AcceptanceCodeTestConsole extends CodeTestConsole
 {
+    /**
+     * @var string
+     */
     public const COMMAND_NAME = 'code:test:acceptance';
 
     /**

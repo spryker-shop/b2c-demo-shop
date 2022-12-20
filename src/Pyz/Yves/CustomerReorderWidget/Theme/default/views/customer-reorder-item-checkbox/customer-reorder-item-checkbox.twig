@@ -1,0 +1,19 @@
+{% extends view('customer-reorder-item-checkbox', '@SprykerShop:CustomerReorderWidget') %}
+
+{% define data = {
+    additionalModifiers: [],
+} %}
+
+{% block body %}
+    {% include atom('checkbox') with {
+        modifiers: data.additionalModifiers,
+        data: {
+            inputClass: data.checkboxClasses,
+        },
+        attributes: {
+            name: 'items[]',
+            disabled: not data.availability,
+            value: data.idSalesOrderItem,
+        },
+    } only %}
+{% endblock %}

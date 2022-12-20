@@ -12,6 +12,9 @@ use Spryker\Glue\GlueApplication\GlueApplicationConfig as SprykerGlueApplication
 
 class GlueApplicationConfig extends SprykerGlueApplicationConfig
 {
+    /**
+     * @var bool
+     */
     public const VALIDATE_REQUEST_HEADERS = false;
 
     /**

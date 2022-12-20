@@ -1,30 +1,8 @@
-{% extends template('page-layout-main') %}
-
-{% define data = {
-    product: _view.product,
-    productUrl: _view.productUrl,
-    hostName: app.request.getSchemeAndHttpHost(),
-
-    cart: _view.cart,
-    isBundle: _view.product.attributes.bundled_product | default(null),
-    bundleItems: _view.product.pyzBundledProducts,
-
-    title: product.metaTitle | default(_view.product.name),
-    metaTitle: product.metaTitle | default(_view.product.name),
-    metaDescription: _view.product.metaDescription | default,
-    metaKeywords: _view.product.metaKeywords | default,
-} %}
+{% extends view('pdp', '@SprykerShop:ProductDetailPage') %}
 
 {% block headStyles %}
     {{ parent() }}
     <link itemprop="url" href="{{ data.productUrl }}">
-{% endblock %}
-
-{% block headScripts %}
-    {{ parent() }}
-
-    {% widget 'AssetWidget' args ['pdp-header'] only %}
-    {% endwidget %}
 {% endblock %}
 
 {% block pageInfo %}
@@ -34,7 +12,9 @@
         {% endblock %}
     </div>
 {% endblock %}
+
 {% block contentClass %} page-layout-main {% endblock %}
+
 {% block content %}
     <div class="container__inner">
         <div class="grid">
@@ -73,9 +53,7 @@
                 {% include molecule('product-configurator', 'ProductDetailPage') with {
                     data: {
                         product: data.product,
-                        isBundle: data.bundleItems,
-                        bundleItems: data.bundleItems
-                    }
+                    },
                 } only %}
             </div>
         </div>
@@ -92,13 +70,6 @@
             },
         } only %}
     </div>
-    {% if data.bundleItems %}
-        {% include molecule('product-bundle', 'ProductDetailPage') with {
-            data: {
-                bundleItems: data.bundleItems,
-            },
-        } only %}
-    {% endif %}
 
     {% widget 'ProductReplacementForListWidget' args [data.product.sku] only %}{% endwidget %}
 
@@ -125,11 +96,4 @@
             {% endblock %}
         {% endembed %}
     </div>
-{% endblock %}
-
-{% block footerScripts %}
-    {% widget 'AssetWidget' args ['pdp-footer'] only %}
-    {% endwidget %}
-
-    {{ parent() }}
 {% endblock %}

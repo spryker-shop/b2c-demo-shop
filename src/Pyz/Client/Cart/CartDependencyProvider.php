@@ -14,6 +14,7 @@ use Spryker\Client\PersistentCart\Plugin\DatabaseQuoteStorageStrategy;
 use Spryker\Client\ProductBundle\Plugin\Cart\BundleProductQuoteItemFinderPlugin;
 use Spryker\Client\ProductBundle\Plugin\Cart\ProductBundleItemCountQuantityPlugin;
 use Spryker\Client\ProductBundle\Plugin\Cart\RemoveBundleChangeRequestExpanderPlugin;
+use Spryker\Client\ProductConfigurationCart\Plugin\Cart\ProductConfigurationCartChangeRequestExpanderPlugin;
 
 class CartDependencyProvider extends SprykerCartDependencyProvider
 {
@@ -52,6 +53,7 @@ class CartDependencyProvider extends SprykerCartDependencyProvider
         return [
             new AddDiscountPromotionCartRequestExpandPlugin(),
             new ProductSeparateCartChangeExpanderPlugin(),
+            new ProductConfigurationCartChangeRequestExpanderPlugin(),
         ];
     }
 

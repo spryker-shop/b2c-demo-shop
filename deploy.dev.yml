@@ -5,12 +5,31 @@ tag: 'dev'
 
 environment: docker.dev
 image:
-    tag: spryker/php:7.4-alpine3.12
+    tag: spryker/php:8.1
     php:
         enabled-extensions:
             - blackfire
     environment:
-        STORE_NAME_REFERENCE_MAP: '{"DE":"dev-DE","AT":"dev-AT","US":"dev-US"}'
+        #AOP
+        SPRYKER_AOP_INFRASTRUCTURE: '{
+            "SPRYKER_MESSAGE_BROKER_HTTP_SENDER_CONFIG": {},
+            "SPRYKER_MESSAGE_BROKER_SQS_RECEIVER_CONFIG": {}
+        }'
+        SPRYKER_AOP_APPLICATION: '{
+            "APP_DOMAINS": [],
+            "STORE_NAME_REFERENCE_MAP": {},
+            "APP_CATALOG_SCRIPT_URL": ""
+        }'
+        SPRYKER_AOP_AUTHENTICATION: '{
+            "AUTH0_CUSTOM_DOMAIN": "",
+            "AUTH0_CLIENT_ID": "",
+            "AUTH0_CLIENT_SECRET": ""
+        }'
+        SPRYKER_PRODUCT_CONFIGURATOR_HOST: date-time-configurator-example.spryker.local
+        SPRYKER_PRODUCT_CONFIGURATOR_PORT: 80
+    node:
+        version: 16
+        npm: 8
 
 composer:
     mode: ''
@@ -65,6 +84,8 @@ groups:
             yves_eu:
                 application: yves
                 endpoints:
+                    date-time-configurator-example.spryker.local:
+                        entry-point: Configurator
                     yves.de.spryker.local:
                         store: DE
                         services:
@@ -159,6 +180,7 @@ services:
                 protocol: tcp
     broker:
         engine: rabbitmq
+        version: '3.9'
         api:
             username: "spryker"
             password: "secret"
@@ -175,12 +197,14 @@ services:
                 protocol: tcp
     search:
         engine: elastic
-        version: 7.6
+        version: '7.10'
         endpoints:
             localhost:9200:
                 protocol: tcp
     scheduler:
         engine: jenkins
+        version: '2.324'
+        csrf-protection-enabled: true
         endpoints:
             scheduler.spryker.local:
     mail_catcher:

@@ -1,0 +1,28 @@
+@include product-bundle-widget-bundle-items() {
+    &__item {
+        display: flex;
+        margin-bottom: rem(15);
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    &__details {
+        padding: rem(5) rem(18);
+    }
+
+    &__name {
+        @include helper-effect-transition(color);
+        font-family: $setting-font-family-additional;
+        letter-spacing: rem(0.27);
+
+        &:hover {
+            text-decoration: none;
+        }
+    }
+
+    &__quantity {
+        color: $setting-color-gray-4;
+    }
+}

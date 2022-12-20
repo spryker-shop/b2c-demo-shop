@@ -15,6 +15,9 @@ use Spryker\Shared\Chart\Dependency\Plugin\ChartPluginInterface;
 
 class ExampleChartPlugin implements ChartPluginInterface, ChartLayoutablePluginInterface
 {
+    /**
+     * @var string
+     */
     public const TEST_CHART = 'testChart';
 
     /**

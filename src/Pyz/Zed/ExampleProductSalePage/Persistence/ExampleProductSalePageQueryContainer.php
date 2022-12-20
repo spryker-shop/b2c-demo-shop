@@ -10,6 +10,7 @@ namespace Pyz\Zed\ExampleProductSalePage\Persistence;
 use Orm\Zed\Product\Persistence\SpyProductAbstractQuery;
 use Orm\Zed\ProductLabel\Persistence\Map\SpyProductLabelProductAbstractTableMap;
 use Orm\Zed\ProductLabel\Persistence\SpyProductLabelProductAbstractQuery;
+use Orm\Zed\ProductLabel\Persistence\SpyProductLabelQuery;
 use Propel\Runtime\ActiveQuery\Criteria;
 use Propel\Runtime\ActiveQuery\Criterion\BasicModelCriterion;
 use Spryker\Zed\Kernel\Persistence\AbstractQueryContainer;
@@ -52,7 +53,7 @@ class ExampleProductSalePageQueryContainer extends AbstractQueryContainer implem
      *
      * @return \Orm\Zed\ProductLabel\Persistence\SpyProductLabelQuery
      */
-    public function queryPyzProductLabelByName($labelName)
+    public function queryPyzProductLabelByName($labelName): SpyProductLabelQuery
     {
         return $this->getFactory()
             ->getPyzProductLabelQueryContainer()

@@ -54,7 +54,7 @@
                                 class="{{ config.name }}__step"
                                 href="{{ path(data.paginationPath, data.parameters | merge({ page: i })) }}{{ data.anchor }}"
                             >
-                                {{- i -}}
+                                {{- i | executeFilterIfExists('formatInt', app.locale) -}}
                             </a>
                         </li>
                     {% endif %}
@@ -75,7 +75,7 @@
                                 class="{{ config.name }}__step"
                                 href="{{ path(data.paginationPath, data.parameters | merge({ page: i })) }}{{ data.anchor }}"
                             >
-                                {{- i -}}
+                                {{- i | executeFilterIfExists('formatInt', app.locale) -}}
                             </a>
                         </li>
                     {% endif %}
@@ -99,7 +99,7 @@
                     class="{{ config.name }}__step {{ config.name }}__step--current"
                     href="{{ path(data.paginationPath, data.parameters | merge({ page: data.currentPage })) }}{{ data.anchor }}"
                 >
-                    {{- data.currentPage -}}
+                    {{- data.currentPage | executeFilterIfExists('formatInt', app.locale) -}}
                 </a>
             </li>
 
@@ -111,7 +111,7 @@
                                 class="{{ config.name }}__step"
                                 href="{{ path(data.paginationPath, data.parameters | merge({ page: i})) }}{{ data.anchor }}"
                             >
-                                {{- i -}}
+                                {{- i | executeFilterIfExists('formatInt', app.locale) -}}
                             </a>
                         </li>
                     {% endif %}
@@ -132,7 +132,7 @@
                                 class="{{ config.name }}__step"
                                 href="{{ path(data.paginationPath, data.parameters | merge({ page: i })) }}{{ data.anchor }}"
                             >
-                                {{- i -}}
+                                {{- i | executeFilterIfExists('formatInt', app.locale) -}}
                             </a>
                         </li>
                     {% endif %}

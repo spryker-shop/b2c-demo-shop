@@ -30,6 +30,7 @@
                             embed: {
                                 order: data.order,
                                 bundleItems: item.bundleItems | default([]),
+                                reorderSelectionClassName: data.reorderSelectionClassName,
                             },
                         } only %}
                             {% import _self as component %}
@@ -37,11 +38,23 @@
                                 <div class="grid grid--middle col">
                                     {% if embed.order is not empty %}
                                         <span class="spacing-right">
-                                            {% widget 'CustomerReorderItemCheckboxWidget' args [data.productItem] with {
-                                                data: {
-                                                    additionalModifiers: ['big'],
-                                                },
-                                            } only %}{% endwidget %}
+                                            {% if data.productItem.bundleItemIdentifier ?? false %}
+                                                {% widget 'CustomerReorderBundleItemCheckboxWidget' args [data.productItem] with {
+                                                    data: {
+                                                        checkboxClasses: embed.reorderSelectionClassName,
+                                                        additionalModifiers: ['big'],
+                                                    },
+                                                } only %}
+                                                {% endwidget %}
+                                            {% else %}
+                                                {% widget 'CustomerReorderItemCheckboxWidget' args [data.productItem] with {
+                                                    data: {
+                                                        checkboxClasses: embed.reorderSelectionClassName,
+                                                        additionalModifiers: ['big'],
+                                                    },
+                                                } only %}
+                                                {% endwidget %}
+                                            {% endif %}
                                         </span>
                                     {% endif %}
 
@@ -71,6 +84,16 @@
                                         {% endfor %}
                                     </ul>
                                 {% endif %}
+                            {% endblock %}
+
+                            {% block productConfiguration %}
+                                {% widget 'ProductConfigurationOrderItemDisplayWidget' args [data.productItem] only %}
+                                    {% block body %}
+                                        <div class="spacing-bottom">
+                                            {{ parent() }}
+                                        </div>
+                                    {% endblock %}
+                                {% endwidget %}
                             {% endblock %}
 
                             {% block state %}

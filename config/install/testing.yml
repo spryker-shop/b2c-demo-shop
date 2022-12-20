@@ -35,13 +35,13 @@ sections:
             command: 'vendor/bin/console rest-api:build-request-validation-cache'
 
         generate-page-source-map:
-            command: "vendor/bin/console search:setup:source-map"
+            command: 'vendor/bin/console search:setup:source-map'
 
         translator-generate-cache:
-            command: "vendor/bin/console translator:generate-cache"
+            command: 'vendor/bin/console translator:generate-cache'
 
         class-resolver-build:
-            command: "vendor/bin/console cache:class-resolver:build"
+            command: 'vendor/bin/console cache:class-resolver:build'
 
     queue-flush:
         set-permissions:
@@ -126,14 +126,11 @@ sections:
         dependencies-install:
             command: 'vendor/bin/console frontend:project:install-dependencies'
 
-        yves-install-dependencies:
-            command: 'vendor/bin/console frontend:yves:install-dependencies'
-
         yves-build-frontend:
             command: 'vendor/bin/console frontend:yves:build'
 
-        zed-install-dependencies:
-            command: 'vendor/bin/console frontend:zed:install-dependencies'
-
         zed-build-frontend:
             command: 'vendor/bin/console frontend:zed:build'
+
+        date-time-product-configurator:
+            command: 'vendor/bin/console frontend:date-time-product-configurator:build'

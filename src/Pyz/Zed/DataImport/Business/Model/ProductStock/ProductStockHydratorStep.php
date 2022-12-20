@@ -14,17 +14,47 @@ use Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface;
 
 class ProductStockHydratorStep implements DataImportStepInterface
 {
+    /**
+     * @var int
+     */
     public const BULK_SIZE = 100;
 
+    /**
+     * @var string
+     */
     public const COLUMN_CONCRETE_SKU = 'concrete_sku';
+    /**
+     * @var string
+     */
     public const COLUMN_NAME = 'name';
+    /**
+     * @var string
+     */
     public const COLUMN_QUANTITY = 'quantity';
+    /**
+     * @var string
+     */
     public const COLUMN_IS_NEVER_OUT_OF_STOCK = 'is_never_out_of_stock';
+    /**
+     * @var string
+     */
     public const COLUMN_IS_BUNDLE = 'is_bundle';
 
+    /**
+     * @var string
+     */
     public const KEY_FK_PRODUCT = 'fk_product';
+    /**
+     * @var string
+     */
     public const KEY_FK_STOCK = 'fk_stock';
+    /**
+     * @var string
+     */
     public const STOCK_ENTITY_TRANSFER = 'STOCK_ENTITY_TRANSFER';
+    /**
+     * @var string
+     */
     public const STOCK_PRODUCT_ENTITY_TRANSFER = 'STOCK_PRODUCT_ENTITY_TRANSFER';
 
     /**
