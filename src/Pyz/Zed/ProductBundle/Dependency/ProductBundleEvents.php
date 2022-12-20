@@ -14,6 +14,8 @@ interface ProductBundleEvents
      * - Represents spy_product_bundle entity creation.
      *
      * @api
+     *
+     * @var string
      */
     public const ENTITY_SPY_PRODUCT_BUNDLE_CREATE = 'Entity.spy_product_bundle.create';
 
@@ -22,6 +24,8 @@ interface ProductBundleEvents
      * - Represents spy_product_bundle entity changes.
      *
      * @api
+     *
+     * @var string
      */
     public const ENTITY_SPY_PRODUCT_BUNDLE_UPDATE = 'Entity.spy_product_bundle.update';
 
@@ -30,6 +34,8 @@ interface ProductBundleEvents
      * - Represents spy_product_bundle entity deletion.
      *
      * @api
+     *
+     * @var string
      */
     public const ENTITY_SPY_PRODUCT_BUNDLE_DELETE = 'Entity.spy_product_bundle.delete';
 }

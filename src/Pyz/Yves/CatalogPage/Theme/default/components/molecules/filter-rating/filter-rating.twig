@@ -1,0 +1,5 @@
+{% extends molecule('filter-rating', '@SprykerShop:CatalogPage') %}
+
+{% block body %}
+    {% widget 'ProductRatingFilterWidget' args [data.filter, data.request] only %}{% endwidget %}
+{% endblock %}

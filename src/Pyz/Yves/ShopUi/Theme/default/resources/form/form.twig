@@ -161,6 +161,48 @@
     {% endif %}
 {%- endblock password_widget -%}
 
+{%- block formatted_integer_widget -%}
+    {%- set label = (label | default) | trans -%}
+    {%- set filteredAttr = attr | filter((value, key) => key != 'class' and key != 'min' and key != 'max') -%}
+
+    {%- set attr = attr | merge({
+        placeholder: attr.placeholder | default(label)
+    }) -%}
+
+    {%- set inputAttributes = {
+        'decimal-rounding': 1,
+    } -%}
+
+    {% if grouping_separator_symbol ?? false %}
+        {%- set inputAttributes = inputAttributes | merge({'grouping-separator': grouping_separator_symbol}) -%}
+    {% endif %}
+
+    {% if decimal_separator_symbol ?? false %}
+        {%- set inputAttributes = inputAttributes | merge({'decimal-separator': decimal_separator_symbol}) -%}
+    {% endif %}
+
+    {% if attr.min ?? false %}
+        {%- set inputAttributes = inputAttributes | merge({min: attr.min}) -%}
+    {% endif %}
+
+    {% if attr.max ?? false %}
+        {%- set inputAttributes = inputAttributes | merge({max: attr.max}) -%}
+    {% endif %}
+
+    {% include molecule('formatted-number-input') with {
+        modifiers: ['expand', errors is not empty ? 'error'],
+        class: componentClass | default,
+        data: {
+            inputName: full_name,
+            inputValue: value,
+            inputAttributes: filteredAttr,
+            inputExtraClasses: attr.class | default,
+            hiddenInputExtraClasses: hiddenInputClass | default,
+        },
+        attributes: inputAttributes,
+    } only %}
+{%- endblock formatted_integer_widget -%}
+
 {# rows #}
 
 {%- block form_row -%}

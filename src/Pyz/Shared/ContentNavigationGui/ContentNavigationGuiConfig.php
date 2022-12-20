@@ -15,6 +15,8 @@ class ContentNavigationGuiConfig extends SprykerContentNavigationGuiConfig
      * @uses \Pyz\Shared\ContentNavigation\ContentNavigationConfig::PYZ_WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_HEADER
      *
      * Content item navigation header template identifier.
+     *
+     * @var string
      */
     protected const PYZ_WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_HEADER = 'navigation-header';
 
@@ -22,6 +24,8 @@ class ContentNavigationGuiConfig extends SprykerContentNavigationGuiConfig
      * @uses \Pyz\Shared\ContentNavigation\ContentNavigationConfig::PYZ_WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_HEADER_MOBILE
      *
      * Content item navigation header mobile template identifier.
+     *
+     * @var string
      */
     protected const PYZ_WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_HEADER_MOBILE = 'navigation-header-mobile';
 
@@ -29,21 +33,29 @@ class ContentNavigationGuiConfig extends SprykerContentNavigationGuiConfig
      * @uses \Pyz\Shared\ContentNavigation\ContentNavigationConfig::PYZ_WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_FOOTER
      *
      * Content item navigation footer template identifier.
+     *
+     * @var string
      */
     protected const PYZ_WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_FOOTER = 'navigation-footer';
 
     /**
      * Content item navigation header template name.
+     *
+     * @var string
      */
     protected const PYZ_WIDGET_TEMPLATE_DISPLAY_NAME_LIST_NAVIGATION_HEADER = 'Navigation Header';
 
     /**
      * Content item navigation header mobile template name.
+     *
+     * @var string
      */
     protected const PYZ_WIDGET_TEMPLATE_DISPLAY_NAME_LIST_NAVIGATION_HEADER_MOBILE = 'Navigation Header Mobile';
 
     /**
      * Content item navigation footer template name.
+     *
+     * @var string
      */
     protected const PYZ_WIDGET_TEMPLATE_DISPLAY_NAME_LIST_NAVIGATION_FOOTER = 'Navigation Footer';
 

@@ -65,6 +65,30 @@
                                 }) }}
                             </div>
                         {% endif %}
+
+                        <div class="{{ component.renderClass(config.name ~ '__additional-options', modifiers) }} col">
+                            {% widget 'ProductConfigurationCartItemDisplayWidget'
+                                args [data.productItem]
+                                with {
+                                    data: {
+                                        wrapperClassName: config.name ~ '__product-configuration-options ' ~ config.name ~ '__product-configuration-options--desktop ' ~ config.name ~ '__product-configuration-options--no-spacing',
+                                        hasStatus: false,
+                                    },
+                                } only %}
+                            {% endwidget %}
+                        </div>
+                    {% endblock %}
+
+                    {% block productConfiguration %}
+                        {% widget 'ProductConfigurationCartItemDisplayWidget'
+                            args [data.productItem]
+                            with {
+                            data: {
+                                wrapperClassName: config.name ~ '__product-configuration-options ' ~ config.name ~ '__product-configuration-options--mobile',
+                                hasStatus: false,
+                            },
+                        } only %}
+                        {% endwidget %}
                     {% endblock %}
 
                     {% block bundles %}{% endblock %}

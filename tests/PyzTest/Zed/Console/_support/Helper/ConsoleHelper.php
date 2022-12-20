@@ -10,18 +10,20 @@ namespace PyzTest\Zed\Console\Helper;
 use Codeception\Module;
 use Codeception\TestInterface;
 use Codeception\Util\FileSystem;
+use SprykerTest\Shared\Testify\Helper\ModuleHelperConfigTrait;
 
 class ConsoleHelper extends Module
 {
-    public const RUNNER = 'console_runner.php';
-    public const SANDBOX_DIR = 'cli_sandbox/';
+    use ModuleHelperConfigTrait;
 
     /**
-     * @var array
+     * @var string
      */
-    protected $config = [
-      'cleanup_dirs' => ['data', 'src'],
-    ];
+    public const RUNNER = 'console_runner.php';
+    /**
+     * @var string
+     */
+    public const SANDBOX_DIR = 'cli_sandbox/';
 
     /**
      * @param \Codeception\TestInterface $test
@@ -46,6 +48,16 @@ class ConsoleHelper extends Module
     {
         $command = 'php ' . codecept_data_dir() . self::RUNNER . " $command";
         $this->getCli()->runShellCommand($command);
+    }
+
+    /**
+     * @return void
+     */
+    protected function setDefaultConfig(): void
+    {
+        $this->config = [
+            'cleanup_dirs' => ['data', 'src'],
+        ];
     }
 
     /**

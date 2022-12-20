@@ -71,7 +71,7 @@
     <div class="{{ config.name }}__col col col--sm-4 text-center">
         {% block quantity %}
             <span class="{{ component.renderClass(config.name ~ '__text', ['secondary'] | merge(modifiers)) }}">
-                {{ 'configured_bundle_widget.multiplier' | trans }} {{ data.quantity }}
+                {{ 'configured_bundle_widget.multiplier' | trans }} {{ data.quantity | executeFilterIfExists('formatInt', app.locale) }}
             </span>
         {% endblock %}
     </div>

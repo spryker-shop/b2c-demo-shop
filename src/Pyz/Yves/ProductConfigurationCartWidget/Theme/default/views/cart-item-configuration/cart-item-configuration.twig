@@ -1,0 +1,18 @@
+{% extends view('cart-item-configuration', 'SprykerShop:ProductConfigurationCartWidget') %}
+
+{% define data = {
+    wrapperClassName: '',
+    hasStatus: true,
+} %}
+
+{% block body %}
+    <div class="{{ data.wrapperClassName }}">
+        {{ parent() }}
+    </div>
+{% endblock %}
+
+{% block status %}
+    {% if data.hasStatus %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}

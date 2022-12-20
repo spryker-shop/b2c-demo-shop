@@ -42,7 +42,7 @@
 {% endblock %}
 
 {% block productItemQuantity %}
-    {{ 'global.quantity_symbol' | trans }} {{ data.item.quantity }}
+    {{ 'global.quantity_symbol' | trans }} {{ data.item.quantity | executeFilterIfExists('formatInt', app.locale) }}
 {% endblock %}
 
 {% block productOptions %}{% endblock %}

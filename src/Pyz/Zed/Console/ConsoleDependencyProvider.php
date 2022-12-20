@@ -15,12 +15,6 @@ use SecurityChecker\Command\SecurityCheckerCommand;
 use Spryker\Shared\Config\Environment;
 use Spryker\Zed\Cache\Communication\Console\EmptyAllCachesConsole;
 use Spryker\Zed\CategoryDataImport\CategoryDataImportConfig;
-use Spryker\Zed\CodeGenerator\Communication\Console\BundleClientCodeGeneratorConsole;
-use Spryker\Zed\CodeGenerator\Communication\Console\BundleCodeGeneratorConsole;
-use Spryker\Zed\CodeGenerator\Communication\Console\BundleServiceCodeGeneratorConsole;
-use Spryker\Zed\CodeGenerator\Communication\Console\BundleSharedCodeGeneratorConsole;
-use Spryker\Zed\CodeGenerator\Communication\Console\BundleYvesCodeGeneratorConsole;
-use Spryker\Zed\CodeGenerator\Communication\Console\BundleZedCodeGeneratorConsole;
 use Spryker\Zed\Console\Communication\Plugin\ConsoleLogPlugin;
 use Spryker\Zed\Console\ConsoleDependencyProvider as SprykerConsoleDependencyProvider;
 use Spryker\Zed\ContentNavigationDataImport\ContentNavigationDataImportConfig;
@@ -76,6 +70,7 @@ use Spryker\Zed\PriceProductSchedule\Communication\Console\PriceProductScheduleA
 use Spryker\Zed\PriceProductSchedule\Communication\Console\PriceProductScheduleCleanupConsole;
 use Spryker\Zed\PriceProductScheduleDataImport\PriceProductScheduleDataImportConfig;
 use Spryker\Zed\ProductAlternativeDataImport\ProductAlternativeDataImportConfig;
+use Spryker\Zed\ProductConfigurationDataImport\ProductConfigurationDataImportConfig;
 use Spryker\Zed\ProductDiscontinued\Communication\Console\DeactivateDiscontinuedProductsConsole;
 use Spryker\Zed\ProductDiscontinuedDataImport\ProductDiscontinuedDataImportConfig;
 use Spryker\Zed\ProductLabel\Communication\Console\ProductLabelRelationUpdaterConsole;
@@ -162,6 +157,7 @@ use SprykerSdk\Spryk\Console\SprykBuildConsole;
 use SprykerSdk\Spryk\Console\SprykDumpConsole;
 use SprykerSdk\Spryk\Console\SprykRunConsole;
 use SprykerSdk\Zed\ComposerConstrainer\Communication\Console\ComposerConstraintConsole;
+use SprykerShop\Zed\DateTimeConfiguratorPageExample\Communication\Console\DateTimeProductConfiguratorBuildFrontendConsole;
 use Stecman\Component\Symfony\Console\BashCompletion\CompletionCommand;
 
 /**
@@ -269,6 +265,7 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
             new DataImportConsole(DataImportConsole::DEFAULT_NAME . ':' . ProductQuantityDataImportConfig::IMPORT_TYPE_PRODUCT_QUANTITY),
             new DataImportConsole(DataImportConsole::DEFAULT_NAME . ':' . ProductRelationDataImportConfig::IMPORT_TYPE_PRODUCT_RELATION),
             new DataImportConsole(DataImportConsole::DEFAULT_NAME . ':' . ProductRelationDataImportConfig::IMPORT_TYPE_PRODUCT_RELATION_STORE),
+            new DataImportConsole(DataImportConsole::DEFAULT_NAME . ':' . ProductConfigurationDataImportConfig::IMPORT_TYPE_PRODUCT_CONFIGURATION),
 
             // Publish and Synchronization
             new EventBehaviorTriggerTimeoutConsole(),
@@ -344,6 +341,8 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
 
             new OrderInvoiceSendConsole(),
             new MessageBrokerWorkerConsole(),
+
+            new DateTimeProductConfiguratorBuildFrontendConsole(),
         ];
 
         $propelCommands = $container->getLocator()->propel()->facade()->getConsoleCommands();
@@ -359,12 +358,6 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
             $commands[] = new CodeArchitectureSnifferConsole();
             $commands[] = new CodePhpstanConsole();
             $commands[] = new ValidatorConsole();
-            $commands[] = new BundleCodeGeneratorConsole();
-            $commands[] = new BundleYvesCodeGeneratorConsole();
-            $commands[] = new BundleZedCodeGeneratorConsole();
-            $commands[] = new BundleServiceCodeGeneratorConsole();
-            $commands[] = new BundleSharedCodeGeneratorConsole();
-            $commands[] = new BundleClientCodeGeneratorConsole();
             $commands[] = new GenerateZedIdeAutoCompletionConsole();
             $commands[] = new RemoveZedIdeAutoCompletionConsole();
             $commands[] = new GenerateClientIdeAutoCompletionConsole();

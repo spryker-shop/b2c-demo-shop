@@ -9,6 +9,7 @@ namespace Pyz\Client\PersistentCart;
 
 use Spryker\Client\DiscountPromotion\Plugin\AddDiscountPromotionPersistentCartRequestExpanderPlugin;
 use Spryker\Client\PersistentCart\PersistentCartDependencyProvider as SprykerPersistentCartDependencyProvider;
+use Spryker\Client\ProductConfigurationPersistentCart\Plugin\PersistentCart\ProductConfigurationPersistentCartRequestExpanderPlugin;
 
 class PersistentCartDependencyProvider extends SprykerPersistentCartDependencyProvider
 {
@@ -19,6 +20,7 @@ class PersistentCartDependencyProvider extends SprykerPersistentCartDependencyPr
     {
         return [
             new AddDiscountPromotionPersistentCartRequestExpanderPlugin(),
+            new ProductConfigurationPersistentCartRequestExpanderPlugin(),
         ];
     }
 }

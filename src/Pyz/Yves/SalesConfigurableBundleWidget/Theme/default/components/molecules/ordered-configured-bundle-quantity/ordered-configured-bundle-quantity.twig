@@ -2,6 +2,6 @@
 
 {% block quantity %}
     <span>
-        {{ 'configured_bundle_widget.multiplier' | trans }} {{ data.quantity }}
+        {{ 'configured_bundle_widget.multiplier' | trans }} {{ data.quantity | executeFilterIfExists('formatInt', app.locale) }}
     </span>
 {% endblock %}

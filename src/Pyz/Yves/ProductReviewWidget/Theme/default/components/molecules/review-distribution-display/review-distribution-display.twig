@@ -20,7 +20,7 @@
 
         <tr>
             <td class="{{ config.name }}__cell">
-                {{ rating }}
+                {{ rating | executeFilterIfExists('formatInt', app.locale) }}
 
                 {% set amount = rating > 1 ? 'multiple' : rating %}
 
@@ -34,7 +34,7 @@
                     <div class="{{ config.name }}__progress-status" style="left: -{{ ratingReviewPercent }}%;"></div>
                 </div>
             </td>
-            <td class="{{ config.name }}__cell">{{ ratingReview }}</td>
+            <td class="{{ config.name }}__cell">{{ ratingReview | executeFilterIfExists('formatInt', app.locale) }}</td>
         </tr>
     {% endfor %}
 {% endblock %}
