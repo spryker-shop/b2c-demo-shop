@@ -25,6 +25,8 @@ class ProductConcretePropelDataSetWriter implements DataSetWriterInterface
 {
     /**
      * @uses \Spryker\Shared\ProductBundleStorage\ProductBundleStorageConfig::PRODUCT_BUNDLE_PUBLISH
+     *
+     * @var string
      */
     protected const PRODUCT_BUNDLE_PUBLISH = 'ProductBundle.product_bundle.publish.write';
 

@@ -13,6 +13,9 @@ use Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface;
 
 class AddCategoryKeysStep implements DataImportStepInterface
 {
+    /**
+     * @var string
+     */
     public const KEY_CATEGORY_KEYS = 'categoryKeys';
 
     /**

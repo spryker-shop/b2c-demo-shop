@@ -10,7 +10,8 @@
     minQuantity: 1,
     value: 1,
     readOnly: false,
-    hasUpdateButton: true
+    hasUpdateButton: true,
+    numberFormatConfig: {},
 } %}
 
 {% block body %}
@@ -28,8 +29,9 @@
                     minQuantity: data.minQuantity,
                     value: data.value,
                     readOnly: data.readOnly,
-                    autoUpdate: data.hasUpdateButton
-                }
+                    autoUpdate: data.hasUpdateButton,
+                    numberFormatConfig: data.numberFormatConfig,
+                },
             } only %}
         {% endblock %}
     </div>

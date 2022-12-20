@@ -3,7 +3,7 @@
 
 {% define config = {
     name: 'quantity-counter',
-    tag: 'quantity-counter'
+    tag: 'quantity-counter',
 } %}
 
 {% define data = {
@@ -11,31 +11,64 @@
     minQuantity: 1,
     value: 1,
     readOnly: false,
-    autoUpdate: false
+    disabled: false,
+    autoUpdate: false,
+    inputAttributes: {
+        class: '',
+        name: 'quantity',
+    },
+    numberFormatConfig: {},
 } %}
 
+{% set maxQuantity = data.maxQuantity < 0 or data.maxQuantity < data.minQuantity ? false : data.maxQuantity %}
+{% set inputAttributes = {
+    'data-max-quantity': maxQuantity,
+    'data-min-quantity': data.minQuantity,
+    'data-auto-update': data.autoUpdate,
+    disabled: data.disabled,
+    readonly: data.readOnly,
+} %}
+{% set hiddenInputAttributes = {
+    'data-qa': config.name,
+    disabled: data.disabled,
+} %}
+{% set formatAttributes = {
+    'watch-external-changes': true,
+    max: maxQuantity,
+    min: data.minQuantity,
+} | merge(data.numberFormatConfig) %}
+
 {% block body %}
-    {% set maxQuantity = data.maxQuantity < 0 or data.maxQuantity < data.minQuantity ? null : data.maxQuantity %}
+    {% set inputClassName = data.inputAttributes.class ~ ' ' ~ component.renderClass(config.name ~ '__input', modifiers) ~ ' ' ~ config.jsName ~ '__input js-volume-price__quantity' %}
+    {% set buttonDisabledClassName = data.minQuantity == maxQuantity or data.disabled ? 'button--disabled' %}
+
     <div class="{{ component.renderClass(config.name ~ '__container', modifiers) }} grid grid--middle">
-        <div class="col">
-            <div class="{{ component.renderClass('button', modifiers) }} button--quantity {{ config.jsName }}__decr">-</div>
-        </div>
-        <div class="col">
-            <input
-                class="{{ component.renderClass(config.name ~ '__input', modifiers) }} {{ config.jsName }}__input input js-volume-price__quantity"
-                data-max-quantity="{{ maxQuantity }}"
-                data-min-quantity="{{ data.minQuantity }}"
-                type="number"
-                value="{{ data.value }}"
-                name="quantity"
-                min="{{ data.minQuantity }}"
-                {{ qa('quantity-input') }}
-                {% if maxQuantity is not empty %}max="{{ maxQuantity }}"{% endif %}
-                {% if data.readOnly %}readonly{% endif %}
-                {% if data.autoUpdate %}data-auto-update="true"{% endif %}/>
-        </div>
-        <div class="col">
-            <div class="{{ component.renderClass('button', modifiers) }} button--quantity {{ config.jsName }}__incr">+</div>
-        </div>
+        {% block decreaseButton %}
+            <div class="col">
+                <div class="{{ component.renderClass('button', modifiers) }} {{ buttonDisabledClassName }} button--quantity {{ config.jsName }}__decr">-</div>
+            </div>
+        {% endblock %}
+
+        {% block input %}
+            <div class="col">
+                {% include molecule('formatted-number-input') with {
+                    class: config.jsName ~ '__formatted-input',
+                    data: {
+                        inputName: data.inputAttributes.name,
+                        inputExtraClasses: inputClassName,
+                        inputValue: data.value,
+                        inputAttributes: inputAttributes,
+                        hiddenInputAttributes: hiddenInputAttributes,
+                    },
+                    attributes: formatAttributes,
+                } only %}
+            </div>
+        {% endblock %}
+
+        {% block increaseButton %}
+            <div class="col">
+                <div class="{{ component.renderClass('button', modifiers) }} {{ buttonDisabledClassName }} button--quantity {{ config.jsName }}__incr">+</div>
+            </div>
+        {% endblock %}
     </div>
 {% endblock %}

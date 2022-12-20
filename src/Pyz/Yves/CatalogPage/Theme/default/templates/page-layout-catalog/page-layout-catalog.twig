@@ -3,26 +3,18 @@
 {% define data = {
     products: _view.products,
     facets: _view.facets,
+    filteredFacets: _view.filteredFacets | default([]),
     category: _view.category | default,
     categories: categories | default([]),
-    filteredFacets: _view.filteredFacets | default([]),
     filterPath: _view.filterPath | default,
     viewMode: _view.viewMode | default,
     title: _view.category.name | default,
     metaTitle: _view.pageTitle | default(_view.category.name | default),
     metaDescription: _view.pageDescription | default,
     metaKeywords: _view.pageKeywords | default,
-    sort: _view.sort,
-
     pagination: {
-        parameters: app.request.query.all(),
         currentPage: _view.pagination.currentPage,
-        paginationPath: app.request.getPathInfo(),
         maxPage: _view.pagination.maxPage,
-        showAlwaysFirstAndLast: true,
-        numFound: _view.pagination.numFound,
-        config: _view.pagination.config,
-        currentItemsPerPage: _view.pagination.currentItemsPerPage,
     },
 } %}
 
@@ -100,6 +92,7 @@
                                         categories: data.categories,
                                         togglerClass: 'js-catalog-toggler-click__trigger',
                                         parentJsName: catalogJsName,
+                                        numberFormatConfig: numberFormatConfig,
                                     },
                                 } only %}
                             {% endblock %}

@@ -8,6 +8,7 @@
 
 {% define data = {
     parameter: required,
+    inputAttributes: {},
 } %}
 
 {% define attributes = {
@@ -23,22 +24,25 @@
     margin: 1,
 } %}
 
-
 {% block body %}
     {% set activeMin = (attributes['active-min'] != attributes['value-min']) ? attributes['active-min'] %}
     {% set activeMax = (attributes['active-max'] != attributes['value-max']) ? attributes['active-max'] %}
 
-    {% macro renderInput(class, name, value, min, max, defaultValue) %}
-        <input
-                class="{{ class }}"
-                type="hidden"
-                name="{{ name }}"
-                value="{{ value }}"
-                required="required"
-                min="{{ min }}"
-                max="{{ max }}"
-                data-default-value="{{ defaultValue }}"
-        >
+    {% macro renderInput(class, name, value, min, max, defaultValue, attrs) %}
+        {% include molecule('formatted-number-input') with {
+            data: {
+                inputName: name,
+                inputValue: value,
+                inputExtraClasses: 'is-hidden',
+                hiddenInputExtraClasses: class,
+                hiddenInputAttributes: {
+                    'data-default-value': defaultValue,
+                    min: min,
+                    max: max,
+                },
+            },
+            attributes: attrs,
+        } only %}
     {% endmacro %}
 
     {% macro renderValueItem(name, jsName, value, parameter) %}
@@ -49,8 +53,8 @@
         </span>
     {% endmacro %}
 
-    {{ _self.renderInput(config.jsName ~ '__input', data.parameter ~ '[min]', activeMin, attributes['value-min'], attributes['value-max'], attributes['value-min'] ) }}
-    {{ _self.renderInput(config.jsName ~ '__input', data.parameter ~ '[max]', activeMax, attributes['value-min'], attributes['value-max'], attributes['value-max'] ) }}
+    {{ _self.renderInput(config.jsName ~ '__input', data.parameter ~ '[min]', activeMin, attributes['value-min'], attributes['value-max'], attributes['value-min'], data.inputAttributes) }}
+    {{ _self.renderInput(config.jsName ~ '__input', data.parameter ~ '[max]', activeMax, attributes['value-min'], attributes['value-max'], attributes['value-max'], data.inputAttributes) }}
 
     <div class="{{ component.renderClass(config.name ~ '__slider-content', modifiers) }} {{ config.jsName }}__slider-content">
         <div class="{{ config.name }}__values">

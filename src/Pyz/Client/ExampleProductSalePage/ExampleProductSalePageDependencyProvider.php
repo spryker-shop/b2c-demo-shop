@@ -130,7 +130,7 @@ class ExampleProductSalePageDependencyProvider extends AbstractDependencyProvide
                 new SortedQueryExpanderPlugin(),
                 new PaginatedQueryExpanderPlugin(),
 
-                /**
+                /*
                  * FacetQueryExpanderPlugin needs to be after other query expanders which filters down the results.
                  */
                 new FacetQueryExpanderPlugin(),

@@ -13,6 +13,9 @@ use Spryker\Zed\ProductSearch\Dependency\ProductSearchEvents;
 
 class ProductSearchAfterImportHook implements DataImporterAfterImportInterface
 {
+    /**
+     * @var int
+     */
     public const ID_DEFAULT = 0;
 
     /**

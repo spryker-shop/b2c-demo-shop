@@ -39,7 +39,7 @@
             {% endblock %}
 
             <div class="{{ component.renderClass(config.name ~ '__content-wrapper', modifiers) }} col">
-                <div class="{{ component.renderClass(config.name ~ '__content', modifiers) }} col">
+                <div class="{{ component.renderClass(config.name ~ '__content', modifiers) }}">
                     <div class="grid grid--justify grid--middle">
                         {% block title %}
                             <a href="{{ data.productItem.url }}" class="{{ component.renderClass(config.name ~ '__title', modifiers) }} col col--lg-8 col--sm-12">
@@ -98,23 +98,12 @@
                                 <div class="col">
                                     {% block quantity %}
                                         {% if canEditCart %}
-                                            {% widget 'CartChangeQuantityFormWidget' args [data.productItem, not canEditCart] only %}
-                                                {% block embeddedData %}
-                                                    {% include molecule('product-quantity-input') with {
-                                                        data: {
-                                                            maxQuantity: data.cartItem.maxQuantity,
-                                                            value: data.cartItem.quantity,
-                                                        },
-                                                    } only %}
-
-                                                <input type="hidden" value="{{ data.cartItem.groupKey }}" name="groupKey">
-                                            {% endblock %}
-                                        {% endwidget %}
-                                    {% else %}
-                                        {{ 'cart.item_quantity' | trans }}: {{ data.productItem.quantity | executeFilterIfExists('formatInt', app.locale) }}
-                                    {% endif %}
-                                {% endblock %}
-                            </div>
+                                            {% widget 'CartChangeQuantityFormWidget' args [data.productItem, not canEditCart] only %}{% endwidget %}
+                                        {% else %}
+                                            {{ 'cart.item_quantity' | trans }}: {{ data.productItem.quantity | executeFilterIfExists('formatInt', app.locale) }}
+                                        {% endif %}
+                                    {% endblock %}
+                                </div>
 
                                 {% block state %}{% endblock %}
                             </div>
