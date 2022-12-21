@@ -1,43 +1,9 @@
-{% extends model('component') %}
+{% extends molecule('product-configurator', '@SprykerShop:ProductDetailPage') %}
 
-{% define config = {
-    name: 'product-configurator',
-    tag: 'section'
-} %}
-
-{% define data = {
-    product: required,
-    maxQuantity: 10,
-    isBundle: null,
-    bundleItems: []
-} %}
-
-{% set options = [] %}
 {% set productName = data.product.name | default %}
-{% set sku = data.product.sku %}
-{% set availabilityWidget = '' %}
 {% set isProductConcrete = data.product.idProductConcrete is not empty %}
-{% set isDisabled = data.product.idProductConcrete is empty or data.product.price is empty %}
-{% set isProductAvailable = true %}
-
-{% for index in 1..data.maxQuantity %}
-    {% set options = options | merge([{
-        label: index,
-        value: index
-    }]) %}
-{% endfor %}
-
-{% set isAvailable = data.product.idProductConcrete and data.product.available %}
-{% set isDisabled = not isAvailable or isDisabled %}
-
-{% set productDiscontinuedNoteWidget = findWidget('ProductDiscontinuedNoteWidget', [sku]) %}
-{% if productDiscontinuedNoteWidget.isDiscontinued is not null %}
-    {% set isDisabled = productDiscontinuedNoteWidget.isDiscontinued or isDisabled %}
-    {% set isProductAvailable = not productDiscontinuedNoteWidget.isDiscontinued %}
-{% endif %}
 
 {% block body %}
-
     <h1 itemprop="name" class="title title--product title--h2">{{ productName }}</h1>
     <link itemprop="url" href="{{ data.product.url }}">
 
@@ -57,34 +23,10 @@
                 } only %}
             </div>
         {% endwidget %}
-        
     </div>
-    {% if data.isBundle != null %}
-        {% embed molecule('toggler-item') with {
-            modifiers: ['with-top-border', 'option'],
-            data: {
-                title: 'bundle.title' | trans,
-                triggerClass: config.jsName ~ '__trigger-bundle',
-                targetClass: config.jsName ~ '__target-bundle',
-                isActive: true,
-            },
-            embed: {
-                bundleItems: data.bundleItems,
-            }
-        } only %}
-            {% block contentText %}
-                {% include molecule('bundle-option-list', 'ProductDetailPage') with {
-                    data: {
-                        bundleItems: embed.bundleItems,
-                    }
-                } only %}
-            {% endblock %}
-        {% endembed %}
-    {% endif %}
 
-    {% block colors %}
-        {% widget 'ProductGroupColorWidget' args [data.product.idProductAbstract, data.product.selectedAttributes ?? []] use view('product-detail-color-selector', 'ProductGroupWidget') only %}{% endwidget %}
-    {% endblock %}
+    {{ block('bundleProducts') }}
+    {{ block('colors') }}
 
     {% include molecule('variant-configurator', 'ProductDetailPage') with {
         data: {
@@ -93,6 +35,12 @@
             availableAttributes: data.product.availableAttributes
         }
     } only %}
+
+    {% widget 'ProductConfigurationProductViewDisplayWidget' args [data.product] only %}{% endwidget %}
+
+    {% widget 'ProductConfigurationProductDetailPageButtonWidget' args [data.product] only %}{% endwidget %}
+
+    <hr>
 
     {% widget 'AddToCartFormWidget' args [config, data.product, isDisabled, options] only %}
         {% block embeddedData %}
@@ -107,10 +55,16 @@
                     },
                 } only %}
                     {% block contentText %}
+                        {% set numberFormatConfig = {} %}
+                        {% for key, value in getNumberFormatConfig(app.locale).toArray() %}
+                            {% set numberFormatConfig = numberFormatConfig | merge({ (key | replace({'_symbol': '', '_': '-'})): value }) %}
+                        {% endfor %}
+
                         {% include molecule('quantity-counter') with {
                             modifiers: ['quantity-large', 'no-spacing'],
                             data: {
                                 readOnly: true,
+                                numberFormatConfig: numberFormatConfig,
                             },
                         } only %}
                     {% endblock %}

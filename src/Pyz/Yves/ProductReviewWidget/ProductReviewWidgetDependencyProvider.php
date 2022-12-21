@@ -12,6 +12,9 @@ use SprykerShop\Yves\ProductReviewWidget\ProductReviewWidgetDependencyProvider a
 
 class ProductReviewWidgetDependencyProvider extends SprykerProductReviewWidgetDependencyProvider
 {
+    /**
+     * @var string
+     */
     public const PYZ_CLIENT_GLOSSARY_STORAGE = 'PYZ_CLIENT_GLOSSARY_STORAGE';
 
     /**

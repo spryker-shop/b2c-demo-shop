@@ -32,7 +32,13 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class PlaceOrderStepTest extends Unit
 {
+    /**
+     * @var string
+     */
     protected const LOCALE_NAME_PLACE_ORDER_STEP = 'en_US';
+    /**
+     * @var string
+     */
     protected const MESSAGE_CHECKOUT_ERROR_TRANSFER = 'MESSAGE_CHECKOUT_ERROR_TRANSFER';
 
     /**

@@ -14,24 +14,66 @@ use Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface;
 
 class CombinedProductImageHydratorStep extends ProductImageHydratorStep
 {
+    /**
+     * @var int
+     */
     public const BULK_SIZE = 5000;
 
+    /**
+     * @var string
+     */
     public const COLUMN_ABSTRACT_SKU = 'abstract_sku';
+    /**
+     * @var string
+     */
     public const COLUMN_CONCRETE_SKU = 'concrete_sku';
 
+    /**
+     * @var string
+     */
     public const COLUMN_IMAGE_SET_NAME = 'product_image.image_set_name';
+    /**
+     * @var string
+     */
     public const COLUMN_EXTERNAL_URL_LARGE = 'product_image.external_url_large';
+    /**
+     * @var string
+     */
     public const COLUMN_EXTERNAL_URL_SMALL = 'product_image.external_url_small';
+    /**
+     * @var string
+     */
     public const COLUMN_LOCALE = 'product_image.locale';
+    /**
+     * @var string
+     */
     public const COLUMN_SORT_ORDER = 'product_image.sort_order';
+    /**
+     * @var string
+     */
     public const COLUMN_PRODUCT_IMAGE_KEY = 'product_image.product_image_key';
+    /**
+     * @var string
+     */
     public const COLUMN_PRODUCT_IMAGE_SET_KEY = 'product_image.product_image_set_key';
 
+    /**
+     * @var string
+     */
     public const COLUMN_ASSIGNED_PRODUCT_TYPE = 'product_image.assigned_product_type';
 
+    /**
+     * @var string
+     */
     protected const ASSIGNABLE_PRODUCT_TYPE_ABSTRACT = 'abstract';
+    /**
+     * @var string
+     */
     protected const ASSIGNABLE_PRODUCT_TYPE_CONCRETE = 'concrete';
 
+    /**
+     * @var array
+     */
     protected const ASSIGNABLE_PRODUCT_TYPES = [
         self::ASSIGNABLE_PRODUCT_TYPE_ABSTRACT,
         self::ASSIGNABLE_PRODUCT_TYPE_CONCRETE,

@@ -31,12 +31,8 @@ use Spryker\Zed\Locale\Business\LocaleFacade;
 use Spryker\Zed\PriceProduct\Business\PriceProductFacade;
 use Spryker\Zed\PriceProduct\Persistence\PriceProductQueryContainer;
 use Spryker\Zed\Product\Business\Product\ProductManager;
-use Spryker\Zed\Product\Business\Product\Url\ProductUrlManager;
 use Spryker\Zed\Product\Business\ProductBusinessFactory;
 use Spryker\Zed\Product\Business\ProductFacade;
-use Spryker\Zed\Product\Dependency\Facade\ProductToLocaleBridge;
-use Spryker\Zed\Product\Dependency\Facade\ProductToTouchBridge;
-use Spryker\Zed\Product\Dependency\Facade\ProductToUrlBridge;
 use Spryker\Zed\Product\Persistence\ProductQueryContainer;
 use Spryker\Zed\ProductImage\Persistence\ProductImageQueryContainer;
 use Spryker\Zed\Store\Business\StoreFacade;
@@ -47,33 +43,69 @@ use Spryker\Zed\Url\Business\UrlFacade;
 
 abstract class ProductTestAbstract extends Unit
 {
+    /**
+     * @var array
+     */
     public const PRODUCT_ABSTRACT_NAME = [
         'en_US' => 'Product name en_US',
         'de_DE' => 'Product name de_DE',
     ];
 
+    /**
+     * @var array
+     */
     public const PRODUCT_CONCRETE_NAME = [
         'en_US' => 'Product concrete name en_US',
         'de_DE' => 'Product concrete name de_DE',
     ];
 
+    /**
+     * @var array
+     */
     public const UPDATED_PRODUCT_ABSTRACT_NAME = [
         'en_US' => 'Updated Product name en_US',
         'de_DE' => 'Updated Product name de_DE',
     ];
 
+    /**
+     * @var array
+     */
     public const UPDATED_PRODUCT_CONCRETE_NAME = [
         'en_US' => 'Updated Product concrete name en_US',
         'de_DE' => 'Updated Product concrete name de_DE',
     ];
 
+    /**
+     * @var string
+     */
     public const ABSTRACT_SKU = 'foo';
+    /**
+     * @var string
+     */
     public const CONCRETE_SKU = 'foo-concrete';
+    /**
+     * @var string
+     */
     public const IMAGE_SET_NAME = 'Default';
+    /**
+     * @var string
+     */
     public const IMAGE_URL_LARGE = 'large';
+    /**
+     * @var string
+     */
     public const IMAGE_URL_SMALL = 'small';
+    /**
+     * @var int
+     */
     public const PRICE = 1234;
+    /**
+     * @var int
+     */
     public const STOCK_QUANTITY = 99;
+    /**
+     * @var string
+     */
     public const CURRENCY_ISO_CODE = 'EUR';
 
     /**
@@ -152,11 +184,6 @@ abstract class ProductTestAbstract extends Unit
     protected $productConcreteManager;
 
     /**
-     * @var \Spryker\Zed\Product\Business\Product\Url\ProductUrlManagerInterface
-     */
-    protected $productUrlManager;
-
-    /**
      * @var \Generated\Shared\Transfer\ProductAbstractTransfer
      */
     protected $productAbstractTransfer;
@@ -212,22 +239,9 @@ abstract class ProductTestAbstract extends Unit
         $this->setupConcretePluginData();
 
         $productBusinessFactory = new ProductBusinessFactory();
-        $urlBridge = new ProductToUrlBridge($this->urlFacade);
-        $touchBridge = new ProductToTouchBridge($this->touchFacade);
-        $localeBridge = new ProductToLocaleBridge($this->localeFacade);
 
         $this->productConcreteManager = $productBusinessFactory->createProductConcreteManager();
         $this->productAbstractManager = $productBusinessFactory->createProductAbstractManager();
-
-        $urlGenerator = $productBusinessFactory->createProductUrlGenerator();
-
-        $this->productUrlManager = new ProductUrlManager(
-            $urlBridge,
-            $touchBridge,
-            $localeBridge,
-            $this->productQueryContainer,
-            $urlGenerator
-        );
 
         $this->productManager = new ProductManager(
             $this->productAbstractManager,

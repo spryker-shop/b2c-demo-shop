@@ -61,13 +61,15 @@ class ProductReviewForm extends AbstractType
 
     /**
      * @deprecated Use {@link ProductReviewWidgetConfig::GLOSSARY_KEY_INVALID_RATING_VALIDATION_MESSAGE} instead.
+     *
+     * @var string
      */
     protected const PYZ_VALIDATION_RATING_MESSAGE = 'validation.choice';
 
     /**
      * @return string
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'productReviewForm';
     }

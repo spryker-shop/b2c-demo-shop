@@ -44,8 +44,9 @@ use SprykerShop\Yves\CurrencyWidget\Widget\CurrencyWidget;
 use SprykerShop\Yves\CustomerPage\Plugin\Application\CustomerConfirmationUserCheckerApplicationPlugin;
 use SprykerShop\Yves\CustomerPage\Widget\CustomerNavigationWidget;
 use SprykerShop\Yves\CustomerReorderWidget\Plugin\CustomerPage\CustomerReorderFormWidget;
-use SprykerShop\Yves\CustomerReorderWidget\Plugin\CustomerPage\CustomerReorderItemCheckboxWidget;
 use SprykerShop\Yves\CustomerReorderWidget\Plugin\CustomerPage\CustomerReorderItemsFormWidget;
+use SprykerShop\Yves\CustomerReorderWidget\Widget\CustomerReorderBundleItemCheckboxWidget;
+use SprykerShop\Yves\CustomerReorderWidget\Widget\CustomerReorderItemCheckboxWidget;
 use SprykerShop\Yves\DiscountPromotionWidget\Plugin\ShopApplication\CartDiscountPromotionProductListWidgetCacheKeyGeneratorStrategyPlugin;
 use SprykerShop\Yves\DiscountPromotionWidget\Widget\CartDiscountPromotionProductListWidget;
 use SprykerShop\Yves\LanguageSwitcherWidget\Widget\LanguageSwitcherWidget;
@@ -65,8 +66,17 @@ use SprykerShop\Yves\ProductBundleWidget\Widget\ProductBundleCartItemsListWidget
 use SprykerShop\Yves\ProductBundleWidget\Widget\ProductBundleItemCounterWidget;
 use SprykerShop\Yves\ProductBundleWidget\Widget\ProductBundleItemsMultiCartItemsListWidget;
 use SprykerShop\Yves\ProductBundleWidget\Widget\ProductBundleMultiCartItemsListWidget;
+use SprykerShop\Yves\ProductBundleWidget\Widget\ProductBundleProductDetailPageItemsListWidget;
 use SprykerShop\Yves\ProductCategoryWidget\Widget\ProductBreadcrumbsWithCategoriesWidget;
 use SprykerShop\Yves\ProductCategoryWidget\Widget\ProductSchemaOrgCategoryWidget;
+use SprykerShop\Yves\ProductConfigurationCartWidget\Widget\ProductConfigurationCartItemDisplayWidget;
+use SprykerShop\Yves\ProductConfigurationCartWidget\Widget\ProductConfigurationCartPageButtonWidget;
+use SprykerShop\Yves\ProductConfigurationCartWidget\Widget\ProductConfigurationQuoteValidatorWidget;
+use SprykerShop\Yves\ProductConfigurationWidget\Widget\ProductConfigurationProductDetailPageButtonWidget;
+use SprykerShop\Yves\ProductConfigurationWidget\Widget\ProductConfigurationProductViewDisplayWidget;
+use SprykerShop\Yves\ProductConfigurationWishlistWidget\Widget\ProductConfigurationWishlistFormWidget;
+use SprykerShop\Yves\ProductConfigurationWishlistWidget\Widget\ProductConfigurationWishlistItemDisplayWidget;
+use SprykerShop\Yves\ProductConfigurationWishlistWidget\Widget\ProductConfigurationWishlistPageButtonWidget;
 use SprykerShop\Yves\ProductDiscontinuedWidget\Widget\ProductDiscontinuedNoteWidget;
 use SprykerShop\Yves\ProductDiscontinuedWidget\Widget\ProductDiscontinuedWidget;
 use SprykerShop\Yves\ProductGroupWidget\Widget\ProductGroupColorWidget;
@@ -92,6 +102,7 @@ use SprykerShop\Yves\ProductWidget\Widget\ProductAlternativeWidget;
 use SprykerShop\Yves\SalesConfigurableBundleWidget\Widget\OrderItemsConfiguredBundleWidget;
 use SprykerShop\Yves\SalesOrderThresholdWidget\Widget\SalesOrderThresholdWidget;
 use SprykerShop\Yves\SalesProductBundleWidget\Widget\OrderItemsProductBundleWidget;
+use SprykerShop\Yves\SalesProductConfigurationWidget\Widget\ProductConfigurationOrderItemDisplayWidget;
 use SprykerShop\Yves\ShopApplication\Plugin\Application\ShopApplicationApplicationPlugin;
 use SprykerShop\Yves\ShopApplication\ShopApplicationDependencyProvider as SprykerShopApplicationDependencyProvider;
 use SprykerShop\Yves\TabsWidget\Widget\FullTextSearchTabsWidget;
@@ -121,7 +132,6 @@ class ShopApplicationDependencyProvider extends SprykerShopApplicationDependency
             CurrencyWidget::class,
             CurrencyIsoCodeWidget::class,
             CustomerNavigationWidget::class,
-            CustomerReorderItemCheckboxWidget::class,
             DisplayProductAbstractReviewWidget::class,
             ProductGroupColorWidget::class,
             LanguageSwitcherWidget::class,
@@ -180,6 +190,18 @@ class ShopApplicationDependencyProvider extends SprykerShopApplicationDependency
             OrderCancelButtonWidget::class,
             CartAddProductAsSeparateItemWidget::class,
             AssetWidget::class,
+            CustomerReorderItemCheckboxWidget::class,
+            CustomerReorderBundleItemCheckboxWidget::class,
+            ProductBundleProductDetailPageItemsListWidget::class,
+            ProductConfigurationCartPageButtonWidget::class,
+            ProductConfigurationCartItemDisplayWidget::class,
+            ProductConfigurationProductDetailPageButtonWidget::class,
+            ProductConfigurationProductViewDisplayWidget::class,
+            ProductConfigurationOrderItemDisplayWidget::class,
+            ProductConfigurationQuoteValidatorWidget::class,
+            ProductConfigurationWishlistFormWidget::class,
+            ProductConfigurationWishlistItemDisplayWidget::class,
+            ProductConfigurationWishlistPageButtonWidget::class,
         ];
     }
 

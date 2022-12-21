@@ -32,7 +32,7 @@
             } only %}
         {% endfor %}
     </div>
-    {% if is_granted('IS_AUTHENTICATED_FULLY') and is_granted('ROLE_USER') %}
+    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') and is_granted('ROLE_USER') %}
         {% include molecule('user-block-item') with {
             modifiers: ['small'],
             data: {

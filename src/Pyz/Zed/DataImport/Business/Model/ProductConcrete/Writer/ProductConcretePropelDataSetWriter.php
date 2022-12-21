@@ -25,6 +25,8 @@ class ProductConcretePropelDataSetWriter implements DataSetWriterInterface
 {
     /**
      * @uses \Spryker\Shared\ProductBundleStorage\ProductBundleStorageConfig::PRODUCT_BUNDLE_PUBLISH
+     *
+     * @var string
      */
     protected const PRODUCT_BUNDLE_PUBLISH = 'ProductBundle.product_bundle.publish.write';
 
@@ -86,11 +88,19 @@ class ProductConcretePropelDataSetWriter implements DataSetWriterInterface
         $productConcreteEntity = SpyProductQuery::create()
             ->filterBySku($productConcreteEntityTransfer->getSku())
             ->findOneOrCreate();
+
+        $fkProductAbstract = $productConcreteEntity->getFkProductAbstract();
+
         $productConcreteEntity->fromArray($productConcreteEntityTransfer->modifiedToArray());
 
         if ($productConcreteEntity->isNew() || $productConcreteEntity->isModified()) {
             $productConcreteEntity->save();
             DataImporterPublisher::addEvent(ProductEvents::PRODUCT_CONCRETE_PUBLISH, $productConcreteEntity->getIdProduct());
+
+            if ($fkProductAbstract !== $idAbstract) {
+                DataImporterPublisher::addEvent(ProductEvents::PRODUCT_ABSTRACT_PUBLISH, $fkProductAbstract);
+                DataImporterPublisher::addEvent(ProductEvents::PRODUCT_ABSTRACT_PUBLISH, $idAbstract);
+            }
         }
 
         return $productConcreteEntity;

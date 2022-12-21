@@ -10,5 +10,5 @@
 {% set label = (itemCount == 1) ? 'multi_cart_widget.cart.item' : 'multi_cart_widget.cart.items' %}
 
 {% block body %}
-    {{ itemCount }} {{ label | trans }} | {{ data.subTotal | money(true, data.currencyCode) }}
+    {{ itemCount | executeFilterIfExists('formatInt', app.locale) }} {{ label | trans }} | {{ data.subTotal | money(true, data.currencyCode) }}
 {% endblock %}

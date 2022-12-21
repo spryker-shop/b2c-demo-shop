@@ -60,10 +60,11 @@
 
                     {% block quantity %}
                         <div class="{{ component.renderClass(config.name ~ '__option', modifiers) }}">
-                            {{ 'cart.item_quantity' | trans }}: {{ data.productItem.quantity }}
+                            {{ 'cart.item_quantity' | trans }}: {{ data.productItem.quantity | executeFilterIfExists('formatInt', app.locale) }}
                         </div>
                     {% endblock %}
 
+                    {% block productConfiguration %}{% endblock %}
                     {% block bundles %}{% endblock %}
                     {% block summary %}{% endblock %}
                 {% endembed %}

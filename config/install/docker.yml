@@ -61,12 +61,6 @@ sections:
         dependencies-install:
             command: 'vendor/bin/console frontend:project:install-dependencies'
 
-        yves-install-dependencies:
-            command: 'vendor/bin/console frontend:yves:install-dependencies'
-
-        zed-install-dependencies:
-            command: 'vendor/bin/console frontend:zed:install-dependencies'
-
     build-static-production:
         excluded: true
         yves-build-frontend:
@@ -75,12 +69,18 @@ sections:
         zed-build-frontend:
             command: 'vendor/bin/console frontend:zed:build -e production'
 
+        date-time-product-configurator:
+            command: 'vendor/bin/console frontend:date-time-product-configurator:build'
+
     build-static-development:
         yves-build-frontend:
             command: 'vendor/bin/console frontend:yves:build'
 
         zed-build-frontend:
             command: 'vendor/bin/console frontend:zed:build'
+
+        date-time-product-configurator:
+            command: 'vendor/bin/console frontend:date-time-product-configurator:build'
 
     scheduler-setup:
         jenkins-setup:

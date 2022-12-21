@@ -17,7 +17,7 @@
                 </tr>
             </thead>
             <tbody>
-            {% for item in data.wishlistItems %}
+            {% for idWishlistItem, item in data.wishlistItems %}
                 {% set isItemAvailable = item.available is defined and item.available and item.price is defined and item.price is not null %}
                 {% set productDiscontinuedWidget = findWidget('ProductDiscontinuedWidget', [item.sku]) %}
                 {% set isDiscontinued = productDiscontinuedWidget.isDiscontinued %}
@@ -57,6 +57,14 @@
                                     <li>{{ ('product.attribute.' ~ attribute) | trans }}: <span class="title title--medium">{{ item.attributes[attribute] }}</span></li>
                                 {% endif %}
                             {% endfor %}
+
+                            {% set wishlistItem = data.indexedWishlistItems[idWishlistItem] | default %}
+                            {% if wishlistItem %}
+                                <li class="spacing-top">
+                                    {% widget 'ProductConfigurationWishlistItemDisplayWidget' args [wishlistItem] only %}{% endwidget %}
+                                    {% widget 'ProductConfigurationWishlistPageButtonWidget' args [wishlistItem] only %}{% endwidget %}
+                                </li>
+                            {% endif %}
                         </ul>
                     </td>
                     <td nowrap="nowrap">

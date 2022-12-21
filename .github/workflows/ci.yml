@@ -11,13 +11,13 @@ on:
 
 jobs:
     validation:
-        name: "Static analysis / PHP 7.4"
+        name: "Static analysis / PHP 8.0"
         runs-on: ubuntu-18.04
         strategy:
             fail-fast: false
             matrix:
                 php-version: [
-                        '7.4',
+                        '8.0',
                 ]
 
         env:
@@ -50,7 +50,7 @@ jobs:
 
             - uses: actions/setup-node@v1
               with:
-                  node-version: '12'
+                  node-version: '16'
 
             - name: NPM cache
               uses: actions/cache@v2
@@ -115,8 +115,7 @@ jobs:
 
             - name: Frontend install-dependencies
               run: |
-                  vendor/bin/console frontend:project:install-dependencies
-                  vendor/bin/console frontend:yves:install-dependencies
+                  vendor/bin/console frontend:project:install-dependencies -vvv
 
             - name: Install NPM packages
               run: |
@@ -149,17 +148,17 @@ jobs:
               run: vendor/bin/phpmd src/ text vendor/spryker/architecture-sniffer/src/ruleset.xml --minimumpriority 2
 
             - name: Run PHPStan
-              run: vendor/bin/phpstan analyze -l 4 -c phpstan.neon src/ --debug
+              run: vendor/bin/phpstan analyze -l 5 -c phpstan.neon src/ --debug
 
             - name: Run Security check
               run: vendor/bin/console security:check
 
-    php-74-mariadb-glue-alpine:
-        name: "PHP 7.4 / MariaDB / Glue / Alpine"
+    php-80-mariadb-glue-alpine:
+        name: "PHP 8.0 / MariaDB / Glue / Alpine"
         runs-on: ubuntu-18.04
         env:
             PROGRESS_TYPE: plain
-            SPRYKER_PLATFORM_IMAGE: spryker/php:7.4
+            SPRYKER_PLATFORM_IMAGE: spryker/php:8.0
             TRAVIS: 1
 
         steps:
@@ -183,12 +182,12 @@ jobs:
                   docker/sdk testing console queue:worker:start --stop-when-empty
                   docker/sdk testing codecept run -c codeception.api.yml
 
-    php-74-postgresql-acceptance-alpine:
-        name: "PHP 7.4 / PostgreSQL / Acceptance / Alpine"
+    php-80-postgresql-acceptance-alpine:
+        name: "PHP 8.0 / PostgreSQL / Acceptance / Alpine"
         runs-on: ubuntu-18.04
         env:
             PROGRESS_TYPE: plain
-            SPRYKER_PLATFORM_IMAGE: spryker/php:7.4
+            SPRYKER_PLATFORM_IMAGE: spryker/php:8.0
             TRAVIS: 1
 
         steps:
@@ -212,12 +211,12 @@ jobs:
                   docker/sdk testing codecept run -c codeception.acceptance.yml
 
 
-    php-74-postgresql-functional-alpine:
-        name: "PHP 7.4 / PostgreSQL / Functional / Alpine"
+    php-80-postgresql-functional-alpine:
+        name: "PHP 8.0 / PostgreSQL / Functional / Alpine"
         runs-on: ubuntu-18.04
         env:
             PROGRESS_TYPE: plain
-            SPRYKER_PLATFORM_IMAGE: spryker/php:7.4
+            SPRYKER_PLATFORM_IMAGE: spryker/php:8.0
             TRAVIS: 1
 
         steps:
@@ -240,12 +239,12 @@ jobs:
                   docker/sdk testing console queue:worker:start --stop-when-empty
                   docker/sdk testing codecept run -c codeception.functional.yml
 
-    php-74-mariadb-acceptance-alpine:
-        name: "PHP 7.4 / MariaDB / Acceptance / Alpine"
+    php-80-mariadb-acceptance-alpine:
+        name: "PHP 8.0 / MariaDB / Acceptance / Alpine"
         runs-on: ubuntu-18.04
         env:
             PROGRESS_TYPE: plain
-            SPRYKER_PLATFORM_IMAGE: spryker/php:7.4
+            SPRYKER_PLATFORM_IMAGE: spryker/php:8.0
             TRAVIS: 1
 
         steps:
@@ -269,12 +268,12 @@ jobs:
                   docker/sdk testing codecept run -c codeception.acceptance.yml
 
 
-    php-74-mariadb-functional-alpine:
-        name: "PHP 7.4 / MariaDB / Functional / Alpine"
+    php-80-mariadb-functional-alpine:
+        name: "PHP 8.0 / MariaDB / Functional / Alpine"
         runs-on: ubuntu-18.04
         env:
             PROGRESS_TYPE: plain
-            SPRYKER_PLATFORM_IMAGE: spryker/php:7.4
+            SPRYKER_PLATFORM_IMAGE: spryker/php:8.0
             TRAVIS: 1
 
         steps:
@@ -297,12 +296,12 @@ jobs:
                   docker/sdk testing codecept run -c codeception.functional.yml
 
 
-    php-74-postgres-functional-debian:
-        name: "PHP 7.4 / PostgreSQL / Functional / Debian"
+    php-80-postgres-functional-debian:
+        name: "PHP 8.0 / PostgreSQL / Functional / Debian"
         runs-on: ubuntu-18.04
         env:
             PROGRESS_TYPE: plain
-            SPRYKER_PLATFORM_IMAGE: spryker/php:7.4-debian
+            SPRYKER_PLATFORM_IMAGE: spryker/php:8.0-debian
             TRAVIS: 1
 
         steps:
@@ -324,12 +323,12 @@ jobs:
                   docker/sdk up -t -v
                   docker/sdk testing codecept run -c codeception.functional.yml
 
-    frontend-assets-via-docker-php-7-4:
-        name: "Docker / Alpine / PHP 7.4 / Frontend & Assets"
+    frontend-assets-via-docker-php-8-0:
+        name: "Docker / Alpine / PHP 8.0 / Frontend & Assets"
         runs-on: ubuntu-18.04
         env:
             PROGRESS_TYPE: plain
-            SPRYKER_PLATFORM_IMAGE: spryker/php:7.4-alpine3.12
+            SPRYKER_PLATFORM_IMAGE: spryker/php:8.0
         steps:
             - uses: actions/checkout@v2
             - run: echo eyAiZXhwZXJpbWVudGFsIiA6IHRydWUsICJmZWF0dXJlcyIgOiB7ICJidWlsZGtpdCI6IHRydWUgfSB9Cg==|base64 -d|sudo tee /etc/docker/daemon.json

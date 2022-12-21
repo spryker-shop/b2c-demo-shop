@@ -34,7 +34,9 @@ use Spryker\Glue\CartCodesRestApi\Plugin\GlueApplication\GuestCartVouchersResour
 use Spryker\Glue\CartCodesRestApi\Plugin\GlueApplication\VoucherByQuoteResourceRelationshipPlugin;
 use Spryker\Glue\CartsRestApi\CartsRestApiConfig;
 use Spryker\Glue\CartsRestApi\Plugin\ControllerBeforeAction\SetAnonymousCustomerIdControllerBeforeActionPlugin;
+use Spryker\Glue\CartsRestApi\Plugin\GlueApplication\CartByRestCheckoutDataResourceRelationshipPlugin;
 use Spryker\Glue\CartsRestApi\Plugin\GlueApplication\CartItemsByQuoteResourceRelationshipPlugin;
+use Spryker\Glue\CartsRestApi\Plugin\GlueApplication\GuestCartByRestCheckoutDataResourceRelationshipPlugin;
 use Spryker\Glue\CartsRestApi\Plugin\GlueApplication\GuestCartItemsByQuoteResourceRelationshipPlugin;
 use Spryker\Glue\CartsRestApi\Plugin\ResourceRoute\CartItemsResourceRoutePlugin;
 use Spryker\Glue\CartsRestApi\Plugin\ResourceRoute\CartsResourceRoutePlugin;
@@ -119,6 +121,7 @@ use Spryker\Glue\ProductBundleCartsRestApi\ProductBundleCartsRestApiConfig;
 use Spryker\Glue\ProductBundlesRestApi\Plugin\GlueApplication\BundledProductByProductConcreteSkuResourceRelationshipPlugin;
 use Spryker\Glue\ProductBundlesRestApi\Plugin\GlueApplication\ConcreteProductsBundledProductsResourceRoutePlugin;
 use Spryker\Glue\ProductBundlesRestApi\ProductBundlesRestApiConfig;
+use Spryker\Glue\ProductConfigurationsRestApi\Plugin\GlueApplication\CartItemProductConfigurationRestRequestValidatorPlugin;
 use Spryker\Glue\ProductImageSetsRestApi\Plugin\AbstractProductImageSetsRoutePlugin;
 use Spryker\Glue\ProductImageSetsRestApi\Plugin\ConcreteProductImageSetsRoutePlugin;
 use Spryker\Glue\ProductImageSetsRestApi\Plugin\Relationship\AbstractProductsProductImageSetsResourceRelationshipPlugin;
@@ -335,6 +338,7 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
             new PriceModeParameterValidatorPlugin(),
             new EntityTagRestRequestValidatorPlugin(),
             new CatalogSearchRequestParametersIntegerRestRequestValidatorPlugin(),
+            new CartItemProductConfigurationRestRequestValidatorPlugin(),
         ];
     }
 
@@ -531,6 +535,14 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
         $resourceRelationshipCollection->addRelationship(
             CheckoutRestApiConfig::RESOURCE_CHECKOUT_DATA,
             new AddressByCheckoutDataResourceRelationshipPlugin()
+        );
+        $resourceRelationshipCollection->addRelationship(
+            CheckoutRestApiConfig::RESOURCE_CHECKOUT_DATA,
+            new CartByRestCheckoutDataResourceRelationshipPlugin(),
+        );
+        $resourceRelationshipCollection->addRelationship(
+            CheckoutRestApiConfig::RESOURCE_CHECKOUT_DATA,
+            new GuestCartByRestCheckoutDataResourceRelationshipPlugin(),
         );
         $resourceRelationshipCollection->addRelationship(
             SalesReturnsRestApiConfig::RESOURCE_RETURNS,

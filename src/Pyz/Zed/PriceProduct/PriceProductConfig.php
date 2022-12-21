@@ -13,6 +13,8 @@ class PriceProductConfig extends SprykerPriceProductConfig
 {
     /**
      * Perform orphan prices removing automatically.
+     *
+     * @var bool
      */
     protected const IS_DELETE_ORPHAN_STORE_PRICES_ON_SAVE_ENABLED = true;
 }

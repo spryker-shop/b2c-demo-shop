@@ -16,6 +16,6 @@ class MessageBrokerConfig extends SprykerMessageBrokerConfig
      */
     public function getDefaultWorkerChannels(): array
     {
-        return ['assets', 'payment'];
+        return ['assets', 'payment', 'product'];
     }
 }

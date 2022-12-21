@@ -3,6 +3,7 @@
 use Generated\Shared\Transfer\AssetAddedTransfer;
 use Generated\Shared\Transfer\AssetDeletedTransfer;
 use Generated\Shared\Transfer\AssetUpdatedTransfer;
+use Generated\Shared\Transfer\InitializeProductExportTransfer;
 use Generated\Shared\Transfer\PaymentCancelReservationFailedTransfer;
 use Generated\Shared\Transfer\PaymentCancelReservationRequestedTransfer;
 use Generated\Shared\Transfer\PaymentConfirmationFailedTransfer;
@@ -17,6 +18,10 @@ use Generated\Shared\Transfer\PaymentRefundedTransfer;
 use Generated\Shared\Transfer\PaymentRefundFailedTransfer;
 use Generated\Shared\Transfer\PaymentRefundRequestedTransfer;
 use Generated\Shared\Transfer\PaymentReservationCanceledTransfer;
+use Generated\Shared\Transfer\ProductCreatedTransfer;
+use Generated\Shared\Transfer\ProductDeletedTransfer;
+use Generated\Shared\Transfer\ProductExportedTransfer;
+use Generated\Shared\Transfer\ProductUpdatedTransfer;
 use Monolog\Logger;
 use Pyz\Shared\Console\ConsoleConstants;
 use Pyz\Shared\Scheduler\SchedulerConfig;
@@ -56,6 +61,7 @@ use Spryker\Shared\OauthAuth0\OauthAuth0Constants;
 use Spryker\Shared\OauthClient\OauthClientConstants;
 use Spryker\Shared\OauthCryptography\OauthCryptographyConstants;
 use Spryker\Shared\Oms\OmsConstants;
+use Spryker\Shared\ProductConfiguration\ProductConfigurationConstants;
 use Spryker\Shared\ProductLabel\ProductLabelConstants;
 use Spryker\Shared\ProductManagement\ProductManagementConstants;
 use Spryker\Shared\ProductRelation\ProductRelationConstants;
@@ -78,7 +84,7 @@ use Spryker\Shared\SessionRedis\SessionRedisConfig;
 use Spryker\Shared\SessionRedis\SessionRedisConstants;
 use Spryker\Shared\Storage\StorageConstants;
 use Spryker\Shared\StorageRedis\StorageRedisConstants;
-use Spryker\Shared\StoreReference\StoreReferenceConstants;
+use Spryker\Shared\Store\StoreConstants;
 use Spryker\Shared\Tax\TaxConstants;
 use Spryker\Shared\Testify\TestifyConstants;
 use Spryker\Shared\Translator\TranslatorConstants;
@@ -90,6 +96,7 @@ use Spryker\Zed\MessageBrokerAws\MessageBrokerAwsConfig;
 use Spryker\Zed\OauthAuth0\OauthAuth0Config;
 use Spryker\Zed\Payment\PaymentConfig;
 use Spryker\Zed\Propel\PropelConfig;
+use Spryker\Shared\Quote\QuoteConstants;
 use SprykerShop\Shared\CustomerPage\CustomerPageConstants;
 use SprykerShop\Shared\ShopUi\ShopUiConstants;
 
@@ -234,13 +241,13 @@ $config[UserConstants::USER_SYSTEM_USERS] = [
 ];
 $config[SecuritySystemUserConstants::AUTH_DEFAULT_CREDENTIALS] = [
     'yves_system' => [
-        'token' => getenv('SPRYKER_ZED_REQUEST_TOKEN') ?: '',
+        'token' => getenv('SPRYKER_ZED_REQUEST_TOKEN'),
     ],
 ];
 
 // >> URL Signer
 
-$config[HttpConstants::URI_SIGNER_SECRET_KEY] = getenv('SPRYKER_ZED_REQUEST_TOKEN') ?: null;
+$config[HttpConstants::URI_SIGNER_SECRET_KEY] = getenv('SPRYKER_URI_SIGNER_SECRET_KEY') ?: null;
 
 // ACL: Special rules for specific users
 $config[AclConstants::ACL_DEFAULT_CREDENTIALS] = [
@@ -585,16 +592,17 @@ $config[GlueApplicationConstants::GLUE_APPLICATION_CORS_ALLOW_ORIGIN] = getenv('
 
 $config[OmsConstants::PROCESS_LOCATION] = [
     OmsConfig::DEFAULT_PROCESS_LOCATION,
-    APPLICATION_ROOT_DIR . '/vendor/spryker/payment/config/Zed/Oms',
+    APPLICATION_ROOT_DIR . '/vendor/spryker/sales-payment/config/Zed/Oms',
 ];
-$config[OmsConstants::ACTIVE_PROCESSES] = [];
+$config[OmsConstants::ACTIVE_PROCESSES] = [
+    'ForeignPaymentB2CStateMachine01',
+];
 $config[SalesConstants::PAYMENT_METHOD_STATEMACHINE_MAPPING] = [
-    PaymentConfig::PAYMENT_FOREIGN_PROVIDER => 'B2CStateMachine01',
+    PaymentConfig::PAYMENT_FOREIGN_PROVIDER => 'ForeignPaymentB2CStateMachine01',
 ];
 
-// ----------------------------------------------------------------------------
-// ------------------------------ PAYMENTS ------------------------------------
-// ----------------------------------------------------------------------------
+// ---------- Guest cart
+$config[QuoteConstants::GUEST_QUOTE_LIFETIME] = 'P01M';
 
 // >>> Taxes
 $config[TaxConstants::DEFAULT_TAX_RATE] = 19;
@@ -612,14 +620,14 @@ $config[ProductLabelConstants::PRODUCT_LABEL_TO_DE_ASSIGN_CHUNK_SIZE] = 1000;
 $config[CartsRestApiConstants::IS_QUOTE_RELOAD_ENABLED] = true;
 
 // ----------------------------------------------------------------------------
-// ------------------------------ AOP -----------------------------------------
+// ------------------------------ ACP -----------------------------------------
 // ----------------------------------------------------------------------------
 $aopApplicationConfiguration = json_decode(html_entity_decode((string)getenv('SPRYKER_AOP_APPLICATION')), true);
 $config[KernelConstants::DOMAIN_WHITELIST] = array_merge(
     $config[KernelConstants::DOMAIN_WHITELIST],
     $aopApplicationConfiguration['APP_DOMAINS'] ?? [],
 );
-$config[StoreReferenceConstants::STORE_NAME_REFERENCE_MAP] = $aopApplicationConfiguration['STORE_NAME_REFERENCE_MAP'] ?? [];
+$config[StoreConstants::STORE_NAME_REFERENCE_MAP] = $aopApplicationConfiguration['STORE_NAME_REFERENCE_MAP'] ?? [];
 $config[AppCatalogGuiConstants::APP_CATALOG_SCRIPT_URL] = $aopApplicationConfiguration['APP_CATALOG_SCRIPT_URL'] ?? '';
 
 $aopAuthenticationConfiguration = json_decode(html_entity_decode((string)getenv('SPRYKER_AOP_AUTHENTICATION')), true);
@@ -645,17 +653,24 @@ $config[MessageBrokerConstants::MESSAGE_TO_CHANNEL_MAP] = [
     AssetAddedTransfer::class => 'assets',
     AssetUpdatedTransfer::class => 'assets',
     AssetDeletedTransfer::class => 'assets',
+    ProductExportedTransfer::class => 'product',
+    ProductCreatedTransfer::class => 'product',
+    ProductUpdatedTransfer::class => 'product',
+    ProductDeletedTransfer::class => 'product',
+    InitializeProductExportTransfer::class => 'product',
 ];
 
 $config[MessageBrokerConstants::CHANNEL_TO_TRANSPORT_MAP] =
 $config[MessageBrokerAwsConstants::CHANNEL_TO_RECEIVER_TRANSPORT_MAP] = [
     'payment' => MessageBrokerAwsConfig::SQS_TRANSPORT,
     'assets' => MessageBrokerAwsConfig::SQS_TRANSPORT,
+    'product' => MessageBrokerAwsConfig::SQS_TRANSPORT,
 ];
 
 $config[MessageBrokerAwsConstants::CHANNEL_TO_SENDER_TRANSPORT_MAP] = [
     'payment' => 'http',
     'assets' => 'http',
+    'product' => 'http',
 ];
 
 $aopInfrastructureConfiguration = json_decode(html_entity_decode((string)getenv('SPRYKER_AOP_INFRASTRUCTURE')), true);
@@ -677,3 +692,10 @@ $config[AppCatalogGuiConstants::OAUTH_OPTION_AUDIENCE] = 'aop-atrs';
 $config[OauthClientConstants::OAUTH_PROVIDER_NAME_FOR_PAYMENT_AUTHORIZE] = OauthAuth0Config::PROVIDER_NAME;
 $config[OauthClientConstants::OAUTH_GRANT_TYPE_FOR_PAYMENT_AUTHORIZE] = OauthAuth0Config::GRANT_TYPE_CLIENT_CREDENTIALS;
 $config[OauthClientConstants::OAUTH_OPTION_AUDIENCE_FOR_PAYMENT_AUTHORIZE] = 'aop-app';
+
+// ----------------------------------------------------------------------------
+// ------------------------------ Product Configuration ---------------------------------------
+// ----------------------------------------------------------------------------
+$config[ProductConfigurationConstants::SPRYKER_PRODUCT_CONFIGURATOR_ENCRYPTION_KEY] = getenv('SPRYKER_PRODUCT_CONFIGURATOR_ENCRYPTION_KEY') ?: 'change123';
+$config[ProductConfigurationConstants::SPRYKER_PRODUCT_CONFIGURATOR_HEX_INITIALIZATION_VECTOR] = getenv('SPRYKER_PRODUCT_CONFIGURATOR_HEX_INITIALIZATION_VECTOR') ?: '0c1ffefeebdab4a3d839d0e52590c9a2';
+$config[KernelConstants::DOMAIN_WHITELIST][] = getenv('SPRYKER_PRODUCT_CONFIGURATOR_HOST');

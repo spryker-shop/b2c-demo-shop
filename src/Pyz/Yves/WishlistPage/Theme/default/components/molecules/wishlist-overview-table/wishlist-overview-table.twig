@@ -34,7 +34,7 @@
                             <a href="{{ path('wishlist/details', { wishlistName: wishlist.name }) }}">{{ wishlist.name }}</a>
                         {% endif %}
                     </td>
-                    <td>{{ wishlist.numberOfItems }}</td>
+                    <td>{{ wishlist.numberOfItems | executeFilterIfExists('formatInt', app.locale) }}</td>
                     <td>{{ wishlist.createdAt | formatDate }}</td>
                     <td>
                         <ul class="menu menu--inline float-right text-right">

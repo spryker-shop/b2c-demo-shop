@@ -1,20 +1,4 @@
-{% extends model('component') %}
-
-{% define config = {
-    name: 'variant-configurator'
-} %}
-
-{% define data = {
-    sku: required,
-    superAttributes: [],
-    selectedAttributes: [],
-    availableAttributes: [],
-    useExternalForm: false
-} %}
-
-{% block component %}
-    {% if data.superAttributes is not empty %}{{parent()}}{% endif %}
-{% endblock %}
+{% extends molecule('variant-configurator', '@SprykerShop:DiscountPromotionWidget') %}
 
 {% block body %}
     {% if not data.useExternalForm %}

@@ -12,12 +12,6 @@ const globalSettings = {
         prod: 'production',
     },
 
-    // build modules
-    buildVariants: {
-        esm: 'esm',
-        legacy: 'legacy',
-    },
-
     paths: {
         // locate the typescript configuration json file
         tsConfig: './tsconfig.json',
@@ -68,14 +62,6 @@ const imageOptimizationOptions = {
     gif: {
         optimizationLevel: 2,
     },
-};
-
-const buildVariantArray = process.argv.filter(argv => argv.includes('module'));
-const buildVariant = buildVariantArray.length ? buildVariantArray[0].replace('module:', '') : '';
-
-const buildVariantSettings = {
-    buildVariant,
-    isES6Module: buildVariant === globalSettings.buildVariants.esm,
 };
 
 const getAppSettingsByTheme = (namespaceConfig, theme, pathToConfig) => {
@@ -273,5 +259,4 @@ const getAppSettings = (namespaceConfigList, pathToConfig) => {
 module.exports = {
     globalSettings,
     getAppSettings,
-    buildVariantSettings,
 };

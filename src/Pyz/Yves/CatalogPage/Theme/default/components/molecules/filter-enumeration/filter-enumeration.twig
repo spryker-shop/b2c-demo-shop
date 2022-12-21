@@ -1,0 +1,20 @@
+{% extends molecule('filter-enumeration', '@SprykerShop:CatalogPage') %}
+
+{% block body %}
+    <ul class="menu">
+        {% for filterValue in data.filter.values %}
+            <li class="menu__item">
+                {% include inputComponent with {
+                    attributes: {
+                        name: data.filter.config.parameterName ~ (isMultiSelect ? '[]' : ''),
+                        value: filterValue.value,
+                        checked: (filterValue.value in activeValues),
+                    },
+                    data: {
+                        label: filterValue.value ~ ' (' ~ filterValue.docCount | executeFilterIfExists('formatInt', app.locale) ~ ')',
+                    },
+                } only %}
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

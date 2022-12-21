@@ -36,6 +36,6 @@
 
 {% block quantity %}
     <div class="{{ config.name }}__quantity col col--sm-4 col--xl-2">
-        {{ 'global.quantity_symbol' | trans }} {{ data.product.quantity }}
+        {{ 'global.quantity_symbol' | trans }} {{ data.product.quantity | executeFilterIfExists('formatInt', app.locale) }}
     </div>
 {% endblock %}

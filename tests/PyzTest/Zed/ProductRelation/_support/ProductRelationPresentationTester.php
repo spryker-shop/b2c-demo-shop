@@ -30,12 +30,34 @@ class ProductRelationPresentationTester extends Actor
 {
     use _generated\ProductRelationPresentationTesterActions;
 
+    /**
+     * @var int
+     */
     public const ELEMENT_TIMEOUT = 45;
+    /**
+     * @var string
+     */
     public const PRODUCT_RELATION_TYPE_SELECTOR = '//*[@id="product_relation_productRelationType"]';
+    /**
+     * @var string
+     */
     public const PRODUCT_TABLE_FILTER_LABEL_INPUT_SELECTOR = '//*[@id="product-table_filter"]/label/input';
+    /**
+     * @var string
+     */
     public const PRODUCT_TAB_SELECTOR = '//*[@id="form-product-relation"]/div/ul/li[2]/a';
+    /**
+     * @var string
+     */
     public const SUBMIT_RELATION_BUTTON_SELECTOR = '//*[@id="submit-relation"]';
+    /**
+     * @var string
+     */
     public const ACTIVATE_RELATION_BUTTON_SELECTOR = '//*[@id="activate-relation"]';
+    /**
+     * @var string
+     */
+    public const PRODUCT_TABLE_BODY_XPATH = '//*[@class="dataTables_scrollBody"]/table/tbody/tr[1]/td[1]';
 
     /**
      * @var int
@@ -73,7 +95,7 @@ class ProductRelationPresentationTester extends Actor
      */
     public function filterProductsByName($name)
     {
-        $this->waitForElement(static::PRODUCT_TABLE_FILTER_LABEL_INPUT_SELECTOR, static::ELEMENT_TIMEOUT);
+        $this->waitForElement(static::PRODUCT_TABLE_BODY_XPATH, static::ELEMENT_TIMEOUT);
         $this->fillField(static::PRODUCT_TABLE_FILTER_LABEL_INPUT_SELECTOR, $name);
 
         return $this;
@@ -86,6 +108,7 @@ class ProductRelationPresentationTester extends Actor
      */
     public function selectProduct($sku)
     {
+        $this->waitForElement(static::PRODUCT_TABLE_BODY_XPATH, static::ELEMENT_TIMEOUT);
         $buttonElementId = sprintf('//*[@id="select-product-%s"]', $sku);
 
         $this->waitForElementNotVisible('//*[@id="product-table_processing"]', self::ELEMENT_TIMEOUT);
