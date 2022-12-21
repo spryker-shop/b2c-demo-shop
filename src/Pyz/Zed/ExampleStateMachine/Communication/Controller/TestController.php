@@ -8,6 +8,7 @@
 namespace Pyz\Zed\ExampleStateMachine\Communication\Controller;
 
 use Spryker\Zed\Kernel\Communication\Controller\AbstractController;
+use Spryker\Zed\StateMachine\Business\StateMachineFacade;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -52,7 +53,7 @@ class TestController extends AbstractController
      *
      * @return array<\Generated\Shared\Transfer\StateMachineItemTransfer>
      */
-    protected function createPyzStateMachineLookupTable(array $stateMachineItems)
+    protected function createPyzStateMachineLookupTable(array $stateMachineItems): array
     {
         $lookupIndex = [];
         foreach ($stateMachineItems as $stateMachineItemTransfer) {
@@ -65,7 +66,7 @@ class TestController extends AbstractController
     /**
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function addPyzItemAction()
+    public function addPyzItemAction(): RedirectResponse
     {
         $this->getFacade()->createPyzExampleItem();
 
@@ -77,7 +78,7 @@ class TestController extends AbstractController
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function deletePyzItemAction(Request $request)
+    public function deletePyzItemAction(Request $request): RedirectResponse
     {
         $idStateMachineItem = $this->castId($request->query->get('id'));
 
@@ -91,7 +92,7 @@ class TestController extends AbstractController
     /**
      * @return \Spryker\Zed\StateMachine\Business\StateMachineFacade
      */
-    protected function getPyzStateMachineFacade()
+    protected function getPyzStateMachineFacade(): StateMachineFacade
     {
         return $this->getFactory()->getPyzStateMachineFacade();
     }

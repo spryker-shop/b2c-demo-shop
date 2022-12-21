@@ -18,7 +18,7 @@ class ZedRequestDependencyProvider extends SprykerZedRequestDependencyProvider
     /**
      * @return array<\Spryker\Client\ZedRequest\Dependency\Plugin\MetaDataProviderPluginInterface>
      */
-    protected function getMetaDataProviderPlugins()
+    protected function getMetaDataProviderPlugins(): array
     {
         return [
             'currency' => new ZedRequestMetaDataProviderPlugin(),

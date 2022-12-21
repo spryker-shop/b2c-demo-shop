@@ -30,7 +30,7 @@ class ExampleStateMachineItemReader
      *
      * @return array<\Generated\Shared\Transfer\StateMachineItemTransfer>
      */
-    public function getStateMachineItemTransferByItemStateIds(array $stateIds = [])
+    public function getStateMachineItemTransferByItemStateIds(array $stateIds = []): array
     {
         $exampleStateMachineItems = $this->exampleStateMachineQueryContainer
             ->queryPyzStateMachineItemsByStateIds($stateIds)
@@ -42,7 +42,7 @@ class ExampleStateMachineItemReader
     /**
      * @return array<\Generated\Shared\Transfer\StateMachineItemTransfer>
      */
-    public function getStateMachineItems()
+    public function getStateMachineItems(): array
     {
         $exampleStateMachineItems = $this->exampleStateMachineQueryContainer
             ->queryPyzAllStateMachineItems();
@@ -55,7 +55,7 @@ class ExampleStateMachineItemReader
      *
      * @return array<\Generated\Shared\Transfer\StateMachineItemTransfer>
      */
-    protected function hydrateTransferFromPersistence($exampleStateMachineItems)
+    protected function hydrateTransferFromPersistence($exampleStateMachineItems): array
     {
         $stateMachineItems = [];
         foreach ($exampleStateMachineItems as $exampleStateMachineItemEntity) {

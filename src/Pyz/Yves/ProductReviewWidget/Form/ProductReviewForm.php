@@ -136,7 +136,7 @@ class ProductReviewForm extends AbstractType
      *
      * @return array
      */
-    protected function getPyzRatingFieldChoices()
+    protected function getPyzRatingFieldChoices(): array
     {
         $unselectedChoice = [static::PYZ_UNSELECTED_RATING => 'product_review.submit.rating.none'];
         $choices = range(static::PYZ_MINIMUM_RATING, $this->getFactory()->getProductReviewClient()->getMaximumRating());

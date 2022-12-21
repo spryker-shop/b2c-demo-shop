@@ -39,7 +39,7 @@ class CombinedProductPricePropelDataSetWriter extends ProductPricePropelDataSetW
     public function __construct(
         ProductRepository $productRepository,
         StoreFacadeInterface $storeFacade,
-        CurrencyFacadeInterface $currencyFacade
+        CurrencyFacadeInterface $currencyFacade,
     ) {
         parent::__construct($productRepository, $storeFacade, $currencyFacade);
     }

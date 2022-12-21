@@ -48,7 +48,7 @@ class GiftCardAbstractConfigurationWriterStep implements DataImportStepInterface
      *
      * @return void
      */
-    public function execute(DataSetInterface $dataSet)
+    public function execute(DataSetInterface $dataSet): void
     {
         $pattern = $dataSet[static::COL_PATTERN];
         $abstractSku = $dataSet[static::COL_ABSTRACT_SKU];

@@ -23,7 +23,7 @@ class TestCommandPlugin extends AbstractPlugin implements CommandPluginInterface
      *
      * @return bool
      */
-    public function run(StateMachineItemTransfer $stateMachineItemTransfer)
+    public function run(StateMachineItemTransfer $stateMachineItemTransfer): bool
     {
         return true;
     }

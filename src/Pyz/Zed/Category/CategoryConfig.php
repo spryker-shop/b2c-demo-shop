@@ -14,7 +14,7 @@ class CategoryConfig extends SprykerCategoryConfig
     /**
      * @return array<string>
      */
-    public function getTemplateList()
+    public function getTemplateList(): array
     {
         $templateList = [
             'Catalog + CMS Slot' => '@CatalogPage/views/catalog-with-cms-block/catalog-with-cms-slot.twig',

@@ -15,7 +15,7 @@ class StateMachineDependencyProvider extends SprykerStateMachineDependencyProvid
     /**
      * @return array<\Spryker\Zed\StateMachine\Dependency\Plugin\StateMachineHandlerInterface>
      */
-    protected function getStateMachineHandlers()
+    protected function getStateMachineHandlers(): array
     {
         return [
             new TestStateMachineHandlerPlugin(),

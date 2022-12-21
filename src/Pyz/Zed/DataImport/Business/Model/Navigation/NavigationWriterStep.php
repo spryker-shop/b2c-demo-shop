@@ -41,7 +41,7 @@ class NavigationWriterStep extends PublishAwareStep implements DataImportStepInt
      *
      * @return void
      */
-    public function execute(DataSetInterface $dataSet)
+    public function execute(DataSetInterface $dataSet): void
     {
         $navigationEntity = SpyNavigationQuery::create()
             ->filterByKey($dataSet[static::KEY])
@@ -61,7 +61,7 @@ class NavigationWriterStep extends PublishAwareStep implements DataImportStepInt
      *
      * @return string
      */
-    protected function getName(SpyNavigation $navigationEntity, DataSetInterface $dataSet)
+    protected function getName(SpyNavigation $navigationEntity, DataSetInterface $dataSet): string
     {
         if (isset($dataSet[static::NAME]) && !empty($dataSet[static::NAME])) {
             return $dataSet[static::NAME];

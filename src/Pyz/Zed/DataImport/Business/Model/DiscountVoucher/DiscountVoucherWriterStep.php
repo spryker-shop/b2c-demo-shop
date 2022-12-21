@@ -76,7 +76,7 @@ class DiscountVoucherWriterStep implements DataImportStepInterface
      *
      * @return void
      */
-    public function execute(DataSetInterface $dataSet)
+    public function execute(DataSetInterface $dataSet): void
     {
         $discountEntity = SpyDiscountQuery::create()
             ->findOneByDiscountKey($dataSet[static::KEY_DISCOUNT_KEY]);
@@ -113,7 +113,7 @@ class DiscountVoucherWriterStep implements DataImportStepInterface
      *
      * @return bool
      */
-    protected function voucherBatchExists(SpyDiscount $discountEntity, $voucherBatch)
+    protected function voucherBatchExists(SpyDiscount $discountEntity, $voucherBatch): bool
     {
         $query = SpyDiscountVoucherQuery::create()
             ->filterByFkDiscountVoucherPool($discountEntity->getFkDiscountVoucherPool())
@@ -129,7 +129,7 @@ class DiscountVoucherWriterStep implements DataImportStepInterface
      *
      * @return array
      */
-    protected function generateCodes($length, $quantity, $customCode = null)
+    protected function generateCodes($length, $quantity, $customCode = null): array
     {
         $codesToGenerate = [];
 
@@ -156,7 +156,7 @@ class DiscountVoucherWriterStep implements DataImportStepInterface
      *
      * @return string
      */
-    protected function addCustomCodeToGenerated($customCode, $code)
+    protected function addCustomCodeToGenerated($customCode, $code): string
     {
         $replacementString = $this->discountConfig->getVoucherPoolTemplateReplacementString();
 
@@ -176,7 +176,7 @@ class DiscountVoucherWriterStep implements DataImportStepInterface
      *
      * @return bool
      */
-    protected function voucherCodeExists($code)
+    protected function voucherCodeExists($code): bool
     {
         return (SpyDiscountVoucherQuery::create()->filterByCode($code)->count() > 0);
     }
@@ -186,7 +186,7 @@ class DiscountVoucherWriterStep implements DataImportStepInterface
      *
      * @return string
      */
-    protected function getRandomVoucherCode($length)
+    protected function getRandomVoucherCode($length): string
     {
         $allowedCharacters = $this->discountConfig->getVoucherCodeCharacters();
 

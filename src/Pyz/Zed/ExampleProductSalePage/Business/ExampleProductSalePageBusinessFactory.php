@@ -8,6 +8,7 @@
 namespace Pyz\Zed\ExampleProductSalePage\Business;
 
 use Pyz\Zed\ExampleProductSalePage\Business\Label\ProductAbstractRelationReader;
+use Pyz\Zed\ExampleProductSalePage\Business\Label\ProductAbstractRelationReaderInterface;
 use Pyz\Zed\ExampleProductSalePage\ExampleProductSalePageDependencyProvider;
 use Spryker\Zed\Currency\Business\CurrencyFacadeInterface;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
@@ -22,7 +23,7 @@ class ExampleProductSalePageBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \Pyz\Zed\ExampleProductSalePage\Business\Label\ProductAbstractRelationReaderInterface
      */
-    public function createPyzProductAbstractRelationReader()
+    public function createPyzProductAbstractRelationReader(): ProductAbstractRelationReaderInterface
     {
         return new ProductAbstractRelationReader(
             $this->getQueryContainer(),

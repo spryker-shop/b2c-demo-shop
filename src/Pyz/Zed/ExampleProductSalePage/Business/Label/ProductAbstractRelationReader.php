@@ -47,7 +47,7 @@ class ProductAbstractRelationReader implements ProductAbstractRelationReaderInte
         ExampleProductSalePageQueryContainerInterface $productSaleQueryContainer,
         ExampleProductSalePageConfig $productSaleConfig,
         CurrencyFacadeInterface $currencyFacade,
-        PriceFacadeInterface $priceFacade
+        PriceFacadeInterface $priceFacade,
     ) {
         $this->productSaleQueryContainer = $productSaleQueryContainer;
         $this->productSaleConfig = $productSaleConfig;
@@ -85,7 +85,7 @@ class ProductAbstractRelationReader implements ProductAbstractRelationReaderInte
      *
      * @return \Orm\Zed\ProductLabel\Persistence\SpyProductLabel
      */
-    protected function getProductLabelNewEntity()
+    protected function getProductLabelNewEntity(): SpyProductLabel
     {
         $labelNewName = $this->productSaleConfig->getPyzLabelSaleName();
         $productLabelNewEntity = $this->productSaleQueryContainer
@@ -107,7 +107,7 @@ class ProductAbstractRelationReader implements ProductAbstractRelationReaderInte
      *
      * @return array
      */
-    protected function findRelationsBecomingInactive(SpyProductLabel $productLabelEntity)
+    protected function findRelationsBecomingInactive(SpyProductLabel $productLabelEntity): array
     {
         $relations = [];
 
@@ -130,7 +130,7 @@ class ProductAbstractRelationReader implements ProductAbstractRelationReaderInte
      *
      * @return array
      */
-    protected function findRelationsBecomingActive(SpyProductLabel $productLabelEntity)
+    protected function findRelationsBecomingActive(SpyProductLabel $productLabelEntity): array
     {
         $relations = [];
 
@@ -157,8 +157,11 @@ class ProductAbstractRelationReader implements ProductAbstractRelationReaderInte
      *
      * @return \Generated\Shared\Transfer\ProductLabelProductAbstractRelationsTransfer
      */
-    protected function mapRelationTransfer($idProductLabel, array $relationsToAssign, array $relationsToDeAssign)
-    {
+    protected function mapRelationTransfer(
+        $idProductLabel,
+        array $relationsToAssign,
+        array $relationsToDeAssign,
+    ): ProductLabelProductAbstractRelationsTransfer {
         $productLabelProductAbstractRelationsTransfer = new ProductLabelProductAbstractRelationsTransfer();
         $productLabelProductAbstractRelationsTransfer->setIdProductLabel($idProductLabel);
 

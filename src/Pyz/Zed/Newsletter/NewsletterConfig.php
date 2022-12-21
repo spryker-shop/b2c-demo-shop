@@ -15,7 +15,7 @@ class NewsletterConfig extends SprykerNewsletterConfig
     /**
      * @return array<string>
      */
-    public function getNewsletterTypes()
+    public function getNewsletterTypes(): array
     {
         return [
             NewsletterConstants::DEFAULT_NEWSLETTER_TYPE,

@@ -45,7 +45,7 @@ class ProductImageRepository implements ProductImageRepositoryInterface
         int $localeId,
         ?int $productAbstractId = null,
         ?int $productConcreteId = null,
-        ?string $productImageSetKey = null
+        ?string $productImageSetKey = null,
     ): SpyProductImageSet {
         $key = $this->buildProductImageSetKey($name, $localeId, $productAbstractId, $productConcreteId, $productImageSetKey);
 
@@ -78,7 +78,7 @@ class ProductImageRepository implements ProductImageRepositoryInterface
      */
     public function getProductImageSetToProductImageRelationEntity(
         int $productImageSetId,
-        int $productImageId
+        int $productImageId,
     ): SpyProductImageSetToProductImage {
         $key = $this->buildProductImageSetToProductImageRelationKey($productImageSetId, $productImageId);
 
@@ -115,7 +115,7 @@ class ProductImageRepository implements ProductImageRepositoryInterface
      */
     protected function buildProductImageSetToProductImageRelationKey(
         int $productImageSetId,
-        int $productImageId
+        int $productImageId,
     ): string {
         return sprintf('%d:%d', $productImageSetId, $productImageId);
     }
@@ -128,7 +128,7 @@ class ProductImageRepository implements ProductImageRepositoryInterface
      */
     protected function getProductImageSetToProductImageRelation(
         int $productImageSetId,
-        int $productImageId
+        int $productImageId,
     ): SpyProductImageSetToProductImage {
         return SpyProductImageSetToProductImageQuery::create()
             ->filterByFkProductImageSet($productImageSetId)
@@ -150,7 +150,7 @@ class ProductImageRepository implements ProductImageRepositoryInterface
         int $localeId,
         ?int $productAbstractId = null,
         ?int $productConcreteId = null,
-        ?string $productImageSetKey = null
+        ?string $productImageSetKey = null,
     ): string {
         return $productImageSetKey ?? sprintf(
             '%s:%d:%d:%d',
@@ -175,7 +175,7 @@ class ProductImageRepository implements ProductImageRepositoryInterface
         int $localeId,
         ?int $productAbstractId = null,
         ?int $productConcreteId = null,
-        ?string $productImageSetKey = null
+        ?string $productImageSetKey = null,
     ): SpyProductImageSet {
         $query = SpyProductImageSetQuery::create()
             ->filterByName($name)

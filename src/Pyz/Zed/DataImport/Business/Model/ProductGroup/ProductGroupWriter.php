@@ -55,7 +55,7 @@ class ProductGroupWriter extends PublishAwareStep implements DataImportStepInter
      *
      * @return void
      */
-    public function execute(DataSetInterface $dataSet)
+    public function execute(DataSetInterface $dataSet): void
     {
         $productGroupEntity = SpyProductGroupQuery::create()
             ->filterByProductGroupKey($dataSet[static::COLUMN_PRODUCT_GROUP_KEY])

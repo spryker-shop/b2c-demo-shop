@@ -29,7 +29,7 @@ class InstallerDependencyProvider extends SprykerInstallerDependencyProvider
     /**
      * @return array<\Spryker\Zed\Installer\Dependency\Plugin\InstallerPluginInterface>
      */
-    public function getInstallerPlugins()
+    public function getInstallerPlugins(): array
     {
         return [
             new PriceInstallerPlugin(),

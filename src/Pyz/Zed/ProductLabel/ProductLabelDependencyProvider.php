@@ -18,7 +18,7 @@ class ProductLabelDependencyProvider extends SprykerProductLabelDependencyProvid
     /**
      * @return array<\Spryker\Zed\ProductLabel\Dependency\Plugin\ProductLabelRelationUpdaterPluginInterface>
      */
-    protected function getProductLabelRelationUpdaterPlugins()
+    protected function getProductLabelRelationUpdaterPlugins(): array
     {
         return [
             new ProductNewLabelUpdaterPlugin(),

@@ -25,7 +25,7 @@ class SetupConfig extends SprykerSetupConfig
      *
      * @return array
      */
-    public function getSetupInstallCommandNames()
+    public function getSetupInstallCommandNames(): array
     {
         return [
             EmptyAllCachesConsole::COMMAND_NAME,

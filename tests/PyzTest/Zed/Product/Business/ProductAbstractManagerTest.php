@@ -27,7 +27,7 @@ class ProductAbstractManagerTest extends ProductTestAbstract
     /**
      * @return void
      */
-    public function testCreateProductAbstractShouldCreateProductAbstractAndTriggerPlugins()
+    public function testCreateProductAbstractShouldCreateProductAbstractAndTriggerPlugins(): void
     {
         $idProductAbstract = $this->productAbstractManager->createProductAbstract($this->productAbstractTransfer);
 
@@ -39,7 +39,7 @@ class ProductAbstractManagerTest extends ProductTestAbstract
     /**
      * @return void
      */
-    public function testSaveProductAbstractShouldUpdateProductAbstractAndTriggerPlugins()
+    public function testSaveProductAbstractShouldUpdateProductAbstractAndTriggerPlugins(): void
     {
         $idProductAbstract = $this->productAbstractManager->createProductAbstract($this->productAbstractTransfer);
         $this->productAbstractTransfer->setIdProductAbstract($idProductAbstract);
@@ -59,7 +59,7 @@ class ProductAbstractManagerTest extends ProductTestAbstract
     /**
      * @return void
      */
-    public function testGetProductAbstractByIdShouldReturnFullyLoadedTransferObject()
+    public function testGetProductAbstractByIdShouldReturnFullyLoadedTransferObject(): void
     {
         $this->setupDefaultProducts();
 
@@ -75,7 +75,7 @@ class ProductAbstractManagerTest extends ProductTestAbstract
      *
      * @return void
      */
-    protected function assertCreateProductAbstract(ProductAbstractTransfer $productAbstractTransfer)
+    protected function assertCreateProductAbstract(ProductAbstractTransfer $productAbstractTransfer): void
     {
         $createdProductEntity = $this->productQueryContainer
             ->queryProductAbstract()
@@ -92,7 +92,7 @@ class ProductAbstractManagerTest extends ProductTestAbstract
      *
      * @return void
      */
-    protected function assertSaveProductAbstract(ProductAbstractTransfer $productAbstractTransfer)
+    protected function assertSaveProductAbstract(ProductAbstractTransfer $productAbstractTransfer): void
     {
         $updatedProductEntity = $this->productQueryContainer
             ->queryProductAbstract()
@@ -114,7 +114,7 @@ class ProductAbstractManagerTest extends ProductTestAbstract
      *
      * @return void
      */
-    protected function assertReadProductAbstract(ProductAbstractTransfer $productAbstractTransfer)
+    protected function assertReadProductAbstract(ProductAbstractTransfer $productAbstractTransfer): void
     {
         $this->assertProductPrice($productAbstractTransfer);
         $this->assertProductImages($productAbstractTransfer);
@@ -125,7 +125,7 @@ class ProductAbstractManagerTest extends ProductTestAbstract
      *
      * @return void
      */
-    protected function assertProductPrice(ProductAbstractTransfer $productAbstractTransfer)
+    protected function assertProductPrice(ProductAbstractTransfer $productAbstractTransfer): void
     {
         foreach ($productAbstractTransfer->getPrices() as $priceProductTransfer) {
             $this->assertInstanceOf(PriceProductTransfer::class, $priceProductTransfer);
@@ -139,7 +139,7 @@ class ProductAbstractManagerTest extends ProductTestAbstract
      *
      * @return void
      */
-    protected function assertProductImages(ProductAbstractTransfer $productAbstractTransfer)
+    protected function assertProductImages(ProductAbstractTransfer $productAbstractTransfer): void
     {
         /** @var array<\Generated\Shared\Transfer\ProductImageSetTransfer> $imageSetCollection */
         $imageSetCollection = (array)$productAbstractTransfer->getImageSets();

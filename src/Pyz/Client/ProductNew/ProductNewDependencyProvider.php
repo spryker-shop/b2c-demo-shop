@@ -25,7 +25,7 @@ class ProductNewDependencyProvider extends SprykerProductNewDependencyProvider
     /**
      * @return array<\Spryker\Client\SearchExtension\Dependency\Plugin\QueryExpanderPluginInterface>|array<\Spryker\Client\Search\Dependency\Plugin\QueryExpanderPluginInterface>
      */
-    protected function getNewProductsQueryExpanderPlugins()
+    protected function getNewProductsQueryExpanderPlugins(): array
     {
         return [
             new StoreQueryExpanderPlugin(),

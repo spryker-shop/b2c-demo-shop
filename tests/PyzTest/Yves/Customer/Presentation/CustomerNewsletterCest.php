@@ -30,7 +30,7 @@ class CustomerNewsletterCest
      *
      * @return void
      */
-    public function testICanSubscribeNewsletter(CustomerPresentationTester $i)
+    public function testICanSubscribeNewsletter(CustomerPresentationTester $i): void
     {
         $i->amLoggedInCustomer();
         $i->amOnPage(CustomerNewsletterPage::URL);
@@ -47,7 +47,7 @@ class CustomerNewsletterCest
      *
      * @return void
      */
-    public function testICanUnSubscribeNewsletter(CustomerPresentationTester $i)
+    public function testICanUnSubscribeNewsletter(CustomerPresentationTester $i): void
     {
         $customerTransfer = $i->amLoggedInCustomer();
 

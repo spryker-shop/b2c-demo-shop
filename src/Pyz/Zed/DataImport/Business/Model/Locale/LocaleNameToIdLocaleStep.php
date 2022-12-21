@@ -57,7 +57,7 @@ class LocaleNameToIdLocaleStep implements DataImportStepInterface
      *
      * @return void
      */
-    public function execute(DataSetInterface $dataSet)
+    public function execute(DataSetInterface $dataSet): void
     {
         if (!isset($dataSet[$this->source])) {
             throw new DataKeyNotFoundInDataSetException(sprintf(
@@ -81,7 +81,7 @@ class LocaleNameToIdLocaleStep implements DataImportStepInterface
      *
      * @return int
      */
-    protected function resolveIdLocale($localeName)
+    protected function resolveIdLocale($localeName): int
     {
         $query = SpyLocaleQuery::create();
         $localeEntity = $query->filterByLocaleName($localeName)->findOne();

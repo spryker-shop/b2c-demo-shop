@@ -28,7 +28,7 @@ class ContentProductAbstractReader implements ContentProductAbstractReaderInterf
      */
     public function __construct(
         ContentProductClientInterface $contentProductClient,
-        ProductStorageClientInterface $productStorageClient
+        ProductStorageClientInterface $productStorageClient,
     ) {
         $this->contentProductClient = $contentProductClient;
         $this->productStorageClient = $productStorageClient;

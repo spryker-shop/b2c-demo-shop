@@ -46,7 +46,7 @@ class Customer
      *
      * @return \Generated\Shared\Transfer\CustomerTransfer
      */
-    public static function getCustomerData($email)
+    public static function getCustomerData($email): CustomerTransfer
     {
         $customerTransfer = new CustomerTransfer();
         $customerTransfer->fromArray(self::$customer[$email]);

@@ -28,7 +28,7 @@ class WebProfilerWidgetDependencyProvider extends SprykerWebProfilerDependencyPr
     /**
      * @return array<\Spryker\Shared\WebProfilerExtension\Dependency\Plugin\WebProfilerDataCollectorPluginInterface>
      */
-    public function getDataCollectorPlugins()
+    public function getDataCollectorPlugins(): array
     {
         return [
             new WebProfilerRequestDataCollectorPlugin(),

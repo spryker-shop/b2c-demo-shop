@@ -47,7 +47,7 @@ class ShipmentStepTest extends Unit
     /**
      * @return void
      */
-    public function testShipmentStepExecuteShouldTriggerPlugins()
+    public function testShipmentStepExecuteShouldTriggerPlugins(): void
     {
         $shipmentPluginMock = $this->createShipmentMock();
         $shipmentPluginMock->expects($this->once())->method('addToDataClass');
@@ -68,7 +68,7 @@ class ShipmentStepTest extends Unit
     /**
      * @return void
      */
-    public function testShipmentPostConditionsShouldReturnTrueWhenShipmentSet()
+    public function testShipmentPostConditionsShouldReturnTrueWhenShipmentSet(): void
     {
         $quoteTransfer = new QuoteTransfer();
         $expenseTransfer = new ExpenseTransfer();
@@ -83,7 +83,7 @@ class ShipmentStepTest extends Unit
     /**
      * @return void
      */
-    public function testShipmentRequireInputShouldReturnTrue()
+    public function testShipmentRequireInputShouldReturnTrue(): void
     {
         $shipmentStep = $this->createShipmentStep(new StepHandlerPluginCollection());
         $quoteTransfer = (new QuoteBuilder())
@@ -98,7 +98,7 @@ class ShipmentStepTest extends Unit
      *
      * @return \SprykerShop\Yves\CheckoutPage\Process\Steps\ShipmentStep
      */
-    protected function createShipmentStep(StepHandlerPluginCollection $shipmentPlugins)
+    protected function createShipmentStep(StepHandlerPluginCollection $shipmentPlugins): ShipmentStep
     {
         return new ShipmentStep(
             $this->createCalculationClientMock(),
@@ -114,7 +114,7 @@ class ShipmentStepTest extends Unit
     /**
      * @return \Symfony\Component\HttpFoundation\Request
      */
-    protected function createRequest()
+    protected function createRequest(): Request
     {
         return Request::createFromGlobals();
     }

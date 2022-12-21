@@ -53,7 +53,7 @@ class CountryRepository implements CountryRepositoryInterface
     /**
      * @return void
      */
-    private function loadCountries()
+    private function loadCountries(): void
     {
         $query = SpyCountryQuery::create();
 

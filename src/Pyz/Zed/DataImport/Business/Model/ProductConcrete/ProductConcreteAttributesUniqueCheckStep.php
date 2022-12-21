@@ -72,7 +72,7 @@ class ProductConcreteAttributesUniqueCheckStep implements DataImportStepInterfac
      */
     public function __construct(
         ProductRepositoryInterface $productRepository,
-        DataImportToUtilEncodingServiceInterface $utilEncodingService
+        DataImportToUtilEncodingServiceInterface $utilEncodingService,
     ) {
         $this->productRepository = $productRepository;
         $this->utilEncodingService = $utilEncodingService;
@@ -109,7 +109,7 @@ class ProductConcreteAttributesUniqueCheckStep implements DataImportStepInterfac
     protected function checkProductConcreteAttributesUnique(
         string $dataSetProductAbstractSku,
         string $dataSetProductConcreteSku,
-        array $dataSetProductConcreteAttributes
+        array $dataSetProductConcreteAttributes,
     ): void {
         if (!isset(static::$productConcreteAttributesMap[$dataSetProductAbstractSku])) {
             return;

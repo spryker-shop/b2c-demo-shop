@@ -173,7 +173,7 @@ class ExampleProductSalePageQueryContainer extends AbstractQueryContainer implem
         int $idProductLabel,
         int $currentStoreId,
         int $currentCurrencyId,
-        string $priceMode
+        string $priceMode,
     ): SpyProductAbstractQuery {
         /** @var \Orm\Zed\Product\Persistence\SpyProductAbstractQuery $productAbstractQuery */
         $productAbstractQuery = $this->getFactory()

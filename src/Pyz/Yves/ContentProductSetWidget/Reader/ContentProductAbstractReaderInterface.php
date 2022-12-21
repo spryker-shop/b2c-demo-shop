@@ -21,6 +21,6 @@ interface ContentProductAbstractReaderInterface
     public function findProductAbstractCollection(
         ProductSetDataStorageTransfer $productSetDataStorageTransfer,
         array $selectedAttributes,
-        string $localeName
+        string $localeName,
     ): array;
 }

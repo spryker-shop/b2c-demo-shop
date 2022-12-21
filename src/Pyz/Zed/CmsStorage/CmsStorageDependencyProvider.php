@@ -15,7 +15,7 @@ class CmsStorageDependencyProvider extends SprykerCmsStorageDependencyProvider
     /**
      * @return array<\Spryker\Zed\CmsExtension\Dependency\Plugin\CmsPageDataExpanderPluginInterface>
      */
-    protected function getContentWidgetDataExpander()
+    protected function getContentWidgetDataExpander(): array
     {
         return [
             new CmsPageParameterMapExpanderPlugin(),

@@ -26,7 +26,7 @@ class CustomerWriterStep implements DataImportStepInterface
      *
      * @return void
      */
-    public function execute(DataSetInterface $dataSet)
+    public function execute(DataSetInterface $dataSet): void
     {
         $customerEntity = SpyCustomerQuery::create()
             ->filterByCustomerReference($dataSet[self::COL_CUSTOMER_REFERENCE])
@@ -53,7 +53,7 @@ class CustomerWriterStep implements DataImportStepInterface
      *
      * @return int
      */
-    protected function getCurrentId(DataSetInterface $dataSet)
+    protected function getCurrentId(DataSetInterface $dataSet): int
     {
         if (!preg_match('/(\d+)$/', preg_quote($dataSet[self::COL_CUSTOMER_REFERENCE], '/'), $matches)) {
             throw new InvalidDataException(sprintf(

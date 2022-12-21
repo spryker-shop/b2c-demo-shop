@@ -12,6 +12,7 @@ use Generated\Shared\Transfer\ProductConcreteTransfer;
 use Generated\Shared\Transfer\ProductImageSetTransfer;
 use Generated\Shared\Transfer\ProductImageTransfer;
 use Generated\Shared\Transfer\StockProductTransfer;
+use Orm\Zed\Product\Persistence\SpyProduct;
 
 /**
  * Auto-generated group annotations
@@ -28,7 +29,7 @@ class ProductConcreteManagerTest extends ProductTestAbstract
     /**
      * @return void
      */
-    public function testCreateProductConcreteShouldCreateProductAndTriggerPlugins()
+    public function testCreateProductConcreteShouldCreateProductAndTriggerPlugins(): void
     {
         $idProductAbstract = $this->productAbstractManager->createProductAbstract($this->productAbstractTransfer);
         $this->productConcreteTransfer->setFkProductAbstract($idProductAbstract);
@@ -45,7 +46,7 @@ class ProductConcreteManagerTest extends ProductTestAbstract
     /**
      * @return void
      */
-    public function testSaveProductConcreteShouldUpdateProductAndTriggerPlugins()
+    public function testSaveProductConcreteShouldUpdateProductAndTriggerPlugins(): void
     {
         $idProductAbstract = $this->productAbstractManager->createProductAbstract($this->productAbstractTransfer);
         $this->productConcreteTransfer->setFkProductAbstract($idProductAbstract);
@@ -69,7 +70,7 @@ class ProductConcreteManagerTest extends ProductTestAbstract
     /**
      * @return void
      */
-    public function testGetConcreteProductsByAbstractProductIdShouldReturnFullyLoadedTransferObject()
+    public function testGetConcreteProductsByAbstractProductIdShouldReturnFullyLoadedTransferObject(): void
     {
         $this->setupDefaultProducts();
 
@@ -87,7 +88,7 @@ class ProductConcreteManagerTest extends ProductTestAbstract
      *
      * @return \Orm\Zed\Product\Persistence\SpyProduct
      */
-    protected function getProductConcreteEntityById($idProductConcrete)
+    protected function getProductConcreteEntityById($idProductConcrete): SpyProduct
     {
         return $this->productQueryContainer
             ->queryProduct()
@@ -100,7 +101,7 @@ class ProductConcreteManagerTest extends ProductTestAbstract
      *
      * @return void
      */
-    protected function assertCreateProductConcrete(ProductConcreteTransfer $productConcreteTransfer)
+    protected function assertCreateProductConcrete(ProductConcreteTransfer $productConcreteTransfer): void
     {
         $createdProductEntity = $this->getProductConcreteEntityById($productConcreteTransfer->getIdProductConcrete());
 
@@ -113,7 +114,7 @@ class ProductConcreteManagerTest extends ProductTestAbstract
      *
      * @return void
      */
-    protected function assertSaveProductConcrete(ProductConcreteTransfer $productConcreteTransfer)
+    protected function assertSaveProductConcrete(ProductConcreteTransfer $productConcreteTransfer): void
     {
         $updatedProductEntity = $this->getProductConcreteEntityById($productConcreteTransfer->getIdProductConcrete());
 
@@ -132,7 +133,7 @@ class ProductConcreteManagerTest extends ProductTestAbstract
      *
      * @return void
      */
-    protected function assertReadProductConcrete(ProductConcreteTransfer $productConcreteTransfer)
+    protected function assertReadProductConcrete(ProductConcreteTransfer $productConcreteTransfer): void
     {
         $this->assertProductPrice($productConcreteTransfer);
         $this->assertProductStock($productConcreteTransfer);
@@ -144,7 +145,7 @@ class ProductConcreteManagerTest extends ProductTestAbstract
      *
      * @return void
      */
-    protected function assertProductPrice(ProductConcreteTransfer $productConcreteTransfer)
+    protected function assertProductPrice(ProductConcreteTransfer $productConcreteTransfer): void
     {
         foreach ($productConcreteTransfer->getPrices() as $priceProductTransfer) {
             $this->assertInstanceOf(PriceProductTransfer::class, $priceProductTransfer);
@@ -158,7 +159,7 @@ class ProductConcreteManagerTest extends ProductTestAbstract
      *
      * @return void
      */
-    protected function assertProductStock(ProductConcreteTransfer $productConcreteTransfer)
+    protected function assertProductStock(ProductConcreteTransfer $productConcreteTransfer): void
     {
         $stockCollection = $productConcreteTransfer->getStocks();
 
@@ -172,7 +173,7 @@ class ProductConcreteManagerTest extends ProductTestAbstract
      *
      * @return void
      */
-    protected function assertProductImages(ProductConcreteTransfer $productConcreteTransfer)
+    protected function assertProductImages(ProductConcreteTransfer $productConcreteTransfer): void
     {
         /** @var array<\Generated\Shared\Transfer\ProductImageSetTransfer> $imageSetCollection */
         $imageSetCollection = (array)$productConcreteTransfer->getImageSets();

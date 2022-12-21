@@ -48,7 +48,7 @@ class CmsBlockStoreWriterStep extends PublishAwareStep implements DataImportStep
      *
      * @return void
      */
-    public function execute(DataSetInterface $dataSet)
+    public function execute(DataSetInterface $dataSet): void
     {
         $idCmsBlock = $this->getIdCmsBlockByKey($dataSet[static::KEY_BLOCK_KEY]);
 

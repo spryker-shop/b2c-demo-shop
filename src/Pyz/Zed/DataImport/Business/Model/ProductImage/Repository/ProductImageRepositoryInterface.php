@@ -27,7 +27,7 @@ interface ProductImageRepositoryInterface
         int $localeId,
         ?int $productAbstractId = null,
         ?int $productConcreteId = null,
-        ?string $productImageSetKey = null
+        ?string $productImageSetKey = null,
     ): SpyProductImageSet;
 
     /**
@@ -45,6 +45,6 @@ interface ProductImageRepositoryInterface
      */
     public function getProductImageSetToProductImageRelationEntity(
         int $productImageSetId,
-        int $productImageId
+        int $productImageId,
     ): SpyProductImageSetToProductImage;
 }

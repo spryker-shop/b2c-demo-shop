@@ -11,6 +11,7 @@ use Codeception\Module;
 use Codeception\Stub;
 use Codeception\TestInterface;
 use Generated\Shared\DataBuilder\CustomerBuilder;
+use Generated\Shared\Transfer\CustomerTransfer;
 use Generated\Shared\Transfer\NewsletterSubscriberTransfer;
 use Generated\Shared\Transfer\NewsletterSubscriptionRequestTransfer;
 use Generated\Shared\Transfer\NewsletterTypeTransfer;
@@ -23,6 +24,7 @@ use PyzTest\Yves\Customer\PageObject\CustomerAddressesPage;
 use PyzTest\Yves\Customer\PageObject\CustomerLoginPage;
 use Spryker\Client\Session\SessionClient;
 use Spryker\Shared\Newsletter\NewsletterConstants;
+use Spryker\Zed\Customer\Business\CustomerFacadeInterface;
 use Spryker\Zed\Customer\CustomerDependencyProvider;
 use Spryker\Zed\Customer\Dependency\Facade\CustomerToMailBridge;
 use Spryker\Zed\Mail\Business\MailFacadeInterface;
@@ -42,7 +44,7 @@ class CustomerHelper extends Module
      *
      * @return void
      */
-    public function _before(TestInterface $step)
+    public function _before(TestInterface $step): void
     {
         $this->cleanUpDatabase();
     }
@@ -50,7 +52,7 @@ class CustomerHelper extends Module
     /**
      * @return void
      */
-    protected function cleanUpDatabase()
+    protected function cleanUpDatabase(): void
     {
         $customer = [
             Customer::NEW_CUSTOMER_EMAIL,
@@ -67,7 +69,7 @@ class CustomerHelper extends Module
      *
      * @return void
      */
-    protected function deleteCustomerByEmail($email)
+    protected function deleteCustomerByEmail($email): void
     {
         $customerEntity = $this->loadCustomerByEmail($email);
         if ($customerEntity) {
@@ -83,7 +85,7 @@ class CustomerHelper extends Module
      *
      * @return void
      */
-    protected function deleteCustomerAddresses(SpyCustomer $customerEntity)
+    protected function deleteCustomerAddresses(SpyCustomer $customerEntity): void
     {
         $addresses = $customerEntity->getAddresses();
         if ($addresses) {
@@ -96,7 +98,7 @@ class CustomerHelper extends Module
      *
      * @return void
      */
-    protected function deleteNewsletterSubscription(SpyCustomer $customerEntity)
+    protected function deleteNewsletterSubscription(SpyCustomer $customerEntity): void
     {
         $newsletterSubscriptions = $customerEntity->getSpyNewsletterSubscribers();
         if ($newsletterSubscriptions) {
@@ -114,7 +116,7 @@ class CustomerHelper extends Module
      *
      * @return \Orm\Zed\Customer\Persistence\SpyCustomer
      */
-    public function loadCustomerByEmail($email)
+    public function loadCustomerByEmail($email): SpyCustomer
     {
         $customerQuery = new SpyCustomerQuery();
         $customerEntity = $customerQuery->findOneByEmail($email);
@@ -127,7 +129,7 @@ class CustomerHelper extends Module
      *
      * @return \Generated\Shared\Transfer\CustomerTransfer
      */
-    public function haveRegisteredCustomer(array $seed = [])
+    public function haveRegisteredCustomer(array $seed = []): CustomerTransfer
     {
         $this->setupSession();
 
@@ -148,7 +150,7 @@ class CustomerHelper extends Module
     /**
      * @return \Spryker\Zed\Customer\Business\CustomerFacadeInterface
      */
-    private function getFacade()
+    private function getFacade(): CustomerFacadeInterface
     {
         return $this->getLocator()->customer()->facade();
     }
@@ -169,7 +171,7 @@ class CustomerHelper extends Module
      *
      * @return void
      */
-    public function addAddressToCustomer($email, $address, $isDefaultShipping = true, $isDefaultBilling = true)
+    public function addAddressToCustomer($email, $address, $isDefaultShipping = true, $isDefaultBilling = true): void
     {
         $customerEntity = $this->loadCustomerByEmail($email);
         $addressTransfer = CustomerAddressesPage::getAddressData($address);
@@ -198,7 +200,7 @@ class CustomerHelper extends Module
      *
      * @return void
      */
-    public function addNewsletterSubscription($email, $type = NewsletterConstants::DEFAULT_NEWSLETTER_TYPE)
+    public function addNewsletterSubscription($email, $type = NewsletterConstants::DEFAULT_NEWSLETTER_TYPE): void
     {
         $customerEntity = $this->loadCustomerByEmail($email);
         $newsletterSubscriberTransfer = new NewsletterSubscriberTransfer();
@@ -221,7 +223,7 @@ class CustomerHelper extends Module
      *
      * @return \Generated\Shared\Transfer\CustomerTransfer
      */
-    public function amLoggedInCustomer(array $seed = [])
+    public function amLoggedInCustomer(array $seed = []): CustomerTransfer
     {
         $customerTransfer = $this->haveRegisteredCustomer($seed);
 
@@ -248,7 +250,7 @@ class CustomerHelper extends Module
     /**
      * @return void
      */
-    protected function setupSession()
+    protected function setupSession(): void
     {
         $sessionContainer = new Session(new MockArraySessionStorage());
         $sessionClient = new SessionClient();

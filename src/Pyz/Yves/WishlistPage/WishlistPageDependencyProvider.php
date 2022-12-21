@@ -18,7 +18,7 @@ class WishlistPageDependencyProvider extends SprykerWishlistPageDependencyProvid
     /**
      * @return array<\Spryker\Client\ProductStorage\Dependency\Plugin\ProductViewExpanderPluginInterface>
      */
-    protected function getWishlistItemExpanderPlugins()
+    protected function getWishlistItemExpanderPlugins(): array
     {
         return [
             new ProductViewPriceExpanderPlugin(),

@@ -35,7 +35,7 @@ class ContentProductAbstractReader implements ContentProductAbstractReaderInterf
     public function findProductAbstractCollection(
         ProductSetDataStorageTransfer $productSetDataStorageTransfer,
         array $selectedAttributes,
-        string $localeName
+        string $localeName,
     ): array {
         $productAbstractViewCollection = [];
 

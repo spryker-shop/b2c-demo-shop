@@ -16,7 +16,7 @@ class ProductRelationStorageDependencyProvider extends SprykerProductRelationSto
     /**
      * @return array<\Spryker\Client\ProductStorage\Dependency\Plugin\ProductViewExpanderPluginInterface>
      */
-    protected function getRelatedProductExpanderPlugins()
+    protected function getRelatedProductExpanderPlugins(): array
     {
         return [
             new ProductViewPriceExpanderPlugin(),

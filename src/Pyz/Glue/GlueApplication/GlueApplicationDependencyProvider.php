@@ -390,7 +390,7 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
      * @return \Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\ResourceRelationshipCollectionInterface
      */
     protected function getResourceRelationshipPlugins(
-        ResourceRelationshipCollectionInterface $resourceRelationshipCollection
+        ResourceRelationshipCollectionInterface $resourceRelationshipCollection,
     ): ResourceRelationshipCollectionInterface {
         $resourceRelationshipCollection->addRelationship(
             ProductsRestApiConfig::RESOURCE_ABSTRACT_PRODUCTS,

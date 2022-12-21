@@ -25,7 +25,7 @@ class ProductStockAfterImportPublishHook implements DataImporterAfterImportInter
     /**
      * @return void
      */
-    public function afterImport()
+    public function afterImport(): void
     {
         $availabilities = SpyAvailabilityAbstractQuery::create()
             ->addJoin(

@@ -45,7 +45,7 @@ class SubmitController extends SprykerSubmitController
      */
     protected function processPyzProductReviewForm(
         FormInterface $form,
-        ?CustomerTransfer $customerTransfer = null
+        ?CustomerTransfer $customerTransfer = null,
     ): ?CustomerTransfer {
         if (!$form->isSubmitted()) {
             return null;
@@ -70,7 +70,7 @@ class SubmitController extends SprykerSubmitController
      */
     protected function processPyzCoreProductReviewForm(
         FormInterface $form,
-        ?CustomerTransfer $customerTransfer = null
+        ?CustomerTransfer $customerTransfer = null,
     ): ?CustomerTransfer {
         if (!$form->isSubmitted()) {
             return null;

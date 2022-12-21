@@ -23,7 +23,7 @@ class TestConditionPlugin extends AbstractPlugin implements ConditionPluginInter
      *
      * @return bool
      */
-    public function check(StateMachineItemTransfer $stateMachineItemTransfer)
+    public function check(StateMachineItemTransfer $stateMachineItemTransfer): bool
     {
         return (bool)($stateMachineItemTransfer->getIdentifier() % 2);
     }

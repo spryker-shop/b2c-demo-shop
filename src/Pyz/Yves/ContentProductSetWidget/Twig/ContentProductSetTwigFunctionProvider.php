@@ -86,7 +86,7 @@ class ContentProductSetTwigFunctionProvider extends TwigFunctionProvider
         Environment $twig,
         string $localeName,
         ContentProductSetReaderInterface $contentProductSetReader,
-        ContentProductAbstractReaderInterface $contentProductAbstractReader
+        ContentProductAbstractReaderInterface $contentProductAbstractReader,
     ) {
         $this->twig = $twig;
         $this->localeName = $localeName;

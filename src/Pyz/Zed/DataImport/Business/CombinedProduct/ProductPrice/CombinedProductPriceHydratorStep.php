@@ -100,7 +100,7 @@ class CombinedProductPriceHydratorStep extends ProductPriceHydratorStep
      */
     public function __construct(
         PriceProductFacadeInterface $priceProductFacade,
-        DataImportToUtilEncodingServiceInterface $utilEncodingService
+        DataImportToUtilEncodingServiceInterface $utilEncodingService,
     ) {
         parent::__construct($priceProductFacade, $utilEncodingService);
     }

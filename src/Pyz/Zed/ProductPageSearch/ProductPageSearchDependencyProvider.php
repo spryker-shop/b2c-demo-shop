@@ -41,7 +41,7 @@ class ProductPageSearchDependencyProvider extends SprykerProductPageSearchDepend
     /**
      * @return array<\Spryker\Zed\ProductPageSearch\Dependency\Plugin\ProductPageDataExpanderInterface>
      */
-    protected function getDataExpanderPlugins()
+    protected function getDataExpanderPlugins(): array
     {
         $dataExpanderPlugins = [];
 
@@ -58,7 +58,7 @@ class ProductPageSearchDependencyProvider extends SprykerProductPageSearchDepend
     /**
      * @return array<\Spryker\Zed\ProductPageSearchExtension\Dependency\Plugin\ProductPageDataLoaderPluginInterface>
      */
-    protected function getDataLoaderPlugins()
+    protected function getDataLoaderPlugins(): array
     {
         return [
             new ImagePageDataLoaderPlugin(),

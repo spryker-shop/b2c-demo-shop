@@ -19,7 +19,7 @@ class UrlStorageDependencyProvider extends SprykerUrlDependencyProvider
     /**
      * @return array<\Spryker\Client\UrlStorage\Dependency\Plugin\UrlStorageResourceMapperPluginInterface>
      */
-    protected function getUrlStorageResourceMapperPlugins()
+    protected function getUrlStorageResourceMapperPlugins(): array
     {
         return [
             new UrlStorageCmsPageMapperPlugin(),

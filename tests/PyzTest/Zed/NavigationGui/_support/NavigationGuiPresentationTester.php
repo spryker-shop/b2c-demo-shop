@@ -300,7 +300,7 @@ class NavigationGuiPresentationTester extends Actor
      *
      * @return void
      */
-    public function seeNumberOfNavigationNodes($count)
+    public function seeNumberOfNavigationNodes($count): void
     {
         $this->seeNumberOfElements(self::NAVIGATION_NODE_SELECTOR, $count);
     }
@@ -311,7 +311,7 @@ class NavigationGuiPresentationTester extends Actor
      *
      * @return void
      */
-    public function seeNavigationNodeHierarchy($idParentNavigationNode, $idChildNavigationNode)
+    public function seeNavigationNodeHierarchy($idParentNavigationNode, $idChildNavigationNode): void
     {
         $this->waitForElement(sprintf(
             self::NODE_CHILD_SELECTOR,
@@ -496,7 +496,7 @@ class NavigationGuiPresentationTester extends Actor
     protected function createNavigationNodesRecursively(
         NavigationTreeNodeTransfer $navigationTreeNodeTransfer,
         $idNavigation,
-        $idParentNavigationNode = null
+        $idParentNavigationNode = null,
     ): void {
         $navigationNodeTransfer = $navigationTreeNodeTransfer->getNavigationNode();
         $navigationNodeTransfer

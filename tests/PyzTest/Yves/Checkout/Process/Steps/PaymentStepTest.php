@@ -63,7 +63,7 @@ class PaymentStepTest extends Unit
      */
     public function testPostConditionsShouldReturnTrueWhenPaymentSet(
         PaymentStep $paymentStep,
-        QuoteTransfer $quoteTransfer
+        QuoteTransfer $quoteTransfer,
     ): void {
         // Act
         $postConditionFulfilled = $paymentStep->postCondition($quoteTransfer);
@@ -82,7 +82,7 @@ class PaymentStepTest extends Unit
      */
     public function testShipmentRequireInputShouldReturnTrue(
         PaymentStep $paymentStep,
-        QuoteTransfer $quoteTransfer
+        QuoteTransfer $quoteTransfer,
     ): void {
         // Act
         $isInputRequired = $paymentStep->requireInput($quoteTransfer);
@@ -215,7 +215,7 @@ class PaymentStepTest extends Unit
     /**
      * @return \Symfony\Component\HttpFoundation\Request
      */
-    protected function createRequest()
+    protected function createRequest(): Request
     {
         return Request::createFromGlobals();
     }

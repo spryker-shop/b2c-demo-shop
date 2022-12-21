@@ -20,7 +20,7 @@ class ExampleProductSalePageLabelUpdaterPlugin extends AbstractPlugin implements
     /**
      * @return array<\Generated\Shared\Transfer\ProductLabelProductAbstractRelationsTransfer>
      */
-    public function findProductLabelProductAbstractRelationChanges()
+    public function findProductLabelProductAbstractRelationChanges(): array
     {
         return $this->getFacade()->findPyzProductLabelProductAbstractRelationChanges();
     }

@@ -19,7 +19,7 @@ class CustomerDependencyProvider extends SprykerCustomerDependencyProvider
     /**
      * @return array<\Spryker\Client\Customer\Dependency\Plugin\CustomerSessionGetPluginInterface>
      */
-    protected function getCustomerSessionGetPlugins()
+    protected function getCustomerSessionGetPlugins(): array
     {
         return [
             new CustomerTransferSessionRefreshPlugin(),
@@ -29,7 +29,7 @@ class CustomerDependencyProvider extends SprykerCustomerDependencyProvider
     /**
      * @return array<\Spryker\Client\Customer\Dependency\Plugin\CustomerSessionSetPluginInterface>
      */
-    protected function getCustomerSessionSetPlugins()
+    protected function getCustomerSessionSetPlugins(): array
     {
         return [
             new GuestCartUpdateCustomerSessionSetPlugin(),
@@ -40,7 +40,7 @@ class CustomerDependencyProvider extends SprykerCustomerDependencyProvider
     /**
      * @return array<\Spryker\Client\Customer\Dependency\Plugin\DefaultAddressChangePluginInterface>
      */
-    protected function getDefaultAddressChangePlugins()
+    protected function getDefaultAddressChangePlugins(): array
     {
         return [
             new CustomerAddressSessionUpdatePlugin(),

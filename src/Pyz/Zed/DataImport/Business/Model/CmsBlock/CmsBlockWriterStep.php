@@ -140,7 +140,7 @@ class CmsBlockWriterStep extends PublishAwareStep implements DataImportStepInter
      *
      * @return void
      */
-    protected function findOrCreateCmsBlockPlaceholderTranslation(DataSetInterface $dataSet, SpyCmsBlock $cmsBlockEntity)
+    protected function findOrCreateCmsBlockPlaceholderTranslation(DataSetInterface $dataSet, SpyCmsBlock $cmsBlockEntity): void
     {
         foreach ($dataSet[LocalizedAttributesExtractorStep::KEY_LOCALIZED_ATTRIBUTES] as $idLocale => $placeholder) {
             foreach ($placeholder as $key => $value) {

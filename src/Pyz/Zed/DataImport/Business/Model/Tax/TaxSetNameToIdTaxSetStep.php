@@ -56,7 +56,7 @@ class TaxSetNameToIdTaxSetStep implements DataImportStepInterface
      *
      * @return void
      */
-    public function execute(DataSetInterface $dataSet)
+    public function execute(DataSetInterface $dataSet): void
     {
         if (!isset($dataSet[$this->source])) {
             throw new DataKeyNotFoundInDataSetException(sprintf(
@@ -78,7 +78,7 @@ class TaxSetNameToIdTaxSetStep implements DataImportStepInterface
      *
      * @return int
      */
-    protected function resolveIdStock($taxSetName)
+    protected function resolveIdStock($taxSetName): int
     {
         $taxSetEntity = SpyTaxSetQuery::create()
             ->filterByName($taxSetName)

@@ -32,7 +32,7 @@ class CombinedProductStockPropelDataSetWriter extends ProductStockPropelDataSetW
         ProductBundleFacadeInterface $productBundleFacade,
         ProductRepositoryInterface $productRepository,
         StoreFacadeInterface $storeFacade,
-        StockFacadeInterface $stockFacade
+        StockFacadeInterface $stockFacade,
     ) {
         parent::__construct($productBundleFacade, $productRepository, $storeFacade, $stockFacade);
     }

@@ -25,7 +25,7 @@ class UserDependencyProvider extends SprykerUserDependencyProvider
      *
      * @return \Spryker\Zed\Kernel\Container
      */
-    protected function addGroupPlugin(Container $container)
+    protected function addGroupPlugin(Container $container): Container
     {
         $container->set(static::PLUGIN_GROUP, function (Container $container) {
             return new GroupPlugin();

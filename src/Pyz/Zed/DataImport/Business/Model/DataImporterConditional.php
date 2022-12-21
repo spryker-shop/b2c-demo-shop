@@ -24,7 +24,7 @@ class DataImporterConditional extends DataImporter
      *
      * @return void
      */
-    public function setDataSetCondition(DataSetConditionInterface $dataSetCondition)
+    public function setDataSetCondition(DataSetConditionInterface $dataSetCondition): void
     {
         $this->dataSetCondition = $dataSetCondition;
     }

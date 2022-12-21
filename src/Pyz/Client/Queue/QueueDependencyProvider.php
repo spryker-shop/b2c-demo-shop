@@ -17,7 +17,7 @@ class QueueDependencyProvider extends BaseQueueDependencyProvider
      *
      * @return array<\Spryker\Client\Queue\Model\Adapter\AdapterInterface>
      */
-    protected function createQueueAdapters(Container $container)
+    protected function createQueueAdapters(Container $container): array
     {
         return [
             $container->getLocator()->rabbitMq()->client()->createQueueAdapter(),

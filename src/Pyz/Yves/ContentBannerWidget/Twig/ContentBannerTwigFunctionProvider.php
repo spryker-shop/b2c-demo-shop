@@ -62,7 +62,7 @@ class ContentBannerTwigFunctionProvider extends TwigFunctionProvider
     public function __construct(
         Environment $twig,
         string $localeName,
-        ContentBannerWidgetToContentBannerClientInterface $contentBannerClient
+        ContentBannerWidgetToContentBannerClientInterface $contentBannerClient,
     ) {
         $this->twig = $twig;
         $this->localeName = $localeName;

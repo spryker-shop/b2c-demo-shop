@@ -88,7 +88,7 @@ class ProductImagePropelDataSetWriter implements DataSetWriterInterface
      */
     protected function createOrUpdateProductImage(
         DataSetInterface $dataSet,
-        SpyProductImageSet $productImageSetEntity
+        SpyProductImageSet $productImageSetEntity,
     ): SpyProductImage {
         $productImageEntityTransfer = $this->getProductImageTransfer($dataSet);
         $productImageEntity = $this->findOrCreateProductImageEntityByProductImageKey(
@@ -118,7 +118,7 @@ class ProductImagePropelDataSetWriter implements DataSetWriterInterface
     protected function createOrUpdateImageToImageSetRelation(
         SpyProductImageSet $productImageSetEntity,
         SpyProductImage $productImageEntity,
-        DataSetInterface $dataSet
+        DataSetInterface $dataSet,
     ): void {
         $productImageSetToProductImageEntity = $this->productImageRepository->getProductImageSetToProductImageRelationEntity(
             $productImageSetEntity->getIdProductImageSet(),
@@ -161,7 +161,7 @@ class ProductImagePropelDataSetWriter implements DataSetWriterInterface
      * @return \Generated\Shared\Transfer\SpyProductImageSetToProductImageEntityTransfer
      */
     protected function getProductImageToImageSetRelationTransfer(
-        DataSetInterface $dataSet
+        DataSetInterface $dataSet,
     ): SpyProductImageSetToProductImageEntityTransfer {
         return $dataSet[ProductImageHydratorStep::DATA_PRODUCT_IMAGE_TO_IMAGE_SET_RELATION_TRANSFER];
     }

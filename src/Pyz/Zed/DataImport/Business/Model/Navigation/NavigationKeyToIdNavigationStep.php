@@ -57,7 +57,7 @@ class NavigationKeyToIdNavigationStep implements DataImportStepInterface
      *
      * @return void
      */
-    public function execute(DataSetInterface $dataSet)
+    public function execute(DataSetInterface $dataSet): void
     {
         if (!isset($dataSet[$this->source])) {
             throw new DataKeyNotFoundInDataSetException(sprintf(
@@ -81,7 +81,7 @@ class NavigationKeyToIdNavigationStep implements DataImportStepInterface
      *
      * @return int
      */
-    protected function resolveIdNavigation($navigationKey)
+    protected function resolveIdNavigation($navigationKey): int
     {
         $navigationEntity = SpyNavigationQuery::create()
             ->findOneByKey($navigationKey);

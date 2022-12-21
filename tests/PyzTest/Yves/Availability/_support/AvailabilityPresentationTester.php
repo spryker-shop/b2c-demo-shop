@@ -68,7 +68,7 @@ class AvailabilityPresentationTester extends Actor
     /**
      * @return void
      */
-    public function processCheckout()
+    public function processCheckout(): void
     {
         $this->processAllCheckoutSteps();
     }

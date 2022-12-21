@@ -46,7 +46,7 @@ class GlossaryWriterStep extends PublishAwareStep implements DataImportStepInter
      *
      * @return void
      */
-    public function execute(DataSetInterface $dataSet)
+    public function execute(DataSetInterface $dataSet): void
     {
         $glossaryKeyEntity = SpyGlossaryKeyQuery::create()
             ->filterByKey($dataSet[static::KEY_KEY])

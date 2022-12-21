@@ -35,7 +35,7 @@ class CheckoutAvailabilityCest
      *
      * @return void
      */
-    public function testCheckoutItemWithAvailability(AvailabilityPresentationTester $i, Scenario $scenario)
+    public function testCheckoutItemWithAvailability(AvailabilityPresentationTester $i, Scenario $scenario): void
     {
         $i->wantTo('Checkout item with stock');
         $i->expectTo('Availability changed during SM processing.');
