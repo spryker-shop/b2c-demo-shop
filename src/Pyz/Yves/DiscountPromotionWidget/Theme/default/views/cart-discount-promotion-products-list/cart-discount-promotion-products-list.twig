@@ -87,12 +87,17 @@
                             {% widget 'AddToCartFormWidget' args [config, data.product, isDisabled] only %}
                                 {% block embeddedData %}
                                     {% set disabledAttribute = data.isDisabled ? 'disabled' %}
+                                    {% set numberFormatConfig = {} %}
+                                    {% for key, value in getNumberFormatConfig(app.locale).toArray() %}
+                                        {% set numberFormatConfig = numberFormatConfig | merge({ (key | replace({'_symbol': '', '_': '-'})): value }) %}
+                                    {% endfor %}
 
                                     {% include molecule('product-quantity-input') with {
                                         class: 'spacing-bottom--big',
                                         data: {
                                             maxQuantity: data.product.promotionItem.maxQuantity,
                                             hasUpdateButton: false,
+                                            numberFormatConfig: numberFormatConfig,
                                         },
                                     } only %}
 
