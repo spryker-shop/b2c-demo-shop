@@ -56,7 +56,7 @@ class ProductConcreteManagerTest extends ProductTestAbstract
 
         foreach ($this->productConcreteTransfer->getLocalizedAttributes() as $localizedAttribute) {
             $localizedAttribute->setName(
-                self::UPDATED_PRODUCT_ABSTRACT_NAME[$localizedAttribute->getLocale()->getLocaleName()]
+                self::UPDATED_PRODUCT_ABSTRACT_NAME[$localizedAttribute->getLocale()->getLocaleName()],
             );
         }
 
@@ -74,7 +74,7 @@ class ProductConcreteManagerTest extends ProductTestAbstract
         $this->setupDefaultProducts();
 
         $concreteCollection = $this->productConcreteManager->getConcreteProductsByAbstractProductId(
-            $this->productAbstractTransfer->getIdProductAbstract()
+            $this->productAbstractTransfer->getIdProductAbstract(),
         );
 
         foreach ($concreteCollection as $concreteProduct) {
@@ -174,7 +174,7 @@ class ProductConcreteManagerTest extends ProductTestAbstract
      */
     protected function assertProductImages(ProductConcreteTransfer $productConcreteTransfer)
     {
-        /** @var \Generated\Shared\Transfer\ProductImageSetTransfer $imageSet */
+        /** @var array<\Generated\Shared\Transfer\ProductImageSetTransfer> $imageSetCollection */
         $imageSetCollection = (array)$productConcreteTransfer->getImageSets();
         $this->assertNotEmpty($imageSetCollection);
 

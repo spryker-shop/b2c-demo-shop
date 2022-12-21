@@ -91,7 +91,7 @@ class SuccessStepTest extends Unit
             $cartClientMock,
             $checkoutPageConfigMock,
             'success_route',
-            'escape_route'
+            'escape_route',
         );
     }
 

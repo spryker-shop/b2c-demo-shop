@@ -107,7 +107,7 @@ class ShipmentStepTest extends Unit
             $this->createGiftCardItemsChecker(),
             CheckoutPageDependencyProvider::PLUGIN_SHIPMENT_STEP_HANDLER,
             'escape_route',
-            $this->getCheckoutShipmentStepEnterPreCheckPlugins()
+            $this->getCheckoutShipmentStepEnterPreCheckPlugins(),
         );
     }
 
@@ -171,7 +171,7 @@ class ShipmentStepTest extends Unit
     }
 
     /**
-     * @return \SprykerShop\Yves\CheckoutPageExtension\Dependency\Plugin\CheckoutShipmentStepEnterPreCheckPluginInterface[]
+     * @return array<\SprykerShop\Yves\CheckoutPageExtension\Dependency\Plugin\CheckoutShipmentStepEnterPreCheckPluginInterface>
      */
     public function getCheckoutShipmentStepEnterPreCheckPlugins(): array
     {

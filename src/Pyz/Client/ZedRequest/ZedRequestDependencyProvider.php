@@ -16,7 +16,7 @@ use Spryker\Client\ZedRequest\ZedRequestDependencyProvider as SprykerZedRequestD
 class ZedRequestDependencyProvider extends SprykerZedRequestDependencyProvider
 {
     /**
-     * @return \Spryker\Client\ZedRequest\Dependency\Plugin\MetaDataProviderPluginInterface[]
+     * @return array<\Spryker\Client\ZedRequest\Dependency\Plugin\MetaDataProviderPluginInterface>
      */
     protected function getMetaDataProviderPlugins()
     {
@@ -26,7 +26,7 @@ class ZedRequestDependencyProvider extends SprykerZedRequestDependencyProvider
     }
 
     /**
-     * @return \Spryker\Client\ZedRequestExtension\Dependency\Plugin\HeaderExpanderPluginInterface[]
+     * @return array<\Spryker\Client\ZedRequestExtension\Dependency\Plugin\HeaderExpanderPluginInterface>
      */
     protected function getHeaderExpanderPlugins(): array
     {

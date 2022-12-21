@@ -25,6 +25,7 @@ class CustomerAddressesPage extends Customer
      * @var string
      */
     public const ADDRESS_A = 'address a';
+
     /**
      * @var string
      */

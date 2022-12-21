@@ -14,7 +14,7 @@ use SprykerShop\Yves\ErrorPage\Plugin\ExceptionHandler\SubRequestExceptionHandle
 class ErrorPageDependencyProvider extends SprykerErrorPageDependencyProvider
 {
     /**
-     * @return \SprykerShop\Yves\ErrorPageExtension\Dependency\Plugin\ExceptionHandlerPluginInterface[]
+     * @return array<\SprykerShop\Yves\ErrorPageExtension\Dependency\Plugin\ExceptionHandlerPluginInterface>
      */
     protected function getExceptionHandlerPlugins()
     {

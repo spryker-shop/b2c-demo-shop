@@ -25,10 +25,12 @@ class NavigationWriterStep extends PublishAwareStep implements DataImportStepInt
      * @var string
      */
     public const NAME = 'name';
+
     /**
      * @var string
      */
     public const KEY = 'key';
+
     /**
      * @var string
      */

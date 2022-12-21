@@ -33,7 +33,7 @@ use Spryker\Zed\ZedRequest\Communication\Plugin\EventDispatcher\GatewayControlle
 class EventDispatcherDependencyProvider extends SprykerEventDispatcherDependencyProvider
 {
     /**
-     * @return \Spryker\Shared\EventDispatcherExtension\Dependency\Plugin\EventDispatcherPluginInterface[]
+     * @return array<\Spryker\Shared\EventDispatcherExtension\Dependency\Plugin\EventDispatcherPluginInterface>
      */
     protected function getEventDispatcherPlugins(): array
     {
@@ -61,7 +61,7 @@ class EventDispatcherDependencyProvider extends SprykerEventDispatcherDependency
     }
 
     /**
-     * @return \Spryker\Shared\EventDispatcherExtension\Dependency\Plugin\EventDispatcherPluginInterface[]
+     * @return array<\Spryker\Shared\EventDispatcherExtension\Dependency\Plugin\EventDispatcherPluginInterface>
      */
     protected function getBackendGatewayEventDispatcherPlugins(): array
     {
@@ -76,7 +76,7 @@ class EventDispatcherDependencyProvider extends SprykerEventDispatcherDependency
     }
 
     /**
-     * @return \Spryker\Shared\EventDispatcherExtension\Dependency\Plugin\EventDispatcherPluginInterface[]
+     * @return array<\Spryker\Shared\EventDispatcherExtension\Dependency\Plugin\EventDispatcherPluginInterface>
      */
     protected function getBackendApiEventDispatcherPlugins(): array
     {

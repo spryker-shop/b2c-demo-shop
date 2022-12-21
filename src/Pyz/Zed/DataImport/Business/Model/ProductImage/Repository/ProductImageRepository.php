@@ -17,17 +17,17 @@ use Orm\Zed\ProductImage\Persistence\SpyProductImageSetToProductImageQuery;
 class ProductImageRepository implements ProductImageRepositoryInterface
 {
     /**
-     * @var \Orm\Zed\ProductImage\Persistence\SpyProductImageSet[]
+     * @var array<\Orm\Zed\ProductImage\Persistence\SpyProductImageSet>
      */
     protected $resolvedProductImageSets = [];
 
     /**
-     * @var \Orm\Zed\ProductImage\Persistence\SpyProductImage[]
+     * @var array<\Orm\Zed\ProductImage\Persistence\SpyProductImage>
      */
     protected $resolvedProductImages = [];
 
     /**
-     * @var \Orm\Zed\ProductImage\Persistence\SpyProductImageSetToProductImage[]
+     * @var array<\Orm\Zed\ProductImage\Persistence\SpyProductImageSetToProductImage>
      */
     protected $resolvedProductImageSetToProductImageRelations = [];
 
@@ -157,7 +157,7 @@ class ProductImageRepository implements ProductImageRepositoryInterface
             $name,
             $localeId,
             $productAbstractId ?? 0,
-            $productConcreteId ?? 0
+            $productConcreteId ?? 0,
         );
     }
 

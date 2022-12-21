@@ -32,7 +32,7 @@ class AddProductAttributeKeysStep implements DataImportStepInterface
      */
     public function execute(DataSetInterface $dataSet)
     {
-        if (empty($this->productAttributeKeys)) {
+        if (!$this->productAttributeKeys) {
             $query = SpyProductAttributeKeyQuery::create()
                 ->select([
                     SpyProductAttributeKeyTableMap::COL_ID_PRODUCT_ATTRIBUTE_KEY,

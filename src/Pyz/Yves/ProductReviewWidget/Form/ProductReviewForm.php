@@ -20,7 +20,7 @@ use Symfony\Component\Validator\Constraints\LessThanOrEqual;
 
 /**
  * @method \SprykerShop\Yves\ProductReviewWidget\ProductReviewWidgetFactory getFactory()
- * @method \SprykerShop\Yves\ProductReviewWidget\ProductReviewWidgetConfig getConfig()
+ * @method \Pyz\Yves\ProductReviewWidget\ProductReviewWidgetConfig getConfig()
  */
 class ProductReviewForm extends AbstractType
 {
@@ -113,11 +113,11 @@ class ProductReviewForm extends AbstractType
                         [
                         'value' => static::PYZ_MINIMUM_RATING,
                         'message' => $this->getConfig()->getInvalidRatingValidationMessageGlossaryKey(),
-                        ]
+                        ],
                     ),
                     new LessThanOrEqual(['value' => $this->getFactory()->getProductReviewClient()->getMaximumRating()]),
                 ],
-            ]
+            ],
         );
 
         return $this;
@@ -161,7 +161,7 @@ class ProductReviewForm extends AbstractType
                 'constraints' => [
                     new Length(['min' => 1]),
                 ],
-            ]
+            ],
         );
 
         return $this;
@@ -186,7 +186,7 @@ class ProductReviewForm extends AbstractType
                 'constraints' => [
                     new Length(['min' => 1]),
                 ],
-            ]
+            ],
         );
 
         return $this;
@@ -208,7 +208,7 @@ class ProductReviewForm extends AbstractType
                 'constraints' => [
                     new Length(['min' => 1, 'max' => 255]),
                 ],
-            ]
+            ],
         );
 
         return $this;
@@ -226,7 +226,7 @@ class ProductReviewForm extends AbstractType
             HiddenType::class,
             [
                 'required' => true,
-            ]
+            ],
         );
 
         return $this;

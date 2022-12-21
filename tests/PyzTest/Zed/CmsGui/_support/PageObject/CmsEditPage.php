@@ -18,6 +18,7 @@ class CmsEditPage
      * @var string
      */
     public const PAGE_ACTIVATE_SUCCESS_MESSAGE = 'Page was created successfully.';
+
     /**
      * @var string
      */

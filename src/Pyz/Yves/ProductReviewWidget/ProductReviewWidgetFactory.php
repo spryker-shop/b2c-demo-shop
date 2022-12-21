@@ -24,7 +24,7 @@ class ProductReviewWidgetFactory extends SprykerShopProductReviewWidgetFactory
         $form = $this->getFormFactory()->create(
             ProductReviewForm::class,
             $dataProvider->getData($idProductAbstract),
-            $dataProvider->getOptions()
+            $dataProvider->getOptions(),
         );
 
         return $form;

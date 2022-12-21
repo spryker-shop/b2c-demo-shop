@@ -44,7 +44,7 @@ class DevelopmentConfig extends SprykerDevelopmentConfig
     }
 
     /**
-     * @return string[]
+     * @return array<string>
      */
     public function getPathsToInternalNamespace(): array
     {

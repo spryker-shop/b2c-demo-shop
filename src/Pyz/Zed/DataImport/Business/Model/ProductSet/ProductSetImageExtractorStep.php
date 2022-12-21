@@ -21,10 +21,12 @@ class ProductSetImageExtractorStep implements DataImportStepInterface
      * @var string
      */
     public const IMAGE_SET_KEY_PREFIX = 'image_set.';
+
     /**
      * @var string
      */
     public const IMAGE_SMALL_KEY_PREFIX = 'image_small.';
+
     /**
      * @var string
      */

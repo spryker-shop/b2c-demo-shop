@@ -23,6 +23,7 @@ class CustomerRegistrationPage extends Customer
      * @var string
      */
     public const BUTTON_REGISTER = '[data-qa="submit-button"]';
+
     /**
      * @var string
      */
@@ -32,26 +33,32 @@ class CustomerRegistrationPage extends Customer
      * @var string
      */
     public const FORM_FIELD_SELECTOR_SALUTATION = 'registerForm[salutation]';
+
     /**
      * @var string
      */
     public const FORM_FIELD_SELECTOR_FIRST_NAME = 'registerForm[first_name]';
+
     /**
      * @var string
      */
     public const FORM_FIELD_SELECTOR_LAST_NAME = 'registerForm[last_name]';
+
     /**
      * @var string
      */
     public const FORM_FIELD_SELECTOR_EMAIL = 'registerForm[email]';
+
     /**
      * @var string
      */
     public const FORM_FIELD_SELECTOR_PASSWORD = 'registerForm[password][pass]';
+
     /**
      * @var string
      */
     public const FORM_FIELD_SELECTOR_PASSWORD_CONFIRM = 'registerForm[password][confirm]';
+
     /**
      * @var string
      */
@@ -61,6 +68,7 @@ class CustomerRegistrationPage extends Customer
      * @var string
      */
     public const SUCCESS_MESSAGE = 'Registration Successful';
+
     /**
      * @var string
      */

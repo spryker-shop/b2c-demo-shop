@@ -33,8 +33,8 @@ class ContentProductSetTwigPlugin extends AbstractPlugin implements TwigPluginIn
         $twig->addFunction(
             $this->getFactory()->createPyzContentProductSetTwigFunction(
                 $twig,
-                $this->getLocale()
-            )
+                $this->getLocale(),
+            ),
         );
 
         return $twig;

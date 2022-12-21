@@ -17,7 +17,9 @@ use Spryker\Zed\Store\Business\StoreFacadeInterface;
 class CombinedProductStockPropelDataSetWriter extends ProductStockPropelDataSetWriter
 {
     protected const COLUMN_CONCRETE_SKU = CombinedProductStockHydratorStep::COLUMN_CONCRETE_SKU;
+
     protected const COLUMN_IS_BUNDLE = CombinedProductStockHydratorStep::COLUMN_IS_BUNDLE;
+
     protected const COLUMN_IS_NEVER_OUT_OF_STOCK = CombinedProductStockHydratorStep::COLUMN_IS_NEVER_OUT_OF_STOCK;
 
     /**

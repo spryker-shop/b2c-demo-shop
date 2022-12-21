@@ -27,26 +27,32 @@ class DiscountVoucherWriterStep implements DataImportStepInterface
      * @var string
      */
     public const KEY_DISCOUNT_KEY = 'discount_key';
+
     /**
      * @var string
      */
     public const KEY_RANDOM_GENERATED_CODE_LENGTH = 'random_generated_code_length';
+
     /**
      * @var string
      */
     public const KEY_QUANTITY = 'quantity';
+
     /**
      * @var string
      */
     public const KEY_CUSTOM_CODE = 'custom_code';
+
     /**
      * @var string
      */
     public const KEY_VOUCHER_BATCH = 'voucher_batch';
+
     /**
      * @var string
      */
     public const KEY_IS_ACTIVE = 'is_active';
+
     /**
      * @var string
      */

@@ -79,37 +79,44 @@ abstract class ProductTestAbstract extends Unit
      * @var string
      */
     public const ABSTRACT_SKU = 'foo';
+
     /**
      * @var string
      */
     public const CONCRETE_SKU = 'foo-concrete';
+
     /**
      * @var string
      */
     public const IMAGE_SET_NAME = 'Default';
+
     /**
      * @var string
      */
     public const IMAGE_URL_LARGE = 'large';
+
     /**
      * @var string
      */
     public const IMAGE_URL_SMALL = 'small';
+
     /**
      * @var int
      */
     public const PRICE = 1234;
+
     /**
      * @var int
      */
     public const STOCK_QUANTITY = 99;
+
     /**
      * @var string
      */
     public const CURRENCY_ISO_CODE = 'EUR';
 
     /**
-     * @var \Generated\Shared\Transfer\LocaleTransfer[]
+     * @var array<\Generated\Shared\Transfer\LocaleTransfer>
      */
     protected $locales;
 
@@ -246,7 +253,7 @@ abstract class ProductTestAbstract extends Unit
         $this->productManager = new ProductManager(
             $this->productAbstractManager,
             $this->productConcreteManager,
-            $this->productQueryContainer
+            $this->productQueryContainer,
         );
     }
 
@@ -351,15 +358,15 @@ abstract class ProductTestAbstract extends Unit
             ->setExternalUrlSmall(self::IMAGE_URL_SMALL);
 
         $imageSetTransfer->setProductImages(
-            new ArrayObject([$imageTransfer])
+            new ArrayObject([$imageTransfer]),
         );
 
         $this->productAbstractTransfer->setImageSets(
-            new ArrayObject([$imageSetTransfer])
+            new ArrayObject([$imageSetTransfer]),
         );
 
         $this->productConcreteTransfer->setImageSets(
-            new ArrayObject([$imageSetTransfer])
+            new ArrayObject([$imageSetTransfer]),
         );
     }
 

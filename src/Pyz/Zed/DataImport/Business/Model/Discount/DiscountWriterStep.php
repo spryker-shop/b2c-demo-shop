@@ -199,7 +199,7 @@ class DiscountWriterStep implements DataImportStepInterface
     /**
      * @param string $queryString
      *
-     * @return string[]
+     * @return array<string>
      */
     protected function extractConditionValuesWithShipmentCarrierMethodNames($queryString)
     {
@@ -213,7 +213,7 @@ class DiscountWriterStep implements DataImportStepInterface
     /**
      * @param string $queryString
      *
-     * @return string[]
+     * @return array<string>
      */
     protected function extractConditionValueWithShipmentCarrierNames($queryString)
     {

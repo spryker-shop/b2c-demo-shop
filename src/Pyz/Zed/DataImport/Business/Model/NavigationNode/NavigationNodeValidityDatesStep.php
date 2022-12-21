@@ -80,7 +80,7 @@ class NavigationNodeValidityDatesStep implements DataImportStepInterface
 
         if ($timestamp === false || $timestamp <= 0) {
             throw new NavigationNodeValidityDateException(
-                sprintf('%s date (%s) does not match expected format: YYYY-MM-DD.', $key, $dataSet[$key])
+                sprintf('%s date (%s) does not match expected format: YYYY-MM-DD.', $key, $dataSet[$key]),
             );
         }
 
@@ -110,8 +110,8 @@ class NavigationNodeValidityDatesStep implements DataImportStepInterface
                     $this->keyValidFrom,
                     $validFromDate,
                     $this->keyValidTo,
-                    $validToDate
-                )
+                    $validToDate,
+                ),
             );
         }
     }

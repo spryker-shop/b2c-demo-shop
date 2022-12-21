@@ -316,7 +316,7 @@ class NavigationGuiPresentationTester extends Actor
         $this->waitForElement(sprintf(
             self::NODE_CHILD_SELECTOR,
             $idParentNavigationNode,
-            $idChildNavigationNode
+            $idChildNavigationNode,
         ), 1);
     }
 
@@ -584,7 +584,7 @@ class NavigationGuiPresentationTester extends Actor
 
     /**
      * @param string $defaultSlug
-     * @param string[] $localizedSlugs
+     * @param array<string> $localizedSlugs
      *
      * @return array
      */

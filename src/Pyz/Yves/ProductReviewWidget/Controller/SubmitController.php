@@ -93,7 +93,7 @@ class SubmitController extends SprykerSubmitController
         $productReviewResponseTransfer = $this->getFactory()->getProductReviewClient()->submitCustomerReview(
             $this->getPyzProductReviewFormData($form)
                 ->setCustomerReference($customerReference)
-                ->setLocaleName($this->getLocale())
+                ->setLocaleName($this->getLocale()),
         );
 
         if ($productReviewResponseTransfer->getIsSuccess()) {

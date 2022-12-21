@@ -38,50 +38,62 @@ class ProductSetWriterStep extends PublishAwareStep implements DataImportStepInt
      * @var string
      */
     public const KEY_PRODUCT_SET_KEY = 'product_set_key';
+
     /**
      * @var string
      */
     public const KEY_NAME = 'name';
+
     /**
      * @var string
      */
     public const KEY_DESCRIPTION = 'description';
+
     /**
      * @var string
      */
     public const KEY_META_TITLE = 'meta_title';
+
     /**
      * @var string
      */
     public const KEY_META_DESCRIPTION = 'meta_description';
+
     /**
      * @var string
      */
     public const KEY_META_KEYWORDS = 'meta_keywords';
+
     /**
      * @var string
      */
     public const KEY_URL = 'url';
+
     /**
      * @var string
      */
     public const KEY_IS_ACTIVE = 'is_active';
+
     /**
      * @var string
      */
     public const KEY_WEIGHT = 'weight';
+
     /**
      * @var string
      */
     public const KEY_ABSTRACT_SKUS = 'abstract_skus';
+
     /**
      * @var string
      */
     public const KEY_IMAGE_SET = 'image_set';
+
     /**
      * @var string
      */
     public const KEY_IMAGES = 'images';
+
     /**
      * @var string
      */

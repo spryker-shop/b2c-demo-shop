@@ -31,42 +31,52 @@ class NavigationNodeWriterStep extends PublishAwareStep implements DataImportSte
      * @var string
      */
     public const KEY_NAVIGATION_KEY = 'navigation_key';
+
     /**
      * @var string
      */
     public const KEY_NODE_KEY = 'node_key';
+
     /**
      * @var string
      */
     public const KEY_PARENT_NODE_KEY = 'parent_node_key';
+
     /**
      * @var string
      */
     public const KEY_POSITION = 'position';
+
     /**
      * @var string
      */
     public const KEY_NODE_TYPE = 'node_type';
+
     /**
      * @var string
      */
     public const KEY_TITLE = 'title';
+
     /**
      * @var string
      */
     public const KEY_URL = 'url';
+
     /**
      * @var string
      */
     public const KEY_IS_ACTIVE = 'is_active';
+
     /**
      * @var string
      */
     public const KEY_CSS_CLASS = 'css_class';
+
     /**
      * @var string
      */
     public const KEY_VALID_FROM = 'valid_from';
+
     /**
      * @var string
      */
@@ -76,14 +86,17 @@ class NavigationNodeWriterStep extends PublishAwareStep implements DataImportSte
      * @var string
      */
     public const NODE_TYPE_LINK = 'link';
+
     /**
      * @var string
      */
     public const NODE_TYPE_EXTERNAL_URL = 'external_url';
+
     /**
      * @var string
      */
     public const NODE_TYPE_CATEGORY = 'category';
+
     /**
      * @var string
      */
@@ -116,7 +129,7 @@ class NavigationNodeWriterStep extends PublishAwareStep implements DataImportSte
 
         if (!empty($dataSet[static::KEY_PARENT_NODE_KEY])) {
             $navigationNodeEntity->setFkParentNavigationNode(
-                $this->getFkParentNavigationNode($dataSet[static::KEY_PARENT_NODE_KEY])
+                $this->getFkParentNavigationNode($dataSet[static::KEY_PARENT_NODE_KEY]),
             );
         }
 
@@ -165,7 +178,7 @@ class NavigationNodeWriterStep extends PublishAwareStep implements DataImportSte
         if (!$parentNavigationNodeEntity) {
             throw new NavigationNodeByKeyNotFoundException(sprintf(
                 'NavigationNode with key "%s" not found',
-                $nodeKey
+                $nodeKey,
             ));
         }
 

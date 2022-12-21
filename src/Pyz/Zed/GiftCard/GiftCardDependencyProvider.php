@@ -23,7 +23,7 @@ class GiftCardDependencyProvider extends SprykerGiftCardDependencyProvider
     }
 
     /**
-     * @return \Spryker\Zed\GiftCard\Dependency\Plugin\GiftCardPaymentSaverPluginInterface[]
+     * @return array<\Spryker\Zed\GiftCard\Dependency\Plugin\GiftCardPaymentSaverPluginInterface>
      */
     protected function getPaymentSaverPlugins()
     {
@@ -33,7 +33,7 @@ class GiftCardDependencyProvider extends SprykerGiftCardDependencyProvider
     }
 
     /**
-     * @return \Spryker\Zed\GiftCard\Dependency\Plugin\GiftCardDecisionRulePluginInterface[]
+     * @return array<\Spryker\Zed\GiftCard\Dependency\Plugin\GiftCardDecisionRulePluginInterface>
      */
     protected function getDecisionRulePlugins()
     {

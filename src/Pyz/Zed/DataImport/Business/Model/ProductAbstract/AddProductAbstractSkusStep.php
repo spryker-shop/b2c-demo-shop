@@ -32,7 +32,7 @@ class AddProductAbstractSkusStep implements DataImportStepInterface
      */
     public function execute(DataSetInterface $dataSet)
     {
-        if (empty($this->productAbstractSkus)) {
+        if (!$this->productAbstractSkus) {
             $query = SpyProductAbstractQuery::create();
             $query->select([
                 SpyProductAbstractTableMap::COL_SKU,

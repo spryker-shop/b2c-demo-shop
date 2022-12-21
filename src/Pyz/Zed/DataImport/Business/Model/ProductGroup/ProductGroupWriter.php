@@ -26,10 +26,12 @@ class ProductGroupWriter extends PublishAwareStep implements DataImportStepInter
      * @var string
      */
     public const COLUMN_ABSTRACT_SKU = 'abstract_sku';
+
     /**
      * @var string
      */
     public const COLUMN_PRODUCT_GROUP_KEY = 'group_key';
+
     /**
      * @var string
      */

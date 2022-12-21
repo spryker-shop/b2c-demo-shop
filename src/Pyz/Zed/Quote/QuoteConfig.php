@@ -13,7 +13,7 @@ use Spryker\Zed\Quote\QuoteConfig as SprykerQuoteConfig;
 class QuoteConfig extends SprykerQuoteConfig
 {
     /**
-     * @return string[]
+     * @return array<string>
      */
     public function getQuoteFieldsAllowedForSaving()
     {

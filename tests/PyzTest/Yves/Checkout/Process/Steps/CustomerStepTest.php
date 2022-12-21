@@ -147,7 +147,7 @@ class CustomerStepTest extends Unit
             $authHandlerMock,
             'customer_step',
             'escape_route',
-            '/logout'
+            '/logout',
         );
     }
 

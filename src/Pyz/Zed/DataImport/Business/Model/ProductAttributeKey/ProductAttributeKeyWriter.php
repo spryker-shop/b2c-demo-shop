@@ -17,6 +17,7 @@ class ProductAttributeKeyWriter implements DataImportStepInterface
      * @var string
      */
     public const ATTRIBUTE_KEY = 'attribute_key';
+
     /**
      * @var string
      */

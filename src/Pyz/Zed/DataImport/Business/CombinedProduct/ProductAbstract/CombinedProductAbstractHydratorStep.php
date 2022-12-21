@@ -23,6 +23,7 @@ class CombinedProductAbstractHydratorStep extends ProductAbstractHydratorStep
      * @var string
      */
     public const COLUMN_ABSTRACT_SKU = 'abstract_sku';
+
     /**
      * @var string
      */
@@ -32,38 +33,47 @@ class CombinedProductAbstractHydratorStep extends ProductAbstractHydratorStep
      * @var string
      */
     public const COLUMN_CATEGORY_KEY = 'product_abstract.category_key';
+
     /**
      * @var string
      */
     public const COLUMN_CATEGORY_PRODUCT_ORDER = 'product_abstract.category_product_order';
+
     /**
      * @var string
      */
     public const COLUMN_URL = 'product_abstract.url';
+
     /**
      * @var string
      */
     public const COLUMN_COLOR_CODE = 'product_abstract.color_code';
+
     /**
      * @var string
      */
     public const COLUMN_TAX_SET_NAME = 'product_abstract.tax_set_name';
+
     /**
      * @var string
      */
     public const COLUMN_META_TITLE = 'product_abstract.meta_title';
+
     /**
      * @var string
      */
     public const COLUMN_META_KEYWORDS = 'product_abstract.meta_keywords';
+
     /**
      * @var string
      */
     public const COLUMN_META_DESCRIPTION = 'product_abstract.meta_description';
+
     /**
      * @var string
      */
     public const COLUMN_NEW_FROM = 'product_abstract.new_from';
+
     /**
      * @var string
      */
@@ -73,6 +83,7 @@ class CombinedProductAbstractHydratorStep extends ProductAbstractHydratorStep
      * @var string
      */
     public const COLUMN_NAME = 'product.name';
+
     /**
      * @var string
      */
@@ -87,6 +98,7 @@ class CombinedProductAbstractHydratorStep extends ProductAbstractHydratorStep
      * @var string
      */
     protected const ASSIGNABLE_PRODUCT_TYPE_ABSTRACT = 'abstract';
+
     /**
      * @var string
      */
@@ -126,7 +138,7 @@ class CombinedProductAbstractHydratorStep extends ProductAbstractHydratorStep
             throw new DataKeyNotFoundInDataSetException(sprintf(
                 '"%s" must be defined in the data set. Given: "%s"',
                 static::COLUMN_ASSIGNED_PRODUCT_TYPE,
-                implode(', ', array_keys($dataSet->getArrayCopy()))
+                implode(', ', array_keys($dataSet->getArrayCopy())),
             ));
         }
 
@@ -135,7 +147,7 @@ class CombinedProductAbstractHydratorStep extends ProductAbstractHydratorStep
                 '"%s" must have one of the following values: %s. Given: "%s"',
                 static::COLUMN_ASSIGNED_PRODUCT_TYPE,
                 implode(', ', static::ASSIGNABLE_PRODUCT_TYPES),
-                $dataSet[static::COLUMN_ASSIGNED_PRODUCT_TYPE]
+                $dataSet[static::COLUMN_ASSIGNED_PRODUCT_TYPE],
             ));
         }
     }

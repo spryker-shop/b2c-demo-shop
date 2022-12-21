@@ -13,7 +13,7 @@ use SprykerShop\Yves\ShopPermission\ShopPermissionDependencyProvider as SprykerS
 class ShopPermissionDependencyProvider extends SprykerShopPermissionDependencyProvider
 {
     /**
-     * @return \SprykerShop\Yves\ShopApplication\Plugin\AbstractTwigExtensionPlugin[]
+     * @return array<\SprykerShop\Yves\ShopApplication\Plugin\AbstractTwigExtensionPlugin>
      */
     protected function getPermissionTwigExtensionPlugins()
     {

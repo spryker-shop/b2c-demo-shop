@@ -17,6 +17,7 @@ class CmsTemplateWriterStep implements DataImportStepInterface
      * @var string
      */
     public const KEY_TEMPLATE_NAME = 'template_name';
+
     /**
      * @var string
      */

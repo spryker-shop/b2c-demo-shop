@@ -13,7 +13,7 @@ use Spryker\Zed\CartsRestApi\Communication\Plugin\AuthRestApi\AddGuestQuoteItems
 class AuthRestApiDependencyProvider extends SprykerAuthRestApiDependencyProvider
 {
     /**
-     * @return \Spryker\Zed\AuthRestApiExtension\Dependency\Plugin\PostAuthPluginInterface[]
+     * @return array<\Spryker\Zed\AuthRestApiExtension\Dependency\Plugin\PostAuthPluginInterface>
      */
     protected function getPostAuthPlugins(): array
     {

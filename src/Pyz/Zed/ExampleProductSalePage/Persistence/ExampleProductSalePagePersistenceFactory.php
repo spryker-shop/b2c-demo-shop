@@ -11,8 +11,8 @@ use Pyz\Zed\ExampleProductSalePage\ExampleProductSalePageDependencyProvider;
 use Spryker\Zed\Kernel\Persistence\AbstractPersistenceFactory;
 
 /**
- * @method \Spryker\Zed\ProductNew\ProductNewConfig getConfig()
- * @method \Spryker\Zed\ProductNew\Persistence\ProductNewQueryContainer getQueryContainer()
+ * @method \Pyz\Zed\ExampleProductSalePage\ExampleProductSalePageConfig getConfig()
+ * @method \Pyz\Zed\ExampleProductSalePage\Persistence\ExampleProductSalePageQueryContainerInterface getQueryContainer()
  */
 class ExampleProductSalePagePersistenceFactory extends AbstractPersistenceFactory
 {

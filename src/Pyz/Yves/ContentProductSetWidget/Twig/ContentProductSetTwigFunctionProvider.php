@@ -133,7 +133,7 @@ class ContentProductSetTwigFunctionProvider extends TwigFunctionProvider
                 [
                     'productSet' => $productSetDataStorageTransfer,
                     'productViews' => $productAbstractViewCollection,
-                ]
+                ],
             );
         };
     }
@@ -150,7 +150,7 @@ class ContentProductSetTwigFunctionProvider extends TwigFunctionProvider
     }
 
     /**
-     * @return string[]
+     * @return array<string>
      */
     protected function getPyzAvailableTemplates(): array
     {

@@ -11,7 +11,7 @@ use Orm\Zed\ProductBundle\Persistence\SpyProductBundleQuery;
 use Spryker\Zed\ProductStorage\Persistence\ProductStoragePersistenceFactory as SprykerProductStoragePersistenceFactory;
 
 /**
- * @method \Spryker\Zed\ProductStorage\ProductStorageConfig getConfig()
+ * @method \Pyz\Zed\ProductStorage\ProductStorageConfig getConfig()
  * @method \Pyz\Zed\ProductStorage\Persistence\ProductStorageQueryContainerInterface getQueryContainer()
  */
 class ProductStoragePersistenceFactory extends SprykerProductStoragePersistenceFactory

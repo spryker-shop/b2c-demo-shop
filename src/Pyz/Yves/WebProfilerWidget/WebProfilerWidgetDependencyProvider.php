@@ -26,7 +26,7 @@ use SprykerShop\Yves\WebProfilerWidget\WebProfilerWidgetDependencyProvider as Sp
 class WebProfilerWidgetDependencyProvider extends SprykerWebProfilerDependencyProvider
 {
     /**
-     * @return \Spryker\Shared\WebProfilerExtension\Dependency\Plugin\WebProfilerDataCollectorPluginInterface[]
+     * @return array<\Spryker\Shared\WebProfilerExtension\Dependency\Plugin\WebProfilerDataCollectorPluginInterface>
      */
     public function getDataCollectorPlugins()
     {

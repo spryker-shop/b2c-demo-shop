@@ -98,7 +98,7 @@ class ContentBannerTwigFunctionProvider extends TwigFunctionProvider
 
             return (string)$this->twig->render(
                 $this->getPyzAvailableTemplates()[$templateIdentifier],
-                ['banner' => $contentBannerTypeTransfer]
+                ['banner' => $contentBannerTypeTransfer],
             );
         };
     }

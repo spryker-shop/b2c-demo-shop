@@ -31,7 +31,7 @@ class ProductStockAfterImportPublishHook implements DataImporterAfterImportInter
             ->addJoin(
                 SpyAvailabilityAbstractTableMap::COL_ABSTRACT_SKU,
                 SpyProductAbstractTableMap::COL_SKU,
-                Criteria::INNER_JOIN
+                Criteria::INNER_JOIN,
             )
             ->withColumn(SpyProductAbstractTableMap::COL_ID_PRODUCT_ABSTRACT, 'idProductAbstract')
             ->find();

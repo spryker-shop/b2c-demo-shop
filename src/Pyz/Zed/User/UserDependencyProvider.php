@@ -35,7 +35,7 @@ class UserDependencyProvider extends SprykerUserDependencyProvider
     }
 
     /**
-     * @return \Spryker\Zed\UserExtension\Dependency\Plugin\UserTableActionExpanderPluginInterface[]
+     * @return array<\Spryker\Zed\UserExtension\Dependency\Plugin\UserTableActionExpanderPluginInterface>
      */
     protected function getUserTableActionExpanderPlugins(): array
     {
@@ -45,7 +45,7 @@ class UserDependencyProvider extends SprykerUserDependencyProvider
     }
 
     /**
-     * @return \Spryker\Zed\UserExtension\Dependency\Plugin\UserFormExpanderPluginInterface[]
+     * @return array<\Spryker\Zed\UserExtension\Dependency\Plugin\UserFormExpanderPluginInterface>
      */
     protected function getUserFormExpanderPlugins(): array
     {
@@ -56,7 +56,7 @@ class UserDependencyProvider extends SprykerUserDependencyProvider
     }
 
     /**
-     * @return \Spryker\Zed\UserExtension\Dependency\Plugin\UserTableConfigExpanderPluginInterface[]
+     * @return array<\Spryker\Zed\UserExtension\Dependency\Plugin\UserTableConfigExpanderPluginInterface>
      */
     protected function getUserTableConfigExpanderPlugins(): array
     {
@@ -66,7 +66,7 @@ class UserDependencyProvider extends SprykerUserDependencyProvider
     }
 
     /**
-     * @return \Spryker\Zed\UserExtension\Dependency\Plugin\UserTableDataExpanderPluginInterface[]
+     * @return array<\Spryker\Zed\UserExtension\Dependency\Plugin\UserTableDataExpanderPluginInterface>
      */
     protected function getUserTableDataExpanderPlugins(): array
     {
@@ -76,7 +76,7 @@ class UserDependencyProvider extends SprykerUserDependencyProvider
     }
 
     /**
-     * @return \Spryker\Zed\UserExtension\Dependency\Plugin\UserPreSavePluginInterface[]
+     * @return array<\Spryker\Zed\UserExtension\Dependency\Plugin\UserPreSavePluginInterface>
      */
     protected function getUserPreSavePlugins(): array
     {
@@ -86,7 +86,7 @@ class UserDependencyProvider extends SprykerUserDependencyProvider
     }
 
     /**
-     * @return \Spryker\Zed\UserExtension\Dependency\Plugin\UserTransferExpanderPluginInterface[]
+     * @return array<\Spryker\Zed\UserExtension\Dependency\Plugin\UserTransferExpanderPluginInterface>
      */
     protected function getUserTransferExpanderPlugins(): array
     {

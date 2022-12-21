@@ -19,10 +19,12 @@ class GiftCardAbstractConfigurationWriterStep implements DataImportStepInterface
      * @var int
      */
     public const BULK_SIZE = 100;
+
     /**
      * @var string
      */
     public const COL_PATTERN = 'pattern';
+
     /**
      * @var string
      */

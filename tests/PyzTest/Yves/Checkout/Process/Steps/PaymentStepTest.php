@@ -185,7 +185,7 @@ class PaymentStepTest extends Unit
             $this->getFlashMessengerMock(),
             $this->getCalculationClientMock(),
             $this->getCheckoutPaymentStepEnterPreCheckPlugins(),
-            new PaymentMethodKeyExtractor()
+            new PaymentMethodKeyExtractor(),
         );
     }
 
@@ -247,7 +247,7 @@ class PaymentStepTest extends Unit
     }
 
     /**
-     * @return \SprykerShop\Yves\CheckoutPageExtension\Dependency\Plugin\CheckoutPaymentStepEnterPreCheckPluginInterface[]
+     * @return array<\SprykerShop\Yves\CheckoutPageExtension\Dependency\Plugin\CheckoutPaymentStepEnterPreCheckPluginInterface>
      */
     public function getCheckoutPaymentStepEnterPreCheckPlugins(): array
     {

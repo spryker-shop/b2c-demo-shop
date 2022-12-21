@@ -20,6 +20,7 @@ class ConsoleHelper extends Module
      * @var string
      */
     public const RUNNER = 'console_runner.php';
+
     /**
      * @var string
      */

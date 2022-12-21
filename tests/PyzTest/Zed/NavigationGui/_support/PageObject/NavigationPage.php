@@ -13,10 +13,12 @@ class NavigationPage
      * @var string
      */
     public const URL = '/navigation-gui';
+
     /**
      * @var string
      */
     public const PAGE_LIST_TABLE_XPATH = '//*[@class="dataTables_scrollBody"]/table/tbody/tr[1]/td[1]';
+
     /**
      * @var string
      */

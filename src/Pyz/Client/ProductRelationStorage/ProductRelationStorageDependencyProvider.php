@@ -14,7 +14,7 @@ use Spryker\Client\ProductRelationStorage\ProductRelationStorageDependencyProvid
 class ProductRelationStorageDependencyProvider extends SprykerProductRelationStorageDependencyProvider
 {
     /**
-     * @return \Spryker\Client\ProductStorage\Dependency\Plugin\ProductViewExpanderPluginInterface[]
+     * @return array<\Spryker\Client\ProductStorage\Dependency\Plugin\ProductViewExpanderPluginInterface>
      */
     protected function getRelatedProductExpanderPlugins()
     {

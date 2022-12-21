@@ -13,7 +13,7 @@ use Spryker\Zed\StateMachine\StateMachineDependencyProvider as SprykerStateMachi
 class StateMachineDependencyProvider extends SprykerStateMachineDependencyProvider
 {
     /**
-     * @return \Spryker\Zed\StateMachine\Dependency\Plugin\StateMachineHandlerInterface[]
+     * @return array<\Spryker\Zed\StateMachine\Dependency\Plugin\StateMachineHandlerInterface>
      */
     protected function getStateMachineHandlers()
     {

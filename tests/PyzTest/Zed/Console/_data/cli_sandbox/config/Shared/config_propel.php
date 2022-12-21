@@ -11,7 +11,7 @@ $dsn = sprintf(
     $config[PropelConstants::ZED_DB_ENGINE],
     $config[PropelConstants::ZED_DB_HOST],
     $config[PropelConstants::ZED_DB_PORT],
-    $config[PropelConstants::ZED_DB_DATABASE]
+    $config[PropelConstants::ZED_DB_DATABASE],
 );
 
 $connections = [

@@ -13,6 +13,7 @@ class NewsletterSubscriptionHomePage
      * @var string
      */
     public const NEW_EMAIL = 'foo@bar.com';
+
     /**
      * @var string
      */
@@ -27,6 +28,7 @@ class NewsletterSubscriptionHomePage
      * @var string
      */
     public const ERROR_MESSAGE = 'You are already subscribed to the newsletter';
+
     /**
      * @var string
      */

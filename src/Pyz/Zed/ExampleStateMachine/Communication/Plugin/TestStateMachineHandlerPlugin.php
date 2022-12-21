@@ -15,7 +15,7 @@ use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 use Spryker\Zed\StateMachine\Dependency\Plugin\StateMachineHandlerInterface;
 
 /**
- * @method \Pyz\Zed\ExampleStateMachine\Business\ExampleStateMachineFacade getFacade()
+ * @method \Pyz\Zed\ExampleStateMachine\Business\ExampleStateMachineFacadeInterface getFacade()
  * @method \Pyz\Zed\ExampleStateMachine\Communication\ExampleStateMachineCommunicationFactory getFactory()
  * @method \Pyz\Zed\ExampleStateMachine\Persistence\ExampleStateMachineQueryContainerInterface getQueryContainer()
  */
@@ -24,7 +24,7 @@ class TestStateMachineHandlerPlugin extends AbstractPlugin implements StateMachi
     /**
      * List of command plugins for this state machine for all processes.
      *
-     * @return \Spryker\Zed\StateMachine\Dependency\Plugin\CommandPluginInterface[]
+     * @return array<\Spryker\Zed\StateMachine\Dependency\Plugin\CommandPluginInterface>
      */
     public function getCommandPlugins()
     {
@@ -36,7 +36,7 @@ class TestStateMachineHandlerPlugin extends AbstractPlugin implements StateMachi
     /**
      * List of condition plugins for this state machine for all processes.
      *
-     * @return \Spryker\Zed\StateMachine\Dependency\Plugin\ConditionPluginInterface[]
+     * @return array<\Spryker\Zed\StateMachine\Dependency\Plugin\ConditionPluginInterface>
      */
     public function getConditionPlugins()
     {
@@ -58,7 +58,7 @@ class TestStateMachineHandlerPlugin extends AbstractPlugin implements StateMachi
     /**
      * List of active processes used for this state machine
      *
-     * @return string[]
+     * @return array<string>
      */
     public function getActiveProcesses()
     {
@@ -86,8 +86,8 @@ class TestStateMachineHandlerPlugin extends AbstractPlugin implements StateMachi
         throw new InvalidArgumentException(
             sprintf(
                 'Initial state not found for process "%s".',
-                $processName
-            )
+                $processName,
+            ),
         );
     }
 
@@ -109,7 +109,7 @@ class TestStateMachineHandlerPlugin extends AbstractPlugin implements StateMachi
      *
      * @param array $stateIds
      *
-     * @return \Generated\Shared\Transfer\StateMachineItemTransfer[]
+     * @return array<\Generated\Shared\Transfer\StateMachineItemTransfer>
      */
     public function getStateMachineItemsByStateIds(array $stateIds = [])
     {

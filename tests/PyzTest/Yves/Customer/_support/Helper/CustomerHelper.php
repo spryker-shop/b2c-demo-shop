@@ -154,7 +154,7 @@ class CustomerHelper extends Module
     }
 
     /**
-     * @return object|\Spryker\Zed\Mail\Business\MailFacadeInterface
+     * @return \Spryker\Zed\Mail\Business\MailFacadeInterface|object
      */
     private function getMailMock()
     {

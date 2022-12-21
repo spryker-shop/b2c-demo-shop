@@ -22,22 +22,24 @@ class CmsBlockStoreWriterStep extends PublishAwareStep implements DataImportStep
      * @var int
      */
     public const BULK_SIZE = 100;
+
     /**
      * @var string
      */
     public const KEY_BLOCK_KEY = 'block_key';
+
     /**
      * @var string
      */
     public const KEY_STORE_NAME = 'store_name';
 
     /**
-     * @var int[] Keys are CMS Block names, values are CMS Block IDs.
+     * @var array<int> Keys are CMS Block names, values are CMS Block IDs.
      */
     protected static $idCmsBlockBuffer = [];
 
     /**
-     * @var int[] Keys are store names, values are store ids.
+     * @var array<int> Keys are store names, values are store ids.
      */
     protected static $idStoreBuffer = [];
 

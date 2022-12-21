@@ -30,7 +30,7 @@ class ContentProductAbstractReader implements ContentProductAbstractReaderInterf
      * @param array $selectedAttributes
      * @param string $localeName
      *
-     * @return \Generated\Shared\Transfer\ProductViewTransfer[]
+     * @return array<\Generated\Shared\Transfer\ProductViewTransfer>
      */
     public function findProductAbstractCollection(
         ProductSetDataStorageTransfer $productSetDataStorageTransfer,

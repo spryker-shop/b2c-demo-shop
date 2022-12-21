@@ -48,7 +48,7 @@ class SaleController extends AbstractController
         return $this->view(
             $searchResults,
             $this->getFactory()->getExampleProductSalePageWidgetPlugins(),
-            '@ExampleProductSalePage/views/sale-example/sale-example.twig'
+            '@ExampleProductSalePage/views/sale-example/sale-example.twig',
         );
     }
 
@@ -72,7 +72,7 @@ class SaleController extends AbstractController
             throw new NotFoundHttpException(sprintf(
                 'Category not found by path %s (full path %s)',
                 $categoryPath,
-                $fullCategoryPath
+                $fullCategoryPath,
             ));
         }
 

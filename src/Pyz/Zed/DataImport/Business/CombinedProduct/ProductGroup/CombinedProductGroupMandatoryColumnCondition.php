@@ -12,7 +12,7 @@ use Pyz\Zed\DataImport\Business\CombinedProduct\DataSet\CombinedProductMandatory
 class CombinedProductGroupMandatoryColumnCondition extends CombinedProductMandatoryColumnCondition
 {
     /**
-     * @return string[]
+     * @return array<string>
      */
     protected function getMandatoryColumns(): array
     {

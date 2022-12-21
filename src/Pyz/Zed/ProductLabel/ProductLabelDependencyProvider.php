@@ -16,7 +16,7 @@ use Spryker\Zed\ProductNew\Communication\Plugin\ProductNewLabelUpdaterPlugin;
 class ProductLabelDependencyProvider extends SprykerProductLabelDependencyProvider
 {
     /**
-     * @return \Spryker\Zed\ProductLabel\Dependency\Plugin\ProductLabelRelationUpdaterPluginInterface[]
+     * @return array<\Spryker\Zed\ProductLabel\Dependency\Plugin\ProductLabelRelationUpdaterPluginInterface>
      */
     protected function getProductLabelRelationUpdaterPlugins()
     {

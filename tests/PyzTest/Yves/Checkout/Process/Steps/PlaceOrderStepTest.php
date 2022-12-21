@@ -36,6 +36,7 @@ class PlaceOrderStepTest extends Unit
      * @var string
      */
     protected const LOCALE_NAME_PLACE_ORDER_STEP = 'en_US';
+
     /**
      * @var string
      */
@@ -92,10 +93,10 @@ class PlaceOrderStepTest extends Unit
 
         $checkoutResponseTransfer = new CheckoutResponseTransfer();
         $checkoutResponseTransfer->addError(
-            (new CheckoutErrorTransfer())->setMessage(static::MESSAGE_CHECKOUT_ERROR_TRANSFER)
+            (new CheckoutErrorTransfer())->setMessage(static::MESSAGE_CHECKOUT_ERROR_TRANSFER),
         );
         $checkoutResponseTransfer->addError(
-            (new CheckoutErrorTransfer())->setMessage(static::MESSAGE_CHECKOUT_ERROR_TRANSFER)
+            (new CheckoutErrorTransfer())->setMessage(static::MESSAGE_CHECKOUT_ERROR_TRANSFER),
         );
 
         $checkoutClientMock->expects($this->once())->method('placeOrder')->willReturn($checkoutResponseTransfer);
@@ -156,7 +157,7 @@ class PlaceOrderStepTest extends Unit
             static::LOCALE_NAME_PLACE_ORDER_STEP,
             $this->createGlossaryStorageClientMock(),
             'place_order',
-            'escape_route'
+            'escape_route',
         );
     }
 

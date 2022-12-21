@@ -13,7 +13,7 @@ use SprykerShop\Yves\SalesReturnPage\SalesReturnPageDependencyProvider as Spryke
 class SalesReturnPageDependencyProvider extends SprykerSalesReturnPageDependencyProvider
 {
     /**
-     * @return \SprykerShop\Yves\SalesReturnPageExtension\Dependency\Plugin\ReturnCreateFormHandlerPluginInterface[]
+     * @return array<\SprykerShop\Yves\SalesReturnPageExtension\Dependency\Plugin\ReturnCreateFormHandlerPluginInterface>
      */
     protected function getReturnCreateFormHandlerPlugins(): array
     {

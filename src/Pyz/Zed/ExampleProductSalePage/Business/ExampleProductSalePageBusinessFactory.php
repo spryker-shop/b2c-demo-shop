@@ -14,7 +14,7 @@ use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 use Spryker\Zed\Price\Business\PriceFacadeInterface;
 
 /**
- * @method \Pyz\Zed\ExampleProductSalePage\Persistence\ExampleProductSalePageQueryContainer getQueryContainer()
+ * @method \Pyz\Zed\ExampleProductSalePage\Persistence\ExampleProductSalePageQueryContainerInterface getQueryContainer()
  * @method \Pyz\Zed\ExampleProductSalePage\ExampleProductSalePageConfig getConfig()
  */
 class ExampleProductSalePageBusinessFactory extends AbstractBusinessFactory

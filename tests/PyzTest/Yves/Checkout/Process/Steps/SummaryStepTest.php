@@ -80,7 +80,7 @@ class SummaryStepTest extends Unit
             $this->createConfigMock(),
             'shipment',
             'escape_route',
-            $this->getCheckoutClientMock()
+            $this->getCheckoutClientMock(),
         );
     }
 

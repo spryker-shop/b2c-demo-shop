@@ -61,7 +61,7 @@ class EntryStepTest extends Unit
     {
         return new EntryStep(
             'entry_route',
-            'escape_route'
+            'escape_route',
         );
     }
 
