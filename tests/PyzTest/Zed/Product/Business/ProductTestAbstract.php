@@ -43,33 +43,69 @@ use Spryker\Zed\Url\Business\UrlFacade;
 
 abstract class ProductTestAbstract extends Unit
 {
+    /**
+     * @var array
+     */
     public const PRODUCT_ABSTRACT_NAME = [
         'en_US' => 'Product name en_US',
         'de_DE' => 'Product name de_DE',
     ];
 
+    /**
+     * @var array
+     */
     public const PRODUCT_CONCRETE_NAME = [
         'en_US' => 'Product concrete name en_US',
         'de_DE' => 'Product concrete name de_DE',
     ];
 
+    /**
+     * @var array
+     */
     public const UPDATED_PRODUCT_ABSTRACT_NAME = [
         'en_US' => 'Updated Product name en_US',
         'de_DE' => 'Updated Product name de_DE',
     ];
 
+    /**
+     * @var array
+     */
     public const UPDATED_PRODUCT_CONCRETE_NAME = [
         'en_US' => 'Updated Product concrete name en_US',
         'de_DE' => 'Updated Product concrete name de_DE',
     ];
 
+    /**
+     * @var string
+     */
     public const ABSTRACT_SKU = 'foo';
+    /**
+     * @var string
+     */
     public const CONCRETE_SKU = 'foo-concrete';
+    /**
+     * @var string
+     */
     public const IMAGE_SET_NAME = 'Default';
+    /**
+     * @var string
+     */
     public const IMAGE_URL_LARGE = 'large';
+    /**
+     * @var string
+     */
     public const IMAGE_URL_SMALL = 'small';
+    /**
+     * @var int
+     */
     public const PRICE = 1234;
+    /**
+     * @var int
+     */
     public const STOCK_QUANTITY = 99;
+    /**
+     * @var string
+     */
     public const CURRENCY_ISO_CODE = 'EUR';
 
     /**

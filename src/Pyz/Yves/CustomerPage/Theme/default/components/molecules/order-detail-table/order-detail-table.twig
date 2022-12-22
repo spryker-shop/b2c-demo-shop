@@ -86,6 +86,16 @@
                                 {% endif %}
                             {% endblock %}
 
+                            {% block productConfiguration %}
+                                {% widget 'ProductConfigurationOrderItemDisplayWidget' args [data.productItem] only %}
+                                    {% block body %}
+                                        <div class="spacing-bottom">
+                                            {{ parent() }}
+                                        </div>
+                                    {% endblock %}
+                                {% endwidget %}
+                            {% endblock %}
+
                             {% block state %}
                                 {% set itemState = data.productItem.state ?? {} %}
 

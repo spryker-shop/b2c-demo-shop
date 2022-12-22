@@ -26,7 +26,13 @@ use Throwable;
  */
 class PropelOrmTransactionHandlerTest extends Unit
 {
+    /**
+     * @var string
+     */
     public const TEST_SKU = 'foo';
+    /**
+     * @var string
+     */
     public const TEST_NAME = 'Foo Bar';
 
     /**
@@ -115,9 +121,6 @@ class PropelOrmTransactionHandlerTest extends Unit
         $this->expectExceptionMessage('DB error occured');
 
         $productManager->addProductWithTransactionHandlingShouldRollbackAndThrowException(static::TEST_SKU, static::TEST_NAME);
-
-        $this->assertEntityCreatedWithinTransaction();
-        $this->assertEntityNotCreatedOutsideTransaction();
     }
 
     /**

@@ -1,0 +1,13 @@
+{% extends view('cart-change-quantity-form', '@SprykerShop:CartPage') %}
+
+{% block embeddedData %}
+    {% include molecule('product-quantity-input') with {
+        data: {
+            maxQuantity: cartItem.maxQuantity,
+            value: cartItem.quantity,
+            readOnly: data.readOnly,
+            numberFormatConfig: numberFormatConfig,
+        },
+    } only %}
+    <input type="hidden" value="{{ cartItem.groupKey }}" name="groupKey">
+{% endblock %}

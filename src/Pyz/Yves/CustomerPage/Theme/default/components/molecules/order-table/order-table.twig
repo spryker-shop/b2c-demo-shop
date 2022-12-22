@@ -88,14 +88,31 @@
                                     {% endblock %}
                                 {% endembed %}
 
-                                {% widget 'OrderCancelButtonWidget' args [order, data.requestUri] only %}
-                                    {% block body %}
-                                        {% set buttonClasses = 'menu__link' %}
-                                        <li class="menu__item">
-                                            {{ parent() }}
-                                        </li>
-                                    {% endblock %}
-                                {% endwidget %}
+                                {% block orderCancelButton %}
+                                    {% widget 'OrderCancelButtonWidget' args [order, data.requestUri] only %}
+                                        {% block body %}
+                                            {% set buttonClasses = 'menu__link' %}
+                                            <li class="menu__item">
+                                                {% include molecule('remote-form-submit') with {
+                                                    data: {
+                                                        label: 'order_cancel_widget.cancel_order' | trans,
+                                                        buttonClass: buttonClasses,
+                                                    },
+                                                    attributes: {
+                                                        'form-name': 'orderCancelForm_' ~ data.order.idSalesOrder,
+                                                        'form-action': path('order/cancel', {
+                                                            'id-sales-order': data.order.idSalesOrder,
+                                                            'return-url': data.returnUrl,
+                                                        }),
+                                                        'field-id': 'orderCancelForm__token_' ~ data.order.idSalesOrder,
+                                                        'field-name': 'orderCancelForm[_token]',
+                                                        'field-value': csrf_token('orderCancelForm'),
+                                                    },
+                                                } only %}
+                                            </li>
+                                        {% endblock %}
+                                    {% endwidget %}
+                                {% endblock %}
                             </ul>
                         </td>
                     </tr>

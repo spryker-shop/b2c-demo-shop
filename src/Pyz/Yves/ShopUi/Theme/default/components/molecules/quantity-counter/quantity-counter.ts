@@ -1,4 +1,5 @@
 import Component from 'ShopUi/models/component';
+import FormattedNumberInput from 'ShopUi/components/molecules/formatted-number-input/formatted-number-input';
 
 export default class QuantityCounter extends Component {
     protected quantityInput: HTMLInputElement;
@@ -7,7 +8,8 @@ export default class QuantityCounter extends Component {
     protected value: number;
     protected duration: number = 1000;
     protected timeout: number = 0;
-    protected inputChange: Event = new Event('change');
+    protected inputEvent: Event = new Event('input');
+    protected formattedNumberInput: FormattedNumberInput;
 
     protected readyCallback(): void {}
 
@@ -15,6 +17,9 @@ export default class QuantityCounter extends Component {
         this.quantityInput = <HTMLInputElement>this.getElementsByClassName(`${this.jsName}__input`)[0];
         this.decrButton = <HTMLButtonElement>this.getElementsByClassName(`${this.jsName}__decr`)[0];
         this.incrButton = <HTMLButtonElement>this.getElementsByClassName(`${this.jsName}__incr`)[0];
+        this.formattedNumberInput = <FormattedNumberInput>(
+            this.getElementsByClassName(`${this.jsName}__formatted-input`)[0]
+        );
         this.value = this.getValue;
 
         this.mapEvents();
@@ -22,14 +27,17 @@ export default class QuantityCounter extends Component {
     }
 
     protected mapEvents(): void {
-        this.quantityInput.addEventListener('input', (event: Event) => this.triggerInputEvent());
         this.quantityInput.addEventListener('change', () => this.autoUpdateOnChange());
         this.decrButton.addEventListener('click', () => this.onDecrementButtonClick());
         this.incrButton.addEventListener('click', () => this.onIncrementButtonClick());
     }
 
     protected onDecrementButtonClick(): void {
-        const value: number = +this.quantityInput.value;
+        if (this.isDisabled) {
+            return;
+        }
+
+        const value = this.formattedNumberInput.unformattedValue;
 
         if (value > this.minQuantity) {
             this.quantityInput.value = (value - 1).toString();
@@ -40,7 +48,11 @@ export default class QuantityCounter extends Component {
     }
 
     protected onIncrementButtonClick(): void {
-        const value: number = Number(this.quantityInput.value);
+        if (this.isDisabled) {
+            return;
+        }
+
+        const value = this.formattedNumberInput.unformattedValue;
 
         if (value < this.maxQuantity) {
             this.quantityInput.value = (value + 1).toString();
@@ -57,7 +69,7 @@ export default class QuantityCounter extends Component {
     }
 
     protected triggerInputEvent(): void {
-        this.quantityInput.dispatchEvent(this.inputChange);
+        this.quantityInput.dispatchEvent(this.inputEvent);
     }
 
     protected timer(): void {
@@ -83,11 +95,15 @@ export default class QuantityCounter extends Component {
         return +this.quantityInput.getAttribute('data-min-quantity');
     }
 
-    protected get autoUpdate(): string {
-        return this.quantityInput.getAttribute('data-auto-update');
+    protected get autoUpdate(): boolean {
+        return this.quantityInput.hasAttribute('data-auto-update');
+    }
+
+    protected get isDisabled(): boolean {
+        return this.quantityInput.hasAttribute('disabled');
     }
 
     protected get getValue(): number {
-        return +this.quantityInput.value;
+        return this.formattedNumberInput.unformattedValue;
     }
 }

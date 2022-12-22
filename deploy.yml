@@ -5,7 +5,7 @@ tag: '1.0'
 
 environment: docker.production
 image:
-    tag: spryker/php:8.0
+    tag: spryker/php:8.1
     php:
         ini:
             "opcache.revalidate_freq": 0
@@ -13,7 +13,9 @@ image:
     node:
         version: 16
         npm: 8
-
+    environment:
+        SPRYKER_PRODUCT_CONFIGURATOR_HOST: date-time-configurator-example.spryker.local
+        SPRYKER_PRODUCT_CONFIGURATOR_PORT: 80
 composer:
     mode: --no-dev
     autoload: --classmap-authoritative
@@ -73,6 +75,8 @@ groups:
             yves_eu:
                 application: yves
                 endpoints:
+                    date-time-configurator-example.spryker.local:
+                        entry-point: Configurator
                     yves.de.spryker.local:
                         store: DE
                         services:
@@ -185,7 +189,7 @@ services:
                 protocol: tcp
     search:
         engine: elastic
-        version: 7.6
+        version: '7.10'
         endpoints:
             localhost:9200:
                 protocol: tcp

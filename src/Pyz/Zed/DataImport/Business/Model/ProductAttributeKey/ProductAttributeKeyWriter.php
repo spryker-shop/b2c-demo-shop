@@ -13,7 +13,13 @@ use Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface;
 
 class ProductAttributeKeyWriter implements DataImportStepInterface
 {
+    /**
+     * @var string
+     */
     public const ATTRIBUTE_KEY = 'attribute_key';
+    /**
+     * @var string
+     */
     public const IS_SUPER = 'is_super';
 
     /**

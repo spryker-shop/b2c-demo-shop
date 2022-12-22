@@ -16,6 +16,9 @@ use Spryker\Shared\CustomerAccess\CustomerAccessConfig;
 
 class CustomerAccessRestApiConfig extends SprykerCustomerAccessRestApiConfig
 {
+    /**
+     * @var array<string, array<string>>
+     */
     protected const CUSTOMER_ACCESS_CONTENT_TYPE_TO_RESOURCE_TYPE_MAPPING = [
         CustomerAccessConfig::CONTENT_TYPE_PRICE => [
             ProductPricesRestApiConfig::RESOURCE_ABSTRACT_PRODUCT_PRICES,

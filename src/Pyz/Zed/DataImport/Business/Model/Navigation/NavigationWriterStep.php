@@ -16,10 +16,22 @@ use Spryker\Zed\Navigation\Dependency\NavigationEvents;
 
 class NavigationWriterStep extends PublishAwareStep implements DataImportStepInterface
 {
+    /**
+     * @var int
+     */
     public const BULK_SIZE = 100;
 
+    /**
+     * @var string
+     */
     public const NAME = 'name';
+    /**
+     * @var string
+     */
     public const KEY = 'key';
+    /**
+     * @var string
+     */
     public const KEY_IS_ACTIVE = 'is_active';
 
     /**

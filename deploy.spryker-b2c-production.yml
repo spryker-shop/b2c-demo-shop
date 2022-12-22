@@ -12,7 +12,7 @@ tag: '1.0'
 
 environment: docker
 image:
-    tag: spryker/php:8.0
+    tag: spryker/php:8.1
     php:
         enabled-extensions:
             - blackfire
@@ -20,6 +20,9 @@ image:
     node:
         version: 16
         npm: 8
+    environment:
+        SPRYKER_PRODUCT_CONFIGURATOR_HOST: date-time-configurator.b2c.demo-spryker.com
+        SPRYKER_PRODUCT_CONFIGURATOR_PORT: 443
 
 composer:
     mode: --no-dev
@@ -98,6 +101,8 @@ groups:
             Yves:
                 application: yves
                 endpoints:
+                    date-time-configurator.b2c.demo-spryker.com:
+                        entry-point: Configurator
                     www.de.b2c.demo-spryker.com:
                         store: DE
                     www.at.b2c.demo-spryker.com:
@@ -175,7 +180,7 @@ services:
                 protocol: tcp
     search:
         engine: elastic
-        version: 7.6
+        version: '7.10'
         endpoints:
             localhost:9200:
                 protocol: tcp

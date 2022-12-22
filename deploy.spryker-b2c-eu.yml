@@ -42,7 +42,7 @@ tag: '1.0'
 
 environment: docker.demo
 image:
-    tag: spryker/php:8.0
+    tag: spryker/php:8.1
     environment:
         SPRYKER_DEFAULT_STORE: "DE"
         SPRYKER_ACTIVE_STORES: "DE,AT"
@@ -50,6 +50,8 @@ image:
         SPRYKER_HOOK_AFTER_DEPLOY: "true"
         SPRYKER_HOOK_INSTALL: "vendor/bin/install -r EU/production --no-ansi -vvv"
         SPRYKER_HOOK_DESTRUCTIVE_INSTALL: "vendor/bin/install -r EU/destructive --no-ansi -vvv"
+        SPRYKER_PRODUCT_CONFIGURATOR_HOST: dtc.b2c-staging-eu.cloud.spryker.toys
+        SPRYKER_PRODUCT_CONFIGURATOR_PORT: 443
     php:
         enabled-extensions:
             - blackfire
@@ -107,6 +109,8 @@ groups:
             yves_eu:
                 application: yves
                 endpoints:
+                    dtc.b2c-staging-eu.cloud.spryker.toys:
+                        entry-point: Configurator
                     www.de.b2c-staging-eu.cloud.spryker.toys:
                         store: DE
                         <<: *frontend-auth
@@ -175,7 +179,7 @@ services:
                 protocol: tcp
     search:
         engine: elastic
-        version: 7.6
+        version: '7.10'
         endpoints:
             localhost:9200:
                 protocol: tcp

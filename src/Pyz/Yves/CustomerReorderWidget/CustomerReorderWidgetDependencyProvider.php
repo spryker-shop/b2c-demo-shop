@@ -10,6 +10,7 @@ namespace Pyz\Yves\CustomerReorderWidget;
 use SprykerShop\Yves\CustomerReorderWidget\CustomerReorderWidgetDependencyProvider as SprykerCustomerReorderWidgetDependencyProvider;
 use SprykerShop\Yves\ProductBundleWidget\Plugin\CustomerReorderWidget\ProductBundleReorderItemFetcherPlugin;
 use SprykerShop\Yves\SalesConfigurableBundleWidget\Plugin\CustomerReorder\ConfiguredBundlePostReorderPlugin;
+use SprykerShop\Yves\SalesProductConfigurationWidget\Plugin\CustomerReorderWidget\ProductConfigurationReorderItemExpanderPlugin;
 use SprykerShop\Yves\SalesReturnPage\Plugin\CustomerReorderWidget\RemunerationAmountReorderItemSanitizerPlugin;
 
 class CustomerReorderWidgetDependencyProvider extends SprykerCustomerReorderWidgetDependencyProvider
@@ -41,6 +42,16 @@ class CustomerReorderWidgetDependencyProvider extends SprykerCustomerReorderWidg
     {
         return [
             new ProductBundleReorderItemFetcherPlugin(),
+        ];
+    }
+
+    /**
+     * @return array<\SprykerShop\Yves\CustomerReorderWidgetExtension\Dependency\Plugin\ReorderItemExpanderPluginInterface>
+     */
+    protected function getReorderItemExpanderPlugins(): array
+    {
+        return [
+            new ProductConfigurationReorderItemExpanderPlugin(),
         ];
     }
 }

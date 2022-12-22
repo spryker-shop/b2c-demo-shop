@@ -34,7 +34,7 @@ class ProductNewDependencyProvider extends SprykerProductNewDependencyProvider
             new SortedQueryExpanderPlugin(),
             new PaginatedQueryExpanderPlugin(),
 
-            /**
+            /*
              * FacetQueryExpanderPlugin needs to be after other query expanders which filters down the results.
              */
             new FacetQueryExpanderPlugin(),

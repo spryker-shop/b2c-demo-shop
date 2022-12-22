@@ -9,6 +9,9 @@ namespace PyzTest\Zed\CmsGui\PageObject;
 
 class CmsCreateGlossaryPage
 {
+    /**
+     * @var string
+     */
     public const URL = 'cms-gui/create-glossary/index?id-cms-page=%d';
 
     /**

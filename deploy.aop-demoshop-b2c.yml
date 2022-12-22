@@ -42,7 +42,7 @@ tag: '1.0'
 
 environment: docker.demo
 image:
-    tag: spryker/php:8.0-alpine3.12
+    tag: spryker/php:8.1-alpine3.12
     environment:
         SPRYKER_DEFAULT_STORE: "DE"
         SPRYKER_ACTIVE_STORES: "DE,AT"
@@ -84,6 +84,8 @@ image:
         enabled-extensions:
             - blackfire
             - newrelic
+        ini:
+            opcache.interned_strings_buffer: 32
     node:
         version: 16
         npm: 8
@@ -197,7 +199,7 @@ groups:
 services:
     database:
         engine: mysql
-        version: mariadb-10.4
+        version: mariadb-10.5
         root:
             username: "root"
             password: "secret"
@@ -223,7 +225,7 @@ services:
                 protocol: tcp
     search:
         engine: elastic
-        version: 7.6
+        version: '7.10'
         endpoints:
             localhost:9200:
                 protocol: tcp

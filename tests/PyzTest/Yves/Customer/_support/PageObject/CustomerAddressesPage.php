@@ -11,11 +11,23 @@ use Generated\Shared\Transfer\AddressTransfer;
 
 class CustomerAddressesPage extends Customer
 {
+    /**
+     * @var string
+     */
     public const URL = '/en/customer/address';
 
+    /**
+     * @var string
+     */
     public const ADD_ADDRESS_LINK = '[data-qa="customer-add-new-address"]';
 
+    /**
+     * @var string
+     */
     public const ADDRESS_A = 'address a';
+    /**
+     * @var string
+     */
     public const ADDRESS_B = 'address b';
 
     /**
