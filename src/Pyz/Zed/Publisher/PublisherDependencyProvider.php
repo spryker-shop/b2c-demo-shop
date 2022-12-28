@@ -75,6 +75,8 @@ use Spryker\Zed\ProductLabelStorage\Communication\Plugin\Publisher\ProductLabelD
 use Spryker\Zed\ProductLabelStorage\Communication\Plugin\Publisher\ProductLabelDictionary\ProductLabelDictionaryWritePublisherPlugin as ProductLabelDictionaryStorageWritePublisherPlugin;
 use Spryker\Zed\ProductLabelStorage\Communication\Plugin\Publisher\ProductLabelDictionaryPublisherTriggerPlugin;
 use Spryker\Zed\ProductLabelStorage\Communication\Plugin\Publisher\ProductLabelProductAbstract\ProductLabelProductAbstractWritePublisherPlugin as ProductLabelProductAbstractStorageWritePublisherPlugin;
+use Spryker\Zed\ProductPageSearch\Communication\Plugin\Publisher\Product\ProductConcretePageSearchWritePublisherPlugin;
+use Spryker\Zed\ProductPageSearch\Communication\Plugin\Publisher\ProductConcretePublisherTriggerPlugin;
 use Spryker\Zed\ProductRelationStorage\Communication\Plugin\Publisher\ProductRelation\ProductRelationWriteForPublishingPublisherPlugin;
 use Spryker\Zed\ProductRelationStorage\Communication\Plugin\Publisher\ProductRelation\ProductRelationWritePublisherPlugin;
 use Spryker\Zed\ProductRelationStorage\Communication\Plugin\Publisher\ProductRelationProductAbstract\ProductRelationProductAbstractWritePublisherPlugin;
@@ -105,6 +107,7 @@ class PublisherDependencyProvider extends SprykerPublisherDependencyProvider
             $this->getProductConfigurationStoragePlugins(),
             $this->getCategoryStoragePlugins(),
             $this->getCategoryPageSearchPlugins(),
+            $this->getProductPageSearchPlugins(),
             $this->getProductCategoryStoragePlugins(),
             $this->getAssetStoragePlugins(),
             $this->getProductExportPlugins(),
@@ -141,6 +144,7 @@ class PublisherDependencyProvider extends SprykerPublisherDependencyProvider
             new CategoryTreePublisherTriggerPlugin(),
             new ProductCategoryPublisherTriggerPlugin(),
             new CategoryPagePublisherTriggerPlugin(),
+            new ProductConcretePublisherTriggerPlugin(),
         ];
     }
 
@@ -268,6 +272,16 @@ class PublisherDependencyProvider extends SprykerPublisherDependencyProvider
             new CategoryPageSearchCategoryNodeWritePublisherPlugin(),
             new CategoryPageSearchCategoryTemplateDeletePublisherPlugin(),
             new CategoryPageSearchCategoryTemplateWritePublisherPlugin(),
+        ];
+    }
+
+    /**
+     * @return array<\Spryker\Zed\PublisherExtension\Dependency\Plugin\PublisherPluginInterface>
+     */
+    protected function getProductPageSearchPlugins(): array
+    {
+        return [
+            new ProductConcretePageSearchWritePublisherPlugin(),
         ];
     }
 
