@@ -11,7 +11,9 @@ use Spryker\Zed\CartsRestApi\CartsRestApiDependencyProvider as SprykerCartsRestA
 use Spryker\Zed\CartsRestApi\Communication\Plugin\CartsRestApi\QuoteCreatorPlugin;
 use Spryker\Zed\CartsRestApiExtension\Dependency\Plugin\QuoteCreatorPluginInterface;
 use Spryker\Zed\DiscountPromotionsRestApi\Communication\Plugin\CartsRestApi\DiscountPromotionCartItemMapperPlugin;
+use Spryker\Zed\PersistentCart\Communication\Plugin\CartsRestApi\QuoteCreatorPlugin;
 use Spryker\Zed\ProductBundleCartsRestApi\Communication\Plugin\BundleItemQuoteItemReadValidatorPlugin;
+use Spryker\Zed\ProductMeasurementUnitsRestApi\Communication\Plugin\CartsRestApi\SalesUnitCartItemMapperPlugin;
 use Spryker\Zed\ProductOptionsRestApi\Communication\Plugin\CartsRestApi\ProductOptionCartItemMapperPlugin;
 use Spryker\Zed\SalesOrderThresholdsRestApi\Communication\Plugin\CartsRestApi\SalesOrderThresholdQuoteExpanderPlugin;
 
@@ -20,7 +22,7 @@ class CartsRestApiDependencyProvider extends SprykerCartsRestApiDependencyProvid
     /**
      * @return \Spryker\Zed\CartsRestApiExtension\Dependency\Plugin\QuoteCreatorPluginInterface
      */
-    protected function getQuoteCreatorPlugin(): QuoteCreatorPluginInterface
+    protected function getQuoteCreatorPlugin(): QuoteCreatorPlugin
     {
         return new QuoteCreatorPlugin();
     }
@@ -33,6 +35,7 @@ class CartsRestApiDependencyProvider extends SprykerCartsRestApiDependencyProvid
         return [
             new ProductOptionCartItemMapperPlugin(),
             new DiscountPromotionCartItemMapperPlugin(),
+            new SalesUnitCartItemMapperPlugin(),
         ];
     }
 

@@ -10,6 +10,7 @@ namespace Pyz\Zed\Customer;
 use Spryker\Shared\Newsletter\NewsletterConstants;
 use Spryker\Zed\AvailabilityNotification\Communication\Plugin\Customer\AvailabilityNotificationSubscriptionCustomerTransferExpanderPlugin;
 use Spryker\Zed\AvailabilityNotification\Communication\Plugin\CustomerAnonymizer\AvailabilityNotificationAnonymizerPlugin;
+use Spryker\Zed\CompanyUser\Communication\Plugin\Customer\IsActiveCompanyUserExistsCustomerTransferExpanderPlugin;
 use Spryker\Zed\Customer\CustomerDependencyProvider as SprykerCustomerDependencyProvider;
 use Spryker\Zed\CustomerGroup\Communication\Plugin\CustomerAnonymizer\RemoveCustomerFromGroupPlugin;
 use Spryker\Zed\CustomerUserConnector\Communication\Plugin\CustomerTransferUsernameExpanderPlugin;
@@ -70,6 +71,7 @@ class CustomerDependencyProvider extends SprykerCustomerDependencyProvider
         return [
             new CustomerTransferUsernameExpanderPlugin(),
             new AvailabilityNotificationSubscriptionCustomerTransferExpanderPlugin(),
+            new IsActiveCompanyUserExistsCustomerTransferExpanderPlugin(),
         ];
     }
 }

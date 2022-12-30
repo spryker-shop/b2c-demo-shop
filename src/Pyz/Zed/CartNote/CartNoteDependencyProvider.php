@@ -16,7 +16,7 @@ class CartNoteDependencyProvider extends SprykerCartNoteDependencyProvider
     /**
      * @return \Spryker\Zed\CartNoteExtension\Dependency\Plugin\QuoteItemFinderPluginInterface
      */
-    protected function getQuoteItemsFinderPlugin(): QuoteItemFinderPluginInterface
+    protected function getQuoteItemsFinderPlugin(): BundleProductQuoteItemFinderPlugin
     {
         return new BundleProductQuoteItemFinderPlugin();
     }

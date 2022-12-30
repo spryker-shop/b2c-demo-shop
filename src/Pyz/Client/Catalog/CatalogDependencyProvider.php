@@ -26,8 +26,10 @@ use Spryker\Client\ProductLabelStorage\Plugin\ProductLabelFacetConfigTransferBui
 use Spryker\Client\ProductListSearch\Plugin\Search\ProductListQueryExpanderPlugin;
 use Spryker\Client\ProductReview\Plugin\RatingFacetConfigTransferBuilderPlugin;
 use Spryker\Client\ProductReview\Plugin\RatingSortConfigTransferBuilderPlugin;
+use Spryker\Client\SalesProductConnector\Plugin\PopularitySortConfigTransferBuilderPlugin;
 use Spryker\Client\SearchElasticsearch\Plugin\QueryExpander\CompletionQueryExpanderPlugin;
 use Spryker\Client\SearchElasticsearch\Plugin\QueryExpander\FacetQueryExpanderPlugin;
+use Spryker\Client\SearchElasticsearch\Plugin\QueryExpander\FuzzyQueryExpanderPlugin;
 use Spryker\Client\SearchElasticsearch\Plugin\QueryExpander\IsActiveInDateRangeQueryExpanderPlugin;
 use Spryker\Client\SearchElasticsearch\Plugin\QueryExpander\IsActiveQueryExpanderPlugin;
 use Spryker\Client\SearchElasticsearch\Plugin\QueryExpander\LocalizedQueryExpanderPlugin;
@@ -70,6 +72,7 @@ class CatalogDependencyProvider extends SprykerCatalogDependencyProvider
             new DescendingNameSortConfigTransferBuilderPlugin(),
             new AscendingPriceSortConfigTransferBuilderPlugin(),
             new DescendingPriceSortConfigTransferBuilderPlugin(),
+            new PopularitySortConfigTransferBuilderPlugin(),
         ];
     }
 
@@ -133,6 +136,7 @@ class CatalogDependencyProvider extends SprykerCatalogDependencyProvider
             new SuggestionByTypeQueryExpanderPlugin(),
             new IsActiveQueryExpanderPlugin(),
             new IsActiveInDateRangeQueryExpanderPlugin(),
+            new FuzzyQueryExpanderPlugin(),
         ];
     }
 

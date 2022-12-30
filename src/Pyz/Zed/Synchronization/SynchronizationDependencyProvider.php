@@ -27,6 +27,8 @@ use Spryker\Zed\ContentStorage\Communication\Plugin\Synchronization\ContentStora
 use Spryker\Zed\CustomerAccessStorage\Communication\Plugin\Synchronization\CustomerAccessSynchronizationDataBulkPlugin;
 use Spryker\Zed\FileManagerStorage\Communication\Plugin\Synchronization\FileSynchronizationDataBulkPlugin;
 use Spryker\Zed\GlossaryStorage\Communication\Plugin\Synchronization\GlossarySynchronizationDataRepositoryPlugin;
+use Spryker\Zed\MerchantProductOfferStorage\Communication\Plugin\Synchronization\ProductConcreteProductOffersSynchronizationDataBulkRepositoryPlugin;
+use Spryker\Zed\MerchantProductOfferStorage\Communication\Plugin\Synchronization\ProductOfferSynchronizationDataBulkRepositoryPlugin;
 use Spryker\Zed\NavigationStorage\Communication\Plugin\Synchronization\NavigationSynchronizationDataPlugin;
 use Spryker\Zed\PriceProductStorage\Communication\Plugin\Synchronization\PriceProductAbstractSynchronizationDataPlugin;
 use Spryker\Zed\PriceProductStorage\Communication\Plugin\Synchronization\PriceProductConcreteSynchronizationDataPlugin;
@@ -43,6 +45,8 @@ use Spryker\Zed\ProductLabelStorage\Communication\Plugin\Synchronization\Product
 use Spryker\Zed\ProductLabelStorage\Communication\Plugin\Synchronization\ProductLabelDictionarySynchronizationDataRepositoryPlugin;
 use Spryker\Zed\ProductListStorage\Communication\Plugin\Synchronization\ProductAbstractProductListSynchronizationDataBulkPlugin;
 use Spryker\Zed\ProductListStorage\Communication\Plugin\Synchronization\ProductConcreteProductListSynchronizationDataBulkPlugin;
+use Spryker\Zed\ProductMeasurementUnitStorage\Communication\Plugin\Synchronization\ProductConcreteMeasurementUnitSynchronizationDataBulkPlugin;
+use Spryker\Zed\ProductMeasurementUnitStorage\Communication\Plugin\Synchronization\ProductMeasurementUnitSynchronizationDataBulkPlugin;
 use Spryker\Zed\ProductOptionStorage\Communication\Plugin\Synchronization\ProductOptionSynchronizationDataPlugin;
 use Spryker\Zed\ProductPageSearch\Communication\Plugin\Synchronization\ProductConcretePageSynchronizationDataBulkPlugin;
 use Spryker\Zed\ProductPageSearch\Communication\Plugin\Synchronization\ProductPageSynchronizationDataPlugin;
@@ -126,13 +130,17 @@ class SynchronizationDependencyProvider extends SprykerSynchronizationDependency
             new ReturnReasonSynchronizationDataBulkRepositoryPlugin(),
             new ProductBundleSynchronizationDataBulkRepositoryPlugin(),
             new AssetStorageSynchronizationDataPlugin(),
+            new ProductOfferSynchronizationDataBulkRepositoryPlugin(),
+            new ProductConcreteProductOffersSynchronizationDataBulkRepositoryPlugin(),
+            new ProductMeasurementUnitSynchronizationDataBulkPlugin(),
+            new ProductConcreteMeasurementUnitSynchronizationDataBulkPlugin(),
         ];
     }
 
     /**
      * @return \Spryker\Zed\SynchronizationExtension\Dependency\Plugin\SynchronizationDataQueryExpanderStrategyPluginInterface
      */
-    protected function getSynchronizationDataQueryExpanderStrategyPlugin(): SynchronizationDataQueryExpanderStrategyPluginInterface
+    protected function getSynchronizationDataQueryExpanderStrategyPlugin(): SynchronizationDataQueryExpanderWhereBetweenStrategyPlugin
     {
         return new SynchronizationDataQueryExpanderWhereBetweenStrategyPlugin();
     }

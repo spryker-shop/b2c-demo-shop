@@ -43,6 +43,7 @@ class CmsContentWidgetDependencyProvider extends SprykerCmsContentWidgetDependen
             CmsContentWidgetCmsBlockConnectorConfigurationProvider::FUNCTION_NAME => new CmsBlockContentWidgetPlugin(
                 new CmsContentWidgetCmsBlockConnectorConfigurationProvider()
             ),
+            new CmsBlockContentWidgetPlugin(),
         ];
     }
 }
