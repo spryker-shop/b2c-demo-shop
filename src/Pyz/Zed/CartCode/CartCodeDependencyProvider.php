@@ -14,7 +14,7 @@ use Spryker\Zed\GiftCard\Communication\Plugin\CartCode\GiftCardCartCodePlugin;
 class CartCodeDependencyProvider extends SprykerCartCodeDependencyProvider
 {
     /**
-     * @return \Spryker\Zed\CartCodeExtension\Dependency\Plugin\CartCodePluginInterface[]
+     * @return array<\Spryker\Zed\CartCodeExtension\Dependency\Plugin\CartCodePluginInterface>
      */
     protected function getCartCodePlugins(): array
     {

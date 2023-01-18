@@ -19,12 +19,12 @@ use Spryker\Zed\DataImport\Business\Model\Publisher\DataImporterPublisher;
 class ProductAbstractStorePropelDataSetWriter implements DataSetWriterInterface
 {
     /**
-     * @var int[] Keys are SKUs, values are product abstract ids.
+     * @var array<int> Keys are SKUs, values are product abstract ids.
      */
     protected static $idProductAbstractBuffer;
 
     /**
-     * @var int[] Keys are store names, values are store ids.
+     * @var array<int> Keys are store names, values are store ids.
      */
     protected static $idStoreBuffer;
 

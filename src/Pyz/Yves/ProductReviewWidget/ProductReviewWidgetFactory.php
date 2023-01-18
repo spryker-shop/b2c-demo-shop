@@ -10,6 +10,7 @@ namespace Pyz\Yves\ProductReviewWidget;
 use Pyz\Yves\ProductReviewWidget\Form\ProductReviewForm;
 use Spryker\Client\GlossaryStorage\GlossaryStorageClient;
 use SprykerShop\Yves\ProductReviewWidget\ProductReviewWidgetFactory as SprykerShopProductReviewWidgetFactory;
+use Symfony\Component\Form\FormInterface;
 
 class ProductReviewWidgetFactory extends SprykerShopProductReviewWidgetFactory
 {
@@ -18,13 +19,13 @@ class ProductReviewWidgetFactory extends SprykerShopProductReviewWidgetFactory
      *
      * @return \Symfony\Component\Form\FormInterface
      */
-    public function createPyzProductReviewForm($idProductAbstract)
+    public function createPyzProductReviewForm($idProductAbstract): FormInterface
     {
         $dataProvider = $this->createProductReviewFormDataProvider();
         $form = $this->getFormFactory()->create(
             ProductReviewForm::class,
             $dataProvider->getData($idProductAbstract),
-            $dataProvider->getOptions()
+            $dataProvider->getOptions(),
         );
 
         return $form;

@@ -13,6 +13,7 @@ class NavigationUpdatePage
      * @var string
      */
     public const URL = '/navigation-gui/update?id-navigation=%d';
+
     /**
      * @var string
      */

@@ -14,7 +14,7 @@ $dsn = sprintf(
     $config[PropelConstants::ZED_DB_ENGINE],
     $config[PropelConstants::ZED_DB_HOST],
     $config[PropelConstants::ZED_DB_PORT],
-    $config[PropelConstants::ZED_DB_DATABASE]
+    $config[PropelConstants::ZED_DB_DATABASE],
 );
 
 $slaves = [];
@@ -25,7 +25,7 @@ foreach ($config[PropelConstants::ZED_DB_REPLICAS] ?? [] as $slaveData) {
             $config[PropelConstants::ZED_DB_ENGINE],
             $slaveData[PropelConstants::ZED_DB_HOST],
             $slaveData[PropelConstants::ZED_DB_PORT],
-            $config[PropelConstants::ZED_DB_DATABASE]
+            $config[PropelConstants::ZED_DB_DATABASE],
         ),
         'user' => $config[PropelConstants::ZED_DB_USERNAME],
         'password' => $config[PropelConstants::ZED_DB_PASSWORD],

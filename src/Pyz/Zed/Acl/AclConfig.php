@@ -15,7 +15,7 @@ class AclConfig extends SprykerAclConfig
     /**
      * @return array
      */
-    public function getInstallerUsers()
+    public function getInstallerUsers(): array
     {
         return [
             'admin@spryker.com' => [

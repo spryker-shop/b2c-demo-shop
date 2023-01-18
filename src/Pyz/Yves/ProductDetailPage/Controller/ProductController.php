@@ -29,7 +29,7 @@ class ProductController extends SprykerShopProductController
 
         $quoteTransfer = new QuoteTransfer();
         $quoteTransfer->addItem(
-            (new ItemTransfer())->setIdProductAbstract($viewData['product']->getIdProductAbstract())
+            (new ItemTransfer())->setIdProductAbstract($viewData['product']->getIdProductAbstract()),
         );
         $viewData['cart'] = $quoteTransfer;
 

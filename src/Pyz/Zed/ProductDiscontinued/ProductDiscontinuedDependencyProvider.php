@@ -16,7 +16,7 @@ use Spryker\Zed\ProductDiscontinuedProductLabelConnector\Communication\Plugin\Pr
 class ProductDiscontinuedDependencyProvider extends SprykerProductDiscontinuedDependencyProvider
 {
     /**
-     * @return \Spryker\Zed\ProductDiscontinuedExtension\Dependency\Plugin\PostProductDiscontinuePluginInterface[]
+     * @return array<\Spryker\Zed\ProductDiscontinuedExtension\Dependency\Plugin\PostProductDiscontinuePluginInterface>
      */
     protected function getPostProductDiscontinuePlugins(): array
     {
@@ -27,7 +27,7 @@ class ProductDiscontinuedDependencyProvider extends SprykerProductDiscontinuedDe
     }
 
     /**
-     * @return \Spryker\Zed\ProductDiscontinuedExtension\Dependency\Plugin\PostDeleteBulkProductDiscontinuedPluginInterface[]
+     * @return array<\Spryker\Zed\ProductDiscontinuedExtension\Dependency\Plugin\PostDeleteBulkProductDiscontinuedPluginInterface>
      */
     protected function getPostDeleteBulkProductDiscontinuedPlugins(): array
     {
@@ -37,7 +37,7 @@ class ProductDiscontinuedDependencyProvider extends SprykerProductDiscontinuedDe
     }
 
     /**
-     * @return \Spryker\Zed\ProductDiscontinuedExtension\Dependency\Plugin\ProductDiscontinuedPreDeleteCheckPluginInterface[]
+     * @return array<\Spryker\Zed\ProductDiscontinuedExtension\Dependency\Plugin\ProductDiscontinuedPreDeleteCheckPluginInterface>
      */
     protected function getProductDiscontinuedPreDeleteCheckPlugins(): array
     {

@@ -13,7 +13,7 @@ use Spryker\Zed\SalesReturnGui\SalesReturnGuiDependencyProvider as SprykerSalesR
 class SalesReturnGuiDependencyProvider extends SprykerSalesReturnGuiDependencyProvider
 {
     /**
-     * @return \Spryker\Zed\SalesReturnGuiExtension\Dependency\Plugin\ReturnCreateFormHandlerPluginInterface[]
+     * @return array<\Spryker\Zed\SalesReturnGuiExtension\Dependency\Plugin\ReturnCreateFormHandlerPluginInterface>
      */
     protected function getReturnCreateFormHandlerPlugins(): array
     {

@@ -9,6 +9,7 @@ namespace Pyz\Zed\ExampleStateMachine\Persistence;
 
 use Orm\Zed\ExampleStateMachine\Persistence\PyzExampleStateMachineItemQuery;
 use Propel\Runtime\ActiveQuery\Criteria;
+use Propel\Runtime\Collection\ObjectCollection;
 use Spryker\Zed\Kernel\Persistence\AbstractQueryContainer;
 
 /**
@@ -17,7 +18,7 @@ use Spryker\Zed\Kernel\Persistence\AbstractQueryContainer;
 class ExampleStateMachineQueryContainer extends AbstractQueryContainer implements ExampleStateMachineQueryContainerInterface
 {
     /**
-     * @param int[] $stateIds
+     * @param array<int> $stateIds
      *
      * @return \Orm\Zed\ExampleStateMachine\Persistence\PyzExampleStateMachineItemQuery
      */
@@ -29,9 +30,9 @@ class ExampleStateMachineQueryContainer extends AbstractQueryContainer implement
     }
 
     /**
-     * @return \Orm\Zed\ExampleStateMachine\Persistence\PyzExampleStateMachineItem[]|\Propel\Runtime\Collection\ObjectCollection
+     * @return \Propel\Runtime\Collection\ObjectCollection<\Orm\Zed\ExampleStateMachine\Persistence\PyzExampleStateMachineItem>
      */
-    public function queryPyzAllStateMachineItems()
+    public function queryPyzAllStateMachineItems(): ObjectCollection
     {
          return $this->getFactory()
              ->createPyzExampleStateMachineQuery()

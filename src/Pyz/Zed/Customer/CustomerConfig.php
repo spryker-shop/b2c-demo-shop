@@ -15,6 +15,7 @@ class CustomerConfig extends SprykerCustomerConfig
      * @var int
      */
     protected const MIN_LENGTH_CUSTOMER_PASSWORD = 8;
+
     /**
      * @var int
      */
@@ -23,7 +24,7 @@ class CustomerConfig extends SprykerCustomerConfig
     /**
      * {@inheritDoc}
      *
-     * @return string[]
+     * @return array<string>
      */
     public function getCustomerPasswordAllowList(): array
     {
@@ -35,7 +36,7 @@ class CustomerConfig extends SprykerCustomerConfig
     /**
      * {@inheritDoc}
      *
-     * @return string[]
+     * @return array<string>
      */
     public function getCustomerPasswordDenyList(): array
     {
@@ -77,7 +78,7 @@ class CustomerConfig extends SprykerCustomerConfig
     /**
      * {@inheritDoc}
      *
-     * @return string[]
+     * @return array<string>
      */
     public function getCustomerDetailExternalBlocksUrls()
     {

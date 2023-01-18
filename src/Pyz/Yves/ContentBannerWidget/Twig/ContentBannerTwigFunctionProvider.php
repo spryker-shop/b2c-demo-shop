@@ -62,7 +62,7 @@ class ContentBannerTwigFunctionProvider extends TwigFunctionProvider
     public function __construct(
         Environment $twig,
         string $localeName,
-        ContentBannerWidgetToContentBannerClientInterface $contentBannerClient
+        ContentBannerWidgetToContentBannerClientInterface $contentBannerClient,
     ) {
         $this->twig = $twig;
         $this->localeName = $localeName;
@@ -98,7 +98,7 @@ class ContentBannerTwigFunctionProvider extends TwigFunctionProvider
 
             return (string)$this->twig->render(
                 $this->getPyzAvailableTemplates()[$templateIdentifier],
-                ['banner' => $contentBannerTypeTransfer]
+                ['banner' => $contentBannerTypeTransfer],
             );
         };
     }

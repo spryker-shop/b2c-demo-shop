@@ -23,6 +23,7 @@ class CustomerPasswordForgottenPage extends Customer
      * @var string
      */
     public const BUTTON_BACK = 'Back';
+
     /**
      * @var string
      */

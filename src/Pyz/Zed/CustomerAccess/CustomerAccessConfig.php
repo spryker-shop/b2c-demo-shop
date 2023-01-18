@@ -15,7 +15,7 @@ class CustomerAccessConfig extends SprykerCustomerAccessConfig
     /**
      * {@inheritDoc}
      *
-     * @return string[]
+     * @return array<string>
      */
     public function getContentTypes(): array
     {
@@ -31,7 +31,7 @@ class CustomerAccessConfig extends SprykerCustomerAccessConfig
     /**
      * Returns content access by type for install.
      *
-     * @return bool[]
+     * @return array<bool>
      */
     public function getContentAccessByType(): array
     {

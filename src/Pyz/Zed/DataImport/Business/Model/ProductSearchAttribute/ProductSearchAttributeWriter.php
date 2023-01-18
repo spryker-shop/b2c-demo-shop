@@ -48,7 +48,7 @@ class ProductSearchAttributeWriter extends PublishAwareStep implements DataImpor
      *
      * @return void
      */
-    public function execute(DataSetInterface $dataSet)
+    public function execute(DataSetInterface $dataSet): void
     {
         $productSearchAttributeEntity = SpyProductSearchAttributeQuery::create()
             ->filterByFkProductAttributeKey($dataSet[AddProductAttributeKeysStep::KEY_TARGET][$dataSet['key']])

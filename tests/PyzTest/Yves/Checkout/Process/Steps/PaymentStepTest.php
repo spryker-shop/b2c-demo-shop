@@ -63,7 +63,7 @@ class PaymentStepTest extends Unit
      */
     public function testPostConditionsShouldReturnTrueWhenPaymentSet(
         PaymentStep $paymentStep,
-        QuoteTransfer $quoteTransfer
+        QuoteTransfer $quoteTransfer,
     ): void {
         // Act
         $postConditionFulfilled = $paymentStep->postCondition($quoteTransfer);
@@ -82,7 +82,7 @@ class PaymentStepTest extends Unit
      */
     public function testShipmentRequireInputShouldReturnTrue(
         PaymentStep $paymentStep,
-        QuoteTransfer $quoteTransfer
+        QuoteTransfer $quoteTransfer,
     ): void {
         // Act
         $isInputRequired = $paymentStep->requireInput($quoteTransfer);
@@ -185,7 +185,7 @@ class PaymentStepTest extends Unit
             $this->getFlashMessengerMock(),
             $this->getCalculationClientMock(),
             $this->getCheckoutPaymentStepEnterPreCheckPlugins(),
-            new PaymentMethodKeyExtractor()
+            new PaymentMethodKeyExtractor(),
         );
     }
 
@@ -215,7 +215,7 @@ class PaymentStepTest extends Unit
     /**
      * @return \Symfony\Component\HttpFoundation\Request
      */
-    protected function createRequest()
+    protected function createRequest(): Request
     {
         return Request::createFromGlobals();
     }
@@ -247,7 +247,7 @@ class PaymentStepTest extends Unit
     }
 
     /**
-     * @return \SprykerShop\Yves\CheckoutPageExtension\Dependency\Plugin\CheckoutPaymentStepEnterPreCheckPluginInterface[]
+     * @return array<\SprykerShop\Yves\CheckoutPageExtension\Dependency\Plugin\CheckoutPaymentStepEnterPreCheckPluginInterface>
      */
     public function getCheckoutPaymentStepEnterPreCheckPlugins(): array
     {

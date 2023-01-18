@@ -19,6 +19,7 @@ use Generated\Shared\Transfer\ProductOptionTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Generated\Shared\Transfer\StoreTransfer;
 use Orm\Zed\Country\Persistence\SpyCountryQuery;
+use Orm\Zed\Currency\Persistence\SpyCurrency;
 use Orm\Zed\Currency\Persistence\SpyCurrencyQuery;
 use Orm\Zed\Discount\Persistence\Base\SpyDiscountQuery;
 use Orm\Zed\Discount\Persistence\SpyDiscount;
@@ -60,7 +61,7 @@ class CalculationWithCalculableObjectFacadeTest extends Unit
     /**
      * @return void
      */
-    public function testCalculatorStackWithGrossPriceMode()
+    public function testCalculatorStackWithGrossPriceMode(): void
     {
         $calculationFacade = $this->createCalculationFacade();
 
@@ -121,7 +122,7 @@ class CalculationWithCalculableObjectFacadeTest extends Unit
     /**
      * @return void
      */
-    public function testCalculatorStackWithGrossPriceModeAfterDiscounts()
+    public function testCalculatorStackWithGrossPriceModeAfterDiscounts(): void
     {
         $calculationFacade = $this->createCalculationFacade();
 
@@ -186,7 +187,7 @@ class CalculationWithCalculableObjectFacadeTest extends Unit
     /**
      * @return void
      */
-    public function testCalculatorStackWithNetTaxMode()
+    public function testCalculatorStackWithNetTaxMode(): void
     {
         $calculationFacade = $this->createCalculationFacade();
         $quoteTransfer = $this->createFixtureDataForCalculation();
@@ -254,7 +255,7 @@ class CalculationWithCalculableObjectFacadeTest extends Unit
     /**
      * @return void
      */
-    public function testCalculatorStackWithNetTaxModeAfterDiscounts()
+    public function testCalculatorStackWithNetTaxModeAfterDiscounts(): void
     {
         $calculationFacade = $this->createCalculationFacade();
         $quoteTransfer = $this->createFixtureDataForCalculation();
@@ -315,7 +316,7 @@ class CalculationWithCalculableObjectFacadeTest extends Unit
     /**
      * @return void
      */
-    public function testTaxCalculationWhenDifferentRatesUsed()
+    public function testTaxCalculationWhenDifferentRatesUsed(): void
     {
         $calculationFacade = $this->createCalculationFacade();
 
@@ -360,7 +361,7 @@ class CalculationWithCalculableObjectFacadeTest extends Unit
     /**
      * @return void
      */
-    public function testTaxCalculationWhenDifferentRatesAndDiscountUsed()
+    public function testTaxCalculationWhenDifferentRatesAndDiscountUsed(): void
     {
         $calculationFacade = $this->createCalculationFacade();
 
@@ -410,7 +411,7 @@ class CalculationWithCalculableObjectFacadeTest extends Unit
     /**
      * @return void
      */
-    public function testCalculationWhenTaxExemptionIsUsedShouldUseEmptyTax()
+    public function testCalculationWhenTaxExemptionIsUsedShouldUseEmptyTax(): void
     {
         $calculationFacade = $this->createCalculationFacade();
 
@@ -441,7 +442,7 @@ class CalculationWithCalculableObjectFacadeTest extends Unit
     /**
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    protected function createFixtureDataForCalculation()
+    protected function createFixtureDataForCalculation(): QuoteTransfer
     {
         $quoteTransfer = new QuoteTransfer();
         $quoteTransfer->setStore($this->getCurrentStoreTransfer());
@@ -489,7 +490,7 @@ class CalculationWithCalculableObjectFacadeTest extends Unit
      *
      * @return \Orm\Zed\Discount\Persistence\SpyDiscountVoucher
      */
-    protected function createDiscounts($discountAmount, $calculatorType)
+    protected function createDiscounts($discountAmount, $calculatorType): SpyDiscountVoucher
     {
         $discountVoucherPoolEntity = new SpyDiscountVoucherPool();
         $discountVoucherPoolEntity->setName('test-pool');
@@ -536,7 +537,7 @@ class CalculationWithCalculableObjectFacadeTest extends Unit
     /**
      * @return \Orm\Zed\Currency\Persistence\SpyCurrency
      */
-    protected function getCurrency()
+    protected function getCurrency(): SpyCurrency
     {
         return SpyCurrencyQuery::create()->findOneByCode('EUR');
     }
@@ -544,7 +545,7 @@ class CalculationWithCalculableObjectFacadeTest extends Unit
     /**
      * @return \Spryker\Zed\Calculation\Business\CalculationFacade
      */
-    protected function createCalculationFacade()
+    protected function createCalculationFacade(): CalculationFacade
     {
         return new CalculationFacade();
     }
@@ -552,7 +553,7 @@ class CalculationWithCalculableObjectFacadeTest extends Unit
     /**
      * @return void
      */
-    protected function resetCurrentDiscounts()
+    protected function resetCurrentDiscounts(): void
     {
         $discounts = SpyDiscountQuery::create()->find();
         foreach ($discounts as $discountEntity) {
@@ -566,7 +567,7 @@ class CalculationWithCalculableObjectFacadeTest extends Unit
      *
      * @return \Orm\Zed\Product\Persistence\SpyProductAbstract
      */
-    protected function createAbstractProductWithTaxSet($taxRate)
+    protected function createAbstractProductWithTaxSet($taxRate): SpyProductAbstract
     {
         $countryEntity = SpyCountryQuery::create()->findOneByIso2Code('DE');
 
@@ -588,7 +589,7 @@ class CalculationWithCalculableObjectFacadeTest extends Unit
     /**
      * @return \Orm\Zed\Product\Persistence\SpyProductAbstract
      */
-    protected function createAbstractProductWithTaxExemption()
+    protected function createAbstractProductWithTaxExemption(): SpyProductAbstract
     {
         $taxRateEntity = new SpyTaxRate();
         $taxRateEntity->setRate(0);
@@ -609,7 +610,7 @@ class CalculationWithCalculableObjectFacadeTest extends Unit
      *
      * @return \Orm\Zed\Product\Persistence\SpyProductAbstract
      */
-    protected function createAbstractProduct(SpyTaxSet $taxSetEntity)
+    protected function createAbstractProduct(SpyTaxSet $taxSetEntity): SpyProductAbstract
     {
         $abstractProductEntity = new SpyProductAbstract();
         $abstractProductEntity->setSku('test-abstract-sku');
@@ -623,7 +624,7 @@ class CalculationWithCalculableObjectFacadeTest extends Unit
     /**
      * @return \Orm\Zed\Tax\Persistence\SpyTaxSet
      */
-    protected function createTaxSet()
+    protected function createTaxSet(): SpyTaxSet
     {
         $taxSetEntity = new SpyTaxSet();
         $taxSetEntity->setName('name of tax set');
@@ -638,7 +639,7 @@ class CalculationWithCalculableObjectFacadeTest extends Unit
      *
      * @return void
      */
-    protected function createTaxSetTax(SpyTaxSet $taxSetEntity, SpyTaxRate $taxRateEntity)
+    protected function createTaxSetTax(SpyTaxSet $taxSetEntity, SpyTaxRate $taxRateEntity): void
     {
         $taxSetTaxRateEntity = new SpyTaxSetTax();
         $taxSetTaxRateEntity->setFkTaxSet($taxSetEntity->getIdTaxSet());
@@ -649,7 +650,7 @@ class CalculationWithCalculableObjectFacadeTest extends Unit
     /**
      * @return \Generated\Shared\Transfer\StoreTransfer
      */
-    protected function getCurrentStoreTransfer()
+    protected function getCurrentStoreTransfer(): StoreTransfer
     {
         return (new StoreTransfer())
             ->setIdStore(1)

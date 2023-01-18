@@ -16,7 +16,7 @@ abstract class CombinedProductMandatoryColumnCondition implements DataSetConditi
      * Specification:
      * - Returns a list of columns.
      *
-     * @return string[]
+     * @return array<string>
      */
     abstract protected function getMandatoryColumns(): array;
 

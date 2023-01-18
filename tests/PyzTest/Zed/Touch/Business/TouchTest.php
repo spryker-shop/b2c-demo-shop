@@ -25,7 +25,7 @@ class TouchTest extends Unit
     /**
      * @return void
      */
-    public function testDatabaseAccessWorks()
+    public function testDatabaseAccessWorks(): void
     {
         $query = SpyTouchQuery::create();
         $query->count();

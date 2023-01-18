@@ -2,9 +2,10 @@
 
 $stores = [];
 
-if (!empty(getenv('SPRYKER_ACTIVE_STORES'))) {
+if (getenv('SPRYKER_ACTIVE_STORES')) {
     $activeStores = array_map('trim', explode(',', getenv('SPRYKER_ACTIVE_STORES')));
 
+    $templates = [];
     $templates['default'] = [
         // different contexts
         'contexts' => [

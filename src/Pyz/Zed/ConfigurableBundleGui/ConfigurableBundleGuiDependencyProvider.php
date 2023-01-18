@@ -18,7 +18,7 @@ use Spryker\Zed\ProductListGui\Communication\Plugin\ConfigurableBundleGui\Produc
 class ConfigurableBundleGuiDependencyProvider extends SprykerConfigurableBundleGuiDependencyProvider
 {
     /**
-     * @return \Spryker\Zed\ConfigurableBundleGuiExtension\Dependency\Plugin\ConfigurableBundleTemplateSlotEditTabsExpanderPluginInterface[]
+     * @return array<\Spryker\Zed\ConfigurableBundleGuiExtension\Dependency\Plugin\ConfigurableBundleTemplateSlotEditTabsExpanderPluginInterface>
      */
     protected function getConfigurableBundleTemplateSlotEditTabsExpanderPlugins(): array
     {
@@ -28,7 +28,7 @@ class ConfigurableBundleGuiDependencyProvider extends SprykerConfigurableBundleG
     }
 
     /**
-     * @return \Spryker\Zed\ConfigurableBundleGuiExtension\Dependency\Plugin\ConfigurableBundleTemplateSlotEditFormExpanderPluginInterface[]
+     * @return array<\Spryker\Zed\ConfigurableBundleGuiExtension\Dependency\Plugin\ConfigurableBundleTemplateSlotEditFormExpanderPluginInterface>
      */
     protected function getConfigurableBundleTemplateSlotEditFormExpanderPlugins(): array
     {
@@ -38,7 +38,7 @@ class ConfigurableBundleGuiDependencyProvider extends SprykerConfigurableBundleG
     }
 
     /**
-     * @return \Spryker\Zed\ConfigurableBundleGuiExtension\Dependency\Plugin\ConfigurableBundleTemplateSlotEditFormDataProviderExpanderPluginInterface[]
+     * @return array<\Spryker\Zed\ConfigurableBundleGuiExtension\Dependency\Plugin\ConfigurableBundleTemplateSlotEditFormDataProviderExpanderPluginInterface>
      */
     protected function getConfigurableBundleTemplateSlotEditFormDataProviderExpanderPlugins(): array
     {
@@ -48,7 +48,7 @@ class ConfigurableBundleGuiDependencyProvider extends SprykerConfigurableBundleG
     }
 
     /**
-     * @return \Spryker\Zed\ConfigurableBundleGuiExtension\Dependency\Plugin\ConfigurableBundleTemplateSlotEditFormFileUploadHandlerPluginInterface[]
+     * @return array<\Spryker\Zed\ConfigurableBundleGuiExtension\Dependency\Plugin\ConfigurableBundleTemplateSlotEditFormFileUploadHandlerPluginInterface>
      */
     protected function getConfigurableBundleTemplateSlotEditFormFileUploadHandlerPlugins(): array
     {
@@ -58,7 +58,7 @@ class ConfigurableBundleGuiDependencyProvider extends SprykerConfigurableBundleG
     }
 
     /**
-     * @return \Spryker\Zed\ConfigurableBundleGuiExtension\Dependency\Plugin\ConfigurableBundleTemplateSlotEditSubTabsProviderPluginInterface[]
+     * @return array<\Spryker\Zed\ConfigurableBundleGuiExtension\Dependency\Plugin\ConfigurableBundleTemplateSlotEditSubTabsProviderPluginInterface>
      */
     protected function getConfigurableBundleTemplateSlotEditSubTabsProviderPlugins(): array
     {
@@ -68,7 +68,7 @@ class ConfigurableBundleGuiDependencyProvider extends SprykerConfigurableBundleG
     }
 
     /**
-     * @return \Spryker\Zed\ConfigurableBundleGuiExtension\Dependency\Plugin\ConfigurableBundleTemplateSlotEditTablesProviderPluginInterface[]
+     * @return array<\Spryker\Zed\ConfigurableBundleGuiExtension\Dependency\Plugin\ConfigurableBundleTemplateSlotEditTablesProviderPluginInterface>
      */
     protected function getConfigurableBundleTemplateSlotEditTablesProviderPlugins(): array
     {

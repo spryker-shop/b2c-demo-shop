@@ -27,7 +27,7 @@ class CartsRestApiDependencyProvider extends SprykerCartsRestApiDependencyProvid
     }
 
     /**
-     * @return \Spryker\Zed\CartsRestApiExtension\Dependency\Plugin\CartItemMapperPluginInterface[]
+     * @return array<\Spryker\Zed\CartsRestApiExtension\Dependency\Plugin\CartItemMapperPluginInterface>
      */
     protected function getCartItemMapperPlugins(): array
     {
@@ -39,7 +39,7 @@ class CartsRestApiDependencyProvider extends SprykerCartsRestApiDependencyProvid
     }
 
     /**
-     * @return \Spryker\Zed\CartsRestApiExtension\Dependency\Plugin\QuoteItemReadValidatorPluginInterface[]
+     * @return array<\Spryker\Zed\CartsRestApiExtension\Dependency\Plugin\QuoteItemReadValidatorPluginInterface>
      */
     protected function getQuoteItemReadValidatorPlugins(): array
     {

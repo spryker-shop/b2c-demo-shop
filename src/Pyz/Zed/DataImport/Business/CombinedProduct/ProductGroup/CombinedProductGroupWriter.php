@@ -16,10 +16,12 @@ class CombinedProductGroupWriter extends ProductGroupWriter
      * @var string
      */
     public const COLUMN_ABSTRACT_SKU = 'abstract_sku';
+
     /**
      * @var string
      */
     public const COLUMN_PRODUCT_GROUP_KEY = 'product_group.group_key';
+
     /**
      * @var string
      */

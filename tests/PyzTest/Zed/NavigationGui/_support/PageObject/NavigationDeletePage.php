@@ -13,6 +13,7 @@ class NavigationDeletePage
      * @var string
      */
     public const URL = '/navigation-gui/delete?id-navigation=%d';
+
     /**
      * @var string
      */

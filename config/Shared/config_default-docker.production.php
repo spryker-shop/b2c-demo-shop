@@ -110,7 +110,7 @@ if (!getenv('SPRYKER_SSL_ENABLE')) {
     $config[ApplicationConstants::BASE_URL_ZED] = sprintf(
         'http://%s%s',
         getenv('SPRYKER_BE_HOST'),
-        $backofficePort !== 80 ? ':' . $backofficePort : ''
+        $backofficePort !== 80 ? ':' . $backofficePort : '',
     );
 
 // ----------------------------------------------------------------------------
@@ -126,7 +126,7 @@ if (!getenv('SPRYKER_SSL_ENABLE')) {
         = sprintf(
             'http://%s%s',
             $yvesHost,
-            $yvesPort !== 80 ? ':' . $yvesPort : ''
+            $yvesPort !== 80 ? ':' . $yvesPort : '',
         );
 
 // ----------------------------------------------------------------------------
@@ -138,7 +138,7 @@ if (!getenv('SPRYKER_SSL_ENABLE')) {
     $config[GlueApplicationConstants::GLUE_APPLICATION_DOMAIN] = sprintf(
         'http://%s%s',
         $glueHost,
-        $gluePort !== 80 ? ':' . $gluePort : ''
+        $gluePort !== 80 ? ':' . $gluePort : '',
     );
 
     if (class_exists(TestifyConstants::class, true)) {
@@ -157,9 +157,9 @@ $config[TwigConstants::ZED_TWIG_OPTIONS] = [
         sprintf(
             '%s/data/%s/cache/Zed/twig',
             APPLICATION_ROOT_DIR,
-            $CURRENT_STORE
+            $CURRENT_STORE,
         ),
-        FilesystemCache::FORCE_BYTECODE_INVALIDATION
+        FilesystemCache::FORCE_BYTECODE_INVALIDATION,
     ),
 ];
 
@@ -168,9 +168,9 @@ $config[TwigConstants::YVES_TWIG_OPTIONS] = [
         sprintf(
             '%s/data/%s/cache/Yves/twig',
             APPLICATION_ROOT_DIR,
-            $CURRENT_STORE
+            $CURRENT_STORE,
         ),
-        FilesystemCache::FORCE_BYTECODE_INVALIDATION
+        FilesystemCache::FORCE_BYTECODE_INVALIDATION,
     ),
 ];
 

@@ -17,7 +17,7 @@ class ProductSetPageSearchDependencyProvider extends SprykerProductSetPageSearch
     /**
      * @return array
      */
-    protected function getProductSetListResultFormatterPlugins()
+    protected function getProductSetListResultFormatterPlugins(): array
     {
         return [
             new ProductSetPageSearchListResultFormatterPlugin(),
@@ -27,7 +27,7 @@ class ProductSetPageSearchDependencyProvider extends SprykerProductSetPageSearch
     /**
      * @return array
      */
-    protected function getProductSetListQueryExpanderPlugins()
+    protected function getProductSetListQueryExpanderPlugins(): array
     {
         return [
             new LocalizedQueryExpanderPlugin(),

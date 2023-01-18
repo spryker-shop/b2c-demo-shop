@@ -5,6 +5,8 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
+use PHP_CodeSniffer\Config;
+
 define('APPLICATION_ROOT_DIR', __DIR__);
 define('APPLICATION_VENDOR_DIR', APPLICATION_ROOT_DIR . '/vendor');
 define('APPLICATION_SOURCE_DIR', APPLICATION_ROOT_DIR . '/src');
@@ -24,7 +26,7 @@ if (file_exists($codeceptionShimFilePath)) {
 }
 
 $manualAutoload = APPLICATION_VENDOR_DIR . '/squizlabs/php_codesniffer/autoload.php';
-if (!class_exists(\PHP_CodeSniffer\Config::class) && file_exists($manualAutoload)) {
+if (!class_exists(Config::class) && file_exists($manualAutoload)) {
     require $manualAutoload;
 }
 
@@ -36,7 +38,7 @@ if (!function_exists('opcache_invalidate')) {
      *
      * @return void
      */
-    function opcache_invalidate($script, $force = false)
+    function opcache_invalidate($script, $force = false): void
     {
     }
 }

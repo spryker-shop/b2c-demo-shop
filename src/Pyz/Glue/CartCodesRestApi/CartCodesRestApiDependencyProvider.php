@@ -13,7 +13,7 @@ use Spryker\Glue\DiscountPromotionsRestApi\Plugin\CartCodesRestApi\DiscountPromo
 class CartCodesRestApiDependencyProvider extends SprykerCartCodesRestApiDependencyProvider
 {
     /**
-     * @return \Spryker\Glue\CartCodesRestApiExtension\Dependency\Plugin\DiscountMapperPluginInterface[]
+     * @return array<\Spryker\Glue\CartCodesRestApiExtension\Dependency\Plugin\DiscountMapperPluginInterface>
      */
     protected function getDiscountMapperPlugins(): array
     {

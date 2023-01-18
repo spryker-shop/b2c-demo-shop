@@ -29,7 +29,7 @@ class CustomerLogoutCest
      *
      * @return void
      */
-    public function testICanLogoutWhenLoggedIn(CustomerPresentationTester $i)
+    public function testICanLogoutWhenLoggedIn(CustomerPresentationTester $i): void
     {
         $i->amOnPage(CustomerLoginPage::URL);
         $customerTransfer = $i->haveRegisteredCustomer();

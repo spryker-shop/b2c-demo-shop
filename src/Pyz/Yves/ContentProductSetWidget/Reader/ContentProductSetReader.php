@@ -29,7 +29,7 @@ class ContentProductSetReader implements ContentProductSetReaderInterface
      */
     public function __construct(
         ContentProductSetWidgetToContentProductSetClientInterface $contentProductSetClient,
-        ContentProductSetWidgetToProductSetStorageClientInterface $productSetStorageClient
+        ContentProductSetWidgetToProductSetStorageClientInterface $productSetStorageClient,
     ) {
         $this->contentProductSetClient = $contentProductSetClient;
         $this->productSetStorageClient = $productSetStorageClient;

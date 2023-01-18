@@ -48,7 +48,7 @@ class CustomerPresentationTester extends Actor
      *
      * @return void
      */
-    public function submitLoginForm($email, $password)
+    public function submitLoginForm($email, $password): void
     {
         $i = $this;
         $i->submitForm(['name' => 'loginForm'], [
@@ -60,7 +60,7 @@ class CustomerPresentationTester extends Actor
     /**
      * @return void
      */
-    public function fillOutRegistrationForm()
+    public function fillOutRegistrationForm(): void
     {
         $i = $this;
         $customerTransfer = CustomerRegistrationPage::getCustomerData(CustomerRegistrationPage::NEW_CUSTOMER_EMAIL);
