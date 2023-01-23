@@ -26,6 +26,9 @@ use SprykerShop\Yves\CustomerPage\Plugin\CheckoutPage\CheckoutAddressFormDataPro
 use SprykerShop\Yves\CustomerPage\Plugin\CheckoutPage\CustomerAddressExpanderPlugin;
 use SprykerShop\Yves\CustomerPage\Plugin\CustomerStepHandler;
 use SprykerShop\Yves\PaymentPage\Plugin\PaymentPage\PaymentForeignPaymentCollectionExtenderPlugin;
+use SprykerShop\Yves\QuoteRequestAgentPage\Plugin\CheckoutPage\QuoteRequestAgentCheckoutWorkflowStepResolverStrategyPlugin;
+use SprykerShop\Yves\QuoteRequestPage\Plugin\CheckoutPage\QuoteRequestCheckoutWorkflowStepResolverStrategyPlugin;
+use SprykerShop\Yves\QuoteRequestPage\Plugin\CheckoutPage\QuoteWithCustomShipmentPriceCheckoutWorkflowStepResolverStrategyPlugin;
 use SprykerShop\Yves\SalesOrderThresholdWidget\Plugin\CheckoutPage\SalesOrderThresholdWidgetPlugin;
 use Symfony\Component\Form\FormFactory;
 
@@ -55,7 +58,7 @@ class CheckoutPageDependencyProvider extends SprykerShopCheckoutPageDependencyPr
     protected function getSummaryPageWidgetPlugins(): array
     {
         return [
-            SalesOrderThresholdWidgetPlugin::class, #SalesOrderThresholdFeature
+            SalesOrderThresholdWidgetPlugin::class, // SalesOrderThresholdFeature
         ];
     }
 
@@ -114,12 +117,14 @@ class CheckoutPageDependencyProvider extends SprykerShopCheckoutPageDependencyPr
      */
     protected function extendPyzPaymentMethodHandler(Container $container): Container
     {
-        $container->extend(static::PAYMENT_METHOD_HANDLER, function (StepHandlerPluginCollection $paymentMethodHandler) {
-            $paymentMethodHandler->add(new NopaymentHandlerPlugin(), NopaymentConfig::PAYMENT_PROVIDER_NAME);
-            $paymentMethodHandler->add(new PaymentForeignHandlerPlugin(), PaymentTransfer::FOREIGN_PAYMENTS);
+        $container->extend(
+            static::PAYMENT_METHOD_HANDLER, function (StepHandlerPluginCollection $paymentMethodHandler) {
+                $paymentMethodHandler->add(new NopaymentHandlerPlugin(), NopaymentConfig::PAYMENT_PROVIDER_NAME);
+                $paymentMethodHandler->add(new PaymentForeignHandlerPlugin(), PaymentTransfer::FOREIGN_PAYMENTS);
 
-            return $paymentMethodHandler;
-        });
+                return $paymentMethodHandler;
+            }
+        );
 
         return $container;
     }
@@ -157,6 +162,17 @@ class CheckoutPageDependencyProvider extends SprykerShopCheckoutPageDependencyPr
     {
         return [
             new PaymentForeignPaymentCollectionExtenderPlugin(),
+        ];
+    }
+    /**
+     * @return array<\SprykerShop\Yves\CheckoutPageExtension\Dependency\Plugin\CheckoutStepResolverStrategyPluginInterface>
+     */
+    protected function getCheckoutStepResolverStrategyPlugins() : array
+    {
+        return [
+            new QuoteRequestAgentCheckoutWorkflowStepResolverStrategyPlugin(),
+            new QuoteRequestCheckoutWorkflowStepResolverStrategyPlugin(),
+            new QuoteWithCustomShipmentPriceCheckoutWorkflowStepResolverStrategyPlugin(),
         ];
     }
 }

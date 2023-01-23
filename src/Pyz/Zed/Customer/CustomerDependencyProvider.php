@@ -10,6 +10,7 @@ namespace Pyz\Zed\Customer;
 use Spryker\Shared\Newsletter\NewsletterConstants;
 use Spryker\Zed\AvailabilityNotification\Communication\Plugin\Customer\AvailabilityNotificationSubscriptionCustomerTransferExpanderPlugin;
 use Spryker\Zed\AvailabilityNotification\Communication\Plugin\CustomerAnonymizer\AvailabilityNotificationAnonymizerPlugin;
+use Spryker\Zed\CompanyUser\Communication\Plugin\Customer\IsActiveCompanyUserExistsCustomerTransferExpanderPlugin;
 use Spryker\Zed\Customer\CustomerDependencyProvider as SprykerCustomerDependencyProvider;
 use Spryker\Zed\CustomerGroup\Communication\Plugin\CustomerAnonymizer\RemoveCustomerFromGroupPlugin;
 use Spryker\Zed\CustomerUserConnector\Communication\Plugin\CustomerTransferUsernameExpanderPlugin;
@@ -37,13 +38,17 @@ class CustomerDependencyProvider extends SprykerCustomerDependencyProvider
     {
         $container = parent::provideCommunicationLayerDependencies($container);
 
-        $container->set(static::PYZ_SALES_FACADE, function (Container $container) {
-            return $container->getLocator()->sales()->facade();
-        });
+        $container->set(
+            static::PYZ_SALES_FACADE, function (Container $container) {
+                return $container->getLocator()->sales()->facade();
+            }
+        );
 
-        $container->set(static::PYZ_NEWSLETTER_FACADE, function (Container $container) {
-            return $container->getLocator()->newsletter()->facade();
-        });
+        $container->set(
+            static::PYZ_NEWSLETTER_FACADE, function (Container $container) {
+                return $container->getLocator()->newsletter()->facade();
+            }
+        );
 
         return $container;
     }
@@ -54,9 +59,11 @@ class CustomerDependencyProvider extends SprykerCustomerDependencyProvider
     protected function getCustomerAnonymizerPlugins()
     {
         return [
-            new CustomerUnsubscribePlugin([
+            new CustomerUnsubscribePlugin(
+                [
                 NewsletterConstants::DEFAULT_NEWSLETTER_TYPE,
-            ]),
+                ]
+            ),
             new RemoveCustomerFromGroupPlugin(),
             new AvailabilityNotificationAnonymizerPlugin(),
         ];
@@ -70,6 +77,7 @@ class CustomerDependencyProvider extends SprykerCustomerDependencyProvider
         return [
             new CustomerTransferUsernameExpanderPlugin(),
             new AvailabilityNotificationSubscriptionCustomerTransferExpanderPlugin(),
+            new IsActiveCompanyUserExistsCustomerTransferExpanderPlugin(),
         ];
     }
 }

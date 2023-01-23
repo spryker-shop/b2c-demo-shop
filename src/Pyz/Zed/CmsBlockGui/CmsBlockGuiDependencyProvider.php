@@ -24,10 +24,12 @@ class CmsBlockGuiDependencyProvider extends CmsBlockGuiCmsBlockGuiDependencyProv
     protected function getCmsBlockFormPlugins()
     {
         $plugins = parent::getCmsBlockFormPlugins();
-        $plugins = array_merge($plugins, [
+        $plugins = array_merge(
+            $plugins, [
             new CmsBlockCategoryFormPlugin(),
             new CmsBlockProductAbstractFormPlugin(),
-        ]);
+            ]
+        );
 
         return $plugins;
     }
@@ -37,10 +39,12 @@ class CmsBlockGuiDependencyProvider extends CmsBlockGuiCmsBlockGuiDependencyProv
      */
     protected function getCmsBlockViewPlugins()
     {
-        return array_merge(parent::getCmsBlockViewPlugins(), [
+        return array_merge(
+            parent::getCmsBlockViewPlugins(), [
             new CmsBlockCategoryListViewPlugin(),
             new CmsBlockProductAbstractListViewPlugin(),
-        ]);
+            ]
+        );
     }
 
     /**

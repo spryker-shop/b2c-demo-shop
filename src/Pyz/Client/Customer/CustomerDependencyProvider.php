@@ -7,6 +7,7 @@
 
 namespace Pyz\Client\Customer;
 
+use Spryker\Client\Agent\Plugin\Customer\AgentAccessCustomerSecuredPatternRulePlugin;
 use Spryker\Client\Cart\Plugin\CustomerChangeCartUpdatePlugin;
 use Spryker\Client\Customer\CustomerDependencyProvider as SprykerCustomerDependencyProvider;
 use Spryker\Client\Customer\Plugin\CustomerAddressSessionUpdatePlugin;
@@ -53,7 +54,7 @@ class CustomerDependencyProvider extends SprykerCustomerDependencyProvider
     protected function getCustomerSecuredPatternRulePlugins(): array
     {
         return [
-            new CustomerAccessSecuredPatternRulePlugin(), #CustomerAccessPermissionFeature
+            new CustomerAccessSecuredPatternRulePlugin(), new AgentAccessCustomerSecuredPatternRulePlugin(), // CustomerAccessPermissionFeature
         ];
     }
 }

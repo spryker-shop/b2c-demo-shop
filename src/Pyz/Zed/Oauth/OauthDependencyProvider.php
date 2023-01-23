@@ -55,10 +55,12 @@ class OauthDependencyProvider extends SprykerOauthDependencyProvider
      */
     protected function getGrantTypeConfigurationProviderPlugins(): array
     {
-        return array_merge(parent::getGrantTypeConfigurationProviderPlugins(), [
+        return array_merge(
+            parent::getGrantTypeConfigurationProviderPlugins(), [
             new AgentCredentialsOauthGrantTypeConfigurationProviderPlugin(),
             new CustomerImpersonationOauthGrantTypeConfigurationProviderPlugin(),
-        ]);
+            ]
+        );
     }
 
     /**

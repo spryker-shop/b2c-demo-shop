@@ -49,6 +49,7 @@ use SprykerShop\Yves\ProductNewPage\Plugin\Router\ProductNewPageRouteProviderPlu
 use SprykerShop\Yves\ProductReviewWidget\Plugin\Router\ProductReviewWidgetRouteProviderPlugin;
 use SprykerShop\Yves\ProductSearchWidget\Plugin\Router\ProductSearchWidgetRouteProviderPlugin;
 use SprykerShop\Yves\ProductSetListPage\Plugin\Router\ProductSetListPageRouteProviderPlugin;
+use SprykerShop\Yves\QuoteRequestAgentWidget\Plugin\Router\QuoteRequestAgentWidgetRouteProviderPlugin;
 use SprykerShop\Yves\SalesReturnPage\Plugin\Router\SalesReturnPageRouteProviderPlugin;
 use SprykerShop\Yves\StorageRouter\Plugin\Router\StorageRouterPlugin;
 use SprykerShop\Yves\WishlistPage\Plugin\Router\WishlistPageRouteProviderPlugin;
@@ -95,11 +96,11 @@ class RouterDependencyProvider extends SprykerRouterDependencyProvider
             new DiscountWidgetRouteProviderPlugin(),
             new PriceWidgetRouteProviderPlugin(),
             new CartCodeWidgetRouteProviderPlugin(),
-            new CartNoteWidgetRouteProviderPlugin(), #CartNoteFeature
-            new AgentPageRouteProviderPlugin(), #AgentFeature
-            new AgentWidgetRouteProviderPlugin(), #AgentFeature
+            new CartNoteWidgetRouteProviderPlugin(), // CartNoteFeature
+            new AgentPageRouteProviderPlugin(), // AgentFeature
+            new AgentWidgetRouteProviderPlugin(), // AgentFeature
             new FileManagerWidgetRouteProviderPlugin(),
-            new CmsSearchPageRouteProviderPlugin(), #CmsSearchPageFeature
+            new CmsSearchPageRouteProviderPlugin(), // CmsSearchPageFeature
             new ProductSearchWidgetRouteProviderPlugin(),
             new AvailabilityNotificationWidgetRouteProviderPlugin(),
             new AvailabilityNotificationPageRouteProviderPlugin(),
@@ -110,6 +111,7 @@ class RouterDependencyProvider extends SprykerRouterDependencyProvider
             new SalesReturnPageRouteProviderPlugin(),
             new OrderCancelWidgetRouteProviderPlugin(),
             new PaymentPageRouteProviderPlugin(),
+            new QuoteRequestAgentWidgetRouteProviderPlugin(),
         ];
     }
 

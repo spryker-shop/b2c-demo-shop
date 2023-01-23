@@ -185,13 +185,15 @@ class CalculationDependencyProvider extends SprykerCalculationDependencyProvider
      */
     protected function getQuoteCalculatorPluginStack(Container $container)
     {
-        /** @var \Spryker\Zed\Calculation\Dependency\Plugin\CalculationPluginInterface[] $pluginStack */
+        /**
+ * @var \Spryker\Zed\Calculation\Dependency\Plugin\CalculationPluginInterface[] $pluginStack 
+*/
         $pluginStack = [
             new RemoveTotalsCalculatorPlugin(),
             new RemoveAllCalculatedDiscountsCalculatorPlugin(),
             new RemovePromotionItemsCalculatorPlugin(),
             new RemoveCanceledAmountCalculatorPlugin(),
-            new RemoveSalesOrderThresholdExpenseCalculatorPlugin(), #SalesOrderThresholdFeature
+            new RemoveSalesOrderThresholdExpenseCalculatorPlugin(), // SalesOrderThresholdFeature
             new FilterObsoleteShipmentExpensesCalculatorPlugin(),
 
             new PriceCalculatorPlugin(),
@@ -199,13 +201,13 @@ class CalculationDependencyProvider extends SprykerCalculationDependencyProvider
             new ItemSubtotalAggregatorPlugin(),
 
             new SubtotalCalculatorPlugin(),
-            new AddSalesOrderThresholdExpenseCalculatorPlugin(), #SalesOrderThresholdFeature
+            new AddSalesOrderThresholdExpenseCalculatorPlugin(), // SalesOrderThresholdFeature
 
             new ProductItemTaxRateCalculatorPlugin(),
             new ProductOptionTaxRateCalculatorPlugin(),
             new ShipmentTaxRateCalculatorPlugin(),
 
-            new GiftCardCalculatorPlugin(), #GiftCardFeature
+            new GiftCardCalculatorPlugin(), // GiftCardFeature
 
             new InitialGrandTotalCalculatorPlugin(),
             new DiscountCalculationPlugin(),

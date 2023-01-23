@@ -41,9 +41,9 @@ class InstallerDependencyProvider extends SprykerInstallerDependencyProvider
             new GlossaryInstallerPlugin(),
             new CustomerAccessInstallerPlugin(),
             new TranslatorInstallerPlugin(),
-            new ProductAlternativeProductLabelConnectorInstallerPlugin(), #ProductAlternativeFeature
-            new ProductDiscontinuedProductLabelConnectorInstallerPlugin(), #ProductDiscontinuedFeature
-            new SalesOrderThresholdTypeInstallerPlugin(), #SalesOrderThresholdFeature
+            new ProductAlternativeProductLabelConnectorInstallerPlugin(), // ProductAlternativeFeature
+            new ProductDiscontinuedProductLabelConnectorInstallerPlugin(), // ProductDiscontinuedFeature
+            new SalesOrderThresholdTypeInstallerPlugin(), // SalesOrderThresholdFeature
             new OauthClientInstallerPlugin(),
             new OauthCustomerScopeInstallerPlugin(),
             new AgentOauthScopeInstallerPlugin(),

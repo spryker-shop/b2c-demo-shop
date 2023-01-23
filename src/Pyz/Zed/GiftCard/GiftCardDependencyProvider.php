@@ -37,8 +37,10 @@ class GiftCardDependencyProvider extends SprykerGiftCardDependencyProvider
      */
     protected function getDecisionRulePlugins()
     {
-        return array_merge(parent::getDecisionRulePlugins(), [
+        return array_merge(
+            parent::getDecisionRulePlugins(), [
             new BalanceCheckerApplicabilityPlugin(),
-        ]);
+            ]
+        );
     }
 }

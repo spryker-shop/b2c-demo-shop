@@ -61,8 +61,8 @@ class ProductManagementDependencyProvider extends SprykerProductManagementDepend
     protected function getProductConcreteFormEditTabsExpanderPlugins(): array
     {
         return [
-            new DiscontinueProductConcreteFormEditTabsExpanderPlugin(), #ProductDiscontinuedFeature
-            new ProductConcreteFormEditTabsExpanderPlugin(), #ProductAlternativeFeature
+            new DiscontinueProductConcreteFormEditTabsExpanderPlugin(), // ProductDiscontinuedFeature
+            new ProductConcreteFormEditTabsExpanderPlugin(), // ProductAlternativeFeature
             new ScheduledPriceProductConcreteFormEditTabsExpanderPlugin(),
         ];
     }
@@ -103,8 +103,8 @@ class ProductManagementDependencyProvider extends SprykerProductManagementDepend
     protected function getProductConcreteEditFormExpanderPlugins(): array
     {
         return [
-            new DiscontinuedProductConcreteEditFormExpanderPlugin(), #ProductDiscontinuedFeature
-            new ProductConcreteEditFormExpanderPlugin(), #ProductAlternativeFeature
+            new DiscontinuedProductConcreteEditFormExpanderPlugin(), // ProductDiscontinuedFeature
+            new ProductConcreteEditFormExpanderPlugin(), // ProductAlternativeFeature
         ];
     }
 
@@ -114,8 +114,8 @@ class ProductManagementDependencyProvider extends SprykerProductManagementDepend
     protected function getProductConcreteFormEditDataProviderExpanderPlugins(): array
     {
         return [
-            new DiscontinueProductConcreteFormEditDataProviderExpanderPlugin(), #ProductDiscontinuedFeature
-            new ProductConcreteFormEditDataProviderExpanderPlugin(), #ProductAlternativeFeature
+            new DiscontinueProductConcreteFormEditDataProviderExpanderPlugin(), // ProductDiscontinuedFeature
+            new ProductConcreteFormEditDataProviderExpanderPlugin(), // ProductAlternativeFeature
         ];
     }
 
@@ -125,8 +125,8 @@ class ProductManagementDependencyProvider extends SprykerProductManagementDepend
     protected function getProductFormTransferMapperExpanderPlugins(): array
     {
         return [
-            new ProductFormTransferMapperExpanderPlugin(), #ProductAlternativeFeature
-            new DiscontinuedNotesProductFormTransferMapperExpanderPlugin(), #ProductDiscontinuedFeature
+            new ProductFormTransferMapperExpanderPlugin(), // ProductAlternativeFeature
+            new DiscontinuedNotesProductFormTransferMapperExpanderPlugin(), // ProductDiscontinuedFeature
         ];
     }
 }
