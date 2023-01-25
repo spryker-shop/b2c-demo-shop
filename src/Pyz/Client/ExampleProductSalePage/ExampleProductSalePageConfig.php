@@ -15,7 +15,7 @@ class ExampleProductSalePageConfig extends AbstractBundleConfig
     /**
      * @return string
      */
-    public function getPyzLabelSaleName()
+    public function getPyzLabelSaleName(): string
     {
         return SharedExampleProductSaleConfig::DEFAULT_LABEL_NAME;
     }

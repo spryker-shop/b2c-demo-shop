@@ -18,14 +18,17 @@ class CustomerProfilePage extends Customer
      * @var string
      */
     public const FORM_FIELD_SELECTOR_SALUTATION = 'profileForm[salutation]';
+
     /**
      * @var string
      */
     public const FORM_FIELD_SELECTOR_FIRST_NAME = 'profileForm[first_name]';
+
     /**
      * @var string
      */
     public const FORM_FIELD_SELECTOR_LAST_NAME = 'profileForm[last_name]';
+
     /**
      * @var string
      */
@@ -35,6 +38,7 @@ class CustomerProfilePage extends Customer
      * @var string
      */
     public const FORM_FIELD_SELECTOR_PASSWORD = 'profileForm[password][pass]';
+
     /**
      * @var string
      */
@@ -44,6 +48,7 @@ class CustomerProfilePage extends Customer
      * @var array
      */
     public const BUTTON_PROFILE_FORM_SUBMIT_SELECTOR = ['name' => 'profileForm'];
+
     /**
      * @var string
      */
@@ -53,6 +58,7 @@ class CustomerProfilePage extends Customer
      * @var string
      */
     public const SUCCESS_MESSAGE = 'Profile was successfully saved';
+
     /**
      * @var string
      */
@@ -62,6 +68,7 @@ class CustomerProfilePage extends Customer
      * @var string
      */
     public const FORM_FIELD_CHANGE_PASSWORD_SELECTOR_PASSWORD = 'passwordForm[password]';
+
     /**
      * @var string
      */
@@ -71,6 +78,7 @@ class CustomerProfilePage extends Customer
      * @var string
      */
     public const FORM_FIELD_CHANGE_PASSWORD_SELECTOR_NEW_PASSWORD_CONFIRM = 'passwordForm[new_password][confirm]';
+
     /**
      * @var string
      */
@@ -85,6 +93,7 @@ class CustomerProfilePage extends Customer
      * @var string
      */
     public const SUCCESS_MESSAGE_CHANGE_PASSWORD = 'Password change successful';
+
     /**
      * @var string
      */

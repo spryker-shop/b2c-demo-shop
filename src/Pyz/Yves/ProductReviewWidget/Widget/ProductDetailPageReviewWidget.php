@@ -260,7 +260,7 @@ class ProductDetailPageReviewWidget extends AbstractWidget
             static::PYZ_PARAMETER_SUMMARY,
             $this->getFactory()
                 ->getProductReviewClient()
-                ->calculateProductReviewSummary($ratingAggregationTransfer)
+                ->calculateProductReviewSummary($ratingAggregationTransfer),
         );
     }
 }

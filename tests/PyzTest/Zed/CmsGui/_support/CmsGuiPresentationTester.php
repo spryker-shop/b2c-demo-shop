@@ -109,7 +109,7 @@ class CmsGuiPresentationTester extends Actor
      *
      * @return void
      */
-    public function fillPlaceholderContents($placeHolderIndex, $localeIndex, $contents)
+    public function fillPlaceholderContents($placeHolderIndex, $localeIndex, $contents): void
     {
         $translationElementId = 'cms_glossary_glossaryAttributes_' . $placeHolderIndex . '_translations_' . $localeIndex . '_translation';
 
@@ -156,7 +156,7 @@ class CmsGuiPresentationTester extends Actor
              var jq = document.createElement("script");
              jq.src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js";
              document.getElementsByTagName("head")[0].appendChild(jq);
-            '
+            ',
         );
 
         $this->wait(3);
@@ -167,7 +167,7 @@ class CmsGuiPresentationTester extends Actor
     /**
      * @return int
      */
-    public function grabCmsPageId()
+    public function grabCmsPageId(): int
     {
         return $this->grabFromCurrentUrl('/id-cms-page=(\d+)/');
     }

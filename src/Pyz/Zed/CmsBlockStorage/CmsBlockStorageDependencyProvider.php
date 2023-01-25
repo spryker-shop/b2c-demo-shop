@@ -13,7 +13,7 @@ use Spryker\Zed\CmsContentWidget\Communication\Plugin\CmsBlockStorage\CmsBlockSt
 class CmsBlockStorageDependencyProvider extends SprykerCmsBlockStorageDependencyProvider
 {
     /**
-     * @return \Spryker\Zed\CmsBlockStorage\Dependency\Plugin\CmsBlockStorageDataExpanderPluginInterface[]
+     * @return array<\Spryker\Zed\CmsBlockStorage\Dependency\Plugin\CmsBlockStorageDataExpanderPluginInterface>
      */
     protected function getContentWidgetDataExpanderPlugins(): array
     {

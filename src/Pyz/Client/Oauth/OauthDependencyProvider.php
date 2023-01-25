@@ -14,7 +14,7 @@ use Spryker\Client\OauthCryptography\Communication\Plugin\Oauth\FileSystemKeyLoa
 class OauthDependencyProvider extends SprykerOauthDependencyProvider
 {
     /**
-     * @return \Spryker\Client\OauthExtension\Dependency\Plugin\KeyLoaderPluginInterface[]
+     * @return array<\Spryker\Client\OauthExtension\Dependency\Plugin\KeyLoaderPluginInterface>
      */
     protected function getKeyLoaderPlugins(): array
     {
@@ -24,7 +24,7 @@ class OauthDependencyProvider extends SprykerOauthDependencyProvider
     }
 
     /**
-     * @return \Spryker\Client\OauthExtension\Dependency\Plugin\AuthorizationValidatorPluginInterface[]
+     * @return array<\Spryker\Client\OauthExtension\Dependency\Plugin\AuthorizationValidatorPluginInterface>
      */
     protected function getAuthorizationValidatorPlugins(): array
     {

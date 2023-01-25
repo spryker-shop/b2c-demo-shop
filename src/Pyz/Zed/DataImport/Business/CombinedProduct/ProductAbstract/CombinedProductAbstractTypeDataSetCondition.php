@@ -16,6 +16,7 @@ class CombinedProductAbstractTypeDataSetCondition implements DataSetConditionInt
      * @var string
      */
     protected const ASSIGNABLE_PRODUCT_TYPE_ABSTRACT = 'abstract';
+
     /**
      * @var string
      */

@@ -14,7 +14,7 @@ use SprykerShop\Yves\TabsWidget\TabsWidgetDependencyProvider as SprykerTabsWidge
 class TabsWidgetDependencyProvider extends SprykerTabsWidgetDependencyProvider
 {
     /**
-     * @return \SprykerShop\Yves\TabsWidgetExtension\Plugin\FullTextSearchTabPluginInterface[]
+     * @return array<\SprykerShop\Yves\TabsWidgetExtension\Plugin\FullTextSearchTabPluginInterface>
      */
     protected function createFullTextSearchPlugins(): array
     {

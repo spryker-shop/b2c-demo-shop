@@ -18,7 +18,7 @@ use Spryker\Client\ProductReview\ProductReviewDependencyProvider as SprykerProdu
 class ProductReviewDependencyProvider extends SprykerProductReviewDependencyProvider
 {
     /**
-     * @return \Spryker\Client\SearchExtension\Dependency\Plugin\QueryExpanderPluginInterface[]
+     * @return array<\Spryker\Client\SearchExtension\Dependency\Plugin\QueryExpanderPluginInterface>
      */
     protected function getProductReviewsBulkQueryExpanderPlugins(): array
     {

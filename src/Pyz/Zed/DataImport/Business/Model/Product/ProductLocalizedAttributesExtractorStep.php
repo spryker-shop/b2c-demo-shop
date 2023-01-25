@@ -35,7 +35,7 @@ class ProductLocalizedAttributesExtractorStep implements DataImportStepInterface
      *
      * @return void
      */
-    public function execute(DataSetInterface $dataSet)
+    public function execute(DataSetInterface $dataSet): void
     {
         $keysToUnset = [];
         $localizedAttributes = [];

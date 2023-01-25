@@ -15,7 +15,7 @@ use Spryker\Zed\CmsSlotBlockProductCategoryGui\Communication\Plugin\ProductCateg
 class CmsSlotBlockGuiDependencyProvider extends SprykerCmsSlotBlockGuiDependencyProvider
 {
     /**
-     * @return \Spryker\Zed\CmsSlotBlockGuiExtension\Communication\Plugin\CmsSlotBlockGuiConditionFormPluginInterface[]
+     * @return array<\Spryker\Zed\CmsSlotBlockGuiExtension\Communication\Plugin\CmsSlotBlockGuiConditionFormPluginInterface>
      */
     protected function getCmsSlotBlockFormPlugins(): array
     {

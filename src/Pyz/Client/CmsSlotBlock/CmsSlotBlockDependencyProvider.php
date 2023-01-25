@@ -15,7 +15,7 @@ use Spryker\Client\CmsSlotBlockProductCategoryConnector\Plugin\CmsSlotBlock\Prod
 class CmsSlotBlockDependencyProvider extends SprykerCmsSlotBlockDependencyProvider
 {
     /**
-     * @return \Spryker\Client\CmsSlotBlockExtension\Dependency\Plugin\CmsSlotBlockVisibilityResolverPluginInterface[]
+     * @return array<\Spryker\Client\CmsSlotBlockExtension\Dependency\Plugin\CmsSlotBlockVisibilityResolverPluginInterface>
      */
     protected function getCmsSlotBlockVisibilityResolverPlugins(): array
     {

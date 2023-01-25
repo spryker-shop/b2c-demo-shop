@@ -29,30 +29,34 @@ class ProductOptionPriceWriterStep extends PublishAwareStep implements DataImpor
      * @var string
      */
     public const KEY_PRODUCT_OPTION_SKU = 'product_option_sku';
+
     /**
      * @var string
      */
     public const KEY_STORE = 'store';
+
     /**
      * @var string
      */
     public const KEY_CURRENCY = 'currency';
+
     /**
      * @var string
      */
     public const KEY_NET_AMOUNT = 'value_net';
+
     /**
      * @var string
      */
     public const KEY_GROSS_AMOUNT = 'value_gross';
 
     /**
-     * @var int[] Keys are store names
+     * @var array<int> Keys are store names
      */
     protected static $idStoreBuffer = [];
 
     /**
-     * @var int[] Keys are currency codes.
+     * @var array<int> Keys are currency codes.
      */
     protected static $idCurrencyBuffer = [];
 
@@ -63,14 +67,14 @@ class ProductOptionPriceWriterStep extends PublishAwareStep implements DataImpor
      *
      * @return void
      */
-    public function execute(DataSetInterface $dataSet)
+    public function execute(DataSetInterface $dataSet): void
     {
         $productOptionValueEntity = SpyProductOptionValueQuery::create()
             ->findOneBySku($dataSet[static::KEY_PRODUCT_OPTION_SKU]);
 
         if ($productOptionValueEntity === null) {
             throw new InvalidDataException(
-                sprintf('Product option SKU (%s) not found in permanent storage.', $dataSet[static::KEY_PRODUCT_OPTION_SKU])
+                sprintf('Product option SKU (%s) not found in permanent storage.', $dataSet[static::KEY_PRODUCT_OPTION_SKU]),
             );
         }
 
@@ -93,7 +97,7 @@ class ProductOptionPriceWriterStep extends PublishAwareStep implements DataImpor
      *
      * @return void
      */
-    protected function publishRelatedProductAbstracts($idProductOptionValue)
+    protected function publishRelatedProductAbstracts($idProductOptionValue): void
     {
         $productAbstractCollection = SpyProductAbstractQuery::create()
             ->joinSpyProductAbstractProductOptionGroup()
@@ -118,7 +122,7 @@ class ProductOptionPriceWriterStep extends PublishAwareStep implements DataImpor
      *
      * @return int|null
      */
-    protected function getIdStore($storeName)
+    protected function getIdStore($storeName): ?int
     {
         if ($storeName === '' || $storeName === null) {
             return null;
@@ -137,7 +141,7 @@ class ProductOptionPriceWriterStep extends PublishAwareStep implements DataImpor
      *
      * @return int
      */
-    protected function getIdCurrency($currencyIsoCode)
+    protected function getIdCurrency($currencyIsoCode): int
     {
         if (!isset(static::$idCurrencyBuffer[$currencyIsoCode])) {
             static::$idCurrencyBuffer[$currencyIsoCode] = SpyCurrencyQuery::create()
@@ -153,7 +157,7 @@ class ProductOptionPriceWriterStep extends PublishAwareStep implements DataImpor
      *
      * @return int|null
      */
-    protected function formatPrice($price)
+    protected function formatPrice($price): ?int
     {
         if ($price === '' || $price === null) {
             return null;

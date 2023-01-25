@@ -7,6 +7,7 @@
 
 namespace Pyz\Zed\ProductStorage\Persistence;
 
+use Orm\Zed\ProductBundle\Persistence\SpyProductBundleQuery;
 use Spryker\Zed\ProductStorage\Persistence\ProductStorageQueryContainerInterface as SprykerProductStorageQueryContainerInterface;
 
 interface ProductStorageQueryContainerInterface extends SprykerProductStorageQueryContainerInterface
@@ -18,7 +19,7 @@ interface ProductStorageQueryContainerInterface extends SprykerProductStorageQue
      *
      * @return \Orm\Zed\ProductBundle\Persistence\SpyProductBundleQuery
      */
-    public function queryPyzBundledProductIdsByProductConcreteId($idProductConcrete);
+    public function queryPyzBundledProductIdsByProductConcreteId($idProductConcrete): SpyProductBundleQuery;
 
     /**
      * @api
@@ -27,5 +28,5 @@ interface ProductStorageQueryContainerInterface extends SprykerProductStorageQue
      *
      * @return \Orm\Zed\ProductBundle\Persistence\SpyProductBundleQuery
      */
-    public function queryPyzBundleProduct($idProductConcrete);
+    public function queryPyzBundleProduct($idProductConcrete): SpyProductBundleQuery;
 }

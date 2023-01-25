@@ -14,7 +14,7 @@ use SprykerShop\Yves\CmsBlockWidget\Plugin\Twig\CmsBlockWidgetTwigPlugin;
 class CmsBlockWidgetDependencyProvider extends SprykerCmsBlockWidgetDependencyProvider
 {
     /**
-     * @return \Spryker\Shared\Twig\TwigExtensionInterface[]
+     * @return array<\Spryker\Shared\Twig\TwigExtensionInterface>
      */
     protected function getTwigExtensionPlugins(): array
     {

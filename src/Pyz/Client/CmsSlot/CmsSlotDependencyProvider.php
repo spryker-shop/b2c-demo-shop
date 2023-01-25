@@ -14,7 +14,7 @@ use Spryker\Client\CmsSlotStoreConnector\Plugin\CmsSlot\StoreExternalDataProvide
 class CmsSlotDependencyProvider extends SprykerCmsSlotDependencyProvider
 {
     /**
-     * @return \Spryker\Client\CmsSlotExtension\Dependency\Plugin\ExternalDataProviderStrategyPluginInterface[]
+     * @return array<\Spryker\Client\CmsSlotExtension\Dependency\Plugin\ExternalDataProviderStrategyPluginInterface>
      */
     public function getExternalDataProviderStrategyPlugins(): array
     {

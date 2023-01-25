@@ -32,7 +32,7 @@ class ContentProductWidgetFactory extends SprykerContentProductWidgetFactory
         return new TwigFunction(
             $functionProvider->getFunctionName(),
             $functionProvider->getFunction(),
-            $functionProvider->getOptions()
+            $functionProvider->getOptions(),
         );
     }
 
@@ -47,7 +47,7 @@ class ContentProductWidgetFactory extends SprykerContentProductWidgetFactory
         return new ContentProductAbstractListTwigFunctionProvider(
             $twig,
             $localeName,
-            $this->createPyzContentProductAbstractReader()
+            $this->createPyzContentProductAbstractReader(),
         );
     }
 
@@ -58,7 +58,7 @@ class ContentProductWidgetFactory extends SprykerContentProductWidgetFactory
     {
         return new ContentProductAbstractReader(
             $this->getPyzContentProductClient(),
-            $this->getPyzProductStorageClient()
+            $this->getPyzProductStorageClient(),
         );
     }
 

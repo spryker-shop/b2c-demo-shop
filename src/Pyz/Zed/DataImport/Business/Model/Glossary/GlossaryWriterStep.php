@@ -25,14 +25,17 @@ class GlossaryWriterStep extends PublishAwareStep implements DataImportStepInter
      * @var string
      */
     public const KEY_KEY = 'key';
+
     /**
      * @var string
      */
     public const KEY_TRANSLATION = 'translation';
+
     /**
      * @var string
      */
     public const KEY_ID_LOCALE = 'idLocale';
+
     /**
      * @var string
      */
@@ -43,7 +46,7 @@ class GlossaryWriterStep extends PublishAwareStep implements DataImportStepInter
      *
      * @return void
      */
-    public function execute(DataSetInterface $dataSet)
+    public function execute(DataSetInterface $dataSet): void
     {
         $glossaryKeyEntity = SpyGlossaryKeyQuery::create()
             ->filterByKey($dataSet[static::KEY_KEY])

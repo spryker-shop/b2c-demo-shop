@@ -38,50 +38,62 @@ class ProductSetWriterStep extends PublishAwareStep implements DataImportStepInt
      * @var string
      */
     public const KEY_PRODUCT_SET_KEY = 'product_set_key';
+
     /**
      * @var string
      */
     public const KEY_NAME = 'name';
+
     /**
      * @var string
      */
     public const KEY_DESCRIPTION = 'description';
+
     /**
      * @var string
      */
     public const KEY_META_TITLE = 'meta_title';
+
     /**
      * @var string
      */
     public const KEY_META_DESCRIPTION = 'meta_description';
+
     /**
      * @var string
      */
     public const KEY_META_KEYWORDS = 'meta_keywords';
+
     /**
      * @var string
      */
     public const KEY_URL = 'url';
+
     /**
      * @var string
      */
     public const KEY_IS_ACTIVE = 'is_active';
+
     /**
      * @var string
      */
     public const KEY_WEIGHT = 'weight';
+
     /**
      * @var string
      */
     public const KEY_ABSTRACT_SKUS = 'abstract_skus';
+
     /**
      * @var string
      */
     public const KEY_IMAGE_SET = 'image_set';
+
     /**
      * @var string
      */
     public const KEY_IMAGES = 'images';
+
     /**
      * @var string
      */
@@ -105,7 +117,7 @@ class ProductSetWriterStep extends PublishAwareStep implements DataImportStepInt
      *
      * @return void
      */
-    public function execute(DataSetInterface $dataSet)
+    public function execute(DataSetInterface $dataSet): void
     {
         $productSetEntity = $this->findOrCreateProductSet($dataSet);
 
@@ -119,7 +131,7 @@ class ProductSetWriterStep extends PublishAwareStep implements DataImportStepInt
      *
      * @return \Orm\Zed\ProductSet\Persistence\SpyProductSet
      */
-    protected function findOrCreateProductSet(DataSetInterface $dataSet)
+    protected function findOrCreateProductSet(DataSetInterface $dataSet): SpyProductSet
     {
         $productSetEntity = SpyProductSetQuery::create()
             ->filterByProductSetKey($dataSet[static::KEY_PRODUCT_SET_KEY])
@@ -143,7 +155,7 @@ class ProductSetWriterStep extends PublishAwareStep implements DataImportStepInt
      *
      * @return void
      */
-    protected function findOrCreateProductAbstractSet(DataSetInterface $dataSet, SpyProductSet $productSetEntity)
+    protected function findOrCreateProductAbstractSet(DataSetInterface $dataSet, SpyProductSet $productSetEntity): void
     {
         $productAbstractSkus = explode(',', $dataSet[static::KEY_ABSTRACT_SKUS]);
         $productAbstractSkus = array_map('trim', $productAbstractSkus);
@@ -175,7 +187,7 @@ class ProductSetWriterStep extends PublishAwareStep implements DataImportStepInt
      *
      * @return void
      */
-    protected function findOrCreateProductSetData(DataSetInterface $dataSet, SpyProductSet $productSetEntity)
+    protected function findOrCreateProductSetData(DataSetInterface $dataSet, SpyProductSet $productSetEntity): void
     {
         foreach ($dataSet[LocalizedAttributesExtractorStep::KEY_LOCALIZED_ATTRIBUTES] as $idLocale => $localizedAttributes) {
             $productSetDataEntity = SpyProductSetDataQuery::create()
@@ -214,7 +226,7 @@ class ProductSetWriterStep extends PublishAwareStep implements DataImportStepInt
      *
      * @return void
      */
-    protected function findOrCreateProductImageSet(DataSetInterface $dataSet, SpyProductSet $productSetEntity)
+    protected function findOrCreateProductImageSet(DataSetInterface $dataSet, SpyProductSet $productSetEntity): void
     {
         foreach ($dataSet[ProductSetImageExtractorStep::KEY_TARGET] as $imageSet) {
             $productImageSetEntity = SpyProductImageSetQuery::create()

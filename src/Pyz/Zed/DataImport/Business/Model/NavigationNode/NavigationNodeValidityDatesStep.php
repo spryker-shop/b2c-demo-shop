@@ -38,7 +38,7 @@ class NavigationNodeValidityDatesStep implements DataImportStepInterface
      *
      * @return void
      */
-    public function execute(DataSetInterface $dataSet)
+    public function execute(DataSetInterface $dataSet): void
     {
         $this->filterDate($dataSet, $this->keyValidFrom);
         $this->filterDate($dataSet, $this->keyValidTo);
@@ -53,7 +53,7 @@ class NavigationNodeValidityDatesStep implements DataImportStepInterface
      *
      * @return void
      */
-    protected function filterDate(DataSetInterface $dataSet, $key)
+    protected function filterDate(DataSetInterface $dataSet, $key): void
     {
         if (isset($dataSet[$key])) {
             return;
@@ -70,7 +70,7 @@ class NavigationNodeValidityDatesStep implements DataImportStepInterface
      *
      * @return void
      */
-    protected function formatDate(DataSetInterface $dataSet, $key)
+    protected function formatDate(DataSetInterface $dataSet, $key): void
     {
         if ($dataSet[$key] === '') {
             return;
@@ -80,7 +80,7 @@ class NavigationNodeValidityDatesStep implements DataImportStepInterface
 
         if ($timestamp === false || $timestamp <= 0) {
             throw new NavigationNodeValidityDateException(
-                sprintf('%s date (%s) does not match expected format: YYYY-MM-DD.', $key, $dataSet[$key])
+                sprintf('%s date (%s) does not match expected format: YYYY-MM-DD.', $key, $dataSet[$key]),
             );
         }
 
@@ -94,7 +94,7 @@ class NavigationNodeValidityDatesStep implements DataImportStepInterface
      *
      * @return void
      */
-    protected function assertDateRelation(DataSetInterface $dataSet)
+    protected function assertDateRelation(DataSetInterface $dataSet): void
     {
         $validFromDate = $dataSet[$this->keyValidFrom];
         $validToDate = $dataSet[$this->keyValidTo];
@@ -110,8 +110,8 @@ class NavigationNodeValidityDatesStep implements DataImportStepInterface
                     $this->keyValidFrom,
                     $validFromDate,
                     $this->keyValidTo,
-                    $validToDate
-                )
+                    $validToDate,
+                ),
             );
         }
     }

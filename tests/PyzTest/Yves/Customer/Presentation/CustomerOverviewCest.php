@@ -31,7 +31,7 @@ class CustomerOverviewCest
      *
      * @return void
      */
-    public function testICanOpenOverviewPage(CustomerPresentationTester $i)
+    public function testICanOpenOverviewPage(CustomerPresentationTester $i): void
     {
         $i->amLoggedInCustomer();
         $i->amOnPage(CustomerOverviewPage::URL);
@@ -46,7 +46,7 @@ class CustomerOverviewCest
      *
      * @return void
      */
-    public function testCustomerWithoutAddressShouldSeeAddAddressInfoText(CustomerPresentationTester $i)
+    public function testCustomerWithoutAddressShouldSeeAddAddressInfoText(CustomerPresentationTester $i): void
     {
         $i->amLoggedInCustomer();
         $i->amOnPage(CustomerOverviewPage::URL);
@@ -60,7 +60,7 @@ class CustomerOverviewCest
      *
      * @return void
      */
-    public function testICanGoFromOverviewToProfilePage(CustomerPresentationTester $i)
+    public function testICanGoFromOverviewToProfilePage(CustomerPresentationTester $i): void
     {
         $i->amLoggedInCustomer();
         $i->amOnPage(CustomerOverviewPage::URL);
@@ -73,7 +73,7 @@ class CustomerOverviewCest
      *
      * @return void
      */
-    public function testICanGoFromOverviewToAddressesPage(CustomerPresentationTester $i)
+    public function testICanGoFromOverviewToAddressesPage(CustomerPresentationTester $i): void
     {
         $i->amLoggedInCustomer();
         $i->amOnPage(CustomerOverviewPage::URL);
@@ -86,7 +86,7 @@ class CustomerOverviewCest
      *
      * @return void
      */
-    public function testICanGoFromOverviewToOrdersPage(CustomerPresentationTester $i)
+    public function testICanGoFromOverviewToOrdersPage(CustomerPresentationTester $i): void
     {
         $i->amLoggedInCustomer();
         $i->amOnPage(CustomerOverviewPage::URL);
@@ -99,7 +99,7 @@ class CustomerOverviewCest
      *
      * @return void
      */
-    public function testICanGoFromOverviewToNewsletterPage(CustomerPresentationTester $i)
+    public function testICanGoFromOverviewToNewsletterPage(CustomerPresentationTester $i): void
     {
         $i->amLoggedInCustomer();
         $i->amOnPage(CustomerOverviewPage::URL);

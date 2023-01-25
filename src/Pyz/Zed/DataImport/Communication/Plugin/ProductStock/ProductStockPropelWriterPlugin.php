@@ -14,6 +14,7 @@ use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 /**
  * @method \Pyz\Zed\DataImport\Business\DataImportFacadeInterface getFacade()
  * @method \Pyz\Zed\DataImport\DataImportConfig getConfig()
+ * @method \Spryker\Zed\DataImport\Communication\DataImportCommunicationFactory getFactory()
  */
 class ProductStockPropelWriterPlugin extends AbstractPlugin implements DataSetWriterPluginInterface
 {
@@ -22,7 +23,7 @@ class ProductStockPropelWriterPlugin extends AbstractPlugin implements DataSetWr
      *
      * @return void
      */
-    public function write(DataSetInterface $dataSet)
+    public function write(DataSetInterface $dataSet): void
     {
         $this->getFacade()->writeProductStockDataSet($dataSet);
     }
@@ -30,7 +31,7 @@ class ProductStockPropelWriterPlugin extends AbstractPlugin implements DataSetWr
     /**
      * @return void
      */
-    public function flush()
+    public function flush(): void
     {
         $this->getFacade()->flushProductStockDataImporter();
     }

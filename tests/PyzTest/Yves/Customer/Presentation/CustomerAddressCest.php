@@ -28,7 +28,7 @@ class CustomerAddressCest
      *
      * @return void
      */
-    public function testICanAddNewAddress(CustomerPresentationTester $i)
+    public function testICanAddNewAddress(CustomerPresentationTester $i): void
     {
         $i->amLoggedInCustomer();
         $i->amOnPage(CustomerAddressPage::URL);

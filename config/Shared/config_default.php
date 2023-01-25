@@ -69,6 +69,7 @@ use Spryker\Shared\Propel\PropelConstants;
 use Spryker\Shared\PropelQueryBuilder\PropelQueryBuilderConstants;
 use Spryker\Shared\Queue\QueueConfig;
 use Spryker\Shared\Queue\QueueConstants;
+use Spryker\Shared\Quote\QuoteConstants;
 use Spryker\Shared\RabbitMq\RabbitMqEnv;
 use Spryker\Shared\Router\RouterConstants;
 use Spryker\Shared\Sales\SalesConstants;
@@ -96,7 +97,6 @@ use Spryker\Zed\MessageBrokerAws\MessageBrokerAwsConfig;
 use Spryker\Zed\OauthAuth0\OauthAuth0Config;
 use Spryker\Zed\Payment\PaymentConfig;
 use Spryker\Zed\Propel\PropelConfig;
-use Spryker\Shared\Quote\QuoteConstants;
 use SprykerShop\Shared\CustomerPage\CustomerPageConstants;
 use SprykerShop\Shared\ShopUi\ShopUiConstants;
 
@@ -221,14 +221,14 @@ $config[LogConstants::LOG_SANITIZE_FIELDS] = [
 $config[OauthConstants::PRIVATE_KEY_PATH] = str_replace(
     '__LINE__',
     PHP_EOL,
-    getenv('SPRYKER_OAUTH_KEY_PRIVATE') ?: ''
+    getenv('SPRYKER_OAUTH_KEY_PRIVATE') ?: '',
 ) ?: null;
 $config[OauthConstants::PUBLIC_KEY_PATH]
     = $config[OauthCryptographyConstants::PUBLIC_KEY_PATH]
     = str_replace(
         '__LINE__',
         PHP_EOL,
-        getenv('SPRYKER_OAUTH_KEY_PUBLIC') ?: ''
+        getenv('SPRYKER_OAUTH_KEY_PUBLIC') ?: '',
     ) ?: null;
 $config[OauthConstants::ENCRYPTION_KEY] = getenv('SPRYKER_OAUTH_ENCRYPTION_KEY') ?: null;
 $config[OauthConstants::OAUTH_CLIENT_IDENTIFIER] = getenv('SPRYKER_OAUTH_CLIENT_IDENTIFIER') ?: null;
@@ -486,7 +486,7 @@ $config[SchedulerJenkinsConstants::JENKINS_CONFIGURATION] = [
             '%s://%s:%s/',
             getenv('SPRYKER_SCHEDULER_PROTOCOL') ?: 'http',
             getenv('SPRYKER_SCHEDULER_HOST'),
-            getenv('SPRYKER_SCHEDULER_PORT')
+            getenv('SPRYKER_SCHEDULER_PORT'),
         ),
         SchedulerJenkinsConfig::SCHEDULER_JENKINS_CSRF_ENABLED => (bool)getenv('SPRYKER_JENKINS_CSRF_PROTECTION_ENABLED'),
     ],
@@ -526,15 +526,15 @@ $zedPort = ((int)getenv('SPRYKER_ZED_PORT')) ?: $backofficeDefaultPort;
 $config[ZedRequestConstants::HOST_ZED_API] = sprintf(
     '%s%s',
     getenv('SPRYKER_ZED_HOST') ?: 'not-configured-host',
-    $zedPort !== $backofficeDefaultPort ? ':' . $zedPort : ''
+    $zedPort !== $backofficeDefaultPort ? ':' . $zedPort : '',
 );
 $config[ZedRequestConstants::BASE_URL_ZED_API] = sprintf(
     'http://%s',
-    $config[ZedRequestConstants::HOST_ZED_API]
+    $config[ZedRequestConstants::HOST_ZED_API],
 );
 $config[ZedRequestConstants::BASE_URL_SSL_ZED_API] = sprintf(
     'https://%s',
-    $config[ZedRequestConstants::HOST_ZED_API]
+    $config[ZedRequestConstants::HOST_ZED_API],
 );
 
 // ----------------------------------------------------------------------------
@@ -545,7 +545,7 @@ $backofficePort = (int)(getenv('SPRYKER_BE_PORT')) ?: 443;
 $config[ApplicationConstants::BASE_URL_ZED] = sprintf(
     'https://%s%s',
     $sprykerBackendHost,
-    $backofficePort !== 443 ? $backofficePort : ''
+    $backofficePort !== 443 ? $backofficePort : '',
 );
 
 // ----------------------------------------------------------------------------
@@ -562,7 +562,7 @@ $config[ApplicationConstants::BASE_URL_YVES]
     = sprintf(
         'https://%s%s',
         $yvesHost,
-        $yvesPort !== 443 ? ':' . $yvesPort : ''
+        $yvesPort !== 443 ? ':' . $yvesPort : '',
     );
 
 $config[ShopUiConstants::YVES_ASSETS_URL_PATTERN] = '/assets/' . (getenv('SPRYKER_BUILD_HASH') ?: 'current') . '/%theme%/';
@@ -577,7 +577,7 @@ $config[GlueApplicationConstants::GLUE_APPLICATION_DOMAIN]
     = sprintf(
         'https://%s%s',
         $glueHost,
-        $gluePort !== 443 ? ':' . $gluePort : ''
+        $gluePort !== 443 ? ':' . $gluePort : '',
     );
 
 if (class_exists(TestifyConstants::class)) {

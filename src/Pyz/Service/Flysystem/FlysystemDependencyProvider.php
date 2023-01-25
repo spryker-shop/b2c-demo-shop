@@ -19,7 +19,7 @@ class FlysystemDependencyProvider extends SprykerFlysystemDependencyProvider
      *
      * @return \Spryker\Service\Kernel\Container
      */
-    protected function addFilesystemBuilderPluginCollection($container)
+    protected function addFilesystemBuilderPluginCollection($container): Container
     {
         $container->set(static::PLUGIN_COLLECTION_FILESYSTEM_BUILDER, function (Container $container) {
             return [

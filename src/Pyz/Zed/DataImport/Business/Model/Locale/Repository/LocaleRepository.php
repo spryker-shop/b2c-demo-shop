@@ -34,7 +34,7 @@ class LocaleRepository implements LocaleRepositoryInterface
     /**
      * @return void
      */
-    private function loadLocaleMap()
+    private function loadLocaleMap(): void
     {
         /** @var array $localeCollection */
         $localeCollection = SpyLocaleQuery::create()

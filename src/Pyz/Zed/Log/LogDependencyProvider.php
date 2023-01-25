@@ -21,7 +21,7 @@ use Spryker\Zed\Propel\Communication\Plugin\Log\EntityProcessorPlugin;
 class LogDependencyProvider extends SprykerLogDependencyProvider
 {
     /**
-     * @return \Spryker\Shared\Log\Dependency\Plugin\LogHandlerPluginInterface[]
+     * @return array<\Spryker\Shared\Log\Dependency\Plugin\LogHandlerPluginInterface>
      */
     protected function getLogHandlers(): array
     {
@@ -32,7 +32,7 @@ class LogDependencyProvider extends SprykerLogDependencyProvider
     }
 
     /**
-     * @return \Spryker\Shared\Log\Dependency\Plugin\LogProcessorPluginInterface[]
+     * @return array<\Spryker\Shared\Log\Dependency\Plugin\LogProcessorPluginInterface>
      */
     protected function getLogProcessors(): array
     {

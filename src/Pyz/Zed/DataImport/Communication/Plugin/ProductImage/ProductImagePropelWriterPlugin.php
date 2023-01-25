@@ -14,6 +14,7 @@ use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 /**
  * @method \Pyz\Zed\DataImport\Business\DataImportFacadeInterface getFacade()
  * @method \Pyz\Zed\DataImport\DataImportConfig getConfig()
+ * @method \Spryker\Zed\DataImport\Communication\DataImportCommunicationFactory getFactory()
  */
 class ProductImagePropelWriterPlugin extends AbstractPlugin implements DataSetWriterPluginInterface
 {

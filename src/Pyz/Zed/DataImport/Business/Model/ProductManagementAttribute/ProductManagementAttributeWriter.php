@@ -31,7 +31,7 @@ class ProductManagementAttributeWriter extends PublishAwareStep implements DataI
      *
      * @return void
      */
-    public function execute(DataSetInterface $dataSet)
+    public function execute(DataSetInterface $dataSet): void
     {
         $productManagementAttributeEntity = SpyProductManagementAttributeQuery::create()
             ->filterByFkProductAttributeKey($dataSet[AddProductAttributeKeysStep::KEY_TARGET][$dataSet['key']])

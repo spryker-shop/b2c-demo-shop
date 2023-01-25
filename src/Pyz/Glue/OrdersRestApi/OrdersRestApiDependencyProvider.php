@@ -17,7 +17,7 @@ use Spryker\Glue\ShipmentsRestApi\Plugin\OrdersRestApi\ShipmentRestOrderDetailsA
 class OrdersRestApiDependencyProvider extends SprykerOrdersRestApiDependencyProvider
 {
     /**
-     * @return \Spryker\Glue\OrdersRestApiExtension\Dependency\Plugin\RestOrderItemsAttributesMapperPluginInterface[]
+     * @return array<\Spryker\Glue\OrdersRestApiExtension\Dependency\Plugin\RestOrderItemsAttributesMapperPluginInterface>
      */
     protected function getRestOrderItemsAttributesMapperPlugins(): array
     {
@@ -29,7 +29,7 @@ class OrdersRestApiDependencyProvider extends SprykerOrdersRestApiDependencyProv
     }
 
     /**
-     * @return \Spryker\Glue\OrdersRestApiExtension\Dependency\Plugin\RestOrderDetailsAttributesMapperPluginInterface[]
+     * @return array<\Spryker\Glue\OrdersRestApiExtension\Dependency\Plugin\RestOrderDetailsAttributesMapperPluginInterface>
      */
     protected function getRestOrderDetailsAttributesMapperPlugins(): array
     {
