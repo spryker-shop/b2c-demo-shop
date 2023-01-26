@@ -35,7 +35,7 @@ class ProductManagerStub
      *
      * @return \Orm\Zed\Product\Persistence\SpyProductAbstract
      */
-    protected function createProductAbstractEntity($sku)
+    protected function createProductAbstractEntity($sku): SpyProductAbstract
     {
         $productAbstractEntity = new SpyProductAbstract();
         $productAbstractEntity->setSku($sku);
@@ -51,7 +51,7 @@ class ProductManagerStub
      *
      * @return \Orm\Zed\Product\Persistence\SpyProductAbstractLocalizedAttributes
      */
-    protected function createLocalizedAttributeEntity($name, $idProductAbstract)
+    protected function createLocalizedAttributeEntity($name, $idProductAbstract): SpyProductAbstractLocalizedAttributes
     {
         $localizedAttributeEntity = new SpyProductAbstractLocalizedAttributes();
         $localizedAttributeEntity->setAttributes('{}');
@@ -69,7 +69,7 @@ class ProductManagerStub
      *
      * @return int
      */
-    public function addProductWithoutTransactionHandling($sku, $name)
+    public function addProductWithoutTransactionHandling($sku, $name): int
     {
         $this->productQueryContainer->getConnection()->beginTransaction();
 
@@ -87,7 +87,7 @@ class ProductManagerStub
      *
      * @return void
      */
-    public function addProductWithoutTransactionHandlingShouldThrowException($sku, $name)
+    public function addProductWithoutTransactionHandlingShouldThrowException($sku, $name): void
     {
         $this->productQueryContainer->getConnection()->beginTransaction();
 
@@ -114,9 +114,9 @@ class ProductManagerStub
      *
      * @return void
      */
-    public function addProductWithTransactionHandlingShouldRollbackAndThrowException($sku, $name)
+    public function addProductWithTransactionHandlingShouldRollbackAndThrowException($sku, $name): void
     {
-        $this->handleDatabaseTransaction(function () use ($sku, $name) {
+        $this->handleDatabaseTransaction(function () use ($sku, $name): void {
             $productAbstractEntity = new SpyProductAbstract();
             $productAbstractEntity->setSku($sku);
             $productAbstractEntity->setAttributes('{}');
@@ -139,7 +139,7 @@ class ProductManagerStub
      *
      * @return \Orm\Zed\Product\Persistence\SpyProductAbstractLocalizedAttributes
      */
-    public function addProductWithTransactionHandlingShouldCommitAndReturnValue($sku, $name)
+    public function addProductWithTransactionHandlingShouldCommitAndReturnValue($sku, $name): SpyProductAbstractLocalizedAttributes
     {
         return $this->handleDatabaseTransaction(function () use ($sku, $name) {
             $productAbstractEntity = new SpyProductAbstract();
@@ -163,7 +163,7 @@ class ProductManagerStub
      *
      * @return void
      */
-    protected function throwSampleException()
+    protected function throwSampleException(): void
     {
         throw new Exception('DB error occured');
     }

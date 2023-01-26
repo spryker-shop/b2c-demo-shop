@@ -32,46 +32,57 @@ class ProductAbstractHydratorStep implements DataImportStepInterface
      * @var string
      */
     public const COLUMN_CATEGORY_KEY = 'category_key';
+
     /**
      * @var string
      */
     public const COLUMN_CATEGORY_PRODUCT_ORDER = 'category_product_order';
+
     /**
      * @var string
      */
     public const COLUMN_NAME = 'name';
+
     /**
      * @var string
      */
     public const COLUMN_URL = 'url';
+
     /**
      * @var string
      */
     public const COLUMN_COLOR_CODE = 'color_code';
+
     /**
      * @var string
      */
     public const COLUMN_DESCRIPTION = 'description';
+
     /**
      * @var string
      */
     public const COLUMN_TAX_SET_NAME = 'tax_set_name';
+
     /**
      * @var string
      */
     public const COLUMN_META_TITLE = 'meta_title';
+
     /**
      * @var string
      */
     public const COLUMN_META_KEYWORDS = 'meta_keywords';
+
     /**
      * @var string
      */
     public const COLUMN_META_DESCRIPTION = 'meta_description';
+
     /**
      * @var string
      */
     public const COLUMN_NEW_FROM = 'new_from';
+
     /**
      * @var string
      */
@@ -81,70 +92,87 @@ class ProductAbstractHydratorStep implements DataImportStepInterface
      * @var string
      */
     public const DATA_PRODUCT_ABSTRACT_TRANSFER = 'DATA_PRODUCT_ABSTRACT_TRANSFER';
+
     /**
      * @var string
      */
     public const DATA_PRODUCT_ABSTRACT_LOCALIZED_TRANSFER = 'DATA_PRODUCT_ABSTRACT_LOCALIZED_TRANSFER';
+
     /**
      * @var string
      */
     public const DATA_PRODUCT_CATEGORY_TRANSFER = 'DATA_PRODUCT_CATEGORY_TRANSFER';
+
     /**
      * @var string
      */
     public const DATA_PRODUCT_URL_TRANSFER = 'DATA_PRODUCT_URL_TRANSFER';
+
     /**
      * @var string
      */
     public const KEY_PRODUCT_CATEGORY_TRANSFER = 'productCategoryTransfer';
+
     /**
      * @var string
      */
     public const KEY_PRODUCT_ABSTRACT_LOCALIZED_TRANSFER = 'localizedAttributeTransfer';
+
     /**
      * @var string
      */
     public const KEY_PRODUCT_URL_TRASNFER = 'urlTransfer';
+
     /**
      * @var string
      */
     public const KEY_SKU = 'sku';
+
     /**
      * @var string
      */
     public const KEY_ATTRIBUTES = 'attributes';
+
     /**
      * @var string
      */
     public const KEY_ID_TAX_SET = 'idTaxSet';
+
     /**
      * @var string
      */
     public const KEY_FK_TAX_SET = 'fk_tax_set';
+
     /**
      * @var string
      */
     public const COLUMN_CATEGORY_KEYS = 'categoryKeys';
+
     /**
      * @var string
      */
     public const KEY_FK_CATEGORY = 'fk_category';
+
     /**
      * @var string
      */
     public const KEY_PRODUCT_ORDER = 'product_order';
+
     /**
      * @var string
      */
     public const KEY_LOCALES = 'locales';
+
     /**
      * @var string
      */
     public const KEY_FK_LOCALE = 'fk_locale';
+
     /**
      * @var string
      */
     public const KEY_ID_URL = 'id_url';
+
     /**
      * @var string
      */
@@ -230,7 +258,7 @@ class ProductAbstractHydratorStep implements DataImportStepInterface
                 throw new DataKeyNotFoundInDataSetException(sprintf(
                     'The category with key "%s" was not found in categoryKeys. Maybe there is a typo. Given Categories: "%s"',
                     $categoryKey,
-                    implode('', array_values($dataSet[static::COLUMN_CATEGORY_KEYS]))
+                    implode('', array_values($dataSet[static::COLUMN_CATEGORY_KEYS])),
                 ));
             }
 

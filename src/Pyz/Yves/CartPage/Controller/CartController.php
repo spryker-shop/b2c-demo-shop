@@ -9,6 +9,7 @@ namespace Pyz\Yves\CartPage\Controller;
 
 use SprykerShop\Yves\CartPage\Controller\CartController as SprykerCartController;
 use SprykerShop\Yves\CartPage\Plugin\Router\CartPageRouteProviderPlugin;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -27,7 +28,7 @@ class CartController extends SprykerCartController
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function addAction(Request $request, $sku)
+    public function addAction(Request $request, $sku): RedirectResponse
     {
         parent::addAction($request, $sku);
 
@@ -40,7 +41,7 @@ class CartController extends SprykerCartController
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function removeAction(Request $request, $sku)
+    public function removeAction(Request $request, $sku): RedirectResponse
     {
         parent::removeAction($request, $sku);
 
@@ -52,7 +53,7 @@ class CartController extends SprykerCartController
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    protected function redirectPyz(Request $request)
+    protected function redirectPyz(Request $request): RedirectResponse
     {
         if ($request->headers->has(static::PYZ_REQUEST_HEADER_REFERER)) {
             return $this->redirectResponseExternal($request->headers->get(static::PYZ_REQUEST_HEADER_REFERER));

@@ -28,7 +28,7 @@ class CustomerRegistrationCest
      *
      * @return void
      */
-    public function testICanOpenRegistrationPage(CustomerPresentationTester $i)
+    public function testICanOpenRegistrationPage(CustomerPresentationTester $i): void
     {
         $i->amOnPage(CustomerRegistrationPage::URL);
         $i->see(CustomerRegistrationPage::TITLE_CREATE_ACCOUNT);
@@ -39,7 +39,7 @@ class CustomerRegistrationCest
      *
      * @return void
      */
-    public function testICanRegisterWithValidData(CustomerPresentationTester $i)
+    public function testICanRegisterWithValidData(CustomerPresentationTester $i): void
     {
         $i->amOnPage(CustomerRegistrationPage::URL);
         $i->fillOutRegistrationForm();

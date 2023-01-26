@@ -16,7 +16,7 @@ use SprykerShop\Yves\SalesReturnPage\Plugin\CustomerReorderWidget\RemunerationAm
 class CustomerReorderWidgetDependencyProvider extends SprykerCustomerReorderWidgetDependencyProvider
 {
     /**
-     * @return \SprykerShop\Yves\CustomerReorderWidgetExtension\Dependency\Plugin\PostReorderPluginInterface[]
+     * @return array<\SprykerShop\Yves\CustomerReorderWidgetExtension\Dependency\Plugin\PostReorderPluginInterface>
      */
     protected function getPostReorderPlugins(): array
     {

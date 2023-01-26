@@ -31,7 +31,7 @@ class CustomerStepTest extends Unit
     /**
      * @return void
      */
-    public function testExecuteShouldTriggerAuthHandler()
+    public function testExecuteShouldTriggerAuthHandler(): void
     {
         $authHandlerMock = $this->createAuthHandlerMock();
         $authHandlerMock->expects($this->once())->method('addToDataClass')->willReturnArgument(1);
@@ -43,7 +43,7 @@ class CustomerStepTest extends Unit
     /**
      * @return void
      */
-    public function testPostConditionWhenCustomerTransferNotSetShouldReturnFalse()
+    public function testPostConditionWhenCustomerTransferNotSetShouldReturnFalse(): void
     {
         $customerStep = $this->createCustomerStep();
         $this->assertFalse($customerStep->postCondition(new QuoteTransfer()));
@@ -52,7 +52,7 @@ class CustomerStepTest extends Unit
     /**
      * @return void
      */
-    public function testPostConditionWhenCustomerIsLoggedInAndTriesToLoginAsAGuestShouldReturnFalse()
+    public function testPostConditionWhenCustomerIsLoggedInAndTriesToLoginAsAGuestShouldReturnFalse(): void
     {
         $customerClientMock = $this->createCustomerClientMock();
         $customerClientMock->expects($this->once())->method('getCustomer')->willReturn(new CustomerTransfer());
@@ -69,7 +69,7 @@ class CustomerStepTest extends Unit
     /**
      * @return void
      */
-    public function testPostConditionWhenInvalidCustomerSetShouldReturnFalse()
+    public function testPostConditionWhenInvalidCustomerSetShouldReturnFalse(): void
     {
         $customerStep = $this->createCustomerStep();
         $quoteTransfer = new QuoteTransfer();
@@ -81,7 +81,7 @@ class CustomerStepTest extends Unit
     /**
      * @return void
      */
-    public function testPostConditionWhenGuestCustomerSetShouldReturnTrue()
+    public function testPostConditionWhenGuestCustomerSetShouldReturnTrue(): void
     {
         $customerStep = $this->createCustomerStep();
         $quoteTransfer = new QuoteTransfer();
@@ -95,7 +95,7 @@ class CustomerStepTest extends Unit
     /**
      * @return void
      */
-    public function testRequireInputWhenCustomerIsSetShouldReturnTrue()
+    public function testRequireInputWhenCustomerIsSetShouldReturnTrue(): void
     {
         $customerStep = $this->createCustomerStep();
         $quoteTransfer = new QuoteTransfer();
@@ -107,7 +107,7 @@ class CustomerStepTest extends Unit
     /**
      * @return void
      */
-    public function testRequireInputWhenCustomerLoggedInShouldReturnFalse()
+    public function testRequireInputWhenCustomerLoggedInShouldReturnFalse(): void
     {
         $customerClientMock = $this->createCustomerClientMock();
         $customerClientMock->expects($this->once())->method('getCustomer')->willReturn(new CustomerTransfer());
@@ -121,7 +121,7 @@ class CustomerStepTest extends Unit
     /**
      * @return void
      */
-    public function testRequireInputWhenNotLoggedInAndNotYetSetInQuoteShouldReturnTrue()
+    public function testRequireInputWhenNotLoggedInAndNotYetSetInQuoteShouldReturnTrue(): void
     {
         $customerStep = $this->createCustomerStep();
         $this->assertTrue($customerStep->requireInput(new QuoteTransfer()));
@@ -133,7 +133,7 @@ class CustomerStepTest extends Unit
      *
      * @return \SprykerShop\Yves\CheckoutPage\Process\Steps\CustomerStep
      */
-    protected function createCustomerStep($customerClientMock = null, $authHandlerMock = null)
+    protected function createCustomerStep($customerClientMock = null, $authHandlerMock = null): CustomerStep
     {
         if ($customerClientMock === null) {
             $customerClientMock = $this->createCustomerClientMock();
@@ -147,7 +147,7 @@ class CustomerStepTest extends Unit
             $authHandlerMock,
             'customer_step',
             'escape_route',
-            '/logout'
+            '/logout',
         );
     }
 
@@ -162,7 +162,7 @@ class CustomerStepTest extends Unit
     /**
      * @return \Symfony\Component\HttpFoundation\Request
      */
-    protected function createRequest()
+    protected function createRequest(): Request
     {
         return Request::createFromGlobals();
     }

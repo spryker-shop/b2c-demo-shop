@@ -13,7 +13,7 @@ use Spryker\Zed\UserPasswordResetMail\Communication\Plugin\UserPasswordReset\Mai
 class UserPasswordResetDependencyProvider extends SprykerUserPasswordResetDependencyProvider
 {
     /**
-     * @return \Spryker\Zed\UserPasswordResetExtension\Dependency\Plugin\UserPasswordResetRequestStrategyPluginInterface[]
+     * @return array<\Spryker\Zed\UserPasswordResetExtension\Dependency\Plugin\UserPasswordResetRequestStrategyPluginInterface>
      */
     public function getUserPasswordResetRequestStrategyPlugins(): array
     {

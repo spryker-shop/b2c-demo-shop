@@ -32,7 +32,7 @@ class SuccessStepTest extends Unit
     /**
      * @return void
      */
-    public function testExecuteShouldEmptyQuoteTransfer()
+    public function testExecuteShouldEmptyQuoteTransfer(): void
     {
         $customerClientMock = $this->createCustomerClientMock();
         $customerClientMock->expects($this->once())->method('markCustomerAsDirty');
@@ -51,7 +51,7 @@ class SuccessStepTest extends Unit
     /**
      * @return void
      */
-    public function testPostConditionsWhenOrderReferenceIsSetShouldReturnTrue()
+    public function testPostConditionsWhenOrderReferenceIsSetShouldReturnTrue(): void
     {
         $successStep = $this->createSuccessStep();
 
@@ -64,7 +64,7 @@ class SuccessStepTest extends Unit
     /**
      * @return void
      */
-    public function testPostConditionsWhenOrderReferenceIsMissingShouldReturnFalse()
+    public function testPostConditionsWhenOrderReferenceIsMissingShouldReturnFalse(): void
     {
         $successStep = $this->createSuccessStep();
         $quoteTransfer = new QuoteTransfer();
@@ -77,7 +77,7 @@ class SuccessStepTest extends Unit
      *
      * @return \SprykerShop\Yves\CheckoutPage\Process\Steps\SuccessStep
      */
-    protected function createSuccessStep($customerClientMock = null)
+    protected function createSuccessStep($customerClientMock = null): SuccessStep
     {
         if ($customerClientMock === null) {
             $customerClientMock = $this->createCustomerClientMock();
@@ -91,7 +91,7 @@ class SuccessStepTest extends Unit
             $cartClientMock,
             $checkoutPageConfigMock,
             'success_route',
-            'escape_route'
+            'escape_route',
         );
     }
 
@@ -106,7 +106,7 @@ class SuccessStepTest extends Unit
     /**
      * @return \Symfony\Component\HttpFoundation\Request
      */
-    protected function createRequest()
+    protected function createRequest(): Request
     {
         return Request::createFromGlobals();
     }

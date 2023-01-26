@@ -18,6 +18,7 @@ class ProductAbstractSkuToIdProductAbstractStep implements DataImportStepInterfa
      * @var string
      */
     public const KEY_SOURCE = 'sku';
+
     /**
      * @var string
      */

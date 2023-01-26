@@ -68,7 +68,7 @@ class ProductImagePropelDataSetWriter implements DataSetWriterInterface
             $productImageSetEntityTransfer->getFkLocale(),
             (int)$productImageSetEntityTransfer->getFkProductAbstract(),
             (int)$productImageSetEntityTransfer->getFkProduct(),
-            $productImageSetEntityTransfer->getProductImageSetKey()
+            $productImageSetEntityTransfer->getProductImageSetKey(),
         );
 
         if ($productImageSetEntity->isNew() || $productImageSetEntity->isModified()) {
@@ -88,11 +88,11 @@ class ProductImagePropelDataSetWriter implements DataSetWriterInterface
      */
     protected function createOrUpdateProductImage(
         DataSetInterface $dataSet,
-        SpyProductImageSet $productImageSetEntity
+        SpyProductImageSet $productImageSetEntity,
     ): SpyProductImage {
         $productImageEntityTransfer = $this->getProductImageTransfer($dataSet);
         $productImageEntity = $this->findOrCreateProductImageEntityByProductImageKey(
-            $productImageEntityTransfer->getProductImageKey()
+            $productImageEntityTransfer->getProductImageKey(),
         );
 
         $productImageEntity->setExternalUrlLarge($productImageEntityTransfer->getExternalUrlLarge());
@@ -118,11 +118,11 @@ class ProductImagePropelDataSetWriter implements DataSetWriterInterface
     protected function createOrUpdateImageToImageSetRelation(
         SpyProductImageSet $productImageSetEntity,
         SpyProductImage $productImageEntity,
-        DataSetInterface $dataSet
+        DataSetInterface $dataSet,
     ): void {
         $productImageSetToProductImageEntity = $this->productImageRepository->getProductImageSetToProductImageRelationEntity(
             $productImageSetEntity->getIdProductImageSet(),
-            $productImageEntity->getIdProductImage()
+            $productImageEntity->getIdProductImage(),
         );
 
         $productImageToImageSetRelationTransfer = $this->getProductImageToImageSetRelationTransfer($dataSet);
@@ -161,7 +161,7 @@ class ProductImagePropelDataSetWriter implements DataSetWriterInterface
      * @return \Generated\Shared\Transfer\SpyProductImageSetToProductImageEntityTransfer
      */
     protected function getProductImageToImageSetRelationTransfer(
-        DataSetInterface $dataSet
+        DataSetInterface $dataSet,
     ): SpyProductImageSetToProductImageEntityTransfer {
         return $dataSet[ProductImageHydratorStep::DATA_PRODUCT_IMAGE_TO_IMAGE_SET_RELATION_TRANSFER];
     }
@@ -176,16 +176,16 @@ class ProductImagePropelDataSetWriter implements DataSetWriterInterface
         if ($productImageSetEntity->getFkProductAbstract()) {
             DataImporterPublisher::addEvent(
                 ProductImageEvents::PRODUCT_IMAGE_PRODUCT_ABSTRACT_PUBLISH,
-                $productImageSetEntity->getFkProductAbstract()
+                $productImageSetEntity->getFkProductAbstract(),
             );
             DataImporterPublisher::addEvent(
                 ProductEvents::PRODUCT_ABSTRACT_PUBLISH,
-                $productImageSetEntity->getFkProductAbstract()
+                $productImageSetEntity->getFkProductAbstract(),
             );
         } elseif ($productImageSetEntity->getFkProduct()) {
             DataImporterPublisher::addEvent(
                 ProductImageEvents::PRODUCT_IMAGE_PRODUCT_CONCRETE_PUBLISH,
-                $productImageSetEntity->getFkProduct()
+                $productImageSetEntity->getFkProduct(),
             );
         }
     }

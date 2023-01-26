@@ -28,7 +28,7 @@ class ContentBannerWidgetFactory extends SprykerContentBannerWidgetFactory
         return new TwigFunction(
             $functionProvider->getFunctionName(),
             $functionProvider->getFunction(),
-            $functionProvider->getOptions()
+            $functionProvider->getOptions(),
         );
     }
 
@@ -43,7 +43,7 @@ class ContentBannerWidgetFactory extends SprykerContentBannerWidgetFactory
         return new ContentBannerTwigFunctionProvider(
             $twig,
             $localeName,
-            $this->getContentBannerClient()
+            $this->getContentBannerClient(),
         );
     }
 }

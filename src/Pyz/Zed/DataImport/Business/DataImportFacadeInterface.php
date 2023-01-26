@@ -85,7 +85,7 @@ interface DataImportFacadeInterface extends SprykerDataImportFacadeInterface
     /**
      * @return void
      */
-    public function flushCombinedProductPriceDataImporter();
+    public function flushCombinedProductPriceDataImporter(): void;
 
     /**
      * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet

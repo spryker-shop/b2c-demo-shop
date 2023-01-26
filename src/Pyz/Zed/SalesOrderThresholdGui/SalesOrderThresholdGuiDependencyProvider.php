@@ -17,7 +17,7 @@ use Spryker\Zed\SalesOrderThresholdGui\SalesOrderThresholdGuiDependencyProvider 
 class SalesOrderThresholdGuiDependencyProvider extends SprykerSalesOrderThresholdGuiDependencyProvider
 {
     /**
-     * @return \Spryker\Zed\SalesOrderThresholdGuiExtension\Dependency\Plugin\SalesOrderThresholdFormExpanderPluginInterface[]
+     * @return array<\Spryker\Zed\SalesOrderThresholdGuiExtension\Dependency\Plugin\SalesOrderThresholdFormExpanderPluginInterface>
      */
     protected function getSalesOrderThresholdFormExpanderPlugins(): array
     {

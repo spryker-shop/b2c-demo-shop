@@ -9,6 +9,10 @@ namespace Pyz\Zed\Development\Communication\Console;
 
 use Spryker\Zed\Development\Communication\Console\CodeTestConsole;
 
+/**
+ * @method \Spryker\Zed\Development\Business\DevelopmentFacadeInterface getFacade()
+ * @method \Spryker\Zed\Development\Communication\DevelopmentCommunicationFactory getFactory()
+ */
 class AcceptanceCodeTestConsole extends CodeTestConsole
 {
     /**

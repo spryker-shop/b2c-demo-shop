@@ -13,10 +13,10 @@ use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 use Spryker\Zed\PropelOrm\Business\Transaction\DatabaseTransactionHandlerTrait;
 
 /**
- * @method \Spryker\Zed\ProductStorage\Persistence\ProductStorageQueryContainerInterface getQueryContainer()
+ * @method \Pyz\Zed\ProductStorage\Persistence\ProductStorageQueryContainerInterface getQueryContainer()
  * @method \Spryker\Zed\ProductStorage\Communication\ProductStorageCommunicationFactory getFactory()
  * @method \Spryker\Zed\ProductStorage\Business\ProductStorageFacadeInterface getFacade()
- * @method \Spryker\Zed\ProductStorage\ProductStorageConfig getConfig()
+ * @method \Pyz\Zed\ProductStorage\ProductStorageConfig getConfig()
  */
 class ProductBundleStoragePublishListener extends AbstractPlugin implements EventBulkHandlerInterface
 {
@@ -27,7 +27,7 @@ class ProductBundleStoragePublishListener extends AbstractPlugin implements Even
      *
      * @api
      *
-     * @param \Generated\Shared\Transfer\EventEntityTransfer[] $eventTransfers
+     * @param array<\Generated\Shared\Transfer\EventEntityTransfer> $eventTransfers
      * @param string $eventName
      *
      * @return void

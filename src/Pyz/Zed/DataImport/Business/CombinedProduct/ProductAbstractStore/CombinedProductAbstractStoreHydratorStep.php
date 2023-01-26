@@ -20,6 +20,7 @@ class CombinedProductAbstractStoreHydratorStep extends ProductAbstractStoreHydra
      * @var string
      */
     public const COLUMN_ABSTRACT_SKU = 'abstract_sku';
+
     /**
      * @var string
      */

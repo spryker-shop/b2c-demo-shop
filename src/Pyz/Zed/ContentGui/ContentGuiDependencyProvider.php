@@ -22,7 +22,7 @@ use Spryker\Zed\ContentProductSetGui\Communication\Plugin\ContentGui\ProductSetF
 class ContentGuiDependencyProvider extends SprykerContentGuiDependencyProvider
 {
     /**
-     * @return \Spryker\Zed\ContentGuiExtension\Dependency\Plugin\ContentPluginInterface[]
+     * @return array<\Spryker\Zed\ContentGuiExtension\Dependency\Plugin\ContentPluginInterface>
      */
     protected function getContentPlugins(): array
     {
@@ -36,7 +36,7 @@ class ContentGuiDependencyProvider extends SprykerContentGuiDependencyProvider
     }
 
     /**
-     * @return \Spryker\Zed\ContentGuiExtension\Dependency\Plugin\ContentGuiEditorPluginInterface[]
+     * @return array<\Spryker\Zed\ContentGuiExtension\Dependency\Plugin\ContentGuiEditorPluginInterface>
      */
     protected function getContentEditorPlugins(): array
     {

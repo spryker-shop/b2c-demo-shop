@@ -12,6 +12,7 @@ use Generated\Shared\Transfer\WishlistTransfer;
 use SprykerShop\Yves\CustomerPage\Plugin\Router\CustomerPageRouteProviderPlugin;
 use SprykerShop\Yves\WishlistPage\Controller\WishlistController as SprykerWishlistController;
 use SprykerShop\Yves\WishlistPage\Plugin\Router\WishlistPageRouteProviderPlugin;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -29,7 +30,7 @@ class WishlistController extends SprykerWishlistController
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function addItemAction(Request $request)
+    public function addItemAction(Request $request): RedirectResponse
     {
         $wishlistItemTransfer = $this->getWishlistItemTransferFromRequest($request);
         if (!$wishlistItemTransfer) {

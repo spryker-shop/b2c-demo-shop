@@ -25,7 +25,7 @@ class LogDependencyProvider extends SprykerLogDependencyProvider
      *
      * @return \Spryker\Yves\Kernel\Container
      */
-    protected function addLogHandlers(Container $container)
+    protected function addLogHandlers(Container $container): Container
     {
         $container->set(static::LOG_HANDLERS, function () {
             return [
@@ -42,7 +42,7 @@ class LogDependencyProvider extends SprykerLogDependencyProvider
      *
      * @return \Spryker\Yves\Kernel\Container
      */
-    protected function addProcessors(Container $container)
+    protected function addProcessors(Container $container): Container
     {
         $container->set(static::LOG_PROCESSORS, function () {
             return [

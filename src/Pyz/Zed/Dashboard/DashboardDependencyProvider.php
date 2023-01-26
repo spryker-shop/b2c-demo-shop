@@ -15,7 +15,7 @@ use Spryker\Zed\SalesStatistics\Communication\Plugin\TopOrdersChartPlugin;
 class DashboardDependencyProvider extends SprykerDashboardDependencyProvider
 {
     /**
-     * @return \Spryker\Shared\Dashboard\Dependency\Plugin\DashboardPluginInterface[]
+     * @return array<\Spryker\Shared\Dashboard\Dependency\Plugin\DashboardPluginInterface>
      */
     protected function getDashboardPlugins(): array
     {

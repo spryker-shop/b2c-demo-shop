@@ -14,7 +14,7 @@ use Spryker\Zed\ZedNavigation\ZedNavigationDependencyProvider as SprykerZedNavig
 class ZedNavigationDependencyProvider extends SprykerZedNavigationDependencyProvider
 {
     /**
-     * @return \Spryker\Zed\ZedNavigationExtension\Dependency\Plugin\NavigationItemCollectionFilterPluginInterface[]
+     * @return array<\Spryker\Zed\ZedNavigationExtension\Dependency\Plugin\NavigationItemCollectionFilterPluginInterface>
      */
     protected function getNavigationItemCollectionFilterPlugins(): array
     {

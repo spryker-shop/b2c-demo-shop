@@ -19,10 +19,12 @@ class GiftCardConcreteConfigurationWriterStep implements DataImportStepInterface
      * @var int
      */
     public const BULK_SIZE = 100;
+
     /**
      * @var string
      */
     public const COL_VALUE = 'value';
+
     /**
      * @var string
      */
@@ -46,7 +48,7 @@ class GiftCardConcreteConfigurationWriterStep implements DataImportStepInterface
      *
      * @return void
      */
-    public function execute(DataSetInterface $dataSet)
+    public function execute(DataSetInterface $dataSet): void
     {
         $value = $dataSet[static::COL_VALUE];
         $concreteSku = $dataSet[static::COL_SKU];

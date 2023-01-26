@@ -13,7 +13,7 @@ use SprykerShop\Yves\ChartWidget\ChartWidgetDependencyProvider as SprykerShopCha
 class ChartWidgetDependencyProvider extends SprykerShopChartDependencyProvider
 {
     /**
-     * @return \Spryker\Shared\Chart\Dependency\Plugin\ChartPluginInterface[]
+     * @return array<\Spryker\Shared\Chart\Dependency\Plugin\ChartPluginInterface>
      */
     protected function getChartPlugins(): array
     {

@@ -40,7 +40,7 @@ class ProductOptionFacadeAggregatorTest extends Unit
     /**
      * @return void
      */
-    public function testSaveSaleOrderProductOptionsShouldPersistProvidedOptions()
+    public function testSaveSaleOrderProductOptionsShouldPersistProvidedOptions(): void
     {
         $productOptionFacade = $this->createProductOptionFacade();
 
@@ -68,7 +68,7 @@ class ProductOptionFacadeAggregatorTest extends Unit
     /**
      * @return \Orm\Zed\Sales\Persistence\SpySalesOrderAddress
      */
-    protected function createSalesOrderAddress()
+    protected function createSalesOrderAddress(): SpySalesOrderAddress
     {
         $salesOrderAddressEntity = new SpySalesOrderAddress();
         $salesOrderAddressEntity->setAddress1(1);
@@ -94,7 +94,7 @@ class ProductOptionFacadeAggregatorTest extends Unit
     /**
      * @return \Orm\Zed\Oms\Persistence\SpyOmsOrderProcess
      */
-    protected function createOmsProcess()
+    protected function createOmsProcess(): SpyOmsOrderProcess
     {
         $omsProcessEntity = new SpyOmsOrderProcess();
         $omsProcessEntity->setName('test');
@@ -106,7 +106,7 @@ class ProductOptionFacadeAggregatorTest extends Unit
     /**
      * @return \Orm\Zed\Oms\Persistence\SpyOmsOrderItemState
      */
-    protected function createOmsState()
+    protected function createOmsState(): SpyOmsOrderItemState
     {
         $omsStateEntity = new SpyOmsOrderItemState();
         $omsStateEntity->setName('test');
@@ -118,7 +118,7 @@ class ProductOptionFacadeAggregatorTest extends Unit
     /**
      * @return \Spryker\Zed\ProductOption\Business\ProductOptionFacade
      */
-    protected function createProductOptionFacade()
+    protected function createProductOptionFacade(): ProductOptionFacade
     {
         $productOptionFacade = new ProductOptionFacade();
 
@@ -131,7 +131,7 @@ class ProductOptionFacadeAggregatorTest extends Unit
      *
      * @return \Orm\Zed\Sales\Persistence\SpySalesOrder
      */
-    protected function createSalesOrderEntity(SpySalesOrderAddress $address1, SpySalesOrderAddress $address2)
+    protected function createSalesOrderEntity(SpySalesOrderAddress $address1, SpySalesOrderAddress $address2): SpySalesOrder
     {
         $salesOrderEntity = new SpySalesOrder();
         $salesOrderEntity->setFkSalesOrderAddressBilling($address1->getIdSalesOrderAddress());
@@ -155,8 +155,8 @@ class ProductOptionFacadeAggregatorTest extends Unit
     protected function createSalesOrderItemEntity(
         SpyOmsOrderItemState $testStateEntity,
         SpyOmsOrderProcess $omsProcessEntity,
-        SpySalesOrder $salesOrderEntity
-    ) {
+        SpySalesOrder $salesOrderEntity,
+    ): SpySalesOrderItem {
         $salesOrderItemEntity = new SpySalesOrderItem();
         $salesOrderItemEntity->setFkOmsOrderItemState($testStateEntity->getIdOmsOrderItemState());
         $salesOrderItemEntity->setFkOmsOrderProcess($omsProcessEntity->getIdOmsOrderProcess());
@@ -177,7 +177,7 @@ class ProductOptionFacadeAggregatorTest extends Unit
      *
      * @return \Orm\Zed\Sales\Persistence\SpySalesOrderItemOption
      */
-    protected function createSalesOrderItemOptionEntity(SpySalesOrderItem $salesOrderItemEntity)
+    protected function createSalesOrderItemOptionEntity(SpySalesOrderItem $salesOrderItemEntity): SpySalesOrderItemOption
     {
         $salesOrderItemOptionEntity = new SpySalesOrderItemOption();
         $salesOrderItemOptionEntity->setFkSalesOrderItem($salesOrderItemEntity->getIdSalesOrderItem());
@@ -196,7 +196,7 @@ class ProductOptionFacadeAggregatorTest extends Unit
      *
      * @return \Generated\Shared\Transfer\OrderTransfer
      */
-    protected function createOrderTransferWithRelatedPersistedData($createOptions = true)
+    protected function createOrderTransferWithRelatedPersistedData($createOptions = true): OrderTransfer
     {
         $address1 = $this->createSalesOrderAddress();
         $address2 = $this->createSalesOrderAddress();

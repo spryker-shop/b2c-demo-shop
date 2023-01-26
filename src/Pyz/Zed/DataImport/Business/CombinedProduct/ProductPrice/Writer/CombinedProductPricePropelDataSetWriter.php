@@ -16,12 +16,19 @@ use Spryker\Zed\Store\Business\StoreFacadeInterface;
 class CombinedProductPricePropelDataSetWriter extends ProductPricePropelDataSetWriter
 {
     protected const COLUMN_ABSTRACT_SKU = CombinedProductPriceHydratorStep::COLUMN_ABSTRACT_SKU;
+
     protected const COLUMN_CONCRETE_SKU = CombinedProductPriceHydratorStep::COLUMN_CONCRETE_SKU;
+
     protected const COLUMN_STORE = CombinedProductPriceHydratorStep::COLUMN_STORE;
+
     protected const COLUMN_CURRENCY = CombinedProductPriceHydratorStep::COLUMN_CURRENCY;
+
     protected const COLUMN_PRICE_GROSS = CombinedProductPriceHydratorStep::COLUMN_PRICE_GROSS;
+
     protected const COLUMN_PRICE_NET = CombinedProductPriceHydratorStep::COLUMN_PRICE_NET;
+
     protected const COLUMN_PRICE_DATA = CombinedProductPriceHydratorStep::COLUMN_PRICE_DATA;
+
     protected const COLUMN_PRICE_DATA_CHECKSUM = CombinedProductPriceHydratorStep::COLUMN_PRICE_DATA_CHECKSUM;
 
     /**
@@ -32,7 +39,7 @@ class CombinedProductPricePropelDataSetWriter extends ProductPricePropelDataSetW
     public function __construct(
         ProductRepository $productRepository,
         StoreFacadeInterface $storeFacade,
-        CurrencyFacadeInterface $currencyFacade
+        CurrencyFacadeInterface $currencyFacade,
     ) {
         parent::__construct($productRepository, $storeFacade, $currencyFacade);
     }

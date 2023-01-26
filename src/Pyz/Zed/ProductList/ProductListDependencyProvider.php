@@ -13,7 +13,7 @@ use Spryker\Zed\ProductList\ProductListDependencyProvider as SprykerProductListD
 class ProductListDependencyProvider extends SprykerProductListDependencyProvider
 {
     /**
-     * @return \Spryker\Zed\ProductListExtension\Dependency\Plugin\ProductListDeletePreCheckPluginInterface[]
+     * @return array<\Spryker\Zed\ProductListExtension\Dependency\Plugin\ProductListDeletePreCheckPluginInterface>
      */
     protected function getProductListDeletePreCheckPlugins(): array
     {

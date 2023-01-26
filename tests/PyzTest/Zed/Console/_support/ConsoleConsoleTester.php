@@ -33,7 +33,7 @@ class ConsoleConsoleTester extends Actor
     /**
      * @return string
      */
-    public function runConsoleApplication()
+    public function runConsoleApplication(): string
     {
         $cmd = 'vendor/bin/console';
         $process = new Process([$cmd]);
