@@ -9,6 +9,7 @@ namespace Pyz\Zed\CategoryDataImport\Business;
 
 use Pyz\Zed\CategoryDataImport\Business\Model\CategoryWriterStep;
 use Spryker\Zed\CategoryDataImport\Business\CategoryDataImportBusinessFactory as SprykerCategoryDataImportBusinessFactory;
+use Spryker\Zed\DataImport\Business\Model\DataImporterInterface;
 
 /**
  * @method \Spryker\Zed\CategoryDataImport\CategoryDataImportConfig getConfig()
@@ -18,7 +19,7 @@ class CategoryDataImportBusinessFactory extends SprykerCategoryDataImportBusines
     /**
      * @return \Spryker\Zed\DataImport\Business\Model\DataImporterInterface
      */
-    public function createPyzCategoryImporter()
+    public function createPyzCategoryImporter(): DataImporterInterface
     {
         $dataImporter = $this->getCsvDataImporterFromConfig($this->getConfig()->getCategoryDataImporterConfiguration());
 

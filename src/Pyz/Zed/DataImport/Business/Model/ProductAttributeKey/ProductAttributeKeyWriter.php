@@ -17,6 +17,7 @@ class ProductAttributeKeyWriter implements DataImportStepInterface
      * @var string
      */
     public const ATTRIBUTE_KEY = 'attribute_key';
+
     /**
      * @var string
      */
@@ -27,7 +28,7 @@ class ProductAttributeKeyWriter implements DataImportStepInterface
      *
      * @return void
      */
-    public function execute(DataSetInterface $dataSet)
+    public function execute(DataSetInterface $dataSet): void
     {
         $query = SpyProductAttributeKeyQuery::create();
         $productAttributeKeyEntity = $query

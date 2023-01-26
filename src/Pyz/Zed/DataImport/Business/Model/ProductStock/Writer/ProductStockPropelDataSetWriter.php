@@ -35,25 +35,31 @@ use Spryker\Zed\Store\Business\StoreFacadeInterface;
 class ProductStockPropelDataSetWriter implements DataSetWriterInterface
 {
     protected const COLUMN_CONCRETE_SKU = ProductStockHydratorStep::COLUMN_CONCRETE_SKU;
+
     protected const COLUMN_IS_BUNDLE = ProductStockHydratorStep::COLUMN_IS_BUNDLE;
+
     protected const COLUMN_IS_NEVER_OUT_OF_STOCK = ProductStockHydratorStep::COLUMN_IS_NEVER_OUT_OF_STOCK;
 
     /**
      * @var string
      */
     protected const KEY_AVAILABILITY_SKU = 'KEY_AVAILABILITY_SKU';
+
     /**
      * @var string
      */
     protected const KEY_AVAILABILITY_QUANTITY = 'KEY_AVAILABILITY_QUANTITY';
+
     /**
      * @var string
      */
     protected const KEY_AVAILABILITY_ID_STORE = 'KEY_AVAILABILITY_ID_STORE';
+
     /**
      * @var string
      */
     protected const KEY_AVAILABILITY_IS_NEVER_OUT_OF_STOCK = 'KEY_AVAILABILITY_IS_NEVER_OUT_OF_STOCK';
+
     /**
      * @var string
      */
@@ -63,13 +69,14 @@ class ProductStockPropelDataSetWriter implements DataSetWriterInterface
      * @var string
      */
     protected const COL_AVAILABILITY_TOTAL_QUANTITY = 'availabilityTotalQuantity';
+
     /**
      * @var string
      */
     protected const COL_STOCK_PRODUCT_TOTAL_QUANTITY = 'stockProductTotalQuantity';
 
     /**
-     * @var string[]
+     * @var array<string>
      */
     protected static $productAbstractSkus = [];
 
@@ -103,7 +110,7 @@ class ProductStockPropelDataSetWriter implements DataSetWriterInterface
         ProductBundleFacadeInterface $productBundleFacade,
         ProductRepositoryInterface $productRepository,
         StoreFacadeInterface $storeFacade,
-        StockFacadeInterface $stockFacade
+        StockFacadeInterface $stockFacade,
     ) {
         $this->productBundleFacade = $productBundleFacade;
         $this->productRepository = $productRepository;
@@ -145,7 +152,7 @@ class ProductStockPropelDataSetWriter implements DataSetWriterInterface
      *
      * @return \Orm\Zed\Stock\Persistence\SpyStock
      */
-    protected function createOrUpdateStock(DataSetInterface $dataSet)
+    protected function createOrUpdateStock(DataSetInterface $dataSet): SpyStock
     {
         $stockTransfer = $dataSet[ProductStockHydratorStep::STOCK_ENTITY_TRANSFER];
         $stockEntity = SpyStockQuery::create()
@@ -199,7 +206,7 @@ class ProductStockPropelDataSetWriter implements DataSetWriterInterface
     }
 
     /**
-     * @return int[]
+     * @return array<int>
      */
     protected function getAvailabilityAbstractIdsForCollectedAbstractSkus(): array
     {
@@ -219,7 +226,7 @@ class ProductStockPropelDataSetWriter implements DataSetWriterInterface
     }
 
     /**
-     * @return int[]
+     * @return array<int>
      */
     protected function getStoreIds(): array
     {
@@ -317,13 +324,13 @@ class ProductStockPropelDataSetWriter implements DataSetWriterInterface
 
     /**
      * @param int $idProductConcrete
-     * @param string[] $stockNames
+     * @param array<string> $stockNames
      *
      * @return \Spryker\DecimalObject\Decimal
      */
     protected function getStockProductQuantityByIdProductAndStockNames(
         int $idProductConcrete,
-        array $stockNames
+        array $stockNames,
     ): Decimal {
         $stockProductTotalQuantity = SpyStockProductQuery::create()
             ->filterByFkProduct($idProductConcrete)
@@ -472,7 +479,7 @@ class ProductStockPropelDataSetWriter implements DataSetWriterInterface
      */
     protected function updateAbstractAvailabilityQuantity(
         SpyAvailabilityAbstract $availabilityAbstractEntity,
-        int $idStore
+        int $idStore,
     ): SpyAvailabilityAbstract {
         $sumQuantity = SpyAvailabilityQuery::create()
             ->filterByFkAvailabilityAbstract($availabilityAbstractEntity->getIdAvailabilityAbstract())

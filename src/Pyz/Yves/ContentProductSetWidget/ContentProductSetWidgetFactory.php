@@ -27,14 +27,14 @@ class ContentProductSetWidgetFactory extends SprykerContentProductSetWidgetFacto
      */
     public function createPyzContentProductSetTwigFunction(
         Environment $twig,
-        string $localeName
+        string $localeName,
     ): TwigFunction {
         $functionProvider = $this->createPyzContentProductSetTwigFunctionProvider($twig, $localeName);
 
         return new TwigFunction(
             $functionProvider->getFunctionName(),
             $functionProvider->getFunction(),
-            $functionProvider->getOptions()
+            $functionProvider->getOptions(),
         );
     }
 
@@ -46,13 +46,13 @@ class ContentProductSetWidgetFactory extends SprykerContentProductSetWidgetFacto
      */
     public function createPyzContentProductSetTwigFunctionProvider(
         Environment $twig,
-        string $localeName
+        string $localeName,
     ): TwigFunctionProvider {
         return new ContentProductSetTwigFunctionProvider(
             $twig,
             $localeName,
             $this->createPyzContentProductSetReader(),
-            $this->createPyzContentProductAbstractReader()
+            $this->createPyzContentProductAbstractReader(),
         );
     }
 
@@ -63,7 +63,7 @@ class ContentProductSetWidgetFactory extends SprykerContentProductSetWidgetFacto
     {
         return new ContentProductSetReader(
             $this->getContentProductSetClient(),
-            $this->getProductSetStorageClient()
+            $this->getProductSetStorageClient(),
         );
     }
 
@@ -73,7 +73,7 @@ class ContentProductSetWidgetFactory extends SprykerContentProductSetWidgetFacto
     public function createPyzContentProductAbstractReader(): ContentProductAbstractReaderInterface
     {
         return new ContentProductAbstractReader(
-            $this->getProductStorageClient()
+            $this->getProductStorageClient(),
         );
     }
 }

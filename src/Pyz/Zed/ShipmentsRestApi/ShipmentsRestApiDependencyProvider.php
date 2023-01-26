@@ -16,7 +16,7 @@ use Spryker\Zed\ShipmentsRestApi\ShipmentsRestApiDependencyProvider as SprykerSh
 class ShipmentsRestApiDependencyProvider extends SprykerShipmentsRestApiDependencyProvider
 {
     /**
-     * @return \Spryker\Zed\ShipmentsRestApiExtension\Dependency\Plugin\AddressProviderStrategyPluginInterface[]
+     * @return array<\Spryker\Zed\ShipmentsRestApiExtension\Dependency\Plugin\AddressProviderStrategyPluginInterface>
      */
     protected function getAddressProviderStrategyPlugins(): array
     {

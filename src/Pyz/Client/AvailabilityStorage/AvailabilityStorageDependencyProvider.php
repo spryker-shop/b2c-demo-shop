@@ -13,7 +13,7 @@ use Spryker\Client\ProductConfigurationStorage\Plugin\AvailabilityStorage\Produc
 class AvailabilityStorageDependencyProvider extends SprykerAvailabilityStorageDependencyProvider
 {
     /**
-     * @return \Spryker\Client\AvailabilityStorageExtension\Dependency\Plugin\AvailabilityStorageStrategyPluginInterface[]
+     * @return array<\Spryker\Client\AvailabilityStorageExtension\Dependency\Plugin\AvailabilityStorageStrategyPluginInterface>
      */
     public function getAvailabilityStorageStrategyPlugins(): array
     {

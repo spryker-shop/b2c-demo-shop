@@ -68,7 +68,7 @@ class ProductSetIdsWidget extends AbstractWidget
     }
 
     /**
-     * @param int[] $productSetIds
+     * @param array<int> $productSetIds
      *
      * @return array
      */
@@ -119,7 +119,7 @@ class ProductSetIdsWidget extends AbstractWidget
     /**
      * @param \Generated\Shared\Transfer\ProductSetDataStorageTransfer $productSetDataStorageTransfer
      *
-     * @return \Generated\Shared\Transfer\ProductViewTransfer[]
+     * @return array<\Generated\Shared\Transfer\ProductViewTransfer>
      */
     protected function mapPyzProductViewTransfers(ProductSetDataStorageTransfer $productSetDataStorageTransfer): array
     {
@@ -129,7 +129,7 @@ class ProductSetIdsWidget extends AbstractWidget
             $productViewTransfer = $this->getFactory()->getPyzProductStorageClient()->findProductAbstractViewTransfer(
                 $idProductAbstract,
                 $this->getLocale(),
-                $this->getPyzSelectedAttributes($idProductAbstract)
+                $this->getPyzSelectedAttributes($idProductAbstract),
             );
 
             if ($productViewTransfer === null) {

@@ -21,7 +21,7 @@ class ProductSearchAfterImportHook implements DataImporterAfterImportInterface
     /**
      * @return void
      */
-    public function afterImport()
+    public function afterImport(): void
     {
         DataImporterPublisher::addImportedEntityEvents([
             ProductSearchEvents::PRODUCT_SEARCH_CONFIG_PUBLISH => [

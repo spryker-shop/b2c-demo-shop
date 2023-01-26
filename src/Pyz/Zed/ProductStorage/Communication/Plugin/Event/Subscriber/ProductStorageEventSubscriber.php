@@ -12,6 +12,12 @@ use Pyz\Zed\ProductStorage\Communication\Plugin\Event\Listener\ProductBundleStor
 use Spryker\Zed\Event\Dependency\EventCollectionInterface;
 use Spryker\Zed\ProductStorage\Communication\Plugin\Event\Subscriber\ProductStorageEventSubscriber as SprykerProductStorageEventSubscriber;
 
+/**
+ * @method \Pyz\Zed\ProductStorage\Persistence\ProductStorageQueryContainerInterface getQueryContainer()
+ * @method \Spryker\Zed\ProductStorage\Business\ProductStorageFacadeInterface getFacade()
+ * @method \Pyz\Zed\ProductStorage\ProductStorageConfig getConfig()
+ * @method \Spryker\Zed\ProductStorage\Communication\ProductStorageCommunicationFactory getFactory()
+ */
 class ProductStorageEventSubscriber extends SprykerProductStorageEventSubscriber
 {
     /**
@@ -38,7 +44,7 @@ class ProductStorageEventSubscriber extends SprykerProductStorageEventSubscriber
     {
         $eventCollection->addListenerQueued(
             ProductBundleEvents::ENTITY_SPY_PRODUCT_BUNDLE_CREATE,
-            new ProductBundleStoragePublishListener()
+            new ProductBundleStoragePublishListener(),
         );
 
         return $eventCollection;
@@ -53,7 +59,7 @@ class ProductStorageEventSubscriber extends SprykerProductStorageEventSubscriber
     {
         $eventCollection->addListenerQueued(
             ProductBundleEvents::ENTITY_SPY_PRODUCT_BUNDLE_UPDATE,
-            new ProductBundleStoragePublishListener()
+            new ProductBundleStoragePublishListener(),
         );
 
         return $eventCollection;
@@ -68,7 +74,7 @@ class ProductStorageEventSubscriber extends SprykerProductStorageEventSubscriber
     {
         $eventCollection->addListenerQueued(
             ProductBundleEvents::ENTITY_SPY_PRODUCT_BUNDLE_DELETE,
-            new ProductBundleStoragePublishListener()
+            new ProductBundleStoragePublishListener(),
         );
 
         return $eventCollection;

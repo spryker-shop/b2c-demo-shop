@@ -18,6 +18,7 @@ class ProductSkuToIdProductStep implements DataImportStepInterface
      * @var string
      */
     public const KEY_SOURCE = 'sku';
+
     /**
      * @var string
      */

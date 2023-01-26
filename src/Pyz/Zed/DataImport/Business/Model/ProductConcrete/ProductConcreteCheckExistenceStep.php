@@ -25,12 +25,12 @@ class ProductConcreteCheckExistenceStep implements DataImportStepInterface
     protected $productRepository;
 
     /**
-     * @var string[] Keys are abstract product sku values.
+     * @var array<string> Keys are abstract product sku values.
      */
     protected $skuProductAbstractList = [];
 
     /**
-     * @var bool[] Keys are concrete product sku values. Values are set to "true" when concrete product added.
+     * @var array<bool> Keys are concrete product sku values. Values are set to "true" when concrete product added.
      */
     protected $resolved = [];
 

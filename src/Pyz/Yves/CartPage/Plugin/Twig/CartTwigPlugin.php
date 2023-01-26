@@ -73,7 +73,7 @@ class CartTwigPlugin extends SprykerCartTwigPlugin
             return $this->getFactory()
                 ->createCartItemReader()
                 ->getCartItems(
-                    $this->getFactory()->getCartClient()->getQuote()
+                    $this->getFactory()->getCartClient()->getQuote(),
                 );
         });
 

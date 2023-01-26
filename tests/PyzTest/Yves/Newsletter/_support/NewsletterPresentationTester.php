@@ -49,7 +49,7 @@ class NewsletterPresentationTester extends Actor
      *
      * @return void
      */
-    public function haveAnAlreadySubscribedEmail($email)
+    public function haveAnAlreadySubscribedEmail($email): void
     {
         $newsletterSubscriberEntity = new SpyNewsletterSubscriber();
         $newsletterSubscriberEntity

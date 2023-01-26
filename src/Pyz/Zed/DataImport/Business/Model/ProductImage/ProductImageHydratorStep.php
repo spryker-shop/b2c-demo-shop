@@ -26,34 +26,42 @@ class ProductImageHydratorStep extends PublishAwareStep implements DataImportSte
      * @var string
      */
     public const COLUMN_ABSTRACT_SKU = 'abstract_sku';
+
     /**
      * @var string
      */
     public const COLUMN_CONCRETE_SKU = 'concrete_sku';
+
     /**
      * @var string
      */
     public const COLUMN_IMAGE_SET_NAME = 'image_set_name';
+
     /**
      * @var string
      */
     public const COLUMN_EXTERNAL_URL_LARGE = 'external_url_large';
+
     /**
      * @var string
      */
     public const COLUMN_EXTERNAL_URL_SMALL = 'external_url_small';
+
     /**
      * @var string
      */
     public const COLUMN_LOCALE = 'locale';
+
     /**
      * @var string
      */
     public const COLUMN_SORT_ORDER = 'sort_order';
+
     /**
      * @var string
      */
     public const COLUMN_PRODUCT_IMAGE_KEY = 'product_image_key';
+
     /**
      * @var string
      */
@@ -63,6 +71,7 @@ class ProductImageHydratorStep extends PublishAwareStep implements DataImportSte
      * @var string
      */
     public const KEY_IMAGE_SET_FK_PRODUCT = 'fk_product';
+
     /**
      * @var string
      */
@@ -72,62 +81,77 @@ class ProductImageHydratorStep extends PublishAwareStep implements DataImportSte
      * @var string
      */
     public const KEY_ID_LOCALE = 'id_locale';
+
     /**
      * @var string
      */
     public const KEY_SPY_LOCALE = 'spy_locale';
+
     /**
      * @var string
      */
     public const KEY_LOCALE_NAME = 'locale_name';
+
     /**
      * @var string
      */
     public const KEY_IMAGE_SET_DB_NAME_COLUMN = 'name';
+
     /**
      * @var string
      */
     public const KEY_IMAGE_SET_RELATION_ID_PRODUCT_IMAGE_SET = 'id_product_image_set';
+
     /**
      * @var string
      */
     public const KEY_IMAGE_SET_RELATION_ID_PRODUCT_IMAGE = 'id_product_image';
+
     /**
      * @var string
      */
     public const KEY_IMAGE_SET_FK_RESOURCE_PRODUCT_SET = 'fk_resource_product_set';
+
     /**
      * @var string
      */
     public const KEY_IMAGE_SET_FK_LOCALE = 'fk_locale';
+
     /**
      * @var string
      */
     public const KEY_ID_PRODUCT = 'id_product';
+
     /**
      * @var string
      */
     public const KEY_FK_PRODUCT = 'fk_product';
+
     /**
      * @var string
      */
     public const KEY_ID_PRODUCT_ABSTRACT = 'id_product_abstract';
+
     /**
      * @var string
      */
     public const KEY_FK_PRODUCT_ABSTRACT = 'fk_product_abstract';
+
     /**
      * @var int
      */
     public const IMAGE_TO_IMAGE_SET_RELATION_ORDER = 0;
+
     /**
      * @var string
      */
     public const DATA_PRODUCT_IMAGE_SET_TRANSFER = 'DATA_PRODUCT_IMAGE_SET_TRANSFER';
+
     /**
      * @var string
      */
     public const DATA_PRODUCT_IMAGE_TRANSFER = 'DATA_PRODUCT_IMAGE_TRANSFER';
+
     /**
      * @var string
      */

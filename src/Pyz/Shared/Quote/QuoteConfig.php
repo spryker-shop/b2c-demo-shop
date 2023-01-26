@@ -14,7 +14,7 @@ class QuoteConfig extends SprykerQuoteConfig
     /**
      * @return string
      */
-    public function getStorageStrategy()
+    public function getStorageStrategy(): string
     {
         return static::STORAGE_STRATEGY_DATABASE;
     }

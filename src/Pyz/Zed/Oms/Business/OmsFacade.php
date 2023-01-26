@@ -13,6 +13,8 @@ use Spryker\Zed\Oms\Business\OmsFacade as SprykerOmsFacade;
 
 /**
  * @method \Pyz\Zed\Oms\Business\OmsBusinessFactory getFactory()
+ * @method \Spryker\Zed\Oms\Persistence\OmsEntityManagerInterface getEntityManager()
+ * @method \Spryker\Zed\Oms\Persistence\OmsRepositoryInterface getRepository()
  */
 class OmsFacade extends SprykerOmsFacade implements OmsFacadeInterface
 {
@@ -26,7 +28,7 @@ class OmsFacade extends SprykerOmsFacade implements OmsFacadeInterface
      * @return \Generated\Shared\Transfer\TimeoutProcessorTimeoutResponseTransfer
      */
     public function calculatePyzInitiationTimeout(
-        TimeoutProcessorTimeoutRequestTransfer $timeoutProcessorTimeoutRequestTransfer
+        TimeoutProcessorTimeoutRequestTransfer $timeoutProcessorTimeoutRequestTransfer,
     ): TimeoutProcessorTimeoutResponseTransfer {
         return $this->getFactory()->createPyzInitiationTimeoutCalculator()->calculateTimeout($timeoutProcessorTimeoutRequestTransfer);
     }

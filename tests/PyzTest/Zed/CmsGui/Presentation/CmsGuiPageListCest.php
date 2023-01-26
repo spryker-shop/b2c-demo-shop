@@ -27,7 +27,7 @@ class CmsGuiPageListCest
      *
      * @return void
      */
-    public function testICanOpenCmsPageList(CmsGuiPresentationTester $i)
+    public function testICanOpenCmsPageList(CmsGuiPresentationTester $i): void
     {
         $i->amLoggedInUser();
         $i->amOnPage(CmsListPage::URL);

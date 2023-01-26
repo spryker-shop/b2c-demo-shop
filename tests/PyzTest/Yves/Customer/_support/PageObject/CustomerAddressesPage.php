@@ -25,6 +25,7 @@ class CustomerAddressesPage extends Customer
      * @var string
      */
     public const ADDRESS_A = 'address a';
+
     /**
      * @var string
      */
@@ -67,7 +68,7 @@ class CustomerAddressesPage extends Customer
      *
      * @return \Generated\Shared\Transfer\AddressTransfer
      */
-    public static function getAddressData($address)
+    public static function getAddressData($address): AddressTransfer
     {
         $addressTransfer = new AddressTransfer();
         $addressTransfer->fromArray(self::$addresses[$address]);

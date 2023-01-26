@@ -13,6 +13,7 @@ class CmsCreatePage
      * @var string
      */
     public const URL = '/cms-gui/create-page';
+
     /**
      * @var string
      */

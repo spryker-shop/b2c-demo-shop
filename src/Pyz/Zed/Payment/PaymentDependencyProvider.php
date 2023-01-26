@@ -15,7 +15,7 @@ use Spryker\Zed\Payment\PaymentDependencyProvider as SprykerPaymentDependencyPro
 class PaymentDependencyProvider extends SprykerPaymentDependencyProvider
 {
     /**
-     * @return \Spryker\Zed\PaymentExtension\Dependency\Plugin\PaymentMethodFilterPluginInterface[]
+     * @return array<\Spryker\Zed\PaymentExtension\Dependency\Plugin\PaymentMethodFilterPluginInterface>
      */
     protected function getPaymentMethodFilterPlugins(): array
     {

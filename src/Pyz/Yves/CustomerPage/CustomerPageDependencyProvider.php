@@ -15,7 +15,7 @@ use SprykerShop\Yves\SessionAgentValidation\Plugin\CustomerPage\UpdateAgentSessi
 class CustomerPageDependencyProvider extends SprykerShopCustomerPageDependencyProvider
 {
     /**
-     * @return string[]
+     * @return array<string>
      */
     protected function getCustomerOverviewWidgetPlugins(): array
     {
@@ -25,7 +25,7 @@ class CustomerPageDependencyProvider extends SprykerShopCustomerPageDependencyPr
     }
 
     /**
-     * @return string[]
+     * @return array<string>
      */
     protected function getCustomerOrderListWidgetPlugins(): array
     {
@@ -35,7 +35,7 @@ class CustomerPageDependencyProvider extends SprykerShopCustomerPageDependencyPr
     }
 
     /**
-     * @return string[]
+     * @return array<string>
      */
     protected function getCustomerOrderViewWidgetPlugins(): array
     {

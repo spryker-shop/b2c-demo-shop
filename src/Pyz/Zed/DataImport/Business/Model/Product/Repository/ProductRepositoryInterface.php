@@ -35,12 +35,12 @@ interface ProductRepositoryInterface
     public function getIdProductAbstractByAbstractSku($sku): int;
 
     /**
-     * @return string[]
+     * @return array<string>
      */
     public function getSkuProductAbstractList(): array;
 
     /**
-     * @return string[]
+     * @return array<string>
      */
     public function getSkuProductConcreteList(): array;
 

@@ -17,7 +17,7 @@ use SprykerShop\Yves\StorageRouter\StorageRouterDependencyProvider as SprykerSho
 class StorageRouterDependencyProvider extends SprykerShopStorageRouterDependencyProvider
 {
     /**
-     * @return \SprykerShop\Yves\StorageRouterExtension\Dependency\Plugin\ResourceCreatorPluginInterface[]
+     * @return array<\SprykerShop\Yves\StorageRouterExtension\Dependency\Plugin\ResourceCreatorPluginInterface>
      */
     protected function getResourceCreatorPlugins(): array
     {

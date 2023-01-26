@@ -28,9 +28,9 @@ class AddCategoryKeysStep implements DataImportStepInterface
      *
      * @return void
      */
-    public function execute(DataSetInterface $dataSet)
+    public function execute(DataSetInterface $dataSet): void
     {
-        if (empty($this->categoryKeys)) {
+        if (!$this->categoryKeys) {
             $categoryEntityCollection = SpyCategoryQuery::create()->find();
 
             foreach ($categoryEntityCollection as $categoryEntity) {

@@ -13,6 +13,7 @@ class CmsListPage
      * @var string
      */
     public const URL = '/cms-gui/list-page';
+
     /**
      * @var string
      */

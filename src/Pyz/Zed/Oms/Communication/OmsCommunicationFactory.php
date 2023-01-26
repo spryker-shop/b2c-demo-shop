@@ -13,6 +13,10 @@ use Spryker\Zed\Translator\Business\TranslatorFacadeInterface;
 
 /**
  * @method \Pyz\Zed\Oms\Business\OmsFacadeInterface getFacade()
+ * @method \Spryker\Zed\Oms\Persistence\OmsQueryContainerInterface getQueryContainer()
+ * @method \Spryker\Zed\Oms\Persistence\OmsEntityManagerInterface getEntityManager()
+ * @method \Pyz\Zed\Oms\OmsConfig getConfig()
+ * @method \Spryker\Zed\Oms\Persistence\OmsRepositoryInterface getRepository()
  */
 class OmsCommunicationFactory extends SprykerOmsCommunicationFactory
 {

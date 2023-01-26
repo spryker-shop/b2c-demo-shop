@@ -14,7 +14,7 @@ class StoreConfig extends SprykerStoreConfig
     /**
      * @return bool
      */
-    public function isMultiStorePerZedEnabled()
+    public function isMultiStorePerZedEnabled(): bool
     {
         return true;
     }

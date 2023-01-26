@@ -18,9 +18,9 @@ use Spryker\Zed\ProductLabel\Dependency\Plugin\ProductLabelRelationUpdaterPlugin
 class ExampleProductSalePageLabelUpdaterPlugin extends AbstractPlugin implements ProductLabelRelationUpdaterPluginInterface
 {
     /**
-     * @return \Generated\Shared\Transfer\ProductLabelProductAbstractRelationsTransfer[]
+     * @return array<\Generated\Shared\Transfer\ProductLabelProductAbstractRelationsTransfer>
      */
-    public function findProductLabelProductAbstractRelationChanges()
+    public function findProductLabelProductAbstractRelationChanges(): array
     {
         return $this->getFacade()->findPyzProductLabelProductAbstractRelationChanges();
     }

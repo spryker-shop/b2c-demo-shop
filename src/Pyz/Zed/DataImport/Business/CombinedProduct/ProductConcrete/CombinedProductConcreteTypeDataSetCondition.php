@@ -16,6 +16,7 @@ class CombinedProductConcreteTypeDataSetCondition implements DataSetConditionInt
      * @var string
      */
     protected const ASSIGNABLE_PRODUCT_TYPE_CONCRETE = 'concrete';
+
     /**
      * @var string
      */

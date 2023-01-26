@@ -26,7 +26,7 @@ class GenerateDataBuildersCest
      *
      * @return void
      */
-    public function dataBuilder(ConsoleConsoleTester $i)
+    public function dataBuilder(ConsoleConsoleTester $i): void
     {
         $i->runSprykerCommand('transfer:databuilder:generate -vvv');
         $i->seeInShellOutput('CustomerBuilder.php was generated');

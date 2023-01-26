@@ -26,10 +26,12 @@ class ProductGroupWriter extends PublishAwareStep implements DataImportStepInter
      * @var string
      */
     public const COLUMN_ABSTRACT_SKU = 'abstract_sku';
+
     /**
      * @var string
      */
     public const COLUMN_PRODUCT_GROUP_KEY = 'group_key';
+
     /**
      * @var string
      */
@@ -53,7 +55,7 @@ class ProductGroupWriter extends PublishAwareStep implements DataImportStepInter
      *
      * @return void
      */
-    public function execute(DataSetInterface $dataSet)
+    public function execute(DataSetInterface $dataSet): void
     {
         $productGroupEntity = SpyProductGroupQuery::create()
             ->filterByProductGroupKey($dataSet[static::COLUMN_PRODUCT_GROUP_KEY])

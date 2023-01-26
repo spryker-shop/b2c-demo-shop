@@ -24,7 +24,7 @@ class DataImporterDataSetWriterAwareConditional extends DataImporterDataSetWrite
      *
      * @return void
      */
-    public function setDataSetCondition(DataSetConditionInterface $dataSetCondition)
+    public function setDataSetCondition(DataSetConditionInterface $dataSetCondition): void
     {
         $this->dataSetCondition = $dataSetCondition;
     }
