@@ -5,6 +5,6 @@ export default register(
         import(
             /* webpackMode: "lazy" */
             /* webpackChunkName: "formatted-number-input" */
-            './formatted-number-input'
+            'ShopUi/components/molecules/formatted-number-input/formatted-number-input'
         ),
 );

@@ -39,8 +39,7 @@
 } | merge(data.numberFormatConfig) %}
 
 {% block body %}
-    {% set inputClassName = data.inputAttributes.class ~ ' ' ~ component.renderClass(config.name ~ '__input', modifiers) ~ ' ' ~ config.jsName ~ '__input' %}
-    {% set hiddenInputClassName = 'js-volume-price__quantity' %}
+    {% set inputClassName = data.inputAttributes.class ~ ' ' ~ component.renderClass(config.name ~ '__input', modifiers) ~ ' ' ~ config.jsName ~ '__input js-volume-price__quantity' %}
     {% set buttonDisabledClassName = data.minQuantity == maxQuantity or data.disabled ? 'button--disabled' %}
 
     <div class="{{ component.renderClass(config.name ~ '__container', modifiers) }} grid grid--middle">
@@ -60,7 +59,6 @@
                         inputValue: data.value,
                         inputAttributes: inputAttributes,
                         hiddenInputAttributes: hiddenInputAttributes,
-                        hiddenInputExtraClasses: hiddenInputClassName,
                     },
                     attributes: formatAttributes,
                 } only %}
