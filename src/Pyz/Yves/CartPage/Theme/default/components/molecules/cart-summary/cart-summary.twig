@@ -68,7 +68,7 @@
     </div>
 
     {% set productConfigurationWidget = findWidget('ProductConfigurationQuoteValidatorWidget', [data.cart]) %}
-    {% set canProceedQuoteCheckout = productConfigurationWidget.isQuoteProductConfigurationValid %}
+    {% set canProceedQuoteCheckout = productConfigurationWidget.isQuoteProductConfigurationValid ?? true %}
 
     {% widget 'ProductConfigurationQuoteValidatorWidget' args [data.cart] only %}{% endwidget %}
 
