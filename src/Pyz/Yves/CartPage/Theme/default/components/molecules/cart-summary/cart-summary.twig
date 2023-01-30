@@ -70,7 +70,7 @@
     {% set productConfigurationWidget = findWidget('ProductConfigurationQuoteValidatorWidget', [data.cart]) %}
     {% set canProceedQuoteCheckout = productConfigurationWidget.isQuoteProductConfigurationValid ?? true %}
 
-    {% widget 'ProductConfigurationQuoteValidatorWidget' args [data.cart] only %}{% endwidget %}
+    {% widget productConfigurationWidget only %}{% endwidget %}
 
     {% if canProceedToCheckout %}
         {% set disableButton = not canProceedQuoteCheckout ? 'button--disabled' %}
