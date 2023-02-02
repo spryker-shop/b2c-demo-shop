@@ -20,9 +20,9 @@ x-frontend-auth: &frontend-auth
 namespace: spryker-cloud
 tag: '1.0'
 
-environment: docker.dev
+environment: docker.production
 image:
-    tag: spryker/php:7.4
+    tag: spryker/php:8.1
     environment:
         SPRYKER_DNS_RESOLVER_IP: "10.105.0.2"
         SPRYKER_DEFAULT_STORE: "DE"
@@ -31,14 +31,21 @@ image:
         SPRYKER_HOOK_AFTER_DEPLOY: "true"
         SPRYKER_HOOK_INSTALL: "vendor/bin/install -r EU/production --no-ansi -vvv"
         SPRYKER_HOOK_DESTRUCTIVE_INSTALL: "vendor/bin/install -r EU/destructive --no-ansi -vvv"
+        SPRYKER_PRODUCT_CONFIGURATOR_HOST: dtc.academy.b2c.demo-spryker.com
+        SPRYKER_PRODUCT_CONFIGURATOR_PORT: 443
     php:
+        ini:
+            "opcache.revalidate_freq": 0
         enabled-extensions:
             - blackfire
             - newrelic
+    node:
+        version: 16
+        npm: 8
 
 composer:
-    mode: ''
-    autoload: ''
+    mode: '--no-dev'
+    autoload: ' --classmap-authoritative --optimize'
 
 assets:
     image: fholzer/nginx-brotli:v1.18.0
@@ -92,12 +99,12 @@ groups:
                         store: DE
                         redirect:
                             code: 302
-                            url: www.de.academy.b2c.demo-spryker.com 
+                            url: www.de.academy.b2c.demo-spryker.com
                     www.academy.b2c.demo-spryker.com:
                         store: DE
                         redirect:
                             code: 302
-                            url: www.de.academy.b2c.demo-spryker.com  
+                            url: www.de.academy.b2c.demo-spryker.com
                     backoffice.academy.b2c.demo-spryker.com:
                         store: DE
                         redirect:
@@ -117,17 +124,17 @@ groups:
                         store: AT
                         redirect:
                             code: 302
-                            url: backoffice.at.academy.b2c.demo-spryker.com                            
-                    us.academy.b2c.demo-spryker.com:                    
+                            url: backoffice.at.academy.b2c.demo-spryker.com
+                    us.academy.b2c.demo-spryker.com:
                         store: US
                         redirect:
                             code: 302
                             url: www.academy-us.b2c.demo-spryker.com
-                    www.us.academy.b2c.demo-spryker.com:                    
+                    www.us.academy.b2c.demo-spryker.com:
                         store: US
                         redirect:
                             code: 302
-                            url: www.academy-us.b2c.demo-spryker.com                                                        
+                            url: www.academy-us.b2c.demo-spryker.com
                     backoffice.us.academy.b2c.demo-spryker.com:
                         store: US
                         redirect:
@@ -137,11 +144,11 @@ groups:
                         store: US
                         redirect:
                             code: 302
-                            url: backoffice.academy-us.b2c.demo-spryker.com                            
+                            url: backoffice.academy-us.b2c.demo-spryker.com
             yves:
                 application: yves
                 endpoints:
-                    date-time-configurator-example.academy.b2c.demo-spryker.com:
+                    dtc.academy.b2c.demo-spryker.com:
                         entry-point: Configurator
                     www.de.academy.b2c.demo-spryker.com:
                         store: DE
