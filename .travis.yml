@@ -148,7 +148,9 @@ jobs:
               key_url: https://download.docker.com/linux/ubuntu/gpg
       install:
         - echo eyAiZXhwZXJpbWVudGFsIiA6IHRydWUsICJmZWF0dXJlcyIgOiB7ICJidWlsZGtpdCI6IHRydWUgfSwgImlwdjYiOiBmYWxzZSwgIm10dSI6IDE0NTB9|base64 -d|sudo tee /etc/docker/daemon.json
-        - sudo apt-get install --only-upgrade docker-ce -y
+        - sudo apt-get remove docker docker-engine docker.io containerd runc
+        - sudo apt-get install docker-ce=5:20.10.23~3-0~ubuntu-bionic docker-ce-cli=5:20.10.23~3-0~ubuntu-bionic containerd.io docker-compose-plugin
+        - docker -v
         - sudo curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
         - sudo chmod +x /usr/local/bin/docker-compose
       script:
