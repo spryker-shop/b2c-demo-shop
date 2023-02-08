@@ -18,7 +18,6 @@ use Spryker\Zed\CategoryImage\Communication\Plugin\RemoveCategoryImageSetRelatio
 use Spryker\Zed\CategoryNavigationConnector\Communication\Plugin\UpdateNavigationRelationPlugin;
 use Spryker\Zed\CmsBlockCategoryConnector\Communication\Plugin\Category\CmsBlockCategoryCategoryRelationPlugin;
 use Spryker\Zed\ProductCategory\Communication\Plugin\RemoveProductCategoryRelationPlugin;
-use Spryker\Zed\ProductCategory\Communication\Plugin\UpdateProductCategoryRelationPlugin;
 
 class CategoryDependencyProvider extends SprykerDependencyProvider
 {
@@ -44,7 +43,6 @@ class CategoryDependencyProvider extends SprykerDependencyProvider
     protected function getRelationUpdatePluginStack(): array
     {
         return [
-            new UpdateProductCategoryRelationPlugin(),
             new UpdateNavigationRelationPlugin(),
             new CmsBlockCategoryCategoryRelationPlugin(),
         ];
