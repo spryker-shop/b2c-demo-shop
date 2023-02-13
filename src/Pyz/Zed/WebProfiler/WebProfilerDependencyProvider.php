@@ -23,7 +23,7 @@ use Spryker\Zed\WebProfiler\WebProfilerDependencyProvider as SprykerWebProfilerD
 class WebProfilerDependencyProvider extends SprykerWebProfilerDependencyProvider
 {
     /**
-     * @return \Spryker\Shared\WebProfilerExtension\Dependency\Plugin\WebProfilerDataCollectorPluginInterface[]
+     * @return array<\Spryker\Shared\WebProfilerExtension\Dependency\Plugin\WebProfilerDataCollectorPluginInterface>
      */
     public function getDataCollectorPlugins(): array
     {

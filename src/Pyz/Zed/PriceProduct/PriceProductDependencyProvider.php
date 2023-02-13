@@ -17,7 +17,7 @@ use Spryker\Zed\PriceProductVolume\Communication\Plugin\PriceProductExtension\Pr
 class PriceProductDependencyProvider extends SprykerPriceProductDependencyProvider
 {
     /**
-     * @return \Spryker\Zed\PriceProductExtension\Dependency\Plugin\PriceProductReaderPricesExtractorPluginInterface[]
+     * @return array<\Spryker\Zed\PriceProductExtension\Dependency\Plugin\PriceProductReaderPricesExtractorPluginInterface>
      */
     protected function getPriceProductPricesExtractorPlugins(): array
     {

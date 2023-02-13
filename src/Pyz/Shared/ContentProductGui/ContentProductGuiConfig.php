@@ -58,7 +58,7 @@ class ContentProductGuiConfig extends SprykerContentProductGuiConfig
                 static::PYZ_WIDGET_TEMPLATE_IDENTIFIER_SLIDER => static::PYZ_WIDGET_TEMPLATE_DISPLAY_NAME_SLIDER,
                 static::PYZ_WIDGET_TEMPLATE_IDENTIFIER_WITH_BUTTON => static::PYZ_WIDGET_TEMPLATE_DISPLAY_NAME_SLIDER_WITH_BUTTON,
                 static::PYZ_WIDGET_TEMPLATE_IDENTIFIER_SLIDER_NOT_INCLUDE_GROUP => static::PYZ_WIDGET_TEMPLATE_DISPLAY_NAME_SLIDER_NOT_INCLUDE_GROUP,
-            ]
+            ],
         );
     }
 }

@@ -13,9 +13,9 @@ use Spryker\Zed\Newsletter\NewsletterConfig as SprykerNewsletterConfig;
 class NewsletterConfig extends SprykerNewsletterConfig
 {
     /**
-     * @return string[]
+     * @return array<string>
      */
-    public function getNewsletterTypes()
+    public function getNewsletterTypes(): array
     {
         return [
             NewsletterConstants::DEFAULT_NEWSLETTER_TYPE,

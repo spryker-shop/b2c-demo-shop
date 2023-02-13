@@ -7,6 +7,7 @@
 
 namespace Pyz\Zed\ProductOption;
 
+use Spryker\Zed\Kernel\Communication\Form\FormTypeInterface;
 use Spryker\Zed\Kernel\Container;
 use Spryker\Zed\MoneyGui\Communication\Plugin\Form\MoneyCollectionFormTypePlugin;
 use Spryker\Zed\ProductOption\ProductOptionDependencyProvider as SprykerProductOptionDependencyProvider;
@@ -18,7 +19,7 @@ class ProductOptionDependencyProvider extends SprykerProductOptionDependencyProv
      *
      * @return \Spryker\Zed\Kernel\Communication\Form\FormTypeInterface
      */
-    protected function createMoneyCollectionFormTypePlugin(Container $container)
+    protected function createMoneyCollectionFormTypePlugin(Container $container): FormTypeInterface
     {
         return new MoneyCollectionFormTypePlugin();
     }

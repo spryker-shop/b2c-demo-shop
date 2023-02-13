@@ -17,9 +17,9 @@ class QuoteDependencyProvider extends BaseQuoteDependencyProvider
     /**
      * @param \Spryker\Client\Kernel\Container $container
      *
-     * @return \Spryker\Client\Quote\Dependency\Plugin\QuoteTransferExpanderPluginInterface[]
+     * @return array<\Spryker\Client\Quote\Dependency\Plugin\QuoteTransferExpanderPluginInterface>
      */
-    protected function getQuoteTransferExpanderPlugins(Container $container)
+    protected function getQuoteTransferExpanderPlugins(Container $container): array
     {
         return [
             new StoreQuoteTransferExpanderPlugin(),

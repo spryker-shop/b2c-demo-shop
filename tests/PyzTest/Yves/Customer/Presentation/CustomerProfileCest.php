@@ -27,7 +27,7 @@ class CustomerProfileCest
      *
      * @return void
      */
-    public function testICanUpdateProfileData(CustomerPresentationTester $i)
+    public function testICanUpdateProfileData(CustomerPresentationTester $i): void
     {
         $i->amLoggedInCustomer();
         $i->amOnPage(CustomerProfilePage::URL);
@@ -47,7 +47,7 @@ class CustomerProfileCest
      *
      * @return void
      */
-    public function testICanUpdateEmail(CustomerPresentationTester $i)
+    public function testICanUpdateEmail(CustomerPresentationTester $i): void
     {
         $i->amLoggedInCustomer();
         $i->amOnPage(CustomerProfilePage::URL);
@@ -63,7 +63,7 @@ class CustomerProfileCest
      *
      * @return void
      */
-    public function testICanNotUpdateEmailToAnAlreadyUsedOne(CustomerPresentationTester $i)
+    public function testICanNotUpdateEmailToAnAlreadyUsedOne(CustomerPresentationTester $i): void
     {
         $i->amLoggedInCustomer();
         $i->haveRegisteredCustomer(['email' => CustomerProfilePage::REGISTERED_CUSTOMER_EMAIL]);
@@ -80,7 +80,7 @@ class CustomerProfileCest
      *
      * @return void
      */
-    public function testICanChangePassword(CustomerPresentationTester $i)
+    public function testICanChangePassword(CustomerPresentationTester $i): void
     {
         $customerTransfer = $i->amLoggedInCustomer();
         $i->amOnPage(CustomerProfilePage::URL);
@@ -101,7 +101,7 @@ class CustomerProfileCest
      *
      * @return void
      */
-    public function testICanNotChangePasswordWhenNewPasswordsNotMatch(CustomerPresentationTester $i)
+    public function testICanNotChangePasswordWhenNewPasswordsNotMatch(CustomerPresentationTester $i): void
     {
         $i->amLoggedInCustomer();
         $i->amOnPage(CustomerProfilePage::URL);

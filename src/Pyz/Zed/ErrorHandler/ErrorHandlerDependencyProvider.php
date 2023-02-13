@@ -13,7 +13,7 @@ use Spryker\Zed\ErrorHandler\ErrorHandlerDependencyProvider as SprykerErrorHandl
 class ErrorHandlerDependencyProvider extends SprykerErrorHandlerDependencyProvider
 {
     /**
-     * @return \Spryker\Zed\ErrorHandlerExtension\Dependency\Plugin\ExceptionHandlerStrategyPluginInterface[]
+     * @return array<\Spryker\Zed\ErrorHandlerExtension\Dependency\Plugin\ExceptionHandlerStrategyPluginInterface>
      */
     protected function getExceptionHandlerStrategyPlugins(): array
     {

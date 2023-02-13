@@ -25,14 +25,17 @@ class CombinedProductStockHydratorStep extends ProductStockHydratorStep
      * @var string
      */
     public const COLUMN_NAME = 'product_stock.name';
+
     /**
      * @var string
      */
     public const COLUMN_QUANTITY = 'product_stock.quantity';
+
     /**
      * @var string
      */
     public const COLUMN_IS_NEVER_OUT_OF_STOCK = 'product_stock.is_never_out_of_stock';
+
     /**
      * @var string
      */

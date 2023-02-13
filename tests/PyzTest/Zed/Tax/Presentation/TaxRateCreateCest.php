@@ -28,7 +28,7 @@ class TaxRateCreateCest
      *
      * @return void
      */
-    public function testCreateValidTaxRateShouldShowSuccessMessage(TaxPresentationTester $i)
+    public function testCreateValidTaxRateShouldShowSuccessMessage(TaxPresentationTester $i): void
     {
         $i->wantTo('Create valid tax rate.');
         $i->expect('Tax rate is successfully created');
@@ -44,7 +44,7 @@ class TaxRateCreateCest
      *
      * @return void
      */
-    public function testCreateInvalidTaxRateShouldShowErrorMessages(TaxPresentationTester $i)
+    public function testCreateInvalidTaxRateShouldShowErrorMessages(TaxPresentationTester $i): void
     {
         $i->wantTo('Create invalid tax rate');
         $i->expect('Error messages are displayed. Tax rate is not created');
@@ -58,7 +58,7 @@ class TaxRateCreateCest
      *
      * @return void
      */
-    public function testBackToListOfTaxRatesShouldOpenTaxRateListPageWithoutSaving(TaxPresentationTester $i)
+    public function testBackToListOfTaxRatesShouldOpenTaxRateListPageWithoutSaving(TaxPresentationTester $i): void
     {
         $i->wantTo('Create valid tax rate and back to list of tax rates');
         $i->expect('List of tax rates is opened, tax rate is not created');
@@ -78,7 +78,7 @@ class TaxRateCreateCest
      *
      * @return void
      */
-    public function testCreateTaxRateWhichAlreadyExistsShouldShowErrorMessage(TaxPresentationTester $i)
+    public function testCreateTaxRateWhichAlreadyExistsShouldShowErrorMessage(TaxPresentationTester $i): void
     {
         $i->wantTo('Create tax rate which already exists');
         $i->expect('Error message is displayed on attempt to create one and the same Tax Rate');
@@ -96,7 +96,7 @@ class TaxRateCreateCest
      *
      * @return void
      */
-    public function testCreateAlreadyExistedTaxRateShouldShowErrorMessage(TaxPresentationTester $i)
+    public function testCreateAlreadyExistedTaxRateShouldShowErrorMessage(TaxPresentationTester $i): void
     {
         $i->wantTo('Create tax rate which already exists');
         $i->expect('Error message is displayed on attempt to create one and the same Tax Rate');

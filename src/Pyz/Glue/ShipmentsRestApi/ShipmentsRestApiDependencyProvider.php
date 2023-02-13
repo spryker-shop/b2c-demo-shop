@@ -13,7 +13,7 @@ use Spryker\Glue\ShipmentsRestApi\ShipmentsRestApiDependencyProvider as SprykerS
 class ShipmentsRestApiDependencyProvider extends SprykerShipmentsRestApiDependencyProvider
 {
     /**
-     * @return \Spryker\Glue\ShipmentsRestApiExtension\Dependency\Plugin\AddressSourceCheckerPluginInterface[]
+     * @return array<\Spryker\Glue\ShipmentsRestApiExtension\Dependency\Plugin\AddressSourceCheckerPluginInterface>
      */
     protected function getAddressSourceCheckerPlugins(): array
     {

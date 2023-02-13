@@ -13,9 +13,9 @@ use Spryker\Zed\CmsStorage\CmsStorageDependencyProvider as SprykerCmsStorageDepe
 class CmsStorageDependencyProvider extends SprykerCmsStorageDependencyProvider
 {
     /**
-     * @return \Spryker\Zed\CmsExtension\Dependency\Plugin\CmsPageDataExpanderPluginInterface[]
+     * @return array<\Spryker\Zed\CmsExtension\Dependency\Plugin\CmsPageDataExpanderPluginInterface>
      */
-    protected function getContentWidgetDataExpander()
+    protected function getContentWidgetDataExpander(): array
     {
         return [
             new CmsPageParameterMapExpanderPlugin(),

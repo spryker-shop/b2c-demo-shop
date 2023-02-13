@@ -4,6 +4,7 @@ $autoloader = function ($className) {
     $className = ltrim($className, '\\');
     $classNameParts = explode('\\', $className);
 
+    $filePathPartsSupport = [];
     if ($classNameParts[0] === 'PyzTest') {
         array_shift($classNameParts);
         $application = array_shift($classNameParts);
@@ -31,7 +32,7 @@ $autoloader = function ($className) {
         ];
     }
 
-    if (isset($filePathPartsSupport)) {
+    if ($filePathPartsSupport) {
         $filePath = implode(DIRECTORY_SEPARATOR, $filePathPartsSupport);
         if (file_exists($filePath)) {
             require $filePath;

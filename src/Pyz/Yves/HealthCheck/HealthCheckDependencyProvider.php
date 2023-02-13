@@ -16,7 +16,7 @@ use Spryker\Yves\ZedRequest\Plugin\HealthCheck\ZedRequestHealthCheckPlugin;
 class HealthCheckDependencyProvider extends SprykerHealthCheckDependencyProvider
 {
     /**
-     * @return \Spryker\Shared\HealthCheckExtension\Dependency\Plugin\HealthCheckPluginInterface[]
+     * @return array<\Spryker\Shared\HealthCheckExtension\Dependency\Plugin\HealthCheckPluginInterface>
      */
     protected function getHealthCheckPlugins(): array
     {

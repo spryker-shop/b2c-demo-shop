@@ -15,7 +15,7 @@ use Spryker\Glue\UrlsRestApi\UrlsRestApiDependencyProvider as SprykerUrlsRestApi
 class UrlsRestApiDependencyProvider extends SprykerUrlsRestApiDependencyProvider
 {
     /**
-     * @return \Spryker\Glue\UrlsRestApiExtension\Dependency\Plugin\RestUrlResolverAttributesTransferProviderPluginInterface[]
+     * @return array<\Spryker\Glue\UrlsRestApiExtension\Dependency\Plugin\RestUrlResolverAttributesTransferProviderPluginInterface>
      */
     protected function getRestUrlResolverAttributesTransferProviderPlugins(): array
     {

@@ -32,7 +32,7 @@ class ContentProductSetGuiConfig extends SprykerContentProductSetGuiConfig
             parent::getContentWidgetTemplates(),
             [
                 static::PYZ_WIDGET_TEMPLATE_IDENTIFIER_ADD_TO_CART => static::PYZ_WIDGET_TEMPLATE_DISPLAY_NAME_ADD_TO_CART,
-            ]
+            ],
         );
     }
 }

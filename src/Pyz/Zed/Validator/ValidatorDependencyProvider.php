@@ -16,7 +16,7 @@ use Spryker\Zed\Validator\ValidatorDependencyProvider as SprykerValidatorDepende
 class ValidatorDependencyProvider extends SprykerValidatorDependencyProvider
 {
     /**
-     * @return \Spryker\Shared\ValidatorExtension\Dependency\Plugin\ValidatorPluginInterface[]
+     * @return array<\Spryker\Shared\ValidatorExtension\Dependency\Plugin\ValidatorPluginInterface>
      */
     protected function getValidatorPlugins(): array
     {
@@ -28,7 +28,7 @@ class ValidatorDependencyProvider extends SprykerValidatorDependencyProvider
     }
 
     /**
-     * @return \Spryker\Shared\ValidatorExtension\Dependency\Plugin\ConstraintPluginInterface[]
+     * @return array<\Spryker\Shared\ValidatorExtension\Dependency\Plugin\ConstraintPluginInterface>
      */
     protected function getConstraintPlugins(): array
     {

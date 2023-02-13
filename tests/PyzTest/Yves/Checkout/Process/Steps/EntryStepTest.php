@@ -29,7 +29,7 @@ class EntryStepTest extends Unit
     /**
      * @return void
      */
-    public function testRequireInputShouldReturnFalse()
+    public function testRequireInputShouldReturnFalse(): void
     {
         $entryStep = $this->createEntryStep();
         $this->assertFalse($entryStep->requireInput(new QuoteTransfer()));
@@ -38,7 +38,7 @@ class EntryStepTest extends Unit
     /**
      * @return void
      */
-    public function testPostConditionShouldReturnTrue()
+    public function testPostConditionShouldReturnTrue(): void
     {
         $entryStep = $this->createEntryStep();
 
@@ -48,7 +48,7 @@ class EntryStepTest extends Unit
     /**
      * @return void
      */
-    public function testPreConditionShouldReturnFalseIfCarIsEmpty()
+    public function testPreConditionShouldReturnFalseIfCarIsEmpty(): void
     {
         $entryStep = $this->createEntryStep();
         $this->assertFalse($entryStep->preCondition(new QuoteTransfer()));
@@ -57,18 +57,18 @@ class EntryStepTest extends Unit
     /**
      * @return \SprykerShop\Yves\CheckoutPage\Process\Steps\EntryStep
      */
-    protected function createEntryStep()
+    protected function createEntryStep(): EntryStep
     {
         return new EntryStep(
             'entry_route',
-            'escape_route'
+            'escape_route',
         );
     }
 
     /**
      * @return \Symfony\Component\HttpFoundation\Request
      */
-    protected function createRequest()
+    protected function createRequest(): Request
     {
         return Request::createFromGlobals();
     }
@@ -76,7 +76,7 @@ class EntryStepTest extends Unit
     /**
      * @return \Spryker\Client\Customer\CustomerClient
      */
-    protected function createCustomerClient()
+    protected function createCustomerClient(): CustomerClient
     {
         return new CustomerClient();
     }

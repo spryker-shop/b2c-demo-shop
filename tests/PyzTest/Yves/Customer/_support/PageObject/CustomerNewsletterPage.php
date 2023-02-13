@@ -18,6 +18,7 @@ class CustomerNewsletterPage extends Customer
      * @var string
      */
     public const FORM_FIELD_SELECTOR_NEWSLETTER_SUBSCRIPTION = '[data-qa*="newsletterSubscriptionForm_subscribe"] label';
+
     /**
      * @var string
      */
@@ -32,10 +33,12 @@ class CustomerNewsletterPage extends Customer
      * @var string
      */
     public const SUCCESS_MESSAGE_SUBSCRIBED = 'You successfully subscribed to the newsletter';
+
     /**
      * @var string
      */
     public const SUCCESS_MESSAGE_UN_SUBSCRIBED = 'You successfully unsubscribed from the newsletter';
+
     /**
      * @var string
      */

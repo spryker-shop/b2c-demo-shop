@@ -19,7 +19,7 @@ class CmsProductGroupContentWidgetConfigurationProvider extends SprykerCmsProduc
     /**
      * @return array
      */
-    public function getAvailableTemplates()
+    public function getAvailableTemplates(): array
     {
         $availableTemplates = parent::getAvailableTemplates();
         $availableTemplates[static::PYZ_SLIDER_TEMPLATE_IDENTIFIER] = '@CmsContentWidgetProductConnector/views/cms-product-group/cms-product-group-slider.twig';
@@ -30,7 +30,7 @@ class CmsProductGroupContentWidgetConfigurationProvider extends SprykerCmsProduc
     /**
      * @return string
      */
-    public function getUsageInformation()
+    public function getUsageInformation(): string
     {
         return "{{ product_group(['sku1', 'sku2']) }}, to use different template {{ product_group(['sku1', 'sku2'], 'default') }}";
     }

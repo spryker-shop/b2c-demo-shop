@@ -181,11 +181,11 @@ class CalculationDependencyProvider extends SprykerCalculationDependencyProvider
      *
      * @param \Spryker\Zed\Kernel\Container $container
      *
-     * @return \Spryker\Zed\CalculationExtension\Dependency\Plugin\CalculationPluginInterface[]
+     * @return array<\Spryker\Zed\CalculationExtension\Dependency\Plugin\CalculationPluginInterface>
      */
-    protected function getQuoteCalculatorPluginStack(Container $container)
+    protected function getQuoteCalculatorPluginStack(Container $container): array
     {
-        /** @var \Spryker\Zed\Calculation\Dependency\Plugin\CalculationPluginInterface[] $pluginStack */
+        /** @var array<\Spryker\Zed\Calculation\Dependency\Plugin\CalculationPluginInterface> $pluginStack */
         $pluginStack = [
             new RemoveTotalsCalculatorPlugin(),
             new RemoveAllCalculatedDiscountsCalculatorPlugin(),
@@ -242,9 +242,9 @@ class CalculationDependencyProvider extends SprykerCalculationDependencyProvider
      *
      * @param \Spryker\Zed\Kernel\Container $container
      *
-     * @return \Spryker\Zed\CalculationExtension\Dependency\Plugin\CalculationPluginInterface[]
+     * @return array<\Spryker\Zed\CalculationExtension\Dependency\Plugin\CalculationPluginInterface>
      */
-    protected function getOrderCalculatorPluginStack(Container $container)
+    protected function getOrderCalculatorPluginStack(Container $container): array
     {
         return [
 
@@ -279,7 +279,7 @@ class CalculationDependencyProvider extends SprykerCalculationDependencyProvider
     }
 
     /**
-     * @return \Spryker\Zed\CalculationExtension\Dependency\Plugin\QuotePostRecalculatePluginStrategyInterface[]
+     * @return array<\Spryker\Zed\CalculationExtension\Dependency\Plugin\QuotePostRecalculatePluginStrategyInterface>
      */
     protected function getQuotePostRecalculatePlugins(): array
     {

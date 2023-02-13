@@ -16,7 +16,7 @@ use SprykerShop\Yves\WebProfilerWidget\Plugin\Form\WebProfilerFormPlugin;
 class FormDependencyProvider extends SprykerFormDependencyProvider
 {
     /**
-     * @return \Spryker\Shared\FormExtension\Dependency\Plugin\FormPluginInterface[]
+     * @return array<\Spryker\Shared\FormExtension\Dependency\Plugin\FormPluginInterface>
      */
     protected function getFormPlugins(): array
     {

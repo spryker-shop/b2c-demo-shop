@@ -26,9 +26,9 @@ class ExampleStateMachineFacade extends AbstractFacade implements ExampleStateMa
     }
 
     /**
-     * @param int[] $stateIds
+     * @param array<int> $stateIds
      *
-     * @return \Generated\Shared\Transfer\StateMachineItemTransfer[]
+     * @return array<\Generated\Shared\Transfer\StateMachineItemTransfer>
      */
     public function getPyzExampleStateMachineItemsByStateIds(array $stateIds = []): array
     {
@@ -36,7 +36,7 @@ class ExampleStateMachineFacade extends AbstractFacade implements ExampleStateMa
     }
 
     /**
-     * @return \Generated\Shared\Transfer\StateMachineItemTransfer[]
+     * @return array<\Generated\Shared\Transfer\StateMachineItemTransfer>
      */
     public function getPyzStateMachineItems(): array
     {

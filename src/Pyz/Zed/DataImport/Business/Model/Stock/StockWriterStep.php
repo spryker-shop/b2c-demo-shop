@@ -23,7 +23,7 @@ class StockWriterStep implements DataImportStepInterface
      *
      * @return void
      */
-    public function execute(DataSetInterface $dataSet)
+    public function execute(DataSetInterface $dataSet): void
     {
         $stockEntity = SpyStockQuery::create()
             ->filterByName($dataSet[static::KEY_NAME])

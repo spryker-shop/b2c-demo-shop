@@ -22,14 +22,14 @@ interface ExampleStateMachineFacadeInterface
     public function updatePyzItemState(StateMachineItemTransfer $stateMachineItemTransfer): bool;
 
     /**
-     * @param int[] $stateIds
+     * @param array<int> $stateIds
      *
-     * @return \Generated\Shared\Transfer\StateMachineItemTransfer[]
+     * @return array<\Generated\Shared\Transfer\StateMachineItemTransfer>
      */
     public function getPyzExampleStateMachineItemsByStateIds(array $stateIds = []): array;
 
     /**
-     * @return \Generated\Shared\Transfer\StateMachineItemTransfer[]
+     * @return array<\Generated\Shared\Transfer\StateMachineItemTransfer>
      */
     public function getPyzStateMachineItems(): array;
 

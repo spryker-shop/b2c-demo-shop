@@ -15,7 +15,7 @@ use Spryker\Zed\SchedulerJenkins\Communication\Plugin\Adapter\SchedulerJenkinsAd
 class SchedulerDependencyProvider extends SprykerSchedulerDependencyProvider
 {
     /**
-     * @return \Spryker\Zed\SchedulerExtension\Dependency\Plugin\ScheduleReaderPluginInterface[]
+     * @return array<\Spryker\Zed\SchedulerExtension\Dependency\Plugin\ScheduleReaderPluginInterface>
      */
     protected function getScheduleReaderPlugins(): array
     {
@@ -25,7 +25,7 @@ class SchedulerDependencyProvider extends SprykerSchedulerDependencyProvider
     }
 
     /**
-     * @return \Spryker\Zed\SchedulerExtension\Dependency\Plugin\SchedulerAdapterPluginInterface[]
+     * @return array<\Spryker\Zed\SchedulerExtension\Dependency\Plugin\SchedulerAdapterPluginInterface>
      */
     protected function getSchedulerAdapterPlugins(): array
     {

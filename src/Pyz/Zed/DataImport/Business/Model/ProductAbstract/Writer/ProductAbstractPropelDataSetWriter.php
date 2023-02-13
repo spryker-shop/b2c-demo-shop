@@ -88,7 +88,7 @@ class ProductAbstractPropelDataSetWriter implements DataSetWriterInterface
      */
     protected function createOrUpdateProductAbstractLocalizedAbstract(
         DataSetInterface $dataSet,
-        int $idProductAbstract
+        int $idProductAbstract,
     ): void {
         $productAbstractLocalizedTransfers = $this->getProductAbstractLocalizedTransfers($dataSet);
 

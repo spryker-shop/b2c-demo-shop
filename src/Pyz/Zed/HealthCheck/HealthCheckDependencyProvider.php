@@ -19,7 +19,7 @@ use Spryker\Zed\Storage\Communication\Plugin\HealthCheck\KeyValueStoreHealthChec
 class HealthCheckDependencyProvider extends SprykerHealthCheckDependencyProvider
 {
     /**
-     * @return \Spryker\Shared\HealthCheckExtension\Dependency\Plugin\HealthCheckPluginInterface[]
+     * @return array<\Spryker\Shared\HealthCheckExtension\Dependency\Plugin\HealthCheckPluginInterface>
      */
     protected function getHealthCheckPlugins(): array
     {

@@ -81,7 +81,7 @@ class ExampleProductSalePageQueryContainer extends AbstractQueryContainer implem
                     ->addJoinCondition(
                         'priceTypeOrigin',
                         'priceTypeOrigin.name = ?',
-                        static::PYZ_PRICE_TYPE_ORIGINAL
+                        static::PYZ_PRICE_TYPE_ORIGINAL,
                     )
                     ->usePriceProductStoreQuery('priceProductStoreOrigin', Criteria::LEFT_JOIN)
                         ->usePriceProductDefaultQuery('priceProductDefaultOriginal', Criteria::LEFT_JOIN)
@@ -93,7 +93,7 @@ class ExampleProductSalePageQueryContainer extends AbstractQueryContainer implem
                     ->addJoinCondition(
                         'priceTypeDefault',
                         'priceTypeDefault.name = ?',
-                        static::PYZ_PRICE_TYPE_DEFAULT
+                        static::PYZ_PRICE_TYPE_DEFAULT,
                     )
                     ->usePriceProductStoreQuery('priceProductStoreDefault', Criteria::LEFT_JOIN)
                         ->usePriceProductDefaultQuery('priceProductDefaultDefault', Criteria::LEFT_JOIN)
@@ -111,15 +111,15 @@ class ExampleProductSalePageQueryContainer extends AbstractQueryContainer implem
                 $this->getPyzBasicModelCriterion(
                     $productLabelProductAbstractQuery,
                     'priceProductStoreOrigin.gross_price < priceProductStoreDefault.gross_price',
-                    'priceProductStoreOrigin.gross_price'
-                )
+                    'priceProductStoreOrigin.gross_price',
+                ),
             )
                 ->addOr(
                     $this->getPyzBasicModelCriterion(
                         $productLabelProductAbstractQuery,
                         'priceProductStoreOrigin.gross_price = priceProductStoreDefault.gross_price',
-                        'priceProductStoreOrigin.gross_price'
-                    )
+                        'priceProductStoreOrigin.gross_price',
+                    ),
                 )
                 ->addOr($productLabelProductAbstractQuery->getNewCriterion('priceProductStoreOrigin.gross_price', null, Criteria::ISNULL)
                     ->addOr($productLabelProductAbstractQuery->getNewCriterion('priceProductStoreDefault.gross_price', null, Criteria::ISNULL)));
@@ -130,15 +130,15 @@ class ExampleProductSalePageQueryContainer extends AbstractQueryContainer implem
                 $this->getPyzBasicModelCriterion(
                     $productLabelProductAbstractQuery,
                     'priceProductStoreOrigin.net_price < priceProductStoreDefault.net_price',
-                    'priceProductStoreOrigin.net_price'
-                )
+                    'priceProductStoreOrigin.net_price',
+                ),
             )
                 ->addOr(
                     $this->getPyzBasicModelCriterion(
                         $productLabelProductAbstractQuery,
                         'priceProductStoreOrigin.net_price = priceProductStoreDefault.net_price',
-                        'priceProductStoreOrigin.net_price'
-                    )
+                        'priceProductStoreOrigin.net_price',
+                    ),
                 )
                 ->addOr($productLabelProductAbstractQuery->getNewCriterion('priceProductStoreOrigin.net_price', null, Criteria::ISNULL)
                     ->addAnd($productLabelProductAbstractQuery->getNewCriterion('priceProductStoreDefault.net_price', null, Criteria::ISNULL)));
@@ -173,7 +173,7 @@ class ExampleProductSalePageQueryContainer extends AbstractQueryContainer implem
         int $idProductLabel,
         int $currentStoreId,
         int $currentCurrencyId,
-        string $priceMode
+        string $priceMode,
     ): SpyProductAbstractQuery {
         /** @var \Orm\Zed\Product\Persistence\SpyProductAbstractQuery $productAbstractQuery */
         $productAbstractQuery = $this->getFactory()
@@ -185,7 +185,7 @@ class ExampleProductSalePageQueryContainer extends AbstractQueryContainer implem
                 ->addJoinCondition(
                     'priceTypeOrigin',
                     'priceTypeOrigin.name = ?',
-                    static::PYZ_PRICE_TYPE_ORIGINAL
+                    static::PYZ_PRICE_TYPE_ORIGINAL,
                 )
                 ->usePriceProductStoreQuery('priceProductStoreOrigin', Criteria::LEFT_JOIN)
                     ->usePriceProductDefaultQuery('priceProductDefaultOriginal', Criteria::LEFT_JOIN)
@@ -197,7 +197,7 @@ class ExampleProductSalePageQueryContainer extends AbstractQueryContainer implem
                 ->addJoinCondition(
                     'priceTypeDefault',
                     'priceTypeDefault.name = ?',
-                    static::PYZ_PRICE_TYPE_DEFAULT
+                    static::PYZ_PRICE_TYPE_DEFAULT,
                 )
                 ->usePriceProductStoreQuery('priceProductStoreDefault', Criteria::LEFT_JOIN)
                     ->usePriceProductDefaultQuery('priceProductDefaultDefault', Criteria::LEFT_JOIN)
@@ -209,7 +209,7 @@ class ExampleProductSalePageQueryContainer extends AbstractQueryContainer implem
             ->addJoin(
                 ['rel.fk_product_abstract', SpyProductLabelProductAbstractTableMap::COL_FK_PRODUCT_LABEL],
                 [SpyProductLabelProductAbstractTableMap::COL_FK_PRODUCT_ABSTRACT, $idProductLabel],
-                Criteria::LEFT_JOIN
+                Criteria::LEFT_JOIN,
             )
             ->addJoinCondition('priceProductStoreDefault', 'priceProductDefault.id_price_product=priceProductStoreDefault.fk_price_product')
             ->addJoinCondition('priceProductStoreDefault', 'priceProductStoreOrigin.fk_store = priceProductStoreDefault.fk_store')
@@ -226,8 +226,8 @@ class ExampleProductSalePageQueryContainer extends AbstractQueryContainer implem
                 $this->getPyzBasicModelCriterion(
                     $productAbstractQuery,
                     'priceProductStoreOrigin.gross_price > priceProductStoreDefault.gross_price',
-                    'priceProductStoreOrigin.gross_price'
-                )
+                    'priceProductStoreOrigin.gross_price',
+                ),
             );
         }
 
@@ -236,8 +236,8 @@ class ExampleProductSalePageQueryContainer extends AbstractQueryContainer implem
                 $this->getPyzBasicModelCriterion(
                     $productAbstractQuery,
                     'priceProductStoreOrigin.net_price > priceProductStoreDefault.net_price',
-                    'priceProductStoreOrigin.net_price'
-                )
+                    'priceProductStoreOrigin.net_price',
+                ),
             );
         }
 

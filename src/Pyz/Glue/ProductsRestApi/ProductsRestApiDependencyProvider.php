@@ -16,7 +16,7 @@ use Spryker\Glue\ProductsRestApi\ProductsRestApiDependencyProvider as SprykerPro
 class ProductsRestApiDependencyProvider extends SprykerProductsRestApiDependencyProvider
 {
     /**
-     * @return \Spryker\Glue\ProductsRestApiExtension\Dependency\Plugin\ConcreteProductsResourceExpanderPluginInterface[]
+     * @return array<\Spryker\Glue\ProductsRestApiExtension\Dependency\Plugin\ConcreteProductsResourceExpanderPluginInterface>
      */
     protected function getConcreteProductsResourceExpanderPlugins(): array
     {
@@ -28,7 +28,7 @@ class ProductsRestApiDependencyProvider extends SprykerProductsRestApiDependency
     }
 
     /**
-     * @return \Spryker\Glue\ProductsRestApiExtension\Dependency\Plugin\AbstractProductsResourceExpanderPluginInterface[]
+     * @return array<\Spryker\Glue\ProductsRestApiExtension\Dependency\Plugin\AbstractProductsResourceExpanderPluginInterface>
      */
     protected function getAbstractProductsResourceExpanderPlugins(): array
     {
