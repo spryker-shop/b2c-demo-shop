@@ -15,12 +15,12 @@ const defaultGlobSettings = {
 const globAsync = async (patterns, rootConfiguration) => {
     try {
         return await glob(patterns, rootConfiguration);
-    } catch(error) {
+    } catch (error) {
         console.error('An error occurred while globbing the system for entry points.', error);
     }
 };
 
-const findFiles = (globDirs, globPatterns, globSettings) => (
+const findFiles = (globDirs, globPatterns, globSettings) =>
     globDirs.reduce(async (resultsPromise, dir) => {
         const rootConfiguration = {
             ...defaultGlobSettings,
@@ -32,43 +32,45 @@ const findFiles = (globDirs, globPatterns, globSettings) => (
         const globPath = await globAsync(globPatterns, rootConfiguration);
 
         return results.concat(globPath);
-    }, Promise.resolve([]))
-);
+    }, Promise.resolve([]));
 
 const find = async (globDirs, globPatterns, globFallbackPatterns, globSettings = {}) => {
     const customThemeFiles = await findFiles(globDirs, globPatterns, globSettings);
-    const defaultThemeFiles = globFallbackPatterns.length ?
-        await findFiles(globDirs, globFallbackPatterns, globSettings) : [];
+    const defaultThemeFiles = globFallbackPatterns.length
+        ? await findFiles(globDirs, globFallbackPatterns, globSettings)
+        : [];
 
     return defaultThemeFiles.concat(customThemeFiles);
 };
 
 // find entry points
-const findEntryPoints = async settings => {
-    const files = await find(settings.dirs, settings.patterns,  settings.fallbackPatterns, settings.globSettings);
+const findEntryPoints = async (settings) => {
+    const files = await find(settings.dirs, settings.patterns, settings.fallbackPatterns, settings.globSettings);
     return mergeEntryPoints(files);
 };
 
 // merge entry points
-const mergeEntryPoints = async files => Object.values(files.reduce((map, file) => {
-    const dir = path.dirname(file);
-    const name = path.basename(dir);
-    const type = path.basename(path.dirname(dir));
-    map[`${type}/${name}`] = file;
-    return map;
-}, {}));
+const mergeEntryPoints = async (files) =>
+    Object.values(
+        files.reduce((map, file) => {
+            const dir = path.dirname(file);
+            const name = path.basename(dir);
+            const type = path.basename(path.dirname(dir));
+            map[`${type}/${name}`] = file;
+            return map;
+        }, {}),
+    );
 
 // find components entry points
-const findComponentEntryPoints = async settings => await findEntryPoints(settings);
+const findComponentEntryPoints = async (settings) => await findEntryPoints(settings);
 
 // find component styles
-const findComponentStyles = async settings =>
-    await find(settings.dirs, settings.patterns, [], settings.globSettings);
+const findComponentStyles = async (settings) => await find(settings.dirs, settings.patterns, [], settings.globSettings);
 
 // find application entry points
 const findAppEntryPoint = async (settings, file) => {
     const config = Object.assign({}, settings);
-    const updatePatterns = patternCollection => patternCollection.map(pattern => path.join(pattern, file));
+    const updatePatterns = (patternCollection) => patternCollection.map((pattern) => path.join(pattern, file));
 
     config.patterns = updatePatterns(config.patterns);
     config.fallbackPatterns = updatePatterns(config.fallbackPatterns);
