@@ -36,47 +36,39 @@ const imagesOptimization = (appSettings, requestedArguments) => {
     }
 
     try {
-        Object.values(appSettings.paths.assets).map(async assetsPath => {
+        Object.values(appSettings.paths.assets).map(async (assetsPath) => {
             const assetsImagePath = normalize(join(assetsPath, '/images/'));
             const assetsImagePattern = '/*.{jpg,png,svg,gif}';
-            const outputPattern = shouldReplaceImages ?
-                '/images/' :
-                '/images/optimized-images/';
-            const outputPath = isPublicOutput ?
-                normalize(join(appSettings.paths.public, '/images/')) :
-                normalize(join(assetsPath, outputPattern));
+            const outputPattern = shouldReplaceImages ? '/images/' : '/images/optimized-images/';
+            const outputPath = isPublicOutput
+                ? normalize(join(appSettings.paths.public, '/images/'))
+                : normalize(join(assetsPath, outputPattern));
 
             const isGlobalImages = assetsPath === appSettings.paths.assets.globalAssets;
 
-            if (!existsSync(assetsImagePath) || isGlobalImages && isGlobalImagesOptimized && !isPublicOutput) {
+            if (!existsSync(assetsImagePath) || (isGlobalImages && isGlobalImagesOptimized && !isPublicOutput)) {
                 return;
             }
 
-            const isDirectory = source => lstatSync(source).isDirectory();
+            const isDirectory = (source) => lstatSync(source).isDirectory();
 
-            const getDirectories = async source => {
+            const getDirectories = async (source) => {
                 const innerFolders = await readdirAsync(source);
-                return innerFolders
-                    .map(name => join(source, name))
-                    .filter(isDirectory);
+                return innerFolders.map((name) => join(source, name)).filter(isDirectory);
             };
 
-            const getDirectoriesRecursive = async source => {
+            const getDirectoriesRecursive = async (source) => {
                 const foundFolders = await getDirectories(source);
                 const foundFoldersPromises = foundFolders.map(async (dir) => await getDirectoriesRecursive(dir));
                 const allFolders = await Promise.all(foundFoldersPromises);
-                return [
-                    source,
-                    ...allFolders.reduce((a, b) => a.concat(b), [])
-                ];
+                return [source, ...allFolders.reduce((a, b) => a.concat(b), [])];
             };
 
             const assetsImageFolders = await getDirectoriesRecursive(assetsImagePath);
 
             const outputImageFolders = assetsImageFolders
-                .map(imagePath => imagePath.replace(assetsImagePath,''))
-                .map(imageInnerFolder => join(outputPath, imageInnerFolder));
-
+                .map((imagePath) => imagePath.replace(assetsImagePath, ''))
+                .map((imageInnerFolder) => join(outputPath, imageInnerFolder));
 
             await asyncForEach(assetsImageFolders, async (dir, index) => {
                 imagemin([`${dir}${assetsImagePattern}`], {
@@ -88,7 +80,7 @@ const imagesOptimization = (appSettings, requestedArguments) => {
                             plugins: [appSettings.imageOptimizationOptions.svg],
                         }),
                         imageminGifsicle(appSettings.imageOptimizationOptions.gif),
-                    ]
+                    ],
                 });
             });
 
@@ -97,8 +89,10 @@ const imagesOptimization = (appSettings, requestedArguments) => {
             }
         }, []);
 
-        console.info(`${appSettings.namespaceConfig.namespace} (${appSettings.theme} theme) --> images successfully compressed!`);
-    } catch ({message}) {
+        console.info(
+            `${appSettings.namespaceConfig.namespace} (${appSettings.theme} theme) --> images successfully compressed!`,
+        );
+    } catch ({ message }) {
         console.error('Images compression has been interrupted with error: ', message);
     }
 };

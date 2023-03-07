@@ -16,7 +16,7 @@ try {
     console.info('Images optimization is disabled.');
 }
 
-const getConfiguration = async appSettings => {
+const getConfiguration = async (appSettings) => {
     const componentEntryPointsPromise = findComponentEntryPoints(appSettings.find.componentEntryPoints);
     const stylesPromise = findComponentStyles(appSettings.find.componentStyles);
     const [componentEntryPoints, styles] = await Promise.all([componentEntryPointsPromise, stylesPromise]);
@@ -28,13 +28,17 @@ const getConfiguration = async appSettings => {
     const utilScss = await findAppEntryPoint(appSettings.find.shopUiEntryPoints, './styles/util.scss');
     const sharedScss = await findAppEntryPoint(appSettings.find.shopUiEntryPoints, './styles/shared.scss');
 
-    const criticalEntryPoints = componentEntryPoints.filter(filePathFilter({
-        include: appSettings.criticalPatterns,
-    }));
+    const criticalEntryPoints = componentEntryPoints.filter(
+        filePathFilter({
+            include: appSettings.criticalPatterns,
+        }),
+    );
 
-    const nonCriticalEntryPoints = componentEntryPoints.filter(filePathFilter({
-        exclude: appSettings.criticalPatterns,
-    }));
+    const nonCriticalEntryPoints = componentEntryPoints.filter(
+        filePathFilter({
+            exclude: appSettings.criticalPatterns,
+        }),
+    );
 
     return {
         namespace: appSettings.namespaceConfig.namespace,
@@ -52,36 +56,27 @@ const getConfiguration = async appSettings => {
                 chunkModules: false,
                 chunkOrigins: false,
                 modules: false,
-                entrypoints: false
+                entrypoints: false,
             },
 
             entry: {
-                'vendor': vendorTs,
-                'app': [
-                    appTs,
-                    ...componentEntryPoints,
-                ],
-                'critical': [
-                    basicScss,
-                    ...criticalEntryPoints,
-                ],
-                'non-critical': [
-                    ...nonCriticalEntryPoints,
-                    utilScss,
-                ],
-                'util': utilScss,
+                vendor: vendorTs,
+                app: [appTs, ...componentEntryPoints],
+                critical: [basicScss, ...criticalEntryPoints],
+                'non-critical': [...nonCriticalEntryPoints, utilScss],
+                util: utilScss,
             },
 
             output: {
                 path: join(appSettings.context, appSettings.paths.public),
                 publicPath: `/${appSettings.urls.assets}/`,
                 filename: `./js/${appSettings.name}.[name].js`,
-                jsonpFunction: `webpackJsonp_${appSettings.name.replace(/(-|\W)+/gi, '_')}`
+                chunkLoadingGlobal: `webpackJsonp_${appSettings.name.replace(/(-|\W)+/gi, '_')}`,
             },
 
             resolve: {
                 extensions: ['.ts', '.js', '.json', '.css', '.scss'],
-                alias
+                alias,
             },
 
             module: {
@@ -92,56 +87,63 @@ const getConfiguration = async appSettings => {
                         options: {
                             cacheDirectory: true,
                             presets: [
-                                ['@babel/env', {
-                                    loose: true,
-                                    modules: false,
-                                    targets: {
-                                        esmodules: true,
+                                [
+                                    '@babel/env',
+                                    {
+                                        loose: true,
+                                        modules: false,
+                                        targets: {
+                                            esmodules: true,
+                                        },
+                                        useBuiltIns: false,
                                     },
-                                    useBuiltIns: false,
-                                }],
-                                '@babel/preset-typescript'
+                                ],
+                                '@babel/preset-typescript',
                             ],
                             plugins: [
                                 ['@babel/plugin-transform-runtime'],
-                                ['@babel/plugin-proposal-class-properties', {
-                                    loose: true,
-                                }],
-                            ]
-                        }
+                                [
+                                    '@babel/plugin-proposal-class-properties',
+                                    {
+                                        loose: true,
+                                    },
+                                ],
+                            ],
+                        },
                     },
                     {
                         test: /\.(scss|css)/i,
                         use: [
-                            MiniCssExtractPlugin.loader, {
+                            MiniCssExtractPlugin.loader,
+                            {
                                 loader: 'css-loader',
                                 options: {
                                     importLoaders: 1,
                                     url: false,
-                                }
-                            }, {
+                                },
+                            },
+                            {
                                 loader: 'postcss-loader',
                                 options: {
                                     ident: 'postcss',
-                                    plugins: [require('autoprefixer')]
-                                }
-                            }, {
+                                    plugins: [require('autoprefixer')],
+                                },
+                            },
+                            {
                                 loader: 'sass-loader',
                                 options: {
                                     implementation: require('sass'),
-                                }
-                            }, {
+                                },
+                            },
+                            {
                                 loader: '@spryker/sass-resources-loader',
                                 options: {
-                                    resources: [
-                                        sharedScss,
-                                        ...styles,
-                                    ]
-                                }
-                            }
-                        ]
-                    }
-                ]
+                                    resources: [sharedScss, ...styles],
+                                },
+                            },
+                        ],
+                    },
+                ],
             },
 
             optimization: {
@@ -152,15 +154,15 @@ const getConfiguration = async appSettings => {
                     minChunks: 1,
                     cacheGroups: {
                         default: false,
-                        vendors: false
-                    }
-                }
+                        defaultVendors: false,
+                    },
+                },
             },
 
             plugins: [
                 new webpack.DefinePlugin({
                     __NAME__: `'${appSettings.name}'`,
-                    __PRODUCTION__: appSettings.isProductionMode
+                    __PRODUCTION__: appSettings.isProductionMode,
                 }),
 
                 ...getAssetsConfig(appSettings),
@@ -169,30 +171,32 @@ const getConfiguration = async appSettings => {
                     filename: `./css/${appSettings.name}.[name].css`,
                 }),
 
-                compiler => compiler.hooks.afterEmit.tap('webpack', () => {
-                    if (isImagesOptimizationEnabled) {
-                        imagesOptimization(appSettings);
-                    }
-                }),
+                (compiler) =>
+                    compiler.hooks.afterEmit.tap('webpack', () => {
+                        if (isImagesOptimizationEnabled) {
+                            imagesOptimization(appSettings);
+                        }
+                    }),
 
-                compiler => compiler.hooks.done.tap('webpack', compilationParams => {
-                    const watchLifecycleEventNames = ['yves:watch'];
+                (compiler) =>
+                    compiler.hooks.done.tap('webpack', (compilationParams) => {
+                        const watchLifecycleEventNames = ['yves:watch'];
 
-                    if (watchLifecycleEventNames.includes(process.env.npm_lifecycle_event)) {
-                        return;
-                    }
+                        if (watchLifecycleEventNames.includes(process.env.npm_lifecycle_event)) {
+                            return;
+                        }
 
-                    const { errors } = compilationParams.compilation;
+                        const { errors } = compilationParams.compilation;
 
-                    if (!errors || !errors.length) {
-                        return;
-                    }
+                        if (!errors || !errors.length) {
+                            return;
+                        }
 
-                    errors.forEach(error => console.log(error.message));
-                    process.exit(1);
-                })
-            ]
-        }
+                        errors.forEach((error) => console.log(error.message));
+                        process.exit(1);
+                    }),
+            ],
+        },
     };
 };
 
