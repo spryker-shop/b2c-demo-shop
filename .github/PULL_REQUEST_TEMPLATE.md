@@ -8,4 +8,4 @@
 
 ###### Change log
 
-{Relevant changes for project level go here.}~~
+{Relevant changes for project level go here.}
