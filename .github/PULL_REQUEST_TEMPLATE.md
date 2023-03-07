@@ -1,4 +1,4 @@
-~~#### Overview
+#### Overview
 
 - Ticket: URL_HERE
 
