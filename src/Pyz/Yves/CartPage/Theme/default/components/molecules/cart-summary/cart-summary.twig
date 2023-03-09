@@ -67,8 +67,15 @@
         </ul>
     </div>
 
+    {% set productConfigurationWidget = findWidget('ProductConfigurationQuoteValidatorWidget', [data.cart]) %}
+    {% set canProceedQuoteCheckout = productConfigurationWidget.isQuoteProductConfigurationValid ?? true %}
+
+    {% widget productConfigurationWidget only %}{% endwidget %}
+
     {% if canProceedToCheckout %}
-        <a class="button button--expand button--large"
+        {% set disableButton = not canProceedQuoteCheckout ? 'button--disabled' %}
+
+        <a class="button button--expand button--large {{ disableButton }}"
            href="{{ url('checkout-index') }}" {{ qa('cart-go-to-checkout') }}>
             {{ 'cart.checkout' | trans }}
         </a>

@@ -12,10 +12,11 @@ const getConfiguration = require(`./configs/${requestedArguments.mode}`);
 const namespaceConfigList = getFilteredNamespaceConfigList(requestedArguments);
 
 // get the promise for each namespace webpack configuration
-const configurationPromises = getAppSettings(namespaceConfigList, requestedArguments.pathToConfig)
-    .map(getConfiguration);
+const configurationPromises = getAppSettings(namespaceConfigList, requestedArguments.pathToConfig).map(
+    getConfiguration,
+);
 
 // build the project
 Promise.all(configurationPromises)
-    .then(configs => compiler.multiCompile(configs))
-    .catch(error => console.error('An error occur while creating configuration', error));
+    .then((configs) => compiler.multiCompile(configs))
+    .catch((error) => console.error('An error occur while creating configuration', error));

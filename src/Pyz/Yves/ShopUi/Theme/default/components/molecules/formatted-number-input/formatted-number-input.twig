@@ -1,0 +1,12 @@
+{% extends molecule('formatted-number-input', '@SprykerShop:ShopUi') %}
+
+{% set globalNumberFormatConfig = {} %}
+{% for key, value in getNumberFormatConfig(app.locale).toArray() %}
+    {% set globalNumberFormatConfig = globalNumberFormatConfig | merge({ (key | replace({'_symbol': '', '_': '-'})): value }) %}
+{% endfor %}
+
+{% define attributes = {
+    'grouping-separator': globalNumberFormatConfig['grouping-separator'] | default,
+    'decimal-separator': globalNumberFormatConfig['decimal-separator'] | default('.'),
+    'decimal-rounding': globalNumberFormatConfig['decimal-rounding'] | default(3),
+} %}
