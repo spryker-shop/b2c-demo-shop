@@ -4,7 +4,9 @@
     activePage: ''
 } %}
 
-{%- block class -%}js-page-layout-main__side-drawer-container{%- endblock -%}
+{% set pageLoadingClassName = 'page-loading' %}
+
+{%- block class -%}js-page-layout-main__side-drawer-container {{ pageLoadingClassName }}{%- endblock -%}
 
 {% block body %}
     {% block sidebar %}
@@ -123,6 +125,12 @@
         {% include molecule('viewport-intersection-observer') only %}
 
         {% include molecule('node-animator') only %}
+
+        {% include molecule('page-load-state') with {
+            attributes: {
+                'body-loading-class-name': pageLoadingClassName,
+            },
+        } only %}
     {% endblock %}
 
     {% block footer %}
