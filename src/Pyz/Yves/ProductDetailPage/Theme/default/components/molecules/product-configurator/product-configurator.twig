@@ -55,16 +55,10 @@
                     },
                 } only %}
                     {% block contentText %}
-                        {% set numberFormatConfig = {} %}
-                        {% for key, value in getNumberFormatConfig(app.locale).toArray() %}
-                            {% set numberFormatConfig = numberFormatConfig | merge({ (key | replace({'_symbol': '', '_': '-'})): value }) %}
-                        {% endfor %}
-
                         {% include molecule('quantity-counter') with {
                             modifiers: ['quantity-large', 'no-spacing'],
                             data: {
                                 readOnly: true,
-                                numberFormatConfig: numberFormatConfig,
                             },
                         } only %}
                     {% endblock %}

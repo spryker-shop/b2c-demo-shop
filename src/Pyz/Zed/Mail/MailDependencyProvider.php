@@ -7,27 +7,26 @@
 
 namespace Pyz\Zed\Mail;
 
-use Spryker\Zed\AvailabilityNotification\Communication\Plugin\Mail\AvailabilityNotificationMailTypePlugin;
-use Spryker\Zed\AvailabilityNotification\Communication\Plugin\Mail\AvailabilityNotificationSubscriptionMailTypePlugin;
-use Spryker\Zed\AvailabilityNotification\Communication\Plugin\Mail\AvailabilityNotificationUnsubscribedMailTypePlugin;
-use Spryker\Zed\Customer\Communication\Plugin\Mail\CustomerRegistrationConfirmationMailTypePlugin;
-use Spryker\Zed\Customer\Communication\Plugin\Mail\CustomerRegistrationMailTypePlugin;
-use Spryker\Zed\Customer\Communication\Plugin\Mail\CustomerRestoredPasswordConfirmationMailTypePlugin;
-use Spryker\Zed\Customer\Communication\Plugin\Mail\CustomerRestorePasswordMailTypePlugin;
-use Spryker\Zed\GiftCardMailConnector\Communication\Plugin\Mail\GiftCardDeliveryMailTypePlugin;
-use Spryker\Zed\GiftCardMailConnector\Communication\Plugin\Mail\GiftCardUsageMailTypePlugin;
+use Spryker\Zed\AvailabilityNotification\Communication\Plugin\Mail\AvailabilityNotificationMailTypeBuilderPlugin;
+use Spryker\Zed\AvailabilityNotification\Communication\Plugin\Mail\AvailabilityNotificationSubscriptionMailTypeBuilderPlugin;
+use Spryker\Zed\AvailabilityNotification\Communication\Plugin\Mail\AvailabilityNotificationUnsubscribedMailTypeBuilderPlugin;
+use Spryker\Zed\Customer\Communication\Plugin\Mail\CustomerRegistrationConfirmationMailTypeBuilderPlugin;
+use Spryker\Zed\Customer\Communication\Plugin\Mail\CustomerRegistrationMailTypeBuilderPlugin;
+use Spryker\Zed\Customer\Communication\Plugin\Mail\CustomerRestoredPasswordConfirmationMailTypeBuilderPlugin;
+use Spryker\Zed\Customer\Communication\Plugin\Mail\CustomerRestorePasswordMailTypeBuilderPlugin;
+use Spryker\Zed\GiftCardMailConnector\Communication\Plugin\Mail\GiftCardDeliveryMailTypeBuilderPlugin;
+use Spryker\Zed\GiftCardMailConnector\Communication\Plugin\Mail\GiftCardUsageMailTypeBuilderPlugin;
 use Spryker\Zed\Kernel\Container;
-use Spryker\Zed\Mail\Business\Model\Mail\MailTypeCollectionAddInterface;
 use Spryker\Zed\Mail\Business\Model\Provider\MailProviderCollectionAddInterface;
-use Spryker\Zed\Mail\Communication\Plugin\MailProviderPlugin;
 use Spryker\Zed\Mail\MailConfig;
 use Spryker\Zed\Mail\MailDependencyProvider as SprykerMailDependencyProvider;
-use Spryker\Zed\Newsletter\Communication\Plugin\Mail\NewsletterSubscribedMailTypePlugin;
-use Spryker\Zed\Newsletter\Communication\Plugin\Mail\NewsletterUnsubscribedMailTypePlugin;
-use Spryker\Zed\Oms\Communication\Plugin\Mail\OrderConfirmationMailTypePlugin;
-use Spryker\Zed\Oms\Communication\Plugin\Mail\OrderShippedMailTypePlugin;
-use Spryker\Zed\SalesInvoice\Communication\Plugin\Mail\OrderInvoiceMailTypePlugin;
-use Spryker\Zed\UserPasswordResetMail\Communication\Plugin\Mail\UserPasswordResetMailTypePlugin;
+use Spryker\Zed\Newsletter\Communication\Plugin\Mail\NewsletterSubscribedMailTypeBuilderPlugin;
+use Spryker\Zed\Newsletter\Communication\Plugin\Mail\NewsletterUnsubscribedMailTypeBuilderPlugin;
+use Spryker\Zed\Oms\Communication\Plugin\Mail\OrderConfirmationMailTypeBuilderPlugin;
+use Spryker\Zed\Oms\Communication\Plugin\Mail\OrderShippedMailTypeBuilderPlugin;
+use Spryker\Zed\SalesInvoice\Communication\Plugin\Mail\OrderInvoiceMailTypeBuilderPlugin;
+use Spryker\Zed\SymfonyMailer\Communication\Plugin\Mail\SymfonyMailerProviderPlugin;
+use Spryker\Zed\UserPasswordResetMail\Communication\Plugin\Mail\UserPasswordResetMailTypeBuilderPlugin;
 
 class MailDependencyProvider extends SprykerMailDependencyProvider
 {
@@ -40,33 +39,51 @@ class MailDependencyProvider extends SprykerMailDependencyProvider
     {
         $container = parent::provideBusinessLayerDependencies($container);
 
-        $container->extend(static::MAIL_TYPE_COLLECTION, function (MailTypeCollectionAddInterface $mailCollection) {
-            $mailCollection
-                ->add(new CustomerRegistrationMailTypePlugin())
-                ->add(new CustomerRegistrationConfirmationMailTypePlugin())
-                ->add(new CustomerRestorePasswordMailTypePlugin())
-                ->add(new CustomerRestoredPasswordConfirmationMailTypePlugin())
-                ->add(new NewsletterSubscribedMailTypePlugin())
-                ->add(new NewsletterUnsubscribedMailTypePlugin())
-                ->add(new OrderConfirmationMailTypePlugin())
-                ->add(new OrderShippedMailTypePlugin())
-                ->add(new AvailabilityNotificationUnsubscribedMailTypePlugin())
-                ->add(new AvailabilityNotificationSubscriptionMailTypePlugin())
-                ->add(new AvailabilityNotificationMailTypePlugin())
-                ->add(new UserPasswordResetMailTypePlugin())
-                ->add(new GiftCardDeliveryMailTypePlugin())#GiftCardFeature
-                ->add(new GiftCardUsageMailTypePlugin()) #GiftCardFeature
-                ->add(new OrderInvoiceMailTypePlugin());
+        $container = $this->extendMailProviderCollection($container);
 
-            return $mailCollection;
-        });
+        return $container;
+    }
 
+    /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Zed\Kernel\Container
+     */
+    protected function extendMailProviderCollection(Container $container): Container
+    {
         $container->extend(self::MAIL_PROVIDER_COLLECTION, function (MailProviderCollectionAddInterface $mailProviderCollection) {
-            $mailProviderCollection->addProvider(new MailProviderPlugin(), MailConfig::MAIL_TYPE_ALL);
+            $mailProviderCollection
+                ->addProvider(new SymfonyMailerProviderPlugin(), [
+                    MailConfig::MAIL_TYPE_ALL,
+                ]);
 
             return $mailProviderCollection;
         });
 
         return $container;
+    }
+
+    /**
+     * @return array<\Spryker\Zed\MailExtension\Dependency\Plugin\MailTypeBuilderPluginInterface>
+     */
+    protected function getMailTypeBuilderPlugins(): array
+    {
+        return [
+            new CustomerRegistrationMailTypeBuilderPlugin(),
+            new CustomerRegistrationConfirmationMailTypeBuilderPlugin(),
+            new CustomerRestorePasswordMailTypeBuilderPlugin(),
+            new CustomerRestoredPasswordConfirmationMailTypeBuilderPlugin(),
+            new NewsletterSubscribedMailTypeBuilderPlugin(),
+            new NewsletterUnsubscribedMailTypeBuilderPlugin(),
+            new OrderConfirmationMailTypeBuilderPlugin(),
+            new OrderShippedMailTypeBuilderPlugin(),
+            new AvailabilityNotificationUnsubscribedMailTypeBuilderPlugin(),
+            new AvailabilityNotificationSubscriptionMailTypeBuilderPlugin(),
+            new AvailabilityNotificationMailTypeBuilderPlugin(),
+            new UserPasswordResetMailTypeBuilderPlugin(),
+            new GiftCardDeliveryMailTypeBuilderPlugin(),
+            new GiftCardUsageMailTypeBuilderPlugin(),
+            new OrderInvoiceMailTypeBuilderPlugin(),
+        ];
     }
 }
