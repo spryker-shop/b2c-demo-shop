@@ -8,7 +8,9 @@
 namespace Pyz\Yves\ExampleProductSalePage;
 
 use Spryker\Client\Catalog\CatalogClientInterface;
+use Spryker\Client\Locale\LocaleClientInterface;
 use Spryker\Client\UrlStorage\UrlStorageClientInterface;
+use Spryker\Service\UtilNumber\UtilNumberServiceInterface;
 use Spryker\Shared\Kernel\Store;
 use Spryker\Yves\Kernel\AbstractFactory;
 
@@ -44,5 +46,21 @@ class ExampleProductSalePageFactory extends AbstractFactory
     public function getPyzCatalogClient(): CatalogClientInterface
     {
         return $this->getProvidedDependency(ExampleProductSalePageDependencyProvider::PYZ_CLIENT_CATALOG);
+    }
+
+    /**
+     * @return \Spryker\Client\Locale\LocaleClientInterface
+     */
+    public function getPyzLocaleClient(): LocaleClientInterface
+    {
+        return $this->getProvidedDependency(ExampleProductSalePageDependencyProvider::PYZ_CLIENT_LOCALE);
+    }
+
+    /**
+     * @return \Spryker\Service\UtilNumber\UtilNumberServiceInterface
+     */
+    public function getUtilNumberService(): UtilNumberServiceInterface
+    {
+        return $this->getProvidedDependency(ExampleProductSalePageDependencyProvider::PYZ_SERVICE_UTIL_NUMBER);
     }
 }
