@@ -1,4 +1,6 @@
 @mixin shop-ui-suggest-search($name: '.suggest-search') {
+    @include shop-ui-input(#{$name}__input);
+
     #{$name} {
         &__container {
             margin: 0;
@@ -11,6 +13,8 @@
             border: none;
             padding: 0;
             font: fw(medium) rem(24) $setting-font-family-additional;
+            color: $setting-color-black;
+            border-radius: rem(2);
 
             @include helper-breakpoint-media-min($md-min) {
                 font-size: rem(20);
