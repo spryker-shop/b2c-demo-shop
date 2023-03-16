@@ -663,7 +663,7 @@ $config[MessageBrokerConstants::MESSAGE_TO_CHANNEL_MAP] = [
     ProductDeletedTransfer::class => 'product',
     InitializeProductExportTransfer::class => 'product',
     AddReviewsTransfer::class => 'reviews',
-    OrderStatusChangedTransfer::class => 'orders'
+    OrderStatusChangedTransfer::class => 'orders',
 ];
 
 $config[MessageBrokerConstants::CHANNEL_TO_TRANSPORT_MAP] =
