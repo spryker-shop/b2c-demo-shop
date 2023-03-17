@@ -1,0 +1,24 @@
+/**
+ * Povides transition property configured by the passed parameters.
+ * @param {String} $props
+ * @param {Number} $duration [$setting-effect-default-duration]
+ * @param {String} $ease [$setting-effect-default-ease]
+ */
+@mixin helper-effect-transition(
+    $props: opacity visibility,
+    $duration: $setting-effect-default-duration,
+    $ease: $setting-effect-default-ease
+) {
+    $transition: null;
+
+    @each $prop in $props {
+        $transition: $prop $duration $ease, $transition;
+    }
+    transition: $transition;
+
+    .page-loading & {
+        transition: none;
+    }
+
+    @content;
+}
