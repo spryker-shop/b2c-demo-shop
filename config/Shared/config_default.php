@@ -87,6 +87,7 @@ use Spryker\Shared\Storage\StorageConstants;
 use Spryker\Shared\StorageRedis\StorageRedisConstants;
 use Spryker\Shared\Store\StoreConstants;
 use Spryker\Shared\SymfonyMailer\SymfonyMailerConstants;
+use Spryker\Shared\Synchronization\SynchronizationConstants;
 use Spryker\Shared\Tax\TaxConstants;
 use Spryker\Shared\Testify\TestifyConstants;
 use Spryker\Shared\Translator\TranslatorConstants;
@@ -476,6 +477,9 @@ foreach ($rabbitConnections as $key => $connection) {
     }
     $config[RabbitMqEnv::RABBITMQ_CONNECTIONS][$key][RabbitMqEnv::RABBITMQ_DEFAULT_CONNECTION] = $key === APPLICATION_STORE;
 }
+
+// >>> SYNCHRONIZATION
+$config[SynchronizationConstants::DEFAULT_SYNC_SEARCH_QUEUE_MESSAGE_CHUNK_SIZE] = 7500;
 
 // >>> SCHEDULER
 $config[SchedulerConstants::ENABLED_SCHEDULERS] = [
