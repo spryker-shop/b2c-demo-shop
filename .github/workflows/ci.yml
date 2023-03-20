@@ -17,11 +17,12 @@ jobs:
             fail-fast: false
             matrix:
                 php-version: [
-                        '8.0',
+                    '8.0',
+                    '8.1'
                 ]
 
         env:
-            APPLICATION_ENV: devtest
+            APPLICATION_ENV: ci.mysql
             APPLICATION_STORE: DE
             PROJECT: suite
 
@@ -46,7 +47,7 @@ jobs:
               uses: elastic/elastic-github-actions/elasticsearch@master
               with:
                   stack-version: 7.10.0
-                  port: 10005
+                  port: 9200
 
             - uses: actions/setup-node@v1
               with:
@@ -148,11 +149,88 @@ jobs:
               run: vendor/bin/phpmd src/ text vendor/spryker/architecture-sniffer/src/ruleset.xml --minimumpriority 2
 
             - name: Run PHPStan
-              run: vendor/bin/phpstan analyze -l 5 -c phpstan.neon src/ --debug
+              run: vendor/bin/phpstan analyze -l 5 -c phpstan.neon src/
 
             - name: Run Security check
               run: vendor/bin/console security:check
 
+    php-81-mariadb-glue-alpine:
+        name: "PHP 8.1 / MariaDB / Glue / Alpine"
+        runs-on: ubuntu-20.04
+        env:
+            PROGRESS_TYPE: plain
+            SPRYKER_PLATFORM_IMAGE: spryker/php:8.1
+            TRAVIS: 1
+
+        steps:
+            - uses: actions/checkout@v2
+
+            - name: Install apt-packages
+              run: |
+                  sudo apt-get install apache2-utils
+            - name: Install docker-compose
+              run: |
+                  sudo curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+                  sudo chmod +x /usr/local/bin/docker-compose
+            - name: Run docker
+              run: |
+                  git clone https://github.com/spryker/docker-sdk.git ./docker
+                  docker/sdk boot deploy.ci.api.mariadb.yml -v
+                  docker/sdk up -t -v
+                  docker/sdk testing codecept fixtures
+                  docker/sdk testing console queue:worker:start --stop-when-empty
+                  docker/sdk testing codecept run -c codeception.api.yml
+
+    php-81-mariadb-acceptance-alpine:
+        name: "PHP 8.1 / MariaDB / Acceptance / Alpine"
+        runs-on: ubuntu-20.04
+        env:
+            PROGRESS_TYPE: plain
+            SPRYKER_PLATFORM_IMAGE: spryker/php:8.1
+            TRAVIS: 1
+
+        steps:
+            - uses: actions/checkout@v2
+
+            - name: Install apt-packages
+              run: |
+                  sudo apt-get install apache2-utils
+            - name: Install docker-compose
+              run: |
+                  sudo curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+                  sudo chmod +x /usr/local/bin/docker-compose
+            - name: Run docker
+              run: |
+                  git clone https://github.com/spryker/docker-sdk.git ./docker
+                  docker/sdk boot -v deploy.ci.acceptance.mariadb.yml
+                  docker/sdk up -t
+                  docker/sdk testing console queue:worker:start --stop-when-empty
+                  docker/sdk testing codecept run -c codeception.acceptance.yml
+
+    php-81-mariadb-functional-alpine:
+        name: "PHP 8.1 / MariaDB / Functional / Alpine"
+        runs-on: ubuntu-20.04
+        env:
+            PROGRESS_TYPE: plain
+            SPRYKER_PLATFORM_IMAGE: spryker/php:8.1
+            TRAVIS: 1
+
+        steps:
+            - uses: actions/checkout@v2
+
+            - name: Install apt-packages
+              run: |
+                  sudo apt-get install apache2-utils
+            - name: Install docker-compose
+              run: |
+                  sudo curl -L "https://github.com/docker/compose/releases/download/2.12.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+                  sudo chmod +x /usr/local/bin/docker-compose
+            - name: Run docker
+              run: |
+                  git clone https://github.com/spryker/docker-sdk.git ./docker
+                  docker/sdk boot deploy.ci.functional.mariadb.yml -v
+                  docker/sdk up -t -v
+                  docker/sdk testing codecept run -c codeception.functional.yml
     php-80-mariadb-glue-alpine:
         name: "PHP 8.0 / MariaDB / Glue / Alpine"
         runs-on: ubuntu-20.04
@@ -341,3 +419,105 @@ jobs:
             - run: docker run -t --rm -e SPRYKER_NGINX_CGI_HOST_YVES_EU=localhost -e SPRYKER_NGINX_CGI_HOST_ZED_EU=localhost -e SPRYKER_NGINX_CGI_HOST_GLUE_EU=localhost -e SPRYKER_NGINX_CGI_HOST_YVES_US=localhost -e SPRYKER_NGINX_CGI_HOST_GLUE_US=localhost -e SPRYKER_NGINX_CGI_HOST_ZED_US=localhost -e ALLOWED_IP=127.0.0.1 spryker_b2c_frontend:1.0-frontend nginx -t
             - run: docker run -t --rm --entrypoint='' spryker_b2c_frontend:1.0-frontend ls -al /data/public/Yves/assets/myhash
             - run: docker run -t --rm --entrypoint='' spryker_b2c_frontend:1.0-frontend ls -al /data/public/Zed/assets/
+
+    docker-alpine-php-8-0-mariadb-robot:
+        name: "Docker / Alpine / PHP 8.0 / MariaDB / Robot"
+        runs-on: ubuntu-20.04
+        env:
+            PROGRESS_TYPE: plain
+            SPRYKER_PLATFORM_IMAGE: spryker/php:8.0
+            TRAVIS: 1
+            ROBOT_TESTS_ARTIFACTS_BUCKET_REGION: eu-west-1
+        steps:
+            - uses: actions/checkout@v2
+
+            - uses: actions/setup-python@v4
+              with:
+                  python-version: '3.9'
+
+            - name: Install packages
+              run: |
+                  sudo apt-get install apache2-utils
+                  sudo apt install awscli -q
+                  python3 -m pip install --upgrade pip
+                  python3 -m pip install -U robotframework
+                  python3 -m pip install -U robotframework-requests
+                  python3 -m pip install -U robotframework-jsonlibrary
+                  python3 -m pip install -U robotframework-databaselibrary
+                  python3 -m pip install PyMySQL
+            - name: Install docker-compose
+              run: |
+                  sudo curl -L "https://github.com/docker/compose/releases/download/2.12.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+                  sudo chmod +x /usr/local/bin/docker-compose
+            - name: Install Robot tests
+              run: |
+                  git clone https://github.com/spryker/robotframework-suite-tests.git --single-branch --branch master robotframework-tests
+            - name: Install Project
+              continue-on-error: true
+              run: |
+                  git clone https://github.com/spryker/docker-sdk.git ./docker
+                  docker/sdk boot -v deploy.ci.acceptance.mariadb.yml
+                  docker/sdk up -t -v
+                  docker/sdk testing console queue:worker:start --stop-when-empty
+                  sudo bash -c "echo '127.0.0.1 backend-api.at.spryker.local backend-api.de.spryker.local backend-gateway.at.spryker.local backend-gateway.de.spryker.local backoffice.at.spryker.local backoffice.de.spryker.local date-time-configurator-example.spryker.local glue.at.spryker.local glue.de.spryker.local yves.at.spryker.local yves.de.spryker.local' >> /etc/hosts"
+            - name: Run Tests
+              run: |
+                  cd robotframework-tests
+                  robot -v env:api_b2c --exclude skip-due-to-issueORskip-due-to-refactoring -d results -s tests.api.b2c.glue .
+            - name: Upload artifacts
+              if: always()
+              run: |
+                  AWS_DEFAULT_REGION=${{env.ROBOT_TESTS_ARTIFACTS_BUCKET_REGION}} AWS_ACCESS_KEY_ID=${{ secrets.ROBOT_TESTS_ARTIFACTS_KEY }} AWS_SECRET_ACCESS_KEY=${{ secrets.ROBOT_TESTS_ARTIFACTS_SECRET }} aws s3 cp robotframework-tests/results s3://${{vars.ROBOT_TESTS_ARTIFACTS_BUCKET}}/b2c-robot-api-ci/${GITHUB_RUN_ID}/PHP8.0MariaDBRobot/ \
+                    --recursive \
+                    --expires "$(date -d '+7 days' --utc +'%Y-%m-%dT%H:%M:%SZ')"
+
+    docker-alpine-php-8-1-postgresql-robot:
+        name: "Docker / Alpine / PHP 8.1 / PostgreSQL / Robot"
+        runs-on: ubuntu-20.04
+        env:
+            PROGRESS_TYPE: plain
+            SPRYKER_PLATFORM_IMAGE: spryker/php:8.1
+            TRAVIS: 1
+            ROBOT_TESTS_ARTIFACTS_BUCKET_REGION: eu-west-1
+        steps:
+            - uses: actions/checkout@v2
+
+            - uses: actions/setup-python@v4
+              with:
+                  python-version: '3.9'
+
+            - name: Install packages
+              run: |
+                  sudo apt-get install apache2-utils
+                  sudo apt install awscli -q
+                  python3 -m pip install --upgrade pip
+                  python3 -m pip install -U robotframework
+                  python3 -m pip install -U robotframework-requests
+                  python3 -m pip install -U robotframework-jsonlibrary
+                  python3 -m pip install -U robotframework-databaselibrary
+                  python3 -m pip install psycopg2-binary
+            - name: Install docker-compose
+              run: |
+                  sudo curl -L "https://github.com/docker/compose/releases/download/2.12.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+                  sudo chmod +x /usr/local/bin/docker-compose
+            - name: Install Robot tests
+              run: |
+                  git clone https://github.com/spryker/robotframework-suite-tests.git --single-branch --branch master robotframework-tests
+            - name: Install Project
+              continue-on-error: true
+              run: |
+                  git clone https://github.com/spryker/docker-sdk.git ./docker
+                  docker/sdk boot -v deploy.ci.acceptance.yml
+                  docker/sdk up -t -v
+                  docker/sdk testing console queue:worker:start --stop-when-empty
+                  sudo bash -c "echo '127.0.0.1 backend-api.at.spryker.local backend-api.de.spryker.local backend-gateway.at.spryker.local backend-gateway.de.spryker.local backoffice.at.spryker.local backoffice.de.spryker.local date-time-configurator-example.spryker.local glue.at.spryker.local glue.de.spryker.local yves.at.spryker.local yves.de.spryker.local' >> /etc/hosts"
+            - name: Run Tests
+              run: |
+                  cd robotframework-tests
+                  robot -v env:api_b2c -v db_engine:psycopg2 --exclude skip-due-to-issueORskip-due-to-refactoring -d results -s tests.api.b2c.glue .
+            - name: Upload artifacts
+              if: always()
+              run: |
+                  AWS_DEFAULT_REGION=${{env.ROBOT_TESTS_ARTIFACTS_BUCKET_REGION}} AWS_ACCESS_KEY_ID=${{ secrets.ROBOT_TESTS_ARTIFACTS_KEY }} AWS_SECRET_ACCESS_KEY=${{ secrets.ROBOT_TESTS_ARTIFACTS_SECRET }} aws s3 cp robotframework-tests/results s3://${{vars.ROBOT_TESTS_ARTIFACTS_BUCKET}}/b2c-robot-api-ci/${GITHUB_RUN_ID}/PHP8.1PostgreSQLRobot/ \
+                    --recursive \
+                    --expires "$(date -d '+7 days' --utc +'%Y-%m-%dT%H:%M:%SZ')"
