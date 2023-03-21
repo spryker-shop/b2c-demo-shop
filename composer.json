@@ -176,6 +176,7 @@
         "spryker/sales-returns-rest-api": "^1.1.0",
         "spryker/sales-statistics": "^1.2.0",
         "spryker/scheduler-jenkins": "^1.2.1",
+        "spryker/search-http": "^0.2.0",
         "spryker/secrets-manager": "^1.0.0",
         "spryker/secrets-manager-aws": "^1.0.1",
         "spryker/security-blocker-rest-api": "^1.0.0",
@@ -254,7 +255,8 @@
         "allow-plugins": {
             "dealerdirect/phpcodesniffer-composer-installer": true,
             "composer/package-versions-deprecated": true,
-            "spryker-sdk/integrator": true
+            "spryker-sdk/integrator": true,
+            "spryker-projects/acp-configuration": true
         }
     },
     "scripts": {
@@ -276,5 +278,11 @@
         "prefer-mid": [
             "COMPOSER_MEMORY_LIMIT=-1 composer require twig/twig:\"^2.9.0\""
         ]
-    }
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/spryker-projects/acp-configuration"
+        }
+    ]
 }
