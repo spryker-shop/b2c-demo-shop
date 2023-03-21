@@ -171,4 +171,5 @@ $config[MessageBrokerAwsConstants::CHANNEL_TO_RECEIVER_TRANSPORT_MAP] = [
     'payment' => $messageBrokerTransport,
     'assets' => $messageBrokerTransport,
     'product' => $messageBrokerTransport,
+    'search' => $messageBrokerTransport,
 ];
