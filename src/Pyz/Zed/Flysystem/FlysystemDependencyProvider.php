@@ -22,13 +22,21 @@ class FlysystemDependencyProvider extends SprykerFlysystemDependencyProvider
      */
     protected function addFilesystemBuilderPluginCollection($container): SprykerContainer
     {
-        $container[self::PLUGIN_COLLECTION_FILESYSTEM_BUILDER] = function (Container $container) {
-            return [
-                new FtpFilesystemBuilderPlugin(),
-                new LocalFilesystemBuilderPlugin(),
-            ];
-        };
+        $container->set(self::PLUGIN_COLLECTION_FILESYSTEM_BUILDER, function (Container $container) {
+            return $this->getFilesystemBuilderPluginCollection();
+        });
 
         return $container;
+    }
+
+    /**
+     * @return array<\Spryker\Service\Flysystem\Dependency\Plugin\FlysystemFilesystemBuilderPluginInterface>
+     */
+    protected function getFilesystemBuilderPluginCollection(): array
+    {
+        return [
+            new FtpFilesystemBuilderPlugin(),
+            new LocalFilesystemBuilderPlugin(),
+        ];
     }
 }
