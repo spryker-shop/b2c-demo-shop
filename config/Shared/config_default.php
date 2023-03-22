@@ -678,7 +678,6 @@ $config[MessageBrokerAwsConstants::CHANNEL_TO_SENDER_TRANSPORT_MAP] = [
     'payment' => 'http',
     'assets' => 'http',
     'product' => 'http',
-    'search' => 'http',
 ];
 
 $aopInfrastructureConfiguration = json_decode(html_entity_decode((string)getenv('SPRYKER_AOP_INFRASTRUCTURE')), true);
