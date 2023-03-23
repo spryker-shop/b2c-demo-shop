@@ -39,6 +39,16 @@ class ExampleProductSalePageDependencyProvider extends AbstractBundleDependencyP
     public const PYZ_CLIENT_CATALOG = 'PYZ_CLIENT_CATALOG';
 
     /**
+     * @var string
+     */
+    public const PYZ_CLIENT_LOCALE = 'PYZ_CLIENT_LOCALE';
+
+    /**
+     * @var string
+     */
+    public const PYZ_SERVICE_UTIL_NUMBER = 'PYZ_SERVICE_UTIL_NUMBER';
+
+    /**
      * @param \Spryker\Yves\Kernel\Container $container
      *
      * @return \Spryker\Yves\Kernel\Container
@@ -50,6 +60,8 @@ class ExampleProductSalePageDependencyProvider extends AbstractBundleDependencyP
         $container = $this->addPyzStore($container);
         $container = $this->addProductSalePageWidgetPlugins($container);
         $container = $this->addPyzCatalogClient($container);
+        $container = $this->addPyzLocaleClient($container);
+        $container = $this->addPyzUtilNumberService($container);
 
         return $container;
     }
@@ -119,6 +131,34 @@ class ExampleProductSalePageDependencyProvider extends AbstractBundleDependencyP
     {
         $container->set(static::PYZ_PLUGIN_PRODUCT_SALE_PAGE_WIDGETS, function () {
             return $this->getProductSalePageWidgetPlugins();
+        });
+
+        return $container;
+    }
+
+    /**
+     * @param \Spryker\Yves\Kernel\Container $container
+     *
+     * @return \Spryker\Yves\Kernel\Container
+     */
+    protected function addPyzLocaleClient(Container $container): Container
+    {
+        $container->set(static::PYZ_CLIENT_LOCALE, function (Container $container) {
+            return $container->getLocator()->locale()->client();
+        });
+
+        return $container;
+    }
+
+    /**
+     * @param \Spryker\Yves\Kernel\Container $container
+     *
+     * @return \Spryker\Yves\Kernel\Container
+     */
+    protected function addPyzUtilNumberService(Container $container): Container
+    {
+        $container->set(static::PYZ_SERVICE_UTIL_NUMBER, function (Container $container) {
+            return $container->getLocator()->utilNumber()->service();
         });
 
         return $container;
