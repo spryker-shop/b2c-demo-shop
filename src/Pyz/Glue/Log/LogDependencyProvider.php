@@ -60,7 +60,7 @@ class LogDependencyProvider extends SprykerLogDependencyProvider
     }
 
     /**
-     * @return array<callable>
+     * @return array<\Spryker\Shared\Log\Dependency\Plugin\LogProcessorPluginInterface>
      */
     protected function getProcessors(): array
     {
