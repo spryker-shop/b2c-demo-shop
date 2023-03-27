@@ -37,6 +37,7 @@ use Spryker\Shared\Acl\AclConstants;
 use Spryker\Shared\AppCatalogGui\AppCatalogGuiConstants;
 use Spryker\Shared\Application\ApplicationConstants;
 use Spryker\Shared\Application\Log\Config\SprykerLoggerConfig;
+use Spryker\Shared\AvailabilityNotification\AvailabilityNotificationConstants;
 use Spryker\Shared\CartsRestApi\CartsRestApiConstants;
 use Spryker\Shared\Category\CategoryConstants;
 use Spryker\Shared\CmsGui\CmsGuiConstants;
@@ -570,6 +571,14 @@ $config[ApplicationConstants::BASE_URL_YVES]
     );
 
 $config[ShopUiConstants::YVES_ASSETS_URL_PATTERN] = '/assets/' . (getenv('SPRYKER_BUILD_HASH') ?: 'current') . '/%theme%/';
+
+// >>> Availability Notification
+$config[AvailabilityNotificationConstants::BASE_URL_YVES_PORT] = $yvesPort;
+$config[AvailabilityNotificationConstants::STORE_TO_YVES_HOST_MAPPING] = [
+    'DE' => getenv('SPRYKER_YVES_HOST_DE'),
+    'AT' => getenv('SPRYKER_YVES_HOST_AT'),
+    'US' => getenv('SPRYKER_YVES_HOST_US'),
+];
 
 // ----------------------------------------------------------------------------
 // ------------------------------ API -----------------------------------------
