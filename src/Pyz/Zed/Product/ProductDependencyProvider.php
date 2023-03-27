@@ -32,6 +32,7 @@ use Spryker\Zed\ProductImage\Communication\Plugin\ProductAbstractAfterUpdatePlug
 use Spryker\Zed\ProductImage\Communication\Plugin\ProductAbstractReadPlugin as ImageSetProductAbstractReadPlugin;
 use Spryker\Zed\ProductImage\Communication\Plugin\ProductConcreteAfterCreatePlugin as ImageSetProductConcreteAfterCreatePlugin;
 use Spryker\Zed\ProductImage\Communication\Plugin\ProductConcreteAfterUpdatePlugin as ImageSetProductConcreteAfterUpdatePlugin;
+use Spryker\Zed\ProductLabel\Communication\Plugin\Product\ProductLabelProductConcreteExpanderPlugin;
 use Spryker\Zed\ProductReview\Communication\Plugin\Product\ProductReviewProductConcreteExpanderPlugin;
 use Spryker\Zed\ProductSearch\Communication\Plugin\Product\ProductSearchProductConcreteExpanderPlugin;
 use Spryker\Zed\ProductSearch\Communication\Plugin\ProductConcrete\ProductSearchProductConcreteAfterCreatePlugin;
@@ -174,6 +175,7 @@ class ProductDependencyProvider extends SprykerProductDependencyProvider
             new ProductValidityProductConcreteExpanderPlugin(),
             new ProductReviewProductConcreteExpanderPlugin(),
             new ProductConcreteCategoriesExpanderPlugin(),
+            new ProductLabelProductConcreteExpanderPlugin(),
         ];
     }
 
