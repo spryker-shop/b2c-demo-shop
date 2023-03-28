@@ -14,8 +14,6 @@ use Spryker\Shared\Event\EventConstants;
 use Spryker\Shared\GlueApplication\GlueApplicationConstants;
 use Spryker\Shared\Kernel\KernelConstants;
 use Spryker\Shared\Log\LogConstants;
-use Spryker\Shared\MessageBroker\MessageBrokerConstants;
-use Spryker\Shared\MessageBrokerAws\MessageBrokerAwsConstants;
 use Spryker\Shared\Newsletter\NewsletterConstants;
 use Spryker\Shared\OauthClient\OauthClientConstants;
 use Spryker\Shared\ProductManagement\ProductManagementConstants;
@@ -28,7 +26,6 @@ use Spryker\Shared\Session\SessionConstants;
 use Spryker\Shared\Testify\TestifyConstants;
 use Spryker\Shared\WebProfiler\WebProfilerConstants;
 use Spryker\Shared\ZedRequest\ZedRequestConstants;
-use Spryker\Zed\MessageBrokerAws\MessageBrokerAwsConfig;
 use Spryker\Zed\OauthDummy\OauthDummyConfig;
 use SprykerShop\Shared\CalculationPage\CalculationPageConstants;
 use SprykerShop\Shared\ErrorPage\ErrorPageConstants;
@@ -160,15 +157,3 @@ require 'common/config_oms-development.php';
 $config[OauthClientConstants::OAUTH_PROVIDER_NAME_FOR_MESSAGE_BROKER] = OauthDummyConfig::PROVIDER_NAME;
 $config[OauthClientConstants::OAUTH_PROVIDER_NAME_FOR_PAYMENT_AUTHORIZE] = OauthDummyConfig::PROVIDER_NAME;
 $config[AppCatalogGuiConstants::OAUTH_PROVIDER_NAME] = OauthDummyConfig::PROVIDER_NAME;
-
-// ----------------------------------------------------------------------------
-// ------------------------------ MessageBroker -----------------------------------------
-// ----------------------------------------------------------------------------
-$messageBrokerTransport = getenv('SPRYKER_TESTING_ENABLED') ? 'in-memory' : MessageBrokerAwsConfig::SQS_TRANSPORT;
-
-$config[MessageBrokerConstants::CHANNEL_TO_TRANSPORT_MAP] =
-$config[MessageBrokerAwsConstants::CHANNEL_TO_RECEIVER_TRANSPORT_MAP] = [
-    'payment' => $messageBrokerTransport,
-    'assets' => $messageBrokerTransport,
-    'product' => $messageBrokerTransport,
-];

@@ -22,6 +22,8 @@ use Generated\Shared\Transfer\ProductCreatedTransfer;
 use Generated\Shared\Transfer\ProductDeletedTransfer;
 use Generated\Shared\Transfer\ProductExportedTransfer;
 use Generated\Shared\Transfer\ProductUpdatedTransfer;
+use Generated\Shared\Transfer\SearchEndpointAvailableTransfer;
+use Generated\Shared\Transfer\SearchEndpointRemovedTransfer;
 use Monolog\Logger;
 use Pyz\Shared\Console\ConsoleConstants;
 use Pyz\Shared\Scheduler\SchedulerConfig;
@@ -35,6 +37,7 @@ use Spryker\Shared\Acl\AclConstants;
 use Spryker\Shared\AppCatalogGui\AppCatalogGuiConstants;
 use Spryker\Shared\Application\ApplicationConstants;
 use Spryker\Shared\Application\Log\Config\SprykerLoggerConfig;
+use Spryker\Shared\AvailabilityNotification\AvailabilityNotificationConstants;
 use Spryker\Shared\CartsRestApi\CartsRestApiConstants;
 use Spryker\Shared\Category\CategoryConstants;
 use Spryker\Shared\CmsGui\CmsGuiConstants;
@@ -569,6 +572,14 @@ $config[ApplicationConstants::BASE_URL_YVES]
 
 $config[ShopUiConstants::YVES_ASSETS_URL_PATTERN] = '/assets/' . (getenv('SPRYKER_BUILD_HASH') ?: 'current') . '/%theme%/';
 
+// >>> Availability Notification
+$config[AvailabilityNotificationConstants::BASE_URL_YVES_PORT] = $yvesPort;
+$config[AvailabilityNotificationConstants::STORE_TO_YVES_HOST_MAPPING] = [
+    'DE' => getenv('SPRYKER_YVES_HOST_DE'),
+    'AT' => getenv('SPRYKER_YVES_HOST_AT'),
+    'US' => getenv('SPRYKER_YVES_HOST_US'),
+];
+
 // ----------------------------------------------------------------------------
 // ------------------------------ API -----------------------------------------
 // ----------------------------------------------------------------------------
@@ -660,6 +671,8 @@ $config[MessageBrokerConstants::MESSAGE_TO_CHANNEL_MAP] = [
     ProductUpdatedTransfer::class => 'product',
     ProductDeletedTransfer::class => 'product',
     InitializeProductExportTransfer::class => 'product',
+    SearchEndpointAvailableTransfer::class => 'search',
+    SearchEndpointRemovedTransfer::class => 'search',
 ];
 
 $config[MessageBrokerConstants::CHANNEL_TO_TRANSPORT_MAP] =
@@ -667,6 +680,7 @@ $config[MessageBrokerAwsConstants::CHANNEL_TO_RECEIVER_TRANSPORT_MAP] = [
     'payment' => MessageBrokerAwsConfig::SQS_TRANSPORT,
     'assets' => MessageBrokerAwsConfig::SQS_TRANSPORT,
     'product' => MessageBrokerAwsConfig::SQS_TRANSPORT,
+    'search' => MessageBrokerAwsConfig::SQS_TRANSPORT,
 ];
 
 $config[MessageBrokerAwsConstants::CHANNEL_TO_SENDER_TRANSPORT_MAP] = [
