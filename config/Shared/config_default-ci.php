@@ -96,7 +96,7 @@ $config[KernelConstants::DOMAIN_WHITELIST] = array_merge($trustedHosts, $config[
 // ------------------------------ AUTHENTICATION ------------------------------
 // ----------------------------------------------------------------------------
 
-require 'common/config_oauth-devvm.php';
+require 'common/config_oauth.php';
 
 // ----------------------------------------------------------------------------
 // ------------------------------ SERVICES ------------------------------------
@@ -282,4 +282,5 @@ $config[MessageBrokerAwsConstants::CHANNEL_TO_RECEIVER_TRANSPORT_MAP] = [
     'payment' => 'in-memory',
     'assets' => 'in-memory',
     'product' => 'in-memory',
+    'search' => 'in-memory',
 ];

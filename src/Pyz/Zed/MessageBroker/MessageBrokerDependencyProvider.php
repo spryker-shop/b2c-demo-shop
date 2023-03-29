@@ -32,6 +32,8 @@ use Spryker\Zed\Payment\Communication\Plugin\MessageBroker\PaymentRefundFailedMe
 use Spryker\Zed\Payment\Communication\Plugin\MessageBroker\PaymentReservationCanceledMessageHandlerPlugin;
 use Spryker\Zed\Product\Communication\Plugin\MessageBroker\InitializeProductExportMessageHandlerPlugin;
 use Spryker\Zed\ProductReview\Communication\Plugin\MessageBroker\ProductReviewAddReviewsMessageHandlerPlugin;
+use Spryker\Zed\SearchHttp\Communication\Plugin\MessageBroker\SearchEndpointAvailableMessageHandlerPlugin;
+use Spryker\Zed\SearchHttp\Communication\Plugin\MessageBroker\SearchEndpointRemovedMessageHandlerPlugin;
 use Spryker\Zed\Session\Communication\Plugin\MessageBroker\SessionTrackingIdMessageAttributeProviderPlugin;
 use Spryker\Zed\Store\Communication\Plugin\MessageBroker\CurrentStoreReferenceMessageAttributeProviderPlugin;
 use Spryker\Zed\Store\Communication\Plugin\MessageBroker\StoreReferenceMessageValidatorPlugin;
@@ -81,6 +83,8 @@ class MessageBrokerDependencyProvider extends SprykerMessageBrokerDependencyProv
             new AssetDeletedMessageHandlerPlugin(),
             new InitializeProductExportMessageHandlerPlugin(),
             new ProductReviewAddReviewsMessageHandlerPlugin(),
+            new SearchEndpointAvailableMessageHandlerPlugin(),
+            new SearchEndpointRemovedMessageHandlerPlugin(),
         ];
     }
 
