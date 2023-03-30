@@ -262,16 +262,12 @@ class ProductAbstractHydratorStep implements DataImportStepInterface
                 ));
             }
 
-            $productOrder = 0;
+            $productCategoryEntityTransfer = (new SpyProductCategoryEntityTransfer())
+                ->setFkCategory($dataSet[static::COLUMN_CATEGORY_KEYS][$categoryKey]);
 
-            if (count($categoryProductOrder) && isset($categoryProductOrder[$index])) {
-                $productOrder = (int)$categoryProductOrder[$index];
+            if (count($categoryProductOrder) && isset($categoryProductOrder[$index]) && $categoryProductOrder[$index] !== '') {
+                $productCategoryEntityTransfer->setProductOrder((int)$categoryProductOrder[$index]);
             }
-
-            $productCategoryEntityTransfer = new SpyProductCategoryEntityTransfer();
-            $productCategoryEntityTransfer
-                ->setFkCategory($dataSet[static::COLUMN_CATEGORY_KEYS][$categoryKey])
-                ->setProductOrder($productOrder);
 
             $productCategoryTransfers[] = [
                 static::COLUMN_ABSTRACT_SKU => $dataSet[static::COLUMN_ABSTRACT_SKU],

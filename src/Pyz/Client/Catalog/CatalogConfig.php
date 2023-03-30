@@ -12,7 +12,7 @@ use Spryker\Client\Catalog\CatalogConfig as SprykerCatalogConfig;
 class CatalogConfig extends SprykerCatalogConfig
 {
     /**
-     * @var array
+     * @var array<int>
      */
     protected const PAGINATION_VALID_ITEMS_PER_PAGE = [
         10,

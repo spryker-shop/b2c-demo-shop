@@ -10,6 +10,8 @@ image:
     environment:
         SPRYKER_PRODUCT_CONFIGURATOR_HOST: date-time-configurator-example.spryker.local
         SPRYKER_PRODUCT_CONFIGURATOR_PORT: 80
+        SPRYKER_YVES_HOST_DE: yves.de.spryker.local
+        SPRYKER_YVES_HOST_AT: yves.at.spryker.local
     node:
         version: 16
         npm: 8
@@ -115,6 +117,9 @@ services:
         root:
             username: "root"
             password: "secret"
+        endpoints:
+            localhost:5432:
+                protocol: tcp
     broker:
         engine: rabbitmq
         version: '3.9'
