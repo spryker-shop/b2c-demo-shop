@@ -16,20 +16,6 @@ use Spryker\Zed\Kernel\Container;
 class FlysystemDependencyProvider extends SprykerFlysystemDependencyProvider
 {
     /**
-     * @param \Spryker\Service\Kernel\Container $container
-     *
-     * @return \Spryker\Service\Kernel\Container
-     */
-    protected function addFilesystemBuilderPluginCollection($container): SprykerContainer
-    {
-        $container->set(self::PLUGIN_COLLECTION_FILESYSTEM_BUILDER, function (Container $container) {
-            return $this->getFilesystemBuilderPluginCollection();
-        });
-
-        return $container;
-    }
-
-    /**
      * @return array<\Spryker\Service\Flysystem\Dependency\Plugin\FlysystemFilesystemBuilderPluginInterface>
      */
     protected function getFilesystemBuilderPluginCollection(): array

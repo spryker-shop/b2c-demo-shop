@@ -7,7 +7,6 @@
 
 namespace Pyz\Glue\Log;
 
-use Spryker\Glue\Kernel\Container;
 use Spryker\Glue\Log\LogDependencyProvider as SprykerLogDependencyProvider;
 use Spryker\Glue\Log\Plugin\Handler\ExceptionStreamHandlerPlugin;
 use Spryker\Glue\Log\Plugin\Handler\StreamHandlerPlugin;
@@ -21,20 +20,6 @@ use Spryker\Glue\Log\Plugin\Processor\ServerProcessorPlugin;
 class LogDependencyProvider extends SprykerLogDependencyProvider
 {
     /**
-     * @param \Spryker\Glue\Kernel\Container $container
-     *
-     * @return \Spryker\Glue\Kernel\Container
-     */
-    protected function addLogHandlers(Container $container): Container
-    {
-        $container->set(static::LOG_HANDLERS, function () {
-            return $this->getLogHandlers();
-        });
-
-        return $container;
-    }
-
-    /**
      * @return array<\Monolog\Handler\HandlerInterface>
      */
     protected function getLogHandlers(): array
@@ -43,20 +28,6 @@ class LogDependencyProvider extends SprykerLogDependencyProvider
             new StreamHandlerPlugin(),
             new ExceptionStreamHandlerPlugin(),
         ];
-    }
-
-    /**
-     * @param \Spryker\Glue\Kernel\Container $container
-     *
-     * @return \Spryker\Glue\Kernel\Container
-     */
-    protected function addProcessors(Container $container): Container
-    {
-        $container->set(static::LOG_PROCESSORS, function () {
-            return $this->getProcessors();
-        });
-
-        return $container;
     }
 
     /**
