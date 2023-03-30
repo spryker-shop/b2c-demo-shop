@@ -412,10 +412,6 @@ $config[SecurityBlockerConstants::SECURITY_BLOCKER_BLOCKING_TTL] = 600;
 $config[SecurityBlockerConstants::SECURITY_BLOCKER_BLOCK_FOR] = 300;
 $config[SecurityBlockerConstants::SECURITY_BLOCKER_BLOCKING_NUMBER_OF_ATTEMPTS] = 10;
 
-$config[SecurityBlockerConstants::SECURITY_BLOCKER_AGENT_BLOCK_FOR] = 360;
-$config[SecurityBlockerConstants::SECURITY_BLOCKER_AGENT_BLOCKING_NUMBER_OF_ATTEMPTS] = 9;
-$config[SecurityBlockerConstants::SECURITY_BLOCKER_AGENT_BLOCKING_TTL] = 900;
-
 // >>> Security Blocker Storefront Agent
 $config[SecurityBlockerStorefrontAgentConstants::AGENT_BLOCK_FOR_SECONDS] = 360;
 $config[SecurityBlockerStorefrontAgentConstants::AGENT_BLOCKING_TTL] = 900;
