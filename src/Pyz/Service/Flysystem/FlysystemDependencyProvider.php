@@ -10,24 +10,9 @@ namespace Pyz\Service\Flysystem;
 use Spryker\Service\Flysystem\FlysystemDependencyProvider as SprykerFlysystemDependencyProvider;
 use Spryker\Service\FlysystemFtpFileSystem\Plugin\Flysystem\FtpFilesystemBuilderPlugin;
 use Spryker\Service\FlysystemLocalFileSystem\Plugin\Flysystem\LocalFilesystemBuilderPlugin;
-use Spryker\Service\Kernel\Container;
 
 class FlysystemDependencyProvider extends SprykerFlysystemDependencyProvider
 {
-    /**
-     * @param \Spryker\Service\Kernel\Container $container
-     *
-     * @return \Spryker\Service\Kernel\Container
-     */
-    protected function addFilesystemBuilderPluginCollection($container): Container
-    {
-        $container->set(static::PLUGIN_COLLECTION_FILESYSTEM_BUILDER, function (Container $container) {
-            return $this->getFilesystemBuilderPluginCollection();
-        });
-
-        return $container;
-    }
-
     /**
      * @return array<\Spryker\Service\Flysystem\Dependency\Plugin\FlysystemFilesystemBuilderPluginInterface>
      */
