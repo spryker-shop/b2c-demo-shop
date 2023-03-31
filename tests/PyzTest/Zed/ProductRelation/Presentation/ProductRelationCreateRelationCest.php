@@ -8,7 +8,6 @@
 namespace PyzTest\Zed\ProductRelation\Presentation;
 
 use PyzTest\Zed\ProductRelation\PageObject\ProductRelationCreatePage;
-use PyzTest\Zed\ProductRelation\PageObject\ProductRelationTablePage;
 use PyzTest\Zed\ProductRelation\ProductRelationPresentationTester;
 use Spryker\Shared\ProductRelation\ProductRelationTypes;
 
