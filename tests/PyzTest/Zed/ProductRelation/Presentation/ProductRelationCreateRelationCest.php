@@ -23,7 +23,6 @@ use Spryker\Shared\ProductRelation\ProductRelationTypes;
  */
 class ProductRelationCreateRelationCest
 {
-
     /**
      * @param \PyzTest\Zed\ProductRelation\ProductRelationPresentationTester $i
      *
