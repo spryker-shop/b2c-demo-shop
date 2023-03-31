@@ -1,9 +1,11 @@
 <?php
 
+use Generated\Shared\Transfer\AddReviewsTransfer;
 use Generated\Shared\Transfer\AssetAddedTransfer;
 use Generated\Shared\Transfer\AssetDeletedTransfer;
 use Generated\Shared\Transfer\AssetUpdatedTransfer;
 use Generated\Shared\Transfer\InitializeProductExportTransfer;
+use Generated\Shared\Transfer\OrderStatusChangedTransfer;
 use Generated\Shared\Transfer\PaymentCancelReservationFailedTransfer;
 use Generated\Shared\Transfer\PaymentCancelReservationRequestedTransfer;
 use Generated\Shared\Transfer\PaymentConfirmationFailedTransfer;
@@ -22,6 +24,8 @@ use Generated\Shared\Transfer\ProductCreatedTransfer;
 use Generated\Shared\Transfer\ProductDeletedTransfer;
 use Generated\Shared\Transfer\ProductExportedTransfer;
 use Generated\Shared\Transfer\ProductUpdatedTransfer;
+use Generated\Shared\Transfer\SearchEndpointAvailableTransfer;
+use Generated\Shared\Transfer\SearchEndpointRemovedTransfer;
 use Monolog\Logger;
 use Pyz\Shared\Console\ConsoleConstants;
 use Pyz\Shared\Scheduler\SchedulerConfig;
@@ -35,6 +39,7 @@ use Spryker\Shared\Acl\AclConstants;
 use Spryker\Shared\AppCatalogGui\AppCatalogGuiConstants;
 use Spryker\Shared\Application\ApplicationConstants;
 use Spryker\Shared\Application\Log\Config\SprykerLoggerConfig;
+use Spryker\Shared\AvailabilityNotification\AvailabilityNotificationConstants;
 use Spryker\Shared\CartsRestApi\CartsRestApiConstants;
 use Spryker\Shared\Category\CategoryConstants;
 use Spryker\Shared\CmsGui\CmsGuiConstants;
@@ -87,6 +92,7 @@ use Spryker\Shared\Storage\StorageConstants;
 use Spryker\Shared\StorageRedis\StorageRedisConstants;
 use Spryker\Shared\Store\StoreConstants;
 use Spryker\Shared\SymfonyMailer\SymfonyMailerConstants;
+use Spryker\Shared\Synchronization\SynchronizationConstants;
 use Spryker\Shared\Tax\TaxConstants;
 use Spryker\Shared\Testify\TestifyConstants;
 use Spryker\Shared\Translator\TranslatorConstants;
@@ -189,6 +195,8 @@ $config[KernelConstants::DOMAIN_WHITELIST] = array_merge($trustedHosts, [
     'threedssvc.pay1.de', // trusted Payone domain
     'www.sofort.com', // trusted Payone domain
 ]);
+$config[KernelConstants::DOMAIN_WHITELIST][] = '*.bazaarvoice.com';
+
 $config[KernelConstants::STRICT_DOMAIN_REDIRECT] = true;
 
 $config[HttpConstants::ZED_HTTP_STRICT_TRANSPORT_SECURITY_ENABLED]
@@ -477,6 +485,9 @@ foreach ($rabbitConnections as $key => $connection) {
     $config[RabbitMqEnv::RABBITMQ_CONNECTIONS][$key][RabbitMqEnv::RABBITMQ_DEFAULT_CONNECTION] = $key === APPLICATION_STORE;
 }
 
+// >>> SYNCHRONIZATION
+$config[SynchronizationConstants::DEFAULT_SYNC_SEARCH_QUEUE_MESSAGE_CHUNK_SIZE] = 1000;
+
 // >>> SCHEDULER
 $config[SchedulerConstants::ENABLED_SCHEDULERS] = [
     SchedulerConfig::PYZ_SCHEDULER_JENKINS,
@@ -569,6 +580,14 @@ $config[ApplicationConstants::BASE_URL_YVES]
 
 $config[ShopUiConstants::YVES_ASSETS_URL_PATTERN] = '/assets/' . (getenv('SPRYKER_BUILD_HASH') ?: 'current') . '/%theme%/';
 
+// >>> Availability Notification
+$config[AvailabilityNotificationConstants::BASE_URL_YVES_PORT] = $yvesPort;
+$config[AvailabilityNotificationConstants::STORE_TO_YVES_HOST_MAPPING] = [
+    'DE' => getenv('SPRYKER_YVES_HOST_DE'),
+    'AT' => getenv('SPRYKER_YVES_HOST_AT'),
+    'US' => getenv('SPRYKER_YVES_HOST_US'),
+];
+
 // ----------------------------------------------------------------------------
 // ------------------------------ API -----------------------------------------
 // ----------------------------------------------------------------------------
@@ -660,6 +679,10 @@ $config[MessageBrokerConstants::MESSAGE_TO_CHANNEL_MAP] = [
     ProductUpdatedTransfer::class => 'product',
     ProductDeletedTransfer::class => 'product',
     InitializeProductExportTransfer::class => 'product',
+    AddReviewsTransfer::class => 'reviews',
+    OrderStatusChangedTransfer::class => 'orders',
+    SearchEndpointAvailableTransfer::class => 'search',
+    SearchEndpointRemovedTransfer::class => 'search',
 ];
 
 $config[MessageBrokerConstants::CHANNEL_TO_TRANSPORT_MAP] =
@@ -667,12 +690,15 @@ $config[MessageBrokerAwsConstants::CHANNEL_TO_RECEIVER_TRANSPORT_MAP] = [
     'payment' => MessageBrokerAwsConfig::SQS_TRANSPORT,
     'assets' => MessageBrokerAwsConfig::SQS_TRANSPORT,
     'product' => MessageBrokerAwsConfig::SQS_TRANSPORT,
+    'reviews' => MessageBrokerAwsConfig::SQS_TRANSPORT,
+    'search' => MessageBrokerAwsConfig::SQS_TRANSPORT,
 ];
 
 $config[MessageBrokerAwsConstants::CHANNEL_TO_SENDER_TRANSPORT_MAP] = [
     'payment' => 'http',
     'assets' => 'http',
     'product' => 'http',
+    'orders' => 'http',
 ];
 
 $aopInfrastructureConfiguration = json_decode(html_entity_decode((string)getenv('SPRYKER_AOP_INFRASTRUCTURE')), true);
