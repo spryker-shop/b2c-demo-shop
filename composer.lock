@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f4db7778c22c1206e089f2e8831b90a3",
+    "content-hash": "e3cb30b1a49a8bf13649fbf13005503a",
     "packages": [
         {
             "name": "async-aws/core",
@@ -5044,30 +5044,34 @@
         },
         {
             "name": "spryker-feature/customer-account-management",
-            "version": "202212.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker-feature/customer-account-management.git",
-                "reference": "bff7f7a853c7539f3ee7fce13e4be8933f64732b"
+                "reference": "e90a29582b91c235457be62de6269f5301520c5f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker-feature/customer-account-management/zipball/bff7f7a853c7539f3ee7fce13e4be8933f64732b",
-                "reference": "bff7f7a853c7539f3ee7fce13e4be8933f64732b",
+                "url": "https://api.github.com/repos/spryker-feature/customer-account-management/zipball/e90a29582b91c235457be62de6269f5301520c5f",
+                "reference": "e90a29582b91c235457be62de6269f5301520c5f",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.0",
                 "spryker-shop/customer-page": "^2.40.0",
+                "spryker-shop/customer-validation-page": "^1.0.0",
                 "spryker-shop/session-customer-validation-page": "^1.0.0",
                 "spryker/customer": "^7.48.0",
                 "spryker/customer-group": "^2.6.0",
                 "spryker/customer-note": "^1.1.0",
                 "spryker/customer-note-gui": "^1.2.0",
+                "spryker/customer-storage": "^1.0.0",
                 "spryker/oauth": "^2.6.0",
                 "spryker/oauth-cryptography": "^1.0.0",
+                "spryker/oauth-customer-validation": "^1.0.0",
                 "spryker/oauth-revoke": "^1.3.0"
             },
+            "default-branch": true,
             "type": "metapackage",
             "extra": {
                 "branch-alias": {
@@ -5080,9 +5084,9 @@
             ],
             "description": "Customer Account Management [feature]",
             "support": {
-                "source": "https://github.com/spryker-feature/customer-account-management/tree/202212.0"
+                "source": "https://github.com/spryker-feature/customer-account-management/tree/master"
             },
-            "time": "2022-12-16T09:39:33+00:00"
+            "time": "2023-02-08T19:54:53+00:00"
         },
         {
             "name": "spryker-feature/deployment-tools",
@@ -8798,6 +8802,57 @@
                 "source": "https://github.com/spryker-shop/customer-reorder-widget-extension/tree/1.3.0"
             },
             "time": "2022-06-21T15:12:58+00:00"
+        },
+        {
+            "name": "spryker-shop/customer-validation-page",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker-shop/customer-validation-page.git",
+                "reference": "1e61281f63d10d8e5e4b88a043207da58d4b904e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker-shop/customer-validation-page/zipball/1e61281f63d10d8e5e4b88a043207da58d4b904e",
+                "reference": "1e61281f63d10d8e5e4b88a043207da58d4b904e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.0",
+                "spryker-shop/shop-application-extension": "^1.1.0",
+                "spryker/customer": "^7.48.0",
+                "spryker/customer-storage": "^1.0.0",
+                "spryker/kernel": "^3.52.0",
+                "spryker/session": "^4.0.0",
+                "spryker/symfony": "^3.1.0",
+                "spryker/transfer": "^3.27.0"
+            },
+            "require-dev": {
+                "spryker/application": "*",
+                "spryker/code-sniffer": "*",
+                "spryker/container": "*",
+                "spryker/testify": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "SprykerShop\\": "src/SprykerShop/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "CustomerValidationPage module",
+            "support": {
+                "source": "https://github.com/spryker-shop/customer-validation-page/tree/1.0.0"
+            },
+            "time": "2023-02-08T18:31:48+00:00"
         },
         {
             "name": "spryker-shop/date-time-configurator-page-example",
@@ -21325,20 +21380,21 @@
         },
         {
             "name": "spryker/customer",
-            "version": "7.48.1",
+            "version": "7.50.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/customer.git",
-                "reference": "92d7f77cef5db0b6f8b64b075b11ed23bc276560"
+                "reference": "41b458793e76d193284c87e5524138bee0c29faf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/customer/zipball/92d7f77cef5db0b6f8b64b075b11ed23bc276560",
-                "reference": "92d7f77cef5db0b6f8b64b075b11ed23bc276560",
+                "url": "https://api.github.com/repos/spryker/customer/zipball/41b458793e76d193284c87e5524138bee0c29faf",
+                "reference": "41b458793e76d193284c87e5524138bee0c29faf",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.0",
+                "spryker/acl-merchant-portal-extension": "^1.0.0",
                 "spryker/authorization-extension": "^1.0.0",
                 "spryker/checkout-extension": "^1.2.0",
                 "spryker/country": "^3.0.0",
@@ -21356,7 +21412,7 @@
                 "spryker/store": "^1.4.0",
                 "spryker/symfony": "^3.0.0",
                 "spryker/tax-product-connector-extension": "^1.0.0",
-                "spryker/transfer": "^3.25.0",
+                "spryker/transfer": "^3.27.0",
                 "spryker/util-date-time": "^1.0.0",
                 "spryker/util-encoding": "^2.0.0",
                 "spryker/util-sanitize": "^2.0.0",
@@ -21400,9 +21456,9 @@
             ],
             "description": "Customer module",
             "support": {
-                "source": "https://github.com/spryker/customer/tree/7.48.1"
+                "source": "https://github.com/spryker/customer/tree/7.50.0"
             },
-            "time": "2022-12-29T12:04:01+00:00"
+            "time": "2023-03-10T14:11:16+00:00"
         },
         {
             "name": "spryker/customer-access",
@@ -21898,6 +21954,64 @@
                 "source": "https://github.com/spryker/customer-note-gui/tree/1.2.0"
             },
             "time": "2021-12-01T17:41:51+00:00"
+        },
+        {
+            "name": "spryker/customer-storage",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/customer-storage.git",
+                "reference": "abd0f1f6d6d2c9f53bb402bec10e9b39184b11ba"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/customer-storage/zipball/abd0f1f6d6d2c9f53bb402bec10e9b39184b11ba",
+                "reference": "abd0f1f6d6d2c9f53bb402bec10e9b39184b11ba",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.0",
+                "spryker/customer": "^7.49.0",
+                "spryker/kernel": "^3.30.0",
+                "spryker/propel-orm": "^1.5.0",
+                "spryker/publisher-extension": "^1.0.0",
+                "spryker/storage": "^3.7.1",
+                "spryker/symfony": "^3.0.0",
+                "spryker/synchronization": "^1.9.0",
+                "spryker/synchronization-behavior": "^1.0.0",
+                "spryker/synchronization-extension": "^1.1.0",
+                "spryker/transfer": "^3.27.0",
+                "spryker/util-encoding": "^2.0.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/propel": "*",
+                "spryker/queue": "*",
+                "spryker/testify": "*"
+            },
+            "suggest": {
+                "spryker/event": "If you want to use Event plugins, minimum required version: 2.1.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "CustomerStorage module",
+            "support": {
+                "source": "https://github.com/spryker/customer-storage/tree/1.0.0"
+            },
+            "time": "2023-02-08T18:31:45+00:00"
         },
         {
             "name": "spryker/customer-user-connector",
@@ -26739,29 +26853,29 @@
         },
         {
             "name": "spryker/oauth",
-            "version": "2.6.0",
+            "version": "2.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/oauth.git",
-                "reference": "5c7dab85adeb9430f1240c6f8f51ae578d3efb78"
+                "reference": "8d8e74962834767bc3a06ccb9d61a6ed35bfcc96"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/oauth/zipball/5c7dab85adeb9430f1240c6f8f51ae578d3efb78",
-                "reference": "5c7dab85adeb9430f1240c6f8f51ae578d3efb78",
+                "url": "https://api.github.com/repos/spryker/oauth/zipball/8d8e74962834767bc3a06ccb9d61a6ed35bfcc96",
+                "reference": "8d8e74962834767bc3a06ccb9d61a6ed35bfcc96",
                 "shasum": ""
             },
             "require": {
-                "league/oauth2-server": "^8.0.0",
-                "php": ">=7.4",
+                "league/oauth2-server": "^8.3.0",
+                "php": ">=8.0",
                 "psr/http-message": "^1.0.0",
                 "spryker/config": "^3.0.0",
                 "spryker/guzzle": "^2.0.0",
                 "spryker/kernel": "^3.30.0",
-                "spryker/oauth-extension": "^1.7.0",
+                "spryker/oauth-extension": "^1.8.0",
                 "spryker/propel-orm": "^1.0.0",
                 "spryker/symfony": "^3.0.0",
-                "spryker/transfer": "^3.25.0",
+                "spryker/transfer": "^3.27.0",
                 "spryker/util-encoding": "^2.0.0",
                 "spryker/zed-request": "^3.0.0"
             },
@@ -26795,9 +26909,9 @@
             ],
             "description": "Oauth module",
             "support": {
-                "source": "https://github.com/spryker/oauth/tree/2.6.0"
+                "source": "https://github.com/spryker/oauth/tree/2.9.0"
             },
-            "time": "2022-08-01T10:21:40+00:00"
+            "time": "2023-03-17T10:37:30+00:00"
         },
         {
             "name": "spryker/oauth-agent-connector",
@@ -27136,6 +27250,54 @@
             "time": "2018-12-29T09:45:16+00:00"
         },
         {
+            "name": "spryker/oauth-customer-validation",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/oauth-customer-validation.git",
+                "reference": "386e91d7b5edc6e64696e8be92295bc2aa074e68"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/oauth-customer-validation/zipball/386e91d7b5edc6e64696e8be92295bc2aa074e68",
+                "reference": "386e91d7b5edc6e64696e8be92295bc2aa074e68",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.0",
+                "spryker/customer-storage": "^1.0.0",
+                "spryker/kernel": "^3.30.0",
+                "spryker/oauth": "^2.8.0",
+                "spryker/oauth-extension": "^1.8.0",
+                "spryker/transfer": "^3.27.0",
+                "spryker/util-encoding": "^2.0.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/testify": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "OauthCustomerValidation module",
+            "support": {
+                "source": "https://github.com/spryker/oauth-customer-validation/tree/1.0.0"
+            },
+            "time": "2023-02-08T18:31:45+00:00"
+        },
+        {
             "name": "spryker/oauth-dummy",
             "version": "1.1.0",
             "source": {
@@ -27183,20 +27345,20 @@
         },
         {
             "name": "spryker/oauth-extension",
-            "version": "1.7.0",
+            "version": "1.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/oauth-extension.git",
-                "reference": "6a4c63763100b8359b8bea57be82369550988d70"
+                "reference": "2e657b82733b3569d2fba91617d455fcbb1a6041"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/oauth-extension/zipball/6a4c63763100b8359b8bea57be82369550988d70",
-                "reference": "6a4c63763100b8359b8bea57be82369550988d70",
+                "url": "https://api.github.com/repos/spryker/oauth-extension/zipball/2e657b82733b3569d2fba91617d455fcbb1a6041",
+                "reference": "2e657b82733b3569d2fba91617d455fcbb1a6041",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.4"
+                "php": ">=8.0"
             },
             "require-dev": {
                 "psr/http-message": "^1.0.0",
@@ -27225,9 +27387,9 @@
             ],
             "description": "OauthExtension module",
             "support": {
-                "source": "https://github.com/spryker/oauth-extension/tree/1.7.0"
+                "source": "https://github.com/spryker/oauth-extension/tree/1.8.0"
             },
-            "time": "2022-06-27T10:26:17+00:00"
+            "time": "2023-02-08T18:31:45+00:00"
         },
         {
             "name": "spryker/oauth-revoke",
@@ -55313,6 +55475,12 @@
             "alias_normalized": "202304.0"
         },
         {
+            "package": "spryker-feature/customer-account-management",
+            "version": "9999999-dev",
+            "alias": "202304.0",
+            "alias_normalized": "202304.0"
+        },
+        {
             "package": "spryker-feature/deployment-tools",
             "version": "9999999-dev",
             "alias": "202304.0",
@@ -55373,6 +55541,7 @@
         "spryker-feature/availability-notification": 20,
         "spryker-feature/cart": 20,
         "spryker-feature/category-management": 20,
+        "spryker-feature/customer-account-management": 20,
         "spryker-feature/deployment-tools": 20,
         "spryker-feature/file-manager": 20,
         "spryker-feature/product": 20,

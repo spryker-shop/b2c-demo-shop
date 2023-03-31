@@ -150,6 +150,16 @@ $jobs[] = [
     'stores' => $allStores,
 ];
 
+/* Customer */
+$jobs[] = [
+    'name' => 'delete-expired-customer-invalidated',
+    'command' => '$PHP_BIN vendor/bin/console customer:delete-expired-customer-invalidated',
+    'schedule' => '0 0 * * 0',
+    'enable' => true,
+    'stores' => $allStores,
+];
+
+/* Order invoice */
 $jobs[] = [
     'name' => 'order-invoice-send',
     'command' => '$PHP_BIN vendor/bin/console order:invoice:send',
