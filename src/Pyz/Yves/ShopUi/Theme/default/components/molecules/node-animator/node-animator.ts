@@ -221,5 +221,4 @@ export default class NodeAnimator extends Component {
     protected get animationDurationValue(): number {
         return Number(this.getAttribute('animation-duration'));
     }
-    /* tslint:disable: max-file-line-count */
 }
