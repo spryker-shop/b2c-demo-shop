@@ -3,7 +3,7 @@ import { mount } from 'ShopUi/app';
 
 export default class PageLoadState extends Component {
     protected body: HTMLBodyElement;
-    protected readyCallback() {}
+    protected readyCallback(): void {}
 
     protected async init(): Promise<void> {
         this.body = <HTMLBodyElement>document.body;
