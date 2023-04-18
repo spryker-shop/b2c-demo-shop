@@ -437,6 +437,7 @@ jobs:
 
             - name: Install packages
               run: |
+                  sudo apt update
                   sudo apt-get install apache2-utils
                   sudo apt install awscli -q
                   python3 -m pip install --upgrade pip
@@ -488,6 +489,7 @@ jobs:
 
             - name: Install packages
               run: |
+                  sudo apt update
                   sudo apt-get install apache2-utils
                   sudo apt install awscli -q
                   python3 -m pip install --upgrade pip
