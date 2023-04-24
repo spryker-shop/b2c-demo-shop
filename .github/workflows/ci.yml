@@ -126,13 +126,13 @@ jobs:
               run: speccy lint src/Generated/Glue/Specification/spryker_rest_api.schema.yml --rules=default
 
             - name: Style lint
-              run: node ./frontend/libs/stylelint
+              run: npm run yves:stylelint
 
-            - name: TS lint
-              run: node ./frontend/libs/tslint --format stylish
+            - name: ES lint
+              run: npm run yves:lint
 
             - name: Front-end Formatter
-              run: node ./frontend/libs/formatter
+              run: npm run formatter
 
             - name: Validate propel files
               run: |
@@ -437,6 +437,7 @@ jobs:
 
             - name: Install packages
               run: |
+                  sudo apt-get update
                   sudo apt-get install apache2-utils
                   sudo apt install awscli -q
                   python3 -m pip install --upgrade pip
@@ -488,6 +489,7 @@ jobs:
 
             - name: Install packages
               run: |
+                  sudo apt-get update
                   sudo apt-get install apache2-utils
                   sudo apt install awscli -q
                   python3 -m pip install --upgrade pip

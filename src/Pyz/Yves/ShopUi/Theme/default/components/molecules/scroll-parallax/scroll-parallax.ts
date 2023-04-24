@@ -13,7 +13,7 @@ export default class ScrollParallax extends Component {
     protected windowWidth: number;
     protected wrapperHeight: number;
     protected distanceToWrapper: number;
-    protected initialized: boolean = false;
+    protected initialized = false;
 
     protected readyCallback(): void {}
 

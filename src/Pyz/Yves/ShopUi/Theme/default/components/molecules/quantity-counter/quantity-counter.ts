@@ -6,8 +6,8 @@ export default class QuantityCounter extends Component {
     protected decrButton: HTMLButtonElement;
     protected incrButton: HTMLButtonElement;
     protected value: number;
-    protected duration: number = 1000;
-    protected timeout: number = 0;
+    protected duration = 1000;
+    protected timeout = 0;
     protected inputEvent: Event = new Event('input');
     protected changeEvent: Event = new Event('change');
     protected formattedNumberInput: FormattedNumberInput;

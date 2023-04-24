@@ -1,11 +1,11 @@
 import Component from 'ShopUi/models/component';
 
 export default class NavOverlay extends Component {
-    protected classToggle: string = `${this.name}--active`;
+    protected classToggle = `${this.name}--active`;
     protected triggers: HTMLElement[];
     protected triggerClose: HTMLElement;
     protected blocks: HTMLElement[];
-    protected savedIndex: number = 0;
+    protected savedIndex = 0;
 
     protected readyCallback(): void {}
 
