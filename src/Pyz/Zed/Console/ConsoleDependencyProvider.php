@@ -29,6 +29,7 @@ use Spryker\Zed\Development\Communication\Console\CodePhpstanConsole;
 use Spryker\Zed\Development\Communication\Console\CodeStyleSnifferConsole;
 use Spryker\Zed\Development\Communication\Console\CodeTestConsole;
 use Spryker\Zed\Development\Communication\Console\GenerateClientIdeAutoCompletionConsole;
+use Spryker\Zed\Development\Communication\Console\GenerateGlueBackendIdeAutoCompletionConsole;
 use Spryker\Zed\Development\Communication\Console\GenerateGlueIdeAutoCompletionConsole;
 use Spryker\Zed\Development\Communication\Console\GenerateIdeAutoCompletionConsole;
 use Spryker\Zed\Development\Communication\Console\GenerateServiceIdeAutoCompletionConsole;
@@ -36,6 +37,7 @@ use Spryker\Zed\Development\Communication\Console\GenerateYvesIdeAutoCompletionC
 use Spryker\Zed\Development\Communication\Console\GenerateZedIdeAutoCompletionConsole;
 use Spryker\Zed\Development\Communication\Console\PluginUsageFinderConsole;
 use Spryker\Zed\Development\Communication\Console\RemoveClientIdeAutoCompletionConsole;
+use Spryker\Zed\Development\Communication\Console\RemoveGlueBackendIdeAutoCompletionConsole;
 use Spryker\Zed\Development\Communication\Console\RemoveGlueIdeAutoCompletionConsole;
 use Spryker\Zed\Development\Communication\Console\RemoveIdeAutoCompletionConsole;
 use Spryker\Zed\Development\Communication\Console\RemoveServiceIdeAutoCompletionConsole;
@@ -60,6 +62,7 @@ use Spryker\Zed\MessageBrokerAws\Communication\Console\MessageBrokerAwsSqsQueues
 use Spryker\Zed\MessageBrokerAws\Communication\Console\MessageBrokerSqsToSnsSubscriberConsole;
 use Spryker\Zed\Monitoring\Communication\Plugin\Console\MonitoringConsolePlugin;
 use Spryker\Zed\Oauth\Communication\Console\OauthTokenConsole;
+use Spryker\Zed\Oauth\Communication\Console\ScopeCacheCollectorConsole;
 use Spryker\Zed\Oms\Communication\Console\CheckConditionConsole as OmsCheckConditionConsole;
 use Spryker\Zed\Oms\Communication\Console\CheckTimeoutConsole as OmsCheckTimeoutConsole;
 use Spryker\Zed\Oms\Communication\Console\ClearLocksConsole as OmsClearLocksConsole;
@@ -342,6 +345,8 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
             new OrderInvoiceSendConsole(),
             new MessageBrokerWorkerConsole(),
 
+            new ScopeCacheCollectorConsole(),
+
             new DateTimeProductConfiguratorBuildFrontendConsole(),
         ];
 
@@ -379,6 +384,8 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
             $commands[] = new DataImportDumpConsole();
             $commands[] = new GenerateGlueIdeAutoCompletionConsole();
             $commands[] = new RemoveGlueIdeAutoCompletionConsole();
+            $commands[] = new GenerateGlueBackendIdeAutoCompletionConsole();
+            $commands[] = new RemoveGlueBackendIdeAutoCompletionConsole();
             $commands[] = new PluginUsageFinderConsole();
             $commands[] = new PostgresIndexGeneratorConsole();
             $commands[] = new PostgresIndexRemoverConsole();
