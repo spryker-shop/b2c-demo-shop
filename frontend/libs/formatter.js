@@ -13,8 +13,6 @@ const mode = commandLineParser.fix ? '--write' : '--check';
 const filePaths = commandLineParser.filePath ? [commandLineParser.filePath] : globalSettings.formatter;
 const ignorePath = commandLineParser.ignorePath ? commandLineParser.ignorePath : './.prettierignore';
 
-spawn(
-    'npx',
-    ['prettier', '--config', configPath, '--ignore-path', ignorePath, mode, ...filePaths],
-    { stdio: 'inherit' }
-);
+spawn('npx', ['prettier', '--config', configPath, '--ignore-path', ignorePath, mode, ...filePaths], {
+    stdio: 'inherit',
+});

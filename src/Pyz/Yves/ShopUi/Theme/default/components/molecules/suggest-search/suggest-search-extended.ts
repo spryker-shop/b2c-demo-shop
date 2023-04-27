@@ -6,10 +6,8 @@ export default class SuggestSearchExtended extends SuggestSearch {
     protected searchOverlay: HTMLElement;
     protected overlayOpenButtons: HTMLElement[];
     protected overlayCloseTriggers: HTMLElement[];
-    protected focusTimeout: number = 0;
-    protected timeout: number = 400;
-
-    protected readyCallback(): void {}
+    protected focusTimeout = 0;
+    protected timeout = 400;
 
     protected init(): void {
         this.searchOverlay = <HTMLElement>document.getElementsByClassName(`${this.jsName}__overlay`)[0];

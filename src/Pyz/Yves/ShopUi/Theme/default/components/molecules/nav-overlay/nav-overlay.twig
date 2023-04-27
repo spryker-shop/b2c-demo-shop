@@ -15,10 +15,10 @@
     <div class="{{ config.name }}__container">
         {% block dropDown %}
             {% include molecule('user-block') with {
-                class: config.jsName ~ '__drop-down-block',
+                class: config.jsName ~ '__drop-down-block is-hidden',
             } only %}
             {% include molecule('cart-block') with {
-                class: config.jsName ~ '__drop-down-block',
+                class: config.jsName ~ '__drop-down-block is-hidden',
             } only %}
         {% endblock %}
     </div>

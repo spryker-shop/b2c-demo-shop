@@ -8,8 +8,6 @@
 namespace Pyz\Client\ExampleProductSalePage;
 
 use Pyz\Client\ExampleProductSalePage\Plugin\Elasticsearch\Query\SaleSearchQueryPlugin;
-use Spryker\Client\Catalog\Plugin\Elasticsearch\ResultFormatter\RawCatalogSearchResultFormatterPlugin;
-use Spryker\Client\CatalogPriceProductConnector\Plugin\CurrencyAwareCatalogSearchResultFormatterPlugin;
 use Spryker\Client\CatalogPriceProductConnector\Plugin\ProductPriceQueryExpanderPlugin;
 use Spryker\Client\Kernel\AbstractDependencyProvider;
 use Spryker\Client\Kernel\Container;
@@ -123,21 +121,29 @@ class ExampleProductSalePageDependencyProvider extends AbstractDependencyProvide
     protected function addSaleSearchQueryExpanderPlugins(Container $container): Container
     {
         $container->set(static::PYZ_SALE_SEARCH_QUERY_EXPANDER_PLUGINS, function () {
-            return [
-                new StoreQueryExpanderPlugin(),
-                new LocalizedQueryExpanderPlugin(),
-                new ProductPriceQueryExpanderPlugin(),
-                new SortedQueryExpanderPlugin(),
-                new PaginatedQueryExpanderPlugin(),
-
-                /*
-                 * FacetQueryExpanderPlugin needs to be after other query expanders which filters down the results.
-                 */
-                new FacetQueryExpanderPlugin(),
-            ];
+            return $this->getSaleSearchQueryExpanderPlugins();
         });
 
         return $container;
+    }
+
+    /**
+     * @return array<\Spryker\Client\SearchExtension\Dependency\Plugin\QueryExpanderPluginInterface>
+     */
+    protected function getSaleSearchQueryExpanderPlugins(): array
+    {
+        return [
+            new StoreQueryExpanderPlugin(),
+            new LocalizedQueryExpanderPlugin(),
+            new ProductPriceQueryExpanderPlugin(),
+            new SortedQueryExpanderPlugin(),
+            new PaginatedQueryExpanderPlugin(),
+
+            /*
+             * FacetQueryExpanderPlugin needs to be after other query expanders which filters down the results.
+             */
+            new FacetQueryExpanderPlugin(),
+        ];
     }
 
     /**
@@ -148,20 +154,22 @@ class ExampleProductSalePageDependencyProvider extends AbstractDependencyProvide
     protected function addSaleSearchResultFormatterPlugins(Container $container): Container
     {
         $container->set(static::PYZ_SALE_SEARCH_RESULT_FORMATTER_PLUGINS, function () {
-            /** @phpstan-var \Spryker\Client\SearchExtension\Dependency\Plugin\ResultFormatterPluginInterface $rawCatalogSearchResultFormatterPlugin */
-            $rawCatalogSearchResultFormatterPlugin = new RawCatalogSearchResultFormatterPlugin();
-
-            return [
-                new FacetResultFormatterPlugin(),
-                new SortedResultFormatterPlugin(),
-                new PaginatedResultFormatterPlugin(),
-                new CurrencyAwareCatalogSearchResultFormatterPlugin(
-                    $rawCatalogSearchResultFormatterPlugin,
-                ),
-            ];
+            return $this->getSaleSearchResultFormatterPlugins();
         });
 
         return $container;
+    }
+
+    /**
+     * @return array<\Spryker\Client\SearchExtension\Dependency\Plugin\ResultFormatterPluginInterface>
+     */
+    protected function getSaleSearchResultFormatterPlugins(): array
+    {
+        return [
+            new FacetResultFormatterPlugin(),
+            new SortedResultFormatterPlugin(),
+            new PaginatedResultFormatterPlugin(),
+        ];
     }
 
     /**

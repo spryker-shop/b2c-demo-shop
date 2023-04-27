@@ -62,8 +62,7 @@
         }
 
         &__overlay-shadow {
-            @include helper-effect-transition(opacity visibility, 400ms, ease-in-out);
-            background-color: $setting-color-black;
+            @include helper-effect-transition(background-color opacity visibility, 400ms);
             position: fixed;
             top: 0;
             left: 0;
@@ -84,28 +83,26 @@
                 visibility: visible;
 
                 #{$name}__overlay-shadow {
-                    @include helper-effect-transition(opacity visibility, 400ms, ease-in-out);
                     visibility: visible;
                     opacity: 0.4;
+                    background: $setting-color-black;
                 }
 
                 #{$name}__search-overlay-container {
-                    @include helper-effect-transition(all);
+                    @include helper-visibility-visible;
                     transform: scaleY(1);
-                    opacity: 1;
-                    visibility: visible;
                 }
             }
         }
 
         &__search-overlay-container {
             @include helper-effect-transition(all);
+            @include helper-visibility-invisible;
             padding: rem(34) rem(30);
             background: $setting-color-white;
             min-width: 100vw;
             transform-origin: top center;
             transform: scaleY(0);
-            opacity: 0;
 
             @include helper-breakpoint-media-min($md-min) {
                 min-width: rem(480);
@@ -131,6 +128,9 @@
         }
 
         &__search-close {
+            position: absolute;
+            top: rem(34);
+            right: rem(30);
             z-index: $setting-zi-search-suggestions + 2;
             cursor: pointer;
             margin-bottom: rem(25);
@@ -139,7 +139,6 @@
 
             @include helper-breakpoint-media-min($md-min) {
                 padding: rem(34) rem(30);
-                position: absolute;
                 right: 0;
                 top: 0;
                 width: auto;

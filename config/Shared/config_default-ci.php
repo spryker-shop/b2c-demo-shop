@@ -17,7 +17,6 @@ use Spryker\Shared\Http\HttpConstants;
 use Spryker\Shared\Kernel\KernelConstants;
 use Spryker\Shared\Kernel\Store;
 use Spryker\Shared\Log\LogConstants;
-use Spryker\Shared\Mail\MailConstants;
 use Spryker\Shared\MessageBroker\MessageBrokerConstants;
 use Spryker\Shared\MessageBrokerAws\MessageBrokerAwsConstants;
 use Spryker\Shared\Newsletter\NewsletterConstants;
@@ -35,6 +34,7 @@ use Spryker\Shared\Session\SessionConstants;
 use Spryker\Shared\SessionRedis\SessionRedisConstants;
 use Spryker\Shared\StorageDatabase\StorageDatabaseConstants;
 use Spryker\Shared\StorageRedis\StorageRedisConstants;
+use Spryker\Shared\SymfonyMailer\SymfonyMailerConstants;
 use Spryker\Shared\Testify\TestifyConstants;
 use Spryker\Shared\ZedRequest\ZedRequestConstants;
 use Spryker\Zed\OauthDummy\OauthDummyConfig;
@@ -194,9 +194,9 @@ $config[RabbitMqEnv::RABBITMQ_CONNECTIONS] = array_map(static function ($storeNa
 
 $config[LogConstants::LOG_LEVEL] = Logger::CRITICAL;
 
-// >>> EMAIL
+// >>> SYMFONY_MAILER
 
-$config[MailConstants::SMTP_PORT] = 1025;
+$config[SymfonyMailerConstants::SMTP_PORT] = 1025;
 
 // ----------------------------------------------------------------------------
 // ------------------------------ ZED (Gateway) -------------------------------
@@ -286,6 +286,7 @@ $config[MessageBrokerAwsConstants::CHANNEL_TO_RECEIVER_TRANSPORT_MAP] = [
     'payment' => 'in-memory',
     'assets' => 'in-memory',
     'product' => 'in-memory',
+    'search' => 'in-memory',
 ];
 
 // ----------------------------------------------------------------------------
