@@ -28,8 +28,8 @@ use Spryker\Zed\Kernel\Communication\Form\FormTypeInterface;
 use Spryker\Zed\MoneyGui\Communication\Plugin\Form\MoneyCollectionFormTypePlugin;
 use Spryker\Zed\ProductDiscountConnector\Communication\Plugin\Collector\ProductAttributeCollectorPlugin;
 use Spryker\Zed\ProductDiscountConnector\Communication\Plugin\DecisionRule\ProductAttributeDecisionRulePlugin;
-use Spryker\Zed\ProductLabelDiscountConnector\Communication\Plugin\Collector\ProductLabelCollectorPlugin;
-use Spryker\Zed\ProductLabelDiscountConnector\Communication\Plugin\DecisionRule\ProductLabelDecisionRulePlugin;
+use Spryker\Zed\ProductLabelDiscountConnector\Communication\Plugin\Discount\ProductLabelDiscountableItemCollectorPlugin;
+use Spryker\Zed\ProductLabelDiscountConnector\Communication\Plugin\Discount\ProductLabelListDecisionRulePlugin;
 use Spryker\Zed\SalesQuantity\Communication\Plugin\DiscountExtension\NonSplittableDiscountableItemTransformerStrategyPlugin;
 use Spryker\Zed\ShipmentDiscountConnector\Communication\Plugin\DecisionRule\ShipmentCarrierDecisionRulePlugin;
 use Spryker\Zed\ShipmentDiscountConnector\Communication\Plugin\DecisionRule\ShipmentMethodDecisionRulePlugin;
@@ -51,7 +51,7 @@ class DiscountDependencyProvider extends SprykerDiscountDependencyProvider
             new ShipmentMethodDecisionRulePlugin(),
             new ShipmentPriceDecisionRulePlugin(),
             new CustomerGroupDecisionRulePlugin(),
-            new ProductLabelDecisionRulePlugin(),
+            new ProductLabelListDecisionRulePlugin(),
             new ProductAttributeDecisionRulePlugin(),
             new CategoryDecisionRulePlugin(),
         ]);
@@ -63,7 +63,7 @@ class DiscountDependencyProvider extends SprykerDiscountDependencyProvider
     protected function getCollectorPlugins(): array
     {
         return array_merge(parent::getCollectorPlugins(), [
-            new ProductLabelCollectorPlugin(),
+            new ProductLabelDiscountableItemCollectorPlugin(),
             new ItemByShipmentCarrierPlugin(),
             new ItemByShipmentMethodPlugin(),
             new ItemByShipmentPricePlugin(),
