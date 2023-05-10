@@ -7,24 +7,6 @@ sections:
         generate-transfers:
             command: 'vendor/bin/console transfer:generate'
 
-        router-cache-warmup-yves:
-            command: 'vendor/bin/yves router:cache:warm-up'
-
-        router-cache-warmup-backoffice:
-            command: 'vendor/bin/console router:cache:warm-up:backoffice'
-
-        router-cache-warmup-backend-gateway:
-            command: 'vendor/bin/console router:cache:warm-up:backend-gateway'
-
-        twig-cache-warmup:
-            command: 'vendor/bin/console twig:cache:warmer'
-
-        navigation-cache-warmup:
-            command: 'vendor/bin/console navigation:build-cache'
-
-        rest-request-validation-cache-warmup:
-            command: 'vendor/bin/console rest-api:build-request-validation-cache'
-
         propel-copy-schema:
             command: 'vendor/bin/console propel:schema:copy'
 
@@ -59,31 +41,6 @@ sections:
         api-generate-documentation:
             command: 'vendor/bin/glue api:generate:documentation'
 
-    build-static:
-        dependencies-install:
-            command: 'vendor/bin/console frontend:project:install-dependencies'
-
-    build-static-production:
-        excluded: true
-        yves-build-frontend:
-            command: 'vendor/bin/console frontend:yves:build -e production'
-
-        zed-build-frontend:
-            command: 'vendor/bin/console frontend:zed:build -e production'
-
-    build-static-development:
-        yves-build-frontend:
-            command: 'vendor/bin/console frontend:yves:build'
-
-        zed-build-frontend:
-            command: 'vendor/bin/console frontend:zed:build'
-
-    init-storages-per-store:
-        queue-setup:
-            command: 'vendor/bin/console queue:setup'
-        setup-search-create-sources:
-            command: 'vendor/bin/console search:setup:sources'
-
     init-storages-per-region:
         propel-copy-schema:
             command: 'vendor/bin/console propel:schema:copy'
@@ -107,11 +64,14 @@ sections:
             command: 'vendor/bin/console setup:init-db'
 
     demodata:
+        queue-setup:
+            command: 'vendor/bin/console queue:setup'
+
         import-eu-region-demodata:
             command: 'vendor/bin/console data:import --config=data/import/local/full_EU.yml'
 
-        apply-scheduled-prices:
-            command: 'vendor/bin/console price-product-schedule:apply'
+        setup-search-create-sources:
+            command: 'vendor/bin/console search:setup:sources'
 
         update-product-labels:
             command: 'vendor/bin/console product-label:relations:update'
