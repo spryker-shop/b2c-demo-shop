@@ -8,6 +8,7 @@
 namespace SprykerConfig;
 
 use Spryker\Shared\Kernel\CodeBucket\Config\AbstractCodeBucketConfig;
+use Spryker\Shared\Kernel\Store;
 
 class CodeBucketConfig extends AbstractCodeBucketConfig
 {
@@ -15,6 +16,23 @@ class CodeBucketConfig extends AbstractCodeBucketConfig
      * @return array<string>
      */
     public function getCodeBuckets(): array
+    {
+        if ($this->isAcpDevOn()) {
+            return Store::getInstance()->getAllowedStores();
+        }
+
+        return [
+            'EU',
+            'US',
+        ];
+    }
+
+    /**
+     * @deprecated This method implementation will be removed when environment configs are cleaned up.
+     *
+     * @return string
+     */
+    public function getDefaultCodeBucket(): string
     {
         if ($this->isAcpDevOn()) {
             return APPLICATION_STORE;
