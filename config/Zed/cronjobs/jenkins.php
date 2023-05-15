@@ -38,6 +38,7 @@ $jobs[] = [
     'command' => '$PHP_BIN vendor/bin/console price-product-schedule:apply',
     'schedule' => '* * * * *',
     'enable' => true,
+    'storeAware' => true,
 ];
 
 /* Oms */
@@ -67,6 +68,7 @@ $jobs[] = [
     'command' => '$PHP_BIN vendor/bin/console queue:worker:start',
     'schedule' => '* * * * *',
     'enable' => true,
+    'storeAware' => true,
 ];
 
 $jobs[] = [
@@ -77,10 +79,10 @@ $jobs[] = [
 ];
 
 $jobs[] = [
-  'name' => 'event-trigger-timeout',
-  'command' => '$PHP_BIN vendor/bin/console event:trigger:timeout -vvv',
-  'schedule' => '*/5 * * * *',
-  'enable' => true,
+    'name' => 'event-trigger-timeout',
+    'command' => '$PHP_BIN vendor/bin/console event:trigger:timeout -vvv',
+    'schedule' => '*/5 * * * *',
+    'enable' => true,
 ];
 
 $jobs[] = [

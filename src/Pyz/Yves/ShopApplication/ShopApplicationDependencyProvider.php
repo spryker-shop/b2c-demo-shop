@@ -106,6 +106,7 @@ use SprykerShop\Yves\SalesProductBundleWidget\Widget\OrderItemsProductBundleWidg
 use SprykerShop\Yves\SalesProductConfigurationWidget\Widget\ProductConfigurationOrderItemDisplayWidget;
 use SprykerShop\Yves\ShopApplication\Plugin\Application\ShopApplicationApplicationPlugin;
 use SprykerShop\Yves\ShopApplication\ShopApplicationDependencyProvider as SprykerShopApplicationDependencyProvider;
+use SprykerShop\Yves\StoreWidget\Widget\StoreSwitcherWidget;
 use SprykerShop\Yves\TabsWidget\Widget\FullTextSearchTabsWidget;
 use SprykerShop\Yves\WebProfilerWidget\Plugin\Application\WebProfilerApplicationPlugin;
 use SprykerShop\Yves\WishlistWidget\Widget\WishlistMenuItemWidget;
@@ -203,6 +204,7 @@ class ShopApplicationDependencyProvider extends SprykerShopApplicationDependency
             ProductConfigurationWishlistFormWidget::class,
             ProductConfigurationWishlistItemDisplayWidget::class,
             ProductConfigurationWishlistPageButtonWidget::class,
+            StoreSwitcherWidget::class,
         ];
     }
 
@@ -233,6 +235,7 @@ class ShopApplicationDependencyProvider extends SprykerShopApplicationDependency
     protected function getApplicationPlugins(): array
     {
         $applicationPlugins = [
+            new HttpApplicationPlugin(),
             new TwigApplicationPlugin(),
             new EventDispatcherApplicationPlugin(),
             new ShopApplicationApplicationPlugin(),
@@ -241,7 +244,6 @@ class ShopApplicationDependencyProvider extends SprykerShopApplicationDependency
             new TranslatorApplicationPlugin(),
             new RouterApplicationPlugin(),
             new SessionApplicationPlugin(),
-            new HttpApplicationPlugin(),
             new ErrorHandlerApplicationPlugin(),
             new FlashMessengerApplicationPlugin(),
             new FormApplicationPlugin(),

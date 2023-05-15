@@ -43,12 +43,32 @@ use Spryker\Shared\TaxProductStorage\TaxProductStorageConfig;
 use Spryker\Shared\TaxStorage\TaxStorageConfig;
 use Spryker\Shared\UrlStorage\UrlStorageConfig;
 use Spryker\Shared\UrlStorage\UrlStorageConstants;
+use Spryker\Shared\RabbitMq\RabbitMqEnv;
+use Spryker\Shared\StoreStorage\StoreStorageConfig;
 
 /**
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
 class RabbitMqConfig extends SprykerRabbitMqConfig
 {
+    /**
+     * @return array<string, array<int, string>>
+     */
+    public function getQueuePools(): array
+    {
+        return [
+            'synchronizationPool' => $this->getQueueConnectionNames(),
+        ];
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getDefaultLocaleCode(): ?string
+    {
+        return 'en_US';
+    }
+
     /**
      *  QueueNameFoo, // Queue => QueueNameFoo, (Queue and error queue will be created: QueueNameFoo and QueueNameFoo.error)
      *  QueueNameBar => [
@@ -127,6 +147,7 @@ class RabbitMqConfig extends SprykerRabbitMqConfig
             TaxProductStorageConfig::PRODUCT_ABSTRACT_TAX_SET_SYNC_STORAGE_QUEUE,
             TaxStorageConfig::TAX_SET_SYNC_STORAGE_QUEUE,
             SalesReturnSearchConfig::SYNC_SEARCH_RETURN,
+            StoreStorageConfig::STORE_SYNC_STORAGE_QUEUE,
             AssetStorageConfig::ASSET_SYNC_STORAGE_QUEUE,
             ProductConfigurationStorageConfig::PRODUCT_CONFIGURATION_SYNC_STORAGE_QUEUE,
             SearchHttpConfig::SEARCH_HTTP_CONFIG_SYNC_QUEUE,
@@ -139,5 +160,18 @@ class RabbitMqConfig extends SprykerRabbitMqConfig
     protected function getDefaultBoundQueueNamePrefix(): string
     {
         return 'error';
+    }
+
+    /**
+     * @return array<string>
+     */
+    protected function getQueueConnectionNames(): array
+    {
+        return array_map(
+            function (array $connection): string {
+                return $connection[RabbitMqEnv::RABBITMQ_CONNECTION_NAME];
+            },
+            $this->get(RabbitMqEnv::RABBITMQ_CONNECTIONS),
+        );
     }
 }

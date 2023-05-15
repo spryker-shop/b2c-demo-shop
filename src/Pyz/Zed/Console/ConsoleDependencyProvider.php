@@ -7,6 +7,11 @@
 
 namespace Pyz\Zed\Console;
 
+use Spryker\Zed\CountryDataImport\CountryDataImportConfig;
+use Spryker\Zed\CurrencyDataImport\CurrencyDataImportConfig;
+use Spryker\Zed\Locale\Communication\Plugin\Application\ConsoleLocaleApplicationPlugin;
+use Spryker\Zed\LocaleDataImport\LocaleDataImportConfig;
+use Spryker\Zed\StoreDataImport\StoreDataImportConfig;
 use Pyz\Zed\DataImport\DataImportConfig;
 use Pyz\Zed\Development\Communication\Console\AcceptanceCodeTestConsole;
 use Pyz\Zed\Development\Communication\Console\ApiCodeTestConsole;
@@ -267,6 +272,13 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
             new DataImportConsole(DataImportConsole::DEFAULT_NAME . ':' . ProductRelationDataImportConfig::IMPORT_TYPE_PRODUCT_RELATION),
             new DataImportConsole(DataImportConsole::DEFAULT_NAME . ':' . ProductRelationDataImportConfig::IMPORT_TYPE_PRODUCT_RELATION_STORE),
             new DataImportConsole(DataImportConsole::DEFAULT_NAME . ':' . ProductConfigurationDataImportConfig::IMPORT_TYPE_PRODUCT_CONFIGURATION),
+            new DataImportConsole(DataImportConsole::DEFAULT_NAME . ':' . CountryDataImportConfig::IMPORT_TYPE_COUNTRY_STORE),
+            new DataImportConsole(DataImportConsole::DEFAULT_NAME . ':' . CurrencyDataImportConfig::IMPORT_TYPE_CURRENCY_STORE),
+            new DataImportConsole(DataImportConsole::DEFAULT_NAME . ':' . LocaleDataImportConfig::IMPORT_TYPE_LOCALE_STORE),
+            new DataImportConsole(DataImportConsole::DEFAULT_NAME . ':' . LocaleDataImportConfig::IMPORT_TYPE_DEFAULT_LOCALE_STORE),
+            new DataImportConsole(DataImportConsole::DEFAULT_NAME . ':' . StoreDataImportConfig::IMPORT_TYPE_STORE),
+
+
 
             // Publish and Synchronization
             new EventBehaviorTriggerTimeoutConsole(),
@@ -434,6 +446,7 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
         $applicationPlugins = parent::getApplicationPlugins($container);
         $applicationPlugins[] = new PropelApplicationPlugin();
         $applicationPlugins[] = new TwigApplicationPlugin();
+        $applicationPlugins[] = new ConsoleLocaleApplicationPlugin();
 
         return $applicationPlugins;
     }

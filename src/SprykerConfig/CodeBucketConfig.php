@@ -16,20 +16,20 @@ class CodeBucketConfig extends AbstractCodeBucketConfig
      */
     public function getCodeBuckets(): array
     {
-        return [
-            'DE',
-            'AT',
-            'US',
-        ];
+        if ($this->isAcpDevOn()) {
+            return APPLICATION_STORE;
+        }
+
+        $codeBuckets = $this->getCodeBuckets();
+
+        return defined('APPLICATION_REGION') ? APPLICATION_REGION : reset($codeBuckets);
     }
 
     /**
-     * @deprecated This method implementation will be removed when environment configs are cleaned up.
-     *
-     * @return string
+     * @return bool
      */
-    public function getDefaultCodeBucket(): string
+    protected function isAcpDevOn(): bool
     {
-        return APPLICATION_STORE;
+        return APPLICATION_ENV === 'docker.acp.dev';
     }
 }

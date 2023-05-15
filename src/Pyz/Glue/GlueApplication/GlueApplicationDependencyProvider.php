@@ -7,6 +7,8 @@
 
 namespace Pyz\Glue\GlueApplication;
 
+use Spryker\Glue\StoresRestApi\Plugin\Application\StoreHttpHeaderApplicationPlugin;
+use Spryker\Glue\Locale\Plugin\Application\LocaleApplicationPlugin;
 use Spryker\Glue\AgentAuthRestApi\Plugin\GlueApplication\AgentAccessTokenRestRequestValidatorPlugin;
 use Spryker\Glue\AgentAuthRestApi\Plugin\GlueApplication\AgentAccessTokenRestUserFinderPlugin;
 use Spryker\Glue\AgentAuthRestApi\Plugin\GlueApplication\AgentAccessTokensResourceRoutePlugin;
@@ -96,7 +98,6 @@ use Spryker\Glue\GlueApplication\Plugin\GlueApplication\CorsValidateHttpRequestP
 use Spryker\Glue\GlueApplication\Plugin\GlueApplication\FallbackStorefrontApiGlueApplicationBootstrapPlugin;
 use Spryker\Glue\GlueApplication\Plugin\GlueApplication\HeadersValidateHttpRequestPlugin;
 use Spryker\Glue\GlueApplication\Plugin\GlueApplication\PaginationParametersValidateHttpRequestPlugin;
-use Spryker\Glue\GlueApplication\Plugin\Rest\SetStoreCurrentLocaleBeforeActionPlugin;
 use Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\ResourceRelationshipCollectionInterface;
 use Spryker\Glue\GlueBackendApiApplication\Plugin\GlueApplication\BackendApiGlueApplicationBootstrapPlugin;
 use Spryker\Glue\GlueBackendApiApplication\Plugin\GlueApplication\BackendRouterProviderPlugin;
@@ -397,7 +398,6 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
     protected function getControllerBeforeActionPlugins(): array
     {
         return [
-            new SetStoreCurrentLocaleBeforeActionPlugin(),
             new SetAnonymousCustomerIdControllerBeforeActionPlugin(),
             new SetCustomerBeforeActionPlugin(),
             new SetCurrencyBeforeActionPlugin(),
@@ -694,6 +694,8 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
             new EventDispatcherApplicationPlugin(),
             new GlueApplicationApplicationPlugin(),
             new RouterApplicationPlugin(),
+            new StoreHttpHeaderApplicationPlugin(),
+            new LocaleApplicationPlugin(),
         ];
     }
 
