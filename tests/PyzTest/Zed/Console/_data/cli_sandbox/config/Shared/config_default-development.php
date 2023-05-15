@@ -17,8 +17,6 @@ use Spryker\Shared\ZedNavigation\ZedNavigationConstants;
 use Spryker\Shared\ZedRequest\ZedRequestConstants;
 use Twig\Cache\FilesystemCache;
 
-$CURRENT_STORE = Store::getInstance()->getStoreName();
-
 $config[SessionConstants::YVES_SESSION_COOKIE_DOMAIN] = $config[ApplicationConstants::HOST_YVES];
 $config[SessionConstants::YVES_SESSION_COOKIE_SECURE] = false;
 
@@ -29,7 +27,7 @@ $config[TwigConstants::ZED_TWIG_OPTIONS] = [
         sprintf(
             '%s/data/%s/cache/%s/twig',
             APPLICATION_ROOT_DIR,
-            $CURRENT_STORE,
+            APPLICATION_CODE_BUCKET,
             APPLICATION,
         ),
         FilesystemCache::FORCE_BYTECODE_INVALIDATION,
@@ -41,7 +39,7 @@ $config[TwigConstants::YVES_TWIG_OPTIONS] = [
         sprintf(
             '%s/data/%s/cache/%s/twig',
             APPLICATION_ROOT_DIR,
-            $CURRENT_STORE,
+            APPLICATION_CODE_BUCKET,
             APPLICATION,
         ),
         FilesystemCache::FORCE_BYTECODE_INVALIDATION,
