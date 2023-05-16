@@ -25,6 +25,9 @@ sections:
         rest-request-validation-cache-warmup:
             command: 'vendor/bin/console rest-api:build-request-validation-cache'
 
+        controller-cache-warmup:
+            command: 'vendor/bin/glue glue-api:controller:cache:warm-up'
+
         propel-copy-schema:
             command: 'vendor/bin/console propel:schema:copy'
 
