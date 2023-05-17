@@ -39,4 +39,12 @@ class GlueApplicationConfig extends SprykerGlueApplicationConfig
     {
         return false;
     }
+
+    /**
+     * @return bool
+     */
+    public function isConfigurableResponseEnabled(): bool
+    {
+        return true;
+    }
 }
