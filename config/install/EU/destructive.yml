@@ -71,3 +71,7 @@ sections:
         scheduler-setup:
             command: "vendor/bin/console scheduler:setup -vvv --no-ansi || true"
             stores: true
+
+    publish-data:
+        trigger-events:
+            command: 'vendor/bin/console publish:trigger-events'
