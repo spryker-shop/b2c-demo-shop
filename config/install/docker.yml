@@ -106,6 +106,9 @@ sections:
             command: 'vendor/bin/console search:setup:sources'
 
     init-storages-per-region:
+        queue-setup:
+            command: 'vendor/bin/console queue:setup'
+
         propel-copy-schema:
             command: 'vendor/bin/console propel:schema:copy'
 

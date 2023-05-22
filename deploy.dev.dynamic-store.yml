@@ -1,6 +1,6 @@
 version: '0.1'
 
-namespace: spryker-dynamic-store
+namespace: spryker_b2c_dev-dynamic-store
 tag: 'dev'
 
 environment: docker.dev
@@ -12,11 +12,25 @@ image:
     environment:
         SPRYKER_PRODUCT_CONFIGURATOR_HOST: date-time-configurator-example.spryker.local
         SPRYKER_PRODUCT_CONFIGURATOR_PORT: 80
-        SPRYKER_PRODUCT_CONFIGURATOR_ENCRYPTION_KEY: 'change123'
-        SPRYKER_PRODUCT_CONFIGURATOR_HEX_INITIALIZATION_VECTOR: '0c1ffefeebdab4a3d839d0e52590c9a2'
+        SPRYKER_HOOK_INSTALL: 'vendor/bin/install -r destructive.dynamic-store --no-ansi -vvv'
         SPRYKER_DYNAMIC_STORE_MODE: true
         SPRYKER_YVES_HOST_EU: yves.eu.spryker.local
         SPRYKER_YVES_HOST_US: yves.us.spryker.local
+        #AOP
+        SPRYKER_AOP_INFRASTRUCTURE: '{
+            "SPRYKER_MESSAGE_BROKER_HTTP_SENDER_CONFIG": {},
+            "SPRYKER_MESSAGE_BROKER_SQS_RECEIVER_CONFIG": {}
+        }'
+        SPRYKER_AOP_APPLICATION: '{
+            "APP_DOMAINS": [],
+            "STORE_NAME_REFERENCE_MAP": {},
+            "APP_CATALOG_SCRIPT_URL": ""
+        }'
+        SPRYKER_AOP_AUTHENTICATION: '{
+            "AUTH0_CUSTOM_DOMAIN": "",
+            "AUTH0_CLIENT_ID": "",
+            "AUTH0_CLIENT_SECRET": ""
+        }'
     node:
         version: 16
         npm: 8
@@ -68,16 +82,6 @@ groups:
     EU:
         region: EU
         applications:
-            merchant_portal_eu:
-                application: merchant-portal
-                endpoints:
-                    mp.eu.spryker.local:
-                        region: EU
-                        entry-point: MerchantPortal
-                        primal: true
-                        services:
-                            session:
-                                namespace: 1
             yves_eu:
                 application: yves
                 endpoints:
@@ -126,16 +130,6 @@ groups:
     US:
         region: US
         applications:
-            mportal_us:
-                application: merchant-portal
-                endpoints:
-                    mp.us.multistore.frw.cloud.spryker.toys:
-                        region: US
-                        entry-point: MerchantPortal
-                        primal: true
-                        services:
-                            session:
-                                namespace: 4
             yves_us:
                 application: yves
                 endpoints:
