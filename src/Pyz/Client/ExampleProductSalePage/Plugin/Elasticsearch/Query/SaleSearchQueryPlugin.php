@@ -139,9 +139,10 @@ class SaleSearchQueryPlugin extends AbstractPlugin implements QueryInterface, Se
             ->getConfig()
             ->getPyzLabelSaleName();
 
+        $defaultLocale = current($storeTransfer->getAvailableLocaleIsoCodes());
         $storageProductLabelTransfer = $this->getFactory()
             ->getPyzProductLabelStorageClient()
-            ->findLabelByName($labelName, $storeTransfer->getDefaultLocaleIsoCode(), $storeTransfer->getName());
+            ->findLabelByName($labelName, $defaultLocale, $storeTransfer->getName());
 
         $labelId = $storageProductLabelTransfer ? $storageProductLabelTransfer->getIdProductLabel() : 0;
 

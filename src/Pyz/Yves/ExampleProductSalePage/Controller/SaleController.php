@@ -71,7 +71,8 @@ class SaleController extends AbstractController
      */
     protected function getPyzCategoryNode($categoryPath): array
     {
-        $categoryPathPrefix = '/' . $this->getLanguageFromLocale($this->getFactory()->getPyzStore()->getDefaultLocaleIsoCodeOrFail());
+        $defaultLocale = current($this->getFactory()->getPyzStore()->getAvailableLocaleIsoCodes());
+        $categoryPathPrefix = '/' . $this->getLanguageFromLocale($defaultLocale);
         $fullCategoryPath = $categoryPathPrefix . '/' . ltrim($categoryPath, '/');
 
         $categoryNode = $this->getFactory()

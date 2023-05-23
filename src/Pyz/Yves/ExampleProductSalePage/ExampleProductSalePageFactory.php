@@ -7,7 +7,7 @@
 
 namespace Pyz\Yves\ExampleProductSalePage;
 
-use Generated\Shared\Transfer\StoreCollectionTransfer;
+use Generated\Shared\Transfer\StoreTransfer;
 use Spryker\Client\Catalog\CatalogClientInterface;
 use Spryker\Client\Locale\LocaleClientInterface;
 use Spryker\Client\UrlStorage\UrlStorageClientInterface;
@@ -35,7 +35,7 @@ class ExampleProductSalePageFactory extends AbstractFactory
     /**
      * @return \Generated\Shared\Transfer\StoreTransfer
      */
-    public function getPyzStore(): StoreCollectionTransfer
+    public function getPyzStore(): StoreTransfer
     {
         /** @var \Pyz\Yves\ExampleProductSalePage\Dependency\Client\ExampleProductSalePageToStoreClientInterface $storeClient */
         $storeClient = $this->getProvidedDependency(ExampleProductSalePageDependencyProvider::PYZ_CLIENT_STORE);
