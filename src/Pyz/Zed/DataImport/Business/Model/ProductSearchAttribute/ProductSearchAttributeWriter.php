@@ -68,6 +68,10 @@ class ProductSearchAttributeWriter extends PublishAwareStep implements DataImpor
         $glossaryKeyEntity->save();
 
         foreach ($dataSet[ProductLocalizedAttributesExtractorStep::KEY_LOCALIZED_ATTRIBUTES] as $idLocale => $localizedAttribute) {
+            if ($localizedAttribute === []) {
+                continue;
+            }
+
             $glossaryTranslationEntity = SpyGlossaryTranslationQuery::create()
                 ->filterByFkLocale($idLocale)
                 ->filterByFkGlossaryKey($glossaryKeyEntity->getIdGlossaryKey())

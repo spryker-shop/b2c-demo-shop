@@ -13,6 +13,7 @@ use Pyz\Zed\ExampleProductSalePage\ExampleProductSalePageDependencyProvider;
 use Spryker\Zed\Currency\Business\CurrencyFacadeInterface;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 use Spryker\Zed\Price\Business\PriceFacadeInterface;
+use Spryker\Zed\Store\Business\StoreFacadeInterface;
 
 /**
  * @method \Pyz\Zed\ExampleProductSalePage\Persistence\ExampleProductSalePageQueryContainerInterface getQueryContainer()
@@ -30,6 +31,7 @@ class ExampleProductSalePageBusinessFactory extends AbstractBusinessFactory
             $this->getConfig(),
             $this->getPyzCurrencyFacade(),
             $this->getPyzPriceFacade(),
+            $this->getStoreFacade(),
         );
     }
 
@@ -47,5 +49,13 @@ class ExampleProductSalePageBusinessFactory extends AbstractBusinessFactory
     protected function getPyzPriceFacade(): PriceFacadeInterface
     {
         return $this->getProvidedDependency(ExampleProductSalePageDependencyProvider::PYZ_FACADE_PRICE);
+    }
+
+    /**
+     * @return \Spryker\Zed\Store\Business\StoreFacadeInterface
+     */
+    protected function getStoreFacade(): StoreFacadeInterface
+    {
+        return $this->getProvidedDependency(ExampleProductSalePageDependencyProvider::PYZ_FACADE_STORE);
     }
 }
