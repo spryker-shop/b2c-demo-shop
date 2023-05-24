@@ -7,7 +7,6 @@
 
 namespace Pyz\Client\ExampleProductSalePage;
 
-use Pyz\Client\ExampleProductSalePage\Dependency\Client\ExampleProductSalePageToStoreClientBridge;
 use Pyz\Client\ExampleProductSalePage\Plugin\Elasticsearch\Query\SaleSearchQueryPlugin;
 use Spryker\Client\Catalog\Plugin\Elasticsearch\ResultFormatter\RawCatalogSearchResultFormatterPlugin;
 use Spryker\Client\CatalogPriceProductConnector\Plugin\CurrencyAwareCatalogSearchResultFormatterPlugin;
@@ -188,9 +187,7 @@ class ExampleProductSalePageDependencyProvider extends AbstractDependencyProvide
     protected function addPyzClientStore(Container $container): Container
     {
         $container->set(static::PYZ_CLIENT_STORE, function (Container $container) {
-            return new ExampleProductSalePageToStoreClientBridge(
-                $container->getLocator()->store()->client(),
-            );
+            return $container->getLocator()->store()->client();
         });
 
         return $container;

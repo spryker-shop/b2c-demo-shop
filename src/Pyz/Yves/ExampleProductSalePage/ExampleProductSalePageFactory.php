@@ -37,7 +37,6 @@ class ExampleProductSalePageFactory extends AbstractFactory
      */
     public function getPyzStore(): StoreTransfer
     {
-        /** @var \Pyz\Yves\ExampleProductSalePage\Dependency\Client\ExampleProductSalePageToStoreClientInterface $storeClient */
         $storeClient = $this->getProvidedDependency(ExampleProductSalePageDependencyProvider::PYZ_CLIENT_STORE);
 
         return $storeClient->getCurrentStore();

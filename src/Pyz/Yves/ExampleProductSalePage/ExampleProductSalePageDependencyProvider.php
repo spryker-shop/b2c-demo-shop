@@ -7,7 +7,6 @@
 
 namespace Pyz\Yves\ExampleProductSalePage;
 
-use Pyz\Yves\ExampleProductSalePage\Dependency\Client\ExampleProductSalePageToStoreClientBridge;
 use Spryker\Yves\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Yves\Kernel\Container;
 
@@ -102,9 +101,7 @@ class ExampleProductSalePageDependencyProvider extends AbstractBundleDependencyP
     protected function addPyzClientStore($container): Container
     {
         $container->set(static::PYZ_CLIENT_STORE, function (Container $container) {
-            return new ExampleProductSalePageToStoreClientBridge(
-                $container->getLocator()->store()->client(),
-            );
+            return $container->getLocator()->store()->client();
         });
 
         return $container;
