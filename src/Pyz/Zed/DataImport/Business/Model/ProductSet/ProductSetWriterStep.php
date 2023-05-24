@@ -190,6 +190,10 @@ class ProductSetWriterStep extends PublishAwareStep implements DataImportStepInt
     protected function findOrCreateProductSetData(DataSetInterface $dataSet, SpyProductSet $productSetEntity): void
     {
         foreach ($dataSet[LocalizedAttributesExtractorStep::KEY_LOCALIZED_ATTRIBUTES] as $idLocale => $localizedAttributes) {
+            if ($localizedAttributes === []) {
+                continue;
+            }
+
             $productSetDataEntity = SpyProductSetDataQuery::create()
                 ->filterByFkProductSet($productSetEntity->getIdProductSet())
                 ->filterByFkLocale($idLocale)

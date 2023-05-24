@@ -34,6 +34,8 @@ use Spryker\Shared\User\UserConstants;
 use Spryker\Shared\ZedNavigation\ZedNavigationConstants;
 use Spryker\Shared\ZedRequest\ZedRequestConstants;
 use Spryker\Zed\Oms\OmsConfig;
+use Spryker\Shared\PropelQueryBuilder\PropelQueryBuilderConstants;
+use Spryker\Zed\Propel\PropelConfig;
 
 $config[KernelConstants::PROJECT_NAMESPACES] = [
     'Pyz',
@@ -182,8 +184,6 @@ $config[ApplicationConstants::YVES_COOKIE_VISITOR_ID_VALID_FOR] = '+30 minute';
 $config[CustomerConstants::CUSTOMER_SECURED_PATTERN] = '(^/login_check$|^/customer|^/wishlist)';
 $config[CustomerConstants::CUSTOMER_ANONYMOUS_PATTERN] = '^/.*';
 
-$currentStore = Store::getInstance()->getStoreName();
-
 $config[ApplicationConstants::CLOUD_ENABLED] = false;
 $config[ApplicationConstants::CLOUD_OBJECT_STORAGE_ENABLED] = false;
 $config[ApplicationConstants::CLOUD_CDN_ENABLED] = false;
@@ -319,3 +319,13 @@ $config[SalesConstants::PAYMENT_METHOD_STATEMACHINE_MAPPING] = [
  *
  */
 $config[QueueConstants::QUEUE_ADAPTER_CONFIGURATION] = [];
+
+
+$config[PropelConstants::ZED_DB_ENGINE] = $config[PropelConstants::ZED_DB_ENGINE]
+    = $config[PropelQueryBuilderConstants::ZED_DB_ENGINE]
+    = strtolower(getenv('SPRYKER_DB_ENGINE') ?: '') ?: PropelConfig::DB_ENGINE_MYSQL;
+$config[PropelConstants::ZED_DB_HOST] = getenv('SPRYKER_DB_HOST');
+$config[PropelConstants::ZED_DB_PORT] = getenv('SPRYKER_DB_PORT');
+$config[PropelConstants::ZED_DB_USERNAME] = getenv('SPRYKER_DB_USERNAME');
+$config[PropelConstants::ZED_DB_PASSWORD] = getenv('SPRYKER_DB_PASSWORD');
+$config[PropelConstants::ZED_DB_DATABASE] = getenv('SPRYKER_DB_DATABASE');
