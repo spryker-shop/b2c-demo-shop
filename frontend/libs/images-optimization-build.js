@@ -7,7 +7,7 @@ const requestedArguments = getAttributes();
 const namespaceConfigList = getFilteredNamespaceConfigList(requestedArguments);
 const appSettingsList = getAppSettings(namespaceConfigList, requestedArguments.pathToConfig);
 
-appSettingsList.forEach(appSettings => {
+appSettingsList.forEach((appSettings) => {
     console.info('Image compression has been started...');
     imagesOptimization(appSettings, requestedArguments);
 });

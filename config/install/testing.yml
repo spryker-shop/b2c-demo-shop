@@ -15,6 +15,12 @@ sections:
         rest-api-generate-documentation:
             command: 'vendor/bin/console rest-api:generate:documentation'
 
+        api-generate-documentation:
+            command: 'vendor/bin/glue api:generate:documentation'
+
+        generate-scope-collection-file:
+            command: 'vendor/bin/console oauth:scope-collection-file:generate'
+
     cache:
         router-cache-warmup-yves:
             command: 'vendor/bin/yves router:cache:warm-up'

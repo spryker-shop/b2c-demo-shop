@@ -46,8 +46,16 @@ class SaleController extends AbstractController
             ->getPyzCatalogClient()
             ->getCatalogViewMode($request);
 
+        $numberFormatConfigTransfer = $this->getFactory()
+            ->getUtilNumberService()
+            ->getNumberFormatConfig(
+                $this->getFactory()->getPyzLocaleClient()->getCurrentLocale(),
+            );
+
         return $this->view(
-            $searchResults,
+            array_merge($searchResults, [
+                'numberFormatConfig' => $numberFormatConfigTransfer->toArray(),
+            ]),
             $this->getFactory()->getExampleProductSalePageWidgetPlugins(),
             '@ExampleProductSalePage/views/sale-example/sale-example.twig',
         );

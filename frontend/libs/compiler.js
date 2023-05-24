@@ -2,18 +2,18 @@ const webpack = require('webpack');
 
 // execute webpack compiler on array of configurations
 // and nicely handle the console output
-const multiCompile = configs => {
+const multiCompile = (configs) => {
     if (!configs || !configs.length) {
         return console.error('Nothing to build. Build aborted.');
     }
 
-    configs.forEach(config => {
+    configs.forEach((config) => {
         if (config.webpack.watch) {
             console.log(`${config.namespace} (${config.theme}) watch mode: ON`);
         }
     });
 
-    const webpackConfigs = configs.map(item => item.webpack);
+    const webpackConfigs = configs.map((item) => item.webpack);
 
     webpack(webpackConfigs, (err, multiStats) => {
         if (err) {
@@ -26,15 +26,13 @@ const multiCompile = configs => {
             return;
         }
 
-        multiStats.stats.forEach(
-            (stat, index) => {
-                console.log(`${configs[index].namespace} namespace building statistics:`);
-                console.log(`Theme: ${configs[index].theme}`);
-                console.log(`Components entry points: ${configs[index].componentEntryPointsLength}`);
-                console.log(`Components styles: ${configs[index].stylesLength}`);
-                console.log(stat.toString(webpackConfigs[index].stats), '\n')
-            }
-        );
+        multiStats.stats.forEach((stat, index) => {
+            console.log(`${configs[index].namespace} namespace building statistics:`);
+            console.log(`Theme: ${configs[index].theme}`);
+            console.log(`Components entry points: ${configs[index].componentEntryPointsLength}`);
+            console.log(`Components styles: ${configs[index].stylesLength}`);
+            console.log(stat.toString(webpackConfigs[index].stats), '\n');
+        });
     });
 };
 
