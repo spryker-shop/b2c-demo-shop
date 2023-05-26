@@ -2,9 +2,17 @@
 version: 0
 actions:
   - data_entity: store
-    # Cannot have a source because we use store.php
+    source: data/import/common/EU/store.csv
   - data_entity: currency
     source: data/import/common/common/currency.csv
+  - data_entity: currency-store
+    source: data/import/common/US/currency_store.csv
+  - data_entity: country-store
+    source: data/import/common/US/country_store.csv
+  - data_entity: locale-store
+    source: data/import/common/US/locale_store.csv
+  - data_entity: default-locale-store
+    source: data/import/common/US/default_locale_store.csv
   - data_entity: customer
     source: data/import/common/common/customer.csv
   - data_entity: glossary
