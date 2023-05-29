@@ -103,6 +103,9 @@ sections:
             command: 'vendor/bin/console rest-api:build-request-validation-cache'
             stores: true
 
+        controller-cache-warmup:
+            command: 'vendor/bin/glue glue-api:controller:cache:warm-up'
+
     queue-flush:
         set-permissions:
             command: 'vendor/bin/console queue:permission:set'
