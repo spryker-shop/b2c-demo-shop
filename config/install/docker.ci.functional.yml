@@ -28,6 +28,9 @@ sections:
         generate-scope-collection-file:
             command: 'vendor/bin/console oauth:scope-collection-file:generate'
 
+        controller-cache-warmup:
+            command: 'vendor/bin/glue glue-api:controller:cache:warm-up'
+
     build-development:
         generate-transfers:
             command: 'vendor/bin/console transfer:generate'

@@ -36,7 +36,7 @@ class NewsletterSubscriptionCest
         $i->wantTo('Subscribe to the newsletter with an unsubscribed new email.');
         $i->expect('Success message is displayed.');
 
-        $i->amOnPage(Homepage::URL);
+        $i->amOnPage(Homepage::URL_EN);
 
         $customerTransfer = $this->buildCustomerTransfer();
 
@@ -56,7 +56,7 @@ class NewsletterSubscriptionCest
         $i->wantTo('Subscribe to the newsletter with an already subscribed email.');
         $i->expect('Error message is displayed.');
 
-        $i->amOnPage(Homepage::URL);
+        $i->amOnPage(Homepage::URL_EN);
 
         $customerTransfer = $this->buildCustomerTransfer();
 
@@ -78,7 +78,7 @@ class NewsletterSubscriptionCest
         $i->wantTo('Subscribe to the newsletter with an unsubscribed email and later on register with that address.');
         $i->expect('Subscriber email should be linked with registered customer.');
 
-        $i->amOnPage(Homepage::URL);
+        $i->amOnPage(Homepage::URL_EN);
 
         $customerTransfer = $this->buildCustomerTransfer();
 

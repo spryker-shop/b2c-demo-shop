@@ -7,7 +7,7 @@
 
 namespace Orm\Zed\StoreStorage\Persistence;
 
-use Spryker\Zed\StoreStorage\Persistence\Propel\AbstractSpyStoreListStorage as BaseSpyStoreListStorage;
+use Spryker\Zed\StoreStorage\Persistence\Propel\AbstractSpyStoreListStorageQuery as BaseSpyStoreListStorageQuery;
 
 /**
  * Skeleton subclass for representing a row from the 'spy_store_list_storage' table.
@@ -18,6 +18,6 @@ use Spryker\Zed\StoreStorage\Persistence\Propel\AbstractSpyStoreListStorage as B
  * application requirements. This class will only be generated as
  * long as it does not already exist in the output directory.
  */
-class SpyStoreListStorageQuery extends BaseSpyStoreListStorage
+class SpyStoreListStorageQuery extends BaseSpyStoreListStorageQuery
 {
 }
