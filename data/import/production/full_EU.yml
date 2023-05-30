@@ -4,9 +4,25 @@ version: 0
 actions:
 #1. Commerce Setup import
   - data_entity: store
-    # Cannot have a source because we use store.php
+    source: data/import/common/EU/store.csv
   - data_entity: currency
     source: data/import/common/common/currency.csv
+  - data_entity: currency-store
+    source: data/import/common/DE/currency_store.csv
+  - data_entity: currency-store
+    source: data/import/common/AT/currency_store.csv
+  - data_entity: country-store
+    source: data/import/common/DE/country_store.csv
+  - data_entity: country-store
+    source: data/import/common/AT/country_store.csv
+  - data_entity: locale-store
+    source: data/import/common/DE/locale_store.csv
+  - data_entity: locale-store
+    source: data/import/common/AT/locale_store.csv
+  - data_entity: default-locale-store
+    source: data/import/common/DE/default_locale_store.csv
+  - data_entity: default-locale-store
+    source: data/import/common/AT/default_locale_store.csv
   - data_entity: customer
     source: data/import/common/common/customer.csv
   - data_entity: glossary
