@@ -181,6 +181,33 @@ jobs:
                   docker/sdk testing console queue:worker:start --stop-when-empty
                   docker/sdk testing codecept run -c codeception.api.yml
 
+    php-81-postgresql-glue-alpine:
+        name: "PHP 8.1 / PostgreSQL / Glue / Alpine"
+        runs-on: ubuntu-20.04
+        env:
+            PROGRESS_TYPE: plain
+            SPRYKER_PLATFORM_IMAGE: spryker/php:8.1
+            TRAVIS: 1
+
+        steps:
+            - uses: actions/checkout@v3
+
+            - name: Install apt-packages
+              run: |
+                  sudo apt-get install apache2-utils
+            - name: Install docker-compose
+              run: |
+                  sudo curl -L "https://github.com/docker/compose/releases/download/2.12.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+                  sudo chmod +x /usr/local/bin/docker-compose
+            - name: Run docker
+              run: |
+                  git clone https://github.com/spryker/docker-sdk.git ./docker
+                  docker/sdk boot deploy.ci.api.yml -v
+                  docker/sdk up -t -v
+                  docker/sdk testing codecept fixtures
+                  docker/sdk testing console queue:worker:start --stop-when-empty
+                  docker/sdk testing codecept run -c codeception.api.yml
+
     php-81-mariadb-acceptance-alpine:
         name: "PHP 8.1 / MariaDB / Acceptance / Alpine"
         runs-on: ubuntu-20.04
@@ -203,6 +230,32 @@ jobs:
               run: |
                   git clone https://github.com/spryker/docker-sdk.git ./docker
                   docker/sdk boot -v deploy.ci.acceptance.mariadb.yml
+                  docker/sdk up -t
+                  docker/sdk testing console queue:worker:start --stop-when-empty
+                  docker/sdk testing codecept run -c codeception.acceptance.yml
+
+    php-81-postgresql-acceptance-alpine:
+        name: "PHP 8.1 / PostgreSQL / Acceptance / Alpine"
+        runs-on: ubuntu-20.04
+        env:
+            PROGRESS_TYPE: plain
+            SPRYKER_PLATFORM_IMAGE: spryker/php:8.1
+            TRAVIS: 1
+
+        steps:
+            - uses: actions/checkout@v3
+
+            - name: Install apt-packages
+              run: |
+                  sudo apt-get install apache2-utils
+            - name: Install docker-compose
+              run: |
+                  sudo curl -L "https://github.com/docker/compose/releases/download/2.12.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+                  sudo chmod +x /usr/local/bin/docker-compose
+            - name: Run docker
+              run: |
+                  git clone https://github.com/spryker/docker-sdk.git ./docker
+                  docker/sdk boot -v deploy.ci.acceptance.yml
                   docker/sdk up -t
                   docker/sdk testing console queue:worker:start --stop-when-empty
                   docker/sdk testing codecept run -c codeception.acceptance.yml
@@ -231,6 +284,33 @@ jobs:
                   docker/sdk boot deploy.ci.functional.mariadb.yml -v
                   docker/sdk up -t -v
                   docker/sdk testing codecept run -c codeception.functional.yml
+
+    php-81-postgresql-functional-alpine:
+        name: "PHP 8.1 / PostgreSQL / Functional / Alpine"
+        runs-on: ubuntu-20.04
+        env:
+            PROGRESS_TYPE: plain
+            SPRYKER_PLATFORM_IMAGE: spryker/php:8.1
+            TRAVIS: 1
+
+        steps:
+            - uses: actions/checkout@v3
+
+            - name: Install apt-packages
+              run: |
+                  sudo apt-get install apache2-utils
+            - name: Install docker-compose
+              run: |
+                  sudo curl -L "https://github.com/docker/compose/releases/download/2.12.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+                  sudo chmod +x /usr/local/bin/docker-compose
+            - name: Run docker
+              run: |
+                  git clone https://github.com/spryker/docker-sdk.git ./docker
+                  docker/sdk boot -v deploy.ci.functional.yml
+                  docker/sdk up -t
+                  docker/sdk testing console queue:worker:start --stop-when-empty
+                  docker/sdk testing codecept run -c codeception.functional.yml
+
     php-80-mariadb-glue-alpine:
         name: "PHP 8.0 / MariaDB / Glue / Alpine"
         runs-on: ubuntu-20.04

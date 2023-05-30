@@ -1,16 +1,9 @@
 @include shop-ui-collapsible-list() {
     $name: '.collapsible-list';
 
-    &__wrapper,
-    &__collapse-wrapper {
-        width: 100%;
-        display: flex;
-        flex-wrap: wrap;
-    }
-
     &__name {
         text-transform: uppercase;
-        font: 700 rem(13) / rem(22) $setting-font-family-additional;
+        font: fw(bold) rem(13) / rem(22) $setting-font-family-additional;
         letter-spacing: rem(2);
         width: 100%;
 
@@ -33,14 +26,6 @@
             width: 30%;
             padding-top: rem(5);
             padding-bottom: rem(5);
-        }
-    }
-
-    &__button-wrapper {
-        width: 100%;
-
-        @include helper-breakpoint(lg) {
-            display: none;
         }
     }
 }

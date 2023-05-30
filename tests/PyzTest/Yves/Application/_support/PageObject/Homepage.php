@@ -13,4 +13,9 @@ class Homepage
      * @var string
      */
     public const URL = '/';
+
+    /**
+     * @var string
+     */
+    public const URL_EN = '/en';
 }
