@@ -8,7 +8,7 @@
 {% block pageInfo %}
     <div class="container__inner">
         {% block breadcrumbs %}
-            {% widget 'ProductBreadcrumbsWithCategoriesWidget' args [data.product] only %}{% endwidget %}
+            {% widget 'ProductBreadcrumbsWithCategoriesWidget' args [data.product, data.requestReferer] only %}{% endwidget %}
         {% endblock %}
     </div>
 {% endblock %}
