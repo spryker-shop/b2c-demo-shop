@@ -93,7 +93,9 @@ class OmsDependencyProvider extends SprykerOmsDependencyProvider
             $commandCollection->add(new SendEventPaymentConfirmationPendingPlugin(), 'Payment/SendEventPaymentConfirmationPending');
             $commandCollection->add(new SendEventPaymentRefundPendingPlugin(), 'Payment/SendEventPaymentRefundPending');
             $commandCollection->add(new SendEventPaymentCancelReservationPendingPlugin(), 'Payment/SendEventPaymentCancelReservationPending');
-
+            //TODO 1
+            // Add the PayCommand to the command collection.
+            // Hint: You should pass the same name you added in the event in the Demo01.xml file
             return $commandCollection;
         });
 
@@ -110,7 +112,9 @@ class OmsDependencyProvider extends SprykerOmsDependencyProvider
         $container->extend(self::CONDITION_PLUGINS, function (ConditionCollectionInterface $conditionCollection) {
             $conditionCollection
             ->add(new IsGiftCardConditionPlugin(), 'GiftCard/IsGiftCard');
-
+            //TODO 2: Add  the IsAuthorizedCondition to the `$conditionCollection`.
+            //Hint: Call $conditionCollection's add method and pass an instance of `IsAuthorizedCondition`
+            // and as a second argument `Demo/IsAuthorized`
             return $conditionCollection;
         });
 

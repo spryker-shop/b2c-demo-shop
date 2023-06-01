@@ -36,7 +36,7 @@ $config[NopaymentConstants::NO_PAYMENT_METHODS] = [
 $config[NopaymentConstants::WHITELIST_PAYMENT_METHODS] = [
     GiftCardConfig::PROVIDER_NAME,
 ];
-
+//TODO 1: Add Demo01 to the active processes
 $config[OmsConstants::ACTIVE_PROCESSES] = array_merge([
     'Nopayment01',
     'DummyPayment01',
@@ -45,6 +45,7 @@ $config[OmsConstants::ACTIVE_PROCESSES] = array_merge([
 $config[SalesConstants::PAYMENT_METHOD_STATEMACHINE_MAPPING] = array_replace(
     $config[SalesConstants::PAYMENT_METHOD_STATEMACHINE_MAPPING],
     [
+        //TODO 2: Add Demo01 as the OMS PAYMENT_METHOD_INVOICE
     DummyPaymentConfig::PAYMENT_METHOD_INVOICE => 'DummyPayment01',
     DummyPaymentConfig::PAYMENT_METHOD_CREDIT_CARD => 'DummyPayment01',
     NopaymentConfig::PAYMENT_PROVIDER_NAME => 'Nopayment01',

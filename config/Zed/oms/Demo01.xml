@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<statemachine
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="spryker:oms-01"
+    xsi:schemaLocation="spryker:oms-01 http://static.spryker.com/oms-01.xsd">
+    <!-- Used as example XML for OMS implementation -->
+
+    <process name="Demo01" main="true">
+        <states>
+            <!-- TODO 1
+          Add the following states: new, paid, shipped,returned,refunded,closed
+            Hint: Use the tag state and the attribute name
+            -->
+            <!-- TODO 6 :
+            Add the unauthorized state
+            -->
+        </states>
+
+        <transitions>
+            <transition>
+                <source>new</source>
+                <target>paid</target>
+                <event>pay</event>
+            </transition>
+            <!--
+            TODO 3
+            Add the following transitions
+           - From paid to shipped with  the ship event
+           - From shipped to returned with  the return event
+          - From returned to refunded with  the refund event
+          - From shipped to closed with  the close event
+          - From refunded to closed with  the "close after refund" event
+
+            -->
+            <!-- TODO 7:
+            1) Modify the transition  "new to paid"
+            The transition has to have a condition attribute with the value Demo/IsAuthorized
+            2) Add a transition from new to unauthorized with a pay event
+
+            -->
+        </transitions>
+
+        <events>
+            <event name="pay" onEnter="true"/>
+            <!--
+            TODO 2
+            Add the following events:
+            - ship with manual attribute set to true
++           - return with manual attribute set to true
++           - refund with onEnter attribute set to true
++           - close with a  timeout attribute of 14 days
++           - "close after refund"  with onEnter set to true
+
+            -->
+            <!--
+            TODO 4
+            Add the command Demo/Pay to the pay event
+            -->
+        </events>
+    </process>
+</statemachine>
