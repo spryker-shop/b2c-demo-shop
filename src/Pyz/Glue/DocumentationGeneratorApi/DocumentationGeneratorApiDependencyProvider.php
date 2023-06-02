@@ -21,6 +21,7 @@ use Spryker\Glue\GlueBackendApiApplication\Plugin\DocumentationGeneratorApi\Back
 use Spryker\Glue\GlueBackendApiApplication\Plugin\DocumentationGeneratorApi\BackendHostContextExpanderPlugin;
 use Spryker\Glue\GlueBackendApiApplication\Plugin\DocumentationGeneratorApi\BackendResourcesContextExpanderPlugin;
 use Spryker\Glue\GlueBackendApiApplicationAuthorizationConnector\Plugin\DocumentationGeneratorApi\AuthorizationContextExpanderPlugin as BackendAuthorizationContextExpanderPlugin;
+use Spryker\Glue\GlueBackendApiApplicationGlueJsonApiConventionConnector\Plugin\DocumentationGeneratorApi\RelationshipPluginsContextExpanderPlugin as BackendRelationshipPluginsContextExpanderPlugin;
 use Spryker\Glue\GlueJsonApiConvention\Plugin\DocumentationGeneratorApi\JsonApiSchemaFormatterPlugin;
 use Spryker\Glue\GlueStorefrontApiApplication\Plugin\DocumentationGeneratorApi\StorefrontApiApplicationProviderPlugin;
 use Spryker\Glue\GlueStorefrontApiApplication\Plugin\DocumentationGeneratorApi\StorefrontCustomRoutesContextExpanderPlugin;
@@ -89,6 +90,7 @@ class DocumentationGeneratorApiDependencyProvider extends SprykerDocumentationGe
         $contextExpanderCollection->addExpander(new StorefrontHostContextExpanderPlugin(), [static::GLUE_STOREFRONT_API_APPLICATION_NAME]);
         $contextExpanderCollection->addExpander(new StorefrontAuthorizationContextExpanderPlugin(), [static::GLUE_STOREFRONT_API_APPLICATION_NAME]);
         $contextExpanderCollection->addExpander(new BackendAuthorizationContextExpanderPlugin(), [static::GLUE_BACKEND_API_APPLICATION_NAME]);
+        $contextExpanderCollection->addExpander(new BackendRelationshipPluginsContextExpanderPlugin(), [static::GLUE_BACKEND_API_APPLICATION_NAME]);
 
         return $contextExpanderCollection;
     }
