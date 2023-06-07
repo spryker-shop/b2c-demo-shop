@@ -454,11 +454,7 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
     public function getEventSubscriber(Container $container): array
     {
         $eventSubscriber = parent::getEventSubscriber($container);
-
-        if (!Environment::isDevelopment()) {
-            $eventSubscriber[] = new ConsoleLogPlugin();
-            $eventSubscriber[] = new MonitoringConsolePlugin();
-        }
+        $eventSubscriber[] = new MonitoringConsolePlugin();
 
         return $eventSubscriber;
     }
