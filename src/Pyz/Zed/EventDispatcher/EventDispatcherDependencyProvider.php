@@ -27,6 +27,7 @@ use Spryker\Zed\Router\Communication\Plugin\EventDispatcher\RequestAttributesEve
 use Spryker\Zed\Router\Communication\Plugin\EventDispatcher\RouterListenerEventDispatcherPlugin;
 use Spryker\Zed\Router\Communication\Plugin\EventDispatcher\RouterLocaleEventDispatcherPlugin;
 use Spryker\Zed\Router\Communication\Plugin\EventDispatcher\RouterSslRedirectEventDispatcherPlugin;
+use Spryker\Zed\SecurityBlockerBackofficeGui\Communication\Plugin\EventDispatcher\SecurityBlockerBackofficeUserEventDispatcherPlugin;
 use Spryker\Zed\Session\Communication\Plugin\EventDispatcher\SaveSessionEventDispatcherPlugin;
 use Spryker\Zed\Session\Communication\Plugin\EventDispatcher\SessionEventDispatcherPlugin;
 use Spryker\Zed\Twig\Communication\Plugin\EventDispatcher\TwigEventDispatcherPlugin;
@@ -61,6 +62,7 @@ class EventDispatcherDependencyProvider extends SprykerEventDispatcherDependency
             new ErrorPageEventDispatcherPlugin(),
             new RedirectUrlValidationEventDispatcherPlugin(),
             new EnvironmentInfoHeaderEventDispatcherPlugin(),
+            new SecurityBlockerBackofficeUserEventDispatcherPlugin(),
         ];
     }
 

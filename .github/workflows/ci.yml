@@ -51,15 +51,7 @@ jobs:
 
             - uses: actions/setup-node@v3
               with:
-                  node-version: '16'
-
-            - name: NPM cache
-              uses: actions/cache@v3
-              with:
-                  path: ~/.npm
-                  key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-                  restore-keys: |
-                      ${{ runner.os }}-node-
+                  node-version: '18'
 
             - name: Setup PHP
               uses: shivammathur/setup-php@v2
