@@ -146,6 +146,9 @@ jobs:
             - name: Run Security check
               run: vendor/bin/console security:check
 
+            - name: Run Evaluator
+              run: vendor/bin/evaluator evaluate
+
     php-81-mariadb-glue-alpine:
         name: "PHP 8.1 / MariaDB / Glue / Alpine"
         runs-on: ubuntu-20.04
