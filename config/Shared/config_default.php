@@ -13,7 +13,6 @@ use Generated\Shared\Transfer\PaymentConfirmationRequestedTransfer;
 use Generated\Shared\Transfer\PaymentConfirmedTransfer;
 use Generated\Shared\Transfer\PaymentMethodAddedTransfer;
 use Generated\Shared\Transfer\PaymentMethodDeletedTransfer;
-use Generated\Shared\Transfer\PaymentMethodTransfer;
 use Generated\Shared\Transfer\PaymentPreauthorizationFailedTransfer;
 use Generated\Shared\Transfer\PaymentPreauthorizedTransfer;
 use Generated\Shared\Transfer\PaymentRefundedTransfer;
@@ -690,7 +689,6 @@ $config[OauthAuth0Constants::AUTH0_CLIENT_ID] = $aopAuthenticationConfiguration[
 $config[OauthAuth0Constants::AUTH0_CLIENT_SECRET] = $aopAuthenticationConfiguration['AUTH0_CLIENT_SECRET'] ?? '';
 
 $config[MessageBrokerConstants::MESSAGE_TO_CHANNEL_MAP] = [
-    PaymentMethodTransfer::class => 'payment',
     PaymentMethodAddedTransfer::class => 'payment',
     PaymentCancelReservationRequestedTransfer::class => 'payment',
     PaymentConfirmationRequestedTransfer::class => 'payment',
