@@ -32,6 +32,6 @@ class CmsGuiPageListCest
         $i->amLoggedInUser();
         $i->amOnPage(CmsListPage::URL);
 
-        $i->waitForElementVisible(CmsListPage::PAGE_LIST_TABLE_XPATH, 5);
+        $i->waitForElementVisible(CmsListPage::PAGE_LIST_TABLE_XPATH, 10);
     }
 }

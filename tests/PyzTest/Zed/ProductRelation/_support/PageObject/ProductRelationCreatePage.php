@@ -17,5 +17,20 @@ class ProductRelationCreatePage
     /**
      * @var string
      */
-    public const PRODUCT_SUCCESS_FULLY_CREATED_MESSAGE = 'Product relation successfully created';
+    public const EDIT_PRODUCT_RELATION_TEXT = 'Edit Product Relation:';
+
+    /**
+     * @var string
+     */
+    public const PRODUCT_RELATION_PRODUCT_1_SKU = '214';
+
+    /**
+     * @var string
+     */
+    public const PRODUCT_RELATION_PRODUCT_2_SKU = '123';
+
+    /**
+     * @var string
+     */
+    public const PRODUCT_RELATION_PRODUCT_1_NAME = 'Samsung Bundle';
 }

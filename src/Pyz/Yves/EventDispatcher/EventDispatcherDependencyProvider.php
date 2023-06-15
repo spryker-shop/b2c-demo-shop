@@ -10,9 +10,10 @@ namespace Pyz\Yves\EventDispatcher;
 use Spryker\Shared\Http\Plugin\EventDispatcher\ResponseListenerEventDispatcherPlugin;
 use Spryker\Yves\Application\Communication\Plugin\EventDispatcher\HeadersSecurityEventDispatcherPlugin;
 use Spryker\Yves\EventDispatcher\EventDispatcherDependencyProvider as SprykerEventDispatcherDependencyProvider;
+use Spryker\Yves\Http\Plugin\EventDispatcher\CacheControlHeaderEventDispatcherPlugin;
 use Spryker\Yves\Http\Plugin\EventDispatcher\CookieEventDispatcherPlugin;
+use Spryker\Yves\Http\Plugin\EventDispatcher\EnvironmentInfoHeaderEventDispatcherPlugin;
 use Spryker\Yves\Http\Plugin\EventDispatcher\FragmentEventDispatcherPlugin;
-use Spryker\Yves\Http\Plugin\EventDispatcher\HeaderEventDispatcherPlugin;
 use Spryker\Yves\Http\Plugin\EventDispatcher\HstsHeaderEventDispatcher;
 use Spryker\Yves\Kernel\Plugin\EventDispatcher\AutoloaderCacheEventDispatcherPlugin;
 use Spryker\Yves\Kernel\Plugin\EventDispatcher\RedirectUrlValidationEventDispatcherPlugin;
@@ -51,7 +52,7 @@ class EventDispatcherDependencyProvider extends SprykerEventDispatcherDependency
             new RouterSslRedirectEventDispatcherPlugin(),
             new CookieEventDispatcherPlugin(),
             new FragmentEventDispatcherPlugin(),
-            new HeaderEventDispatcherPlugin(),
+            new CacheControlHeaderEventDispatcherPlugin(),
             new HstsHeaderEventDispatcher(),
             new StorageCacheEventDispatcherPlugin(),
             new MonitoringRequestTransactionEventDispatcherPlugin(),
@@ -61,6 +62,7 @@ class EventDispatcherDependencyProvider extends SprykerEventDispatcherDependency
             new ResponseListenerEventDispatcherPlugin(),
             new SecurityBlockerCustomerEventDispatcherPlugin(),
             new SecurityBlockerAgentEventDispatcherPlugin(),
+            new EnvironmentInfoHeaderEventDispatcherPlugin(),
         ];
     }
 }

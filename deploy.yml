@@ -11,11 +11,14 @@ image:
             "opcache.revalidate_freq": 0
             "opcache.validate_timestamps": 0
     node:
-        version: 16
-        npm: 8
+        version: 18
+        npm: 9
     environment:
         SPRYKER_PRODUCT_CONFIGURATOR_HOST: date-time-configurator-example.spryker.local
         SPRYKER_PRODUCT_CONFIGURATOR_PORT: 80
+        SPRYKER_YVES_HOST_DE: yves.de.spryker.local
+        SPRYKER_YVES_HOST_AT: yves.at.spryker.local
+        SPRYKER_YVES_HOST_US: yves.us.spryker.local
 composer:
     mode: --no-dev
     autoload: --classmap-authoritative
@@ -94,6 +97,20 @@ groups:
                         store: DE
                     glue.at.spryker.local:
                         store: AT
+            glue_storefront_eu:
+                application: glue-storefront
+                endpoints:
+                    glue-storefront.de.spryker.local:
+                        store: DE
+                    glue-storefront.at.spryker.local:
+                        store: AT
+            glue_backend_eu:
+                application: glue-backend
+                endpoints:
+                    glue-backend.de.spryker.local:
+                        store: DE
+                    glue-backend.at.spryker.local:
+                        store: AT
             backoffice_eu:
                 application: backoffice
                 endpoints:
@@ -140,6 +157,16 @@ groups:
                 application: glue
                 endpoints:
                     glue.us.spryker.local:
+                        store: US
+            glue_storefront_us:
+                application: glue-storefront
+                endpoints:
+                    glue-storefront.us.spryker.local:
+                        store: US
+            glue_backend_us:
+                application: glue-backend
+                endpoints:
+                    glue-backend.us.spryker.local:
                         store: US
             backoffice_us:
                 application: backoffice

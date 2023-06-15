@@ -1,9 +1,11 @@
 <?php
 
+use Generated\Shared\Transfer\AddReviewsTransfer;
 use Generated\Shared\Transfer\AssetAddedTransfer;
 use Generated\Shared\Transfer\AssetDeletedTransfer;
 use Generated\Shared\Transfer\AssetUpdatedTransfer;
 use Generated\Shared\Transfer\InitializeProductExportTransfer;
+use Generated\Shared\Transfer\OrderStatusChangedTransfer;
 use Generated\Shared\Transfer\PaymentCancelReservationFailedTransfer;
 use Generated\Shared\Transfer\PaymentCancelReservationRequestedTransfer;
 use Generated\Shared\Transfer\PaymentConfirmationFailedTransfer;
@@ -22,6 +24,8 @@ use Generated\Shared\Transfer\ProductCreatedTransfer;
 use Generated\Shared\Transfer\ProductDeletedTransfer;
 use Generated\Shared\Transfer\ProductExportedTransfer;
 use Generated\Shared\Transfer\ProductUpdatedTransfer;
+use Generated\Shared\Transfer\SearchEndpointAvailableTransfer;
+use Generated\Shared\Transfer\SearchEndpointRemovedTransfer;
 use Monolog\Logger;
 use Pyz\Shared\Console\ConsoleConstants;
 use Pyz\Shared\Scheduler\SchedulerConfig;
@@ -35,6 +39,7 @@ use Spryker\Shared\Acl\AclConstants;
 use Spryker\Shared\AppCatalogGui\AppCatalogGuiConstants;
 use Spryker\Shared\Application\ApplicationConstants;
 use Spryker\Shared\Application\Log\Config\SprykerLoggerConfig;
+use Spryker\Shared\AvailabilityNotification\AvailabilityNotificationConstants;
 use Spryker\Shared\CartsRestApi\CartsRestApiConstants;
 use Spryker\Shared\Category\CategoryConstants;
 use Spryker\Shared\CmsGui\CmsGuiConstants;
@@ -48,6 +53,9 @@ use Spryker\Shared\FileManager\FileManagerConstants;
 use Spryker\Shared\FileManagerGui\FileManagerGuiConstants;
 use Spryker\Shared\FileSystem\FileSystemConstants;
 use Spryker\Shared\GlueApplication\GlueApplicationConstants;
+use Spryker\Shared\GlueBackendApiApplication\GlueBackendApiApplicationConstants;
+use Spryker\Shared\GlueJsonApiConvention\GlueJsonApiConventionConstants;
+use Spryker\Shared\GlueStorefrontApiApplication\GlueStorefrontApiApplicationConstants;
 use Spryker\Shared\Http\HttpConstants;
 use Spryker\Shared\Kernel\KernelConstants;
 use Spryker\Shared\Log\LogConstants;
@@ -67,6 +75,7 @@ use Spryker\Shared\ProductManagement\ProductManagementConstants;
 use Spryker\Shared\ProductRelation\ProductRelationConstants;
 use Spryker\Shared\Propel\PropelConstants;
 use Spryker\Shared\PropelQueryBuilder\PropelQueryBuilderConstants;
+use Spryker\Shared\PropelReplicationCache\PropelReplicationCacheConstants;
 use Spryker\Shared\Queue\QueueConfig;
 use Spryker\Shared\Queue\QueueConstants;
 use Spryker\Shared\Quote\QuoteConstants;
@@ -78,6 +87,9 @@ use Spryker\Shared\SchedulerJenkins\SchedulerJenkinsConfig;
 use Spryker\Shared\SchedulerJenkins\SchedulerJenkinsConstants;
 use Spryker\Shared\SearchElasticsearch\SearchElasticsearchConstants;
 use Spryker\Shared\SecurityBlocker\SecurityBlockerConstants;
+use Spryker\Shared\SecurityBlockerBackoffice\SecurityBlockerBackofficeConstants;
+use Spryker\Shared\SecurityBlockerStorefrontAgent\SecurityBlockerStorefrontAgentConstants;
+use Spryker\Shared\SecurityBlockerStorefrontCustomer\SecurityBlockerStorefrontCustomerConstants;
 use Spryker\Shared\SecuritySystemUser\SecuritySystemUserConstants;
 use Spryker\Shared\Session\SessionConfig;
 use Spryker\Shared\Session\SessionConstants;
@@ -86,6 +98,8 @@ use Spryker\Shared\SessionRedis\SessionRedisConstants;
 use Spryker\Shared\Storage\StorageConstants;
 use Spryker\Shared\StorageRedis\StorageRedisConstants;
 use Spryker\Shared\Store\StoreConstants;
+use Spryker\Shared\SymfonyMailer\SymfonyMailerConstants;
+use Spryker\Shared\Synchronization\SynchronizationConstants;
 use Spryker\Shared\Tax\TaxConstants;
 use Spryker\Shared\Testify\TestifyConstants;
 use Spryker\Shared\Translator\TranslatorConstants;
@@ -188,6 +202,8 @@ $config[KernelConstants::DOMAIN_WHITELIST] = array_merge($trustedHosts, [
     'threedssvc.pay1.de', // trusted Payone domain
     'www.sofort.com', // trusted Payone domain
 ]);
+$config[KernelConstants::DOMAIN_WHITELIST][] = '*.bazaarvoice.com';
+
 $config[KernelConstants::STRICT_DOMAIN_REDIRECT] = true;
 
 $config[HttpConstants::ZED_HTTP_STRICT_TRANSPORT_SECURITY_ENABLED]
@@ -231,8 +247,7 @@ $config[OauthConstants::PUBLIC_KEY_PATH]
         getenv('SPRYKER_OAUTH_KEY_PUBLIC') ?: '',
     ) ?: null;
 $config[OauthConstants::ENCRYPTION_KEY] = getenv('SPRYKER_OAUTH_ENCRYPTION_KEY') ?: null;
-$config[OauthConstants::OAUTH_CLIENT_IDENTIFIER] = getenv('SPRYKER_OAUTH_CLIENT_IDENTIFIER') ?: null;
-$config[OauthConstants::OAUTH_CLIENT_SECRET] = getenv('SPRYKER_OAUTH_CLIENT_SECRET') ?: null;
+$config[OauthConstants::OAUTH_CLIENT_CONFIGURATION] = json_decode(getenv('SPRYKER_OAUTH_CLIENT_CONFIGURATION'), true) ?: [];
 
 // >> ZED REQUEST
 
@@ -319,6 +334,9 @@ $config[PropelConstants::ZED_DB_DATABASE] = getenv('SPRYKER_DB_DATABASE');
 $config[PropelConstants::ZED_DB_REPLICAS] = json_decode(getenv('SPRYKER_DB_REPLICAS') ?: '[]', true);
 $config[PropelConstants::USE_SUDO_TO_MANAGE_DATABASE] = false;
 
+// >>> DATABASE REPLICA CACHE
+$config[PropelReplicationCacheConstants::CACHE_TTL] = 2;
+
 // >>> SEARCH
 
 $config[SearchElasticsearchConstants::HOST] = getenv('SPRYKER_SEARCH_HOST');
@@ -400,8 +418,20 @@ $config[SecurityBlockerConstants::SECURITY_BLOCKER_BLOCKING_TTL] = 600;
 $config[SecurityBlockerConstants::SECURITY_BLOCKER_BLOCK_FOR] = 300;
 $config[SecurityBlockerConstants::SECURITY_BLOCKER_BLOCKING_NUMBER_OF_ATTEMPTS] = 10;
 
-$config[SecurityBlockerConstants::SECURITY_BLOCKER_AGENT_BLOCK_FOR] = 360;
-$config[SecurityBlockerConstants::SECURITY_BLOCKER_AGENT_BLOCKING_NUMBER_OF_ATTEMPTS] = 9;
+// >>> Security Blocker Storefront Agent
+$config[SecurityBlockerStorefrontAgentConstants::AGENT_BLOCK_FOR_SECONDS] = 360;
+$config[SecurityBlockerStorefrontAgentConstants::AGENT_BLOCKING_TTL] = 900;
+$config[SecurityBlockerStorefrontAgentConstants::AGENT_BLOCKING_NUMBER_OF_ATTEMPTS] = 9;
+
+// >>> Security Blocker Storefront Customer
+$config[SecurityBlockerStorefrontCustomerConstants::CUSTOMER_BLOCK_FOR_SECONDS] = 360;
+$config[SecurityBlockerStorefrontCustomerConstants::CUSTOMER_BLOCKING_TTL] = 900;
+$config[SecurityBlockerStorefrontCustomerConstants::CUSTOMER_BLOCKING_NUMBER_OF_ATTEMPTS] = 9;
+
+// >>> Security Blocker BackOffice user
+$config[SecurityBlockerBackofficeConstants::BACKOFFICE_USER_BLOCKING_TTL] = 900;
+$config[SecurityBlockerBackofficeConstants::BACKOFFICE_USER_BLOCK_FOR_SECONDS] = 360;
+$config[SecurityBlockerBackofficeConstants::BACKOFFICE_USER_BLOCKING_NUMBER_OF_ATTEMPTS] = 9;
 
 // >>> LOGGING
 
@@ -466,6 +496,14 @@ $defaultConnection = [
 ];
 
 $config[RabbitMqEnv::RABBITMQ_CONNECTIONS] = [];
+$connectionKeys = array_keys($rabbitConnections);
+$defaultKey = reset($connectionKeys);
+if (getenv('SPRYKER_CURRENT_REGION')) {
+    $defaultKey = getenv('SPRYKER_CURRENT_REGION');
+}
+if (getenv('APPLICATION_STORE') && (bool)getenv('SPRYKER_DYNAMIC_STORE_MODE') === false) {
+    $defaultKey = getenv('APPLICATION_STORE');
+}
 foreach ($rabbitConnections as $key => $connection) {
     $config[RabbitMqEnv::RABBITMQ_CONNECTIONS][$key] = $defaultConnection;
     $config[RabbitMqEnv::RABBITMQ_CONNECTIONS][$key][RabbitMqEnv::RABBITMQ_CONNECTION_NAME] = $key . '-connection';
@@ -473,8 +511,11 @@ foreach ($rabbitConnections as $key => $connection) {
     foreach ($connection as $constant => $value) {
         $config[RabbitMqEnv::RABBITMQ_CONNECTIONS][$key][constant(RabbitMqEnv::class . '::' . $constant)] = $value;
     }
-    $config[RabbitMqEnv::RABBITMQ_CONNECTIONS][$key][RabbitMqEnv::RABBITMQ_DEFAULT_CONNECTION] = $key === APPLICATION_STORE;
+    $config[RabbitMqEnv::RABBITMQ_CONNECTIONS][$key][RabbitMqEnv::RABBITMQ_DEFAULT_CONNECTION] = $key === $defaultKey;
 }
+
+// >>> SYNCHRONIZATION
+$config[SynchronizationConstants::DEFAULT_SYNC_SEARCH_QUEUE_MESSAGE_CHUNK_SIZE] = 1000;
 
 // >>> SCHEDULER
 $config[SchedulerConstants::ENABLED_SCHEDULERS] = [
@@ -495,15 +536,16 @@ $config[SchedulerJenkinsConstants::JENKINS_CONFIGURATION] = [
 $config[SchedulerJenkinsConstants::JENKINS_TEMPLATE_PATH] = getenv('SPRYKER_JENKINS_TEMPLATE_PATH') ?: null;
 
 // >>> MAIL
-$config[MailConstants::SMTP_HOST] = getenv('SPRYKER_SMTP_HOST') ?: null;
-$config[MailConstants::SMTP_PORT] = getenv('SPRYKER_SMTP_PORT') ?: null;
-$config[MailConstants::SMTP_ENCRYPTION] = getenv('SPRYKER_SMTP_ENCRYPTION') ?: null;
-$config[MailConstants::SMTP_AUTH_MODE] = getenv('SPRYKER_SMTP_AUTH_MODE') ?: null;
-$config[MailConstants::SMTP_USERNAME] = getenv('SPRYKER_SMTP_USERNAME') ?: null;
-$config[MailConstants::SMTP_PASSWORD] = getenv('SPRYKER_SMTP_PASSWORD') ?: null;
-
 $config[MailConstants::SENDER_EMAIL] = getenv('SPRYKER_MAIL_SENDER_EMAIL') ?: null;
 $config[MailConstants::SENDER_NAME] = getenv('SPRYKER_MAIL_SENDER_NAME') ?: null;
+
+// >>> SYMFONY_MAILER
+$config[SymfonyMailerConstants::SMTP_HOST] = getenv('SPRYKER_SMTP_HOST') ?: null;
+$config[SymfonyMailerConstants::SMTP_PORT] = getenv('SPRYKER_SMTP_PORT') ?: null;
+$config[SymfonyMailerConstants::SMTP_ENCRYPTION] = getenv('SPRYKER_SMTP_ENCRYPTION') ?: null;
+$config[SymfonyMailerConstants::SMTP_AUTH_MODE] = getenv('SPRYKER_SMTP_AUTH_MODE') ?: null;
+$config[SymfonyMailerConstants::SMTP_USERNAME] = getenv('SPRYKER_SMTP_USERNAME') ?: null;
+$config[SymfonyMailerConstants::SMTP_PASSWORD] = getenv('SPRYKER_SMTP_PASSWORD') ?: null;
 
 // >>> FILESYSTEM
 $config[FileSystemConstants::FILESYSTEM_SERVICE] = [
@@ -566,6 +608,18 @@ $config[ApplicationConstants::BASE_URL_YVES]
     );
 
 $config[ShopUiConstants::YVES_ASSETS_URL_PATTERN] = '/assets/' . (getenv('SPRYKER_BUILD_HASH') ?: 'current') . '/%theme%/';
+
+// >>> Availability Notification
+$config[AvailabilityNotificationConstants::BASE_URL_YVES_PORT] = $yvesPort;
+$config[AvailabilityNotificationConstants::STORE_TO_YVES_HOST_MAPPING] = [
+    'DE' => getenv('SPRYKER_YVES_HOST_DE'),
+    'AT' => getenv('SPRYKER_YVES_HOST_AT'),
+    'US' => getenv('SPRYKER_YVES_HOST_US'),
+];
+$config[AvailabilityNotificationConstants::REGION_TO_YVES_HOST_MAPPING] = [
+    'EU' => getenv('SPRYKER_YVES_HOST_EU'),
+    'US' => getenv('SPRYKER_YVES_HOST_US'),
+];
 
 // ----------------------------------------------------------------------------
 // ------------------------------ API -----------------------------------------
@@ -658,6 +712,10 @@ $config[MessageBrokerConstants::MESSAGE_TO_CHANNEL_MAP] = [
     ProductUpdatedTransfer::class => 'product',
     ProductDeletedTransfer::class => 'product',
     InitializeProductExportTransfer::class => 'product',
+    AddReviewsTransfer::class => 'reviews',
+    OrderStatusChangedTransfer::class => 'orders',
+    SearchEndpointAvailableTransfer::class => 'search',
+    SearchEndpointRemovedTransfer::class => 'search',
 ];
 
 $config[MessageBrokerConstants::CHANNEL_TO_TRANSPORT_MAP] =
@@ -665,12 +723,15 @@ $config[MessageBrokerAwsConstants::CHANNEL_TO_RECEIVER_TRANSPORT_MAP] = [
     'payment' => MessageBrokerAwsConfig::SQS_TRANSPORT,
     'assets' => MessageBrokerAwsConfig::SQS_TRANSPORT,
     'product' => MessageBrokerAwsConfig::SQS_TRANSPORT,
+    'reviews' => MessageBrokerAwsConfig::SQS_TRANSPORT,
+    'search' => MessageBrokerAwsConfig::SQS_TRANSPORT,
 ];
 
 $config[MessageBrokerAwsConstants::CHANNEL_TO_SENDER_TRANSPORT_MAP] = [
     'payment' => 'http',
     'assets' => 'http',
     'product' => 'http',
+    'orders' => 'http',
 ];
 
 $aopInfrastructureConfiguration = json_decode(html_entity_decode((string)getenv('SPRYKER_AOP_INFRASTRUCTURE')), true);
@@ -699,3 +760,22 @@ $config[OauthClientConstants::OAUTH_OPTION_AUDIENCE_FOR_PAYMENT_AUTHORIZE] = 'ao
 $config[ProductConfigurationConstants::SPRYKER_PRODUCT_CONFIGURATOR_ENCRYPTION_KEY] = getenv('SPRYKER_PRODUCT_CONFIGURATOR_ENCRYPTION_KEY') ?: 'change123';
 $config[ProductConfigurationConstants::SPRYKER_PRODUCT_CONFIGURATOR_HEX_INITIALIZATION_VECTOR] = getenv('SPRYKER_PRODUCT_CONFIGURATOR_HEX_INITIALIZATION_VECTOR') ?: '0c1ffefeebdab4a3d839d0e52590c9a2';
 $config[KernelConstants::DOMAIN_WHITELIST][] = getenv('SPRYKER_PRODUCT_CONFIGURATOR_HOST');
+
+// ----------------------------------------------------------------------------
+// ------------------------------ Glue Backend API -------------------------------
+// ----------------------------------------------------------------------------
+$sprykerGlueBackendHost = getenv('SPRYKER_GLUE_BACKEND_HOST');
+$config[GlueBackendApiApplicationConstants::GLUE_BACKEND_API_HOST] = $sprykerGlueBackendHost;
+$config[GlueBackendApiApplicationConstants::PROJECT_NAMESPACES] = [
+    'Pyz',
+];
+
+// ----------------------------------------------------------------------------
+// ------------------------------ Glue Storefront API -------------------------------
+// ----------------------------------------------------------------------------
+$sprykerGlueStorefrontHost = getenv('SPRYKER_GLUE_STOREFRONT_HOST');
+$config[GlueStorefrontApiApplicationConstants::GLUE_STOREFRONT_API_HOST] = $sprykerGlueStorefrontHost;
+$config[GlueJsonApiConventionConstants::GLUE_DOMAIN] = sprintf(
+    'https://%s',
+    $sprykerGlueStorefrontHost ?: $sprykerGlueBackendHost ?: 'localhost',
+);

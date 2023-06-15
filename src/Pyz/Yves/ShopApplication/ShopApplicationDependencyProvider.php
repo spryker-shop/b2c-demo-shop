@@ -7,7 +7,9 @@
 
 namespace Pyz\Yves\ShopApplication;
 
+use Pyz\Yves\ProductRelationWidget\Widget\UpSellingProductsWidget;
 use Pyz\Yves\ProductReviewWidget\Widget\ProductDetailPageReviewWidget;
+use Pyz\Yves\ProductSetWidget\Widget\ProductSetIdsWidget;
 use Spryker\Yves\ErrorHandler\Plugin\Application\ErrorHandlerApplicationPlugin;
 use Spryker\Yves\EventDispatcher\Plugin\Application\EventDispatcherApplicationPlugin;
 use Spryker\Yves\Form\Plugin\Application\FormApplicationPlugin;
@@ -17,7 +19,6 @@ use Spryker\Yves\Messenger\Plugin\Application\FlashMessengerApplicationPlugin;
 use Spryker\Yves\Router\Plugin\Application\RouterApplicationPlugin;
 use Spryker\Yves\Security\Plugin\Application\SecurityApplicationPlugin;
 use Spryker\Yves\Session\Plugin\Application\SessionApplicationPlugin;
-use Spryker\Yves\Store\Plugin\Application\StoreApplicationPlugin;
 use Spryker\Yves\Translator\Plugin\Application\TranslatorApplicationPlugin;
 use Spryker\Yves\Twig\Plugin\Application\TwigApplicationPlugin;
 use Spryker\Yves\Validator\Plugin\Application\ValidatorApplicationPlugin;
@@ -47,6 +48,7 @@ use SprykerShop\Yves\CustomerReorderWidget\Plugin\CustomerPage\CustomerReorderFo
 use SprykerShop\Yves\CustomerReorderWidget\Plugin\CustomerPage\CustomerReorderItemsFormWidget;
 use SprykerShop\Yves\CustomerReorderWidget\Widget\CustomerReorderBundleItemCheckboxWidget;
 use SprykerShop\Yves\CustomerReorderWidget\Widget\CustomerReorderItemCheckboxWidget;
+use SprykerShop\Yves\CustomerValidationPage\Plugin\ShopApplication\LogoutInvalidatedCustomerFilterControllerEventHandlerPlugin;
 use SprykerShop\Yves\DiscountPromotionWidget\Plugin\ShopApplication\CartDiscountPromotionProductListWidgetCacheKeyGeneratorStrategyPlugin;
 use SprykerShop\Yves\DiscountPromotionWidget\Widget\CartDiscountPromotionProductListWidget;
 use SprykerShop\Yves\LanguageSwitcherWidget\Widget\LanguageSwitcherWidget;
@@ -85,7 +87,6 @@ use SprykerShop\Yves\ProductLabelWidget\Widget\ProductAbstractLabelWidget;
 use SprykerShop\Yves\ProductLabelWidget\Widget\ProductConcreteLabelWidget;
 use SprykerShop\Yves\ProductOptionWidget\Widget\ProductOptionConfiguratorWidget;
 use SprykerShop\Yves\ProductRelationWidget\Widget\SimilarProductsWidget;
-use SprykerShop\Yves\ProductRelationWidget\Widget\UpSellingProductsWidget;
 use SprykerShop\Yves\ProductReplacementForWidget\Widget\ProductReplacementForListWidget;
 use SprykerShop\Yves\ProductReviewWidget\Widget\DisplayProductAbstractReviewWidget;
 use SprykerShop\Yves\ProductReviewWidget\Widget\ProductRatingFilterWidget;
@@ -105,6 +106,8 @@ use SprykerShop\Yves\SalesProductBundleWidget\Widget\OrderItemsProductBundleWidg
 use SprykerShop\Yves\SalesProductConfigurationWidget\Widget\ProductConfigurationOrderItemDisplayWidget;
 use SprykerShop\Yves\ShopApplication\Plugin\Application\ShopApplicationApplicationPlugin;
 use SprykerShop\Yves\ShopApplication\ShopApplicationDependencyProvider as SprykerShopApplicationDependencyProvider;
+use SprykerShop\Yves\StoreWidget\Plugin\ShopApplication\StoreApplicationPlugin;
+use SprykerShop\Yves\StoreWidget\Widget\StoreSwitcherWidget;
 use SprykerShop\Yves\TabsWidget\Widget\FullTextSearchTabsWidget;
 use SprykerShop\Yves\WebProfilerWidget\Plugin\Application\WebProfilerApplicationPlugin;
 use SprykerShop\Yves\WishlistWidget\Widget\WishlistMenuItemWidget;
@@ -189,6 +192,7 @@ class ShopApplicationDependencyProvider extends SprykerShopApplicationDependency
             ProductAbstractAddToCartButtonWidget::class,
             OrderCancelButtonWidget::class,
             CartAddProductAsSeparateItemWidget::class,
+            ProductSetIdsWidget::class,
             AssetWidget::class,
             CustomerReorderItemCheckboxWidget::class,
             CustomerReorderBundleItemCheckboxWidget::class,
@@ -202,6 +206,7 @@ class ShopApplicationDependencyProvider extends SprykerShopApplicationDependency
             ProductConfigurationWishlistFormWidget::class,
             ProductConfigurationWishlistItemDisplayWidget::class,
             ProductConfigurationWishlistPageButtonWidget::class,
+            StoreSwitcherWidget::class,
         ];
     }
 
@@ -217,11 +222,22 @@ class ShopApplicationDependencyProvider extends SprykerShopApplicationDependency
     }
 
     /**
+     * @return array<\SprykerShop\Yves\ShopApplicationExtension\Dependency\Plugin\FilterControllerEventHandlerPluginInterface>
+     */
+    protected function getFilterControllerEventSubscriberPlugins(): array
+    {
+        return [
+            new LogoutInvalidatedCustomerFilterControllerEventHandlerPlugin(),
+        ];
+    }
+
+    /**
      * @return array<\Spryker\Shared\ApplicationExtension\Dependency\Plugin\ApplicationPluginInterface>
      */
     protected function getApplicationPlugins(): array
     {
         $applicationPlugins = [
+            new HttpApplicationPlugin(),
             new TwigApplicationPlugin(),
             new EventDispatcherApplicationPlugin(),
             new ShopApplicationApplicationPlugin(),
@@ -230,7 +246,6 @@ class ShopApplicationDependencyProvider extends SprykerShopApplicationDependency
             new TranslatorApplicationPlugin(),
             new RouterApplicationPlugin(),
             new SessionApplicationPlugin(),
-            new HttpApplicationPlugin(),
             new ErrorHandlerApplicationPlugin(),
             new FlashMessengerApplicationPlugin(),
             new FormApplicationPlugin(),
