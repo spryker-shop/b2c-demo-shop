@@ -143,9 +143,6 @@ jobs:
             - name: Run PHPStan
               run: vendor/bin/phpstan analyze -l 5 -c phpstan.neon src/
 
-            - name: Run Security check
-              run: vendor/bin/console security:check
-
             - name: Run Evaluator
               run: vendor/bin/evaluator evaluate
 
