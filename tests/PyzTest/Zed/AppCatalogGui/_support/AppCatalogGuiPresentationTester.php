@@ -25,9 +25,9 @@ use Codeception\Actor;
  *
  * @SuppressWarnings(PHPMD)
  */
-class AppCatalogGuiCommunicationTester extends Actor
+class AppCatalogGuiPresentationTester extends Actor
 {
-    use _generated\AppCatalogGuiCommunicationTesterActions;
+    use _generated\AppCatalogGuiPresentationTesterActions;
 
     /**
      * @return bool

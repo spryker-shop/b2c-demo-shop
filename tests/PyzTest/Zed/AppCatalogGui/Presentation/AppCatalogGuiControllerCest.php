@@ -5,9 +5,9 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-namespace PyzTest\Zed\AppCatalogGui\Communication\Controller;
+namespace PyzTest\Zed\AppCatalogGui\Presentation;
 
-use PyzTest\Zed\AppCatalogGui\AppCatalogGuiCommunicationTester;
+use PyzTest\Zed\AppCatalogGui\AppCatalogGuiPresentationTester;
 use PyzTest\Zed\AppCatalogGui\PageObject\AppCatalogGuiApiLoginPage;
 use PyzTest\Zed\AppCatalogGui\PageObject\AppCatalogGuiIndexPage;
 
@@ -17,8 +17,7 @@ use PyzTest\Zed\AppCatalogGui\PageObject\AppCatalogGuiIndexPage;
  * @group PyzTest
  * @group Zed
  * @group AppCatalogGui
- * @group Communication
- * @group Controller
+ * @group Presentation
  * @group AppCatalogGuiControllerCest
  * Add your own group annotations below this line
  */
@@ -30,11 +29,11 @@ class AppCatalogGuiControllerCest
     protected const STORE_REFERENCE = 'dev-DE';
 
     /**
-     * @param \PyzTest\Zed\AppCatalogGui\AppCatalogGuiCommunicationTester $I
+     * @param \PyzTest\Zed\AppCatalogGui\AppCatalogGuiPresentationTester $I
      *
      * @return void
      */
-    public function checkIfAppCatalogGuiReturn200AndValidUrl(AppCatalogGuiCommunicationTester $I): void
+    public function checkIfAppCatalogGuiReturn200AndValidUrl(AppCatalogGuiPresentationTester $I): void
     {
         if ($I->seeThatDynamicStoreEnabled()) {
             $I->markTestSkipped('Test is valid for Static Store mode only.');
@@ -66,11 +65,11 @@ class AppCatalogGuiControllerCest
     }
 
     /**
-     * @param \PyzTest\Zed\AppCatalogGui\AppCatalogGuiCommunicationTester $I
+     * @param \PyzTest\Zed\AppCatalogGui\AppCatalogGuiPresentationTester $I
      *
      * @return void
      */
-    public function checkIfAppCatalogGuiApiLoginReturn200AndValidToken(AppCatalogGuiCommunicationTester $I): void
+    public function checkIfAppCatalogGuiApiLoginReturn200AndValidToken(AppCatalogGuiPresentationTester $I): void
     {
         if ($I->seeThatDynamicStoreEnabled()) {
             $I->markTestSkipped('Test is valid for Static Store mode only.');
