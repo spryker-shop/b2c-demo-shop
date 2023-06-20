@@ -7,6 +7,7 @@
 
 namespace Pyz\Zed\TaxProductConnector;
 
+use Spryker\Zed\CompanyUnitAddress\Communication\Plugin\TaxProductConnector\CompanyUnitAddressShippingAddressValidatorPlugin;
 use Spryker\Zed\Customer\Communication\Plugin\TaxProductConnector\CustomerAddressShippingAddressValidatorPlugin;
 use Spryker\Zed\TaxProductConnector\TaxProductConnectorDependencyProvider as SprykerTaxProductConnectorDependencyProvider;
 
@@ -20,7 +21,7 @@ class TaxProductConnectorDependencyProvider extends SprykerTaxProductConnectorDe
     protected function getShippingAddressValidatorPlugins(): array
     {
         return [
-            new CustomerAddressShippingAddressValidatorPlugin(),
+            new CustomerAddressShippingAddressValidatorPlugin(), new CompanyUnitAddressShippingAddressValidatorPlugin(),
         ];
     }
 }

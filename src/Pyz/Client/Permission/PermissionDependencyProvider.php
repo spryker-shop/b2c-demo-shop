@@ -7,6 +7,7 @@
 
 namespace Pyz\Client\Permission;
 
+use Spryker\Client\CompanyUser\Plugin\Permission\SeeCompanyUsersPermissionPlugin;
 use Spryker\Client\CustomerAccessPermission\Plugin\CustomerAccessPermissionStoragePlugin;
 use Spryker\Client\CustomerAccessPermission\Plugin\SeeAddToCartPermissionPlugin;
 use Spryker\Client\CustomerAccessPermission\Plugin\SeeOrderPlaceSubmitPermissionPlugin;
@@ -36,6 +37,7 @@ class PermissionDependencyProvider extends SprykerPermissionDependencyProvider
             new SeeOrderPlaceSubmitPermissionPlugin(),
             new SeeAddToCartPermissionPlugin(),
             new SeeWishlistPermissionPlugin(),
+            new SeeCompanyUsersPermissionPlugin(),
         ];
     }
 }
