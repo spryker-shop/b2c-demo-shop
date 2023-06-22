@@ -33,4 +33,5 @@ $config[PropelConstants::LOG_FILE_PATH]
 //----------------------------------- ACP -------------------------------------
 //-----------------------------------------------------------------------------
 $config[ProductConstants::PUBLISHING_TO_MESSAGE_BROKER_ENABLED] = false;
+
 $config[MessageBrokerConstants::IS_ENABLED] = true;
