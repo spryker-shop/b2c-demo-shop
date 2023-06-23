@@ -293,6 +293,8 @@ $config[MessageBrokerAwsConstants::CHANNEL_TO_RECEIVER_TRANSPORT_MAP] = [
     'search' => 'in-memory',
 ];
 
+$config[MessageBrokerConstants::IS_ENABLED] = true;
+
 // ----------------------------------------------------------------------------
 // ------------------------------ Glue Backend API -------------------------------
 // ----------------------------------------------------------------------------
