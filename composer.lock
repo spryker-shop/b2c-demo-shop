@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9cdb71ccb3acad9dbdb7dda19c9c3e8c",
+    "content-hash": "d50aee6fde0c3cf9d1f6fc2f7bbfb7fa",
     "packages": [
         {
             "name": "async-aws/core",
@@ -5300,7 +5300,7 @@
         },
         {
             "name": "spryker-feature/gift-cards",
-            "version": "202212.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker-feature/gift-cards.git",
@@ -5324,6 +5324,7 @@
             "suggest": {
                 "spryker-feature/payments": "Recommended feature dependency."
             },
+            "default-branch": true,
             "type": "metapackage",
             "extra": {
                 "branch-alias": {
@@ -15180,24 +15181,25 @@
         },
         {
             "name": "spryker/cart-code",
-            "version": "1.2.0",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/cart-code.git",
-                "reference": "c23c2b885a40e96c3513efb48bb42481ae4a1edc"
+                "reference": "6282ed4f45700ac5a46f6b44fa9a034c558c74ee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/cart-code/zipball/c23c2b885a40e96c3513efb48bb42481ae4a1edc",
-                "reference": "c23c2b885a40e96c3513efb48bb42481ae4a1edc",
+                "url": "https://api.github.com/repos/spryker/cart-code/zipball/6282ed4f45700ac5a46f6b44fa9a034c558c74ee",
+                "reference": "6282ed4f45700ac5a46f6b44fa9a034c558c74ee",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.2",
+                "php": ">=8.0",
                 "spryker/calculation": "^4.0.0",
-                "spryker/cart-code-extension": "^1.1.0",
+                "spryker/cart-code-extension": "^1.2.0",
                 "spryker/kernel": "^3.30.0",
                 "spryker/quote": "^2.8.0",
+                "spryker/transfer": "^3.25.0",
                 "spryker/zed-request": "^3.0.0"
             },
             "require-dev": {
@@ -15223,30 +15225,29 @@
             ],
             "description": "CartCode module",
             "support": {
-                "source": "https://github.com/spryker/cart-code/tree/master"
+                "source": "https://github.com/spryker/cart-code/tree/1.3.0"
             },
-            "time": "2020-05-29T07:08:27+00:00"
+            "time": "2023-06-23T09:24:33+00:00"
         },
         {
             "name": "spryker/cart-code-extension",
-            "version": "1.1.0",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/cart-code-extension.git",
-                "reference": "486d311261bdb1a96e519da69bd9f7a6b4df7010"
+                "reference": "8fedde427ed5852c59f3594543aeeba368179ed8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/cart-code-extension/zipball/486d311261bdb1a96e519da69bd9f7a6b4df7010",
-                "reference": "486d311261bdb1a96e519da69bd9f7a6b4df7010",
+                "url": "https://api.github.com/repos/spryker/cart-code-extension/zipball/8fedde427ed5852c59f3594543aeeba368179ed8",
+                "reference": "8fedde427ed5852c59f3594543aeeba368179ed8",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.2"
+                "php": ">=8.0"
             },
             "require-dev": {
-                "spryker/code-sniffer": "*",
-                "spryker/testify": "*"
+                "spryker/code-sniffer": "*"
             },
             "type": "library",
             "extra": {
@@ -15265,9 +15266,9 @@
             ],
             "description": "CartCodeExtension module",
             "support": {
-                "source": "https://github.com/spryker/cart-code-extension/tree/master"
+                "source": "https://github.com/spryker/cart-code-extension/tree/1.2.0"
             },
-            "time": "2019-12-04T15:11:36+00:00"
+            "time": "2023-06-23T09:24:33+00:00"
         },
         {
             "name": "spryker/cart-codes-rest-api",
@@ -27816,30 +27817,33 @@
         },
         {
             "name": "spryker/nopayment",
-            "version": "4.1.0",
+            "version": "4.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/nopayment.git",
-                "reference": "e919982ecf79a353cab3bfc098a71e33892b3db5"
+                "reference": "11ba62886b9a09713d4f7b48e6146d46cfbf58fa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/nopayment/zipball/e919982ecf79a353cab3bfc098a71e33892b3db5",
-                "reference": "e919982ecf79a353cab3bfc098a71e33892b3db5",
+                "url": "https://api.github.com/repos/spryker/nopayment/zipball/11ba62886b9a09713d4f7b48e6146d46cfbf58fa",
+                "reference": "11ba62886b9a09713d4f7b48e6146d46cfbf58fa",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.3",
+                "php": ">=8.0",
+                "spryker/cart-code-extension": "^1.2.0",
                 "spryker/checkout-extension": "^1.2.0",
                 "spryker/kernel": "^3.30.0",
                 "spryker/payment-extension": "^1.0.0",
-                "spryker/sales": "^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0 || ^10.0.0 || ^11.0.0"
+                "spryker/sales": "^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0 || ^10.0.0 || ^11.0.0",
+                "spryker/transfer": "^3.25.0"
             },
             "require-dev": {
                 "spryker/code-sniffer": "*",
                 "spryker/oms": "*",
                 "spryker/payment": "*",
                 "spryker/propel": "*",
+                "spryker/shipment": "*",
                 "spryker/step-engine": "^3.1.0",
                 "spryker/symfony": "*",
                 "spryker/testify": "*"
@@ -27867,9 +27871,9 @@
             ],
             "description": "Nopayment module",
             "support": {
-                "source": "https://github.com/spryker/nopayment/tree/4.1.0"
+                "source": "https://github.com/spryker/nopayment/tree/4.2.0"
             },
-            "time": "2021-05-14T11:00:44+00:00"
+            "time": "2023-06-23T09:24:33+00:00"
         },
         {
             "name": "spryker/oauth",
@@ -57080,6 +57084,12 @@
             "alias_normalized": "202304.0"
         },
         {
+            "package": "spryker-feature/gift-cards",
+            "version": "9999999-dev",
+            "alias": "202304.0",
+            "alias_normalized": "202304.0"
+        },
+        {
             "package": "spryker-feature/order-management",
             "version": "9999999-dev",
             "alias": "202304.0",
@@ -57156,6 +57166,7 @@
         "spryker-feature/customer-account-management": 20,
         "spryker-feature/deployment-tools": 20,
         "spryker-feature/file-manager": 20,
+        "spryker-feature/gift-cards": 20,
         "spryker-feature/order-management": 20,
         "spryker-feature/prices": 20,
         "spryker-feature/product": 20,
