@@ -10,6 +10,7 @@ namespace Pyz\Zed\CartCode;
 use Spryker\Zed\CartCode\CartCodeDependencyProvider as SprykerCartCodeDependencyProvider;
 use Spryker\Zed\Discount\Communication\Plugin\CartCode\VoucherCartCodePlugin;
 use Spryker\Zed\GiftCard\Communication\Plugin\CartCode\GiftCardCartCodePlugin;
+use Spryker\Zed\Nopayment\Communication\Plugin\CartCode\NopaymentCartCodePostAddPlugin;
 
 class CartCodeDependencyProvider extends SprykerCartCodeDependencyProvider
 {
@@ -21,6 +22,16 @@ class CartCodeDependencyProvider extends SprykerCartCodeDependencyProvider
         return [
             new VoucherCartCodePlugin(),
             new GiftCardCartCodePlugin(),
+        ];
+    }
+
+    /**
+     * @return list<\Spryker\Zed\CartCodeExtension\Dependency\Plugin\CartCodePostAddPluginInterface>
+     */
+    protected function getCartCodePostAddPlugins(): array
+    {
+        return [
+            new NopaymentCartCodePostAddPlugin(),
         ];
     }
 }

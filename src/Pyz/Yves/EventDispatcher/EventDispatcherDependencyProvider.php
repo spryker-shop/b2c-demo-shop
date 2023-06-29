@@ -19,6 +19,7 @@ use Spryker\Yves\Kernel\Plugin\EventDispatcher\AutoloaderCacheEventDispatcherPlu
 use Spryker\Yves\Kernel\Plugin\EventDispatcher\RedirectUrlValidationEventDispatcherPlugin;
 use Spryker\Yves\Locale\Plugin\EventDispatcher\LocaleEventDispatcherPlugin;
 use Spryker\Yves\Monitoring\Plugin\EventDispatcher\MonitoringRequestTransactionEventDispatcherPlugin;
+use Spryker\Yves\Profiler\Plugin\EventDispatcher\ProfilerRequestEventDispatcherPlugin;
 use Spryker\Yves\Router\Plugin\EventDispatcher\RouterListenerEventDispatcherPlugin;
 use Spryker\Yves\Router\Plugin\EventDispatcher\RouterLocaleEventDispatcherPlugin;
 use Spryker\Yves\Router\Plugin\EventDispatcher\RouterSslRedirectEventDispatcherPlugin;
@@ -39,7 +40,7 @@ class EventDispatcherDependencyProvider extends SprykerEventDispatcherDependency
      */
     protected function getEventDispatcherPlugins(): array
     {
-        return [
+        $plugins = [
             new ErrorPageEventDispatcherPlugin(),
             new HeadersSecurityEventDispatcherPlugin(),
             new LocaleEventDispatcherPlugin(),
@@ -64,5 +65,11 @@ class EventDispatcherDependencyProvider extends SprykerEventDispatcherDependency
             new SecurityBlockerAgentEventDispatcherPlugin(),
             new EnvironmentInfoHeaderEventDispatcherPlugin(),
         ];
+
+        if (class_exists(ProfilerRequestEventDispatcherPlugin::class)) {
+            $plugins[] = new ProfilerRequestEventDispatcherPlugin();
+        }
+
+        return $plugins;
     }
 }
