@@ -50,8 +50,9 @@ class ExampleStateMachineQueryContainer extends AbstractQueryContainer implement
      *
      * @return \Orm\Zed\ExampleStateMachine\Persistence\PyzExampleStateMachineItemQuery<\Orm\Zed\ExampleStateMachine\Persistence\PyzExampleStateMachineItem>
      */
-    public function queryPyzExampleStateMachineItemByIdStateMachineItem($idStateMachineItem)
-    {
+    public function queryPyzExampleStateMachineItemByIdStateMachineItem(
+        $idStateMachineItem,
+    ): PyzExampleStateMachineItemQuery {
         return $this->getFactory()
             ->createPyzExampleStateMachineQuery()
             ->filterByIdExampleStateMachineItem($idStateMachineItem);

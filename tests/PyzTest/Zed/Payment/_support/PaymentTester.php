@@ -33,7 +33,7 @@ use Spryker\Shared\Kernel\Transfer\TransferInterface;
  * @method void comment($description)
  * @method void pause()
  *
- * @SuppressWarnings(PHPMD)
+ * @SuppressWarnings(\PyzTest\Zed\Payment\PHPMD)
  */
 class PaymentTester extends Actor
 {
