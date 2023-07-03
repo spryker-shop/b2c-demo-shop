@@ -19,9 +19,9 @@ class ExampleProductSalePageClient extends AbstractClient implements ExampleProd
      *
      * @api
      *
-     * @param array $requestParameters
+     * @param array<mixed> $requestParameters
      *
-     * @return array
+     * @return array<mixed>
      */
     public function salePyzSearch(array $requestParameters = []): array
     {

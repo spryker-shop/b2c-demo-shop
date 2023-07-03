@@ -229,7 +229,7 @@ class ProductAbstractHydratorStep implements DataImportStepInterface
                 ->setMetaDescription($localizedAttributes[static::COLUMN_META_DESCRIPTION])
                 ->setMetaKeywords($localizedAttributes[static::COLUMN_META_KEYWORDS])
                 ->setFkLocale($idLocale)
-                ->setAttributes(json_encode($localizedAttributes[static::KEY_ATTRIBUTES]));
+                ->setAttributes((string)json_encode($localizedAttributes[static::KEY_ATTRIBUTES]));
 
             $localizedAttributeTransfer[] = [
                 static::COLUMN_ABSTRACT_SKU => $dataSet[static::COLUMN_ABSTRACT_SKU],
@@ -308,7 +308,7 @@ class ProductAbstractHydratorStep implements DataImportStepInterface
     /**
      * @param string $categoryKeys
      *
-     * @return array
+     * @return array<string>
      */
     protected function getCategoryKeys($categoryKeys): array
     {
@@ -320,7 +320,7 @@ class ProductAbstractHydratorStep implements DataImportStepInterface
     /**
      * @param string $categoryProductOrder
      *
-     * @return array
+     * @return array<string>
      */
     protected function getCategoryProductOrder($categoryProductOrder): array
     {

@@ -1,16 +1,25 @@
 includes:
     - vendor/spryker-sdk/phpstan-spryker/extension.neon
+    - vendor/phpstan/phpstan/conf/bleedingEdge.neon
 
 parameters:
+    level: 6
+    paths:
+        - src/
+
     excludePaths:
-        - %rootDir%/../../../src/Generated/*
-        - %rootDir%/../../../src/Orm/*
+        - '%rootDir%/../../../src/Generated/*'
+        - '%rootDir%/../../../src/Orm/*'
 
     bootstrapFiles:
-        - %rootDir%/../../../phpstan-bootstrap.php
+        - '%rootDir%/../../../phpstan-bootstrap.php'
 
     ignoreErrors:
         - '#Call to an undefined method .+Criteria::.+\(\).#'
+        - '#Call to an undefined method .+DataSetStepBrokerAwareInterface::setDataSetWriter\(\).#'
+        - '#Call to an undefined method .+DataSetStepBrokerAwareInterface::addAfterImportHook\(\).#'
+        - '#Parameter \#1 \$rawCatalogSearchResultFormatterPlugin of class .+CurrencyAwareSuggestionByTypeResultFormatter constructor expects .+ResultFormatterPluginInterface, .+SuggestionByTypeResultFormatterPlugin given.#'
+        - '#Method .+CheckoutPageDependencyProvider::.+\(\) return type has no value type specified in iterable type .+FormInterface.#'
 
     reportUnmatchedIgnoredErrors: false
 
@@ -21,4 +30,4 @@ parameters:
         - APPLICATION_CODE_BUCKET
 
     parallel:
-       maximumNumberOfProcesses: 1
+    	maximumNumberOfProcesses: 1
