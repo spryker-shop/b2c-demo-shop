@@ -1,9 +1,6 @@
 build:
     environment:
-        php: '8.0.19'
-        node: 18.16.0
-        apt_packages:
-            - libc6=2.27-3ubuntu1.2
+        docker: true
 
     tests:
         override:
@@ -13,4 +10,5 @@ build:
         analysis:
             tests:
                 override:
-                    - php-scrutinizer-run
+                    - docker run -v $PWD:/src -w /src node:18 js-scrutinizer-run
+                    - docker run -v $PWD:/src -w /src php:8.0.19 php-scrutinizer-run
