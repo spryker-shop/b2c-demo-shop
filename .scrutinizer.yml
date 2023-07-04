@@ -2,7 +2,6 @@ build:
     environment:
         php: '8.0.19'
         node: '14.0'
-        docker: true
 
     tests:
         override:
@@ -13,4 +12,3 @@ build:
             tests:
                 override:
                     - php-scrutinizer-run
-                    - docker run -v $PWD:/src -w /src node:18 js-scrutinizer-run
