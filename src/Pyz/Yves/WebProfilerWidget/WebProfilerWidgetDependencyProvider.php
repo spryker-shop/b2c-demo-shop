@@ -7,6 +7,7 @@
 
 namespace Pyz\Yves\WebProfilerWidget;
 
+use Spryker\Yves\Profiler\Plugin\WebProfiler\WebProfilerProfilerDataCollectorPlugin;
 use Spryker\Yves\Redis\Plugin\WebProfiler\WebProfilerRedisDataCollectorPlugin;
 use Spryker\Yves\SearchElasticsearch\Plugin\WebProfiler\WebProfilerElasticsearchDataCollectorPlugin;
 use Spryker\Yves\ZedRequest\Plugin\WebProfiler\WebProfilerZedRequestDataCollectorPlugin;
@@ -30,7 +31,7 @@ class WebProfilerWidgetDependencyProvider extends SprykerWebProfilerDependencyPr
      */
     public function getDataCollectorPlugins(): array
     {
-        return [
+        $plugins = [
             new WebProfilerRequestDataCollectorPlugin(),
             new WebProfilerRouterDataCollectorPlugin(),
             new WebProfilerAjaxDataCollectorPlugin(),
@@ -46,5 +47,11 @@ class WebProfilerWidgetDependencyProvider extends SprykerWebProfilerDependencyPr
             new WebProfilerElasticsearchDataCollectorPlugin(),
             new WebProfilerZedRequestDataCollectorPlugin(),
         ];
+
+        if (class_exists(WebProfilerProfilerDataCollectorPlugin::class)) {
+            $plugins[] = new WebProfilerProfilerDataCollectorPlugin();
+        }
+
+        return $plugins;
     }
 }
