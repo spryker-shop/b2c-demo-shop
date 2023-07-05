@@ -117,7 +117,6 @@
         "spryker/customer-user-connector": "^1.0.4",
         "spryker/customer-user-connector-gui": "^1.4.0",
         "spryker/customers-rest-api": "^1.21.2",
-        "spryker/development-core": "dev-feature/composer-auto-rising",
         "spryker/discount-calculation-connector": "^5.3.0",
         "spryker/discount-promotions-rest-api": "^1.4.2",
         "spryker/documentation-generator-rest-api": "^1.15.0",
@@ -1193,10 +1192,6 @@
         {
             "type": "git",
             "url": "https://github.com/spryker/robotframework-suite-tests.git"
-        },
-        {
-            "type": "git",
-            "url": "git@github.com:spryker/development-core.git"
         }
     ],
     "scripts": {
@@ -1217,6 +1212,15 @@
         "phpstan-setup": "vendor/bin/console dev:ide-auto-completion:generate",
         "prefer-mid": [
             "COMPOSER_MEMORY_LIMIT=-1 composer require twig/twig:\"^2.9.0\""
-        ]
+        ],
+        "auto-scripts": {
+            "cache:clear": "symfony-cmd",
+            "assets:install %PUBLIC_DIR%": "symfony-cmd"
+        }
+    },
+    "extra": {
+        "symfony": {
+            "docker": false
+        }
     }
 }
