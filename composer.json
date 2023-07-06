@@ -336,7 +336,7 @@
         "spryker-shop/content-product-set-widget": "1.4.1",
         "spryker-shop/content-product-widget": "1.2.0",
         "spryker-shop/currency-widget": "1.6.0",
-        "spryker-shop/customer-page": "2.42.0",
+        "spryker-shop/customer-page": "2.42.1",
         "spryker-shop/customer-page-extension": "1.5.0",
         "spryker-shop/customer-reorder-widget": "6.15.0",
         "spryker-shop/customer-reorder-widget-extension": "1.3.0",
@@ -1212,6 +1212,10 @@
         "phpstan-setup": "vendor/bin/console dev:ide-auto-completion:generate",
         "prefer-mid": [
             "COMPOSER_MEMORY_LIMIT=-1 composer require twig/twig:\"^2.9.0\""
-        ]
+        ],
+        "auto-scripts": {
+            "cache:clear": "symfony-cmd",
+            "assets:install %PUBLIC_DIR%": "symfony-cmd"
+        }
     }
 }
