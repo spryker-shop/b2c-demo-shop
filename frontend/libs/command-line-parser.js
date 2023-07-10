@@ -166,7 +166,7 @@ const getAttributes = () => {
     };
 };
 
-if (process.argv.includes('initialize')) {
+if (process.argv.includes('--help') || process.argv.includes('-h')) {
     getAttributes();
 }
 
