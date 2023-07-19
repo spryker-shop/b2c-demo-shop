@@ -13,7 +13,7 @@ use Spryker\Shared\DummyPayment\DummyPaymentConfig;
 class PaymentsRestApiConfig extends SprykerPaymentsRestApiConfig
 {
     /**
-     * @var array
+     * @var array<string, int>
      */
     protected const PAYMENT_METHOD_PRIORITY = [
         DummyPaymentConfig::PAYMENT_METHOD_INVOICE => 1,
@@ -21,7 +21,7 @@ class PaymentsRestApiConfig extends SprykerPaymentsRestApiConfig
     ];
 
     /**
-     * @var array
+     * @var array<string, array<string, array<string>>>
      */
     protected const PAYMENT_METHOD_REQUIRED_FIELDS = [
         DummyPaymentConfig::PROVIDER_NAME => [
