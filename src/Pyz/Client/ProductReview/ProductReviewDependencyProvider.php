@@ -14,6 +14,7 @@ use Spryker\Client\ProductReview\Plugin\Elasticsearch\ResultFormatter\PaginatedP
 use Spryker\Client\ProductReview\Plugin\Elasticsearch\ResultFormatter\ProductRatingAggregationBulkResultFormatterPlugin;
 use Spryker\Client\ProductReview\Plugin\Elasticsearch\ResultFormatter\ProductReviewsResultFormatterPlugin;
 use Spryker\Client\ProductReview\ProductReviewDependencyProvider as SprykerProductReviewDependencyProvider;
+use Spryker\Client\ProductReviewSearch\Plugin\Search\FilterByIdProductReviewQueryExpanderPlugin;
 
 class ProductReviewDependencyProvider extends SprykerProductReviewDependencyProvider
 {
@@ -41,5 +42,16 @@ class ProductReviewDependencyProvider extends SprykerProductReviewDependencyProv
             new PaginatedProductReviewsResultFormatterPlugin(),
             new ProductRatingAggregationBulkResultFormatterPlugin(),
         ];
+    }
+
+    /**
+     * @return list<\Spryker\Client\Search\Dependency\Plugin\QueryExpanderPluginInterface|\Spryker\Client\SearchExtension\Dependency\Plugin\QueryExpanderPluginInterface>
+     */
+    protected function getProductReviewsQueryExpanderPlugins(): array
+    {
+        $productReviewQueryExpanderPlugins = parent::getProductReviewsQueryExpanderPlugins();
+        $productReviewQueryExpanderPlugins[] = new FilterByIdProductReviewQueryExpanderPlugin();
+
+        return $productReviewQueryExpanderPlugins;
     }
 }
