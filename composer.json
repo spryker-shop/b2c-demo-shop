@@ -14,6 +14,7 @@
         "ext-pgsql": "*",
         "ext-readline": "*",
         "ext-redis": "*",
+        "hackweekender-aw/spryker-autowiring": "dev-main",
         "spryker-eco/loggly": "^0.1.1",
         "spryker-feature/agent-assist": "dev-master as 202307.0",
         "spryker-feature/alternative-products": "dev-master as 202307.0",
@@ -1185,7 +1186,8 @@
             "dealerdirect/phpcodesniffer-composer-installer": true,
             "composer/package-versions-deprecated": true,
             "symfony/flex": true,
-            "symfony/runtime": true
+            "symfony/runtime": true,
+            "sllh/composer-versions-check": true
         }
     },
     "repositories": [
@@ -1212,6 +1214,10 @@
         "phpstan-setup": "vendor/bin/console dev:ide-auto-completion:generate",
         "prefer-mid": [
             "COMPOSER_MEMORY_LIMIT=-1 composer require twig/twig:\"^2.9.0\""
-        ]
+        ],
+        "auto-scripts": {
+            "cache:clear": "symfony-cmd",
+            "assets:install %PUBLIC_DIR%": "symfony-cmd"
+        }
     }
 }

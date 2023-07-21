@@ -138,6 +138,7 @@ $config[KernelConstants::CORE_NAMESPACES] = [
     'SprykerEco',
     'Spryker',
     'SprykerSdk',
+    'AW'
 ];
 
 // >>> ROUTER

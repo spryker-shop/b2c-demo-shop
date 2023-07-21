@@ -12,6 +12,8 @@ use Pyz\Zed\Development\Communication\Console\AcceptanceCodeTestConsole;
 use Pyz\Zed\Development\Communication\Console\ApiCodeTestConsole;
 use Pyz\Zed\Development\Communication\Console\FunctionalCodeTestConsole;
 use SecurityChecker\Command\SecurityCheckerCommand;
+use Spryker\Client\ProductStorage\ProductStorageClient;
+use Spryker\Client\Storage\StorageClient;
 use Spryker\Zed\Cache\Communication\Console\EmptyAllCachesConsole;
 use Spryker\Zed\CategoryDataImport\CategoryDataImportConfig;
 use Spryker\Zed\Console\ConsoleDependencyProvider as SprykerConsoleDependencyProvider;
@@ -182,6 +184,21 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
     protected function getConsoleCommands(Container $container): array
     {
         $commands = [
+            new class extends \Spryker\Zed\Kernel\Communication\Console\Console {
+                protected function configure() {
+                    $this->setName('test');
+                    parent::configure();
+                }
+                protected function execute(
+                    \Symfony\Component\Console\Input\InputInterface   $input,
+                    \Symfony\Component\Console\Output\OutputInterface $output
+                ): int {
+
+                    $res = (new ProductStorageClient())->findProductAbstractStorageData(1, 'en');
+
+                    return static::CODE_SUCCESS;
+                }
+            },
             new CacheWarmerConsole(),
             new BuildNavigationConsole(),
             new RemoveNavigationCacheConsole(),
