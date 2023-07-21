@@ -25,7 +25,7 @@ use Orm\Zed\Asset\Persistence\SpyAssetQuery;
  * @method void comment($description)
  * @method void pause()
  *
- * @SuppressWarnings(PHPMD)
+ * @SuppressWarnings(\PyzTest\Zed\Asset\PHPMD)
  */
 class AssetTester extends Actor
 {

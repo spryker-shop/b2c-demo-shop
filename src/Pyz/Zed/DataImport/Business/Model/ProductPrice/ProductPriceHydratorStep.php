@@ -352,7 +352,7 @@ class ProductPriceHydratorStep implements DataImportStepInterface
     /**
      * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
      *
-     * @return array
+     * @return array<string, mixed>
      */
     protected function getPriceData(DataSetInterface $dataSet): array
     {
@@ -403,11 +403,11 @@ class ProductPriceHydratorStep implements DataImportStepInterface
     }
 
     /**
-     * @param array $priceData
+     * @param array<string, mixed> $priceData
      * @param string $key
      * @param string $value
      *
-     * @return array
+     * @return array<string, mixed>
      */
     protected function addPriceDataValue(array $priceData, string $key, string $value): array
     {

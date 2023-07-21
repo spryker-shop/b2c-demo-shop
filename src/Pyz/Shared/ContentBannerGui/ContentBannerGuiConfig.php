@@ -36,7 +36,7 @@ class ContentBannerGuiConfig extends SprykerContentBannerGuiConfig
     protected const PYZ_WIDGET_TEMPLATE_DISPLAY_NAME_SLIDER_WITHOUT_LINK = 'content_banner.template.slider-without-link';
 
     /**
-     * @return array
+     * @return array<string, string>
      */
     public function getContentWidgetTemplates(): array
     {

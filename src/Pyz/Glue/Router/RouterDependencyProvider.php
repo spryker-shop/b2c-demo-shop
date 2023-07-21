@@ -13,7 +13,7 @@ use Spryker\Glue\Router\RouterDependencyProvider as SprykerRouterDependencyProvi
 class RouterDependencyProvider extends SprykerRouterDependencyProvider
 {
     /**
-     * @return array
+     * @return array<\Spryker\Glue\RouterExtension\Dependency\Plugin\RouterPluginInterface|\Spryker\Glue\Kernel\AbstractPlugin>
      */
     protected function getRouterPlugins(): array
     {

@@ -36,8 +36,7 @@ FOSS.md
 
 /data/*
 !/data/import/
-!/data/translation/
-!/data/export
+!/data/export/
 
 # grunt stuff
 .grunt
@@ -47,11 +46,10 @@ config/Yves/cache_bust.php
 /node_modules/
 
 # public stuff
-/public/*/assets/
-/public/*/dist/
+public/*/assets/
+public/Configurator/dist/
 
 # docker stuff
-/docker/
 /.docker-sync/
 /.unison*
 /deploy.local.yml
@@ -91,4 +89,15 @@ composer.phar
 c3.php
 .phpstorm.meta.php
 .githook_local
-/architecture-baseline.json
+
+# Yarn
+.yarn/*
+!.yarn/releases/
+!.yarn/plugins/
+
+# Docker
+docker
+
+# angular
+/.angular/cache
+/.angular

@@ -105,7 +105,7 @@ class CombinedProductAbstractHydratorStep extends ProductAbstractHydratorStep
     protected const ASSIGNABLE_PRODUCT_TYPE_BOTH = 'both';
 
     /**
-     * @var array
+     * @var array<string>
      */
     protected const ASSIGNABLE_PRODUCT_TYPES = [
         self::ASSIGNABLE_PRODUCT_TYPE_ABSTRACT,

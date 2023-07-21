@@ -114,7 +114,7 @@ class ProductAbstractRelationReader implements ProductAbstractRelationReaderInte
     /**
      * @param \Orm\Zed\ProductLabel\Persistence\SpyProductLabel $productLabelEntity
      *
-     * @return array
+     * @return array<int, array<int>>
      */
     protected function findRelationsBecomingInactive(SpyProductLabel $productLabelEntity): array
     {
@@ -137,7 +137,7 @@ class ProductAbstractRelationReader implements ProductAbstractRelationReaderInte
     /**
      * @param \Orm\Zed\ProductLabel\Persistence\SpyProductLabel $productLabelEntity
      *
-     * @return array
+     * @return array<int, array<int>>
      */
     protected function findRelationsBecomingActive(SpyProductLabel $productLabelEntity): array
     {
@@ -167,8 +167,8 @@ class ProductAbstractRelationReader implements ProductAbstractRelationReaderInte
 
     /**
      * @param int $idProductLabel
-     * @param array $relationsToAssign
-     * @param array $relationsToDeAssign
+     * @param array<int, array<int>> $relationsToAssign
+     * @param array<int, array<int>> $relationsToDeAssign
      *
      * @return \Generated\Shared\Transfer\ProductLabelProductAbstractRelationsTransfer
      */
