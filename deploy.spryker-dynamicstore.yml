@@ -44,12 +44,12 @@ environment: docker.production
 image:
     tag: spryker/php:8.1
     environment:
-        SPRYKER_PRODUCT_CONFIGURATOR_HOST: date-time-configurator-example.dynamicstore.demo-spryker.com
+        SPRYKER_PRODUCT_CONFIGURATOR_HOST: date-time-configurator-example.dynamic-store.demo-spryker.com
         SPRYKER_PRODUCT_CONFIGURATOR_PORT: 80
         SPRYKER_PRODUCT_CONFIGURATOR_ENCRYPTION_KEY: 'change123'
         SPRYKER_PRODUCT_CONFIGURATOR_HEX_INITIALIZATION_VECTOR: '0c1ffefeebdab4a3d839d0e52590c9a2'
         SPRYKER_DYNAMIC_STORE_MODE: true
-        SPRYKER_YVES_HOST_EU: yves.eu.dynamicstore.demo-spryker.com
+        SPRYKER_YVES_HOST_EU: yves.eu.dynamic-store.demo-spryker.com
     node:
         version: 18
         npm: 9
@@ -72,7 +72,7 @@ regions:
             mail:
                 sender:
                     name: Spryker No-Reply
-                    email: no-reply@dynamicstore.demo-spryker.com
+                    email: no-reply@dynamic-store.demo-spryker.com
             database:
                 database: eu-docker
                 username: spryker
@@ -92,7 +92,7 @@ groups:
             mportal:
                 application: merchant-portal
                 endpoints:
-                    mp.eu.dynamicstore.demo-spryker.com:
+                    mp.eu.dynamic-store.demo-spryker.com:
                         region: EU
                         <<: *frontend-auth
                         entry-point: MerchantPortal
@@ -103,7 +103,7 @@ groups:
             Yves:
                 application: yves
                 endpoints:
-                    yves.eu.dynamicstore.demo-spryker.com:
+                    yves.eu.dynamic-store.demo-spryker.com:
                         region: EU
                         <<: *frontend-auth
                         services:
@@ -112,12 +112,12 @@ groups:
             Glue:
                 application: glue
                 endpoints:
-                    glue.eu.dynamicstore.demo-spryker.com:
+                    glue.eu.dynamic-store.demo-spryker.com:
                         region: EU
             boffice:
                 application: backoffice
                 endpoints:
-                    backoffice.eu.dynamicstore.demo-spryker.com:
+                    backoffice.eu.dynamic-store.demo-spryker.com:
                         region: EU
                         <<: *frontend-auth
                         primal: true
@@ -127,24 +127,24 @@ groups:
             backgw:
                 application: backend-gateway
                 endpoints:
-                    backend-gateway.eu.dynamicstore.demo-spryker.com:
+                    backend-gateway.eu.dynamic-store.demo-spryker.com:
                         region: EU
                         primal: true
             backapi:
                 application: zed
                 endpoints:
-                    backend-api.eu.dynamicstore.demo-spryker.com:
+                    backend-api.eu.dynamic-store.demo-spryker.com:
                         region: EU
                         entry-point: BackendApi
             glue_storefront:
                 application: glue-storefront
                 endpoints:
-                    glue-storefront.eu.dynamicstore.demo-spryker.com:
+                    glue-storefront.eu.dynamic-store.demo-spryker.com:
                         region: EU
             glue_backend:
                 application: glue-backend
                 endpoints:
-                    glue-backend.eu.dynamicstore.demo-spryker.com:
+                    glue-backend.eu.dynamic-store.demo-spryker.com:
                         region: EU
 
 services:
@@ -164,7 +164,7 @@ services:
             username: 'spryker'
             password: 'secret'
         endpoints:
-            queue.dynamicstore.demo-spryker.com:
+            queue.dynamic-store.demo-spryker.com:
             localhost:5672:
                 protocol: tcp
     session:
@@ -185,23 +185,23 @@ services:
         version: '2.324'
         csrf-protection-enabled: true
         endpoints:
-            scheduler.dynamicstore.demo-spryker.com:
+            scheduler.dynamic-store.demo-spryker.com:
     mail_catcher:
         engine: mailhog
         endpoints:
-            mail.dynamicstore.demo-spryker.com:
+            mail.dynamic-store.demo-spryker.com:
     swagger:
         engine: swagger-ui
         endpoints:
-            swagger.dynamicstore.demo-spryker.com:
+            swagger.dynamic-store.demo-spryker.com:
     redis-gui:
         engine: redis-commander
         endpoints:
-            redis-commander.dynamicstore.demo-spryker.com:
+            redis-commander.dynamic-store.demo-spryker.com:
     dashboard:
         engine: dashboard
         endpoints:
-            dynamicstore.demo-spryker.com:
+            dynamic-store.demo-spryker.com:
     webdriver:
         engine: chromedriver
 
@@ -218,12 +218,4 @@ docker:
     testing:
         region: EU
     mount:
-        native:
-            platforms:
-                - linux
-        docker-sync:
-            platforms:
-                - windows
-        mutagen:
-            platforms:
-                - macos
+        baked:
