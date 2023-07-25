@@ -150,14 +150,15 @@ if (!getenv('SPRYKER_SSL_ENABLE')) {
 // ------------------------------ Twig -----------------------------------------
 // ----------------------------------------------------------------------------
 
-$CURRENT_STORE = Store::getInstance()->getStoreName();
+//$CURRENT_STORE = Store::getInstance()->getStoreName();
 
 $config[TwigConstants::ZED_TWIG_OPTIONS] = [
     'cache' => new FilesystemCache(
         sprintf(
-            '%s/data/%s/cache/Zed/twig',
+            '%s/data/%s/cache/%s/twig',
             APPLICATION_ROOT_DIR,
-            $CURRENT_STORE,
+            APPLICATION_CODE_BUCKET,
+            APPLICATION,
         ),
         FilesystemCache::FORCE_BYTECODE_INVALIDATION,
     ),
@@ -166,9 +167,10 @@ $config[TwigConstants::ZED_TWIG_OPTIONS] = [
 $config[TwigConstants::YVES_TWIG_OPTIONS] = [
     'cache' => new FilesystemCache(
         sprintf(
-            '%s/data/%s/cache/Yves/twig',
+            '%s/data/%s/cache/%s/twig',
             APPLICATION_ROOT_DIR,
-            $CURRENT_STORE,
+            APPLICATION_CODE_BUCKET,
+            APPLICATION,
         ),
         FilesystemCache::FORCE_BYTECODE_INVALIDATION,
     ),
