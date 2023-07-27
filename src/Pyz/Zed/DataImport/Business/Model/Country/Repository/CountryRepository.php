@@ -13,7 +13,7 @@ use Orm\Zed\Country\Persistence\SpyCountryQuery;
 class CountryRepository implements CountryRepositoryInterface
 {
     /**
-     * @var \ArrayObject
+     * @var \ArrayObject<string, int>
      */
     protected $countryIds;
 

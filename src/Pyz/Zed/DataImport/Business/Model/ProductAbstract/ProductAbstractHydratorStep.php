@@ -229,7 +229,7 @@ class ProductAbstractHydratorStep implements DataImportStepInterface
                 ->setMetaDescription($localizedAttributes[static::COLUMN_META_DESCRIPTION])
                 ->setMetaKeywords($localizedAttributes[static::COLUMN_META_KEYWORDS])
                 ->setFkLocale($idLocale)
-                ->setAttributes(json_encode($localizedAttributes[static::KEY_ATTRIBUTES]));
+                ->setAttributes((string)json_encode($localizedAttributes[static::KEY_ATTRIBUTES]));
 
             $localizedAttributeTransfer[] = [
                 static::COLUMN_ABSTRACT_SKU => $dataSet[static::COLUMN_ABSTRACT_SKU],
@@ -262,16 +262,12 @@ class ProductAbstractHydratorStep implements DataImportStepInterface
                 ));
             }
 
-            $productOrder = 0;
+            $productCategoryEntityTransfer = (new SpyProductCategoryEntityTransfer())
+                ->setFkCategory($dataSet[static::COLUMN_CATEGORY_KEYS][$categoryKey]);
 
-            if (count($categoryProductOrder) && isset($categoryProductOrder[$index])) {
-                $productOrder = (int)$categoryProductOrder[$index];
+            if (count($categoryProductOrder) && isset($categoryProductOrder[$index]) && $categoryProductOrder[$index] !== '') {
+                $productCategoryEntityTransfer->setProductOrder((int)$categoryProductOrder[$index]);
             }
-
-            $productCategoryEntityTransfer = new SpyProductCategoryEntityTransfer();
-            $productCategoryEntityTransfer
-                ->setFkCategory($dataSet[static::COLUMN_CATEGORY_KEYS][$categoryKey])
-                ->setProductOrder($productOrder);
 
             $productCategoryTransfers[] = [
                 static::COLUMN_ABSTRACT_SKU => $dataSet[static::COLUMN_ABSTRACT_SKU],
@@ -312,7 +308,7 @@ class ProductAbstractHydratorStep implements DataImportStepInterface
     /**
      * @param string $categoryKeys
      *
-     * @return array
+     * @return array<string>
      */
     protected function getCategoryKeys($categoryKeys): array
     {
@@ -324,7 +320,7 @@ class ProductAbstractHydratorStep implements DataImportStepInterface
     /**
      * @param string $categoryProductOrder
      *
-     * @return array
+     * @return array<string>
      */
     protected function getCategoryProductOrder($categoryProductOrder): array
     {

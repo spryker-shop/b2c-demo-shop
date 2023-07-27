@@ -36,7 +36,7 @@ class LocaleNameToIdLocaleStep implements DataImportStepInterface
     protected $target;
 
     /**
-     * @var array
+     * @var array<string, int>
      */
     protected $resolved = [];
 
@@ -67,11 +67,13 @@ class LocaleNameToIdLocaleStep implements DataImportStepInterface
             ));
         }
 
-        if (!isset($this->resolved[$dataSet[$this->source]])) {
-            $this->resolved[$dataSet[$this->source]] = $this->resolveIdLocale($dataSet[$this->source]);
+        /** @var string $localeName */
+        $localeName = $dataSet[$this->source];
+        if (!isset($this->resolved[$localeName])) {
+            $this->resolved[$localeName] = $this->resolveIdLocale($localeName);
         }
 
-        $dataSet[$this->target] = $this->resolved[$dataSet[$this->source]];
+        $dataSet[$this->target] = $this->resolved[$localeName];
     }
 
     /**

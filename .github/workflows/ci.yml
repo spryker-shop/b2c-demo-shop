@@ -34,7 +34,7 @@ jobs:
                 options: --health-cmd="redis-cli ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
         steps:
-            - uses: actions/checkout@v2
+            - uses: actions/checkout@v3
 
             - name: Configure sysctl limits
               run: |
@@ -49,17 +49,9 @@ jobs:
                   stack-version: 7.10.0
                   port: 9200
 
-            - uses: actions/setup-node@v1
+            - uses: actions/setup-node@v3
               with:
-                  node-version: '16'
-
-            - name: NPM cache
-              uses: actions/cache@v2
-              with:
-                  path: ~/.npm
-                  key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-                  restore-keys: |
-                      ${{ runner.os }}-node-
+                  node-version: '18'
 
             - name: Setup PHP
               uses: shivammathur/setup-php@v2
@@ -71,10 +63,10 @@ jobs:
             - name: Composer get cache directory
               id: composer-cache
               run: |
-                  echo "::set-output name=dir::$(composer config cache-files-dir)"
+                  echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
 
             - name: Composer cache
-              uses: actions/cache@v2
+              uses: actions/cache@v3
               with:
                   path: ${{ steps.composer-cache.outputs.dir }}
                   key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
@@ -126,13 +118,13 @@ jobs:
               run: speccy lint src/Generated/Glue/Specification/spryker_rest_api.schema.yml --rules=default
 
             - name: Style lint
-              run: node ./frontend/libs/stylelint
+              run: npm run yves:stylelint
 
-            - name: TS lint
-              run: node ./frontend/libs/tslint --format stylish
+            - name: ES lint
+              run: npm run yves:lint
 
             - name: Front-end Formatter
-              run: node ./frontend/libs/formatter
+              run: npm run formatter
 
             - name: Validate propel files
               run: |
@@ -149,10 +141,10 @@ jobs:
               run: vendor/bin/phpmd src/ text vendor/spryker/architecture-sniffer/src/ruleset.xml --minimumpriority 2
 
             - name: Run PHPStan
-              run: vendor/bin/phpstan analyze -l 5 -c phpstan.neon src/
+              run: vendor/bin/phpstan analyze -l 6 -c phpstan.neon src/
 
-            - name: Run Security check
-              run: vendor/bin/console security:check
+            - name: Run Evaluator
+              run: vendor/bin/evaluator evaluate
 
     php-81-mariadb-glue-alpine:
         name: "PHP 8.1 / MariaDB / Glue / Alpine"
@@ -163,7 +155,7 @@ jobs:
             TRAVIS: 1
 
         steps:
-            - uses: actions/checkout@v2
+            - uses: actions/checkout@v3
 
             - name: Install apt-packages
               run: |
@@ -181,6 +173,33 @@ jobs:
                   docker/sdk testing console queue:worker:start --stop-when-empty
                   docker/sdk testing codecept run -c codeception.api.yml
 
+    php-81-postgresql-glue-alpine:
+        name: "PHP 8.1 / PostgreSQL / Glue / Alpine"
+        runs-on: ubuntu-20.04
+        env:
+            PROGRESS_TYPE: plain
+            SPRYKER_PLATFORM_IMAGE: spryker/php:8.1
+            TRAVIS: 1
+
+        steps:
+            - uses: actions/checkout@v3
+
+            - name: Install apt-packages
+              run: |
+                  sudo apt-get install apache2-utils
+            - name: Install docker-compose
+              run: |
+                  sudo curl -L "https://github.com/docker/compose/releases/download/2.12.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+                  sudo chmod +x /usr/local/bin/docker-compose
+            - name: Run docker
+              run: |
+                  git clone https://github.com/spryker/docker-sdk.git ./docker
+                  docker/sdk boot deploy.ci.api.yml -v
+                  docker/sdk up -t -v
+                  docker/sdk testing codecept fixtures
+                  docker/sdk testing console queue:worker:start --stop-when-empty
+                  docker/sdk testing codecept run -c codeception.api.yml
+
     php-81-mariadb-acceptance-alpine:
         name: "PHP 8.1 / MariaDB / Acceptance / Alpine"
         runs-on: ubuntu-20.04
@@ -190,7 +209,7 @@ jobs:
             TRAVIS: 1
 
         steps:
-            - uses: actions/checkout@v2
+            - uses: actions/checkout@v3
 
             - name: Install apt-packages
               run: |
@@ -207,6 +226,32 @@ jobs:
                   docker/sdk testing console queue:worker:start --stop-when-empty
                   docker/sdk testing codecept run -c codeception.acceptance.yml
 
+    php-81-postgresql-acceptance-alpine:
+        name: "PHP 8.1 / PostgreSQL / Acceptance / Alpine"
+        runs-on: ubuntu-20.04
+        env:
+            PROGRESS_TYPE: plain
+            SPRYKER_PLATFORM_IMAGE: spryker/php:8.1
+            TRAVIS: 1
+
+        steps:
+            - uses: actions/checkout@v3
+
+            - name: Install apt-packages
+              run: |
+                  sudo apt-get install apache2-utils
+            - name: Install docker-compose
+              run: |
+                  sudo curl -L "https://github.com/docker/compose/releases/download/2.12.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+                  sudo chmod +x /usr/local/bin/docker-compose
+            - name: Run docker
+              run: |
+                  git clone https://github.com/spryker/docker-sdk.git ./docker
+                  docker/sdk boot -v deploy.ci.acceptance.yml
+                  docker/sdk up -t
+                  docker/sdk testing console queue:worker:start --stop-when-empty
+                  docker/sdk testing codecept run -c codeception.acceptance.yml
+
     php-81-mariadb-functional-alpine:
         name: "PHP 8.1 / MariaDB / Functional / Alpine"
         runs-on: ubuntu-20.04
@@ -216,7 +261,7 @@ jobs:
             TRAVIS: 1
 
         steps:
-            - uses: actions/checkout@v2
+            - uses: actions/checkout@v3
 
             - name: Install apt-packages
               run: |
@@ -231,6 +276,33 @@ jobs:
                   docker/sdk boot deploy.ci.functional.mariadb.yml -v
                   docker/sdk up -t -v
                   docker/sdk testing codecept run -c codeception.functional.yml
+
+    php-81-postgresql-functional-alpine:
+        name: "PHP 8.1 / PostgreSQL / Functional / Alpine"
+        runs-on: ubuntu-20.04
+        env:
+            PROGRESS_TYPE: plain
+            SPRYKER_PLATFORM_IMAGE: spryker/php:8.1
+            TRAVIS: 1
+
+        steps:
+            - uses: actions/checkout@v3
+
+            - name: Install apt-packages
+              run: |
+                  sudo apt-get install apache2-utils
+            - name: Install docker-compose
+              run: |
+                  sudo curl -L "https://github.com/docker/compose/releases/download/2.12.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+                  sudo chmod +x /usr/local/bin/docker-compose
+            - name: Run docker
+              run: |
+                  git clone https://github.com/spryker/docker-sdk.git ./docker
+                  docker/sdk boot -v deploy.ci.functional.yml
+                  docker/sdk up -t
+                  docker/sdk testing console queue:worker:start --stop-when-empty
+                  docker/sdk testing codecept run -c codeception.functional.yml
+
     php-80-mariadb-glue-alpine:
         name: "PHP 8.0 / MariaDB / Glue / Alpine"
         runs-on: ubuntu-20.04
@@ -240,7 +312,7 @@ jobs:
             TRAVIS: 1
 
         steps:
-            - uses: actions/checkout@v2
+            - uses: actions/checkout@v3
 
             - name: Install apt-packages
               run: |
@@ -269,7 +341,7 @@ jobs:
             TRAVIS: 1
 
         steps:
-            - uses: actions/checkout@v2
+            - uses: actions/checkout@v3
 
             - name: Install apt-packages
               run: |
@@ -298,7 +370,7 @@ jobs:
             TRAVIS: 1
 
         steps:
-            - uses: actions/checkout@v2
+            - uses: actions/checkout@v3
 
             - name: Install apt-packages
               run: |
@@ -326,7 +398,7 @@ jobs:
             TRAVIS: 1
 
         steps:
-            - uses: actions/checkout@v2
+            - uses: actions/checkout@v3
 
             - name: Install apt-packages
               run: |
@@ -355,7 +427,7 @@ jobs:
             TRAVIS: 1
 
         steps:
-            - uses: actions/checkout@v2
+            - uses: actions/checkout@v3
 
             - name: Install apt-packages
               run: |
@@ -383,7 +455,7 @@ jobs:
             TRAVIS: 1
 
         steps:
-            - uses: actions/checkout@v2
+            - uses: actions/checkout@v3
 
             - name: Install apt-packages
               run: |
@@ -408,7 +480,7 @@ jobs:
             PROGRESS_TYPE: plain
             SPRYKER_PLATFORM_IMAGE: spryker/php:8.0
         steps:
-            - uses: actions/checkout@v2
+            - uses: actions/checkout@v3
             - run: echo eyAiZXhwZXJpbWVudGFsIiA6IHRydWUsICJmZWF0dXJlcyIgOiB7ICJidWlsZGtpdCI6IHRydWUgfSB9Cg==|base64 -d|sudo tee /etc/docker/daemon.json
             - run: sudo apt-get install --only-upgrade docker -y
             - run: sudo curl -L "https://github.com/docker/compose/releases/download/2.12.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
@@ -429,7 +501,7 @@ jobs:
             TRAVIS: 1
             ROBOT_TESTS_ARTIFACTS_BUCKET_REGION: eu-west-1
         steps:
-            - uses: actions/checkout@v2
+            - uses: actions/checkout@v3
 
             - uses: actions/setup-python@v4
               with:
@@ -437,6 +509,7 @@ jobs:
 
             - name: Install packages
               run: |
+                  sudo apt-get update
                   sudo apt-get install apache2-utils
                   sudo apt install awscli -q
                   python3 -m pip install --upgrade pip
@@ -480,7 +553,7 @@ jobs:
             TRAVIS: 1
             ROBOT_TESTS_ARTIFACTS_BUCKET_REGION: eu-west-1
         steps:
-            - uses: actions/checkout@v2
+            - uses: actions/checkout@v3
 
             - uses: actions/setup-python@v4
               with:
@@ -488,6 +561,7 @@ jobs:
 
             - name: Install packages
               run: |
+                  sudo apt-get update
                   sudo apt-get install apache2-utils
                   sudo apt install awscli -q
                   python3 -m pip install --upgrade pip

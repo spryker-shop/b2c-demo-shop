@@ -40,9 +40,15 @@
                         },
                     } only %}{% endwidget %}
                 </div>
-
                 <div class="{{ config.name }}__select">
                     {%- widget 'CurrencyWidget' with {
+                        data: {
+                            additionalClassName: config.name,
+                        },
+                    } only -%}{%- endwidget -%}
+                </div>
+                <div class="{{ config.name }}__select">
+                    {%- widget 'StoreSwitcher' with {
                         data: {
                             additionalClassName: config.name,
                         },

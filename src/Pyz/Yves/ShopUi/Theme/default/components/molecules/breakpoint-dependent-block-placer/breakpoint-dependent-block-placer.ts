@@ -9,9 +9,9 @@ interface BlockMovingInterface {
 }
 
 export default class BreakpointDependentBlockPlacer extends Component {
-    protected data: Object[];
+    protected data: BlockMovingInterface[];
     protected blocks: HTMLElement[];
-    protected timeout: number = 300;
+    protected timeout = 300;
 
     protected readyCallback(): void {}
 

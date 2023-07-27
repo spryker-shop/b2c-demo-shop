@@ -30,7 +30,7 @@ use Orm\Zed\Navigation\Persistence\SpyNavigationQuery;
  * @method void comment($description)
  * @method \Codeception\Lib\Friend haveFriend($name, $actorClass = NULL)
  *
- * @SuppressWarnings(PHPMD)
+ * @SuppressWarnings(\PyzTest\Zed\NavigationGui\PHPMD)
  */
 class NavigationGuiPresentationTester extends Actor
 {

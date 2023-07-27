@@ -4,8 +4,6 @@ import AjaxProvider from 'ShopUi/components/molecules/ajax-provider/ajax-provide
 export default class AutocompleteForm extends AutocompleteFormCore {
     protected parentWrap: HTMLElement;
 
-    protected readyCallback(): void {}
-
     protected init(): void {
         if (this.parentWrapClassName) {
             this.parentWrap = <HTMLElement>document.getElementsByClassName(`${this.parentWrapClassName}`)[0];

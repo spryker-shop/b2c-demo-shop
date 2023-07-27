@@ -76,7 +76,7 @@ class ProductReviewForm extends AbstractType
 
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     * @param array $options
+     * @param array<mixed> $options
      *
      * @return $this
      */
@@ -134,7 +134,7 @@ class ProductReviewForm extends AbstractType
      *  [-1 => 'none', 1 => 1, 2 => 2]
      * @see ProductReviewForm::PYZ_UNSELECTED_RATING
      *
-     * @return array
+     * @return array<mixed>
      */
     protected function getPyzRatingFieldChoices(): array
     {

@@ -119,7 +119,7 @@ class SubmitController extends SprykerSubmitController
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
-     * @return array
+     * @return array<mixed>
      */
     protected function executePyzIndexAction(Request $request): array
     {

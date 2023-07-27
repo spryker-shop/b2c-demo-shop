@@ -13,6 +13,8 @@ use Spryker\Glue\GlueApplication\GlueApplicationConfig as SprykerGlueApplication
 class GlueApplicationConfig extends SprykerGlueApplicationConfig
 {
     /**
+     * @deprecated Will be removed without replacement.
+     *
      * @var bool
      */
     public const VALIDATE_REQUEST_HEADERS = false;
@@ -29,10 +31,28 @@ class GlueApplicationConfig extends SprykerGlueApplicationConfig
     }
 
     /**
+     * @deprecated Will be removed without replacement.
+     *
      * @return bool
      */
     public function isEagerRelationshipsLoadingEnabled(): bool
     {
         return false;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isConfigurableResponseEnabled(): bool
+    {
+        return true;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isTerminationEnabled(): bool
+    {
+        return true;
     }
 }

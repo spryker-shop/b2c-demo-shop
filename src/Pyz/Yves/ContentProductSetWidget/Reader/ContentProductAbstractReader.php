@@ -27,7 +27,7 @@ class ContentProductAbstractReader implements ContentProductAbstractReaderInterf
 
     /**
      * @param \Generated\Shared\Transfer\ProductSetDataStorageTransfer $productSetDataStorageTransfer
-     * @param array $selectedAttributes
+     * @param array<mixed> $selectedAttributes
      * @param string $localeName
      *
      * @return array<\Generated\Shared\Transfer\ProductViewTransfer>
@@ -56,9 +56,9 @@ class ContentProductAbstractReader implements ContentProductAbstractReaderInterf
 
     /**
      * @param int $idProductAbstract
-     * @param array $selectedAttributes
+     * @param array<mixed> $selectedAttributes
      *
-     * @return array
+     * @return array<mixed>
      */
     protected function getSelectedAttributesByIdProductAbstract(int $idProductAbstract, array $selectedAttributes): array
     {

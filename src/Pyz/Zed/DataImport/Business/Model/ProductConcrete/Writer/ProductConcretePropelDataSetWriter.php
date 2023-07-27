@@ -7,12 +7,15 @@
 
 namespace Pyz\Zed\DataImport\Business\Model\ProductConcrete\Writer;
 
+use Generated\Shared\Transfer\EventEntityTransfer;
 use Generated\Shared\Transfer\SpyProductEntityTransfer;
 use Generated\Shared\Transfer\SpyProductSearchEntityTransfer;
 use Orm\Zed\Product\Persistence\SpyProduct;
 use Orm\Zed\Product\Persistence\SpyProductLocalizedAttributesQuery;
 use Orm\Zed\Product\Persistence\SpyProductQuery;
 use Orm\Zed\ProductBundle\Persistence\SpyProductBundleQuery;
+use Orm\Zed\ProductSearch\Persistence\Map\SpyProductSearchTableMap;
+use Orm\Zed\ProductSearch\Persistence\SpyProductSearch;
 use Orm\Zed\ProductSearch\Persistence\SpyProductSearchQuery;
 use Pyz\Zed\DataImport\Business\Model\Product\Repository\ProductRepositoryInterface;
 use Pyz\Zed\DataImport\Business\Model\ProductConcrete\ProductConcreteHydratorStep;
@@ -20,6 +23,7 @@ use Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface;
 use Spryker\Zed\DataImport\Business\Model\DataSet\DataSetWriterInterface;
 use Spryker\Zed\DataImport\Business\Model\Publisher\DataImporterPublisher;
 use Spryker\Zed\Product\Dependency\ProductEvents;
+use Spryker\Zed\ProductSearch\Dependency\ProductSearchEvents;
 
 class ProductConcretePropelDataSetWriter implements DataSetWriterInterface
 {
@@ -183,15 +187,51 @@ class ProductConcretePropelDataSetWriter implements DataSetWriterInterface
             ->findOneOrCreate();
         $productSearchEntity->fromArray($productSearchEntityTransfer->modifiedToArray());
 
-        if ($productSearchEntity->isNew() || $productSearchEntity->isModified()) {
+        $isNewProductSearchEntity = $productSearchEntity->isNew();
+        if ($isNewProductSearchEntity || $productSearchEntity->isModified()) {
             $productSearchEntity->save();
+            $eventEntityTransfer = $this->mapProductSearchEntityToEventEntityTransfer(
+                $productSearchEntity,
+                $isNewProductSearchEntity,
+                new EventEntityTransfer(),
+            );
+            DataImporterPublisher::addEvent($eventEntityTransfer->getEvent(), $eventEntityTransfer->getId(), $eventEntityTransfer);
         }
+    }
+
+    /**
+     * @param \Orm\Zed\ProductSearch\Persistence\SpyProductSearch $productSearchEntity
+     * @param bool $isNewProductSearchEntity
+     * @param \Generated\Shared\Transfer\EventEntityTransfer $eventEntityTransfer
+     *
+     * @return \Generated\Shared\Transfer\EventEntityTransfer
+     */
+    protected function mapProductSearchEntityToEventEntityTransfer(
+        SpyProductSearch $productSearchEntity,
+        bool $isNewProductSearchEntity,
+        EventEntityTransfer $eventEntityTransfer,
+    ): EventEntityTransfer {
+        return $eventEntityTransfer
+            ->setId($productSearchEntity->getIdProductSearch())
+            ->setEvent(
+                $isNewProductSearchEntity
+                    ? ProductSearchEvents::ENTITY_SPY_PRODUCT_SEARCH_CREATE
+                    : ProductSearchEvents::ENTITY_SPY_PRODUCT_SEARCH_UPDATE,
+            )
+            ->setName(SpyProductSearchTableMap::TABLE_NAME)
+            ->setForeignKeys([
+                SpyProductSearchTableMap::COL_FK_PRODUCT => $productSearchEntity->getFkProduct(),
+                SpyProductSearchTableMap::COL_FK_LOCALE => $productSearchEntity->getFkLocale(),
+            ])
+            ->setModifiedColumns([
+                SpyProductSearchTableMap::COL_IS_SEARCHABLE,
+            ]);
     }
 
     /**
      * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
      *
-     * @return array
+     * @return array<string, mixed>
      */
     protected function getProductConcreteBundleData(DataSetInterface $dataSet): array
     {
@@ -201,7 +241,7 @@ class ProductConcretePropelDataSetWriter implements DataSetWriterInterface
     /**
      * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
      *
-     * @return array
+     * @return array<string, mixed>
      */
     protected function getProductConcreteLocalizedTransfers(DataSetInterface $dataSet): array
     {

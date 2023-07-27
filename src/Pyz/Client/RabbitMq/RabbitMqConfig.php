@@ -19,6 +19,7 @@ use Spryker\Shared\ConfigurableBundlePageSearch\ConfigurableBundlePageSearchConf
 use Spryker\Shared\ConfigurableBundleStorage\ConfigurableBundleStorageConfig;
 use Spryker\Shared\ContentStorage\ContentStorageConfig;
 use Spryker\Shared\CustomerAccessStorage\CustomerAccessStorageConstants;
+use Spryker\Shared\CustomerStorage\CustomerStorageConfig;
 use Spryker\Shared\Event\EventConfig;
 use Spryker\Shared\Event\EventConstants;
 use Spryker\Shared\FileManagerStorage\FileManagerStorageConstants;
@@ -36,7 +37,10 @@ use Spryker\Shared\PublishAndSynchronizeHealthCheck\PublishAndSynchronizeHealthC
 use Spryker\Shared\PublishAndSynchronizeHealthCheckSearch\PublishAndSynchronizeHealthCheckSearchConfig;
 use Spryker\Shared\PublishAndSynchronizeHealthCheckStorage\PublishAndSynchronizeHealthCheckStorageConfig;
 use Spryker\Shared\Publisher\PublisherConfig;
+use Spryker\Shared\RabbitMq\RabbitMqEnv;
 use Spryker\Shared\SalesReturnSearch\SalesReturnSearchConfig;
+use Spryker\Shared\SearchHttp\SearchHttpConfig;
+use Spryker\Shared\StoreStorage\StoreStorageConfig;
 use Spryker\Shared\TaxProductStorage\TaxProductStorageConfig;
 use Spryker\Shared\TaxStorage\TaxStorageConfig;
 use Spryker\Shared\UrlStorage\UrlStorageConfig;
@@ -48,6 +52,24 @@ use Spryker\Shared\UrlStorage\UrlStorageConstants;
 class RabbitMqConfig extends SprykerRabbitMqConfig
 {
     /**
+     * @return array<string, array<int, string>>
+     */
+    public function getQueuePools(): array
+    {
+        return [
+            'synchronizationPool' => $this->getQueueConnectionNames(),
+        ];
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getDefaultLocaleCode(): ?string
+    {
+        return 'en_US';
+    }
+
+    /**
      *  QueueNameFoo, // Queue => QueueNameFoo, (Queue and error queue will be created: QueueNameFoo and QueueNameFoo.error)
      *  QueueNameBar => [
      *       RoutingKeyFoo => QueueNameBaz, // (Additional queues can be defined by several routing keys)
@@ -55,7 +77,7 @@ class RabbitMqConfig extends SprykerRabbitMqConfig
      *
      * @see https://www.rabbitmq.com/tutorials/amqp-concepts.html
      *
-     * @return array
+     * @return array<mixed>
      */
     protected function getQueueConfiguration(): array
     {
@@ -73,7 +95,7 @@ class RabbitMqConfig extends SprykerRabbitMqConfig
     }
 
     /**
-     * @return array
+     * @return array<mixed>
      */
     protected function getPyzPublishQueueConfiguration(): array
     {
@@ -94,11 +116,12 @@ class RabbitMqConfig extends SprykerRabbitMqConfig
             ProductPageSearchConfig::PUBLISH_PRODUCT_CONCRETE_PAGE,
             ProductStorageConfig::PUBLISH_PRODUCT_ABSTRACT,
             ProductStorageConfig::PUBLISH_PRODUCT_CONCRETE,
+            CustomerStorageConfig::PUBLISH_CUSTOMER_INVALIDATED,
         ];
     }
 
     /**
-     * @return array
+     * @return array<mixed>
      */
     protected function getPyzSynchronizationQueueConfiguration(): array
     {
@@ -109,6 +132,7 @@ class RabbitMqConfig extends SprykerRabbitMqConfig
             UrlStorageConstants::URL_SYNC_STORAGE_QUEUE,
             AvailabilityStorageConstants::AVAILABILITY_SYNC_STORAGE_QUEUE,
             CustomerAccessStorageConstants::CUSTOMER_ACCESS_SYNC_STORAGE_QUEUE,
+            CustomerStorageConfig::CUSTOMER_INVALIDATED_SYNC_STORAGE_QUEUE,
             CategoryStorageConstants::CATEGORY_SYNC_STORAGE_QUEUE,
             ProductStorageConstants::PRODUCT_SYNC_STORAGE_QUEUE,
             PriceProductStorageConstants::PRICE_SYNC_STORAGE_QUEUE,
@@ -123,8 +147,10 @@ class RabbitMqConfig extends SprykerRabbitMqConfig
             TaxProductStorageConfig::PRODUCT_ABSTRACT_TAX_SET_SYNC_STORAGE_QUEUE,
             TaxStorageConfig::TAX_SET_SYNC_STORAGE_QUEUE,
             SalesReturnSearchConfig::SYNC_SEARCH_RETURN,
+            StoreStorageConfig::STORE_SYNC_STORAGE_QUEUE,
             AssetStorageConfig::ASSET_SYNC_STORAGE_QUEUE,
             ProductConfigurationStorageConfig::PRODUCT_CONFIGURATION_SYNC_STORAGE_QUEUE,
+            SearchHttpConfig::SEARCH_HTTP_CONFIG_SYNC_QUEUE,
         ];
     }
 
@@ -134,5 +160,18 @@ class RabbitMqConfig extends SprykerRabbitMqConfig
     protected function getDefaultBoundQueueNamePrefix(): string
     {
         return 'error';
+    }
+
+    /**
+     * @return array<string>
+     */
+    protected function getQueueConnectionNames(): array
+    {
+        return array_map(
+            function (array $connection): string {
+                return $connection[RabbitMqEnv::RABBITMQ_CONNECTION_NAME];
+            },
+            $this->get(RabbitMqEnv::RABBITMQ_CONNECTIONS),
+        );
     }
 }

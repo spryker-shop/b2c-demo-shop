@@ -21,7 +21,7 @@ class ProductStorageQueryContainer extends SprykerProductStorageQueryContainer
     /**
      * @api
      *
-     * @param array $productAbstractIds
+     * @param array<int> $productAbstractIds
      *
      * @return \Propel\Runtime\ActiveQuery\ModelCriteria
      */

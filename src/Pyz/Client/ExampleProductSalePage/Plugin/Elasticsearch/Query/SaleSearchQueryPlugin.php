@@ -52,7 +52,7 @@ class SaleSearchQueryPlugin extends AbstractPlugin implements QueryInterface, Se
      *
      * @return \Elastica\Query
      */
-    public function getSearchQuery()
+    public function getSearchQuery(): Query
     {
         return $this->query;
     }
@@ -139,9 +139,10 @@ class SaleSearchQueryPlugin extends AbstractPlugin implements QueryInterface, Se
             ->getConfig()
             ->getPyzLabelSaleName();
 
+        $defaultLocale = current($storeTransfer->getAvailableLocaleIsoCodes());
         $storageProductLabelTransfer = $this->getFactory()
             ->getPyzProductLabelStorageClient()
-            ->findLabelByName($labelName, $storeTransfer->getCurrentLocale(), $storeTransfer->getStoreName());
+            ->findLabelByName($labelName, $defaultLocale, $storeTransfer->getName());
 
         $labelId = $storageProductLabelTransfer ? $storageProductLabelTransfer->getIdProductLabel() : 0;
 
