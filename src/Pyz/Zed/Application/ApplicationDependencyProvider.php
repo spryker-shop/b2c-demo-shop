@@ -61,7 +61,7 @@ class ApplicationDependencyProvider extends SprykerApplicationDependencyProvider
             new PropelApplicationPlugin(),
             new BackofficeRouterApplicationPlugin(),
             new HttpApplicationPlugin(),
-            new ErrorHandlerApplicationPlugin(),
+            //new ErrorHandlerApplicationPlugin(),
             new FormApplicationPlugin(),
             new ValidatorApplicationPlugin(),
             new SecurityApplicationPlugin(),
@@ -107,7 +107,7 @@ class ApplicationDependencyProvider extends SprykerApplicationDependencyProvider
             new PropelApplicationPlugin(),
             new BackendApiRouterApplicationPlugin(),
             new HttpApplicationPlugin(),
-            new ErrorHandlerApplicationPlugin(),
+            //new ErrorHandlerApplicationPlugin(),
             new ValidatorApplicationPlugin(),
         ];
     }
