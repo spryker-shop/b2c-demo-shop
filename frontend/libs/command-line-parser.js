@@ -6,6 +6,7 @@ let mode = null;
 
 const collectArguments = (argument, argumentCollection) => {
     argumentCollection.push(argument);
+
     return argumentCollection;
 };
 
@@ -164,5 +165,9 @@ const getAttributes = () => {
         replaceOptimizedImages: commandLineParameters.replace,
     };
 };
+
+if (process.argv.includes('--help') || process.argv.includes('-h')) {
+    getAttributes();
+}
 
 module.exports = getAttributes;

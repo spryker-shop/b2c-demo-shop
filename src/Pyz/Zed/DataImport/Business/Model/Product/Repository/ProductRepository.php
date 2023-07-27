@@ -34,7 +34,7 @@ class ProductRepository implements ProductRepositoryInterface
     public const ABSTRACT_SKU = 'abstractSku';
 
     /**
-     * @var array
+     * @var array<string, array<string, mixed>>
      */
     protected static $resolved = [];
 

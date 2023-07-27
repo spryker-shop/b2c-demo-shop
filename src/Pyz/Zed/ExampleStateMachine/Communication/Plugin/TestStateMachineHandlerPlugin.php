@@ -107,7 +107,7 @@ class TestStateMachineHandlerPlugin extends AbstractPlugin implements StateMachi
     /**
      * This method should return all list of StateMachineItemTransfer, with (identifier, IdStateMachineProcess, IdItemState)
      *
-     * @param array $stateIds
+     * @param array<int> $stateIds
      *
      * @return array<\Generated\Shared\Transfer\StateMachineItemTransfer>
      */

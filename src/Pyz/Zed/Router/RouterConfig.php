@@ -12,7 +12,7 @@ use Spryker\Zed\Router\RouterConfig as SprykerRouterConfig;
 class RouterConfig extends SprykerRouterConfig
 {
     /**
-     * @return array
+     * @return list<string>
      */
     public function getControllerDirectories(): array
     {

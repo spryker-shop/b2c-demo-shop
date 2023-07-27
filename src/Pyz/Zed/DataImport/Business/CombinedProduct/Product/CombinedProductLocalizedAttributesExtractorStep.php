@@ -12,7 +12,7 @@ use Pyz\Zed\DataImport\Business\Model\Product\ProductLocalizedAttributesExtracto
 class CombinedProductLocalizedAttributesExtractorStep extends ProductLocalizedAttributesExtractorStep
 {
     /**
-     * @param array $defaultAttributes
+     * @param array<mixed> $defaultAttributes
      */
     public function __construct(array $defaultAttributes = [])
     {

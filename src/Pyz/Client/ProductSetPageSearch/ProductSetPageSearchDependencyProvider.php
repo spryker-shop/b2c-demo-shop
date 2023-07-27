@@ -15,7 +15,7 @@ use Spryker\Client\SearchElasticsearch\Plugin\QueryExpander\StoreQueryExpanderPl
 class ProductSetPageSearchDependencyProvider extends SprykerProductSetPageSearchDependencyProvider
 {
     /**
-     * @return array
+     * @return array<\Spryker\Client\SearchExtension\Dependency\Plugin\ResultFormatterPluginInterface|\Spryker\Client\Search\Dependency\Plugin\ResultFormatterPluginInterface>
      */
     protected function getProductSetListResultFormatterPlugins(): array
     {
@@ -25,7 +25,7 @@ class ProductSetPageSearchDependencyProvider extends SprykerProductSetPageSearch
     }
 
     /**
-     * @return array
+     * @return array<\Spryker\Client\Kernel\AbstractPlugin>
      */
     protected function getProductSetListQueryExpanderPlugins(): array
     {
