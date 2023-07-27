@@ -53,7 +53,7 @@ class ProductManagementLocalizedAttributesExtractorStep implements DataImportSte
     /**
      * @param string $data
      *
-     * @return array
+     * @return array<string>
      */
     private function toArray($data): array
     {

@@ -12,7 +12,7 @@ use Spryker\Zed\Transfer\TransferConfig as SprykerTransferConfig;
 class TransferConfig extends SprykerTransferConfig
 {
     /**
-     * @return array
+     * @return array<string>
      */
     public function getEntitiesSourceDirectories(): array
     {

@@ -62,7 +62,7 @@ class ProductConcreteAttributesUniqueCheckStep implements DataImportStepInterfac
     protected $utilEncodingService;
 
     /**
-     * @var array
+     * @var array<string, array<string, array<string, mixed>>>
      */
     protected static $productConcreteAttributesMap = [];
 
@@ -87,7 +87,9 @@ class ProductConcreteAttributesUniqueCheckStep implements DataImportStepInterfac
      */
     public function execute(DataSetInterface $dataSet): void
     {
+        /** @var string $dataSetProductConcreteSku */
         $dataSetProductConcreteSku = $dataSet[static::KEY_CONCRETE_SKU];
+        /** @var string $dataSetProductAbstractSku */
         $dataSetProductAbstractSku = $dataSet[static::KEY_ABSTRACT_SKU];
         $dataSetProductConcreteAttributes = $dataSet[static::KEY_ATTRIBUTES];
         ksort($dataSetProductConcreteAttributes);
@@ -100,7 +102,7 @@ class ProductConcreteAttributesUniqueCheckStep implements DataImportStepInterfac
     /**
      * @param string $dataSetProductAbstractSku
      * @param string $dataSetProductConcreteSku
-     * @param array $dataSetProductConcreteAttributes
+     * @param array<string, mixed> $dataSetProductConcreteAttributes
      *
      * @throws \Pyz\Zed\DataImport\Business\Exception\InvalidDataException
      *
@@ -144,7 +146,9 @@ class ProductConcreteAttributesUniqueCheckStep implements DataImportStepInterfac
             if ($productConcreteAttributes) {
                 ksort($productConcreteAttributes);
             }
+            /** @var string $productConcreteSku */
             $productConcreteSku = $productConcrete[static::PRODUCT_COL_SKU];
+            /** @var string $productAbstractSku */
             $productAbstractSku = $productConcrete[static::PRODUCT_ABSTRACT_COL_SKU];
 
             static::$productConcreteAttributesMap[$productAbstractSku][$productConcreteSku] = $productConcreteAttributes;
