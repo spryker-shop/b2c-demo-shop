@@ -16,6 +16,9 @@ use Spryker\Zed\DataImport\Business\Model\DataImportStep\DataImportStepInterface
 use Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface;
 use Spryker\Zed\Discount\DiscountConfig;
 
+/**
+ * @SuppressWarnings(PHPMD.CountInLoopExpression)
+ */
 class DiscountVoucherWriterStep implements DataImportStepInterface
 {
     /**
@@ -127,7 +130,7 @@ class DiscountVoucherWriterStep implements DataImportStepInterface
      * @param int $quantity
      * @param string|null $customCode
      *
-     * @return array
+     * @return array<string>
      */
     protected function generateCodes($length, $quantity, $customCode = null): array
     {

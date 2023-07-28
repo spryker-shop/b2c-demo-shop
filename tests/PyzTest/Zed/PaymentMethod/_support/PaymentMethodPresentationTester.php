@@ -31,7 +31,7 @@ use Spryker\Zed\Payment\Dependency\Service\PaymentToUtilTextServiceBridge;
  * @method void comment($description)
  * @method \Codeception\Lib\Friend haveFriend($name, $actorClass = null)
  *
- * @SuppressWarnings(PHPMD)
+ * @SuppressWarnings(\PyzTest\Zed\PaymentMethod\PHPMD)
  */
 class PaymentMethodPresentationTester extends Actor
 {

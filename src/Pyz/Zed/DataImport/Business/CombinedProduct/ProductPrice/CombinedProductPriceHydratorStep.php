@@ -87,7 +87,7 @@ class CombinedProductPriceHydratorStep extends ProductPriceHydratorStep
     protected const ASSIGNABLE_PRODUCT_TYPE_CONCRETE = 'concrete';
 
     /**
-     * @var array
+     * @var array<string>
      */
     protected const ASSIGNABLE_PRODUCT_TYPES = [
         self::ASSIGNABLE_PRODUCT_TYPE_ABSTRACT,

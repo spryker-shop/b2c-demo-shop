@@ -18,10 +18,10 @@ use Symfony\Component\HttpFoundation\Request;
 class ProductController extends SprykerShopProductController
 {
     /**
-     * @param array $productData
+     * @param array<mixed> $productData
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
-     * @return array
+     * @return array<mixed>
      */
     protected function executeDetailAction(array $productData, Request $request): array
     {

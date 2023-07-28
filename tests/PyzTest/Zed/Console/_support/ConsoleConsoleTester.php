@@ -24,7 +24,7 @@ use Symfony\Component\Process\Process;
  * @method void comment($description)
  * @method \Codeception\Lib\Friend haveFriend($name, $actorClass = NULL)
  *
- * @SuppressWarnings(PHPMD)
+ * @SuppressWarnings(\PyzTest\Zed\Console\PHPMD)
  */
 class ConsoleConsoleTester extends Actor
 {

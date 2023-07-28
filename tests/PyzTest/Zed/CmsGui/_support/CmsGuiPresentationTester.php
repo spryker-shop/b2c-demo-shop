@@ -25,7 +25,7 @@ use Faker\Factory;
  * @method void comment($description)
  * @method \Codeception\Lib\Friend haveFriend($name, $actorClass = NULL)
  *
- * @SuppressWarnings(PHPMD)
+ * @SuppressWarnings(\PyzTest\Zed\CmsGui\PHPMD)
  */
 class CmsGuiPresentationTester extends Actor
 {

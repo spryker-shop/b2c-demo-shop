@@ -17,7 +17,7 @@ class CmsProductGroupContentWidgetConfigurationProvider extends SprykerCmsProduc
     protected const PYZ_SLIDER_TEMPLATE_IDENTIFIER = 'slider';
 
     /**
-     * @return array
+     * @return array<string, string>
      */
     public function getAvailableTemplates(): array
     {

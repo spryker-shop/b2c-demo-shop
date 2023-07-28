@@ -48,7 +48,7 @@ class ContentProductGuiConfig extends SprykerContentProductGuiConfig
     protected const PYZ_WIDGET_TEMPLATE_DISPLAY_NAME_SLIDER_NOT_INCLUDE_GROUP = 'content_product.template.slider_not_include_group';
 
     /**
-     * @return array
+     * @return array<string, string>
      */
     public function getContentWidgetTemplates(): array
     {

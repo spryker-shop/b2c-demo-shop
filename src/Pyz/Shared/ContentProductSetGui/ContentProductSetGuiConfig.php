@@ -24,7 +24,7 @@ class ContentProductSetGuiConfig extends SprykerContentProductSetGuiConfig
     protected const PYZ_WIDGET_TEMPLATE_DISPLAY_NAME_ADD_TO_CART = 'content_product_set.template.add_to_cart';
 
     /**
-     * @return array
+     * @return array<string, string>
      */
     public function getContentWidgetTemplates(): array
     {

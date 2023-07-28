@@ -20,7 +20,7 @@ class CmsDependencyProvider extends SprykerCmsDependencyProvider
     /**
      * @param \Spryker\Zed\Kernel\Container $container
      *
-     * @return array
+     * @return array<\Spryker\Zed\CmsExtension\Dependency\Plugin\CmsVersionPostSavePluginInterface>
      */
     protected function getPostSavePlugins(Container $container): array
     {
@@ -32,7 +32,7 @@ class CmsDependencyProvider extends SprykerCmsDependencyProvider
     /**
      * @param \Spryker\Zed\Kernel\Container $container
      *
-     * @return array
+     * @return array<\Spryker\Zed\CmsExtension\Dependency\Plugin\CmsVersionTransferExpanderPluginInterface>
      */
     protected function getTransferExpanderPlugins(Container $container): array
     {

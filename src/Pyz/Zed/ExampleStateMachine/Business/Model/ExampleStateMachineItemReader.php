@@ -51,6 +51,8 @@ class ExampleStateMachineItemReader
     }
 
     /**
+     * @psalm-suppress TooManyTemplateParams
+     *
      * @param \Propel\Runtime\Collection\ObjectCollection<\Orm\Zed\ExampleStateMachine\Persistence\PyzExampleStateMachineItem> $exampleStateMachineItems
      *
      * @return array<\Generated\Shared\Transfer\StateMachineItemTransfer>

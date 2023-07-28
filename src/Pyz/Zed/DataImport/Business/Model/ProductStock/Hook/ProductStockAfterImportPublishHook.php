@@ -18,7 +18,7 @@ use Spryker\Zed\DataImport\Business\Model\Publisher\DataImporterPublisher;
 class ProductStockAfterImportPublishHook implements DataImporterAfterImportInterface
 {
     /**
-     * @var array
+     * @var array<mixed>
      */
     protected $entityEvents = [];
 

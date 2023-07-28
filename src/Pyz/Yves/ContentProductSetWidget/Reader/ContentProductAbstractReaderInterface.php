@@ -13,7 +13,7 @@ interface ContentProductAbstractReaderInterface
 {
     /**
      * @param \Generated\Shared\Transfer\ProductSetDataStorageTransfer $productSetDataStorageTransfer
-     * @param array $selectedAttributes
+     * @param array<mixed> $selectedAttributes
      * @param string $localeName
      *
      * @return array<\Generated\Shared\Transfer\ProductViewTransfer>
