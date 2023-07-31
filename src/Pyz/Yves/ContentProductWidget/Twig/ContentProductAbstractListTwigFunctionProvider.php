@@ -116,7 +116,7 @@ class ContentProductAbstractListTwigFunctionProvider extends TwigFunctionProvide
     }
 
     /**
-     * @return array
+     * @return array<string, string>
      */
     protected function getPyzAvailableTemplates(): array
     {

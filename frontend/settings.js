@@ -29,8 +29,6 @@ const globalSettings = {
         project: './src/Pyz/Yves',
     },
 
-    formatter: [`**/*.(scss|css|less|js|ts|json|html)`],
-
     expectedModeArgument: 2,
 };
 

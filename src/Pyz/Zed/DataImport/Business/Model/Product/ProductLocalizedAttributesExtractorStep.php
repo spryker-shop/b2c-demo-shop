@@ -18,12 +18,12 @@ class ProductLocalizedAttributesExtractorStep implements DataImportStepInterface
     public const KEY_LOCALIZED_ATTRIBUTES = 'localizedAttributes';
 
     /**
-     * @var array
+     * @var array<string>
      */
     protected $defaultAttributes = [];
 
     /**
-     * @param array $defaultAttributes
+     * @param array<string> $defaultAttributes
      */
     public function __construct(array $defaultAttributes = [])
     {

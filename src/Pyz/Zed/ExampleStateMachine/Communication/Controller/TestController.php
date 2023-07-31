@@ -25,7 +25,7 @@ class TestController extends AbstractController
     public const PYZ_STATE_MACHINE_NAME = 'Test';
 
     /**
-     * @return array
+     * @return array<string, mixed>
      */
     public function listPyzAction(): array
     {

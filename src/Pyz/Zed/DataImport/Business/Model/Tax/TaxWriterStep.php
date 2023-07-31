@@ -54,7 +54,7 @@ class TaxWriterStep extends PublishAwareStep implements DataImportStepInterface
     protected $countryRepository;
 
     /**
-     * @var array
+     * @var array<string, bool>
      */
     protected $shipmentSets = [
         'Shipment Taxes' => true,

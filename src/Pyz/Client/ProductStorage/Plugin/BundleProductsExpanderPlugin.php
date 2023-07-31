@@ -30,7 +30,7 @@ class BundleProductsExpanderPlugin extends AbstractPlugin implements ProductView
      * @api
      *
      * @param \Generated\Shared\Transfer\ProductViewTransfer $productViewTransfer
-     * @param array $productData
+     * @param array<mixed> $productData
      * @param string $localeName
      *
      * @return \Generated\Shared\Transfer\ProductViewTransfer

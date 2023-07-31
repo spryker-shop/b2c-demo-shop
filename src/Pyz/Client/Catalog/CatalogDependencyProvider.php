@@ -166,13 +166,10 @@ class CatalogDependencyProvider extends SprykerCatalogDependencyProvider
      */
     protected function createSuggestionResultFormatterPlugins(): array
     {
-        /** @phpstan-var \Spryker\Client\SearchExtension\Dependency\Plugin\ResultFormatterPluginInterface $suggestionByTypeResultFormatterPlugin */
-        $suggestionByTypeResultFormatterPlugin = new SuggestionByTypeResultFormatterPlugin();
-
         return [
             new CompletionResultFormatterPlugin(),
             new CurrencyAwareSuggestionByTypeResultFormatter(
-                $suggestionByTypeResultFormatterPlugin,
+                new SuggestionByTypeResultFormatterPlugin(),
             ),
         ];
     }

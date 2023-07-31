@@ -36,7 +36,7 @@ class NavigationKeyToIdNavigationStep implements DataImportStepInterface
     protected $target;
 
     /**
-     * @var array
+     * @var array<string, int>
      */
     protected $resolved = [];
 
@@ -67,11 +67,13 @@ class NavigationKeyToIdNavigationStep implements DataImportStepInterface
             ));
         }
 
-        if (!isset($this->resolved[$dataSet[$this->source]])) {
-            $this->resolved[$dataSet[$this->source]] = $this->resolveIdNavigation($dataSet[$this->source]);
+        /** @var string $navigationKey */
+        $navigationKey = $dataSet[$this->source];
+        if (!isset($this->resolved[$navigationKey])) {
+            $this->resolved[$navigationKey] = $this->resolveIdNavigation($navigationKey);
         }
 
-        $dataSet[$this->target] = $this->resolved[$dataSet[$this->source]];
+        $dataSet[$this->target] = $this->resolved[$navigationKey];
     }
 
     /**

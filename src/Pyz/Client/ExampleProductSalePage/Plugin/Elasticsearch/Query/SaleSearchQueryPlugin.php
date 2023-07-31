@@ -52,7 +52,7 @@ class SaleSearchQueryPlugin extends AbstractPlugin implements QueryInterface, Se
      *
      * @return \Elastica\Query
      */
-    public function getSearchQuery()
+    public function getSearchQuery(): Query
     {
         return $this->query;
     }
