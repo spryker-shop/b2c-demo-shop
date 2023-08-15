@@ -51,15 +51,7 @@ jobs:
 
             - uses: actions/setup-node@v3
               with:
-                  node-version: '16'
-
-            - name: NPM cache
-              uses: actions/cache@v3
-              with:
-                  path: ~/.npm
-                  key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-                  restore-keys: |
-                      ${{ runner.os }}-node-
+                  node-version: '18'
 
             - name: Setup PHP
               uses: shivammathur/setup-php@v2
@@ -149,10 +141,10 @@ jobs:
               run: vendor/bin/phpmd src/ text vendor/spryker/architecture-sniffer/src/ruleset.xml --minimumpriority 2
 
             - name: Run PHPStan
-              run: vendor/bin/phpstan analyze -l 5 -c phpstan.neon src/
+              run: vendor/bin/phpstan analyze -l 6 -c phpstan.neon src/
 
-            - name: Run Security check
-              run: vendor/bin/console security:check
+            - name: Run Evaluator
+              run: vendor/bin/evaluator evaluate
 
     php-81-mariadb-glue-alpine:
         name: "PHP 8.1 / MariaDB / Glue / Alpine"
@@ -540,11 +532,11 @@ jobs:
                   docker/sdk boot -v deploy.ci.acceptance.mariadb.yml
                   docker/sdk up -t -v
                   docker/sdk testing console queue:worker:start --stop-when-empty
-                  sudo bash -c "echo '127.0.0.1 backend-api.at.spryker.local backend-api.de.spryker.local backend-gateway.at.spryker.local backend-gateway.de.spryker.local backoffice.at.spryker.local backoffice.de.spryker.local date-time-configurator-example.spryker.local glue.at.spryker.local glue.de.spryker.local yves.at.spryker.local yves.de.spryker.local' >> /etc/hosts"
+                  sudo bash -c "echo '127.0.0.1 backend-api.at.spryker.local backend-api.de.spryker.local backend-gateway.at.spryker.local backend-gateway.de.spryker.local backoffice.at.spryker.local backoffice.de.spryker.local date-time-configurator-example.spryker.local glue.at.spryker.local glue.de.spryker.local yves.at.spryker.local yves.de.spryker.local glue-storefront.de.spryker.local glue-storefront.at.spryker.local' >> /etc/hosts"
             - name: Run Tests
               run: |
                   cd robotframework-tests
-                  robot -v env:api_b2c --exclude skip-due-to-issueORskip-due-to-refactoring -d results -s tests.api.b2c.glue .
+                  robot -v env:api_b2c --exclude skip-due-to-issueORskip-due-to-refactoring -d results -s tests.api.b2c .
             - name: Upload artifacts
               if: always()
               run: |
@@ -592,11 +584,11 @@ jobs:
                   docker/sdk boot -v deploy.ci.acceptance.yml
                   docker/sdk up -t -v
                   docker/sdk testing console queue:worker:start --stop-when-empty
-                  sudo bash -c "echo '127.0.0.1 backend-api.at.spryker.local backend-api.de.spryker.local backend-gateway.at.spryker.local backend-gateway.de.spryker.local backoffice.at.spryker.local backoffice.de.spryker.local date-time-configurator-example.spryker.local glue.at.spryker.local glue.de.spryker.local yves.at.spryker.local yves.de.spryker.local' >> /etc/hosts"
+                  sudo bash -c "echo '127.0.0.1 backend-api.at.spryker.local backend-api.de.spryker.local backend-gateway.at.spryker.local backend-gateway.de.spryker.local backoffice.at.spryker.local backoffice.de.spryker.local date-time-configurator-example.spryker.local glue.at.spryker.local glue.de.spryker.local yves.at.spryker.local yves.de.spryker.local glue-storefront.de.spryker.local glue-storefront.at.spryker.local' >> /etc/hosts"
             - name: Run Tests
               run: |
                   cd robotframework-tests
-                  robot -v env:api_b2c -v db_engine:psycopg2 --exclude skip-due-to-issueORskip-due-to-refactoring -d results -s tests.api.b2c.glue .
+                  robot -v env:api_b2c -v db_engine:psycopg2 --exclude skip-due-to-issueORskip-due-to-refactoring -d results -s tests.api.b2c .
             - name: Upload artifacts
               if: always()
               run: |

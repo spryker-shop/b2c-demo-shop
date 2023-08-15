@@ -13,7 +13,6 @@ use Generated\Shared\Transfer\PaymentConfirmationRequestedTransfer;
 use Generated\Shared\Transfer\PaymentConfirmedTransfer;
 use Generated\Shared\Transfer\PaymentMethodAddedTransfer;
 use Generated\Shared\Transfer\PaymentMethodDeletedTransfer;
-use Generated\Shared\Transfer\PaymentMethodTransfer;
 use Generated\Shared\Transfer\PaymentPreauthorizationFailedTransfer;
 use Generated\Shared\Transfer\PaymentPreauthorizedTransfer;
 use Generated\Shared\Transfer\PaymentRefundedTransfer;
@@ -87,6 +86,9 @@ use Spryker\Shared\SchedulerJenkins\SchedulerJenkinsConfig;
 use Spryker\Shared\SchedulerJenkins\SchedulerJenkinsConstants;
 use Spryker\Shared\SearchElasticsearch\SearchElasticsearchConstants;
 use Spryker\Shared\SecurityBlocker\SecurityBlockerConstants;
+use Spryker\Shared\SecurityBlockerBackoffice\SecurityBlockerBackofficeConstants;
+use Spryker\Shared\SecurityBlockerStorefrontAgent\SecurityBlockerStorefrontAgentConstants;
+use Spryker\Shared\SecurityBlockerStorefrontCustomer\SecurityBlockerStorefrontCustomerConstants;
 use Spryker\Shared\SecuritySystemUser\SecuritySystemUserConstants;
 use Spryker\Shared\Session\SessionConfig;
 use Spryker\Shared\Session\SessionConstants;
@@ -244,8 +246,7 @@ $config[OauthConstants::PUBLIC_KEY_PATH]
         getenv('SPRYKER_OAUTH_KEY_PUBLIC') ?: '',
     ) ?: null;
 $config[OauthConstants::ENCRYPTION_KEY] = getenv('SPRYKER_OAUTH_ENCRYPTION_KEY') ?: null;
-$config[OauthConstants::OAUTH_CLIENT_IDENTIFIER] = getenv('SPRYKER_OAUTH_CLIENT_IDENTIFIER') ?: null;
-$config[OauthConstants::OAUTH_CLIENT_SECRET] = getenv('SPRYKER_OAUTH_CLIENT_SECRET') ?: null;
+$config[OauthConstants::OAUTH_CLIENT_CONFIGURATION] = json_decode(getenv('SPRYKER_OAUTH_CLIENT_CONFIGURATION'), true) ?: [];
 
 // >> ZED REQUEST
 
@@ -416,8 +417,20 @@ $config[SecurityBlockerConstants::SECURITY_BLOCKER_BLOCKING_TTL] = 600;
 $config[SecurityBlockerConstants::SECURITY_BLOCKER_BLOCK_FOR] = 300;
 $config[SecurityBlockerConstants::SECURITY_BLOCKER_BLOCKING_NUMBER_OF_ATTEMPTS] = 10;
 
-$config[SecurityBlockerConstants::SECURITY_BLOCKER_AGENT_BLOCK_FOR] = 360;
-$config[SecurityBlockerConstants::SECURITY_BLOCKER_AGENT_BLOCKING_NUMBER_OF_ATTEMPTS] = 9;
+// >>> Security Blocker Storefront Agent
+$config[SecurityBlockerStorefrontAgentConstants::AGENT_BLOCK_FOR_SECONDS] = 360;
+$config[SecurityBlockerStorefrontAgentConstants::AGENT_BLOCKING_TTL] = 900;
+$config[SecurityBlockerStorefrontAgentConstants::AGENT_BLOCKING_NUMBER_OF_ATTEMPTS] = 9;
+
+// >>> Security Blocker Storefront Customer
+$config[SecurityBlockerStorefrontCustomerConstants::CUSTOMER_BLOCK_FOR_SECONDS] = 360;
+$config[SecurityBlockerStorefrontCustomerConstants::CUSTOMER_BLOCKING_TTL] = 900;
+$config[SecurityBlockerStorefrontCustomerConstants::CUSTOMER_BLOCKING_NUMBER_OF_ATTEMPTS] = 9;
+
+// >>> Security Blocker BackOffice user
+$config[SecurityBlockerBackofficeConstants::BACKOFFICE_USER_BLOCKING_TTL] = 900;
+$config[SecurityBlockerBackofficeConstants::BACKOFFICE_USER_BLOCK_FOR_SECONDS] = 360;
+$config[SecurityBlockerBackofficeConstants::BACKOFFICE_USER_BLOCKING_NUMBER_OF_ATTEMPTS] = 9;
 
 // >>> LOGGING
 
@@ -676,54 +689,71 @@ $config[OauthAuth0Constants::AUTH0_CLIENT_ID] = $aopAuthenticationConfiguration[
 $config[OauthAuth0Constants::AUTH0_CLIENT_SECRET] = $aopAuthenticationConfiguration['AUTH0_CLIENT_SECRET'] ?? '';
 
 $config[MessageBrokerConstants::MESSAGE_TO_CHANNEL_MAP] = [
-    PaymentMethodTransfer::class => 'payment',
-    PaymentMethodAddedTransfer::class => 'payment',
-    PaymentCancelReservationRequestedTransfer::class => 'payment',
-    PaymentConfirmationRequestedTransfer::class => 'payment',
-    PaymentRefundRequestedTransfer::class => 'payment',
-    PaymentMethodDeletedTransfer::class => 'payment',
-    PaymentPreauthorizedTransfer::class => 'payment',
-    PaymentPreauthorizationFailedTransfer::class => 'payment',
-    PaymentConfirmedTransfer::class => 'payment',
-    PaymentConfirmationFailedTransfer::class => 'payment',
-    PaymentRefundedTransfer::class => 'payment',
-    PaymentRefundFailedTransfer::class => 'payment',
-    PaymentReservationCanceledTransfer::class => 'payment',
-    PaymentCancelReservationFailedTransfer::class => 'payment',
-    AssetAddedTransfer::class => 'assets',
-    AssetUpdatedTransfer::class => 'assets',
-    AssetDeletedTransfer::class => 'assets',
-    ProductExportedTransfer::class => 'product',
-    ProductCreatedTransfer::class => 'product',
-    ProductUpdatedTransfer::class => 'product',
-    ProductDeletedTransfer::class => 'product',
-    InitializeProductExportTransfer::class => 'product',
-    AddReviewsTransfer::class => 'reviews',
-    OrderStatusChangedTransfer::class => 'orders',
-    SearchEndpointAvailableTransfer::class => 'search',
-    SearchEndpointRemovedTransfer::class => 'search',
+    PaymentMethodAddedTransfer::class => 'payment-method-commands',
+    PaymentMethodDeletedTransfer::class => 'payment-method-commands',
+    PaymentCancelReservationRequestedTransfer::class => 'payment-commands',
+    PaymentConfirmationRequestedTransfer::class => 'payment-commands',
+    PaymentRefundRequestedTransfer::class => 'payment-commands',
+    PaymentPreauthorizedTransfer::class => 'payment-events',
+    PaymentPreauthorizationFailedTransfer::class => 'payment-events',
+    PaymentConfirmedTransfer::class => 'payment-events',
+    PaymentConfirmationFailedTransfer::class => 'payment-events',
+    PaymentRefundedTransfer::class => 'payment-events',
+    PaymentRefundFailedTransfer::class => 'payment-events',
+    PaymentReservationCanceledTransfer::class => 'payment-events',
+    PaymentCancelReservationFailedTransfer::class => 'payment-events',
+    AssetAddedTransfer::class => 'asset-commands',
+    AssetUpdatedTransfer::class => 'asset-commands',
+    AssetDeletedTransfer::class => 'asset-commands',
+    ProductExportedTransfer::class => 'product-events',
+    ProductCreatedTransfer::class => 'product-events',
+    ProductUpdatedTransfer::class => 'product-events',
+    ProductDeletedTransfer::class => 'product-events',
+    InitializeProductExportTransfer::class => 'product-commands',
+    AddReviewsTransfer::class => 'product-review-commands',
+    OrderStatusChangedTransfer::class => 'order-events',
+    SearchEndpointAvailableTransfer::class => 'search-commands',
+    SearchEndpointRemovedTransfer::class => 'search-commands',
 ];
 
-$config[MessageBrokerConstants::CHANNEL_TO_TRANSPORT_MAP] =
+$config[MessageBrokerConstants::CHANNEL_TO_TRANSPORT_MAP] = [
+    'product-review-commands' => MessageBrokerAwsConfig::SQS_TRANSPORT,
+    'payment-method-commands' => MessageBrokerAwsConfig::SQS_TRANSPORT,
+    'payment-commands' => MessageBrokerAwsConfig::SQS_TRANSPORT,
+    'payment-events' => MessageBrokerAwsConfig::SQS_TRANSPORT,
+    'asset-commands' => MessageBrokerAwsConfig::SQS_TRANSPORT,
+    'product-commands' => MessageBrokerAwsConfig::SQS_TRANSPORT,
+    'search-commands' => MessageBrokerAwsConfig::SQS_TRANSPORT,
+    'order-events' => 'http',
+    'product-events' => 'http',
+];
+
 $config[MessageBrokerAwsConstants::CHANNEL_TO_RECEIVER_TRANSPORT_MAP] = [
-    'payment' => MessageBrokerAwsConfig::SQS_TRANSPORT,
-    'assets' => MessageBrokerAwsConfig::SQS_TRANSPORT,
-    'product' => MessageBrokerAwsConfig::SQS_TRANSPORT,
-    'reviews' => MessageBrokerAwsConfig::SQS_TRANSPORT,
-    'search' => MessageBrokerAwsConfig::SQS_TRANSPORT,
+    'product-review-commands' => MessageBrokerAwsConfig::SQS_TRANSPORT,
+    'payment-method-commands' => MessageBrokerAwsConfig::SQS_TRANSPORT,
+    'payment-commands' => MessageBrokerAwsConfig::SQS_TRANSPORT,
+    'payment-events' => MessageBrokerAwsConfig::SQS_TRANSPORT,
+    'asset-commands' => MessageBrokerAwsConfig::SQS_TRANSPORT,
+    'product-commands' => MessageBrokerAwsConfig::SQS_TRANSPORT,
+    'search-commands' => MessageBrokerAwsConfig::SQS_TRANSPORT,
+    'order-events' => MessageBrokerAwsConfig::SQS_TRANSPORT,
 ];
 
 $config[MessageBrokerAwsConstants::CHANNEL_TO_SENDER_TRANSPORT_MAP] = [
-    'payment' => 'http',
-    'assets' => 'http',
-    'product' => 'http',
-    'orders' => 'http',
+    'payment-commands' => 'http',
+    'product-events' => 'http',
+    'order-events' => 'http',
 ];
 
 $aopInfrastructureConfiguration = json_decode(html_entity_decode((string)getenv('SPRYKER_AOP_INFRASTRUCTURE')), true);
 
 $config[MessageBrokerAwsConstants::SQS_RECEIVER_CONFIG] = json_encode($aopInfrastructureConfiguration['SPRYKER_MESSAGE_BROKER_SQS_RECEIVER_CONFIG'] ?? []);
 $config[MessageBrokerAwsConstants::HTTP_SENDER_CONFIG] = $aopInfrastructureConfiguration['SPRYKER_MESSAGE_BROKER_HTTP_SENDER_CONFIG'] ?? [];
+
+$config[MessageBrokerConstants::IS_ENABLED] = (
+    !empty($aopInfrastructureConfiguration['SPRYKER_MESSAGE_BROKER_SQS_RECEIVER_CONFIG'])
+    && !empty($aopInfrastructureConfiguration['SPRYKER_MESSAGE_BROKER_HTTP_SENDER_CONFIG'])
+);
 
 // ----------------------------------------------------------------------------
 // ------------------------------ OAUTH ---------------------------------------
@@ -755,13 +785,18 @@ $config[GlueBackendApiApplicationConstants::GLUE_BACKEND_API_HOST] = $sprykerGlu
 $config[GlueBackendApiApplicationConstants::PROJECT_NAMESPACES] = [
     'Pyz',
 ];
+$config[GlueBackendApiApplicationConstants::GLUE_BACKEND_CORS_ALLOW_ORIGIN] = getenv('SPRYKER_GLUE_APPLICATION_CORS_ALLOW_ORIGIN') ?: '*';
 
 // ----------------------------------------------------------------------------
 // ------------------------------ Glue Storefront API -------------------------------
 // ----------------------------------------------------------------------------
 $sprykerGlueStorefrontHost = getenv('SPRYKER_GLUE_STOREFRONT_HOST');
 $config[GlueStorefrontApiApplicationConstants::GLUE_STOREFRONT_API_HOST] = $sprykerGlueStorefrontHost;
+$gluePort = (int)(getenv('SPRYKER_API_PORT')) ?: 443;
+$protocol = $gluePort === 443 ? 'https' : 'http';
 $config[GlueJsonApiConventionConstants::GLUE_DOMAIN] = sprintf(
-    'https://%s',
+    '%s://%s',
+    $protocol,
     $sprykerGlueStorefrontHost ?: $sprykerGlueBackendHost ?: 'localhost',
 );
+$config[GlueStorefrontApiApplicationConstants::GLUE_STOREFRONT_CORS_ALLOW_ORIGIN] = getenv('SPRYKER_GLUE_APPLICATION_CORS_ALLOW_ORIGIN') ?: '*';

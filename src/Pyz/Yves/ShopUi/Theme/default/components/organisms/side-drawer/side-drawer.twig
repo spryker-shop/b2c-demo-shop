@@ -23,24 +23,25 @@
                             app.request.pathInfo,
                             app.request.queryString,
                             app.request.requestUri
-                        ] only %}
-                            {% block body %}
-                                {% define data = {
-                                    additionalModifiers: ['hollow', 'header', 'side-drawer']
-                                } %}
-                                {{ parent() }}
-                            {% endblock %}
-                        {% endwidget %}
+                        ] with {
+                            data: {
+                                additionalModifiers: ['hollow', 'header', 'side-drawer'],
+                            },
+                        } only %}{% endwidget %}
                     </div>
                     <div class="col">
-                        {%- widget 'CurrencyWidget' only -%}
-                            {% block body %}
-                                {% define data = {
-                                    additionalModifiers: ['hollow', 'header', 'side-drawer']
-                                } %}
-                                {{ parent() }}
-                            {% endblock %}
-                        {%- endwidget -%}
+                        {%- widget 'CurrencyWidget' with {
+                            data: {
+                                additionalModifiers: ['hollow', 'header', 'side-drawer'],
+                            },
+                        } only -%}{%- endwidget -%}
+                    </div>
+                    <div class="col">
+                        {%- widget 'StoreSwitcher' with {
+                            data: {
+                                additionalModifiers: ['hollow', 'header', 'side-drawer'],
+                            },
+                        } only -%}{%- endwidget -%}
                     </div>
                 </div>
             {% endblock %}

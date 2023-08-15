@@ -1215,7 +1215,7 @@ class DataImportBusinessFactory extends SprykerDataImportBusinessFactory
     }
 
     /**
-     * @param array $defaultAttributes
+     * @param array<string> $defaultAttributes
      *
      * @return \Pyz\Zed\DataImport\Business\Model\Product\ProductLocalizedAttributesExtractorStep
      */
@@ -1226,7 +1226,7 @@ class DataImportBusinessFactory extends SprykerDataImportBusinessFactory
     }
 
     /**
-     * @param array $defaultAttributes
+     * @param array<string> $defaultAttributes
      *
      * @return \Pyz\Zed\DataImport\Business\Model\Product\ProductLocalizedAttributesExtractorStep
      */
