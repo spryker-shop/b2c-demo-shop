@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d1bda8fded752522a74e13bf91a1e99d",
+    "content-hash": "edcaf986c9d18136f5385fc5624decfd",
     "packages": [
         {
             "name": "async-aws/core",
@@ -5676,16 +5676,16 @@
         },
         {
             "name": "spryker-feature/product",
-            "version": "202307.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker-feature/product.git",
-                "reference": "3244400800b294d206797944971574c3b9e0abf5"
+                "reference": "0cff10756f5524e0dc0cdf986e180281ecf81037"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker-feature/product/zipball/3244400800b294d206797944971574c3b9e0abf5",
-                "reference": "3244400800b294d206797944971574c3b9e0abf5",
+                "url": "https://api.github.com/repos/spryker-feature/product/zipball/0cff10756f5524e0dc0cdf986e180281ecf81037",
+                "reference": "0cff10756f5524e0dc0cdf986e180281ecf81037",
                 "shasum": ""
             },
             "require": {
@@ -5723,6 +5723,7 @@
             "suggest": {
                 "spryker-feature/spryker-core": "Recommended feature dependency."
             },
+            "default-branch": true,
             "type": "metapackage",
             "extra": {
                 "branch-alias": {
@@ -5735,9 +5736,9 @@
             ],
             "description": "Product [feature]",
             "support": {
-                "source": "https://github.com/spryker-feature/product/tree/202307.0"
+                "source": "https://github.com/spryker-feature/product/tree/master"
             },
-            "time": "2023-07-26T14:50:17+00:00"
+            "time": "2023-07-28T08:09:13+00:00"
         },
         {
             "name": "spryker-feature/product-barcode",
@@ -33526,16 +33527,16 @@
         },
         {
             "name": "spryker/product-image",
-            "version": "3.16.0",
+            "version": "3.17.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/product-image.git",
-                "reference": "768d310f354c7b3230f85aa9814c325dbb759b7d"
+                "reference": "ee8b04fd065a58fc74cd5bd0ed307ee50810f8c3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/product-image/zipball/768d310f354c7b3230f85aa9814c325dbb759b7d",
-                "reference": "768d310f354c7b3230f85aa9814c325dbb759b7d",
+                "url": "https://api.github.com/repos/spryker/product-image/zipball/ee8b04fd065a58fc74cd5bd0ed307ee50810f8c3",
+                "reference": "ee8b04fd065a58fc74cd5bd0ed307ee50810f8c3",
                 "shasum": ""
             },
             "require": {
@@ -33573,28 +33574,31 @@
             ],
             "description": "ProductImage module",
             "support": {
-                "source": "https://github.com/spryker/product-image/tree/3.16.0"
+                "source": "https://github.com/spryker/product-image/tree/3.17.0"
             },
-            "time": "2023-04-17T15:49:27+00:00"
+            "time": "2023-07-17T12:04:54+00:00"
         },
         {
             "name": "spryker/product-image-cart-connector",
-            "version": "1.2.4",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/product-image-cart-connector.git",
-                "reference": "899b64d25d31424a617b1baa38b81c02de20d549"
+                "reference": "5c1513f84b32e965dd5d9b2f9fbe28d950e124bf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/product-image-cart-connector/zipball/899b64d25d31424a617b1baa38b81c02de20d549",
-                "reference": "899b64d25d31424a617b1baa38b81c02de20d549",
+                "url": "https://api.github.com/repos/spryker/product-image-cart-connector/zipball/5c1513f84b32e965dd5d9b2f9fbe28d950e124bf",
+                "reference": "5c1513f84b32e965dd5d9b2f9fbe28d950e124bf",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.0",
+                "spryker/cart-extension": "^1.10.0 || ^2.6.0 || ^4.2.0",
                 "spryker/kernel": "^3.30.0",
-                "spryker/product-image": "^3.7.0"
+                "spryker/locale": "^3.0.0 || ^4.0.0",
+                "spryker/product-image": "^3.17.0",
+                "spryker/transfer": "^3.27.0"
             },
             "require-dev": {
                 "spryker/cart": "*",
@@ -33625,9 +33629,9 @@
             ],
             "description": "ProductImageCartConnector module",
             "support": {
-                "source": "https://github.com/spryker/product-image-cart-connector/tree/1.2.4"
+                "source": "https://github.com/spryker/product-image-cart-connector/tree/1.3.0"
             },
-            "time": "2023-03-31T19:36:11+00:00"
+            "time": "2023-07-17T12:04:54+00:00"
         },
         {
             "name": "spryker/product-image-sets-rest-api",
@@ -57741,11 +57745,18 @@
             "version": "9999999-dev",
             "alias": "202400.0",
             "alias_normalized": "202400.0"
+        },
+        {
+            "package": "spryker-feature/product",
+            "version": "9999999-dev",
+            "alias": "202400.0",
+            "alias_normalized": "202400.0"
         }
     ],
     "minimum-stability": "dev",
     "stability-flags": {
         "spryker-feature/inventory-management": 20,
+        "spryker-feature/product": 20,
         "spryker/docker-chromedriver": 20,
         "spryker/robotframework-suite-tests": 20
     },
