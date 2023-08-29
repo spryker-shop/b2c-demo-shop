@@ -12,6 +12,11 @@ use SprykerShop\Yves\SecurityBlockerPage\SecurityBlockerPageConfig as SprykerSec
 class SecurityBlockerPageConfig extends SprykerSecurityBlockerPageConfig
 {
     /**
+     * @var bool
+     */
+    protected const USE_EMAIL_CONTEXT_FOR_LOGIN_SECURITY_BLOCKER = false;
+
+    /**
      * {@inheritDoc}
      *
      * @api
