@@ -12,6 +12,7 @@ use Spryker\Zed\Currency\Communication\Plugin\Application\CurrencyBackendGateway
 use Spryker\Zed\ErrorHandler\Communication\Plugin\Application\ErrorHandlerApplicationPlugin;
 use Spryker\Zed\EventDispatcher\Communication\Plugin\Application\BackendApiEventDispatcherApplicationPlugin;
 use Spryker\Zed\EventDispatcher\Communication\Plugin\Application\BackendGatewayEventDispatcherApplicationPlugin;
+use Spryker\Zed\EventDispatcher\Communication\Plugin\Application\BackofficeEventDispatcherApplicationPlugin;
 use Spryker\Zed\EventDispatcher\Communication\Plugin\Application\EventDispatcherApplicationPlugin;
 use Spryker\Zed\Form\Communication\Plugin\Application\FormApplicationPlugin;
 use Spryker\Zed\Http\Communication\Plugin\Application\HttpApplicationPlugin;
@@ -22,6 +23,7 @@ use Spryker\Zed\Propel\Communication\Plugin\Application\PropelApplicationPlugin;
 use Spryker\Zed\Router\Communication\Plugin\Application\BackendApiRouterApplicationPlugin;
 use Spryker\Zed\Router\Communication\Plugin\Application\BackendGatewayRouterApplicationPlugin;
 use Spryker\Zed\Router\Communication\Plugin\Application\BackofficeRouterApplicationPlugin;
+use Spryker\Zed\Router\Communication\Plugin\Application\RouterApplicationPlugin;
 use Spryker\Zed\Security\Communication\Plugin\Application\SecurityApplicationPlugin;
 use Spryker\Zed\Session\Communication\Plugin\Application\MockArraySessionApplicationPlugin;
 use Spryker\Zed\Session\Communication\Plugin\Application\SessionApplicationPlugin;
@@ -37,13 +39,33 @@ use Spryker\Zed\ZedRequest\Communication\Plugin\Application\RequestBackendGatewa
 class ApplicationDependencyProvider extends SprykerApplicationDependencyProvider
 {
     /**
-     * @deprecated Use {@link \Pyz\Zed\Application\ApplicationDependencyProvider::getBackofficeApplicationPlugins()} instead.
-     *
      * @return array<\Spryker\Shared\ApplicationExtension\Dependency\Plugin\ApplicationPluginInterface>
      */
     protected function getApplicationPlugins(): array
     {
-        return $this->getBackofficeApplicationPlugins();
+        $plugins = [
+            new SessionApplicationPlugin(),
+            new TwigApplicationPlugin(),
+            new EventDispatcherApplicationPlugin(),
+            new LocaleApplicationPlugin(),
+            new TranslatorApplicationPlugin(),
+            new MessengerApplicationPlugin(),
+            new PropelApplicationPlugin(),
+            new RouterApplicationPlugin(),
+            new HttpApplicationPlugin(),
+            new ErrorHandlerApplicationPlugin(),
+            new FormApplicationPlugin(),
+            new ValidatorApplicationPlugin(),
+            new SecurityApplicationPlugin(),
+            new NumberFormatterApplicationPlugin(),
+            new BackofficeStoreApplicationPlugin(),
+        ];
+
+        if (class_exists(WebProfilerApplicationPlugin::class)) {
+            $plugins[] = new WebProfilerApplicationPlugin();
+        }
+
+        return $plugins;
     }
 
     /**
@@ -54,7 +76,7 @@ class ApplicationDependencyProvider extends SprykerApplicationDependencyProvider
         $plugins = [
             new SessionApplicationPlugin(),
             new TwigApplicationPlugin(),
-            new EventDispatcherApplicationPlugin(),
+            new BackofficeEventDispatcherApplicationPlugin(),
             new LocaleApplicationPlugin(),
             new TranslatorApplicationPlugin(),
             new MessengerApplicationPlugin(),

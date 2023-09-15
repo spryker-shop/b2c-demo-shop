@@ -2,7 +2,7 @@ FROM mcr.microsoft.com/playwright:jammy
 ENV ROBOT_WORK_DIR /opt/robotframework
 RUN mkdir -p ${ROBOT_WORK_DIR}
 
-RUN apt-get update -y && apt install -y \
+RUN apt-get update -y && DEBIAN_FRONTEND=noninteractive apt install -y \
     python3  \
     python3-pip \
     python3-tk \
