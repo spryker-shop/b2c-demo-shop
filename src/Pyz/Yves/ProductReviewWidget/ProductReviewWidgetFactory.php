@@ -36,6 +36,6 @@ class ProductReviewWidgetFactory extends SprykerShopProductReviewWidgetFactory
      */
     public function getPyzGlossaryClient(): GlossaryStorageClient
     {
-        return $this->getProvidedDependency(ProductReviewWidgetDependencyProvider::PYZ_CLIENT_GLOSSARY_STORAGE);
+        return $this->getProvidedDependency(ProductReviewWidgetDependencyProvider::CLIENT_GLOSSARY_STORAGE);
     }
 }

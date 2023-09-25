@@ -67,7 +67,7 @@ class ContentProductWidgetFactory extends SprykerContentProductWidgetFactory
      */
     public function getPyzContentProductClient(): ContentProductClientInterface
     {
-        return $this->getProvidedDependency(ContentProductWidgetDependencyProvider::PYZ_CLIENT_CONTENT_PRODUCT);
+        return $this->getProvidedDependency(ContentProductWidgetDependencyProvider::CLIENT_CONTENT_PRODUCT);
     }
 
     /**
@@ -75,6 +75,6 @@ class ContentProductWidgetFactory extends SprykerContentProductWidgetFactory
      */
     public function getPyzProductStorageClient(): ProductStorageClientInterface
     {
-        return $this->getProvidedDependency(ContentProductWidgetDependencyProvider::PYZ_CLIENT_PRODUCT_STORAGE);
+        return $this->getProvidedDependency(ContentProductWidgetDependencyProvider::CLIENT_PRODUCT_STORAGE);
     }
 }

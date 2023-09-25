@@ -22,7 +22,7 @@ class TestController extends AbstractController
     /**
      * @var string
      */
-    public const PYZ_STATE_MACHINE_NAME = 'Test';
+    public const STATE_MACHINE_NAME = 'Test';
 
     /**
      * @return array<string, mixed>

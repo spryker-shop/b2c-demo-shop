@@ -14,14 +14,14 @@ class ContentProductSetGuiConfig extends SprykerContentProductSetGuiConfig
     /**
      * @var string
      */
-    protected const PYZ_WIDGET_TEMPLATE_IDENTIFIER_ADD_TO_CART = 'add-to-cart';
+    protected const WIDGET_TEMPLATE_IDENTIFIER_ADD_TO_CART = 'add-to-cart';
 
     /**
      * Content item banner default template name
      *
      * @var string
      */
-    protected const PYZ_WIDGET_TEMPLATE_DISPLAY_NAME_ADD_TO_CART = 'content_product_set.template.add_to_cart';
+    protected const WIDGET_TEMPLATE_DISPLAY_NAME_ADD_TO_CART = 'content_product_set.template.add_to_cart';
 
     /**
      * @return array<string, string>
@@ -31,7 +31,7 @@ class ContentProductSetGuiConfig extends SprykerContentProductSetGuiConfig
         return array_merge(
             parent::getContentWidgetTemplates(),
             [
-                static::PYZ_WIDGET_TEMPLATE_IDENTIFIER_ADD_TO_CART => static::PYZ_WIDGET_TEMPLATE_DISPLAY_NAME_ADD_TO_CART,
+                static::WIDGET_TEMPLATE_IDENTIFIER_ADD_TO_CART => static::WIDGET_TEMPLATE_DISPLAY_NAME_ADD_TO_CART,
             ],
         );
     }

@@ -15,37 +15,37 @@ class ExampleProductSalePageDependencyProvider extends AbstractBundleDependencyP
     /**
      * @var string
      */
-    public const PYZ_CLIENT_SEARCH = 'PYZ_CLIENT_SEARCH';
+    public const CLIENT_SEARCH = 'CLIENT_SEARCH';
 
     /**
      * @var string
      */
-    public const PYZ_CLIENT_URL_STORAGE = 'PYZ_CLIENT_URL_STORAGE';
+    public const CLIENT_URL_STORAGE = 'CLIENT_URL_STORAGE';
 
     /**
      * @var string
      */
-    public const PYZ_CLIENT_STORE = 'PYZ_CLIENT_STORE';
+    public const CLIENT_STORE = 'CLIENT_STORE';
 
     /**
      * @var string
      */
-    public const PYZ_PLUGIN_PRODUCT_SALE_PAGE_WIDGETS = 'PYZ_PLUGIN_PRODUCT_SALE_PAGE_WIDGETS';
+    public const PLUGIN_PRODUCT_SALE_PAGE_WIDGETS = 'PLUGIN_PRODUCT_SALE_PAGE_WIDGETS';
 
     /**
      * @var string
      */
-    public const PYZ_CLIENT_CATALOG = 'PYZ_CLIENT_CATALOG';
+    public const CLIENT_CATALOG = 'CLIENT_CATALOG';
 
     /**
      * @var string
      */
-    public const PYZ_CLIENT_LOCALE = 'PYZ_CLIENT_LOCALE';
+    public const CLIENT_LOCALE = 'CLIENT_LOCALE';
 
     /**
      * @var string
      */
-    public const PYZ_SERVICE_UTIL_NUMBER = 'PYZ_SERVICE_UTIL_NUMBER';
+    public const SERVICE_UTIL_NUMBER = 'SERVICE_UTIL_NUMBER';
 
     /**
      * @param \Spryker\Yves\Kernel\Container $container
@@ -72,7 +72,7 @@ class ExampleProductSalePageDependencyProvider extends AbstractBundleDependencyP
      */
     protected function addPyzSearchClient(Container $container): Container
     {
-        $container->set(static::PYZ_CLIENT_SEARCH, function (Container $container) {
+        $container->set(static::CLIENT_SEARCH, function (Container $container) {
             return $container->getLocator()->search()->client();
         });
 
@@ -86,7 +86,7 @@ class ExampleProductSalePageDependencyProvider extends AbstractBundleDependencyP
      */
     protected function addPyzUrlStorageClient(Container $container): Container
     {
-        $container->set(static::PYZ_CLIENT_URL_STORAGE, function (Container $container) {
+        $container->set(static::CLIENT_URL_STORAGE, function (Container $container) {
             return $container->getLocator()->urlStorage()->client();
         });
 
@@ -100,7 +100,7 @@ class ExampleProductSalePageDependencyProvider extends AbstractBundleDependencyP
      */
     protected function addPyzClientStore($container): Container
     {
-        $container->set(static::PYZ_CLIENT_STORE, function (Container $container) {
+        $container->set(static::CLIENT_STORE, function (Container $container) {
             return $container->getLocator()->store()->client();
         });
 
@@ -114,7 +114,7 @@ class ExampleProductSalePageDependencyProvider extends AbstractBundleDependencyP
      */
     protected function addPyzCatalogClient(Container $container): Container
     {
-        $container->set(static::PYZ_CLIENT_CATALOG, function (Container $container) {
+        $container->set(static::CLIENT_CATALOG, function (Container $container) {
             return $container->getLocator()->catalog()->client();
         });
 
@@ -128,7 +128,7 @@ class ExampleProductSalePageDependencyProvider extends AbstractBundleDependencyP
      */
     protected function addProductSalePageWidgetPlugins($container): Container
     {
-        $container->set(static::PYZ_PLUGIN_PRODUCT_SALE_PAGE_WIDGETS, function () {
+        $container->set(static::PLUGIN_PRODUCT_SALE_PAGE_WIDGETS, function () {
             return $this->getProductSalePageWidgetPlugins();
         });
 
@@ -142,7 +142,7 @@ class ExampleProductSalePageDependencyProvider extends AbstractBundleDependencyP
      */
     protected function addPyzLocaleClient(Container $container): Container
     {
-        $container->set(static::PYZ_CLIENT_LOCALE, function (Container $container) {
+        $container->set(static::CLIENT_LOCALE, function (Container $container) {
             return $container->getLocator()->locale()->client();
         });
 
@@ -156,7 +156,7 @@ class ExampleProductSalePageDependencyProvider extends AbstractBundleDependencyP
      */
     protected function addPyzUtilNumberService(Container $container): Container
     {
-        $container->set(static::PYZ_SERVICE_UTIL_NUMBER, function (Container $container) {
+        $container->set(static::SERVICE_UTIL_NUMBER, function (Container $container) {
             return $container->getLocator()->utilNumber()->service();
         });
 

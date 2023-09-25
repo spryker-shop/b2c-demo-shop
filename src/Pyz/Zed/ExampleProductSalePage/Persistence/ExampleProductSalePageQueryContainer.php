@@ -23,28 +23,28 @@ class ExampleProductSalePageQueryContainer extends AbstractQueryContainer implem
     /**
      * @var string
      */
-    protected const PYZ_PRICE_TYPE_ORIGINAL = 'ORIGINAL';
+    protected const PRICE_TYPE_ORIGINAL = 'ORIGINAL';
 
     /**
      * @uses \Spryker\Shared\PriceProduct\PriceProductConfig::PRICE_TYPE_DEFAULT
      *
      * @var string
      */
-    protected const PYZ_PRICE_TYPE_DEFAULT = 'DEFAULT';
+    protected const PRICE_TYPE_DEFAULT = 'DEFAULT';
 
     /**
      * @uses \Spryker\Shared\Price\PriceConfig::PRICE_MODE_NET
      *
      * @var string
      */
-    protected const PYZ_PRICE_MODE_NET = 'NET_MODE';
+    protected const PRICE_MODE_NET = 'NET_MODE';
 
     /**
      * @uses \Spryker\Shared\Price\PriceConfig::PRICE_MODE_GROSS
      *
      * @var string
      */
-    protected const PYZ_PRICE_MODE_GROSS = 'GROSS_MODE';
+    protected const PRICE_MODE_GROSS = 'GROSS_MODE';
 
     /**
      * @api
@@ -81,7 +81,7 @@ class ExampleProductSalePageQueryContainer extends AbstractQueryContainer implem
                     ->addJoinCondition(
                         'priceTypeOrigin',
                         'priceTypeOrigin.name = ?',
-                        static::PYZ_PRICE_TYPE_ORIGINAL,
+                        static::PRICE_TYPE_ORIGINAL,
                     )
                     ->usePriceProductStoreQuery('priceProductStoreOrigin', Criteria::LEFT_JOIN)
                         ->usePriceProductDefaultQuery('priceProductDefaultOriginal', Criteria::LEFT_JOIN)
@@ -93,7 +93,7 @@ class ExampleProductSalePageQueryContainer extends AbstractQueryContainer implem
                     ->addJoinCondition(
                         'priceTypeDefault',
                         'priceTypeDefault.name = ?',
-                        static::PYZ_PRICE_TYPE_DEFAULT,
+                        static::PRICE_TYPE_DEFAULT,
                     )
                     ->usePriceProductStoreQuery('priceProductStoreDefault', Criteria::LEFT_JOIN)
                         ->usePriceProductDefaultQuery('priceProductDefaultDefault', Criteria::LEFT_JOIN)
@@ -106,7 +106,7 @@ class ExampleProductSalePageQueryContainer extends AbstractQueryContainer implem
             ->addJoinCondition('priceProductStoreDefault', 'priceProductStoreOrigin.fk_store = priceProductStoreDefault.fk_store')
             ->addJoinCondition('priceProductStoreDefault', 'priceProductStoreOrigin.fk_currency = priceProductStoreDefault.fk_currency');
 
-        if ($priceMode === static::PYZ_PRICE_MODE_GROSS) {
+        if ($priceMode === static::PRICE_MODE_GROSS) {
             $productLabelProductAbstractQuery->addAnd(
                 $this->getPyzBasicModelCriterion(
                     $productLabelProductAbstractQuery,
@@ -125,7 +125,7 @@ class ExampleProductSalePageQueryContainer extends AbstractQueryContainer implem
                     ->addOr($productLabelProductAbstractQuery->getNewCriterion('priceProductStoreDefault.gross_price', null, Criteria::ISNULL)));
         }
 
-        if ($priceMode === static::PYZ_PRICE_MODE_NET) {
+        if ($priceMode === static::PRICE_MODE_NET) {
             $productLabelProductAbstractQuery->addAnd(
                 $this->getPyzBasicModelCriterion(
                     $productLabelProductAbstractQuery,
@@ -185,7 +185,7 @@ class ExampleProductSalePageQueryContainer extends AbstractQueryContainer implem
                 ->addJoinCondition(
                     'priceTypeOrigin',
                     'priceTypeOrigin.name = ?',
-                    static::PYZ_PRICE_TYPE_ORIGINAL,
+                    static::PRICE_TYPE_ORIGINAL,
                 )
                 ->usePriceProductStoreQuery('priceProductStoreOrigin', Criteria::LEFT_JOIN)
                     ->usePriceProductDefaultQuery('priceProductDefaultOriginal', Criteria::LEFT_JOIN)
@@ -197,7 +197,7 @@ class ExampleProductSalePageQueryContainer extends AbstractQueryContainer implem
                 ->addJoinCondition(
                     'priceTypeDefault',
                     'priceTypeDefault.name = ?',
-                    static::PYZ_PRICE_TYPE_DEFAULT,
+                    static::PRICE_TYPE_DEFAULT,
                 )
                 ->usePriceProductStoreQuery('priceProductStoreDefault', Criteria::LEFT_JOIN)
                     ->usePriceProductDefaultQuery('priceProductDefaultDefault', Criteria::LEFT_JOIN)
@@ -221,7 +221,7 @@ class ExampleProductSalePageQueryContainer extends AbstractQueryContainer implem
         $productAbstractQuery->addAnd('priceProductStoreDefault.fk_store', $currentStoreId, Criteria::EQUAL);
         $productAbstractQuery->addAnd('priceProductStoreDefault.fk_currency', $currentCurrencyId, Criteria::EQUAL);
 
-        if ($priceMode === static::PYZ_PRICE_MODE_GROSS) {
+        if ($priceMode === static::PRICE_MODE_GROSS) {
             $productAbstractQuery->addAnd(
                 $this->getPyzBasicModelCriterion(
                     $productAbstractQuery,
@@ -231,7 +231,7 @@ class ExampleProductSalePageQueryContainer extends AbstractQueryContainer implem
             );
         }
 
-        if ($priceMode === static::PYZ_PRICE_MODE_NET) {
+        if ($priceMode === static::PRICE_MODE_NET) {
             $productAbstractQuery->addAnd(
                 $this->getPyzBasicModelCriterion(
                     $productAbstractQuery,

@@ -23,7 +23,7 @@ class ExampleProductSalePagePersistenceFactory extends AbstractPersistenceFactor
      */
     public function getPyzProductLabelQueryContainer(): ProductLabelQueryContainerInterface
     {
-        return $this->getProvidedDependency(ExampleProductSalePageDependencyProvider::PYZ_QUERY_CONTAINER_PRODUCT_LABEL);
+        return $this->getProvidedDependency(ExampleProductSalePageDependencyProvider::QUERY_CONTAINER_PRODUCT_LABEL);
     }
 
     /**
@@ -31,6 +31,6 @@ class ExampleProductSalePagePersistenceFactory extends AbstractPersistenceFactor
      */
     public function getPyzProductQueryContainer(): ProductQueryContainerInterface
     {
-        return $this->getProvidedDependency(ExampleProductSalePageDependencyProvider::PYZ_QUERY_CONTAINER_PRODUCT);
+        return $this->getProvidedDependency(ExampleProductSalePageDependencyProvider::QUERY_CONTAINER_PRODUCT);
     }
 }

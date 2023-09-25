@@ -22,6 +22,6 @@ class ExampleStateMachineCommunicationFactory extends AbstractCommunicationFacto
      */
     public function getPyzStateMachineFacade(): StateMachineFacade
     {
-        return $this->getProvidedDependency(ExampleStateMachineDependencyProvider::PYZ_FACADE_STATE_MACHINE);
+        return $this->getProvidedDependency(ExampleStateMachineDependencyProvider::FACADE_STATE_MACHINE);
     }
 }

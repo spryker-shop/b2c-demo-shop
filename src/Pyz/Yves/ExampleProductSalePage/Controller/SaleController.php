@@ -42,7 +42,7 @@ class SaleController extends AbstractController
             ->salePyzSearch($parameters);
 
         $searchResults['category'] = $categoryNode;
-        $searchResults['filterPath'] = ExampleProductSaleRouteProviderPlugin::PYZ_ROUTE_NAME_SALE;
+        $searchResults['filterPath'] = ExampleProductSaleRouteProviderPlugin::ROUTE_NAME_SALE;
         $searchResults['viewMode'] = $this->getFactory()
             ->getPyzCatalogClient()
             ->getCatalogViewMode($request);

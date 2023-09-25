@@ -27,7 +27,7 @@ class SaleSearchQueryPlugin extends AbstractPlugin implements QueryInterface, Se
     /**
      * @var string
      */
-    protected const PYZ_SOURCE_IDENTIFIER = 'page';
+    protected const SOURCE_IDENTIFIER = 'page';
 
     /**
      * @var \Elastica\Query
@@ -95,7 +95,7 @@ class SaleSearchQueryPlugin extends AbstractPlugin implements QueryInterface, Se
     protected function setupDefaultSearchContext(): void
     {
         $searchContextTransfer = new SearchContextTransfer();
-        $searchContextTransfer->setSourceIdentifier(static::PYZ_SOURCE_IDENTIFIER);
+        $searchContextTransfer->setSourceIdentifier(static::SOURCE_IDENTIFIER);
 
         $this->searchContextTransfer = $searchContextTransfer;
     }

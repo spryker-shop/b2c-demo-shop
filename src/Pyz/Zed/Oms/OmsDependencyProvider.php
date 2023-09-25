@@ -34,7 +34,7 @@ class OmsDependencyProvider extends SprykerOmsDependencyProvider
     /**
      * @var string
      */
-    public const PYZ_FACADE_TRANSLATOR = 'PYZ_FACADE_TRANSLATOR';
+    public const FACADE_TRANSLATOR = 'FACADE_TRANSLATOR';
 
     /**
      * @param \Spryker\Zed\Kernel\Container $container
@@ -70,7 +70,7 @@ class OmsDependencyProvider extends SprykerOmsDependencyProvider
      */
     protected function addPyzTranslatorFacade(Container $container): Container
     {
-        $container->set(static::PYZ_FACADE_TRANSLATOR, function (Container $container) {
+        $container->set(static::FACADE_TRANSLATOR, function (Container $container) {
             return $container->getLocator()->translator()->facade();
         });
 

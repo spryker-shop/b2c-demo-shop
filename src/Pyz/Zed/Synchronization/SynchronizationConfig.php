@@ -14,7 +14,7 @@ class SynchronizationConfig extends SprykerSynchronizationConfig
     /**
      * @var string
      */
-    public const PYZ_DEFAULT_SYNCHRONIZATION_POOL_NAME = 'synchronizationPool';
+    public const DEFAULT_SYNCHRONIZATION_POOL_NAME = 'synchronizationPool';
 
     /**
      * @return bool

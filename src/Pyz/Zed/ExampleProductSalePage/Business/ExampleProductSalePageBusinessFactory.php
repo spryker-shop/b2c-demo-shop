@@ -40,7 +40,7 @@ class ExampleProductSalePageBusinessFactory extends AbstractBusinessFactory
      */
     protected function getPyzCurrencyFacade(): CurrencyFacadeInterface
     {
-        return $this->getProvidedDependency(ExampleProductSalePageDependencyProvider::PYZ_FACADE_CURRENCY);
+        return $this->getProvidedDependency(ExampleProductSalePageDependencyProvider::FACADE_CURRENCY);
     }
 
     /**
@@ -48,7 +48,7 @@ class ExampleProductSalePageBusinessFactory extends AbstractBusinessFactory
      */
     protected function getPyzPriceFacade(): PriceFacadeInterface
     {
-        return $this->getProvidedDependency(ExampleProductSalePageDependencyProvider::PYZ_FACADE_PRICE);
+        return $this->getProvidedDependency(ExampleProductSalePageDependencyProvider::FACADE_PRICE);
     }
 
     /**
@@ -56,6 +56,6 @@ class ExampleProductSalePageBusinessFactory extends AbstractBusinessFactory
      */
     protected function getStoreFacade(): StoreFacadeInterface
     {
-        return $this->getProvidedDependency(ExampleProductSalePageDependencyProvider::PYZ_FACADE_STORE);
+        return $this->getProvidedDependency(ExampleProductSalePageDependencyProvider::FACADE_STORE);
     }
 }

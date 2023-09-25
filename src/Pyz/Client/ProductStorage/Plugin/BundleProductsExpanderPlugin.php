@@ -22,7 +22,7 @@ class BundleProductsExpanderPlugin extends AbstractPlugin implements ProductView
     /**
      * @var string
      */
-    protected const PYZ_KEY_SKU = 'sku';
+    protected const KEY_SKU = 'sku';
 
     /**
      * {@inheritDoc}
@@ -40,7 +40,7 @@ class BundleProductsExpanderPlugin extends AbstractPlugin implements ProductView
         foreach ($productViewTransfer->getPyzBundledProductIds() as $productId => $quantity) {
             $bundledProduct = $this->getClient()->findProductConcreteStorageData($productId, $localeName);
             $bundledProduct[ProductStorageConfig::RESOURCE_TYPE_ATTRIBUTE_MAP] = (new AttributeMapStorageTransfer())->toArray();
-            if (!isset($bundledProduct[static::PYZ_KEY_SKU])) {
+            if (!isset($bundledProduct[static::KEY_SKU])) {
                 continue;
             }
 

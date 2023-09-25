@@ -23,7 +23,7 @@ class SubmitController extends SprykerSubmitController
     /**
      * @var string
      */
-    protected const PYZ_PRODUCT_REVIEW_ERROR_PLEASE_LOGIN = 'product_review.error.please_login';
+    protected const PRODUCT_REVIEW_ERROR_PLEASE_LOGIN = 'product_review.error.please_login';
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
@@ -82,7 +82,7 @@ class SubmitController extends SprykerSubmitController
 
         if ($customerReference === null) {
             $glossaryStorageClient = $this->getFactory()->getPyzGlossaryClient();
-            $errorMessage = $glossaryStorageClient->translate(self::PYZ_PRODUCT_REVIEW_ERROR_PLEASE_LOGIN, $this->getLocale());
+            $errorMessage = $glossaryStorageClient->translate(self::PRODUCT_REVIEW_ERROR_PLEASE_LOGIN, $this->getLocale());
             $form->addError(new FormError($errorMessage));
         }
 

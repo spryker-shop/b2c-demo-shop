@@ -15,7 +15,7 @@ class ProductReviewWidgetDependencyProvider extends SprykerProductReviewWidgetDe
     /**
      * @var string
      */
-    public const PYZ_CLIENT_GLOSSARY_STORAGE = 'PYZ_CLIENT_GLOSSARY_STORAGE';
+    public const CLIENT_GLOSSARY_STORAGE = 'CLIENT_GLOSSARY_STORAGE';
 
     /**
      * @param \Spryker\Yves\Kernel\Container $container
@@ -37,7 +37,7 @@ class ProductReviewWidgetDependencyProvider extends SprykerProductReviewWidgetDe
      */
     protected function addPyzGlossaryStorageClient(Container $container): Container
     {
-        $container->set(static::PYZ_CLIENT_GLOSSARY_STORAGE, function (Container $container) {
+        $container->set(static::CLIENT_GLOSSARY_STORAGE, function (Container $container) {
             return $container->getLocator()->glossaryStorage()->client();
         });
 

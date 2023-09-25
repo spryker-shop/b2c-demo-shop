@@ -17,16 +17,6 @@ use Symfony\Component\HttpFoundation\Request;
 class CreateController extends SprykerCreateController
 {
     /**
-     * @var string
-     */
-    protected const PYZ_REQUEST_HEADER_REFERER = 'referer';
-
-    /**
-     * @var string
-     */
-    protected const PYZ_URL_MAIN = '/';
-
-    /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
@@ -45,11 +35,11 @@ class CreateController extends SprykerCreateController
      */
     protected function getPyzRefererUrl(Request $request): string
     {
-        if ($request->headers->has(static::PYZ_REQUEST_HEADER_REFERER)) {
-            return $request->headers->get(static::PYZ_REQUEST_HEADER_REFERER);
+        if ($request->headers->has(static::REQUEST_HEADER_REFERER)) {
+            return $request->headers->get(static::REQUEST_HEADER_REFERER);
         }
 
-        return static::PYZ_URL_MAIN;
+        return static::URL_MAIN;
     }
 
     /**

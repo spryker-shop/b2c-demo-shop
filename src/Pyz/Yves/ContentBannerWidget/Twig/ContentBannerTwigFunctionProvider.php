@@ -17,27 +17,27 @@ class ContentBannerTwigFunctionProvider extends TwigFunctionProvider
     /**
      * @var string
      */
-    protected const PYZ_WIDGET_TEMPLATE_IDENTIFIER_SLIDER = 'slider';
+    protected const WIDGET_TEMPLATE_IDENTIFIER_SLIDER = 'slider';
 
     /**
      * @var string
      */
-    protected const PYZ_WIDGET_TEMPLATE_IDENTIFIER_SLIDER_WITHOUT_LINK = 'slider-without-link';
+    protected const WIDGET_TEMPLATE_IDENTIFIER_SLIDER_WITHOUT_LINK = 'slider-without-link';
 
     /**
      * @var string
      */
-    protected const PYZ_TWIG_FUNCTION_NAME_CONTENT_BANNER = 'content_banner';
+    protected const TWIG_FUNCTION_NAME_CONTENT_BANNER = 'content_banner';
 
     /**
      * @var string
      */
-    protected const PYZ_WIDGET_TEMPLATE_IDENTIFIER_BOTTOM_TITLE = 'bottom-title';
+    protected const WIDGET_TEMPLATE_IDENTIFIER_BOTTOM_TITLE = 'bottom-title';
 
     /**
      * @var string
      */
-    protected const PYZ_WIDGET_TEMPLATE_IDENTIFIER_TOP_TITLE = 'top-title';
+    protected const WIDGET_TEMPLATE_IDENTIFIER_TOP_TITLE = 'top-title';
 
     /**
      * @var \Twig\Environment
@@ -74,7 +74,7 @@ class ContentBannerTwigFunctionProvider extends TwigFunctionProvider
      */
     public function getFunctionName(): string
     {
-        return static::PYZ_TWIG_FUNCTION_NAME_CONTENT_BANNER;
+        return static::TWIG_FUNCTION_NAME_CONTENT_BANNER;
     }
 
     /**
@@ -109,10 +109,10 @@ class ContentBannerTwigFunctionProvider extends TwigFunctionProvider
     protected function getPyzAvailableTemplates(): array
     {
         return [
-            static::PYZ_WIDGET_TEMPLATE_IDENTIFIER_BOTTOM_TITLE => '@ContentBannerWidget/views/banner/banner.twig',
-            static::PYZ_WIDGET_TEMPLATE_IDENTIFIER_TOP_TITLE => '@ContentBannerWidget/views/banner-alternative/banner-alternative.twig',
-            static::PYZ_WIDGET_TEMPLATE_IDENTIFIER_SLIDER => '@ContentBannerWidget/views/slider/slider.twig',
-            static::PYZ_WIDGET_TEMPLATE_IDENTIFIER_SLIDER_WITHOUT_LINK => '@ContentBannerWidget/views/slider-without-link/slider-without-link.twig',
+            static::WIDGET_TEMPLATE_IDENTIFIER_BOTTOM_TITLE => '@ContentBannerWidget/views/banner/banner.twig',
+            static::WIDGET_TEMPLATE_IDENTIFIER_TOP_TITLE => '@ContentBannerWidget/views/banner-alternative/banner-alternative.twig',
+            static::WIDGET_TEMPLATE_IDENTIFIER_SLIDER => '@ContentBannerWidget/views/slider/slider.twig',
+            static::WIDGET_TEMPLATE_IDENTIFIER_SLIDER_WITHOUT_LINK => '@ContentBannerWidget/views/slider-without-link/slider-without-link.twig',
         ];
     }
 

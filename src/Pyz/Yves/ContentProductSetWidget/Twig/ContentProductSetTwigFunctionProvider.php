@@ -22,34 +22,34 @@ class ContentProductSetTwigFunctionProvider extends TwigFunctionProvider
     /**
      * @var string
      */
-    protected const PYZ_WIDGET_TEMPLATE_IDENTIFIER_ADD_TO_CART = 'add-to-cart';
+    protected const WIDGET_TEMPLATE_IDENTIFIER_ADD_TO_CART = 'add-to-cart';
 
     /**
      * @var string
      */
-    protected const PYZ_FUNCTION_CONTENT_PRODUCT_SET = 'content_product_set';
+    protected const FUNCTION_CONTENT_PRODUCT_SET = 'content_product_set';
 
     /**
      * @var string
      */
-    protected const PYZ_WIDGET_TEMPLATE_IDENTIFIER_CART_BUTTON_TOP = 'cart-button-top';
+    protected const WIDGET_TEMPLATE_IDENTIFIER_CART_BUTTON_TOP = 'cart-button-top';
 
     /**
      * @var string
      */
-    protected const PYZ_WIDGET_TEMPLATE_IDENTIFIER_CART_BUTTON_BOTTOM = 'cart-button-btm';
+    protected const WIDGET_TEMPLATE_IDENTIFIER_CART_BUTTON_BOTTOM = 'cart-button-btm';
 
     /**
      * @var string
      */
-    protected const PYZ_PARAM_ATTRIBUTE = 'attributes';
+    protected const PARAM_ATTRIBUTE = 'attributes';
 
     /**
      * @deprecated Use {@link \SprykerShop\Yves\ContentProductSetWidget\Twig\ContentProductSetTwigFunctionProvider::WIDGET_TEMPLATE_IDENTIFIER_CART_BUTTON_TOP} instead.
      *
      * @var string
      */
-    protected const PYZ_WIDGET_TEMPLATE_IDENTIFIER_DEFAULT = 'default';
+    protected const WIDGET_TEMPLATE_IDENTIFIER_DEFAULT = 'default';
 
     /**
      * @var \Twig\Environment
@@ -99,7 +99,7 @@ class ContentProductSetTwigFunctionProvider extends TwigFunctionProvider
      */
     public function getFunctionName(): string
     {
-        return static::PYZ_FUNCTION_CONTENT_PRODUCT_SET;
+        return static::FUNCTION_CONTENT_PRODUCT_SET;
     }
 
     /**
@@ -124,7 +124,7 @@ class ContentProductSetTwigFunctionProvider extends TwigFunctionProvider
             }
 
             /** @var array<mixed> $selectedAttributes */
-            $selectedAttributes = $this->getPyzRequest($context)->query->get(static::PYZ_PARAM_ATTRIBUTE) ?: [];
+            $selectedAttributes = $this->getPyzRequest($context)->query->get(static::PARAM_ATTRIBUTE) ?: [];
             $productAbstractViewCollection = $this->contentProductAbstractReader
                 ->findProductAbstractCollection($productSetDataStorageTransfer, $selectedAttributes, $this->localeName);
 
@@ -155,10 +155,10 @@ class ContentProductSetTwigFunctionProvider extends TwigFunctionProvider
     protected function getPyzAvailableTemplates(): array
     {
         return [
-            static::PYZ_WIDGET_TEMPLATE_IDENTIFIER_DEFAULT => '@ContentProductSetWidget/views/content-product-set/content-product-set.twig',
-            static::PYZ_WIDGET_TEMPLATE_IDENTIFIER_CART_BUTTON_TOP => '@ContentProductSetWidget/views/content-product-set/content-product-set.twig',
-            static::PYZ_WIDGET_TEMPLATE_IDENTIFIER_CART_BUTTON_BOTTOM => '@ContentProductSetWidget/views/content-product-set-alternative/content-product-set-alternative.twig',
-            static::PYZ_WIDGET_TEMPLATE_IDENTIFIER_ADD_TO_CART => '@ContentProductSetWidget/views/add-to-cart/add-to-cart.twig',
+            static::WIDGET_TEMPLATE_IDENTIFIER_DEFAULT => '@ContentProductSetWidget/views/content-product-set/content-product-set.twig',
+            static::WIDGET_TEMPLATE_IDENTIFIER_CART_BUTTON_TOP => '@ContentProductSetWidget/views/content-product-set/content-product-set.twig',
+            static::WIDGET_TEMPLATE_IDENTIFIER_CART_BUTTON_BOTTOM => '@ContentProductSetWidget/views/content-product-set-alternative/content-product-set-alternative.twig',
+            static::WIDGET_TEMPLATE_IDENTIFIER_ADD_TO_CART => '@ContentProductSetWidget/views/add-to-cart/add-to-cart.twig',
         ];
     }
 

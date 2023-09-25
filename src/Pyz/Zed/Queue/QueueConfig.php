@@ -19,7 +19,7 @@ class QueueConfig extends SprykerQueueConfig
     /**
      * @var string
      */
-    public const PYZ_RABBITMQ = 'rabbitmq';
+    public const RABBITMQ = 'rabbitmq';
 
     /**
      * @return array<int>
@@ -41,13 +41,13 @@ class QueueConfig extends SprykerQueueConfig
     {
         return [
             QueueConstants::QUEUE_DEFAULT_RECEIVER => [
-                static::PYZ_RABBITMQ => $this->getPyzRabbitMqQueueConsumerOptions(),
+                static::RABBITMQ => $this->getPyzRabbitMqQueueConsumerOptions(),
             ],
             EventConstants::EVENT_QUEUE => [
-                static::PYZ_RABBITMQ => $this->getPyzRabbitMqQueueConsumerOptions(),
+                static::RABBITMQ => $this->getPyzRabbitMqQueueConsumerOptions(),
             ],
             Config::get(LogConstants::LOG_QUEUE_NAME) => [
-                static::PYZ_RABBITMQ => $this->getPyzRabbitMqQueueConsumerOptions(),
+                static::RABBITMQ => $this->getPyzRabbitMqQueueConsumerOptions(),
             ],
         ];
     }
@@ -59,7 +59,7 @@ class QueueConfig extends SprykerQueueConfig
     {
         return [
             QueueConstants::QUEUE_WORKER_MESSAGE_CHECK_OPTION => [
-                static::PYZ_RABBITMQ => $this->getPyzRabbitMqQueueMessageCheckOptions(),
+                static::RABBITMQ => $this->getPyzRabbitMqQueueMessageCheckOptions(),
             ],
         ];
     }

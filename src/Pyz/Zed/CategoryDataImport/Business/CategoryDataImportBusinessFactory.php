@@ -31,7 +31,7 @@ class CategoryDataImportBusinessFactory extends SprykerCategoryDataImportBusines
                 CategoryWriterStep::KEY_META_TITLE,
                 CategoryWriterStep::KEY_META_DESCRIPTION,
                 CategoryWriterStep::KEY_META_KEYWORDS,
-                CategoryWriterStep::PYZ_KEY_CATEGORY_IMAGE_NAME,
+                CategoryWriterStep::KEY_CATEGORY_IMAGE_NAME,
             ]))
             ->addStep(new CategoryWriterStep($this->createCategoryRepository()));
 
