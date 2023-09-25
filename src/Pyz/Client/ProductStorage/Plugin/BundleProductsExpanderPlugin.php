@@ -37,7 +37,7 @@ class BundleProductsExpanderPlugin extends AbstractPlugin implements ProductView
      */
     public function expandProductViewTransfer(ProductViewTransfer $productViewTransfer, array $productData, $localeName)
     {
-        foreach ($productViewTransfer->getPyzBundledProductIds() as $productId => $quantity) {
+        foreach ($productViewTransfer->getBundledProductIds() as $productId => $quantity) {
             $bundledProduct = $this->getClient()->findProductConcreteStorageData($productId, $localeName);
             $bundledProduct[ProductStorageConfig::RESOURCE_TYPE_ATTRIBUTE_MAP] = (new AttributeMapStorageTransfer())->toArray();
             if (!isset($bundledProduct[static::KEY_SKU])) {
