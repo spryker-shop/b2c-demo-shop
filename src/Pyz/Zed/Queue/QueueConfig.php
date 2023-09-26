@@ -41,13 +41,13 @@ class QueueConfig extends SprykerQueueConfig
     {
         return [
             QueueConstants::QUEUE_DEFAULT_RECEIVER => [
-                static::RABBITMQ => $this->getPyzRabbitMqQueueConsumerOptions(),
+                static::RABBITMQ => $this->getRabbitMqQueueConsumerOptions(),
             ],
             EventConstants::EVENT_QUEUE => [
-                static::RABBITMQ => $this->getPyzRabbitMqQueueConsumerOptions(),
+                static::RABBITMQ => $this->getRabbitMqQueueConsumerOptions(),
             ],
             Config::get(LogConstants::LOG_QUEUE_NAME) => [
-                static::RABBITMQ => $this->getPyzRabbitMqQueueConsumerOptions(),
+                static::RABBITMQ => $this->getRabbitMqQueueConsumerOptions(),
             ],
         ];
     }
@@ -59,7 +59,7 @@ class QueueConfig extends SprykerQueueConfig
     {
         return [
             QueueConstants::QUEUE_WORKER_MESSAGE_CHECK_OPTION => [
-                static::RABBITMQ => $this->getPyzRabbitMqQueueMessageCheckOptions(),
+                static::RABBITMQ => $this->getRabbitMqQueueMessageCheckOptions(),
             ],
         ];
     }
@@ -67,9 +67,9 @@ class QueueConfig extends SprykerQueueConfig
     /**
      * @return \Generated\Shared\Transfer\RabbitMqConsumerOptionTransfer
      */
-    protected function getPyzRabbitMqQueueMessageCheckOptions(): RabbitMqConsumerOptionTransfer
+    protected function getRabbitMqQueueMessageCheckOptions(): RabbitMqConsumerOptionTransfer
     {
-        $queueOptionTransfer = $this->getPyzRabbitMqQueueConsumerOptions();
+        $queueOptionTransfer = $this->getRabbitMqQueueConsumerOptions();
         $queueOptionTransfer->setRequeueOnReject(true);
 
         return $queueOptionTransfer;
@@ -78,7 +78,7 @@ class QueueConfig extends SprykerQueueConfig
     /**
      * @return \Generated\Shared\Transfer\RabbitMqConsumerOptionTransfer
      */
-    protected function getPyzRabbitMqQueueConsumerOptions(): RabbitMqConsumerOptionTransfer
+    protected function getRabbitMqQueueConsumerOptions(): RabbitMqConsumerOptionTransfer
     {
         $queueOptionTransfer = new RabbitMqConsumerOptionTransfer();
         $queueOptionTransfer->setConsumerExclusive(false);

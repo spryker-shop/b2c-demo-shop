@@ -24,13 +24,13 @@ class ExampleProductSalePageBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \Pyz\Zed\ExampleProductSalePage\Business\Label\ProductAbstractRelationReaderInterface
      */
-    public function createPyzProductAbstractRelationReader(): ProductAbstractRelationReaderInterface
+    public function createProductAbstractRelationReader(): ProductAbstractRelationReaderInterface
     {
         return new ProductAbstractRelationReader(
             $this->getQueryContainer(),
             $this->getConfig(),
-            $this->getPyzCurrencyFacade(),
-            $this->getPyzPriceFacade(),
+            $this->getCurrencyFacade(),
+            $this->getPriceFacade(),
             $this->getStoreFacade(),
         );
     }
@@ -38,7 +38,7 @@ class ExampleProductSalePageBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \Spryker\Zed\Currency\Business\CurrencyFacadeInterface
      */
-    protected function getPyzCurrencyFacade(): CurrencyFacadeInterface
+    protected function getCurrencyFacade(): CurrencyFacadeInterface
     {
         return $this->getProvidedDependency(ExampleProductSalePageDependencyProvider::FACADE_CURRENCY);
     }
@@ -46,7 +46,7 @@ class ExampleProductSalePageBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \Spryker\Zed\Price\Business\PriceFacadeInterface
      */
-    protected function getPyzPriceFacade(): PriceFacadeInterface
+    protected function getPriceFacade(): PriceFacadeInterface
     {
         return $this->getProvidedDependency(ExampleProductSalePageDependencyProvider::FACADE_PRICE);
     }

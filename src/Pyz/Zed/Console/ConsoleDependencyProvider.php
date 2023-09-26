@@ -359,7 +359,7 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
         $propelCommands = $container->getLocator()->propel()->facade()->getConsoleCommands();
         $commands = array_merge($commands, $propelCommands);
 
-        if ($this->getConfig()->isPyzDevelopmentConsoleCommandsEnabled()) {
+        if ($this->getConfig()->isDevelopmentConsoleCommandsEnabled()) {
             $commands[] = new CodeTestConsole();
             $commands[] = new CodeFixturesConsole();
             $commands[] = new AcceptanceCodeTestConsole();

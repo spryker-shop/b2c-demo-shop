@@ -15,5 +15,5 @@ interface ContentProductAbstractReaderInterface
      *
      * @return array<\Generated\Shared\Transfer\ProductViewTransfer>
      */
-    public function getPyzProductAbstractCollection(string $contentKey, string $localeName): array;
+    public function getProductAbstractCollection(string $contentKey, string $localeName): array;
 }

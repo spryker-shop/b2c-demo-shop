@@ -23,11 +23,11 @@ class ExampleProductSalePageFactory extends AbstractFactory
      *
      * @return \Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface
      */
-    public function getPyzSaleSearchQueryPlugin(array $requestParameters = []): QueryInterface
+    public function getSaleSearchQueryPlugin(array $requestParameters = []): QueryInterface
     {
         $saleQueryPlugin = $this->getProvidedDependency(ExampleProductSalePageDependencyProvider::SALE_SEARCH_QUERY_PLUGIN);
 
-        return $this->getPyzSearchClient()->expandQuery(
+        return $this->getSearchClient()->expandQuery(
             $saleQueryPlugin,
             $this->getSaleSearchQueryExpanderPlugins(),
             $requestParameters,
@@ -37,7 +37,7 @@ class ExampleProductSalePageFactory extends AbstractFactory
     /**
      * @return \Spryker\Client\ProductLabelStorage\ProductLabelStorageClientInterface
      */
-    public function getPyzProductLabelStorageClient(): ProductLabelStorageClientInterface
+    public function getProductLabelStorageClient(): ProductLabelStorageClientInterface
     {
         return $this->getProvidedDependency(ExampleProductSalePageDependencyProvider::CLIENT_PRODUCT_LABEL_STORAGE);
     }
@@ -45,7 +45,7 @@ class ExampleProductSalePageFactory extends AbstractFactory
     /**
      * @return \Generated\Shared\Transfer\StoreTransfer
      */
-    public function getPyzStore(): StoreTransfer
+    public function getStore(): StoreTransfer
     {
         $storeClient = $this->getProvidedDependency(ExampleProductSalePageDependencyProvider::CLIENT_STORE);
 
@@ -55,7 +55,7 @@ class ExampleProductSalePageFactory extends AbstractFactory
     /**
      * @return \Spryker\Client\Search\SearchClientInterface
      */
-    public function getPyzSearchClient(): SearchClientInterface
+    public function getSearchClient(): SearchClientInterface
     {
         return $this->getProvidedDependency(ExampleProductSalePageDependencyProvider::CLIENT_SEARCH);
     }

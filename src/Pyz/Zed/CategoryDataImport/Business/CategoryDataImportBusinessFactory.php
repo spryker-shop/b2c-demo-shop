@@ -19,7 +19,7 @@ class CategoryDataImportBusinessFactory extends SprykerCategoryDataImportBusines
     /**
      * @return \Spryker\Zed\DataImport\Business\Model\DataImporterInterface
      */
-    public function createPyzCategoryImporter(): DataImporterInterface
+    public function createCategoryImporter(): DataImporterInterface
     {
         $dataImporter = $this->getCsvDataImporterFromConfig($this->getConfig()->getCategoryDataImporterConfiguration());
 

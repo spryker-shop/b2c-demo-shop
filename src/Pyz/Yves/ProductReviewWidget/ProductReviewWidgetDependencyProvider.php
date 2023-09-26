@@ -25,7 +25,7 @@ class ProductReviewWidgetDependencyProvider extends SprykerProductReviewWidgetDe
     public function provideDependencies(Container $container): Container
     {
         $container = parent::provideDependencies($container);
-        $this->addPyzGlossaryStorageClient($container);
+        $this->addGlossaryStorageClient($container);
 
         return $container;
     }
@@ -35,7 +35,7 @@ class ProductReviewWidgetDependencyProvider extends SprykerProductReviewWidgetDe
      *
      * @return \Spryker\Yves\Kernel\Container
      */
-    protected function addPyzGlossaryStorageClient(Container $container): Container
+    protected function addGlossaryStorageClient(Container $container): Container
     {
         $container->set(static::CLIENT_GLOSSARY_STORAGE, function (Container $container) {
             return $container->getLocator()->glossaryStorage()->client();

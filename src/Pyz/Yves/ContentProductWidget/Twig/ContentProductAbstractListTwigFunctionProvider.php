@@ -91,23 +91,23 @@ class ContentProductAbstractListTwigFunctionProvider extends TwigFunctionProvide
     public function getFunction(): callable
     {
         return function (string $contentKey, string $templateIdentifier): string {
-            if (!isset($this->getPyzAvailableTemplates()[$templateIdentifier])) {
-                return $this->getPyzMessageProductAbstractWrongTemplate($templateIdentifier);
+            if (!isset($this->getAvailableTemplates()[$templateIdentifier])) {
+                return $this->getMessageProductAbstractWrongTemplate($templateIdentifier);
             }
 
             try {
                 $productAbstractViewCollection = $this->contentProductAbstractReader
-                    ->getPyzProductAbstractCollection($contentKey, $this->localeName);
+                    ->getProductAbstractCollection($contentKey, $this->localeName);
             } catch (InvalidProductAbstractListTermException $exception) {
-                return $this->getPyzMessageProductAbstractWrongType($contentKey);
+                return $this->getMessageProductAbstractWrongType($contentKey);
             }
 
             if ($productAbstractViewCollection === []) {
-                return $this->getPyzMessageProductAbstractNotFound($contentKey);
+                return $this->getMessageProductAbstractNotFound($contentKey);
             }
 
             return (string)$this->twig->render(
-                $this->getPyzAvailableTemplates()[$templateIdentifier],
+                $this->getAvailableTemplates()[$templateIdentifier],
                 [
                     'productAbstractViewCollection' => $productAbstractViewCollection,
                 ],
@@ -118,7 +118,7 @@ class ContentProductAbstractListTwigFunctionProvider extends TwigFunctionProvide
     /**
      * @return array<string, string>
      */
-    protected function getPyzAvailableTemplates(): array
+    protected function getAvailableTemplates(): array
     {
         return [
             static::WIDGET_TEMPLATE_IDENTIFIER_BOTTOM_TITLE => '@ContentProductWidget/views/cms-product-abstract-list/cms-product-abstract-list.twig',
@@ -134,7 +134,7 @@ class ContentProductAbstractListTwigFunctionProvider extends TwigFunctionProvide
      *
      * @return string
      */
-    protected function getPyzMessageProductAbstractNotFound(string $contentKey): string
+    protected function getMessageProductAbstractNotFound(string $contentKey): string
     {
         return sprintf('<strong>Content product abstract list with content key "%s" not found.</strong>', $contentKey);
     }
@@ -144,7 +144,7 @@ class ContentProductAbstractListTwigFunctionProvider extends TwigFunctionProvide
      *
      * @return string
      */
-    protected function getPyzMessageProductAbstractWrongTemplate(string $templateIdentifier): string
+    protected function getMessageProductAbstractWrongTemplate(string $templateIdentifier): string
     {
         return sprintf('<strong>"%s" is not supported name of template.</strong>', $templateIdentifier);
     }
@@ -154,7 +154,7 @@ class ContentProductAbstractListTwigFunctionProvider extends TwigFunctionProvide
      *
      * @return string
      */
-    protected function getPyzMessageProductAbstractWrongType(string $contentKey): string
+    protected function getMessageProductAbstractWrongType(string $contentKey): string
     {
         return sprintf('<strong>Content product abstract list widget could not be rendered because the content item with key "%s" is not an abstract product list.</strong>', $contentKey);
     }

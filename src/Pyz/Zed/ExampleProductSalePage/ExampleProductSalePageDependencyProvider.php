@@ -46,8 +46,8 @@ class ExampleProductSalePageDependencyProvider extends AbstractBundleDependencyP
     {
         $container = parent::providePersistenceLayerDependencies($container);
 
-        $container = $this->addPyzProductLabelQueryContainer($container);
-        $container = $this->addPyzProductQueryContainer($container);
+        $container = $this->addProductLabelQueryContainer($container);
+        $container = $this->addProductQueryContainer($container);
 
         return $container;
     }
@@ -60,8 +60,8 @@ class ExampleProductSalePageDependencyProvider extends AbstractBundleDependencyP
     public function provideBusinessLayerDependencies(Container $container): Container
     {
         $container = parent::provideBusinessLayerDependencies($container);
-        $container = $this->addPyzCurrencyFacade($container);
-        $container = $this->addPyzPriceFacade($container);
+        $container = $this->addCurrencyFacade($container);
+        $container = $this->addPriceFacade($container);
         $container = $this->addStoreFacade($container);
 
         return $container;
@@ -72,7 +72,7 @@ class ExampleProductSalePageDependencyProvider extends AbstractBundleDependencyP
      *
      * @return \Spryker\Zed\Kernel\Container
      */
-    protected function addPyzProductLabelQueryContainer(Container $container): Container
+    protected function addProductLabelQueryContainer(Container $container): Container
     {
         $container->set(static::QUERY_CONTAINER_PRODUCT_LABEL, function (Container $container) {
             return $container->getLocator()->productLabel()->queryContainer();
@@ -86,7 +86,7 @@ class ExampleProductSalePageDependencyProvider extends AbstractBundleDependencyP
      *
      * @return \Spryker\Zed\Kernel\Container
      */
-    protected function addPyzProductQueryContainer(Container $container): Container
+    protected function addProductQueryContainer(Container $container): Container
     {
         $container->set(static::QUERY_CONTAINER_PRODUCT, function (Container $container) {
             return $container->getLocator()->product()->queryContainer();
@@ -100,7 +100,7 @@ class ExampleProductSalePageDependencyProvider extends AbstractBundleDependencyP
      *
      * @return \Spryker\Zed\Kernel\Container
      */
-    protected function addPyzCurrencyFacade(Container $container): Container
+    protected function addCurrencyFacade(Container $container): Container
     {
         $container->set(static::FACADE_CURRENCY, function (Container $container) {
             return $container->getLocator()->currency()->facade();
@@ -114,7 +114,7 @@ class ExampleProductSalePageDependencyProvider extends AbstractBundleDependencyP
      *
      * @return \Spryker\Zed\Kernel\Container
      */
-    protected function addPyzPriceFacade(Container $container): Container
+    protected function addPriceFacade(Container $container): Container
     {
         $container->set(static::FACADE_PRICE, function (Container $container) {
             return $container->getLocator()->price()->facade();

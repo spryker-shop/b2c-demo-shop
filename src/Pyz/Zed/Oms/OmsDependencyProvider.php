@@ -58,7 +58,7 @@ class OmsDependencyProvider extends SprykerOmsDependencyProvider
     public function provideCommunicationLayerDependencies(Container $container): Container
     {
         $container = parent::provideCommunicationLayerDependencies($container);
-        $container = $this->addPyzTranslatorFacade($container);
+        $container = $this->addTranslatorFacade($container);
 
         return $container;
     }
@@ -68,7 +68,7 @@ class OmsDependencyProvider extends SprykerOmsDependencyProvider
      *
      * @return \Spryker\Zed\Kernel\Container
      */
-    protected function addPyzTranslatorFacade(Container $container): Container
+    protected function addTranslatorFacade(Container $container): Container
     {
         $container->set(static::FACADE_TRANSLATOR, function (Container $container) {
             return $container->getLocator()->translator()->facade();

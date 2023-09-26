@@ -7,10 +7,6 @@
 
 namespace Pyz\Yves\ContentProductSetWidget;
 
-use Pyz\Yves\ContentProductSetWidget\Reader\ContentProductAbstractReader;
-use Pyz\Yves\ContentProductSetWidget\Reader\ContentProductAbstractReaderInterface;
-use Pyz\Yves\ContentProductSetWidget\Reader\ContentProductSetReader;
-use Pyz\Yves\ContentProductSetWidget\Reader\ContentProductSetReaderInterface;
 use Pyz\Yves\ContentProductSetWidget\Twig\ContentProductSetTwigFunctionProvider;
 use Spryker\Shared\Twig\TwigFunctionProvider;
 use SprykerShop\Yves\ContentProductSetWidget\ContentProductSetWidgetFactory as SprykerContentProductSetWidgetFactory;
@@ -25,11 +21,11 @@ class ContentProductSetWidgetFactory extends SprykerContentProductSetWidgetFacto
      *
      * @return \Twig\TwigFunction
      */
-    public function createPyzContentProductSetTwigFunction(
+    public function createContentProductSetTwigFunction(
         Environment $twig,
         string $localeName,
     ): TwigFunction {
-        $functionProvider = $this->createPyzContentProductSetTwigFunctionProvider($twig, $localeName);
+        $functionProvider = $this->createContentProductSetTwigFunctionProvider($twig, $localeName);
 
         return new TwigFunction(
             $functionProvider->getFunctionName(),
@@ -44,36 +40,15 @@ class ContentProductSetWidgetFactory extends SprykerContentProductSetWidgetFacto
      *
      * @return \Spryker\Shared\Twig\TwigFunctionProvider
      */
-    public function createPyzContentProductSetTwigFunctionProvider(
+    public function createContentProductSetTwigFunctionProvider(
         Environment $twig,
         string $localeName,
     ): TwigFunctionProvider {
         return new ContentProductSetTwigFunctionProvider(
             $twig,
             $localeName,
-            $this->createPyzContentProductSetReader(),
-            $this->createPyzContentProductAbstractReader(),
-        );
-    }
-
-    /**
-     * @return \Pyz\Yves\ContentProductSetWidget\Reader\ContentProductSetReaderInterface
-     */
-    public function createPyzContentProductSetReader(): ContentProductSetReaderInterface
-    {
-        return new ContentProductSetReader(
-            $this->getContentProductSetClient(),
-            $this->getProductSetStorageClient(),
-        );
-    }
-
-    /**
-     * @return \Pyz\Yves\ContentProductSetWidget\Reader\ContentProductAbstractReaderInterface
-     */
-    public function createPyzContentProductAbstractReader(): ContentProductAbstractReaderInterface
-    {
-        return new ContentProductAbstractReader(
-            $this->getProductStorageClient(),
+            $this->createContentProductSetReader(),
+            $this->createContentProductAbstractReader(),
         );
     }
 }

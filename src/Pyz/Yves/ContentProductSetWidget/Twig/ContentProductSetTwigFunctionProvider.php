@@ -7,10 +7,10 @@
 
 namespace Pyz\Yves\ContentProductSetWidget\Twig;
 
-use Pyz\Yves\ContentProductSetWidget\Reader\ContentProductAbstractReaderInterface;
-use Pyz\Yves\ContentProductSetWidget\Reader\ContentProductSetReaderInterface;
 use Spryker\Client\ContentProductSet\Exception\InvalidProductSetTermException;
 use Spryker\Shared\Twig\TwigFunctionProvider;
+use SprykerShop\Yves\ContentProductSetWidget\Reader\ContentProductAbstractReaderInterface;
+use SprykerShop\Yves\ContentProductSetWidget\Reader\ContentProductSetReaderInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Twig\Environment;
 
@@ -67,20 +67,20 @@ class ContentProductSetTwigFunctionProvider extends TwigFunctionProvider
     protected $localeName;
 
     /**
-     * @var \Pyz\Yves\ContentProductSetWidget\Reader\ContentProductSetReaderInterface
+     * @var \SprykerShop\Yves\ContentProductSetWidget\Reader\ContentProductSetReaderInterface
      */
     protected $contentProductSetReader;
 
     /**
-     * @var \Pyz\Yves\ContentProductSetWidget\Reader\ContentProductAbstractReaderInterface
+     * @var \SprykerShop\Yves\ContentProductSetWidget\Reader\ContentProductAbstractReaderInterface
      */
     protected $contentProductAbstractReader;
 
     /**
      * @param \Twig\Environment $twig
      * @param string $localeName
-     * @param \Pyz\Yves\ContentProductSetWidget\Reader\ContentProductSetReaderInterface $contentProductSetReader
-     * @param \Pyz\Yves\ContentProductSetWidget\Reader\ContentProductAbstractReaderInterface $contentProductAbstractReader
+     * @param \SprykerShop\Yves\ContentProductSetWidget\Reader\ContentProductSetReaderInterface $contentProductSetReader
+     * @param \SprykerShop\Yves\ContentProductSetWidget\Reader\ContentProductAbstractReaderInterface $contentProductAbstractReader
      */
     public function __construct(
         Environment $twig,
@@ -108,28 +108,28 @@ class ContentProductSetTwigFunctionProvider extends TwigFunctionProvider
     public function getFunction(): callable
     {
         return function (array $context, string $contentKey, string $templateIdentifier): string {
-            if (!isset($this->getPyzAvailableTemplates()[$templateIdentifier])) {
-                return $this->getPyzMessageProductSetWrongTemplate($templateIdentifier);
+            if (!isset($this->getAvailableTemplates()[$templateIdentifier])) {
+                return $this->getMessageProductSetWrongTemplate($templateIdentifier);
             }
 
             try {
                 $productSetDataStorageTransfer = $this->contentProductSetReader
                     ->findProductSet($contentKey, $this->localeName);
             } catch (InvalidProductSetTermException $exception) {
-                return $this->getPyzMessageProductSetWrongType($contentKey);
+                return $this->getMessageProductSetWrongType($contentKey);
             }
 
             if (!$productSetDataStorageTransfer) {
-                return $this->getPyzMessageProductSetNotFound($contentKey);
+                return $this->getMessageProductSetNotFound($contentKey);
             }
 
             /** @var array<mixed> $selectedAttributes */
-            $selectedAttributes = $this->getPyzRequest($context)->query->get(static::PARAM_ATTRIBUTE) ?: [];
+            $selectedAttributes = $this->getRequest($context)->query->get(static::PARAM_ATTRIBUTE) ?: [];
             $productAbstractViewCollection = $this->contentProductAbstractReader
                 ->findProductAbstractCollection($productSetDataStorageTransfer, $selectedAttributes, $this->localeName);
 
             return (string)$this->twig->render(
-                $this->getPyzAvailableTemplates()[$templateIdentifier],
+                $this->getAvailableTemplates()[$templateIdentifier],
                 [
                     'productSet' => $productSetDataStorageTransfer,
                     'productViews' => $productAbstractViewCollection,
@@ -152,7 +152,7 @@ class ContentProductSetTwigFunctionProvider extends TwigFunctionProvider
     /**
      * @return array<string>
      */
-    protected function getPyzAvailableTemplates(): array
+    protected function getAvailableTemplates(): array
     {
         return [
             static::WIDGET_TEMPLATE_IDENTIFIER_DEFAULT => '@ContentProductSetWidget/views/content-product-set/content-product-set.twig',
@@ -167,7 +167,7 @@ class ContentProductSetTwigFunctionProvider extends TwigFunctionProvider
      *
      * @return string
      */
-    protected function getPyzMessageProductSetNotFound(string $contentKey): string
+    protected function getMessageProductSetNotFound(string $contentKey): string
     {
         return sprintf('<strong>Content product set with content key "%s" not found.</strong>', $contentKey);
     }
@@ -177,7 +177,7 @@ class ContentProductSetTwigFunctionProvider extends TwigFunctionProvider
      *
      * @return string
      */
-    protected function getPyzMessageProductSetWrongTemplate(string $templateIdentifier): string
+    protected function getMessageProductSetWrongTemplate(string $templateIdentifier): string
     {
         return sprintf('<strong>"%s" is not supported name of template.</strong>', $templateIdentifier);
     }
@@ -187,7 +187,7 @@ class ContentProductSetTwigFunctionProvider extends TwigFunctionProvider
      *
      * @return string
      */
-    protected function getPyzMessageProductSetWrongType(string $contentKey): string
+    protected function getMessageProductSetWrongType(string $contentKey): string
     {
         return sprintf('<strong>Content product set widget could not be rendered because the content item with key "%s" is not a product set.</strong>', $contentKey);
     }
@@ -197,7 +197,7 @@ class ContentProductSetTwigFunctionProvider extends TwigFunctionProvider
      *
      * @return \Symfony\Component\HttpFoundation\Request
      */
-    protected function getPyzRequest(array $context): Request
+    protected function getRequest(array $context): Request
     {
         return $context['app']['request'];
     }

@@ -23,9 +23,9 @@ class CreateController extends SprykerCreateController
      */
     public function indexAction(Request $request): RedirectResponse
     {
-        $this->executePyzIndexAction($request);
+        $this->executeIndexAction($request);
 
-        return $this->redirectResponseExternal($this->getPyzRefererUrl($request));
+        return $this->redirectResponseExternal($this->getRefererUrl($request));
     }
 
     /**
@@ -33,7 +33,7 @@ class CreateController extends SprykerCreateController
      *
      * @return string
      */
-    protected function getPyzRefererUrl(Request $request): string
+    protected function getRefererUrl(Request $request): string
     {
         if ($request->headers->has(static::REQUEST_HEADER_REFERER)) {
             return $request->headers->get(static::REQUEST_HEADER_REFERER);
@@ -47,11 +47,11 @@ class CreateController extends SprykerCreateController
      *
      * @return void
      */
-    protected function executePyzIndexAction(Request $request): void
+    protected function executeIndexAction(Request $request): void
     {
         $idProductAbstract = $request->attributes->get('idProductAbstract');
         $productReviewForm = $this->getFactory()
-            ->createPyzProductReviewForm($idProductAbstract)
+            ->createProductReviewForm($idProductAbstract)
             ->handleRequest($request);
 
         if (!$productReviewForm->isSubmitted()) {

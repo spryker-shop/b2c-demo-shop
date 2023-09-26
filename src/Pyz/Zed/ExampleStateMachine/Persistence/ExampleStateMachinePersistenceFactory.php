@@ -7,7 +7,7 @@
 
 namespace Pyz\Zed\ExampleStateMachine\Persistence;
 
-use Orm\Zed\ExampleStateMachine\Persistence\PyzExampleStateMachineItemQuery;
+use Orm\Zed\ExampleStateMachine\Persistence\ExampleStateMachineItemQuery;
 use Spryker\Zed\Kernel\Persistence\AbstractPersistenceFactory;
 
 /**
@@ -16,10 +16,10 @@ use Spryker\Zed\Kernel\Persistence\AbstractPersistenceFactory;
 class ExampleStateMachinePersistenceFactory extends AbstractPersistenceFactory
 {
     /**
-     * @return \Orm\Zed\ExampleStateMachine\Persistence\PyzExampleStateMachineItemQuery
+     * @return \Orm\Zed\ExampleStateMachine\Persistence\ExampleStateMachineItemQuery
      */
-    public function createPyzExampleStateMachineQuery(): PyzExampleStateMachineItemQuery
+    public function createExampleStateMachineQuery(): ExampleStateMachineItemQuery
     {
-        return PyzExampleStateMachineItemQuery::create();
+        return ExampleStateMachineItemQuery::create();
     }
 }

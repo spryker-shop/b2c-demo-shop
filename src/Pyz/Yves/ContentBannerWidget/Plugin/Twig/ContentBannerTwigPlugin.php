@@ -30,7 +30,7 @@ class ContentBannerTwigPlugin extends AbstractPlugin implements TwigPluginInterf
      */
     public function extend(Environment $twig, ContainerInterface $container): Environment
     {
-        $twig->addFunction($this->getFactory()->createPyzContentBannerTwigFunction($twig, $this->getLocale()));
+        $twig->addFunction($this->getFactory()->createContentBannerTwigFunction($twig, $this->getLocale()));
 
         return $twig;
     }

@@ -53,10 +53,10 @@ class ExampleProductSalePageQueryContainer extends AbstractQueryContainer implem
      *
      * @return \Orm\Zed\ProductLabel\Persistence\SpyProductLabelQuery
      */
-    public function queryPyzProductLabelByName($labelName): SpyProductLabelQuery
+    public function queryProductLabelByName($labelName): SpyProductLabelQuery
     {
         return $this->getFactory()
-            ->getPyzProductLabelQueryContainer()
+            ->getProductLabelQueryContainer()
             ->queryProductLabelByName($labelName);
     }
 
@@ -68,11 +68,11 @@ class ExampleProductSalePageQueryContainer extends AbstractQueryContainer implem
      *
      * @return \Orm\Zed\ProductLabel\Persistence\SpyProductLabelProductAbstractQuery
      */
-    public function queryPyzRelationsBecomingInactive(int $idProductLabel, string $priceMode): SpyProductLabelProductAbstractQuery
+    public function queryRelationsBecomingInactive(int $idProductLabel, string $priceMode): SpyProductLabelProductAbstractQuery
     {
         /** @var \Orm\Zed\ProductLabel\Persistence\SpyProductLabelProductAbstractQuery $productLabelProductAbstractQuery */
         $productLabelProductAbstractQuery = $this->getFactory()
-            ->getPyzProductLabelQueryContainer()
+            ->getProductLabelQueryContainer()
             ->queryProductAbstractRelationsByIdProductLabel($idProductLabel)
             ->distinct()
             ->useSpyProductAbstractQuery(null, Criteria::LEFT_JOIN)
@@ -108,14 +108,14 @@ class ExampleProductSalePageQueryContainer extends AbstractQueryContainer implem
 
         if ($priceMode === static::PRICE_MODE_GROSS) {
             $productLabelProductAbstractQuery->addAnd(
-                $this->getPyzBasicModelCriterion(
+                $this->getBasicModelCriterion(
                     $productLabelProductAbstractQuery,
                     'priceProductStoreOrigin.gross_price < priceProductStoreDefault.gross_price',
                     'priceProductStoreOrigin.gross_price',
                 ),
             )
                 ->addOr(
-                    $this->getPyzBasicModelCriterion(
+                    $this->getBasicModelCriterion(
                         $productLabelProductAbstractQuery,
                         'priceProductStoreOrigin.gross_price = priceProductStoreDefault.gross_price',
                         'priceProductStoreOrigin.gross_price',
@@ -127,14 +127,14 @@ class ExampleProductSalePageQueryContainer extends AbstractQueryContainer implem
 
         if ($priceMode === static::PRICE_MODE_NET) {
             $productLabelProductAbstractQuery->addAnd(
-                $this->getPyzBasicModelCriterion(
+                $this->getBasicModelCriterion(
                     $productLabelProductAbstractQuery,
                     'priceProductStoreOrigin.net_price < priceProductStoreDefault.net_price',
                     'priceProductStoreOrigin.net_price',
                 ),
             )
                 ->addOr(
-                    $this->getPyzBasicModelCriterion(
+                    $this->getBasicModelCriterion(
                         $productLabelProductAbstractQuery,
                         'priceProductStoreOrigin.net_price = priceProductStoreDefault.net_price',
                         'priceProductStoreOrigin.net_price',
@@ -154,7 +154,7 @@ class ExampleProductSalePageQueryContainer extends AbstractQueryContainer implem
      *
      * @return \Propel\Runtime\ActiveQuery\Criterion\BasicModelCriterion
      */
-    protected function getPyzBasicModelCriterion(Criteria $criteria, string $clause, $column): BasicModelCriterion
+    protected function getBasicModelCriterion(Criteria $criteria, string $clause, $column): BasicModelCriterion
     {
         return new BasicModelCriterion($criteria, $clause, $column);
     }
@@ -169,7 +169,7 @@ class ExampleProductSalePageQueryContainer extends AbstractQueryContainer implem
      *
      * @return \Orm\Zed\Product\Persistence\SpyProductAbstractQuery
      */
-    public function queryPyzRelationsBecomingActive(
+    public function queryRelationsBecomingActive(
         int $idProductLabel,
         int $currentStoreId,
         int $currentCurrencyId,
@@ -177,7 +177,7 @@ class ExampleProductSalePageQueryContainer extends AbstractQueryContainer implem
     ): SpyProductAbstractQuery {
         /** @var \Orm\Zed\Product\Persistence\SpyProductAbstractQuery $productAbstractQuery */
         $productAbstractQuery = $this->getFactory()
-            ->getPyzProductQueryContainer()
+            ->getProductQueryContainer()
             ->queryProductAbstract()
             ->distinct()
             ->usePriceProductQuery('priceProductOrigin', Criteria::LEFT_JOIN)
@@ -223,7 +223,7 @@ class ExampleProductSalePageQueryContainer extends AbstractQueryContainer implem
 
         if ($priceMode === static::PRICE_MODE_GROSS) {
             $productAbstractQuery->addAnd(
-                $this->getPyzBasicModelCriterion(
+                $this->getBasicModelCriterion(
                     $productAbstractQuery,
                     'priceProductStoreOrigin.gross_price > priceProductStoreDefault.gross_price',
                     'priceProductStoreOrigin.gross_price',
@@ -233,7 +233,7 @@ class ExampleProductSalePageQueryContainer extends AbstractQueryContainer implem
 
         if ($priceMode === static::PRICE_MODE_NET) {
             $productAbstractQuery->addAnd(
-                $this->getPyzBasicModelCriterion(
+                $this->getBasicModelCriterion(
                     $productAbstractQuery,
                     'priceProductStoreOrigin.net_price > priceProductStoreDefault.net_price',
                     'priceProductStoreOrigin.net_price',

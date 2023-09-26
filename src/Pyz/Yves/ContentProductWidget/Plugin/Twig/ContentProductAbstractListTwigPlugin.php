@@ -30,7 +30,7 @@ class ContentProductAbstractListTwigPlugin extends AbstractPlugin implements Twi
      */
     public function extend(Environment $twig, ContainerInterface $container): Environment
     {
-        $twig->addFunction($this->getFactory()->createPyzContentProductAbstractListTwigFunction($twig, $this->getLocale()));
+        $twig->addFunction($this->getFactory()->createContentProductAbstractListTwigFunction($twig, $this->getLocale()));
 
         return $twig;
     }

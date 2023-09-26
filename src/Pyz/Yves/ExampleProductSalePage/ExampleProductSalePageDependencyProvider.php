@@ -54,13 +54,13 @@ class ExampleProductSalePageDependencyProvider extends AbstractBundleDependencyP
      */
     public function provideDependencies(Container $container): Container
     {
-        $container = $this->addPyzSearchClient($container);
-        $container = $this->addPyzUrlStorageClient($container);
-        $container = $this->addPyzClientStore($container);
+        $container = $this->addSearchClient($container);
+        $container = $this->addUrlStorageClient($container);
+        $container = $this->addClientStore($container);
         $container = $this->addProductSalePageWidgetPlugins($container);
-        $container = $this->addPyzCatalogClient($container);
-        $container = $this->addPyzLocaleClient($container);
-        $container = $this->addPyzUtilNumberService($container);
+        $container = $this->addCatalogClient($container);
+        $container = $this->addLocaleClient($container);
+        $container = $this->addUtilNumberService($container);
 
         return $container;
     }
@@ -70,7 +70,7 @@ class ExampleProductSalePageDependencyProvider extends AbstractBundleDependencyP
      *
      * @return \Spryker\Yves\Kernel\Container
      */
-    protected function addPyzSearchClient(Container $container): Container
+    protected function addSearchClient(Container $container): Container
     {
         $container->set(static::CLIENT_SEARCH, function (Container $container) {
             return $container->getLocator()->search()->client();
@@ -84,7 +84,7 @@ class ExampleProductSalePageDependencyProvider extends AbstractBundleDependencyP
      *
      * @return \Spryker\Yves\Kernel\Container
      */
-    protected function addPyzUrlStorageClient(Container $container): Container
+    protected function addUrlStorageClient(Container $container): Container
     {
         $container->set(static::CLIENT_URL_STORAGE, function (Container $container) {
             return $container->getLocator()->urlStorage()->client();
@@ -98,7 +98,7 @@ class ExampleProductSalePageDependencyProvider extends AbstractBundleDependencyP
      *
      * @return \Spryker\Yves\Kernel\Container
      */
-    protected function addPyzClientStore($container): Container
+    protected function addClientStore($container): Container
     {
         $container->set(static::CLIENT_STORE, function (Container $container) {
             return $container->getLocator()->store()->client();
@@ -112,7 +112,7 @@ class ExampleProductSalePageDependencyProvider extends AbstractBundleDependencyP
      *
      * @return \Spryker\Yves\Kernel\Container
      */
-    protected function addPyzCatalogClient(Container $container): Container
+    protected function addCatalogClient(Container $container): Container
     {
         $container->set(static::CLIENT_CATALOG, function (Container $container) {
             return $container->getLocator()->catalog()->client();
@@ -140,7 +140,7 @@ class ExampleProductSalePageDependencyProvider extends AbstractBundleDependencyP
      *
      * @return \Spryker\Yves\Kernel\Container
      */
-    protected function addPyzLocaleClient(Container $container): Container
+    protected function addLocaleClient(Container $container): Container
     {
         $container->set(static::CLIENT_LOCALE, function (Container $container) {
             return $container->getLocator()->locale()->client();
@@ -154,7 +154,7 @@ class ExampleProductSalePageDependencyProvider extends AbstractBundleDependencyP
      *
      * @return \Spryker\Yves\Kernel\Container
      */
-    protected function addPyzUtilNumberService(Container $container): Container
+    protected function addUtilNumberService(Container $container): Container
     {
         $container->set(static::SERVICE_UTIL_NUMBER, function (Container $container) {
             return $container->getLocator()->utilNumber()->service();

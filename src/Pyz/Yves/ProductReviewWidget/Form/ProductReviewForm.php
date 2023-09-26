@@ -83,11 +83,11 @@ class ProductReviewForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $this
-            ->addPyzSummaryField($builder)
-            ->addPyzRatingField($builder)
-            ->addPyzDescriptionField($builder)
-            ->addPyzNicknameField($builder)
-            ->addPyzProductField($builder);
+            ->addSummaryField($builder)
+            ->addRatingField($builder)
+            ->addDescriptionField($builder)
+            ->addNicknameField($builder)
+            ->addProductField($builder);
 
         return $this;
     }
@@ -97,13 +97,13 @@ class ProductReviewForm extends AbstractType
      *
      * @return $this
      */
-    protected function addPyzRatingField(FormBuilderInterface $builder)
+    protected function addRatingField(FormBuilderInterface $builder)
     {
         $builder->add(
             static::FIELD_RATING,
             ChoiceType::class,
             [
-                'choices' => array_flip($this->getPyzRatingFieldChoices()),
+                'choices' => array_flip($this->getRatingFieldChoices()),
                 'label' => 'product_review.submit.rating',
                 'required' => true,
                 'expanded' => false,
@@ -136,7 +136,7 @@ class ProductReviewForm extends AbstractType
      *
      * @return array<mixed>
      */
-    protected function getPyzRatingFieldChoices(): array
+    protected function getRatingFieldChoices(): array
     {
         $unselectedChoice = [static::UNSELECTED_RATING => 'product_review.submit.rating.none'];
         $choices = range(static::MINIMUM_RATING, $this->getFactory()->getProductReviewClient()->getMaximumRating());
@@ -150,7 +150,7 @@ class ProductReviewForm extends AbstractType
      *
      * @return $this
      */
-    protected function addPyzSummaryField(FormBuilderInterface $builder)
+    protected function addSummaryField(FormBuilderInterface $builder)
     {
         $builder->add(
             static::FIELD_SUMMARY,
@@ -172,7 +172,7 @@ class ProductReviewForm extends AbstractType
      *
      * @return $this
      */
-    protected function addPyzDescriptionField(FormBuilderInterface $builder)
+    protected function addDescriptionField(FormBuilderInterface $builder)
     {
         $builder->add(
             static::FIELD_DESCRIPTION,
@@ -197,7 +197,7 @@ class ProductReviewForm extends AbstractType
      *
      * @return $this
      */
-    protected function addPyzNicknameField(FormBuilderInterface $builder)
+    protected function addNicknameField(FormBuilderInterface $builder)
     {
         $builder->add(
             static::FIELD_NICKNAME,
@@ -219,7 +219,7 @@ class ProductReviewForm extends AbstractType
      *
      * @return $this
      */
-    protected function addPyzProductField(FormBuilderInterface $builder)
+    protected function addProductField(FormBuilderInterface $builder)
     {
         $builder->add(
             static::FIELD_PRODUCT,
