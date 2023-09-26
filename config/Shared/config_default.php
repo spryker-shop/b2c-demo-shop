@@ -792,8 +792,11 @@ $config[GlueBackendApiApplicationConstants::GLUE_BACKEND_CORS_ALLOW_ORIGIN] = ge
 // ----------------------------------------------------------------------------
 $sprykerGlueStorefrontHost = getenv('SPRYKER_GLUE_STOREFRONT_HOST');
 $config[GlueStorefrontApiApplicationConstants::GLUE_STOREFRONT_API_HOST] = $sprykerGlueStorefrontHost;
+$gluePort = (int)(getenv('SPRYKER_API_PORT')) ?: 443;
+$protocol = $gluePort === 443 ? 'https' : 'http';
 $config[GlueJsonApiConventionConstants::GLUE_DOMAIN] = sprintf(
-    'https://%s',
+    '%s://%s',
+    $protocol,
     $sprykerGlueStorefrontHost ?: $sprykerGlueBackendHost ?: 'localhost',
 );
 $config[GlueStorefrontApiApplicationConstants::GLUE_STOREFRONT_CORS_ALLOW_ORIGIN] = getenv('SPRYKER_GLUE_APPLICATION_CORS_ALLOW_ORIGIN') ?: '*';
