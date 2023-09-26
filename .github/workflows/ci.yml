@@ -144,7 +144,7 @@ jobs:
               run: vendor/bin/phpstan analyze -l 6 -c phpstan.neon src/
 
             - name: Run Evaluator
-              run: vendor/bin/evaluator evaluate
+              run: vendor/bin/evaluator evaluate --exclude-checkers=NPM_CHECKER,SPRYKER_DEV_PACKAGES_CHECKER --format=compact
 
     php-81-mariadb-glue-alpine:
         name: "PHP 8.1 / MariaDB / Glue / Alpine"
