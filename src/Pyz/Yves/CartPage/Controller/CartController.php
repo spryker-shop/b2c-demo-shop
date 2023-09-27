@@ -32,7 +32,7 @@ class CartController extends SprykerCartController
     {
         parent::addAction($request, $sku);
 
-        return $this->redirectPyz($request);
+        return $this->redirect($request);
     }
 
     /**
@@ -45,7 +45,7 @@ class CartController extends SprykerCartController
     {
         parent::removeAction($request, $sku);
 
-        return $this->redirectPyz($request);
+        return $this->redirect($request);
     }
 
     /**
@@ -53,7 +53,7 @@ class CartController extends SprykerCartController
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    protected function redirectPyz(Request $request): RedirectResponse
+    protected function redirect(Request $request): RedirectResponse
     {
         if ($request->headers->has(static::REQUEST_HEADER_REFERER)) {
             return $this->redirectResponseExternal($request->headers->get(static::REQUEST_HEADER_REFERER));

@@ -50,11 +50,11 @@ class ProductAbstractStoreHydratorStep implements DataImportStepInterface
      */
     protected function importProductAbstractStore(DataSetInterface $dataSet): void
     {
-        $pyzProductAbstractStoreTransfer = new ProductAbstractStoreTransfer();
-        $pyzProductAbstractStoreTransfer
+        $productAbstractStoreTransfer = new ProductAbstractStoreTransfer();
+        $productAbstractStoreTransfer
             ->setStoreName($dataSet[static::COLUMN_STORE_NAME])
             ->setProductAbstractSku($dataSet[static::COLUMN_ABSTRACT_SKU]);
 
-        $dataSet[static::DATA_PRODUCT_ABSTRACT_STORE_ENTITY_TRANSFER] = $pyzProductAbstractStoreTransfer;
+        $dataSet[static::DATA_PRODUCT_ABSTRACT_STORE_ENTITY_TRANSFER] = $productAbstractStoreTransfer;
     }
 }
