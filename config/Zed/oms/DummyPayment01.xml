@@ -10,6 +10,8 @@
             <process>DummyReturn</process>
             <process>CreateGiftCard</process>
             <process>DummyInvoice</process>
+            <process>DummyPicking</process>
+            <process>WarehouseAllocation</process>
         </subprocesses>
 
         <states>
@@ -38,20 +40,26 @@
         </states>
 
         <transitions>
-            <transition happy="true" condition="DummyPayment/IsAuthorized">
+            <transition happy="true">
                 <source>new</source>
+                <target>warehouse allocated</target>
+                <event>allocate warehouse</event>
+            </transition>
+
+            <transition happy="true" condition="DummyPayment/IsAuthorized">
+                <source>warehouse allocated</source>
                 <target>payment pending</target>
                 <event>authorize</event>
             </transition>
 
             <transition>
-                <source>new</source>
+                <source>warehouse allocated</source>
                 <target>invalid</target>
                 <event>authorize</event>
             </transition>
 
             <transition>
-                <source>new</source>
+                <source>warehouse allocated</source>
                 <target>cancelled</target>
                 <event>cancel</event>
             </transition>
@@ -100,8 +108,14 @@
 
             <transition happy="true">
                 <source>waiting</source>
+                <target>picking list generation scheduled</target>
+                <event>picking list generation schedule</event>
+            </transition>
+
+            <transition happy="true">
+                <source>picking finished</source>
                 <target>exported</target>
-                <event>check giftcard purchase</event>
+                <event>finish picking</event>
             </transition>
 
             <transition happy="true" condition="GiftCard/IsGiftCard">
@@ -154,5 +168,7 @@
     <process name="DummyReturn" file="DummySubprocess/DummyReturn01.xml"/>
     <process name="CreateGiftCard" file="GiftCardSubprocess/CreateGiftCard01.xml"/>
     <process name="DummyInvoice" file="DummySubprocess/DummyInvoice01.xml"/>
+    <process name="DummyPicking" file="DummySubprocess/DummyPicking01.xml"/>
+    <process name="WarehouseAllocation" file="WarehouseAllocationSubprocess/WarehouseAllocation01.xml"/>
 
 </statemachine>

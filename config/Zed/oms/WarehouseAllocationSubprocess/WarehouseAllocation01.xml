@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<statemachine
+    xmlns="spryker:oms-01"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="spryker:oms-01 http://static.spryker.com/oms-01.xsd"
+>
+
+    <process name="WarehouseAllocation">
+        <states>
+            <state name="warehouse allocated" reserved="true" display="oms.state.new"/>
+        </states>
+
+        <events>
+            <event name="allocate warehouse" onEnter="true" command="WarehouseAllocation/WarehouseAllocate"/>
+        </events>
+    </process>
+</statemachine>

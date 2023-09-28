@@ -158,6 +158,21 @@ if (Config::get(MessageBrokerAwsConstants::SQS_RECEIVER_CONFIG)) {
     ];
 }
 
+/* Push notification */
+$jobs[] = [
+    'name' => 'delete-expired-push-notification-subscriptions',
+    'command' => '$PHP_BIN vendor/bin/console push-notification:delete-expired-push-notification-subscriptions',
+    'schedule' => '0 0 * * 0',
+    'enable' => true,
+];
+
+$jobs[] = [
+    'name' => 'send-push-notifications',
+    'command' => '$PHP_BIN vendor/bin/console push-notification:send-push-notifications',
+    'schedule' => '* * * * *',
+    'enable' => true,
+];
+
 if (getenv('SPRYKER_CURRENT_REGION')) {
     foreach ($jobs as $job) {
         $job['region'] = getenv('SPRYKER_CURRENT_REGION');
