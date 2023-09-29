@@ -335,6 +335,33 @@
         <controller>index</controller>
         <action>index</action>
     </app-catalog-gui>
+
+    <dynamic-entities-gui>
+        <label>Data Exchange API Configuration</label>
+        <title>Data Exchange API Configuration</title>
+        <icon>fa-exchange-alt</icon>
+        <bundle>dynamic-entity-gui</bundle>
+        <controller>configuration-list</controller>
+        <action>index</action>
+        <pages>
+            <dynamic-entity-create>
+                <label>Create new configuration</label>
+                <title>Create new configuration</title>
+                <bundle>dynamic-entity-gui</bundle>
+                <controller>configuration-create</controller>
+                <action>index</action>
+                <visible>0</visible>
+            </dynamic-entity-create>
+            <dynamic-entity-edit>
+                <label>Edit configuration</label>
+                <title>Edit configuration</title>
+                <bundle>dynamic-entity-gui</bundle>
+                <controller>configuration-edit</controller>
+                <action>index</action>
+                <visible>0</visible>
+            </dynamic-entity-edit>
+        </pages>
+    </dynamic-entities-gui>
     <administration>
         <label>Administration</label>
         <title>Administration</title>
@@ -516,6 +543,13 @@
                 <controller>maintenance</controller>
                 <action>index</action>
             </storage-gui>
+            <api-key>
+                <label>API Keys</label>
+                <title>API Keys</title>
+                <bundle>api-key-gui</bundle>
+                <controller>list</controller>
+                <action>index</action>
+            </api-key>
         </pages>
     </maintenance>
 </config>

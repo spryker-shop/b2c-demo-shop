@@ -15,6 +15,8 @@ use Spryker\Glue\DocumentationGeneratorOpenApi\Plugin\DocumentationGeneratorApi\
 use Spryker\Glue\DocumentationGeneratorOpenApi\Plugin\DocumentationGeneratorApi\DocumentationGeneratorOpenApiContentGeneratorStrategyPlugin;
 use Spryker\Glue\DocumentationGeneratorOpenApi\Plugin\DocumentationGeneratorApi\DocumentationGeneratorOpenApiSchemaFormatterPlugin;
 use Spryker\Glue\DocumentationGeneratorOpenApi\Plugin\DocumentationGeneratorApi\RelationshipPluginAnnotationsContextExpanderPlugin;
+use Spryker\Glue\DynamicEntityBackendApi\Plugin\DocumentationGeneratorApi\DynamicEntityApiSchemaContextExpanderPlugin;
+use Spryker\Glue\DynamicEntityBackendApi\Plugin\DocumentationGeneratorApi\DynamicEntityDocumentationInvalidationVoterPlugin;
 use Spryker\Glue\GlueApplication\Plugin\DocumentationGeneratorApi\RestApiSchemaFormatterPlugin;
 use Spryker\Glue\GlueBackendApiApplication\Plugin\DocumentationGeneratorApi\BackendApiApplicationProviderPlugin;
 use Spryker\Glue\GlueBackendApiApplication\Plugin\DocumentationGeneratorApi\BackendCustomRoutesContextExpanderPlugin;
@@ -83,6 +85,7 @@ class DocumentationGeneratorApiDependencyProvider extends SprykerDocumentationGe
         $contextExpanderCollection->addExpander(new RelationshipPluginsContextExpanderPlugin(), [static::GLUE_STOREFRONT_API_APPLICATION_NAME]);
         $contextExpanderCollection->addExpander(new BackendResourcesContextExpanderPlugin(), [static::GLUE_BACKEND_API_APPLICATION_NAME]);
         $contextExpanderCollection->addExpander(new BackendCustomRoutesContextExpanderPlugin(), [static::GLUE_BACKEND_API_APPLICATION_NAME]);
+        $contextExpanderCollection->addExpander(new DynamicEntityApiSchemaContextExpanderPlugin(), [static::GLUE_BACKEND_API_APPLICATION_NAME]);
         $contextExpanderCollection->addExpander(new ControllerAnnotationsContextExpanderPlugin());
         $contextExpanderCollection->addExpander(new CustomRouteControllerAnnotationsContextExpanderPlugin());
         $contextExpanderCollection->addExpander(new RelationshipPluginAnnotationsContextExpanderPlugin(), [static::GLUE_STOREFRONT_API_APPLICATION_NAME]);
@@ -101,5 +104,15 @@ class DocumentationGeneratorApiDependencyProvider extends SprykerDocumentationGe
     protected function getContentGeneratorStrategyPlugin(): ContentGeneratorStrategyPluginInterface
     {
         return new DocumentationGeneratorOpenApiContentGeneratorStrategyPlugin();
+    }
+
+    /**
+     * @return array<\Spryker\Glue\DocumentationGeneratorApiExtension\Dependency\Plugin\DocumentationInvalidationVoterPluginInterface>
+     */
+    protected function getInvalidationVoterPlugins(): array
+    {
+        return [
+            new DynamicEntityDocumentationInvalidationVoterPlugin(),
+        ];
     }
 }
