@@ -27,9 +27,9 @@
                 <flag>cancellable</flag>
             </state>
             <state name="tax invoice submitted" reserved="true" display="oms.state.paid"/>
-            <state name="product review requested" reserved="true" display="oms.state.paid"/>
             <state name="waiting" reserved="true" display="oms.state.waiting"/>
             <state name="exported" reserved="true" display="oms.state.exported"/>
+            <state name="product review requested" reserved="true" display="oms.state.paid"/>
             <state name="confirmed" reserved="true" display="oms.state.confirmed">
                 <flag>cancellable</flag>
             </state>
@@ -63,6 +63,12 @@
                 <event>pay</event>
             </transition>
 
+            <transition happy="true">
+                <source>paid</source>
+                <target>tax invoice submitted</target>
+                <event>submit tax invoice</event>
+            </transition>
+
             <transition>
                 <source>payment pending</source>
                 <target>cancelled</target>
@@ -73,12 +79,6 @@
                 <source>payment pending</source>
                 <target>cancelled</target>
                 <event>cancel</event>
-            </transition>
-
-            <transition happy="true">
-                <source>paid</source>
-                <target>tax invoice submitted</target>
-                <event>submit tax invoice</event>
             </transition>
 
             <transition happy="true">
