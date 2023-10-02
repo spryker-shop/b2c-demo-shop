@@ -12,24 +12,6 @@ use Spryker\Shared\GlueBackendApiApplicationAuthorizationConnector\GlueBackendAp
 class GlueBackendApiApplicationAuthorizationConnectorConfig extends SprykerGlueBackendApiApplicationAuthorizationConnectorConfig
 {
     /**
-     * Specification:
-     * - Returns a list of protected endpoints.
-     * - Structure example:
-     * [
-     *      '/example' => [
-     *          'isRegularExpression' => false,
-     *      ],
-     *      '/\/example\/.+/' => [
-     *          'isRegularExpression' => true,
-     *          'methods' => [
-     *              'patch',
-     *              'delete',
-     *          ],
-     *      ],
-     * ]
-     *
-     * @api
-     *
      * @return array<string, mixed>
      */
     public function getProtectedPaths(): array
