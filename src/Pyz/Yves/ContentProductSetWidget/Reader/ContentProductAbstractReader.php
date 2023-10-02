@@ -9,6 +9,7 @@ namespace Pyz\Yves\ContentProductSetWidget\Reader;
 
 use Generated\Shared\Transfer\ProductSetDataStorageTransfer;
 use SprykerShop\Yves\ContentProductSetWidget\Dependency\Client\ContentProductSetWidgetToProductStorageClientInterface;
+use SprykerShop\Yves\ContentProductSetWidget\Reader\ContentProductAbstractReaderInterface;
 
 class ContentProductAbstractReader implements ContentProductAbstractReaderInterface
 {
