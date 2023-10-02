@@ -31,7 +31,7 @@ class ContentProductSetTwigPlugin extends AbstractPlugin implements TwigPluginIn
     public function extend(Environment $twig, ContainerInterface $container): Environment
     {
         $twig->addFunction(
-            $this->getFactory()->createPyzContentProductSetTwigFunction(
+            $this->getFactory()->createContentProductSetTwigFunction(
                 $twig,
                 $this->getLocale(),
             ),

@@ -21,9 +21,9 @@ class ContentBannerWidgetFactory extends SprykerContentBannerWidgetFactory
      *
      * @return \Twig\TwigFunction
      */
-    public function createPyzContentBannerTwigFunction(Environment $twig, string $localeName): TwigFunction
+    public function createContentBannerTwigFunction(Environment $twig, string $localeName): TwigFunction
     {
-        $functionProvider = $this->createPyzContentBannerTwigFunctionProvider($twig, $localeName);
+        $functionProvider = $this->createContentBannerTwigFunctionProvider($twig, $localeName);
 
         return new TwigFunction(
             $functionProvider->getFunctionName(),
@@ -38,7 +38,7 @@ class ContentBannerWidgetFactory extends SprykerContentBannerWidgetFactory
      *
      * @return \Spryker\Shared\Twig\TwigFunctionProvider
      */
-    public function createPyzContentBannerTwigFunctionProvider(Environment $twig, string $localeName): TwigFunctionProvider
+    public function createContentBannerTwigFunctionProvider(Environment $twig, string $localeName): TwigFunctionProvider
     {
         return new ContentBannerTwigFunctionProvider(
             $twig,

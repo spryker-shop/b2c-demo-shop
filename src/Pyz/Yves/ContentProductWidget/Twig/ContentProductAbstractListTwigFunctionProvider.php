@@ -20,32 +20,32 @@ class ContentProductAbstractListTwigFunctionProvider extends TwigFunctionProvide
     /**
      * @var string
      */
-    protected const PYZ_WIDGET_TEMPLATE_IDENTIFIER_SLIDER_WITH_BUTTON = 'slider-with-button';
+    protected const WIDGET_TEMPLATE_IDENTIFIER_SLIDER_WITH_BUTTON = 'slider-with-button';
 
     /**
      * @var string
      */
-    protected const PYZ_WIDGET_TEMPLATE_IDENTIFIER_SLIDER = 'slider';
+    protected const WIDGET_TEMPLATE_IDENTIFIER_SLIDER = 'slider';
 
     /**
      * @var string
      */
-    protected const PYZ_WIDGET_TEMPLATE_IDENTIFIER_SLIDER_NOT_INCLUDE_GROUP = 'slider-not-include-group';
+    protected const WIDGET_TEMPLATE_IDENTIFIER_SLIDER_NOT_INCLUDE_GROUP = 'slider-not-include-group';
 
     /**
      * @var string
      */
-    protected const PYZ_FUNCTION_CONTENT_PRODUCT_ABSTRACT_LIST = 'content_product_abstract_list';
+    protected const FUNCTION_CONTENT_PRODUCT_ABSTRACT_LIST = 'content_product_abstract_list';
 
     /**
      * @var string
      */
-    protected const PYZ_WIDGET_TEMPLATE_IDENTIFIER_BOTTOM_TITLE = 'bottom-title';
+    protected const WIDGET_TEMPLATE_IDENTIFIER_BOTTOM_TITLE = 'bottom-title';
 
     /**
      * @var string
      */
-    protected const PYZ_WIDGET_TEMPLATE_IDENTIFIER_TOP_TITLE = 'top-title';
+    protected const WIDGET_TEMPLATE_IDENTIFIER_TOP_TITLE = 'top-title';
 
     /**
      * @var \Twig\Environment
@@ -82,7 +82,7 @@ class ContentProductAbstractListTwigFunctionProvider extends TwigFunctionProvide
      */
     public function getFunctionName(): string
     {
-        return static::PYZ_FUNCTION_CONTENT_PRODUCT_ABSTRACT_LIST;
+        return static::FUNCTION_CONTENT_PRODUCT_ABSTRACT_LIST;
     }
 
     /**
@@ -91,23 +91,23 @@ class ContentProductAbstractListTwigFunctionProvider extends TwigFunctionProvide
     public function getFunction(): callable
     {
         return function (string $contentKey, string $templateIdentifier): string {
-            if (!isset($this->getPyzAvailableTemplates()[$templateIdentifier])) {
-                return $this->getPyzMessageProductAbstractWrongTemplate($templateIdentifier);
+            if (!isset($this->getAvailableTemplates()[$templateIdentifier])) {
+                return $this->getMessageProductAbstractWrongTemplate($templateIdentifier);
             }
 
             try {
                 $productAbstractViewCollection = $this->contentProductAbstractReader
-                    ->getPyzProductAbstractCollection($contentKey, $this->localeName);
+                    ->getProductAbstractCollection($contentKey, $this->localeName);
             } catch (InvalidProductAbstractListTermException $exception) {
-                return $this->getPyzMessageProductAbstractWrongType($contentKey);
+                return $this->getMessageProductAbstractWrongType($contentKey);
             }
 
             if ($productAbstractViewCollection === []) {
-                return $this->getPyzMessageProductAbstractNotFound($contentKey);
+                return $this->getMessageProductAbstractNotFound($contentKey);
             }
 
             return (string)$this->twig->render(
-                $this->getPyzAvailableTemplates()[$templateIdentifier],
+                $this->getAvailableTemplates()[$templateIdentifier],
                 [
                     'productAbstractViewCollection' => $productAbstractViewCollection,
                 ],
@@ -118,14 +118,14 @@ class ContentProductAbstractListTwigFunctionProvider extends TwigFunctionProvide
     /**
      * @return array<string, string>
      */
-    protected function getPyzAvailableTemplates(): array
+    protected function getAvailableTemplates(): array
     {
         return [
-            static::PYZ_WIDGET_TEMPLATE_IDENTIFIER_BOTTOM_TITLE => '@ContentProductWidget/views/cms-product-abstract-list/cms-product-abstract-list.twig',
-            static::PYZ_WIDGET_TEMPLATE_IDENTIFIER_TOP_TITLE => '@ContentProductWidget/views/cms-product-abstract-list-alternative/cms-product-abstract-list-alternative.twig',
-            static::PYZ_WIDGET_TEMPLATE_IDENTIFIER_SLIDER_WITH_BUTTON => '@ContentProductWidget/views/cms-product-abstract-and-button/cms-product-abstract-and-button.twig',
-            static::PYZ_WIDGET_TEMPLATE_IDENTIFIER_SLIDER => '@ContentProductWidget/views/cms-product-abstract/cms-product-abstract.twig',
-            static::PYZ_WIDGET_TEMPLATE_IDENTIFIER_SLIDER_NOT_INCLUDE_GROUP => '@ContentProductWidget/views/cms-product-abstract-not-include-group/cms-product-abstract-not-include-group.twig',
+            static::WIDGET_TEMPLATE_IDENTIFIER_BOTTOM_TITLE => '@ContentProductWidget/views/cms-product-abstract-list/cms-product-abstract-list.twig',
+            static::WIDGET_TEMPLATE_IDENTIFIER_TOP_TITLE => '@ContentProductWidget/views/cms-product-abstract-list-alternative/cms-product-abstract-list-alternative.twig',
+            static::WIDGET_TEMPLATE_IDENTIFIER_SLIDER_WITH_BUTTON => '@ContentProductWidget/views/cms-product-abstract-and-button/cms-product-abstract-and-button.twig',
+            static::WIDGET_TEMPLATE_IDENTIFIER_SLIDER => '@ContentProductWidget/views/cms-product-abstract/cms-product-abstract.twig',
+            static::WIDGET_TEMPLATE_IDENTIFIER_SLIDER_NOT_INCLUDE_GROUP => '@ContentProductWidget/views/cms-product-abstract-not-include-group/cms-product-abstract-not-include-group.twig',
         ];
     }
 
@@ -134,7 +134,7 @@ class ContentProductAbstractListTwigFunctionProvider extends TwigFunctionProvide
      *
      * @return string
      */
-    protected function getPyzMessageProductAbstractNotFound(string $contentKey): string
+    protected function getMessageProductAbstractNotFound(string $contentKey): string
     {
         return sprintf('<strong>Content product abstract list with content key "%s" not found.</strong>', $contentKey);
     }
@@ -144,7 +144,7 @@ class ContentProductAbstractListTwigFunctionProvider extends TwigFunctionProvide
      *
      * @return string
      */
-    protected function getPyzMessageProductAbstractWrongTemplate(string $templateIdentifier): string
+    protected function getMessageProductAbstractWrongTemplate(string $templateIdentifier): string
     {
         return sprintf('<strong>"%s" is not supported name of template.</strong>', $templateIdentifier);
     }
@@ -154,7 +154,7 @@ class ContentProductAbstractListTwigFunctionProvider extends TwigFunctionProvide
      *
      * @return string
      */
-    protected function getPyzMessageProductAbstractWrongType(string $contentKey): string
+    protected function getMessageProductAbstractWrongType(string $contentKey): string
     {
         return sprintf('<strong>Content product abstract list widget could not be rendered because the content item with key "%s" is not an abstract product list.</strong>', $contentKey);
     }

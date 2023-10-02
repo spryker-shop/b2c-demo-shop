@@ -7,10 +7,10 @@
 
 namespace Orm\Zed\ExampleStateMachine\Persistence;
 
-use Orm\Zed\ExampleStateMachine\Persistence\Base\PyzExampleStateMachineItemQuery as BasePyzExampleStateMachineItemQuery;
+use Orm\Zed\ExampleStateMachine\Persistence\Base\ExampleStateMachineItem as BaseExampleStateMachineItem;
 
 /**
- * Skeleton subclass for performing query and update operations on the 'pyz_example_state_machine_item' table.
+ * Skeleton subclass for representing a row from the 'example_state_machine_item' table.
  *
  *
  *
@@ -18,6 +18,6 @@ use Orm\Zed\ExampleStateMachine\Persistence\Base\PyzExampleStateMachineItemQuery
  * application requirements. This class will only be generated as
  * long as it does not already exist in the output directory.
  */
-class PyzExampleStateMachineItemQuery extends BasePyzExampleStateMachineItemQuery
+class ExampleStateMachineItem extends BaseExampleStateMachineItem
 {
 }

@@ -28,9 +28,9 @@ class ProductStorageEventSubscriber extends SprykerProductStorageEventSubscriber
     public function getSubscribedEvents(EventCollectionInterface $eventCollection): EventCollectionInterface
     {
         $eventCollection = parent::getSubscribedEvents($eventCollection);
-        $eventCollection = $this->addPyzProductBundleCreateStorageListener($eventCollection);
-        $eventCollection = $this->addPyzProductBundleUpdateStorageListener($eventCollection);
-        $eventCollection = $this->addPyzProductBundleDeleteStorageListener($eventCollection);
+        $eventCollection = $this->addProductBundleCreateStorageListener($eventCollection);
+        $eventCollection = $this->addProductBundleUpdateStorageListener($eventCollection);
+        $eventCollection = $this->addProductBundleDeleteStorageListener($eventCollection);
 
         return $eventCollection;
     }
@@ -40,7 +40,7 @@ class ProductStorageEventSubscriber extends SprykerProductStorageEventSubscriber
      *
      * @return \Spryker\Zed\Event\Dependency\EventCollectionInterface
      */
-    protected function addPyzProductBundleCreateStorageListener(EventCollectionInterface $eventCollection): EventCollectionInterface
+    protected function addProductBundleCreateStorageListener(EventCollectionInterface $eventCollection): EventCollectionInterface
     {
         $eventCollection->addListenerQueued(
             ProductBundleEvents::ENTITY_SPY_PRODUCT_BUNDLE_CREATE,
@@ -55,7 +55,7 @@ class ProductStorageEventSubscriber extends SprykerProductStorageEventSubscriber
      *
      * @return \Spryker\Zed\Event\Dependency\EventCollectionInterface
      */
-    protected function addPyzProductBundleUpdateStorageListener(EventCollectionInterface $eventCollection): EventCollectionInterface
+    protected function addProductBundleUpdateStorageListener(EventCollectionInterface $eventCollection): EventCollectionInterface
     {
         $eventCollection->addListenerQueued(
             ProductBundleEvents::ENTITY_SPY_PRODUCT_BUNDLE_UPDATE,
@@ -70,7 +70,7 @@ class ProductStorageEventSubscriber extends SprykerProductStorageEventSubscriber
      *
      * @return \Spryker\Zed\Event\Dependency\EventCollectionInterface
      */
-    protected function addPyzProductBundleDeleteStorageListener(EventCollectionInterface $eventCollection): EventCollectionInterface
+    protected function addProductBundleDeleteStorageListener(EventCollectionInterface $eventCollection): EventCollectionInterface
     {
         $eventCollection->addListenerQueued(
             ProductBundleEvents::ENTITY_SPY_PRODUCT_BUNDLE_DELETE,
