@@ -7,12 +7,6 @@
 
 namespace Pyz\Yves\ContentProductSetWidget\Twig;
 
-use Spryker\Client\ContentProductSet\Exception\InvalidProductSetTermException;
-use Spryker\Shared\Twig\TwigFunctionProvider;
-use SprykerShop\Yves\ContentProductSetWidget\Reader\ContentProductAbstractReaderInterface;
-use SprykerShop\Yves\ContentProductSetWidget\Reader\ContentProductSetReaderInterface;
-use Symfony\Component\HttpFoundation\Request;
-use Twig\Environment;
 use SprykerShop\Yves\ContentProductSetWidget\Twig\ContentProductSetTwigFunctionProvider as SprykerShopContentProductSetTwigFunctionProvider;
 
 /**

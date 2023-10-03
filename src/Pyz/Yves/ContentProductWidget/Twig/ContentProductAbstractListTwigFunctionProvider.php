@@ -7,10 +7,6 @@
 
 namespace Pyz\Yves\ContentProductWidget\Twig;
 
-use Pyz\Yves\ContentProductWidget\Reader\ContentProductAbstractReaderInterface;
-use Spryker\Client\ContentProduct\Exception\InvalidProductAbstractListTermException;
-use Spryker\Shared\Twig\TwigFunctionProvider;
-use Twig\Environment;
 use SprykerShop\Yves\ContentProductWidget\Twig\ContentProductAbstractListTwigFunctionProvider as SprykerShopContentProductAbstractListTwigFunctionProvider;
 
 /**

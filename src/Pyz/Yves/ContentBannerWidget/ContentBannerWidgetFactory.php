@@ -11,7 +11,6 @@ use Pyz\Yves\ContentBannerWidget\Twig\ContentBannerTwigFunctionProvider;
 use Spryker\Shared\Twig\TwigFunctionProvider;
 use SprykerShop\Yves\ContentBannerWidget\ContentBannerWidgetFactory as SprykerContentBannerWidgetFactory;
 use Twig\Environment;
-use Twig\TwigFunction;
 
 class ContentBannerWidgetFactory extends SprykerContentBannerWidgetFactory
 {

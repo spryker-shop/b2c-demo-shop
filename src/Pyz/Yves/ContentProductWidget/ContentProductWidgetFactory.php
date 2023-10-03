@@ -7,13 +7,10 @@
 
 namespace Pyz\Yves\ContentProductWidget;
 
-use Pyz\Yves\ContentProductWidget\Reader\ContentProductAbstractReader;
-use Pyz\Yves\ContentProductWidget\Reader\ContentProductAbstractReaderInterface;
 use Pyz\Yves\ContentProductWidget\Twig\ContentProductAbstractListTwigFunctionProvider;
 use Spryker\Shared\Twig\TwigFunctionProvider;
 use SprykerShop\Yves\ContentProductWidget\ContentProductWidgetFactory as SprykerContentProductWidgetFactory;
 use Twig\Environment;
-use Twig\TwigFunction;
 
 class ContentProductWidgetFactory extends SprykerContentProductWidgetFactory
 {

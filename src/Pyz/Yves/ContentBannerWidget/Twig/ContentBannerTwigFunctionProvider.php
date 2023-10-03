@@ -7,10 +7,6 @@
 
 namespace Pyz\Yves\ContentBannerWidget\Twig;
 
-use Spryker\Client\ContentBanner\Exception\MissingBannerTermException;
-use Spryker\Shared\Twig\TwigFunctionProvider;
-use SprykerShop\Yves\ContentBannerWidget\Dependency\Client\ContentBannerWidgetToContentBannerClientInterface;
-use Twig\Environment;
 use SprykerShop\Yves\ContentBannerWidget\Twig\ContentBannerTwigFunctionProvider as SprykerShopContentBannerTwigFunctionProvider;
 
 class ContentBannerTwigFunctionProvider extends SprykerShopContentBannerTwigFunctionProvider
