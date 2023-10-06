@@ -17,6 +17,6 @@ class ProductBundleStorageConfig extends SprykerProductBundleStorageConfig
      */
     public function getProductBundleSynchronizationPoolName(): ?string
     {
-        return SynchronizationConfig::PYZ_DEFAULT_SYNCHRONIZATION_POOL_NAME;
+        return SynchronizationConfig::DEFAULT_SYNCHRONIZATION_POOL_NAME;
     }
 }

@@ -5,12 +5,12 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-namespace Orm\Zed\ExampleStateMachine\Persistence;
+namespace Orm\Zed\DynamicEntity\Persistence;
 
-use Orm\Zed\ExampleStateMachine\Persistence\Base\PyzExampleStateMachineItemQuery as BasePyzExampleStateMachineItemQuery;
+use Spryker\Zed\DynamicEntity\Persistence\Propel\AbstractSpyDynamicEntityConfigurationQuery as BaseSpyDynamicEntityConfigurationQuery;
 
 /**
- * Skeleton subclass for performing query and update operations on the 'pyz_example_state_machine_item' table.
+ * Skeleton subclass for performing query and update operations on the 'spy_dynamic_entity_configuration' table.
  *
  *
  *
@@ -18,6 +18,6 @@ use Orm\Zed\ExampleStateMachine\Persistence\Base\PyzExampleStateMachineItemQuery
  * application requirements. This class will only be generated as
  * long as it does not already exist in the output directory.
  */
-class PyzExampleStateMachineItemQuery extends BasePyzExampleStateMachineItemQuery
+class SpyDynamicEntityConfigurationQuery extends BaseSpyDynamicEntityConfigurationQuery
 {
 }

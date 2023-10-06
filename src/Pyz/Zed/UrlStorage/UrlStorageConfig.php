@@ -18,7 +18,7 @@ class UrlStorageConfig extends SprykerUrlStorageConfig
      */
     public function getUrlSynchronizationPoolName(): ?string
     {
-        return SynchronizationConfig::PYZ_DEFAULT_SYNCHRONIZATION_POOL_NAME;
+        return SynchronizationConfig::DEFAULT_SYNCHRONIZATION_POOL_NAME;
     }
 
     /**
@@ -26,7 +26,7 @@ class UrlStorageConfig extends SprykerUrlStorageConfig
      */
     public function getUrlRedirectSynchronizationPoolName(): ?string
     {
-        return SynchronizationConfig::PYZ_DEFAULT_SYNCHRONIZATION_POOL_NAME;
+        return SynchronizationConfig::DEFAULT_SYNCHRONIZATION_POOL_NAME;
     }
 
     /**

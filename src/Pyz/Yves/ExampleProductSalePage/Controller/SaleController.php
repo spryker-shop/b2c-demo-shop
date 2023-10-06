@@ -26,31 +26,31 @@ class SaleController extends AbstractController
      *
      * @return \Spryker\Yves\Kernel\View\View
      */
-    public function indexPyzAction($categoryPath, Request $request): View
+    public function indexAction($categoryPath, Request $request): View
     {
         $parameters = $request->query->all();
 
         $categoryNode = [];
         if ($categoryPath) {
-            $categoryNode = $this->getPyzCategoryNode($categoryPath);
+            $categoryNode = $this->getCategoryNode($categoryPath);
 
             $parameters['category'] = $categoryNode['node_id'];
         }
 
         $searchResults = $this
             ->getClient()
-            ->salePyzSearch($parameters);
+            ->saleSearch($parameters);
 
         $searchResults['category'] = $categoryNode;
-        $searchResults['filterPath'] = ExampleProductSaleRouteProviderPlugin::PYZ_ROUTE_NAME_SALE;
+        $searchResults['filterPath'] = ExampleProductSaleRouteProviderPlugin::ROUTE_NAME_SALE;
         $searchResults['viewMode'] = $this->getFactory()
-            ->getPyzCatalogClient()
+            ->getCatalogClient()
             ->getCatalogViewMode($request);
 
         $numberFormatConfigTransfer = $this->getFactory()
             ->getUtilNumberService()
             ->getNumberFormatConfig(
-                $this->getFactory()->getPyzLocaleClient()->getCurrentLocale(),
+                $this->getFactory()->getLocaleClient()->getCurrentLocale(),
             );
 
         return $this->view(
@@ -69,14 +69,14 @@ class SaleController extends AbstractController
      *
      * @return array<mixed>
      */
-    protected function getPyzCategoryNode($categoryPath): array
+    protected function getCategoryNode($categoryPath): array
     {
-        $defaultLocale = current($this->getFactory()->getPyzStore()->getAvailableLocaleIsoCodes());
+        $defaultLocale = current($this->getFactory()->getStore()->getAvailableLocaleIsoCodes());
         $categoryPathPrefix = '/' . $this->getLanguageFromLocale($defaultLocale);
         $fullCategoryPath = $categoryPathPrefix . '/' . ltrim($categoryPath, '/');
 
         $categoryNode = $this->getFactory()
-            ->getPyzUrlStorageClient()
+            ->getUrlStorageClient()
             ->matchUrl($fullCategoryPath, $this->getLocale());
 
         if (!$categoryNode || empty($categoryNode['data'])) {
