@@ -33,6 +33,8 @@ image:
         SPRYKER_HOOK_DESTRUCTIVE_INSTALL: "vendor/bin/install -r EU/destructive --no-ansi -vvv"
         SPRYKER_PRODUCT_CONFIGURATOR_HOST: dtc.b2c.demo-spryker.com
         SPRYKER_PRODUCT_CONFIGURATOR_PORT: 443
+        SPRYKER_YVES_HOST_DE: de.b2c.demo-spryker.com
+        SPRYKER_YVES_HOST_AT: at.b2c.demo-spryker.com
     php:
         ini:
             "opcache.revalidate_freq": 0
@@ -40,8 +42,8 @@ image:
             - blackfire
             - newrelic
     node:
-        version: 16
-        npm: 8
+        version: 18
+        npm: 9
 
 composer:
     mode: '--no-dev'
@@ -142,6 +144,20 @@ groups:
                     glue.de.b2c.demo-spryker.com:
                         store: DE
                     glue.at.b2c.demo-spryker.com:
+                        store: AT
+            glue_storefront:
+                application: glue-storefront
+                endpoints:
+                    glue-storefront.de.b2c.demo-spryker.com:
+                        store: DE
+                    glue-storefront.at.b2c.demo-spryker.com:
+                        store: AT
+            glue_backend:
+                application: glue-backend
+                endpoints:
+                    glue-backend.de.b2c.demo-spryker.com:
+                        store: DE
+                    glue-backend.at.b2c.demo-spryker.com:
                         store: AT
             boffice:
                 application: backoffice

@@ -33,6 +33,7 @@ image:
         SPRYKER_HOOK_DESTRUCTIVE_INSTALL: "vendor/bin/install -r US/destructive --no-ansi -vvv"
         SPRYKER_PRODUCT_CONFIGURATOR_HOST: dtc.b2c-us.demo-spryker.com
         SPRYKER_PRODUCT_CONFIGURATOR_PORT: 443
+        SPRYKER_YVES_HOST_US: us.b2c-us.demo-spryker.com
     php:
         ini:
             "opcache.revalidate_freq": 0
@@ -40,8 +41,8 @@ image:
             - blackfire
             - newrelic
     node:
-        version: 16
-        npm: 8
+        version: 18
+        npm: 9
 
 composer:
     mode: '--no-dev'
@@ -95,6 +96,16 @@ groups:
                 application: glue
                 endpoints:
                     glue.us.b2c-us.demo-spryker.com:
+                        store: US
+            glue_storefront:
+                application: glue-storefront
+                endpoints:
+                    glue-storefront.us.b2c-us.demo-spryker.com:
+                        store: US
+            glue_backend:
+                application: glue-backend
+                endpoints:
+                    glue-backend.us.b2c-us.demo-spryker.com:
                         store: US
             boffice:
                 application: backoffice
