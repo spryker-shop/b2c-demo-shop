@@ -18,7 +18,6 @@ use Spryker\Zed\GiftCardMailConnector\Communication\Plugin\Mail\GiftCardDelivery
 use Spryker\Zed\GiftCardMailConnector\Communication\Plugin\Mail\GiftCardUsageMailTypeBuilderPlugin;
 use Spryker\Zed\Kernel\Container;
 use Spryker\Zed\Mail\Business\Model\Provider\MailProviderCollectionAddInterface;
-use Spryker\Zed\Mail\Communication\Plugin\MailProviderPlugin;
 use Spryker\Zed\Mail\MailConfig;
 use Spryker\Zed\Mail\MailDependencyProvider as SprykerMailDependencyProvider;
 use Spryker\Zed\Newsletter\Communication\Plugin\Mail\NewsletterSubscribedMailTypeBuilderPlugin;
@@ -54,7 +53,7 @@ class MailDependencyProvider extends SprykerMailDependencyProvider
     {
         $container->extend(self::MAIL_PROVIDER_COLLECTION, function (MailProviderCollectionAddInterface $mailProviderCollection) {
             $mailProviderCollection
-                ->addProvider(new MailProviderPlugin(), [
+                ->addProvider(new SymfonyMailerProviderPlugin(), [
                     MailConfig::MAIL_TYPE_ALL,
                 ]);
 
