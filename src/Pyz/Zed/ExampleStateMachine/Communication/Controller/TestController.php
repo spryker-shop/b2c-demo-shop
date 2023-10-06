@@ -70,7 +70,7 @@ class TestController extends AbstractController
     {
         $this->getFacade()->createExampleItem();
 
-        return new RedirectResponse('/example-state-machine/test/list-pyz');
+        return new RedirectResponse('/example-state-machine/test/list');
     }
 
     /**
@@ -86,7 +86,7 @@ class TestController extends AbstractController
             ->queryExampleStateMachineItemByIdStateMachineItem($idStateMachineItem)
             ->delete();
 
-        return new RedirectResponse('/example-state-machine/test/list-pyz');
+        return new RedirectResponse('/example-state-machine/test/list');
     }
 
     /**

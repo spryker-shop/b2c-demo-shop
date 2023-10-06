@@ -11,29 +11,9 @@ use Pyz\Yves\ContentProductSetWidget\Twig\ContentProductSetTwigFunctionProvider;
 use Spryker\Shared\Twig\TwigFunctionProvider;
 use SprykerShop\Yves\ContentProductSetWidget\ContentProductSetWidgetFactory as SprykerContentProductSetWidgetFactory;
 use Twig\Environment;
-use Twig\TwigFunction;
 
 class ContentProductSetWidgetFactory extends SprykerContentProductSetWidgetFactory
 {
-    /**
-     * @param \Twig\Environment $twig
-     * @param string $localeName
-     *
-     * @return \Twig\TwigFunction
-     */
-    public function createContentProductSetTwigFunction(
-        Environment $twig,
-        string $localeName,
-    ): TwigFunction {
-        $functionProvider = $this->createContentProductSetTwigFunctionProvider($twig, $localeName);
-
-        return new TwigFunction(
-            $functionProvider->getFunctionName(),
-            $functionProvider->getFunction(),
-            $functionProvider->getOptions(),
-        );
-    }
-
     /**
      * @param \Twig\Environment $twig
      * @param string $localeName

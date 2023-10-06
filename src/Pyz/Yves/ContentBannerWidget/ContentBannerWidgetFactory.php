@@ -11,27 +11,9 @@ use Pyz\Yves\ContentBannerWidget\Twig\ContentBannerTwigFunctionProvider;
 use Spryker\Shared\Twig\TwigFunctionProvider;
 use SprykerShop\Yves\ContentBannerWidget\ContentBannerWidgetFactory as SprykerContentBannerWidgetFactory;
 use Twig\Environment;
-use Twig\TwigFunction;
 
 class ContentBannerWidgetFactory extends SprykerContentBannerWidgetFactory
 {
-    /**
-     * @param \Twig\Environment $twig
-     * @param string $localeName
-     *
-     * @return \Twig\TwigFunction
-     */
-    public function createContentBannerTwigFunction(Environment $twig, string $localeName): TwigFunction
-    {
-        $functionProvider = $this->createContentBannerTwigFunctionProvider($twig, $localeName);
-
-        return new TwigFunction(
-            $functionProvider->getFunctionName(),
-            $functionProvider->getFunction(),
-            $functionProvider->getOptions(),
-        );
-    }
-
     /**
      * @param \Twig\Environment $twig
      * @param string $localeName
