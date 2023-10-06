@@ -17,5 +17,5 @@ class CategoryWriterStep extends SprykerCategoryWriterStep
     /**
      * @var string
      */
-    public const PYZ_KEY_CATEGORY_IMAGE_NAME = 'category_image_name';
+    public const KEY_CATEGORY_IMAGE_NAME = 'category_image_name';
 }

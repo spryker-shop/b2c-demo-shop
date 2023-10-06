@@ -12,5 +12,5 @@ interface ExampleProductSalePageFacadeInterface
     /**
      * @return array<\Generated\Shared\Transfer\ProductLabelProductAbstractRelationsTransfer>
      */
-    public function findPyzProductLabelProductAbstractRelationChanges(): array;
+    public function findProductLabelProductAbstractRelationChanges(): array;
 }

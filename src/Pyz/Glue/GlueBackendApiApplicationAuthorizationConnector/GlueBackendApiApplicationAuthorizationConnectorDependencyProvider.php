@@ -7,6 +7,7 @@
 
 namespace Pyz\Glue\GlueBackendApiApplicationAuthorizationConnector;
 
+use Spryker\Glue\ApiKeyAuthorizationConnector\Plugin\GlueBackendApiApplicationAuthorizationConnector\ApiKeyAuthorizationRequestExpanderPlugin;
 use Spryker\Glue\GlueBackendApiApplicationAuthorizationConnector\GlueBackendApiApplicationAuthorizationConnectorDependencyProvider as SprykerGlueBackendApiApplicationAuthorizationConnectorDependencyProvider;
 use Spryker\Glue\WarehouseOauthBackendApi\Plugin\GlueBackendApiApplicationAuthorizationConnector\WarehouseAuthorizationRequestExpanderPlugin;
 
@@ -21,6 +22,7 @@ class GlueBackendApiApplicationAuthorizationConnectorDependencyProvider extends 
     protected function getAuthorizationRequestExpanderPlugins(): array
     {
         return [
+            new ApiKeyAuthorizationRequestExpanderPlugin(),
             new WarehouseAuthorizationRequestExpanderPlugin(),
         ];
     }

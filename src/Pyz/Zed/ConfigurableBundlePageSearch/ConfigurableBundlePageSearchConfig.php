@@ -18,7 +18,7 @@ class ConfigurableBundlePageSearchConfig extends SprykerConfigurableBundlePageSe
      */
     public function getConfigurableBundlePageSynchronizationPoolName(): ?string
     {
-        return SynchronizationConfig::PYZ_DEFAULT_SYNCHRONIZATION_POOL_NAME;
+        return SynchronizationConfig::DEFAULT_SYNCHRONIZATION_POOL_NAME;
     }
 
     /**

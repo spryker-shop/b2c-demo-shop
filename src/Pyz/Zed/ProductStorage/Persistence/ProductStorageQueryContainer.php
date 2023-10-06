@@ -57,10 +57,10 @@ class ProductStorageQueryContainer extends SprykerProductStorageQueryContainer
      *
      * @return \Orm\Zed\ProductBundle\Persistence\SpyProductBundleQuery
      */
-    public function queryPyzBundledProductIdsByProductConcreteId($idProductConcrete): SpyProductBundleQuery
+    public function queryBundledProductIdsByProductConcreteId($idProductConcrete): SpyProductBundleQuery
     {
         return $this->getFactory()
-            ->getPyzProductBundleQuery()
+            ->getProductBundleQuery()
             ->filterByFkProduct($idProductConcrete);
     }
 }

@@ -10,6 +10,7 @@ namespace Pyz\Zed\Installer;
 use Spryker\Zed\Acl\Communication\Plugin\AclInstallerPlugin;
 use Spryker\Zed\Country\Communication\Plugin\CountryInstallerPlugin;
 use Spryker\Zed\CustomerAccess\Communication\Plugin\CustomerAccessInstallerPlugin;
+use Spryker\Zed\DynamicEntity\Communication\Plugin\Installer\DynamicEntityInstallerPlugin;
 use Spryker\Zed\Glossary\Communication\Plugin\GlossaryInstallerPlugin;
 use Spryker\Zed\Installer\InstallerDependencyProvider as SprykerInstallerDependencyProvider;
 use Spryker\Zed\Locale\Communication\Plugin\LocaleInstallerPlugin;
@@ -49,6 +50,7 @@ class InstallerDependencyProvider extends SprykerInstallerDependencyProvider
             new OauthClientInstallerPlugin(),
             new OauthCustomerScopeInstallerPlugin(),
             new AgentOauthScopeInstallerPlugin(),
+            new DynamicEntityInstallerPlugin(),
             new PushNotificationWebPushPhpProviderInstallerPlugin(),
             new OauthWarehouseInstallerPlugin(),
         ];

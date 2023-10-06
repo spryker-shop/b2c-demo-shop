@@ -17,12 +17,12 @@ class CartTwigPlugin extends SprykerCartTwigPlugin
     /**
      * @var string
      */
-    protected const PYZ_FUNCTION_NAME_GET_QUOTE = 'getQuote';
+    protected const FUNCTION_NAME_GET_QUOTE = 'getQuote';
 
     /**
      * @var string
      */
-    protected const PYZ_FUNCTION_NAME_GET_CART_ITEMS = 'getCartItems';
+    protected const FUNCTION_NAME_GET_CART_ITEMS = 'getCartItems';
 
     /**
      * {@inheritDoc}
@@ -51,7 +51,7 @@ class CartTwigPlugin extends SprykerCartTwigPlugin
      */
     protected function addQuoteFunction(Environment $twig): Environment
     {
-        $quoteFunction = new TwigFunction(static::PYZ_FUNCTION_NAME_GET_QUOTE, function () {
+        $quoteFunction = new TwigFunction(static::FUNCTION_NAME_GET_QUOTE, function () {
             return $this->getFactory()
                 ->getCartClient()
                 ->getQuote();
@@ -69,7 +69,7 @@ class CartTwigPlugin extends SprykerCartTwigPlugin
      */
     protected function addCartItemsFunction(Environment $twig): Environment
     {
-        $quoteFunction = new TwigFunction(static::PYZ_FUNCTION_NAME_GET_CART_ITEMS, function () {
+        $quoteFunction = new TwigFunction(static::FUNCTION_NAME_GET_CART_ITEMS, function () {
             return $this->getFactory()
                 ->createCartItemReader()
                 ->getCartItems(

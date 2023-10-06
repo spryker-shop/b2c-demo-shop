@@ -14,7 +14,7 @@ class CustomerPageConfig extends SprykerCustomerPageConfig
     /**
      * @var string
      */
-    protected const PYZ_LOGIN_FAILURE_REDIRECT_URL = '/login';
+    protected const LOGIN_FAILURE_REDIRECT_URL = '/login';
 
     /**
      * @uses \Pyz\Zed\Customer\CustomerConfig::MIN_LENGTH_CUSTOMER_PASSWORD
@@ -42,7 +42,7 @@ class CustomerPageConfig extends SprykerCustomerPageConfig
      */
     public function loginFailureRedirectUrl(): ?string
     {
-        return static::PYZ_LOGIN_FAILURE_REDIRECT_URL;
+        return static::LOGIN_FAILURE_REDIRECT_URL;
     }
 
     /**
