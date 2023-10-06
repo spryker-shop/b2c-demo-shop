@@ -15,7 +15,7 @@ use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 use Spryker\Zed\StateMachine\Dependency\Plugin\StateMachineHandlerInterface;
 
 /**
- * @method \Pyz\Zed\ExampleStateMachine\Business\ExampleStateMachineFacade getFacade()
+ * @method \Pyz\Zed\ExampleStateMachine\Business\ExampleStateMachineFacadeInterface getFacade()
  * @method \Pyz\Zed\ExampleStateMachine\Communication\ExampleStateMachineCommunicationFactory getFactory()
  * @method \Pyz\Zed\ExampleStateMachine\Persistence\ExampleStateMachineQueryContainerInterface getQueryContainer()
  */
@@ -24,9 +24,9 @@ class TestStateMachineHandlerPlugin extends AbstractPlugin implements StateMachi
     /**
      * List of command plugins for this state machine for all processes.
      *
-     * @return \Spryker\Zed\StateMachine\Dependency\Plugin\CommandPluginInterface[]
+     * @return array<\Spryker\Zed\StateMachine\Dependency\Plugin\CommandPluginInterface>
      */
-    public function getCommandPlugins()
+    public function getCommandPlugins(): array
     {
         return [
             'Test/Command' => new TestCommandPlugin(),
@@ -36,9 +36,9 @@ class TestStateMachineHandlerPlugin extends AbstractPlugin implements StateMachi
     /**
      * List of condition plugins for this state machine for all processes.
      *
-     * @return \Spryker\Zed\StateMachine\Dependency\Plugin\ConditionPluginInterface[]
+     * @return array<\Spryker\Zed\StateMachine\Dependency\Plugin\ConditionPluginInterface>
      */
-    public function getConditionPlugins()
+    public function getConditionPlugins(): array
     {
         return [
             'Test/Condition' => new TestConditionPlugin(),
@@ -50,7 +50,7 @@ class TestStateMachineHandlerPlugin extends AbstractPlugin implements StateMachi
      *
      * @return string
      */
-    public function getStateMachineName()
+    public function getStateMachineName(): string
     {
         return 'Test';
     }
@@ -58,9 +58,9 @@ class TestStateMachineHandlerPlugin extends AbstractPlugin implements StateMachi
     /**
      * List of active processes used for this state machine
      *
-     * @return string[]
+     * @return array<string>
      */
-    public function getActiveProcesses()
+    public function getActiveProcesses(): array
     {
         return [
             'Invoice01',
@@ -76,7 +76,7 @@ class TestStateMachineHandlerPlugin extends AbstractPlugin implements StateMachi
      *
      * @return string
      */
-    public function getInitialStateForProcess($processName)
+    public function getInitialStateForProcess($processName): string
     {
         switch ($processName) {
             case 'Invoice01':
@@ -86,8 +86,8 @@ class TestStateMachineHandlerPlugin extends AbstractPlugin implements StateMachi
         throw new InvalidArgumentException(
             sprintf(
                 'Initial state not found for process "%s".',
-                $processName
-            )
+                $processName,
+            ),
         );
     }
 
@@ -99,7 +99,7 @@ class TestStateMachineHandlerPlugin extends AbstractPlugin implements StateMachi
      *
      * @return bool
      */
-    public function itemStateUpdated(StateMachineItemTransfer $stateMachineItemTransfer)
+    public function itemStateUpdated(StateMachineItemTransfer $stateMachineItemTransfer): bool
     {
          return $this->getFacade()->updatePyzItemState($stateMachineItemTransfer);
     }
@@ -107,11 +107,11 @@ class TestStateMachineHandlerPlugin extends AbstractPlugin implements StateMachi
     /**
      * This method should return all list of StateMachineItemTransfer, with (identifier, IdStateMachineProcess, IdItemState)
      *
-     * @param array $stateIds
+     * @param array<int> $stateIds
      *
-     * @return \Generated\Shared\Transfer\StateMachineItemTransfer[]
+     * @return array<\Generated\Shared\Transfer\StateMachineItemTransfer>
      */
-    public function getStateMachineItemsByStateIds(array $stateIds = [])
+    public function getStateMachineItemsByStateIds(array $stateIds = []): array
     {
          return $this->getFacade()->getPyzExampleStateMachineItemsByStateIds($stateIds);
     }

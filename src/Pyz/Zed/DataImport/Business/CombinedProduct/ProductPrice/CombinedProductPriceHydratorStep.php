@@ -25,6 +25,7 @@ class CombinedProductPriceHydratorStep extends ProductPriceHydratorStep
      * @var string
      */
     public const COLUMN_ABSTRACT_SKU = 'abstract_sku';
+
     /**
      * @var string
      */
@@ -34,30 +35,37 @@ class CombinedProductPriceHydratorStep extends ProductPriceHydratorStep
      * @var string
      */
     public const COLUMN_CURRENCY = 'product_price.currency';
+
     /**
      * @var string
      */
     public const COLUMN_STORE = 'product_price.store';
+
     /**
      * @var string
      */
     public const COLUMN_PRICE_NET = 'product_price.value_net';
+
     /**
      * @var string
      */
     public const COLUMN_PRICE_GROSS = 'product_price.value_gross';
+
     /**
      * @var string
      */
     public const COLUMN_PRICE_DATA = 'product_price.price_data';
+
     /**
      * @var string
      */
     public const COLUMN_PRICE_DATA_CHECKSUM = 'product_price.price_data_checksum';
+
     /**
      * @var string
      */
     public const COLUMN_PRICE_TYPE = 'product_price.price_type';
+
     /**
      * @var string
      */
@@ -72,12 +80,14 @@ class CombinedProductPriceHydratorStep extends ProductPriceHydratorStep
      * @var string
      */
     protected const ASSIGNABLE_PRODUCT_TYPE_ABSTRACT = 'abstract';
+
     /**
      * @var string
      */
     protected const ASSIGNABLE_PRODUCT_TYPE_CONCRETE = 'concrete';
+
     /**
-     * @var array
+     * @var array<string>
      */
     protected const ASSIGNABLE_PRODUCT_TYPES = [
         self::ASSIGNABLE_PRODUCT_TYPE_ABSTRACT,
@@ -90,7 +100,7 @@ class CombinedProductPriceHydratorStep extends ProductPriceHydratorStep
      */
     public function __construct(
         PriceProductFacadeInterface $priceProductFacade,
-        DataImportToUtilEncodingServiceInterface $utilEncodingService
+        DataImportToUtilEncodingServiceInterface $utilEncodingService,
     ) {
         parent::__construct($priceProductFacade, $utilEncodingService);
     }
@@ -140,7 +150,7 @@ class CombinedProductPriceHydratorStep extends ProductPriceHydratorStep
             throw new DataKeyNotFoundInDataSetException(sprintf(
                 '"%s" must be defined in the data set. Given: "%s"',
                 static::COLUMN_ASSIGNED_PRODUCT_TYPE,
-                implode(', ', array_keys($dataSet->getArrayCopy()))
+                implode(', ', array_keys($dataSet->getArrayCopy())),
             ));
         }
 
@@ -149,7 +159,7 @@ class CombinedProductPriceHydratorStep extends ProductPriceHydratorStep
                 '"%s" must have one of the following values: %s. Given: "%s"',
                 static::COLUMN_ASSIGNED_PRODUCT_TYPE,
                 implode(', ', static::ASSIGNABLE_PRODUCT_TYPES),
-                $dataSet[static::COLUMN_ASSIGNED_PRODUCT_TYPE]
+                $dataSet[static::COLUMN_ASSIGNED_PRODUCT_TYPE],
             ));
         }
     }

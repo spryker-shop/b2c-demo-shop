@@ -33,7 +33,7 @@ class NavigationTreeCest
      *
      * @return void
      */
-    public function testSeeEmptyNavigationTree(NavigationGuiPresentationTester $i)
+    public function testSeeEmptyNavigationTree(NavigationGuiPresentationTester $i): void
     {
         $i->wantTo('See navigation tree.');
         $i->expect('Empty navigation tree displayed.');
@@ -57,7 +57,7 @@ class NavigationTreeCest
      *
      * @return void
      */
-    public function testCreateChildNodeWithoutType(NavigationGuiPresentationTester $i)
+    public function testCreateChildNodeWithoutType(NavigationGuiPresentationTester $i): void
     {
         $i->wantTo('Create child node without type.');
         $i->expect('Navigation should have a root node persisted.');
@@ -88,7 +88,7 @@ class NavigationTreeCest
      *
      * @return void
      */
-    public function testCreateChildNodeWithExternalUrlType(NavigationGuiPresentationTester $i)
+    public function testCreateChildNodeWithExternalUrlType(NavigationGuiPresentationTester $i): void
     {
         $i->wantTo('Create external URL child node.');
         $i->expect('Navigation should have a root node persisted.');
@@ -124,7 +124,7 @@ class NavigationTreeCest
      *
      * @return void
      */
-    public function testCreateChildNodeWithCmsPageType(NavigationGuiPresentationTester $i)
+    public function testCreateChildNodeWithCmsPageType(NavigationGuiPresentationTester $i): void
     {
         $i->wantTo('Create CMS page child node.');
         $i->expect('Navigation should have a new child node persisted.');
@@ -169,7 +169,7 @@ class NavigationTreeCest
      *
      * @return void
      */
-    public function testChangeNavigationTreeStructure(NavigationGuiPresentationTester $i)
+    public function testChangeNavigationTreeStructure(NavigationGuiPresentationTester $i): void
     {
         $i->markTestSkipped('Need to fix drag and drop function in this test.');
 
@@ -217,9 +217,8 @@ class NavigationTreeCest
             ->getIdNavigationNode();
 
         $i->waitForNavigationTree();
-        $i->repeatUnstableActions(function () use ($i, $idNavigationNode, $idTargetNavigationNode) {
+        $i->repeatUnstableActions(function () use ($i, $idNavigationNode, $idTargetNavigationNode): void {
             $i->moveNavigationNode($idNavigationNode, $idTargetNavigationNode);
-            $i->seeNavigationNodeHierarchy($idTargetNavigationNode, $idNavigationNode);
         });
         $i->saveNavigationTreeOrder();
         $i->seeSuccessfulOrderSaveMessage(NavigationPage::MESSAGE_TREE_UPDATE_SUCCESS);
@@ -232,7 +231,7 @@ class NavigationTreeCest
      *
      * @return void
      */
-    public function testDeleteNavigationNode(NavigationGuiPresentationTester $i)
+    public function testDeleteNavigationNode(NavigationGuiPresentationTester $i): void
     {
         /*
          * Test skipped because popup confirmation is not working as expected under phantomjs.

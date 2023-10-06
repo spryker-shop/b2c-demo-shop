@@ -27,15 +27,15 @@ class ContentProductAbstractReader implements ContentProductAbstractReaderInterf
 
     /**
      * @param \Generated\Shared\Transfer\ProductSetDataStorageTransfer $productSetDataStorageTransfer
-     * @param array $selectedAttributes
+     * @param array<mixed> $selectedAttributes
      * @param string $localeName
      *
-     * @return \Generated\Shared\Transfer\ProductViewTransfer[]
+     * @return array<\Generated\Shared\Transfer\ProductViewTransfer>
      */
     public function findProductAbstractCollection(
         ProductSetDataStorageTransfer $productSetDataStorageTransfer,
         array $selectedAttributes,
-        string $localeName
+        string $localeName,
     ): array {
         $productAbstractViewCollection = [];
 
@@ -56,9 +56,9 @@ class ContentProductAbstractReader implements ContentProductAbstractReaderInterf
 
     /**
      * @param int $idProductAbstract
-     * @param array $selectedAttributes
+     * @param array<mixed> $selectedAttributes
      *
-     * @return array
+     * @return array<mixed>
      */
     protected function getSelectedAttributesByIdProductAbstract(int $idProductAbstract, array $selectedAttributes): array
     {

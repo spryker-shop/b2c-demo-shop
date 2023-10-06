@@ -7,6 +7,7 @@
 
 namespace Pyz\Zed\DataImport\Business\Model\DiscountAmount;
 
+use Orm\Zed\Currency\Persistence\SpyCurrency;
 use Orm\Zed\Currency\Persistence\SpyCurrencyQuery;
 use Orm\Zed\Discount\Persistence\SpyDiscountAmountQuery;
 use Orm\Zed\Discount\Persistence\SpyDiscountQuery;
@@ -24,21 +25,24 @@ class DiscountAmountWriterStep implements DataImportStepInterface
      * @var string
      */
     public const KEY_DISCOUNT_KEY = 'discount_key';
+
     /**
      * @var string
      */
     public const KEY_CURRENCY = 'currency';
+
     /**
      * @var string
      */
     public const KEY_VALUE_NET = 'value_net';
+
     /**
      * @var string
      */
     public const KEY_VALUE_GROSS = 'value_gross';
 
     /**
-     * @var \Orm\Zed\Currency\Persistence\SpyCurrency[]
+     * @var array<\Orm\Zed\Currency\Persistence\SpyCurrency>
      */
     protected static $currencyCache = [];
 
@@ -47,7 +51,7 @@ class DiscountAmountWriterStep implements DataImportStepInterface
      *
      * @return void
      */
-    public function execute(DataSetInterface $dataSet)
+    public function execute(DataSetInterface $dataSet): void
     {
         $discountEntity = SpyDiscountQuery::create()
             ->findOneByDiscountKey($dataSet[static::KEY_DISCOUNT_KEY]);
@@ -73,7 +77,7 @@ class DiscountAmountWriterStep implements DataImportStepInterface
      *
      * @return \Orm\Zed\Currency\Persistence\SpyCurrency
      */
-    protected function getCurrencyByCode($currencyCode)
+    protected function getCurrencyByCode($currencyCode): SpyCurrency
     {
         if (isset(static::$currencyCache[$currencyCode])) {
             return static::$currencyCache[$currencyCode];

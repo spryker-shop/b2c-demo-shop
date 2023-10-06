@@ -17,18 +17,18 @@ use Spryker\Zed\CategoryImage\Communication\Plugin\CategoryImageSetUpdaterPlugin
 use Spryker\Zed\CategoryImage\Communication\Plugin\RemoveCategoryImageSetRelationPlugin;
 use Spryker\Zed\CategoryNavigationConnector\Communication\Plugin\UpdateNavigationRelationPlugin;
 use Spryker\Zed\CmsBlockCategoryConnector\Communication\Plugin\Category\CmsBlockCategoryCategoryRelationPlugin;
+use Spryker\Zed\ProductCategory\Communication\Plugin\Category\ProductUpdateEventTriggerCategoryRelationUpdatePlugin;
 use Spryker\Zed\ProductCategory\Communication\Plugin\RemoveProductCategoryRelationPlugin;
-use Spryker\Zed\ProductCategory\Communication\Plugin\UpdateProductCategoryRelationPlugin;
 
 class CategoryDependencyProvider extends SprykerDependencyProvider
 {
     /**
-     * @return \Spryker\Zed\CategoryExtension\Dependency\Plugin\CategoryRelationDeletePluginInterface[]
+     * @return array<\Spryker\Zed\CategoryExtension\Dependency\Plugin\CategoryRelationDeletePluginInterface>
      */
     protected function getRelationDeletePluginStack(): array
     {
         /**
-         * @var \Spryker\Zed\Category\Dependency\Plugin\CategoryRelationDeletePluginInterface[] $deletePlugins
+         * @var array<\Spryker\Zed\Category\Dependency\Plugin\CategoryRelationDeletePluginInterface> $deletePlugins
          */
         $deletePlugins = [
             new RemoveProductCategoryRelationPlugin(),
@@ -39,19 +39,19 @@ class CategoryDependencyProvider extends SprykerDependencyProvider
     }
 
     /**
-     * @return \Spryker\Zed\CategoryExtension\Dependency\Plugin\CategoryRelationUpdatePluginInterface[]
+     * @return array<\Spryker\Zed\CategoryExtension\Dependency\Plugin\CategoryRelationUpdatePluginInterface>
      */
     protected function getRelationUpdatePluginStack(): array
     {
         return [
-            new UpdateProductCategoryRelationPlugin(),
             new UpdateNavigationRelationPlugin(),
             new CmsBlockCategoryCategoryRelationPlugin(),
+            new ProductUpdateEventTriggerCategoryRelationUpdatePlugin(),
         ];
     }
 
     /**
-     * @return \Spryker\Zed\CategoryExtension\Dependency\Plugin\CategoryTransferExpanderPluginInterface[]
+     * @return array<\Spryker\Zed\CategoryExtension\Dependency\Plugin\CategoryTransferExpanderPluginInterface>
      */
     protected function getCategoryPostReadPlugins(): array
     {
@@ -61,7 +61,7 @@ class CategoryDependencyProvider extends SprykerDependencyProvider
     }
 
     /**
-     * @return \Spryker\Zed\CategoryExtension\Dependency\Plugin\CategoryUrlPathPluginInterface[]
+     * @return array<\Spryker\Zed\CategoryExtension\Dependency\Plugin\CategoryUrlPathPluginInterface>
      */
     protected function getCategoryUrlPathPlugins(): array
     {
@@ -71,7 +71,7 @@ class CategoryDependencyProvider extends SprykerDependencyProvider
     }
 
     /**
-     * @return \Spryker\Zed\CategoryExtension\Dependency\Plugin\CategoryUpdateAfterPluginInterface[]
+     * @return array<\Spryker\Zed\CategoryExtension\Dependency\Plugin\CategoryUpdateAfterPluginInterface>
      */
     protected function getCategoryPostUpdatePlugins(): array
     {
@@ -81,7 +81,7 @@ class CategoryDependencyProvider extends SprykerDependencyProvider
     }
 
     /**
-     * @return \Spryker\Zed\CategoryExtension\Dependency\Plugin\CategoryCreateAfterPluginInterface[]
+     * @return array<\Spryker\Zed\CategoryExtension\Dependency\Plugin\CategoryCreateAfterPluginInterface>
      */
     protected function getCategoryPostCreatePlugins(): array
     {

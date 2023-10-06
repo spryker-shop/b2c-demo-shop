@@ -12,6 +12,7 @@ use Orm\Zed\Tax\Persistence\SpyTaxRate;
 use Orm\Zed\Tax\Persistence\SpyTaxRateQuery;
 use Orm\Zed\Tax\Persistence\SpyTaxSet;
 use Orm\Zed\Tax\Persistence\SpyTaxSetQuery;
+use Orm\Zed\Tax\Persistence\SpyTaxSetTax;
 use Orm\Zed\Tax\Persistence\SpyTaxSetTaxQuery;
 use Propel\Runtime\ActiveQuery\Criteria;
 use Pyz\Zed\DataImport\Business\Model\Country\Repository\CountryRepositoryInterface;
@@ -31,14 +32,17 @@ class TaxWriterStep extends PublishAwareStep implements DataImportStepInterface
      * @var string
      */
     public const KEY_COUNTRY_NAME = 'country_name';
+
     /**
      * @var string
      */
     public const KEY_TAX_RATE_NAME = 'tax_rate_name';
+
     /**
      * @var string
      */
     public const KEY_TAX_RATE_PERCENT = 'tax_rate_percent';
+
     /**
      * @var string
      */
@@ -50,7 +54,7 @@ class TaxWriterStep extends PublishAwareStep implements DataImportStepInterface
     protected $countryRepository;
 
     /**
-     * @var array
+     * @var array<string, bool>
      */
     protected $shipmentSets = [
         'Shipment Taxes' => true,
@@ -70,7 +74,7 @@ class TaxWriterStep extends PublishAwareStep implements DataImportStepInterface
      *
      * @return void
      */
-    public function execute(DataSetInterface $dataSet)
+    public function execute(DataSetInterface $dataSet): void
     {
         $taxRateEntity = $this->findOrCreateTaxRate($dataSet);
 
@@ -92,7 +96,7 @@ class TaxWriterStep extends PublishAwareStep implements DataImportStepInterface
      *
      * @return \Orm\Zed\Tax\Persistence\SpyTaxRate
      */
-    protected function findOrCreateTaxRate(DataSetInterface $dataSet)
+    protected function findOrCreateTaxRate(DataSetInterface $dataSet): SpyTaxRate
     {
         $idCountry = null;
         if ($this->countryRepository->hasCountryByName($dataSet[static::KEY_COUNTRY_NAME])) {
@@ -115,7 +119,7 @@ class TaxWriterStep extends PublishAwareStep implements DataImportStepInterface
      *
      * @return \Orm\Zed\Tax\Persistence\SpyTaxSet
      */
-    protected function findOrCreateTaxSet(DataSetInterface $dataSet)
+    protected function findOrCreateTaxSet(DataSetInterface $dataSet): SpyTaxSet
     {
         $taxSetEntity = SpyTaxSetQuery::create()
             ->filterByName($dataSet[static::KEY_TAX_SET_NAME])
@@ -132,7 +136,7 @@ class TaxWriterStep extends PublishAwareStep implements DataImportStepInterface
      *
      * @return \Orm\Zed\Tax\Persistence\SpyTaxSetTax
      */
-    protected function findOrCreateTaxSetTax(SpyTaxRate $taxRateEntity, SpyTaxSet $taxSetEntity)
+    protected function findOrCreateTaxSetTax(SpyTaxRate $taxRateEntity, SpyTaxSet $taxSetEntity): SpyTaxSetTax
     {
         $taxSetTaxEntity = SpyTaxSetTaxQuery::create()
             ->filterByFkTaxRate($taxRateEntity->getIdTaxRate())
@@ -149,7 +153,7 @@ class TaxWriterStep extends PublishAwareStep implements DataImportStepInterface
      *
      * @return void
      */
-    protected function addShipmentTax(SpyTaxSet $taxSetEntity)
+    protected function addShipmentTax(SpyTaxSet $taxSetEntity): void
     {
         if (!isset($this->shipmentSets[$taxSetEntity->getName()])) {
             return;

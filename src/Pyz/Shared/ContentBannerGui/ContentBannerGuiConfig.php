@@ -36,7 +36,7 @@ class ContentBannerGuiConfig extends SprykerContentBannerGuiConfig
     protected const PYZ_WIDGET_TEMPLATE_DISPLAY_NAME_SLIDER_WITHOUT_LINK = 'content_banner.template.slider-without-link';
 
     /**
-     * @return array
+     * @return array<string, string>
      */
     public function getContentWidgetTemplates(): array
     {
@@ -45,7 +45,7 @@ class ContentBannerGuiConfig extends SprykerContentBannerGuiConfig
             [
                 static::PYZ_WIDGET_TEMPLATE_IDENTIFIER_SLIDER => static::PYZ_WIDGET_TEMPLATE_DISPLAY_NAME_SLIDER,
                 static::PYZ_WIDGET_TEMPLATE_IDENTIFIER_SLIDER_WITHOUT_LINK => static::PYZ_WIDGET_TEMPLATE_DISPLAY_NAME_SLIDER_WITHOUT_LINK,
-            ]
+            ],
         );
     }
 }

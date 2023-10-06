@@ -13,7 +13,7 @@ use Spryker\Client\Price\PriceDependencyProvider as SprykerPriceDependencyProvid
 class PriceDependencyProvider extends SprykerPriceDependencyProvider
 {
     /**
-     * @return \Spryker\Client\PriceExtension\Dependency\Plugin\PriceModePostUpdatePluginInterface[]
+     * @return array<\Spryker\Client\PriceExtension\Dependency\Plugin\PriceModePostUpdatePluginInterface>
      */
     protected function getPriceModePostUpdatePlugins(): array
     {

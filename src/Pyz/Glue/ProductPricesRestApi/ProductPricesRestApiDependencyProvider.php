@@ -13,7 +13,7 @@ use Spryker\Glue\ProductPricesRestApi\ProductPricesRestApiDependencyProvider as 
 class ProductPricesRestApiDependencyProvider extends SprykerProductPricesRestApiDependencyProvider
 {
     /**
-     * @return \Spryker\Glue\ProductPricesRestApiExtension\Dependency\Plugin\RestProductPricesAttributesMapperPluginInterface[]
+     * @return array<\Spryker\Glue\ProductPricesRestApiExtension\Dependency\Plugin\RestProductPricesAttributesMapperPluginInterface>
      */
     protected function getRestProductPricesAttributesMapperPlugins(): array
     {

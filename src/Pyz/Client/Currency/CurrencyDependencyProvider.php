@@ -13,7 +13,7 @@ use Spryker\Client\Currency\CurrencyDependencyProvider as SprykerCurrencyDepende
 class CurrencyDependencyProvider extends SprykerCurrencyDependencyProvider
 {
     /**
-     * @return \Spryker\Client\CurrencyExtension\Dependency\CurrencyPostChangePluginInterface[]
+     * @return array<\Spryker\Client\CurrencyExtension\Dependency\CurrencyPostChangePluginInterface>
      */
     protected function getCurrencyPostChangePlugins(): array
     {

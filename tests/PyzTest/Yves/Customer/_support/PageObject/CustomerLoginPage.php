@@ -13,6 +13,7 @@ class CustomerLoginPage extends Customer
      * @var string
      */
     public const URL = '/en/login';
+
     /**
      * @var string
      */
@@ -27,6 +28,7 @@ class CustomerLoginPage extends Customer
      * @var string
      */
     public const TITLE_LOGIN = 'Login';
+
     /**
      * @var string
      */
@@ -36,6 +38,7 @@ class CustomerLoginPage extends Customer
      * @var string
      */
     public const FORM_FIELD_SELECTOR_EMAIL = 'loginForm[email]';
+
     /**
      * @var string
      */

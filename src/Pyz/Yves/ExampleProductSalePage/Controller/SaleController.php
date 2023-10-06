@@ -7,8 +7,10 @@
 
 namespace Pyz\Yves\ExampleProductSalePage\Controller;
 
+use InvalidArgumentException;
 use Pyz\Yves\ExampleProductSalePage\Plugin\Router\ExampleProductSaleRouteProviderPlugin;
 use Spryker\Yves\Kernel\Controller\AbstractController;
+use Spryker\Yves\Kernel\View\View;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -24,7 +26,7 @@ class SaleController extends AbstractController
      *
      * @return \Spryker\Yves\Kernel\View\View
      */
-    public function indexPyzAction($categoryPath, Request $request)
+    public function indexPyzAction($categoryPath, Request $request): View
     {
         $parameters = $request->query->all();
 
@@ -45,10 +47,18 @@ class SaleController extends AbstractController
             ->getPyzCatalogClient()
             ->getCatalogViewMode($request);
 
+        $numberFormatConfigTransfer = $this->getFactory()
+            ->getUtilNumberService()
+            ->getNumberFormatConfig(
+                $this->getFactory()->getPyzLocaleClient()->getCurrentLocale(),
+            );
+
         return $this->view(
-            $searchResults,
+            array_merge($searchResults, [
+                'numberFormatConfig' => $numberFormatConfigTransfer->toArray(),
+            ]),
             $this->getFactory()->getExampleProductSalePageWidgetPlugins(),
-            '@ExampleProductSalePage/views/sale-example/sale-example.twig'
+            '@ExampleProductSalePage/views/sale-example/sale-example.twig',
         );
     }
 
@@ -57,11 +67,12 @@ class SaleController extends AbstractController
      *
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      *
-     * @return array
+     * @return array<mixed>
      */
     protected function getPyzCategoryNode($categoryPath): array
     {
-        $categoryPathPrefix = '/' . $this->getFactory()->getPyzStore()->getCurrentLanguage();
+        $defaultLocale = current($this->getFactory()->getPyzStore()->getAvailableLocaleIsoCodes());
+        $categoryPathPrefix = '/' . $this->getLanguageFromLocale($defaultLocale);
         $fullCategoryPath = $categoryPathPrefix . '/' . ltrim($categoryPath, '/');
 
         $categoryNode = $this->getFactory()
@@ -72,10 +83,27 @@ class SaleController extends AbstractController
             throw new NotFoundHttpException(sprintf(
                 'Category not found by path %s (full path %s)',
                 $categoryPath,
-                $fullCategoryPath
+                $fullCategoryPath,
             ));
         }
 
         return $categoryNode['data'];
+    }
+
+    /**
+     * @param string $locale
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return string
+     */
+    protected function getLanguageFromLocale(string $locale): string
+    {
+        $position = strpos($locale, '_');
+        if ($position === false) {
+            throw new InvalidArgumentException(sprintf('Invalid format for locale `%s`, expected `xx_YY`.', $locale));
+        }
+
+        return substr($locale, 0, $position);
     }
 }

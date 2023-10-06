@@ -33,7 +33,7 @@ class CmsGuiCreatePageCest
      *
      * @return void
      */
-    public function testICanCreateCmsPageWithTranslatedPlaceholders(CmsGuiPresentationTester $i, Scenario $scenario)
+    public function testICanCreateCmsPageWithTranslatedPlaceholders(CmsGuiPresentationTester $i, Scenario $scenario): void
     {
         $i->wantTo('Create cms page with multiple translations');
         $i->expect('Page is persisted in Zed, exported to Yves and is accessible.');
@@ -42,7 +42,7 @@ class CmsGuiCreatePageCest
         $i->amOnPage(CmsCreatePage::URL);
         $i->selectOption('//*[@id="cms_page_fkTemplate"]', 'Placeholders Title & Content');
         $i->setValidFrom('1985-07-01');
-        $i->setValidTo('2037-07-01');
+        $i->setValidTo('2030-07-01');
         $i->setIsSearchable();
 
         $i->fillLocalizedUrlForm(0, $i->getLocalizedName('en'), $i->getLocalizedUrl('en'));

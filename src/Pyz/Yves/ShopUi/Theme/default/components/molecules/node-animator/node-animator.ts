@@ -34,7 +34,7 @@ export default class NodeAnimator extends Component {
         rootMargin: '0px',
         threshold: 0,
     };
-    protected isTargetInViewport: boolean = true;
+    protected isTargetInViewport = true;
 
     protected readyCallback(): void {}
 
@@ -57,7 +57,7 @@ export default class NodeAnimator extends Component {
     }
 
     protected observerCallback(): IntersectionObserverCallback {
-        return (entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
+        return (entries: IntersectionObserverEntry[]) => {
             entries.forEach((entry: IntersectionObserverEntry) => {
                 this.targetState = Boolean(entry.intersectionRatio) || entry.isIntersecting;
             });
@@ -124,16 +124,16 @@ export default class NodeAnimator extends Component {
             trigger.dataset.cloneNodeClassNames ?? ''
         }`;
         clonedNode.style.cssText = `
-            top: ${elementCoordinates.top + pageYOffset}px;
-            left: ${elementCoordinates.left + pageXOffset}px;
+            top: ${elementCoordinates.top + scrollY}px;
+            left: ${elementCoordinates.left + scrollX}px;
             width: ${elementCoordinates.width}px;
             height: ${elementCoordinates.height}px;
         `;
         this.clonedElements.push({
             element: clonedNode,
             coordinates: elementCoordinates,
-            pageXScroll: pageXOffset,
-            pageYScroll: pageYOffset,
+            pageXScroll: scrollX,
+            pageYScroll: scrollY,
             animationStartTime: performance.now(),
         });
         document.body.appendChild(clonedNode);
@@ -181,12 +181,12 @@ export default class NodeAnimator extends Component {
 
             if (side === DIRECTIONS.LEFT || side === DIRECTIONS.RIGHT) {
                 initialPageOffset = element.pageXScroll;
-                pageOffset = pageXOffset;
+                pageOffset = scrollX;
             }
 
             if (side === DIRECTIONS.TOP || side === DIRECTIONS.BOTTOM) {
                 initialPageOffset = element.pageYScroll;
-                pageOffset = pageYOffset;
+                pageOffset = scrollY;
             }
 
             const elementCoordinates = Number(element.coordinates[side]) + initialPageOffset;
@@ -221,5 +221,4 @@ export default class NodeAnimator extends Component {
     protected get animationDurationValue(): number {
         return Number(this.getAttribute('animation-duration'));
     }
-    /* tslint:disable: max-file-line-count */
 }

@@ -14,7 +14,7 @@ use Spryker\Client\ProductDiscontinuedStorage\Plugin\ProductAlternativeStorage\D
 class ProductAlternativeStorageDependencyProvider extends SprykerProductAlternativeStorageDependencyProvider
 {
     /**
-     * @return \Spryker\Client\ProductAlternativeStorageExtension\Dependency\Plugin\AlternativeProductApplicablePluginInterface[]
+     * @return array<\Spryker\Client\ProductAlternativeStorageExtension\Dependency\Plugin\AlternativeProductApplicablePluginInterface>
      */
     protected function getAlternativeProductApplicableCheckPlugins(): array
     {

@@ -33,34 +33,42 @@ class ProductPriceHydratorStep implements DataImportStepInterface
      * @var string
      */
     public const COLUMN_ABSTRACT_SKU = 'abstract_sku';
+
     /**
      * @var string
      */
     public const COLUMN_CONCRETE_SKU = 'concrete_sku';
+
     /**
      * @var string
      */
     public const COLUMN_CURRENCY = 'currency';
+
     /**
      * @var string
      */
     public const COLUMN_STORE = 'store';
+
     /**
      * @var string
      */
     public const COLUMN_PRICE_NET = 'value_net';
+
     /**
      * @var string
      */
     public const COLUMN_PRICE_GROSS = 'value_gross';
+
     /**
      * @var string
      */
     public const COLUMN_PRICE_DATA = 'price_data';
+
     /**
      * @var string
      */
     public const COLUMN_PRICE_DATA_CHECKSUM = 'price_data_checksum';
+
     /**
      * @var string
      */
@@ -70,94 +78,117 @@ class ProductPriceHydratorStep implements DataImportStepInterface
      * @var string
      */
     public const KEY_ID_PRODUCT_ABSTRACT = 'id_product_abstract';
+
     /**
      * @var string
      */
     public const KEY_ID_PRODUCT = 'id_product';
+
     /**
      * @var string
      */
     public const KEY_ID_PRICE_PRODUCT = 'id_price_product';
+
     /**
      * @var string
      */
     public const KEY_PRICE_TYPE_NAME = 'name';
+
     /**
      * @var string
      */
     public const KEY_PRICE_MODE_CONFIGURATION = 'price_mode_configuration';
+
     /**
      * @var string
      */
     public const KEY_DEFAULT_PRICE_MODE_CONFIGURATION = SpyPriceTypeTableMap::COL_PRICE_MODE_CONFIGURATION_BOTH;
+
     /**
      * @var string
      */
     public const KEY_PRICE_GROSS_DB = 'gross_price';
+
     /**
      * @var string
      */
     public const KEY_PRICE_NET_DB = 'net_price';
+
     /**
      * @var string
      */
     public const KEY_CURRENCY_NAME = 'name';
+
     /**
      * @var string
      */
     public const KEY_STORE_NAME = 'name';
+
     /**
      * @var string
      */
     public const KEY_SPY_PRODUCT_ABSTRACT = 'spy_product_abstract';
+
     /**
      * @var string
      */
     public const KEY_SPY_PRODUCT = 'spy_product';
+
     /**
      * @var string
      */
     public const KEY_FK_PRODUCT_ABSTRACT = 'fk_product_abstract';
+
     /**
      * @var string
      */
     public const KEY_FK_PRODUCT = 'fk_product';
+
     /**
      * @var string
      */
     public const KEY_PRICE_PRODUCT_STORES = 'spy_price_product_stores';
+
     /**
      * @var string
      */
     public const KEY_PRODUCT = 'product';
+
     /**
      * @var string
      */
     public const KEY_SKU = 'sku';
+
     /**
      * @var string
      */
     public const PRICE_TYPE_TRANSFER = 'PRICE_TYPE_TRANSFER';
+
     /**
      * @var string
      */
     public const PRICE_PRODUCT_TRANSFER = 'PRICE_PRODUCT_TRANSFER';
+
     /**
      * @var string
      */
     public const KEY_PRICE_DATA_PREFIX = 'price_data.';
+
     /**
      * @var string
      */
     public const KEY_ID_PRICE_TYPE = 'id_price_type';
+
     /**
      * @var string
      */
     public const KEY_ID_CURRENCY = 'id_currency';
+
     /**
      * @var string
      */
     public const KEY_ID_STORE = 'id_store';
+
     /**
      * @var string
      */
@@ -179,7 +210,7 @@ class ProductPriceHydratorStep implements DataImportStepInterface
      */
     public function __construct(
         PriceProductFacadeInterface $priceProductFacade,
-        DataImportToUtilEncodingServiceInterface $utilEncodingService
+        DataImportToUtilEncodingServiceInterface $utilEncodingService,
     ) {
         $this->priceProductFacade = $priceProductFacade;
         $this->utilEncodingService = $utilEncodingService;
@@ -213,7 +244,7 @@ class ProductPriceHydratorStep implements DataImportStepInterface
                 'One of "%s" or "%s" must be in the data set. Given: "%s"',
                 $dataSet[static::COLUMN_ABSTRACT_SKU],
                 $dataSet[static::COLUMN_ABSTRACT_SKU],
-                implode(', ', array_keys($dataSet->getArrayCopy()))
+                implode(', ', array_keys($dataSet->getArrayCopy())),
             ));
         }
 
@@ -321,7 +352,7 @@ class ProductPriceHydratorStep implements DataImportStepInterface
     /**
      * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
      *
-     * @return array
+     * @return array<string, mixed>
      */
     protected function getPriceData(DataSetInterface $dataSet): array
     {
@@ -363,8 +394,8 @@ class ProductPriceHydratorStep implements DataImportStepInterface
             throw new InvalidPriceDataKeyException(
                 sprintf(
                     'Price data key "%s" has invalid format. Should be in following format: "price_data.some_key"',
-                    $key
-                )
+                    $key,
+                ),
             );
         }
 
@@ -372,15 +403,15 @@ class ProductPriceHydratorStep implements DataImportStepInterface
     }
 
     /**
-     * @param array $priceData
+     * @param array<string, mixed> $priceData
      * @param string $key
      * @param string $value
      *
-     * @return array
+     * @return array<string, mixed>
      */
     protected function addPriceDataValue(array $priceData, string $key, string $value): array
     {
-        if (empty($value)) {
+        if (!$value) {
             return $priceData;
         }
 

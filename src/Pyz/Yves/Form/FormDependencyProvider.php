@@ -11,12 +11,13 @@ use Spryker\Yves\Form\FormDependencyProvider as SprykerFormDependencyProvider;
 use Spryker\Yves\Form\Plugin\Form\CsrfFormPlugin;
 use Spryker\Yves\Http\Plugin\Form\HttpFoundationTypeExtensionFormPlugin;
 use Spryker\Yves\Validator\Plugin\Form\ValidatorExtensionFormPlugin;
+use SprykerShop\Yves\ShopUi\Plugin\Form\SanitizeXssTypeExtensionFormPlugin;
 use SprykerShop\Yves\WebProfilerWidget\Plugin\Form\WebProfilerFormPlugin;
 
 class FormDependencyProvider extends SprykerFormDependencyProvider
 {
     /**
-     * @return \Spryker\Shared\FormExtension\Dependency\Plugin\FormPluginInterface[]
+     * @return array<\Spryker\Shared\FormExtension\Dependency\Plugin\FormPluginInterface>
      */
     protected function getFormPlugins(): array
     {
@@ -24,6 +25,7 @@ class FormDependencyProvider extends SprykerFormDependencyProvider
             new ValidatorExtensionFormPlugin(),
             new HttpFoundationTypeExtensionFormPlugin(),
             new CsrfFormPlugin(),
+            new SanitizeXssTypeExtensionFormPlugin(),
         ];
 
         if (class_exists(WebProfilerFormPlugin::class)) {

@@ -12,13 +12,13 @@ use Spryker\Zed\Propel\PropelConfig as SprykerPropelConfig;
 class PropelConfig extends SprykerPropelConfig
 {
     /**
-     * @return array
+     * @return array<mixed>
      */
-    public function getProjectPropelSchemaPathPatterns()
+    public function getProjectPropelSchemaPathPatterns(): array
     {
         return array_merge(
             [APPLICATION_SOURCE_DIR . '/*/Zed/*/Persistence/Propel/Schema/'],
-            parent::getProjectPropelSchemaPathPatterns()
+            parent::getProjectPropelSchemaPathPatterns(),
         );
     }
 }

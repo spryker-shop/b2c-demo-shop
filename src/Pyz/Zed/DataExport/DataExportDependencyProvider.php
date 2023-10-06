@@ -15,7 +15,7 @@ use Spryker\Zed\SalesDataExport\Communication\Plugin\DataExport\OrderItemDataEnt
 class DataExportDependencyProvider extends SprykerDataExportDependencyProvider
 {
     /**
-     * @return \Spryker\Zed\DataExportExtension\Dependency\Plugin\DataEntityExporterPluginInterface[]
+     * @return array<\Spryker\Zed\DataExportExtension\Dependency\Plugin\DataEntityExporterPluginInterface>
      */
     protected function getDataEntityExporterPlugins(): array
     {

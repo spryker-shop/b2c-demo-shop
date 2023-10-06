@@ -1,11 +1,11 @@
 import Component from 'ShopUi/models/component';
 
 export default class NavOverlay extends Component {
-    protected classToggle: string = `${this.name}--active`;
+    protected classToggle = `${this.name}--active`;
     protected triggers: HTMLElement[];
     protected triggerClose: HTMLElement;
     protected blocks: HTMLElement[];
-    protected savedIndex: number = 0;
+    protected savedIndex = 0;
 
     protected readyCallback(): void {}
 
@@ -14,7 +14,6 @@ export default class NavOverlay extends Component {
         this.triggerClose = <HTMLElement>this.getElementsByClassName(`${this.jsName}__shadow`)[0];
         this.blocks = <HTMLElement[]>Array.from(this.getElementsByClassName(`${this.jsName}__drop-down-block`));
 
-        this.hideBlocks();
         this.mapEvents();
     }
 

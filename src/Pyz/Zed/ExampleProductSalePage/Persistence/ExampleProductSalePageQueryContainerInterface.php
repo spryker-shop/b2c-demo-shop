@@ -49,6 +49,6 @@ interface ExampleProductSalePageQueryContainerInterface
         int $idProductLabel,
         int $currentStoreId,
         int $currentCurrencyId,
-        string $priceMode
+        string $priceMode,
     ): SpyProductAbstractQuery;
 }

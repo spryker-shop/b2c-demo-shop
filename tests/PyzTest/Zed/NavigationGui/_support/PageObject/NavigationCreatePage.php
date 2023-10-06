@@ -13,6 +13,7 @@ class NavigationCreatePage
      * @var string
      */
     public const URL = '/navigation-gui/create';
+
     /**
      * @var string
      */

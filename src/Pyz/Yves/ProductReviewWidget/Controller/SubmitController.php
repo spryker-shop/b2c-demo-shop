@@ -45,7 +45,7 @@ class SubmitController extends SprykerSubmitController
      */
     protected function processPyzProductReviewForm(
         FormInterface $form,
-        ?CustomerTransfer $customerTransfer = null
+        ?CustomerTransfer $customerTransfer = null,
     ): ?CustomerTransfer {
         if (!$form->isSubmitted()) {
             return null;
@@ -70,7 +70,7 @@ class SubmitController extends SprykerSubmitController
      */
     protected function processPyzCoreProductReviewForm(
         FormInterface $form,
-        ?CustomerTransfer $customerTransfer = null
+        ?CustomerTransfer $customerTransfer = null,
     ): ?CustomerTransfer {
         if (!$form->isSubmitted()) {
             return null;
@@ -93,7 +93,7 @@ class SubmitController extends SprykerSubmitController
         $productReviewResponseTransfer = $this->getFactory()->getProductReviewClient()->submitCustomerReview(
             $this->getPyzProductReviewFormData($form)
                 ->setCustomerReference($customerReference)
-                ->setLocaleName($this->getLocale())
+                ->setLocaleName($this->getLocale()),
         );
 
         if ($productReviewResponseTransfer->getIsSuccess()) {
@@ -119,7 +119,7 @@ class SubmitController extends SprykerSubmitController
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
-     * @return array
+     * @return array<mixed>
      */
     protected function executePyzIndexAction(Request $request): array
     {

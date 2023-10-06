@@ -41,7 +41,7 @@ class SummaryStepTest extends Unit
     /**
      * @return void
      */
-    public function testPostConditionShouldReturnWhenQuoteReadyForSummaryDisplay()
+    public function testPostConditionShouldReturnWhenQuoteReadyForSummaryDisplay(): void
     {
         $summaryStep = $this->createSummaryStep();
 
@@ -60,7 +60,7 @@ class SummaryStepTest extends Unit
     /**
      * @return void
      */
-    public function testRequireInputShouldBeTrue()
+    public function testRequireInputShouldBeTrue(): void
     {
         $summaryStep = $this->createSummaryStep();
 
@@ -70,7 +70,7 @@ class SummaryStepTest extends Unit
     /**
      * @return \SprykerShop\Yves\CheckoutPage\Process\Steps\SummaryStep
      */
-    protected function createSummaryStep()
+    protected function createSummaryStep(): SummaryStep
     {
         $productBundleClient = $this->createProductBundleClient();
 
@@ -80,7 +80,7 @@ class SummaryStepTest extends Unit
             $this->createConfigMock(),
             'shipment',
             'escape_route',
-            $this->getCheckoutClientMock()
+            $this->getCheckoutClientMock(),
         );
     }
 
@@ -95,7 +95,7 @@ class SummaryStepTest extends Unit
     /**
      * @return \Symfony\Component\HttpFoundation\Request
      */
-    protected function createRequest()
+    protected function createRequest(): Request
     {
         return Request::createFromGlobals();
     }

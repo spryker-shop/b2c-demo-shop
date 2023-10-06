@@ -22,7 +22,7 @@ class QueueConfig extends SprykerQueueConfig
     public const PYZ_RABBITMQ = 'rabbitmq';
 
     /**
-     * @return int[]
+     * @return array<int>
      */
     public function getSignalsForGracefulWorkerShutdown(): array
     {
@@ -35,7 +35,7 @@ class QueueConfig extends SprykerQueueConfig
     }
 
     /**
-     * @return array
+     * @return array<string, mixed>
      */
     protected function getQueueReceiverOptions(): array
     {
@@ -53,7 +53,7 @@ class QueueConfig extends SprykerQueueConfig
     }
 
     /**
-     * @return array
+     * @return array<string, mixed>
      */
     protected function getMessageCheckOptions(): array
     {

@@ -27,7 +27,7 @@ use PyzTest\Zed\Tax\PageObject\TaxRateListPage;
  * @method void comment($description)
  * @method \Codeception\Lib\Friend haveFriend($name, $actorClass = null)
  *
- * @SuppressWarnings(PHPMD)
+ * @SuppressWarnings(\PyzTest\Zed\Tax\PHPMD)
  */
 class TaxPresentationTester extends Actor
 {

@@ -24,7 +24,7 @@ use Codeception\Scenario;
  * @method void comment($description)
  * @method \Codeception\Lib\Friend haveFriend($name, $actorClass = NULL)
  *
- * @SuppressWarnings(PHPMD)
+ * @SuppressWarnings(\PyzTest\Yves\Availability\PHPMD)
  */
 class AvailabilityPresentationTester extends Actor
 {
@@ -34,14 +34,17 @@ class AvailabilityPresentationTester extends Actor
      * @var int
      */
     public const FUJITSU_PRODUCT_ID = 118;
+
     /**
      * @var string
      */
     public const FUJITSU_PRODUCT_PAGE = '/en/fujitsu-esprimo-e420-118';
+
     /**
      * @var string
      */
     public const FUJITSU2_PRODUCT_PAGE = '/en/fujitsu-esprimo-e920-119';
+
     /**
      * @var string
      */
@@ -65,7 +68,7 @@ class AvailabilityPresentationTester extends Actor
     /**
      * @return void
      */
-    public function processCheckout()
+    public function processCheckout(): void
     {
         $this->processAllCheckoutSteps();
     }

@@ -30,7 +30,7 @@ class CategoryGuiDependencyProvider extends SpykerCategoryGuiDependencyProvider
     }
 
     /**
-     * @return \Spryker\Zed\CategoryGuiExtension\Dependency\Plugin\CategoryFormTabExpanderPluginInterface[]
+     * @return array<\Spryker\Zed\CategoryGuiExtension\Dependency\Plugin\CategoryFormTabExpanderPluginInterface>
      */
     protected function getCategoryFormTabExpanderPlugins(): array
     {
@@ -40,7 +40,7 @@ class CategoryGuiDependencyProvider extends SpykerCategoryGuiDependencyProvider
     }
 
     /**
-     * @return \Spryker\Zed\CategoryGuiExtension\Dependency\Plugin\CategoryFormPluginInterface[]
+     * @return array<\Spryker\Zed\CategoryGuiExtension\Dependency\Plugin\CategoryFormPluginInterface>
      */
     protected function getCategoryFormPlugins(): array
     {
@@ -51,7 +51,7 @@ class CategoryGuiDependencyProvider extends SpykerCategoryGuiDependencyProvider
     }
 
     /**
-     * @return \Spryker\Zed\CategoryGuiExtension\Dependency\Plugin\CategoryRelationReadPluginInterface[]
+     * @return array<\Spryker\Zed\CategoryGuiExtension\Dependency\Plugin\CategoryRelationReadPluginInterface>
      */
     protected function getCategoryRelationReadPlugins(): array
     {

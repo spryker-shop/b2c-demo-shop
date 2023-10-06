@@ -26,7 +26,7 @@ use PyzTest\Yves\Customer\PageObject\CustomerRegistrationPage;
  * @method void comment($description)
  * @method \Codeception\Lib\Friend haveFriend($name, $actorClass = NULL)
  *
- * @SuppressWarnings(PHPMD)
+ * @SuppressWarnings(\PyzTest\Yves\Customer\PHPMD)
  */
 class CustomerPresentationTester extends Actor
 {
@@ -48,7 +48,7 @@ class CustomerPresentationTester extends Actor
      *
      * @return void
      */
-    public function submitLoginForm($email, $password)
+    public function submitLoginForm($email, $password): void
     {
         $i = $this;
         $i->submitForm(['name' => 'loginForm'], [
@@ -60,7 +60,7 @@ class CustomerPresentationTester extends Actor
     /**
      * @return void
      */
-    public function fillOutRegistrationForm()
+    public function fillOutRegistrationForm(): void
     {
         $i = $this;
         $customerTransfer = CustomerRegistrationPage::getCustomerData(CustomerRegistrationPage::NEW_CUSTOMER_EMAIL);

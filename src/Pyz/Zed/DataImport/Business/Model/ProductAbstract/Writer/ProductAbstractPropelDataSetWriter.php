@@ -88,7 +88,7 @@ class ProductAbstractPropelDataSetWriter implements DataSetWriterInterface
      */
     protected function createOrUpdateProductAbstractLocalizedAbstract(
         DataSetInterface $dataSet,
-        int $idProductAbstract
+        int $idProductAbstract,
     ): void {
         $productAbstractLocalizedTransfers = $this->getProductAbstractLocalizedTransfers($dataSet);
 
@@ -206,7 +206,7 @@ class ProductAbstractPropelDataSetWriter implements DataSetWriterInterface
     /**
      * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
      *
-     * @return array
+     * @return array<string, mixed>
      */
     protected function getProductAbstractLocalizedTransfers(DataSetInterface $dataSet): array
     {
@@ -216,7 +216,7 @@ class ProductAbstractPropelDataSetWriter implements DataSetWriterInterface
     /**
      * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
      *
-     * @return array
+     * @return array<string, mixed>
      */
     protected function getProductCategoryTransfers(DataSetInterface $dataSet): array
     {
@@ -226,7 +226,7 @@ class ProductAbstractPropelDataSetWriter implements DataSetWriterInterface
     /**
      * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
      *
-     * @return array
+     * @return array<string, mixed>
      */
     protected function getProductUrlTransfers(DataSetInterface $dataSet): array
     {

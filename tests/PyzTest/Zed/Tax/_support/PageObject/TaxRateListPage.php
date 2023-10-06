@@ -23,10 +23,12 @@ class TaxRateListPage
      * @var string
      */
     public const SELECTOR_SEARCH = 'input.form-control.input-sm';
+
     /**
      * @var string
      */
     public const SELECTOR_DELETE = 'Delete';
+
     /**
      * @var string
      */

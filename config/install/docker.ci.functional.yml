@@ -25,6 +25,12 @@ sections:
         cache-class-resolver-build:
             command: 'vendor/bin/console cache:class-resolver:build'
 
+        generate-scope-collection-file:
+            command: 'vendor/bin/console oauth:scope-collection-file:generate'
+
+        controller-cache-warmup:
+            command: 'vendor/bin/glue glue-api:controller:cache:warm-up'
+
     build-development:
         generate-transfers:
             command: 'vendor/bin/console transfer:generate'
@@ -34,6 +40,9 @@ sections:
 
         rest-api-generate-documentation:
             command: 'vendor/bin/console rest-api:generate:documentation'
+
+        api-generate-documentation:
+            command: 'vendor/bin/glue api:generate:documentation'
 
     init-storages-per-store:
         queue-setup:

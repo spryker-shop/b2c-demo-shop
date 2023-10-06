@@ -136,7 +136,7 @@ class ProductDetailPageReviewWidget extends AbstractWidget
      * @param int $idProductAbstract
      * @param \Symfony\Component\HttpFoundation\Request $parentRequest
      *
-     * @return array
+     * @return array<mixed>
      */
     protected function findPyzProductReviews(int $idProductAbstract, Request $parentRequest): array
     {
@@ -260,7 +260,7 @@ class ProductDetailPageReviewWidget extends AbstractWidget
             static::PYZ_PARAMETER_SUMMARY,
             $this->getFactory()
                 ->getProductReviewClient()
-                ->calculateProductReviewSummary($ratingAggregationTransfer)
+                ->calculateProductReviewSummary($ratingAggregationTransfer),
         );
     }
 }

@@ -18,20 +18,20 @@ use Spryker\Zed\DataImport\Business\Model\Publisher\DataImporterPublisher;
 class ProductStockAfterImportPublishHook implements DataImporterAfterImportInterface
 {
     /**
-     * @var array
+     * @var array<mixed>
      */
     protected $entityEvents = [];
 
     /**
      * @return void
      */
-    public function afterImport()
+    public function afterImport(): void
     {
         $availabilities = SpyAvailabilityAbstractQuery::create()
             ->addJoin(
                 SpyAvailabilityAbstractTableMap::COL_ABSTRACT_SKU,
                 SpyProductAbstractTableMap::COL_SKU,
-                Criteria::INNER_JOIN
+                Criteria::INNER_JOIN,
             )
             ->withColumn(SpyProductAbstractTableMap::COL_ID_PRODUCT_ABSTRACT, 'idProductAbstract')
             ->find();

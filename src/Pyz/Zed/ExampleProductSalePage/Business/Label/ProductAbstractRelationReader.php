@@ -14,6 +14,7 @@ use Pyz\Zed\ExampleProductSalePage\ExampleProductSalePageConfig;
 use Pyz\Zed\ExampleProductSalePage\Persistence\ExampleProductSalePageQueryContainerInterface;
 use Spryker\Zed\Currency\Business\CurrencyFacadeInterface;
 use Spryker\Zed\Price\Business\PriceFacadeInterface;
+use Spryker\Zed\Store\Business\StoreFacadeInterface;
 
 class ProductAbstractRelationReader implements ProductAbstractRelationReaderInterface
 {
@@ -38,21 +39,29 @@ class ProductAbstractRelationReader implements ProductAbstractRelationReaderInte
     protected $priceFacade;
 
     /**
+     * @var \Spryker\Zed\Store\Business\StoreFacadeInterface
+     */
+    protected $storeFacade;
+
+    /**
      * @param \Pyz\Zed\ExampleProductSalePage\Persistence\ExampleProductSalePageQueryContainerInterface $productSaleQueryContainer
      * @param \Pyz\Zed\ExampleProductSalePage\ExampleProductSalePageConfig $productSaleConfig
      * @param \Spryker\Zed\Currency\Business\CurrencyFacadeInterface $currencyFacade
      * @param \Spryker\Zed\Price\Business\PriceFacadeInterface $priceFacade
+     * @param \Spryker\Zed\Store\Business\StoreFacadeInterface $storeFacade
      */
     public function __construct(
         ExampleProductSalePageQueryContainerInterface $productSaleQueryContainer,
         ExampleProductSalePageConfig $productSaleConfig,
         CurrencyFacadeInterface $currencyFacade,
-        PriceFacadeInterface $priceFacade
+        PriceFacadeInterface $priceFacade,
+        StoreFacadeInterface $storeFacade,
     ) {
         $this->productSaleQueryContainer = $productSaleQueryContainer;
         $this->productSaleConfig = $productSaleConfig;
         $this->currencyFacade = $currencyFacade;
         $this->priceFacade = $priceFacade;
+        $this->storeFacade = $storeFacade;
     }
 
     /**
@@ -85,7 +94,7 @@ class ProductAbstractRelationReader implements ProductAbstractRelationReaderInte
      *
      * @return \Orm\Zed\ProductLabel\Persistence\SpyProductLabel
      */
-    protected function getProductLabelNewEntity()
+    protected function getProductLabelNewEntity(): SpyProductLabel
     {
         $labelNewName = $this->productSaleConfig->getPyzLabelSaleName();
         $productLabelNewEntity = $this->productSaleQueryContainer
@@ -95,7 +104,7 @@ class ProductAbstractRelationReader implements ProductAbstractRelationReaderInte
         if (!$productLabelNewEntity) {
             throw new ProductLabelSaleNotFoundException(sprintf(
                 'Product Label "%1$s" doesn\'t exists. You can fix this problem by persisting a new Product Label entity into your database with "%1$s" name.',
-                $labelNewName
+                $labelNewName,
             ));
         }
 
@@ -105,9 +114,9 @@ class ProductAbstractRelationReader implements ProductAbstractRelationReaderInte
     /**
      * @param \Orm\Zed\ProductLabel\Persistence\SpyProductLabel $productLabelEntity
      *
-     * @return array
+     * @return array<int, array<int>>
      */
-    protected function findRelationsBecomingInactive(SpyProductLabel $productLabelEntity)
+    protected function findRelationsBecomingInactive(SpyProductLabel $productLabelEntity): array
     {
         $relations = [];
 
@@ -128,17 +137,23 @@ class ProductAbstractRelationReader implements ProductAbstractRelationReaderInte
     /**
      * @param \Orm\Zed\ProductLabel\Persistence\SpyProductLabel $productLabelEntity
      *
-     * @return array
+     * @return array<int, array<int>>
      */
-    protected function findRelationsBecomingActive(SpyProductLabel $productLabelEntity)
+    protected function findRelationsBecomingActive(SpyProductLabel $productLabelEntity): array
     {
         $relations = [];
+
+        $storeTransfer = $this->storeFacade->getCurrentStore(true);
+
+        $currencyId = current($this->currencyFacade->getCurrencyTransfersByIsoCodes(
+            $storeTransfer->getAvailableCurrencyIsoCodes(),
+        ))->getIdCurrency();
 
         $productAbstractEntities = $this->productSaleQueryContainer
             ->queryPyzRelationsBecomingActive(
                 $productLabelEntity->getIdProductLabel(),
-                $this->currencyFacade->getCurrentStoreWithCurrencies()->getStore()->getIdStore(),
-                $this->currencyFacade->getDefaultCurrencyForCurrentStore()->getIdCurrency(),
+                $storeTransfer->getIdStore(),
+                $currencyId,
                 $this->priceFacade->getDefaultPriceMode(),
             )
             ->find();
@@ -152,13 +167,16 @@ class ProductAbstractRelationReader implements ProductAbstractRelationReaderInte
 
     /**
      * @param int $idProductLabel
-     * @param array $relationsToAssign
-     * @param array $relationsToDeAssign
+     * @param array<int, array<int>> $relationsToAssign
+     * @param array<int, array<int>> $relationsToDeAssign
      *
      * @return \Generated\Shared\Transfer\ProductLabelProductAbstractRelationsTransfer
      */
-    protected function mapRelationTransfer($idProductLabel, array $relationsToAssign, array $relationsToDeAssign)
-    {
+    protected function mapRelationTransfer(
+        $idProductLabel,
+        array $relationsToAssign,
+        array $relationsToDeAssign,
+    ): ProductLabelProductAbstractRelationsTransfer {
         $productLabelProductAbstractRelationsTransfer = new ProductLabelProductAbstractRelationsTransfer();
         $productLabelProductAbstractRelationsTransfer->setIdProductLabel($idProductLabel);
 

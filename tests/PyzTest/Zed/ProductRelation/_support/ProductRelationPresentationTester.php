@@ -24,7 +24,7 @@ use Codeception\Scenario;
  * @method void comment($description)
  * @method \Codeception\Lib\Friend haveFriend($name, $actorClass = null)
  *
- * @SuppressWarnings(PHPMD)
+ * @SuppressWarnings(\PyzTest\Zed\ProductRelation\PHPMD)
  */
 class ProductRelationPresentationTester extends Actor
 {
@@ -34,26 +34,32 @@ class ProductRelationPresentationTester extends Actor
      * @var int
      */
     public const ELEMENT_TIMEOUT = 45;
+
     /**
      * @var string
      */
     public const PRODUCT_RELATION_TYPE_SELECTOR = '//*[@id="product_relation_productRelationType"]';
+
     /**
      * @var string
      */
     public const PRODUCT_TABLE_FILTER_LABEL_INPUT_SELECTOR = '//*[@id="product-table_filter"]/label/input';
+
     /**
      * @var string
      */
     public const PRODUCT_TAB_SELECTOR = '//*[@id="form-product-relation"]/div/ul/li[2]/a';
+
     /**
      * @var string
      */
     public const SUBMIT_RELATION_BUTTON_SELECTOR = '//*[@id="submit-relation"]';
+
     /**
      * @var string
      */
     public const ACTIVATE_RELATION_BUTTON_SELECTOR = '//*[@id="activate-relation"]';
+
     /**
      * @var string
      */

@@ -9,6 +9,7 @@ namespace Pyz\Zed\ExampleStateMachine\Persistence;
 
 use Orm\Zed\ExampleStateMachine\Persistence\PyzExampleStateMachineItemQuery;
 use Propel\Runtime\ActiveQuery\Criteria;
+use Propel\Runtime\Collection\ObjectCollection;
 use Spryker\Zed\Kernel\Persistence\AbstractQueryContainer;
 
 /**
@@ -17,9 +18,11 @@ use Spryker\Zed\Kernel\Persistence\AbstractQueryContainer;
 class ExampleStateMachineQueryContainer extends AbstractQueryContainer implements ExampleStateMachineQueryContainerInterface
 {
     /**
-     * @param int[] $stateIds
+     * @psalm-suppress TooManyTemplateParams
      *
-     * @return \Orm\Zed\ExampleStateMachine\Persistence\PyzExampleStateMachineItemQuery
+     * @param array<int> $stateIds
+     *
+     * @return \Orm\Zed\ExampleStateMachine\Persistence\PyzExampleStateMachineItemQuery<\Orm\Zed\ExampleStateMachine\Persistence\PyzExampleStateMachineItem>
      */
     public function queryPyzStateMachineItemsByStateIds(array $stateIds = []): PyzExampleStateMachineItemQuery
     {
@@ -29,9 +32,11 @@ class ExampleStateMachineQueryContainer extends AbstractQueryContainer implement
     }
 
     /**
-     * @return \Orm\Zed\ExampleStateMachine\Persistence\PyzExampleStateMachineItem[]|\Propel\Runtime\Collection\ObjectCollection
+     * @psalm-suppress TooManyTemplateParams
+     *
+     * @return \Propel\Runtime\Collection\ObjectCollection<\Orm\Zed\ExampleStateMachine\Persistence\PyzExampleStateMachineItem>
      */
-    public function queryPyzAllStateMachineItems()
+    public function queryPyzAllStateMachineItems(): ObjectCollection
     {
          return $this->getFactory()
              ->createPyzExampleStateMachineQuery()
@@ -39,12 +44,15 @@ class ExampleStateMachineQueryContainer extends AbstractQueryContainer implement
     }
 
     /**
+     * @psalm-suppress TooManyTemplateParams
+     *
      * @param int $idStateMachineItem
      *
-     * @return \Orm\Zed\ExampleStateMachine\Persistence\PyzExampleStateMachineItem[]|\Orm\Zed\ExampleStateMachine\Persistence\PyzExampleStateMachineItemQuery|\Propel\Runtime\Collection\ObjectCollection
+     * @return \Orm\Zed\ExampleStateMachine\Persistence\PyzExampleStateMachineItemQuery<\Orm\Zed\ExampleStateMachine\Persistence\PyzExampleStateMachineItem>
      */
-    public function queryPyzExampleStateMachineItemByIdStateMachineItem($idStateMachineItem)
-    {
+    public function queryPyzExampleStateMachineItemByIdStateMachineItem(
+        $idStateMachineItem,
+    ): PyzExampleStateMachineItemQuery {
         return $this->getFactory()
             ->createPyzExampleStateMachineQuery()
             ->filterByIdExampleStateMachineItem($idStateMachineItem);

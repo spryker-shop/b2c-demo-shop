@@ -14,7 +14,7 @@ use Spryker\Yves\Http\Plugin\Http\InlineRendererFragmentHandlerPlugin;
 class HttpDependencyProvider extends SprykerHttpDependencyProvider
 {
     /**
-     * @return \Spryker\Shared\HttpExtension\Dependency\Plugin\FragmentHandlerPluginInterface[]
+     * @return array<\Spryker\Shared\HttpExtension\Dependency\Plugin\FragmentHandlerPluginInterface>
      */
     protected function getFragmentHandlerPlugins(): array
     {

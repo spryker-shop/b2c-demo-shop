@@ -20,7 +20,7 @@ use Spryker\Zed\SalesStatistics\Communication\Plugin\TopOrdersChartPlugin;
 class ChartGuiDependencyProvider extends SprykerChartGuiDependencyProvider
 {
     /**
-     * @return \Spryker\Shared\Chart\Dependency\Plugin\ChartPluginInterface[]
+     * @return array<\Spryker\Shared\Chart\Dependency\Plugin\ChartPluginInterface>
      */
     protected function getChartPlugins(): array
     {
@@ -33,7 +33,7 @@ class ChartGuiDependencyProvider extends SprykerChartGuiDependencyProvider
     }
 
     /**
-     * @return \Spryker\Shared\Chart\Dependency\Plugin\TwigChartFunctionPluginInterface[]
+     * @return array<\Spryker\Shared\Chart\Dependency\Plugin\TwigChartFunctionPluginInterface>
      */
     protected function getTwigChartFunctionPlugins(): array
     {

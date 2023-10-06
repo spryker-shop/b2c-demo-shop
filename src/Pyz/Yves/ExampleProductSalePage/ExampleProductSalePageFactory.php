@@ -7,12 +7,17 @@
 
 namespace Pyz\Yves\ExampleProductSalePage;
 
+use Generated\Shared\Transfer\StoreTransfer;
+use Spryker\Client\Catalog\CatalogClientInterface;
+use Spryker\Client\Locale\LocaleClientInterface;
+use Spryker\Client\UrlStorage\UrlStorageClientInterface;
+use Spryker\Service\UtilNumber\UtilNumberServiceInterface;
 use Spryker\Yves\Kernel\AbstractFactory;
 
 class ExampleProductSalePageFactory extends AbstractFactory
 {
     /**
-     * @return string[]
+     * @return array<string>
      */
     public function getExampleProductSalePageWidgetPlugins(): array
     {
@@ -22,24 +27,42 @@ class ExampleProductSalePageFactory extends AbstractFactory
     /**
      * @return \Spryker\Client\UrlStorage\UrlStorageClientInterface
      */
-    public function getPyzUrlStorageClient()
+    public function getPyzUrlStorageClient(): UrlStorageClientInterface
     {
         return $this->getProvidedDependency(ExampleProductSalePageDependencyProvider::PYZ_CLIENT_URL_STORAGE);
     }
 
     /**
-     * @return \Spryker\Shared\Kernel\Store
+     * @return \Generated\Shared\Transfer\StoreTransfer
      */
-    public function getPyzStore()
+    public function getPyzStore(): StoreTransfer
     {
-        return $this->getProvidedDependency(ExampleProductSalePageDependencyProvider::PYZ_STORE);
+        $storeClient = $this->getProvidedDependency(ExampleProductSalePageDependencyProvider::PYZ_CLIENT_STORE);
+
+        return $storeClient->getCurrentStore();
     }
 
     /**
      * @return \Spryker\Client\Catalog\CatalogClientInterface
      */
-    public function getPyzCatalogClient()
+    public function getPyzCatalogClient(): CatalogClientInterface
     {
         return $this->getProvidedDependency(ExampleProductSalePageDependencyProvider::PYZ_CLIENT_CATALOG);
+    }
+
+    /**
+     * @return \Spryker\Client\Locale\LocaleClientInterface
+     */
+    public function getPyzLocaleClient(): LocaleClientInterface
+    {
+        return $this->getProvidedDependency(ExampleProductSalePageDependencyProvider::PYZ_CLIENT_LOCALE);
+    }
+
+    /**
+     * @return \Spryker\Service\UtilNumber\UtilNumberServiceInterface
+     */
+    public function getUtilNumberService(): UtilNumberServiceInterface
+    {
+        return $this->getProvidedDependency(ExampleProductSalePageDependencyProvider::PYZ_SERVICE_UTIL_NUMBER);
     }
 }

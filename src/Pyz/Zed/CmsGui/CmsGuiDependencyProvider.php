@@ -18,7 +18,7 @@ use Spryker\Zed\Store\Communication\Plugin\Form\StoreRelationToggleFormTypePlugi
 class CmsGuiDependencyProvider extends SprykerCmsGuiDependencyProvider
 {
     /**
-     * @return \Spryker\Zed\CmsGui\Dependency\Plugin\CmsPageTableExpanderPluginInterface[]
+     * @return array<\Spryker\Zed\CmsGui\Dependency\Plugin\CmsPageTableExpanderPluginInterface>
      */
     protected function getCmsPageTableExpanderPlugins(): array
     {
@@ -28,7 +28,7 @@ class CmsGuiDependencyProvider extends SprykerCmsGuiDependencyProvider
     }
 
     /**
-     * @return \Spryker\Zed\CmsGui\Dependency\Plugin\CreateGlossaryExpanderPluginInterface[]
+     * @return array<\Spryker\Zed\CmsGui\Dependency\Plugin\CreateGlossaryExpanderPluginInterface>
      */
     protected function getCreateGlossaryExpanderPlugins(): array
     {
@@ -46,7 +46,7 @@ class CmsGuiDependencyProvider extends SprykerCmsGuiDependencyProvider
     }
 
     /**
-     * @return \Spryker\Zed\CmsGuiExtension\Dependency\Plugin\CmsGlossaryAfterFindPluginInterface[]
+     * @return array<\Spryker\Zed\CmsGuiExtension\Dependency\Plugin\CmsGlossaryAfterFindPluginInterface>
      */
     protected function getCmsGlossaryAfterFindPlugins(): array
     {
@@ -56,7 +56,7 @@ class CmsGuiDependencyProvider extends SprykerCmsGuiDependencyProvider
     }
 
     /**
-     * @return \Spryker\Zed\CmsGuiExtension\Dependency\Plugin\CmsGlossaryBeforeSavePluginInterface[]
+     * @return array<\Spryker\Zed\CmsGuiExtension\Dependency\Plugin\CmsGlossaryBeforeSavePluginInterface>
      */
     protected function getCmsGlossaryBeforeSavePlugins(): array
     {

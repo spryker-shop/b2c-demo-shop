@@ -8,6 +8,8 @@
 namespace Pyz\Client\ZedRequest;
 
 use Spryker\Client\Currency\Plugin\ZedRequestMetaDataProviderPlugin;
+use Spryker\Client\Locale\Plugin\ZedRequest\LocaleMetaDataProviderPlugin;
+use Spryker\Client\Store\Plugin\ZedRequest\StoreMetaDataProviderPlugin;
 use Spryker\Client\ZedRequest\Plugin\AcceptEncodingHeaderExpanderPlugin;
 use Spryker\Client\ZedRequest\Plugin\AuthTokenHeaderExpanderPlugin;
 use Spryker\Client\ZedRequest\Plugin\RequestIdHeaderExpanderPlugin;
@@ -16,17 +18,19 @@ use Spryker\Client\ZedRequest\ZedRequestDependencyProvider as SprykerZedRequestD
 class ZedRequestDependencyProvider extends SprykerZedRequestDependencyProvider
 {
     /**
-     * @return \Spryker\Client\ZedRequest\Dependency\Plugin\MetaDataProviderPluginInterface[]
+     * @return array<string, \Spryker\Client\ZedRequestExtension\Dependency\Plugin\MetaDataProviderPluginInterface>
      */
-    protected function getMetaDataProviderPlugins()
+    protected function getMetaDataProviderPlugins(): array
     {
         return [
             'currency' => new ZedRequestMetaDataProviderPlugin(),
+            'store' => new StoreMetaDataProviderPlugin(),
+            'locale' => new LocaleMetaDataProviderPlugin(),
         ];
     }
 
     /**
-     * @return \Spryker\Client\ZedRequestExtension\Dependency\Plugin\HeaderExpanderPluginInterface[]
+     * @return array<\Spryker\Client\ZedRequestExtension\Dependency\Plugin\HeaderExpanderPluginInterface>
      */
     protected function getHeaderExpanderPlugins(): array
     {

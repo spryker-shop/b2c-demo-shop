@@ -52,7 +52,7 @@ class SaleSearchQueryPlugin extends AbstractPlugin implements QueryInterface, Se
      *
      * @return \Elastica\Query
      */
-    public function getSearchQuery()
+    public function getSearchQuery(): Query
     {
         return $this->query;
     }
@@ -103,7 +103,7 @@ class SaleSearchQueryPlugin extends AbstractPlugin implements QueryInterface, Se
     /**
      * @return \Elastica\Query
      */
-    protected function createSearchQuery()
+    protected function createSearchQuery(): Query
     {
         $saleProductsFilter = $this->createSaleProductsFilter();
 
@@ -116,7 +116,7 @@ class SaleSearchQueryPlugin extends AbstractPlugin implements QueryInterface, Se
     /**
      * @return \Elastica\Query\Nested
      */
-    protected function createSaleProductsFilter()
+    protected function createSaleProductsFilter(): Nested
     {
         $saleProductsQuery = $this->createSaleProductsQuery();
 
@@ -131,7 +131,7 @@ class SaleSearchQueryPlugin extends AbstractPlugin implements QueryInterface, Se
     /**
      * @return \Elastica\Query\BoolQuery
      */
-    protected function createSaleProductsQuery()
+    protected function createSaleProductsQuery(): BoolQuery
     {
         $storeTransfer = $this->getFactory()->getPyzStore();
 
@@ -139,9 +139,10 @@ class SaleSearchQueryPlugin extends AbstractPlugin implements QueryInterface, Se
             ->getConfig()
             ->getPyzLabelSaleName();
 
+        $defaultLocale = current($storeTransfer->getAvailableLocaleIsoCodes());
         $storageProductLabelTransfer = $this->getFactory()
             ->getPyzProductLabelStorageClient()
-            ->findLabelByName($labelName, $storeTransfer->getCurrentLocale(), $storeTransfer->getStoreName());
+            ->findLabelByName($labelName, $defaultLocale, $storeTransfer->getName());
 
         $labelId = $storageProductLabelTransfer ? $storageProductLabelTransfer->getIdProductLabel() : 0;
 
@@ -162,7 +163,7 @@ class SaleSearchQueryPlugin extends AbstractPlugin implements QueryInterface, Se
      *
      * @return \Elastica\Query\Term
      */
-    protected function createStringFacetFieldFilter($fieldName)
+    protected function createStringFacetFieldFilter($fieldName): Term
     {
         $termQuery = new Term();
         $termQuery->setTerm(PageIndexMap::STRING_FACET_FACET_NAME, $fieldName);
@@ -175,7 +176,7 @@ class SaleSearchQueryPlugin extends AbstractPlugin implements QueryInterface, Se
      *
      * @return \Elastica\Query\Term
      */
-    protected function createStringFacetValueFilter($idProductLabel)
+    protected function createStringFacetValueFilter($idProductLabel): Term
     {
         $termQuery = new Term();
         $termQuery->setTerm(PageIndexMap::STRING_FACET_FACET_VALUE, (string)$idProductLabel);
@@ -188,7 +189,7 @@ class SaleSearchQueryPlugin extends AbstractPlugin implements QueryInterface, Se
      *
      * @return \Elastica\Query
      */
-    protected function createQuery(AbstractQuery $abstractQuery)
+    protected function createQuery(AbstractQuery $abstractQuery): Query
     {
         $query = new Query();
         $query

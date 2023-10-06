@@ -13,9 +13,9 @@ use Spryker\Zed\Quote\QuoteConfig as SprykerQuoteConfig;
 class QuoteConfig extends SprykerQuoteConfig
 {
     /**
-     * @return string[]
+     * @return array<string>
      */
-    public function getQuoteFieldsAllowedForSaving()
+    public function getQuoteFieldsAllowedForSaving(): array
     {
         return array_merge(parent::getQuoteFieldsAllowedForSaving(), [
             QuoteTransfer::BUNDLE_ITEMS,

@@ -19,6 +19,7 @@ class LocaleNameToIdLocaleStep implements DataImportStepInterface
      * @var string
      */
     public const KEY_SOURCE = 'localeName';
+
     /**
      * @var string
      */
@@ -35,7 +36,7 @@ class LocaleNameToIdLocaleStep implements DataImportStepInterface
     protected $target;
 
     /**
-     * @var array
+     * @var array<string, int>
      */
     protected $resolved = [];
 
@@ -56,21 +57,23 @@ class LocaleNameToIdLocaleStep implements DataImportStepInterface
      *
      * @return void
      */
-    public function execute(DataSetInterface $dataSet)
+    public function execute(DataSetInterface $dataSet): void
     {
         if (!isset($dataSet[$this->source])) {
             throw new DataKeyNotFoundInDataSetException(sprintf(
                 'Expected a key "%s" in current data set. Available keys: "%s"',
                 $this->source,
-                implode(', ', array_keys($dataSet->getArrayCopy()))
+                implode(', ', array_keys($dataSet->getArrayCopy())),
             ));
         }
 
-        if (!isset($this->resolved[$dataSet[$this->source]])) {
-            $this->resolved[$dataSet[$this->source]] = $this->resolveIdLocale($dataSet[$this->source]);
+        /** @var string $localeName */
+        $localeName = $dataSet[$this->source];
+        if (!isset($this->resolved[$localeName])) {
+            $this->resolved[$localeName] = $this->resolveIdLocale($localeName);
         }
 
-        $dataSet[$this->target] = $this->resolved[$dataSet[$this->source]];
+        $dataSet[$this->target] = $this->resolved[$localeName];
     }
 
     /**
@@ -80,7 +83,7 @@ class LocaleNameToIdLocaleStep implements DataImportStepInterface
      *
      * @return int
      */
-    protected function resolveIdLocale($localeName)
+    protected function resolveIdLocale($localeName): int
     {
         $query = SpyLocaleQuery::create();
         $localeEntity = $query->filterByLocaleName($localeName)->findOne();

@@ -48,7 +48,7 @@ class ProductSearchAttributeWriter extends PublishAwareStep implements DataImpor
      *
      * @return void
      */
-    public function execute(DataSetInterface $dataSet)
+    public function execute(DataSetInterface $dataSet): void
     {
         $productSearchAttributeEntity = SpyProductSearchAttributeQuery::create()
             ->filterByFkProductAttributeKey($dataSet[AddProductAttributeKeysStep::KEY_TARGET][$dataSet['key']])
@@ -68,6 +68,10 @@ class ProductSearchAttributeWriter extends PublishAwareStep implements DataImpor
         $glossaryKeyEntity->save();
 
         foreach ($dataSet[ProductLocalizedAttributesExtractorStep::KEY_LOCALIZED_ATTRIBUTES] as $idLocale => $localizedAttribute) {
+            if ($localizedAttribute === []) {
+                continue;
+            }
+
             $glossaryTranslationEntity = SpyGlossaryTranslationQuery::create()
                 ->filterByFkLocale($idLocale)
                 ->filterByFkGlossaryKey($glossaryKeyEntity->getIdGlossaryKey())

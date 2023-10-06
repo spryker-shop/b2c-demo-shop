@@ -33,11 +33,16 @@ class ExampleProductSalePageDependencyProvider extends AbstractBundleDependencyP
     public const PYZ_FACADE_PRICE = 'PYZ_FACADE_PRICE';
 
     /**
+     * @var string
+     */
+    public const PYZ_FACADE_STORE = 'PYZ_FACADE_STORE';
+
+    /**
      * @param \Spryker\Zed\Kernel\Container $container
      *
      * @return \Spryker\Zed\Kernel\Container
      */
-    public function providePersistenceLayerDependencies(Container $container)
+    public function providePersistenceLayerDependencies(Container $container): Container
     {
         $container = parent::providePersistenceLayerDependencies($container);
 
@@ -57,6 +62,7 @@ class ExampleProductSalePageDependencyProvider extends AbstractBundleDependencyP
         $container = parent::provideBusinessLayerDependencies($container);
         $container = $this->addPyzCurrencyFacade($container);
         $container = $this->addPyzPriceFacade($container);
+        $container = $this->addStoreFacade($container);
 
         return $container;
     }
@@ -112,6 +118,20 @@ class ExampleProductSalePageDependencyProvider extends AbstractBundleDependencyP
     {
         $container->set(static::PYZ_FACADE_PRICE, function (Container $container) {
             return $container->getLocator()->price()->facade();
+        });
+
+        return $container;
+    }
+
+    /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Zed\Kernel\Container
+     */
+    protected function addStoreFacade(Container $container): Container
+    {
+        $container->set(static::PYZ_FACADE_STORE, function (Container $container) {
+            return $container->getLocator()->store()->facade();
         });
 
         return $container;

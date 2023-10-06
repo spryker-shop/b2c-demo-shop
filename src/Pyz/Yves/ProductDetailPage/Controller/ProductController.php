@@ -18,10 +18,10 @@ use Symfony\Component\HttpFoundation\Request;
 class ProductController extends SprykerShopProductController
 {
     /**
-     * @param array $productData
+     * @param array<mixed> $productData
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
-     * @return array
+     * @return array<mixed>
      */
     protected function executeDetailAction(array $productData, Request $request): array
     {
@@ -29,7 +29,7 @@ class ProductController extends SprykerShopProductController
 
         $quoteTransfer = new QuoteTransfer();
         $quoteTransfer->addItem(
-            (new ItemTransfer())->setIdProductAbstract($viewData['product']->getIdProductAbstract())
+            (new ItemTransfer())->setIdProductAbstract($viewData['product']->getIdProductAbstract()),
         );
         $viewData['cart'] = $quoteTransfer;
 

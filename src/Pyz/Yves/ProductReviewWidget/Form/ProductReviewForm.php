@@ -20,7 +20,7 @@ use Symfony\Component\Validator\Constraints\LessThanOrEqual;
 
 /**
  * @method \SprykerShop\Yves\ProductReviewWidget\ProductReviewWidgetFactory getFactory()
- * @method \SprykerShop\Yves\ProductReviewWidget\ProductReviewWidgetConfig getConfig()
+ * @method \Pyz\Yves\ProductReviewWidget\ProductReviewWidgetConfig getConfig()
  */
 class ProductReviewForm extends AbstractType
 {
@@ -76,7 +76,7 @@ class ProductReviewForm extends AbstractType
 
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     * @param array $options
+     * @param array<mixed> $options
      *
      * @return $this
      */
@@ -113,11 +113,11 @@ class ProductReviewForm extends AbstractType
                         [
                         'value' => static::PYZ_MINIMUM_RATING,
                         'message' => $this->getConfig()->getInvalidRatingValidationMessageGlossaryKey(),
-                        ]
+                        ],
                     ),
                     new LessThanOrEqual(['value' => $this->getFactory()->getProductReviewClient()->getMaximumRating()]),
                 ],
-            ]
+            ],
         );
 
         return $this;
@@ -134,9 +134,9 @@ class ProductReviewForm extends AbstractType
      *  [-1 => 'none', 1 => 1, 2 => 2]
      * @see ProductReviewForm::PYZ_UNSELECTED_RATING
      *
-     * @return array
+     * @return array<mixed>
      */
-    protected function getPyzRatingFieldChoices()
+    protected function getPyzRatingFieldChoices(): array
     {
         $unselectedChoice = [static::PYZ_UNSELECTED_RATING => 'product_review.submit.rating.none'];
         $choices = range(static::PYZ_MINIMUM_RATING, $this->getFactory()->getProductReviewClient()->getMaximumRating());
@@ -161,7 +161,7 @@ class ProductReviewForm extends AbstractType
                 'constraints' => [
                     new Length(['min' => 1]),
                 ],
-            ]
+            ],
         );
 
         return $this;
@@ -186,7 +186,7 @@ class ProductReviewForm extends AbstractType
                 'constraints' => [
                     new Length(['min' => 1]),
                 ],
-            ]
+            ],
         );
 
         return $this;
@@ -208,7 +208,7 @@ class ProductReviewForm extends AbstractType
                 'constraints' => [
                     new Length(['min' => 1, 'max' => 255]),
                 ],
-            ]
+            ],
         );
 
         return $this;
@@ -226,7 +226,7 @@ class ProductReviewForm extends AbstractType
             HiddenType::class,
             [
                 'required' => true,
-            ]
+            ],
         );
 
         return $this;

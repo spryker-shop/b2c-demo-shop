@@ -93,12 +93,26 @@ use Spryker\Glue\GiftCardsRestApi\Plugin\GlueApplication\GiftCardByQuoteResource
 use Spryker\Glue\GlueApplication\GlueApplicationDependencyProvider as SprykerGlueApplicationDependencyProvider;
 use Spryker\Glue\GlueApplication\Plugin\Application\GlueApplicationApplicationPlugin;
 use Spryker\Glue\GlueApplication\Plugin\GlueApplication\CorsValidateHttpRequestPlugin;
+use Spryker\Glue\GlueApplication\Plugin\GlueApplication\FallbackStorefrontApiGlueApplicationBootstrapPlugin;
 use Spryker\Glue\GlueApplication\Plugin\GlueApplication\HeadersValidateHttpRequestPlugin;
 use Spryker\Glue\GlueApplication\Plugin\GlueApplication\PaginationParametersValidateHttpRequestPlugin;
-use Spryker\Glue\GlueApplication\Plugin\Rest\SetStoreCurrentLocaleBeforeActionPlugin;
 use Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\ResourceRelationshipCollectionInterface;
+use Spryker\Glue\GlueBackendApiApplication\Plugin\GlueApplication\BackendApiGlueApplicationBootstrapPlugin;
+use Spryker\Glue\GlueBackendApiApplication\Plugin\GlueApplication\BackendRouterProviderPlugin;
+use Spryker\Glue\GlueBackendApiApplication\Plugin\GlueApplication\ControllerCacheCollectorPlugin as BackendControllerCacheCollectorPlugin;
+use Spryker\Glue\GlueBackendApiApplication\Plugin\GlueApplication\CustomRouteRoutesProviderPlugin as BackendCustomRouteRoutesProviderPlugin;
+use Spryker\Glue\GlueBackendApiApplication\Plugin\GlueApplication\ResourcesProviderPlugin as BackendResourcesProviderPlugin;
+use Spryker\Glue\GlueBackendApiApplicationAuthorizationConnector\Plugin\GlueApplication\IsProtectedTableColumnExpanderPlugin as BackendIsProtectedTableColumnExpanderPlugin;
+use Spryker\Glue\GlueJsonApiConvention\Plugin\GlueApplication\JsonApiConventionPlugin;
+use Spryker\Glue\GlueStorefrontApiApplication\Plugin\GlueApplication\ControllerCacheCollectorPlugin as StorefrontControllerCacheCollectorPlugin;
+use Spryker\Glue\GlueStorefrontApiApplication\Plugin\GlueApplication\CustomRouteRoutesProviderPlugin as StorefrontCustomRouteRoutesProviderPlugin;
+use Spryker\Glue\GlueStorefrontApiApplication\Plugin\GlueApplication\ResourcesProviderPlugin as StorefrontResourcesProviderPlugin;
+use Spryker\Glue\GlueStorefrontApiApplication\Plugin\GlueApplication\StorefrontApiGlueApplicationBootstrapPlugin;
+use Spryker\Glue\GlueStorefrontApiApplication\Plugin\GlueApplication\StorefrontRouterProviderPlugin;
+use Spryker\Glue\GlueStorefrontApiApplicationAuthorizationConnector\Plugin\GlueApplication\IsProtectedTableColumnExpanderPlugin as StorefrontIsProtectedTableColumnExpanderPlugin;
 use Spryker\Glue\HealthCheck\Plugin\HealthCheckResourceRoutePlugin;
 use Spryker\Glue\Http\Plugin\Application\HttpApplicationPlugin;
+use Spryker\Glue\Locale\Plugin\Application\LocaleApplicationPlugin;
 use Spryker\Glue\NavigationsCategoryNodesResourceRelationship\Plugin\GlueApplication\CategoryNodeByResourceIdResourceRelationshipPlugin;
 use Spryker\Glue\NavigationsRestApi\NavigationsRestApiConfig;
 use Spryker\Glue\NavigationsRestApi\Plugin\ResourceRoute\NavigationsResourceRoutePlugin;
@@ -168,6 +182,7 @@ use Spryker\Glue\ShipmentsRestApi\Plugin\GlueApplication\OrderShipmentByOrderRes
 use Spryker\Glue\ShipmentsRestApi\Plugin\GlueApplication\ShipmentMethodsByShipmentResourceRelationshipPlugin;
 use Spryker\Glue\ShipmentsRestApi\Plugin\GlueApplication\ShipmentsByCheckoutDataResourceRelationshipPlugin;
 use Spryker\Glue\ShipmentsRestApi\ShipmentsRestApiConfig;
+use Spryker\Glue\StoresRestApi\Plugin\Application\StoreHttpHeaderApplicationPlugin;
 use Spryker\Glue\StoresRestApi\Plugin\StoresResourceRoutePlugin;
 use Spryker\Glue\UpSellingProductsRestApi\Plugin\GlueApplication\CartUpSellingProductsResourceRoutePlugin;
 use Spryker\Glue\UpSellingProductsRestApi\Plugin\GlueApplication\GuestCartUpSellingProductsResourceRoutePlugin;
@@ -185,7 +200,9 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
     /**
      * {@inheritDoc}
      *
-     * @return \Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\ResourceRoutePluginInterface[]
+     * @deprecated Will be removed without replacement.
+     *
+     * @return array<\Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\ResourceRoutePluginInterface>
      */
     protected function getResourceRoutePlugins(): array
     {
@@ -263,7 +280,9 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
     /**
      * {@inheritDoc}
      *
-     * @return \Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\ValidateHttpRequestPluginInterface[]
+     * @deprecated Will be removed without replacement.
+     *
+     * @return array<\Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\ValidateHttpRequestPluginInterface>
      */
     protected function getValidateHttpRequestPlugins(): array
     {
@@ -277,7 +296,9 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
     /**
      * {@inheritDoc}
      *
-     * @return \Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\FormattedControllerBeforeActionPluginInterface[]
+     * @deprecated Will be removed without replacement.
+     *
+     * @return array<\Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\FormattedControllerBeforeActionPluginInterface>
      */
     protected function getFormattedControllerBeforeActionTerminatePlugins(): array
     {
@@ -289,7 +310,9 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
     /**
      * {@inheritDoc}
      *
-     * @return \Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\FormatRequestPluginInterface[]
+     * @deprecated Will be removed without replacement.
+     *
+     * @return array<\Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\FormatRequestPluginInterface>
      */
     protected function getFormatRequestPlugins(): array
     {
@@ -301,7 +324,9 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
     /**
      * {@inheritDoc}
      *
-     * @return \Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\ValidateRestRequestPluginInterface[]
+     * @deprecated Will be removed without replacement.
+     *
+     * @return array<\Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\ValidateRestRequestPluginInterface>
      */
     protected function getValidateRestRequestPlugins(): array
     {
@@ -311,7 +336,11 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
     }
 
     /**
-     * @return \Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\RestUserValidatorPluginInterface[]
+     * {@inheritDoc}
+     *
+     * @deprecated Will be removed without replacement.
+     *
+     * @return array<\Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\RestUserValidatorPluginInterface>
      */
     protected function getRestUserValidatorPlugins(): array
     {
@@ -323,7 +352,9 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
     /**
      * {@inheritDoc}
      *
-     * @return \Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\RestRequestValidatorPluginInterface[]
+     * @deprecated Will be removed without replacement.
+     *
+     * @return array<\Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\RestRequestValidatorPluginInterface>
      */
     protected function getRestRequestValidatorPlugins(): array
     {
@@ -345,7 +376,9 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
     /**
      * {@inheritDoc}
      *
-     * @return \Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\FormatResponseHeadersPluginInterface[]
+     * @deprecated Will be removed without replacement.
+     *
+     * @return array<\Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\FormatResponseHeadersPluginInterface>
      */
     protected function getFormatResponseHeadersPlugins(): array
     {
@@ -358,12 +391,13 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
     /**
      * {@inheritDoc}
      *
-     * @return \Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\ControllerBeforeActionPluginInterface[]
+     * @deprecated Will be removed without replacement.
+     *
+     * @return array<\Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\ControllerBeforeActionPluginInterface>
      */
     protected function getControllerBeforeActionPlugins(): array
     {
         return [
-            new SetStoreCurrentLocaleBeforeActionPlugin(),
             new SetAnonymousCustomerIdControllerBeforeActionPlugin(),
             new SetCustomerBeforeActionPlugin(),
             new SetCurrencyBeforeActionPlugin(),
@@ -372,7 +406,9 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
     }
 
     /**
-     * @return \Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\ControllerAfterActionPluginInterface[]
+     * @deprecated Will be removed without replacement.
+     *
+     * @return array<\Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\ControllerAfterActionPluginInterface>
      */
     protected function getControllerAfterActionPlugins(): array
     {
@@ -385,156 +421,158 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
     /**
      * {@inheritDoc}
      *
+     * @deprecated Will be removed without replacement.
+     *
      * @param \Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\ResourceRelationshipCollectionInterface $resourceRelationshipCollection
      *
      * @return \Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\ResourceRelationshipCollectionInterface
      */
     protected function getResourceRelationshipPlugins(
-        ResourceRelationshipCollectionInterface $resourceRelationshipCollection
+        ResourceRelationshipCollectionInterface $resourceRelationshipCollection,
     ): ResourceRelationshipCollectionInterface {
         $resourceRelationshipCollection->addRelationship(
             ProductsRestApiConfig::RESOURCE_ABSTRACT_PRODUCTS,
-            new AbstractProductsProductImageSetsResourceRelationshipPlugin()
+            new AbstractProductsProductImageSetsResourceRelationshipPlugin(),
         );
         $resourceRelationshipCollection->addRelationship(
             ProductsRestApiConfig::RESOURCE_ABSTRACT_PRODUCTS,
-            new ConcreteProductsByProductConcreteIdsResourceRelationshipPlugin()
+            new ConcreteProductsByProductConcreteIdsResourceRelationshipPlugin(),
         );
         $resourceRelationshipCollection->addRelationship(
             ProductsRestApiConfig::RESOURCE_CONCRETE_PRODUCTS,
-            new ConcreteProductsProductImageSetsResourceRelationshipPlugin()
+            new ConcreteProductsProductImageSetsResourceRelationshipPlugin(),
         );
         $resourceRelationshipCollection->addRelationship(
             WishlistsRestApiConfig::RESOURCE_WISHLIST_ITEMS,
-            new ConcreteProductBySkuResourceRelationshipPlugin()
+            new ConcreteProductBySkuResourceRelationshipPlugin(),
         );
         $resourceRelationshipCollection->addRelationship(
             CatalogSearchRestApiConfig::RESOURCE_CATALOG_SEARCH,
-            new CatalogSearchAbstractProductsResourceRelationshipPlugin()
+            new CatalogSearchAbstractProductsResourceRelationshipPlugin(),
         );
         $resourceRelationshipCollection->addRelationship(
             CatalogSearchRestApiConfig::RESOURCE_CATALOG_SEARCH_SUGGESTIONS,
-            new CatalogSearchSuggestionsAbstractProductsResourceRelationshipPlugin()
+            new CatalogSearchSuggestionsAbstractProductsResourceRelationshipPlugin(),
         );
         $resourceRelationshipCollection->addRelationship(
             ProductsRestApiConfig::RESOURCE_ABSTRACT_PRODUCTS,
-            new AbstractProductAvailabilitiesByResourceIdResourceRelationshipPlugin()
+            new AbstractProductAvailabilitiesByResourceIdResourceRelationshipPlugin(),
         );
         $resourceRelationshipCollection->addRelationship(
             ProductsRestApiConfig::RESOURCE_CONCRETE_PRODUCTS,
-            new ConcreteProductAvailabilitiesByResourceIdResourceRelationshipPlugin()
+            new ConcreteProductAvailabilitiesByResourceIdResourceRelationshipPlugin(),
         );
         $resourceRelationshipCollection->addRelationship(
             ProductsRestApiConfig::RESOURCE_ABSTRACT_PRODUCTS,
-            new AbstractProductPricesByResourceIdResourceRelationshipPlugin()
+            new AbstractProductPricesByResourceIdResourceRelationshipPlugin(),
         );
         $resourceRelationshipCollection->addRelationship(
             ProductsRestApiConfig::RESOURCE_CONCRETE_PRODUCTS,
-            new ConcreteProductPricesByResourceIdResourceRelationshipPlugin()
+            new ConcreteProductPricesByResourceIdResourceRelationshipPlugin(),
         );
         $resourceRelationshipCollection->addRelationship(
             ProductsRestApiConfig::RESOURCE_ABSTRACT_PRODUCTS,
-            new AbstractProductsCategoriesResourceRelationshipPlugin()
+            new AbstractProductsCategoriesResourceRelationshipPlugin(),
         );
         $resourceRelationshipCollection->addRelationship(
             CustomersRestApiConfig::RESOURCE_CUSTOMERS,
-            new CustomersToAddressesRelationshipPlugin()
+            new CustomersToAddressesRelationshipPlugin(),
         );
         $resourceRelationshipCollection->addRelationship(
             CustomersRestApiConfig::RESOURCE_CUSTOMERS,
-            new WishlistRelationshipByResourceIdPlugin()
+            new WishlistRelationshipByResourceIdPlugin(),
         );
         $resourceRelationshipCollection->addRelationship(
             ProductsRestApiConfig::RESOURCE_ABSTRACT_PRODUCTS,
-            new ProductLabelsRelationshipByResourceIdPlugin()
+            new ProductLabelsRelationshipByResourceIdPlugin(),
         );
         $resourceRelationshipCollection->addRelationship(
             ProductsRestApiConfig::RESOURCE_CONCRETE_PRODUCTS,
-            new ProductLabelByProductConcreteSkuResourceRelationshipPlugin()
+            new ProductLabelByProductConcreteSkuResourceRelationshipPlugin(),
         );
         $resourceRelationshipCollection->addRelationship(
             CheckoutRestApiConfig::RESOURCE_CHECKOUT,
-            new OrderRelationshipByOrderReferencePlugin()
+            new OrderRelationshipByOrderReferencePlugin(),
         );
         $resourceRelationshipCollection->addRelationship(
             CartsRestApiConfig::RESOURCE_CART_ITEMS,
-            new ConcreteProductBySkuResourceRelationshipPlugin()
+            new ConcreteProductBySkuResourceRelationshipPlugin(),
         );
         $resourceRelationshipCollection->addRelationship(
             CartsRestApiConfig::RESOURCE_GUEST_CARTS_ITEMS,
-            new ConcreteProductBySkuResourceRelationshipPlugin()
+            new ConcreteProductBySkuResourceRelationshipPlugin(),
         );
         $resourceRelationshipCollection->addRelationship(
             NavigationsRestApiConfig::RESOURCE_NAVIGATIONS,
-            new CategoryNodeByResourceIdResourceRelationshipPlugin()
+            new CategoryNodeByResourceIdResourceRelationshipPlugin(),
         );
         $resourceRelationshipCollection->addRelationship(
             ProductsRestApiConfig::RESOURCE_ABSTRACT_PRODUCTS,
-            new ProductTaxSetByProductAbstractSkuResourceRelationshipPlugin()
+            new ProductTaxSetByProductAbstractSkuResourceRelationshipPlugin(),
         );
         $resourceRelationshipCollection->addRelationship(
             ProductsRestApiConfig::RESOURCE_ABSTRACT_PRODUCTS,
-            new ProductReviewsRelationshipByProductAbstractSkuPlugin()
+            new ProductReviewsRelationshipByProductAbstractSkuPlugin(),
         );
         $resourceRelationshipCollection->addRelationship(
             ProductsRestApiConfig::RESOURCE_CONCRETE_PRODUCTS,
-            new ProductReviewsRelationshipByProductConcreteSkuPlugin()
+            new ProductReviewsRelationshipByProductConcreteSkuPlugin(),
         );
         $resourceRelationshipCollection->addRelationship(
             ProductsRestApiConfig::RESOURCE_ABSTRACT_PRODUCTS,
-            new ProductOptionsByProductAbstractSkuResourceRelationshipPlugin()
+            new ProductOptionsByProductAbstractSkuResourceRelationshipPlugin(),
         );
         $resourceRelationshipCollection->addRelationship(
             ProductsRestApiConfig::RESOURCE_CONCRETE_PRODUCTS,
-            new ProductOptionsByProductConcreteSkuResourceRelationshipPlugin()
+            new ProductOptionsByProductConcreteSkuResourceRelationshipPlugin(),
         );
         $resourceRelationshipCollection->addRelationship(
             CartsRestApiConfig::RESOURCE_CARTS,
-            new VoucherByQuoteResourceRelationshipPlugin()
+            new VoucherByQuoteResourceRelationshipPlugin(),
         );
         $resourceRelationshipCollection->addRelationship(
             CartsRestApiConfig::RESOURCE_GUEST_CARTS,
-            new VoucherByQuoteResourceRelationshipPlugin()
+            new VoucherByQuoteResourceRelationshipPlugin(),
         );
         $resourceRelationshipCollection->addRelationship(
             CartsRestApiConfig::RESOURCE_CARTS,
-            new CartRuleByQuoteResourceRelationshipPlugin()
+            new CartRuleByQuoteResourceRelationshipPlugin(),
         );
         $resourceRelationshipCollection->addRelationship(
             CartsRestApiConfig::RESOURCE_GUEST_CARTS,
-            new CartRuleByQuoteResourceRelationshipPlugin()
+            new CartRuleByQuoteResourceRelationshipPlugin(),
         );
         $resourceRelationshipCollection->addRelationship(
             CartsRestApiConfig::RESOURCE_CARTS,
-            new CartItemsByQuoteResourceRelationshipPlugin()
+            new CartItemsByQuoteResourceRelationshipPlugin(),
         );
         $resourceRelationshipCollection->addRelationship(
             CartsRestApiConfig::RESOURCE_CARTS,
-            new PromotionItemByQuoteTransferResourceRelationshipPlugin()
+            new PromotionItemByQuoteTransferResourceRelationshipPlugin(),
         );
         $resourceRelationshipCollection->addRelationship(
             CartsRestApiConfig::RESOURCE_GUEST_CARTS,
-            new PromotionItemByQuoteTransferResourceRelationshipPlugin()
+            new PromotionItemByQuoteTransferResourceRelationshipPlugin(),
         );
         $resourceRelationshipCollection->addRelationship(
             DiscountPromotionsRestApiConfig::RESOURCE_PROMOTIONAL_ITEMS,
-            new ProductAbstractBySkuResourceRelationshipPlugin()
+            new ProductAbstractBySkuResourceRelationshipPlugin(),
         );
         $resourceRelationshipCollection->addRelationship(
             CheckoutRestApiConfig::RESOURCE_CHECKOUT_DATA,
-            new ShipmentsByCheckoutDataResourceRelationshipPlugin()
+            new ShipmentsByCheckoutDataResourceRelationshipPlugin(),
         );
         $resourceRelationshipCollection->addRelationship(
             ShipmentsRestApiConfig::RESOURCE_SHIPMENTS,
-            new ShipmentMethodsByShipmentResourceRelationshipPlugin()
+            new ShipmentMethodsByShipmentResourceRelationshipPlugin(),
         );
         $resourceRelationshipCollection->addRelationship(
             CheckoutRestApiConfig::RESOURCE_CHECKOUT_DATA,
-            new PaymentMethodsByCheckoutDataResourceRelationshipPlugin()
+            new PaymentMethodsByCheckoutDataResourceRelationshipPlugin(),
         );
         $resourceRelationshipCollection->addRelationship(
             CheckoutRestApiConfig::RESOURCE_CHECKOUT_DATA,
-            new AddressByCheckoutDataResourceRelationshipPlugin()
+            new AddressByCheckoutDataResourceRelationshipPlugin(),
         );
         $resourceRelationshipCollection->addRelationship(
             CheckoutRestApiConfig::RESOURCE_CHECKOUT_DATA,
@@ -546,92 +584,94 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
         );
         $resourceRelationshipCollection->addRelationship(
             SalesReturnsRestApiConfig::RESOURCE_RETURNS,
-            new ReturnItemByReturnResourceRelationshipPlugin()
+            new ReturnItemByReturnResourceRelationshipPlugin(),
         );
         $resourceRelationshipCollection->addRelationship(
             OrdersRestApiConfig::RESOURCE_ORDERS,
-            new OrderShipmentByOrderResourceRelationshipPlugin()
+            new OrderShipmentByOrderResourceRelationshipPlugin(),
         );
         $resourceRelationshipCollection->addRelationship(
             SalesReturnsRestApiConfig::RESOURCE_RETURN_ITEMS,
-            new OrderItemByResourceIdResourceRelationshipPlugin()
+            new OrderItemByResourceIdResourceRelationshipPlugin(),
         );
         $resourceRelationshipCollection->addRelationship(
             CartsRestApiConfig::RESOURCE_CARTS,
-            new GiftCardByQuoteResourceRelationshipPlugin()
+            new GiftCardByQuoteResourceRelationshipPlugin(),
         );
         $resourceRelationshipCollection->addRelationship(
             CartsRestApiConfig::RESOURCE_GUEST_CARTS,
-            new GiftCardByQuoteResourceRelationshipPlugin()
+            new GiftCardByQuoteResourceRelationshipPlugin(),
         );
         $resourceRelationshipCollection->addRelationship(
             ProductBundlesRestApiConfig::RESOURCE_BUNDLED_PRODUCTS,
-            new ConcreteProductBySkuResourceRelationshipPlugin()
+            new ConcreteProductBySkuResourceRelationshipPlugin(),
         );
         $resourceRelationshipCollection->addRelationship(
             ProductsRestApiConfig::RESOURCE_CONCRETE_PRODUCTS,
-            new BundledProductByProductConcreteSkuResourceRelationshipPlugin()
+            new BundledProductByProductConcreteSkuResourceRelationshipPlugin(),
         );
         $resourceRelationshipCollection->addRelationship(
             ProductsRestApiConfig::RESOURCE_CONCRETE_PRODUCTS,
-            new ProductAbstractByProductAbstractSkuResourceRelationshipPlugin()
+            new ProductAbstractByProductAbstractSkuResourceRelationshipPlugin(),
         );
         $resourceRelationshipCollection->addRelationship(
             CartsRestApiConfig::RESOURCE_CARTS,
-            new BundleItemByQuoteResourceRelationshipPlugin()
+            new BundleItemByQuoteResourceRelationshipPlugin(),
         );
         $resourceRelationshipCollection->addRelationship(
             CartsRestApiConfig::RESOURCE_GUEST_CARTS,
-            new GuestBundleItemByQuoteResourceRelationshipPlugin()
+            new GuestBundleItemByQuoteResourceRelationshipPlugin(),
         );
         $resourceRelationshipCollection->addRelationship(
             ProductBundleCartsRestApiConfig::RESOURCE_BUNDLE_ITEMS,
-            new BundledItemByQuoteResourceRelationshipPlugin()
+            new BundledItemByQuoteResourceRelationshipPlugin(),
         );
         $resourceRelationshipCollection->addRelationship(
             ProductBundleCartsRestApiConfig::RESOURCE_BUNDLE_ITEMS,
-            new ConcreteProductBySkuResourceRelationshipPlugin()
+            new ConcreteProductBySkuResourceRelationshipPlugin(),
         );
         $resourceRelationshipCollection->addRelationship(
             ProductBundleCartsRestApiConfig::RESOURCE_BUNDLED_ITEMS,
-            new ConcreteProductBySkuResourceRelationshipPlugin()
+            new ConcreteProductBySkuResourceRelationshipPlugin(),
         );
         $resourceRelationshipCollection->addRelationship(
             CartsRestApiConfig::RESOURCE_GUEST_CARTS,
-            new GuestCartItemsByQuoteResourceRelationshipPlugin()
+            new GuestCartItemsByQuoteResourceRelationshipPlugin(),
         );
         $resourceRelationshipCollection->addRelationship(
             ConfigurableBundlesRestApiConfig::RESOURCE_CONFIGURABLE_BUNDLE_TEMPLATES,
-            new ConfigurableBundleTemplateSlotByConfigurableBundleTemplateResourceRelationshipPlugin()
+            new ConfigurableBundleTemplateSlotByConfigurableBundleTemplateResourceRelationshipPlugin(),
         );
 
         $resourceRelationshipCollection->addRelationship(
             ConfigurableBundlesRestApiConfig::RESOURCE_CONFIGURABLE_BUNDLE_TEMPLATES,
-            new ConfigurableBundleTemplateImageSetByConfigurableBundleTemplateResourceRelationshipPlugin()
+            new ConfigurableBundleTemplateImageSetByConfigurableBundleTemplateResourceRelationshipPlugin(),
         );
 
         $resourceRelationshipCollection->addRelationship(
             ConfigurableBundlesProductsResourceRelationshipConfig::RESOURCE_CONFIGURABLE_BUNDLE_TEMPLATE_SLOTS,
-            new ProductConcreteByConfigurableBundleTemplateSlotResourceRelationshipPlugin()
+            new ProductConcreteByConfigurableBundleTemplateSlotResourceRelationshipPlugin(),
         );
         $resourceRelationshipCollection->addRelationship(
             CmsPagesRestApiConfig::RESOURCE_CMS_PAGES,
-            new ContentBannerByCmsPageResourceRelationshipPlugin()
+            new ContentBannerByCmsPageResourceRelationshipPlugin(),
         );
         $resourceRelationshipCollection->addRelationship(
             CmsPagesRestApiConfig::RESOURCE_CMS_PAGES,
-            new ContentProductAbstractListByCmsPageResourceRelationshipPlugin()
+            new ContentProductAbstractListByCmsPageResourceRelationshipPlugin(),
         );
         $resourceRelationshipCollection->addRelationship(
             ContentProductAbstractListsRestApiConfig::RESOURCE_CONTENT_PRODUCT_ABSTRACT_LISTS,
-            new ProductAbstractByContentProductAbstractListResourceRelationshipPlugin()
+            new ProductAbstractByContentProductAbstractListResourceRelationshipPlugin(),
         );
 
         return $resourceRelationshipCollection;
     }
 
     /**
-     * @return \Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\RestUserFinderPluginInterface[]
+     * @deprecated Will be removed without replacement.
+     *
+     * @return array<\Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\RestUserFinderPluginInterface>
      */
     protected function getRestUserFinderPlugins(): array
     {
@@ -642,7 +682,9 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
     }
 
     /**
-     * @return \Spryker\Shared\ApplicationExtension\Dependency\Plugin\ApplicationPluginInterface[]
+     * @deprecated Will be removed without replacement.
+     *
+     * @return array<\Spryker\Shared\ApplicationExtension\Dependency\Plugin\ApplicationPluginInterface>
      */
     protected function getApplicationPlugins(): array
     {
@@ -652,6 +694,85 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
             new EventDispatcherApplicationPlugin(),
             new GlueApplicationApplicationPlugin(),
             new RouterApplicationPlugin(),
+            new StoreHttpHeaderApplicationPlugin(),
+            new LocaleApplicationPlugin(),
+        ];
+    }
+
+    /**
+     * @return array<\Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\GlueApplicationBootstrapPluginInterface>
+     */
+    protected function getGlueApplicationBootstrapPlugins(): array
+    {
+        return [
+            new StorefrontApiGlueApplicationBootstrapPlugin(),
+            new BackendApiGlueApplicationBootstrapPlugin(),
+            new FallbackStorefrontApiGlueApplicationBootstrapPlugin(),
+        ];
+    }
+
+    /**
+     * @return array<\Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\ConventionPluginInterface>
+     */
+    protected function getConventionPlugins(): array
+    {
+        return [
+            new JsonApiConventionPlugin(),
+        ];
+    }
+
+    /**
+     * @return array<\Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\ControllerCacheCollectorPluginInterface>
+     */
+    protected function getControllerCacheCollectorPlugins(): array
+    {
+        return [
+            new StorefrontControllerCacheCollectorPlugin(),
+            new BackendControllerCacheCollectorPlugin(),
+        ];
+    }
+
+    /**
+     * @return array<\Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\ApiApplicationEndpointProviderPluginInterface>
+     */
+    protected function getGlueApplicationRouterProviderPlugins(): array
+    {
+        return [
+            new BackendRouterProviderPlugin(),
+            new StorefrontRouterProviderPlugin(),
+        ];
+    }
+
+    /**
+     * @return array<\Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\RoutesProviderPluginInterface>
+     */
+    protected function getRoutesProviderPlugins(): array
+    {
+        return [
+            new StorefrontCustomRouteRoutesProviderPlugin(),
+            new BackendCustomRouteRoutesProviderPlugin(),
+        ];
+    }
+
+    /**
+     * @return array<\Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\ResourcesProviderPluginInterface>
+     */
+    protected function getResourcesProviderPlugins(): array
+    {
+        return [
+            new StorefrontResourcesProviderPlugin(),
+            new BackendResourcesProviderPlugin(),
+        ];
+    }
+
+    /**
+     * @return array<\Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\TableColumnExpanderPluginInterface>
+     */
+    protected function getTableColumnExpanderPlugins(): array
+    {
+        return [
+            new BackendIsProtectedTableColumnExpanderPlugin(),
+            new StorefrontIsProtectedTableColumnExpanderPlugin(),
         ];
     }
 }

@@ -70,7 +70,7 @@ class ContentProductAbstractListTwigFunctionProvider extends TwigFunctionProvide
     public function __construct(
         Environment $twig,
         string $localeName,
-        ContentProductAbstractReaderInterface $contentProductAbstractReader
+        ContentProductAbstractReaderInterface $contentProductAbstractReader,
     ) {
         $this->twig = $twig;
         $this->localeName = $localeName;
@@ -110,13 +110,13 @@ class ContentProductAbstractListTwigFunctionProvider extends TwigFunctionProvide
                 $this->getPyzAvailableTemplates()[$templateIdentifier],
                 [
                     'productAbstractViewCollection' => $productAbstractViewCollection,
-                ]
+                ],
             );
         };
     }
 
     /**
-     * @return array
+     * @return array<string, string>
      */
     protected function getPyzAvailableTemplates(): array
     {

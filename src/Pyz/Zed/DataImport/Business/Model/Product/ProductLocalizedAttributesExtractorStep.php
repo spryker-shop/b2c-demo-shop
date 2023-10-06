@@ -18,12 +18,12 @@ class ProductLocalizedAttributesExtractorStep implements DataImportStepInterface
     public const KEY_LOCALIZED_ATTRIBUTES = 'localizedAttributes';
 
     /**
-     * @var array
+     * @var array<string>
      */
     protected $defaultAttributes = [];
 
     /**
-     * @param array $defaultAttributes
+     * @param array<string> $defaultAttributes
      */
     public function __construct(array $defaultAttributes = [])
     {
@@ -35,7 +35,7 @@ class ProductLocalizedAttributesExtractorStep implements DataImportStepInterface
      *
      * @return void
      */
-    public function execute(DataSetInterface $dataSet)
+    public function execute(DataSetInterface $dataSet): void
     {
         $keysToUnset = [];
         $localizedAttributes = [];
@@ -63,6 +63,12 @@ class ProductLocalizedAttributesExtractorStep implements DataImportStepInterface
             ];
 
             foreach ($this->defaultAttributes as $defaultAttribute) {
+                if (!isset($dataSet[$defaultAttribute . '.' . $localeName])) {
+                    unset($localizedAttributes[$idLocale]);
+
+                    continue;
+                }
+
                 $localizedAttributes[$idLocale][$defaultAttribute] = $dataSet[$defaultAttribute . '.' . $localeName];
 
                 $keysToUnset[] = $defaultAttribute . '.' . $localeName;

@@ -32,7 +32,7 @@ class ProductSetIdsWidget extends AbstractWidget
     protected const PYZ_PARAMETER_PRODUCT_SET_LIST = 'productSetList';
 
     /**
-     * @param array $productSetIds
+     * @param list<int> $productSetIds
      */
     public function __construct(array $productSetIds)
     {
@@ -40,7 +40,7 @@ class ProductSetIdsWidget extends AbstractWidget
     }
 
     /**
-     * @param array $productSetIds
+     * @param list<int> $productSetIds
      *
      * @return void
      */
@@ -68,9 +68,9 @@ class ProductSetIdsWidget extends AbstractWidget
     }
 
     /**
-     * @param int[] $productSetIds
+     * @param array<int> $productSetIds
      *
-     * @return array
+     * @return array<mixed>
      */
     protected function getPyzProductSetList(array $productSetIds): array
     {
@@ -90,7 +90,7 @@ class ProductSetIdsWidget extends AbstractWidget
     /**
      * @param int $productSetId
      *
-     * @return array
+     * @return array<string, mixed>
      */
     protected function getPyzSingleProductSet(int $productSetId): array
     {
@@ -119,7 +119,7 @@ class ProductSetIdsWidget extends AbstractWidget
     /**
      * @param \Generated\Shared\Transfer\ProductSetDataStorageTransfer $productSetDataStorageTransfer
      *
-     * @return \Generated\Shared\Transfer\ProductViewTransfer[]
+     * @return array<\Generated\Shared\Transfer\ProductViewTransfer>
      */
     protected function mapPyzProductViewTransfers(ProductSetDataStorageTransfer $productSetDataStorageTransfer): array
     {
@@ -129,7 +129,7 @@ class ProductSetIdsWidget extends AbstractWidget
             $productViewTransfer = $this->getFactory()->getPyzProductStorageClient()->findProductAbstractViewTransfer(
                 $idProductAbstract,
                 $this->getLocale(),
-                $this->getPyzSelectedAttributes($idProductAbstract)
+                $this->getPyzSelectedAttributes($idProductAbstract),
             );
 
             if ($productViewTransfer === null) {
@@ -145,7 +145,7 @@ class ProductSetIdsWidget extends AbstractWidget
     /**
      * @param int $idProductAbstract
      *
-     * @return array
+     * @return array<mixed>
      */
     protected function getPyzSelectedAttributes(int $idProductAbstract): array
     {

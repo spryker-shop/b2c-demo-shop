@@ -30,7 +30,7 @@ use Orm\Zed\Navigation\Persistence\SpyNavigationQuery;
  * @method void comment($description)
  * @method \Codeception\Lib\Friend haveFriend($name, $actorClass = NULL)
  *
- * @SuppressWarnings(PHPMD)
+ * @SuppressWarnings(\PyzTest\Zed\NavigationGui\PHPMD)
  */
 class NavigationGuiPresentationTester extends Actor
 {
@@ -300,7 +300,7 @@ class NavigationGuiPresentationTester extends Actor
      *
      * @return void
      */
-    public function seeNumberOfNavigationNodes($count)
+    public function seeNumberOfNavigationNodes($count): void
     {
         $this->seeNumberOfElements(self::NAVIGATION_NODE_SELECTOR, $count);
     }
@@ -311,12 +311,12 @@ class NavigationGuiPresentationTester extends Actor
      *
      * @return void
      */
-    public function seeNavigationNodeHierarchy($idParentNavigationNode, $idChildNavigationNode)
+    public function seeNavigationNodeHierarchy($idParentNavigationNode, $idChildNavigationNode): void
     {
         $this->waitForElement(sprintf(
             self::NODE_CHILD_SELECTOR,
             $idParentNavigationNode,
-            $idChildNavigationNode
+            $idChildNavigationNode,
         ), 1);
     }
 
@@ -496,7 +496,7 @@ class NavigationGuiPresentationTester extends Actor
     protected function createNavigationNodesRecursively(
         NavigationTreeNodeTransfer $navigationTreeNodeTransfer,
         $idNavigation,
-        $idParentNavigationNode = null
+        $idParentNavigationNode = null,
     ): void {
         $navigationNodeTransfer = $navigationTreeNodeTransfer->getNavigationNode();
         $navigationNodeTransfer
@@ -584,7 +584,7 @@ class NavigationGuiPresentationTester extends Actor
 
     /**
      * @param string $defaultSlug
-     * @param string[] $localizedSlugs
+     * @param array<string> $localizedSlugs
      *
      * @return array
      */

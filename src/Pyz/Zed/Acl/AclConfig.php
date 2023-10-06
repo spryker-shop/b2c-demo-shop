@@ -13,9 +13,9 @@ use Spryker\Zed\Acl\AclConfig as SprykerAclConfig;
 class AclConfig extends SprykerAclConfig
 {
     /**
-     * @return array
+     * @return array<array<string, mixed>>
      */
-    public function getInstallerUsers()
+    public function getInstallerUsers(): array
     {
         return [
             'admin@spryker.com' => [

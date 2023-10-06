@@ -13,7 +13,7 @@ use Spryker\Zed\Propel\PropelDependencyProvider as SprykerPropelDependencyProvid
 class PropelDependencyProvider extends SprykerPropelDependencyProvider
 {
     /**
-     * @return \Spryker\Zed\Propel\Dependency\Plugin\PropelSchemaElementFilterPluginInterface[]
+     * @return array<\Spryker\Zed\Propel\Dependency\Plugin\PropelSchemaElementFilterPluginInterface>
      */
     protected function getPropelSchemaElementFilterPlugins(): array
     {

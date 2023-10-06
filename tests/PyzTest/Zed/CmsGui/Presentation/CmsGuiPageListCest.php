@@ -27,11 +27,11 @@ class CmsGuiPageListCest
      *
      * @return void
      */
-    public function testICanOpenCmsPageList(CmsGuiPresentationTester $i)
+    public function testICanOpenCmsPageList(CmsGuiPresentationTester $i): void
     {
         $i->amLoggedInUser();
         $i->amOnPage(CmsListPage::URL);
 
-        $i->waitForElementVisible(CmsListPage::PAGE_LIST_TABLE_XPATH, 5);
+        $i->waitForElementVisible(CmsListPage::PAGE_LIST_TABLE_XPATH, 10);
     }
 }

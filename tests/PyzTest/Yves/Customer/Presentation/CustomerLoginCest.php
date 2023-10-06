@@ -30,7 +30,7 @@ class CustomerLoginCest
      *
      * @return void
      */
-    public function testICanOpenLoginPage(CustomerPresentationTester $i)
+    public function testICanOpenLoginPage(CustomerPresentationTester $i): void
     {
         $i->amOnPage(CustomerLoginPage::URL);
         $i->see(CustomerLoginPage::TITLE_LOGIN);
@@ -42,7 +42,7 @@ class CustomerLoginCest
      *
      * @return void
      */
-    public function testICanOpenForgotPasswordPage(CustomerPresentationTester $i, Scenario $scenario)
+    public function testICanOpenForgotPasswordPage(CustomerPresentationTester $i, Scenario $scenario): void
     {
         $scenario->skip('Test is outdated and needs to be actualized.');
 
@@ -56,7 +56,7 @@ class CustomerLoginCest
      *
      * @return void
      */
-    public function testICanLoginWithValidData(CustomerPresentationTester $i)
+    public function testICanLoginWithValidData(CustomerPresentationTester $i): void
     {
         $i->amOnPage(CustomerLoginPage::URL);
         $customerTransfer = $i->haveRegisteredCustomer();

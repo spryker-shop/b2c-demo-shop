@@ -17,6 +17,7 @@ use Spryker\Zed\OmsExtension\Dependency\Plugin\TimeoutProcessorPluginInterface;
  * @method \Pyz\Zed\Oms\Business\OmsFacadeInterface getFacade()
  * @method \Pyz\Zed\Oms\Communication\OmsCommunicationFactory getFactory()
  * @method \Pyz\Zed\Oms\OmsConfig getConfig()
+ * @method \Spryker\Zed\Oms\Persistence\OmsQueryContainerInterface getQueryContainer()
  */
 class InitiationTimeoutProcessorPlugin extends AbstractPlugin implements TimeoutProcessorPluginInterface
 {
@@ -45,7 +46,7 @@ class InitiationTimeoutProcessorPlugin extends AbstractPlugin implements Timeout
     {
         return sprintf(
             $this->getFactory()->getPyzTranslatorFacade()->trans('Starts when defined timeout (%s) is over.'),
-            $omsEventTransfer->getTimeout()
+            $omsEventTransfer->getTimeout(),
         );
     }
 

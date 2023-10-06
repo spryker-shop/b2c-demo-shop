@@ -2,7 +2,8 @@ namespace: PyzTest
 actor: Tester
 
 include:
-    - tests/PyzTest/*/*
+    - tests/PyzTest/Zed/*
+    - tests/PyzTest/Yves/*
 
 paths:
     tests: tests
@@ -11,11 +12,10 @@ paths:
     support: tests/_support
     envs: tests/_envs
 
-bootstrap: _bootstrap.php
 settings:
     suite_class: \PHPUnit_Framework_TestSuite
     colors: true
-    memory_limit: 1536M
+    memory_limit: 2048M
     log: true
     lint: false
 

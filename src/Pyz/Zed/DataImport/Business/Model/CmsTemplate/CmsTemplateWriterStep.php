@@ -17,6 +17,7 @@ class CmsTemplateWriterStep implements DataImportStepInterface
      * @var string
      */
     public const KEY_TEMPLATE_NAME = 'template_name';
+
     /**
      * @var string
      */
@@ -27,7 +28,7 @@ class CmsTemplateWriterStep implements DataImportStepInterface
      *
      * @return void
      */
-    public function execute(DataSetInterface $dataSet)
+    public function execute(DataSetInterface $dataSet): void
     {
         $cmsTemplate = SpyCmsTemplateQuery::create()
             ->filterByTemplateName($dataSet[static::KEY_TEMPLATE_NAME])
