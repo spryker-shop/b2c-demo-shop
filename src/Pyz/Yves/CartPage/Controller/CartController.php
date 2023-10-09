@@ -20,7 +20,7 @@ class CartController extends SprykerCartController
     /**
      * @var string
      */
-    public const PYZ_REQUEST_HEADER_REFERER = 'referer';
+    public const REQUEST_HEADER_REFERER = 'referer';
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
@@ -32,7 +32,7 @@ class CartController extends SprykerCartController
     {
         parent::addAction($request, $sku);
 
-        return $this->redirectPyz($request);
+        return $this->redirect($request);
     }
 
     /**
@@ -45,7 +45,7 @@ class CartController extends SprykerCartController
     {
         parent::removeAction($request, $sku);
 
-        return $this->redirectPyz($request);
+        return $this->redirect($request);
     }
 
     /**
@@ -53,10 +53,10 @@ class CartController extends SprykerCartController
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    protected function redirectPyz(Request $request): RedirectResponse
+    protected function redirect(Request $request): RedirectResponse
     {
-        if ($request->headers->has(static::PYZ_REQUEST_HEADER_REFERER)) {
-            return $this->redirectResponseExternal($request->headers->get(static::PYZ_REQUEST_HEADER_REFERER));
+        if ($request->headers->has(static::REQUEST_HEADER_REFERER)) {
+            return $this->redirectResponseExternal($request->headers->get(static::REQUEST_HEADER_REFERER));
         }
 
         return $this->redirectResponseInternal(CartPageRouteProviderPlugin::ROUTE_NAME_CART);

@@ -96,6 +96,8 @@ use Spryker\Zed\Propel\Communication\Console\PropelSchemaXmlNameValidatorConsole
 use Spryker\Zed\Propel\Communication\Console\RemoveEntityTransferConsole;
 use Spryker\Zed\Propel\Communication\Plugin\Application\PropelApplicationPlugin;
 use Spryker\Zed\Publisher\Communication\Console\PublisherTriggerEventsConsole;
+use Spryker\Zed\PushNotification\Communication\Console\DeleteExpiredPushNotificationSubscriptionConsole;
+use Spryker\Zed\PushNotification\Communication\Console\SendPushNotificationConsole;
 use Spryker\Zed\Queue\Communication\Console\QueueDumpConsole;
 use Spryker\Zed\Queue\Communication\Console\QueueTaskConsole;
 use Spryker\Zed\Queue\Communication\Console\QueueWorkerConsole;
@@ -172,7 +174,7 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
     /**
      * @var string
      */
-    protected const PYZ_COMMAND_SEPARATOR = ':';
+    protected const COMMAND_SEPARATOR = ':';
 
     /**
      * @param \Spryker\Zed\Kernel\Container $container
@@ -216,7 +218,7 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
             new DataImportConsole(DataImportConsole::DEFAULT_NAME . ':' . DataImportConfig::IMPORT_TYPE_STORE),
             new DataImportConsole(DataImportConsole::DEFAULT_NAME . ':' . DataImportConfig::IMPORT_TYPE_CURRENCY),
             new DataImportConsole(DataImportConsole::DEFAULT_NAME . ':' . CategoryDataImportConfig::IMPORT_TYPE_CATEGORY),
-            new DataImportConsole(DataImportConsole::DEFAULT_NAME . static::PYZ_COMMAND_SEPARATOR . CategoryDataImportConfig::IMPORT_TYPE_CATEGORY_STORE),
+            new DataImportConsole(DataImportConsole::DEFAULT_NAME . static::COMMAND_SEPARATOR . CategoryDataImportConfig::IMPORT_TYPE_CATEGORY_STORE),
             new DataImportConsole(DataImportConsole::DEFAULT_NAME . ':' . DataImportConfig::IMPORT_TYPE_CATEGORY_TEMPLATE),
             new DataImportConsole(DataImportConsole::DEFAULT_NAME . ':' . DataImportConfig::IMPORT_TYPE_CUSTOMER),
             new DataImportConsole(DataImportConsole::DEFAULT_NAME . ':' . DataImportConfig::IMPORT_TYPE_GLOSSARY),
@@ -354,12 +356,15 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
             new ScopeCacheCollectorConsole(),
 
             new DateTimeProductConfiguratorBuildFrontendConsole(),
+
+            new DeleteExpiredPushNotificationSubscriptionConsole(),
+            new SendPushNotificationConsole(),
         ];
 
         $propelCommands = $container->getLocator()->propel()->facade()->getConsoleCommands();
         $commands = array_merge($commands, $propelCommands);
 
-        if ($this->getConfig()->isPyzDevelopmentConsoleCommandsEnabled()) {
+        if ($this->getConfig()->isDevelopmentConsoleCommandsEnabled()) {
             $commands[] = new CodeTestConsole();
             $commands[] = new CodeFixturesConsole();
             $commands[] = new AcceptanceCodeTestConsole();

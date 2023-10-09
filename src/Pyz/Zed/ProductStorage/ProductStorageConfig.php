@@ -18,7 +18,7 @@ class ProductStorageConfig extends SprykerProductStorageConfig
      */
     public function getProductConcreteSynchronizationPoolName(): ?string
     {
-        return SynchronizationConfig::PYZ_DEFAULT_SYNCHRONIZATION_POOL_NAME;
+        return SynchronizationConfig::DEFAULT_SYNCHRONIZATION_POOL_NAME;
     }
 
     /**
@@ -26,7 +26,7 @@ class ProductStorageConfig extends SprykerProductStorageConfig
      */
     public function getProductAbstractSynchronizationPoolName(): ?string
     {
-        return SynchronizationConfig::PYZ_DEFAULT_SYNCHRONIZATION_POOL_NAME;
+        return SynchronizationConfig::DEFAULT_SYNCHRONIZATION_POOL_NAME;
     }
 
     /**

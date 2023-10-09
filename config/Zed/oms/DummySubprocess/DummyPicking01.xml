@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<statemachine
+    xmlns="spryker:oms-01"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="spryker:oms-01 http://static.spryker.com/oms-01.xsd"
+>
+
+    <process name="DummyPicking">
+        <states>
+            <state name="picking list generation scheduled" display="oms.state.confirmed"/>
+            <state name="picking list generation started" display="oms.state.confirmed"/>
+            <state name="ready for picking" display="oms.state.confirmed"/>
+            <state name="picking started" display="oms.state.confirmed"/>
+            <state name="picking finished" display="oms.state.confirmed"/>
+        </states>
+
+        <transitions>
+            <transition happy="true">
+                <source>picking list generation scheduled</source>
+                <target>picking list generation started</target>
+                <event>generate picking lists</event>
+            </transition>
+
+            <transition happy="true" condition="PickingList/isPickingListGenerationFinished">
+                <source>picking list generation started</source>
+                <target>ready for picking</target>
+                <event>prepare for picking</event>
+            </transition>
+
+            <transition happy="true" condition="PickingList/isPickingStarted">
+                <source>ready for picking</source>
+                <target>picking started</target>
+                <event>start picking</event>
+            </transition>
+
+            <transition happy="true" condition="PickingList/isPickingFinished">
+                <source>picking started</source>
+                <target>picking finished</target>
+                <event>finish picking</event>
+            </transition>
+        </transitions>
+
+        <events>
+            <event name="picking list generation schedule" manual="true"/>
+            <event name="generate picking lists" onEnter="true" command="PickingList/GeneratePickingLists"/>
+            <event name="prepare for picking" timeout="1 second" manual="true"/>
+            <event name="start picking" timeout="1 second" manual="true"/>
+            <event name="finish picking" timeout="1 second" manual="true"/>
+        </events>
+    </process>
+</statemachine>

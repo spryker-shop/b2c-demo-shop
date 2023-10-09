@@ -8,7 +8,7 @@
 namespace Pyz\Zed\ExampleStateMachine\Business\Model;
 
 use Generated\Shared\Transfer\StateMachineItemTransfer;
-use Orm\Zed\ExampleStateMachine\Persistence\PyzExampleStateMachineItem;
+use Orm\Zed\ExampleStateMachine\Persistence\ExampleStateMachineItem;
 use Pyz\Zed\ExampleStateMachine\Persistence\ExampleStateMachineQueryContainerInterface;
 
 class ExampleStateMachineItemSaver
@@ -34,7 +34,7 @@ class ExampleStateMachineItemSaver
     public function updateItemState(StateMachineItemTransfer $stateMachineItemTransfer): bool
     {
         $exampleStateMachineItemEntity = $this->exampleStateMachineQueryContainer
-            ->queryPyzExampleStateMachineItemByIdStateMachineItem($stateMachineItemTransfer->getIdentifier())
+            ->queryExampleStateMachineItemByIdStateMachineItem($stateMachineItemTransfer->getIdentifier())
             ->findOne();
 
         $exampleStateMachineItemEntity->setFkStateMachineItemState($stateMachineItemTransfer->getIdItemState());
@@ -48,7 +48,7 @@ class ExampleStateMachineItemSaver
      */
     public function createExampleItem(): bool
     {
-        $exampleStateMachineItemEntity = new PyzExampleStateMachineItem();
+        $exampleStateMachineItemEntity = new ExampleStateMachineItem();
         $exampleStateMachineItemEntity->setName('Test item ' . rand(123, 321));
 
         $affectedRowCount = $exampleStateMachineItemEntity->save();

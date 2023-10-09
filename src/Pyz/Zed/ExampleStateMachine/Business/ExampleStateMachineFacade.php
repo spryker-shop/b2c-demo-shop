@@ -20,9 +20,9 @@ class ExampleStateMachineFacade extends AbstractFacade implements ExampleStateMa
      *
      * @return bool
      */
-    public function updatePyzItemState(StateMachineItemTransfer $stateMachineItemTransfer): bool
+    public function updateItemState(StateMachineItemTransfer $stateMachineItemTransfer): bool
     {
-        return $this->getFactory()->createPyzStateMachineSaver()->updateItemState($stateMachineItemTransfer);
+        return $this->getFactory()->createStateMachineSaver()->updateItemState($stateMachineItemTransfer);
     }
 
     /**
@@ -30,24 +30,24 @@ class ExampleStateMachineFacade extends AbstractFacade implements ExampleStateMa
      *
      * @return array<\Generated\Shared\Transfer\StateMachineItemTransfer>
      */
-    public function getPyzExampleStateMachineItemsByStateIds(array $stateIds = []): array
+    public function getExampleStateMachineItemsByStateIds(array $stateIds = []): array
     {
-        return $this->getFactory()->createPyzExampleStateMachineItemReader()->getStateMachineItemTransferByItemStateIds($stateIds);
+        return $this->getFactory()->createExampleStateMachineItemReader()->getStateMachineItemTransferByItemStateIds($stateIds);
     }
 
     /**
      * @return array<\Generated\Shared\Transfer\StateMachineItemTransfer>
      */
-    public function getPyzStateMachineItems(): array
+    public function getStateMachineItems(): array
     {
-        return $this->getFactory()->createPyzExampleStateMachineItemReader()->getStateMachineItems();
+        return $this->getFactory()->createExampleStateMachineItemReader()->getStateMachineItems();
     }
 
     /**
      * @return bool
      */
-    public function createPyzExampleItem(): bool
+    public function createExampleItem(): bool
     {
-        return $this->getFactory()->createPyzStateMachineSaver()->createExampleItem();
+        return $this->getFactory()->createStateMachineSaver()->createExampleItem();
     }
 }
