@@ -22,68 +22,68 @@ class ProductDetailPageReviewWidget extends AbstractWidget
     /**
      * @var string
      */
-    protected const PYZ_PARAMETER_ID_PRODUCT_ABSTRACT = 'idProductAbstract';
+    protected const PARAMETER_ID_PRODUCT_ABSTRACT = 'idProductAbstract';
 
     /**
      * @var string
      */
-    protected const PYZ_PARAMETER_PRODUCT_REVIEW_STORAGE_TRANSFER = 'productReviewStorageTransfer';
+    protected const PARAMETER_PRODUCT_REVIEW_STORAGE_TRANSFER = 'productReviewStorageTransfer';
 
     /**
      * @var string
      */
-    protected const PYZ_PARAMETER_FORM = 'form';
+    protected const PARAMETER_FORM = 'form';
 
     /**
      * @var string
      */
-    protected const PYZ_PARAMETER_HIDE_FORM = 'hideForm';
+    protected const PARAMETER_HIDE_FORM = 'hideForm';
 
     /**
      * @var string
      */
-    protected const PYZ_PARAMETER_HAS_CUSTOMER = 'hasCustomer';
+    protected const PARAMETER_HAS_CUSTOMER = 'hasCustomer';
 
     /**
      * @var string
      */
-    protected const PYZ_PARAMETER_PRODUCT_REVIEWS = 'productReviews';
+    protected const PARAMETER_PRODUCT_REVIEWS = 'productReviews';
 
     /**
      * @var string
      */
-    protected const PYZ_PARAMETER_PAGINATION = 'pagination';
+    protected const PARAMETER_PAGINATION = 'pagination';
 
     /**
      * @var string
      */
-    protected const PYZ_PARAMETER_SUMMARY = 'summary';
+    protected const PARAMETER_SUMMARY = 'summary';
 
     /**
      * @var string
      */
-    protected const PYZ_PARAMETER_MAXIMUM_RATING = 'maximumRating';
+    protected const PARAMETER_MAXIMUM_RATING = 'maximumRating';
 
     /**
      * @param int $idProductAbstract
      */
     public function __construct(int $idProductAbstract)
     {
-        $request = $this->getPyzCurrentRequest();
-        $productReviews = $this->findPyzProductReviews($idProductAbstract, $request);
+        $request = $this->getCurrentRequest();
+        $productReviews = $this->findProductReviews($idProductAbstract, $request);
 
         $ratingAggregationTransfer = (new RatingAggregationTransfer());
         $ratingAggregationTransfer->setRatingAggregation($productReviews['ratingAggregation']);
 
-        $this->addPyzHasCustomerParameter();
-        $this->addPyzMaximumRatingParameter();
-        $this->addPyzIdProductAbstractParameter($idProductAbstract);
-        $this->addPyzProductReviewStorageTransferParameter($idProductAbstract);
-        $this->addPyzFormParameter($idProductAbstract);
-        $this->addPyzHideFormParameter($idProductAbstract);
-        $this->addPyzProductReviewsParameter($idProductAbstract);
-        $this->addPyzPaginationParameter($idProductAbstract);
-        $this->addPyzSummaryParameter($idProductAbstract);
+        $this->addHasCustomerParameter();
+        $this->addMaximumRatingParameter();
+        $this->addIdProductAbstractParameter($idProductAbstract);
+        $this->addProductReviewStorageTransferParameter($idProductAbstract);
+        $this->addFormParameter($idProductAbstract);
+        $this->addHideFormParameter($idProductAbstract);
+        $this->addProductReviewsParameter($idProductAbstract);
+        $this->addPaginationParameter($idProductAbstract);
+        $this->addSummaryParameter($idProductAbstract);
     }
 
     /**
@@ -107,27 +107,27 @@ class ProductDetailPageReviewWidget extends AbstractWidget
      *
      * @return \Symfony\Component\Form\FormInterface
      */
-    protected function getPyzProductReviewForm(int $idProductAbstract): FormInterface
+    protected function getProductReviewForm(int $idProductAbstract): FormInterface
     {
-        $request = $this->getPyzCurrentRequest();
+        $request = $this->getCurrentRequest();
 
         return $this->getFactory()
-            ->createPyzProductReviewForm($idProductAbstract)
+            ->createProductReviewForm($idProductAbstract)
             ->handleRequest($request);
     }
 
     /**
      * @return \Symfony\Component\HttpFoundation\Request
      */
-    protected function getPyzCurrentRequest(): Request
+    protected function getCurrentRequest(): Request
     {
-        return $this->getPyzRequestStack()->getCurrentRequest();
+        return $this->getRequestStack()->getCurrentRequest();
     }
 
     /**
      * @return \Symfony\Component\HttpFoundation\RequestStack
      */
-    protected function getPyzRequestStack(): RequestStack
+    protected function getRequestStack(): RequestStack
     {
         return $this->getGlobalContainer()->get('request_stack');
     }
@@ -138,7 +138,7 @@ class ProductDetailPageReviewWidget extends AbstractWidget
      *
      * @return array<mixed>
      */
-    protected function findPyzProductReviews(int $idProductAbstract, Request $parentRequest): array
+    protected function findProductReviews(int $idProductAbstract, Request $parentRequest): array
     {
         $productReviewSearchRequestTransfer = new ProductReviewSearchRequestTransfer();
         $productReviewSearchRequestTransfer->setIdProductAbstract($idProductAbstract);
@@ -154,9 +154,9 @@ class ProductDetailPageReviewWidget extends AbstractWidget
      *
      * @return void
      */
-    protected function addPyzIdProductAbstractParameter(int $idProductAbstract): void
+    protected function addIdProductAbstractParameter(int $idProductAbstract): void
     {
-        $this->addParameter(static::PYZ_PARAMETER_ID_PRODUCT_ABSTRACT, $idProductAbstract);
+        $this->addParameter(static::PARAMETER_ID_PRODUCT_ABSTRACT, $idProductAbstract);
     }
 
     /**
@@ -164,13 +164,13 @@ class ProductDetailPageReviewWidget extends AbstractWidget
      *
      * @return void
      */
-    protected function addPyzProductReviewStorageTransferParameter(int $idProductAbstract): void
+    protected function addProductReviewStorageTransferParameter(int $idProductAbstract): void
     {
         $productReviewStorageTransfer = $this->getFactory()
             ->getProductReviewStorageClient()
             ->findProductAbstractReview($idProductAbstract);
 
-        $this->addParameter(static::PYZ_PARAMETER_PRODUCT_REVIEW_STORAGE_TRANSFER, $productReviewStorageTransfer);
+        $this->addParameter(static::PARAMETER_PRODUCT_REVIEW_STORAGE_TRANSFER, $productReviewStorageTransfer);
     }
 
     /**
@@ -178,11 +178,11 @@ class ProductDetailPageReviewWidget extends AbstractWidget
      *
      * @return void
      */
-    protected function addPyzFormParameter(int $idProductAbstract): void
+    protected function addFormParameter(int $idProductAbstract): void
     {
-        $form = $this->getPyzProductReviewForm($idProductAbstract);
+        $form = $this->getProductReviewForm($idProductAbstract);
 
-        $this->addParameter(static::PYZ_PARAMETER_FORM, $form->createView());
+        $this->addParameter(static::PARAMETER_FORM, $form->createView());
     }
 
     /**
@@ -190,31 +190,31 @@ class ProductDetailPageReviewWidget extends AbstractWidget
      *
      * @return void
      */
-    protected function addPyzHideFormParameter(int $idProductAbstract): void
+    protected function addHideFormParameter(int $idProductAbstract): void
     {
-        $form = $this->getPyzProductReviewForm($idProductAbstract);
+        $form = $this->getProductReviewForm($idProductAbstract);
 
-        $this->addParameter(static::PYZ_PARAMETER_HIDE_FORM, !$form->isSubmitted());
+        $this->addParameter(static::PARAMETER_HIDE_FORM, !$form->isSubmitted());
     }
 
     /**
      * @return void
      */
-    protected function addPyzHasCustomerParameter(): void
+    protected function addHasCustomerParameter(): void
     {
         $customer = $this->getFactory()->getCustomerClient()->getCustomer();
 
-        $this->addParameter(static::PYZ_PARAMETER_HAS_CUSTOMER, $customer !== null);
+        $this->addParameter(static::PARAMETER_HAS_CUSTOMER, $customer !== null);
     }
 
     /**
      * @return void
      */
-    protected function addPyzMaximumRatingParameter(): void
+    protected function addMaximumRatingParameter(): void
     {
         $maximumRating = $this->getFactory()->getProductReviewClient()->getMaximumRating();
 
-        $this->addParameter(static::PYZ_PARAMETER_MAXIMUM_RATING, $maximumRating);
+        $this->addParameter(static::PARAMETER_MAXIMUM_RATING, $maximumRating);
     }
 
     /**
@@ -222,12 +222,12 @@ class ProductDetailPageReviewWidget extends AbstractWidget
      *
      * @return void
      */
-    protected function addPyzProductReviewsParameter(int $idProductAbstract): void
+    protected function addProductReviewsParameter(int $idProductAbstract): void
     {
-        $request = $this->getPyzCurrentRequest();
-        $productReviews = $this->findPyzProductReviews($idProductAbstract, $request);
+        $request = $this->getCurrentRequest();
+        $productReviews = $this->findProductReviews($idProductAbstract, $request);
 
-        $this->addParameter(static::PYZ_PARAMETER_PRODUCT_REVIEWS, $productReviews[static::PYZ_PARAMETER_PRODUCT_REVIEWS]);
+        $this->addParameter(static::PARAMETER_PRODUCT_REVIEWS, $productReviews[static::PARAMETER_PRODUCT_REVIEWS]);
     }
 
     /**
@@ -235,12 +235,12 @@ class ProductDetailPageReviewWidget extends AbstractWidget
      *
      * @return void
      */
-    protected function addPyzPaginationParameter(int $idProductAbstract): void
+    protected function addPaginationParameter(int $idProductAbstract): void
     {
-        $request = $this->getPyzCurrentRequest();
-        $productReviews = $this->findPyzProductReviews($idProductAbstract, $request);
+        $request = $this->getCurrentRequest();
+        $productReviews = $this->findProductReviews($idProductAbstract, $request);
 
-        $this->addParameter(static::PYZ_PARAMETER_PAGINATION, $productReviews[static::PYZ_PARAMETER_PAGINATION]);
+        $this->addParameter(static::PARAMETER_PAGINATION, $productReviews[static::PARAMETER_PAGINATION]);
     }
 
     /**
@@ -248,16 +248,16 @@ class ProductDetailPageReviewWidget extends AbstractWidget
      *
      * @return void
      */
-    protected function addPyzSummaryParameter(int $idProductAbstract): void
+    protected function addSummaryParameter(int $idProductAbstract): void
     {
-        $request = $this->getPyzCurrentRequest();
-        $productReviews = $this->findPyzProductReviews($idProductAbstract, $request);
+        $request = $this->getCurrentRequest();
+        $productReviews = $this->findProductReviews($idProductAbstract, $request);
 
         $ratingAggregationTransfer = (new RatingAggregationTransfer());
         $ratingAggregationTransfer->setRatingAggregation($productReviews['ratingAggregation']);
 
         $this->addParameter(
-            static::PYZ_PARAMETER_SUMMARY,
+            static::PARAMETER_SUMMARY,
             $this->getFactory()
                 ->getProductReviewClient()
                 ->calculateProductReviewSummary($ratingAggregationTransfer),

@@ -19,7 +19,7 @@ class CategoryDataImportBusinessFactory extends SprykerCategoryDataImportBusines
     /**
      * @return \Spryker\Zed\DataImport\Business\Model\DataImporterInterface
      */
-    public function createPyzCategoryImporter(): DataImporterInterface
+    public function createCategoryImporter(): DataImporterInterface
     {
         $dataImporter = $this->getCsvDataImporterFromConfig($this->getConfig()->getCategoryDataImporterConfiguration());
 
@@ -31,7 +31,7 @@ class CategoryDataImportBusinessFactory extends SprykerCategoryDataImportBusines
                 CategoryWriterStep::KEY_META_TITLE,
                 CategoryWriterStep::KEY_META_DESCRIPTION,
                 CategoryWriterStep::KEY_META_KEYWORDS,
-                CategoryWriterStep::PYZ_KEY_CATEGORY_IMAGE_NAME,
+                CategoryWriterStep::KEY_CATEGORY_IMAGE_NAME,
             ]))
             ->addStep(new CategoryWriterStep($this->createCategoryRepository()));
 

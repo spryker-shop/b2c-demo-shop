@@ -101,7 +101,7 @@ class TestStateMachineHandlerPlugin extends AbstractPlugin implements StateMachi
      */
     public function itemStateUpdated(StateMachineItemTransfer $stateMachineItemTransfer): bool
     {
-         return $this->getFacade()->updatePyzItemState($stateMachineItemTransfer);
+         return $this->getFacade()->updateItemState($stateMachineItemTransfer);
     }
 
     /**
@@ -113,6 +113,6 @@ class TestStateMachineHandlerPlugin extends AbstractPlugin implements StateMachi
      */
     public function getStateMachineItemsByStateIds(array $stateIds = []): array
     {
-         return $this->getFacade()->getPyzExampleStateMachineItemsByStateIds($stateIds);
+         return $this->getFacade()->getExampleStateMachineItemsByStateIds($stateIds);
     }
 }

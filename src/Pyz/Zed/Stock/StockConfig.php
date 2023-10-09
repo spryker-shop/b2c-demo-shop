@@ -14,7 +14,7 @@ class StockConfig extends SprykerStockConfig
     /**
      * @return array<string, list<string>>
      */
-    public function getPyzStoreToWarehouseMapping(): array
+    public function getStoreToWarehouseMapping(): array
     {
         return [
             'DE' => [

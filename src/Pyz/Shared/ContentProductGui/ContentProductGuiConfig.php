@@ -14,38 +14,38 @@ class ContentProductGuiConfig extends SprykerContentProductGuiConfig
     /**
      * @var string
      */
-    protected const PYZ_WIDGET_TEMPLATE_IDENTIFIER_SLIDER = 'slider';
+    protected const WIDGET_TEMPLATE_IDENTIFIER_SLIDER = 'slider';
 
     /**
      * @var string
      */
-    protected const PYZ_WIDGET_TEMPLATE_IDENTIFIER_WITH_BUTTON = 'slider-with-button';
+    protected const WIDGET_TEMPLATE_IDENTIFIER_WITH_BUTTON = 'slider-with-button';
 
     /**
      * @var string
      */
-    protected const PYZ_WIDGET_TEMPLATE_IDENTIFIER_SLIDER_NOT_INCLUDE_GROUP = 'slider-not-include-group';
-
-    /**
-     * Content item banner default template name
-     *
-     * @var string
-     */
-    protected const PYZ_WIDGET_TEMPLATE_DISPLAY_NAME_SLIDER = 'content_product.template.slider';
+    protected const WIDGET_TEMPLATE_IDENTIFIER_SLIDER_NOT_INCLUDE_GROUP = 'slider-not-include-group';
 
     /**
      * Content item banner default template name
      *
      * @var string
      */
-    protected const PYZ_WIDGET_TEMPLATE_DISPLAY_NAME_SLIDER_WITH_BUTTON = 'content_product.template.slider_with_button';
+    protected const WIDGET_TEMPLATE_DISPLAY_NAME_SLIDER = 'content_product.template.slider';
 
     /**
      * Content item banner default template name
      *
      * @var string
      */
-    protected const PYZ_WIDGET_TEMPLATE_DISPLAY_NAME_SLIDER_NOT_INCLUDE_GROUP = 'content_product.template.slider_not_include_group';
+    protected const WIDGET_TEMPLATE_DISPLAY_NAME_SLIDER_WITH_BUTTON = 'content_product.template.slider_with_button';
+
+    /**
+     * Content item banner default template name
+     *
+     * @var string
+     */
+    protected const WIDGET_TEMPLATE_DISPLAY_NAME_SLIDER_NOT_INCLUDE_GROUP = 'content_product.template.slider_not_include_group';
 
     /**
      * @return array<string, string>
@@ -55,9 +55,9 @@ class ContentProductGuiConfig extends SprykerContentProductGuiConfig
         return array_merge(
             parent::getContentWidgetTemplates(),
             [
-                static::PYZ_WIDGET_TEMPLATE_IDENTIFIER_SLIDER => static::PYZ_WIDGET_TEMPLATE_DISPLAY_NAME_SLIDER,
-                static::PYZ_WIDGET_TEMPLATE_IDENTIFIER_WITH_BUTTON => static::PYZ_WIDGET_TEMPLATE_DISPLAY_NAME_SLIDER_WITH_BUTTON,
-                static::PYZ_WIDGET_TEMPLATE_IDENTIFIER_SLIDER_NOT_INCLUDE_GROUP => static::PYZ_WIDGET_TEMPLATE_DISPLAY_NAME_SLIDER_NOT_INCLUDE_GROUP,
+                static::WIDGET_TEMPLATE_IDENTIFIER_SLIDER => static::WIDGET_TEMPLATE_DISPLAY_NAME_SLIDER,
+                static::WIDGET_TEMPLATE_IDENTIFIER_WITH_BUTTON => static::WIDGET_TEMPLATE_DISPLAY_NAME_SLIDER_WITH_BUTTON,
+                static::WIDGET_TEMPLATE_IDENTIFIER_SLIDER_NOT_INCLUDE_GROUP => static::WIDGET_TEMPLATE_DISPLAY_NAME_SLIDER_NOT_INCLUDE_GROUP,
             ],
         );
     }
