@@ -27,9 +27,9 @@ class OmsFacade extends SprykerOmsFacade implements OmsFacadeInterface
      *
      * @return \Generated\Shared\Transfer\TimeoutProcessorTimeoutResponseTransfer
      */
-    public function calculatePyzInitiationTimeout(
+    public function calculateInitiationTimeout(
         TimeoutProcessorTimeoutRequestTransfer $timeoutProcessorTimeoutRequestTransfer,
     ): TimeoutProcessorTimeoutResponseTransfer {
-        return $this->getFactory()->createPyzInitiationTimeoutCalculator()->calculateTimeout($timeoutProcessorTimeoutRequestTransfer);
+        return $this->getFactory()->createInitiationTimeoutCalculator()->calculateTimeout($timeoutProcessorTimeoutRequestTransfer);
     }
 }

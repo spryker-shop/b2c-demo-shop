@@ -30,7 +30,7 @@ class SchedulerDependencyProvider extends SprykerSchedulerDependencyProvider
     protected function getSchedulerAdapterPlugins(): array
     {
         return [
-            SchedulerConfig::PYZ_SCHEDULER_JENKINS => new SchedulerJenkinsAdapterPlugin(),
+            SchedulerConfig::SCHEDULER_JENKINS => new SchedulerJenkinsAdapterPlugin(),
         ];
     }
 }

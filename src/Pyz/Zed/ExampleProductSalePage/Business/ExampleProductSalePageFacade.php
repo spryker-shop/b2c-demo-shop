@@ -17,10 +17,10 @@ class ExampleProductSalePageFacade extends SprykerProductFacade implements Examp
     /**
      * @return array<\Generated\Shared\Transfer\ProductLabelProductAbstractRelationsTransfer>
      */
-    public function findPyzProductLabelProductAbstractRelationChanges(): array
+    public function findProductLabelProductAbstractRelationChanges(): array
     {
         return $this->getFactory()
-            ->createPyzProductAbstractRelationReader()
+            ->createProductAbstractRelationReader()
             ->findProductLabelProductAbstractRelationChanges();
     }
 }

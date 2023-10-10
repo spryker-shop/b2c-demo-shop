@@ -17,6 +17,6 @@ class SearchHttpConfig extends SprykerSearchHttpConfig
      */
     public function getSearchHttpSynchronizationPoolName(): ?string
     {
-        return SynchronizationConfig::PYZ_DEFAULT_SYNCHRONIZATION_POOL_NAME;
+        return SynchronizationConfig::DEFAULT_SYNCHRONIZATION_POOL_NAME;
     }
 }

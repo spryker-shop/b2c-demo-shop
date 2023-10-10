@@ -15,27 +15,27 @@ class ExampleProductSalePageDependencyProvider extends AbstractBundleDependencyP
     /**
      * @var string
      */
-    public const PYZ_QUERY_CONTAINER_PRODUCT_LABEL = 'PYZ_QUERY_CONTAINER_PRODUCT_LABEL';
+    public const QUERY_CONTAINER_PRODUCT_LABEL = 'QUERY_CONTAINER_PRODUCT_LABEL';
 
     /**
      * @var string
      */
-    public const PYZ_QUERY_CONTAINER_PRODUCT = 'PYZ_QUERY_CONTAINER_PRODUCT';
+    public const QUERY_CONTAINER_PRODUCT = 'QUERY_CONTAINER_PRODUCT';
 
     /**
      * @var string
      */
-    public const PYZ_FACADE_CURRENCY = 'PYZ_FACADE_CURRENCY';
+    public const FACADE_CURRENCY = 'FACADE_CURRENCY';
 
     /**
      * @var string
      */
-    public const PYZ_FACADE_PRICE = 'PYZ_FACADE_PRICE';
+    public const FACADE_PRICE = 'FACADE_PRICE';
 
     /**
      * @var string
      */
-    public const PYZ_FACADE_STORE = 'PYZ_FACADE_STORE';
+    public const FACADE_STORE = 'FACADE_STORE';
 
     /**
      * @param \Spryker\Zed\Kernel\Container $container
@@ -46,8 +46,8 @@ class ExampleProductSalePageDependencyProvider extends AbstractBundleDependencyP
     {
         $container = parent::providePersistenceLayerDependencies($container);
 
-        $container = $this->addPyzProductLabelQueryContainer($container);
-        $container = $this->addPyzProductQueryContainer($container);
+        $container = $this->addProductLabelQueryContainer($container);
+        $container = $this->addProductQueryContainer($container);
 
         return $container;
     }
@@ -60,8 +60,8 @@ class ExampleProductSalePageDependencyProvider extends AbstractBundleDependencyP
     public function provideBusinessLayerDependencies(Container $container): Container
     {
         $container = parent::provideBusinessLayerDependencies($container);
-        $container = $this->addPyzCurrencyFacade($container);
-        $container = $this->addPyzPriceFacade($container);
+        $container = $this->addCurrencyFacade($container);
+        $container = $this->addPriceFacade($container);
         $container = $this->addStoreFacade($container);
 
         return $container;
@@ -72,9 +72,9 @@ class ExampleProductSalePageDependencyProvider extends AbstractBundleDependencyP
      *
      * @return \Spryker\Zed\Kernel\Container
      */
-    protected function addPyzProductLabelQueryContainer(Container $container): Container
+    protected function addProductLabelQueryContainer(Container $container): Container
     {
-        $container->set(static::PYZ_QUERY_CONTAINER_PRODUCT_LABEL, function (Container $container) {
+        $container->set(static::QUERY_CONTAINER_PRODUCT_LABEL, function (Container $container) {
             return $container->getLocator()->productLabel()->queryContainer();
         });
 
@@ -86,9 +86,9 @@ class ExampleProductSalePageDependencyProvider extends AbstractBundleDependencyP
      *
      * @return \Spryker\Zed\Kernel\Container
      */
-    protected function addPyzProductQueryContainer(Container $container): Container
+    protected function addProductQueryContainer(Container $container): Container
     {
-        $container->set(static::PYZ_QUERY_CONTAINER_PRODUCT, function (Container $container) {
+        $container->set(static::QUERY_CONTAINER_PRODUCT, function (Container $container) {
             return $container->getLocator()->product()->queryContainer();
         });
 
@@ -100,9 +100,9 @@ class ExampleProductSalePageDependencyProvider extends AbstractBundleDependencyP
      *
      * @return \Spryker\Zed\Kernel\Container
      */
-    protected function addPyzCurrencyFacade(Container $container): Container
+    protected function addCurrencyFacade(Container $container): Container
     {
-        $container->set(static::PYZ_FACADE_CURRENCY, function (Container $container) {
+        $container->set(static::FACADE_CURRENCY, function (Container $container) {
             return $container->getLocator()->currency()->facade();
         });
 
@@ -114,9 +114,9 @@ class ExampleProductSalePageDependencyProvider extends AbstractBundleDependencyP
      *
      * @return \Spryker\Zed\Kernel\Container
      */
-    protected function addPyzPriceFacade(Container $container): Container
+    protected function addPriceFacade(Container $container): Container
     {
-        $container->set(static::PYZ_FACADE_PRICE, function (Container $container) {
+        $container->set(static::FACADE_PRICE, function (Container $container) {
             return $container->getLocator()->price()->facade();
         });
 
@@ -130,7 +130,7 @@ class ExampleProductSalePageDependencyProvider extends AbstractBundleDependencyP
      */
     protected function addStoreFacade(Container $container): Container
     {
-        $container->set(static::PYZ_FACADE_STORE, function (Container $container) {
+        $container->set(static::FACADE_STORE, function (Container $container) {
             return $container->getLocator()->store()->facade();
         });
 
