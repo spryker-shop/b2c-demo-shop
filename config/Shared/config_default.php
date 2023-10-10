@@ -4,11 +4,7 @@ use Generated\Shared\Transfer\AddReviewsTransfer;
 use Generated\Shared\Transfer\AssetAddedTransfer;
 use Generated\Shared\Transfer\AssetDeletedTransfer;
 use Generated\Shared\Transfer\AssetUpdatedTransfer;
-use Generated\Shared\Transfer\ExportMerchantsTransfer;
 use Generated\Shared\Transfer\InitializeProductExportTransfer;
-use Generated\Shared\Transfer\MerchantCreatedTransfer;
-use Generated\Shared\Transfer\MerchantExportedTransfer;
-use Generated\Shared\Transfer\MerchantUpdatedTransfer;
 use Generated\Shared\Transfer\OrderStatusChangedTransfer;
 use Generated\Shared\Transfer\PaymentCancelReservationFailedTransfer;
 use Generated\Shared\Transfer\PaymentCancelReservationRequestedTransfer;
@@ -730,10 +726,6 @@ $config[MessageBrokerAwsConstants::MESSAGE_TO_CHANNEL_MAP] = [
     SearchEndpointRemovedTransfer::class => 'search-commands',
     AddReviewsTransfer::class => 'product-review-commands',
     OrderStatusChangedTransfer::class => 'order-events',
-    ExportMerchantsTransfer::class => 'merchant-commands',
-    MerchantExportedTransfer::class => 'merchant-events',
-    MerchantCreatedTransfer::class => 'merchant-events',
-    MerchantUpdatedTransfer::class => 'merchant-events',
 ];
 
 $config[MessageBrokerConstants::CHANNEL_TO_RECEIVER_TRANSPORT_MAP] = [

@@ -135,7 +135,6 @@ class PublisherDependencyProvider extends SprykerPublisherDependencyProvider
             $this->getAssetStoragePlugins(),
             $this->getCustomerStoragePlugins(),
             $this->getProductExportPlugins(),
-            $this->getMerchantExportPlugins(),
         );
     }
 
@@ -390,18 +389,6 @@ class PublisherDependencyProvider extends SprykerPublisherDependencyProvider
             new CurrencyStoreWritePublisherPlugin(),
             new CountryStoreWritePublisherPlugin(),
             new LocaleStoreWritePublisherPlugin(),
-        ];
-    }
-
-    /**
-     * @return array<\Spryker\Zed\PublisherExtension\Dependency\Plugin\PublisherPluginInterface>
-     */
-    protected function getMerchantExportPlugins(): array
-    {
-        return [
-            new MerchantExportedMessageBrokerPublisherPlugin(),
-            new MerchantCreatedMessageBrokerPublisherPlugin(),
-            new MerchantUpdatedMessageBrokerPublisherPlugin(),
         ];
     }
 }
