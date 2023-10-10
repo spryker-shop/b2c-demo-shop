@@ -4,7 +4,11 @@ use Generated\Shared\Transfer\AddReviewsTransfer;
 use Generated\Shared\Transfer\AssetAddedTransfer;
 use Generated\Shared\Transfer\AssetDeletedTransfer;
 use Generated\Shared\Transfer\AssetUpdatedTransfer;
+use Generated\Shared\Transfer\ExportMerchantsTransfer;
 use Generated\Shared\Transfer\InitializeProductExportTransfer;
+use Generated\Shared\Transfer\MerchantCreatedTransfer;
+use Generated\Shared\Transfer\MerchantExportedTransfer;
+use Generated\Shared\Transfer\MerchantUpdatedTransfer;
 use Generated\Shared\Transfer\OrderStatusChangedTransfer;
 use Generated\Shared\Transfer\PaymentCancelReservationFailedTransfer;
 use Generated\Shared\Transfer\PaymentCancelReservationRequestedTransfer;
@@ -68,6 +72,8 @@ use Spryker\Shared\OauthAuth0\OauthAuth0Constants;
 use Spryker\Shared\OauthClient\OauthClientConstants;
 use Spryker\Shared\OauthCryptography\OauthCryptographyConstants;
 use Spryker\Shared\Oms\OmsConstants;
+use Spryker\Shared\Payment\PaymentConstants;
+use Spryker\Shared\Product\ProductConstants;
 use Spryker\Shared\ProductConfiguration\ProductConfigurationConstants;
 use Spryker\Shared\ProductLabel\ProductLabelConstants;
 use Spryker\Shared\ProductManagement\ProductManagementConstants;
@@ -86,6 +92,7 @@ use Spryker\Shared\Scheduler\SchedulerConstants;
 use Spryker\Shared\SchedulerJenkins\SchedulerJenkinsConfig;
 use Spryker\Shared\SchedulerJenkins\SchedulerJenkinsConstants;
 use Spryker\Shared\SearchElasticsearch\SearchElasticsearchConstants;
+use Spryker\Shared\SearchHttp\SearchHttpConstants;
 use Spryker\Shared\SecurityBlocker\SecurityBlockerConstants;
 use Spryker\Shared\SecurityBlockerBackoffice\SecurityBlockerBackofficeConstants;
 use Spryker\Shared\SecurityBlockerStorefrontAgent\SecurityBlockerStorefrontAgentConstants;
@@ -687,9 +694,12 @@ $config[OauthAuth0Constants::AUTH0_CUSTOM_DOMAIN] = $aopAuthenticationConfigurat
 $config[OauthAuth0Constants::AUTH0_CLIENT_ID] = $aopAuthenticationConfiguration['AUTH0_CLIENT_ID'] ?? '';
 $config[OauthAuth0Constants::AUTH0_CLIENT_SECRET] = $aopAuthenticationConfiguration['AUTH0_CLIENT_SECRET'] ?? '';
 
-$config[MessageBrokerConstants::TENANT_IDENTIFIER]
+$config[SearchHttpConstants::TENANT_IDENTIFIER]
+    = $config[ProductConstants::TENANT_IDENTIFIER]
+    = $config[MessageBrokerConstants::TENANT_IDENTIFIER]
     = $config[MessageBrokerAwsConstants::CONSUMER_ID]
     = $config[OauthClientConstants::TENANT_IDENTIFIER]
+    = $config[PaymentConstants::TENANT_IDENTIFIER]
     = $config[AppCatalogGuiConstants::TENANT_IDENTIFIER]
     = getenv('SPRYKER_TENANT_IDENTIFIER') ?: '';
 
@@ -720,6 +730,10 @@ $config[MessageBrokerAwsConstants::MESSAGE_TO_CHANNEL_MAP] = [
     SearchEndpointRemovedTransfer::class => 'search-commands',
     AddReviewsTransfer::class => 'product-review-commands',
     OrderStatusChangedTransfer::class => 'order-events',
+    ExportMerchantsTransfer::class => 'merchant-commands',
+    MerchantExportedTransfer::class => 'merchant-events',
+    MerchantCreatedTransfer::class => 'merchant-events',
+    MerchantUpdatedTransfer::class => 'merchant-events',
 ];
 
 $config[MessageBrokerConstants::CHANNEL_TO_RECEIVER_TRANSPORT_MAP] = [

@@ -20,12 +20,15 @@ use Spryker\Shared\MessageBroker\MessageBrokerConstants;
 use Spryker\Shared\MessageBrokerAws\MessageBrokerAwsConstants;
 use Spryker\Shared\Newsletter\NewsletterConstants;
 use Spryker\Shared\OauthClient\OauthClientConstants;
+use Spryker\Shared\Payment\PaymentConstants;
+use Spryker\Shared\Product\ProductConstants;
 use Spryker\Shared\ProductManagement\ProductManagementConstants;
 use Spryker\Shared\Propel\PropelConstants;
 use Spryker\Shared\PropelOrm\PropelOrmConstants;
 use Spryker\Shared\Queue\QueueConfig;
 use Spryker\Shared\Queue\QueueConstants;
 use Spryker\Shared\Router\RouterConstants;
+use Spryker\Shared\SearchHttp\SearchHttpConstants;
 use Spryker\Shared\Session\SessionConstants;
 use Spryker\Shared\Testify\TestifyConstants;
 use Spryker\Shared\WebProfiler\WebProfilerConstants;
@@ -180,8 +183,11 @@ $config[GlueStorefrontApiApplicationConstants::GLUE_STOREFRONT_API_HOST] = $spry
 //-----------------------------------------------------------------------------
 //----------------------------------- ACP -------------------------------------
 //-----------------------------------------------------------------------------
-$config[MessageBrokerConstants::TENANT_IDENTIFIER]
+$config[SearchHttpConstants::TENANT_IDENTIFIER]
+    = $config[ProductConstants::TENANT_IDENTIFIER]
+    = $config[MessageBrokerConstants::TENANT_IDENTIFIER]
     = $config[MessageBrokerAwsConstants::CONSUMER_ID]
     = $config[OauthClientConstants::TENANT_IDENTIFIER]
+    = $config[PaymentConstants::TENANT_IDENTIFIER]
     = $config[AppCatalogGuiConstants::TENANT_IDENTIFIER]
     = getenv('SPRYKER_TENANT_IDENTIFIER') ?: 'tenant-identifier';
