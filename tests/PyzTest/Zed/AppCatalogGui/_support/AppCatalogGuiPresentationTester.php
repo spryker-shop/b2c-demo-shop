@@ -24,16 +24,18 @@ use Codeception\Actor;
  * @method void pause()
  *
  * @SuppressWarnings(\PyzTest\Zed\AppCatalogGui\PHPMD)
+ *
+ * @method \Spryker\Zed\AppCatalogGui\AppCatalogGuiConfig getModuleConfig()
  */
-class AppCatalogGuiCommunicationTester extends Actor
+class AppCatalogGuiPresentationTester extends Actor
 {
-    use _generated\AppCatalogGuiCommunicationTesterActions;
+    use _generated\AppCatalogGuiPresentationTesterActions;
 
     /**
-     * @return bool
+     * @return string
      */
-    public function seeThatDynamicStoreEnabled(): bool
+    public function getLocale(): string
     {
-        return (bool)getenv('SPRYKER_DYNAMIC_STORE_MODE');
+        return mb_substr($this->getLocator()->locale()->facade()->getCurrentLocaleName(), 0, 2);
     }
 }
