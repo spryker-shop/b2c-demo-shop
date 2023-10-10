@@ -8,7 +8,6 @@
 namespace Pyz\Zed\MessageBroker;
 
 use Spryker\Zed\Asset\Communication\Plugin\MessageBroker\AssetMessageHandlerPlugin;
-use Spryker\Zed\Merchant\Communication\Plugin\MessageBroker\MerchantMessageHandlerPlugin;
 use Spryker\Zed\MessageBroker\Communication\Plugin\MessageBroker\CorrelationIdMessageAttributeProviderPlugin;
 use Spryker\Zed\MessageBroker\Communication\Plugin\MessageBroker\TenantActorMessageAttributeProviderPlugin;
 use Spryker\Zed\MessageBroker\Communication\Plugin\MessageBroker\TimestampMessageAttributeProviderPlugin;
@@ -73,7 +72,6 @@ class MessageBrokerDependencyProvider extends SprykerMessageBrokerDependencyProv
             new ProductExportMessageHandlerPlugin(),
             new SearchEndpointMessageHandlerPlugin(),
             new ProductReviewAddReviewsMessageHandlerPlugin(),
-            new MerchantMessageHandlerPlugin(),
         ];
     }
 
