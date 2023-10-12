@@ -8,6 +8,7 @@
 namespace PyzTest\Yves\Application;
 
 use Codeception\Actor;
+use Codeception\Scenario;
 
 /**
  * Inherited Methods
@@ -25,11 +26,17 @@ use Codeception\Actor;
  *
  * @SuppressWarnings(\PyzTest\Yves\Application\PHPMD)
  */
-class ApplicationControllerTester extends Actor
+class ApplicationPresentationTester extends Actor
 {
-    use _generated\ApplicationControllerTesterActions;
+    use _generated\ApplicationPresentationTesterActions;
 
-   /**
-    * Define custom actions here
-    */
+    /**
+     * @param \Codeception\Scenario $scenario
+     */
+    public function __construct(Scenario $scenario)
+    {
+        parent::__construct($scenario);
+
+        $this->amYves();
+    }
 }
