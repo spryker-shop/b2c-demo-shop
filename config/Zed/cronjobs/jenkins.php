@@ -8,6 +8,10 @@
  */
 
 /* ProductValidity */
+
+use Spryker\Shared\Config\Config;
+use Spryker\Shared\MessageBroker\MessageBrokerConstants;
+
 $jobs[] = [
     'name' => 'check-product-validity',
     'command' => '$PHP_BIN vendor/bin/console product:check-validity',
@@ -153,7 +157,7 @@ $jobs[] = [
 ];
 
 /* Message broker */
-if (\Spryker\Shared\Config\Config::get(\Spryker\Shared\MessageBroker\MessageBrokerConstants::IS_ENABLED)) {
+if (Config::get(MessageBrokerConstants::IS_ENABLED)) {
     $jobs[] = [
         'name' => 'message-broker-consume-channels',
         'command' => '$PHP_BIN vendor/bin/console message-broker:consume --time-limit=15 --sleep=5',
