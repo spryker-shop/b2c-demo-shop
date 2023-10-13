@@ -144,11 +144,11 @@ jobs:
               run: vendor/bin/phpstan analyze -l 6 -c phpstan.neon src/
 
             - name: Run Evaluator for main branch
-              run: vendor/bin/evaluator evaluate --exclude-checkers=NPM_CHECKER --format=compact
+              run: vendor/bin/evaluator evaluate --format=compact
               if: github.ref == 'refs/heads/master'
 
             - name: Run Evaluator for feature branches
-              run: vendor/bin/evaluator evaluate --exclude-checkers=NPM_CHECKER,SPRYKER_DEV_PACKAGES_CHECKER --format=compact
+              run: vendor/bin/evaluator evaluate --exclude-checkers=SPRYKER_DEV_PACKAGES_CHECKER --format=compact
               if: github.ref != 'refs/heads/master'
 
     php-81-mariadb-glue-alpine:
