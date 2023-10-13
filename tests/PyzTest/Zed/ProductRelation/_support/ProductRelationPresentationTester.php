@@ -9,6 +9,8 @@ namespace PyzTest\Zed\ProductRelation;
 
 use Codeception\Actor;
 use Codeception\Scenario;
+use Orm\Zed\ProductRelation\Persistence\SpyProductRelation;
+use Orm\Zed\ProductRelation\Persistence\SpyProductRelationQuery;
 
 /**
  * Inherited Methods
@@ -182,5 +184,31 @@ class ProductRelationPresentationTester extends Actor
         $this->click(static::ACTIVATE_RELATION_BUTTON_SELECTOR);
 
         return $this;
+    }
+
+    /**
+     * @param string $productRelationKey
+     *
+     * @return void
+     */
+    public function cleanUpProductRelation(string $productRelationKey): void
+    {
+        $productRelationEntity = $this->findProductRelationByProductRelationKey($productRelationKey);
+        if (!$productRelationEntity) {
+            return;
+        }
+
+        $productRelationEntity->getSpyProductRelationProductAbstracts()->delete();
+        $productRelationEntity->delete();
+    }
+
+    /**
+     * @param string $productRelationKey
+     *
+     * @return \Orm\Zed\ProductRelation\Persistence\SpyProductRelation|null
+     */
+    protected function findProductRelationByProductRelationKey(string $productRelationKey): ?SpyProductRelation
+    {
+        return SpyProductRelationQuery::create()->findOneByProductRelationKey($productRelationKey);
     }
 }
