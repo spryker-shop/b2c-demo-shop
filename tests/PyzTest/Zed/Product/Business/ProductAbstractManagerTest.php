@@ -83,8 +83,7 @@ class ProductAbstractManagerTest extends ProductTestAbstract
             ->findOne();
 
         $this->assertNotNull($createdProductEntity);
-
-        $this->assertEquals($productAbstractTransfer->getSku(), $createdProductEntity->getSku());
+        $this->assertSame($productAbstractTransfer->getSku(), $createdProductEntity->getSku());
     }
 
     /**
@@ -100,12 +99,12 @@ class ProductAbstractManagerTest extends ProductTestAbstract
             ->findOne();
 
         $this->assertNotNull($updatedProductEntity);
-        $this->assertEquals($this->productAbstractTransfer->getSku(), $updatedProductEntity->getSku());
+        $this->assertSame($this->productAbstractTransfer->getSku(), $updatedProductEntity->getSku());
 
         foreach ($productAbstractTransfer->getLocalizedAttributes() as $localizedAttribute) {
             $expectedProductName = self::UPDATED_PRODUCT_ABSTRACT_NAME[$localizedAttribute->getLocale()->getLocaleName()];
 
-            $this->assertEquals($expectedProductName, $localizedAttribute->getName());
+            $this->assertSame($expectedProductName, $localizedAttribute->getName());
         }
     }
 
@@ -149,7 +148,7 @@ class ProductAbstractManagerTest extends ProductTestAbstract
         $imageSet = $imageSetCollection[0];
         $this->assertInstanceOf(ProductImageSetTransfer::class, $imageSet);
         $this->assertNotNull($imageSet->getIdProductImageSet());
-        $this->assertEquals($productAbstractTransfer->getIdProductAbstract(), $imageSet->getIdProductAbstract());
+        $this->assertSame($productAbstractTransfer->getIdProductAbstract(), $imageSet->getIdProductAbstract());
 
         $productImageCollection = (array)$imageSet->getProductImages();
         $this->assertNotEmpty($imageSetCollection);
@@ -157,7 +156,7 @@ class ProductAbstractManagerTest extends ProductTestAbstract
         /** @var \Generated\Shared\Transfer\ProductImageTransfer $productImage */
         $productImage = $productImageCollection[0];
         $this->assertInstanceOf(ProductImageTransfer::class, $productImage);
-        $this->assertEquals(self::IMAGE_URL_LARGE, $productImage->getExternalUrlLarge());
-        $this->assertEquals(self::IMAGE_URL_SMALL, $productImage->getExternalUrlSmall());
+        $this->assertSame(self::IMAGE_URL_LARGE, $productImage->getExternalUrlLarge());
+        $this->assertSame(self::IMAGE_URL_SMALL, $productImage->getExternalUrlSmall());
     }
 }
