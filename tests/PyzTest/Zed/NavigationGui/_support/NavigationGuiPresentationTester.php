@@ -10,7 +10,6 @@ namespace PyzTest\Zed\NavigationGui;
 use Codeception\Actor;
 use Codeception\Scenario;
 use Exception;
-use Generated\Shared\Transfer\NavigationTransfer;
 use Generated\Shared\Transfer\NavigationTreeNodeTransfer;
 use Generated\Shared\Transfer\NavigationTreeTransfer;
 use Orm\Zed\Navigation\Persistence\SpyNavigation;
@@ -527,7 +526,9 @@ class NavigationGuiPresentationTester extends Actor
      */
     public function cleanUpNavigationTree(NavigationTreeTransfer $navigationTreeTransfer): void
     {
-        $navigationEntity = $this->findNavigationByName($navigationTreeTransfer->getNavigation());
+        $navigationEntity = $this->findNavigationByIdNavigation(
+            $navigationTreeTransfer->getNavigationOrFail()->getIdNavigationOrFail(),
+        );
 
         if (!$navigationEntity) {
             return;
@@ -544,22 +545,13 @@ class NavigationGuiPresentationTester extends Actor
     }
 
     /**
-     * @param \Generated\Shared\Transfer\NavigationTransfer $navigationTransfer
+     * @param int $idNavigation
      *
      * @return \Orm\Zed\Navigation\Persistence\SpyNavigation|null
      */
-    protected function findNavigationByName(NavigationTransfer $navigationTransfer): ?SpyNavigation
+    protected function findNavigationByIdNavigation(int $idNavigation): ?SpyNavigation
     {
-        $navigationEntity = (new SpyNavigationQuery())
-            ->joinWithSpyNavigationNode()
-                ->useSpyNavigationNodeQuery()
-                    ->joinWithSpyNavigationNodeLocalizedAttributes()
-                ->endUse()
-            ->findByName(
-                $navigationTransfer->getName(),
-            )->getFirst();
-
-        return $navigationEntity;
+        return (new SpyNavigationQuery())->findOneByIdNavigation($idNavigation);
     }
 
     /**

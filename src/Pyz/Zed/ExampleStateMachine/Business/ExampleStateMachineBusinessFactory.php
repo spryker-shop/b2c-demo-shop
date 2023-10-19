@@ -19,7 +19,7 @@ class ExampleStateMachineBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \Pyz\Zed\ExampleStateMachine\Business\Model\ExampleStateMachineItemSaver
      */
-    public function createPyzStateMachineSaver(): ExampleStateMachineItemSaver
+    public function createStateMachineSaver(): ExampleStateMachineItemSaver
     {
         return new ExampleStateMachineItemSaver($this->getQueryContainer());
     }
@@ -27,7 +27,7 @@ class ExampleStateMachineBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \Pyz\Zed\ExampleStateMachine\Business\Model\ExampleStateMachineItemReader
      */
-    public function createPyzExampleStateMachineItemReader(): ExampleStateMachineItemReader
+    public function createExampleStateMachineItemReader(): ExampleStateMachineItemReader
     {
         return new ExampleStateMachineItemReader($this->getQueryContainer());
     }

@@ -28,9 +28,6 @@ sections:
         generate-scope-collection-file:
             command: 'vendor/bin/console oauth:scope-collection-file:generate'
 
-        controller-cache-warmup:
-            command: 'vendor/bin/glue glue-api:controller:cache:warm-up'
-
     build-development:
         generate-transfers:
             command: 'vendor/bin/console transfer:generate'
@@ -40,9 +37,6 @@ sections:
 
         rest-api-generate-documentation:
             command: 'vendor/bin/console rest-api:generate:documentation'
-
-        api-generate-documentation:
-            command: 'vendor/bin/glue api:generate:documentation'
 
     init-storages-per-store:
         queue-setup:
@@ -78,3 +72,13 @@ sections:
 
         update-product-labels:
             command: 'vendor/bin/console product-label:relations:update'
+
+        publish-and-sync:
+            command: 'vendor/bin/console queue:worker:start --stop-when-empty'
+            timeout: 2000
+
+        controller-cache-warmup:
+            command: 'vendor/bin/glue glue-api:controller:cache:warm-up'
+
+        api-generate-documentation:
+            command: 'vendor/bin/glue api:generate:documentation'

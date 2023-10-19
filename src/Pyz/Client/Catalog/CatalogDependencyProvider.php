@@ -7,8 +7,6 @@
 
 namespace Pyz\Client\Catalog;
 
-use Generated\Shared\Transfer\SearchContextTransfer;
-use Generated\Shared\Transfer\SearchHttpSearchContextTransfer;
 use Spryker\Client\Catalog\CatalogDependencyProvider as SprykerCatalogDependencyProvider;
 use Spryker\Client\Catalog\Plugin\ConfigTransferBuilder\AscendingNameSortConfigTransferBuilderPlugin;
 use Spryker\Client\Catalog\Plugin\ConfigTransferBuilder\CategoryFacetConfigTransferBuilderPlugin;
@@ -25,6 +23,7 @@ use Spryker\Client\CatalogPriceProductConnector\Plugin\ConfigTransferBuilder\Pri
 use Spryker\Client\CatalogPriceProductConnector\Plugin\CurrencyAwareCatalogSearchResultFormatterPlugin;
 use Spryker\Client\CatalogPriceProductConnector\Plugin\CurrencyAwareSuggestionByTypeResultFormatter;
 use Spryker\Client\CatalogPriceProductConnector\Plugin\ProductPriceQueryExpanderPlugin;
+use Spryker\Client\CategoryStorage\Plugin\Catalog\ResultFormatter\CategorySuggestionsSearchHttpResultFormatterPlugin;
 use Spryker\Client\CategoryStorage\Plugin\Catalog\ResultFormatter\CategoryTreeFilterSearchHttpResultFormatterPlugin;
 use Spryker\Client\CategoryStorage\Plugin\Elasticsearch\ResultFormatter\CategoryTreeFilterPageSearchResultFormatterPlugin;
 use Spryker\Client\ProductLabelStorage\Plugin\Catalog\ProductLabelSearchHttpFacetConfigTransferBuilderPlugin;
@@ -50,14 +49,20 @@ use Spryker\Client\SearchElasticsearch\Plugin\ResultFormatter\PaginatedResultFor
 use Spryker\Client\SearchElasticsearch\Plugin\ResultFormatter\SortedResultFormatterPlugin;
 use Spryker\Client\SearchElasticsearch\Plugin\ResultFormatter\SpellingSuggestionResultFormatterPlugin;
 use Spryker\Client\SearchElasticsearch\Plugin\ResultFormatter\SuggestionByTypeResultFormatterPlugin;
+use Spryker\Client\SearchHttp\Plugin\Catalog\Query\ProductConcreteSearchHttpQueryPlugin;
 use Spryker\Client\SearchHttp\Plugin\Catalog\Query\SearchHttpQueryPlugin;
+use Spryker\Client\SearchHttp\Plugin\Catalog\Query\SuggestionSearchHttpQueryPlugin;
 use Spryker\Client\SearchHttp\Plugin\Catalog\QueryExpander\BasicSearchHttpQueryExpanderPlugin;
 use Spryker\Client\SearchHttp\Plugin\Catalog\QueryExpander\FacetSearchHttpQueryExpanderPlugin;
+use Spryker\Client\SearchHttp\Plugin\Catalog\ResultFormatter\CompletionSearchHttpResultFormatterPlugin;
 use Spryker\Client\SearchHttp\Plugin\Catalog\ResultFormatter\FacetSearchHttpResultFormatterPlugin;
 use Spryker\Client\SearchHttp\Plugin\Catalog\ResultFormatter\PaginationSearchHttpResultFormatterPlugin;
 use Spryker\Client\SearchHttp\Plugin\Catalog\ResultFormatter\ProductSearchHttpResultFormatterPlugin;
+use Spryker\Client\SearchHttp\Plugin\Catalog\ResultFormatter\ProductSuggestionSearchHttpResultFormatterPlugin;
 use Spryker\Client\SearchHttp\Plugin\Catalog\ResultFormatter\SortSearchHttpResultFormatterPlugin;
 use Spryker\Client\SearchHttp\Plugin\Catalog\ResultFormatter\SpellingSuggestionSearchHttpResultFormatterPlugin;
+use Spryker\Client\SearchHttp\Plugin\Search\ProductConcreteCatalogSearchHttpResultFormatterPlugin;
+use Spryker\Client\SearchHttp\Plugin\Search\SearchHttpSearchResultCountPlugin;
 use Spryker\Shared\SearchHttp\SearchHttpConfig;
 
 class CatalogDependencyProvider extends SprykerCatalogDependencyProvider
@@ -234,12 +239,60 @@ class CatalogDependencyProvider extends SprykerCatalogDependencyProvider
      */
     protected function createCatalogSearchQueryPluginVariants(): array
     {
-        $searchContextTransfer = (new SearchContextTransfer())
-            ->setSourceIdentifier(SearchHttpConfig::SOURCE_IDENTIFIER_PRODUCT)
-            ->setSearchHttpContext(new SearchHttpSearchContextTransfer());
-
         return [
-            new SearchHttpQueryPlugin($searchContextTransfer),
+            new SearchHttpQueryPlugin(),
+        ];
+    }
+
+    /**
+     * @phpstan-return array<\Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface>
+     *
+     * @return array<\Spryker\Client\Search\Dependency\Plugin\QueryInterface>
+     */
+    protected function createSuggestionQueryPluginVariants(): array
+    {
+        return [
+            new SuggestionSearchHttpQueryPlugin(),
+        ];
+    }
+
+    /**
+     * @return array<string, array<\Spryker\Client\SearchExtension\Dependency\Plugin\ResultFormatterPluginInterface>>
+     */
+    protected function createProductConcreteCatalogSearchResultFormatterPluginVariants(): array
+    {
+        return [
+            SearchHttpConfig::TYPE_PRODUCT_CONCRETE_SEARCH_HTTP => [
+                new ProductConcreteCatalogSearchHttpResultFormatterPlugin(),
+            ],
+        ];
+    }
+
+    /**
+     * @return array<string, array<\Spryker\Client\SearchExtension\Dependency\Plugin\ResultFormatterPluginInterface>>
+     */
+    protected function createSuggestionResultFormatterPluginVariants(): array
+    {
+        return [
+            SearchHttpConfig::TYPE_SUGGESTION_SEARCH_HTTP => [
+                new CompletionSearchHttpResultFormatterPlugin(),
+                new CurrencyAwareCatalogSearchHttpResultFormatterPlugin(
+                    new ProductSuggestionSearchHttpResultFormatterPlugin(),
+                ),
+                new CategorySuggestionsSearchHttpResultFormatterPlugin(),
+            ],
+        ];
+    }
+
+    /**
+     * @phpstan-return array<\Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface>
+     *
+     * @return array<\Spryker\Client\Search\Dependency\Plugin\QueryInterface>
+     */
+    protected function createProductConcreteCatalogSearchQueryPluginVariants(): array
+    {
+        return [
+            new ProductConcreteSearchHttpQueryPlugin(),
         ];
     }
 
@@ -273,6 +326,18 @@ class CatalogDependencyProvider extends SprykerCatalogDependencyProvider
                 new FacetSearchHttpResultFormatterPlugin(),
                 new CategoryTreeFilterSearchHttpResultFormatterPlugin(),
             ],
+        ];
+    }
+
+    /**
+     * @api
+     *
+     * @return list<\Spryker\Client\SearchExtension\Dependency\Plugin\SearchResultCountPluginInterface>
+     */
+    protected function getSearchResultCountPlugins(): array
+    {
+        return [
+            new SearchHttpSearchResultCountPlugin(),
         ];
     }
 }

@@ -148,6 +148,13 @@ $jobs[] = [
     'enable' => true,
 ];
 
+$jobs[] = [
+    'name' => 'glue-api-generate-documentation',
+    'command' => '$PHP_BIN vendor/bin/glue api:generate:documentation --invalidated-after-interval 90sec',
+    'schedule' => '*/1 * * * *',
+    'enable' => true,
+];
+
 /* Message broker */
 if (Config::get(MessageBrokerAwsConstants::SQS_RECEIVER_CONFIG)) {
     $jobs[] = [
@@ -157,6 +164,21 @@ if (Config::get(MessageBrokerAwsConstants::SQS_RECEIVER_CONFIG)) {
         'enable' => true,
     ];
 }
+
+/* Push notification */
+$jobs[] = [
+    'name' => 'delete-expired-push-notification-subscriptions',
+    'command' => '$PHP_BIN vendor/bin/console push-notification:delete-expired-push-notification-subscriptions',
+    'schedule' => '0 0 * * 0',
+    'enable' => true,
+];
+
+$jobs[] = [
+    'name' => 'send-push-notifications',
+    'command' => '$PHP_BIN vendor/bin/console push-notification:send-push-notifications',
+    'schedule' => '* * * * *',
+    'enable' => true,
+];
 
 if (getenv('SPRYKER_CURRENT_REGION')) {
     foreach ($jobs as $job) {

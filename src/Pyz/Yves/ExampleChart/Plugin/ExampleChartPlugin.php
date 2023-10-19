@@ -19,14 +19,14 @@ class ExampleChartPlugin extends AbstractPlugin implements ChartPluginInterface,
     /**
      * @var string
      */
-    public const PYZ_TEST_CHART = 'testChart';
+    public const TEST_CHART = 'testChart';
 
     /**
      * @return string
      */
     public function getName(): string
     {
-        return static::PYZ_TEST_CHART;
+        return static::TEST_CHART;
     }
 
     /**

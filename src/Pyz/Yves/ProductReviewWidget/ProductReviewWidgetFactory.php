@@ -19,7 +19,7 @@ class ProductReviewWidgetFactory extends SprykerShopProductReviewWidgetFactory
      *
      * @return \Symfony\Component\Form\FormInterface
      */
-    public function createPyzProductReviewForm($idProductAbstract): FormInterface
+    public function createProductReviewForm($idProductAbstract): FormInterface
     {
         $dataProvider = $this->createProductReviewFormDataProvider();
         $form = $this->getFormFactory()->create(
@@ -34,8 +34,8 @@ class ProductReviewWidgetFactory extends SprykerShopProductReviewWidgetFactory
     /**
      * @return \Spryker\Client\GlossaryStorage\GlossaryStorageClient
      */
-    public function getPyzGlossaryClient(): GlossaryStorageClient
+    public function getGlossaryClient(): GlossaryStorageClient
     {
-        return $this->getProvidedDependency(ProductReviewWidgetDependencyProvider::PYZ_CLIENT_GLOSSARY_STORAGE);
+        return $this->getProvidedDependency(ProductReviewWidgetDependencyProvider::CLIENT_GLOSSARY_STORAGE);
     }
 }

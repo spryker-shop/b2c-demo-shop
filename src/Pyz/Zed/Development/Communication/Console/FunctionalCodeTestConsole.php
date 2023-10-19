@@ -23,5 +23,5 @@ class FunctionalCodeTestConsole extends CodeTestConsole
     /**
      * @var string
      */
-    protected const PYZ_CODECEPTION_CONFIG_FILE_NAME = 'codeception.functional.yml';
+    protected const CODECEPTION_CONFIG_FILE_NAME = 'codeception.functional.yml';
 }

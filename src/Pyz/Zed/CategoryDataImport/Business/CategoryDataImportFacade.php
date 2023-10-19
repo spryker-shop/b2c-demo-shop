@@ -28,6 +28,6 @@ class CategoryDataImportFacade extends SprykerCategoryDataImportFacade implement
      */
     public function import(?DataImporterConfigurationTransfer $dataImporterConfigurationTransfer = null): DataImporterReportTransfer
     {
-        return $this->getFactory()->createPyzCategoryImporter()->import($dataImporterConfigurationTransfer);
+        return $this->getFactory()->createCategoryImporter()->import($dataImporterConfigurationTransfer);
     }
 }

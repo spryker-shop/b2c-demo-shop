@@ -12,25 +12,25 @@ use SprykerShop\Yves\ContentNavigationWidget\ContentNavigationWidgetConfig as Sp
 class ContentNavigationWidgetConfig extends SprykerContentNavigationWidget
 {
     /**
-     * @uses \Pyz\Shared\ContentNavigation\ContentNavigationConfig::PYZ_WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_HEADER
+     * @uses \Pyz\Shared\ContentNavigation\ContentNavigationConfig::WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_HEADER
      *
      * @var string
      */
-    protected const PYZ_WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_HEADER = 'navigation-header';
+    protected const WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_HEADER = 'navigation-header';
 
     /**
-     * @uses \Pyz\Shared\ContentNavigation\ContentNavigationConfig::PYZ_WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_HEADER_MOBILE
+     * @uses \Pyz\Shared\ContentNavigation\ContentNavigationConfig::WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_HEADER_MOBILE
      *
      * @var string
      */
-    protected const PYZ_WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_HEADER_MOBILE = 'navigation-header-mobile';
+    protected const WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_HEADER_MOBILE = 'navigation-header-mobile';
 
     /**
-     * @uses \Pyz\Shared\ContentNavigation\ContentNavigationConfig::PYZ_WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_FOOTER
+     * @uses \Pyz\Shared\ContentNavigation\ContentNavigationConfig::WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_FOOTER
      *
      * @var string
      */
-    protected const PYZ_WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_FOOTER = 'navigation-footer';
+    protected const WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_FOOTER = 'navigation-footer';
 
     /**
      * @api
@@ -41,9 +41,9 @@ class ContentNavigationWidgetConfig extends SprykerContentNavigationWidget
     {
         $availableTemplates = parent::getAvailableTemplateList();
         $availableTemplates += [
-            static::PYZ_WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_HEADER => '@ContentNavigationWidget/views/navigation-header/navigation-header.twig',
-            static::PYZ_WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_HEADER_MOBILE => '@ContentNavigationWidget/views/navigation-header-mobile/navigation-header-mobile.twig',
-            static::PYZ_WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_FOOTER => '@ContentNavigationWidget/views/navigation-footer/navigation-footer.twig',
+            static::WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_HEADER => '@ContentNavigationWidget/views/navigation-header/navigation-header.twig',
+            static::WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_HEADER_MOBILE => '@ContentNavigationWidget/views/navigation-header-mobile/navigation-header-mobile.twig',
+            static::WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_FOOTER => '@ContentNavigationWidget/views/navigation-footer/navigation-footer.twig',
         ];
 
         return $availableTemplates;

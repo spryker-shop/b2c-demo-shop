@@ -96,9 +96,9 @@ class ProductAbstractRelationReader implements ProductAbstractRelationReaderInte
      */
     protected function getProductLabelNewEntity(): SpyProductLabel
     {
-        $labelNewName = $this->productSaleConfig->getPyzLabelSaleName();
+        $labelNewName = $this->productSaleConfig->getLabelSaleName();
         $productLabelNewEntity = $this->productSaleQueryContainer
-            ->queryPyzProductLabelByName($labelNewName)
+            ->queryProductLabelByName($labelNewName)
             ->findOne();
 
         if (!$productLabelNewEntity) {
@@ -121,7 +121,7 @@ class ProductAbstractRelationReader implements ProductAbstractRelationReaderInte
         $relations = [];
 
         $productLabelProductAbstractEntities = $this->productSaleQueryContainer
-            ->queryPyzRelationsBecomingInactive(
+            ->queryRelationsBecomingInactive(
                 $productLabelEntity->getIdProductLabel(),
                 $this->priceFacade->getDefaultPriceMode(),
             )
@@ -150,7 +150,7 @@ class ProductAbstractRelationReader implements ProductAbstractRelationReaderInte
         ))->getIdCurrency();
 
         $productAbstractEntities = $this->productSaleQueryContainer
-            ->queryPyzRelationsBecomingActive(
+            ->queryRelationsBecomingActive(
                 $productLabelEntity->getIdProductLabel(),
                 $storeTransfer->getIdStore(),
                 $currencyId,

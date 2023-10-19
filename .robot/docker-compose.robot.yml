@@ -1,0 +1,20 @@
+version: '3.7'
+
+services:
+    robot-framework:
+        build:
+            context: ./.robot
+            dockerfile: Dockerfile
+        networks:
+            - private
+        env_file:
+            - ${DEPLOYMENT_PATH}/env/backoffice_eu.env # depends on application setup
+        labels:
+            'spryker.app.name': robot-framework
+            'spryker.app.type': robot-framework
+            'spryker.project': ${SPRYKER_DOCKER_PREFIX}:${SPRYKER_DOCKER_TAG}
+        volumes:
+            - ./vendor/spryker/robotframework-suite-tests:/opt/robotframework:rw
+            - ./.robot/results:/opt/robotframework/results:rw
+networks:
+    private:
