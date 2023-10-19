@@ -11,7 +11,7 @@ Spryker B2C Demo Shop is a collection of Spryker B2C-specific features. It suits
 
 This section describes how to get started with the B2C Demo Shop quickly.
 
-For detailed installation instructions, see [Installing Spryker with Docker](https://docs.spryker.com/docs/installing-spryker-with-docker) or [Installing with Development Virtual Machine](https://docs.spryker.com/docs/dev-getting-started#installing-spryker-with-development-virtual-machine).
+For detailed installation instructions, see [Installing Spryker](https://docs.spryker.com/docs/scos/dev/set-up-spryker-locally/install-spryker/install-spryker.html).
 
 ### Prerequisites
 
@@ -167,11 +167,11 @@ docker/sdk up --build --assets --data
 
 ## Installation of B2C Demo Shop with Docker
 
-For detailed installation instructions of Spryker with Docker, see [Installing Spryker with Docker](https://docs.spryker.com/docs/installing-spryker-with-docker).
+For detailed installation instructions of Spryker with Docker, see [Installing Spryker](https://docs.spryker.com/docs/scos/dev/set-up-spryker-locally/install-spryker/install-spryker.html).
 
 ## Glue API reference
 
-See Glue API reference at [REST API reference](https://docs.spryker.com/docs/rest-api-reference#/rest-api-reference).
+See Glue API reference at [REST API reference](https://docs.spryker.com/docs/scos/dev/glue-api-guides/202307.0/decoupled-glue-api.html).
 
 ## Contributing to the repository
 
