@@ -55,7 +55,7 @@ jobs:
             - name: Run Tests
               run: |
                   cd robotframework-tests
-                  robot -v env:api_b2c --exclude skip-due-to-issueORskip-due-to-refactoring -d results -s tests.api.b2c.glue .
+                  robot -v env:api_b2c --exclude skip-due-to-issueORskip-due-to-refactoring -d results -s tests.api.b2c .
             - name: Upload artifacts
               if: always()
               run: |
