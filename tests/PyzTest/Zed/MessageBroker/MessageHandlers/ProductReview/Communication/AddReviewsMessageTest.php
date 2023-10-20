@@ -8,6 +8,7 @@
 namespace PyzTest\Zed\MessageBroker\MessageHandlers\ProductReview\Communication;
 
 use Codeception\Test\Unit;
+use Generated\Shared\Transfer\MessageAttributesTransfer;
 use PyzTest\Zed\MessageBroker\ProductReviewCommunicationTester;
 
 /**
@@ -35,16 +36,24 @@ class AddReviewsMessageTest extends Unit
     public function testAddReviewsMessageIsSuccessfullyHandled(): void
     {
         // Arrange
-        $channelName = 'product-review-commands';
         $addReviewsTransfer = $this->tester->haveAddReviewTransferWithValidProductAndLocale();
+
+        if (!$this->tester->isDynamicStoreEnabled()) {
+            $storeReference = 'dev-DE';
+            $storeTransfer = $this->tester->getAllowedStore();
+            $this->tester->setStoreReferenceData([$storeTransfer->getName() => $storeReference]);
+
+            $addReviewsTransfer->setMessageAttributes(
+                (new MessageAttributesTransfer())->setStoreReference($storeReference),
+            );
+        }
 
         $reviewsTransfer = $addReviewsTransfer->getReviews()->getIterator()->current();
 
         // Act
-        $this->tester->setupMessageBroker($addReviewsTransfer::class, $channelName);
         $messageBrokerFacade = $this->tester->getLocator()->messageBroker()->facade();
         $messageBrokerFacade->sendMessage($addReviewsTransfer);
-        $messageBrokerFacade->startWorker($this->tester->buildMessageBrokerWorkerConfigTransfer([$channelName], 1));
+        $messageBrokerFacade->startWorker($this->tester->buildMessageBrokerWorkerConfigTransfer(['reviews'], 1));
 
         // Assert
         $this->tester->assertReviewExists($reviewsTransfer);

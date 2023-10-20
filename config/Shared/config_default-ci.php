@@ -287,15 +287,10 @@ $config[ProductConstants::PUBLISHING_TO_MESSAGE_BROKER_ENABLED] = false;
 $config[MessageBrokerConstants::CHANNEL_TO_TRANSPORT_MAP] =
 $config[MessageBrokerAwsConstants::CHANNEL_TO_SENDER_TRANSPORT_MAP] =
 $config[MessageBrokerAwsConstants::CHANNEL_TO_RECEIVER_TRANSPORT_MAP] = [
-    'payment-method-commands' => 'in-memory',
-    'payment-commands' => 'in-memory',
-    'payment-events' => 'in-memory',
-    'asset-commands' => 'in-memory',
-    'product-events' => 'in-memory',
-    'product-commands' => 'in-memory',
-    'search-commands' => 'in-memory',
-    'product-review-commands' => 'in-memory',
-    'order-events' => 'in-memory',
+    'payment' => 'in-memory',
+    'assets' => 'in-memory',
+    'product' => 'in-memory',
+    'search' => 'in-memory',
 ];
 
 $config[MessageBrokerConstants::IS_ENABLED] = true;

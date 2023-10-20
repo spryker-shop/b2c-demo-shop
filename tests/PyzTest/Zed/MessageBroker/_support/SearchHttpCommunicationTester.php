@@ -65,22 +65,26 @@ class SearchHttpCommunicationTester extends Actor
     }
 
     /**
+     * @param array $messageAttributeSeedData
+     *
      * @return \Generated\Shared\Transfer\SearchEndpointAvailableTransfer
      */
-    public function buildSearchEndpointAvailableTransfer(): SearchEndpointAvailableTransfer
+    public function buildSearchEndpointAvailableTransfer(array $messageAttributeSeedData = []): SearchEndpointAvailableTransfer
     {
         return (new SearchEndpointAvailableBuilder())
-            ->withMessageAttributes()
+            ->withMessageAttributes($messageAttributeSeedData)
             ->build();
     }
 
     /**
+     * @param array $messageAttributeSeedData
+     *
      * @return \Generated\Shared\Transfer\SearchEndpointRemovedTransfer
      */
-    public function buildSearchEndpointRemovedTransfer(): SearchEndpointRemovedTransfer
+    public function buildSearchEndpointRemovedTransfer(array $messageAttributeSeedData = []): SearchEndpointRemovedTransfer
     {
         return (new SearchEndpointRemovedBuilder())
-            ->withMessageAttributes()
+            ->withMessageAttributes($messageAttributeSeedData)
             ->build();
     }
 
@@ -103,12 +107,10 @@ class SearchHttpCommunicationTester extends Actor
      */
     public function handleSearchMessage(TransferInterface $searchMessageTransfer): void
     {
-        $channelName = 'search-commands';
-        $this->setupMessageBroker($searchMessageTransfer::class, $channelName);
         $messageBrokerFacade = $this->getLocator()->messageBroker()->facade();
         $messageBrokerFacade->sendMessage($searchMessageTransfer);
         $messageBrokerFacade->startWorker(
-            $this->buildMessageBrokerWorkerConfigTransfer([$channelName], 1),
+            $this->buildMessageBrokerWorkerConfigTransfer(['search'], 1),
         );
         $this->resetInMemoryMessages();
     }

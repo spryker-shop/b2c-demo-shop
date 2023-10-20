@@ -11,6 +11,7 @@ use Codeception\Test\Unit;
 use Generated\Shared\Transfer\AssetAddedTransfer;
 use Generated\Shared\Transfer\AssetDeletedTransfer;
 use Generated\Shared\Transfer\AssetUpdatedTransfer;
+use Generated\Shared\Transfer\MessageAttributesTransfer;
 use PyzTest\Zed\MessageBroker\AssetCommunicationTester;
 use Ramsey\Uuid\Uuid;
 
@@ -29,6 +30,11 @@ use Ramsey\Uuid\Uuid;
 class AssetMessageTest extends Unit
 {
     /**
+     * @var string
+     */
+    protected const STORE_REFERENCE = 'dev-DE';
+
+    /**
      * @var \PyzTest\Zed\MessageBroker\AssetCommunicationTester
      */
     protected AssetCommunicationTester $tester;
@@ -41,18 +47,25 @@ class AssetMessageTest extends Unit
         // Arrange
         $assetUuid = Uuid::uuid4()->toString();
         $slotName = 'slt-footer';
-        $channelName = 'asset-commands';
+
+        $messageAttributesData = [];
+
+        if (!$this->tester->isDynamicStoreEnabled()) {
+            $storeTransfer = $this->tester->getAllowedStore();
+            $this->tester->setStoreReferenceData([$storeTransfer->getName() => static::STORE_REFERENCE]);
+            $messageAttributesData[MessageAttributesTransfer::STORE_REFERENCE] = static::STORE_REFERENCE;
+        }
 
         $assetAddedTransfer = $this->tester->generateAssetAddedTransfer([
             AssetAddedTransfer::ASSET_SLOT => $slotName,
             AssetAddedTransfer::ASSET_IDENTIFIER => $assetUuid,
+            AssetAddedTransfer::MESSAGE_ATTRIBUTES => $messageAttributesData,
         ]);
 
         // Act
-        $this->tester->setupMessageBroker($assetAddedTransfer::class, $channelName);
         $messageBrokerFacade = $this->tester->getLocator()->messageBroker()->facade();
         $messageBrokerFacade->sendMessage($assetAddedTransfer);
-        $messageBrokerFacade->startWorker($this->tester->buildMessageBrokerWorkerConfigTransfer([$channelName], 1));
+        $messageBrokerFacade->startWorker($this->tester->buildMessageBrokerWorkerConfigTransfer(['assets'], 1));
 
         // Assert
         $asset = $this->tester->findAssetByUuid($assetUuid);
@@ -66,28 +79,35 @@ class AssetMessageTest extends Unit
     public function testAssetUpdatedMessageIsSuccessfullyHandled(): void
     {
         // Arrange
-        $channelName = 'asset-commands';
         $assetUuid = Uuid::uuid4()->toString();
         $slotName = 'header-top';
 
-        $this->tester->setupMessageBroker(AssetAddedTransfer::class, $channelName);
+        $messageAttributesData = [];
+
+        if (!$this->tester->isDynamicStoreEnabled()) {
+            $storeTransfer = $this->tester->getAllowedStore();
+            $this->tester->setStoreReferenceData([$storeTransfer->getName() => static::STORE_REFERENCE]);
+            $messageAttributesData[MessageAttributesTransfer::STORE_REFERENCE] = static::STORE_REFERENCE;
+        }
+
         $messageBrokerFacade = $this->tester->getLocator()->messageBroker()->facade();
-        $messageBrokerWorkerConfigTransfer = $this->tester->buildMessageBrokerWorkerConfigTransfer([$channelName], 1);
+        $messageBrokerWorkerConfigTransfer = $this->tester->buildMessageBrokerWorkerConfigTransfer(['assets'], 1);
         $messageBrokerFacade->sendMessage(
             $this->tester->generateAssetAddedTransfer([
                 AssetAddedTransfer::ASSET_SLOT => 'slt-footer',
                 AssetAddedTransfer::ASSET_IDENTIFIER => $assetUuid,
+                AssetAddedTransfer::MESSAGE_ATTRIBUTES => $messageAttributesData,
             ]),
         );
         $messageBrokerFacade->startWorker($messageBrokerWorkerConfigTransfer);
         $this->tester->resetInMemoryMessages();
 
         // Act
-        $this->tester->setupMessageBroker(AssetUpdatedTransfer::class, $channelName);
         $messageBrokerFacade->sendMessage(
             $this->tester->generateAssetUpdatedTransfer([
                 AssetUpdatedTransfer::ASSET_SLOT => $slotName,
                 AssetUpdatedTransfer::ASSET_IDENTIFIER => $assetUuid,
+                AssetUpdatedTransfer::MESSAGE_ATTRIBUTES => $messageAttributesData,
             ]),
         );
         $messageBrokerFacade->startWorker($messageBrokerWorkerConfigTransfer);
@@ -104,25 +124,32 @@ class AssetMessageTest extends Unit
     public function testAssetDeletedMessageIsSuccessfullyHandled(): void
     {
         // Arrange
-        $channelName = 'asset-commands';
         $assetUuid = Uuid::uuid4()->toString();
 
-        $this->tester->setupMessageBroker(AssetAddedTransfer::class, $channelName);
+        $messageAttributesData = [];
+
+        if (!$this->tester->isDynamicStoreEnabled()) {
+            $storeTransfer = $this->tester->getAllowedStore();
+            $this->tester->setStoreReferenceData([$storeTransfer->getName() => static::STORE_REFERENCE]);
+            $messageAttributesData[MessageAttributesTransfer::STORE_REFERENCE] = static::STORE_REFERENCE;
+        }
+
         $messageBrokerFacade = $this->tester->getLocator()->messageBroker()->facade();
-        $messageBrokerWorkerConfigTransfer = $this->tester->buildMessageBrokerWorkerConfigTransfer([$channelName], 1);
+        $messageBrokerWorkerConfigTransfer = $this->tester->buildMessageBrokerWorkerConfigTransfer(['assets'], 1);
         $messageBrokerFacade->sendMessage(
             $this->tester->generateAssetAddedTransfer([
                 AssetAddedTransfer::ASSET_IDENTIFIER => $assetUuid,
+                AssetAddedTransfer::MESSAGE_ATTRIBUTES => $messageAttributesData,
             ]),
         );
         $messageBrokerFacade->startWorker($messageBrokerWorkerConfigTransfer);
         $this->tester->resetInMemoryMessages();
 
         // Act
-        $this->tester->setupMessageBroker(AssetDeletedTransfer::class, $channelName);
         $messageBrokerFacade->sendMessage(
             $this->tester->generateAssetDeletedTransfer([
                 AssetDeletedTransfer::ASSET_IDENTIFIER => $assetUuid,
+                AssetDeletedTransfer::MESSAGE_ATTRIBUTES => $messageAttributesData,
             ]),
         );
         $messageBrokerFacade->startWorker($messageBrokerWorkerConfigTransfer);

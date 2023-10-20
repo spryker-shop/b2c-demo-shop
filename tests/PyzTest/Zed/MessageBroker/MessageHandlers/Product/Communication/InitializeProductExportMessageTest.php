@@ -9,7 +9,7 @@ namespace PyzTest\Zed\MessageBroker\MessageHandlers\Product\Communication;
 
 use Codeception\Test\Unit;
 use Generated\Shared\Transfer\EventEntityTransfer;
-use Generated\Shared\Transfer\InitializeProductExportTransfer;
+use Generated\Shared\Transfer\MessageAttributesTransfer;
 use PyzTest\Zed\MessageBroker\ProductCommunicationTester;
 use Spryker\Zed\Product\Business\ProductBusinessFactory;
 use Spryker\Zed\Product\Dependency\Facade\ProductToEventInterface;
@@ -31,6 +31,11 @@ use Spryker\Zed\Product\ProductDependencyProvider;
 class InitializeProductExportMessageTest extends Unit
 {
     /**
+     * @var string
+     */
+    protected const STORE_REFERENCE = 'dev-DE';
+
+    /**
      * @var \PyzTest\Zed\MessageBroker\ProductCommunicationTester
      */
     protected ProductCommunicationTester $tester;
@@ -41,6 +46,14 @@ class InitializeProductExportMessageTest extends Unit
     public function testInitializeProductExportMessageIsSuccessfullyHandled(): void
     {
         // Arrange
+        $messageAttributesData = [];
+
+        if (!$this->tester->isDynamicStoreEnabled()) {
+            $storeTransfer = $this->tester->getAllowedStore();
+            $this->tester->setStoreReferenceData([$storeTransfer->getName() => static::STORE_REFERENCE]);
+            $messageAttributesData[MessageAttributesTransfer::STORE_REFERENCE] = static::STORE_REFERENCE;
+        }
+
         $eventFacadeMock = $this->createMock(ProductToEventInterface::class);
         $this->tester->setDependency(
             ProductDependencyProvider::FACADE_EVENT,
@@ -48,7 +61,6 @@ class InitializeProductExportMessageTest extends Unit
             ProductBusinessFactory::class,
         );
         $this->tester->haveFullProduct();
-        $channelName = 'product-commands';
 
         // Assert
         $eventFacadeMock->expects($this->atLeastOnce())->method('triggerBulk')->with(
@@ -63,13 +75,12 @@ class InitializeProductExportMessageTest extends Unit
         );
 
         // Act
-        $this->tester->setupMessageBroker(InitializeProductExportTransfer::class, $channelName);
         $messageBrokerFacade = $this->tester->getLocator()->messageBroker()->facade();
         $messageBrokerFacade->sendMessage(
-            $this->tester->buildInitializeProductExportTransfer(),
+            $this->tester->buildInitializeProductExportTransfer($messageAttributesData),
         );
         $messageBrokerFacade->startWorker(
-            $this->tester->buildMessageBrokerWorkerConfigTransfer([$channelName], 1),
+            $this->tester->buildMessageBrokerWorkerConfigTransfer(['product-commands'], 1),
         );
     }
 }

@@ -42,6 +42,11 @@ class PaymentPresentationTester extends Actor
     /**
      * @var string
      */
+    protected const STORE_REFERENCE = 'dev-DE';
+
+    /**
+     * @var string
+     */
     protected const CURRENCY_USD = 'USD';
 
     /**
@@ -55,6 +60,9 @@ class PaymentPresentationTester extends Actor
     public function __construct(Scenario $scenario)
     {
         parent::__construct($scenario);
+
+        $storeTransfer = $this->getAllowedStore();
+        $this->setStoreReferenceData([$storeTransfer->getName() => static::STORE_REFERENCE]);
 
         $this->amZed();
         $this->amLoggedInUser();
@@ -102,12 +110,10 @@ class PaymentPresentationTester extends Actor
      */
     public function handlePaymentMessageTransfer(TransferInterface $paymentMessageTransfer): void
     {
-        $channelName = 'payment-commands';
-        $this->setupMessageBroker($paymentMessageTransfer::class, $channelName);
         $messageBrokerFacade = $this->getLocator()->messageBroker()->facade();
         $messageBrokerFacade->sendMessage($paymentMessageTransfer);
         $messageBrokerFacade->startWorker(
-            $this->buildMessageBrokerWorkerConfigTransfer([$channelName], 1),
+            $this->buildMessageBrokerWorkerConfigTransfer(['payment'], 1),
         );
     }
 

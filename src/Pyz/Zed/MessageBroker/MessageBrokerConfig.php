@@ -18,10 +18,11 @@ class MessageBrokerConfig extends SprykerMessageBrokerConfig
     public function getDefaultWorkerChannels(): array
     {
         return [
-            'payment-events',
-            'payment-method-commands',
-            'asset-commands',
             'product-review-commands',
+            'payment-method-commands',
+            'payment-commands',
+            'payment-events',
+            'asset-commands',
             'product-commands',
             'search-commands',
         ];
