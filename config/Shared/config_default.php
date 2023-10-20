@@ -255,7 +255,7 @@ $config[OauthConstants::OAUTH_CLIENT_CONFIGURATION] = array_merge(
             'secret' => null,
             'isConfidential' => false,
             'name' => 'Fulfillment b2c local',
-            'redirectUri' => 'http://localhost:4200',
+            'redirectUri' => 'http://localhost:4200/oauth/cb/spryker',
             'isDefault' => false,
         ],
         [
@@ -263,7 +263,7 @@ $config[OauthConstants::OAUTH_CLIENT_CONFIGURATION] = array_merge(
             'secret' => null,
             'isConfidential' => false,
             'name' => 'Fulfillment b2c dev',
-            'redirectUri' => 'https://dev-b2c-fulfillment.netlify.app',
+            'redirectUri' => 'https://dev-b2c-fulfillment.netlify.app/oauth/cb/spryker',
             'isDefault' => false,
         ],
     ],
