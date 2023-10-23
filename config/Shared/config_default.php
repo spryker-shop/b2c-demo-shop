@@ -737,35 +737,38 @@ $config[MessageBrokerConstants::MESSAGE_TO_CHANNEL_MAP] = [
 ];
 
 $config[MessageBrokerConstants::CHANNEL_TO_TRANSPORT_MAP] = [
-    'product-review-commands' => MessageBrokerAwsConfig::SQS_TRANSPORT,
-    'payment-method-commands' => MessageBrokerAwsConfig::SQS_TRANSPORT,
-    'payment-commands' => MessageBrokerAwsConfig::SQS_TRANSPORT,
     'payment-events' => MessageBrokerAwsConfig::SQS_TRANSPORT,
+    'payment-method-commands' => MessageBrokerAwsConfig::SQS_TRANSPORT,
     'asset-commands' => MessageBrokerAwsConfig::SQS_TRANSPORT,
-    'product-commands' => MessageBrokerAwsConfig::SQS_TRANSPORT,
+    'product-review-commands' => MessageBrokerAwsConfig::SQS_TRANSPORT,
     'search-commands' => MessageBrokerAwsConfig::SQS_TRANSPORT,
-    'payment-tax-invoice-commands' => MessageBrokerAwsConfig::SQS_TRANSPORT,
-    'order-events' => 'http',
-    'product-events' => 'http',
+    'product-commands' => MessageBrokerAwsConfig::SQS_TRANSPORT,
+    'merchant-commands' => MessageBrokerAwsConfig::SQS_TRANSPORT,
+    'tax-commands' => MessageBrokerAwsConfig::SQS_TRANSPORT,
+    'payment-commands' => MessageBrokerAwsConfig::HTTP_TRANSPORT,
+    'product-events' => MessageBrokerAwsConfig::HTTP_TRANSPORT,
+    'order-events' => MessageBrokerAwsConfig::HTTP_TRANSPORT,
+    'merchant-events' => MessageBrokerAwsConfig::HTTP_TRANSPORT,
+    'payment-tax-invoice-commands' => MessageBrokerAwsConfig::HTTP_TRANSPORT,
 ];
 
 $config[MessageBrokerAwsConstants::CHANNEL_TO_RECEIVER_TRANSPORT_MAP] = [
-    'product-review-commands' => MessageBrokerAwsConfig::SQS_TRANSPORT,
-    'payment-method-commands' => MessageBrokerAwsConfig::SQS_TRANSPORT,
-    'payment-commands' => MessageBrokerAwsConfig::SQS_TRANSPORT,
     'payment-events' => MessageBrokerAwsConfig::SQS_TRANSPORT,
+    'payment-method-commands' => MessageBrokerAwsConfig::SQS_TRANSPORT,
     'asset-commands' => MessageBrokerAwsConfig::SQS_TRANSPORT,
-    'product-commands' => MessageBrokerAwsConfig::SQS_TRANSPORT,
+    'product-review-commands' => MessageBrokerAwsConfig::SQS_TRANSPORT,
     'search-commands' => MessageBrokerAwsConfig::SQS_TRANSPORT,
-    'order-events' => MessageBrokerAwsConfig::SQS_TRANSPORT,
+    'product-commands' => MessageBrokerAwsConfig::SQS_TRANSPORT,
+    'merchant-commands' => MessageBrokerAwsConfig::SQS_TRANSPORT,
     'tax-commands' => MessageBrokerAwsConfig::SQS_TRANSPORT,
 ];
 
 $config[MessageBrokerAwsConstants::CHANNEL_TO_SENDER_TRANSPORT_MAP] = [
-    'payment-commands' => 'http',
-    'product-events' => 'http',
-    'order-events' => 'http',
-    'payment-tax-invoice-commands' => 'http',
+    'payment-commands' => MessageBrokerAwsConfig::HTTP_TRANSPORT,
+    'product-events' => MessageBrokerAwsConfig::HTTP_TRANSPORT,
+    'order-events' => MessageBrokerAwsConfig::HTTP_TRANSPORT,
+    'merchant-events' => MessageBrokerAwsConfig::HTTP_TRANSPORT,
+    'payment-tax-invoice-commands' => MessageBrokerAwsConfig::HTTP_TRANSPORT,
 ];
 
 $aopInfrastructureConfiguration = json_decode(html_entity_decode((string)getenv('SPRYKER_AOP_INFRASTRUCTURE')), true);
