@@ -12,12 +12,21 @@ coverage:
     whitelist: { include: ['../../../../src/*'] }
 
 suites:
-    Controller:
-        path: .
-        actor: ApplicationControllerTester
+    Presentation:
+        path: Presentation
+        actor: ApplicationPresentationTester
         modules:
             enabled:
-                - \SprykerTest\Yves\Testify\Helper\YvesEnvironment
-                - \SprykerTest\Shared\Testify\Helper\ConfigHelper
-                - \PyzTest\Yves\Testify\Helper\DebugHelper
-                - \PyzTest\Yves\Testify\Helper\BootstrapHelper
+                - \PyzTest\Shared\Testify\Helper\Environment
+                - \SprykerTest\Shared\Propel\Helper\ConnectionHelper
+                - \SprykerTest\Shared\Testify\Helper\LocatorHelper:
+                      projectNamespaces: ['Pyz']
+                - \SprykerTest\Shared\Testify\Helper\DependencyHelper
+                - \SprykerTest\Shared\Config\Helper\ConfigInit
+                - WebDriver:
+                      url: ''
+                      browser: chrome
+                      window_size: 1920x1080
+                      host: 0.0.0.0
+                      restart: false
+                - \SprykerTest\Shared\Application\Helper\YvesHelper
