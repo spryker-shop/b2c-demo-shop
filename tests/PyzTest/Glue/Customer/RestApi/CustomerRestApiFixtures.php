@@ -29,7 +29,7 @@ class CustomerRestApiFixtures implements FixturesBuilderInterface, FixturesConta
     /**
      * @var string
      */
-    private const TEST_PASSWORD = 'change123';
+    protected const TEST_PASSWORD = 'change123';
 
     /**
      * @var \Generated\Shared\Transfer\CustomerTransfer
