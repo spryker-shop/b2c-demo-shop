@@ -182,3 +182,29 @@ suites:
                 - \SprykerTest\Shared\Store\Helper\StoreDataHelper
                 - \SprykerTest\Shared\Store\Helper\StoreReferenceHelper
                 - \SprykerTest\Shared\Propel\Helper\TransactionHelper
+
+    TaxAppCommunication:
+        path: MessageHandlers/TaxApp/Communication
+        actor: TaxAppCommunicationTester
+        modules:
+            enabled:
+                - Asserts
+                - \PyzTest\Shared\Testify\Helper\Environment
+                - \SprykerTest\Shared\Config\Helper\ConfigInit
+                -   \SprykerTest\Shared\Testify\Helper\LocatorHelper:
+                        projectNamespaces: [ 'Pyz' ]
+                - \SprykerTest\Shared\Testify\Helper\ConfigHelper
+                - \SprykerTest\Zed\Testify\Helper\Business\BusinessHelper
+                - \SprykerTest\Zed\Testify\Helper\Business\DependencyProviderHelper
+                - \SprykerTest\Shared\Propel\Helper\ConnectionHelper
+                - \SprykerTest\Shared\Propel\Helper\TransactionHelper
+                - \SprykerTest\Zed\MessageBroker\Helper\InMemoryMessageBrokerHelper
+                - \SprykerTest\Zed\MessageBroker\Helper\MessageBrokerHelper
+                - \SprykerTest\Zed\ProductReview\Helper\ProductReviewHelper
+                - \SprykerTest\Shared\Product\Helper\ProductDataHelper
+                - \SprykerTest\Shared\Testify\Helper\DataCleanupHelper
+                - \SprykerTest\Shared\Store\Helper\StoreDataHelper
+                - \SprykerTest\Shared\Store\Helper\StoreReferenceHelper
+                - \SprykerTest\Shared\Testify\Helper\DependencyHelper
+                - \SprykerTest\Service\Container\Helper\ContainerHelper
+                - \SprykerTest\Shared\Store\Helper\StoreDependencyHelper
