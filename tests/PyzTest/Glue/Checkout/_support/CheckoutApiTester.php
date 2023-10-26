@@ -7,6 +7,7 @@
 
 namespace PyzTest\Glue\Checkout;
 
+use DateTime;
 use Generated\Shared\DataBuilder\AddressBuilder;
 use Generated\Shared\DataBuilder\CustomerBuilder;
 use Generated\Shared\DataBuilder\ItemBuilder;
@@ -24,7 +25,9 @@ use Generated\Shared\Transfer\RestAddressTransfer;
 use Generated\Shared\Transfer\RestCheckoutDataTransfer;
 use Generated\Shared\Transfer\RestCheckoutResponseTransfer;
 use Generated\Shared\Transfer\RestCustomerTransfer;
+use Generated\Shared\Transfer\RestOrderDetailsAttributesTransfer;
 use Generated\Shared\Transfer\RestPaymentTransfer;
+use Generated\Shared\Transfer\RestShipmentsTransfer;
 use Generated\Shared\Transfer\RestShipmentTransfer;
 use Generated\Shared\Transfer\ShipmentMethodTransfer;
 use Generated\Shared\Transfer\ShipmentTransfer;
@@ -34,9 +37,11 @@ use Generated\Shared\Transfer\StoreTransfer;
 use Generated\Shared\Transfer\TotalsTransfer;
 use Spryker\Glue\CheckoutRestApi\CheckoutRestApiConfig;
 use Spryker\Glue\GlueApplication\Rest\RequestConstantsInterface;
+use Spryker\Glue\OrdersRestApi\OrdersRestApiConfig;
 use Spryker\Shared\Price\PriceConfig;
+use Spryker\Shared\Shipment\ShipmentConfig;
+use Spryker\Zed\Cart\Business\CartFacadeInterface;
 use Spryker\Zed\Customer\Business\CustomerFacadeInterface;
-use Spryker\Zed\Payment\Business\PaymentFacadeInterface;
 use Spryker\Zed\Store\Business\StoreFacadeInterface;
 use SprykerTest\Glue\Testify\Tester\ApiEndToEndTester;
 
@@ -135,6 +140,32 @@ class CheckoutApiTester extends ApiEndToEndTester
     }
 
     /**
+     * @param int $price
+     *
+     * @return void
+     */
+    public function assertShipmentExpensesHaveCorrectPrice(int $price): void
+    {
+        $this->amSure('The returned resource should have included orders resource')
+            ->whenI()
+            ->seeIncludesContainResourceOfType(OrdersRestApiConfig::RESOURCE_ORDERS);
+
+        $ordersAttributes = $this->getDataFromResponseByJsonPath(
+            sprintf('$.included[?(@.type == %1$s)].attributes', json_encode(OrdersRestApiConfig::RESOURCE_ORDERS)),
+        );
+
+        $this->assertNotNull($ordersAttributes);
+        $this->assertCount(1, $ordersAttributes);
+        $restOrdersDetailsAttributesTransfer = (new RestOrderDetailsAttributesTransfer())->fromArray($ordersAttributes[0], true);
+        $this->assertCount(1, $restOrdersDetailsAttributesTransfer->getExpenses());
+
+        /** @var \Generated\Shared\Transfer\RestOrderExpensesAttributesTransfer $restOrderExpensesAttributesTransfer */
+        $restOrderExpensesAttributesTransfer = $restOrdersDetailsAttributesTransfer->getExpenses()->getIterator()->current();
+        $this->assertSame(ShipmentConfig::SHIPMENT_EXPENSE_TYPE, $restOrderExpensesAttributesTransfer->getType());
+        $this->assertSame($price, $restOrderExpensesAttributesTransfer->getSumPrice());
+    }
+
+    /**
      * @param array<string> $includes
      *
      * @return string
@@ -185,13 +216,11 @@ class CheckoutApiTester extends ApiEndToEndTester
     }
 
     /**
-     * @return \Spryker\Zed\Payment\Business\PaymentFacadeInterface
+     * @return \Spryker\Zed\Cart\Business\CartFacadeInterface
      */
-    public function getPaymentFacade(): PaymentFacadeInterface
+    public function getCartFacade(): CartFacadeInterface
     {
-        return $this->getLocator()
-            ->payment()
-            ->facade();
+        return $this->getLocator()->cart()->facade();
     }
 
     /**
@@ -260,6 +289,21 @@ class CheckoutApiTester extends ApiEndToEndTester
     {
         return [
             RestShipmentTransfer::ID_SHIPMENT_METHOD => $idShipmentMethod,
+        ];
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ItemTransfer $itemTransfer
+     *
+     * @return array<string, mixed>
+     */
+    public function getSplitShipmentRequestPayload(ItemTransfer $itemTransfer): array
+    {
+        return [
+            RestShipmentsTransfer::ID_SHIPMENT_METHOD => $itemTransfer->getShipmentOrFail()->getMethodOrFail()->getIdShipmentMethodOrFail(),
+            RestShipmentsTransfer::ITEMS => [$itemTransfer->getGroupKeyOrFail()],
+            RestShipmentsTransfer::SHIPPING_ADDRESS => $this->getAddressRequestPayload($itemTransfer->getShipmentOrFail()->getShippingAddressOrFail()),
+            RestShipmentsTransfer::REQUESTED_DELIVERY_DATE => (new DateTime('tomorrow'))->format('Y-m-d'),
         ];
     }
 
@@ -335,11 +379,15 @@ class CheckoutApiTester extends ApiEndToEndTester
     /**
      * @param \Generated\Shared\Transfer\CustomerTransfer $customerTransfer
      * @param array $overrideItems
+     * @param string $priceMode
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function havePersistentQuoteWithItemsAndItemLevelShipment(CustomerTransfer $customerTransfer, array $overrideItems = []): QuoteTransfer
-    {
+    public function havePersistentQuoteWithItemsAndItemLevelShipment(
+        CustomerTransfer $customerTransfer,
+        array $overrideItems = [],
+        string $priceMode = PriceConfig::PRICE_MODE_GROSS,
+    ): QuoteTransfer {
         return $this->havePersistentQuote([
             QuoteTransfer::CUSTOMER => $customerTransfer,
             QuoteTransfer::TOTALS => (new TotalsTransfer())
@@ -347,7 +395,7 @@ class CheckoutApiTester extends ApiEndToEndTester
                 ->setPriceToPay(random_int(1000, 10000)),
             QuoteTransfer::ITEMS => $this->mapProductConcreteTransfersToQuoteTransferItemsWithItemLevelShipment($overrideItems),
             QuoteTransfer::STORE => [StoreTransfer::NAME => 'DE'],
-            QuoteTransfer::PRICE_MODE => PriceConfig::PRICE_MODE_GROSS,
+            QuoteTransfer::PRICE_MODE => $priceMode,
             QuoteTransfer::BILLING_ADDRESS => (new AddressBuilder())->build(),
         ]);
     }

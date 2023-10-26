@@ -15,6 +15,7 @@ use Generated\Shared\Transfer\ShipmentMethodTransfer;
 use PyzTest\Glue\Checkout\CheckoutApiTester;
 use PyzTest\Glue\Checkout\RestApi\Fixtures\CheckoutRestApiFixtures;
 use Spryker\Glue\CheckoutRestApi\CheckoutRestApiConfig;
+use Spryker\Shared\Price\PriceConfig;
 
 /**
  * Auto-generated group annotations
@@ -257,5 +258,205 @@ class CheckoutRestApiCest
         $I->amSure('The returned resource has correct self link')
             ->whenI()
             ->seeSingleResourceHasSelfLink($url);
+    }
+
+    /**
+     * @depends loadFixtures
+     *
+     * @param \PyzTest\Glue\Checkout\CheckoutApiTester $I
+     *
+     * @return void
+     */
+    public function requestWithNetPriceModeAndSingleShipment(CheckoutApiTester $I): void
+    {
+        // Arrange
+        $customerTransfer = $this->fixtures->getCustomerTransfer();
+        $I->authorizeCustomerToGlue($customerTransfer);
+
+        $shipmentMethodTransfer = $this->fixtures->getShipmentMethodTransfer();
+        $quoteTransfer = $I->havePersistentQuoteWithItemsAndItemLevelShipment(
+            $customerTransfer,
+            [$I->getQuoteItemOverrideData($this->fixtures->getProductConcreteTransfers()[0], $shipmentMethodTransfer, 10)],
+            PriceConfig::PRICE_MODE_NET,
+        );
+        $shippingAddressTransfer = $quoteTransfer->getItems()[0]->getShipment()->getShippingAddress();
+
+        $url = $I->buildCheckoutUrl(['orders']);
+        $requestPayload = [
+            'data' => [
+                'type' => CheckoutRestApiConfig::RESOURCE_CHECKOUT,
+                'attributes' => [
+                    'idCart' => $quoteTransfer->getUuid(),
+                    'billingAddress' => $I->getAddressRequestPayload($quoteTransfer->getBillingAddress()),
+                    'shippingAddress' => $I->getAddressRequestPayload($shippingAddressTransfer),
+                    'customer' => $I->getCustomerRequestPayload($customerTransfer),
+                    'payments' => $I->getPaymentRequestPayload('Credit Card'),
+                    'shipment' => $I->getShipmentRequestPayload($shipmentMethodTransfer->getIdShipmentMethod()),
+                ],
+            ],
+        ];
+
+        // Act
+        $I->sendPOST($url, $requestPayload);
+
+        // Assert
+        $I->seeResponseCodeIs(HttpCode::CREATED);
+        $I->seeResponseIsJson();
+        $I->seeResponseMatchesOpenApiSchema();
+
+        $I->assertCheckoutResponseResourceHasCorrectData();
+        $I->assertShipmentExpensesHaveCorrectPrice(
+            $shipmentMethodTransfer->getPrices()->offsetGet(0)->getNetAmountOrFail(),
+        );
+    }
+
+    /**
+     * @depends loadFixtures
+     *
+     * @param \PyzTest\Glue\Checkout\CheckoutApiTester $I
+     *
+     * @return void
+     */
+    public function requestWithNetPriceModeAndSplitShipment(CheckoutApiTester $I): void
+    {
+        // Arrange
+        $customerTransfer = $this->fixtures->getCustomerTransfer();
+        $I->authorizeCustomerToGlue($customerTransfer);
+
+        $shipmentMethodTransfer = $this->fixtures->getShipmentMethodTransfer();
+        $quoteTransfer = $I->havePersistentQuoteWithItemsAndItemLevelShipment(
+            $customerTransfer,
+            [$I->getQuoteItemOverrideData($this->fixtures->getProductConcreteTransfers()[0], $shipmentMethodTransfer, 10)],
+            PriceConfig::PRICE_MODE_NET,
+        );
+        $quoteTransfer = $I->getCartFacade()->reloadItems($quoteTransfer);
+
+        $url = $I->buildCheckoutUrl(['orders']);
+        $requestPayload = [
+            'data' => [
+                'type' => CheckoutRestApiConfig::RESOURCE_CHECKOUT,
+                'attributes' => [
+                    'idCart' => $quoteTransfer->getUuid(),
+                    'billingAddress' => $I->getAddressRequestPayload($quoteTransfer->getBillingAddress()),
+                    'customer' => $I->getCustomerRequestPayload($customerTransfer),
+                    'payments' => $I->getPaymentRequestPayload('Credit Card'),
+                    'shipments' => [
+                        $I->getSplitShipmentRequestPayload($quoteTransfer->getItems()->offsetGet(0)),
+                    ],
+                ],
+            ],
+        ];
+
+        // Act
+        $I->sendPOST($url, $requestPayload);
+
+        // Assert
+        $I->seeResponseCodeIs(HttpCode::CREATED);
+        $I->seeResponseIsJson();
+        $I->seeResponseMatchesOpenApiSchema();
+
+        $I->assertCheckoutResponseResourceHasCorrectData();
+        $I->assertShipmentExpensesHaveCorrectPrice(
+            $shipmentMethodTransfer->getPrices()->offsetGet(0)->getNetAmountOrFail(),
+        );
+    }
+
+    /**
+     * @depends loadFixtures
+     *
+     * @param \PyzTest\Glue\Checkout\CheckoutApiTester $I
+     *
+     * @return void
+     */
+    public function requestWithGrossPriceModeAndSingleShipment(CheckoutApiTester $I): void
+    {
+        // Arrange
+        $customerTransfer = $this->fixtures->getCustomerTransfer();
+        $I->authorizeCustomerToGlue($customerTransfer);
+
+        $shipmentMethodTransfer = $this->fixtures->getShipmentMethodTransfer();
+        $quoteTransfer = $I->havePersistentQuoteWithItemsAndItemLevelShipment(
+            $customerTransfer,
+            [$I->getQuoteItemOverrideData($this->fixtures->getProductConcreteTransfers()[0], $shipmentMethodTransfer, 10)],
+        );
+        $shippingAddressTransfer = $quoteTransfer->getItems()[0]->getShipment()->getShippingAddress();
+
+        $url = $I->buildCheckoutUrl(['orders']);
+        $requestPayload = [
+            'data' => [
+                'type' => CheckoutRestApiConfig::RESOURCE_CHECKOUT,
+                'attributes' => [
+                    'idCart' => $quoteTransfer->getUuid(),
+                    'billingAddress' => $I->getAddressRequestPayload($quoteTransfer->getBillingAddress()),
+                    'shippingAddress' => $I->getAddressRequestPayload($shippingAddressTransfer),
+                    'customer' => $I->getCustomerRequestPayload($customerTransfer),
+                    'payments' => $I->getPaymentRequestPayload('Credit Card'),
+                    'shipment' => $I->getShipmentRequestPayload($shipmentMethodTransfer->getIdShipmentMethod()),
+                ],
+            ],
+        ];
+
+        // Act
+        $I->sendPOST($url, $requestPayload);
+
+        // Assert
+        $I->seeResponseCodeIs(HttpCode::CREATED);
+        $I->seeResponseIsJson();
+        $I->seeResponseMatchesOpenApiSchema();
+
+        $I->assertCheckoutResponseResourceHasCorrectData();
+        $I->assertShipmentExpensesHaveCorrectPrice(
+            $shipmentMethodTransfer->getPrices()->offsetGet(0)->getGrossAmountOrFail(),
+        );
+    }
+
+    /**
+     * @depends loadFixtures
+     *
+     * @param \PyzTest\Glue\Checkout\CheckoutApiTester $I
+     *
+     * @return void
+     */
+    public function requestWithGrossPriceModeAndSplitShipment(CheckoutApiTester $I): void
+    {
+        // Arrange
+        $customerTransfer = $this->fixtures->getCustomerTransfer();
+        $I->authorizeCustomerToGlue($customerTransfer);
+
+        $shipmentMethodTransfer = $this->fixtures->getShipmentMethodTransfer();
+        $quoteTransfer = $I->havePersistentQuoteWithItemsAndItemLevelShipment(
+            $customerTransfer,
+            [$I->getQuoteItemOverrideData($this->fixtures->getProductConcreteTransfers()[0], $shipmentMethodTransfer, 10)],
+        );
+        $quoteTransfer = $I->getCartFacade()->reloadItems($quoteTransfer);
+
+        $url = $I->buildCheckoutUrl(['orders']);
+        $requestPayload = [
+            'data' => [
+                'type' => CheckoutRestApiConfig::RESOURCE_CHECKOUT,
+                'attributes' => [
+                    'idCart' => $quoteTransfer->getUuid(),
+                    'billingAddress' => $I->getAddressRequestPayload($quoteTransfer->getBillingAddress()),
+                    'customer' => $I->getCustomerRequestPayload($customerTransfer),
+                    'payments' => $I->getPaymentRequestPayload('Credit Card'),
+                    'shipments' => [
+                        $I->getSplitShipmentRequestPayload($quoteTransfer->getItems()->offsetGet(0)),
+                    ],
+                ],
+            ],
+        ];
+
+        // Act
+        $I->sendPOST($url, $requestPayload);
+
+        // Assert
+        $I->seeResponseCodeIs(HttpCode::CREATED);
+        $I->seeResponseIsJson();
+        $I->seeResponseMatchesOpenApiSchema();
+
+        $I->assertCheckoutResponseResourceHasCorrectData();
+        $I->assertShipmentExpensesHaveCorrectPrice(
+            $shipmentMethodTransfer->getPrices()->offsetGet(0)->getGrossAmountOrFail(),
+        );
     }
 }
