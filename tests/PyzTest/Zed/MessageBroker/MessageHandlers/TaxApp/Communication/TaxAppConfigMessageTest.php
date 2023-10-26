@@ -55,6 +55,8 @@ class TaxAppConfigMessageTest extends Unit
             MessageAttributesTransfer::STORE_REFERENCE => static::STORE_REFERENCE,
         ], [
             ConfigureTaxAppTransfer::VENDOR_CODE => static::VENDOR_CODE,
+            ConfigureTaxAppTransfer::API_URL => 'url',
+            ConfigureTaxAppTransfer::IS_ACTIVE => true,
         ]);
 
         // Act
