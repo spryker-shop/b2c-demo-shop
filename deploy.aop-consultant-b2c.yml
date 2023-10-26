@@ -57,31 +57,14 @@ image:
         SPRYKER_PUSH_NOTIFICATION_WEB_PUSH_PHP_VAPID_SUBJECT: 'https://spryker.com'
 
         #AOP
-        SPRYKER_AOP_INFRASTRUCTURE: '{
-            "SPRYKER_MESSAGE_BROKER_HTTP_SENDER_CONFIG": {
-                "endpoint":"https:\/\/events.atrs.spryker.com\/events\/tenant"
-            },
-            "SPRYKER_MESSAGE_BROKER_SQS_RECEIVER_CONFIG": {
-                "default": {
-                    "endpoint":"https:\/\/sqs.eu-central-1.amazonaws.com",
-                    "region":"eu-central-1",
-                    "auto_setup":false,
-                    "buffer_size":1
-                },
-                "DE": {
-                    "queue_name":"AOP_Production_Consultant_b2c-DE.fifo"
-                },
-                "AT": {
-                    "queue_name":"AOP_Production_Consultant_b2c-AT.fifo"
-                }
-            }
-        }'
+        SPRYKER_MESSAGE_BROKER_HTTP_CHANNEL_SENDER_BASE_URL: ""
+        SPRYKER_MESSAGE_BROKER_HTTP_CHANNEL_RECEIVER_BASE_URL: ""
+
         SPRYKER_AOP_APPLICATION: '{
             "APP_DOMAINS": [
                 "os.apps.aop.spryker.com",
                 "*.bazaarvoice.com"
             ],
-            "STORE_NAME_REFERENCE_MAP": {"DE":"AOP_Production_Consultant_b2c-DE","AT":"AOP_Production_Consultant_b2c-AT"},
             "APP_CATALOG_SCRIPT_URL": "https://app-catalog.atrs.spryker.com/loader"
         }'
 
