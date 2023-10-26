@@ -349,35 +349,6 @@ class CheckoutApiTester extends ApiEndToEndTester
 
     /**
      * @param \Generated\Shared\Transfer\CustomerTransfer $customerTransfer
-     * @param array<\Generated\Shared\Transfer\ProductConcreteTransfer> $productConcreteTransfers
-     * @param array $overrideShipment
-     *
-     * @return \Generated\Shared\Transfer\QuoteTransfer
-     */
-    public function havePersistentQuoteWithItems(
-        CustomerTransfer $customerTransfer,
-        array $productConcreteTransfers,
-        array $overrideShipment = [],
-    ): QuoteTransfer {
-        $shipmentTransfer = (new ShipmentBuilder($overrideShipment))
-            ->withMethod()
-            ->withShippingAddress();
-
-        return $this->havePersistentQuote([
-            QuoteTransfer::CUSTOMER => $customerTransfer,
-            QuoteTransfer::TOTALS => (new TotalsTransfer())
-                ->setSubtotal(random_int(1000, 10000))
-                ->setPriceToPay(random_int(1000, 10000)),
-            QuoteTransfer::ITEMS => $this->mapProductConcreteTransfersToQuoteTransferItems($productConcreteTransfers),
-            QuoteTransfer::STORE => [StoreTransfer::NAME => 'DE'],
-            QuoteTransfer::PRICE_MODE => PriceConfig::PRICE_MODE_GROSS,
-            QuoteTransfer::BILLING_ADDRESS => (new AddressBuilder())->build(),
-            QuoteTransfer::SHIPMENT => $shipmentTransfer,
-        ]);
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\CustomerTransfer $customerTransfer
      * @param array $overrideItems
      * @param string $priceMode
      *
@@ -508,29 +479,6 @@ class CheckoutApiTester extends ApiEndToEndTester
         $customerFacade->createAddress($addressTransfer);
 
         return $customerFacade->getCustomer($customerTransfer);
-    }
-
-    /**
-     * @param array<\Generated\Shared\Transfer\ProductConcreteTransfer> $productConcreteTransfers
-     *
-     * @return array
-     */
-    protected function mapProductConcreteTransfersToQuoteTransferItems(array $productConcreteTransfers): array
-    {
-        $quoteTransferItems = [];
-
-        foreach ($productConcreteTransfers as $productConcreteTransfer) {
-            $quoteTransferItems[] = (new ItemBuilder([
-                ItemTransfer::SKU => $productConcreteTransfer->getSku(),
-                ItemTransfer::GROUP_KEY => $productConcreteTransfer->getSku(),
-                ItemTransfer::ABSTRACT_SKU => $productConcreteTransfer->getAbstractSku(),
-                ItemTransfer::ID_PRODUCT_ABSTRACT => $productConcreteTransfer->getFkProductAbstract(),
-                ItemTransfer::QUANTITY => static::DEFAULT_QUOTE_ITEM_QUANTITY,
-            ]))->build()
-                ->modifiedToArray();
-        }
-
-        return $quoteTransferItems;
     }
 
     /**

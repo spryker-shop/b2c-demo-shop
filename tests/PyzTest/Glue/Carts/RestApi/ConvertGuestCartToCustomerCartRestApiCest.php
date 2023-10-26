@@ -77,6 +77,45 @@ class ConvertGuestCartToCustomerCartRestApiCest
      *
      * @return void
      */
+    public function requestGuestCartBecomesCustomerCartAfterCustomerLogin(CartsApiTester $I): void
+    {
+        // Arrange
+        $this->authorizeCustomer($I);
+        $quoteUuid = $this->fixtures->getGuestQuoteTransfer()->getUuid();
+        $itemGroupKey = $this->fixtures->getGuestQuoteTransfer()->getItems()->offsetGet(0)->getGroupKey();
+        $url = $I->buildCartUrl($quoteUuid, [CartsRestApiConfig::RESOURCE_CART_ITEMS]);
+
+        // Act
+        $I->sendGET($url);
+
+        // Assert
+        $I->seeResponseCodeIs(HttpCode::OK);
+        $I->seeResponseIsJson();
+        $I->seeResponseMatchesOpenApiSchema();
+
+        $I->amSure('The returned resource is of correct type')
+            ->whenI()
+            ->seeResponseDataContainsSingleResourceOfType(CartsRestApiConfig::RESOURCE_CARTS);
+
+        $I->amSure('The returned resource has correct id')
+            ->whenI()
+            ->seeSingleResourceIdEqualTo($quoteUuid);
+
+        $I->amSure('The returned resource has relationship')
+            ->whenI()
+            ->seeSingleResourceHasRelationshipByTypeAndId(
+                CartsRestApiConfig::RESOURCE_CART_ITEMS,
+                $itemGroupKey,
+            );
+    }
+
+    /**
+     * @depends loadFixtures
+     *
+     * @param \PyzTest\Glue\Carts\CartsApiTester $I
+     *
+     * @return void
+     */
     public function requestGuestCartCollectionIsEmpty(CartsApiTester $I): void
     {
         // Arrange

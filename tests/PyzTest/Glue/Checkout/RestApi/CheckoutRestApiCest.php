@@ -83,15 +83,8 @@ class CheckoutRestApiCest
                     'billingAddress' => $I->getAddressRequestPayload($quoteTransfer->getBillingAddress()),
                     'shippingAddress' => $I->getAddressRequestPayload($shippingAddressTransfer),
                     'customer' => $I->getCustomerRequestPayload($customerTransfer),
-                    'payments' => [
-                        [
-                            RestPaymentTransfer::PAYMENT_METHOD_NAME => 'Invoice',
-                            RestPaymentTransfer::PAYMENT_PROVIDER_NAME => 'DummyPayment',
-                        ],
-                    ],
-                    'shipment' => [
-                        ShipmentMethodTransfer::ID_SHIPMENT_METHOD => $shipmentMethodTransfer->getIdShipmentMethod(),
-                    ],
+                    'payments' => $I->getPaymentRequestPayload(),
+                    'shipment' => $I->getShipmentRequestPayload($shipmentMethodTransfer->getIdShipmentMethod()),
                 ],
             ],
         ];
