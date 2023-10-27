@@ -22,9 +22,8 @@ class MessageBrokerConfig extends SprykerMessageBrokerConfig
             'payment-method-commands',
             'asset-commands',
             'product-review-commands',
-            'search-commands',
             'product-commands',
-            'merchant-commands',
+            'search-commands',
             'tax-commands',
         ];
     }
