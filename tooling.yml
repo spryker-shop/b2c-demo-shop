@@ -1,4 +1,8 @@
 evaluator:
-  rules:
-    ignore:
-      - NotUnique:ModuleName
+    checkerConfiguration:
+        - checker: NPM_CHECKER
+          var:
+              ALLOWED_SEVERITY_LEVELS: [critical]
+    rules:
+        ignore:
+              - NotUnique:ModuleName

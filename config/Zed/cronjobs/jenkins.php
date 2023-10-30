@@ -7,10 +7,11 @@
  * - jobs[]['role'] default value is 'admin'
  */
 
-use Spryker\Shared\Config\Config;
-use Spryker\Shared\MessageBrokerAws\MessageBrokerAwsConstants;
-
 /* ProductValidity */
+
+use Spryker\Shared\Config\Config;
+use Spryker\Shared\MessageBroker\MessageBrokerConstants;
+
 $jobs[] = [
     'name' => 'check-product-validity',
     'command' => '$PHP_BIN vendor/bin/console product:check-validity',
@@ -156,10 +157,10 @@ $jobs[] = [
 ];
 
 /* Message broker */
-if (Config::get(MessageBrokerAwsConstants::SQS_RECEIVER_CONFIG)) {
+if (Config::get(MessageBrokerConstants::IS_ENABLED)) {
     $jobs[] = [
         'name' => 'message-broker-consume-channels',
-        'command' => '$PHP_BIN vendor/bin/console message-broker:consume --time-limit=15',
+        'command' => '$PHP_BIN vendor/bin/console message-broker:consume --time-limit=15 --sleep=5',
         'schedule' => '* * * * *',
         'enable' => true,
     ];
