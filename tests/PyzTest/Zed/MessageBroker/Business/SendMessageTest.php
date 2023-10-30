@@ -9,6 +9,7 @@ namespace PyzTest\Zed\MessageBroker\Business;
 
 use Codeception\Test\Unit;
 use Generated\Shared\Transfer\MessageBrokerTestMessageTransfer;
+use PyzTest\Zed\MessageBroker\MessageBrokerBusinessTester;
 use Ramsey\Uuid\Uuid;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use Spryker\Zed\MessageBrokerExtension\Dependency\Plugin\MessageSenderPluginInterface;
@@ -34,17 +35,12 @@ class SendMessageTest extends Unit
     /**
      * @var string
      */
-    protected const STORE_REFERENCE = 'dev-DE';
-
-    /**
-     * @var string
-     */
     protected const MESSAGE_BROKER_TRANSFER_VALUE = 'value';
 
     /**
      * @var \PyzTest\Zed\MessageBroker\MessageBrokerBusinessTester
      */
-    protected $tester;
+    protected MessageBrokerBusinessTester $tester;
 
     /**
      * @return void
@@ -52,11 +48,6 @@ class SendMessageTest extends Unit
     public function testCheckAttributesBeforeSendingMessage(): void
     {
         // Arrange
-        if (!$this->tester->isDynamicStoreEnabled()) {
-            $storeTransfer = $this->tester->getAllowedStore();
-            $this->tester->setStoreReferenceData([$storeTransfer->getName() => static::STORE_REFERENCE]);
-        }
-
         $messageSenderPlugin = $this->createMock(MessageSenderPluginInterface::class);
 
         $this->tester->setMessageToSenderChannelNameMap(MessageBrokerTestMessageTransfer::class, static::CHANNEL_NAME);
@@ -75,11 +66,6 @@ class SendMessageTest extends Unit
 
                 $this->assertIsObject($message->getMessageAttributes());
 
-                if (!$this->tester->isDynamicStoreEnabled()) {
-                    $this->assertSame($message->getMessageAttributes()->getStoreReference(), static::STORE_REFERENCE);
-                    $this->assertSame($message->getMessageAttributes()->getEmitter(), static::STORE_REFERENCE);
-                }
-
                 $this->assertSame($message->getMessageAttributes()->getTransferName(), $this->getTransferNameFromClass($message));
                 $this->assertSame($message->getMessageAttributes()->getEvent(), $this->getTransferNameFromClass($message));
 
@@ -95,6 +81,12 @@ class SendMessageTest extends Unit
 
                 $this->assertNotEmpty($message->getMessageAttributes()->getAuthorization());
                 $this->assertStringContainsString('Bearer', $message->getMessageAttributes()->getAuthorization());
+
+                $this->assertNotEmpty($message->getMessageAttributes()->getTenantIdentifier());
+                $this->assertSame(
+                    $message->getMessageAttributes()->getTenantIdentifier(),
+                    $this->tester->getModuleConfig()->getTenantIdentifier(),
+                );
 
                 return $envelope;
             });
