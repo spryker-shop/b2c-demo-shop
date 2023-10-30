@@ -7,7 +7,7 @@
 
 namespace PyzTest\Zed\MessageBroker\MessageHandlers\PaymentMethod\Presentation;
 
-use Generated\Shared\Transfer\MessageAttributesTransfer;
+use Generated\Shared\Transfer\PaymentMethodAddedTransfer;
 use Generated\Shared\Transfer\PaymentMethodDeletedTransfer;
 use PyzTest\Zed\MessageBroker\PageObject\PaymentMethodPage;
 use PyzTest\Zed\MessageBroker\PaymentMethodPresentationTester;
@@ -26,11 +26,6 @@ use PyzTest\Zed\MessageBroker\PaymentMethodPresentationTester;
  */
 class PaymentMethodMessageCest
 {
-    /**
-     * @var string
-     */
-    protected const STORE_REFERENCE = 'dev-DE';
-
     /**
      * @var string
      */
@@ -56,25 +51,18 @@ class PaymentMethodMessageCest
             static::PAYMENT_METHOD_NAME,
         );
 
-        $messageAttributesData = [];
-
-        if (!$I->isDynamicStoreEnabled()) {
-            $storeTransfer = $I->getAllowedStore();
-            $I->setStoreReferenceData([$storeTransfer->getName() => static::STORE_REFERENCE]);
-            $messageAttributesData[MessageAttributesTransfer::STORE_REFERENCE] = static::STORE_REFERENCE;
-        }
-
         // Act
+        $channelName = 'payment-method-commands';
+        $I->setupMessageBroker(PaymentMethodAddedTransfer::class, $channelName);
         $messageBrokerFacade->sendMessage(
             $I->havePaymentMethodAddedTransfer(
                 [
                     PaymentMethodDeletedTransfer::NAME => static::PAYMENT_METHOD_NAME,
                     PaymentMethodDeletedTransfer::PROVIDER_NAME => static::PROVIDER_NAME,
                 ],
-                $messageAttributesData,
             ),
         );
-        $messageBrokerFacade->startWorker($I->buildMessageBrokerWorkerConfigTransfer(['payment'], 1));
+        $messageBrokerFacade->startWorker($I->buildMessageBrokerWorkerConfigTransfer([$channelName], 1));
 
         // Assert
         $I->amZed();
@@ -105,35 +93,28 @@ class PaymentMethodMessageCest
             static::PAYMENT_METHOD_NAME,
         );
 
-        $messageAttributesData = [];
-
-        if (!$I->isDynamicStoreEnabled()) {
-            $storeTransfer = $I->getAllowedStore();
-            $I->setStoreReferenceData([$storeTransfer->getName() => static::STORE_REFERENCE]);
-            $messageAttributesData[MessageAttributesTransfer::STORE_REFERENCE] = static::STORE_REFERENCE;
-        }
-
+        $channelName = 'payment-method-commands';
+        $I->setupMessageBroker(PaymentMethodAddedTransfer::class, $channelName);
         $messageBrokerFacade->sendMessage(
             $I->havePaymentMethodAddedTransfer(
                 [
                     PaymentMethodDeletedTransfer::NAME => static::PAYMENT_METHOD_NAME,
                     PaymentMethodDeletedTransfer::PROVIDER_NAME => static::PROVIDER_NAME,
                 ],
-                $messageAttributesData,
             ),
         );
-        $messageBrokerWorkerConfigTransfer = $I->buildMessageBrokerWorkerConfigTransfer(['payment'], 1);
+        $messageBrokerWorkerConfigTransfer = $I->buildMessageBrokerWorkerConfigTransfer([$channelName], 1);
         $messageBrokerFacade->startWorker($messageBrokerWorkerConfigTransfer);
         $I->resetInMemoryMessages();
 
         // Act
+        $I->setupMessageBroker(PaymentMethodDeletedTransfer::class, $channelName);
         $messageBrokerFacade->sendMessage(
             $I->havePaymentMethodDeletedTransfer(
                 [
                     PaymentMethodDeletedTransfer::NAME => static::PAYMENT_METHOD_NAME,
                     PaymentMethodDeletedTransfer::PROVIDER_NAME => static::PROVIDER_NAME,
                 ],
-                $messageAttributesData,
             ),
         );
         $messageBrokerFacade->startWorker($messageBrokerWorkerConfigTransfer);
