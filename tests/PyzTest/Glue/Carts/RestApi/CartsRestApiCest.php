@@ -1233,23 +1233,6 @@ class CartsRestApiCest
     }
 
     /**
-     * @param \PyzTest\Glue\Carts\CartsApiTester $I
-     * @param \Generated\Shared\Transfer\CustomerTransfer|null $customerTransfer
-     *
-     * @return void
-     */
-    protected function authorizeCustomer(CartsApiTester $I, ?CustomerTransfer $customerTransfer = null): void
-    {
-        if (!$customerTransfer) {
-            $customerTransfer = $this->fixtures->getCustomerTransfer();
-        }
-
-        $token = $I->haveAuthorizationToGlue($customerTransfer)->getAccessToken();
-
-        $I->amBearerAuthenticated($token);
-    }
-
-    /**
      * @depends loadFixtures
      *
      * @param \PyzTest\Glue\Carts\CartsApiTester $I
@@ -1305,5 +1288,22 @@ class CartsRestApiCest
         // Assert
         $I->seeResponseCodeIs(HttpCode::FORBIDDEN);
         $I->seeResponseMatchesOpenApiSchema();
+    }
+
+    /**
+     * @param \PyzTest\Glue\Carts\CartsApiTester $I
+     * @param \Generated\Shared\Transfer\CustomerTransfer|null $customerTransfer
+     *
+     * @return void
+     */
+    protected function authorizeCustomer(CartsApiTester $I, ?CustomerTransfer $customerTransfer = null): void
+    {
+        if (!$customerTransfer) {
+            $customerTransfer = $this->fixtures->getCustomerTransfer();
+        }
+
+        $token = $I->haveAuthorizationToGlue($customerTransfer)->getAccessToken();
+
+        $I->amBearerAuthenticated($token);
     }
 }

@@ -100,6 +100,35 @@ class OrdersRestApiFixtures implements FixturesBuilderInterface, FixturesContain
     /**
      * @param \PyzTest\Glue\Orders\OrdersApiTester $I
      *
+     * @return \Generated\Shared\Transfer\ProductConcreteTransfer
+     */
+    public function createProductTransfer(OrdersApiTester $I): ProductConcreteTransfer
+    {
+        return $I->haveProduct();
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\CustomerTransfer $customerTransfer
+     * @param array $productTransfers
+     *
+     * @return \Spryker\Shared\Kernel\Transfer\AbstractTransfer
+     */
+    public function createQuoteTransfer(CustomerTransfer $customerTransfer, array $productTransfers): AbstractTransfer
+    {
+        return (new QuoteBuilder())
+            ->withItem($productTransfers)
+            ->withCustomer([CustomerTransfer::CUSTOMER_REFERENCE => $customerTransfer->getCustomerReference()])
+            ->withTotals([TotalsTransfer::GRAND_TOTAL => static::TEST_GRAND_TOTAL])
+            ->withShippingAddress()
+            ->withBillingAddress()
+            ->withCurrency()
+            ->withPayment()
+            ->build();
+    }
+
+    /**
+     * @param \PyzTest\Glue\Orders\OrdersApiTester $I
+     *
      * @return \Generated\Shared\Transfer\SaveOrderTransfer
      */
     protected function createOrderTransfer(OrdersApiTester $I): SaveOrderTransfer
@@ -139,34 +168,5 @@ class OrdersRestApiFixtures implements FixturesBuilderInterface, FixturesContain
         ]);
 
         return $I->confirmCustomer($customerTransfer);
-    }
-
-    /**
-     * @param \PyzTest\Glue\Orders\OrdersApiTester $I
-     *
-     * @return \Generated\Shared\Transfer\ProductConcreteTransfer
-     */
-    public function createProductTransfer(OrdersApiTester $I): ProductConcreteTransfer
-    {
-        return $I->haveProduct();
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\CustomerTransfer $customerTransfer
-     * @param array $productTransfers
-     *
-     * @return \Spryker\Shared\Kernel\Transfer\AbstractTransfer
-     */
-    public function createQuoteTransfer(CustomerTransfer $customerTransfer, array $productTransfers): AbstractTransfer
-    {
-        return (new QuoteBuilder())
-            ->withItem($productTransfers)
-            ->withCustomer([CustomerTransfer::CUSTOMER_REFERENCE => $customerTransfer->getCustomerReference()])
-            ->withTotals([TotalsTransfer::GRAND_TOTAL => static::TEST_GRAND_TOTAL])
-            ->withShippingAddress()
-            ->withBillingAddress()
-            ->withCurrency()
-            ->withPayment()
-            ->build();
     }
 }

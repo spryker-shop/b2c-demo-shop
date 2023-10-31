@@ -163,6 +163,32 @@ class ProductConfigurationsRestApiFixtures implements FixturesBuilderInterface, 
     }
 
     /**
+     * @param \Generated\Shared\Transfer\CustomerTransfer $customerTransfer
+     * @param \Generated\Shared\Transfer\ProductConcreteTransfer $productConcreteTransfer
+     * @param \Generated\Shared\Transfer\ProductConfigurationInstanceTransfer $productConfigurationInstanceTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function createQuoteTransfer(
+        CustomerTransfer $customerTransfer,
+        ProductConcreteTransfer $productConcreteTransfer,
+        ProductConfigurationInstanceTransfer $productConfigurationInstanceTransfer,
+    ): QuoteTransfer {
+        return (new QuoteBuilder())
+            ->withItem([
+                ItemTransfer::PRODUCT_CONFIGURATION_INSTANCE => $productConfigurationInstanceTransfer->toArray(),
+                ItemTransfer::SKU => $productConcreteTransfer->getSku(),
+            ])
+            ->withCustomer([CustomerTransfer::CUSTOMER_REFERENCE => $customerTransfer->getCustomerReference()])
+            ->withTotals()
+            ->withShippingAddress()
+            ->withBillingAddress()
+            ->withCurrency()
+            ->withPayment()
+            ->build();
+    }
+
+    /**
      * @param \PyzTest\Glue\ProductConfigurations\ProductConfigurationsApiTester $I
      *
      * @return void
@@ -234,32 +260,6 @@ class ProductConfigurationsRestApiFixtures implements FixturesBuilderInterface, 
             ->salesProductConfiguration()
             ->facade()
             ->saveSalesOrderItemConfigurationsFromQuote($quoteTransfer);
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\CustomerTransfer $customerTransfer
-     * @param \Generated\Shared\Transfer\ProductConcreteTransfer $productConcreteTransfer
-     * @param \Generated\Shared\Transfer\ProductConfigurationInstanceTransfer $productConfigurationInstanceTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteTransfer
-     */
-    public function createQuoteTransfer(
-        CustomerTransfer $customerTransfer,
-        ProductConcreteTransfer $productConcreteTransfer,
-        ProductConfigurationInstanceTransfer $productConfigurationInstanceTransfer,
-    ): QuoteTransfer {
-        return (new QuoteBuilder())
-            ->withItem([
-                ItemTransfer::PRODUCT_CONFIGURATION_INSTANCE => $productConfigurationInstanceTransfer->toArray(),
-                ItemTransfer::SKU => $productConcreteTransfer->getSku(),
-            ])
-            ->withCustomer([CustomerTransfer::CUSTOMER_REFERENCE => $customerTransfer->getCustomerReference()])
-            ->withTotals()
-            ->withShippingAddress()
-            ->withBillingAddress()
-            ->withCurrency()
-            ->withPayment()
-            ->build();
     }
 
     /**

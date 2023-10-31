@@ -102,22 +102,6 @@ class ProductConfigurationsApiTester extends ApiEndToEndTester
     }
 
     /**
-     * @return array<string, mixed>
-     */
-    protected function grabProductConfigurationInstanceDataFromConcreteProductsResource(): array
-    {
-        return $this->getDataFromResponseByJsonPath('$.data.attributes.productConfigurationInstance');
-    }
-
-    /**
-     * @return array<string, mixed>
-     */
-    protected function grabProductConfigurationInstanceDataFromOrdersResource(): array
-    {
-        return $this->getDataFromResponseByJsonPath('$.data.attributes.items[0].salesOrderItemConfiguration');
-    }
-
-    /**
      * @param string $resourceName
      * @param string $sku
      *
@@ -138,6 +122,22 @@ class ProductConfigurationsApiTester extends ApiEndToEndTester
         }
 
         return [];
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    protected function grabProductConfigurationInstanceDataFromConcreteProductsResource(): array
+    {
+        return $this->getDataFromResponseByJsonPath('$.data.attributes.productConfigurationInstance');
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    protected function grabProductConfigurationInstanceDataFromOrdersResource(): array
+    {
+        return $this->getDataFromResponseByJsonPath('$.data.attributes.items[0].salesOrderItemConfiguration');
     }
 
     /**
