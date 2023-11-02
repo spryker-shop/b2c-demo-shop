@@ -1,0 +1,48 @@
+namespace: PyzTest\Glue\Carts
+
+paths:
+    tests: .
+    data: _data
+    support: _support
+    output: _output
+
+coverage:
+    enabled: true
+    remote: false
+    whitelist: { include: ['../../../../src/*'] }
+
+suites:
+    RestApi:
+        actor: CartsApiTester
+        modules:
+            enabled:
+                - Asserts
+                - \PyzTest\Shared\Testify\Helper\Environment
+                - \SprykerTest\Shared\Testify\Helper\LocatorHelper:
+                      projectNamespaces: ['Pyz']
+                - \SprykerTest\Shared\Propel\Helper\ConnectionHelper
+                - \SprykerTest\Shared\Testify\Helper\DependencyHelper
+                - \SprykerTest\Shared\Quote\Helper\PersistentQuoteHelper
+                - \SprykerTest\Shared\Testify\Helper\DataCleanupHelper
+                - \SprykerTest\Shared\Customer\Helper\CustomerDataHelper
+                - \SprykerTest\Glue\Testify\Helper\OpenApi3
+                - \SprykerTest\Glue\Testify\Helper\JsonPath
+                - \SprykerTest\Shared\Product\Helper\ProductDataHelper
+                - \SprykerTest\Shared\PriceProduct\Helper\PriceProductDataHelper
+                - \SprykerTest\Shared\ProductOption\Helper\ProductOptionGroupDataHelper
+                - \SprykerTest\Shared\Stock\Helper\StockDataHelper
+                - \SprykerTest\Zed\ProductLabel\Helper\ProductLabelDataHelper
+                - \SprykerTest\Glue\Testify\Helper\GlueRest
+                - \SprykerTest\Shared\EntityTag\Helper\EntityTagHelper
+                - \SprykerTest\Shared\ProductRelation\Helper\ProductRelationDataHelper
+                - \SprykerTest\Glue\AuthRestApi\Helper\AuthRestApiHelper
+                - \SprykerTest\Zed\SalesOrderThreshold\Helper\SalesOrderThresholdHelper
+                - \SprykerTest\Service\Container\Helper\ContainerHelper
+                - \SprykerTest\Shared\Store\Helper\StoreDependencyHelper
+                - \SprykerTest\Shared\Testify\Helper\TableRelationsCleanupHelper
+            config:
+                \SprykerTest\Glue\Testify\Helper\GlueRest:
+                    depends: PhpBrowser
+                    part: Json
+                \SprykerTest\Shared\Testify\Helper\DataCleanupHelper:
+                    cleanup: false
