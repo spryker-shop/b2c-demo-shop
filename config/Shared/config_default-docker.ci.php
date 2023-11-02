@@ -6,6 +6,7 @@
 
 use Monolog\Logger;
 use Spryker\Shared\Event\EventConstants;
+use Spryker\Shared\GlueBackendApiApplication\GlueBackendApiApplicationConstants;
 use Spryker\Shared\GlueJsonApiConvention\GlueJsonApiConventionConstants;
 use Spryker\Shared\GlueStorefrontApiApplication\GlueStorefrontApiApplicationConstants;
 use Spryker\Shared\Log\LogConstants;
@@ -39,8 +40,10 @@ $config[ProductConstants::PUBLISHING_TO_MESSAGE_BROKER_ENABLED] = false;
 $config[MessageBrokerConstants::IS_ENABLED] = true;
 
 $sprykerGlueStorefrontHost = getenv('SPRYKER_GLUE_STOREFRONT_HOST');
+$sprykerGlueBackendHost = getenv('SPRYKER_GLUE_BACKEND_HOST');
+$config[GlueBackendApiApplicationConstants::GLUE_BACKEND_API_HOST] = $sprykerGlueBackendHost;
 $config[GlueStorefrontApiApplicationConstants::GLUE_STOREFRONT_API_HOST] = $sprykerGlueStorefrontHost;
 $config[GlueJsonApiConventionConstants::GLUE_DOMAIN] = sprintf(
     'http://%s',
-    $sprykerGlueStorefrontHost ?: 'localhost',
+    $sprykerGlueStorefrontHost ?: $sprykerGlueBackendHost ?: 'localhost',
 );

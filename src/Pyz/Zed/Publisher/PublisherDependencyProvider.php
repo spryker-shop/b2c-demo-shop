@@ -85,6 +85,7 @@ use Spryker\Zed\ProductLabelStorage\Communication\Plugin\Publisher\ProductLabelD
 use Spryker\Zed\ProductLabelStorage\Communication\Plugin\Publisher\ProductLabelProductAbstract\ProductLabelProductAbstractWritePublisherPlugin as ProductLabelProductAbstractStorageWritePublisherPlugin;
 use Spryker\Zed\ProductListSearch\Communication\Plugin\Publisher\ProductListSearchPublisherTriggerPlugin;
 use Spryker\Zed\ProductListStorage\Communication\Plugin\Publisher\ProductListPublisherTriggerPlugin;
+use Spryker\Zed\ProductPageSearch\Communication\Plugin\Publisher\CategoryStore\CategoryStoreProductAbstractPageSearchWritePublisherPlugin;
 use Spryker\Zed\ProductPageSearch\Communication\Plugin\Publisher\Product\ProductConcretePageSearchWritePublisherPlugin;
 use Spryker\Zed\ProductPageSearch\Communication\Plugin\Publisher\ProductConcretePublisherTriggerPlugin;
 use Spryker\Zed\ProductRelationStorage\Communication\Plugin\Publisher\ProductRelation\ProductRelationWriteForPublishingPublisherPlugin;
@@ -127,6 +128,7 @@ class PublisherDependencyProvider extends SprykerPublisherDependencyProvider
             $this->getCategoryStoragePlugins(),
             $this->getCategoryPageSearchPlugins(),
             $this->getProductPageSearchPlugins(),
+            $this->getProductAbstractPageSearchPlugins(),
             $this->getProductCategoryStoragePlugins(),
             $this->getStoreStoragePlugins(),
             $this->getAssetStoragePlugins(),
@@ -386,6 +388,16 @@ class PublisherDependencyProvider extends SprykerPublisherDependencyProvider
             new CurrencyStoreWritePublisherPlugin(),
             new CountryStoreWritePublisherPlugin(),
             new LocaleStoreWritePublisherPlugin(),
+        ];
+    }
+
+    /**
+     * @return list<\Spryker\Zed\PublisherExtension\Dependency\Plugin\PublisherPluginInterface>
+     */
+    public function getProductAbstractPageSearchPlugins(): array
+    {
+        return [
+            new CategoryStoreProductAbstractPageSearchWritePublisherPlugin(),
         ];
     }
 }
