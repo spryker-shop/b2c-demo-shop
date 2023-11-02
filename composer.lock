@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1a99f9092ddf4c2bf38fd78a73d0a4e8",
+    "content-hash": "62456cac0e64a73862170bda0e1a9f29",
     "packages": [
         {
             "name": "async-aws/core",
@@ -1328,6 +1328,58 @@
             },
             "abandoned": true,
             "time": "2022-12-19T11:08:26+00:00"
+        },
+        {
+            "name": "galbar/jsonpath",
+            "version": "1.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Galbar/JsonPath-PHP.git",
+                "reference": "38fdd37420626671394bb7e258d3b1be3724537b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Galbar/JsonPath-PHP/zipball/38fdd37420626671394bb7e258d3b1be3724537b",
+                "reference": "38fdd37420626671394bb7e258d3b1be3724537b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0",
+                "sami/sami": ">=3.3.0",
+                "satooshi/php-coveralls": ">=1.0.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "JsonPath\\": "src/Galbar/JsonPath",
+                    "Utilities\\": "src/Galbar/Utilities"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Alessio Linares",
+                    "email": "alessio@alessio.cc",
+                    "role": "Software Engineer"
+                }
+            ],
+            "description": "JSONPath implementation for querying and updating JSON objects",
+            "keywords": [
+                "json",
+                "jsonpath",
+                "path"
+            ],
+            "support": {
+                "issues": "https://github.com/Galbar/JsonPath-PHP/issues",
+                "source": "https://github.com/Galbar/JsonPath-PHP/tree/1.3.1"
+            },
+            "time": "2021-08-19T20:18:48+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -26095,6 +26147,53 @@
             "time": "2023-07-20T15:05:10+00:00"
         },
         {
+            "name": "spryker/glue-application-authorization-connector",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/glue-application-authorization-connector.git",
+                "reference": "cc158ef0bc5d80a6859eadddcc70a8bcb61c98c6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/glue-application-authorization-connector/zipball/cc158ef0bc5d80a6859eadddcc70a8bcb61c98c6",
+                "reference": "cc158ef0bc5d80a6859eadddcc70a8bcb61c98c6",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.4",
+                "spryker/authorization": "^1.2.0",
+                "spryker/glue-application": "^1.35.0",
+                "spryker/glue-application-authorization-connector-extension": "^1.0.0",
+                "spryker/glue-application-extension": "^1.5.0",
+                "spryker/kernel": "^3.33.0",
+                "spryker/symfony": "^3.5.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "GlueApplicationAuthorizationConnector module",
+            "support": {
+                "source": "https://github.com/spryker/glue-application-authorization-connector/tree/1.1.0"
+            },
+            "time": "2022-08-26T15:08:26+00:00"
+        },
+        {
             "name": "spryker/glue-application-authorization-connector-extension",
             "version": "1.0.0",
             "source": {
@@ -43997,16 +44096,16 @@
         },
         {
             "name": "spryker/shipments-rest-api",
-            "version": "1.8.0",
+            "version": "1.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/shipments-rest-api.git",
-                "reference": "007e8a8ac229b5d44011c9d95f85110e56d258e0"
+                "reference": "1c4a43eec809b0736fb1a0f2637924d645ac0494"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/shipments-rest-api/zipball/007e8a8ac229b5d44011c9d95f85110e56d258e0",
-                "reference": "007e8a8ac229b5d44011c9d95f85110e56d258e0",
+                "url": "https://api.github.com/repos/spryker/shipments-rest-api/zipball/1c4a43eec809b0736fb1a0f2637924d645ac0494",
+                "reference": "1c4a43eec809b0736fb1a0f2637924d645ac0494",
                 "shasum": ""
             },
             "require": {
@@ -44019,10 +44118,12 @@
                 "spryker/quote-requests-rest-api-extension": "^1.0.0",
                 "spryker/shipment": "^6.11.0 || ^7.4.0 || ^8.17.0",
                 "spryker/shipments-rest-api-extension": "^1.0.0",
-                "spryker/symfony": "^3.3.0"
+                "spryker/symfony": "^3.3.0",
+                "spryker/transfer": "^3.27.0"
             },
             "require-dev": {
                 "spryker/code-sniffer": "*",
+                "spryker/container": "*",
                 "spryker/propel": "*",
                 "spryker/store": "*",
                 "spryker/testify": "*"
@@ -44044,9 +44145,9 @@
             ],
             "description": "ShipmentsRestApi module",
             "support": {
-                "source": "https://github.com/spryker/shipments-rest-api/tree/1.8.0"
+                "source": "https://github.com/spryker/shipments-rest-api/tree/1.10.0"
             },
-            "time": "2023-09-04T12:35:05+00:00"
+            "time": "2023-10-19T09:39:34+00:00"
         },
         {
             "name": "spryker/shipments-rest-api-extension",
@@ -59706,7 +59807,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/robotframework-suite-tests.git",
-                "reference": "80de7b8085db8c43f75aeeec3cd1b2ff33b9d29a"
+                "reference": "1bb6ab758431f375ef17fc4042934245d655843b"
             },
             "default-branch": true,
             "type": "library",
@@ -59714,7 +59815,7 @@
                 "MIT"
             ],
             "description": "Automated tests for the Robot Framework",
-            "time": "2023-08-25T11:58:30+00:00"
+            "time": "2023-11-02T09:08:50+00:00"
         },
         {
             "name": "spryker/testify",
