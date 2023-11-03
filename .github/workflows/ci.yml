@@ -1,4 +1,4 @@
-name: CI
+name: B2C-CI
 
 on:
     pull_request:
@@ -9,10 +9,14 @@ on:
     schedule:
         - cron: "0 0 * * *"
 
+concurrency:
+    group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+    cancel-in-progress: true
+
 jobs:
     validation:
         name: "Static analysis / PHP 8.0"
-        runs-on: ubuntu-20.04
+        runs-on: ubuntu-22.04
         strategy:
             fail-fast: false
             matrix:
@@ -144,16 +148,16 @@ jobs:
               run: vendor/bin/phpstan analyze -l 6 -c phpstan.neon src/
 
             - name: Run Evaluator for main branch
-              run: vendor/bin/evaluator evaluate --exclude-checkers=NPM_CHECKER --format=compact
+              run: vendor/bin/evaluator evaluate --format=compact
               if: github.ref == 'refs/heads/master'
 
             - name: Run Evaluator for feature branches
-              run: vendor/bin/evaluator evaluate --exclude-checkers=NPM_CHECKER,SPRYKER_DEV_PACKAGES_CHECKER --format=compact
+              run: vendor/bin/evaluator evaluate --exclude-checkers=SPRYKER_DEV_PACKAGES_CHECKER --format=compact
               if: github.ref != 'refs/heads/master'
 
     php-81-mariadb-glue-alpine:
         name: "PHP 8.1 / MariaDB / Glue / Alpine"
-        runs-on: ubuntu-20.04
+        runs-on: ubuntu-22.04
         env:
             PROGRESS_TYPE: plain
             SPRYKER_PLATFORM_IMAGE: spryker/php:8.1
@@ -180,7 +184,7 @@ jobs:
 
     php-81-postgresql-glue-alpine:
         name: "PHP 8.1 / PostgreSQL / Glue / Alpine"
-        runs-on: ubuntu-20.04
+        runs-on: ubuntu-22.04
         env:
             PROGRESS_TYPE: plain
             SPRYKER_PLATFORM_IMAGE: spryker/php:8.1
@@ -207,7 +211,7 @@ jobs:
 
     php-81-mariadb-acceptance-alpine:
         name: "PHP 8.1 / MariaDB / Acceptance / Alpine"
-        runs-on: ubuntu-20.04
+        runs-on: ubuntu-22.04
         env:
             PROGRESS_TYPE: plain
             SPRYKER_PLATFORM_IMAGE: spryker/php:8.1
@@ -233,7 +237,7 @@ jobs:
 
     php-81-postgresql-acceptance-alpine:
         name: "PHP 8.1 / PostgreSQL / Acceptance / Alpine"
-        runs-on: ubuntu-20.04
+        runs-on: ubuntu-22.04
         env:
             PROGRESS_TYPE: plain
             SPRYKER_PLATFORM_IMAGE: spryker/php:8.1
@@ -259,7 +263,7 @@ jobs:
 
     php-81-mariadb-functional-alpine:
         name: "PHP 8.1 / MariaDB / Functional / Alpine"
-        runs-on: ubuntu-20.04
+        runs-on: ubuntu-22.04
         env:
             PROGRESS_TYPE: plain
             SPRYKER_PLATFORM_IMAGE: spryker/php:8.1
@@ -284,7 +288,7 @@ jobs:
 
     php-81-postgresql-functional-alpine:
         name: "PHP 8.1 / PostgreSQL / Functional / Alpine"
-        runs-on: ubuntu-20.04
+        runs-on: ubuntu-22.04
         env:
             PROGRESS_TYPE: plain
             SPRYKER_PLATFORM_IMAGE: spryker/php:8.1
@@ -310,7 +314,7 @@ jobs:
 
     php-80-mariadb-glue-alpine:
         name: "PHP 8.0 / MariaDB / Glue / Alpine"
-        runs-on: ubuntu-20.04
+        runs-on: ubuntu-22.04
         env:
             PROGRESS_TYPE: plain
             SPRYKER_PLATFORM_IMAGE: spryker/php:8.0
@@ -339,7 +343,7 @@ jobs:
 
     php-80-postgresql-acceptance-alpine:
         name: "PHP 8.0 / PostgreSQL / Acceptance / Alpine"
-        runs-on: ubuntu-20.04
+        runs-on: ubuntu-22.04
         env:
             PROGRESS_TYPE: plain
             SPRYKER_PLATFORM_IMAGE: spryker/php:8.0
@@ -368,7 +372,7 @@ jobs:
 
     php-80-postgresql-functional-alpine:
         name: "PHP 8.0 / PostgreSQL / Functional / Alpine"
-        runs-on: ubuntu-20.04
+        runs-on: ubuntu-22.04
         env:
             PROGRESS_TYPE: plain
             SPRYKER_PLATFORM_IMAGE: spryker/php:8.0
@@ -396,7 +400,7 @@ jobs:
 
     php-80-mariadb-acceptance-alpine:
         name: "PHP 8.0 / MariaDB / Acceptance / Alpine"
-        runs-on: ubuntu-20.04
+        runs-on: ubuntu-22.04
         env:
             PROGRESS_TYPE: plain
             SPRYKER_PLATFORM_IMAGE: spryker/php:8.0
@@ -425,7 +429,7 @@ jobs:
 
     php-80-mariadb-functional-alpine:
         name: "PHP 8.0 / MariaDB / Functional / Alpine"
-        runs-on: ubuntu-20.04
+        runs-on: ubuntu-22.04
         env:
             PROGRESS_TYPE: plain
             SPRYKER_PLATFORM_IMAGE: spryker/php:8.0
@@ -453,7 +457,7 @@ jobs:
 
     php-80-postgres-functional-debian:
         name: "PHP 8.0 / PostgreSQL / Functional / Debian"
-        runs-on: ubuntu-20.04
+        runs-on: ubuntu-22.04
         env:
             PROGRESS_TYPE: plain
             SPRYKER_PLATFORM_IMAGE: spryker/php:8.0-debian
@@ -480,7 +484,7 @@ jobs:
 
     frontend-assets-via-docker-php-8-0:
         name: "Docker / Alpine / PHP 8.0 / Frontend & Assets"
-        runs-on: ubuntu-20.04
+        runs-on: ubuntu-22.04
         env:
             PROGRESS_TYPE: plain
             SPRYKER_PLATFORM_IMAGE: spryker/php:8.0
@@ -499,7 +503,7 @@ jobs:
 
     docker-alpine-php-8-0-mariadb-robot:
         name: "Docker / Alpine / PHP 8.0 / MariaDB / Robot"
-        runs-on: ubuntu-20.04
+        runs-on: ubuntu-22.04
         env:
             PROGRESS_TYPE: plain
             SPRYKER_PLATFORM_IMAGE: spryker/php:8.0
@@ -524,9 +528,11 @@ jobs:
               run: |
                   git clone https://github.com/spryker/docker-sdk.git ./docker
                   docker/sdk boot -v deploy.ci.acceptance.mariadb.yml
+                  sudo bash -c "echo '127.0.0.1 backend-api.at.spryker.local backend-api.de.spryker.local glue-backend.de.spryker.local glue-backend.at.spryker.local glue-storefront.de.spryker.local glue-storefront.at.spryker.local backend-gateway.at.spryker.local backend-gateway.de.spryker.local backoffice.at.spryker.local backoffice.de.spryker.local date-time-configurator-example.spryker.local glue.at.spryker.local glue.de.spryker.local yves.at.spryker.local yves.de.spryker.local' >> /etc/hosts"
                   docker/sdk up -t -v
+                  docker/sdk cli composer dump-autoload -o -a
                   docker/sdk testing console queue:worker:start --stop-when-empty
-                  sudo bash -c "echo '127.0.0.1 backend-api.at.spryker.local backend-api.de.spryker.local backend-gateway.at.spryker.local backend-gateway.de.spryker.local backoffice.at.spryker.local backoffice.de.spryker.local date-time-configurator-example.spryker.local glue.at.spryker.local glue.de.spryker.local yves.at.spryker.local yves.de.spryker.local glue-storefront.de.spryker.local glue-storefront.at.spryker.local' >> /etc/hosts"
+                  APPLICATION_STORE=AT docker/sdk console queue:worker:start --stop-when-empty
             - name: Run Tests
               run: |
                   docker/sdk exec robot-framework robot -v env:api_b2c -v docker:True --exclude skip-due-to-issueORskip-due-to-refactoring -d results -s tests.api.b2c .
@@ -539,7 +545,7 @@ jobs:
 
     docker-alpine-php-8-1-postgresql-robot:
         name: "Docker / Alpine / PHP 8.1 / PostgreSQL / Robot"
-        runs-on: ubuntu-20.04
+        runs-on: ubuntu-22.04
         env:
             PROGRESS_TYPE: plain
             SPRYKER_PLATFORM_IMAGE: spryker/php:8.1
@@ -568,9 +574,11 @@ jobs:
               run: |
                   git clone https://github.com/spryker/docker-sdk.git ./docker
                   docker/sdk boot -v deploy.ci.acceptance.yml
+                  sudo bash -c "echo '127.0.0.1 backend-api.at.spryker.local backend-api.de.spryker.local glue-backend.de.spryker.local glue-backend.at.spryker.local glue-storefront.de.spryker.local glue-storefront.at.spryker.local backend-gateway.at.spryker.local backend-gateway.de.spryker.local backoffice.at.spryker.local backoffice.de.spryker.local date-time-configurator-example.spryker.local glue.at.spryker.local glue.de.spryker.local yves.at.spryker.local yves.de.spryker.local' >> /etc/hosts"
                   docker/sdk up -t -v
+                  docker/sdk cli composer dump-autoload -o -a
                   docker/sdk testing console queue:worker:start --stop-when-empty
-                  sudo bash -c "echo '127.0.0.1 backend-api.at.spryker.local backend-api.de.spryker.local backend-gateway.at.spryker.local backend-gateway.de.spryker.local backoffice.at.spryker.local backoffice.de.spryker.local date-time-configurator-example.spryker.local glue.at.spryker.local glue.de.spryker.local yves.at.spryker.local yves.de.spryker.local glue-storefront.de.spryker.local glue-storefront.at.spryker.local' >> /etc/hosts"
+                  APPLICATION_STORE=AT docker/sdk console queue:worker:start --stop-when-empty
             - name: Run Tests
               run: |
                   docker/sdk exec robot-framework robot -v env:api_b2c -v db_engine:psycopg2 -v docker:True --exclude skip-due-to-issueORskip-due-to-refactoring -d results -s tests.api.b2c .
