@@ -1,0 +1,14 @@
+{% extends view('options-list', '@SprykerShop:DateTimeConfiguratorPageExample') %}
+
+{% define data = {
+    modifiers: [],
+} %}
+
+{% block body %}
+    {% include molecule('collapsible-list') with {
+        modifiers: data.modifiers,
+        data: {
+            listItems: data.listItems,
+        },
+    } only %}
+{% endblock %}
