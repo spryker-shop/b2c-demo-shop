@@ -78,9 +78,9 @@ class ProductReviewForm extends AbstractType
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array<mixed> $options
      *
-     * @return $this
+     * @return void
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $this
             ->addSummaryField($builder)
@@ -88,8 +88,6 @@ class ProductReviewForm extends AbstractType
             ->addDescriptionField($builder)
             ->addNicknameField($builder)
             ->addProductField($builder);
-
-        return $this;
     }
 
     /**
