@@ -15,14 +15,14 @@ concurrency:
 
 jobs:
     validation:
-        name: "Static analysis / PHP 8.0"
+        name: "Static analysis / PHP 8.1"
         runs-on: ubuntu-22.04
         strategy:
             fail-fast: false
             matrix:
                 php-version: [
-                    '8.0',
-                    '8.1'
+                    '8.1',
+                    '8.2'
                 ]
 
         env:
@@ -155,12 +155,12 @@ jobs:
               run: vendor/bin/evaluator evaluate --exclude-checkers=SPRYKER_DEV_PACKAGES_CHECKER --format=compact
               if: github.ref != 'refs/heads/master'
 
-    php-81-mariadb-glue-alpine:
-        name: "PHP 8.1 / MariaDB / Glue / Alpine"
+    php-82-mariadb-glue-alpine:
+        name: "PHP 8.2 / MariaDB / Glue / Alpine"
         runs-on: ubuntu-22.04
         env:
             PROGRESS_TYPE: plain
-            SPRYKER_PLATFORM_IMAGE: spryker/php:8.1
+            SPRYKER_PLATFORM_IMAGE: spryker/php:8.2
             TRAVIS: 1
 
         steps:
@@ -182,12 +182,12 @@ jobs:
                   docker/sdk testing console queue:worker:start --stop-when-empty
                   docker/sdk testing codecept run -c codeception.api.yml
 
-    php-81-postgresql-glue-alpine:
-        name: "PHP 8.1 / PostgreSQL / Glue / Alpine"
+    php-82-postgresql-glue-alpine:
+        name: "PHP 8.2 / PostgreSQL / Glue / Alpine"
         runs-on: ubuntu-22.04
         env:
             PROGRESS_TYPE: plain
-            SPRYKER_PLATFORM_IMAGE: spryker/php:8.1
+            SPRYKER_PLATFORM_IMAGE: spryker/php:8.2
             TRAVIS: 1
 
         steps:
@@ -209,12 +209,12 @@ jobs:
                   docker/sdk testing console queue:worker:start --stop-when-empty
                   docker/sdk testing codecept run -c codeception.api.yml
 
-    php-81-mariadb-acceptance-alpine:
-        name: "PHP 8.1 / MariaDB / Acceptance / Alpine"
+    php-82-mariadb-acceptance-alpine:
+        name: "PHP 8.2 / MariaDB / Acceptance / Alpine"
         runs-on: ubuntu-22.04
         env:
             PROGRESS_TYPE: plain
-            SPRYKER_PLATFORM_IMAGE: spryker/php:8.1
+            SPRYKER_PLATFORM_IMAGE: spryker/php:8.2
             TRAVIS: 1
 
         steps:
@@ -235,12 +235,12 @@ jobs:
                   docker/sdk testing console queue:worker:start --stop-when-empty
                   docker/sdk testing codecept run -c codeception.acceptance.yml
 
-    php-81-postgresql-acceptance-alpine:
-        name: "PHP 8.1 / PostgreSQL / Acceptance / Alpine"
+    php-82-postgresql-acceptance-alpine:
+        name: "PHP 8.2 / PostgreSQL / Acceptance / Alpine"
         runs-on: ubuntu-22.04
         env:
             PROGRESS_TYPE: plain
-            SPRYKER_PLATFORM_IMAGE: spryker/php:8.1
+            SPRYKER_PLATFORM_IMAGE: spryker/php:8.2
             TRAVIS: 1
 
         steps:
@@ -261,12 +261,12 @@ jobs:
                   docker/sdk testing console queue:worker:start --stop-when-empty
                   docker/sdk testing codecept run -c codeception.acceptance.yml
 
-    php-81-mariadb-functional-alpine:
-        name: "PHP 8.1 / MariaDB / Functional / Alpine"
+    php-82-mariadb-functional-alpine:
+        name: "PHP 8.2 / MariaDB / Functional / Alpine"
         runs-on: ubuntu-22.04
         env:
             PROGRESS_TYPE: plain
-            SPRYKER_PLATFORM_IMAGE: spryker/php:8.1
+            SPRYKER_PLATFORM_IMAGE: spryker/php:8.2
             TRAVIS: 1
 
         steps:
@@ -286,12 +286,12 @@ jobs:
                   docker/sdk up -t -v
                   docker/sdk testing codecept run -c codeception.functional.yml
 
-    php-81-postgresql-functional-alpine:
-        name: "PHP 8.1 / PostgreSQL / Functional / Alpine"
+    php-82-postgresql-functional-alpine:
+        name: "PHP 8.2 / PostgreSQL / Functional / Alpine"
         runs-on: ubuntu-22.04
         env:
             PROGRESS_TYPE: plain
-            SPRYKER_PLATFORM_IMAGE: spryker/php:8.1
+            SPRYKER_PLATFORM_IMAGE: spryker/php:8.2
             TRAVIS: 1
 
         steps:
@@ -312,12 +312,12 @@ jobs:
                   docker/sdk testing console queue:worker:start --stop-when-empty
                   docker/sdk testing codecept run -c codeception.functional.yml
 
-    php-80-mariadb-glue-alpine:
-        name: "PHP 8.0 / MariaDB / Glue / Alpine"
+    php-81-mariadb-glue-alpine:
+        name: "PHP 8.1 / MariaDB / Glue / Alpine"
         runs-on: ubuntu-22.04
         env:
             PROGRESS_TYPE: plain
-            SPRYKER_PLATFORM_IMAGE: spryker/php:8.0
+            SPRYKER_PLATFORM_IMAGE: spryker/php:8.1
             TRAVIS: 1
 
         steps:
@@ -341,12 +341,12 @@ jobs:
                   docker/sdk testing console queue:worker:start --stop-when-empty
                   docker/sdk testing codecept run -c codeception.api.yml
 
-    php-80-postgresql-acceptance-alpine:
-        name: "PHP 8.0 / PostgreSQL / Acceptance / Alpine"
+    php-81-postgresql-acceptance-alpine:
+        name: "PHP 8.1 / PostgreSQL / Acceptance / Alpine"
         runs-on: ubuntu-22.04
         env:
             PROGRESS_TYPE: plain
-            SPRYKER_PLATFORM_IMAGE: spryker/php:8.0
+            SPRYKER_PLATFORM_IMAGE: spryker/php:8.1
             TRAVIS: 1
 
         steps:
@@ -370,12 +370,12 @@ jobs:
                   docker/sdk testing codecept run -c codeception.acceptance.yml
 
 
-    php-80-postgresql-functional-alpine:
-        name: "PHP 8.0 / PostgreSQL / Functional / Alpine"
+    php-81-postgresql-functional-alpine:
+        name: "PHP 8.1 / PostgreSQL / Functional / Alpine"
         runs-on: ubuntu-22.04
         env:
             PROGRESS_TYPE: plain
-            SPRYKER_PLATFORM_IMAGE: spryker/php:8.0
+            SPRYKER_PLATFORM_IMAGE: spryker/php:8.1
             TRAVIS: 1
 
         steps:
@@ -398,12 +398,12 @@ jobs:
                   docker/sdk testing console queue:worker:start --stop-when-empty
                   docker/sdk testing codecept run -c codeception.functional.yml
 
-    php-80-mariadb-acceptance-alpine:
-        name: "PHP 8.0 / MariaDB / Acceptance / Alpine"
+    php-81-mariadb-acceptance-alpine:
+        name: "PHP 8.1 / MariaDB / Acceptance / Alpine"
         runs-on: ubuntu-22.04
         env:
             PROGRESS_TYPE: plain
-            SPRYKER_PLATFORM_IMAGE: spryker/php:8.0
+            SPRYKER_PLATFORM_IMAGE: spryker/php:8.1
             TRAVIS: 1
 
         steps:
@@ -427,12 +427,12 @@ jobs:
                   docker/sdk testing codecept run -c codeception.acceptance.yml
 
 
-    php-80-mariadb-functional-alpine:
-        name: "PHP 8.0 / MariaDB / Functional / Alpine"
+    php-81-mariadb-functional-alpine:
+        name: "PHP 8.1 / MariaDB / Functional / Alpine"
         runs-on: ubuntu-22.04
         env:
             PROGRESS_TYPE: plain
-            SPRYKER_PLATFORM_IMAGE: spryker/php:8.0
+            SPRYKER_PLATFORM_IMAGE: spryker/php:8.1
             TRAVIS: 1
 
         steps:
@@ -455,12 +455,12 @@ jobs:
                   docker/sdk testing codecept run -c codeception.functional.yml
 
 
-    php-80-postgres-functional-debian:
-        name: "PHP 8.0 / PostgreSQL / Functional / Debian"
+    php-81-postgres-functional-debian:
+        name: "PHP 8.1 / PostgreSQL / Functional / Debian"
         runs-on: ubuntu-22.04
         env:
             PROGRESS_TYPE: plain
-            SPRYKER_PLATFORM_IMAGE: spryker/php:8.0-debian
+            SPRYKER_PLATFORM_IMAGE: spryker/php:8.1-debian
             TRAVIS: 1
 
         steps:
@@ -482,12 +482,12 @@ jobs:
                   docker/sdk up -t -v
                   docker/sdk testing codecept run -c codeception.functional.yml
 
-    frontend-assets-via-docker-php-8-0:
-        name: "Docker / Alpine / PHP 8.0 / Frontend & Assets"
+    frontend-assets-via-docker-php-8-1:
+        name: "Docker / Alpine / PHP 8.1 / Frontend & Assets"
         runs-on: ubuntu-22.04
         env:
             PROGRESS_TYPE: plain
-            SPRYKER_PLATFORM_IMAGE: spryker/php:8.0
+            SPRYKER_PLATFORM_IMAGE: spryker/php:8.1
         steps:
             - uses: actions/checkout@v3
             - run: echo eyAiZXhwZXJpbWVudGFsIiA6IHRydWUsICJmZWF0dXJlcyIgOiB7ICJidWlsZGtpdCI6IHRydWUgfSB9Cg==|base64 -d|sudo tee /etc/docker/daemon.json
@@ -501,12 +501,12 @@ jobs:
             - run: docker run -t --rm --entrypoint='' spryker_b2c_frontend:1.0-frontend ls -al /data/public/Yves/assets/myhash
             - run: docker run -t --rm --entrypoint='' spryker_b2c_frontend:1.0-frontend ls -al /data/public/Zed/assets/
 
-    docker-alpine-php-8-0-mariadb-robot:
-        name: "Docker / Alpine / PHP 8.0 / MariaDB / Robot"
+    docker-alpine-php-8-1-mariadb-robot:
+        name: "Docker / Alpine / PHP 8.1 / MariaDB / Robot"
         runs-on: ubuntu-22.04
         env:
             PROGRESS_TYPE: plain
-            SPRYKER_PLATFORM_IMAGE: spryker/php:8.0
+            SPRYKER_PLATFORM_IMAGE: spryker/php:8.1
             TRAVIS: 1
             ROBOT_TESTS_ARTIFACTS_BUCKET_REGION: eu-west-1
         steps:
@@ -539,16 +539,16 @@ jobs:
             - name: Upload artifacts
               if: always()
               run: |
-                  AWS_DEFAULT_REGION=${{env.ROBOT_TESTS_ARTIFACTS_BUCKET_REGION}} AWS_ACCESS_KEY_ID=${{ secrets.ROBOT_TESTS_ARTIFACTS_KEY }} AWS_SECRET_ACCESS_KEY=${{ secrets.ROBOT_TESTS_ARTIFACTS_SECRET }} aws s3 cp .robot/results s3://${{vars.ROBOT_TESTS_ARTIFACTS_BUCKET}}/b2c-robot-api-ci/${GITHUB_RUN_ID}/PHP8.0MariaDBRobot/ \
+                  AWS_DEFAULT_REGION=${{env.ROBOT_TESTS_ARTIFACTS_BUCKET_REGION}} AWS_ACCESS_KEY_ID=${{ secrets.ROBOT_TESTS_ARTIFACTS_KEY }} AWS_SECRET_ACCESS_KEY=${{ secrets.ROBOT_TESTS_ARTIFACTS_SECRET }} aws s3 cp .robot/results s3://${{vars.ROBOT_TESTS_ARTIFACTS_BUCKET}}/b2c-robot-api-ci/${GITHUB_RUN_ID}/PHP8.1MariaDBRobot/ \
                     --recursive \
                     --expires "$(date -d '+7 days' --utc +'%Y-%m-%dT%H:%M:%SZ')"
 
-    docker-alpine-php-8-1-postgresql-robot:
-        name: "Docker / Alpine / PHP 8.1 / PostgreSQL / Robot"
+    docker-alpine-php-8-2-postgresql-robot:
+        name: "Docker / Alpine / PHP 8.2 / PostgreSQL / Robot"
         runs-on: ubuntu-22.04
         env:
             PROGRESS_TYPE: plain
-            SPRYKER_PLATFORM_IMAGE: spryker/php:8.1
+            SPRYKER_PLATFORM_IMAGE: spryker/php:8.2
             TRAVIS: 1
             ROBOT_TESTS_ARTIFACTS_BUCKET_REGION: eu-west-1
         steps:
@@ -585,6 +585,6 @@ jobs:
             - name: Upload artifacts
               if: always()
               run: |
-                  AWS_DEFAULT_REGION=${{env.ROBOT_TESTS_ARTIFACTS_BUCKET_REGION}} AWS_ACCESS_KEY_ID=${{ secrets.ROBOT_TESTS_ARTIFACTS_KEY }} AWS_SECRET_ACCESS_KEY=${{ secrets.ROBOT_TESTS_ARTIFACTS_SECRET }} aws s3 cp .robot/results s3://${{vars.ROBOT_TESTS_ARTIFACTS_BUCKET}}/b2c-robot-api-ci/${GITHUB_RUN_ID}/PHP8.1PostgreSQLRobot/ \
+                  AWS_DEFAULT_REGION=${{env.ROBOT_TESTS_ARTIFACTS_BUCKET_REGION}} AWS_ACCESS_KEY_ID=${{ secrets.ROBOT_TESTS_ARTIFACTS_KEY }} AWS_SECRET_ACCESS_KEY=${{ secrets.ROBOT_TESTS_ARTIFACTS_SECRET }} aws s3 cp .robot/results s3://${{vars.ROBOT_TESTS_ARTIFACTS_BUCKET}}/b2c-robot-api-ci/${GITHUB_RUN_ID}/PHP8.2PostgreSQLRobot/ \
                     --recursive \
                     --expires "$(date -d '+7 days' --utc +'%Y-%m-%dT%H:%M:%SZ')"
