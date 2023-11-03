@@ -1,4 +1,4 @@
-name: CI
+name: B2C-CI
 
 on:
     pull_request:
@@ -8,6 +8,10 @@ on:
     workflow_dispatch:
     schedule:
         - cron: "0 0 * * *"
+
+concurrency:
+    group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+    cancel-in-progress: true
 
 jobs:
     validation:
