@@ -131,6 +131,12 @@
                 'body-loading-class-name': pageLoadingClassName,
             },
         } only %}
+
+        {% include molecule('main-overlay') with {
+            attributes: {
+                'is-open': data.isOverlayOpen,
+            },
+        } only %}
     {% endblock %}
 
     {% block footer %}
