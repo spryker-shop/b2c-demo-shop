@@ -253,7 +253,27 @@ $config[OauthConstants::PUBLIC_KEY_PATH]
         getenv('SPRYKER_OAUTH_KEY_PUBLIC') ?: '',
     ) ?: null;
 $config[OauthConstants::ENCRYPTION_KEY] = getenv('SPRYKER_OAUTH_ENCRYPTION_KEY') ?: null;
-$config[OauthConstants::OAUTH_CLIENT_CONFIGURATION] = json_decode(getenv('SPRYKER_OAUTH_CLIENT_CONFIGURATION'), true) ?: [];
+$config[OauthConstants::OAUTH_CLIENT_CONFIGURATION] = array_merge(
+    json_decode(getenv('SPRYKER_OAUTH_CLIENT_CONFIGURATION'), true) ?: [],
+    [
+        [
+            'identifier' => 'fulfillment-client-b2c-local',
+            'secret' => null,
+            'isConfidential' => false,
+            'name' => 'Fulfillment b2c local',
+            'redirectUri' => 'http://localhost:4200/oauth/cb/spryker',
+            'isDefault' => false,
+        ],
+        [
+            'identifier' => 'fulfillment-client-b2c-dev',
+            'secret' => null,
+            'isConfidential' => false,
+            'name' => 'Fulfillment b2c dev',
+            'redirectUri' => 'https://dev-b2c-fulfillment.netlify.app/oauth/cb/spryker',
+            'isDefault' => false,
+        ],
+    ],
+);
 
 // >> ZED REQUEST
 
