@@ -6,10 +6,13 @@
 
         {% if not isItemRelatedToBundle %}
             <div class="grid {{ config.jsName }}__item-shipping-{{ loop.index }}">
-                {% set hasShippingAddresses = item.shippingAddress.id_customer_address is defined %}
+                {% set shippingAddress = item.shippingAddress %}
+                {% set hasShippingAddresses = shippingAddress.id_customer_address is defined %}
+                {% set isNewAddressSelected = shippingAddress.id_customer_address.vars.value | default == 0 %}
                 {% set itemName = item.vars.data.name | default %}
                 {% set itemQuantity = item.vars.data.quantity | default %}
                 {% set imageUrl = item.vars.data.images[0].externalUrlSmall ?? '' %}
+                {% set newAddressHiddenClassName = not isNewAddressSelected and hasShippingAddresses ? ' is-hidden' %}
 
                 {% embed molecule('product-card-item') with {
                     class: 'col col--sm-12 col--lg-6',
@@ -80,10 +83,10 @@
 
                 <div class="col col--sm-12">
                     {% include molecule('form') with {
-                        class: config.jsName ~ '__item-shipping ' ~ (hasShippingAddresses ? ' is-hidden ') ~ config.jsName ~ '__item-shipping--' ~ loop.index,
+                        class: config.jsName ~ '__item-shipping ' ~ config.jsName ~ '__item-shipping--' ~ loop.index ~ newAddressHiddenClassName,
                         modifiers: ['checkout-form'],
                         data: {
-                            form: item.shippingAddress,
+                            form: shippingAddress,
                             enableStart: false,
                             enableEnd: false,
                             layout: {
@@ -102,7 +105,7 @@
                     {% include molecule('address-form-toggler', 'CustomerPage') ignore missing with {
                         class: config.jsName ~ '__toggler',
                         attributes: {
-                            'trigger-selector': '[name="' ~ item.shippingAddress.id_customer_address.vars.full_name ~ '"]',
+                            'trigger-selector': '[name="' ~ shippingAddress.id_customer_address.vars.full_name ~ '"]',
                             'target-selector': '.' ~ config.jsName ~ '__item-shipping--' ~ loop.index,
                             'parent-target-class-name': config.jsName,
                         },
