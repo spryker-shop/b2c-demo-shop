@@ -219,7 +219,7 @@
         "spryker/util-number": "^1.0.0",
         "spryker/uuid": "^1.0.1",
         "spryker/warehouse-oauth-backend-api": "^1.0.0",
-        "spryker/warehouse-users-backend-api": "1.1.0",
+        "spryker/warehouse-users-backend-api": "^1.1.0",
         "spryker/warehouses-backend-api": "^1.0.0",
         "spryker/wishlists-rest-api": "^1.6.2",
         "symfony/http-kernel": "^6.3.7"
@@ -1288,6 +1288,10 @@
         "phpstan-setup": "vendor/bin/console dev:ide-auto-completion:generate",
         "prefer-mid": [
             "COMPOSER_MEMORY_LIMIT=-1 composer require twig/twig:\"^2.9.0\""
-        ]
+        ],
+        "auto-scripts": {
+            "cache:clear": "symfony-cmd",
+            "assets:install %PUBLIC_DIR%": "symfony-cmd"
+        }
     }
 }
