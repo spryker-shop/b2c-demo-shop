@@ -179,15 +179,3 @@ $config[GlueBackendApiApplicationConstants::PROJECT_NAMESPACES] = [
 // ----------------------------------------------------------------------------
 $sprykerGlueStorefrontHost = getenv('SPRYKER_GLUE_STOREFRONT_HOST');
 $config[GlueStorefrontApiApplicationConstants::GLUE_STOREFRONT_API_HOST] = $sprykerGlueStorefrontHost;
-
-//-----------------------------------------------------------------------------
-//----------------------------------- ACP -------------------------------------
-//-----------------------------------------------------------------------------
-$config[SearchHttpConstants::TENANT_IDENTIFIER]
-    = $config[ProductConstants::TENANT_IDENTIFIER]
-    = $config[MessageBrokerConstants::TENANT_IDENTIFIER]
-    = $config[MessageBrokerAwsConstants::CONSUMER_ID]
-    = $config[OauthClientConstants::TENANT_IDENTIFIER]
-    = $config[PaymentConstants::TENANT_IDENTIFIER]
-    = $config[AppCatalogGuiConstants::TENANT_IDENTIFIER]
-    = getenv('SPRYKER_TENANT_IDENTIFIER') ?: '';
