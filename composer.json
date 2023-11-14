@@ -665,7 +665,7 @@
         "spryker/documentation-generator-rest-api": "1.15.0",
         "spryker/documentation-generator-rest-api-extension": "1.0.0",
         "spryker/dummy-payment": "2.8.0",
-        "spryker/dynamic-entity": "1.1.0",
+        "spryker/dynamic-entity": "1.2.0",
         "spryker/dynamic-entity-backend-api": "1.1.0",
         "spryker/dynamic-entity-extension": "1.0.0",
         "spryker/dynamic-entity-gui": "1.1.0",
@@ -696,7 +696,7 @@
         "spryker/gift-cards-rest-api": "1.0.0",
         "spryker/glossary": "3.15.0",
         "spryker/glossary-storage": "1.11.2",
-        "spryker/glue-application": "1.58.0",
+        "spryker/glue-application": "1.59.0",
         "spryker/glue-application-authorization-connector": "1.1.0",
         "spryker/glue-application-authorization-connector-extension": "1.0.0",
         "spryker/glue-application-extension": "1.14.0",
@@ -1289,6 +1289,10 @@
         "phpstan-setup": "vendor/bin/console dev:ide-auto-completion:generate",
         "prefer-mid": [
             "COMPOSER_MEMORY_LIMIT=-1 composer require twig/twig:\"^2.9.0\""
-        ]
+        ],
+        "auto-scripts": {
+            "cache:clear": "symfony-cmd",
+            "assets:install %PUBLIC_DIR%": "symfony-cmd"
+        }
     }
 }
