@@ -2789,5 +2789,39 @@
                 }
             ]
         }
+    },
+    {
+        "tableName": "spy_locale_store",
+        "tableAlias": "locale-stores",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_locale_store",
+            "fields": [
+                {
+                    "fieldName": "id_locale_store",
+                    "fieldVisibleName": "id_locale_store",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "validation": { "isRequired": false },
+                    "type": "integer"
+                },
+                {
+                    "fieldName": "fk_locale",
+                    "fieldVisibleName": "fk_locale",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "fk_store",
+                    "fieldVisibleName": "fk_store",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                }
+            ]
+        }
     }
 ]
