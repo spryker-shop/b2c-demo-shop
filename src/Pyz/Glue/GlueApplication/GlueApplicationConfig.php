@@ -49,6 +49,16 @@ class GlueApplicationConfig extends SprykerGlueApplicationConfig
     }
 
     /**
+     * @return array<string>
+     */
+    public function getRoutePatternsAllowedForCacheWarmUp(): array
+    {
+        return [
+            '/^\/dynamic-entity\/.+/', // @see {@link \Spryker\Glue\DynamicEntityBackendApi\DynamicEntityBackendApiConfig::getRoutePrefix()}
+        ];
+    }
+
+    /**
      * @return bool
      */
     public function isTerminationEnabled(): bool
