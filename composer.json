@@ -459,7 +459,7 @@
         "spryker/agent-gui": "1.1.0",
         "spryker/alternative-products-rest-api": "1.1.2",
         "spryker/api-key": "2.0.0",
-        "spryker/api-key-authorization-connector": "1.0.0",
+        "spryker/api-key-authorization-connector": "1.1.0",
         "spryker/api-key-gui": "2.0.0",
         "spryker/app-catalog-gui": "1.4.1",
         "spryker/application": "3.35.0",
@@ -473,8 +473,8 @@
         "spryker/authentication": "1.0.0",
         "spryker/authentication-extension": "1.0.0",
         "spryker/authentication-oauth": "1.0.1",
-        "spryker/authorization": "1.4.0",
-        "spryker/authorization-extension": "1.1.0",
+        "spryker/authorization": "1.5.0",
+        "spryker/authorization-extension": "1.2.0",
         "spryker/availability": "9.20.0",
         "spryker/availability-cart-connector": "7.3.0",
         "spryker/availability-cart-connector-extension": "1.0.0",
@@ -1289,6 +1289,10 @@
         "phpstan-setup": "vendor/bin/console dev:ide-auto-completion:generate",
         "prefer-mid": [
             "COMPOSER_MEMORY_LIMIT=-1 composer require twig/twig:\"^2.9.0\""
-        ]
+        ],
+        "auto-scripts": {
+            "cache:clear": "symfony-cmd",
+            "assets:install %PUBLIC_DIR%": "symfony-cmd"
+        }
     }
 }
