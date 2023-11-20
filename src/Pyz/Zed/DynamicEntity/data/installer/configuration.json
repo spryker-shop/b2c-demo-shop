@@ -23,14 +23,6 @@
                     "validation": { "isRequired": true }
                 },
                 {
-                    "fieldName": "approval_status",
-                    "fieldVisibleName": "approval_status",
-                    "isCreatable": true,
-                    "isEditable": true,
-                    "type": "string",
-                    "validation": { "isRequired": false }
-                },
-                {
                     "fieldName": "attributes",
                     "fieldVisibleName": "attributes",
                     "isCreatable": true,
@@ -105,14 +97,6 @@
                     "validation": { "isRequired": true }
                 },
                 {
-                    "fieldName": "discount",
-                    "fieldVisibleName": "discount",
-                    "isCreatable": true,
-                    "isEditable": true,
-                    "type": "integer",
-                    "validation": { "isRequired": false }
-                },
-                {
                     "fieldName": "is_active",
                     "fieldVisibleName": "is_active",
                     "isVisible": true,
@@ -136,14 +120,6 @@
                     "isEditable": true,
                     "type": "string",
                     "validation": { "isRequired": true }
-                },
-                {
-                    "fieldName": "warehouses",
-                    "fieldVisibleName": "warehouses",
-                    "isCreatable": true,
-                    "isEditable": true,
-                    "type": "string",
-                    "validation": { "isRequired": false }
                 }
             ]
         }
@@ -1086,14 +1062,6 @@
                     "validation": { "isRequired": false }
                 },
                 {
-                    "fieldName": "key",
-                    "fieldVisibleName": "key",
-                    "isCreatable": true,
-                    "isEditable": true,
-                    "type": "string",
-                    "validation": { "isRequired": true }
-                },
-                {
                     "fieldName": "name",
                     "fieldVisibleName": "name",
                     "isCreatable": true,
@@ -1630,8 +1598,8 @@
                     "validation": { "isRequired": false }
                 },
                 {
-                    "fieldName": "is_actice",
-                    "fieldVisibleName": "is_actice",
+                    "fieldName": "is_active",
+                    "fieldVisibleName": "is_active",
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "boolean",
@@ -2014,8 +1982,8 @@
                     "validation": { "isRequired": true }
                 },
                 {
-                    "fieldName": "fk_task_set",
-                    "fieldVisibleName": "fk_task_set",
+                    "fieldName": "fk_tax_set",
+                    "fieldVisibleName": "fk_tax_set",
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
@@ -2818,6 +2786,40 @@
                     "isEditable": false,
                     "type": "string",
                     "validation": { "isRequired": false }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_locale_store",
+        "tableAlias": "locale-stores",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_locale_store",
+            "fields": [
+                {
+                    "fieldName": "id_locale_store",
+                    "fieldVisibleName": "id_locale_store",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "validation": { "isRequired": false },
+                    "type": "integer"
+                },
+                {
+                    "fieldName": "fk_locale",
+                    "fieldVisibleName": "fk_locale",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "fk_store",
+                    "fieldVisibleName": "fk_store",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
                 }
             ]
         }
