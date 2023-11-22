@@ -3,6 +3,7 @@
 {% define data = {
     wrapperClassName: '',
     hasStatus: true,
+    modifiers: [],
 } %}
 
 {% block body %}
@@ -15,4 +16,13 @@
     {% if data.hasStatus %}
         {{ parent() }}
     {% endif %}
+{% endblock %}
+
+{% block optionsTemplate %}
+    {% include configurableTemplate ignore missing with {
+        data: {
+            listItems: productConfigurationTemplate.data,
+            modifiers: data.modifiers,
+        },
+    } only %}
 {% endblock %}

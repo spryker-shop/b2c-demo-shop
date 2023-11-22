@@ -202,7 +202,6 @@ class ProductConfigurationsRestApiFixtures implements FixturesBuilderInterface, 
             PriceProductTransfer::MONEY_VALUE => [
                 MoneyValueTransfer::NET_AMOUNT => 100,
                 MoneyValueTransfer::GROSS_AMOUNT => 100,
-                MoneyValueTransfer::STORE => static::STORE_NAME_DE,
             ],
         ]);
     }

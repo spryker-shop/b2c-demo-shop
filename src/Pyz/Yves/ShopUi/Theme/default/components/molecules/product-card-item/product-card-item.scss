@@ -44,6 +44,10 @@
 
             &--additional-info {
                 padding: 0 0 0 rem(20);
+
+                @include helper-breakpoint-media-min($lg-min) {
+                    display: flex;
+                }
             }
 
             &--with-checkbox {
@@ -60,33 +64,7 @@
         }
 
         &__product-configuration {
-            display: inline-block;
-        }
-
-        &__product-configuration-options {
-            margin: rem(16) 0;
-
-            &--desktop {
-                display: none;
-
-                @include helper-breakpoint-media-min($lg-min) {
-                    display: block;
-                }
-            }
-
-            &--mobile {
-                @include helper-breakpoint-media-min($lg-min) {
-                    display: none;
-                }
-            }
-
-            &--no-spacing {
-                margin: 0;
-            }
-        }
-
-        &__additional-options {
-            display: inline-block;
+            margin: rem(10) 0;
         }
 
         &__image {
