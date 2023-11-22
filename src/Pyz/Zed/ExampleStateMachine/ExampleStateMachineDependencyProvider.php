@@ -15,7 +15,7 @@ class ExampleStateMachineDependencyProvider extends AbstractBundleDependencyProv
     /**
      * @var string
      */
-    public const PYZ_FACADE_STATE_MACHINE = 'PYZ_FACADE_STATE_MACHINE';
+    public const FACADE_STATE_MACHINE = 'FACADE_STATE_MACHINE';
 
     /**
      * @param \Spryker\Zed\Kernel\Container $container
@@ -24,7 +24,7 @@ class ExampleStateMachineDependencyProvider extends AbstractBundleDependencyProv
      */
     public function provideBusinessLayerDependencies(Container $container): Container
     {
-        $container->set(static::PYZ_FACADE_STATE_MACHINE, function (Container $container) {
+        $container->set(static::FACADE_STATE_MACHINE, function (Container $container) {
             return $container->getLocator()->stateMachine()->facade();
         });
 
@@ -38,7 +38,7 @@ class ExampleStateMachineDependencyProvider extends AbstractBundleDependencyProv
      */
     public function provideCommunicationLayerDependencies(Container $container): Container
     {
-        $container->set(static::PYZ_FACADE_STATE_MACHINE, function (Container $container) {
+        $container->set(static::FACADE_STATE_MACHINE, function (Container $container) {
             return $container->getLocator()->stateMachine()->facade();
         });
 

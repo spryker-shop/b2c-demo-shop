@@ -60,7 +60,7 @@
 
         <li class="{{ config.name }}__item">
             {% include molecule('cart-counter') with {
-                class: config.jsName ~ '__trigger',
+                class: config.name ~ '__link ' ~ config.jsName ~ '__trigger',
                 data: {
                     quantity: data.cartQuantity,
                 },

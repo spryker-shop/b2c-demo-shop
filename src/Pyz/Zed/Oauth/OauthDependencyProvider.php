@@ -31,6 +31,9 @@ use Spryker\Zed\OauthRevoke\Communication\Plugin\Oauth\OauthRefreshTokensReaderP
 use Spryker\Zed\OauthRevoke\Communication\Plugin\Oauth\OauthRefreshTokensRevokerPlugin;
 use Spryker\Zed\OauthUserConnector\Communication\Plugin\Oauth\UserOauthScopeProviderPlugin;
 use Spryker\Zed\OauthUserConnector\Communication\Plugin\Oauth\UserOauthUserProviderPlugin;
+use Spryker\Zed\OauthWarehouse\Communication\Plugin\Oauth\WarehouseOauthRequestGrantTypeConfigurationProviderPlugin;
+use Spryker\Zed\OauthWarehouse\Communication\Plugin\Oauth\WarehouseOauthScopeProviderPlugin;
+use Spryker\Zed\OauthWarehouse\Communication\Plugin\Oauth\WarehouseOauthUserProviderPlugin;
 
 class OauthDependencyProvider extends SprykerOauthDependencyProvider
 {
@@ -43,6 +46,7 @@ class OauthDependencyProvider extends SprykerOauthDependencyProvider
             new CustomerOauthUserProviderPlugin(),
             new AgentOauthUserProviderPlugin(),
             new CustomerImpersonationOauthUserProviderPlugin(),
+            new WarehouseOauthUserProviderPlugin(),
         ];
     }
 
@@ -66,6 +70,7 @@ class OauthDependencyProvider extends SprykerOauthDependencyProvider
             new AgentOauthScopeProviderPlugin(),
             new CustomerImpersonationOauthScopeProviderPlugin(),
             new UserOauthScopeProviderPlugin(),
+            new WarehouseOauthScopeProviderPlugin(),
         ];
     }
 
@@ -158,6 +163,7 @@ class OauthDependencyProvider extends SprykerOauthDependencyProvider
         return [
             new UserPasswordOauthRequestGrantTypeConfigurationProviderPlugin(),
             new CustomerPasswordOauthRequestGrantTypeConfigurationProviderPlugin(),
+            new WarehouseOauthRequestGrantTypeConfigurationProviderPlugin(),
         ];
     }
 

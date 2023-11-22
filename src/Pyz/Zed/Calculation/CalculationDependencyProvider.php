@@ -45,6 +45,7 @@ use Spryker\Zed\Shipment\Communication\Plugin\Calculation\ShipmentTotalCalculato
 use Spryker\Zed\Tax\Communication\Plugin\Calculator\TaxAmountAfterCancellationCalculatorPlugin;
 use Spryker\Zed\Tax\Communication\Plugin\Calculator\TaxAmountCalculatorPlugin;
 use Spryker\Zed\Tax\Communication\Plugin\Calculator\TaxRateAverageAggregatorPlugin;
+use Spryker\Zed\TaxApp\Communication\Plugin\Calculation\TaxAppCalculationPlugin;
 use Spryker\Zed\TaxProductConnector\Communication\Plugin\Calculation\ProductItemTaxRateCalculatorPlugin;
 
 class CalculationDependencyProvider extends SprykerCalculationDependencyProvider
@@ -228,6 +229,7 @@ class CalculationDependencyProvider extends SprykerCalculationDependencyProvider
             new DiscountTotalCalculatorPlugin(),
             new RefundTotalCalculatorPlugin(),
             new TaxTotalCalculatorPlugin(),
+            new TaxAppCalculationPlugin(),
             new GrandTotalCalculatorPlugin(),
             new NetTotalCalculatorPlugin(),
 
@@ -273,6 +275,7 @@ class CalculationDependencyProvider extends SprykerCalculationDependencyProvider
             new RefundTotalCalculatorPlugin(),
             new CanceledTotalCalculationPlugin(),
             new OrderTaxTotalCalculationPlugin(),
+            new TaxAppCalculationPlugin(),
             new GrandTotalCalculatorPlugin(),
             new NetTotalCalculatorPlugin(),
         ];

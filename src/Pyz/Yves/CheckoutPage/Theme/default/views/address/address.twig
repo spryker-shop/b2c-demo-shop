@@ -28,6 +28,13 @@
     } only %}
         {% block fields %}
             {% set hasShippingAddresses = data.form.shippingAddress.id_customer_address is defined %}
+            {% set hiddenClassName = 'is-hidden' %}
+            {% set shippingAddressValue = data.form.shippingAddress.id_customer_address.vars.value | default %}
+            {% set isNewAddressSelected = shippingAddressValue == 0 or shippingAddressValue is empty %}
+            {% set newAddressHiddenClassName = hasShippingAddresses and not isNewAddressSelected ? ' ' ~ hiddenClassName %}
+            {% set isMultipleShipmentSelected = shippingAddressValue == -1 %}
+            {% set multipleShipmentHiddenClassName = not isMultipleShipmentSelected ? ' ' ~ hiddenClassName %}
+            {% set billingSameAsShippingHiddenClassName = isMultipleShipmentSelected ? hiddenClassName %}
 
             <h2 class="title title--primary col col--sm-12 grid grid--baseline">
                 <span class="col col--sm-12 col--md-8">{{ 'page.checkout.address.shipping-address' | trans }}</span>
@@ -47,7 +54,7 @@
             {% endif %}
 
             {% include molecule('form') with {
-                class: embed.jsAddressClass ~ '__shipping' ~ (hasShippingAddresses ? ' is-hidden ') ~ 'col col--sm-12',
+                class: embed.jsAddressClass ~ '__shipping col col--sm-12' ~ newAddressHiddenClassName,
                 modifiers: ['checkout-form', 'checkout-form-elements'],
                 data: {
                     form: embed.forms.shipping,
@@ -68,7 +75,7 @@
 
             {% if embed.isMultipleShipmentEnabled %}
                 {% include molecule('address-item-form', 'CheckoutPage') with {
-                    class: 'col col--sm-12 is-hidden spacing-bottom ' ~ embed.jsAddressClass ~ '__items-target',
+                    class: 'col col--sm-12 spacing-bottom ' ~ embed.jsAddressClass ~ '__items-target' ~ multipleShipmentHiddenClassName,
                     data: {
                         form: embed.forms.items,
                         formBundle: embed.forms.bundleItems,
@@ -81,20 +88,20 @@
             <div class="grid grid--expand col col--sm-12 spacing-bottom spacing-bottom--biggest">
                 <h2 class="title title--primary col col--sm-12">{{ 'page.checkout.address.billing-address' | trans }}</h2>
 
-                <div class="col col--sm-12 {{ embed.jsAddressClass }}__billing-same-as-shipping">
+                <div class="col col--sm-12 {{ embed.jsAddressClass }}__billing-same-as-shipping {{ billingSameAsShippingHiddenClassName }}">
                     {{ form_row(data.form.billingSameAsShipping, {
                         label: 'page.checkout.address.billing-same-as-shipping' | trans,
                         component: molecule('toggler-checkbox'),
                         attributes: {
                             'target-class-name': embed.jsAddressClass ~ '__billing-address',
                             'add-class-when-checked': true,
-                            'checked': embed.isBillingSameAsShippingChecked,
+                            checked: not isMultipleShipmentSelected ? embed.isBillingSameAsShippingChecked : false,
                         },
                     }) }}
                 </div>
 
                 {% embed molecule('form') with {
-                    class: 'col col--sm-12 spacing-top spacing-top--big is-hidden ' ~ embed.jsAddressClass ~  '__billing-address',
+                    class: 'col col--sm-12 spacing-top spacing-top--big ' ~ embed.jsAddressClass ~  '__billing-address ' ~ hiddenClassName,
                     modifiers: ['checkout-form-elements'],
                     data: {
                         form: embed.forms.billing,
@@ -113,10 +120,14 @@
                     },
                     embed: {
                         jsAddressClass: embed.jsAddressClass,
+                        hiddenClassName: hiddenClassName
                     },
                 } only %}
                     {% block fields %}
                         {% set hasBillingAddresses = data.form.id_customer_address is defined %}
+                        {% set billingAddressValue = data.form.id_customer_address.vars.value | default %}
+                        {% set isNewAddressSelected = billingAddressValue == 0 or billingAddressValue is empty %}
+                        {% set newAddressHiddenClassName = hasBillingAddresses and not isNewAddressSelected ? ' ' ~ embed.hiddenClassName %}
 
                         {% if hasBillingAddresses %}
                             <div class="col col--sm-12 spacing-bottom spacing-bottom--small">
@@ -127,7 +138,7 @@
                         {% endif %}
 
                         <div class="{{ config.name }}__checkout-sub-form">
-                            <div class="{{ config.name }}__checkout-sub-form-content {{ embed.jsAddressClass }}__billing {{ hasBillingAddresses ? 'is-hidden' }}">
+                            <div class="{{ config.name }}__checkout-sub-form-content {{ embed.jsAddressClass }}__billing {{ newAddressHiddenClassName }}">
                                 {{ parent() }}
                             </div>
                         </div>

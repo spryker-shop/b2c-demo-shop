@@ -7,6 +7,7 @@
 
 namespace Pyz\Zed\DataImport\Business\Model\Product\Repository;
 
+use Generated\Shared\Transfer\PaginationTransfer;
 use Orm\Zed\Product\Persistence\Map\SpyProductAbstractTableMap;
 use Orm\Zed\Product\Persistence\Map\SpyProductTableMap;
 use Orm\Zed\Product\Persistence\SpyProduct;
@@ -103,17 +104,19 @@ class ProductRepository implements ProductRepositoryInterface
     }
 
     /**
+     * @param \Generated\Shared\Transfer\PaginationTransfer $paginationTransfer
+     *
      * @return \Propel\Runtime\Collection\ArrayCollection
      */
-    public function getProductConcreteAttributesCollection(): ArrayCollection
+    public function getProductConcreteAttributesCollection(PaginationTransfer $paginationTransfer): ArrayCollection
     {
-        /** @var \Propel\Runtime\Collection\ArrayCollection $productData */
-        $productData = SpyProductQuery::create()
+        $productQuery = SpyProductQuery::create()
             ->joinWithSpyProductAbstract()
-            ->select([SpyProductTableMap::COL_ATTRIBUTES, SpyProductTableMap::COL_SKU, SpyProductAbstractTableMap::COL_SKU])
-            ->find();
+            ->select([SpyProductTableMap::COL_ATTRIBUTES, SpyProductTableMap::COL_SKU, SpyProductAbstractTableMap::COL_SKU]);
 
-        return $productData;
+        $productQuery = $this->applyPagination($productQuery, $paginationTransfer);
+
+        return $productQuery->find();
     }
 
     /**
@@ -192,5 +195,22 @@ class ProductRepository implements ProductRepositoryInterface
     public function flush(): void
     {
         static::$resolved = [];
+    }
+
+    /**
+     * @param \Orm\Zed\Product\Persistence\SpyProductQuery $productQuery
+     * @param \Generated\Shared\Transfer\PaginationTransfer $paginationTransfer
+     *
+     * @return \Orm\Zed\Product\Persistence\SpyProductQuery
+     */
+    protected function applyPagination(SpyProductQuery $productQuery, PaginationTransfer $paginationTransfer): SpyProductQuery
+    {
+        if ($paginationTransfer->getOffset() === null || $paginationTransfer->getLimit() === null) {
+            return $productQuery;
+        }
+
+        return $productQuery
+            ->offset($paginationTransfer->getOffsetOrFail())
+            ->setLimit($paginationTransfer->getLimitOrFail());
     }
 }

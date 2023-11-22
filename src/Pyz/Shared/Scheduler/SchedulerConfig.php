@@ -14,5 +14,5 @@ class SchedulerConfig extends AbstractSharedConfig
     /**
      * @var string
      */
-    public const PYZ_SCHEDULER_JENKINS = 'jenkins';
+    public const SCHEDULER_JENKINS = 'jenkins';
 }

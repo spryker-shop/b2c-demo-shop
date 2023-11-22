@@ -24,13 +24,13 @@ class ExampleProductSalePageBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \Pyz\Zed\ExampleProductSalePage\Business\Label\ProductAbstractRelationReaderInterface
      */
-    public function createPyzProductAbstractRelationReader(): ProductAbstractRelationReaderInterface
+    public function createProductAbstractRelationReader(): ProductAbstractRelationReaderInterface
     {
         return new ProductAbstractRelationReader(
             $this->getQueryContainer(),
             $this->getConfig(),
-            $this->getPyzCurrencyFacade(),
-            $this->getPyzPriceFacade(),
+            $this->getCurrencyFacade(),
+            $this->getPriceFacade(),
             $this->getStoreFacade(),
         );
     }
@@ -38,17 +38,17 @@ class ExampleProductSalePageBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \Spryker\Zed\Currency\Business\CurrencyFacadeInterface
      */
-    protected function getPyzCurrencyFacade(): CurrencyFacadeInterface
+    protected function getCurrencyFacade(): CurrencyFacadeInterface
     {
-        return $this->getProvidedDependency(ExampleProductSalePageDependencyProvider::PYZ_FACADE_CURRENCY);
+        return $this->getProvidedDependency(ExampleProductSalePageDependencyProvider::FACADE_CURRENCY);
     }
 
     /**
      * @return \Spryker\Zed\Price\Business\PriceFacadeInterface
      */
-    protected function getPyzPriceFacade(): PriceFacadeInterface
+    protected function getPriceFacade(): PriceFacadeInterface
     {
-        return $this->getProvidedDependency(ExampleProductSalePageDependencyProvider::PYZ_FACADE_PRICE);
+        return $this->getProvidedDependency(ExampleProductSalePageDependencyProvider::FACADE_PRICE);
     }
 
     /**
@@ -56,6 +56,6 @@ class ExampleProductSalePageBusinessFactory extends AbstractBusinessFactory
      */
     protected function getStoreFacade(): StoreFacadeInterface
     {
-        return $this->getProvidedDependency(ExampleProductSalePageDependencyProvider::PYZ_FACADE_STORE);
+        return $this->getProvidedDependency(ExampleProductSalePageDependencyProvider::FACADE_STORE);
     }
 }

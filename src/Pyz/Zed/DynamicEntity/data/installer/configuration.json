@@ -1,0 +1,2827 @@
+[
+    {
+        "tableName": "spy_product_abstract",
+        "tableAlias": "product-abstracts",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_product_abstract",
+            "fields": [
+                {
+                    "fieldName": "id_product_abstract",
+                    "fieldVisibleName": "id_product_abstract",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "type": "integer",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "fk_tax_set",
+                    "fieldVisibleName": "fk_tax_set",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "attributes",
+                    "fieldVisibleName": "attributes",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "new_from",
+                    "fieldVisibleName": "new_from",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "new_to",
+                    "fieldVisibleName": "new_to",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "sku",
+                    "fieldVisibleName": "sku",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "color_code",
+                    "fieldVisibleName": "color_code",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": false }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_product",
+        "tableAlias": "products",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_product",
+            "fields": [
+                {
+                    "fieldName": "id_product",
+                    "fieldVisibleName": "id_product",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "validation": { "isRequired": false },
+                    "type": "integer"
+                },
+                {
+                    "fieldName": "fk_product_abstract",
+                    "fieldVisibleName": "fk_product_abstract",
+                    "type": "integer",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "attributes",
+                    "fieldVisibleName": "attributes",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "is_active",
+                    "fieldVisibleName": "is_active",
+                    "isVisible": true,
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "boolean",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "is_quantity_splittable",
+                    "fieldVisibleName": "is_quantity_splittable",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "boolean",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "sku",
+                    "fieldVisibleName": "sku",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": true }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_product_abstract_localized_attributes",
+        "tableAlias": "product-abstract-localized-attributes",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_abstract_attributes",
+            "fields": [
+                {
+                    "fieldName": "id_abstract_attributes",
+                    "fieldVisibleName": "id_abstract_attributes",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "validation": { "isRequired": false },
+                    "type": "integer"
+                },
+                {
+                    "fieldName": "fk_locale",
+                    "fieldVisibleName": "fk_locale",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "fk_product_abstract",
+                    "fieldVisibleName": "fk_product_abstract",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "attributes",
+                    "fieldVisibleName": "attributes",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "description",
+                    "fieldVisibleName": "description",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "name",
+                    "fieldVisibleName": "name",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "meta_description",
+                    "fieldVisibleName": "meta_description",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "meta_keywords",
+                    "fieldVisibleName": "meta_keywords",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "meta_title",
+                    "fieldVisibleName": "meta_title",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": false }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_category",
+        "tableAlias": "categories",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_category",
+            "fields": [
+                {
+                    "fieldName": "id_category",
+                    "fieldVisibleName": "id_category",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "validation": { "isRequired": false },
+                    "type": "integer"
+                },
+                {
+                    "fieldName": "fk_category_template",
+                    "fieldVisibleName": "fk_category_template",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "category_key",
+                    "fieldVisibleName": "category_key",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "is_active",
+                    "fieldVisibleName": "is_active",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "boolean",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "is_clickable",
+                    "fieldVisibleName": "is_clickable",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "boolean",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "is_in_menu",
+                    "fieldVisibleName": "is_in_menu",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "boolean",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "is_active",
+                    "fieldVisibleName": "is_active",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "boolean",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "is_searchable",
+                    "fieldVisibleName": "is_searchable",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "boolean",
+                    "validation": { "isRequired": false }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_category_template",
+        "tableAlias": "category-templates",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_category_template",
+            "fields": [
+                {
+                    "fieldName": "id_category_template",
+                    "fieldVisibleName": "id_category_template",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "validation": { "isRequired": false },
+                    "type": "integer"
+                },
+                {
+                    "fieldName": "name",
+                    "fieldVisibleName": "name",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "type": "string",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "template_path",
+                    "fieldVisibleName": "template_path",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "type": "string",
+                    "validation": { "isRequired": false }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_product_category",
+        "tableAlias": "product-categories",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_product_category",
+            "fields": [
+                {
+                    "fieldName": "id_product_category",
+                    "fieldVisibleName": "id_product_category",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "validation": { "isRequired": false },
+                    "type": "integer"
+                },
+                {
+                    "fieldName": "fk_category",
+                    "fieldVisibleName": "fk_category",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true },
+                    "type": "integer"
+                },
+                {
+                    "fieldName": "fk_product_abstract",
+                    "fieldVisibleName": "fk_product_abstract",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "product_order",
+                    "fieldVisibleName": "product_order",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": false }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_url",
+        "tableAlias": "urls",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_url",
+            "fields": [
+                {
+                    "fieldName": "id_url",
+                    "fieldVisibleName": "id_url",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "validation": { "isRequired": false },
+                    "type": "integer"
+                },
+                {
+                    "fieldName": "fk_locale",
+                    "fieldVisibleName": "fk_locale",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "fk_resource_product_abstract",
+                    "fieldVisibleName": "fk_resource_product_abstract",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "url",
+                    "fieldVisibleName": "url",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": true }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_locale",
+        "tableAlias": "locales",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_locale",
+            "fields": [
+                {
+                    "fieldName": "id_locale",
+                    "fieldVisibleName": "id_locale",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "validation": { "isRequired": false },
+                    "type": "integer"
+                },
+                {
+                    "fieldName": "locale_name",
+                    "fieldVisibleName": "locale_name",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "is_active",
+                    "fieldVisibleName": "is_active",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "boolean",
+                    "validation": { "isRequired": true }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_product_localized_attributes",
+        "tableAlias": "product-localized-attributes",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_product_attributes",
+            "fields": [
+                {
+                    "fieldName": "id_product_attributes",
+                    "fieldVisibleName": "id_product_attributes",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "validation": { "isRequired": false },
+                    "type": "integer"
+                },
+                {
+                    "fieldName": "fk_locale",
+                    "fieldVisibleName": "fk_locale",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "fk_product",
+                    "fieldVisibleName": "fk_product",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "attributes",
+                    "fieldVisibleName": "attributes",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "description",
+                    "fieldVisibleName": "description",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "name",
+                    "fieldVisibleName": "name",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": true }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_product_bundle",
+        "tableAlias": "product-bundles",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_product_bundle",
+            "fields": [
+                {
+                    "fieldName": "id_product_bundle",
+                    "fieldVisibleName": "id_product_bundle",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "fk_bundled_product",
+                    "fieldVisibleName": "fk_bundled_product",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "fk_product",
+                    "fieldVisibleName": "fk_product",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "quantity",
+                    "fieldVisibleName": "quantity",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_product_abstract_store",
+        "tableAlias": "product-abstract-stores",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_product_abstract_store",
+            "fields": [
+                {
+                    "fieldName": "id_product_abstract_store",
+                    "fieldVisibleName": "id_product_abstract_store",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "type": "integer",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "fk_product_abstract",
+                    "fieldVisibleName": "fk_product_abstract",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "fk_store",
+                    "fieldVisibleName": "fk_store",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_store",
+        "tableAlias": "stores",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_store",
+            "fields": [
+                {
+                    "fieldName": "id_store",
+                    "fieldVisibleName": "id_store",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "validation": { "isRequired": false },
+                    "type": "integer"
+                },
+                {
+                    "fieldName": "fk_locale",
+                    "fieldVisibleName": "fk_locale",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "fk_currency",
+                    "fieldVisibleName": "fk_currency",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "name",
+                    "fieldVisibleName": "name",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": false }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_product_attribute_key",
+        "tableAlias": "product-attribute-keys",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_product_attribute_key",
+            "fields": [
+                {
+                    "fieldName": "id_product_attribute_key",
+                    "fieldVisibleName": "id_product_attribute_key",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "is_super",
+                    "fieldVisibleName": "is_super",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "boolean",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "key",
+                    "fieldVisibleName": "key",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": true }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_product_group",
+        "tableAlias": "product-groups",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_product_group",
+            "fields": [
+                {
+                    "fieldName": "id_product_group",
+                    "fieldVisibleName": "id_product_group",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "product_group_key",
+                    "fieldVisibleName": "product_group_key",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": true }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_product_abstract_group",
+        "tableAlias": "product-abstract-groups",
+        "isActive": true,
+        "definition": {
+            "identifier": "fk_product_abstract",
+            "fields": [
+                {
+                    "fieldName": "fk_product_abstract",
+                    "fieldVisibleName": "fk_product_abstract",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "fk_product_group",
+                    "fieldVisibleName": "fk_product_group",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "position",
+                    "fieldVisibleName": "position",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": false }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_product_image",
+        "tableAlias": "product-images",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_product_image",
+            "fields": [
+                {
+                    "fieldName": "id_product_image",
+                    "fieldVisibleName": "id_product_image",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "validation": { "isRequired": false },
+                    "type": "integer"
+                },
+                {
+                    "fieldName": "external_url_large",
+                    "fieldVisibleName": "external_url_large",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "external_url_small",
+                    "fieldVisibleName": "external_url_small",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": true }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_product_image_set",
+        "tableAlias": "product-image-sets",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_product_image_set",
+            "fields": [
+                {
+                    "fieldName": "id_product_image_set",
+                    "fieldVisibleName": "id_product_image_set",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "validation": { "isRequired": false },
+                    "type": "integer"
+                },
+                {
+                    "fieldName": "fk_locale",
+                    "fieldVisibleName": "fk_locale",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "fk_product",
+                    "fieldVisibleName": "fk_product",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "name",
+                    "fieldVisibleName": "name",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "fk_product_abstract",
+                    "fieldVisibleName": "fk_product_abstract",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": false }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_product_image_set_to_product_image",
+        "tableAlias": "product-image-set-to-product-images",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_product_image_set_to_product_image",
+            "fields": [
+                {
+                    "fieldName": "id_product_image_set_to_product_image",
+                    "fieldVisibleName": "id_product_image_set_to_product_image",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "validation": { "isRequired": false },
+                    "type": "integer"
+                },
+                {
+                    "fieldName": "fk_product_image",
+                    "fieldVisibleName": "fk_product_image",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "fk_product_image_set",
+                    "fieldVisibleName": "fk_product_image_set",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "sort_order",
+                    "fieldVisibleName": "sort_order",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_product_management_attribute",
+        "tableAlias": "product-management-attributes",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_product_management_attribute",
+            "fields": [
+                {
+                    "fieldName": "id_product_management_attribute",
+                    "fieldVisibleName": "id_product_management_attribute",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "fk_product_attribute_key",
+                    "fieldVisibleName": "fk_product_attribute_key",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "allow_input",
+                    "fieldVisibleName": "allow_input",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "boolean",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "input_type",
+                    "fieldVisibleName": "input_type",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": true }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_product_management_attribute_value",
+        "tableAlias": "product-management-attribute-values",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_product_management_attribute_value",
+            "fields": [
+                {
+                    "fieldName": "id_product_management_attribute_value",
+                    "fieldVisibleName": "id_product_management_attribute_value",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "fk_product_management_attribute",
+                    "fieldVisibleName": "fk_product_management_attribute",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "value",
+                    "fieldVisibleName": "value",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": true }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_glossary_key",
+        "tableAlias": "glossary-keys",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_glossary_key",
+            "fields": [
+                {
+                    "fieldName": "id_glossary_key",
+                    "fieldVisibleName": "id_glossary_key",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "is_active",
+                    "fieldVisibleName": "is_active",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "boolean",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "key",
+                    "fieldVisibleName": "key",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": true }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_glossary_translation",
+        "tableAlias": "glossary-translation",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_glossary_translation",
+            "fields": [
+                {
+                    "fieldName": "id_glossary_translation",
+                    "fieldVisibleName": "id_glossary_translation",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "fk_glossary_key",
+                    "fieldVisibleName": "fk_glossary_key",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "fk_locale",
+                    "fieldVisibleName": "fk_locale",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "is_active",
+                    "fieldVisibleName": "is_active",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "boolean",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "value",
+                    "fieldVisibleName": "value",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": true }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_product_management_attribute_value_translation",
+        "tableAlias": "product-management-attribute-value-translations",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_product_management_attribute_value_translation",
+            "fields": [
+                {
+                    "fieldName": "id_product_management_attribute_value_translation",
+                    "fieldVisibleName": "id_product_management_attribute_value_translation",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "fk_locale",
+                    "fieldVisibleName": "fk_locale",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "fk_product_management_attribute_value",
+                    "fieldVisibleName": "fk_product_management_attribute_value",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "translation",
+                    "fieldVisibleName": "translation",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": true }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_product_option_group",
+        "tableAlias": "product-option-groups",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_product_option_group",
+            "fields": [
+                {
+                    "fieldName": "id_product_option_group",
+                    "fieldVisibleName": "id_product_option_group",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "fk_tax_set",
+                    "fieldVisibleName": "fk_tax_set",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "active",
+                    "fieldVisibleName": "active",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "boolean",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "name",
+                    "fieldVisibleName": "name",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": false }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_product_option_value",
+        "tableAlias": "product-option-values",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_product_option_value",
+            "fields": [
+                {
+                    "fieldName": "id_product_option_value",
+                    "fieldVisibleName": "id_product_option_value",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "fk_product_option_group",
+                    "fieldVisibleName": "fk_product_option_group",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "price",
+                    "fieldVisibleName": "price",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "sku",
+                    "fieldVisibleName": "sku",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "value",
+                    "fieldVisibleName": "value",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": true }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_product_abstract_product_option_group",
+        "tableAlias": "product-abstract-product-option-groups",
+        "isActive": true,
+        "definition": {
+            "identifier": "fk_product_abstract",
+            "fields": [
+                {
+                    "fieldName": "fk_product_abstract",
+                    "fieldVisibleName": "fk_product_abstract",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "fk_product_option_group",
+                    "fieldVisibleName": "fk_product_option_group",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_product_option_value_price",
+        "tableAlias": "product-option-value-prices",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_product_option_value_price",
+            "fields": [
+                {
+                    "fieldName": "id_product_option_value_price",
+                    "fieldVisibleName": "id_product_option_value_price",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "fk_currency",
+                    "fieldVisibleName": "fk_currency",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "fk_product_option_value",
+                    "fieldVisibleName": "fk_product_option_value",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "fk_store",
+                    "fieldVisibleName": "fk_store",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "gross_price",
+                    "fieldVisibleName": "gross_price",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "net_price",
+                    "fieldVisibleName": "net_price",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": false }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_currency",
+        "tableAlias": "currencies",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_currency",
+            "fields": [
+                {
+                    "fieldName": "id_currency",
+                    "fieldVisibleName": "id_currency",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "name",
+                    "fieldVisibleName": "name",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "code",
+                    "fieldVisibleName": "code",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "symbol",
+                    "fieldVisibleName": "symbol",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": false }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_price_type",
+        "tableAlias": "price-types",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_price_type",
+            "fields": [
+                {
+                    "fieldName": "id_price_type",
+                    "fieldVisibleName": "id_price_type",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "name",
+                    "fieldVisibleName": "name",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "price_mode_configuration",
+                    "fieldVisibleName": "price_mode_configuration",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": false }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_price_product",
+        "tableAlias": "price-products",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_price_product",
+            "fields": [
+                {
+                    "fieldName": "id_price_product",
+                    "fieldVisibleName": "id_price_product",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "validation": { "isRequired": false },
+                    "type": "integer"
+                },
+                {
+                    "fieldName": "fk_price_type",
+                    "fieldVisibleName": "fk_price_type",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "fk_product",
+                    "fieldVisibleName": "fk_product",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "fk_product_abstract",
+                    "fieldVisibleName": "fk_product_abstract",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "price",
+                    "fieldVisibleName": "price",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": false }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_price_product_store",
+        "tableAlias": "price-product-stores",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_price_product_store",
+            "fields": [
+                {
+                    "fieldName": "id_price_product_store",
+                    "fieldVisibleName": "id_price_product_store",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "validation": { "isRequired": false },
+                    "type": "integer"
+                },
+                {
+                    "fieldName": "fk_currency",
+                    "fieldVisibleName": "fk_currency",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "fk_price_product",
+                    "fieldVisibleName": "fk_price_product",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "fk_store",
+                    "fieldVisibleName": "fk_store",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "gross_price",
+                    "fieldVisibleName": "gross_price",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "net_price",
+                    "fieldVisibleName": "net_price",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_price_product_default",
+        "tableAlias": "price-product-defaults",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_price_product_default",
+            "fields": [
+                {
+                    "fieldName": "id_price_product_default",
+                    "fieldVisibleName": "id_price_product_default",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "validation": { "isRequired": false },
+                    "type": "integer"
+                },
+                {
+                    "fieldName": "fk_price_product_store",
+                    "fieldVisibleName": "fk_price_product_store",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_product_review",
+        "tableAlias": "product-reviews",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_product_review",
+            "fields": [
+                {
+                    "fieldName": "id_product_review",
+                    "fieldVisibleName": "id_product_review",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "fk_locale",
+                    "fieldVisibleName": "fk_locale",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "fk_product_abstract",
+                    "fieldVisibleName": "fk_product_abstract",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "customer_reference",
+                    "fieldVisibleName": "customer_reference",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "description",
+                    "fieldVisibleName": "description",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "nickname",
+                    "fieldVisibleName": "nickname",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "rating",
+                    "fieldVisibleName": "rating",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "status",
+                    "fieldVisibleName": "status",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "summary",
+                    "fieldVisibleName": "summary",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": false }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_product_search_attribute",
+        "tableAlias": "product-search-attributes",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_product_search_attribute",
+            "fields": [
+                {
+                    "fieldName": "id_product_search_attribute",
+                    "fieldVisibleName": "id_product_search_attribute",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "fk_product_attribute_key",
+                    "fieldVisibleName": "fk_product_attribute_key",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "filter_type",
+                    "fieldVisibleName": "filter_type",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "position",
+                    "fieldVisibleName": "position",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "synced",
+                    "fieldVisibleName": "synced",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "boolean",
+                    "validation": { "isRequired": false }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_product_search_attribute_map",
+        "tableAlias": "product-search-attribute-maps",
+        "isActive": true,
+        "definition": {
+            "identifier": "fk_product_attribute_key",
+            "fields": [
+                {
+                    "fieldName": "fk_product_attribute_key",
+                    "fieldVisibleName": "fk_product_attribute_key",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "target_field",
+                    "fieldVisibleName": "target_field",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "synced",
+                    "fieldVisibleName": "synced",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "boolean",
+                    "validation": { "isRequired": false }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_product_set",
+        "tableAlias": "product-sets",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_product_set",
+            "fields": [
+                {
+                    "fieldName": "id_product_set",
+                    "fieldVisibleName": "id_product_set",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "is_active",
+                    "fieldVisibleName": "is_active",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "boolean",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "product_set_key",
+                    "fieldVisibleName": "product_set_key",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "weight",
+                    "fieldVisibleName": "weight",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_product_abstract_set",
+        "tableAlias": "product-abstract-sets",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_product_abstract_set",
+            "fields": [
+                {
+                    "fieldName": "id_product_abstract_set",
+                    "fieldVisibleName": "id_product_abstract_set",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "fk_product_abstract",
+                    "fieldVisibleName": "fk_product_abstract",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "fk_product_set",
+                    "fieldVisibleName": "fk_product_set",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "position",
+                    "fieldVisibleName": "position",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_product_set_data",
+        "tableAlias": "product-set-data",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_product_set_data",
+            "fields": [
+                {
+                    "fieldName": "id_product_set_data",
+                    "fieldVisibleName": "id_product_set_data",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "fk_locale",
+                    "fieldVisibleName": "fk_locale",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "fk_product_set",
+                    "fieldVisibleName": "fk_product_set",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "description",
+                    "fieldVisibleName": "description",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "meta_description",
+                    "fieldVisibleName": "meta_description",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "meta_keywords",
+                    "fieldVisibleName": "meta_keywords",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "meta_title",
+                    "fieldVisibleName": "meta_title",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "name",
+                    "fieldVisibleName": "name",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": true }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_stock",
+        "tableAlias": "stocks",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_stock",
+            "fields": [
+                {
+                    "fieldName": "id_stock",
+                    "fieldVisibleName": "id_stock",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": false },
+                    "type": "integer"
+                },
+                {
+                    "fieldName": "is_active",
+                    "fieldVisibleName": "is_active",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "boolean",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "name",
+                    "fieldVisibleName": "name",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "uuid",
+                    "fieldVisibleName": "uuid",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "type": "string",
+                    "validation": { "isRequired": false }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_stock_product",
+        "tableAlias": "stock-products",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_stock_product",
+            "fields": [
+                {
+                    "fieldName": "id_stock_product",
+                    "fieldVisibleName": "id_stock_product",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "validation": { "isRequired": false },
+                    "type": "integer"
+                },
+                {
+                    "fieldName": "fk_product",
+                    "fieldVisibleName": "fk_product",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "fk_stock",
+                    "fieldVisibleName": "fk_stock",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "is_never_out_of_stock",
+                    "fieldVisibleName": "is_never_out_of_stock",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "boolean",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "quantity",
+                    "fieldVisibleName": "quantity",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_availability_abstract",
+        "tableAlias": "availability-abstracts",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_availability_abstract",
+            "fields": [
+                {
+                    "fieldName": "id_availability_abstract",
+                    "fieldVisibleName": "id_availability_abstract",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "fk_store",
+                    "fieldVisibleName": "fk_store",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "abstract_sku",
+                    "fieldVisibleName": "abstract_sku",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "quantity",
+                    "fieldVisibleName": "quantity",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "float",
+                    "validation": { "isRequired": true }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_availability",
+        "tableAlias": "availabilities",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_availability",
+            "fields": [
+                {
+                    "fieldName": "id_availability",
+                    "fieldVisibleName": "id_availability",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "fk_availability_abstract",
+                    "fieldVisibleName": "fk_availability_abstract",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "fk_store",
+                    "fieldVisibleName": "fk_store",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "is_never_out_of_stock",
+                    "fieldVisibleName": "is_never_out_of_stock",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "boolean",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "quantity",
+                    "fieldVisibleName": "quantity",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "float",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "sku",
+                    "fieldVisibleName": "sku",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": true }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_tax_set",
+        "tableAlias": "tax-sets",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_tax_set",
+            "fields": [
+                {
+                    "fieldName": "id_tax_set",
+                    "fieldVisibleName": "id_tax_set",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "name",
+                    "fieldVisibleName": "name",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "uuid",
+                    "fieldVisibleName": "uuid",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": false }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_tax_set_tax",
+        "tableAlias": "tax-set-taxes",
+        "isActive": true,
+        "definition": {
+            "identifier": "fk_tax_rate",
+            "fields": [
+                {
+                    "fieldName": "fk_tax_rate",
+                    "fieldVisibleName": "fk_tax_rate",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "fk_tax_set",
+                    "fieldVisibleName": "fk_tax_set",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_tax_rate",
+        "tableAlias": "tax-rates",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_tax_rate",
+            "fields": [
+                {
+                    "fieldName": "id_tax_rate",
+                    "fieldVisibleName": "id_tax_rate",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "fk_country",
+                    "fieldVisibleName": "fk_country",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "name",
+                    "fieldVisibleName": "name",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "rate",
+                    "fieldVisibleName": "rate",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "float",
+                    "validation": { "isRequired": true }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_country",
+        "tableAlias": "countries",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_country",
+            "fields": [
+                {
+                    "fieldName": "id_country",
+                    "fieldVisibleName": "id_country",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "iso2_code",
+                    "fieldVisibleName": "iso2_code",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "iso3_code",
+                    "fieldVisibleName": "iso3_code",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "name",
+                    "fieldVisibleName": "name",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "postal_code_mandatory",
+                    "fieldVisibleName": "postal_code_mandatory",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "postal_code_regex",
+                    "fieldVisibleName": "postal_code_regex",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": false }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_product_search",
+        "tableAlias": "product-searches",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_product_search",
+            "fields": [
+                {
+                    "fieldName": "id_product_search",
+                    "fieldVisibleName": "id_product_search",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "validation": { "isRequired": false },
+                    "type": "integer"
+                },
+                {
+                    "fieldName": "fk_product",
+                    "fieldVisibleName": "fk_product",
+                    "type": "integer",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "fk_locale",
+                    "fieldVisibleName": "fk_locale",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "is_searchable",
+                    "fieldVisibleName": "is_searchable",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "boolean",
+                    "validation": { "isRequired": true }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_category_node",
+        "tableAlias": "category-nodes",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_category_node",
+            "fields": [
+                {
+                    "fieldName": "id_category_node",
+                    "fieldVisibleName": "id_category_node",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": false },
+                    "type": "integer"
+                },
+                {
+                    "fieldName": "fk_category",
+                    "fieldVisibleName": "fk_category",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "fk_parent_category_node",
+                    "fieldVisibleName": "fk_parent_category_node",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "is_main",
+                    "fieldVisibleName": "is_main",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "boolean",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "is_root",
+                    "fieldVisibleName": "is_root",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "boolean",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "node_order",
+                    "fieldVisibleName": "node_order",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": false }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_category_store",
+        "tableAlias": "category-stores",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_category_store",
+            "fields": [
+                {
+                    "fieldName": "id_category_store",
+                    "fieldVisibleName": "id_category_store",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": false },
+                    "type": "integer"
+                },
+                {
+                    "fieldName": "fk_category",
+                    "fieldVisibleName": "fk_category",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "fk_store",
+                    "fieldVisibleName": "fk_store",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_category_attribute",
+        "tableAlias": "category-attributes",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_category_attribute",
+            "fields": [
+                {
+                    "fieldName": "id_category_attribute",
+                    "fieldVisibleName": "id_category_attribute",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "validation": { "isRequired": false },
+                    "type": "integer"
+                },
+                {
+                    "fieldName": "fk_category",
+                    "fieldVisibleName": "fk_category",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "fk_locale",
+                    "fieldVisibleName": "fk_locale",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "category_image_name",
+                    "fieldVisibleName": "category_image_name",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "name",
+                    "fieldVisibleName": "name",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "meta_description",
+                    "fieldVisibleName": "meta_description",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "meta_keywords",
+                    "fieldVisibleName": "meta_keywords",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "meta_title",
+                    "fieldVisibleName": "meta_title",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": false }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_product_relation_type",
+        "tableAlias": "product-relation-types",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_product_relation_type",
+            "fields": [
+                {
+                    "fieldName": "id_product_relation_type",
+                    "fieldVisibleName": "id_product_relation_type",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": false },
+                    "type": "integer"
+                },
+                {
+                    "fieldName": "key",
+                    "fieldVisibleName": "key",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": true }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_product_relation",
+        "tableAlias": "product-relations",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_product_relation",
+            "fields": [
+                {
+                    "fieldName": "id_product_relation",
+                    "fieldVisibleName": "id_product_relation",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": false },
+                    "type": "integer"
+                },
+                {
+                    "fieldName": "fk_product_abstract",
+                    "fieldVisibleName": "fk_product_abstract",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "fk_product_relation_type",
+                    "fieldVisibleName": "fk_product_relation_type",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "is_active",
+                    "fieldVisibleName": "is_active",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "boolean",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "is_rebuild_scheduled",
+                    "fieldVisibleName": "is_rebuild_scheduled",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "boolean",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "product_relation_key",
+                    "fieldVisibleName": "product_relation_key",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "query_set_data",
+                    "fieldVisibleName": "query_set_data",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": false }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_product_relation_product_abstract",
+        "tableAlias": "product-relations-product-abstract",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_product_relation_product_abstract",
+            "fields": [
+                {
+                    "fieldName": "id_product_relation_product_abstract",
+                    "fieldVisibleName": "id_product_relation_product_abstract",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": false },
+                    "type": "integer"
+                },
+                {
+                    "fieldName": "fk_product_abstract",
+                    "fieldVisibleName": "fk_product_abstract",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "fk_product_relation",
+                    "fieldVisibleName": "fk_product_relation",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "order",
+                    "fieldVisibleName": "order",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": false }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_product_relation_store",
+        "tableAlias": "product-relation-stores",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_product_relation_store",
+            "fields": [
+                {
+                    "fieldName": "id_product_relation_store",
+                    "fieldVisibleName": "id_product_relation_store",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": false },
+                    "type": "integer"
+                },
+                {
+                    "fieldName": "fk_product_relation",
+                    "fieldVisibleName": "fk_product_relation",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "fk_store",
+                    "fieldVisibleName": "fk_store",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_product_label",
+        "tableAlias": "product-labels",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_product_label",
+            "fields": [
+                {
+                    "fieldName": "id_product_label",
+                    "fieldVisibleName": "id_product_label",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": false },
+                    "type": "integer"
+                },
+                {
+                    "fieldName": "front_end_reference",
+                    "fieldVisibleName": "front_end_reference",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "is_active",
+                    "fieldVisibleName": "is_active",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "boolean",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "is_dynamic",
+                    "fieldVisibleName": "is_dynamic",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "boolean",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "is_exclusive",
+                    "fieldVisibleName": "is_exclusive",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "boolean",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "is_published",
+                    "fieldVisibleName": "is_published",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "boolean",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "name",
+                    "fieldVisibleName": "name",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "position",
+                    "fieldVisibleName": "position",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "valid_from",
+                    "fieldVisibleName": "valid_from",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "valid_to",
+                    "fieldVisibleName": "valid_to",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": false }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_product_label_localized_attributes",
+        "tableAlias": "product-labels-localized-attributes",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_product_label_localized_attributes",
+            "fields": [
+                {
+                    "fieldName": "id_product_label_localized_attributes",
+                    "fieldVisibleName": "id_product_label_localized_attributes",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "fk_locale",
+                    "fieldVisibleName": "fk_locale",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "fk_product_label",
+                    "fieldVisibleName": "fk_product_label",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "name",
+                    "fieldVisibleName": "name",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": { "isRequired": true }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_product_label_store",
+        "tableAlias": "product-label-stores",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_product_label_store",
+            "fields": [
+                {
+                    "fieldName": "id_product_label_store",
+                    "fieldVisibleName": "id_product_label_store",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "fk_product_label",
+                    "fieldVisibleName": "fk_product_label",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "fk_store",
+                    "fieldVisibleName": "fk_store",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_product_label_product_abstract",
+        "tableAlias": "product-label-product-abstracts",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_product_label_product_abstract",
+            "fields": [
+                {
+                    "fieldName": "id_product_label_product_abstract",
+                    "fieldVisibleName": "id_product_label_product_abstract",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "fk_product_abstract",
+                    "fieldVisibleName": "fk_product_abstract",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "fk_product_label",
+                    "fieldVisibleName": "fk_product_label",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_sales_order",
+        "tableAlias": "sales-orders",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_sales_order",
+            "fields": [
+                {
+                    "fieldName": "id_sales_order",
+                    "fieldVisibleName": "id_sales_order",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "validation": { "isRequired": false },
+                    "type": "integer"
+                },
+                {
+                    "fieldName": "fk_sales_order_address_billing",
+                    "fieldVisibleName": "fk_sales_order_address_billing",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "type": "integer",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "fk_sales_order_address_shipping",
+                    "fieldVisibleName": "fk_sales_order_address_shipping",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "type": "integer",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "fk_locale",
+                    "fieldVisibleName": "fk_locale",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "type": "integer",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "email",
+                    "fieldVisibleName": "email",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "type": "string",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "salutation",
+                    "fieldVisibleName": "salutation",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "type": "integer",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "first_name",
+                    "fieldVisibleName": "first_name",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "type": "string",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "last_name",
+                    "fieldVisibleName": "last_name",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "type": "string",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "order_reference",
+                    "fieldVisibleName": "order_reference",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "type": "string",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "price_mode",
+                    "fieldVisibleName": "price_mode",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "type": "integer",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "is_test",
+                    "fieldVisibleName": "is_test",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "type": "boolean",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "store",
+                    "fieldVisibleName": "store",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "type": "string",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "currency_iso_code",
+                    "fieldVisibleName": "currency_iso_code",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "type": "string",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "created_at",
+                    "fieldVisibleName": "created_at",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "type": "string",
+                    "validation": { "isRequired": false }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_locale_store",
+        "tableAlias": "locale-stores",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_locale_store",
+            "fields": [
+                {
+                    "fieldName": "id_locale_store",
+                    "fieldVisibleName": "id_locale_store",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "validation": { "isRequired": false },
+                    "type": "integer"
+                },
+                {
+                    "fieldName": "fk_locale",
+                    "fieldVisibleName": "fk_locale",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "fk_store",
+                    "fieldVisibleName": "fk_store",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": true }
+                }
+            ]
+        }
+    }
+]

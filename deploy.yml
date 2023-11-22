@@ -5,7 +5,7 @@ tag: '1.0'
 
 environment: docker.production
 image:
-    tag: spryker/php:8.1
+    tag: spryker/php:8.2
     php:
         ini:
             "opcache.revalidate_freq": 0
@@ -19,6 +19,9 @@ image:
         SPRYKER_YVES_HOST_DE: yves.de.spryker.local
         SPRYKER_YVES_HOST_AT: yves.at.spryker.local
         SPRYKER_YVES_HOST_US: yves.us.spryker.local
+        SPRYKER_PUSH_NOTIFICATION_WEB_PUSH_PHP_VAPID_PUBLIC_KEY: 'BGqNWbv0hWM5CQ1-KwAfSQBMC6TMVFyrnh3vQp37oGCNvQ6eG_HyMjxBFJRWeCPTbzDoxcjhxLJS8Ck8r1G2oFw'
+        SPRYKER_PUSH_NOTIFICATION_WEB_PUSH_PHP_VAPID_PRIVATE_KEY: 'UK6DywwjKITPpRHBSY9TLPIXm6BPrHX40sseIoXT9c8'
+        SPRYKER_PUSH_NOTIFICATION_WEB_PUSH_PHP_VAPID_SUBJECT: 'https://spryker.com'
 composer:
     mode: --no-dev
     autoload: --classmap-authoritative
@@ -95,6 +98,7 @@ groups:
                 endpoints:
                     glue.de.spryker.local:
                         store: DE
+                        cors-allow-origin: '*'
                     glue.at.spryker.local:
                         store: AT
             glue_storefront_eu:
@@ -222,7 +226,7 @@ services:
                 protocol: tcp
     scheduler:
         engine: jenkins
-        version: '2.324'
+        version: '2.401'
         csrf-protection-enabled: true
         endpoints:
             scheduler.spryker.local:

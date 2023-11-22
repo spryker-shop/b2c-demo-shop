@@ -44,6 +44,8 @@ class NavigationCRUDCest
 
         $this->read($i);
 
+        $i->wait(10);
+
         $this->update($i, $idNavigation);
 
         # Somehow $this->update() influences on this $this->delete() so the test becomes flickery.

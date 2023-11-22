@@ -10,14 +10,25 @@
 } %}
 
 {% define attributes = {
-    'data-search-id': required
+    'data-search-id': required,
+    'wrapper-class-name': required,
+    'close-class-name': required,
+    'open-class-name': required,
+    'wrapper-toggle-class-name': '',
 } %}
 
 {% block body %}
-    <form action="{{data.searchUrl}}">
+    <form action="{{ data.searchUrl }}">
         <div class="grid">
             <div class="col col--sm-10">
-                <input name="q" type="text" class="suggest-search__input suggest-search__input--expand {{ config.jsName }}__input--{{ attributes['data-search-id'] }}" placeholder="{{ 'global.search' | trans }}" value="{{data.searchValue}}" autofocus="autofocus" autocomplete="off">
+                <input 
+                    name="q"
+                    class="suggest-search__input suggest-search__input--expand {{ config.jsName }}__input--{{ attributes['data-search-id'] }}"
+                    placeholder="{{ 'global.search' | trans }}"
+                    value="{{ data.searchValue }}"
+                    autocomplete="off"
+                    autofocus
+                >
             </div>
         </div>
 
@@ -26,6 +37,10 @@
                 'suggestion-url': path('search/suggestion'),
                 'base-suggest-url': path('search/suggestion'),
                 'input-class-name': config.jsName ~ '__input--' ~ attributes['data-search-id'],
+                'wrapper-class-name': attributes['wrapper-class-name'],
+                'close-class-name': attributes['close-class-name'],
+                'open-class-name': attributes['open-class-name'],
+                'wrapper-toggle-class-name': attributes['wrapper-toggle-class-name'],
             },
         } only %}
 
