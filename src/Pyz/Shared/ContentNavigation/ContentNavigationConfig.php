@@ -16,19 +16,19 @@ class ContentNavigationConfig extends SprykerContentNavigationConfig
      *
      * @var string
      */
-    public const PYZ_WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_HEADER = 'navigation-header';
+    public const WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_HEADER = 'navigation-header';
 
     /**
      * Content item navigation header mobile template identifier.
      *
      * @var string
      */
-    public const PYZ_WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_HEADER_MOBILE = 'navigation-header-mobile';
+    public const WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_HEADER_MOBILE = 'navigation-header-mobile';
 
     /**
      * Content item navigation footer template identifier.
      *
      * @var string
      */
-    public const PYZ_WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_FOOTER = 'navigation-footer';
+    public const WIDGET_TEMPLATE_IDENTIFIER_LIST_NAVIGATION_FOOTER = 'navigation-footer';
 }

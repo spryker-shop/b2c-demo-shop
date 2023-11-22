@@ -1,5 +1,7 @@
 namespace: PyzTest\Zed\MessageBroker
 
+bootstrap: _bootstrap.php
+
 paths:
     tests: .
     data: _data
@@ -20,10 +22,184 @@ suites:
                 - Asserts
                 - \SprykerTest\Shared\Testify\Helper\Environment
                 - \SprykerTest\Shared\Testify\Helper\LocatorHelper:
-                      projectNamespaces: [ 'Pyz' ]
+                      projectNamespaces: ['Pyz']
                 - \SprykerTest\Shared\Propel\Helper\TransactionHelper
                 - \SprykerTest\Shared\Testify\Helper\ConfigHelper
                 - \SprykerTest\Shared\Store\Helper\StoreDataHelper
-                - \SprykerTest\Shared\Store\Helper\StoreReferenceHelper
                 - \SprykerTest\Zed\MessageBroker\Helper\MessageBrokerHelper
                 - \SprykerTest\Zed\Testify\Helper\Business\DependencyProviderHelper
+                - \SprykerTest\Shared\Testify\Helper\DependencyHelper
+                - \SprykerTest\Service\Container\Helper\ContainerHelper
+                - \SprykerTest\Shared\Store\Helper\StoreDependencyHelper
+
+    AssetCommunication:
+        path: MessageHandlers/Asset/Communication
+        actor: AssetCommunicationTester
+        modules:
+            enabled:
+                - Asserts
+                - \PyzTest\Shared\Testify\Helper\Environment
+                - \SprykerTest\Shared\Config\Helper\ConfigInit
+                - \SprykerTest\Shared\Testify\Helper\LocatorHelper:
+                      projectNamespaces: ['Pyz']
+                - \SprykerTest\Shared\Testify\Helper\ConfigHelper
+                - \SprykerTest\Zed\Testify\Helper\Business\BusinessHelper
+                - \SprykerTest\Zed\Testify\Helper\Business\DependencyProviderHelper
+                - \SprykerTest\Shared\Propel\Helper\ConnectionHelper
+                - \SprykerTest\Shared\Propel\Helper\TransactionHelper
+                - \SprykerTest\Zed\MessageBroker\Helper\InMemoryMessageBrokerHelper
+                - \SprykerTest\Zed\MessageBroker\Helper\MessageBrokerHelper
+                - \SprykerTest\Shared\Store\Helper\StoreDataHelper
+                - \SprykerTest\Shared\Asset\Helper\AssetDataHelper
+                - \SprykerTest\Shared\Testify\Helper\DependencyHelper
+                - \SprykerTest\Service\Container\Helper\ContainerHelper
+                - \SprykerTest\Shared\Store\Helper\StoreDependencyHelper
+
+    PaymentPresentation:
+        path: MessageHandlers/Payment/Presentation
+        actor: PaymentPresentationTester
+        modules:
+            enabled:
+                - Asserts
+                - \PyzTest\Shared\Testify\Helper\Environment
+                - \SprykerTest\Shared\Application\Helper\ZedHelper
+                - \SprykerTest\Shared\Testify\Helper\BrowserHelper
+                - \SprykerTest\Shared\Testify\Helper\LocatorHelper:
+                      projectNamespaces: ['Pyz']
+                - WebDriver:
+                      url: ''
+                      browser: chrome
+                      window_size: 1920x1080
+                      host: 0.0.0.0
+                      restart: false
+                      log_js_errors: false
+                - \SprykerTest\Shared\Testify\Helper\ConfigHelper
+                - \SprykerTest\Zed\Testify\Helper\Business\DependencyProviderHelper
+                - \SprykerTest\Shared\Propel\Helper\ConnectionHelper
+                - \SprykerTest\Zed\MessageBroker\Helper\InMemoryMessageBrokerHelper
+                - \SprykerTest\Zed\MessageBroker\Helper\MessageBrokerHelper
+                - \SprykerTest\Shared\Currency\Helper\CurrencyDataHelper
+                - \SprykerTest\Zed\Sales\Helper\BusinessHelper
+                - \SprykerTest\Shared\Store\Helper\StoreDataHelper
+
+    PaymentMethodPresentation:
+        path: MessageHandlers/PaymentMethod/Presentation
+        actor: PaymentMethodPresentationTester
+        modules:
+            enabled:
+                - Asserts
+                - \PyzTest\Shared\Testify\Helper\Environment
+                - \SprykerTest\Shared\Application\Helper\ZedHelper
+                - \SprykerTest\Shared\Testify\Helper\LocatorHelper:
+                      projectNamespaces: ['Pyz']
+                - \SprykerTest\Shared\Propel\Helper\PropelInstallHelper
+                - WebDriver:
+                      url: ''
+                      browser: chrome
+                      window_size: 1920x1080
+                      host: 0.0.0.0
+                      restart: false
+                      log_js_errors: true
+                - \SprykerTest\Shared\Testify\Helper\DataCleanupHelper
+                - \SprykerTest\Shared\Propel\Helper\ConnectionHelper
+                - \SprykerTest\Shared\Payment\Helper\PaymentDataHelper
+                - \SprykerTest\Zed\Testify\Helper\Business\DependencyProviderHelper
+                - \SprykerTest\Zed\MessageBroker\Helper\InMemoryMessageBrokerHelper
+                - \SprykerTest\Zed\MessageBroker\Helper\MessageBrokerHelper
+                - \SprykerTest\Shared\Testify\Helper\ConfigHelper
+                - \SprykerTest\Shared\Store\Helper\StoreDataHelper
+                - \SprykerTest\Shared\Testify\Helper\DependencyHelper
+                - \SprykerTest\Service\Container\Helper\ContainerHelper
+                - \SprykerTest\Shared\Store\Helper\StoreDependencyHelper
+
+    ProductCommunication:
+        path: MessageHandlers/Product/Communication
+        actor: ProductCommunicationTester
+        modules:
+            enabled:
+                - Asserts
+                - \PyzTest\Shared\Testify\Helper\Environment
+                - \SprykerTest\Shared\Testify\Helper\LocatorHelper:
+                      projectNamespaces: ['Pyz']
+                - \SprykerTest\Shared\Testify\Helper\ConfigHelper
+                - \SprykerTest\Zed\Testify\Helper\Business\BusinessHelper
+                - \SprykerTest\Shared\Product\Helper\ProductDataHelper
+                - \SprykerTest\Shared\Testify\Helper\DataCleanupHelper
+                - \SprykerTest\Shared\Propel\Helper\TransactionHelper
+                - \SprykerTest\Zed\Testify\Helper\Business\DependencyProviderHelper
+                - \SprykerTest\Zed\MessageBroker\Helper\InMemoryMessageBrokerHelper
+                - \SprykerTest\Zed\MessageBroker\Helper\MessageBrokerHelper
+                - \SprykerTest\Shared\Product\Helper\ProductDataHelper
+                - \SprykerTest\Shared\Store\Helper\StoreDataHelper
+                - \SprykerTest\Shared\Testify\Helper\DependencyHelper
+                - \SprykerTest\Service\Container\Helper\ContainerHelper
+                - \SprykerTest\Shared\Store\Helper\StoreDependencyHelper
+
+    ProductReviewCommunication:
+        path: MessageHandlers/ProductReview/Communication
+        actor: ProductReviewCommunicationTester
+        modules:
+            enabled:
+                - Asserts
+                - \PyzTest\Shared\Testify\Helper\Environment
+                - \SprykerTest\Shared\Config\Helper\ConfigInit
+                - \SprykerTest\Shared\Testify\Helper\LocatorHelper:
+                      projectNamespaces: ['Pyz']
+                - \SprykerTest\Shared\Testify\Helper\ConfigHelper
+                - \SprykerTest\Zed\Testify\Helper\Business\BusinessHelper
+                - \SprykerTest\Zed\Testify\Helper\Business\DependencyProviderHelper
+                - \SprykerTest\Shared\Propel\Helper\ConnectionHelper
+                - \SprykerTest\Shared\Propel\Helper\TransactionHelper
+                - \SprykerTest\Zed\MessageBroker\Helper\InMemoryMessageBrokerHelper
+                - \SprykerTest\Zed\MessageBroker\Helper\MessageBrokerHelper
+                - \SprykerTest\Zed\ProductReview\Helper\ProductReviewHelper
+                - \SprykerTest\Shared\Product\Helper\ProductDataHelper
+                - \SprykerTest\Shared\Testify\Helper\DataCleanupHelper
+                - \SprykerTest\Shared\Store\Helper\StoreDataHelper
+                - \SprykerTest\Shared\Testify\Helper\DependencyHelper
+                - \SprykerTest\Service\Container\Helper\ContainerHelper
+                - \SprykerTest\Shared\Store\Helper\StoreDependencyHelper
+
+    SearchHttpCommunication:
+        path: MessageHandlers/SearchHttp/Communication
+        actor: SearchHttpCommunicationTester
+        modules:
+            enabled:
+                - Asserts
+                - \PyzTest\Shared\Testify\Helper\Environment
+                - \SprykerTest\Shared\Config\Helper\ConfigInit
+                - \SprykerTest\Shared\Testify\Helper\LocatorHelper:
+                      projectNamespaces: ['Pyz']
+                - \SprykerTest\Shared\Propel\Helper\ConnectionHelper
+                - \SprykerTest\Shared\Testify\Helper\ConfigHelper
+                - \SprykerTest\Zed\Testify\Helper\Business\DependencyProviderHelper
+                - \SprykerTest\Zed\MessageBroker\Helper\InMemoryMessageBrokerHelper
+                - \SprykerTest\Zed\MessageBroker\Helper\MessageBrokerHelper
+                - \SprykerTest\Shared\Store\Helper\StoreDataHelper
+                - \SprykerTest\Shared\Propel\Helper\TransactionHelper
+
+    TaxAppCommunication:
+        path: MessageHandlers/TaxApp/Communication
+        actor: TaxAppCommunicationTester
+        modules:
+            enabled:
+                - Asserts
+                - \PyzTest\Shared\Testify\Helper\Environment
+                - \SprykerTest\Shared\Config\Helper\ConfigInit
+                -   \SprykerTest\Shared\Testify\Helper\LocatorHelper:
+                        projectNamespaces: [ 'Pyz' ]
+                - \SprykerTest\Shared\Testify\Helper\ConfigHelper
+                - \SprykerTest\Zed\Testify\Helper\Business\BusinessHelper
+                - \SprykerTest\Zed\Testify\Helper\Business\DependencyProviderHelper
+                - \SprykerTest\Shared\Propel\Helper\ConnectionHelper
+                - \SprykerTest\Shared\Propel\Helper\TransactionHelper
+                - \SprykerTest\Zed\MessageBroker\Helper\InMemoryMessageBrokerHelper
+                - \SprykerTest\Zed\MessageBroker\Helper\MessageBrokerHelper
+                - \SprykerTest\Zed\ProductReview\Helper\ProductReviewHelper
+                - \SprykerTest\Shared\Product\Helper\ProductDataHelper
+                - \SprykerTest\Shared\Testify\Helper\DataCleanupHelper
+                - \SprykerTest\Shared\Store\Helper\StoreDataHelper
+                - \SprykerTest\Shared\Store\Helper\StoreReferenceHelper
+                - \SprykerTest\Shared\Testify\Helper\DependencyHelper
+                - \SprykerTest\Service\Container\Helper\ContainerHelper
+                - \SprykerTest\Shared\Store\Helper\StoreDependencyHelper

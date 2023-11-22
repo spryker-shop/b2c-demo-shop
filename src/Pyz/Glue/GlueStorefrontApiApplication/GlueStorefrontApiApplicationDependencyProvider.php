@@ -7,6 +7,7 @@
 
 namespace Pyz\Glue\GlueStorefrontApiApplication;
 
+use Spryker\Glue\EventDispatcher\Plugin\Application\EventDispatcherApplicationPlugin;
 use Spryker\Glue\GlueStorefrontApiApplication\GlueStorefrontApiApplicationDependencyProvider as SprykerGlueStorefrontApiApplicationDependencyProvider;
 use Spryker\Glue\GlueStorefrontApiApplication\Plugin\GlueApplication\ApplicationIdentifierRequestBuilderPlugin;
 use Spryker\Glue\GlueStorefrontApiApplication\Plugin\GlueApplication\LocaleRequestBuilderPlugin;
@@ -21,7 +22,10 @@ use Spryker\Glue\OauthApi\Plugin\AccessTokenValidatorPlugin;
 use Spryker\Glue\OauthApi\Plugin\CustomerRequestBuilderPlugin;
 use Spryker\Glue\OauthApi\Plugin\GlueApplication\CustomerRequestValidatorPlugin;
 use Spryker\Glue\OauthApi\Plugin\GlueApplication\OauthApiTokenResource;
-use Spryker\Glue\StoresRestApi\Plugin\Application\StoreHttpHeaderApplicationPlugin;
+use Spryker\Glue\Router\Plugin\Application\RouterApplicationPlugin;
+use Spryker\Glue\StoresApi\Plugin\GlueApplication\StoreValidatorPlugin;
+use Spryker\Glue\StoresApi\Plugin\GlueStorefrontApiApplication\StoreApplicationPlugin;
+use Spryker\Glue\StoresApi\Plugin\GlueStorefrontApiApplication\StoresResource;
 
 class GlueStorefrontApiApplicationDependencyProvider extends SprykerGlueStorefrontApiApplicationDependencyProvider
 {
@@ -45,6 +49,7 @@ class GlueStorefrontApiApplicationDependencyProvider extends SprykerGlueStorefro
         return [
             new AccessTokenValidatorPlugin(),
             new CustomerRequestValidatorPlugin(),
+            new StoreValidatorPlugin(),
         ];
     }
 
@@ -78,6 +83,7 @@ class GlueStorefrontApiApplicationDependencyProvider extends SprykerGlueStorefro
     {
         return [
             new OauthApiTokenResource(),
+            new StoresResource(),
         ];
     }
 
@@ -96,8 +102,10 @@ class GlueStorefrontApiApplicationDependencyProvider extends SprykerGlueStorefro
     {
         return [
             new HttpApplicationPlugin(),
-            new StoreHttpHeaderApplicationPlugin(),
+            new StoreApplicationPlugin(),
             new LocaleApplicationPlugin(),
+            new RouterApplicationPlugin(),
+            new EventDispatcherApplicationPlugin(),
         ];
     }
 }

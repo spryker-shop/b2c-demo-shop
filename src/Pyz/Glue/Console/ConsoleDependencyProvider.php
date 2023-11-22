@@ -13,6 +13,7 @@ use Spryker\Glue\GlueApplication\Plugin\Console\ControllerCacheCollectorConsole;
 use Spryker\Glue\GlueApplication\Plugin\Console\RouterCacheWarmUpConsole;
 use Spryker\Glue\GlueApplication\Plugin\Console\RouterDebugGlueApplicationConsole;
 use Spryker\Glue\Kernel\Container;
+use Spryker\Zed\Propel\Communication\Plugin\Application\PropelApplicationPlugin;
 
 class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
 {
@@ -29,5 +30,19 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
             new RouterDebugGlueApplicationConsole(),
             new RouterCacheWarmUpConsole(),
         ];
+    }
+
+    /**
+     * @param \Spryker\Glue\Kernel\Container $container
+     *
+     * @return array<\Spryker\Shared\ApplicationExtension\Dependency\Plugin\ApplicationPluginInterface>
+     */
+    public function getApplicationPlugins(Container $container): array
+    {
+        $applicationPlugins = parent::getApplicationPlugins($container);
+
+        $applicationPlugins[] = new PropelApplicationPlugin();
+
+        return $applicationPlugins;
     }
 }

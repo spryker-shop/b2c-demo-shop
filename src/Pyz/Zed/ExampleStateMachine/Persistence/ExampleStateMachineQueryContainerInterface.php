@@ -7,7 +7,7 @@
 
 namespace Pyz\Zed\ExampleStateMachine\Persistence;
 
-use Orm\Zed\ExampleStateMachine\Persistence\PyzExampleStateMachineItemQuery;
+use Orm\Zed\ExampleStateMachine\Persistence\ExampleStateMachineItemQuery;
 use Propel\Runtime\Collection\ObjectCollection;
 
 interface ExampleStateMachineQueryContainerInterface
@@ -17,25 +17,25 @@ interface ExampleStateMachineQueryContainerInterface
      *
      * @param array<int> $stateIds
      *
-     * @return \Orm\Zed\ExampleStateMachine\Persistence\PyzExampleStateMachineItemQuery<\Orm\Zed\ExampleStateMachine\Persistence\PyzExampleStateMachineItem>
+     * @return \Orm\Zed\ExampleStateMachine\Persistence\ExampleStateMachineItemQuery<\Orm\Zed\ExampleStateMachine\Persistence\ExampleStateMachineItem>
      */
-    public function queryPyzStateMachineItemsByStateIds(array $stateIds = []): PyzExampleStateMachineItemQuery;
+    public function queryStateMachineItemsByStateIds(array $stateIds = []): ExampleStateMachineItemQuery;
 
     /**
      * @psalm-suppress TooManyTemplateParams
      *
-     * @return \Propel\Runtime\Collection\ObjectCollection<\Orm\Zed\ExampleStateMachine\Persistence\PyzExampleStateMachineItem>
+     * @return \Propel\Runtime\Collection\ObjectCollection<\Orm\Zed\ExampleStateMachine\Persistence\ExampleStateMachineItem>
      */
-    public function queryPyzAllStateMachineItems(): ObjectCollection;
+    public function queryAllStateMachineItems(): ObjectCollection;
 
     /**
      * @psalm-suppress TooManyTemplateParams
      *
      * @param int $idStateMachineItem
      *
-     * @return \Orm\Zed\ExampleStateMachine\Persistence\PyzExampleStateMachineItemQuery<\Orm\Zed\ExampleStateMachine\Persistence\PyzExampleStateMachineItem>
+     * @return \Orm\Zed\ExampleStateMachine\Persistence\ExampleStateMachineItemQuery<\Orm\Zed\ExampleStateMachine\Persistence\ExampleStateMachineItem>
      */
-    public function queryPyzExampleStateMachineItemByIdStateMachineItem(
+    public function queryExampleStateMachineItemByIdStateMachineItem(
         $idStateMachineItem,
-    ): PyzExampleStateMachineItemQuery;
+    ): ExampleStateMachineItemQuery;
 }

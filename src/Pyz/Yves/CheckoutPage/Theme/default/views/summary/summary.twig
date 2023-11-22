@@ -82,17 +82,13 @@
                                 } only %}
                             {% endblock %}
 
-                            {% block productConfiguration %}
-                                {% widget 'ProductConfigurationCartItemDisplayWidget'
-                                    args [data.productItem]
-                                    with {
-                                        data: {
-                                            wrapperClassName: config.name ~ '__product-configuration-options',
-                                            hasStatus: false,
-                                        },
-                                    } only %}
-                                {% endwidget %}
+                            {% block productConfigurationContent %}
+                                {% set hasStatus = false %}
+
+                                {{ parent() }}
                             {% endblock %}
+
+                            {% block productConfigurationButton %}{% endblock %}
                         {% endembed %}
                     {% endfor %}
                 </div>

@@ -3,7 +3,6 @@
 {% define data = {
     idProductAbstract: _widget.idProductAbstract,
     form: _widget.form,
-    showSuccessMessage: true,
     action: 'product-review/create',
     reviews: _widget.productReviews,
     summary: _widget.summary,
@@ -16,38 +15,52 @@
         paginationPath: app.request.getPathInfo(),
         maxPage: _widget.pagination.maxPage,
         showAlwaysFirstAndLast: true,
-        anchor: 'product-reviews'
-    }
+        anchor: 'product-reviews',
+    },
 } %}
 
 {% block rating %}
     {% include molecule('rating-selector', 'ProductReviewWidget') with {
         data: {
             value: _widget.productReviewStorageTransfer.averageRating | default(0),
-            reviewCount: _widget.productReviewStorageTransfer.reviewCount | default(''),
-            maxValue: _widget.maximumRating
+            reviewCount: _widget.productReviewStorageTransfer.reviewCount | default,
+            maxValue: _widget.maximumRating,
         },
         attributes: {
-            readonly: true
-        }
+            readonly: true,
+        },
+    } only %}
+{% endblock %}
+
+{% block newReviewForm %}
+    {% include molecule('new-review-form', 'ProductReviewWidget') with {
+        data: {
+            form: data.form,
+            action: url(data.action, { idProductAbstract: data.idProductAbstract }),
+        },
     } only %}
 {% endblock %}
 
 {% block body %}
+    {% set openReviewFormTriggerClassName = 'js-pdp-review__add-review' %}
+
     <div class="pdp-review">
         {% embed molecule('product-slider-title') with {
             class: 'js-pdp-review-trigger',
             modifiers: ['pdp-review'],
             data: {
-                title: 'product_review.ratings_reviews' | trans
-            }
+                title: 'product_review.ratings_reviews' | trans,
+            },
+            embed: {
+                openReviewFormTriggerClassName: openReviewFormTriggerClassName,
+            },
         } only %}
             {% block subContent %}
                 <div class="{{ config.name }}__sub-col is-hidden-sm-md">
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                        <span class="link link--custom-underline js-new-review-form__trigger">
+                        <button type="button" class="{{ embed.openReviewFormTriggerClassName }} link link--custom-underline">
                             {{ 'product_review.submit.add_a_review' | trans }}
-                        </span>
+                        </button>
                     {% else %}
                         <a class="link link--custom-underline" href="{{ path('login') }}">
                             {{ 'product_review.submit.add_a_review' | trans }}
@@ -57,29 +70,17 @@
             {% endblock %}
         {% endembed %}
 
-        {% include molecule('toggler-click') with {
+        {% include molecule('main-popup') with {
+            modifiers: ['big'],
+            data: {
+                title: 'product_review.submit.add_a_review' | trans,
+                content: block('newReviewForm'),
+            },
             attributes: {
-                'trigger-class-name': 'js-new-review-form__trigger',
-                'target-class-name': 'js-new-review-form__target',
+                'content-id': 'new-review-form',
+                'trigger-class-name': openReviewFormTriggerClassName,
             },
         } only %}
-
-        {% if is_granted('ROLE_USER') %}
-            <div class="is-hidden js-new-review-form__target">
-                {% if data.showSuccessMessage %}
-                    <div class="box box--success">
-                        {{ 'product_review.submit.success' | trans }}
-                    </div>
-                {% endif %}
-
-                {% include molecule('new-review-form', 'ProductReviewWidget') with {
-                    data: {
-                        form: data.form,
-                        action: url(data.action, {idProductAbstract: data.idProductAbstract})
-                    }
-                } only %}
-            </div>
-        {% endif %}
 
         {% include organism('review-summary', 'ProductReviewWidget') with {
             data: {
@@ -87,8 +88,9 @@
                 summary: data.summary,
                 ratingMaxValue: data.ratingMaxValue,
                 hasCustomer: data.hasCustomer,
-                pagination: data.pagination
-            }
+                pagination: data.pagination,
+                openReviewFormTriggerClassName: openReviewFormTriggerClassName,
+            },
         } only %}
     </div>
 {% endblock %}

@@ -80,18 +80,25 @@
                             {% endblock %}
 
                             {% block productConfiguration %}
-                                <div class="{{ component.renderClass(config.name ~ '__product-configuration', modifiers) }}">
+                                {% set hasStatus = true %}
+
+                                {% block productConfigurationContent %}
                                     {% widget 'ProductConfigurationCartItemDisplayWidget'
                                         args [data.productItem]
                                         with {
                                         data: {
-                                            wrapperClassName: config.name ~ '__product-configuration-options',
+                                            wrapperClassName: config.name ~ '__product-configuration',
+                                            hasStatus: hasStatus,
+                                            modifiers: ['alternative'],
                                         },
                                     } only %}
                                     {% endwidget %}
+                                {% endblock %}
+
+                                {% block productConfigurationButton %}
                                     {% widget 'ProductConfigurationCartPageButtonWidget' args [data.productItem] only %}
                                     {% endwidget %}
-                                </div>
+                                {% endblock %}
                             {% endblock %}
 
                             <div class="grid grid--justify grid--gap">

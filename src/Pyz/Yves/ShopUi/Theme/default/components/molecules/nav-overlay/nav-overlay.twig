@@ -8,10 +8,10 @@
 {% define attributes = {
     'trigger-open-class-name': required,
     'active-link': required,
+    'overlay-class-name': 'main-overlay',
 } %}
 
 {% block body %}
-    <div class="{{ config.name }}__shadow {{ config.jsName }}__shadow"></div>
     <div class="{{ config.name }}__container">
         {% block dropDown %}
             {% include molecule('user-block') with {

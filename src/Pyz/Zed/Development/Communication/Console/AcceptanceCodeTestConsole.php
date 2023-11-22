@@ -23,5 +23,5 @@ class AcceptanceCodeTestConsole extends CodeTestConsole
     /**
      * @var string
      */
-    protected const PYZ_CODECEPTION_CONFIG_FILE_NAME = 'codeception.acceptance.yml';
+    protected const CODECEPTION_CONFIG_FILE_NAME = 'codeception.acceptance.yml';
 }

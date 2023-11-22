@@ -28,4 +28,31 @@
             padding-bottom: rem(5);
         }
     }
+
+    &--alternative {
+        #{$name}__name {
+            text-transform: unset;
+            letter-spacing: unset;
+            font-size: rem(14);
+            font-weight: fw(medium);
+            font-family: $setting-font-family;
+            padding-right: rem(5);
+
+            @include helper-breakpoint(lg) {
+                width: auto;
+                font-size: rem(16);
+                padding: 0 rem(5) 0 0;
+            }
+        }
+
+        #{$name}__value {
+            font-size: rem(14);
+
+            @include helper-breakpoint(lg) {
+                width: auto;
+                font-size: rem(16);
+                padding: 0;
+            }
+        }
+    }
 }

@@ -27,44 +27,44 @@ class ProductReviewForm extends AbstractType
     /**
      * @var string
      */
-    public const PYZ_FIELD_RATING = ProductReviewRequestTransfer::RATING;
+    public const FIELD_RATING = ProductReviewRequestTransfer::RATING;
 
     /**
      * @var string
      */
-    public const PYZ_FIELD_SUMMARY = ProductReviewRequestTransfer::SUMMARY;
+    public const FIELD_SUMMARY = ProductReviewRequestTransfer::SUMMARY;
 
     /**
      * @var string
      */
-    public const PYZ_FIELD_DESCRIPTION = ProductReviewRequestTransfer::DESCRIPTION;
+    public const FIELD_DESCRIPTION = ProductReviewRequestTransfer::DESCRIPTION;
 
     /**
      * @var string
      */
-    public const PYZ_FIELD_NICKNAME = ProductReviewRequestTransfer::NICKNAME;
+    public const FIELD_NICKNAME = ProductReviewRequestTransfer::NICKNAME;
 
     /**
      * @var string
      */
-    public const PYZ_FIELD_PRODUCT = ProductReviewRequestTransfer::ID_PRODUCT_ABSTRACT;
+    public const FIELD_PRODUCT = ProductReviewRequestTransfer::ID_PRODUCT_ABSTRACT;
 
     /**
      * @var int
      */
-    public const PYZ_UNSELECTED_RATING = -1;
+    public const UNSELECTED_RATING = -1;
 
     /**
      * @var int
      */
-    public const PYZ_MINIMUM_RATING = 1;
+    public const MINIMUM_RATING = 1;
 
     /**
      * @deprecated Use {@link ProductReviewWidgetConfig::GLOSSARY_KEY_INVALID_RATING_VALIDATION_MESSAGE} instead.
      *
      * @var string
      */
-    protected const PYZ_VALIDATION_RATING_MESSAGE = 'validation.choice';
+    protected const VALIDATION_RATING_MESSAGE = 'validation.choice';
 
     /**
      * @return string
@@ -78,18 +78,16 @@ class ProductReviewForm extends AbstractType
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array<mixed> $options
      *
-     * @return $this
+     * @return void
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $this
-            ->addPyzSummaryField($builder)
-            ->addPyzRatingField($builder)
-            ->addPyzDescriptionField($builder)
-            ->addPyzNicknameField($builder)
-            ->addPyzProductField($builder);
-
-        return $this;
+            ->addSummaryField($builder)
+            ->addRatingField($builder)
+            ->addDescriptionField($builder)
+            ->addNicknameField($builder)
+            ->addProductField($builder);
     }
 
     /**
@@ -97,13 +95,13 @@ class ProductReviewForm extends AbstractType
      *
      * @return $this
      */
-    protected function addPyzRatingField(FormBuilderInterface $builder)
+    protected function addRatingField(FormBuilderInterface $builder)
     {
         $builder->add(
-            static::PYZ_FIELD_RATING,
+            static::FIELD_RATING,
             ChoiceType::class,
             [
-                'choices' => array_flip($this->getPyzRatingFieldChoices()),
+                'choices' => array_flip($this->getRatingFieldChoices()),
                 'label' => 'product_review.submit.rating',
                 'required' => true,
                 'expanded' => false,
@@ -111,7 +109,7 @@ class ProductReviewForm extends AbstractType
                 'constraints' => [
                     new GreaterThanOrEqual(
                         [
-                        'value' => static::PYZ_MINIMUM_RATING,
+                        'value' => static::MINIMUM_RATING,
                         'message' => $this->getConfig()->getInvalidRatingValidationMessageGlossaryKey(),
                         ],
                     ),
@@ -127,19 +125,19 @@ class ProductReviewForm extends AbstractType
      * Returns a sequence between predefined minimum and maximum as an array with a leading "unselected" element
      * - keys match values
      *
-     * @see ProductReviewForm::PYZ_MINIMUM_RATING
+     * @see ProductReviewForm::MINIMUM_RATING
      * @see ProductReviewClientInterface::getMaximumRating()
      *
      * Example
      *  [-1 => 'none', 1 => 1, 2 => 2]
-     * @see ProductReviewForm::PYZ_UNSELECTED_RATING
+     * @see ProductReviewForm::UNSELECTED_RATING
      *
      * @return array<mixed>
      */
-    protected function getPyzRatingFieldChoices(): array
+    protected function getRatingFieldChoices(): array
     {
-        $unselectedChoice = [static::PYZ_UNSELECTED_RATING => 'product_review.submit.rating.none'];
-        $choices = range(static::PYZ_MINIMUM_RATING, $this->getFactory()->getProductReviewClient()->getMaximumRating());
+        $unselectedChoice = [static::UNSELECTED_RATING => 'product_review.submit.rating.none'];
+        $choices = range(static::MINIMUM_RATING, $this->getFactory()->getProductReviewClient()->getMaximumRating());
         $choices = array_merge($unselectedChoice, array_combine($choices, $choices));
 
         return $choices;
@@ -150,10 +148,10 @@ class ProductReviewForm extends AbstractType
      *
      * @return $this
      */
-    protected function addPyzSummaryField(FormBuilderInterface $builder)
+    protected function addSummaryField(FormBuilderInterface $builder)
     {
         $builder->add(
-            static::PYZ_FIELD_SUMMARY,
+            static::FIELD_SUMMARY,
             TextType::class,
             [
                 'label' => 'product_review.submit.summary',
@@ -172,10 +170,10 @@ class ProductReviewForm extends AbstractType
      *
      * @return $this
      */
-    protected function addPyzDescriptionField(FormBuilderInterface $builder)
+    protected function addDescriptionField(FormBuilderInterface $builder)
     {
         $builder->add(
-            static::PYZ_FIELD_DESCRIPTION,
+            static::FIELD_DESCRIPTION,
             TextareaType::class,
             [
                 'label' => 'product_review.submit.description',
@@ -197,10 +195,10 @@ class ProductReviewForm extends AbstractType
      *
      * @return $this
      */
-    protected function addPyzNicknameField(FormBuilderInterface $builder)
+    protected function addNicknameField(FormBuilderInterface $builder)
     {
         $builder->add(
-            static::PYZ_FIELD_NICKNAME,
+            static::FIELD_NICKNAME,
             TextType::class,
             [
                 'label' => 'product_review.submit.nickname',
@@ -219,10 +217,10 @@ class ProductReviewForm extends AbstractType
      *
      * @return $this
      */
-    protected function addPyzProductField(FormBuilderInterface $builder)
+    protected function addProductField(FormBuilderInterface $builder)
     {
         $builder->add(
-            static::PYZ_FIELD_PRODUCT,
+            static::FIELD_PRODUCT,
             HiddenType::class,
             [
                 'required' => true,

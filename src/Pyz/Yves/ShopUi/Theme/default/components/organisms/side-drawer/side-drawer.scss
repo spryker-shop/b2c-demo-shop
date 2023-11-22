@@ -6,17 +6,6 @@ $shop-ui-right-side-drawer-width: rem(320);
         position: relative;
         z-index: $setting-zi-side-drawer;
 
-        &__overlay {
-            @include helper-visibility-invisible;
-            @include helper-effect-transition(opacity visibility);
-            position: fixed;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background-color: $setting-color-overlay;
-        }
-
         &__drawer {
             @include helper-ui-shadow;
             @include helper-visibility-invisible;
@@ -56,10 +45,6 @@ $shop-ui-right-side-drawer-width: rem(320);
 
         &__navigation {
             margin: rem(10) rem(24) 0;
-        }
-
-        &--show &__overlay {
-            @include helper-visibility-visible;
         }
 
         &--show &__drawer {

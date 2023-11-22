@@ -23,7 +23,7 @@ class SubmitController extends SprykerSubmitController
     /**
      * @var string
      */
-    protected const PYZ_PRODUCT_REVIEW_ERROR_PLEASE_LOGIN = 'product_review.error.please_login';
+    protected const PRODUCT_REVIEW_ERROR_PLEASE_LOGIN = 'product_review.error.please_login';
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
@@ -32,7 +32,7 @@ class SubmitController extends SprykerSubmitController
      */
     public function indexAction(Request $request): View
     {
-        $viewData = $this->executePyzIndexAction($request);
+        $viewData = $this->executeIndexAction($request);
 
         return $this->view($viewData, [], '@ProductReviewWidget/views/review-create/review-create.twig');
     }
@@ -41,17 +41,17 @@ class SubmitController extends SprykerSubmitController
      * @param \Symfony\Component\Form\FormInterface $form
      * @param \Generated\Shared\Transfer\CustomerTransfer|null $customerTransfer
      *
-     * @return \Generated\Shared\Transfer\CustomerTransfer|null
+     * @return bool
      */
-    protected function processPyzProductReviewForm(
+    protected function processProductReviewForm(
         FormInterface $form,
         ?CustomerTransfer $customerTransfer = null,
-    ): ?CustomerTransfer {
+    ): bool {
         if (!$form->isSubmitted()) {
-            return null;
+            return false;
         }
 
-        $result = $this->processPyzCoreProductReviewForm($form, $customerTransfer);
+        $result = $this->processCoreProductReviewForm($form, $customerTransfer);
 
         if ($result) {
             $this->addSuccessMessage('product_review.submit.success');
@@ -59,7 +59,7 @@ class SubmitController extends SprykerSubmitController
             $this->addErrorMessage('product_review.submit.error');
         }
 
-        return $result;
+        return (bool)$result;
     }
 
     /**
@@ -68,7 +68,7 @@ class SubmitController extends SprykerSubmitController
      *
      * @return \Generated\Shared\Transfer\CustomerTransfer|null
      */
-    protected function processPyzCoreProductReviewForm(
+    protected function processCoreProductReviewForm(
         FormInterface $form,
         ?CustomerTransfer $customerTransfer = null,
     ): ?CustomerTransfer {
@@ -78,11 +78,11 @@ class SubmitController extends SprykerSubmitController
 
         $customerReference = $customerTransfer === null ? null : $customerTransfer->getCustomerReference();
 
-        $this->getFactory()->getPyzGlossaryClient();
+        $this->getFactory()->getGlossaryClient();
 
         if ($customerReference === null) {
-            $glossaryStorageClient = $this->getFactory()->getPyzGlossaryClient();
-            $errorMessage = $glossaryStorageClient->translate(self::PYZ_PRODUCT_REVIEW_ERROR_PLEASE_LOGIN, $this->getLocale());
+            $glossaryStorageClient = $this->getFactory()->getGlossaryClient();
+            $errorMessage = $glossaryStorageClient->translate(self::PRODUCT_REVIEW_ERROR_PLEASE_LOGIN, $this->getLocale());
             $form->addError(new FormError($errorMessage));
         }
 
@@ -91,7 +91,7 @@ class SubmitController extends SprykerSubmitController
         }
 
         $productReviewResponseTransfer = $this->getFactory()->getProductReviewClient()->submitCustomerReview(
-            $this->getPyzProductReviewFormData($form)
+            $this->getProductReviewFormData($form)
                 ->setCustomerReference($customerReference)
                 ->setLocaleName($this->getLocale()),
         );
@@ -111,7 +111,7 @@ class SubmitController extends SprykerSubmitController
      *
      * @return \Generated\Shared\Transfer\ProductReviewRequestTransfer
      */
-    protected function getPyzProductReviewFormData(FormInterface $form): ProductReviewRequestTransfer
+    protected function getProductReviewFormData(FormInterface $form): ProductReviewRequestTransfer
     {
         return $form->getData();
     }
@@ -121,20 +121,20 @@ class SubmitController extends SprykerSubmitController
      *
      * @return array<mixed>
      */
-    protected function executePyzIndexAction(Request $request): array
+    protected function executeIndexAction(Request $request): array
     {
         $parentRequest = $this->getRequestStack()->getParentRequest();
         $idProductAbstract = $request->attributes->get('idProductAbstract');
 
         $customer = $this->getFactory()->getCustomerClient()->getCustomer();
         $productReviewForm = $this->getFactory()
-            ->createPyzProductReviewForm($idProductAbstract)
+            ->createProductReviewForm($idProductAbstract)
             ->handleRequest($parentRequest);
         $isFormEmpty = !$productReviewForm->isSubmitted();
-        $isReviewPosted = $this->processPyzProductReviewForm($productReviewForm, $customer);
+        $isReviewPosted = $this->processProductReviewForm($productReviewForm, $customer);
 
         if ($isReviewPosted) {
-            $productReviewForm = $this->getFactory()->createPyzProductReviewForm($idProductAbstract);
+            $productReviewForm = $this->getFactory()->createProductReviewForm($idProductAbstract);
         }
 
         return [

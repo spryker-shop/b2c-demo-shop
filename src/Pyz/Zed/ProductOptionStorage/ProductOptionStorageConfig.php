@@ -18,7 +18,7 @@ class ProductOptionStorageConfig extends SprykerProductOptionStorageConfig
      */
     public function getProductAbstractOptionSynchronizationPoolName(): ?string
     {
-        return SynchronizationConfig::PYZ_DEFAULT_SYNCHRONIZATION_POOL_NAME;
+        return SynchronizationConfig::DEFAULT_SYNCHRONIZATION_POOL_NAME;
     }
 
     /**
