@@ -253,19 +253,7 @@ $config[OauthConstants::PUBLIC_KEY_PATH]
         getenv('SPRYKER_OAUTH_KEY_PUBLIC') ?: '',
     ) ?: null;
 $config[OauthConstants::ENCRYPTION_KEY] = getenv('SPRYKER_OAUTH_ENCRYPTION_KEY') ?: null;
-$config[OauthConstants::OAUTH_CLIENT_CONFIGURATION] = array_merge(
-    json_decode(getenv('SPRYKER_OAUTH_CLIENT_CONFIGURATION'), true) ?: [],
-    [
-        [
-            'identifier' => 'fulfillment-client-b2c-prod',
-            'secret' => null,
-            'isConfidential' => false,
-            'name' => 'Fulfillment b2c prod',
-            'redirectUri' => 'https://de.b2c.fulfillment-app.demo-spryker.com/oauth/cb/spryker',
-            'isDefault' => false,
-        ],
-    ],
-);
+$config[OauthConstants::OAUTH_CLIENT_CONFIGURATION] = json_decode(getenv('SPRYKER_OAUTH_CLIENT_CONFIGURATION'), true) ?: [];
 
 // >> ZED REQUEST
 
