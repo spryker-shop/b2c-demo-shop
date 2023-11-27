@@ -206,6 +206,11 @@ class DataImportConfig extends SprykerDataImportConfig
     public const IMPORT_TYPE_COMBINED_PRODUCT_GROUP = 'combined-product-group';
 
     /**
+     * @var int
+     */
+    protected const READ_COLLECTION_BATCH_SIZE = 500;
+
+    /**
      * @return string|null
      */
     public function getDefaultYamlConfigPath(): ?string
@@ -225,5 +230,13 @@ class DataImportConfig extends SprykerDataImportConfig
         ];
 
         return array_merge(parent::getFullImportTypes(), $customImportTypes);
+    }
+
+    /**
+     * @return int
+     */
+    public function getReadCollectionBatchSize(): int
+    {
+        return static::READ_COLLECTION_BATCH_SIZE;
     }
 }

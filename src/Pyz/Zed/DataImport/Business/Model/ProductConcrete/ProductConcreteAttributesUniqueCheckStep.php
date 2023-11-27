@@ -7,8 +7,11 @@
 
 namespace Pyz\Zed\DataImport\Business\Model\ProductConcrete;
 
+use Generated\Shared\Transfer\PaginationTransfer;
+use Propel\Runtime\Collection\ArrayCollection;
 use Pyz\Zed\DataImport\Business\Exception\InvalidDataException;
 use Pyz\Zed\DataImport\Business\Model\Product\Repository\ProductRepositoryInterface;
+use Pyz\Zed\DataImport\DataImportConfig;
 use Spryker\Zed\DataImport\Business\Model\DataImportStep\DataImportStepInterface;
 use Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface;
 use Spryker\Zed\DataImport\Dependency\Service\DataImportToUtilEncodingServiceInterface;
@@ -54,28 +57,36 @@ class ProductConcreteAttributesUniqueCheckStep implements DataImportStepInterfac
     /**
      * @var \Pyz\Zed\DataImport\Business\Model\Product\Repository\ProductRepositoryInterface
      */
-    protected $productRepository;
+    protected ProductRepositoryInterface $productRepository;
 
     /**
      * @var \Spryker\Zed\DataImport\Dependency\Service\DataImportToUtilEncodingServiceInterface
      */
-    protected $utilEncodingService;
+    protected DataImportToUtilEncodingServiceInterface $utilEncodingService;
+
+    /**
+     * @var \Pyz\Zed\DataImport\DataImportConfig
+     */
+    protected DataImportConfig $dataImportConfig;
 
     /**
      * @var array<string, array<string, array<string, mixed>>>
      */
-    protected static $productConcreteAttributesMap = [];
+    protected static array $productConcreteAttributesMap = [];
 
     /**
      * @param \Pyz\Zed\DataImport\Business\Model\Product\Repository\ProductRepositoryInterface $productRepository
      * @param \Spryker\Zed\DataImport\Dependency\Service\DataImportToUtilEncodingServiceInterface $utilEncodingService
+     * @param \Pyz\Zed\DataImport\DataImportConfig $dataImportConfig
      */
     public function __construct(
         ProductRepositoryInterface $productRepository,
         DataImportToUtilEncodingServiceInterface $utilEncodingService,
+        DataImportConfig $dataImportConfig,
     ) {
         $this->productRepository = $productRepository;
         $this->utilEncodingService = $utilEncodingService;
+        $this->dataImportConfig = $dataImportConfig;
 
         $this->prepareProductConcreteAttributesMap();
     }
@@ -139,17 +150,42 @@ class ProductConcreteAttributesUniqueCheckStep implements DataImportStepInterfac
      */
     protected function prepareProductConcreteAttributesMap(): void
     {
-        $productConcreteCollection = $this->productRepository->getProductConcreteAttributesCollection();
+        $readCollectionBatchSize = $this->dataImportConfig->getReadCollectionBatchSize();
+        $paginationTransfer = (new PaginationTransfer())->setOffset(0)->setLimit($readCollectionBatchSize);
 
-        foreach ($productConcreteCollection as $productConcrete) {
-            $productConcreteAttributes = $this->utilEncodingService->decodeJson($productConcrete[static::PRODUCT_COL_ATTRIBUTES], true);
-            if ($productConcreteAttributes) {
-                ksort($productConcreteAttributes);
+        do {
+            $productConcreteCollection = $this->productRepository->getProductConcreteAttributesCollection($paginationTransfer);
+            if (!count($productConcreteCollection)) {
+                break;
             }
+
+            $this->processProductConcreteAttributesMap($productConcreteCollection);
+
+            $paginationTransfer->setOffset($paginationTransfer->getOffset() + $readCollectionBatchSize);
+        } while (count($productConcreteCollection));
+    }
+
+    /**
+     * @param \Propel\Runtime\Collection\ArrayCollection $productConcreteCollection
+     *
+     * @return void
+     */
+    protected function processProductConcreteAttributesMap(ArrayCollection $productConcreteCollection): void
+    {
+        foreach ($productConcreteCollection as $productConcrete) {
             /** @var string $productConcreteSku */
             $productConcreteSku = $productConcrete[static::PRODUCT_COL_SKU];
             /** @var string $productAbstractSku */
             $productAbstractSku = $productConcrete[static::PRODUCT_ABSTRACT_COL_SKU];
+
+            if (isset(static::$productConcreteAttributesMap[$productAbstractSku][$productConcreteSku])) {
+                continue;
+            }
+
+            $productConcreteAttributes = $this->utilEncodingService->decodeJson($productConcrete[static::PRODUCT_COL_ATTRIBUTES], true);
+            if ($productConcreteAttributes) {
+                ksort($productConcreteAttributes);
+            }
 
             static::$productConcreteAttributesMap[$productAbstractSku][$productConcreteSku] = $productConcreteAttributes;
         }
