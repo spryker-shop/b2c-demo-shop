@@ -18,4 +18,12 @@ class CheckoutRestApiConfig extends SprykerCheckoutRestApiConfig
     {
         return false;
     }
+
+    /**
+     * @return bool
+     */
+    public function isRecalculationEnabledForQuoteMapperPlugins(): bool
+    {
+        return false;
+    }
 }
