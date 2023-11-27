@@ -166,15 +166,12 @@ class ExampleProductSalePageDependencyProvider extends AbstractDependencyProvide
      */
     protected function getSaleSearchResultFormatterPlugins(): array
     {
-        /** @phpstan-var \Spryker\Client\SearchExtension\Dependency\Plugin\ResultFormatterPluginInterface $rawCatalogSearchResultFormatterPlugin */
-        $rawCatalogSearchResultFormatterPlugin = new RawCatalogSearchResultFormatterPlugin();
-
         return [
             new FacetResultFormatterPlugin(),
             new SortedResultFormatterPlugin(),
             new PaginatedResultFormatterPlugin(),
             new CurrencyAwareCatalogSearchResultFormatterPlugin(
-                $rawCatalogSearchResultFormatterPlugin,
+                new RawCatalogSearchResultFormatterPlugin(),
             ),
         ];
     }

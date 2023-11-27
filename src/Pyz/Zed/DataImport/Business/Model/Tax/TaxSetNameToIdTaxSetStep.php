@@ -35,7 +35,7 @@ class TaxSetNameToIdTaxSetStep implements DataImportStepInterface
     protected $target;
 
     /**
-     * @var array<string, string>
+     * @var array<int|string, int|string>
      */
     protected $resolved = [];
 
