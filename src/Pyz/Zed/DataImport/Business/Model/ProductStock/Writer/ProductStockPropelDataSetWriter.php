@@ -214,10 +214,10 @@ class ProductStockPropelDataSetWriter implements DataSetWriterInterface
 
         return SpyAvailabilityAbstractQuery::create()
             ->joinWithSpyAvailability()
+            ->filterByAbstractSku_In(static::$productAbstractSkus)
             ->useSpyAvailabilityQuery()
                 ->filterByFkStore_In($storeIds)
             ->endUse()
-            ->filterByAbstractSku_In(static::$productAbstractSkus)
             ->select([
                 SpyAvailabilityAbstractTableMap::COL_ID_AVAILABILITY_ABSTRACT,
             ])
@@ -347,18 +347,18 @@ class ProductStockPropelDataSetWriter implements DataSetWriterInterface
     {
         $idStore = $this->getIdStore($storeTransfer);
 
+        /** @var \Propel\Runtime\Collection\ArrayCollection $productReservations */
         $productReservations = SpyOmsProductReservationQuery::create()
             ->filterBySku($sku)
             ->filterByFkStore($idStore)
             ->select([
                 SpyOmsProductReservationTableMap::COL_RESERVATION_QUANTITY,
             ])
-            ->find()
-            ->toArray();
+            ->find();
 
         $reservationQuantity = new Decimal(0);
 
-        foreach ($productReservations as $productReservationQuantity) {
+        foreach ($productReservations->toArray() as $productReservationQuantity) {
             $reservationQuantity = $reservationQuantity->add($productReservationQuantity);
         }
 
