@@ -13,10 +13,10 @@ image:
         SPRYKER_HOOK_AFTER_DEPLOY: "true"
         SPRYKER_HOOK_INSTALL: "vendor/bin/install -r EU/production --no-ansi -vvv"
         SPRYKER_HOOK_DESTRUCTIVE_INSTALL: "vendor/bin/install -r EU/destructive --no-ansi -vvv"
-        SPRYKER_PRODUCT_CONFIGURATOR_HOST: dtc.b2c.latest.demo-spryker.com
+        SPRYKER_PRODUCT_CONFIGURATOR_HOST: dtc.scos-b2c.cloud.spryker.toys
         SPRYKER_PRODUCT_CONFIGURATOR_PORT: 443
-        SPRYKER_YVES_HOST_DE: www.de.b2c.latest.demo-spryker.com
-        SPRYKER_YVES_HOST_AT: www.at.b2c.latest.demo-spryker.com
+        SPRYKER_YVES_HOST_DE: www.de.scos-b2c.cloud.spryker.toys
+        SPRYKER_YVES_HOST_AT: www.at.scos-b2c.cloud.spryker.toys
     node:
         version: 18
         npm: 9
@@ -37,7 +37,7 @@ regions:
     EU:
         services:
             database:
-                database: spryker_b2clatest
+                database: scos_b2с
                 username: spryker
                 password: secret
 
@@ -70,55 +70,55 @@ groups:
             yves:
                 application: yves
                 endpoints:
-                    dtc.b2c.latest.demo-spryker.com:
+                    dtc.scos-b2c.cloud.spryker.toys:
                         entry-point: Configurator
-                    www.de.b2c.latest.demo-spryker.com:
+                    www.de.scos-b2c.cloud.spryker.toys:
                         store: DE
-                    www.at.b2c.latest.demo-spryker.com:
+                    www.at.scos-b2c.cloud.spryker.toys:
                         store: AT
             boffice:
                 application: backoffice
                 endpoints:
-                    backoffice.de.b2c.latest.demo-spryker.com:
+                    backoffice.de.scos-b2c.cloud.spryker.toys:
                         store: DE
-                    backoffice.at.b2c.latest.demo-spryker.com:
+                    backoffice.at.scos-b2c.cloud.spryker.toys:
                         store: AT
             backgw:
                 application: backend-gateway
                 endpoints:
-                    backend-gateway.de.b2c.latest.demo-spryker.com:
+                    backend-gateway.de.scos-b2c.cloud.spryker.toys:
                         store: DE
-                    backend-gateway.at.b2c.latest.demo-spryker.com:
+                    backend-gateway.at.scos-b2c.cloud.spryker.toys:
                         store: AT
             backapi:
                 application: zed
                 endpoints:
-                    backend-api.de.b2c.latest.demo-spryker.com:
+                    backend-api.de.scos-b2c.cloud.spryker.toys:
                         store: DE
                         entry-point: BackendApi
-                    backend-api.at.b2c.latest.demo-spryker.com:
+                    backend-api.at.scos-b2c.cloud.spryker.toys:
                         store: AT
                         entry-point: BackendApi
             glue:
                 application: glue
                 endpoints:
-                    glue.de.b2c.latest.demo-spryker.com:
+                    glue.de.scos-b2c.cloud.spryker.toys:
                         store: DE
-                    glue.at.b2c.latest.demo-spryker.com:
+                    glue.at.scos-b2c.cloud.spryker.toys:
                         store: AT
             gluestorefront:
                 application: glue-storefront
                 endpoints:
-                    glue-storefront.de.b2c.latest.demo-spryker.com:
+                    glue-storefront.de.scos-b2c.cloud.spryker.toys:
                         store: DE
-                    glue-storefront.at.b2c.latest.demo-spryker.com:
+                    glue-storefront.at.scos-b2c.cloud.spryker.toys:
                         store: AT
             gluebackend:
                 application: glue-backend
                 endpoints:
-                    glue-backend.de.b2c.latest.demo-spryker.com:
+                    glue-backend.de.scos-b2c.cloud.spryker.toys:
                         store: DE
-                    glue-backend.at.b2c.latest.demo-spryker.com:
+                    glue-backend.at.scos-b2c.cloud.spryker.toys:
                         store: AT
 services:
     database:
@@ -137,7 +137,7 @@ services:
             username: "spryker"
             password: "secret"
         endpoints:
-            queue.b2c.latest.demo-spryker.com:
+            queue.scos-b2c.cloud.spryker.toys:
             localhost:5672:
                 protocol: tcp
     session:
@@ -157,11 +157,11 @@ services:
         engine: jenkins
         version: '2.401'
         endpoints:
-            scheduler.latest.demo-spryker.com:
+            scheduler.scos-b2c.cloud.spryker.toys:
     mail_catcher:
         engine: mailhog
         endpoints:
-            mail.latest.demo-spryker.com:
+            mail.scos-b2c.cloud.spryker.toys:
 
 docker:
 
