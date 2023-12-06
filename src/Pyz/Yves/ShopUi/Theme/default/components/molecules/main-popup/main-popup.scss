@@ -1,0 +1,61 @@
+@include shop-ui-main-popup {
+    $name: '.main-popup';
+    border-radius: rem(3);
+    padding: rem(20);
+
+    &__head {
+        min-height: rem(45);
+        padding-right: rem(40);
+        padding-bottom: rem(20);
+        margin-bottom: rem(20);
+        border-bottom: rem(1) dotted $setting-color-gray-3;
+    }
+
+    &__title {
+        padding: 0;
+        font-family: $setting-font-family-additional;
+    }
+
+    &__close {
+        width: rem(24);
+        height: rem(24);
+        right: rem(20);
+        top: rem(20);
+        transition: none;
+        color: $setting-color-black;
+
+        &:hover,
+        &:focus,
+        &:active {
+            color: $setting-color-black;
+        }
+    }
+
+    &__content {
+        padding: 0;
+    }
+
+    &--big {
+        @include helper-breakpoint-media-min($lg-min) {
+            width: rem(700);
+            padding: rem(32) rem(38) rem(38);
+
+            #{$name}__head {
+                min-height: rem(57);
+                margin-bottom: rem(40);
+                padding-bottom: rem(15);
+            }
+
+            #{$name}__title {
+                font-size: rem(34);
+            }
+
+            #{$name}__close {
+                width: rem(28);
+                height: rem(28);
+                top: rem(38);
+                right: rem(38);
+            }
+        }
+    }
+}

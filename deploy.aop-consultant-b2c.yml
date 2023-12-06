@@ -42,7 +42,7 @@ tag: '1.0'
 
 environment: docker.demo
 image:
-    tag: spryker/php:8.1
+    tag: spryker/php:8.2
     environment:
         SPRYKER_DEFAULT_STORE: "DE"
         SPRYKER_ACTIVE_STORES: "DE,AT"
@@ -58,8 +58,8 @@ image:
 
         #AOP
         SPRYKER_TENANT_IDENTIFIER: "AOP_Production_Consultant_b2c-DE"
-        SPRYKER_MESSAGE_BROKER_HTTP_CHANNEL_SENDER_BASE_URL: ""
-        SPRYKER_MESSAGE_BROKER_HTTP_CHANNEL_RECEIVER_BASE_URL: ""
+        SPRYKER_MESSAGE_BROKER_HTTP_CHANNEL_SENDER_BASE_URL: "https://publish.mb.spryker.com/"
+        SPRYKER_MESSAGE_BROKER_HTTP_CHANNEL_RECEIVER_BASE_URL: "https://consume.mb.spryker.com/"
 
         SPRYKER_AOP_APPLICATION: '{
             "APP_DOMAINS": [
