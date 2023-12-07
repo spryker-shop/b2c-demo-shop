@@ -48,10 +48,10 @@
             {% set multishipmentValidatorClassName = embed.jsAddressClass ~ '__multishipment-validate-next-checkout-step' %}
 
             {% set optionValueDeliverToMultipleAddresses = '-1' %}
-            {% set shippingAddress = data.form.shippingAddress.id_customer_address %}
-            {% set shippingAddressValue = shippingAddress.vars.value | default %}
+            {% set hasShippingAddresses = data.form.shippingAddress.id_customer_address is defined %}
+            {% set shippingAddressValue = data.form.shippingAddress.id_customer_address.vars.value | default %}
             {% set isNewAddressSelected = shippingAddressValue == 0 or shippingAddressValue is empty %}
-            {% set newAddressHiddenClassName = shippingAddress is defined and not isNewAddressSelected ? ' ' ~ hiddenClassName %}
+            {% set newAddressHiddenClassName = hasShippingAddresses and not isNewAddressSelected ? ' ' ~ hiddenClassName %}
             {% set isMultipleShipmentSelected = shippingAddressValue == optionValueDeliverToMultipleAddresses %}
             {% set multipleShipmentHiddenClassName = not isMultipleShipmentSelected ? ' ' ~ hiddenClassName %}
             {% set billingSameAsShippingHiddenClassName = isMultipleShipmentSelected ? hiddenClassName %}
@@ -65,7 +65,7 @@
                 {% endif %}
             </h2>
 
-            {% if shippingAddress is defined %}
+            {% if hasShippingAddresses %}
                 <div class="col col--sm-12 spacing-bottom spacing-bottom--biggest">
                     {{ form_row(embed.forms.shipping.id_customer_address, {
                         label: 'page.checkout.address.delivery.address_select' | trans,
@@ -164,12 +164,12 @@
                     },
                 } only %}
                     {% block fields %}
-                        {% set billingAddress = data.form.id_customer_address %}
-                        {% set billingAddressValue = billingAddress.vars.value | default %}
+                        {% set hasBillingAddresses = data.form.id_customer_address is defined %}
+                        {% set billingAddressValue = data.form.id_customer_address.vars.value | default %}
                         {% set isNewAddressSelected = billingAddressValue == 0 or billingAddressValue is empty %}
-                        {% set newAddressHiddenClassName = billingAddress is defined and not isNewAddressSelected ? ' ' ~ embed.hiddenClassName %}
+                        {% set newAddressHiddenClassName = hasBillingAddresses and not isNewAddressSelected ? ' ' ~ embed.hiddenClassName %}
 
-                        {% if billingAddress is defined %}
+                        {% if hasBillingAddresses %}
                             <div class="col col--sm-12 spacing-bottom spacing-bottom--small">
                                 {{ form_row(data.form.id_customer_address, {
                                     label: 'page.checkout.address.billing.address_select' | trans,
