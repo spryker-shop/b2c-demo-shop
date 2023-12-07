@@ -6,9 +6,9 @@
 
 {% define data = {
     shipmentGroup: required,
+    shipmentExpenses: required,
     isGiftCardExists: false,
     canEdit: false,
-    shipmentExpenses: {},
 } %}
 
 {% block body %}
@@ -30,27 +30,13 @@
     {% if not data.isGiftCardExists %}
         <div class="{{ config.name }}__item">
             <h4 class="title title--secondary-small">{{ 'checkout.step.summary.delivery_method' | trans }}</h4>
-            <h4 class="title title--secondary-small spacing-bottom grid grid--justify grid--middle">
-                <span class="col col--sm-7">{{ shipment.method.carrierName | trans }}</span>
-                <span class="col">
-                    {% set deliveryLogoName =  shipment.method.carrierName | replace({' ': ''}) | lower ~ '-logo' %}
-                    {% include atom('icon') with {
-                        class: 'col',
-                        modifiers: [deliveryLogoName],
-                        data: {
-                            name: deliveryLogoName,
-                        },
-                    } only %}
-                </span>
-            </h4>
+            
             {% if data.shipmentExpenses[data.shipmentGroup.hash] is defined %}
                 {% include molecule('shipment-information', 'CustomerPage') ignore missing with {
                     data: {
                         shipmentExpense: data.shipmentExpenses[data.shipmentGroup.hash],
                     },
                 } only %}
-            {% else %}
-                <div class="{{ config.name }}__text">{{ shipment.method.name }}: {{ shipment.method.storeCurrencyPrice | money(true, shipment.method.currencyIsoCode) }}</div>
             {% endif %}
 
             {% if data.canEdit %}
