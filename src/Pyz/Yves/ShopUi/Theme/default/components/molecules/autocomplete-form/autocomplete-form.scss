@@ -1,4 +1,6 @@
-@include shop-ui-autocomplete-form {
+@include shop-ui-autocomplete-form() {
+    $name: '.autocomplete-form';
+
     margin-right: rem(20);
 
     &__suggestion {
@@ -24,8 +26,9 @@
         position: relative;
     }
 
-    &__input {
+    #{$name}__input {
         border: none;
+        border-radius: rem(3) 0 0 rem(3);
         background-color: $setting-color-gray-1;
         font-weight: fw(medium);
         font-size: rem(18);
@@ -37,10 +40,35 @@
         opacity: 0.3;
     }
 
-    &__clean-button {
+    #{$name}__clean-button {
         position: absolute;
         top: 0;
         right: 0;
         bottom: 0;
+    }
+
+    &--small {
+        margin-right: 0;
+
+        #{$name}__input {
+            @include helper-font-size(small);
+            padding: rem(12) rem(40) rem(12) rem(14);
+            line-height: rem(16);
+        }
+
+        #{$name}__clean-button {
+            padding: rem(14);
+            line-height: 0;
+
+            &:hover,
+            &:focus {
+                color: $setting-color-gray-4;
+            }
+        }
+
+        #{$name}__icon {
+            width: rem(12);
+            height: rem(12);
+        }
     }
 }
