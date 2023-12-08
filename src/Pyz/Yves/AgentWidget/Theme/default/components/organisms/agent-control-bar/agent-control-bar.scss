@@ -2,14 +2,10 @@
     #{$name} {
         position: relative;
         border-bottom: rem(1) solid $setting-color-gray-1;
-        z-index: $setting-zi-header + 1;
+        z-index: $setting-zi-header + 4;
 
         @include helper-breakpoint-media-min($lg-min) {
             border-bottom: none;
-        }
-
-        .body-has-overlay & {
-            z-index: auto;
         }
 
         &__content {
@@ -26,7 +22,7 @@
         &__col {
             flex-grow: 0;
             flex-basis: auto;
-            padding: rem(8) 0  rem(12);
+            padding: rem(8) 0 rem(12);
 
             @include helper-breakpoint-media-min($md-min) {
                 padding-top: 0;

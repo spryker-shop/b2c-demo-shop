@@ -1,15 +1,20 @@
 @include shop-ui-autocomplete-form() {
     $name: '.autocomplete-form';
-
     margin-right: rem(20);
 
-    &__suggestion {
+    &__suggestions {
+        @include helper-font-size(small);
+        @include helper-font-line-height(default);
         background-color: $setting-color-white;
         border-radius: rem(3);
         padding: rem(12) rem(18);
-        font-size: rem(19);
-        line-height: 1.79;
         color: $setting-color-black;
+        box-shadow: 0 rem(10) rem(10) 0 $setting-color-alpha-1;
+
+        @include helper-breakpoint-media-min($lg-min) {
+            font-size: rem(19);
+            line-height: 1.79;
+        }
     }
 
     &__item {
@@ -49,6 +54,10 @@
 
     &--small {
         margin-right: 0;
+
+        #{$name}__suggestions {
+            padding: rem(14) rem(12);
+        }
 
         #{$name}__input {
             @include helper-font-size(small);
