@@ -15,6 +15,7 @@
             {% block cleanButton %}
                 <button type="button" class="button button--skinless {{ config.name }}__clean-button {{ config.jsName }}__clean-button">
                     {% include atom('icon') with {
+                        class: config.name ~ '__icon',
                         data: {
                             name: 'close',
                         },
