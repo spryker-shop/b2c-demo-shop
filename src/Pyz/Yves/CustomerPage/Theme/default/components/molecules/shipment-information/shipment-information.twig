@@ -1,10 +1,13 @@
 {% extends molecule('shipment-information', '@SprykerShop:CustomerPage') %}
+{% import _self as component %}
 
 {% define config = {
     tag: 'div',
 } %}
 
-{% block class %}{{ parent() }}{% endblock %}
+{% block class %}
+    {{- component.renderClass(config.name, modifiers, class) -}}
+{% endblock %}
 
 {% block body %}
     {% set shipmentMethod = data.shipmentExpense.shipment.method %}
