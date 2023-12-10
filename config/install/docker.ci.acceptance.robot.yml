@@ -16,6 +16,9 @@ sections:
         router-cache-warmup-backend-gateway:
             command: 'vendor/bin/console router:cache:warm-up:backend-gateway'
 
+        router-cache-warmup-merchant-portal:
+            command: 'vendor/bin/console router:cache:warm-up:merchant-portal'
+
         twig-cache-warmup:
             command: 'vendor/bin/console twig:cache:warmer'
 
@@ -68,12 +71,26 @@ sections:
         zed-build-frontend:
             command: 'vendor/bin/console frontend:zed:build -e production'
 
+        merchant-portal-build-frontend:
+            command: 'vendor/bin/console frontend:mp:build -e production'
+            timeout: 1600
+
+        date-time-product-configurator:
+            command: 'vendor/bin/console frontend:date-time-product-configurator:build'
+
     build-static-development:
         yves-build-frontend:
             command: 'vendor/bin/console frontend:yves:build'
 
         zed-build-frontend:
             command: 'vendor/bin/console frontend:zed:build'
+
+        merchant-portal-build-frontend:
+            command: 'vendor/bin/console frontend:mp:build'
+            timeout: 1600
+
+        date-time-product-configurator:
+            command: 'vendor/bin/console frontend:date-time-product-configurator:build'
 
     init-storages-per-store:
         queue-setup:
