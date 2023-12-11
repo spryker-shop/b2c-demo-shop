@@ -49,7 +49,7 @@ class TaxAppCommunicationTester extends Actor
 
         $this->assertEquals($taxAppConfigEntity->getApiUrl(), $configureTaxAppTransfer->getApiUrl());
         $this->assertEquals($taxAppConfigEntity->getVendorCode(), $configureTaxAppTransfer->getVendorCode());
-        $this->assertEquals($taxAppConfigEntity->getApplicationId(), $configureTaxAppTransfer->getMessageAttributesOrFail()->getEmitterOrFail());
+        $this->assertEquals($taxAppConfigEntity->getApplicationId(), $configureTaxAppTransfer->getMessageAttributesOrFail()->getActorIdOrFail());
         $this->assertEquals($taxAppConfigEntity->getIsActive(), $configureTaxAppTransfer->getIsActive());
     }
 
