@@ -98,6 +98,7 @@
     {%- set type = type | default('checkbox') -%}
     {%- set component = component | default(atom(type)) -%}
     {%- set label = label | default(name | humanize) | trans -%}
+    {%- set componentClass = componentClass | default -%}
     {%- set modifiers = errors is empty ? ['expand'] : ['expand', 'error'] -%}
     {%- set inputClass = attr.class | default -%}
 
@@ -114,6 +115,7 @@
     {%- set modifiers = modifiers | merge([attributes.additionalModifier]) -%}
 
     {% include component with {
+        class: componentClass,
         modifiers: modifiers,
         data: {
             label: label,
