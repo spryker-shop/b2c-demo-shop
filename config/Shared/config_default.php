@@ -119,6 +119,7 @@ use Spryker\Zed\Payment\PaymentConfig;
 use Spryker\Zed\Propel\PropelConfig;
 use SprykerShop\Shared\CustomerPage\CustomerPageConstants;
 use SprykerShop\Shared\ShopUi\ShopUiConstants;
+use Symfony\Component\HttpFoundation\Cookie;
 
 // ############################################################################
 // ############################## PRODUCTION CONFIGURATION ####################
@@ -391,6 +392,7 @@ $config[SessionConstants::YVES_SESSION_COOKIE_TIME_TO_LIVE] = SessionConfig::SES
 $config[SessionConstants::YVES_SESSION_PERSISTENT_CONNECTION]
     = $config[SessionConstants::ZED_SESSION_PERSISTENT_CONNECTION]
     = true;
+$config[SessionConstants::YVES_SESSION_COOKIE_SAMESITE] = getenv('SPRYKER_YVES_SESSION_COOKIE_SAMESITE') ?: Cookie::SAMESITE_LAX;
 
 // >>> SESSION BACKOFFICE
 
