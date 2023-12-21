@@ -1,91 +1,111 @@
 {% extends view('wishlist-product-alternative', '@SprykerShop:ProductAlternativeWidget') %}
 
+{% macro image(imageUrl, name, className, modifiers = []) %}
+    {% if imageUrl %}
+        {% include molecule('lazy-image') with {
+            modifiers: ['min-size', 'wishlist'] | merge(modifiers),
+            class: className,
+            data: {
+                imageSrc: imageUrl,
+                imageTitle: name,
+            },
+        } only %}
+    {% endif %}
+{% endmacro %}
+
+{% block addToWishlistAction %}
+    {% include molecule('single-button-form') with {
+        data: {
+            formAction: path('wishlist/add-item', { sku: item.sku, 'product-id': item.idProductConcrete, 'wishlist-name': data.wishlistName }),
+            buttonText: 'product_alternative_widget.add_to_wishlist' | trans,
+            iconName: '',
+            buttonClass: 'table-action-list__link',
+            fieldName: 'wishlist_add_item_form[_token]',
+            fieldValue: csrf_token('wishlist_add_item_form'),
+            buttonAttributes: {
+                disabled: item.idProductConcrete is empty,
+            },
+        },
+    } only %}
+{% endblock %}
+
 {% block body %}
     {% if data.products is not empty %}
         <tr>
-            <td class="is-hidden-sm-only"></td>
-            <td colspan="4" class="spacing spacing--inner spacing--reset spacing-top spacing-top--inner spacing-top--bigger">
-                <h4 class="title title--medium">{{ 'product_alternative_widget.alternative_for' | trans({name: data.item.name}) }}</h4>
+            <td></td>
+            <td colspan="4">
+                <h4 class="title title--medium">{{ 'product_alternative_widget.alternative_for' | trans({ name: data.item.name }) }}</h4>
             </td>
         </tr>
         <tr>
-            <td class="is-hidden-sm-only"></td>
-            <td colspan="4" class="spacing-x spacing-x--inner spacing-x--reset spacing-bottom spacing-bottom--inner spacing-bottom--bigger">
-                <table class="table table--expand">
-                {% for item in data.products %}
-                    {% if loop.index == 4 %}
-                        <tr class="table table__tr--with-border-bottom js-product-alternative-{{- wishlistItemSku -}}__show-all-target">
-                            <td class="spacing-bottom spacing-bottom--inner spacing-bottom--big" colspan="5">
-                                <div class="text-center">
-                                    <button type="button" class="button button--hollow js-product-alternative-{{- wishlistItemSku -}}__show-all-trigger">{{ 'product_alternative_widget.show_all' | trans }}</button>
-                                </div>
-                            </td>
-                        </tr>
-                        {% include molecule('toggler-click') with {
-                            attributes: {
-                                'trigger-class-name': 'js-product-alternative-' ~ wishlistItemSku ~ '__show-all-trigger',
-                                'target-class-name': 'js-product-alternative-' ~ wishlistItemSku ~ '__show-all-target',
-                            },
-                        } only %}
-                    {% endif %}
-                    <tr class="{{ loop.index > 3 ? 'js-product-alternative-' ~ wishlistItemSku ~ '__show-all-target is-hidden' }}">
-                        <td>
-                            {% set imageUrl = item.images.0.externalUrlSmall ?? '' %}
-
-                            {% if imageUrl %}
-                                {% include molecule('lazy-image') with {
-                                    modifiers: ['thumbnail', 'min-size', 'wishlist'],
-                                    data: {
-                                        imageSrc: imageUrl,
-                                        imageTitle: item.name,
-                                    },
-                                } only %}
-                            {% endif %}
-                        </td>
-                        <td>
-                            <ul class="menu menu--inline menu--middle">
-                                <li><strong><a href="{{ item.url }}">{{ item.name }}</a></strong></li>
-                                <li>{{ item.sku }}</li>
-                                {% for attribute in item.superAttributesDefinition %}
-                                    {% if item.attributes[attribute] is defined %}
-                                        <li>{{ ('product.attribute.' ~ attribute) | trans }}: <span class="title title--medium">{{ item.attributes[attribute] }}</span></li>
-                                    {% endif %}
-                                {% endfor %}
-                            </ul>
-                        </td>
-                        <td nowrap="nowrap">
-                            {% if item.price is not null %}
-                                {% include molecule('money-price') with {
-                                    modifiers: ['wishlist'],
-                                    data: {
-                                        amount: item.price,
-                                        originalAmount: item.prices.ORIGINAL is not defined or item.prices.ORIGINAL is empty ? null : item.prices.ORIGINAL
-                                    }
-                                } only %}
-                            {% else %}
-                                N/A
-                            {% endif %}
-                        </td>
-                        <td>
-                            {% set idProductConcrete = item.idProductConcrete %}
-
-                            {% include molecule('single-button-form') with {
-                                class: 'float-right',
-                                data: {
-                                    formAction: path('wishlist/add-item', { sku: item.sku, 'product-id': idProductConcrete, 'wishlist-name': data.wishlistName }),
-                                    buttonText: 'product_alternative_widget.add_to_wishlist' | trans,
-                                    iconName: '',
-                                    buttonClass: 'link link--user-account',
-                                    fieldName: 'wishlist_add_item_form[_token]',
-                                    fieldValue: csrf_token('wishlist_add_item_form'),
-                                    buttonAttributes: {
-                                        disabled: idProductConcrete is empty,
-                                    },
+            <td></td>
+            <td colspan="4">
+                <table class="table table--expand table--responsive table--sub-table">
+                    {% for item in data.products %}
+                        {% if loop.index == 4 %}
+                            <tr class="js-product-alternative-{{- wishlistItemSku -}}__show-all-target">
+                                <td colspan="5" class="spacing-bottom spacing-bottom--inner spacing-bottom--big">
+                                    <div class="text-center">
+                                        <button type="button" class="button button--hollow js-product-alternative-{{- wishlistItemSku -}}__show-all-trigger">{{ 'product_alternative_widget.show_all' | trans }}</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            
+                            {% include molecule('toggler-click') with {
+                                attributes: {
+                                    'trigger-class-name': 'js-product-alternative-' ~ wishlistItemSku ~ '__show-all-trigger',
+                                    'target-class-name': 'js-product-alternative-' ~ wishlistItemSku ~ '__show-all-target',
                                 },
                             } only %}
-                        </td>
-                    </tr>
-                {% endfor %}
+                        {% endif %}
+
+                        <tr class="{{ not loop.last ? 'table__tr table__tr--with-border-bottom' }} {{ loop.index > 3 ? 'js-product-alternative-' ~ wishlistItemSku ~ '__show-all-target is-hidden' }}">
+                            {% set imageUrl = item.images.0.externalUrlSmall ?? '' %}
+
+                            <td>
+                                {{ _self.image(imageUrl, item.name, 'is-hidden-sm-md', ['thumbnail']) }}
+                            </td>
+                            <td class="transform-cell transform-cell--spacing-top" data-content="{{ 'customer.account.wishlist.product' | trans }}">
+                                <div>
+                                    {{ _self.image(imageUrl, item.name, 'is-hidden-lg-xl') }}
+
+                                    <ul class="menu menu--inline menu--middle">
+                                        <li><strong><a href="{{ item.url }}">{{ item.name }}</a></strong></li>
+                                        <li>{{ item.sku }}</li>
+                                        {% for attribute in item.superAttributesDefinition %}
+                                            {% if item.attributes[attribute] is defined %}
+                                                <li>{{ ('product.attribute.' ~ attribute) | trans }}: <span class="title title--medium">{{ item.attributes[attribute] }}</span></li>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </td>
+                            <td class="transform-cell transform-cell--spacing-bottom" data-content="{{ 'customer.account.wishlist.price' | trans }}">
+                                {% if item.price is not null %}
+                                    {% include molecule('money-price') with {
+                                        modifiers: ['wishlist'],
+                                        data: {
+                                            amount: item.price,
+                                            originalAmount: item.prices.ORIGINAL ?? null,
+                                        },
+                                    } only %}
+                                {% else %}
+                                    N/A
+                                {% endif %}
+                            </td>
+                            <td class="table__actions">
+                                {% include molecule('table-action-list') with {
+                                    data: {
+                                        items: [
+                                            {
+                                                customAction: block('addToWishlistAction'),
+                                            },
+                                        ],
+                                    },
+                                } only %}
+                            </td>
+                        </tr>
+                    {% endfor %}
                 </table>
             </td>
         </tr>
