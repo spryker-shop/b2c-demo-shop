@@ -7,7 +7,7 @@
 
 namespace Pyz\Zed\Validator;
 
-use Spryker\Zed\Security\Communication\Plugin\Validator\UserPasswordValidatorConstraintPlugin;
+use Spryker\Zed\Security\Communication\Plugin\Validator\ZedUserPasswordValidatorConstraintPlugin;
 use Spryker\Zed\Translator\Communication\Plugin\Validator\TranslatorValidatorPlugin;
 use Spryker\Zed\Validator\Communication\Plugin\Validator\ConstraintFactoryValidatorPlugin;
 use Spryker\Zed\Validator\Communication\Plugin\Validator\MetadataFactoryValidatorPlugin;
@@ -33,7 +33,7 @@ class ValidatorDependencyProvider extends SprykerValidatorDependencyProvider
     protected function getConstraintPlugins(): array
     {
         return [
-            new UserPasswordValidatorConstraintPlugin(),
+            new ZedUserPasswordValidatorConstraintPlugin(),
         ];
     }
 }
