@@ -40,7 +40,7 @@ jobs:
                   sudo chmod +x /usr/local/bin/docker-compose
             - name: Install Robot tests
               run: |
-                  git clone https://github.com/spryker/robotframework-suite-tests.git --single-branch --branch ci-smoke-set robotframework-tests
+                  git clone git@github.com:spryker/robotframework-suite-tests.git robotframework-tests
             - name: Install Project
               continue-on-error: true
               run: |
