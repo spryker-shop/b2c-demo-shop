@@ -1,30 +1,42 @@
 name: CI Robot UI
 
 on:
+    schedule:
+        -   cron: '0 3 * * *'
     workflow_dispatch:
     push:
         branches:
             - feature/frw-5940/master-support-symfony-security-v6-robot
 
 jobs:
-    docker-alpine-php-8-1-mariadb-robot-ui:
-        name: "Docker / Alpine / PHP 8.1 / MariaDB / Robot / UI"
+    docker-alpine-php-8-2-mariadb-robot-ui:
+        name: "Docker / Alpine / PHP 8.2 / MariaDB / Robot / UI"
         runs-on: ubuntu-20.04
         env:
             PROGRESS_TYPE: plain
-            SPRYKER_PLATFORM_IMAGE: spryker/php:8.1
+            SPRYKER_PLATFORM_IMAGE: spryker/php:8.2
             TRAVIS: 1
             ROBOT_TESTS_ARTIFACTS_BUCKET_REGION: eu-west-1
         steps:
-            - uses: actions/checkout@v3
+            - name: apt update
+              run: sudo apt update
 
             - uses: actions/setup-python@v4
               with:
                   python-version: '3.9'
 
+            - name: Clone project (internal)
+              run: |
+                  git config --global user.email "github-actions[bot]@users.noreply.github.com"
+                  git config --global user.name "github-actions[bot]"
+                  git clone -b internal --single-branch https://github.com/spryker-shop/b2c-demo-shop.git .
+            - name: Up-merge fresh branch (internal)
+              run: |
+                  git fetch origin
+                  git config pull.ff only
+                  git pull origin internal --no-ff --allow-unrelated-histories --no-edit
             - name: Install packages
               run: |
-                  sudo apt update
                   sudo apt-get install apache2-utils
                   sudo apt install awscli -q
                   python3 -m pip install --upgrade pip
@@ -40,25 +52,29 @@ jobs:
                   sudo chmod +x /usr/local/bin/docker-compose
             - name: Install Robot tests
               run: |
-                  git clone https://github.com/spryker/robotframework-suite-tests.git robotframework-tests
+                  git clone https://github.com/spryker/robotframework-suite-tests.git --single-branch --branch master robotframework-tests
             - name: Install Project
-              continue-on-error: true
+              continue-on-error: false
               run: |
                   git clone https://github.com/spryker/docker-sdk.git ./docker
-                  docker/sdk boot -v deploy.ci.acceptance.mariadb.yml
+                  docker/sdk boot -v deploy.ci.acceptance.mariadb.robot.yml
+                  sudo bash -c "echo '127.0.0.1 backend-api.at.spryker.local backend-api.de.spryker.local glue-backend.de.spryker.local glue-backend.at.spryker.local glue-storefront.de.spryker.local glue-storefront.at.spryker.local backend-gateway.at.spryker.local backend-gateway.de.spryker.local backoffice.at.spryker.local backoffice.de.spryker.local date-time-configurator-example.spryker.local glue.at.spryker.local glue.de.spryker.local yves.at.spryker.local yves.de.spryker.local mp.de.spryker.local mail.spryker.local mp.at.spryker.local' >> /etc/hosts"
                   docker/sdk up -t -v
-                  APPLICATION_STORE=DE docker/sdk testing console queue:worker:start --stop-when-empty
-                  APPLICATION_STORE=AT docker/sdk testing console queue:worker:start --stop-when-empty
-                  sudo bash -c "echo '127.0.0.1 backend-api.at.spryker.local backend-api.de.spryker.local backend-gateway.at.spryker.local backend-gateway.de.spryker.local backoffice.at.spryker.local backoffice.de.spryker.local date-time-configurator-example.spryker.local glue.at.spryker.local glue.de.spryker.local yves.at.spryker.local yves.de.spryker.local mp.de.spryker.local mp.at.spryker.local' >> /etc/hosts"
+            - name: Custom commands
+              continue-on-error: false
+              run: |
+                  docker/sdk cli composer dump-autoload -o -a
+                  APPLICATION_STORE=DE docker/sdk console queue:worker:start --stop-when-empty
+                  APPLICATION_STORE=AT docker/sdk console queue:worker:start --stop-when-empty
             - name: Run Tests
               run: |
                   cd robotframework-tests
                   rfbrowser init
-                  robot -v env:ui_b2c -v headless:true -d results --exclude skip-due-to-issueORskip-due-to-refactoring tests/ui/e2e/b2c.robot
+                  robot -v env:ui_b2c -v headless:true -v ignore_console:false -d results --exclude skip-due-to-issueORskip-due-to-refactoring tests/ui/e2e/b2c.robot
                   touch results/time.txt && echo $(date) > results/time.txt
             - name: Upload artifacts
               if: always()
               run: |
-                  AWS_DEFAULT_REGION=${{env.ROBOT_TESTS_ARTIFACTS_BUCKET_REGION}} AWS_ACCESS_KEY_ID=${{ secrets.ROBOT_TESTS_ARTIFACTS_KEY }} AWS_SECRET_ACCESS_KEY=${{ secrets.ROBOT_TESTS_ARTIFACTS_SECRET }} aws s3 cp robotframework-tests/results s3://${{vars.ROBOT_TESTS_ARTIFACTS_BUCKET}}/robot-ui-testing/b2c/${GITHUB_RUN_ID}/PHP8.0MariaDBRobotUi/ \
+                  AWS_DEFAULT_REGION=${{env.ROBOT_TESTS_ARTIFACTS_BUCKET_REGION}} AWS_ACCESS_KEY_ID=${{ secrets.ROBOT_TESTS_ARTIFACTS_KEY }} AWS_SECRET_ACCESS_KEY=${{ secrets.ROBOT_TESTS_ARTIFACTS_SECRET }} aws s3 cp robotframework-tests/results s3://${{vars.ROBOT_TESTS_ARTIFACTS_BUCKET}}/robot-ui-testing/b2c_regression/${GITHUB_RUN_ID}/PHP8.2MariaDBRobotUi/ \
                     --recursive \
                     --expires "$(date -d '+7 days' --utc +'%Y-%m-%dT%H:%M:%SZ')"
