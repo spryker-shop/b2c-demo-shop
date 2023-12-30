@@ -7,7 +7,7 @@
 
 namespace Pyz\Yves\CustomerPage;
 
-use SprykerShop\Yves\AgentPage\Plugin\FixAgentTokenAfterCustomerAuthenticationSuccessPlugin;
+use SprykerShop\Yves\AgentPage\Plugin\Security\UpdateAgentTokenAfterCustomerAuthenticationSuccessPlugin;
 use SprykerShop\Yves\CustomerPage\CustomerPageDependencyProvider as SprykerShopCustomerPageDependencyProvider;
 use SprykerShop\Yves\CustomerReorderWidget\Plugin\CustomerPage\CustomerReorderWidgetPlugin;
 use SprykerShop\Yves\SessionAgentValidation\Plugin\CustomerPage\UpdateAgentSessionAfterCustomerAuthenticationSuccessPlugin;
@@ -50,7 +50,7 @@ class CustomerPageDependencyProvider extends SprykerShopCustomerPageDependencyPr
     protected function getAfterCustomerAuthenticationSuccessPlugins(): array
     {
         return [
-            new FixAgentTokenAfterCustomerAuthenticationSuccessPlugin(),
+            new UpdateAgentTokenAfterCustomerAuthenticationSuccessPlugin(),
             new UpdateAgentSessionAfterCustomerAuthenticationSuccessPlugin(),
         ];
     }
