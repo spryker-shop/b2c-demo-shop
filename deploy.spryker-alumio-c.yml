@@ -45,7 +45,11 @@ image:
     tag: spryker/php:8.2  # Last actual image
     environment:
         SPRYKER_DEFAULT_STORE: "DE"
-        SPRYKER_ACTIVE_STORES: "DE"
+        SPRYKER_ACTIVE_STORES: "DE,AT"
+        SPRYKER_HOOK_BEFORE_DEPLOY: "vendor/bin/install -r EU/pre-deploy -vvv"
+        SPRYKER_HOOK_AFTER_DEPLOY: "true"
+        SPRYKER_HOOK_INSTALL: "vendor/bin/install -r EU/production --no-ansi -vvv"
+        SPRYKER_HOOK_DESTRUCTIVE_INSTALL: "vendor/bin/install -r EU/destructive --no-ansi -vvv"
         SPRYKER_PRODUCT_CONFIGURATOR_HOST: date-time-configurator.alumio-uat-b2c.demo-spryker.com
         SPRYKER_PRODUCT_CONFIGURATOR_PORT: 80
         SPRYKER_YVES_HOST_DE: de.alumio-uat-b2c.demo-spryker.com
