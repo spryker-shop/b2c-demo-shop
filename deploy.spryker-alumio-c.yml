@@ -1,4 +1,4 @@
-version: "0.1"
+version: '0.1'
 
 x-real-ip: &real-ip
     real-ip:
@@ -37,19 +37,19 @@ x-frontend-auth: &frontend-auth
             - '${ALLOWED_IP}' # AWS gateway
             - 185.60.20.0/24 # PayOne
 
-namespace: spryker-alumio-c
+namespace: spryker-cloud
 tag: '1.0'
 
 environment: docker
 image:
     tag: spryker/php:8.2  # Last actual image
     environment:
-        SPRYKER_DEFAULT_STORE: "DE"
-        SPRYKER_ACTIVE_STORES: "DE,AT"
         SPRYKER_HOOK_BEFORE_DEPLOY: "vendor/bin/install -r EU/pre-deploy -vvv"
         SPRYKER_HOOK_AFTER_DEPLOY: "true"
         SPRYKER_HOOK_INSTALL: "vendor/bin/install -r EU/production --no-ansi -vvv"
         SPRYKER_HOOK_DESTRUCTIVE_INSTALL: "vendor/bin/install -r EU/destructive --no-ansi -vvv"
+        SPRYKER_DEFAULT_STORE: "DE"
+        SPRYKER_ACTIVE_STORES: "DE,AT"
         SPRYKER_PRODUCT_CONFIGURATOR_HOST: date-time-configurator.alumio-uat-b2c.demo-spryker.com
         SPRYKER_PRODUCT_CONFIGURATOR_PORT: 80
         SPRYKER_YVES_HOST_DE: de.alumio-uat-b2c.demo-spryker.com
@@ -75,6 +75,10 @@ assets:
 regions:
     EU:
         services:
+            mail:
+                sender:
+                    name: Spryker No-Reply
+                    email: no-reply@alumio-uat-b2c.demo-spryker.com
             database:
                 database: spryker_alumio_c
                 username: spryker
@@ -84,24 +88,41 @@ regions:
             DE:
                 services:
                     broker:
-                        namespace: de-docker
+                        namespace: de_queue
                     key_value_store:
                         namespace: 1
                     search:
                         namespace: de_search
+                    session:
+                        namespace: 2
             AT:
                 services:
                     broker:
-                        namespace: at-docker
+                        namespace: at_queue
                     key_value_store:
-                        namespace: 2
+                        namespace: 3
                     search:
                         namespace: at_search
+                    session:
+                        namespace: 4
 groups:
     EU:
         region: EU
         applications:
-            yves_eu:
+            Redirects:
+                application: static
+                endpoints:
+                    de.alumio-uat-b2c.demo-spryker.com:
+                        store: DE
+                        redirect:
+                            code: 302
+                            url: www.de.alumio-uat-b2c.demo-spryker.com
+                    at.alumio-uat-b2c.demo-spryker.com:
+                        store: AT
+                        redirect:
+                            code: 302
+                            url: www.at.alumio-uat-b2c.demo-spryker.com
+            Yves:
                 application: yves
                 endpoints:
                     date-time-configurator.alumio-uat-b2c.demo-spryker.com:
@@ -109,15 +130,10 @@ groups:
                     www.de.alumio-uat-b2c.demo-spryker.com:
                         store: DE
                         <<: *frontend-auth
-                    de.alumio-uat-b2c.demo-spryker.com:
-                        store: DE
-                        <<: *frontend-auth
                     www.at.alumio-uat-b2c.demo-spryker.com:
                         store: AT
-                    at.alumio-uat-b2c.demo-spryker.com:
-                        store: AT
                         <<: *frontend-auth
-            backoffice_eu:
+            boffice:
                 application: backoffice
                 endpoints:
                     backoffice.de.alumio-uat-b2c.demo-spryker.com:
@@ -125,7 +141,7 @@ groups:
                         primal: true
                     backoffice.at.alumio-uat-b2c.demo-spryker.com:
                         store: AT
-            backend_gateway_eu:
+            backgw:
                 application: backend-gateway
                 endpoints:
                     backend-gateway.de.alumio-uat-b2c.demo-spryker.com:
@@ -133,7 +149,7 @@ groups:
                         primal: true
                     backend-gateway.at.alumio-uat-b2c.demo-spryker.com:
                         store: AT
-            backend_api_eu:
+            backapi:
                 application: zed
                 endpoints:
                     backend-api.de.alumio-uat-b2c.demo-spryker.com:
@@ -142,7 +158,7 @@ groups:
                     backend-api.at.alumio-uat-b2c.demo-spryker.com:
                         store: AT
                         entry-point: BackendApi
-            glue_eu:
+            Glue:
                 application: glue
                 endpoints:
                     glue.de.alumio-uat-b2c.demo-spryker.com:
@@ -150,20 +166,20 @@ groups:
                         primal: true
                     glue.at.alumio-uat-b2c.demo-spryker.com:
                         store: AT
-            glue_backend_eu:
+            glue_backend:
                 application: glue-backend
                 endpoints:
-                    glue-backend.de.alumio-uat-b2c:
+                    glue-backend.de.alumio-uat-b2c.demo-spryker.com:
                         store: DE
-                    glue-backend.at.alumio-uat-b2c:
+                    glue-backend.at.alumio-uat-b2c.demo-spryker.com:
                         store: AT
 services:
     database:
         engine: mysql
         version: mariadb-10.4
         root:
-            username: "root"
-            password: "secret"
+            username: 'root'
+            password: 'secret'
         endpoints:
             localhost:3306:
                 protocol: tcp
@@ -171,8 +187,8 @@ services:
         engine: rabbitmq
         version: '3.9'
         api:
-            username: "spryker"
-            password: "secret"
+            username: 'spryker'
+            password: 'secret'
         endpoints:
             queue.alumio-uat-b2c.demo-spryker.com:
             localhost:5672:
