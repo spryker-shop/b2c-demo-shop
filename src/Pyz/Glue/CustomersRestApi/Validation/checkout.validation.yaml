@@ -1,0 +1,80 @@
+checkout-data:
+    post:
+        billingAddress:
+            - Optional:
+                  constraints:
+                      - Collection:
+                            fields:
+                                salutation:
+                                    - Optional:
+                                          constraints:
+                                              - NotBlank
+                                firstName:
+                                    - Optional:
+                                          constraints:
+                                              - NotBlank
+                                lastName:
+                                    - Optional:
+                                          constraints:
+                                              - NotBlank
+                                address1:
+                                    - Optional:
+                                          constraints:
+                                              - NotBlank
+                                address2:
+                                    - Optional:
+                                          constraints:
+                                              - NotBlank
+                                zipCode:
+                                    - Optional:
+                                          constraints:
+                                              - NotBlank
+                                city:
+                                    - Optional:
+                                          constraints:
+                                              - NotBlank
+                                              - Length:
+                                                    min: 3
+                                iso2Code:
+                                    - Optional:
+                                          constraints:
+                                              - NotBlank
+checkout:
+    post:
+        billingAddress:
+            - Collection:
+                  fields:
+                      salutation:
+                          - Optional:
+                                constraints:
+                                    - NotBlank
+                      firstName:
+                          - Optional:
+                                constraints:
+                                    - NotBlank
+                      lastName:
+                          - Optional:
+                                constraints:
+                                    - NotBlank
+                      address1:
+                          - Optional:
+                                constraints:
+                                    - NotBlank
+                      address2:
+                          - Optional:
+                                constraints:
+                                    - NotBlank
+                      zipCode:
+                          - Optional:
+                                constraints:
+                                    - NotBlank
+                      city:
+                          - Optional:
+                                constraints:
+                                    - NotBlank
+                                    - Length:
+                                          min: 3
+                      iso2Code:
+                          - Optional:
+                                constraints:
+                                    - NotBlank
