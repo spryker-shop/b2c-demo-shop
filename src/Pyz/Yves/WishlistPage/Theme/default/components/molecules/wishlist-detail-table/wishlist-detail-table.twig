@@ -4,19 +4,73 @@
     name: 'wishlist-detail-table',
 } %}
 
+{% macro image(imageUrl, name, className, modifiers = []) %}
+    {% if imageUrl %}
+        {% include molecule('lazy-image') with {
+            modifiers: ['min-size', 'wishlist'] | merge(modifiers),
+            class: className,
+            data: {
+                imageSrc: imageUrl,
+                imageTitle: name,
+            },
+        } only %}
+    {% endif %}
+{% endmacro %}
+
+{% block actionContent %}
+    <input type="hidden" name="id-wishlist-item" value="{{ idWishlistItem }}">
+                
+    {% if widgetGlobalExists('MerchantProductOfferWidget') %}
+        {% include molecule('wishlist-item-product-offer', 'MerchantProductOfferWidget') with {
+            data: {
+                productView: item,
+            },
+        } only %}
+    {% elseif widgetGlobalExists('MerchantProductWidget') %}
+        {% include molecule('wishlist-item-merchant-product', 'MerchantProductWidget') with {
+            data: {
+                productView: item,
+            },
+        } only %}
+    {% endif %}
+{% endblock %}
+
+{% block wishlistMoveToCartAction %}
+    {% if wishlistMoveToCartForm %}
+        {{ form_start(wishlistMoveToCartForm, { action: moveToCartActionPath, name: moveToCartFormName, attr: { id: moveToCartFormName } }) }}
+            <button class="table-action-list__link">
+                {{ 'customer.account.wishlist.add-to-cart' | trans }}
+            </button>
+
+            {{ block('actionContent') }}
+        {{ form_end(wishlistMoveToCartForm) }}
+    {% endif %}
+{% endblock %}
+
+{% block wishlistRemoveItemAction %}
+    {% if wishlistRemoveItemForm %}
+        {{ form_start(wishlistRemoveItemForm, { action: removeItemActionPatch, name: removeItemFormName, attr: { id: removeItemFormName } }) }}
+            <button class="table-action-list__link">
+                {{ 'customer.account.wishlist.remove' | trans }}
+            </button>
+
+            {{ block('actionContent') }}
+        {{ form_end(wishlistRemoveItemForm) }}
+    {% endif %}
+{% endblock %}
+
 {% block body %}
-    <div class="is-scrollable-x">
-        <table class="table table--expand table--wishlist">
-            <thead>
-                <tr>
-                    <th>{{ 'customer.account.wishlist.product' | trans  }}</th>
-                    <th class="is-hidden-sm-only"></th>
-                    <th>{{ 'customer.account.wishlist.price' | trans  }}</th>
-                    <th>{{ 'customer.account.wishlist.availability' | trans  }}</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
+    <table class="table table--expand table--responsive">
+        <thead>
+            <tr>
+                <th>{{ 'customer.account.wishlist.product' | trans }}</th>
+                <th></th>
+                <th>{{ 'customer.account.wishlist.price' | trans }}</th>
+                <th>{{ 'customer.account.wishlist.availability' | trans }}</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
             {% for idWishlistItem, item in data.wishlistItems %}
                 {% set isItemAvailable = item.available is defined and item.available and item.price is defined and item.price is not null %}
                 {% set productDiscontinuedWidget = findWidget('ProductDiscontinuedWidget', [item.sku]) %}
@@ -24,63 +78,55 @@
                 {% if isDiscontinued is not null %}
                     {% set isItemAvailable = not isDiscontinued and isItemAvailable %}
                 {% endif %}
-                <tr>
-                    <td class="is-hidden-sm-only">
-                        {% set imageUrl = item.images.0.externalUrlSmall ?? '' %}
-
-                        {% if imageUrl %}
-                            {% include molecule('lazy-image') with {
-                                modifiers: ['thumbnail', 'min-size', 'wishlist'],
-                                data: {
-                                    imageSrc: imageUrl,
-                                    imageTitle: item.name,
-                                },
-                            } only %}
-                        {% endif %}
-                    </td>
+                {% set imageUrl = item.images.0.externalUrlSmall ?? '' %}
+                {% import _self as macros %}
+                
+                <tr class="table__tr table__tr--with-border">
                     <td>
-                        {% if imageUrl %}
-                            {% include molecule('lazy-image') with {
-                                class: 'is-hidden-md-xl',
-                                modifiers: ['thumbnail', 'min-size', 'wishlist'],
-                                data: {
-                                    imageSrc: imageUrl,
-                                    imageTitle: item.name,
-                                },
-                            } only %}
-                        {% endif %}
-                        <ul class="menu menu--inline menu--middle">
-                            <li><strong><a href="{{ item.url }}">{{ item.name }}</a></strong></li>
-                            <li>{{ item.sku }}</li>
-                            {% for attribute in item.superAttributesDefinition %}
-                                {% if item.attributes[attribute] is defined %}
-                                    <li>{{ ('product.attribute.' ~ attribute) | trans }}: <span class="title title--medium">{{ item.attributes[attribute] }}</span></li>
-                                {% endif %}
-                            {% endfor %}
-
-                            {% set wishlistItem = data.indexedWishlistItems[idWishlistItem] | default %}
-                            {% if wishlistItem %}
-                                <li class="spacing-top">
-                                    {% widget 'ProductConfigurationWishlistItemDisplayWidget' args [wishlistItem] only %}{% endwidget %}
-                                    {% widget 'ProductConfigurationWishlistPageButtonWidget' args [wishlistItem] only %}{% endwidget %}
-                                </li>
-                            {% endif %}
-                        </ul>
+                        {{ _self.image(imageUrl, item.name, 'is-hidden-sm-md', ['thumbnail']) }}
                     </td>
-                    <td nowrap="nowrap">
+                    <td class="transform-cell transform-cell--spacing-top" data-content="{{ 'customer.account.wishlist.product' | trans }}">
+                        <div>
+                            {{ _self.image(imageUrl, item.name, 'is-hidden-lg-xl') }}
+
+                            <ul class="menu menu--inline menu--middle">
+                                <li><strong><a href="{{ item.url }}">{{ item.name }}</a></strong></li>
+                                <li>
+                                    {% if widgetGlobalExists('SoldByMerchantWidget') %}
+                                        {% widget 'SoldByMerchantWidget' args [item] only %}{% endwidget %}
+                                    {% endif %}
+                                </li>
+                                <li>{{ item.sku }}</li>
+                                {% for attribute in item.superAttributesDefinition %}
+                                    {% if item.attributes[attribute] is defined %}
+                                        <li>{{ ('product.attribute.' ~ attribute) | trans }}: <span class="title title--medium">{{ item.attributes[attribute] }}</span></li>
+                                    {% endif %}
+                                {% endfor %}
+
+                                {% set wishlistItem = data.indexedWishlistItems[idWishlistItem] | default %}
+                                {% if wishlistItem %}
+                                    <li class="spacing-top">
+                                        {% widget 'ProductConfigurationWishlistItemDisplayWidget' args [wishlistItem] only %}{% endwidget %}
+                                        {% widget 'ProductConfigurationWishlistPageButtonWidget' args [wishlistItem] only %}{% endwidget %}
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </td>
+                    <td class="transform-cell" data-content="{{ 'customer.account.wishlist.price' | trans }}">
                         {% if item.price is not null %}
                             {% include molecule('money-price') with {
                                 modifiers: ['wishlist'],
                                 data: {
                                     amount: item.price,
-                                    originalAmount: item.prices.ORIGINAL is not defined ? null : item.prices.ORIGINAL
-                                }
+                                    originalAmount: item.prices.ORIGINAL ?? null,
+                                },
                             } only %}
                         {% else %}
                             N/A
                         {% endif %}
                     </td>
-                    <td class="text-center">
+                    <td class="transform-cell transform-cell--spacing-bottom" data-content="{{ 'customer.account.wishlist.availability' | trans }}">
                         {% if isItemAvailable %}
                             {{ 'customer.account.wishlist.available' | trans }}
                         {% else %}
@@ -90,66 +136,32 @@
                             {% endwidget %}
                         {% endif %}
                     </td>
-                    <td>
-                        <ul class="menu menu--inline menu--actions float-right">
-                            {% if isItemAvailable %}
-                                <li class="menu__item">
-                                    {% set addToCartFormName = 'addToCart_' ~ loop.index %}
-                                    {% set moveToCartActionPath = path('wishlist/move-to-cart', {sku: item.sku, 'wishlist-name': data.wishlistName}) %}
+                    <td class="table__actions">
+                        {% set moveToCartFormName = 'addToCart_' ~ loop.index %}
+                        {% set moveToCartActionPath = path('wishlist/move-to-cart', { sku: item.sku, 'wishlist-name': data.wishlistName }) %}
+                        {% set wishlistMoveToCartForm = data.wishlistMoveToCartFormClone.getForm.createView ?? null %}
+                        {% set removeItemFormName = 'deleteWishlistItem_' ~ loop.index %}
+                        {% set removeItemActionPatch = path('wishlist/remove-item', { sku: item.sku, 'wishlist-name': data.wishlistName }) %}
+                        {% set wishlistRemoveItemForm = data.wishlistRemoveItemFormClone.getForm.createView ?? null %}
 
-                                    {% if data.wishlistMoveToCartFormClone %}
-                                        {% set wishlistMoveToCartForm = data.wishlistMoveToCartFormClone.getForm.createView %}
-
-                                        {{ form_start(wishlistMoveToCartForm, { 'action': moveToCartActionPath, 'name': addToCartFormName, 'attr': {'id': addToCartFormName}}) }}
-                                            {% block addToCartButton %}
-                                                <button class="link link--user-account">
-                                                    {{ 'customer.account.wishlist.add-to-cart' | trans }}
-                                                </button>
-                                            {% endblock %}
-                                        {{ form_end(wishlistMoveToCartForm) }}
-                                    {% else %}
-                                        <form id="{{ addToCartFormName }}" name="{{ addToCartFormName }}" method="POST" action="{{ moveToCartActionPath }}">
-                                            <input type="hidden" name="wishlist_move_to_cart_form[_token]" value="{{ csrf_token('wishlist_move_to_cart_form') }}">
-                                            {{ block('addToCartButton') }}
-                                        </form>
-                                    {% endif %}
-                                </li>
-                            {% endif %}
-                            <li class="menu__item float-right spacing-y">
-                                {% set deleteFormName = 'deleteWishlistItem_' ~ loop.index %}
-                                {% set removeItemActionPatch = path('wishlist/remove-item', {sku: item.sku, 'wishlist-name': data.wishlistName}) %}
-
-                                {% if data.wishlistRemoveItemFormClone %}
-                                    {% set wishlistRemoveItemForm = data.wishlistRemoveItemFormClone.getForm.createView %}
-
-                                    {{ form_start(wishlistRemoveItemForm, {'action': removeItemActionPatch, 'name': deleteFormName, 'attr': {'id': deleteFormName}}) }}
-                                        <button class="link link--user-account">
-                                            {{ 'customer.account.wishlist.remove' | trans }}
-                                        </button>
-                                    {{ form_end(wishlistRemoveItemForm) }}
-                                {% else %}
-                                    {% include molecule('single-button-form') with {
-                                        data: {
-                                            formAction: removeItemActionPatch,
-                                            buttonText: 'customer.account.wishlist.remove' | trans,
-                                            iconName: '',
-                                            buttonClass: 'link link--user-account',
-                                            fieldName: 'wishlist_remove_item_form[_token]',
-                                            fieldValue: csrf_token('wishlist_remove_item_form'),
-                                            formAttributes: {
-                                                name: deleteFormName,
-                                                id: deleteFormName,
-                                            },
-                                        },
-                                    } only %}
-                                {% endif %}
-                            </li>
-                        </ul>
+                        {% include molecule('table-action-list') with {
+                            data: {
+                                items: [
+                                    {
+                                        customAction: block('wishlistMoveToCartAction'),
+                                        available: isItemAvailable,
+                                    },
+                                    {
+                                        customAction: block('wishlistRemoveItemAction'),
+                                    },
+                                ],
+                            },
+                        } only %}
                     </td>
                 </tr>
+
                 {% widget 'WishlistProductAlternativeWidget' args [item, data.wishlistName] only %}{% endwidget %}
             {% endfor %}
-            </tbody>
-        </table>
-    </div>
+        </tbody>
+    </table>
 {% endblock %}

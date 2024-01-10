@@ -96,7 +96,8 @@
                 <div class="col col--sm-12 col--lg-5">
                     {% include molecule('summary-sidebar', 'CheckoutPage') with {
                         data: {
-                            shipment: shipmentGroup.shipment,
+                            shipmentGroup: shipmentGroup,
+                            shipmentExpenses: data.shipmentExpenses,
                             isGiftCardExists: isGiftCardExists,
                             canEdit: true,
                         },
