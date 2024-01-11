@@ -32,9 +32,7 @@
             <state name="waiting" reserved="true" display="oms.state.waiting"/>
             <state name="exported" reserved="true" display="oms.state.exported"/>
             <state name="product review requested" reserved="true" display="oms.state.paid"/>
-            <state name="confirmed" reserved="true" display="oms.state.confirmed">
-                <flag>cancellable</flag>
-            </state>
+            <state name="confirmed" reserved="true" display="oms.state.confirmed"/>
             <state name="shipped" reserved="true" display="oms.state.shipped"/>
             <state name="delivered" display="oms.state.delivered"/>
             <state name="closed" display="oms.state.closed"/>
@@ -105,12 +103,6 @@
                 <source>confirmed</source>
                 <target>waiting</target>
                 <event>skip timeout</event>
-            </transition>
-
-            <transition>
-                <source>confirmed</source>
-                <target>cancelled</target>
-                <event>cancel</event>
             </transition>
 
             <transition happy="true">

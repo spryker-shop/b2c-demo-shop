@@ -705,6 +705,7 @@ $config[SearchHttpConstants::TENANT_IDENTIFIER]
     = $config[OauthClientConstants::TENANT_IDENTIFIER]
     = $config[PaymentConstants::TENANT_IDENTIFIER]
     = $config[AppCatalogGuiConstants::TENANT_IDENTIFIER]
+    = $config[TaxAppConstants::TENANT_IDENTIFIER]
     = getenv('SPRYKER_TENANT_IDENTIFIER') ?: '';
 
 $config[MessageBrokerConstants::MESSAGE_TO_CHANNEL_MAP] =
