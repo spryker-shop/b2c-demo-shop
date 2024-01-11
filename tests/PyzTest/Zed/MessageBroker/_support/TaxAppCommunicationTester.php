@@ -50,7 +50,8 @@ class TaxAppCommunicationTester extends Actor
 
         $taxAppConfigApiUrlsTransfer = (new TaxAppApiUrlsTransfer())->fromArray(json_decode($taxAppConfigEntity->getApiUrls(), true));
 
-        $this->assertEquals($taxAppConfigEntity->getApiUrl(), $configureTaxAppTransfer->getApiUrl());
+        $this->assertEquals($taxAppConfigApiUrlsTransfer->getRefundsUrl(), $configureTaxAppTransfer->getApiUrlsOrFail()->getRefundsUrlOrFail());
+        $this->assertEquals($taxAppConfigApiUrlsTransfer->getQuotationUrl(), $configureTaxAppTransfer->getApiUrlsOrFail()->getQuotationUrlOrFail());
         $this->assertEquals($taxAppConfigEntity->getVendorCode(), $configureTaxAppTransfer->getVendorCode());
         $this->assertEquals($taxAppConfigEntity->getApplicationId(), $configureTaxAppTransfer->getMessageAttributesOrFail()->getActorIdOrFail());
         $this->assertEquals($taxAppConfigEntity->getIsActive(), $configureTaxAppTransfer->getIsActive());
