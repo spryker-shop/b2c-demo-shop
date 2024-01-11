@@ -12,6 +12,11 @@ use SprykerShop\Yves\CustomerPage\CustomerPageConfig as SprykerCustomerPageConfi
 class CustomerPageConfig extends SprykerCustomerPageConfig
 {
     /**
+     * @var bool
+     */
+    protected const CUSTOMER_SECURITY_BLOCKER_ENABLED = true;
+
+    /**
      * @var string
      */
     protected const LOGIN_FAILURE_REDIRECT_URL = '/login';

@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block salesReturnTable %}
-    {% set salesReturnTableClass = 'table table--expand table--customer-account table--return table--responsive' %}
+    {% set salesReturnTableClass = salesReturnTableClass ~ ' table--responsive' %}
 
     {{ parent() }}
 {% endblock %}
@@ -36,41 +36,45 @@
             <tr class="table__tr table__tr--with-border">
                 <td class="transform-cell transform-cell--spacing-top" data-content="{{ 'return_page.return.return_ref' | trans }}">{{ return.returnReference }}</td>
                 <td class="transform-cell" data-content="{{ 'return_page.return.order_ref' | trans }}">
-                    {% for orderReference in orderReferences %}
-                        {{ orderReference }}
-                    {% endfor %}
+                    <div>
+                        {% for orderReference in orderReferences %}
+                            {{- (not loop.first ? ', ') ~ orderReference -}}
+                        {% endfor %}
+                    </div>
                 </td>
                 <td class="transform-cell" data-content="{{ 'return_page.return.number_of_items' | trans }}">{{ return.returnItems | length | executeFilterIfExists('formatInt', app.locale) }}</td>
                 <td class="transform-cell" data-content="{{ 'return_page.return.date' | trans }}">{{ date(return.createdAt) | formatDateTime }}</td>
                 <td class="transform-cell transform-cell--spacing-bottom" data-content="{{ 'return_page.return.items_state' | trans }}">
-                    {% for state in itemStates %}
-                        {% set stateName = state.status | replace({' ': '-'}) | lower %}
+                    <div>
+                        {% for state in itemStates %}
+                            {% set stateName = state.status | replace({' ': '-'}) | lower %}
 
-                        {% block state %}
-                            {% include molecule('status') with {
-                                data: {
-                                    label: state.label | trans,
-                                    status: stateName,
-                                },
-                            } only %}
-                        {% endblock %}
-                    {% endfor %}
+                            {{ block('state') }}
+                        {% endfor %}
+                    </div>
                 </td>
-                <td class="text-right">
-                    <ul class="menu menu--inline menu--customer-account menu--actions">
-                        <li class="menu__item">
-                            <a class="menu__link" href="{{ path('return/view', { returnReference: (return.returnReference)}) }}">
-                                {{ 'return_page.return.view_return' | trans }}
-                            </a>
-                        </li>
-                        <li class="menu__item">
-                            <a class="menu__link spacing-left spacing-left--small" href="{{ path('return/slip-print', { returnReference: (return.returnReference)}) }}" target="_blank">
-                                {{ 'return_page.return.print_return' | trans }}
-                            </a>
-                        </li>
-                    </ul>
+                <td class="table__actions">
+                    {{ block('returnActionsMenu') }}
                 </td>
             </tr>
         {% endfor %}
     </tbody>
+{% endblock %}
+
+{% block returnActionsMenu %}
+    {% include molecule('table-action-list') with {
+        data: {
+            items: [
+                {
+                    url: path('return/view', { returnReference: (return.returnReference) }),
+                    title: 'return_page.return.view_return' | trans,
+                },
+                {
+                    url: path('return/slip-print', { returnReference: (return.returnReference) }),
+                    title: 'return_page.return.print_return' | trans,
+                    target: '_blank',
+                },
+            ],
+        },
+    } only %}
 {% endblock %}

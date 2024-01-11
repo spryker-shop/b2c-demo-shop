@@ -29,31 +29,54 @@
             } only %}
 
             <div class="col {{ config.name }}__currency-lang">
-                <div class="{{ config.name }}__select">
-                    {% widget 'LanguageSwitcherWidget' args [
-                        app.request.pathInfo,
-                        app.request.queryString,
-                        app.request.requestUri
-                    ] with {
-                        data: {
-                            additionalClassName: config.name,
-                        },
-                    } only %}{% endwidget %}
-                </div>
-                <div class="{{ config.name }}__select">
-                    {%- widget 'CurrencyWidget' with {
-                        data: {
-                            additionalClassName: config.name,
-                        },
-                    } only -%}{%- endwidget -%}
-                </div>
-                <div class="{{ config.name }}__select">
-                    {%- widget 'StoreSwitcher' with {
-                        data: {
-                            additionalClassName: config.name,
-                        },
-                    } only -%}{%- endwidget -%}
-                </div>
+                {% widget 'LanguageSwitcherWidget' args [
+                    app.request.pathInfo,
+                    app.request.queryString,
+                    app.request.requestUri
+                ] with {
+                    data: {
+                        additionalClassName: config.name,
+                    },
+                    embed: {
+                        parentConfigName: config.name,
+                    },
+                } only %}
+                    {% block body %}
+                        <div class="{{ embed.parentConfigName }}__select">
+                            {{ parent () }}
+                        </div>
+                    {% endblock %}
+                {% endwidget %}
+
+                {%- widget 'CurrencyWidget' with {
+                    data: {
+                        additionalClassName: config.name,
+                    },
+                    embed: {
+                        parentConfigName: config.name,
+                    },
+                } only %}
+                    {% block body %}
+                        <div class="{{ embed.parentConfigName }}__select">
+                            {{ parent () }}
+                        </div>
+                    {% endblock %}
+                {% endwidget %}
+
+                {%- widget 'StoreSwitcher' with {
+                    data: {
+                        additionalClassName: config.name,
+                    },
+                    embed: {
+                        parentConfigName: config.name,
+                    },
+                } only %}
+                    {% block body %}
+                        <div class="{{ embed.parentConfigName }}__select">
+                            {{ parent () }}
+                        </div>
+                    {% endblock %}
+                {% endwidget %}
             </div>
         </div>
     </div>

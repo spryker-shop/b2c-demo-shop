@@ -2,6 +2,7 @@
 
 {% block content %}
     {% set jsAddressClass = 'js-address' %}
+    {% set formSubmitClassName = jsAddressClass ~ '__form-submit' %}
     {% set billingSameAsShippingData = data.forms.billingSameAsShipping.vars.data %}
 
     {% embed molecule('form') with {
@@ -11,7 +12,7 @@
             submit: {
                 enable: true,
                 text: 'general.next.button' | trans,
-                class: 'button button--large button--expand ' ~ jsAddressClass ~ '__form-submit',
+                class: 'button button--large button--expand ' ~ formSubmitClassName,
             },
         },
         embed: {
@@ -24,15 +25,34 @@
             isMultipleShipmentEnabled: data.isMultipleShipmentEnabled,
             jsAddressClass: jsAddressClass,
             isBillingSameAsShippingChecked: billingSameAsShippingData is not defined or billingSameAsShippingData,
+            formSubmitClassName: formSubmitClassName,
         },
     } only %}
         {% block fields %}
-            {% set hasShippingAddresses = data.form.shippingAddress.id_customer_address is defined %}
             {% set hiddenClassName = 'is-hidden' %}
+            {% set shippingClassName = embed.jsAddressClass ~ '__shipping' %}
+            {% set shippingSelectClassName = embed.jsAddressClass ~ '__shipping-select' %}
+            {% set billingClassName = embed.jsAddressClass ~ '__billing' %}
+            {% set billingSelectClassName = embed.jsAddressClass ~ '__billing-select' %}
+            {% set billingFormClassName = embed.jsAddressClass ~ '__billing-form' %}
+            {% set billingSameAsShippingClassName = embed.jsAddressClass ~ '__billing-same-as-shipping' %}
+            {% set billingFormTriggerClassName = embed.jsAddressClass ~ '__billing-form-trigger' %}
+            {% set addressSelectClassName = embed.jsAddressClass ~ '__address-select' %}
+            {% set addressFormClassName = embed.jsAddressClass ~ '__address-form' %}
+            {% set addressFormContainerClassName = embed.jsAddressClass ~ '__address-form-container' %}
+            {% set commonSelectsClassName = embed.jsAddressClass ~ '__common-select' %}
+            {% set commonFormsClassName = embed.jsAddressClass ~ '__common-form' %}
+            {% set commonFormContainersClassName = embed.jsAddressClass ~ '__common-form-container' %}
+            {% set multishipmentTargetClassName = embed.jsAddressClass ~ '__items-target' %}
+            {% set validatorClassName = embed.jsAddressClass ~ '__validate-next-checkout-step' %}
+            {% set multishipmentValidatorClassName = embed.jsAddressClass ~ '__multishipment-validate-next-checkout-step' %}
+
+            {% set optionValueDeliverToMultipleAddresses = '-1' %}
+            {% set hasShippingAddresses = data.form.shippingAddress.id_customer_address is defined %}
             {% set shippingAddressValue = data.form.shippingAddress.id_customer_address.vars.value | default %}
             {% set isNewAddressSelected = shippingAddressValue == 0 or shippingAddressValue is empty %}
             {% set newAddressHiddenClassName = hasShippingAddresses and not isNewAddressSelected ? ' ' ~ hiddenClassName %}
-            {% set isMultipleShipmentSelected = shippingAddressValue == -1 %}
+            {% set isMultipleShipmentSelected = shippingAddressValue == optionValueDeliverToMultipleAddresses %}
             {% set multipleShipmentHiddenClassName = not isMultipleShipmentSelected ? ' ' ~ hiddenClassName %}
             {% set billingSameAsShippingHiddenClassName = isMultipleShipmentSelected ? hiddenClassName %}
 
@@ -49,38 +69,49 @@
                 <div class="col col--sm-12 spacing-bottom spacing-bottom--biggest">
                     {{ form_row(embed.forms.shipping.id_customer_address, {
                         label: 'page.checkout.address.delivery.address_select' | trans,
+                        attr: {
+                            class: addressSelectClassName ~ ' ' ~ commonSelectsClassName ~ ' ' ~ shippingSelectClassName,
+                        },
                     }) }}
                 </div>
             {% endif %}
 
-            {% include molecule('form') with {
-                class: embed.jsAddressClass ~ '__shipping col col--sm-12' ~ newAddressHiddenClassName,
-                modifiers: ['checkout-form', 'checkout-form-elements'],
-                data: {
-                    form: embed.forms.shipping,
-                    enableStart: false,
-                    enableEnd: false,
-                    layout: {
-                        salutation: 'col col--sm-12 col--lg-3',
-                        first_name: 'col col--sm-12 col--lg-4',
-                        last_name: 'col col--sm-12 col--lg-5',
-                        address1: 'col col--sm-12 col--md-8 col--lg-9',
-                        address2: 'col col--sm-12 col--md-4 col--lg-3',
-                        zip_code: 'col col--sm-12 col--lg-3',
-                        city: 'col col--sm-12 col--lg-5',
-                        iso2_code: 'col col--sm-12 col--lg-4',
+            <div class="{{ addressFormContainerClassName }} col col--sm-12">
+                {% include molecule('form') with {
+                    class: shippingClassName ~ ' ' ~ addressFormClassName ~ newAddressHiddenClassName,
+                    modifiers: ['checkout-form', 'checkout-form-elements'],
+                    data: {
+                        form: embed.forms.shipping,
+                        enableStart: false,
+                        enableEnd: false,
+                        layout: {
+                            salutation: 'col col--sm-12 col--lg-3',
+                            first_name: 'col col--sm-12 col--lg-4',
+                            last_name: 'col col--sm-12 col--lg-5',
+                            address1: 'col col--sm-12 col--md-8 col--lg-9',
+                            address2: 'col col--sm-12 col--md-4 col--lg-3',
+                            zip_code: 'col col--sm-12 col--lg-3',
+                            city: 'col col--sm-12 col--lg-5',
+                            iso2_code: 'col col--sm-12 col--lg-4',
+                        },
                     },
-                },
-            } only %}
+                } only %}
+            </div>
 
             {% if embed.isMultipleShipmentEnabled %}
                 {% include molecule('address-item-form', 'CheckoutPage') with {
-                    class: 'col col--sm-12 spacing-bottom ' ~ embed.jsAddressClass ~ '__items-target' ~ multipleShipmentHiddenClassName,
+                    class: multishipmentTargetClassName ~ multipleShipmentHiddenClassName ~ ' col col--sm-12 spacing-bottom',
                     data: {
                         form: embed.forms.items,
                         formBundle: embed.forms.bundleItems,
                         shippingForm: embed.forms.shipping,
                         jsAddressClass: embed.jsAddressClass,
+                        hiddenClassName: hiddenClassName,
+                        validatorClassName: multishipmentValidatorClassName,
+                        formSubmitClassName: embed.formSubmitClassName,
+                        addressSelectClassName: commonSelectsClassName,
+                        addressFormClassName: commonFormsClassName,
+                        addressFormContainerClassName: commonFormContainersClassName,
                     },
                 } only %}
             {% endif %}
@@ -88,12 +119,14 @@
             <div class="grid grid--expand col col--sm-12 spacing-bottom spacing-bottom--biggest">
                 <h2 class="title title--primary col col--sm-12">{{ 'page.checkout.address.billing-address' | trans }}</h2>
 
-                <div class="col col--sm-12 {{ embed.jsAddressClass }}__billing-same-as-shipping {{ billingSameAsShippingHiddenClassName }}">
+                <div class="col col--sm-12 {{ billingSameAsShippingClassName }} {{ billingSameAsShippingHiddenClassName }}">
                     {{ form_row(data.form.billingSameAsShipping, {
                         label: 'page.checkout.address.billing-same-as-shipping' | trans,
                         component: molecule('toggler-checkbox'),
+                        componentClass: billingFormTriggerClassName,
                         attributes: {
-                            'target-class-name': embed.jsAddressClass ~ '__billing-address',
+                            'target-class-name': billingClassName,
+                            'class-to-toggle': hiddenClassName,
                             'add-class-when-checked': true,
                             checked: not isMultipleShipmentSelected ? embed.isBillingSameAsShippingChecked : false,
                         },
@@ -101,7 +134,7 @@
                 </div>
 
                 {% embed molecule('form') with {
-                    class: 'col col--sm-12 spacing-top spacing-top--big ' ~ embed.jsAddressClass ~  '__billing-address ' ~ hiddenClassName,
+                    class: billingClassName ~ ' ' ~ addressFormContainerClassName ~ ' ' ~ commonFormContainersClassName ~ ' ' ~ multipleShipmentHiddenClassName ~ ' col col--sm-12 spacing-top spacing-top--big',
                     modifiers: ['checkout-form-elements'],
                     data: {
                         form: embed.forms.billing,
@@ -120,7 +153,14 @@
                     },
                     embed: {
                         jsAddressClass: embed.jsAddressClass,
-                        hiddenClassName: hiddenClassName
+                        hiddenClassName: hiddenClassName,
+                        billingSelectClassName: billingSelectClassName,
+                        billingFormClassName: billingFormClassName,
+                        addressSelectClassName: addressSelectClassName,
+                        addressFormClassName: addressFormClassName,
+                        addressFormContainerClassName: addressFormContainerClassName,
+                        commonSelectsClassName: commonSelectsClassName,
+                        commonFormsClassName: commonFormsClassName,
                     },
                 } only %}
                     {% block fields %}
@@ -133,30 +173,49 @@
                             <div class="col col--sm-12 spacing-bottom spacing-bottom--small">
                                 {{ form_row(data.form.id_customer_address, {
                                     label: 'page.checkout.address.billing.address_select' | trans,
+                                    attr: {
+                                        class: embed.addressSelectClassName ~ ' ' ~ embed.commonSelectsClassName ~ ' ' ~ embed.billingSelectClassName,
+                                    },
                                 }) }}
                             </div>
                         {% endif %}
 
                         <div class="{{ config.name }}__checkout-sub-form">
-                            <div class="{{ config.name }}__checkout-sub-form-content {{ embed.jsAddressClass }}__billing {{ newAddressHiddenClassName }}">
+                            <div class="{{ config.name }}__checkout-sub-form-content {{ embed.addressFormClassName }} {{ embed.commonFormsClassName }} {{ embed.billingFormClassName }} {{ newAddressHiddenClassName }}">
                                 {{ parent() }}
                             </div>
                         </div>
                     {% endblock %}
                 {% endembed %}
             </div>
-        {% endblock %}
 
-        {% block actions %}
-            {% set optionValueDeliverToMultipleAddresses = '-1' %}
+            {% include molecule('is-next-checkout-step-enabled', 'CheckoutPage') with {
+                attributes: {
+                    'trigger-selector': '.' ~ shippingSelectClassName,
+                    'extra-triggers-class-name': billingFormTriggerClassName,
+                    'target-selector': '.' ~ multishipmentValidatorClassName,
+                    'extra-target-selector': '.' ~ validatorClassName,
+                },
+            } only %}
 
+            {% include molecule('validate-next-checkout-step', 'CheckoutPage') with {
+                class: validatorClassName,
+                attributes: {
+                    'container-selector': '.' ~ addressFormClassName,
+                    'extra-container-selector': '.' ~ addressFormContainerClassName,
+                    'target-selector': '.' ~ embed.formSubmitClassName,
+                    'dropdown-trigger-selector': '.' ~ addressSelectClassName ~ ':not(.' ~ hiddenClassName ~ ')',
+                    'is-enable': false,
+                },
+            } only %}
+            
             {% include molecule('address-form-toggler', 'CustomerPage') ignore missing with {
                 attributes: {
-                    'trigger-selector': '[name="' ~ embed.forms.shipping.id_customer_address.vars.full_name ~ '"]',
-                    'target-selector': '.' ~ embed.jsAddressClass ~ '__shipping',
-                    'sub-target-selector': '.' ~ embed.jsAddressClass ~ '__items-target',
-                    'container-billing-address-selector': '.' ~ embed.jsAddressClass ~ '__billing-address',
-                    'billing-same-as-shipping-selector': '.' ~ embed.jsAddressClass ~ '__billing-same-as-shipping',
+                    'trigger-selector': '.' ~ shippingSelectClassName,
+                    'target-selector': '.' ~ shippingClassName,
+                    'sub-target-selector': '.' ~ multishipmentTargetClassName,
+                    'container-billing-address-selector': '.' ~ billingClassName,
+                    'billing-same-as-shipping-selector': '.' ~ billingSameAsShippingClassName,
                     'billing-same-as-shipping-toggler-selector': 'input[name="addressesForm[billingSameAsShipping]"]',
                     'toggle-option-value': optionValueDeliverToMultipleAddresses,
                 },
@@ -164,12 +223,10 @@
 
             {% include molecule('address-form-toggler', 'CustomerPage') ignore missing with {
                 attributes: {
-                    'trigger-selector': '[name="' ~ embed.forms.billing.id_customer_address.vars.full_name ~ '"]',
-                    'target-selector': '.' ~ embed.jsAddressClass ~ '__billing',
+                    'trigger-selector': '.' ~ billingSelectClassName,
+                    'target-selector': '.' ~ billingFormClassName,
                 },
             } only %}
-
-            {{ parent() }}
         {% endblock %}
     {% endembed %}
 {% endblock %}

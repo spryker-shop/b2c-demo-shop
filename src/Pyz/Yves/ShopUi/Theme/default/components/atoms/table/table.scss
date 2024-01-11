@@ -1,77 +1,38 @@
 @include shop-ui-table {
+    $name: '.table';
+
     &__body,
     tbody {
         tr {
+            background-color: $setting-color-transparent !important;
+
             &:last-child {
                 border-bottom: rem(1) solid $setting-color-gray-3;
             }
-
-            &:nth-child(even) {
-                background: none;
-            }
         }
     }
 
-    .text-right {
-        text-align: right;
+    td,
+    th {
+        padding: rem(8);
+        font-size: rem(14);
+
+        @include helper-breakpoint-media-min($md-min) {
+            font-size: rem(16);
+        }
     }
 
-    &--customer-account {
-        td,
-        th {
-            padding: rem(8);
-        }
+    .checkbox {
+        margin: 0;
 
-        .checkbox {
+        @include helper-breakpoint-media-min($md-min) {
             margin: rem(4) 0 0;
         }
     }
 
-    &--order,
-    &--return {
-        th,
-        td {
-            font-size: rem(14);
-
-            @include helper-breakpoint-media-min($md-min) {
-                font-size: rem(16);
-            }
-        }
-    }
-
-    &--order-detail {
-        th,
-        td {
-            font-size: rem(11);
-            padding: rem(4);
-
-            @include helper-breakpoint-media-min($md-min) {
-                font-size: rem(16);
-                padding: rem(8);
-            }
-        }
-
-        .checkbox {
-            margin: 0;
-
-            @include helper-breakpoint-media-min($md-min) {
-                margin: rem(4) 0 0;
-            }
-        }
-    }
-
-    &--wishlist {
-        th,
-        td {
-            padding-left: 0;
-
-            @include helper-breakpoint-media-min($lg-min) {
-                padding-left: rem(4);
-            }
-        }
-
-        td:first-child {
-            width: 5%;
+    &--sub-table {
+        tbody tr:last-child {
+            border-bottom: none;
         }
     }
 
@@ -91,8 +52,7 @@
             /* stylelint-disable selector-max-type */
             tbody tr {
                 display: block;
-                background-color: $setting-color-transparent !important;
-                border-top: none;
+                border: none;
                 padding-bottom: rem(15);
 
                 &:last-child {
@@ -116,7 +76,6 @@
 
             .transform-cell {
                 display: flex;
-                align-items: baseline;
                 position: relative;
                 background-color: $setting-color-gray-1;
 
@@ -141,5 +100,13 @@
 
     &__tr--with-border-bottom {
         border-bottom: rem(1) solid $setting-color-gray-3;
+    }
+
+    #{$name}__actions {
+        padding: 0;
+
+        @include helper-breakpoint-media-min($lg-min) {
+            width: 0;
+        }
     }
 }

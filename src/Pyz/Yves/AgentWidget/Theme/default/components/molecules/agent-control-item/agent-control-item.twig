@@ -5,26 +5,39 @@
 } %}
 
 {% define data = {
-    title: required,
-    buttonLink: required,
-    buttonName: required,
+    title: 'agent.control_bar.username' | trans,
+    buttonLink: url('agent_logout'),
+    buttonTitle: 'agent.control_bar.logout' | trans,
+    type: 'agent',
     firstName: '',
     lastName: '',
 } %}
-{% block extraClass %}
-    grid grid--gap grid--inline grid--middle
-{% endblock %}
 
 {% block body %}
-    <div class="col {{ config.name }}__info">
-        <div>
-            {{ data.title }}
-        </div>
-        {% if data.firstName or data.lastName %}
-            <a href="{{ path('agent/overview') }}" class="{{ config.name }}__name">{{ data.firstName }} {{ data.lastName }}</a>
-        {% endif %}
+    <div class="{{ config.name }}__col {{ config.name }}__icon">
+        {% include atom('icon') with {
+            modifiers: ['big'],
+            data: {
+                name: data.type,
+            },
+        } only %}
     </div>
-    <div class="col {{ config.name }}__button-wrap">
-        <a href="{{ data.buttonLink }}" class="button button--agent button--hollow button--big">{{ data.buttonName }}</a>
+    <div class="{{ config.name }}__col {{ config.name }}__info">
+        <div class="{{ config.name }}__title">
+            {{- data.title -}}
+        </div>
+        <a href="{{ path(data.type ~ '/overview') }}" class="{{ config.name }}__name">
+            {{- data.firstName }} {{ data.lastName -}}
+        </a>
+    </div>
+    <div class="{{ config.name }}__col {{ config.name }}__button-wrapper">
+        <a href="{{ data.buttonLink }}" class="{{ config.name }}__button" title="{{ data.buttonTitle }}">
+            {% include atom('icon') with {
+                modifiers: ['small'],
+                data: {
+                    name: 'close',
+                },
+            } only %}
+        </a>
     </div>
 {% endblock %}

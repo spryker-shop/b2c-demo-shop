@@ -130,7 +130,8 @@
             <div class="col col--sm-12 col--xl-4">
                 {% include molecule('summary-sidebar', 'CheckoutPage') ignore missing with {
                     data: {
-                        shipment: shipmentGroup.shipment,
+                        shipmentGroup: shipmentGroup,
+                        shipmentExpenses: data.orderShipmentExpenses,
                         isGiftCardExists: isGiftCardExists,
                     },
                 } only %}

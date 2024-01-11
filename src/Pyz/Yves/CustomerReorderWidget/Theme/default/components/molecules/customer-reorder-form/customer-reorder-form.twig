@@ -1,5 +1,9 @@
 {% extends molecule('customer-reorder-form', '@SprykerShop:CustomerReorderWidget') %}
 
+{% block extraClass %}
+    box
+{% endblock %}
+
 {% block formContent %}
     {% include molecule('order-detail', 'CustomerPage') ignore missing with {
         class: 'spacing-top spacing-top--big',

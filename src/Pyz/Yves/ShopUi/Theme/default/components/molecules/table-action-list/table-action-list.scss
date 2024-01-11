@@ -1,0 +1,57 @@
+@mixin shop-ui-table-action-list($name: '.table-action-list') {
+    #{$name} {
+        display: flex;
+        flex-wrap: wrap;
+        padding: rem(10) 0;
+
+        @include helper-breakpoint-media-min($lg-min) {
+            width: 100%;
+            padding: 0 rem(3) 0 0;
+            flex-wrap: nowrap;
+        }
+
+        &__item {
+            flex-grow: 1;
+            min-width: calc(100% / 3);
+            padding: rem(2) rem(5);
+
+            @include helper-breakpoint-media-min($md-min) {
+                min-width: 20%;
+            }
+
+            @include helper-breakpoint-media-min($lg-min) {
+                flex-grow: 0;
+                padding: 0 rem(5);
+                white-space: nowrap;
+            }
+        }
+
+        &__link {
+            background: none;
+            color: $setting-color-black;
+            font: fw(light) rem(16) $setting-font-family;
+            cursor: pointer;
+            padding: rem(5);
+            border-radius: rem(2);
+            border: rem(1) solid $setting-color-gray-3;
+            text-align: center;
+            display: block;
+            width: 100%;
+
+            @include helper-breakpoint-media-min($lg-min) {
+                padding: 0;
+                border: none;
+                text-align: left;
+            }
+
+            &:hover {
+                color: $setting-color-alt;
+                text-decoration: underline;
+            }
+        }
+
+        @content;
+    }
+}
+
+@include shop-ui-table-action-list();

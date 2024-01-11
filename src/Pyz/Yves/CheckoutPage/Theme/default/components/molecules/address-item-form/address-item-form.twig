@@ -17,17 +17,26 @@
                 enableEnd: false,
             },
             embed: {
+                jsName: config.jsName,
                 shippingForm: data.shippingForm,
-                jsAddressClass: data.jsAddressClass,
+                addressSelectClassName: addressSelectClassName,
+                validatorTriggerClassName: validatorTriggerClassName,
+                itemShippingClassName: itemShippingClassName,
+                itemDeliveryValidationClassName: itemDeliveryValidationClassName,
+                hiddenClassName: data.hiddenClassName,
             },
         } only %}
             {% block fields %}
                 <div class="col col--sm-12">
                     {% include molecule('address-item-form-field-list', 'CheckoutPage') with {
+                        class: embed.jsName ~ '__items',
                         data: {
                             items: data.form,
                             shippingForm: embed.shippingForm,
-                            jsAddressClass: embed.jsAddressClass,
+                            addressSelectClassName: embed.addressSelectClassName,
+                            itemShippingClassName: embed.itemShippingClassName,
+                            validationClassName: embed.itemDeliveryValidationClassName,
+                            hiddenClassName: embed.hiddenClassName,
                         },
                     } only %}
                 </div>
@@ -43,21 +52,32 @@
                 enableEnd: false,
             },
             embed: {
+                jsName: config.jsName,
                 shippingForm: data.shippingForm,
-                jsAddressClass: data.jsAddressClass,
+                addressSelectClassName: addressSelectClassName,
+                validatorTriggerClassName: validatorTriggerClassName,
+                itemShippingClassName: itemShippingClassName,
+                itemDeliveryValidationClassName: itemDeliveryValidationClassName,
+                hiddenClassName: data.hiddenClassName,
             },
         } only %}
             {% block fields %}
                 <div class="col col--sm-12">
                     {% include molecule('address-bundle-item-form-field-list', 'CheckoutPage') with {
+                        class: embed.jsName ~ '__items',
                         data: {
                             items: data.form,
                             shippingForm: embed.shippingForm,
-                            jsAddressClass: embed.jsAddressClass,
+                            addressSelectClassName: embed.addressSelectClassName,
+                            itemShippingClassName: embed.itemShippingClassName,
+                            validationClassName: embed.itemDeliveryValidationClassName,
+                            hiddenClassName: embed.hiddenClassName,
                         },
                     } only %}
                 </div>
             {% endblock %}
         {% endembed %}
     {% endif %}
+
+    {{ block('stepValidation') }}
 {% endblock %}

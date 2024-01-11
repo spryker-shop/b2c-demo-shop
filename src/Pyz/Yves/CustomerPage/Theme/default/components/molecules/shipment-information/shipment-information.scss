@@ -1,0 +1,12 @@
+@mixin customer-page-shipment-information($name: '.shipment-information') {
+    #{$name} {
+        &__content {
+            font-weight: fw(light);
+            letter-spacing: rem(-0.18);
+        }
+
+        @content;
+    }
+}
+
+@include customer-page-shipment-information();

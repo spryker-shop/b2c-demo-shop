@@ -343,4 +343,34 @@ class CheckoutDataRestApiCest
             ->whenI()
             ->seeSingleResourceHasSelfLink($url);
     }
+
+    /**
+     * @depends loadFixtures
+     *
+     * @param \PyzTest\Glue\Checkout\CheckoutApiTester $I
+     *
+     * @return void
+     */
+    public function requestWithCustomerBillingAddressIdOnly(CheckoutApiTester $I): void
+    {
+        // Arrange
+        $I->authorizeCustomerToGlue($this->fixtures->getCustomerTransfer());
+        $requestPayload = [
+            'data' => [
+                'type' => CheckoutRestApiConfig::RESOURCE_CHECKOUT_DATA,
+                'attributes' => [
+                    'idCart' => $this->fixtures->getQuoteTransfer()->getUuid(),
+                    'billingAddress' => [
+                        'id' => $this->fixtures->getCustomerAddress()->getUuid(),
+                    ],
+                ],
+            ],
+        ];
+
+        // Act
+        $I->sendPOST($I->buildCheckoutDataUrl(), $requestPayload);
+
+        // Assert
+        $I->seeResponseCodeIs(HttpCode::OK);
+    }
 }

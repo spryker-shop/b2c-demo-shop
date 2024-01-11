@@ -1,83 +1,81 @@
 {% extends molecule('wishlist-overview-table', '@SprykerShop:WishlistPage') %}
 
+{% block wishlistDeleteAction %}
+    {% if wishlistDeleteForm %}
+        {{ form_start(wishlistDeleteForm, { action: path('wishlist/delete', { wishlistName: wishlist.name}), name: 'wishlistDeleteForm_' ~ wishlist.name }) }}
+            <button class="table-action-list__link" data-init-single-click>
+                {{ 'customer.account.wishlist.overview.delete' | trans }}
+            </button>
+        {{ form_end(wishlistDeleteForm) }}
+    {% endif %}
+{% endblock %}
+
 {% block body %}
-    <div class="is-scrollable-x">
-        <table class="table table--expand">
-            <thead>
-                <tr>
-                    <th width="35%">{{ 'customer.account.wishlist.overview.name' | trans }}</th>
-                    <th width="20%">{{ 'customer.account.wishlist.overview.item_count' | trans }}</th>
-                    <th width="20%">{{ 'customer.account.wishlist.overview.date' | trans }}</th>
-                    <th width="25%"></th>
-                </tr>
-            </thead>
-            <tbody>
+    <table class="table table--expand table--responsive">
+        <thead>
+            <tr>
+                <th>{{ 'customer.account.wishlist.overview.name' | trans }}</th>
+                <th>{{ 'customer.account.wishlist.overview.item_count' | trans }}</th>
+                <th>{{ 'customer.account.wishlist.overview.date' | trans }}</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
             {% for wishlist in data.wishlists %}
                 {% set hasWishlistForm = data.wishlistForm is not empty and wishlist.idWishlist == data.wishlistForm.vars.data.idWishlist %}
+                
                 <tr class="table__tr table__tr--with-border">
-                    <td>
+                    <td class="transform-cell transform-cell--spacing-top" data-content="{{ 'customer.account.wishlist.overview.name' | trans }}">
                         {% if hasWishlistForm %}
                             {{ form_start(data.wishlistForm) }}
-                            <div class="grid grid--desktop-no-wrap">
-                                <div class="col">
-                                    {{ form_widget(data.wishlistForm.name, {attr: {placeholder: 'customer.account.wishlist.overview.enter_name'|trans}}) }}
+                                <div class="grid grid--desktop-nowrap">
+                                    <div class="col">
+                                        {{ form_widget(data.wishlistForm.name, {
+                                            attr: {
+                                                placeholder: 'customer.account.wishlist.overview.enter_name' | trans,
+                                            },
+                                        }) }}
+                                    </div>
+                                    <div class="col">
+                                        <button class="button button--combined">
+                                            {{ 'wishlist.form.save' | trans }}
+                                        </button>
+                                    </div>
                                 </div>
-                                <div class="col">
-                                    <button type="submit" class="button button--combined">
-                                        {{ 'wishlist.form.save' | trans }}
-                                    </button>
-                                </div>
-                            </div>
-                            {{ form_errors(data.wishlistForm) }}
+
+                                {{ form_errors(data.wishlistForm) }}
                             {{ form_end(data.wishlistForm) }}
                         {% else %}
                             <a href="{{ path('wishlist/details', { wishlistName: wishlist.name }) }}">{{ wishlist.name }}</a>
                         {% endif %}
                     </td>
-                    <td>{{ wishlist.numberOfItems | executeFilterIfExists('formatInt', app.locale) }}</td>
-                    <td>{{ wishlist.createdAt | formatDate }}</td>
-                    <td>
-                        <ul class="menu menu--inline float-right text-right">
-                            {% if not hasWishlistForm %}
-                                <li class="menu__item">
-                                    <a href="{{ url('wishlist/update', {wishlistName: wishlist.name}) }}" class="link link--user-account" title="{{ 'customer.account.wishlist.overview.edit' | trans }}">
-                                        {{ 'customer.account.wishlist.overview.edit' | trans }}
-                                    </a>
-                                </li>
-                            {% endif %}
-                            <li class="menu__item">
-                                {% if data.wishlistDeleteFormClone %}
-                                    {% set wishlistDeleteForm = data.wishlistDeleteFormClone.getForm.createView %}
+                    <td class="transform-cell" data-content="{{ 'customer.account.wishlist.overview.item_count' | trans }}">
+                        {{ wishlist.numberOfItems | executeFilterIfExists('formatInt', app.locale) }}
+                    </td>
+                    <td class="transform-cell transform-cell--spacing-bottom" data-content="{{ 'customer.account.wishlist.overview.date' | trans }}">
+                        {{ wishlist.createdAt | formatDate }}
+                    </td>
+                    <td class="table__actions">
+                        {% set wishlistDeleteForm = data.wishlistDeleteFormClone.getForm.createView ?? null %}
+                        {% import _self as macros %}
 
-                                    {{ form_start(wishlistDeleteForm, {'action': path('wishlist/delete', {'wishlistName': wishlist.name}), 'name': 'wishlistDeleteForm_' ~ wishlist.name }) }}
-                                        <button data-init-single-click class="link link--user-account" title="{{ 'customer.account.wishlist.overview.delete' | trans }}">
-                                            {{ 'customer.account.wishlist.overview.delete' | trans }}
-                                        </button>
-                                    {{ form_end(wishlistDeleteForm) }}
-                                {% else %}
-                                    {% set formName = 'wishlistDeleteForm_' ~ loop.index %}
-
-                                    {% include molecule('single-button-form') with {
-                                        data: {
-                                            formAction: path('wishlist/delete', {'wishlistName': wishlist.name}),
-                                            buttonText: 'customer.account.wishlist.overview.delete' | trans,
-                                            iconName: '',
-                                            buttonClass: 'link link--user-account',
-                                            fieldName: 'wishlist_delete_form[_token]',
-                                            fieldValue: csrf_token('wishlist_delete_form'),
-                                            formAttributes: {
-                                                'name': formName,
-                                                'id': formName,
-                                            },
-                                        },
-                                    } only %}
-                                {% endif %}
-                            </li>
-                        </ul>
+                        {% include molecule('table-action-list') with {
+                            data: {
+                                items: [
+                                    {
+                                        url: url('wishlist/update', { wishlistName: wishlist.name }),
+                                        title: 'customer.account.wishlist.overview.edit' | trans,
+                                        available: not hasWishlistForm,
+                                    },
+                                    {
+                                        customAction: block('wishlistDeleteAction'),
+                                    },
+                                ],
+                            },
+                        } only %}
                     </td>
                 </tr>
             {% endfor %}
-            </tbody>
-        </table>
-    </div>
+        </tbody>
+    </table>
 {% endblock %}

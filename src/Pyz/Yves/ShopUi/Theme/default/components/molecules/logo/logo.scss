@@ -1,22 +1,35 @@
 @mixin shop-ui-logo($name: '.logo') {
     #{$name} {
         padding: rem(13);
+        border-bottom: rem(1) solid $setting-color-gray-1;
 
-        @include helper-breakpoint-media-max($sm-max) {
-            border-bottom: rem(1) solid $setting-color-gray-1;
+        @include helper-breakpoint-media-min($md-min) {
+            border-bottom: none;
         }
 
         &__link {
-            @include helper-breakpoint-media-max($sm-max) {
-                width: rem(120);
+            display: block;
+            width: rem(150);
+
+            @include helper-breakpoint-media-min($md-min) {
+                width: rem(180);
             }
         }
 
+        &__image {
+            display: inline-block;
+            vertical-align: top;
+        }
+
         &--checkout {
-            @include helper-breakpoint-media-max($sm-max) {
-                padding: rem(22) rem(13);
+            padding: rem(22) rem(13);
+
+            @include helper-breakpoint-media-min($md-min) {
+                padding: 0 0 rem(22);
             }
         }
+
+        @content;
     }
 }
 

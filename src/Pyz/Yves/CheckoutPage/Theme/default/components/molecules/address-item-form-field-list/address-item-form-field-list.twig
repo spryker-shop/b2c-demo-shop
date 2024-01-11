@@ -9,10 +9,7 @@
                 {% set shippingAddress = item.shippingAddress %}
                 {% set hasShippingAddresses = shippingAddress.id_customer_address is defined %}
                 {% set isNewAddressSelected = shippingAddress.id_customer_address.vars.value | default == 0 %}
-                {% set itemName = item.vars.data.name | default %}
-                {% set itemQuantity = item.vars.data.quantity | default %}
-                {% set imageUrl = item.vars.data.images[0].externalUrlSmall ?? '' %}
-                {% set newAddressHiddenClassName = not isNewAddressSelected and hasShippingAddresses ? ' is-hidden' %}
+                {% set newAddressHiddenClassName = not isNewAddressSelected and hasShippingAddresses ? ' ' ~ data.hiddenClassName %}
 
                 {% embed molecule('product-card-item') with {
                     class: 'col col--sm-12 col--lg-6',
@@ -26,6 +23,9 @@
                     embed: {
                         item: item,
                         hasShippingAddresses: hasShippingAddresses,
+                        jsName: config.jsName,
+                        addressSelectClassName: data.addressSelectClassName,
+                        index: loop.index,
                     },
                 } only %}
                     {% import _self as component %}
@@ -63,7 +63,7 @@
                                 {{ form_row(embed.item.shippingAddress.id_customer_address, {
                                     label: 'page.checkout.address.delivery.address_select' | trans,
                                     attr: {
-                                        'multi-shipping-addresses-form-select': '',
+                                        class: embed.addressSelectClassName ~ ' ' ~ embed.jsName ~ '__trigger--' ~ embed.index,
                                     },
                                 }) }}
                             </div>
@@ -81,9 +81,9 @@
                     {% block bundles %}{% endblock %}
                 {% endembed %}
 
-                <div class="col col--sm-12">
+                <div class="{{ data.validationClassName }} col col--sm-12">
                     {% include molecule('form') with {
-                        class: config.jsName ~ '__item-shipping ' ~ config.jsName ~ '__item-shipping--' ~ loop.index ~ newAddressHiddenClassName,
+                        class: data.itemShippingClassName ~ ' ' ~ config.jsName ~ '__item-shipping ' ~ config.jsName ~ '__item-shipping--' ~ loop.index ~ newAddressHiddenClassName,
                         modifiers: ['checkout-form'],
                         data: {
                             form: shippingAddress,
@@ -105,7 +105,7 @@
                     {% include molecule('address-form-toggler', 'CustomerPage') ignore missing with {
                         class: config.jsName ~ '__toggler',
                         attributes: {
-                            'trigger-selector': '[name="' ~ shippingAddress.id_customer_address.vars.full_name ~ '"]',
+                            'trigger-selector': '.' ~ config.jsName ~ '__trigger--' ~ loop.index,
                             'target-selector': '.' ~ config.jsName ~ '__item-shipping--' ~ loop.index,
                             'parent-target-class-name': config.jsName,
                         },
@@ -114,22 +114,4 @@
             </div>
         {% endif %}
     {% endfor %}
-
-    {% include molecule('is-next-checkout-step-enabled', 'CheckoutPage') with {
-        attributes: {
-            'trigger-selector': '[name="' ~ data.shippingForm.id_customer_address.vars.full_name ~ '"]',
-            'target-selector': '.' ~ config.jsName ~ '__validate-next-checkout-step',
-        },
-    } only %}
-
-    {% include molecule('validate-next-checkout-step', 'CheckoutPage') with {
-        class: config.jsName ~ '__validate-next-checkout-step',
-        attributes: {
-            'container-selector': '.' ~ config.jsName ~ '__item-shipping',
-            'target-selector': '.' ~ data.jsAddressClass ~ '__form-submit',
-            'dropdown-trigger-selector': '[multi-shipping-addresses-form-select]',
-            'parent-target-class-name': config.jsName,
-            'is-enable': false,
-        },
-    } only %}
 {% endblock %}

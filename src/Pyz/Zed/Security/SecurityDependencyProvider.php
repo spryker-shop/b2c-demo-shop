@@ -8,12 +8,12 @@
 namespace Pyz\Zed\Security;
 
 use Spryker\Zed\Security\SecurityDependencyProvider as SprykerSecurityDependencyProvider;
-use Spryker\Zed\SecurityGui\Communication\Plugin\Security\UserSecurityPlugin;
-use Spryker\Zed\SecurityOauthUser\Communication\Plugin\Security\OauthUserSecurityPlugin;
-use Spryker\Zed\SecuritySystemUser\Communication\Plugin\Security\SystemUserSecurityPlugin;
+use Spryker\Zed\SecurityGui\Communication\Plugin\Security\ZedUserSecurityPlugin;
+use Spryker\Zed\SecurityOauthUser\Communication\Plugin\Security\ZedOauthUserSecurityPlugin;
+use Spryker\Zed\SecuritySystemUser\Communication\Plugin\Security\ZedSystemUserSecurityPlugin;
 use Spryker\Zed\SessionUserValidation\Communication\Plugin\Security\SaveSessionUserSecurityPlugin;
-use Spryker\Zed\SessionUserValidation\Communication\Plugin\Security\ValidateSessionUserSecurityPlugin;
-use Spryker\Zed\User\Communication\Plugin\Security\UserSessionHandlerSecurityPlugin;
+use Spryker\Zed\SessionUserValidation\Communication\Plugin\Security\ZedValidateSessionUserSecurityPlugin;
+use Spryker\Zed\User\Communication\Plugin\Security\ZedUserSessionHandlerSecurityPlugin;
 
 class SecurityDependencyProvider extends SprykerSecurityDependencyProvider
 {
@@ -23,11 +23,11 @@ class SecurityDependencyProvider extends SprykerSecurityDependencyProvider
     protected function getSecurityPlugins(): array
     {
         return [
-            new UserSessionHandlerSecurityPlugin(),
-            new SystemUserSecurityPlugin(),
-            new UserSecurityPlugin(),
-            new OauthUserSecurityPlugin(),
-            new ValidateSessionUserSecurityPlugin(),
+            new ZedUserSessionHandlerSecurityPlugin(),
+            new ZedSystemUserSecurityPlugin(),
+            new ZedUserSecurityPlugin(),
+            new ZedOauthUserSecurityPlugin(),
+            new ZedValidateSessionUserSecurityPlugin(),
             new SaveSessionUserSecurityPlugin(),
         ];
     }

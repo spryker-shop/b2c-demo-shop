@@ -1,22 +1,64 @@
 @mixin agent-widget-agent-control-item($name: '.agent-control-item') {
     #{$name} {
-        &__info {
-            margin-top: rem(8);
-            margin-bottom: rem(8);
-            font-size: rem(14);
-            line-height: normal;
+        display: flex;
+        align-items: center;
+
+        &__col {
+            flex-grow: 0;
+            flex-basis: auto;
         }
 
-        &__button-wrap {
-            margin: rem(8) 0 rem(8) rem(8);
+        &__icon {
+            padding-right: rem(10);
+
+            @include helper-breakpoint-media-min($xl-min) {
+                padding-right: rem(15);
+            }
+        }
+
+        &__info {
+            font-size: rem(12);
+            line-height: normal;
+            overflow: hidden;
+        }
+
+        &__title {
+            margin-bottom: rem(4);
         }
 
         &__name {
-            font-weight: fw(medium);
+            font-size: rem(10);
+            font-weight: fw(bold);
             color: $setting-color-gray-4;
+            text-transform: uppercase;
+            display: inline-block;
+            max-width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
 
-            &:hover {
-                color: $setting-color-gray-3;
+            &:hover,
+            &:focus {
+                color: $setting-color-black;
+            }
+        }
+
+        &__button-wrapper {
+            align-self: stretch;
+            display: flex;
+            align-items: flex-end;
+            padding-left: rem(8);
+        }
+
+        &__button {
+            color: $setting-color-gray-4;
+            display: inline-block;
+            font-size: 0;
+            line-height: 0;
+            padding: rem(5) rem(5) rem(3);
+
+            &:hover,
+            &:focus {
+                color: $setting-color-black;
             }
         }
 

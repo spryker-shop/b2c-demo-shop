@@ -13,6 +13,7 @@ use Generated\Shared\DataBuilder\DeleteTaxAppBuilder;
 use Generated\Shared\Transfer\ConfigureTaxAppTransfer;
 use Generated\Shared\Transfer\DeleteTaxAppTransfer;
 use Generated\Shared\Transfer\StoreTransfer;
+use Generated\Shared\Transfer\TaxAppApiUrlsTransfer;
 use Orm\Zed\TaxApp\Persistence\SpyTaxAppConfig;
 use Orm\Zed\TaxApp\Persistence\SpyTaxAppConfigQuery;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
@@ -47,9 +48,12 @@ class TaxAppCommunicationTester extends Actor
     {
         $taxAppConfigEntity = $this->findTaxAppConfigEntity($storeTransfer, $configureTaxAppTransfer->getVendorCode());
 
-        $this->assertEquals($taxAppConfigEntity->getApiUrl(), $configureTaxAppTransfer->getApiUrl());
+        $taxAppConfigApiUrlsTransfer = (new TaxAppApiUrlsTransfer())->fromArray(json_decode($taxAppConfigEntity->getApiUrls(), true));
+
+        $this->assertEquals($taxAppConfigApiUrlsTransfer->getRefundsUrl(), $configureTaxAppTransfer->getApiUrlsOrFail()->getRefundsUrlOrFail());
+        $this->assertEquals($taxAppConfigApiUrlsTransfer->getQuotationUrl(), $configureTaxAppTransfer->getApiUrlsOrFail()->getQuotationUrlOrFail());
         $this->assertEquals($taxAppConfigEntity->getVendorCode(), $configureTaxAppTransfer->getVendorCode());
-        $this->assertEquals($taxAppConfigEntity->getApplicationId(), $configureTaxAppTransfer->getMessageAttributesOrFail()->getEmitterOrFail());
+        $this->assertEquals($taxAppConfigEntity->getApplicationId(), $configureTaxAppTransfer->getMessageAttributesOrFail()->getActorIdOrFail());
         $this->assertEquals($taxAppConfigEntity->getIsActive(), $configureTaxAppTransfer->getIsActive());
     }
 
@@ -74,7 +78,7 @@ class TaxAppCommunicationTester extends Actor
      */
     public function buildConfigureTaxAppTransfer(array $messageAttributesSeed = [], array $configureTaxAppSeed = []): ConfigureTaxAppTransfer
     {
-        return (new ConfigureTaxAppBuilder())->seed($configureTaxAppSeed)
+        return (new ConfigureTaxAppBuilder())->seed($configureTaxAppSeed)->withApiUrls()
             ->withMessageAttributes($messageAttributesSeed)
             ->build();
     }
