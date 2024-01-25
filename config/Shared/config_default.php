@@ -809,6 +809,7 @@ if ($isTestifyConstantsClassExists) {
         $sprykerGlueBackendHost,
         $sprykerGlueBackendPort !== 443 ? ':' . $sprykerGlueBackendPort : '',
     );
+    $config[TestifyConstants::GLUE_BACKEND_API_OPEN_API_SCHEMA] = APPLICATION_SOURCE_DIR . '/Generated/GlueBackend/Specification/spryker_backend_api.schema.yml';
 }
 
 // ----------------------------------------------------------------------------
