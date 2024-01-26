@@ -206,6 +206,11 @@ class DataImportConfig extends SprykerDataImportConfig
     public const IMPORT_TYPE_COMBINED_PRODUCT_GROUP = 'combined-product-group';
 
     /**
+     * @var string
+     */
+    public const IMPORT_TYPE_CUSTOMER_TASK = 'customer-task';
+
+    /**
      * @var int
      */
     protected const READ_COLLECTION_BATCH_SIZE = 500;

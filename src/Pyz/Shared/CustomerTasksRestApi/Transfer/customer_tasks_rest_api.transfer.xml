@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<transfers xmlns="spryker:transfer-01"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="spryker:transfer-01 http://static.spryker.com/transfer-01.xsd">
+
+    <transfer name="RestCustomerTaskAttributes">
+        <property name="idCustomerTask" type="int"/>
+        <property name="fkCreator" type="int"/>
+        <property name="fkOwner" type="int"/>
+        <property name="title" type="string"/>
+        <property name="description" type="string"/>
+        <property name="dueDate" type="string"/>
+        <property name="status" type="string"/>
+        <property name="tags" type="CustomerTaskTag[]" singular="tag"/>
+    </transfer>
+
+    <transfer name="CustomerTaskCollectionResponse">
+        <property name="customerTasks" type="CustomerTaskCollection"/>
+        <property name="isSuccessful" type="bool"/>
+        <property name="messages" type="Message[]" singular="message"/>
+    </transfer>
+
+    <transfer name="CustomerTaskResponse">
+        <property name="customerTask" type="CustomerTask"/>
+        <property name="isSuccessful" type="bool"/>
+        <property name="messages" type="Message[]" singular="message"/>
+    </transfer>
+
+    <transfer name="RestCustomerTaskAssignAttributes">
+        <property name="email" type="string"/>
+        <property name="task" type="RestCustomerTaskAttributes"/>
+    </transfer>
+
+    <transfer name="RestCustomerTaskTagAttributes">
+        <property name="tag" type="string"/>
+        <property name="task" type="RestCustomerTaskAttributes"/>
+    </transfer>
+
+    <transfer name="RestCustomerTaskAssignRequest">
+        <property name="idCustomerTask" type="int"/>
+        <property name="email" type="string"/>
+    </transfer>
+
+    <transfer name="RestCustomerTaskTagRequest">
+        <property name="idCustomerTask" type="int"/>
+        <property name="tag" type="string"/>
+    </transfer>
+
+</transfers>

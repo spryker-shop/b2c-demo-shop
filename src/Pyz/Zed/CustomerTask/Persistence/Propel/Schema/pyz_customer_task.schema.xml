@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<database xmlns="spryker:schema-01"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          name="zed"
+          xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd"
+          namespace="Orm\Zed\CustomerTask\Persistence" package="src.Orm.Zed.CustomerTask.Persistence">
+
+    <table name="pyz_customer_task" idMethod="native">
+        <column name="id_customer_task" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_creator" required="true" type="INTEGER"/>
+        <column name="fk_owner" required="false" type="INTEGER" default="NULL"/>
+        <column name="title" required="true" size="255" type="VARCHAR"/>
+        <column name="description" required="false" type="LONGVARCHAR"/>
+        <column name="due_date" required="false" type="DATE"/>
+        <column name="status" required="false" size="45" type="VARCHAR"/>
+
+        <foreign-key foreignTable="spy_customer" phpName="Creator">
+            <reference foreign="id_customer" local="fk_creator"/>
+        </foreign-key>
+
+        <foreign-key foreignTable="spy_customer" phpName="Owner">
+            <reference foreign="id_customer" local="fk_owner"/>
+        </foreign-key>
+
+        <behavior name="timestampable"/>
+    </table>
+
+    <table name="pyz_customer_task_tag" idMethod="native">
+        <column name="id_customer_task_tag" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="tag" required="true" size="255" type="VARCHAR"/>
+
+        <unique name="pyz_customer_task_tag-tag">
+            <unique-column name="tag"/>
+        </unique>
+    </table>
+
+    <table name="pyz_customer_task_tag_relation" idMethod="native">
+        <column name="fk_customer_task" type="integer" primaryKey="true"/>
+        <column name="fk_customer_task_tag" type="integer" primaryKey="true"/>
+
+        <foreign-key name="pyz_customer_task_tag_relation-fk_customer_task" foreignTable="pyz_customer_task" onDelete="CASCADE">
+            <reference local="fk_customer_task" foreign="id_customer_task"/>
+        </foreign-key>
+        <foreign-key name="pyz_customer_task_tag_relation-fk_customer_task_tag" foreignTable="pyz_customer_task_tag" onDelete="CASCADE">
+            <reference local="fk_customer_task_tag" foreign="id_customer_task_tag"/>
+        </foreign-key>
+    </table>
+
+</database>

@@ -7,6 +7,7 @@
 
 namespace Pyz\Zed\Console;
 
+use Pyz\Zed\CustomerTask\Communication\Console\CustomerTaskOverdueConsole;
 use Pyz\Zed\DataImport\DataImportConfig;
 use Pyz\Zed\Development\Communication\Console\AcceptanceCodeTestConsole;
 use Pyz\Zed\Development\Communication\Console\ApiCodeTestConsole;
@@ -359,6 +360,8 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
 
             new DeleteExpiredPushNotificationSubscriptionConsole(),
             new SendPushNotificationConsole(),
+
+            new CustomerTaskOverdueConsole(),
         ];
 
         $propelCommands = $container->getLocator()->propel()->facade()->getConsoleCommands();

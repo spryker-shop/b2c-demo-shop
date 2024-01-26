@@ -1,0 +1,857 @@
+{
+	"info": {
+		"_postman_id": "19e9fece-ef74-4bfb-9612-1cfa0831a118",
+		"name": "UserTask",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7145124"
+	},
+	"item": [
+		{
+			"name": "01 get collection unauthorized",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}customer-tasks",
+					"host": [
+						"{{baseUrl}}customer-tasks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "02 authorization",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"try{\r",
+							"    var data = pm.response.json();\r",
+							"    pm.collectionVariables.set(\"accessToken\", data.data.attributes.accessToken);\r",
+							"}catch(e){\r",
+							"    pm.test('Invaild response data', () => {throw new Error(e.message)});\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{   \r\n      \"data\": {     \r\n        \"type\": \"access-tokens\",     \r\n        \"attributes\": {\r\n            \"username\": \"{{userOne}}\",       \r\n            \"password\": \"{{password}}\"\r\n        }   \r\n    } \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}access-tokens",
+					"host": [
+						"{{baseUrl}}access-tokens"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "03 get collection",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}customer-tasks",
+					"host": [
+						"{{baseUrl}}customer-tasks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "04 get collection with pagination",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}customer-tasks?page=2",
+					"host": [
+						"{{baseUrl}}customer-tasks"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "05 get task by id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}customer-tasks/2",
+					"host": [
+						"{{baseUrl}}customer-tasks"
+					],
+					"path": [
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "06 create new task",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"try{\r",
+							"    var data = pm.response.json();\r",
+							"    pm.collectionVariables.set(\"currentIfCustomerTask\", data.data.attributes.idCustomerTask);\r",
+							"    pm.collectionVariables.set(\"currentFkCreator\", data.data.attributes.fkCreator);\r",
+							"    pm.collectionVariables.set(\"currentFkOwner\", data.data.attributes.fkOwner);\r",
+							"    pm.collectionVariables.set(\"currentTitle\", data.data.attributes.title);\r",
+							"    pm.collectionVariables.set(\"currentDescription\", data.data.attributes.description);\r",
+							"    pm.collectionVariables.set(\"currentDueDate\", data.data.attributes.dueDate);\r",
+							"    pm.collectionVariables.set(\"currentStatus\", data.data.attributes.status);\r",
+							"}catch(e){\r",
+							"    pm.test('Invaild response data', () => {throw new Error(e.message)});\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept-Language",
+						"value": "<string>"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"data\": {\r\n        \"type\": \"customer-tasks\",\r\n        \"attributes\": {\r\n            \"title\": \"New task for demo\",\r\n            \"description\": \"Task created for demo reasons\",\r\n            \"dueDate\": \"2025-01-01\",\r\n            \"status\": \"New\"\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}customer-tasks/",
+					"host": [
+						"{{baseUrl}}customer-tasks"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "06a create new task validation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"try{\r",
+							"    var data = pm.response.json();\r",
+							"    pm.collectionVariables.set(\"currentIfCustomerTask\", data.data.attributes.idCustomerTask);\r",
+							"    pm.collectionVariables.set(\"currentFkCreator\", data.data.attributes.fkCreator);\r",
+							"    pm.collectionVariables.set(\"currentFkOwner\", data.data.attributes.fkOwner);\r",
+							"    pm.collectionVariables.set(\"currentTitle\", data.data.attributes.title);\r",
+							"    pm.collectionVariables.set(\"currentDescription\", data.data.attributes.description);\r",
+							"    pm.collectionVariables.set(\"currentDueDate\", data.data.attributes.dueDate);\r",
+							"    pm.collectionVariables.set(\"currentStatus\", data.data.attributes.status);\r",
+							"}catch(e){\r",
+							"    pm.test('Invaild response data', () => {throw new Error(e.message)});\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept-Language",
+						"value": "<string>"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"data\": {\r\n        \"type\": \"customer-tasks\",\r\n        \"attributes\": {\r\n            \"title\": \"\",\r\n            \"description\": \"\",\r\n            \"dueDate\": \"test\",\r\n            \"status\": \"\"\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}customer-tasks/",
+					"host": [
+						"{{baseUrl}}customer-tasks"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "07 update task",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Accept-Language",
+						"value": "<string>"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Cookie",
+						"value": "XDEBUG_SESSION=PHPSTORM",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"data\": {\r\n        \"type\": \"customer-tasks\",\r\n        \"attributes\": {\r\n            \"fkCreator\": {{currentFkCreator}},\r\n            \"fkOwner\": {{currentFkOwner}},\r\n            \"title\": \"Updated task title\",\r\n            \"description\": \"Updated description\",\r\n            \"dueDate\": \"2023-01-01\",\r\n            \"status\": \"In Progress\"\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}customer-tasks/{{currentIfCustomerTask}}",
+					"host": [
+						"{{baseUrl}}customer-tasks"
+					],
+					"path": [
+						"{{currentIfCustomerTask}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "08 delete task",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept-Language",
+						"value": "<string>"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Cookie",
+						"value": "XDEBUG_SESSION=PHPSTORM",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}customer-tasks/{{currentIfCustomerTask}}",
+					"host": [
+						"{{baseUrl}}customer-tasks"
+					],
+					"path": [
+						"{{currentIfCustomerTask}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "09 assign",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Accept-Language",
+						"value": "<string>"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Cookie",
+						"value": "XDEBUG_SESSION=PHPSTORM",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"data\": {\r\n        \"type\": \"customer-task-assign\",\r\n        \"attributes\": {\r\n            \"email\": \"{{userTwo}}\"\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}customer-task-assign/{{currentIfCustomerTask}}",
+					"host": [
+						"{{baseUrl}}customer-task-assign"
+					],
+					"path": [
+						"{{currentIfCustomerTask}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "09a assign validation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Accept-Language",
+						"value": "<string>"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Cookie",
+						"value": "XDEBUG_SESSION=PHPSTORM",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"data\": {\r\n        \"type\": \"customer-task-assign\",\r\n        \"attributes\": {\r\n            \"email\": \"\"\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}customer-task-assign/{{currentIfCustomerTask}}",
+					"host": [
+						"{{baseUrl}}customer-task-assign"
+					],
+					"path": [
+						"{{currentIfCustomerTask}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "10 add tag",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Accept-Language",
+						"value": "<string>"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Cookie",
+						"value": "XDEBUG_SESSION=PHPSTORM",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"data\": {\r\n        \"type\": \"customer-task-tags\",\r\n        \"attributes\": {\r\n            \"tag\": \"new_tag\"\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}customer-task-tags/{{currentIfCustomerTask}}",
+					"host": [
+						"{{baseUrl}}customer-task-tags"
+					],
+					"path": [
+						"{{currentIfCustomerTask}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "10a add tag validation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Accept-Language",
+						"value": "<string>"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Cookie",
+						"value": "XDEBUG_SESSION=PHPSTORM",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"data\": {\r\n        \"type\": \"customer-task-tags\",\r\n        \"attributes\": {\r\n            \"tag\": \"\"\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}customer-task-tags/{{currentIfCustomerTask}}",
+					"host": [
+						"{{baseUrl}}customer-task-tags"
+					],
+					"path": [
+						"{{currentIfCustomerTask}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "11 get collection by title",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "XDEBUG_SESSION=PHPSTORM",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}customer-tasks?title=task",
+					"host": [
+						"{{baseUrl}}customer-tasks"
+					],
+					"query": [
+						{
+							"key": "title",
+							"value": "task"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "12 get collection by description",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "XDEBUG_SESSION=PHPSTORM",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}customer-tasks?description=task",
+					"host": [
+						"{{baseUrl}}customer-tasks"
+					],
+					"query": [
+						{
+							"key": "description",
+							"value": "task"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "13 get collection by tag",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "XDEBUG_SESSION=PHPSTORM",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}customer-tasks?tag=new_tag",
+					"host": [
+						"{{baseUrl}}customer-tasks"
+					],
+					"query": [
+						{
+							"key": "tag",
+							"value": "new_tag"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://glue.de.spryker.local/",
+			"type": "string"
+		},
+		{
+			"key": "accessToken",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "userOne",
+			"value": "spencor.hopkin@spryker.com",
+			"type": "string"
+		},
+		{
+			"key": "userTwo",
+			"value": "sonia@spryker.com",
+			"type": "string"
+		},
+		{
+			"key": "userThree",
+			"value": "maria.williams@spryker.com",
+			"type": "string"
+		},
+		{
+			"key": "password",
+			"value": "change123",
+			"type": "string"
+		},
+		{
+			"key": "currentIfCustomerTask",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "currentFkCreator",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "currentFkOwner",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "currentTitle",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "currentDescription",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "currentDueDate",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "currentStatus",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

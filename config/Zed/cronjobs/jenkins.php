@@ -181,6 +181,13 @@ $jobs[] = [
     'enable' => true,
 ];
 
+$jobs[] = [
+    'name' => 'customer-task-overdue-notification',
+    'command' => '$PHP_BIN vendor/bin/console customer-task:overdue-notification',
+    'schedule' => '0 0 * * *',
+    'enable' => true,
+];
+
 if (getenv('SPRYKER_CURRENT_REGION')) {
     foreach ($jobs as $job) {
         $job['region'] = getenv('SPRYKER_CURRENT_REGION');

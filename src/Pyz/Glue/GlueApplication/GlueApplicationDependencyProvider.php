@@ -7,6 +7,9 @@
 
 namespace Pyz\Glue\GlueApplication;
 
+use Pyz\Glue\CustomerTasksRestApi\Plugin\CustomerTaskAssignResourceRoutePlugin;
+use Pyz\Glue\CustomerTasksRestApi\Plugin\CustomerTasksResourceRoutePlugin;
+use Pyz\Glue\CustomerTasksRestApi\Plugin\CustomerTaskTagsResourceRoutePlugin;
 use Spryker\Glue\AgentAuthRestApi\Plugin\GlueApplication\AgentAccessTokenRestRequestValidatorPlugin;
 use Spryker\Glue\AgentAuthRestApi\Plugin\GlueApplication\AgentAccessTokenRestUserFinderPlugin;
 use Spryker\Glue\AgentAuthRestApi\Plugin\GlueApplication\AgentAccessTokensResourceRoutePlugin;
@@ -276,6 +279,9 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
             new MyAvailabilityNotificationsResourceRoutePlugin(),
             new ConfiguredBundlesResourceRoutePlugin(),
             new GuestConfiguredBundlesResourceRoutePlugin(),
+            new CustomerTasksResourceRoutePlugin(),
+            new CustomerTaskAssignResourceRoutePlugin(),
+            new CustomerTaskTagsResourceRoutePlugin(),
         ];
     }
 

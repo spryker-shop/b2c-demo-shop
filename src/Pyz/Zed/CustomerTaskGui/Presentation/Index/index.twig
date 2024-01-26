@@ -1,0 +1,17 @@
+{% extends '@Gui/layout/layout.twig' %}
+
+{% set widget_title = 'Customer Tasks' | trans %}
+
+{% block head_title widget_title %}
+{% block section_title widget_title %}
+
+{% block content %}
+    {% embed '@Gui/Partials/widget.twig' %}
+        {% block widget_title -%}
+            <h5>{{ 'Customer Tasks' | trans}}</h5>
+        {%- endblock %}
+        {% block widget_content %}
+            {{ tasks | raw }}
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

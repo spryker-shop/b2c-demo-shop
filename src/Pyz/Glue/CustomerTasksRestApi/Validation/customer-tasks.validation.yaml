@@ -1,0 +1,39 @@
+customer-tasks:
+    post:
+        title:
+            - NotBlank
+            - Length:
+                  min: 3
+                  max: 255
+        description:
+            - NotBlank
+        dueDate:
+            - NotBlank
+            - Date
+        status:
+            - NotBlank
+    patch:
+        fkCreator:
+            - NotBlank
+            - NotNull
+        title:
+            - NotBlank
+            - Length:
+                  min: 3
+                  max: 255
+        description:
+            - NotBlank
+        dueDate:
+            - NotBlank
+            - Date
+        status:
+            - NotBlank
+customer-task-assign:
+    patch:
+        email:
+            - NotBlank
+            - Email
+customer-task-tags:
+    patch:
+        tag:
+            - NotBlank
