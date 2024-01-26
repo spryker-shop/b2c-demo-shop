@@ -93,7 +93,7 @@ class CustomerTaskTable extends AbstractTable
     /**
      * @param \Spryker\Zed\Gui\Communication\Table\TableConfiguration $config
      *
-     * @return array<int, <string, string>>
+     * @return array<array<string, mixed>>
      */
     protected function prepareData(TableConfiguration $config): array
     {

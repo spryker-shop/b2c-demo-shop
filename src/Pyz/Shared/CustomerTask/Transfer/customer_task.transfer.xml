@@ -14,13 +14,6 @@
         <property name="tags" type="CustomerTaskTag[]" singular="tag"/>
     </transfer>
 
-    <transfer name="CustomerTask">
-        <property name="title" dataBuilderRule="sentence(2)"/>
-        <property name="description" dataBuilderRule="sentence(2)"/>
-        <property name="dueDate" dataBuilderRule="date('Y-m-d', 'tomorrow')"/>
-        <property name="status" dataBuilderRule="randomElement(['New', 'In Progress', 'To Do', 'Completed', 'Overdue'])"/>
-    </transfer>
-
     <transfer name="CustomerTaskTag">
         <property name="idCustomerTaskTag" type="int"/>
         <property name="tag" type="string"/>

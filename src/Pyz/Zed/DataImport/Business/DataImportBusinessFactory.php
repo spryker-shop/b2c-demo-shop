@@ -39,6 +39,8 @@ use Pyz\Zed\DataImport\Business\Model\Country\Repository\CountryRepository;
 use Pyz\Zed\DataImport\Business\Model\Country\Repository\CountryRepositoryInterface;
 use Pyz\Zed\DataImport\Business\Model\Currency\CurrencyWriterStep;
 use Pyz\Zed\DataImport\Business\Model\Customer\CustomerWriterStep;
+use Pyz\Zed\DataImport\Business\Model\CustomerTask\CreatorEmailToIdCustomerStep;
+use Pyz\Zed\DataImport\Business\Model\CustomerTask\CustomerTaskWriterStep;
 use Pyz\Zed\DataImport\Business\Model\DataImporterConditional;
 use Pyz\Zed\DataImport\Business\Model\DataImporterDataSetWriterAwareConditional;
 use Pyz\Zed\DataImport\Business\Model\DataSet\DataSetConditionInterface;
@@ -95,8 +97,6 @@ use Pyz\Zed\DataImport\Business\Model\ProductStock\ProductStockHydratorStep;
 use Pyz\Zed\DataImport\Business\Model\ProductStock\Writer\ProductStockPropelDataSetWriter;
 use Pyz\Zed\DataImport\Business\Model\Tax\TaxSetNameToIdTaxSetStep;
 use Pyz\Zed\DataImport\Business\Model\Tax\TaxWriterStep;
-use Pyz\Zed\DataImport\Business\Model\CustomerTask\CreatorEmailToIdCustomerStep;
-use Pyz\Zed\DataImport\Business\Model\CustomerTask\CustomerTaskWriterStep;
 use Pyz\Zed\DataImport\Communication\Plugin\CombinedProduct\ProductAbstract\CombinedProductAbstractPropelWriterPlugin;
 use Pyz\Zed\DataImport\Communication\Plugin\CombinedProduct\ProductAbstractStore\CombinedProductAbstractStorePropelWriterPlugin;
 use Pyz\Zed\DataImport\Communication\Plugin\CombinedProduct\ProductConcrete\CombinedProductConcretePropelWriterPlugin;
@@ -1823,7 +1823,7 @@ class DataImportBusinessFactory extends SprykerDataImportBusinessFactory
     /**
      * @param \Generated\Shared\Transfer\DataImportConfigurationActionTransfer $dataImportConfigurationActionTransfer
      *
-     * @return \Spryker\Zed\DataImport\Business\Model\DataImporterInterface|\Spryker\Zed\DataImport\Business\Model\DataSet\DataSetStepBrokerAwareInterface
+     * @return \Spryker\Zed\DataImport\Business\Model\DataImporterInterface
      */
     private function createCustomerTaskImporter(
         DataImportConfigurationActionTransfer $dataImportConfigurationActionTransfer,

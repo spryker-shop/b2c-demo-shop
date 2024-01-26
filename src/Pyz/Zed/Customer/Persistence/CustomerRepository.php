@@ -12,6 +12,9 @@ use Generated\Shared\Transfer\CustomerTransfer;
 use Orm\Zed\Customer\Persistence\SpyCustomerQuery;
 use Spryker\Zed\Customer\Persistence\CustomerRepository as SprykerCustomerRepository;
 
+/**
+ * @method \Spryker\Zed\Customer\Persistence\CustomerPersistenceFactory getFactory()
+ */
 class CustomerRepository extends SprykerCustomerRepository
 {
     /**
@@ -22,7 +25,7 @@ class CustomerRepository extends SprykerCustomerRepository
     public function findCustomerByCriteria(CustomerCriteriaTransfer $customerCriteriaTransfer): ?CustomerTransfer
     {
         $customerQuery = $this->getFactory()->createSpyCustomerQuery();
-        $customerQuery= $this->applyFilters($customerQuery, $customerCriteriaTransfer);
+        $customerQuery = $this->applyFilters($customerQuery, $customerCriteriaTransfer);
         $customerEntity = $customerQuery->findOne();
 
         if ($customerEntity === null) {
@@ -42,13 +45,13 @@ class CustomerRepository extends SprykerCustomerRepository
      */
     private function applyFilters(
         SpyCustomerQuery $customerQuery,
-        CustomerCriteriaTransfer $customerCriteriaTransfer
+        CustomerCriteriaTransfer $customerCriteriaTransfer,
     ): SpyCustomerQuery {
         if ($customerCriteriaTransfer->getCustomerReference()) {
             $customerQuery->filterByCustomerReference($customerCriteriaTransfer->getCustomerReference());
         }
 
-        if ($customerCriteriaTransfer->getEmail() ) {
+        if ($customerCriteriaTransfer->getEmail()) {
             $customerQuery->filterByEmail($customerCriteriaTransfer->getEmail());
         }
 

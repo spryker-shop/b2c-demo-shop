@@ -24,11 +24,6 @@ class CustomerTaskRepository extends AbstractRepository implements CustomerTaskR
     /**
      * @var int
      */
-    private const DEFAULT_PAGINATION_PAGE = 1;
-
-    /**
-     * @var int
-     */
     private const DEFAULT_PAGINATION_MAX_PER_PAGE = 10;
 
     /**
@@ -46,7 +41,7 @@ class CustomerTaskRepository extends AbstractRepository implements CustomerTaskR
             $customerTaskCriteriaTransfer->getPagination(),
         );
 
-        return $this->getFactory()->creatCustomerTaskMapper()->mapCustomerTaskEntitiesToCustomerTaskCollectionTransfer(
+        return $this->getFactory()->createCustomerTaskMapper()->mapCustomerTaskEntitiesToCustomerTaskCollectionTransfer(
             $customerTaskQuery->find(),
             $customerTaskCollectionTransfer,
         );
@@ -68,7 +63,7 @@ class CustomerTaskRepository extends AbstractRepository implements CustomerTaskR
             return null;
         }
 
-        return $this->getFactory()->creatCustomerTaskMapper()->mapCustomerTaskEntityToCustomerTaskTransfer(
+        return $this->getFactory()->createCustomerTaskMapper()->mapCustomerTaskEntityToCustomerTaskTransfer(
             $customerTaskEntity,
             new CustomerTaskTransfer(),
         );

@@ -16,7 +16,7 @@ use Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface;
 class CreatorEmailToIdCustomerStep implements DataImportStepInterface
 {
     /**
-     * @var array
+     * @var array<string, int>
      */
     private array $customerIds = [];
 

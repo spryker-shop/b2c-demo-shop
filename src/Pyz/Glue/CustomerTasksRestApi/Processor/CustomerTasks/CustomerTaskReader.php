@@ -38,8 +38,6 @@ class CustomerTaskReader implements CustomerTaskReaderInterface
     private const REQUEST_PARAMETER_TAG = 'tag';
 
     /**
-     * @uses \Pyz\Zed\CustomerTask\Persistence\CustomerTaskRepository::DEFAULT_PAGINATION_PAGE
-     *
      * @var int
      */
     private const DEFAULT_PAGINATION_PAGE = 1;

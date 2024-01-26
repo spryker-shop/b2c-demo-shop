@@ -31,7 +31,7 @@ class CustomerTaskPersistenceFactory extends AbstractPersistenceFactory
     /**
      * @return \Pyz\Zed\CustomerTask\Persistence\Propel\Mapper\CustomerTaskMapper
      */
-    public function creatCustomerTaskMapper(): CustomerTaskMapper
+    public function createCustomerTaskMapper(): CustomerTaskMapper
     {
         return new CustomerTaskMapper();
     }

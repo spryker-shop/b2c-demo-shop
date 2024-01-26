@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class IndexController extends AbstractController
 {
     /**
-     * @return array
+     * @return array<string, mixed>
      */
     public function indexAction(): array
     {

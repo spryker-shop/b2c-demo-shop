@@ -15,7 +15,6 @@ use Generated\Shared\Transfer\CustomerTaskTransfer;
 use Generated\Shared\Transfer\MessageTransfer;
 use Generated\Shared\Transfer\RestCustomerTaskAssignRequestTransfer;
 use Generated\Shared\Transfer\RestCustomerTaskTagRequestTransfer;
-use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use Spryker\Zed\Kernel\Communication\Controller\AbstractGatewayController;
 
 /**
@@ -44,7 +43,7 @@ class GatewayController extends AbstractGatewayController
             $customerTaskCollectionResponseTransfer->setCustomerTasks($customerTaskCollectionTransfer)
                 ->setIsSuccessful(true);
         } catch (Exception $exception) {
-            $this->handleErrorMessage($customerTaskCollectionResponseTransfer, $exception);
+            return $this->handleErrorMessageForCollection($customerTaskCollectionResponseTransfer, $exception);
         }
 
         return $customerTaskCollectionResponseTransfer;
@@ -73,7 +72,7 @@ class GatewayController extends AbstractGatewayController
             $customerTaskResponseTransfer->setCustomerTask($customerTaskTransfer)
                 ->setIsSuccessful(true);
         } catch (Exception $exception) {
-            $this->handleErrorMessage($customerTaskResponseTransfer, $exception);
+            return $this->handleErrorMessage($customerTaskResponseTransfer, $exception);
         }
 
         return $customerTaskResponseTransfer;
@@ -96,7 +95,7 @@ class GatewayController extends AbstractGatewayController
             $customerTaskResponseTransfer->setCustomerTask($customerTaskTransfer)
                 ->setIsSuccessful(true);
         } catch (Exception $exception) {
-            $this->handleErrorMessage($customerTaskResponseTransfer, $exception);
+            return $this->handleErrorMessage($customerTaskResponseTransfer, $exception);
         }
 
         return $customerTaskResponseTransfer;
@@ -119,7 +118,7 @@ class GatewayController extends AbstractGatewayController
             $customerTaskResponseTransfer->setCustomerTask($customerTaskTransfer)
                 ->setIsSuccessful(true);
         } catch (Exception $exception) {
-            $this->handleErrorMessage($customerTaskResponseTransfer, $exception);
+            return $this->handleErrorMessage($customerTaskResponseTransfer, $exception);
         }
 
         return $customerTaskResponseTransfer;
@@ -141,7 +140,7 @@ class GatewayController extends AbstractGatewayController
 
             $customerTaskResponseTransfer->setIsSuccessful($result);
         } catch (Exception $exception) {
-            $this->handleErrorMessage($customerTaskResponseTransfer, $exception);
+            return $this->handleErrorMessage($customerTaskResponseTransfer, $exception);
         }
 
         return $customerTaskResponseTransfer;
@@ -167,7 +166,7 @@ class GatewayController extends AbstractGatewayController
             $customerTaskResponseTransfer->setCustomerTask($customerTaskTransfer)
                 ->setIsSuccessful(true);
         } catch (Exception $exception) {
-            $this->handleErrorMessage($customerTaskResponseTransfer, $exception);
+            return $this->handleErrorMessage($customerTaskResponseTransfer, $exception);
         }
 
         return $customerTaskResponseTransfer;
@@ -193,20 +192,38 @@ class GatewayController extends AbstractGatewayController
             $customerTaskResponseTransfer->setCustomerTask($customerTaskTransfer)
                 ->setIsSuccessful(true);
         } catch (Exception $exception) {
-            $this->handleErrorMessage($customerTaskResponseTransfer, $exception);
+            return $this->handleErrorMessage($customerTaskResponseTransfer, $exception);
         }
 
         return $customerTaskResponseTransfer;
     }
 
     /**
-     * @param \Generated\Shared\Transfer\CustomerTaskCollectionResponseTransfer|\Generated\Shared\Transfer\CustomerTaskResponseTransfer|\Spryker\Shared\Kernel\Transfer\AbstractTransfer $responseTransfer
+     * @param \Generated\Shared\Transfer\CustomerTaskCollectionResponseTransfer $responseTransfer
      * @param \Exception $exception
      *
-     * @return \Spryker\Shared\Kernel\Transfer\AbstractTransfer
+     * @return \Generated\Shared\Transfer\CustomerTaskCollectionResponseTransfer
      */
-    private function handleErrorMessage(AbstractTransfer $responseTransfer, Exception $exception): AbstractTransfer
-    {
+    private function handleErrorMessageForCollection(
+        CustomerTaskCollectionResponseTransfer $responseTransfer,
+        Exception $exception,
+    ): CustomerTaskCollectionResponseTransfer {
+        $messageTransfer = (new MessageTransfer())->setMessage($exception->getMessage());
+        $responseTransfer->addMessage($messageTransfer);
+
+        return $responseTransfer;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\CustomerTaskResponseTransfer $responseTransfer
+     * @param \Exception $exception
+     *
+     * @return \Generated\Shared\Transfer\CustomerTaskResponseTransfer
+     */
+    private function handleErrorMessage(
+        CustomerTaskResponseTransfer $responseTransfer,
+        Exception $exception,
+    ): CustomerTaskResponseTransfer {
         $messageTransfer = (new MessageTransfer())->setMessage($exception->getMessage());
         $responseTransfer->addMessage($messageTransfer);
 

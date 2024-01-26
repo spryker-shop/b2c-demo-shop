@@ -30,7 +30,7 @@ class CustomerTaskEntityManager extends AbstractEntityManager implements Custome
         $customerTaskEntity->save();
 
         return $this->getFactory()
-            ->creatCustomerTaskMapper()
+            ->createCustomerTaskMapper()
             ->mapCustomerTaskEntityToCustomerTaskTransfer(
                 $customerTaskEntity,
                 $customerTaskTransfer,
@@ -55,7 +55,7 @@ class CustomerTaskEntityManager extends AbstractEntityManager implements Custome
         $customerTaskEntity->save();
 
         return $this->getFactory()
-            ->creatCustomerTaskMapper()
+            ->createCustomerTaskMapper()
             ->mapCustomerTaskEntityToCustomerTaskTransfer(
                 $customerTaskEntity,
                 $customerTaskTransfer,
@@ -97,7 +97,7 @@ class CustomerTaskEntityManager extends AbstractEntityManager implements Custome
         $customerTaskTagRelationEntity->save();
 
         return $this->getFactory()
-            ->creatCustomerTaskMapper()
+            ->createCustomerTaskMapper()
             ->mapCustomerTaskTagEntityToCustomerTaskTagTransfer(
                 $customerTaskTagEntity,
                 new CustomerTaskTagTransfer(),
