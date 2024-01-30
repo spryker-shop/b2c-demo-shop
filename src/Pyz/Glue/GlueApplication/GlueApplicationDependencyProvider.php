@@ -153,7 +153,6 @@ use Spryker\Glue\ProductPricesRestApi\Plugin\GlueApplication\AbstractProductPric
 use Spryker\Glue\ProductPricesRestApi\Plugin\GlueApplication\ConcreteProductPricesByResourceIdResourceRelationshipPlugin;
 use Spryker\Glue\ProductPricesRestApi\Plugin\GlueApplication\CurrencyParameterValidatorPlugin;
 use Spryker\Glue\ProductPricesRestApi\Plugin\GlueApplication\PriceModeParameterValidatorPlugin;
-use Spryker\Glue\ProductPricesRestApi\Plugin\GlueApplication\SetCurrencyBeforeActionPlugin;
 use Spryker\Glue\ProductPricesRestApi\Plugin\GlueApplication\SetPriceModeBeforeActionPlugin;
 use Spryker\Glue\ProductReviewsRestApi\Plugin\GlueApplication\AbstractProductsProductReviewsResourceRoutePlugin;
 use Spryker\Glue\ProductReviewsRestApi\Plugin\GlueApplication\ProductReviewsRelationshipByProductAbstractSkuPlugin;
@@ -403,7 +402,6 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
         return [
             new SetAnonymousCustomerIdControllerBeforeActionPlugin(),
             new SetCustomerBeforeActionPlugin(),
-            new SetCurrencyBeforeActionPlugin(),
             new SetPriceModeBeforeActionPlugin(),
         ];
     }

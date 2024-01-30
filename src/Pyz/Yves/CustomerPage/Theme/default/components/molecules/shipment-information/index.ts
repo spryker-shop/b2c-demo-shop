@@ -1,0 +1,1 @@
+import './shipment-information.scss';

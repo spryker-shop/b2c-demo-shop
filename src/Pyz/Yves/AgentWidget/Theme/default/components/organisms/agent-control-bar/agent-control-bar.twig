@@ -1,74 +1,63 @@
 {% extends organism('agent-control-bar', '@SprykerShop:AgentWidget') %}
 
-{% block body %}
-    <div class="{{ config.name }}__header">
-        <div class="container">
-            <div class="grid grid--middle grid--gap {{ config.name }}__container">
-                <div class="col col--sm-12 col--md-9">
-                    <div class="grid grid--middle">
-                        {% if is_granted('ROLE_PREVIOUS_ADMIN') %}
-                            <div class="col">
-                                {% set customer = data.customer %}
+{% define data = {
+    locale: app.locale | slice(0, 2),
+} %}
 
-                                {% include molecule('agent-control-item', 'AgentWidget') with {
+{% block body %}
+    {% set isAgentControl = is_granted('ROLE_PREVIOUS_ADMIN') %}
+    {% set customerSectionClassNames = config.name ~ '__customer ' ~ (not isAgentControl ? config.name ~ '__customer--search') %}
+    {% set agentSectionClassNames = config.name ~ '__agent ' ~ (not isAgentControl ? config.name ~ '__agent--search')  %}
+    {% set customerTitle = 'agent.control_bar.customer_name' | trans %}
+
+    <div class="container">
+        <div class="{{ config.name }}__content">
+            <div class="{{ customerSectionClassNames }} {{ config.name }}__col">
+                {% if isAgentControl %}
+                    {% include molecule('agent-control-item', 'AgentWidget') with {
+                        data: {
+                            title: customerTitle,
+                            buttonLink: '/' ~ data.locale ~ '?_switch_user=_exit',
+                            buttonTitle: 'agent.control_bar.logout_as_customer' | trans,
+                            firstName: data.customer.firstName,
+                            lastName: data.customer.lastName,
+                            type: 'customer',
+                        },
+                    } only %}
+                {% else %}
+                    <div class="{{ config.name }}__title">{{ customerTitle }}</div>
+                    <form method="GET" action="/{{ data.locale }}">
+                        <div class="grid grid--middle grid--nowrap">
+                            <div class="col col--expand">
+                                {% include molecule('autocomplete-form') with {
+                                    modifiers: ['small'],
                                     data: {
-                                        title: 'agent.control_bar.customer_name' | trans,
-                                        buttonLink: '/?_switch_user=_exit',
-                                        buttonName: 'agent.control_bar.logout_as_customer' | trans,
-                                        firstName: customer.firstName,
-                                        lastName: customer.lastName,
+                                        id: 'agent',
+                                        suggestionsUrl: path('agent-widget/customer-autocomplete'),
+                                        name: '_switch_user',
+                                        showCleanButton: true,
+                                    },
+                                    attributes: {
+                                        'suggested-item-class-name': 'js-customer-list__container-item',
                                     },
                                 } only %}
                             </div>
-                        {% endif %}
-
-                        {% if not is_granted('ROLE_PREVIOUS_ADMIN') %}
-                            <form class="col col--sm-12 col--lg-7" method="GET" action="/">
-                                <div class="grid grid--gap grid--middle spacing-bottom">
-                                    <div class="col col--expand">
-                                        {% include molecule('autocomplete-form') with {
-                                            modifiers: ['overlap'],
-                                            data: {
-                                                id: 'agent',
-                                                suggestionsUrl: path('agent-widget/customer-autocomplete'),
-                                                name: '_switch_user',
-                                                showCleanButton: true,
-                                            },
-                                            attributes: {
-                                                'suggested-item-class-name': 'js-customer-list__suggestions-item',
-                                            },
-                                        } only %}
-                                    </div>
-
-                                    <div class="col">
-                                        <button class="button button--agent button--success button--big">
-                                            {{ 'agent.confirm_user_selection' | trans }}
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                        {% endif %}
-                        <div class="col">
-                            {% widget 'QuoteRequestAgentOverviewWidget' only %}
-                                {% block activeRequestActions %}{% endblock %}
-                                {% block activeRequest %}{% endblock %}
-                            {% endwidget %}
+                            <div class="col">
+                                <button class="button button--success button--agent">
+                                    {{- 'agent.confirm_user_selection' | trans -}}
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col col--sm-12 col--md-3 text-right spacing-left spacing-left--inner">
-                    {% set agent = data.agent %}
-
-                    {% include molecule('agent-control-item', 'AgentWidget') with {
-                        data: {
-                            title: 'agent.control_bar.username' | trans,
-                            buttonLink: path('agent_logout'),
-                            buttonName: 'agent.control_bar.logout' | trans,
-                            firstName: agent.firstName,
-                            lastName: agent.lastName,
-                        },
-                    } only %}
-                </div>
+                    </form>
+                {% endif %}
+            </div>
+            <div class="{{ agentSectionClassNames }} {{ config.name }}__col">
+                {% include molecule('agent-control-item', 'AgentWidget') with {
+                    data: {
+                        firstName: data.agent.firstName,
+                        lastName: data.agent.lastName,
+                    },
+                } only %}
             </div>
         </div>
     </div>

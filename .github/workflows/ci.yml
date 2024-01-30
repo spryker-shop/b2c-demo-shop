@@ -6,8 +6,6 @@ on:
         branches:
             - master
     workflow_dispatch:
-    schedule:
-        - cron: "0 0 * * *"
 
 concurrency:
     group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
@@ -535,7 +533,7 @@ jobs:
                   APPLICATION_STORE=AT docker/sdk console queue:worker:start --stop-when-empty
             - name: Run Tests
               run: |
-                  docker/sdk exec robot-framework robot -v env:api_b2c -v docker:True --exclude skip-due-to-issueORskip-due-to-refactoring -d results -s tests.api.b2c .
+                  docker/sdk exec robot-framework robot -v env:api_b2c -v docker:True --exclude skip-due-to-issueORskip-due-to-refactoring -d results -s robotframework.tests.api.b2c .
             - name: Upload artifacts
               if: always()
               run: |
@@ -581,7 +579,7 @@ jobs:
                   APPLICATION_STORE=AT docker/sdk console queue:worker:start --stop-when-empty
             - name: Run Tests
               run: |
-                  docker/sdk exec robot-framework robot -v env:api_b2c -v db_engine:psycopg2 -v docker:True --exclude skip-due-to-issueORskip-due-to-refactoring -d results -s tests.api.b2c .
+                  docker/sdk exec robot-framework robot -v env:api_b2c -v db_engine:psycopg2 -v docker:True --exclude skip-due-to-issueORskip-due-to-refactoring -d results -s robotframework.tests.api.b2c .
             - name: Upload artifacts
               if: always()
               run: |
