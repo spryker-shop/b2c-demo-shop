@@ -168,7 +168,7 @@ $config[TwigConstants::YVES_TWIG_OPTIONS] = [
         sprintf(
             '%s/data/%s/cache/Yves/twig',
             APPLICATION_ROOT_DIR,
-            $CURRENT_STORE,
+            $CURRENT_CACHE_KEY,
         ),
         FilesystemCache::FORCE_BYTECODE_INVALIDATION,
     ),
