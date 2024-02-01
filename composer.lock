@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "653e9c9b5a9e6d04858b3c1b43bd2cec",
+    "content-hash": "2edf52813b218ab6c50861d5631fe165",
     "packages": [
         {
             "name": "async-aws/core",
@@ -6958,7 +6958,7 @@
         },
         {
             "name": "spryker-feature/warehouse-picking",
-            "version": "202311.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker-feature/warehouse-picking.git",
@@ -6978,6 +6978,7 @@
             "suggest": {
                 "spryker-feature/spryker-core": "Recommended feature dependency."
             },
+            "default-branch": true,
             "type": "metapackage",
             "extra": {
                 "branch-alias": {
@@ -6996,31 +6997,33 @@
         },
         {
             "name": "spryker-feature/warehouse-user-management",
-            "version": "202311.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker-feature/warehouse-user-management.git",
-                "reference": "007ddd26e65fcd83dfd3b4fca955eff4eda0c3d2"
+                "reference": "6ace319312728a88fe6bc5460e25e4b825ad35f1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker-feature/warehouse-user-management/zipball/007ddd26e65fcd83dfd3b4fca955eff4eda0c3d2",
-                "reference": "007ddd26e65fcd83dfd3b4fca955eff4eda0c3d2",
+                "url": "https://api.github.com/repos/spryker-feature/warehouse-user-management/zipball/6ace319312728a88fe6bc5460e25e4b825ad35f1",
+                "reference": "6ace319312728a88fe6bc5460e25e4b825ad35f1",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.0",
                 "spryker/oauth-warehouse": "^1.0.0",
+                "spryker/oauth-warehouse-user": "^1.0.0",
                 "spryker/warehouse-user": "^1.1.0",
                 "spryker/warehouse-user-gui": "^1.1.0"
             },
             "suggest": {
                 "spryker-feature/spryker-core-back-office": "Recommended feature dependency."
             },
+            "default-branch": true,
             "type": "metapackage",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "202311.x-dev"
+                    "dev-master": "202403.x-dev"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -7029,9 +7032,9 @@
             ],
             "description": "Warehouse User Management [feature]",
             "support": {
-                "source": "https://github.com/spryker-feature/warehouse-user-management/tree/202311.0"
+                "source": "https://github.com/spryker-feature/warehouse-user-management/tree/master"
             },
-            "time": "2023-11-21T13:27:30+00:00"
+            "time": "2024-02-01T14:30:36+00:00"
         },
         {
             "name": "spryker-feature/wishlist",
@@ -29951,6 +29954,54 @@
             "description": "OauthWarehouse module",
             "support": {
                 "source": "https://github.com/spryker/oauth-warehouse/tree/1.1.0"
+            },
+            "time": "2024-02-01T12:59:57+00:00"
+        },
+        {
+            "name": "spryker/oauth-warehouse-user",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/oauth-warehouse-user.git",
+                "reference": "61f067faaf3321ed7614f46ddfdd622416803990"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/oauth-warehouse-user/zipball/61f067faaf3321ed7614f46ddfdd622416803990",
+                "reference": "61f067faaf3321ed7614f46ddfdd622416803990",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.1",
+                "spryker/kernel": "^3.30.0",
+                "spryker/oauth-user-connector-extension": "^1.0.0",
+                "spryker/transfer": "^3.27.0",
+                "spryker/user": "^3.16.0",
+                "spryker/warehouse-user": "^1.0.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/propel": "*",
+                "spryker/testify": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "OauthWarehouseUser module",
+            "support": {
+                "source": "https://github.com/spryker/oauth-warehouse-user/tree/1.0.0"
             },
             "time": "2024-02-01T12:59:57+00:00"
         },
@@ -60916,6 +60967,18 @@
             "version": "9999999-dev",
             "alias": "202403.0",
             "alias_normalized": "202403.0"
+        },
+        {
+            "package": "spryker-feature/warehouse-picking",
+            "version": "9999999-dev",
+            "alias": "202403.0",
+            "alias_normalized": "202403.0"
+        },
+        {
+            "package": "spryker-feature/warehouse-user-management",
+            "version": "9999999-dev",
+            "alias": "202403.0",
+            "alias_normalized": "202403.0"
         }
     ],
     "minimum-stability": "dev",
@@ -60925,6 +60988,8 @@
         "spryker-feature/shipment": 20,
         "spryker-feature/spryker-core": 20,
         "spryker-feature/spryker-core-back-office": 20,
+        "spryker-feature/warehouse-picking": 20,
+        "spryker-feature/warehouse-user-management": 20,
         "spryker/docker-chromedriver": 20,
         "spryker/robotframework-suite-tests": 20
     },
