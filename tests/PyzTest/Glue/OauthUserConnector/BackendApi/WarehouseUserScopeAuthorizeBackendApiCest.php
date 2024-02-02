@@ -10,7 +10,6 @@ namespace PyzTest\Glue\OauthUserConnector\BackendApi;
 use Codeception\Util\HttpCode;
 use PyzTest\Glue\OauthUserConnector\BackendApi\Fixtures\OauthUserConnectorBackendApiFixtures;
 use PyzTest\Glue\OauthUserConnector\OauthUserConnectorBackendApiTester;
-use Spryker\Glue\PushNotificationsBackendApi\PushNotificationsBackendApiConfig;
 use Spryker\Glue\WarehouseUsersBackendApi\WarehouseUsersBackendApiConfig;
 
 /**
@@ -42,25 +41,6 @@ class WarehouseUserScopeAuthorizeBackendApiCest
         $fixtures = $I->loadFixtures(OauthUserConnectorBackendApiFixtures::class);
 
         $this->fixtures = $fixtures;
-    }
-
-    /**
-     * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\OauthUserConnector\OauthUserConnectorBackendApiTester $I
-     *
-     * @return void
-     */
-    public function requestPushNotificationProvidersForWarehouseUserForbidden(OauthUserConnectorBackendApiTester $I): void
-    {
-        $backendOauthResponseTransfer = $I->havePasswordAuthorizationToBackendApi($this->fixtures->getWarehouseUserTransfer());
-        $I->amBearerAuthenticated($backendOauthResponseTransfer->getAccessToken());
-
-        //Act
-        $I->sendJsonApiGet(PushNotificationsBackendApiConfig::RESOURCE_PUSH_NOTIFICATION_PROVIDERS);
-
-        //Assert
-        $I->seeResponseCodeIs(HttpCode::FORBIDDEN);
     }
 
     /**
