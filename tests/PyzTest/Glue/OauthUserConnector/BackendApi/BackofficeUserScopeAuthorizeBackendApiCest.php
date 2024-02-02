@@ -50,7 +50,7 @@ class BackofficeUserScopeAuthorizeBackendApiCest
      *
      * @return void
      */
-    public function requestServicePointsForBackofficeUserAllowed(OauthUserConnectorBackendApiTester $I): void
+    public function requestPushNotificationProvidersForBackofficeUserAllowed(OauthUserConnectorBackendApiTester $I): void
     {
         $backendOauthResponseTransfer = $I->havePasswordAuthorizationToBackendApi($this->fixtures->getBackofficeUserTransfer());
         $I->amBearerAuthenticated($backendOauthResponseTransfer->getAccessToken());

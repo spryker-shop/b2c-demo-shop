@@ -51,7 +51,7 @@ class WarehouseUserScopeAuthorizeBackendApiCest
      *
      * @return void
      */
-    public function requestServicePointsForWarehouseUserForbidden(OauthUserConnectorBackendApiTester $I): void
+    public function requestPushNotificationProvidersForWarehouseUserForbidden(OauthUserConnectorBackendApiTester $I): void
     {
         $backendOauthResponseTransfer = $I->havePasswordAuthorizationToBackendApi($this->fixtures->getWarehouseUserTransfer());
         $I->amBearerAuthenticated($backendOauthResponseTransfer->getAccessToken());
