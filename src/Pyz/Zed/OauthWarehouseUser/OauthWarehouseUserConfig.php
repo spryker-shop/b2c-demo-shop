@@ -52,6 +52,9 @@ class OauthWarehouseUserConfig extends SprykerOauthWarehouseUserConfig
             '/push-notification-subscriptions' => [
                 'isRegularExpression' => false,
             ],
+            '/\/push-notification-providers.*/' => [
+                'isRegularExpression' => true,
+            ],
             '/warehouse-tokens' => [
                 'isRegularExpression' => false,
                 'methods' => [
