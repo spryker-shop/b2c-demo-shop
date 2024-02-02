@@ -12,21 +12,21 @@ use Spryker\Zed\OauthWarehouse\OauthWarehouseConfig as SprykerOauthWarehouseConf
 class OauthWarehouseConfig extends SprykerOauthWarehouseConfig
 {
     /**
-     * @var string
-     */
-    public const SCOPE_WAREHOUSE_USER = 'warehouse-user';
-
-    /**
-     * @var string
-     */
-    public const SCOPE_BACK_OFFICE_USER = 'back-office-user';
-
-    /**
-     * Specification:
-     * - Returns a list of user scopes that are allowed to be authorized.
-     * - If empty, all user scopes are allowed.
+     * @uses \Spryker\Zed\OauthUserConnector\OauthUserConnectorConfig::SCOPE_BACK_OFFICE_USER
      *
-     * @api
+     * @var string
+     */
+    protected const SCOPE_BACK_OFFICE_USER = 'back-office-user';
+
+    /**
+     * @uses \Spryker\Zed\OauthWarehouseUser\OauthWarehouseUserConfig::SCOPE_WAREHOUSE_USER
+     *
+     * @var string
+     */
+    protected const SCOPE_WAREHOUSE_USER = 'warehouse-user';
+
+    /**
+     * {@inheritDoc}
      *
      * @return list<string>
      */
