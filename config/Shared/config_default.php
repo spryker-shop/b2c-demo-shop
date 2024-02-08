@@ -1,30 +1,30 @@
 <?php
 
+use Generated\Shared\Transfer\AddPaymentMethodTransfer;
 use Generated\Shared\Transfer\AddReviewsTransfer;
 use Generated\Shared\Transfer\AssetAddedTransfer;
 use Generated\Shared\Transfer\AssetDeletedTransfer;
 use Generated\Shared\Transfer\AssetUpdatedTransfer;
+use Generated\Shared\Transfer\CancelPaymentTransfer;
+use Generated\Shared\Transfer\CapturePaymentTransfer;
 use Generated\Shared\Transfer\ConfigureTaxAppTransfer;
+use Generated\Shared\Transfer\DeletePaymentMethodTransfer;
 use Generated\Shared\Transfer\DeleteTaxAppTransfer;
 use Generated\Shared\Transfer\InitializeProductExportTransfer;
 use Generated\Shared\Transfer\OrderStatusChangedTransfer;
-use Generated\Shared\Transfer\PaymentCancelReservationFailedTransfer;
-use Generated\Shared\Transfer\PaymentCancelReservationRequestedTransfer;
-use Generated\Shared\Transfer\PaymentConfirmationFailedTransfer;
-use Generated\Shared\Transfer\PaymentConfirmationRequestedTransfer;
-use Generated\Shared\Transfer\PaymentConfirmedTransfer;
-use Generated\Shared\Transfer\PaymentMethodAddedTransfer;
-use Generated\Shared\Transfer\PaymentMethodDeletedTransfer;
-use Generated\Shared\Transfer\PaymentPreauthorizationFailedTransfer;
-use Generated\Shared\Transfer\PaymentPreauthorizedTransfer;
+use Generated\Shared\Transfer\PaymentAuthorizationFailedTransfer;
+use Generated\Shared\Transfer\PaymentAuthorizedTransfer;
+use Generated\Shared\Transfer\PaymentCanceledTransfer;
+use Generated\Shared\Transfer\PaymentCancellationFailedTransfer;
+use Generated\Shared\Transfer\PaymentCapturedTransfer;
+use Generated\Shared\Transfer\PaymentCaptureFailedTransfer;
 use Generated\Shared\Transfer\PaymentRefundedTransfer;
 use Generated\Shared\Transfer\PaymentRefundFailedTransfer;
-use Generated\Shared\Transfer\PaymentRefundRequestedTransfer;
-use Generated\Shared\Transfer\PaymentReservationCanceledTransfer;
 use Generated\Shared\Transfer\ProductCreatedTransfer;
 use Generated\Shared\Transfer\ProductDeletedTransfer;
 use Generated\Shared\Transfer\ProductExportedTransfer;
 use Generated\Shared\Transfer\ProductUpdatedTransfer;
+use Generated\Shared\Transfer\RefundPaymentTransfer;
 use Generated\Shared\Transfer\SearchEndpointAvailableTransfer;
 use Generated\Shared\Transfer\SearchEndpointRemovedTransfer;
 use Generated\Shared\Transfer\SubmitPaymentTaxInvoiceTransfer;
@@ -710,19 +710,19 @@ $config[SearchHttpConstants::TENANT_IDENTIFIER]
 
 $config[MessageBrokerConstants::MESSAGE_TO_CHANNEL_MAP] =
 $config[MessageBrokerAwsConstants::MESSAGE_TO_CHANNEL_MAP] = [
-    PaymentMethodAddedTransfer::class => 'payment-method-commands',
-    PaymentMethodDeletedTransfer::class => 'payment-method-commands',
-    PaymentCancelReservationRequestedTransfer::class => 'payment-commands',
-    PaymentConfirmationRequestedTransfer::class => 'payment-commands',
-    PaymentRefundRequestedTransfer::class => 'payment-commands',
-    PaymentPreauthorizedTransfer::class => 'payment-events',
-    PaymentPreauthorizationFailedTransfer::class => 'payment-events',
-    PaymentConfirmedTransfer::class => 'payment-events',
-    PaymentConfirmationFailedTransfer::class => 'payment-events',
+    AddPaymentMethodTransfer::class => 'payment-method-commands',
+    DeletePaymentMethodTransfer::class => 'payment-method-commands',
+    CancelPaymentTransfer::class => 'payment-commands',
+    CapturePaymentTransfer::class => 'payment-commands',
+    RefundPaymentTransfer::class => 'payment-commands',
+    PaymentAuthorizedTransfer::class => 'payment-events',
+    PaymentAuthorizationFailedTransfer::class => 'payment-events',
+    PaymentCapturedTransfer::class => 'payment-events',
+    PaymentCaptureFailedTransfer::class => 'payment-events',
     PaymentRefundedTransfer::class => 'payment-events',
     PaymentRefundFailedTransfer::class => 'payment-events',
-    PaymentReservationCanceledTransfer::class => 'payment-events',
-    PaymentCancelReservationFailedTransfer::class => 'payment-events',
+    PaymentCanceledTransfer::class => 'payment-events',
+    PaymentCancellationFailedTransfer::class => 'payment-events',
     AssetAddedTransfer::class => 'asset-commands',
     AssetUpdatedTransfer::class => 'asset-commands',
     AssetDeletedTransfer::class => 'asset-commands',

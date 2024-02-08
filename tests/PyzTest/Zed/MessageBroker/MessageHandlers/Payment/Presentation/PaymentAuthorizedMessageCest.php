@@ -7,7 +7,7 @@
 
 namespace PyzTest\Zed\MessageBroker\MessageHandlers\Payment\Presentation;
 
-use Generated\Shared\Transfer\PaymentConfirmationFailedTransfer;
+use Generated\Shared\Transfer\PaymentAuthorizedTransfer;
 use PyzTest\Zed\MessageBroker\PaymentPresentationTester;
 
 /**
@@ -19,37 +19,37 @@ use PyzTest\Zed\MessageBroker\PaymentPresentationTester;
  * @group MessageHandlers
  * @group Payment
  * @group Presentation
- * @group PaymentConfirmationFailedMessageCest
+ * @group PaymentAuthorizedMessageCest
  * Add your own group annotations below this line
  */
-class PaymentConfirmationFailedMessageCest
+class PaymentAuthorizedMessageCest
 {
     /**
      * @var string
      */
-    protected const INITIAL_ITEM_STATE = 'payment confirmation pending';
+    protected const INITIAL_ITEM_STATE = 'payment authorization pending';
 
     /**
      * @var string
      */
-    public const FINAL_ITEM_STATE = 'payment failed';
+    public const FINAL_ITEM_STATE = 'payment authorized';
 
     /**
      * @param \PyzTest\Zed\MessageBroker\PaymentPresentationTester $I
      *
      * @return void
      */
-    public function testPaymentConfirmationFailedMessageIsSuccessfullyHandled(PaymentPresentationTester $I): void
+    public function testPaymentAuthorizedMessageIsSuccessfullyHandled(PaymentPresentationTester $I): void
     {
         // Arrange
         $salesOrderEntity = $I->haveSalesOrder(static::INITIAL_ITEM_STATE);
-        $paymentConfirmationFailedTransfer = $I->havePaymentMessageTransfer(
-            PaymentConfirmationFailedTransfer::class,
+        $paymentAuthorizedTransfer = $I->havePaymentMessageTransfer(
+            PaymentAuthorizedTransfer::class,
             $salesOrderEntity,
         );
 
         // Act
-        $I->handlePaymentMessageTransfer($paymentConfirmationFailedTransfer);
+        $I->handlePaymentMessageTransfer($paymentAuthorizedTransfer);
 
         // Assert
         $I->assertOrderHasCorrectState($salesOrderEntity, static::FINAL_ITEM_STATE);
