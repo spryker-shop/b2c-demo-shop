@@ -7,7 +7,7 @@
 
 namespace PyzTest\Zed\MessageBroker\MessageHandlers\Payment\Presentation;
 
-use Generated\Shared\Transfer\PaymentReservationCanceledTransfer;
+use Generated\Shared\Transfer\PaymentCanceledTransfer;
 use PyzTest\Zed\MessageBroker\PaymentPresentationTester;
 
 /**
@@ -27,29 +27,29 @@ class PaymentReservationMessageCest
     /**
      * @var string
      */
-    protected const INITIAL_ITEM_STATE = 'reservation cancellation pending';
+    protected const INITIAL_ITEM_STATE = 'payment cancellation pending';
 
     /**
      * @var string
      */
-    public const FINAL_ITEM_STATE = 'reservation cancelled';
+    public const FINAL_ITEM_STATE = 'payment cancelled';
 
     /**
      * @param \PyzTest\Zed\MessageBroker\PaymentPresentationTester $I
      *
      * @return void
      */
-    public function testPaymentReservationCanceledMessageIsSuccessfullyHandled(PaymentPresentationTester $I): void
+    public function testPaymentCanceledMessageIsSuccessfullyHandled(PaymentPresentationTester $I): void
     {
         // Arrange
         $salesOrderEntity = $I->haveSalesOrder(static::INITIAL_ITEM_STATE);
-        $paymentReservationCanceledTransfer = $I->havePaymentMessageTransfer(
-            PaymentReservationCanceledTransfer::class,
+        $paymentCanceledTransfer = $I->havePaymentMessageTransfer(
+            PaymentCanceledTransfer::class,
             $salesOrderEntity,
         );
 
         // Act
-        $I->handlePaymentMessageTransfer($paymentReservationCanceledTransfer);
+        $I->handlePaymentMessageTransfer($paymentCanceledTransfer);
 
         // Assert
         $I->assertOrderHasCorrectState($salesOrderEntity, static::FINAL_ITEM_STATE);
