@@ -881,12 +881,12 @@ dynamic_entity.validation.persistence_failed_duplicate_entry,"Failed to persist 
 dynamic_entity.validation.persistence_failed_duplicate_entry,"Das Speichern der Daten ist fehlgeschlagen. Bitte überprüfen Sie die bereitgestellten Daten und versuchen Sie es erneut. Eintrag is doppelt vorhanden.",de_DE
 dynamic_entity.validation.entity_does_not_exist,"The entity could not be found in the database.",en_US
 dynamic_entity.validation.entity_does_not_exist,"Die Entität konnte in der Datenbank nicht gefunden werden.",de_DE
-dynamic_entity.validation.invalid_field_type,"Invalid data type for field: %fieldName%",en_US
-dynamic_entity.validation.invalid_field_type,"Ungültiger Datentyp: %fieldName%",de_DE
+dynamic_entity.validation.invalid_field_type,"Invalid data type for field: %tableAlias%.%fieldName%",en_US
+dynamic_entity.validation.invalid_field_type,"Ungültiger Datentyp: %tableAlias%.%fieldName%",de_DE
 dynamic_entity.validation.invalid_field_value,"Invalid data value for field: %fieldName%, row number: %rowNumber%. Field rules: %validationRules%",en_US
 dynamic_entity.validation.invalid_field_value,"Ungültiger Datenwert für das Feld: %fieldName%, Zeilennummer: %rowNumber%. Feldregeln: %validationRules%",de_DE
-dynamic_entity.validation.required_field_is_missing,"The required field must not be empty. Field: '%fieldName%'",en_US
-dynamic_entity.validation.required_field_is_missing,"Das erforderlich Feld darf nicht leer sein. Feld: '%fieldName%'",de_DE
+dynamic_entity.validation.required_field_is_missing,"The required field must not be empty. Field: '%tableAlias%.%fieldName%'",en_US
+dynamic_entity.validation.required_field_is_missing,"Das erforderlich Feld darf nicht leer sein. Feld: '%tableAlias%.%fieldName%'",de_DE
 dynamic_entity.validation.entity_not_found_or_identifier_is_not_creatable,"Entity `%identifier%` not found by identifier, and new identifier can not be persisted. Please update the request.",en_US
 dynamic_entity.validation.entity_not_found_or_identifier_is_not_creatable,"Entität `%identifier%` konnte anhand der ID nicht gefunden werden, und die neue ID kann nicht dauerhaft gespeichert werden. Bitte aktualisieren Sie die Anfrage.",de_DE
 dynamic_entity.validation.modification_of_immutable_field_prohibited,"Modification of immutable field `%fieldName%` is prohibited",en_US
@@ -895,6 +895,8 @@ dynamic_entity.validation.missing_identifier,"Incomplete Request - missing ident
 dynamic_entity.validation.missing_identifier,"Unvollständige Anforderung - fehlende ID",de_DE
 dynamic_entity.validation.provided_field_is_invalid,"The provided `%fieldName%` is incorrect or invalid.",en_US
 dynamic_entity.validation.provided_field_is_invalid,"Der angegebene `%fieldName%` ist falsch oder ungültig.",de_DE
+dynamic_entity.validation.relation_is_not_editable,"The relationship `%relationName%` is not editable by configuration.",en_US
+dynamic_entity.validation.relation_is_not_editable,"Die Beziehung `%relationName%` kann nicht per Konfiguration bearbeitet werden.",de_DE
 dynamic_entity.validation.relation_not_found,"Relation `%relationName%` not found. Please check the requested relation name and try again.",en_US
 dynamic_entity.validation.relation_not_found,"Beziehung ``%relationName%` nicht gefunden. Bitte überprüfen Sie den angeforderten Beziehungsnamen und versuchen Sie es erneut.",de_DE
 dynamic_entity.validation.configuration_not_found,"Dynamic entity configuration for table alias `%aliasName%` not found.",en_US
@@ -1387,6 +1389,8 @@ product.filter.price-default-eur-net_mode,Preis,de_DE
 product.filter.price-default-eur-net_mode,Price,en_US
 product.filter.price-default-eur-gross_mode,Preis,de_DE
 product.filter.price-default-eur-gross_mode,Price,en_US
+product.filter.price-default-usd-net_mode,Price range,en_US
+product.filter.price-default-usd-gross_mode,Price range,en_US
 cart.pre.check.product_discontinued,"Product '%name%' is discontinued, please choose an alternative one.",en_US
 cart.pre.check.product_discontinued,"Produkt '%name%' ist nicht mehr verfügbar, bitte wählen Sie eine Alternative.",de_DE
 replacement_for_widget.replacement_for,Replacement for,en_US
