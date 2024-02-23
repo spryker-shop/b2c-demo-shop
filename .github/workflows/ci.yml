@@ -598,6 +598,7 @@ jobs:
         steps:
             - name: apt update
               run: sudo apt update
+            - uses: actions/checkout@v3
 
             - uses: actions/setup-python@v4
               with:
@@ -610,6 +611,7 @@ jobs:
                   git clone -b internal --single-branch https://github.com/spryker-shop/b2c-demo-shop.git .
             - name: Install packages
               run: |
+                  sudo apt-get update
                   sudo apt-get install apache2-utils
                   sudo apt install awscli -q
                   python3 -m pip install --upgrade pip
@@ -618,6 +620,8 @@ jobs:
                   python3 -m pip install -U robotframework-jsonlibrary
                   python3 -m pip install -U robotframework-databaselibrary
                   python3 -m pip install PyMySQL
+            - name: Composer install
+              run: composer install
             - name: Install docker-compose
               run: |
                   sudo curl -L "https://github.com/docker/compose/releases/download/2.12.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
