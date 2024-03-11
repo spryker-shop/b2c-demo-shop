@@ -43,7 +43,7 @@ use SprykerTest\Glue\Testify\Tester\BackendApiEndToEndTester;
  * @method void comment($description)
  * @method void pause($vars = [])
  *
- * @SuppressWarnings(PHPMD)
+ * @SuppressWarnings(\PyzTest\Glue\PickingListsBackend\PHPMD)
  */
 class PickingListsBackendApiTester extends BackendApiEndToEndTester
 {
