@@ -63,7 +63,7 @@ use Spryker\Zed\StoreStorage\Communication\Plugin\Synchronization\StoreSynchroni
 use Spryker\Zed\Synchronization\Communication\Plugin\Synchronization\SynchronizationDataQueryExpanderWhereBetweenStrategyPlugin;
 use Spryker\Zed\Synchronization\SynchronizationDependencyProvider as SprykerSynchronizationDependencyProvider;
 use Spryker\Zed\SynchronizationExtension\Dependency\Plugin\SynchronizationDataQueryExpanderStrategyPluginInterface;
-use Spryker\Zed\TaxProductStorage\Communication\Plugin\Synchronization\TaxProductSynchronizationDataPlugin;
+use Spryker\Zed\TaxProductStorage\Communication\Plugin\Synchronization\TaxProductSynchronizationDataBulkRepositoryPlugin;
 use Spryker\Zed\TaxStorage\Communication\Plugin\Synchronization\TaxSynchronizationDataPlugin;
 use Spryker\Zed\UrlStorage\Communication\Plugin\Synchronization\UrlRedirectSynchronizationDataPlugin;
 use Spryker\Zed\UrlStorage\Communication\Plugin\Synchronization\UrlSynchronizationDataPlugin;
@@ -125,7 +125,7 @@ class SynchronizationDependencyProvider extends SprykerSynchronizationDependency
             new ContentStorageSynchronizationDataPlugin(),
             new ProductAlternativeSynchronizationDataBulkPlugin(),
             new ProductReplacementForSynchronizationDataBulkPlugin(),
-            new TaxProductSynchronizationDataPlugin(),
+            new TaxProductSynchronizationDataBulkRepositoryPlugin(),
             new TaxSynchronizationDataPlugin(),
             new CmsSlotSynchronizationDataBulkPlugin(),
             new ConfigurableBundleTemplatePageSynchronizationDataBulkPlugin(),
