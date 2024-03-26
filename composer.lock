@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9e5cb8f19db7d09625fd4afccdbb0e4a",
+    "content-hash": "84453cd86af5b30c8f34a268e0f0cdb0",
     "packages": [
         {
             "name": "async-aws/core",
@@ -2418,39 +2418,47 @@
         },
         {
             "name": "league/flysystem",
-            "version": "2.5.0",
+            "version": "3.25.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "8aaffb653c5777781b0f7f69a5d937baf7ab6cdb"
+                "reference": "abbd664eb4381102c559d358420989f835208f18"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/8aaffb653c5777781b0f7f69a5d937baf7ab6cdb",
-                "reference": "8aaffb653c5777781b0f7f69a5d937baf7ab6cdb",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/abbd664eb4381102c559d358420989f835208f18",
+                "reference": "abbd664eb4381102c559d358420989f835208f18",
                 "shasum": ""
             },
             "require": {
-                "ext-json": "*",
+                "league/flysystem-local": "^3.0.0",
                 "league/mime-type-detection": "^1.0.0",
-                "php": "^7.2 || ^8.0"
+                "php": "^8.0.2"
             },
             "conflict": {
-                "guzzlehttp/ringphp": "<1.1.1"
+                "async-aws/core": "<1.19.0",
+                "async-aws/s3": "<1.14.0",
+                "aws/aws-sdk-php": "3.209.31 || 3.210.0",
+                "guzzlehttp/guzzle": "<7.0",
+                "guzzlehttp/ringphp": "<1.1.1",
+                "phpseclib/phpseclib": "3.0.15",
+                "symfony/http-client": "<5.2"
             },
             "require-dev": {
-                "async-aws/s3": "^1.5",
-                "async-aws/simple-s3": "^1.0",
-                "aws/aws-sdk-php": "^3.132.4",
+                "async-aws/s3": "^1.5 || ^2.0",
+                "async-aws/simple-s3": "^1.1 || ^2.0",
+                "aws/aws-sdk-php": "^3.295.10",
                 "composer/semver": "^3.0",
                 "ext-fileinfo": "*",
                 "ext-ftp": "*",
-                "friendsofphp/php-cs-fixer": "^3.2",
+                "ext-zip": "*",
+                "friendsofphp/php-cs-fixer": "^3.5",
                 "google/cloud-storage": "^1.23",
-                "phpseclib/phpseclib": "^2.0",
-                "phpstan/phpstan": "^0.12.26",
-                "phpunit/phpunit": "^8.5 || ^9.4",
-                "sabre/dav": "^4.1"
+                "microsoft/azure-storage-blob": "^1.1",
+                "phpseclib/phpseclib": "^3.0.36",
+                "phpstan/phpstan": "^1.10",
+                "phpunit/phpunit": "^9.5.11|^10.0",
+                "sabre/dav": "^4.6.0"
             },
             "type": "library",
             "autoload": {
@@ -2484,7 +2492,7 @@
             ],
             "support": {
                 "issues": "https://github.com/thephpleague/flysystem/issues",
-                "source": "https://github.com/thephpleague/flysystem/tree/2.5.0"
+                "source": "https://github.com/thephpleague/flysystem/tree/3.25.1"
             },
             "funding": [
                 {
@@ -2494,26 +2502,141 @@
                 {
                     "url": "https://github.com/frankdejonge",
                     "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/league/flysystem",
-                    "type": "tidelift"
                 }
             ],
-            "time": "2022-09-17T21:02:32+00:00"
+            "time": "2024-03-16T12:53:19+00:00"
         },
         {
-            "name": "league/mime-type-detection",
-            "version": "1.14.0",
+            "name": "league/flysystem-ftp",
+            "version": "3.25.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/thephpleague/mime-type-detection.git",
-                "reference": "b6a5854368533df0295c5761a0253656a2e52d9e"
+                "url": "https://github.com/thephpleague/flysystem-ftp.git",
+                "reference": "34a1a1abfc1c4c541033210e4c3c506357ee266b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/mime-type-detection/zipball/b6a5854368533df0295c5761a0253656a2e52d9e",
-                "reference": "b6a5854368533df0295c5761a0253656a2e52d9e",
+                "url": "https://api.github.com/repos/thephpleague/flysystem-ftp/zipball/34a1a1abfc1c4c541033210e4c3c506357ee266b",
+                "reference": "34a1a1abfc1c4c541033210e4c3c506357ee266b",
+                "shasum": ""
+            },
+            "require": {
+                "ext-ftp": "*",
+                "league/flysystem": "^3.0.0",
+                "league/mime-type-detection": "^1.0.0",
+                "php": "^8.0.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "League\\Flysystem\\Ftp\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Frank de Jonge",
+                    "email": "info@frankdejonge.nl"
+                }
+            ],
+            "description": "FTP filesystem adapter for Flysystem.",
+            "keywords": [
+                "Flysystem",
+                "file",
+                "files",
+                "filesystem",
+                "ftp",
+                "ftpd"
+            ],
+            "support": {
+                "source": "https://github.com/thephpleague/flysystem-ftp/tree/3.25.1"
+            },
+            "funding": [
+                {
+                    "url": "https://ecologi.com/frankdejonge",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/frankdejonge",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-03-15T19:58:44+00:00"
+        },
+        {
+            "name": "league/flysystem-local",
+            "version": "3.25.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thephpleague/flysystem-local.git",
+                "reference": "61a6a90d6e999e4ddd9ce5adb356de0939060b92"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thephpleague/flysystem-local/zipball/61a6a90d6e999e4ddd9ce5adb356de0939060b92",
+                "reference": "61a6a90d6e999e4ddd9ce5adb356de0939060b92",
+                "shasum": ""
+            },
+            "require": {
+                "ext-fileinfo": "*",
+                "league/flysystem": "^3.0.0",
+                "league/mime-type-detection": "^1.0.0",
+                "php": "^8.0.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "League\\Flysystem\\Local\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Frank de Jonge",
+                    "email": "info@frankdejonge.nl"
+                }
+            ],
+            "description": "Local filesystem adapter for Flysystem.",
+            "keywords": [
+                "Flysystem",
+                "file",
+                "files",
+                "filesystem",
+                "local"
+            ],
+            "support": {
+                "source": "https://github.com/thephpleague/flysystem-local/tree/3.25.1"
+            },
+            "funding": [
+                {
+                    "url": "https://ecologi.com/frankdejonge",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/frankdejonge",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-03-15T19:58:44+00:00"
+        },
+        {
+            "name": "league/mime-type-detection",
+            "version": "1.15.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thephpleague/mime-type-detection.git",
+                "reference": "ce0f4d1e8a6f4eb0ddff33f57c69c50fd09f4301"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thephpleague/mime-type-detection/zipball/ce0f4d1e8a6f4eb0ddff33f57c69c50fd09f4301",
+                "reference": "ce0f4d1e8a6f4eb0ddff33f57c69c50fd09f4301",
                 "shasum": ""
             },
             "require": {
@@ -2544,7 +2667,7 @@
             "description": "Mime-type detection for Flysystem",
             "support": {
                 "issues": "https://github.com/thephpleague/mime-type-detection/issues",
-                "source": "https://github.com/thephpleague/mime-type-detection/tree/1.14.0"
+                "source": "https://github.com/thephpleague/mime-type-detection/tree/1.15.0"
             },
             "funding": [
                 {
@@ -2556,7 +2679,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-10-17T14:13:20+00:00"
+            "time": "2024-01-28T23:22:08+00:00"
         },
         {
             "name": "league/oauth2-client",
@@ -25624,26 +25747,26 @@
         },
         {
             "name": "spryker/file-system",
-            "version": "2.0.0",
+            "version": "2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/file-system.git",
-                "reference": "32b003f13788141bb42ad6ac58eaf831b866d3b4"
+                "reference": "d42b7481cad2bc5a984c423a4509884893bf612c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/file-system/zipball/32b003f13788141bb42ad6ac58eaf831b866d3b4",
-                "reference": "32b003f13788141bb42ad6ac58eaf831b866d3b4",
+                "url": "https://api.github.com/repos/spryker/file-system/zipball/d42b7481cad2bc5a984c423a4509884893bf612c",
+                "reference": "d42b7481cad2bc5a984c423a4509884893bf612c",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.3",
+                "php": ">=8.1",
                 "spryker/file-system-extension": "^1.0.0",
                 "spryker/kernel": "^3.30.0"
             },
             "require-dev": {
                 "spryker/code-sniffer": "*",
-                "spryker/flysystem": "^2.0.0",
+                "spryker/flysystem": "*",
                 "spryker/flysystem-aws3v3-file-system": "*",
                 "spryker/flysystem-ftp-file-system": "*",
                 "spryker/flysystem-local-file-system": "*",
@@ -25667,9 +25790,9 @@
             ],
             "description": "FileSystem module",
             "support": {
-                "source": "https://github.com/spryker/file-system/tree/2.0.0"
+                "source": "https://github.com/spryker/file-system/tree/2.0.1"
             },
-            "time": "2021-10-08T18:13:40+00:00"
+            "time": "2024-02-29T13:26:38+00:00"
         },
         {
             "name": "spryker/file-system-extension",
@@ -25714,21 +25837,21 @@
         },
         {
             "name": "spryker/flysystem",
-            "version": "2.2.0",
+            "version": "3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/flysystem.git",
-                "reference": "70beda81e0a4b842b461e83f8e5bc06adc30b4db"
+                "reference": "c49ee9a19547eb2694562d8b0e4dfd89d0b5a1d1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/flysystem/zipball/70beda81e0a4b842b461e83f8e5bc06adc30b4db",
-                "reference": "70beda81e0a4b842b461e83f8e5bc06adc30b4db",
+                "url": "https://api.github.com/repos/spryker/flysystem/zipball/c49ee9a19547eb2694562d8b0e4dfd89d0b5a1d1",
+                "reference": "c49ee9a19547eb2694562d8b0e4dfd89d0b5a1d1",
                 "shasum": ""
             },
             "require": {
-                "league/flysystem": "^2.0",
-                "php": ">=8.0",
+                "league/flysystem": "^3.7.0",
+                "php": ">=8.1",
                 "spryker/file-system-extension": "^1.0.0",
                 "spryker/kernel": "^3.30.0",
                 "spryker/transfer": "^3.25.0"
@@ -25747,7 +25870,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0.x-dev"
+                    "dev-master": "3.0.x-dev"
                 }
             },
             "autoload": {
@@ -25761,27 +25884,27 @@
             ],
             "description": "Flysystem module",
             "support": {
-                "source": "https://github.com/spryker/flysystem/tree/2.2.0"
+                "source": "https://github.com/spryker/flysystem/tree/3.0.0"
             },
-            "time": "2023-03-29T12:45:08+00:00"
+            "time": "2024-02-29T13:26:38+00:00"
         },
         {
             "name": "spryker/flysystem-ftp-file-system",
-            "version": "2.1.0",
+            "version": "3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/flysystem-ftp-file-system.git",
-                "reference": "1ee174c810d633b83213ebbf74c6975cd932a1d3"
+                "reference": "6bc46116dad686bee64274befa27fe9210304210"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/flysystem-ftp-file-system/zipball/1ee174c810d633b83213ebbf74c6975cd932a1d3",
-                "reference": "1ee174c810d633b83213ebbf74c6975cd932a1d3",
+                "url": "https://api.github.com/repos/spryker/flysystem-ftp-file-system/zipball/6bc46116dad686bee64274befa27fe9210304210",
+                "reference": "6bc46116dad686bee64274befa27fe9210304210",
                 "shasum": ""
             },
             "require": {
-                "league/flysystem": "^2.0.8",
-                "php": ">=8.0",
+                "league/flysystem-ftp": "^3.0.0",
+                "php": ">=8.1",
                 "spryker/kernel": "^3.30.0",
                 "spryker/transfer": "^3.25.0"
             },
@@ -25797,7 +25920,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0.x-dev"
+                    "dev-master": "3.0.x-dev"
                 }
             },
             "autoload": {
@@ -25811,27 +25934,27 @@
             ],
             "description": "FlysystemFtpFileSystem module",
             "support": {
-                "source": "https://github.com/spryker/flysystem-ftp-file-system/tree/2.1.0"
+                "source": "https://github.com/spryker/flysystem-ftp-file-system/tree/3.0.0"
             },
-            "time": "2023-10-18T10:03:14+00:00"
+            "time": "2024-02-29T13:26:38+00:00"
         },
         {
             "name": "spryker/flysystem-local-file-system",
-            "version": "2.0.0",
+            "version": "3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/flysystem-local-file-system.git",
-                "reference": "4e03646b46d96cf199c7ab03284fcdde0ca55c00"
+                "reference": "177dd4b6f57b1d01d321677209e1bddfe856cef1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/flysystem-local-file-system/zipball/4e03646b46d96cf199c7ab03284fcdde0ca55c00",
-                "reference": "4e03646b46d96cf199c7ab03284fcdde0ca55c00",
+                "url": "https://api.github.com/repos/spryker/flysystem-local-file-system/zipball/177dd4b6f57b1d01d321677209e1bddfe856cef1",
+                "reference": "177dd4b6f57b1d01d321677209e1bddfe856cef1",
                 "shasum": ""
             },
             "require": {
-                "league/flysystem": "^2.0",
-                "php": ">=7.3",
+                "league/flysystem-local": "^3.0.0",
+                "php": ">=8.1",
                 "spryker/kernel": "^3.30.0"
             },
             "require-dev": {
@@ -25846,7 +25969,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0.x-dev"
+                    "dev-master": "3.0.x-dev"
                 }
             },
             "autoload": {
@@ -25860,9 +25983,9 @@
             ],
             "description": "FlysystemLocalFileSystem module",
             "support": {
-                "source": "https://github.com/spryker/flysystem-local-file-system/tree/2.0.0"
+                "source": "https://github.com/spryker/flysystem-local-file-system/tree/3.0.0"
             },
-            "time": "2021-10-08T18:13:40+00:00"
+            "time": "2024-02-29T13:26:38+00:00"
         },
         {
             "name": "spryker/form",
@@ -25965,20 +26088,20 @@
         },
         {
             "name": "spryker/gift-card",
-            "version": "1.9.3",
+            "version": "1.9.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/gift-card.git",
-                "reference": "64a4aae8b6958168b2b283113a53ed3e2e9bbf23"
+                "reference": "7fec9621d361447a84537837fbca1140ea1b2a24"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/gift-card/zipball/64a4aae8b6958168b2b283113a53ed3e2e9bbf23",
-                "reference": "64a4aae8b6958168b2b283113a53ed3e2e9bbf23",
+                "url": "https://api.github.com/repos/spryker/gift-card/zipball/7fec9621d361447a84537837fbca1140ea1b2a24",
+                "reference": "7fec9621d361447a84537837fbca1140ea1b2a24",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.0",
+                "php": ">=8.1",
                 "spryker/acl-merchant-portal-extension": "^1.0.0",
                 "spryker/cart-code-extension": "^1.1.0",
                 "spryker/checkout-extension": "^1.2.0",
@@ -26034,9 +26157,9 @@
             ],
             "description": "GiftCard module",
             "support": {
-                "source": "https://github.com/spryker/gift-card/tree/1.9.3"
+                "source": "https://github.com/spryker/gift-card/tree/1.9.4"
             },
-            "time": "2023-06-06T15:14:45+00:00"
+            "time": "2023-11-24T09:08:03+00:00"
         },
         {
             "name": "spryker/gift-card-balance",
@@ -26964,21 +27087,21 @@
         },
         {
             "name": "spryker/graceful-runner",
-            "version": "1.0.0",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/graceful-runner.git",
-                "reference": "a2462f9306d5b87c652d44bb2295193ed2ea63ec"
+                "reference": "2990a52e39297d2f07bd793336d04dec7a2caadd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/graceful-runner/zipball/a2462f9306d5b87c652d44bb2295193ed2ea63ec",
-                "reference": "a2462f9306d5b87c652d44bb2295193ed2ea63ec",
+                "url": "https://api.github.com/repos/spryker/graceful-runner/zipball/2990a52e39297d2f07bd793336d04dec7a2caadd",
+                "reference": "2990a52e39297d2f07bd793336d04dec7a2caadd",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.3",
-                "seld/signal-handler": "^1.2.0",
+                "php": ">=8.1",
+                "seld/signal-handler": "^1.2.0 || ^2.0.0",
                 "spryker/kernel": "^3.30.0"
             },
             "require-dev": {
@@ -27002,9 +27125,9 @@
             ],
             "description": "GracefulRunner module",
             "support": {
-                "source": "https://github.com/spryker/graceful-runner/tree/1.0.0"
+                "source": "https://github.com/spryker/graceful-runner/tree/1.1.0"
             },
-            "time": "2021-02-17T09:10:21+00:00"
+            "time": "2024-03-19T14:33:17+00:00"
         },
         {
             "name": "spryker/graph",
@@ -27089,16 +27212,16 @@
         },
         {
             "name": "spryker/gui",
-            "version": "3.52.1",
+            "version": "3.53.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/gui.git",
-                "reference": "c44699f1197d4754647a283f71da37ec20f8f376"
+                "reference": "5516f626884c62a1e0d7b5b5eadddcd850a4212b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/gui/zipball/c44699f1197d4754647a283f71da37ec20f8f376",
-                "reference": "c44699f1197d4754647a283f71da37ec20f8f376",
+                "url": "https://api.github.com/repos/spryker/gui/zipball/5516f626884c62a1e0d7b5b5eadddcd850a4212b",
+                "reference": "5516f626884c62a1e0d7b5b5eadddcd850a4212b",
                 "shasum": ""
             },
             "require": {
@@ -27147,9 +27270,9 @@
             ],
             "description": "Gui module",
             "support": {
-                "source": "https://github.com/spryker/gui/tree/3.52.1"
+                "source": "https://github.com/spryker/gui/tree/3.53.0"
             },
-            "time": "2023-11-28T14:08:58+00:00"
+            "time": "2024-03-19T14:33:17+00:00"
         },
         {
             "name": "spryker/guzzle",
@@ -40234,16 +40357,16 @@
         },
         {
             "name": "spryker/sales",
-            "version": "11.45.0",
+            "version": "11.46.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/sales.git",
-                "reference": "578401b9de9dcd8468856e4b95dcd04e8f7956d5"
+                "reference": "918c100f19e578bae738d95e3b4c91fdecbd6b0f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/sales/zipball/578401b9de9dcd8468856e4b95dcd04e8f7956d5",
-                "reference": "578401b9de9dcd8468856e4b95dcd04e8f7956d5",
+                "url": "https://api.github.com/repos/spryker/sales/zipball/918c100f19e578bae738d95e3b4c91fdecbd6b0f",
+                "reference": "918c100f19e578bae738d95e3b4c91fdecbd6b0f",
                 "shasum": ""
             },
             "require": {
@@ -40309,9 +40432,9 @@
             ],
             "description": "Sales module",
             "support": {
-                "source": "https://github.com/spryker/sales/tree/11.45.0"
+                "source": "https://github.com/spryker/sales/tree/11.46.0"
             },
-            "time": "2024-03-07T15:46:18+00:00"
+            "time": "2024-03-19T13:00:55+00:00"
         },
         {
             "name": "spryker/sales-configurable-bundle",
@@ -45923,20 +46046,20 @@
         },
         {
             "name": "spryker/stores-rest-api",
-            "version": "1.2.0",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/stores-rest-api.git",
-                "reference": "ed25e8437457d3745f63cbb713200b42b1bd6968"
+                "reference": "dd3c58e306b606a3117537f8508e65df0b39f85a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/stores-rest-api/zipball/ed25e8437457d3745f63cbb713200b42b1bd6968",
-                "reference": "ed25e8437457d3745f63cbb713200b42b1bd6968",
+                "url": "https://api.github.com/repos/spryker/stores-rest-api/zipball/dd3c58e306b606a3117537f8508e65df0b39f85a",
+                "reference": "dd3c58e306b606a3117537f8508e65df0b39f85a",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.0",
+                "php": ">=8.1",
                 "spryker/application-extension": "^1.1.0",
                 "spryker/country": "^3.2.0 || ^4.0.0",
                 "spryker/currency": "^3.2.0 || ^4.0.0",
@@ -45971,9 +46094,9 @@
             ],
             "description": "StoresRestApi module",
             "support": {
-                "source": "https://github.com/spryker/stores-rest-api/tree/1.2.0"
+                "source": "https://github.com/spryker/stores-rest-api/tree/1.3.0"
             },
-            "time": "2023-07-24T13:36:15+00:00"
+            "time": "2024-03-19T15:50:20+00:00"
         },
         {
             "name": "spryker/symfony",
@@ -46884,16 +47007,16 @@
         },
         {
             "name": "spryker/twig",
-            "version": "3.19.0",
+            "version": "3.20.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/twig.git",
-                "reference": "edb5f3254ec226949b7346d243818053af6d7cdc"
+                "reference": "aed418c90222375f845be7e92cee556bbd3e8dfd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/twig/zipball/edb5f3254ec226949b7346d243818053af6d7cdc",
-                "reference": "edb5f3254ec226949b7346d243818053af6d7cdc",
+                "url": "https://api.github.com/repos/spryker/twig/zipball/aed418c90222375f845be7e92cee556bbd3e8dfd",
+                "reference": "aed418c90222375f845be7e92cee556bbd3e8dfd",
                 "shasum": ""
             },
             "require": {
@@ -46938,9 +47061,9 @@
             ],
             "description": "Twig module",
             "support": {
-                "source": "https://github.com/spryker/twig/tree/3.19.0"
+                "source": "https://github.com/spryker/twig/tree/3.20.0"
             },
-            "time": "2023-11-02T20:09:27+00:00"
+            "time": "2024-03-19T19:07:13+00:00"
         },
         {
             "name": "spryker/twig-extension",
