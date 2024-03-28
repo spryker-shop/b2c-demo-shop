@@ -19,10 +19,10 @@ use PyzTest\Zed\MessageBroker\PaymentPresentationTester;
  * @group MessageHandlers
  * @group Payment
  * @group Presentation
- * @group PaymentReservationMessageCest
+ * @group PaymentCanceledMessageCest
  * Add your own group annotations below this line
  */
-class PaymentReservationMessageCest
+class PaymentCanceledMessageCest
 {
     /**
      * @var string
@@ -33,6 +33,11 @@ class PaymentReservationMessageCest
      * @var string
      */
     public const FINAL_ITEM_STATE = 'payment cancelled';
+
+    /**
+     * @var string
+     */
+    public const NOT_ALLOWED_FOR_CANCEL_ITEM_STATE = 'payment captured';
 
     /**
      * @param \PyzTest\Zed\MessageBroker\PaymentPresentationTester $I
@@ -53,5 +58,26 @@ class PaymentReservationMessageCest
 
         // Assert
         $I->assertOrderHasCorrectState($salesOrderEntity, static::FINAL_ITEM_STATE);
+    }
+
+    /**
+     * @param \PyzTest\Zed\MessageBroker\PaymentPresentationTester $I
+     *
+     * @return void
+     */
+    public function testPaymentCanceledMessageIsIgnoredWhenTransitionIsNotPossible(PaymentPresentationTester $I): void
+    {
+        // Arrange
+        $salesOrderEntity = $I->haveSalesOrder(static::NOT_ALLOWED_FOR_CANCEL_ITEM_STATE);
+        $paymentCanceledTransfer = $I->havePaymentMessageTransfer(
+            PaymentCanceledTransfer::class,
+            $salesOrderEntity,
+        );
+
+        // Act
+        $I->handlePaymentMessageTransfer($paymentCanceledTransfer);
+
+        // Assert
+        $I->assertOrderHasCorrectState($salesOrderEntity, static::NOT_ALLOWED_FOR_CANCEL_ITEM_STATE);
     }
 }
