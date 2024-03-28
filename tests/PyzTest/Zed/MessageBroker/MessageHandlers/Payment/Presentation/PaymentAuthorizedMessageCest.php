@@ -27,7 +27,7 @@ class PaymentAuthorizedMessageCest
     /**
      * @var string
      */
-    protected const INITIAL_ITEM_STATE = 'payment authorization pending';
+    protected const INITIAL_ITEM_STATE = 'payment pending';
 
     /**
      * @var string

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of the Spryker Commerce OS.
+ * This file is part of the Spryker Suite.
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
@@ -27,7 +27,12 @@ class PaymentCapturedMessageCest
     /**
      * @var string
      */
-    protected const INITIAL_ITEM_STATE = 'payment capture pending';
+    protected const INITIAL_ITEM_STATE = 'payment pending';
+
+    /**
+     * @var string
+     */
+    protected const INITIAL_ITEM_STATE_AFTER_AUTHORIZATION = 'payment capture pending';
 
     /**
      * @var string
@@ -43,6 +48,27 @@ class PaymentCapturedMessageCest
     {
         // Arrange
         $salesOrderEntity = $I->haveSalesOrder(static::INITIAL_ITEM_STATE);
+        $paymentCapturedTransfer = $I->havePaymentMessageTransfer(
+            PaymentCapturedTransfer::class,
+            $salesOrderEntity,
+        );
+
+        // Act
+        $I->handlePaymentMessageTransfer($paymentCapturedTransfer);
+
+        // Assert
+        $I->assertOrderHasCorrectState($salesOrderEntity, static::FINAL_ITEM_STATE);
+    }
+
+    /**
+     * @param \PyzTest\Zed\MessageBroker\PaymentPresentationTester $I
+     *
+     * @return void
+     */
+    public function testPaymentCapturedMessageIsSuccessfullyHandledWhenItemWasAuthorized(PaymentPresentationTester $I): void
+    {
+        // Arrange
+        $salesOrderEntity = $I->haveSalesOrder(static::INITIAL_ITEM_STATE_AFTER_AUTHORIZATION);
         $paymentCapturedTransfer = $I->havePaymentMessageTransfer(
             PaymentCapturedTransfer::class,
             $salesOrderEntity,
