@@ -1,6 +1,6 @@
-const stylelint = require('stylelint');
-const { globalSettings } = require('../settings');
-const commandLineParser = require('commander');
+import commandLineParser from 'commander';
+import stylelint from 'stylelint';
+import { globalSettings } from '../settings.js';
 
 commandLineParser
     .option('-f, --fix', 'execute stylelint in the fix mode.')
@@ -13,9 +13,8 @@ const filePaths = commandLineParser.filePath ? [commandLineParser.filePath] : de
 
 stylelint
     .lint({
-        configFile: `${globalSettings.context}/node_modules/@spryker/frontend-config.stylelint/.stylelintrc.json`,
+        configFile: `${globalSettings.context}/.stylelintrc.js`,
         files: filePaths,
-        syntax: 'scss',
         formatter: 'string',
         fix: isFixMode,
     })
