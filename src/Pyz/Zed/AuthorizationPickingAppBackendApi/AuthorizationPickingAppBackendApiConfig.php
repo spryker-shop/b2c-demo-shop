@@ -18,6 +18,7 @@ class AuthorizationPickingAppBackendApiConfig extends SprykerEcoAuthorizationPic
     {
         return [
             'warehouse-user',
+            'user',
         ];
     }
 }
