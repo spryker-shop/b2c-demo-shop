@@ -92,7 +92,7 @@ class SearchHttpCommunicationTester extends Actor
     public function removeHttpConfigForStore(StoreTransfer $storeTransfer): void
     {
         (new SpySearchHttpConfigQuery())
-            ->filterByStoreName($storeTransfer->getName())
+            ->filterByStore($storeTransfer->getName())
             ->delete();
     }
 
@@ -121,7 +121,7 @@ class SearchHttpCommunicationTester extends Actor
     protected function getSearchHttpConfigEntity(StoreTransfer $storeTransfer): ?SpySearchHttpConfig
     {
         return (new SpySearchHttpConfigQuery())
-            ->filterByStoreName($storeTransfer->getName())
+            ->filterByStore($storeTransfer->getName())
             ->findOne();
     }
 }
