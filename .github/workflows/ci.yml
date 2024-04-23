@@ -6,8 +6,6 @@ on:
         branches:
             - master
     workflow_dispatch:
-    schedule:
-        - cron: "0 0 * * *"
 
 concurrency:
     group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
@@ -15,7 +13,7 @@ concurrency:
 
 jobs:
     validation:
-        name: "Static analysis / PHP 8.1"
+        name: "Static analysis"
         runs-on: ubuntu-22.04
         strategy:
             fail-fast: false
@@ -502,7 +500,7 @@ jobs:
             - run: docker run -t --rm --entrypoint='' spryker_b2c_frontend:1.0-frontend ls -al /data/public/Zed/assets/
 
     docker-alpine-php-8-1-mariadb-robot:
-        name: "Docker / Alpine / PHP 8.1 / MariaDB / Robot"
+        name: "Docker / Alpine / PHP 8.1 / MariaDB / Robot/ API"
         runs-on: ubuntu-22.04
         env:
             PROGRESS_TYPE: plain
@@ -535,7 +533,7 @@ jobs:
                   APPLICATION_STORE=AT docker/sdk console queue:worker:start --stop-when-empty
             - name: Run Tests
               run: |
-                  docker/sdk exec robot-framework robot -v env:api_b2c -v docker:True --exclude skip-due-to-issueORskip-due-to-refactoring -d results -s tests.api.b2c .
+                  docker/sdk exec robot-framework robot -v env:api_b2c -v docker:True --exclude skip-due-to-issueORskip-due-to-refactoring -d results -s robotframework.tests.api.b2c .
             - name: Upload artifacts
               if: always()
               run: |
@@ -544,7 +542,7 @@ jobs:
                     --expires "$(date -d '+7 days' --utc +'%Y-%m-%dT%H:%M:%SZ')"
 
     docker-alpine-php-8-2-postgresql-robot:
-        name: "Docker / Alpine / PHP 8.2 / PostgreSQL / Robot"
+        name: "Docker / Alpine / PHP 8.2 / PostgreSQL / Robot/ API"
         runs-on: ubuntu-22.04
         env:
             PROGRESS_TYPE: plain
@@ -581,10 +579,51 @@ jobs:
                   APPLICATION_STORE=AT docker/sdk console queue:worker:start --stop-when-empty
             - name: Run Tests
               run: |
-                  docker/sdk exec robot-framework robot -v env:api_b2c -v db_engine:psycopg2 -v docker:True --exclude skip-due-to-issueORskip-due-to-refactoring -d results -s tests.api.b2c .
+                  docker/sdk exec robot-framework robot -v env:api_b2c -v db_engine:psycopg2 -v docker:True --exclude skip-due-to-issueORskip-due-to-refactoring -d results -s robotframework.tests.api.b2c .
             - name: Upload artifacts
               if: always()
               run: |
                   AWS_DEFAULT_REGION=${{env.ROBOT_TESTS_ARTIFACTS_BUCKET_REGION}} AWS_ACCESS_KEY_ID=${{ secrets.ROBOT_TESTS_ARTIFACTS_KEY }} AWS_SECRET_ACCESS_KEY=${{ secrets.ROBOT_TESTS_ARTIFACTS_SECRET }} aws s3 cp .robot/results s3://${{vars.ROBOT_TESTS_ARTIFACTS_BUCKET}}/b2c-robot-api-ci/${GITHUB_RUN_ID}/PHP8.2PostgreSQLRobot/ \
+                    --recursive \
+                    --expires "$(date -d '+7 days' --utc +'%Y-%m-%dT%H:%M:%SZ')"
+
+    docker-alpine-php-8-2-mariadb-robot-dynamic-multistore:
+        name: "Docker / Alpine / PHP 8.2 / MariaDB / Robot / API / Dynamic Multistore "
+        runs-on: ubuntu-22.04
+        env:
+            PROGRESS_TYPE: plain
+            SPRYKER_PLATFORM_IMAGE: spryker/php:8.2
+            TRAVIS: 1
+            ROBOT_TESTS_ARTIFACTS_BUCKET_REGION: eu-west-1
+        steps:
+            - uses: actions/checkout@v3
+
+            - name: Install packages
+              run: |
+                  sudo apt-get update
+                  sudo apt-get install apache2-utils
+                  sudo apt install awscli -q
+            - name: Composer install
+              run: composer install
+            - name: Install docker-compose
+              run: |
+                  sudo curl -L "https://github.com/docker/compose/releases/download/2.12.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+                  sudo chmod +x /usr/local/bin/docker-compose
+            - name: Install Project
+              continue-on-error: true
+              run: |
+                  git clone https://github.com/spryker/docker-sdk.git ./docker
+                  docker/sdk boot -v deploy.ci.api.mariadb.dynamic-store.robot.yml
+                  sudo bash -c "echo '127.0.0.1 backend-api.eu.spryker.local backend-api.us.spryker.local backend-gateway.eu.spryker.local backend-gateway.us.spryker.local backoffice.eu.spryker.local backoffice.us.spryker.local glue-backend.eu.spryker.local glue-backend.us.spryker.local glue-storefront.eu.spryker.local glue-storefront.us.spryker.local glue.eu.spryker.local glue.us.spryker.local mail.spryker.local mp.eu.spryker.local mp.us.spryker.local queue.spryker.local scheduler.spryker.local spryker.local swagger.spryker.local yves.eu.spryker.local yves.us.spryker.local' >> /etc/hosts"
+                  docker/sdk up -t -v
+                  docker/sdk cli composer dump-autoload -o -a
+                  SPRYKER_CURRENT_REGION=EU docker/sdk console queue:worker:start --stop-when-empty
+            - name: Run Tests
+              run: |
+                  docker/sdk exec robot-framework robot -v env:api_b2c -v docker:True -v dms:true -v glue_env:http://glue.eu.spryker.local -v bapi_env:http://glue-backend.eu.spryker.local -v sapi_env:http://glue-storefront.eu.spryker.local --exclude skip-due-to-issueORskip-due-to-refactoring -d results -s robotframework.tests.api.b2c .
+            - name: Upload artifacts
+              if: always()
+              run: |
+                  AWS_DEFAULT_REGION=${{env.ROBOT_TESTS_ARTIFACTS_BUCKET_REGION}} AWS_ACCESS_KEY_ID=${{ secrets.ROBOT_TESTS_ARTIFACTS_KEY }} AWS_SECRET_ACCESS_KEY=${{ secrets.ROBOT_TESTS_ARTIFACTS_SECRET }} aws s3 cp .robot/results s3://${{vars.ROBOT_TESTS_ARTIFACTS_BUCKET}}/b2c-robot-api-ci-dynamic-multistore/${GITHUB_RUN_ID}/PHP8.1MariaDBRobot/ \
                     --recursive \
                     --expires "$(date -d '+7 days' --utc +'%Y-%m-%dT%H:%M:%SZ')"

@@ -1,0 +1,454 @@
+{
+    "data": {
+        "name": "HP ProDesk 400 G3",
+        "image": "https://images.icecat.biz/img/gallery/30400157_1167.jpg",
+        "logo": "./logo.svg"
+    },
+    "configuration": [
+        {
+            "id": "barebone",
+            "label": "Barebone",
+            "tooltip": "Barebone refers to the bare or motherboard of a computer.",
+            "data": [
+                {
+                    "value": "1",
+                    "title": "14.0\" Office/Business (NL50GU) Celeron N4120 1x1.10GHz UHD 600",
+                    "price": 38950
+                },
+                {
+                    "value": "2",
+                    "title": "17.3\" Office/Business (NJ70CU) i3-10110U 2x 2.10GHz Intel HD Graphics",
+                    "price": 51700,
+                    "availableQuantity": [
+                        {
+                            "condition": {
+                                "store_name": "AT"
+                            },
+                            "quantity": 0
+                        }
+                    ]
+                },
+                {
+                    "value": "3",
+                    "title": "15.6\" Gaming/Multimedia GTX (NK50SB) Nvidia GTX 1650 4GB GDDR6",
+                    "price": 60700
+                },
+                {
+                    "value": "4",
+                    "title": "15.6\" Office/Business (NL50RU) AMD Ryzen 5 4500U 6x 2.30GHz Radeon RX Vega 6",
+                    "price": 62100
+                },
+                {
+                    "value": "5",
+                    "title": "15.6\" Office/Business (NL50RU) AMD Ryzen 7 4700U 8x 2.00GHz Radeon RX Vega 7",
+                    "price": 65000
+                },
+                {
+                    "value": "6",
+                    "title": "14.0\" Office/Business (NV40MZ) Dark Blue i5-1135G7 4x2.40GHz Intel Iris Xe Graphics",
+                    "price": 65000
+                },
+                {
+                    "value": "7",
+                    "title": "15.6\" Gaming/Multimedia GTX (NK50SE) Nvidia GTX 1650 Ti 4GB GDDR6",
+                    "price": 67800
+                },
+                {
+                    "value": "8",
+                    "title": "17.3\" Gaming/Multimedia (NK70SE) Nvidia GTX 1650Ti 4GB GDDR6",
+                    "price": 73500
+                },
+                {
+                    "value": "9",
+                    "title": "15.6\" Gaming/Multimedia (NH50DB) i5-10300H 4x 2.50GHz Nvidia GTX 1650 4GB GDDR6",
+                    "price": 79100
+                },
+                {
+                    "value": "10",
+                    "title": "15.6\" Gaming/Multimedia (NH58DBQ) i5-10300H 4x 2.50Ghz Nvidia GTX 1650 4GB GDDR6",
+                    "price": 84700
+                },
+                {
+                    "value": "11",
+                    "title": "17.3\" Gaming/Multimedia (NH77DBQ) i7-10750H Nvidia GTX 1650 4GB GDDR6",
+                    "price": 90500
+                },
+                {
+                    "value": "12",
+                    "title": "15.6\" Gaming/Multimedia (NP50DB) i7-10750H 6x 2.60GHz Nvidia GTX 1650 4GB GDDR6",
+                    "price": 91900
+                },
+                {
+                    "value": "13",
+                    "title": "16.1\" Gaming/Multimedia RTX (N960KP) Nvidia RTX 3060 6GB GDDR6",
+                    "price": 94750
+                },
+                {
+                    "value": "14",
+                    "title": "17.3\" Gaming/Multimedia (NH77DEQ) i7-10750H Nvidia GTX 1650Ti 4GB GDDR6",
+                    "price": 101800
+                }
+            ]
+        },
+        {
+            "id": "processor",
+            "label": "Processor",
+            "data": [
+                {
+                    "value": "1",
+                    "title": "Intel Core i3-10100 4x 3.60GHz (BX8070110100) (65W)",
+                    "price": 16700
+                },
+                {
+                    "value": "2",
+                    "title": "Intel Core i5-10400 6x 2.90GHz (BX8070110400) (65W)",
+                    "price": 21000,
+                    "availableQuantity": 7
+                },
+                {
+                    "value": "3",
+                    "title": "Intel Core i5-10500 6x 3.10GHz (BX8070110500) (65W)",
+                    "price": 24900
+                },
+                {
+                    "value": "4",
+                    "title": "Intel Core i5-10600 6x 3.30 GHz (BX8070110600) (65W)",
+                    "price": 27500
+                },
+                {
+                    "value": "5",
+                    "title": "Intel Core i7-10700 8x 2.90GHz (BX8070110700) (65W)",
+                    "price": 47300
+                },
+                {
+                    "value": "6",
+                    "title": "Intel Core i9-10900 10x 2.80GHz (BX8070110900) (65W)",
+                    "price": 64100
+                }
+            ]
+        },
+        {
+            "id": "gpu",
+            "label": "GPU",
+            "data": [
+                {
+                    "value": "1",
+                    "title": "NVIDIA GeForce GTX 1650Ti 4GB GDDR6",
+                    "price": 0
+                },
+                {
+                    "value": "2",
+                    "title": "AMD Radeon RX Vega 6",
+                    "price": 10000,
+                    "disabled": {
+                        "barebone": {
+                            "condition": ["1", "5"],
+                            "tooltip": "This option is not compatible with the selected Barebone"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "id": "drive",
+            "label": "External Drive",
+            "data": [
+                {
+                    "value": "1",
+                    "title": "Yes",
+                    "price": 3600
+                },
+                {
+                    "value": "2",
+                    "title": "No",
+                    "price": 0
+                }
+            ]
+        },
+        {
+            "id": "operating_system",
+            "label": "Operating system",
+            "data": [
+                {
+                    "value": "2",
+                    "title": "Linux 5.13.7",
+                    "price": 1500
+                },
+                {
+                    "value": "1",
+                    "title": "Microsoft Windows 10 64Bit Professional preinstalled & Key",
+                    "price": 5100
+                }
+            ]
+        },
+        {
+            "id": "w_lan",
+            "label": "W-LAN",
+            "data": [
+                {
+                    "value": "1",
+                    "title": "Standard WLAN",
+                    "price": 0
+                },
+                {
+                    "value": "2",
+                    "title": "Intel Wi-Fi 6 AX201 WLAN 2.4GHz/5GHz Bluetooth 5.2 (AX201.NGWG)",
+                    "price": 1900
+                },
+                {
+                    "value": "3",
+                    "title": "Intel Wi-Fi 6 AX200 WLAN 2.4GHz/5GHz Bluetooth 5.2 (AX200.NGWG)",
+                    "price": 2700
+                }
+            ]
+        },
+        {
+            "id": "memory",
+            "label": "Memory",
+            "data": [
+                {
+                    "value": "1",
+                    "title": "8GB Crucial DDR4 2.666MHz (CT8G4SFRA266)",
+                    "price": 4500
+                },
+                {
+                    "value": "2",
+                    "title": "8GB Crucial DDR4 3.200MHz (CT8G4SFRA32A)",
+                    "price": 4800
+                },
+                {
+                    "value": "3",
+                    "title": "16GB Crucial DDR4 3.200MHz (CT16G4SFRA32A)",
+                    "price": 8800
+                },
+                {
+                    "value": "4",
+                    "title": "16GB Crucial DDR4 2.666MHz (CT16G4SFD8266)",
+                    "price": 8900
+                },
+                {
+                    "value": "5",
+                    "title": "32GB Crucial DDR4 2.666MHz (CT2K16G4SFD8266)",
+                    "price": 17900
+                },
+                {
+                    "value": "6",
+                    "title": "32GB Crucial DDR4 2.666MHz (CT2K16G4SFD8266)",
+                    "price": 19100
+                },
+                {
+                    "value": "7",
+                    "title": "64GB Crucial DDR4 2.666MHz (CT2K32G4SFD8266)",
+                    "price": 34500,
+                    "disabled": {
+                        "barebone": {
+                            "condition": ["1", "5"],
+                            "tooltip": "This option is not compatible with the selected CPU"
+                        }
+                    }
+                },
+                {
+                    "value": "8",
+                    "title": "64GB Crucial 3.200MHz (CT2K32G4SFD832A)",
+                    "price": 36700,
+                    "disabled": {
+                        "barebone": {
+                            "condition": ["1", "5"],
+                            "tooltip": "This option is not compatible with the selected CPU"
+                        }
+                    }
+                },
+                {
+                    "value": "9",
+                    "title": "64GB Crucial Ballistix DDR4 3.200MHz (BL2K32G32C16S4B)",
+                    "price": 45100,
+                    "disabled": {
+                        "barebone": {
+                            "condition": ["1", "5"],
+                            "tooltip": "This option is not compatible with the selected CPU"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "id": "ssd",
+            "label": "SSD",
+            "data": [
+                {
+                    "value": "1",
+                    "title": "250GB Western Digital Blue 3D NAND M.2 (WDS250G2B0B)",
+                    "price": 4600
+                },
+                {
+                    "value": "2",
+                    "title": "250GB Western Digital Blue 3D NAND SSD (WDS250G2B0A)",
+                    "price": 5700
+                },
+                {
+                    "value": "3",
+                    "title": "250GB Samsung 860 EVO M.2 (MZ-N6E250BW)",
+                    "price": 6600
+                },
+                {
+                    "value": "4",
+                    "title": "250GB Samsung 860 EVO (MZ-76E250B/EU)",
+                    "price": 7300
+                },
+                {
+                    "value": "5",
+                    "title": "500GB Western Digital Blue 3D NAND SSD (WDS500G2B0A)",
+                    "price": 8500
+                },
+                {
+                    "value": "6",
+                    "title": "500GB Samsung 870 EVO Black (MZ-77E500B/EU)",
+                    "price": 11100
+                },
+                {
+                    "value": "7",
+                    "title": "1TB Western Digital Blue 3D NAND M.2 (WDS100T2B0B)",
+                    "price": 11400
+                },
+                {
+                    "value": "8",
+                    "title": "1TB Samsung 870 QVO 2.5\" (MZ-77Q1T0BW)",
+                    "price": 14500
+                },
+                {
+                    "value": "9",
+                    "title": "2TB Samsung SSD 870 QVO (MZ-77Q2T0BW)",
+                    "price": 25400
+                },
+                {
+                    "value": "10",
+                    "title": "2TB Western Digital Blue 3D 2000GB SSD M.2 (WDS200T2B0B)",
+                    "price": 37900
+                },
+                {
+                    "value": "11",
+                    "title": "4TB Samsung SSD 870 QVO (MZ-77Q4T0BW)",
+                    "price": 41500
+                }
+            ]
+        },
+        {
+            "id": "hhd",
+            "label": "Hard disk drive (HDD)",
+            "data": [
+                {
+                    "value": "1",
+                    "title": "500GB Western Digital WD Blue Mobile (WD5000LPCX)",
+                    "price": 3300
+                },
+                {
+                    "value": "2",
+                    "title": "500GB Toshiba MQ (MQ01ABD050)",
+                    "price": 3600
+                },
+                {
+                    "value": "3",
+                    "title": "1TB Seagate Barracuda (ST1000LM048)",
+                    "price": 4700
+                },
+                {
+                    "value": "4",
+                    "title": "500GB HGST Travelstar Z5K500 (0J38065/HTS545050A7E680)",
+                    "price": 4800
+                },
+                {
+                    "value": "5",
+                    "title": "1000GB Seagate Barracuda Pro (ST1000LM049)",
+                    "price": 6600
+                },
+                {
+                    "value": "6",
+                    "title": "2TB Seagate Barracuda BarraCuda 2.5\" 2000GB (ST2000LM015)",
+                    "price": 7200
+                },
+                {
+                    "value": "7",
+                    "title": "1TB Seagate FireCuda 1000GB SSHD (ST1000LX015)",
+                    "price": 7900
+                }
+            ]
+        },
+        {
+            "id": "keyboard",
+            "label": "Keyboard",
+            "data": [
+                {
+                    "value": "2",
+                    "title": "English Keyboard",
+                    "price": 0
+                },
+                {
+                    "value": "1",
+                    "title": "German Keyboard",
+                    "price": 0
+                },
+                {
+                    "value": "3",
+                    "title": "Spanish Keyboard",
+                    "price": 0
+                },
+                {
+                    "value": "4",
+                    "title": "Italian Keyboard",
+                    "price": 0
+                },
+                {
+                    "value": "5",
+                    "title": "French Keyboard",
+                    "price": 0
+                }
+            ]
+        }
+    ],
+    "defaults": {
+        "barebone": "1",
+        "drive": "1",
+        "gpu": "1",
+        "hhd": "1",
+        "keyboard": "2",
+        "memory": "1",
+        "operating_system": "2",
+        "processor": "1",
+        "ssd": "1",
+        "time_of_day": "2",
+        "w_lan": "1"
+    },
+    "volumePrices": [
+        {
+            "condition": {
+                "barebone": "3",
+                "drive": "1",
+                "gpu": "1",
+                "hhd": "1",
+                "keyboard": "2",
+                "memory": "1",
+                "operating_system": "2",
+                "processor": "1",
+                "ssd": "1",
+                "time_of_day": "2",
+                "w_lan": "1"
+            },
+            "prices": {
+                "GROSS_MODE": [
+                    {
+                        "quantity": 5,
+                        "net_price": 58500,
+                        "gross_price": 59000
+                    }
+                ],
+                "NET_MODE": [
+                    {
+                        "quantity": 5,
+                        "net_price": 53500,
+                        "gross_price": 54000
+                    }
+                ]
+            }
+        }
+    ]
+}

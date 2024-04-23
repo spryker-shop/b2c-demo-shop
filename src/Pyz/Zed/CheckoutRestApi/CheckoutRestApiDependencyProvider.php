@@ -8,7 +8,7 @@
 namespace Pyz\Zed\CheckoutRestApi;
 
 use Spryker\Zed\CheckoutRestApi\CheckoutRestApiDependencyProvider as SprykerCheckoutRestApiDependencyProvider;
-use Spryker\Zed\Country\Communication\Plugin\CheckoutRestApi\CountryCheckoutDataValidatorPlugin;
+use Spryker\Zed\Country\Communication\Plugin\CheckoutRestApi\CountriesCheckoutDataValidatorPlugin;
 use Spryker\Zed\CustomersRestApi\Communication\Plugin\CheckoutRestApi\AddressQuoteMapperPlugin;
 use Spryker\Zed\CustomersRestApi\Communication\Plugin\CheckoutRestApi\CustomerAddressCheckoutDataValidatorPlugin;
 use Spryker\Zed\CustomersRestApi\Communication\Plugin\CheckoutRestApi\CustomerQuoteMapperPlugin;
@@ -43,10 +43,10 @@ class CheckoutRestApiDependencyProvider extends SprykerCheckoutRestApiDependency
     protected function getCheckoutDataValidatorPlugins(): array
     {
         return [
-            new CountryCheckoutDataValidatorPlugin(),
             new ShipmentMethodCheckoutDataValidatorPlugin(),
             new ItemsCheckoutDataValidatorPlugin(),
             new CustomerAddressCheckoutDataValidatorPlugin(),
+            new CountriesCheckoutDataValidatorPlugin(),
         ];
     }
 

@@ -18,7 +18,8 @@ use Spryker\Glue\GlueBackendApiApplication\Plugin\GlueApplication\SecurityHeader
 use Spryker\Glue\GlueBackendApiApplication\Plugin\GlueApplication\StrictTransportSecurityHeaderResponseFormatterPlugin;
 use Spryker\Glue\GlueBackendApiApplicationAuthorizationConnector\Plugin\GlueBackendApiApplication\AuthorizationRequestAfterRoutingValidatorPlugin;
 use Spryker\Glue\Http\Plugin\Application\HttpApplicationPlugin;
-use Spryker\Glue\OauthBackendApi\Plugin\AccessTokenValidatorPlugin;
+use Spryker\Glue\Locale\Plugin\Application\LocaleApplicationPlugin;
+use Spryker\Glue\OauthBackendApi\Plugin\GlueApplication\BackendApiAccessTokenValidatorPlugin;
 use Spryker\Glue\OauthBackendApi\Plugin\GlueApplication\OauthBackendApiTokenResource;
 use Spryker\Glue\OauthBackendApi\Plugin\GlueApplication\UserRequestValidatorPlugin;
 use Spryker\Glue\OauthBackendApi\Plugin\GlueBackendApiApplication\UserRequestBuilderPlugin;
@@ -28,7 +29,8 @@ use Spryker\Glue\PickingListsBackendApi\Plugin\GlueBackendApiApplication\Picking
 use Spryker\Glue\PushNotificationsBackendApi\Plugin\GlueBackendApiApplication\PushNotificationProvidersBackendResourcePlugin;
 use Spryker\Glue\PushNotificationsBackendApi\Plugin\GlueBackendApiApplication\PushNotificationSubscriptionsBackendResourcePlugin;
 use Spryker\Glue\Router\Plugin\Application\RouterApplicationPlugin;
-use Spryker\Glue\StoresRestApi\Plugin\Application\StoreHttpHeaderApplicationPlugin;
+use Spryker\Glue\StoresApi\Plugin\GlueBackendApiApplication\StoreApplicationPlugin as ClientStoreApplicationPlugin;
+use Spryker\Glue\StoresBackendApi\Plugin\GlueBackendApiApplication\StoreApplicationPlugin;
 use Spryker\Glue\WarehouseOauthBackendApi\Plugin\GlueBackendApiApplication\WarehouseRequestBuilderPlugin;
 use Spryker\Glue\WarehouseOauthBackendApi\Plugin\GlueBackendApiApplication\WarehouseRequestValidatorPlugin;
 use Spryker\Glue\WarehouseOauthBackendApi\Plugin\GlueBackendApiApplication\WarehouseTokensBackendResourcePlugin;
@@ -45,9 +47,11 @@ class GlueBackendApiApplicationDependencyProvider extends SprykerGlueBackendApiA
         return [
             new HttpApplicationPlugin(),
             new PropelApplicationPlugin(),
-            new StoreHttpHeaderApplicationPlugin(),
+            new ClientStoreApplicationPlugin(),
+            new StoreApplicationPlugin(),
             new RouterApplicationPlugin(),
             new EventDispatcherApplicationPlugin(),
+            new LocaleApplicationPlugin(),
         ];
     }
 
@@ -70,7 +74,7 @@ class GlueBackendApiApplicationDependencyProvider extends SprykerGlueBackendApiA
     protected function getRequestValidatorPlugins(): array
     {
         return [
-            new AccessTokenValidatorPlugin(),
+            new BackendApiAccessTokenValidatorPlugin(),
             new UserRequestValidatorPlugin(),
             new WarehouseRequestValidatorPlugin(),
         ];
