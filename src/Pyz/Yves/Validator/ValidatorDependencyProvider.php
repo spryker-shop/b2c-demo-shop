@@ -7,7 +7,7 @@
 
 namespace Pyz\Yves\Validator;
 
-use Spryker\Yves\Security\Plugin\Validator\UserPasswordValidatorConstraintPlugin;
+use Spryker\Yves\Security\Plugin\Validator\YvesUserPasswordValidatorConstraintPlugin;
 use Spryker\Yves\Translator\Plugin\Validator\TranslatorValidatorPlugin;
 use Spryker\Yves\Validator\Plugin\Validator\ConstraintValidatorFactoryValidatorPlugin;
 use Spryker\Yves\Validator\Plugin\Validator\MetadataFactoryValidatorPlugin;
@@ -33,7 +33,7 @@ class ValidatorDependencyProvider extends SprykerValidatorDependencyProvider
     protected function getConstraintPlugins(): array
     {
         return [
-            new UserPasswordValidatorConstraintPlugin(),
+            new YvesUserPasswordValidatorConstraintPlugin(),
         ];
     }
 }

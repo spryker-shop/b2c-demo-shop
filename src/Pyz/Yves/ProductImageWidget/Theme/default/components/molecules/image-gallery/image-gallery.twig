@@ -39,7 +39,7 @@
             {% set activeItemClass = loop.first ? config.name ~ '__item--active' %}
 
             <div class="{{ config.name }}__item {{ config.jsName }}__item {{ activeItemClass }}">
-                {% if image.externalUrlLarge is not empty %}
+                {% if image.externalUrlLarge is defined %}
                     {% include molecule('lazy-image') with {
                         class: config.name ~ '__image',
                         modifiers: ['full-height'],

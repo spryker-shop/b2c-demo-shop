@@ -1,0 +1,136 @@
+version: '0.1'
+
+namespace: spryker_ci
+tag: '1.0'
+
+environment: docker.ci
+pipeline: docker.ci.acceptance.dynamic-store
+image:
+    tag: spryker/php:8.2
+    environment:
+        SPRYKER_PRODUCT_CONFIGURATOR_HOST: date-time-configurator-example.spryker.local
+        SPRYKER_PRODUCT_CONFIGURATOR_PORT: 80
+        SPRYKER_CONFIGURATOR_ENCRYPTION_KEY: 'change123'
+        SPRYKER_YVES_HOST_EU: yves.eu.spryker.local
+        SPRYKER_YVES_HOST_US: yves.us.spryker.local
+        SPRYKER_DYNAMIC_STORE_MODE: true
+        SPRYKER_PUSH_NOTIFICATION_WEB_PUSH_PHP_VAPID_PUBLIC_KEY: 'BGqNWbv0hWM5CQ1-KwAfSQBMC6TMVFyrnh3vQp37oGCNvQ6eG_HyMjxBFJRWeCPTbzDoxcjhxLJS8Ck8r1G2oFw'
+        SPRYKER_PUSH_NOTIFICATION_WEB_PUSH_PHP_VAPID_PRIVATE_KEY: 'UK6DywwjKITPpRHBSY9TLPIXm6BPrHX40sseIoXT9c8'
+        SPRYKER_PUSH_NOTIFICATION_WEB_PUSH_PHP_VAPID_SUBJECT: 'https://spryker.com'
+    node:
+        version: 18
+        npm: 9
+
+composer:
+    mode: "--no-dev --quiet"
+    autoload: --classmap-authoritative
+
+regions:
+    EU:
+        services:
+            mail:
+                sender:
+                    name: Spryker No-Reply
+                    email: no-reply@spryker.local
+            database:
+                database: eu-docker
+                username: spryker
+                password: secret
+
+            broker:
+                namespace: eu-docker
+                key_value_store:
+                    namespace: 1
+                search:
+                    namespace: eu_search
+groups:
+    EU:
+        region: EU
+        applications:
+            yves_eu:
+                application: yves
+                endpoints:
+                    yves.eu.spryker.local:
+                        region: EU
+                        services:
+                            session:
+                                namespace: 1
+            glue_eu:
+                application: glue
+                endpoints:
+                    glue.eu.spryker.local:
+                        region: EU
+            backoffice_eu:
+                application: backoffice
+                endpoints:
+                    backoffice.eu.spryker.local:
+                        region: EU
+                        services:
+                            session:
+                                namespace: 3
+            backend_gateway_eu:
+                application: backend-gateway
+                endpoints:
+                    backend-gateway.eu.spryker.local:
+                        region: EU
+                        primal: true
+            backend_api_eu:
+                application: zed
+                endpoints:
+                    backend-api.eu.spryker.local:
+                        region: EU
+                        entry-point: BackendApi
+            glue_storefront_eu:
+                application: glue-storefront
+                endpoints:
+                    glue-storefront.eu.spryker.local:
+                        region: EU
+            glue_backend_eu:
+                application: glue-backend
+                endpoints:
+                    glue-backend.eu.spryker.local:
+                        region: EU
+services:
+    database:
+        engine: mysql
+        version: mariadb-10.4
+        root:
+            username: 'root'
+            password: 'secret'
+        endpoints:
+            localhost:3306:
+                protocol: tcp
+    broker:
+        engine: rabbitmq
+        version: '3.9'
+        api:
+            username: 'spryker'
+            password: 'secret'
+    session:
+        engine: redis
+    key_value_store:
+        engine: redis
+    search:
+        engine: elastic
+        version: '7.10'
+    mail_catcher:
+        engine: mailhog
+
+docker:
+    ssl:
+        enabled: false
+
+    debug:
+        enabled: false
+        xdebug:
+            enabled: false
+
+    testing:
+        region: EU
+
+    mount:
+        baked:
+
+    compose:
+        yamls:
+            - .robot/docker-compose.robot.yml

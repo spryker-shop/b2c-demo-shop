@@ -9,6 +9,7 @@ namespace Pyz\Glue\GlueBackendApiApplicationAuthorizationConnector;
 
 use Spryker\Glue\ApiKeyAuthorizationConnector\Plugin\GlueBackendApiApplicationAuthorizationConnector\ApiKeyAuthorizationRequestExpanderPlugin;
 use Spryker\Glue\GlueBackendApiApplicationAuthorizationConnector\GlueBackendApiApplicationAuthorizationConnectorDependencyProvider as SprykerGlueBackendApiApplicationAuthorizationConnectorDependencyProvider;
+use Spryker\Glue\OauthUserConnector\Plugin\GlueBackendApiApplicationAuthorizationConnector\OauthUserScopeProtectedRouteAuthorizationConfigProviderPlugin;
 use Spryker\Glue\WarehouseOauthBackendApi\Plugin\GlueBackendApiApplicationAuthorizationConnector\WarehouseAuthorizationRequestExpanderPlugin;
 
 /**
@@ -24,6 +25,16 @@ class GlueBackendApiApplicationAuthorizationConnectorDependencyProvider extends 
         return [
             new ApiKeyAuthorizationRequestExpanderPlugin(),
             new WarehouseAuthorizationRequestExpanderPlugin(),
+        ];
+    }
+
+    /**
+     * @return list<\Spryker\Glue\GlueBackendApiApplicationAuthorizationConnectorExtension\Dependency\Plugin\ProtectedRouteAuthorizationConfigProviderPluginInterface>
+     */
+    protected function getProtectedRouteAuthorizationConfigProviderPlugins(): array
+    {
+        return [
+            new OauthUserScopeProtectedRouteAuthorizationConfigProviderPlugin(),
         ];
     }
 }

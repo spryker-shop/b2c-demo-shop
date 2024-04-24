@@ -96,7 +96,8 @@
                 <div class="col col--sm-12 col--lg-5">
                     {% include molecule('summary-sidebar', 'CheckoutPage') with {
                         data: {
-                            shipment: shipmentGroup.shipment,
+                            shipmentGroup: shipmentGroup,
+                            shipmentExpenses: data.shipmentExpenses,
                             isGiftCardExists: isGiftCardExists,
                             canEdit: true,
                         },
@@ -142,7 +143,7 @@
                 data: {
                     form: data.forms.summary,
                     submit: {
-                        enable: true,
+                        enable: data.isPlaceableOrder,
                         text: 'checkout.step.place.order' | trans,
                         class: 'form__action--checkout button button--large button--expand js-form__submit-button',
                     },
@@ -158,6 +159,7 @@
                     overview: data.overview,
                     cart: data.cart,
                     acceptTermsFieldName: data.acceptTermsFieldName,
+                    isPlaceableOrderErrors: data.isPlaceableOrderErrors,
                 },
             } only %}
                 {% block field %}
@@ -186,6 +188,15 @@
                     } only %}
 
                     {{ parent() }}
+
+                    {% if embed.isPlaceableOrderErrors is not empty %}
+                        <hr>
+                        <ul class="list list--alert">
+                            {% for error in embed.isPlaceableOrderErrors %}
+                                <li class="list__item">{{ error.message | trans(error.parameters) }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
                 {% endblock %}
             {% endembed %}
         </div>
