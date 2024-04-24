@@ -8,11 +8,11 @@ parameters:
         - src/
 
     excludePaths:
-        - '%rootDir%/../../../src/Generated/*'
-        - '%rootDir%/../../../src/Orm/*'
+        - src/Generated/*
+        - src/Orm/*
 
     bootstrapFiles:
-        - '%rootDir%/../../../phpstan-bootstrap.php'
+        - phpstan-bootstrap.php
 
     ignoreErrors:
         - '#Call to an undefined method .+Criteria::.+\(\).#'
@@ -29,6 +29,3 @@ parameters:
         - APPLICATION_ENV
         - APPLICATION_STORE
         - APPLICATION_CODE_BUCKET
-
-    parallel:
-    	maximumNumberOfProcesses: 1
