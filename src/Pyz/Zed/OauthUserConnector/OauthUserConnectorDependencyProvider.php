@@ -14,9 +14,9 @@ use Spryker\Zed\OauthWarehouseUser\Communication\Plugin\OauthUserConnector\Wareh
 
 class OauthUserConnectorDependencyProvider extends SprykerOauthUserConnectorDependencyProvider
 {
- /**
-  * @return list<\Spryker\Zed\OauthUserConnectorExtension\Dependency\Plugin\UserTypeOauthScopeProviderPluginInterface>
-  */
+    /**
+     * @return list<\Spryker\Zed\OauthUserConnectorExtension\Dependency\Plugin\UserTypeOauthScopeProviderPluginInterface>
+     */
     protected function getUserTypeOauthScopeProviderPlugins(): array
     {
         return [

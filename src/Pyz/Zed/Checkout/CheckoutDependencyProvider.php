@@ -31,6 +31,7 @@ use Spryker\Zed\ProductCartConnector\Communication\Plugin\Checkout\ProductExists
 use Spryker\Zed\ProductConfigurationCart\Communication\Plugin\Checkout\ProductConfigurationCheckoutPreConditionPlugin;
 use Spryker\Zed\ProductDiscontinued\Communication\Plugin\Checkout\ProductDiscontinuedCheckoutPreConditionPlugin;
 use Spryker\Zed\ProductOption\Communication\Plugin\Checkout\ProductOptionOrderSaverPlugin;
+use Spryker\Zed\ProductQuantity\Communication\Plugin\Checkout\ProductQuantityRestrictionCheckoutPreConditionPlugin;
 use Spryker\Zed\Sales\Communication\Plugin\Checkout\DuplicateOrderCheckoutPreConditionPlugin;
 use Spryker\Zed\Sales\Communication\Plugin\Checkout\OrderItemsSaverPlugin;
 use Spryker\Zed\Sales\Communication\Plugin\Checkout\OrderSaverPlugin;
@@ -69,6 +70,7 @@ class CheckoutDependencyProvider extends SprykerCheckoutDependencyProvider
             new ProductConfigurationCheckoutPreConditionPlugin(),
             new DuplicateOrderCheckoutPreConditionPlugin(),
             new ProductExistsCheckoutPreConditionPlugin(),
+            new ProductQuantityRestrictionCheckoutPreConditionPlugin(),
         ];
     }
 
