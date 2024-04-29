@@ -670,7 +670,7 @@ jobs:
                     docker/sdk cli console queue:worker:start --stop-when-empty
             -   name: Run Tests
                 run: |
-                    docker/sdk exec --env "ENV_REPOSITORY_ID=b2c" --env cypress-tests npm run cy:ci
+                    docker/sdk exec --env "ENV_REPOSITORY_ID=b2c" cypress-tests npm run cy:ci
             -   name: Upload artifacts
                 if: failure()
                 run: |
