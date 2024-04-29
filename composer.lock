@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "727c28c86a3516ba7622807f1a61226e",
+    "content-hash": "513570bd5bef3ec4ee2d21aa98da7055",
     "packages": [
         {
             "name": "async-aws/core",
@@ -5696,7 +5696,7 @@
         },
         {
             "name": "spryker-feature/customer-account-management",
-            "version": "202404.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker-feature/customer-account-management.git",
@@ -5723,6 +5723,7 @@
                 "spryker/oauth-customer-validation": "^1.0.0",
                 "spryker/oauth-revoke": "^1.3.0"
             },
+            "default-branch": true,
             "type": "metapackage",
             "extra": {
                 "branch-alias": {
@@ -23115,16 +23116,16 @@
         },
         {
             "name": "spryker/customer",
-            "version": "7.56.1",
+            "version": "7.56.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/customer.git",
-                "reference": "70cada48245cdf22794fd8e5fe752932320820b9"
+                "reference": "e4c03261bdc2ae8401fdcedb60c48944081ec92a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/customer/zipball/70cada48245cdf22794fd8e5fe752932320820b9",
-                "reference": "70cada48245cdf22794fd8e5fe752932320820b9",
+                "url": "https://api.github.com/repos/spryker/customer/zipball/e4c03261bdc2ae8401fdcedb60c48944081ec92a",
+                "reference": "e4c03261bdc2ae8401fdcedb60c48944081ec92a",
                 "shasum": ""
             },
             "require": {
@@ -23191,9 +23192,9 @@
             ],
             "description": "Customer module",
             "support": {
-                "source": "https://github.com/spryker/customer/tree/7.56.1"
+                "source": "https://github.com/spryker/customer/tree/7.56.2"
             },
-            "time": "2024-04-01T14:15:35+00:00"
+            "time": "2024-04-29T10:21:07+00:00"
         },
         {
             "name": "spryker/customer-access",
@@ -60505,6 +60506,21 @@
             "time": "2024-03-22T09:53:22+00:00"
         },
         {
+            "name": "spryker/cypress-tests",
+            "version": "dev-feature/cc-33308-smoke-tests",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/cypress-tests.git",
+                "reference": "1674d71a4bc5f18ba8f29714dcf39dc120e93afd"
+            },
+            "type": "library",
+            "license": [
+                "MIT"
+            ],
+            "description": "This repository is dedicated to housing an extensive collection of UI end-to-end tests, meticulously crafted using Cypress for Spryker applications. These tests are designed to thoroughly evaluate the user interface, ensuring that all interactions and visual elements function as intended in real-world scenarios. By leveraging Cypress's advanced browser automation capabilities, this suite provides an efficient and effective means of validating the user experience, confirming the seamless operation and aesthetic integrity of Spryker's front-end components. Our commitment to rigorous UI testing helps maintain the high standard of quality and reliability that Spryker users expect.",
+            "time": "2024-04-29T10:57:50+00:00"
+        },
+        {
             "name": "spryker/development",
             "version": "3.37.0",
             "source": {
@@ -60789,6 +60805,61 @@
                 "source": "https://github.com/spryker/testify/tree/3.55.1"
             },
             "time": "2024-03-25T16:40:08+00:00"
+        },
+        {
+            "name": "spryker/testify-backend-api",
+            "version": "0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/testify-backend-api.git",
+                "reference": "eba025b1da5b9715b5660d7b0aaec4995d1773bc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/testify-backend-api/zipball/eba025b1da5b9715b5660d7b0aaec4995d1773bc",
+                "reference": "eba025b1da5b9715b5660d7b0aaec4995d1773bc",
+                "shasum": ""
+            },
+            "require": {
+                "codeception/codeception": "^5.0.2",
+                "php": ">=8.1",
+                "spryker/event-behavior": "^1.0.0",
+                "spryker/glue-json-api-convention-extension": "^1.0.0",
+                "spryker/kernel": "^3.73.0",
+                "spryker/log": "^3.0.0",
+                "spryker/queue": "^1.0.0",
+                "spryker/symfony": "^3.0.0",
+                "spryker/testify": "^3.0.0",
+                "spryker/transfer": "^3.27.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/glue-application": "*"
+            },
+            "suggest": {
+                "spryker/glue-application": "If you want to use plugins with glue application."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/",
+                    "SprykerTest\\Shared\\TestifyBackendApi\\Helper\\": "tests/SprykerTest/Shared/TestifyBackendApi/Helper/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "TestifyBackendApi module",
+            "support": {
+                "source": "https://github.com/spryker/testify-backend-api/tree/0.1.0"
+            },
+            "time": "2024-03-13T15:14:46+00:00"
         },
         {
             "name": "spryker/web-profiler",
@@ -61452,9 +61523,18 @@
             "time": "2022-06-03T18:03:27+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "package": "spryker-feature/customer-account-management",
+            "version": "9999999-dev",
+            "alias": "202407.0",
+            "alias_normalized": "202407.0"
+        }
+    ],
     "minimum-stability": "dev",
     "stability-flags": {
+        "spryker-feature/customer-account-management": 20,
+        "spryker/cypress-tests": 20,
         "spryker/docker-chromedriver": 20,
         "spryker/robotframework-suite-tests": 20
     },
