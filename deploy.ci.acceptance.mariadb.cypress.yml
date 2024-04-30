@@ -22,7 +22,7 @@ image:
         npm: 9
 
 composer:
-    mode: '--no-dev --quiet'
+    mode: ''
     autoload: --classmap-authoritative
 
 regions:
@@ -169,7 +169,9 @@ docker:
         store: DE
 
     mount:
-        baked:
+        native:
+            platforms:
+                - linux
 
     compose:
         yamls:
