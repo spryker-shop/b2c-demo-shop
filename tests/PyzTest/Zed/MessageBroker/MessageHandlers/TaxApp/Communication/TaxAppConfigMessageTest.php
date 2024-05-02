@@ -9,8 +9,8 @@ namespace PyzTest\Zed\MessageBroker\MessageHandlers\TaxApp\Communication;
 
 use Codeception\Test\Unit;
 use Generated\Shared\Transfer\ConfigureTaxAppTransfer;
+use Generated\Shared\Transfer\DeleteTaxAppTransfer;
 use Generated\Shared\Transfer\MessageAttributesTransfer;
-use Generated\Shared\Transfer\StoreTransfer;
 use PyzTest\Zed\MessageBroker\TaxAppCommunicationTester;
 
 /**
@@ -55,7 +55,6 @@ class TaxAppConfigMessageTest extends Unit
             MessageAttributesTransfer::STORE_REFERENCE => static::STORE_REFERENCE,
         ], [
             ConfigureTaxAppTransfer::VENDOR_CODE => static::VENDOR_CODE,
-            ConfigureTaxAppTransfer::API_URL => 'url',
             ConfigureTaxAppTransfer::IS_ACTIVE => true,
         ]);
 
@@ -75,12 +74,12 @@ class TaxAppConfigMessageTest extends Unit
         $storeTransfer = $this->tester->getAllowedStore();
         $this->tester->setStoreReferenceData([$storeTransfer->getName() => static::STORE_REFERENCE]);
 
-        $this->createDummyTaxAppConfig($storeTransfer);
+        $this->createDummyTaxAppConfig();
 
         $deleteTaxAppTransfer = $this->tester->buildDeleteTaxAppTransfer([
             MessageAttributesTransfer::STORE_REFERENCE => static::STORE_REFERENCE,
         ], [
-            ConfigureTaxAppTransfer::VENDOR_CODE => static::VENDOR_CODE,
+            DeleteTaxAppTransfer::VENDOR_CODE => static::VENDOR_CODE,
         ]);
 
         // Act
@@ -91,16 +90,15 @@ class TaxAppConfigMessageTest extends Unit
     }
 
     /**
-     * @param \Generated\Shared\Transfer\StoreTransfer $storeTransfer
-     *
      * @return void
      */
-    protected function createDummyTaxAppConfig(StoreTransfer $storeTransfer): void
+    protected function createDummyTaxAppConfig(): void
     {
         $this->tester->handleTaxAppMessage(
             $this->tester->buildConfigureTaxAppTransfer([
                 MessageAttributesTransfer::STORE_REFERENCE => static::STORE_REFERENCE,
                 ConfigureTaxAppTransfer::VENDOR_CODE => static::VENDOR_CODE,
+                ConfigureTaxAppTransfer::IS_ACTIVE => true,
             ]),
         );
     }

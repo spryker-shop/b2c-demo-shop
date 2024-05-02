@@ -81,6 +81,11 @@ class ProductStockPropelDataSetWriter implements DataSetWriterInterface
     protected static $productAbstractSkus = [];
 
     /**
+     * @var array<string, array<int, \Orm\Zed\Availability\Persistence\SpyAvailabilityAbstract>>
+     */
+    protected static $availabilityAbstractEntitiesIndexedByAbstractSkuAndIdStore = [];
+
+    /**
      * @var \Pyz\Zed\DataImport\Business\Model\Product\Repository\ProductRepositoryInterface
      */
     protected $productRepository;
@@ -214,10 +219,10 @@ class ProductStockPropelDataSetWriter implements DataSetWriterInterface
 
         return SpyAvailabilityAbstractQuery::create()
             ->joinWithSpyAvailability()
+            ->filterByAbstractSku_In(static::$productAbstractSkus)
             ->useSpyAvailabilityQuery()
                 ->filterByFkStore_In($storeIds)
             ->endUse()
-            ->filterByAbstractSku_In(static::$productAbstractSkus)
             ->select([
                 SpyAvailabilityAbstractTableMap::COL_ID_AVAILABILITY_ABSTRACT,
             ])
@@ -347,18 +352,18 @@ class ProductStockPropelDataSetWriter implements DataSetWriterInterface
     {
         $idStore = $this->getIdStore($storeTransfer);
 
+        /** @var \Propel\Runtime\Collection\ArrayCollection $productReservations */
         $productReservations = SpyOmsProductReservationQuery::create()
             ->filterBySku($sku)
             ->filterByFkStore($idStore)
             ->select([
                 SpyOmsProductReservationTableMap::COL_RESERVATION_QUANTITY,
             ])
-            ->find()
-            ->toArray();
+            ->find();
 
         $reservationQuantity = new Decimal(0);
 
-        foreach ($productReservations as $productReservationQuantity) {
+        foreach ($productReservations->toArray() as $productReservationQuantity) {
             $reservationQuantity = $reservationQuantity->add($productReservationQuantity);
         }
 
@@ -435,16 +440,22 @@ class ProductStockPropelDataSetWriter implements DataSetWriterInterface
      */
     protected function getAvailabilityAbstract(string $abstractSku, int $idStore): SpyAvailabilityAbstract
     {
+        if (!empty(static::$availabilityAbstractEntitiesIndexedByAbstractSkuAndIdStore[$abstractSku][$idStore])) {
+            return static::$availabilityAbstractEntitiesIndexedByAbstractSkuAndIdStore[$abstractSku][$idStore];
+        }
+
         $availabilityAbstractEntity = SpyAvailabilityAbstractQuery::create()
             ->filterByAbstractSku($abstractSku)
             ->filterByFkStore($idStore)
             ->findOne();
 
-        if ($availabilityAbstractEntity !== null) {
-            return $availabilityAbstractEntity;
+        if (!$availabilityAbstractEntity) {
+            $availabilityAbstractEntity = $this->createAvailabilityAbstract($abstractSku, $idStore);
         }
 
-        return $this->createAvailabilityAbstract($abstractSku, $idStore);
+        static::$availabilityAbstractEntitiesIndexedByAbstractSkuAndIdStore[$abstractSku][$idStore] = $availabilityAbstractEntity;
+
+        return $availabilityAbstractEntity;
     }
 
     /**

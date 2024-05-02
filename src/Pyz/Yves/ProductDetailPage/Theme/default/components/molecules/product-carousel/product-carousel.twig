@@ -1,30 +1,21 @@
-{% extends model('component') %}
-
-{% define config = {
-    name: 'product-carousel',
-    tag: 'product-carousel'
-} %}
-
-{% define data = {
-    product: required
-} %}
+{% extends molecule('product-carousel', '@SprykerShop:ProductDetailPage') %}
 
 {% block body %}
     {% include molecule('image-gallery', 'ProductImageWidget') with {
         data: {
             idProductAbstract: data.product.idProductAbstract,
-            images: data.product.images | default([])
+            images: data.product.images | default([defaultSlide]),
         },
         attributes: {
             'active-class': 'image-gallery__item--active',
             'thumbnail-active-class': 'image-gallery-thumbnail__item--active',
             'slider-config': '{
-                "slidesToShow":5,
-                "slidesToScroll":1,
-                "infinite":false,
-                "vertical":true,
-                "prevArrow":"<div class=\'image-gallery-thumbnail__prev\'><svg class=\'icon icon--thumbnail-arrow icon--reverse\'><use href=\'#:arrow-down\'></use></svg></div>",
-                "nextArrow":"<div class=\'image-gallery-thumbnail__next\'><svg class=\'icon icon--thumbnail-arrow\'><use href=\'#:arrow-down\'></use></svg></div>",
+                "slidesToShow": 5,
+                "slidesToScroll": 1,
+                "infinite": false,
+                "vertical": true,
+                "prevArrow": "<div class=\'image-gallery-thumbnail__prev\'><svg class=\'icon icon--thumbnail-arrow icon--reverse\'><use href=\'#:arrow-down\'></use></svg></div>",
+                "nextArrow": "<div class=\'image-gallery-thumbnail__next\'><svg class=\'icon icon--thumbnail-arrow\'><use href=\'#:arrow-down\'></use></svg></div>",
                 "responsive": [
                     {
                         "breakpoint": 769,

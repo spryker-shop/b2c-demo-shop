@@ -8,11 +8,11 @@ parameters:
         - src/
 
     excludePaths:
-        - '%rootDir%/../../../src/Generated/*'
-        - '%rootDir%/../../../src/Orm/*'
+        - src/Generated/*
+        - src/Orm/*
 
     bootstrapFiles:
-        - '%rootDir%/../../../phpstan-bootstrap.php'
+        - phpstan-bootstrap.php
 
     ignoreErrors:
         - '#Call to an undefined method .+Criteria::.+\(\).#'
@@ -20,6 +20,7 @@ parameters:
         - '#Call to an undefined method .+DataSetStepBrokerAwareInterface::addAfterImportHook\(\).#'
         - '#Parameter \#1 \$rawCatalogSearchResultFormatterPlugin of class .+CurrencyAwareSuggestionByTypeResultFormatter constructor expects .+ResultFormatterPluginInterface, .+SuggestionByTypeResultFormatterPlugin given.#'
         - '#Method .+CheckoutPageDependencyProvider::.+\(\) return type has no value type specified in iterable type .+FormInterface.#'
+        - '#PHPDoc tag .+with type string is not subtype of native type mixed.#'
 
     reportUnmatchedIgnoredErrors: false
 
@@ -28,6 +29,3 @@ parameters:
         - APPLICATION_ENV
         - APPLICATION_STORE
         - APPLICATION_CODE_BUCKET
-
-    parallel:
-    	maximumNumberOfProcesses: 1

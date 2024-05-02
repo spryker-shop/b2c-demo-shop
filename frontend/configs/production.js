@@ -1,6 +1,6 @@
 const { mergeWithCustomize, customizeObject } = require('webpack-merge');
 const TerserPlugin = require('terser-webpack-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const getConfiguration = require('./development');
 
@@ -38,12 +38,14 @@ const configurationProdMode = async (appSettings) =>
                         },
                     }),
 
-                    new OptimizeCSSAssetsPlugin({
-                        cssProcessorOptions: {
-                            discardEmpty: true,
-                            discardComments: {
-                                removeAll: true,
-                            },
+                    new CssMinimizerPlugin({
+                        minimizerOptions: {
+                            preset: [
+                                'default',
+                                {
+                                    discardComments: { removeAll: true },
+                                },
+                            ],
                         },
                     }),
                 ],

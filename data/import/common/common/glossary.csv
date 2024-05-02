@@ -875,26 +875,34 @@ customer.newsletter.subscribed,Newsletter subscribed,en_US
 customer.newsletter.subscribed,Newsletter abonniert,de_DE
 dynamic_entity.validation.invalid_data_format,"Invalid or missing data format. Please ensure that the data is provided in the correct format. Example request body: {'data':[{...},{...},..]}",en_US
 dynamic_entity.validation.invalid_data_format,"Ungültiges oder fehlendes Datenformat. Stellen Sie bitte sicher, dass die Daten im richtigen Format bereitgestellt werden. Beispiel Anforderungskörper: {'data':[{...},{...}]}",de_DE
-dynamic_entity.validation.persistence_failed,"Failed to persist the data. Please verify the provided data and try again.",en_US
-dynamic_entity.validation.persistence_failed,"Das Speichern der Daten ist fehlgeschlagen. Bitte überprüfen Sie die bereitgestellten Daten und versuchen Sie es erneut.",de_DE
-dynamic_entity.validation.persistence_failed_duplicate_entry,"Failed to persist the data. Please verify the provided data and try again. Entry is duplicated.",en_US
-dynamic_entity.validation.persistence_failed_duplicate_entry,"Das Speichern der Daten ist fehlgeschlagen. Bitte überprüfen Sie die bereitgestellten Daten und versuchen Sie es erneut. Eintrag is doppelt vorhanden.",de_DE
-dynamic_entity.validation.entity_does_not_exist,"The entity could not be found in the database.",en_US
-dynamic_entity.validation.entity_does_not_exist,"Die Entität konnte in der Datenbank nicht gefunden werden.",de_DE
-dynamic_entity.validation.invalid_field_type,"Invalid data type for field: %fieldName%",en_US
-dynamic_entity.validation.invalid_field_type,"Ungültiger Datentyp: %fieldName%",de_DE
-dynamic_entity.validation.invalid_field_value,"Invalid data value for field: %fieldName%, row number: %rowNumber%. Field rules: %validationRules%",en_US
-dynamic_entity.validation.invalid_field_value,"Ungültiger Datenwert für das Feld: %fieldName%, Zeilennummer: %rowNumber%. Feldregeln: %validationRules%",de_DE
-dynamic_entity.validation.required_field_is_missing,"The required field must not be empty. Field: '%fieldName%'",en_US
-dynamic_entity.validation.required_field_is_missing,"Das erforderlich Feld darf nicht leer sein. Feld: '%fieldName%'",de_DE
+dynamic_entity.validation.persistence_failed,"Failed to persist the data for `%errorPath%`. Please verify the provided data and try again.",en_US
+dynamic_entity.validation.persistence_failed,"Das Speichern der Daten ist fehlgeschlagen für `%errorPath%`. Bitte überprüfen Sie die bereitgestellten Daten und versuchen Sie es erneut.",de_DE
+dynamic_entity.validation.persistence_failed_duplicate_entry,"Failed to persist the data for `%errorPath%`. Please verify the provided data and try again. Entry is duplicated.",en_US
+dynamic_entity.validation.persistence_failed_duplicate_entry,"Das Speichern der Daten ist fehlgeschlagen für `%errorPath%`. Bitte überprüfen Sie die bereitgestellten Daten und versuchen Sie es erneut. Eintrag is doppelt vorhanden.",de_DE
+dynamic_entity.validation.entity_does_not_exist,"The entity `%errorPath%` could not be found in the database.",en_US
+dynamic_entity.validation.entity_does_not_exist,"Die Entität `%errorPath%` konnte in der Datenbank nicht gefunden werden.",de_DE
+dynamic_entity.validation.invalid_field_type,"Invalid data type `%errorPath%` for field `%fieldName%`",en_US
+dynamic_entity.validation.invalid_field_type,"Ungültiger Datentyp `%errorPath%` für das Feld `%fieldName%`",de_DE
+dynamic_entity.validation.invalid_field_value,"Invalid data value `%errorPath%` for field: `%fieldName%`. Field rules: %validationRules%",en_US
+dynamic_entity.validation.invalid_field_value,"Ungültiger Datenwert `%errorPath%` für das Feld: `%fieldName%`. Feldregeln: %validationRules%",de_DE
+dynamic_entity.validation.required_field_is_missing,"The required field must not be empty. Field: '%errorPath%.%fieldName%'",en_US
+dynamic_entity.validation.required_field_is_missing,"Das erforderlich Feld darf nicht leer sein. Feld: '%errorPath%.%fieldName%'",de_DE
 dynamic_entity.validation.entity_not_found_or_identifier_is_not_creatable,"Entity `%identifier%` not found by identifier, and new identifier can not be persisted. Please update the request.",en_US
 dynamic_entity.validation.entity_not_found_or_identifier_is_not_creatable,"Entität `%identifier%` konnte anhand der ID nicht gefunden werden, und die neue ID kann nicht dauerhaft gespeichert werden. Bitte aktualisieren Sie die Anfrage.",de_DE
-dynamic_entity.validation.modification_of_immutable_field_prohibited,"Modification of immutable field `%fieldName%` is prohibited",en_US
-dynamic_entity.validation.modification_of_immutable_field_prohibited,"Änderung des unveränderlichen Feldes %fieldName% ist nicht zulässig.",de_DE
-dynamic_entity.validation.missing_identifier,"Incomplete Request - missing identifier",en_US
-dynamic_entity.validation.missing_identifier,"Unvollständige Anforderung - fehlende ID",de_DE
-dynamic_entity.validation.provided_field_is_invalid,"The provided `%fieldName%` is incorrect or invalid.",en_US
-dynamic_entity.validation.provided_field_is_invalid,"Der angegebene `%fieldName%` ist falsch oder ungültig.",de_DE
+dynamic_entity.validation.modification_of_immutable_field_prohibited,"Modification of immutable field `%errorPath%.%fieldName%` is prohibited",en_US
+dynamic_entity.validation.modification_of_immutable_field_prohibited,"Änderung des unveränderlichen Feldes `%errorPath%.%fieldName%` ist nicht zulässig.",de_DE
+dynamic_entity.validation.missing_identifier,"Incomplete Request - missing identifier for `%errorPath%`",en_US
+dynamic_entity.validation.missing_identifier,"Unvollständige Anforderung - fehlende ID für `%errorPath%`",de_DE
+dynamic_entity.validation.provided_field_is_invalid,"The provided `%errorPath%.%fieldName%` is incorrect or invalid.",en_US
+dynamic_entity.validation.provided_field_is_invalid,"Der angegebene `%errorPath%.%fieldName%` ist falsch oder ungültig.",de_DE
+dynamic_entity.validation.relation_is_not_editable,"The relationship `%relationName%` is not editable by configuration.",en_US
+dynamic_entity.validation.relation_is_not_editable,"Die Beziehung `%relationName%` kann nicht per Konfiguration bearbeitet werden.",de_DE
+dynamic_entity.validation.relation_not_found,"Relation `%relationName%` not found. Please check the requested relation name and try again.",en_US
+dynamic_entity.validation.relation_not_found,"Beziehung `%relationName%` nicht gefunden. Bitte überprüfen Sie den angeforderten Beziehungsnamen und versuchen Sie es erneut.",de_DE
+dynamic_entity.validation.configuration_not_found,"Dynamic entity configuration for table alias `%aliasName%` not found.",en_US
+dynamic_entity.validation.configuration_not_found,"Dynamische Entitätskonfiguration für Tabellenalias `%aliasName%` nicht gefunden.",de_DE
+dynamic_entity.validation.filter_field_not_found,"Filter field `%filterField%` for table alias `%aliasName%` not found.",en_US
+dynamic_entity.validation.filter_field_not_found,"Filterfeld `%filterField%` für Tabellen alias `%aliasName%` nicht gefunden.",de_DE
 validator.constraints.password.do_not_match,Passwords don't match,en_US
 validator.constraints.password.do_not_match,Passwörter stimmen nicht überein,de_DE
 discount.successfully.applied,"The discount ""display_name"" has been successfully applied",en_US
@@ -1383,6 +1391,8 @@ product.filter.price-default-eur-net_mode,Preis,de_DE
 product.filter.price-default-eur-net_mode,Price,en_US
 product.filter.price-default-eur-gross_mode,Preis,de_DE
 product.filter.price-default-eur-gross_mode,Price,en_US
+product.filter.price-default-usd-net_mode,Price range,en_US
+product.filter.price-default-usd-gross_mode,Price range,en_US
 cart.pre.check.product_discontinued,"Product '%name%' is discontinued, please choose an alternative one.",en_US
 cart.pre.check.product_discontinued,"Produkt '%name%' ist nicht mehr verfügbar, bitte wählen Sie eine Alternative.",de_DE
 replacement_for_widget.replacement_for,Replacement for,en_US
@@ -3036,3 +3046,5 @@ picking_list.validation.picking_list.validation.picking_list_item_duplicated,Pic
 picking_list.validation.picking_list.validation.picking_list_item_duplicated,PickingListItem dupliziert.,de_DE
 picking_list_push_notification.validation.warehouse_entity_not_found,Warehouse not found.,en_US
 picking_list_push_notification.validation.warehouse_entity_not_found,Lager nicht gefunden.,de_DE
+category.validation.category_node_entity_not_found,The category node ID '%category_node_id%' cannot be relocated because this category node no longer exists.,en_US
+category.validation.category_node_entity_not_found,"Die Kategorieknoten-ID '%category_node_id%' kann nicht verschoben werden, da dieser Kategorieknoten nicht mehr existiert.",de_DE
