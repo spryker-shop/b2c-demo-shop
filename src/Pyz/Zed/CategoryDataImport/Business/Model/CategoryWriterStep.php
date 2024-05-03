@@ -18,4 +18,14 @@ class CategoryWriterStep extends SprykerCategoryWriterStep
      * @var string
      */
     public const KEY_CATEGORY_IMAGE_NAME = 'category_image_name';
+
+    public function anyName()
+    {
+        $sum = 0;
+        $array = [1, 2, 3, 4, 5];
+        foreach ($array as $item) {
+            $sum+= $item;
+        }
+        return $sum;
+    }
 }
