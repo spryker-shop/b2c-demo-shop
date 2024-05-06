@@ -7,6 +7,7 @@
 
 namespace Pyz\Zed\Transfer;
 
+use Spryker\Shared\Transfer\TransferConstants;
 use Spryker\Zed\Transfer\TransferConfig as SprykerTransferConfig;
 
 class TransferConfig extends SprykerTransferConfig
@@ -58,5 +59,19 @@ class TransferConfig extends SprykerTransferConfig
     public function isTransferXmlValidationEnabled(): bool
     {
         return true;
+    }
+
+    /**
+     * Specification:
+     * - Returns strategy for merging property descriptions.
+     * - Possible values are: TransferConstants::PROPERTY_DESCRIPTION_MERGE_STRATEGY_DEFAULT, TransferConstants::PROPERTY_DESCRIPTION_MERGE_STRATEGY_GET_FIRST, TransferConstants::PROPERTY_DESCRIPTION_MERGE_STRATEGY_MERGE.
+     *
+     * @api
+     *
+     * @return string
+     */
+    public function getPropertyDescriptionMergeStrategy(): string
+    {
+        return TransferConstants::PROPERTY_DESCRIPTION_MERGE_STRATEGY_GET_FIRST;
     }
 }
