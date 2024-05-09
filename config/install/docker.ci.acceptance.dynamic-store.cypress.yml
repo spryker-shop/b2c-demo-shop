@@ -1,0 +1,131 @@
+env:
+    NEW_RELIC_ENABLED: 0
+    SPRYKER_LOG_STDOUT: /dev/null
+
+sections:
+    build:
+        generate-transfers:
+            command: 'vendor/bin/console transfer:generate'
+
+        router-cache-warmup-yves:
+            command: 'vendor/bin/yves router:cache:warm-up'
+
+        router-cache-warmup-backoffice:
+            command: 'vendor/bin/console router:cache:warm-up:backoffice'
+
+        router-cache-warmup-backend-gateway:
+            command: 'vendor/bin/console router:cache:warm-up:backend-gateway'
+
+        twig-cache-warmup:
+            command: 'vendor/bin/console twig:cache:warmer'
+
+        navigation-cache-warmup:
+            command: 'vendor/bin/console navigation:build-cache'
+
+        rest-request-validation-cache-warmup:
+            command: 'vendor/bin/console rest-api:build-request-validation-cache'
+
+        propel-copy-schema:
+            command: 'vendor/bin/console propel:schema:copy'
+
+        propel-build:
+            command: 'vendor/bin/console propel:model:build'
+
+        generate-entity-transfer:
+            command: 'vendor/bin/console transfer:entity:generate'
+
+        generate-page-source-map:
+            command: 'vendor/bin/console search:setup:source-map'
+
+        translator-generate-cache:
+            command: 'vendor/bin/console translator:generate-cache'
+
+        cache-class-resolver-build:
+            command: 'vendor/bin/console cache:class-resolver:build'
+
+        generate-scope-collection-file:
+            command: 'vendor/bin/console oauth:scope-collection-file:generate'
+
+    build-development:
+        generate-transfers:
+            command: 'vendor/bin/console transfer:generate'
+
+        generate-transfer-databuilders:
+            command: 'vendor/bin/console transfer:databuilder:generate'
+
+        rest-api-generate-documentation:
+            command: 'vendor/bin/console rest-api:generate:documentation'
+
+    build-static:
+        dependencies-install:
+            command: 'vendor/bin/console frontend:project:install-dependencies'
+
+    build-static-production:
+        excluded: true
+        yves-build-frontend:
+            command: 'vendor/bin/console frontend:yves:build -e production'
+
+        zed-build-frontend:
+            command: 'vendor/bin/console frontend:zed:build -e production'
+
+        date-time-product-configurator:
+            command: 'vendor/bin/console frontend:date-time-product-configurator:build'
+
+    build-static-development:
+        yves-build-frontend:
+            command: 'vendor/bin/console frontend:yves:build'
+
+        zed-build-frontend:
+            command: 'vendor/bin/console frontend:zed:build'
+
+
+        date-time-product-configurator:
+            command: 'vendor/bin/console frontend:date-time-product-configurator:build'
+
+    init-storages-per-region:
+        propel-copy-schema:
+            command: 'vendor/bin/console propel:schema:copy'
+
+        propel-postgres-compatibility:
+            command: 'vendor/bin/console propel:pg-sql-compat'
+
+        propel-migration-delete:
+            command: 'vendor/bin/console propel:migration:delete'
+
+        propel-diff:
+            command: 'vendor/bin/console propel:diff'
+
+        propel-migrate:
+            command: 'vendor/bin/console propel:migrate'
+
+        propel-migration-cleanup:
+            command: 'vendor/bin/console propel:migration:delete'
+
+    demodata:
+        queue-setup:
+            command: 'vendor/bin/console queue:setup'
+
+        init-database:
+            command: 'vendor/bin/console setup:init-db'
+
+        import-eu-region-demodata:
+            command: 'vendor/bin/console data:import --config=data/import/local/full_EU.yml'
+
+        apply-scheduled-prices:
+            command: 'vendor/bin/console price-product-schedule:apply'
+
+        setup-search-create-sources:
+            command: 'vendor/bin/console search:setup:sources'
+
+        update-product-labels:
+            command: 'vendor/bin/console product-label:relations:update'
+
+        publish-and-sync:
+            command: 'vendor/bin/console queue:worker:start --stop-when-empty'
+            timeout: 2000
+
+        controller-cache-warmup:
+            command: 'vendor/bin/glue glue-api:controller:cache:warm-up'
+
+        api-generate-documentation:
+            command: 'vendor/bin/glue api:generate:documentation'
