@@ -27,16 +27,6 @@ jobs:
               with:
                   python-version: '3.9'
 
-            - name: Clone project (master)
-              run: |
-                  git config --global user.email "github-actions[bot]@users.noreply.github.com"
-                  git config --global user.name "github-actions[bot]"
-                  git clone -b master --single-branch https://github.com/spryker-shop/b2c-demo-shop.git .
-            - name: Up-merge fresh branch (master)
-              run: |
-                  git fetch origin
-                  git config pull.ff only
-                  git pull origin master --no-ff --allow-unrelated-histories --no-edit
             - name: Install packages
               run: |
                   sudo apt-get install apache2-utils
@@ -48,6 +38,8 @@ jobs:
                   python3 -m pip install -U robotframework-databaselibrary
                   python3 -m pip install -U robotframework-browser
                   python3 -m pip install PyMySQL
+            - name: Composer install
+              run: composer install
             - name: Install docker-compose
               run: |
                   sudo curl -L "https://github.com/docker/compose/releases/download/2.12.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
@@ -68,6 +60,7 @@ jobs:
                   docker/sdk cli composer dump-autoload -o -a --apcu
                   APPLICATION_STORE=DE docker/sdk console queue:worker:start --stop-when-empty
                   APPLICATION_STORE=AT docker/sdk console queue:worker:start --stop-when-empty
+
             - name: Run Tests
               id: run_tests
               continue-on-error: true
@@ -93,7 +86,6 @@ jobs:
                     --recursive \
                     --expires "$(date -d '+7 days' --utc +'%Y-%m-%dT%H:%M:%SZ')"
 
-
     docker-alpine-php-8-2-mariadb-robot-ui-group-two:
         name: "Docker / Alpine / PHP 8.2 / MariaDB / Robot / UI /Group Two"
         runs-on: ubuntu-20.04
@@ -110,16 +102,6 @@ jobs:
               with:
                   python-version: '3.9'
 
-            - name: Clone project (master)
-              run: |
-                  git config --global user.email "github-actions[bot]@users.noreply.github.com"
-                  git config --global user.name "github-actions[bot]"
-                  git clone -b master --single-branch https://github.com/spryker-shop/b2c-demo-shop.git .
-            - name: Up-merge fresh branch (master)
-              run: |
-                  git fetch origin
-                  git config pull.ff only
-                  git pull origin master --no-ff --allow-unrelated-histories --no-edit
             - name: Install packages
               run: |
                   sudo apt-get install apache2-utils
@@ -131,6 +113,8 @@ jobs:
                   python3 -m pip install -U robotframework-databaselibrary
                   python3 -m pip install -U robotframework-browser
                   python3 -m pip install PyMySQL
+            - name: Composer install
+              run: composer install
             - name: Install docker-compose
               run: |
                   sudo curl -L "https://github.com/docker/compose/releases/download/2.12.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
@@ -151,6 +135,7 @@ jobs:
                   docker/sdk cli composer dump-autoload -o -a --apcu
                   APPLICATION_STORE=DE docker/sdk console queue:worker:start --stop-when-empty
                   APPLICATION_STORE=AT docker/sdk console queue:worker:start --stop-when-empty
+
             - name: Run Tests
               id: run_tests
               continue-on-error: true
@@ -192,16 +177,6 @@ jobs:
               with:
                   python-version: '3.9'
 
-            - name: Clone project (master)
-              run: |
-                  git config --global user.email "github-actions[bot]@users.noreply.github.com"
-                  git config --global user.name "github-actions[bot]"
-                  git clone -b master --single-branch https://github.com/spryker-shop/b2c-demo-shop.git .
-            - name: Up-merge fresh branch (master)
-              run: |
-                  git fetch origin
-                  git config pull.ff only
-                  git pull origin master --no-ff --allow-unrelated-histories --no-edit
             - name: Install packages
               run: |
                   sudo apt-get install apache2-utils
@@ -213,6 +188,8 @@ jobs:
                   python3 -m pip install -U robotframework-databaselibrary
                   python3 -m pip install -U robotframework-browser
                   python3 -m pip install PyMySQL
+            - name: Composer install
+              run: composer install
             - name: Install docker-compose
               run: |
                   sudo curl -L "https://github.com/docker/compose/releases/download/2.12.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
