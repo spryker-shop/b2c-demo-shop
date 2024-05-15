@@ -25,25 +25,24 @@ jobs:
                 with:
                     python-version: '3.9'
 
-            -   uses: actions/cache@v4
+            -   name: Cache pip packages
+                uses: actions/cache@v4
                 with:
                     path: ~/.cache/pip
                     key: ${{ runner.os }}-pip-${{ hashFiles('composer.lock') }}
                     restore-keys: |
                         ${{ runner.os }}-pip-
 
+            -   name: Cache Docker images.
+                uses: ScribeMD/docker-cache@0.5.0
+                with:
+                    key: docker-${{ runner.os }}-${{ hashFiles('deploy.ci.acceptance.mariadb.robot.yml') }}
+
             -   name: Cache docker-compose
                 uses: actions/cache@v4
                 with:
                     path: /usr/local/bin/docker-compose
                     key: docker-compose-${{ runner.os }}
-
-            -   name: Cache Docker images
-                uses: actions/cache@v4
-                with:
-                    path: |
-                        ~/.docker
-                    key: docker-${{ runner.os }}-${{ hashFiles('docker/deployment/default/images/**/Dockerfile') }}
 
             -   name: Install packages
                 run: |
@@ -57,6 +56,7 @@ jobs:
                     python3 -m pip install -U robotframework-browser
                     python3 -m pip install -U robotframework-pabot
                     python3 -m pip install PyMySQL
+                    sudo npx playwright install-deps
 
             -   name: Install docker-compose
                 run: |
@@ -118,12 +118,18 @@ jobs:
                 with:
                     python-version: '3.9'
 
-            -   uses: actions/cache@v4
+            -   name: Cache pip packages
+                uses: actions/cache@v4
                 with:
                     path: ~/.cache/pip
                     key: ${{ runner.os }}-pip-${{ hashFiles('composer.lock') }}
                     restore-keys: |
                         ${{ runner.os }}-pip-
+
+            -   name: Cache Docker images.
+                uses: ScribeMD/docker-cache@0.5.0
+                with:
+                    key: docker-${{ runner.os }}-${{ hashFiles('deploy.ci.acceptance.mariadb.robot.yml') }}
 
             -   name: Cache docker-compose
                 uses: actions/cache@v4
@@ -141,6 +147,7 @@ jobs:
                     python3 -m pip install -U robotframework-jsonlibrary
                     python3 -m pip install -U robotframework-databaselibrary
                     python3 -m pip install -U robotframework-browser
+                    python3 -m pip install -U robotframework-pabot
                     python3 -m pip install PyMySQL
                     sudo npx playwright install-deps
 
@@ -200,16 +207,22 @@ jobs:
             ROBOT_TESTS_ARTIFACTS_BUCKET_REGION: eu-west-1
         steps:
             -   uses: actions/checkout@v4
-            -   uses: actions/setup-python@v4
+            -   uses: actions/setup-python@v5
                 with:
                     python-version: '3.9'
 
-            -   uses: actions/cache@v4
+            -   name: Cache pip packages
+                uses: actions/cache@v4
                 with:
                     path: ~/.cache/pip
                     key: ${{ runner.os }}-pip-${{ hashFiles('composer.lock') }}
                     restore-keys: |
                         ${{ runner.os }}-pip-
+
+            -   name: Cache Docker images.
+                uses: ScribeMD/docker-cache@0.5.0
+                with:
+                    key: docker-${{ runner.os }}-${{ hashFiles('deploy.ci.acceptance.mariadb.robot.yml') }}
 
             -   name: Cache docker-compose
                 uses: actions/cache@v4
@@ -227,7 +240,9 @@ jobs:
                     python3 -m pip install -U robotframework-jsonlibrary
                     python3 -m pip install -U robotframework-databaselibrary
                     python3 -m pip install -U robotframework-browser
+                    python3 -m pip install -U robotframework-pabot
                     python3 -m pip install PyMySQL
+                    sudo npx playwright install-deps
 
             -   name: Install docker-compose
                 run: |
