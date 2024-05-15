@@ -81,7 +81,7 @@ jobs:
                 run: |
                     cd robotframework-tests
                     rfbrowser init
-                    pabot -v env:ui_b2c -v headless:true -v ignore_console:false -d results --exclude skip-due-to-issueORskip-due-to-refactoring --include group_one -s '*'.tests.ui.b2c .
+                    pabot --variable env:ui_b2c --variable headless:true --variable ignore_console:false --outputdir results --exclude skip-due-to-issueORskip-due-to-refactoring --include group_tree --suite '*'.tests.ui.b2c .
                     touch results/time.txt && echo $(date) > results/time.txt
             -   name: Rerun Failed Tests
                 if: steps.run_tests.outcome != 'success'
