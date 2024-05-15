@@ -29,8 +29,6 @@ Recommended system requirements for MacOS:
 
 ### Install the B2C Demo Shop
 
-To install the B2C Demo Shop:
-
 1. Create a project folder and clone the B2C Demo Shop and the Docker SDK:
 ```bash
 mkdir spryker-b2c && cd spryker-b2c
@@ -43,8 +41,6 @@ git clone git@github.com:spryker/docker-sdk.git docker
   * [Set up a production-like environment](#set-up-a-production-like-environment)
 
 #### Set up a development environment
-
-To set up a development environment:
 
 1. Bootstrap the docker setup:
 
@@ -76,8 +72,6 @@ You've set up your Spryker B2C Demo Shop and can access your applications.
 
 
 ### Set up a production-like environment
-
-To set up a production-like environment:
 
 1. Bootstrap the docker setup:
 
