@@ -36,7 +36,7 @@ jobs:
                 options: --health-cmd="redis-cli ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
         steps:
-            - uses: actions/checkout@v3
+            - uses: actions/checkout@v4
 
             - name: Configure sysctl limits
               run: |
@@ -162,7 +162,7 @@ jobs:
             TRAVIS: 1
 
         steps:
-            - uses: actions/checkout@v3
+            - uses: actions/checkout@v4
 
             - name: Install apt-packages
               run: |
@@ -190,7 +190,7 @@ jobs:
             TRAVIS: 1
 
         steps:
-            - uses: actions/checkout@v3
+            - uses: actions/checkout@v4
 
             - name: Install apt-packages
               run: |
@@ -218,7 +218,7 @@ jobs:
             TRAVIS: 1
 
         steps:
-            - uses: actions/checkout@v3
+            - uses: actions/checkout@v4
 
             - name: Install apt-packages
               run: |
@@ -245,7 +245,7 @@ jobs:
             TRAVIS: 1
 
         steps:
-            - uses: actions/checkout@v3
+            - uses: actions/checkout@v4
 
             - name: Install apt-packages
               run: |
@@ -272,7 +272,7 @@ jobs:
             TRAVIS: 1
 
         steps:
-            - uses: actions/checkout@v3
+            - uses: actions/checkout@v4
 
             - name: Install apt-packages
               run: |
@@ -298,7 +298,7 @@ jobs:
             TRAVIS: 1
 
         steps:
-            - uses: actions/checkout@v3
+            - uses: actions/checkout@v4
 
             - name: Install apt-packages
               run: |
@@ -325,7 +325,7 @@ jobs:
             TRAVIS: 1
 
         steps:
-            - uses: actions/checkout@v3
+            - uses: actions/checkout@v4
 
             - name: Install apt-packages
               run: |
@@ -355,7 +355,7 @@ jobs:
             TRAVIS: 1
 
         steps:
-            - uses: actions/checkout@v3
+            - uses: actions/checkout@v4
 
             - name: Install apt-packages
               run: |
@@ -385,7 +385,7 @@ jobs:
             TRAVIS: 1
 
         steps:
-            - uses: actions/checkout@v3
+            - uses: actions/checkout@v4
 
             - name: Install apt-packages
               run: |
@@ -414,7 +414,7 @@ jobs:
             TRAVIS: 1
 
         steps:
-            - uses: actions/checkout@v3
+            - uses: actions/checkout@v4
 
             - name: Install apt-packages
               run: |
@@ -444,7 +444,7 @@ jobs:
             TRAVIS: 1
 
         steps:
-            - uses: actions/checkout@v3
+            - uses: actions/checkout@v4
 
             - name: Install apt-packages
               run: |
@@ -473,7 +473,7 @@ jobs:
             TRAVIS: 1
 
         steps:
-            - uses: actions/checkout@v3
+            - uses: actions/checkout@v4
 
             - name: Install apt-packages
               run: |
@@ -499,7 +499,7 @@ jobs:
             PROGRESS_TYPE: plain
             SPRYKER_PLATFORM_IMAGE: spryker/php:8.1
         steps:
-            - uses: actions/checkout@v3
+            - uses: actions/checkout@v4
             - run: echo eyAiZXhwZXJpbWVudGFsIiA6IHRydWUsICJmZWF0dXJlcyIgOiB7ICJidWlsZGtpdCI6IHRydWUgfSB9Cg==|base64 -d|sudo tee /etc/docker/daemon.json
             - run: sudo apt-get install --only-upgrade docker -y
             - run: sudo curl -L "https://github.com/docker/compose/releases/download/2.12.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
@@ -520,7 +520,7 @@ jobs:
             TRAVIS: 1
             ROBOT_TESTS_ARTIFACTS_BUCKET_REGION: eu-west-1
         steps:
-            - uses: actions/checkout@v3
+            - uses: actions/checkout@v4
 
             - name: Install packages
               run: |
@@ -561,7 +561,7 @@ jobs:
             TRAVIS: 1
             ROBOT_TESTS_ARTIFACTS_BUCKET_REGION: eu-west-1
         steps:
-            - uses: actions/checkout@v3
+            - uses: actions/checkout@v4
 
             - uses: actions/setup-python@v4
               with:
@@ -606,7 +606,7 @@ jobs:
             TRAVIS: 1
             ROBOT_TESTS_ARTIFACTS_BUCKET_REGION: eu-west-1
         steps:
-            - uses: actions/checkout@v3
+            - uses: actions/checkout@v4
 
             - name: Install packages
               run: |
