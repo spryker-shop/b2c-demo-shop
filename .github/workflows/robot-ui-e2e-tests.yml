@@ -33,6 +33,12 @@ jobs:
                     restore-keys: |
                         ${{ runner.os }}-pip-
 
+            -   name: Build Tag and Push Docker image
+                uses: docker/build-push-action@v4
+                with:
+                    cache-from: type=gha
+                    cache-to: type=gha,mode=max
+
             -   name: Install packages
                 run: |
                     sudo apt install awscli -q
@@ -44,7 +50,6 @@ jobs:
                     python3 -m pip install -U robotframework-browser
                     python3 -m pip install -U robotframework-pabot
                     python3 -m pip install PyMySQL
-                    sudo npx playwright install-deps
 
             -   name: Install docker-compose
                 run: |
@@ -73,13 +78,13 @@ jobs:
                 run: |
                     cd robotframework-tests
                     rfbrowser init
-                    pabot --testlevelsplit -v env:ui_b2c -v headless:true -v ignore_console:false -d results --exclude skip-due-to-issueORskip-due-to-refactoring --include group_one -s '*'.tests.ui.b2c .
+                    robot -v env:ui_b2c -v headless:true -v ignore_console:false -d results --exclude skip-due-to-issueORskip-due-to-refactoring --include group_one -s '*'.tests.ui.b2c .
                     touch results/time.txt && echo $(date) > results/time.txt
             -   name: Rerun Failed Tests
                 if: steps.run_tests.outcome != 'success'
                 run: |
                     cd robotframework-tests
-                    pabot -v env:ui_b2c -v headless:true -v ignore_console:false -d results/rerun --runemptysuite --rerunfailed results/output.xml --output rerun.xml -s '*'.tests.ui.b2c .
+                    robot -v env:ui_b2c -v headless:true -v ignore_console:false -d results/rerun --runemptysuite --rerunfailed results/output.xml --output rerun.xml -s '*'.tests.ui.b2c .
             -   name: Merge Test Results
                 if: always() && steps.run_tests.outcome != 'success'
                 run: |
