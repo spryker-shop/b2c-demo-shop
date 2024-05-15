@@ -33,20 +33,13 @@ jobs:
                     restore-keys: |
                         ${{ runner.os }}-pip-
 
-            -   name: Cache Docker images.
-                uses: ScribeMD/docker-cache@0.5.0
-                with:
-                    key: docker-${{ runner.os }}-${{ hashFiles('deploy.ci.acceptance.mariadb.robot.yml') }}
-
-            -   name: Cache docker-compose
-                uses: actions/cache@v4
-                with:
-                    path: /usr/local/bin/docker-compose
-                    key: docker-compose-${{ runner.os }}
+#            -   name: Cache Docker images.
+#                uses: ScribeMD/docker-cache@0.5.0
+#                with:
+#                    key: docker-${{ runner.os }}-${{ hashFiles('deploy.ci.acceptance.mariadb.robot.yml','composer.lock') }}
 
             -   name: Install packages
                 run: |
-                    sudo apt-get install apache2-utils
                     sudo apt install awscli -q
                     python3 -m pip install --upgrade pip
                     python3 -m pip install -U robotframework
@@ -85,7 +78,7 @@ jobs:
                 run: |
                     cd robotframework-tests
                     rfbrowser init
-                    robot -v env:ui_b2c -v headless:true -v ignore_console:false -d results --exclude skip-due-to-issueORskip-due-to-refactoring --include group_one -s '*'.tests.ui.b2c .
+                    pabot -v env:ui_b2c -v headless:true -v ignore_console:false -d results --exclude skip-due-to-issueORskip-due-to-refactoring --include group_one -s '*'.tests.ui.b2c .
                     touch results/time.txt && echo $(date) > results/time.txt
             -   name: Rerun Failed Tests
                 if: steps.run_tests.outcome != 'success'
@@ -126,20 +119,13 @@ jobs:
                     restore-keys: |
                         ${{ runner.os }}-pip-
 
-            -   name: Cache Docker images.
-                uses: ScribeMD/docker-cache@0.5.0
-                with:
-                    key: docker-${{ runner.os }}-${{ hashFiles('deploy.ci.acceptance.mariadb.robot.yml') }}
-
-            -   name: Cache docker-compose
-                uses: actions/cache@v4
-                with:
-                    path: /usr/local/bin/docker-compose
-                    key: docker-compose-${{ runner.os }}
+#            -   name: Cache Docker images.
+#                uses: ScribeMD/docker-cache@0.5.0
+#                with:
+#                    key: docker-${{ runner.os }}-${{ hashFiles('deploy.ci.acceptance.mariadb.robot.yml','composer.lock') }}
 
             -   name: Install packages
                 run: |
-                    sudo apt-get install apache2-utils
                     sudo apt install awscli -q
                     python3 -m pip install --upgrade pip
                     python3 -m pip install -U robotframework
@@ -219,20 +205,13 @@ jobs:
                     restore-keys: |
                         ${{ runner.os }}-pip-
 
-            -   name: Cache Docker images.
-                uses: ScribeMD/docker-cache@0.5.0
-                with:
-                    key: docker-${{ runner.os }}-${{ hashFiles('deploy.ci.acceptance.mariadb.robot.yml') }}
-
-            -   name: Cache docker-compose
-                uses: actions/cache@v4
-                with:
-                    path: /usr/local/bin/docker-compose
-                    key: docker-compose-${{ runner.os }}
+#            -   name: Cache Docker images.
+#                uses: ScribeMD/docker-cache@0.5.0
+#                with:
+#                    key: docker-${{ runner.os }}-${{ hashFiles('deploy.ci.acceptance.mariadb.robot.yml','composer.lock') }}
 
             -   name: Install packages
                 run: |
-                    sudo apt-get install apache2-utils
                     sudo apt install awscli -q
                     python3 -m pip install --upgrade pip
                     python3 -m pip install -U robotframework
