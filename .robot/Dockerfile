@@ -18,7 +18,10 @@ RUN pip3 install  \
     PyMySQL \
     psycopg2-binary \
     robotframework-jsonlibrary \
+    robotframework-pabot \
     tk
+
+RUN npx playwright install-deps
 
 RUN rfbrowser init
 
