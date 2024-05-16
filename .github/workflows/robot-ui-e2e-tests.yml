@@ -43,6 +43,7 @@ jobs:
                     python3 -m pip install -U robotframework-databaselibrary
                     python3 -m pip install -U robotframework-browser
                     python3 -m pip install PyMySQL
+                    sudo npx playwright install-deps
 
             -   name: Install docker-compose
                 run: |
@@ -121,7 +122,6 @@ jobs:
                     python3 -m pip install -U robotframework-jsonlibrary
                     python3 -m pip install -U robotframework-databaselibrary
                     python3 -m pip install -U robotframework-browser
-                    python3 -m pip install -U robotframework-pabot
                     python3 -m pip install PyMySQL
                     sudo npx playwright install-deps
 
@@ -152,7 +152,7 @@ jobs:
                 run: |
                     cd robotframework-tests
                     rfbrowser init
-                    pabot -v env:ui_b2c -v headless:true -v ignore_console:false -d results --exclude skip-due-to-issueORskip-due-to-refactoring --include group_two -s '*'.tests.ui.b2c .
+                    robot -v env:ui_b2c -v headless:true -v ignore_console:false -d results --exclude skip-due-to-issueORskip-due-to-refactoring --include group_two -s '*'.tests.ui.b2c .
                     touch results/time.txt && echo $(date) > results/time.txt
             -   name: Rerun Failed Tests
                 if: steps.run_tests.outcome != 'success'
@@ -203,6 +203,7 @@ jobs:
                     python3 -m pip install -U robotframework-databaselibrary
                     python3 -m pip install -U robotframework-browser
                     python3 -m pip install PyMySQL
+                    sudo npx playwright install-deps
 
             -   name: Install docker-compose
                 run: |
