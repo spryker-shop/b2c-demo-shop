@@ -2,6 +2,8 @@ name: "[b2c][master] Robot Regression UI E2E"
 
 on:
     pull_request:
+        types: [ labeled ]
+    push:
         branches:
             - master
     workflow_dispatch:
@@ -12,6 +14,7 @@ concurrency:
 
 jobs:
     docker-alpine-php-8-2-mariadb-robot-ui-group-one:
+        if: ${{ github.event.label.name == 'robot-regression-ui-e2e' }}
         name: "Docker / Alpine / PHP 8.2 / MariaDB / Robot / UI / Group One"
         runs-on: ubuntu-22.04
         env:
@@ -92,6 +95,7 @@ jobs:
                       --expires "$(date -d '+7 days' --utc +'%Y-%m-%dT%H:%M:%SZ')"
 
     docker-alpine-php-8-2-mariadb-robot-ui-group-two:
+        if: ${{ github.event.label.name == 'robot-regression-ui-e2e' }}
         name: "Docker / Alpine / PHP 8.2 / MariaDB / Robot / UI /Group Two"
         runs-on: ubuntu-22.04
         env:
@@ -172,6 +176,7 @@ jobs:
                       --expires "$(date -d '+7 days' --utc +'%Y-%m-%dT%H:%M:%SZ')"
 
     docker-alpine-php-8-2-mariadb-robot-ui-group-three:
+        if: ${{ github.event.label.name == 'robot-regression-ui-e2e' }}
         name: "Docker / Alpine / PHP 8.2 / MariaDB / Robot / UI / Group Three"
         runs-on: ubuntu-22.04
         env:
