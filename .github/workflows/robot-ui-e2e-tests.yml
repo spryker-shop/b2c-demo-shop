@@ -88,7 +88,7 @@ jobs:
                     cd robotframework-tests
                     rebot -d results --merge results/output.xml results/rerun/rerun.xml
             -   name: Upload artifacts
-                if: always()
+                if: failure()
                 run: |
                     AWS_DEFAULT_REGION=${{env.ROBOT_TESTS_ARTIFACTS_BUCKET_REGION}} AWS_ACCESS_KEY_ID=${{ secrets.ROBOT_TESTS_ARTIFACTS_KEY }} AWS_SECRET_ACCESS_KEY=${{ secrets.ROBOT_TESTS_ARTIFACTS_SECRET }} aws s3 cp robotframework-tests/results s3://${{vars.ROBOT_TESTS_ARTIFACTS_BUCKET}}/master-robot-ui-ci/b2c_regression/group1/${GITHUB_RUN_ID}/PHP8.2MariaDBRobotUi/ \
                       --recursive \
@@ -169,7 +169,7 @@ jobs:
                     cd robotframework-tests
                     rebot -d results --merge results/output.xml results/rerun/rerun.xml
             -   name: Upload artifacts
-                if: always()
+                if: failure()
                 run: |
                     AWS_DEFAULT_REGION=${{env.ROBOT_TESTS_ARTIFACTS_BUCKET_REGION}} AWS_ACCESS_KEY_ID=${{ secrets.ROBOT_TESTS_ARTIFACTS_KEY }} AWS_SECRET_ACCESS_KEY=${{ secrets.ROBOT_TESTS_ARTIFACTS_SECRET }} aws s3 cp robotframework-tests/results s3://${{vars.ROBOT_TESTS_ARTIFACTS_BUCKET}}/master-robot-ui-ci/b2c_regression/group2/${GITHUB_RUN_ID}/PHP8.2MariaDBRobotUi/ \
                       --recursive \
@@ -249,7 +249,7 @@ jobs:
                     cd robotframework-tests
                     rebot -d results --merge results/output.xml results/rerun/rerun.xml
             -   name: Upload artifacts
-                if: always()
+                if: failure()
                 run: |
                     AWS_DEFAULT_REGION=${{env.ROBOT_TESTS_ARTIFACTS_BUCKET_REGION}} AWS_ACCESS_KEY_ID=${{ secrets.ROBOT_TESTS_ARTIFACTS_KEY }} AWS_SECRET_ACCESS_KEY=${{ secrets.ROBOT_TESTS_ARTIFACTS_SECRET }} aws s3 cp robotframework-tests/results s3://${{vars.ROBOT_TESTS_ARTIFACTS_BUCKET}}/master-robot-ui-ci/b2c_regression/group3/${GITHUB_RUN_ID}/PHP8.2MariaDBRobotUi/ \
                       --recursive \
