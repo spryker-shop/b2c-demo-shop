@@ -45,7 +45,7 @@ git clone git@github.com:spryker/docker-sdk.git docker
 1. Bootstrap the docker setup:
 
 ```bash
-docker/sdk boot deploy.dev.yml
+docker/sdk boot deploy.dev.dynamic-store.yml
 ```
 
 2. If the command you've run in the previous step returned instructions, follow them.
@@ -59,7 +59,7 @@ docker/sdk up
 
 ```bash
 git checkout {your_branch}
-docker/sdk boot -s deploy.dev.yml
+docker/sdk boot -s deploy.dev.dynamic-store.yml
 docker/sdk up --build --assets --data
 ```
 
@@ -141,7 +141,7 @@ git status
 3. Restart file synchronization and rebuild the codebase:
 ```bash
 docker/sdk trouble
-docker/sdk boot -s deploy.dev.yml
+docker/sdk boot -s deploy.dev.dynamic-store.yml
 docker/sdk up --build --assets
 ```
 
@@ -155,7 +155,7 @@ You do not see the expected demo data on the Storefront.
 2. If the queues are empty, and the issue persists, reload the demo data:
 ```bash
 docker/sdk trouble
-docker/sdk boot -s deploy.dev.yml
+docker/sdk boot -s deploy.dev.dynamic-store.yml
 docker/sdk up --build --assets --data
 ```
 
