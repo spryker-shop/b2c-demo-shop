@@ -52,7 +52,7 @@ jobs:
                     stack-version: 7.10.0
                     port: 9200
 
-            -   uses: actions/setup-node@v3
+            -   uses: actions/setup-node@v4
                 with:
                     node-version: '18'
 
@@ -69,7 +69,7 @@ jobs:
                     echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
 
             -   name: Composer cache
-                uses: actions/cache@v3
+                uses: actions/cache@v4
                 with:
                     path: ${{ steps.composer-cache.outputs.dir }}
                     key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
@@ -776,7 +776,6 @@ jobs:
         steps:
             -   uses: actions/checkout@v4
             -   run: echo eyAiZXhwZXJpbWVudGFsIiA6IHRydWUsICJmZWF0dXJlcyIgOiB7ICJidWlsZGtpdCI6IHRydWUgfSB9Cg==|base64 -d|sudo tee /etc/docker/daemon.json
-            -   run: sudo apt-get install --only-upgrade docker -y
             -   run: sudo curl -L "https://github.com/docker/compose/releases/download/2.12.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
             -   run: sudo chmod +x /usr/local/bin/docker-compose
             -   run: git clone https://github.com/spryker/docker-sdk.git --single-branch --branch master ./docker
@@ -800,8 +799,10 @@ jobs:
             -   name: Install packages
                 run: |
                     sudo apt install awscli -q
-            -   name: Composer install
-                run: composer install
+            -   name: Install robotframework-suite-tests folder
+                run: |
+                    cd ./data && composer require "spryker/robotframework-suite-tests:dev-master" --dev --no-interaction
+                    cp -r vendor ../vendor
             -   name: Install docker-compose
                 run: |
                     sudo curl -L "https://github.com/docker/compose/releases/download/2.12.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
@@ -846,8 +847,10 @@ jobs:
             -   name: Install packages
                 run: |
                     sudo apt install awscli -q
-            -   name: Composer install
-                run: composer install
+            -   name: Install robotframework-suite-tests folder
+                run: |
+                    cd ./data && composer require "spryker/robotframework-suite-tests:dev-master" --dev --no-interaction
+                    cp -r vendor ../vendor
             -   name: Install docker-compose
                 run: |
                     sudo curl -L "https://github.com/docker/compose/releases/download/2.12.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
@@ -887,8 +890,10 @@ jobs:
             -   name: Install packages
                 run: |
                     sudo apt install awscli -q
-            -   name: Composer install
-                run: composer install
+            -   name: Install robotframework-suite-tests folder
+                run: |
+                    cd ./data && composer require "spryker/robotframework-suite-tests:dev-master" --dev --no-interaction
+                    cp -r vendor ../vendor
             -   name: Install docker-compose
                 run: |
                     sudo curl -L "https://github.com/docker/compose/releases/download/2.12.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
@@ -926,8 +931,10 @@ jobs:
             -   name: Install packages
                 run: |
                     sudo apt install awscli -q
-            -   name: Composer install
-                run: composer install
+            -   name: Install cypress-tests folder
+                run: |
+                    cd ./data && composer require "spryker/cypress-tests:dev-master" --dev --no-interaction
+                    cp -r vendor ../vendor
             -   name: Install docker-compose
                 run: |
                     sudo curl -L "https://github.com/docker/compose/releases/download/2.12.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
@@ -972,8 +979,10 @@ jobs:
             -   name: Install packages
                 run: |
                     sudo apt install awscli -q
-            -   name: Composer install
-                run: composer install
+            -   name: Install cypress-tests folder
+                run: |
+                    cd ./data && composer require "spryker/cypress-tests:dev-master" --dev --no-interaction
+                    cp -r vendor ../vendor
             -   name: Install docker-compose
                 run: |
                     sudo curl -L "https://github.com/docker/compose/releases/download/2.12.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
