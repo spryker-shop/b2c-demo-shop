@@ -38,12 +38,6 @@ sections:
         rest-api-generate-documentation:
             command: 'vendor/bin/console rest-api:generate:documentation'
 
-    init-storages-per-store:
-        queue-setup:
-            command: 'vendor/bin/console queue:setup'
-        setup-search-create-sources:
-            command: 'vendor/bin/console search:setup:sources'
-
     init-storages-per-region:
         propel-copy-schema:
             command: 'vendor/bin/console propel:schema:copy'
@@ -67,8 +61,14 @@ sections:
             command: 'vendor/bin/console setup:init-db'
 
     demodata:
+        queue-setup:
+            command: 'vendor/bin/console queue:setup'
+
         import-eu-region-demodata:
             command: 'vendor/bin/console data:import --config=data/import/local/full_EU.yml'
+
+        setup-search-create-sources:
+            command: 'vendor/bin/console search:setup:sources'
 
         update-product-labels:
             command: 'vendor/bin/console product-label:relations:update'
