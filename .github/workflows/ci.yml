@@ -918,7 +918,7 @@ jobs:
                       --expires "$(date -d '+7 days' --utc +'%Y-%m-%dT%H:%M:%SZ')"
 
     docker-alpine-php-8-2-mariadb-cypress-dynamic-store-off:
-        name: "Docker / Alpine / PHP 8.2 / MariaDB / Cypress / UI"
+        name: "Docker / Alpine / PHP 8.2 / MariaDB / Cypress / UI / Dynamic Store OFF"
         runs-on: ubuntu-22.04
         env:
             PROGRESS_TYPE: plain
@@ -927,7 +927,6 @@ jobs:
             ROBOT_TESTS_ARTIFACTS_BUCKET_REGION: eu-west-1
         steps:
             -   uses: actions/checkout@v4
-
             -   name: Install packages
                 run: |
                     sudo apt install awscli -q
@@ -964,7 +963,7 @@ jobs:
                       --expires "$(date -d '+7 days' --utc +'%Y-%m-%dT%H:%M:%SZ')"
 
     docker-alpine-php-8-2-mariadb-cypress:
-        name: "Docker / Alpine / PHP 8.2 / MariaDB / Cypress / UI / Dynamic Store ON"
+        name: "Docker / Alpine / PHP 8.2 / MariaDB / Cypress / UI"
         runs-on: ubuntu-22.04
         env:
             PROGRESS_TYPE: plain
