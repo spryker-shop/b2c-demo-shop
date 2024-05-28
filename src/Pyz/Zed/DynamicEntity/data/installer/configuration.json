@@ -4587,5 +4587,352 @@
                 }
             ]
         }
+    },
+    {
+        "tableName": "spy_currency_store",
+        "tableAlias": "currency-stores",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_currency_store",
+            "isDeletable": false,
+            "fields": [
+                {
+                    "fieldName": "id_currency_store",
+                    "fieldVisibleName": "id_currency_store",
+                    "type": "integer",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "fk_currency",
+                    "fieldVisibleName": "fk_currency",
+                    "type": "integer",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "fk_store",
+                    "fieldVisibleName": "fk_store",
+                    "type": "integer",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_stock_store",
+        "tableAlias": "stock-stores",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_stock_store",
+            "isDeletable": false,
+            "fields": [
+                {
+                    "fieldName": "id_stock_store",
+                    "fieldVisibleName": "id_stock_store",
+                    "type": "integer",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "fk_stock",
+                    "fieldVisibleName": "fk_stock",
+                    "type": "integer",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "fk_store",
+                    "fieldVisibleName": "fk_store",
+                    "type": "integer",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_payment_method",
+        "tableAlias": "payment-methods",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_payment_method",
+            "isDeletable": false,
+            "fields": [
+                {
+                    "fieldName": "id_payment_method",
+                    "fieldVisibleName": "id_payment_method",
+                    "type": "integer",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "is_active",
+                    "fieldVisibleName": "is_active",
+                    "type": "boolean",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "name",
+                    "fieldVisibleName": "name",
+                    "type": "string",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_payment_method_store",
+        "tableAlias": "payment-method-stores",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_payment_method_store",
+            "isDeletable": false,
+            "fields": [
+                {
+                    "fieldName": "id_payment_method_store",
+                    "fieldVisibleName": "id_payment_method_store",
+                    "type": "integer",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "fk_payment_method",
+                    "fieldVisibleName": "fk_payment_method",
+                    "type": "integer",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "fk_store",
+                    "fieldVisibleName": "fk_store",
+                    "type": "integer",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_shipment_method",
+        "tableAlias": "shipment-methods",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_shipment_method",
+            "isDeletable": false,
+            "fields": [
+                {
+                    "fieldName": "id_shipment_method",
+                    "fieldVisibleName": "id_shipment_method",
+                    "type": "integer",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "is_active",
+                    "fieldVisibleName": "is_active",
+                    "type": "boolean",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "name",
+                    "fieldVisibleName": "name",
+                    "type": "string",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_shipment_method_store",
+        "tableAlias": "shipment-method-stores",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_shipment_method_store",
+            "isDeletable": false,
+            "fields": [
+                {
+                    "fieldName": "id_shipment_method_store",
+                    "fieldVisibleName": "id_shipment_method_store",
+                    "type": "integer",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "fk_shipment_method",
+                    "fieldVisibleName": "fk_shipment_method",
+                    "type": "integer",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "fk_store",
+                    "fieldVisibleName": "fk_store",
+                    "type": "integer",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_country_store",
+        "tableAlias": "country-stores",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_country_store",
+            "isDeletable": false,
+            "fields": [
+                {
+                    "fieldName": "id_country_store",
+                    "fieldVisibleName": "id_country_store",
+                    "type": "integer",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "fk_country",
+                    "fieldVisibleName": "fk_country",
+                    "type": "integer",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "fk_store",
+                    "fieldVisibleName": "fk_store",
+                    "type": "integer",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_shipment_method_price",
+        "tableAlias": "shipment-method-prices",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_shipment_method_price",
+            "isDeletable": false,
+            "fields": [
+                {
+                    "fieldName": "id_shipment_method_price",
+                    "fieldVisibleName": "id_shipment_method_price",
+                    "type": "integer",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "fk_currency",
+                    "fieldVisibleName": "fk_currency",
+                    "type": "integer",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "fk_shipment_method",
+                    "fieldVisibleName": "fk_shipment_method",
+                    "type": "integer",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "fk_store",
+                    "fieldVisibleName": "fk_store",
+                    "type": "integer",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "default_gross_price",
+                    "fieldVisibleName": "default_gross_price",
+                    "type": "integer",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "default_net_price",
+                    "fieldVisibleName": "default_net_price",
+                    "type": "integer",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "uuid",
+                    "fieldVisibleName": "uuid",
+                    "type": "string",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "pyz_example_state_machine_item",
+        "tableAlias": "example-state-machine-items",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_example_state_machine_item",
+            "isDeletable": true,
+            "fields": [
+                {
+                    "fieldName": "id_example_state_machine_item",
+                    "fieldVisibleName": "id_example_state_machine_item",
+                    "type": "integer",
+                    "isCreatable": true,
+                    "isEditable": false,
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "fk_state_machine_item_state",
+                    "fieldVisibleName": "fk_state_machine_item_state",
+                    "type": "integer",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "name",
+                    "fieldVisibleName": "name",
+                    "type": "string",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true }
+                }
+            ]
+        }
     }
 ]
