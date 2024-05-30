@@ -480,7 +480,7 @@ jobs:
                 continue-on-error: true
                 run: |
                     git clone https://github.com/spryker/docker-sdk.git ./docker
-                    docker/sdk boot -v deploy.ci.acceptance.mariadb.yml
+                    docker/sdk boot -v deploy.dev.yml
                     sudo bash -c "echo '127.0.0.1 backend-api.at.spryker.local backend-api.de.spryker.local glue-backend.de.spryker.local glue-backend.at.spryker.local glue-storefront.de.spryker.local glue-storefront.at.spryker.local backend-gateway.at.spryker.local backend-gateway.de.spryker.local backoffice.at.spryker.local backoffice.de.spryker.local date-time-configurator-example.spryker.local glue.at.spryker.local glue.de.spryker.local yves.at.spryker.local yves.de.spryker.local' >> /etc/hosts"
                     docker/sdk up -t -v
                     docker/sdk cli composer dump-autoload -o -a --apcu
@@ -566,7 +566,7 @@ jobs:
                 continue-on-error: true
                 run: |
                     git clone https://github.com/spryker/docker-sdk.git ./docker
-                    docker/sdk boot -v deploy.ci.api.mariadb.dynamic-store.robot.yml
+                    docker/sdk boot -v deploy.dev.dynamic-store.yml
                     sudo bash -c "echo '127.0.0.1 backend-api.eu.spryker.local backend-api.us.spryker.local backend-gateway.eu.spryker.local backend-gateway.us.spryker.local backoffice.eu.spryker.local backoffice.us.spryker.local glue-backend.eu.spryker.local glue-backend.us.spryker.local glue-storefront.eu.spryker.local glue-storefront.us.spryker.local glue.eu.spryker.local glue.us.spryker.local mail.spryker.local mp.eu.spryker.local mp.us.spryker.local queue.spryker.local scheduler.spryker.local spryker.local swagger.spryker.local yves.eu.spryker.local yves.us.spryker.local' >> /etc/hosts"
                     docker/sdk up -t -v
                     docker/sdk cli composer dump-autoload -o -a --apcu
