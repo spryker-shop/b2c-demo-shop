@@ -823,9 +823,7 @@
                     "fieldVisibleName": "id_url",
                     "isCreatable": false,
                     "isEditable": false,
-                    "validation": {
-                        "isRequired": false
-                    },
+                    "validation": { "isRequired": false },
                     "type": "integer"
                 },
                 {
@@ -834,18 +832,17 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": {
-                        "isRequired": true
-                    }
+                    "validation": { "isRequired": true }
                 },
                 {
-                    "fieldName": "fk_resource_product_abstract",
-                    "fieldVisibleName": "fk_resource_product_abstract",
+                    "fieldName": "url",
+                    "fieldVisibleName": "url",
                     "isCreatable": true,
                     "isEditable": true,
-                    "type": "integer",
+                    "type": "string",
                     "validation": {
-                        "isRequired": false
+                        "isRequired": true,
+                        "constraints": [{ "name": "url" }]
                     }
                 },
                 {
@@ -855,16 +852,6 @@
                     "isEditable": true,
                     "type": "integer",
                     "validation": { "isRequired": false }
-                },
-                {
-                    "fieldName": "url",
-                    "fieldVisibleName": "url",
-                    "isCreatable": true,
-                    "isEditable": true,
-                    "type": "string",
-                    "validation": {
-                        "isRequired": true
-                    }
                 }
             ]
         }
