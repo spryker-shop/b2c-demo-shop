@@ -1,0 +1,28 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'navigation-cart',
+    tag: 'li'
+} %}
+
+{% define data = {
+    cartQuantity: 0,
+    ajaxCartUrl: null,
+} %}
+
+{% block body %}
+    {% include molecule('cart-counter') with {
+        class: config.name ~ '__link ' ~ config.jsName ~ '__trigger',
+        data: {
+            quantity: data.cartQuantity,
+            ajaxCartUrl: data.ajaxCartUrl,
+        },
+    } only %}
+
+    {% include molecule('nav-overlay') with {
+        attributes: {
+            'trigger-open-class-name': config.jsName ~ '__trigger',
+            'active-link': config.name ~ '__link--active',
+        },
+    } only %}
+{% endblock %}

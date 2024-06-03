@@ -1,5 +1,5 @@
-import Component from 'ShopUi/models/component';
 import FormattedNumberInput from 'ShopUi/components/molecules/formatted-number-input/formatted-number-input';
+import Component from 'ShopUi/models/component';
 
 export default class QuantityCounter extends Component {
     protected quantityInput: HTMLInputElement;
@@ -77,7 +77,7 @@ export default class QuantityCounter extends Component {
     protected timer(): void {
         clearTimeout(this.timeout);
         this.timeout = window.setTimeout(() => {
-            if (this.value !== this.getValue) {
+            if (this.value !== this.getValue && !this.isAjaxMode) {
                 this.quantityInput.form.submit();
             }
         }, this.duration);
@@ -107,5 +107,9 @@ export default class QuantityCounter extends Component {
 
     protected get getValue(): number {
         return this.formattedNumberInput.unformattedValue;
+    }
+
+    protected get isAjaxMode(): boolean {
+        return !!this.quantityInput.getAttribute('data-ajax-mode');
     }
 }

@@ -16,6 +16,7 @@
     canEditCart: true,
     additionalContainerClass: 'grid--justify grid--no-wrap',
     productOptionsModifiers: [],
+    ajaxTriggerAttribute: null,
 } %}
 
 {% set canEditCart = (not is_granted('IS_AUTHENTICATED_FULLY') or can('WriteSharedCartPermissionPlugin', data.idQuote)) and data.canEditCart %}
@@ -105,7 +106,12 @@
                                 <div class="col">
                                     {% block quantity %}
                                         {% if canEditCart %}
-                                            {% widget 'CartChangeQuantityFormWidget' args [data.productItem, not canEditCart] only %}{% endwidget %}
+                                            {% widget 'CartChangeQuantityFormWidget' args [data.productItem, not canEditCart] with {
+                                                data: {
+                                                    ajaxTriggerAttribute: data.ajaxTriggerAttribute,
+                                                },
+                                            } only %}
+                                            {% endwidget %}
                                         {% else %}
                                             {{ 'cart.item_quantity' | trans }}: {{ data.productItem.quantity | executeFilterIfExists('formatInt', app.locale) }}
                                         {% endif %}
