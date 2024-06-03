@@ -28,7 +28,7 @@ image:
         SPRYKER_DEFAULT_STORE: "DE"
         SPRYKER_ACTIVE_STORES: "DE,AT"
         SPRYKER_HOOK_BEFORE_DEPLOY: "vendor/bin/install -r EU/pre-deploy -vvv"
-        SPRYKER_HOOK_AFTER_DEPLOY: "true"
+        SPRYKER_HOOK_AFTER_DEPLOY: "vendor/bin/install -r install-post-deploy-workflow.yml -vvv"
         SPRYKER_HOOK_INSTALL: "vendor/bin/install -r EU/production --no-ansi -vvv"
         SPRYKER_HOOK_DESTRUCTIVE_INSTALL: "vendor/bin/install -r EU/destructive --no-ansi -vvv"
         SPRYKER_PRODUCT_CONFIGURATOR_HOST: dtc.b2c.demo-spryker.com
@@ -129,8 +129,6 @@ groups:
             yves:
                 application: yves
                 endpoints:
-                    dtc.b2c.demo-spryker.com:
-                        entry-point: Configurator
                     www.de.b2c.demo-spryker.com:
                         store: DE
                         services:
@@ -141,6 +139,8 @@ groups:
                         services:
                             session:
                                 namespace: 2
+                    dtc.b2c.demo-spryker.com:
+                        entry-point: Configurator
             glue:
                 application: glue
                 endpoints:
