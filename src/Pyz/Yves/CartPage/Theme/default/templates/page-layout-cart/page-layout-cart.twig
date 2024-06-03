@@ -8,6 +8,10 @@
 
 {% block contentClass %}page-layout-cart{% endblock %}
 
+{% block title %}
+    {% widget 'CartOperationsWidget' args [data.cart] use view('cart-operations-title', 'MultiCartWidget') only %}{% endwidget %}
+{% endblock %}
+
 {% block contentInner %}
     {% if data.cart.idQuote is not empty %}
         <div>

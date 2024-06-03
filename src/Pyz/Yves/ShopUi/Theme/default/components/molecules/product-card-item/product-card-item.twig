@@ -74,7 +74,8 @@
                                     {% include molecule('product-item-variant-selector') with {
                                         data: {
                                             productItem: data.productItem,
-                                            productItemAttributes: data.attributes
+                                            productItemAttributes: data.attributes,
+                                            ajaxTriggerAttribute: data.ajaxTriggerAttribute,
                                         }
                                     } only %}
                                 {% endif %}
@@ -122,9 +123,16 @@
                             </div>
 
                             {% if canEditCart %}
-                                {% widget 'RemoveFromCartFormWidget' args [data.productItem, random()] only %}
+                               {% widget 'RemoveFromCartFormWidget' args [data.productItem, random()] with {
+                                    data: {
+                                        ajaxTriggerAttribute: data.ajaxTriggerAttribute,
+                                    },
+                                    embed: {
+                                        ajaxTriggerAttribute: data.ajaxTriggerAttribute,
+                                    },
+                                }  only %}
                                     {% block embeddedData %}
-                                        <button class="link link--darkest link--edit" data-init-single-click {{ qa('add-to-cart-button') }}>
+                                        <button {{ embed.ajaxTriggerAttribute }} class="link link--darkest link--edit" data-init-single-click {{ qa('add-to-cart-button') }}>
                                             {{- 'remove' | trans -}}
                                         </button>
                                     {% endblock %}
