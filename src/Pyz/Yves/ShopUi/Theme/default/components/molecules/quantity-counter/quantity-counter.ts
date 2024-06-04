@@ -1,6 +1,8 @@
 import FormattedNumberInput from 'ShopUi/components/molecules/formatted-number-input/formatted-number-input';
 import Component from 'ShopUi/models/component';
 
+type RepeatableEvent = CustomEvent<{ repeat: boolean }>;
+
 export default class QuantityCounter extends Component {
     protected quantityInput: HTMLInputElement;
     protected decrButton: HTMLButtonElement;
@@ -8,8 +10,7 @@ export default class QuantityCounter extends Component {
     protected value: number;
     protected duration = 1000;
     protected timeout = 0;
-    protected inputEvent: Event = new Event('input');
-    protected changeEvent: Event = new Event('change');
+    protected repeatableEvent?: Event = null;
     protected formattedNumberInput: FormattedNumberInput;
 
     protected readyCallback(): void {}
@@ -29,55 +30,54 @@ export default class QuantityCounter extends Component {
 
     protected mapEvents(): void {
         this.quantityInput.addEventListener('change', () => this.autoUpdateOnChange());
-        this.decrButton.addEventListener('click', () => this.onDecrementButtonClick());
-        this.incrButton.addEventListener('click', () => this.onIncrementButtonClick());
+        this.decrButton.addEventListener('click', (event) => this.onChangeQuantity(event, 'decrease'));
+        this.incrButton.addEventListener('click', (event) => this.onChangeQuantity(event, 'increase'));
     }
 
-    protected onDecrementButtonClick(): void {
-        if (this.isDisabled) {
+    protected onChangeQuantity(event: Event | RepeatableEvent, type: 'decrease' | 'increase'): void {
+        if (this.isDisabled || (event as RepeatableEvent).detail.repeat) {
             return;
         }
 
         const value = this.formattedNumberInput.unformattedValue;
+        const isDecrease = value > this.minQuantity && type === 'decrease';
+        const isIncrease = value < this.maxQuantity && type === 'increase';
+        this.quantityInput.value = (isDecrease ? value - 1 : isIncrease ? value + 1 : value).toString();
 
-        if (value > this.minQuantity) {
-            this.quantityInput.value = (value - 1).toString();
-
-            this.autoUpdateOnChange();
-            this.triggerInputEvents();
+        if (isDecrease || isIncrease) {
+            this.autoUpdateOnChange(event);
+            this.quantityInput.dispatchEvent(new Event('input'));
+            this.quantityInput.dispatchEvent(new Event('change'));
         }
     }
 
-    protected onIncrementButtonClick(): void {
-        if (this.isDisabled) {
-            return;
-        }
-
-        const value = this.formattedNumberInput.unformattedValue;
-
-        if (value < this.maxQuantity) {
-            this.quantityInput.value = (value + 1).toString();
-
-            this.autoUpdateOnChange();
-            this.triggerInputEvents();
-        }
-    }
-
-    protected autoUpdateOnChange(): void {
+    protected autoUpdateOnChange(event?: Event): void {
         if (this.autoUpdate) {
-            this.timer();
+            this.timer(event);
         }
     }
 
-    protected triggerInputEvents(): void {
-        this.quantityInput.dispatchEvent(this.inputEvent);
-        this.quantityInput.dispatchEvent(this.changeEvent);
-    }
+    protected timer(event?: Event): void {
+        if (event) {
+            event.stopPropagation();
+            this.repeatableEvent = event;
+        }
 
-    protected timer(): void {
         clearTimeout(this.timeout);
         this.timeout = window.setTimeout(() => {
-            if (this.value !== this.getValue && !this.isAjaxMode) {
+            const shouldUpdate = this.value !== this.getValue;
+
+            if (shouldUpdate && this.isAjaxMode && this.repeatableEvent) {
+                this.repeatableEvent.target.dispatchEvent(
+                    new CustomEvent(this.repeatableEvent.type, {
+                        bubbles: true,
+                        detail: { repeat: true },
+                    }),
+                );
+                this.repeatableEvent = null;
+            }
+
+            if (shouldUpdate && !this.isAjaxMode) {
                 this.quantityInput.form.submit();
             }
         }, this.duration);
