@@ -261,6 +261,19 @@
                         "parentFieldName": "id_product_abstract"
                     }
                 ]
+            },
+            {
+                "name": "productAbstractUrls",
+                "isEditable": false,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "urls"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_resource_product_abstract",
+                        "parentFieldName": "id_product_abstract"
+                    }
+                ]
             }
         ]
     },
@@ -810,9 +823,7 @@
                     "fieldVisibleName": "id_url",
                     "isCreatable": false,
                     "isEditable": false,
-                    "validation": {
-                        "isRequired": false
-                    },
+                    "validation": { "isRequired": false },
                     "type": "integer"
                 },
                 {
@@ -821,19 +832,7 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": {
-                        "isRequired": true
-                    }
-                },
-                {
-                    "fieldName": "fk_resource_product_abstract",
-                    "fieldVisibleName": "fk_resource_product_abstract",
-                    "isCreatable": true,
-                    "isEditable": true,
-                    "type": "integer",
-                    "validation": {
-                        "isRequired": false
-                    }
+                    "validation": { "isRequired": true }
                 },
                 {
                     "fieldName": "url",
@@ -842,8 +841,25 @@
                     "isEditable": true,
                     "type": "string",
                     "validation": {
-                        "isRequired": true
+                        "isRequired": true,
+                        "constraints": [{ "name": "url" }]
                     }
+                },
+                {
+                    "fieldName": "fk_resource_product_set",
+                    "fieldVisibleName": "fk_resource_product_set",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "fk_resource_product_abstract",
+                    "fieldVisibleName": "fk_resource_product_abstract",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": false }
                 }
             ]
         }
