@@ -1,6 +1,9 @@
 {% extends molecule('variant', '@SprykerShop:DiscountPromotionWidget') %}
 
 {% block body %}
+    {% set submitterKey = data.ajaxTriggerAttribute ?: 'data-form-submitter' %}
+    {% set submitterValue = data.ajaxTriggerAttribute ? 'change' : true %}
+
     <strong class="{{ config.name }}__label">{{ data.label }}:</strong>
 
     {% if data.selectedValue is null %}
@@ -11,7 +14,7 @@
                     name: data.formName,
                     'config-width': 'auto',
                     'config-theme': 'small',
-                    'data-form-submitter': '',
+                    (submitterKey): submitterValue,
                 },
                 embed: {
                     values: data.values,
@@ -34,12 +37,22 @@
                 formName: data.formName,
                 selectedValue: data.selectedValue,
             },
+            embed: {
+                ajaxTriggerAttribute: data.ajaxTriggerAttribute,
+            },
+            attributes: {
+                'ajax-mode': data.ajaxTriggerAttribute ?: null,
+            },
         } only %}
             {% block selectedValue %}
                 <span class="spacing-x spacing-x--big">
                     {{ data.selectedValue }}
                 </span>
-                <button type="button" class="link link--darkest link--edit {{ config.jsName }}__trigger">
+                <button
+                    {% if embed.ajaxTriggerAttribute %} data-form-data-url-builder-skip-field="{{ data.formName }}" {{ embed.ajaxTriggerAttribute }} {% endif %}
+                    type="button"
+                    class="link link--darkest link--edit {{ config.jsName }}__trigger"
+                >
                     {{- 'product.attribute.variant.reset' | trans -}}
                 </button>
             {% endblock %}

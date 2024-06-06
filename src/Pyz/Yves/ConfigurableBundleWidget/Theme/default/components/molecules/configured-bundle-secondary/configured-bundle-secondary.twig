@@ -6,6 +6,7 @@
 
 {% define data = {
     configuredBundleListNumber: '',
+    ajaxTriggerAttribute: null,
 } %}
 
 {%- block bundleInner -%}
@@ -72,6 +73,9 @@
 
 {% block editableConfigurableBundleNote %}
     {% widget 'ConfiguredBundleNoteWidget' args [data.bundle, data.quote] with {
+        data: {
+            ajaxTriggerAttribute: data.ajaxTriggerAttribute,
+        },
         embed: {
             configuredBundleListNumber: data.configuredBundleListNumber,
         },

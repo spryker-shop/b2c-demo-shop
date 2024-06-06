@@ -2,7 +2,7 @@
 
 {% block body %}
     {% if not data.useExternalForm %}
-        <form method="GET">
+        <form method="GET" {% if data.formAction %} data-form-data-url-builder action="{{ data.formAction }}" {% endif %}>
     {% endif %}
 
     <ul>
@@ -26,7 +26,8 @@
                             values: values,
                             selectedValue: selectedValue,
                             label: ('product.attribute.' ~ name) | trans,
-                            isAvailable: isAvailable
+                            isAvailable: isAvailable,
+                            ajaxTriggerAttribute: data.ajaxTriggerAttribute,
                         }
                     } only %}
                 </li>

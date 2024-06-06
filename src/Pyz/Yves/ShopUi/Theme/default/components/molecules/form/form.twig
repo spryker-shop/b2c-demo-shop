@@ -23,7 +23,8 @@
         class: 'button button--success',
         icon: null,
         enable: false,
-        qa: 'submit-button'
+        qa: 'submit-button',
+        attributes: '',
     },
 
     cancel: {
@@ -92,7 +93,7 @@
 
                     {% if data.submit.enable %}
                         {% block submit %}
-                            <button type="submit" class="{{config.name}}__action {{data.submit.class}}" {{qa(data.submit.qa)}}>
+                            <button {{ data.submit.attributes }} type="submit" class="{{config.name}}__action {{data.submit.class}}" {{qa(data.submit.qa)}}>
                                 {% if data.submit.icon is not empty %}
                                     {% include atom('icon') with {
                                         modifiers: ['small'],

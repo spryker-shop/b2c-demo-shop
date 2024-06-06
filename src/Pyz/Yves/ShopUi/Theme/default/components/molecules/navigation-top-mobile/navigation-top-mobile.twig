@@ -8,7 +8,9 @@
 {% define data = {
     url: '/',
     searchUrl: path('search'),
-    cartQuantity: getCartQuantity()
+    cartQuantity: getCartQuantity(),
+    isAjaxMode: false,
+    ajaxCartUrl: '',
 } %}
 
 {% block body %}
@@ -50,7 +52,8 @@
                     },
                     embed: {
                         item: item,
-                        cartQuantity: data.cartQuantity
+                        cartQuantity: data.cartQuantity,
+                        ajaxCartUrl: data.isAjaxMode ? data.ajaxCartUrl : null,
                     }
                 } only %}
                     {% block button %}
@@ -59,6 +62,8 @@
                                 modifiers: ['mobile'],
                                 data: {
                                     quantity: embed.cartQuantity,
+                                    ajaxCartUrl: embed.ajaxCartUrl ~ '?counterOnly=true',
+                                    ajaxClassSuffix: 'mobile',
                                 },
                             } only %}
                         {% endif %}

@@ -3,6 +3,8 @@
 {% define data = {
     form: _widget.cartCodeForm,
     isQuoteEditable: _widget.isQuoteEditable,
+    ajaxTriggerAttribute: null,
+    redirectRoute: null,
 } %}
 
 {% block body %}
@@ -11,6 +13,8 @@
         data: {
             form: data.form,
             isQuoteEditable: data.isQuoteEditable,
+            ajaxTriggerAttribute: data.ajaxTriggerAttribute,
+            redirectRoute: data.redirectRoute,
         },
     } only %}
 {% endblock %}

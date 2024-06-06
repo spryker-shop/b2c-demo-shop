@@ -18,6 +18,7 @@
         name: 'quantity',
     },
     numberFormatConfig: {},
+    ajaxTriggerAttribute: '',
 } %}
 
 {% set maxQuantity = data.maxQuantity < 0 or data.maxQuantity < data.minQuantity ? false : data.maxQuantity %}
@@ -25,6 +26,7 @@
     'data-max-quantity': maxQuantity,
     'data-min-quantity': data.minQuantity,
     'data-auto-update': data.autoUpdate,
+    'data-ajax-mode': data.ajaxTriggerAttribute,
     disabled: data.disabled,
     readonly: data.readOnly,
 } %}
@@ -45,7 +47,7 @@
     <div class="{{ component.renderClass(config.name ~ '__container', modifiers) }} grid grid--middle">
         {% block decreaseButton %}
             <div class="col">
-                <div class="{{ component.renderClass('button', modifiers) }} {{ buttonDisabledClassName }} button--quantity {{ config.jsName }}__decr">-</div>
+                <div {{ data.ajaxTriggerAttribute }} class="{{ component.renderClass('button', modifiers) }} {{ buttonDisabledClassName }} button--quantity {{ config.jsName }}__decr">-</div>
             </div>
         {% endblock %}
 
@@ -67,7 +69,7 @@
 
         {% block increaseButton %}
             <div class="col">
-                <div class="{{ component.renderClass('button', modifiers) }} {{ buttonDisabledClassName }} button--quantity {{ config.jsName }}__incr">+</div>
+                <div {{ data.ajaxTriggerAttribute }} class="{{ component.renderClass('button', modifiers) }} {{ buttonDisabledClassName }} button--quantity {{ config.jsName }}__incr">+</div>
             </div>
         {% endblock %}
     </div>
