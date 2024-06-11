@@ -1,8 +1,6 @@
 import FormattedNumberInput from 'ShopUi/components/molecules/formatted-number-input/formatted-number-input';
 import Component from 'ShopUi/models/component';
 
-type RepeatableEvent = CustomEvent<{ repeat: boolean }>;
-
 export default class QuantityCounter extends Component {
     protected quantityInput: HTMLInputElement;
     protected decrButton: HTMLButtonElement;
@@ -10,7 +8,6 @@ export default class QuantityCounter extends Component {
     protected value: number;
     protected duration = 1000;
     protected timeout = 0;
-    protected repeatableEvent?: Event = null;
     protected formattedNumberInput: FormattedNumberInput;
 
     protected readyCallback(): void {}
@@ -29,58 +26,66 @@ export default class QuantityCounter extends Component {
     }
 
     protected mapEvents(): void {
-        this.quantityInput.addEventListener('change', () => this.autoUpdateOnChange());
         this.decrButton.addEventListener('click', (event) => this.onChangeQuantity(event, 'decrease'));
         this.incrButton.addEventListener('click', (event) => this.onChangeQuantity(event, 'increase'));
+        this.quantityInput?.addEventListener('keydown', (event: KeyboardEvent) => this.onKeyDown(event));
+
+        if (this.autoUpdate) {
+            this.quantityInput.addEventListener('change', () => this.delayToSubmit());
+        }
     }
 
-    protected onChangeQuantity(event: Event | RepeatableEvent, type: 'decrease' | 'increase'): void {
-        if (this.isDisabled || (event as RepeatableEvent).detail.repeat) {
+    protected onChangeQuantity(event: Event, type: 'decrease' | 'increase'): void {
+        event.preventDefault();
+
+        if (this.isDisabled) {
             return;
         }
 
         const value = this.formattedNumberInput.unformattedValue;
         const isDecrease = value > this.minQuantity && type === 'decrease';
         const isIncrease = value < this.maxQuantity && type === 'increase';
+        const shouldUpdate = isDecrease || isIncrease;
+
+        if (!shouldUpdate) {
+            return;
+        }
+
         this.quantityInput.value = (isDecrease ? value - 1 : isIncrease ? value + 1 : value).toString();
 
-        if (isDecrease || isIncrease) {
-            this.autoUpdateOnChange(event);
-            this.quantityInput.dispatchEvent(new Event('input'));
-            this.quantityInput.dispatchEvent(new Event('change'));
+        if (this.isAjaxMode) {
+            this.delayToSubmit(true);
+
+            return;
         }
+
+        this.quantityInput.dispatchEvent(new Event('change'));
+        this.quantityInput.dispatchEvent(new Event('input'));
     }
 
-    protected autoUpdateOnChange(event?: Event): void {
-        if (this.autoUpdate) {
-            this.timer(event);
-        }
-    }
-
-    protected timer(event?: Event): void {
-        if (event) {
-            event.stopPropagation();
-            this.repeatableEvent = event;
-        }
-
+    protected delayToSubmit(triggerInput = false): void {
         clearTimeout(this.timeout);
         this.timeout = window.setTimeout(() => {
-            const shouldUpdate = this.value !== this.getValue;
-
-            if (shouldUpdate && this.isAjaxMode && this.repeatableEvent) {
-                this.repeatableEvent.target.dispatchEvent(
-                    new CustomEvent(this.repeatableEvent.type, {
-                        bubbles: true,
-                        detail: { repeat: true },
-                    }),
-                );
-                this.repeatableEvent = null;
+            if (this.value === this.getValue) {
+                return;
             }
 
-            if (shouldUpdate && !this.isAjaxMode) {
+            if (this.isAjaxMode && triggerInput) {
+                this.quantityInput.dispatchEvent(new Event('input', { bubbles: true }));
+                this.quantityInput.dispatchEvent(new Event('change', { bubbles: true }));
+                return;
+            }
+
+            if (!this.isAjaxMode) {
                 this.quantityInput.form.submit();
             }
         }, this.duration);
+    }
+
+    protected onKeyDown(event: KeyboardEvent): void {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+        }
     }
 
     protected setMaxQuantityToInfinity(): void {
