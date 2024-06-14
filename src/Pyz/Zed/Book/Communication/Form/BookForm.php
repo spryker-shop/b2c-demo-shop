@@ -13,8 +13,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class BookForm extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
-{
+   
+    public function buildForm(FormBuilderInterface $builder, array $options){
     $builder
         ->add('name', TextType::class, [
             'label' => 'Name',
@@ -31,8 +31,10 @@ class BookForm extends AbstractType
         ->add('save', SubmitType::class, ['label' => 'Save']);
 }
 
-    public function configureOptions(OptionsResolver $resolver)
-    {
+
+
+
+    public function configureOptions(OptionsResolver $resolver){
         $resolver->setDefaults([
             'data_class' => PyzBookTransfer::class,
         ]);

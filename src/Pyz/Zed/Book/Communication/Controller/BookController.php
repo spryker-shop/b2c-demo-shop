@@ -19,7 +19,7 @@ class BookController extends AbstractController
     public function createAction(Request $request)
     {
         $bookTransfer = new PyzBookTransfer();
-        $form = $this->getFactory()->createBookForm($bookTransfer);
+        $form = $this->getFactory()->createBookForm();
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -39,8 +39,7 @@ class BookController extends AbstractController
 
         $bookTransfer = new PyzBookTransfer();
         $bookTransfer->fromArray($bookEntity->toArray(), true);
-
-        $form = $this->getFactory()->createBookForm($bookTransfer);
+        $form = $this->getFactory()->createBookForm();
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
