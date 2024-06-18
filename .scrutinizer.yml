@@ -9,6 +9,8 @@ build:
 
     nodes:
         analysis:
+            requires:
+                - branch: /^release-.+$/
             tests:
                 override:
                     - php-scrutinizer-run
