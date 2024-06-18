@@ -1,0 +1,80 @@
+name: Up-merge latest release to "master-deploy" branch
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  up-merge:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Git
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+
+      - name: Get the latest tag
+        run: |
+          latest_tag=$(git describe --tags $(git rev-list --tags --max-count=1))
+          echo "latest_tag=$latest_tag" >> $GITHUB_ENV
+
+      - name: Get the current tag on master-deploy
+        run: |
+          git checkout master-deploy
+          current_tag=$(git describe --tags --abbrev=0)
+          echo "current_tag=$current_tag" >> $GITHUB_ENV
+
+      - name: Compare release tags
+        run: |
+          latest_tag="${{ env.latest_tag }}"
+          current_tag="${{ env.current_tag }}"
+          latest_version=$(echo $latest_tag | sed 's/^v//')
+          current_version=$(echo $current_tag | sed 's/^v//')
+
+          if [ "$(printf '%s\n' "$latest_version" "$current_version" | sort -V | tail -n1)" = "$latest_version" ] && [ "$latest_version" != "$current_version" ]; then
+            echo "up_merge_is_required=true" >> $GITHUB_ENV
+          else
+            echo "up_merge_is_required=false" >> $GITHUB_ENV
+          fi
+
+      - name: Check if the latest tag is newer than the current tag on master-deploy
+        if: env.up_merge_is_required == 'false'
+        run: echo "Latest tag is not newer than the current tag on master-deploy. Skipping merge!"
+
+      - name: Attempt to merge latest tag to master-deploy
+        if: env.up_merge_is_required == 'true'
+        run: |
+          git merge ${{ env.latest_tag }} -m "Merge tag ${{ env.latest_tag }} into master-deploy"
+        continue-on-error: true
+
+      - name: Push changes
+        if: success() && env.up_merge_is_required == 'true'
+        run: |
+          git push origin master-deploy
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Notify Slack on Failure
+        if: failure()
+        uses: slackapi/slack-github-action@v1.26.0
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+        with:
+          channel-id: ${{ secrets.SLACK_CHANNEL_ID }}
+          slack-message: "❌Failed to merge tag ${{ env.latest_tag }} into master-deploy. Manual intervention is required! \n*Details*: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+
+      - name: Notify Slack on Success
+        if: success()
+        uses: slackapi/slack-github-action@v1.26.0
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+        with:
+          channel-id: ${{ secrets.SLACK_CHANNEL_ID }}
+          slack-message: "✅Successfully merged tag ${{ env.latest_tag }} into master-deploy of the ${{ github.repository }} repository. The deployment will be triggered shortly."
