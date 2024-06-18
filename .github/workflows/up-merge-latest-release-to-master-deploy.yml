@@ -54,18 +54,6 @@ jobs:
           git merge ${{ env.latest_tag }} -m "Merge tag ${{ env.latest_tag }} into master-deploy"
         continue-on-error: true
 
-      - name: Check for merge conflicts
-        if: failure() && env.up_merge_is_required == 'true'
-        run: |
-          if git ls-files -u | grep -q 'composer.json\|composer.lock'; then
-            echo "Merge conflict in composer.json or composer.lock"
-            exit 1
-          else
-            git checkout --theirs .
-            git add .
-            git commit -m "Merge tag ${{ env.latest_tag }} into master-deploy and resolved conflicts using theirs strategy."
-          fi
-
       - name: Push changes
         if: success() && env.up_merge_is_required == 'true'
         run: |
@@ -89,4 +77,4 @@ jobs:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
         with:
           channel-id: ${{ secrets.SLACK_CHANNEL_ID }}
-          slack-message: "✅Successfully merged tag ${{ env.latest_tag }} into master-deploy. The deployment will be triggered shortly."
+          slack-message: "✅Successfully merged tag ${{ env.latest_tag }} into master-deploy of the ${{ github.repository }} repository. The deployment will be triggered shortly."
