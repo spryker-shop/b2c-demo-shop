@@ -2,8 +2,6 @@ build:
     environment:
         php: '8.1.0'
         node: '14.0'
-        variables:
-            BRANCH_NAME: ${SCRUTINIZER_REPO_BRANCH} # Capture the branch name
 
     tests:
         override:
@@ -12,8 +10,7 @@ build:
     nodes:
         analysis:
             requires:
-                - branch: /^master$|^release-.+/
+                - branch: /^master$|/^release-.+$/
             tests:
                 override:
-                    - |
-                        if [[ "$SCRUTINIZER_REPO_BRANCH" =~ ^master$ || "$SCRUTINIZER_REPO_BRANCH" =~ ^release-.+ ]]; then php-scrutinizer-run; else echo "Skipping Scrutinizer for branch $SCRUTINIZER_REPO_BRANCH"; fi
+                    - php-scrutinizer-run
