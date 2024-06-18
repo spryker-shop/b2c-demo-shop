@@ -9,8 +9,12 @@ build:
 
     nodes:
         analysis:
-            requires:
-                - branch: /^master$|/^release-.+$/
             tests:
                 override:
                     - php-scrutinizer-run
+
+filter:
+    branches:
+        patterns:
+            - /^master/
+            - /^release-.+$/
