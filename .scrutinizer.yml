@@ -1,8 +1,4 @@
 build:
-    my-first-test:
-        requires:
-            - node: my-first-test
-            - branch: /^master$|/^release-.+$/
     environment:
         php: '8.1.0'
         node: '14.0'
@@ -13,6 +9,8 @@ build:
 
     nodes:
         analysis:
+            requires:
+                - branch: master
             tests:
                 override:
                     - php-scrutinizer-run
