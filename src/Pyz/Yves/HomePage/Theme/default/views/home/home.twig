@@ -20,6 +20,57 @@
 
     <div class="container container--home-page">
         <main>
+            <div class="container">
+                <div class="col col--lg-12 col--md-12 col--sm-12">
+                    {% include molecule('my-first-component') with {
+                        modifiers: ['big'],
+                        data: {
+                            name: 'Counting a tags...',
+                            description: 'How many links are there on this page?'
+                        },
+                        attributes: {
+                            'element-selector': 'div'
+                        }
+                    } only %}
+                </div>
+                <div class="col col--lg-12 col--md-12 col--sm-12">
+                    {% embed molecule('simple-carousel') with {
+                        data: {
+                            showDots: false,
+                            slides: [{
+                                    url: publicPath('images/inspire1-bottom.jpg')
+                                },{
+                                    url: publicPath('images/inspire1-main.jpg')
+                                }, {
+                                    url: publicPath('images/inspire1-bottom.jpg')
+                                }, {
+                                    url: publicPath('images/inspire1-main.jpg')
+                                },{
+                                    url: publicPath('images/inspire1-bottom.jpg')
+                                }, {
+                                    url: publicPath('images/inspire1-main.jpg')
+                                }]
+                        },
+                        attributes: {
+                            'slides-to-show': 3
+                        }
+                    } only %}
+                    {% block slide %}
+                        <div class="text-center">
+                            {% include molecule('lazy-image') with {
+                                modifiers: ['thumbnail', 'bigger'],
+                                data: {
+                                    imageSrc: slide.url,
+                                    extraAttributes: {
+                                        itemprop: 'image',
+                                    },
+                                },
+                            } only %}
+                        </div>
+                    {% endblock %}
+                {% endembed %}
+                </div>
+            </div>
             {% block content %}
 
                 {% cms_slot 'slt-3' %}

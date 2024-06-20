@@ -1,0 +1,22 @@
+{% extends molecule('product-item') %}
+
+{% define config = {
+    name: 'new-existing-component-product-item',
+    tag: 'new-existing-component-product-item'
+} %}
+
+{% define data = {
+    name: data.product.name | default,
+} %}
+
+{% block imageContainer %}
+    {% if data.name%}
+        <h5>{{ data.name }}</h5>
+    {% endif %}
+    {{ parent() }}
+{% endblock %}
+
+{% block colors %}
+    <p>Our colors:</p>
+    {{ parent() }}
+{% endblock %}
