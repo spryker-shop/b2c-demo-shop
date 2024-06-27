@@ -1,0 +1,11 @@
+{% extends '@Gui/Layout/layout.twig' %}
+{% block content %}
+    <h1>{{ book ? 'Edit' : 'Create New' }}</h1>
+    {{ form_start(form) }}
+    {{ form_row(form.name) }}
+    {{ form_row(form.description) }}
+    {{ form_row(form.publication_date) }}
+    {{ form_row(form.save) }}
+    {{ form_end(form) }}
+    <a href="{{ url('/book') }}">List of Books</a>
+{% endblock %}

@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<database name="zed" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\Customer\Persistence" package="src.Orm.Zed.Customer.Persistence">
+    <table name="spy_book" idMethod="native">
+        <column name="id_book" required="true" type="INTEGER" autoIncrement="true" primaryKey="true" />
+        <column name="name" required="true" size="255" type="VARCHAR" />
+        <column name="description" size="255" type="VARCHAR" />
+        <column name="publication_date" type="TIMESTAMP" required="true"/>
+        <unique>
+            <unique-column name="name"/>
+        </unique>
+    </table>
+</database>
