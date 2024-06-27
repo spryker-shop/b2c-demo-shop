@@ -1,0 +1,28 @@
+{% extends '@Gui/Layout/layout.twig' %}
+{% block content %}
+    <h1>Lis of Books</h1>
+    <a href="{{ url('/book/create') }}">Add New</a>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Publish Date</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for book in books %}
+            <tr>
+                <td>{{ book.name }}</td>
+                <td>{{ book.description }}</td>
+                <td>{{ book.publication_date }}</td>
+                <td>
+                    <a href="{{ url('/book/update', {id: book.id_pyz_book}) }}">Edit</a>
+                    <a href="{{ url('/book/delete', {id: book.id_pyz_book}) }}">Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
