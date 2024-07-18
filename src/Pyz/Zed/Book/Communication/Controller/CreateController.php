@@ -15,7 +15,7 @@ class CreateController extends AbstractController
         $bookEntity = new PyzBook();
         $bookEntity->fromArray($formData);
         $bookEntity->save();
-
+        
         $this->addSuccessMessage('Book created successfully.');
 
         // Redirect to a list page or any other page as needed
