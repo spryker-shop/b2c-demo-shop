@@ -4,6 +4,7 @@ namespace Pyz\Zed\Book\Communication\Table;
 use DateTime;
 use Exception;
 use Orm\Zed\Book\Persistence\PyzBookQuery;
+use Orm\Zed\Book\Persistence\Map\PyzBookTableMap;
 use Spryker\Zed\Gui\Communication\Table\AbstractTable;
 use Spryker\Zed\Gui\Communication\Table\TableConfiguration;
 
@@ -18,34 +19,35 @@ class BookTable extends AbstractTable
 
     protected function configure(TableConfiguration $config)
     {
-        // To do: Change hardcoded strings to reflect the example given in docs at https://docs.spryker.com/docs/dg/dev/backend-development/zed-ui-tables/create-and-configure-zed-tables.html#configure-the-table
+        // Using constants from PyzBookTableMap
         $config->setHeader([
-            'id' => 'ID',
-            'name' => 'Name',
-            'description' => 'Description',
-            'publication_date' => 'Publication Date',
+            PyzBookTableMap::COL_ID_BOOK => 'ID',
+            PyzBookTableMap::COL_NAME => 'Name',
+            PyzBookTableMap::COL_DESCRIPTION => 'Description',
+            PyzBookTableMap::COL_PUBLICATION_DATE => 'Publication Date',
         ]);
 
         $config->setSortable([
-            'id',
-            'name',
-            'publication_date',
+            PyzBookTableMap::COL_ID_BOOK,
+            PyzBookTableMap::COL_NAME,
+            PyzBookTableMap::COL_PUBLICATION_DATE,
         ]);
 
         $config->setSearchable([
-            'name',
-            'description',
+            PyzBookTableMap::COL_NAME,
+            PyzBookTableMap::COL_DESCRIPTION,
         ]);
 
-        $config->setDefaultSortField('publication_date', TableConfiguration::SORT_DESC);
+        $config->setDefaultSortField(PyzBookTableMap::COL_PUBLICATION_DATE, TableConfiguration::SORT_DESC);
 
         $config->setSearchableColumns([
-            'id' => 'id',
-            'name' => 'name',
-            'description' => 'description',
-            'publication_date' => 'publication_date',
+            PyzBookTableMap::COL_ID_BOOK => 'id',
+            PyzBookTableMap::COL_NAME => 'name',
+            PyzBookTableMap::COL_DESCRIPTION => 'description',
+            PyzBookTableMap::COL_PUBLICATION_DATE => 'publication_date',
         ]);
-        // addRawColumn doesn't seem to apply
+
+        // Return the configuration object
         return $config;
     }
 
@@ -57,12 +59,13 @@ class BookTable extends AbstractTable
         foreach ($queryResults as $item) {
             try {
                 $results[] = [
-                    'id' => $item['Id'],
-                    'name' => $item['Name'],
-                    'description' => $item['Description'],
-                    'publication_date' => (new DateTime($item['PublicationDate']))->format('Y-m-d H:i:s'),
+                    'id' => $item[PyzBookTableMap::COL_ID_BOOK],
+                    'name' => $item[PyzBookTableMap::COL_NAME],
+                    'description' => $item[PyzBookTableMap::COL_DESCRIPTION],
+                    'publication_date' => (new DateTime($item[PyzBookTableMap::COL_PUBLICATION_DATE]))->format('Y-m-d H:i:s'),
                 ];
             } catch (Exception $e) {
+                // Handle exception or log error
             }
         }
         return $results;
