@@ -7,6 +7,7 @@ use Orm\Zed\Book\Persistence\PyzBookQuery;
 
 class ReadController extends AbstractController
 {
+    // Todo: Refactor to adhere to SOLID design principles
     public function indexAction(Request $request)
     {
         $id = $request->query->getInt('id');
