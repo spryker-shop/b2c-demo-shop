@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class CreateController extends AbstractController
 {
-    // Todo: Refactor to adhere to SOLID design principles
+    // Todo: Refactor to adhere to SOLID design principles, adding validation and error handling
     public function indexAction(Request $request): Response
     {
         $formData = $request->request->all();

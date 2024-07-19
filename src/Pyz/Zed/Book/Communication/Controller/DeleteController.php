@@ -7,7 +7,7 @@ use Orm\Zed\Book\Persistence\PyzBookQuery;
 
 class DeleteController extends AbstractController
 {
-    // Todo: Refactor to adhere to SOLID design principles
+    // Todo: Refactor to adhere to SOLID design principles, adding validation and error handling
     public function indexAction(Request $request)
     {
         $id = $request->request->getInt('id');
