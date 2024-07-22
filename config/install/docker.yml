@@ -69,6 +69,10 @@ sections:
         zed-build-frontend:
             command: 'vendor/bin/console frontend:zed:build -e production'
 
+        merchant-portal-build-frontend:
+            command: 'vendor/bin/console frontend:mp:build -e production'
+            timeout: 1600
+
         date-time-product-configurator:
             command: 'vendor/bin/console frontend:date-time-product-configurator:build'
 
@@ -78,6 +82,10 @@ sections:
 
         zed-build-frontend:
             command: 'vendor/bin/console frontend:zed:build'
+
+        merchant-portal-build-frontend:
+            command: 'vendor/bin/console frontend:mp:build'
+            timeout: 1600
 
         date-time-product-configurator:
             command: 'vendor/bin/console frontend:date-time-product-configurator:build'
