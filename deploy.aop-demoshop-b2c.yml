@@ -177,15 +177,16 @@ groups:
                     backend-gateway.at.aop-b2c.demo-spryker.com:
                         store: AT
                         primal: true
-            backapi:
-                application: zed
+            mportal:
+                application: merchant-portal
                 endpoints:
-                    backend-api.de.aop-b2c.demo-spryker.com:
+                    mp.de.aop-b2c.demo-spryker.com:
                         store: DE
-                        entry-point: BackendApi
-                    backend-api.at.aop-b2c.demo-spryker.com:
+                        entry-point: MerchantPortal
+                        primal: true
+                    mp.at.aop-b2c.demo-spryker.com:
                         store: AT
-                        entry-point: BackendApi
+                        entry-point: MerchantPortal
 services:
     database:
         engine: mysql
