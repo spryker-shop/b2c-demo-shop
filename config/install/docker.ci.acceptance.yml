@@ -75,12 +75,6 @@ sections:
         zed-build-frontend:
             command: 'vendor/bin/console frontend:zed:build'
 
-    init-storages-per-store:
-        queue-setup:
-            command: 'vendor/bin/console queue:setup'
-        setup-search-create-sources:
-            command: 'vendor/bin/console search:setup:sources'
-
     init-storages-per-region:
         propel-copy-schema:
             command: 'vendor/bin/console propel:schema:copy'
@@ -100,15 +94,18 @@ sections:
         propel-migration-cleanup:
             command: 'vendor/bin/console propel:migration:delete'
 
+    demodata:
+        queue-setup:
+            command: 'vendor/bin/console queue:setup'
+
         init-database:
             command: 'vendor/bin/console setup:init-db'
 
-    demodata:
         import-eu-region-demodata:
             command: 'vendor/bin/console data:import --config=data/import/local/full_EU.yml'
 
-        apply-scheduled-prices:
-            command: 'vendor/bin/console price-product-schedule:apply'
+        setup-search-create-sources:
+            command: 'vendor/bin/console search:setup:sources'
 
         update-product-labels:
             command: 'vendor/bin/console product-label:relations:update'
