@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<transfers xmlns="spryker:transfer-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="spryker:transfer-01 http://static.spryker.com/transfer-01.xsd">
+
+    <transfer name="PyzBookEntity">
+        <property name="idBook" type="int"/>
+        <property name="name" type="string"/>
+        <property name="description" type="string"/>
+        <property name="publicationDate" type="string"/>
+    </transfer>
+
+    <transfer name="PyzBookCollection">
+        <property name="books" type="PyzBookEntity[]" singular="book"/>
+    </transfer>
+
+    <transfer name="PyzBookCriteriaFilter">
+        <property name="idBook" type="int"/>
+        <property name="filter" type="Filter"/>
+        <property name="name" type="string"/>
+        <property name="publicationDate" type="string"/>
+    </transfer>
+
+    <transfer name="Filter">
+        <property name="limit" type="int"/>
+        <property name="offset" type="int"/>
+        <property name="orderBy" type="string"/>
+        <property name="orderDirection" type="string"/>
+    </transfer>
+
+</transfers>
