@@ -1,0 +1,24 @@
+{% extends '@Gui/Layout/layout.twig' %}
+
+{% set widget_title = 'List of Books' %}
+
+{% block head_title widget_title %}
+{% block section_title 'Overview of Books' | trans %}
+
+{% block action %}
+    {{ createActionButton('/book/add', 'Create Book' | trans) }}
+{% endblock %}
+
+{% block content %}
+
+    {% embed '@Gui/Partials/widget.twig' %}
+
+        {% block widget_content %}
+
+            {{ bookTable | raw }}
+
+        {% endblock %}
+
+    {% endembed %}
+
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends '@Gui/Layout/layout.twig' %}
+
+{% if widget_title is not defined %}
+    {% set widget_title = 'Book Details' %}
+{% endif %}
+
+{% block head_title widget_title %}
+{% block section_title 'Create Book' | trans %}
+
+{% form_theme form '@Book/Twig/book-form.twig' %}
+
+{% block action %}
+    {{ backActionButton('/book', 'Back to Books' | trans) }}
+{% endblock %}
+
+{% block content %}
+
+    {% embed '@Gui/Partials/widget.twig' %}
+
+        {% block widget_content %}
+
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+
+            <input type="submit" class="btn btn-primary safe-submit" value="{{ 'Save' | trans }}" />
+            {{ form_end(form) }}
+
+        {% endblock %}
+
+    {% endembed %}
+
+{% endblock %}
+
+{% block footer_js %}
+    {{ parent() }}
+    <script src="{{ assetsPath('js/spryker-zed-book-main.js') }}"></script>
+{% endblock %}

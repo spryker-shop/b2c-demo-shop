@@ -1,5 +1,6 @@
 <?php
 
+
 /**
  * Copyright © 2016-present Spryker Systems GmbH. All rights reserved.
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
@@ -8,6 +9,8 @@
 namespace Pyz\Zed\Book\Communication\Controller;
 
 use Spryker\Zed\Kernel\Communication\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @method \Pyz\Zed\Book\Business\BookFacadeInterface getFacade()
@@ -15,29 +18,23 @@ use Spryker\Zed\Kernel\Communication\Controller\AbstractController;
  * @method \Pyz\Zed\Book\Communication\BookCommunicationFactory getFactory()
  * @method \Pyz\Zed\Book\Persistence\BookRepositoryInterface getRepository()
  */
-class IndexController extends AbstractController
+class AjaxController extends AbstractController
 {
     /**
-     * @return array
+     * @var string
      */
-    public function indexAction()
-    {
-        $table = $this->getFactory()
-            ->createBookTable();
-
-        return $this->viewResponse([
-            'bookTable' => $table->render(),
-        ]);
-    }
+    public const SEARCH_TERM = 'term';
 
     /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
      * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
-    public function tableAction()
+    public function booksAction(Request $request)
     {
-        $table = $this->getFactory()
-            ->createBookTable();
+        $term = (string)$request->query->get(static::SEARCH_TERM);
+        $books = $this->getFacade()->getBookSuggestions($term);
 
-        return $this->jsonResponse($table->fetchData());
+        return new JsonResponse($books);
     }
 }
