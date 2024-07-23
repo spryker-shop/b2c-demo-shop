@@ -22,6 +22,7 @@ use Symfony\Component\Form\FormBuilderInterface;
  */
 class UpdateBookForm extends BookForm
 {
+    public const OPTION_LOCALES = 'locales';
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      *

@@ -38,9 +38,7 @@ class BookCommunicationFactory extends AbstractCommunicationFactory
      */
     public function createBookAddForm()
     {
-        return $this->getFormFactory()->create(BookForm::class, null, [
-            BookForm::OPTION_LOCALES => $this->getEnabledLocales(),
-        ]);
+        return $this->getFormFactory()->create(BookForm::class);
     }
 
     /**
@@ -73,5 +71,13 @@ class BookCommunicationFactory extends AbstractCommunicationFactory
         $bookQuery = $this->getQueryContainer()->queryBooks();
 
         return new BookTable($bookQuery, $locales);
+    }
+
+    /**
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    public function getBookCreateForm()
+    {
+        return $this->createBookAddForm();
     }
 }

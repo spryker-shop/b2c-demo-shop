@@ -1,6 +1,5 @@
 <?php
 
-
 /**
  * Copyright © 2016-present Spryker Systems GmbH. All rights reserved.
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
@@ -14,17 +13,16 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Length;
 
 /**
- * @method \Spryker\Zed\Book\Business\BookFacadeInterface getFacade()
- * @method \Spryker\Zed\Book\Communication\BookCommunicationFactory getFactory()
- * @method \Spryker\Zed\Book\Persistence\BookQueryContainerInterface getQueryContainer()
- * @method \Spryker\Zed\Book\BookConfig getConfig()
- * @method \Spryker\Zed\Book\Persistence\BookRepositoryInterface getRepository()
+ * @method \Pyz\Zed\Book\Business\BookFacadeInterface getFacade()
+ * @method \Pyz\Zed\Book\Communication\BookCommunicationFactory getFactory()
+ * @method \Pyz\Zed\Book\Persistence\BookQueryContainerInterface getQueryContainer()
+ * @method \Pyz\Zed\Book\BookConfig getConfig()
+ * @method \Pyz\Zed\Book\Persistence\BookRepositoryInterface getRepository()
  */
 class BookForm extends AbstractType
 {
@@ -104,8 +102,7 @@ class BookForm extends AbstractType
             'label' => 'Publication Date',
             'widget' => 'single_text',
             'required' => false,
-            'input' => 'datetime',
-            'format' => 'yyyy-MM-dd HH:mm:ss',
+            'input' => 'datetime'
         ]);
 
         return $this;
@@ -134,7 +131,6 @@ class BookForm extends AbstractType
     /**
      * @return string
      * @deprecated Use {@link getBlockPrefix()} instead.
-     *
      */
     public function getName()
     {

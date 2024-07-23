@@ -44,7 +44,7 @@ class BookQueryContainer extends AbstractQueryContainer implements BookQueryCont
      */
     public function queryBooks()
     {
-        return $this->getFactory()->createPyzBookQuery();
+        return $this->getFactory()->createBookQuery();
     }
 
     /**

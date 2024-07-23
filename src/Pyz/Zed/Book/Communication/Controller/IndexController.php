@@ -22,8 +22,8 @@ class IndexController extends AbstractController
      */
     public function indexAction()
     {
-        $table = $this->getFactory()
-            ->createBookTable();
+        $locales = $this->getFactory()->getEnabledLocales();
+        $table = $this->getFactory()->createBookTable($locales);
 
         return $this->viewResponse([
             'bookTable' => $table->render(),
@@ -35,8 +35,8 @@ class IndexController extends AbstractController
      */
     public function tableAction()
     {
-        $table = $this->getFactory()
-            ->createBookTable();
+        $locales = $this->getFactory()->getEnabledLocales();
+        $table = $this->getFactory()->createBookTable($locales);
 
         return $this->jsonResponse($table->fetchData());
     }

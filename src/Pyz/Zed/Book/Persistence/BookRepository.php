@@ -32,7 +32,7 @@ class BookRepository extends AbstractRepository implements BookRepositoryInterfa
             return null;
         }
 
-        return $this->getFactory()->createBookMapper()->mapBookEntityToPyzBookEntityTransfer($bookEntity, new PyzBookEntityTransfer());
+        return $this->getFactory()->createBookMapper()->mapEntityToBookTransfer($bookEntity, new PyzBookEntityTransfer());
     }
 
     /**
@@ -51,7 +51,7 @@ class BookRepository extends AbstractRepository implements BookRepositoryInterfa
             return null;
         }
 
-        return $this->getFactory()->createBookMapper()->mapBookEntityToPyzBookEntityTransfer($bookEntity, new PyzBookEntityTransfer());
+        return $this->getFactory()->createBookMapper()->mapEntityToBookTransfer($bookEntity, new PyzBookEntityTransfer());
     }
 
     /**
@@ -113,13 +113,28 @@ class BookRepository extends AbstractRepository implements BookRepositoryInterfa
     }
 
     /**
+     * @return array<\Generated\Shared\Transfer\PyzBookEntityTransfer>
+     */
+    public function findAllBooks(): array
+    {
+        /** @var \Propel\Runtime\Collection\ObjectCollection<\Orm\Zed\Book\Persistence\PyzBook> $bookEntities */
+        $bookEntities = $this->getFactory()->createBookQuery()->find();
+
+        if ($bookEntities->isEmpty()) {
+            return [];
+        }
+
+        return $this->mapBookEntitiesToPyzBookEntityTransfers($bookEntities);
+    }
+
+    /**
      * @param \Orm\Zed\Book\Persistence\PyzBook $bookEntity
      *
      * @return \Generated\Shared\Transfer\PyzBookEntityTransfer
      */
     protected function mapBookEntityToPyzBookEntityTransfer(\Orm\Zed\Book\Persistence\PyzBook $bookEntity): PyzBookEntityTransfer
     {
-        return $this->getFactory()->createBookMapper()->mapBookEntityToPyzBookEntityTransfer($bookEntity, new PyzBookEntityTransfer());
+        return $this->getFactory()->createBookMapper()->mapEntityToBookTransfer($bookEntity, new PyzBookEntityTransfer());
     }
 
     /**

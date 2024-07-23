@@ -19,6 +19,16 @@
         <property name="publicationDate" type="string"/>
     </transfer>
 
+    <transfer name="BookResponse">
+        <property name="bookTransfer" type="Book"/>
+        <property name="isSuccessful" type="bool"/>
+        <property name="messages" type="ResponseMessage[]" singular="message"/>
+    </transfer>
+
+    <transfer name="ResponseMessage">
+        <property name="text" type="string"/>
+    </transfer>
+
     <transfer name="Filter">
         <property name="limit" type="int"/>
         <property name="offset" type="int"/>

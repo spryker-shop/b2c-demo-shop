@@ -1,8 +1,8 @@
 <?php
+
 namespace Pyz\Zed\Book\Communication\Controller;
 
 use Generated\Shared\Transfer\PyzBookEntityTransfer;
-use Pyz\Zed\Book\Business\BookFacadeInterface;
 use Spryker\Zed\Kernel\Communication\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -24,17 +24,12 @@ class AddController extends AbstractController
      */
     public function indexAction(Request $request)
     {
-        $bookForm = $this
-            ->getFactory()
-            ->getBookCreateForm();
+        $bookForm = $this->getFactory()->getBookCreateForm();
 
         $bookForm->handleRequest($request);
 
         if ($bookForm->isSubmitted() && $bookForm->isValid()) {
-            $data = $bookForm->getData();
-
-            $bookTransfer = new PyzBookEntityTransfer();
-            $bookTransfer->fromArray($data, true);
+            $bookTransfer = $bookForm->getData(); // Returns a PyzBookEntityTransfer instance
 
             $bookFacade = $this->getFacade();
             $bookFacade->createBook($bookTransfer);
