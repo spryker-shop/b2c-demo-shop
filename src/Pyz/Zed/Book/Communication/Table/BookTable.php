@@ -21,14 +21,14 @@ class BookTable extends AbstractTable
     {
         // Using constants from PyzBookTableMap
         $config->setHeader([
-            PyzBookTableMap::COL_ID_BOOK => 'ID',
+            PyzBookTableMap::COL_ID => 'ID',
             PyzBookTableMap::COL_NAME => 'Name',
             PyzBookTableMap::COL_DESCRIPTION => 'Description',
             PyzBookTableMap::COL_PUBLICATION_DATE => 'Publication Date',
         ]);
 
         $config->setSortable([
-            PyzBookTableMap::COL_ID_BOOK,
+            PyzBookTableMap::COL_ID,
             PyzBookTableMap::COL_NAME,
             PyzBookTableMap::COL_PUBLICATION_DATE,
         ]);
@@ -41,7 +41,7 @@ class BookTable extends AbstractTable
         $config->setDefaultSortField(PyzBookTableMap::COL_PUBLICATION_DATE, TableConfiguration::SORT_DESC);
 
         $config->setSearchableColumns([
-            PyzBookTableMap::COL_ID_BOOK => 'id',
+            PyzBookTableMap::COL_ID => 'id',
             PyzBookTableMap::COL_NAME => 'name',
             PyzBookTableMap::COL_DESCRIPTION => 'description',
             PyzBookTableMap::COL_PUBLICATION_DATE => 'publication_date',
@@ -56,18 +56,50 @@ class BookTable extends AbstractTable
         $queryResults = $this->runQuery($this->query, $config, true);
 
         $results = [];
-        foreach ($queryResults as $item) {
-            try {
-                $results[] = [
-                    'id' => $item[PyzBookTableMap::COL_ID_BOOK],
-                    'name' => $item[PyzBookTableMap::COL_NAME],
-                    'description' => $item[PyzBookTableMap::COL_DESCRIPTION],
-                    'publication_date' => (new DateTime($item[PyzBookTableMap::COL_PUBLICATION_DATE]))->format('Y-m-d H:i:s'),
-                ];
-            } catch (Exception $e) {
-                // Handle exception or log error
+        if ($queryResults instanceof \Propel\Runtime\Collection\ObjectCollection) {
+            // Handle ObjectCollection
+            foreach ($queryResults as $item) {
+                try {
+                    $publicationDate = $item->getPublicationDate();
+                    if (!$publicationDate instanceof DateTime) {
+                        $publicationDate = new DateTime($publicationDate);
+                    }
+
+                    $results[] = [
+                        PyzBookTableMap::COL_ID => $item->getId(), // Use getter methods
+                        PyzBookTableMap::COL_NAME => $item->getName(),
+                        PyzBookTableMap::COL_DESCRIPTION => $item->getDescription(),
+                        PyzBookTableMap::COL_PUBLICATION_DATE => $publicationDate->format('Y-m-d H:i:s'),
+                    ];
+                } catch (Exception $e) {
+                    // Handle exception or log error
+                    // e.g., error_log($e->getMessage());
+                }
+            }
+        } elseif (is_array($queryResults)) {
+            // Handle array of arrays
+            foreach ($queryResults as $item) {
+                try {
+                    $publicationDate = $item[PyzBookTableMap::COL_PUBLICATION_DATE];
+                    if (!$publicationDate instanceof DateTime) {
+                        $publicationDate = new DateTime($publicationDate);
+                    }
+
+                    $results[] = [
+                        'id_' => $item[PyzBookTableMap::COL_ID],
+                        'name' => $item[PyzBookTableMap::COL_NAME],
+                        'description' => $item[PyzBookTableMap::COL_DESCRIPTION],
+                        'publication_date' => $publicationDate->format('Y-m-d H:i:s'),
+                    ];
+                } catch (Exception $e) {
+                    // Handle exception or log error
+                    // e.g., error_log($e->getMessage());
+                }
             }
         }
+
         return $results;
     }
+
+
 }

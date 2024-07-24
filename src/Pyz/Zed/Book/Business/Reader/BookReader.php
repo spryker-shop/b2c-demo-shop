@@ -33,10 +33,10 @@ class BookReader implements BookWtriterInterface
      */
     public function findBookById(PyzBookEntityTransfer $bookEntityTransfer): BookResponseTransfer
     {
-        $bookEntityTransfer->requireIdBook();
+        $bookEntityTransfer->requireId();
 
         $bookEntity = $this->bookRepository->findBookById(
-            $bookEntityTransfer->getIdBook()
+            $bookEntityTransfer->getId()
         );
 
         $bookResponseTransfer = new BookResponseTransfer();

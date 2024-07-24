@@ -59,7 +59,7 @@ class BookQueryContainer extends AbstractQueryContainer implements BookQueryCont
     public function queryBookById($idBook)
     {
         $query = $this->queryBooks();
-        $query->filterByIdBook($idBook);
+        $query->filterById($idBook);
 
         return $query;
     }
@@ -77,7 +77,7 @@ class BookQueryContainer extends AbstractQueryContainer implements BookQueryCont
     {
         $query
             ->distinct()
-            ->withColumn(PyzBookTableMap::COL_ID_BOOK, 'value')
+            ->withColumn(PyzBookTableMap::COL_ID, 'value')
             ->withColumn(PyzBookTableMap::COL_NAME, 'label');
 
         return $query;
@@ -125,7 +125,7 @@ class BookQueryContainer extends AbstractQueryContainer implements BookQueryCont
     public function queryBooksById(array $idBooks)
     {
         $query = $this->queryBooks();
-        $query->filterByIdBook($idBooks, Criteria::IN);
+        $query->filterById($idBooks, Criteria::IN);
 
         return $query;
     }

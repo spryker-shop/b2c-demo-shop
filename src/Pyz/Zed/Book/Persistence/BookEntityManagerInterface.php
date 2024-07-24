@@ -14,7 +14,7 @@ interface BookEntityManagerInterface
     /**
      * Specification:
      * - Creates a book
-     * - Finds a book by PyzBookEntityTransfer::idBook in the transfer
+     * - Finds a book by PyzBookEntityTransfer::id in the transfer
      * - Updates fields in a book entity
      *
      * @param \Generated\Shared\Transfer\PyzBookEntityTransfer $bookEntityTransfer
@@ -25,7 +25,7 @@ interface BookEntityManagerInterface
 
     /**
      * Specification:
-     * - Finds a book by idBook
+     * - Finds a book by id
      * - Deletes the book
      *
      * @param int $idBook

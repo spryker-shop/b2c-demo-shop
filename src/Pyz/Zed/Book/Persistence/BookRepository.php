@@ -25,7 +25,7 @@ class BookRepository extends AbstractRepository implements BookRepositoryInterfa
     {
         /** @var \Orm\Zed\Book\Persistence\PyzBook $bookEntity */
         $bookEntity = $this->getFactory()->createBookQuery()
-            ->filterByIdBook($idBook)
+            ->filterById($idBook)
             ->findOne();
 
         if (!$bookEntity) {

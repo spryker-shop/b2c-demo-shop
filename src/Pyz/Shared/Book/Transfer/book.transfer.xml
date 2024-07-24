@@ -2,7 +2,7 @@
 <transfers xmlns="spryker:transfer-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="spryker:transfer-01 http://static.spryker.com/transfer-01.xsd">
 
     <transfer name="PyzBookEntity">
-        <property name="idBook" type="int"/>
+        <property name="id" type="int"/>
         <property name="name" type="string"/>
         <property name="description" type="string"/>
         <property name="publicationDate" type="string"/>
@@ -13,14 +13,14 @@
     </transfer>
 
     <transfer name="PyzBookCriteriaFilter">
-        <property name="idBook" type="int"/>
+        <property name="id" type="int"/>
         <property name="filter" type="Filter"/>
         <property name="name" type="string"/>
         <property name="publicationDate" type="string"/>
     </transfer>
 
     <transfer name="BookResponse">
-        <property name="bookTransfer" type="Book"/>
+        <property name="bookEntityTransfer" type="PyzBookEntity"/>
         <property name="isSuccessful" type="bool"/>
         <property name="messages" type="ResponseMessage[]" singular="message"/>
     </transfer>

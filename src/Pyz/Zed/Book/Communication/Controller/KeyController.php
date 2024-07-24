@@ -41,14 +41,14 @@ class KeyController extends AbstractController
 
         $idBook = false;
         if ($book) {
-            $idBook = $book->getIdBook();
+            $idBook = $book->getId();
         }
 
         $result = [];
         if ($idBook) {
             $bookData = $book->toArray(TableMap::TYPE_COLNAME);
             $result = [
-                'id_book' => $bookData[PyzBookTableMap::COL_ID_BOOK],
+                'id' => $bookData[PyzBookTableMap::COL_ID],
                 'name' => $bookData[PyzBookTableMap::COL_NAME],
                 'description' => $bookData[PyzBookTableMap::COL_DESCRIPTION],
                 'publication_date' => $bookData[PyzBookTableMap::COL_PUBLICATION_DATE],

@@ -59,6 +59,6 @@ class BookFormDataProvider
     {
         return $this->bookQueryContainer
             ->queryBooks()
-            ->findOneByIdBook($idBook);
+            ->findOneById($idBook);
     }
 }

@@ -33,11 +33,11 @@ class AddController extends AbstractController
 
             $bookFacade = $this->getFacade();
             $bookFacade->createBook($bookTransfer);
-            $idBook = $bookTransfer->getIdBook();
+            $idBook = $bookTransfer->getId();
 
             $this->addSuccessMessage(static::MESSAGE_CREATE_SUCCESS, ['%d' => $idBook]);
 
-            return $this->redirectResponse('/book/list');
+            return $this->redirectResponse('/book');
         }
 
         return $this->viewResponse([

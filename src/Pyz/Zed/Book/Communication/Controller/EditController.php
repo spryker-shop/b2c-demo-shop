@@ -81,7 +81,7 @@ class EditController extends AbstractController
 
         return $this->viewResponse([
             'form' => $bookForm->createView(),
-            'idBook' => $idBook,
+            'id' => $idBook,
         ]);
     }
 }

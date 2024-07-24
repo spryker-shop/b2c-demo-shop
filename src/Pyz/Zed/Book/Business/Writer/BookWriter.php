@@ -42,7 +42,7 @@ class BookWriter implements BookWriterInterface
 
         return $bookResponseTransfer
             ->setIsSuccessful(true)
-            ->setBookTransfer($savedBookEntityTransfer);
+            ->setBookEntityTransfer($savedBookEntityTransfer);
     }
 
     /**
@@ -73,7 +73,7 @@ class BookWriter implements BookWriterInterface
     {
         $bookResponseTransfer = new BookResponseTransfer();
 
-        $isDeleted = $this->bookEntityManager->deleteBookById($bookEntityTransfer->getIdBook());
+        $isDeleted = $this->bookEntityManager->deleteBookById($bookEntityTransfer->getId());
         if (!$isDeleted) {
             return $bookResponseTransfer->setIsSuccessful(false);
         }

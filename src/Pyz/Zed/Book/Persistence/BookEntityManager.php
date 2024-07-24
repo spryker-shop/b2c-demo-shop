@@ -27,7 +27,7 @@ class BookEntityManager extends AbstractEntityManager implements BookEntityManag
     {
         $spyBook = $this->getFactory()
             ->createBookQuery()
-            ->filterByIdBook($bookEntityTransfer->getIdBook())
+            ->filterById($bookEntityTransfer->getId())
             ->findOneOrCreate();
 
         $spyBook = $this->getFactory()
@@ -52,7 +52,7 @@ class BookEntityManager extends AbstractEntityManager implements BookEntityManag
     {
         $this->getFactory()
             ->createBookQuery()
-            ->filterByIdBook($idBook)
+            ->filterById($idBook)
             ->delete();
     }
 
