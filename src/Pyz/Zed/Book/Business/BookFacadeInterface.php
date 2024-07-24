@@ -1,6 +1,8 @@
 <?php
+
 namespace Pyz\Zed\Book\Business;
 
+use Generated\Shared\Transfer\BookResponseTransfer;
 use Generated\Shared\Transfer\PyzBookEntityTransfer;
 
 interface BookFacadeInterface
@@ -9,39 +11,42 @@ interface BookFacadeInterface
      * Specification:
      * - Creates a new book entity.
      * - Persists the book entity to the database.
+     * - Returns a BookResponseTransfer containing the created book details and status.
      *
      * @api
      *
      * @param \Generated\Shared\Transfer\PyzBookEntityTransfer $pyzBookEntityTransfer
      *
-     * @return \Generated\Shared\Transfer\PyzBookEntityTransfer
+     * @return \Generated\Shared\Transfer\BookResponseTransfer
      */
-    public function createBook(PyzBookEntityTransfer $pyzBookEntityTransfer): PyzBookEntityTransfer;
+    public function createBook(PyzBookEntityTransfer $pyzBookEntityTransfer): BookResponseTransfer;
 
     /**
      * Specification:
      * - Updates an existing book entity.
      * - Persists the updated book entity to the database.
+     * - Returns a BookResponseTransfer containing the updated book details and status.
      *
      * @api
      *
      * @param \Generated\Shared\Transfer\PyzBookEntityTransfer $pyzBookEntityTransfer
      *
-     * @return \Generated\Shared\Transfer\PyzBookEntityTransfer
+     * @return \Generated\Shared\Transfer\BookResponseTransfer
      */
-    public function updateBook(PyzBookEntityTransfer $pyzBookEntityTransfer): PyzBookEntityTransfer;
+    public function updateBook(PyzBookEntityTransfer $pyzBookEntityTransfer): BookResponseTransfer;
 
     /**
      * Specification:
      * - Deletes a book entity by ID.
+     * - Returns a BookResponseTransfer indicating the deletion status.
      *
      * @api
      *
-     * @param int $idBook
+     * @param \Generated\Shared\Transfer\PyzBookEntityTransfer $pyzBookEntityTransfer
      *
-     * @return void
+     * @return \Generated\Shared\Transfer\BookResponseTransfer
      */
-    public function deleteBook(int $idBook): void;
+    public function deleteBook(PyzBookEntityTransfer $pyzBookEntityTransfer): BookResponseTransfer;
 
     /**
      * Specification:
@@ -54,7 +59,7 @@ interface BookFacadeInterface
      *
      * @return \Generated\Shared\Transfer\PyzBookEntityTransfer|null
      */
-    public function findBookById(int $idBook);
+    public function findBookById(int $idBook): ?PyzBookEntityTransfer;
 
     /**
      * Specification:
@@ -66,7 +71,7 @@ interface BookFacadeInterface
      *
      * @return array<\Generated\Shared\Transfer\PyzBookEntityTransfer>
      */
-//    public function findBooksByCriteria(BookCriteriaTransfer $criteriaTransfer): array;
+    // public function findBooksByCriteria(BookCriteriaTransfer $criteriaTransfer): array;
 
     /**
      * Specification:

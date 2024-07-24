@@ -21,7 +21,7 @@ interface BookWriterInterface
      *
      * @return \Generated\Shared\Transfer\BookResponseTransfer
      */
-    public function createBook(PyzBookEntityTransfer $bookEntityTransfer): PyzBookEntityTransfer;
+    public function createBook(PyzBookEntityTransfer $bookEntityTransfer): BookResponseTransfer;
 
     /**
      * Specification:

@@ -7,6 +7,7 @@
 
 namespace Pyz\Zed\Book\Business;
 
+use Generated\Shared\Transfer\BookResponseTransfer;
 use Generated\Shared\Transfer\PyzBookEntityTransfer;
 use Spryker\Zed\Kernel\Business\AbstractFacade;
 
@@ -20,7 +21,7 @@ class BookFacade extends AbstractFacade implements BookFacadeInterface
     /**
      * {@inheritdoc}
      */
-    public function createBook(PyzBookEntityTransfer $pyzBookEntityTransfer): PyzBookEntityTransfer
+    public function createBook(PyzBookEntityTransfer $pyzBookEntityTransfer): BookResponseTransfer
     {
         return $this->getFactory()->createBookWriter()->createBook($pyzBookEntityTransfer);
     }
@@ -28,7 +29,7 @@ class BookFacade extends AbstractFacade implements BookFacadeInterface
     /**
      * {@inheritdoc}
      */
-    public function updateBook(PyzBookEntityTransfer $pyzBookEntityTransfer): PyzBookEntityTransfer
+    public function updateBook(PyzBookEntityTransfer $pyzBookEntityTransfer): BookResponseTransfer
     {
         return $this->getFactory()->createBookWriter()->updateBook($pyzBookEntityTransfer);
     }
@@ -36,9 +37,9 @@ class BookFacade extends AbstractFacade implements BookFacadeInterface
     /**
      * {@inheritdoc}
      */
-    public function deleteBook(int $idBook): void
+    public function deleteBook(PyzBookEntityTransfer $pyzBookEntityTransfer): BookResponseTransfer
     {
-        $this->getFactory()->createBookWriter()->deleteBook($idBook);
+        return $this->getFactory()->createBookWriter()->deleteBook($pyzBookEntityTransfer);
     }
 
     /**
@@ -56,10 +57,4 @@ class BookFacade extends AbstractFacade implements BookFacadeInterface
     {
         return $this->getRepository()->findAllBooks();
     }
-
-    // Uncomment and implement if required
-    // public function findBooksByCriteria(BookCriteriaTransfer $criteriaTransfer): array
-    // {
-    //     return $this->getRepository()->findBooksByCriteria($criteriaTransfer);
-    // }
 }
