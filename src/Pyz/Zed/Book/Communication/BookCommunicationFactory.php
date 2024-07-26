@@ -46,11 +46,9 @@ class BookCommunicationFactory extends AbstractCommunicationFactory
      *
      * @return \Symfony\Component\Form\FormInterface
      */
-    public function createBookUpdateForm(array $formData)
+    public function createBookUpdateForm($formData)
     {
-        return $this->getFormFactory()->create(UpdateBookForm::class, $formData, [
-            UpdateBookForm::OPTION_LOCALES => $this->getEnabledLocales(),
-        ]);
+        return $this->getFormFactory()->create(UpdateBookForm::class, $formData);
     }
 
     /**
@@ -79,5 +77,15 @@ class BookCommunicationFactory extends AbstractCommunicationFactory
     public function getBookCreateForm()
     {
         return $this->createBookAddForm();
+    }
+
+    /**
+     * @param array $formData
+     *
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    public function getBookUpdateForm($formData)
+    {
+        return $this->createBookUpdateForm($formData);
     }
 }

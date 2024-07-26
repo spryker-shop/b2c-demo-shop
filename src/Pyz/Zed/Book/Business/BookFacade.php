@@ -57,4 +57,20 @@ class BookFacade extends AbstractFacade implements BookFacadeInterface
     {
         return $this->getRepository()->findAllBooks();
     }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @param \Generated\Shared\Transfer\PyzBookEntityTransfer $pyzBookEntityTransfer
+     *
+     * @return \Generated\Shared\Transfer\PyzBookEntityTransfer
+     *@api
+     *
+     */
+    public function saveBook(PyzBookEntityTransfer $pyzBookEntityTransfer): PyzBookEntityTransfer
+    {
+        $bookManager = $this->getFactory()->createBookManager();
+
+        return $bookManager->createBook($pyzBookEntityTransfer);
+    }
 }

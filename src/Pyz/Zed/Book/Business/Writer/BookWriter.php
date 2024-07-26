@@ -61,7 +61,7 @@ class BookWriter implements BookWriterInterface
 
         return $bookResponseTransfer
             ->setIsSuccessful(true)
-            ->setBookTransfer($updatedBookEntityTransfer);
+            ->setBookEntityTransfer($updatedBookEntityTransfer);
     }
 
     /**

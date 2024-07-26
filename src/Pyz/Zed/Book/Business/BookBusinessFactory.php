@@ -23,7 +23,8 @@ class BookBusinessFactory extends AbstractBusinessFactory
     public function createBookManager(): BookManagerInterface
     {
         return new BookManager(
-            $this->getRepository()
+            $this->getRepository(),
+            $this->getEntityManager()
         );
     }
 

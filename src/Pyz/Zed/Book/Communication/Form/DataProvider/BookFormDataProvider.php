@@ -1,15 +1,8 @@
 <?php
 
-
-/**
- * Copyright © 2016-present Spryker Systems GmbH. All rights reserved.
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
- */
-
 namespace Pyz\Zed\Book\Communication\Form\DataProvider;
 
 use Orm\Zed\Book\Persistence\PyzBook;
-use Propel\Runtime\Map\TableMap;
 use Pyz\Zed\Book\Persistence\BookQueryContainerInterface;
 use Pyz\Zed\Book\Communication\Form\BookForm;
 
@@ -45,7 +38,11 @@ class BookFormDataProvider
 
         $data[BookForm::FIELD_NAME] = $bookEntity->getName();
         $data[BookForm::FIELD_DESCRIPTION] = $bookEntity->getDescription();
-        $data[BookForm::FIELD_PUBLICATION_DATE] = $bookEntity->getPublicationDate() ? $bookEntity->getPublicationDate()->format('Y-m-d H:i:s') : null;
+        $publicationDate = $bookEntity->getPublicationDate();
+
+        // Ensure publication_date is a \DateTime object
+//        $data[BookForm::FIELD_PUBLICATION_DATE] = $bookEntity->getPublicationDate() ? $bookEntity->getPublicationDate()->format('Y-m-d H:i:s') : null;
+        $data[BookForm::FIELD_PUBLICATION_DATE] = $publicationDate instanceof \DateTime ? $publicationDate : new \DateTime($publicationDate);
 
         return $data;
     }

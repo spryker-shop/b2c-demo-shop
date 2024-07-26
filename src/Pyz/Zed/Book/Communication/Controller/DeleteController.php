@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
  * @method \Pyz\Zed\Book\Persistence\BookQueryContainerInterface getQueryContainer()
  * @method \Pyz\Zed\Book\Persistence\BookRepositoryInterface getRepository()
  */
-class EditController extends AbstractController
+class DeleteController extends AbstractController
 {
     /**
      * @var string
@@ -27,17 +27,17 @@ class EditController extends AbstractController
     /**
      * @var string
      */
-    public const MESSAGE_UPDATE_SUCCESS = 'Book %d was updated successfully.';
+    public const MESSAGE_DELETE_SUCCESS = 'Book %d was deleted successfully.';
 
     /**
      * @var string
      */
-    public const MESSAGE_UPDATE_ERROR = 'Book entry was not updated.';
+    public const MESSAGE_DELETE_ERROR = 'Book entry was not deleted.';
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function indexAction(Request $request)
     {
@@ -55,34 +55,15 @@ class EditController extends AbstractController
         }
 
         $bookEntityTransfer = (new PyzBookEntityTransfer())->fromArray($formData, true);
+        $bookEntityTransfer->setId($idBook);
 
-        $bookForm = $this
-            ->getFactory()
-            ->getBookUpdateForm($bookEntityTransfer);
-
-        $bookForm->handleRequest($request);
-
-        if ($bookForm->isSubmitted() && $bookForm->isValid()) {
-            $data = $bookForm->getData();
-
-            $updatedBookEntityTransfer = (new PyzBookEntityTransfer())->fromArray($data->toArray(), true);
-            $updatedBookEntityTransfer->setId($idBook);
-            $bookFacade = $this->getFacade();
-
-            if ($bookFacade->updateBook($updatedBookEntityTransfer)) {
-                $this->addSuccessMessage(static::MESSAGE_UPDATE_SUCCESS, ['%d' => $idBook]);
-
-                return $this->redirectResponse('/book');
-            }
-
-            $this->addErrorMessage(static::MESSAGE_UPDATE_ERROR);
-
-            return $this->redirectResponse('/book');
+        try {
+            $this->getFacade()->deleteBook($bookEntityTransfer);
+            $this->addSuccessMessage(static::MESSAGE_DELETE_SUCCESS, ['%d' => $idBook]);
+        } catch (\Exception $e) {
+            $this->addErrorMessage(static::MESSAGE_DELETE_ERROR);
         }
 
-        return $this->viewResponse([
-            'form' => $bookForm->createView(),
-            'id' => $idBook,
-        ]);
+        return $this->redirectResponse('/book');
     }
 }

@@ -12,6 +12,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
  * @method \Pyz\Zed\Book\Business\BookFacadeInterface getFacade()
@@ -73,8 +75,7 @@ class UpdateBookForm extends BookForm
             'label' => 'Publication Date',
             'widget' => 'single_text',
             'required' => false,
-            'input' => 'datetime',
-            'format' => 'yyyy-MM-dd HH:mm:ss',
+            'input' => 'datetime'
         ]);
 
         return $this;
