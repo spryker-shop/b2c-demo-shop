@@ -5,14 +5,15 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace Pyz\Zed\ProductDetailPageWidget\Persistence;
+namespace Pyz\Zed\ProductDetailWidget\Persistence;
 
 use Generated\Shared\Transfer\ProductAbstractTransfer;
 use Orm\Zed\Product\Persistence\SpyProductAbstract;
+use Pyz\Zed\ProductDetailWidget\Persistence\ProductDetailEntityManagerInterface;
 use Spryker\Zed\Kernel\Persistence\AbstractEntityManager;
 
 /**
- * @method \Pyz\Zed\ProductDetailPageWidget\Persistence\ProductDetailPersistenceFactory getFactory()
+ * @method \Pyz\Zed\ProductDetailWidget\Persistence\ProductDetailPersistenceFactory getFactory()
  */
 class ProductDetailEntityManager extends AbstractEntityManager implements ProductDetailEntityManagerInterface
 {

@@ -5,7 +5,7 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace Pyz\Zed\ProductDetailPageWidget\Persistence;
+namespace Pyz\Zed\ProductDetailWidget\Persistence;
 
 use Generated\Shared\Transfer\ProductAbstractTransfer;
 

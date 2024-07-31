@@ -1,13 +1,19 @@
-{% extends 'widget.twig' %}
+{% extends template('widget') %}
 
 {% define data = {
-    createdAt: _widget.productAbstractTransfer.getCreatedAt,
-    updatedAt: _widget.productAbstractTransfer.getUpdatedAt
+    sku: _widget.template
 } %}
 
 {% block body %}
     <div class="product-details">
-        <p>Created At: {{ data.createdAt|date('Y-m-d H:i:s') }}</p>
-        <p>Updated At: {{ data.updatedAt|date('Y-m-d H:i:s') }}</p>
+        <p>{{ data.sku }}</p>
     </div>
 {% endblock %}
+
+
+{#createdAt: _widget.productAbstractTransfer.getCreatedAt,#}
+{#updatedAt: _widget.productAbstractTransfer.getUpdatedAt#}
+
+{#
+<p>Created At: {{ data.createdAt|date('Y-m-d H:i:s') }}</p>
+<p>Updated At: {{ data.updatedAt|date('Y-m-d H:i:s') }}</p>#}

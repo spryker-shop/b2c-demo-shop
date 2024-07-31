@@ -1,23 +1,22 @@
 <?php
 
-namespace Pyz\Zed\ProductDetailPageWidget\Business;
+namespace Pyz\Zed\ProductDetailWidget\Business;
 
-use Pyz\Zed\ProductDetailPageWidget\Business\Manager\ProductDetailManager;
-use Pyz\Zed\ProductDetailPageWidget\Business\Manager\ProductDetailManagerInterface;
-use Pyz\Zed\ProductDetailPageWidget\Business\Reader\ProductDetailWriter;
-use Pyz\Zed\ProductDetailPageWidget\Business\Writer\ProductDetailPageWriterInterface;
-use Pyz\Zed\ProductDetailPageWidget\Business\Writer\ProductDetailPageWriter;
+use Pyz\Zed\ProductDetailWidget\Business\Manager\ProductDetailManager;
+use Pyz\Zed\ProductDetailWidget\Business\Manager\ProductDetailManagerInterface;
+use Pyz\Zed\ProductDetailWidget\Business\Reader\ProductDetailReader;
+use Pyz\Zed\ProductDetailWidget\Business\Reader\ProductDetailReaderInterface;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 
 /**
- * @method \Pyz\Zed\ProductDetailPageWidget\ProductDetailWidgetConfig getConfig()
- * @method \Pyz\Zed\ProductDetailPageWidget\Persistence\ProductDetailRepositoryInterface getRepository()
- * @method \Pyz\Zed\ProductDetailPageWidget\Persistence\ProductDetailEntityManagerInterface getEntityManager()
+ * @method \Pyz\Zed\ProductDetailWidget\ProductDetailWidgetConfig getConfig()
+ * @method \Pyz\Zed\ProductDetailWidget\Persistence\ProductDetailRepositoryInterface getRepository()
+ * @method \Pyz\Zed\ProductDetailWidget\Persistence\ProductDetailEntityManagerInterface getEntityManager()
  */
 class ProductDetailWidgetBusinessFactory extends AbstractBusinessFactory
 {
     /**
-     * @return \Pyz\Zed\ProductDetailPageWidget\Business\Manager\ProductDetailManagerInterface
+     * @return \Pyz\Zed\ProductDetailWidget\Business\Manager\ProductDetailManagerInterface
      */
     public function createProductDetailManager(): ProductDetailManagerInterface
     {
@@ -28,16 +27,16 @@ class ProductDetailWidgetBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \Pyz\Zed\ProductDetailPageWidget\Business\Reader\ProductDetailWriterInterface
+     * @return \Pyz\Zed\ProductDetailWidget\Business\Reader\ProductDetailReaderInterface
      */
-    public function createProductDetailReader(): ProductDetailPageWriterInterface
+    public function createProductDetailReader(): ProductDetailReaderInterface
     {
-        return new ProductDetailWriter($this->getRepository());
+        return new ProductDetailReader($this->getRepository());
     }
 
 
-    public function createProductWriter(): ProductDetailPageWriterInterface
+    /*public function createProductWriter(): ProductDetailPageWriterInterface
     {
         return new ProductDetailPageWriter($this->getEntityManager());
-    }
+    }*/
 }

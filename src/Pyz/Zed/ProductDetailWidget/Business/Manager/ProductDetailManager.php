@@ -5,27 +5,27 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace Pyz\Zed\ProductDetailPageWidget\Business\Manager;
+namespace Pyz\Zed\ProductDetailWidget\Business\Manager;
 
 use Generated\Shared\Transfer\ProductAbstractTransfer;
-use Pyz\Zed\ProductDetailPageWidget\Persistence\ProductDetailEntityManagerInterface;
-use Pyz\Zed\ProductDetailPageWidget\Persistence\ProductDetailRepositoryInterface;
+use Pyz\Zed\ProductDetailWidget\Persistence\ProductDetailEntityManagerInterface;
+use Pyz\Zed\ProductDetailWidget\Persistence\ProductDetailRepositoryInterface;
 
 class ProductDetailManager implements ProductDetailManagerInterface
 {
     /**
-     * @var \Pyz\Zed\ProductDetailPageWidget\Persistence\ProductDetailRepositoryInterface
+     * @var \Pyz\Zed\ProductDetailWidget\Persistence\ProductDetailRepositoryInterface
      */
     protected $productDetailRepository;
 
     /**
-     * @var \Pyz\Zed\ProductDetailPageWidget\Persistence\ProductDetailEntityManagerInterface
+     * @var \Pyz\Zed\ProductDetailWidget\Persistence\ProductDetailEntityManagerInterface
      */
     protected $productDetailEntityManager;
 
     /**
-     * @param \Pyz\Zed\ProductDetailPageWidget\Persistence\ProductDetailRepositoryInterface $productDetailRepository
-     * @param \Pyz\Zed\ProductDetailPageWidget\Persistence\ProductDetailEntityManagerInterface $productDetailEntityManager
+     * @param \Pyz\Zed\ProductDetailWidget\Persistence\ProductDetailRepositoryInterface $productDetailRepository
+     * @param \Pyz\Zed\ProductDetailWidget\Persistence\ProductDetailEntityManagerInterface $productDetailEntityManager
      */
     public function __construct(
         ProductDetailRepositoryInterface $productDetailRepository,

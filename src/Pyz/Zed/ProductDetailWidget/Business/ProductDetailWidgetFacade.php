@@ -5,14 +5,14 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace Pyz\Zed\ProductDetailPageWidget\Business;
+namespace Pyz\Zed\ProductDetailWidget\Business;
 
 use Generated\Shared\Transfer\ProductAbstractTransfer;
 use Spryker\Zed\Kernel\Business\AbstractFacade;
 
 /**
- * @method \Pyz\Zed\ProductDetailPageWidget\Business\ProductDetailWidgetBusinessFactory getFactory()
- * @method \Pyz\Zed\ProductDetailPageWidget\Persistence\ProductDetailRepositoryInterface getRepository()
+ * @method \Pyz\Zed\ProductDetailWidget\Business\ProductDetailWidgetBusinessFactory getFactory()
+ * @method \Pyz\Zed\ProductDetailWidget\Persistence\ProductDetailRepositoryInterface getRepository()
  */
 class ProductDetailWidgetFacade extends AbstractFacade implements ProductDetailWidgetFacadeInterface
 {
@@ -32,10 +32,10 @@ class ProductDetailWidgetFacade extends AbstractFacade implements ProductDetailW
      * @return \Generated\Shared\Transfer\ProductAbstractTransfer
      * @api
      */
-    public function saveProduct(ProductAbstractTransfer $productTransfer): ProductAbstractTransfer
+    /*public function saveProduct(ProductAbstractTransfer $productTransfer): ProductAbstractTransfer
     {
         $productManager = $this->getFactory()->createProductDetailManager();
 
         return $productManager->saveProduct($productTransfer); // Ensure this method exists in ProductManager
-    }
+    }*/
 }

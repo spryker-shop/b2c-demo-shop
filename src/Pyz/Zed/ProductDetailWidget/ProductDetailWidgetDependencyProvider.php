@@ -5,13 +5,13 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace Pyz\Zed\ProductDetailPageWidget;
+namespace Pyz\Zed\ProductDetailWidget;
 
 use Spryker\Zed\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Zed\Kernel\Container;
 
 /**
- * @method \Pyz\Zed\ProductDetailPageWidget\ProductDetailWidgetConfig getConfig()
+ * @method \Pyz\Zed\ProductDetailWidget\ProductDetailWidgetConfig getConfig()
  */
 class ProductDetailWidgetDependencyProvider extends AbstractBundleDependencyProvider
 {

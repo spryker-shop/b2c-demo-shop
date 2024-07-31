@@ -1,6 +1,6 @@
 <?php
 
-namespace Pyz\Zed\ProductDetailPageWidget\Business\Manager;
+namespace Pyz\Zed\ProductDetailWidget\Business\Manager;
 
 use Generated\Shared\Transfer\ProductAbstractTransfer;
 

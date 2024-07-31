@@ -5,7 +5,7 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace Pyz\Zed\ProductDetailPageWidget;
+namespace Pyz\Zed\ProductDetailWidget;
 
 use Spryker\Zed\Kernel\AbstractBundleConfig;
 

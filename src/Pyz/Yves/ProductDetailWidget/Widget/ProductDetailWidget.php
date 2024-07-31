@@ -13,9 +13,9 @@ class ProductDetailWidget extends AbstractWidget
     /**
      * @param \Generated\Shared\Transfer\ProductAbstractTransfer $productAbstractTransfer
      */
-    public function __construct(ProductAbstractTransfer $productAbstractTransfer)
+    public function __construct(string $sku)
     {
-        $this->addParameter('productAbstractTransfer', $this->getProductAbstractTransfer($productAbstractTransfer));
+        $this->addParameter('sku', $sku);
     }
 
     /**

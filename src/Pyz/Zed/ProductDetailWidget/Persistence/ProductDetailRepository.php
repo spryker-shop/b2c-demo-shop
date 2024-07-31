@@ -5,13 +5,13 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace Pyz\Zed\ProductDetailPageWidget\Persistence;
+namespace Pyz\Zed\ProductDetailWidget\Persistence;
 
 use Generated\Shared\Transfer\ProductAbstractTransfer;
 use Spryker\Zed\Kernel\Persistence\AbstractRepository;
 
 /**
- * @method \Pyz\Zed\ProductDetailPageWidget\Persistence\ProductDetailPersistenceFactory getFactory()
+ * @method \Pyz\Zed\ProductDetailWidget\Persistence\ProductDetailPersistenceFactory getFactory()
  */
 class ProductDetailRepository extends AbstractRepository implements ProductDetailRepositoryInterface
 {

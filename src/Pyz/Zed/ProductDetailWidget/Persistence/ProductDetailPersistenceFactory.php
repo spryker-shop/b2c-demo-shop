@@ -5,17 +5,17 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace Pyz\Zed\ProductDetailPageWidget\Persistence;
+namespace Pyz\Zed\ProductDetailWidget\Persistence;
 
 use Orm\Zed\Product\Persistence\SpyProductAbstractQuery;
-use Pyz\Zed\ProductDetailPageWidget\Persistence\Mapper\ProductAbstractMapper;
-use Pyz\Zed\ProductDetailPageWidget\Persistence\Mapper\ProductAbstractMapperInterface;
+use Pyz\Zed\ProductDetailWidget\Persistence\Mapper\ProductAbstractMapper;
+use Pyz\Zed\ProductDetailWidget\Persistence\Mapper\ProductAbstractMapperInterface;
 use Spryker\Zed\Kernel\Persistence\AbstractPersistenceFactory;
 
 /**
- * @method \Pyz\Zed\ProductDetailPageWidget\ProductDetailWidgetConfig getConfig()
- * @method \Pyz\Zed\ProductDetailPageWidget\Persistence\ProductDetailEntityManagerInterface getEntityManager()
- * @method \Pyz\Zed\ProductDetailPageWidget\Persistence\ProductDetailRepositoryInterface getRepository()
+ * @method \Pyz\Zed\ProductDetailWidget\ProductDetailWidgetConfig getConfig()
+ * @method \Pyz\Zed\ProductDetailWidget\Persistence\ProductDetailEntityManagerInterface getEntityManager()
+ * @method \Pyz\Zed\ProductDetailWidget\Persistence\ProductDetailRepositoryInterface getRepository()
  */
 class ProductDetailPersistenceFactory extends AbstractPersistenceFactory
 {
@@ -28,7 +28,7 @@ class ProductDetailPersistenceFactory extends AbstractPersistenceFactory
     }
 
     /**
-     * @return \Pyz\Zed\ProductDetailPageWidget\Persistence\Mapper\ProductAbstractMapperInterface
+     * @return \Pyz\Zed\ProductDetailWidget\Persistence\Mapper\ProductAbstractMapperInterface
      */
     public function createProductAbstractMapper(): ProductAbstractMapperInterface
     {
