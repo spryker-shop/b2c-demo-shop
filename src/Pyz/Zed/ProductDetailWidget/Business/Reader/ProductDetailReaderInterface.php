@@ -9,7 +9,7 @@ namespace Pyz\Zed\ProductDetailWidget\Business\Reader;
 
 use Generated\Shared\Transfer\ProductAbstractTransfer;
 
-interface ProductDetailPageReaderInterface
+interface ProductDetailReaderInterface
 {
     /**
      * Specification:

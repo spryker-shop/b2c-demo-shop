@@ -84,6 +84,8 @@
     {% widget 'SimilarProductsWidget' args [data.product] only %}{% endwidget %}
 
     <div class="container__inner">
+        {{ widget('ProductDetailWidget', { 'id': data.idProductAbstract }) }}
+
         {% embed molecule('product-cms-block', 'CmsBlockWidget') ignore missing with {
             data: {
                 idProductAbstract: data.product.idProductAbstract,
