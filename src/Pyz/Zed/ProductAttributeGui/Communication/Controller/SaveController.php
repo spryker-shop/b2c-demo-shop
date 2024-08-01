@@ -7,6 +7,7 @@
 
 namespace Pyz\Zed\ProductAttributeGui\Communication\Controller;
 
+use Generated\Shared\Transfer\LocaleTransfer;
 use Spryker\Zed\Kernel\Communication\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,7 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Spryker\Zed\ProductAttributeGui\Communication\Controller\SaveController as SpySaveController;
 
 /**
- * @method \Spryker\Zed\ProductAttributeGui\Communication\ProductAttributeGuiCommunicationFactory getFactory()
+ * @method \Pyz\Zed\ProductAttributeGui\Communication\ProductAttributeGuiCommunicationFactory getFactory()
  */
 class SaveController extends SpySaveController
 {
@@ -40,6 +41,16 @@ class SaveController extends SpySaveController
     public const ATTRIBUTE_VALUE = 'value';
 
     /**
+     * @var string
+     */
+    public const LOCALE_CODE = 'locale_code';
+
+    /**
+     * @var string
+     */
+    public const ID = 'id';
+
+    /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
      * @return \Symfony\Component\HttpFoundation\JsonResponse|array
@@ -56,17 +67,53 @@ class SaveController extends SpySaveController
 
         $json = (string)$request->request->get(static::PARAM_JSON);
         $data = json_decode($json, true);
-        // $productData = $this->getRepository()
+        $productData = $this->getFactory()->getProductFacade()->findProductAbstractById($idProductAbstract);
+        $prices = $productData->getPrices();
+        foreach ($prices as $price) {
+            $productPrice = $price->getMoneyValue()->getGrossAmount();
+            break;
+        }
+
+        $carbonEmission = $this->getCarbonEmissionFromApi($productPrice);
+        $energyEmission = $this->getEnergyEmissionFromApi();
+        $carbonFlag = 0;
+        $energyFlag = 0;
         foreach ($data as $key => $attribute) {
             if ($attribute[static::ATTRIBUTE_KEY] === static::CARBON_EMISSION_ATTRIBUTE) {
-                $attribute[static::ATTRIBUTE_VALUE] = "50";
+                $attribute[static::ATTRIBUTE_VALUE] = $carbonEmission;
                 $data[$key] = $attribute;
+                $carbonFlag++;
             }
 
-            // if ($attribute[static::ATTRIBUTE_KEY] === static::ENERGY_EMISSION_ATTRIBUTE) {
-            //     $attribute[static::ATTRIBUTE_VALUE] = "110";
-            //     $data[$key] = $attribute;
-            // }
+            if ($attribute[static::ATTRIBUTE_KEY] === static::ENERGY_EMISSION_ATTRIBUTE) {
+                $attribute[static::ATTRIBUTE_VALUE] = $energyEmission;
+                $data[$key] = $attribute;
+                $energyFlag++;
+            }
+        }
+
+        if($carbonFlag == 0) {
+            $carbonAttributeId = $this->getAttributeIdByKey(static::CARBON_EMISSION_ATTRIBUTE);
+            $locales = $this->getFactory()->getLocaleFacade()->getLocaleCollection();
+            foreach ($locales as $locale => $value) {
+                $carbonData = $this->prepareAttributeData($carbonAttributeId, static::CARBON_EMISSION_ATTRIBUTE, $carbonEmission, $locale);
+                $data[count($data)] = $carbonData;
+            }
+
+            $carbonData = $this->prepareAttributeData($carbonAttributeId, static::CARBON_EMISSION_ATTRIBUTE, $carbonEmission, '_');
+            $data[count($data)] = $carbonData;
+        }
+
+        if($energyFlag == 0) {
+            $energyAttributeId = $this->getAttributeIdByKey(static::ENERGY_EMISSION_ATTRIBUTE);
+            $locales = $this->getFactory()->getLocaleFacade()->getLocaleCollection();
+            foreach ($locales as $locale => $value) {
+                $energyData = $this->prepareAttributeData($energyAttributeId, static::ENERGY_EMISSION_ATTRIBUTE, $energyEmission, $locale);
+                $data[count($data)] = $energyData;
+            }
+
+            $energyData = $this->prepareAttributeData($energyAttributeId, static::ENERGY_EMISSION_ATTRIBUTE, $energyEmission, '_');
+            $data[count($data)] = $energyData;
         }
 
         $this->getFactory()
@@ -76,15 +123,29 @@ class SaveController extends SpySaveController
         return $this->createJsonResponse(static::MESSAGE_PRODUCT_ABSTRACT_ATTRIBUTES_SAVED);
     }
 
+    protected function prepareAttributeData($attributeId, $attributeKey, $attributeValue, $locale)
+    {
+        $attributeData[static::ATTRIBUTE_KEY] = $attributeKey;
+        $attributeData[static::ATTRIBUTE_VALUE] = $attributeValue;
+        $attributeData[static::LOCALE_CODE] = $locale;
+        $attributeData[static::ID] = $attributeId;
+
+        return $attributeData;
+    }
+
+    protected function getAttributeIdByKey($attributeKey)
+    {
+        $attribute = $this->getFactory()->getProductAttributeQueryContainer()->queryProductAttributeKeyByKeys([$attributeKey])->find();
+        return $attribute[0]->getIdProductAttributeKey() ?? null;
+    }
+
     protected function getCarbonEmissionFromApi($productPrice, $currency = 'eur')
     {
 
         $data['emission_factor']['id'] = '4b703411-bd44-4d30-a069-dd59b1a61a0b';
         $data['parameters']['money'] = $productPrice;
         $data['parameters']['money_unit'] = $currency;
-        $carbonEmission = $this->sendCurlRequest('https://beta4.api.climatiq.io/estimate', $data);
-echo "<pre>";print_r($carbonEmission);die('WWW');
-        return '{
+        $carbonEmission = '{
         "co2e": 29213,
         "co2e_unit": "kg",
         "co2e_calculation_method": "ar5",
@@ -115,16 +176,67 @@ echo "<pre>";print_r($carbonEmission);die('WWW');
         },
         "audit_trail": "selector"
         }';
+        // $carbonEmission = $this->sendCurlRequest('https://beta4.api.climatiq.io/estimate', $data);
+        $carbonEmissionData = json_decode($carbonEmission, true);
+        return $carbonEmissionData['co2e'];
+    }
+
+
+    protected function getEnergyEmissionFromApi($energyAmount = 100, $energyUnit = 'kWh')
+    {
+
+        $data['emission_factor']['activity_id'] = 'electricity-supply_grid-source_supplier_mix';
+        $data['emission_factor']['region'] = 'IN';
+        $data['emission_factor']['data_version'] = '5.5';
+        $data['parameters']['energy'] = $energyAmount;
+        $data['parameters']['energy_unit'] = $energyUnit;
+
+        $energyEmission = '{
+  "co2e": 71.32,
+  "co2e_unit": "kg",
+  "co2e_calculation_method": "ar4",
+  "co2e_calculation_origin": "source",
+  "emission_factor": {
+    "name": "Electricity supplied from grid",
+    "activity_id": "electricity-supply_grid-source_supplier_mix",
+    "id": "8eefd087-009f-4418-a989-de7103cd3194",
+    "access_type": "public",
+    "source": "CT",
+    "source_dataset": "Climate Transparency Report",
+    "year": 2021,
+    "region": "IN",
+    "category": "Electricity",
+    "source_lca_activity": "electricity_generation",
+    "data_quality_flags": [
+      "partial_factor"
+    ]
+  },
+  "constituent_gases": {
+    "co2e_total": 71.32,
+    "co2e_other": null,
+    "co2": 71.32,
+    "ch4": null,
+    "n2o": null
+  },
+  "activity_data": {
+    "activity_value": 100,
+    "activity_unit": "kWh"
+  },
+  "audit_trail": "selector"
+}';
+        // $energyEmission = $this->sendCurlRequest('https://beta4.api.climatiq.io/estimate', $data);
+        $energyEmissionData = json_decode($energyEmission, true);
+        return $energyEmissionData['co2e'];
+
     }
 
     protected function sendCurlRequest($url, $data)
     {
         $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_HEADER, 'Authorization: Bearer API_KEY');
+        curl_setopt($ch, CURLOPT_HTTPHEADER, ['Authorization: Bearer 510F3NVHA6M9ZGHG5MV07E55645H']);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_POST, true);
-
-        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
         $contents = curl_exec($ch);
         curl_close($ch);
         return $contents;

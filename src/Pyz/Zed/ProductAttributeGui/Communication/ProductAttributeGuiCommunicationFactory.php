@@ -7,17 +7,6 @@
 
 namespace Pyz\Zed\ProductAttributeGui\Communication;
 
-use Spryker\Zed\Kernel\Communication\AbstractCommunicationFactory;
-use Spryker\Zed\ProductAttributeGui\Communication\Form\AttributeCsrfForm;
-use Spryker\Zed\ProductAttributeGui\Communication\Form\AttributeForm;
-use Spryker\Zed\ProductAttributeGui\Communication\Form\AttributeKeyForm;
-use Spryker\Zed\ProductAttributeGui\Communication\Form\AttributeKeyFormDataProvider;
-use Spryker\Zed\ProductAttributeGui\Communication\Form\AttributeTranslationCollectionForm;
-use Spryker\Zed\ProductAttributeGui\Communication\Form\DataProvider\AttributeFormDataProvider;
-use Spryker\Zed\ProductAttributeGui\Communication\Form\DataProvider\AttributeTranslationFormCollectionDataProvider;
-use Spryker\Zed\ProductAttributeGui\Communication\Table\AttributeTable;
-use Spryker\Zed\ProductAttributeGui\Communication\Transfer\AttributeFormTransferMapper;
-use Spryker\Zed\ProductAttributeGui\Communication\Transfer\AttributeTranslationFormTransferMapper;
 use Pyz\Zed\ProductAttributeGui\ProductAttributeGuiDependencyProvider;
 use Spryker\Zed\ProductAttributeGui\Communication\ProductAttributeGuiCommunicationFactory as SpyFactory;
 

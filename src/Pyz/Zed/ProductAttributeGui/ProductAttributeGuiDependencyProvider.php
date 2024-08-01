@@ -40,7 +40,7 @@ class ProductAttributeGuiDependencyProvider extends SpyProductAttributeGuiDepend
      */
     protected function addProductFacade(Container $container)
     {
-        $container->set(static::FACADE_PRODUCT_ATTRIBUTE, function (Container $container) {
+        $container->set(static::FACADE_PRODUCT, function (Container $container) {
             return new FacadeProductAttributeGuiToProductBridge($container->getLocator()->product()->facade());
         });
 
