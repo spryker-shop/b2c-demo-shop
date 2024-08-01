@@ -66,6 +66,8 @@ use Spryker\Client\SearchHttp\Plugin\Search\SearchHttpSearchResultCountPlugin;
 use Spryker\Shared\SearchHttp\SearchHttpConfig;
 use Pyz\Client\SearchElasticsearch\Plugin\QueryExpander\AiElasticSearchQueryExpanderPlugin;
 use Pyz\Client\Catalog\Plugin\Elasticsearch\Query\PyzProductCatalogSearchQueryPlugin;
+use Pyz\Client\Catalog\Plugin\ConfigTransferBuilder\AscendingCarbonEmissionSortConfigTransferBuilderPlugin;
+use Pyz\Client\Catalog\Plugin\ConfigTransferBuilder\DescendingCarbonEmissionSortConfigTransferBuilderPlugin;
 
 class CatalogDependencyProvider extends SprykerCatalogDependencyProvider
 {
@@ -88,6 +90,8 @@ class CatalogDependencyProvider extends SprykerCatalogDependencyProvider
     protected function getSortConfigTransferBuilderPlugins(): array
     {
         return [
+            new AscendingCarbonEmissionSortConfigTransferBuilderPlugin(),
+            new DescendingCarbonEmissionSortConfigTransferBuilderPlugin(),
             new RatingSortConfigTransferBuilderPlugin(),
             new AscendingNameSortConfigTransferBuilderPlugin(),
             new DescendingNameSortConfigTransferBuilderPlugin(),

@@ -13,6 +13,18 @@
 
             {{ block('labels') }}
 
+        {% if data.product.carbon_emission is defined %}
+            <label-group class="custom-element label-group" data-qa="component label-group" class-to-toggle="is-hidden" product-item-class-name="js-product-item">
+                <span class="tag js-label-group__label-tag is-hidden" data-qa="component tag" data-label-tag-type="template:tag">
+                    <span class="tag__text js-label-group__label-tag-text"></span>
+                </span>
+                {% set cls = data.product.carbon_emission > 20 ? 'flag--discontinued' : 'flag--highlight' %}
+                <div class="flag {{ cls }} js-label-group__label-flag" data-qa="component flag" data-config-name="flag" data-label-tag-type="">
+                    <span class="js-label-group__label-flag-text">{{ "Co2: "|trans }}{{data.product.carbon_emission}}{{ " kt"|trans }}</span>
+                </div>
+            </label-group>
+        {% endif %}
+
             <div class="{{ config.name }}__overlay-container">
                 {% block colors %}
                     {% widget 'ProductGroupColorWidget' args [data.idProductAbstract, data.product.selectedAttributes ?? []] use view('product-item-color-selector', 'ProductGroupWidget') with {

@@ -35,6 +35,7 @@ use Spryker\Zed\ProductPageSearch\ProductPageSearchDependencyProvider as Spryker
 use Spryker\Zed\ProductReviewSearch\Communication\Plugin\PageDataExpander\ProductReviewDataLoaderExpanderPlugin;
 use Spryker\Zed\ProductReviewSearch\Communication\Plugin\PageDataLoader\ProductReviewPageDataLoaderPlugin;
 use Spryker\Zed\ProductReviewSearch\Communication\Plugin\ProductPageSearch\Elasticsearch\ProductReviewMapExpanderPlugin;
+use Pyz\Zed\SearchElasticsearch\Communication\Plugin\ProductPageSearch\Elasticsearch\PyzProductCarbonEmissionSortMapExpanderPlugin;
 
 class ProductPageSearchDependencyProvider extends SprykerProductPageSearchDependencyProvider
 {
@@ -104,6 +105,7 @@ class ProductPageSearchDependencyProvider extends SprykerProductPageSearchDepend
             new ProductLabelMapExpanderPlugin(),
             new ProductReviewMapExpanderPlugin(),
             new ProductListMapExpanderPlugin(),
+            new PyzProductCarbonEmissionSortMapExpanderPlugin(),
         ];
     }
 
