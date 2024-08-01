@@ -7,6 +7,7 @@
 
 namespace Pyz\Yves\ShopApplication;
 
+use Pyz\Yves\CarbonEmissionWidget\Widget\CarbonEmissionWidget;
 use Pyz\Yves\ProductRelationWidget\Widget\UpSellingProductsWidget;
 use Pyz\Yves\ProductReviewWidget\Widget\ProductDetailPageReviewWidget;
 use Pyz\Yves\ProductSetWidget\Widget\ProductSetIdsWidget;
@@ -209,6 +210,7 @@ class ShopApplicationDependencyProvider extends SprykerShopApplicationDependency
             ProductConfigurationWishlistPageButtonWidget::class,
             StoreSwitcherWidget::class,
             CartSummaryHideTaxAmountWidget::class,
+            CarbonEmissionWidget::class,
         ];
     }
 

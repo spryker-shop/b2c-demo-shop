@@ -1,0 +1,16 @@
+{% extends template('widget') %}
+
+{% define data ={
+
+    product: _widget.product
+
+} %}
+
+{% block body %}
+
+      {% include molecule('carbon-emission-modal', 'CarbonEmissionWidget') with {
+                    class: 'table table--expand',
+                   
+                } only %}
+   
+{% endblock body %}

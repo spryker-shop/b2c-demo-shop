@@ -26,6 +26,9 @@
     </div>
 
     {{ block('bundleProducts') }}
+    {% block carbonEmission %}
+        {% widget 'CarbonEmissionWidget' args [data.product] only %}{% endwidget %}
+    {% endblock %}
     {{ block('colors') }}
 
     {% include molecule('variant-configurator', 'ProductDetailPage') with {
