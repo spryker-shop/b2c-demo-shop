@@ -93,7 +93,7 @@ use Spryker\Shared\Sales\SalesConstants;
 use Spryker\Shared\Scheduler\SchedulerConstants;
 use Spryker\Shared\SchedulerJenkins\SchedulerJenkinsConfig;
 use Spryker\Shared\SchedulerJenkins\SchedulerJenkinsConstants;
-use Spryker\Shared\SearchElasticsearch\SearchElasticsearchConstants;
+use Pyz\Shared\SearchElasticsearch\SearchElasticsearchConstants;
 use Spryker\Shared\SearchHttp\SearchHttpConstants;
 use Spryker\Shared\SecurityBlocker\SecurityBlockerConstants;
 use Spryker\Shared\SecurityBlockerBackoffice\SecurityBlockerBackofficeConstants;
@@ -362,6 +362,7 @@ $config[SearchElasticsearchConstants::AUTH_HEADER] = getenv('SPRYKER_SEARCH_BASI
 $config[SearchElasticsearchConstants::INDEX_PREFIX] = getenv('SPRYKER_SEARCH_INDEX_PREFIX') ?: '';
 
 $config[SearchElasticsearchConstants::FULL_TEXT_BOOSTED_BOOSTING_VALUE] = 3;
+$config[SearchElasticsearchConstants::ENABLE_GOOGLE_AI_SEARCH] = true;
 
 // >>> STORAGE
 

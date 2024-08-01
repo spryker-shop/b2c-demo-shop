@@ -19,4 +19,12 @@ class SearchElasticsearchConfig extends SprykerSearchElasticsearchConfig
         'product-review',
         'return_reason',
     ];
+
+    /**
+     * @return boolean
+     */
+    public function isGoogleAiSearchEnabled(): bool
+    {
+        return (bool) $this->getConfig()->get(SearchElasticsearchConstants::ENABLE_GOOGLE_AI_SEARCH, false);
+    }
 }

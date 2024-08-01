@@ -64,6 +64,7 @@ use Spryker\Client\SearchHttp\Plugin\Catalog\ResultFormatter\SpellingSuggestionS
 use Spryker\Client\SearchHttp\Plugin\Search\ProductConcreteCatalogSearchHttpResultFormatterPlugin;
 use Spryker\Client\SearchHttp\Plugin\Search\SearchHttpSearchResultCountPlugin;
 use Spryker\Shared\SearchHttp\SearchHttpConfig;
+use Pyz\Client\SearchElasticsearch\Plugin\QueryExpander\AiElasticSearchQueryExpanderPlugin;
 
 class CatalogDependencyProvider extends SprykerCatalogDependencyProvider
 {
@@ -119,6 +120,7 @@ class CatalogDependencyProvider extends SprykerCatalogDependencyProvider
             new SpellingSuggestionQueryExpanderPlugin(),
             new IsActiveQueryExpanderPlugin(),
             new IsActiveInDateRangeQueryExpanderPlugin(),
+            new AiElasticSearchQueryExpanderPlugin(),
 
             /*
              * FacetQueryExpanderPlugin needs to be after other query expanders which filters down the results.
