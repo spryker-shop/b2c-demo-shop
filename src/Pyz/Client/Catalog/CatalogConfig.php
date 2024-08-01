@@ -7,6 +7,7 @@
 
 namespace Pyz\Client\Catalog;
 
+use Pyz\Shared\SearchElasticsearch\SearchElasticsearchConstants;
 use Spryker\Client\Catalog\CatalogConfig as SprykerCatalogConfig;
 
 class CatalogConfig extends SprykerCatalogConfig
@@ -23,4 +24,12 @@ class CatalogConfig extends SprykerCatalogConfig
      * @var int
      */
     protected const PAGINATION_CATALOG_SEARCH_DEFAULT_ITEMS_PER_PAGE = 12;
+
+    /**
+     * @return boolean
+     */
+    public function isGoogleAiSearchEnabled(): bool
+    {
+        return (bool) $this->getConfig()->get(SearchElasticsearchConstants::ENABLE_GOOGLE_AI_SEARCH, false);
+    }
 }

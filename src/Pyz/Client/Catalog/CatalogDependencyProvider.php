@@ -65,6 +65,7 @@ use Spryker\Client\SearchHttp\Plugin\Search\ProductConcreteCatalogSearchHttpResu
 use Spryker\Client\SearchHttp\Plugin\Search\SearchHttpSearchResultCountPlugin;
 use Spryker\Shared\SearchHttp\SearchHttpConfig;
 use Pyz\Client\SearchElasticsearch\Plugin\QueryExpander\AiElasticSearchQueryExpanderPlugin;
+use Pyz\Client\Catalog\Plugin\Elasticsearch\Query\PyzProductCatalogSearchQueryPlugin;
 
 class CatalogDependencyProvider extends SprykerCatalogDependencyProvider
 {
@@ -102,7 +103,7 @@ class CatalogDependencyProvider extends SprykerCatalogDependencyProvider
      */
     protected function createCatalogSearchQueryPlugin(): QueryInterface
     {
-        return new ProductCatalogSearchQueryPlugin();
+        return new PyzProductCatalogSearchQueryPlugin();
     }
 
     /**

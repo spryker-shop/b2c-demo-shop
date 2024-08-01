@@ -15,6 +15,7 @@ use Elastica\Query\MultiMatch;
 use Elastica\Query\Term;
 use Elastica\Query\Nested;
 use Spryker\Client\SearchElasticsearch\Plugin\QueryExpander\FacetQueryExpanderPlugin;
+use Elastica\Query\AbstractQuery;
 
 /**
  * @method \Spryker\Client\SearchElasticsearch\SearchElasticsearchFactory getFactory()
@@ -59,14 +60,16 @@ class AiElasticSearchQueryExpanderPlugin extends FacetQueryExpanderPlugin implem
         // }', true);
 
         $data = json_decode('{
+            "product_type": "laptop",
             "attributes":[
                 {
-                    "key":"brand",
-                    "value":"Sony"
+                    "key":"price",
+                    "min":"400"
                 }
             ]
         }', true);
 
+        // $data = [];
         // must query
         $this->updateDynamicFullTextQuery($searchQuery->getSearchQuery(), $data);
 
@@ -89,11 +92,26 @@ class AiElasticSearchQueryExpanderPlugin extends FacetQueryExpanderPlugin implem
         ];
 
         if (isset($data['product_type'])) {
-            $query->setMust((new MultiMatch())
+            $query->setQuery(
+                $this->createBoolQuery((new MultiMatch())
                 ->setFields($fields)
                 ->setQuery($data['product_type'])
-                ->setType(MultiMatch::TYPE_CROSS_FIELDS));
+                ->setType(MultiMatch::TYPE_CROSS_FIELDS))
+            );
         }
+    }
+
+    /**
+     * @param \Elastica\Query\AbstractQuery $matchQuery
+     *
+     * @return \Elastica\Query\BoolQuery
+     */
+    protected function createBoolQuery(AbstractQuery $matchQuery)
+    {
+        $boolQuery = new BoolQuery();
+        $boolQuery->addMust($matchQuery);
+
+        return $boolQuery;
     }
 
     // protected function createMultiMatchQuery1(array $data)
@@ -120,7 +138,7 @@ class AiElasticSearchQueryExpanderPlugin extends FacetQueryExpanderPlugin implem
     {
         $boolQuery = $this->getBoolQuery($query);
 
-        $this->createMultiMatchQuery($data, $boolQuery);
+        $this->createMultiMatchQuery($data, $query);
         // $boolQuery->addMust($this->createMultiMatchQuery1($data));
     }
 
