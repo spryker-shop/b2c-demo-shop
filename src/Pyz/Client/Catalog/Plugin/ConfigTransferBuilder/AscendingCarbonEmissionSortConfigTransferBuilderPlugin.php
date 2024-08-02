@@ -27,6 +27,6 @@ class AscendingCarbonEmissionSortConfigTransferBuilderPlugin extends AbstractPlu
         return (new SortConfigTransfer())
             ->setName(static::NAME)
             ->setParameterName(static::PARAMETER_NAME)
-            ->setFieldName(PageIndexMap::STRING_SORT);
+            ->setFieldName(PageIndexMap::INTEGER_SORT);
     }
 }

@@ -44,7 +44,7 @@ class PyzProductCarbonEmissionSortMapExpanderPlugin  extends AbstractPlugin impl
                     'carbon_emission',
                     $productData['attributes']['carbon_emission'],
                 );
-                $pageMapBuilder->addStringSort(
+                $pageMapBuilder->addIntegerSort(
                     $pageMapTransfer,
                     $this->buildSortFieldName(),
                     $productData['attributes']['carbon_emission'],
