@@ -16,6 +16,7 @@ use Spryker\Zed\ProductAttributeGui\Communication\Controller\SaveController as S
 
 /**
  * @method \Pyz\Zed\ProductAttributeGui\Communication\ProductAttributeGuiCommunicationFactory getFactory()
+ * @method \Pyz\Zed\ProductAttributeGui\ProductAttributeGuiConfig getConfig()
  */
 class SaveController extends SpySaveController
 {
@@ -73,9 +74,11 @@ class SaveController extends SpySaveController
             $productPrice = $price->getMoneyValue()->getGrossAmount();
             break;
         }
-
-        $carbonEmission = $this->getCarbonEmissionFromApi($productPrice);
-        $energyEmission = $this->getEnergyEmissionFromApi();
+        $defaultLocale = $this->getFactory()->getConfig()->getDefaultLocaleCode();
+        $token = $this->getFactory()->getConfig()->getCarbonEmissionToken();
+        $carbonEmission = $this->getCarbonEmissionFromApi($token, $productPrice);
+        $energyEmission = $this->getEnergyEmissionFromApi($token);
+        
         $carbonFlag = 0;
         $energyFlag = 0;
         foreach ($data as $key => $attribute) {
@@ -100,7 +103,7 @@ class SaveController extends SpySaveController
                 $data[count($data)] = $carbonData;
             }
 
-            $carbonData = $this->prepareAttributeData($carbonAttributeId, static::CARBON_EMISSION_ATTRIBUTE, $carbonEmission, '_');
+            $carbonData = $this->prepareAttributeData($carbonAttributeId, static::CARBON_EMISSION_ATTRIBUTE, $carbonEmission, $defaultLocale);
             $data[count($data)] = $carbonData;
         }
 
@@ -112,7 +115,7 @@ class SaveController extends SpySaveController
                 $data[count($data)] = $energyData;
             }
 
-            $energyData = $this->prepareAttributeData($energyAttributeId, static::ENERGY_EMISSION_ATTRIBUTE, $energyEmission, '_');
+            $energyData = $this->prepareAttributeData($energyAttributeId, static::ENERGY_EMISSION_ATTRIBUTE, $energyEmission, $defaultLocale);
             $data[count($data)] = $energyData;
         }
 
@@ -139,50 +142,54 @@ class SaveController extends SpySaveController
         return $attribute[0]->getIdProductAttributeKey() ?? null;
     }
 
-    protected function getCarbonEmissionFromApi($productPrice, $currency = 'eur')
+    protected function getCarbonEmissionFromApi($token, $productPrice, $currency = 'eur')
     {
 
         $data['emission_factor']['id'] = '4b703411-bd44-4d30-a069-dd59b1a61a0b';
         $data['parameters']['money'] = $productPrice;
         $data['parameters']['money_unit'] = $currency;
-        $carbonEmission = '{
-        "co2e": 29213,
-        "co2e_unit": "kg",
-        "co2e_calculation_method": "ar5",
-        "co2e_calculation_origin": "source",
-        "emission_factor": {
-            "name": "Electrical machinery and apparatus (not elsewhere specified)",
-            "activity_id": "electrical_equipment-type_electrical_machinery_apparatus_not_elsewhere_specified",
-            "id": "4b703411-bd44-4d30-a069-dd59b1a61a0b",
-            "access_type": "public",
-            "source": "EXIOBASE",
-            "source_dataset": "EXIOBASE 3",
-            "year": 2019,
-            "region": "AT",
-            "category": "Electrical Equipment",
-            "source_lca_activity": "unknown",
-            "data_quality_flags": []
-        },
-        "constituent_gases": {
-            "co2e_total": 29213,
-            "co2e_other": null,
-            "co2": null,
-            "ch4": null,
-            "n2o": null
-        },
-        "activity_data": {
-            "activity_value": 100011,
-            "activity_unit": "eur"
-        },
-        "audit_trail": "selector"
-        }';
-        // $carbonEmission = $this->sendCurlRequest('https://beta4.api.climatiq.io/estimate', $data);
+        if ($token) {
+            $carbonEmission = $this->sendCurlRequest('https://beta4.api.climatiq.io/estimate', $data, $token);
+        } else {
+            $carbonEmission = '{
+            "co2e": 29213,
+            "co2e_unit": "kg",
+            "co2e_calculation_method": "ar5",
+            "co2e_calculation_origin": "source",
+            "emission_factor": {
+                "name": "Electrical machinery and apparatus (not elsewhere specified)",
+                "activity_id": "electrical_equipment-type_electrical_machinery_apparatus_not_elsewhere_specified",
+                "id": "4b703411-bd44-4d30-a069-dd59b1a61a0b",
+                "access_type": "public",
+                "source": "EXIOBASE",
+                "source_dataset": "EXIOBASE 3",
+                "year": 2019,
+                "region": "AT",
+                "category": "Electrical Equipment",
+                "source_lca_activity": "unknown",
+                "data_quality_flags": []
+            },
+            "constituent_gases": {
+                "co2e_total": 29213,
+                "co2e_other": null,
+                "co2": null,
+                "ch4": null,
+                "n2o": null
+            },
+            "activity_data": {
+                "activity_value": 100011,
+                "activity_unit": "eur"
+            },
+            "audit_trail": "selector"
+            }';
+        }
+
         $carbonEmissionData = json_decode($carbonEmission, true);
         return $carbonEmissionData['co2e'];
     }
 
 
-    protected function getEnergyEmissionFromApi($energyAmount = 100, $energyUnit = 'kWh')
+    protected function getEnergyEmissionFromApi($token, $energyAmount = 100, $energyUnit = 'kWh')
     {
 
         $data['emission_factor']['activity_id'] = 'electricity-supply_grid-source_supplier_mix';
@@ -190,50 +197,52 @@ class SaveController extends SpySaveController
         $data['emission_factor']['data_version'] = '5.5';
         $data['parameters']['energy'] = $energyAmount;
         $data['parameters']['energy_unit'] = $energyUnit;
-
-        $energyEmission = '{
-  "co2e": 71.32,
-  "co2e_unit": "kg",
-  "co2e_calculation_method": "ar4",
-  "co2e_calculation_origin": "source",
-  "emission_factor": {
-    "name": "Electricity supplied from grid",
-    "activity_id": "electricity-supply_grid-source_supplier_mix",
-    "id": "8eefd087-009f-4418-a989-de7103cd3194",
-    "access_type": "public",
-    "source": "CT",
-    "source_dataset": "Climate Transparency Report",
-    "year": 2021,
-    "region": "IN",
-    "category": "Electricity",
-    "source_lca_activity": "electricity_generation",
-    "data_quality_flags": [
-      "partial_factor"
-    ]
-  },
-  "constituent_gases": {
-    "co2e_total": 71.32,
-    "co2e_other": null,
-    "co2": 71.32,
-    "ch4": null,
-    "n2o": null
-  },
-  "activity_data": {
-    "activity_value": 100,
-    "activity_unit": "kWh"
-  },
-  "audit_trail": "selector"
-}';
-        // $energyEmission = $this->sendCurlRequest('https://beta4.api.climatiq.io/estimate', $data);
+        if ($token) {
+            $energyEmission = $this->sendCurlRequest('https://beta4.api.climatiq.io/estimate', $data, $token);
+        } else {
+            $energyEmission = '{
+            "co2e": 71.32,
+            "co2e_unit": "kg",
+            "co2e_calculation_method": "ar4",
+            "co2e_calculation_origin": "source",
+            "emission_factor": {
+                "name": "Electricity supplied from grid",
+                "activity_id": "electricity-supply_grid-source_supplier_mix",
+                "id": "8eefd087-009f-4418-a989-de7103cd3194",
+                "access_type": "public",
+                "source": "CT",
+                "source_dataset": "Climate Transparency Report",
+                "year": 2021,
+                "region": "IN",
+                "category": "Electricity",
+                "source_lca_activity": "electricity_generation",
+                "data_quality_flags": [
+                "partial_factor"
+                ]
+            },
+            "constituent_gases": {
+                "co2e_total": 71.32,
+                "co2e_other": null,
+                "co2": 71.32,
+                "ch4": null,
+                "n2o": null
+            },
+            "activity_data": {
+                "activity_value": 100,
+                "activity_unit": "kWh"
+            },
+            "audit_trail": "selector"
+            }';
+        }
         $energyEmissionData = json_decode($energyEmission, true);
         return $energyEmissionData['co2e'];
 
     }
 
-    protected function sendCurlRequest($url, $data)
+    protected function sendCurlRequest($url, $data, $token)
     {
         $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, ['Authorization: Bearer 510F3NVHA6M9ZGHG5MV07E55645H']);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, ['Authorization: Bearer '.$token]);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));

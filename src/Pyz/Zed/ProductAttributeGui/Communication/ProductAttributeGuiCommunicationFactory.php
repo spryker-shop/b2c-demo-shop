@@ -7,6 +7,7 @@
 
 namespace Pyz\Zed\ProductAttributeGui\Communication;
 
+use Pyz\Zed\ProductAttributeGui\ProductAttributeGuiConfig;
 use Pyz\Zed\ProductAttributeGui\ProductAttributeGuiDependencyProvider;
 use Spryker\Zed\ProductAttributeGui\Communication\ProductAttributeGuiCommunicationFactory as SpyFactory;
 
@@ -22,5 +23,13 @@ class ProductAttributeGuiCommunicationFactory extends SpyFactory
     public function getProductFacade()
     {
         return $this->getProvidedDependency(ProductAttributeGuiDependencyProvider::FACADE_PRODUCT);
+    }
+
+    /**
+     * @return \Pyz\Zed\ProductAttributeGui\ProductAttributeGuiConfig
+     */
+    public function getConfig()
+    {
+        return new ProductAttributeGuiConfig();
     }
 }
