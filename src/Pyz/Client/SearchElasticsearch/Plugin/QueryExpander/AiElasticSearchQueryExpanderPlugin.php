@@ -46,36 +46,6 @@ class AiElasticSearchQueryExpanderPlugin extends FacetQueryExpanderPlugin implem
         $vertexService = $this->getFactory()->getVertexAiService();
         $data = $vertexService->generateNlp($query);
 
-
-        // $data = json_decode('{
-        //     "product_type":"laptop",
-        //     "category":"electronics",
-        //     "sub_category": "computers",
-        //     "attributes":[
-        //         {
-        //             "key":"brand",
-        //             "value":"Samsung"
-        //         },
-        //         {
-        //             "key":"price",
-        //             "value":"331",
-        //             "min":"382",
-        //             "max":"500"
-        //         }
-        //     ]
-        // }', true);
-
-        $data = json_decode('{
-            "product_type": "laptop",
-            "attributes":[
-                {
-                    "key":"color",
-                    "value":"black"
-                }
-            ]
-        }', true);
-
-        $data = [];
         // must query
         $this->updateDynamicFullTextQuery($searchQuery->getSearchQuery(), $data);
 
@@ -120,21 +90,6 @@ class AiElasticSearchQueryExpanderPlugin extends FacetQueryExpanderPlugin implem
         return $boolQuery;
     }
 
-    // protected function createMultiMatchQuery1(array $data)
-    // {
-    //     $fields = [
-    //         PageIndexMap::FULL_TEXT,
-    //         PageIndexMap::FULL_TEXT_BOOSTED . '^' . $this->getFullTextBoostedBoostingValue(),
-    //     ];
-
-    //     $value = 'Bar';
-
-    //     return (new MultiMatch())
-    //         ->setFields($fields)
-    //         ->setQuery($value)
-    //         ->setType(MultiMatch::TYPE_CROSS_FIELDS);
-    // }
-
     /**
      * @param \Elastica\Query $query
      *
@@ -145,7 +100,6 @@ class AiElasticSearchQueryExpanderPlugin extends FacetQueryExpanderPlugin implem
         $boolQuery = $this->getBoolQuery($query);
 
         $this->createMultiMatchQuery($data, $query);
-        // $boolQuery->addMust($this->createMultiMatchQuery1($data));
     }
 
     protected function addAttributeQuery(Query $query, $data): void
@@ -162,6 +116,7 @@ class AiElasticSearchQueryExpanderPlugin extends FacetQueryExpanderPlugin implem
         $facetConfig = $this->getFactory()->getSearchConfig()->getFacetConfig();
 
         if (isset($attribute['min']) || isset($attribute['max'])) {
+            $attribute = array_filter($attribute, function($value){return !empty($value) && $value!='null';});
             $requestParameters[$attribute['key']] = $attribute;
         } else {
             $requestParameters[$attribute['key']] = $attribute['value'];
