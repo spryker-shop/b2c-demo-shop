@@ -18,7 +18,7 @@ use Spryker\Client\SearchElasticsearch\Plugin\QueryExpander\FacetQueryExpanderPl
 use Elastica\Query\AbstractQuery;
 
 /**
- * @method \Spryker\Client\SearchElasticsearch\SearchElasticsearchFactory getFactory()
+ * @method \Pyz\Client\SearchElasticsearch\SearchElasticsearchFactory getFactory()
  */
 class AiElasticSearchQueryExpanderPlugin extends FacetQueryExpanderPlugin implements QueryExpanderPluginInterface
 {
@@ -37,9 +37,15 @@ class AiElasticSearchQueryExpanderPlugin extends FacetQueryExpanderPlugin implem
      */
     public function expandQuery(QueryInterface $searchQuery, array $requestParameters = []): QueryInterface
     {
-        if ($this->getFactory()->getConfig()->isGoogleAiSearchEnabled() !== true) {
+        $query = !empty($requestParameters['q']) ? $requestParameters['q'] : "";
+
+        if ($this->getFactory()->getConfig()->isGoogleAiSearchEnabled() !== true || empty($query)) {
             return $searchQuery;
         }
+
+        $vertexService = $this->getFactory()->getVertexAiService();
+        $data = $vertexService->generateNlp($query);
+
 
         // $data = json_decode('{
         //     "product_type":"laptop",
@@ -63,13 +69,13 @@ class AiElasticSearchQueryExpanderPlugin extends FacetQueryExpanderPlugin implem
             "product_type": "laptop",
             "attributes":[
                 {
-                    "key":"price",
-                    "min":"400"
+                    "key":"color",
+                    "value":"black"
                 }
             ]
         }', true);
 
-        // $data = [];
+        $data = [];
         // must query
         $this->updateDynamicFullTextQuery($searchQuery->getSearchQuery(), $data);
 

@@ -11,21 +11,19 @@ use Generated\Shared\Transfer\NlpResponseTransfer;
 
 class NlpGenerator implements NlpGeneratorInterface
 {
-    
+
 
     /**
-     * 
+     *
      */
     public function __construct()
     {
-       
+
     }
 
     /**
      * @param string $text
      * @param string|null $generatorPlugin
-     *
-     * @return \Generated\Shared\Transfer\NlpResponseTransfer
      */
     public function generateNlp(string $text)
     {
@@ -45,7 +43,7 @@ class NlpGenerator implements NlpGeneratorInterface
                 "temperature" => 1,
                 "topP" => 0.95,
             ],
-        
+
         ];
 
         $jsonData = json_encode($data);
@@ -109,18 +107,18 @@ class NlpGenerator implements NlpGeneratorInterface
     public function getData($string, $start, $end) {
         $startPos = strpos($string, $start);
         if ($startPos === false) {
-            return false; 
+            return false;
         }
-    
+
         $startPos += strlen($start);
-    
+
         $endPos = strpos($string, $end, $startPos);
         if ($endPos === false) {
-            return false; 
+            return false;
         }
-    
+
         $length = $endPos - $startPos;
-    
+
         return substr($string, $startPos, $length);
     }
 }

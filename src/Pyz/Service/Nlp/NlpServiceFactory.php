@@ -20,6 +20,4 @@ class NlpServiceFactory extends AbstractServiceFactory
     {
         return new NlpGenerator();
     }
-
-    
 }

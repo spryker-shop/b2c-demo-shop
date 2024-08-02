@@ -15,6 +15,39 @@ use Spryker\Client\SearchElasticsearch\SearchElasticsearchDependencyProvider as 
 class SearchElasticsearchDependencyProvider extends SprykerSearchElasticsearchDependencyProvider
 {
     /**
+     * @var string
+     */
+    public const SERVICE_VERTEX_AI = 'SERVICE_VERTEX_AI';
+
+    /**
+     * @param \Spryker\Client\Kernel\Container $container
+     *
+     * @return \Spryker\Client\Kernel\Container
+     */
+    public function provideServiceLayerDependencies(Container $container): Container
+    {
+        $container = parent::provideServiceLayerDependencies($container);
+
+        $container = $this->addVertexAiService($container);
+
+        return $container;
+    }
+
+    /**
+     * @param \Spryker\Client\Kernel\Container $container
+     *
+     * @return \Spryker\Client\Kernel\Container
+     */
+    protected function addVertexAiService(Container $container): Container
+    {
+        $container->set(static::SERVICE_VERTEX_AI, function (Container $container) {
+            return $container->getLocator()->nlp()->service();
+        });
+
+        return $container;
+    }
+
+    /**
      * @param \Spryker\Client\Kernel\Container $container
      *
      * @return array<\Spryker\Client\SearchExtension\Dependency\Plugin\SearchConfigBuilderPluginInterface>

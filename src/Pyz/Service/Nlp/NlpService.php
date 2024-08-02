@@ -7,11 +7,10 @@
 
 namespace Pyz\Service\Nlp;
 
-use Generated\Shared\Transfer\NlpResponseTransfer;
 use Spryker\Service\Kernel\AbstractService;
 
 /**
- * @method \Spryker\Service\Nlp\NlpServiceFactory getFactory()
+ * @method \Pyz\Service\Nlp\NlpServiceFactory getFactory()
  */
 class NlpService extends AbstractService implements NlpServiceInterface
 {
@@ -22,10 +21,8 @@ class NlpService extends AbstractService implements NlpServiceInterface
      *
      * @param string $text
      * @param string|null $generatorPlugin
-     *
-     * @return \Generated\Shared\Transfer\NlpResponseTransfer
      */
-    public function generateNlp(string $text): NlpResponseTransfer
+    public function generateNlp(string $text): array
     {
         return $this->getFactory()
             ->createNlpGenerator()

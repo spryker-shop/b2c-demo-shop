@@ -14,8 +14,6 @@ interface NlpGeneratorInterface
     /**
      * @param string $text
      * @param string|null $generatorPlugin
-     *
-     * @return \Generated\Shared\Transfer\NlpResponseTransfer
      */
     public function generateNlp(string $text);
 }
