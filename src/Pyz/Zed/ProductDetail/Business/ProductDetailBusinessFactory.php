@@ -13,7 +13,7 @@ use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
  * @method \Pyz\Zed\ProductDetailWidget\Persistence\ProductDetailRepositoryInterface getRepository()
  * @method \Pyz\Zed\ProductDetailWidget\Persistence\ProductDetailEntityManagerInterface getEntityManager()
  */
-class ProductDetailWidgetBusinessFactory extends AbstractBusinessFactory
+class ProductDetailBusinessFactory extends AbstractBusinessFactory
 {
     /**
      * @return \Pyz\Zed\ProductDetailWidget\Business\Manager\ProductDetailManagerInterface

@@ -4,7 +4,7 @@ namespace Pyz\Zed\ProductDetailWidget\Business;
 
 use Generated\Shared\Transfer\ProductAbstractTransfer;
 
-interface ProductDetailWidgetFacadeInterface
+interface ProductDetailFacadeInterface
 {
     /**
      * Specification:
@@ -13,9 +13,9 @@ interface ProductDetailWidgetFacadeInterface
      *
      * @param int $idProductAbstract
      *
-     * @return \Generated\Shared\Transfer\ProductAbstractTransfer|null
+     * @return \Generated\Shared\Transfer\ProductResponseTransfer|null
      *@api
      *
      */
-    public function findProductAbstractById(int $idProductAbstract): ?ProductAbstractTransfer;
+    public function findProductAbstractById(int $idProductAbstract): ?ProductResponseTransfer;
 }

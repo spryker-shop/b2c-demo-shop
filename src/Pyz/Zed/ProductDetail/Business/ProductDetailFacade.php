@@ -11,15 +11,15 @@ use Generated\Shared\Transfer\ProductAbstractTransfer;
 use Spryker\Zed\Kernel\Business\AbstractFacade;
 
 /**
- * @method \Pyz\Zed\ProductDetailWidget\Business\ProductDetailWidgetBusinessFactory getFactory()
+ * @method \Pyz\Zed\ProductDetailWidget\Business\ProductDetailBusinessFactory getFactory()
  * @method \Pyz\Zed\ProductDetailWidget\Persistence\ProductDetailRepositoryInterface getRepository()
  */
-class ProductDetailWidgetFacade extends AbstractFacade implements ProductDetailWidgetFacadeInterface
+class ProductDetailFacade extends AbstractFacade implements ProductDetailFacadeInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function findProductAbstractById(int $idProductAbstract): ?ProductAbstractTransfer
+    public function findProductAbstractById(int $idProductAbstract): ?ProductResponseTransfer
     {
         return $this->getRepository()->findProductAbstractById($idProductAbstract);
     }

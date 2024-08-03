@@ -5,10 +5,15 @@ use Generated\Shared\Transfer\ProductAbstractTransfer;
 use Pyz\Client\ProductDetailWidget\Dependency\Client\ProductDetailWidgetClientInterface;
 use Spryker\Client\Kernel\AbstractClient;
 
-class ProductDetailWidgetClient extends AbstractClient implements ProductDetailWidgetClientInterface
+class ProductDetailClient extends AbstractClient implements ProductDetailWidgetClientInterface
 {
-    public function getProductAbstractData(int $id): ?ProductAbstractTransfer
+    /**
+     * @param string $sku
+     *
+     * @return \Generated\Shared\Transfer\ProductAbstractTransfer|null
+     */
+    public function findProductAbstractBySku(string $sku): ?ProductAbstractTransfer
     {
-        return $this->getFactory()->createProductService()->findProductAbstractById($id);
+        return $this->getFactory()->createProductService()->findProductAbstractBySku($sku);
     }
 }

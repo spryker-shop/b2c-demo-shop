@@ -4,10 +4,10 @@ namespace Pyz\Client\ProductDetailWidget;
 use Pyz\Yves\ProductDetailWidget\ProductDetailWidgetDependencyProvider;
 use Spryker\Client\Kernel\AbstractFactory;
 
-class ProductDetailWidgetFactory extends AbstractFactory
+class ProductDetailFactory extends AbstractFactory
 {
-    public function createProductService(): ProductDetailWidgetServiceInterface
+    public function createProductService(): ProductDetailWidgetClient
     {
-        return $this->getProvidedDependency(ProductDetailWidgetDependencyProvider::SERVICE_PRODUCT);
+        return $this->getProvidedDependency(ProductDetailWidgetDependencyProvider::CLIENT_PRODUCT_DETAIL);
     }
 }
