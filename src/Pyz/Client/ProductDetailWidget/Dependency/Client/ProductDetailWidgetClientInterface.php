@@ -1,9 +1,15 @@
 <?php
+
 namespace Pyz\Client\ProductDetailWidget\Dependency\Client;
 
 use Generated\Shared\Transfer\ProductAbstractTransfer;
 
 interface ProductDetailWidgetClientInterface
 {
-    public function getProductAbstractData(int $id): ?ProductAbstractTransfer;
+    /**
+     * @param string $sku
+     *
+     * @return \Generated\Shared\Transfer\ProductAbstractTransfer|null
+     */
+    public function findProductAbstractBySku(string $sku): ?ProductAbstractTransfer;
 }

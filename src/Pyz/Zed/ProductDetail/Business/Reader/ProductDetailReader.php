@@ -1,24 +1,26 @@
 <?php
 
 
-namespace Pyz\Zed\ProductDetailWidget\Business\Reader;
+namespace Pyz\Zed\ProductDetail\Business\Reader;
 
 use Generated\Shared\Transfer\ProductAbstractTransfer;
-use Pyz\Zed\ProductDetailWidget\Business\Reader\ProductDetailReaderInterface;
+use Generated\Shared\Transfer\ProductResponseTransfer;
+use Pyz\Zed\ProductDetail\Business\Reader\ProductDetailReaderInterface;
+use Pyz\Zed\ProductDetail\Persistence\ProductDetailRepositoryInterface;
 
 class ProductDetailReader implements ProductDetailReaderInterface
 {
     /**
-     * @var \Pyz\Zed\ProductDetailWidget\Business\Reader\ProductDetailReaderInterface
+     * @var \Pyz\Zed\ProductDetail\Business\Reader\ProductDetailReaderInterface
      */
-    protected $productAbstractReader;
+    protected $productDetailReader;
 
     /**
-     * @param \Pyz\Zed\ProductDetailWidget\Business\Reader\ProductDetailReaderInterface $productAbstractReader
+     * @param \Pyz\Zed\ProductDetail\Business\Reader\ProductDetailReaderInterface $productDetailReader
      */
-    public function __construct(ProductDetailReaderInterface $productAbstractReader)
+    public function __construct(ProductDetailRepositoryInterface $productDetailReader)
     {
-        $this->productAbstractReader = $productAbstractReader;
+        $this->productDetailReader = $productDetailReader;
     }
 
     /**
@@ -26,14 +28,14 @@ class ProductDetailReader implements ProductDetailReaderInterface
      *
      * @return \Generated\Shared\Transfer\ProductAbstractTransfer
      */
-    public function findProductAbstractById(ProductAbstractTransfer $productAbstractTransfer): ProductAbstractTransfer
+    public function findProductAbstractBySku(ProductAbstractTransfer $productAbstractTransfer): ProductResponseTransfer
     {
-        $productId = $productAbstractTransfer->getIdProductAbstract();
+        $productId = $productAbstractTransfer->getSku();
         if ($productId === null) {
             throw new \InvalidArgumentException('Product ID cannot be null.');
         }
 
-        $productAbstractTransfer = $this->productAbstractReader->findProductAbstractById($productId);
+        $productAbstractTransfer = $this->productDetailReader->findProductAbstractBySku($productId);
 
         if ($productAbstractTransfer === null) {
             throw new \RuntimeException(sprintf('Product abstract with ID %d not found.', $productId));

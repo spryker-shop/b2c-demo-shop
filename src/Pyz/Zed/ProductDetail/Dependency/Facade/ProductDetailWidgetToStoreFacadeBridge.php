@@ -5,7 +5,7 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace Pyz\Zed\ProductDetailWidget\Dependency\Facade;
+namespace Pyz\Zed\ProductDetail\Dependency\Facade;
 
 use Generated\Shared\Transfer\StoreTransfer;
 use Spryker\Zed\Store\Business\StoreFacadeInterface;

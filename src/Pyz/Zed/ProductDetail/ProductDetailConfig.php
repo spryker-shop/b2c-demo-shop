@@ -5,11 +5,11 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace Pyz\Zed\ProductDetailWidget;
+namespace Pyz\Zed\ProductDetail;
 
 use Spryker\Zed\Kernel\AbstractBundleConfig;
 
-class ProductDetailWidgetConfig extends AbstractBundleConfig
+class ProductDetailConfig extends AbstractBundleConfig
 {
     /**
      * Used as `item_type` for touch mechanism.

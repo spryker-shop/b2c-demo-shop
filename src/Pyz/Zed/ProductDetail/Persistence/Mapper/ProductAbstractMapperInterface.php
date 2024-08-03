@@ -1,6 +1,6 @@
 <?php
 
-namespace Pyz\Zed\ProductDetailWidget\Persistence\Mapper;
+namespace Pyz\Zed\ProductDetail\Persistence\Mapper;
 
 use Generated\Shared\Transfer\ProductAbstractTransfer;
 use Generated\Shared\Transfer\ProductAbstractCollectionTransfer;

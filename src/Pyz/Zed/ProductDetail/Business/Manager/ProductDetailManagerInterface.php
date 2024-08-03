@@ -1,8 +1,9 @@
 <?php
 
-namespace Pyz\Zed\ProductDetailWidget\Business\Manager;
+namespace Pyz\Zed\ProductDetail\Business\Manager;
 
 use Generated\Shared\Transfer\ProductAbstractTransfer;
+use Generated\Shared\Transfer\ProductResponseTransfer;
 
 interface ProductDetailManagerInterface
 {
@@ -11,9 +12,9 @@ interface ProductDetailManagerInterface
      * - Finds a product abstract by its ID.
      * - Returns the ProductAbstractTransfer if found, null otherwise.
      *
-     * @param int $idProductAbstract
+     * @param string $sku
      *
-     * @return \Generated\Shared\Transfer\ProductAbstractTransfer|null
+     * @return \Generated\Shared\Transfer\ProductResponseTransfer|null
      */
-    public function findProductAbstractById(int $idProductAbstract): ?ProductAbstractTransfer;
+    public function findProductAbstractBySku(string $sku): ?ProductResponseTransfer;
 }

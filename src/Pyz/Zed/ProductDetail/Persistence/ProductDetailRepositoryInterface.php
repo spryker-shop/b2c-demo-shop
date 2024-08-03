@@ -5,9 +5,9 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace Pyz\Zed\ProductDetailWidget\Persistence;
+namespace Pyz\Zed\ProductDetail\Persistence;
 
-use Generated\Shared\Transfer\ProductAbstractTransfer;
+use Generated\Shared\Transfer\ProductResponseTransfer;
 
 interface ProductDetailRepositoryInterface
 {
@@ -15,9 +15,9 @@ interface ProductDetailRepositoryInterface
      * Specification:
      * - Finds a product abstract by its ID.
      *
-     * @param int $idProductAbstract
+     * @param string $sku
      *
-     * @return \Generated\Shared\Transfer\ProductAbstractTransfer|null
+     * @return \Generated\Shared\Transfer\ProductResponseTransfer|null
      */
-    public function findProductAbstractById(int $idProductAbstract): ?ProductAbstractTransfer;
+    public function findProductAbstractBySku(string $sku): ?ProductResponseTransfer;
 }

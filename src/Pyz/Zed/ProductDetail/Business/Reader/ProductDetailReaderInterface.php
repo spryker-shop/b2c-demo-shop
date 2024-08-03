@@ -5,9 +5,10 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace Pyz\Zed\ProductDetailWidget\Business\Reader;
+namespace Pyz\Zed\ProductDetail\Business\Reader;
 
 use Generated\Shared\Transfer\ProductAbstractTransfer;
+use Generated\Shared\Transfer\ProductResponseTransfer;
 
 interface ProductDetailReaderInterface
 {
@@ -18,7 +19,7 @@ interface ProductDetailReaderInterface
      *
      * @param \Generated\Shared\Transfer\ProductAbstractTransfer $productAbstractTransfer
      *
-     * @return \Generated\Shared\Transfer\ProductAbstractTransfer
+     * @return \Generated\Shared\Transfer\ProductResponseTransfer
      */
-    public function findProductAbstractById(ProductAbstractTransfer $productAbstractTransfer): ProductAbstractTransfer;
+    public function findProductAbstractBySku(ProductAbstractTransfer $productAbstractTransfer): ProductResponseTransfer;
 }

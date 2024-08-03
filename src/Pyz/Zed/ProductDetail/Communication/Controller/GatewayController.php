@@ -8,7 +8,7 @@ use Spryker\Zed\Kernel\Communication\Controller\AbstractGatewayController;
 /**
  * @method \Pyz\Zed\ProductDetail\Business\ProductDetailFacadeInterface getFacade()
  */
-class ProductDetailController extends AbstractGatewayController
+class GatewayController extends AbstractGatewayController
 {
     /**
      * @param \Generated\Shared\Transfer\ProductAbstractTransfer $productDataTransfer
@@ -17,6 +17,6 @@ class ProductDetailController extends AbstractGatewayController
      */
     public function getProductDetailAction(ProductAbstractTransfer $productDataTransfer): ProductResponseTransfer
     {
-        return $this->getFacade()->findProductAbstractById($productDataTransfer->getIdProductAbstract());
+        return $this->getFacade()->findProductAbstractBySku($productDataTransfer->getSku());
     }
 }

@@ -5,23 +5,24 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace Pyz\Zed\ProductDetailWidget\Business;
+namespace Pyz\Zed\ProductDetail\Business;
 
 use Generated\Shared\Transfer\ProductAbstractTransfer;
+use Generated\Shared\Transfer\ProductResponseTransfer;
 use Spryker\Zed\Kernel\Business\AbstractFacade;
 
 /**
- * @method \Pyz\Zed\ProductDetailWidget\Business\ProductDetailBusinessFactory getFactory()
- * @method \Pyz\Zed\ProductDetailWidget\Persistence\ProductDetailRepositoryInterface getRepository()
+ * @method \Pyz\Zed\ProductDetail\Business\ProductDetailBusinessFactory getFactory()
+ * @method \Pyz\Zed\ProductDetail\Persistence\ProductDetailRepositoryInterface getRepository()
  */
 class ProductDetailFacade extends AbstractFacade implements ProductDetailFacadeInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function findProductAbstractById(int $idProductAbstract): ?ProductResponseTransfer
+    public function findProductAbstractBySku(string $sku): ?ProductResponseTransfer
     {
-        return $this->getRepository()->findProductAbstractById($idProductAbstract);
+        return $this->getRepository()->findProductAbstractBySku($sku);
     }
 
     /**

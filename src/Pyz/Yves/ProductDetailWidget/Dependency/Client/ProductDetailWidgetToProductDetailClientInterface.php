@@ -4,14 +4,14 @@ namespace Pyz\Yves\ProductDetailWidget\Dependency\Client;
 
 use Generated\Shared\Transfer\ProductAbstractTransfer;
 
-interface ProductDetailWidgetToProductClientInterface
+interface ProductDetailWidgetToProductDetailClientInterface
 {
     /**
      * Fetches the product abstract data by its ID.
      *
-     * @param int $idProductAbstract
+     * @param string $sku
      *
      * @return \Generated\Shared\Transfer\ProductAbstractTransfer|null
      */
-    public function findProductAbstractById(int $idProductAbstract): ?ProductAbstractTransfer;
+    public function findProductAbstractBySku(string $sku): ?ProductAbstractTransfer;
 }

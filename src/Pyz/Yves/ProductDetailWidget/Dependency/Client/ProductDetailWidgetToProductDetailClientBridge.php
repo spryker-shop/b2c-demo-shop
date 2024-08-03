@@ -3,29 +3,30 @@
 namespace Pyz\Yves\ProductDetailWidget\Dependency\Client;
 
 use Generated\Shared\Transfer\ProductAbstractTransfer;
+use Pyz\Client\ProductDetailWidget\Dependency\Client\ProductDetailWidgetClientInterface;
 
-class ProductDetailWidgetToProductClientBridge implements ProductDetailWidgetToProductClientInterface
+class ProductDetailWidgetToProductDetailClientBridge implements ProductDetailWidgetToProductDetailClientInterface
 {
     /**
-     * @var \Spryker\Client\Product\ProductClientInterface
+     * @var ProductDetailWidgetClientInterface
      */
-    protected $productClient;
+    protected $productDetailWidgetClient;
 
     /**
-     * @param \Spryker\Client\Product\ProductClientInterface $productClient
+     * @param ProductDetailWidgetClientInterface $productDetailWidgetClient
      */
-    public function __construct($productClient)
+    public function __construct($productDetailWidgetClient)
     {
-        $this->productClient = $productClient;
+        $this->productDetailWidgetClient = $productDetailWidgetClient;
     }
 
     /**
-     * @param int $idProductAbstract
+     * @param string $sku
      *
      * @return \Generated\Shared\Transfer\ProductAbstractTransfer|null
      */
-    public function findProductAbstractById(int $idProductAbstract): ?ProductAbstractTransfer
+    public function findProductAbstractBySku(string $sku): ?ProductAbstractTransfer
     {
-        return $this->productClient->findProductAbstractById($idProductAbstract);
+        return $this->productDetailWidgetClient->findProductAbstractBySku($sku);
     }
 }

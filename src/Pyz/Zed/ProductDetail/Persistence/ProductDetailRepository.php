@@ -1,36 +1,45 @@
 <?php
 
 /**
- * Copyright © [year]-present Spryker Systems GmbH. All rights reserved.
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * (c) Spryker Systems GmbH copyright protected
  */
 
-namespace Pyz\Zed\ProductDetailWidget\Persistence;
+namespace Pyz\Zed\ProductDetail\Persistence;
 
 use Generated\Shared\Transfer\ProductAbstractTransfer;
+use Generated\Shared\Transfer\ProductResponseTransfer;
 use Spryker\Zed\Kernel\Persistence\AbstractRepository;
 
 /**
- * @method \Pyz\Zed\ProductDetailWidget\Persistence\ProductDetailPersistenceFactory getFactory()
+ * @method \Pyz\Zed\ProductDetail\Persistence\ProductDetailPersistenceFactory getFactory()
  */
 class ProductDetailRepository extends AbstractRepository implements ProductDetailRepositoryInterface
 {
     /**
-     * @param int $idProductAbstract
+     * @param string $sku
      *
-     * @return \Generated\Shared\Transfer\ProductAbstractTransfer|null
+     * @return \Generated\Shared\Transfer\ProductResponseTransfer
      */
-    public function findProductAbstractById(int $idProductAbstract): ?ProductAbstractTransfer
+    public function findProductAbstractBySku(string $sku): ProductResponseTransfer
     {
-        /** @var \Orm\Zed\Product\Persistence\SpyProductAbstract $productEntity */
+        /** @var \Orm\Zed\Product\Persistence\SpyProductAbstract|null $productEntity */
         $productEntity = $this->getFactory()->createProductAbstractQuery()
-            ->filterByIdProductAbstract($idProductAbstract)
+//            ->filterBySku($sku)  ToDo: uncomment and debug
             ->findOne();
 
-        if (!$productEntity) {
-            return null;
+        $productResponseTransfer = new ProductResponseTransfer();
+
+        if ($productEntity) {
+            $productAbstractTransfer = $this->getFactory()->createProductAbstractMapper()
+                ->mapEntityToProductAbstractTransfer($productEntity, new ProductAbstractTransfer());
+
+            $productResponseTransfer->setProductAbstract($productAbstractTransfer);
+            $productResponseTransfer->setIsSuccess(true);
+        } else {
+            $productResponseTransfer->setIsSuccess(false);
+            $productResponseTransfer->setMessage('Product not found');
         }
 
-        return $this->getFactory()->createProductAbstractMapper()->mapEntityToProductAbstractTransfer($productEntity, new ProductAbstractTransfer());
+        return $productResponseTransfer;
     }
 }

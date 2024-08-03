@@ -1,8 +1,9 @@
 <?php
 
-namespace Pyz\Zed\ProductDetailWidget\Business;
+namespace Pyz\Zed\ProductDetail\Business;
 
 use Generated\Shared\Transfer\ProductAbstractTransfer;
+use Generated\Shared\Transfer\ProductResponseTransfer;
 
 interface ProductDetailFacadeInterface
 {
@@ -11,11 +12,11 @@ interface ProductDetailFacadeInterface
      * - Finds a book entity by ID.
      * - Returns null if the book entity does not exist.
      *
-     * @param int $idProductAbstract
+     * @param string $sku
      *
      * @return \Generated\Shared\Transfer\ProductResponseTransfer|null
      *@api
      *
      */
-    public function findProductAbstractById(int $idProductAbstract): ?ProductResponseTransfer;
+    public function findProductAbstractBySku(string $sku): ?ProductResponseTransfer;
 }

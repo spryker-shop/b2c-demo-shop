@@ -5,7 +5,7 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace Pyz\Zed\ProductDetailWidget\Business\Exception;
+namespace Pyz\Zed\ProductDetail\Business\Exception;
 
 use Exception;
 

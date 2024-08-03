@@ -4,7 +4,7 @@ namespace Pyz\Client\ProductDetailWidget;
 
 use Generated\Shared\Transfer\ProductAbstractTransfer;
 
-interface ProductDetailServiceInterface
+interface ProductDetailWidgetServiceInterface
 {
     /**
      * Fetches a product abstract by its ID.

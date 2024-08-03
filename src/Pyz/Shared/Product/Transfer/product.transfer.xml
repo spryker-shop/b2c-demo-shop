@@ -6,4 +6,17 @@
         <property name="storeName" type="string"/>
     </transfer>
 
+    <transfer name="ProductAbstract">
+        <property name="idProductAbstract" type="int"/>
+        <property name="productAbstractSku" type="string"/>
+        <property name="createdAt" type="string"/> <!-- DateTime in string format -->
+        <property name="updatedAt" type="string"/> <!-- DateTime in string format -->
+    </transfer>
+
+    <transfer name="ProductResponse">
+        <property name="productAbstract" type="ProductAbstract"/>
+        <property name="isSuccess" type="bool"/>
+        <property name="message" type="string"/>
+    </transfer>
+
 </transfers>

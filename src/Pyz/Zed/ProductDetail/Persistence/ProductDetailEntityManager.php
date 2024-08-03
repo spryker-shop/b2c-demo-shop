@@ -5,15 +5,15 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace Pyz\Zed\ProductDetailWidget\Persistence;
+namespace Pyz\Zed\ProductDetail\Persistence;
 
 use Generated\Shared\Transfer\ProductAbstractTransfer;
-use Orm\Zed\Product\Persistence\SpyProductAbstract;
-use Pyz\Zed\ProductDetailWidget\Persistence\ProductDetailEntityManagerInterface;
+use Orm\Zed\Product\Persistence\SpyProductAbstractQuery;
+use Pyz\Zed\ProductDetail\Persistence\ProductDetailEntityManagerInterface;
 use Spryker\Zed\Kernel\Persistence\AbstractEntityManager;
 
 /**
- * @method \Pyz\Zed\ProductDetailWidget\Persistence\ProductDetailPersistenceFactory getFactory()
+ * @method \Pyz\Zed\ProductDetail\Persistence\ProductDetailPersistenceFactory getFactory()
  */
 class ProductDetailEntityManager extends AbstractEntityManager implements ProductDetailEntityManagerInterface
 {
@@ -28,7 +28,7 @@ class ProductDetailEntityManager extends AbstractEntityManager implements Produc
     {
         $spyProductAbstract = $this->getFactory()
             ->createProductAbstractQuery()
-            ->filterByIdProductAbstract($productAbstractTransfer->getIdProductAbstract())
+            ->filterBySku($productAbstractTransfer->getSku())
             ->findOneOrCreate();
 
         $spyProductAbstract = $this->getFactory()
@@ -37,6 +37,30 @@ class ProductDetailEntityManager extends AbstractEntityManager implements Produc
 
         $spyProductAbstract->save();
 
+        $productAbstractTransfer->fromArray($spyProductAbstract->toArray(), true);
+
+        return $productAbstractTransfer;
+    }
+
+    /**
+     * Finds a product by its ID.
+     *
+     * @param int $idProductAbstract
+     *
+     * @return \Generated\Shared\Transfer\ProductAbstractTransfer|null
+     */
+    public function findProductById(int $idProductAbstract): ?ProductAbstractTransfer
+    {
+        $spyProductAbstract = $this->getFactory()
+            ->createProductAbstractQuery()
+            ->filterByIdProductAbstract($idProductAbstract)
+            ->findOne();
+
+        if ($spyProductAbstract === null) {
+            return null;
+        }
+
+        $productAbstractTransfer = new ProductAbstractTransfer();
         $productAbstractTransfer->fromArray($spyProductAbstract->toArray(), true);
 
         return $productAbstractTransfer;

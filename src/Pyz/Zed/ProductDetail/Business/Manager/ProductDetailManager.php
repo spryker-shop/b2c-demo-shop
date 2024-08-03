@@ -5,27 +5,28 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace Pyz\Zed\ProductDetailWidget\Business\Manager;
+namespace Pyz\Zed\ProductDetail\Business\Manager;
 
 use Generated\Shared\Transfer\ProductAbstractTransfer;
-use Pyz\Zed\ProductDetailWidget\Persistence\ProductDetailEntityManagerInterface;
-use Pyz\Zed\ProductDetailWidget\Persistence\ProductDetailRepositoryInterface;
+use Generated\Shared\Transfer\ProductResponseTransfer;
+use Pyz\Zed\ProductDetail\Persistence\ProductDetailEntityManagerInterface;
+use Pyz\Zed\ProductDetail\Persistence\ProductDetailRepositoryInterface;
 
 class ProductDetailManager implements ProductDetailManagerInterface
 {
     /**
-     * @var \Pyz\Zed\ProductDetailWidget\Persistence\ProductDetailRepositoryInterface
+     * @var \Pyz\Zed\ProductDetail\Persistence\ProductDetailRepositoryInterface
      */
     protected $productDetailRepository;
 
     /**
-     * @var \Pyz\Zed\ProductDetailWidget\Persistence\ProductDetailEntityManagerInterface
+     * @var \Pyz\Zed\ProductDetail\Persistence\ProductDetailEntityManagerInterface
      */
     protected $productDetailEntityManager;
 
     /**
-     * @param \Pyz\Zed\ProductDetailWidget\Persistence\ProductDetailRepositoryInterface $productDetailRepository
-     * @param \Pyz\Zed\ProductDetailWidget\Persistence\ProductDetailEntityManagerInterface $productDetailEntityManager
+     * @param \Pyz\Zed\ProductDetail\Persistence\ProductDetailRepositoryInterface $productDetailRepository
+     * @param \Pyz\Zed\ProductDetail\Persistence\ProductDetailEntityManagerInterface $productDetailEntityManager
      */
     public function __construct(
         ProductDetailRepositoryInterface $productDetailRepository,
@@ -38,8 +39,8 @@ class ProductDetailManager implements ProductDetailManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function findProductAbstractById(int $idProductAbstract): ?ProductAbstractTransfer
+    public function findProductAbstractBySku(string $sku): ?ProductResponseTransfer
     {
-        return $this->productDetailRepository->findProductAbstractById($idProductAbstract);
+        return $this->productDetailRepository->findProductAbstractBySku($sku);
     }
 }

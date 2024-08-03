@@ -5,37 +5,48 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace Spryker\Client\Quote\Zed;
+namespace Pyz\Client\ProductDetailWidget\Stub;
 
-use Generated\Shared\Transfer\QuoteResponseTransfer;
-use Generated\Shared\Transfer\QuoteTransfer;
+use Generated\Shared\Transfer\ProductAbstractTransfer;
+use Generated\Shared\Transfer\ProductDataTransfer;
+use Generated\Shared\Transfer\ProductResponseTransfer;
 use Spryker\Client\ZedRequest\ZedRequestClientInterface;
 
-class QuoteStub implements QuoteStubInterface
+class ZedStub implements ZedStubInterface
 {
     /**
      * @var \Spryker\Client\ZedRequest\ZedRequestClientInterface
      */
-    protected $zedStub;
+    protected $zedRequestClient;
 
     /**
-     * @param \Spryker\Client\ZedRequest\ZedRequestClientInterface $zedStub
+     * @param \Spryker\Client\ZedRequest\ZedRequestClientInterface $zedRequestClient
      */
-    public function __construct(ZedRequestClientInterface $zedStub)
+    public function __construct(ZedRequestClientInterface $zedRequestClient)
     {
-        $this->zedStub = $zedStub;
+        $this->zedRequestClient = $zedRequestClient;
     }
 
     /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param string $sku
      *
-     * @return \Generated\Shared\Transfer\QuoteResponseTransfer
+     * @return ProductResponseTransfer
      */
-    public function deleteQuote(QuoteTransfer $quoteTransfer): QuoteResponseTransfer
+    /**
+     * @param string $sku
+     *
+     * @return \Generated\Shared\Transfer\ProductResponseTransfer
+     */
+    public function findProductAbstractBySku(string $sku): ProductResponseTransfer
     {
-        /** @var \Generated\Shared\Transfer\QuoteResponseTransfer $quoteResponseTransfer */
-        $quoteResponseTransfer = $this->zedStub->call('/quote/gateway/delete-quote', $quoteTransfer);
+        // Create a new Transfer object for the request
+        $productDataTransfer = new ProductAbstractTransfer();
+        $productDataTransfer->setSku($sku);
 
-        return $quoteResponseTransfer;
+        // Make the Zed request
+        /** @var \Generated\Shared\Transfer\ProductResponseTransfer $productResponseTransfer */
+        $productResponseTransfer = $this->zedRequestClient->call('/product-detail/gateway/get-product-detail', $productDataTransfer);
+
+        return $productResponseTransfer;
     }
 }

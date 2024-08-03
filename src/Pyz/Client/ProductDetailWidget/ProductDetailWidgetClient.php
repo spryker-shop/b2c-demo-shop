@@ -5,7 +5,7 @@ use Generated\Shared\Transfer\ProductAbstractTransfer;
 use Pyz\Client\ProductDetailWidget\Dependency\Client\ProductDetailWidgetClientInterface;
 use Spryker\Client\Kernel\AbstractClient;
 
-class ProductDetailClient extends AbstractClient implements ProductDetailWidgetClientInterface
+class ProductDetailWidgetClient  extends AbstractClient implements ProductDetailWidgetClientInterface
 {
     /**
      * @param string $sku
@@ -14,6 +14,6 @@ class ProductDetailClient extends AbstractClient implements ProductDetailWidgetC
      */
     public function findProductAbstractBySku(string $sku): ?ProductAbstractTransfer
     {
-        return $this->getFactory()->createProductService()->findProductAbstractBySku($sku);
+        return $this->getFactory()->createZedStub()->findProductAbstractBySku($sku);
     }
 }

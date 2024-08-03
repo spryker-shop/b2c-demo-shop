@@ -1,13 +1,21 @@
 <?php
 namespace Pyz\Client\ProductDetailWidget;
 
+use Pyz\Client\ProductDetailWidget\Stub\ZedStub;
 use Pyz\Yves\ProductDetailWidget\ProductDetailWidgetDependencyProvider;
 use Spryker\Client\Kernel\AbstractFactory;
 
-class ProductDetailFactory extends AbstractFactory
+class ProductDetailWidgetFactory extends AbstractFactory
 {
-    public function createProductService(): ProductDetailWidgetClient
+    /**
+     */
+    public function createZedStub(): ZedStub
     {
-        return $this->getProvidedDependency(ProductDetailWidgetDependencyProvider::CLIENT_PRODUCT_DETAIL);
+        return new ZedStub($this->getZedService());
+    }
+
+    public function getZedService()
+    {
+        return $this->getProvidedDependency(ProductDetailWidgetDependencyProvider::SERVICE_ZED);
     }
 }

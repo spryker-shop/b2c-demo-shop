@@ -1,22 +1,22 @@
 <?php
 
-namespace Pyz\Zed\ProductDetailWidget\Business;
+namespace Pyz\Zed\ProductDetail\Business;
 
-use Pyz\Zed\ProductDetailWidget\Business\Manager\ProductDetailManager;
-use Pyz\Zed\ProductDetailWidget\Business\Manager\ProductDetailManagerInterface;
-use Pyz\Zed\ProductDetailWidget\Business\Reader\ProductDetailReader;
-use Pyz\Zed\ProductDetailWidget\Business\Reader\ProductDetailReaderInterface;
+use Pyz\Zed\ProductDetail\Business\Manager\ProductDetailManager;
+use Pyz\Zed\ProductDetail\Business\Manager\ProductDetailManagerInterface;
+use Pyz\Zed\ProductDetail\Business\Reader\ProductDetailReader;
+use Pyz\Zed\ProductDetail\Business\Reader\ProductDetailReaderInterface;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 
 /**
- * @method \Pyz\Zed\ProductDetailWidget\ProductDetailWidgetConfig getConfig()
- * @method \Pyz\Zed\ProductDetailWidget\Persistence\ProductDetailRepositoryInterface getRepository()
- * @method \Pyz\Zed\ProductDetailWidget\Persistence\ProductDetailEntityManagerInterface getEntityManager()
+ * @method \Pyz\Zed\ProductDetail\ProductDetailConfig getConfig()
+ * @method \Pyz\Zed\ProductDetail\Persistence\ProductDetailRepositoryInterface getRepository()
+ * @method \Pyz\Zed\ProductDetail\Persistence\ProductDetailEntityManagerInterface getEntityManager()
  */
 class ProductDetailBusinessFactory extends AbstractBusinessFactory
 {
     /**
-     * @return \Pyz\Zed\ProductDetailWidget\Business\Manager\ProductDetailManagerInterface
+     * @return \Pyz\Zed\ProductDetail\Business\Manager\ProductDetailManagerInterface
      */
     public function createProductDetailManager(): ProductDetailManagerInterface
     {
@@ -27,7 +27,7 @@ class ProductDetailBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \Pyz\Zed\ProductDetailWidget\Business\Reader\ProductDetailReaderInterface
+     * @return \Pyz\Zed\ProductDetail\Business\Reader\ProductDetailReaderInterface
      */
     public function createProductDetailReader(): ProductDetailReaderInterface
     {

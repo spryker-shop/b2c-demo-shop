@@ -1,21 +1,17 @@
 <?php
 
-/**
- * Copyright © 2016-present Spryker Systems GmbH. All rights reserved.
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
- */
+namespace Pyz\Client\ProductDetailWidget\Stub;
 
-namespace Spryker\Client\Quote\Zed;
+use Generated\Shared\Transfer\ProductDataTransfer;
+use Generated\Shared\Transfer\ProductResponseTransfer;
 
-use Generated\Shared\Transfer\QuoteResponseTransfer;
-use Generated\Shared\Transfer\QuoteTransfer;
-
-interface QuoteStubInterface
+interface ZedStubInterface
 {
     /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param string $sku
      *
-     * @return \Generated\Shared\Transfer\QuoteResponseTransfer
+     * @return ProductResponseTransfer
      */
-    public function deleteQuote(QuoteTransfer $quoteTransfer): QuoteResponseTransfer;
+    public function findProductAbstractBySku(string $sku): ProductResponseTransfer;
 }
+
