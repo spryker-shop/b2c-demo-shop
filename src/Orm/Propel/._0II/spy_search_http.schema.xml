@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<database xmlns="spryker:schema-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\SearchHttp\Persistence" package="src.Orm.Zed.SearchHttp.Persistence">
+
+    <table name="spy_search_http_config" identifierQuoting="true">
+        <column name="id_search_http_config" type="BIGINT" autoIncrement="true" primaryKey="true"/>
+        <id-method-parameter value="spy_search_http_config_pk_seq"/>
+        <column name="store" type="VARCHAR" size="255" required="true"/>
+        <unique name="spy_search_http_config-store_unique">
+            <unique-column name="store"/>
+        </unique>
+        <behavior name="synchronization">
+            <parameter name="resource" value="search_http_config"/>
+            <parameter name="queue_group" value="sync.http.search.config"/>
+            <parameter name="store" required="true"/>
+        </behavior>
+
+        <behavior name="timestampable"/>
+    </table>
+
+</database>

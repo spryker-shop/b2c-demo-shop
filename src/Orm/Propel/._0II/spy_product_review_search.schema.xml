@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<database xmlns="spryker:schema-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\ProductReviewSearch\Persistence" package="src.Orm.Zed.ProductReviewSearch.Persistence">
+    <table name="spy_product_review_search" identifierQuoting="true">
+        <column name="id_product_review_search" type="BIGINT" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_product_review" type="INTEGER" required="true"/>
+        <column name="structured_data" type="LONGVARCHAR" required="true"/>
+        <index name="spy_product_review_search-fk_product_review">
+            <index-column name="fk_product_review"/>
+        </index>
+        <id-method-parameter value="spy_product_review_search_pk_seq"/>
+        <behavior name="synchronization">
+            <parameter name="resource" value="product_review"/>
+            <parameter name="key_suffix_column" value="fk_product_review"/>
+            <parameter name="queue_group" value="sync.search.product"/>
+            <parameter name="params" value="{&quot;type&quot;:&quot;product-review&quot;}"/>
+            <parameter name="queue_pool" value="synchronizationPool"/>
+        </behavior>
+        <behavior name="timestampable"/>
+    </table>
+</database>

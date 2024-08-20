@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<database xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:noNamespaceSchemaLocation="http://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\StockAddress\Persistence" package="src.Orm.Zed.StockAddress.Persistence">
+
+    <table name="spy_stock_address" idMethod="native">
+        <column name="id_stock_address" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_stock" type="INTEGER" required="true"/>
+        <column name="fk_country" type="INTEGER" required="true"/>
+        <column name="fk_region" type="INTEGER"/>
+        <column name="address1" size="255" type="VARCHAR" required="true"/>
+        <column name="address2" size="255" type="VARCHAR"/>
+        <column name="address3" size="255" type="VARCHAR"/>
+        <column name="city" size="255" type="VARCHAR" required="true"/>
+        <column name="zip_code" size="15" type="VARCHAR" required="true"/>
+        <column name="phone" size="255" type="VARCHAR"/>
+        <column name="comment" size="255" type="VARCHAR"/>
+
+        <index name="index-spy_stock_address-fk_stock">
+            <index-column name="fk_stock"/>
+        </index>
+
+        <index name="index-spy_stock_address-fk_country">
+            <index-column name="fk_country"/>
+        </index>
+
+        <index name="index-spy_stock_address-fk_region">
+            <index-column name="fk_region"/>
+        </index>
+
+        <foreign-key name="spy_stock_address-fk_stock" foreignTable="spy_stock" phpName="Stock" refPhpName="StockAddress">
+            <reference local="fk_stock" foreign="id_stock"/>
+        </foreign-key>
+
+        <foreign-key name="spy_stock_address-fk_country" foreignTable="spy_country" phpName="Country" refPhpName="StockAddress">
+            <reference local="fk_country" foreign="id_country"/>
+        </foreign-key>
+
+        <foreign-key name="spy_stock_address-fk_region" foreignTable="spy_region" phpName="Region" refPhpName="StockAddress">
+            <reference local="fk_region" foreign="id_region"/>
+        </foreign-key>
+
+        <id-method-parameter value="spy_stock_address_pk_seq"/>
+    </table>
+
+</database>

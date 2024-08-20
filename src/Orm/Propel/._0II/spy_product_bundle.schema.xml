@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<database xmlns="spryker:schema-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\ProductBundle\Persistence" package="src.Orm.Zed.ProductBundle.Persistence">
+    <table name="spy_sales_order_item_bundle">
+        <column name="id_sales_order_item_bundle" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="cart_note" required="false" size="255" type="VARCHAR"/>
+        <column name="gross_price" type="INTEGER" required="true"/>
+        <column name="image" type="LONGVARCHAR"/>
+        <column name="name" type="VARCHAR" size="255" required="true"/>
+        <column name="net_price" type="INTEGER" required="false" default="0"/>
+        <column name="price" type="INTEGER" required="false" default="0"/>
+        <column name="sku" type="VARCHAR" size="255" required="true"/>
+        <id-method-parameter value="spy_sales_order_item_bundle_pk_seq"/>
+        <behavior name="timestampable"/>
+    </table>
+    <table name="spy_product_bundle" idMethod="native" allowPkInsert="true">
+        <column name="id_product_bundle" type="INTEGER" primaryKey="true" autoIncrement="true"/>
+        <column name="fk_bundled_product" type="INTEGER" required="true" description="Representation of the single item in this bundle"/>
+        <column name="fk_product" type="INTEGER" required="true" description="Relation to the main bundle product"/>
+        <column name="quantity" required="true" type="INTEGER" default="1" description="Number of items bundled. For instance when you have 5000 equal items you will have quantity 5000"/>
+        <foreign-key name="spy_product_bundle-fk_bundled_product" foreignTable="spy_product" onDelete="CASCADE" onUpdate="CASCADE">
+            <reference local="fk_bundled_product" foreign="id_product"/>
+        </foreign-key>
+        <foreign-key name="spy_product_bundle-fk_product" foreignTable="spy_product" onDelete="CASCADE" onUpdate="CASCADE">
+            <reference local="fk_product" foreign="id_product"/>
+        </foreign-key>
+        <index name="spy_product_bundle-index-fk_product">
+            <index-column name="fk_product"/>
+        </index>
+        <index name="index-spy_product_bundle-fk_bundled_product">
+            <index-column name="fk_bundled_product"/>
+        </index>
+        <id-method-parameter value="spy_product_bundle_pk_seq"/>
+        <behavior name="timestampable"/>
+        <behavior name="event">
+            <parameter name="spy_product_bundle_all" column="*"/>
+        </behavior>
+    </table>
+</database>

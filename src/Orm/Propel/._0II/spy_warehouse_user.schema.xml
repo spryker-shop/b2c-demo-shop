@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<database xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:noNamespaceSchemaLocation="http://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\WarehouseUser\Persistence" package="src.Orm.Zed.WarehouseUser.Persistence">
+
+    <table name="spy_warehouse_user_assignment">
+        <column name="id_warehouse_user_assignment" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="uuid" required="false" type="VARCHAR" size="255"/>
+        <column name="fk_warehouse" type="INTEGER" required="true"/>
+        <column name="user_uuid" required="true" type="VARCHAR" size="255"/>
+        <column name="is_active" required="true" type="BOOLEAN" default="false"/>
+
+        <unique name="spy_warehouse_user_assignment-unique-uuid">
+            <unique-column name="uuid"/>
+        </unique>
+
+        <index name="spy_warehouse_user_assignment-fk_warehouse">
+            <index-column name="fk_warehouse"/>
+        </index>
+
+        <unique name="spy_warehouse_user_assignment-unique-fk_w-u">
+            <unique-column name="fk_warehouse"/>
+            <unique-column name="user_uuid"/>
+        </unique>
+
+        <foreign-key name="spy_warehouse_user_assignment-fk_w" foreignTable="spy_stock">
+            <reference foreign="id_stock" local="fk_warehouse"/>
+        </foreign-key>
+
+        <behavior name="uuid">
+            <parameter name="key_columns" value="id_warehouse_user_assignment.fk_warehouse.user_uuid"/>
+        </behavior>
+
+        <id-method-parameter value="spy_warehouse_user_assignment_pk_seq"/>
+        <behavior name="timestampable"/>
+    </table>
+
+</database>

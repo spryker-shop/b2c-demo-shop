@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<database xmlns="spryker:schema-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\SalesReclamation\Persistence" package="src.Orm.Zed.SalesReclamation.Persistence">
+    <table name="spy_sales_reclamation">
+        <column name="id_sales_reclamation" type="INTEGER" required="true" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_sales_order" type="INTEGER" required="true"/>
+        <column name="customer_email" size="255" type="VARCHAR" required="true"/>
+        <column name="customer_name" size="511" type="VARCHAR" required="true"/>
+        <column name="customer_reference" size="255" type="VARCHAR" required="false"/>
+        <column name="is_open" type="BOOLEAN" required="true"/>
+        <foreign-key name="spy_sales_reclamation-fk_sales_order" foreignTable="spy_sales_order" phpName="Order" refPhpName="Reclamation">
+            <reference local="fk_sales_order" foreign="id_sales_order"/>
+        </foreign-key>
+        <index name="index-spy_sales_reclamation-fk_sales_order">
+            <index-column name="fk_sales_order"/>
+        </index>
+        <id-method-parameter value="spy_sales_reclamation_pk_seq"/>
+        <behavior name="timestampable"/>
+    </table>
+    <table name="spy_sales_reclamation_item">
+        <column name="id_sales_reclamation_item" type="INTEGER" required="true" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_sales_order_item" type="INTEGER" required="true"/>
+        <column name="fk_sales_reclamation" type="INTEGER" required="true"/>
+        <foreign-key name="spy_sales_reclamation_item-fk_sales_reclamation" foreignTable="spy_sales_reclamation">
+            <reference local="fk_sales_reclamation" foreign="id_sales_reclamation"/>
+        </foreign-key>
+        <foreign-key name="spy_sales_reclamation_item-fk_sales_order_item" foreignTable="spy_sales_order_item" phpName="OrderItem" refPhpName="ReclamationItem">
+            <reference local="fk_sales_order_item" foreign="id_sales_order_item"/>
+        </foreign-key>
+        <index name="index-spy_sales_reclamation_item-fk_sales_reclamation">
+            <index-column name="fk_sales_reclamation"/>
+        </index>
+        <index name="index-spy_sales_reclamation_item-fk_sales_order_item">
+            <index-column name="fk_sales_order_item"/>
+        </index>
+        <id-method-parameter value="spy_sales_reclamation_item_pk_seq"/>
+    </table>
+</database>

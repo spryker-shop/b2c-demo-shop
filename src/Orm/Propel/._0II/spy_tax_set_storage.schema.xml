@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<database xmlns="spryker:schema-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\TaxStorage\Persistence" package="src.Orm.Zed.TaxStorage.Persistence">
+    <table name="spy_tax_set_storage" identifierQuoting="true">
+        <column name="id_tax_set_storage" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_tax_set" type="INTEGER" required="true"/>
+        <column name="data" type="LONGVARCHAR" required="false"/>
+        <index name="spy_tax_set_storage-fk_tax_set">
+            <index-column name="fk_tax_set"/>
+        </index>
+        <id-method-parameter value="id_tax_set_storage_pk_seq"/>
+        <behavior name="synchronization">
+            <parameter name="resource" value="tax_set"/>
+            <parameter name="key_suffix_column" value="fk_tax_set"/>
+            <parameter name="queue_group" value="sync.storage.tax_set"/>
+            <parameter name="queue_pool" value="synchronizationPool"/>
+        </behavior>
+        <behavior name="timestampable"/>
+    </table>
+</database>

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<database xmlns="spryker:schema-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\TaxApp\Persistence" package="src.Orm.Zed.TaxApp.Persistence">
+
+    <table name="spy_tax_app_config" identifierQuoting="true">
+        <column name="id_tax_app_config" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <id-method-parameter value="spy_tax_app_config_pk_seq"/>
+        <column name="fk_store" required="false" type="INTEGER"/>
+        <column name="application_id" required="true" type="VARCHAR" size="255"/>
+        <column name="is_active" required="true" type="BOOLEAN" default="TRUE"/>
+        <column name="vendor_code" required="true" type="VARCHAR" size="255"/>
+        <column name="api_urls" description="API URLs JSON-encoded object" required="true" type="LONGVARCHAR"/>
+
+        <behavior name="timestampable"/>
+    </table>
+
+</database>

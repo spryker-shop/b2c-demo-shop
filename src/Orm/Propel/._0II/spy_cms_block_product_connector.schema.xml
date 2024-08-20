@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<database xmlns="spryker:schema-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\CmsBlockProductConnector\Persistence" package="src.Orm.Zed.CmsBlockProductConnector.Persistence">
+    <table name="spy_cms_block_product_connector">
+        <column name="id_cms_block_product_connector" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_cms_block" type="INTEGER" required="true"/>
+        <column name="fk_product_abstract" type="INTEGER" required="true"/>
+
+        <foreign-key name="spy_cms_block_product_connector-fk_cms_block" foreignTable="spy_cms_block" phpName="CmsBlock" onDelete="CASCADE">
+            <reference foreign="id_cms_block" local="fk_cms_block"/>
+        </foreign-key>
+
+        <foreign-key name="spy_cms_block_product_connector-fk_product_abstract" foreignTable="spy_product_abstract" phpName="ProductAbstract" onDelete="CASCADE">
+            <reference foreign="id_product_abstract" local="fk_product_abstract"/>
+        </foreign-key>
+
+        <index name="spy_cms_block_product_connector-fk_cms_block">
+            <index-column name="fk_cms_block"/>
+        </index>
+
+        <index name="spy_cms_block_product_connector-fk_product_abstract">
+            <index-column name="fk_product_abstract"/>
+        </index>
+
+        <id-method-parameter value="spy_cms_block_product_connector_pk_seq"/>
+    </table>
+</database>

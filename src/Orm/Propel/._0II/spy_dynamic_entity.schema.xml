@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<database xmlns="spryker:schema-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\DynamicEntity\Persistence" package="src.Orm.Zed.DynamicEntity.Persistence">
+
+    <table name="spy_dynamic_entity_configuration" idMethod="native">
+        <column name="id_dynamic_entity_configuration" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="table_alias" required="true" size="255" type="VARCHAR"/>
+        <column name="table_name" required="true" size="255" type="VARCHAR"/>
+        <column name="is_active" required="true" type="BOOLEAN" defaultValue="false"/>
+        <column name="definition" required="true" type="LONGVARCHAR"/>
+        <column name="type" size="255" type="VARCHAR"/>
+
+        <id-method-parameter value="spy_dynamic_entity_configuration_pk_seq"/>
+        <unique name="spy_dynamic_entity_configuration-unique-table_alias-type">
+            <unique-column name="table_alias"/>
+            <unique-column name="type"/>
+        </unique>
+        <unique name="spy_dynamic_entity_configuration-unique-table_name-type">
+            <unique-column name="table_name"/>
+            <unique-column name="type"/>
+        </unique>
+        <behavior name="timestampable"/>
+    </table>
+
+    <table name="spy_dynamic_entity_configuration_relation" idMethod="native">
+        <column name="id_dynamic_entity_configuration_relation" required="true" type="INTEGER" primaryKey="true" autoIncrement="true"/>
+        <column name="fk_parent_dynamic_entity_configuration" required="true" type="INTEGER"/>
+        <column name="fk_child_dynamic_entity_configuration" required="true" type="INTEGER"/>
+        <column name="name" required="true" size="255" type="VARCHAR"/>
+        <column name="is_editable" required="true" type="BOOLEAN"/>
+
+        <id-method-parameter value="spy_dynamic_entity_configuration_relation_pk_seq"/>
+        <foreign-key name="parent-spy_dynamic_entity_configuration" foreignTable="spy_dynamic_entity_configuration">
+            <reference local="fk_parent_dynamic_entity_configuration" foreign="id_dynamic_entity_configuration"/>
+        </foreign-key>
+        <foreign-key name="child-spy_dynamic_entity_configuration" foreignTable="spy_dynamic_entity_configuration">
+            <reference local="fk_child_dynamic_entity_configuration" foreign="id_dynamic_entity_configuration"/>
+        </foreign-key>
+    </table>
+
+    <table name="spy_dynamic_entity_configuration_relation_field_mapping" idMethod="native">
+        <column name="id_dynamic_entity_configuration_relation_field_mapping" required="true" type="INTEGER" primaryKey="true" autoIncrement="true"/>
+        <column name="fk_dynamic_entity_configuration_relation" required="true" type="INTEGER"/>
+        <column name="child_field_name" required="true" size="255" type="VARCHAR"/>
+        <column name="parent_field_name" required="true" size="255" type="VARCHAR"/>
+
+        <id-method-parameter value="spy_dynamic_entity_configuration_relation_field_mapping_pk_seq"/>
+        <foreign-key name="fk_dynamic_entity_configuration_relation" foreignTable="spy_dynamic_entity_configuration_relation">
+            <reference local="fk_dynamic_entity_configuration_relation" foreign="id_dynamic_entity_configuration_relation"/>
+        </foreign-key>
+    </table>
+</database>

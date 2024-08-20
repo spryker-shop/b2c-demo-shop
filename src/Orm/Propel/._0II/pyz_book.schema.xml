@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<database xmlns="spryker:schema-01"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          name="zed"
+          xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd"
+          namespace="Orm\Zed\Book\Persistence"
+          package="src.Orm.Zed.Book.Persistence">
+
+    <table name="pyz_book">
+        <!-- Behaviors -->
+        <behavior name="timestampable">
+            <parameter name="create_column" value="created_at"/>
+            <parameter name="update_column" value="updated_at"/>
+            <parameter name="disable_created_at" value="false"/>
+            <parameter name="disable_updated_at" value="false"/>
+        </behavior>
+
+        <behavior name="event"/>
+
+        <!-- Columns -->
+        <column name="id_book" type="INTEGER" required="true" primaryKey="true" autoIncrement="true"/>
+        <column name="name" type="VARCHAR" size="255" required="true"/>
+        <column name="description" type="LONGVARCHAR"/>
+        <column name="publication_date" type="TIMESTAMP"/>
+
+        <!-- Indices -->
+        <index name="idx_pyz_book_name">
+            <index-column name="name"/>
+        </index>
+    </table>
+
+</database>

@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<database xmlns="spryker:schema-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\ProductRelation\Persistence" package="src.Orm.Zed.ProductRelation.Persistence">
+    <table name="spy_product_relation" idMethod="native" allowPkInsert="true" identifierQuoting="true">
+        <column name="id_product_relation" required="true" type="INTEGER" primaryKey="true" autoIncrement="true"/>
+        <column name="fk_product_abstract" required="true" type="INTEGER"/>
+        <column name="fk_product_relation_type" required="true" type="INTEGER"/>
+        <column name="is_active" required="true" defaultValue="true" type="BOOLEAN"/>
+        <column name="is_rebuild_scheduled" required="true" defaultValue="false" type="BOOLEAN"/>
+        <column name="product_relation_key" type="VARCHAR" size="255"/>
+        <column name="query_set_data" type="LONGVARCHAR" required="false"/>
+        <foreign-key name="spy_product-relation-fk_product_abstract" foreignTable="spy_product_abstract">
+            <reference local="fk_product_abstract" foreign="id_product_abstract"/>
+        </foreign-key>
+        <foreign-key name="spy_product-relation-type-fk_product_abstract" foreignTable="spy_product_relation_type">
+            <reference local="fk_product_relation_type" foreign="id_product_relation_type"/>
+        </foreign-key>
+        <index name="index-spy_product_relation-fk_product_abstract">
+            <index-column name="fk_product_abstract"/>
+        </index>
+        <index name="index-spy_product_relation-fk_product_relation_type">
+            <index-column name="fk_product_relation_type"/>
+        </index>
+        <unique name="spy_product-relation-unique-product-relation-key">
+            <unique-column name="product_relation_key"/>
+        </unique>
+        <id-method-parameter value="spy_product_relation_pk_seq"/>
+        <behavior name="timestampable"/>
+        <behavior name="event">
+            <parameter name="spy_product_relation_all" column="*"/>
+        </behavior>
+    </table>
+    <table name="spy_product_relation_type" idMethod="native" allowPkInsert="true" identifierQuoting="true">
+        <column name="id_product_relation_type" required="true" type="INTEGER" primaryKey="true" autoIncrement="true"/>
+        <column name="key" required="true" type="VARCHAR" size="255"/>
+        <id-method-parameter value="spy_product_relation_type_pk_seq"/>
+        <behavior name="timestampable"/>
+    </table>
+    <table name="spy_product_relation_product_abstract" idMethod="native" allowPkInsert="true" identifierQuoting="true" isCrossRef="true">
+        <column name="id_product_relation_product_abstract" required="true" type="INTEGER" primaryKey="true" autoIncrement="true"/>
+        <column name="fk_product_abstract" required="true" type="INTEGER"/>
+        <column name="fk_product_relation" required="true" type="INTEGER"/>
+        <column name="order" required="true" type="INTEGER"/>
+        <foreign-key name="spy_product-rel-prod-rel-fk_product_relation" foreignTable="spy_product_relation">
+            <reference local="fk_product_relation" foreign="id_product_relation"/>
+        </foreign-key>
+        <foreign-key name="spy_product-rel-prod-abs-fk_product_abstract" foreignTable="spy_product_abstract">
+            <reference local="fk_product_abstract" foreign="id_product_abstract"/>
+        </foreign-key>
+        <index name="index-spy_product_relation_product_abstract-fk_product_relation">
+            <index-column name="fk_product_relation"/>
+        </index>
+        <index name="index-spy_product_relation_product_abstract-fk_product_abstract">
+            <index-column name="fk_product_abstract"/>
+        </index>
+        <id-method-parameter value="spy_product_rel_prod_abs_type_pk_seq"/>
+        <behavior name="timestampable"/>
+        <behavior name="event">
+            <parameter name="spy_product_relation_product_abstract_all" column="*"/>
+        </behavior>
+    </table>
+    <table name="spy_product_relation_store" phpName="SpyProductRelationStore">
+        <column name="id_product_relation_store" type="INTEGER" required="true" primaryKey="true" autoIncrement="true"/>
+        <column name="fk_product_relation" type="INTEGER" required="true"/>
+        <column name="fk_store" type="INTEGER" required="true"/>
+        <foreign-key name="spy_product_relation_store-fk_product_relation" foreignTable="spy_product_relation" phpName="ProductRelation" refPhpName="ProductRelationStore">
+            <reference local="fk_product_relation" foreign="id_product_relation"/>
+        </foreign-key>
+        <foreign-key name="spy_product_relation_store-fk_store" foreignTable="spy_store" phpName="Store" refPhpName="ProductRelationStore">
+            <reference local="fk_store" foreign="id_store"/>
+        </foreign-key>
+        <index name="index-spy_product_relation_store-fk_store">
+            <index-column name="fk_store"/>
+        </index>
+        <unique name="spy_product_relation_store-unique-fk_product_relation-fk_store">
+            <unique-column name="fk_product_relation"/>
+            <unique-column name="fk_store"/>
+        </unique>
+        <id-method-parameter value="spy_product_relation_store_pk_seq"/>
+        <behavior name="event">
+            <parameter name="spy_product_relation_store_all" column="*"/>
+        </behavior>
+    </table>
+</database>

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<database xmlns="spryker:schema-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\SalesOrderThreshold\Persistence" package="src.Orm.Zed.SalesOrderThreshold.Persistence">
+
+    <table name="spy_sales_order_threshold_type" idMethod="native" allowPkInsert="true" identifierQuoting="true">
+        <column name="id_sales_order_threshold_type" required="true" type="INTEGER" primaryKey="true" autoIncrement="true"/>
+        <column name="key" type="VARCHAR" size="255" required="true"/>
+        <column name="threshold_group" type="VARCHAR" size="255" required="true"/>
+
+        <behavior name="timestampable"/>
+
+        <id-method-parameter value="id_sales_order_threshold_type_pk_seq"/>
+
+        <unique name="spy_sales_order_threshold_type-unique-key">
+            <unique-column name="key"/>
+        </unique>
+    </table>
+
+</database>

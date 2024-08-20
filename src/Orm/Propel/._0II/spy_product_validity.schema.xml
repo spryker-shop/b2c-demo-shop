@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<database xmlns="spryker:schema-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\ProductValidity\Persistence" package="src.Orm.Zed.ProductValidity.Persistence">
+    <table name="spy_product_validity" idMethod="native" allowPkInsert="true" identifierQuoting="true">
+        <column name="id_product_validity" primaryKey="true" type="INTEGER" autoIncrement="true"/>
+        <column name="fk_product" required="true" type="INTEGER"/>
+        <column name="valid_from" type="TIMESTAMP" required="false"/>
+        <column name="valid_to" type="TIMESTAMP" required="false"/>
+        <foreign-key name="spy_product_validity-fk_product" foreignTable="spy_product">
+            <reference local="fk_product" foreign="id_product"/>
+        </foreign-key>
+        <unique name="spy_product_validity-fk_product-unique">
+            <unique-column name="fk_product"/>
+        </unique>
+        <id-method-parameter value="spy_product_validity_pk_seq"/>
+    </table>
+</database>

@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<database xmlns="spryker:schema-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\CmsBlock\Persistence" package="src.Orm.Zed.CmsBlock.Persistence">
+    <table name="spy_cms_block_template">
+        <column name="id_cms_block_template" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="template_name" type="VARCHAR" size="255" required="true"/>
+        <column name="template_path" type="VARCHAR" size="255" required="true"/>
+        <unique name="spy_cms_block_template-unique-template_path">
+            <unique-column name="template_path"/>
+        </unique>
+        <id-method-parameter value="spy_cms_block_template_pk_seq"/>
+    </table>
+    <table name="spy_cms_block_glossary_key_mapping">
+        <column name="id_cms_block_glossary_key_mapping" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_cms_block" type="INTEGER" required="true"/>
+        <column name="fk_glossary_key" type="INTEGER" required="true"/>
+        <column name="placeholder" type="VARCHAR" size="255" required="true"/>
+        <foreign-key name="spy_cms_block_glossary_key_mapping-fk_cms_block" foreignTable="spy_cms_block" phpName="CmsBlock" onDelete="CASCADE">
+            <reference foreign="id_cms_block" local="fk_cms_block"/>
+        </foreign-key>
+        <foreign-key name="spy_cms_block_glossary_key_mapping-fk_glossary_key" foreignTable="spy_glossary_key" phpName="GlossaryKey" onDelete="CASCADE">
+            <reference foreign="id_glossary_key" local="fk_glossary_key"/>
+        </foreign-key>
+        <index name="index-spy_cms_block_glossary_key_mapping-placeholder">
+            <index-column name="placeholder"/>
+        </index>
+        <index name="index-spy_cms_block_glossary_key_mapping-fk_glossary_key">
+            <index-column name="fk_glossary_key"/>
+        </index>
+        <unique name="spy_cms_block_glossary_key_mapping-unique-fk_cms_block">
+            <unique-column name="fk_cms_block"/>
+            <unique-column name="placeholder"/>
+        </unique>
+        <id-method-parameter value="spy_cms_block_glossary_key_mapping_pk_seq"/>
+        <behavior name="event">
+            <parameter name="spy_cms_block_glossary_key_mapping_all" column="*"/>
+        </behavior>
+    </table>
+    <table name="spy_cms_block" identifierQuoting="true" phpName="SpyCmsBlock">
+        <column name="id_cms_block" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_template" type="INTEGER" required="false"/>
+        <column name="is_active" type="BOOLEAN" required="true" default="false"/>
+        <column name="key" required="true" type="VARCHAR" size="255" description="Identifier for existing entities. It should never be changed."/>
+        <column name="name" type="VARCHAR" required="true" size="255"/>
+        <column name="valid_from" type="TIMESTAMP" required="false"/>
+        <column name="valid_to" type="TIMESTAMP" required="false"/>
+        <foreign-key name="spy_cms_block-fk_template" foreignTable="spy_cms_block_template" phpName="CmsBlockTemplate" onDelete="CASCADE">
+            <reference foreign="id_cms_block_template" local="fk_template"/>
+        </foreign-key>
+        <index name="index-spy_cms_block-fk_template">
+            <index-column name="fk_template"/>
+        </index>
+        <unique name="spy_cms_block-name-uq">
+            <unique-column name="name"/>
+        </unique>
+        <unique name="spy_cms_block-key">
+            <unique-column name="key"/>
+        </unique>
+        <id-method-parameter value="spy_cms_block_pk_seq"/>
+        <behavior name="event">
+            <parameter name="spy_cms_block_all" column="*"/>
+        </behavior>
+    </table>
+    <table name="spy_cms_block_store" idMethod="native" allowPkInsert="true" identifierQuoting="true">
+        <column name="id_cms_block_store" required="true" type="INTEGER" primaryKey="true" autoIncrement="true"/>
+        <column name="fk_cms_block" required="true" type="INTEGER"/>
+        <column name="fk_store" required="true" type="INTEGER"/>
+        <foreign-key name="spy_cms_block_store-fk_cms_block" foreignTable="spy_cms_block">
+            <reference local="fk_cms_block" foreign="id_cms_block"/>
+        </foreign-key>
+        <foreign-key name="spy_cms_block_store-fk_store" foreignTable="spy_store">
+            <reference local="fk_store" foreign="id_store"/>
+        </foreign-key>
+        <index name="index-spy_cms_block_store-fk_store">
+            <index-column name="fk_store"/>
+        </index>
+        <unique name="spy_cms_block_store-fk_cms_block-fk_store">
+            <unique-column name="fk_cms_block"/>
+            <unique-column name="fk_store"/>
+        </unique>
+        <id-method-parameter value="id_cms_block_store_pk_seq"/>
+        <behavior name="event">
+            <parameter name="spy_cms_block_store_all" column="*"/>
+        </behavior>
+    </table>
+</database>

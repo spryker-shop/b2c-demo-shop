@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<database xmlns="spryker:schema-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\OauthClient\Persistence" package="src.Orm.Zed.OauthClient.Persistence">
+
+    <table name="spy_oauth_client_access_token_cache" identifierQuoting="true">
+        <column name="id_spy_oauth_client_access_token_cache" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="cache_key" required="true" type="VARCHAR" size="50"/>
+        <column name="access_token" required="true" type="LONGVARCHAR"/>
+        <column name="expires_at" required="true" type="TIMESTAMP"/>
+
+        <unique name="spy_oauth_client_access_token_cache-unique-cache_key">
+            <unique-column name="cache_key"/>
+        </unique>
+
+        <behavior name="timestampable">
+            <parameter name="disable_updated_at" value="true"/>
+        </behavior>
+
+        <id-method-parameter value="spy_oauth_client_access_token_cache_pk_seq"/>
+    </table>
+
+</database>

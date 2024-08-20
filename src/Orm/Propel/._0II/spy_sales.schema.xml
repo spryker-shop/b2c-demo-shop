@@ -1,0 +1,452 @@
+<?xml version="1.0"?>
+<database xmlns="spryker:schema-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\Sales\Persistence" package="src.Orm.Zed.Sales.Persistence">
+    <table name="spy_sales_order">
+        <column name="id_sales_order" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_locale" type="INTEGER"/>
+        <column name="fk_sales_order_address_billing" type="INTEGER" required="true"/>
+        <column name="fk_sales_order_address_shipping" type="INTEGER" required="false"/>
+        <column name="cart_note" required="false" size="255" type="VARCHAR"/>
+        <column name="currency_iso_code" type="VARCHAR" size="5" required="false"/>
+        <column name="customer_reference" type="VARCHAR" size="255" required="false"/>
+        <column name="email" required="false" size="255" type="VARCHAR"/>
+        <column name="first_name" required="false" size="100" type="VARCHAR"/>
+        <column name="is_test" type="BOOLEAN" required="true" default="false"/>
+        <column name="last_name" required="false" size="100" type="VARCHAR"/>
+        <column name="oms_processor_identifier" type="TINYINT" description="Defines the processor id for OMS multi-thread order processing"/>
+        <column name="order_custom_reference" required="false" size="255" type="VARCHAR"/>
+        <column name="order_reference" type="VARCHAR" size="45" required="true"/>
+        <column name="price_mode" type="ENUM" valueSet="NET_MODE, GROSS_MODE" required="false"/>
+        <column name="salutation" type="ENUM" valueSet="Mr, Mrs, Dr, Ms" required="false"/>
+        <column name="store" type="VARCHAR" size="255" required="false"/>
+        <foreign-key name="spy_sales_order-fk_sales_order_address_billing" foreignTable="spy_sales_order_address" phpName="BillingAddress">
+            <reference local="fk_sales_order_address_billing" foreign="id_sales_order_address"/>
+        </foreign-key>
+        <foreign-key name="spy_sales_order-fk_sales_order_address_shipping" foreignTable="spy_sales_order_address" phpName="ShippingAddress">
+            <reference local="fk_sales_order_address_shipping" foreign="id_sales_order_address"/>
+        </foreign-key>
+        <foreign-key name="spy_sales_order-fk_locale" foreignTable="spy_locale" phpName="Locale">
+            <reference local="fk_locale" foreign="id_locale"/>
+        </foreign-key>
+        <index name="spy_sales_order-customer_reference">
+            <index-column name="customer_reference"/>
+        </index>
+        <index name="index-spy_sales_order-oms_processor_identifier">
+            <index-column name="oms_processor_identifier"/>
+        </index>
+        <index name="spy_sales_order-store">
+            <index-column name="store"/>
+        </index>
+        <index name="spy_sales_order-currency_iso_code">
+            <index-column name="currency_iso_code"/>
+        </index>
+        <index name="index-spy_sales_order-fk_sales_order_address_billing">
+            <index-column name="fk_sales_order_address_billing"/>
+        </index>
+        <index name="index-spy_sales_order-fk_sales_order_address_shipping">
+            <index-column name="fk_sales_order_address_shipping"/>
+        </index>
+        <index name="index-spy_sales_order-fk_locale">
+            <index-column name="fk_locale"/>
+        </index>
+        <unique name="spy_sales_order-order_reference">
+            <unique-column name="order_reference"/>
+        </unique>
+        <id-method-parameter value="spy_sales_order_pk_seq"/>
+        <behavior name="uuid">
+            <parameter name="key_columns" value="id_sales_order.order_reference.store"/>
+        </behavior>
+        <behavior name="timestampable"/>
+    </table>
+    <table name="spy_sales_order_item" idMethod="native" allowPkInsert="true">
+        <column name="id_sales_order_item" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_oms_order_item_state" type="INTEGER" required="true"/>
+        <column name="fk_oms_order_process" type="INTEGER" required="false"/>
+        <column name="fk_sales_order" type="INTEGER" required="true"/>
+        <column name="fk_sales_order_item_bundle" type="INTEGER" required="false"/>
+        <column name="fk_sales_shipment" type="INTEGER" required="false"/>
+        <column name="canceled_amount" type="INTEGER" required="false" default="0"/>
+        <column name="cart_note" required="false" size="255" type="VARCHAR"/>
+        <column name="discount_amount_aggregation" type="INTEGER" required="false" default="0" description="/Total discount amount for item/"/>
+        <column name="discount_amount_full_aggregation" type="INTEGER" required="false" default="0" description="/Total discount amount for item with options or item expenses/"/>
+        <column name="expense_price_aggregation" type="INTEGER" required="false" default="0" description="/Total price amount for item from item expenses/"/>
+        <column name="gross_price" type="INTEGER" required="true" description="/price for one unit including tax, without shipping, coupons/"/>
+        <column name="group_key" type="VARCHAR" size="255" required="false" description=""/>
+        <column name="is_quantity_splittable" required="true" type="BOOLEAN" defaultValue="true"/>
+        <column name="last_state_change" type="TIMESTAMP" required="true" defaultExpr="CURRENT_TIMESTAMP"/>
+        <column name="name" type="VARCHAR" size="255" required="true"/>
+        <column name="net_price" type="INTEGER" required="false" default="0" description="/Price for one unit not including tax, without shipping, coupons/"/>
+        <column name="order_item_reference" type="VARCHAR" size="255" required="false"/>
+        <column name="price" type="INTEGER" required="false" default="0" description="/Price for item, can be gross or net price depending on tax mode/"/>
+        <column name="price_to_pay_aggregation" type="INTEGER" required="false" default="0" description="/Total item price to pay after discounts including options or item expenses/"/>
+        <column name="product_option_price_aggregation" type="INTEGER" required="false" default="0" description="/Total price amount for item from options/"/>
+        <column name="quantity" type="INTEGER" unsigned="true" default="1" required="true" description="/Quantity ordered for item/"/>
+        <column name="refundable_amount" type="INTEGER" required="false" default="0" description="/Total item refundable amount/"/>
+        <column name="remuneration_amount" type="INTEGER" required="false"/>
+        <column name="sku" type="VARCHAR" size="255" required="true"/>
+        <column name="subtotal_aggregation" type="INTEGER" required="false" description="/Subtotal price amount (item + options + item expenses) before discounts/"/>
+        <column name="tax_amount" type="INTEGER" required="false" default="0" description="/Calculated tax amount based on tax mode/"/>
+        <column name="tax_amount_after_cancellation" type="INTEGER" default="0" required="false" description="/Calculated tax full amount based on tax mode, includes options, item expenses, /"/>
+        <column name="tax_amount_full_aggregation" type="INTEGER" default="0" required="false" description="/Calculated tax full amount based on tax mode, includes options, item expenses/"/>
+        <column name="tax_rate" type="DECIMAL" size="8" scale="2" required="false"/>
+        <column name="tax_rate_average_aggregation" type="DECIMAL" size="8" scale="2" required="false" description="/Calculated tax rate, includes options, item expenses, /"/>
+        <column name="uuid" required="false" type="VARCHAR" size="36"/>
+        <foreign-key name="spy_sales_order_item-fk_sales_order_item_bundle" foreignTable="spy_sales_order_item_bundle" phpName="SalesOrderItemBundle" refPhpName="SalesOrderItem">
+            <reference local="fk_sales_order_item_bundle" foreign="id_sales_order_item_bundle"/>
+        </foreign-key>
+        <foreign-key name="spy_sales_order_item-fk_sales_order" foreignTable="spy_sales_order" phpName="Order" refPhpName="Item">
+            <reference local="fk_sales_order" foreign="id_sales_order"/>
+        </foreign-key>
+        <foreign-key name="spy_sales_order_item-fk_oms_order_item_state" foreignTable="spy_oms_order_item_state" phpName="State" refPhpName="Order">
+            <reference local="fk_oms_order_item_state" foreign="id_oms_order_item_state"/>
+        </foreign-key>
+        <foreign-key name="spy_sales_order_item-fk_oms_order_process" foreignTable="spy_oms_order_process" phpName="Process" refPhpName="Item">
+            <reference local="fk_oms_order_process" foreign="id_oms_order_process"/>
+        </foreign-key>
+        <foreign-key name="spy_sales_order_item-fk_sales_shipment" foreignTable="spy_sales_shipment" refPhpName="SpySalesOrderItem">
+            <reference local="fk_sales_shipment" foreign="id_sales_shipment"/>
+        </foreign-key>
+        <index name="spy_sales_order_item-sku">
+            <index-column name="sku"/>
+        </index>
+        <index name="index-spy_sales_order_item-fk_sales_shipment">
+            <index-column name="fk_sales_shipment"/>
+        </index>
+        <index name="index-spy_sales_order_item-fk_sales_order_item_bundle">
+            <index-column name="fk_sales_order_item_bundle"/>
+        </index>
+        <index name="index-spy_sales_order_item-fk_sales_order">
+            <index-column name="fk_sales_order"/>
+        </index>
+        <index name="index-spy_sales_order_item-fk_oms_order_item_state">
+            <index-column name="fk_oms_order_item_state"/>
+        </index>
+        <index name="index-spy_sales_order_item-fk_oms_order_process">
+            <index-column name="fk_oms_order_process"/>
+        </index>
+        <unique name="spy_sales_order_item-order_item_reference">
+            <unique-column name="order_item_reference"/>
+        </unique>
+        <unique name="spy_sales-order-item-uuid">
+            <unique-column name="uuid"/>
+        </unique>
+        <id-method-parameter value="spy_sales_order_item_pk_seq"/>
+        <behavior name="uuid">
+            <parameter name="key_columns" value="id_sales_order_item"/>
+        </behavior>
+        <behavior name="timestampable"/>
+    </table>
+    <table name="spy_sales_discount">
+        <column name="id_sales_discount" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_sales_expense" type="INTEGER" required="false"/>
+        <column name="fk_sales_order" type="INTEGER" required="false"/>
+        <column name="fk_sales_order_item" type="INTEGER" required="false"/>
+        <column name="fk_sales_order_item_option" type="INTEGER" required="false"/>
+        <column name="amount" type="INTEGER" required="true"/>
+        <column name="description" type="VARCHAR" size="1024" default="NULL"/>
+        <column name="display_name" type="VARCHAR" size="255" required="true"/>
+        <column name="name" type="VARCHAR" size="255" required="true"/>
+        <foreign-key name="spy_sales_discount-fk_sales_order" foreignTable="spy_sales_order" phpName="Order" refPhpName="Discount">
+            <reference local="fk_sales_order" foreign="id_sales_order"/>
+        </foreign-key>
+        <foreign-key name="spy_sales_discount-fk_sales_order_item" foreignTable="spy_sales_order_item" phpName="OrderItem" refPhpName="Discount">
+            <reference local="fk_sales_order_item" foreign="id_sales_order_item"/>
+        </foreign-key>
+        <foreign-key name="spy_sales_discount-fk_sales_expense" foreignTable="spy_sales_expense" phpName="Expense" refPhpName="Discount">
+            <reference local="fk_sales_expense" foreign="id_sales_expense"/>
+        </foreign-key>
+        <foreign-key name="spy_sales_discount-fk_sales_order_item_option" foreignTable="spy_sales_order_item_option" phpName="Option" refPhpName="Discount">
+            <reference local="fk_sales_order_item_option" foreign="id_sales_order_item_option"/>
+        </foreign-key>
+        <index name="index-spy_sales_discount-fk_sales_order">
+            <index-column name="fk_sales_order"/>
+        </index>
+        <index name="index-spy_sales_discount-fk_sales_order_item">
+            <index-column name="fk_sales_order_item"/>
+        </index>
+        <index name="index-spy_sales_discount-fk_sales_expense">
+            <index-column name="fk_sales_expense"/>
+        </index>
+        <index name="index-spy_sales_discount-fk_sales_order_item_option">
+            <index-column name="fk_sales_order_item_option"/>
+        </index>
+        <id-method-parameter value="spy_sales_discount_pk_seq"/>
+        <behavior name="timestampable"/>
+    </table>
+    <table name="spy_sales_discount_code">
+        <column name="id_sales_discount_code" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_sales_discount" type="INTEGER" required="true"/>
+        <column name="code" type="VARCHAR" size="255" required="true"/>
+        <column name="codepool_name" type="VARCHAR" size="255" required="true"/>
+        <column name="is_once_per_customer" type="BOOLEAN" default="true"/>
+        <column name="is_refundable" type="BOOLEAN" default="false"/>
+        <column name="is_reusable" type="BOOLEAN" default="false"/>
+        <foreign-key name="spy_sales_discount_code-fk_sales_discount" foreignTable="spy_sales_discount" phpName="Discount" refPhpName="DiscountCode">
+            <reference local="fk_sales_discount" foreign="id_sales_discount"/>
+        </foreign-key>
+        <index name="index-spy_sales_discount_code-fk_sales_discount">
+            <index-column name="fk_sales_discount"/>
+        </index>
+        <id-method-parameter value="spy_sales_discount_code_pk_seq"/>
+        <behavior name="timestampable"/>
+    </table>
+    <table name="spy_sales_order_item_gift_card">
+        <column name="id_sales_order_item_gift_card" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_sales_order_item" type="INTEGER" required="true"/>
+        <column name="attributes" type="LONGVARCHAR" required="false"/>
+        <column name="code" type="VARCHAR" size="40" required="false"/>
+        <column name="pattern" type="VARCHAR" size="40" required="false"/>
+        <column name="value" type="INTEGER" required="false"/>
+        <foreign-key name="spy_sales_order_item_gift_card-fk_sales_order_item" foreignTable="spy_sales_order_item" phpName="SpySalesOrderItem" refPhpName="SpySalesOrderItemGiftCard">
+            <reference local="fk_sales_order_item" foreign="id_sales_order_item"/>
+        </foreign-key>
+        <index name="index-spy_sales_order_item_gift_card-fk_sales_order_item">
+            <index-column name="fk_sales_order_item"/>
+        </index>
+        <id-method-parameter value="spy_sales_order_item_gift_card_pk_seq"/>
+    </table>
+    <table name="spy_sales_order_item_option">
+        <column name="id_sales_order_item_option" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_sales_order_item" type="INTEGER" required="true"/>
+        <column name="canceled_amount" type="INTEGER" required="false" default="0"/>
+        <column name="discount_amount_aggregation" type="INTEGER" default="0" required="false" description="/Total discount amount for item/"/>
+        <column name="gross_price" type="INTEGER" required="true" default="0"/>
+        <column name="group_name" type="VARCHAR" size="255" required="true"/>
+        <column name="net_price" type="INTEGER" required="false" default="0" description="/Price for one unit not including tax, without shipping, coupons/"/>
+        <column name="price" type="INTEGER" required="false" default="0" description="/Price for item, can be gross or net price depending on tax mode/"/>
+        <column name="sku" type="VARCHAR" size="255" required="true"/>
+        <column name="tax_amount" type="INTEGER" required="false" default="0" description="/Calculated tax amount based on tax mode/"/>
+        <column name="tax_rate" type="DECIMAL" size="8" scale="2" required="true"/>
+        <column name="value" type="VARCHAR" size="255" required="true"/>
+        <foreign-key name="spy_sales_order_item_option-fk_sales_order_item" foreignTable="spy_sales_order_item" phpName="OrderItem" refPhpName="Option">
+            <reference local="fk_sales_order_item" foreign="id_sales_order_item"/>
+        </foreign-key>
+        <index name="index-spy_sales_order_item_option-fk_sales_order_item">
+            <index-column name="fk_sales_order_item"/>
+        </index>
+        <id-method-parameter value="spy_sales_order_item_option_pk_seq"/>
+        <behavior name="timestampable"/>
+    </table>
+    <table name="spy_sales_order_address">
+        <column name="id_sales_order_address" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_country" type="INTEGER" required="true"/>
+        <column name="fk_region" type="INTEGER"/>
+        <column name="address1" size="255" type="VARCHAR"/>
+        <column name="address2" size="255" type="VARCHAR"/>
+        <column name="address3" size="255" type="VARCHAR"/>
+        <column name="cell_phone" size="255" type="VARCHAR"/>
+        <column name="city" size="255" type="VARCHAR" required="true"/>
+        <column name="comment" size="255" type="VARCHAR"/>
+        <column name="company" size="255" type="VARCHAR"/>
+        <column name="description" size="255" type="VARCHAR"/>
+        <column name="email" size="255" type="VARCHAR" required="false"/>
+        <column name="first_name" required="true" size="100" type="VARCHAR"/>
+        <column name="last_name" required="true" size="100" type="VARCHAR"/>
+        <column name="middle_name" required="false" size="100" type="VARCHAR"/>
+        <column name="phone" size="255" type="VARCHAR"/>
+        <column name="po_box" size="255" type="VARCHAR"/>
+        <column name="salutation" type="ENUM" valueSet="Mr, Mrs, Dr, Ms"/>
+        <column name="zip_code" size="15" type="VARCHAR" required="true"/>
+        <foreign-key name="spy_sales_order_address-fk_country" foreignTable="spy_country" phpName="Country" refPhpName="SalesOrderAddress">
+            <reference local="fk_country" foreign="id_country"/>
+        </foreign-key>
+        <foreign-key name="spy_sales_order_address-fk_region" foreignTable="spy_region" phpName="Region" refPhpName="SalesOrderAddress">
+            <reference local="fk_region" foreign="id_region"/>
+        </foreign-key>
+        <index name="index-spy_sales_order_address-fk_country">
+            <index-column name="fk_country"/>
+        </index>
+        <index name="index-spy_sales_order_address-fk_region">
+            <index-column name="fk_region"/>
+        </index>
+        <id-method-parameter value="spy_sales_order_address_pk_seq"/>
+        <behavior name="uuid">
+            <parameter name="key_columns" value="id_sales_order_address"/>
+        </behavior>
+        <behavior name="timestampable"/>
+    </table>
+    <table name="spy_sales_order_address_history">
+        <column name="id_sales_order_address_history" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_country" type="INTEGER" required="true"/>
+        <column name="fk_region" type="INTEGER"/>
+        <column name="fk_sales_order_address" type="INTEGER" required="true"/>
+        <column name="address1" size="255" type="VARCHAR"/>
+        <column name="address2" size="255" type="VARCHAR"/>
+        <column name="address3" size="255" type="VARCHAR"/>
+        <column name="cell_phone" size="255" type="VARCHAR"/>
+        <column name="city" size="255" type="VARCHAR" required="true"/>
+        <column name="comment" size="255" type="VARCHAR"/>
+        <column name="company" size="255" type="VARCHAR"/>
+        <column name="description" size="255" type="VARCHAR"/>
+        <column name="email" size="255" type="VARCHAR" required="false"/>
+        <column name="first_name" required="true" size="100" type="VARCHAR"/>
+        <column name="is_billing" type="BOOLEAN" default="0"/>
+        <column name="last_name" required="true" size="100" type="VARCHAR"/>
+        <column name="middle_name" required="false" size="100" type="VARCHAR"/>
+        <column name="phone" size="255" type="VARCHAR"/>
+        <column name="po_box" size="255" type="VARCHAR"/>
+        <column name="salutation" type="ENUM" valueSet="Mr, Mrs, Dr, Ms"/>
+        <column name="zip_code" size="15" type="VARCHAR" required="true"/>
+        <foreign-key name="spy_sales_order_address_history-fk_country" foreignTable="spy_country" phpName="Country" refPhpName="SalesOrderAddressHistory">
+            <reference local="fk_country" foreign="id_country"/>
+        </foreign-key>
+        <foreign-key name="spy_sales_order_address_history-fk_sales_order_address" foreignTable="spy_sales_order_address" phpName="SalesOrderAddress" refPhpName="SalesOrderAddressHistory">
+            <reference local="fk_sales_order_address" foreign="id_sales_order_address"/>
+        </foreign-key>
+        <foreign-key name="spy_sales_order_address_history-fk_region" foreignTable="spy_region" phpName="Region" refPhpName="SalesOrderAddressHistory">
+            <reference local="fk_region" foreign="id_region"/>
+        </foreign-key>
+        <index name="index-spy_sales_order_address_history-fk_country">
+            <index-column name="fk_country"/>
+        </index>
+        <index name="index-spy_sales_order_address_history-fk_sales_order_address">
+            <index-column name="fk_sales_order_address"/>
+        </index>
+        <index name="index-spy_sales_order_address_history-fk_region">
+            <index-column name="fk_region"/>
+        </index>
+        <id-method-parameter value="spy_sales_order_address_history_pk_seq"/>
+        <behavior name="uuid">
+            <parameter name="key_columns" value="id_sales_order_address_history.fk_sales_order_address"/>
+        </behavior>
+        <behavior name="timestampable"/>
+    </table>
+    <table name="spy_sales_order_totals">
+        <column name="id_sales_order_totals" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_sales_order" type="INTEGER" required="true" default="0"/>
+        <column name="canceled_total" type="INTEGER" required="false" default="0"/>
+        <column name="discount_total" type="INTEGER" required="false" default="0"/>
+        <column name="grand_total" type="INTEGER" required="false" default="0"/>
+        <column name="order_expense_total" type="INTEGER" required="false" default="0"/>
+        <column name="refund_total" type="INTEGER" required="false" default="0"/>
+        <column name="subtotal" type="INTEGER" required="false" default="0"/>
+        <column name="tax_total" type="INTEGER" required="false" default="0"/>
+        <foreign-key name="spy_sales_order_totals-fk_sales_order" foreignTable="spy_sales_order" phpName="Order" refPhpName="OrderTotal">
+            <reference local="fk_sales_order" foreign="id_sales_order"/>
+        </foreign-key>
+        <index name="index-spy_sales_order_totals-fk_sales_order">
+            <index-column name="fk_sales_order"/>
+        </index>
+        <id-method-parameter value="spy_sales_order_totals_pk_seq"/>
+        <behavior name="uuid">
+            <parameter name="key_columns" value="id_sales_order_totals.fk_sales_order"/>
+        </behavior>
+        <behavior name="timestampable"/>
+    </table>
+    <table name="spy_sales_order_note">
+        <column name="id_sales_order_note" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_sales_order" type="INTEGER" required="true"/>
+        <column name="command" type="VARCHAR" size="255" required="true"/>
+        <column name="message" type="VARCHAR" size="255" required="true"/>
+        <column name="success" type="BOOLEAN" required="true"/>
+        <foreign-key name="spy_sales_order_note-fk_sales_order" foreignTable="spy_sales_order" phpName="Order" refPhpName="Note">
+            <reference local="fk_sales_order" foreign="id_sales_order"/>
+        </foreign-key>
+        <index name="index-spy_sales_order_note-fk_sales_order">
+            <index-column name="fk_sales_order"/>
+        </index>
+        <id-method-parameter value="spy_sales_order_note_pk_seq"/>
+        <behavior name="uuid">
+            <parameter name="key_columns" value="id_sales_order_note.fk_sales_order"/>
+        </behavior>
+        <behavior name="timestampable"/>
+    </table>
+    <table name="spy_sales_order_comment">
+        <column name="id_sales_order_comment" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_sales_order" type="INTEGER" required="true"/>
+        <column name="message" type="LONGVARCHAR" required="true"/>
+        <column name="username" type="VARCHAR" size="255" required="false" default="NULL"/>
+        <foreign-key name="spy_sales_order_comment-fk_sales_order" foreignTable="spy_sales_order" phpName="Order" refPhpName="OrderComment">
+            <reference local="fk_sales_order" foreign="id_sales_order"/>
+        </foreign-key>
+        <index name="index-spy_sales_order_comment-fk_sales_order">
+            <index-column name="fk_sales_order"/>
+        </index>
+        <id-method-parameter value="spy_sales_order_comment_pk_seq"/>
+        <behavior name="uuid">
+            <parameter name="key_columns" value="id_sales_order_comment.fk_sales_order"/>
+        </behavior>
+        <behavior name="timestampable"/>
+    </table>
+    <table name="spy_sales_expense">
+        <column name="id_sales_expense" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_sales_order" type="INTEGER" required="false" default="NULL"/>
+        <column name="canceled_amount" type="INTEGER" required="false" default="0"/>
+        <column name="discount_amount_aggregation" type="INTEGER" required="false" default="0" description="/Total discount amount for item/"/>
+        <column name="gross_price" type="INTEGER" required="true"/>
+        <column name="name" type="VARCHAR" size="255"/>
+        <column name="net_price" type="INTEGER" required="false" default="0" description="/Price for one unit not including tax, without shipping, coupons/"/>
+        <column name="price" type="INTEGER" required="false" default="0" description="/Price for item, can be gross or net price depending on tax mode/"/>
+        <column name="price_to_pay_aggregation" type="INTEGER" required="false" default="0" description="/Total item price to pay after discounts/"/>
+        <column name="refundable_amount" type="INTEGER" required="false" default="0" description="/Total item refundable amount/"/>
+        <column name="tax_amount" type="INTEGER" required="false" default="0" description="/Calculated tax amount based on tax mode/"/>
+        <column name="tax_amount_after_cancellation" type="INTEGER" default="0" required="false" description="/Calculated tax full amount based on tax mode, includes options, item expenses, /"/>
+        <column name="tax_rate" type="DECIMAL" size="8" scale="2" required="false"/>
+        <column name="type" type="VARCHAR" size="150"/>
+        <foreign-key name="spy_sales_expense-fk_sales_order" foreignTable="spy_sales_order" phpName="Order" refPhpName="Expense">
+            <reference local="fk_sales_order" foreign="id_sales_order"/>
+        </foreign-key>
+        <index name="spy_sales_expense-index-fk_sales_order">
+            <index-column name="fk_sales_order"/>
+            <index-column name="type"/>
+        </index>
+        <id-method-parameter value="spy_sales_expense_pk_seq"/>
+        <behavior name="uuid">
+            <parameter name="key_columns" value="id_sales_expense.fk_sales_order"/>
+        </behavior>
+        <behavior name="timestampable"/>
+    </table>
+    <table name="spy_sales_order_item_metadata">
+        <column name="id_sales_order_item_metadata" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_sales_order_item" type="INTEGER" required="true"/>
+        <column name="image" type="LONGVARCHAR"/>
+        <column name="super_attributes" type="LONGVARCHAR" required="true"/>
+        <foreign-key name="spy_sales_order_item_metadata-fk_sales_order_item" foreignTable="spy_sales_order_item" phpName="OrderItem" refPhpName="Metadata">
+            <reference local="fk_sales_order_item" foreign="id_sales_order_item"/>
+        </foreign-key>
+        <index name="spy_sales_order_item_metadata-index-fk_sales_order_item">
+            <index-column name="fk_sales_order_item"/>
+        </index>
+        <id-method-parameter value="spy_sales_order_item_metadata_pk_seq"/>
+        <behavior name="uuid">
+            <parameter name="key_columns" value="id_sales_order_item_metadata.fk_sales_order_item"/>
+        </behavior>
+        <behavior name="timestampable"/>
+    </table>
+    <table name="spy_sales_shipment">
+        <column name="id_sales_shipment" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_sales_expense" type="INTEGER" required="false"/>
+        <column name="fk_sales_order" type="INTEGER" required="true"/>
+        <column name="fk_sales_order_address" type="INTEGER" required="false"/>
+        <column name="fk_sales_shipment_type" type="INTEGER" required="false"/>
+        <column name="carrier_name" type="VARCHAR" size="255"/>
+        <column name="delivery_time" type="VARCHAR" size="255"/>
+        <column name="name" type="VARCHAR" size="255"/>
+        <column name="requested_delivery_date" type="VARCHAR" size="255"/>
+        <foreign-key name="spy_sales_shipment-fk_sales_shipment_type" foreignTable="spy_sales_shipment_type" phpName="SalesShipmentType" refPhpName="SalesShipment">
+            <reference local="fk_sales_shipment_type" foreign="id_sales_shipment_type"/>
+        </foreign-key>
+        <foreign-key name="spy_sales_shipment-fk_sales_order" foreignTable="spy_sales_order" phpName="Order" refPhpName="SpySalesShipment">
+            <reference local="fk_sales_order" foreign="id_sales_order"/>
+        </foreign-key>
+        <foreign-key name="spy_sales_shipment-fk_sales_expense" foreignTable="spy_sales_expense" phpName="Expense" refPhpName="SpySalesShipment">
+            <reference local="fk_sales_expense" foreign="id_sales_expense"/>
+        </foreign-key>
+        <foreign-key name="spy_sales_shipment-fk_sales_order_address" foreignTable="spy_sales_order_address" phpName="SpySalesOrderAddress" refPhpName="SpySalesShipment">
+            <reference local="fk_sales_order_address" foreign="id_sales_order_address"/>
+        </foreign-key>
+        <index name="index-spy_sales_shipment-fk_sales_order_address">
+            <index-column name="fk_sales_order_address"/>
+        </index>
+        <index name="index-spy_sales_shipment-fk_sales_order">
+            <index-column name="fk_sales_order"/>
+        </index>
+        <index name="index-spy_sales_shipment-fk_sales_expense">
+            <index-column name="fk_sales_expense"/>
+        </index>
+        <id-method-parameter value="spy_sales_shipment_pk_seq"/>
+        <behavior name="timestampable"/>
+        <behavior name="uuid">
+            <parameter name="key_columns" value="id_sales_shipment.fk_sales_order.fk_sales_expense"/>
+        </behavior>
+    </table>
+</database>

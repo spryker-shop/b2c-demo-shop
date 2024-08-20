@@ -1,0 +1,11 @@
+{% extends '@Gui/Layout/layout.twig' %}
+
+{% block content %}
+    <h1>Edit Book</h1>
+    {{ form_start(form) }}
+        {{ form_row(form.name) }}
+        {{ form_row(form.description) }}
+        {{ form_row(form.publicationDate) }}
+        <button type="submit" class="btn btn-primary">Save</button>
+    {{ form_end(form) }}
+{% endblock %}

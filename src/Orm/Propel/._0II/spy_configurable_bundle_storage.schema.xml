@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<database xmlns="spryker:schema-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\ConfigurableBundleStorage\Persistence" package="src.Orm.Zed.ConfigurableBundleStorage.Persistence">
+    <table name="spy_configurable_bundle_template_storage" identifierQuoting="true">
+        <column name="id_configurable_bundle_template_storage" type="integer" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_configurable_bundle_template" type="integer" required="true"/>
+        <column name="data" type="LONGVARCHAR" required="false"/>
+        <column name="key" type="VARCHAR" size="1024" required="true"/>
+        <index name="spy_configurable_bundle_template_storage-fk_c_b_t">
+            <index-column name="fk_configurable_bundle_template"/>
+        </index>
+        <id-method-parameter value="id_configurable_bundle_template_storage_pk_seq"/>
+        <behavior name="synchronization">
+            <parameter name="resource" value="configurable_bundle_template"/>
+            <parameter name="key_suffix_column" value="fk_configurable_bundle_template"/>
+            <parameter name="queue_group" value="sync.storage.configurable_bundle"/>
+            <parameter name="mappings" value="uuid:id_configurable_bundle_template"/>
+            <parameter name="queue_pool" value="synchronizationPool"/>
+        </behavior>
+        <behavior name="timestampable"/>
+    </table>
+    <table name="spy_configurable_bundle_template_image_storage" identifierQuoting="true">
+        <column name="id_configurable_bundle_template_image_storage" type="BIGINT" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_configurable_bundle_template" type="INTEGER" required="true"/>
+        <column name="data" type="LONGVARCHAR" required="false"/>
+        <column name="key" type="VARCHAR" size="1024" required="true"/>
+        <index name="spy_configurable_bundle_template_image_storage-fk_c_b_t">
+            <index-column name="fk_configurable_bundle_template"/>
+        </index>
+        <id-method-parameter value="spy_configurable_bundle_template_image_storage_pk_seq"/>
+        <behavior name="synchronization">
+            <parameter name="resource" value="configurable_bundle_template_image"/>
+            <parameter name="locale" required="true"/>
+            <parameter name="key_suffix_column" value="fk_configurable_bundle_template"/>
+            <parameter name="queue_group" value="sync.storage.configurable_bundle"/>
+            <parameter name="queue_pool" value="synchronizationPool"/>
+        </behavior>
+        <behavior name="timestampable"/>
+    </table>
+</database>

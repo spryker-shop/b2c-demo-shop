@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<database xmlns="spryker:schema-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\ApiKey\Persistence" package="src.Orm.Zed.ApiKey.Persistence">
+
+    <table name="spy_api_key" idMethod="native" identifierQuoting="true">
+        <column name="id_api_key" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="name" required="true" size="255" type="VARCHAR"/>
+        <column name="key_hash" required="true" size="64" type="VARCHAR"/>
+        <column name="scopes" type="VARCHAR" size="1024" required="false"/>
+        <column name="created_by" type="INTEGER" required="true"/>
+        <column name="valid_to" type="TIMESTAMP" default="NULL"/>
+        <id-method-parameter value="spy_api_key_pk_seq"/>
+        <unique name="spy_api_key-name">
+            <unique-column name="name"/>
+        </unique>
+        <unique name="spy_api_key-key_hash">
+            <unique-column name="key_hash"/>
+        </unique>
+
+         <foreign-key name="spy_api_key-created_by" foreignTable="spy_user" phpName="User" refPhpName="ApiKey">
+            <reference local="created_by" foreign="id_user"/>
+        </foreign-key>
+        <behavior name="timestampable"/>
+    </table>
+
+</database>

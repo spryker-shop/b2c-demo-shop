@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<database xmlns="spryker:schema-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\ProductConfiguration\Persistence" package="src.Orm.Zed.ProductConfiguration.Persistence">
+    <table name="spy_product_configuration" idMethod="native" class="SpyProductConfiguration">
+        <column name="id_product_configuration" type="INTEGER" required="true" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_product" type="INTEGER" required="true"/>
+        <column name="configurator_key" required="true" type="VARCHAR" size="255"/>
+        <column name="default_configuration" type="CLOB" required="false"/>
+        <column name="default_display_data" type="CLOB" required="false"/>
+        <column name="is_complete" required="true" default="false" type="BOOLEAN"/>
+        <column name="uuid" type="VARCHAR" size="36"/>
+        <foreign-key name="spy_product_configuration-fk_product" foreignTable="spy_product">
+            <reference local="fk_product" foreign="id_product"/>
+        </foreign-key>
+        <index name="spy_product_configuration-fk_product">
+            <index-column name="fk_product"/>
+        </index>
+        <index name="spy_product_configuration-configurator_key">
+            <index-column name="configurator_key"/>
+        </index>
+        <unique name="spy_product_configuration-unique-uuid">
+            <unique-column name="uuid"/>
+        </unique>
+        <id-method-parameter value="spy_product_configuration_pk_seq"/>
+        <behavior name="uuid">
+            <parameter name="key_columns" value="id_product_configuration"/>
+        </behavior>
+        <behavior name="timestampable"/>
+        <behavior name="event">
+            <parameter name="spy_product_configuration_all" column="*"/>
+        </behavior>
+    </table>
+</database>

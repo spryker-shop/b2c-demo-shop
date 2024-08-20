@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<database xmlns="spryker:schema-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\Url\Persistence" package="src.Orm.Zed.Url.Persistence">
+    <table name="spy_url">
+        <column name="id_url" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_locale" required="true" type="INTEGER"/>
+        <column name="fk_resource_categorynode" type="INTEGER"/>
+        <column name="fk_resource_page" type="INTEGER"/>
+        <column name="fk_resource_product_abstract" type="INTEGER"/>
+        <column name="fk_resource_product_set" type="INTEGER"/>
+        <column name="fk_resource_redirect" type="INTEGER"/>
+        <column name="url" type="VARCHAR" size="255" required="true"/>
+        <foreign-key name="spy_url-fk_resource_categorynode" foreignTable="spy_category_node" phpName="SpyCategoryNode" onDelete="CASCADE">
+            <reference foreign="id_category_node" local="fk_resource_categorynode"/>
+        </foreign-key>
+        <foreign-key name="spy_url-fk_resource_page" foreignTable="spy_cms_page" phpName="CmsPage" onDelete="CASCADE">
+            <reference foreign="id_cms_page" local="fk_resource_page"/>
+        </foreign-key>
+        <foreign-key name="spy_url-fk_resource_product_set" foreignTable="spy_product_set" onDelete="CASCADE">
+            <reference foreign="id_product_set" local="fk_resource_product_set"/>
+        </foreign-key>
+        <foreign-key name="spy_url-fk_resource_product_abstract" foreignTable="spy_product_abstract" phpName="SpyProduct" onDelete="CASCADE">
+            <reference foreign="id_product_abstract" local="fk_resource_product_abstract"/>
+        </foreign-key>
+        <foreign-key name="spy_url-fk_locale" foreignTable="spy_locale" phpName="SpyLocale" onDelete="CASCADE">
+            <reference foreign="id_locale" local="fk_locale"/>
+        </foreign-key>
+        <foreign-key name="spy_url-fk_resource_redirect" foreignTable="spy_url_redirect" onDelete="CASCADE">
+            <reference foreign="id_url_redirect" local="fk_resource_redirect"/>
+        </foreign-key>
+        <index name="spy_url-fk_resource_product_set">
+            <index-column name="fk_resource_product_set"/>
+        </index>
+        <index name="index-spy_url-fk_resource_categorynode">
+            <index-column name="fk_resource_categorynode"/>
+        </index>
+        <index name="index-spy_url-fk_resource_page">
+            <index-column name="fk_resource_page"/>
+        </index>
+        <index name="index-spy_url-fk_resource_product_abstract">
+            <index-column name="fk_resource_product_abstract"/>
+        </index>
+        <index name="index-spy_url-fk_locale">
+            <index-column name="fk_locale"/>
+        </index>
+        <index name="index-spy_url-fk_resource_redirect">
+            <index-column name="fk_resource_redirect"/>
+        </index>
+        <unique name="spy_url_unique_key">
+            <unique-column name="url"/>
+        </unique>
+        <id-method-parameter value="spy_url_pk_seq"/>
+        <behavior name="event">
+            <parameter name="spy_url_all" column="*"/>
+        </behavior>
+    </table>
+    <table name="spy_url_redirect">
+        <column name="id_url_redirect" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="status" type="INTEGER" required="true" default="301"/>
+        <column name="to_url" type="VARCHAR" size="255" required="true"/>
+        <index name="spy_url_redirect-to_url">
+            <index-column name="to_url"/>
+            <index-column name="status"/>
+        </index>
+        <id-method-parameter value="spy_url_redirect_pk_seq"/>
+        <behavior name="event">
+            <parameter name="spy_url_redirect_event_all" column="*"/>
+        </behavior>
+    </table>
+</database>

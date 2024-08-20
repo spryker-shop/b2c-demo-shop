@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<database xmlns="spryker:schema-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\CmsSlotBlock\Persistence" package="src.Orm.Zed.CmsSlotBlock.Persistence">
+    <table name="spy_cms_slot_block" idMethod="native" allowPkInsert="true">
+        <column name="id_cms_slot_block" required="true" type="BIGINT" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_cms_block" required="true" type="INTEGER"/>
+        <column name="fk_cms_slot" required="true" type="INTEGER"/>
+        <column name="fk_cms_slot_template" required="true" type="INTEGER"/>
+        <column name="conditions" type="LONGVARCHAR"/>
+        <column name="position" required="true" type="INTEGER"/>
+        <foreign-key name="spy_cms_slot_block-fk_cms_slot_template" foreignTable="spy_cms_slot_template" phpName="CmsSlotTemplate">
+            <reference foreign="id_cms_slot_template" local="fk_cms_slot_template"/>
+        </foreign-key>
+        <foreign-key name="spy_cms_slot_block-fk_cms_slot" foreignTable="spy_cms_slot" phpName="CmsSlot">
+            <reference foreign="id_cms_slot" local="fk_cms_slot"/>
+        </foreign-key>
+        <foreign-key name="spy_cms_slot_block-fk_cms_block" foreignTable="spy_cms_block" phpName="CmsBlock">
+            <reference foreign="id_cms_block" local="fk_cms_block"/>
+        </foreign-key>
+        <index name="index-spy_cms_slot_block-fk_cms_slot">
+            <index-column name="fk_cms_slot"/>
+        </index>
+        <index name="index-spy_cms_slot_block-fk_cms_block">
+            <index-column name="fk_cms_block"/>
+        </index>
+        <unique name="spy_cms_slot_block-slot-block">
+            <unique-column name="fk_cms_slot_template"/>
+            <unique-column name="fk_cms_slot"/>
+            <unique-column name="fk_cms_block"/>
+            <unique-column name="position"/>
+        </unique>
+        <id-method-parameter value="spy_cms_slot_block_pk_seq"/>
+    </table>
+</database>

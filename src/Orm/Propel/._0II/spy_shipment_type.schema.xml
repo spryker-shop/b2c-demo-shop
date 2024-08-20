@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<database xmlns="spryker:schema-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" namespace="Orm\Zed\ShipmentType\Persistence" package="src.Orm.Zed.ShipmentType.Persistence" xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd">
+
+    <table name="spy_shipment_type" idMethod="native" allowPkInsert="true" identifierQuoting="true">
+        <column name="id_shipment_type" type="INTEGER" required="true" autoIncrement="true" primaryKey="true"/>
+        <column name="uuid" type="VARCHAR" required="false" size="36"/>
+        <column name="name" type="VARCHAR" required="true" size="255"/>
+        <column name="key" type="VARCHAR" required="true" size="255"/>
+        <column name="is_active" type="BOOLEAN" required="true"/>
+
+        <unique name="spy_shipment_type-key">
+            <unique-column name="key"/>
+        </unique>
+
+        <unique name="spy_shipment_type-unique-uuid">
+            <unique-column name="uuid"/>
+        </unique>
+
+        <id-method-parameter value="spy_shipment_type_pk_seq"/>
+
+        <behavior name="uuid">
+            <parameter name="key_columns" value="id_shipment_type"/>
+        </behavior>
+    </table>
+
+    <table name="spy_shipment_type_store" idMethod="native" allowPkInsert="true">
+        <column name="id_shipment_type_store" type="INTEGER" required="true" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_shipment_type" type="INTEGER" required="true"/>
+        <column name="fk_store" type="INTEGER" required="true"/>
+
+        <foreign-key name="spy_shipment_type_store-fk_shipment_type" foreignTable="spy_shipment_type" phpName="ShipmentType" refPhpName="ShipmentTypeStore">
+            <reference local="fk_shipment_type" foreign="id_shipment_type"/>
+        </foreign-key>
+
+        <foreign-key name="spy_shipment_type_store-fk_store" foreignTable="spy_store" phpName="Store" refPhpName="ShipmentTypeStore">
+            <reference local="fk_store" foreign="id_store"/>
+        </foreign-key>
+
+        <unique name="spy_shipment_type_store-fk_shipment_type-fk_store">
+            <unique-column name="fk_shipment_type"/>
+            <unique-column name="fk_store"/>
+        </unique>
+
+        <id-method-parameter value="spy_shipment_type_store_pk_seq"/>
+    </table>
+
+</database>

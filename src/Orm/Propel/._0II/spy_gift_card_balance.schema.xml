@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<database xmlns="spryker:schema-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\GiftCardBalance\Persistence" package="src.Orm.Zed.GiftCardBalance.Persistence">
+
+    <table name="spy_gift_card_balance_log">
+        <column name="id_gift_card_balance_log" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_gift_card" type="INTEGER" required="true"/>
+        <column name="fk_sales_order" type="INTEGER" required="true"/>
+        <column name="value" type="INTEGER" required="true"/>
+        <column name="created_at" type="TIMESTAMP" required="true"/>
+
+        <foreign-key name="spy_gift_card_balance_log-fk_gift_card" foreignTable="spy_gift_card" phpName="SpyGiftCard">
+            <reference foreign="id_gift_card" local="fk_gift_card"/>
+        </foreign-key>
+
+        <foreign-key name="spy_gift_card_balance_log-fk_sales_order" foreignTable="spy_sales_order" phpName="SpySalesOrder">
+            <reference foreign="id_sales_order" local="fk_sales_order"/>
+        </foreign-key>
+
+        <behavior name="timestampable">
+            <parameter name="disable_updated_at" value="true"/>
+        </behavior>
+
+        <index>
+            <index-column name="fk_gift_card"/>
+            <index-column name="created_at"/>
+            <index-column name="fk_sales_order"/>
+            <index-column name="value"/>
+        </index>
+
+        <id-method-parameter value="spy_gift_card_balance_log_pk_seq"/>
+    </table>
+
+</database>

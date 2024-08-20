@@ -1,0 +1,136 @@
+<?xml version="1.0"?>
+<database xmlns="spryker:schema-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\Cms\Persistence" package="src.Orm.Zed.Cms.Persistence">
+    <table name="spy_cms_page" idMethod="native" allowPkInsert="true" phpName="SpyCmsPage">
+        <column name="id_cms_page" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_template" type="INTEGER" required="true"/>
+        <column name="is_active" type="BOOLEAN" required="true" default="false"/>
+        <column name="is_searchable" type="BOOLEAN" required="true" default="false"/>
+        <column name="page_key" type="VARCHAR" size="32" required="false"/>
+        <column name="uuid" required="false" type="VARCHAR" size="36"/>
+        <column name="valid_from" type="TIMESTAMP" required="false"/>
+        <column name="valid_to" type="TIMESTAMP" required="false"/>
+        <foreign-key name="spy_cms_page-fk_template" foreignTable="spy_cms_template" phpName="CmsTemplate" onDelete="CASCADE">
+            <reference foreign="id_cms_template" local="fk_template"/>
+        </foreign-key>
+        <index>
+            <index-column name="page_key"/>
+        </index>
+        <index name="index-spy_cms_page-fk_template">
+            <index-column name="fk_template"/>
+        </index>
+        <unique name="spy_cms_page-unique-uuid">
+            <unique-column name="uuid"/>
+        </unique>
+        <id-method-parameter value="spy_cms_page_pk_seq"/>
+        <behavior name="uuid">
+            <parameter name="key_columns" value="id_cms_page"/>
+        </behavior>
+        <behavior name="event">
+            <parameter name="spy_cms_page_all" column="*"/>
+        </behavior>
+    </table>
+    <table name="spy_cms_version">
+        <column name="id_cms_version" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_cms_page" type="INTEGER" required="true"/>
+        <column name="fk_user" type="INTEGER"/>
+        <column name="data" type="LONGVARCHAR"/>
+        <column name="version" type="INTEGER" required="true"/>
+        <column name="version_name" type="VARCHAR" size="255"/>
+        <foreign-key name="spy_cms_version-fk_user" foreignTable="spy_user">
+            <reference foreign="id_user" local="fk_user"/>
+        </foreign-key>
+        <foreign-key name="spy_cms_version-fk_cms_page" foreignTable="spy_cms_page" onDelete="CASCADE">
+            <reference foreign="id_cms_page" local="fk_cms_page"/>
+        </foreign-key>
+        <index name="spy_cms_version-index-fk_cms_page_version">
+            <index-column name="fk_cms_page"/>
+            <index-column name="version"/>
+        </index>
+        <index name="index-spy_cms_version-fk_user">
+            <index-column name="fk_user"/>
+        </index>
+        <id-method-parameter value="spy_cms_version_pk_seq"/>
+        <behavior name="timestampable"/>
+        <behavior name="event">
+            <parameter name="spy_cms_version_all" column="*"/>
+        </behavior>
+    </table>
+    <table name="spy_cms_template">
+        <column name="id_cms_template" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="template_name" type="VARCHAR" size="255" required="true"/>
+        <column name="template_path" type="VARCHAR" size="255" required="true"/>
+        <index name="spy_cms_template-template_path">
+            <index-column name="template_path"/>
+        </index>
+        <unique name="spy_cms_template-unique-template_path">
+            <unique-column name="template_path"/>
+        </unique>
+        <id-method-parameter value="spy_cms_template_pk_seq"/>
+    </table>
+    <table name="spy_cms_page_localized_attributes" idMethod="native" allowPkInsert="true">
+        <column name="id_cms_page_localized_attributes" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_cms_page" required="true" type="INTEGER"/>
+        <column name="fk_locale" required="true" type="INTEGER"/>
+        <column name="meta_description" required="false" type="LONGVARCHAR" default="NULL"/>
+        <column name="meta_keywords" required="false" type="LONGVARCHAR" default="NULL"/>
+        <column name="meta_title" required="false" type="VARCHAR" default="NULL" size="255"/>
+        <column name="name" required="true" size="255" type="VARCHAR"/>
+        <foreign-key name="spy_cms_page_localized_attributes-fk_cms_page" foreignTable="spy_cms_page" onDelete="CASCADE" onUpdate="CASCADE">
+            <reference local="fk_cms_page" foreign="id_cms_page"/>
+        </foreign-key>
+        <foreign-key name="spy_cms_page_localized_attributes-fk_locale" foreignTable="spy_locale" phpName="Locale">
+            <reference local="fk_locale" foreign="id_locale"/>
+        </foreign-key>
+        <index name="index-spy_cms_page_localized_attributes-fk_locale">
+            <index-column name="fk_locale"/>
+        </index>
+        <unique name="spy_cms_page_localized_attributes-unique-fk_cms_page">
+            <unique-column name="fk_cms_page"/>
+            <unique-column name="fk_locale"/>
+        </unique>
+        <id-method-parameter value="spy_cms_page_localized_attributes_pk_seq"/>
+        <behavior name="timestampable"/>
+    </table>
+    <table name="spy_cms_glossary_key_mapping">
+        <column name="id_cms_glossary_key_mapping" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_glossary_key" type="INTEGER" required="true"/>
+        <column name="fk_page" type="INTEGER" required="true"/>
+        <column name="placeholder" type="VARCHAR" size="255" required="true"/>
+        <foreign-key name="spy_cms_glossary_key_mapping-fk_page" foreignTable="spy_cms_page" phpName="CmsPage" onDelete="CASCADE">
+            <reference foreign="id_cms_page" local="fk_page"/>
+        </foreign-key>
+        <foreign-key name="spy_cms_glossary_key_mapping-fk_glossary_key" foreignTable="spy_glossary_key" phpName="GlossaryKey" onDelete="CASCADE">
+            <reference foreign="id_glossary_key" local="fk_glossary_key"/>
+        </foreign-key>
+        <index name="index-spy_cms_glossary_key_mapping-fk_glossary_key">
+            <index-column name="fk_glossary_key"/>
+        </index>
+        <unique name="spy_cms_glossary_key_mapping-unique-fk_page">
+            <unique-column name="fk_page"/>
+            <unique-column name="placeholder"/>
+        </unique>
+        <id-method-parameter value="spy_cms_glossary_key_mapping_pk_seq"/>
+    </table>
+    <table name="spy_cms_page_store" idMethod="native" allowPkInsert="true" identifierQuoting="true">
+        <column name="id_cms_page_store" required="true" type="INTEGER" primaryKey="true" autoIncrement="true"/>
+        <column name="fk_cms_page" required="true" type="INTEGER"/>
+        <column name="fk_store" required="true" type="INTEGER"/>
+        <foreign-key name="spy_cms_page_store-fk_cms_page" foreignTable="spy_cms_page">
+            <reference local="fk_cms_page" foreign="id_cms_page"/>
+        </foreign-key>
+        <foreign-key name="spy_cms_page_store-fk_store" foreignTable="spy_store">
+            <reference local="fk_store" foreign="id_store"/>
+        </foreign-key>
+        <index name="index-spy_cms_page_store-fk_store">
+            <index-column name="fk_store"/>
+        </index>
+        <unique name="spy_cms_page_store-fk_cms_page-fk_store">
+            <unique-column name="fk_cms_page"/>
+            <unique-column name="fk_store"/>
+        </unique>
+        <id-method-parameter value="id_cms_page_store_pk_seq"/>
+        <behavior name="event">
+            <parameter name="spy_cms_page_store_all" column="*"/>
+        </behavior>
+    </table>
+</database>

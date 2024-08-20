@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<database xmlns="spryker:schema-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\ProductCategory\Persistence" package="src.Orm.Zed.ProductCategory.Persistence">
+    <table name="spy_product_category" idMethod="native">
+        <column name="id_product_category" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_category" required="true" type="INTEGER"/>
+        <column name="fk_product_abstract" required="true" type="INTEGER"/>
+        <column name="product_order" required="false" default="0" type="INTEGER"/>
+        <foreign-key name="spy_product_category-fk_category" foreignTable="spy_category">
+            <reference foreign="id_category" local="fk_category"/>
+        </foreign-key>
+        <foreign-key name="spy_product_category-fk_product_abstract" foreignTable="spy_product_abstract">
+            <reference foreign="id_product_abstract" local="fk_product_abstract"/>
+        </foreign-key>
+        <index name="index-spy_product_category-fk_category">
+            <index-column name="fk_category"/>
+        </index>
+        <unique name="spy_product_category-unique-fk_product_abstract">
+            <unique-column name="fk_product_abstract"/>
+            <unique-column name="fk_category"/>
+        </unique>
+        <id-method-parameter value="spy_product_category_pk_seq"/>
+        <behavior name="event">
+            <parameter name="spy_product_category_all" column="*"/>
+        </behavior>
+    </table>
+</database>

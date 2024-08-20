@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<database xmlns="spryker:schema-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\Content\Persistence" package="src.Orm.Zed.Content.Persistence">
+    <table name="spy_content" identifierQuoting="true" phpName="SpyContent">
+        <column name="id_content" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="content_term_key" required="true" type="VARCHAR" size="255"/>
+        <column name="content_type_key" required="true" type="VARCHAR" size="255"/>
+        <column name="description" required="false" type="LONGVARCHAR"/>
+        <column name="key" required="true" type="VARCHAR" size="255" description="Identifier for existing entities. It should never be changed."/>
+        <column name="name" required="true" type="VARCHAR" size="255"/>
+        <unique name="spy_content-key">
+            <unique-column name="key"/>
+        </unique>
+        <id-method-parameter value="spy_content_pk_seq"/>
+        <behavior name="timestampable"/>
+        <behavior name="event">
+            <parameter name="spy_content_all" column="*"/>
+        </behavior>
+    </table>
+    <table name="spy_content_localized">
+        <column name="id_content_localized" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_content" required="true" type="INTEGER"/>
+        <column name="fk_locale" required="false" type="INTEGER"/>
+        <column name="parameters" required="true" type="LONGVARCHAR"/>
+        <foreign-key name="spy_content_localized-fk_content" foreignTable="spy_content">
+            <reference local="fk_content" foreign="id_content"/>
+        </foreign-key>
+        <foreign-key name="spy_content_localized-fk_locale" foreignTable="spy_locale">
+            <reference local="fk_locale" foreign="id_locale"/>
+        </foreign-key>
+        <index name="index-spy_content_localized-fk_locale">
+            <index-column name="fk_locale"/>
+        </index>
+        <unique name="fk_content_unique_fk_locale_unique">
+            <unique-column name="fk_content"/>
+            <unique-column name="fk_locale"/>
+        </unique>
+        <id-method-parameter value="spy_content_localized_pk_seq"/>
+        <behavior name="timestampable"/>
+    </table>
+</database>
