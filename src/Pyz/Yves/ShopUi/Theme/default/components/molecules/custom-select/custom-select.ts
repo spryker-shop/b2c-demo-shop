@@ -26,7 +26,7 @@ export default class CustomSelect extends Component {
     }
 
     protected onChangeSelect(): void {
-        const event = new Event('change');
+        const event = new Event('change', { bubbles: true });
         this.select.dispatchEvent(event);
         this.removeAttributeTitle();
     }

@@ -1,5 +1,5 @@
-import Component from 'ShopUi/models/component';
 import FormattedNumberInput from 'ShopUi/components/molecules/formatted-number-input/formatted-number-input';
+import Component from 'ShopUi/models/component';
 
 export default class QuantityCounter extends Component {
     protected quantityInput: HTMLInputElement;
@@ -8,8 +8,6 @@ export default class QuantityCounter extends Component {
     protected value: number;
     protected duration = 1000;
     protected timeout = 0;
-    protected inputEvent: Event = new Event('input');
-    protected changeEvent: Event = new Event('change');
     protected formattedNumberInput: FormattedNumberInput;
 
     protected readyCallback(): void {}
@@ -28,59 +26,66 @@ export default class QuantityCounter extends Component {
     }
 
     protected mapEvents(): void {
-        this.quantityInput.addEventListener('change', () => this.autoUpdateOnChange());
-        this.decrButton.addEventListener('click', () => this.onDecrementButtonClick());
-        this.incrButton.addEventListener('click', () => this.onIncrementButtonClick());
-    }
+        this.decrButton.addEventListener('click', (event) => this.onChangeQuantity(event, 'decrease'));
+        this.incrButton.addEventListener('click', (event) => this.onChangeQuantity(event, 'increase'));
+        this.quantityInput?.addEventListener('keydown', (event: KeyboardEvent) => this.onKeyDown(event));
 
-    protected onDecrementButtonClick(): void {
-        if (this.isDisabled) {
-            return;
-        }
-
-        const value = this.formattedNumberInput.unformattedValue;
-
-        if (value > this.minQuantity) {
-            this.quantityInput.value = (value - 1).toString();
-
-            this.autoUpdateOnChange();
-            this.triggerInputEvents();
-        }
-    }
-
-    protected onIncrementButtonClick(): void {
-        if (this.isDisabled) {
-            return;
-        }
-
-        const value = this.formattedNumberInput.unformattedValue;
-
-        if (value < this.maxQuantity) {
-            this.quantityInput.value = (value + 1).toString();
-
-            this.autoUpdateOnChange();
-            this.triggerInputEvents();
-        }
-    }
-
-    protected autoUpdateOnChange(): void {
         if (this.autoUpdate) {
-            this.timer();
+            this.quantityInput.addEventListener('change', () => this.delayToSubmit());
         }
     }
 
-    protected triggerInputEvents(): void {
-        this.quantityInput.dispatchEvent(this.inputEvent);
-        this.quantityInput.dispatchEvent(this.changeEvent);
+    protected onChangeQuantity(event: Event, type: 'decrease' | 'increase'): void {
+        event.preventDefault();
+
+        if (this.isDisabled) {
+            return;
+        }
+
+        const value = this.formattedNumberInput.unformattedValue;
+        const isDecrease = value > this.minQuantity && type === 'decrease';
+        const isIncrease = value < this.maxQuantity && type === 'increase';
+        const shouldUpdate = isDecrease || isIncrease;
+
+        if (!shouldUpdate) {
+            return;
+        }
+
+        this.quantityInput.value = (isDecrease ? value - 1 : isIncrease ? value + 1 : value).toString();
+
+        if (this.isAjaxMode) {
+            this.delayToSubmit(true);
+
+            return;
+        }
+
+        this.quantityInput.dispatchEvent(new Event('change'));
+        this.quantityInput.dispatchEvent(new Event('input'));
     }
 
-    protected timer(): void {
+    protected delayToSubmit(triggerInput = false): void {
         clearTimeout(this.timeout);
         this.timeout = window.setTimeout(() => {
-            if (this.value !== this.getValue) {
+            if (this.value === this.getValue) {
+                return;
+            }
+
+            if (this.isAjaxMode && triggerInput) {
+                this.quantityInput.dispatchEvent(new Event('input', { bubbles: true }));
+                this.quantityInput.dispatchEvent(new Event('change', { bubbles: true }));
+                return;
+            }
+
+            if (!this.isAjaxMode) {
                 this.quantityInput.form.submit();
             }
         }, this.duration);
+    }
+
+    protected onKeyDown(event: KeyboardEvent): void {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+        }
     }
 
     protected setMaxQuantityToInfinity(): void {
@@ -107,5 +112,9 @@ export default class QuantityCounter extends Component {
 
     protected get getValue(): number {
         return this.formattedNumberInput.unformattedValue;
+    }
+
+    protected get isAjaxMode(): boolean {
+        return !!this.quantityInput.getAttribute('data-ajax-mode');
     }
 }
