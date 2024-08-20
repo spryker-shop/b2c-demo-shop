@@ -1,0 +1,37 @@
+{% extends '@Gui/Layout/layout.twig' %}
+
+{% block content %}
+    <h1>Books List</h1>
+
+    {% if books is not empty %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Publication Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in books %}
+                    <tr>
+                        <td>{{ book.IdBook }}</td>
+                        <td>{{ book.Name }}</td>
+                        <td>{{ book.Description }}</td>
+                        <td>{{ book.PublicationDate|date('Y-m-d H:i:s') }}</td>
+                        <td>
+                            <a href="{{ url('/book/book/edit', { 'id': book.IdBook }) }}" class="btn btn-primary">Edit</a>
+                            <a href="{{ url('/book/book/delete', { 'id': book.IdBook }) }}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this book?');">Delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No books found.</p>
+    {% endif %}
+
+    <a href="{{ url('/book/book/create') }}" class="btn btn-success">Add New Book</a>
+{% endblock %}
