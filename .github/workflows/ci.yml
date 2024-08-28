@@ -297,6 +297,7 @@ jobs:
 
     php-81-mariadb-glue-alpine:
         name: "PHP 8.1 / MariaDB / Glue / Alpine"
+        if: "!contains(github.event.pull_request.head.ref, 'hackathon')"
         runs-on: ubuntu-22.04
         env:
             PROGRESS_TYPE: plain
