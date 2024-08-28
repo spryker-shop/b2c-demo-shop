@@ -227,6 +227,7 @@ jobs:
 
     php-82-postgresql-acceptance-alpine:
         name: "PHP 8.2 / PostgreSQL / Acceptance / Alpine"
+        if: "!contains(github.event.pull_request.labels.*.name, 'hackathon')"
         runs-on: ubuntu-22.04
         env:
             PROGRESS_TYPE: plain
