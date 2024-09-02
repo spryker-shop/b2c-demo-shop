@@ -234,7 +234,7 @@ class ProductAbstractHydratorStep implements DataImportStepInterface
                 ->setMetaDescription($localizedAttributes[static::COLUMN_META_DESCRIPTION])
                 ->setMetaKeywords($localizedAttributes[static::COLUMN_META_KEYWORDS])
                 ->setFkLocale($idLocale)
-                ->setAttributes((string)json_encode($localizedAttributes[static::KEY_ATTRIBUTES]));
+                ->setAttributes((string)json_encode($this->formatMultiSelectProductAttributes($localizedAttributes[static::KEY_ATTRIBUTES] ?? [])));
 
             $localizedAttributeTransfer[] = [
                 static::COLUMN_ABSTRACT_SKU => $dataSet[static::COLUMN_ABSTRACT_SKU],
