@@ -207,7 +207,7 @@ class ProductAbstractHydratorStep implements DataImportStepInterface
             ->setNewFrom($dataSet[static::COLUMN_NEW_FROM])
             ->setNewTo($dataSet[static::COLUMN_NEW_TO]);
 
-        $attributes = $this->formatMultiSelectProductAttributes($dataSet[static::KEY_ATTRIBUTES] ?? []);
+        $attributes = json_encode($this->formatMultiSelectProductAttributes($dataSet[static::KEY_ATTRIBUTES] ?? []));
 
         if ($attributes) {
             $productAbstractEntityTransfer->setAttributes($attributes);
