@@ -7,6 +7,8 @@
 
 namespace Pyz\Glue\ProductsRestApi;
 
+use Spryker\Glue\ProductAttributesRestApi\Plugin\ProductsRestApi\MultiSelectAttributeAbstractProductsResourceExpanderPlugin;
+use Spryker\Glue\ProductAttributesRestApi\Plugin\ProductsRestApi\MultiSelectAttributeConcreteProductsResourceExpanderPlugin;
 use Spryker\Glue\ProductConfigurationsRestApi\Plugin\ProductsRestApi\ProductConfigurationConcreteProductsResourceExpanderPlugin;
 use Spryker\Glue\ProductDiscontinuedRestApi\Plugin\ProductDiscontinuedConcreteProductsResourceExpanderPlugin;
 use Spryker\Glue\ProductReviewsRestApi\Plugin\ProductsRestApi\ProductReviewsAbstractProductsResourceExpanderPlugin;
@@ -24,6 +26,7 @@ class ProductsRestApiDependencyProvider extends SprykerProductsRestApiDependency
             new ProductDiscontinuedConcreteProductsResourceExpanderPlugin(),
             new ProductReviewsConcreteProductsResourceExpanderPlugin(),
             new ProductConfigurationConcreteProductsResourceExpanderPlugin(),
+            new MultiSelectAttributeConcreteProductsResourceExpanderPlugin(),
         ];
     }
 
@@ -34,6 +37,7 @@ class ProductsRestApiDependencyProvider extends SprykerProductsRestApiDependency
     {
         return [
             new ProductReviewsAbstractProductsResourceExpanderPlugin(),
+            new MultiSelectAttributeAbstractProductsResourceExpanderPlugin(),
         ];
     }
 }
