@@ -181,6 +181,14 @@ $jobs[] = [
     'enable' => true,
 ];
 
+$jobs[] = [
+    'name' => 'sync-order-matrix',
+    'command' => '$PHP_BIN vendor/bin/console order-matrix:sync',
+    'schedule' => '*/1 * * * *',
+    'enable' => true,
+    'global' => true,
+];
+
 if (getenv('SPRYKER_CURRENT_REGION')) {
     foreach ($jobs as $job) {
         $job['region'] = getenv('SPRYKER_CURRENT_REGION');

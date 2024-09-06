@@ -6167,12 +6167,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker-feature/order-management.git",
-                "reference": "1e09b0727a27910f4c3932d8ce8af377e032ba1f"
+                "reference": "5bd90bcb276c6a42c0b31092effd9f43b1c72eeb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker-feature/order-management/zipball/1e09b0727a27910f4c3932d8ce8af377e032ba1f",
-                "reference": "1e09b0727a27910f4c3932d8ce8af377e032ba1f",
+                "url": "https://api.github.com/repos/spryker-feature/order-management/zipball/5bd90bcb276c6a42c0b31092effd9f43b1c72eeb",
+                "reference": "5bd90bcb276c6a42c0b31092effd9f43b1c72eeb",
                 "shasum": ""
             },
             "require": {
@@ -6182,6 +6182,8 @@
                 "spryker/oms": "^11.31.0",
                 "spryker/order-custom-reference": "^1.0.0",
                 "spryker/order-custom-reference-gui": "^1.0.0",
+                "spryker/order-matrix": "^1.0.0",
+                "spryker/order-matrix-gui": "^1.0.0",
                 "spryker/sales": "^11.47.0",
                 "spryker/sales-data-export": "^0.2.0",
                 "spryker/sales-invoice": "^1.4.0",
@@ -6195,7 +6197,7 @@
             "type": "metapackage",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "202404.x-dev"
+                    "dev-master": "202407.x-dev"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -6204,9 +6206,9 @@
             ],
             "description": "Order Management [feature]",
             "support": {
-                "source": "https://github.com/spryker-feature/order-management/tree/202404.0"
+                "source": "https://github.com/spryker-feature/order-management/tree/master"
             },
-            "time": "2024-04-23T08:48:54+00:00"
+            "time": "2024-08-29T11:26:34+00:00"
         },
         {
             "name": "spryker-feature/payments",
@@ -7068,12 +7070,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker-feature/spryker-core.git",
-                "reference": "2cafd1b935cdc33f92534c007eda1e9bdb78ac82"
+                "reference": "c9fa350afb608096233720e78c97889f949ec66a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker-feature/spryker-core/zipball/2cafd1b935cdc33f92534c007eda1e9bdb78ac82",
-                "reference": "2cafd1b935cdc33f92534c007eda1e9bdb78ac82",
+                "url": "https://api.github.com/repos/spryker-feature/spryker-core/zipball/c9fa350afb608096233720e78c97889f949ec66a",
+                "reference": "c9fa350afb608096233720e78c97889f949ec66a",
                 "shasum": ""
             },
             "require": {
@@ -7119,6 +7121,7 @@
                 "spryker/health-check": "^1.0.1",
                 "spryker/http": "^1.11.0",
                 "spryker/installer": "^4.2.0",
+                "spryker/kernel-app": "^1.0.0",
                 "spryker/locale": "^4.5.0",
                 "spryker/locale-data-import": "^0.1.0",
                 "spryker/locale-gui": "^1.0.0",
@@ -7179,7 +7182,7 @@
             "support": {
                 "source": "https://github.com/spryker-feature/spryker-core/tree/master"
             },
-            "time": "2024-07-11T11:06:05+00:00"
+            "time": "2024-09-06T11:45:45+00:00"
         },
         {
             "name": "spryker-feature/spryker-core-back-office",
@@ -28024,6 +28027,61 @@
             "time": "2024-05-20T17:36:41+00:00"
         },
         {
+            "name": "spryker/kernel-app",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/kernel-app.git",
+                "reference": "01fa7697e8e3732c1f772295acb91e7832d9b3ae"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/kernel-app/zipball/01fa7697e8e3732c1f772295acb91e7832d9b3ae",
+                "reference": "01fa7697e8e3732c1f772295acb91e7832d9b3ae",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.1",
+                "spryker/guzzle": "^2.0.0",
+                "spryker/kernel": "^3.30.0",
+                "spryker/message-broker-extension": "^1.0.0",
+                "spryker/symfony": "^3.17.0",
+                "spryker/transfer": "^3.27.0",
+                "spryker/util-encoding": "^2.0.0"
+            },
+            "require-dev": {
+                "psr/http-message": "^1.1 || ^2.0",
+                "spryker/code-sniffer": "*",
+                "spryker/container": "*",
+                "spryker/kernel-app-extension": "*",
+                "spryker/message-broker": "*",
+                "spryker/propel": "*",
+                "spryker/ramsey-uuid": "*",
+                "spryker/testify": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/",
+                    "SprykerTest\\Shared\\KernelApp\\Helper\\": "tests/SprykerTest/Shared/KernelApp/_support/Helper/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "KernelApp module",
+            "support": {
+                "source": "https://github.com/spryker/kernel-app/tree/1.0.0"
+            },
+            "time": "2024-08-06T15:45:00+00:00"
+        },
+        {
             "name": "spryker/key-builder",
             "version": "1.1.0",
             "source": {
@@ -30512,19 +30570,20 @@
         },
         {
             "name": "spryker/oms",
-            "version": "11.31.0",
+            "version": "11.35.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/oms.git",
-                "reference": "8d0c3ba4530f225c362aec8d6bc9cf3a210e45fd"
+                "reference": "52bd9a804b191b0d2201a87bfc01825366d070c1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/oms/zipball/8d0c3ba4530f225c362aec8d6bc9cf3a210e45fd",
-                "reference": "8d0c3ba4530f225c362aec8d6bc9cf3a210e45fd",
+                "url": "https://api.github.com/repos/spryker/oms/zipball/52bd9a804b191b0d2201a87bfc01825366d070c1",
+                "reference": "52bd9a804b191b0d2201a87bfc01825366d070c1",
                 "shasum": ""
             },
             "require": {
+                "ext-simplexml": "*",
                 "php": ">=8.1",
                 "spryker/acl-merchant-portal-extension": "^1.0.0",
                 "spryker/decimal-object": "^1.0.0",
@@ -30578,9 +30637,9 @@
             ],
             "description": "Oms module",
             "support": {
-                "source": "https://github.com/spryker/oms/tree/11.31.0"
+                "source": "https://github.com/spryker/oms/tree/11.35.0"
             },
-            "time": "2024-03-07T13:22:26+00:00"
+            "time": "2024-08-29T09:44:14+00:00"
         },
         {
             "name": "spryker/oms-discount-connector",
@@ -30819,6 +30878,100 @@
                 "source": "https://github.com/spryker/order-custom-reference-gui/tree/1.0.0"
             },
             "time": "2020-03-18T13:04:41+00:00"
+        },
+        {
+            "name": "spryker/order-matrix",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/order-matrix.git",
+                "reference": "d93852808cc527987b2629a91bb7982a013bbce1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/order-matrix/zipball/d93852808cc527987b2629a91bb7982a013bbce1",
+                "reference": "d93852808cc527987b2629a91bb7982a013bbce1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.1",
+                "spryker/kernel": "^3.30.0",
+                "spryker/oms": "^11.35.0",
+                "spryker/storage-redis": "^1.0.0",
+                "spryker/symfony": "^3.0.0",
+                "spryker/transfer": "^3.27.0",
+                "spryker/util-encoding": "^2.1.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/testify": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "OrderMatrix module",
+            "support": {
+                "source": "https://github.com/spryker/order-matrix/tree/1.0.0"
+            },
+            "time": "2024-08-29T09:44:14+00:00"
+        },
+        {
+            "name": "spryker/order-matrix-gui",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/order-matrix-gui.git",
+                "reference": "f2d49f56a19a6056c029bac08a361f75356c4f2e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/order-matrix-gui/zipball/f2d49f56a19a6056c029bac08a361f75356c4f2e",
+                "reference": "f2d49f56a19a6056c029bac08a361f75356c4f2e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.1",
+                "spryker/kernel": "^3.30.0",
+                "spryker/order-matrix": "^1.0.0",
+                "spryker/sales": "^11.0.0",
+                "spryker/transfer": "^3.27.0",
+                "spryker/util-sanitize": "^2.0.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "OrderMatrixGui module",
+            "support": {
+                "source": "https://github.com/spryker/order-matrix-gui/tree/1.0.0"
+            },
+            "time": "2024-08-29T09:44:14+00:00"
         },
         {
             "name": "spryker/order-payments-rest-api",
@@ -62094,5 +62247,5 @@
     "platform-overrides": {
         "php": "8.1.0"
     },
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.3.0"
 }
