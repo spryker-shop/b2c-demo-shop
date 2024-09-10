@@ -40090,16 +40090,16 @@
         },
         {
             "name": "spryker/queue",
-            "version": "1.10.0",
+            "version": "1.13.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/queue.git",
-                "reference": "9dad70c821ee6bab666aa1ab42e81d2f4d57af1a"
+                "reference": "612d69d1daf3974410b5ca2a42749b005ef08e53"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/queue/zipball/9dad70c821ee6bab666aa1ab42e81d2f4d57af1a",
-                "reference": "9dad70c821ee6bab666aa1ab42e81d2f4d57af1a",
+                "url": "https://api.github.com/repos/spryker/queue/zipball/612d69d1daf3974410b5ca2a42749b005ef08e53",
+                "reference": "612d69d1daf3974410b5ca2a42749b005ef08e53",
                 "shasum": ""
             },
             "require": {
@@ -40107,6 +40107,7 @@
                 "spryker/gui": "^3.0.0",
                 "spryker/kernel": "^3.30.0",
                 "spryker/propel-orm": "^1.0.0",
+                "spryker/queue-extension": "^1.0.0",
                 "spryker/symfony": "^3.0.0",
                 "spryker/transfer": "^3.0.0",
                 "spryker/util-encoding": "^2.1.0"
@@ -40141,9 +40142,50 @@
             ],
             "description": "Queue module",
             "support": {
-                "source": "https://github.com/spryker/queue/tree/1.10.0"
+                "source": "https://github.com/spryker/queue/tree/1.13.0"
             },
-            "time": "2023-11-02T20:09:27+00:00"
+            "time": "2024-09-10T09:23:46+00:00"
+        },
+        {
+            "name": "spryker/queue-extension",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/queue-extension.git",
+                "reference": "778248bcd35916e9b59dcbc57a3242bd82f3ad03"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/queue-extension/zipball/778248bcd35916e9b59dcbc57a3242bd82f3ad03",
+                "reference": "778248bcd35916e9b59dcbc57a3242bd82f3ad03",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.1"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "QueueExtension module",
+            "support": {
+                "source": "https://github.com/spryker/queue-extension/tree/1.0.0"
+            },
+            "time": "2024-09-10T09:23:46+00:00"
         },
         {
             "name": "spryker/quick-order-extension",
@@ -40372,16 +40414,16 @@
         },
         {
             "name": "spryker/rabbit-mq",
-            "version": "2.18.0",
+            "version": "2.20.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/rabbit-mq.git",
-                "reference": "046834c71ca024e4eb494ec6a42aab6b072640fa"
+                "reference": "5b0dcb1e19fed87eaa0bbb777c04009c6b0740cd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/rabbit-mq/zipball/046834c71ca024e4eb494ec6a42aab6b072640fa",
-                "reference": "046834c71ca024e4eb494ec6a42aab6b072640fa",
+                "url": "https://api.github.com/repos/spryker/rabbit-mq/zipball/5b0dcb1e19fed87eaa0bbb777c04009c6b0740cd",
+                "reference": "5b0dcb1e19fed87eaa0bbb777c04009c6b0740cd",
                 "shasum": ""
             },
             "require": {
@@ -40391,7 +40433,8 @@
                 "spryker/kernel": "^3.56.0",
                 "spryker/log": "^3.7.0",
                 "spryker/queue": "^1.5.0",
-                "spryker/store": "^1.10.0",
+                "spryker/queue-extension": "^1.0.0",
+                "spryker/store": "^1.21.0",
                 "spryker/symfony": "^3.5.0",
                 "spryker/transfer": "^3.33.1"
             },
@@ -40400,7 +40443,7 @@
                 "codeception/stub": "^4.1",
                 "mikey179/vfsstream": "^1.6.11",
                 "spryker/code-sniffer": "^0.17.1",
-                "spryker/testify": "^3.47.0"
+                "spryker/testify": "^3.49.0"
             },
             "type": "library",
             "extra": {
@@ -40438,7 +40481,7 @@
             "support": {
                 "source": "https://github.com/spryker/rabbit-mq"
             },
-            "time": "2024-03-21T18:45:00+00:00"
+            "time": "2024-09-10T09:23:43+00:00"
         },
         {
             "name": "spryker/ramsey-uuid",
@@ -62247,5 +62290,5 @@
     "platform-overrides": {
         "php": "8.1.0"
     },
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.6.0"
 }
