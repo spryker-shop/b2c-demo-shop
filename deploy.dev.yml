@@ -1,6 +1,6 @@
 version: "0.1"
 
-namespace: spryker_b2c_dev
+namespace: spryker_b2c_dev-ai-anything-search
 tag: 'dev'
 
 environment: docker.dev
@@ -10,20 +10,20 @@ image:
         enabled-extensions:
             - blackfire
     environment:
-        #AOP
+        # AOP
         SPRYKER_AOP_INFRASTRUCTURE: '{
-            "SPRYKER_MESSAGE_BROKER_HTTP_SENDER_CONFIG": {},
-            "SPRYKER_MESSAGE_BROKER_SQS_RECEIVER_CONFIG": {}
+               "SPRYKER_MESSAGE_BROKER_HTTP_SENDER_CONFIG": {},
+               "SPRYKER_MESSAGE_BROKER_SQS_RECEIVER_CONFIG": {}
         }'
         SPRYKER_AOP_APPLICATION: '{
-            "APP_DOMAINS": [],
-            "STORE_NAME_REFERENCE_MAP": {},
-            "APP_CATALOG_SCRIPT_URL": ""
+               "APP_DOMAINS": [],
+               "STORE_NAME_REFERENCE_MAP": {},
+               "APP_CATALOG_SCRIPT_URL": ""
         }'
         SPRYKER_AOP_AUTHENTICATION: '{
-            "AUTH0_CUSTOM_DOMAIN": "",
-            "AUTH0_CLIENT_ID": "",
-            "AUTH0_CLIENT_SECRET": ""
+               "AUTH0_CUSTOM_DOMAIN": "",
+               "AUTH0_CLIENT_ID": "",
+               "AUTH0_CLIENT_SECRET": ""
         }'
         SPRYKER_PRODUCT_CONFIGURATOR_HOST: date-time-configurator-example.spryker.local
         SPRYKER_PRODUCT_CONFIGURATOR_PORT: 80
