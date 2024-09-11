@@ -113,8 +113,11 @@ class QueueDependencyProvider extends SprykerDependencyProvider
      */
     protected function getQueueMessageCheckerPlugins(): array
     {
-        return [
-            new RabbitMqQueueMessageCheckerPlugin(),
-        ];
+        return array_merge(
+            parent::getQueueMessageCheckerPlugins(),
+            [
+                new RabbitMqQueueMessageCheckerPlugin(),
+            ],
+        );
     }
 }
