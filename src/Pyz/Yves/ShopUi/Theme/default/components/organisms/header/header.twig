@@ -97,6 +97,10 @@
 
                 {% if data.showSearchForm %}
                     {% include molecule('search-form') with {
+                        class: config.name ~ '__search-form',
+                        data: {
+                            byImage: true,
+                        },
                         attributes: {
                             'data-search-id': 'desktop',
                             'wrapper-class-name': 'js-' ~ config.name ~ '__search-wrapper',
