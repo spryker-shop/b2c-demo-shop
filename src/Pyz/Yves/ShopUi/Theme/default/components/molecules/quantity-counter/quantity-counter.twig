@@ -18,6 +18,7 @@
         name: 'quantity',
     },
     numberFormatConfig: {},
+    ajaxTriggerAttribute: '',
 } %}
 
 {% set maxQuantity = data.maxQuantity < 0 or data.maxQuantity < data.minQuantity ? false : data.maxQuantity %}
@@ -57,7 +58,7 @@
                         inputName: data.inputAttributes.name,
                         inputExtraClasses: inputClassName,
                         inputValue: data.value,
-                        inputAttributes: inputAttributes,
+                        inputAttributes: inputAttributes | merge(data.ajaxTriggerAttribute ? { 'data-ajax-mode': data.ajaxTriggerAttribute, (data.ajaxTriggerAttribute): 'change', } : {}),
                         hiddenInputAttributes: hiddenInputAttributes,
                     },
                     attributes: formatAttributes,

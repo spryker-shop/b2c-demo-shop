@@ -7,6 +7,7 @@
 
 namespace Pyz\Zed\DataImport\Business\Model\Product\Repository;
 
+use Generated\Shared\Transfer\PaginationTransfer;
 use Orm\Zed\Product\Persistence\SpyProduct;
 use Orm\Zed\Product\Persistence\SpyProductAbstract;
 use Propel\Runtime\Collection\ArrayCollection;
@@ -45,9 +46,11 @@ interface ProductRepositoryInterface
     public function getSkuProductConcreteList(): array;
 
     /**
+     * @param \Generated\Shared\Transfer\PaginationTransfer $paginationTransfer
+     *
      * @return \Propel\Runtime\Collection\ArrayCollection
      */
-    public function getProductConcreteAttributesCollection(): ArrayCollection;
+    public function getProductConcreteAttributesCollection(PaginationTransfer $paginationTransfer): ArrayCollection;
 
     /**
      * @param \Orm\Zed\Product\Persistence\SpyProductAbstract $productAbstractEntity

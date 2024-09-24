@@ -6,7 +6,7 @@ tag: '1.0'
 environment: docker.ci
 pipeline: docker.ci.acceptance.dynamic-store
 image:
-    tag: spryker/php:8.1
+    tag: spryker/php:8.2
     environment:
         SPRYKER_PRODUCT_CONFIGURATOR_HOST: date-time-configurator-example.spryker.local
         SPRYKER_PRODUCT_CONFIGURATOR_PORT: 80
@@ -98,6 +98,9 @@ services:
         root:
             username: 'root'
             password: 'secret'
+        endpoints:
+            localhost:3306:
+                protocol: tcp
     broker:
         engine: rabbitmq
         version: '3.9'
@@ -113,7 +116,7 @@ services:
         version: '7.10'
     scheduler:
         engine: jenkins
-        version: '2.401'
+        version: '2.442'
         csrf-protection-enabled: true
     mail_catcher:
         engine: mailhog

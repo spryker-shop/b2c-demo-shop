@@ -54,23 +54,6 @@
             }
         }
 
-        &--send-review {
-            position: absolute;
-            top: rem(13);
-            right: rem(24);
-            min-width: rem(100);
-            padding: rem(12) rem(16);
-
-            @include helper-breakpoint-media-min($lg-min) {
-                min-width: $button-min-width;
-                padding: rem(16);
-                margin-top: rem(20);
-                position: relative;
-                top: 0;
-                right: 0;
-            }
-        }
-
         &--quantity {
             border: rem(1) solid $setting-color-gray-4;
             border-radius: 50%;
@@ -189,7 +172,9 @@
         }
 
         &--agent {
-            min-width: rem(79);
+            border-radius: 0 rem(2) rem(2) 0;
+            min-width: 0;
+            padding: rem(11) rem(12);
         }
 
         &--combined {

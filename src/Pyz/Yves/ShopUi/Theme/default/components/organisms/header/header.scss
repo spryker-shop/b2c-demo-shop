@@ -2,7 +2,6 @@
     #{$name} {
         position: relative;
         background-color: $setting-color-white;
-        z-index: $setting-zi-header;
         padding-top: rem(4);
         border-bottom: rem(1) solid $setting-color-gray-1;
 
@@ -61,41 +60,23 @@
             z-index: $setting-zi-header + 1;
         }
 
-        &__overlay-shadow {
-            @include helper-effect-transition(background-color opacity visibility, 400ms);
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 100%;
-            z-index: $setting-zi-underside;
-            opacity: 0;
-            visibility: hidden;
-        }
-
-        &__search-overlay {
+        &__search-wrapper {
             position: absolute;
             top: 0;
             z-index: $setting-zi-search-suggestions;
             visibility: hidden;
 
-            &.active {
+            &-active {
                 visibility: visible;
 
-                #{$name}__overlay-shadow {
-                    visibility: visible;
-                    opacity: 0.4;
-                    background: $setting-color-black;
-                }
-
-                #{$name}__search-overlay-container {
+                #{$name}__search {
                     @include helper-visibility-visible;
                     transform: scaleY(1);
                 }
             }
         }
 
-        &__search-overlay-container {
+        &__search {
             @include helper-effect-transition(all);
             @include helper-visibility-invisible;
             padding: rem(34) rem(30);

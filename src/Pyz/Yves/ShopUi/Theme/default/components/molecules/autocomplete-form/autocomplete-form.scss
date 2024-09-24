@@ -1,13 +1,20 @@
-@include shop-ui-autocomplete-form {
+@include shop-ui-autocomplete-form() {
+    $name: '.autocomplete-form';
     margin-right: rem(20);
 
-    &__suggestion {
+    &__suggestions {
+        @include helper-font-size(small);
+        @include helper-font-line-height(default);
         background-color: $setting-color-white;
         border-radius: rem(3);
         padding: rem(12) rem(18);
-        font-size: rem(19);
-        line-height: 1.79;
         color: $setting-color-black;
+        box-shadow: 0 rem(10) rem(10) 0 $setting-color-alpha-1;
+
+        @include helper-breakpoint-media-min($lg-min) {
+            font-size: rem(19);
+            line-height: 1.79;
+        }
     }
 
     &__item {
@@ -24,8 +31,9 @@
         position: relative;
     }
 
-    &__input {
+    #{$name}__input {
         border: none;
+        border-radius: rem(3) 0 0 rem(3);
         background-color: $setting-color-gray-1;
         font-weight: fw(medium);
         font-size: rem(18);
@@ -37,10 +45,39 @@
         opacity: 0.3;
     }
 
-    &__clean-button {
+    #{$name}__clean-button {
         position: absolute;
         top: 0;
         right: 0;
         bottom: 0;
+    }
+
+    &--small {
+        margin-right: 0;
+
+        #{$name}__suggestions {
+            padding: rem(14) rem(12);
+        }
+
+        #{$name}__input {
+            @include helper-font-size(small);
+            padding: rem(12) rem(40) rem(12) rem(14);
+            line-height: rem(16);
+        }
+
+        #{$name}__clean-button {
+            padding: rem(14);
+            line-height: 0;
+
+            &:hover,
+            &:focus {
+                color: $setting-color-gray-4;
+            }
+        }
+
+        #{$name}__icon {
+            width: rem(12);
+            height: rem(12);
+        }
     }
 }

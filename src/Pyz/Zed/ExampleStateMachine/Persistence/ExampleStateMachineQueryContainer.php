@@ -26,9 +26,9 @@ class ExampleStateMachineQueryContainer extends AbstractQueryContainer implement
      */
     public function queryStateMachineItemsByStateIds(array $stateIds = []): ExampleStateMachineItemQuery
     {
-          return $this->getFactory()
-              ->createExampleStateMachineQuery()
-              ->filterByFkStateMachineItemState($stateIds, Criteria::IN);
+        return $this->getFactory()
+            ->createExampleStateMachineQuery()
+            ->filterByFkStateMachineItemState($stateIds, Criteria::IN);
     }
 
     /**
@@ -38,9 +38,10 @@ class ExampleStateMachineQueryContainer extends AbstractQueryContainer implement
      */
     public function queryAllStateMachineItems(): ObjectCollection
     {
-         return $this->getFactory()
-             ->createExampleStateMachineQuery()
-             ->find();
+        /** @phpstan-var \Propel\Runtime\Collection\ObjectCollection<\Orm\Zed\ExampleStateMachine\Persistence\ExampleStateMachineItem> */
+        return $this->getFactory()
+            ->createExampleStateMachineQuery()
+            ->find();
     }
 
     /**

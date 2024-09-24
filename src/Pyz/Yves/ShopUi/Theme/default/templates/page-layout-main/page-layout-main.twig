@@ -73,7 +73,12 @@
     {% block outside %}{% endblock %}
 
     {% block header %}
-        {% embed organism('header') only %}
+        {% embed organism('header') with {
+            data: {
+                isAjaxMode: data.isAjaxHeader,
+                ajaxCartUrl: data.ajaxCartUrl,
+            },
+        } only %}
             {% block mainNavigation %}
                 {% cms_slot 'slt-desktop-header' %}
             {% endblock %}
@@ -129,6 +134,12 @@
         {% include molecule('page-load-state') with {
             attributes: {
                 'body-loading-class-name': pageLoadingClassName,
+            },
+        } only %}
+
+        {% include molecule('main-overlay') with {
+            attributes: {
+                'is-open': data.isOverlayOpen,
             },
         } only %}
     {% endblock %}

@@ -11,8 +11,8 @@ namespace PyzTest\Zed\MessageBroker;
 
 use Codeception\Actor;
 use Generated\Shared\DataBuilder\MessageAttributesBuilder;
-use Generated\Shared\Transfer\PaymentMethodAddedTransfer;
-use Generated\Shared\Transfer\PaymentMethodDeletedTransfer;
+use Generated\Shared\Transfer\AddPaymentMethodTransfer;
+use Generated\Shared\Transfer\DeletePaymentMethodTransfer;
 use Orm\Zed\Payment\Persistence\SpyPaymentMethodQuery;
 use Orm\Zed\Payment\Persistence\SpyPaymentMethodStoreQuery;
 use Ramsey\Uuid\Uuid;
@@ -38,21 +38,21 @@ use Spryker\Zed\Payment\Dependency\Service\PaymentToUtilTextServiceBridge;
 class PaymentMethodPresentationTester extends Actor
 {
     use _generated\PaymentMethodPresentationTesterActions {
-        havePaymentMethodAddedTransfer as protected testerHavePaymentMethodAddedTransferAction;
-        havePaymentMethodDeletedTransfer as protected testerHavePaymentMethodDeletedTransferAction;
+        haveAddPaymentMethodTransfer as protected testerHaveAddPaymentMethodTransferAction;
+        haveDeletePaymentMethodTransfer as protected testerHaveDeletePaymentMethodTransferAction;
     }
 
     /**
      * @param array<string, mixed> $seedData
      * @param array<string, mixed> $messageAttributesSeedData
      *
-     * @return \Generated\Shared\Transfer\PaymentMethodAddedTransfer
+     * @return \Generated\Shared\Transfer\AddPaymentMethodTransfer
      */
-    public function havePaymentMethodAddedTransfer(
+    public function haveAddPaymentMethodTransfer(
         array $seedData,
         array $messageAttributesSeedData = [],
-    ): PaymentMethodAddedTransfer {
-        return $this->testerHavePaymentMethodAddedTransferAction($seedData)
+    ): AddPaymentMethodTransfer {
+        return $this->testerHaveAddPaymentMethodTransferAction($seedData)
             ->setMessageAttributes(
                 (new MessageAttributesBuilder($messageAttributesSeedData))->build(),
             );
@@ -62,13 +62,13 @@ class PaymentMethodPresentationTester extends Actor
      * @param array<string, mixed> $seedData
      * @param array<string, mixed> $messageAttributesSeedData
      *
-     * @return \Generated\Shared\Transfer\PaymentMethodDeletedTransfer
+     * @return \Generated\Shared\Transfer\DeletePaymentMethodTransfer
      */
-    public function havePaymentMethodDeletedTransfer(
+    public function haveDeletePaymentMethodTransfer(
         array $seedData,
         array $messageAttributesSeedData = [],
-    ): PaymentMethodDeletedTransfer {
-        return $this->testerHavePaymentMethodDeletedTransferAction($seedData)
+    ): DeletePaymentMethodTransfer {
+        return $this->testerHaveDeletePaymentMethodTransferAction($seedData)
             ->setMessageAttributes(
                 (new MessageAttributesBuilder($messageAttributesSeedData))->build(),
             );

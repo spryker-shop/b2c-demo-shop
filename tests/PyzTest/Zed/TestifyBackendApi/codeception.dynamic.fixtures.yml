@@ -1,0 +1,58 @@
+namespace: PyzTest\Zed\TestifyBackendApi
+
+paths:
+    tests: .
+    data: _data
+    support: _support
+    output: _output
+
+suites:
+    DynamicFixture:
+        actor: DynamicFixtureTester
+        modules:
+            enabled:
+                - \PyzTest\Shared\Testify\Helper\Environment
+                - \SprykerTest\Shared\Testify\Helper\LocatorHelper:
+                      projectNamespaces: ['Pyz']
+                - \SprykerTest\Shared\Propel\Helper\ConnectionHelper
+                - \SprykerTest\Service\Container\Helper\ContainerHelper
+                - \SprykerTest\Zed\Application\Helper\ApplicationHelper
+                - \SprykerTest\Zed\EventDispatcher\Helper\EventDispatcherHelper
+                - \SprykerTest\Shared\Testify\Helper\DataCleanupHelper
+                - \SprykerTest\Zed\Testify\Helper\Communication\DependencyProviderHelper
+                - \SprykerTest\Shared\Sales\Helper\SalesDataHelper
+                - \SprykerTest\Shared\Testify\Helper\ConfigHelper
+                - \SprykerTest\Shared\Customer\Helper\CustomerDataHelper
+                - \SprykerTest\Shared\Testify\Helper\DependencyHelper
+                - \SprykerTest\Glue\AuthRestApi\Helper\AuthRestApiHelper
+                - \SprykerTest\Shared\Quote\Helper\PersistentQuoteHelper
+                - \SprykerTest\Shared\Product\Helper\ProductDataHelper
+                - \SprykerTest\Shared\Store\Helper\StoreDependencyHelper
+                - \SprykerTest\Zed\SalesOrderThreshold\Helper\SalesOrderThresholdHelper
+                - \SprykerTest\Shared\StockAddress\Helper\StockAddressDataHelper
+                - \SprykerTest\Shared\Stock\Helper\StockDataHelper
+                - \SprykerTest\Zed\Testify\Helper\Communication\CommunicationHelper
+                - \SprykerTest\Shared\TestifyBackendApi\Helper\TestifyBackendApiHelper
+                - \SprykerTest\Shared\PriceProduct\Helper\PriceProductDataHelper
+                - \SprykerTest\Shared\User\Helper\UserDataHelper
+                - \SprykerTest\Zed\Acl\Helper\AclHelper
+                - \SprykerTest\Shared\Stock\Helper\StockDataHelper
+                - \SprykerTest\Shared\Url\Helper\UrlDataHelper
+                - \SprykerTest\Shared\ProductImage\Helper\ProductImageDataHelper
+                - \SprykerTest\Zed\Permission\Helper\PermissionHelper
+                - \SprykerTest\Zed\Country\Helper\CountryDataHelper
+                - \SprykerTest\Shared\Discount\Helper\DiscountDataHelper
+                - \SprykerTest\Zed\Twig\Helper\TwigHelper:
+                      twigPlugins:
+                          - \Spryker\Zed\Application\Communication\Plugin\Twig\ApplicationTwigPlugin
+                          - \Spryker\Zed\CmsBlock\Communication\Plugin\Twig\CmsBlockTwigExtensionPlugin
+                      loaderPlugins:
+                          - \Spryker\Zed\Twig\Communication\Plugin\FilesystemTwigLoaderPlugin
+                          - \Spryker\Zed\Twig\Communication\Plugin\FormFilesystemTwigLoaderPlugin
+                          - \Spryker\Zed\Gui\Communication\Plugin\Twig\GuiTwigLoaderPlugin
+                          - \Spryker\Zed\CmsBlock\Communication\Plugin\Twig\CmsBlockTemplateTwigLoaderPlugin
+            config:
+                \SprykerTest\Shared\Testify\Helper\DataCleanupHelper:
+                    cleanup: false
+                \SprykerTest\Shared\Customer\Helper\CustomerDataHelper:
+                    isMailFacadeMockEnabled: false

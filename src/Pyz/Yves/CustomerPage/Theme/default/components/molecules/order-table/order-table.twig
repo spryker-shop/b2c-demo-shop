@@ -4,11 +4,54 @@
     requestUri: app.request.requestUri,
 } %}
 
+{% block customerReorderAction %}
+    {% widget 'CustomerReorderFormWidget' args [order] only %}
+        {% block body %}
+            {% include molecule('remote-form-submit') with {
+                data: {
+                    label: 'customer.order.reorder' | trans,
+                    buttonClass: 'table-action-list__link',
+                },
+                attributes: {
+                    'form-name': 'customerReorderWidgetForm_' ~ data.order.idSalesOrder,
+                    'form-action': path('customer/order/reorder', { idSalesOrder: data.order.idSalesOrder }),
+                    'field-id': 'customerReorderWidgetForm__token_' ~ data.order.idSalesOrder,
+                    'field-name': 'customerReorderWidgetForm[_token]',
+                    'field-value': csrf_token('customerReorderWidgetForm'),
+                },
+            } only %}
+        {% endblock %}
+    {% endwidget %}
+{% endblock %}
+
+{% block orderCancelAction %}
+    {% widget 'OrderCancelButtonWidget' args [order, data.requestUri] only %}
+        {% block body %}
+            {% include molecule('remote-form-submit') with {
+                data: {
+                    label: 'order_cancel_widget.cancel_order' | trans,
+                    buttonClass: 'table-action-list__link',
+                },
+                attributes: {
+                    'form-name': 'orderCancelForm_' ~ data.order.idSalesOrder,
+                    'form-action': path('order/cancel', {
+                        'id-sales-order': data.order.idSalesOrder,
+                        'return-url': data.returnUrl,
+                    }),
+                    'field-id': 'orderCancelForm__token_' ~ data.order.idSalesOrder,
+                    'field-name': 'orderCancelForm[_token]',
+                    'field-value': csrf_token('orderCancelForm'),
+                },
+            } only %}
+        {% endblock %}
+    {% endwidget %}
+{% endblock %}
+
 {% block body %}
     {% if data.orders is empty %}
         <p>{{ 'customer.account.no_order' | trans }}</p>
     {% else %}
-        <table class="table table--expand table--customer-account table--order">
+        <table class="table table--expand table--responsive">
             <thead>
                 <tr>
                     <th>{{ 'customer.order.order_id' | trans }}</th>
@@ -21,99 +64,39 @@
             <tbody>
                 {% for order in data.orders %}
                     <tr class="table__tr table__tr--with-border">
-                        <td>{{ order.orderReference }}</td>
-                        <td>{{ date(order.createdAt) | formatDateTime }}</td>
-                        <td>{{ order.totals.grandTotal | default(0) | money(true, order.currencyIsoCode) }}</td>
-                        <td>
-                            {% block stateWrapper %}
-                                {% set stateCollection = data.ordersAggregatedItemStateDisplayNames[order.orderReference] %}
-
-                                {% if order.orderReference and stateCollection %}
-                                    {% for displayName, stateNames in stateCollection %}
-                                        {% block state %}
-                                            {% include molecule('status') with {
-                                                data: {
-                                                    label: displayName | trans,
-                                                    status: stateNames | first | replace({' ': '-'}) | lower,
-                                                },
-                                            } only %}
-                                        {% endblock %}
-                                    {% endfor %}
-                                {% endif %}
-                            {% endblock %}
+                        <td class="transform-cell transform-cell--spacing-top" data-content="{{ 'customer.order.order_id' | trans }}">
+                            {{ order.orderReference }}
                         </td>
-                        <td class="text-right">
-                            <ul class="menu menu--inline menu--customer-account menu--actions">
-                                <li class="menu__item">
-                                    <a class="menu__link" href="{{ path('customer/order/details', {'id': order.idSalesOrder}) }}">
-                                        {{ 'customer.order.view_order' | trans }}
-                                    </a>
-                                </li>
-
-                                {% if widgetExists('CustomerReorderWidgetPlugin') %}
-                                    <li class="menu__item">
-                                        {% include molecule('remote-form-submit') with {
-                                            data: {
-                                                label: 'customer.order.reorder' | trans,
-                                                buttonClass: 'menu__link',
-                                            },
-                                            attributes: {
-                                                'form-name': 'customerReorderWidgetForm_' ~ order.idSalesOrder,
-                                                'form-action': path('customer/order/reorder', {'idSalesOrder': order.idSalesOrder}),
-                                                'field-id': 'customerReorderWidgetForm__token_' ~ order.idSalesOrder,
-                                                'field-name': 'customerReorderWidgetForm[_token]',
-                                                'field-value': csrf_token('customerReorderWidgetForm'),
-                                            },
-                                        } only %}
-                                    </li>
-                                {% else %}
-                                    {% include molecule('customer-reorder-link', 'CustomerReorderWidget') ignore missing with {
-                                        data: {
-                                            idSalesOrder: order.idSalesOrder,
+                        <td class="transform-cell" data-content="{{ 'customer.order.date' | trans }}">
+                            {{ date(order.createdAt) | formatDateTime }}
+                        </td>
+                        <td class="transform-cell" data-content="{{ 'customer.order.total' | trans }}">
+                            {{ order.totals.grandTotal | default(0) | money(true, order.currencyIsoCode) }}
+                        </td>
+                        <td class="transform-cell transform-cell--spacing-bottom" data-content="{{ 'customer.order.items_state' | trans }}">
+                            <div>{{ block('stateWrapper') }}</div>
+                        </td>
+                        <td class="table__actions">
+                            {% include molecule('table-action-list') with {
+                                data: {
+                                    items: [
+                                        {
+                                            url: path('customer/order/details', { id: order.idSalesOrder }),
+                                            title: 'customer.order.view_order' | trans,
                                         },
-                                    } only %}
-                                {% endif %}
-
-                                {% embed molecule('return-create-link', 'SalesReturnPage') ignore missing with {
-                                    data: {
-                                        orderReference: order.orderReference,
-                                    },
-                                } only %}
-                                    {%- block extraClass %} menu__link{% endblock -%}
-
-                                    {% block component %}
-                                        <li class="menu__item">
-                                            {{ parent() }}
-                                        </li>
-                                    {% endblock %}
-                                {% endembed %}
-
-                                {% block orderCancelButton %}
-                                    {% widget 'OrderCancelButtonWidget' args [order, data.requestUri] only %}
-                                        {% block body %}
-                                            {% set buttonClasses = 'menu__link' %}
-                                            <li class="menu__item">
-                                                {% include molecule('remote-form-submit') with {
-                                                    data: {
-                                                        label: 'order_cancel_widget.cancel_order' | trans,
-                                                        buttonClass: buttonClasses,
-                                                    },
-                                                    attributes: {
-                                                        'form-name': 'orderCancelForm_' ~ data.order.idSalesOrder,
-                                                        'form-action': path('order/cancel', {
-                                                            'id-sales-order': data.order.idSalesOrder,
-                                                            'return-url': data.returnUrl,
-                                                        }),
-                                                        'field-id': 'orderCancelForm__token_' ~ data.order.idSalesOrder,
-                                                        'field-name': 'orderCancelForm[_token]',
-                                                        'field-value': csrf_token('orderCancelForm'),
-                                                    },
-                                                } only %}
-                                            </li>
-                                        {% endblock %}
-                                    {% endwidget %}
-                                {% endblock %}
-                            </ul>
+                                        {
+                                            customAction: block('customerReorderAction'),
+                                        },
+                                        {
+                                            url: path('return/create', { orderReference: order.orderReference }),
+                                            title: 'return_page.button.create_return' | trans,
+                                        },
+                                        {
+                                            customAction: block('orderCancelAction'),
+                                        },
+                                    ],
+                                },
+                            } only %}
                         </td>
                     </tr>
                 {% endfor %}

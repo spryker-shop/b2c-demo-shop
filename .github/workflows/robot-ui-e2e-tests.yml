@@ -1,0 +1,259 @@
+name: "[b2c][master] Robot Regression UI E2E"
+
+on:
+    pull_request:
+        types: [ labeled, synchronize ]
+    push:
+        branches:
+            - master
+    workflow_dispatch:
+
+concurrency:
+    group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+    cancel-in-progress: true
+
+jobs:
+    docker-alpine-php-8-2-mariadb-robot-ui-group-one:
+        if: >
+            (github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'robot-regression-ui-e2e')) ||
+            (github.event_name == 'push' && github.ref == 'refs/heads/master')
+        name: "Docker / Alpine / PHP 8.2 / MariaDB / Robot / UI / Group One"
+        runs-on: ubuntu-22.04
+        env:
+            PROGRESS_TYPE: plain
+            SPRYKER_PLATFORM_IMAGE: spryker/php:8.2
+            TRAVIS: 1
+            ROBOT_TESTS_ARTIFACTS_BUCKET_REGION: eu-west-1
+        steps:
+            -   uses: actions/checkout@v4
+            -   uses: actions/setup-python@v5
+                with:
+                    python-version: '3.9'
+
+            -   name: Cache pip packages
+                uses: actions/cache@v4
+                with:
+                    path: ~/.cache/pip
+                    key: ${{ runner.os }}-pip-${{ hashFiles('composer.lock') }}
+                    restore-keys: |
+                        ${{ runner.os }}-pip-
+
+            -   name: Install packages
+                run: |
+                    python3 -m pip install --upgrade pip
+                    python3 -m pip install -U robotframework
+                    python3 -m pip install -U robotframework-requests
+                    python3 -m pip install -U robotframework-jsonlibrary
+                    python3 -m pip install -U robotframework-databaselibrary
+                    python3 -m pip install -U robotframework-browser
+                    python3 -m pip install PyMySQL
+                    sudo npx playwright install-deps
+
+            -   name: Install docker-compose
+                run: |
+                    sudo curl -L "https://github.com/docker/compose/releases/download/2.12.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+                    sudo chmod +x /usr/local/bin/docker-compose
+            -   name: Install Robot tests
+                run: |
+                    git clone https://github.com/spryker/robotframework-suite-tests.git --single-branch --branch master robotframework-tests
+            -   name: Install Project
+                continue-on-error: false
+                run: |
+                    git clone https://github.com/spryker/docker-sdk.git ./docker
+                    docker/sdk boot -v deploy.ci.acceptance.mariadb.robot.yml
+                    sudo bash -c "echo '127.0.0.1 backend-api.at.spryker.local backend-api.de.spryker.local glue-backend.de.spryker.local glue-backend.at.spryker.local glue-storefront.de.spryker.local glue-storefront.at.spryker.local backend-gateway.at.spryker.local backend-gateway.de.spryker.local backoffice.at.spryker.local backoffice.de.spryker.local date-time-configurator-example.spryker.local glue.at.spryker.local glue.de.spryker.local yves.at.spryker.local yves.de.spryker.local mp.de.spryker.local mail.spryker.local mp.at.spryker.local' >> /etc/hosts"
+                    docker/sdk up -t -v
+            -   name: Custom commands
+                continue-on-error: false
+                run: |
+                    docker/sdk cli composer dump-autoload -o -a --apcu
+                    APPLICATION_STORE=DE docker/sdk console queue:worker:start --stop-when-empty
+                    APPLICATION_STORE=AT docker/sdk console queue:worker:start --stop-when-empty
+
+            -   name: Run Tests
+                id: run_tests
+                continue-on-error: true
+                run: |
+                    cd robotframework-tests
+                    rfbrowser init
+                    robot -v env:ui_b2c -v headless:true -v ignore_console:false -d results --exclude skip-due-to-issueORskip-due-to-refactoring --include group_one -s '*'.tests.ui.b2c .
+                    touch results/time.txt && echo $(date) > results/time.txt
+            -   name: Rerun Failed Tests
+                if: steps.run_tests.outcome != 'success'
+                run: |
+                    cd robotframework-tests
+                    robot -v env:ui_b2c -v headless:true -v ignore_console:false -d results/rerun --runemptysuite --rerunfailed results/output.xml --output rerun.xml -s '*'.tests.ui.b2c .
+            -   name: Merge Test Results
+                if: always() && steps.run_tests.outcome != 'success'
+                run: |
+                    cd robotframework-tests
+                    rebot -d results --merge results/output.xml results/rerun/rerun.xml
+            -   name: Upload artifacts
+                if: failure()
+                run: |
+                    AWS_DEFAULT_REGION=${{env.ROBOT_TESTS_ARTIFACTS_BUCKET_REGION}} AWS_ACCESS_KEY_ID=${{ secrets.ROBOT_TESTS_ARTIFACTS_KEY }} AWS_SECRET_ACCESS_KEY=${{ secrets.ROBOT_TESTS_ARTIFACTS_SECRET }} aws s3 cp robotframework-tests/results s3://${{vars.ROBOT_TESTS_ARTIFACTS_BUCKET}}/master-robot-ui-ci/b2c_regression/group1/${GITHUB_RUN_ID}/PHP8.2MariaDBRobotUi/ \
+                      --recursive \
+                      --expires "$(date -d '+7 days' --utc +'%Y-%m-%dT%H:%M:%SZ')"
+
+    docker-alpine-php-8-2-mariadb-robot-ui-group-two:
+        if: >
+            (github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'robot-regression-ui-e2e')) ||
+            (github.event_name == 'push' && github.ref == 'refs/heads/master')
+        name: "Docker / Alpine / PHP 8.2 / MariaDB / Robot / UI /Group Two"
+        runs-on: ubuntu-22.04
+        env:
+            PROGRESS_TYPE: plain
+            SPRYKER_PLATFORM_IMAGE: spryker/php:8.2
+            TRAVIS: 1
+            ROBOT_TESTS_ARTIFACTS_BUCKET_REGION: eu-west-1
+        steps:
+            -   uses: actions/checkout@v4
+            -   uses: actions/setup-python@v5
+                with:
+                    python-version: '3.9'
+
+            -   name: Cache pip packages
+                uses: actions/cache@v4
+                with:
+                    path: ~/.cache/pip
+                    key: ${{ runner.os }}-pip-${{ hashFiles('composer.lock') }}
+                    restore-keys: |
+                        ${{ runner.os }}-pip-
+
+            -   name: Install packages
+                run: |
+                    python3 -m pip install --upgrade pip
+                    python3 -m pip install -U robotframework
+                    python3 -m pip install -U robotframework-requests
+                    python3 -m pip install -U robotframework-jsonlibrary
+                    python3 -m pip install -U robotframework-databaselibrary
+                    python3 -m pip install -U robotframework-browser
+                    python3 -m pip install PyMySQL
+                    sudo npx playwright install-deps
+
+            -   name: Install docker-compose
+                run: |
+                    sudo curl -L "https://github.com/docker/compose/releases/download/2.12.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+                    sudo chmod +x /usr/local/bin/docker-compose
+            -   name: Install Robot tests
+                run: |
+                    git clone https://github.com/spryker/robotframework-suite-tests.git --single-branch --branch master robotframework-tests
+            -   name: Install Project
+                continue-on-error: false
+                run: |
+                    git clone https://github.com/spryker/docker-sdk.git ./docker
+                    docker/sdk boot -v deploy.ci.acceptance.mariadb.robot.yml
+                    sudo bash -c "echo '127.0.0.1 backend-api.at.spryker.local backend-api.de.spryker.local glue-backend.de.spryker.local glue-backend.at.spryker.local glue-storefront.de.spryker.local glue-storefront.at.spryker.local backend-gateway.at.spryker.local backend-gateway.de.spryker.local backoffice.at.spryker.local backoffice.de.spryker.local date-time-configurator-example.spryker.local glue.at.spryker.local glue.de.spryker.local yves.at.spryker.local yves.de.spryker.local mp.de.spryker.local mail.spryker.local mp.at.spryker.local' >> /etc/hosts"
+                    docker/sdk up -t -v
+            -   name: Custom commands
+                continue-on-error: false
+                run: |
+                    docker/sdk cli composer dump-autoload -o -a --apcu
+                    APPLICATION_STORE=DE docker/sdk console queue:worker:start --stop-when-empty
+                    APPLICATION_STORE=AT docker/sdk console queue:worker:start --stop-when-empty
+
+            -   name: Run Tests
+                id: run_tests
+                continue-on-error: true
+                run: |
+                    cd robotframework-tests
+                    rfbrowser init
+                    robot -v env:ui_b2c -v headless:true -v ignore_console:false -d results --exclude skip-due-to-issueORskip-due-to-refactoring --include group_two -s '*'.tests.ui.b2c .
+                    touch results/time.txt && echo $(date) > results/time.txt
+            -   name: Rerun Failed Tests
+                if: steps.run_tests.outcome != 'success'
+                run: |
+                    cd robotframework-tests
+                    robot -v env:ui_b2c -v headless:true -v ignore_console:false -d results/rerun --runemptysuite --rerunfailed results/output.xml --output rerun.xml -s '*'.tests.ui.b2c .
+            -   name: Merge Test Results
+                if: always() && steps.run_tests.outcome != 'success'
+                run: |
+                    cd robotframework-tests
+                    rebot -d results --merge results/output.xml results/rerun/rerun.xml
+            -   name: Upload artifacts
+                if: failure()
+                run: |
+                    AWS_DEFAULT_REGION=${{env.ROBOT_TESTS_ARTIFACTS_BUCKET_REGION}} AWS_ACCESS_KEY_ID=${{ secrets.ROBOT_TESTS_ARTIFACTS_KEY }} AWS_SECRET_ACCESS_KEY=${{ secrets.ROBOT_TESTS_ARTIFACTS_SECRET }} aws s3 cp robotframework-tests/results s3://${{vars.ROBOT_TESTS_ARTIFACTS_BUCKET}}/master-robot-ui-ci/b2c_regression/group2/${GITHUB_RUN_ID}/PHP8.2MariaDBRobotUi/ \
+                      --recursive \
+                      --expires "$(date -d '+7 days' --utc +'%Y-%m-%dT%H:%M:%SZ')"
+
+    docker-alpine-php-8-2-mariadb-robot-ui-group-three:
+        if: >
+            (github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'robot-regression-ui-e2e')) ||
+            (github.event_name == 'push' && github.ref == 'refs/heads/master')
+        name: "Docker / Alpine / PHP 8.2 / MariaDB / Robot / UI / Group Three"
+        runs-on: ubuntu-22.04
+        env:
+            PROGRESS_TYPE: plain
+            SPRYKER_PLATFORM_IMAGE: spryker/php:8.2
+            TRAVIS: 1
+            ROBOT_TESTS_ARTIFACTS_BUCKET_REGION: eu-west-1
+        steps:
+            -   uses: actions/checkout@v4
+            -   uses: actions/setup-python@v5
+                with:
+                    python-version: '3.9'
+
+            -   name: Cache pip packages
+                uses: actions/cache@v4
+                with:
+                    path: ~/.cache/pip
+                    key: ${{ runner.os }}-pip-${{ hashFiles('composer.lock') }}
+                    restore-keys: |
+                        ${{ runner.os }}-pip-
+
+            -   name: Install packages
+                run: |
+                    python3 -m pip install --upgrade pip
+                    python3 -m pip install -U robotframework
+                    python3 -m pip install -U robotframework-requests
+                    python3 -m pip install -U robotframework-jsonlibrary
+                    python3 -m pip install -U robotframework-databaselibrary
+                    python3 -m pip install -U robotframework-browser
+                    python3 -m pip install PyMySQL
+                    sudo npx playwright install-deps
+
+            -   name: Install docker-compose
+                run: |
+                    sudo curl -L "https://github.com/docker/compose/releases/download/2.12.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+                    sudo chmod +x /usr/local/bin/docker-compose
+            -   name: Install Robot tests
+                run: |
+                    git clone https://github.com/spryker/robotframework-suite-tests.git --single-branch --branch master robotframework-tests
+            -   name: Install Project
+                continue-on-error: false
+                run: |
+                    git clone https://github.com/spryker/docker-sdk.git ./docker
+                    docker/sdk boot -v deploy.ci.acceptance.mariadb.robot.yml
+                    sudo bash -c "echo '127.0.0.1 backend-api.at.spryker.local backend-api.de.spryker.local glue-backend.de.spryker.local glue-backend.at.spryker.local glue-storefront.de.spryker.local glue-storefront.at.spryker.local backend-gateway.at.spryker.local backend-gateway.de.spryker.local backoffice.at.spryker.local backoffice.de.spryker.local date-time-configurator-example.spryker.local glue.at.spryker.local glue.de.spryker.local yves.at.spryker.local yves.de.spryker.local mp.de.spryker.local mail.spryker.local mp.at.spryker.local' >> /etc/hosts"
+                    docker/sdk up -t -v
+            -   name: Custom commands
+                continue-on-error: false
+                run: |
+                    docker/sdk cli composer dump-autoload -o -a --apcu
+                    APPLICATION_STORE=DE docker/sdk console queue:worker:start --stop-when-empty
+                    APPLICATION_STORE=AT docker/sdk console queue:worker:start --stop-when-empty
+            -   name: Run Tests
+                id: run_tests
+                continue-on-error: true
+                run: |
+                    cd robotframework-tests
+                    rfbrowser init
+                    robot -v env:ui_b2c -v headless:true -v ignore_console:false -d results --exclude skip-due-to-issueORskip-due-to-refactoring --include group_tree -s '*'.tests.ui.b2c .
+                    touch results/time.txt && echo $(date) > results/time.txt
+            -   name: Rerun Failed Tests
+                if: steps.run_tests.outcome != 'success'
+                run: |
+                    cd robotframework-tests
+                    robot -v env:ui_b2c -v headless:true -v ignore_console:false -d results/rerun --runemptysuite --rerunfailed results/output.xml --output rerun.xml -s '*'.tests.ui.b2c .
+            -   name: Merge Test Results
+                if: always() && steps.run_tests.outcome != 'success'
+                run: |
+                    cd robotframework-tests
+                    rebot -d results --merge results/output.xml results/rerun/rerun.xml
+            -   name: Upload artifacts
+                if: failure()
+                run: |
+                    AWS_DEFAULT_REGION=${{env.ROBOT_TESTS_ARTIFACTS_BUCKET_REGION}} AWS_ACCESS_KEY_ID=${{ secrets.ROBOT_TESTS_ARTIFACTS_KEY }} AWS_SECRET_ACCESS_KEY=${{ secrets.ROBOT_TESTS_ARTIFACTS_SECRET }} aws s3 cp robotframework-tests/results s3://${{vars.ROBOT_TESTS_ARTIFACTS_BUCKET}}/master-robot-ui-ci/b2c_regression/group3/${GITHUB_RUN_ID}/PHP8.2MariaDBRobotUi/ \
+                      --recursive \
+                      --expires "$(date -d '+7 days' --utc +'%Y-%m-%dT%H:%M:%SZ')"

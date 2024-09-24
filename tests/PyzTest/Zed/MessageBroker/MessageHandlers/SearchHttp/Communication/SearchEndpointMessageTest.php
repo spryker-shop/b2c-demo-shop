@@ -8,7 +8,6 @@
 namespace PyzTest\Zed\MessageBroker\MessageHandlers\SearchHttp\Communication;
 
 use Codeception\Test\Unit;
-use Generated\Shared\Transfer\MessageAttributesTransfer;
 use PyzTest\Zed\MessageBroker\SearchHttpCommunicationTester;
 
 /**
@@ -26,11 +25,6 @@ use PyzTest\Zed\MessageBroker\SearchHttpCommunicationTester;
 class SearchEndpointMessageTest extends Unit
 {
     /**
-     * @var string
-     */
-    protected const STORE_REFERENCE = 'dev-DE';
-
-    /**
      * @var \PyzTest\Zed\MessageBroker\SearchHttpCommunicationTester
      */
     protected SearchHttpCommunicationTester $tester;
@@ -41,19 +35,9 @@ class SearchEndpointMessageTest extends Unit
     public function testSearchEndpointAvailableMessageIsSuccessfullyHandled(): void
     {
         // Arrange
-        $messageAttributesData = [
-            MessageAttributesTransfer::EMITTER => 'test',
-        ];
-
         $storeTransfer = $this->tester->getAllowedStore();
-
-        if (!$this->tester->isDynamicStoreEnabled()) {
-            $this->tester->setStoreReferenceData([$storeTransfer->getName() => static::STORE_REFERENCE]);
-            $messageAttributesData[MessageAttributesTransfer::STORE_REFERENCE] = static::STORE_REFERENCE;
-        }
-
         $this->tester->removeHttpConfigForStore($storeTransfer);
-        $searchEndpointAvailableTransfer = $this->tester->buildSearchEndpointAvailableTransfer($messageAttributesData);
+        $searchEndpointAvailableTransfer = $this->tester->buildSearchEndpointAvailableTransfer();
 
         // Act
         $this->tester->handleSearchMessage($searchEndpointAvailableTransfer);
@@ -68,27 +52,14 @@ class SearchEndpointMessageTest extends Unit
     public function testSearchEndpointRemovedMessageIsSuccessfullyHandled(): void
     {
         // Arrange
-        $emitter = 'test';
-        $messageAttributesData = [
-            MessageAttributesTransfer::EMITTER => $emitter,
-        ];
-
         $storeTransfer = $this->tester->getAllowedStore();
-
-        if (!$this->tester->isDynamicStoreEnabled()) {
-            $this->tester->setStoreReferenceData([$storeTransfer->getName() => static::STORE_REFERENCE]);
-            $messageAttributesData[MessageAttributesTransfer::STORE_REFERENCE] = static::STORE_REFERENCE;
-        }
 
         $this->tester->removeHttpConfigForStore($storeTransfer);
         $this->tester->handleSearchMessage(
-            $this->tester->buildSearchEndpointAvailableTransfer([
-                MessageAttributesTransfer::STORE_REFERENCE => static::STORE_REFERENCE,
-                MessageAttributesTransfer::EMITTER => $emitter,
-            ]),
+            $this->tester->buildSearchEndpointAvailableTransfer(),
         );
 
-        $searchEndpointRemovedTransfer = $this->tester->buildSearchEndpointRemovedTransfer($messageAttributesData);
+        $searchEndpointRemovedTransfer = $this->tester->buildSearchEndpointRemovedTransfer();
 
         // Act
         $this->tester->handleSearchMessage($searchEndpointRemovedTransfer);

@@ -18,7 +18,6 @@ use Spryker\Shared\Kernel\KernelConstants;
 use Spryker\Shared\Kernel\Store;
 use Spryker\Shared\Log\LogConstants;
 use Spryker\Shared\MessageBroker\MessageBrokerConstants;
-use Spryker\Shared\MessageBrokerAws\MessageBrokerAwsConstants;
 use Spryker\Shared\Newsletter\NewsletterConstants;
 use Spryker\Shared\OauthClient\OauthClientConstants;
 use Spryker\Shared\Product\ProductConstants;
@@ -54,6 +53,8 @@ $backofficeHost = $dynamicStoreEnabled ? 'backoffice.eu.spryker.test' : 'backoff
 $merchantPortalHost = $dynamicStoreEnabled ? 'mp.eu.spryker.test' : 'mp.de.spryker.test';
 $backendGatewayHost = $dynamicStoreEnabled ? 'backend-gateway.eu.spryker.test' : 'backend-gateway.de.spryker.test';
 $backendApiHost = $dynamicStoreEnabled ? 'backend-api.eu.spryker.test' : 'backend-api.de.spryker.test';
+
+$isTestifyConstantsClassExists = class_exists(TestifyConstants::class);
 
 // ----------------------------------------------------------------------------
 // ------------------------------ CODEBASE ------------------------------------
@@ -257,7 +258,7 @@ $config[GlueApplicationConstants::GLUE_APPLICATION_DOMAIN]
         $glueHost,
     );
 
-if (class_exists(TestifyConstants::class)) {
+if ($isTestifyConstantsClassExists) {
     $config[TestifyConstants::GLUE_APPLICATION_DOMAIN] = $config[GlueApplicationConstants::GLUE_APPLICATION_DOMAIN];
 }
 
@@ -284,19 +285,6 @@ $config[ProductConstants::PUBLISHING_TO_MESSAGE_BROKER_ENABLED] = false;
 // ----------------------------------------------------------------------------
 // ------------------------------ MessageBroker -----------------------------------------
 // ----------------------------------------------------------------------------
-$config[MessageBrokerConstants::CHANNEL_TO_TRANSPORT_MAP] =
-$config[MessageBrokerAwsConstants::CHANNEL_TO_SENDER_TRANSPORT_MAP] =
-$config[MessageBrokerAwsConstants::CHANNEL_TO_RECEIVER_TRANSPORT_MAP] = [
-    'payment-events' => 'in-memory',
-    'payment-method-commands' => 'in-memory',
-    'asset-commands' => 'in-memory',
-    'product-review-commands' => 'in-memory',
-    'search-commands' => 'in-memory',
-    'product-commands' => 'in-memory',
-    'merchant-commands' => 'in-memory',
-    'tax-commands' => 'in-memory',
-];
-
 $config[MessageBrokerConstants::IS_ENABLED] = true;
 
 // ----------------------------------------------------------------------------
@@ -306,6 +294,10 @@ $config[GlueBackendApiApplicationConstants::GLUE_BACKEND_API_HOST] = $glueBacken
 $config[GlueBackendApiApplicationConstants::PROJECT_NAMESPACES] = [
     'Pyz',
 ];
+
+if ($isTestifyConstantsClassExists) {
+    $config[TestifyConstants::GLUE_BACKEND_API_DOMAIN] = sprintf('http://%s', $glueBackendHost);
+}
 
 // ----------------------------------------------------------------------------
 // ------------------------------ Glue Storefront API -------------------------------

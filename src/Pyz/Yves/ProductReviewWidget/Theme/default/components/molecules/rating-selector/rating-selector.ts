@@ -4,6 +4,10 @@ import { EVENT_UPDATE_REVIEW_COUNT } from 'ShopUiProject/components/molecules/pr
 export default class RatingSelector extends RatingSelectorCore {
     protected reviewCount: HTMLElement;
 
+    connectedCallback() {
+        this.init();
+    }
+
     protected init(): void {
         this.reviewCount = <HTMLElement>this.getElementsByClassName(`${this.jsName}__review-count`)[0];
 

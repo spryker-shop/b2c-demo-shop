@@ -6,10 +6,10 @@
 
         {% if not isItemRelatedToBundle %}
             <div class="grid {{ config.jsName }}__item-shipping-{{ loop.index }}">
-                {% set hasShippingAddresses = item.shippingAddress.id_customer_address is defined %}
-                {% set itemName = item.vars.data.name | default %}
-                {% set itemQuantity = item.vars.data.quantity | default %}
-                {% set imageUrl = item.vars.data.images[0].externalUrlSmall ?? '' %}
+                {% set shippingAddress = item.shippingAddress %}
+                {% set hasShippingAddresses = shippingAddress.id_customer_address is defined %}
+                {% set isNewAddressSelected = shippingAddress.id_customer_address.vars.value | default == 0 %}
+                {% set newAddressHiddenClassName = not isNewAddressSelected and hasShippingAddresses ? ' ' ~ data.hiddenClassName %}
 
                 {% embed molecule('product-card-item') with {
                     class: 'col col--sm-12 col--lg-6',
@@ -23,6 +23,9 @@
                     embed: {
                         item: item,
                         hasShippingAddresses: hasShippingAddresses,
+                        jsName: config.jsName,
+                        addressSelectClassName: data.addressSelectClassName,
+                        index: loop.index,
                     },
                 } only %}
                     {% import _self as component %}
@@ -60,46 +63,30 @@
                                 {{ form_row(embed.item.shippingAddress.id_customer_address, {
                                     label: 'page.checkout.address.delivery.address_select' | trans,
                                     attr: {
-                                        'multi-shipping-addresses-form-select': '',
+                                        class: embed.addressSelectClassName ~ ' ' ~ embed.jsName ~ '__trigger--' ~ embed.index,
                                     },
                                 }) }}
                             </div>
                         {% endif %}
-
-                        <div class="{{ component.renderClass(config.name ~ '__additional-options', modifiers) }} col">
-                            {% widget 'ProductConfigurationCartItemDisplayWidget'
-                                args [data.productItem]
-                                with {
-                                    data: {
-                                        wrapperClassName: config.name ~ '__product-configuration-options ' ~ config.name ~ '__product-configuration-options--desktop ' ~ config.name ~ '__product-configuration-options--no-spacing',
-                                        hasStatus: false,
-                                    },
-                                } only %}
-                            {% endwidget %}
-                        </div>
                     {% endblock %}
 
-                    {% block productConfiguration %}
-                        {% widget 'ProductConfigurationCartItemDisplayWidget'
-                            args [data.productItem]
-                            with {
-                            data: {
-                                wrapperClassName: config.name ~ '__product-configuration-options ' ~ config.name ~ '__product-configuration-options--mobile',
-                                hasStatus: false,
-                            },
-                        } only %}
-                        {% endwidget %}
+                    {% block productConfigurationContent %}
+                        {% set hasStatus = false %}
+
+                        {{ parent() }}
                     {% endblock %}
+
+                    {% block productConfigurationButton %}{% endblock %}
 
                     {% block bundles %}{% endblock %}
                 {% endembed %}
 
-                <div class="col col--sm-12">
+                <div class="{{ data.validationClassName }} col col--sm-12">
                     {% include molecule('form') with {
-                        class: config.jsName ~ '__item-shipping ' ~ (hasShippingAddresses ? ' is-hidden ') ~ config.jsName ~ '__item-shipping--' ~ loop.index,
+                        class: data.itemShippingClassName ~ ' ' ~ config.jsName ~ '__item-shipping ' ~ config.jsName ~ '__item-shipping--' ~ loop.index ~ newAddressHiddenClassName,
                         modifiers: ['checkout-form'],
                         data: {
-                            form: item.shippingAddress,
+                            form: shippingAddress,
                             enableStart: false,
                             enableEnd: false,
                             layout: {
@@ -118,7 +105,7 @@
                     {% include molecule('address-form-toggler', 'CustomerPage') ignore missing with {
                         class: config.jsName ~ '__toggler',
                         attributes: {
-                            'trigger-selector': '[name="' ~ item.shippingAddress.id_customer_address.vars.full_name ~ '"]',
+                            'trigger-selector': '.' ~ config.jsName ~ '__trigger--' ~ loop.index,
                             'target-selector': '.' ~ config.jsName ~ '__item-shipping--' ~ loop.index,
                             'parent-target-class-name': config.jsName,
                         },
@@ -127,22 +114,4 @@
             </div>
         {% endif %}
     {% endfor %}
-
-    {% include molecule('is-next-checkout-step-enabled', 'CheckoutPage') with {
-        attributes: {
-            'trigger-selector': '[name="' ~ data.shippingForm.id_customer_address.vars.full_name ~ '"]',
-            'target-selector': '.' ~ config.jsName ~ '__validate-next-checkout-step',
-        },
-    } only %}
-
-    {% include molecule('validate-next-checkout-step', 'CheckoutPage') with {
-        class: config.jsName ~ '__validate-next-checkout-step',
-        attributes: {
-            'container-selector': '.' ~ config.jsName ~ '__item-shipping',
-            'target-selector': '.' ~ data.jsAddressClass ~ '__form-submit',
-            'dropdown-trigger-selector': '[multi-shipping-addresses-form-select]',
-            'parent-target-class-name': config.jsName,
-            'is-enable': false,
-        },
-    } only %}
 {% endblock %}

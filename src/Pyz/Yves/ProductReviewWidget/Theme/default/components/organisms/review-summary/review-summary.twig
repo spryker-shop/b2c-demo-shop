@@ -2,7 +2,7 @@
 
 {% define config = {
     name: 'review-summary',
-    tag: 'section'
+    tag: 'section',
 } %}
 
 {% define data = {
@@ -10,6 +10,7 @@
     summary: required,
     ratingMaxValue: required,
     hasCustomer: required,
+    openReviewFormTriggerClassName: required,
 
     pagination: {
         parameters: required,
@@ -17,29 +18,31 @@
         paginationPath: required,
         maxPage: required,
         showAlwaysFirstAndLast: true,
-        anchor: 'product-reviews'
+        anchor: 'product-reviews',
     }
 } %}
 
 {% block body %}
     <h3 class="title title--review-summary title--regular">{{ 'product_review.product_ratings' | trans }}</h3>
+
     {% include molecule('review-average-display', 'ProductReviewWidget') with {
         data: {
             summary: data.summary,
-            ratingMaxValue: data.ratingMaxValue
-        }
+            ratingMaxValue: data.ratingMaxValue,
+        },
     } only %}
+
     {% include molecule('review-distribution-display', 'ProductReviewWidget') with {
         data: {
-            summary: data.summary
-        }
+            summary: data.summary,
+        },
     } only %}
 
     <div class="is-hidden-lg-xl {{ config.name }}__add-review-mobile">
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-            <span class="button button--hollow button--expand js-new-review-form__trigger">
+            <button type="button" class="button button--hollow button--expand {{ data.openReviewFormTriggerClassName }}">
                 {{ 'product_review.submit.add_a_review' | trans }}
-            </span>
+            </button>
         {% else %}
             <a class="button button--hollow button--expand" href="{{ path('login') }}">
                 {{ 'product_review.submit.add_a_review' | trans }}
@@ -62,16 +65,15 @@
                             ratingMaxValue: data.ratingMaxValue,
                             nickname: review.nickname,
                             createdAt: review.createdAt | formatDateTime,
-                            description: review.description
-                        }
+                            description: review.description,
+                        },
                     } only %}
                 {% endfor %}
             </div>
 
             {% include molecule('pagination') with {
-                data: data.pagination
+                data: data.pagination,
             } only %}
         {% endif %}
-
     {% endif %}
 {% endblock %}

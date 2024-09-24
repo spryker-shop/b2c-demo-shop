@@ -7,7 +7,6 @@
 
 namespace Pyz\Zed\MessageBroker;
 
-use Generated\Shared\Transfer\MessageAttributesTransfer;
 use Spryker\Zed\MessageBroker\MessageBrokerConfig as SprykerMessageBrokerConfig;
 
 class MessageBrokerConfig extends SprykerMessageBrokerConfig
@@ -22,24 +21,9 @@ class MessageBrokerConfig extends SprykerMessageBrokerConfig
             'payment-method-commands',
             'asset-commands',
             'product-review-commands',
-            'search-commands',
             'product-commands',
-            'merchant-commands',
+            'search-commands',
             'tax-commands',
-        ];
-    }
-
-    /**
-     * Defines attributes which should not be logged.
-     *
-     * @api
-     *
-     * @return array<string>
-     */
-    public function getProtectedMessageAttributes(): array
-    {
-        return [
-            MessageAttributesTransfer::AUTHORIZATION,
         ];
     }
 }
