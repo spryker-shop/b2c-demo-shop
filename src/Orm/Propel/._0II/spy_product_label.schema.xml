@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<database xmlns="spryker:schema-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\ProductLabel\Persistence" package="src.Orm.Zed.ProductLabel.Persistence">
+    <table name="spy_product_label" idMethod="native" identifierQuoting="true">
+        <column name="id_product_label" type="INTEGER" required="true" autoIncrement="true" primaryKey="true"/>
+        <column name="front_end_reference" type="VARCHAR" size="255" required="false"/>
+        <column name="is_active" type="BOOLEAN" required="true" defaultValue="false"/>
+        <column name="is_dynamic" type="BOOLEAN" required="true" defaultValue="false"/>
+        <column name="is_exclusive" type="BOOLEAN" required="true" defaultValue="false"/>
+        <column name="is_published" type="BOOLEAN" required="false" defaultValue="false"/>
+        <column name="name" type="VARCHAR" size="255" required="true"/>
+        <column name="position" type="INTEGER" required="true"/>
+        <column name="valid_from" type="TIMESTAMP" required="false"/>
+        <column name="valid_to" type="TIMESTAMP" required="false"/>
+        <index name="idx-spy_product_label-position">
+            <index-column name="position"/>
+        </index>
+        <unique name="spy_product_label-name">
+            <unique-column name="name"/>
+        </unique>
+        <id-method-parameter value="spy_product_label_pk_seq"/>
+        <behavior name="timestampable"/>
+        <behavior name="event">
+            <parameter name="spy_product_label_all" column="*"/>
+        </behavior>
+    </table>
+    <table name="spy_product_label_store">
+        <column name="id_product_label_store" type="INTEGER" required="true" primaryKey="true" autoIncrement="true"/>
+        <column name="fk_product_label" type="INTEGER" required="true"/>
+        <column name="fk_store" type="INTEGER" required="true"/>
+        <foreign-key name="spy_product_label_store-fk_product_label" foreignTable="spy_product_label" phpName="ProductLabel" refPhpName="ProductLabelStore">
+            <reference local="fk_product_label" foreign="id_product_label"/>
+        </foreign-key>
+        <foreign-key name="spy_product_label_store-fk_store" foreignTable="spy_store" phpName="Store" refPhpName="ProductLabelStore">
+            <reference local="fk_store" foreign="id_store"/>
+        </foreign-key>
+        <index name="index-spy_product_label_store-fk_store">
+            <index-column name="fk_store"/>
+        </index>
+        <unique name="spy_product_label_store-unique-fk_product_label-fk_store">
+            <unique-column name="fk_product_label"/>
+            <unique-column name="fk_store"/>
+        </unique>
+        <id-method-parameter value="spy_product_label_store_pk_seq"/>
+        <behavior name="event">
+            <parameter name="spy_product_label_store_all" column="*"/>
+        </behavior>
+    </table>
+</database>

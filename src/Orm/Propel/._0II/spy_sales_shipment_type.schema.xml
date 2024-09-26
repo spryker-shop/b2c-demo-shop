@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<database xmlns="spryker:schema-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" namespace="Orm\Zed\SalesShipmentType\Persistence" package="src.Orm.Zed.SalesShipmentType.Persistence" xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd">
+
+    <table name="spy_sales_shipment_type" idMethod="native" identifierQuoting="true">
+        <column name="id_sales_shipment_type" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="key" type="VARCHAR" size="255" required="true"/>
+        <column name="name" type="VARCHAR" size="255" required="true"/>
+
+        <unique name="spy_sales_shipment_type-key-name">
+            <unique-column name="key"/>
+            <unique-column name="name"/>
+        </unique>
+
+        <index name="spy_sales_shipment_type-key">
+            <index-column name="key"/>
+        </index>
+
+        <id-method-parameter value="spy_sales_shipment_type_pk_seq"/>
+    </table>
+
+</database>
