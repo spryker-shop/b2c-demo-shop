@@ -79,14 +79,15 @@
         &__search {
             @include helper-effect-transition(all);
             @include helper-visibility-invisible;
-            padding: rem(34) rem(30);
+            padding: rem(34) rem(50) rem(34) rem(20);
             background: $setting-color-white;
             min-width: 100vw;
             transform-origin: top center;
             transform: scaleY(0);
 
             @include helper-breakpoint-media-min($md-min) {
-                min-width: rem(480);
+                min-width: rem(540);
+                padding-right: rem(76);
             }
         }
 
@@ -111,7 +112,7 @@
         &__search-close {
             position: absolute;
             top: rem(34);
-            right: rem(30);
+            right: rem(15);
             z-index: $setting-zi-search-suggestions + 2;
             cursor: pointer;
             margin-bottom: rem(25);
@@ -134,6 +135,11 @@
                 width: rem(16);
                 height: rem(16);
             }
+        }
+
+        &__image-search {
+            position: relative;
+            z-index: $setting-zi-search-suggestions + 10;
         }
 
         &--checkout {

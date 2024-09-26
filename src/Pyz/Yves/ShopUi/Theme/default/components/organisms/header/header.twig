@@ -95,17 +95,30 @@
                     } only %}
                 </div>
 
-                {% if data.showSearchForm %}
-                    {% include molecule('search-form') with {
-                        attributes: {
-                            'data-search-id': 'desktop',
-                            'wrapper-class-name': 'js-' ~ config.name ~ '__search-wrapper',
-                            'close-class-name': 'js-' ~ config.name ~ '__search-close',
-                            'open-class-name': 'js-' ~ config.name ~ '__search-open',
-                            'wrapper-toggle-class-name': config.name ~ '__search-wrapper-active',
-                        },
-                    } only %}
-                {% endif %}
+                <div class="grid grid--no-wrap">
+                    {% if data.showSearchForm %}
+                        <div class="col col--expand">
+                            {% include molecule('search-form') with {
+                                class: config.name ~ '__search-form',
+                                attributes: {
+                                    'data-search-id': 'desktop',
+                                    'wrapper-class-name': 'js-' ~ config.name ~ '__search-wrapper',
+                                    'close-class-name': 'js-' ~ config.name ~ '__search-close',
+                                    'open-class-name': 'js-' ~ config.name ~ '__search-open',
+                                    'wrapper-toggle-class-name': config.name ~ '__search-wrapper-active',
+                                },
+                            } only %}
+                        </div>
+
+                        {% if widgetGlobalExists('ImageSearchAiWidget') %}
+                            <div class="col">
+                                <div class="{{ config.name }}__image-search">
+                                    {% widget 'ImageSearchAiWidget' only %}{% endwidget %}
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                </div>
             </div>
         </div>
 

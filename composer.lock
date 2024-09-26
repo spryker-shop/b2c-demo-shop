@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "843228d2814babdc4268de45fafdbc60",
+    "content-hash": "982fa12f036dc116edb65bafc76e28b6",
     "packages": [
         {
             "name": "async-aws/core",
@@ -3511,6 +3511,98 @@
             "time": "2021-11-18T09:23:29+00:00"
         },
         {
+            "name": "openai-php/client",
+            "version": "v0.8.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/openai-php/client.git",
+                "reference": "0f755fafa4d3f8d5c8ed964d3166d078fac0605a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/openai-php/client/zipball/0f755fafa4d3f8d5c8ed964d3166d078fac0605a",
+                "reference": "0f755fafa4d3f8d5c8ed964d3166d078fac0605a",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.1.0",
+                "php-http/discovery": "^1.19.4",
+                "php-http/multipart-stream-builder": "^1.3.0",
+                "psr/http-client": "^1.0.3",
+                "psr/http-client-implementation": "^1.0.1",
+                "psr/http-factory-implementation": "*",
+                "psr/http-message": "^1.1.0|^2.0.0"
+            },
+            "require-dev": {
+                "guzzlehttp/guzzle": "^7.8.1",
+                "guzzlehttp/psr7": "^2.6.2",
+                "laravel/pint": "^1.15.0",
+                "mockery/mockery": "^1.6.11",
+                "nunomaduro/collision": "^7.10.0",
+                "pestphp/pest": "^2.34.6",
+                "pestphp/pest-plugin-arch": "^2.7",
+                "pestphp/pest-plugin-type-coverage": "^2.8.1",
+                "phpstan/phpstan": "^1.10.66",
+                "rector/rector": "^1.0.4",
+                "symfony/var-dumper": "^6.4.4"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/OpenAI.php"
+                ],
+                "psr-4": {
+                    "OpenAI\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nuno Maduro",
+                    "email": "enunomaduro@gmail.com"
+                },
+                {
+                    "name": "Sandro Gehri"
+                }
+            ],
+            "description": "OpenAI PHP is a supercharged PHP API client that allows you to interact with the Open AI API",
+            "keywords": [
+                "GPT-3",
+                "api",
+                "client",
+                "codex",
+                "dall-e",
+                "language",
+                "natural",
+                "openai",
+                "php",
+                "processing",
+                "sdk"
+            ],
+            "support": {
+                "issues": "https://github.com/openai-php/client/issues",
+                "source": "https://github.com/openai-php/client/tree/v0.8.5"
+            },
+            "funding": [
+                {
+                    "url": "https://www.paypal.com/paypalme/enunomaduro",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/gehrisandro",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/nunomaduro",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-04-15T19:11:23+00:00"
+        },
+        {
             "name": "paragonie/constant_time_encoding",
             "version": "v2.6.3",
             "source": {
@@ -3793,6 +3885,141 @@
                 "source": "https://github.com/php-amqplib/php-amqplib/tree/v3.6.1"
             },
             "time": "2024-02-07T17:21:26+00:00"
+        },
+        {
+            "name": "php-http/discovery",
+            "version": "1.19.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-http/discovery.git",
+                "reference": "0700efda8d7526335132360167315fdab3aeb599"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-http/discovery/zipball/0700efda8d7526335132360167315fdab3aeb599",
+                "reference": "0700efda8d7526335132360167315fdab3aeb599",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.0|^2.0",
+                "php": "^7.1 || ^8.0"
+            },
+            "conflict": {
+                "nyholm/psr7": "<1.0",
+                "zendframework/zend-diactoros": "*"
+            },
+            "provide": {
+                "php-http/async-client-implementation": "*",
+                "php-http/client-implementation": "*",
+                "psr/http-client-implementation": "*",
+                "psr/http-factory-implementation": "*",
+                "psr/http-message-implementation": "*"
+            },
+            "require-dev": {
+                "composer/composer": "^1.0.2|^2.0",
+                "graham-campbell/phpspec-skip-example-extension": "^5.0",
+                "php-http/httplug": "^1.0 || ^2.0",
+                "php-http/message-factory": "^1.0",
+                "phpspec/phpspec": "^5.1 || ^6.1 || ^7.3",
+                "sebastian/comparator": "^3.0.5 || ^4.0.8",
+                "symfony/phpunit-bridge": "^6.4.4 || ^7.0.1"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "Http\\Discovery\\Composer\\Plugin",
+                "plugin-optional": true
+            },
+            "autoload": {
+                "psr-4": {
+                    "Http\\Discovery\\": "src/"
+                },
+                "exclude-from-classmap": [
+                    "src/Composer/Plugin.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Márk Sági-Kazár",
+                    "email": "mark.sagikazar@gmail.com"
+                }
+            ],
+            "description": "Finds and installs PSR-7, PSR-17, PSR-18 and HTTPlug implementations",
+            "homepage": "http://php-http.org",
+            "keywords": [
+                "adapter",
+                "client",
+                "discovery",
+                "factory",
+                "http",
+                "message",
+                "psr17",
+                "psr7"
+            ],
+            "support": {
+                "issues": "https://github.com/php-http/discovery/issues",
+                "source": "https://github.com/php-http/discovery/tree/1.19.4"
+            },
+            "time": "2024-03-29T13:00:05+00:00"
+        },
+        {
+            "name": "php-http/multipart-stream-builder",
+            "version": "1.4.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-http/multipart-stream-builder.git",
+                "reference": "10086e6de6f53489cca5ecc45b6f468604d3460e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-http/multipart-stream-builder/zipball/10086e6de6f53489cca5ecc45b6f468604d3460e",
+                "reference": "10086e6de6f53489cca5ecc45b6f468604d3460e",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1 || ^8.0",
+                "php-http/discovery": "^1.15",
+                "psr/http-factory-implementation": "^1.0"
+            },
+            "require-dev": {
+                "nyholm/psr7": "^1.0",
+                "php-http/message": "^1.5",
+                "php-http/message-factory": "^1.0.2",
+                "phpunit/phpunit": "^7.5.15 || ^8.5 || ^9.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Http\\Message\\MultipartStream\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tobias Nyholm",
+                    "email": "tobias.nyholm@gmail.com"
+                }
+            ],
+            "description": "A builder class that help you create a multipart stream",
+            "homepage": "http://php-http.org",
+            "keywords": [
+                "factory",
+                "http",
+                "message",
+                "multipart stream",
+                "stream"
+            ],
+            "support": {
+                "issues": "https://github.com/php-http/multipart-stream-builder/issues",
+                "source": "https://github.com/php-http/multipart-stream-builder/tree/1.4.2"
+            },
+            "time": "2024-09-04T13:22:54+00:00"
         },
         {
             "name": "phpdocumentor/graphviz",
@@ -5161,6 +5388,60 @@
             "time": "2024-03-30T18:03:49+00:00"
         },
         {
+            "name": "spryker-eco/image-search-ai",
+            "version": "0.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker-eco/image-search-ai.git",
+                "reference": "ef621e7468655500d09ad57e9a8c6caf7624afd1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker-eco/image-search-ai/zipball/ef621e7468655500d09ad57e9a8c6caf7624afd1",
+                "reference": "ef621e7468655500d09ad57e9a8c6caf7624afd1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.1",
+                "spryker-eco/open-ai": "^0.1.0",
+                "spryker/catalog": "^5.0.0",
+                "spryker/kernel": "^3.73.0",
+                "spryker/symfony": "^3.0.0",
+                "spryker/transfer": "^3.27.0",
+                "spryker/util-encoding": "^2.0.0",
+                "spryker/util-text": "^1.1.0"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "*",
+                "spryker/code-sniffer": "*",
+                "spryker/router": "*"
+            },
+            "suggest": {
+                "spryker/router": "Use this module when you want to use the Router."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "SprykerEco\\": "src/SprykerEco/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "ImageSearchAi module",
+            "support": {
+                "issues": "https://github.com/spryker-eco/image-search-ai/issues",
+                "source": "https://github.com/spryker-eco/image-search-ai/tree/0.1.1"
+            },
+            "time": "2024-09-17T11:44:42+00:00"
+        },
+        {
             "name": "spryker-eco/loggly",
             "version": "0.1.1",
             "source": {
@@ -5211,6 +5492,110 @@
                 "source": "https://github.com/spryker-eco/loggly/tree/0.1.1"
             },
             "time": "2021-11-10T11:57:20+00:00"
+        },
+        {
+            "name": "spryker-eco/open-ai",
+            "version": "0.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker-eco/open-ai.git",
+                "reference": "db200a5042343eea1e18c5fffe845088d60af881"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker-eco/open-ai/zipball/db200a5042343eea1e18c5fffe845088d60af881",
+                "reference": "db200a5042343eea1e18c5fffe845088d60af881",
+                "shasum": ""
+            },
+            "require": {
+                "openai-php/client": "^0.8.4",
+                "php": ">=8.1",
+                "spryker/kernel": "^3.33.0",
+                "spryker/transfer": "^3.27.0"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "*",
+                "spryker/code-sniffer": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "SprykerEco\\": "src/SprykerEco/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "OpenAi module",
+            "support": {
+                "issues": "https://github.com/spryker-eco/open-ai/issues",
+                "source": "https://github.com/spryker-eco/open-ai/tree/0.1.1"
+            },
+            "time": "2024-09-17T11:44:44+00:00"
+        },
+        {
+            "name": "spryker-eco/product-management-ai",
+            "version": "0.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker-eco/product-management-ai.git",
+                "reference": "687a67c378af65c5eab1302f133cb50b09f5215c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker-eco/product-management-ai/zipball/687a67c378af65c5eab1302f133cb50b09f5215c",
+                "reference": "687a67c378af65c5eab1302f133cb50b09f5215c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.1",
+                "spryker-eco/open-ai": "^0.1.0",
+                "spryker/category": "^5.0.0",
+                "spryker/gui": "^3.45.0",
+                "spryker/kernel": "^3.33.0",
+                "spryker/locale": "^4.0.0",
+                "spryker/product": "^6.0.0",
+                "spryker/product-category": "^4.17.0",
+                "spryker/product-extension": "^1.1.0",
+                "spryker/product-management-extension": "^1.2.0",
+                "spryker/symfony": "^3.0.0",
+                "spryker/transfer": "^3.27.0",
+                "spryker/util-encoding": "^2.0.0"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "*",
+                "spryker/code-sniffer": "*"
+            },
+            "suggest": {
+                "spryker/propel-orm": "Used for Propel schema generation."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "SprykerEco\\": "src/SprykerEco/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "ProductManagementAi module",
+            "support": {
+                "issues": "https://github.com/spryker-eco/product-management-ai/issues",
+                "source": "https://github.com/spryker-eco/product-management-ai/tree/0.1.1"
+            },
+            "time": "2024-09-17T11:44:46+00:00"
         },
         {
             "name": "spryker-feature/agent-assist",
@@ -8165,16 +8550,16 @@
         },
         {
             "name": "spryker-shop/cart-page",
-            "version": "3.44.0",
+            "version": "3.44.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker-shop/cart-page.git",
-                "reference": "501a9071122ac032c985e3a2a1a4aabe5e52936a"
+                "reference": "ae690ff48c623982886656aa05f31d25958e6d62"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker-shop/cart-page/zipball/501a9071122ac032c985e3a2a1a4aabe5e52936a",
-                "reference": "501a9071122ac032c985e3a2a1a4aabe5e52936a",
+                "url": "https://api.github.com/repos/spryker-shop/cart-page/zipball/ae690ff48c623982886656aa05f31d25958e6d62",
+                "reference": "ae690ff48c623982886656aa05f31d25958e6d62",
                 "shasum": ""
             },
             "require": {
@@ -8249,9 +8634,9 @@
             ],
             "description": "CartPage module",
             "support": {
-                "source": "https://github.com/spryker-shop/cart-page/tree/3.44.0"
+                "source": "https://github.com/spryker-shop/cart-page/tree/3.44.1"
             },
-            "time": "2024-09-04T07:26:53+00:00"
+            "time": "2024-09-12T14:55:59+00:00"
         },
         {
             "name": "spryker-shop/cart-page-extension",
@@ -8297,16 +8682,16 @@
         },
         {
             "name": "spryker-shop/catalog-page",
-            "version": "1.26.0",
+            "version": "1.26.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker-shop/catalog-page.git",
-                "reference": "22fac5eb129e979a24cb3702cf041dc8a0486794"
+                "reference": "6a121bb6c063a029eb3a6e7618beb35cd8af1634"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker-shop/catalog-page/zipball/22fac5eb129e979a24cb3702cf041dc8a0486794",
-                "reference": "22fac5eb129e979a24cb3702cf041dc8a0486794",
+                "url": "https://api.github.com/repos/spryker-shop/catalog-page/zipball/6a121bb6c063a029eb3a6e7618beb35cd8af1634",
+                "reference": "6a121bb6c063a029eb3a6e7618beb35cd8af1634",
                 "shasum": ""
             },
             "require": {
@@ -8362,9 +8747,9 @@
             ],
             "description": "CatalogPage module",
             "support": {
-                "source": "https://github.com/spryker-shop/catalog-page/tree/1.26.0"
+                "source": "https://github.com/spryker-shop/catalog-page/tree/1.26.1"
             },
-            "time": "2024-09-04T07:26:53+00:00"
+            "time": "2024-09-12T14:55:59+00:00"
         },
         {
             "name": "spryker-shop/category-image-storage-widget",
@@ -11628,20 +12013,20 @@
         },
         {
             "name": "spryker-shop/product-group-widget",
-            "version": "1.9.2",
+            "version": "1.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker-shop/product-group-widget.git",
-                "reference": "219d34583c4a7a1c9fc211d1c471f0406ceeacf5"
+                "reference": "c4c103106a1b37e676e378d0fe1b7d192bd5486e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker-shop/product-group-widget/zipball/219d34583c4a7a1c9fc211d1c471f0406ceeacf5",
-                "reference": "219d34583c4a7a1c9fc211d1c471f0406ceeacf5",
+                "url": "https://api.github.com/repos/spryker-shop/product-group-widget/zipball/c4c103106a1b37e676e378d0fe1b7d192bd5486e",
+                "reference": "c4c103106a1b37e676e378d0fe1b7d192bd5486e",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.0",
+                "php": ">=8.1",
                 "spryker-shop/product-group-widget-extension": "^1.1.0",
                 "spryker-shop/shop-ui": "^1.43.0",
                 "spryker/kernel": "^3.33.0",
@@ -11668,9 +12053,9 @@
             ],
             "description": "ProductGroupWidget module",
             "support": {
-                "source": "https://github.com/spryker-shop/product-group-widget/tree/1.9.2"
+                "source": "https://github.com/spryker-shop/product-group-widget/tree/1.10.0"
             },
-            "time": "2023-08-08T10:47:26+00:00"
+            "time": "2024-09-12T14:55:59+00:00"
         },
         {
             "name": "spryker-shop/product-group-widget-extension",
@@ -12352,16 +12737,16 @@
         },
         {
             "name": "spryker-shop/product-widget",
-            "version": "1.5.0",
+            "version": "1.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker-shop/product-widget.git",
-                "reference": "660a00f269eeb6280c8ca201537a9b8a07932e2d"
+                "reference": "9b4cd466ce66345e1c9ec9f742c05c8b4571dd67"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker-shop/product-widget/zipball/660a00f269eeb6280c8ca201537a9b8a07932e2d",
-                "reference": "660a00f269eeb6280c8ca201537a9b8a07932e2d",
+                "url": "https://api.github.com/repos/spryker-shop/product-widget/zipball/9b4cd466ce66345e1c9ec9f742c05c8b4571dd67",
+                "reference": "9b4cd466ce66345e1c9ec9f742c05c8b4571dd67",
                 "shasum": ""
             },
             "require": {
@@ -12401,9 +12786,9 @@
             ],
             "description": "ProductWidget module",
             "support": {
-                "source": "https://github.com/spryker-shop/product-widget/tree/1.5.0"
+                "source": "https://github.com/spryker-shop/product-widget/tree/1.5.1"
             },
-            "time": "2024-09-04T07:26:53+00:00"
+            "time": "2024-09-12T14:55:59+00:00"
         },
         {
             "name": "spryker-shop/redirect-page",
@@ -13554,16 +13939,16 @@
         },
         {
             "name": "spryker-shop/shop-ui",
-            "version": "1.76.0",
+            "version": "1.77.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker-shop/shop-ui.git",
-                "reference": "a4dd3afc9312b7d969b406e2788d0a7b507aab57"
+                "reference": "0cfb10d95c42b7dd845fb85aac18a69eb373ca6d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker-shop/shop-ui/zipball/a4dd3afc9312b7d969b406e2788d0a7b507aab57",
-                "reference": "a4dd3afc9312b7d969b406e2788d0a7b507aab57",
+                "url": "https://api.github.com/repos/spryker-shop/shop-ui/zipball/0cfb10d95c42b7dd845fb85aac18a69eb373ca6d",
+                "reference": "0cfb10d95c42b7dd845fb85aac18a69eb373ca6d",
                 "shasum": ""
             },
             "require": {
@@ -13611,9 +13996,9 @@
             ],
             "description": "ShopUi module",
             "support": {
-                "source": "https://github.com/spryker-shop/shop-ui/tree/1.76.0"
+                "source": "https://github.com/spryker-shop/shop-ui/tree/1.77.0"
             },
-            "time": "2024-09-04T07:26:53+00:00"
+            "time": "2024-09-12T14:55:59+00:00"
         },
         {
             "name": "spryker-shop/shopping-list-page-extension",
@@ -27441,16 +27826,16 @@
         },
         {
             "name": "spryker/gui",
-            "version": "3.53.2",
+            "version": "3.53.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/gui.git",
-                "reference": "cdf54c3fdde0300ca1d08557448f7c3aba5f511b"
+                "reference": "ebd24aa51c93a1e9a0c10918b1f85d1c98e53346"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/gui/zipball/cdf54c3fdde0300ca1d08557448f7c3aba5f511b",
-                "reference": "cdf54c3fdde0300ca1d08557448f7c3aba5f511b",
+                "url": "https://api.github.com/repos/spryker/gui/zipball/ebd24aa51c93a1e9a0c10918b1f85d1c98e53346",
+                "reference": "ebd24aa51c93a1e9a0c10918b1f85d1c98e53346",
                 "shasum": ""
             },
             "require": {
@@ -27499,9 +27884,9 @@
             ],
             "description": "Gui module",
             "support": {
-                "source": "https://github.com/spryker/gui/tree/3.53.2"
+                "source": "https://github.com/spryker/gui/tree/3.53.3"
             },
-            "time": "2024-04-03T13:26:42+00:00"
+            "time": "2024-09-12T14:55:57+00:00"
         },
         {
             "name": "spryker/guzzle",
@@ -36094,16 +36479,16 @@
         },
         {
             "name": "spryker/product-image-storage",
-            "version": "1.17.0",
+            "version": "1.17.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/product-image-storage.git",
-                "reference": "33798920b8000ec0fbb63008a9b5d803291735d5"
+                "reference": "a17887c3671126223eea9b2792b5e0d3bae88b4a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/product-image-storage/zipball/33798920b8000ec0fbb63008a9b5d803291735d5",
-                "reference": "33798920b8000ec0fbb63008a9b5d803291735d5",
+                "url": "https://api.github.com/repos/spryker/product-image-storage/zipball/a17887c3671126223eea9b2792b5e0d3bae88b4a",
+                "reference": "a17887c3671126223eea9b2792b5e0d3bae88b4a",
                 "shasum": ""
             },
             "require": {
@@ -36121,12 +36506,15 @@
             },
             "require-dev": {
                 "spryker/code-sniffer": "*",
+                "spryker/container": "*",
                 "spryker/event": "*",
                 "spryker/locale": "*",
                 "spryker/product-attribute": "*",
                 "spryker/product-storage": "*",
                 "spryker/propel": "*",
                 "spryker/queue": "*",
+                "spryker/rabbit-mq": "*",
+                "spryker/store": "*",
                 "spryker/testify": "*"
             },
             "suggest": {
@@ -36150,9 +36538,9 @@
             ],
             "description": "ProductImageStorage module",
             "support": {
-                "source": "https://github.com/spryker/product-image-storage/tree/1.17.0"
+                "source": "https://github.com/spryker/product-image-storage/tree/1.17.2"
             },
-            "time": "2023-12-21T15:24:13+00:00"
+            "time": "2024-09-12T14:55:57+00:00"
         },
         {
             "name": "spryker/product-label",
@@ -36937,16 +37325,16 @@
         },
         {
             "name": "spryker/product-management",
-            "version": "0.19.41",
+            "version": "0.19.42",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/product-management.git",
-                "reference": "dc3269b8a0a514a3dc49b69ba530e722669761a0"
+                "reference": "1ae46d9c43f3f303d5b7f6b4305f42403488b54a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/product-management/zipball/dc3269b8a0a514a3dc49b69ba530e722669761a0",
-                "reference": "dc3269b8a0a514a3dc49b69ba530e722669761a0",
+                "url": "https://api.github.com/repos/spryker/product-management/zipball/1ae46d9c43f3f303d5b7f6b4305f42403488b54a",
+                "reference": "1ae46d9c43f3f303d5b7f6b4305f42403488b54a",
                 "shasum": ""
             },
             "require": {
@@ -37014,9 +37402,9 @@
             ],
             "description": "ProductManagement module",
             "support": {
-                "source": "https://github.com/spryker/product-management/tree/0.19.41"
+                "source": "https://github.com/spryker/product-management/tree/0.19.42"
             },
-            "time": "2024-09-02T08:22:15+00:00"
+            "time": "2024-09-12T14:55:57+00:00"
         },
         {
             "name": "spryker/product-management-extension",

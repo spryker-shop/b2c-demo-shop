@@ -17,6 +17,7 @@ use Spryker\Yves\Router\Plugin\Router\YvesRouterPlugin;
 use Spryker\Yves\Router\Plugin\RouterEnhancer\LanguagePrefixRouterEnhancerPlugin;
 use Spryker\Yves\Router\Plugin\RouterEnhancer\StorePrefixRouterEnhancerPlugin;
 use Spryker\Yves\Router\RouterDependencyProvider as SprykerRouterDependencyProvider;
+use SprykerEco\Yves\ImageSearchAi\Plugin\Router\ImageSearchAiRouteProviderPlugin;
 use SprykerShop\Yves\AgentPage\Plugin\Router\AgentPageRouteProviderPlugin;
 use SprykerShop\Yves\AgentWidget\Plugin\Router\AgentWidgetRouteProviderPlugin;
 use SprykerShop\Yves\AvailabilityNotificationPage\Plugin\Router\AvailabilityNotificationPageRouteProviderPlugin;
@@ -124,6 +125,7 @@ class RouterDependencyProvider extends SprykerRouterDependencyProvider
             new ConfigurableBundleNoteWidgetAsyncRouteProviderPlugin(),
             new ConfigurableBundleWidgetAsyncRouteProviderPlugin(),
             new OrderCustomReferenceWidgetAsyncRouteProviderPlugin(),
+            new ImageSearchAiRouteProviderPlugin(),
         ];
     }
 
