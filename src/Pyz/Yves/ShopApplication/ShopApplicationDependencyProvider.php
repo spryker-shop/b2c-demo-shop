@@ -23,6 +23,7 @@ use Spryker\Yves\Translator\Plugin\Application\TranslatorApplicationPlugin;
 use Spryker\Yves\Twig\Plugin\Application\TwigApplicationPlugin;
 use Spryker\Yves\Validator\Plugin\Application\ValidatorApplicationPlugin;
 use SprykerShop\Yves\AgentWidget\Widget\AgentControlBarWidget;
+use Pyz\Yves\ProductDetailWidget\Widget\ProductDetailWidget;
 use SprykerShop\Yves\AssetWidget\Widget\AssetWidget;
 use SprykerShop\Yves\AvailabilityNotificationWidget\Widget\AvailabilityNotificationSubscriptionWidget;
 use SprykerShop\Yves\BarcodeWidget\Widget\BarcodeWidget;
@@ -124,6 +125,7 @@ class ShopApplicationDependencyProvider extends SprykerShopApplicationDependency
     protected function getGlobalWidgets(): array
     {
         return [
+            ProductDetailWidget::class,
             AgentControlBarWidget::class,
             CartDiscountPromotionProductListWidget::class,
             CartCodeFormWidget::class,
