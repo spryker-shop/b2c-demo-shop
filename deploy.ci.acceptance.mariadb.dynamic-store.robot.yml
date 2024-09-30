@@ -4,7 +4,7 @@ namespace: spryker_ci
 tag: '1.0'
 
 environment: docker.ci
-pipeline: docker.ci.acceptance.dynamic-store
+pipeline: docker.ci.acceptance.dynamic-store.robot
 image:
     tag: spryker/php:8.2
     environment:
@@ -14,6 +14,7 @@ image:
         SPRYKER_YVES_HOST_EU: yves.eu.spryker.local
         SPRYKER_YVES_HOST_US: yves.us.spryker.local
         SPRYKER_DYNAMIC_STORE_MODE: true
+        SPRYKER_PRODUCT_CONFIGURATOR_HEX_INITIALIZATION_VECTOR: '0c1ffefeebdab4a3d839d0e52590c9a2'
         SPRYKER_PUSH_NOTIFICATION_WEB_PUSH_PHP_VAPID_PUBLIC_KEY: 'BGqNWbv0hWM5CQ1-KwAfSQBMC6TMVFyrnh3vQp37oGCNvQ6eG_HyMjxBFJRWeCPTbzDoxcjhxLJS8Ck8r1G2oFw'
         SPRYKER_PUSH_NOTIFICATION_WEB_PUSH_PHP_VAPID_PRIVATE_KEY: 'UK6DywwjKITPpRHBSY9TLPIXm6BPrHX40sseIoXT9c8'
         SPRYKER_PUSH_NOTIFICATION_WEB_PUSH_PHP_VAPID_SUBJECT: 'https://spryker.com'
@@ -50,6 +51,8 @@ groups:
             yves_eu:
                 application: yves
                 endpoints:
+                    date-time-configurator-example.spryker.local:
+                        entry-point: Configurator
                     yves.eu.spryker.local:
                         region: EU
                         services:
@@ -114,14 +117,8 @@ services:
     search:
         engine: elastic
         version: '7.10'
-    scheduler:
-        engine: jenkins
-        version: '2.442'
-        csrf-protection-enabled: true
     mail_catcher:
         engine: mailhog
-    webdriver:
-        engine: chromedriver
 
 docker:
     ssl:
