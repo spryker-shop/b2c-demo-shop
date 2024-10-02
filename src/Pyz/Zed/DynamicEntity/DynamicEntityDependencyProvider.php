@@ -16,6 +16,8 @@ use Spryker\Zed\CategoryDynamicEntityConnector\Communication\Plugin\DynamicEntit
 use Spryker\Zed\CategoryDynamicEntityConnector\Communication\Plugin\DynamicEntity\CategoryUrlDynamicEntityPostCreatePlugin;
 use Spryker\Zed\CategoryDynamicEntityConnector\Communication\Plugin\DynamicEntity\CategoryUrlDynamicEntityPostUpdatePlugin;
 use Spryker\Zed\DynamicEntity\DynamicEntityDependencyProvider as SprykerDynamicEntityDependencyProvider;
+use Spryker\Zed\ProductDynamicEntityConnector\Communication\Plugin\DynamicEntity\ProductAbstractLocalizedAttributesDynamicEntityPostCreatePlugin;
+use Spryker\Zed\ProductDynamicEntityConnector\Communication\Plugin\DynamicEntity\ProductAbstractLocalizedAttributesDynamicEntityPostUpdatePlugin;
 
 class DynamicEntityDependencyProvider extends SprykerDynamicEntityDependencyProvider
 {
@@ -29,6 +31,7 @@ class DynamicEntityDependencyProvider extends SprykerDynamicEntityDependencyProv
             new CategoryClosureTableDynamicEntityPostUpdatePlugin(),
             new CategoryUrlDynamicEntityPostUpdatePlugin(),
             new CategoryTreeDynamicEntityPostUpdatePlugin(),
+            new ProductAbstractLocalizedAttributesDynamicEntityPostUpdatePlugin(),
         ];
     }
 
@@ -42,6 +45,7 @@ class DynamicEntityDependencyProvider extends SprykerDynamicEntityDependencyProv
             new CategoryClosureTableDynamicEntityPostCreatePlugin(),
             new CategoryUrlDynamicEntityPostCreatePlugin(),
             new CategoryTreeDynamicEntityPostCreatePlugin(),
+            new ProductAbstractLocalizedAttributesDynamicEntityPostCreatePlugin(),
         ];
     }
 }
