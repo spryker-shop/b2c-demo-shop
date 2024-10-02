@@ -13,15 +13,15 @@ concurrency:
     cancel-in-progress: true
 
 jobs:
-    docker-alpine-php-8-2-mariadb-robot-ui-group-one:
+    docker-alpine-php-8-3-mariadb-robot-ui-group-one:
         if: >
             (github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'robot-regression-ui-e2e')) ||
             (github.event_name == 'push' && github.ref == 'refs/heads/master')
-        name: "Docker / Alpine / PHP 8.2 / MariaDB / Robot / UI / Group One"
+        name: "Docker / Alpine / PHP 8.3 / MariaDB / Robot / UI / Group One"
         runs-on: ubuntu-22.04
         env:
             PROGRESS_TYPE: plain
-            SPRYKER_PLATFORM_IMAGE: spryker/php:8.2
+            SPRYKER_PLATFORM_IMAGE: spryker/php:8.3
             TRAVIS: 1
             ROBOT_TESTS_ARTIFACTS_BUCKET_REGION: eu-west-1
         steps:
@@ -91,19 +91,19 @@ jobs:
             -   name: Upload artifacts
                 if: failure()
                 run: |
-                    AWS_DEFAULT_REGION=${{env.ROBOT_TESTS_ARTIFACTS_BUCKET_REGION}} AWS_ACCESS_KEY_ID=${{ secrets.ROBOT_TESTS_ARTIFACTS_KEY }} AWS_SECRET_ACCESS_KEY=${{ secrets.ROBOT_TESTS_ARTIFACTS_SECRET }} aws s3 cp robotframework-tests/results s3://${{vars.ROBOT_TESTS_ARTIFACTS_BUCKET}}/master-robot-ui-ci/b2c_regression/group1/${GITHUB_RUN_ID}/PHP8.2MariaDBRobotUi/ \
+                    AWS_DEFAULT_REGION=${{env.ROBOT_TESTS_ARTIFACTS_BUCKET_REGION}} AWS_ACCESS_KEY_ID=${{ secrets.ROBOT_TESTS_ARTIFACTS_KEY }} AWS_SECRET_ACCESS_KEY=${{ secrets.ROBOT_TESTS_ARTIFACTS_SECRET }} aws s3 cp robotframework-tests/results s3://${{vars.ROBOT_TESTS_ARTIFACTS_BUCKET}}/master-robot-ui-ci/b2c_regression/group1/${GITHUB_RUN_ID}/PHP8.3MariaDBRobotUi/ \
                       --recursive \
                       --expires "$(date -d '+7 days' --utc +'%Y-%m-%dT%H:%M:%SZ')"
 
-    docker-alpine-php-8-2-mariadb-robot-ui-group-two:
+    docker-alpine-php-8-3-mariadb-robot-ui-group-two:
         if: >
             (github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'robot-regression-ui-e2e')) ||
             (github.event_name == 'push' && github.ref == 'refs/heads/master')
-        name: "Docker / Alpine / PHP 8.2 / MariaDB / Robot / UI /Group Two"
+        name: "Docker / Alpine / PHP 8.3 / MariaDB / Robot / UI /Group Two"
         runs-on: ubuntu-22.04
         env:
             PROGRESS_TYPE: plain
-            SPRYKER_PLATFORM_IMAGE: spryker/php:8.2
+            SPRYKER_PLATFORM_IMAGE: spryker/php:8.3
             TRAVIS: 1
             ROBOT_TESTS_ARTIFACTS_BUCKET_REGION: eu-west-1
         steps:
@@ -173,19 +173,19 @@ jobs:
             -   name: Upload artifacts
                 if: failure()
                 run: |
-                    AWS_DEFAULT_REGION=${{env.ROBOT_TESTS_ARTIFACTS_BUCKET_REGION}} AWS_ACCESS_KEY_ID=${{ secrets.ROBOT_TESTS_ARTIFACTS_KEY }} AWS_SECRET_ACCESS_KEY=${{ secrets.ROBOT_TESTS_ARTIFACTS_SECRET }} aws s3 cp robotframework-tests/results s3://${{vars.ROBOT_TESTS_ARTIFACTS_BUCKET}}/master-robot-ui-ci/b2c_regression/group2/${GITHUB_RUN_ID}/PHP8.2MariaDBRobotUi/ \
+                    AWS_DEFAULT_REGION=${{env.ROBOT_TESTS_ARTIFACTS_BUCKET_REGION}} AWS_ACCESS_KEY_ID=${{ secrets.ROBOT_TESTS_ARTIFACTS_KEY }} AWS_SECRET_ACCESS_KEY=${{ secrets.ROBOT_TESTS_ARTIFACTS_SECRET }} aws s3 cp robotframework-tests/results s3://${{vars.ROBOT_TESTS_ARTIFACTS_BUCKET}}/master-robot-ui-ci/b2c_regression/group2/${GITHUB_RUN_ID}/PHP8.3MariaDBRobotUi/ \
                       --recursive \
                       --expires "$(date -d '+7 days' --utc +'%Y-%m-%dT%H:%M:%SZ')"
 
-    docker-alpine-php-8-2-mariadb-robot-ui-group-three:
+    docker-alpine-php-8-3-mariadb-robot-ui-group-three:
         if: >
             (github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'robot-regression-ui-e2e')) ||
             (github.event_name == 'push' && github.ref == 'refs/heads/master')
-        name: "Docker / Alpine / PHP 8.2 / MariaDB / Robot / UI / Group Three"
+        name: "Docker / Alpine / PHP 8.3 / MariaDB / Robot / UI / Group Three"
         runs-on: ubuntu-22.04
         env:
             PROGRESS_TYPE: plain
-            SPRYKER_PLATFORM_IMAGE: spryker/php:8.2
+            SPRYKER_PLATFORM_IMAGE: spryker/php:8.3
             TRAVIS: 1
             ROBOT_TESTS_ARTIFACTS_BUCKET_REGION: eu-west-1
         steps:
@@ -254,6 +254,6 @@ jobs:
             -   name: Upload artifacts
                 if: failure()
                 run: |
-                    AWS_DEFAULT_REGION=${{env.ROBOT_TESTS_ARTIFACTS_BUCKET_REGION}} AWS_ACCESS_KEY_ID=${{ secrets.ROBOT_TESTS_ARTIFACTS_KEY }} AWS_SECRET_ACCESS_KEY=${{ secrets.ROBOT_TESTS_ARTIFACTS_SECRET }} aws s3 cp robotframework-tests/results s3://${{vars.ROBOT_TESTS_ARTIFACTS_BUCKET}}/master-robot-ui-ci/b2c_regression/group3/${GITHUB_RUN_ID}/PHP8.2MariaDBRobotUi/ \
+                    AWS_DEFAULT_REGION=${{env.ROBOT_TESTS_ARTIFACTS_BUCKET_REGION}} AWS_ACCESS_KEY_ID=${{ secrets.ROBOT_TESTS_ARTIFACTS_KEY }} AWS_SECRET_ACCESS_KEY=${{ secrets.ROBOT_TESTS_ARTIFACTS_SECRET }} aws s3 cp robotframework-tests/results s3://${{vars.ROBOT_TESTS_ARTIFACTS_BUCKET}}/master-robot-ui-ci/b2c_regression/group3/${GITHUB_RUN_ID}/PHP8.3MariaDBRobotUi/ \
                       --recursive \
                       --expires "$(date -d '+7 days' --utc +'%Y-%m-%dT%H:%M:%SZ')"
