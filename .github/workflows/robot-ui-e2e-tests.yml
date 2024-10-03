@@ -77,13 +77,13 @@ jobs:
                 run: |
                     cd robotframework-tests
                     rfbrowser init
-                    robot -v env:ui_b2c -v headless:true -v ignore_console:false -d results -v dms:true -v glue_env:http://glue.eu.spryker.local -v bapi_env:http://glue-backend.eu.spryker.local -v sapi_env:http://glue-storefront.eu.spryker.local --exclude skip-due-to-issueORskip-due-to-refactoring --include group_one -s '*'.tests.ui.b2c .
+                    robot -v env:ui_b2c -v headless:true -v ignore_console:false -v dms:true -v glue_env:http://glue.eu.spryker.local -v bapi_env:http://glue-backend.eu.spryker.local -v sapi_env:http://glue-storefront.eu.spryker.local -v yves_env:http://yves.eu.spryker.local -v zed_env:http://backoffice.eu.spryker.local -d results --exclude skip-due-to-issueORskip-due-to-refactoring --include group_one -s '*'.tests.ui.b2c .
                     touch results/time.txt && echo $(date) > results/time.txt
             -   name: Rerun Failed Tests
                 if: steps.run_tests.outcome != 'success'
                 run: |
                     cd robotframework-tests
-                    robot -v env:ui_b2c -v headless:true -v ignore_console:false -d results/rerun --runemptysuite --rerunfailed results/output.xml --output rerun.xml -s '*'.tests.ui.b2c .
+                    robot -v env:ui_b2c -v headless:true -v ignore_console:false -v dms:true -v glue_env:http://glue.eu.spryker.local -v bapi_env:http://glue-backend.eu.spryker.local -v sapi_env:http://glue-storefront.eu.spryker.local -v yves_env:http://yves.eu.spryker.local -v zed_env:http://backoffice.eu.spryker.local -d results/rerun --runemptysuite --rerunfailed results/output.xml --output rerun.xml -s '*'.tests.ui.b2c .
             -   name: Merge Test Results
                 if: always() && steps.run_tests.outcome != 'success'
                 run: |
@@ -160,13 +160,13 @@ jobs:
                 run: |
                     cd robotframework-tests
                     rfbrowser init
-                    robot -v env:ui_b2c -v headless:true -v ignore_console:false -d results -v dms:true -v glue_env:http://glue.eu.spryker.local -v bapi_env:http://glue-backend.eu.spryker.local -v sapi_env:http://glue-storefront.eu.spryker.local --exclude skip-due-to-issueORskip-due-to-refactoring --include group_two -s '*'.tests.ui.b2c .
+                    robot -v env:ui_b2c -v headless:true -v ignore_console:false -v dms:true -v glue_env:http://glue.eu.spryker.local -v bapi_env:http://glue-backend.eu.spryker.local -v sapi_env:http://glue-storefront.eu.spryker.local -v yves_env:http://yves.eu.spryker.local -v zed_env:http://backoffice.eu.spryker.local -d results --exclude skip-due-to-issueORskip-due-to-refactoring --include group_two -s '*'.tests.ui.b2c .
                     touch results/time.txt && echo $(date) > results/time.txt
             -   name: Rerun Failed Tests
                 if: steps.run_tests.outcome != 'success'
                 run: |
                     cd robotframework-tests
-                    robot -v env:ui_b2c -v headless:true -v ignore_console:false -d results/rerun --runemptysuite --rerunfailed results/output.xml --output rerun.xml -s '*'.tests.ui.b2c .
+                    robot -v env:ui_b2c -v headless:true -v ignore_console:false -v dms:true -v glue_env:http://glue.eu.spryker.local -v bapi_env:http://glue-backend.eu.spryker.local -v sapi_env:http://glue-storefront.eu.spryker.local -v yves_env:http://yves.eu.spryker.local -v zed_env:http://backoffice.eu.spryker.local -d results/rerun --runemptysuite --rerunfailed results/output.xml --output rerun.xml -s '*'.tests.ui.b2c .
             -   name: Merge Test Results
                 if: always() && steps.run_tests.outcome != 'success'
                 run: |
@@ -242,13 +242,13 @@ jobs:
                 run: |
                     cd robotframework-tests
                     rfbrowser init
-                    robot -v env:ui_b2c -v headless:true -v ignore_console:false -d results -v dms:true -v glue_env:http://glue.eu.spryker.local -v bapi_env:http://glue-backend.eu.spryker.local -v sapi_env:http://glue-storefront.eu.spryker.local --exclude skip-due-to-issueORskip-due-to-refactoring --include group_tree -s '*'.tests.ui.b2c .
+                    robot -v env:ui_b2c -v headless:true -v ignore_console:false -v dms:true -v glue_env:http://glue.eu.spryker.local -v bapi_env:http://glue-backend.eu.spryker.local -v sapi_env:http://glue-storefront.eu.spryker.local -v yves_env:http://yves.eu.spryker.local -v zed_env:http://backoffice.eu.spryker.local -d results --exclude skip-due-to-issueORskip-due-to-refactoring --include group_tree -s '*'.tests.ui.b2c .
                     touch results/time.txt && echo $(date) > results/time.txt
             -   name: Rerun Failed Tests
                 if: steps.run_tests.outcome != 'success'
                 run: |
                     cd robotframework-tests
-                    robot -v env:ui_b2c -v headless:true -v ignore_console:false -d results/rerun --runemptysuite --rerunfailed results/output.xml --output rerun.xml -s '*'.tests.ui.b2c .
+                    robot -v env:ui_b2c -v headless:true -v ignore_console:false -v dms:true -v glue_env:http://glue.eu.spryker.local -v bapi_env:http://glue-backend.eu.spryker.local -v sapi_env:http://glue-storefront.eu.spryker.local -v yves_env:http://yves.eu.spryker.local -v zed_env:http://backoffice.eu.spryker.local -d results/rerun --runemptysuite --rerunfailed results/output.xml --output rerun.xml -s '*'.tests.ui.b2c .
             -   name: Merge Test Results
                 if: always() && steps.run_tests.outcome != 'success'
                 run: |
