@@ -16,6 +16,7 @@
     canEditCart: true,
     additionalContainerClass: 'grid--justify grid--no-wrap',
     productOptionsModifiers: [],
+    ajaxTriggerAttribute: null,
 } %}
 
 {% set canEditCart = (not is_granted('IS_AUTHENTICATED_FULLY') or can('WriteSharedCartPermissionPlugin', data.idQuote)) and data.canEditCart %}
@@ -73,7 +74,8 @@
                                     {% include molecule('product-item-variant-selector') with {
                                         data: {
                                             productItem: data.productItem,
-                                            productItemAttributes: data.attributes
+                                            productItemAttributes: data.attributes,
+                                            ajaxTriggerAttribute: data.ajaxTriggerAttribute,
                                         }
                                     } only %}
                                 {% endif %}
@@ -105,7 +107,12 @@
                                 <div class="col">
                                     {% block quantity %}
                                         {% if canEditCart %}
-                                            {% widget 'CartChangeQuantityFormWidget' args [data.productItem, not canEditCart] only %}{% endwidget %}
+                                            {% widget 'CartChangeQuantityFormWidget' args [data.productItem, not canEditCart] with {
+                                                data: {
+                                                    ajaxTriggerAttribute: data.ajaxTriggerAttribute,
+                                                },
+                                            } only %}
+                                            {% endwidget %}
                                         {% else %}
                                             {{ 'cart.item_quantity' | trans }}: {{ data.productItem.quantity | executeFilterIfExists('formatInt', app.locale) }}
                                         {% endif %}
@@ -116,9 +123,16 @@
                             </div>
 
                             {% if canEditCart %}
-                                {% widget 'RemoveFromCartFormWidget' args [data.productItem, random()] only %}
+                               {% widget 'RemoveFromCartFormWidget' args [data.productItem, random()] with {
+                                    data: {
+                                        ajaxTriggerAttribute: data.ajaxTriggerAttribute,
+                                    },
+                                    embed: {
+                                        ajaxTriggerAttribute: data.ajaxTriggerAttribute,
+                                    },
+                                }  only %}
                                     {% block embeddedData %}
-                                        <button class="link link--darkest link--edit" data-init-single-click {{ qa('add-to-cart-button') }}>
+                                        <button {{ embed.ajaxTriggerAttribute }} class="link link--darkest link--edit" data-init-single-click {{ qa('add-to-cart-button') }}>
                                             {{- 'remove' | trans -}}
                                         </button>
                                     {% endblock %}

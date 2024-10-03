@@ -207,7 +207,7 @@ class ProductAbstractHydratorStep implements DataImportStepInterface
             ->setNewFrom($dataSet[static::COLUMN_NEW_FROM])
             ->setNewTo($dataSet[static::COLUMN_NEW_TO]);
 
-        $attributes = json_encode($dataSet[static::KEY_ATTRIBUTES]);
+        $attributes = json_encode($this->formatMultiSelectProductAttributes($dataSet[static::KEY_ATTRIBUTES] ?? []));
 
         if ($attributes) {
             $productAbstractEntityTransfer->setAttributes($attributes);
@@ -234,7 +234,7 @@ class ProductAbstractHydratorStep implements DataImportStepInterface
                 ->setMetaDescription($localizedAttributes[static::COLUMN_META_DESCRIPTION])
                 ->setMetaKeywords($localizedAttributes[static::COLUMN_META_KEYWORDS])
                 ->setFkLocale($idLocale)
-                ->setAttributes((string)json_encode($localizedAttributes[static::KEY_ATTRIBUTES]));
+                ->setAttributes((string)json_encode($this->formatMultiSelectProductAttributes($localizedAttributes[static::KEY_ATTRIBUTES] ?? [])));
 
             $localizedAttributeTransfer[] = [
                 static::COLUMN_ABSTRACT_SKU => $dataSet[static::COLUMN_ABSTRACT_SKU],
@@ -332,5 +332,25 @@ class ProductAbstractHydratorStep implements DataImportStepInterface
         $categoryProductOrder = explode(',', $categoryProductOrder);
 
         return array_map('trim', $categoryProductOrder);
+    }
+
+    /**
+     * @param array<mixed> $attributes
+     *
+     * @return array<mixed>
+     */
+    protected function formatMultiSelectProductAttributes(array $attributes): array
+    {
+        foreach ($attributes as $key => $value) {
+            if (is_string($value) && preg_match('/^\[.*\]$/', $value)) {
+                $json = str_replace("'", '"', $value);
+                $decoded = json_decode($json, true);
+                if (json_last_error() === JSON_ERROR_NONE && is_array($decoded)) {
+                    $attributes[$key] = $decoded;
+                }
+            }
+        }
+
+        return $attributes;
     }
 }

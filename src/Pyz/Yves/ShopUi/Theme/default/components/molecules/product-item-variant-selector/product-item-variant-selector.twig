@@ -6,7 +6,8 @@
 
 {% define data = {
     productItem: required,
-    productItemAttributes: []
+    productItemAttributes: [],
+    ajaxTriggerAttribute: null,
 } %}
 
 {% block component %}
@@ -15,7 +16,10 @@
 {% endblock %}
 
 {% block body %}
-    <form method="POST" action="{{ path('cart/update', {'sku': data.productItem.sku }) }}">
+    {% set submitterKey = data.ajaxTriggerAttribute ?: 'data-cart-form-submitter' %}
+    {% set submitterValue = data.ajaxTriggerAttribute ? 'change' : true %}
+
+    <form method="POST" action="{{ path(data.ajaxTriggerAttribute ? 'cart/async/update' : 'cart/update', {'sku': data.productItem.sku }) }}">
         <ul class="list">
             {% for attributeName, attributeOptions in data.productItemAttributes %}
                 {% set options = [] %}
@@ -41,7 +45,7 @@
                             attributes: {
                                 name: 'preselectedAttributes[' ~ attributeName ~ ']',
                                 'config-theme': 'small',
-                                'data-form-submitter': '',
+                                (submitterKey): submitterValue,
                             },
                         } only %}
                     </label>

@@ -18,8 +18,16 @@ export default class VariantResetter extends Component {
     }
 
     protected onClick(event: Event): void {
+        if (this.isAjaxMode) {
+            return;
+        }
+
         event.preventDefault();
         this.target.value = '';
         this.target.closest('form').submit();
+    }
+
+    protected get isAjaxMode(): boolean {
+        return !!this.getAttribute('ajax-mode');
     }
 }

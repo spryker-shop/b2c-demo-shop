@@ -5,6 +5,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_product_abstract",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_product_abstract",
@@ -133,7 +134,7 @@
             },
             {
                 "name": "productAbstractStores",
-                "isEditable": false,
+                "isEditable": true,
                 "childDynamicEntityConfiguration": {
                     "tableAlias": "product-abstract-stores"
                 },
@@ -260,6 +261,19 @@
                         "parentFieldName": "id_product_abstract"
                     }
                 ]
+            },
+            {
+                "name": "productAbstractUrls",
+                "isEditable": false,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "urls"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_resource_product_abstract",
+                        "parentFieldName": "id_product_abstract"
+                    }
+                ]
             }
         ]
     },
@@ -269,6 +283,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_product",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_product",
@@ -446,6 +461,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_abstract_attributes",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_abstract_attributes",
@@ -546,6 +562,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_category",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_category",
@@ -677,6 +694,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_category_template",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_category_template",
@@ -732,6 +750,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_product_category",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_product_category",
@@ -797,15 +816,14 @@
         "isActive": true,
         "definition": {
             "identifier": "id_url",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_url",
                     "fieldVisibleName": "id_url",
                     "isCreatable": false,
                     "isEditable": false,
-                    "validation": {
-                        "isRequired": false
-                    },
+                    "validation": { "isRequired": false },
                     "type": "integer"
                 },
                 {
@@ -814,19 +832,7 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": {
-                        "isRequired": true
-                    }
-                },
-                {
-                    "fieldName": "fk_resource_product_abstract",
-                    "fieldVisibleName": "fk_resource_product_abstract",
-                    "isCreatable": true,
-                    "isEditable": true,
-                    "type": "integer",
-                    "validation": {
-                        "isRequired": false
-                    }
+                    "validation": { "isRequired": true }
                 },
                 {
                     "fieldName": "url",
@@ -835,8 +841,25 @@
                     "isEditable": true,
                     "type": "string",
                     "validation": {
-                        "isRequired": true
+                        "isRequired": true,
+                        "constraints": [{ "name": "url" }]
                     }
+                },
+                {
+                    "fieldName": "fk_resource_product_set",
+                    "fieldVisibleName": "fk_resource_product_set",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "fk_resource_product_abstract",
+                    "fieldVisibleName": "fk_resource_product_abstract",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "integer",
+                    "validation": { "isRequired": false }
                 }
             ]
         }
@@ -847,6 +870,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_locale",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_locale",
@@ -1071,6 +1095,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_product_attributes",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_product_attributes",
@@ -1141,6 +1166,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_product_bundle",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_product_bundle",
@@ -1191,6 +1217,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_product_abstract_store",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_product_abstract_store",
@@ -1231,6 +1258,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_store",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_store",
@@ -1400,6 +1428,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_product_attribute_key",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_product_attribute_key",
@@ -1481,6 +1510,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_product_group",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_product_group",
@@ -1526,6 +1556,7 @@
         "isActive": true,
         "definition": {
             "identifier": "fk_product_abstract",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "fk_product_abstract",
@@ -1566,6 +1597,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_product_image",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_product_image",
@@ -1621,6 +1653,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_product_image_set",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_product_image_set",
@@ -1696,6 +1729,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_product_image_set_to_product_image",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_product_image_set_to_product_image",
@@ -1746,6 +1780,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_product_management_attribute",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_product_management_attribute",
@@ -1811,6 +1846,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_product_management_attribute_value",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_product_management_attribute_value",
@@ -1866,6 +1902,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_glossary_key",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_glossary_key",
@@ -1921,6 +1958,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_glossary_translation",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_glossary_translation",
@@ -1981,6 +2019,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_product_management_attribute_value_translation",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_product_management_attribute_value_translation",
@@ -2031,6 +2070,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_product_option_group",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_product_option_group",
@@ -2109,6 +2149,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_product_option_value",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_product_option_value",
@@ -2184,6 +2225,7 @@
         "isActive": true,
         "definition": {
             "identifier": "fk_product_abstract",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "fk_product_abstract",
@@ -2214,6 +2256,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_product_option_value_price",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_product_option_value_price",
@@ -2284,6 +2327,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_currency",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_currency",
@@ -2375,6 +2419,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_price_type",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_price_type",
@@ -2415,6 +2460,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_price_product",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_price_product",
@@ -2490,6 +2536,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_price_product_store",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_price_product_store",
@@ -2575,6 +2622,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_price_product_default",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_price_product_default",
@@ -2605,6 +2653,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_product_review",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_product_review",
@@ -2705,6 +2754,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_product_search_attribute",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_product_search_attribute",
@@ -2765,6 +2815,7 @@
         "isActive": true,
         "definition": {
             "identifier": "fk_product_attribute_key",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "fk_product_attribute_key",
@@ -2805,6 +2856,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_product_set",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_product_set",
@@ -2909,6 +2961,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_product_abstract_set",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_product_abstract_set",
@@ -2959,6 +3012,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_product_set_data",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_product_set_data",
@@ -3049,6 +3103,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_stock",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_stock",
@@ -3114,6 +3169,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_stock_product",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_stock_product",
@@ -3174,6 +3230,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_availability_abstract",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_availability_abstract",
@@ -3239,6 +3296,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_availability",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_availability",
@@ -3309,6 +3367,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_tax_set",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_tax_set",
@@ -3390,6 +3449,7 @@
         "isActive": true,
         "definition": {
             "identifier": "fk_tax_rate",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "fk_tax_rate",
@@ -3420,6 +3480,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_tax_rate",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_tax_rate",
@@ -3470,6 +3531,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_country",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_country",
@@ -3555,6 +3617,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_product_search",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_product_search",
@@ -3605,6 +3668,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_category_node",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_category_node",
@@ -3690,6 +3754,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_category_store",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_category_store",
@@ -3730,6 +3795,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_category_attribute",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_category_attribute",
@@ -3820,6 +3886,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_product_relation_type",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_product_relation_type",
@@ -3865,6 +3932,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_product_relation",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_product_relation",
@@ -3973,6 +4041,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_product_relation_product_abstract",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_product_relation_product_abstract",
@@ -4023,6 +4092,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_product_relation_store",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_product_relation_store",
@@ -4063,6 +4133,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_product_label",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_product_label",
@@ -4214,6 +4285,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_product_label_localized_attributes",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_product_label_localized_attributes",
@@ -4264,6 +4336,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_product_label_store",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_product_label_store",
@@ -4304,6 +4377,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_product_label_product_abstract",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_product_label_product_abstract",
@@ -4344,6 +4418,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_sales_order",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_sales_order",
@@ -4494,6 +4569,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_locale_store",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_locale_store",
@@ -4524,6 +4600,353 @@
                     "validation": {
                         "isRequired": true
                     }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_currency_store",
+        "tableAlias": "currency-stores",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_currency_store",
+            "isDeletable": false,
+            "fields": [
+                {
+                    "fieldName": "id_currency_store",
+                    "fieldVisibleName": "id_currency_store",
+                    "type": "integer",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "fk_currency",
+                    "fieldVisibleName": "fk_currency",
+                    "type": "integer",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "fk_store",
+                    "fieldVisibleName": "fk_store",
+                    "type": "integer",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_stock_store",
+        "tableAlias": "stock-stores",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_stock_store",
+            "isDeletable": false,
+            "fields": [
+                {
+                    "fieldName": "id_stock_store",
+                    "fieldVisibleName": "id_stock_store",
+                    "type": "integer",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "fk_stock",
+                    "fieldVisibleName": "fk_stock",
+                    "type": "integer",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "fk_store",
+                    "fieldVisibleName": "fk_store",
+                    "type": "integer",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_payment_method",
+        "tableAlias": "payment-methods",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_payment_method",
+            "isDeletable": false,
+            "fields": [
+                {
+                    "fieldName": "id_payment_method",
+                    "fieldVisibleName": "id_payment_method",
+                    "type": "integer",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "is_active",
+                    "fieldVisibleName": "is_active",
+                    "type": "boolean",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "name",
+                    "fieldVisibleName": "name",
+                    "type": "string",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_payment_method_store",
+        "tableAlias": "payment-method-stores",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_payment_method_store",
+            "isDeletable": false,
+            "fields": [
+                {
+                    "fieldName": "id_payment_method_store",
+                    "fieldVisibleName": "id_payment_method_store",
+                    "type": "integer",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "fk_payment_method",
+                    "fieldVisibleName": "fk_payment_method",
+                    "type": "integer",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "fk_store",
+                    "fieldVisibleName": "fk_store",
+                    "type": "integer",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_shipment_method",
+        "tableAlias": "shipment-methods",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_shipment_method",
+            "isDeletable": false,
+            "fields": [
+                {
+                    "fieldName": "id_shipment_method",
+                    "fieldVisibleName": "id_shipment_method",
+                    "type": "integer",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "is_active",
+                    "fieldVisibleName": "is_active",
+                    "type": "boolean",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "name",
+                    "fieldVisibleName": "name",
+                    "type": "string",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_shipment_method_store",
+        "tableAlias": "shipment-method-stores",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_shipment_method_store",
+            "isDeletable": false,
+            "fields": [
+                {
+                    "fieldName": "id_shipment_method_store",
+                    "fieldVisibleName": "id_shipment_method_store",
+                    "type": "integer",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "fk_shipment_method",
+                    "fieldVisibleName": "fk_shipment_method",
+                    "type": "integer",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "fk_store",
+                    "fieldVisibleName": "fk_store",
+                    "type": "integer",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_country_store",
+        "tableAlias": "country-stores",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_country_store",
+            "isDeletable": false,
+            "fields": [
+                {
+                    "fieldName": "id_country_store",
+                    "fieldVisibleName": "id_country_store",
+                    "type": "integer",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "fk_country",
+                    "fieldVisibleName": "fk_country",
+                    "type": "integer",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "fk_store",
+                    "fieldVisibleName": "fk_store",
+                    "type": "integer",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_shipment_method_price",
+        "tableAlias": "shipment-method-prices",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_shipment_method_price",
+            "isDeletable": false,
+            "fields": [
+                {
+                    "fieldName": "id_shipment_method_price",
+                    "fieldVisibleName": "id_shipment_method_price",
+                    "type": "integer",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "fk_currency",
+                    "fieldVisibleName": "fk_currency",
+                    "type": "integer",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "fk_shipment_method",
+                    "fieldVisibleName": "fk_shipment_method",
+                    "type": "integer",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "fk_store",
+                    "fieldVisibleName": "fk_store",
+                    "type": "integer",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "default_gross_price",
+                    "fieldVisibleName": "default_gross_price",
+                    "type": "integer",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "default_net_price",
+                    "fieldVisibleName": "default_net_price",
+                    "type": "integer",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "uuid",
+                    "fieldVisibleName": "uuid",
+                    "type": "string",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "pyz_example_state_machine_item",
+        "tableAlias": "example-state-machine-items",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_example_state_machine_item",
+            "isDeletable": true,
+            "fields": [
+                {
+                    "fieldName": "id_example_state_machine_item",
+                    "fieldVisibleName": "id_example_state_machine_item",
+                    "type": "integer",
+                    "isCreatable": true,
+                    "isEditable": false,
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "fk_state_machine_item_state",
+                    "fieldVisibleName": "fk_state_machine_item_state",
+                    "type": "integer",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "name",
+                    "fieldVisibleName": "name",
+                    "type": "string",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true }
                 }
             ]
         }

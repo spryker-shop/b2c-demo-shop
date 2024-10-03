@@ -7,6 +7,8 @@
 {% define data = {
     form: required,
     isQuoteEditable: required,
+    redirectRoute: null,
+    ajaxTriggerAttribute: null,
 } %}
 
 {% block body %}
@@ -20,9 +22,13 @@
             },
             embed: {
                 form: data.form,
+                ajaxTriggerAttribute: data.ajaxTriggerAttribute,
+                redirectRoute: data.redirectRoute,
             },
         } only %}
             {% block contentText %}
+                {% set formActionRoute = embed.ajaxTriggerAttribute ? 'cart-code/code-async/add' : 'cart-code/code/add' %}
+
                 {% include molecule('form') with {
                     modifiers: ['inline'],
                     data: {
@@ -32,9 +38,10 @@
                             text: 'cart.voucher.redeem' | trans,
                             icon: null,
                             class: 'button button--combined',
+                            attributes: embed.ajaxTriggerAttribute,
                         },
                         options: {
-                            action: path('cart-code/code/add'),
+                            action: embed.redirectRoute ? path(formActionRoute, {'redirectRouteName': embed.redirectRoute}) : path(formActionRoute)
                         },
                     },
                 } only %}
