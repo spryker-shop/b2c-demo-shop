@@ -30,6 +30,7 @@ use Spryker\Zed\ProductDiscountConnector\Communication\Plugin\Collector\ProductA
 use Spryker\Zed\ProductDiscountConnector\Communication\Plugin\DecisionRule\ProductAttributeDecisionRulePlugin;
 use Spryker\Zed\ProductLabelDiscountConnector\Communication\Plugin\Discount\ProductLabelDiscountableItemCollectorPlugin;
 use Spryker\Zed\ProductLabelDiscountConnector\Communication\Plugin\Discount\ProductLabelListDecisionRulePlugin;
+use Spryker\Zed\SalesDiscountConnector\Communication\Plugin\Discount\CustomerOrderCountDecisionRulePlugin;
 use Spryker\Zed\SalesQuantity\Communication\Plugin\DiscountExtension\NonSplittableDiscountableItemTransformerStrategyPlugin;
 use Spryker\Zed\ShipmentDiscountConnector\Communication\Plugin\DecisionRule\ShipmentCarrierDecisionRulePlugin;
 use Spryker\Zed\ShipmentDiscountConnector\Communication\Plugin\DecisionRule\ShipmentMethodDecisionRulePlugin;
@@ -54,6 +55,7 @@ class DiscountDependencyProvider extends SprykerDiscountDependencyProvider
             new ProductLabelListDecisionRulePlugin(),
             new ProductAttributeDecisionRulePlugin(),
             new CategoryDecisionRulePlugin(),
+            new CustomerOrderCountDecisionRulePlugin(),
         ]);
     }
 
