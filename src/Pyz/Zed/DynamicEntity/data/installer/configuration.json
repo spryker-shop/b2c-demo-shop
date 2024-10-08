@@ -133,6 +133,32 @@
                 ]
             },
             {
+                "name": "abstractProductMeasurementBaseUnits",
+                "isEditable": true,
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_product_abstract",
+                        "parentFieldName": "id_product_abstract"
+                    }
+                ],
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "product-measurement-base-units"
+                }
+            },
+            {
+                "name": "abstractProductAlternatives",
+                "isEditable": true,
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_product_abstract_alternative",
+                        "parentFieldName": "id_product_abstract"
+                    }
+                ],
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "product-alternatives"
+                }
+            },
+            {
                 "name": "productAbstractStores",
                 "isEditable": true,
                 "childDynamicEntityConfiguration": {
@@ -452,6 +478,45 @@
                         "parentFieldName": "fk_product_abstract"
                     }
                 ]
+            },
+            {
+                "name": "discontinuedProducts",
+                "isEditable": true,
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_product",
+                        "parentFieldName": "id_product"
+                    }
+                ],
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "discontinued-products"
+                }
+            },
+            {
+                "name": "productAlternatives",
+                "isEditable": true,
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_product_concrete_alternative",
+                        "parentFieldName": "id_product"
+                    }
+                ],
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "product-alternatives"
+                }
+            },
+            {
+                "name": "productPackagingUnits",
+                "isEditable": true,
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_product",
+                        "parentFieldName": "id_product"
+                    }
+                ],
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "product-packaging-units"
+                }
             }
         ]
     },
@@ -4914,6 +4979,446 @@
                     "validation": { "isRequired": true }
                 }
             ]
+        }
+    },
+    {
+        "tableName": "spy_product_packaging_unit",
+        "tableAlias": "product-packaging-units",
+        "isActive": true,
+        "definition": {
+            "isDeletable": false,
+            "fields": [
+                {
+                    "fieldName": "id_product_packaging_unit",
+                    "fieldVisibleName": "id_product_packaging_unit",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "validation": {
+                        "isRequired": true
+                    },
+                    "type": "integer"
+                },
+                {
+                    "fieldName": "fk_lead_product",
+                    "fieldVisibleName": "fk_lead_product",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": {
+                        "isRequired": true
+                    },
+                    "type": "integer"
+                },
+                {
+                    "fieldName": "fk_product",
+                    "fieldVisibleName": "fk_product",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": {
+                        "isRequired": true
+                    },
+                    "type": "integer"
+                },
+                {
+                    "fieldName": "fk_product_packaging_unit_type",
+                    "fieldVisibleName": "fk_product_packaging_unit_type",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": {
+                        "isRequired": true
+                    },
+                    "type": "integer"
+                },
+                {
+                    "fieldName": "amount_interval",
+                    "fieldVisibleName": "amount_interval",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": {
+                        "isRequired": false
+                    },
+                    "type": "integer"
+                },
+                {
+                    "fieldName": "amount_max",
+                    "fieldVisibleName": "amount_max",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": {
+                        "isRequired": false
+                    },
+                    "type": "integer"
+                },
+                {
+                    "fieldName": "amount_min",
+                    "fieldVisibleName": "amount_min",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": {
+                        "isRequired": false
+                    },
+                    "type": "integer"
+                },
+                {
+                    "fieldName": "default_amount",
+                    "fieldVisibleName": "default_amount",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": {
+                        "isRequired": true
+                    },
+                    "type": "integer"
+                },
+                {
+                    "fieldName": "is_amount_variable",
+                    "fieldVisibleName": "is_amount_variable",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": {
+                        "isRequired": true
+                    },
+                    "type": "boolean"
+                },
+                {
+                    "fieldName": "created_at",
+                    "fieldVisibleName": "created_at",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": {
+                        "isRequired": false
+                    },
+                    "type": "string"
+                },
+                {
+                    "fieldName": "updated_at",
+                    "fieldVisibleName": "updated_at",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": {
+                        "isRequired": false
+                    },
+                    "type": "string"
+                },
+                {
+                    "fieldName": "uuid",
+                    "fieldVisibleName": "uuid",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": {
+                        "isRequired": false
+                    },
+                    "type": "string"
+                }
+            ],
+            "identifier": "id_product_packaging_unit"
+        }
+    },
+    {
+        "tableName": "spy_product_measurement_base_unit",
+        "tableAlias": "product-measurement-base-units",
+        "isActive": true,
+        "definition": {
+            "isDeletable": false,
+            "fields": [
+                {
+                    "fieldName": "id_product_measurement_base_unit",
+                    "fieldVisibleName": "id_product_measurement_base_unit",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "validation": {
+                        "isRequired": true
+                    },
+                    "type": "integer"
+                },
+                {
+                    "fieldName": "fk_product_abstract",
+                    "fieldVisibleName": "fk_product_abstract",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": {
+                        "isRequired": true
+                    },
+                    "type": "integer"
+                },
+                {
+                    "fieldName": "fk_product_measurement_unit",
+                    "fieldVisibleName": "fk_product_measurement_unit",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": {
+                        "isRequired": true
+                    },
+                    "type": "integer"
+                },
+                {
+                    "fieldName": "created_at",
+                    "fieldVisibleName": "created_at",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": {
+                        "isRequired": false
+                    },
+                    "type": "string"
+                },
+                {
+                    "fieldName": "updated_at",
+                    "fieldVisibleName": "updated_at",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": {
+                        "isRequired": false
+                    },
+                    "type": "string"
+                }
+            ],
+            "identifier": "id_product_measurement_base_unit"
+        },
+        "childRelations": [
+            {
+                "name": "baseProductMeasurementSalesUnits",
+                "isEditable": true,
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_product_measurement_base_unit",
+                        "parentFieldName": "id_product_measurement_base_unit"
+                    }
+                ],
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "product-measurement-sales-units"
+                }
+            }
+        ]
+    },
+    {
+        "tableName": "spy_product_measurement_sales_unit",
+        "tableAlias": "product-measurement-sales-units",
+        "isActive": true,
+        "definition": {
+            "isDeletable": false,
+            "fields": [
+                {
+                    "fieldName": "id_product_measurement_sales_unit",
+                    "fieldVisibleName": "id_product_measurement_sales_unit",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "validation": {
+                        "isRequired": true
+                    },
+                    "type": "integer"
+                },
+                {
+                    "fieldName": "fk_product",
+                    "fieldVisibleName": "fk_product",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": {
+                        "isRequired": true
+                    },
+                    "type": "integer"
+                },
+                {
+                    "fieldName": "fk_product_measurement_base_unit",
+                    "fieldVisibleName": "fk_product_measurement_base_unit",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": {
+                        "isRequired": true
+                    },
+                    "type": "integer"
+                },
+                {
+                    "fieldName": "fk_product_measurement_unit",
+                    "fieldVisibleName": "fk_product_measurement_unit",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": {
+                        "isRequired": true
+                    },
+                    "type": "integer"
+                },
+                {
+                    "fieldName": "conversion",
+                    "fieldVisibleName": "conversion",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": {
+                        "isRequired": false
+                    },
+                    "type": "integer"
+                },
+                {
+                    "fieldName": "is_default",
+                    "fieldVisibleName": "is_default",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": {
+                        "isRequired": true
+                    },
+                    "type": "boolean"
+                },
+                {
+                    "fieldName": "is_displayed",
+                    "fieldVisibleName": "is_displayed",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": {
+                        "isRequired": true
+                    },
+                    "type": "boolean"
+                },
+                {
+                    "fieldName": "key",
+                    "fieldVisibleName": "key",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": {
+                        "isRequired": false
+                    },
+                    "type": "string"
+                },
+                {
+                    "fieldName": "precision",
+                    "fieldVisibleName": "precision",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": {
+                        "isRequired": false
+                    },
+                    "type": "integer"
+                },
+                {
+                    "fieldName": "created_at",
+                    "fieldVisibleName": "created_at",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": {
+                        "isRequired": false
+                    },
+                    "type": "string"
+                },
+                {
+                    "fieldName": "updated_at",
+                    "fieldVisibleName": "updated_at",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": {
+                        "isRequired": false
+                    },
+                    "type": "string"
+                }
+            ],
+            "identifier": "id_product_measurement_sales_unit"
+        }
+    },
+    {
+        "tableName": "spy_product_discontinued",
+        "tableAlias": "discontinued-products",
+        "isActive": true,
+        "definition": {
+            "isDeletable": false,
+            "fields": [
+                {
+                    "fieldName": "id_product_discontinued",
+                    "fieldVisibleName": "id_product_discontinued",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "validation": {
+                        "isRequired": true
+                    },
+                    "type": "integer"
+                },
+                {
+                    "fieldName": "fk_product",
+                    "fieldVisibleName": "fk_product",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": {
+                        "isRequired": true
+                    },
+                    "type": "integer"
+                },
+                {
+                    "fieldName": "active_until",
+                    "fieldVisibleName": "active_until",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": {
+                        "isRequired": true
+                    },
+                    "type": "string"
+                },
+                {
+                    "fieldName": "discontinued_on",
+                    "fieldVisibleName": "discontinued_on",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": {
+                        "isRequired": false
+                    },
+                    "type": "string"
+                },
+                {
+                    "fieldName": "updated_at",
+                    "fieldVisibleName": "updated_at",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": {
+                        "isRequired": false
+                    },
+                    "type": "string"
+                }
+            ],
+            "identifier": "id_product_discontinued"
+        }
+    },
+    {
+        "tableName": "spy_product_alternative",
+        "tableAlias": "product-alternatives",
+        "isActive": true,
+        "definition": {
+            "isDeletable": false,
+            "fields": [
+                {
+                    "fieldName": "id_product_alternative",
+                    "fieldVisibleName": "id_product_alternative",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "validation": {
+                        "isRequired": true
+                    },
+                    "type": "integer"
+                },
+                {
+                    "fieldName": "fk_product",
+                    "fieldVisibleName": "fk_product",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": {
+                        "isRequired": true
+                    },
+                    "type": "integer"
+                },
+                {
+                    "fieldName": "fk_product_abstract_alternative",
+                    "fieldVisibleName": "fk_product_abstract_alternative",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": {
+                        "isRequired": false
+                    },
+                    "type": "integer"
+                },
+                {
+                    "fieldName": "fk_product_concrete_alternative",
+                    "fieldVisibleName": "fk_product_concrete_alternative",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": {
+                        "isRequired": false
+                    },
+                    "type": "integer"
+                }
+            ],
+            "identifier": "id_product_alternative"
         }
     },
     {
