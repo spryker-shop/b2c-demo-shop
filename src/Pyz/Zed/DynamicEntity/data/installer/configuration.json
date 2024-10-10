@@ -133,6 +133,19 @@
                 ]
             },
             {
+                "name": "abstractProductAlternatives",
+                "isEditable": true,
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_product_abstract_alternative",
+                        "parentFieldName": "id_product_abstract"
+                    }
+                ],
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "product-alternatives"
+                }
+            },
+            {
                 "name": "productAbstractStores",
                 "isEditable": true,
                 "childDynamicEntityConfiguration": {
@@ -452,6 +465,32 @@
                         "parentFieldName": "fk_product_abstract"
                     }
                 ]
+            },
+            {
+                "name": "discontinuedProducts",
+                "isEditable": true,
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_product",
+                        "parentFieldName": "id_product"
+                    }
+                ],
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "discontinued-products"
+                }
+            },
+            {
+                "name": "productAlternatives",
+                "isEditable": true,
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_product_concrete_alternative",
+                        "parentFieldName": "id_product"
+                    }
+                ],
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "product-alternatives"
+                }
             }
         ]
     },
@@ -4914,6 +4953,118 @@
                     "validation": { "isRequired": true }
                 }
             ]
+        }
+    },
+    {
+        "tableName": "spy_product_discontinued",
+        "tableAlias": "discontinued-products",
+        "isActive": true,
+        "definition": {
+            "isDeletable": false,
+            "fields": [
+                {
+                    "fieldName": "id_product_discontinued",
+                    "fieldVisibleName": "id_product_discontinued",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "validation": {
+                        "isRequired": true
+                    },
+                    "type": "integer"
+                },
+                {
+                    "fieldName": "fk_product",
+                    "fieldVisibleName": "fk_product",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": {
+                        "isRequired": true
+                    },
+                    "type": "integer"
+                },
+                {
+                    "fieldName": "active_until",
+                    "fieldVisibleName": "active_until",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": {
+                        "isRequired": true
+                    },
+                    "type": "string"
+                },
+                {
+                    "fieldName": "discontinued_on",
+                    "fieldVisibleName": "discontinued_on",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": {
+                        "isRequired": false
+                    },
+                    "type": "string"
+                },
+                {
+                    "fieldName": "updated_at",
+                    "fieldVisibleName": "updated_at",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": {
+                        "isRequired": false
+                    },
+                    "type": "string"
+                }
+            ],
+            "identifier": "id_product_discontinued"
+        }
+    },
+    {
+        "tableName": "spy_product_alternative",
+        "tableAlias": "product-alternatives",
+        "isActive": true,
+        "definition": {
+            "isDeletable": false,
+            "fields": [
+                {
+                    "fieldName": "id_product_alternative",
+                    "fieldVisibleName": "id_product_alternative",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "validation": {
+                        "isRequired": true
+                    },
+                    "type": "integer"
+                },
+                {
+                    "fieldName": "fk_product",
+                    "fieldVisibleName": "fk_product",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": {
+                        "isRequired": true
+                    },
+                    "type": "integer"
+                },
+                {
+                    "fieldName": "fk_product_abstract_alternative",
+                    "fieldVisibleName": "fk_product_abstract_alternative",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": {
+                        "isRequired": false
+                    },
+                    "type": "integer"
+                },
+                {
+                    "fieldName": "fk_product_concrete_alternative",
+                    "fieldVisibleName": "fk_product_concrete_alternative",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": {
+                        "isRequired": false
+                    },
+                    "type": "integer"
+                }
+            ],
+            "identifier": "id_product_alternative"
         }
     },
     {
