@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "abb912bc5db49385af4791543be9d817",
+    "content-hash": "a4f9e67fd89e2647baeb7de1d3fdeb54",
     "packages": [
         {
             "name": "async-aws/core",
@@ -13562,20 +13562,20 @@
         },
         {
             "name": "spryker-shop/shop-ui",
-            "version": "1.76.0",
+            "version": "dev-add_image_alt_text",
             "source": {
                 "type": "git",
-                "url": "https://github.com/spryker-shop/shop-ui.git",
-                "reference": "a4dd3afc9312b7d969b406e2788d0a7b507aab57"
+                "url": "https://github.com/spryker-projects/spryker-shop-shop-ui.git",
+                "reference": "345106e734759757f87b9c2e81c16ab047421df5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker-shop/shop-ui/zipball/a4dd3afc9312b7d969b406e2788d0a7b507aab57",
-                "reference": "a4dd3afc9312b7d969b406e2788d0a7b507aab57",
+                "url": "https://api.github.com/repos/spryker-projects/spryker-shop-shop-ui/zipball/345106e734759757f87b9c2e81c16ab047421df5",
+                "reference": "345106e734759757f87b9c2e81c16ab047421df5",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.1",
+                "php": ">=8.2",
                 "spryker/form-extension": "^1.0.0",
                 "spryker/kernel": "^3.30.0",
                 "spryker/locale": "^3.0.0 || ^4.0.0",
@@ -13613,15 +13613,27 @@
                     "SprykerShop\\": "src/SprykerShop/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "SprykerShopTest\\": "tests/SprykerShopTest/"
+                }
+            },
+            "scripts": {
+                "cs-check": [
+                    "phpcs -p -s --standard=vendor/spryker/code-sniffer/Spryker/ruleset.xml src/ tests/"
+                ],
+                "cs-fix": [
+                    "phpcbf -p --standard=vendor/spryker/code-sniffer/Spryker/ruleset.xml src/ tests/"
+                ]
+            },
             "license": [
                 "proprietary"
             ],
             "description": "ShopUi module",
             "support": {
-                "source": "https://github.com/spryker-shop/shop-ui/tree/1.76.0"
+                "source": "https://github.com/spryker-projects/spryker-shop-shop-ui/tree/add_image_alt_text"
             },
-            "time": "2024-09-04T07:26:53+00:00"
+            "time": "2024-10-10T11:46:44+00:00"
         },
         {
             "name": "spryker-shop/shopping-list-page-extension",
@@ -62478,6 +62490,12 @@
             "alias_normalized": "1.0.9999999.9999999-dev"
         },
         {
+            "package": "spryker-shop/shop-ui",
+            "version": "dev-add_image_alt_text",
+            "alias": "1.76.0",
+            "alias_normalized": "1.76.0.0"
+        },
+        {
             "package": "spryker/product-image",
             "version": "dev-add_image_alt_text",
             "alias": "3.18.0",
@@ -62510,6 +62528,7 @@
         "spryker-feature/spryker-core": 20,
         "spryker-feature/spryker-core-back-office": 20,
         "spryker-shop/product-image-widget": 20,
+        "spryker-shop/shop-ui": 20,
         "spryker/product-image": 20,
         "spryker/product-image-storage": 20,
         "spryker/product-management": 20,
