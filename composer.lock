@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b0629fbc1cdb36012eb648c42430226c",
+    "content-hash": "a4f9e67fd89e2647baeb7de1d3fdeb54",
     "packages": [
         {
             "name": "async-aws/core",
@@ -1699,8 +1699,8 @@
                 "schema"
             ],
             "support": {
-                "issues": "https://github.com/justinrainbow/json-schema/issues",
-                "source": "https://github.com/justinrainbow/json-schema/tree/v5.2.13"
+                "issues": "https://github.com/jsonrainbow/json-schema/issues",
+                "source": "https://github.com/jsonrainbow/json-schema/tree/v5.2.13"
             },
             "time": "2023-09-26T02:20:38+00:00"
         },
@@ -6349,7 +6349,7 @@
             "type": "metapackage",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "202404.x-dev"
+                    "dev-master": "202407.x-dev"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -6358,7 +6358,7 @@
             ],
             "description": "Product [feature]",
             "support": {
-                "source": "https://github.com/spryker-feature/product/tree/202404.0"
+                "source": "https://github.com/spryker-feature/product/tree/master"
             },
             "time": "2024-04-23T08:48:30+00:00"
         },
@@ -6753,7 +6753,7 @@
             "type": "metapackage",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "202404.x-dev"
+                    "dev-master": "202407.x-dev"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -6762,7 +6762,7 @@
             ],
             "description": "Promotions & Discounts [feature]",
             "support": {
-                "source": "https://github.com/spryker-feature/promotions-discounts/tree/202404.0"
+                "source": "https://github.com/spryker-feature/promotions-discounts/tree/master"
             },
             "time": "2024-04-23T08:48:48+00:00"
         },
@@ -11716,20 +11716,20 @@
         },
         {
             "name": "spryker-shop/product-image-widget",
-            "version": "1.0.2",
+            "version": "dev-add_image_alt_text",
             "source": {
                 "type": "git",
-                "url": "https://github.com/spryker-shop/product-image-widget.git",
-                "reference": "ec456f6b6a9954ddb9a787b9b590f734d6189652"
+                "url": "https://github.com/spryker-projects/product-image-widget.git",
+                "reference": "b573e36d3990662c729d7f2e4ba677432f80a3c7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker-shop/product-image-widget/zipball/ec456f6b6a9954ddb9a787b9b590f734d6189652",
-                "reference": "ec456f6b6a9954ddb9a787b9b590f734d6189652",
+                "url": "https://api.github.com/repos/spryker-projects/product-image-widget/zipball/b573e36d3990662c729d7f2e4ba677432f80a3c7",
+                "reference": "b573e36d3990662c729d7f2e4ba677432f80a3c7",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.2",
+                "php": ">=8.2",
                 "spryker-shop/shop-ui": "^1.40.0",
                 "spryker/kernel": "^3.30.0"
             },
@@ -11751,15 +11751,22 @@
                     "SprykerShop\\": "src/SprykerShop/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "scripts": {
+                "cs-check": [
+                    "phpcs -p -s --standard=vendor/spryker/code-sniffer/Spryker/ruleset.xml src/"
+                ],
+                "cs-fix": [
+                    "phpcbf -p --standard=vendor/spryker/code-sniffer/Spryker/ruleset.xml src/"
+                ]
+            },
             "license": [
                 "proprietary"
             ],
             "description": "ProductImageWidget module",
             "support": {
-                "source": "https://github.com/spryker-shop/product-image-widget/tree/1.0.2"
+                "source": "https://github.com/spryker-projects/product-image-widget/tree/add_image_alt_text"
             },
-            "time": "2020-06-12T10:16:02+00:00"
+            "time": "2024-10-07T12:20:42+00:00"
         },
         {
             "name": "spryker-shop/product-label-widget",
@@ -13556,20 +13563,20 @@
         },
         {
             "name": "spryker-shop/shop-ui",
-            "version": "1.76.0",
+            "version": "dev-add_image_alt_text",
             "source": {
                 "type": "git",
-                "url": "https://github.com/spryker-shop/shop-ui.git",
-                "reference": "a4dd3afc9312b7d969b406e2788d0a7b507aab57"
+                "url": "https://github.com/spryker-projects/spryker-shop-shop-ui.git",
+                "reference": "e3d66eede430a9f87bf1de19c53b4a47570e363f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker-shop/shop-ui/zipball/a4dd3afc9312b7d969b406e2788d0a7b507aab57",
-                "reference": "a4dd3afc9312b7d969b406e2788d0a7b507aab57",
+                "url": "https://api.github.com/repos/spryker-projects/spryker-shop-shop-ui/zipball/e3d66eede430a9f87bf1de19c53b4a47570e363f",
+                "reference": "e3d66eede430a9f87bf1de19c53b4a47570e363f",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.1",
+                "php": ">=8.2",
                 "spryker/form-extension": "^1.0.0",
                 "spryker/kernel": "^3.30.0",
                 "spryker/locale": "^3.0.0 || ^4.0.0",
@@ -13607,15 +13614,27 @@
                     "SprykerShop\\": "src/SprykerShop/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "SprykerShopTest\\": "tests/SprykerShopTest/"
+                }
+            },
+            "scripts": {
+                "cs-check": [
+                    "phpcs -p -s --standard=vendor/spryker/code-sniffer/Spryker/ruleset.xml src/ tests/"
+                ],
+                "cs-fix": [
+                    "phpcbf -p --standard=vendor/spryker/code-sniffer/Spryker/ruleset.xml src/ tests/"
+                ]
+            },
             "license": [
                 "proprietary"
             ],
             "description": "ShopUi module",
             "support": {
-                "source": "https://github.com/spryker-shop/shop-ui/tree/1.76.0"
+                "source": "https://github.com/spryker-projects/spryker-shop-shop-ui/tree/add_image_alt_text"
             },
-            "time": "2024-09-04T07:26:53+00:00"
+            "time": "2024-10-11T12:54:52+00:00"
         },
         {
             "name": "spryker-shop/shopping-list-page-extension",
@@ -35935,20 +35954,20 @@
         },
         {
             "name": "spryker/product-image",
-            "version": "3.17.1",
+            "version": "dev-add_image_alt_text",
             "source": {
                 "type": "git",
-                "url": "https://github.com/spryker/product-image.git",
-                "reference": "104877b57549292a870a13a9d55ecf75555a2038"
+                "url": "https://github.com/spryker-projects/product-image.git",
+                "reference": "01893fe317e57ea3cd669dabdd889ae897bcbb71"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/product-image/zipball/104877b57549292a870a13a9d55ecf75555a2038",
-                "reference": "104877b57549292a870a13a9d55ecf75555a2038",
+                "url": "https://api.github.com/repos/spryker-projects/product-image/zipball/01893fe317e57ea3cd669dabdd889ae897bcbb71",
+                "reference": "01893fe317e57ea3cd669dabdd889ae897bcbb71",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.1",
+                "php": ">=8.2",
                 "spryker/acl-merchant-portal-extension": "^1.0.0",
                 "spryker/kernel": "^3.30.0",
                 "spryker/locale": "^3.0.0 || ^4.0.0",
@@ -35976,15 +35995,27 @@
                     "SprykerTest\\Shared\\ProductImage\\Helper\\": "tests/SprykerTest/Shared/ProductImage/_support/Helper/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "SprykerTest\\": "tests/SprykerTest/"
+                }
+            },
+            "scripts": {
+                "cs-check": [
+                    "phpcs -p -s --standard=vendor/spryker/code-sniffer/Spryker/ruleset.xml src/ tests/"
+                ],
+                "cs-fix": [
+                    "phpcbf -p --standard=vendor/spryker/code-sniffer/Spryker/ruleset.xml src/ tests/"
+                ]
+            },
             "license": [
                 "proprietary"
             ],
             "description": "ProductImage module",
             "support": {
-                "source": "https://github.com/spryker/product-image/tree/3.17.1"
+                "source": "https://github.com/spryker-projects/product-image/tree/add_image_alt_text"
             },
-            "time": "2024-02-08T15:23:43+00:00"
+            "time": "2024-10-11T12:57:27+00:00"
         },
         {
             "name": "spryker/product-image-cart-connector",
@@ -36143,20 +36174,20 @@
         },
         {
             "name": "spryker/product-image-storage",
-            "version": "1.17.0",
+            "version": "dev-add_image_alt_text",
             "source": {
                 "type": "git",
-                "url": "https://github.com/spryker/product-image-storage.git",
-                "reference": "33798920b8000ec0fbb63008a9b5d803291735d5"
+                "url": "https://github.com/spryker-projects/product-image-storage.git",
+                "reference": "06de598821b8ad8929d60cff3faa951b17d7f0ac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/product-image-storage/zipball/33798920b8000ec0fbb63008a9b5d803291735d5",
-                "reference": "33798920b8000ec0fbb63008a9b5d803291735d5",
+                "url": "https://api.github.com/repos/spryker-projects/product-image-storage/zipball/06de598821b8ad8929d60cff3faa951b17d7f0ac",
+                "reference": "06de598821b8ad8929d60cff3faa951b17d7f0ac",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.1",
+                "php": ">=8.2",
                 "spryker/event-behavior": "^1.10.0",
                 "spryker/kernel": "^3.30.0",
                 "spryker/product": "^5.5.0 || ^6.0.0",
@@ -36170,12 +36201,15 @@
             },
             "require-dev": {
                 "spryker/code-sniffer": "*",
+                "spryker/container": "*",
                 "spryker/event": "*",
                 "spryker/locale": "*",
                 "spryker/product-attribute": "*",
                 "spryker/product-storage": "*",
                 "spryker/propel": "*",
                 "spryker/queue": "*",
+                "spryker/rabbit-mq": "*",
+                "spryker/store": "*",
                 "spryker/testify": "*"
             },
             "suggest": {
@@ -36193,15 +36227,27 @@
                     "Spryker\\": "src/Spryker/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "SprykerTest\\": "tests/SprykerTest/"
+                }
+            },
+            "scripts": {
+                "cs-check": [
+                    "phpcs -p -s --standard=vendor/spryker/code-sniffer/Spryker/ruleset.xml src/ tests/"
+                ],
+                "cs-fix": [
+                    "phpcbf -p --standard=vendor/spryker/code-sniffer/Spryker/ruleset.xml src/ tests/"
+                ]
+            },
             "license": [
                 "proprietary"
             ],
             "description": "ProductImageStorage module",
             "support": {
-                "source": "https://github.com/spryker/product-image-storage/tree/1.17.0"
+                "source": "https://github.com/spryker-projects/product-image-storage/tree/add_image_alt_text"
             },
-            "time": "2023-12-21T15:24:13+00:00"
+            "time": "2024-10-11T12:57:59+00:00"
         },
         {
             "name": "spryker/product-label",
@@ -36987,16 +37033,16 @@
         },
         {
             "name": "spryker/product-management",
-            "version": "0.19.43",
+            "version": "dev-add_image_alt_text",
             "source": {
                 "type": "git",
-                "url": "https://github.com/spryker/product-management.git",
-                "reference": "c37f167c7c086c5bdcae733cbfa1d8ac155ebf8a"
+                "url": "https://github.com/spryker-projects/product-management.git",
+                "reference": "99bb2db529aff2d761eecfc39e6913db6e761409"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/product-management/zipball/c37f167c7c086c5bdcae733cbfa1d8ac155ebf8a",
-                "reference": "c37f167c7c086c5bdcae733cbfa1d8ac155ebf8a",
+                "url": "https://api.github.com/repos/spryker-projects/product-management/zipball/99bb2db529aff2d761eecfc39e6913db6e761409",
+                "reference": "99bb2db529aff2d761eecfc39e6913db6e761409",
                 "shasum": ""
             },
             "require": {
@@ -37018,7 +37064,7 @@
                 "spryker/product-category": "^4.12.1",
                 "spryker/product-group": "^1.0.0",
                 "spryker/product-image": "^3.0.0",
-                "spryker/product-management-extension": "^1.7.0",
+                "spryker/product-management-extension": "^1.6.0",
                 "spryker/product-validity": "^1.0.0",
                 "spryker/propel-orm": "^1.0.0",
                 "spryker/stock": "^8.0.0",
@@ -37058,15 +37104,27 @@
                     "SprykerTest\\Zed\\ProductManagement\\PageObject\\": "tests/SprykerTest/Zed/ProductManagement/_support/PageObject/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "SprykerTest\\": "tests/SprykerTest/"
+                }
+            },
+            "scripts": {
+                "cs-check": [
+                    "phpcs -p -s --standard=vendor/spryker/code-sniffer/Spryker/ruleset.xml src/ tests/"
+                ],
+                "cs-fix": [
+                    "phpcbf -p --standard=vendor/spryker/code-sniffer/Spryker/ruleset.xml src/ tests/"
+                ]
+            },
             "license": [
                 "proprietary"
             ],
             "description": "ProductManagement module",
             "support": {
-                "source": "https://github.com/spryker/product-management/tree/0.19.43"
+                "source": "https://github.com/spryker-projects/product-management/tree/add_image_alt_text"
             },
-            "time": "2024-10-10T13:43:31+00:00"
+            "time": "2024-10-11T12:58:28+00:00"
         },
         {
             "name": "spryker/product-management-extension",
@@ -62426,6 +62484,36 @@
             "version": "9999999-dev",
             "alias": "202407.0",
             "alias_normalized": "202407.0"
+        },
+        {
+            "package": "spryker-shop/product-image-widget",
+            "version": "dev-add_image_alt_text",
+            "alias": "1.0.x-dev",
+            "alias_normalized": "1.0.9999999.9999999-dev"
+        },
+        {
+            "package": "spryker-shop/shop-ui",
+            "version": "dev-add_image_alt_text",
+            "alias": "1.76.0",
+            "alias_normalized": "1.76.0.0"
+        },
+        {
+            "package": "spryker/product-image",
+            "version": "dev-add_image_alt_text",
+            "alias": "3.18.0",
+            "alias_normalized": "3.18.0.0"
+        },
+        {
+            "package": "spryker/product-image-storage",
+            "version": "dev-add_image_alt_text",
+            "alias": "1.17.2",
+            "alias_normalized": "1.17.2.0"
+        },
+        {
+            "package": "spryker/product-management",
+            "version": "dev-add_image_alt_text",
+            "alias": "0.19.42",
+            "alias_normalized": "0.19.42.0"
         }
     ],
     "minimum-stability": "dev",
@@ -62441,6 +62529,11 @@
         "spryker-feature/promotions-discounts": 20,
         "spryker-feature/spryker-core": 20,
         "spryker-feature/spryker-core-back-office": 20,
+        "spryker-shop/product-image-widget": 20,
+        "spryker-shop/shop-ui": 20,
+        "spryker/product-image": 20,
+        "spryker/product-image-storage": 20,
+        "spryker/product-management": 20,
         "spryker/cypress-tests": 20,
         "spryker/docker-chromedriver": 20,
         "spryker/robotframework-suite-tests": 20

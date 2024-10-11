@@ -17,7 +17,7 @@
                     modifiers: ['full-height'],
                     data: {
                         imageSrc: image.externalUrlLarge,
-                        imageTitle: 'page.product.details.slider_thumbnail' | trans,
+                        imageTitle: image.altTextLarge is defined ? image.altTextLarge : ('page.product.details.slider_thumbnail' | trans),
                     },
                 } only %}
             {% endif %}
