@@ -46,10 +46,10 @@ image:
     environment:
         SPRYKER_DEFAULT_STORE: "DE"
         SPRYKER_ACTIVE_STORES: "DE,AT"
-        SPRYKER_HOOK_BEFORE_DEPLOY: "vendor/bin/install -r EU/pre-deploy -vvv"
+        SPRYKER_HOOK_BEFORE_DEPLOY: "vendor/bin/install -r EU/pre-deploy.dynamic-store-off -vvv"
         SPRYKER_HOOK_AFTER_DEPLOY: "true"
-        SPRYKER_HOOK_INSTALL: "vendor/bin/install -r EU/production --no-ansi -vvv"
-        SPRYKER_HOOK_DESTRUCTIVE_INSTALL: "vendor/bin/install -r EU/destructive --no-ansi -vvv"
+        SPRYKER_HOOK_INSTALL: "vendor/bin/install -r EU/production.dynamic-store-off --no-ansi -vvv"
+        SPRYKER_HOOK_DESTRUCTIVE_INSTALL: "vendor/bin/install -r EU/destructive.dynamic-store-off --no-ansi -vvv"
         SPRYKER_YVES_HOST_DE: www.de.aop-b2c.demo-spryker.com
         SPRYKER_YVES_HOST_AT: www.at.aop-b2c.demo-spryker.com
         SPRYKER_PUSH_NOTIFICATION_WEB_PUSH_PHP_VAPID_PUBLIC_KEY: 'BGqNWbv0hWM5CQ1-KwAfSQBMC6TMVFyrnh3vQp37oGCNvQ6eG_HyMjxBFJRWeCPTbzDoxcjhxLJS8Ck8r1G2oFw'
