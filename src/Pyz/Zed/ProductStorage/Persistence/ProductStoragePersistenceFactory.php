@@ -13,6 +13,7 @@ use Spryker\Zed\ProductStorage\Persistence\ProductStoragePersistenceFactory as S
 /**
  * @method \Pyz\Zed\ProductStorage\ProductStorageConfig getConfig()
  * @method \Pyz\Zed\ProductStorage\Persistence\ProductStorageQueryContainerInterface getQueryContainer()
+ * @method \Spryker\Zed\ProductStorage\Persistence\ProductStorageRepositoryInterface getRepository()
  */
 class ProductStoragePersistenceFactory extends SprykerProductStoragePersistenceFactory
 {
