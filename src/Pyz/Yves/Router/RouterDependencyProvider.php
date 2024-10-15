@@ -51,6 +51,7 @@ use SprykerShop\Yves\OrderCustomReferenceWidget\Plugin\Router\OrderCustomReferen
 use SprykerShop\Yves\OrderCustomReferenceWidget\Plugin\Router\OrderCustomReferenceWidgetRouteProviderPlugin;
 use SprykerShop\Yves\PaymentPage\Plugin\Router\PaymentPageRouteProviderPlugin;
 use SprykerShop\Yves\PriceWidget\Plugin\Router\PriceWidgetRouteProviderPlugin;
+use SprykerShop\Yves\ProductComparisonPage\Plugin\Router\ProductComparisonPageRouteProviderPlugin;
 use SprykerShop\Yves\ProductConfiguratorGatewayPage\Plugin\Router\ProductConfiguratorGatewayPageRouteProviderPlugin;
 use SprykerShop\Yves\ProductNewPage\Plugin\Router\ProductNewPageRouteProviderPlugin;
 use SprykerShop\Yves\ProductReviewWidget\Plugin\Router\ProductReviewWidgetRouteProviderPlugin;
@@ -124,6 +125,7 @@ class RouterDependencyProvider extends SprykerRouterDependencyProvider
             new ConfigurableBundleNoteWidgetAsyncRouteProviderPlugin(),
             new ConfigurableBundleWidgetAsyncRouteProviderPlugin(),
             new OrderCustomReferenceWidgetAsyncRouteProviderPlugin(),
+            new ProductComparisonPageRouteProviderPlugin(),
         ];
     }
 
