@@ -88,6 +88,8 @@
         {% endblock %}
     {% endwidget %}
 
+    {% widget 'ComparisonProductTogglerComparisonListWidget' args [data.product.sku, isDisabled] only %}{% endwidget %}
+
     {% if not isAvailable and isProductConcrete %}
         {% widget 'AvailabilityNotificationSubscriptionWidget' args [data.product] only %}{% endwidget %}
     {% endif %}
