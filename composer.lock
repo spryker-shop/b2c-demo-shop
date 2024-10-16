@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6aeade48eed7fcca95aeae3ea03b4fbd",
+    "content-hash": "cc2735c028b5f62b2106ac05f43d4e3e",
     "packages": [
         {
             "name": "async-aws/core",
@@ -6443,6 +6443,42 @@
             "time": "2024-04-23T08:49:05+00:00"
         },
         {
+            "name": "spryker-feature/product-comparison",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker-feature/product-comparison.git",
+                "reference": "318b006c918a372332f251f57c117bbd1118b067"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker-feature/product-comparison/zipball/318b006c918a372332f251f57c117bbd1118b067",
+                "reference": "318b006c918a372332f251f57c117bbd1118b067",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.1",
+                "spryker-shop/product-comparison-page": "^1.0.0",
+                "spryker-shop/product-comparison-widget": "^1.0.0"
+            },
+            "default-branch": true,
+            "type": "metapackage",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "202407.x-dev"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "Product Comparison [feature]",
+            "support": {
+                "source": "https://github.com/spryker-feature/product-comparison/tree/master"
+            },
+            "time": "2024-10-15T10:15:24+00:00"
+        },
+        {
             "name": "spryker-feature/product-groups",
             "version": "202404.0",
             "source": {
@@ -11095,6 +11131,105 @@
             "time": "2023-04-20T13:53:45+00:00"
         },
         {
+            "name": "spryker-shop/product-comparison-page",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker-shop/product-comparison-page.git",
+                "reference": "0c65ac0d1a163d66935802da727e05cbb5028b94"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker-shop/product-comparison-page/zipball/0c65ac0d1a163d66935802da727e05cbb5028b94",
+                "reference": "0c65ac0d1a163d66935802da727e05cbb5028b94",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.2",
+                "spryker-shop/shop-application": "^1.0.0",
+                "spryker-shop/shop-ui": "^1.73.0",
+                "spryker/kernel": "^3.52.0",
+                "spryker/product-storage": "^1.29.0",
+                "spryker/symfony": "^3.0.0",
+                "spryker/transfer": "^3.27.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/router": "*"
+            },
+            "suggest": {
+                "spryker/router": "Use this module if you want use the RouterProviderPlugin.",
+                "spryker/silex": "Use this module when using plugins that need Silex dependencies."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "SprykerShop\\": "src/SprykerShop/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "ProductComparisonPage module",
+            "support": {
+                "source": "https://github.com/spryker-shop/product-comparison-page/tree/1.0.0"
+            },
+            "time": "2024-10-10T11:46:44+00:00"
+        },
+        {
+            "name": "spryker-shop/product-comparison-widget",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker-shop/product-comparison-widget.git",
+                "reference": "3df2c0eb3ce74a5426044a8e9bd596ce410fddd7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker-shop/product-comparison-widget/zipball/3df2c0eb3ce74a5426044a8e9bd596ce410fddd7",
+                "reference": "3df2c0eb3ce74a5426044a8e9bd596ce410fddd7",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.2",
+                "spryker-shop/product-comparison-page": "^1.0.0",
+                "spryker-shop/shop-ui": "^1.73.0",
+                "spryker/kernel": "^3.52.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*"
+            },
+            "suggest": {
+                "spryker/silex": "Use this module when using plugins that need Silex dependencies."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "SprykerShop\\": "src/SprykerShop/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "ProductComparisonWidget module",
+            "support": {
+                "source": "https://github.com/spryker-shop/product-comparison-widget/tree/1.0.0"
+            },
+            "time": "2024-10-10T11:46:44+00:00"
+        },
+        {
             "name": "spryker-shop/product-configuration-cart-widget",
             "version": "1.0.0",
             "source": {
@@ -11514,20 +11649,20 @@
         },
         {
             "name": "spryker-shop/product-detail-page",
-            "version": "3.20.1",
+            "version": "3.21.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker-shop/product-detail-page.git",
-                "reference": "672e6d68ccd01c95bb9a651b53c8edfa98a78ae3"
+                "reference": "3ed31ab3d061a5d87c86cd7900dba72d8968c4b5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker-shop/product-detail-page/zipball/672e6d68ccd01c95bb9a651b53c8edfa98a78ae3",
-                "reference": "672e6d68ccd01c95bb9a651b53c8edfa98a78ae3",
+                "url": "https://api.github.com/repos/spryker-shop/product-detail-page/zipball/3ed31ab3d061a5d87c86cd7900dba72d8968c4b5",
+                "reference": "3ed31ab3d061a5d87c86cd7900dba72d8968c4b5",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.1",
+                "php": ">=8.2",
                 "spryker-shop/shop-application": "^1.0.0",
                 "spryker-shop/shop-router-extension": "^1.0.0",
                 "spryker-shop/shop-ui": "^1.44.0",
@@ -11551,6 +11686,7 @@
                 "spryker-shop/cart-page": "Add the module if you want to use CartAddProductAsSeparateItemWidget.",
                 "spryker-shop/cms-block-widget": "If you want to use components from module CmsBlockWidget or ProductCmsBlockWidgetPlugin.",
                 "spryker-shop/product-bundle-widget": "If you want to use components from module ProductBundle",
+                "spryker-shop/product-comparison-widget": "If you want to use ComparisonProductTogglerComparisonListWidget widget from the ProductComparisonWidget module.",
                 "spryker-shop/product-configuration-widget": "Add the module if you want to use ProductConfigurationProductViewDisplayWidget or ProductConfigurationProductDetailPageButtonWidget.",
                 "spryker-shop/product-group-widget": "If you want to use components from module ProductGroupColorWidget or ProductGroupWidget",
                 "spryker-shop/product-review-widget": "If you want to use ProductDetailPageReviewWidget or ProductReviewWidgetPlugin.",
@@ -11573,9 +11709,9 @@
             ],
             "description": "ProductDetailPage module",
             "support": {
-                "source": "https://github.com/spryker-shop/product-detail-page/tree/3.20.1"
+                "source": "https://github.com/spryker-shop/product-detail-page/tree/3.21.0"
             },
-            "time": "2024-09-02T08:22:17+00:00"
+            "time": "2024-10-10T11:46:44+00:00"
         },
         {
             "name": "spryker-shop/product-discontinued-widget",
@@ -13557,20 +13693,20 @@
         },
         {
             "name": "spryker-shop/shop-ui",
-            "version": "1.76.0",
+            "version": "1.78.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker-shop/shop-ui.git",
-                "reference": "a4dd3afc9312b7d969b406e2788d0a7b507aab57"
+                "reference": "345106e734759757f87b9c2e81c16ab047421df5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker-shop/shop-ui/zipball/a4dd3afc9312b7d969b406e2788d0a7b507aab57",
-                "reference": "a4dd3afc9312b7d969b406e2788d0a7b507aab57",
+                "url": "https://api.github.com/repos/spryker-shop/shop-ui/zipball/345106e734759757f87b9c2e81c16ab047421df5",
+                "reference": "345106e734759757f87b9c2e81c16ab047421df5",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.1",
+                "php": ">=8.2",
                 "spryker/form-extension": "^1.0.0",
                 "spryker/kernel": "^3.30.0",
                 "spryker/locale": "^3.0.0 || ^4.0.0",
@@ -13614,9 +13750,9 @@
             ],
             "description": "ShopUi module",
             "support": {
-                "source": "https://github.com/spryker-shop/shop-ui/tree/1.76.0"
+                "source": "https://github.com/spryker-shop/shop-ui/tree/1.78.0"
             },
-            "time": "2024-09-04T07:26:53+00:00"
+            "time": "2024-10-10T11:46:44+00:00"
         },
         {
             "name": "spryker-shop/shopping-list-page-extension",
@@ -62419,6 +62555,12 @@
             "alias_normalized": "202407.0"
         },
         {
+            "package": "spryker-feature/product-comparison",
+            "version": "9999999-dev",
+            "alias": "202410.0",
+            "alias_normalized": "202410.0"
+        },
+        {
             "package": "spryker-feature/promotions-discounts",
             "version": "9999999-dev",
             "alias": "202407.0",
@@ -62448,6 +62590,7 @@
         "spryker-feature/gift-cards": 20,
         "spryker-feature/order-management": 20,
         "spryker-feature/product": 20,
+        "spryker-feature/product-comparison": 20,
         "spryker-feature/promotions-discounts": 20,
         "spryker-feature/spryker-core": 20,
         "spryker-feature/spryker-core-back-office": 20,
@@ -62470,7 +62613,7 @@
         "ext-readline": "*",
         "ext-redis": "*"
     },
-    "platform-dev": {},
+    "platform-dev": [],
     "platform-overrides": {
         "php": "8.2.0"
     },

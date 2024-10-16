@@ -72,6 +72,8 @@ use SprykerShop\Yves\ProductBundleWidget\Widget\ProductBundleMultiCartItemsListW
 use SprykerShop\Yves\ProductBundleWidget\Widget\ProductBundleProductDetailPageItemsListWidget;
 use SprykerShop\Yves\ProductCategoryWidget\Widget\ProductBreadcrumbsWithCategoriesWidget;
 use SprykerShop\Yves\ProductCategoryWidget\Widget\ProductSchemaOrgCategoryWidget;
+use SprykerShop\Yves\ProductComparisonWidget\Widget\ComparisonProductTogglerComparisonListWidget;
+use SprykerShop\Yves\ProductComparisonWidget\Widget\LinkToProductComparisonListWidget;
 use SprykerShop\Yves\ProductConfigurationCartWidget\Widget\ProductConfigurationCartItemDisplayWidget;
 use SprykerShop\Yves\ProductConfigurationCartWidget\Widget\ProductConfigurationCartPageButtonWidget;
 use SprykerShop\Yves\ProductConfigurationCartWidget\Widget\ProductConfigurationQuoteValidatorWidget;
@@ -209,6 +211,8 @@ class ShopApplicationDependencyProvider extends SprykerShopApplicationDependency
             ProductConfigurationWishlistPageButtonWidget::class,
             StoreSwitcherWidget::class,
             CartSummaryHideTaxAmountWidget::class,
+            ComparisonProductTogglerComparisonListWidget::class,
+            LinkToProductComparisonListWidget::class,
         ];
     }
 
