@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<database xmlns="spryker:schema-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\ProductStorage\Persistence" package="src.Orm.Zed.ProductStorage.Persistence">
+    <table name="spy_product_concrete_storage" identifierQuoting="true">
+        <column name="id_product_concrete_storage" type="BIGINT" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_product" type="INTEGER" required="true"/>
+        <column name="sku" required="false" type="VARCHAR" size="255"/>
+        <index name="spy_product_concrete_storage-fk_product">
+            <index-column name="fk_product"/>
+        </index>
+        <id-method-parameter value="spy_product_concrete_storage_pk_seq"/>
+        <behavior name="synchronization">
+            <parameter name="mappings" value="sku:id_product_concrete"/>
+            <parameter name="mapping_resource_key_suffix_column" value="sku"/>
+            <parameter name="mapping_resource" value="sku"/>
+            <parameter name="resource" value="product_concrete"/>
+            <parameter name="locale" required="true"/>
+            <parameter name="key_suffix_column" value="fk_product"/>
+            <parameter name="queue_group" value="sync.storage.product"/>
+            <parameter name="queue_pool" value="synchronizationPool"/>
+        </behavior>
+        <behavior name="timestampable"/>
+    </table>
+    <table name="spy_product_abstract_storage" identifierQuoting="true">
+        <column name="id_product_abstract_storage" type="BIGINT" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_product_abstract" type="INTEGER" required="true"/>
+        <column name="sku" required="false" type="VARCHAR" size="255"/>
+        <index name="spy_product_abstract_storage-fk_product_abstract">
+            <index-column name="fk_product_abstract"/>
+        </index>
+        <id-method-parameter value="spy_product_abstract_storage_pk_seq"/>
+        <behavior name="synchronization">
+            <parameter name="mappings" value="sku:id_product_abstract"/>
+            <parameter name="mapping_resource_key_suffix_column" value="sku"/>
+            <parameter name="mapping_resource" value="sku"/>
+            <parameter name="resource" value="product_abstract"/>
+            <parameter name="store" required="true"/>
+            <parameter name="locale" required="true"/>
+            <parameter name="key_suffix_column" value="fk_product_abstract"/>
+            <parameter name="queue_group" value="sync.storage.product"/>
+        </behavior>
+        <behavior name="timestampable"/>
+    </table>
+</database>

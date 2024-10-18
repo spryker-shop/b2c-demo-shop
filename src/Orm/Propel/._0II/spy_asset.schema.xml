@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<database xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:noNamespaceSchemaLocation="http://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\Asset\Persistence" package="src.Orm.Zed.Asset.Persistence">
+
+    <table name="spy_asset" identifierQuoting="true">
+        <column name="id_asset" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="asset_slot" required="true" type="VARCHAR" size="255"/>
+        <column name="asset_uuid" required="true" type="VARCHAR" size="36"/>
+        <column name="asset_name" required="true" type="VARCHAR" size="255"/>
+        <column name="asset_content" required="true" type="LONGVARCHAR"/>
+        <column name="is_active" required="false" type="BOOLEAN" default="true"/>
+        <column name="last_message_timestamp" required="false" type="TIMESTAMP" size="6"/>
+
+        <unique name="spy_asset-unique-asset_uuid">
+            <unique-column name="asset_uuid"/>
+        </unique>
+
+        <behavior name="event">
+            <parameter name="spy_asset_all" column="*"/>
+        </behavior>
+        <id-method-parameter value="spy_asset_pk_seq"/>
+    </table>
+
+    <table name="spy_asset_store" identifierQuoting="true">
+        <column name="id_asset_store" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_asset" required="true" type="INTEGER"/>
+        <column name="fk_store" required="true" type="INTEGER"/>
+
+        <foreign-key name="spy_asset_store-fk_asset" foreignTable="spy_asset">
+            <reference local="fk_asset" foreign="id_asset"/>
+        </foreign-key>
+
+        <foreign-key name="spy_asset_store-fk_store" foreignTable="spy_store">
+            <reference local="fk_store" foreign="id_store"/>
+        </foreign-key>
+
+        <unique name="spy_asset_store-unique-fk_block-fk_store">
+            <unique-column name="fk_asset"/>
+            <unique-column name="fk_store"/>
+        </unique>
+
+        <behavior name="event">
+            <parameter name="spy_asset_store_all" column="*"/>
+        </behavior>
+        <id-method-parameter value="spy_asset_store_pk_seq"/>
+    </table>
+</database>

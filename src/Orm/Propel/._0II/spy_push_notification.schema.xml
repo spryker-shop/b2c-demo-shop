@@ -1,0 +1,144 @@
+<?xml version="1.0"?>
+<database xmlns="spryker:schema-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" namespace="Orm\Zed\PushNotification\Persistence" package="src.Orm.Zed.PushNotification.Persistence" xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd">
+
+    <table name="spy_push_notification" idMethod="native">
+        <column name="id_push_notification" required="true" type="INTEGER" primaryKey="true" autoIncrement="true"/>
+        <column name="uuid" required="false" type="VARCHAR" size="36"/>
+        <column name="fk_push_notification_group" required="true" type="INTEGER"/>
+        <column name="fk_push_notification_provider" required="true" type="INTEGER"/>
+        <column name="payload" type="CLOB"/>
+
+        <id-method-parameter value="id_push_notification_pk_seq"/>
+
+        <foreign-key name="spy_push_notification-fk_push_notification_group" foreignTable="spy_push_notification_group">
+            <reference local="fk_push_notification_group" foreign="id_push_notification_group"/>
+        </foreign-key>
+
+        <foreign-key name="spy_push_notification-fk_push_notification_provider" foreignTable="spy_push_notification_provider">
+            <reference local="fk_push_notification_provider" foreign="id_push_notification_provider"/>
+        </foreign-key>
+
+        <index name="spy_push_notification-fk_push_notification_group">
+            <index-column name="fk_push_notification_group"/>
+        </index>
+
+        <index name="spy_push_notification-fk_push_notification_provider">
+            <index-column name="fk_push_notification_provider"/>
+        </index>
+
+        <behavior name="timestampable"/>
+
+        <behavior name="uuid">
+            <parameter name="key_columns" value="id_push_notification.fk_push_notification_group.fk_push_notification_provider"/>
+        </behavior>
+    </table>
+
+    <table name="spy_push_notification_subscription" idMethod="native">
+        <column name="id_push_notification_subscription" required="true" type="INTEGER" primaryKey="true" autoIncrement="true"/>
+        <column name="uuid" required="false" type="VARCHAR" size="36"/>
+        <column name="fk_push_notification_group" required="true" type="INTEGER"/>
+        <column name="fk_push_notification_provider" required="true" type="INTEGER"/>
+        <column name="fk_locale" required="false" default="null" type="INTEGER"/>
+        <column name="payload" type="CLOB"/>
+        <column name="payload_checksum" type="VARCHAR" size="255"/>
+        <column name="expired_at" required="true" type="TIMESTAMP"/>
+
+        <id-method-parameter value="id_push_notification_subscription_pk_seq"/>
+
+        <foreign-key name="spy_push_notification_sub-fk_push_notification_group" foreignTable="spy_push_notification_group">
+            <reference local="fk_push_notification_group" foreign="id_push_notification_group"/>
+        </foreign-key>
+
+        <foreign-key name="spy_push_notification_sub-fk_push_notification_provider" foreignTable="spy_push_notification_provider">
+            <reference local="fk_push_notification_provider" foreign="id_push_notification_provider"/>
+        </foreign-key>
+
+        <foreign-key name="spy_push_notification_sub-fk_locale" foreignTable="spy_locale">
+            <reference local="fk_locale" foreign="id_locale"/>
+        </foreign-key>
+
+        <index name="spy_push_notification_sub-fk_push_notification_group">
+            <index-column name="fk_push_notification_group"/>
+        </index>
+
+        <index name="spy_push_notification_sub-fk_push_notification_provider">
+            <index-column name="fk_push_notification_provider"/>
+        </index>
+
+        <behavior name="timestampable"/>
+
+        <behavior name="uuid">
+            <parameter name="key_columns" value="id_push_notification_subscription.fk_push_notification_group.fk_push_notification_provider"/>
+        </behavior>
+    </table>
+
+    <table name="spy_push_notification_subscription_delivery_log" idMethod="native">
+        <column name="id_push_notification_subscription_delivery_log" required="true" type="INTEGER" primaryKey="true" autoIncrement="true"/>
+        <column name="fk_push_notification" required="true" type="INTEGER"/>
+        <column name="fk_push_notification_subscription" required="true" type="INTEGER"/>
+
+        <id-method-parameter value="id_push_notification_subscription_delivery_log_pk_seq"/>
+
+        <foreign-key name="spy_push_notification_subscription_delivery_log-fk_push_not" foreignTable="spy_push_notification">
+            <reference local="fk_push_notification" foreign="id_push_notification"/>
+        </foreign-key>
+
+        <foreign-key name="spy_push_notification_subscription_delivery_log-fk_push_not_sub" foreignTable="spy_push_notification_subscription">
+            <reference local="fk_push_notification_subscription" foreign="id_push_notification_subscription"/>
+        </foreign-key>
+
+        <index name="spy_push_not_sub_delivery_log-fk_push_notification">
+            <index-column name="fk_push_notification"/>
+        </index>
+
+        <index name="spy_push_not_sub_delivery_log_delivery_log-fk_push_not_sub">
+            <index-column name="fk_push_notification_subscription"/>
+        </index>
+
+        <unique name="spy_push_not_subscr_del_log-fk_push_not-fk_push_not_subscr">
+            <unique-column name="fk_push_notification"/>
+            <unique-column name="fk_push_notification_subscription"/>
+        </unique>
+
+        <behavior name="timestampable"/>
+    </table>
+
+    <table name="spy_push_notification_group" idMethod="native">
+        <column name="id_push_notification_group" required="true" type="INTEGER" primaryKey="true" autoIncrement="true"/>
+        <column name="uuid" required="false" type="VARCHAR" size="36"/>
+        <column name="name" required="true" size="255" type="VARCHAR"/>
+        <column name="identifier" required="false" size="255" type="VARCHAR"/>
+
+        <id-method-parameter value="id_push_notification_group_pk_seq"/>
+
+        <unique name="spy_push_notification_group-name-identifier">
+            <unique-column name="name"/>
+            <unique-column name="identifier"/>
+        </unique>
+
+        <behavior name="uuid">
+            <parameter name="key_columns" value="id_push_notification_group"/>
+        </behavior>
+
+        <behavior name="timestampable"/>
+    </table>
+
+    <table name="spy_push_notification_provider" idMethod="native" identifierQuoting="true">
+        <column name="id_push_notification_provider" required="true" type="INTEGER" primaryKey="true" autoIncrement="true"/>
+        <column name="uuid" required="false" type="VARCHAR" size="36"/>
+        <column name="name" required="true" size="255" type="VARCHAR"/>
+
+        <unique name="spy_push_notification_provider-name">
+            <unique-column name="name"/>
+        </unique>
+
+        <id-method-parameter value="id_push_notification_provider_pk_seq"/>
+
+        <behavior name="uuid">
+            <parameter name="key_columns" value="id_push_notification_provider"/>
+        </behavior>
+
+        <behavior name="timestampable"/>
+    </table>
+
+</database>

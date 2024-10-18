@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<database xmlns="spryker:schema-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\SalesReturnSearch\Persistence" package="src.Orm.Zed.SalesReturnSearch.Persistence">
+    <table name="spy_sales_return_reason_search" identifierQuoting="true">
+        <column name="id_sales_return_reason_search" type="BIGINT" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_sales_return_reason" type="INTEGER" required="true"/>
+        <column name="structured_data" type="LONGVARCHAR" required="true"/>
+        <index name="spy_sales_return_reason_search-fk_sales_return_reason">
+            <index-column name="fk_sales_return_reason"/>
+        </index>
+        <id-method-parameter value="spy_sales_return_reason_search_pk_seq"/>
+        <behavior name="synchronization">
+            <parameter name="resource" value="return_reason"/>
+            <parameter name="locale" required="true"/>
+            <parameter name="key_suffix_column" value="fk_sales_return_reason"/>
+            <parameter name="queue_group" value="sync.search.return"/>
+            <parameter name="params" value="{&quot;type&quot;:&quot;return_reason&quot;}"/>
+            <parameter name="queue_pool" value="synchronizationPool"/>
+        </behavior>
+        <behavior name="timestampable"/>
+    </table>
+</database>

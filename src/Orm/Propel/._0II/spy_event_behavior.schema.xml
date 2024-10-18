@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<database xmlns="spryker:schema-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\EventBehavior\Persistence" package="src.Orm.Zed.EventBehavior.Persistence">
+
+    <table name="spy_event_behavior_entity_change" identifierQuoting="true">
+        <column name="id_event_behavior_entity_change" type="BIGINT" autoIncrement="true" primaryKey="true"/>
+        <column name="data" type="LONGVARCHAR"/>
+        <column name="process_id" type="VARCHAR" size="255"/>
+
+        <index name="spy_event_behavior_entity_change-process_id">
+            <index-column name="process_id"/>
+        </index>
+
+        <behavior name="timestampable">
+            <parameter name="disable_updated_at" value="true" />
+        </behavior>
+    <id-method-parameter value="spy_event_behavior_entity_change_pk_seq"/></table>
+</database>

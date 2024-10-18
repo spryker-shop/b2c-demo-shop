@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<database xmlns="spryker:schema-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\Oauth\Persistence" package="src.Orm.Zed.Oauth.Persistence">
+    <table name="spy_oauth_access_token" identifierQuoting="true">
+        <column name="id_oauth_access_token" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_oauth_client" type="VARCHAR" size="1024" required="true"/>
+        <column name="expirity_date" type="TIMESTAMP" required="true"/>
+        <column name="identifier" type="VARCHAR" size="3024" required="true"/>
+        <column name="scopes" type="VARCHAR" size="1024" required="false"/>
+        <column name="user_identifier" type="VARCHAR" size="1024" required="true"/>
+        <foreign-key name="spy_oauth_access_token-identifier" foreignTable="spy_oauth_client" phpName="OauthClient" refPhpName="OauthAccessToken">
+            <reference local="fk_oauth_client" foreign="identifier"/>
+        </foreign-key>
+        <index name="index-spy_oauth_access_token-fk_oauth_client">
+            <index-column name="fk_oauth_client"/>
+        </index>
+        <id-method-parameter value="spy_oauth_access_token_pk_seq"/>
+        <behavior name="timestampable"/>
+    </table>
+    <table name="spy_oauth_client" identifierQuoting="true">
+        <column name="id_oauth_client" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="identifier" type="VARCHAR" size="1024" required="true"/>
+        <column name="is_confidential" type="BOOLEAN" required="false"/>
+        <column name="name" type="VARCHAR" size="1024" required="true"/>
+        <column name="redirect_uri" type="VARCHAR" size="1024" required="false"/>
+        <column name="secret" type="VARCHAR" size="1024" required="false"/>
+        <unique name="spy_oauth_client-identifier">
+            <unique-column name="identifier"/>
+        </unique>
+        <id-method-parameter value="spy_oauth_client_pk_seq"/>
+    </table>
+    <table name="spy_oauth_scope" identifierQuoting="true">
+        <column name="id_oauth_scope" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="description" type="LONGVARCHAR" required="false"/>
+        <column name="identifier" type="VARCHAR" size="1024" required="true"/>
+        <unique name="spy_oauth_scope-identifier">
+            <unique-column name="identifier"/>
+        </unique>
+        <id-method-parameter value="spy_oauth_scope_pk_seq"/>
+    </table>
+</database>

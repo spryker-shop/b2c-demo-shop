@@ -1,0 +1,116 @@
+<?xml version="1.0"?>
+<database xmlns="spryker:schema-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\FileManager\Persistence" package="src.Orm.Zed.FileManager.Persistence">
+    <table name="spy_file">
+        <column name="id_file" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_file_directory" type="INTEGER" required="false"/>
+        <column name="file_name" type="VARCHAR" size="500" required="true"/>
+        <foreign-key name="spy_file-fk_file_directory" foreignTable="spy_file_directory" phpName="FileDirectory">
+            <reference foreign="id_file_directory" local="fk_file_directory"/>
+        </foreign-key>
+        <index name="index-spy_file-fk_file_directory">
+            <index-column name="fk_file_directory"/>
+        </index>
+        <id-method-parameter value="spy_file_pk_seq"/>
+        <behavior name="event">
+            <parameter name="spy_file_all" column="*"/>
+        </behavior>
+    </table>
+    <table name="spy_file_info">
+        <column name="id_file_info" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_file" type="INTEGER" required="true"/>
+        <column name="extension" type="VARCHAR" size="255" required="true"/>
+        <column name="size" type="INTEGER" required="true"/>
+        <column name="storage_file_name" type="VARCHAR" size="255"/>
+        <column name="storage_name" type="VARCHAR" size="255"/>
+        <column name="type" type="VARCHAR" size="255" required="true"/>
+        <column name="version" type="INTEGER" required="true"/>
+        <column name="version_name" type="VARCHAR" size="255" required="true"/>
+        <foreign-key name="spy_file_info-fk_file" foreignTable="spy_file" phpName="File" onDelete="CASCADE">
+            <reference foreign="id_file" local="fk_file"/>
+        </foreign-key>
+        <index name="index-spy_file_info-fk_file">
+            <index-column name="fk_file"/>
+        </index>
+        <id-method-parameter value="spy_file_info_pk_seq"/>
+        <behavior name="timestampable"/>
+        <behavior name="event">
+            <parameter name="spy_file_info_all" column="*"/>
+        </behavior>
+    </table>
+    <table name="spy_file_localized_attributes" idMethod="native" allowPkInsert="true">
+        <column name="id_file_localized_attributes" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_file" required="true" type="INTEGER"/>
+        <column name="fk_locale" required="true" type="INTEGER"/>
+        <column name="alt" required="false" type="LONGVARCHAR" default="NULL"/>
+        <column name="title" required="false" type="VARCHAR" default="NULL" size="255"/>
+        <foreign-key name="spy_file_localized_attributes-fk_file" foreignTable="spy_file" onDelete="CASCADE" onUpdate="CASCADE">
+            <reference local="fk_file" foreign="id_file"/>
+        </foreign-key>
+        <foreign-key name="spy_file_localized_attributes-fk_locale" foreignTable="spy_locale" phpName="Locale">
+            <reference local="fk_locale" foreign="id_locale"/>
+        </foreign-key>
+        <index name="index-spy_file_localized_attributes-fk_locale">
+            <index-column name="fk_locale"/>
+        </index>
+        <unique name="spy_file_localized_attributes-unique-fk_file">
+            <unique-column name="fk_file"/>
+            <unique-column name="fk_locale"/>
+        </unique>
+        <id-method-parameter value="spy_file_localized_attributes_pk_seq"/>
+        <behavior name="event">
+            <parameter name="spy_file_localized_attributes_all" column="*"/>
+        </behavior>
+    </table>
+    <table name="spy_file_directory" idMethod="native">
+        <column name="id_file_directory" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_parent_file_directory" required="false" type="INTEGER" default="NULL"/>
+        <column name="is_active" type="BOOLEAN" default="true" required="true"/>
+        <column name="name" type="VARCHAR" size="255" required="true"/>
+        <column name="position" type="INTEGER" required="false" default="NULL"/>
+        <foreign-key foreignTable="spy_file_directory" phpName="ParentFileDirectory" refPhpName="ChildrenFileDirectory" onDelete="CASCADE">
+            <reference foreign="id_file_directory" local="fk_parent_file_directory"/>
+        </foreign-key>
+        <index>
+            <index-column name="position"/>
+        </index>
+        <index name="index-spy_file_directory-fk_parent_file_directory">
+            <index-column name="fk_parent_file_directory"/>
+        </index>
+        <id-method-parameter value="spy_file_directory_pk_seq"/>
+    </table>
+    <table name="spy_file_directory_localized_attributes" idMethod="native">
+        <column name="id_file_directory_localized_attributes" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_file_directory" required="true" type="INTEGER"/>
+        <column name="fk_locale" required="true" type="INTEGER"/>
+        <column name="title" type="VARCHAR" size="255" required="true"/>
+        <foreign-key foreignTable="spy_file_directory" onDelete="CASCADE">
+            <reference foreign="id_file_directory" local="fk_file_directory"/>
+        </foreign-key>
+        <foreign-key foreignTable="spy_locale">
+            <reference foreign="id_locale" local="fk_locale"/>
+        </foreign-key>
+        <index name="index-spy_file_directory_localized_attributes-fk_locale">
+            <index-column name="fk_locale"/>
+        </index>
+        <unique name="spy_file_directory_localized_attributes-unique-fk_fd-fk_locale">
+            <unique-column name="fk_file_directory"/>
+            <unique-column name="fk_locale"/>
+        </unique>
+        <id-method-parameter value="spy_file_directory_localized_attributes_pk_seq"/>
+        <behavior name="timestampable"/>
+        <behavior name="event">
+            <parameter name="spy_file_directory_localized_attributes_all" column="*"/>
+        </behavior>
+    </table>
+    <table name="spy_mime_type">
+        <column name="id_mime_type" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="comment" type="VARCHAR" size="255" required="false"/>
+        <column name="extensions" type="LONGVARCHAR" required="false"/>
+        <column name="is_allowed" type="BOOLEAN" required="true"/>
+        <column name="name" type="VARCHAR" size="255" required="true"/>
+        <unique name="spy_mime_type-name">
+            <unique-column name="name"/>
+        </unique>
+        <id-method-parameter value="spy_mime_type_pk_seq"/>
+    </table>
+</database>

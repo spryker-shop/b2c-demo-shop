@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<database xmlns="spryker:schema-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\GiftCard\Persistence" package="src.Orm.Zed.GiftCard.Persistence">
+    <table name="spy_gift_card">
+        <column name="id_gift_card" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="attributes" type="LONGVARCHAR" required="false"/>
+        <column name="code" type="VARCHAR" size="40" required="true"/>
+        <column name="currency_iso_code" type="VARCHAR" size="5" required="false"/>
+        <column name="is_active" type="BOOLEAN" required="true" default="true"/>
+        <column name="name" type="VARCHAR" size="40" required="true"/>
+        <column name="replacement_pattern" type="VARCHAR" size="40" required="false"/>
+        <column name="value" type="INTEGER" required="true"/>
+        <id-method-parameter value="spy_gift_card_pk_seq"/>
+        <behavior name="timestampable"/>
+    </table>
+    <table name="spy_gift_card_product_abstract_configuration">
+        <column name="id_gift_card_product_abstract_configuration" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="code_pattern" type="VARCHAR" size="40" required="true"/>
+        <id-method-parameter value="spy_gift_card_product_abstract_configuration_pk_seq"/>
+        <behavior name="timestampable"/>
+    </table>
+    <table name="spy_gift_card_product_abstract_configuration_link">
+        <column name="id_gift_card_product_abstract_configuration_link" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_gift_card_product_abstract_configuration" type="INTEGER" required="true"/>
+        <column name="fk_product_abstract" type="INTEGER" required="true"/>
+        <foreign-key name="spy_gift_card_product_abstract_conf_link-fk_product_abstract" foreignTable="spy_product_abstract">
+            <reference local="fk_product_abstract" foreign="id_product_abstract"/>
+        </foreign-key>
+        <foreign-key name="spy_gift_card_pa_conf_link-fk_gift_card_pa_conf" foreignTable="spy_gift_card_product_abstract_configuration">
+            <reference local="fk_gift_card_product_abstract_configuration" foreign="id_gift_card_product_abstract_configuration"/>
+        </foreign-key>
+        <index name="index-spy_gift_card_product_abstract_configuration-ea801cb20841">
+            <index-column name="fk_product_abstract"/>
+        </index>
+        <index name="index-spy_gift_card_product_abstract_configuration-5c47cd7f57d8">
+            <index-column name="fk_gift_card_product_abstract_configuration"/>
+        </index>
+        <id-method-parameter value="spy_gift_card_product_abstract_configuration_link_pk_seq"/>
+    </table>
+    <table name="spy_gift_card_product_configuration">
+        <column name="id_gift_card_product_configuration" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="value" type="INTEGER" required="true"/>
+        <id-method-parameter value="spy_gift_card_product_configuration_pk_seq"/>
+        <behavior name="timestampable"/>
+    </table>
+    <table name="spy_gift_card_product_configuration_link">
+        <column name="id_gift_card_product_configuration_link" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_gift_card_product_configuration" type="INTEGER" required="true"/>
+        <column name="fk_product" type="INTEGER" required="true"/>
+        <foreign-key name="spy_gift_card_product_configuration_link-fk_product" foreignTable="spy_product">
+            <reference local="fk_product" foreign="id_product"/>
+        </foreign-key>
+        <foreign-key name="spy_gift_card_p_conf_link-fk_gift_card_p_conf" foreignTable="spy_gift_card_product_configuration">
+            <reference local="fk_gift_card_product_configuration" foreign="id_gift_card_product_configuration"/>
+        </foreign-key>
+        <index name="index-spy_gift_card_product_configuration_link-fk_product">
+            <index-column name="fk_product"/>
+        </index>
+        <index name="index-spy_gift_card_product_configuration_link-fk_-b6cecefc1da0">
+            <index-column name="fk_gift_card_product_configuration"/>
+        </index>
+        <id-method-parameter value="spy_gift_card_product_configuration_link_pk_seq"/>
+    </table>
+    <table name="spy_payment_gift_card">
+        <column name="id_payment_gift_card" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_sales_payment" type="INTEGER" required="true"/>
+        <column name="code" type="VARCHAR" size="255" required="true"/>
+        <foreign-key name="spy_payment_gift_card-fk_payment" foreignTable="spy_sales_payment" phpName="SpySalesPayment" refPhpName="SpyGiftCardPayment">
+            <reference local="fk_sales_payment" foreign="id_sales_payment"/>
+        </foreign-key>
+        <index name="index-spy_payment_gift_card-fk_sales_payment">
+            <index-column name="fk_sales_payment"/>
+        </index>
+        <id-method-parameter value="spy_payment_gift_card_pk_seq"/>
+        <behavior name="timestampable">
+            <parameter name="disable_updated_at" value="true"/>
+        </behavior>
+    </table>
+</database>

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<database xmlns="spryker:schema-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\CustomerAccess\Persistence" package="src.Orm.Zed.CustomerAccess.Persistence">
+    <table name="spy_unauthenticated_customer_access" idMethod="native" identifierQuoting="true" phpName="SpyUnauthenticatedCustomerAccess">
+        <column name="id_unauthenticated_customer_access" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="content_type" required="true" size="100" type="VARCHAR"/>
+        <column name="is_restricted" required="true" type="BOOLEAN"/>
+        <unique>
+            <unique-column name="content_type"/>
+        </unique>
+        <id-method-parameter value="spy_unauthenticated_customer_access_pk_seq"/>
+        <behavior name="event">
+            <parameter name="spy_unauthenticated_customer_access_all" column="*"/>
+        </behavior>
+    </table>
+</database>

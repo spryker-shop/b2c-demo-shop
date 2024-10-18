@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<database xmlns="spryker:schema-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\StoreContext\Persistence" package="src.Orm.Zed.StoreContext.Persistence">
+    <table name="spy_store_context">
+        <column name="id_store_context" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="application_context_collection" required="true" type="LONGVARCHAR"/>
+        <column name="fk_store" required="true" type="INTEGER"/>
+        <foreign-key name="spy_store_context-fk_store" foreignTable="spy_store">
+            <reference local="fk_store" foreign="id_store"/>
+        </foreign-key>
+        <unique name="spy_store_context-unique-fk_store">
+            <unique-column name="fk_store"/>
+        </unique>
+        <id-method-parameter value="id_store_context_pk_seq"/>
+    </table>
+</database>
