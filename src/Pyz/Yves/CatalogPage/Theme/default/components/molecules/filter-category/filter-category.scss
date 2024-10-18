@@ -10,8 +10,41 @@
             }
         }
 
+        &__category-toggle-button {
+            @include helper-effect-transition(transform);
+            color: $setting-color-black;
+            margin-right: rem(5);
+            background-color: $setting-color-transparent;
+            cursor: pointer;
+
+            &--collapsed {
+                transform: rotate(-90deg);
+            }
+        }
+
+        &__category-target {
+            @include helper-effect-transition(grid-template-rows);
+            display: grid;
+            grid-template-rows: 1fr;
+
+            &--hidden {
+                grid-template-rows: 0fr;
+            }
+        }
+
+        &__category-target-inner {
+            overflow: hidden;
+        }
+
+        &__category-row {
+            &--no-children {
+                margin-left: rem(16);
+            }
+        }
+
         #{$name}__item {
-            margin: 0 0 0 rem(16);
+            display: flex;
+            margin: 0 0 0 rem(4);
             font: 400 rem(15) $setting-font-family;
 
             &--level-1 {
