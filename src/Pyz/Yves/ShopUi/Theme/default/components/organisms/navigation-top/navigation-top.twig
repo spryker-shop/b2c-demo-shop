@@ -18,6 +18,14 @@
     <div {% if data.ajaxCartUrl %}class="{{ ajaxContentClass }}"{% endif %}>
         {% block contentInner %}
             <ul class="grid grid--middle grid--right">
+                 {% widget 'LinkToProductComparisonListWidget' %}
+                    {% block body %}
+                        <li class="{{ config.name }}__item">
+                            {{ parent() }}
+                        </li>
+                    {% endblock %}
+                {% endwidget %}
+
                 {% if data.showUserMenu %}
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                         <li class="{{ config.name }}__item">
