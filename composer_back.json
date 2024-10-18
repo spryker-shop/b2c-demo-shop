@@ -274,9 +274,7 @@
             "Application\\Module\\": "vendor/spryker/application/tests/_support/Module/",
             "Auth\\Module\\": "vendor/spryker/auth/tests/_support/Module/"
         },
-        "files": [
-            "test-autoload.php"
-        ]
+        "files": ["test-autoload.php"]
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
@@ -287,9 +285,7 @@
         },
         "use-include-path": true,
         "sort-packages": true,
-        "github-protocols": [
-            "https"
-        ],
+        "github-protocols": ["https"],
         "process-timeout": 900,
         "chromium-revision": 814168,
         "allow-plugins": {
@@ -319,18 +315,10 @@
             "echo '<?php return \"development-heroku\";' > config/Shared/console_env_local.php",
             "./deploy/heroku/run.sh"
         ],
-        "post-install-cmd": [
-            "ChromedriverInstaller\\Installer::installChromedriver"
-        ],
-        "post-update-cmd": [
-            "ChromedriverInstaller\\Installer::installChromedriver"
-        ],
-        "phpstan": [
-            "php -d memory_limit=1024M vendor/bin/phpstan analyze -c phpstan.neon src/ -l 6"
-        ],
+        "post-install-cmd": ["ChromedriverInstaller\\Installer::installChromedriver"],
+        "post-update-cmd": ["ChromedriverInstaller\\Installer::installChromedriver"],
+        "phpstan": ["php -d memory_limit=1024M vendor/bin/phpstan analyze -c phpstan.neon src/ -l 6"],
         "phpstan-setup": "vendor/bin/console dev:ide-auto-completion:generate",
-        "prefer-mid": [
-            "COMPOSER_MEMORY_LIMIT=-1 composer require twig/twig:\"^2.9.0\""
-        ]
+        "prefer-mid": ["COMPOSER_MEMORY_LIMIT=-1 composer require twig/twig:\"^2.9.0\""]
     }
 }
