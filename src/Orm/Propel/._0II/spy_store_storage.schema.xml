@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<database xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:noNamespaceSchemaLocation="http://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\StoreStorage\Persistence" package="src.Orm.Zed.StoreStorage.Persistence">
+
+    <table name="spy_store_storage" identifierQuoting="true">
+        <column name="id_spy_store_storage" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_store" type="INTEGER" required="true"/>
+        <column name="store_name" type="VARCHAR" size="255" required="true"/>
+        <column name="data" type="CLOB" required="false"/>
+        <id-method-parameter value="id_spy_store_storage_pk_seq"/>
+        <index name="spy_store_storage-fk_store">
+            <index-column name="fk_store"/>
+        </index>
+        <behavior name="synchronization">
+            <parameter name="resource" value="store"/>
+            <parameter name="key_suffix_column" value="store_name"/>
+            <parameter name="queue_group" value="sync.storage.store"/>
+        </behavior>
+        <behavior name="timestampable"/>
+    </table>
+
+    <table name="spy_store_list_storage" identifierQuoting="true">
+        <column name="id_store_list_storage" type="integer" autoIncrement="true" primaryKey="true"/>
+        <column name="key" type="VARCHAR" size="255" required="true"/>
+        <column name="data" type="LONGVARCHAR" required="false"/>
+        <id-method-parameter value="id_store_list_storage_pk_seq"/>
+        <behavior name="synchronization">
+            <parameter name="resource" value="store_list"/>
+            <parameter name="queue_group" value="sync.storage.store"/>
+        </behavior>
+        <behavior name="timestampable"/>
+    </table>
+
+</database>

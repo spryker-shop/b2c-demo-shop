@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<database xmlns="spryker:schema-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" namespace="Orm\Zed\ShipmentTypeStorage\Persistence" package="src.Orm.Zed.ShipmentTypeStorage.Persistence" xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd">
+
+    <table name="spy_shipment_type_storage" identifierQuoting="true">
+        <column name="id_shipment_type_storage" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_shipment_type" type="INTEGER" required="true"/>
+
+        <id-method-parameter value="spy_shipment_type_storage_pk_seq"/>
+
+        <index name="spy_shipment_type_storage-fk_shipment_type">
+            <index-column name="fk_shipment_type"/>
+        </index>
+
+        <behavior name="synchronization">
+            <parameter name="resource" value="shipment_type"/>
+            <parameter name="store" required="true"/>
+            <parameter name="key_suffix_column" value="fk_shipment_type"/>
+            <parameter name="queue_group" value="sync.storage.shipment_type"/>
+            <parameter name="mappings" value="uuid:id_shipment_type"/>
+        </behavior>
+
+        <behavior name="timestampable"/>
+    </table>
+
+</database>

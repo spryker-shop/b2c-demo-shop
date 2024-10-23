@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<database xmlns="spryker:schema-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\Navigation\Persistence" package="src.Orm.Zed.Navigation.Persistence">
+    <table name="spy_navigation" idMethod="native" identifierQuoting="true">
+        <column name="id_navigation" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="is_active" type="BOOLEAN" default="true" required="true"/>
+        <column name="key" type="VARCHAR" size="255" required="true"/>
+        <column name="name" type="VARCHAR" size="255" required="true"/>
+        <index name="spy_navigation-index-key">
+            <index-column name="key"/>
+        </index>
+        <index name="spy_navigation-index-is_active">
+            <index-column name="is_active"/>
+        </index>
+        <unique name="spy_navigation_key-unique-key">
+            <unique-column name="key"/>
+        </unique>
+        <id-method-parameter value="spy_navigation_pk_seq"/>
+        <behavior name="timestampable"/>
+        <behavior name="event">
+            <parameter name="spy_navigation-all" column="*"/>
+        </behavior>
+    </table>
+    <table name="spy_navigation_node" idMethod="native">
+        <column name="id_navigation_node" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_navigation" required="true" type="INTEGER"/>
+        <column name="fk_parent_navigation_node" required="false" type="INTEGER" default="NULL"/>
+        <column name="is_active" type="BOOLEAN" default="true" required="true"/>
+        <column name="node_key" type="VARCHAR" size="32" required="false"/>
+        <column name="node_type" type="VARCHAR" size="255" required="false" default="null"/>
+        <column name="position" type="INTEGER" required="false" default="NULL"/>
+        <column name="valid_from" type="TIMESTAMP" required="false"/>
+        <column name="valid_to" type="TIMESTAMP" required="false"/>
+        <foreign-key foreignTable="spy_navigation_node" phpName="ParentNavigationNode" refPhpName="ChildrenNavigationNode" onDelete="CASCADE">
+            <reference foreign="id_navigation_node" local="fk_parent_navigation_node"/>
+        </foreign-key>
+        <foreign-key foreignTable="spy_navigation" onDelete="CASCADE">
+            <reference foreign="id_navigation" local="fk_navigation"/>
+        </foreign-key>
+        <index>
+            <index-column name="position"/>
+        </index>
+        <index>
+            <index-column name="node_key"/>
+        </index>
+        <index name="index-spy_navigation_node-fk_parent_navigation_node">
+            <index-column name="fk_parent_navigation_node"/>
+        </index>
+        <index name="index-spy_navigation_node-fk_navigation">
+            <index-column name="fk_navigation"/>
+        </index>
+        <id-method-parameter value="spy_navigation_node_pk_seq"/>
+        <behavior name="event">
+            <parameter name="spy_navigation_node-all" column="*"/>
+        </behavior>
+    </table>
+    <table name="spy_navigation_node_localized_attributes" idMethod="native">
+        <column name="id_navigation_node_localized_attributes" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_locale" required="true" type="INTEGER"/>
+        <column name="fk_navigation_node" required="true" type="INTEGER"/>
+        <column name="fk_url" required="false" type="INTEGER" default="NULL"/>
+        <column name="css_class" type="VARCHAR" size="255" required="false" default="NULL"/>
+        <column name="external_url" type="VARCHAR" size="255" required="false" default="NULL"/>
+        <column name="link" type="VARCHAR" size="255" required="false" default="NULL"/>
+        <column name="title" type="VARCHAR" size="255" required="true"/>
+        <foreign-key foreignTable="spy_navigation_node" onDelete="CASCADE">
+            <reference foreign="id_navigation_node" local="fk_navigation_node"/>
+        </foreign-key>
+        <foreign-key foreignTable="spy_locale">
+            <reference foreign="id_locale" local="fk_locale"/>
+        </foreign-key>
+        <foreign-key foreignTable="spy_url">
+            <reference foreign="id_url" local="fk_url"/>
+        </foreign-key>
+        <index name="index-spy_navigation_node_localized_attributes-fk_-4f569df99f9b">
+            <index-column name="fk_navigation_node"/>
+        </index>
+        <index name="index-spy_navigation_node_localized_attributes-fk_locale">
+            <index-column name="fk_locale"/>
+        </index>
+        <index name="index-spy_navigation_node_localized_attributes-fk_url">
+            <index-column name="fk_url"/>
+        </index>
+        <id-method-parameter value="spy_navigation_node_localized_attributes_pk_seq"/>
+        <behavior name="timestampable"/>
+        <behavior name="event">
+            <parameter name="spy_navigation_node_localized_attributes-all" column="*"/>
+        </behavior>
+    </table>
+</database>
