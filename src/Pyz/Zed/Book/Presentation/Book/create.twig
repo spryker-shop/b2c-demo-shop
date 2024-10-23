@@ -1,0 +1,39 @@
+{% extends '@Gui/Layout/layout.twig' %}
+
+{% block content %}
+    <h1>{{ idBook is defined ? 'Edit Book' : 'Create Book' }}</h1>
+
+    {{ form_start(bookForm, {'attr': {'class': 'form-horizontal'}}) }}
+    
+    <div class="form-group">
+        {{ form_label(bookForm.name, null, {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+        <div class="col-sm-3">
+            {{ form_widget(bookForm.name, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(bookForm.name) }}
+        </div>
+    </div>
+
+    <div class="form-group">
+        {{ form_label(bookForm.description, null, {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+        <div class="col-sm-3">
+            {{ form_widget(bookForm.description, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(bookForm.description) }}
+        </div>
+    </div>
+
+    <div class="form-group">
+        {{ form_label(bookForm.publicationDate, null, {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+        <div class="col-sm-2">
+            {{ form_widget(bookForm.publicationDate, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(bookForm.publicationDate) }}
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            {{ form_widget(bookForm.save, {'attr': {'class': 'btn btn-primary'}}) }}
+        </div>
+    </div>
+
+    {{ form_end(bookForm) }}
+{% endblock %}
