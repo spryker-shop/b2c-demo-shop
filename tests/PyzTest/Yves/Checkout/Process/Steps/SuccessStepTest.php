@@ -34,18 +34,23 @@ class SuccessStepTest extends Unit
      */
     public function testExecuteShouldEmptyQuoteTransfer(): void
     {
+        // Arrange
         $customerClientMock = $this->createCustomerClientMock();
         $customerClientMock->expects($this->once())->method('markCustomerAsDirty');
 
-        $successStep = $this->createSuccessStep($customerClientMock);
+        $cartClientMock = $this->createCartClientMock();
+
+        // Assert
+        $cartClientMock->expects($this->once())->method('clearQuote');
+
+        // Arrange
+        $successStep = $this->createSuccessStep($customerClientMock, $cartClientMock);
 
         $quoteTransfer = new QuoteTransfer();
         $quoteTransfer->addItem(new ItemTransfer());
 
-        $this->assertTrue($successStep->preCondition($quoteTransfer));
-        $quoteTransfer = $successStep->execute($this->createRequest(), $quoteTransfer);
-
-        $this->assertFalse($successStep->preCondition($quoteTransfer));
+        // Act
+        $successStep->execute($this->createRequest(), $quoteTransfer);
     }
 
     /**
@@ -74,16 +79,20 @@ class SuccessStepTest extends Unit
 
     /**
      * @param \SprykerShop\Yves\CheckoutPage\Dependency\Client\CheckoutPageToCustomerClientInterface|null $customerClientMock
+     * @param \SprykerShop\Yves\CheckoutPage\Dependency\Client\CheckoutPageToCartClientInterface|null $cartClientMock
      *
      * @return \SprykerShop\Yves\CheckoutPage\Process\Steps\SuccessStep
      */
-    protected function createSuccessStep($customerClientMock = null): SuccessStep
+    protected function createSuccessStep($customerClientMock = null, ?CheckoutPageToCartClientInterface $cartClientMock = null): SuccessStep
     {
         if ($customerClientMock === null) {
             $customerClientMock = $this->createCustomerClientMock();
         }
 
-        $cartClientMock = $this->createCartClientMock();
+        if ($cartClientMock === null) {
+            $cartClientMock = $this->createCartClientMock();
+        }
+
         $checkoutPageConfigMock = $this->createCheckoutPageConfigMock();
 
         return new SuccessStep(

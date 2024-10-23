@@ -74,6 +74,7 @@ use Spryker\Zed\ProductConfigurationStorage\Communication\Plugin\Publisher\Produ
 use Spryker\Zed\ProductConfigurationStorage\Communication\Plugin\Publisher\ProductConfiguration\ProductConfigurationWritePublisherPlugin;
 use Spryker\Zed\ProductConfigurationStorage\Communication\Plugin\Publisher\ProductConfigurationPublisherTriggerPlugin;
 use Spryker\Zed\ProductDiscontinuedStorage\Communication\Plugin\Publisher\ProductDiscontinuedPublisherTriggerPlugin;
+use Spryker\Zed\ProductLabel\Communication\Plugin\Publisher\ProductLabelLocalizedAttributesWritePublisherPlugin;
 use Spryker\Zed\ProductLabel\Communication\Plugin\Publisher\ProductLabelProductUpdatedEventTriggerPlugin;
 use Spryker\Zed\ProductLabelSearch\Communication\Plugin\Publisher\ProductLabel\ProductLabelWritePublisherPlugin as ProductLabelSearchWritePublisherPlugin;
 use Spryker\Zed\ProductLabelSearch\Communication\Plugin\Publisher\ProductLabelProductAbstract\ProductLabelProductAbstractWritePublisherPlugin as ProductLabelProductAbstractSearchWritePublisherPlugin;
@@ -235,6 +236,7 @@ class PublisherDependencyProvider extends SprykerPublisherDependencyProvider
             new ProductLabelProductAbstractStorageWritePublisherPlugin(),
             new ProductLabelDictionaryStorageWritePublisherPlugin(),
             new ProductLabelDictionaryStorageDeletePublisherPlugin(),
+            new ProductLabelLocalizedAttributesWritePublisherPlugin(),
         ];
     }
 
