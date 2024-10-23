@@ -604,12 +604,10 @@ $config[SymfonyMailerConstants::SMTP_PASSWORD] = getenv('SPRYKER_SMTP_PASSWORD')
 $config[FileSystemConstants::FILESYSTEM_SERVICE] = [
     's3-import' => [
         'sprykerAdapterClass' => Aws3v3FilesystemBuilderPlugin::class,
-        'root' => '/',
         'path' => '/',
         'key' => '',
         'secret' => '',
         'bucket' => '',
-        'version' => '',
         'region' => '',
     ],
     'files-import' => [
@@ -717,10 +715,10 @@ $config[OmsConstants::PROCESS_LOCATION] = [
     APPLICATION_ROOT_DIR . '/vendor/spryker/sales-payment/config/Zed/Oms',
 ];
 $config[OmsConstants::ACTIVE_PROCESSES] = [
-    'ForeignPaymentStateMachine01',
+    'ForeignPaymentB2CStateMachine01',
 ];
 $config[SalesConstants::PAYMENT_METHOD_STATEMACHINE_MAPPING] = [
-    PaymentConfig::PAYMENT_FOREIGN_PROVIDER => 'ForeignPaymentStateMachine01',
+    PaymentConfig::PAYMENT_FOREIGN_PROVIDER => 'ForeignPaymentB2CStateMachine01',
 ];
 
 // ---------- Guest cart

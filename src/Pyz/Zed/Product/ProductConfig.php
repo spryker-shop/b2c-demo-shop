@@ -82,4 +82,12 @@ class ProductConfig extends SprykerProductConfig
     {
         return true;
     }
+
+    /**
+     * @return bool
+     */
+    public function isRememberMeEnabled(): bool
+    {
+        return false;
+    }
 }

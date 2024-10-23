@@ -1,0 +1,21 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'comparison-link',
+    tag: 'comparison-link',
+} %}
+
+{% define attributes = {
+    url: path('product-comparison'),
+} %}
+
+{% block body %}
+    <a class="{{ config.name }}__link {{ config.jsName }}__link" href="{{ attributes.url }}" data-qa="{{ config.name }}-list-link">
+        {% include atom('icon') with {
+            modifiers: ['big'],
+            data: {
+                name: 'compare',
+            },
+        } only %}
+    </a>
+{% endblock %}

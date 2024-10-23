@@ -88,6 +88,20 @@
         {% endblock %}
     {% endwidget %}
 
+    {% widget 'ComparisonProductTogglerComparisonListWidget' args [data.product.sku, isDisabled] only %}
+        {% block body %}
+            {% include molecule('comparison-product-toggler', 'ProductComparisonPage') with {
+                class: 'spacing-top',
+                modifiers: ['expand', 'hollow'],
+                data: {
+                    sku: data.sku,
+                    isDisabled: data.isDisabled,
+                    maxItems: data.maxItems,
+                },
+            } only %}
+        {% endblock %}
+    {% endwidget %}
+
     {% if not isAvailable and isProductConcrete %}
         {% widget 'AvailabilityNotificationSubscriptionWidget' args [data.product] only %}{% endwidget %}
     {% endif %}
