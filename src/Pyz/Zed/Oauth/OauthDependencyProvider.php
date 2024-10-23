@@ -17,6 +17,8 @@ use Spryker\Zed\Oauth\OauthDependencyProvider as SprykerOauthDependencyProvider;
 use Spryker\Zed\OauthAgentConnector\Communication\Plugin\Oauth\AgentCredentialsOauthGrantTypeConfigurationProviderPlugin;
 use Spryker\Zed\OauthAgentConnector\Communication\Plugin\Oauth\AgentOauthScopeProviderPlugin;
 use Spryker\Zed\OauthAgentConnector\Communication\Plugin\Oauth\AgentOauthUserProviderPlugin;
+use Spryker\Zed\OauthCodeFlow\Communication\Plugin\Oauth\CustomerAuthCodeOauthRequestGrantTypeConfigurationProviderPlugin;
+use Spryker\Zed\OauthCodeFlow\Communication\Plugin\Oauth\UserAuthCodeOauthRequestGrantTypeConfigurationProviderPlugin;
 use Spryker\Zed\OauthCustomerConnector\Communication\Plugin\Oauth\CustomerImpersonationOauthGrantTypeConfigurationProviderPlugin;
 use Spryker\Zed\OauthCustomerConnector\Communication\Plugin\Oauth\CustomerImpersonationOauthScopeProviderPlugin;
 use Spryker\Zed\OauthCustomerConnector\Communication\Plugin\Oauth\CustomerImpersonationOauthUserProviderPlugin;
@@ -164,6 +166,8 @@ class OauthDependencyProvider extends SprykerOauthDependencyProvider
             new UserPasswordOauthRequestGrantTypeConfigurationProviderPlugin(),
             new CustomerPasswordOauthRequestGrantTypeConfigurationProviderPlugin(),
             new WarehouseOauthRequestGrantTypeConfigurationProviderPlugin(),
+            new UserAuthCodeOauthRequestGrantTypeConfigurationProviderPlugin(),
+            new CustomerAuthCodeOauthRequestGrantTypeConfigurationProviderPlugin(),
         ];
     }
 
