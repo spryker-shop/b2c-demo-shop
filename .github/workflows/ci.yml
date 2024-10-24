@@ -977,7 +977,7 @@ jobs:
                     sudo apt install awscli -q
             -   name: Install cypress-tests folder
                 run: |
-                    cd ./data && composer require "spryker/cypress-tests:dev-master" --dev --no-interaction
+                    cd ./data && composer require "spryker/cypress-tests:dev-feature/frw-8354-create-dms-acceptance-tests" --dev --no-interaction
                     cp -r vendor ../vendor
             -   name: Install docker-compose
                 run: |
@@ -995,6 +995,8 @@ jobs:
             -   name: Run Tests
                 run: |
                     docker/sdk exec cypress-tests cp .env.dynamic-store.example .env
+                    docker/sdk exec cypress-tests git checkout . && docker/sdk exec cypress-tests git pull origin master && docker/sdk exec cypress-tests git fetch && docker/sdk exec cypress-tests git checkout feature/frw-8354-create-dms-acceptance-tests && docker/sdk exec cypress-tests git pull origin feature/frw-8354-create-dms-acceptance-tests
+                    docker/sdk exec --env "ENV_REPOSITORY_ID=b2b-mp" cypress-tests npm run cy:dms
                     for i in 1 2; do
                       docker/sdk exec --env "ENV_REPOSITORY_ID=b2c" cypress-tests npm run cy:ci && s=0 && break || s=$? && echo "Test failed, retrying..."
                       sleep 1
