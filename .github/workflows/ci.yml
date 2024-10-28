@@ -996,11 +996,7 @@ jobs:
                 run: |
                     docker/sdk exec cypress-tests cp .env.dynamic-store.example .env
                     docker/sdk exec cypress-tests git log -2
-                    for i in 1 2; do
-                      docker/sdk exec --env "ENV_REPOSITORY_ID=b2c" cypress-tests npm run cy:ci && s=0 && break || s=$? && echo "Test failed, retrying..."
-                      sleep 1
-                    done
-                    (exit $s)
+                    docker/sdk exec --env "ENV_REPOSITORY_ID=b2c" cypress-tests npm run cy:ci
             -   name: Upload artifacts
                 if: failure()
                 run: |
