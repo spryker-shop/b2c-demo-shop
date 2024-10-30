@@ -57,12 +57,12 @@ sections:
         propel-migration-cleanup:
             command: 'vendor/bin/console propel:migration:delete'
 
-        init-database:
-            command: 'vendor/bin/console setup:init-db'
-
     demodata:
         queue-setup:
             command: 'vendor/bin/console queue:setup'
+
+        init-database:
+            command: 'vendor/bin/console setup:init-db'
 
         import-eu-region-demodata:
             command: 'vendor/bin/console data:import --config=data/import/local/full_EU.yml'
@@ -75,7 +75,7 @@ sections:
 
         publish-and-sync:
             command: 'vendor/bin/console queue:worker:start --stop-when-empty'
-            timeout: 2000
+            timeout: 4000
 
         controller-cache-warmup:
             command: 'vendor/bin/glue glue-api:controller:cache:warm-up'
