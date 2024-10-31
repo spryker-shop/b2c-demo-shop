@@ -838,7 +838,6 @@ $config[OauthClientConstants::OAUTH_OPTION_AUDIENCE_FOR_MESSAGE_BROKER] = 'aop-e
 
 $config[AppCatalogGuiConstants::OAUTH_OPTION_AUDIENCE] = 'aop-atrs';
 
-
 // ----------------------------------------------------------------------------
 // ------------------------------ Product Configuration ---------------------------------------
 // ----------------------------------------------------------------------------
