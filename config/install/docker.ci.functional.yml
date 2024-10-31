@@ -38,12 +38,6 @@ sections:
         rest-api-generate-documentation:
             command: 'vendor/bin/console rest-api:generate:documentation'
 
-    init-storages-per-store:
-        queue-setup:
-            command: 'vendor/bin/console queue:setup'
-        setup-search-create-sources:
-            command: 'vendor/bin/console search:setup:sources'
-
     init-storages-per-region:
         propel-copy-schema:
             command: 'vendor/bin/console propel:schema:copy'
@@ -63,19 +57,25 @@ sections:
         propel-migration-cleanup:
             command: 'vendor/bin/console propel:migration:delete'
 
+    demodata:
+        queue-setup:
+            command: 'vendor/bin/console queue:setup'
+
         init-database:
             command: 'vendor/bin/console setup:init-db'
 
-    demodata:
         import-eu-region-demodata:
             command: 'vendor/bin/console data:import --config=data/import/local/full_EU.yml'
+
+        setup-search-create-sources:
+            command: 'vendor/bin/console search:setup:sources'
 
         update-product-labels:
             command: 'vendor/bin/console product-label:relations:update'
 
         publish-and-sync:
             command: 'vendor/bin/console queue:worker:start --stop-when-empty'
-            timeout: 2000
+            timeout: 4000
 
         controller-cache-warmup:
             command: 'vendor/bin/glue glue-api:controller:cache:warm-up'
