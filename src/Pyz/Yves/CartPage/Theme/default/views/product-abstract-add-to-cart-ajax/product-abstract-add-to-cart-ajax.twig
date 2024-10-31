@@ -22,6 +22,9 @@
                     buttonExtraClasses: data.buttonExtraClasses,
                     extraAttributes: data.extraAttributes | merge(not addToCartSku ? {disabled: true} : {}),
                 },
+                attributes: {
+                    'event-revealer': data.eventRevealer,
+                },
             } only %}
                 {% block button %}
                     {% set iconModifiers = ['cart-plus'] %}

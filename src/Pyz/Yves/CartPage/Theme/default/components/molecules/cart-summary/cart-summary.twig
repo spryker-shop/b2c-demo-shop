@@ -8,6 +8,7 @@
     cart: required,
     isQuoteValid: required,
     isQuoteEditable: required,
+    ajaxTriggerAttribute: null,
 } %}
 
 {% set canProceedToCheckout = data.cart.items is not empty
@@ -49,6 +50,8 @@
                     ruleDiscounts: data.cart.cartRuleDiscounts,
                     discountTotal: data.cart.totals.discounttotal,
                     isQuoteEditable: data.isQuoteEditable,
+                    ajaxTriggerAttribute: data.ajaxTriggerAttribute,
+                    redirectRoute: data.ajaxTriggerAttribute ? 'cart/async/view' : null,
                 },
             } only %}
 

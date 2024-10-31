@@ -1,0 +1,29 @@
+name: Label Check
+
+on:
+    pull_request:
+        types: [opened, edited, labeled, unlabeled, synchronize]
+
+jobs:
+    label-check:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Verify Labels
+              run: |
+                  labels=$(jq -r '.pull_request.labels[].name' "$GITHUB_EVENT_PATH")
+                  required_labels=("robot-regression-ui-e2e" "skip-robot-regression-ui-e2e")
+                  has_required_label=false
+                  for label in "${required_labels[@]}"; do
+                    if [[ "$labels" == *"$label"* ]]; then
+                      has_required_label=true
+                      break
+                    fi
+                  done
+                  if [ "$has_required_label" == false ]; then
+                    echo "Pull request does not have any of the required labels: ${required_labels[@]}"
+                    echo "Please use at least one of the required labels to proceed:"
+                    echo "- ${required_labels[0]}: to run Robot UI E2E tests (use this label by default)"
+                    echo "- ${required_labels[1]}: to skip Robot UI E2E tests (use this label if the code can't affect any functionality)"
+                    exit 1
+                  fi

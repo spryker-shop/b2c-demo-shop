@@ -1,0 +1,297 @@
+version: "0.1"
+
+namespace: spryker_b2c_dev_dynamic_store_off
+tag: 'dev'
+
+environment: docker.dev
+image:
+    tag: spryker/php:8.3
+    php:
+        enabled-extensions:
+            - blackfire
+    environment:
+        #AOP
+        SPRYKER_AOP_INFRASTRUCTURE: '{
+            "SPRYKER_MESSAGE_BROKER_HTTP_SENDER_CONFIG": {},
+            "SPRYKER_MESSAGE_BROKER_SQS_RECEIVER_CONFIG": {}
+        }'
+        SPRYKER_AOP_APPLICATION: '{
+            "APP_DOMAINS": [],
+            "STORE_NAME_REFERENCE_MAP": {},
+            "APP_CATALOG_SCRIPT_URL": ""
+        }'
+        SPRYKER_AOP_AUTHENTICATION: '{
+            "AUTH0_CUSTOM_DOMAIN": "",
+            "AUTH0_CLIENT_ID": "",
+            "AUTH0_CLIENT_SECRET": ""
+        }'
+        SPRYKER_PRODUCT_CONFIGURATOR_HOST: date-time-configurator-example.spryker.local
+        SPRYKER_PRODUCT_CONFIGURATOR_PORT: 80
+        SPRYKER_YVES_HOST_DE: yves.de.spryker.local
+        SPRYKER_YVES_HOST_AT: yves.at.spryker.local
+        SPRYKER_YVES_HOST_US: yves.us.spryker.local
+        SPRYKER_PUSH_NOTIFICATION_WEB_PUSH_PHP_VAPID_PUBLIC_KEY: 'BGqNWbv0hWM5CQ1-KwAfSQBMC6TMVFyrnh3vQp37oGCNvQ6eG_HyMjxBFJRWeCPTbzDoxcjhxLJS8Ck8r1G2oFw'
+        SPRYKER_PUSH_NOTIFICATION_WEB_PUSH_PHP_VAPID_PRIVATE_KEY: 'UK6DywwjKITPpRHBSY9TLPIXm6BPrHX40sseIoXT9c8'
+        SPRYKER_PUSH_NOTIFICATION_WEB_PUSH_PHP_VAPID_SUBJECT: 'https://spryker.com'
+    node:
+        version: 18
+        npm: 9
+
+composer:
+    mode: ''
+    autoload: ''
+assets:
+    mode: development
+
+regions:
+    EU:
+        services:
+            database:
+                database: eu-docker
+                username: spryker
+                password: secret
+
+        stores:
+            DE:
+                services:
+                    broker:
+                        namespace: de-docker
+                    key_value_store:
+                        namespace: 1
+                    search:
+                        namespace: de_search
+            AT:
+                services:
+                    broker:
+                        namespace: at-docker
+                    key_value_store:
+                        namespace: 2
+                    search:
+                        namespace: at_search
+    US:
+        services:
+            database:
+                database: us-docker
+                username: spryker
+                password: secret
+        stores:
+            US:
+                services:
+                    broker:
+                        namespace: us-docker
+                    key_value_store:
+                        namespace: 3
+                    search:
+                        namespace: us_search
+groups:
+    EU:
+        region: EU
+        applications:
+            yves_eu:
+                application: yves
+                endpoints:
+                    date-time-configurator-example.spryker.local:
+                        entry-point: Configurator
+                    yves.de.spryker.local:
+                        store: DE
+                        services:
+                            session:
+                                namespace: 1
+                    yves.at.spryker.local:
+                        store: AT
+                        services:
+                            session:
+                                namespace: 2
+            glue_eu:
+                application: glue
+                endpoints:
+                    glue.de.spryker.local:
+                        store: DE
+                        cors-allow-origin: '*'
+                    glue.at.spryker.local:
+                        store: AT
+                        cors-allow-origin: '*'
+            glue_storefront_eu:
+                application: glue-storefront
+                endpoints:
+                    glue-storefront.de.spryker.local:
+                        store: DE
+                        cors-allow-origin: '*'
+                    glue-storefront.at.spryker.local:
+                        store: AT
+                        cors-allow-origin: '*'
+            glue_backend_eu:
+                application: glue-backend
+                endpoints:
+                    glue-backend.de.spryker.local:
+                        store: DE
+                        cors-allow-origin: '*'
+                    glue-backend.at.spryker.local:
+                        store: AT
+                        cors-allow-origin: '*'
+            backoffice_eu:
+                application: backoffice
+                endpoints:
+                    backoffice.de.spryker.local:
+                        store: DE
+                        services:
+                            session:
+                                namespace: 3
+                    backoffice.at.spryker.local:
+                        store: AT
+                        services:
+                            session:
+                                namespace: 4
+            backend_gateway_eu:
+                application: backend-gateway
+                endpoints:
+                    backend-gateway.de.spryker.local:
+                        store: DE
+                        primal: true
+                    backend-gateway.at.spryker.local:
+                        store: AT
+                        primal: true
+            backend_api_eu:
+                application: zed
+                endpoints:
+                    backend-api.de.spryker.local:
+                        store: DE
+                        entry-point: BackendApi
+                    backend-api.at.spryker.local:
+                        store: AT
+                        entry-point: BackendApi
+    US:
+        region: US
+        applications:
+            yves_us:
+                application: yves
+                endpoints:
+                    yves.us.spryker.local:
+                        store: US
+                        services:
+                            session:
+                                namespace: 5
+            glue_us:
+                application: glue
+                endpoints:
+                    glue.us.spryker.local:
+                        store: US
+                        cors-allow-origin: '*'
+            glue_storefront_us:
+                application: glue-storefront
+                endpoints:
+                    glue-storefront.us.spryker.local:
+                        store: US
+                        cors-allow-origin: '*'
+            glue_backend_us:
+                application: glue-backend
+                endpoints:
+                    glue-backend.us.spryker.local:
+                        store: US
+                        cors-allow-origin: '*'
+            backoffice_us:
+                application: backoffice
+                endpoints:
+                    backoffice.us.spryker.local:
+                        store: US
+                        services:
+                            session:
+                                namespace: 6
+            backend_gateway_us:
+                application: backend-gateway
+                endpoints:
+                    backend-gateway.us.spryker.local:
+                        store: US
+            backend_api_us:
+                application: zed
+                endpoints:
+                    backend-api.us.spryker.local:
+                        store: US
+services:
+    database:
+        engine: mysql
+        version: mariadb-10.4
+        root:
+            username: "root"
+            password: "secret"
+        endpoints:
+            localhost:3306:
+                protocol: tcp
+    broker:
+        engine: rabbitmq
+        version: '3.9'
+        api:
+            username: "spryker"
+            password: "secret"
+        endpoints:
+            queue.spryker.local:
+            localhost:5672:
+                protocol: tcp
+    session:
+        engine: redis
+    key_value_store:
+        engine: redis
+        endpoints:
+            localhost:16379:
+                protocol: tcp
+    search:
+        engine: elastic
+        version: '7.10'
+        endpoints:
+            localhost:9200:
+                protocol: tcp
+    scheduler:
+        engine: jenkins
+        version: '2.442'
+        csrf-protection-enabled: true
+        endpoints:
+            scheduler.spryker.local:
+    mail_catcher:
+        engine: mailhog
+        endpoints:
+            mail.spryker.local:
+    swagger:
+        engine: swagger-ui
+        endpoints:
+            swagger.spryker.local:
+    redis-gui:
+        engine: redis-commander
+        endpoints:
+            redis-commander.spryker.local:
+    dashboard:
+        engine: dashboard
+        endpoints:
+            spryker.local:
+    webdriver:
+        engine: chromedriver
+
+docker:
+
+    ssl:
+        enabled: false
+        redirect: true
+
+    testing:
+        store: DE
+
+    debug:
+        enabled: true
+        xdebug:
+            enabled: true
+
+    mount:
+        native:
+            platforms:
+                - linux
+
+        docker-sync:
+            platforms:
+                - windows
+
+        mutagen:
+            platforms:
+                - macos
+
+    compose:
+        yamls:
+            - .robot/docker-compose.robot.yml

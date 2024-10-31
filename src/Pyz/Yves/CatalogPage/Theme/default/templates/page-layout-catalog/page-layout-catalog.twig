@@ -16,6 +16,8 @@
         currentPage: _view.pagination.currentPage,
         maxPage: _view.pagination.maxPage,
     },
+    isAjaxHeader: _view.isMiniCartAsyncModeEnabled | default(false),
+    ajaxCartUrl: '/cart/async/mini-cart-view',
 } %}
 
 {% block container %}
@@ -90,6 +92,7 @@
                                         filteredFacets: data.filteredFacets,
                                         filterPath: data.filterPath,
                                         categories: data.categories,
+                                        isEmptyCategoryFilterValueVisible: data.isEmptyCategoryFilterValueVisible,
                                         togglerClass: 'js-catalog-toggler-click__trigger',
                                         parentJsName: catalogJsName,
                                         numberFormatConfig: numberFormatConfig,
@@ -140,7 +143,12 @@
                                 <div class="grid {% if data.viewMode != 'list' %}grid--stretch product-list{% endif %}">
                                     {% if data.products %}
                                         {% for product in data.products %}
-                                            {% widget 'CatalogPageProductWidget' args [product, data.viewMode] only %}{% endwidget %}
+                                            {% widget 'CatalogPageProductWidget' args [product, data.viewMode] with {
+                                                data: {
+                                                    eventRevealer: data.isAjaxHeader ? 'CART_UPDATE_EVENT' : null,
+                                                },
+                                            } only %}
+                                            {% endwidget %}
                                         {% endfor %}
                                     {% else %}
                                         {% block noResults %}{{ parent() }}{% endblock %}

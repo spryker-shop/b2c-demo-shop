@@ -2,7 +2,8 @@
 
 {% define config = {
     name: 'navigation-top',
-    tag: 'nav'
+    tag: 'nav',
+    ajaxCartUrl: null,
 } %}
 
 {% define data = {
@@ -11,68 +12,103 @@
 } %}
 
 {% block body %}
-    <ul class="grid grid--middle grid--right">
-        {% if data.showUserMenu %}
-            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                <li class="{{ config.name }}__item">
-                    <a href="{{ url('wishlist/overview') }}" class="{{ config.name }}__link">
-                        {% include atom('icon') with {
-                            modifiers: ['big'],
-                            data: {
-                                name: 'wishlist'
-                            }
-                        } only %}
-                    </a>
-                </li>
-                <li class="{{ config.name }}__item">
-                    <a href="{{ url('customer/overview') }}" class="{{ config.name }}__link {{ config.jsName }}__trigger">
-                        {% include atom('icon') with {
-                            modifiers: ['big'],
-                            data: {
-                                name: 'user-account'
-                            }
-                        } only %}
-                    </a>
-                </li>
-            {% else %}
-                <li class="{{ config.name }}__item">
-                    <a href="{{ url('login') }}" class="{{ config.name }}__link">
-                        {% include atom('icon') with {
-                            modifiers: ['big'],
-                            data: {
-                                name: 'wishlist'
-                            }
-                        } only %}
-                    </a>
-                </li>
-                <li class="{{ config.name }}__item">
-                    <a href="{{ url('login') }}" class="{{ config.name }}__link {{ config.jsName }}__trigger">
-                        {% include atom('icon') with {
-                            modifiers: ['big'],
-                            data: {
-                                name: 'user-account'
-                            }
-                        } only %}
-                    </a>
-                </li>
-            {% endif %}
-        {% endif %}
+    {% set ajaxContentClass = config.jsName ~ '-content' %}
+    {% set ajaxCartProvider = data.ajaxCartUrl ? config.jsName ~ '-provider' : null %}
 
-        <li class="{{ config.name }}__item">
-            {% include molecule('cart-counter') with {
-                class: config.name ~ '__link ' ~ config.jsName ~ '__trigger',
-                data: {
-                    quantity: data.cartQuantity,
-                },
-            } only %}
-        </li>
-        <li class="{{ config.name }}__item {{ config.name }}__item--overlay">
-            {% include molecule('nav-overlay') with {
-                attributes: {
-                    'trigger-open-class-name': config.jsName ~ '__trigger',
-                    'active-link': config.name ~ '__link--active',
-                },
-            } only %}
-        </li>
-    </ul>
+    <div {% if data.ajaxCartUrl %}class="{{ ajaxContentClass }}"{% endif %}>
+        {% block contentInner %}
+            <ul class="grid grid--middle grid--right">
+                 {% widget 'LinkToProductComparisonListWidget' %}
+                    {% block body %}
+                        <li class="{{ config.name }}__item">
+                            {{ parent() }}
+                        </li>
+                    {% endblock %}
+                {% endwidget %}
+
+                {% if data.showUserMenu %}
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <li class="{{ config.name }}__item">
+                            <a href="{{ url('wishlist/overview') }}" class="{{ config.name }}__link">
+                                {% include atom('icon') with {
+                                    modifiers: ['big'],
+                                    data: {
+                                        name: 'wishlist'
+                                    }
+                                } only %}
+                            </a>
+                        </li>
+                        <li class="{{ config.name }}__item">
+                            <a href="{{ url('customer/overview') }}" class="{{ config.name }}__link {{ config.jsName }}__trigger">
+                                {% include atom('icon') with {
+                                    modifiers: ['big'],
+                                    data: {
+                                        name: 'user-account'
+                                    }
+                                } only %}
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="{{ config.name }}__item">
+                            <a href="{{ url('login') }}" class="{{ config.name }}__link">
+                                {% include atom('icon') with {
+                                    modifiers: ['big'],
+                                    data: {
+                                        name: 'wishlist'
+                                    }
+                                } only %}
+                            </a>
+                        </li>
+                        <li class="{{ config.name }}__item">
+                            <a href="{{ url('login') }}" class="{{ config.name }}__link {{ config.jsName }}__trigger">
+                                {% include atom('icon') with {
+                                    modifiers: ['big'],
+                                    data: {
+                                        name: 'user-account'
+                                    }
+                                } only %}
+                            </a>
+                        </li>
+                    {% endif %}
+                {% endif %}
+
+                <li class="{{ config.name }}__item">
+                    {% include molecule('cart-counter') with {
+                        class: config.name ~ '__link ' ~ config.jsName ~ '__trigger',
+                        data: {
+                            quantity: data.cartQuantity,
+                        },
+                    } only %}
+                </li>
+                <li class="{{ config.name }}__item {{ config.name }}__item--overlay">
+                    {% include molecule('nav-overlay') with {
+                        attributes: {
+                            'trigger-open-class-name': config.jsName ~ '__trigger',
+                            'active-link': config.name ~ '__link--active',
+                        },
+                    } only %}
+                </li>
+            </ul>
+        {% endblock %}
+    </div>
+
+    {% if data.ajaxCartUrl %}
+        {% include molecule('ajax-provider') with {
+            class: ajaxCartProvider,
+            attributes: {
+                url: data.ajaxCartUrl,
+                method: 'POST',
+                'event-host': 'CART_UPDATE_EVENT',
+                'element-visibility-checker-class-name': ajaxContentClass,
+            },
+        } only %}
+
+        {% include molecule('ajax-renderer') with {
+            attributes: {
+                'provider-class-name': ajaxCartProvider,
+                'target-class-name': ajaxContentClass,
+                'mount-after-render': true,
+            },
+        } only %}
+    {% endif %}
 {% endblock %}

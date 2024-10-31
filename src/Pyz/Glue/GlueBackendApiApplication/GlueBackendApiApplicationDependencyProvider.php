@@ -31,6 +31,7 @@ use Spryker\Glue\PushNotificationsBackendApi\Plugin\GlueBackendApiApplication\Pu
 use Spryker\Glue\Router\Plugin\Application\RouterApplicationPlugin;
 use Spryker\Glue\StoresApi\Plugin\GlueBackendApiApplication\StoreApplicationPlugin as ClientStoreApplicationPlugin;
 use Spryker\Glue\StoresBackendApi\Plugin\GlueBackendApiApplication\StoreApplicationPlugin;
+use Spryker\Glue\TestifyBackendApi\Plugin\GlueBackendApiApplication\DynamicFixturesBackendResourcePlugin;
 use Spryker\Glue\WarehouseOauthBackendApi\Plugin\GlueBackendApiApplication\WarehouseRequestBuilderPlugin;
 use Spryker\Glue\WarehouseOauthBackendApi\Plugin\GlueBackendApiApplication\WarehouseRequestValidatorPlugin;
 use Spryker\Glue\WarehouseOauthBackendApi\Plugin\GlueBackendApiApplication\WarehouseTokensBackendResourcePlugin;
@@ -109,7 +110,7 @@ class GlueBackendApiApplicationDependencyProvider extends SprykerGlueBackendApiA
      */
     protected function getResourcePlugins(): array
     {
-        return [
+        $plugins = [
             new OauthBackendApiTokenResource(),
             new WarehouseTokensBackendResourcePlugin(),
             new PushNotificationSubscriptionsBackendResourcePlugin(),
@@ -120,6 +121,12 @@ class GlueBackendApiApplicationDependencyProvider extends SprykerGlueBackendApiA
             new WarehouseUserAssignmentsBackendResourcePlugin(),
             new AuthorizeResource(),
         ];
+
+        if (class_exists(DynamicFixturesBackendResourcePlugin::class)) {
+            $plugins[] = new DynamicFixturesBackendResourcePlugin();
+        }
+
+        return $plugins;
     }
 
     /**

@@ -8,7 +8,9 @@
 {% define data = {
     url: '/',
     searchUrl: path('search'),
-    cartQuantity: getCartQuantity()
+    cartQuantity: getCartQuantity(),
+    isAjaxMode: false,
+    ajaxCartUrl: '',
 } %}
 
 {% block body %}
@@ -22,6 +24,11 @@
             iconName: 'search',
             isButton: true,
             jsClass: 'js-header__search-open'
+        },
+        {
+            iconName: 'compare',
+            isCompare: true,
+            isEmbed: true,
         },
         {
             iconName: 'wishlist',
@@ -50,15 +57,20 @@
                     },
                     embed: {
                         item: item,
-                        cartQuantity: data.cartQuantity
+                        cartQuantity: data.cartQuantity,
+                        ajaxCartUrl: data.isAjaxMode ? data.ajaxCartUrl : null,
                     }
                 } only %}
                     {% block button %}
-                        {% if embed.item.isCart is defined %}
+                        {% if embed.item.isCompare is defined %}
+                            {% widget 'LinkToProductComparisonListWidget' %}{% endwidget %}
+                        {% elseif embed.item.isCart is defined %}
                             {% include molecule('cart-counter') with {
                                 modifiers: ['mobile'],
                                 data: {
                                     quantity: embed.cartQuantity,
+                                    ajaxCartUrl: embed.ajaxCartUrl ~ '?counterOnly=true',
+                                    ajaxClassSuffix: 'mobile',
                                 },
                             } only %}
                         {% endif %}
