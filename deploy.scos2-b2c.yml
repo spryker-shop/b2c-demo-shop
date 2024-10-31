@@ -1,0 +1,189 @@
+version: "0.1"
+
+namespace: spryker-cloud
+tag: '1.0'
+
+environment: docker.production
+image:
+    tag: spryker/php:8.3
+    environment:
+        SPRYKER_DEFAULT_STORE: "DE"
+        SPRYKER_ACTIVE_STORES: "DE,AT"
+        SPRYKER_HOOK_BEFORE_DEPLOY: "vendor/bin/install -r EU/pre-deploy.dynamic-store-off -vvv"
+        SPRYKER_HOOK_AFTER_DEPLOY: "true"
+        SPRYKER_HOOK_INSTALL: "vendor/bin/install -r EU/production.dynamic-store-off --no-ansi -vvv"
+        SPRYKER_HOOK_DESTRUCTIVE_INSTALL: "vendor/bin/install -r EU/destructive.dynamic-store-off --no-ansi -vvv"
+        SPRYKER_PRODUCT_CONFIGURATOR_HOST: dtc.spryker-b2c.cloud.spryker.toys
+        SPRYKER_PRODUCT_CONFIGURATOR_PORT: 443
+        SPRYKER_YVES_HOST_DE: www.de.spryker-b2c.cloud.spryker.toys
+        SPRYKER_YVES_HOST_AT: www.at.spryker-b2c.cloud.spryker.toys
+        SPRYKER_PUSH_NOTIFICATION_WEB_PUSH_PHP_VAPID_PUBLIC_KEY: 'BGqNWbv0hWM5CQ1-KwAfSQBMC6TMVFyrnh3vQp37oGCNvQ6eG_HyMjxBFJRWeCPTbzDoxcjhxLJS8Ck8r1G2oFw'
+        SPRYKER_PUSH_NOTIFICATION_WEB_PUSH_PHP_VAPID_PRIVATE_KEY: 'UK6DywwjKITPpRHBSY9TLPIXm6BPrHX40sseIoXT9c8'
+        SPRYKER_PUSH_NOTIFICATION_WEB_PUSH_PHP_VAPID_SUBJECT: 'https://spryker.com'
+    node:
+        version: 18
+        npm: 9
+
+composer:
+    mode: --no-dev
+    autoload: --classmap-authoritative
+
+assets:
+    image: spryker/nginx-brotli:latest
+    mode: production
+    compression:
+        brotli:
+            static: on
+            level: 5
+
+regions:
+    EU:
+        services:
+            mail:
+                sender:
+                    name: scos2-b2c-No-Reply
+                    email: no-reply@spryker-b2c.cloud.spryker.toys
+            database:
+                database: scos2_b2c
+                username: spryker
+                password: secret
+
+        stores:
+            DE:
+                services:
+                    broker:
+                        namespace: de_queue
+                    key_value_store:
+                        namespace: 1
+                    search:
+                        namespace: de_search
+                    session:
+                        namespace: 2
+            AT:
+                services:
+                    broker:
+                        namespace: at_queue
+                    key_value_store:
+                        namespace: 1
+                    search:
+                        namespace: at_search
+                    session:
+                        namespace: 2
+
+groups:
+    EU:
+        region: EU
+        applications:
+            yves:
+                application: yves
+                endpoints:
+                    dtc.spryker-b2c.cloud.spryker.toys:
+                        entry-point: Configurator
+                    www.de.spryker-b2c.cloud.spryker.toys:
+                        store: DE
+                    www.at.spryker-b2c.cloud.spryker.toys:
+                        store: AT
+            boffice:
+                application: backoffice
+                endpoints:
+                    backoffice.de.spryker-b2c.cloud.spryker.toys:
+                        store: DE
+                    backoffice.at.spryker-b2c.cloud.spryker.toys:
+                        store: AT
+            backgw:
+                application: backend-gateway
+                endpoints:
+                    backend-gateway.de.spryker-b2c.cloud.spryker.toys:
+                        store: DE
+                    backend-gateway.at.spryker-b2c.cloud.spryker.toys:
+                        store: AT
+            glue:
+                application: glue
+                endpoints:
+                    glue.de.spryker-b2c.cloud.spryker.toys:
+                        store: DE
+                        cors-allow-origin: '*'
+                    glue.at.spryker-b2c.cloud.spryker.toys:
+                        store: AT
+                        cors-allow-origin: '*'
+            gluestorefront:
+                application: glue-storefront
+                endpoints:
+                    glue-storefront.de.spryker-b2c.cloud.spryker.toys:
+                        store: DE
+                        cors-allow-origin: '*'
+                    glue-storefront.at.spryker-b2c.cloud.spryker.toys:
+                        store: AT
+                        cors-allow-origin: '*'
+            gluebackend:
+                application: glue-backend
+                endpoints:
+                    glue-backend.de.spryker-b2c.cloud.spryker.toys:
+                        store: DE
+                        cors-allow-origin: '*'
+                    glue-backend.at.spryker-b2c.cloud.spryker.toys:
+                        store: AT
+                        cors-allow-origin: '*'
+services:
+    database:
+        engine: mysql
+        version: mariadb-10.4
+        root:
+            username: "root"
+            password: "secret"
+        endpoints:
+            localhost:3306:
+                protocol: tcp
+    broker:
+        engine: rabbitmq
+        version: '3.9'
+        api:
+            username: "spryker"
+            password: "secret"
+        endpoints:
+            queue.spryker-b2c.cloud.spryker.toys:
+            localhost:5672:
+                protocol: tcp
+    session:
+        engine: redis
+    key_value_store:
+        engine: redis
+        endpoints:
+            localhost:16379:
+                protocol: tcp
+    search:
+        engine: elastic
+        version: '7.10'
+        endpoints:
+            localhost:9200:
+                protocol: tcp
+    scheduler:
+        engine: jenkins
+        version: '2.442'
+        csrf-protection-enabled: false
+        endpoints:
+            scheduler.spryker-b2c.cloud.spryker.toys:
+    mail_catcher:
+        engine: mailhog
+        endpoints:
+            mail.spryker-b2c.cloud.spryker.toys:
+
+docker:
+
+    blackfire:
+        enabled: true
+
+    ssl:
+        enabled: true
+        redirect: true
+
+    debug:
+        enabled: false
+        xdebug:
+            enabled: false
+
+    testing:
+        store: DE
+
+    mount:
+        baked:
