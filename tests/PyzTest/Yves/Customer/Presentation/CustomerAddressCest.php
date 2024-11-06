@@ -28,6 +28,16 @@ class CustomerAddressCest
      *
      * @return void
      */
+    public function _before(CustomerPresentationTester $i): void
+    {
+        $i->amYves();
+    }
+
+    /**
+     * @param \PyzTest\Yves\Customer\CustomerPresentationTester $i
+     *
+     * @return void
+     */
     public function testICanAddNewAddress(CustomerPresentationTester $i): void
     {
         $i->amLoggedInCustomer();

@@ -133,7 +133,7 @@ class SuccessStepTest extends Unit
      */
     protected function createCheckoutPageConfigMock(): CheckoutPageConfig
     {
-        $checkoutPageConfigMock = $this->getMockBuilder(CheckoutPageConfig::class)->setMethods(['cleanCartAfterOrderCreation'])->getMock();
+        $checkoutPageConfigMock = $this->getMockBuilder(CheckoutPageConfig::class)->onlyMethods(['cleanCartAfterOrderCreation'])->getMock();
         $checkoutPageConfigMock->method('cleanCartAfterOrderCreation')->willReturn(true);
 
         return $checkoutPageConfigMock;

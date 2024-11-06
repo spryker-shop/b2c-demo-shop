@@ -196,7 +196,7 @@ class PaymentStepTest extends Unit
     {
         $paymentClientMock = $this->getMockBuilder(CheckoutPageToPaymentClientInterface::class)
             ->disableOriginalConstructor()
-            ->setMethods(['getAvailableMethods'])
+            ->onlyMethods(['getAvailableMethods'])
             ->getMock();
 
         $paymentMethodsTransfer = (new PaymentMethodsBuilder())

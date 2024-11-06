@@ -8,7 +8,6 @@
 namespace PyzTest\Yves\Customer;
 
 use Codeception\Actor;
-use Codeception\Scenario;
 use PyzTest\Yves\Customer\PageObject\CustomerLoginPage;
 use PyzTest\Yves\Customer\PageObject\CustomerRegistrationPage;
 
@@ -31,16 +30,6 @@ use PyzTest\Yves\Customer\PageObject\CustomerRegistrationPage;
 class CustomerPresentationTester extends Actor
 {
     use _generated\CustomerPresentationTesterActions;
-
-    /**
-     * @param \Codeception\Scenario $scenario
-     */
-    public function __construct(Scenario $scenario)
-    {
-        parent::__construct($scenario);
-
-        $this->amYves();
-    }
 
     /**
      * @param string $email

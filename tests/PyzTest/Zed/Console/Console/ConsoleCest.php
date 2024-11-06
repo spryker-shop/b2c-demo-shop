@@ -32,7 +32,7 @@ class ConsoleCest
         $i->wantTo('See that console is running');
 
         $output = $i->runConsoleApplication();
-        Assert::assertRegExp('/Store/', $output);
-        Assert::assertRegExp('/Environment/', $output);
+        Assert::assertMatchesRegularExpression('/Store/', $output);
+        Assert::assertMatchesRegularExpression('/Environment/', $output);
     }
 }

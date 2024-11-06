@@ -8,7 +8,6 @@
 namespace PyzTest\Zed\CmsGui;
 
 use Codeception\Actor;
-use Codeception\Scenario;
 use Faker\Factory;
 
 /**
@@ -35,17 +34,6 @@ class CmsGuiPresentationTester extends Actor
      * @var array|null
      */
     protected $localizedFakeData;
-
-    /**
-     * @param \Codeception\Scenario $scenario
-     */
-    public function __construct(Scenario $scenario)
-    {
-        parent::__construct($scenario);
-
-        $this->amZed();
-        $this->amLoggedInUser();
-    }
 
     /**
      * @param string $date

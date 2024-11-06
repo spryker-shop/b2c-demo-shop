@@ -28,6 +28,17 @@ class TaxRateCreateCest
      *
      * @return void
      */
+    public function _before(TaxPresentationTester $i): void
+    {
+        $i->amZed();
+        $i->amLoggedInUser();
+    }
+
+    /**
+     * @param \PyzTest\Zed\Tax\TaxPresentationTester $i
+     *
+     * @return void
+     */
     public function testCreateValidTaxRateShouldShowSuccessMessage(TaxPresentationTester $i): void
     {
         $i->wantTo('Create valid tax rate.');

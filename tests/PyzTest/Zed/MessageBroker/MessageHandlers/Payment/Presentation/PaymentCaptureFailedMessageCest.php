@@ -40,6 +40,17 @@ class PaymentCaptureFailedMessageCest
     public const FINAL_ITEM_STATE = 'payment failed';
 
     /**
+     * @param \PyzTest\Zed\MessageBroker\PaymentPresentationTester $i
+     *
+     * @return void
+     */
+    public function _before(PaymentPresentationTester $i): void
+    {
+        $i->amZed();
+        $i->amLoggedInUser();
+    }
+
+    /**
      * @param \PyzTest\Zed\MessageBroker\PaymentPresentationTester $I
      *
      * @return void
