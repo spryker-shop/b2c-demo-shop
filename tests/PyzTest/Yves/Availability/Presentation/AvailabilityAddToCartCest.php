@@ -25,6 +25,16 @@ class AvailabilityAddToCartCest
 {
     /**
      * @param \PyzTest\Yves\Availability\AvailabilityPresentationTester $i
+     *
+     * @return void
+     */
+    public function _before(AvailabilityPresentationTester $i): void
+    {
+        $i->amYves();
+    }
+
+    /**
+     * @param \PyzTest\Yves\Availability\AvailabilityPresentationTester $i
      * @param \Codeception\Scenario $scenario
      *
      * @return void

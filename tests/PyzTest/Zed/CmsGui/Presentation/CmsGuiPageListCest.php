@@ -27,6 +27,17 @@ class CmsGuiPageListCest
      *
      * @return void
      */
+    public function _before(CmsGuiPresentationTester $i): void
+    {
+        $i->amZed();
+        $i->amLoggedInUser();
+    }
+
+    /**
+     * @param \PyzTest\Zed\CmsGui\CmsGuiPresentationTester $i
+     *
+     * @return void
+     */
     public function testICanOpenCmsPageList(CmsGuiPresentationTester $i): void
     {
         $i->amLoggedInUser();

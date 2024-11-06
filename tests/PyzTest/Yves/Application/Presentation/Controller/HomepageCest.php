@@ -28,6 +28,16 @@ class HomepageCest
      *
      * @return void
      */
+    public function _before(ApplicationPresentationTester $i): void
+    {
+        $i->amYves();
+    }
+
+    /**
+     * @param \PyzTest\Yves\Application\ApplicationPresentationTester $i
+     *
+     * @return void
+     */
     public function testICanOpenHomepage(ApplicationPresentationTester $i): void
     {
         $i->wantTo('See that i can open the homepage');

@@ -28,6 +28,17 @@ class ProductRelationCreateRelationCest
      *
      * @return void
      */
+    public function _before(ProductRelationPresentationTester $i): void
+    {
+        $i->amZed();
+        $i->amLoggedInUser();
+    }
+
+    /**
+     * @param \PyzTest\Zed\ProductRelation\ProductRelationPresentationTester $i
+     *
+     * @return void
+     */
     public function testICanCreateProductRelationAndSeeInYves(ProductRelationPresentationTester $i): void
     {
         $i->wantTo('I want to create up selling relation');

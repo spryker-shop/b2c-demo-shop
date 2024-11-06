@@ -29,6 +29,16 @@ class CustomerLogoutCest
      *
      * @return void
      */
+    public function _before(CustomerPresentationTester $i): void
+    {
+        $i->amYves();
+    }
+
+    /**
+     * @param \PyzTest\Yves\Customer\CustomerPresentationTester $i
+     *
+     * @return void
+     */
     public function testICanLogoutWhenLoggedIn(CustomerPresentationTester $i): void
     {
         $i->amOnPage(CustomerLoginPage::URL);

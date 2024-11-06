@@ -8,7 +8,6 @@
 namespace PyzTest\Zed\NavigationGui;
 
 use Codeception\Actor;
-use Codeception\Scenario;
 use Exception;
 use Generated\Shared\Transfer\NavigationTreeNodeTransfer;
 use Generated\Shared\Transfer\NavigationTreeTransfer;
@@ -129,17 +128,6 @@ class NavigationGuiPresentationTester extends Actor
      * @var string
      */
     public const NAVIGATION_ROW_ACTIVE_LINK_SELECTOR = '//*[@id="navigation-table"]/tbody/tr[1]/td[5]/a[2]';
-
-    /**
-     * @param \Codeception\Scenario $scenario
-     */
-    public function __construct(Scenario $scenario)
-    {
-        parent::__construct($scenario);
-
-        $this->amZed();
-        $this->amLoggedInUser();
-    }
 
     /**
      * @param string $value

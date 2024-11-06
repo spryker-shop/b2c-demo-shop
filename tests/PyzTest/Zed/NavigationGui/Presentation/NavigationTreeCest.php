@@ -33,6 +33,17 @@ class NavigationTreeCest
      *
      * @return void
      */
+    public function _before(NavigationGuiPresentationTester $i): void
+    {
+        $i->amZed();
+        $i->amLoggedInUser();
+    }
+
+    /**
+     * @param \PyzTest\Zed\NavigationGui\NavigationGuiPresentationTester $i
+     *
+     * @return void
+     */
     public function testSeeEmptyNavigationTree(NavigationGuiPresentationTester $i): void
     {
         $i->wantTo('See navigation tree.');
