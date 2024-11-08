@@ -31,6 +31,16 @@ class CustomerOverviewCest
      *
      * @return void
      */
+    public function _before(CustomerPresentationTester $i): void
+    {
+        $i->amYves();
+    }
+
+    /**
+     * @param \PyzTest\Yves\Customer\CustomerPresentationTester $i
+     *
+     * @return void
+     */
     public function testICanOpenOverviewPage(CustomerPresentationTester $i): void
     {
         $i->amLoggedInCustomer();

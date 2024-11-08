@@ -8,7 +8,6 @@
 namespace PyzTest\Zed\Tax;
 
 use Codeception\Actor;
-use Codeception\Scenario;
 use Orm\Zed\Tax\Persistence\SpyTaxRateQuery;
 use PyzTest\Zed\Tax\PageObject\TaxRateCreatePage;
 use PyzTest\Zed\Tax\PageObject\TaxRateListPage;
@@ -32,17 +31,6 @@ use PyzTest\Zed\Tax\PageObject\TaxRateListPage;
 class TaxPresentationTester extends Actor
 {
     use _generated\TaxPresentationTesterActions;
-
-    /**
-     * @param \Codeception\Scenario $scenario
-     */
-    public function __construct(Scenario $scenario)
-    {
-        parent::__construct($scenario);
-
-        $this->amZed();
-        $this->amLoggedInUser();
-    }
 
     /**
      * @param string $taxRateName

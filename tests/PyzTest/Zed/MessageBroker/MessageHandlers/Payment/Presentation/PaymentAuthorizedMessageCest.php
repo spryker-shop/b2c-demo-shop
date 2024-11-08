@@ -35,6 +35,17 @@ class PaymentAuthorizedMessageCest
     public const FINAL_ITEM_STATE = 'payment authorized';
 
     /**
+     * @param \PyzTest\Zed\MessageBroker\PaymentPresentationTester $i
+     *
+     * @return void
+     */
+    public function _before(PaymentPresentationTester $i): void
+    {
+        $i->amZed();
+        $i->amLoggedInUser();
+    }
+
+    /**
      * @param \PyzTest\Zed\MessageBroker\PaymentPresentationTester $I
      *
      * @return void
