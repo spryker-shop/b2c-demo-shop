@@ -1,3 +1,4 @@
+
 version: "0.1"
 
 x-real-ip: &real-ip
@@ -22,16 +23,17 @@ tag: '1.0'
 
 environment: docker.production
 image:
-    tag: spryker/php:8.2
+    tag: spryker/php:8.3
     environment:
         SPRYKER_DNS_RESOLVER_IP: "10.105.0.2"
-        SPRYKER_HOOK_BEFORE_DEPLOY: 'vendor/bin/install -r pre-deploy -vvv'
-        SPRYKER_HOOK_AFTER_DEPLOY: 'true'
-        SPRYKER_HOOK_INSTALL: 'vendor/bin/install -r dynamic-store --no-ansi -vvv'
-        SPRYKER_HOOK_DESTRUCTIVE_INSTALL: 'vendor/bin/install -r destructive --no-ansi -vvv'
-        SPRYKER_DYNAMIC_STORE_MODE: true
+        SPRYKER_HOOK_BEFORE_DEPLOY: "vendor/bin/install -r EU/pre-deploy -vvv"
+        SPRYKER_HOOK_AFTER_DEPLOY: "vendor/bin/install -r install-post-deploy-workflow.yml -vvv"
+        SPRYKER_HOOK_INSTALL: "vendor/bin/install -r EU/production --no-ansi -vvv"
+        SPRYKER_HOOK_DESTRUCTIVE_INSTALL: "vendor/bin/install -r EU/destructive --no-ansi -vvv"
         SPRYKER_PRODUCT_CONFIGURATOR_HOST: dtc.b2c-eu.demo-spryker.com
         SPRYKER_PRODUCT_CONFIGURATOR_PORT: 443
+        SPRYKER_YVES_HOST_EU: www.b2c-eu.demo-spryker.com
+        SPRYKER_YVES_HOST_US: www.b2c-us.demo-spryker.com
         SPRYKER_PUSH_NOTIFICATION_WEB_PUSH_PHP_VAPID_PUBLIC_KEY: 'BGqNWbv0hWM5CQ1-KwAfSQBMC6TMVFyrnh3vQp37oGCNvQ6eG_HyMjxBFJRWeCPTbzDoxcjhxLJS8Ck8r1G2oFw'
         SPRYKER_PUSH_NOTIFICATION_WEB_PUSH_PHP_VAPID_PRIVATE_KEY: 'UK6DywwjKITPpRHBSY9TLPIXm6BPrHX40sseIoXT9c8'
         SPRYKER_PUSH_NOTIFICATION_WEB_PUSH_PHP_VAPID_SUBJECT: 'https://spryker.com'
@@ -58,7 +60,6 @@ assets:
         gzip:
             static: true
             level: 5
-
 
 regions:
   EU:
@@ -91,7 +92,7 @@ groups:
                         services:
                             session:
                                 namespace: 2
-                    dtc.b2c.demo-spryker.com:
+                    dtc.b2c-eu.demo-spryker.com:
                         entry-point: Configurator
             glue:
                 application: glue
@@ -99,13 +100,13 @@ groups:
                     glue.b2c-eu.demo-spryker.com:
                         region: EU
                         cors-allow-origin: '*'
-            glue_storefront:
+            glue-storefront:
                 application: glue-storefront
                 endpoints:
                     glue-storefront.b2c-eu.demo-spryker.com:
                         region: EU
                         cors-allow-origin: '*'
-            glue_backend:
+            glue-backend:
                 application: glue-backend
                 endpoints:
                     glue-backend.b2c-eu.demo-spryker.com:
@@ -149,7 +150,7 @@ services:
             username: "spryker"
             password: "secret"
         endpoints:
-            queue.b2c.demo-spryker.com:
+            queue.b2c-eu.demo-spryker.com:
             localhost:5672:
                 protocol: tcp
     session:
@@ -161,7 +162,7 @@ services:
                 protocol: tcp
     search:
         engine: elastic
-        version: 7.6
+        version: 7.10
         endpoints:
             localhost:9200:
                 protocol: tcp
@@ -169,11 +170,11 @@ services:
         engine: jenkins
         version: '2.442'
         endpoints:
-            scheduler.b2c.demo-spryker.com:
+            scheduler.b2c-eu.demo-spryker.com:
     mail_catcher:
         engine: mailhog
         endpoints:
-            mail.b2c.demo-spryker.com:
+            mail.b2c-eu.demo-spryker.com:
 
 docker:
 
