@@ -66,5 +66,8 @@ sections:
             command: 'vendor/bin/console publish:trigger-events'
 
     scheduler-start:
+        queue-setup:
+            command: 'vendor/bin/console queue:setup'
+
         scheduler-setup:
             command: 'vendor/bin/console scheduler:setup -vvv --no-ansi || true'
