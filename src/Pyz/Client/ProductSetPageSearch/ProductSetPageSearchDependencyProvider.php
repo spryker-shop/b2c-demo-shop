@@ -10,7 +10,6 @@ namespace Pyz\Client\ProductSetPageSearch;
 use Spryker\Client\ProductSetPageSearch\Plugin\Elasticsearch\ResultFormatter\ProductSetPageSearchListResultFormatterPlugin;
 use Spryker\Client\ProductSetPageSearch\ProductSetPageSearchDependencyProvider as SprykerProductSetPageSearchDependencyProvider;
 use Spryker\Client\SearchElasticsearch\Plugin\QueryExpander\LocalizedQueryExpanderPlugin;
-use Spryker\Client\SearchElasticsearch\Plugin\QueryExpander\StoreQueryExpanderPlugin;
 
 class ProductSetPageSearchDependencyProvider extends SprykerProductSetPageSearchDependencyProvider
 {
@@ -31,7 +30,6 @@ class ProductSetPageSearchDependencyProvider extends SprykerProductSetPageSearch
     {
         return [
             new LocalizedQueryExpanderPlugin(),
-            new StoreQueryExpanderPlugin(),
         ];
     }
 }
