@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<database xmlns="spryker:schema-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\PriceProduct\Persistence" package="src.Orm.Zed.PriceProduct.Persistence">
+    <table name="spy_price_product">
+        <column name="id_price_product" type="INTEGER" required="true" primaryKey="true" autoIncrement="true"/>
+        <column name="fk_price_type" type="INTEGER" required="true"/>
+        <column name="fk_product" type="INTEGER" required="false"/>
+        <column name="fk_product_abstract" type="INTEGER" required="false"/>
+        <column name="price" type="INTEGER" defaultValue="0" comment="deprecated"/>
+        <foreign-key name="spy_price_product-fk_product" foreignTable="spy_product" phpName="Product" refPhpName="PriceProduct">
+            <reference local="fk_product" foreign="id_product"/>
+        </foreign-key>
+        <foreign-key name="spy_price_product-fk_price_type" foreignTable="spy_price_type" phpName="PriceType" refPhpName="PriceProduct">
+            <reference local="fk_price_type" foreign="id_price_type"/>
+        </foreign-key>
+        <foreign-key name="spy_price_product-fk_product_abstract" foreignTable="spy_product_abstract" phpName="SpyProductAbstract" refPhpName="PriceProduct">
+            <reference local="fk_product_abstract" foreign="id_product_abstract"/>
+        </foreign-key>
+        <index name="spy_price_product-fk_price_type">
+            <index-column name="fk_price_type"/>
+        </index>
+        <index name="spy_price_product-index-fk_product-fk_price_type-price">
+            <index-column name="fk_product"/>
+            <index-column name="fk_price_type"/>
+            <index-column name="price"/>
+        </index>
+        <unique name="spy_price_product-unique-fk_product_abstract">
+            <unique-column name="fk_product_abstract"/>
+            <unique-column name="fk_product"/>
+            <unique-column name="fk_price_type"/>
+        </unique>
+        <unique name="fk_price_type_unique_fk_product_abstract_unique">
+            <unique-column name="fk_product_abstract"/>
+            <unique-column name="fk_price_type"/>
+        </unique>
+        <unique name="fk_price_type_unique_fk_product_unique">
+            <unique-column name="fk_product"/>
+            <unique-column name="fk_price_type"/>
+        </unique>
+        <id-method-parameter value="spy_price_product_pk_seq"/>
+        <behavior name="event">
+            <parameter name="spy_price_product_all" column="*"/>
+        </behavior>
+    </table>
+    <table name="spy_price_type">
+        <column name="id_price_type" type="INTEGER" required="true" primaryKey="true" autoIncrement="true"/>
+        <column name="name" type="VARCHAR" size="255" required="true"/>
+        <column name="price_mode_configuration" type="ENUM" valueSet="NET_MODE, GROSS_MODE, BOTH"/>
+        <unique name="spy_price_type-name">
+            <unique-column name="name"/>
+        </unique>
+        <id-method-parameter value="spy_price_type_pk_seq"/>
+        <behavior name="event">
+            <parameter name="spy_price_type_all" column="*"/>
+        </behavior>
+    </table>
+    <table name="spy_price_product_store">
+        <column name="id_price_product_store" type="BIGINT" required="true" primaryKey="true" autoIncrement="true"/>
+        <column name="fk_currency" type="INTEGER" required="true"/>
+        <column name="fk_price_product" type="INTEGER" required="true"/>
+        <column name="fk_store" type="INTEGER"/>
+        <column name="gross_price" type="INTEGER"/>
+        <column name="net_price" type="INTEGER"/>
+        <column name="price_data" required="false" type="LONGVARCHAR"/>
+        <column name="price_data_checksum" required="false" type="VARCHAR" size="255"/>
+        <foreign-key name="spy_price_product_store-fk_currency" foreignTable="spy_currency" phpName="Currency" refPhpName="PriceProductStore">
+            <reference local="fk_currency" foreign="id_currency"/>
+        </foreign-key>
+        <foreign-key name="spy_price_product_store-fk_store" foreignTable="spy_store" phpName="Store" refPhpName="PriceProductStore">
+            <reference local="fk_store" foreign="id_store"/>
+        </foreign-key>
+        <foreign-key name="spy_price_product_store-fk_price_product" foreignTable="spy_price_product" phpName="PriceProduct" refPhpName="PriceProductStore">
+            <reference local="fk_price_product" foreign="id_price_product"/>
+        </foreign-key>
+        <index name="spy_price_product_store-index-fk_pr_pro-fk_cur-fk_st">
+            <index-column name="fk_currency"/>
+            <index-column name="fk_store"/>
+            <index-column name="fk_price_product"/>
+            <index-column name="price_data_checksum"/>
+            <index-column name="net_price"/>
+            <index-column name="gross_price"/>
+        </index>
+        <index name="spy_price_product_store-index-fk_pr_pro-id_pr_pro_st">
+            <index-column name="fk_price_product"/>
+            <index-column name="id_price_product_store"/>
+        </index>
+        <id-method-parameter value="spy_price_product_store_pk_seq"/>
+        <behavior name="event">
+            <parameter name="spy_price_product_store_all" column="*"/>
+        </behavior>
+    </table>
+    <table name="spy_price_product_default">
+        <column name="id_price_product_default" type="BIGINT" required="true" primaryKey="true" autoIncrement="true"/>
+        <column name="fk_price_product_store" type="BIGINT" required="true"/>
+        <foreign-key name="spy_price_product_default-fk_price_product_store" foreignTable="spy_price_product_store" onDelete="CASCADE" phpName="PriceProductStore" refPhpName="PriceProductDefault">
+            <reference local="fk_price_product_store" foreign="id_price_product_store"/>
+        </foreign-key>
+        <unique name="spy_prs_prod_default-unique-price_product_store">
+            <unique-column name="fk_price_product_store"/>
+        </unique>
+        <id-method-parameter value="spy_price_product_default_pk_seq"/>
+        <behavior name="event">
+            <parameter name="spy_price_product_default_all" column="*"/>
+        </behavior>
+    </table>
+</database>

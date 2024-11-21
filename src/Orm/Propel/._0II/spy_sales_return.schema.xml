@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<database xmlns="spryker:schema-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\SalesReturn\Persistence" package="src.Orm.Zed.SalesReturn.Persistence">
+    <table name="spy_sales_return_reason" identifierQuoting="true" idMethod="native" allowPkInsert="true">
+        <column name="id_sales_return_reason" required="true" type="INTEGER" primaryKey="true" autoIncrement="true"/>
+        <column name="glossary_key_reason" required="true" type="VARCHAR" size="255"/>
+        <column name="key" type="VARCHAR" size="255" description="Key is an identifier for existing entities. This should never be changed."/>
+        <unique name="spy_sales_return_reason-glossary_key_reason">
+            <unique-column name="glossary_key_reason"/>
+        </unique>
+        <id-method-parameter value="spy_sales_return_reason_pk_seq"/>
+        <behavior name="event">
+            <parameter name="spy_sales_return_reason_all" column="*"/>
+        </behavior>
+    </table>
+    <table name="spy_sales_return" idMethod="native" allowPkInsert="true">
+        <column name="id_sales_return" required="true" type="INTEGER" primaryKey="true" autoIncrement="true"/>
+        <column name="customer_reference" type="VARCHAR" size="255" required="false"/>
+        <column name="return_reference" type="VARCHAR" size="255" required="true"/>
+        <column name="store" type="VARCHAR" size="255" required="true"/>
+        <index name="spy_sales_return-customer_reference">
+            <index-column name="customer_reference"/>
+        </index>
+        <index name="spy_sales_return-store">
+            <index-column name="store"/>
+        </index>
+        <unique name="spy_sales_return-return_reference">
+            <unique-column name="return_reference"/>
+        </unique>
+        <id-method-parameter value="spy_sales_return_pk_seq"/>
+        <behavior name="timestampable"/>
+    </table>
+    <table name="spy_sales_return_item" idMethod="native" allowPkInsert="true">
+        <column name="id_sales_return_item" required="true" type="INTEGER" primaryKey="true" autoIncrement="true"/>
+        <column name="fk_sales_order_item" type="INTEGER" required="true"/>
+        <column name="fk_sales_return" type="INTEGER" required="true"/>
+        <column name="reason" type="LONGVARCHAR" required="false"/>
+        <column name="uuid" required="false" type="VARCHAR" size="36"/>
+        <foreign-key name="spy_sales_return_item-fk_sales_return" foreignTable="spy_sales_return">
+            <reference foreign="id_sales_return" local="fk_sales_return"/>
+        </foreign-key>
+        <foreign-key name="spy_sales_return_item-fk_sales_order_item" foreignTable="spy_sales_order_item">
+            <reference foreign="id_sales_order_item" local="fk_sales_order_item"/>
+        </foreign-key>
+        <index name="spy_sales_return_item-fk_sales_return">
+            <index-column name="fk_sales_return"/>
+        </index>
+        <index name="spy_sales_return_item-fk_sales_order_item">
+            <index-column name="fk_sales_order_item"/>
+        </index>
+        <unique name="spy_sales_return_item-uuid">
+            <unique-column name="uuid"/>
+        </unique>
+        <id-method-parameter value="spy_sales_return_item_pk_seq"/>
+        <behavior name="timestampable"/>
+        <behavior name="uuid">
+            <parameter name="key_columns" value="id_sales_return_item"/>
+        </behavior>
+    </table>
+</database>

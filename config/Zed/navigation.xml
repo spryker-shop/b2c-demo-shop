@@ -17,6 +17,47 @@
         <action>index</action>
         <icon>fa-chart-area</icon>
     </dashboard>
+  <book>
+    <label>Book Management</label>
+    <title>Book Management</title>
+    <bundle>book</bundle>
+    <icon>fa-list</icon>
+    <pages>
+        <list>
+            <label>Book List</label>
+            <title>Book List</title>
+            <bundle>book</bundle>
+            <controller>book</controller>
+            <action>index</action>
+            <visible>1</visible>
+        </list>
+        <create>
+            <label>Create Book</label>
+            <title>Create Book</title>
+            <bundle>book</bundle>
+            <controller>book</controller>
+            <action>create</action>
+            <visible>1</visible>
+        </create>
+        <edit>
+            <label>Edit Book</label>
+            <title>Edit Book</title>
+            <bundle>book</bundle>
+            <controller>book</controller>
+            <action>edit</action>
+            <visible>0</visible>
+        </edit>
+        <delete>
+            <label>Delete Book</label>
+            <title>Delete Book</title>
+            <bundle>book</bundle>
+            <controller>book</controller>
+            <action>delete</action>
+            <visible>0</visible>
+        </delete>
+    </pages>
+</book>
+
     <sales>
         <label>Sales</label>
         <uri>/sales</uri>
@@ -360,14 +401,14 @@
                 <action>index</action>
                 <visible>0</visible>
             </dynamic-entity-create>
-            <dynamic-entity-edit>
+            <dynamic-entity-Delete>
                 <label>Edit configuration</label>
                 <title>Edit configuration</title>
                 <bundle>dynamic-entity-gui</bundle>
                 <controller>configuration-edit</controller>
                 <action>index</action>
                 <visible>0</visible>
-            </dynamic-entity-edit>
+            </dynamic-entity-Delete>
         </pages>
     </dynamic-entities-gui>
     <administration>

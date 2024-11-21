@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<database
+    xmlns="spryker:schema-01"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    name="zed"
+    xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd"
+    namespace="Orm\Zed\PublishAndSynchronizeHealthCheck\Persistence"
+    package="src.Orm.Zed.PublishAndSynchronizeHealthCheck.Persistence"
+>
+
+    <table name="spy_publish_and_synchronize_health_check" idMethod="native" class="SpyPublishAndSynchronizeHealthCheck">
+        <column name="id_publish_and_synchronize_health_check" required="true" type="INTEGER" primaryKey="true" autoIncrement="true"/>
+        <column name="health_check_key" required="true" type="VARCHAR" size="255"/>
+        <column name="health_check_data" required="true" type="VARCHAR" size="255"/>
+        <unique name="spy_publish_and_synchronize_health_check-health_check_key">
+            <unique-column name="health_check_key"/>
+        </unique>
+        <id-method-parameter value="spy_publish_and_synchronize_health_check_pk_seq"/>
+        <behavior name="event">
+            <parameter name="spy_publish_and_synchronize_health_check_all" column="*"/>
+        </behavior>
+        <behavior name="timestampable"/>
+    </table>
+
+</database>

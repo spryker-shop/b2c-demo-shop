@@ -1,0 +1,14 @@
+<database name="zed"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://static.spryker.com/schema-01.xsd"
+    namespace="Orm\Zed\Book\Persistence"
+    package="src.Orm.Zed.Book.Persistence">
+    <table name="pyz_book">
+        <column name="id_book" type="INTEGER" required="true" primaryKey="true" autoIncrement="true"/>
+        <column name="name" type="VARCHAR" size="255" required="true"/>
+        <column name="description" type="VARCHAR" size="255" required="true"/>
+        <column name="publication_date" type="TIMESTAMP" required="true"/>
+        <column name="created_at" type="TIMESTAMP" required="true"/>
+        <column name="updated_at" type="TIMESTAMP" required="true"/>
+    </table>
+</database>

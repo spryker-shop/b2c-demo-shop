@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<database xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:noNamespaceSchemaLocation="http://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\PickingList\Persistence" package="src.Orm.Zed.PickingList.Persistence">
+
+    <table name="spy_picking_list" idMethod="native" class="SpyPickingList">
+        <column name="id_picking_list" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="uuid" type="VARCHAR" size="36"/>
+        <column name="fk_warehouse" required="true" type="INTEGER"/>
+        <column name="user_uuid" required="false" type="VARCHAR" size="36"/>
+        <column name="status" required="true" type="VARCHAR" size="255"/>
+
+        <unique name="spy_picking_list-unique-uuid">
+            <unique-column name="uuid"/>
+        </unique>
+
+        <index name="spy_picking_list-fk_warehouse">
+            <index-column name="fk_warehouse"/>
+        </index>
+
+        <foreign-key name="spy_picking_list-fk_warehouse" foreignTable="spy_stock">
+            <reference foreign="id_stock" local="fk_warehouse"/>
+        </foreign-key>
+
+        <index name="spy_picking_list-user_uuid">
+            <index-column name="user_uuid"/>
+        </index>
+
+        <index name="spy_picking_list-status">
+            <index-column name="status"/>
+        </index>
+
+        <behavior name="uuid">
+            <parameter name="key_columns" value="id_picking_list"/>
+        </behavior>
+
+        <behavior name="timestampable"/>
+        <id-method-parameter value="spy_picking_list_pk_seq"/>
+    </table>
+
+    <table name="spy_picking_list_item" idMethod="native" class="SpyPickingListItem">
+        <column name="id_picking_list_item" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="uuid" type="VARCHAR" size="36"/>
+        <column name="fk_picking_list" type="INTEGER" required="true"/>
+        <column name="sales_order_item_uuid" required="true" type="VARCHAR" size="36"/>
+        <column name="quantity" required="true" type="INTEGER"/>
+        <column name="number_of_picked" required="true" type="INTEGER" default="0"/>
+        <column name="number_of_not_picked" required="true" type="INTEGER" default="0"/>
+
+        <unique name="spy_picking_list_item-unique-uuid">
+            <unique-column name="uuid"/>
+        </unique>
+
+        <index name="spy_picking_list_item-sales_order_item_uuid">
+            <index-column name="sales_order_item_uuid"/>
+        </index>
+
+        <index name="spy_picking_list_item-fk_picking_list">
+            <index-column name="fk_picking_list"/>
+        </index>
+
+        <foreign-key name="spy_picking_list-fk_picking_list" foreignTable="spy_picking_list">
+            <reference foreign="id_picking_list" local="fk_picking_list"/>
+        </foreign-key>
+
+        <behavior name="uuid">
+            <parameter name="key_columns" value="id_picking_list_item"/>
+        </behavior>
+
+        <behavior name="timestampable"/>
+        <id-method-parameter value="spy_picking_list_item_pk_seq"/>
+    </table>
+
+</database>

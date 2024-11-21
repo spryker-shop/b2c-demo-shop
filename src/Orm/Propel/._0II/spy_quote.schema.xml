@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<database xmlns="spryker:schema-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\Quote\Persistence" package="src.Orm.Zed.Quote.Persistence">
+    <table name="spy_quote" idMethod="native" allowPkInsert="true">
+        <column name="id_quote" required="true" type="INTEGER" primaryKey="true" autoIncrement="true"/>
+        <column name="fk_store" required="true" type="INTEGER"/>
+        <column name="customer_reference" required="true" type="VARCHAR" size="255"/>
+        <column name="quote_data" required="true" type="CLOB"/>
+        <column name="uuid" required="false" type="VARCHAR" size="255"/>
+        <foreign-key name="spy_quote-fk_store" foreignTable="spy_store">
+            <reference local="fk_store" foreign="id_store"/>
+        </foreign-key>
+        <index name="spy_quote-fk_store">
+            <index-column name="fk_store"/>
+        </index>
+        <index name="spy_quote-customer_reference">
+            <index-column name="customer_reference"/>
+        </index>
+        <unique name="spy_quote-unique-uuid">
+            <unique-column name="uuid"/>
+        </unique>
+        <id-method-parameter value="id_quote_pk_seq"/>
+        <behavior name="uuid">
+            <parameter name="key_columns" value="customer_reference.id_quote"/>
+        </behavior>
+        <behavior name="timestampable"/>
+    </table>
+</database>

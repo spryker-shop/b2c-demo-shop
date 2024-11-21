@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<database xmlns="spryker:schema-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\CustomerGroup\Persistence" package="src.Orm.Zed.CustomerGroup.Persistence">
+    <table name="spy_customer_group" idMethod="native">
+        <column name="id_customer_group" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="description" required="false" type="VARCHAR" size="255"/>
+        <column name="name" required="true" type="VARCHAR" size="70"/>
+        <unique name="spy_customer-name">
+            <unique-column name="name"/>
+        </unique>
+        <id-method-parameter value="spy_customer_group_pk_seq"/>
+        <behavior name="timestampable"/>
+    </table>
+    <table name="spy_customer_group_to_customer" idMethod="native">
+        <column name="id_customer_group_to_customer" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_customer" required="true" type="INTEGER"/>
+        <column name="fk_customer_group" type="INTEGER" required="true"/>
+        <foreign-key name="spy_customer_group_to_customer-fk_customer_group" foreignTable="spy_customer_group" phpName="CustomerGroup" onDelete="CASCADE">
+            <reference local="fk_customer_group" foreign="id_customer_group"/>
+        </foreign-key>
+        <foreign-key name="spy_customer_group_to_customer-fk_customer" foreignTable="spy_customer" phpName="Customer">
+            <reference local="fk_customer" foreign="id_customer"/>
+        </foreign-key>
+        <index name="index-spy_customer_group_to_customer-fk_customer">
+            <index-column name="fk_customer"/>
+        </index>
+        <unique name="fk_customer_group-fk_customer">
+            <unique-column name="fk_customer_group"/>
+            <unique-column name="fk_customer"/>
+        </unique>
+        <id-method-parameter value="spy_customer_group_to_customer_pk_seq"/>
+        <behavior name="timestampable"/>
+    </table>
+</database>
