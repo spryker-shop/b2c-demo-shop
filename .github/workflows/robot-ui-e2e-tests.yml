@@ -278,12 +278,12 @@ jobs:
                 id: run_tests
                 continue-on-error: true
                 run: |
-                    docker/sdk exec robot-framework robot -v env:ui_b2c -v db_engine:psycopg2 -v headless:true -v ignore_console:false -d results --exclude skip-due-to-issueORskip-due-to-refactoring --include group_one -s '*'.tests.ui.b2c .
+                    docker/sdk exec robot-framework robot -v env:ui_b2c yves_env:http://yves.eur.spryker.local -v db_engine:psycopg2 -v headless:true -v ignore_console:false -d results --exclude skip-due-to-issueORskip-due-to-refactoring --include group_one -s '*'.tests.ui.b2c .
                     docker/sdk exec robot-framework touch results/time.txt && echo $(date) > results/time.txt
             -   name: Rerun Failed Tests
                 if: steps.run_tests.outcome != 'success'
                 run: |
-                    docker/sdk exec robot-framework robot -v env:ui_b2c -v db_engine:psycopg2 -v headless:true -v ignore_console:false -d results/rerun --runemptysuite --rerunfailed results/output.xml --output rerun.xml -s '*'.tests.ui.b2c .
+                    docker/sdk exec robot-framework robot -v env:ui_b2c yves_env:http://yves.eur.spryker.local -v db_engine:psycopg2 -v headless:true -v ignore_console:false -d results/rerun --runemptysuite --rerunfailed results/output.xml --output rerun.xml -s '*'.tests.ui.b2c .
             -   name: Merge Test Results
                 if: always() && steps.run_tests.outcome != 'success'
                 run: |
@@ -348,12 +348,12 @@ jobs:
                 id: run_tests
                 continue-on-error: true
                 run: |
-                    docker/sdk exec robot-framework robot -v env:ui_b2c -v db_engine:psycopg2 -v headless:true -v ignore_console:false -d results --exclude skip-due-to-issueORskip-due-to-refactoring --include group_two -s '*'.tests.ui.b2c .
+                    docker/sdk exec robot-framework robot -v env:ui_b2c yves_env:http://yves.eur.spryker.local -v db_engine:psycopg2 -v headless:true -v ignore_console:false -d results --exclude skip-due-to-issueORskip-due-to-refactoring --include group_two -s '*'.tests.ui.b2c .
                     docker/sdk exec robot-framework touch results/time.txt && echo $(date) > results/time.txt
             -   name: Rerun Failed Tests
                 if: steps.run_tests.outcome != 'success'
                 run: |
-                    docker/sdk exec robot-framework robot -v env:ui_b2c -v db_engine:psycopg2 -v headless:true -v ignore_console:false -d results/rerun --runemptysuite --rerunfailed results/output.xml --output rerun.xml -s '*'.tests.ui.b2c .
+                    docker/sdk exec robot-framework robot -v env:ui_b2c yves_env:http://yves.eur.spryker.local -v db_engine:psycopg2 -v headless:true -v ignore_console:false -d results/rerun --runemptysuite --rerunfailed results/output.xml --output rerun.xml -s '*'.tests.ui.b2c .
             -   name: Merge Test Results
                 if: always() && steps.run_tests.outcome != 'success'
                 run: |
@@ -417,12 +417,12 @@ jobs:
                 id: run_tests
                 continue-on-error: true
                 run: |
-                    docker/sdk exec robot-framework robot -v env:ui_b2c -v db_engine:psycopg2 -v headless:true -v ignore_console:false -d results --exclude skip-due-to-issueORskip-due-to-refactoring --include group_tree -s '*'.tests.ui.b2c .
+                    docker/sdk exec robot-framework robot -v env:ui_b2c yves_env:http://yves.eur.spryker.local -v db_engine:psycopg2 -v headless:true -v ignore_console:false -d results --exclude skip-due-to-issueORskip-due-to-refactoring --include group_tree -s '*'.tests.ui.b2c .
                     docker/sdk exec robot-framework touch results/time.txt && echo $(date) > results/time.txt
             -   name: Rerun Failed Tests
                 if: steps.run_tests.outcome != 'success'
                 run: |
-                    docker/sdk exec robot-framework robot -v env:ui_b2c -v db_engine:psycopg2 -v headless:true -v ignore_console:false -d results/rerun --runemptysuite --rerunfailed results/output.xml --output rerun.xml -s '*'.tests.ui.b2c .
+                    docker/sdk exec robot-framework robot -v env:ui_b2c yves_env:http://yves.eur.spryker.local -v db_engine:psycopg2 -v headless:true -v ignore_console:false -d results/rerun --runemptysuite --rerunfailed results/output.xml --output rerun.xml -s '*'.tests.ui.b2c .
             -   name: Merge Test Results
                 if: always() && steps.run_tests.outcome != 'success'
                 run: |
