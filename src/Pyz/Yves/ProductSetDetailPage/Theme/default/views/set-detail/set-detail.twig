@@ -19,3 +19,33 @@
         }
     } only %}
 {% endblock %}
+
+{% block eventTracker %}
+    {% set products = data.views
+        | filter(product => product.idProductConcrete is not empty and product.available)
+        | map(product => {
+        sku: product.sku,
+        price: can('SeePricePermissionPlugin') ? product.prices.DEFAULT | default : null,
+        available: product.idProductConcrete is not empty and product.available,
+    })
+    %}
+    {% set events = {
+        list: events.list  | merge([
+            {
+                event: 'ADD_TO_CART',
+                name: 'click',
+                triggers: [
+                {
+                    selector: '[name="addItemsForm"] button[data-init-single-click]',
+                },
+            ],
+            }
+        ]),
+        data: events.data | merge({
+            page: 'PDP',
+            products: products,
+        }),
+    } %}
+
+    {{ parent() }}
+{% endblock %}
