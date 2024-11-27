@@ -213,6 +213,7 @@ class ShopApplicationDependencyProvider extends SprykerShopApplicationDependency
             CartSummaryHideTaxAmountWidget::class,
             ComparisonProductTogglerComparisonListWidget::class,
             LinkToProductComparisonListWidget::class,
+            TraceableEventWidget::class,
         ];
     }
 

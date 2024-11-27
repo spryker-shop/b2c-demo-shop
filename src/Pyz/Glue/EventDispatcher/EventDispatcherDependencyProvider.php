@@ -34,6 +34,7 @@ class EventDispatcherDependencyProvider extends SprykerEventDispatcherDependency
             new ResponseSecurityHeadersEventDispatcherPlugin(),
             new StrictTransportSecurityHeaderEventDispatcherPlugin(),
             new CacheControlHeaderEventDispatcherPlugin(),
+            new AnonymousIdSessionAssignEventDispatcherPlugin(),
         ];
     }
 
