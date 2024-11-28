@@ -24,6 +24,7 @@ use Spryker\Zed\DiscountPromotion\Communication\Plugin\Cart\DiscountPromotionCar
 use Spryker\Zed\GiftCard\Communication\Plugin\GiftCardMetadataExpanderPlugin;
 use Spryker\Zed\Kernel\Container;
 use Spryker\Zed\PaymentCartConnector\Communication\Plugin\Cart\RemovePaymentCartPostSavePlugin;
+use Spryker\Zed\PaymentCartConnector\Communication\Plugin\Cart\RemoveQuotePaymentCartItemExpanderPlugin;
 use Spryker\Zed\PriceCartConnector\Communication\Plugin\CartItemPricePlugin;
 use Spryker\Zed\PriceCartConnector\Communication\Plugin\CartItemPricePreCheckPlugin;
 use Spryker\Zed\PriceCartConnector\Communication\Plugin\FilterItemsWithoutPricePlugin;
@@ -87,6 +88,7 @@ class CartDependencyProvider extends SprykerCartDependencyProvider
             new ProductUrlItemExpanderPlugin(),
             new SanitizeCartShipmentItemExpanderPlugin(),
             new ProductConfigurationGroupKeyItemExpanderPlugin(),
+            new RemoveQuotePaymentCartItemExpanderPlugin(),
         ];
     }
 
