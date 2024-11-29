@@ -67,6 +67,7 @@ use Spryker\Shared\GlueStorefrontApiApplication\GlueStorefrontApiApplicationCons
 use Spryker\Shared\Http\HttpConstants;
 use Spryker\Shared\Kernel\KernelConstants;
 use Spryker\Shared\KernelApp\KernelAppConstants;
+use Spryker\Shared\Locale\LocaleConstants;
 use Spryker\Shared\Log\LogConstants;
 use Spryker\Shared\Mail\MailConstants;
 use Spryker\Shared\MessageBroker\MessageBrokerConstants;
@@ -128,6 +129,8 @@ use Spryker\Zed\Payment\PaymentConfig;
 use Spryker\Zed\Propel\PropelConfig;
 use SprykerShop\Shared\CustomerPage\CustomerPageConstants;
 use SprykerShop\Shared\ShopUi\ShopUiConstants;
+use SprykerShop\Shared\StorageRouter\StorageRouterConstants;
+use SprykerShop\Shared\StoreWidget\StoreWidgetConstants;
 use Symfony\Component\HttpFoundation\Cookie;
 
 // ############################################################################
@@ -165,6 +168,12 @@ $config[RouterConstants::YVES_SSL_EXCLUDED_ROUTE_NAMES] = [
 $config[RouterConstants::ZED_SSL_EXCLUDED_ROUTE_NAMES] = [
     'healthCheck' => 'health-check/index',
 ];
+
+$config[RouterConstants::IS_STORE_ROUTING_ENABLED]
+    = $config[StoreWidgetConstants::IS_STORE_ROUTING_ENABLED]
+    = $config[StorageRouterConstants::IS_STORE_ROUTING_ENABLED]
+    = $config[ShopUiConstants::IS_STORE_ROUTING_ENABLED]
+    = $config[LocaleConstants::IS_STORE_ROUTING_ENABLED] = (bool)getenv('SPRYKER_DYNAMIC_STORE_MODE');
 
 // >>> DEV TOOLS
 

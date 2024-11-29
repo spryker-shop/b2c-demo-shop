@@ -8,6 +8,7 @@
 namespace PyzTest\Yves\Customer;
 
 use Codeception\Actor;
+use Codeception\Step\Assertion;
 use PyzTest\Yves\Customer\PageObject\CustomerLoginPage;
 use PyzTest\Yves\Customer\PageObject\CustomerRegistrationPage;
 
@@ -61,5 +62,19 @@ class CustomerPresentationTester extends Actor
         $i->fillField(CustomerRegistrationPage::FORM_FIELD_SELECTOR_PASSWORD, $customerTransfer->getPassword());
         $i->fillField(CustomerRegistrationPage::FORM_FIELD_SELECTOR_PASSWORD_CONFIRM, $customerTransfer->getPassword());
         $i->click(CustomerRegistrationPage::FORM_FIELD_SELECTOR_ACCEPT_TERMS);
+    }
+
+    /**
+     * @param string $uri
+     *
+     * @return void
+     */
+    public function seeCurrentUrlEquals(string $uri): void
+    {
+        if ($this->getLocator()->store()->facade()->isDynamicStoreEnabled() === true) {
+            $uri = sprintf('%s%s', '/DE', $uri);
+        }
+
+        $this->getScenario()->runStep(new Assertion('seeCurrentUrlEquals', func_get_args()));
     }
 }
