@@ -5,26 +5,13 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-namespace Pyz\Yves\Router;
+namespace Pyz\Yves\StorageRouter;
 
 use Spryker\Client\Kernel\Container;
-use Spryker\Yves\Router\RouterConfig as SprykerRouterConfig;
+use SprykerShop\Yves\StorageRouter\StorageRouterConfig as SprykerShopStorageRouterConfig;
 
-/**
- * @method \Spryker\Shared\Router\RouterConfig getSharedConfig()
- */
-class RouterConfig extends SprykerRouterConfig
+class StorageRouterConfig extends SprykerShopStorageRouterConfig
 {
-    /**
-     * @see \Spryker\Yves\Router\Plugin\RouterEnhancer\LanguagePrefixRouterEnhancerPlugin
-     *
-     * @return array<string>
-     */
-    public function getAllowedLanguages(): array
-    {
-        return (new Container())->getLocator()->locale()->client()->getAllowedLanguages();
-    }
-
     /**
      * Specification:
      * - Returns a list of supported stores for Route manipulation.
