@@ -97,3 +97,60 @@
         {% endembed %}
     </div>
 {% endblock %}
+
+{% block eventTracker %}
+    {% set sku = data.product.idProductConcrete ? data.product.sku : (data.product.attributeMap is defined and data.product.attributeMap ? data.product.attributeMap.productConcreteIds | keys | first) | default(data.product.sku) %}
+
+    {% set events = {
+        list: events.list | merge([
+            {
+                event: 'ADD_TO_WISHLIST',
+                name: 'click',
+                triggers: [
+                    {
+                        selector: '.wishlist-selector__form button',
+                    },
+                ],
+            },
+            {
+                event: 'ADD_TO_CART',
+                name: 'click',
+                triggers: [
+                    {
+                        selector: 'body:has(.product-configurator__button-wrap button:focus)',
+                        groupAs: {
+                            key: 'products',
+                            toArray: true,
+                        },
+                        data: {
+                            quantity: [
+                                {
+                                    selector: 'select[name="quantity"]',
+                                    attribute: 'value',
+                                },
+                                {
+                                    selector: '.js-formatted-number-input__hidden-input',
+                                    attribute: 'value',
+                                }
+                            ],
+                            price: {
+                                selector: '[itemprop="price"]',
+                                attribute: 'content',
+                            },
+                            sku: {
+                                value: sku,
+                            },
+                        },
+                    },
+                ],
+            }
+        ]),
+        data: events.data | merge({
+            page: 'PDP',
+            products: [{ sku: sku }],
+            searchId: app.request.get('search-id'),
+        }),
+    } %}
+
+    {{ parent() }}
+{% endblock %}
