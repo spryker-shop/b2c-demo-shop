@@ -29,14 +29,3 @@
     </div>
 {% endblock %}
 
-{% block eventTracker %}
-    {% set events = {
-        list: events.list,
-        data: events.data | merge({
-            page: 'HOME',
-        }),
-    } %}
-
-    {{ parent() }}
-{% endblock %}
-
