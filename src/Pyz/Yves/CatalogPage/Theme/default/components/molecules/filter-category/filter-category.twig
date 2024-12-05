@@ -82,7 +82,7 @@
                 {% endif %}
 
                 <div class="{{ config.name }}__category-row {{ not hasChildren ? config.name ~ '__category-row--no-children' }}">
-                    <button class="{{ config.name }}__link {{ linkActiveClass }} {{ triggerButtonJsName }}" {{ disableAttribute }} type="button" data-url={{ categoryUrl }}>
+                    <button class="{{ config.name }}__link {{ linkActiveClass }} {{ triggerButtonJsName }}" {{ disableAttribute }} type="button" data-url={{ categoryUrl }} data-name="{{ categoryNode.name }}">
                         {{ categoryNode.name }}
                         <span class="text-secondary">({{ quantity | executeFilterIfExists('formatInt', app.locale) }})</span>
                     </button>
