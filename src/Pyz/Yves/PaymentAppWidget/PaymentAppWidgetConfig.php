@@ -8,6 +8,7 @@
 namespace Pyz\Yves\PaymentAppWidget;
 
 use Generated\Shared\Transfer\QuoteTransfer;
+use SprykerShop\Yves\CheckoutPage\Plugin\Router\CheckoutPageRouteProviderPlugin;
 use SprykerShop\Yves\PaymentAppWidget\PaymentAppWidgetConfig as SprykerPaymentAppWidgetConfig;
 
 class PaymentAppWidgetConfig extends SprykerPaymentAppWidgetConfig
@@ -32,4 +33,12 @@ class PaymentAppWidgetConfig extends SprykerPaymentAppWidgetConfig
         QuoteTransfer::SHIPPING_ADDRESS,
         QuoteTransfer::PRE_ORDER_PAYMENT_DATA,
     ];
+
+    /**
+     * @return string
+     */
+    public function getExpressCheckoutStartPageRouteName(): string
+    {
+        return CheckoutPageRouteProviderPlugin::ROUTE_NAME_CHECKOUT_INDEX;
+    }
 }
