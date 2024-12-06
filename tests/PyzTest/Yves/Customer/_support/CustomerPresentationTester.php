@@ -33,6 +33,11 @@ class CustomerPresentationTester extends Actor
     use _generated\CustomerPresentationTesterActions;
 
     /**
+     * @var string
+     */
+    protected const URL_STORE_PREFIX = '/DE';
+
+    /**
      * @param string $email
      * @param string $password
      *
@@ -72,7 +77,7 @@ class CustomerPresentationTester extends Actor
     public function seeCurrentUrlEquals(string $uri): void
     {
         if ($this->getLocator()->store()->facade()->isDynamicStoreEnabled() === true) {
-            $uri = sprintf('%s%s', '/DE', $uri);
+            $uri = sprintf('%s%s', static::URL_STORE_PREFIX, $uri);
         }
 
         $this->getScenario()->runStep(new Assertion('seeCurrentUrlEquals', func_get_args()));
