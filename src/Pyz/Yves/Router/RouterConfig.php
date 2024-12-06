@@ -24,4 +24,12 @@ class RouterConfig extends SprykerRouterConfig
     {
         return (new Container())->getLocator()->locale()->client()->getAllowedLanguages();
     }
+
+    /**
+     * @return array<string>
+     */
+    public function getAllowedStores(): array
+    {
+        return (new Container())->getLocator()->storeStorage()->client()->getStoreNames();
+    }
 }
