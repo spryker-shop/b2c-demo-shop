@@ -168,4 +168,8 @@
     {% block notifications %}
         {% include organism('notification-area') only %}
     {% endblock %}
+
+    {% block traceableEvent %}
+        {{ parent() }}
+    {% endblock %}
 {% endblock %}
