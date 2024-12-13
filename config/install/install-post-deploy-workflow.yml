@@ -4,4 +4,4 @@ sections:
       command: 'mkdir -p ./data/tmp && cd ./data/tmp && composer require spryker/cypress-tests:dev-master'
   run-post-deploy-workflow-handler:
     run-script:
-      command: 'bash ./data/tmp/vendor/spryker/cypress-tests/post-deploy-workflow/post-deploy-workflow-trigger.sh --deploy-file=deploy.spryker-b2cprodeu.yml --demo-shop-type=b2c --npm-command=cy:smoke --github-workflow-runner-bearer-token=$GITHUB_WORKFLOW_RUNNER_BEARER_TOKEN --github-workflow-runner-org-name=spryker --github-workflow-runner-repository=cypress-tests'
+      command: 'bash ./data/tmp/vendor/spryker/cypress-tests/post-deploy-workflow/post-deploy-workflow-trigger.sh --deploy-file=deploy.spryker-b2cprod.yml --demo-shop-type=b2c --npm-command=cy:smoke --github-workflow-runner-bearer-token=$GITHUB_WORKFLOW_RUNNER_BEARER_TOKEN --github-workflow-runner-org-name=spryker --github-workflow-runner-repository=cypress-tests'
