@@ -26,19 +26,29 @@ class CustomerPageConfig extends SprykerCustomerPageConfig
      *
      * @var int
      */
-    protected const MIN_LENGTH_CUSTOMER_PASSWORD = 8;
+    protected const MIN_LENGTH_CUSTOMER_PASSWORD = 12;
 
     /**
      * @uses \Pyz\Zed\Customer\CustomerConfig::MAX_LENGTH_CUSTOMER_PASSWORD
      *
      * @var int
      */
-    protected const MAX_LENGTH_CUSTOMER_PASSWORD = 64;
+    protected const MAX_LENGTH_CUSTOMER_PASSWORD = 128;
 
     /**
      * @var bool
      */
     protected const IS_ORDER_HISTORY_SEARCH_ENABLED = true;
+
+    /**
+     * @var string
+     */
+    protected const PASSWORD_VALIDATION_PATTERN = '/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()\_\-\=\+\[\]\{\}\|;:<>.,\/?\\~])[A-Za-z\d!@#$%^&*()\_\-\=\+\[\]\{\}\|;:<>.,\/?\\~]+$/';
+
+    /**
+     * @var string
+     */
+    protected const PASSWORD_VALIDATION_MESSAGE = 'global.password.invalid_password';
 
     /**
      * {@inheritDoc}
@@ -72,5 +82,31 @@ class CustomerPageConfig extends SprykerCustomerPageConfig
     public function isLocaleInLoginCheckPath(): bool
     {
         return true;
+    }
+
+    /**
+     * Specification:
+     * - Returns the pattern for customer password validation.
+     *
+     * @api
+     *
+     * @return string
+     */
+    public function getCustomerPasswordPattern(): string
+    {
+        return static::PASSWORD_VALIDATION_PATTERN;
+    }
+
+    /**
+     * Specification:
+     * - Returns the message for customer password validation.
+     *
+     * @api
+     *
+     * @return string
+     */
+    public function getPasswordValidationMessage(): string
+    {
+        return static::PASSWORD_VALIDATION_MESSAGE;
     }
 }
