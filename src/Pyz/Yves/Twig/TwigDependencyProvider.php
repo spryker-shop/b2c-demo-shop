@@ -10,10 +10,10 @@ namespace Pyz\Yves\Twig;
 use Pyz\Yves\CartPage\Plugin\Twig\CartTwigPlugin;
 use Pyz\Yves\CartPage\Plugin\Twig\QuoteTwigPlugin;
 use Spryker\Service\UtilDateTime\Plugin\Twig\DateTimeFormatterTwigPlugin;
-use Spryker\Shared\Twig\Plugin\DebugTwigPlugin;
 use Spryker\Shared\Twig\Plugin\FormTwigPlugin;
 use Spryker\Shared\Twig\Plugin\RoutingTwigPlugin;
 use Spryker\Shared\Twig\Plugin\SecurityTwigPlugin;
+use Spryker\Shared\Twig\Plugin\VarDumperTwigPlugin;
 use Spryker\Yves\CmsContentWidget\Plugin\Twig\CmsContentWidgetTwigPlugin;
 use Spryker\Yves\Http\Plugin\Twig\HttpKernelTwigPlugin;
 use Spryker\Yves\Http\Plugin\Twig\RuntimeLoaderTwigPlugin;
@@ -55,7 +55,7 @@ class TwigDependencyProvider extends SprykerTwigDependencyProvider
     protected function getTwigPlugins(): array
     {
         return [
-            new DebugTwigPlugin(),
+            new VarDumperTwigPlugin(),
             new FormTwigPlugin(),
             new HttpKernelTwigPlugin(),
             new RoutingTwigPlugin(),
