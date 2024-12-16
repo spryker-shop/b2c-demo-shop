@@ -275,7 +275,7 @@ class CustomerUpdateCest
         // Arrange
         $restCustomersAttributesTransfer = (new RestCustomersAttributesTransfer())
             ->setPassword('Change!23456')
-            ->setConfirmPassword('change1234')
+            ->setConfirmPassword('Change!234564')
             ->setGender($this->customerTransfer->getGender())
             ->setSalutation($this->customerTransfer->getSalutation());
 

@@ -180,7 +180,7 @@ class CustomerRegistrationCest
             [
                 'attributes' => (new RestCustomersAttributesBuilder([
                     RestCustomersAttributesTransfer::PASSWORD => 'Change!23456',
-                    RestCustomersAttributesTransfer::CONFIRM_PASSWORD => 'change1234',
+                    RestCustomersAttributesTransfer::CONFIRM_PASSWORD => 'Change!234564',
                     RestCustomersAttributesTransfer::ACCEPTED_TERMS => true,
                 ]))->build(),
                 RestErrorMessageTransfer::STATUS => Response::HTTP_UNPROCESSABLE_ENTITY,
