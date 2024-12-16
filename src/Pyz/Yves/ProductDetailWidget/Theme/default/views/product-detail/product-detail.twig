@@ -1,0 +1,13 @@
+{% extends template('widget') %}
+
+{% define data = {
+    createdAt: _widget.productAbstract.getCreatedAt,
+    updatedAt: _widget.productAbstract.getUpdatedAt
+} %}
+
+{% block body %}
+    <div class="product-details">
+        <p>Created At: {{ data.createdAt|date('Y-m-d H:i:s') }}</p>
+        <p>Updated At: {{ data.updatedAt|date('Y-m-d H:i:s') }}</p>
+    </div>
+{% endblock %}
