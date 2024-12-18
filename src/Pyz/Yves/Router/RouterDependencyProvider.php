@@ -49,6 +49,7 @@ use SprykerShop\Yves\NewsletterWidget\Plugin\Router\NewsletterWidgetRouteProvide
 use SprykerShop\Yves\OrderCancelWidget\Plugin\Router\OrderCancelWidgetRouteProviderPlugin;
 use SprykerShop\Yves\OrderCustomReferenceWidget\Plugin\Router\OrderCustomReferenceWidgetAsyncRouteProviderPlugin;
 use SprykerShop\Yves\OrderCustomReferenceWidget\Plugin\Router\OrderCustomReferenceWidgetRouteProviderPlugin;
+use SprykerShop\Yves\PaymentAppWidget\Plugin\Router\PaymentAppWidgetRouteProviderPlugin;
 use SprykerShop\Yves\PaymentPage\Plugin\Router\PaymentPageRouteProviderPlugin;
 use SprykerShop\Yves\PriceWidget\Plugin\Router\PriceWidgetRouteProviderPlugin;
 use SprykerShop\Yves\ProductComparisonPage\Plugin\Router\ProductComparisonPageRouteProviderPlugin;
@@ -126,6 +127,7 @@ class RouterDependencyProvider extends SprykerRouterDependencyProvider
             new ConfigurableBundleWidgetAsyncRouteProviderPlugin(),
             new OrderCustomReferenceWidgetAsyncRouteProviderPlugin(),
             new ProductComparisonPageRouteProviderPlugin(),
+            new PaymentAppWidgetRouteProviderPlugin(),
         ];
     }
 
@@ -147,8 +149,8 @@ class RouterDependencyProvider extends SprykerRouterDependencyProvider
     protected function getRouterEnhancerPlugins(): array
     {
         return [
-            new LanguagePrefixRouterEnhancerPlugin(),
             new StorePrefixRouterEnhancerPlugin(),
+            new LanguagePrefixRouterEnhancerPlugin(),
         ];
     }
 }

@@ -3,27 +3,33 @@ customers:
         password:
             - NotBlank
             - Length:
-                  min: 8
-                  max: 64
+                  min: 12
+                  max: 128
+            - Regex:
+                  pattern: '/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()\_\-\=\+\[\]\{\}\|;:<>.,\/?\\~])[A-Za-z\d!@#$%^&*()\_\-\=\+\[\]\{\}\|;:<>.,\/?\\~]+$/'
+            - NotCompromisedPassword
         confirmPassword:
             - NotBlank
             - Length:
-                  min: 8
-                  max: 64
+                  min: 12
+                  max: 128
     patch:
         password:
             - Optional:
                   constraints:
                       - Length:
-                            min: 8
-                            max: 64
+                            min: 12
+                            max: 128
+                      - Regex:
+                            pattern: '/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()\_\-\=\+\[\]\{\}\|;:<>.,\/?\\~])[A-Za-z\d!@#$%^&*()\_\-\=\+\[\]\{\}\|;:<>.,\/?\\~]+$/'
+                      - NotCompromisedPassword
 
         confirmPassword:
             - Optional:
                   constraints:
                       - Length:
-                            min: 8
-                            max: 64
+                            min: 12
+                            max: 128
 
 customer-password:
     patch:
@@ -32,23 +38,29 @@ customer-password:
         newPassword:
             - NotBlank
             - Length:
-                  min: 8
-                  max: 64
+                  min: 12
+                  max: 128
+            - Regex:
+                  pattern: '/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()\_\-\=\+\[\]\{\}\|;:<>.,\/?\\~])[A-Za-z\d!@#$%^&*()\_\-\=\+\[\]\{\}\|;:<>.,\/?\\~]+$/'
+            - NotCompromisedPassword
         confirmPassword:
             - NotBlank
             - Length:
-                  min: 8
-                  max: 64
+                  min: 12
+                  max: 128
 
 customer-restore-password:
     patch:
         password:
             - NotBlank
             - Length:
-                  min: 8
-                  max: 64
+                  min: 12
+                  max: 128
+            - Regex:
+                  pattern: '/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()\_\-\=\+\[\]\{\}\|;:<>.,\/?\\~])[A-Za-z\d!@#$%^&*()\_\-\=\+\[\]\{\}\|;:<>.,\/?\\~]+$/'
+            - NotCompromisedPassword
         confirmPassword:
             - NotBlank
             - Length:
-                  min: 8
-                  max: 64
+                  min: 12
+                  max: 128

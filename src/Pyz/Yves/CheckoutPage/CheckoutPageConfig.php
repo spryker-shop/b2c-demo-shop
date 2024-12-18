@@ -21,4 +21,14 @@ class CheckoutPageConfig extends SprykerCheckoutPageConfig
             'de_DE' => '/de/agb',
         ];
     }
+
+    /**
+     * @return list<string>
+     */
+    public function getExcludedPaymentMethodKeys(): array
+    {
+        return [
+            'payone-paypal-express',
+        ];
+    }
 }
