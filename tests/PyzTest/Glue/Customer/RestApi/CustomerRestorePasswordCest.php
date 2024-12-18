@@ -116,20 +116,20 @@ class CustomerRestorePasswordCest
         return [
             [
                 'attributes' => [
-                    RestCustomerRestorePasswordAttributesTransfer::PASSWORD => 'qwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiop',
-                    RestCustomerRestorePasswordAttributesTransfer::CONFIRM_PASSWORD => 'qwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiop',
+                    RestCustomerRestorePasswordAttributesTransfer::PASSWORD => 'Change!23456pqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuioppqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwert',
+                    RestCustomerRestorePasswordAttributesTransfer::CONFIRM_PASSWORD => 'Change!23456pqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuioppqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwert',
                 ],
                 RestErrorMessageTransfer::STATUS => Response::HTTP_UNPROCESSABLE_ENTITY,
                 'errors' => [
                     [
                         RestErrorMessageTransfer::CODE => RestRequestValidatorConfig::RESPONSE_CODE_REQUEST_INVALID,
                         RestErrorMessageTransfer::STATUS => Response::HTTP_UNPROCESSABLE_ENTITY,
-                        RestErrorMessageTransfer::DETAIL => 'password => This value is too long. It should have 64 characters or less.',
+                        RestErrorMessageTransfer::DETAIL => 'password => This value is too long. It should have 128 characters or less.',
                     ],
                     [
                         RestErrorMessageTransfer::CODE => RestRequestValidatorConfig::RESPONSE_CODE_REQUEST_INVALID,
                         RestErrorMessageTransfer::STATUS => Response::HTTP_UNPROCESSABLE_ENTITY,
-                        RestErrorMessageTransfer::DETAIL => 'confirmPassword => This value is too long. It should have 64 characters or less.',
+                        RestErrorMessageTransfer::DETAIL => 'confirmPassword => This value is too long. It should have 128 characters or less.',
                     ],
                 ],
             ],
@@ -143,12 +143,22 @@ class CustomerRestorePasswordCest
                     [
                         RestErrorMessageTransfer::CODE => RestRequestValidatorConfig::RESPONSE_CODE_REQUEST_INVALID,
                         RestErrorMessageTransfer::STATUS => Response::HTTP_UNPROCESSABLE_ENTITY,
-                        RestErrorMessageTransfer::DETAIL => 'password => This value is too short. It should have 8 characters or more.',
+                        RestErrorMessageTransfer::DETAIL => 'password => This value is too short. It should have 12 characters or more.',
                     ],
                     [
                         RestErrorMessageTransfer::CODE => RestRequestValidatorConfig::RESPONSE_CODE_REQUEST_INVALID,
                         RestErrorMessageTransfer::STATUS => Response::HTTP_UNPROCESSABLE_ENTITY,
-                        RestErrorMessageTransfer::DETAIL => 'confirmPassword => This value is too short. It should have 8 characters or more.',
+                        RestErrorMessageTransfer::DETAIL => 'password => This value is not valid.',
+                    ],
+                    [
+                        RestErrorMessageTransfer::CODE => RestRequestValidatorConfig::RESPONSE_CODE_REQUEST_INVALID,
+                        RestErrorMessageTransfer::STATUS => Response::HTTP_UNPROCESSABLE_ENTITY,
+                        RestErrorMessageTransfer::DETAIL => 'password => This password has been leaked in a data breach, it must not be used. Please use another password.',
+                    ],
+                    [
+                        RestErrorMessageTransfer::CODE => RestRequestValidatorConfig::RESPONSE_CODE_REQUEST_INVALID,
+                        RestErrorMessageTransfer::STATUS => Response::HTTP_UNPROCESSABLE_ENTITY,
+                        RestErrorMessageTransfer::DETAIL => 'confirmPassword => This value is too short. It should have 12 characters or more.',
                     ],
                 ],
             ],

@@ -30,14 +30,14 @@ class Customer
             'firstName' => 'New',
             'lastName' => 'Customer',
             'email' => self::NEW_CUSTOMER_EMAIL,
-            'password' => 'sP3yK3r%23',
+            'password' => 'sP3yK3r%23!23',
         ],
         self::REGISTERED_CUSTOMER_EMAIL => [
             'salutation' => 'Mrs',
             'firstName' => 'Registered',
             'lastName' => 'Customer',
             'email' => self::REGISTERED_CUSTOMER_EMAIL,
-            'password' => 'sP3yK3r%23',
+            'password' => 'sP3yK3r%23!23',
         ],
     ];
 
