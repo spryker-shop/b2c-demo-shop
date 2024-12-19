@@ -27,6 +27,11 @@ class CustomerConfig extends SprykerCustomerConfig
     protected const MAX_LENGTH_CUSTOMER_PASSWORD = 128;
 
     /**
+     * @var bool
+     */
+    protected const IS_CUSTOMER_EMAIL_VALIDATION_CASE_SENSITIVE = true;
+
+    /**
      * {@inheritDoc}
      *
      * @return array<string>
