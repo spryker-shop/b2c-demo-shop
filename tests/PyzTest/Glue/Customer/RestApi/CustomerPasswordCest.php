@@ -230,7 +230,7 @@ class CustomerPasswordCest
                     [
                         RestErrorMessageTransfer::CODE => RestRequestValidatorConfig::RESPONSE_CODE_REQUEST_INVALID,
                         RestErrorMessageTransfer::STATUS => Response::HTTP_UNPROCESSABLE_ENTITY,
-                        RestErrorMessageTransfer::DETAIL => 'newPassword => This value is not valid.',
+                        RestErrorMessageTransfer::DETAIL => 'newPassword => Your password must include at least one uppercase letter, one lowercase letter, one number, and one special character from the following list: !@#$%^&*()_-+=[]{}|;:<>.,/?\~. Non-Latin and other special characters are not allowed.',
                     ],
                     [
                         RestErrorMessageTransfer::CODE => RestRequestValidatorConfig::RESPONSE_CODE_REQUEST_INVALID,
