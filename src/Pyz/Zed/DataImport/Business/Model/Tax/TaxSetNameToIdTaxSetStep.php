@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace Pyz\Zed\DataImport\Business\Model\Tax;
 
 use Orm\Zed\Tax\Persistence\SpyTaxSetQuery;
@@ -43,7 +45,7 @@ class TaxSetNameToIdTaxSetStep implements DataImportStepInterface
      * @param string $source
      * @param string $target
      */
-    public function __construct($source = self::KEY_SOURCE, $target = self::KEY_TARGET)
+    public function __construct(string $source = self::KEY_SOURCE, string $target = self::KEY_TARGET)
     {
         $this->source = $source;
         $this->target = $target;
@@ -78,7 +80,7 @@ class TaxSetNameToIdTaxSetStep implements DataImportStepInterface
      *
      * @return int
      */
-    protected function resolveIdStock($taxSetName): int
+    protected function resolveIdStock(string $taxSetName): int
     {
         $taxSetEntity = SpyTaxSetQuery::create()
             ->filterByName($taxSetName)

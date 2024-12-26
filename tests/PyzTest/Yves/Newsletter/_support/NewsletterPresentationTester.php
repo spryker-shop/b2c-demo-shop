@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace PyzTest\Yves\Newsletter;
 
 use Codeception\Actor;
@@ -38,7 +40,7 @@ class NewsletterPresentationTester extends Actor
      *
      * @return void
      */
-    public function haveAnAlreadySubscribedEmail($email): void
+    public function haveAnAlreadySubscribedEmail(string $email): void
     {
         $newsletterSubscriberEntity = new SpyNewsletterSubscriber();
         $newsletterSubscriberEntity

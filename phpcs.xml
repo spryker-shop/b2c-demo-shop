@@ -22,14 +22,15 @@
     <exclude-pattern>*/tests/_output/*</exclude-pattern>
     <exclude-pattern>*/tests/*/_data/*</exclude-pattern>
 
-    <rule ref="vendor/spryker/code-sniffer/Spryker/ruleset.xml"/>
-
-    <rule ref="vendor/spryker/code-sniffer/SprykerStrict/ruleset.xml">
-        <exclude name="SprykerStrict.TypeHints.ParameterTypeHint"/>
-        <exclude name="SprykerStrict.TypeHints.PropertyTypeHint"/>
+    <rule ref="vendor/spryker/code-sniffer/Spryker/ruleset.xml">
+        <exclude name="Spryker.Commenting.DocBlock"/>
+        <exclude name="Spryker.Commenting.DocBlockConst"/>
+        <exclude name="Spryker.Commenting.InlineDocBlock"/>
+        <exclude name="Spryker.Commenting.DocBlockApiAnnotation"/>
+        <exclude name="Spryker.Commenting.DocBlockReturnVoid"/>
     </rule>
 
-    <!-- Define your own sniffs here -->
+    <rule ref="vendor/spryker/code-sniffer/SprykerStrict/ruleset.xml"/>
 
     <rule ref="Spryker.Internal.SprykerDisallowFunctions">
         <properties>
@@ -57,4 +58,16 @@
         <severity>0</severity>
     </rule>
 
+    <rule ref="SlevomatCodingStandard.TypeHints.DeclareStrictTypes"/>
+    <rule ref="SlevomatCodingStandard.Operators.DisallowEqualOperators"/>
+    <rule ref="SlevomatCodingStandard.ControlStructures.EarlyExit"/>
+    <rule ref="SlevomatCodingStandard.PHP.OptimizedFunctionsWithoutUnpacking"/>
+    <rule ref="SlevomatCodingStandard.PHP.UselessSemicolon"/>
+    <rule ref="SlevomatCodingStandard.Variables.DisallowSuperGlobalVariable"/>
+    <rule ref="SlevomatCodingStandard.Variables.UselessVariable"/>
+    <rule ref="SlevomatCodingStandard.ControlStructures.UselessTernaryOperator"/>
+    <rule ref="SlevomatCodingStandard.Functions.UnusedParameter"/>
+    <rule ref="SlevomatCodingStandard.Variables.UnusedVariable"/>
+
+    <!-- Define your own sniffs here -->
 </ruleset>

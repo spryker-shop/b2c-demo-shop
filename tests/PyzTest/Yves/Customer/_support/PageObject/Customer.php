@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace PyzTest\Yves\Customer\PageObject;
 
 use Generated\Shared\Transfer\CustomerTransfer;
@@ -46,7 +48,7 @@ class Customer
      *
      * @return \Generated\Shared\Transfer\CustomerTransfer
      */
-    public static function getCustomerData($email): CustomerTransfer
+    public static function getCustomerData(string $email): CustomerTransfer
     {
         $customerTransfer = new CustomerTransfer();
         $customerTransfer->fromArray(self::$customer[$email]);

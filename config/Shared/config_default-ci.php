@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 use Monolog\Logger;
 use Pyz\Shared\Console\ConsoleConstants;
 use Spryker\Shared\AppCatalogGui\AppCatalogGuiConstants;

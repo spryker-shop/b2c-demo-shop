@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace Pyz\Zed\DataImport\Business\Model\Navigation;
 
 use Orm\Zed\Navigation\Persistence\SpyNavigationQuery;
@@ -44,7 +46,7 @@ class NavigationKeyToIdNavigationStep implements DataImportStepInterface
      * @param string $source
      * @param string $target
      */
-    public function __construct($source = self::KEY_SOURCE, $target = self::KEY_TARGET)
+    public function __construct(string $source = self::KEY_SOURCE, string $target = self::KEY_TARGET)
     {
         $this->source = $source;
         $this->target = $target;
@@ -83,7 +85,7 @@ class NavigationKeyToIdNavigationStep implements DataImportStepInterface
      *
      * @return int
      */
-    protected function resolveIdNavigation($navigationKey): int
+    protected function resolveIdNavigation(string $navigationKey): int
     {
         $navigationEntity = SpyNavigationQuery::create()
             ->findOneByKey($navigationKey);

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 use Spryker\Shared\DummyPayment\DummyPaymentConfig;
 use Spryker\Shared\Kernel\KernelConstants;
 use Spryker\Shared\Nopayment\NopaymentConfig;

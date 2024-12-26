@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 use Generated\Shared\Transfer\AddPaymentMethodTransfer;
 use Generated\Shared\Transfer\AddReviewsTransfer;
 use Generated\Shared\Transfer\AppConfigUpdatedTransfer;

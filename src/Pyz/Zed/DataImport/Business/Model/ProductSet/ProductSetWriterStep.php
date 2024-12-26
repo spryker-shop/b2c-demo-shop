@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace Pyz\Zed\DataImport\Business\Model\ProductSet;
 
 use Orm\Zed\ProductImage\Persistence\SpyProductImageQuery;
@@ -173,11 +175,13 @@ class ProductSetWriterStep extends PublishAwareStep implements DataImportStepInt
             $position++;
             $productAbstractSetEntity->setPosition($position);
 
-            if ($productAbstractSetEntity->isNew() || $productAbstractSetEntity->isModified()) {
-                $productAbstractSetEntity->save();
-
-                $this->addPublishEvents(ProductEvents::PRODUCT_ABSTRACT_PUBLISH, $idProductAbstract);
+            if (!$productAbstractSetEntity->isNew() && !$productAbstractSetEntity->isModified()) {
+                continue;
             }
+
+            $productAbstractSetEntity->save();
+
+            $this->addPublishEvents(ProductEvents::PRODUCT_ABSTRACT_PUBLISH, $idProductAbstract);
         }
     }
 
@@ -217,10 +221,12 @@ class ProductSetWriterStep extends PublishAwareStep implements DataImportStepInt
 
             $productSetUrlEntity->setUrl($localizedAttributes[static::KEY_URL]);
 
-            if ($productSetUrlEntity->isNew() || $productSetUrlEntity->isModified()) {
-                $productSetUrlEntity->save();
-                $this->addPublishEvents(UrlEvents::URL_PUBLISH, $productSetUrlEntity->getIdUrl());
+            if (!$productSetUrlEntity->isNew() && !$productSetUrlEntity->isModified()) {
+                continue;
             }
+
+            $productSetUrlEntity->save();
+            $this->addPublishEvents(UrlEvents::URL_PUBLISH, $productSetUrlEntity->getIdUrl());
         }
     }
 
@@ -260,9 +266,11 @@ class ProductSetWriterStep extends PublishAwareStep implements DataImportStepInt
 
                 $productImageSetToProductImageEntity->setSortOrder(0);
 
-                if ($productImageSetToProductImageEntity->isNew() || $productImageSetToProductImageEntity->isModified()) {
-                    $productImageSetToProductImageEntity->save();
+                if (!$productImageSetToProductImageEntity->isNew() && !$productImageSetToProductImageEntity->isModified()) {
+                    continue;
                 }
+
+                $productImageSetToProductImageEntity->save();
             }
         }
     }

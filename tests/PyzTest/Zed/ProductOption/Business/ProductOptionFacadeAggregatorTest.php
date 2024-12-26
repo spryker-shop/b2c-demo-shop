@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace PyzTest\Zed\ProductOption\Business;
 
 use Codeception\Test\Unit;
@@ -120,9 +122,7 @@ class ProductOptionFacadeAggregatorTest extends Unit
      */
     protected function createProductOptionFacade(): ProductOptionFacade
     {
-        $productOptionFacade = new ProductOptionFacade();
-
-        return $productOptionFacade;
+        return new ProductOptionFacade();
     }
 
     /**
@@ -196,7 +196,7 @@ class ProductOptionFacadeAggregatorTest extends Unit
      *
      * @return \Generated\Shared\Transfer\OrderTransfer
      */
-    protected function createOrderTransferWithRelatedPersistedData($createOptions = true): OrderTransfer
+    protected function createOrderTransferWithRelatedPersistedData(bool $createOptions = true): OrderTransfer
     {
         $address1 = $this->createSalesOrderAddress();
         $address2 = $this->createSalesOrderAddress();

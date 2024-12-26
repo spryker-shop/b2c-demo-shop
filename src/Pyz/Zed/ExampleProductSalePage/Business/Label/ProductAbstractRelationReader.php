@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace Pyz\Zed\ExampleProductSalePage\Business\Label;
 
 use Generated\Shared\Transfer\ProductLabelProductAbstractRelationsTransfer;
@@ -173,7 +175,7 @@ class ProductAbstractRelationReader implements ProductAbstractRelationReaderInte
      * @return \Generated\Shared\Transfer\ProductLabelProductAbstractRelationsTransfer
      */
     protected function mapRelationTransfer(
-        $idProductLabel,
+        int $idProductLabel,
         array $relationsToAssign,
         array $relationsToDeAssign,
     ): ProductLabelProductAbstractRelationsTransfer {

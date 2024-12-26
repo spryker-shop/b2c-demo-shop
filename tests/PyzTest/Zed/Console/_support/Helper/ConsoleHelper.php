@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace PyzTest\Zed\Console\Helper;
 
 use Codeception\Module;
@@ -45,7 +47,7 @@ class ConsoleHelper extends Module
      *
      * @return void
      */
-    public function runSprykerCommand($command): void
+    public function runSprykerCommand(string $command): void
     {
         $command = 'php ' . codecept_data_dir() . self::RUNNER . " $command";
         $this->getCli()->runShellCommand($command);

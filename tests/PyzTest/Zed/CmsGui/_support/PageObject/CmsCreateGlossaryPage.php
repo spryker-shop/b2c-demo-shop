@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace PyzTest\Zed\CmsGui\PageObject;
 
 class CmsCreateGlossaryPage
@@ -34,7 +36,7 @@ class CmsCreateGlossaryPage
      *
      * @return string
      */
-    public static function getLocalizedPlaceholderData($placeholder, $locale): string
+    public static function getLocalizedPlaceholderData(string $placeholder, string $locale): string
     {
         return static::$localizedPlaceholders[$placeholder][$locale];
     }
