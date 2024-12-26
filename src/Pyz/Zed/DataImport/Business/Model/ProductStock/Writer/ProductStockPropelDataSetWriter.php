@@ -495,7 +495,7 @@ class ProductStockPropelDataSetWriter implements DataSetWriterInterface
             ->findOne();
 
         $availabilityAbstractEntity->setFkStore($idStore);
-        $availabilityAbstractEntity->setQuantity($sumQuantity);
+        $availabilityAbstractEntity->setQuantity((string)$sumQuantity);
         $availabilityAbstractEntity->save();
 
         return $availabilityAbstractEntity;
