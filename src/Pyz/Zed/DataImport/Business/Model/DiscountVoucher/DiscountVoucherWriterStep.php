@@ -88,7 +88,7 @@ class DiscountVoucherWriterStep implements DataImportStepInterface
 
         $voucherBatch = $dataSet[static::KEY_VOUCHER_BATCH];
 
-        if ($this->voucherBatchExists($discountEntity, $voucherBatch)) {
+        if ($this->voucherBatchExists($discountEntity, (int)$voucherBatch)) {
             return;
         }
 
