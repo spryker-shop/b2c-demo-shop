@@ -25,7 +25,7 @@ class TestCommandPlugin extends AbstractPlugin implements CommandPluginInterface
      *
      * @return bool
      */
-    public function run(StateMachineItemTransfer $stateMachineItemTransfer): bool
+    public function run(StateMachineItemTransfer $stateMachineItemTransfer): bool // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
     {
         return true;
     }

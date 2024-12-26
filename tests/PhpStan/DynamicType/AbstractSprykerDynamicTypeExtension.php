@@ -47,7 +47,7 @@ abstract class AbstractSprykerDynamicTypeExtension implements DynamicMethodRetur
      *
      * @return \PHPStan\Type\Type
      */
-    public function getTypeFromMethodCall(MethodReflection $methodReflection, MethodCall $methodCall, Scope $scope): Type
+    public function getTypeFromMethodCall(MethodReflection $methodReflection, MethodCall $methodCall, Scope $scope): Type // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
     {
         $docComment = $scope->getClassReflection()->getNativeReflection()->getDocComment();
 

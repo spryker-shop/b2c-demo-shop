@@ -140,7 +140,7 @@ class OmsDependencyProvider extends SprykerOmsDependencyProvider
      *
      * @return array<\Spryker\Zed\OmsExtension\Dependency\Plugin\OmsOrderMailExpanderPluginInterface>
      */
-    protected function getOmsOrderMailExpanderPlugins(Container $container): array
+    protected function getOmsOrderMailExpanderPlugins(Container $container): array // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
     {
         return [
             new ShipmentOrderMailExpanderPlugin(),
@@ -152,7 +152,7 @@ class OmsDependencyProvider extends SprykerOmsDependencyProvider
      *
      * @return array<\Spryker\Zed\OmsExtension\Dependency\Plugin\OmsManualEventGrouperPluginInterface>
      */
-    protected function getOmsManualEventGrouperPlugins(Container $container): array
+    protected function getOmsManualEventGrouperPlugins(Container $container): array // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
     {
         return [
             new ShipmentManualEventGrouperPlugin(),

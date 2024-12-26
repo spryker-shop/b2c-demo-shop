@@ -25,9 +25,9 @@ class DebugHelper extends Module
      *
      * @return void
      */
-    public function _beforeSuite(array $settings = []): void
+    public function _beforeSuite(array $settings = []): void // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
     {
-        $_COOKIE['XDEBUG_SESSION'] = 'XDEBUG_ECLIPSE';
+        $_COOKIE['XDEBUG_SESSION'] = 'XDEBUG_ECLIPSE'; // phpcs:ignore SlevomatCodingStandard.Variables.DisallowSuperGlobalVariable
         $this->getConfigHelper()->setConfig(ZedRequestConstants::TRANSFER_DEBUG_SESSION_FORWARD_ENABLED, true);
     }
 }

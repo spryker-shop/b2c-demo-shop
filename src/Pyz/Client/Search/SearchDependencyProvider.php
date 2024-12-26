@@ -26,7 +26,7 @@ class SearchDependencyProvider extends SprykerSearchDependencyProvider
      *
      * @return \Spryker\Client\Search\Dependency\Plugin\SearchConfigBuilderInterface
      */
-    protected function createSearchConfigBuilderPlugin(Container $container): SearchConfigBuilderInterface
+    protected function createSearchConfigBuilderPlugin(Container $container): SearchConfigBuilderInterface // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
     {
         return new CatalogSearchConfigBuilder();
     }

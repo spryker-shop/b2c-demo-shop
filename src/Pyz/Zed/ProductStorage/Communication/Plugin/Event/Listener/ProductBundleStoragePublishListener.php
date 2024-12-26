@@ -34,7 +34,7 @@ class ProductBundleStoragePublishListener extends AbstractPlugin implements Even
      *
      * @return void
      */
-    public function handleBulk(array $eventTransfers, $eventName): void
+    public function handleBulk(array $eventTransfers, $eventName): void // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
     {
         $this->preventTransaction();
         $productIds = $this->getFactory()

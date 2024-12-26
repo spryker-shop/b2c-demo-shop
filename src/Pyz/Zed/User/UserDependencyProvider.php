@@ -32,7 +32,7 @@ class UserDependencyProvider extends SprykerUserDependencyProvider
      */
     protected function addGroupPlugin(Container $container): Container
     {
-        $container->set(static::PLUGIN_GROUP, function (Container $container) {
+        $container->set(static::PLUGIN_GROUP, function (Container $container) { // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
             return new GroupPlugin();
         });
 

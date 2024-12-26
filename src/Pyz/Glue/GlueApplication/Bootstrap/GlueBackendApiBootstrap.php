@@ -20,7 +20,7 @@ class GlueBackendApiBootstrap extends GlueBootstrap
      *
      * @return \Spryker\Shared\Application\ApplicationInterface
      */
-    public function boot(array $glueApplicationBootstrapPluginClassNames = []): ApplicationInterface
+    public function boot(array $glueApplicationBootstrapPluginClassNames = []): ApplicationInterface // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
     {
         return parent::boot([BackendApiGlueApplicationBootstrapPlugin::class]);
     }

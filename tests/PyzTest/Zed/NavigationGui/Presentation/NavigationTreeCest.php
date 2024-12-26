@@ -244,7 +244,7 @@ class NavigationTreeCest
      *
      * @return void
      */
-    public function testDeleteNavigationNode(NavigationGuiPresentationTester $i): void
+    public function testDeleteNavigationNode(NavigationGuiPresentationTester $i): void // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
     {
         /*
          * Test skipped because popup confirmation is not working as expected under phantomjs.

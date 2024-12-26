@@ -46,7 +46,7 @@ class CustomerHelper extends Module
      *
      * @return void
      */
-    public function _before(TestInterface $step): void
+    public function _before(TestInterface $step): void // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
     {
         $this->cleanUpDatabase();
     }

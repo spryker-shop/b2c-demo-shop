@@ -293,7 +293,7 @@ class GuestCartsRestApiCest
     public function requestCreateGuestCart(CartsApiTester $I): void
     {
         // Arrange
-        $I->haveHttpHeader(CartsRestApiConfig::HEADER_ANONYMOUS_CUSTOMER_UNIQUE_ID, uniqid(123, true));
+        $I->haveHttpHeader(CartsRestApiConfig::HEADER_ANONYMOUS_CUSTOMER_UNIQUE_ID, uniqid("123", true));
 
         // Act
         $I->sendPOST(

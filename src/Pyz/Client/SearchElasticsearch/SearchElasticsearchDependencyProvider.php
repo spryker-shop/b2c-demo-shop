@@ -21,7 +21,7 @@ class SearchElasticsearchDependencyProvider extends SprykerSearchElasticsearchDe
      *
      * @return array<\Spryker\Client\SearchExtension\Dependency\Plugin\SearchConfigBuilderPluginInterface>
      */
-    protected function getSearchConfigBuilderPlugins(Container $container): array
+    protected function getSearchConfigBuilderPlugins(Container $container): array // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
     {
         return [
             new ElasticsearchCatalogSearchConfigBuilderPlugin(),
@@ -33,7 +33,7 @@ class SearchElasticsearchDependencyProvider extends SprykerSearchElasticsearchDe
      *
      * @return array<\Spryker\Client\SearchExtension\Dependency\Plugin\SearchConfigExpanderPluginInterface>
      */
-    protected function getSearchConfigExpanderPlugins(Container $container): array
+    protected function getSearchConfigExpanderPlugins(Container $container): array // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
     {
         return [
             new ProductSearchConfigExpanderPlugin(),

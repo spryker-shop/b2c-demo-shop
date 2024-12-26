@@ -14,6 +14,7 @@ use Generated\Shared\DataBuilder\PaymentMethodsBuilder;
 use Generated\Shared\DataBuilder\QuoteBuilder;
 use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
+use PyzTest\Yves\Checkout\CheckoutBusinessTester;
 use Spryker\Yves\Messenger\FlashMessenger\FlashMessengerInterface;
 use Spryker\Yves\StepEngine\Dependency\Plugin\Handler\StepHandlerPluginCollection;
 use Spryker\Yves\StepEngine\Dependency\Plugin\Handler\StepHandlerPluginInterface;
@@ -40,7 +41,7 @@ class PaymentStepTest extends Unit
     /**
      * @var \PyzTest\Yves\Checkout\CheckoutBusinessTester:
      */
-    protected $tester;
+    protected CheckoutBusinessTester $tester;
 
     /**
      * @dataProvider executeDataProvider

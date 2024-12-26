@@ -29,7 +29,7 @@ class CmsContentWidgetDependencyProvider extends SprykerCmsContentWidgetDependen
      *
      * @return array<\Spryker\Zed\CmsContentWidget\Dependency\Plugin\CmsContentWidgetParameterMapperPluginInterface>
      */
-    protected function getCmsContentWidgetParameterMapperPlugins(Container $container)
+    protected function getCmsContentWidgetParameterMapperPlugins(Container $container) // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
     {
         return [
             CmsProductContentWidgetConfigurationProvider::FUNCTION_NAME => new CmsProductSkuMapperPlugin(),

@@ -159,7 +159,7 @@ class CmsGuiPresentationTester extends Actor
      */
     public function grabCmsPageId(): int
     {
-        return $this->grabFromCurrentUrl('/id-cms-page=(\d+)/');
+        return (int)$this->grabFromCurrentUrl('/id-cms-page=(\d+)/');
     }
 
     /**

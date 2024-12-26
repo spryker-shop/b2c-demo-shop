@@ -26,7 +26,7 @@ class BootstrapHelper extends Framework
      *
      * @return void
      */
-    public function _before(TestInterface $test): void
+    public function _before(TestInterface $test): void // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
     {
         $this->disableWhoopsErrorHandler();
 

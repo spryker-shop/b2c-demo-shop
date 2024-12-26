@@ -24,7 +24,7 @@ class CmsDependencyProvider extends SprykerCmsDependencyProvider
      *
      * @return array<\Spryker\Zed\CmsExtension\Dependency\Plugin\CmsVersionPostSavePluginInterface>
      */
-    protected function getPostSavePlugins(Container $container): array
+    protected function getPostSavePlugins(Container $container): array // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
     {
         return [
             new UserCmsVersionPostSavePlugin(),
@@ -36,7 +36,7 @@ class CmsDependencyProvider extends SprykerCmsDependencyProvider
      *
      * @return array<\Spryker\Zed\CmsExtension\Dependency\Plugin\CmsVersionTransferExpanderPluginInterface>
      */
-    protected function getTransferExpanderPlugins(Container $container): array
+    protected function getTransferExpanderPlugins(Container $container): array // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
     {
         return [
             new UserCmsVersionTransferExpanderPlugin(),

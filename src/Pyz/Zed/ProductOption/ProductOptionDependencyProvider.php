@@ -21,7 +21,7 @@ class ProductOptionDependencyProvider extends SprykerProductOptionDependencyProv
      *
      * @return \Spryker\Zed\Kernel\Communication\Form\FormTypeInterface
      */
-    protected function createMoneyCollectionFormTypePlugin(Container $container): FormTypeInterface
+    protected function createMoneyCollectionFormTypePlugin(Container $container): FormTypeInterface // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
     {
         return new MoneyCollectionFormTypePlugin();
     }

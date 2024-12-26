@@ -83,7 +83,7 @@ class NavigationCRUDCest
         $i->submitNavigationForm();
         $i->seeCurrentUrlEquals(NavigationPage::URL);
 
-        return $i->seeSuccessMessage(NavigationCreatePage::MESSAGE_SUCCESS);
+        return (int)$i->seeSuccessMessage(NavigationCreatePage::MESSAGE_SUCCESS);
     }
 
     /**

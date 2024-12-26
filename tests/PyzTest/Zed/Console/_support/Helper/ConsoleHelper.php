@@ -33,7 +33,7 @@ class ConsoleHelper extends Module
      *
      * @return void
      */
-    public function _after(TestInterface $test): void
+    public function _after(TestInterface $test): void // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
     {
         foreach ($this->config['cleanup_dirs'] as $dir) {
             $dir = codecept_data_dir() . self::SANDBOX_DIR . $dir;

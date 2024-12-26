@@ -22,7 +22,7 @@ class ShipmentGuiDependencyProvider extends SprykerShipmentGuiDependencyProvider
      *
      * @return \Spryker\Zed\Kernel\Communication\Form\FormTypeInterface
      */
-    protected function getMoneyCollectionFormTypePlugin(Container $container): FormTypeInterface
+    protected function getMoneyCollectionFormTypePlugin(Container $container): FormTypeInterface // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
     {
         return new MoneyCollectionFormTypePlugin();
     }

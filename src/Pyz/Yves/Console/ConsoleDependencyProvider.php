@@ -23,7 +23,7 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
      *
      * @return array<\Symfony\Component\Console\Command\Command>
      */
-    protected function getConsoleCommands(Container $container): array
+    protected function getConsoleCommands(Container $container): array // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
     {
         return [
             new RouterDebugYvesConsole(),
@@ -36,7 +36,7 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
      *
      * @return array<\Spryker\Shared\ApplicationExtension\Dependency\Plugin\ApplicationPluginInterface>
      */
-    protected function getApplicationPlugins(Container $container): array
+    protected function getApplicationPlugins(Container $container): array // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
     {
         return [
             new RouterApplicationPlugin(),
@@ -48,7 +48,7 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
      *
      * @return array<\Spryker\Yves\Monitoring\Plugin\Console\MonitoringConsolePlugin>
      */
-    protected function getEventSubscriber(Container $container): array
+    protected function getEventSubscriber(Container $container): array // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
     {
         return [
             new MonitoringConsolePlugin(),

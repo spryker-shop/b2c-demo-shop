@@ -20,7 +20,7 @@ class ShipmentDependencyProvider extends SprykerShipmentDependencyProvider
      *
      * @return array<\Spryker\Zed\Shipment\Communication\Plugin\ShipmentMethodAvailabilityPluginInterface>|array<\Spryker\Zed\ShipmentExtension\Dependency\Plugin\ShipmentMethodAvailabilityPluginInterface>
      */
-    protected function getAvailabilityPlugins(Container $container): array
+    protected function getAvailabilityPlugins(Container $container): array // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
     {
         return [];
     }
@@ -30,7 +30,7 @@ class ShipmentDependencyProvider extends SprykerShipmentDependencyProvider
      *
      * @return array<\Spryker\Zed\Shipment\Communication\Plugin\ShipmentMethodPricePluginInterface>|array<\Spryker\Zed\ShipmentExtension\Dependency\Plugin\ShipmentMethodPricePluginInterface>
      */
-    protected function getPricePlugins(Container $container): array
+    protected function getPricePlugins(Container $container): array // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
     {
         return [];
     }
@@ -40,7 +40,7 @@ class ShipmentDependencyProvider extends SprykerShipmentDependencyProvider
      *
      * @return array<\Spryker\Zed\Shipment\Communication\Plugin\ShipmentMethodDeliveryTimePluginInterface>|array<\Spryker\Zed\ShipmentExtension\Dependency\Plugin\ShipmentMethodDeliveryTimePluginInterface>
      */
-    protected function getDeliveryTimePlugins(Container $container): array
+    protected function getDeliveryTimePlugins(Container $container): array // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
     {
         return [];
     }
@@ -50,7 +50,7 @@ class ShipmentDependencyProvider extends SprykerShipmentDependencyProvider
      *
      * @return array<\Spryker\Zed\ShipmentExtension\Dependency\Plugin\ShipmentMethodFilterPluginInterface>
      */
-    protected function getMethodFilterPlugins(Container $container): array
+    protected function getMethodFilterPlugins(Container $container): array // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
     {
         return [
             new GiftCardShipmentGroupMethodFilterPlugin(),

@@ -22,7 +22,7 @@ class QuoteDependencyProvider extends SprykerQuoteDependencyProvider
      *
      * @return array<\Spryker\Client\Quote\Dependency\Plugin\QuoteTransferExpanderPluginInterface>
      */
-    protected function getQuoteTransferExpanderPlugins(Container $container): array
+    protected function getQuoteTransferExpanderPlugins(Container $container): array // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
     {
         return [
             new StoreQuoteTransferExpanderPlugin(),

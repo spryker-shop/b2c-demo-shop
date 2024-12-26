@@ -24,7 +24,7 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
      *
      * @return array<\Symfony\Component\Console\Command\Command>
      */
-    protected function getConsoleCommands(Container $container): array
+    protected function getConsoleCommands(Container $container): array // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
     {
         return [
             new ApiGenerateDocumentationConsole(),

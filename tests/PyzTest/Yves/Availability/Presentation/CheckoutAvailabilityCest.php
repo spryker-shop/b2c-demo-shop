@@ -37,7 +37,7 @@ class CheckoutAvailabilityCest
      *
      * @return void
      */
-    public function testCheckoutItemWithAvailability(AvailabilityPresentationTester $i, Scenario $scenario): void
+    public function testCheckoutItemWithAvailability(AvailabilityPresentationTester $i, Scenario $scenario): void // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
     {
         $i->wantTo('Checkout item with stock');
         $i->expectTo('Availability changed during SM processing.');

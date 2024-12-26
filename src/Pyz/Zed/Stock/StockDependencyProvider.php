@@ -24,7 +24,7 @@ class StockDependencyProvider extends SprykerStockDependencyProvider
      *
      * @return array<\Spryker\Zed\StockExtension\Dependency\Plugin\StockUpdateHandlerPluginInterface>
      */
-    protected function getStockUpdateHandlerPlugins(Container $container): array
+    protected function getStockUpdateHandlerPlugins(Container $container): array // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
     {
         return [
             new AvailabilityStockUpdateHandlerPlugin(),
