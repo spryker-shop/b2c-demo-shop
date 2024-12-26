@@ -74,21 +74,21 @@ class ProductConcreteProductLabelsRestApiCest
             ->whenI()
             ->seeSingleResourceHasRelationshipByTypeAndId(
                 ProductLabelsRestApiConfig::RESOURCE_PRODUCT_LABELS,
-                $idProductLabel,
+                (string)$idProductLabel,
             );
 
         $I->amSure('The returned resource has product-labels include')
             ->whenI()
             ->seeIncludesContainsResourceByTypeAndId(
                 ProductLabelsRestApiConfig::RESOURCE_PRODUCT_LABELS,
-                $idProductLabel,
+                (string)$idProductLabel,
             );
 
         $I->amSure('The include has correct self-link')
             ->whenI()
             ->seeIncludedResourceByTypeAndIdHasSelfLink(
                 ProductLabelsRestApiConfig::RESOURCE_PRODUCT_LABELS,
-                $idProductLabel,
+                (string)$idProductLabel,
                 $I->buildProductLabelUrl($idProductLabel),
             );
     }
