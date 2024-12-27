@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace PyzTest\Zed\Tax;
 
 use Codeception\Actor;
@@ -37,7 +39,7 @@ class TaxPresentationTester extends Actor
      *
      * @return void
      */
-    public function createTaxRate($taxRateName): void
+    public function createTaxRate(string $taxRateName): void
     {
         $i = $this;
 
@@ -50,7 +52,7 @@ class TaxPresentationTester extends Actor
      *
      * @return void
      */
-    protected function fillTaxRateForm($taxRateName): void
+    protected function fillTaxRateForm(string $taxRateName): void
     {
         $i = $this;
 
@@ -69,7 +71,7 @@ class TaxPresentationTester extends Actor
      *
      * @return void
      */
-    public function createTaxRateWithoutSaving($taxRateName): void
+    public function createTaxRateWithoutSaving(string $taxRateName): void
     {
         $i = $this;
         $i->fillTaxRateForm($taxRateName);
@@ -80,7 +82,7 @@ class TaxPresentationTester extends Actor
      *
      * @return void
      */
-    public function searchForTaxRate($taxRateName): void
+    public function searchForTaxRate(string $taxRateName): void
     {
         $i = $this;
 
@@ -92,7 +94,7 @@ class TaxPresentationTester extends Actor
      *
      * @return void
      */
-    public function deleteTaxRate($taxRateName): void
+    public function deleteTaxRate(string $taxRateName): void
     {
         $i = $this;
         $i->amOnPage(TaxRateListPage::URL);
@@ -118,7 +120,7 @@ class TaxPresentationTester extends Actor
      *
      * @return void
      */
-    public function createOneAndTheSameTaxRate($taxRateName): void
+    public function createOneAndTheSameTaxRate(string $taxRateName): void
     {
         $i = $this;
 
@@ -149,7 +151,7 @@ class TaxPresentationTester extends Actor
      *
      * @return void
      */
-    public function editTaxRateWithValidData($taxRateName): void
+    public function editTaxRateWithValidData(string $taxRateName): void
     {
         $i = $this;
 
@@ -175,12 +177,14 @@ class TaxPresentationTester extends Actor
      *
      * @return void
      */
-    public function removeTaxRateFromDatabase($taxRateName): void
+    public function removeTaxRateFromDatabase(string $taxRateName): void
     {
         $taxRateQuery = new SpyTaxRateQuery();
         $taxRateEntity = $taxRateQuery->findOneByName(TaxRateCreatePage::$taxRateData[$taxRateName]['name']);
-        if ($taxRateEntity) {
-            $taxRateEntity->delete();
+        if (!$taxRateEntity) {
+            return;
         }
+
+        $taxRateEntity->delete();
     }
 }

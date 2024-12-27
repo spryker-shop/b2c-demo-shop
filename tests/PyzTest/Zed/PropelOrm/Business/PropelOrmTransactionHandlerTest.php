@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace PyzTest\Zed\PropelOrm\Business;
 
 use Codeception\Test\Unit;
@@ -148,7 +150,7 @@ class PropelOrmTransactionHandlerTest extends Unit
      *
      * @return \Orm\Zed\Product\Persistence\SpyProductAbstract
      */
-    protected function getProductAbstractToAssert($idProductAbstract): SpyProductAbstract
+    protected function getProductAbstractToAssert(int $idProductAbstract): SpyProductAbstract
     {
         return $this->productQueryContainer
             ->queryProductAbstract()
@@ -161,7 +163,7 @@ class PropelOrmTransactionHandlerTest extends Unit
      *
      * @return \Orm\Zed\Product\Persistence\SpyProductAbstractLocalizedAttributes
      */
-    protected function getLocalizedAttributesToAssert($idProductAbstract): SpyProductAbstractLocalizedAttributes
+    protected function getLocalizedAttributesToAssert(int $idProductAbstract): SpyProductAbstractLocalizedAttributes
     {
         return $this->productQueryContainer
             ->queryProductAbstractLocalizedAttributes($idProductAbstract)

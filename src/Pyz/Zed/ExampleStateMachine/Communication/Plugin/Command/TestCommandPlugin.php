@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace Pyz\Zed\ExampleStateMachine\Communication\Plugin\Command;
 
 use Generated\Shared\Transfer\StateMachineItemTransfer;
@@ -23,7 +25,7 @@ class TestCommandPlugin extends AbstractPlugin implements CommandPluginInterface
      *
      * @return bool
      */
-    public function run(StateMachineItemTransfer $stateMachineItemTransfer): bool
+    public function run(StateMachineItemTransfer $stateMachineItemTransfer): bool // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
     {
         return true;
     }

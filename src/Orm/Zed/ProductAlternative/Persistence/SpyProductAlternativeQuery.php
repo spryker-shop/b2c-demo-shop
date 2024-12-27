@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace Orm\Zed\ProductAlternative\Persistence;
 
 use Orm\Zed\ProductAlternative\Persistence\Base\SpyProductAlternativeQuery as BaseSpyProductAlternativeQuery;

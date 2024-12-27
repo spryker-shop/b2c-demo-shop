@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace Pyz\Zed\ExampleStateMachine\Persistence;
 
 use Orm\Zed\ExampleStateMachine\Persistence\ExampleStateMachineItemQuery;
@@ -36,6 +38,6 @@ interface ExampleStateMachineQueryContainerInterface
      * @return \Orm\Zed\ExampleStateMachine\Persistence\ExampleStateMachineItemQuery<\Orm\Zed\ExampleStateMachine\Persistence\ExampleStateMachineItem>
      */
     public function queryExampleStateMachineItemByIdStateMachineItem(
-        $idStateMachineItem,
+        int $idStateMachineItem,
     ): ExampleStateMachineItemQuery;
 }

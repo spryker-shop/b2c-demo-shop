@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace Orm\Zed\PublishAndSynchronizeHealthCheckStorage\Persistence;
 
 use Orm\Zed\PublishAndSynchronizeHealthCheckStorage\Persistence\Base\SpyPublishAndSynchronizeHealthCheckStorageQuery as BaseSpyPublishAndSynchronizeHealthCheckStorageQuery;

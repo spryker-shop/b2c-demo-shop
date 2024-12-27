@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace PyzTest\Zed\Testify\Helper;
 
 use Codeception\Lib\Framework;
@@ -24,7 +26,7 @@ class BootstrapHelper extends Framework
      *
      * @return void
      */
-    public function _before(TestInterface $test): void
+    public function _before(TestInterface $test): void // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
     {
         $this->disableWhoopsErrorHandler();
 

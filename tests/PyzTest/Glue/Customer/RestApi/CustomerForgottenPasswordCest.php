@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace PyzTest\Glue\Customer\RestApi;
 
 use Codeception\Example;
@@ -88,9 +90,9 @@ class CustomerForgottenPasswordCest
         $I->seeResponseMatchesOpenApiSchema();
 
         foreach ($example['errors'] as $index => $error) {
-            $I->seeResponseErrorsHaveCode($error[RestErrorMessageTransfer::CODE], $index);
-            $I->seeResponseErrorsHaveStatus($error[RestErrorMessageTransfer::STATUS], $index);
-            $I->seeResponseErrorsHaveDetail($error[RestErrorMessageTransfer::DETAIL], $index);
+            $I->seeResponseErrorsHaveCode($error[RestErrorMessageTransfer::CODE], (string)$index);
+            $I->seeResponseErrorsHaveStatus($error[RestErrorMessageTransfer::STATUS], (string)$index);
+            $I->seeResponseErrorsHaveDetail($error[RestErrorMessageTransfer::DETAIL], (string)$index);
         }
     }
 

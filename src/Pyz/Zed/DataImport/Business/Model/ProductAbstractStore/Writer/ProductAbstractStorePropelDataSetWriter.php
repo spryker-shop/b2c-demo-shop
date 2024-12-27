@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace Pyz\Zed\DataImport\Business\Model\ProductAbstractStore\Writer;
 
 use Generated\Shared\Transfer\ProductAbstractStoreTransfer;
@@ -62,7 +64,7 @@ class ProductAbstractStorePropelDataSetWriter implements DataSetWriterInterface
      *
      * @return int
      */
-    protected function getIdProductAbstractBySku($productAbstractSku): int
+    protected function getIdProductAbstractBySku(string $productAbstractSku): int
     {
         if (!isset(static::$idProductAbstractBuffer[$productAbstractSku])) {
             static::$idProductAbstractBuffer[$productAbstractSku] =
@@ -77,7 +79,7 @@ class ProductAbstractStorePropelDataSetWriter implements DataSetWriterInterface
      *
      * @return int
      */
-    protected function getIdStoreByName($storeName): int
+    protected function getIdStoreByName(string $storeName): int
     {
         if (!isset(static::$idStoreBuffer[$storeName])) {
             static::$idStoreBuffer[$storeName] =

@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace Pyz\Zed\DataImport\Business\CombinedProduct\ProductPrice;
 
 use Pyz\Zed\DataImport\Business\Exception\InvalidDataException;
@@ -126,10 +128,10 @@ class CombinedProductPriceHydratorStep extends ProductPriceHydratorStep
     {
         $this->assertAssignableProductTypeColumn($dataSet);
 
-        if ($dataSet[static::COLUMN_ASSIGNED_PRODUCT_TYPE] == static::ASSIGNABLE_PRODUCT_TYPE_ABSTRACT) {
+        if ($dataSet[static::COLUMN_ASSIGNED_PRODUCT_TYPE] === static::ASSIGNABLE_PRODUCT_TYPE_ABSTRACT) {
             $dataSet[static::COLUMN_CONCRETE_SKU] = null;
         }
-        if ($dataSet[static::COLUMN_ASSIGNED_PRODUCT_TYPE] == static::ASSIGNABLE_PRODUCT_TYPE_CONCRETE) {
+        if ($dataSet[static::COLUMN_ASSIGNED_PRODUCT_TYPE] === static::ASSIGNABLE_PRODUCT_TYPE_CONCRETE) {
             $dataSet[static::COLUMN_ABSTRACT_SKU] = null;
         }
 

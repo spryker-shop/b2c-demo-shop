@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace Pyz\Zed\DataImport\Business\Model\ProductOptionPrice;
 
 use Orm\Zed\Currency\Persistence\SpyCurrencyQuery;
@@ -97,7 +99,7 @@ class ProductOptionPriceWriterStep extends PublishAwareStep implements DataImpor
      *
      * @return void
      */
-    protected function publishRelatedProductAbstracts($idProductOptionValue): void
+    protected function publishRelatedProductAbstracts(int $idProductOptionValue): void
     {
         $productAbstractCollection = SpyProductAbstractQuery::create()
             ->joinSpyProductAbstractProductOptionGroup()
@@ -122,7 +124,7 @@ class ProductOptionPriceWriterStep extends PublishAwareStep implements DataImpor
      *
      * @return int|null
      */
-    protected function getIdStore($storeName): ?int
+    protected function getIdStore(?string $storeName): ?int
     {
         if ($storeName === '' || $storeName === null) {
             return null;
@@ -141,7 +143,7 @@ class ProductOptionPriceWriterStep extends PublishAwareStep implements DataImpor
      *
      * @return int
      */
-    protected function getIdCurrency($currencyIsoCode): int
+    protected function getIdCurrency(string $currencyIsoCode): int
     {
         if (!isset(static::$idCurrencyBuffer[$currencyIsoCode])) {
             static::$idCurrencyBuffer[$currencyIsoCode] = SpyCurrencyQuery::create()

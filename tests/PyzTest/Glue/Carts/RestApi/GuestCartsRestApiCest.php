@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace PyzTest\Glue\Carts\RestApi;
 
 use Codeception\Util\HttpCode;
@@ -291,7 +293,7 @@ class GuestCartsRestApiCest
     public function requestCreateGuestCart(CartsApiTester $I): void
     {
         // Arrange
-        $I->haveHttpHeader(CartsRestApiConfig::HEADER_ANONYMOUS_CUSTOMER_UNIQUE_ID, uniqid(123, true));
+        $I->haveHttpHeader(CartsRestApiConfig::HEADER_ANONYMOUS_CUSTOMER_UNIQUE_ID, uniqid('123', true));
 
         // Act
         $I->sendPOST(

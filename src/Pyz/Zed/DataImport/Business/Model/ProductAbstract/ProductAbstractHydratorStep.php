@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace Pyz\Zed\DataImport\Business\Model\ProductAbstract;
 
 use Generated\Shared\Transfer\SpyProductAbstractEntityTransfer;
@@ -315,7 +317,7 @@ class ProductAbstractHydratorStep implements DataImportStepInterface
      *
      * @return array<string>
      */
-    protected function getCategoryKeys($categoryKeys): array
+    protected function getCategoryKeys(string $categoryKeys): array
     {
         $categoryKeys = explode(',', $categoryKeys);
 
@@ -327,7 +329,7 @@ class ProductAbstractHydratorStep implements DataImportStepInterface
      *
      * @return array<string>
      */
-    protected function getCategoryProductOrder($categoryProductOrder): array
+    protected function getCategoryProductOrder(string $categoryProductOrder): array
     {
         $categoryProductOrder = explode(',', $categoryProductOrder);
 
@@ -342,13 +344,17 @@ class ProductAbstractHydratorStep implements DataImportStepInterface
     protected function formatMultiSelectProductAttributes(array $attributes): array
     {
         foreach ($attributes as $key => $value) {
-            if (is_string($value) && preg_match('/^\[.*\]$/', $value)) {
-                $json = str_replace("'", '"', $value);
-                $decoded = json_decode($json, true);
-                if (json_last_error() === JSON_ERROR_NONE && is_array($decoded)) {
-                    $attributes[$key] = $decoded;
-                }
+            if (!is_string($value) || !preg_match('/^\[.*\]$/', $value)) {
+                continue;
             }
+
+            $json = str_replace("'", '"', $value);
+            $decoded = json_decode($json, true);
+            if (json_last_error() !== JSON_ERROR_NONE || !is_array($decoded)) {
+                continue;
+            }
+
+            $attributes[$key] = $decoded;
         }
 
         return $attributes;

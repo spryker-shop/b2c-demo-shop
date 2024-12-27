@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace PyzTest\Yves\Checkout\Process\Steps;
 
 use Codeception\Test\Unit;
@@ -83,8 +85,10 @@ class SuccessStepTest extends Unit
      *
      * @return \SprykerShop\Yves\CheckoutPage\Process\Steps\SuccessStep
      */
-    protected function createSuccessStep($customerClientMock = null, ?CheckoutPageToCartClientInterface $cartClientMock = null): SuccessStep
-    {
+    protected function createSuccessStep(
+        ?CheckoutPageToCustomerClientInterface $customerClientMock = null,
+        ?CheckoutPageToCartClientInterface $cartClientMock = null,
+    ): SuccessStep {
         if ($customerClientMock === null) {
             $customerClientMock = $this->createCustomerClientMock();
         }

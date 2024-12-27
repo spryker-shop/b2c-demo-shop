@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace Pyz\Yves\CheckoutPage;
 
 use Generated\Shared\Transfer\PaymentTransfer;
@@ -83,7 +85,7 @@ class CheckoutPageDependencyProvider extends SprykerShopCheckoutPageDependencyPr
      *
      * @return \Symfony\Component\Form\FormInterface
      */
-    protected function getCustomerCheckoutForm($subForm, $blockPrefix): FormInterface
+    protected function getCustomerCheckoutForm(string $subForm, string $blockPrefix): FormInterface
     {
         return $this->getFormFactory()->createNamed(
             $blockPrefix,

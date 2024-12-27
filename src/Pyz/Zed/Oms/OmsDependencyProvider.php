@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace Pyz\Zed\Oms;
 
 use Pyz\Zed\Oms\Communication\Plugin\Oms\InitiationTimeoutProcessorPlugin;
@@ -138,7 +140,7 @@ class OmsDependencyProvider extends SprykerOmsDependencyProvider
      *
      * @return array<\Spryker\Zed\OmsExtension\Dependency\Plugin\OmsOrderMailExpanderPluginInterface>
      */
-    protected function getOmsOrderMailExpanderPlugins(Container $container): array
+    protected function getOmsOrderMailExpanderPlugins(Container $container): array // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
     {
         return [
             new ShipmentOrderMailExpanderPlugin(),
@@ -150,7 +152,7 @@ class OmsDependencyProvider extends SprykerOmsDependencyProvider
      *
      * @return array<\Spryker\Zed\OmsExtension\Dependency\Plugin\OmsManualEventGrouperPluginInterface>
      */
-    protected function getOmsManualEventGrouperPlugins(Container $container): array
+    protected function getOmsManualEventGrouperPlugins(Container $container): array // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
     {
         return [
             new ShipmentManualEventGrouperPlugin(),

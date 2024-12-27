@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace PyzTest\Yves\Customer;
 
 use Codeception\Actor;
@@ -43,7 +45,7 @@ class CustomerPresentationTester extends Actor
      *
      * @return void
      */
-    public function submitLoginForm($email, $password): void
+    public function submitLoginForm(string $email, string $password): void
     {
         $i = $this;
         $i->submitForm(['name' => 'loginForm'], [

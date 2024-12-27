@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace Pyz\Client\Quote;
 
 use Spryker\Client\Kernel\Container;
@@ -20,7 +22,7 @@ class QuoteDependencyProvider extends SprykerQuoteDependencyProvider
      *
      * @return array<\Spryker\Client\Quote\Dependency\Plugin\QuoteTransferExpanderPluginInterface>
      */
-    protected function getQuoteTransferExpanderPlugins(Container $container): array
+    protected function getQuoteTransferExpanderPlugins(Container $container): array // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
     {
         return [
             new StoreQuoteTransferExpanderPlugin(),
