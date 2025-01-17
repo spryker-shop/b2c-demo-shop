@@ -4,6 +4,7 @@ declare(strict_types = 1);
 namespace PyzTest\Zed\RomanNumbers\Business;
 
 use Codeception\Test\Unit;
+use Pyz\Zed\RomanNumbers\Business\Exception\NotARomanNumberException;
 
 /**
  * @group PyzTest
@@ -279,5 +280,29 @@ class RomanNumbersFacadeTest extends Unit
 
         // Assert
         $this->assertSame($expectedInteger, $result);
+    }
+
+    public function testConversionOfRomanNumberToIntegerThrowsNotARomanNumberExceptioWithIllegalCharacters(): void
+    {
+        // Arrange
+        $illegalString = 'KR0815';
+        $expectedException = NotARomanNumberException::class;
+
+        // Act & Assert
+        $this->tester->expectThrowable($expectedException, function () use ($illegalString) {
+            $this->tester->getFacade()->convertRomanToInteger($illegalString);
+        });
+    }
+
+    public function testConversionOfRomanNumberToIntegerThrowsNotARomanNumberExceptionWithEmptyString(): void
+    {
+        // Arrange
+        $emptyString = '';
+        $expectedException = NotARomanNumberException::class;
+
+        // Act & Assert
+        $this->tester->expectThrowable($expectedException, function () use ($emptyString) {
+            $this->tester->getFacade()->convertRomanToInteger($emptyString);
+        });
     }
 }
