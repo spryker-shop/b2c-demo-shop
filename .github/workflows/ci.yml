@@ -837,7 +837,7 @@ jobs:
     frontend-assets-via-docker-php-8-2:
         if: >
             !contains(github.event.pull_request.head.ref, 'hackathon')
-            && (contains(github.event.pull_request.labels.*.name, 'run-compatibility-ci')
+            && (contains(github.event.pull_request.labels.*.name, 'run-functional-ci')
                 || contains(github.event.pull_request.labels.*.name, 'run-all-ci'))
         name: "Docker / Alpine / PHP 8.2 / Frontend & Assets"
         runs-on: ubuntu-22.04
