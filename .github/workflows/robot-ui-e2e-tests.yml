@@ -228,8 +228,7 @@ jobs:
     docker-alpine-php-82-postgresql-dynamic-store-off-robot-ui-group-one:
         if: >
             (github.event_name == 'pull_request'
-                && (contains(github.event.pull_request.labels.*.name, 'run-ui-ci')
-                    || contains(github.event.pull_request.labels.*.name, 'run-all-ci'))
+                && contains(github.event.pull_request.labels.*.name, 'run-compatibility-ci')
             ) || (github.event_name == 'push' && github.ref == 'refs/heads/master')
         name: "Docker / Alpine / PHP 8.2 / PostgreSQL / Dynamic Store OFF / Robot / UI / Group One"
         runs-on: ubuntu-22.04
@@ -298,8 +297,7 @@ jobs:
     docker-alpine-php-82-postgresql-dynamic-store-off-robot-ui-group-two:
         if: >
             (github.event_name == 'pull_request'
-                && (contains(github.event.pull_request.labels.*.name, 'run-ui-ci')
-                    || contains(github.event.pull_request.labels.*.name, 'run-all-ci'))
+                && contains(github.event.pull_request.labels.*.name, 'run-compatibility-ci')
             ) || (github.event_name == 'push' && github.ref == 'refs/heads/master')
         name: "Docker / Alpine / PHP 8.2 / PostgreSQL / Dynamic Store OFF / Robot / UI / Group Two"
         runs-on: ubuntu-22.04
@@ -368,8 +366,7 @@ jobs:
     docker-alpine-php-82-postgresql-dynamic-store-off-robot-ui-group-three:
         if: >
             (github.event_name == 'pull_request'
-                && (contains(github.event.pull_request.labels.*.name, 'run-ui-ci')
-                    || contains(github.event.pull_request.labels.*.name, 'run-all-ci'))
+                && contains(github.event.pull_request.labels.*.name, 'run-compatibility-ci')
             ) || (github.event_name == 'push' && github.ref == 'refs/heads/master')
         name: "Docker / Alpine / PHP 8.2 / PostgreSQL / Dynamic Store OFF / Robot / UI / Group Three"
         runs-on: ubuntu-22.04
