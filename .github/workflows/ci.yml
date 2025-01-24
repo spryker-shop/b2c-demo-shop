@@ -2,6 +2,7 @@ name: B2C-CI
 
 on:
     pull_request:
+        types: [ labeled, synchronize ]
     push:
         branches:
             - master
@@ -15,7 +16,7 @@ jobs:
     validation:
         if: >
             contains(github.event.pull_request.labels.*.name, 'run-static-ci')
-            || contains(github.event.pull_request.labels.*.name, 'run-all-ci')
+            || contains(github.event.pull_request.labels.*.name, 'run-latest-ci')
         name: "Static analysis"
         runs-on: ubuntu-22.04
         strategy:
@@ -187,7 +188,7 @@ jobs:
         if: >
             !contains(github.event.pull_request.head.ref, 'hackathon')
             && (contains(github.event.pull_request.labels.*.name, 'run-api-ci')
-            || contains(github.event.pull_request.labels.*.name, 'run-all-ci'))
+            || contains(github.event.pull_request.labels.*.name, 'run-latest-ci'))
         runs-on: ubuntu-22.04
         env:
             PROGRESS_TYPE: plain
@@ -295,7 +296,7 @@ jobs:
         if: >
             !contains(github.event.pull_request.head.ref, 'hackathon')
             && (contains(github.event.pull_request.labels.*.name, 'run-ui-ci')
-            || contains(github.event.pull_request.labels.*.name, 'run-all-ci'))
+            || contains(github.event.pull_request.labels.*.name, 'run-latest-ci'))
         runs-on: ubuntu-22.04
         env:
             PROGRESS_TYPE: plain
@@ -399,7 +400,7 @@ jobs:
     php-83-mariadb-functional-alpine:
         if: >
             contains(github.event.pull_request.labels.*.name, 'run-functional-ci')
-            || contains(github.event.pull_request.labels.*.name, 'run-all-ci')
+            || contains(github.event.pull_request.labels.*.name, 'run-latest-ci')
         name: "PHP 8.3 / MariaDB / Functional / Alpine"
         runs-on: ubuntu-22.04
         env:
@@ -803,7 +804,7 @@ jobs:
         if: >
             !contains(github.event.pull_request.head.ref, 'hackathon')
             && (contains(github.event.pull_request.labels.*.name, 'run-functional-ci')
-                || contains(github.event.pull_request.labels.*.name, 'run-all-ci'))
+                || contains(github.event.pull_request.labels.*.name, 'run-latest-ci'))
         name: "Docker / Alpine / PHP 8.2 / Frontend & Assets"
         runs-on: ubuntu-22.04
         env:
@@ -919,7 +920,7 @@ jobs:
         if: >
             !contains(github.event.pull_request.head.ref, 'hackathon')
             && (contains(github.event.pull_request.labels.*.name, 'run-api-ci')
-                || contains(github.event.pull_request.labels.*.name, 'run-all-ci'))
+                || contains(github.event.pull_request.labels.*.name, 'run-latest-ci'))
         name: "Docker / Alpine / PHP 8.3 / MariaDB / Robot / API"
         runs-on: ubuntu-22.04
         env:
@@ -1007,7 +1008,7 @@ jobs:
         if: >
             !contains(github.event.pull_request.head.ref, 'hackathon')
             && (contains(github.event.pull_request.labels.*.name, 'run-ui-ci')
-                || contains(github.event.pull_request.labels.*.name, 'run-all-ci'))
+                || contains(github.event.pull_request.labels.*.name, 'run-latest-ci'))
         name: "Docker / Alpine / PHP 8.3 / MariaDB / Cypress / UI"
         runs-on: ubuntu-22.04
         env:
