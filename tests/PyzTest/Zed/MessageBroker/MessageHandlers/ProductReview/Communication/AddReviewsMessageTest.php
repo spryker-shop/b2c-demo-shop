@@ -44,6 +44,7 @@ class AddReviewsMessageTest extends Unit
 
         // Act
         $this->tester->setupMessageBroker($addReviewsTransfer::class, $channelName);
+        $this->tester->setupMessageBrokerPlugins();
         $messageBrokerFacade = $this->tester->getLocator()->messageBroker()->facade();
         $messageBrokerFacade->sendMessage($addReviewsTransfer);
         $messageBrokerFacade->startWorker($this->tester->buildMessageBrokerWorkerConfigTransfer([$channelName], 1));
