@@ -44,7 +44,7 @@ class SearchEndpointMessageTest extends Unit
         $this->tester->handleSearchMessage($searchEndpointAvailableTransfer);
 
         // Assert
-        $this->tester->assertSearchHttpConfigExists();
+        $this->tester->assertSearchHttpConfigExistsForStore();
     }
 
     /**

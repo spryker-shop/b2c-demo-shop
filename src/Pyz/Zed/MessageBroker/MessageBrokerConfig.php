@@ -28,4 +28,19 @@ class MessageBrokerConfig extends SprykerMessageBrokerConfig
             'tax-commands',
         ];
     }
+
+    /**
+     * Specification:
+     * - Returns system worker channels used to retrieve service messages.
+     *
+     * @api
+     *
+     * @return list<string>
+     */
+    public function getSystemWorkerChannels(): array
+    {
+        return [
+            'app-events',
+        ];
+    }
 }

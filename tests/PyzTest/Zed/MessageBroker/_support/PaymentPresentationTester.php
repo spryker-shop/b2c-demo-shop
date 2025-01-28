@@ -94,6 +94,7 @@ class PaymentPresentationTester extends Actor
     {
         $channelName = 'payment-commands';
         $this->setupMessageBroker($paymentMessageTransfer::class, $channelName);
+        $this->setupMessageBrokerPlugins();
         $messageBrokerFacade = $this->getLocator()->messageBroker()->facade();
         $messageBrokerFacade->sendMessage($paymentMessageTransfer);
         $messageBrokerFacade->startWorker(
