@@ -7,7 +7,7 @@
 
 declare(strict_types = 1);
 
-namespace PyzTest\Zed\RomanNumbers;
+namespace PyzTest\Zed\LeapYear;
 
 use Codeception\Actor;
 
@@ -27,9 +27,9 @@ use Codeception\Actor;
  *
  * @SuppressWarnings(PHPMD)
  */
-class RomanNumbersBusinessTester extends Actor
+class LeapYearBusinessTester extends Actor
 {
-    use _generated\RomanNumbersBusinessTesterActions;
+    use _generated\LeapYearBusinessTesterActions;
 
     /**
      * Define custom actions here

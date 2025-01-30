@@ -7,10 +7,10 @@
 
 declare(strict_types = 1);
 
-namespace Pyz\Zed\RomanNumbers\Business\Exception;
+namespace Pyz\Zed\LeapYear;
 
-use Exception;
+use Spryker\Zed\Kernel\AbstractBundleConfig;
 
-class NotARomanNumberException extends Exception
+class LeapYearConfig extends AbstractBundleConfig
 {
 }

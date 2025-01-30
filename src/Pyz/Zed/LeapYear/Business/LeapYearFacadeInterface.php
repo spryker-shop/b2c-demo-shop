@@ -7,10 +7,9 @@
 
 declare(strict_types = 1);
 
-namespace Pyz\Zed\RomanNumbers\Business\Exception;
+namespace Pyz\Zed\LeapYear\Business;
 
-use Exception;
-
-class NotARomanNumberException extends Exception
+interface LeapYearFacadeInterface
 {
+    public function checkLeapYear($year): bool;
 }

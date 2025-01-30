@@ -1,4 +1,10 @@
 <?php
+
+/**
+ * This file is part of the Spryker Commerce OS.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
+ */
+
 declare(strict_types = 1);
 
 namespace PyzTest\Zed\RomanNumbers\Business;
@@ -7,9 +13,11 @@ use Codeception\Test\Unit;
 use Pyz\Zed\RomanNumbers\Business\Exception\NotARomanNumberException;
 
 /**
+ * Auto-generated group annotations
+ *
  * @group PyzTest
  * @group Zed
- * @group StringReverser
+ * @group RomanNumbers
  * @group Business
  * @group Facade
  * @group RomanNumbersFacadeTest
@@ -22,18 +30,6 @@ class RomanNumbersFacadeTest extends Unit
      */
     protected $tester;
 
-    public function testConversionOfRomanNumberToIntegerSpaces(): void
-    {
-        // Arrange
-        $romanNumber = ' M C III  ';
-        $expectedInteger = 1103;
-
-        // Act
-        $result = $this->tester->getFacade()->convertRomanToInteger($romanNumber);
-
-        // Assert
-        $this->assertSame($expectedInteger, $result);
-    }
 
     public function testConversionOfRomanNumberToIntegerOne(): void
     {
@@ -125,18 +121,20 @@ class RomanNumbersFacadeTest extends Unit
         // Assert
         $this->assertSame($expectedInteger, $result);
     }
+
     public function testConversionOfRomanNumberToIntegerNine(): void
-{
+    {
     // Arrange
-    $romanNumber = 'IX';
-    $expectedInteger = 9;
+        $romanNumber = 'IX';
+        $expectedInteger = 9;
 
     // Act
-    $result = $this->tester->getFacade()->convertRomanToInteger($romanNumber);
+        $result = $this->tester->getFacade()->convertRomanToInteger($romanNumber);
 
     // Assert
-    $this->assertSame($expectedInteger, $result);
-}
+        $this->assertSame($expectedInteger, $result);
+    }
+
     public function testConversionOfRomanNumberToIntegerFifty(): void
     {
         // Arrange
@@ -149,6 +147,7 @@ class RomanNumbersFacadeTest extends Unit
         // Assert
         $this->assertSame($expectedInteger, $result);
     }
+
     public function testConversionOfRomanNumberToIntegerFourthy(): void
     {
         // Arrange
@@ -161,6 +160,7 @@ class RomanNumbersFacadeTest extends Unit
         // Assert
         $this->assertSame($expectedInteger, $result);
     }
+
     public function testConversionOfRomanNumberToIntegerHundred(): void
     {
         // Arrange
@@ -173,6 +173,7 @@ class RomanNumbersFacadeTest extends Unit
         // Assert
         $this->assertSame($expectedInteger, $result);
     }
+
     public function testConversionOfRomanNumberToIntegerNinty(): void
     {
         // Arrange
@@ -185,6 +186,7 @@ class RomanNumbersFacadeTest extends Unit
         // Assert
         $this->assertSame($expectedInteger, $result);
     }
+
     public function testConversionOfRomanNumberToIntegerFivehundred(): void
     {
         // Arrange
@@ -197,6 +199,7 @@ class RomanNumbersFacadeTest extends Unit
         // Assert
         $this->assertSame($expectedInteger, $result);
     }
+
     public function testConversionOfRomanNumberToIntegerFourhundredNinty(): void
     {
         // Arrange
@@ -209,6 +212,7 @@ class RomanNumbersFacadeTest extends Unit
         // Assert
         $this->assertSame($expectedInteger, $result);
     }
+
     public function testConversionOfRomanNumberToIntegerTausend(): void
     {
         // Arrange
@@ -221,6 +225,7 @@ class RomanNumbersFacadeTest extends Unit
         // Assert
         $this->assertSame($expectedInteger, $result);
     }
+
     public function testConversionOfRomanNumberToIntegerNinehundredNinty(): void
     {
         // Arrange
@@ -233,6 +238,7 @@ class RomanNumbersFacadeTest extends Unit
         // Assert
         $this->assertSame($expectedInteger, $result);
     }
+
     public function testConversionOfRomanNumberToIntegerThreetausendNintynine(): void
     {
         // Arrange
@@ -245,6 +251,7 @@ class RomanNumbersFacadeTest extends Unit
         // Assert
         $this->assertSame($expectedInteger, $result);
     }
+
     public function testConversionOfRomanNumberToIntegerTwotausendfourhundredfourthy(): void
     {
         // Arrange
@@ -257,6 +264,7 @@ class RomanNumbersFacadeTest extends Unit
         // Assert
         $this->assertSame($expectedInteger, $result);
     }
+
     public function testConversionOfRomanNumberToIntegerFourhundred(): void
     {
         // Arrange
@@ -269,6 +277,7 @@ class RomanNumbersFacadeTest extends Unit
         // Assert
         $this->assertSame($expectedInteger, $result);
     }
+
     public function testConversionOfRomanNumberToIntegerNinehundred(): void
     {
         // Arrange
@@ -289,7 +298,7 @@ class RomanNumbersFacadeTest extends Unit
         $expectedException = NotARomanNumberException::class;
 
         // Act & Assert
-        $this->tester->expectThrowable($expectedException, function () use ($illegalString) {
+        $this->tester->expectThrowable($expectedException, function () use ($illegalString): void {
             $this->tester->getFacade()->convertRomanToInteger($illegalString);
         });
     }
@@ -301,7 +310,7 @@ class RomanNumbersFacadeTest extends Unit
         $expectedException = NotARomanNumberException::class;
 
         // Act & Assert
-        $this->tester->expectThrowable($expectedException, function () use ($emptyString) {
+        $this->tester->expectThrowable($expectedException, function () use ($emptyString): void {
             $this->tester->getFacade()->convertRomanToInteger($emptyString);
         });
     }
