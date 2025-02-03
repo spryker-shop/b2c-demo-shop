@@ -2,6 +2,7 @@ name: B2C-CI
 
 on:
     pull_request:
+        types: [ labeled, synchronize ]
     push:
         branches:
             - master
@@ -13,6 +14,9 @@ concurrency:
 
 jobs:
     validation:
+        if: >
+            contains(github.event.pull_request.labels.*.name, 'run-static-ci')
+            || contains(github.event.pull_request.labels.*.name, 'run-latest-ci')
         name: "Static analysis"
         runs-on: ubuntu-22.04
         strategy:
@@ -120,15 +124,6 @@ jobs:
             -   name: Speccy lint Glue specification
                 run: speccy lint src/Generated/Glue/Specification/spryker_rest_api.schema.yml --rules=default
 
-            -   name: Style lint
-                run: npm run yves:stylelint
-
-            -   name: ES lint
-                run: npm run yves:lint
-
-            -   name: Front-end Formatter
-                run: npm run formatter
-
             -   name: Validate propel files
                 run: |
                     vendor/bin/console propel:schema:validate
@@ -152,8 +147,36 @@ jobs:
 
             -   name: Run Evaluator for all branches
                 run: vendor/bin/evaluator evaluate --exclude-checkers=SPRYKER_DEV_PACKAGES_CHECKER --format=compact
+    js-validation:
+        if: >
+            contains(github.event.pull_request.labels.*.name, 'run-npm-ci')
+            || contains(github.event.pull_request.labels.*.name, 'run-latest-ci')
+        name: "NPM validation"
+        runs-on: ubuntu-22.04
+        strategy:
+            fail-fast: false
+
+        env:
+            APPLICATION_ENV: ci.mysql
+            PROJECT: suite
+
+        steps:
+            -   uses: actions/checkout@v4
+
+            -   name: Install NPM packages
+                run: npm ci
+
+            -   name: Style lint
+                run: npm run yves:stylelint
+
+            -   name: ES lint
+                run: npm run yves:lint
+
+            -   name: Front-end Formatter
+                run: npm run formatter
 
     php-83-mariadb-glue-alpine-dynamic-store-off:
+        if: contains(github.event.pull_request.labels.*.name, 'run-compatibility-ci')
         name: "PHP 8.3 / MariaDB / Glue / Alpine / Dynamic Store OFF"
         runs-on: ubuntu-22.04
         env:
@@ -180,7 +203,10 @@ jobs:
 
     php-83-mariadb-glue-alpine:
         name: "PHP 8.3 / MariaDB / Glue / Alpine"
-        if: "!contains(github.event.pull_request.head.ref, 'hackathon')"
+        if: >
+            !contains(github.event.pull_request.head.ref, 'hackathon')
+            && (contains(github.event.pull_request.labels.*.name, 'run-api-ci')
+            || contains(github.event.pull_request.labels.*.name, 'run-latest-ci'))
         runs-on: ubuntu-22.04
         env:
             PROGRESS_TYPE: plain
@@ -206,6 +232,7 @@ jobs:
                     docker/sdk testing codecept run -c codeception.api.yml
 
     php-83-postgresql-glue-alpine-dynamic-store-off:
+        if: contains(github.event.pull_request.labels.*.name, 'run-compatibility-ci')
         name: "PHP 8.3 / PostgreSQL / Glue / Alpine / Dynamic Store OFF"
         runs-on: ubuntu-22.04
         env:
@@ -232,6 +259,7 @@ jobs:
 
     php-83-postgresql-glue-alpine:
         name: "PHP 8.3 / PostgreSQL / Glue / Alpine"
+        if: contains(github.event.pull_request.labels.*.name, 'run-compatibility-ci')
         runs-on: ubuntu-22.04
         env:
             PROGRESS_TYPE: plain
@@ -257,6 +285,7 @@ jobs:
                     docker/sdk testing codecept run -c codeception.api.yml
 
     php-83-mariadb-acceptance-alpine-dynamic-store-off:
+        if: contains(github.event.pull_request.labels.*.name, 'run-compatibility-ci')
         name: "PHP 8.3 / MariaDB / Acceptance / Alpine / Dynamic Store OFF"
         runs-on: ubuntu-22.04
         env:
@@ -282,7 +311,10 @@ jobs:
 
     php-83-mariadb-acceptance-alpine:
         name: "PHP 8.3 / MariaDB / Acceptance / Alpine"
-        if: "!contains(github.event.pull_request.head.ref, 'hackathon')"
+        if: >
+            !contains(github.event.pull_request.head.ref, 'hackathon')
+            && (contains(github.event.pull_request.labels.*.name, 'run-ui-ci')
+            || contains(github.event.pull_request.labels.*.name, 'run-latest-ci'))
         runs-on: ubuntu-22.04
         env:
             PROGRESS_TYPE: plain
@@ -307,6 +339,7 @@ jobs:
                     docker/sdk testing codecept run -c codeception.acceptance.yml
 
     php-83-postgresql-acceptance-alpine-dynamic-store-off:
+        if: contains(github.event.pull_request.labels.*.name, 'run-compatibility-ci')
         name: "PHP 8.3 / PostgreSQL / Acceptance / Alpine / Dynamic Store OFF"
         runs-on: ubuntu-22.04
         env:
@@ -331,8 +364,10 @@ jobs:
                     docker/sdk testing codecept run -c codeception.acceptance.yml
 
     php-83-postgresql-acceptance-alpine:
+        if: >
+            !contains(github.event.pull_request.head.ref, 'hackathon')
+            && contains(github.event.pull_request.labels.*.name, 'run-compatibility-ci')
         name: "PHP 8.3 / PostgreSQL / Acceptance / Alpine"
-        if: "!contains(github.event.pull_request.head.ref, 'hackathon')"
         runs-on: ubuntu-22.04
         env:
             PROGRESS_TYPE: plain
@@ -357,6 +392,7 @@ jobs:
                     docker/sdk testing codecept run -c codeception.acceptance.yml
 
     php-83-mariadb-functional-alpine-dynamic-store-off:
+        if: contains(github.event.pull_request.labels.*.name, 'run-compatibility-ci')
         name: "PHP 8.3 / MariaDB / Functional / Alpine / Dynamic Store OFF"
         runs-on: ubuntu-22.04
         env:
@@ -380,6 +416,9 @@ jobs:
                     docker/sdk testing codecept run -c codeception.functional.yml
 
     php-83-mariadb-functional-alpine:
+        if: >
+            contains(github.event.pull_request.labels.*.name, 'run-functional-ci')
+            || contains(github.event.pull_request.labels.*.name, 'run-latest-ci')
         name: "PHP 8.3 / MariaDB / Functional / Alpine"
         runs-on: ubuntu-22.04
         env:
@@ -404,6 +443,7 @@ jobs:
                     docker/sdk testing codecept run -c codeception.functional.yml
 
     php-83-postgresql-functional-alpine-dynamic-store-off:
+        if: contains(github.event.pull_request.labels.*.name, 'run-compatibility-ci')
         name: "PHP 8.3 / PostgreSQL / Functional / Alpine / Dynamic Store OFF"
         runs-on: ubuntu-22.04
         env:
@@ -428,8 +468,10 @@ jobs:
                     docker/sdk testing codecept run -c codeception.functional.yml
 
     php-83-postgresql-functional-alpine:
+        if: >
+            !contains(github.event.pull_request.head.ref, 'hackathon')
+            && contains(github.event.pull_request.labels.*.name, 'run-compatibility-ci')
         name: "PHP 8.3 / PostgreSQL / Functional / Alpine"
-        if: "!contains(github.event.pull_request.head.ref, 'hackathon')"
         runs-on: ubuntu-22.04
         env:
             PROGRESS_TYPE: plain
@@ -454,6 +496,7 @@ jobs:
                     docker/sdk testing codecept run -c codeception.functional.yml
 
     php-82-mariadb-glue-alpine-dynamic-store-off:
+        if: contains(github.event.pull_request.labels.*.name, 'run-compatibility-ci')
         name: "PHP 8.2 / MariaDB / Glue / Alpine / Dynamic Store OFF"
         runs-on: ubuntu-22.04
         env:
@@ -479,8 +522,10 @@ jobs:
                     docker/sdk testing codecept run -c codeception.api.yml
 
     php-82-mariadb-glue-alpine:
+        if: >
+            !contains(github.event.pull_request.head.ref, 'hackathon')
+            && contains(github.event.pull_request.labels.*.name, 'run-compatibility-ci')
         name: "PHP 8.2 / MariaDB / Glue / Alpine"
-        if: "!contains(github.event.pull_request.head.ref, 'hackathon')"
         runs-on: ubuntu-22.04
         env:
             PROGRESS_TYPE: plain
@@ -507,6 +552,7 @@ jobs:
                     docker/sdk testing codecept run -c codeception.api.yml
 
     php-82-postgresql-acceptance-alpine-dynamic-store-off:
+        if: contains(github.event.pull_request.labels.*.name, 'run-compatibility-ci')
         name: "PHP 8.2 / PostgreSQL / Acceptance / Alpine / Dynamic Store OFF"
         runs-on: ubuntu-22.04
         env:
@@ -531,6 +577,7 @@ jobs:
                     docker/sdk testing codecept run -c codeception.acceptance.yml
 
     php-82-postgresql-acceptance-alpine:
+        if: contains(github.event.pull_request.labels.*.name, 'run-compatibility-ci')
         name: "PHP 8.2 / PostgreSQL / Acceptance / Alpine"
         runs-on: ubuntu-22.04
         env:
@@ -558,6 +605,7 @@ jobs:
 
 
     php-82-postgresql-functional-alpine-dynamic-store-off:
+        if: contains(github.event.pull_request.labels.*.name, 'run-compatibility-ci')
         name: "PHP 8.2 / PostgreSQL / Functional / Alpine / Dynamic Store OFF"
         runs-on: ubuntu-22.04
         env:
@@ -582,8 +630,10 @@ jobs:
                     docker/sdk testing codecept run -c codeception.functional.yml
 
     php-82-postgresql-functional-alpine:
+        if: >
+            !contains(github.event.pull_request.head.ref, 'hackathon')
+            && contains(github.event.pull_request.labels.*.name, 'run-compatibility-ci')
         name: "PHP 8.2 / PostgreSQL / Functional / Alpine"
-        if: "!contains(github.event.pull_request.head.ref, 'hackathon')"
         runs-on: ubuntu-22.04
         env:
             PROGRESS_TYPE: plain
@@ -609,6 +659,7 @@ jobs:
                     docker/sdk testing codecept run -c codeception.functional.yml
 
     php-82-mariadb-acceptance-alpine-dynamic-store-off:
+        if: contains(github.event.pull_request.labels.*.name, 'run-compatibility-ci')
         name: "PHP 8.2 / MariaDB / Acceptance / Alpine / Dynamic Store OFF"
         runs-on: ubuntu-22.04
         env:
@@ -633,8 +684,10 @@ jobs:
                     docker/sdk testing codecept run -c codeception.acceptance.yml
 
     php-82-mariadb-acceptance-alpine:
+        if: >
+            !contains(github.event.pull_request.head.ref, 'hackathon')
+            && contains(github.event.pull_request.labels.*.name, 'run-compatibility-ci')
         name: "PHP 8.2 / MariaDB / Acceptance / Alpine"
-        if: "!contains(github.event.pull_request.head.ref, 'hackathon')"
         runs-on: ubuntu-22.04
         env:
             PROGRESS_TYPE: plain
@@ -661,6 +714,7 @@ jobs:
 
 
     php-82-mariadb-functional-alpine-dynamic-store-off:
+        if: contains(github.event.pull_request.labels.*.name, 'run-compatibility-ci')
         name: "PHP 8.2 / MariaDB / Functional / Alpine / Dynamic Store OFF"
         runs-on: ubuntu-22.04
         env:
@@ -684,8 +738,10 @@ jobs:
                     docker/sdk testing codecept run -c codeception.functional.yml
 
     php-82-mariadb-functional-alpine:
+        if: >
+            !contains(github.event.pull_request.head.ref, 'hackathon')
+            && contains(github.event.pull_request.labels.*.name, 'run-compatibility-ci')
         name: "PHP 8.2 / MariaDB / Functional / Alpine"
-        if: "!contains(github.event.pull_request.head.ref, 'hackathon')"
         runs-on: ubuntu-22.04
         env:
             PROGRESS_TYPE: plain
@@ -711,6 +767,7 @@ jobs:
 
 
     php-82-postgres-functional-debian-dynamic-store-off:
+        if: contains(github.event.pull_request.labels.*.name, 'run-compatibility-ci')
         name: "PHP 8.2 / PostgreSQL / Functional / Debian / Dynamic Store OFF"
         runs-on: ubuntu-22.04
         env:
@@ -734,8 +791,10 @@ jobs:
                     docker/sdk testing codecept run -c codeception.functional.yml
 
     php-82-postgres-functional-debian:
+        if: >
+            !contains(github.event.pull_request.head.ref, 'hackathon')
+            && contains(github.event.pull_request.labels.*.name, 'run-compatibility-ci')
         name: "PHP 8.2 / PostgreSQL / Functional / Debian"
-        if: "!contains(github.event.pull_request.head.ref, 'hackathon')"
         runs-on: ubuntu-22.04
         env:
             PROGRESS_TYPE: plain
@@ -760,8 +819,11 @@ jobs:
                     docker/sdk testing codecept run -c codeception.functional.yml
 
     frontend-assets-via-docker-php-8-2:
+        if: >
+            !contains(github.event.pull_request.head.ref, 'hackathon')
+            && (contains(github.event.pull_request.labels.*.name, 'run-functional-ci')
+                || contains(github.event.pull_request.labels.*.name, 'run-latest-ci'))
         name: "Docker / Alpine / PHP 8.2 / Frontend & Assets"
-        if: "!contains(github.event.pull_request.head.ref, 'hackathon')"
         runs-on: ubuntu-22.04
         env:
             PROGRESS_TYPE: plain
@@ -781,8 +843,10 @@ jobs:
             -   run: docker run -t --rm --entrypoint='' spryker_b2c_frontend:1.0-frontend ls -al /data/public/Zed/assets/
 
     docker-alpine-php-82-mariadb-robot-dynamic-store-off:
+        if: >
+            !contains(github.event.pull_request.head.ref, 'hackathon')
+            && contains(github.event.pull_request.labels.*.name, 'run-compatibility-ci')
         name: "Docker / Alpine / PHP 8.2 / MariaDB / Robot / API / Dynamic Store OFF"
-        if: "!contains(github.event.pull_request.head.ref, 'hackathon')"
         runs-on: ubuntu-22.04
         env:
             PROGRESS_TYPE: plain
@@ -822,8 +886,10 @@ jobs:
                     AWS_DEFAULT_REGION=${{env.ROBOT_TESTS_ARTIFACTS_BUCKET_REGION}} AWS_ACCESS_KEY_ID=${{ secrets.ROBOT_TESTS_ARTIFACTS_KEY }} AWS_SECRET_ACCESS_KEY=${{ secrets.ROBOT_TESTS_ARTIFACTS_SECRET }} aws s3 cp .robot/results/log.html s3://${{vars.ROBOT_TESTS_ARTIFACTS_BUCKET}}/b2c/dms-off/robot-api/${GITHUB_RUN_ID}/PHP8.2MariaDB/log.html
 
     docker-alpine-php-83-postgresql-robot:
+        if: >
+            !contains(github.event.pull_request.head.ref, 'hackathon')
+            && contains(github.event.pull_request.labels.*.name, 'run-compatibility-ci')
         name: "Docker / Alpine / PHP 8.3 / PostgreSQL / Robot / API"
-        if: "!contains(github.event.pull_request.head.ref, 'hackathon')"
         runs-on: ubuntu-22.04
         env:
             PROGRESS_TYPE: plain
@@ -869,8 +935,11 @@ jobs:
                     AWS_DEFAULT_REGION=${{env.ROBOT_TESTS_ARTIFACTS_BUCKET_REGION}} AWS_ACCESS_KEY_ID=${{ secrets.ROBOT_TESTS_ARTIFACTS_KEY }} AWS_SECRET_ACCESS_KEY=${{ secrets.ROBOT_TESTS_ARTIFACTS_SECRET }} aws s3 cp .robot/results/log.html s3://${{vars.ROBOT_TESTS_ARTIFACTS_BUCKET}}/b2c/dms-on/robot-api/${GITHUB_RUN_ID}/PHP8.3PostgreSQL/log.html
 
     docker-alpine-php-83-mariadb-robot:
+        if: >
+            !contains(github.event.pull_request.head.ref, 'hackathon')
+            && (contains(github.event.pull_request.labels.*.name, 'run-api-ci')
+                || contains(github.event.pull_request.labels.*.name, 'run-latest-ci'))
         name: "Docker / Alpine / PHP 8.3 / MariaDB / Robot / API"
-        if: "!contains(github.event.pull_request.head.ref, 'hackathon')"
         runs-on: ubuntu-22.04
         env:
             PROGRESS_TYPE: plain
@@ -911,8 +980,10 @@ jobs:
                     AWS_DEFAULT_REGION=${{env.ROBOT_TESTS_ARTIFACTS_BUCKET_REGION}} AWS_ACCESS_KEY_ID=${{ secrets.ROBOT_TESTS_ARTIFACTS_KEY }} AWS_SECRET_ACCESS_KEY=${{ secrets.ROBOT_TESTS_ARTIFACTS_SECRET }} aws s3 cp .robot/results/log.html s3://${{vars.ROBOT_TESTS_ARTIFACTS_BUCKET}}/b2c/dms-on/robot-api/${GITHUB_RUN_ID}/PHP8.3MariaDB/log.html
 
     docker-alpine-php-8-3-mariadb-cypress-dynamic-store-off:
+        if: >
+            !contains(github.event.pull_request.head.ref, 'hackathon')
+            && contains(github.event.pull_request.labels.*.name, 'run-compatibility-ci')
         name: "Docker / Alpine / PHP 8.3 / MariaDB / Cypress / UI / Dynamic Store OFF"
-        if: "!contains(github.event.pull_request.head.ref, 'hackathon')"
         runs-on: ubuntu-22.04
         env:
             PROGRESS_TYPE: plain
@@ -951,9 +1022,12 @@ jobs:
                 run: |
                     AWS_DEFAULT_REGION=${{env.ROBOT_TESTS_ARTIFACTS_BUCKET_REGION}} AWS_ACCESS_KEY_ID=${{ secrets.ROBOT_TESTS_ARTIFACTS_KEY }} AWS_SECRET_ACCESS_KEY=${{ secrets.ROBOT_TESTS_ARTIFACTS_SECRET }} aws s3 cp .cypress s3://${{vars.ROBOT_TESTS_ARTIFACTS_BUCKET}}/b2c/dms-off/cypress/${GITHUB_RUN_ID}/PHP8.3MariaDB/ --recursive
 
-    docker-alpine-php-83-mariadb-cypress:
+    docker-alpine-php-8-3-mariadb-cypress:
+        if: >
+            !contains(github.event.pull_request.head.ref, 'hackathon')
+            && (contains(github.event.pull_request.labels.*.name, 'run-ui-ci')
+                || contains(github.event.pull_request.labels.*.name, 'run-latest-ci'))
         name: "Docker / Alpine / PHP 8.3 / MariaDB / Cypress / UI"
-        if: "!contains(github.event.pull_request.head.ref, 'hackathon')"
         runs-on: ubuntu-22.04
         env:
             PROGRESS_TYPE: plain
