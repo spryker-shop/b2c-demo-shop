@@ -12,6 +12,41 @@ concurrency:
     cancel-in-progress: true
 
 jobs:
+    dummy-success-job:
+        if: >
+            (github.event_name == 'workflow_dispatch' && github.ref == 'feature/frw-9607-automate-weekly-ci-test-execution')
+        runs-on: ubuntu-22.04
+        steps:
+            -   name: Dummy Success step
+                run: echo "Dummy Success step"
+            -   name: Slack Notification for scheduled job
+                uses: ./.github/actions/scheduled-job-slack-notifications
+
+    dummy-failed-job:
+        if: >
+            (github.event_name == 'workflow_dispatch' && github.ref == 'feature/frw-9607-automate-weekly-ci-test-execution')
+        runs-on: ubuntu-22.04
+        steps:
+            -   name: Dummy Failed step
+                run: exit 1
+            -   name: Slack Notification for scheduled job
+                uses: ./.github/actions/scheduled-job-slack-notifications
+    dummy-failed-job-with-retry:
+        if: >
+            (github.event_name == 'workflow_dispatch' && github.ref == 'feature/frw-9607-automate-weekly-ci-test-execution')
+        runs-on: ubuntu-22.04
+        steps:
+            -   name: Dummy Failed step
+                run: exit 1
+                id: dummy-failed-step
+                continue-on-error: true
+            -   name: Dummy Retry step
+                if: steps.dummy-failed-step.outcome == 'failure'
+                run: echo "Dummy Retry step"
+            -   name: Slack Notification for scheduled job
+                uses: ./.github/actions/scheduled-job-slack-notifications
+
+
     docker-alpine-php-8-3-mariadb-robot-ui-group-one:
         if: >
             (github.event_name == 'pull_request'
