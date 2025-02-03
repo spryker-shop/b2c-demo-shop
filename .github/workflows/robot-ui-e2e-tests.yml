@@ -12,41 +12,6 @@ concurrency:
     cancel-in-progress: true
 
 jobs:
-    dummy-success-job:
-        if: >
-            (github.event_name == 'workflow_dispatch' && github.ref == 'feature/frw-9607-automate-weekly-ci-test-execution')
-        runs-on: ubuntu-22.04
-        steps:
-            -   name: Dummy Success step
-                run: echo "Dummy Success step"
-            -   name: Slack Notification for scheduled job
-                uses: ./.github/actions/scheduled-job-slack-notifications
-
-    dummy-failed-job:
-        if: >
-            (github.event_name == 'workflow_dispatch' && github.ref == 'feature/frw-9607-automate-weekly-ci-test-execution')
-        runs-on: ubuntu-22.04
-        steps:
-            -   name: Dummy Failed step
-                run: exit 1
-            -   name: Slack Notification for scheduled job
-                uses: ./.github/actions/scheduled-job-slack-notifications
-    dummy-failed-job-with-retry:
-        if: >
-            (github.event_name == 'workflow_dispatch' && github.ref == 'feature/frw-9607-automate-weekly-ci-test-execution')
-        runs-on: ubuntu-22.04
-        steps:
-            -   name: Dummy Failed step
-                run: exit 1
-                id: dummy-failed-step
-                continue-on-error: true
-            -   name: Dummy Retry step
-                if: steps.dummy-failed-step.outcome == 'failure'
-                run: echo "Dummy Retry step"
-            -   name: Slack Notification for scheduled job
-                uses: ./.github/actions/scheduled-job-slack-notifications
-
-
     docker-alpine-php-8-3-mariadb-robot-ui-group-one:
         if: >
             (github.event_name == 'pull_request'
@@ -118,22 +83,12 @@ jobs:
                 run: |
                     AWS_DEFAULT_REGION=${{env.ROBOT_TESTS_ARTIFACTS_BUCKET_REGION}} AWS_ACCESS_KEY_ID=${{ secrets.ROBOT_TESTS_ARTIFACTS_KEY }} AWS_SECRET_ACCESS_KEY=${{ secrets.ROBOT_TESTS_ARTIFACTS_SECRET }} aws s3 cp .robot/results/log.html s3://${{vars.ROBOT_TESTS_ARTIFACTS_BUCKET}}/b2c/dms-on/robot-ui/${GITHUB_RUN_ID}/PHP8.3MariaDB/group1/log.html
 
-            -   name: Notify Slack on Scheduled Job Failure
-                if: failure() && github.event_name == 'schedule'
-                uses: slackapi/slack-github-action@v1.26.0
+            -   name: Slack Notification for scheduled job
+                uses: ./.github/actions/scheduled-job-slack-notifications
                 env:
                     SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-                with:
-                    channel-id: ${{ secrets.WEEKLY_CI_SLACK_CHANNEL_ID }}
-                    slack-message: "❌Scheduled job *${{github.job}}* on the *${{ github.repository }}* repository failed. Manual intervention is required! \n*Details*: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-            -   name: Notify Slack on Scheduled Job Success
-                if: failure() == false && github.event_name == 'schedule'
-                uses: slackapi/slack-github-action@v1.26.0
-                env:
-                    SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-                with:
-                    channel-id: ${{ secrets.WEEKLY_CI_SLACK_CHANNEL_ID }}
-                    slack-message: "✅Scheduled job *${{github.job}}* on the *${{ github.repository }}* repository succeeded."
+                    SLACK_CHANNEL_ID: ${{ secrets.WEEKLY_CI_SLACK_CHANNEL_ID }}
+                if: always()
 
     docker-alpine-php-8-3-mariadb-robot-ui-group-two:
         if: >
@@ -206,22 +161,12 @@ jobs:
                 run: |
                     AWS_DEFAULT_REGION=${{env.ROBOT_TESTS_ARTIFACTS_BUCKET_REGION}} AWS_ACCESS_KEY_ID=${{ secrets.ROBOT_TESTS_ARTIFACTS_KEY }} AWS_SECRET_ACCESS_KEY=${{ secrets.ROBOT_TESTS_ARTIFACTS_SECRET }} aws s3 cp .robot/results/log.html s3://${{vars.ROBOT_TESTS_ARTIFACTS_BUCKET}}/b2c/dms-on/robot-ui/${GITHUB_RUN_ID}/PHP8.3MariaDB/group2/log.html
 
-            -   name: Notify Slack on Scheduled Job Failure
-                if: failure() && github.event_name == 'schedule'
-                uses: slackapi/slack-github-action@v1.26.0
+            -   name: Slack Notification for scheduled job
+                uses: ./.github/actions/scheduled-job-slack-notifications
                 env:
                     SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-                with:
-                    channel-id: ${{ secrets.WEEKLY_CI_SLACK_CHANNEL_ID }}
-                    slack-message: "❌Scheduled job *${{github.job}}* on the *${{ github.repository }}* repository failed. Manual intervention is required! \n*Details*: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-            -   name: Notify Slack on Scheduled Job Success
-                if: failure() == false && github.event_name == 'schedule'
-                uses: slackapi/slack-github-action@v1.26.0
-                env:
-                    SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-                with:
-                    channel-id: ${{ secrets.WEEKLY_CI_SLACK_CHANNEL_ID }}
-                    slack-message: "✅Scheduled job *${{github.job}}* on the *${{ github.repository }}* repository succeeded."
+                    SLACK_CHANNEL_ID: ${{ secrets.WEEKLY_CI_SLACK_CHANNEL_ID }}
+                if: always()
 
     docker-alpine-php-8-3-mariadb-robot-ui-group-three:
         if: >
@@ -293,22 +238,12 @@ jobs:
                 run: |
                     AWS_DEFAULT_REGION=${{env.ROBOT_TESTS_ARTIFACTS_BUCKET_REGION}} AWS_ACCESS_KEY_ID=${{ secrets.ROBOT_TESTS_ARTIFACTS_KEY }} AWS_SECRET_ACCESS_KEY=${{ secrets.ROBOT_TESTS_ARTIFACTS_SECRET }} aws s3 cp .robot/results/log.html s3://${{vars.ROBOT_TESTS_ARTIFACTS_BUCKET}}/b2c/dms-on/robot-ui/${GITHUB_RUN_ID}/PHP8.3MariaDB/group3/log.html
 
-            -   name: Notify Slack on Scheduled Job Failure
-                if: failure() && github.event_name == 'schedule'
-                uses: slackapi/slack-github-action@v1.26.0
+            -   name: Slack Notification for scheduled job
+                uses: ./.github/actions/scheduled-job-slack-notifications
                 env:
                     SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-                with:
-                    channel-id: ${{ secrets.WEEKLY_CI_SLACK_CHANNEL_ID }}
-                    slack-message: "❌Scheduled job *${{github.job}}* on the *${{ github.repository }}* repository failed. Manual intervention is required! \n*Details*: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-            -   name: Notify Slack on Scheduled Job Success
-                if: failure() == false && github.event_name == 'schedule'
-                uses: slackapi/slack-github-action@v1.26.0
-                env:
-                    SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-                with:
-                    channel-id: ${{ secrets.WEEKLY_CI_SLACK_CHANNEL_ID }}
-                    slack-message: "✅Scheduled job *${{github.job}}* on the *${{ github.repository }}* repository succeeded."
+                    SLACK_CHANNEL_ID: ${{ secrets.WEEKLY_CI_SLACK_CHANNEL_ID }}
+                if: always()
 
     docker-alpine-php-82-postgresql-dynamic-store-off-robot-ui-group-one:
         if: >
@@ -379,22 +314,12 @@ jobs:
                 run: |
                     AWS_DEFAULT_REGION=${{env.ROBOT_TESTS_ARTIFACTS_BUCKET_REGION}} AWS_ACCESS_KEY_ID=${{ secrets.ROBOT_TESTS_ARTIFACTS_KEY }} AWS_SECRET_ACCESS_KEY=${{ secrets.ROBOT_TESTS_ARTIFACTS_SECRET }} aws s3 cp .robot/results/log.html s3://${{vars.ROBOT_TESTS_ARTIFACTS_BUCKET}}/b2c/dms-off/robot-ui/${GITHUB_RUN_ID}/PHP8.2PostgreSQL/group1/log.html
 
-            -   name: Notify Slack on Scheduled Job Failure
-                if: failure() && github.event_name == 'schedule'
-                uses: slackapi/slack-github-action@v1.26.0
+            -   name: Slack Notification for scheduled job
+                uses: ./.github/actions/scheduled-job-slack-notifications
                 env:
                     SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-                with:
-                    channel-id: ${{ secrets.WEEKLY_CI_SLACK_CHANNEL_ID }}
-                    slack-message: "❌Scheduled job *${{github.job}}* on the *${{ github.repository }}* repository failed. Manual intervention is required! \n*Details*: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-            -   name: Notify Slack on Scheduled Job Success
-                if: failure() == false && github.event_name == 'schedule'
-                uses: slackapi/slack-github-action@v1.26.0
-                env:
-                    SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-                with:
-                    channel-id: ${{ secrets.WEEKLY_CI_SLACK_CHANNEL_ID }}
-                    slack-message: "✅Scheduled job *${{github.job}}* on the *${{ github.repository }}* repository succeeded."
+                    SLACK_CHANNEL_ID: ${{ secrets.WEEKLY_CI_SLACK_CHANNEL_ID }}
+                if: always()
 
     docker-alpine-php-82-postgresql-dynamic-store-off-robot-ui-group-two:
         if: >
@@ -465,22 +390,12 @@ jobs:
                 run: |
                     AWS_DEFAULT_REGION=${{env.ROBOT_TESTS_ARTIFACTS_BUCKET_REGION}} AWS_ACCESS_KEY_ID=${{ secrets.ROBOT_TESTS_ARTIFACTS_KEY }} AWS_SECRET_ACCESS_KEY=${{ secrets.ROBOT_TESTS_ARTIFACTS_SECRET }} aws s3 cp .robot/results/log.html s3://${{vars.ROBOT_TESTS_ARTIFACTS_BUCKET}}/b2c/dms-off/robot-ui/${GITHUB_RUN_ID}/PHP8.2PostgreSQL/group2/log.html
 
-            -   name: Notify Slack on Scheduled Job Failure
-                if: failure() && github.event_name == 'schedule'
-                uses: slackapi/slack-github-action@v1.26.0
+            -   name: Slack Notification for scheduled job
+                uses: ./.github/actions/scheduled-job-slack-notifications
                 env:
                     SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-                with:
-                    channel-id: ${{ secrets.WEEKLY_CI_SLACK_CHANNEL_ID }}
-                    slack-message: "❌Scheduled job *${{github.job}}* on the *${{ github.repository }}* repository failed. Manual intervention is required! \n*Details*: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-            -   name: Notify Slack on Scheduled Job Success
-                if: failure() == false && github.event_name == 'schedule'
-                uses: slackapi/slack-github-action@v1.26.0
-                env:
-                    SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-                with:
-                    channel-id: ${{ secrets.WEEKLY_CI_SLACK_CHANNEL_ID }}
-                    slack-message: "✅Scheduled job *${{github.job}}* on the *${{ github.repository }}* repository succeeded."
+                    SLACK_CHANNEL_ID: ${{ secrets.WEEKLY_CI_SLACK_CHANNEL_ID }}
+                if: always()
 
     docker-alpine-php-82-postgresql-dynamic-store-off-robot-ui-group-three:
         if: >
@@ -550,19 +465,9 @@ jobs:
                 run: |
                     AWS_DEFAULT_REGION=${{env.ROBOT_TESTS_ARTIFACTS_BUCKET_REGION}} AWS_ACCESS_KEY_ID=${{ secrets.ROBOT_TESTS_ARTIFACTS_KEY }} AWS_SECRET_ACCESS_KEY=${{ secrets.ROBOT_TESTS_ARTIFACTS_SECRET }} aws s3 cp .robot/results/log.html s3://${{vars.ROBOT_TESTS_ARTIFACTS_BUCKET}}/b2c/dms-off/robot-ui/${GITHUB_RUN_ID}/PHP8.2PostgreSQL/group3/log.html
 
-            -   name: Notify Slack on Scheduled Job Failure
-                if: failure() && github.event_name == 'schedule'
-                uses: slackapi/slack-github-action@v1.26.0
+            -   name: Slack Notification for scheduled job
+                uses: ./.github/actions/scheduled-job-slack-notifications
                 env:
                     SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-                with:
-                    channel-id: ${{ secrets.WEEKLY_CI_SLACK_CHANNEL_ID }}
-                    slack-message: "❌Scheduled job *${{github.job}}* on the *${{ github.repository }}* repository failed. Manual intervention is required! \n*Details*: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-            -   name: Notify Slack on Scheduled Job Success
-                if: failure() == false && github.event_name == 'schedule'
-                uses: slackapi/slack-github-action@v1.26.0
-                env:
-                    SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-                with:
-                    channel-id: ${{ secrets.WEEKLY_CI_SLACK_CHANNEL_ID }}
-                    slack-message: "✅Scheduled job *${{github.job}}* on the *${{ github.repository }}* repository succeeded."
+                    SLACK_CHANNEL_ID: ${{ secrets.WEEKLY_CI_SLACK_CHANNEL_ID }}
+                if: always()
