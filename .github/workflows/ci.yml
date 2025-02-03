@@ -2,6 +2,7 @@ name: B2C-CI
 
 on:
     pull_request:
+        types: [ labeled, synchronize ]
     workflow_dispatch:
     schedule:
         -   cron: '0 0 * * 0'
@@ -14,7 +15,7 @@ jobs:
     validation:
         if: >
             contains(github.event.pull_request.labels.*.name, 'run-static-ci')
-            || contains(github.event.pull_request.labels.*.name, 'run-all-ci')
+            || contains(github.event.pull_request.labels.*.name, 'run-latest-ci')
             || (github.event_name == 'schedule' && github.ref == 'refs/heads/master')
         name: "Static analysis"
         runs-on: ubuntu-22.04
@@ -123,15 +124,6 @@ jobs:
             -   name: Speccy lint Glue specification
                 run: speccy lint src/Generated/Glue/Specification/spryker_rest_api.schema.yml --rules=default
 
-            -   name: Style lint
-                run: npm run yves:stylelint
-
-            -   name: ES lint
-                run: npm run yves:lint
-
-            -   name: Front-end Formatter
-                run: npm run formatter
-
             -   name: Validate propel files
                 run: |
                     vendor/bin/console propel:schema:validate
@@ -155,6 +147,33 @@ jobs:
 
             -   name: Run Evaluator for all branches
                 run: vendor/bin/evaluator evaluate --exclude-checkers=SPRYKER_DEV_PACKAGES_CHECKER --format=compact
+    js-validation:
+        if: >
+            contains(github.event.pull_request.labels.*.name, 'run-npm-ci')
+            || contains(github.event.pull_request.labels.*.name, 'run-latest-ci')
+        name: "NPM validation"
+        runs-on: ubuntu-22.04
+        strategy:
+            fail-fast: false
+
+        env:
+            APPLICATION_ENV: ci.mysql
+            PROJECT: suite
+
+        steps:
+            -   uses: actions/checkout@v4
+
+            -   name: Install NPM packages
+                run: npm ci
+
+            -   name: Style lint
+                run: npm run yves:stylelint
+
+            -   name: ES lint
+                run: npm run yves:lint
+
+            -   name: Front-end Formatter
+                run: npm run formatter
 
             -   name: Notify Slack on Scheduled Job Failure
                 if: failure() && github.event_name == 'schedule'
@@ -223,7 +242,7 @@ jobs:
         if: >
             !contains(github.event.pull_request.head.ref, 'hackathon')
             && (contains(github.event.pull_request.labels.*.name, 'run-api-ci')
-            || contains(github.event.pull_request.labels.*.name, 'run-all-ci'))
+                || contains(github.event.pull_request.labels.*.name, 'run-latest-ci'))
             || (github.event_name == 'schedule' && github.ref == 'refs/heads/master')
         runs-on: ubuntu-22.04
         env:
@@ -406,7 +425,7 @@ jobs:
         if: >
             !contains(github.event.pull_request.head.ref, 'hackathon')
             && (contains(github.event.pull_request.labels.*.name, 'run-ui-ci')
-            || contains(github.event.pull_request.labels.*.name, 'run-all-ci'))
+            || contains(github.event.pull_request.labels.*.name, 'run-latest-ci'))
             || (github.event_name == 'schedule' && github.ref == 'refs/heads/master')
         runs-on: ubuntu-22.04
         env:
@@ -584,7 +603,7 @@ jobs:
     php-83-mariadb-functional-alpine:
         if: >
             contains(github.event.pull_request.labels.*.name, 'run-functional-ci')
-            || contains(github.event.pull_request.labels.*.name, 'run-all-ci')
+            || contains(github.event.pull_request.labels.*.name, 'run-latest-ci')
             || (github.event_name == 'schedule' && github.ref == 'refs/heads/master')
         name: "PHP 8.3 / MariaDB / Functional / Alpine"
         runs-on: ubuntu-22.04
@@ -1266,7 +1285,7 @@ jobs:
         if: >
             !contains(github.event.pull_request.head.ref, 'hackathon')
             && (contains(github.event.pull_request.labels.*.name, 'run-functional-ci')
-                || contains(github.event.pull_request.labels.*.name, 'run-all-ci'))
+                || contains(github.event.pull_request.labels.*.name, 'run-latest-ci'))
             || (github.event_name == 'schedule' && github.ref == 'refs/heads/master')
         name: "Docker / Alpine / PHP 8.2 / Frontend & Assets"
         runs-on: ubuntu-22.04
@@ -1436,7 +1455,7 @@ jobs:
         if: >
             !contains(github.event.pull_request.head.ref, 'hackathon')
             && (contains(github.event.pull_request.labels.*.name, 'run-api-ci')
-                || contains(github.event.pull_request.labels.*.name, 'run-all-ci'))
+                || contains(github.event.pull_request.labels.*.name, 'run-latest-ci'))
             || (github.event_name == 'schedule' && github.ref == 'refs/heads/master')
         name: "Docker / Alpine / PHP 8.3 / MariaDB / Robot / API"
         runs-on: ubuntu-22.04
@@ -1560,7 +1579,7 @@ jobs:
         if: >
             !contains(github.event.pull_request.head.ref, 'hackathon')
             && (contains(github.event.pull_request.labels.*.name, 'run-ui-ci')
-                || contains(github.event.pull_request.labels.*.name, 'run-all-ci'))
+                || contains(github.event.pull_request.labels.*.name, 'run-latest-ci'))
             || (github.event_name == 'schedule' && github.ref == 'refs/heads/master')
         name: "Docker / Alpine / PHP 8.3 / MariaDB / Cypress / UI"
         runs-on: ubuntu-22.04

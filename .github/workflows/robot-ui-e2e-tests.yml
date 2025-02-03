@@ -16,7 +16,7 @@ jobs:
         if: >
             (github.event_name == 'pull_request'
                 && (contains(github.event.pull_request.labels.*.name, 'run-ui-ci')
-                    || contains(github.event.pull_request.labels.*.name, 'run-all-ci'))
+                    || contains(github.event.pull_request.labels.*.name, 'run-latest-ci'))
             ) || (github.event_name == 'schedule' && github.ref == 'refs/heads/master')
         name: "Docker / Alpine / PHP 8.3 / MariaDB / Robot / UI / Group One"
         runs-on: ubuntu-22.04
@@ -104,7 +104,7 @@ jobs:
         if: >
             (github.event_name == 'pull_request'
                 && (contains(github.event.pull_request.labels.*.name, 'run-ui-ci')
-                    || contains(github.event.pull_request.labels.*.name, 'run-all-ci'))
+                    || contains(github.event.pull_request.labels.*.name, 'run-latest-ci'))
             ) || (github.event_name == 'schedule' && github.ref == 'refs/heads/master')
         name: "Docker / Alpine / PHP 8.3 / MariaDB / Robot / UI /Group Two"
         runs-on: ubuntu-22.04
@@ -192,7 +192,7 @@ jobs:
         if: >
             (github.event_name == 'pull_request'
                 && (contains(github.event.pull_request.labels.*.name, 'run-ui-ci')
-                    || contains(github.event.pull_request.labels.*.name, 'run-all-ci'))
+                    || contains(github.event.pull_request.labels.*.name, 'run-latest-ci'))
             ) || (github.event_name == 'schedule' && github.ref == 'refs/heads/master')
         name: "Docker / Alpine / PHP 8.3 / MariaDB / Robot / UI / Group Three"
         runs-on: ubuntu-22.04
