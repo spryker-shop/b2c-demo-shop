@@ -159,6 +159,7 @@ jobs:
         if: >
             contains(github.event.pull_request.labels.*.name, 'run-npm-ci')
             || contains(github.event.pull_request.labels.*.name, 'run-latest-ci')
+            || (github.event_name == 'schedule' && github.ref == 'refs/heads/master')
         name: "NPM validation"
         runs-on: ubuntu-22.04
         strategy:
