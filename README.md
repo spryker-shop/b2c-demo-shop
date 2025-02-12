@@ -7,6 +7,7 @@
 
 
 
+
 Spryker B2C Demo Shop is a collection of Spryker B2C-specific features. It suits most projects as a starting point of development and can be used to explore Spryker.
 
 ## B2C Demo Shop quick start
