@@ -66,6 +66,7 @@ class InitializeProductExportMessageTest extends Unit
 
         // Act
         $this->tester->setupMessageBroker(InitializeProductExportTransfer::class, $channelName);
+        $this->tester->setupMessageBrokerPlugins();
         $messageBrokerFacade = $this->tester->getLocator()->messageBroker()->facade();
         $messageBrokerFacade->sendMessage(
             $this->tester->buildInitializeProductExportTransfer(),
