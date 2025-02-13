@@ -283,6 +283,7 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
             new PaymentsResourceRoutePlugin(),
             new PaymentCancellationsResourceRoutePlugin(),
             new PaymentCustomersResourceRoutePlugin(),
+            new TaxValidateIdResourceRoutePlugin(),
         ];
     }
 
