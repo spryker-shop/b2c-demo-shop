@@ -10,6 +10,7 @@ declare(strict_types = 1);
 namespace Pyz\Yves\Router;
 
 use Pyz\Yves\ExampleProductSalePage\Plugin\Router\ExampleProductSaleRouteProviderPlugin;
+use Spryker\Yves\CustomerDataChangeRequest\Plugin\Router\CustomerDataChangeRequestRouteProviderPlugin;
 use Spryker\Yves\HealthCheck\Plugin\Router\HealthCheckRouteProviderPlugin;
 use Spryker\Yves\Router\Plugin\RouteManipulator\LanguageDefaultPostAddRouteManipulatorPlugin;
 use Spryker\Yves\Router\Plugin\RouteManipulator\SslPostAddRouteManipulatorPlugin;
@@ -130,6 +131,7 @@ class RouterDependencyProvider extends SprykerRouterDependencyProvider
             new OrderCustomReferenceWidgetAsyncRouteProviderPlugin(),
             new ProductComparisonPageRouteProviderPlugin(),
             new PaymentAppWidgetRouteProviderPlugin(),
+            new CustomerDataChangeRequestRouteProviderPlugin(),
         ];
     }
 
