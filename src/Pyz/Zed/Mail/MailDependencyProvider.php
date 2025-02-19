@@ -16,6 +16,8 @@ use Spryker\Zed\Customer\Communication\Plugin\Mail\CustomerRegistrationConfirmat
 use Spryker\Zed\Customer\Communication\Plugin\Mail\CustomerRegistrationMailTypeBuilderPlugin;
 use Spryker\Zed\Customer\Communication\Plugin\Mail\CustomerRestoredPasswordConfirmationMailTypeBuilderPlugin;
 use Spryker\Zed\Customer\Communication\Plugin\Mail\CustomerRestorePasswordMailTypeBuilderPlugin;
+use Spryker\Zed\CustomerDataChangeRequest\Communication\Plugin\Mail\CustomerEmailChangeNotificationMailTypePlugin;
+use Spryker\Zed\CustomerDataChangeRequest\Communication\Plugin\Mail\CustomerEmailChangeVerificationMailTypePlugin;
 use Spryker\Zed\GiftCardMailConnector\Communication\Plugin\Mail\GiftCardDeliveryMailTypeBuilderPlugin;
 use Spryker\Zed\GiftCardMailConnector\Communication\Plugin\Mail\GiftCardUsageMailTypeBuilderPlugin;
 use Spryker\Zed\Kernel\Container;
@@ -86,6 +88,8 @@ class MailDependencyProvider extends SprykerMailDependencyProvider
             new GiftCardDeliveryMailTypeBuilderPlugin(),
             new GiftCardUsageMailTypeBuilderPlugin(),
             new OrderInvoiceMailTypeBuilderPlugin(),
+            new CustomerEmailChangeVerificationMailTypePlugin(),
+            new CustomerEmailChangeNotificationMailTypePlugin(),
         ];
     }
 }
