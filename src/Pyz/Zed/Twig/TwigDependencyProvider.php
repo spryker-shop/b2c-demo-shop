@@ -40,8 +40,11 @@ use Spryker\Zed\Gui\Communication\Plugin\Twig\NumberFormatterTwigPlugin;
 use Spryker\Zed\Gui\Communication\Plugin\Twig\TabsTwigPlugin;
 use Spryker\Zed\Gui\Communication\Plugin\Twig\UrlDecodeTwigPlugin;
 use Spryker\Zed\Gui\Communication\Plugin\Twig\UrlTwigPlugin;
+use Spryker\Zed\GuiTable\Communication\Plugin\Twig\GuiTableConfigurationTwigPlugin;
 use Spryker\Zed\Http\Communication\Plugin\Twig\HttpKernelTwigPlugin;
 use Spryker\Zed\Http\Communication\Plugin\Twig\RuntimeLoaderTwigPlugin;
+use Spryker\Zed\MerchantPortalApplication\Communication\Plugin\Twig\MerchantNavigationTypeTwigPlugin;
+use Spryker\Zed\MerchantUser\Communication\Plugin\Twig\MerchantUserTwigPlugin;
 use Spryker\Zed\Money\Communication\Plugin\Twig\MoneyTwigPlugin;
 use Spryker\Zed\Scheduler\Communication\Plugin\Twig\SchedulerTwigPlugin;
 use Spryker\Zed\Translator\Communication\Plugin\Twig\TranslatorTwigPlugin;
@@ -51,6 +54,8 @@ use Spryker\Zed\Twig\TwigDependencyProvider as SprykerTwigDependencyProvider;
 use Spryker\Zed\User\Communication\Plugin\Twig\UserTwigPlugin;
 use Spryker\Zed\WebProfiler\Communication\Plugin\Twig\WebProfilerTwigLoaderPlugin;
 use Spryker\Zed\ZedNavigation\Communication\Plugin\Twig\ZedNavigationTwigPlugin;
+use Spryker\Zed\ZedUi\Communication\Plugin\Twig\BooleanToStringTwigPlugin;
+use Spryker\Zed\ZedUi\Communication\Plugin\ZedUiNavigationTwigPlugin;
 
 class TwigDependencyProvider extends SprykerTwigDependencyProvider
 {
@@ -120,5 +125,54 @@ class TwigDependencyProvider extends SprykerTwigDependencyProvider
         }
 
         return $twigLoaderPlugins;
+    }
+
+    /**
+     * @return array<\Spryker\Shared\TwigExtension\Dependency\Plugin\TwigPluginInterface>
+     */
+    protected function getTwigGatewayPlugins(): array
+    {
+        return [
+            new VarDumperTwigPlugin(),
+            new FormTwigPlugin(),
+            new HttpKernelTwigPlugin(),
+            new RoutingTwigPlugin(),
+            new SecurityTwigPlugin(),
+            new RuntimeLoaderTwigPlugin(),
+            new FormRuntimeLoaderTwigPlugin(),
+            new ApplicationTwigPlugin(),
+            new ChartGuiTwigPlugin(),
+            new UserTwigPlugin(),
+            new MoneyTwigPlugin(),
+            new CurrencyTwigPlugin(),
+            new TranslatorTwigPlugin(),
+            new DateTimeFormatterTwigPlugin(),
+            new ZedUiNavigationTwigPlugin(),
+            new SchedulerTwigPlugin(),
+            new BarcodeTwigPlugin(),
+            new CmsBlockTwigExtensionPlugin(),
+            new NumberFormatterTwigPlugin(),
+            new AssetsPathTwigPlugin(),
+            new TabsTwigPlugin(),
+            new UrlTwigPlugin(),
+            new UrlDecodeTwigPlugin(),
+            new ButtonGroupTwigPlugin(),
+            new BackActionButtonTwigPlugin(),
+            new CreateActionButtonTwigPlugin(),
+            new ViewActionButtonTwigPlugin(),
+            new EditActionButtonTwigPlugin(),
+            new RemoveActionButtonTwigPlugin(),
+            new EditTableButtonTwigPlugin(),
+            new BackTableButtonTwigPlugin(),
+            new CreateTableButtonTwigPlugin(),
+            new ViewTableButtonTwigPlugin(),
+            new RemoveTableButtonTwigPlugin(),
+            new SubmitButtonTwigPlugin(),
+            new GuiFilterTwigPlugin(),
+            new BooleanToStringTwigPlugin(),
+            new GuiTableConfigurationTwigPlugin(),
+            new MerchantUserTwigPlugin(),
+            new MerchantNavigationTypeTwigPlugin(),
+        ];
     }
 }
