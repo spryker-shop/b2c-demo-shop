@@ -1,11 +1,45 @@
 {% extends view('order-detail', '@SprykerShop:CustomerPage') %}
 
 {% block customerContent %}
-    {% widget 'CustomerReorderItemsFormWidget' args [
-        data.order,
-        {},
-        data.orderShipmentExpenses,
-        data.shipmentGroups
-    ] only %}
-    {% endwidget %}
+{#    TODO: Reorder selected items part expects FE adjustments #}
+    {% block orderDetail %}
+        {% widget 'CartReorderItemsWidget' args [
+            data.order,
+            data.shipmentGroups,
+            data.orderShipmentExpenses,
+        ] only %}
+        {% endwidget %}
+    {% endblock %}
+
+    {% block reorderAll %}
+        {% if widgetGlobalExists('CartReorderWidget') %}
+            {% widget 'CartReorderWidget' args [data.order] only %}
+                {% block body %}
+                    <div class="box text-right">
+                        {{ parent() }}
+                    </div>
+                {% endblock %}
+            {% endwidget %}
+        {% else %}
+            {% widget 'CustomerReorderFormWidget' args [data.order] only %}
+                {% block body %}
+                    <div class="box text-right">
+                        {{ parent() }}
+                    </div>
+                {% endblock %}
+            {% endwidget %}
+        {% endif %}
+    {% endblock %}
+
+    {% block orderCancel %}
+        {% widget 'OrderCancelButtonWidget' args [data.order, app.request.requestUri] only %}
+            {% block body %}
+                <div class="box text-right">
+                    {% set buttonClasses = 'button button--alert' %}
+                    {{ parent() }}
+                </div>
+            {% endblock %}
+        {% endwidget %}
+    {% endblock %}
+
 {% endblock %}
