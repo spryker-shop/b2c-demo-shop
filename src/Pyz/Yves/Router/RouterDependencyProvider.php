@@ -31,6 +31,7 @@ use SprykerShop\Yves\CartNoteWidget\Plugin\Router\CartNoteWidgetAsyncRouteProvid
 use SprykerShop\Yves\CartNoteWidget\Plugin\Router\CartNoteWidgetRouteProviderPlugin;
 use SprykerShop\Yves\CartPage\Plugin\Router\CartPageAsyncRouteProviderPlugin;
 use SprykerShop\Yves\CartPage\Plugin\Router\CartPageRouteProviderPlugin;
+use SprykerShop\Yves\CartReorderPage\Plugin\Router\CartReorderPageRouteProviderPlugin;
 use SprykerShop\Yves\CatalogPage\Plugin\Router\CatalogPageRouteProviderPlugin;
 use SprykerShop\Yves\CheckoutPage\Plugin\Router\CheckoutPageRouteProviderPlugin;
 use SprykerShop\Yves\CmsPage\Plugin\Router\CmsPageRouteProviderPlugin;
@@ -61,6 +62,7 @@ use SprykerShop\Yves\ProductNewPage\Plugin\Router\ProductNewPageRouteProviderPlu
 use SprykerShop\Yves\ProductReviewWidget\Plugin\Router\ProductReviewWidgetRouteProviderPlugin;
 use SprykerShop\Yves\ProductSearchWidget\Plugin\Router\ProductSearchWidgetRouteProviderPlugin;
 use SprykerShop\Yves\ProductSetListPage\Plugin\Router\ProductSetListPageRouteProviderPlugin;
+use SprykerShop\Yves\SalesOrderAmendmentWidget\Plugin\Router\SalesOrderAmendmentWidgetRouteProviderPlugin;
 use SprykerShop\Yves\SalesReturnPage\Plugin\Router\SalesReturnPageRouteProviderPlugin;
 use SprykerShop\Yves\StorageRouter\Plugin\Router\StorageRouterPlugin;
 use SprykerShop\Yves\WishlistPage\Plugin\Router\WishlistPageRouteProviderPlugin;
@@ -132,6 +134,8 @@ class RouterDependencyProvider extends SprykerRouterDependencyProvider
             new ProductComparisonPageRouteProviderPlugin(),
             new PaymentAppWidgetRouteProviderPlugin(),
             new CustomerDataChangeRequestRouteProviderPlugin(),
+            new CartReorderPageRouteProviderPlugin(),
+            new SalesOrderAmendmentWidgetRouteProviderPlugin(),
         ];
     }
 

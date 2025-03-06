@@ -28,6 +28,8 @@ class QuoteConfig extends SprykerQuoteConfig
             QuoteTransfer::GIFT_CARDS, #GiftCardFeature
             QuoteTransfer::IS_ORDER_PLACED_SUCCESSFULLY,
             QuoteTransfer::EXPENSES,
+            QuoteTransfer::AMENDMENT_ORDER_REFERENCE,
+            QuoteTransfer::QUOTE_PROCESS_FLOW,
         ]);
     }
 }

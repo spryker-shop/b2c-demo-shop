@@ -1,8 +1,9 @@
 <?xml version="1.0"?>
 <statemachine
-        xmlns="spryker:oms-01"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="spryker:oms-01 http://static.spryker.com/oms-01.xsd">
+    xmlns="spryker:oms-01"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="spryker:oms-01 http://static.spryker.com/oms-01.xsd"
+>
 
     <process name="DummyPayment01" main="true">
         <subprocesses>
@@ -12,10 +13,18 @@
             <process>DummyInvoice</process>
             <process>DummyPicking</process>
             <process>WarehouseAllocation</process>
+            <process>DummyOrderAmendment</process>
         </subprocesses>
 
         <states>
             <state name="new" display="oms.state.new">
+                <flag>cancellable</flag>
+            </state>
+            <state name="grace period started" reserved="true" display="oms.state.new">
+                <flag>cancellable</flag>
+                <flag>amendable</flag>
+            </state>
+            <state name="grace period finished" reserved="true" display="oms.state.new">
                 <flag>cancellable</flag>
             </state>
             <state name="payment pending" reserved="true" display="oms.state.payment-pending">
@@ -41,6 +50,18 @@
         <transitions>
             <transition happy="true">
                 <source>new</source>
+                <target>grace period started</target>
+                <event>start grace period</event>
+            </transition>
+
+            <transition happy="true">
+                <source>grace period started</source>
+                <target>grace period finished</target>
+                <event>skip grace period</event>
+            </transition>
+
+            <transition happy="true">
+                <source>grace period finished</source>
                 <target>warehouse allocated</target>
                 <event>allocate warehouse</event>
             </transition>
@@ -157,7 +178,10 @@
 
         <events>
             <event name="authorize" timeout="1 second"/>
-            <event name="pay" manual="true" timeout="1 hour" timeoutProcessor="OmsTimeout/Initiation" command="DummyPayment/Pay"/>
+            <event name="start grace period" onEnter="true"/>
+            <event name="skip grace period" manual="true" timeout="2 hour"/>
+            <event name="pay" manual="true" timeout="1 hour" timeoutProcessor="OmsTimeout/Initiation"
+                   command="DummyPayment/Pay"/>
             <event name="submit tax invoice" onEnter="true" command="TaxApp/SubmitPaymentTaxInvoice"/>
             <event name="request product review" onEnter="true" command="Order/RequestProductReviews"/>
             <event name="confirm" onEnter="true" manual="true" command="Oms/SendOrderConfirmation"/>
@@ -177,5 +201,6 @@
     <process name="DummyInvoice" file="DummySubprocess/DummyInvoice01.xml"/>
     <process name="DummyPicking" file="DummySubprocess/DummyPicking01.xml"/>
     <process name="WarehouseAllocation" file="WarehouseAllocationSubprocess/WarehouseAllocation01.xml"/>
+    <process name="DummyOrderAmendment" file="DummySubprocess/DummyOrderAmendment01.xml"/>
 
 </statemachine>
