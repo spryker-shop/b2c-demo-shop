@@ -10,6 +10,7 @@
     activePage: 'profile'
 } %}
 {% block customerContent %}
+    {% widget 'CustomerEmailChangeRequestWidget' only %}{% endwidget %}
     <div class="grid grid--justify">
         <div class="col--lg-6 col--sm-12">
             {% include molecule('customer-form', 'CustomerPage') with {
