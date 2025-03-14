@@ -33,6 +33,7 @@ use Spryker\Zed\Store\Communication\Plugin\Application\BackofficeStoreApplicatio
 use Spryker\Zed\Store\Communication\Plugin\Application\StoreBackendGatewayApplicationPlugin;
 use Spryker\Zed\Translator\Communication\Plugin\Application\TranslatorApplicationPlugin;
 use Spryker\Zed\Twig\Communication\Plugin\Application\TwigApplicationPlugin;
+use Spryker\Zed\Twig\Communication\Plugin\Application\TwigGatewayApplicationPlugin;
 use Spryker\Zed\UtilNumber\Communication\Plugin\Application\NumberFormatterApplicationPlugin;
 use Spryker\Zed\Validator\Communication\Plugin\Application\ValidatorApplicationPlugin;
 use Spryker\Zed\WebProfiler\Communication\Plugin\Application\WebProfilerApplicationPlugin;
@@ -113,10 +114,10 @@ class ApplicationDependencyProvider extends SprykerApplicationDependencyProvider
             new CurrencyBackendGatewayApplicationPlugin(),
             new MockArraySessionApplicationPlugin(),
             new TranslatorApplicationPlugin(),
-            new TwigApplicationPlugin(),
             new PropelApplicationPlugin(),
             new BackendGatewayRouterApplicationPlugin(),
             new HttpApplicationPlugin(),
+            new TwigGatewayApplicationPlugin(),
         ];
     }
 
