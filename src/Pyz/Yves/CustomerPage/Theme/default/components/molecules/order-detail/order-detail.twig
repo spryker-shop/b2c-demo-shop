@@ -19,6 +19,12 @@
             {% block actions %}
                 {% set buttonClasses = 'button button--small button--expand-mobile spacing-bottom spacing-bottom--small spacing-right' %}
 
+                {% widget 'OrderAmendmentWidget' args [embed.order] with {
+                    data: {
+                        buttonClass: 'link float-right spacing-left',
+                    },
+                } only %}{% endwidget %}
+
                 <a href="{{ url('customer/order') }}" class="{{ buttonClasses }} button--hollow">
                     {{ 'general.back.button' | trans }}
                 </a>
