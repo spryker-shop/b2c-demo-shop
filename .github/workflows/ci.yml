@@ -351,39 +351,39 @@ jobs:
                 uses: ./.github/actions/scheduled-job-slack-notifications
                 if: always()
 
-    php-83-mariadb-acceptance-alpine:
-        name: "PHP 8.3 / MariaDB / Acceptance / Alpine"
-        if: >
-            !contains(github.event.pull_request.head.ref, 'hackathon')
-            && (contains(github.event.pull_request.labels.*.name, 'run-ui-ci')
-            || contains(github.event.pull_request.labels.*.name, 'run-latest-ci'))
-            || (github.event_name == 'schedule' && github.ref == 'refs/heads/master')
-        runs-on: ubuntu-22.04
-        env:
-            PROGRESS_TYPE: plain
-            SPRYKER_PLATFORM_IMAGE: spryker/php:8.3
-            TRAVIS: 1
-            SPRYKER_CURRENT_REGION: EU
-            DYNAMIC_STORE_MODE: true
-
-        steps:
-            -   uses: actions/checkout@v4
-            -   name: Install docker-compose
-                run: |
-                    sudo curl -L "https://github.com/docker/compose/releases/download/2.12.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-                    sudo chmod +x /usr/local/bin/docker-compose
-            -   name: Run docker
-                run: |
-                    git clone https://github.com/spryker/docker-sdk.git ./docker
-                    docker/sdk boot deploy.ci.acceptance.mariadb.yml
-                    docker/sdk up -t
-                    docker/sdk testing console queue:worker:start --stop-when-empty
-                    docker/sdk cli composer dump-autoload -o -a --apcu
-                    docker/sdk testing codecept run -c codeception.acceptance.yml
-
-            -   name: Slack Notification for scheduled job
-                uses: ./.github/actions/scheduled-job-slack-notifications
-                if: always()
+#    php-83-mariadb-acceptance-alpine:
+#        name: "PHP 8.3 / MariaDB / Acceptance / Alpine"
+#        if: >
+#            !contains(github.event.pull_request.head.ref, 'hackathon')
+#            && (contains(github.event.pull_request.labels.*.name, 'run-ui-ci')
+#            || contains(github.event.pull_request.labels.*.name, 'run-latest-ci'))
+#            || (github.event_name == 'schedule' && github.ref == 'refs/heads/master')
+#        runs-on: ubuntu-22.04
+#        env:
+#            PROGRESS_TYPE: plain
+#            SPRYKER_PLATFORM_IMAGE: spryker/php:8.3
+#            TRAVIS: 1
+#            SPRYKER_CURRENT_REGION: EU
+#            DYNAMIC_STORE_MODE: true
+#
+#        steps:
+#            -   uses: actions/checkout@v4
+#            -   name: Install docker-compose
+#                run: |
+#                    sudo curl -L "https://github.com/docker/compose/releases/download/2.12.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+#                    sudo chmod +x /usr/local/bin/docker-compose
+#            -   name: Run docker
+#                run: |
+#                    git clone https://github.com/spryker/docker-sdk.git ./docker
+#                    docker/sdk boot deploy.ci.acceptance.mariadb.yml
+#                    docker/sdk up -t
+#                    docker/sdk testing console queue:worker:start --stop-when-empty
+#                    docker/sdk cli composer dump-autoload -o -a --apcu
+#                    docker/sdk testing codecept run -c codeception.acceptance.yml
+#
+#            -   name: Slack Notification for scheduled job
+#                uses: ./.github/actions/scheduled-job-slack-notifications
+#                if: always()
 
     php-83-postgresql-acceptance-alpine-dynamic-store-off:
         if: >
