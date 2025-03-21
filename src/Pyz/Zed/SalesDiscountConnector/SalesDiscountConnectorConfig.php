@@ -14,12 +14,6 @@ use Spryker\Zed\SalesDiscountConnector\SalesDiscountConnectorConfig as SprykerSa
 class SalesDiscountConnectorConfig extends SprykerSalesDiscountConnectorConfig
 {
     /**
-     * Specification:
-     * - This method is used to determine whether the current order should be excluded from the customer order count.
-     * - Set this to `true` if you want to exclude the current order from the `customer-order-count` discount condition.
-     *
-     * @api
-     *
      * @return bool
      */
     public function isCurrentOrderExcludedFromCount(): bool
