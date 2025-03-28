@@ -64,6 +64,11 @@ class CustomerProfilePage extends Customer
     /**
      * @var string
      */
+    public const CHANGE_EMAIL_MESSAGE = 'Almost there! We send you an email to validate your email address. Please confirm it to be able to log in.';
+
+    /**
+     * @var string
+     */
     public const ERROR_MESSAGE_EMAIL = 'If this E-mail address is already in use, you will receive a password reset link. Otherwise, you must first validate your E-mail address to finish registration. Please check your E-mail.';
 
     /**
