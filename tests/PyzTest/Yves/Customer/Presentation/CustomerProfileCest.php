@@ -67,7 +67,7 @@ class CustomerProfileCest
         $i->fillField(CustomerProfilePage::FORM_FIELD_SELECTOR_EMAIL, CustomerProfilePage::REGISTERED_CUSTOMER_EMAIL);
         $i->click(CustomerProfilePage::BUTTON_PROFILE_FORM_SUBMIT_TEXT, CustomerProfilePage::BUTTON_PROFILE_FORM_SUBMIT_SELECTOR);
 
-        $i->seeInSource(CustomerProfilePage::CHANGE_EMAIL_MESSAGE);
+        $i->seeInSource(CustomerProfilePage::CONFIRM_EMAIL_MESSAGE);
     }
 
     /**

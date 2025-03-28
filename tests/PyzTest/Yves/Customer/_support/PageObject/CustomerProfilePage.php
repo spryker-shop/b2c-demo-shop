@@ -64,7 +64,7 @@ class CustomerProfilePage extends Customer
     /**
      * @var string
      */
-    public const CHANGE_EMAIL_MESSAGE = 'Almost there! We send you an email to validate your email address. Please confirm it to be able to log in.';
+    public const CONFIRM_EMAIL_MESSAGE = 'Almost there! We send you an email to validate your email address. Please confirm it to be able to log in.';
 
     /**
      * @var string
