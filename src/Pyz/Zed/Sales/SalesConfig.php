@@ -60,4 +60,12 @@ class SalesConfig extends SprykerSalesConfig
     {
         return false;
     }
+
+    /**
+     * @return bool
+     */
+    public function useUniqueRandomIdOrderReferenceGenerator(): bool
+    {
+        return true;
+    }
 }

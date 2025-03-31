@@ -12,6 +12,7 @@ namespace Pyz\Zed\Sales;
 use Spryker\Zed\Currency\Communication\Plugin\Sales\CurrencyOrderExpanderPlugin;
 use Spryker\Zed\Customer\Communication\Plugin\Sales\CustomerOrderHydratePlugin;
 use Spryker\Zed\Discount\Communication\Plugin\Sales\DiscountOrderHydratePlugin;
+use Spryker\Zed\Oms\Communication\Plugin\Sales\DefaultOrderItemInitialStateProviderPlugin;
 use Spryker\Zed\Oms\Communication\Plugin\Sales\IsCancellableOrderExpanderPlugin;
 use Spryker\Zed\Oms\Communication\Plugin\Sales\IsCancellableSearchOrderExpanderPlugin;
 use Spryker\Zed\Oms\Communication\Plugin\Sales\ItemStateOrderItemExpanderPlugin;
@@ -187,6 +188,16 @@ class SalesDependencyProvider extends SprykerSalesDependencyProvider
             new ConfiguredBundlesOrderItemsPostSavePlugin(),
             new ProductConfigurationOrderItemsPostSavePlugin(),
             new ItemMetadataOrderItemsPostSavePlugin(),
+        ];
+    }
+
+    /**
+     * @return list<\Spryker\Zed\SalesExtension\Dependency\Plugin\OrderItemInitialStateProviderPluginInterface>
+     */
+    protected function getOrderItemInitialStateProviderPlugins(): array
+    {
+        return [
+            new DefaultOrderItemInitialStateProviderPlugin(),
         ];
     }
 }
