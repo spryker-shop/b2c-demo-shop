@@ -13,6 +13,8 @@ use SprykerShop\Yves\CartPage\CartPageConfig as SprykerCartPageConfig;
 
 class CartPageConfig extends SprykerCartPageConfig
 {
+    protected const IS_QUOTE_VALIDATION_ENABLED_FOR_AJAX_CART_ITEMS = false;
+
     /**
      * @var bool
      */
