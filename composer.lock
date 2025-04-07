@@ -44361,16 +44361,16 @@
         },
         {
             "name": "spryker/search-http",
-            "version": "0.5.2",
+            "version": "0.5.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/search-http.git",
-                "reference": "50db4a93c3cb2c40172f203a3e3fe9df078ad448"
+                "reference": "8d62c388eaa395d2b660bf6ee1751b68e77f2308"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/search-http/zipball/50db4a93c3cb2c40172f203a3e3fe9df078ad448",
-                "reference": "50db4a93c3cb2c40172f203a3e3fe9df078ad448",
+                "url": "https://api.github.com/repos/spryker/search-http/zipball/8d62c388eaa395d2b660bf6ee1751b68e77f2308",
+                "reference": "8d62c388eaa395d2b660bf6ee1751b68e77f2308",
                 "shasum": ""
             },
             "require": {
@@ -44401,6 +44401,7 @@
                 "spryker/guzzle": "*",
                 "spryker/propel": "*",
                 "spryker/queue": "*",
+                "spryker/rabbit-mq": "*",
                 "spryker/session": "*",
                 "spryker/testify": "*"
             },
@@ -44426,9 +44427,9 @@
             ],
             "description": "SearchHttp module",
             "support": {
-                "source": "https://github.com/spryker/search-http/tree/0.5.2"
+                "source": "https://github.com/spryker/search-http/tree/0.5.3"
             },
-            "time": "2025-03-21T11:58:47+00:00"
+            "time": "2025-04-03T13:02:19+00:00"
         },
         {
             "name": "spryker/secrets-manager",
@@ -46308,22 +46309,23 @@
         },
         {
             "name": "spryker/shipment-type-storage",
-            "version": "1.1.0",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/shipment-type-storage.git",
-                "reference": "77e463a51f34d87e4728106a5c1a38215aed13fe"
+                "reference": "8f8f9ad49add42813ae1d174c5956739a273205b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/shipment-type-storage/zipball/77e463a51f34d87e4728106a5c1a38215aed13fe",
-                "reference": "77e463a51f34d87e4728106a5c1a38215aed13fe",
+                "url": "https://api.github.com/repos/spryker/shipment-type-storage/zipball/8f8f9ad49add42813ae1d174c5956739a273205b",
+                "reference": "8f8f9ad49add42813ae1d174c5956739a273205b",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.1",
+                "php": ">=8.2",
                 "spryker/event-behavior": "^1.0.0",
                 "spryker/kernel": "^3.30.0",
+                "spryker/propel": "^3.41.0",
                 "spryker/publisher-extension": "^1.0.0",
                 "spryker/shipment": "^8.18.0",
                 "spryker/shipment-type": "^1.0.0",
@@ -46338,7 +46340,8 @@
             },
             "require-dev": {
                 "spryker/code-sniffer": "*",
-                "spryker/propel": "*",
+                "spryker/container": "*",
+                "spryker/rabbit-mq": "*",
                 "spryker/testify": "*"
             },
             "type": "library",
@@ -46358,9 +46361,9 @@
             ],
             "description": "ShipmentTypeStorage module",
             "support": {
-                "source": "https://github.com/spryker/shipment-type-storage/tree/1.1.0"
+                "source": "https://github.com/spryker/shipment-type-storage/tree/1.2.0"
             },
-            "time": "2024-05-06T12:15:28+00:00"
+            "time": "2025-04-03T13:02:19+00:00"
         },
         {
             "name": "spryker/shipment-type-storage-extension",
@@ -47583,20 +47586,20 @@
         },
         {
             "name": "spryker/store-context-storage",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/store-context-storage.git",
-                "reference": "239c461ae03c02bc8753387c2d4f8156f29cc257"
+                "reference": "7c2621ee5ff8da41f97a992b97ea384058eeb11e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/store-context-storage/zipball/239c461ae03c02bc8753387c2d4f8156f29cc257",
-                "reference": "239c461ae03c02bc8753387c2d4f8156f29cc257",
+                "url": "https://api.github.com/repos/spryker/store-context-storage/zipball/7c2621ee5ff8da41f97a992b97ea384058eeb11e",
+                "reference": "7c2621ee5ff8da41f97a992b97ea384058eeb11e",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.1",
+                "php": ">=8.2",
                 "spryker/event-behavior": "^1.0.0",
                 "spryker/kernel": "^3.30.0",
                 "spryker/publisher-extension": "^1.0.0",
@@ -47606,8 +47609,11 @@
             },
             "require-dev": {
                 "spryker/code-sniffer": "*",
+                "spryker/container": "*",
                 "spryker/propel": "*",
                 "spryker/queue": "*",
+                "spryker/rabbit-mq": "*",
+                "spryker/storage": "*",
                 "spryker/store": "*",
                 "spryker/store-context": "*",
                 "spryker/testify": "*"
@@ -47629,9 +47635,9 @@
             ],
             "description": "StoreContextStorage module",
             "support": {
-                "source": "https://github.com/spryker/store-context-storage/tree/1.0.0"
+                "source": "https://github.com/spryker/store-context-storage/tree/1.0.1"
             },
-            "time": "2024-06-18T09:53:39+00:00"
+            "time": "2025-04-03T13:02:19+00:00"
         },
         {
             "name": "spryker/store-data-import",
@@ -47825,20 +47831,20 @@
         },
         {
             "name": "spryker/store-storage",
-            "version": "1.0.1",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/store-storage.git",
-                "reference": "9d2ff1e60799e5a8b0e85d93b2f23258a82f1a84"
+                "reference": "923eefa3d2a22b58fd43838e47dc50de4732842e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/store-storage/zipball/9d2ff1e60799e5a8b0e85d93b2f23258a82f1a84",
-                "reference": "9d2ff1e60799e5a8b0e85d93b2f23258a82f1a84",
+                "url": "https://api.github.com/repos/spryker/store-storage/zipball/923eefa3d2a22b58fd43838e47dc50de4732842e",
+                "reference": "923eefa3d2a22b58fd43838e47dc50de4732842e",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.1",
+                "php": ">=8.2",
                 "spryker/country": "^4.0.0",
                 "spryker/currency": "^4.0.0",
                 "spryker/event-behavior": "^1.0.0",
@@ -47856,8 +47862,10 @@
             },
             "require-dev": {
                 "spryker/code-sniffer": "*",
+                "spryker/container": "*",
                 "spryker/propel": "*",
                 "spryker/queue": "*",
+                "spryker/rabbit-mq": "*",
                 "spryker/testify": "*"
             },
             "type": "library",
@@ -47877,9 +47885,9 @@
             ],
             "description": "StoreStorage module",
             "support": {
-                "source": "https://github.com/spryker/store-storage/tree/1.0.1"
+                "source": "https://github.com/spryker/store-storage/tree/1.0.2"
             },
-            "time": "2024-08-02T09:21:41+00:00"
+            "time": "2025-04-03T13:02:19+00:00"
         },
         {
             "name": "spryker/stores-api",
@@ -48740,20 +48748,20 @@
         },
         {
             "name": "spryker/tax-storage",
-            "version": "1.5.0",
+            "version": "1.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/tax-storage.git",
-                "reference": "63577d8e38e6180c095ecd33c4c225aaaff68846"
+                "reference": "60c5378f05f746ba2e0bf30b168a8158cfd93ba8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/tax-storage/zipball/63577d8e38e6180c095ecd33c4c225aaaff68846",
-                "reference": "63577d8e38e6180c095ecd33c4c225aaaff68846",
+                "url": "https://api.github.com/repos/spryker/tax-storage/zipball/60c5378f05f746ba2e0bf30b168a8158cfd93ba8",
+                "reference": "60c5378f05f746ba2e0bf30b168a8158cfd93ba8",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.1",
+                "php": ">=8.2",
                 "spryker/event-behavior": "^1.0.0",
                 "spryker/kernel": "^3.30.0",
                 "spryker/publisher-extension": "^1.0.0",
@@ -48770,6 +48778,7 @@
                 "spryker/event": "*",
                 "spryker/propel": "*",
                 "spryker/queue": "*",
+                "spryker/rabbit-mq": "*",
                 "spryker/store": "*",
                 "spryker/testify": "*"
             },
@@ -48794,9 +48803,9 @@
             ],
             "description": "TaxStorage module",
             "support": {
-                "source": "https://github.com/spryker/tax-storage/tree/1.5.0"
+                "source": "https://github.com/spryker/tax-storage/tree/1.5.1"
             },
-            "time": "2024-05-06T12:15:28+00:00"
+            "time": "2025-04-03T13:02:19+00:00"
         },
         {
             "name": "spryker/touch",
@@ -63403,7 +63412,7 @@
         "ext-readline": "*",
         "ext-redis": "*"
     },
-    "platform-dev": [],
+    "platform-dev": {},
     "platform-overrides": {
         "php": "8.2.0"
     },
