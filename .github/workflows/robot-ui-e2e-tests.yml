@@ -80,17 +80,21 @@ jobs:
               continue-on-error: true
               run: |
                   docker/sdk exec robot-framework rebot -d results --output output.xml --merge results/dynamic_set/output.xml results/static_set/output.xml
-            - name: Rerun Failed Tests
-              id: rerun_failed_tests
-              if: always() && steps.merge_initial_results.outcome != 'success'
-              run: |
-                  docker/sdk exec robot-framework robot -v env:ui_b2c -v docker:True -v dms:true -v headless:true -v ignore_console:false -d results/rerun --runemptysuite --rerunfailed results/output.xml --output rerun.xml -s '*'.tests.parallel_ui.b2c .
-            - name: Merge Final Test Results
-              if: always() && steps.merge_initial_results.outcome != 'success'
-              run: |
-                  docker/sdk exec robot-framework rebot -d results --merge results/output.xml results/rerun/rerun.xml
+            # - name: Rerun Failed Tests
+            #   id: rerun_failed_tests
+            #   if: always() && steps.merge_initial_results.outcome != 'success'
+            #   run: |
+            #       docker/sdk exec robot-framework robot -v env:ui_b2c -v docker:True -v dms:true -v headless:true -v ignore_console:false -d results/rerun --runemptysuite --rerunfailed results/output.xml --output rerun.xml -s '*'.tests.parallel_ui.b2c .
+            # - name: Merge Final Test Results
+            #   if: always() && steps.merge_initial_results.outcome != 'success'
+            #   run: |
+            #       docker/sdk exec robot-framework rebot -d results --merge results/output.xml results/rerun/rerun.xml
+            # - name: Upload artifacts
+            #   if: failure()
+            #   run: |
+            #       AWS_DEFAULT_REGION=${{env.ROBOT_TESTS_ARTIFACTS_BUCKET_REGION}} AWS_ACCESS_KEY_ID=${{ secrets.ROBOT_TESTS_ARTIFACTS_KEY }} AWS_SECRET_ACCESS_KEY=${{ secrets.ROBOT_TESTS_ARTIFACTS_SECRET }} aws s3 cp .robot/results/log.html s3://${{vars.ROBOT_TESTS_ARTIFACTS_BUCKET}}/b2c/dms-on/robot-ui/${GITHUB_RUN_ID}/PHP8.3MariaDB/log.html
             - name: Upload artifacts
-              if: failure()
+              if: always() && steps.merge_initial_results.outcome != 'success'
               run: |
                   AWS_DEFAULT_REGION=${{env.ROBOT_TESTS_ARTIFACTS_BUCKET_REGION}} AWS_ACCESS_KEY_ID=${{ secrets.ROBOT_TESTS_ARTIFACTS_KEY }} AWS_SECRET_ACCESS_KEY=${{ secrets.ROBOT_TESTS_ARTIFACTS_SECRET }} aws s3 cp .robot/results/log.html s3://${{vars.ROBOT_TESTS_ARTIFACTS_BUCKET}}/b2c/dms-on/robot-ui/${GITHUB_RUN_ID}/PHP8.3MariaDB/log.html
             - name: Slack Notification for scheduled job
@@ -159,17 +163,21 @@ jobs:
               continue-on-error: true
               run: |
                   docker/sdk exec robot-framework rebot -d results --output output.xml --merge results/dynamic_set/output.xml results/static_set/output.xml
-            - name: Rerun Failed Tests
-              id: rerun_failed_tests
-              if: always() && steps.merge_initial_results.outcome != 'success'
-              run: |
-                  docker/sdk exec robot-framework robot -v env:ui_b2c -v docker:True -v dms:false -v db_engine:psycopg2 -v headless:true -v ignore_console:false -d results/rerun --runemptysuite --rerunfailed results/output.xml --output rerun.xml -s '*'.tests.parallel_ui.b2c .
-            - name: Merge Final Test Results
-              if: always() && steps.merge_initial_results.outcome != 'success'
-              run: |
-                  docker/sdk exec robot-framework rebot -d results --merge results/output.xml results/rerun/rerun.xml
+            # - name: Rerun Failed Tests
+            #   id: rerun_failed_tests
+            #   if: always() && steps.merge_initial_results.outcome != 'success'
+            #   run: |
+            #       docker/sdk exec robot-framework robot -v env:ui_b2c -v docker:True -v dms:false -v db_engine:psycopg2 -v headless:true -v ignore_console:false -d results/rerun --runemptysuite --rerunfailed results/output.xml --output rerun.xml -s '*'.tests.parallel_ui.b2c .
+            # - name: Merge Final Test Results
+            #   if: always() && steps.merge_initial_results.outcome != 'success'
+            #   run: |
+            #       docker/sdk exec robot-framework rebot -d results --merge results/output.xml results/rerun/rerun.xml
+            # - name: Upload artifacts
+            #   if: failure()
+            #   run: |
+            #       AWS_DEFAULT_REGION=${{env.ROBOT_TESTS_ARTIFACTS_BUCKET_REGION}} AWS_ACCESS_KEY_ID=${{ secrets.ROBOT_TESTS_ARTIFACTS_KEY }} AWS_SECRET_ACCESS_KEY=${{ secrets.ROBOT_TESTS_ARTIFACTS_SECRET }} aws s3 cp .robot/results/log.html s3://${{vars.ROBOT_TESTS_ARTIFACTS_BUCKET}}/b2c/dms-off/robot-ui/${GITHUB_RUN_ID}/PHP8.2PostgreSQL/log.html
             - name: Upload artifacts
-              if: failure()
+              if: always() && steps.merge_initial_results.outcome != 'success'
               run: |
                   AWS_DEFAULT_REGION=${{env.ROBOT_TESTS_ARTIFACTS_BUCKET_REGION}} AWS_ACCESS_KEY_ID=${{ secrets.ROBOT_TESTS_ARTIFACTS_KEY }} AWS_SECRET_ACCESS_KEY=${{ secrets.ROBOT_TESTS_ARTIFACTS_SECRET }} aws s3 cp .robot/results/log.html s3://${{vars.ROBOT_TESTS_ARTIFACTS_BUCKET}}/b2c/dms-off/robot-ui/${GITHUB_RUN_ID}/PHP8.2PostgreSQL/log.html
             - name: Slack Notification for scheduled job
