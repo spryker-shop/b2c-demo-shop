@@ -12,6 +12,7 @@ RUN apt-get update -y && DEBIAN_FRONTEND=noninteractive apt install -y \
 RUN pip3 install  \
     --no-cache-dir  \
     robotframework  \
+    robotframework-pabot \
     robotframework-browser  \
     robotframework-databaselibrary  \
     robotframework-requests \
