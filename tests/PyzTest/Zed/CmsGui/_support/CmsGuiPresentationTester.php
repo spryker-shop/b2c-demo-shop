@@ -10,6 +10,7 @@ declare(strict_types = 1);
 namespace PyzTest\Zed\CmsGui;
 
 use Codeception\Actor;
+use Exception;
 use Faker\Factory;
 
 /**
@@ -74,6 +75,39 @@ class CmsGuiPresentationTester extends Actor
     }
 
     /**
+     * @param string $selector
+     *
+     * @return bool
+     */
+    public function tryToSeeElement(string $selector): bool
+    {
+        try {
+            $this->seeElement($selector);
+
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
+
+    /**
+     * @param string $elementIdentifier
+     *
+     * @return $this
+     */
+    public function openIboxForElement(string $elementIdentifier)
+    {
+        $collapseLinkIdentifier = $elementIdentifier
+            . '/ancestor::div[contains(@class, "ibox") and contains(@class, "collapsed")]//a[@class="collapse-link"]';
+
+        $this->waitForElementClickable($collapseLinkIdentifier);
+
+        $this->click($collapseLinkIdentifier);
+
+        return $this;
+    }
+
+    /**
      * @param int $formIndex
      * @param string $name
      * @param string $url
@@ -83,9 +117,21 @@ class CmsGuiPresentationTester extends Actor
     public function fillLocalizedUrlForm(int $formIndex, string $name, string $url)
     {
         $nameFieldIdentifier = sprintf('//*[@id="cms_page_pageAttributes_%s_name"]', $formIndex);
+
+        if (!$this->tryToSeeElement($nameFieldIdentifier)) {
+            $this->openIboxForElement($nameFieldIdentifier);
+        }
+
         $this->waitForElementVisible($nameFieldIdentifier);
+
         $this->fillField($nameFieldIdentifier, $name);
+
         $urlFieldIdentifier = sprintf('//*[@id="cms_page_pageAttributes_%s_url"]', $formIndex);
+
+        if (!$this->tryToSeeElement($urlFieldIdentifier)) {
+            $this->openIboxForElement($urlFieldIdentifier);
+        }
+
         $this->waitForElementVisible($urlFieldIdentifier);
         $this->fillField($urlFieldIdentifier, $url);
 
@@ -104,16 +150,6 @@ class CmsGuiPresentationTester extends Actor
         $translationElementId = 'cms_glossary_glossaryAttributes_' . $placeHolderIndex . '_translations_' . $localeIndex . '_translation';
 
         $this->executeJS("$('#$translationElementId').text('$contents');");
-    }
-
-    /**
-     * @return $this
-     */
-    public function expandLocalizedUrlPane()
-    {
-        $this->click('//*[@id="tab-content-general"]/div/div[7]/div[1]/a');
-
-        return $this;
     }
 
     /**
