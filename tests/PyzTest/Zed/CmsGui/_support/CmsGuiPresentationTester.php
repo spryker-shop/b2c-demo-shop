@@ -108,6 +108,18 @@ class CmsGuiPresentationTester extends Actor
     }
 
     /**
+     * @return $this
+     */
+    protected function makeSureCalendarIsClosed()
+    {
+        if ($this->tryToSeeElement('//*[@id="ui-datepicker-div"]')) {
+            $this->click('//*[@class="footer"]');
+        }
+
+        return $this;
+    }
+
+    /**
      * @param int $formIndex
      * @param string $name
      * @param string $url
@@ -116,6 +128,8 @@ class CmsGuiPresentationTester extends Actor
      */
     public function fillLocalizedUrlForm(int $formIndex, string $name, string $url)
     {
+        $this->makeSureCalendarIsClosed();
+
         $nameFieldIdentifier = sprintf('//*[@id="cms_page_pageAttributes_%s_name"]', $formIndex);
 
         if (!$this->tryToSeeElement($nameFieldIdentifier)) {
