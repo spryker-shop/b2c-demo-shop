@@ -14,8 +14,8 @@ use Spryker\Shared\GlueStorefrontApiApplication\GlueStorefrontApiApplicationCons
 use Spryker\Shared\Log\LogConstants;
 use Spryker\Shared\Product\ProductConstants;
 use Spryker\Shared\Propel\PropelConstants;
-use Spryker\Shared\Redis\RedisConstants;
 use Spryker\Shared\Queue\QueueConstants;
+use Spryker\Shared\Redis\RedisConstants;
 
 require 'config_default-docker.dev.php';
 
