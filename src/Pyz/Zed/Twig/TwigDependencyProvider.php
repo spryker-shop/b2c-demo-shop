@@ -121,4 +121,48 @@ class TwigDependencyProvider extends SprykerTwigDependencyProvider
 
         return $twigLoaderPlugins;
     }
+
+    /**
+     * @return array<\Spryker\Shared\TwigExtension\Dependency\Plugin\TwigPluginInterface>
+     */
+    protected function getTwigGatewayPlugins(): array
+    {
+        return [
+            new VarDumperTwigPlugin(),
+            new FormTwigPlugin(),
+            new HttpKernelTwigPlugin(),
+            new RoutingTwigPlugin(),
+            new SecurityTwigPlugin(),
+            new RuntimeLoaderTwigPlugin(),
+            new FormRuntimeLoaderTwigPlugin(),
+            new ApplicationTwigPlugin(),
+            new ChartGuiTwigPlugin(),
+            new UserTwigPlugin(),
+            new MoneyTwigPlugin(),
+            new CurrencyTwigPlugin(),
+            new TranslatorTwigPlugin(),
+            new DateTimeFormatterTwigPlugin(),
+            new SchedulerTwigPlugin(),
+            new BarcodeTwigPlugin(),
+            new CmsBlockTwigExtensionPlugin(),
+            new NumberFormatterTwigPlugin(),
+            new AssetsPathTwigPlugin(),
+            new TabsTwigPlugin(),
+            new UrlTwigPlugin(),
+            new UrlDecodeTwigPlugin(),
+            new ButtonGroupTwigPlugin(),
+            new BackActionButtonTwigPlugin(),
+            new CreateActionButtonTwigPlugin(),
+            new ViewActionButtonTwigPlugin(),
+            new EditActionButtonTwigPlugin(),
+            new RemoveActionButtonTwigPlugin(),
+            new EditTableButtonTwigPlugin(),
+            new BackTableButtonTwigPlugin(),
+            new CreateTableButtonTwigPlugin(),
+            new ViewTableButtonTwigPlugin(),
+            new RemoveTableButtonTwigPlugin(),
+            new SubmitButtonTwigPlugin(),
+            new GuiFilterTwigPlugin(),
+        ];
+    }
 }
