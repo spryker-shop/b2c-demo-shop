@@ -65,10 +65,6 @@ sections:
         trigger-events:
             command: 'vendor/bin/console publish:trigger-events'
 
-        publish-and-sync:
-            command: 'vendor/bin/console queue:worker:start --stop-when-empty'
-            timeout: 2000
-
     scheduler-start:
         queue-setup:
             command: 'vendor/bin/console queue:setup'
