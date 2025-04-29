@@ -13,8 +13,8 @@ use Spryker\Shared\GlueJsonApiConvention\GlueJsonApiConventionConstants;
 use Spryker\Shared\GlueStorefrontApiApplication\GlueStorefrontApiApplicationConstants;
 use Spryker\Shared\Log\LogConstants;
 use Spryker\Shared\Product\ProductConstants;
-use Spryker\Shared\Redis\RedisConstants;
 use Spryker\Shared\Propel\PropelConstants;
+use Spryker\Shared\Redis\RedisConstants;
 use Spryker\Shared\Queue\QueueConstants;
 
 require 'config_default-docker.dev.php';
