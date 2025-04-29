@@ -13,6 +13,7 @@ use Spryker\Shared\GlueJsonApiConvention\GlueJsonApiConventionConstants;
 use Spryker\Shared\GlueStorefrontApiApplication\GlueStorefrontApiApplicationConstants;
 use Spryker\Shared\Log\LogConstants;
 use Spryker\Shared\Product\ProductConstants;
+use Spryker\Shared\Redis\RedisConstants;
 use Spryker\Shared\Propel\PropelConstants;
 use Spryker\Shared\Queue\QueueConstants;
 
@@ -46,3 +47,11 @@ $config[GlueJsonApiConventionConstants::GLUE_DOMAIN] = sprintf(
     'http://%s',
     $sprykerGlueStorefrontHost ?: $sprykerGlueBackendHost ?: 'localhost',
 );
+
+// ----------------------------------------------------------------------------
+// ------------------------------ SERVICES ------------------------------------
+// ----------------------------------------------------------------------------
+
+// >>> STORAGE
+
+$config[RedisConstants::REDIS_IS_DEV_MODE] = false;
