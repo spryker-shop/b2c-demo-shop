@@ -137,6 +137,11 @@ use SprykerShop\Shared\StorageRouter\StorageRouterConstants;
 use SprykerShop\Shared\StoreWidget\StoreWidgetConstants;
 use Symfony\Component\HttpFoundation\Cookie;
 
+use SprykerEco\Shared\Unzer\UnzerConstants;
+use SprykerEco\Shared\Unzer\UnzerConfig;
+use Spryker\Shared\Vault\VaultConstants;
+use SprykerEco\Shared\UnzerApi\UnzerApiConstants;
+
 // ############################################################################
 // ############################## PRODUCTION CONFIGURATION ####################
 // ############################################################################
@@ -163,6 +168,37 @@ $config[KernelConstants::CORE_NAMESPACES] = [
     'Spryker',
     'SprykerSdk',
 ];
+
+
+// UNZER
+$config[VaultConstants::ENCRYPTION_KEY] = 'nzb9y7rNpyn5W5dd';
+$config[UnzerConstants::WEBHOOK_RETRIEVE_URL] = 'https://3804-190-229-143-91.ngrok-free.app/unzer/notification';
+$config[UnzerConstants::VAULT_DATA_TYPE] = 'unzer-private-key';
+$config[UnzerConstants::EXPENSES_REFUND_STRATEGY_KEY] = UnzerConstants::LAST_SHIPMENT_ITEM_EXPENSES_REFUND_STRATEGY;
+
+// UNZER API
+$config[UnzerApiConstants::WEBHOOK_RESOURCE_URL] = 'https://api.unzer.com/v1/webhooks';
+$config[UnzerApiConstants::CUSTOMER_RESOURCE_URL] = 'https://api.unzer.com/v1/customers/%s';
+$config[UnzerApiConstants::BASKET_RESOURCE_URL] = 'https://api.unzer.com/v2/baskets';
+$config[UnzerApiConstants::MARKETPLACE_BASKET_RESOURCE_URL] = 'https://api.unzer.com/v2/marketplace/baskets';
+$config[UnzerApiConstants::MARKETPLACE_AUTHORIZE_URL] = 'https://api.unzer.com/v1/marketplace/payments/authorize';
+$config[UnzerApiConstants::AUTHORIZE_URL] = 'https://api.unzer.com/v1/payments/authorize';
+$config[UnzerApiConstants::METADATA_RESOURCE_URL] = 'https://api.unzer.com/v1/metadata';
+$config[UnzerApiConstants::MARKETPLACE_GET_PAYMENT_URL] = 'https://api.unzer.com/v1/marketplace/payments/%s';
+$config[UnzerApiConstants::GET_PAYMENT_URL] = 'https://api.unzer.com/v1/payments/%s';
+$config[UnzerApiConstants::CHARGE_URL] = 'https://api.unzer.com/v1/payments/charges';
+$config[UnzerApiConstants::MARKETPLACE_CHARGE_URL] = 'https://api.unzer.com/v1/marketplace/payments/charges';
+$config[UnzerApiConstants::MARKETPLACE_CREDIT_CARD_CHARGE_URL] = 'https://api.unzer.com/v1/marketplace/payments/%s/authorize/%s/charges';
+$config[UnzerApiConstants::CREDIT_CARD_CHARGE_URL] = 'https://api.unzer.com/v1/payments/%s/charges';
+$config[UnzerApiConstants::CREATE_PAYMENT_RESOURCE_URL] = 'https://api.unzer.com/v1/types/%s';
+$config[UnzerApiConstants::MARKETPLACE_REFUND_URL] = 'https://api.unzer.com/v1/marketplace/payments/%s/charges/%s/cancels';
+$config[UnzerApiConstants::REFUND_URL] = 'https://api.unzer.com/v1/payments/%s/charges/%s/cancels';
+$config[UnzerApiConstants::GET_PAYMENT_METHODS_URL] = 'https://api.unzer.com/v1/keypair';
+
+
+$config[UnzerConstants::UNZER_AUTHORIZE_RETURN_URL] = 'https://mysprykershop/unzer/payment-result';
+$config[UnzerConstants::UNZER_CHARGE_RETURN_URL] = 'https://mysprykershop/unzer/payment-result';
+
 
 // >>> ROUTER
 
@@ -714,6 +750,7 @@ $config[OmsConstants::PROCESS_LOCATION] = [
 ];
 $config[OmsConstants::ACTIVE_PROCESSES] = [
     'ForeignPaymentB2CStateMachine01',
+    'UnzerCreditCard'
 ];
 $config[SalesConstants::PAYMENT_METHOD_STATEMACHINE_MAPPING] = [
     PaymentConfig::PAYMENT_FOREIGN_PROVIDER => 'ForeignPaymentB2CStateMachine01',

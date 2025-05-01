@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<statemachine
+    xmlns="spryker:oms-01"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="spryker:oms-01 http://static.spryker.com/oms-01.xsd">
+
+    <process name="UnzerCreditCard" main="true">
+
+        <states>
+            <state name="new" reserved="true"/>
+            <state name="authorize pending" reserved="true"/>
+            <state name="authorize succeeded" reserved="true"/>
+            <state name="authorize failed"/>
+            <state name="authorize canceled"/>
+            <state name="charge pending" reserved="true"/>
+            <state name="payment completed" reserved="true"/>
+            <state name="charge failed"/>
+            <state name="refunded"/>
+            <state name="payment chargeback"/>
+            <state name="shipped"/>
+            <state name="closed"/>
+        </states>
+
+        <events>
+            <event name="charge" manual="true" command="Unzer/Charge"/>
+            <event name="refund" manual="true" command="Unzer/Refund"/>
+            <event name="ship" manual="true"/>
+            <event name="close" manual="false" timeout="14 days"/>
+        </events>
+
+        <transitions>
+            <transition happy="true">
+                <source>new</source>
+                <target>authorize pending</target>
+            </transition>
+
+            <transition condition="Unzer/IsAuthorizeSucceeded" happy="true">
+                <source>authorize pending</source>
+                <target>authorize succeeded</target>
+            </transition>
+
+            <transition condition="Unzer/IsAuthorizeFailed" happy="true">
+                <source>authorize pending</source>
+                <target>authorize failed</target>
+            </transition>
+
+            <transition condition="Unzer/IsAuthorizeCanceled" happy="true">
+                <source>authorize pending</source>
+                <target>authorize canceled</target>
+            </transition>
+
+            <transition happy="true">
+                <source>authorize succeeded</source>
+                <target>charge pending</target>
+                <event>charge</event>
+            </transition>
+
+            <transition condition="Unzer/IsPaymentCompleted" happy="true">
+                <source>charge pending</source>
+                <target>payment completed</target>
+            </transition>
+
+            <transition condition="Unzer/IsChargeFailed" happy="true">
+                <source>charge pending</source>
+                <target>charge failed</target>
+            </transition>
+
+            <transition condition="Unzer/IsPaymentChargeback" happy="true">
+                <source>payment completed</source>
+                <target>payment chargeback</target>
+            </transition>
+
+            <transition happy="true">
+                <source>payment completed</source>
+                <target>refunded</target>
+                <event>refund</event>
+            </transition>
+
+            <transition happy="true">
+                <source>payment completed</source>
+                <target>shipped</target>
+                <event>ship</event>
+            </transition>
+
+            <transition happy="true">
+                <source>shipped</source>
+                <target>closed</target>
+                <event>close</event>
+            </transition>
+        </transitions>
+    </process>
+</statemachine>

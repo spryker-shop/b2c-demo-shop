@@ -38,6 +38,14 @@ use Spryker\Zed\Shipment\Dependency\Plugin\Oms\ShipmentOrderMailExpanderPlugin;
 use Spryker\Zed\TaxApp\Communication\Plugin\Oms\Command\SubmitPaymentTaxInvoicePlugin;
 use Spryker\Zed\TaxApp\Communication\Plugin\Oms\OrderRefundedEventListenerPlugin;
 use Spryker\Zed\WarehouseAllocation\Communication\Plugin\Oms\SalesOrderWarehouseAllocationCommandPlugin;
+use SprykerEco\Zed\Unzer\Communication\Plugin\Oms\Command\UnzerChargeCommandByOrderPlugin;
+use SprykerEco\Zed\Unzer\Communication\Plugin\Oms\Command\UnzerRefundCommandByOrderPlugin;
+use SprykerEco\Zed\Unzer\Communication\Plugin\Oms\Condition\UnzerIsAuthorizeCanceledConditionPlugin;
+use SprykerEco\Zed\Unzer\Communication\Plugin\Oms\Condition\UnzerIsAuthorizeFailedConditionPlugin;
+use SprykerEco\Zed\Unzer\Communication\Plugin\Oms\Condition\UnzerIsAuthorizeSucceededConditionPlugin;
+use SprykerEco\Zed\Unzer\Communication\Plugin\Oms\Condition\UnzerIsChargeFailedConditionPlugin;
+use SprykerEco\Zed\Unzer\Communication\Plugin\Oms\Condition\UnzerIsPaymentChargebackConditionPlugin;
+use SprykerEco\Zed\Unzer\Communication\Plugin\Oms\Condition\UnzerIsPaymentCompletedConditionPlugin;
 
 class OmsDependencyProvider extends SprykerOmsDependencyProvider
 {
@@ -110,6 +118,9 @@ class OmsDependencyProvider extends SprykerOmsDependencyProvider
             $commandCollection->add(new SendCancelPaymentMessageCommandPlugin(), 'Payment/Cancel');
             $commandCollection->add(new RefundCommandPlugin(), 'Payment/Refund/Confirm');
 
+            $commandCollection->add(new UnzerChargeCommandByOrderPlugin(), 'Unzer/Charge');
+            $commandCollection->add(new UnzerRefundCommandByOrderPlugin(), 'Unzer/Refund');
+
             return $commandCollection;
         });
 
@@ -128,6 +139,13 @@ class OmsDependencyProvider extends SprykerOmsDependencyProvider
             $conditionCollection->add(new IsPickingListGenerationFinishedConditionPlugin(), 'PickingList/isPickingListGenerationFinished');
             $conditionCollection->add(new IsPickingStartedConditionPlugin(), 'PickingList/isPickingStarted');
             $conditionCollection->add(new IsPickingFinishedConditionPlugin(), 'PickingList/isPickingFinished');
+
+            $conditionCollection->add(new UnzerIsAuthorizeSucceededConditionPlugin(), 'Unzer/IsAuthorizeSucceeded');
+            $conditionCollection->add(new UnzerIsAuthorizeFailedConditionPlugin(), 'Unzer/IsAuthorizeFailed');
+            $conditionCollection->add(new UnzerIsAuthorizeCanceledConditionPlugin(), 'Unzer/IsAuthorizeCanceled');
+            $conditionCollection->add(new UnzerIsPaymentCompletedConditionPlugin(), 'Unzer/IsPaymentCompleted');
+            $conditionCollection->add(new UnzerIsChargeFailedConditionPlugin(), 'Unzer/IsChargeFailed');
+            $conditionCollection->add(new UnzerIsPaymentChargebackConditionPlugin(), 'Unzer/IsPaymentChargeback');
 
             return $conditionCollection;
         });
