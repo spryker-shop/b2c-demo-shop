@@ -47,6 +47,9 @@ use Spryker\Zed\SalesOrderThreshold\Communication\Plugin\Checkout\SalesOrderThre
 use Spryker\Zed\SalesPayment\Communication\Plugin\Checkout\SalesPaymentCheckoutDoSaveOrderPlugin;
 use Spryker\Zed\Shipment\Communication\Plugin\Checkout\SalesOrderShipmentSavePlugin;
 use Spryker\Zed\ShipmentCheckoutConnector\Communication\Plugin\Checkout\ShipmentCheckoutPreCheckPlugin;
+use SprykerEco\Zed\Unzer\Communication\Plugin\Checkout\UnzerCheckoutDoSaveOrderPlugin;
+use SprykerEco\Zed\Unzer\Communication\Plugin\Checkout\UnzerCheckoutPostSavePlugin;
+use SprykerEco\Zed\Unzer\Communication\Plugin\Checkout\UnzerCheckoutPreSaveOrderPlugin;
 
 class CheckoutDependencyProvider extends SprykerCheckoutDependencyProvider
 {
@@ -109,6 +112,7 @@ class CheckoutDependencyProvider extends SprykerCheckoutDependencyProvider
             new SalesPaymentCheckoutDoSaveOrderPlugin(),
             new GiftCardCheckoutDoSaveOrderPlugin(),
             new SalesOrderThresholdExpenseSavePlugin(), #SalesOrderThresholdFeature
+            new UnzerCheckoutDoSaveOrderPlugin()
         ];
     }
 
@@ -124,6 +128,7 @@ class CheckoutDependencyProvider extends SprykerCheckoutDependencyProvider
             new SendEmailToGiftCardUser(), #GiftCardFeature
             new PaymentAuthorizationCheckoutPostSavePlugin(),
             new PaymentConfirmPreOrderPaymentCheckoutPostSavePlugin(),
+            new UnzerCheckoutPostSavePlugin()
         ];
     }
 
@@ -137,6 +142,8 @@ class CheckoutDependencyProvider extends SprykerCheckoutDependencyProvider
         return [
             new DisallowQuoteCheckoutPreSavePlugin(),
             new SalesOrderExpanderPlugin(),
+            new UnzerCheckoutPreSaveOrderPlugin(),
+
         ];
     }
 }

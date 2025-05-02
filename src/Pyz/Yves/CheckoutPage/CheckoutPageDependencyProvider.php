@@ -18,6 +18,7 @@ use Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface;
 use Spryker\Yves\StepEngine\Dependency\Plugin\Handler\StepHandlerPluginCollection;
 use Spryker\Yves\StepEngine\Dependency\Plugin\Handler\StepHandlerPluginInterface;
 use SprykerEco\Yves\Unzer\Plugin\StepEngine\UnzerStepHandlerPlugin;
+use SprykerEco\Zed\Unzer\UnzerConfig;
 use SprykerShop\Yves\CheckoutPage\CheckoutPageDependencyProvider as SprykerShopCheckoutPageDependencyProvider;
 use SprykerShop\Yves\CheckoutPage\Plugin\StepEngine\PaymentForeignHandlerPlugin;
 use SprykerShop\Yves\CustomerPage\Form\CheckoutAddressCollectionForm;
@@ -126,6 +127,13 @@ class CheckoutPageDependencyProvider extends SprykerShopCheckoutPageDependencyPr
             $paymentMethodHandler->add(new PaymentForeignHandlerPlugin(), PaymentTransfer::FOREIGN_PAYMENTS);
 
             $paymentMethodHandler->add(new UnzerStepHandlerPlugin(), 'unzerCreditCard');
+//
+//            $paymentMethodHandler->add(new UnzerStepHandlerPlugin(), UnzerConfig::PAYMENT_METHOD_KEY_MARKETPLACE_BANK_TRANSFER);
+//            $paymentMethodHandler->add(new UnzerStepHandlerPlugin(), UnzerConfig::PAYMENT_METHOD_KEY_MARKETPLACE_CREDIT_CARD);
+//            $paymentMethodHandler->add(new UnzerStepHandlerPlugin(), UnzerConfig::PAYMENT_METHOD_KEY_MARKETPLACE_SOFORT);
+//            $paymentMethodHandler->add(new UnzerStepHandlerPlugin(), UnzerConfig::PAYMENT_METHOD_KEY_CREDIT_CARD);
+//            $paymentMethodHandler->add(new UnzerStepHandlerPlugin(), UnzerConfig::PAYMENT_METHOD_KEY_SOFORT);
+//            $paymentMethodHandler->add(new UnzerStepHandlerPlugin(), UnzerConfig::PAYMENT_METHOD_KEY_BANK_TRANSFER);
 
             return $paymentMethodHandler;
         });
