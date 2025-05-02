@@ -172,7 +172,7 @@ $config[KernelConstants::CORE_NAMESPACES] = [
 
 // UNZER
 $config[VaultConstants::ENCRYPTION_KEY] = 'nzb9y7rNpyn5W5dd';
-$config[UnzerConstants::WEBHOOK_RETRIEVE_URL] = 'https://3804-190-229-143-91.ngrok-free.app/unzer/notification';
+$config[UnzerConstants::WEBHOOK_RETRIEVE_URL] = 'https://e9dc-190-229-143-91.ngrok-free.app/unzer/notification';
 $config[UnzerConstants::VAULT_DATA_TYPE] = 'unzer-private-key';
 $config[UnzerConstants::EXPENSES_REFUND_STRATEGY_KEY] = UnzerConstants::LAST_SHIPMENT_ITEM_EXPENSES_REFUND_STRATEGY;
 
@@ -196,8 +196,8 @@ $config[UnzerApiConstants::REFUND_URL] = 'https://api.unzer.com/v1/payments/%s/c
 $config[UnzerApiConstants::GET_PAYMENT_METHODS_URL] = 'https://api.unzer.com/v1/keypair';
 
 
-$config[UnzerConstants::UNZER_AUTHORIZE_RETURN_URL] = 'https://mysprykershop/unzer/payment-result';
-$config[UnzerConstants::UNZER_CHARGE_RETURN_URL] = 'https://mysprykershop/unzer/payment-result';
+$config[UnzerConstants::UNZER_AUTHORIZE_RETURN_URL] = 'http://yves.eu.spryker.local/unzer/payment-result';
+$config[UnzerConstants::UNZER_CHARGE_RETURN_URL] = 'http://yves.eu.spryker.local/unzer/payment-result';
 
 
 // >>> ROUTER
@@ -268,10 +268,14 @@ $config[KernelConstants::DOMAIN_WHITELIST] = array_merge($trustedHosts, [
     'threedssvc.pay1.de', // trusted Payone domain
     'www.sofort.com', // trusted Payone domain
     'connect.stripe.com', // trusted Stripe domain
+    'http://yves.eu.spryker.local/DE/en',
+    'http://yves.eu.spryker.local/DE/en/checkout/summary',
+    'payment.unzer.com',
+    'http://backend-gateway.eu.spryker.local:10006',
 ]);
 $config[KernelConstants::DOMAIN_WHITELIST][] = '*.bazaarvoice.com';
 
-$config[KernelConstants::STRICT_DOMAIN_REDIRECT] = true;
+$config[KernelConstants::STRICT_DOMAIN_REDIRECT] = false;
 
 $config[HttpConstants::ZED_HTTP_STRICT_TRANSPORT_SECURITY_ENABLED]
     = $config[HttpConstants::YVES_HTTP_STRICT_TRANSPORT_SECURITY_ENABLED]
@@ -457,7 +461,7 @@ $config[SessionConstants::YVES_SESSION_COOKIE_TIME_TO_LIVE] = SessionConfig::SES
 $config[SessionConstants::YVES_SESSION_PERSISTENT_CONNECTION]
     = $config[SessionConstants::ZED_SESSION_PERSISTENT_CONNECTION]
     = true;
-$config[SessionConstants::YVES_SESSION_COOKIE_SAMESITE] = getenv('SPRYKER_YVES_SESSION_COOKIE_SAMESITE') ?: Cookie::SAMESITE_LAX;
+$config[SessionConstants::YVES_SESSION_COOKIE_SAMESITE] = Cookie::SAMESITE_LAX;
 
 // >>> SESSION BACKOFFICE
 
