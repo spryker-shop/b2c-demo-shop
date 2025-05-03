@@ -7,16 +7,15 @@ environment: docker.production
 image:
     tag: spryker/php:8.3
     environment:
-        SPRYKER_DEFAULT_STORE: "DE"
-        SPRYKER_ACTIVE_STORES: "DE,AT"
-        SPRYKER_HOOK_BEFORE_DEPLOY: "vendor/bin/install -r EU/pre-deploy.dynamic-store-off -vvv"
-        SPRYKER_HOOK_AFTER_DEPLOY: "true"
-        SPRYKER_HOOK_INSTALL: "vendor/bin/install -r EU/production.dynamic-store-off --no-ansi -vvv"
-        SPRYKER_HOOK_DESTRUCTIVE_INSTALL: "vendor/bin/install -r EU/destructive.dynamic-store-off --no-ansi -vvv"
         SPRYKER_PRODUCT_CONFIGURATOR_HOST: dtc.spryker-b2c.cloud.spryker.toys
         SPRYKER_PRODUCT_CONFIGURATOR_PORT: 443
-        SPRYKER_YVES_HOST_DE: www.de.spryker-b2c.cloud.spryker.toys
-        SPRYKER_YVES_HOST_AT: www.at.spryker-b2c.cloud.spryker.toys
+        SPRYKER_YVES_HOST_EU: yves.eu.spryker-b2c.cloud.spryker.toys
+        SPRYKER_YVES_HOST_US: yves.us.spryker-b2c.cloud.spryker.toys
+        SPRYKER_HOOK_BEFORE_DEPLOY: "vendor/bin/install -r pre-deploy -vvv"
+        SPRYKER_HOOK_AFTER_DEPLOY: "true"
+        SPRYKER_HOOK_INSTALL: "vendor/bin/install -r dynamic-store --no-ansi -vvv"
+        SPRYKER_HOOK_DESTRUCTIVE_INSTALL: "vendor/bin/install -r destructive --no-ansi -vvv"
+        SPRYKER_DYNAMIC_STORE_MODE: true
         SPRYKER_PUSH_NOTIFICATION_WEB_PUSH_PHP_VAPID_PUBLIC_KEY: 'BGqNWbv0hWM5CQ1-KwAfSQBMC6TMVFyrnh3vQp37oGCNvQ6eG_HyMjxBFJRWeCPTbzDoxcjhxLJS8Ck8r1G2oFw'
         SPRYKER_PUSH_NOTIFICATION_WEB_PUSH_PHP_VAPID_PRIVATE_KEY: 'UK6DywwjKITPpRHBSY9TLPIXm6BPrHX40sseIoXT9c8'
         SPRYKER_PUSH_NOTIFICATION_WEB_PUSH_PHP_VAPID_SUBJECT: 'https://spryker.com'
@@ -35,7 +34,6 @@ assets:
         brotli:
             static: on
             level: 5
-
 regions:
     EU:
         services:
@@ -47,28 +45,12 @@ regions:
                 database: scos2_b2c
                 username: spryker
                 password: secret
-
-        stores:
-            DE:
-                services:
-                    broker:
-                        namespace: de_queue
-                    key_value_store:
-                        namespace: 1
-                    search:
-                        namespace: de_search
-                    session:
-                        namespace: 2
-            AT:
-                services:
-                    broker:
-                        namespace: at_queue
-                    key_value_store:
-                        namespace: 1
-                    search:
-                        namespace: at_search
-                    session:
-                        namespace: 2
+            broker:
+                namespace: eu-docker
+            key_value_store:
+                namespace: 1
+            search:
+                namespace: eu_search
 
 groups:
     EU:
@@ -79,58 +61,52 @@ groups:
                 endpoints:
                     dtc.spryker-b2c.cloud.spryker.toys:
                         entry-point: Configurator
-                    www.de.spryker-b2c.cloud.spryker.toys:
-                        store: DE
-                    www.at.spryker-b2c.cloud.spryker.toys:
-                        store: AT
+                    yves.eu.spryker-b2c.cloud.spryker.toys:
+                        region: EU
+                        services:
+                            session:
+                                namespace: 1
             boffice:
                 application: backoffice
                 endpoints:
-                    backoffice.de.spryker-b2c.cloud.spryker.toys:
-                        store: DE
-                    backoffice.at.spryker-b2c.cloud.spryker.toys:
-                        store: AT
+                    backoffice.eu.spryker-b2c.cloud.spryker.toys:
+                        region: EU
+                        primal: true
+                        services:
+                            session:
+                                namespace: 3
             backgw:
                 application: backend-gateway
                 endpoints:
-                    backend-gateway.de.spryker-b2c.cloud.spryker.toys:
-                        store: DE
-                    backend-gateway.at.spryker-b2c.cloud.spryker.toys:
-                        store: AT
+                    backend-gateway.eu.spryker-b2c.cloud.spryker.toys:
+                        region: EU
+                        primal: true
+
             glue:
                 application: glue
                 endpoints:
-                    glue.de.spryker-b2c.cloud.spryker.toys:
-                        store: DE
+                    glue.eu.spryker-b2c.cloud.spryker.toys:
                         cors-allow-origin: '*'
-                    glue.at.spryker-b2c.cloud.spryker.toys:
-                        store: AT
-                        cors-allow-origin: '*'
+                        region: EU
             gluestorefront:
                 application: glue-storefront
                 endpoints:
-                    glue-storefront.de.spryker-b2c.cloud.spryker.toys:
-                        store: DE
-                        cors-allow-origin: '*'
-                    glue-storefront.at.spryker-b2c.cloud.spryker.toys:
-                        store: AT
+                    glue-storefront.eu.spryker-b2c.cloud.spryker.toys:
+                        region: EU
                         cors-allow-origin: '*'
             gluebackend:
                 application: glue-backend
                 endpoints:
-                    glue-backend.de.spryker-b2c.cloud.spryker.toys:
-                        store: DE
-                        cors-allow-origin: '*'
-                    glue-backend.at.spryker-b2c.cloud.spryker.toys:
-                        store: AT
+                    glue-backend.eu.spryker-b2c.cloud.spryker.toys:
+                        region: EU
                         cors-allow-origin: '*'
 services:
     database:
         engine: mysql
         version: mariadb-10.4
         root:
-            username: "root"
-            password: "secret"
+            username: 'root'
+            password: 'secret'
         endpoints:
             localhost:3306:
                 protocol: tcp
@@ -138,8 +114,8 @@ services:
         engine: rabbitmq
         version: '3.9'
         api:
-            username: "spryker"
-            password: "secret"
+            username: 'spryker'
+            password: 'secret'
         endpoints:
             queue.spryker-b2c.cloud.spryker.toys:
             localhost:5672:
@@ -160,7 +136,6 @@ services:
     scheduler:
         engine: jenkins
         version: '2.442'
-        csrf-protection-enabled: false
         endpoints:
             scheduler.spryker-b2c.cloud.spryker.toys:
     mail_catcher:
@@ -181,9 +156,7 @@ docker:
         enabled: false
         xdebug:
             enabled: false
-
     testing:
-        store: DE
-
+        region: EU
     mount:
         baked:
