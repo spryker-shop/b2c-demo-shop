@@ -407,7 +407,7 @@ $config[SessionRedisConstants::LOCKING_LOCK_TTL_MILLISECONDS] = 0;
 $config[SessionConstants::YVES_SESSION_COOKIE_NAME]
     = $config[SessionConstants::YVES_SESSION_COOKIE_DOMAIN]
     = $sprykerFrontendHost;
-$config[SessionConstants::YVES_SESSION_SAVE_HANDLER] = SessionRedisConfig::SESSION_HANDLER_REDIS_LOCKING;
+$config[SessionConstants::YVES_SESSION_SAVE_HANDLER] = SessionRedisConfig::SESSION_HANDLER_CONFIGURABLE_REDIS_LOCKING;
 $config[SessionRedisConstants::YVES_SESSION_REDIS_SCHEME] = getenv('SPRYKER_SESSION_FE_PROTOCOL') ?: 'tcp';
 $config[SessionRedisConstants::YVES_SESSION_REDIS_HOST] = getenv('SPRYKER_SESSION_FE_HOST');
 $config[SessionRedisConstants::YVES_SESSION_REDIS_PORT] = getenv('SPRYKER_SESSION_FE_PORT');
