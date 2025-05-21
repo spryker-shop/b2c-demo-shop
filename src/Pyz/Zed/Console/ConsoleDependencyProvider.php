@@ -144,6 +144,7 @@ use Spryker\Zed\SetupFrontend\Communication\Console\YvesInstallDependenciesConso
 use Spryker\Zed\SetupFrontend\Communication\Console\ZedBuildFrontendConsole;
 use Spryker\Zed\SetupFrontend\Communication\Console\ZedInstallDependenciesConsole;
 use Spryker\Zed\ShipmentDataImport\ShipmentDataImportConfig;
+use Spryker\Zed\Sitemap\Communication\Console\SitemapGenerateConsole;
 use Spryker\Zed\StateMachine\Communication\Console\CheckConditionConsole as StateMachineCheckConditionConsole;
 use Spryker\Zed\StateMachine\Communication\Console\CheckTimeoutConsole as StateMachineCheckTimeoutConsole;
 use Spryker\Zed\StateMachine\Communication\Console\ClearLocksConsole as StateMachineClearLocksConsole;
@@ -369,6 +370,7 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
             new SendPushNotificationConsole(),
             new OrderMatrixConsole(),
             new StorageRedisDataReSaveConsole(),
+            new SitemapGenerateConsole(),
         ];
 
         $propelCommands = $container->getLocator()->propel()->facade()->getConsoleCommands();
