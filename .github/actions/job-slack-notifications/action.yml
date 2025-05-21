@@ -5,7 +5,7 @@ runs:
     using: "composite"
     steps:
         - name: Set Slack message with user groups
-          if: job.status == 'failure' && github.ref == 'refs/heads/master'
+          if: job.status == 'failure' && github.ref == 'refs/heads/feature/cc-33509/cc-3573-smart-slack-pipeline-failure-notifications-v2-testing'
           shell: bash
           run: |
               COMMIT_MESSAGE="${{ github.event.head_commit.message }}"  
@@ -15,17 +15,27 @@ runs:
                 TEAM_NAME="${BASH_REMATCH[1]}"
               fi
               
+              echo "${TEAM_NAME}" 
+              
               if [[ -z "$TEAM_NAME" && "$COMMIT_MESSAGE" =~ /([a-zA-Z]+)-[0-9]+[-/] ]]; then
                 TEAM_NAME="${BASH_REMATCH[1]}"
               fi
+              
+              echo "${TEAM_NAME}"
               
               if [[ -n "$TEAM_NAME" ]]; then
                 TEAM_NAME=$(echo "$TEAM_NAME" | tr '[:lower:]' '[:upper:]')
               fi
               
+              echo "${TEAM_NAME}"
+              
               MENTIONS=""
               if [[ -n "$TEAM_NAME" ]]; then
-                USER_GROUPS=$(echo '${{ env.JIRA_TICKET_SLACK_USER_GROUP_MAPPING }}' | jq -r --arg team "$TEAM_NAME" '.[$team][]? // empty')
+                USER_GROUPS=$(echo '{"SSP":["ssp1","ssp2"]}' | jq -r --arg team "$TEAM_NAME" '.[$team][]? // empty')    
+              
+                echo "${USER_GROUPS}"
+
+              # USER_GROUPS=$(echo '${{ env.JIRA_TICKET_SLACK_USER_GROUP_MAPPING }}' | jq -r --arg team "$TEAM_NAME" '.[$team][]? // empty')
                 if [[ -n "$USER_GROUPS" ]]; then
                   for group in $USER_GROUPS; do
                     MENTIONS+="<!subteam^$group> "
@@ -33,15 +43,16 @@ runs:
                 fi
               fi
               
-              MESSAGE="❌ Job *${{ github.job }}* on the *${{ github.repository }}* repository failed. Manual intervention is required! ${MENTIONS}
+              MESSAGE="❌ Job *${{ github.job }}* on the *${{ github.repository }}* repository failed. ${MENTIONS}Manual intervention is required!
               *Details*: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
               
+              echo "$MESSAGE"
               echo "SLACK_MESSAGE<<EOF" >> $GITHUB_ENV
               echo "$MESSAGE" >> $GITHUB_ENV
               echo "EOF" >> $GITHUB_ENV
 
         - name: Notify Slack on master Job Failure
-          if: job.status == 'failure' && github.ref == 'refs/heads/master'
+          if: job.status == 'failure' && github.ref == 'refs/heads/feature/cc-33509/cc-3573-smart-slack-pipeline-failure-notifications-v2-testing'
           uses: slackapi/slack-github-action@v1.26.0
           env:
               SLACK_BOT_TOKEN: ${{ env.SLACK_BOT_TOKEN }}
