@@ -1,0 +1,50 @@
+name: 'Slack Notification for failed job'
+description: 'Send a Slack message based on job status'
+
+runs:
+    using: "composite"
+    steps:
+        - name: Set Slack message with user groups
+          if: job.status == 'failure' && github.ref == 'refs/heads/master'
+          shell: bash
+          run: |
+              COMMIT_MESSAGE="${{ github.event.head_commit.message }}"  
+              TEAM_NAME=""
+              
+              if [[ "$COMMIT_MESSAGE" =~ ^([a-zA-Z]+)-[0-9]+ ]]; then
+                TEAM_NAME="${BASH_REMATCH[1]}"
+              fi
+              
+              if [[ -z "$TEAM_NAME" && "$COMMIT_MESSAGE" =~ /([a-zA-Z]+)-[0-9]+[-/] ]]; then
+                TEAM_NAME="${BASH_REMATCH[1]}"
+              fi
+              
+              if [[ -n "$TEAM_NAME" ]]; then
+                TEAM_NAME=$(echo "$TEAM_NAME" | tr '[:lower:]' '[:upper:]')
+              fi
+              
+              MENTIONS=""
+              if [[ -n "$TEAM_NAME" ]]; then
+                USER_GROUPS=$(echo '${{ env.JIRA_TICKET_SLACK_USER_GROUP_MAPPING }}' | jq -r --arg team "$TEAM_NAME" '.[$team][]? // empty')
+                if [[ -n "$USER_GROUPS" ]]; then
+                  for group in $USER_GROUPS; do
+                    MENTIONS+="<!subteam^$group> "
+                  done
+                fi
+              fi
+              
+              MESSAGE="❌ Job *${{ github.job }}* on the *${{ github.repository }}* repository failed. Manual intervention is required! ${MENTIONS}
+              *Details*: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+              
+              echo "SLACK_MESSAGE<<EOF" >> $GITHUB_ENV
+              echo "$MESSAGE" >> $GITHUB_ENV
+              echo "EOF" >> $GITHUB_ENV
+
+        - name: Notify Slack on master Job Failure
+          if: job.status == 'failure' && github.ref == 'refs/heads/master'
+          uses: slackapi/slack-github-action@v1.26.0
+          env:
+              SLACK_BOT_TOKEN: ${{ env.SLACK_BOT_TOKEN }}
+          with:
+              channel-id: ${{ env.WEEKLY_CI_SLACK_CHANNEL_ID }}
+              slack-message: "${{ env.SLACK_MESSAGE }}"
