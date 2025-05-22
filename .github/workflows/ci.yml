@@ -2,11 +2,14 @@ name: B2C-CI
 
 on:
     pull_request:
-        types: [ labeled, unlabeled, synchronize, opened ]
+        types: [labeled, unlabeled, synchronize]
     push:
         branches:
             - master
     workflow_dispatch:
+    pull_request_target:
+        types: [opened]
+        if: github.event.pull_request.base.ref == 'master'
 
 
 env:
