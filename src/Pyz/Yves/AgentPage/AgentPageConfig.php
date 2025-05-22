@@ -22,7 +22,7 @@ class AgentPageConfig extends SprykerAgentPageConfig
      *
      * @return bool
      */
-    public function isLocaleInLoginCheckPath(): bool
+    public function isLocaleInLoginCheckPath(): int
     {
         return true;
     }
