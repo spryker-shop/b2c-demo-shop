@@ -5,24 +5,24 @@ runs:
     using: "composite"
     steps:
         - name: Set Slack message with user groups
-          if: job.status == 'failure' && github.ref == 'refs/heads/master'
+          if: job.status == 'failure' && github.ref == 'refs/heads/master-bla-bla'
           shell: bash
           run: |
-              COMMIT_MESSAGE="${{ github.event.head_commit.message }}"  
+              COMMIT_MESSAGE="${{ github.event.head_commit.message }}"
               TEAM_NAME=""
-              
+
               if [[ "$COMMIT_MESSAGE" =~ ^([a-zA-Z]+)-[0-9]+ ]]; then
                 TEAM_NAME="${BASH_REMATCH[1]}"
               fi
-              
+
               if [[ -z "$TEAM_NAME" && "$COMMIT_MESSAGE" =~ /([a-zA-Z]+)-[0-9]+[-/] ]]; then
                 TEAM_NAME="${BASH_REMATCH[1]}"
               fi
-              
+
               if [[ -n "$TEAM_NAME" ]]; then
                 TEAM_NAME=$(echo "$TEAM_NAME" | tr '[:lower:]' '[:upper:]')
               fi
-              
+
               MENTIONS=""
               if [[ -n "$TEAM_NAME" ]]; then
                 USER_GROUPS=$(echo '${{ env.JIRA_TICKET_SLACK_USER_GROUP_MAPPING }}' | jq -r --arg team "$TEAM_NAME" '.[$team][]? // empty')
@@ -32,16 +32,16 @@ runs:
                   done
                 fi
               fi
-              
+
               MESSAGE="❌ Job *${{ github.job }}* on the *${{ github.repository }}* repository failed. Manual intervention is required! ${MENTIONS}
               *Details*: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-              
+
               echo "SLACK_MESSAGE<<EOF" >> $GITHUB_ENV
               echo "$MESSAGE" >> $GITHUB_ENV
               echo "EOF" >> $GITHUB_ENV
 
         - name: Notify Slack on master Job Failure
-          if: job.status == 'failure' && github.ref == 'refs/heads/master'
+          if: job.status == 'failure' && github.ref == 'refs/heads/master-bla-bla'
           uses: slackapi/slack-github-action@v1.26.0
           env:
               SLACK_BOT_TOKEN: ${{ env.SLACK_BOT_TOKEN }}
