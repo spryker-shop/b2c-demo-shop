@@ -23,7 +23,7 @@ jobs:
                 && (contains(github.event.pull_request.labels.*.name, 'run-ui-ci')
                     || contains(github.event.pull_request.labels.*.name, 'run-latest-ci'))
             ) || github.ref == 'refs/heads/master'
-        name: "Docker / Alpine / PHP 8.3 / MariaDB / Robot / UI / Group One"
+        name: "[run-ui-ci] PHP 8.3 / MariaDB / Robot / UI / Group One"
         runs-on: ubuntu-22.04
         env:
             PROGRESS_TYPE: plain
@@ -99,7 +99,7 @@ jobs:
                 && (contains(github.event.pull_request.labels.*.name, 'run-ui-ci')
                     || contains(github.event.pull_request.labels.*.name, 'run-latest-ci'))
             ) || github.ref == 'refs/heads/master'
-        name: "Docker / Alpine / PHP 8.3 / MariaDB / Robot / UI /Group Two"
+        name: "[run-ui-ci] PHP 8.3 / MariaDB / Robot / UI /Group Two"
         runs-on: ubuntu-22.04
         env:
             PROGRESS_TYPE: plain
@@ -174,7 +174,7 @@ jobs:
                 && (contains(github.event.pull_request.labels.*.name, 'run-ui-ci')
                     || contains(github.event.pull_request.labels.*.name, 'run-latest-ci'))
             ) || github.ref == 'refs/heads/master'
-        name: "Docker / Alpine / PHP 8.3 / MariaDB / Robot / UI / Group Three"
+        name: "[run-ui-ci] PHP 8.3 / MariaDB / Robot / UI / Group Three"
         runs-on: ubuntu-22.04
         env:
             PROGRESS_TYPE: plain
