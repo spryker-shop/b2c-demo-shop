@@ -14,9 +14,6 @@ use Spryker\Zed\ProductManagement\ProductManagementConfig as SprykerProductManag
 class ProductManagementConfig extends SprykerProductManagementConfig
 {
     /**
-     * Specification:
-     * - Returns whether the concrete SKU search in the product table is enabled.
-     *
      * @return bool
      */
     public function isConcreteSkuSearchInProductTableEnabled(): bool
