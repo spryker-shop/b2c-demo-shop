@@ -27,6 +27,15 @@ const globalSettings = {
 
         // project folders
         project: './src/Pyz/Yves',
+
+        // paths for icon sprite
+        iconSprite: {
+            sources: [
+                './src/Pyz/Yves/ShopUi/Theme/default/components/atoms/icon-sprite/icon-sprite.twig',
+                './vendor/spryker-shop/shop-ui/src/SprykerShop/Yves/ShopUi/Theme/default/components/atoms/icon-sprite/icon-sprite.twig',
+            ],
+            target: './frontend/assets/global/default/icons/sprite.svg',
+        },
     },
 
     expectedModeArgument: 2,
@@ -148,6 +157,8 @@ const getAppSettingsByTheme = (namespaceConfig, theme, pathToConfig) => {
 
         // project folders
         project: globalSettings.paths.project,
+
+        iconSprite: globalSettings.paths.iconSprite,
     };
 
     // define if current theme is empty
