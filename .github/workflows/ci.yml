@@ -2,7 +2,7 @@ name: B2C-CI
 
 on:
     pull_request:
-        types: [ labeled, unlabeled, synchronize ]
+        types: [ labeled, unlabeled, synchronize, opened ]
     push:
         branches:
             - master
@@ -11,6 +11,7 @@ on:
 env:
     SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
     WEEKLY_CI_SLACK_CHANNEL_ID: ${{ secrets.WEEKLY_CI_SLACK_CHANNEL_ID }}
+    JIRA_TICKET_SLACK_USER_GROUP_MAPPING: ${{ secrets.JIRA_TICKET_SLACK_USER_GROUP_MAPPING }}
 
 concurrency:
     group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
@@ -18,10 +19,6 @@ concurrency:
 
 jobs:
     validation:
-        if: >
-            contains(github.event.pull_request.labels.*.name, 'run-static-ci')
-            || contains(github.event.pull_request.labels.*.name, 'run-latest-ci')
-            || github.ref == 'refs/heads/master'
         name: "Static analysis"
         runs-on: ubuntu-22.04
         strategy:
@@ -157,10 +154,6 @@ jobs:
                 uses: ./.github/actions/job-slack-notifications
                 if: always()
     js-validation:
-        if: >
-            contains(github.event.pull_request.labels.*.name, 'run-npm-ci')
-            || contains(github.event.pull_request.labels.*.name, 'run-latest-ci')
-            || github.ref == 'refs/heads/master'
         name: "NPM validation"
         runs-on: ubuntu-22.04
         strategy:
