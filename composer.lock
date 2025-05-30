@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f825e2048d000a11e1202d02b393c2a2",
+    "content-hash": "e6ed063be733caea0a469b25decb7eac",
     "packages": [
         {
             "name": "async-aws/core",
@@ -24162,6 +24162,59 @@
             "time": "2025-03-17T11:28:00+00:00"
         },
         {
+            "name": "spryker/customer-discount-connector",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/customer-discount-connector.git",
+                "reference": "966a1c6686ddd17b135eaf08ac6f5aad4a661870"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/customer-discount-connector/zipball/966a1c6686ddd17b135eaf08ac6f5aad4a661870",
+                "reference": "966a1c6686ddd17b135eaf08ac6f5aad4a661870",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.2",
+                "spryker/customer": "^7.0.0",
+                "spryker/discount": "^9.44.0",
+                "spryker/discount-extension": "^1.2.0",
+                "spryker/kernel": "^3.77.0",
+                "spryker/propel": "^3.43.0",
+                "spryker/propel-orm": "^1.16.0",
+                "spryker/transfer": "^3.27.0"
+            },
+            "require-dev": {
+                "spryker/checkout": "*",
+                "spryker/code-sniffer": "*",
+                "spryker/testify": "*"
+            },
+            "suggest": {
+                "spryker/checkout": "Add this dependency to use CustomerDiscountOrderSavePlugin"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "CustomerDiscountConnector module",
+            "support": {
+                "source": "https://github.com/spryker/customer-discount-connector/tree/1.0.0"
+            },
+            "time": "2025-05-29T14:11:05+00:00"
+        },
+        {
             "name": "spryker/customer-extension",
             "version": "1.6.0",
             "source": {
@@ -25001,16 +25054,16 @@
         },
         {
             "name": "spryker/discount",
-            "version": "9.42.1",
+            "version": "9.45.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/discount.git",
-                "reference": "c62ec71e59e9f8b385f92cdeb4c0108c0f48db6f"
+                "reference": "b03370cf2d648fe656c7409c74a28a9384c18f89"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/discount/zipball/c62ec71e59e9f8b385f92cdeb4c0108c0f48db6f",
-                "reference": "c62ec71e59e9f8b385f92cdeb4c0108c0f48db6f",
+                "url": "https://api.github.com/repos/spryker/discount/zipball/b03370cf2d648fe656c7409c74a28a9384c18f89",
+                "reference": "b03370cf2d648fe656c7409c74a28a9384c18f89",
                 "shasum": ""
             },
             "require": {
@@ -25021,13 +25074,14 @@
                 "spryker/checkout-extension": "^1.5.0",
                 "spryker/currency": "^3.1.0 || ^4.0.0",
                 "spryker/discount-extension": "^1.3.0",
-                "spryker/gui": "^3.45.0",
+                "spryker/gui": "^3.61.0",
                 "spryker/kernel": "^3.30.0",
                 "spryker/locale": "^3.0.0 || ^4.0.0",
                 "spryker/log": "^3.0.0",
                 "spryker/messenger": "^3.0.0",
                 "spryker/money": "^2.0.0",
                 "spryker/product-option": "^6.0.0 || ^8.0.0",
+                "spryker/propel": "^3.43.0",
                 "spryker/propel-orm": "^1.0.0",
                 "spryker/sales": "^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0 || ^10.0.0 || ^11.0.0",
                 "spryker/sales-extension": "^1.12.0",
@@ -25047,7 +25101,6 @@
                 "spryker/event-dispatcher": "*",
                 "spryker/form": "*",
                 "spryker/oms": "*",
-                "spryker/propel": "*",
                 "spryker/router": "*",
                 "spryker/testify": "*",
                 "spryker/validator": "*",
@@ -25075,9 +25128,9 @@
             ],
             "description": "Discount module",
             "support": {
-                "source": "https://github.com/spryker/discount/tree/9.42.1"
+                "source": "https://github.com/spryker/discount/tree/9.45.0"
             },
-            "time": "2025-04-18T12:00:41+00:00"
+            "time": "2025-05-29T14:11:05+00:00"
         },
         {
             "name": "spryker/discount-calculation-connector",
@@ -28167,16 +28220,16 @@
         },
         {
             "name": "spryker/gui",
-            "version": "3.60.0",
+            "version": "3.61.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/gui.git",
-                "reference": "ecd0a594989f531d46500c8310ce10bbb4e31823"
+                "reference": "2cccb62dc79a012714f2617355d56a7b1cb44325"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/gui/zipball/ecd0a594989f531d46500c8310ce10bbb4e31823",
-                "reference": "ecd0a594989f531d46500c8310ce10bbb4e31823",
+                "url": "https://api.github.com/repos/spryker/gui/zipball/2cccb62dc79a012714f2617355d56a7b1cb44325",
+                "reference": "2cccb62dc79a012714f2617355d56a7b1cb44325",
                 "shasum": ""
             },
             "require": {
@@ -28225,9 +28278,9 @@
             ],
             "description": "Gui module",
             "support": {
-                "source": "https://github.com/spryker/gui/tree/3.60.0"
+                "source": "https://github.com/spryker/gui/tree/3.61.0"
             },
-            "time": "2025-04-24T15:03:28+00:00"
+            "time": "2025-05-28T14:36:24+00:00"
         },
         {
             "name": "spryker/guzzle",
@@ -63555,7 +63608,7 @@
         "ext-readline": "*",
         "ext-redis": "*"
     },
-    "platform-dev": {},
+    "platform-dev": [],
     "platform-overrides": {
         "php": "8.2.0"
     },
