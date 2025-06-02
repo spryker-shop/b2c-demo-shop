@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f825e2048d000a11e1202d02b393c2a2",
+    "content-hash": "e1eb28acbd25e957da7b31c51ec8a0cf",
     "packages": [
         {
             "name": "async-aws/core",
@@ -6281,12 +6281,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker-feature/payments.git",
-                "reference": "9e9a5e0a4c29c6ac4c5a6f29caf27c239acd78eb"
+                "reference": "5e96fe4dbb1d0fce991653292d4c245d719ea0e7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker-feature/payments/zipball/9e9a5e0a4c29c6ac4c5a6f29caf27c239acd78eb",
-                "reference": "9e9a5e0a4c29c6ac4c5a6f29caf27c239acd78eb",
+                "url": "https://api.github.com/repos/spryker-feature/payments/zipball/5e96fe4dbb1d0fce991653292d4c245d719ea0e7",
+                "reference": "5e96fe4dbb1d0fce991653292d4c245d719ea0e7",
                 "shasum": ""
             },
             "require": {
@@ -6294,7 +6294,7 @@
                 "spryker-shop/payment-app-widget": "^1.0.0",
                 "spryker-shop/payment-page": "^1.4.0",
                 "spryker/payment": "^5.26.0",
-                "spryker/payment-app": "^1.0.0",
+                "spryker/payment-app": "^2.0.0",
                 "spryker/payment-app-shipment": "^1.0.0",
                 "spryker/payment-data-import": "^1.0.0",
                 "spryker/payment-gui": "^1.3.0",
@@ -6315,7 +6315,7 @@
             "support": {
                 "source": "https://github.com/spryker-feature/payments/tree/master"
             },
-            "time": "2024-11-28T14:24:21+00:00"
+            "time": "2025-03-11T15:45:24+00:00"
         },
         {
             "name": "spryker-feature/prices",
@@ -24162,6 +24162,59 @@
             "time": "2025-03-17T11:28:00+00:00"
         },
         {
+            "name": "spryker/customer-discount-connector",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/customer-discount-connector.git",
+                "reference": "966a1c6686ddd17b135eaf08ac6f5aad4a661870"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/customer-discount-connector/zipball/966a1c6686ddd17b135eaf08ac6f5aad4a661870",
+                "reference": "966a1c6686ddd17b135eaf08ac6f5aad4a661870",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.2",
+                "spryker/customer": "^7.0.0",
+                "spryker/discount": "^9.44.0",
+                "spryker/discount-extension": "^1.2.0",
+                "spryker/kernel": "^3.77.0",
+                "spryker/propel": "^3.43.0",
+                "spryker/propel-orm": "^1.16.0",
+                "spryker/transfer": "^3.27.0"
+            },
+            "require-dev": {
+                "spryker/checkout": "*",
+                "spryker/code-sniffer": "*",
+                "spryker/testify": "*"
+            },
+            "suggest": {
+                "spryker/checkout": "Add this dependency to use CustomerDiscountOrderSavePlugin"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "CustomerDiscountConnector module",
+            "support": {
+                "source": "https://github.com/spryker/customer-discount-connector/tree/1.0.0"
+            },
+            "time": "2025-05-29T14:11:05+00:00"
+        },
+        {
             "name": "spryker/customer-extension",
             "version": "1.6.0",
             "source": {
@@ -25001,16 +25054,16 @@
         },
         {
             "name": "spryker/discount",
-            "version": "9.42.1",
+            "version": "9.45.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/discount.git",
-                "reference": "c62ec71e59e9f8b385f92cdeb4c0108c0f48db6f"
+                "reference": "b03370cf2d648fe656c7409c74a28a9384c18f89"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/discount/zipball/c62ec71e59e9f8b385f92cdeb4c0108c0f48db6f",
-                "reference": "c62ec71e59e9f8b385f92cdeb4c0108c0f48db6f",
+                "url": "https://api.github.com/repos/spryker/discount/zipball/b03370cf2d648fe656c7409c74a28a9384c18f89",
+                "reference": "b03370cf2d648fe656c7409c74a28a9384c18f89",
                 "shasum": ""
             },
             "require": {
@@ -25021,13 +25074,14 @@
                 "spryker/checkout-extension": "^1.5.0",
                 "spryker/currency": "^3.1.0 || ^4.0.0",
                 "spryker/discount-extension": "^1.3.0",
-                "spryker/gui": "^3.45.0",
+                "spryker/gui": "^3.61.0",
                 "spryker/kernel": "^3.30.0",
                 "spryker/locale": "^3.0.0 || ^4.0.0",
                 "spryker/log": "^3.0.0",
                 "spryker/messenger": "^3.0.0",
                 "spryker/money": "^2.0.0",
                 "spryker/product-option": "^6.0.0 || ^8.0.0",
+                "spryker/propel": "^3.43.0",
                 "spryker/propel-orm": "^1.0.0",
                 "spryker/sales": "^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0 || ^10.0.0 || ^11.0.0",
                 "spryker/sales-extension": "^1.12.0",
@@ -25047,7 +25101,6 @@
                 "spryker/event-dispatcher": "*",
                 "spryker/form": "*",
                 "spryker/oms": "*",
-                "spryker/propel": "*",
                 "spryker/router": "*",
                 "spryker/testify": "*",
                 "spryker/validator": "*",
@@ -25075,9 +25128,9 @@
             ],
             "description": "Discount module",
             "support": {
-                "source": "https://github.com/spryker/discount/tree/9.42.1"
+                "source": "https://github.com/spryker/discount/tree/9.45.0"
             },
-            "time": "2025-04-18T12:00:41+00:00"
+            "time": "2025-05-29T14:11:05+00:00"
         },
         {
             "name": "spryker/discount-calculation-connector",
@@ -32042,16 +32095,16 @@
         },
         {
             "name": "spryker/payment-app",
-            "version": "1.1.0",
+            "version": "2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/payment-app.git",
-                "reference": "86cb8c9f63a91d080970a4ef5d0a43b3f64a20b7"
+                "reference": "1b9a35af9c1b3f03b64b1daac12e9598c47bc7e1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/payment-app/zipball/86cb8c9f63a91d080970a4ef5d0a43b3f64a20b7",
-                "reference": "86cb8c9f63a91d080970a4ef5d0a43b3f64a20b7",
+                "url": "https://api.github.com/repos/spryker/payment-app/zipball/1b9a35af9c1b3f03b64b1daac12e9598c47bc7e1",
+                "reference": "1b9a35af9c1b3f03b64b1daac12e9598c47bc7e1",
                 "shasum": ""
             },
             "require": {
@@ -32059,6 +32112,8 @@
                 "spryker/cart": "^7.5.0",
                 "spryker/kernel": "^3.30.0",
                 "spryker/kernel-app": "^1.0.0",
+                "spryker/log": "^3.0.0",
+                "spryker/message-broker-extension": "^1.0.0",
                 "spryker/payment": "^5.25.0",
                 "spryker/payment-app-extension": "^1.1.0",
                 "spryker/symfony": "^3.0.0",
@@ -32068,14 +32123,24 @@
             },
             "require-dev": {
                 "spryker/code-sniffer": "*",
+                "spryker/oms": "*",
                 "spryker/propel": "*",
+                "spryker/propel-orm": "*",
                 "spryker/ramsey-uuid": "*",
-                "spryker/testify": "*"
+                "spryker/sales": "*",
+                "spryker/sales-payment": "*",
+                "spryker/shipment": "*",
+                "spryker/testify": "*",
+                "spryker/testify-async-api": "*"
+            },
+            "suggest": {
+                "spryker/oms": "If you want to use the OMS Plugins",
+                "spryker/sales": "If you want to use the OMS Plugins, they are using the SalesItem"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0.x-dev"
+                    "dev-master": "2.0.x-dev"
                 }
             },
             "autoload": {
@@ -32089,9 +32154,9 @@
             ],
             "description": "PaymentApp module",
             "support": {
-                "source": "https://github.com/spryker/payment-app/tree/1.1.0"
+                "source": "https://github.com/spryker/payment-app/tree/2.1.1"
             },
-            "time": "2024-12-12T09:58:21+00:00"
+            "time": "2025-05-12T14:06:28+00:00"
         },
         {
             "name": "spryker/payment-app-extension",
