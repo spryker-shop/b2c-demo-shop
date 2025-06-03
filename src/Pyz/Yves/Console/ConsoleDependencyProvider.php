@@ -59,7 +59,7 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
     /**
      * @param \Spryker\Yves\Kernel\Container $container
      *
-     * @return array<\Spryker\Yves\Monitoring\Plugin\Console\MonitoringConsolePlugin>
+     * @return array<\Symfony\Component\EventDispatcher\EventSubscriberInterface>
      */
     protected function getEventSubscriber(Container $container): array // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
     {
