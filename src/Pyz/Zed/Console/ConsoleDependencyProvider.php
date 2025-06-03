@@ -50,6 +50,7 @@ use Spryker\Zed\DocumentationGeneratorRestApi\Communication\Console\GenerateRest
 use Spryker\Zed\EventBehavior\Communication\Console\EventBehaviorTriggerTimeoutConsole;
 use Spryker\Zed\EventBehavior\Communication\Console\EventTriggerListenerConsole;
 use Spryker\Zed\EventBehavior\Communication\Plugin\Console\EventBehaviorPostHookPlugin;
+use Spryker\Zed\Form\Communication\Plugin\Application\FormApplicationPlugin;
 use Spryker\Zed\IndexGenerator\Communication\Console\PostgresIndexGeneratorConsole;
 use Spryker\Zed\IndexGenerator\Communication\Console\PostgresIndexRemoverConsole;
 use Spryker\Zed\Installer\Communication\Console\InitializeDatabaseConsole;
@@ -134,6 +135,7 @@ use Spryker\Zed\SearchElasticsearch\Communication\Console\ElasticsearchSnapshotC
 use Spryker\Zed\SearchElasticsearch\Communication\Console\ElasticsearchSnapshotDeleteConsole;
 use Spryker\Zed\SearchElasticsearch\Communication\Console\ElasticsearchSnapshotRegisterRepositoryConsole;
 use Spryker\Zed\SearchElasticsearch\Communication\Console\ElasticsearchSnapshotRestoreConsole;
+use Spryker\Zed\Security\Communication\Plugin\Application\ConsoleSecurityApplicationPlugin;
 use Spryker\Zed\Session\Communication\Console\SessionRemoveLockConsole;
 use Spryker\Zed\SetupFrontend\Communication\Console\CleanUpDependenciesConsole;
 use Spryker\Zed\SetupFrontend\Communication\Console\InstallPackageManagerConsole;
@@ -165,6 +167,7 @@ use Spryker\Zed\Transfer\Communication\Console\ValidatorConsole;
 use Spryker\Zed\Translator\Communication\Console\CleanTranslationCacheConsole;
 use Spryker\Zed\Translator\Communication\Console\GenerateTranslationCacheConsole;
 use Spryker\Zed\Twig\Communication\Console\CacheWarmerConsole;
+use Spryker\Zed\Twig\Communication\Console\TwigTemplateWarmerConsole;
 use Spryker\Zed\Twig\Communication\Plugin\Application\TwigApplicationPlugin;
 use Spryker\Zed\Uuid\Communication\Console\UuidGeneratorConsole;
 use Spryker\Zed\ZedNavigation\Communication\Console\BuildNavigationConsole;
@@ -192,6 +195,7 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
     {
         $commands = [
             new CacheWarmerConsole(),
+            new TwigTemplateWarmerConsole(),
             new BuildNavigationConsole(),
             new RemoveNavigationCacheConsole(),
             new BuildRestApiValidationCacheConsole(),
@@ -453,9 +457,12 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
     public function getApplicationPlugins(Container $container): array
     {
         $applicationPlugins = parent::getApplicationPlugins($container);
+
+        $applicationPlugins[] = new ConsoleLocaleApplicationPlugin();
+        $applicationPlugins[] = new ConsoleSecurityApplicationPlugin();
         $applicationPlugins[] = new PropelApplicationPlugin();
         $applicationPlugins[] = new TwigApplicationPlugin();
-        $applicationPlugins[] = new ConsoleLocaleApplicationPlugin();
+        $applicationPlugins[] = new FormApplicationPlugin();
 
         return $applicationPlugins;
     }
