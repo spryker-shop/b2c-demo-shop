@@ -32,4 +32,9 @@ class CartPageConfig extends SprykerCartPageConfig
      * @var string
      */
     protected const CART_BLOCK_MINI_CART_VIEW_TEMPLATE_PATH = '@ShopUi/components/organisms/navigation-top-async/navigation-top-async.twig';
+
+    /**
+     * @var bool
+     */
+    protected const IS_QUOTE_VALIDATION_ENABLED_FOR_AJAX_CART_ITEMS = false;
 }
