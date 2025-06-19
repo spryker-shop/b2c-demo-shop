@@ -160,10 +160,7 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                php-version: [
-                    '8.2',
-                    '8.3'
-                ]
+                node-version: [ '18' ]
         env:
             APPLICATION_ENV: ci.mysql
             PROJECT: suite
@@ -947,7 +944,7 @@ jobs:
                 uses: ./.github/actions/job-slack-notifications
                 if: always()
 
-    frontend-assets-via-docker-php-8-2:
+    frontend-assets-via-docker-php-82:
         if: >
             contains(github.event.pull_request.labels.*.name, 'run-functional-ci')
             || contains(github.event.pull_request.labels.*.name, 'run-latest-ci')
@@ -1075,7 +1072,7 @@ jobs:
                 uses: ./.github/actions/job-slack-notifications
                 if: always()
 
-    docker-alpine-php-8-3-mariadb-cypress-dynamic-store-off:
+    docker-alpine-php-83-mariadb-cypress-dynamic-store-off:
         if: >
             contains(github.event.pull_request.labels.*.name, 'run-compatibility-ci')
             || github.ref == 'refs/heads/master'
@@ -1130,7 +1127,7 @@ jobs:
                 uses: ./.github/actions/job-slack-notifications
                 if: always()
 
-    docker-alpine-php-8-3-mariadb-cypress:
+    docker-alpine-php-83-mariadb-cypress:
         if: >
             contains(github.event.pull_request.labels.*.name, 'run-ui-ci')
             || contains(github.event.pull_request.labels.*.name, 'run-latest-ci')
