@@ -1127,7 +1127,7 @@ jobs:
 #            || contains(github.event.pull_request.labels.*.name, 'run-latest-ci')
 #            || github.ref == 'refs/heads/master'
         name: "[run-ui-ci] PHP 8.3 / MariaDB / Cypress / UI"
-        runs-on: ubuntu-22.04
+        runs-on: ubuntu-latest
         env:
             PROGRESS_TYPE: plain
             SPRYKER_PLATFORM_IMAGE: spryker/php:8.3
@@ -1138,17 +1138,12 @@ jobs:
         steps:
             -   uses: actions/checkout@v4
 
-            -   name: Cache Composer dependencies
-                uses: actions/cache@v4
-                with:
-                    path: ~/.composer/cache
-                    key: composer-${{ runner.os }}-${{ hashFiles('**/composer.lock') }}
-                    restore-keys: composer-${{ runner.os }}-
-
             -   name: Install packages
                 run: |
                     sudo apt-get update
-                    sudo apt install awscli -q
+                    sudo apt-get install -y python3-pip
+                    pip3 install --upgrade pip
+                    pip3 install awscli
 
             -   name: Install cypress-tests folder
                 run: |
