@@ -1127,7 +1127,7 @@ jobs:
 #            || contains(github.event.pull_request.labels.*.name, 'run-latest-ci')
 #            || github.ref == 'refs/heads/master'
         name: "[run-ui-ci] PHP 8.3 / MariaDB / Cypress / UI"
-        runs-on: ubuntu-22.04
+        runs-on: ubuntu-latest
         env:
             PROGRESS_TYPE: plain
             SPRYKER_PLATFORM_IMAGE: spryker/php:8.3
@@ -1169,14 +1169,6 @@ jobs:
                     docker/sdk up -t
                     docker/sdk cli composer dump-autoload -o -a --apcu
                     docker/sdk cli console queue:worker:start --stop-when-empty
-
-            -   name: Restore Cypress npm cache
-                uses: actions/cache@v4
-                with:
-                    path: |
-                        ~/.npm
-                    key: npm-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
-                    restore-keys: npm-${{ runner.os }}-
 
             -   name: Run Tests
                 run: |
