@@ -118,7 +118,7 @@ class RouterDependencyProvider extends SprykerRouterDependencyProvider
             new AvailabilityNotificationPageRouteProviderPlugin(),
             new ConfigurableBundleWidgetRouteProviderPlugin(),
             new ConfigurableBundleNoteWidgetRouteProviderPlugin(),
-//            new ConfigurableBundlePageRouteProviderPlugin(),
+            new ConfigurableBundlePageRouteProviderPlugin(),
             new OrderCustomReferenceWidgetRouteProviderPlugin(),
             new SalesReturnPageRouteProviderPlugin(),
             new OrderCancelWidgetRouteProviderPlugin(),

@@ -1127,7 +1127,7 @@ jobs:
 #            || contains(github.event.pull_request.labels.*.name, 'run-latest-ci')
 #            || github.ref == 'refs/heads/master'
         name: "[run-ui-ci] PHP 8.3 / MariaDB / Cypress / UI"
-        runs-on: ubuntu-latest
+        runs-on: ubuntu-22.04
         env:
             PROGRESS_TYPE: plain
             SPRYKER_PLATFORM_IMAGE: spryker/php:8.3
@@ -1148,9 +1148,7 @@ jobs:
             -   name: Install packages
                 run: |
                     sudo apt-get update
-                    sudo apt-get install -y python3-pip
-                    pip3 install --upgrade pip
-                    pip3 install awscli
+                    sudo apt install awscli -q
 
             -   name: Install cypress-tests folder
                 run: |
@@ -1159,7 +1157,7 @@ jobs:
 
             -   name: Install docker-compose
                 run: |
-                    sudo curl -L "https://github.com/docker/compose/releases/download/2.12.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+                    sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
                     sudo chmod +x /usr/local/bin/docker-compose
 
             -   name: Install Project
