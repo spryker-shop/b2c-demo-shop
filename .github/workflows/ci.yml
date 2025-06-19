@@ -1122,10 +1122,10 @@ jobs:
     #                if: always()
 
     docker-alpine-php-8-3-mariadb-cypress:
-        if: >
-            contains(github.event.pull_request.labels.*.name, 'run-ui-ci')
-            || contains(github.event.pull_request.labels.*.name, 'run-latest-ci')
-            || github.ref == 'refs/heads/master'
+#        if: >
+#            contains(github.event.pull_request.labels.*.name, 'run-ui-ci')
+#            || contains(github.event.pull_request.labels.*.name, 'run-latest-ci')
+#            || github.ref == 'refs/heads/master'
         name: "[run-ui-ci] PHP 8.3 / MariaDB / Cypress / UI"
         runs-on: ubuntu-22.04
         env:
