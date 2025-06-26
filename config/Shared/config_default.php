@@ -283,7 +283,7 @@ $config[OauthConstants::PUBLIC_KEY_PATH]
     ) ?: null;
 $config[OauthConstants::ENCRYPTION_KEY] = getenv('SPRYKER_OAUTH_ENCRYPTION_KEY') ?: null;
 $config[OauthConstants::OAUTH_CLIENT_CONFIGURATION] = array_merge(
-    json_decode(getenv('SPRYKER_OAUTH_CLIENT_CONFIGURATION'), true) ?: [],
+//    json_decode(getenv('SPRYKER_OAUTH_CLIENT_CONFIGURATION'), true) ?: [], //Variable could be missed
     [
         [
             'identifier' => 'fulfillment-client-b2c-local',
