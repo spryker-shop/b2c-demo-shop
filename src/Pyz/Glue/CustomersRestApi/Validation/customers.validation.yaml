@@ -3,27 +3,35 @@ customers:
         password:
             - NotBlank
             - Length:
-                  min: 8
-                  max: 64
+                  min: 12
+                  max: 128
+            - Regex:
+                  pattern: '/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()\_\-\=\+\[\]\{\}\|;:<>.,\/?\\~])[A-Za-z\d!@#$%^&*()\_\-\=\+\[\]\{\}\|;:<>.,\/?\\~]+$/'
+                  message: 'Your password must include at least one uppercase letter, one lowercase letter, one number, and one special character from the following list: !@#$%^&*()_-+=[]{}|;:<>.,/?\~. Non-Latin and other special characters are not allowed.'
+            - NotCompromisedPassword
         confirmPassword:
             - NotBlank
             - Length:
-                  min: 8
-                  max: 64
+                  min: 12
+                  max: 128
     patch:
         password:
             - Optional:
                   constraints:
                       - Length:
-                            min: 8
-                            max: 64
+                            min: 12
+                            max: 128
+                      - Regex:
+                            pattern: '/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()\_\-\=\+\[\]\{\}\|;:<>.,\/?\\~])[A-Za-z\d!@#$%^&*()\_\-\=\+\[\]\{\}\|;:<>.,\/?\\~]+$/'
+                            message: 'Your password must include at least one uppercase letter, one lowercase letter, one number, and one special character from the following list: !@#$%^&*()_-+=[]{}|;:<>.,/?\~. Non-Latin and other special characters are not allowed.'
+                      - NotCompromisedPassword
 
         confirmPassword:
             - Optional:
                   constraints:
                       - Length:
-                            min: 8
-                            max: 64
+                            min: 12
+                            max: 128
 
 customer-password:
     patch:
@@ -32,23 +40,31 @@ customer-password:
         newPassword:
             - NotBlank
             - Length:
-                  min: 8
-                  max: 64
+                  min: 12
+                  max: 128
+            - Regex:
+                  pattern: '/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()\_\-\=\+\[\]\{\}\|;:<>.,\/?\\~])[A-Za-z\d!@#$%^&*()\_\-\=\+\[\]\{\}\|;:<>.,\/?\\~]+$/'
+                  message: 'Your password must include at least one uppercase letter, one lowercase letter, one number, and one special character from the following list: !@#$%^&*()_-+=[]{}|;:<>.,/?\~. Non-Latin and other special characters are not allowed.'
+            - NotCompromisedPassword
         confirmPassword:
             - NotBlank
             - Length:
-                  min: 8
-                  max: 64
+                  min: 12
+                  max: 128
 
 customer-restore-password:
     patch:
         password:
             - NotBlank
             - Length:
-                  min: 8
-                  max: 64
+                  min: 12
+                  max: 128
+            - Regex:
+                  pattern: '/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()\_\-\=\+\[\]\{\}\|;:<>.,\/?\\~])[A-Za-z\d!@#$%^&*()\_\-\=\+\[\]\{\}\|;:<>.,\/?\\~]+$/'
+                  message: 'Your password must include at least one uppercase letter, one lowercase letter, one number, and one special character from the following list: !@#$%^&*()_-+=[]{}|;:<>.,/?\~. Non-Latin and other special characters are not allowed.'
+            - NotCompromisedPassword
         confirmPassword:
             - NotBlank
             - Length:
-                  min: 8
-                  max: 64
+                  min: 12
+                  max: 128

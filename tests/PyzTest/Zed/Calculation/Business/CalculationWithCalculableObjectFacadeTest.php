@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace PyzTest\Zed\Calculation\Business;
 
 use ArrayObject;
@@ -490,7 +492,7 @@ class CalculationWithCalculableObjectFacadeTest extends Unit
      *
      * @return \Orm\Zed\Discount\Persistence\SpyDiscountVoucher
      */
-    protected function createDiscounts($discountAmount, $calculatorType): SpyDiscountVoucher
+    protected function createDiscounts(int $discountAmount, string $calculatorType): SpyDiscountVoucher
     {
         $discountVoucherPoolEntity = new SpyDiscountVoucherPool();
         $discountVoucherPoolEntity->setName('test-pool');
@@ -567,7 +569,7 @@ class CalculationWithCalculableObjectFacadeTest extends Unit
      *
      * @return \Orm\Zed\Product\Persistence\SpyProductAbstract
      */
-    protected function createAbstractProductWithTaxSet($taxRate): SpyProductAbstract
+    protected function createAbstractProductWithTaxSet(int $taxRate): SpyProductAbstract
     {
         $countryEntity = SpyCountryQuery::create()->findOneByIso2Code('DE');
 
@@ -581,9 +583,7 @@ class CalculationWithCalculableObjectFacadeTest extends Unit
 
         $this->createTaxSetTax($taxSetEntity, $taxRateEntity);
 
-        $abstractProductEntity = $this->createAbstractProduct($taxSetEntity);
-
-        return $abstractProductEntity;
+        return $this->createAbstractProduct($taxSetEntity);
     }
 
     /**
@@ -600,9 +600,7 @@ class CalculationWithCalculableObjectFacadeTest extends Unit
 
         $this->createTaxSetTax($taxSetEntity, $taxRateEntity);
 
-        $abstractProductEntity = $this->createAbstractProduct($taxSetEntity);
-
-        return $abstractProductEntity;
+        return $this->createAbstractProduct($taxSetEntity);
     }
 
     /**

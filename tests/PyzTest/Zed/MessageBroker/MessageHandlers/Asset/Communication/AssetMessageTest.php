@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace PyzTest\Zed\MessageBroker\MessageHandlers\Asset\Communication;
 
 use Codeception\Test\Unit;
@@ -50,6 +52,7 @@ class AssetMessageTest extends Unit
 
         // Act
         $this->tester->setupMessageBroker($assetAddedTransfer::class, $channelName);
+        $this->tester->setupMessageBrokerPlugins();
         $messageBrokerFacade = $this->tester->getLocator()->messageBroker()->facade();
         $messageBrokerFacade->sendMessage($assetAddedTransfer);
         $messageBrokerFacade->startWorker($this->tester->buildMessageBrokerWorkerConfigTransfer([$channelName], 1));
@@ -71,6 +74,7 @@ class AssetMessageTest extends Unit
         $slotName = 'header-top';
 
         $this->tester->setupMessageBroker(AssetAddedTransfer::class, $channelName);
+        $this->tester->setupMessageBrokerPlugins();
         $messageBrokerFacade = $this->tester->getLocator()->messageBroker()->facade();
         $messageBrokerWorkerConfigTransfer = $this->tester->buildMessageBrokerWorkerConfigTransfer([$channelName], 1);
         $messageBrokerFacade->sendMessage(
@@ -108,6 +112,7 @@ class AssetMessageTest extends Unit
         $assetUuid = Uuid::uuid4()->toString();
 
         $this->tester->setupMessageBroker(AssetAddedTransfer::class, $channelName);
+        $this->tester->setupMessageBrokerPlugins();
         $messageBrokerFacade = $this->tester->getLocator()->messageBroker()->facade();
         $messageBrokerWorkerConfigTransfer = $this->tester->buildMessageBrokerWorkerConfigTransfer([$channelName], 1);
         $messageBrokerFacade->sendMessage(

@@ -26,3 +26,22 @@
         {% endif %}
     </div>
 {% endblock %}
+
+{% block eventTracker %}
+    {% if data.quote is defined %}
+        {% set events = {
+            list: events.list,
+            data: events.data | merge({
+                page: 'CHECKOUT_SUCCESS',
+                products: ((data.quote.items | default([])) | merge(data.quote.bundleItems | default([]))) | map(item => {
+                    sku: item.sku,
+                    price: can('SeePricePermissionPlugin') ? item.sumSubtotalAggregation : null,
+                    quantity: item.quantity,
+                }),
+                total: can('SeePricePermissionPlugin') ? data.quote.totals.grandTotal : null,
+            }),
+        } %}
+    {% endif %}
+
+    {{ parent() }}
+{% endblock %}

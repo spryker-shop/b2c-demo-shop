@@ -5,9 +5,12 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace Pyz\Yves\Router;
 
 use Pyz\Yves\ExampleProductSalePage\Plugin\Router\ExampleProductSaleRouteProviderPlugin;
+use Spryker\Yves\CustomerDataChangeRequest\Plugin\Router\CustomerDataChangeRequestRouteProviderPlugin;
 use Spryker\Yves\HealthCheck\Plugin\Router\HealthCheckRouteProviderPlugin;
 use Spryker\Yves\Router\Plugin\RouteManipulator\LanguageDefaultPostAddRouteManipulatorPlugin;
 use Spryker\Yves\Router\Plugin\RouteManipulator\SslPostAddRouteManipulatorPlugin;
@@ -17,6 +20,7 @@ use Spryker\Yves\Router\Plugin\Router\YvesRouterPlugin;
 use Spryker\Yves\Router\Plugin\RouterEnhancer\LanguagePrefixRouterEnhancerPlugin;
 use Spryker\Yves\Router\Plugin\RouterEnhancer\StorePrefixRouterEnhancerPlugin;
 use Spryker\Yves\Router\RouterDependencyProvider as SprykerRouterDependencyProvider;
+use Spryker\Yves\Sitemap\Plugin\Router\SitemapRouteProviderPlugin;
 use SprykerShop\Yves\AgentPage\Plugin\Router\AgentPageRouteProviderPlugin;
 use SprykerShop\Yves\AgentWidget\Plugin\Router\AgentWidgetRouteProviderPlugin;
 use SprykerShop\Yves\AvailabilityNotificationPage\Plugin\Router\AvailabilityNotificationPageRouteProviderPlugin;
@@ -49,6 +53,7 @@ use SprykerShop\Yves\NewsletterWidget\Plugin\Router\NewsletterWidgetRouteProvide
 use SprykerShop\Yves\OrderCancelWidget\Plugin\Router\OrderCancelWidgetRouteProviderPlugin;
 use SprykerShop\Yves\OrderCustomReferenceWidget\Plugin\Router\OrderCustomReferenceWidgetAsyncRouteProviderPlugin;
 use SprykerShop\Yves\OrderCustomReferenceWidget\Plugin\Router\OrderCustomReferenceWidgetRouteProviderPlugin;
+use SprykerShop\Yves\PaymentAppWidget\Plugin\Router\PaymentAppWidgetRouteProviderPlugin;
 use SprykerShop\Yves\PaymentPage\Plugin\Router\PaymentPageRouteProviderPlugin;
 use SprykerShop\Yves\PriceWidget\Plugin\Router\PriceWidgetRouteProviderPlugin;
 use SprykerShop\Yves\ProductComparisonPage\Plugin\Router\ProductComparisonPageRouteProviderPlugin;
@@ -126,6 +131,9 @@ class RouterDependencyProvider extends SprykerRouterDependencyProvider
             new ConfigurableBundleWidgetAsyncRouteProviderPlugin(),
             new OrderCustomReferenceWidgetAsyncRouteProviderPlugin(),
             new ProductComparisonPageRouteProviderPlugin(),
+            new PaymentAppWidgetRouteProviderPlugin(),
+            new CustomerDataChangeRequestRouteProviderPlugin(),
+            new SitemapRouteProviderPlugin(),
         ];
     }
 
@@ -147,8 +155,8 @@ class RouterDependencyProvider extends SprykerRouterDependencyProvider
     protected function getRouterEnhancerPlugins(): array
     {
         return [
-            new LanguagePrefixRouterEnhancerPlugin(),
             new StorePrefixRouterEnhancerPlugin(),
+            new LanguagePrefixRouterEnhancerPlugin(),
         ];
     }
 }

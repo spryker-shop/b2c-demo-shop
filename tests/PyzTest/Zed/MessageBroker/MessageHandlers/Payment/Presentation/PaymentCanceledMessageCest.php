@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace PyzTest\Zed\MessageBroker\MessageHandlers\Payment\Presentation;
 
 use Generated\Shared\Transfer\PaymentCanceledTransfer;
@@ -38,6 +40,17 @@ class PaymentCanceledMessageCest
      * @var string
      */
     public const NOT_ALLOWED_FOR_CANCEL_ITEM_STATE = 'payment captured';
+
+    /**
+     * @param \PyzTest\Zed\MessageBroker\PaymentPresentationTester $i
+     *
+     * @return void
+     */
+    public function _before(PaymentPresentationTester $i): void
+    {
+        $i->amZed();
+        $i->amLoggedInUser();
+    }
 
     /**
      * @param \PyzTest\Zed\MessageBroker\PaymentPresentationTester $I

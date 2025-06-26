@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace Pyz\Glue\GlueApplication;
 
 use Spryker\Glue\AgentAuthRestApi\Plugin\GlueApplication\AgentAccessTokenRestRequestValidatorPlugin;
@@ -124,7 +126,10 @@ use Spryker\Glue\OrdersRestApi\Plugin\CustomerOrdersResourceRoutePlugin;
 use Spryker\Glue\OrdersRestApi\Plugin\OrderItemByResourceIdResourceRelationshipPlugin;
 use Spryker\Glue\OrdersRestApi\Plugin\OrderRelationshipByOrderReferencePlugin;
 use Spryker\Glue\OrdersRestApi\Plugin\OrdersResourceRoutePlugin;
+use Spryker\Glue\PaymentsRestApi\Plugin\GlueApplication\PaymentCancellationsResourceRoutePlugin;
+use Spryker\Glue\PaymentsRestApi\Plugin\GlueApplication\PaymentCustomersResourceRoutePlugin;
 use Spryker\Glue\PaymentsRestApi\Plugin\GlueApplication\PaymentMethodsByCheckoutDataResourceRelationshipPlugin;
+use Spryker\Glue\PaymentsRestApi\Plugin\GlueApplication\PaymentsResourceRoutePlugin;
 use Spryker\Glue\ProductAttributesRestApi\Plugin\GlueApplication\ProductManagementAttributesResourceRoutePlugin;
 use Spryker\Glue\ProductAvailabilitiesRestApi\Plugin\AbstractProductAvailabilitiesRoutePlugin;
 use Spryker\Glue\ProductAvailabilitiesRestApi\Plugin\ConcreteProductAvailabilitiesRoutePlugin;
@@ -185,6 +190,7 @@ use Spryker\Glue\ShipmentsRestApi\Plugin\GlueApplication\ShipmentsByCheckoutData
 use Spryker\Glue\ShipmentsRestApi\ShipmentsRestApiConfig;
 use Spryker\Glue\StoresApi\Plugin\GlueStorefrontApiApplication\StoreApplicationPlugin;
 use Spryker\Glue\StoresRestApi\Plugin\StoresResourceRoutePlugin;
+use Spryker\Glue\TaxAppRestApi\Plugin\TaxValidateIdResourceRoutePlugin;
 use Spryker\Glue\UpSellingProductsRestApi\Plugin\GlueApplication\CartUpSellingProductsResourceRoutePlugin;
 use Spryker\Glue\UpSellingProductsRestApi\Plugin\GlueApplication\GuestCartUpSellingProductsResourceRoutePlugin;
 use Spryker\Glue\UrlsRestApi\Plugin\GlueApplication\UrlResolverResourceRoutePlugin;
@@ -200,8 +206,6 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
 {
     /**
      * {@inheritDoc}
-     *
-     * @deprecated Will be removed without replacement.
      *
      * @return array<\Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\ResourceRoutePluginInterface>
      */
@@ -275,13 +279,15 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
             new MyAvailabilityNotificationsResourceRoutePlugin(),
             new ConfiguredBundlesResourceRoutePlugin(),
             new GuestConfiguredBundlesResourceRoutePlugin(),
+            new PaymentsResourceRoutePlugin(),
+            new PaymentCancellationsResourceRoutePlugin(),
+            new PaymentCustomersResourceRoutePlugin(),
+            new TaxValidateIdResourceRoutePlugin(),
         ];
     }
 
     /**
      * {@inheritDoc}
-     *
-     * @deprecated Will be removed without replacement.
      *
      * @return array<\Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\ValidateHttpRequestPluginInterface>
      */
@@ -297,8 +303,6 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
     /**
      * {@inheritDoc}
      *
-     * @deprecated Will be removed without replacement.
-     *
      * @return array<\Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\FormattedControllerBeforeActionPluginInterface>
      */
     protected function getFormattedControllerBeforeActionTerminatePlugins(): array
@@ -310,8 +314,6 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
 
     /**
      * {@inheritDoc}
-     *
-     * @deprecated Will be removed without replacement.
      *
      * @return array<\Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\FormatRequestPluginInterface>
      */
@@ -325,8 +327,6 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
     /**
      * {@inheritDoc}
      *
-     * @deprecated Will be removed without replacement.
-     *
      * @return array<\Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\ValidateRestRequestPluginInterface>
      */
     protected function getValidateRestRequestPlugins(): array
@@ -338,8 +338,6 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
 
     /**
      * {@inheritDoc}
-     *
-     * @deprecated Will be removed without replacement.
      *
      * @return array<\Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\RestUserValidatorPluginInterface>
      */
@@ -353,8 +351,6 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
 
     /**
      * {@inheritDoc}
-     *
-     * @deprecated Will be removed without replacement.
      *
      * @return array<\Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\RestRequestValidatorPluginInterface>
      */
@@ -378,8 +374,6 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
     /**
      * {@inheritDoc}
      *
-     * @deprecated Will be removed without replacement.
-     *
      * @return array<\Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\FormatResponseHeadersPluginInterface>
      */
     protected function getFormatResponseHeadersPlugins(): array
@@ -393,8 +387,6 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
     /**
      * {@inheritDoc}
      *
-     * @deprecated Will be removed without replacement.
-     *
      * @return array<\Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\ControllerBeforeActionPluginInterface>
      */
     protected function getControllerBeforeActionPlugins(): array
@@ -407,8 +399,6 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
     }
 
     /**
-     * @deprecated Will be removed without replacement.
-     *
      * @return array<\Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\ControllerAfterActionPluginInterface>
      */
     protected function getControllerAfterActionPlugins(): array
@@ -421,8 +411,6 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
 
     /**
      * {@inheritDoc}
-     *
-     * @deprecated Will be removed without replacement.
      *
      * @param \Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\ResourceRelationshipCollectionInterface $resourceRelationshipCollection
      *
@@ -670,8 +658,6 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
     }
 
     /**
-     * @deprecated Will be removed without replacement.
-     *
      * @return array<\Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\RestUserFinderPluginInterface>
      */
     protected function getRestUserFinderPlugins(): array
@@ -683,8 +669,6 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
     }
 
     /**
-     * @deprecated Will be removed without replacement.
-     *
      * @return array<\Spryker\Shared\ApplicationExtension\Dependency\Plugin\ApplicationPluginInterface>
      */
     protected function getApplicationPlugins(): array
@@ -701,8 +685,6 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
     }
 
     /**
-     * @deprecated Will be removed without replacement.
-     *
      * @return array<\Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\RouterParameterExpanderPluginInterface>
      */
     protected function getRouterParameterExpanderPlugins(): array

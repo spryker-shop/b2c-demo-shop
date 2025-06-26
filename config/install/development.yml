@@ -79,7 +79,6 @@ sections:
         generate-scope-collection-file:
             command: 'vendor/bin/console oauth:scope-collection-file:generate'
 
-    setup-glue:
         controller-cache-warmup:
             command: 'vendor/bin/glue glue-api:controller:cache:warm-up'
 
@@ -93,6 +92,9 @@ sections:
 
         router-cache-warmup-backoffice:
             command: 'vendor/bin/console router:cache:warm-up:backoffice'
+
+        oms-process-cache-warmup:
+            command: 'vendor/bin/console oms:process-cache:warm-up'
 
         router-cache-warmup-backend-gateway:
             command: 'vendor/bin/console router:cache:warm-up:backend-gateway'

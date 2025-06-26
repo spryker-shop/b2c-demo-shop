@@ -12,6 +12,9 @@ sections:
         router-cache-warmup-backoffice:
             command: 'vendor/bin/console router:cache:warm-up:backoffice'
 
+        oms-process-cache-warmup:
+            command: 'vendor/bin/console oms:process-cache:warm-up'
+
         router-cache-warmup-backend-gateway:
             command: 'vendor/bin/console router:cache:warm-up:backend-gateway'
 
@@ -43,6 +46,12 @@ sections:
         excluded: true
         cache-class-resolver-build:
             command: 'vendor/bin/console cache:class-resolver:build'
+
+        twig-template-warmup-zed:
+            command: 'vendor/bin/console twig:template:warmer'
+
+        twig-template-warmup-yves:
+            command: 'vendor/bin/yves twig:template:warmer'
 
     build-development:
         generate-transfers:

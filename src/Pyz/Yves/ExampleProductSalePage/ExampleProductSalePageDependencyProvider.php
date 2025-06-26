@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace Pyz\Yves\ExampleProductSalePage;
 
 use Spryker\Yves\Kernel\AbstractBundleDependencyProvider;
@@ -98,7 +100,7 @@ class ExampleProductSalePageDependencyProvider extends AbstractBundleDependencyP
      *
      * @return \Spryker\Yves\Kernel\Container
      */
-    protected function addClientStore($container): Container
+    protected function addClientStore(Container $container): Container
     {
         $container->set(static::CLIENT_STORE, function (Container $container) {
             return $container->getLocator()->store()->client();
@@ -126,7 +128,7 @@ class ExampleProductSalePageDependencyProvider extends AbstractBundleDependencyP
      *
      * @return \Spryker\Yves\Kernel\Container
      */
-    protected function addProductSalePageWidgetPlugins($container): Container
+    protected function addProductSalePageWidgetPlugins(Container $container): Container
     {
         $container->set(static::PLUGIN_PRODUCT_SALE_PAGE_WIDGETS, function () {
             return $this->getProductSalePageWidgetPlugins();

@@ -21,7 +21,7 @@
     <form action="{{ data.searchUrl }}">
         <div class="grid">
             <div class="col col--sm-10">
-                <input 
+                <input
                     name="q"
                     class="suggest-search__input suggest-search__input--expand {{ config.jsName }}__input--{{ attributes['data-search-id'] }}"
                     placeholder="{{ 'global.search' | trans }}"
@@ -34,6 +34,7 @@
 
         {% include molecule('suggest-search') with {
             attributes: {
+                'parent-class-name': config.name,
                 'suggestion-url': path('search/suggestion'),
                 'base-suggest-url': path('search/suggestion'),
                 'input-class-name': config.jsName ~ '__input--' ~ attributes['data-search-id'],

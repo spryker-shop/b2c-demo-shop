@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace PyzTest\Zed\Tax\Presentation;
 
 use PyzTest\Zed\Tax\PageObject\TaxRateCreatePage;
@@ -23,6 +25,17 @@ use PyzTest\Zed\Tax\TaxPresentationTester;
  */
 class TaxRateCreateCest
 {
+    /**
+     * @param \PyzTest\Zed\Tax\TaxPresentationTester $i
+     *
+     * @return void
+     */
+    public function _before(TaxPresentationTester $i): void
+    {
+        $i->amZed();
+        $i->amLoggedInUser();
+    }
+
     /**
      * @param \PyzTest\Zed\Tax\TaxPresentationTester $i
      *

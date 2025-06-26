@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace Pyz\Zed\CmsContentWidget;
 
 use Spryker\Shared\CmsContentWidgetProductConnector\ContentWidgetConfigurationProvider\CmsProductContentWidgetConfigurationProvider;
@@ -27,7 +29,7 @@ class CmsContentWidgetDependencyProvider extends SprykerCmsContentWidgetDependen
      *
      * @return array<\Spryker\Zed\CmsContentWidget\Dependency\Plugin\CmsContentWidgetParameterMapperPluginInterface>
      */
-    protected function getCmsContentWidgetParameterMapperPlugins(Container $container)
+    protected function getCmsContentWidgetParameterMapperPlugins(Container $container) // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
     {
         return [
             CmsProductContentWidgetConfigurationProvider::FUNCTION_NAME => new CmsProductSkuMapperPlugin(),

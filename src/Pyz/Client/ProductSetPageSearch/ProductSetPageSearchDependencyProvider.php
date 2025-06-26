@@ -5,12 +5,13 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace Pyz\Client\ProductSetPageSearch;
 
 use Spryker\Client\ProductSetPageSearch\Plugin\Elasticsearch\ResultFormatter\ProductSetPageSearchListResultFormatterPlugin;
 use Spryker\Client\ProductSetPageSearch\ProductSetPageSearchDependencyProvider as SprykerProductSetPageSearchDependencyProvider;
 use Spryker\Client\SearchElasticsearch\Plugin\QueryExpander\LocalizedQueryExpanderPlugin;
-use Spryker\Client\SearchElasticsearch\Plugin\QueryExpander\StoreQueryExpanderPlugin;
 
 class ProductSetPageSearchDependencyProvider extends SprykerProductSetPageSearchDependencyProvider
 {
@@ -31,7 +32,6 @@ class ProductSetPageSearchDependencyProvider extends SprykerProductSetPageSearch
     {
         return [
             new LocalizedQueryExpanderPlugin(),
-            new StoreQueryExpanderPlugin(),
         ];
     }
 }

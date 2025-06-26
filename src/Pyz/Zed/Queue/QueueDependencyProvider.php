@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace Pyz\Zed\Queue;
 
 use Spryker\Shared\AssetStorage\AssetStorageConfig;
@@ -59,7 +61,7 @@ class QueueDependencyProvider extends SprykerDependencyProvider
      *
      * @return array<\Spryker\Zed\Queue\Dependency\Plugin\QueueMessageProcessorPluginInterface>
      */
-    protected function getProcessorMessagePlugins(Container $container): array
+    protected function getProcessorMessagePlugins(Container $container): array // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
     {
         return [
             EventConstants::EVENT_QUEUE => new EventQueueMessageProcessorPlugin(),
@@ -105,6 +107,7 @@ class QueueDependencyProvider extends SprykerDependencyProvider
             AssetStorageConfig::ASSET_SYNC_STORAGE_QUEUE => new SynchronizationStorageQueueMessageProcessorPlugin(),
             ProductConfigurationStorageConfig::PRODUCT_CONFIGURATION_SYNC_STORAGE_QUEUE => new SynchronizationStorageQueueMessageProcessorPlugin(),
             SearchHttpConfig::SEARCH_HTTP_CONFIG_SYNC_QUEUE => new SynchronizationStorageQueueMessageProcessorPlugin(),
+            UrlStorageConfig::PUBLISH_URL_RETRY => new EventRetryQueueMessageProcessorPlugin(),
         ];
     }
 

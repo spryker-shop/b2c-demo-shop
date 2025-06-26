@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace Pyz\Zed\DataImport\Business\Model\DiscountVoucher;
 
 use Orm\Zed\Discount\Persistence\SpyDiscount;
@@ -86,7 +88,7 @@ class DiscountVoucherWriterStep implements DataImportStepInterface
 
         $voucherBatch = $dataSet[static::KEY_VOUCHER_BATCH];
 
-        if ($this->voucherBatchExists($discountEntity, $voucherBatch)) {
+        if ($this->voucherBatchExists($discountEntity, (int)$voucherBatch)) {
             return;
         }
 
@@ -116,7 +118,7 @@ class DiscountVoucherWriterStep implements DataImportStepInterface
      *
      * @return bool
      */
-    protected function voucherBatchExists(SpyDiscount $discountEntity, $voucherBatch): bool
+    protected function voucherBatchExists(SpyDiscount $discountEntity, int $voucherBatch): bool
     {
         $query = SpyDiscountVoucherQuery::create()
             ->filterByFkDiscountVoucherPool($discountEntity->getFkDiscountVoucherPool())
@@ -132,7 +134,7 @@ class DiscountVoucherWriterStep implements DataImportStepInterface
      *
      * @return array<string>
      */
-    protected function generateCodes($length, $quantity, $customCode = null): array
+    protected function generateCodes(int $length, int $quantity, ?string $customCode = null): array
     {
         $codesToGenerate = [];
 
@@ -159,7 +161,7 @@ class DiscountVoucherWriterStep implements DataImportStepInterface
      *
      * @return string
      */
-    protected function addCustomCodeToGenerated($customCode, $code): string
+    protected function addCustomCodeToGenerated(string $customCode, string $code): string
     {
         $replacementString = $this->discountConfig->getVoucherPoolTemplateReplacementString();
 
@@ -179,7 +181,7 @@ class DiscountVoucherWriterStep implements DataImportStepInterface
      *
      * @return bool
      */
-    protected function voucherCodeExists($code): bool
+    protected function voucherCodeExists(string $code): bool
     {
         return (SpyDiscountVoucherQuery::create()->filterByCode($code)->count() > 0);
     }
@@ -189,7 +191,7 @@ class DiscountVoucherWriterStep implements DataImportStepInterface
      *
      * @return string
      */
-    protected function getRandomVoucherCode($length): string
+    protected function getRandomVoucherCode(int $length): string
     {
         $allowedCharacters = $this->discountConfig->getVoucherCodeCharacters();
 
@@ -208,9 +210,11 @@ class DiscountVoucherWriterStep implements DataImportStepInterface
                 $code .= $vowels[random_int(0, count($vowels) - 1)];
             }
 
-            if (count($numbers)) {
-                $code .= $numbers[random_int(0, count($numbers) - 1)];
+            if (!count($numbers)) {
+                continue;
             }
+
+            $code .= $numbers[random_int(0, count($numbers) - 1)];
         }
 
         return substr($code, 0, $length);

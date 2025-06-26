@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace PyzTest\Yves\Checkout\Controller;
 
 use Codeception\Test\Unit;
@@ -624,7 +626,7 @@ class CheckoutControllerTest extends Unit
      *
      * @return array
      */
-    protected function getFormData($url, $actionName, $routeName, $formName): array
+    protected function getFormData(string $url, string $actionName, string $routeName, string $formName): array
     {
         $request = Request::create($url, 'GET');
         $request->request->set('_route', $routeName);

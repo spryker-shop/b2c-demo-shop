@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace PhpStan\DynamicType;
 
 use Exception;
@@ -45,7 +47,7 @@ abstract class AbstractSprykerDynamicTypeExtension implements DynamicMethodRetur
      *
      * @return \PHPStan\Type\Type
      */
-    public function getTypeFromMethodCall(MethodReflection $methodReflection, MethodCall $methodCall, Scope $scope): Type
+    public function getTypeFromMethodCall(MethodReflection $methodReflection, MethodCall $methodCall, Scope $scope): Type // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
     {
         $docComment = $scope->getClassReflection()->getNativeReflection()->getDocComment();
 

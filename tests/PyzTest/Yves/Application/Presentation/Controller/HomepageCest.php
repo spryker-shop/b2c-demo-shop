@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace PyzTest\Yves\Application\Presentation\Controller;
 
 use PyzTest\Yves\Application\ApplicationPresentationTester;
@@ -23,6 +25,16 @@ use PyzTest\Yves\Application\PageObject\Homepage;
  */
 class HomepageCest
 {
+    /**
+     * @param \PyzTest\Yves\Application\ApplicationPresentationTester $i
+     *
+     * @return void
+     */
+    public function _before(ApplicationPresentationTester $i): void
+    {
+        $i->amYves();
+    }
+
     /**
      * @param \PyzTest\Yves\Application\ApplicationPresentationTester $i
      *

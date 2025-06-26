@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace Pyz\Zed\DataImport\Business\Model\ProductAbstract\Writer;
 
 use Generated\Shared\Transfer\SpyProductAbstractEntityTransfer;
@@ -104,9 +106,11 @@ class ProductAbstractPropelDataSetWriter implements DataSetWriterInterface
 
             $productAbstractLocalizedAttributesEntity->fromArray($productAbstractLocalizedTransfer->modifiedToArray());
 
-            if ($productAbstractLocalizedAttributesEntity->isNew() || $productAbstractLocalizedAttributesEntity->isModified()) {
-                $productAbstractLocalizedAttributesEntity->save();
+            if (!$productAbstractLocalizedAttributesEntity->isNew() && !$productAbstractLocalizedAttributesEntity->isModified()) {
+                continue;
             }
+
+            $productAbstractLocalizedAttributesEntity->save();
         }
     }
 
@@ -130,12 +134,14 @@ class ProductAbstractPropelDataSetWriter implements DataSetWriterInterface
 
             $productCategoryEntity->fromArray($productCategoryTransfer->modifiedToArray());
 
-            if ($productCategoryEntity->isNew() || $productCategoryEntity->isModified()) {
-                $productCategoryEntity->save();
-
-                DataImporterPublisher::addEvent(ProductCategoryEvents::PRODUCT_CATEGORY_PUBLISH, $idProductAbstract);
-                DataImporterPublisher::addEvent(ProductEvents::PRODUCT_ABSTRACT_PUBLISH, $idProductAbstract);
+            if (!$productCategoryEntity->isNew() && !$productCategoryEntity->isModified()) {
+                continue;
             }
+
+            $productCategoryEntity->save();
+
+            DataImporterPublisher::addEvent(ProductCategoryEvents::PRODUCT_CATEGORY_PUBLISH, $idProductAbstract);
+            DataImporterPublisher::addEvent(ProductEvents::PRODUCT_ABSTRACT_PUBLISH, $idProductAbstract);
         }
     }
 
@@ -164,11 +170,13 @@ class ProductAbstractPropelDataSetWriter implements DataSetWriterInterface
 
             $urlEntity->fromArray($productUrlTransfer->modifiedToArray());
 
-            if ($urlEntity->isNew() || $urlEntity->isModified()) {
-                $urlEntity->save();
-
-                DataImporterPublisher::addEvent(UrlEvents::URL_PUBLISH, $urlEntity->getIdUrl());
+            if (!$urlEntity->isNew() && !$urlEntity->isModified()) {
+                continue;
             }
+
+            $urlEntity->save();
+
+            DataImporterPublisher::addEvent(UrlEvents::URL_PUBLISH, $urlEntity->getIdUrl());
         }
     }
 

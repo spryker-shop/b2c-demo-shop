@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace Pyz\Zed\Synchronization;
 
 use Spryker\Zed\AssetStorage\Communication\Plugin\Synchronization\AssetStorageSynchronizationDataPlugin;
@@ -59,6 +61,7 @@ use Spryker\Zed\ProductStorage\Communication\Plugin\Synchronization\ProductAbstr
 use Spryker\Zed\ProductStorage\Communication\Plugin\Synchronization\ProductConcreteSynchronizationDataPlugin;
 use Spryker\Zed\SalesReturnSearch\Communication\Plugin\Synchronization\ReturnReasonSynchronizationDataBulkRepositoryPlugin;
 use Spryker\Zed\SearchHttp\Communication\Plugin\Synchronization\SearchHttpSynchronizationDataPlugin;
+use Spryker\Zed\StoreStorage\Communication\Plugin\Synchronization\StoreListSynchronizationDataPlugin;
 use Spryker\Zed\StoreStorage\Communication\Plugin\Synchronization\StoreSynchronizationDataPlugin;
 use Spryker\Zed\Synchronization\Communication\Plugin\Synchronization\SynchronizationDataQueryExpanderWhereBetweenStrategyPlugin;
 use Spryker\Zed\Synchronization\SynchronizationDependencyProvider as SprykerSynchronizationDependencyProvider;
@@ -134,6 +137,7 @@ class SynchronizationDependencyProvider extends SprykerSynchronizationDependency
             new AssetStorageSynchronizationDataPlugin(),
             new ProductConfigurationSynchronizationDataRepositoryPlugin(),
             new SearchHttpSynchronizationDataPlugin(),
+            new StoreListSynchronizationDataPlugin(),
         ];
     }
 

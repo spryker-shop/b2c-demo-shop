@@ -20,7 +20,7 @@ image:
         SPRYKER_DYNAMIC_STORE_MODE: true
 
 composer:
-    mode: "--no-dev --quiet"
+    mode: '--no-dev --quiet -o -a'
     autoload: --classmap-authoritative
 
 regions:
@@ -115,10 +115,10 @@ services:
         version: '6.8'
     scheduler:
         engine: jenkins
-        version: '2.442'
+        version: '2.492.3'
         csrf-protection-enabled: true
     mail_catcher:
-        engine: mailhog
+        engine: mailpit
     webdriver:
         engine: chromedriver
 

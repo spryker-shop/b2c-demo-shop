@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace PyzTest\Zed\CmsGui\Presentation;
 
 use PyzTest\Zed\CmsGui\CmsGuiPresentationTester;
@@ -22,6 +24,17 @@ use PyzTest\Zed\CmsGui\PageObject\CmsListPage;
  */
 class CmsGuiPageListCest
 {
+    /**
+     * @param \PyzTest\Zed\CmsGui\CmsGuiPresentationTester $i
+     *
+     * @return void
+     */
+    public function _before(CmsGuiPresentationTester $i): void
+    {
+        $i->amZed();
+        $i->amLoggedInUser();
+    }
+
     /**
      * @param \PyzTest\Zed\CmsGui\CmsGuiPresentationTester $i
      *

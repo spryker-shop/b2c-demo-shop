@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace PyzTest\Yves\Customer\PageObject;
 
 class CustomerProfilePage extends Customer
@@ -58,6 +60,11 @@ class CustomerProfilePage extends Customer
      * @var string
      */
     public const SUCCESS_MESSAGE = 'Profile was successfully saved';
+
+    /**
+     * @var string
+     */
+    public const CONFIRM_EMAIL_MESSAGE = 'Almost there! We send you an email to validate your email address. Please confirm it to be able to log in.';
 
     /**
      * @var string

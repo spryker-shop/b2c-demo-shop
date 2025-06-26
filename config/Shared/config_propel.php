@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 use Spryker\Shared\Propel\PropelConstants;
 use Spryker\Zed\Propel\PropelConfig;
 use Spryker\Zed\PropelOrm\Business\Builder\ExtensionObjectBuilder;

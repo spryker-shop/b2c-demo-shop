@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace PyzTest\Zed\MessageBroker\Business;
 
 use Codeception\Test\Unit;
@@ -50,6 +52,7 @@ class SendMessageTest extends Unit
         // Arrange
         $messageSenderPlugin = $this->createMock(MessageSenderPluginInterface::class);
 
+        $this->tester->setupMessageBrokerPlugins();
         $this->tester->setMessageToSenderChannelNameMap(MessageBrokerTestMessageTransfer::class, static::CHANNEL_NAME);
         $this->tester->setChannelToTransportMap(static::CHANNEL_NAME, $messageSenderPlugin->getTransportName());
 

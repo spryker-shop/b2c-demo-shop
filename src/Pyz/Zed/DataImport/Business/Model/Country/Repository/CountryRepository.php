@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace Pyz\Zed\DataImport\Business\Model\Country\Repository;
 
 use ArrayObject;
@@ -27,7 +29,7 @@ class CountryRepository implements CountryRepositoryInterface
      *
      * @return bool
      */
-    public function hasCountryByName($countryName): bool
+    public function hasCountryByName(string $countryName): bool
     {
         if ($this->countryIds->count() === 0) {
             $this->loadCountries();
@@ -41,7 +43,7 @@ class CountryRepository implements CountryRepositoryInterface
      *
      * @return int
      */
-    public function getIdCountryByName($countryName): int
+    public function getIdCountryByName(string $countryName): int
     {
         if ($this->countryIds->count() === 0) {
             $this->loadCountries();

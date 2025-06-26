@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace Pyz\Zed\DataImport\Business\Model\Locale\Repository;
 
 use Orm\Zed\Locale\Persistence\Map\SpyLocaleTableMap;
@@ -22,7 +24,7 @@ class LocaleRepository implements LocaleRepositoryInterface
      *
      * @return int
      */
-    public function getIdLocaleByLocale($locale): int
+    public function getIdLocaleByLocale(string $locale): int
     {
         if (!static::$localeMap) {
             $this->loadLocaleMap();

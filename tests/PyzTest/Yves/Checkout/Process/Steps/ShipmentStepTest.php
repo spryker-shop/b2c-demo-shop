@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace PyzTest\Yves\Checkout\Process\Steps;
 
 use Codeception\Test\Unit;
@@ -70,6 +72,8 @@ class ShipmentStepTest extends Unit
      */
     public function testShipmentPostConditionsShouldReturnTrueWhenShipmentSet(): void
     {
+        $this->markTestSkipped('This test is skipped because it is no longer relevant after https://spryker.atlassian.net/browse/SUPESC-435.');
+
         $quoteTransfer = new QuoteTransfer();
         $expenseTransfer = new ExpenseTransfer();
         $expenseTransfer->setType(ShipmentConfig::SHIPMENT_EXPENSE_TYPE);

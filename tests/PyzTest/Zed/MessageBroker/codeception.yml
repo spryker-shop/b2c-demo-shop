@@ -31,6 +31,7 @@ suites:
                 - \SprykerTest\Shared\Testify\Helper\DependencyHelper
                 - \SprykerTest\Service\Container\Helper\ContainerHelper
                 - \SprykerTest\Shared\Store\Helper\StoreDependencyHelper
+                - \PyzTest\Zed\MessageBroker\Helper\MessageBrokerHelper
 
     AssetCommunication:
         path: MessageHandlers/Asset/Communication
@@ -54,6 +55,7 @@ suites:
                 - \SprykerTest\Shared\Testify\Helper\DependencyHelper
                 - \SprykerTest\Service\Container\Helper\ContainerHelper
                 - \SprykerTest\Shared\Store\Helper\StoreDependencyHelper
+                - \PyzTest\Zed\MessageBroker\Helper\MessageBrokerHelper
 
     PaymentPresentation:
         path: MessageHandlers/Payment/Presentation
@@ -81,6 +83,7 @@ suites:
                 - \SprykerTest\Shared\Currency\Helper\CurrencyDataHelper
                 - \SprykerTest\Zed\Sales\Helper\BusinessHelper
                 - \SprykerTest\Shared\Store\Helper\StoreDataHelper
+                - \PyzTest\Zed\MessageBroker\Helper\MessageBrokerHelper
 
     PaymentMethodPresentation:
         path: MessageHandlers/PaymentMethod/Presentation
@@ -134,6 +137,7 @@ suites:
                 - \SprykerTest\Shared\Testify\Helper\DependencyHelper
                 - \SprykerTest\Service\Container\Helper\ContainerHelper
                 - \SprykerTest\Shared\Store\Helper\StoreDependencyHelper
+                - \PyzTest\Zed\MessageBroker\Helper\MessageBrokerHelper
 
     ProductReviewCommunication:
         path: MessageHandlers/ProductReview/Communication
@@ -159,6 +163,7 @@ suites:
                 - \SprykerTest\Shared\Testify\Helper\DependencyHelper
                 - \SprykerTest\Service\Container\Helper\ContainerHelper
                 - \SprykerTest\Shared\Store\Helper\StoreDependencyHelper
+                - \PyzTest\Zed\MessageBroker\Helper\MessageBrokerHelper
 
     SearchHttpCommunication:
         path: MessageHandlers/SearchHttp/Communication
@@ -175,8 +180,8 @@ suites:
                 - \SprykerTest\Zed\Testify\Helper\Business\DependencyProviderHelper
                 - \SprykerTest\Zed\MessageBroker\Helper\InMemoryMessageBrokerHelper
                 - \SprykerTest\Zed\MessageBroker\Helper\MessageBrokerHelper
-                - \SprykerTest\Shared\Store\Helper\StoreDataHelper
                 - \SprykerTest\Shared\Propel\Helper\TransactionHelper
+                - \PyzTest\Zed\MessageBroker\Helper\MessageBrokerHelper
 
     TaxAppCommunication:
         path: MessageHandlers/TaxApp/Communication
@@ -186,20 +191,17 @@ suites:
                 - Asserts
                 - \PyzTest\Shared\Testify\Helper\Environment
                 - \SprykerTest\Shared\Config\Helper\ConfigInit
-                -   \SprykerTest\Shared\Testify\Helper\LocatorHelper:
-                        projectNamespaces: [ 'Pyz' ]
-                - \SprykerTest\Shared\Testify\Helper\ConfigHelper
-                - \SprykerTest\Zed\Testify\Helper\Business\BusinessHelper
-                - \SprykerTest\Zed\Testify\Helper\Business\DependencyProviderHelper
+                - \SprykerTest\Shared\Testify\Helper\LocatorHelper:
+                      projectNamespaces: ['Pyz']
                 - \SprykerTest\Shared\Propel\Helper\ConnectionHelper
-                - \SprykerTest\Shared\Propel\Helper\TransactionHelper
+                - \SprykerTest\Shared\Testify\Helper\ConfigHelper
+                - \SprykerTest\Zed\Testify\Helper\Business\DependencyProviderHelper
                 - \SprykerTest\Zed\MessageBroker\Helper\InMemoryMessageBrokerHelper
                 - \SprykerTest\Zed\MessageBroker\Helper\MessageBrokerHelper
-                - \SprykerTest\Zed\ProductReview\Helper\ProductReviewHelper
-                - \SprykerTest\Shared\Product\Helper\ProductDataHelper
-                - \SprykerTest\Shared\Testify\Helper\DataCleanupHelper
                 - \SprykerTest\Shared\Store\Helper\StoreDataHelper
                 - \SprykerTest\Shared\Store\Helper\StoreReferenceHelper
+                - \SprykerTest\Shared\Store\Helper\StoreDependencyHelper
                 - \SprykerTest\Shared\Testify\Helper\DependencyHelper
                 - \SprykerTest\Service\Container\Helper\ContainerHelper
-                - \SprykerTest\Shared\Store\Helper\StoreDependencyHelper
+                - \SprykerTest\Shared\Propel\Helper\TransactionHelper
+                - \PyzTest\Zed\MessageBroker\Helper\MessageBrokerHelper

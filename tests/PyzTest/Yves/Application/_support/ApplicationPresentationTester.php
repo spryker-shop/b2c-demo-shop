@@ -5,10 +5,11 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace PyzTest\Yves\Application;
 
 use Codeception\Actor;
-use Codeception\Scenario;
 
 /**
  * Inherited Methods
@@ -29,14 +30,4 @@ use Codeception\Scenario;
 class ApplicationPresentationTester extends Actor
 {
     use _generated\ApplicationPresentationTesterActions;
-
-    /**
-     * @param \Codeception\Scenario $scenario
-     */
-    public function __construct(Scenario $scenario)
-    {
-        parent::__construct($scenario);
-
-        $this->amYves();
-    }
 }

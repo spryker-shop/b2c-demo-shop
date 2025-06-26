@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace Pyz\Zed\DataImport\Business\Model\ProductConcrete\Writer;
 
 use Generated\Shared\Transfer\EventEntityTransfer;
@@ -131,14 +133,18 @@ class ProductConcretePropelDataSetWriter implements DataSetWriterInterface
                 ->findOneOrCreate();
             $productBundleEntity->fromArray($productBundle[ProductConcreteHydratorStep::KEY_PRODUCT_BUNDLE_TRANSFER]->modifiedToArray());
 
-            if ($productBundleEntity->isNew() || $productBundleEntity->isModified()) {
-                $productBundleEntity->save();
+            if (!$productBundleEntity->isNew() && !$productBundleEntity->isModified()) {
+                continue;
             }
+
+            $productBundleEntity->save();
         }
 
-        if ($productBundleData) {
-            DataImporterPublisher::addEvent(static::PRODUCT_BUNDLE_PUBLISH, $idProduct);
+        if (!$productBundleData) {
+            return;
         }
+
+        DataImporterPublisher::addEvent(static::PRODUCT_BUNDLE_PUBLISH, $idProduct);
     }
 
     /**
@@ -188,15 +194,17 @@ class ProductConcretePropelDataSetWriter implements DataSetWriterInterface
         $productSearchEntity->fromArray($productSearchEntityTransfer->modifiedToArray());
 
         $isNewProductSearchEntity = $productSearchEntity->isNew();
-        if ($isNewProductSearchEntity || $productSearchEntity->isModified()) {
-            $productSearchEntity->save();
-            $eventEntityTransfer = $this->mapProductSearchEntityToEventEntityTransfer(
-                $productSearchEntity,
-                $isNewProductSearchEntity,
-                new EventEntityTransfer(),
-            );
-            DataImporterPublisher::addEvent($eventEntityTransfer->getEvent(), $eventEntityTransfer->getId(), $eventEntityTransfer);
+        if (!$isNewProductSearchEntity && !$productSearchEntity->isModified()) {
+            return;
         }
+
+        $productSearchEntity->save();
+        $eventEntityTransfer = $this->mapProductSearchEntityToEventEntityTransfer(
+            $productSearchEntity,
+            $isNewProductSearchEntity,
+            new EventEntityTransfer(),
+        );
+        DataImporterPublisher::addEvent($eventEntityTransfer->getEvent(), $eventEntityTransfer->getId(), $eventEntityTransfer);
     }
 
     /**

@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace PyzTest\Yves\Availability\Presentation;
 
 use Codeception\Scenario;
@@ -23,6 +25,16 @@ use PyzTest\Yves\Cart\PageObject\CartListPage;
  */
 class AvailabilityAddToCartCest
 {
+    /**
+     * @param \PyzTest\Yves\Availability\AvailabilityPresentationTester $i
+     *
+     * @return void
+     */
+    public function _before(AvailabilityPresentationTester $i): void
+    {
+        $i->amYves();
+    }
+
     /**
      * @param \PyzTest\Yves\Availability\AvailabilityPresentationTester $i
      * @param \Codeception\Scenario $scenario

@@ -5,12 +5,15 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace Pyz\Zed\Customer;
 
 use Spryker\Shared\Newsletter\NewsletterConstants;
 use Spryker\Zed\AvailabilityNotification\Communication\Plugin\Customer\AvailabilityNotificationSubscriptionCustomerTransferExpanderPlugin;
 use Spryker\Zed\AvailabilityNotification\Communication\Plugin\CustomerAnonymizer\AvailabilityNotificationAnonymizerPlugin;
 use Spryker\Zed\Customer\CustomerDependencyProvider as SprykerCustomerDependencyProvider;
+use Spryker\Zed\CustomerDataChangeRequest\Communication\Plugin\Customer\EmailChangeRequestSendVerificationCustomerPreUpdatePlugin;
 use Spryker\Zed\CustomerGroup\Communication\Plugin\CustomerAnonymizer\RemoveCustomerFromGroupPlugin;
 use Spryker\Zed\CustomerUserConnector\Communication\Plugin\CustomerTransferUsernameExpanderPlugin;
 use Spryker\Zed\Kernel\Container;
@@ -70,6 +73,16 @@ class CustomerDependencyProvider extends SprykerCustomerDependencyProvider
         return [
             new CustomerTransferUsernameExpanderPlugin(),
             new AvailabilityNotificationSubscriptionCustomerTransferExpanderPlugin(),
+        ];
+    }
+
+    /**
+     * @return array<\Spryker\Zed\CustomerExtension\Dependency\Plugin\CustomerPreUpdatePluginInterface>
+     */
+    protected function getCustomerPreUpdatePlugins(): array
+    {
+        return [
+            new EmailChangeRequestSendVerificationCustomerPreUpdatePlugin(),
         ];
     }
 }

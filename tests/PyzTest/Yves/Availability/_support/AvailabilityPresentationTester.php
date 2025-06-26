@@ -5,10 +5,11 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace PyzTest\Yves\Availability;
 
 use Codeception\Actor;
-use Codeception\Scenario;
 
 /**
  * Inherited Methods
@@ -54,16 +55,6 @@ class AvailabilityPresentationTester extends Actor
      * @var string
      */
     public const CART_PRE_CHECK_AVAILABILITY_ERROR_MESSAGE = 'Item 119_29804808 only has availability of 10.';
-
-    /**
-     * @param \Codeception\Scenario $scenario
-     */
-    public function __construct(Scenario $scenario)
-    {
-        parent::__construct($scenario);
-
-        $this->amYves();
-    }
 
     /**
      * @return void

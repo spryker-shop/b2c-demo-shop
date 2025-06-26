@@ -21,6 +21,7 @@
             <meta itemprop="name" content="{{ data.product.name }}">
             <meta itemprop="url" content="{{ data.hostName }}{{ data.productUrl }}">
             <meta itemprop="sku" content="{{ data.product.sku }}">
+            <meta itemprop="abstractSku" content="{{ data.product.abstractSku }}">
             <meta itemprop="productId" content="{{ data.product.sku }}">
             <meta itemprop="description" content="{{ data.product.metaDescription }}">
 
@@ -96,4 +97,61 @@
             {% endblock %}
         {% endembed %}
     </div>
+{% endblock %}
+
+{% block eventTracker %}
+    {% set sku = data.product.idProductConcrete ? data.product.sku : (data.product.attributeMap is defined and data.product.attributeMap ? data.product.attributeMap.productConcreteIds | keys | first) | default(data.product.sku) %}
+
+    {% set events = {
+        list: events.list | merge([
+            {
+                event: 'ADD_TO_WISHLIST',
+                name: 'click',
+                triggers: [
+                    {
+                        selector: '.wishlist-selector__form button',
+                    },
+                ],
+            },
+            {
+                event: 'ADD_TO_CART',
+                name: 'click',
+                triggers: [
+                    {
+                        selector: 'body:has(.product-configurator__button-wrap button:focus)',
+                        groupAs: {
+                            key: 'products',
+                            toArray: true,
+                        },
+                        data: {
+                            quantity: [
+                                {
+                                    selector: '.product-configurator select[name="quantity"]',
+                                    attribute: 'value',
+                                },
+                                {
+                                    selector: '.product-configurator .js-formatted-number-input__hidden-input',
+                                    attribute: 'value',
+                                }
+                            ],
+                            price: {
+                                selector: '.product-configurator [itemprop="price"]',
+                                attribute: 'content',
+                            },
+                            sku: {
+                                value: sku,
+                            },
+                        },
+                    },
+                ],
+            }
+        ]),
+        data: events.data | merge({
+            page: 'PDP',
+            products: [{ sku: sku }],
+            searchId: app.request.get('search-id'),
+        }),
+    } %}
+
+    {{ parent() }}
 {% endblock %}
