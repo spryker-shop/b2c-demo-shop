@@ -34,6 +34,13 @@ class UserConfig extends SprykerUserConfig
                 'username' => 'admin_de@spryker.com',
                 'localeName' => 'de_DE',
             ],
+            [ // For E2E tests purpose only, should not be used in production.
+                'firstName' => 'Harald',
+                'lastName' => 'Schmidt',
+                'password' => 'change123',
+                'username' => 'harald@spryker.com',
+                'localeName' => 'en_US',
+            ],
         ];
     }
 }
