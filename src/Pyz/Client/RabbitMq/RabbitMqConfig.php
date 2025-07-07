@@ -108,7 +108,9 @@ class RabbitMqConfig extends SprykerRabbitMqConfig
             ],
             GlossaryStorageConfig::PUBLISH_TRANSLATION,
             PublishAndSynchronizeHealthCheckConfig::PUBLISH_PUBLISH_AND_SYNCHRONIZE_HEALTH_CHECK,
-            UrlStorageConfig::PUBLISH_URL,
+            UrlStorageConfig::PUBLISH_URL => [
+                PublisherConfig::PUBLISH_ROUTING_KEY_RETRY => UrlStorageConfig::PUBLISH_URL_RETRY,
+            ],
             AvailabilityStorageConfig::PUBLISH_AVAILABILITY,
             PriceProductStorageConfig::PUBLISH_PRICE_PRODUCT_ABSTRACT,
             PriceProductStorageConfig::PUBLISH_PRICE_PRODUCT_CONCRETE,

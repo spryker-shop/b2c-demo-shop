@@ -59,7 +59,6 @@ class CmsGuiCreatePageCest
         $i->setIsSearchable();
 
         $i->fillLocalizedUrlForm(0, $i->getLocalizedName('en'), $i->getLocalizedUrl('en'));
-        $i->expandLocalizedUrlPane();
         $i->fillLocalizedUrlForm(1, $i->getLocalizedName('de'), $i->getLocalizedUrl('de'));
         $i->clickSubmit();
 

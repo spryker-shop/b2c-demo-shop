@@ -72,6 +72,8 @@ class ShipmentStepTest extends Unit
      */
     public function testShipmentPostConditionsShouldReturnTrueWhenShipmentSet(): void
     {
+        $this->markTestSkipped('This test is skipped because it is no longer relevant after https://spryker.atlassian.net/browse/SUPESC-435.');
+
         $quoteTransfer = new QuoteTransfer();
         $expenseTransfer = new ExpenseTransfer();
         $expenseTransfer->setType(ShipmentConfig::SHIPMENT_EXPENSE_TYPE);
