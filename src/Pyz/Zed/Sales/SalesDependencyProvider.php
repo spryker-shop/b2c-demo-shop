@@ -27,6 +27,7 @@ use Spryker\Zed\Oms\Communication\Plugin\Sales\OrderAggregatedItemStateSearchOrd
 use Spryker\Zed\Oms\Communication\Plugin\Sales\StateHistoryOrderItemExpanderPlugin;
 use Spryker\Zed\OmsMultiThread\Communication\Plugin\Sales\OmsMultiThreadProcessorIdentifierOrderExpanderPreSavePlugin;
 use Spryker\Zed\OrderCustomReference\Communication\Plugin\Sales\OrderCustomReferenceOrderPostSavePlugin;
+use Spryker\Zed\OrderCustomReference\Communication\Plugin\Sales\UpdateOrderCustomReferenceOrderPostSavePlugin;
 use Spryker\Zed\ProductBundle\Communication\Plugin\Sales\ProductBundleIdHydratorPlugin;
 use Spryker\Zed\ProductBundle\Communication\Plugin\Sales\ProductBundleOptionItemExpanderPlugin;
 use Spryker\Zed\ProductBundle\Communication\Plugin\Sales\ProductBundleOptionOrderExpanderPlugin;
@@ -113,6 +114,7 @@ class SalesDependencyProvider extends SprykerSalesDependencyProvider
     protected function getOrderPostSavePluginsForOrderAmendment(): array
     {
         return [
+            new UpdateOrderCustomReferenceOrderPostSavePlugin(),
             new CreateSalesOrderAmendmentOrderPostSavePlugin(),
         ];
     }

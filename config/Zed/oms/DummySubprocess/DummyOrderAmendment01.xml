@@ -7,12 +7,25 @@
 
     <process name="DummyOrderAmendment">
         <states>
-            <state name="order amendment" display="oms.state.order-amendment">
+            <state name="order amendment" reserved="true" display="oms.state.order-amendment">
                 <flag>amendment in progress</flag>
             </state>
+            <state name="deleted item unreserved" display="oms.state.new"/>
         </states>
 
         <transitions>
+            <transition happy="true">
+                <source>grace period pending</source>
+                <target>deleted item unreserved</target>
+                <event>unreserve deleted items</event>
+            </transition>
+
+            <transition happy="true">
+                <source>deleted item unreserved</source>
+                <target>grace period started</target>
+                <event>start grace period</event>
+            </transition>
+
             <transition>
                 <source>grace period started</source>
                 <target>order amendment</target>
@@ -39,6 +52,8 @@
         </transitions>
 
         <events>
+            <event name="start grace period" command="OrderAmendment/StartGracePeriod" onEnter="true"/>
+            <event name="unreserve deleted items" command="OrderAmendment/UnreserveDeletedItems" onEnter="true"/>
             <event name="skip-order-amendment"/>
             <event name="start-order-amendment"/>
             <event name="finish-order-amendment"/>

@@ -20,6 +20,7 @@
             <state name="new" display="oms.state.new">
                 <flag>cancellable</flag>
             </state>
+            <state name="grace period pending" display="oms.state.new"/>
             <state name="grace period started" reserved="true" display="oms.state.new">
                 <flag>cancellable</flag>
                 <flag>amendable</flag>
@@ -50,8 +51,7 @@
         <transitions>
             <transition happy="true">
                 <source>new</source>
-                <target>grace period started</target>
-                <event>start grace period</event>
+                <target>grace period pending</target>
             </transition>
 
             <transition happy="true">

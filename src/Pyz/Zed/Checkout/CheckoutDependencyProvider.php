@@ -32,11 +32,17 @@ use Spryker\Zed\Nopayment\Communication\Plugin\Checkout\NopaymentCheckoutPreCond
 use Spryker\Zed\Payment\Communication\Plugin\Checkout\PaymentAuthorizationCheckoutPostSavePlugin;
 use Spryker\Zed\Payment\Communication\Plugin\Checkout\PaymentConfirmPreOrderPaymentCheckoutPostSavePlugin;
 use Spryker\Zed\Payment\Communication\Plugin\Checkout\PaymentMethodValidityCheckoutPreConditionPlugin;
+use Spryker\Zed\ProductApproval\Communication\Plugin\Checkout\OrderAmendmentProductApprovalCheckoutPreConditionPlugin;
+use Spryker\Zed\ProductBundle\Communication\Plugin\Checkout\FilterOriginalOrderBundleItemCheckoutPreSavePlugin;
+use Spryker\Zed\ProductBundle\Communication\Plugin\Checkout\OrderAmendmentProductBundleAvailabilityCheckoutPreConditionPlugin;
 use Spryker\Zed\ProductBundle\Communication\Plugin\Checkout\ProductBundleAvailabilityCheckoutPreConditionPlugin;
 use Spryker\Zed\ProductBundle\Communication\Plugin\Checkout\ProductBundleOrderSaverPlugin;
+use Spryker\Zed\ProductCartConnector\Communication\Plugin\Checkout\OrderAmendmentProductExistsCheckoutPreConditionPlugin;
 use Spryker\Zed\ProductCartConnector\Communication\Plugin\Checkout\ProductExistsCheckoutPreConditionPlugin;
 use Spryker\Zed\ProductConfigurationCart\Communication\Plugin\Checkout\ProductConfigurationCheckoutPreConditionPlugin;
+use Spryker\Zed\ProductDiscontinued\Communication\Plugin\Checkout\OrderAmendmentProductDiscontinuedCheckoutPreConditionPlugin;
 use Spryker\Zed\ProductDiscontinued\Communication\Plugin\Checkout\ProductDiscontinuedCheckoutPreConditionPlugin;
+use Spryker\Zed\ProductOffer\Communication\Plugin\Checkout\OrderAmendmentProductOfferCheckoutPreConditionPlugin;
 use Spryker\Zed\ProductQuantity\Communication\Plugin\Checkout\ProductQuantityRestrictionCheckoutPreConditionPlugin;
 use Spryker\Zed\QuoteCheckoutConnector\Communication\Plugin\Checkout\DisallowedQuoteCheckoutPreConditionPlugin;
 use Spryker\Zed\QuoteCheckoutConnector\Communication\Plugin\Checkout\DisallowQuoteCheckoutPreSavePlugin;
@@ -48,6 +54,7 @@ use Spryker\Zed\Sales\Communication\Plugin\Checkout\UpdateOrderByQuoteCheckoutDo
 use Spryker\Zed\Sales\Communication\Plugin\SalesOrderExpanderPlugin;
 use Spryker\Zed\SalesOrderAmendment\Communication\Plugin\Checkout\OriginalOrderQuoteExpanderCheckoutPreSavePlugin;
 use Spryker\Zed\SalesOrderAmendment\Communication\Plugin\Checkout\SalesOrderAmendmentItemsCheckoutDoSaveOrderPlugin;
+use Spryker\Zed\SalesOrderAmendment\Communication\Plugin\Checkout\SalesOrderAmendmentQuoteCheckoutDoSaveOrderPlugin;
 use Spryker\Zed\SalesOrderAmendmentOms\Communication\Plugin\Checkout\FinishOrderAmendmentCheckoutPostSavePlugin;
 use Spryker\Zed\SalesOrderAmendmentOms\Communication\Plugin\Checkout\OrderAmendmentCheckoutPreCheckPlugin;
 use Spryker\Zed\SalesOrderThreshold\Communication\Plugin\Checkout\ReplaceSalesOrderThresholdExpensesCheckoutDoSaveOrderPlugin;
@@ -70,6 +77,26 @@ class CheckoutDependencyProvider extends SprykerCheckoutDependencyProvider
     protected function getCheckoutPreConditionsForOrderAmendment(Container $container): array
     {
         return [
+            new DisallowedQuoteCheckoutPreConditionPlugin(),
+            new CustomerPreConditionCheckerPlugin(),
+            new CustomerSalutationCheckoutPreConditionPlugin(),
+            new CustomerAddressSalutationCheckoutPreConditionPlugin(),
+            new ProductsAvailableCheckoutPreConditionPlugin(),
+            new GiftCardCheckoutPreConditionPlugin(),
+            new NopaymentCheckoutPreConditionPlugin(),
+            new DummyPaymentCheckoutPreConditionPlugin(),
+            new ShipmentCheckoutPreCheckPlugin(),
+            new SalesOrderThresholdCheckoutPreConditionPlugin(), #SalesOrderThresholdFeature
+            new VoucherDiscountMaxUsageCheckoutPreConditionPlugin(),
+            new ShipmentCheckoutPreCheckPlugin(),
+            new PaymentMethodValidityCheckoutPreConditionPlugin(),
+            new ProductConfigurationCheckoutPreConditionPlugin(),
+            new DuplicateOrderCheckoutPreConditionPlugin(),
+            new ProductQuantityRestrictionCheckoutPreConditionPlugin(),
+            new OrderAmendmentProductBundleAvailabilityCheckoutPreConditionPlugin(), #Order Amendment Feature
+            new OrderAmendmentProductDiscontinuedCheckoutPreConditionPlugin(), #ProductDiscontinuedFeature
+            new OrderAmendmentProductOfferCheckoutPreConditionPlugin(),
+            new OrderAmendmentProductExistsCheckoutPreConditionPlugin(),
             new OrderAmendmentCheckoutPreCheckPlugin(),
         ];
     }
@@ -95,6 +122,7 @@ class CheckoutDependencyProvider extends SprykerCheckoutDependencyProvider
             new ReplaceSalesOrderPaymentCheckoutDoSaveOrderPlugin(),
             new GiftCardPaymentCheckoutDoSaveOrderPlugin(),
             new ReplaceSalesOrderThresholdExpensesCheckoutDoSaveOrderPlugin(),
+            new SalesOrderAmendmentQuoteCheckoutDoSaveOrderPlugin(),
         ];
     }
 
@@ -109,6 +137,7 @@ class CheckoutDependencyProvider extends SprykerCheckoutDependencyProvider
             new DisallowQuoteCheckoutPreSavePlugin(),
             new SalesOrderExpanderPlugin(),
             new OriginalOrderQuoteExpanderCheckoutPreSavePlugin(),
+            new FilterOriginalOrderBundleItemCheckoutPreSavePlugin(),
         ];
     }
 

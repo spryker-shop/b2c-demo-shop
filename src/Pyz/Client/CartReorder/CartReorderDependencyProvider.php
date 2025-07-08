@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace Pyz\Client\CartReorder;
 
 use Spryker\Client\CartReorder\CartReorderDependencyProvider as SprykerCartReorderDependencyProvider;
+use Spryker\Client\Quote\Plugin\CartReorder\ResetItemsSessionCartReorderQuoteProviderStrategyPlugin;
 use Spryker\Client\Quote\Plugin\CartReorder\SessionCartReorderQuoteProviderStrategyPlugin;
 
 class CartReorderDependencyProvider extends SprykerCartReorderDependencyProvider
@@ -15,7 +16,7 @@ class CartReorderDependencyProvider extends SprykerCartReorderDependencyProvider
     protected function getCartReorderQuoteProviderStrategyPlugins(): array
     {
         return [
-            new SessionCartReorderQuoteProviderStrategyPlugin(),
+            new ResetItemsSessionCartReorderQuoteProviderStrategyPlugin(),
         ];
     }
 }

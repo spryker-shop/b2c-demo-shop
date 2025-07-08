@@ -108,6 +108,8 @@ use SprykerShop\Yves\ProductWidget\Widget\PdpProductRelationWidget;
 use SprykerShop\Yves\ProductWidget\Widget\PdpProductReplacementForListWidget;
 use SprykerShop\Yves\ProductWidget\Widget\ProductAlternativeWidget;
 use SprykerShop\Yves\SalesConfigurableBundleWidget\Widget\OrderItemsConfiguredBundleWidget;
+use SprykerShop\Yves\SalesOrderAmendmentWidget\Widget\CancelOrderAmendmentWidget;
+use SprykerShop\Yves\SalesOrderAmendmentWidget\Widget\OrderAmendmentItemLinkWidget;
 use SprykerShop\Yves\SalesOrderAmendmentWidget\Widget\OrderAmendmentWidget;
 use SprykerShop\Yves\SalesOrderThresholdWidget\Widget\SalesOrderThresholdWidget;
 use SprykerShop\Yves\SalesProductBundleWidget\Widget\OrderItemsProductBundleWidget;
@@ -223,6 +225,8 @@ class ShopApplicationDependencyProvider extends SprykerShopApplicationDependency
             CartReorderItemCheckboxWidget::class,
             CartReorderItemsWidget::class,
             OrderAmendmentWidget::class,
+            CancelOrderAmendmentWidget::class,
+            OrderAmendmentItemLinkWidget::class,
         ];
     }
 

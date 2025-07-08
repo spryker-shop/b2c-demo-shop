@@ -13,6 +13,8 @@ use Spryker\Zed\Currency\Communication\Plugin\CartReorder\CopyOrderCurrencyCartP
 use Spryker\Zed\PersistentCart\Communication\Plugin\CartReorder\PersistentCartReorderQuoteProviderStrategyPlugin;
 use Spryker\Zed\PersistentCart\Communication\Plugin\CartReorder\UpdateQuoteCartPostReorderPlugin;
 use Spryker\Zed\Price\Communication\Plugin\CartReorder\CopyOrderPriceModeCartPreReorderPlugin;
+use Spryker\Zed\PriceProductSalesOrderAmendment\Communication\Plugin\CartReorder\OriginalSalesOrderItemPriceCartPreReorderPlugin;
+use Spryker\Zed\ProductBundle\Communication\Plugin\CartReorder\OriginalOrderBundleItemCartPreReorderPlugin;
 use Spryker\Zed\ProductBundle\Communication\Plugin\CartReorder\ProductBundleCartReorderOrderItemFilterPlugin;
 use Spryker\Zed\ProductBundle\Communication\Plugin\CartReorder\ReplaceBundledItemsCartPreReorderPlugin;
 use Spryker\Zed\ProductCartConnector\Communication\Plugin\CartReorder\RemoveInactiveItemsCartReorderPreAddToCartPlugin;
@@ -27,13 +29,25 @@ use Spryker\Zed\SalesOrderAmendment\Communication\Plugin\CartReorder\AmendmentOr
 use Spryker\Zed\SalesOrderAmendment\Communication\Plugin\CartReorder\AmendmentQuoteNameCartPreReorderPlugin;
 use Spryker\Zed\SalesOrderAmendment\Communication\Plugin\CartReorder\OrderAmendmentCartReorderValidatorPlugin;
 use Spryker\Zed\SalesOrderAmendment\Communication\Plugin\CartReorder\OrderAmendmentQuoteProcessFlowExpanderCartPreReorderPlugin;
+use Spryker\Zed\SalesOrderAmendment\Communication\Plugin\CartReorder\OriginalSalesOrderItemCartPreReorderPlugin;
 use Spryker\Zed\SalesOrderAmendment\Communication\Plugin\CartReorder\OriginalSalesOrderItemGroupKeyCartReorderItemHydratorPlugin;
-use Spryker\Zed\SalesOrderAmendmentOms\Communication\Plugin\CartReorder\IsAmendableOrderCartReorderValidatorRulePlugin;
+use Spryker\Zed\SalesOrderAmendmentOms\Communication\Plugin\CartReorder\IsAmendableOrderCartReorderRequestValidatorPlugin;
 use Spryker\Zed\SalesOrderAmendmentOms\Communication\Plugin\CartReorder\StartOrderAmendmentCartReorderPostCreatePlugin;
 use Spryker\Zed\SalesProductConfiguration\Communication\Plugin\CartReorder\ProductConfigurationCartReorderItemHydratorPlugin;
+use Spryker\Zed\Store\Communication\Plugin\CartReorder\CurrentStoreCartReorderValidatorPlugin;
 
 class CartReorderDependencyProvider extends SprykerCartReorderDependencyProvider
 {
+    /**
+     * @return list<\Spryker\Zed\CartReorderExtension\Dependency\Plugin\CartReorderRequestValidatorPluginInterface>
+     */
+    protected function getCartReorderRequestValidatorPlugins(): array
+    {
+        return [
+            new IsAmendableOrderCartReorderRequestValidatorPlugin(),
+        ];
+    }
+
     /**
      * @return list<\Spryker\Zed\CartReorderExtension\Dependency\Plugin\CartReorderQuoteProviderStrategyPluginInterface>
      */
@@ -50,8 +64,8 @@ class CartReorderDependencyProvider extends SprykerCartReorderDependencyProvider
     protected function getCartReorderValidatorPluginsForOrderAmendment(): array
     {
         return [
+            new CurrentStoreCartReorderValidatorPlugin(),
             new OrderAmendmentCartReorderValidatorPlugin(),
-            new IsAmendableOrderCartReorderValidatorRulePlugin(),
         ];
     }
 
@@ -71,9 +85,21 @@ class CartReorderDependencyProvider extends SprykerCartReorderDependencyProvider
             new MergeConfigurableBundleItemsCartPreReorderPlugin(),
             new CartNoteCartPreReorderPlugin(),
             new MergeProductQuantityRestrictionItemsCartPreReorderPlugin(),
+            new OriginalSalesOrderItemPriceCartPreReorderPlugin(),
+            new OriginalSalesOrderItemCartPreReorderPlugin(),
+            new OriginalOrderBundleItemCartPreReorderPlugin(),
         ];
     }
 
+    /**
+     * @return list<\Spryker\Zed\CartReorderExtension\Dependency\Plugin\CartReorderPreAddToCartPluginInterface>
+     */
+    protected function getCartReorderPreAddToCartPluginsForOrderAmendment(): array
+    {
+        return [
+            new RemoveInactiveProductOptionItemsCartReorderPreAddToCartPlugin(),
+        ];
+    }
     /**
      * @return list<\Spryker\Zed\CartReorderExtension\Dependency\Plugin\CartReorderItemHydratorPluginInterface>
      */
