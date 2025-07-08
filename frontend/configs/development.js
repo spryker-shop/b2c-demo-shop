@@ -16,11 +16,32 @@ try {
     console.info('Images optimization is disabled.');
 }
 
+let isExtractIconSpritesEnabled = false;
+let extractIconSprites = null;
+
+try {
+    extractIconSprites = require('../libs/icon-sprite-extractor');
+    isExtractIconSpritesEnabled = true;
+} catch (e) {
+    console.info('Icon sprite extraction is disabled.');
+}
+
 const getConfiguration = async (appSettings) => {
     const componentEntryPointsPromise = findComponentEntryPoints(appSettings.find.componentEntryPoints);
     const stylesPromise = findComponentStyles(appSettings.find.componentStyles);
     const [componentEntryPoints, styles] = await Promise.all([componentEntryPointsPromise, stylesPromise]);
     const alias = getAliasList(appSettings);
+
+    if (isExtractIconSpritesEnabled) {
+        try {
+            await extractIconSprites({
+                sourcePath: appSettings.paths.iconSprite.sources.map((src) => join(process.cwd(), src)),
+                targetPath: join(process.cwd(), appSettings.paths.iconSprite.target),
+            });
+        } catch (error) {
+            console.error('Error extracting icon sprites:', error);
+        }
+    }
 
     const vendorTs = await findAppEntryPoint(appSettings.find.shopUiEntryPoints, './vendor.ts');
     const appTs = await findAppEntryPoint(appSettings.find.shopUiEntryPoints, './app.ts');

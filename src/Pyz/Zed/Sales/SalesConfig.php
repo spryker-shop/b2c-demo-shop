@@ -60,4 +60,20 @@ class SalesConfig extends SprykerSalesConfig
     {
         return false;
     }
+
+    /**
+     * @return bool
+     */
+    public function useUniqueRandomIdOrderReferenceGenerator(): bool
+    {
+        return true;
+    }
+
+    /**
+     * @return string
+     */
+    public function getItemHashColumn(): string
+    {
+        return 'OrderItemReference';
+    }
 }

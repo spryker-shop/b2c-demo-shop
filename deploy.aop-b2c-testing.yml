@@ -85,13 +85,11 @@ composer:
     autoload: --classmap-authoritative
 
 assets:
-    image: fholzer/nginx-brotli:v1.18.0
+    image: spryker/nginx-brotli:latest
     mode: production
     compression:
         brotli:
-            static: only
-        gzip:
-            static: true
+            static: on
             level: 5
 
 regions:
@@ -221,11 +219,12 @@ services:
                 protocol: tcp
     scheduler:
         engine: jenkins
+        version: '2.492.3'
         csrf-protection-enabled: true
         endpoints:
             jenkins.aop-b2c-testing.demo-spryker.com:
     mail_catcher:
-        engine: mailhog
+        engine: mailpit
         endpoints:
             mail.aop-b2c-testing.demo-spryker.com:
 

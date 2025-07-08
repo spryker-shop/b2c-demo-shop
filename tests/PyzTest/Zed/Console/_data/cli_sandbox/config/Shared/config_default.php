@@ -3,12 +3,14 @@
 use Monolog\Logger;
 use Spryker\Shared\Acl\AclConstants;
 use Spryker\Shared\Application\ApplicationConstants;
+use Spryker\Shared\Application\Log\Config\SprykerLoggerConfig;
 use Spryker\Shared\Cms\CmsConstants;
 use Spryker\Shared\Collector\CollectorConstants;
 use Spryker\Shared\Customer\CustomerConstants;
 use Spryker\Shared\DummyPayment\DummyPaymentConfig;
 use Spryker\Shared\ErrorHandler\ErrorHandlerConstants;
 use Spryker\Shared\ErrorHandler\ErrorRenderer\WebHtmlErrorRenderer;
+use Spryker\Shared\Event\EventConstants;
 use Spryker\Shared\Http\HttpConstants;
 use Spryker\Shared\Kernel\KernelConstants;
 use Spryker\Shared\Kernel\Store;
@@ -115,6 +117,15 @@ $config[ApplicationConstants::ZED_HTTP_STRICT_TRANSPORT_SECURITY_CONFIG] =
     ];
 
 $config[LogConstants::LOG_LEVEL] = Logger::INFO;
+$config[LogConstants::LOGGER_CONFIG] = SprykerLoggerConfig::class;
+$config[PropelConstants::LOG_FILE_PATH]
+    = $config[EventConstants::LOG_FILE_PATH]
+    = $config[LogConstants::LOG_FILE_PATH_YVES]
+    = $config[LogConstants::LOG_FILE_PATH_ZED]
+    = $config[LogConstants::LOG_FILE_PATH_GLUE]
+    = $config[LogConstants::LOG_FILE_PATH]
+    = $config[QueueConstants::QUEUE_WORKER_OUTPUT_FILE_NAME]
+    = getenv('SPRYKER_LOG_STDOUT') ?: 'php://stderr';
 
 $config[ZedRequestConstants::TRANSFER_USERNAME] = 'yves';
 $config[ZedRequestConstants::TRANSFER_PASSWORD] = 'o7&bg=Fz;nSslHBC';
@@ -132,7 +143,7 @@ $config[StorageRedisConstants::STORAGE_REDIS_PORT] = 10009;
 $config[StorageRedisConstants::STORAGE_REDIS_PASSWORD] = false;
 $config[StorageRedisConstants::STORAGE_REDIS_DATABASE] = 0;
 
-$config[SessionConstants::YVES_SESSION_SAVE_HANDLER] = SessionRedisConfig::SESSION_HANDLER_REDIS_LOCKING;
+$config[SessionConstants::YVES_SESSION_SAVE_HANDLER] = SessionRedisConfig::SESSION_HANDLER_CONFIGURABLE_REDIS_LOCKING;
 $config[SessionConstants::YVES_SESSION_TIME_TO_LIVE] = SessionConfig::SESSION_LIFETIME_1_HOUR;
 $config[SessionRedisConstants::YVES_SESSION_TIME_TO_LIVE] = $config[SessionConstants::YVES_SESSION_TIME_TO_LIVE];
 $config[SessionFileConstants::YVES_SESSION_TIME_TO_LIVE] = $config[SessionConstants::YVES_SESSION_TIME_TO_LIVE];

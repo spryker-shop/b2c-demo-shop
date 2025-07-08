@@ -16,8 +16,6 @@ use Spryker\Glue\GlueApplication\Rest\RequestConstantsInterface;
 class GlueApplicationConfig extends SprykerGlueApplicationConfig
 {
     /**
-     * @deprecated Will be removed without replacement.
-     *
      * @var bool
      */
     public const VALIDATE_REQUEST_HEADERS = false;
@@ -37,8 +35,6 @@ class GlueApplicationConfig extends SprykerGlueApplicationConfig
     }
 
     /**
-     * @deprecated Will be removed without replacement.
-     *
      * @return bool
      */
     public function isEagerRelationshipsLoadingEnabled(): bool
