@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "85a935f6b6f0c0258aa5415d93dbecf9",
+    "content-hash": "1de5e949e4376553b13e67ac15b47bc0",
     "packages": [
         {
             "name": "async-aws/core",
@@ -17518,6 +17518,103 @@
             "time": "2025-02-27T08:01:24+00:00"
         },
         {
+            "name": "spryker/cart-reorder-rest-api",
+            "version": "0.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/cart-reorder-rest-api.git",
+                "reference": "cca1a4d384ac323886611c3db14b2af687aff2b8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/cart-reorder-rest-api/zipball/cca1a4d384ac323886611c3db14b2af687aff2b8",
+                "reference": "cca1a4d384ac323886611c3db14b2af687aff2b8",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.2",
+                "spryker/cart-reorder": "^0.2.0",
+                "spryker/cart-reorder-rest-api-extension": "^1.0.0",
+                "spryker/carts-rest-api": "^5.18.0",
+                "spryker/glossary-storage": "^1.0.0",
+                "spryker/glue-application": "^1.47.0",
+                "spryker/glue-application-extension": "^1.0.0",
+                "spryker/kernel": "^3.30.0",
+                "spryker/symfony": "^3.0.0",
+                "spryker/transfer": "^3.27.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*"
+            },
+            "suggest": {
+                "spryker/auth-rest-api": "If you want to authorize and authenticate customers via access tokens.",
+                "spryker/authorization": "If you want to use multiple authorization strategies, minimum required version: 1.2.0.",
+                "spryker/rest-request-validator": "If you want to use rest request validation."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "CartReorderRestApi module",
+            "support": {
+                "source": "https://github.com/spryker/cart-reorder-rest-api/tree/0.2.1"
+            },
+            "time": "2025-05-06T10:49:19+00:00"
+        },
+        {
+            "name": "spryker/cart-reorder-rest-api-extension",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/cart-reorder-rest-api-extension.git",
+                "reference": "754347e046a404c2d2549be094e08833ae13f76c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/cart-reorder-rest-api-extension/zipball/754347e046a404c2d2549be094e08833ae13f76c",
+                "reference": "754347e046a404c2d2549be094e08833ae13f76c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.2",
+                "spryker/transfer": "^3.27.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "CartReorderRestApiExtension module",
+            "support": {
+                "source": "https://github.com/spryker/cart-reorder-rest-api-extension/tree/1.0.0"
+            },
+            "time": "2024-11-15T17:27:29+00:00"
+        },
+        {
             "name": "spryker/cart-variant",
             "version": "2.1.0",
             "source": {
@@ -31961,6 +32058,61 @@
                 "source": "https://github.com/spryker/oms-multi-thread/tree/master"
             },
             "time": "2020-08-06T14:52:35+00:00"
+        },
+        {
+            "name": "spryker/order-amendments-rest-api",
+            "version": "0.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/order-amendments-rest-api.git",
+                "reference": "83506694996508f0bf3010711ec16a20a23fcf5d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/order-amendments-rest-api/zipball/83506694996508f0bf3010711ec16a20a23fcf5d",
+                "reference": "83506694996508f0bf3010711ec16a20a23fcf5d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.2",
+                "spryker/cart-reorder-rest-api-extension": "^1.0.0",
+                "spryker/carts-rest-api-extension": "^1.7.0",
+                "spryker/glue-application": "^1.0.0",
+                "spryker/glue-application-extension": "^1.0.0",
+                "spryker/kernel": "^3.30.0",
+                "spryker/sales-order-amendment": "^0.6.0",
+                "spryker/transfer": "^3.27.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/container": "*",
+                "spryker/testify": "*"
+            },
+            "suggest": {
+                "spryker/auth-rest-api": "If you want to authorize and authenticate customers via access tokens.",
+                "spryker/authorization": "If you want to use multiple authorization strategies, minimum required version: 1.2.0.",
+                "spryker/rest-request-validator": "If you want to use rest request validation."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "OrderAmendmentsRestApi module",
+            "support": {
+                "source": "https://github.com/spryker/order-amendments-rest-api/tree/0.6.0"
+            },
+            "time": "2025-07-03T14:22:10+00:00"
         },
         {
             "name": "spryker/order-custom-reference",
