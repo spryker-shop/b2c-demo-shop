@@ -42,7 +42,6 @@ use Spryker\Zed\ProductCartConnector\Communication\Plugin\Checkout\ProductExists
 use Spryker\Zed\ProductConfigurationCart\Communication\Plugin\Checkout\ProductConfigurationCheckoutPreConditionPlugin;
 use Spryker\Zed\ProductDiscontinued\Communication\Plugin\Checkout\OrderAmendmentProductDiscontinuedCheckoutPreConditionPlugin;
 use Spryker\Zed\ProductDiscontinued\Communication\Plugin\Checkout\ProductDiscontinuedCheckoutPreConditionPlugin;
-use Spryker\Zed\ProductOffer\Communication\Plugin\Checkout\OrderAmendmentProductOfferCheckoutPreConditionPlugin;
 use Spryker\Zed\ProductQuantity\Communication\Plugin\Checkout\ProductQuantityRestrictionCheckoutPreConditionPlugin;
 use Spryker\Zed\QuoteCheckoutConnector\Communication\Plugin\Checkout\DisallowedQuoteCheckoutPreConditionPlugin;
 use Spryker\Zed\QuoteCheckoutConnector\Communication\Plugin\Checkout\DisallowQuoteCheckoutPreSavePlugin;
@@ -95,7 +94,6 @@ class CheckoutDependencyProvider extends SprykerCheckoutDependencyProvider
             new ProductQuantityRestrictionCheckoutPreConditionPlugin(),
             new OrderAmendmentProductBundleAvailabilityCheckoutPreConditionPlugin(), #Order Amendment Feature
             new OrderAmendmentProductDiscontinuedCheckoutPreConditionPlugin(), #ProductDiscontinuedFeature
-            new OrderAmendmentProductOfferCheckoutPreConditionPlugin(),
             new OrderAmendmentProductExistsCheckoutPreConditionPlugin(),
             new OrderAmendmentCheckoutPreCheckPlugin(),
         ];

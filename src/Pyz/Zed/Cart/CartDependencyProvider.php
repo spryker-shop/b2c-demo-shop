@@ -58,8 +58,6 @@ use Spryker\Zed\ProductDiscontinued\Communication\Plugin\Cart\ProductDiscontinue
 use Spryker\Zed\ProductImageCartConnector\Communication\Plugin\Cart\ProductImageItemExpanderPlugin;
 use Spryker\Zed\ProductList\Communication\Plugin\CartExtension\ProductListRestrictedItemsPreCheckPlugin;
 use Spryker\Zed\ProductList\Communication\Plugin\CartExtension\RemoveRestrictedItemsPreReloadPlugin;
-use Spryker\Zed\ProductOffer\Communication\Plugin\Cart\OrderAmendmentFilterInactiveProductOfferPreReloadItemsPlugin;
-use Spryker\Zed\ProductOffer\Communication\Plugin\Cart\OrderAmendmentProductOfferCartPreCheckPlugin;
 use Spryker\Zed\ProductOptionCartConnector\Communication\Plugin\Cart\CartItemOptionPreCheckPlugin;
 use Spryker\Zed\ProductOptionCartConnector\Communication\Plugin\CartItemGroupKeyOptionPlugin;
 use Spryker\Zed\ProductOptionCartConnector\Communication\Plugin\CartItemProductOptionPlugin;
@@ -251,7 +249,6 @@ class CartDependencyProvider extends SprykerCartDependencyProvider
             new CleanUpItemsPreReloadPlugin(),
             new ConfiguredBundleQuantityPerSlotPreReloadItemsPlugin(),
             new OrderAmendmentRemoveInactiveItemsPreReloadPlugin(),
-            new OrderAmendmentFilterInactiveProductOfferPreReloadItemsPlugin(),
         ];
     }
 

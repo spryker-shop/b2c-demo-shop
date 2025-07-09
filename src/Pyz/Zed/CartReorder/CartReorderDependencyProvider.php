@@ -11,6 +11,7 @@ use Spryker\Zed\CartReorder\CartReorderDependencyProvider as SprykerCartReorderD
 use Spryker\Zed\ConfigurableBundleNote\Communication\Plugin\CartReorder\ConfigurableBundleNoteCartReorderItemHydratorPlugin;
 use Spryker\Zed\Currency\Communication\Plugin\CartReorder\CopyOrderCurrencyCartPreReorderPlugin;
 use Spryker\Zed\PersistentCart\Communication\Plugin\CartReorder\PersistentCartReorderQuoteProviderStrategyPlugin;
+use Spryker\Zed\PersistentCart\Communication\Plugin\CartReorder\ReplacePersistentCartReorderQuoteProviderStrategyPlugin;
 use Spryker\Zed\PersistentCart\Communication\Plugin\CartReorder\UpdateQuoteCartPostReorderPlugin;
 use Spryker\Zed\Price\Communication\Plugin\CartReorder\CopyOrderPriceModeCartPreReorderPlugin;
 use Spryker\Zed\PriceProductSalesOrderAmendment\Communication\Plugin\CartReorder\OriginalSalesOrderItemPriceCartPreReorderPlugin;
@@ -55,6 +56,7 @@ class CartReorderDependencyProvider extends SprykerCartReorderDependencyProvider
     {
         return [
             new PersistentCartReorderQuoteProviderStrategyPlugin(),
+            new ReplacePersistentCartReorderQuoteProviderStrategyPlugin(),
         ];
     }
 
@@ -66,6 +68,7 @@ class CartReorderDependencyProvider extends SprykerCartReorderDependencyProvider
         return [
             new CurrentStoreCartReorderValidatorPlugin(),
             new OrderAmendmentCartReorderValidatorPlugin(),
+            new IsAmendableOrderCartReorderValidatorRulePlugin(),
         ];
     }
 
