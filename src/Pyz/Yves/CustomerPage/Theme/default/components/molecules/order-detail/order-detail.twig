@@ -19,12 +19,6 @@
             {% block actions %}
                 {% set buttonClasses = 'button button--small button--expand-mobile spacing-bottom spacing-bottom--small spacing-right' %}
 
-                {% widget 'OrderAmendmentWidget' args [embed.order] with {
-                    data: {
-                        buttonClass: 'link float-right spacing-left',
-                    },
-                } only %}{% endwidget %}
-
                 <a href="{{ url('customer/order') }}" class="{{ buttonClasses }} button--hollow">
                     {{ 'general.back.button' | trans }}
                 </a>
@@ -63,7 +57,7 @@
                     {{ 'customer.order.reorder_selected' | trans }}
                 </button>
 
-                {% widget 'CustomerReorderFormWidget' args [embed.order] with {
+                {% widget 'CartReorderWidget' args [embed.order] with {
                     embed: {
                         buttonClasses: buttonClasses,
                     },
@@ -85,6 +79,17 @@
                         } only %}
                     {% endblock %}
                 {% endwidget %}
+
+                {% if widgetGlobalExists('OrderAmendmentWidget') %}
+                    <div class="{{ config.name }}__action">
+                        {% widget 'OrderAmendmentWidget' args [embed.order] with {
+                            data: {
+                                buttonClass: 'button button--small-space button--expand',
+                            },
+                        } only %}
+                        {% endwidget %}
+                    </div>
+                {% endif %}
             {% endblock %}
         {% endembed %}
     </div>

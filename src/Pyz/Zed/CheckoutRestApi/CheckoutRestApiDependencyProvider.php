@@ -10,7 +10,6 @@ declare(strict_types = 1);
 namespace Pyz\Zed\CheckoutRestApi;
 
 use Spryker\Zed\CheckoutRestApi\CheckoutRestApiDependencyProvider as SprykerCheckoutRestApiDependencyProvider;
-use Spryker\Zed\ClickAndCollectExample\Communication\Plugin\CheckoutRestApi\ClickAndCollectExampleReplaceCheckoutDataValidatorPlugin;
 use Spryker\Zed\Country\Communication\Plugin\CheckoutRestApi\CountriesCheckoutDataValidatorPlugin;
 use Spryker\Zed\CustomersRestApi\Communication\Plugin\CheckoutRestApi\AddressQuoteMapperPlugin;
 use Spryker\Zed\CustomersRestApi\Communication\Plugin\CheckoutRestApi\CustomerAddressCheckoutDataValidatorPlugin;
@@ -63,7 +62,6 @@ class CheckoutRestApiDependencyProvider extends SprykerCheckoutRestApiDependency
             new ShipmentMethodCheckoutDataValidatorPlugin(),
             new ItemsCheckoutDataValidatorPlugin(),
             new CustomerAddressCheckoutDataValidatorPlugin(),
-            new ClickAndCollectExampleReplaceCheckoutDataValidatorPlugin(),
         ];
     }
 

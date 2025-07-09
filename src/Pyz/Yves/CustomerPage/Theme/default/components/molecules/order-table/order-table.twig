@@ -5,7 +5,7 @@
 } %}
 
 {% block customerReorderAction %}
-    {% widget 'CustomerReorderFormWidget' args [order] only %}
+    {% widget 'CartReorderWidget' args [order] only %}
         {% block body %}
             {% include molecule('remote-form-submit') with {
                 data: {
@@ -22,6 +22,53 @@
             } only %}
         {% endblock %}
     {% endwidget %}
+{% endblock %}
+
+{% block customOrderAmendmentAction %}
+    {% if widgetGlobalExists('OrderAmendmentWidget') %}
+        {% widget 'OrderAmendmentWidget' args [order] only %}
+            {% block body %}
+                {% embed molecule('order-amendment', 'SalesOrderAmendmentWidget') with {
+                    data: {
+                        form: data.form,
+                        order: data.order,
+                        hasConfirmationPopup: true,
+                        buttonClass: data.buttonClass,
+                    }
+                } only %}
+                    {% block form %}
+                        {% set formVars = data.form.vars %}
+
+                        {% embed molecule('remote-form-submit') with {
+                            data: {
+                                label: (data.hasConfirmationPopup ? 'sales_order_amendment_widget.edit_order.confirm' : 'sales_order_amendment_widget.edit_order') | trans,
+                                buttonClass: data.buttonClass,
+                            },
+                            attributes: {
+                                'form-name': formVars.id ~ order.orderReference,
+                                'form-action': path('order-amendment', {'orderReference': order.orderReference}),
+                                'field-id': formVars.id ~ '_token_' ~ order.idSalesOrder,
+                                'field-name': formVars.id ~ '[_token]',
+                                'field-value': csrf_token(formVars.id),
+                            } | merge(data.hasConfirmationPopup ? {
+                                'initial-mount': false,
+                            }: {}),
+                        } only %}
+{#                            {% block innerSubmitActionContent %}#}
+{#                                {% include molecule('table-action-span') with {#}
+{#                                    class: 'link link--alt link--action',#}
+{#                                    data: {#}
+{#                                        icon: 'edit',#}
+{#                                        title: data.label,#}
+{#                                    },#}
+{#                                } only %}#}
+{#                            {% endblock %}#}
+                        {% endembed %}
+                    {% endblock %}
+                {% endembed %}
+            {% endblock %}
+        {% endwidget %}
+    {% endif %}
 {% endblock %}
 
 {% block orderCancelAction %}
@@ -86,6 +133,9 @@
                                         },
                                         {
                                             customAction: block('customerReorderAction'),
+                                        },
+                                        {
+                                            customAction: block('customOrderAmendmentAction'),
                                         },
                                         {
                                             url: path('return/create', { orderReference: order.orderReference }),

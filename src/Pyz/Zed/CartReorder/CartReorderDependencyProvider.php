@@ -68,7 +68,6 @@ class CartReorderDependencyProvider extends SprykerCartReorderDependencyProvider
         return [
             new CurrentStoreCartReorderValidatorPlugin(),
             new OrderAmendmentCartReorderValidatorPlugin(),
-            new IsAmendableOrderCartReorderValidatorRulePlugin(),
         ];
     }
 
