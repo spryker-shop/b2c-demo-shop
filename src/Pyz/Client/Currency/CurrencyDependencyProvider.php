@@ -22,6 +22,15 @@ class CurrencyDependencyProvider extends SprykerCurrencyDependencyProvider
     {
         return [
             new CartUpdateCurrencyOnCurrencyChangePlugin(),
+        ];
+    }
+
+    /**
+     * @return list<\Spryker\Client\CurrencyExtension\Dependency\Plugin\CurrentCurrencyIsoCodePreCheckPluginInterface>
+     */
+    protected function getCurrentCurrencyIsoCodePreCheckPlugins(): array
+    {
+        return [
             new SalesOrderAmendmentCurrentCurrencyIsoCodePreCheckPlugin(),
         ];
     }
