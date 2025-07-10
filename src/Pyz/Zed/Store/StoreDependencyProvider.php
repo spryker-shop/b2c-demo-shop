@@ -31,6 +31,7 @@ use Spryker\Zed\StoreContext\Communication\Plugin\Store\ContextStorePostCreatePl
 use Spryker\Zed\StoreContext\Communication\Plugin\Store\ContextStorePostUpdatePlugin;
 use Spryker\Zed\StoreContext\Communication\Plugin\Store\ContextStorePreCreateValidationPlugin;
 use Spryker\Zed\StoreContext\Communication\Plugin\Store\ContextStorePreUpdateValidationPlugin;
+use Spryker\Zed\StoreContext\Communication\Plugin\Store\TimezoneStoreCollectionExpanderPlugin;
 
 class StoreDependencyProvider extends SprykerStoreDependencyProvider
 {
@@ -97,6 +98,7 @@ class StoreDependencyProvider extends SprykerStoreDependencyProvider
             new CurrencyStoreCollectionExpanderPlugin(),
             new LocaleStoreCollectionExpanderPlugin(),
             new ContextStoreCollectionExpanderPlugin(),
+            new TimezoneStoreCollectionExpanderPlugin(),
         ];
     }
 }
