@@ -16,7 +16,7 @@ use Spryker\Client\SalesOrderAmendment\Plugin\Currency\SalesOrderAmendmentCurren
 class CurrencyDependencyProvider extends SprykerCurrencyDependencyProvider
 {
     /**
-     * @return array<\Spryker\Client\CurrencyExtension\Dependency\CurrencyPostChangePluginInterface>
+     * @return list<\Spryker\Client\CurrencyExtension\Dependency\CurrencyPostChangePluginInterface>
      */
     protected function getCurrencyPostChangePlugins(): array
     {
