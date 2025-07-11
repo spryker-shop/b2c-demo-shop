@@ -19,8 +19,11 @@ const globalSettings = {
         // path to frontend build config json file
         namespaceConfig: './config/Yves/frontend-build-config.json',
 
-        // core folders
+        // sprykerShop core folders
         core: './vendor/spryker-shop',
+
+        // spryker core folders
+        sprykerCore: './vendor/spryker',
 
         // eco folders
         eco: './vendor/spryker-eco',
@@ -152,6 +155,8 @@ const getAppSettingsByTheme = (namespaceConfig, theme, pathToConfig) => {
         // core folders
         core: globalSettings.paths.core,
 
+        sprykerCore: globalSettings.paths.sprykerCore,
+
         // eco folders
         eco: globalSettings.paths.eco,
 
@@ -217,6 +222,7 @@ const getAppSettingsByTheme = (namespaceConfig, theme, pathToConfig) => {
                 // absolute dirs in which look for
                 dirs: [
                     join(globalSettings.context, paths.core),
+                    join(globalSettings.context, paths.sprykerCore),
                     join(globalSettings.context, paths.eco),
                     join(globalSettings.context, paths.project),
                 ],
@@ -230,7 +236,7 @@ const getAppSettingsByTheme = (namespaceConfig, theme, pathToConfig) => {
             // do not change unless necessary
             componentStyles: {
                 // absolute dirs in which look for
-                dirs: [join(globalSettings.context, paths.core)],
+                dirs: [join(globalSettings.context, paths.core), join(globalSettings.context, paths.sprykerCore)],
                 // files/dirs patterns
                 patterns: [
                     `**/Theme/${namespaceConfig.defaultTheme}/components/atoms/*/*.scss`,

@@ -17,6 +17,7 @@ use Spryker\Zed\CustomerDataChangeRequest\Communication\Plugin\Customer\EmailCha
 use Spryker\Zed\CustomerGroup\Communication\Plugin\CustomerAnonymizer\RemoveCustomerFromGroupPlugin;
 use Spryker\Zed\CustomerUserConnector\Communication\Plugin\CustomerTransferUsernameExpanderPlugin;
 use Spryker\Zed\Kernel\Container;
+use Spryker\Zed\MultiFactorAuth\Communication\Plugin\Customer\RemoveMultiFactorAuthCustomerTableActionExpanderPlugin;
 use Spryker\Zed\Newsletter\Communication\Plugin\CustomerAnonymizer\CustomerUnsubscribePlugin;
 
 class CustomerDependencyProvider extends SprykerCustomerDependencyProvider
@@ -83,6 +84,16 @@ class CustomerDependencyProvider extends SprykerCustomerDependencyProvider
     {
         return [
             new EmailChangeRequestSendVerificationCustomerPreUpdatePlugin(),
+        ];
+    }
+
+    /**
+     * @return array<\Spryker\Zed\CustomerExtension\Dependency\Plugin\CustomerTableActionExpanderPluginInterface>
+     */
+    protected function getCustomerTableActionExpanderPlugins(): array
+    {
+        return [
+            new RemoveMultiFactorAuthCustomerTableActionExpanderPlugin(),
         ];
     }
 }

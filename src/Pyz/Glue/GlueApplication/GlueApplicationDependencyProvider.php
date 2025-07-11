@@ -117,6 +117,12 @@ use Spryker\Glue\GlueStorefrontApiApplicationAuthorizationConnector\Plugin\GlueA
 use Spryker\Glue\HealthCheck\Plugin\HealthCheckResourceRoutePlugin;
 use Spryker\Glue\Http\Plugin\Application\HttpApplicationPlugin;
 use Spryker\Glue\Locale\Plugin\Application\LocaleApplicationPlugin;
+use Spryker\Glue\MultiFactorAuth\Plugin\GlueApplication\RestApi\MultiFactorAuthActivateResourcePlugin;
+use Spryker\Glue\MultiFactorAuth\Plugin\GlueApplication\RestApi\MultiFactorAuthRestUserValidatorPlugin;
+use Spryker\Glue\MultiFactorAuth\Plugin\GlueApplication\RestApi\MultiFactorAuthTriggerResourcePlugin;
+use Spryker\Glue\MultiFactorAuth\Plugin\GlueApplication\RestApi\MultiFactorAuthTypeDeactivateResourcePlugin;
+use Spryker\Glue\MultiFactorAuth\Plugin\GlueApplication\RestApi\MultiFactorAuthTypesResourcePlugin;
+use Spryker\Glue\MultiFactorAuth\Plugin\GlueApplication\RestApi\MultiFactorAuthTypeVerifyResourcePlugin;
 use Spryker\Glue\NavigationsCategoryNodesResourceRelationship\Plugin\GlueApplication\CategoryNodeByResourceIdResourceRelationshipPlugin;
 use Spryker\Glue\NavigationsRestApi\NavigationsRestApiConfig;
 use Spryker\Glue\NavigationsRestApi\Plugin\ResourceRoute\NavigationsResourceRoutePlugin;
@@ -283,6 +289,11 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
             new PaymentCancellationsResourceRoutePlugin(),
             new PaymentCustomersResourceRoutePlugin(),
             new TaxValidateIdResourceRoutePlugin(),
+            new MultiFactorAuthTypesResourcePlugin(),
+            new MultiFactorAuthTriggerResourcePlugin(),
+            new MultiFactorAuthActivateResourcePlugin(),
+            new MultiFactorAuthTypeVerifyResourcePlugin(),
+            new MultiFactorAuthTypeDeactivateResourcePlugin(),
         ];
     }
 
@@ -346,6 +357,7 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
         return [
             new AgentRestUserValidatorPlugin(),
             new AuthorizationRestUserValidatorPlugin(),
+            new MultiFactorAuthRestUserValidatorPlugin(),
         ];
     }
 

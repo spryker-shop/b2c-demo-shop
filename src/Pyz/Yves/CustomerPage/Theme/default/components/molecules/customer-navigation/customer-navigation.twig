@@ -70,5 +70,8 @@
                 {% endblock %}
             {% endwidget %}
         {% endblock %}
+        {% if widgetGlobalExists('SetMultiFactorAuthMenuItemWidget') %}
+            {% widget 'SetMultiFactorAuthMenuItemWidget' args [data.activePage] only %}{% endwidget %}
+        {% endif %}
     </ul>
 {% endblock %}
