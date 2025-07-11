@@ -23,7 +23,7 @@ const globalSettings = {
         core: './vendor/spryker-shop',
 
         // spryker core folders
-        sprykerCore: './vendor/spryker/spryker/Bundles',
+        sprykerCore: './vendor/spryker',
 
         // eco folders
         eco: './vendor/spryker-eco',
