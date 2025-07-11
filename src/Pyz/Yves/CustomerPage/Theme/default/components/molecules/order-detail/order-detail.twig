@@ -57,7 +57,7 @@
                     {{ 'customer.order.reorder_selected' | trans }}
                 </button>
 
-                {% widget 'CustomerReorderFormWidget' args [embed.order] with {
+                {% widget 'CartReorderWidget' args [embed.order] with {
                     embed: {
                         buttonClasses: buttonClasses,
                     },
@@ -79,6 +79,35 @@
                         } only %}
                     {% endblock %}
                 {% endwidget %}
+
+                {% if widgetGlobalExists('OrderAmendmentWidget') %}
+                    <div class="{{ config.name }}__action">
+                        {% widget 'OrderAmendmentWidget' args [embed.order] with {
+                            embed: {
+                                buttonClasses: buttonClasses,
+                            },
+                        } only %}
+                            {% block body %}
+                                {% embed molecule('order-amendment', 'SalesOrderAmendmentWidget') with {
+                                    data: {
+                                        form: data.form,
+                                        order: data.order,
+                                        hasConfirmationPopup: data.hasConfirmationPopup,
+                                    },
+                                    embed: {
+                                        buttonClasses: embed.buttonClasses,
+                                    },
+                                } only %}
+                                    {% block content %}
+                                        {% set buttonClass = embed.buttonClasses %}
+
+                                        {{ parent() }}
+                                    {% endblock %}
+                                {% endembed %}
+                            {% endblock %}
+                        {% endwidget %}
+                    </div>
+                {% endif %}
             {% endblock %}
         {% endembed %}
     </div>

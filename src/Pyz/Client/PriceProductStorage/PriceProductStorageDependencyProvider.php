@@ -9,6 +9,7 @@ declare(strict_types = 1);
 
 namespace Pyz\Client\PriceProductStorage;
 
+use Spryker\Client\PriceProductSalesOrderAmendment\Plugin\PriceProductStorage\OrderItemPriceProductResolveConditionsPriceProductFilterExpanderPlugin;
 use Spryker\Client\PriceProductStorage\PriceProductStorageDependencyProvider as SprykerPriceProductStorageDependencyProvider;
 use Spryker\Client\PriceProductVolume\Plugin\PriceProductStorageExtension\PriceProductVolumeExtractorPlugin;
 use Spryker\Client\ProductConfigurationStorage\Plugin\PriceProductStorage\ProductConfigurationPriceProductFilterExpanderPlugin;
@@ -34,6 +35,7 @@ class PriceProductStorageDependencyProvider extends SprykerPriceProductStorageDe
     {
         return [
             new ProductConfigurationPriceProductFilterExpanderPlugin(),
+            new OrderItemPriceProductResolveConditionsPriceProductFilterExpanderPlugin(),
         ];
     }
 

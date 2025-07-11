@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<statemachine
+    xmlns="spryker:oms-01"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="spryker:oms-01 http://static.spryker.com/oms-01.xsd"
+>
+
+    <process name="DummyOrderAmendment">
+        <states>
+            <state name="order amendment" reserved="true" display="oms.state.order-amendment">
+                <flag>amendment in progress</flag>
+            </state>
+            <state name="deleted item unreserved" display="oms.state.new"/>
+        </states>
+
+        <transitions>
+            <transition happy="true">
+                <source>grace period pending</source>
+                <target>deleted item unreserved</target>
+                <event>unreserve deleted items</event>
+            </transition>
+
+            <transition happy="true">
+                <source>deleted item unreserved</source>
+                <target>grace period started</target>
+                <event>start grace period</event>
+            </transition>
+
+            <transition>
+                <source>grace period started</source>
+                <target>order amendment</target>
+                <event>start-order-amendment</event>
+            </transition>
+
+            <transition>
+                <source>order amendment</source>
+                <target>cancelled</target>
+                <event>finish-order-amendment</event>
+            </transition>
+
+            <transition>
+                <source>order amendment</source>
+                <target>grace period started</target>
+                <event>cancel-order-amendment</event>
+            </transition>
+
+            <transition>
+                <source>order amendment</source>
+                <target>grace period finished</target>
+                <event>skip-order-amendment</event>
+            </transition>
+        </transitions>
+
+        <events>
+            <event name="start grace period" command="OrderAmendment/StartGracePeriod" onEnter="true"/>
+            <event name="unreserve deleted items" command="OrderAmendment/UnreserveDeletedItems" onEnter="true"/>
+            <event name="skip-order-amendment"/>
+            <event name="start-order-amendment"/>
+            <event name="finish-order-amendment"/>
+            <event name="cancel-order-amendment"/>
+        </events>
+    </process>
+
+</statemachine>

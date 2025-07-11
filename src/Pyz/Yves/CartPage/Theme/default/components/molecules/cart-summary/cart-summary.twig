@@ -85,4 +85,11 @@
 
         {% widget 'ExpressCheckoutPaymentWidget' %}{% endwidget %}
     {% endif %}
+
+    {% widget 'CancelOrderAmendmentWidget' args [data.cart] with {
+        data: {
+            buttonClass: 'button button--hollow button--expand spacing-top',
+        },
+    } only %}
+    {% endwidget %}
 {% endblock %}

@@ -5,7 +5,7 @@
 } %}
 
 {% block customerReorderAction %}
-    {% widget 'CustomerReorderFormWidget' args [order] only %}
+    {% widget 'CartReorderWidget' args [order] only %}
         {% block body %}
             {% include molecule('remote-form-submit') with {
                 data: {
@@ -22,6 +22,17 @@
             } only %}
         {% endblock %}
     {% endwidget %}
+{% endblock %}
+
+{% block customOrderAmendmentAction %}
+    {% if widgetGlobalExists('OrderAmendmentWidget') %}
+        {% widget 'OrderAmendmentWidget' args [order] with {
+            data: {
+                buttonClass: 'table-action-list__link',
+            }
+        } only %}
+        {% endwidget %}
+    {% endif %}
 {% endblock %}
 
 {% block orderCancelAction %}
@@ -86,6 +97,9 @@
                                         },
                                         {
                                             customAction: block('customerReorderAction'),
+                                        },
+                                        {
+                                            customAction: block('customOrderAmendmentAction'),
                                         },
                                         {
                                             url: path('return/create', { orderReference: order.orderReference }),
