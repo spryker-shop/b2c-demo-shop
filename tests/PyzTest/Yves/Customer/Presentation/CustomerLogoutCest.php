@@ -46,6 +46,7 @@ class CustomerLogoutCest
         $i->amOnPage(CustomerLoginPage::URL);
         $customerTransfer = $i->haveRegisteredCustomer();
         $i->submitLoginForm($customerTransfer->getEmail(), $customerTransfer->getPassword());
+        $i->wait(5);
         $i->seeCurrentUrlEquals(CustomerOverviewPage::URL);
 
         $i->amOnPage(CustomerLogoutPage::URL);

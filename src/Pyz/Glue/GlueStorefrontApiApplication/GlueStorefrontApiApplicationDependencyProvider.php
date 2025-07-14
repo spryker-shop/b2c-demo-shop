@@ -20,6 +20,12 @@ use Spryker\Glue\GlueStorefrontApiApplication\Plugin\GlueApplication\StrictTrans
 use Spryker\Glue\GlueStorefrontApiApplicationAuthorizationConnector\Plugin\GlueStorefrontApiApplicationAuthorizationConnector\AuthorizationRequestAfterRoutingValidatorPlugin;
 use Spryker\Glue\Http\Plugin\Application\HttpApplicationPlugin;
 use Spryker\Glue\Locale\Plugin\Application\LocaleApplicationPlugin;
+use Spryker\Glue\MultiFactorAuth\Plugin\GlueStorefrontApiApplication\MultiFactorAuthStorefrontApiRequestValidatorPlugin;
+use Spryker\Glue\MultiFactorAuth\Plugin\GlueStorefrontApiApplication\MultiFactorAuthStorefrontResourcePlugin;
+use Spryker\Glue\MultiFactorAuth\Plugin\GlueStorefrontApiApplication\MultiFactorAuthTriggerStorefrontResourcePlugin;
+use Spryker\Glue\MultiFactorAuth\Plugin\GlueStorefrontApiApplication\MultiFactorAuthTypeActivateStorefrontResourcePlugin;
+use Spryker\Glue\MultiFactorAuth\Plugin\GlueStorefrontApiApplication\MultiFactorAuthTypeDeactivateStorefrontResourcePlugin;
+use Spryker\Glue\MultiFactorAuth\Plugin\GlueStorefrontApiApplication\MultiFactorAuthTypeVerifyStorefrontResourcePlugin;
 use Spryker\Glue\OauthApi\Plugin\AccessTokenValidatorPlugin;
 use Spryker\Glue\OauthApi\Plugin\CustomerRequestBuilderPlugin;
 use Spryker\Glue\OauthApi\Plugin\GlueApplication\CustomerRequestValidatorPlugin;
@@ -64,6 +70,7 @@ class GlueStorefrontApiApplicationDependencyProvider extends SprykerGlueStorefro
             new RequestCorsValidatorPlugin(),
             new ScopeRequestAfterRoutingValidatorPlugin(),
             new AuthorizationRequestAfterRoutingValidatorPlugin(),
+            new MultiFactorAuthStorefrontApiRequestValidatorPlugin(),
         ];
     }
 
@@ -86,6 +93,11 @@ class GlueStorefrontApiApplicationDependencyProvider extends SprykerGlueStorefro
         return [
             new OauthApiTokenResource(),
             new StoresResource(),
+            new MultiFactorAuthStorefrontResourcePlugin(),
+            new MultiFactorAuthTriggerStorefrontResourcePlugin(),
+            new MultiFactorAuthTypeActivateStorefrontResourcePlugin(),
+            new MultiFactorAuthTypeDeactivateStorefrontResourcePlugin(),
+            new MultiFactorAuthTypeVerifyStorefrontResourcePlugin(),
         ];
     }
 
