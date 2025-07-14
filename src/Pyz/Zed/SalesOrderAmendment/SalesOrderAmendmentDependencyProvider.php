@@ -14,6 +14,7 @@ use Spryker\Zed\ConfigurableBundleNote\Communication\Plugin\SalesOrderAmendment\
 use Spryker\Zed\SalesOrderAmendment\SalesOrderAmendmentDependencyProvider as SprykerSalesOrderAmendmentDependencyProvider;
 use Spryker\Zed\SalesOrderAmendmentOms\Communication\Plugin\SalesOrderAmendment\OrderSalesOrderAmendmentValidatorRulePlugin;
 use Spryker\Zed\SalesProductConfiguration\Communication\Plugin\SalesOrderAmendment\SalesProductConfigurationSalesOrderItemCollectorPlugin;
+use Spryker\Zed\Shipment\Communication\Plugin\SalesOrderAmendment\ShipmentGroupsSalesOrderAmendmentQuoteExpanderPlugin;
 use Spryker\Zed\Shipment\Communication\Plugin\SalesOrderAmendment\ShipmentSalesOrderItemCollectorPlugin;
 
 class SalesOrderAmendmentDependencyProvider extends SprykerSalesOrderAmendmentDependencyProvider
@@ -38,6 +39,16 @@ class SalesOrderAmendmentDependencyProvider extends SprykerSalesOrderAmendmentDe
             new ShipmentSalesOrderItemCollectorPlugin(),
             new ConfigurableBundleNoteSalesOrderItemCollectorPlugin(),
             new SalesProductConfigurationSalesOrderItemCollectorPlugin(),
+        ];
+    }
+
+    /**
+     * @return list<\Spryker\Zed\SalesOrderAmendmentExtension\Dependency\Plugin\SalesOrderAmendmentQuoteExpanderPluginInterface>
+     */
+    protected function getSalesOrderAmendmentQuoteExpanderPlugins(): array
+    {
+        return [
+            new ShipmentGroupsSalesOrderAmendmentQuoteExpanderPlugin(),
         ];
     }
 }
