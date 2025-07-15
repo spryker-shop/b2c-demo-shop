@@ -19,6 +19,8 @@ use Spryker\Yves\Form\Plugin\Application\FormApplicationPlugin;
 use Spryker\Yves\Http\Plugin\Application\YvesHttpApplicationPlugin;
 use Spryker\Yves\Locale\Plugin\Application\LocaleApplicationPlugin;
 use Spryker\Yves\Messenger\Plugin\Application\FlashMessengerApplicationPlugin;
+use Spryker\Yves\MultiFactorAuth\Widget\MultiFactorAuthHandlerWidget;
+use Spryker\Yves\MultiFactorAuth\Widget\SetMultiFactorAuthMenuItemWidget;
 use Spryker\Yves\Router\Plugin\Application\RouterApplicationPlugin;
 use Spryker\Yves\Security\Plugin\Application\YvesSecurityApplicationPlugin;
 use Spryker\Yves\Session\Plugin\Application\SessionApplicationPlugin;
@@ -222,6 +224,8 @@ class ShopApplicationDependencyProvider extends SprykerShopApplicationDependency
             ExpressCheckoutPaymentWidget::class,
             TraceableEventWidget::class,
             CustomerEmailChangeRequestWidget::class,
+            SetMultiFactorAuthMenuItemWidget::class,
+            MultiFactorAuthHandlerWidget::class,
             SitemapWidget::class,
             CartReorderWidget::class,
             CartReorderItemCheckboxWidget::class,

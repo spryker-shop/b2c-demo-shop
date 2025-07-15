@@ -29,7 +29,7 @@ use Spryker\Zed\GiftCard\Communication\Plugin\Checkout\GiftCardPaymentCheckoutDo
 use Spryker\Zed\GiftCardMailConnector\Communication\Plugin\Checkout\SendEmailToGiftCardUser;
 use Spryker\Zed\Kernel\Container;
 use Spryker\Zed\Nopayment\Communication\Plugin\Checkout\NopaymentCheckoutPreConditionPlugin;
-use Spryker\Zed\OrderAmendmentExample\Communication\Plugin\Checkout\InvoicePaymentToAsyncOrderAmendmentFlowCheckoutPreSavePlugin;
+use Spryker\Zed\OrderAmendmentExample\Communication\Plugin\Checkout\PaymentToAsyncOrderAmendmentFlowCheckoutPreSavePlugin;
 use Spryker\Zed\Payment\Communication\Plugin\Checkout\PaymentAuthorizationCheckoutPostSavePlugin;
 use Spryker\Zed\Payment\Communication\Plugin\Checkout\PaymentConfirmPreOrderPaymentCheckoutPostSavePlugin;
 use Spryker\Zed\Payment\Communication\Plugin\Checkout\PaymentMethodValidityCheckoutPreConditionPlugin;
@@ -138,7 +138,7 @@ class CheckoutDependencyProvider extends SprykerCheckoutDependencyProvider
             new SalesOrderExpanderPlugin(),
             new OriginalOrderQuoteExpanderCheckoutPreSavePlugin(),
             new FilterOriginalOrderBundleItemCheckoutPreSavePlugin(),
-            new InvoicePaymentToAsyncOrderAmendmentFlowCheckoutPreSavePlugin(), #Order Amendment Feature
+            new PaymentToAsyncOrderAmendmentFlowCheckoutPreSavePlugin(), #Order Amendment Feature
         ];
     }
 

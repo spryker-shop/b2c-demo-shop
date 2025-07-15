@@ -277,3 +277,13 @@
         {% endif %}
     {% endapply %}
 {% endblock %}
+
+{% block form_start %}
+    {% if form.vars.multiFactorHandlers is defined %}
+        {% for handler in form.vars.multiFactorHandlers %}
+            {{ handler|raw }}
+        {% endfor %}
+    {% endif %}
+
+    {{ parent() }}
+{% endblock form_start %}

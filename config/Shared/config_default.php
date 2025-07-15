@@ -324,6 +324,12 @@ $config[AclConstants::ACL_DEFAULT_RULES] = [
         'type' => 'allow',
     ],
     [
+        'bundle' => 'multi-factor-auth',
+        'controller' => '*',
+        'action' => '*',
+        'type' => 'allow',
+    ],
+    [
         'bundle' => 'acl',
         'controller' => 'index',
         'action' => 'denied',
@@ -909,6 +915,15 @@ $config[GlueJsonApiConventionConstants::GLUE_DOMAIN] = sprintf(
     $sprykerGlueStorefrontHost ?: $sprykerGlueBackendHost ?: 'localhost',
 );
 $config[GlueStorefrontApiApplicationConstants::GLUE_STOREFRONT_CORS_ALLOW_ORIGIN] = getenv('SPRYKER_GLUE_APPLICATION_CORS_ALLOW_ORIGIN') ?: '*';
+
+if ($isTestifyConstantsClassExists) {
+    $config[TestifyConstants::GLUE_STOREFRONT_API_DOMAIN] = sprintf(
+        'https://%s%s',
+        $sprykerGlueStorefrontHost,
+        $gluePort !== 443 ? ':' . $gluePort : '',
+    );
+    $config[TestifyConstants::GLUE_STOREFRONT_API_OPEN_API_SCHEMA] = APPLICATION_SOURCE_DIR . '/Generated/GlueStorefront/Specification/spryker_storefront_api.schema.yml';
+}
 
 // ----------------------------------------------------------------------------
 // ------------------------------ Push Notification ---------------------------

@@ -29,7 +29,7 @@ class PaymentCapturedMessageCest
     /**
      * @var string
      */
-    protected const INITIAL_ITEM_STATE = 'payment pending';
+    protected const INITIAL_ITEM_STATE = 'payment capture pending';
 
     /**
      * @var string
