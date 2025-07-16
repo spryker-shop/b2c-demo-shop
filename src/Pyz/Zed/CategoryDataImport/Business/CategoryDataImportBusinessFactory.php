@@ -38,6 +38,7 @@ class CategoryDataImportBusinessFactory extends SprykerCategoryDataImportBusines
             ->addStep(new CategoryWriterStep(
                 $this->createCategoryRepository(),
                 $this->getUrlFacade(),
+                $this->getConfig(),
             ));
 
         $dataImporter
