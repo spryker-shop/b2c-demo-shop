@@ -112,7 +112,7 @@ class ProductConcreteCartReorderRestApiCest
         $I->sendPost($I->getCartReorderUrl(), $requestPayload);
 
         // Assert
-        $this->assertCreateCartReorder($I, $saveOrderTransfer);
+        $this->assertCreateCartReorder($I);
     }
 
     /**
@@ -140,7 +140,7 @@ class ProductConcreteCartReorderRestApiCest
         $I->sendPost($I->getCartReorderUrl(), $requestPayload);
 
         // Assert
-        $this->assertCreateCartReorder($I, $saveOrderTransfer);
+        $this->assertCreateCartReorder($I);
     }
 
     /**
@@ -318,15 +318,11 @@ class ProductConcreteCartReorderRestApiCest
 
     /**
      * @param \PyzTest\Glue\CartReorder\CartReorderApiTester $I
-     * @param \Generated\Shared\Transfer\SaveOrderTransfer $saveOrderTransfer
-     * @param string|null $cartNamePostfix
      *
      * @return void
      */
     protected function assertCreateCartReorder(
-        CartReorderApiTester $I,
-        SaveOrderTransfer $saveOrderTransfer,
-        ?string $cartNamePostfix = null,
+        CartReorderApiTester $I
     ): void {
         $I->seeResponseCodeIs(HttpCode::CREATED);
         $I->seeResponseIsJson();
