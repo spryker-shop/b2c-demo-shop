@@ -95,7 +95,6 @@ class RouterDependencyProvider extends SprykerRouterDependencyProvider
             new HomePageRouteProviderPlugin(),
             new CheckoutPageRouteProviderPlugin(),
             new CustomerPageRouteProviderPlugin(),
-            new CustomerReorderWidgetRouteProviderPlugin(),
             new NewsletterPageRouteProviderPlugin(),
             new CartPageRouteProviderPlugin(),
             new WishlistPageRouteProviderPlugin(),

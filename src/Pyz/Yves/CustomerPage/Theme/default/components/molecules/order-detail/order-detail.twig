@@ -68,13 +68,16 @@
                             data: {
                                 label: 'customer.order.reorder_all' | trans,
                                 buttonClass: embed.buttonClasses,
+                                buttonExtraAttributes: {
+                                    'data-qa': 'reorder-all-button',
+                                },
                             },
                             attributes: {
-                                'form-name': 'customerReorderWidgetForm_' ~ data.order.idSalesOrder,
-                                'form-action': path('customer/order/reorder', {'idSalesOrder': data.order.idSalesOrder}),
-                                'field-id': 'customerReorderWidgetForm__token_' ~ data.order.idSalesOrder,
-                                'field-name': 'customerReorderWidgetForm[_token]',
-                                'field-value': csrf_token('customerReorderWidgetForm'),
+                                'form-name': 'cartReorderForm_' ~ data.order.orderReference,
+                                'form-action': path('cart-reorder', {'orderReference': data.order.orderReference}),
+                                'field-id': 'cartReorderForm__token_' ~ data.order.orderReference,
+                                'field-name': 'cartReorderForm[_token]',
+                                'field-value': csrf_token('cartReorderForm'),
                             },
                         } only %}
                     {% endblock %}
