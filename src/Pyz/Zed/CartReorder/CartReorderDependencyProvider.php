@@ -15,7 +15,6 @@ use Spryker\Zed\CartNote\Communication\Plugin\CartReorder\CartNoteCartReorderIte
 use Spryker\Zed\CartReorder\CartReorderDependencyProvider as SprykerCartReorderDependencyProvider;
 use Spryker\Zed\ConfigurableBundleNote\Communication\Plugin\CartReorder\ConfigurableBundleNoteCartReorderItemHydratorPlugin;
 use Spryker\Zed\Currency\Communication\Plugin\CartReorder\CopyOrderCurrencyCartPreReorderPlugin;
-use Spryker\Zed\PersistentCart\Communication\Plugin\CartReorder\PersistentCartReorderQuoteProviderStrategyPlugin;
 use Spryker\Zed\PersistentCart\Communication\Plugin\CartReorder\ReplacePersistentCartReorderQuoteProviderStrategyPlugin;
 use Spryker\Zed\PersistentCart\Communication\Plugin\CartReorder\UpdateQuoteCartPostReorderPlugin;
 use Spryker\Zed\Price\Communication\Plugin\CartReorder\CopyOrderPriceModeCartPreReorderPlugin;
@@ -60,7 +59,6 @@ class CartReorderDependencyProvider extends SprykerCartReorderDependencyProvider
     protected function getCartReorderQuoteProviderStrategyPlugins(): array
     {
         return [
-            new PersistentCartReorderQuoteProviderStrategyPlugin(),
             new ReplacePersistentCartReorderQuoteProviderStrategyPlugin(),
         ];
     }
