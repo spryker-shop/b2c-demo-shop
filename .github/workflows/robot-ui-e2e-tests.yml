@@ -369,15 +369,15 @@ jobs:
                     docker/sdk exec robot-framework robot -v env:ui_b2c -v docker:True -v db_engine:psycopg2 -v headless:true -v ignore_console:false -d results --exclude skip-due-to-issueORskip-due-to-refactoring --include group_two -s '*'.tests.ui.b2c .
                     docker/sdk exec robot-framework touch results/time.txt && echo $(date) > results/time.txt
 
-#            -   name: Rerun Failed Tests
-#                if: steps.run_tests.outcome != 'success'
-#                run: |
-#                    docker/sdk exec robot-framework robot -v env:ui_b2c -v docker:True -v db_engine:psycopg2 -v headless:true -v ignore_console:false -d results/rerun --runemptysuite --rerunfailed results/output.xml --output rerun.xml -s '*'.tests.ui.b2c .
+            -   name: Rerun Failed Tests
+                if: steps.run_tests.outcome != 'success'
+                run: |
+                    docker/sdk exec robot-framework robot -v env:ui_b2c -v docker:True -v db_engine:psycopg2 -v headless:true -v ignore_console:false -d results/rerun --runemptysuite --rerunfailed results/output.xml --output rerun.xml -s '*'.tests.ui.b2c .
 
-#            -   name: Merge Test Results
-#                if: always() && steps.run_tests.outcome != 'success'
-#                run: |
-#                    docker/sdk exec robot-framework rebot -d results --merge results/output.xml results/rerun/rerun.xml
+            -   name: Merge Test Results
+                if: always() && steps.run_tests.outcome != 'success'
+                run: |
+                    docker/sdk exec robot-framework rebot -d results --merge results/output.xml results/rerun/rerun.xml
 
             -   name: Upload artifacts
                 if: failure()
