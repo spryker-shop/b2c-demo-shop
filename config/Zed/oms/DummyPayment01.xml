@@ -55,10 +55,22 @@
                 <target>grace period pending</target>
             </transition>
 
+            <transition>
+                <source>new</source>
+                <target>cancelled</target>
+                <event>cancel</event>
+            </transition>
+
             <transition happy="true">
                 <source>grace period started</source>
                 <target>grace period finished</target>
                 <event>skip grace period</event>
+            </transition>
+
+            <transition>
+                <source>grace period started</source>
+                <target>cancelled</target>
+                <event>cancel</event>
             </transition>
 
             <transition happy="true">
