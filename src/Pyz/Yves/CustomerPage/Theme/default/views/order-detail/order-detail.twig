@@ -11,23 +11,13 @@
     {% endblock %}
 
     {% block reorderAll %}
-        {% if widgetGlobalExists('CartReorderWidget') %}
-            {% widget 'CartReorderWidget' args [data.order] only %}
-                {% block body %}
-                    <div class="box text-right">
-                        {{ parent() }}
-                    </div>
-                {% endblock %}
-            {% endwidget %}
-        {% else %}
-            {% widget 'CustomerReorderFormWidget' args [data.order] only %}
-                {% block body %}
-                    <div class="box text-right">
-                        {{ parent() }}
-                    </div>
-                {% endblock %}
-            {% endwidget %}
-        {% endif %}
+        {% widget 'CartReorderWidget' args [data.order] only %}
+            {% block body %}
+                <div class="box text-right">
+                    {{ parent() }}
+                </div>
+            {% endblock %}
+        {% endwidget %}
     {% endblock %}
 
     {% block orderCancel %}

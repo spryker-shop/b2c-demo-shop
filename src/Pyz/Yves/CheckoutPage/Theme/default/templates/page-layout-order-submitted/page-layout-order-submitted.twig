@@ -13,7 +13,7 @@
     <div class="page-layout-checkout success-page">
         <h1 class="title title--checkout-success title--with-border">{{data.title}}</h1>
         <p class="success-page__text">
-            {% if widgetGlobalExists('UpdateOrderCheckoutSuccessTitleWidget') and data.quote %}
+            {% if data.quote %}
                 {% widget 'UpdateOrderCheckoutSuccessTitleWidget' args [data.message, data.quote] only %}{% endwidget %}
             {% else %}
                 {{ data.message }}

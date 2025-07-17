@@ -25,14 +25,12 @@
 {% endblock %}
 
 {% block customOrderAmendmentAction %}
-    {% if widgetGlobalExists('OrderAmendmentWidget') %}
-        {% widget 'OrderAmendmentWidget' args [order] with {
-            data: {
-                buttonClass: 'table-action-list__link',
-            }
-        } only %}
-        {% endwidget %}
-    {% endif %}
+    {% widget 'OrderAmendmentWidget' args [order] with {
+        data: {
+            buttonClass: 'table-action-list__link',
+        }
+    } only %}
+    {% endwidget %}
 {% endblock %}
 
 {% block orderCancelAction %}
