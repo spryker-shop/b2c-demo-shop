@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ec007a83bd43e034d6e0691a960fa19a",
+    "content-hash": "7456bbbbf1ebea1a2b2d4c7d283e12d1",
     "packages": [
         {
             "name": "async-aws/core",
@@ -6312,6 +6312,44 @@
                 "source": "https://github.com/spryker-feature/non-splittable-products/tree/master"
             },
             "time": "2025-07-16T10:13:37+00:00"
+        },
+        {
+            "name": "spryker-feature/order-amendment",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker-feature/order-amendment.git",
+                "reference": "d3400d8161ee80f9abe4bf7a1469361b1ce46451"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker-feature/order-amendment/zipball/d3400d8161ee80f9abe4bf7a1469361b1ce46451",
+                "reference": "d3400d8161ee80f9abe4bf7a1469361b1ce46451",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.2",
+                "spryker-shop/sales-order-amendment-widget": "^1.0.0",
+                "spryker/price-product-sales-order-amendment": "^1.0.0",
+                "spryker/sales-order-amendment": "^1.0.0",
+                "spryker/sales-order-amendment-oms": "^1.0.0"
+            },
+            "default-branch": true,
+            "type": "metapackage",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "202507.x-dev"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "Order Amendment [feature]",
+            "support": {
+                "source": "https://github.com/spryker-feature/order-amendment/tree/master"
+            },
+            "time": "2025-07-15T09:27:24+00:00"
         },
         {
             "name": "spryker-feature/order-management",
@@ -13063,6 +13101,65 @@
             "time": "2024-11-15T17:27:31+00:00"
         },
         {
+            "name": "spryker-shop/sales-order-amendment-widget",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker-shop/sales-order-amendment-widget.git",
+                "reference": "aaad43b6ad611ae1f0ec360117480d983d337efb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker-shop/sales-order-amendment-widget/zipball/aaad43b6ad611ae1f0ec360117480d983d337efb",
+                "reference": "aaad43b6ad611ae1f0ec360117480d983d337efb",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.2",
+                "spryker-shop/shop-application": "^1.0.0",
+                "spryker-shop/shop-ui": "^1.91.0",
+                "spryker/application": "^3.0.0",
+                "spryker/cart-reorder": "^1.0.0",
+                "spryker/customer": "^7.4.0",
+                "spryker/kernel": "^3.52.0",
+                "spryker/quote": "^2.0.0",
+                "spryker/sales-order-amendment": "^1.0.0",
+                "spryker/symfony": "^3.1.0",
+                "spryker/transfer": "^3.27.0",
+                "spryker/zed-request": "^3.6.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/router": "*"
+            },
+            "suggest": {
+                "spryker-shop/cart-page": "The default successful amendment redirect is heading to a cart controller.",
+                "spryker-shop/customer-page": "The default failure amendment redirect is heading to a customer controller.",
+                "spryker/router": "Use this module when you want to use the Router.",
+                "spryker/silex": "If you want use the widget's router provider."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "SprykerShop\\": "src/SprykerShop/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "SalesOrderAmendmentWidget module",
+            "support": {
+                "source": "https://github.com/spryker-shop/sales-order-amendment-widget/tree/1.0.0"
+            },
+            "time": "2025-07-15T06:12:53+00:00"
+        },
+        {
             "name": "spryker-shop/sales-order-threshold-widget",
             "version": "1.1.4",
             "source": {
@@ -17560,6 +17657,103 @@
             "time": "2025-02-27T08:01:24+00:00"
         },
         {
+            "name": "spryker/cart-reorder-rest-api",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/cart-reorder-rest-api.git",
+                "reference": "eecf24a38ec528ba7559e8beb4b13caa1a95f6a4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/cart-reorder-rest-api/zipball/eecf24a38ec528ba7559e8beb4b13caa1a95f6a4",
+                "reference": "eecf24a38ec528ba7559e8beb4b13caa1a95f6a4",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.2",
+                "spryker/cart-reorder": "^1.0.0",
+                "spryker/cart-reorder-rest-api-extension": "^1.0.0",
+                "spryker/carts-rest-api": "^5.18.0",
+                "spryker/glossary-storage": "^1.0.0",
+                "spryker/glue-application": "^1.47.0",
+                "spryker/glue-application-extension": "^1.0.0",
+                "spryker/kernel": "^3.30.0",
+                "spryker/symfony": "^3.0.0",
+                "spryker/transfer": "^3.27.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*"
+            },
+            "suggest": {
+                "spryker/auth-rest-api": "If you want to authorize and authenticate customers via access tokens.",
+                "spryker/authorization": "If you want to use multiple authorization strategies, minimum required version: 1.2.0.",
+                "spryker/rest-request-validator": "If you want to use rest request validation."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "CartReorderRestApi module",
+            "support": {
+                "source": "https://github.com/spryker/cart-reorder-rest-api/tree/1.0.0"
+            },
+            "time": "2025-07-15T06:12:50+00:00"
+        },
+        {
+            "name": "spryker/cart-reorder-rest-api-extension",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/cart-reorder-rest-api-extension.git",
+                "reference": "754347e046a404c2d2549be094e08833ae13f76c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/cart-reorder-rest-api-extension/zipball/754347e046a404c2d2549be094e08833ae13f76c",
+                "reference": "754347e046a404c2d2549be094e08833ae13f76c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.2",
+                "spryker/transfer": "^3.27.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "CartReorderRestApiExtension module",
+            "support": {
+                "source": "https://github.com/spryker/cart-reorder-rest-api-extension/tree/1.0.0"
+            },
+            "time": "2024-11-15T17:27:29+00:00"
+        },
+        {
             "name": "spryker/cart-variant",
             "version": "2.1.0",
             "source": {
@@ -21952,22 +22146,23 @@
         },
         {
             "name": "spryker/configurable-bundle-carts-rest-api",
-            "version": "0.1.3",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/configurable-bundle-carts-rest-api.git",
-                "reference": "dda505e49137feb43cb8b459e043e41c89b85b65"
+                "reference": "6cc3aba3f279c7409228fdcaa1f45b4597fd1349"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/configurable-bundle-carts-rest-api/zipball/dda505e49137feb43cb8b459e043e41c89b85b65",
-                "reference": "dda505e49137feb43cb8b459e043e41c89b85b65",
+                "url": "https://api.github.com/repos/spryker/configurable-bundle-carts-rest-api/zipball/6cc3aba3f279c7409228fdcaa1f45b4597fd1349",
+                "reference": "6cc3aba3f279c7409228fdcaa1f45b4597fd1349",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.0",
+                "php": ">=8.2",
                 "spryker/carts-rest-api": "^5.7.0",
                 "spryker/carts-rest-api-extension": "^1.5.0",
+                "spryker/configurable-bundle": "^2.5.0",
                 "spryker/configurable-bundle-cart": "^1.3.0",
                 "spryker/configurable-bundle-storage": "^2.1.0",
                 "spryker/glossary-storage": "^1.5.0",
@@ -21977,12 +22172,12 @@
                 "spryker/persistent-cart": "^3.4.0",
                 "spryker/store": "^1.1.0",
                 "spryker/symfony": "^3.0.0",
+                "spryker/transfer": "^3.25.0",
                 "spryker/zed-request": "^3.0.0"
             },
             "require-dev": {
                 "spryker/cart": "*",
                 "spryker/code-sniffer": "*",
-                "spryker/configurable-bundle": "*",
                 "spryker/container": "*",
                 "spryker/customer": "*",
                 "spryker/product": "*",
@@ -22007,9 +22202,9 @@
             ],
             "description": "ConfigurableBundleCartsRestApi module",
             "support": {
-                "source": "https://github.com/spryker/configurable-bundle-carts-rest-api/tree/0.1.3"
+                "source": "https://github.com/spryker/configurable-bundle-carts-rest-api/tree/1.0.0"
             },
-            "time": "2023-03-31T19:36:11+00:00"
+            "time": "2024-11-15T17:27:29+00:00"
         },
         {
             "name": "spryker/configurable-bundle-data-import",
@@ -32090,6 +32285,115 @@
             "time": "2020-08-06T14:52:35+00:00"
         },
         {
+            "name": "spryker/order-amendment-example",
+            "version": "0.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/order-amendment-example.git",
+                "reference": "9d578f60611d2645cc0a817544ee9818251192b0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/order-amendment-example/zipball/9d578f60611d2645cc0a817544ee9818251192b0",
+                "reference": "9d578f60611d2645cc0a817544ee9818251192b0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.2",
+                "spryker/checkout": "^6.9.0",
+                "spryker/checkout-extension": "^1.4.0",
+                "spryker/kernel": "^3.76.0",
+                "spryker/sales": "^11.7.0",
+                "spryker/sales-order-amendment": "^1.0.0",
+                "spryker/sales-order-amendment-extension": "^1.1.0",
+                "spryker/transfer": "^3.27.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/container": "*",
+                "spryker/oms": "*",
+                "spryker/testify": "*"
+            },
+            "suggest": {
+                "spryker/oms": "If you want to use ApplyOrderAmendmentDraftCommandByOrderPlugin plugin: ^11.46.0."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "OrderAmendmentExample module",
+            "support": {
+                "source": "https://github.com/spryker/order-amendment-example/tree/0.3.0"
+            },
+            "time": "2025-07-15T08:19:16+00:00"
+        },
+        {
+            "name": "spryker/order-amendments-rest-api",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/order-amendments-rest-api.git",
+                "reference": "a1227d983dd50193010fde43a6294f1e6a7ca603"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/order-amendments-rest-api/zipball/a1227d983dd50193010fde43a6294f1e6a7ca603",
+                "reference": "a1227d983dd50193010fde43a6294f1e6a7ca603",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.2",
+                "spryker/cart-reorder-rest-api-extension": "^1.0.0",
+                "spryker/carts-rest-api-extension": "^1.7.0",
+                "spryker/glue-application": "^1.0.0",
+                "spryker/glue-application-extension": "^1.0.0",
+                "spryker/kernel": "^3.30.0",
+                "spryker/sales-order-amendment": "^1.0.0",
+                "spryker/transfer": "^3.27.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/container": "*",
+                "spryker/testify": "*"
+            },
+            "suggest": {
+                "spryker/auth-rest-api": "If you want to authorize and authenticate customers via access tokens.",
+                "spryker/authorization": "If you want to use multiple authorization strategies, minimum required version: 1.2.0.",
+                "spryker/rest-request-validator": "If you want to use rest request validation."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "OrderAmendmentsRestApi module",
+            "support": {
+                "source": "https://github.com/spryker/order-amendments-rest-api/tree/1.0.0"
+            },
+            "time": "2025-07-15T06:12:50+00:00"
+        },
+        {
             "name": "spryker/order-custom-reference",
             "version": "1.2.0",
             "source": {
@@ -33940,6 +34244,103 @@
             "description": "PriceProductExtension module",
             "support": {
                 "source": "https://github.com/spryker/price-product-extension/tree/1.8.0"
+            },
+            "time": "2025-04-16T09:16:24+00:00"
+        },
+        {
+            "name": "spryker/price-product-sales-order-amendment",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/price-product-sales-order-amendment.git",
+                "reference": "f83c9207daa37371d3169875a707400a72f88006"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/price-product-sales-order-amendment/zipball/f83c9207daa37371d3169875a707400a72f88006",
+                "reference": "f83c9207daa37371d3169875a707400a72f88006",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.2",
+                "spryker/cart-extension": "^4.2.0",
+                "spryker/cart-reorder-extension": "^1.0.0",
+                "spryker/kernel": "^3.76.0",
+                "spryker/price-product": "^4.46.0",
+                "spryker/price-product-extension": "^1.8.0",
+                "spryker/price-product-sales-order-amendment-extension": "^1.0.0",
+                "spryker/price-product-storage-extension": "^1.2.0",
+                "spryker/sales-order-amendment": "^1.0.0",
+                "spryker/transfer": "^3.27.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/container": "*",
+                "spryker/locale": "*",
+                "spryker/testify": "*"
+            },
+            "suggest": {
+                "spryker/price-cart-connector": "If you want to use OriginalSalesOrderItemPriceItemExpanderPlugin: ^6.12.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "PriceProductSalesOrderAmendment module",
+            "support": {
+                "source": "https://github.com/spryker/price-product-sales-order-amendment/tree/1.0.0"
+            },
+            "time": "2025-07-15T06:12:50+00:00"
+        },
+        {
+            "name": "spryker/price-product-sales-order-amendment-extension",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/price-product-sales-order-amendment-extension.git",
+                "reference": "52566f71deeae32f17cdc38809a46ee0ce8f1874"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/price-product-sales-order-amendment-extension/zipball/52566f71deeae32f17cdc38809a46ee0ce8f1874",
+                "reference": "52566f71deeae32f17cdc38809a46ee0ce8f1874",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.2"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "PriceProductSalesOrderAmendmentExtension module",
+            "support": {
+                "source": "https://github.com/spryker/price-product-sales-order-amendment-extension/tree/1.0.0"
             },
             "time": "2025-04-16T09:16:24+00:00"
         },
@@ -43007,6 +43408,72 @@
             "time": "2023-06-06T15:14:45+00:00"
         },
         {
+            "name": "spryker/sales-order-amendment",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/sales-order-amendment.git",
+                "reference": "d67e11b0d918ed155dce7c1ff27b1527a48e2840"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/sales-order-amendment/zipball/d67e11b0d918ed155dce7c1ff27b1527a48e2840",
+                "reference": "d67e11b0d918ed155dce7c1ff27b1527a48e2840",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.2",
+                "spryker/availability-extension": "^1.2.0",
+                "spryker/cart-extension": "^4.0.0",
+                "spryker/cart-reorder-extension": "^1.0.0",
+                "spryker/checkout-extension": "^1.5.0",
+                "spryker/currency-extension": "^1.1.0",
+                "spryker/kernel": "^3.76.0",
+                "spryker/messenger": "^3.0.0",
+                "spryker/persistent-cart-extension": "^1.2.0",
+                "spryker/price-extension": "^1.1.0",
+                "spryker/propel-orm": "^1.0.0",
+                "spryker/quote": "^2.0.0",
+                "spryker/quote-request-extension": "^1.1.0",
+                "spryker/sales": "^11.63.0",
+                "spryker/sales-extension": "^1.3.0",
+                "spryker/sales-order-amendment-extension": "^1.3.0",
+                "spryker/transfer": "^3.27.0",
+                "spryker/util-encoding": "^2.0.0",
+                "spryker/uuid-behavior": "^1.0.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/container": "*",
+                "spryker/customer": "*",
+                "spryker/oms": "*",
+                "spryker/propel": "*",
+                "spryker/store": "*",
+                "spryker/testify": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/",
+                    "SprykerTest\\Shared\\SalesOrderAmendment\\Helper\\": "tests/SprykerTest/Shared/SalesOrderAmendment/Helper/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "SalesOrderAmendment module",
+            "support": {
+                "source": "https://github.com/spryker/sales-order-amendment/tree/1.0.0"
+            },
+            "time": "2025-07-15T06:12:50+00:00"
+        },
+        {
             "name": "spryker/sales-order-amendment-extension",
             "version": "1.3.0",
             "source": {
@@ -43047,6 +43514,64 @@
                 "source": "https://github.com/spryker/sales-order-amendment-extension/tree/1.3.0"
             },
             "time": "2025-07-10T09:45:02+00:00"
+        },
+        {
+            "name": "spryker/sales-order-amendment-oms",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spryker/sales-order-amendment-oms.git",
+                "reference": "7595fafd55e420b48906a5f9cdbdef26bfb214ef"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spryker/sales-order-amendment-oms/zipball/7595fafd55e420b48906a5f9cdbdef26bfb214ef",
+                "reference": "7595fafd55e420b48906a5f9cdbdef26bfb214ef",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.2",
+                "spryker/cart-reorder-extension": "^1.0.0",
+                "spryker/checkout-extension": "^1.3.0",
+                "spryker/kernel": "^3.76.0",
+                "spryker/mail": "^4.6.0",
+                "spryker/mail-extension": "^1.0.0",
+                "spryker/oms": "^11.46.0",
+                "spryker/quote-extension": "^1.1.0",
+                "spryker/sales": "^11.51.0",
+                "spryker/sales-extension": "^1.12.0",
+                "spryker/sales-order-amendment": "^1.0.0",
+                "spryker/sales-order-amendment-extension": "^1.0.0",
+                "spryker/transfer": "^3.27.0"
+            },
+            "require-dev": {
+                "spryker/code-sniffer": "*",
+                "spryker/container": "*",
+                "spryker/customer": "*",
+                "spryker/propel": "*",
+                "spryker/store": "*",
+                "spryker/testify": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spryker\\": "src/Spryker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "SalesOrderAmendmentOms module",
+            "support": {
+                "source": "https://github.com/spryker/sales-order-amendment-oms/tree/1.0.0"
+            },
+            "time": "2025-07-15T06:12:50+00:00"
         },
         {
             "name": "spryker/sales-order-threshold",
@@ -63071,7 +63596,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/cypress-tests.git",
-                "reference": "1aad22f4baee05a9588576a89968778bcddd4149"
+                "reference": "5af3c407a5a903cb5a945c80112400ba58460a0a"
             },
             "default-branch": true,
             "type": "library",
@@ -63079,7 +63604,7 @@
                 "MIT"
             ],
             "description": "This repository is dedicated to housing an extensive collection of UI end-to-end tests, meticulously crafted using Cypress for Spryker applications. These tests are designed to thoroughly evaluate the user interface, ensuring that all interactions and visual elements function as intended in real-world scenarios. By leveraging Cypress's advanced browser automation capabilities, this suite provides an efficient and effective means of validating the user experience, confirming the seamless operation and aesthetic integrity of Spryker's front-end components. Our commitment to rigorous UI testing helps maintain the high standard of quality and reliability that Spryker users expect.",
-            "time": "2025-07-10T12:51:25+00:00"
+            "time": "2025-07-17T19:51:24+00:00"
         },
         {
             "name": "spryker/development",
@@ -63285,7 +63810,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/robotframework-suite-tests.git",
-                "reference": "0c03104292c70b59fc5ee554a1469d8203b8bb00"
+                "reference": "0aff6a0b2c24be1f8835c34fdc60e7b231aac34f"
             },
             "default-branch": true,
             "type": "library",
@@ -63293,7 +63818,7 @@
                 "MIT"
             ],
             "description": "Automated tests for the Robot Framework",
-            "time": "2025-07-11T12:47:05+00:00"
+            "time": "2025-07-17T19:51:33+00:00"
         },
         {
             "name": "spryker/testify",
@@ -64291,6 +64816,12 @@
             "alias_normalized": "202507.0"
         },
         {
+            "package": "spryker-feature/order-amendment",
+            "version": "9999999-dev",
+            "alias": "202507.0",
+            "alias_normalized": "202507.0"
+        },
+        {
             "package": "spryker-feature/order-management",
             "version": "9999999-dev",
             "alias": "202507.0",
@@ -64497,6 +65028,7 @@
         "spryker-feature/mailing-notifications": 20,
         "spryker-feature/navigation": 20,
         "spryker-feature/non-splittable-products": 20,
+        "spryker-feature/order-amendment": 20,
         "spryker-feature/order-management": 20,
         "spryker-feature/payments": 20,
         "spryker-feature/prices": 20,
