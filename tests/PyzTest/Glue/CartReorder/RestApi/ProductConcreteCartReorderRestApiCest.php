@@ -11,7 +11,6 @@ namespace PyzTest\Glue\CartReorder\RestApi;
 
 use Codeception\Util\HttpCode;
 use Generated\Shared\Transfer\RestCheckoutErrorTransfer;
-use Generated\Shared\Transfer\SaveOrderTransfer;
 use PyzTest\Glue\CartReorder\CartReorderApiTester;
 use PyzTest\Glue\CartReorder\RestApi\Fixtures\ProductConcreteCartReorderRestApiFixtures;
 use Spryker\Glue\CartReorderRestApi\CartReorderRestApiConfig;
@@ -321,9 +320,8 @@ class ProductConcreteCartReorderRestApiCest
      *
      * @return void
      */
-    protected function assertCreateCartReorder(
-        CartReorderApiTester $I
-    ): void {
+    protected function assertCreateCartReorder(CartReorderApiTester $I): void
+    {
         $I->seeResponseCodeIs(HttpCode::CREATED);
         $I->seeResponseIsJson();
         $I->seeResponseMatchesOpenApiSchema();
