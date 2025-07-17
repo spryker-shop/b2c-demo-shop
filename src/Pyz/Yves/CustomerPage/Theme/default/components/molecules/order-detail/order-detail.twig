@@ -14,6 +14,7 @@
             embed: {
                 order: data.order,
                 requestUri: data.requestUri,
+                configJsName: config.jsName,
             },
         } only %}
             {% block actions %}
@@ -24,7 +25,7 @@
                 </a>
 
                 {% include molecule('return-create-link', 'SalesReturnPage') ignore missing with {
-                    class: config.jsName ~ '__target-state-toggler ' ~ buttonClasses,
+                    class: embed.configJsName ~ '__target-state-toggler ' ~ buttonClasses,
                     data: {
                         orderReference: embed.order.orderReference,
                     },
@@ -53,7 +54,7 @@
                     {% endblock %}
                 {% endwidget %}
 
-                <button class="js-customer-reorder-form__trigger {{ buttonClasses }}" data-qa="reorder-selected-button" disabled>
+                <button class="js-cart-reorder-form__trigger {{ buttonClasses }}" data-qa="reorder-selected-button" disabled>
                     {{ 'customer.order.reorder_selected' | trans }}
                 </button>
 
@@ -166,7 +167,7 @@
     {% block buttonsStateHandler %}
         {% include molecule('order-buttons-disable-toggler', 'SalesReturnPage') ignore missing with {
             attributes: {
-                'trigger-class-name': 'js-customer-reorder-form__selection',
+                'trigger-class-name': 'js-cart-reorder-form__selection',
                 'target-class-name': config.jsName ~ '__target-state-toggler',
                 'is-disabled-when-checked': 'false',
                 'disabled-class-name': 'button--disabled',

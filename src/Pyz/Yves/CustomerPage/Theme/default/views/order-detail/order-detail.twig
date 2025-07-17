@@ -1,7 +1,6 @@
 {% extends view('order-detail', '@SprykerShop:CustomerPage') %}
 
 {% block customerContent %}
-{#    TODO: Reorder selected items part expects FE adjustments #}
     {% block orderDetail %}
         {% widget 'CartReorderItemsWidget' args [
             data.order,
