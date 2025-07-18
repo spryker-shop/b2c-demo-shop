@@ -14,6 +14,7 @@
             embed: {
                 order: data.order,
                 requestUri: data.requestUri,
+                configJsName: config.jsName,
             },
         } only %}
             {% block actions %}
@@ -24,7 +25,7 @@
                 </a>
 
                 {% include molecule('return-create-link', 'SalesReturnPage') ignore missing with {
-                    class: config.jsName ~ '__target-state-toggler ' ~ buttonClasses,
+                    class: embed.configJsName ~ '__target-state-toggler ' ~ buttonClasses,
                     data: {
                         orderReference: embed.order.orderReference,
                     },
@@ -53,11 +54,11 @@
                     {% endblock %}
                 {% endwidget %}
 
-                <button class="js-customer-reorder-form__trigger {{ buttonClasses }}" disabled>
+                <button class="js-cart-reorder-form__trigger {{ buttonClasses }}" data-qa="reorder-selected-button" disabled>
                     {{ 'customer.order.reorder_selected' | trans }}
                 </button>
 
-                {% widget 'CustomerReorderFormWidget' args [embed.order] with {
+                {% widget 'CartReorderWidget' args [embed.order] with {
                     embed: {
                         buttonClasses: buttonClasses,
                     },
@@ -68,15 +69,43 @@
                             data: {
                                 label: 'customer.order.reorder_all' | trans,
                                 buttonClass: embed.buttonClasses,
+                                buttonExtraAttributes: {
+                                    'data-qa': 'reorder-all-button',
+                                },
                             },
                             attributes: {
-                                'form-name': 'customerReorderWidgetForm_' ~ data.order.idSalesOrder,
-                                'form-action': path('customer/order/reorder', {'idSalesOrder': data.order.idSalesOrder}),
-                                'field-id': 'customerReorderWidgetForm__token_' ~ data.order.idSalesOrder,
-                                'field-name': 'customerReorderWidgetForm[_token]',
-                                'field-value': csrf_token('customerReorderWidgetForm'),
+                                'form-name': 'cartReorderForm_' ~ data.order.orderReference,
+                                'form-action': path('cart-reorder', {'orderReference': data.order.orderReference}),
+                                'field-id': 'cartReorderForm__token_' ~ data.order.orderReference,
+                                'field-name': 'cartReorderForm[_token]',
+                                'field-value': csrf_token('cartReorderForm'),
                             },
                         } only %}
+                    {% endblock %}
+                {% endwidget %}
+
+                {% widget 'OrderAmendmentWidget' args [embed.order] with {
+                    embed: {
+                        buttonClasses: buttonClasses,
+                    },
+                } only %}
+                    {% block body %}
+                        {% embed molecule('order-amendment', 'SalesOrderAmendmentWidget') with {
+                            data: {
+                                form: data.form,
+                                order: data.order,
+                                hasConfirmationPopup: data.hasConfirmationPopup,
+                            },
+                            embed: {
+                                buttonClasses: embed.buttonClasses,
+                            },
+                        } only %}
+                            {% block content %}
+                                {% set buttonClass = embed.buttonClasses %}
+
+                                {{ parent() }}
+                            {% endblock %}
+                        {% endembed %}
                     {% endblock %}
                 {% endwidget %}
             {% endblock %}
@@ -134,7 +163,7 @@
     {% block buttonsStateHandler %}
         {% include molecule('order-buttons-disable-toggler', 'SalesReturnPage') ignore missing with {
             attributes: {
-                'trigger-class-name': 'js-customer-reorder-form__selection',
+                'trigger-class-name': 'js-cart-reorder-form__selection',
                 'target-class-name': config.jsName ~ '__target-state-toggler',
                 'is-disabled-when-checked': 'false',
                 'disabled-class-name': 'button--disabled',
