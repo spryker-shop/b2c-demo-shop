@@ -46,6 +46,7 @@ use Spryker\Glue\WarehouseOauthBackendApi\Plugin\GlueBackendApiApplication\Wareh
 use Spryker\Glue\WarehouseUsersBackendApi\Plugin\GlueBackendApiApplication\WarehouseUserAssignmentsBackendResourcePlugin;
 use Spryker\Zed\Propel\Communication\Plugin\Application\PropelApplicationPlugin;
 use Spryker\Zed\Twig\Communication\Plugin\Application\TwigApplicationPlugin;
+use SprykerEco\Glue\AuthorizationPickingAppBackendApi\Plugin\GlueApplication\AuthorizeResource;
 
 class GlueBackendApiApplicationDependencyProvider extends SprykerGlueBackendApiApplicationDependencyProvider
 {
@@ -128,6 +129,7 @@ class GlueBackendApiApplicationDependencyProvider extends SprykerGlueBackendApiA
             new PickingListsBackendResourcePlugin(),
             new PickingListStartPickingBackendResourcePlugin(),
             new PickingListItemsBackendResourcePlugin(),
+            new AuthorizeResource(),
             new WarehouseUserAssignmentsBackendResourcePlugin(),
             new MultiFactorAuthBackendResourcePlugin(),
             new MultiFactorAuthTriggerBackendResourcePlugin(),
