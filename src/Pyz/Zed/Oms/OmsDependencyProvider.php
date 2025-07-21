@@ -22,6 +22,7 @@ use Spryker\Zed\Oms\Communication\Plugin\Oms\ReservationHandler\ReservationVersi
 use Spryker\Zed\Oms\Dependency\Plugin\Command\CommandCollectionInterface;
 use Spryker\Zed\Oms\Dependency\Plugin\Condition\ConditionCollectionInterface;
 use Spryker\Zed\Oms\OmsDependencyProvider as SprykerOmsDependencyProvider;
+use Spryker\Zed\OrderAmendmentExample\Communication\Plugin\Oms\ApplyOrderAmendmentDraftCommandByOrderPlugin;
 use Spryker\Zed\PickingList\Communication\Plugin\Oms\GeneratePickingListsCommandByOrderPlugin;
 use Spryker\Zed\PickingList\Communication\Plugin\Oms\IsPickingFinishedConditionPlugin;
 use Spryker\Zed\PickingList\Communication\Plugin\Oms\IsPickingListGenerationFinishedConditionPlugin;
@@ -29,6 +30,11 @@ use Spryker\Zed\PickingList\Communication\Plugin\Oms\IsPickingStartedConditionPl
 use Spryker\Zed\ProductBundle\Communication\Plugin\Oms\ProductBundleReservationPostSaveTerminationAwareStrategyPlugin;
 use Spryker\Zed\Refund\Communication\Plugin\Oms\RefundCommandPlugin;
 use Spryker\Zed\SalesInvoice\Communication\Plugin\Oms\GenerateOrderInvoiceCommandPlugin;
+use Spryker\Zed\SalesOrderAmendmentOms\Communication\Plugin\Oms\DeleteOrderAmendmentQuoteCommandByOrderPlugin;
+use Spryker\Zed\SalesOrderAmendmentOms\Communication\Plugin\Oms\IsOrderAmendmentDraftSuccessfullyAppliedConditionPlugin;
+use Spryker\Zed\SalesOrderAmendmentOms\Communication\Plugin\Oms\NotifyOrderAmendmentAppliedCommandPlugin;
+use Spryker\Zed\SalesOrderAmendmentOms\Communication\Plugin\Oms\NotifyOrderAmendmentFailedCommandPlugin;
+use Spryker\Zed\SalesOrderAmendmentOms\Communication\Plugin\Oms\UpdateDeletedItemReservationCommandByOrderPlugin;
 use Spryker\Zed\SalesPayment\Communication\Plugin\Oms\SendCancelPaymentMessageCommandPlugin;
 use Spryker\Zed\SalesPayment\Communication\Plugin\Oms\SendCapturePaymentMessageCommandPlugin;
 use Spryker\Zed\SalesPayment\Communication\Plugin\Oms\SendRefundPaymentMessageCommandPlugin;
@@ -109,6 +115,11 @@ class OmsDependencyProvider extends SprykerOmsDependencyProvider
             $commandCollection->add(new SendRefundPaymentMessageCommandPlugin(), 'Payment/Refund');
             $commandCollection->add(new SendCancelPaymentMessageCommandPlugin(), 'Payment/Cancel');
             $commandCollection->add(new RefundCommandPlugin(), 'Payment/Refund/Confirm');
+            $commandCollection->add(new UpdateDeletedItemReservationCommandByOrderPlugin(), 'OrderAmendment/UnreserveDeletedItems');
+            $commandCollection->add(new DeleteOrderAmendmentQuoteCommandByOrderPlugin(), 'OrderAmendment/StartGracePeriod');
+            $commandCollection->add(new ApplyOrderAmendmentDraftCommandByOrderPlugin(), 'OrderAmendmentAsync/ApplyOrderAmendmentDraft');
+            $commandCollection->add(new NotifyOrderAmendmentAppliedCommandPlugin(), 'OrderAmendmentAsync/NotifyOrderAmendmentApplied');
+            $commandCollection->add(new NotifyOrderAmendmentFailedCommandPlugin(), 'OrderAmendmentAsync/NotifyOrderAmendmentFailed');
 
             return $commandCollection;
         });
@@ -128,6 +139,7 @@ class OmsDependencyProvider extends SprykerOmsDependencyProvider
             $conditionCollection->add(new IsPickingListGenerationFinishedConditionPlugin(), 'PickingList/isPickingListGenerationFinished');
             $conditionCollection->add(new IsPickingStartedConditionPlugin(), 'PickingList/isPickingStarted');
             $conditionCollection->add(new IsPickingFinishedConditionPlugin(), 'PickingList/isPickingFinished');
+            $conditionCollection->add(new IsOrderAmendmentDraftSuccessfullyAppliedConditionPlugin(), 'DummyOrderAmendmentAsync/IsSuccessfullyApplied');
 
             return $conditionCollection;
         });

@@ -9,43 +9,13 @@ declare(strict_types = 1);
 
 namespace Pyz\Yves\CustomerPage;
 
+use Spryker\Yves\MultiFactorAuth\Plugin\AuthenticationHandler\Customer\CustomerMultiFactorAuthenticationHandlerPlugin;
 use SprykerShop\Yves\AgentPage\Plugin\Security\UpdateAgentTokenAfterCustomerAuthenticationSuccessPlugin;
 use SprykerShop\Yves\CustomerPage\CustomerPageDependencyProvider as SprykerShopCustomerPageDependencyProvider;
-use SprykerShop\Yves\CustomerReorderWidget\Plugin\CustomerPage\CustomerReorderWidgetPlugin;
 use SprykerShop\Yves\SessionAgentValidation\Plugin\CustomerPage\UpdateAgentSessionAfterCustomerAuthenticationSuccessPlugin;
 
 class CustomerPageDependencyProvider extends SprykerShopCustomerPageDependencyProvider
 {
-    /**
-     * @return array<string>
-     */
-    protected function getCustomerOverviewWidgetPlugins(): array
-    {
-        return [
-            CustomerReorderWidgetPlugin::class,
-        ];
-    }
-
-    /**
-     * @return array<string>
-     */
-    protected function getCustomerOrderListWidgetPlugins(): array
-    {
-        return [
-            CustomerReorderWidgetPlugin::class,
-        ];
-    }
-
-    /**
-     * @return array<string>
-     */
-    protected function getCustomerOrderViewWidgetPlugins(): array
-    {
-        return [
-            CustomerReorderWidgetPlugin::class,
-        ];
-    }
-
     /**
      * @return list<\SprykerShop\Yves\CustomerPageExtension\Dependency\Plugin\AfterCustomerAuthenticationSuccessPluginInterface>
      */
@@ -54,6 +24,16 @@ class CustomerPageDependencyProvider extends SprykerShopCustomerPageDependencyPr
         return [
             new UpdateAgentTokenAfterCustomerAuthenticationSuccessPlugin(),
             new UpdateAgentSessionAfterCustomerAuthenticationSuccessPlugin(),
+        ];
+    }
+
+    /**
+     * @return array<\SprykerShop\Yves\CustomerPageExtension\Dependency\Plugin\AuthenticationHandlerPluginInterface>
+     */
+    protected function getCustomerAuthenticationHandlerPlugins(): array
+    {
+        return [
+            new CustomerMultiFactorAuthenticationHandlerPlugin(),
         ];
     }
 }

@@ -12,7 +12,13 @@
 {% block content %}
     <div class="page-layout-checkout success-page">
         <h1 class="title title--checkout-success title--with-border">{{data.title}}</h1>
-        <p class="success-page__text">{{data.message}}</p>
+        <p class="success-page__text">
+            {% if data.quote %}
+                {% widget 'UpdateOrderCheckoutSuccessTitleWidget' args [data.message, data.quote] only %}{% endwidget %}
+            {% else %}
+                {{ data.message }}
+            {% endif %}
+        </p>
 
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
             <a class="link link--darkest link--without-underline" href="{{ url('customer/overview') }}">{{ 'checkout.step.success.link' | trans }}

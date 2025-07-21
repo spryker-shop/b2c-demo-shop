@@ -24,11 +24,15 @@ use Spryker\Zed\Kernel\Container;
 use Spryker\Zed\Mail\Business\Model\Provider\MailProviderCollectionAddInterface;
 use Spryker\Zed\Mail\MailConfig;
 use Spryker\Zed\Mail\MailDependencyProvider as SprykerMailDependencyProvider;
+use Spryker\Zed\MultiFactorAuth\Communication\Plugin\Mail\Customer\CustomerEmailMultiFactorAuthMailTypeBuilderPlugin;
+use Spryker\Zed\MultiFactorAuth\Communication\Plugin\Mail\User\UserEmailMultiFactorAuthMailTypeBuilderPlugin;
 use Spryker\Zed\Newsletter\Communication\Plugin\Mail\NewsletterSubscribedMailTypeBuilderPlugin;
 use Spryker\Zed\Newsletter\Communication\Plugin\Mail\NewsletterUnsubscribedMailTypeBuilderPlugin;
 use Spryker\Zed\Oms\Communication\Plugin\Mail\OrderConfirmationMailTypeBuilderPlugin;
 use Spryker\Zed\Oms\Communication\Plugin\Mail\OrderShippedMailTypeBuilderPlugin;
 use Spryker\Zed\SalesInvoice\Communication\Plugin\Mail\OrderInvoiceMailTypeBuilderPlugin;
+use Spryker\Zed\SalesOrderAmendmentOms\Communication\Plugin\Mail\NotifyOrderAmendmentAppliedMailTypeBuilderPlugin;
+use Spryker\Zed\SalesOrderAmendmentOms\Communication\Plugin\Mail\NotifyOrderAmendmentFailedMailTypeBuilderPlugin;
 use Spryker\Zed\SymfonyMailer\Communication\Plugin\Mail\SymfonyMailerProviderPlugin;
 use Spryker\Zed\UserPasswordResetMail\Communication\Plugin\Mail\UserPasswordResetMailTypeBuilderPlugin;
 
@@ -90,6 +94,10 @@ class MailDependencyProvider extends SprykerMailDependencyProvider
             new OrderInvoiceMailTypeBuilderPlugin(),
             new CustomerEmailChangeVerificationMailTypePlugin(),
             new CustomerEmailChangeNotificationMailTypePlugin(),
+            new CustomerEmailMultiFactorAuthMailTypeBuilderPlugin(),
+            new UserEmailMultiFactorAuthMailTypeBuilderPlugin(),
+            new NotifyOrderAmendmentAppliedMailTypeBuilderPlugin(),
+            new NotifyOrderAmendmentFailedMailTypeBuilderPlugin(),
         ];
     }
 }

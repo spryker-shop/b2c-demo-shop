@@ -41,11 +41,16 @@
 
             <div class="{{ component.renderClass(config.name ~ '__content-wrapper', modifiers) }} col">
                 <div class="{{ component.renderClass(config.name ~ '__content', modifiers) }}">
-                    <div class="grid grid--justify grid--middle">
+                    <div class="grid grid--justify grid--middle" data-qa="product-item-info">
                         {% block title %}
-                            <a href="{{ data.productItem.url }}" class="{{ component.renderClass(config.name ~ '__title', modifiers) }} col col--lg-8 col--sm-12">
-                                {{ data.productItem.name }}
-                            </a>
+                            {% set quote = data.cart is defined and data.cart is not empty ? data.cart : null %}
+                            {% if data.productItem.url and widgetGlobalExists('OrderAmendmentItemLinkWidget') %}
+                                {% widget 'OrderAmendmentItemLinkWidget' args [data.productItem.url, data.productItem.name, quote, data.productItem] only %}{% endwidget %}
+                            {% else %}
+                                <a href="{{ data.productItem.url }}" class="{{ component.renderClass(config.name ~ '__title', modifiers) }} col col--lg-8 col--sm-12">
+                                    {{ data.productItem.name }}
+                                </a>
+                            {% endif %}
                         {% endblock %}
 
                         {% block price %}

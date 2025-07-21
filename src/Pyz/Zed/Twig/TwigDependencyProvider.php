@@ -36,6 +36,7 @@ use Spryker\Zed\Gui\Communication\Plugin\Twig\Buttons\Table\ViewTableButtonTwigP
 use Spryker\Zed\Gui\Communication\Plugin\Twig\FormRuntimeLoaderTwigPlugin;
 use Spryker\Zed\Gui\Communication\Plugin\Twig\GuiFilterTwigPlugin;
 use Spryker\Zed\Gui\Communication\Plugin\Twig\GuiTwigLoaderPlugin;
+use Spryker\Zed\Gui\Communication\Plugin\Twig\NavigationLinkTwigPlugin;
 use Spryker\Zed\Gui\Communication\Plugin\Twig\NumberFormatterTwigPlugin;
 use Spryker\Zed\Gui\Communication\Plugin\Twig\TabsTwigPlugin;
 use Spryker\Zed\Gui\Communication\Plugin\Twig\UrlDecodeTwigPlugin;
@@ -84,6 +85,8 @@ class TwigDependencyProvider extends SprykerTwigDependencyProvider
             new TabsTwigPlugin(),
             new UrlTwigPlugin(),
             new UrlDecodeTwigPlugin(),
+
+            new NavigationLinkTwigPlugin(),
             // navigation buttons
             new ButtonGroupTwigPlugin(),
             new BackActionButtonTwigPlugin(),
@@ -120,5 +123,53 @@ class TwigDependencyProvider extends SprykerTwigDependencyProvider
         }
 
         return $twigLoaderPlugins;
+    }
+
+    /**
+     * @return array<\Spryker\Shared\TwigExtension\Dependency\Plugin\TwigPluginInterface>
+     */
+    protected function getTwigGatewayPlugins(): array
+    {
+        return [
+            new VarDumperTwigPlugin(),
+            new FormTwigPlugin(),
+            new HttpKernelTwigPlugin(),
+            new RoutingTwigPlugin(),
+            new SecurityTwigPlugin(),
+            new RuntimeLoaderTwigPlugin(),
+            new FormRuntimeLoaderTwigPlugin(),
+            new ApplicationTwigPlugin(),
+            new ChartGuiTwigPlugin(),
+            new UserTwigPlugin(),
+            new MoneyTwigPlugin(),
+            new CurrencyTwigPlugin(),
+            new TranslatorTwigPlugin(),
+            new DateTimeFormatterTwigPlugin(),
+            new SchedulerTwigPlugin(),
+            new BarcodeTwigPlugin(),
+            new CmsBlockTwigExtensionPlugin(),
+            new NumberFormatterTwigPlugin(),
+
+            new AssetsPathTwigPlugin(),
+            new TabsTwigPlugin(),
+            new UrlTwigPlugin(),
+            new UrlDecodeTwigPlugin(),
+            // navigation buttons
+            new ButtonGroupTwigPlugin(),
+            new BackActionButtonTwigPlugin(),
+            new CreateActionButtonTwigPlugin(),
+            new ViewActionButtonTwigPlugin(),
+            new EditActionButtonTwigPlugin(),
+            new RemoveActionButtonTwigPlugin(),
+            // table row buttons
+            new EditTableButtonTwigPlugin(),
+            new BackTableButtonTwigPlugin(),
+            new CreateTableButtonTwigPlugin(),
+            new ViewTableButtonTwigPlugin(),
+            new RemoveTableButtonTwigPlugin(),
+            // Form buttons
+            new SubmitButtonTwigPlugin(),
+            new GuiFilterTwigPlugin(),
+        ];
     }
 }

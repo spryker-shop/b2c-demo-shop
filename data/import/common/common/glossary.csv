@@ -755,8 +755,6 @@ customer.data_change_request.email_change.success,"Your email address was succes
 customer.data_change_request.email_change.success,"Ihre E-Mail-Adresse wurde erfolgreich geändert.",de_DE
 customer.data_change_request.email_change.requested,"You requested to change your e-mail to `%newEmail%`. Confirm it by clicking the verification link sent to this address. Please note that the link is valid for %minutes% minutes.",en_US
 customer.data_change_request.email_change.requested,"Sie haben eine Änderung Ihrer E-Mail-Adresse zu `%newEmail%` angefordert. Bestätigen Sie dies, indem Sie auf den Bestätigungslink klicken, der an diese Adresse gesendet wurde. Bitte beachten Sie, dass der Link %minutes% Minuten gültig ist.",de_DE
-customer.data_change_request.email_change.error,"Something went wrong. Please try again.",en_US
-customer.data_change_request.email_change.error,"Etwas ist schief gelaufen. Bitte versuchen Sie es erneut.",de_DE
 customer.data_change_request.invalid,"No valid data change request found.",en_US
 customer.data_change_request.invalid,"Keine gültige Datenänderungsanforderung gefunden.",de_DE
 general.back.button,Back,en_US
@@ -1167,8 +1165,6 @@ mail.customer.restore_password_confirmation.subject,Dein Passwort wurde erfolgre
 mail.customer.restore_password_confirmation.subject,Your password was changed successfully!,en_US
 mail.customer.restore_password_confirmation.text,Dein Passwort wurde erfolgreich geändert!,de_DE
 mail.customer.restore_password_confirmation.text,Your password was changed successfully!,en_US
-mail.customer.customer_email_change_verification.text.second_part ,"Make sure you are logged into the system before clicking the link.",en_US
-mail.customer.customer_email_change_verification.text.second_part ,"Stellen Sie sicher, dass Sie im System angemeldet sind, bevor Sie auf den Link klicken.",de_DE
 mail.newsletter.subscribed.subject,Willkommen beim Spryker Newsletter,de_DE
 mail.newsletter.subscribed.subject,Welcome to Spryker newsletter,en_US
 mail.newsletter.subscribed.text,"Wir freuen uns, dass du dich für unseren Newsletter registriert hast. Wir werden unser bestes geben, um dich mich relevanten und spannenden News und Updates zu versorgen.",de_DE
@@ -2812,6 +2808,10 @@ oms.state.reservation-cancelled,Reservation Cancelled,en_US
 oms.state.reservation-cancelled,Reservation Cancelled,de_DE
 oms.state.reservation-cancellation-pending,Reservation Cancellation Pending,en_US
 oms.state.reservation-cancellation-pending,Reservation Cancellation Pending,de_DE
+oms.state.order-amendment-draft-pending,Editing in Progress,en_US
+oms.state.order-amendment-draft-pending,Bestelländerung in Bearbeitung,de_DE
+oms.state.order-amendment-draft-applied,Editing in Progress,en_US
+oms.state.order-amendment-draft-applied,Bestelländerung in Bearbeitung,de_DE
 return.create_return.validation.returnable_items_error,Return cannot be created as it contains non-returnable items,en_US
 return.create_return.validation.returnable_items_error,"Retoure kann nicht angestellt werden, weil sie die Artikel beinhaltet, die nicht retourniert werden können",de_DE
 return.create_return.validation.store_error,Return cannot be created - a wrong store has been selected,en_US
@@ -3104,8 +3104,54 @@ payment_app_widget.error.payment_failed,Payment failed,en_US
 payment_app_widget.error.payment_failed,Zahlung fehlgeschlagen,de_DE
 payment_app_widget.error.incorrect_quote,"Quote not found, session may have expired",en_US
 payment_app_widget.error.incorrect_quote,"Angebot nicht gefunden, Sitzung ist möglicherweise abgelaufen",de_DE
+mail.multi_factor_auth.email.text,"To proceed with your request, please use the following verification code: %code%. If you did not request this code, please ignore this email.",en_US
+mail.multi_factor_auth.email.text,"Um mit Ihrer Anfrage fortzufahren, verwenden Sie bitte den folgenden Bestätigungscode: %code%. Wenn Sie diesen Code nicht angefordert haben, ignorieren Sie bitte diese E-Mail.",de_DE
 customer.change_customer_email_mail_sent,"Almost there! We send you an email to validate your email address. Please confirm it to be able to log in.",en_US
 customer.change_customer_email_mail_sent,"Fast dort! Wir senden Ihnen eine E-Mail, um Ihre E-Mail-Adresse zu bestätigen. Bitte bestätigen Sie dies, um sich anmelden zu können.",de_DE
+mail.multi_factor_auth.email.subject,"Verification Code for Secure Access",en_US
+mail.multi_factor_auth.email.subject,"Bestätigungscode für sicheren Zugriff",de_DE
+multi_factor_auth.multi_factor_auth.list.title,"Set up Multi-Factor Authentication",en_US
+multi_factor_auth.multi_factor_auth.list.title,"Multi-Faktor-Authentifizierung einrichten",de_DE
+multi_factor_auth.multi_factor_auth.title,"Multi-Factor Authentication",en_US
+multi_factor_auth.multi_factor_auth.title,"Multi-Faktor-Authentifizierung",de_DE
+multi_factor_auth.error.invalid_code,"Invalid multi-factor authentication code. You have %remainingAttempts% attempt(s) left.",en_US
+multi_factor_auth.error.invalid_code,"Ungültiger Multi-Faktor-Authentifizierungscode. Sie haben %remainingAttempts% Versuch(e) verbleiben.",de_DE
+multi_factor_auth.error.attempts_exceeded,"You have exceeded the number of allowed attempts. Please try again after the page has been refreshed.",en_US
+multi_factor_auth.error.attempts_exceeded,"Sie haben die Anzahl der zulässigen Versuche überschritten. Bitte versuchen Sie es erneut, nachdem die Seite aktualisiert wurde.",de_DE
+multi_factor_auth.error.expired_code,"The multi-factor authentication code has expired. Please try again.",en_US
+multi_factor_auth.error.expired_code,"Der Multi-Faktor-Authentifizierungscode ist abgelaufen. Bitte versuchen Sie es erneut.",de_DE
+multi_factor_auth.error.authentication_method_not_selected,"Unable to proceed. A multi-factor authentication method must be selected. Please refresh the page and try again or contact support if the problem persists.",en_US
+multi_factor_auth.error.authentication_method_not_selected,"Kann nicht fortgesetzt werden. Es muss eine Multi-Faktor-Authentifizierungsmethode ausgewählt werden. Bitte aktualisieren Sie die Seite und versuchen Sie es erneut oder wenden Sie sich an den Support, wenn das Problem weiterhin besteht.",de_DE
+multi_factor_auth.error.corrupted_code,"The provided code is empty or invalid. Please try again.",en_US
+multi_factor_auth.error.corrupted_code,"Der angegebene Code ist leer oder ungültig. Bitte versuchen Sie es erneut.",de_DE
+multi_factor_auth.method.select,"Select Authentication Method",en_US
+multi_factor_auth.method.select,"Authentifizierungsmethode auswählen",de_DE
+multi_factor_auth.code.validation,"Enter Authentication Code",en_US
+multi_factor_auth.code.validation,"Authentifizierungscode eingeben",de_DE
+multi_factor_auth.enter_code_for_method,"We sent the authentication code to your %type%. Type it below to continue.",en_US
+multi_factor_auth.enter_code_for_method,"Wir haben Ihnen den Authentifizierungscode per %type% gesendet. Geben Sie ihn unten ein, um fortzufahren.",de_DE
+multi_factor_auth.access_denied,"Access is strictly restricted until multi-factor authentication verification is successfully completed. Please ensure that JavaScript is enabled in your browser, refresh the page, and try again. If the problem persists, you may need to complete the multi-factor authentication process again.",en_US
+multi_factor_auth.access_denied,"Zugriff ist bis zur erfolgreichen Vollziehung der Multi-Faktor-Authentifizierung eingeschränkt. Bitte stellen Sie sicher, dass JavaScript in Ihrem Browser aktiviert ist, die Seite aktualisieren und erneut versuchen. Wenn das Problem weiterhin besteht, sollten Sie die Multi-Faktor-Authentifizierungprozess erneut abschließen.",de_DE
+multi_factor_auth.activation.success,"The multi-factor authentication has been activated.",en_US
+multi_factor_auth.activation.success,"Die Multi-Faktor-Authentifizierung wurde aktiviert.",de_DE
+multi_factor_auth.deactivation.success,"The multi-factor authentication has been deactivated.",en_US
+multi_factor_auth.deactivation.success,"Die Multi-Faktor-Authentifizierung wurde deaktiviert.",de_DE
+multi_factor_auth.activation.error,"The multi-factor authentication could not be activated.",en_US
+multi_factor_auth.activation.error,"Die Multi-Faktor-Authentifizierung konnte nicht aktiviert werden.",de_DE
+multi_factor_auth.deactivation.error,"The multi-factor authentication could not be deactivated.",en_US
+multi_factor_auth.deactivation.error,"Die Multi-Faktor-Authentifizierung konnte nicht deaktiviert werden.",de_DE
+multi_factor_auth.selection.error.required,"Please choose how you would like to verify your identity.",en_US
+multi_factor_auth.selection.error.required,"Bitte wählen Sie aus, wie Sie Ihre Identität überprüfen möchten.",de_DE
+multi_factor_auth.continue,"Continue",en_US
+multi_factor_auth.continue,"Fortfahren",de_DE
+multi_factor_auth.verify_code,"Verify Code",en_US
+multi_factor_auth.verify_code,"Code überprüfen",de_DE
+multi_factor_auth.required_options,"You must choose one option to continue!",en_US
+multi_factor_auth.required_options,"Sie müssen eine Option auswählen, um fortzufahren!",de_DE
+multi_factor_auth.invalid_csrf_token,"Invalid CSRF token.",en_US
+multi_factor_auth.invalid_csrf_token,"Ungültiges CSRF-Token.",de_DE
+multi_factor_auth.note_mfa_affects,"Note, any changes made here will also affect how MFA works in other environments like the Back Office, since your accounts are linked.",en_US
+multi_factor_auth.note_mfa_affects,"Hinweis: Alle hier vorgenommenen Änderungen wirken sich auch darauf aus, wie MFA in anderen Umgebungen wie dem Back Office funktioniert, da Ihre Konten verknüpft sind.",de_DE
 tax_app.vertex.tax-number-country-blocked,Dieses Land ist in den Einstellungen blockiert.,de_DE
 tax_app.vertex.tax-number-validation-not-available,Die Steuernummer konnte nicht durch den Dienst überprüft werden.,de_DE
 tax_app.vertex.tax-number-ignored,"Die Steuernummer wurde ignoriert, da Nummern für diese Region, dieses Land oder diesen Verkäufer blockiert wurden.",de_DE
@@ -3140,3 +3186,99 @@ tax_app.vertex.request-failed,Request to Vertex API failed.,en_US
 tax_app.vertex.request-failed,Anfrage an die Vertex-API fehlgeschlagen.,de_DE
 tax_app.vertex.invalid-credentials,Invalid credentials.,en_US
 tax_app.vertex.invalid-credentials,Ungültige Anmeldeinformationen.,de_DE
+cart_reorder.validation.order_not_found,Order not found.,en_US
+cart_reorder.validation.order_not_found,Bestellung nicht gefunden.,de_DE
+cart_reorder.validation.quote_not_provided,Quote not provided.,en_US
+cart_reorder.validation.quote_not_provided,Angebot nicht bereitgestellt.,de_DE
+sales_configured_bundle.success.items_added_to_cart_as_individual_products,"Please notice: Items from the Configured Bundle were added to the Cart as individual products.",en_US
+sales_configured_bundle.success.items_added_to_cart_as_individual_products,"Bitte beachten: Artikel aus dem konfigurierbaren Bündel wurden als einzelne Produkte in den Warenkorb gelegt.",de_DE
+cart_reorder_page.reorder_all,Reorder all,en_US
+cart_reorder_page.reorder_all,Alle Artikel Nachbestellen,de_DE
+cart_reorder_page.reorder,Reorder,en_US
+cart_reorder_page.reorder,Nachbestellen,de_DE
+cart_reorder_page.reorder_selected,Reorder selected items,en_US
+cart_reorder_page.reorder_selected,Ausgewählte Artikel Nachbestellen,de_DE
+cart_reorder.pre_add_to_cart.inactive_product_option_item_removed,Inactive item %sku% was removed from your shopping cart.,en_US
+cart_reorder.pre_add_to_cart.inactive_product_option_item_removed,Der inaktive Artikel %sku% wurde aus Ihrem Warenkorb entfernt.,de_DE
+sales_order_amendment_oms.validation.order_not_amendable,The order cannot be amended.,en_US
+sales_order_amendment_oms.validation.order_not_amendable,Die Bestellung kann nicht geändert werden.,de_DE
+sales_order_amendment_oms.validation.amended_order_does_not_exist,Order with reference %order_reference% could not be found.,en_US
+sales_order_amendment_oms.validation.amended_order_does_not_exist,Bestellnummer %order_reference% konnte nicht gefunden werden.,de_DE
+sales_order_amendment_oms.validation.amendment_order_does_not_exist,Order with reference %order_reference% could not be found.,en_US
+sales_order_amendment_oms.validation.amendment_order_does_not_exist,Bestellnummer %order_reference% konnte nicht gefunden werden.,de_DE
+sales_order_amendment.validation.sales_order_amendment_does_not_exist,Can not update the sales order amendment with ID %uuid%. Please check the ID.,en_US
+sales_order_amendment.validation.sales_order_amendment_does_not_exist,Die Änderung der Bestellung mit der ID %uuid% kann nicht aktualisiert werden. Bitte überprüfen Sie die ID.,de_DE
+sales_order_amendment.validation.order_amendment_duplicated,An amendment is already in progress for this order. Please complete or cancel it before starting a new one.,en_US
+sales_order_amendment.validation.order_amendment_duplicated,"Für diese Bestellung ist bereits eine Änderung in Bearbeitung. Diese Änderung muss abgeschlossen oder storniert sein, damit Sie eine neue Änderung beginnen können.",de_DE
+sales_order_amendment.validation.cart_reorder.order_reference_not_match,"Another order is currently being amended. Complete or cancel the previous amendment before making changes to this order.",en_US
+sales_order_amendment.validation.cart_reorder.order_reference_not_match,"Eine andere Bestellung wird gerade geändert. Diese Änderung muss abgeschlossen oder storniert sein, bevor Sie Änderungen an dieser Bestellung vornehmen können.",de_DE
+oms.state.order-amendment,Editing in Progress,en_US
+oms.state.order-amendment,Bestelländerung in Bearbeitung,de_DE
+sales_order_amendment_oms.validation.order_not_being_amended,This order cannot be edited because the time limit for changes has expired.,en_US
+sales_order_amendment_oms.validation.order_not_being_amended,"Eine Bearbeitung dieser Bestellung ist nicht möglich, da die Änderungsfrist abgelaufen ist.",de_DE
+sales_order_amendment_widget.edit_order,Edit Order,en_US
+sales_order_amendment_widget.edit_order,Bestellung bearbeiten,de_DE
+sales_order_amendment_widget.edit_order,Edit Order,en_US
+sales_order_amendment_widget.edit_order,Bestellung bearbeiten,de_DE
+sales_order_amendment_widget.edit_order.cancel,Cancel,en_US
+sales_order_amendment_widget.edit_order.cancel,Abbrechen,de_DE
+sales_order_amendment_widget.edit_order.warning_message,"Editing this order will replace the items in your current cart with those from the order?",en_US
+sales_order_amendment_widget.edit_order.warning_message,"Durch die Bearbeitung dieser Bestellung werden die Artikel in Ihrem aktuellen Warenkorb durch die Artikel der Bestellung ersetzt?",de_DE
+sales_order_amendment_widget.cancel_order_amendment,Cancel Edit,en_US
+sales_order_amendment_widget.cancel_order_amendment,Bearbeiten abbrechen,de_DE
+sales_order_amendment_widget.amendment_cant_be_canceled,"This order amendment cannot be canceled.",en_US
+sales_order_amendment_widget.amendment_cant_be_canceled,"Diese Bestelländerung kann nicht storniert werden. ",de_DE
+sales_order_amendment_widget.amendment_canceled,"The order amendment has been successfully canceled.",en_US
+sales_order_amendment_widget.amendment_canceled,"Die Bestelländerung wurde erfolgreich storniert.",de_DE
+sales_order_amendment.validation.cart.cart_cant_be_amended,"Current cart cannot be amended.",en_US
+sales_order_amendment.validation.cart.cart_cant_be_amended,"Der aktuelle Warenkorb kann nicht geändert werden.",de_DE
+oms.state.order-amendment,Editing in Progress,en_US
+oms.state.order-amendment,Bestelländerung in Bearbeitung,de_DE
+sales_order_amendment_oms.validation.order_not_being_amended,This order cannot be edited because the time limit for changes has expired.,en_US
+sales_order_amendment_oms.validation.order_not_being_amended,"Eine Bearbeitung dieser Bestellung ist nicht möglich, da die Änderungsfrist abgelaufen ist.",de_DE
+sales_order_amendment.pre_check.cannot_change_currency,"Currency cannot be changed during order edit.",en_US
+sales_order_amendment.pre_check.cannot_change_currency,"Währung kann während der Bearbeitung einer Bestellung nicht geändert werden.",de_DE
+sales_order_amendment.pre_check.cannot_change_price_mode,"Price mode cannot be changed during order edit.",en_US
+sales_order_amendment.pre_check.cannot_change_price_mode,"Preismodus kann während der Bearbeitung einer Bestellung nicht geändert werden.",de_DE
+store.cart_reorder.error.store_mismatch,"This order was placed in a different store. This action cannot be performed.",en_US
+store.cart_reorder.error.store_mismatch,"Diese Bestellung wurde in einem anderen Store getätigt. Aktion kann nicht ausgeführt werden.",de_DE
+sales_order_amendment.quote_request.validation.error.forbidden,"Quote requests are unavailable during order amendment.",en_US
+sales_order_amendment.quote_request.validation.error.forbidden,"Angebotsanfragen sind während der Bestelländerung nicht verfügbar.",de_DE
+sales_order_amendment.order_amendment_after_rfq.validation.error.forbidden,"Amendments are not allowed for orders created from a quote.",en_US
+sales_order_amendment.order_amendment_after_rfq.validation.error.forbidden,"Für Bestellungen, die aus einem Angebot erstellt wurden, sind keine Änderungen zulässig.",de_DE
+sales_order_amendment_widget.summary_step.update.order,Update order,en_US
+sales_order_amendment_widget.summary_step.update.order,Bestellung aktualisieren,de_DE
+sales_order_amendment_widget.success_step.update.success.title,Your order has been updated successfully!,en_US
+sales_order_amendment_widget.success_step.update.success.title,Ihre Bestellung wurde erfolgreich aktualisiert!,de_DE
+sales_order_amendment_widget.edit_order.confirm,"Clear Cart & Continue",en_US
+sales_order_amendment_widget.edit_order.confirm,"Leeren Warenkorb & Fortfahren",de_DE
+sales_order_amendment_oms.mail.order_amendment_applied.subject,Your order has been successfully updated,en_US
+sales_order_amendment_oms.mail.order_amendment_applied.subject,Ihre Bestellung wurde erfolgreich aktualisiert,de_DE
+sales_order_amendment_oms.mail.order_amendment_applied.salutation,Hello,en_US
+sales_order_amendment_oms.mail.order_amendment_applied.salutation,Hallo,de_DE
+sales_order_amendment_oms.mail.order_amendment_applied.title,Your order has been successfully updated,en_US
+sales_order_amendment_oms.mail.order_amendment_applied.title,Ihre Bestellung wurde erfolgreich aktualisiert,de_DE
+sales_order_amendment_oms.mail.order_amendment_applied.text.line_1,Thank you for shopping at Spryker Shop!,en_US
+sales_order_amendment_oms.mail.order_amendment_applied.text.line_1,Danke für deine Bestellung beim Spryker Shop!,de_DE
+sales_order_amendment_oms.mail.order_amendment_applied.text.line_2,We are writing to let you know that your order has been successfully updated as requested. You will receive a shipping confirmation by e-mail as soon as your updated order has been sent.,en_US
+sales_order_amendment_oms.mail.order_amendment_applied.text.line_2,"Wir möchten Sie darüber informieren, dass Ihre Bestellung wie gewünscht erfolgreich aktualisiert wurde. Sobald Ihre aktualisierte Bestellung versendet wurde, erhalten Sie eine Versandbestätigung per E-Mail.",de_DE
+sales_order_amendment_oms.mail.order_amendment_applied.text.line_3,"If you change your mind, you can return the items within 14 days after delivery. We hope you enjoy your purchase!",en_US
+sales_order_amendment_oms.mail.order_amendment_applied.text.line_3,"Falls Sie es sich anders überlegen, können Sie die Artikel innerhalb von 14 Tagen nach Lieferung zurücksenden. Wir wünschen Ihnen viel Freude mit Ihrem Einkauf!",de_DE
+sales_order_amendment_oms.mail.order_amendment_failed.subject,Order edit could not be saved,en_US
+sales_order_amendment_oms.mail.order_amendment_failed.subject,Bestelländerung konnte nicht gespeichert werden,de_DE
+sales_order_amendment_oms.mail.order_amendment_failed.salutation,Hello,en_US
+sales_order_amendment_oms.mail.order_amendment_failed.salutation,Hallo,de_DE
+sales_order_amendment_oms.mail.order_amendment_failed.title,Order edit could not be saved,en_US
+sales_order_amendment_oms.mail.order_amendment_failed.title,Bestelländerung konnte nicht gespeichert werden,de_DE
+sales_order_amendment_oms.mail.order_amendment_failed.text.line_1,Thank you for shopping at Spryker Shop!,en_US
+sales_order_amendment_oms.mail.order_amendment_failed.text.line_1,Danke für deine Bestellung beim Spryker Shop!,de_DE
+sales_order_amendment_oms.mail.order_amendment_failed.text.line_2,"We are writing to let you know that we tried to update your order as requested. Unfortunately, the changes could not be saved due to the following error:",en_US
+sales_order_amendment_oms.mail.order_amendment_failed.text.line_2,"Wir möchten Sie darüber informieren, dass wir versucht haben, Ihre Bestellung wie gewünscht zu aktualisieren. Leider konnten die Änderungen aufgrund des folgenden Fehlers nicht gespeichert werden:",de_DE
+sales_order_amendment_oms.mail.order_amendment_failed.text.line_3,"Your original order remains unchanged. If you need help or would like to try again, please contact our customer service team. We’re happy to assist you.",en_US
+sales_order_amendment_oms.mail.order_amendment_failed.text.line_3,"Ihre ursprüngliche Bestellung bleibt unverändert. Wenn Sie Hilfe benötigen oder es erneut versuchen möchten, wenden Sie sich bitte an unser Kundenservice — wir helfen Ihnen gerne weiter.",de_DE
+sales_order_amendment_oms.mail.footer.text.line_1,Viele Grüße,de_DE
+sales_order_amendment_oms.mail.footer.text.line_1,Have a great day!,en_US
+sales_order_amendment_oms.mail.footer.text.line_2,Dein Spryker Shop,de_DE
+sales_order_amendment_oms.mail.footer.text.line_2,Your Spryker Shop,en_US
+sales_order_amendment_oms.error.apply_order_amendment_draft_failed,We could not process your order edit.,en_US
+sales_order_amendment_oms.error.apply_order_amendment_draft_failed,Ihre Bestelländerung konnte nicht bearbeitet werden.,de_DE

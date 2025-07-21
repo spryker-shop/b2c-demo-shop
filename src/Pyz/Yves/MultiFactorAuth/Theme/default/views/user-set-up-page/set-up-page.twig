@@ -1,0 +1,79 @@
+{% extends template('page-layout-agent', 'AgentPage') %}
+
+{% define data = {
+    title: 'multi_factor_auth.multi_factor_auth.list.title' | trans,
+    activePage: 'setMultiFactorAuth',
+    multiFactorAuthCollection: _view.multiFactorAuthCollection ?? null,
+    error: _view.error ?? null,
+    csrf_token_activate: _view.csrf_token_activate,
+    csrf_token_deactivate: _view.csrf_token_deactivate,
+} %}
+
+{% block breadcrumbs %}
+    {% include molecule('breadcrumb') with {
+        data: {
+            steps: [
+                {
+                    label: 'agent.account.page_title' | trans,
+                    url: path('agent/overview'),
+                },
+                {
+                    label: 'multi_factor_auth.multi_factor_auth.list.title' | trans,
+                },
+            ],
+        },
+    } only %}
+{% endblock %}
+
+{% block customerContent %}
+    {% if data.error %}
+        <div class="alert alert-danger" role="alert">
+            {{ data.error }}
+        </div>
+    {% endif %}
+
+    <div class="title alert">{{ 'multi_factor_auth.note_mfa_affects' | trans }}</div>
+
+    {% if data.multiFactorAuthCollection %}
+        {% for method in data.multiFactorAuthCollection.multiFactorAuthTypes %}
+            <div class="form box" data-qa="mfa-type-section">
+                <div class="title--h6">{{ method.type | capitalize }}</div>
+                {% block addForm %}
+                    {% if not method.status %}
+                        {% set formName = 'activateForm' %}
+                        {% set path = path('agent/multiFactorAuth/activate', { type: method.type }) %}
+                        {% set flowType = 'is_activation' %}
+                        {% set buttonName = 'Activate' %}
+                        {% set buttonClass = 'button--success' %}
+                        {% set csrfToken = data.csrf_token_activate %}
+                    {% else %}
+                        {% set formName = 'deactivateForm' %}
+                        {% set path = path('agent/multiFactorAuth/deactivate', { type: method.type }) %}
+                        {% set flowType = 'is_deactivation' %}
+                        {% set buttonName = 'Deactivate' %}
+                        {% set buttonClass = 'button--alert' %}
+                        {% set csrfToken = data.csrf_token_deactivate %}
+                    {% endif %}
+
+                    {% set formClass = formName ~ loop.index0 %}
+                    {% set url = "/multi-factor-auth/get-user-enabled-types?#{flowType}=true&type_to_set_up=#{method.type}" %}
+
+                    <form name="{{ formName }}" class="col-sm-push-2 col-sm-10 {{ formClass }}" method="post" action="{{ path }}">
+                        <input type="hidden" name="_csrf_token" value="{{ csrfToken }}">
+                        <button type="submit" class="form__action button {{ buttonClass }}">{{ buttonName }}</button>
+                    </form>
+
+                    {% widget 'MultiFactorAuthHandlerWidget' with {
+                        data: {
+                            id: formName ~ loop.index0,
+                            url: url,
+                            formSelector: '.' ~ formClass,
+                            isJsEnabledHandler: 'true'
+                        }
+                    } only %}
+                    {% endwidget %}
+                {% endblock %}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endblock %}
