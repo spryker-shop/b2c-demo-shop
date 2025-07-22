@@ -19,7 +19,7 @@
 
 {% block actionContent %}
     <input type="hidden" name="id-wishlist-item" value="{{ idWishlistItem }}">
-                
+
     {% if widgetGlobalExists('MerchantProductOfferWidget') %}
         {% include molecule('wishlist-item-product-offer', 'MerchantProductOfferWidget') with {
             data: {
@@ -80,7 +80,7 @@
                 {% endif %}
                 {% set imageUrl = item.images.0.externalUrlSmall ?? '' %}
                 {% import _self as macros %}
-                
+
                 <tr class="table__tr table__tr--with-border">
                     <td>
                         {{ _self.image(imageUrl, item.name, 'is-hidden-sm-md', ['thumbnail']) }}
@@ -90,7 +90,7 @@
                             {{ _self.image(imageUrl, item.name, 'is-hidden-lg-xl') }}
 
                             <ul class="menu menu--inline menu--middle">
-                                <li><strong><a href="{{ item.url }}">{{ item.name }}</a></strong></li>
+                                <li><strong><a href="{{ functionExists('generatePath') ? generatePath(item.url) : item.url }}">{{ item.name }}</a></strong></li>
                                 <li>
                                     {% if widgetGlobalExists('SoldByMerchantWidget') %}
                                         {% widget 'SoldByMerchantWidget' args [item] only %}{% endwidget %}
