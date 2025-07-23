@@ -21,7 +21,7 @@
         {% endif %}
         {% if isAction %}
             <div class="{{ config.name }}__item">
-                <a class="{{ config.name }}__link" href="{{ functionExists('generatePath') ? generatePath(item.url) : item.url }}" target="{{ item.target ?? '_self' }}">
+                <a class="{{ config.name }}__link" href="{{ item.url }}" target="{{ item.target ?? '_self' }}">
                     {{- item.title -}}
                 </a>
             </div>
