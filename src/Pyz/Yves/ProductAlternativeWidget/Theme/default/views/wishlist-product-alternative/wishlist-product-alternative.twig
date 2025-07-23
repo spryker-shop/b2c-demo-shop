@@ -70,7 +70,7 @@
                                     {{ _self.image(imageUrl, item.name, 'is-hidden-lg-xl') }}
 
                                     <ul class="menu menu--inline menu--middle">
-                                        <li><strong><a href="{{ functionExists('generatePath') ? generatePath(item.url) : item.url }}">{{ item.name }}</a></strong></li>
+                                        <li><strong><a href="{{ item.url }}">{{ item.name }}</a></strong></li>
                                         <li>{{ item.sku }}</li>
                                         {% for attribute in item.superAttributesDefinition %}
                                             {% if item.attributes[attribute] is defined %}
