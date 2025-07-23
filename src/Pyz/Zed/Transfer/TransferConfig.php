@@ -70,4 +70,12 @@ class TransferConfig extends SprykerTransferConfig
     {
         return TransferConstants::PROPERTY_DESCRIPTION_MERGE_STRATEGY_GET_FIRST;
     }
+
+    /**
+     * @return bool
+     */
+    public function isTransferSuffixCheckStrict(): bool
+    {
+        return true;
+    }
 }
