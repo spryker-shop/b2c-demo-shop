@@ -132,6 +132,7 @@ use Spryker\Zed\MessageBrokerAws\MessageBrokerAwsConfig;
 use Spryker\Zed\OauthAuth0\OauthAuth0Config;
 use Spryker\Zed\Payment\PaymentConfig;
 use Spryker\Zed\Propel\PropelConfig;
+use SprykerShop\Shared\AgentPage\AgentPageConstants;
 use SprykerShop\Shared\CustomerPage\CustomerPageConstants;
 use SprykerShop\Shared\ShopUi\ShopUiConstants;
 use SprykerShop\Shared\StorageRouter\StorageRouterConstants;
@@ -178,6 +179,8 @@ $config[RouterConstants::IS_STORE_ROUTING_ENABLED]
     = $config[StoreWidgetConstants::IS_STORE_ROUTING_ENABLED]
     = $config[StorageRouterConstants::IS_STORE_ROUTING_ENABLED]
     = $config[ShopUiConstants::IS_STORE_ROUTING_ENABLED]
+    = $config[CustomerPageConstants::IS_STORE_ROUTING_ENABLED]
+    = $config[AgentPageConstants::IS_STORE_ROUTING_ENABLED]
     = $config[LocaleConstants::IS_STORE_ROUTING_ENABLED] = (bool)getenv('SPRYKER_DYNAMIC_STORE_MODE');
 
 // >>> DEV TOOLS
