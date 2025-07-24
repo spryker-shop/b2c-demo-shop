@@ -1,7 +1,7 @@
 {% extends molecule('suggestion-product', '@SprykerShop:CatalogPage') %}
 
 {% block body %}
-    <a class="container grid grid--middle link link--without-underline link--darkest js-suggest-search__item--navigable js-suggest-search__product-item--navigable" href="{{ data.url }}">
+    <a class="container grid grid--middle link link--without-underline link--darkest js-suggest-search__item--navigable js-suggest-search__product-item--navigable" href="{{ functionExists('generatePath') ? generatePath(data.url) : data.url }}">
         <span class="col">
             {% if data.image %}
                 {% set imageClasses = '' %}

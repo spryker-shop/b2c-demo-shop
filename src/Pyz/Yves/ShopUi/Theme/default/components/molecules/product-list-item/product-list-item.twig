@@ -9,7 +9,7 @@
     {% block imageContainer %}
         <div class="col col--sm-12 col--md-3 {{ config.name }}__col {{ config.name }}__col-image">
             {% block image %}
-                <a class="{{ config.name }}__overlay js-product-color-group__image-{{ data.abstractId }}" href="{{ data.url }}">
+                <a class="{{ config.name }}__overlay js-product-color-group__image-{{ data.abstractId }}" href="{{ functionExists('generatePath') ? generatePath(data.url) : data.url }}">
                     {% include molecule('lazy-image') with {
                         modifiers: ['thumbnail', 'product-list-item'],
                         data: {
@@ -38,7 +38,7 @@
         </div>
     {% endblock %}
 
-    <a class="{{ config.name }}__col {{ config.name }}__col-name col col--sm-8 col--md-7" href="{{ data.url }}">
+    <a class="{{ config.name }}__col {{ config.name }}__col-name col col--sm-8 col--md-7" href="{{ functionExists('generatePath') ? generatePath(data.url) : data.url }}">
         {% block name %}
             <span class="title title--medium">{{ data.name }}</span>
         {% endblock %}
@@ -49,7 +49,7 @@
     </a>
 
     {% block actionsContainer %}
-        <a class="{{ config.name }}__col {{ config.name }}__col-price col col--sm-4 col--md-2 col--xl-2 text-right" href="{{ data.url }}">
+        <a class="{{ config.name }}__col {{ config.name }}__col-price col col--sm-4 col--md-2 col--xl-2 text-right" href="{{ functionExists('generatePath') ? generatePath(data.url) : data.url }}">
             {% block price %}
                 {{ parent() }}
             {% endblock %}
