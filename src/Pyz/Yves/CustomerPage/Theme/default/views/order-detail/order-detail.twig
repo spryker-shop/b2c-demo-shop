@@ -9,26 +9,4 @@
         ] only %}
         {% endwidget %}
     {% endblock %}
-
-    {% block reorderAll %}
-        {% widget 'CartReorderWidget' args [data.order] only %}
-            {% block body %}
-                <div class="box text-right">
-                    {{ parent() }}
-                </div>
-            {% endblock %}
-        {% endwidget %}
-    {% endblock %}
-
-    {% block orderCancel %}
-        {% widget 'OrderCancelButtonWidget' args [data.order, app.request.requestUri] only %}
-            {% block body %}
-                <div class="box text-right">
-                    {% set buttonClasses = 'button button--alert' %}
-                    {{ parent() }}
-                </div>
-            {% endblock %}
-        {% endwidget %}
-    {% endblock %}
-
 {% endblock %}
