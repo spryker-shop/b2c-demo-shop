@@ -60,7 +60,7 @@
                         {% block colors %}{% endblock %}
 
                         {% block content %}
-                            <a href="{{ data.url }}" class="{{ config.name }}__info {{ config.jsName }}__link-detail-page grid grid--justify grid--top grid--no-wrap">
+                            <a href="{{ functionExists('generatePath') ? generatePath(data.url) : data.url }}" class="{{ config.name }}__info {{ config.jsName }}__link-detail-page grid grid--justify grid--top grid--no-wrap">
                                 {% if data.name %}
                                     <div class="col col--sm-8">
                                         {{ block('title') }}

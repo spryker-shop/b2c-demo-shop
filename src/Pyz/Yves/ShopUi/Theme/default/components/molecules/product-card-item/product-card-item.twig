@@ -26,7 +26,7 @@
     <div class="{{ component.renderClass(config.name ~ '__box', modifiers) }} {{ productItemBox }}">
         <div class="grid {{ data.additionalContainerClass }}">
             {% block image %}
-                <a href="{{ data.productItem.url }}" class="{{ component.renderClass(config.name ~ '__image', modifiers) }} col">
+                <a href="{{ functionExists('generatePath') ? generatePath(data.productItem.url) : data.productItem.url }}" class="{{ component.renderClass(config.name ~ '__image', modifiers) }} col">
                     {% include molecule('product-image') with {
                         data: {
                             name: data.productItem.name | default,
@@ -47,7 +47,7 @@
                             {% if data.productItem.url and widgetGlobalExists('OrderAmendmentItemLinkWidget') %}
                                 {% widget 'OrderAmendmentItemLinkWidget' args [data.productItem.url, data.productItem.name, quote, data.productItem] only %}{% endwidget %}
                             {% else %}
-                                <a href="{{ data.productItem.url }}" class="{{ component.renderClass(config.name ~ '__title', modifiers) }} col col--lg-8 col--sm-12">
+                                <a href="{{ functionExists('generatePath') ? generatePath(data.productItem.url) : data.productItem.url }}" class="{{ component.renderClass(config.name ~ '__title', modifiers) }} col col--lg-8 col--sm-12">
                                     {{ data.productItem.name }}
                                 </a>
                             {% endif %}

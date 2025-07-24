@@ -2,7 +2,7 @@
 
 {% block headStyles %}
     {{ parent() }}
-    <link itemprop="url" href="{{ data.productUrl }}">
+    <link itemprop="url" href="{{ functionExists('generatePath') ? generatePath(data.productUrl) : data.productUrl }}">
 {% endblock %}
 
 {% block pageInfo %}
