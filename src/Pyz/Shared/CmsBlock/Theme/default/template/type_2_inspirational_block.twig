@@ -7,7 +7,7 @@
                 <div class="inspirational-block__content inspirational-block__content--left">
                     {{ spyCmsBlockPlaceholder('title') | raw }}
                     <p class="inspirational-block__text">{{ spyCmsBlockPlaceholder('description') | raw }}</p>
-                    <a href="{{ 'samsung.search.link' | trans }}" class="button button--hollow button--inspirational button--expand-mobile">{{ 'cms-product-group.category.link.text' | trans }}</a>
+                    <a href="{{ functionExists('generatePath') ? generatePath('samsung.search.link' | trans) : 'samsung.search.link' | trans }}" class="button button--hollow button--inspirational button--expand-mobile">{{ 'cms-product-group.category.link.text' | trans }}</a>
                 </div>
             </div>
             <div class="col col--lg-6 col--md-12 col--sm-12">
@@ -19,7 +19,7 @@
                             },
                         } only %}
                     </div>
-                    <a href="{{ 'samsung.search.link' | trans }}" class="inspirational-block__image inspirational-block__image-2 inspirational-block__image-2--right js-inspirational-block__image-2--2">
+                    <a href="{{ functionExists('generatePath') ? generatePath('samsung.search.link' | trans) : 'samsung.search.link' | trans }}" class="inspirational-block__image inspirational-block__image-2 inspirational-block__image-2--right js-inspirational-block__image-2--2">
                         {% include molecule('lazy-image') with {
                             data: {
                                 imageSrc: publicPath('images/inspire2-main.jpg'),
