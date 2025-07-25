@@ -5,7 +5,7 @@
 
 {% block body %}
     <h1 itemprop="name" class="title title--product title--h2">{{ productName }}</h1>
-    <link itemprop="url" href="{{ data.product.url }}">
+    <link itemprop="url" href="{{ functionExists('generatePath') ? generatePath(data.product.url) : data.product.url }}">
 
     <div class="grid grid--justify spacing-bottom spacing-bottom--bigger">
         {% widget 'ProductDetailPageReviewWidget' args [data.product.idProductAbstract] use view('pdp-review-rating', 'ProductReviewWidget') only %}{% endwidget %}

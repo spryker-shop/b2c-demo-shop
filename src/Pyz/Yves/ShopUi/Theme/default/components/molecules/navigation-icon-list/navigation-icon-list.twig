@@ -24,7 +24,7 @@
                 }
             } only %}
                 {% block url %}
-                    <a class="link link--alt {{ data.node.cssClass }}" href="{{ data.node.url }}" title="{{ data.node.title }}">
+                    <a class="link link--alt {{ data.node.cssClass }}" href="{{ functionExists('generatePath') ? generatePath(data.node.url) : data.node.url }}" title="{{ data.node.title }}">
                         {% include atom('icon') with {
                             modifiers: ['big', data.node.cssClass],
                             data: {

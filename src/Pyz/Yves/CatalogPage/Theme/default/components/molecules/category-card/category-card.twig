@@ -13,7 +13,7 @@
 {% block body %}
     <div class="{{ config.name }}__container">
         {% block image %}
-            <a href="{{ data.url }}">
+            <a href="{{ functionExists('generatePath') ? generatePath(data.url) : data.url }}">
                 {% widget 'CategoryImageStorageWidget' args [data.id, data.name] only %}{% endwidget %}
             </a>
         {% endblock %}
@@ -25,7 +25,7 @@
         {% endblock %}
 
         {% block actions %}
-            <a class="button button--expand" href="{{ data.url }}">
+            <a class="button button--expand" href="{{ functionExists('generatePath') ? generatePath(data.url) : data.url }}">
                 {{ 'product.view' | trans }}
             </a>
         {% endblock %}
