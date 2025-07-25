@@ -22,7 +22,7 @@
             {% endfor %}
 
             {% set currentUrl = data.filterPath is not empty ? url(data.filterPath, {categoryPath: (categoryPath)}) : categoryPath %}
-            {% set categoryUrl = data.filterPath is not empty ? url(data.filterPath, {categoryPath: (categoryNode.url | trimLocale)}) : (functionExists('generatePath') ? generatePath(categoryNode.url) : categoryNode.url) %}
+            {% set categoryUrl = functionExists('generatePath') ? generatePath(categoryNode.url) : categoryNode.url %}
             {% set isActive = currentUrl == categoryUrl %}
             {% set disableAttribute = quantity == 0 ? 'disabled' %}
             {% set classes = [
