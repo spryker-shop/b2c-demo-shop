@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 use Spryker\Shared\Http\HttpConstants;
 use Spryker\Shared\Oauth\OauthConstants;
 use Spryker\Shared\SecuritySystemUser\SecuritySystemUserConstants;

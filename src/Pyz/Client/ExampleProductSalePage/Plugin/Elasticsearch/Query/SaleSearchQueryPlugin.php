@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace Pyz\Client\ExampleProductSalePage\Plugin\Elasticsearch\Query;
 
 use Elastica\Query;
@@ -163,7 +165,7 @@ class SaleSearchQueryPlugin extends AbstractPlugin implements QueryInterface, Se
      *
      * @return \Elastica\Query\Term
      */
-    protected function createStringFacetFieldFilter($fieldName): Term
+    protected function createStringFacetFieldFilter(string $fieldName): Term
     {
         $termQuery = new Term();
         $termQuery->setTerm(PageIndexMap::STRING_FACET_FACET_NAME, $fieldName);
@@ -176,7 +178,7 @@ class SaleSearchQueryPlugin extends AbstractPlugin implements QueryInterface, Se
      *
      * @return \Elastica\Query\Term
      */
-    protected function createStringFacetValueFilter($idProductLabel): Term
+    protected function createStringFacetValueFilter(int $idProductLabel): Term
     {
         $termQuery = new Term();
         $termQuery->setTerm(PageIndexMap::STRING_FACET_FACET_VALUE, (string)$idProductLabel);

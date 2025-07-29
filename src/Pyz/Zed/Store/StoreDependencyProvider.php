@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace Pyz\Zed\Store;
 
 use Spryker\Zed\Country\Communication\Plugin\Store\CountryStoreCollectionExpanderPlugin;
@@ -29,6 +31,7 @@ use Spryker\Zed\StoreContext\Communication\Plugin\Store\ContextStorePostCreatePl
 use Spryker\Zed\StoreContext\Communication\Plugin\Store\ContextStorePostUpdatePlugin;
 use Spryker\Zed\StoreContext\Communication\Plugin\Store\ContextStorePreCreateValidationPlugin;
 use Spryker\Zed\StoreContext\Communication\Plugin\Store\ContextStorePreUpdateValidationPlugin;
+use Spryker\Zed\StoreContext\Communication\Plugin\Store\TimezoneStoreCollectionExpanderPlugin;
 
 class StoreDependencyProvider extends SprykerStoreDependencyProvider
 {
@@ -95,6 +98,7 @@ class StoreDependencyProvider extends SprykerStoreDependencyProvider
             new CurrencyStoreCollectionExpanderPlugin(),
             new LocaleStoreCollectionExpanderPlugin(),
             new ContextStoreCollectionExpanderPlugin(),
+            new TimezoneStoreCollectionExpanderPlugin(),
         ];
     }
 }

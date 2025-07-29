@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace PyzTest\Zed\MessageBroker\MessageHandlers\Payment\Presentation;
 
 use Generated\Shared\Transfer\PaymentCaptureFailedTransfer;
@@ -27,7 +29,7 @@ class PaymentCaptureFailedMessageCest
     /**
      * @var string
      */
-    protected const INITIAL_ITEM_STATE = 'payment pending';
+    protected const INITIAL_ITEM_STATE = 'payment capture pending';
 
     /**
      * @var string
@@ -38,6 +40,17 @@ class PaymentCaptureFailedMessageCest
      * @var string
      */
     public const FINAL_ITEM_STATE = 'payment failed';
+
+    /**
+     * @param \PyzTest\Zed\MessageBroker\PaymentPresentationTester $i
+     *
+     * @return void
+     */
+    public function _before(PaymentPresentationTester $i): void
+    {
+        $i->amZed();
+        $i->amLoggedInUser();
+    }
 
     /**
      * @param \PyzTest\Zed\MessageBroker\PaymentPresentationTester $I

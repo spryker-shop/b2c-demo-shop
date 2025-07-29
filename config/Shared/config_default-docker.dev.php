@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 use Monolog\Logger;
 use Spryker\Shared\AppCatalogGui\AppCatalogGuiConstants;
 use Spryker\Shared\Application\ApplicationConstants;
@@ -23,6 +25,7 @@ use Spryker\Shared\Propel\PropelConstants;
 use Spryker\Shared\PropelOrm\PropelOrmConstants;
 use Spryker\Shared\Queue\QueueConfig;
 use Spryker\Shared\Queue\QueueConstants;
+use Spryker\Shared\Redis\RedisConstants;
 use Spryker\Shared\Router\RouterConstants;
 use Spryker\Shared\Session\SessionConstants;
 use Spryker\Shared\Testify\TestifyConstants;
@@ -74,6 +77,10 @@ $config[ErrorHandlerConstants::ERROR_LEVEL] = getenv('SPRYKER_DEBUG_DEPRECATIONS
 // ----------------------------------------------------------------------------
 // ------------------------------ SERVICES ------------------------------------
 // ----------------------------------------------------------------------------
+
+// >>> STORAGE
+
+$config[RedisConstants::REDIS_IS_DEV_MODE] = getenv('SPRYKER_REDIS_IS_DEV_MODE') !== false ? getenv('SPRYKER_REDIS_IS_DEV_MODE') : true;
 
 // >>> QUEUE
 
@@ -184,4 +191,13 @@ if ($isTestifyConstantsClassExists) {
 // ------------------------------ Glue Storefront API -------------------------------
 // ----------------------------------------------------------------------------
 $sprykerGlueStorefrontHost = getenv('SPRYKER_GLUE_STOREFRONT_HOST');
+$sprykerGlueStorefrontPort = (int)(getenv('SPRYKER_GLUE_STOREFRONT_PORT')) ?: 80;
 $config[GlueStorefrontApiApplicationConstants::GLUE_STOREFRONT_API_HOST] = $sprykerGlueStorefrontHost;
+
+if ($isTestifyConstantsClassExists) {
+    $config[TestifyConstants::GLUE_STOREFRONT_API_DOMAIN] = sprintf(
+        'http://%s%s',
+        $sprykerGlueStorefrontHost,
+        $sprykerGlueStorefrontPort !== 80 ? ':' . $sprykerGlueStorefrontPort : '',
+    );
+}

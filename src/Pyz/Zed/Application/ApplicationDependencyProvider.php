@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace Pyz\Zed\Application;
 
 use Spryker\Zed\Application\ApplicationDependencyProvider as SprykerApplicationDependencyProvider;
@@ -31,6 +33,7 @@ use Spryker\Zed\Store\Communication\Plugin\Application\BackofficeStoreApplicatio
 use Spryker\Zed\Store\Communication\Plugin\Application\StoreBackendGatewayApplicationPlugin;
 use Spryker\Zed\Translator\Communication\Plugin\Application\TranslatorApplicationPlugin;
 use Spryker\Zed\Twig\Communication\Plugin\Application\TwigApplicationPlugin;
+use Spryker\Zed\Twig\Communication\Plugin\Application\TwigGatewayApplicationPlugin;
 use Spryker\Zed\UtilNumber\Communication\Plugin\Application\NumberFormatterApplicationPlugin;
 use Spryker\Zed\Validator\Communication\Plugin\Application\ValidatorApplicationPlugin;
 use Spryker\Zed\WebProfiler\Communication\Plugin\Application\WebProfilerApplicationPlugin;
@@ -111,6 +114,7 @@ class ApplicationDependencyProvider extends SprykerApplicationDependencyProvider
             new CurrencyBackendGatewayApplicationPlugin(),
             new MockArraySessionApplicationPlugin(),
             new TranslatorApplicationPlugin(),
+            new TwigGatewayApplicationPlugin(),
             new TwigApplicationPlugin(),
             new PropelApplicationPlugin(),
             new BackendGatewayRouterApplicationPlugin(),
@@ -130,7 +134,6 @@ class ApplicationDependencyProvider extends SprykerApplicationDependencyProvider
             new PropelApplicationPlugin(),
             new BackendApiRouterApplicationPlugin(),
             new HttpApplicationPlugin(),
-            new ErrorHandlerApplicationPlugin(),
             new ValidatorApplicationPlugin(),
         ];
     }

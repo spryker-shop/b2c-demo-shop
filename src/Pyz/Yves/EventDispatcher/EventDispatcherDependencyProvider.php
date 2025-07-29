@@ -5,10 +5,13 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace Pyz\Yves\EventDispatcher;
 
 use Spryker\Shared\Http\Plugin\EventDispatcher\ResponseListenerEventDispatcherPlugin;
 use Spryker\Yves\Application\Communication\Plugin\EventDispatcher\HeadersSecurityEventDispatcherPlugin;
+use Spryker\Yves\Customer\Plugin\EventDispatcher\AnonymousIdSessionAssignEventDispatcherPlugin;
 use Spryker\Yves\EventDispatcher\EventDispatcherDependencyProvider as SprykerEventDispatcherDependencyProvider;
 use Spryker\Yves\Http\Plugin\EventDispatcher\CacheControlHeaderEventDispatcherPlugin;
 use Spryker\Yves\Http\Plugin\EventDispatcher\CookieEventDispatcherPlugin;
@@ -66,6 +69,7 @@ class EventDispatcherDependencyProvider extends SprykerEventDispatcherDependency
             new SecurityBlockerCustomerEventDispatcherPlugin(),
             new SecurityBlockerAgentEventDispatcherPlugin(),
             new EnvironmentInfoHeaderEventDispatcherPlugin(),
+            new AnonymousIdSessionAssignEventDispatcherPlugin(),
         ];
 
         if (class_exists(ProfilerRequestEventDispatcherPlugin::class)) {

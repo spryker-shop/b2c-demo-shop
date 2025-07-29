@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace Pyz\Zed\DataImport\Business\Model\DiscountAmount;
 
 use Orm\Zed\Currency\Persistence\SpyCurrency;
@@ -77,7 +79,7 @@ class DiscountAmountWriterStep implements DataImportStepInterface
      *
      * @return \Orm\Zed\Currency\Persistence\SpyCurrency
      */
-    protected function getCurrencyByCode($currencyCode): SpyCurrency
+    protected function getCurrencyByCode(string $currencyCode): SpyCurrency
     {
         if (isset(static::$currencyCache[$currencyCode])) {
             return static::$currencyCache[$currencyCode];

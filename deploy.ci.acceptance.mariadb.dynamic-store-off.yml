@@ -20,7 +20,7 @@ image:
         npm: 9
 
 composer:
-    mode: --no-dev
+    mode: '--no-dev --quiet -o -a'
     autoload: --classmap-authoritative
 
 regions:
@@ -140,7 +140,7 @@ services:
                 protocol: tcp
     broker:
         engine: rabbitmq
-        version: '3.9'
+        version: '3.13'
         api:
             username: "spryker"
             password: "secret"
@@ -151,12 +151,8 @@ services:
     search:
         engine: elastic
         version: '7.10'
-    scheduler:
-        engine: jenkins
-        version: '2.442'
-        csrf-protection-enabled: true
     mail_catcher:
-        engine: mailhog
+        engine: mailpit
     webdriver:
         engine: chromedriver
 

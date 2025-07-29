@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace PyzTest\Zed\MessageBroker;
 
 use Codeception\Actor;
@@ -12,7 +14,6 @@ use Generated\Shared\DataBuilder\SearchEndpointAvailableBuilder;
 use Generated\Shared\DataBuilder\SearchEndpointRemovedBuilder;
 use Generated\Shared\Transfer\SearchEndpointAvailableTransfer;
 use Generated\Shared\Transfer\SearchEndpointRemovedTransfer;
-use Generated\Shared\Transfer\StoreTransfer;
 use Orm\Zed\SearchHttp\Persistence\SpySearchHttpConfig;
 use Orm\Zed\SearchHttp\Persistence\SpySearchHttpConfigQuery;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
@@ -38,25 +39,21 @@ class SearchHttpCommunicationTester extends Actor
     use _generated\SearchHttpCommunicationTesterActions;
 
     /**
-     * @param \Generated\Shared\Transfer\StoreTransfer $storeTransfer
-     *
      * @return void
      */
-    public function assertSearchHttpConfigExistsForStore(StoreTransfer $storeTransfer): void
+    public function assertSearchHttpConfigExistsForStore(): void
     {
-        $searchHttpConfigEntity = $this->getSearchHttpConfigEntity($storeTransfer);
+        $searchHttpConfigEntity = $this->getSearchHttpConfigEntity();
 
         $this->assertNotNull($searchHttpConfigEntity);
     }
 
     /**
-     * @param \Generated\Shared\Transfer\StoreTransfer $storeTransfer
-     *
      * @return void
      */
-    public function assertSearchHttpConfigIsRemovedForStore(StoreTransfer $storeTransfer): void
+    public function assertSearchHttpConfigIsRemoved(): void
     {
-        $searchHttpConfigEntity = $this->getSearchHttpConfigEntity($storeTransfer);
+        $searchHttpConfigEntity = $this->getSearchHttpConfigEntity();
 
         $this->assertSame(
             ['search_http_configs' => []],
@@ -85,15 +82,12 @@ class SearchHttpCommunicationTester extends Actor
     }
 
     /**
-     * @param \Generated\Shared\Transfer\StoreTransfer $storeTransfer
-     *
      * @return void
      */
-    public function removeHttpConfigForStore(StoreTransfer $storeTransfer): void
+    public function removeHttpConfig(): void
     {
         (new SpySearchHttpConfigQuery())
-            ->filterByStore($storeTransfer->getName())
-            ->delete();
+            ->deleteAll();
     }
 
     /**
@@ -105,6 +99,7 @@ class SearchHttpCommunicationTester extends Actor
     {
         $channelName = 'search-commands';
         $this->setupMessageBroker($searchMessageTransfer::class, $channelName);
+        $this->setupMessageBrokerPlugins();
         $messageBrokerFacade = $this->getLocator()->messageBroker()->facade();
         $messageBrokerFacade->sendMessage($searchMessageTransfer);
         $messageBrokerFacade->startWorker(
@@ -114,14 +109,11 @@ class SearchHttpCommunicationTester extends Actor
     }
 
     /**
-     * @param \Generated\Shared\Transfer\StoreTransfer $storeTransfer
-     *
      * @return \Orm\Zed\SearchHttp\Persistence\SpySearchHttpConfig|null
      */
-    protected function getSearchHttpConfigEntity(StoreTransfer $storeTransfer): ?SpySearchHttpConfig
+    protected function getSearchHttpConfigEntity(): ?SpySearchHttpConfig
     {
         return (new SpySearchHttpConfigQuery())
-            ->filterByStore($storeTransfer->getName())
             ->findOne();
     }
 }

@@ -70,5 +70,14 @@
                 {% endblock %}
             {% endwidget %}
         {% endblock %}
+        {% if widgetGlobalExists('SetMultiFactorAuthMenuItemWidget') %}
+            {% widget 'SetMultiFactorAuthMenuItemWidget' args [data.activePage] only %}
+                {% block body %}
+                    <li class="menu__item {{ itemClass }}">
+                        <a class="menu__link" href="{{ url(data.setMultiFactorAuthRouteName) }}" data-id="sidebar-multi-factor-auth">{{ 'multi_factor_auth.multi_factor_auth.list.title' | trans }}</a>
+                    </li>
+                {% endblock %}
+            {% endwidget %}
+        {% endif %}
     </ul>
 {% endblock %}

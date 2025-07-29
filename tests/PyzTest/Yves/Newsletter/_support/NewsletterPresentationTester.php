@@ -5,10 +5,11 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace PyzTest\Yves\Newsletter;
 
 use Codeception\Actor;
-use Codeception\Scenario;
 use Orm\Zed\Newsletter\Persistence\SpyNewsletterSubscriber;
 use Orm\Zed\Newsletter\Persistence\SpyNewsletterSubscription;
 use Orm\Zed\Newsletter\Persistence\SpyNewsletterTypeQuery;
@@ -35,21 +36,11 @@ class NewsletterPresentationTester extends Actor
     use _generated\NewsletterPresentationTesterActions;
 
     /**
-     * @param \Codeception\Scenario $scenario
-     */
-    public function __construct(Scenario $scenario)
-    {
-        parent::__construct($scenario);
-
-        $this->amYves();
-    }
-
-    /**
      * @param string $email
      *
      * @return void
      */
-    public function haveAnAlreadySubscribedEmail($email): void
+    public function haveAnAlreadySubscribedEmail(string $email): void
     {
         $newsletterSubscriberEntity = new SpyNewsletterSubscriber();
         $newsletterSubscriberEntity

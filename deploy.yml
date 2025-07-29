@@ -197,7 +197,7 @@ services:
                 protocol: tcp
     broker:
         engine: rabbitmq
-        version: '3.9'
+        version: '3.13'
         api:
             username: 'spryker'
             password: 'secret'
@@ -220,12 +220,12 @@ services:
                 protocol: tcp
     scheduler:
         engine: jenkins
-        version: '2.442'
+        version: '2.492.3'
         csrf-protection-enabled: true
         endpoints:
             scheduler.spryker.local:
     mail_catcher:
-        engine: mailhog
+        engine: mailpit
         endpoints:
             mail.spryker.local:
     swagger:

@@ -20,16 +20,12 @@ image:
         SPRYKER_PUSH_NOTIFICATION_WEB_PUSH_PHP_VAPID_SUBJECT: 'https://spryker.com'
 
 composer:
-    mode: "--no-dev --quiet"
+    mode: '--no-dev --quiet -o -a'
     autoload: --classmap-authoritative
 
 regions:
     EU:
         services:
-            mail:
-                sender:
-                    name: Spryker No-Reply
-                    email: no-reply@spryker.local
             database:
                 database: eu-docker
                 username: spryker
@@ -96,7 +92,7 @@ services:
             password: 'secret'
     broker:
         engine: rabbitmq
-        version: '3.9'
+        version: '3.13'
         api:
             username: 'spryker'
             password: 'secret'
@@ -107,14 +103,6 @@ services:
     search:
         engine: elastic
         version: '7.10'
-    scheduler:
-        engine: jenkins
-        version: '2.442'
-        csrf-protection-enabled: true
-    mail_catcher:
-        engine: mailhog
-    webdriver:
-        engine: chromedriver
 
 docker:
     ssl:

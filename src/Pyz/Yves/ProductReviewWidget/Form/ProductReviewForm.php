@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace Pyz\Yves\ProductReviewWidget\Form;
 
 use Generated\Shared\Transfer\ProductReviewRequestTransfer;
@@ -80,7 +82,7 @@ class ProductReviewForm extends AbstractType
      *
      * @return void
      */
-    public function buildForm(FormBuilderInterface $builder, array $options): void
+    public function buildForm(FormBuilderInterface $builder, array $options): void // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
     {
         $this
             ->addSummaryField($builder)

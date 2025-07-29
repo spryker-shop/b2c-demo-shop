@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace Pyz\Zed\DataImport\Business\Model\NavigationNode;
 
 use Pyz\Zed\DataImport\Business\Exception\NavigationNodeValidityDateException;
@@ -27,7 +29,7 @@ class NavigationNodeValidityDatesStep implements DataImportStepInterface
      * @param string $keyValidFrom
      * @param string $keyValidTo
      */
-    public function __construct($keyValidFrom, $keyValidTo)
+    public function __construct(string $keyValidFrom, string $keyValidTo)
     {
         $this->keyValidFrom = $keyValidFrom;
         $this->keyValidTo = $keyValidTo;
@@ -53,7 +55,7 @@ class NavigationNodeValidityDatesStep implements DataImportStepInterface
      *
      * @return void
      */
-    protected function filterDate(DataSetInterface $dataSet, $key): void
+    protected function filterDate(DataSetInterface $dataSet, string $key): void
     {
         if (isset($dataSet[$key])) {
             return;
@@ -70,7 +72,7 @@ class NavigationNodeValidityDatesStep implements DataImportStepInterface
      *
      * @return void
      */
-    protected function formatDate(DataSetInterface $dataSet, $key): void
+    protected function formatDate(DataSetInterface $dataSet, string $key): void
     {
         if ($dataSet[$key] === '') {
             return;

@@ -8,5 +8,8 @@
                 {{ 'agent.account.overview' | trans }}
             </a>
         </li>
+        {% if widgetGlobalExists('SetMultiFactorAuthMenuItemWidget') %}
+            {% widget 'SetMultiFactorAuthMenuItemWidget' args [data.activePage] only %}{% endwidget %}
+        {% endif %}
     </ul>
 {% endblock %}

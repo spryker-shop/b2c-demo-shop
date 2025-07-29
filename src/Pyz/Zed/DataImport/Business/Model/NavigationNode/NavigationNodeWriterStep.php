@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace Pyz\Zed\DataImport\Business\Model\NavigationNode;
 
 use Orm\Zed\Navigation\Persistence\SpyNavigationNode;
@@ -174,7 +176,7 @@ class NavigationNodeWriterStep extends PublishAwareStep implements DataImportSte
      *
      * @return int
      */
-    protected function getFkParentNavigationNode($nodeKey): int
+    protected function getFkParentNavigationNode(string $nodeKey): int
     {
         $parentNavigationNodeEntity = SpyNavigationNodeQuery::create()
             ->findOneByNodeKey($nodeKey);
@@ -295,7 +297,7 @@ class NavigationNodeWriterStep extends PublishAwareStep implements DataImportSte
     protected function getFkUrl(
         SpyNavigationNodeLocalizedAttributes $navigationNodeLocalizedAttributes,
         array $localizedAttributes,
-        $idLocale,
+        int $idLocale,
     ): ?int {
         if (isset($localizedAttributes[static::KEY_URL]) && !empty($localizedAttributes[static::KEY_URL])) {
             $urlEntity = SpyUrlQuery::create()

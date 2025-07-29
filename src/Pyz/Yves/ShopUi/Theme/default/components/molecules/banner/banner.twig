@@ -1,7 +1,7 @@
 {% extends molecule('banner', '@SprykerShop:ShopUi') %}
 
 {% block body %}
-    <a class="{{ config.name }}__link" href="{{ data.clickUrl }}">
+    <a class="{{ config.name }}__link" href="{{ functionExists('generatePath') ? generatePath(data.clickUrl) : data.clickUrl }}">
         {% block content %}
             {% block image %}
                 {% include molecule('lazy-image') with {

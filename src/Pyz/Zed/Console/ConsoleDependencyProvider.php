@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace Pyz\Zed\Console;
 
 use Pyz\Zed\DataImport\DataImportConfig;
@@ -48,6 +50,7 @@ use Spryker\Zed\DocumentationGeneratorRestApi\Communication\Console\GenerateRest
 use Spryker\Zed\EventBehavior\Communication\Console\EventBehaviorTriggerTimeoutConsole;
 use Spryker\Zed\EventBehavior\Communication\Console\EventTriggerListenerConsole;
 use Spryker\Zed\EventBehavior\Communication\Plugin\Console\EventBehaviorPostHookPlugin;
+use Spryker\Zed\Form\Communication\Plugin\Application\FormApplicationPlugin;
 use Spryker\Zed\IndexGenerator\Communication\Console\PostgresIndexGeneratorConsole;
 use Spryker\Zed\IndexGenerator\Communication\Console\PostgresIndexRemoverConsole;
 use Spryker\Zed\Installer\Communication\Console\InitializeDatabaseConsole;
@@ -69,6 +72,7 @@ use Spryker\Zed\Oauth\Communication\Console\ScopeCacheCollectorConsole;
 use Spryker\Zed\Oms\Communication\Console\CheckConditionConsole as OmsCheckConditionConsole;
 use Spryker\Zed\Oms\Communication\Console\CheckTimeoutConsole as OmsCheckTimeoutConsole;
 use Spryker\Zed\Oms\Communication\Console\ClearLocksConsole as OmsClearLocksConsole;
+use Spryker\Zed\Oms\Communication\Console\ProcessCacheWarmUpConsole as OmsProcessCacheWarmUpConsole;
 use Spryker\Zed\OrderMatrix\Communication\Console\OrderMatrixConsole;
 use Spryker\Zed\PaymentDataImport\PaymentDataImportConfig;
 use Spryker\Zed\PriceProduct\Communication\Console\PriceProductStoreOptimizeConsole;
@@ -131,6 +135,7 @@ use Spryker\Zed\SearchElasticsearch\Communication\Console\ElasticsearchSnapshotC
 use Spryker\Zed\SearchElasticsearch\Communication\Console\ElasticsearchSnapshotDeleteConsole;
 use Spryker\Zed\SearchElasticsearch\Communication\Console\ElasticsearchSnapshotRegisterRepositoryConsole;
 use Spryker\Zed\SearchElasticsearch\Communication\Console\ElasticsearchSnapshotRestoreConsole;
+use Spryker\Zed\Security\Communication\Plugin\Application\ConsoleSecurityApplicationPlugin;
 use Spryker\Zed\Session\Communication\Console\SessionRemoveLockConsole;
 use Spryker\Zed\SetupFrontend\Communication\Console\CleanUpDependenciesConsole;
 use Spryker\Zed\SetupFrontend\Communication\Console\InstallPackageManagerConsole;
@@ -141,11 +146,13 @@ use Spryker\Zed\SetupFrontend\Communication\Console\YvesInstallDependenciesConso
 use Spryker\Zed\SetupFrontend\Communication\Console\ZedBuildFrontendConsole;
 use Spryker\Zed\SetupFrontend\Communication\Console\ZedInstallDependenciesConsole;
 use Spryker\Zed\ShipmentDataImport\ShipmentDataImportConfig;
+use Spryker\Zed\Sitemap\Communication\Console\SitemapGenerateConsole;
 use Spryker\Zed\StateMachine\Communication\Console\CheckConditionConsole as StateMachineCheckConditionConsole;
 use Spryker\Zed\StateMachine\Communication\Console\CheckTimeoutConsole as StateMachineCheckTimeoutConsole;
 use Spryker\Zed\StateMachine\Communication\Console\ClearLocksConsole as StateMachineClearLocksConsole;
 use Spryker\Zed\StockDataImport\StockDataImportConfig;
 use Spryker\Zed\Storage\Communication\Console\StorageDeleteAllConsole;
+use Spryker\Zed\StorageRedis\Communication\Console\StorageRedisDataReSaveConsole;
 use Spryker\Zed\StorageRedis\Communication\Console\StorageRedisExportRdbConsole;
 use Spryker\Zed\StorageRedis\Communication\Console\StorageRedisImportRdbConsole;
 use Spryker\Zed\StoreContextDataImport\StoreContextDataImportConfig;
@@ -160,6 +167,7 @@ use Spryker\Zed\Transfer\Communication\Console\ValidatorConsole;
 use Spryker\Zed\Translator\Communication\Console\CleanTranslationCacheConsole;
 use Spryker\Zed\Translator\Communication\Console\GenerateTranslationCacheConsole;
 use Spryker\Zed\Twig\Communication\Console\CacheWarmerConsole;
+use Spryker\Zed\Twig\Communication\Console\TwigTemplateWarmerConsole;
 use Spryker\Zed\Twig\Communication\Plugin\Application\TwigApplicationPlugin;
 use Spryker\Zed\Uuid\Communication\Console\UuidGeneratorConsole;
 use Spryker\Zed\ZedNavigation\Communication\Console\BuildNavigationConsole;
@@ -187,6 +195,7 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
     {
         $commands = [
             new CacheWarmerConsole(),
+            new TwigTemplateWarmerConsole(),
             new BuildNavigationConsole(),
             new RemoveNavigationCacheConsole(),
             new BuildRestApiValidationCacheConsole(),
@@ -204,6 +213,7 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
             new OmsCheckConditionConsole(),
             new OmsCheckTimeoutConsole(),
             new OmsClearLocksConsole(),
+            new OmsProcessCacheWarmUpConsole(),
             new StateMachineCheckTimeoutConsole(),
             new StateMachineCheckConditionConsole(),
             new StateMachineClearLocksConsole(),
@@ -363,6 +373,8 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
             new DeleteExpiredPushNotificationSubscriptionConsole(),
             new SendPushNotificationConsole(),
             new OrderMatrixConsole(),
+            new StorageRedisDataReSaveConsole(),
+            new SitemapGenerateConsole(),
         ];
 
         $propelCommands = $container->getLocator()->propel()->facade()->getConsoleCommands();
@@ -430,7 +442,7 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
      *
      * @return array<\Spryker\Zed\Console\Dependency\Plugin\ConsolePostRunHookPluginInterface>
      */
-    public function getConsolePostRunHookPlugins(Container $container): array
+    public function getConsolePostRunHookPlugins(Container $container): array // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
     {
         return [
             new EventBehaviorPostHookPlugin(),
@@ -445,9 +457,12 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
     public function getApplicationPlugins(Container $container): array
     {
         $applicationPlugins = parent::getApplicationPlugins($container);
+
+        $applicationPlugins[] = new ConsoleLocaleApplicationPlugin();
+        $applicationPlugins[] = new ConsoleSecurityApplicationPlugin();
         $applicationPlugins[] = new PropelApplicationPlugin();
         $applicationPlugins[] = new TwigApplicationPlugin();
-        $applicationPlugins[] = new ConsoleLocaleApplicationPlugin();
+        $applicationPlugins[] = new FormApplicationPlugin();
 
         return $applicationPlugins;
     }

@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace Pyz\Zed\SalesOrderThresholdGui;
 
 use Spryker\Zed\SalesOrderThresholdGui\Communication\Plugin\FormExpander\GlobalHardMaximumThresholdFormExpanderPlugin;

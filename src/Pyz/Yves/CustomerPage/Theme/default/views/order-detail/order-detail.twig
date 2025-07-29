@@ -1,11 +1,12 @@
 {% extends view('order-detail', '@SprykerShop:CustomerPage') %}
 
 {% block customerContent %}
-    {% widget 'CustomerReorderItemsFormWidget' args [
-        data.order,
-        {},
-        data.orderShipmentExpenses,
-        data.shipmentGroups
-    ] only %}
-    {% endwidget %}
+    {% block orderDetail %}
+        {% widget 'CartReorderItemsWidget' args [
+            data.order,
+            data.shipmentGroups,
+            data.orderShipmentExpenses,
+        ] only %}
+        {% endwidget %}
+    {% endblock %}
 {% endblock %}

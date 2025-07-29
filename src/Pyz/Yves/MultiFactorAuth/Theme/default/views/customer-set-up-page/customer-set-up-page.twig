@@ -1,0 +1,69 @@
+{% extends template('page-layout-customer', 'CustomerPage') %}
+
+{% define data = {
+    title: 'multi_factor_auth.multi_factor_auth.list.title' | trans,
+    activePage: 'setMultiFactorAuth',
+    multiFactorAuthCollection: _view.multiFactorAuthCollection ?? null,
+    error: _view.error ?? null,
+    csrf_token_activate: _view.csrf_token_activate,
+    csrf_token_deactivate: _view.csrf_token_deactivate,
+} %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block customerContent %}
+    {% if data.error %}
+        <div class="alert alert-danger" role="alert">
+            {{ data.error }}
+        </div>
+    {% endif %}
+
+    {% if data.multiFactorAuthCollection %}
+        {% for method in data.multiFactorAuthCollection.multiFactorAuthTypes %}
+            <div class="form box" data-qa="mfa-type-section">
+                {% include molecule('title-box', 'CustomerPage') with {
+                    data: {
+                        title: method.type | capitalize,
+                    },
+                } only %}
+
+                {% block addForm %}
+                    {% if not method.status %}
+                        {% set formName = 'activateForm' %}
+                        {% set path = path('multiFactorAuth/activate', { type: method.type }) %}
+                        {% set flowType = 'is_activation' %}
+                        {% set buttonName = 'multi_factor_auth.activate' | trans %}
+                        {% set buttonClass = 'button--success' %}
+                        {% set csrfToken = data.csrf_token_activate %}
+                    {% else %}
+                        {% set formName = 'deactivateForm' %}
+                        {% set path = path('multiFactorAuth/deactivate', { type: method.type }) %}
+                        {% set flowType = 'is_deactivation' %}
+                        {% set buttonName = 'multi_factor_auth.deactivate' | trans %}
+                        {% set buttonClass = 'button--alert' %}
+                        {% set csrfToken = data.csrf_token_deactivate %}
+                    {% endif %}
+
+                    {% set formClass = formName ~ loop.index0 %}
+                    {% set url = path('multiFactorAuth/getCustomerEnabledTypes', { (flowType): true, type_to_set_up: method.type }) %}
+
+                    <form name="{{ formName }}" class="col-sm-push-2 col-sm-10 {{ formClass }}" method="post" action="{{ path }}">
+                        <input type="hidden" name="_csrf_token" value="{{ csrfToken }}" />
+                        <button type="submit" class="form__action button {{ buttonClass }}">{{ buttonName }}</button>
+                    </form>
+
+                    {% widget 'MultiFactorAuthHandlerWidget' with {
+                        data: {
+                            id: formName ~ loop.index0,
+                            url: url,
+                            formSelector: '.' ~ formClass,
+                            isJsEnabledHandler: 'true',
+                            isRoute: true
+                        }
+                    } only %}
+                    {% endwidget %}
+                {% endblock %}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endblock %}

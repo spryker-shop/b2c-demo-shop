@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace Pyz\Zed\DataImport\Business\Model\CategoryTemplate;
 
 use Orm\Zed\Category\Persistence\SpyCategoryTemplateQuery;
@@ -36,8 +38,10 @@ class CategoryTemplateWriterStep implements DataImportStepInterface
 
         $categoryTemplateEntity->setTemplatePath($dataSet[static::KEY_PATH]);
 
-        if ($categoryTemplateEntity->isNew() || $categoryTemplateEntity->isModified()) {
-            $categoryTemplateEntity->save();
+        if (!$categoryTemplateEntity->isNew() && !$categoryTemplateEntity->isModified()) {
+            return;
         }
+
+        $categoryTemplateEntity->save();
     }
 }

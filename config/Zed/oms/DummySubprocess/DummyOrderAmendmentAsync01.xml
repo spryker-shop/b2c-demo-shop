@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<statemachine
+    xmlns="spryker:oms-01"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="spryker:oms-01 http://static.spryker.com/oms-01.xsd"
+>
+
+    <process name="DummyOrderAmendmentAsync">
+        <states>
+            <state name="order amendment draft pending" reserved="true" display="oms.state.order-amendment-draft-pending">
+                <flag>amendment in progress</flag>
+            </state>
+
+            <state name="order amendment draft" reserved="true" display="oms.state.order-amendment-draft">
+                <flag>amendment in progress</flag>
+            </state>
+
+            <state name="order amendment draft applied" reserved="true" display="oms.state.order-amendment-draft-applied">
+                <flag>amendment in progress</flag>
+            </state>
+
+            <state name="draft apply succeeded" reserved="true" display="oms.state.draft-apply-succeeded">
+                <flag>amendment in progress</flag>
+            </state>
+
+            <state name="draft apply failed" reserved="true" display="oms.state.draft-apply-failed">
+                <flag>amendment in progress</flag>
+            </state>
+        </states>
+
+        <transitions>
+
+            <transition happy="true">
+                <source>order amendment draft pending</source>
+                <target>order amendment draft</target>
+            </transition>
+
+            <transition happy="true">
+                <source>order amendment draft</source>
+                <target>order amendment draft applied</target>
+                <event>apply-order-amendment-draft</event>
+            </transition>
+
+            <transition happy="true" condition="DummyOrderAmendmentAsync/IsSuccessfullyApplied">
+                <source>order amendment draft applied</source>
+                <target>draft apply succeeded</target>
+            </transition>
+
+            <transition happy="true">
+                <source>order amendment draft applied</source>
+                <target>draft apply failed</target>
+            </transition>
+
+            <transition happy="true">
+                <source>draft apply succeeded</source>
+                <target>grace period pending</target>
+                <event>notify-order-amendment-applied</event>
+            </transition>
+
+            <transition happy="true">
+                <source>draft apply failed</source>
+                <target>grace period pending</target>
+                <event>notify-order-amendment-failed</event>
+            </transition>
+
+            <transition>
+                <source>order amendment</source>
+                <target>order amendment draft pending</target>
+                <event>start-order-amendment-draft</event>
+            </transition>
+
+        </transitions>
+
+        <events>
+            <event name="start-order-amendment-draft"/>
+            <event name="apply-order-amendment-draft" command="OrderAmendmentAsync/ApplyOrderAmendmentDraft" onEnter="true"/>
+            <event name="notify-order-amendment-applied" command="OrderAmendmentAsync/NotifyOrderAmendmentApplied" onEnter="true"/>
+            <event name="notify-order-amendment-failed" command="OrderAmendmentAsync/NotifyOrderAmendmentFailed" onEnter="true"/>
+        </events>
+    </process>
+
+
+</statemachine>

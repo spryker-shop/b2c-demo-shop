@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace Orm\Zed\ProductSearch\Persistence;
 
 use Spryker\Zed\ProductSearch\Persistence\Propel\AbstractSpyProductSearchAttributeMapArchive as BaseSpyProductSearchAttributeMapArchive;

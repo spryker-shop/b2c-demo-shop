@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace Pyz\Yves\ProductReviewWidget;
 
 use Pyz\Yves\ProductReviewWidget\Form\ProductReviewForm;
@@ -19,16 +21,15 @@ class ProductReviewWidgetFactory extends SprykerShopProductReviewWidgetFactory
      *
      * @return \Symfony\Component\Form\FormInterface
      */
-    public function createProductReviewForm($idProductAbstract): FormInterface
+    public function createProductReviewForm($idProductAbstract): FormInterface // phpcs:ignore
     {
         $dataProvider = $this->createProductReviewFormDataProvider();
-        $form = $this->getFormFactory()->create(
+
+        return $this->getFormFactory()->create(
             ProductReviewForm::class,
             $dataProvider->getData($idProductAbstract),
             $dataProvider->getOptions(),
         );
-
-        return $form;
     }
 
     /**

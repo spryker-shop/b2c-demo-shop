@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace Pyz\Zed\ProductManagement;
 
 use Spryker\Zed\CmsBlockProductConnector\Communication\Plugin\CmsBlockProductAbstractBlockListViewPlugin;
@@ -52,7 +54,7 @@ class ProductManagementDependencyProvider extends SprykerProductManagementDepend
      *
      * @return \Spryker\Zed\Kernel\Communication\Form\FormTypeInterface
      */
-    protected function createMoneyFormTypePlugin(Container $container): FormTypeInterface
+    protected function createMoneyFormTypePlugin(Container $container): FormTypeInterface // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
     {
         return new MoneyFormTypePlugin();
     }

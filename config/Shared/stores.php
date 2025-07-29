@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 $stores = [];
 
 if (getenv('SPRYKER_ACTIVE_STORES')) {
@@ -37,7 +39,7 @@ if (getenv('SPRYKER_ACTIVE_STORES')) {
             'de' => 'de_DE',
         ],
         // first entry is default
-        'countries' => ['DE', 'AT', 'NO', 'CH', 'ES', 'GB'],
+        'countries' => ['DE', 'AT', 'NO', 'CH', 'ES', 'GB', 'US'],
         // internal and shop
         'currencyIsoCode' => 'EUR',
         'currencyIsoCodes' => ['EUR', 'CHF'],

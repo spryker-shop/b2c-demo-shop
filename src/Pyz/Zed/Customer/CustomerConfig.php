@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace Pyz\Zed\Customer;
 
 use Spryker\Zed\Customer\CustomerConfig as SprykerCustomerConfig;
@@ -19,12 +21,17 @@ class CustomerConfig extends SprykerCustomerConfig
     /**
      * @var int
      */
-    protected const MIN_LENGTH_CUSTOMER_PASSWORD = 8;
+    protected const MIN_LENGTH_CUSTOMER_PASSWORD = 12;
 
     /**
      * @var int
      */
-    protected const MAX_LENGTH_CUSTOMER_PASSWORD = 64;
+    protected const MAX_LENGTH_CUSTOMER_PASSWORD = 128;
+
+    /**
+     * @var bool
+     */
+    protected const IS_CUSTOMER_EMAIL_VALIDATION_CASE_SENSITIVE = true;
 
     /**
      * {@inheritDoc}

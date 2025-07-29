@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace PyzTest\Zed\NavigationGui\Presentation;
 
 use Generated\Shared\Transfer\NavigationNodeLocalizedAttributesTransfer;
@@ -28,6 +30,17 @@ use PyzTest\Zed\NavigationGui\PageObject\NavigationPage;
  */
 class NavigationTreeCest
 {
+    /**
+     * @param \PyzTest\Zed\NavigationGui\NavigationGuiPresentationTester $i
+     *
+     * @return void
+     */
+    public function _before(NavigationGuiPresentationTester $i): void
+    {
+        $i->amZed();
+        $i->amLoggedInUser();
+    }
+
     /**
      * @param \PyzTest\Zed\NavigationGui\NavigationGuiPresentationTester $i
      *
@@ -231,7 +244,7 @@ class NavigationTreeCest
      *
      * @return void
      */
-    public function testDeleteNavigationNode(NavigationGuiPresentationTester $i): void
+    public function testDeleteNavigationNode(NavigationGuiPresentationTester $i): void // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
     {
         /*
          * Test skipped because popup confirmation is not working as expected under phantomjs.

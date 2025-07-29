@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace Pyz\Yves\CheckoutPage;
 
 use Generated\Shared\Transfer\PaymentTransfer;
@@ -25,6 +27,7 @@ use SprykerShop\Yves\CustomerPage\Form\RegisterForm;
 use SprykerShop\Yves\CustomerPage\Plugin\CheckoutPage\CheckoutAddressFormDataProviderPlugin;
 use SprykerShop\Yves\CustomerPage\Plugin\CheckoutPage\CustomerAddressExpanderPlugin;
 use SprykerShop\Yves\CustomerPage\Plugin\CustomerStepHandler;
+use SprykerShop\Yves\PaymentAppWidget\Plugin\CheckoutPage\PaymentAppExpressCheckoutWorkflowCheckoutStepResolverStrategyPlugin;
 use SprykerShop\Yves\PaymentPage\Plugin\PaymentPage\PaymentForeignPaymentCollectionExtenderPlugin;
 use SprykerShop\Yves\SalesOrderThresholdWidget\Plugin\CheckoutPage\SalesOrderThresholdWidgetPlugin;
 use Symfony\Component\Form\FormFactory;
@@ -82,7 +85,7 @@ class CheckoutPageDependencyProvider extends SprykerShopCheckoutPageDependencyPr
      *
      * @return \Symfony\Component\Form\FormInterface
      */
-    protected function getCustomerCheckoutForm($subForm, $blockPrefix): FormInterface
+    protected function getCustomerCheckoutForm(string $subForm, string $blockPrefix): FormInterface
     {
         return $this->getFormFactory()->createNamed(
             $blockPrefix,
@@ -160,6 +163,16 @@ class CheckoutPageDependencyProvider extends SprykerShopCheckoutPageDependencyPr
     {
         return [
             new PaymentForeignPaymentCollectionExtenderPlugin(),
+        ];
+    }
+
+    /**
+     * @return array<\SprykerShop\Yves\CheckoutPageExtension\Dependency\Plugin\CheckoutStepResolverStrategyPluginInterface>
+     */
+    protected function getCheckoutStepResolverStrategyPlugins(): array
+    {
+        return [
+            new PaymentAppExpressCheckoutWorkflowCheckoutStepResolverStrategyPlugin(),
         ];
     }
 }

@@ -57,7 +57,7 @@
         </div>
 
         {% block content %}
-            <a href="{{ data.url }}" class="{{ config.name }}__info {{ config.jsName }}__link-detail-page grid grid--justify grid--top grid--no-wrap">
+            <a href="{{ functionExists('generatePath') ? generatePath(data.url) : data.url }}" class="{{ config.name }}__info {{ config.jsName }}__link-detail-page grid grid--justify grid--top grid--no-wrap">
                 {% if data.name %}
                     <div class="col col--sm-12 col--md-8">
                         {{ block('title') }}
@@ -72,7 +72,7 @@
             <div class="{{ config.name }}__review" itemscope itemtype="http://schema.org/AggregateRating" itemprop="aggregateRating">
                 {{ block('rating') }}
             </div>
-
+            <meta class="{{ config.jsName }}__abstract-sku" itemprop="abstractSku" content="{{ data.abstractSku }}">
             <meta class="{{ config.jsName }}__sku" itemprop="sku" content="{{ data.metaSku }}">
         {% endblock %}
     </div>
@@ -84,7 +84,7 @@
     {% set modifiers = ['spaceless'] %}
 
     {% block productThumbnail %}
-        <a itemprop="url" class="{{ config.name }}__overlay {{ config.jsName }}__link-detail-page {{ linkExtraClass }}" href="{{ data.url }}">
+        <a itemprop="url" class="{{ config.name }}__overlay {{ config.jsName }}__link-detail-page {{ linkExtraClass }}" href="{{ functionExists('generatePath') ? generatePath(data.url) : data.url }}">
             {{ parent() }}
         </a>
     {% endblock %}

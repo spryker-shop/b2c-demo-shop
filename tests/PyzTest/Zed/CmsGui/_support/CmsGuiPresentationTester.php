@@ -5,10 +5,12 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace PyzTest\Zed\CmsGui;
 
 use Codeception\Actor;
-use Codeception\Scenario;
+use Exception;
 use Faker\Factory;
 
 /**
@@ -37,22 +39,11 @@ class CmsGuiPresentationTester extends Actor
     protected $localizedFakeData;
 
     /**
-     * @param \Codeception\Scenario $scenario
-     */
-    public function __construct(Scenario $scenario)
-    {
-        parent::__construct($scenario);
-
-        $this->amZed();
-        $this->amLoggedInUser();
-    }
-
-    /**
      * @param string $date
      *
      * @return $this
      */
-    public function setValidFrom($date)
+    public function setValidFrom(string $date)
     {
         $date = $this->adaptDateInputForBrowser($date);
         $this->fillField('//*[@id="cms_page_validFrom"]', $date);
@@ -75,10 +66,43 @@ class CmsGuiPresentationTester extends Actor
      *
      * @return $this
      */
-    public function setValidTo($date)
+    public function setValidTo(string $date)
     {
         $date = $this->adaptDateInputForBrowser($date);
         $this->fillField('//*[@id="cms_page_validTo"]', $date);
+
+        return $this;
+    }
+
+    /**
+     * @param string $selector
+     *
+     * @return bool
+     */
+    public function tryToSeeElement(string $selector): bool
+    {
+        try {
+            $this->seeElement($selector);
+
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
+
+    /**
+     * @param string $elementIdentifier
+     *
+     * @return $this
+     */
+    public function openIboxForElement(string $elementIdentifier)
+    {
+        $collapseLinkIdentifier = $elementIdentifier
+            . '/ancestor::div[contains(@class, "ibox") and contains(@class, "collapsed")]//a[@class="collapse-link"]';
+
+        $this->waitForElementClickable($collapseLinkIdentifier);
+
+        $this->click($collapseLinkIdentifier);
 
         return $this;
     }
@@ -90,12 +114,24 @@ class CmsGuiPresentationTester extends Actor
      *
      * @return $this
      */
-    public function fillLocalizedUrlForm($formIndex, $name, $url)
+    public function fillLocalizedUrlForm(int $formIndex, string $name, string $url)
     {
         $nameFieldIdentifier = sprintf('//*[@id="cms_page_pageAttributes_%s_name"]', $formIndex);
+
+        if (!$this->tryToSeeElement($nameFieldIdentifier)) {
+            $this->openIboxForElement($nameFieldIdentifier);
+        }
+
         $this->waitForElementVisible($nameFieldIdentifier);
+
         $this->fillField($nameFieldIdentifier, $name);
+
         $urlFieldIdentifier = sprintf('//*[@id="cms_page_pageAttributes_%s_url"]', $formIndex);
+
+        if (!$this->tryToSeeElement($urlFieldIdentifier)) {
+            $this->openIboxForElement($urlFieldIdentifier);
+        }
+
         $this->waitForElementVisible($urlFieldIdentifier);
         $this->fillField($urlFieldIdentifier, $url);
 
@@ -109,21 +145,11 @@ class CmsGuiPresentationTester extends Actor
      *
      * @return void
      */
-    public function fillPlaceholderContents($placeHolderIndex, $localeIndex, $contents): void
+    public function fillPlaceholderContents(int $placeHolderIndex, int $localeIndex, string $contents): void
     {
         $translationElementId = 'cms_glossary_glossaryAttributes_' . $placeHolderIndex . '_translations_' . $localeIndex . '_translation';
 
         $this->executeJS("$('#$translationElementId').text('$contents');");
-    }
-
-    /**
-     * @return $this
-     */
-    public function expandLocalizedUrlPane()
-    {
-        $this->click('//*[@id="tab-content-general"]/div/div[7]/div[1]/a');
-
-        return $this;
     }
 
     /**
@@ -169,7 +195,7 @@ class CmsGuiPresentationTester extends Actor
      */
     public function grabCmsPageId(): int
     {
-        return $this->grabFromCurrentUrl('/id-cms-page=(\d+)/');
+        return (int)$this->grabFromCurrentUrl('/id-cms-page=(\d+)/');
     }
 
     /**
