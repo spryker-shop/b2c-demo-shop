@@ -199,9 +199,9 @@ services:
             localhost:5672:
                 protocol: tcp
     session:
-        engine: redis
+        engine: valkey
     key_value_store:
-        engine: redis
+        engine: valkey
         endpoints:
             localhost:16379:
                 protocol: tcp
@@ -225,10 +225,10 @@ services:
         engine: swagger-ui
         endpoints:
             swagger.spryker.local:
-    redis-gui:
-        engine: redis-commander
+    valkey-gui:
+        engine: valkey-commander
         endpoints:
-            redis-commander.spryker.local:
+            valkey-commander.spryker.local:
     dashboard:
         engine: dashboard
         endpoints:
