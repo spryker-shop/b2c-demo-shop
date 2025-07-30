@@ -8,7 +8,7 @@
 declare(strict_types = 1);
 
 namespace Pyz\Zed\Console;
-
+use Spryker\Zed\Opentelemetry\Communication\Plugin\Console\OpentelemetryGeneratorConsole;
 use Pyz\Zed\DataImport\DataImportConfig;
 use Pyz\Zed\Development\Communication\Console\AcceptanceCodeTestConsole;
 use Pyz\Zed\Development\Communication\Console\ApiCodeTestConsole;
@@ -194,6 +194,7 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
     protected function getConsoleCommands(Container $container): array
     {
         $commands = [
+            new OpentelemetryGeneratorConsole(),
             new CacheWarmerConsole(),
             new TwigTemplateWarmerConsole(),
             new BuildNavigationConsole(),
