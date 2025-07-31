@@ -5,10 +5,13 @@ tag: 'dev'
 
 environment: docker.dev
 image:
-    tag: spryker/php:8.3
+    tag: spryker/php:8.3-alpine3.20-otel
     php:
         enabled-extensions:
             - blackfire
+            - opentelemetry
+            - grpc
+            - protobuf
     environment:
         SPRYKER_PRODUCT_CONFIGURATOR_HOST: date-time-configurator-example.spryker.local
         SPRYKER_PRODUCT_CONFIGURATOR_PORT: 80
