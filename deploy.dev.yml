@@ -1,6 +1,8 @@
 version: '0.1'
+
 namespace: spryker_b2c_dev
 tag: 'dev'
+
 environment: docker.dev
 image:
     tag: spryker/php:8.3-alpine3.20-otel
@@ -14,24 +16,37 @@ image:
         SPRYKER_PRODUCT_CONFIGURATOR_HOST: date-time-configurator-example.spryker.local
         SPRYKER_PRODUCT_CONFIGURATOR_PORT: 80
         SPRYKER_DYNAMIC_STORE_MODE: true
-        OTEL_SDK_DISABLED: false
         SPRYKER_YVES_HOST_EU: yves.eu.spryker.local
         SPRYKER_YVES_HOST_US: yves.us.spryker.local
         SPRYKER_PUSH_NOTIFICATION_WEB_PUSH_PHP_VAPID_PUBLIC_KEY: 'BGqNWbv0hWM5CQ1-KwAfSQBMC6TMVFyrnh3vQp37oGCNvQ6eG_HyMjxBFJRWeCPTbzDoxcjhxLJS8Ck8r1G2oFw'
         SPRYKER_PUSH_NOTIFICATION_WEB_PUSH_PHP_VAPID_PRIVATE_KEY: 'UK6DywwjKITPpRHBSY9TLPIXm6BPrHX40sseIoXT9c8'
         SPRYKER_PUSH_NOTIFICATION_WEB_PUSH_PHP_VAPID_SUBJECT: 'https://spryker.com'
         #AOP
-        SPRYKER_AOP_INFRASTRUCTURE: '{ "SPRYKER_MESSAGE_BROKER_HTTP_SENDER_CONFIG": {}, "SPRYKER_MESSAGE_BROKER_SQS_RECEIVER_CONFIG": {} }'
-        SPRYKER_AOP_APPLICATION: '{ "APP_DOMAINS": [], "STORE_NAME_REFERENCE_MAP": {}, "APP_CATALOG_SCRIPT_URL": "" }'
-        SPRYKER_AOP_AUTHENTICATION: '{ "AUTH0_CUSTOM_DOMAIN": "", "AUTH0_CLIENT_ID": "", "AUTH0_CLIENT_SECRET": "" }'
+        SPRYKER_AOP_INFRASTRUCTURE: '{
+            "SPRYKER_MESSAGE_BROKER_HTTP_SENDER_CONFIG": {},
+            "SPRYKER_MESSAGE_BROKER_SQS_RECEIVER_CONFIG": {}
+        }'
+        SPRYKER_AOP_APPLICATION: '{
+            "APP_DOMAINS": [],
+            "STORE_NAME_REFERENCE_MAP": {},
+            "APP_CATALOG_SCRIPT_URL": ""
+        }'
+        SPRYKER_AOP_AUTHENTICATION: '{
+            "AUTH0_CUSTOM_DOMAIN": "",
+            "AUTH0_CLIENT_ID": "",
+            "AUTH0_CLIENT_SECRET": ""
+        }'
     node:
         version: 18
         npm: 9
+
 composer:
     mode: ''
     autoload: ''
+
 assets:
     mode: development
+
 regions:
     EU:
         services:
@@ -43,17 +58,14 @@ regions:
                 database: eu-docker
                 username: spryker
                 password: secret
+
             broker:
                 namespace: eu-docker
             key_value_store:
                 namespace: 1
             search:
                 namespace: eu_search
-            grafana:
-                engine: otel-stack
-                endpoints:
-                    grafana:
-                        localhost:3000
+
     US:
         services:
             mail:
@@ -70,6 +82,7 @@ regions:
                 namespace: 2
             search:
                 namespace: us_search
+
 groups:
     EU:
         region: EU
@@ -120,6 +133,7 @@ groups:
                     backend-api.eu.spryker.local:
                         region: EU
                         entry-point: BackendApi
+
     US:
         region: US
         applications:
@@ -224,23 +238,29 @@ services:
             spryker.local:
     webdriver:
         engine: chromedriver
+
 docker:
     ssl:
         enabled: false
         redirect: true
+
     testing:
         region: EU
+
     debug:
         enabled: true
         xdebug:
             enabled: true
+
     mount:
         native:
             platforms:
                 - linux
+
         docker-sync:
             platforms:
                 - windows
+
         mutagen:
             platforms:
                 - macos
