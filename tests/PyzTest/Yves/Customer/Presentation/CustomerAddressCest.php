@@ -14,6 +14,8 @@ use PyzTest\Yves\Customer\PageObject\CustomerAddressesPage;
 use PyzTest\Yves\Customer\PageObject\CustomerAddressPage;
 
 /**
+ * @skip This test was temporarily skipped due to flikerness. See {@link https://spryker.atlassian.net/browse/CC-35660} for details
+ *
  * Auto-generated group annotations
  *
  * @group PyzTest
