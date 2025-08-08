@@ -36,6 +36,8 @@ class CustomerAddressCest
     }
 
     /**
+     * @skip This test was temporarily skipped due to flikerness. See {@link https://spryker.atlassian.net/browse/CC-35660} for details
+     *
      * @param \PyzTest\Yves\Customer\CustomerPresentationTester $i
      *
      * @return void
