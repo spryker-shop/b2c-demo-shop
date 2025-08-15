@@ -8,6 +8,8 @@ pipeline: docker.ci.acceptance.dynamic-store-off.cypress
 image:
     tag: spryker/php:8.3
     php:
+        enabled-extensions:
+            - otel
         ini:
             max_execution_time: 300
             request_terminate_timeout: 300
