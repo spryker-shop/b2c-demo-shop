@@ -66,5 +66,15 @@ sections:
             command: 'vendor/bin/console publish:trigger-events'
 
     scheduler-start:
+        queue-setup:
+            command: 'vendor/bin/console queue:setup'
+
+        apply-scheduled-prices:
+            command: 'vendor/bin/console price-product-schedule:apply'
+
+        run-queue-worker:
+            command: 'vendor/bin/console queue:worker:start --stop-when-empty'
+            timeout: 2000
+
         scheduler-setup:
             command: 'vendor/bin/console scheduler:setup -vvv --no-ansi || true'
