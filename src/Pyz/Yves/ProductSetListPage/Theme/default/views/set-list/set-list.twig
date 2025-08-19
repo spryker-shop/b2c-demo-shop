@@ -13,6 +13,7 @@
         <div class="grid set-list">
             {% for productSet in data.sets %}
                 {% set imageUrl = productSet.imageSets.0.images.0.externalUrlSmall | default('') %}
+                {% set imageAltText = productSet.imageSets.0.images.0.altTextSmall | default(productSet.name) %}
 
                 <div class="col col--sm-12 col--lg-4 text-center">
                     {% embed molecule('card') with {
@@ -20,6 +21,7 @@
                             name: productSet.name,
                             url: productSet.url,
                             imageUrl: imageUrl,
+                            imageTitle: imageAltText,
                         },
                     } only %}
                         {% block image %}
@@ -28,7 +30,7 @@
                                     modifiers: ['thumbnail', 'product-set'],
                                     data: {
                                         imageSrc: data.imageUrl,
-                                        imageTitle: data.name,
+                                        imageTitle: data.imageTitle,
                                     },
                                 } only %}
                             </a>
