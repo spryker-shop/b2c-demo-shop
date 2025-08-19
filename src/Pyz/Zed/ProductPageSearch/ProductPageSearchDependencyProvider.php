@@ -44,7 +44,7 @@ use Spryker\Zed\ProductReviewSearch\Communication\Plugin\ProductPageSearch\Elast
 class ProductPageSearchDependencyProvider extends SprykerProductPageSearchDependencyProvider
 {
     /**
-     * @return array<\Spryker\Zed\ProductPageSearch\Dependency\Plugin\ProductPageDataExpanderInterface>
+     * @return array<string, \Spryker\Zed\ProductPageSearch\Dependency\Plugin\ProductPageDataExpanderInterface>
      */
     protected function getDataExpanderPlugins(): array
     {
