@@ -9,7 +9,6 @@ declare(strict_types = 1);
 
 namespace Pyz\Zed\DataImport\Business\Model\DiscountVoucher;
 
-use Exception;
 use Orm\Zed\Discount\Persistence\SpyDiscount;
 use Orm\Zed\Discount\Persistence\SpyDiscountQuery;
 use Orm\Zed\Discount\Persistence\SpyDiscountVoucher;
@@ -80,8 +79,6 @@ class DiscountVoucherWriterStep implements DataImportStepInterface
     /**
      * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
      *
-     * @throws \Exception
-     *
      * @return void
      */
     public function execute(DataSetInterface $dataSet): void
@@ -112,17 +109,7 @@ class DiscountVoucherWriterStep implements DataImportStepInterface
             $voucherCodeCollection->append($discountVoucherEntity);
         }
 
-        try {
-            $voucherCodeCollection->save();
-        } catch (Exception) {
-            $logData = [
-                'dataSet' => $dataSet->getArrayCopy(),
-                'codes' => $codes,
-                'voucherCodeCollection' => $voucherCodeCollection->toArray(),
-            ];
-
-            throw new Exception('Failed to save. Data:' . json_encode($logData));
-        }
+        $voucherCodeCollection->save();
     }
 
     /**
@@ -158,7 +145,7 @@ class DiscountVoucherWriterStep implements DataImportStepInterface
                 $code = $this->addCustomCodeToGenerated($customCode, $code);
             }
 
-            if ($this->voucherCodeExists($code) === true) {
+            if ($this->voucherCodeExists($code) === true || in_array($code, $codesToGenerate, true)) {
                 continue;
             }
 
