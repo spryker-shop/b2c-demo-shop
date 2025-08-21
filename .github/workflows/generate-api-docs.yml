@@ -1,0 +1,44 @@
+name: Generate and Publish API Specs
+
+on:
+  workflow_run:
+    # The name of the workflow to watch
+    workflows: ["B2C-CI"]
+    # The event type that triggers this workflow
+    types:
+      - completed
+    # Optional but recommended: only run for the main/master branch
+    branches:
+      - main
+      - master
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  generate-and-publish:
+    if: github.event.workflow_run.conclusion == 'success'
+    name: Generate and Publish API Specs
+    runs-on: ubuntu-latest
+
+    permissions:
+      id-token: write # Required for AWS OIDC authentication
+      contents: read  # Required to check out the repository
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Generate and Publish Specs
+        uses: spryker-sdk/gha-api-spec-upload@main
+        with:
+          # --- Configure Inputs ---
+          app-type: 'b2c'
+          deploy-file: 'deploy.ci.api.mariadb.yml'
+          s3-bucket: ${{ vars.API_UPLOAD_S3_AWS_BUCKET }}
+          aws-region: ${{ vars.API_UPLOAD_S3_AWS_REGION }}
+          aws-access-key-id: ${{ secrets.API_UPLOAD_S3_AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.API_UPLOAD_S3_AWS_SECRET_ACCESS_KEY }}
+          storefront-server-url: ${{ vars.API_UPLOAD_GLUE_STOREFRONT_SERVER_URL }}
+          backend-server-url: ${{ vars.API_UPLOAD_GLUE_BACKEND_SERVER_URL }}

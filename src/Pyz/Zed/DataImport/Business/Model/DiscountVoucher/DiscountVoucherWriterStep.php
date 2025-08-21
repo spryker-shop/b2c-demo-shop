@@ -145,7 +145,7 @@ class DiscountVoucherWriterStep implements DataImportStepInterface
                 $code = $this->addCustomCodeToGenerated($customCode, $code);
             }
 
-            if ($this->voucherCodeExists($code) === true) {
+            if ($this->voucherCodeExists($code) === true || in_array($code, $codesToGenerate, true)) {
                 continue;
             }
 
