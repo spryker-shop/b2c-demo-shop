@@ -12,10 +12,14 @@ namespace Pyz\Zed\DataImport\Business\Model\ProductImage\Writer;
 use Generated\Shared\Transfer\SpyProductImageEntityTransfer;
 use Generated\Shared\Transfer\SpyProductImageSetEntityTransfer;
 use Generated\Shared\Transfer\SpyProductImageSetToProductImageEntityTransfer;
+use Orm\Zed\Glossary\Persistence\SpyGlossaryKeyQuery;
+use Orm\Zed\Glossary\Persistence\SpyGlossaryTranslationQuery;
 use Orm\Zed\ProductImage\Persistence\SpyProductImage;
 use Orm\Zed\ProductImage\Persistence\SpyProductImageSet;
 use Pyz\Zed\DataImport\Business\Model\ProductImage\ProductImageHydratorStep;
 use Pyz\Zed\DataImport\Business\Model\ProductImage\Repository\ProductImageRepositoryInterface;
+use Spryker\Shared\GlossaryStorage\GlossaryStorageConfig;
+use Spryker\Zed\DataImport\Business\Model\DataImportStep\LocalizedAttributesExtractorStep;
 use Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface;
 use Spryker\Zed\DataImport\Business\Model\DataSet\DataSetWriterInterface;
 use Spryker\Zed\DataImport\Business\Model\Publisher\DataImporterPublisher;
@@ -24,6 +28,21 @@ use Spryker\Zed\ProductImage\Dependency\ProductImageEvents;
 
 class ProductImagePropelDataSetWriter implements DataSetWriterInterface
 {
+    /**
+     * @var string
+     */
+    public const KEY_ALT_TEXT_SMALL = 'alt_text_small';
+
+    /**
+     * @var string
+     */
+    public const KEY_ALT_TEXT_LARGE = 'alt_text_large';
+
+    /**
+     * @var string
+     */
+    protected const GLOSSARY_KEY_PREFIX = 'product_image';
+
     /**
      * @var \Pyz\Zed\DataImport\Business\Model\ProductImage\Repository\ProductImageRepositoryInterface
      */
@@ -46,6 +65,7 @@ class ProductImagePropelDataSetWriter implements DataSetWriterInterface
     {
         $productImageSetEntity = $this->createOrUpdateProductImageSet($dataSet);
         $productImageEntity = $this->createOrUpdateProductImage($dataSet, $productImageSetEntity);
+        $this->createOrUpdateProductImageAltTexts($dataSet, $productImageEntity, $productImageSetEntity);
         $this->createOrUpdateImageToImageSetRelation($productImageSetEntity, $productImageEntity, $dataSet);
     }
 
@@ -137,6 +157,104 @@ class ProductImagePropelDataSetWriter implements DataSetWriterInterface
         $productImageSetToProductImageEntity->save();
 
         $this->addImagePublishEvents($productImageSetEntity);
+    }
+
+    /**
+     * @param \Orm\Zed\ProductImage\Persistence\SpyProductImage $productImageEntity
+     *
+     * @return \Orm\Zed\ProductImage\Persistence\SpyProductImage
+     */
+    protected function saveProductImageAltTextGlossaryKeys(SpyProductImage $productImageEntity): SpyProductImage
+    {
+        $altTextLargeGlossaryKey = sprintf(
+            '%s.%s.%s',
+            static::GLOSSARY_KEY_PREFIX,
+            $productImageEntity->getIdProductImage(),
+            static::KEY_ALT_TEXT_LARGE,
+        );
+        $altTextSmallGlossaryKey = sprintf(
+            '%s.%s.%s',
+            static::GLOSSARY_KEY_PREFIX,
+            $productImageEntity->getIdProductImage(),
+            static::KEY_ALT_TEXT_SMALL,
+        );
+        $productImageEntity->setAltTextLarge($altTextLargeGlossaryKey)
+            ->setAltTextSmall($altTextSmallGlossaryKey)
+            ->save();
+
+        return $productImageEntity;
+    }
+
+    /**
+     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
+     * @param \Orm\Zed\ProductImage\Persistence\SpyProductImage $productImageEntity
+     * @param \Orm\Zed\ProductImage\Persistence\SpyProductImageSet $productImageSetEntity
+     *
+     * @return void
+     */
+    protected function createOrUpdateProductImageAltTexts(
+        DataSetInterface $dataSet,
+        SpyProductImage $productImageEntity,
+        SpyProductImageSet $productImageSetEntity,
+    ): void {
+        if (!$productImageEntity->getAltTextLarge() || !$productImageEntity->getAltTextSmall()) {
+            $productImageEntity = $this->saveProductImageAltTextGlossaryKeys($productImageEntity);
+            $this->addImagePublishEvents($productImageSetEntity);
+        }
+
+        foreach ($dataSet[LocalizedAttributesExtractorStep::KEY_LOCALIZED_ATTRIBUTES] as $idLocale => $localizedAttributes) {
+            if ($productImageSetEntity->getFkLocale() && $productImageSetEntity->getFkLocale() !== $idLocale) {
+                continue;
+            }
+
+            $this->createOrUpdateGlossaryKey(
+                $productImageEntity->getAltTextSmall(),
+                $idLocale,
+                $localizedAttributes[static::KEY_ALT_TEXT_SMALL],
+            );
+            $this->createOrUpdateGlossaryKey(
+                $productImageEntity->getAltTextLarge(),
+                $idLocale,
+                $localizedAttributes[static::KEY_ALT_TEXT_LARGE],
+            );
+        }
+    }
+
+    /**
+     * @param string $glossaryKey
+     * @param int $idLocale
+     * @param string $value
+     *
+     * @return void
+     */
+    protected function createOrUpdateGlossaryKey(
+        string $glossaryKey,
+        int $idLocale,
+        string $value,
+    ): void {
+        $glossaryKeyEntity = SpyGlossaryKeyQuery::create()
+            ->filterByKey($glossaryKey)
+            ->findOneOrCreate();
+        $glossaryKeyEntity->save();
+        $glossaryTranslationEntity = SpyGlossaryTranslationQuery::create()
+            ->filterByGlossaryKey($glossaryKeyEntity)
+            ->filterByFkLocale($idLocale)
+            ->findOneOrCreate();
+        $glossaryTranslationEntity->setValue($value);
+
+        if (!$glossaryTranslationEntity->isNew() && !$glossaryTranslationEntity->isModified()) {
+            return;
+        }
+
+        $glossaryTranslationEntity->save();
+        DataImporterPublisher::addEvent(
+            GlossaryStorageConfig::GLOSSARY_KEY_PUBLISH_WRITE,
+            $glossaryTranslationEntity->getFkGlossaryKey(),
+        );
+        DataImporterPublisher::addEvent(
+            GlossaryStorageConfig::PUBLISH_TRANSLATION,
+            $glossaryTranslationEntity->getIdGlossaryTranslation(),
+        );
     }
 
     /**

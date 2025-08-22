@@ -9,6 +9,9 @@ declare(strict_types = 1);
 
 namespace Pyz\Zed\DataImport\Business\Model\ProductSet;
 
+use Orm\Zed\Glossary\Persistence\SpyGlossaryKeyQuery;
+use Orm\Zed\Glossary\Persistence\SpyGlossaryTranslationQuery;
+use Orm\Zed\ProductImage\Persistence\SpyProductImage;
 use Orm\Zed\ProductImage\Persistence\SpyProductImageQuery;
 use Orm\Zed\ProductImage\Persistence\SpyProductImageSetQuery;
 use Orm\Zed\ProductImage\Persistence\SpyProductImageSetToProductImageQuery;
@@ -100,6 +103,21 @@ class ProductSetWriterStep extends PublishAwareStep implements DataImportStepInt
      * @var string
      */
     public const KEY_IMAGE_LARGE = 'image_large';
+
+    /**
+     * @var string
+     */
+    protected const KEY_ALT_TEXT_SMALL = 'alt_text_small';
+
+    /**
+     * @var string
+     */
+    protected const KEY_ALT_TEXT_LARGE = 'alt_text_large';
+
+    /**
+     * @var string
+     */
+    protected const GLOSSARY_KEY_PREFIX = 'product_image';
 
     /**
      * @var \Pyz\Zed\DataImport\Business\Model\Product\Repository\ProductRepositoryInterface
@@ -238,7 +256,7 @@ class ProductSetWriterStep extends PublishAwareStep implements DataImportStepInt
      */
     protected function findOrCreateProductImageSet(DataSetInterface $dataSet, SpyProductSet $productSetEntity): void
     {
-        foreach ($dataSet[ProductSetImageExtractorStep::KEY_TARGET] as $imageSet) {
+        foreach ($dataSet[ProductSetImageExtractorStep::KEY_TARGET] as $imageSetIndex => $imageSet) {
             $productImageSetEntity = SpyProductImageSetQuery::create()
                 ->filterByFkResourceProductSet($productSetEntity->getIdProductSet())
                 ->filterByName($imageSet[static::KEY_IMAGE_SET])
@@ -248,7 +266,7 @@ class ProductSetWriterStep extends PublishAwareStep implements DataImportStepInt
                 $productImageSetEntity->save();
             }
 
-            foreach ($imageSet[static::KEY_IMAGES] as $image) {
+            foreach ($imageSet[static::KEY_IMAGES] as $imageIndex => $image) {
                 $productImageEntity = SpyProductImageQuery::create()
                     ->filterByExternalUrlLarge($image[static::KEY_IMAGE_LARGE])
                     ->findOneOrCreate();
@@ -258,6 +276,14 @@ class ProductSetWriterStep extends PublishAwareStep implements DataImportStepInt
                 if ($productImageEntity->isNew() || $productImageEntity->isModified()) {
                     $productImageEntity->save();
                 }
+
+                $productImageEntity = $this->saveProductImageAltTextGlossaryKeys($productImageEntity);
+                $this->createOrUpdateProductImageAltTexts(
+                    $dataSet,
+                    $productImageEntity,
+                    ProductSetImageExtractorStep::IMAGE_ALT_TEXT_KEY_PREFIX . ProductSetImageExtractorStep::IMAGE_SMALL_KEY_PREFIX . $imageSetIndex . '.' . $imageIndex,
+                    ProductSetImageExtractorStep::IMAGE_ALT_TEXT_KEY_PREFIX . ProductSetImageExtractorStep::IMAGE_LARGE_KEY_PREFIX . $imageSetIndex . '.' . $imageIndex,
+                );
 
                 $productImageSetToProductImageEntity = SpyProductImageSetToProductImageQuery::create()
                     ->filterByFkProductImage($productImageEntity->getIdProductImage())
@@ -273,5 +299,96 @@ class ProductSetWriterStep extends PublishAwareStep implements DataImportStepInt
                 $productImageSetToProductImageEntity->save();
             }
         }
+    }
+
+    /**
+     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
+     * @param \Orm\Zed\ProductImage\Persistence\SpyProductImage $productImageEntity
+     * @param string $keyAltTextSmall
+     * @param string $keyAltTextLarge
+     *
+     * @return void
+     */
+    protected function createOrUpdateProductImageAltTexts(
+        DataSetInterface $dataSet,
+        SpyProductImage $productImageEntity,
+        string $keyAltTextSmall,
+        string $keyAltTextLarge,
+    ): void {
+        if (!$productImageEntity->getAltTextLarge() || !$productImageEntity->getAltTextSmall()) {
+            $productImageEntity = $this->saveProductImageAltTextGlossaryKeys($productImageEntity);
+        }
+
+        foreach ($dataSet[ProductSetImageLocalizedAttributesExtractorStep::KEY_IMAGE_ALT_TEXT_LOCALIZED_ATTRIBUTES] as $idLocale => $localizedAttributes) {
+            $this->createOrUpdateGlossaryKey(
+                $productImageEntity->getAltTextSmall(),
+                $idLocale,
+                $localizedAttributes[$keyAltTextSmall],
+            );
+            $this->createOrUpdateGlossaryKey(
+                $productImageEntity->getAltTextLarge(),
+                $idLocale,
+                $localizedAttributes[$keyAltTextLarge],
+            );
+        }
+    }
+
+    /**
+     * @param \Orm\Zed\ProductImage\Persistence\SpyProductImage $productImageEntity
+     *
+     * @return \Orm\Zed\ProductImage\Persistence\SpyProductImage
+     */
+    protected function saveProductImageAltTextGlossaryKeys(SpyProductImage $productImageEntity): SpyProductImage
+    {
+        $altTextLargeGlossaryKey = sprintf(
+            '%s.%s.%s',
+            static::GLOSSARY_KEY_PREFIX,
+            $productImageEntity->getIdProductImage(),
+            static::KEY_ALT_TEXT_LARGE,
+        );
+        $altTextSmallGlossaryKey = sprintf(
+            '%s.%s.%s',
+            static::GLOSSARY_KEY_PREFIX,
+            $productImageEntity->getIdProductImage(),
+            static::KEY_ALT_TEXT_SMALL,
+        );
+        $productImageEntity->setAltTextLarge($altTextLargeGlossaryKey)
+            ->setAltTextSmall($altTextSmallGlossaryKey)
+            ->save();
+
+        return $productImageEntity;
+    }
+
+    /**
+     * @param string $glossaryKey
+     * @param int $idLocale
+     * @param string $value
+     *
+     * @return void
+     */
+    protected function createOrUpdateGlossaryKey(
+        string $glossaryKey,
+        int $idLocale,
+        string $value,
+    ): void {
+        if (!$value) {
+            return;
+        }
+
+        $glossaryKeyEntity = SpyGlossaryKeyQuery::create()
+            ->filterByKey($glossaryKey)
+            ->findOneOrCreate();
+        $glossaryKeyEntity->save();
+        $glossaryTranslationEntity = SpyGlossaryTranslationQuery::create()
+            ->filterByGlossaryKey($glossaryKeyEntity)
+            ->filterByFkLocale($idLocale)
+            ->findOneOrCreate();
+        $glossaryTranslationEntity->setValue($value);
+
+        if (!$glossaryTranslationEntity->isNew() && !$glossaryTranslationEntity->isModified()) {
+            return;
+        }
+
+        $glossaryTranslationEntity->save();
     }
 }
