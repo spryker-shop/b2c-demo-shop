@@ -15457,35 +15457,42 @@
         },
         {
             "name": "spryker/agent",
-            "version": "1.7.0",
+            "version": "1.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/agent.git",
-                "reference": "4ee8651af0c54e795d5d4aa9562392959aaa884f"
+                "reference": "1ef233a4b4372e193a23ad682eb5fc576eb45dea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/agent/zipball/4ee8651af0c54e795d5d4aa9562392959aaa884f",
-                "reference": "4ee8651af0c54e795d5d4aa9562392959aaa884f",
+                "url": "https://api.github.com/repos/spryker/agent/zipball/1ef233a4b4372e193a23ad682eb5fc576eb45dea",
+                "reference": "1ef233a4b4372e193a23ad682eb5fc576eb45dea",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.1",
+                "php": ">=8.2",
                 "spryker/agent-extension": "^1.0.0",
                 "spryker/customer": "^7.10.0",
                 "spryker/customer-extension": "^1.2.0",
                 "spryker/kernel": "^3.30.0",
+                "spryker/propel": "^3.46.0",
                 "spryker/propel-orm": "^1.0.0",
+                "spryker/quote-extension": "^1.10.0",
+                "spryker/sales-extension": "^1.13.0",
                 "spryker/session": "^3.2.0 || ^4.0.0",
+                "spryker/transfer": "^3.27.0",
                 "spryker/user": "^3.2.0",
                 "spryker/zed-request": "^3.4.0"
             },
             "require-dev": {
                 "spryker/code-sniffer": "*",
                 "spryker/container": "*",
-                "spryker/propel": "*",
                 "spryker/store": "*",
                 "spryker/testify": "*"
+            },
+            "suggest": {
+                "spryker/quote": "For saving Agent info to orders.",
+                "spryker/sales": "For saving Agent info to orders."
             },
             "type": "library",
             "extra": {
@@ -15505,9 +15512,9 @@
             ],
             "description": "Agent module",
             "support": {
-                "source": "https://github.com/spryker/agent/tree/1.7.0"
+                "source": "https://github.com/spryker/agent/tree/1.9.0"
             },
-            "time": "2024-08-08T15:27:43+00:00"
+            "time": "2025-08-29T14:19:30+00:00"
         },
         {
             "name": "spryker/agent-auth-rest-api",
@@ -15604,23 +15611,24 @@
         },
         {
             "name": "spryker/agent-gui",
-            "version": "1.2.0",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/agent-gui.git",
-                "reference": "d46de9ff353f6e0ad451f23198903ec421047b4c"
+                "reference": "341ab9b5e81fe2275ef3f14bbf2af8f685d963ff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/agent-gui/zipball/d46de9ff353f6e0ad451f23198903ec421047b4c",
-                "reference": "d46de9ff353f6e0ad451f23198903ec421047b4c",
+                "url": "https://api.github.com/repos/spryker/agent-gui/zipball/341ab9b5e81fe2275ef3f14bbf2af8f685d963ff",
+                "reference": "341ab9b5e81fe2275ef3f14bbf2af8f685d963ff",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.1",
+                "php": ">=8.2",
                 "spryker/gui": "^3.13.0",
                 "spryker/kernel": "^3.30.0",
                 "spryker/symfony": "^3.0.0",
+                "spryker/transfer": "^3.27.0",
                 "spryker/user": "^3.2.0",
                 "spryker/user-extension": "^1.0.0"
             },
@@ -15644,9 +15652,9 @@
             ],
             "description": "AgentGui module",
             "support": {
-                "source": "https://github.com/spryker/agent-gui/tree/1.2.0"
+                "source": "https://github.com/spryker/agent-gui/tree/1.3.0"
             },
-            "time": "2024-02-06T10:56:40+00:00"
+            "time": "2025-08-29T14:19:30+00:00"
         },
         {
             "name": "spryker/alternative-products-rest-api",
@@ -42706,16 +42714,16 @@
         },
         {
             "name": "spryker/quote",
-            "version": "2.24.0",
+            "version": "2.26.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/quote.git",
-                "reference": "7bc57c292a8097e9e659fd86e27c4701f1bcfaf8"
+                "reference": "b128aa7baf8095a84b3968c44cf14bfd7183f33f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/quote/zipball/7bc57c292a8097e9e659fd86e27c4701f1bcfaf8",
-                "reference": "7bc57c292a8097e9e659fd86e27c4701f1bcfaf8",
+                "url": "https://api.github.com/repos/spryker/quote/zipball/b128aa7baf8095a84b3968c44cf14bfd7183f33f",
+                "reference": "b128aa7baf8095a84b3968c44cf14bfd7183f33f",
                 "shasum": ""
             },
             "require": {
@@ -42727,7 +42735,7 @@
                 "spryker/customer": "^6.0.0 || ^7.0.0",
                 "spryker/kernel": "^3.30.0",
                 "spryker/propel-orm": "^1.0.0",
-                "spryker/quote-extension": "^1.9.0",
+                "spryker/quote-extension": "^1.10.0",
                 "spryker/session": "^3.3.0 || ^4.14.0",
                 "spryker/store": "^1.19.0",
                 "spryker/symfony": "^3.0.0",
@@ -42760,9 +42768,9 @@
             ],
             "description": "Quote module",
             "support": {
-                "source": "https://github.com/spryker/quote/tree/2.24.0"
+                "source": "https://github.com/spryker/quote/tree/2.26.0"
             },
-            "time": "2025-07-03T11:11:32+00:00"
+            "time": "2025-08-29T14:19:30+00:00"
         },
         {
             "name": "spryker/quote-checkout-connector",
@@ -42813,16 +42821,16 @@
         },
         {
             "name": "spryker/quote-extension",
-            "version": "1.9.0",
+            "version": "1.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/quote-extension.git",
-                "reference": "a0ed11250aa6877a2576b3d3744058b905b09b41"
+                "reference": "e6e26328b2cf349be31f0b4200d5ed8e19ff4794"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/quote-extension/zipball/a0ed11250aa6877a2576b3d3744058b905b09b41",
-                "reference": "a0ed11250aa6877a2576b3d3744058b905b09b41",
+                "url": "https://api.github.com/repos/spryker/quote-extension/zipball/e6e26328b2cf349be31f0b4200d5ed8e19ff4794",
+                "reference": "e6e26328b2cf349be31f0b4200d5ed8e19ff4794",
                 "shasum": ""
             },
             "require": {
@@ -42848,9 +42856,9 @@
             ],
             "description": "QuoteExtension module",
             "support": {
-                "source": "https://github.com/spryker/quote-extension/tree/1.9.0"
+                "source": "https://github.com/spryker/quote-extension/tree/1.10.0"
             },
-            "time": "2025-04-16T09:16:24+00:00"
+            "time": "2025-08-29T14:19:30+00:00"
         },
         {
             "name": "spryker/quote-request-extension",
@@ -43497,16 +43505,16 @@
         },
         {
             "name": "spryker/sales",
-            "version": "11.72.0",
+            "version": "11.74.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/sales.git",
-                "reference": "8956da805b37702efee6d21000bfcc2d290a674d"
+                "reference": "a92c3f4f798bc124c80462f36628c3b9c9bacc5b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/sales/zipball/8956da805b37702efee6d21000bfcc2d290a674d",
-                "reference": "8956da805b37702efee6d21000bfcc2d290a674d",
+                "url": "https://api.github.com/repos/spryker/sales/zipball/a92c3f4f798bc124c80462f36628c3b9c9bacc5b",
+                "reference": "a92c3f4f798bc124c80462f36628c3b9c9bacc5b",
                 "shasum": ""
             },
             "require": {
@@ -43523,7 +43531,7 @@
                 "spryker/oms": "^10.3.0 || ^11.0.0",
                 "spryker/propel": "^3.43.0",
                 "spryker/propel-orm": "^1.16.0",
-                "spryker/sales-extension": "^1.12.0",
+                "spryker/sales-extension": "^1.13.0",
                 "spryker/sales-order-amendment-extension": "^1.3.0",
                 "spryker/sales-split": "^3.0.0 || ^5.0.0",
                 "spryker/sequence-number": "^3.0.0",
@@ -43578,9 +43586,9 @@
             ],
             "description": "Sales module",
             "support": {
-                "source": "https://github.com/spryker/sales/tree/11.72.0"
+                "source": "https://github.com/spryker/sales/tree/11.74.0"
             },
-            "time": "2025-07-24T16:25:10+00:00"
+            "time": "2025-08-29T14:19:30+00:00"
         },
         {
             "name": "spryker/sales-configurable-bundle",
@@ -43750,16 +43758,16 @@
         },
         {
             "name": "spryker/sales-extension",
-            "version": "1.12.0",
+            "version": "1.13.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/sales-extension.git",
-                "reference": "13f19acc81729877bdc991939e6201d0346d2682"
+                "reference": "91f4f0af7b75a6cd757fb9aed65a3e8c46c720ff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/sales-extension/zipball/13f19acc81729877bdc991939e6201d0346d2682",
-                "reference": "13f19acc81729877bdc991939e6201d0346d2682",
+                "url": "https://api.github.com/repos/spryker/sales-extension/zipball/91f4f0af7b75a6cd757fb9aed65a3e8c46c720ff",
+                "reference": "91f4f0af7b75a6cd757fb9aed65a3e8c46c720ff",
                 "shasum": ""
             },
             "require": {
@@ -43786,9 +43794,9 @@
             ],
             "description": "SalesExtension module",
             "support": {
-                "source": "https://github.com/spryker/sales-extension/tree/1.12.0"
+                "source": "https://github.com/spryker/sales-extension/tree/1.13.0"
             },
-            "time": "2025-02-27T08:01:24+00:00"
+            "time": "2025-08-29T14:19:30+00:00"
         },
         {
             "name": "spryker/sales-invoice",
@@ -65294,7 +65302,7 @@
         "ext-readline": "*",
         "ext-redis": "*"
     },
-    "platform-dev": [],
+    "platform-dev": {},
     "platform-overrides": {
         "php": "8.2.0"
     },
