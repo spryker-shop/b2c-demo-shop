@@ -9,6 +9,7 @@ declare(strict_types = 1);
 
 namespace Pyz\Zed\Sales;
 
+use Spryker\Zed\Agent\Communication\Plugin\Sales\AgentOrderExpanderPreSavePlugin;
 use Spryker\Zed\Currency\Communication\Plugin\Sales\CurrencyOrderExpanderPlugin;
 use Spryker\Zed\Customer\Communication\Plugin\Sales\CustomerOrderHydratePlugin;
 use Spryker\Zed\Discount\Communication\Plugin\Sales\DiscountOrderHydratePlugin;
@@ -76,12 +77,13 @@ use Spryker\Zed\WarehouseAllocation\Communication\Plugin\Sales\WarehouseOrderIte
 class SalesDependencyProvider extends SprykerSalesDependencyProvider
 {
     /**
-     * @return array<\Spryker\Zed\Sales\Dependency\Plugin\OrderExpanderPreSavePluginInterface>
+     * @return array<\Spryker\Zed\SalesExtension\Dependency\Plugin\OrderExpanderPreSavePluginInterface>
      */
     protected function getOrderExpanderPreSavePlugins(): array
     {
         return [
             new OmsMultiThreadProcessorIdentifierOrderExpanderPreSavePlugin(),
+            new AgentOrderExpanderPreSavePlugin(),
         ];
     }
 
