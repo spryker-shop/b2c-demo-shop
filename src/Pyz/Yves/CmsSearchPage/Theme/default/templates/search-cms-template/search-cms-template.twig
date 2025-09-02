@@ -1,0 +1,29 @@
+{% extends template('search-cms-template', '@SprykerShop:CmsSearchPage') %}
+
+{%- block contentClass -%}page-layout-main page-layout-main--cms-search-page{%- endblock -%}
+
+{% block formContentSort %}
+    {% set pageJsName = 'js-cms-page-search' %}
+
+    {% include molecule('window-location-applicator', 'CatalogPage') with {
+        attributes: {
+            'form-class-name': pageJsName ~ '__form',
+            'trigger-class-name': pageJsName ~ '__trigger',
+            'sort-trigger-class-name': pageJsName ~ '__sort-trigger',
+        },
+    } only %}
+
+    {% include molecule('sort', 'CatalogPage') with {
+        data: {
+            pagination: data.pagination,
+            sort: data.sort,
+            parentJsName: pageJsName,
+        },
+    } only %}
+{% endblock %}
+
+{% block formContentPaginationBottom %}
+    {% include molecule('pagination') with {
+        data: data.pagination,
+    } only %}
+{% endblock %}
