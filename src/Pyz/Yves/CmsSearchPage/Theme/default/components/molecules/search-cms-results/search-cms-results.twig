@@ -1,24 +1,24 @@
-{% extends model('component') %}
+{% extends molecule('search-cms-results', '@SprykerShop:CmsSearchPage') %}
 
-{% define config = {
-    name: 'search-cms-results'
-} %}
+{% block pageItem %}
+    {% set pageUrl = functionExists('generatePath') ? generatePath(page.url) : page.url %}
 
-{% define data = {
-    pages: required
-} %}
+    <article class="{{ config.name }}__item">
+        <div>
+            {% block title %}
+                <h2 class="{{ config.name }}__title">{{ page.name | raw }}</h2>
+            {% endblock %}
 
-{% block body %}
-    <ul class="{{ config.name }}__list">
-        {% for page in data.pages %}
-            <li class="{{ config.name }}__item">
-                <a href="{{ functionExists('generatePath') ? generatePath(page.url) : page.url }}" class="{{ config.name }}__name spacing-y spacing-y--inner" title="{{ page.name }}">
-                    {{ page.name }}
-                    <span class="{{ config.name }}__button button button--hollow button--medium">
-                        {{ 'global.search.results.view' | trans }}
-                    </span>
+            {% block content %}
+                {{ parent() }}
+            {% endblock %}
+        </div>
+        <div>
+            {% block button %}
+                <a href="{{ pageUrl }}" class="button button--hollow button--small">
+                    {{ 'global.search.results.view' | trans }}
                 </a>
-            </li>
-        {% endfor %}
-    </ul>
+            {% endblock %}
+        </div>
+    </article>
 {% endblock %}
