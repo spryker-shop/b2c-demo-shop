@@ -11,7 +11,9 @@
 {% endblock %}
 
 {% block form %}
-    <div class="col col--sm-12 js-catalog-filter-target">
+    {% set pageJsName = 'js-cms-page-search' %}
+
+    <div class="col col--sm-12 {{ pageJsName }}-filter-target">
         <div class="container__inner">
             <div class="col col--sm-12 spacing-y spacing-y--inner">
                 {% block tabsWidget %}
@@ -26,16 +28,14 @@
                     {% block filterBar %}
                         {% if data.facets | length %}
                             <div class="{{ formFiltersClassName }}">
-                                {% set catalogJsName = 'js-catalog' %}
-
                                 {% block filterSection %}
                                     {% include organism('filter-section', 'CatalogPage') with {
                                         data: {
                                             facets: data.facets,
                                             filteredFacets: data.filteredFacets,
                                             filterPath: data.filterPath,
-                                            togglerClass: 'js-catalog-toggler-click__trigger',
-                                            parentJsName: catalogJsName,
+                                            togglerClass: pageJsName ~ '-toggler-click__trigger',
+                                            parentJsName: pageJsName,
                                             numberFormatConfig: numberFormatConfig,
                                         },
                                     } only %}
@@ -50,13 +50,13 @@
 
                     {% include molecule('toggler-click') with {
                         attributes: {
-                            'trigger-class-name': 'js-catalog-toggler-click__trigger',
-                            'target-class-name': 'js-catalog-filter-target',
+                            'trigger-class-name': pageJsName ~ '-toggler-click__trigger',
+                            'target-class-name': pageJsName ~ '-filter-target',
                             'class-to-toggle': 'show-filter',
                         },
                     } only %}
 
-                    <button type="button" class="button button--hollow button--expand spacing-y spacing-y--big is-hidden-xl-only js-catalog-toggler-click__trigger">
+                    <button type="button" class="button button--hollow button--expand spacing-y spacing-y--big is-hidden-xl-only {{ pageJsName }}-toggler-click__trigger">
                         {%- include atom('icon') with {
                             class: 'spacing-right',
                             data: {
