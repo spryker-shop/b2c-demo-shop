@@ -3,7 +3,7 @@
 {% block pageItem %}
     {% set pageUrl = functionExists('generatePath') ? generatePath(page.url) : page.url %}
 
-    <article class="{{ config.name }}__item">
+    <article class="{{ config.name }}__item list__item--highlighted">
         <div>
             {% block title %}
                 <h2 class="{{ config.name }}__title">{{ page.name | raw }}</h2>

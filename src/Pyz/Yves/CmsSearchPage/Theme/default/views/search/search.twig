@@ -4,7 +4,7 @@
     {% include molecule('jumbotron') with {
         modifiers: ['category', 'category-no-img'],
         data: {
-            headline: null,
+            headline: data.searchString,
             subHeadline: data.title,
         },
     } only %}
@@ -60,8 +60,8 @@
                         {%- include atom('icon') with {
                             class: 'spacing-right',
                             data: {
-                                name: 'filters'
-                            }
+                                name: 'filters',
+                            },
                         } only -%}
                         {{- 'catalog.filter.filter' | trans -}}
                     </button>
