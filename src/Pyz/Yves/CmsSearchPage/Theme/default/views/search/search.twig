@@ -1,68 +1,78 @@
-{% extends template('search-cms-template', 'CmsSearchPage') %}
-
-{% define data = {
-    pages: _view.cms_pages,
-    searchString: _view.searchString,
-
-    title: ('global.search.results' | trans) ~ ' ' ~ _view.searchString,
-    metaTitle: _view.pageTitle | default,
-    metaDescription: _view.pageDescription | default,
-    metaKeywords: _view.pageKeywords | default,
-
-    pagination: {
-        parameters: app.request.query.all(),
-        currentPage: _view.pagination.currentPage,
-        paginationPath: app.request.attributes.get('_route'),
-        maxPage: _view.pagination.maxPage,
-        showAlwaysFirstAndLast: true
-    }
-} %}
-
-{% block breadcrumbs %}
-    {% include molecule('breadcrumb') with {
-        modifiers: ['no-border'],
-        data: {
-            steps: [{
-                label: 'global.search' | trans
-            }]
-        }
-    } only %}
-{% endblock %}
+{% extends view('search', '@SprykerShop:CmsSearchPage') %}
 
 {% block title %}
     {% include molecule('jumbotron') with {
         modifiers: ['category', 'category-no-img'],
         data: {
             headline: data.searchString,
-            subHeadline: 'global.search.results' | trans
-        }
+            subHeadline: data.title,
+        },
     } only %}
 {% endblock %}
 
 {% block form %}
-    <div class="col col--sm-12 spacing spacing--inner">
-        {% widget 'FullTextSearchTabsWidget' args [data.searchString, 'FullTextSearchCmsPage'] only %}{% endwidget %}
+    {% set pageJsName = 'js-cms-page-search' %}
+
+    <div class="col col--sm-12 {{ pageJsName }}-filter-target">
+        <div class="container__inner">
+            <div class="col col--sm-12 spacing-y spacing-y--inner">
+                {% block tabsWidget %}
+                    {% widget 'FullTextSearchTabsWidget' args [data.searchString, 'FullTextSearchCmsPage'] only %}{% endwidget %}
+                {% endblock %}
+            </div>
+
+            <div class="col col--sm-12 grid grid--gap">
+                {% block formFilters %}
+                    {% set formFiltersClassName = 'col col--sm-12 col--lg-4 col--xl-3 catalog-left-side' %}
+
+                    {% block filterBar %}
+                        {% if data.facets | length %}
+                            <div class="{{ formFiltersClassName }}">
+                                {% block filterSection %}
+                                    {% include organism('filter-section', 'CatalogPage') with {
+                                        data: {
+                                            facets: data.facets,
+                                            filteredFacets: data.filteredFacets,
+                                            filterPath: data.filterPath,
+                                            togglerClass: pageJsName ~ '-toggler-click__trigger',
+                                            parentJsName: pageJsName,
+                                            numberFormatConfig: numberFormatConfig,
+                                        },
+                                    } only %}
+                                {% endblock %}
+                            </div>
+                        {% endif %}
+                    {% endblock %}
+                {% endblock %}
+
+                {% block formContentWrapper %}
+                    {% set formContentWrapperClassName = data.facets | length ? 'col col--sm-12 col--lg-8 col--xl-9 catalog-right-side' : 'col col--sm-12' %}
+
+                    {% include molecule('toggler-click') with {
+                        attributes: {
+                            'trigger-class-name': pageJsName ~ '-toggler-click__trigger',
+                            'target-class-name': pageJsName ~ '-filter-target',
+                            'class-to-toggle': 'show-filter',
+                        },
+                    } only %}
+
+                    <button type="button" class="button button--hollow button--expand spacing-y spacing-y--big is-hidden-xl-only {{ pageJsName }}-toggler-click__trigger">
+                        {%- include atom('icon') with {
+                            class: 'spacing-right',
+                            data: {
+                                name: 'filters',
+                            },
+                        } only -%}
+                        {{- 'catalog.filter.filter' | trans -}}
+                    </button>
+
+                    {{ parent() }}
+                {% endblock %}
+            </div>
+
+            {% if data.searchString is not empty %}
+                <input type="hidden" name="q" value="{{ data.searchString }}">
+            {% endif %}
+        </div>
     </div>
-
-    <div class="col col--sm-12">
-        {% include molecule('search-cms-sort', 'CmsSearchPage') only %}
-
-        {% include molecule('search-cms-results', 'CmsSearchPage') with {
-            data: {
-                pages: data.pages
-            }
-        } only %}
-
-        {% include molecule('pagination') with {
-            modifiers: ['search-cms-results'],
-            data: data.pagination
-        } only %}
-
-    </div>
-
-    {{ parent() }}
-
-    {% if data.searchString is not empty %}
-        <input type="hidden" name="q" value="{{ data.searchString }}" />
-    {% endif %}
 {% endblock %}
