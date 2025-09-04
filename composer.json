@@ -14,6 +14,7 @@
         "ext-pgsql": "*",
         "ext-readline": "*",
         "ext-redis": "*",
+        "composer/installers": "^2.3",
         "galbar/jsonpath": "^1.3.1",
         "spryker-eco/loggly": "^0.1.1",
         "spryker-feature/agent-assist": "^202507.0",
@@ -280,6 +281,13 @@
             "SprykerConfig\\": "src/SprykerConfig/"
         }
     },
+    "extra": {
+        "installer-paths": {
+            "tests/cypress-tests/": [
+                "type:zend-module"
+            ]
+        }
+    },
     "autoload-dev": {
         "psr-4": {
             "PyzTest\\": "tests/PyzTest/",
@@ -307,6 +315,7 @@
         "process-timeout": 900,
         "chromium-revision": 814168,
         "allow-plugins": {
+            "composer/installers": true,
             "composer/package-versions-deprecated": true,
             "dealerdirect/phpcodesniffer-composer-installer": true,
             "php-http/discovery": true,
@@ -321,8 +330,20 @@
             "url": "https://github.com/spryker/robotframework-suite-tests.git"
         },
         {
-            "type": "git",
-            "url": "https://github.com/spryker/cypress-tests.git"
+            "type": "package",
+            "package": {
+                "name": "spryker/cypress-tests",
+                "version": "dev-master",
+                "source": {
+                    "url": "https://github.com/spryker/cypress-tests.git",
+                    "type": "git",
+                    "reference": "c528c4351f7108997d2646e0f648973ce5b0affe"
+                },
+                "type": "zend-module",
+                "license": [
+                    "MIT"
+                ]
+            }
         }
     ],
     "scripts": {

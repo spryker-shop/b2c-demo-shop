@@ -427,7 +427,7 @@ jobs:
             -   name: Install robotframework-suite-tests folder
                 run: |
                     cd ./data && composer require "spryker/robotframework-suite-tests:dev-master" --dev --no-interaction
-                    cp -r vendor ../vendor
+                    cp -r vendor/spryker/cypress-tests ../tests/cypress-tests
             -   name: Install docker-compose
                 run: |
                     sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
@@ -479,7 +479,7 @@ jobs:
             -   name: Install robotframework-suite-tests folder
                 run: |
                     cd ./data && composer require "spryker/robotframework-suite-tests:dev-master" --dev --no-interaction
-                    cp -r vendor ../vendor
+                    cp -r vendor/spryker/cypress-tests ../tests/cypress-tests
             -   name: Install docker-compose
                 run: |
                     sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
@@ -529,7 +529,7 @@ jobs:
             -   name: Install cypress-tests folder
                 run: |
                     cd ./data && composer require "spryker/cypress-tests:dev-master" --dev --no-interaction
-                    cp -r vendor ../vendor
+                    cp -r vendor/spryker/cypress-tests ../tests/cypress-tests
 
             -   name: Install docker-compose
                 run: |
@@ -587,7 +587,7 @@ jobs:
             -   name: Install cypress-tests folder
                 run: |
                     cd ./data && composer require "spryker/cypress-tests:dev-master" --dev --no-interaction
-                    cp -r vendor ../vendor
+                    cp -r vendor/spryker/cypress-tests ../tests/cypress-tests
 
             -   name: Install docker-compose
                 run: |
