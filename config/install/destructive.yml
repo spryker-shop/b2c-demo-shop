@@ -55,16 +55,19 @@ sections:
         check-product-validity:
             command: 'vendor/bin/console product:check-validity'
 
-    init-storage:
+    scheduler-start:
+        queue:
+            command: 'vendor/bin/console queue:worker:start --stop-when-empty'
+            timeout: 2000
+
+        scheduler-setup:
+            command: 'vendor/bin/console scheduler:setup -vvv --no-ansi || true'
+
         clean-search:
             command: 'vendor/bin/console elasticsearch:index:delete -vvv --no-ansi'
 
         setup-search-create-sources:
             command: 'vendor/bin/console search:setup:sources -vvv --no-ansi'
 
-        trigger-events:
-            command: 'vendor/bin/console publish:trigger-events'
-
-    scheduler-start:
-        scheduler-setup:
-            command: 'vendor/bin/console scheduler:setup -vvv --no-ansi || true'
+        sync-data:
+            command: 'vendor/bin/console sync:data'
