@@ -143,12 +143,8 @@ jobs:
             -   name: Run PHPStan
                 run: vendor/bin/phpstan analyze -l 6 -c phpstan.neon src/
 
-            -   name: Run Evaluator for release branches
-                run: vendor/bin/evaluator evaluate --format=compact
-                if: github.event.pull_request.base.ref == 'master' && startsWith(github.event.pull_request.head.ref, 'release-')
-
-            -   name: Run Evaluator for all branches
-                run: vendor/bin/evaluator evaluate --exclude-checkers=SPRYKER_DEV_PACKAGES_CHECKER --format=compact
+            -   name: Run Composer audit for all branches
+                run: composer audit --abandoned=ignore
 
             -   name: Slack Notification for failed job
                 uses: ./.github/actions/job-slack-notifications
