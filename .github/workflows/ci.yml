@@ -529,7 +529,7 @@ jobs:
             -   name: Install cypress-tests folder
                 run: |
                     cd ./data && composer require "spryker/cypress-tests:dev-master" --dev --no-interaction
-                    cp -r vendor ../vendor
+                    cp -r vendor/spryker/cypress-tests ../tests/cypress-tests
 
             -   name: Install docker-compose
                 run: |
@@ -587,7 +587,7 @@ jobs:
             -   name: Install cypress-tests folder
                 run: |
                     cd ./data && composer require "spryker/cypress-tests:dev-master" --dev --no-interaction
-                    cp -r vendor ../vendor
+                    cp -r vendor/spryker/cypress-tests ../tests/cypress-tests
 
             -   name: Install docker-compose
                 run: |
