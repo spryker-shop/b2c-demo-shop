@@ -43,6 +43,9 @@ tag: 'dev'
 environment: docker.dev
 image:
     tag: spryker/php:8.3
+    php:
+        enabled-extensions:
+            - otel
     environment:
         SPRYKER_PRODUCT_CONFIGURATOR_HOST: date-time-configurator-example.dynamic-store.demo-spryker.com
         SPRYKER_PRODUCT_CONFIGURATOR_PORT: 80
@@ -168,9 +171,9 @@ services:
             localhost:5672:
                 protocol: tcp
     session:
-        engine: redis
+        engine: valkey
     key_value_store:
-        engine: redis
+        engine: valkey
         endpoints:
             localhost:16379:
                 protocol: tcp
