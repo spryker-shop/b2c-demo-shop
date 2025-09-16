@@ -115,6 +115,7 @@ use Spryker\Zed\StoreStorage\Communication\Plugin\Publisher\CurrencyStore\Curren
 use Spryker\Zed\StoreStorage\Communication\Plugin\Publisher\LocaleStore\LocaleStoreWritePublisherPlugin;
 use Spryker\Zed\StoreStorage\Communication\Plugin\Publisher\Store\StoreSynchronizationTriggeringPublisherPlugin;
 use Spryker\Zed\StoreStorage\Communication\Plugin\Publisher\Store\StoreWritePublisherPlugin;
+use Spryker\Zed\StoreStorage\Communication\Plugin\Publisher\StorePublisherTriggerPlugin;
 use Spryker\Zed\TaxApp\Communication\Plugin\Publisher\Store\RefreshTaxAppStoreRelationPublisherPlugin;
 use Spryker\Zed\TaxProductStorage\Communication\Plugin\Publisher\TaxProductPublisherTriggerPlugin;
 use Spryker\Zed\TaxStorage\Communication\Plugin\Publisher\TaxSetPublisherTriggerPlugin;
@@ -181,6 +182,7 @@ class PublisherDependencyProvider extends SprykerPublisherDependencyProvider
             new CategoryTreePublisherTriggerPlugin(),
             new ProductCategoryPublisherTriggerPlugin(),
             new CategoryPagePublisherTriggerPlugin(),
+            new StorePublisherTriggerPlugin(),
             new ProductConcretePublisherTriggerPlugin(),
             new ProductAlternativePublisherTriggerPlugin(),
             new ProductDiscontinuedPublisherTriggerPlugin(),
