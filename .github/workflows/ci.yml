@@ -209,9 +209,9 @@ jobs:
                     git clone https://github.com/spryker/docker-sdk.git ./docker
                     docker/sdk boot deploy.ci.api.mariadb.yml
                     docker/sdk up -t
+                    docker/sdk cli composer dump-autoload -o -a --apcu
                     docker/sdk testing codecept fixtures
                     docker/sdk testing console queue:worker:start --stop-when-empty
-                    docker/sdk cli composer dump-autoload -o -a --apcu
                     docker/sdk testing codecept run -c codeception.api.yml
 
             -   name: Slack Notification for failed job
@@ -241,9 +241,9 @@ jobs:
                     git clone https://github.com/spryker/docker-sdk.git ./docker
                     docker/sdk boot deploy.ci.api.dynamic-store-off.yml
                     docker/sdk up -t
+                    docker/sdk cli composer dump-autoload -o -a --apcu
                     docker/sdk testing codecept fixtures
                     docker/sdk testing console queue:worker:start --stop-when-empty
-                    docker/sdk cli composer dump-autoload -o -a --apcu
                     docker/sdk testing codecept run -c codeception.api.yml
 
             -   name: Slack Notification for failed job
@@ -276,8 +276,8 @@ jobs:
                     git clone https://github.com/spryker/docker-sdk.git ./docker
                     docker/sdk boot deploy.ci.acceptance.mariadb.yml
                     docker/sdk up -t
-                    docker/sdk testing console queue:worker:start --stop-when-empty
                     docker/sdk cli composer dump-autoload -o -a --apcu
+                    docker/sdk testing console queue:worker:start --stop-when-empty
                     docker/sdk testing codecept run -c codeception.acceptance.yml
 
             -   name: Slack Notification for failed job
@@ -307,8 +307,8 @@ jobs:
                     git clone https://github.com/spryker/docker-sdk.git ./docker
                     docker/sdk boot deploy.ci.acceptance.dynamic-store-off.yml
                     docker/sdk up -t
-                    docker/sdk testing console queue:worker:start --stop-when-empty
                     docker/sdk cli composer dump-autoload -o -a --apcu
+                    docker/sdk testing console queue:worker:start --stop-when-empty
                     docker/sdk testing codecept run -c codeception.acceptance.yml
 
             -   name: Slack Notification for failed job
@@ -436,7 +436,7 @@ jobs:
                 continue-on-error: false
                 run: |
                     git clone https://github.com/spryker/docker-sdk.git ./docker
-                    docker/sdk boot deploy.ci.acceptance.dynamic-store-off.yml
+                    docker/sdk boot deploy.ci.acceptance.dynamic-store-off.robot.yml
                     sudo bash -c "echo '127.0.0.1 backend-api.at.spryker.local backend-api.de.spryker.local glue-backend.de.spryker.local glue-backend.at.spryker.local glue-storefront.de.spryker.local glue-storefront.at.spryker.local backend-gateway.at.spryker.local backend-gateway.de.spryker.local backoffice.at.spryker.local backoffice.de.spryker.local date-time-configurator-example.spryker.local glue.at.spryker.local glue.de.spryker.local yves.at.spryker.local yves.de.spryker.local' >> /etc/hosts"
                     docker/sdk up -t
                     docker/sdk cli composer dump-autoload -o -a --apcu
@@ -537,7 +537,6 @@ jobs:
                     sudo chmod +x /usr/local/bin/docker-compose
 
             -   name: Install Project
-                continue-on-error: true
                 run: |
                     git clone https://github.com/spryker/docker-sdk.git ./docker
                     docker/sdk boot deploy.ci.acceptance.postgres.dynamic-store-off.cypress.yml
@@ -595,7 +594,6 @@ jobs:
                     sudo chmod +x /usr/local/bin/docker-compose
 
             -   name: Install Project
-                continue-on-error: true
                 run: |
                     git clone https://github.com/spryker/docker-sdk.git ./docker
                     docker/sdk boot deploy.ci.acceptance.mariadb.cypress.yml

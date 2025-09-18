@@ -68,17 +68,14 @@ jobs:
 
             -   name: Run Dynamic Tests Set
                 id: run_dynamic_tests
-                continue-on-error: true
                 run: |
                     docker/sdk exec robot-framework pabot --processes 6 --ordering pabot_b2c_ordering -v env:ui_b2c -v docker:True -v headless:true -v ignore_console:false -v dms:true -d results/dynamic_set --exclude skip-due-to-issueORskip-due-to-refactoringORstatic-set -s '*'.tests.parallel_ui.b2c .
             -   name: Run Static Tests Set
                 id: run_static_tests
-                continue-on-error: true
                 run: |
                     docker/sdk exec robot-framework robot -v env:ui_b2c -v docker:True -v headless:true -v ignore_console:false -v dms:true -d results/static_set --exclude skip-due-to-issueORskip-due-to-refactoring --include static-set -s '*'.tests.parallel_ui.b2c .
             -   name: Merge Initial Test Results
                 id: merge_initial_results
-                continue-on-error: true
                 run: |
                     docker/sdk exec robot-framework rebot -d results --output output.xml --merge results/dynamic_set/output.xml results/static_set/output.xml
             -   name: Rerun Failed Tests
@@ -148,17 +145,14 @@ jobs:
 
             -   name: Run Dynamic Tests Set
                 id: run_dynamic_tests
-                continue-on-error: true
                 run: |
                     docker/sdk exec robot-framework pabot --processes 6 --ordering pabot_b2c_ordering -v env:ui_b2c -v docker:True -v headless:true -v ignore_console:false -v dms:false -v db_engine:psycopg2 -d results/dynamic_set --exclude skip-due-to-issueORskip-due-to-refactoringORstatic-set -s '*'.tests.parallel_ui.b2c .
             -   name: Run Static Tests Set
                 id: run_static_tests
-                continue-on-error: true
                 run: |
                     docker/sdk exec robot-framework robot -v env:ui_b2c -v docker:True -v headless:true -v ignore_console:false -v dms:false -v db_engine:psycopg2 -d results/static_set --exclude skip-due-to-issueORskip-due-to-refactoring --include static-set -s '*'.tests.parallel_ui.b2c .
             -   name: Merge Initial Test Results
                 id: merge_initial_results
-                continue-on-error: true
                 run: |
                     docker/sdk exec robot-framework rebot -d results --output output.xml --merge results/dynamic_set/output.xml results/static_set/output.xml
             -   name: Rerun Failed Tests

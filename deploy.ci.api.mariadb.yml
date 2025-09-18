@@ -11,11 +11,7 @@ image:
         enabled-extensions:
             - otel
     environment:
-        SPRYKER_PRODUCT_CONFIGURATOR_HOST: date-time-configurator-example.spryker.local
-        SPRYKER_PRODUCT_CONFIGURATOR_PORT: 80
-        SPRYKER_CONFIGURATOR_ENCRYPTION_KEY: 'change123'
         SPRYKER_YVES_HOST_EU: yves.eu.spryker.local
-        SPRYKER_YVES_HOST_US: yves.us.spryker.local
         SPRYKER_DYNAMIC_STORE_MODE: true
         SPRYKER_PUSH_NOTIFICATION_WEB_PUSH_PHP_VAPID_PUBLIC_KEY: 'BGqNWbv0hWM5CQ1-KwAfSQBMC6TMVFyrnh3vQp37oGCNvQ6eG_HyMjxBFJRWeCPTbzDoxcjhxLJS8Ck8r1G2oFw'
         SPRYKER_PUSH_NOTIFICATION_WEB_PUSH_PHP_VAPID_PRIVATE_KEY: 'UK6DywwjKITPpRHBSY9TLPIXm6BPrHX40sseIoXT9c8'
@@ -46,27 +42,11 @@ groups:
     EU:
         region: EU
         applications:
-            yves_eu:
-                application: yves
-                endpoints:
-                    yves.eu.spryker.local:
-                        region: EU
-                        services:
-                            session:
-                                namespace: 1
             glue_eu:
                 application: glue
                 endpoints:
                     glue.eu.spryker.local:
                         region: EU
-            backoffice_eu:
-                application: backoffice
-                endpoints:
-                    backoffice.eu.spryker.local:
-                        region: EU
-                        services:
-                            session:
-                                namespace: 3
             backend_gateway_eu:
                 application: backend-gateway
                 endpoints:
