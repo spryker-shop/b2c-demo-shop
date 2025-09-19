@@ -4,17 +4,13 @@ namespace: spryker_ci
 tag: '1.0'
 
 environment: docker.ci
-pipeline: docker.ci.acceptance.dynamic-store-off
+pipeline: docker.ci.functional
 image:
     tag: spryker/php:8.2
     php:
         enabled-extensions:
             - otel
     environment:
-        SPRYKER_PRODUCT_CONFIGURATOR_HOST: date-time-configurator-example.spryker.local
-        SPRYKER_PRODUCT_CONFIGURATOR_PORT: 80
-        SPRYKER_CONFIGURATOR_ENCRYPTION_KEY: 'change123'
-        SPRYKER_PRODUCT_CONFIGURATOR_HEX_INITIALIZATION_VECTOR: '0c1ffefeebdab4a3d839d0e52590c9a2'
         SPRYKER_YVES_HOST_DE: yves.de.spryker.local
         SPRYKER_YVES_HOST_AT: yves.at.spryker.local
         SPRYKER_PUSH_NOTIFICATION_WEB_PUSH_PHP_VAPID_PUBLIC_KEY: 'BGqNWbv0hWM5CQ1-KwAfSQBMC6TMVFyrnh3vQp37oGCNvQ6eG_HyMjxBFJRWeCPTbzDoxcjhxLJS8Ck8r1G2oFw'
@@ -65,21 +61,6 @@ groups:
     EU:
         region: EU
         applications:
-            yves_eu:
-                application: yves
-                endpoints:
-                    date-time-configurator-example.spryker.local:
-                        entry-point: Configurator
-                    yves.de.spryker.local:
-                        store: DE
-                        services:
-                            session:
-                                namespace: 1
-                    yves.at.spryker.local:
-                        store: AT
-                        services:
-                            session:
-                                namespace: 2
             glue_eu:
                 application: glue
                 endpoints:
@@ -101,19 +82,6 @@ groups:
                         store: DE
                     glue-backend.at.spryker.local:
                         store: AT
-            backoffice_eu:
-                application: backoffice
-                endpoints:
-                    backoffice.de.spryker.local:
-                        store: DE
-                        services:
-                            session:
-                                namespace: 3
-                    backoffice.at.spryker.local:
-                        store: AT
-                        services:
-                            session:
-                                namespace: 4
             backend_gateway_eu:
                 application: backend-gateway
                 endpoints:
