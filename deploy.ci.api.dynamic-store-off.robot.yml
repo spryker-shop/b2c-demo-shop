@@ -82,6 +82,19 @@ groups:
                         store: DE
                     glue-backend.at.spryker.local:
                         store: AT
+            backoffice_eu:
+                application: backoffice
+                endpoints:
+                    backoffice.de.spryker.local:
+                        store: DE
+                        services:
+                            session:
+                                namespace: 3
+                    backoffice.at.spryker.local:
+                        store: AT
+                        services:
+                            session:
+                                namespace: 4
             backend_gateway_eu:
                 application: backend-gateway
                 endpoints:
