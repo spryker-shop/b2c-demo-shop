@@ -183,78 +183,12 @@ jobs:
                 uses: ./.github/actions/job-slack-notifications
                 if: always()
 
-    php-83-mariadb-glue-alpine:
-        name: "[run-api-ci] PHP 8.3 / MariaDB / Glue / Alpine"
-        if: >
-            contains(github.event.pull_request.labels.*.name, 'run-api-ci')
-            || contains(github.event.pull_request.labels.*.name, 'run-latest-ci')
-            || github.ref == 'refs/heads/master'
-        runs-on: ubuntu-latest
-        env:
-            PROGRESS_TYPE: plain
-            SPRYKER_PLATFORM_IMAGE: spryker/php:8.3
-            TRAVIS: 1
-            SPRYKER_CURRENT_REGION: EU
-            DYNAMIC_STORE_MODE: true
-        steps:
-            -   uses: actions/checkout@v4
-
-            -   name: Install docker-compose
-                run: |
-                    sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-                    sudo chmod +x /usr/local/bin/docker-compose
-
-            -   name: Run docker
-                run: |
-                    git clone https://github.com/spryker/docker-sdk.git ./docker
-                    docker/sdk boot deploy.ci.api.mariadb.yml
-                    docker/sdk up -t
-                    docker/sdk testing codecept fixtures
-                    docker/sdk testing console queue:worker:start --stop-when-empty
-                    docker/sdk cli composer dump-autoload -o -a --apcu
-                    docker/sdk testing codecept run -c codeception.api.yml
-
-            -   name: Slack Notification for failed job
-                uses: ./.github/actions/job-slack-notifications
-                if: always()
-
-    php-82-postgresql-glue-debian-dynamic-store-off:
-        if: >
-            contains(github.event.pull_request.labels.*.name, 'run-compatibility-ci')
-            || github.ref == 'refs/heads/master'
-        name: "PHP 8.2 / PostgreSQL / Glue / Debian / Dynamic Store OFF"
-        runs-on: ubuntu-latest
-        env:
-            PROGRESS_TYPE: plain
-            SPRYKER_PLATFORM_IMAGE: spryker/php:8.2-debian
-            TRAVIS: 1
-        steps:
-            -   uses: actions/checkout@v4
-
-            -   name: Install docker-compose
-                run: |
-                    sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-                    sudo chmod +x /usr/local/bin/docker-compose
-
-            -   name: Run docker
-                run: |
-                    git clone https://github.com/spryker/docker-sdk.git ./docker
-                    docker/sdk boot deploy.ci.api.dynamic-store-off.yml
-                    docker/sdk up -t
-                    docker/sdk testing codecept fixtures
-                    docker/sdk testing console queue:worker:start --stop-when-empty
-                    docker/sdk cli composer dump-autoload -o -a --apcu
-                    docker/sdk testing codecept run -c codeception.api.yml
-
-            -   name: Slack Notification for failed job
-                uses: ./.github/actions/job-slack-notifications
-                if: always()
-
     php-83-mariadb-acceptance-alpine:
-        name: "[run-ui-ci] PHP 8.3 / MariaDB / Acceptance / Alpine"
+        name: "[run-ui-ci] PHP 8.3 / MariaDB / Acceptance & API / Alpine"
         if: >
             contains(github.event.pull_request.labels.*.name, 'run-ui-ci')
             || contains(github.event.pull_request.labels.*.name, 'run-latest-ci')
+            || contains(github.event.pull_request.labels.*.name, 'run-api-ci')
             || github.ref == 'refs/heads/master'
         runs-on: ubuntu-latest
         env:
@@ -276,9 +210,25 @@ jobs:
                     git clone https://github.com/spryker/docker-sdk.git ./docker
                     docker/sdk boot deploy.ci.acceptance.mariadb.yml
                     docker/sdk up -t
-                    docker/sdk testing console queue:worker:start --stop-when-empty
                     docker/sdk cli composer dump-autoload -o -a --apcu
+                    docker/sdk testing codecept fixtures
+                    docker/sdk testing console queue:worker:start --stop-when-empty
+
+            -   name: Run Acceptance Tests
+                if: >
+                    contains(github.event.pull_request.labels.*.name, 'run-ui-ci')
+                    || contains(github.event.pull_request.labels.*.name, 'run-latest-ci')
+                    || github.ref == 'refs/heads/master'
+                run: |
                     docker/sdk testing codecept run -c codeception.acceptance.yml
+
+            -   name: Run API Tests
+                if: >
+                    contains(github.event.pull_request.labels.*.name, 'run-api-ci')
+                    || contains(github.event.pull_request.labels.*.name, 'run-latest-ci')
+                    || github.ref == 'refs/heads/master'
+                run: |
+                    docker/sdk testing codecept run -c codeception.api.yml
 
             -   name: Slack Notification for failed job
                 uses: ./.github/actions/job-slack-notifications
@@ -288,7 +238,7 @@ jobs:
         if: >
             contains(github.event.pull_request.labels.*.name, 'run-compatibility-ci')
             || github.ref == 'refs/heads/master'
-        name: "PHP 8.2 / PostgreSQL / Acceptance / Debian / Dynamic Store OFF"
+        name: "PHP 8.2 / PostgreSQL / Acceptance & API / Debian / Dynamic Store OFF"
         runs-on: ubuntu-latest
         env:
             PROGRESS_TYPE: plain
@@ -307,9 +257,17 @@ jobs:
                     git clone https://github.com/spryker/docker-sdk.git ./docker
                     docker/sdk boot deploy.ci.acceptance.dynamic-store-off.yml
                     docker/sdk up -t
-                    docker/sdk testing console queue:worker:start --stop-when-empty
                     docker/sdk cli composer dump-autoload -o -a --apcu
+                    docker/sdk testing codecept fixtures
+                    docker/sdk testing console queue:worker:start --stop-when-empty
+
+            -   name: Run Acceptance Tests
+                run: |
                     docker/sdk testing codecept run -c codeception.acceptance.yml
+
+            -   name: Run API Tests
+                run: |
+                    docker/sdk testing codecept run -c codeception.api.yml
 
             -   name: Slack Notification for failed job
                 uses: ./.github/actions/job-slack-notifications
@@ -436,11 +394,10 @@ jobs:
                 continue-on-error: false
                 run: |
                     git clone https://github.com/spryker/docker-sdk.git ./docker
-                    docker/sdk boot deploy.ci.acceptance.dynamic-store-off.yml
+                    docker/sdk boot deploy.ci.api.dynamic-store-off.robot.yml
                     sudo bash -c "echo '127.0.0.1 backend-api.at.spryker.local backend-api.de.spryker.local glue-backend.de.spryker.local glue-backend.at.spryker.local glue-storefront.de.spryker.local glue-storefront.at.spryker.local backend-gateway.at.spryker.local backend-gateway.de.spryker.local backoffice.at.spryker.local backoffice.de.spryker.local date-time-configurator-example.spryker.local glue.at.spryker.local glue.de.spryker.local yves.at.spryker.local yves.de.spryker.local' >> /etc/hosts"
                     docker/sdk up -t
                     docker/sdk cli composer dump-autoload -o -a --apcu
-                    docker/sdk testing console queue:worker:start --stop-when-empty
                     APPLICATION_STORE=AT docker/sdk console queue:worker:start --stop-when-empty
             -   name: Run Tests
                 run: |
@@ -492,7 +449,6 @@ jobs:
                     sudo bash -c "echo '127.0.0.1 backend-api.eu.spryker.local backend-api.us.spryker.local backend-gateway.eu.spryker.local backend-gateway.us.spryker.local backoffice.eu.spryker.local backoffice.us.spryker.local glue-backend.eu.spryker.local glue-backend.us.spryker.local glue-storefront.eu.spryker.local glue-storefront.us.spryker.local glue.eu.spryker.local glue.us.spryker.local mail.spryker.local queue.spryker.local spryker.local swagger.spryker.local yves.eu.spryker.local yves.us.spryker.local' >> /etc/hosts"
                     docker/sdk up -t
                     docker/sdk cli composer dump-autoload -o -a --apcu
-                    docker/sdk console queue:worker:start --stop-when-empty
             -   name: Run Tests
                 run: |
                     docker/sdk exec robot-framework robot -v env:api_b2c -v docker:True -v dms:true -v glue_env:http://glue.eu.spryker.local -v bapi_env:http://glue-backend.eu.spryker.local -v sapi_env:http://glue-storefront.eu.spryker.local --exclude skip-due-to-issueORskip-due-to-refactoring -d results -s robotframework.tests.api.b2c .
@@ -537,14 +493,12 @@ jobs:
                     sudo chmod +x /usr/local/bin/docker-compose
 
             -   name: Install Project
-                continue-on-error: true
                 run: |
                     git clone https://github.com/spryker/docker-sdk.git ./docker
                     docker/sdk boot deploy.ci.acceptance.postgres.dynamic-store-off.cypress.yml
                     sudo bash -c "echo '127.0.0.1 backend-api.at.spryker.local backend-api.de.spryker.local glue-backend.de.spryker.local glue-backend.at.spryker.local glue-storefront.de.spryker.local glue-storefront.at.spryker.local backend-gateway.at.spryker.local backend-gateway.de.spryker.local backoffice.at.spryker.local backoffice.de.spryker.local date-time-configurator-example.spryker.local glue.at.spryker.local glue.de.spryker.local yves.at.spryker.local yves.de.spryker.local' >> /etc/hosts"
                     docker/sdk up -t
                     docker/sdk cli composer dump-autoload -o -a --apcu
-                    docker/sdk cli console queue:worker:start --stop-when-empty
 
             -   name: Run Tests
                 run: |
@@ -595,14 +549,12 @@ jobs:
                     sudo chmod +x /usr/local/bin/docker-compose
 
             -   name: Install Project
-                continue-on-error: true
                 run: |
                     git clone https://github.com/spryker/docker-sdk.git ./docker
                     docker/sdk boot deploy.ci.acceptance.mariadb.cypress.yml
                     sudo bash -c "echo '127.0.0.1 backend-api.eu.spryker.local backend-api.us.spryker.local backend-gateway.eu.spryker.local backend-gateway.us.spryker.local backoffice.eu.spryker.local backoffice.us.spryker.local glue-backend.eu.spryker.local glue-backend.us.spryker.local glue-storefront.eu.spryker.local glue-storefront.us.spryker.local glue.eu.spryker.local glue.us.spryker.local mail.spryker.local queue.spryker.local spryker.local swagger.spryker.local yves.eu.spryker.local yves.us.spryker.local' >> /etc/hosts"
                     docker/sdk up -t
                     docker/sdk cli composer dump-autoload -o -a --apcu
-                    docker/sdk cli console queue:worker:start --stop-when-empty
 
             -   name: Run Tests
                 run: |

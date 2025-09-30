@@ -4,7 +4,7 @@ namespace: spryker_ci
 tag: '1.0'
 
 environment: docker.ci.cypress
-pipeline: docker.ci.acceptance.cypress
+pipeline: docker.ci.acceptance
 image:
     tag: spryker/php:8.3
     php:
@@ -28,7 +28,7 @@ image:
 
 composer:
     mode: '--dev --quiet -o -a'
-    autoload: ''
+    autoload: '-o'
 
 regions:
     EU:
