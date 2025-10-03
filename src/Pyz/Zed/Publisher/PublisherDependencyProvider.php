@@ -9,7 +9,6 @@ declare(strict_types = 1);
 
 namespace Pyz\Zed\Publisher;
 
-use Spryker\Shared\GlossaryStorage\GlossaryStorageConfig;
 use Spryker\Shared\PublishAndSynchronizeHealthCheck\PublishAndSynchronizeHealthCheckConfig;
 use Spryker\Zed\Asset\Communication\Plugin\Publisher\Store\RefreshAssetStoreRelationPublisherPlugin;
 use Spryker\Zed\AssetStorage\Communication\Plugin\Publisher\Asset\AssetDeletePublisherPlugin;
@@ -42,6 +41,8 @@ use Spryker\Zed\CategoryStorage\Communication\Plugin\Publisher\CategoryTree\Cate
 use Spryker\Zed\CategoryStorage\Communication\Plugin\Publisher\CategoryTree\CategoryTreeWriteForPublishingPublisherPlugin;
 use Spryker\Zed\CategoryStorage\Communication\Plugin\Publisher\CategoryTreePublisherTriggerPlugin;
 use Spryker\Zed\CategoryStorage\Communication\Plugin\Publisher\ParentWritePublisherPlugin;
+use Spryker\Zed\Cms\Communication\Plugin\Publisher\CmsPageUpdateMessageBrokerPublisherPlugin;
+use Spryker\Zed\Cms\Communication\Plugin\Publisher\CmsPageVersionPublishedMessageBrokerPublisherPlugin;
 use Spryker\Zed\CustomerAccessStorage\Communication\Plugin\Publisher\CustomerAccessPublisherTriggerPlugin;
 use Spryker\Zed\CustomerStorage\Communication\Plugin\Publisher\Customer\CustomerInvalidatedWritePublisherPlugin;
 use Spryker\Zed\FileManagerStorage\Communication\Plugin\Publisher\FileManagerPublisherTriggerPlugin;
@@ -114,6 +115,7 @@ use Spryker\Zed\StoreStorage\Communication\Plugin\Publisher\CurrencyStore\Curren
 use Spryker\Zed\StoreStorage\Communication\Plugin\Publisher\LocaleStore\LocaleStoreWritePublisherPlugin;
 use Spryker\Zed\StoreStorage\Communication\Plugin\Publisher\Store\StoreSynchronizationTriggeringPublisherPlugin;
 use Spryker\Zed\StoreStorage\Communication\Plugin\Publisher\Store\StoreWritePublisherPlugin;
+use Spryker\Zed\StoreStorage\Communication\Plugin\Publisher\StorePublisherTriggerPlugin;
 use Spryker\Zed\TaxApp\Communication\Plugin\Publisher\Store\RefreshTaxAppStoreRelationPublisherPlugin;
 use Spryker\Zed\TaxProductStorage\Communication\Plugin\Publisher\TaxProductPublisherTriggerPlugin;
 use Spryker\Zed\TaxStorage\Communication\Plugin\Publisher\TaxSetPublisherTriggerPlugin;
@@ -146,6 +148,7 @@ class PublisherDependencyProvider extends SprykerPublisherDependencyProvider
             $this->getAssetPlugins(),
             $this->getTaxAppPlugins(),
             $this->getProductStoragePlugins(),
+            $this->getCmsPageMessageBrokerPlugins(),
         );
     }
 
@@ -179,6 +182,7 @@ class PublisherDependencyProvider extends SprykerPublisherDependencyProvider
             new CategoryTreePublisherTriggerPlugin(),
             new ProductCategoryPublisherTriggerPlugin(),
             new CategoryPagePublisherTriggerPlugin(),
+            new StorePublisherTriggerPlugin(),
             new ProductConcretePublisherTriggerPlugin(),
             new ProductAlternativePublisherTriggerPlugin(),
             new ProductDiscontinuedPublisherTriggerPlugin(),
@@ -202,11 +206,9 @@ class PublisherDependencyProvider extends SprykerPublisherDependencyProvider
     protected function getGlossaryStoragePlugins(): array
     {
         return [
-            GlossaryStorageConfig::PUBLISH_TRANSLATION => [
-                new GlossaryKeyDeletePublisherPlugin(),
-                new GlossaryKeyWriterPublisherPlugin(),
-                new GlossaryTranslationWritePublisherPlugin(),
-            ],
+            new GlossaryKeyDeletePublisherPlugin(),
+            new GlossaryKeyWriterPublisherPlugin(),
+            new GlossaryTranslationWritePublisherPlugin(),
         ];
     }
 
@@ -444,6 +446,17 @@ class PublisherDependencyProvider extends SprykerPublisherDependencyProvider
     {
         return [
             new ProductLocalizedAttributesProductAbstractWritePublisherPlugin(),
+        ];
+    }
+
+    /**
+     * @return array<\Spryker\Zed\PublisherExtension\Dependency\Plugin\PublisherPluginInterface>
+     */
+    protected function getCmsPageMessageBrokerPlugins(): array
+    {
+        return [
+            new CmsPageVersionPublishedMessageBrokerPublisherPlugin(),
+            new CmsPageUpdateMessageBrokerPublisherPlugin(),
         ];
     }
 }

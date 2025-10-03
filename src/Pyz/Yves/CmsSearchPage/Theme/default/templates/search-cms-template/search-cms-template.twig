@@ -1,25 +1,29 @@
-{% extends template('page-layout-main') %}
+{% extends template('search-cms-template', '@SprykerShop:CmsSearchPage') %}
 
-{% define data = {
-    pages: required
-} %}
+{%- block contentClass -%}page-layout-main page-layout-main--cms-search-page{%- endblock -%}
 
-{% block container %}
-    <div class="container">
-        <div class="container__inner">
-            {% block breadcrumbs %}{% endblock %}
-        </div>
-    </div>
+{% block formContentSort %}
+    {% set pageJsName = 'js-cms-page-search' %}
 
-    {% block title %}{% endblock %}
+    {% include molecule('window-location-applicator', 'CatalogPage') with {
+        attributes: {
+            'form-class-name': pageJsName ~ '__form',
+            'trigger-class-name': pageJsName ~ '__trigger',
+            'sort-trigger-class-name': pageJsName ~ '__sort-trigger',
+        },
+    } only %}
 
-    <div class="container">
-        <main class="container__inner">
-            {% block content %}
-                <form method="GET" class="grid js-form-input-default-value-disabler__catalog-form">
-                    {% block form %}{% endblock %}
-                </form>
-            {% endblock %}
-        </main>
-    </div>
+    {% include molecule('sort', 'CatalogPage') with {
+        data: {
+            pagination: data.pagination,
+            sort: data.sort,
+            parentJsName: pageJsName,
+        },
+    } only %}
+{% endblock %}
+
+{% block formContentPaginationBottom %}
+    {% include molecule('pagination') with {
+        data: data.pagination,
+    } only %}
 {% endblock %}

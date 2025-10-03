@@ -9,7 +9,6 @@ declare(strict_types = 1);
 
 namespace Pyz\Zed\Transfer;
 
-use Spryker\Shared\Transfer\TransferConstants;
 use Spryker\Zed\Transfer\TransferConfig as SprykerTransferConfig;
 
 class TransferConfig extends SprykerTransferConfig
@@ -61,14 +60,6 @@ class TransferConfig extends SprykerTransferConfig
     public function isTransferXmlValidationEnabled(): bool
     {
         return true;
-    }
-
-    /**
-     * @return string
-     */
-    public function getPropertyDescriptionMergeStrategy(): string
-    {
-        return TransferConstants::PROPERTY_DESCRIPTION_MERGE_STRATEGY_GET_FIRST;
     }
 
     /**

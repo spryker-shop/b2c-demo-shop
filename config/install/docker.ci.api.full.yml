@@ -7,20 +7,11 @@ sections:
         generate-transfers:
             command: 'vendor/bin/console transfer:generate'
 
-        router-cache-warmup-yves:
-            command: 'vendor/bin/yves router:cache:warm-up'
-
-        router-cache-warmup-backoffice:
-            command: 'vendor/bin/console router:cache:warm-up:backoffice'
-
         oms-process-cache-warmup:
             command: 'vendor/bin/console oms:process-cache:warm-up'
 
         router-cache-warmup-backend-gateway:
             command: 'vendor/bin/console router:cache:warm-up:backend-gateway'
-
-        twig-cache-warmup:
-            command: 'vendor/bin/console twig:cache:warmer'
 
         navigation-cache-warmup:
             command: 'vendor/bin/console navigation:build-cache'
@@ -59,31 +50,6 @@ sections:
         rest-api-generate-documentation:
             command: 'vendor/bin/console rest-api:generate:documentation'
 
-    build-static:
-        dependencies-install:
-            command: 'vendor/bin/console frontend:project:install-dependencies'
-
-    build-static-production:
-        excluded: true
-        yves-build-frontend:
-            command: 'vendor/bin/console frontend:yves:build -e production'
-
-        zed-build-frontend:
-            command: 'vendor/bin/console frontend:zed:build -e production'
-
-        date-time-product-configurator:
-            command: 'vendor/bin/console frontend:date-time-product-configurator:build'
-
-    build-static-development:
-        yves-build-frontend:
-            command: 'vendor/bin/console frontend:yves:build'
-
-        zed-build-frontend:
-            command: 'vendor/bin/console frontend:zed:build'
-
-        date-time-product-configurator:
-            command: 'vendor/bin/console frontend:date-time-product-configurator:build'
-
     init-storages-per-store:
         queue-setup:
             command: 'vendor/bin/console queue:setup'
@@ -91,6 +57,9 @@ sections:
             command: 'vendor/bin/console search:setup:sources'
 
     init-storages-per-region:
+        queue-setup:
+            command: 'vendor/bin/console queue:setup'
+
         propel-copy-schema:
             command: 'vendor/bin/console propel:schema:copy'
 
@@ -99,6 +68,9 @@ sections:
 
         propel-migration-delete:
             command: 'vendor/bin/console propel:migration:delete'
+
+        propel-tables-drop:
+            command: 'vendor/bin/console propel:tables:drop'
 
         propel-diff:
             command: 'vendor/bin/console propel:diff'
@@ -113,8 +85,14 @@ sections:
             command: 'vendor/bin/console setup:init-db'
 
     demodata:
+        queue-setup:
+            command: 'vendor/bin/console queue:setup'
+
         import-eu-region-demodata:
             command: 'vendor/bin/console data:import --config=data/import/local/full_EU.yml'
+
+        setup-search-create-sources:
+            command: 'vendor/bin/console search:setup:sources'
 
         apply-scheduled-prices:
             command: 'vendor/bin/console price-product-schedule:apply'

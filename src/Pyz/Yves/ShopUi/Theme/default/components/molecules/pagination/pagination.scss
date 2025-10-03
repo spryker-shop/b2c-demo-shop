@@ -1,5 +1,9 @@
 @mixin shop-ui-pagination($name: '.pagination') {
     #{$name} {
+        &:empty {
+            display: none;
+        }
+
         &__list {
             border-top: rem(1) dotted $setting-color-gray-3;
             border-bottom: rem(1) dotted $setting-color-gray-3;

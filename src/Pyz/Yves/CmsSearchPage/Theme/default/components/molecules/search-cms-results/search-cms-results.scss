@@ -1,27 +1,20 @@
 @mixin cms-search-page-search-cms-results($name: '.search-cms-results') {
     #{$name} {
-        &__list {
-            margin-bottom: rem(60);
-        }
+        margin: rem(50) 0;
+        border-top: rem(1) dotted $setting-color-gray-3;
 
         &__item {
             padding: rem(11) rem(25);
             border-bottom: rem(1) dotted $setting-color-gray-3;
-            text-align: center;
             position: relative;
-
-            &:first-child {
-                border-top: rem(1) dotted $setting-color-gray-3;
-            }
-
-            @include helper-breakpoint-media-min($md-min) {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-            }
+            display: flex;
+            gap: rem(20);
+            flex-direction: column;
 
             @include helper-breakpoint-media-min($xl-min) {
                 @include helper-effect-transition(box-shadow border-bottom-color);
+                justify-content: space-between;
+                flex-direction: row;
 
                 &::before {
                     @include helper-effect-transition(opacity);
@@ -33,6 +26,7 @@
                     bottom: 0;
                     background: linear-gradient(to bottom, $setting-color-black, $setting-color-alpha-1);
                     opacity: 0;
+                    pointer-events: none;
                 }
 
                 &:hover {
@@ -46,25 +40,10 @@
             }
         }
 
-        &__name {
+        &__title {
+            @include helper-font-size(default);
             letter-spacing: rem(0.3);
-            font-family: $setting-font-family-additional;
             font-weight: fw(medium);
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            z-index: $setting-zi-element;
-        }
-
-        &__button {
-            text-decoration-color: $setting-color-white;
-            text-decoration-line: inherit;
-
-            &:hover {
-                @include helper-effect-transition(text-decoration-color);
-                text-decoration-color: $setting-color-alt;
-            }
         }
 
         @content;

@@ -9,7 +9,6 @@ declare(strict_types = 1);
 
 namespace Pyz\Zed\Log;
 
-use Spryker\Zed\Log\Communication\Plugin\Handler\ExceptionStreamHandlerPlugin;
 use Spryker\Zed\Log\Communication\Plugin\Handler\StreamHandlerPlugin;
 use Spryker\Zed\Log\Communication\Plugin\Log\AuditLogMetaDataProcessorPlugin;
 use Spryker\Zed\Log\Communication\Plugin\Log\AuditLogRequestProcessorPlugin;
@@ -33,7 +32,6 @@ class LogDependencyProvider extends SprykerLogDependencyProvider
     {
         return [
             new StreamHandlerPlugin(),
-            new ExceptionStreamHandlerPlugin(),
         ];
     }
 
