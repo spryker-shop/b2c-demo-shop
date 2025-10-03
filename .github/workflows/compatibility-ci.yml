@@ -1,0 +1,243 @@
+name: B2C-COMPATIBILITY-CI
+
+on:
+    pull_request:
+        types: [ labeled, unlabeled, synchronize, opened ]
+    schedule:
+        - cron: '0 3 * * 6'
+    workflow_dispatch:
+
+env:
+    SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+    WEEKLY_CI_SLACK_CHANNEL_ID: ${{ secrets.WEEKLY_CI_SLACK_CHANNEL_ID }}
+    JIRA_TICKET_SLACK_USER_GROUP_MAPPING: ${{ secrets.JIRA_TICKET_SLACK_USER_GROUP_MAPPING }}
+
+concurrency:
+    group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+    cancel-in-progress: true
+
+jobs:
+    php-83-postgresql-acceptance-debian-dynamic-store-off:
+        if: >
+            (github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'run-compatibility-ci'))
+            || github.event_name == 'schedule'
+        name: "PHP 8.3 / PostgreSQL / Acceptance & API / Debian / Dynamic Store OFF"
+        runs-on: ubuntu-latest
+        env:
+            PROGRESS_TYPE: plain
+            SPRYKER_PLATFORM_IMAGE: spryker/php:8.3-debian
+            TRAVIS: 1
+        steps:
+            -   uses: actions/checkout@v4
+
+            -   name: Run docker
+                run: |
+                    git clone --depth 1 https://github.com/spryker/docker-sdk.git ./docker
+                    docker/sdk boot deploy.ci.acceptance.dynamic-store-off.yml
+                    docker/sdk up -t
+                    docker/sdk cli composer dump-autoload -o -a --apcu
+                    docker/sdk testing codecept fixtures
+                    docker/sdk testing console queue:worker:start --stop-when-empty
+
+            -   name: Run Acceptance Tests
+                run: |
+                    docker/sdk testing codecept run -c codeception.acceptance.yml
+
+            -   name: Run API Tests
+                run: |
+                    docker/sdk testing codecept run -c codeception.api.yml
+
+            -   name: Slack Notification for failed job
+                uses: ./.github/actions/job-slack-notifications
+                if: always()
+
+    php-83-postgres-functional-debian-dynamic-store-off:
+        if: >
+            (github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'run-compatibility-ci'))
+            || github.event_name == 'schedule'
+        name: "PHP 8.3 / PostgreSQL / Functional / Debian / Dynamic Store OFF"
+        runs-on: ubuntu-latest
+        env:
+            PROGRESS_TYPE: plain
+            SPRYKER_PLATFORM_IMAGE: spryker/php:8.3-debian
+            TRAVIS: 1
+        steps:
+            -   uses: actions/checkout@v4
+
+            -   name: Run docker
+                run: |
+                    git clone --depth 1 https://github.com/spryker/docker-sdk.git ./docker
+                    docker/sdk boot deploy.ci.functional.dynamic-store-off.yml
+                    docker/sdk up -t
+                    docker/sdk cli composer dump-autoload -o -a --apcu
+                    docker/sdk testing codecept run -c codeception.functional.yml
+
+            -   name: Slack Notification for failed job
+                uses: ./.github/actions/job-slack-notifications
+                if: always()
+
+    docker-debian-php-83-postgresql-robot-dynamic-store-off:
+        if: >
+            (github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'run-compatibility-ci'))
+            || github.event_name == 'schedule'
+        name: "Docker / Debian / PHP 8.3 / PostgreSql / Robot / API / Dynamic Store OFF"
+        runs-on: ubuntu-latest
+        env:
+            PROGRESS_TYPE: plain
+            SPRYKER_PLATFORM_IMAGE: spryker/php:8.3-debian
+            TRAVIS: 1
+            ROBOT_TESTS_ARTIFACTS_BUCKET_REGION: eu-west-1
+        steps:
+            -   uses: actions/checkout@v4
+            -   name: Install packages
+                run: |
+                    sudo apt-get update
+                    sudo apt-get install -y python3-pip
+                    pip3 install --upgrade pip
+                    pip3 install awscli
+            -   name: Install robotframework-suite-tests folder
+                run: |
+                    cd ./data && composer require "spryker/robotframework-suite-tests:dev-master" --dev --no-interaction
+                    cp -r vendor ../vendor
+
+            -   name: Install Project
+                continue-on-error: false
+                run: |
+                    git clone --depth 1 https://github.com/spryker/docker-sdk.git ./docker
+                    docker/sdk boot deploy.ci.api.dynamic-store-off.robot.yml
+                    sudo bash -c "echo '127.0.0.1 backend-api.at.spryker.local backend-api.de.spryker.local glue-backend.de.spryker.local glue-backend.at.spryker.local glue-storefront.de.spryker.local glue-storefront.at.spryker.local backend-gateway.at.spryker.local backend-gateway.de.spryker.local backoffice.at.spryker.local backoffice.de.spryker.local date-time-configurator-example.spryker.local glue.at.spryker.local glue.de.spryker.local yves.at.spryker.local yves.de.spryker.local' >> /etc/hosts"
+                    docker/sdk up -t
+                    docker/sdk cli composer dump-autoload -o -a --apcu
+                    APPLICATION_STORE=AT docker/sdk console queue:worker:start --stop-when-empty
+            -   name: Run Tests
+                run: |
+                    docker/sdk exec robot-framework robot -v env:api_b2c -v db_engine:psycopg2 -v docker:True --exclude skip-due-to-issueORskip-due-to-refactoring -d results -s robotframework.tests.api.b2c .
+            -   name: Upload artifacts
+                if: failure()
+                run: |
+                    AWS_DEFAULT_REGION=${{env.ROBOT_TESTS_ARTIFACTS_BUCKET_REGION}} AWS_ACCESS_KEY_ID=${{ secrets.ROBOT_TESTS_ARTIFACTS_KEY }} AWS_SECRET_ACCESS_KEY=${{ secrets.ROBOT_TESTS_ARTIFACTS_SECRET }} aws s3 cp .robot/results/log.html s3://${{vars.ROBOT_TESTS_ARTIFACTS_BUCKET}}/b2c/dms-off/robot-api/${GITHUB_RUN_ID}/PHP8.3PostgerSQL/log.html
+
+            -   name: Slack Notification for failed job
+                uses: ./.github/actions/job-slack-notifications
+                if: always()
+
+    docker-debian-php-83-postgresql-cypress-dynamic-store-off:
+        if: >
+            (github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'run-compatibility-ci'))
+            || github.event_name == 'schedule'
+        name: "Docker / Debian / PHP 8.3 / PostgreSql / Cypress / UI / Dynamic Store OFF"
+        runs-on: ubuntu-latest
+        env:
+            PROGRESS_TYPE: plain
+            SPRYKER_PLATFORM_IMAGE: spryker/php:8.3-debian
+            TRAVIS: 1
+            ROBOT_TESTS_ARTIFACTS_BUCKET_REGION: eu-west-1
+        steps:
+            -   uses: actions/checkout@v4
+
+            -   name: Install packages
+                run: |
+                    sudo apt-get update
+                    sudo apt-get install -y python3-pip
+                    pip3 install --upgrade pip
+                    pip3 install awscli
+
+            -   name: Install cypress-tests folder
+                run: |
+                    cd ./data && composer require "spryker/cypress-tests:dev-master" --dev --no-interaction
+                    cp -r vendor/spryker/cypress-tests ../tests/cypress-tests
+
+            -   name: Install Project
+                run: |
+                    git clone --depth 1 https://github.com/spryker/docker-sdk.git ./docker
+                    docker/sdk boot deploy.ci.acceptance.postgres.dynamic-store-off.cypress.yml
+                    sudo bash -c "echo '127.0.0.1 backend-api.at.spryker.local backend-api.de.spryker.local glue-backend.de.spryker.local glue-backend.at.spryker.local glue-storefront.de.spryker.local glue-storefront.at.spryker.local backend-gateway.at.spryker.local backend-gateway.de.spryker.local backoffice.at.spryker.local backoffice.de.spryker.local date-time-configurator-example.spryker.local glue.at.spryker.local glue.de.spryker.local yves.at.spryker.local yves.de.spryker.local' >> /etc/hosts"
+                    docker/sdk up -t
+                    docker/sdk cli composer dump-autoload -o -a --apcu
+
+            -   name: Run Tests
+                run: |
+                    docker/sdk exec cypress-tests cp .env.example .env
+                    docker/sdk exec --env "ENV_REPOSITORY_ID=b2c" cypress-tests npm run cy:ci
+
+            -   name: Upload artifacts
+                if: failure()
+                run: |
+                    AWS_DEFAULT_REGION=${{env.ROBOT_TESTS_ARTIFACTS_BUCKET_REGION}} AWS_ACCESS_KEY_ID=${{ secrets.ROBOT_TESTS_ARTIFACTS_KEY }} AWS_SECRET_ACCESS_KEY=${{ secrets.ROBOT_TESTS_ARTIFACTS_SECRET }} aws s3 cp .cypress s3://${{vars.ROBOT_TESTS_ARTIFACTS_BUCKET}}/b2c/dms-off/cypress/${GITHUB_RUN_ID}/PHP8.4MariaDB/ --recursive
+
+            -   name: Slack Notification for failed job
+                uses: ./.github/actions/job-slack-notifications
+                if: always()
+
+    docker-alpine-php-83-postgresql-dynamic-store-off-robot-ui:
+        if: >
+            (github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'run-compatibility-ci'))
+            || github.event_name == 'schedule'
+        name: "Docker / Alpine / PHP 8.3 / PostgreSQL / Dynamic Store OFF / Robot / UI"
+        runs-on: ubuntu-latest
+        env:
+            PROGRESS_TYPE: plain
+            SPRYKER_PLATFORM_IMAGE: spryker/php:8.3
+            TRAVIS: 1
+            ROBOT_TESTS_ARTIFACTS_BUCKET_REGION: eu-west-1
+        steps:
+            -   uses: actions/checkout@v4
+
+            -   name: Install packages
+                run: |
+                    sudo apt-get update
+                    sudo apt-get install -y python3-pip
+                    pip3 install --upgrade pip
+                    pip3 install awscli
+
+            -   name: Install robotframework-suite-tests folder
+                run: |
+                    cd ./data && composer require "spryker/robotframework-suite-tests:dev-master" --dev --no-interaction
+                    cp -r vendor ../vendor
+
+            -   name: Install Project
+                continue-on-error: false
+                run: |
+                    git clone --depth 1 https://github.com/spryker/docker-sdk.git ./docker
+                    docker/sdk boot deploy.ci.acceptance.dynamic-store-off.robot.yml
+                    sudo bash -c "echo '127.0.0.1 backend-api.at.spryker.local backend-api.de.spryker.local glue-backend.de.spryker.local glue-backend.at.spryker.local glue-storefront.de.spryker.local glue-storefront.at.spryker.local backend-gateway.at.spryker.local backend-gateway.de.spryker.local backoffice.at.spryker.local backoffice.de.spryker.local date-time-configurator-example.spryker.local glue.at.spryker.local glue.de.spryker.local yves.at.spryker.local yves.de.spryker.local' >> /etc/hosts"
+                    docker/sdk up -t
+                    docker/sdk cli composer dump-autoload -o -a --apcu
+
+            -   name: Custom commands
+                continue-on-error: false
+                run: |
+                    APPLICATION_STORE=AT docker/sdk console queue:worker:start --stop-when-empty
+
+            -   name: Run Dynamic Tests Set
+                id: run_dynamic_tests
+                continue-on-error: true
+                run: |
+                    docker/sdk exec robot-framework pabot --processes 6 --ordering pabot_b2c_ordering -v env:ui_b2c -v docker:True -v headless:true -v ignore_console:false -v dms:false -v db_engine:psycopg2 -d results/dynamic_set --exclude skip-due-to-issueORskip-due-to-refactoringORstatic-set -s '*'.tests.parallel_ui.b2c .
+            -   name: Run Static Tests Set
+                id: run_static_tests
+                continue-on-error: true
+                run: |
+                    docker/sdk exec robot-framework robot -v env:ui_b2c -v docker:True -v headless:true -v ignore_console:false -v dms:false -v db_engine:psycopg2 -d results/static_set --exclude skip-due-to-issueORskip-due-to-refactoring --include static-set -s '*'.tests.parallel_ui.b2c .
+            -   name: Merge Initial Test Results
+                id: merge_initial_results
+                continue-on-error: true
+                run: |
+                    docker/sdk exec robot-framework rebot -d results --output output.xml --merge results/dynamic_set/output.xml results/static_set/output.xml
+            -   name: Rerun Failed Tests
+                id: rerun_failed_tests
+                if: always() && steps.merge_initial_results.outcome != 'success'
+                run: |
+                    docker/sdk exec robot-framework robot -v env:ui_b2c -v docker:True -v dms:false -v db_engine:psycopg2 -v headless:true -v ignore_console:false -d results/rerun --runemptysuite --rerunfailed results/output.xml --output rerun.xml -s '*'.tests.parallel_ui.b2c .
+            -   name: Merge Final Test Results
+                if: always() && steps.merge_initial_results.outcome != 'success'
+                run: |
+                    docker/sdk exec robot-framework rebot -d results --merge results/output.xml results/rerun/rerun.xml
+            -   name: Upload artifacts
+                if: failure()
+                run: |
+                    AWS_DEFAULT_REGION=${{env.ROBOT_TESTS_ARTIFACTS_BUCKET_REGION}} AWS_ACCESS_KEY_ID=${{ secrets.ROBOT_TESTS_ARTIFACTS_KEY }} AWS_SECRET_ACCESS_KEY=${{ secrets.ROBOT_TESTS_ARTIFACTS_SECRET }} aws s3 cp .robot/results/log.html s3://${{vars.ROBOT_TESTS_ARTIFACTS_BUCKET}}/b2c/dms-off/robot-ui/${GITHUB_RUN_ID}/PHP8.3PostgreSQL/log.html
+
+            -   name: Slack Notification for failed job
+                uses: ./.github/actions/job-slack-notifications
+                if: always()

@@ -47,15 +47,10 @@ jobs:
                     cd ./data && composer require "spryker/robotframework-suite-tests:dev-master" --dev --no-interaction
                     cp -r vendor ../vendor
 
-            -   name: Install docker-compose
-                run: |
-                    sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-                    sudo chmod +x /usr/local/bin/docker-compose
-
             -   name: Install Project
                 continue-on-error: false
                 run: |
-                    git clone https://github.com/spryker/docker-sdk.git ./docker
+                    git clone --depth 1 https://github.com/spryker/docker-sdk.git ./docker
                     docker/sdk boot deploy.ci.acceptance.mariadb.robot.yml
                     sudo bash -c "echo '127.0.0.1 backend-api.eu.spryker.local backend-api.us.spryker.local backend-gateway.eu.spryker.local backend-gateway.us.spryker.local backoffice.eu.spryker.local backoffice.us.spryker.local glue-backend.eu.spryker.local glue-backend.us.spryker.local glue-storefront.eu.spryker.local glue-storefront.us.spryker.local glue.eu.spryker.local glue.us.spryker.local mail.spryker.local queue.spryker.local spryker.local swagger.spryker.local yves.eu.spryker.local yves.us.spryker.local date-time-configurator-example.spryker.local' >> /etc/hosts"
                     docker/sdk up -t
@@ -89,85 +84,6 @@ jobs:
                 if: failure()
                 run: |
                     AWS_DEFAULT_REGION=${{env.ROBOT_TESTS_ARTIFACTS_BUCKET_REGION}} AWS_ACCESS_KEY_ID=${{ secrets.ROBOT_TESTS_ARTIFACTS_KEY }} AWS_SECRET_ACCESS_KEY=${{ secrets.ROBOT_TESTS_ARTIFACTS_SECRET }} aws s3 cp .robot/results/log.html s3://${{vars.ROBOT_TESTS_ARTIFACTS_BUCKET}}/b2c/dms-on/robot-ui/${GITHUB_RUN_ID}/PHP8.4MariaDB/log.html
-
-            -   name: Slack Notification for failed job
-                uses: ./.github/actions/job-slack-notifications
-                if: always()
-
-    docker-alpine-php-83-postgresql-dynamic-store-off-robot-ui:
-        if: >
-            (github.event_name == 'pull_request'
-                && contains(github.event.pull_request.labels.*.name, 'run-compatibility-ci')
-            ) || github.ref == 'refs/heads/master'
-        name: "Docker / Alpine / PHP 8.3 / PostgreSQL / Dynamic Store OFF / Robot / UI"
-        runs-on: ubuntu-latest
-        env:
-            PROGRESS_TYPE: plain
-            SPRYKER_PLATFORM_IMAGE: spryker/php:8.3
-            TRAVIS: 1
-            ROBOT_TESTS_ARTIFACTS_BUCKET_REGION: eu-west-1
-        steps:
-            -   uses: actions/checkout@v4
-
-            -   name: Install packages
-                run: |
-                    sudo apt-get update
-                    sudo apt-get install -y python3-pip
-                    pip3 install --upgrade pip
-                    pip3 install awscli
-
-            -   name: Install robotframework-suite-tests folder
-                run: |
-                    cd ./data && composer require "spryker/robotframework-suite-tests:dev-master" --dev --no-interaction
-                    cp -r vendor ../vendor
-
-            -   name: Install docker-compose
-                run: |
-                    sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-                    sudo chmod +x /usr/local/bin/docker-compose
-
-            -   name: Install Project
-                continue-on-error: false
-                run: |
-                    git clone https://github.com/spryker/docker-sdk.git ./docker
-                    docker/sdk boot deploy.ci.acceptance.dynamic-store-off.robot.yml
-                    sudo bash -c "echo '127.0.0.1 backend-api.at.spryker.local backend-api.de.spryker.local glue-backend.de.spryker.local glue-backend.at.spryker.local glue-storefront.de.spryker.local glue-storefront.at.spryker.local backend-gateway.at.spryker.local backend-gateway.de.spryker.local backoffice.at.spryker.local backoffice.de.spryker.local date-time-configurator-example.spryker.local glue.at.spryker.local glue.de.spryker.local yves.at.spryker.local yves.de.spryker.local' >> /etc/hosts"
-                    docker/sdk up -t
-                    docker/sdk cli composer dump-autoload -o -a --apcu
-
-            -   name: Custom commands
-                continue-on-error: false
-                run: |
-                    APPLICATION_STORE=AT docker/sdk console queue:worker:start --stop-when-empty
-
-            -   name: Run Dynamic Tests Set
-                id: run_dynamic_tests
-                continue-on-error: true
-                run: |
-                    docker/sdk exec robot-framework pabot --processes 6 --ordering pabot_b2c_ordering -v env:ui_b2c -v docker:True -v headless:true -v ignore_console:false -v dms:false -v db_engine:psycopg2 -d results/dynamic_set --exclude skip-due-to-issueORskip-due-to-refactoringORstatic-set -s '*'.tests.parallel_ui.b2c .
-            -   name: Run Static Tests Set
-                id: run_static_tests
-                continue-on-error: true
-                run: |
-                    docker/sdk exec robot-framework robot -v env:ui_b2c -v docker:True -v headless:true -v ignore_console:false -v dms:false -v db_engine:psycopg2 -d results/static_set --exclude skip-due-to-issueORskip-due-to-refactoring --include static-set -s '*'.tests.parallel_ui.b2c .
-            -   name: Merge Initial Test Results
-                id: merge_initial_results
-                continue-on-error: true
-                run: |
-                    docker/sdk exec robot-framework rebot -d results --output output.xml --merge results/dynamic_set/output.xml results/static_set/output.xml
-            -   name: Rerun Failed Tests
-                id: rerun_failed_tests
-                if: always() && steps.merge_initial_results.outcome != 'success'
-                run: |
-                    docker/sdk exec robot-framework robot -v env:ui_b2c -v docker:True -v dms:false -v db_engine:psycopg2 -v headless:true -v ignore_console:false -d results/rerun --runemptysuite --rerunfailed results/output.xml --output rerun.xml -s '*'.tests.parallel_ui.b2c .
-            -   name: Merge Final Test Results
-                if: always() && steps.merge_initial_results.outcome != 'success'
-                run: |
-                    docker/sdk exec robot-framework rebot -d results --merge results/output.xml results/rerun/rerun.xml
-            -   name: Upload artifacts
-                if: failure()
-                run: |
-                    AWS_DEFAULT_REGION=${{env.ROBOT_TESTS_ARTIFACTS_BUCKET_REGION}} AWS_ACCESS_KEY_ID=${{ secrets.ROBOT_TESTS_ARTIFACTS_KEY }} AWS_SECRET_ACCESS_KEY=${{ secrets.ROBOT_TESTS_ARTIFACTS_SECRET }} aws s3 cp .robot/results/log.html s3://${{vars.ROBOT_TESTS_ARTIFACTS_BUCKET}}/b2c/dms-off/robot-ui/${GITHUB_RUN_ID}/PHP8.3PostgreSQL/log.html
 
             -   name: Slack Notification for failed job
                 uses: ./.github/actions/job-slack-notifications
