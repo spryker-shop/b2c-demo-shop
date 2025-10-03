@@ -18,6 +18,19 @@ concurrency:
     cancel-in-progress: true
 
 jobs:
+    scan-credentials:
+        name: "Scan for Credentials"
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
+
+            - name: Run TruffleHog OSS
+              uses: trufflesecurity/trufflehog@v3.90.8
+              with:
+                  extra_args: --log-level=2 --results=verified,unknown
     validation:
         name: "Static analysis"
         runs-on: ubuntu-latest
