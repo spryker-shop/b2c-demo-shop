@@ -20,6 +20,7 @@ concurrency:
 jobs:
     scan-credentials:
         name: "Scan for Credentials"
+        if: ${{ !(github.event_name == 'push' && github.ref == 'refs/heads/master') }}
         runs-on: ubuntu-latest
         steps:
             - name: Checkout code
@@ -33,6 +34,7 @@ jobs:
                   extra_args: --log-level=2 --results=verified,unknown
     validation:
         name: "Static analysis"
+        if: ${{ !(github.event_name == 'push' && github.ref == 'refs/heads/master') }}
         runs-on: ubuntu-latest
         strategy:
             fail-fast: false
@@ -169,6 +171,7 @@ jobs:
 
     js-validation:
         name: "NPM validation"
+        if: ${{ !(github.event_name == 'push' && github.ref == 'refs/heads/master') }}
         runs-on: ubuntu-latest
         strategy:
             fail-fast: false
