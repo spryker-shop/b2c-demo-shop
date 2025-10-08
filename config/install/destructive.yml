@@ -66,5 +66,7 @@ sections:
             command: 'vendor/bin/console product:check-validity'
 
     scheduler-start:
+        trigger-events:
+            command: 'vendor/bin/console publish:trigger-events'
         scheduler-setup:
             command: 'vendor/bin/console scheduler:setup -vvv --no-ansi || true'
