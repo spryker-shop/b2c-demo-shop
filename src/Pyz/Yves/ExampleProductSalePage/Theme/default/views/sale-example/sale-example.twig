@@ -3,12 +3,13 @@
 {% define data = {
     products: _view.products,
     facets: _view.facets,
+    filteredFacets: _view.filteredFacets | default([]),
     filterPath: _view.filterPath | default(null),
     category: _view.category | default(null),
     categories: categories | default([]),
     categoryId: _view.idCategory | default(null),
-    filterPath: _view.filterPath | default(null),
     viewMode: _view.viewMode | default(null),
+    prepareFilterCategoriesDefined: false,
 
     title: _view.category.name | default('catalog.sale' | trans),
     metaTitle: _view.category.name | default('catalog.sale' | trans),
