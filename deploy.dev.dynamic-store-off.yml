@@ -210,7 +210,7 @@ groups:
 services:
     database:
         engine: mysql
-        version: mariadb-10.4
+        version: mariadb-10.11
         root:
             username: "root"
             password: "secret"
@@ -235,14 +235,14 @@ services:
             localhost:16379:
                 protocol: tcp
     search:
-        engine: elastic
-        version: '7.10'
+        engine: opensearch
+        version: '1.3'
         endpoints:
             localhost:9200:
                 protocol: tcp
     scheduler:
         engine: jenkins
-        version: '2.492.3'
+        version: '2.516.3'
         csrf-protection-enabled: true
         endpoints:
             scheduler.spryker.local:
