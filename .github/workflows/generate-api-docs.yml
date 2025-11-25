@@ -6,12 +6,11 @@ on:
     workflow_dispatch:
 
 concurrency:
-    group: ${{ github.workflow }}-${{ github.ref }}
+    group: generate-api-specs-main
     cancel-in-progress: true
 
 jobs:
   generate-and-publish:
-    if: github.event.workflow_run.conclusion == 'success'
     name: Generate and Publish API Specs
     runs-on: ubuntu-latest
 
