@@ -6,7 +6,7 @@ on:
     workflow_dispatch:
 
 concurrency:
-    group: generate-api-specs-main
+    group: ${{ github.workflow }}-${{ github.ref }}
     cancel-in-progress: true
 
 jobs:
