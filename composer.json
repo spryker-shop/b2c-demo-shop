@@ -118,6 +118,7 @@
         "spryker/cms-slot-locale-connector": "^1.1.0",
         "spryker/cms-slot-store-connector": "^1.0.1",
         "spryker/cms-user-connector": "^1.4.0",
+        "spryker/composer-autoload-plugin": "^0.2.0",
         "spryker/configurable-bundle-carts-rest-api": "^1.0.0",
         "spryker/configurable-bundles-products-resource-relationship": "^1.1.0",
         "spryker/configurable-bundles-rest-api": "^1.1.0",
@@ -286,6 +287,12 @@
             "tests/cypress-tests/": [
                 "type:zend-module"
             ]
+        },
+        "splitting": {
+            "namespaces": [
+                "Spryker\\",
+                "SprykerShop\\"
+            ]
         }
     },
     "autoload-dev": {
@@ -321,7 +328,8 @@
             "php-http/discovery": true,
             "symfony/flex": true,
             "symfony/runtime": true,
-            "tbachert/spi": true
+            "tbachert/spi": true,
+            "spryker/composer-autoload-plugin": true
         }
     },
     "repositories": [
