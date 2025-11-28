@@ -138,6 +138,7 @@ use Spryker\Zed\Payment\PaymentConfig;
 use Spryker\Zed\Propel\PropelConfig;
 use SprykerShop\Shared\AgentPage\AgentPageConstants;
 use SprykerShop\Shared\CustomerPage\CustomerPageConstants;
+use SprykerShop\Shared\SecurityBlockerPage\SecurityBlockerPageConstants;
 use SprykerShop\Shared\ShopUi\ShopUiConstants;
 use SprykerShop\Shared\StorageRouter\StorageRouterConstants;
 use SprykerShop\Shared\StoreWidget\StoreWidgetConstants;
@@ -185,6 +186,7 @@ $config[RouterConstants::IS_STORE_ROUTING_ENABLED]
     = $config[ShopUiConstants::IS_STORE_ROUTING_ENABLED]
     = $config[CustomerPageConstants::IS_STORE_ROUTING_ENABLED]
     = $config[AgentPageConstants::IS_STORE_ROUTING_ENABLED]
+    = $config[SecurityBlockerPageConstants::IS_STORE_ROUTING_ENABLED]
     = $config[LocaleConstants::IS_STORE_ROUTING_ENABLED] = (bool)getenv('SPRYKER_DYNAMIC_STORE_MODE');
 
 // >>> DEV TOOLS
@@ -533,6 +535,7 @@ $config[EventBehaviorConstants::EVENT_BEHAVIOR_TRIGGERING_ACTIVE] = true;
 
 $config[EventConstants::MAX_RETRY_ON_FAIL] = 5;
 $config[QueueConstants::QUEUE_PROCESS_TRIGGER_INTERVAL_MICROSECONDS] = 1001;
+$config[QueueConstants::QUEUE_MESSAGE_CHUNK_SIZE_MAP] = json_decode(getenv('QUEUE_MESSAGE_CHUNK_SIZE_MAP') ?: '[]', true);
 
 $config[QueueConstants::QUEUE_ADAPTER_CONFIGURATION] = [
     EventConstants::EVENT_QUEUE => [

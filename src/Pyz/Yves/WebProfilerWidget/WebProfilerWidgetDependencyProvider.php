@@ -9,6 +9,7 @@ declare(strict_types = 1);
 
 namespace Pyz\Yves\WebProfilerWidget;
 
+use Spryker\Yves\Http\Plugin\WebProfilerWidget\WebProfilerExternalHttpDataCollectorPlugin;
 use Spryker\Yves\Profiler\Plugin\WebProfiler\WebProfilerProfilerDataCollectorPlugin;
 use Spryker\Yves\Redis\Plugin\WebProfiler\WebProfilerRedisDataCollectorPlugin;
 use Spryker\Yves\SearchElasticsearch\Plugin\WebProfiler\WebProfilerElasticsearchDataCollectorPlugin;
@@ -48,6 +49,7 @@ class WebProfilerWidgetDependencyProvider extends SprykerWebProfilerDependencyPr
             new WebProfilerRedisDataCollectorPlugin(),
             new WebProfilerElasticsearchDataCollectorPlugin(),
             new WebProfilerZedRequestDataCollectorPlugin(),
+            new WebProfilerExternalHttpDataCollectorPlugin(),
         ];
 
         if (class_exists(WebProfilerProfilerDataCollectorPlugin::class)) {
