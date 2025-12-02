@@ -81,6 +81,7 @@ $config[ErrorHandlerConstants::ERROR_LEVEL] = getenv('SPRYKER_DEBUG_DEPRECATIONS
 // >>> STORAGE
 
 $config[RedisConstants::REDIS_IS_DEV_MODE] = getenv('SPRYKER_REDIS_IS_DEV_MODE') !== false ? getenv('SPRYKER_REDIS_IS_DEV_MODE') : true;
+$config[RedisConstants::REDIS_COMPRESSION_ENABLED] = getenv('SPRYKER_KEY_VALUE_COMPRESSING_ENABLED') ?: false;
 
 // >>> QUEUE
 
