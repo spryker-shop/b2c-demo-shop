@@ -1,5 +1,4 @@
 const fs = require('fs');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 
 const getCopyConfig = (appSettings) =>
@@ -37,11 +36,6 @@ const getCopyStaticConfig = (appSettings) => {
 };
 
 const getAssetsConfig = (appSettings) => [
-    new CleanWebpackPlugin({
-        cleanOnceBeforeBuildPatterns: [appSettings.paths.public, appSettings.paths.publicStatic],
-        verbose: true,
-    }),
-
     new CopyPlugin({
         patterns: getCopyConfig(appSettings),
     }),
