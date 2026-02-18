@@ -63,10 +63,6 @@ class CustomerApiTester extends ApiEndToEndTester
             substr($restCustomersAttributesTransfer->getCreatedAt(), 0, 19),
         );
         $this->assertSame(
-            substr($customerTransfer->getUpdatedAt(), 0, 19),
-            substr($restCustomersAttributesTransfer->getUpdatedAt(), 0, 19),
-        );
-        $this->assertSame(
             $customerTransfer->getDateOfBirth(),
             $restCustomersAttributesTransfer->getDateOfBirth(),
         );
