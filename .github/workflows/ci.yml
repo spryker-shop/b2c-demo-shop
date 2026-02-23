@@ -2,7 +2,10 @@ name: B2C-CI
 
 on:
     push:
-        branches-ignore:
+        branches:
+            - master
+    pull_request:
+        branches:
             - master
     workflow_dispatch:
 
