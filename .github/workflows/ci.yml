@@ -159,6 +159,7 @@ jobs:
 
             -   name: Run Evaluator for release branches
                 run: vendor/bin/evaluator evaluate --format=compact
+                if: github.event.pull_request.base.ref == 'master' && startsWith(github.event.pull_request.head.ref, 'release-')
 
             -   name: Run Evaluator for all branches
                 run: vendor/bin/evaluator evaluate --exclude-checkers=SPRYKER_DEV_PACKAGES_CHECKER --format=compact
