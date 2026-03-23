@@ -19,5 +19,5 @@ class CmsListPage
     /**
      * @var string
      */
-    public const PAGE_LIST_TABLE_XPATH = '//*[@class="dataTables_scrollBody"]/table/tbody/tr[1]/td[1]';
+    public const PAGE_LIST_TABLE_XPATH = '//*[contains(@class, "dataTable")]/tbody/tr[1]/td[1]';
 }

@@ -66,7 +66,7 @@ class ProductRelationPresentationTester extends Actor
     /**
      * @var string
      */
-    public const PRODUCT_TABLE_BODY_XPATH = '//*[@class="dataTables_scrollBody"]/table/tbody/tr[1]/td[1]';
+    public const PRODUCT_TABLE_BODY_XPATH = '//*[contains(@class, "dataTable")]/tbody/tr[1]/td[1]';
 
     /**
      * @var int

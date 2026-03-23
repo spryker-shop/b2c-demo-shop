@@ -84,7 +84,7 @@ class TaxRateCreatePage
     /**
      * @var string
      */
-    public const SELECTOR_LIST_OF_TAX_RATES_BUTTON = '//div[@class="title-action"]/a';
+    public const SELECTOR_LIST_OF_TAX_RATES_BUTTON = '//div[@data-qa="title-action"]/a';
 
     /**
      * @var string
