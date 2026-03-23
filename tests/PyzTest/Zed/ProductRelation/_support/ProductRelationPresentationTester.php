@@ -46,7 +46,7 @@ class ProductRelationPresentationTester extends Actor
     /**
      * @var string
      */
-    public const PRODUCT_TABLE_FILTER_LABEL_INPUT_SELECTOR = '//*[@id="product-table_filter"]/label/input';
+    public const PRODUCT_TABLE_FILTER_LABEL_INPUT_SELECTOR = '//*[@class="dt-search"]//input';
 
     /**
      * @var string
