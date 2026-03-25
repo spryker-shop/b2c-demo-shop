@@ -24,7 +24,7 @@ class TaxRateListPage
     /**
      * @var string
      */
-    public const SELECTOR_SEARCH = 'input.form-control.input-sm';
+    public const SELECTOR_SEARCH = 'input.form-control.form-control-sm';
 
     /**
      * @var string
