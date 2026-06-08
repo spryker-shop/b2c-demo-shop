@@ -8712,20 +8712,20 @@
         },
         {
             "name": "spryker-shop/agent-widget",
-            "version": "1.3.3",
+            "version": "1.3.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker-shop/agent-widget.git",
-                "reference": "4ec89d0ff1471866383c4ac91126e27b2986d64f"
+                "reference": "bfcc34e87256c247acd628962e396c2432d5c988"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker-shop/agent-widget/zipball/4ec89d0ff1471866383c4ac91126e27b2986d64f",
-                "reference": "4ec89d0ff1471866383c4ac91126e27b2986d64f",
+                "url": "https://api.github.com/repos/spryker-shop/agent-widget/zipball/bfcc34e87256c247acd628962e396c2432d5c988",
+                "reference": "bfcc34e87256c247acd628962e396c2432d5c988",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.2",
+                "php": ">=8.3",
                 "spryker-shop/shop-application": "^1.0.0",
                 "spryker-shop/shop-ui": "^1.28.1",
                 "spryker/agent": "^1.0.0",
@@ -8759,9 +8759,9 @@
             ],
             "description": "AgentWidget module",
             "support": {
-                "source": "https://github.com/spryker-shop/agent-widget/tree/master"
+                "source": "https://github.com/spryker-shop/agent-widget/tree/1.3.4"
             },
-            "time": "2020-07-24T04:43:12+00:00"
+            "time": "2026-05-27T15:04:24+00:00"
         },
         {
             "name": "spryker-shop/asset-widget",
@@ -9110,34 +9110,40 @@
         },
         {
             "name": "spryker-shop/cart-code-widget",
-            "version": "1.6.0",
+            "version": "1.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker-shop/cart-code-widget.git",
-                "reference": "2ba0a137d21badec839c937de12849e650341139"
+                "reference": "96b7004e87096732f5fe4215b3badc398767e43e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker-shop/cart-code-widget/zipball/2ba0a137d21badec839c937de12849e650341139",
-                "reference": "2ba0a137d21badec839c937de12849e650341139",
+                "url": "https://api.github.com/repos/spryker-shop/cart-code-widget/zipball/96b7004e87096732f5fe4215b3badc398767e43e",
+                "reference": "96b7004e87096732f5fe4215b3badc398767e43e",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.1",
+                "php": ">=8.3",
                 "spryker-shop/shop-application": "^1.0.0",
                 "spryker/application": "^3.8.0",
                 "spryker/cart-code": "^1.1.0",
+                "spryker/event-dispatcher-extension": "^1.0.0",
                 "spryker/kernel": "^3.52.0",
                 "spryker/quote": "^2.8.0",
+                "spryker/security-blocker": "^1.0.0",
                 "spryker/symfony": "^3.1.0",
                 "spryker/zed-request": "^3.6.0"
             },
             "require-dev": {
                 "spryker/code-sniffer": "*",
+                "spryker/container": "*",
+                "spryker/event-dispatcher": "*",
                 "spryker/router": "*",
                 "spryker/silex": "*"
             },
             "suggest": {
+                "spryker/container": "Use this module when you want to use application services via ContainerInterface.",
+                "spryker/event-dispatcher": "Use this module when you want to register the SecurityBlockerCartCodeEventDispatcherPlugin.",
                 "spryker/router": "Use this module when you want to use the RouteProviderPlugin.",
                 "spryker/silex": "Use this module when using plugins that need Silex dependencies."
             },
@@ -9158,9 +9164,9 @@
             ],
             "description": "CartCodeWidget module",
             "support": {
-                "source": "https://github.com/spryker-shop/cart-code-widget/tree/1.6.0"
+                "source": "https://github.com/spryker-shop/cart-code-widget/tree/1.7.0"
             },
-            "time": "2024-05-22T10:49:07+00:00"
+            "time": "2026-05-21T08:39:14+00:00"
         },
         {
             "name": "spryker-shop/cart-note-widget",
@@ -10528,23 +10534,23 @@
         },
         {
             "name": "spryker-shop/content-file-widget",
-            "version": "2.0.1",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker-shop/content-file-widget.git",
-                "reference": "0c36945373056f8585dc585bf0c3992d04cc1bbd"
+                "reference": "a748dde3723b2a275006e4161d24ea10638060d3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker-shop/content-file-widget/zipball/0c36945373056f8585dc585bf0c3992d04cc1bbd",
-                "reference": "0c36945373056f8585dc585bf0c3992d04cc1bbd",
+                "url": "https://api.github.com/repos/spryker-shop/content-file-widget/zipball/a748dde3723b2a275006e4161d24ea10638060d3",
+                "reference": "a748dde3723b2a275006e4161d24ea10638060d3",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.2",
-                "spryker-shop/file-manager-widget": "^2.0.0",
+                "php": ">=8.3",
+                "spryker-shop/file-manager-widget": "^2.1.0",
                 "spryker/content-file": "^1.0.0",
-                "spryker/file-manager-storage": "^2.0.0",
+                "spryker/file-manager-storage": "^2.7.0",
                 "spryker/kernel": "^3.52.0",
                 "spryker/transfer": "^3.25.0",
                 "spryker/twig": "^3.13.0",
@@ -10555,6 +10561,7 @@
                 "spryker/code-sniffer": "*",
                 "spryker/container": "*",
                 "spryker/locale": "*",
+                "spryker/store": "*",
                 "spryker/testify": "*"
             },
             "suggest": {
@@ -10577,9 +10584,9 @@
             ],
             "description": "ContentFileWidget module",
             "support": {
-                "source": "https://github.com/spryker-shop/content-file-widget/tree/2.0.1"
+                "source": "https://github.com/spryker-shop/content-file-widget/tree/2.1.0"
             },
-            "time": "2024-11-04T14:07:50+00:00"
+            "time": "2026-05-27T15:04:24+00:00"
         },
         {
             "name": "spryker-shop/content-navigation-widget",
@@ -11323,23 +11330,23 @@
         },
         {
             "name": "spryker-shop/file-manager-widget",
-            "version": "2.0.0",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker-shop/file-manager-widget.git",
-                "reference": "c83db6b49df400fc53067f82dab8bb71561fd44b"
+                "reference": "26999c67c3ab615d1177d6e2a361637fec502a37"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker-shop/file-manager-widget/zipball/c83db6b49df400fc53067f82dab8bb71561fd44b",
-                "reference": "c83db6b49df400fc53067f82dab8bb71561fd44b",
+                "url": "https://api.github.com/repos/spryker-shop/file-manager-widget/zipball/26999c67c3ab615d1177d6e2a361637fec502a37",
+                "reference": "26999c67c3ab615d1177d6e2a361637fec502a37",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.3",
+                "php": ">=8.3",
                 "spryker/cms-content-widget": "^1.0.0",
-                "spryker/file-manager": "^2.0.0",
-                "spryker/file-manager-storage": "^2.0.0",
+                "spryker/file-manager": "^2.9.0",
+                "spryker/file-manager-storage": "^2.7.0",
                 "spryker/kernel": "^3.52.0",
                 "spryker/symfony": "^3.0.0",
                 "spryker/transfer": "^3.25.0"
@@ -11374,9 +11381,9 @@
             ],
             "description": "FileManagerWidget module",
             "support": {
-                "source": "https://github.com/spryker-shop/file-manager-widget/tree/2.0.0"
+                "source": "https://github.com/spryker-shop/file-manager-widget/tree/2.1.0"
             },
-            "time": "2021-10-08T18:13:42+00:00"
+            "time": "2026-05-27T15:04:24+00:00"
         },
         {
             "name": "spryker-shop/gift-card-widget",
@@ -27939,27 +27946,28 @@
         },
         {
             "name": "spryker/file-manager",
-            "version": "2.8.0",
+            "version": "2.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/file-manager.git",
-                "reference": "e088c1bded3c1676e8597b5a53c291f3f9d3979e"
+                "reference": "5f1eed151d8571f9ea3ee64c9a4011f769a3c356"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/file-manager/zipball/e088c1bded3c1676e8597b5a53c291f3f9d3979e",
-                "reference": "e088c1bded3c1676e8597b5a53c291f3f9d3979e",
+                "url": "https://api.github.com/repos/spryker/file-manager/zipball/5f1eed151d8571f9ea3ee64c9a4011f769a3c356",
+                "reference": "5f1eed151d8571f9ea3ee64c9a4011f769a3c356",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.2",
+                "php": ">=8.3",
                 "spryker/file-manager-extension": "^1.1.0",
                 "spryker/file-system": "^2.0.0",
                 "spryker/kernel": "^3.30.0",
                 "spryker/locale": "^3.0.0 || ^4.0.0",
                 "spryker/propel-orm": "^1.0.0",
                 "spryker/transfer": "^3.27.0",
-                "spryker/util-encoding": "^2.0.0"
+                "spryker/util-encoding": "^2.0.0",
+                "spryker/uuid-behavior": "^1.0.0"
             },
             "require-dev": {
                 "spryker/code-sniffer": "*",
@@ -27987,9 +27995,9 @@
             ],
             "description": "FileManager module",
             "support": {
-                "source": "https://github.com/spryker/file-manager/tree/2.8.0"
+                "source": "https://github.com/spryker/file-manager/tree/2.9.0"
             },
-            "time": "2025-08-04T10:29:10+00:00"
+            "time": "2026-05-27T15:04:24+00:00"
         },
         {
             "name": "spryker/file-manager-data-import",
@@ -28179,35 +28187,36 @@
         },
         {
             "name": "spryker/file-manager-storage",
-            "version": "2.6.0",
+            "version": "2.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/file-manager-storage.git",
-                "reference": "830baf28523634f1d273401a5f344c580803c90c"
+                "reference": "551396c62dc72cf9a6ebc4a7beb331d6c00ddfd3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/file-manager-storage/zipball/830baf28523634f1d273401a5f344c580803c90c",
-                "reference": "830baf28523634f1d273401a5f344c580803c90c",
+                "url": "https://api.github.com/repos/spryker/file-manager-storage/zipball/551396c62dc72cf9a6ebc4a7beb331d6c00ddfd3",
+                "reference": "551396c62dc72cf9a6ebc4a7beb331d6c00ddfd3",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.3",
                 "spryker/event-behavior": "^1.0.0",
-                "spryker/file-manager": "^2.1.0",
+                "spryker/file-manager": "^2.9.0",
                 "spryker/kernel": "^3.30.0",
                 "spryker/locale": "^3.0.0 || ^4.0.0",
                 "spryker/propel-orm": "^1.0.0",
                 "spryker/publisher-extension": "^1.0.0",
                 "spryker/storage": "^3.0.0",
                 "spryker/synchronization": "^1.0.0",
-                "spryker/synchronization-behavior": "^1.0.0",
+                "spryker/synchronization-behavior": "^1.15.0",
                 "spryker/synchronization-extension": "^1.1.0",
                 "spryker/transfer": "^3.27.0"
             },
             "require-dev": {
                 "spryker/code-sniffer": "*",
-                "spryker/event": "*"
+                "spryker/event": "*",
+                "spryker/testify": "*"
             },
             "suggest": {
                 "spryker/event": "If you want to use Event plugins, minimum required version: 2.1.0"
@@ -28229,9 +28238,9 @@
             ],
             "description": "FileManagerStorage module",
             "support": {
-                "source": "https://github.com/spryker/file-manager-storage/tree/2.6.0"
+                "source": "https://github.com/spryker/file-manager-storage/tree/2.7.0"
             },
-            "time": "2026-04-01T12:34:00+00:00"
+            "time": "2026-05-27T15:04:24+00:00"
         },
         {
             "name": "spryker/file-system",
@@ -42842,16 +42851,16 @@
         },
         {
             "name": "spryker/propel",
-            "version": "3.49.2",
+            "version": "3.50.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/propel.git",
-                "reference": "64c10aa518136b8ee79a810375aca8dd15fab188"
+                "reference": "22320cf6a1df402d6432294ee368e74334674118"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/propel/zipball/64c10aa518136b8ee79a810375aca8dd15fab188",
-                "reference": "64c10aa518136b8ee79a810375aca8dd15fab188",
+                "url": "https://api.github.com/repos/spryker/propel/zipball/22320cf6a1df402d6432294ee368e74334674118",
+                "reference": "22320cf6a1df402d6432294ee368e74334674118",
                 "shasum": ""
             },
             "require": {
@@ -42900,9 +42909,9 @@
             ],
             "description": "Propel module",
             "support": {
-                "source": "https://github.com/spryker/propel/tree/3.49.2"
+                "source": "https://github.com/spryker/propel/tree/3.50.1"
             },
-            "time": "2026-04-23T09:50:15+00:00"
+            "time": "2026-05-27T15:04:24+00:00"
         },
         {
             "name": "spryker/propel-orm",
@@ -51032,20 +51041,20 @@
         },
         {
             "name": "spryker/synchronization-behavior",
-            "version": "1.13.0",
+            "version": "1.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/synchronization-behavior.git",
-                "reference": "5a60022725a7084216aa96b507b031d6b0630fa4"
+                "reference": "1aaf1dc08ed043c52c18daeb17b522049d372ed0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/synchronization-behavior/zipball/5a60022725a7084216aa96b507b031d6b0630fa4",
-                "reference": "5a60022725a7084216aa96b507b031d6b0630fa4",
+                "url": "https://api.github.com/repos/spryker/synchronization-behavior/zipball/1aaf1dc08ed043c52c18daeb17b522049d372ed0",
+                "reference": "1aaf1dc08ed043c52c18daeb17b522049d372ed0",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.2",
+                "php": ">=8.3",
                 "spryker/kernel": "^3.30.0",
                 "spryker/laminas": "^1.0.0",
                 "spryker/propel-orm": "^1.16.0",
@@ -51081,7 +51090,7 @@
             "support": {
                 "source": "https://github.com/spryker/synchronization-behavior"
             },
-            "time": "2025-08-21T14:56:26+00:00"
+            "time": "2026-05-27T14:57:13+00:00"
         },
         {
             "name": "spryker/synchronization-extension",
@@ -51788,16 +51797,16 @@
         },
         {
             "name": "spryker/twig",
-            "version": "3.30.0",
+            "version": "3.31.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/twig.git",
-                "reference": "a30f5cdee22cd4c99785d11c4f573716a84455d8"
+                "reference": "0cf53ad55cf065e700d97f2017a52da3c479af6b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/twig/zipball/a30f5cdee22cd4c99785d11c4f573716a84455d8",
-                "reference": "a30f5cdee22cd4c99785d11c4f573716a84455d8",
+                "url": "https://api.github.com/repos/spryker/twig/zipball/0cf53ad55cf065e700d97f2017a52da3c479af6b",
+                "reference": "0cf53ad55cf065e700d97f2017a52da3c479af6b",
                 "shasum": ""
             },
             "require": {
@@ -51843,9 +51852,9 @@
             ],
             "description": "Twig module",
             "support": {
-                "source": "https://github.com/spryker/twig/tree/3.30.0"
+                "source": "https://github.com/spryker/twig/tree/3.31.0"
             },
-            "time": "2026-04-02T14:44:32+00:00"
+            "time": "2026-05-20T13:29:28+00:00"
         },
         {
             "name": "spryker/twig-extension",
@@ -59970,16 +59979,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v3.24.0",
+            "version": "v3.26.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "a6769aefb305efef849dc25c9fd1653358c148f0"
+                "reference": "1fcae487b180d78e6351f4e0afa91f9eab96a2bc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/a6769aefb305efef849dc25c9fd1653358c148f0",
-                "reference": "a6769aefb305efef849dc25c9fd1653358c148f0",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/1fcae487b180d78e6351f4e0afa91f9eab96a2bc",
+                "reference": "1fcae487b180d78e6351f4e0afa91f9eab96a2bc",
                 "shasum": ""
             },
             "require": {
@@ -60034,7 +60043,7 @@
             ],
             "support": {
                 "issues": "https://github.com/twigphp/Twig/issues",
-                "source": "https://github.com/twigphp/Twig/tree/v3.24.0"
+                "source": "https://github.com/twigphp/Twig/tree/v3.26.0"
             },
             "funding": [
                 {
@@ -60046,7 +60055,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-03-17T21:31:11+00:00"
+            "time": "2026-05-20T07:31:59+00:00"
         },
         {
             "name": "voku/anti-xss",
@@ -67377,5 +67386,5 @@
     "platform-overrides": {
         "php": "8.3.13"
     },
-    "plugin-api-version": "2.9.0"
+    "plugin-api-version": "2.6.0"
 }
