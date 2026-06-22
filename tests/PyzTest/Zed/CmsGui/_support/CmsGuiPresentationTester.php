@@ -123,6 +123,7 @@ class CmsGuiPresentationTester extends Actor
         }
 
         $this->waitForElementVisible($nameFieldIdentifier);
+        $this->waitForElementClickable($nameFieldIdentifier);
 
         $this->fillField($nameFieldIdentifier, $name);
 
@@ -133,6 +134,7 @@ class CmsGuiPresentationTester extends Actor
         }
 
         $this->waitForElementVisible($urlFieldIdentifier);
+        $this->waitForElementClickable($urlFieldIdentifier);
         $this->fillField($urlFieldIdentifier, $url);
 
         return $this;
