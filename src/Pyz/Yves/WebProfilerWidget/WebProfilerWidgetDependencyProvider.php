@@ -23,6 +23,7 @@ use SprykerShop\Yves\WebProfilerWidget\Plugin\WebProfiler\WebProfilerLoggerDataC
 use SprykerShop\Yves\WebProfilerWidget\Plugin\WebProfiler\WebProfilerMemoryDataCollectorPlugin;
 use SprykerShop\Yves\WebProfilerWidget\Plugin\WebProfiler\WebProfilerRequestDataCollectorPlugin;
 use SprykerShop\Yves\WebProfilerWidget\Plugin\WebProfiler\WebProfilerRouterDataCollectorPlugin;
+use SprykerShop\Yves\WebProfilerWidget\Plugin\WebProfiler\WebProfilerSessionDataCollectorPlugin;
 use SprykerShop\Yves\WebProfilerWidget\Plugin\WebProfiler\WebProfilerTimeDataCollectorPlugin;
 use SprykerShop\Yves\WebProfilerWidget\Plugin\WebProfiler\WebProfilerTwigDataCollectorPlugin;
 use SprykerShop\Yves\WebProfilerWidget\WebProfilerWidgetDependencyProvider as SprykerWebProfilerDependencyProvider;
@@ -37,6 +38,7 @@ class WebProfilerWidgetDependencyProvider extends SprykerWebProfilerDependencyPr
         $plugins = [
             new WebProfilerRequestDataCollectorPlugin(),
             new WebProfilerRouterDataCollectorPlugin(),
+            new WebProfilerSessionDataCollectorPlugin(),
             new WebProfilerAjaxDataCollectorPlugin(),
             new SymfonyWebProfilerConfigDataCollectorPlugin(),
             new WebProfilerConfigDataCollectorPlugin(),

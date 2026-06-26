@@ -19,6 +19,7 @@ use Spryker\Zed\WebProfiler\Communication\Plugin\WebProfiler\WebProfilerLoggerDa
 use Spryker\Zed\WebProfiler\Communication\Plugin\WebProfiler\WebProfilerMemoryDataCollectorPlugin;
 use Spryker\Zed\WebProfiler\Communication\Plugin\WebProfiler\WebProfilerRequestDataCollectorPlugin;
 use Spryker\Zed\WebProfiler\Communication\Plugin\WebProfiler\WebProfilerRouterDataCollectorPlugin;
+use Spryker\Zed\WebProfiler\Communication\Plugin\WebProfiler\WebProfilerSessionDataCollectorPlugin;
 use Spryker\Zed\WebProfiler\Communication\Plugin\WebProfiler\WebProfilerTimeDataCollectorPlugin;
 use Spryker\Zed\WebProfiler\Communication\Plugin\WebProfiler\WebProfilerTwigDataCollectorPlugin;
 use Spryker\Zed\WebProfiler\WebProfilerDependencyProvider as SprykerWebProfilerDependencyProvider;
@@ -33,6 +34,7 @@ class WebProfilerDependencyProvider extends SprykerWebProfilerDependencyProvider
         $plugins = [
             new WebProfilerRequestDataCollectorPlugin(),
             new WebProfilerRouterDataCollectorPlugin(),
+            new WebProfilerSessionDataCollectorPlugin(),
             new WebProfilerAjaxDataCollectorPlugin(),
             new SymfonyWebProfilerConfigDataCollectorPlugin(),
             new WebProfilerConfigDataCollectorPlugin(),
