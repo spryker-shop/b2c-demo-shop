@@ -1,8 +1,6 @@
 name: B2C-SCHEDULED
 
-# The Evaluator reports on the state of the shop against the current spryker/* releases, so it
-# turns red for reasons unrelated to the PR under review. It runs weekly here instead of in
-# B2C-CI; the rest of the Static analysis job stays on every PR.
+# The release-state checkers go red for reasons unrelated to any PR, so they run weekly, not per PR.
 
 on:
     schedule:
@@ -16,7 +14,6 @@ on:
 env:
     SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
     WEEKLY_CI_SLACK_CHANNEL_ID: ${{ secrets.WEEKLY_CI_SLACK_CHANNEL_ID }}
-    JIRA_TICKET_SLACK_USER_GROUP_MAPPING: ${{ secrets.JIRA_TICKET_SLACK_USER_GROUP_MAPPING }}
 
 concurrency:
     group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.sha }}

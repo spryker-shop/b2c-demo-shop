@@ -157,11 +157,16 @@ jobs:
             -   name: Run PHPStan
                 run: vendor/bin/phpstan analyze -l 6 -c phpstan.neon src/
 
-            # The all-branches Evaluator moved to scheduled.yml; this release gate stays, because
-            # a weekly cron never sees a release branch.
+            # Release branches get the full set; a weekly cron never sees a release branch.
             -   name: Run Evaluator for release branches
                 run: vendor/bin/evaluator evaluate --format=compact
                 if: github.event.pull_request.base.ref == 'master' && startsWith(github.event.pull_request.head.ref, 'release-')
+
+            # The release-state checkers go red for reasons unrelated to the PR; they run weekly in scheduled.yml.
+            -   name: Run Evaluator project code checks
+                run: >-
+                    vendor/bin/evaluator evaluate --format=compact
+                    --checkers=CONTAINER_SET_FUNCTION_CHECKER,DEAD_CODE_CHECKER,DEPENDENCY_PROVIDER_ADDITIONAL_LOGIC_CHECKER,MULTIDIMENSIONAL_ARRAY_CHECKER,PLUGINS_REGISTRATION_WITH_RESTRICTIONS_CHECKER,SINGLE_PLUGIN_ARGUMENT
 
             -   name: Slack Notification for failed job
                 uses: ./.github/actions/job-slack-notifications
