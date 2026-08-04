@@ -1,0 +1,74 @@
+name: B2C-SCHEDULED
+
+# The Evaluator reports on the state of the shop against the current spryker/* releases, so it
+# turns red for reasons unrelated to the PR under review. It runs weekly here instead of in
+# B2C-CI; the rest of the Static analysis job stays on every PR.
+
+on:
+    schedule:
+        - cron: '47 6 * * 6'
+    # Opt-in re-check from a PR, gated on the label that was just added so an unrelated label
+    # never spawns a run. Re-add the label to re-run after new commits.
+    pull_request:
+        types: [labeled]
+    workflow_dispatch:
+
+env:
+    SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+    WEEKLY_CI_SLACK_CHANNEL_ID: ${{ secrets.WEEKLY_CI_SLACK_CHANNEL_ID }}
+    JIRA_TICKET_SLACK_USER_GROUP_MAPPING: ${{ secrets.JIRA_TICKET_SLACK_USER_GROUP_MAPPING }}
+
+concurrency:
+    group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.sha }}
+    # Scheduled and manual runs on master are keyed by sha, so they never cancel one another.
+    cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+    evaluator:
+        if: >
+            (github.event_name == 'pull_request' && github.event.label.name == 'run-evaluator')
+            || github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+        name: "Evaluator"
+        runs-on: ubuntu-latest
+
+        env:
+            APPLICATION_ENV: ci.mysql
+            APPLICATION_STORE: DE
+            PROJECT: suite
+            SPRYKER_CURRENT_REGION: EU
+
+        steps:
+            -   uses: actions/checkout@v4
+
+            -   name: Setup PHP
+                uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
+                with:
+                    php-version: '8.4'
+                    extensions: mbstring, intl, pdo_mysql, redis, grpc
+                    tools: composer:v2
+                    coverage: none
+
+            -   name: Composer get cache directory
+                id: composer-cache
+                run: |
+                    echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+            -   name: Composer cache
+                uses: actions/cache@v4
+                with:
+                    path: ${{ steps.composer-cache.outputs.dir }}
+                    key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+                    restore-keys: |
+                        ${{ runner.os }}-composer-
+
+            -   name: Composer install
+                run: composer install
+
+            -   name: Run Evaluator
+                run: vendor/bin/evaluator evaluate --exclude-checkers=SPRYKER_DEV_PACKAGES_CHECKER --format=compact
+
+            -   name: Slack Notification for failed job
+                uses: ./.github/actions/job-slack-notifications
+                # continue-on-error keeps a Slack outage from reddening an otherwise green run.
+                if: always()
+                continue-on-error: true
