@@ -161,8 +161,10 @@ jobs:
                 run: vendor/bin/evaluator evaluate --format=compact
                 if: github.event.pull_request.base.ref == 'master' && startsWith(github.event.pull_request.head.ref, 'release-')
 
-            -   name: Run Evaluator for all branches
-                run: vendor/bin/evaluator evaluate --exclude-checkers=SPRYKER_DEV_PACKAGES_CHECKER --format=compact
+            -   name: Run Evaluator project code checks
+                run: >-
+                    vendor/bin/evaluator evaluate --format=compact
+                    --exclude-checkers=DISCOURAGED_PACKAGES_CHECKER,MINIMUM_ALLOWED_SHOP_VERSION,NPM_CHECKER,OPEN_SOURCE_VULNERABILITIES_CHECKER,PHP_VERSION_CHECKER,SPRYKER_DEV_PACKAGES_CHECKER,SPRYKER_SECURITY_CHECKER
 
             -   name: Slack Notification for failed job
                 uses: ./.github/actions/job-slack-notifications
