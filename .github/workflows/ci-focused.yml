@@ -1,0 +1,41 @@
+name: B2C-CI-FOCUSED
+
+on:
+    workflow_dispatch:
+        inputs:
+            framework:
+                description: "Which framework to run (and only that)."
+                required: true
+                type: choice
+                options:
+                    - codeception
+                    - robot-api
+                    - robot-ui
+                    - cypress
+
+concurrency:
+    # Include the framework so concurrent focused runs on the same branch don't cancel each other
+    # (a re-dispatch of the SAME framework still cancels its own in-flight run).
+    group: ${{ github.workflow }}-${{ github.ref }}-${{ github.event.inputs.framework }}
+    cancel-in-progress: true
+
+jobs:
+    codeception:
+        if: ${{ inputs.framework == 'codeception' }}
+        uses: ./.github/workflows/_codeception.yml
+        secrets: inherit
+
+    robot-api:
+        if: ${{ inputs.framework == 'robot-api' }}
+        uses: ./.github/workflows/_robot-api.yml
+        secrets: inherit
+
+    robot-ui:
+        if: ${{ inputs.framework == 'robot-ui' }}
+        uses: ./.github/workflows/_robot-ui.yml
+        secrets: inherit
+
+    cypress:
+        if: ${{ inputs.framework == 'cypress' }}
+        uses: ./.github/workflows/_cypress.yml
+        secrets: inherit

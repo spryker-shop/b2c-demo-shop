@@ -1,0 +1,79 @@
+name: _cypress
+
+on:
+    workflow_call:
+
+# Re-declared here because a reusable workflow does not inherit the caller's env,
+# and the Slack notification action reads these from env rather than inputs.
+env:
+    SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+    WEEKLY_CI_SLACK_CHANNEL_ID: ${{ secrets.WEEKLY_CI_SLACK_CHANNEL_ID }}
+    JIRA_TICKET_SLACK_USER_GROUP_MAPPING: ${{ secrets.JIRA_TICKET_SLACK_USER_GROUP_MAPPING }}
+    ROBOT_TESTS_ARTIFACTS_BUCKET_REGION: eu-west-1
+
+jobs:
+    cypress:
+        name: "Cypress / UI ${{ matrix.shard.label }}"
+        timeout-minutes: 75
+        runs-on: ubuntu-latest
+        strategy:
+            fail-fast: false
+            # Matrix of one: the whole spec set in a single job, i.e. exactly what the
+            # monolithic job used to do. The shard shape is already here so that turning
+            # sharding on is a change of this list plus one extra run step.
+            matrix:
+                shard:
+                    -   label: "1/1"
+                        shard: "1"
+                        total: 1
+                        specs: ""
+                        mode: "all"
+        env:
+            PROGRESS_TYPE: plain
+            SPRYKER_PLATFORM_IMAGE: spryker/php:8.4
+            TRAVIS: 1
+            ROBOT_TESTS_ARTIFACTS_BUCKET_REGION: eu-west-1
+            SPRYKER_CURRENT_REGION: EU
+            DYNAMIC_STORE_MODE: true
+        steps:
+            -   uses: actions/checkout@v4
+
+            -   name: Install packages
+                run: |
+                    sudo apt-get update
+                    sudo apt-get install -y python3-pip
+                    pip3 install --upgrade pip
+                    pip3 install awscli
+
+            -   name: Install cypress-tests folder
+                run: |
+                    cd ./data && composer require "spryker/cypress-tests:dev-release_202512.0_state" --dev --no-interaction
+                    cp -r vendor/spryker/cypress-tests ../tests/cypress-tests
+
+            -   name: Boot Project
+                run: |
+                    git clone --depth 1 https://github.com/spryker/docker-sdk.git ./docker
+                    docker/sdk boot deploy.ci.acceptance.mariadb.cypress.yml
+
+            # Must land between boot and up -t, as it did when the list was pasted inline.
+            -   uses: ./.github/actions/setup-etc-hosts
+
+            -   name: Install Project
+                run: |
+                    docker/sdk up -t
+                    docker/sdk cli composer dump-autoload -o -a --apcu
+
+            -   name: Run Tests
+                if: matrix.shard.mode == 'all'
+                run: |
+                    docker/sdk exec cypress-tests cp .env.dynamic-store.example .env
+                    docker/sdk exec --env "ENV_REPOSITORY_ID=b2c" cypress-tests npm run cy:ci
+
+            -   name: Upload artifacts
+                if: failure()
+                run: |
+                    AWS_DEFAULT_REGION=${{env.ROBOT_TESTS_ARTIFACTS_BUCKET_REGION}} AWS_ACCESS_KEY_ID=${{ secrets.ROBOT_TESTS_ARTIFACTS_KEY }} AWS_SECRET_ACCESS_KEY=${{ secrets.ROBOT_TESTS_ARTIFACTS_SECRET }} aws s3 cp .cypress s3://${{vars.ROBOT_TESTS_ARTIFACTS_BUCKET}}/b2c/dms-on/cypress/${GITHUB_RUN_ID}/PHP8.4MariaDB/ --recursive
+
+            -   name: Slack Notification for failed job
+                uses: ./.github/actions/job-slack-notifications
+                if: always()

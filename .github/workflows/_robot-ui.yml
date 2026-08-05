@@ -1,0 +1,115 @@
+name: _robot-ui
+
+on:
+    workflow_call:
+
+# Re-declared here because a reusable workflow does not inherit the caller's env,
+# and the Slack notification action reads these from env rather than inputs.
+env:
+    SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+    WEEKLY_CI_SLACK_CHANNEL_ID: ${{ secrets.WEEKLY_CI_SLACK_CHANNEL_ID }}
+    JIRA_TICKET_SLACK_USER_GROUP_MAPPING: ${{ secrets.JIRA_TICKET_SLACK_USER_GROUP_MAPPING }}
+    ROBOT_TESTS_ARTIFACTS_BUCKET_REGION: eu-west-1
+
+jobs:
+    robot-ui:
+        name: "Robot / UI"
+        timeout-minutes: 60
+        runs-on: ubuntu-latest
+        env:
+            PROGRESS_TYPE: plain
+            SPRYKER_PLATFORM_IMAGE: spryker/php:8.4
+            TRAVIS: 1
+            ROBOT_TESTS_ARTIFACTS_BUCKET_REGION: eu-west-1
+            SPRYKER_CURRENT_REGION: EU
+            DYNAMIC_STORE_MODE: true
+        steps:
+            -   uses: actions/checkout@v4
+
+            -   name: Install packages
+                run: |
+                    sudo apt-get update
+                    sudo apt-get install -y python3-pip
+                    pip3 install --upgrade pip
+                    pip3 install awscli
+
+            -   name: Install robotframework-suite-tests folder
+                run: |
+                    cd ./data && composer require "spryker/robotframework-suite-tests:dev-release_202512.0_state" --dev --no-interaction
+                    cp -r vendor ../vendor
+
+            -   name: Boot Project
+                run: |
+                    git clone --depth 1 https://github.com/spryker/docker-sdk.git ./docker
+                    docker/sdk boot deploy.ci.acceptance.mariadb.robot.yml
+
+            # Must land between boot and up -t, as it did when the list was pasted inline.
+            -   uses: ./.github/actions/setup-etc-hosts
+
+            -   name: Install Project
+                run: |
+                    docker/sdk up -t
+                    docker/sdk cli composer dump-autoload -o -a --apcu
+
+            -   name: Run Dynamic Tests Set
+                id: run_dynamic_tests
+                continue-on-error: true
+                run: |
+                    docker/sdk exec robot-framework pabot --processes 6 --ordering pabot_b2c_ordering -v env:ui_b2c -v docker:True -v headless:true -v ignore_console:false -v dms:true -d results/dynamic_set --exclude skip-due-to-issueORskip-due-to-refactoringORstatic-set -s '*'.tests.parallel_ui.b2c .
+
+            -   name: Run Static Tests Set
+                id: run_static_tests
+                continue-on-error: true
+                run: |
+                    docker/sdk exec robot-framework robot -v env:ui_b2c -v docker:True -v headless:true -v ignore_console:false -v dms:true -d results/static_set --exclude skip-due-to-issueORskip-due-to-refactoring --include static-set -s '*'.tests.parallel_ui.b2c .
+
+            -   name: Merge Initial Test Results
+                id: merge_initial_results
+                continue-on-error: true
+                # rebot exits with the number of failed tests, so a non-success outcome here is
+                # the signal that a rerun is needed. It also rejects a zero-test source, so guard
+                # the empty-phase case rather than letting the merge itself fail for that reason.
+                run: |
+                    count_tests() {
+                        docker/sdk exec robot-framework python -c "
+                    import xml.etree.ElementTree as ET, sys
+                    try: print(len(ET.parse(sys.argv[1]).findall('.//test')))
+                    except Exception: print(0)" "$1" 2>/dev/null || echo 0
+                    }
+                    DYNAMIC_TESTS=$(count_tests results/dynamic_set/output.xml)
+                    STATIC_TESTS=$(count_tests results/static_set/output.xml)
+                    echo "Dynamic: ${DYNAMIC_TESTS} test(s); Static: ${STATIC_TESTS} test(s)"
+                    if [ "${DYNAMIC_TESTS:-0}" -gt 0 ] && [ "${STATIC_TESTS:-0}" -gt 0 ]; then
+                        docker/sdk exec robot-framework rebot -d results --output output.xml --merge results/dynamic_set/output.xml results/static_set/output.xml
+                    elif [ "${DYNAMIC_TESTS:-0}" -gt 0 ]; then
+                        docker/sdk exec robot-framework rebot -d results --output output.xml results/dynamic_set/output.xml
+                    elif [ "${STATIC_TESTS:-0}" -gt 0 ]; then
+                        docker/sdk exec robot-framework rebot -d results --output output.xml results/static_set/output.xml
+                    else
+                        echo "Both phases produced 0 tests; nothing to merge."
+                    fi
+
+            -   name: Rerun Failed Tests
+                id: rerun_failed_tests
+                if: always() && steps.merge_initial_results.outcome != 'success'
+                # The only step without continue-on-error, so it is the job's pass/fail gate:
+                # everything before it is allowed to go red and be retried here.
+                run: |
+                    docker/sdk exec robot-framework robot -v env:ui_b2c -v docker:True -v dms:true -v headless:true -v ignore_console:false -d results/rerun --runemptysuite --rerunfailed results/output.xml --output rerun.xml -s '*'.tests.parallel_ui.b2c .
+
+            -   name: Merge Final Test Results
+                if: always() && steps.rerun_failed_tests.outcome != 'skipped'
+                continue-on-error: true
+                run: |
+                    docker/sdk exec robot-framework rebot -d results --merge results/output.xml results/rerun/rerun.xml
+
+            -   name: Upload artifacts
+                # Any run that needed a rerun, not just a red one: a test that failed first and
+                # passed on rerun leaves the job green, and its log.html is the only evidence.
+                if: always() && steps.rerun_failed_tests.outcome != 'skipped'
+                run: |
+                    AWS_DEFAULT_REGION=${{env.ROBOT_TESTS_ARTIFACTS_BUCKET_REGION}} AWS_ACCESS_KEY_ID=${{ secrets.ROBOT_TESTS_ARTIFACTS_KEY }} AWS_SECRET_ACCESS_KEY=${{ secrets.ROBOT_TESTS_ARTIFACTS_SECRET }} aws s3 cp .robot/results/log.html s3://${{vars.ROBOT_TESTS_ARTIFACTS_BUCKET}}/b2c/dms-on/robot-ui/${GITHUB_RUN_ID}/PHP8.4MariaDB/log.html
+
+            -   name: Slack Notification for failed job
+                uses: ./.github/actions/job-slack-notifications
+                if: always()
