@@ -160,15 +160,20 @@ jobs:
                 # rebot exits with the number of failed tests, so a non-success outcome here is
                 # the signal that a rerun is needed. It also rejects a zero-test source, so guard
                 # the empty-phase case rather than letting the merge itself fail for that reason.
+                #
+                # The counting runs on the RUNNER, against the bind-mounted results dir: the
+                # robot image has no `python` (only `python3`), and `docker/sdk exec` re-splits
+                # its arguments through `sh -c`, so an in-container interpreter snippet is
+                # doubly unreliable. Getting this wrong is silent — a broken count makes every
+                # branch fall through, the step still exits 0, the rerun is skipped, and a shard
+                # with failed tests reports green.
                 run: |
+                    sudo chmod -R a+rX .robot/results 2>/dev/null || true
                     count_tests() {
-                        docker/sdk exec robot-framework python -c "
-                    import xml.etree.ElementTree as ET, sys
-                    try: print(len(ET.parse(sys.argv[1]).findall('.//test')))
-                    except Exception: print(0)" "$1" 2>/dev/null || echo 0
+                        python3 -c 'import os, sys, xml.etree.ElementTree as ET; p = sys.argv[1]; print(len(ET.parse(p).findall(".//test")) if os.path.isfile(p) else 0)' "$1" 2>/dev/null || echo 0
                     }
-                    DYNAMIC_TESTS=$(count_tests results/dynamic_set/output.xml)
-                    STATIC_TESTS=$(count_tests results/static_set/output.xml)
+                    DYNAMIC_TESTS=$(count_tests .robot/results/dynamic_set/output.xml)
+                    STATIC_TESTS=$(count_tests .robot/results/static_set/output.xml)
                     echo "Dynamic: ${DYNAMIC_TESTS} test(s); Static: ${STATIC_TESTS} test(s)"
                     if [ "${DYNAMIC_TESTS:-0}" -gt 0 ] && [ "${STATIC_TESTS:-0}" -gt 0 ]; then
                         docker/sdk exec robot-framework rebot -d results --output output.xml --merge results/dynamic_set/output.xml results/static_set/output.xml
