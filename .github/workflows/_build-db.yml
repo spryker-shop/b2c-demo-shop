@@ -30,10 +30,6 @@ jobs:
         steps:
             -   uses: actions/checkout@v4
 
-            -   uses: ramsey/composer-install@v3
-                with:
-                    composer-options: "-q --ignore-platform-reqs --optimize-autoloader --no-interaction --prefer-install=auto"
-
             -   name: Configure sysctl limits
                 run: |
                     sudo sysctl -w vm.swappiness=10
@@ -41,17 +37,17 @@ jobs:
                     sudo sysctl -w vm.max_map_count=262144
                     ulimit -n 65536
 
-            -   name: Run project in Docker
+            -   name: Boot Project
                 run: |
-                    git clone https://github.com/spryker/docker-sdk.git ./docker && git -C ./docker fetch --depth 1 origin $(cat .git.docker) && git -C ./docker checkout $(cat .git.docker)
+                    git clone --depth 1 https://github.com/spryker/docker-sdk.git ./docker
                     docker/sdk boot deploy.ci.acceptance.mariadb.yml
 
             -   uses: ./.github/actions/setup-etc-hosts
 
-            -   name: Install project
+            -   name: Install Project
                 run: |
                     docker/sdk up -t
-                    docker/sdk cli composer dump-autoload -o -a --apcu -q
+                    docker/sdk cli composer dump-autoload -o -a --apcu
 
             -   name: Dump details
                 run: |

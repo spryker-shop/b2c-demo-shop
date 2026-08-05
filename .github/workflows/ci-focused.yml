@@ -19,23 +19,33 @@ concurrency:
     group: ${{ github.workflow }}-${{ github.ref }}-${{ github.event.inputs.framework }}
     cancel-in-progress: true
 
+# Every consumer restores the same build-once full_EU dump, so the build job runs for every
+# framework choice — there is only one data flavour in this shop.
 jobs:
+    build-db:
+        uses: ./.github/workflows/_build-db.yml
+        secrets: inherit
+
     codeception:
+        needs: [build-db]
         if: ${{ inputs.framework == 'codeception' }}
         uses: ./.github/workflows/_codeception.yml
         secrets: inherit
 
     robot-api:
+        needs: [build-db]
         if: ${{ inputs.framework == 'robot-api' }}
         uses: ./.github/workflows/_robot-api.yml
         secrets: inherit
 
     robot-ui:
+        needs: [build-db]
         if: ${{ inputs.framework == 'robot-ui' }}
         uses: ./.github/workflows/_robot-ui.yml
         secrets: inherit
 
     cypress:
+        needs: [build-db]
         if: ${{ inputs.framework == 'cypress' }}
         uses: ./.github/workflows/_cypress.yml
         secrets: inherit

@@ -24,12 +24,31 @@ jobs:
         steps:
             -   uses: actions/checkout@v4
 
-            -   name: Run docker
+            # Must land before the boot so the dump is part of the baked image.
+            -   uses: actions/download-artifact@v6
+                with:
+                    name: spryker-app-db
+
+            -   name: Boot Project
                 run: |
                     git clone --depth 1 https://github.com/spryker/docker-sdk.git ./docker
                     docker/sdk boot deploy.ci.acceptance.mariadb.yml
+
+            -   name: Install Project
+                # Build-once: restore the shared full_EU dump via ci.restore-db.stage2 instead
+                # of importing demodata here. The deploy file's own pipeline key is untouched;
+                # only SPRYKER_PIPELINE is overridden for this invocation.
+                env:
+                    SPRYKER_PIPELINE: ci.restore-db.stage2
+                run: |
                     docker/sdk up -t
                     docker/sdk cli composer dump-autoload -o -a --apcu
+
+            -   name: Validate sync completeness
+                uses: ./.github/actions/validate-sync-completeness
+
+            -   name: Run Fixtures
+                run: |
                     docker/sdk testing codecept fixtures
                     docker/sdk testing console queue:worker:start --stop-when-empty
 
@@ -58,12 +77,28 @@ jobs:
         steps:
             -   uses: actions/checkout@v4
 
-            -   name: Run docker
+            # Must land before the boot so the dump is part of the baked image.
+            -   uses: actions/download-artifact@v6
+                with:
+                    name: spryker-app-db
+
+            -   name: Boot Project
                 run: |
                     git clone --depth 1 https://github.com/spryker/docker-sdk.git ./docker
                     docker/sdk boot deploy.ci.functional.mariadb.yml
+
+            -   name: Install Project
+                env:
+                    SPRYKER_PIPELINE: ci.restore-db.stage2
+                run: |
                     docker/sdk up -t
                     docker/sdk cli composer dump-autoload -o -a --apcu
+
+            -   name: Validate sync completeness
+                uses: ./.github/actions/validate-sync-completeness
+
+            -   name: Run Tests
+                run: |
                     docker/sdk testing codecept run -c codeception.functional.yml
 
             -   name: Slack Notification for failed job
