@@ -187,7 +187,16 @@ jobs:
 
             -   name: Rerun Failed Tests
                 id: rerun_failed_tests
-                if: always() && steps.merge_initial_results.outcome != 'success'
+                # Gate on an actual merge FAILURE, not on "not success": when an earlier step such
+                # as Install Project fails, the merge is *skipped*, and `!= 'success'` matched that
+                # too — so the rerun fired with no results to rerun, went red, dragged the artifact
+                # upload red with it, and left Merge Final Test Results reporting success over
+                # nothing. That buries the real cause under three misleading step results.
+                # success() is what GitHub would imply here anyway; spelled out because the whole
+                # point of this gate is that the job has not already failed for another reason.
+                # The test and merge phases carry continue-on-error, so a rescuable failure leaves
+                # the job status successful and still reaches the rerun.
+                if: success() && steps.merge_initial_results.outcome == 'failure'
                 # Re-runs only the failed tests, over the SAME sliced suite files so the
                 # --rerunfailed longnames resolve. The only step without continue-on-error, so
                 # it is the job's pass/fail gate: everything before it may go red and be retried

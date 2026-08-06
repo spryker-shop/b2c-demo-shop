@@ -107,6 +107,7 @@ jobs:
                 uses: ./.github/actions/validate-sync-completeness
 
             -   name: Run Tests
+                id: run_tests
                 if: matrix.shard.mode == 'core' && env.CORE_SPECS != ''
                 run: |
                     docker/sdk exec cypress-tests cp .env.dynamic-store.example .env
@@ -114,7 +115,10 @@ jobs:
                         npx cypress run --headless --browser chrome --spec "$CORE_SPECS"
 
             -   name: Upload artifacts
-                if: failure()
+                # Scoped to a test failure: on bare failure() a red boot or install step also
+                # triggers this, and `.cypress` does not exist yet, so the upload adds a second
+                # red step that points away from the real cause.
+                if: failure() && steps.run_tests.outcome == 'failure'
                 run: |
                     AWS_DEFAULT_REGION=${{env.ROBOT_TESTS_ARTIFACTS_BUCKET_REGION}} AWS_ACCESS_KEY_ID=${{ secrets.ROBOT_TESTS_ARTIFACTS_KEY }} AWS_SECRET_ACCESS_KEY=${{ secrets.ROBOT_TESTS_ARTIFACTS_SECRET }} aws s3 cp .cypress s3://${{vars.ROBOT_TESTS_ARTIFACTS_BUCKET}}/b2c/dms-on/cypress/${GITHUB_RUN_ID}/PHP8.4MariaDB/shard-${{ matrix.shard.shard }}/ --recursive
 

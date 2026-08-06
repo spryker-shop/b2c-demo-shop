@@ -122,6 +122,7 @@ jobs:
                 uses: ./.github/actions/validate-sync-completeness
 
             -   name: Run Tests
+                id: tests
                 if: env.ROBOT_SUITES != ''
                 # --name Suites pins the root suite name: with the slice passed as explicit
                 # suite arguments robot would otherwise derive a root name from the file list,
@@ -131,8 +132,16 @@ jobs:
                     docker/sdk exec robot-framework robot -v env:api_b2c -v docker:True -v dms:true -v glue_env:http://glue.eu.spryker.local -v bapi_env:http://glue-backend.eu.spryker.local -v sapi_env:http://glue-storefront.eu.spryker.local --exclude skip-due-to-issueORskip-due-to-refactoring -d results --name Suites --runemptysuite "${suites[@]}"
 
             -   name: Upload artifacts
-                if: failure()
+                # Scoped to a test failure. On bare failure() a red boot or install step also
+                # triggers this, and it then fails trying to copy a log.html that was never
+                # produced — a second red step pointing at the wrong cause. The guard below still
+                # covers a test run that produced no results file.
+                if: failure() && steps.tests.outcome == 'failure'
                 run: |
+                    if [ ! -f .robot/results/log.html ]; then
+                        echo "No .robot/results/log.html — nothing to upload (the run failed before any test wrote results)."
+                        exit 0
+                    fi
                     AWS_DEFAULT_REGION=${{env.ROBOT_TESTS_ARTIFACTS_BUCKET_REGION}} AWS_ACCESS_KEY_ID=${{ secrets.ROBOT_TESTS_ARTIFACTS_KEY }} AWS_SECRET_ACCESS_KEY=${{ secrets.ROBOT_TESTS_ARTIFACTS_SECRET }} aws s3 cp .robot/results/log.html s3://${{vars.ROBOT_TESTS_ARTIFACTS_BUCKET}}/b2c/dms-on/robot-api/${GITHUB_RUN_ID}/PHP8.4MariaDB/shard-${{ matrix.shard.shard }}/log.html
 
             -   name: Slack Notification for failed job
