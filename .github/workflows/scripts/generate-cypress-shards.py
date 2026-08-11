@@ -87,15 +87,29 @@ def list_installed_specs(package_dir: str) -> list[str]:
     return sorted(specs)
 
 
+def resolve_within_tree(path: str) -> Path | None:
+    """Resolve ``path`` under the working tree, or None if it escapes it.
+
+    Keeps a caller-supplied path from reaching outside the checkout, which is the
+    only place this script has any business reading from.
+    """
+    root = Path.cwd().resolve()
+    candidate = (root / path).resolve()
+    return candidate if candidate == root or root in candidate.parents else None
+
+
 def load_timings(timings_file: str) -> dict[str, float] | None:
     """Load ``{spec: duration_ms}``; return None on any missing/corrupt input.
 
     A None return is the caller's signal to fall back to count-based packing.
     """
-    if not timings_file or not os.path.isfile(timings_file):
+    if not timings_file:
+        return None
+    resolved = resolve_within_tree(timings_file)
+    if resolved is None or not resolved.is_file():
         return None
     try:
-        with open(timings_file) as f:
+        with open(resolved) as f:
             data = json.load(f)
     except (json.JSONDecodeError, OSError):
         return None

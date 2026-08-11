@@ -20,6 +20,10 @@ jobs:
             shards: ${{ steps.compute.outputs.shards }}
         steps:
             -   uses: actions/checkout@v4
+                with:
+                    # Nothing downstream needs the checkout token; every repo cloned or
+                    # composer-installed in these jobs is public.
+                    persist-credentials: false
 
             # Same install trick the test job uses, into the scratch ./data dir: the
             # installed package is the single source of truth for which specs exist, so the
@@ -59,6 +63,8 @@ jobs:
             DYNAMIC_STORE_MODE: true
         steps:
             -   uses: actions/checkout@v4
+                with:
+                    persist-credentials: false
 
             # Must land before the boot so the dump is in place for the restore pipeline.
             -   uses: actions/download-artifact@v6

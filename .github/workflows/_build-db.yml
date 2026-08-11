@@ -29,6 +29,10 @@ jobs:
             DYNAMIC_STORE_MODE: true
         steps:
             -   uses: actions/checkout@v4
+                with:
+                    # Nothing downstream needs the checkout token; every repo cloned or
+                    # composer-installed in these jobs is public.
+                    persist-credentials: false
 
             -   name: Configure sysctl limits
                 run: |
