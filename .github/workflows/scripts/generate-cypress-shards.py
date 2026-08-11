@@ -142,24 +142,52 @@ def spec_durations(
     return {spec: timings.get(spec, mean) for spec in specs}, False
 
 
+def colocation_key(spec: str) -> str | None:
+    """Return the group a spec must stay with, or None if it can be packed alone.
+
+    The dynamic-store specs share one store, created by whichever of them runs
+    first: each calls CreateStoreScenario, which skips creation when the store
+    already exists. Unsharded they all ran in one environment, so exactly one
+    created it and the rest inherited it. Splitting them across shards makes
+    several of them the creator instead, and the ones that create the store and
+    immediately reassign its relations leave it without a default locale --
+    which surfaces much later as a 500 from Yves on the store URL. Keeping the
+    group in one shard reproduces the single-environment ordering.
+    """
+    return "dms" if spec.endswith("-dms.cy.ts") else None
+
+
 def pack_shards(specs: list[str], durations: dict[str, float], shard_count: int) -> list[list[str]]:
     """LPT bin-pack specs into ``shard_count`` bins, balancing total duration.
 
-    Sort longest-first (stable tie-break on spec name for determinism), then
-    drop each spec onto the currently-lightest bin (lowest index breaks ties).
+    Packs *units* rather than individual specs: a co-located group (see
+    ``colocation_key``) is one indivisible unit costing the sum of its members,
+    every other spec is a unit of one. Sort longest-first (stable tie-break for
+    determinism), then drop each unit onto the currently-lightest bin.
     """
+    groups: dict[str, list[str]] = {}
+    units: list[list[str]] = []
+    for spec in specs:
+        key = colocation_key(spec)
+        if key is None:
+            units.append([spec])
+        else:
+            groups.setdefault(key, []).append(spec)
+    units.extend(sorted(groups.values(), key=lambda u: sorted(u)))
+
     bins: list[list[str]] = [[] for _ in range(shard_count)]
     loads = [0.0] * shard_count
-    ordered = sorted(specs, key=lambda s: (-durations[s], s))
-    for spec in ordered:
+    ordered = sorted(units, key=lambda u: (-sum(durations[s] for s in u), sorted(u)))
+    for unit in ordered:
         target = min(range(shard_count), key=lambda i: (loads[i], i))
-        bins[target].append(spec)
-        loads[target] += durations[spec]
-    # Keep each bin's spec list stable/readable.
+        bins[target].extend(unit)
+        loads[target] += sum(durations[s] for s in unit)
+    # Keep each bin's spec list stable/readable. Sorting also puts the co-located
+    # group in the same relative order the unsharded glob produced, so the same
+    # member creates the store.
     for b in bins:
         b.sort()
     return bins
-
 
 def build_matrix(bins: list[list[str]], include_ssp: bool = False) -> list[dict[str, str | int]]:
     """Render the bins as the matrix entries the ``cypress`` job consumes."""
