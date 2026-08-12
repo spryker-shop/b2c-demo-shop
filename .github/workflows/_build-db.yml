@@ -1,12 +1,8 @@
 name: _build-db
 
-# Build-once EU dump.
-#
-# Boots the existing acceptance pipeline and runs `docker/sdk up -t`, so full_EU is
-# imported byte-identically to a normal acceptance boot. Then snapshots the DB to
-# eu-docker.sql and publishes it as the `spryker-app-db` artifact, which every
-# consumer restores via SPRYKER_PIPELINE=ci.restore-db.stage2. One dump serves all
-# consumers here — Robot imports the same full_EU as Codeception and Cypress.
+# Imports full_EU once via a normal acceptance boot and publishes the dump as the
+# `spryker-app-db` artifact, for consumers to restore with SPRYKER_PIPELINE=ci.restore-db.stage2.
+# One dump serves every consumer here, Robot included.
 
 on:
     workflow_call:
@@ -62,9 +58,8 @@ jobs:
                     echo "spy_product_concrete_storage (total keys):     $(query 'SELECT COUNT(*) FROM spy_product_concrete_storage')"
 
             -   name: Create database dump
-                # Two-step dump: schema (--no-data) then data (--no-create-info), excluding the
-                # oauth/token-cache tables that the restore re-initialises via setup:init-db.
-                # `\$` keeps the expansion inside the container.
+                # Schema then data, skipping the oauth/token-cache tables that setup:init-db
+                # re-initialises on restore. `\$` keeps expansion inside the container.
                 run: |
                     docker/sdk cli "mariadb-dump --ssl=false -h \$SPRYKER_DB_HOST -u \$SPRYKER_DB_USERNAME -p\$SPRYKER_DB_PASSWORD \$SPRYKER_DB_DATABASE --no-data" > eu-docker.sql
                     docker/sdk cli "mariadb-dump --ssl=false -h \$SPRYKER_DB_HOST -u \$SPRYKER_DB_USERNAME -p\$SPRYKER_DB_PASSWORD \$SPRYKER_DB_DATABASE --no-create-info --ignore-table=\$SPRYKER_DB_DATABASE.spy_oauth_client --ignore-table=\$SPRYKER_DB_DATABASE.spy_unauthenticated_customer_access --ignore-table=\$SPRYKER_DB_DATABASE.spy_oauth_client_access_token_cache" >> eu-docker.sql

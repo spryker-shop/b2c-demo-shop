@@ -81,9 +81,8 @@ jobs:
                     SHARD: ${{ matrix.shard.shard }}
                     TOTAL: ${{ matrix.shard.total }}
                 run: |
-                    # Suite files live directly under tests/<set>/** (no /suite/ subdir). Strip
-                    # the vendor package prefix so the paths resolve inside the robot-framework
-                    # container, whose cwd is the mounted package root (/opt/robotframework).
+                    # Strip the vendor prefix so paths resolve against the robot-framework
+                    # container's cwd (the mounted package root).
                     mapfile -t suites < <(find vendor -type f -path "*/tests/${TEST_SET}/*.robot" \
                         | LC_ALL=C sort \
                         | sed 's|^vendor/spryker/robotframework-suite-tests/||')
@@ -113,9 +112,8 @@ jobs:
             -   uses: ./.github/actions/setup-etc-hosts
 
             -   name: Install Project
-                # Build-once: restore the shared full_EU dump via ci.restore-db.stage2 instead
-                # of importing demodata per shard. The deploy file's own pipeline key is
-                # untouched; only SPRYKER_PIPELINE is overridden for this invocation.
+                # The pipeline override restores the shared dump instead of importing demodata;
+                # the deploy file's own pipeline key is untouched.
                 env:
                     SPRYKER_PIPELINE: ci.restore-db.stage2
                 run: |
@@ -128,18 +126,15 @@ jobs:
             -   name: Run Tests
                 id: tests
                 if: env.ROBOT_SUITES != ''
-                # --name Suites pins the root suite name: with the slice passed as explicit
-                # suite arguments robot would otherwise derive a root name from the file list,
-                # which changes per shard and breaks longname-based post-processing.
+                # --name pins the root suite name, which robot would otherwise derive from the
+                # file list — it would change per shard and break longname post-processing.
                 run: |
                     read -ra suites <<< "$ROBOT_SUITES"
                     docker/sdk exec robot-framework robot -v env:api_b2c -v docker:True -v dms:true -v glue_env:http://glue.eu.spryker.local -v bapi_env:http://glue-backend.eu.spryker.local -v sapi_env:http://glue-storefront.eu.spryker.local --exclude skip-due-to-issueORskip-due-to-refactoring -d results --name Suites --runemptysuite "${suites[@]}"
 
             -   name: Upload artifacts
-                # Scoped to a test failure. On bare failure() a red boot or install step also
-                # triggers this, and it then fails trying to copy a log.html that was never
-                # produced — a second red step pointing at the wrong cause. The guard below still
-                # covers a test run that produced no results file.
+                # Scoped to a test failure: on a failed boot there is no log.html to copy, and
+                # the upload would add a second red step pointing away from the real cause.
                 if: failure() && steps.tests.outcome == 'failure'
                 run: |
                     if [ ! -f .robot/results/log.html ]; then

@@ -16,9 +16,8 @@ env:
     JIRA_TICKET_SLACK_USER_GROUP_MAPPING: ${{ secrets.JIRA_TICKET_SLACK_USER_GROUP_MAPPING }}
 
 concurrency:
-    # Master pushes are keyed by sha, not by ref: GitHub supersedes a *pending* run in a
-    # shared group even when cancel-in-progress is false, so cancel-in-progress alone does
-    # not stop one master push from discarding another. A per-sha group does.
+    # Master pushes are keyed by sha: GitHub supersedes a pending run in a shared group even
+    # when cancel-in-progress is false, so one master push would otherwise discard another.
     group: ${{ github.workflow }}-${{ github.event.pull_request.number || (github.ref == 'refs/heads/master' && github.sha || github.ref) }}
     cancel-in-progress: ${{ github.ref != 'refs/heads/master' }}
 
@@ -225,9 +224,7 @@ jobs:
                 uses: ./.github/actions/job-slack-notifications
                 if: always()
 
-    # Imports full_EU once and publishes the dump as the `spryker-app-db` artifact. Every
-    # test consumer restores it via SPRYKER_PIPELINE=ci.restore-db.stage2 instead of
-    # importing demodata itself, so the import cost is paid once per run rather than per job.
+    # Publishes the dump every test consumer restores, so demodata is imported once per run.
     build-db:
         needs: [js-validation]
         uses: ./.github/workflows/_build-db.yml

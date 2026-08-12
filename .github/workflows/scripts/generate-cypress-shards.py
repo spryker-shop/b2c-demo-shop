@@ -1,51 +1,14 @@
 #!/usr/bin/env python3
-"""Generate the Cypress shard matrix at runtime from recorded spec timings.
+"""Generate the Cypress shard matrix from the installed specs and recorded timings.
 
-The installed `cypress-tests` package (composer-installed, gitignored) is the
-single source of truth for which specs exist; this script lists them, balances
-them across a FIXED number of shards by measured runtime, and prints the matrix
-the `cypress` job consumes.
+Lists the specs the cypress-tests package installed, LPT bin-packs them into a fixed
+number of shards by measured runtime, and prints to stdout the matrix JSON the `cypress`
+job consumes. The SSP shard is opt-in (--include-ssp): this shop runs no SSP lane, and
+emitting one would execute a spec set that is not part of the baseline.
 
-Pipeline
---------
-1. List installed specs under ``<package-dir>/cypress/e2e/**/*.cy.ts``,
-   excluding ``smoke/`` and any ``ssp*`` basename — the same filter the CI spec
-   glob applies (SSP runs as its own standalone shard).
-2. Load a timings file (``cypress-timings.json``: ``{spec: duration_ms}``) if
-   present. New/untimed specs are assigned the mean of the known durations so
-   a freshly added spec is placed sensibly instead of always landing in shard
-   one.
-3. LPT (longest-processing-time) bin-pack the specs by duration into a fixed
-   ``N`` shards: sort longest first, drop each onto the currently-lightest
-   shard. This is the standard greedy makespan heuristic — it keeps per-shard
-   wall time close without needing an exact solver.
-4. Self-check: assert the union of the shard spec lists equals the installed
-   spec set (no drops, no dupes). A mismatch means a generator bug, so we
-   ``exit 1`` (plain, no run-cancel) — the ONLY red path. Adding a spec cannot
-   trigger it; the spec is absorbed into a shard automatically.
-
-Fallback
---------
-If the timings file is missing, empty, or corrupt, every spec is treated as
-equal cost (count-based packing) and a GitHub ``::notice::`` is logged. Timing
-data is advisory only: its absence or corruption degrades balance but never
-fails the gate.
-
-Output
-------
-Prints a JSON array to stdout: one entry per core shard plus a trailing SSP
-entry, in the exact shape the ``cypress`` matrix already expects
-(``label``/``shard``/``total``/``specs``/``mode``). The gate job captures
-stdout into ``$GITHUB_OUTPUT``.
-
-Usage
------
-    generate-cypress-shards.py [--package-dir DIR] [--timings FILE] [--shards N]
-                               [--include-ssp]
-
-Defaults: package-dir=tests/cypress-tests, timings=cypress-timings.json, N=5,
-include-ssp=off. The SSP shard is opt-in: this shop runs no SSP lane, and emitting
-one would execute a spec set that is not part of the baseline.
+Timings are advisory: a missing or corrupt timings file degrades to count-based packing
+with a ``::notice::``. The only failure path is the self-check, which asserts the packed
+spec set equals the installed set — so adding a spec is absorbed, never a red build.
 """
 
 from __future__ import annotations
@@ -145,14 +108,9 @@ def spec_durations(
 def colocation_key(spec: str) -> str | None:
     """Return the group a spec must stay with, or None if it can be packed alone.
 
-    The dynamic-store specs share one store, created by whichever of them runs
-    first: each calls CreateStoreScenario, which skips creation when the store
-    already exists. Unsharded they all ran in one environment, so exactly one
-    created it and the rest inherited it. Splitting them across shards makes
-    several of them the creator instead, and the ones that create the store and
-    immediately reassign its relations leave it without a default locale --
-    which surfaces much later as a 500 from Yves on the store URL. Keeping the
-    group in one shard reproduces the single-environment ordering.
+    The dynamic-store specs share one store, created by whichever of them runs first;
+    splitting them across shards makes several of them the creator and leaves the store
+    half-configured.
     """
     return "dms" if spec.endswith("-dms.cy.ts") else None
 
@@ -160,10 +118,8 @@ def colocation_key(spec: str) -> str | None:
 def pack_shards(specs: list[str], durations: dict[str, float], shard_count: int) -> list[list[str]]:
     """LPT bin-pack specs into ``shard_count`` bins, balancing total duration.
 
-    Packs *units* rather than individual specs: a co-located group (see
-    ``colocation_key``) is one indivisible unit costing the sum of its members,
-    every other spec is a unit of one. Sort longest-first (stable tie-break for
-    determinism), then drop each unit onto the currently-lightest bin.
+    Packs *units*: a co-located group (see ``colocation_key``) is one indivisible unit
+    costing the sum of its members, every other spec is a unit of one.
     """
     groups: dict[str, list[str]] = {}
     units: list[list[str]] = []
@@ -182,9 +138,8 @@ def pack_shards(specs: list[str], durations: dict[str, float], shard_count: int)
         target = min(range(shard_count), key=lambda i: (loads[i], i))
         bins[target].extend(unit)
         loads[target] += sum(durations[s] for s in unit)
-    # Keep each bin's spec list stable/readable. Sorting also puts the co-located
-    # group in the same relative order the unsharded glob produced, so the same
-    # member creates the store.
+    # Also restores the co-located group to the glob's order, so the same member creates
+    # the store.
     for b in bins:
         b.sort()
     return bins
@@ -205,8 +160,7 @@ def build_matrix(bins: list[list[str]], include_ssp: bool = False) -> list[dict[
         )
     # SSP folded into the matrix as its own shard: one less standalone
     # full-env bring-up; SSP coverage preserved. Handling is unchanged.
-    # Opt-in, because shops with no SSP lane must not be handed an SSP shard —
-    # it would run a spec set they never ran before.
+    # Opt-in: a shop with no SSP lane must not be handed a spec set it never ran.
     if include_ssp:
         matrix.append(
             {

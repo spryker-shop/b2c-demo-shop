@@ -39,9 +39,8 @@ jobs:
                     docker/sdk boot deploy.ci.acceptance.mariadb.yml
 
             -   name: Install Project
-                # Build-once: restore the shared full_EU dump via ci.restore-db.stage2 instead
-                # of importing demodata here. The deploy file's own pipeline key is untouched;
-                # only SPRYKER_PIPELINE is overridden for this invocation.
+                # The pipeline override restores the shared dump instead of importing demodata;
+                # the deploy file's own pipeline key is untouched.
                 env:
                     SPRYKER_PIPELINE: ci.restore-db.stage2
                 run: |

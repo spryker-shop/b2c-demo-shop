@@ -25,19 +25,16 @@ jobs:
                     # composer-installed in these jobs is public.
                     persist-credentials: false
 
-            # Same install trick the test job uses, into the scratch ./data dir: the
-            # installed package is the single source of truth for which specs exist, so the
-            # matrix is generated from the same tree the shards will run.
+            # Into the scratch ./data dir: the installed package is the source of truth for
+            # which specs exist, so the matrix comes from the same tree the shards run.
             -   name: Install cypress-tests folder
                 run: |
                     cd ./data && composer require "spryker/cypress-tests:dev-release_202512.0_state" --dev --no-interaction
 
             -   id: compute
                 name: Generate shard matrix
-                # No timings file exists for the pinned branch yet, so the generator packs by
-                # spec count and logs a ::notice::. Its self-check fails the job red if the
-                # packed spec set is not exactly the installed spec set, which is what keeps
-                # the executed-test set identical to the unsharded baseline.
+                # No timings file for the pinned branch yet, so this packs by spec count. The
+                # self-check is what keeps the executed-test set identical to the baseline.
                 run: |
                     SHARDS=$(.github/workflows/scripts/generate-cypress-shards.py \
                         --package-dir data/vendor/spryker/cypress-tests \
@@ -100,9 +97,8 @@ jobs:
             -   uses: ./.github/actions/setup-etc-hosts
 
             -   name: Install Project
-                # Build-once: restore the shared full_EU dump via ci.restore-db.stage2 instead
-                # of importing demodata per shard. The deploy file's own pipeline key is
-                # untouched; only SPRYKER_PIPELINE is overridden for this invocation.
+                # The pipeline override restores the shared dump instead of importing demodata;
+                # the deploy file's own pipeline key is untouched.
                 env:
                     SPRYKER_PIPELINE: ci.restore-db.stage2
                 run: |
@@ -121,9 +117,8 @@ jobs:
                         npx cypress run --headless --browser chrome --spec "$CORE_SPECS"
 
             -   name: Upload artifacts
-                # Scoped to a test failure: on bare failure() a red boot or install step also
-                # triggers this, and `.cypress` does not exist yet, so the upload adds a second
-                # red step that points away from the real cause.
+                # Scoped to a test failure: on a failed boot `.cypress` does not exist yet, and
+                # the upload would add a second red step pointing away from the real cause.
                 if: failure() && steps.run_tests.outcome == 'failure'
                 run: |
                     AWS_DEFAULT_REGION=${{env.ROBOT_TESTS_ARTIFACTS_BUCKET_REGION}} AWS_ACCESS_KEY_ID=${{ secrets.ROBOT_TESTS_ARTIFACTS_KEY }} AWS_SECRET_ACCESS_KEY=${{ secrets.ROBOT_TESTS_ARTIFACTS_SECRET }} aws s3 cp .cypress s3://${{vars.ROBOT_TESTS_ARTIFACTS_BUCKET}}/b2c/dms-on/cypress/${GITHUB_RUN_ID}/PHP8.4MariaDB/shard-${{ matrix.shard.shard }}/ --recursive
