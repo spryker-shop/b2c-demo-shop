@@ -1,0 +1,148 @@
+name: _robot-api
+
+on:
+    workflow_call:
+
+# Re-declared here because a reusable workflow does not inherit the caller's env,
+# and the Slack notification action reads these from env rather than inputs.
+env:
+    SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+    WEEKLY_CI_SLACK_CHANNEL_ID: ${{ secrets.WEEKLY_CI_SLACK_CHANNEL_ID }}
+    JIRA_TICKET_SLACK_USER_GROUP_MAPPING: ${{ secrets.JIRA_TICKET_SLACK_USER_GROUP_MAPPING }}
+
+jobs:
+    # Pure matrix-compute job (bash only) — emits ROBOT_SHARD_COUNT shards as
+    # {label,shard,total} JSON. The per-shard file slice is computed in the test job,
+    # where the installed suite tree is available to walk.
+    robot-api-shards:
+        name: "Robot API shards"
+        timeout-minutes: 2
+        runs-on: ubuntu-latest
+        outputs:
+            shards: ${{ steps.compute.outputs.shards }}
+        steps:
+            -   id: compute
+                env:
+                    ROBOT_SHARD_COUNT: "2"
+                run: |
+                    n="${ROBOT_SHARD_COUNT}"
+                    SHARDS="["
+                    for i in $(seq 1 "$n"); do
+                        [ "$i" -gt 1 ] && SHARDS="${SHARDS},"
+                        SHARDS="${SHARDS}{\"label\":\"${i}/${n}\",\"shard\":${i},\"total\":${n}}"
+                    done
+                    SHARDS="${SHARDS}]"
+                    echo "shards=${SHARDS}" >> "$GITHUB_OUTPUT"
+                    echo "Computed Robot API shards: ${SHARDS}"
+
+    robot-api:
+        name: "Robot / API ${{ matrix.shard.label }}"
+        timeout-minutes: 60
+        needs: robot-api-shards
+        runs-on: ubuntu-latest
+        strategy:
+            fail-fast: false
+            matrix:
+                shard: ${{ fromJson(needs.robot-api-shards.outputs.shards) }}
+        env:
+            PROGRESS_TYPE: plain
+            SPRYKER_PLATFORM_IMAGE: spryker/php:8.4
+            TRAVIS: 1
+            ROBOT_TESTS_ARTIFACTS_BUCKET_REGION: eu-west-1
+            SPRYKER_CURRENT_REGION: EU
+            DYNAMIC_STORE_MODE: true
+            TEST_SET: api/b2c
+        steps:
+            -   uses: actions/checkout@v4
+                with:
+                    # Nothing downstream needs the checkout token; every repo cloned or
+                    # composer-installed in these jobs is public.
+                    persist-credentials: false
+
+            # Must land before the boot so the dump is part of the baked image.
+            -   uses: actions/download-artifact@v6
+                with:
+                    name: spryker-app-db
+
+            -   name: Install packages
+                run: |
+                    sudo apt-get update
+                    sudo apt-get install -y python3-pip
+                    pip3 install --upgrade pip
+                    pip3 install awscli
+
+            -   name: Install robotframework-suite-tests folder
+                run: |
+                    cd ./data && composer require "spryker/robotframework-suite-tests:dev-release_202512.0_state" --dev --no-interaction
+                    cp -r vendor ../vendor
+
+            -   name: Compute shard slice
+                env:
+                    SHARD: ${{ matrix.shard.shard }}
+                    TOTAL: ${{ matrix.shard.total }}
+                run: |
+                    # Strip the vendor prefix so paths resolve against the robot-framework
+                    # container's cwd (the mounted package root).
+                    mapfile -t suites < <(find vendor -type f -path "*/tests/${TEST_SET}/*.robot" \
+                        | LC_ALL=C sort \
+                        | sed 's|^vendor/spryker/robotframework-suite-tests/||')
+
+                    # Remainder-distribution slice: the first (n % TOTAL) shards take one extra
+                    # file, so every file lands in exactly one shard.
+                    n=${#suites[@]}
+                    base=$(( n / TOTAL ))
+                    extra=$(( n % TOTAL ))
+                    if (( SHARD - 1 < extra )); then
+                        start=$(( (SHARD - 1) * (base + 1) ))
+                        size=$(( base + 1 ))
+                    else
+                        start=$(( extra * (base + 1) + (SHARD - 1 - extra) * base ))
+                        size=$base
+                    fi
+                    sliced=("${suites[@]:start:size}")
+                    echo "ROBOT_SUITES=${sliced[*]}" >> "$GITHUB_ENV"
+                    echo "Shard ${SHARD}/${TOTAL}: ${size} of ${n} suites"
+
+            -   name: Boot Project
+                run: |
+                    git clone --depth 1 https://github.com/spryker/docker-sdk.git ./docker
+                    docker/sdk boot deploy.ci.api.mariadb.robot.yml
+
+            # Must land between boot and up -t, as it did when the list was pasted inline.
+            -   uses: ./.github/actions/setup-etc-hosts
+
+            -   name: Install Project
+                # The pipeline override restores the shared dump instead of importing demodata;
+                # the deploy file's own pipeline key is untouched.
+                env:
+                    SPRYKER_PIPELINE: ci.restore-db.stage2
+                run: |
+                    docker/sdk up -t
+                    docker/sdk cli composer dump-autoload -o -a --apcu
+
+            -   name: Validate sync completeness
+                uses: ./.github/actions/validate-sync-completeness
+
+            -   name: Run Tests
+                id: tests
+                if: env.ROBOT_SUITES != ''
+                # --name pins the root suite name, which robot would otherwise derive from the
+                # file list — it would change per shard and break longname post-processing.
+                run: |
+                    read -ra suites <<< "$ROBOT_SUITES"
+                    docker/sdk exec robot-framework robot -v env:api_b2c -v docker:True -v dms:true -v glue_env:http://glue.eu.spryker.local -v bapi_env:http://glue-backend.eu.spryker.local -v sapi_env:http://glue-storefront.eu.spryker.local --exclude skip-due-to-issueORskip-due-to-refactoring -d results --name Suites --runemptysuite "${suites[@]}"
+
+            -   name: Upload artifacts
+                # Scoped to a test failure: on a failed boot there is no log.html to copy, and
+                # the upload would add a second red step pointing away from the real cause.
+                if: failure() && steps.tests.outcome == 'failure'
+                run: |
+                    if [ ! -f .robot/results/log.html ]; then
+                        echo "No .robot/results/log.html — nothing to upload (the run failed before any test wrote results)."
+                        exit 0
+                    fi
+                    AWS_DEFAULT_REGION=${{env.ROBOT_TESTS_ARTIFACTS_BUCKET_REGION}} AWS_ACCESS_KEY_ID=${{ secrets.ROBOT_TESTS_ARTIFACTS_KEY }} AWS_SECRET_ACCESS_KEY=${{ secrets.ROBOT_TESTS_ARTIFACTS_SECRET }} aws s3 cp .robot/results/log.html s3://${{vars.ROBOT_TESTS_ARTIFACTS_BUCKET}}/b2c/dms-on/robot-api/${GITHUB_RUN_ID}/PHP8.4MariaDB/shard-${{ matrix.shard.shard }}/log.html
+
+            -   name: Slack Notification for failed job
+                uses: ./.github/actions/job-slack-notifications
+                if: always()

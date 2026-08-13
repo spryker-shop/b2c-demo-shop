@@ -1,0 +1,128 @@
+name: _cypress
+
+on:
+    workflow_call:
+
+# Re-declared here because a reusable workflow does not inherit the caller's env,
+# and the Slack notification action reads these from env rather than inputs.
+env:
+    SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+    WEEKLY_CI_SLACK_CHANNEL_ID: ${{ secrets.WEEKLY_CI_SLACK_CHANNEL_ID }}
+    JIRA_TICKET_SLACK_USER_GROUP_MAPPING: ${{ secrets.JIRA_TICKET_SLACK_USER_GROUP_MAPPING }}
+    ROBOT_TESTS_ARTIFACTS_BUCKET_REGION: eu-west-1
+
+jobs:
+    cypress-shards:
+        name: "Cypress shard manifest"
+        timeout-minutes: 10
+        runs-on: ubuntu-latest
+        outputs:
+            shards: ${{ steps.compute.outputs.shards }}
+        steps:
+            -   uses: actions/checkout@v4
+                with:
+                    # Nothing downstream needs the checkout token; every repo cloned or
+                    # composer-installed in these jobs is public.
+                    persist-credentials: false
+
+            # Into the scratch ./data dir: the installed package is the source of truth for
+            # which specs exist, so the matrix comes from the same tree the shards run.
+            -   name: Install cypress-tests folder
+                run: |
+                    cd ./data && composer require "spryker/cypress-tests:dev-release_202512.0_state" --dev --no-interaction
+
+            -   id: compute
+                name: Generate shard matrix
+                # No timings file for the pinned branch yet, so this packs by spec count. The
+                # self-check is what keeps the executed-test set identical to the baseline.
+                run: |
+                    SHARDS=$(.github/workflows/scripts/generate-cypress-shards.py \
+                        --package-dir data/vendor/spryker/cypress-tests \
+                        --shards 5)
+                    echo "shards=${SHARDS}" >> "$GITHUB_OUTPUT"
+                    echo "Computed Cypress shards: ${SHARDS}"
+
+    cypress:
+        name: "Cypress / UI ${{ matrix.shard.label }}"
+        timeout-minutes: 75
+        needs: cypress-shards
+        runs-on: ubuntu-latest
+        strategy:
+            fail-fast: false
+            matrix:
+                shard: ${{ fromJson(needs.cypress-shards.outputs.shards) }}
+        env:
+            PROGRESS_TYPE: plain
+            SPRYKER_PLATFORM_IMAGE: spryker/php:8.4
+            TRAVIS: 1
+            ROBOT_TESTS_ARTIFACTS_BUCKET_REGION: eu-west-1
+            SPRYKER_CURRENT_REGION: EU
+            DYNAMIC_STORE_MODE: true
+        steps:
+            -   uses: actions/checkout@v4
+                with:
+                    persist-credentials: false
+
+            # Must land before the boot so the dump is in place for the restore pipeline.
+            -   uses: actions/download-artifact@v6
+                with:
+                    name: spryker-app-db
+
+            -   name: Install packages
+                run: |
+                    sudo apt-get update
+                    sudo apt-get install -y python3-pip
+                    pip3 install --upgrade pip
+                    pip3 install awscli
+
+            -   name: Install cypress-tests folder
+                run: |
+                    cd ./data && composer require "spryker/cypress-tests:dev-release_202512.0_state" --dev --no-interaction
+                    cp -r vendor/spryker/cypress-tests ../tests/cypress-tests
+
+            -   name: Set core spec list
+                env:
+                    SPECS: ${{ matrix.shard.specs }}
+                run: |
+                    n=$(awk -F, '{print NF}' <<<"$SPECS")
+                    echo "CORE_SPECS=${SPECS}" >> "$GITHUB_ENV"
+                    echo "Shard ${{ matrix.shard.label }}: ${n} spec(s)"
+
+            -   name: Boot Project
+                run: |
+                    git clone --depth 1 https://github.com/spryker/docker-sdk.git ./docker
+                    docker/sdk boot deploy.ci.acceptance.mariadb.cypress.yml
+
+            # Must land between boot and up -t, as it did when the list was pasted inline.
+            -   uses: ./.github/actions/setup-etc-hosts
+
+            -   name: Install Project
+                # The pipeline override restores the shared dump instead of importing demodata;
+                # the deploy file's own pipeline key is untouched.
+                env:
+                    SPRYKER_PIPELINE: ci.restore-db.stage2
+                run: |
+                    docker/sdk up -t
+                    docker/sdk cli composer dump-autoload -o -a --apcu
+
+            -   name: Validate sync completeness
+                uses: ./.github/actions/validate-sync-completeness
+
+            -   name: Run Tests
+                id: run_tests
+                if: matrix.shard.mode == 'core' && env.CORE_SPECS != ''
+                run: |
+                    docker/sdk exec cypress-tests cp .env.dynamic-store.example .env
+                    docker/sdk exec --env "ENV_REPOSITORY_ID=b2c" cypress-tests \
+                        npx cypress run --headless --browser chrome --spec "$CORE_SPECS"
+
+            -   name: Upload artifacts
+                # Scoped to a test failure: on a failed boot `.cypress` does not exist yet, and
+                # the upload would add a second red step pointing away from the real cause.
+                if: failure() && steps.run_tests.outcome == 'failure'
+                run: |
+                    AWS_DEFAULT_REGION=${{env.ROBOT_TESTS_ARTIFACTS_BUCKET_REGION}} AWS_ACCESS_KEY_ID=${{ secrets.ROBOT_TESTS_ARTIFACTS_KEY }} AWS_SECRET_ACCESS_KEY=${{ secrets.ROBOT_TESTS_ARTIFACTS_SECRET }} aws s3 cp .cypress s3://${{vars.ROBOT_TESTS_ARTIFACTS_BUCKET}}/b2c/dms-on/cypress/${GITHUB_RUN_ID}/PHP8.4MariaDB/shard-${{ matrix.shard.shard }}/ --recursive
+
+            -   name: Slack Notification for failed job
+                uses: ./.github/actions/job-slack-notifications
+                if: always()

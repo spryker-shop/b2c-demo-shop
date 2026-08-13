@@ -1,0 +1,80 @@
+name: _build-db
+
+# Imports full_EU once via a normal acceptance boot and publishes the dump as the
+# `spryker-app-db` artifact, for consumers to restore with SPRYKER_PIPELINE=ci.restore-db.stage2.
+# One dump serves every consumer here, Robot included.
+
+on:
+    workflow_call:
+
+env:
+    SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+    WEEKLY_CI_SLACK_CHANNEL_ID: ${{ secrets.WEEKLY_CI_SLACK_CHANNEL_ID }}
+    JIRA_TICKET_SLACK_USER_GROUP_MAPPING: ${{ secrets.JIRA_TICKET_SLACK_USER_GROUP_MAPPING }}
+
+jobs:
+    build-db:
+        name: "Build DB (EU)"
+        timeout-minutes: 60
+        runs-on: ubuntu-latest
+        env:
+            PROGRESS_TYPE: plain
+            SPRYKER_PLATFORM_IMAGE: spryker/php:8.4
+            TRAVIS: 1
+            SPRYKER_CURRENT_REGION: EU
+            DYNAMIC_STORE_MODE: true
+        steps:
+            -   uses: actions/checkout@v4
+                with:
+                    # Nothing downstream needs the checkout token; every repo cloned or
+                    # composer-installed in these jobs is public.
+                    persist-credentials: false
+
+            -   name: Configure sysctl limits
+                run: |
+                    sudo sysctl -w vm.swappiness=10
+                    sudo sysctl -w fs.file-max=262144
+                    sudo sysctl -w vm.max_map_count=262144
+                    ulimit -n 65536
+
+            -   name: Boot Project
+                run: |
+                    git clone --depth 1 https://github.com/spryker/docker-sdk.git ./docker
+                    docker/sdk boot deploy.ci.acceptance.mariadb.yml
+
+            -   uses: ./.github/actions/setup-etc-hosts
+
+            -   name: Install Project
+                run: |
+                    docker/sdk up -t
+                    docker/sdk cli composer dump-autoload -o -a --apcu
+
+            -   name: Dump details
+                run: |
+                    query() { docker/sdk cli "mariadb --ssl=false -h \$SPRYKER_DB_HOST -u \$SPRYKER_DB_USERNAME -p\$SPRYKER_DB_PASSWORD \$SPRYKER_DB_DATABASE -sNe '$1'"; }
+                    echo "spy_product_abstract:                          $(query 'SELECT COUNT(*) FROM spy_product_abstract')"
+                    echo "spy_product:                                   $(query 'SELECT COUNT(*) FROM spy_product')"
+                    echo "spy_product_abstract_page_search (total keys): $(query 'SELECT COUNT(*) FROM spy_product_abstract_page_search')"
+                    echo "spy_product_concrete_storage (total keys):     $(query 'SELECT COUNT(*) FROM spy_product_concrete_storage')"
+
+            -   name: Create database dump
+                # Schema then data, skipping the oauth/token-cache tables that setup:init-db
+                # re-initialises on restore. `\$` keeps expansion inside the container.
+                run: |
+                    docker/sdk cli "mariadb-dump --ssl=false -h \$SPRYKER_DB_HOST -u \$SPRYKER_DB_USERNAME -p\$SPRYKER_DB_PASSWORD \$SPRYKER_DB_DATABASE --no-data" > eu-docker.sql
+                    docker/sdk cli "mariadb-dump --ssl=false -h \$SPRYKER_DB_HOST -u \$SPRYKER_DB_USERNAME -p\$SPRYKER_DB_PASSWORD \$SPRYKER_DB_DATABASE --no-create-info --ignore-table=\$SPRYKER_DB_DATABASE.spy_oauth_client --ignore-table=\$SPRYKER_DB_DATABASE.spy_unauthenticated_customer_access --ignore-table=\$SPRYKER_DB_DATABASE.spy_oauth_client_access_token_cache" >> eu-docker.sql
+                    echo "eu-docker.sql size: $(wc -c < eu-docker.sql) bytes"
+
+            -   name: Save project artifacts
+                uses: actions/upload-artifact@v6
+                with:
+                    name: spryker-app-db
+                    retention-days: 1
+                    overwrite: true
+                    path: |
+                        eu-docker.sql
+                    compression-level: 6 # 0: No compression, 1: Best speed, 6: Default compression (same as GNU Gzip), 9: Best compression
+
+            -   name: Slack Notification for failed job
+                uses: ./.github/actions/job-slack-notifications
+                if: always()

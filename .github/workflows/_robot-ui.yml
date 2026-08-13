@@ -1,0 +1,207 @@
+name: _robot-ui
+
+on:
+    workflow_call:
+
+# Re-declared here because a reusable workflow does not inherit the caller's env,
+# and the Slack notification action reads these from env rather than inputs.
+env:
+    SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+    WEEKLY_CI_SLACK_CHANNEL_ID: ${{ secrets.WEEKLY_CI_SLACK_CHANNEL_ID }}
+    JIRA_TICKET_SLACK_USER_GROUP_MAPPING: ${{ secrets.JIRA_TICKET_SLACK_USER_GROUP_MAPPING }}
+    ROBOT_TESTS_ARTIFACTS_BUCKET_REGION: eu-west-1
+
+jobs:
+    # Pure matrix-compute job (bash only) — emits ROBOT_SHARD_COUNT shards as
+    # {label,shard,total} JSON. The per-shard file slice is computed in the test job,
+    # where the installed suite tree is available to walk.
+    robot-ui-shards:
+        name: "Robot UI shards"
+        timeout-minutes: 2
+        runs-on: ubuntu-latest
+        outputs:
+            shards: ${{ steps.compute.outputs.shards }}
+        steps:
+            -   id: compute
+                env:
+                    ROBOT_SHARD_COUNT: "3"
+                run: |
+                    n="${ROBOT_SHARD_COUNT}"
+                    SHARDS="["
+                    for i in $(seq 1 "$n"); do
+                        [ "$i" -gt 1 ] && SHARDS="${SHARDS},"
+                        SHARDS="${SHARDS}{\"label\":\"${i}/${n}\",\"shard\":${i},\"total\":${n}}"
+                    done
+                    SHARDS="${SHARDS}]"
+                    echo "shards=${SHARDS}" >> "$GITHUB_OUTPUT"
+                    echo "Computed Robot UI shards: ${SHARDS}"
+
+    robot-ui:
+        name: "Robot / UI ${{ matrix.shard.label }}"
+        timeout-minutes: 60
+        needs: robot-ui-shards
+        runs-on: ubuntu-latest
+        strategy:
+            fail-fast: false
+            matrix:
+                shard: ${{ fromJson(needs.robot-ui-shards.outputs.shards) }}
+        env:
+            PROGRESS_TYPE: plain
+            SPRYKER_PLATFORM_IMAGE: spryker/php:8.4
+            TRAVIS: 1
+            ROBOT_TESTS_ARTIFACTS_BUCKET_REGION: eu-west-1
+            SPRYKER_CURRENT_REGION: EU
+            DYNAMIC_STORE_MODE: true
+            TEST_SET: parallel_ui/b2c
+        steps:
+            -   uses: actions/checkout@v4
+                with:
+                    # Nothing downstream needs the checkout token; every repo cloned or
+                    # composer-installed in these jobs is public.
+                    persist-credentials: false
+
+            # Must land before the boot so the dump is part of the baked image.
+            -   uses: actions/download-artifact@v6
+                with:
+                    name: spryker-app-db
+
+            -   name: Install packages
+                run: |
+                    sudo apt-get update
+                    sudo apt-get install -y python3-pip
+                    pip3 install --upgrade pip
+                    pip3 install awscli
+
+            -   name: Install robotframework-suite-tests folder
+                run: |
+                    cd ./data && composer require "spryker/robotframework-suite-tests:dev-release_202512.0_state" --dev --no-interaction
+                    cp -r vendor ../vendor
+
+            -   name: Compute shard slice
+                env:
+                    SHARD: ${{ matrix.shard.shard }}
+                    TOTAL: ${{ matrix.shard.total }}
+                run: |
+                    # Strip the vendor prefix so paths resolve against the robot-framework
+                    # container's cwd (the mounted package root). Only one shard's slice holds
+                    # the static-set file, so other shards' static phase is empty by design.
+                    mapfile -t suites < <(find vendor -type f -path "*/tests/${TEST_SET}/*.robot" \
+                        | LC_ALL=C sort \
+                        | sed 's|^vendor/spryker/robotframework-suite-tests/||')
+
+                    # Remainder-distribution slice: the first (n % TOTAL) shards take one extra
+                    # file, so every file lands in exactly one shard.
+                    n=${#suites[@]}
+                    base=$(( n / TOTAL ))
+                    extra=$(( n % TOTAL ))
+                    if (( SHARD - 1 < extra )); then
+                        start=$(( (SHARD - 1) * (base + 1) ))
+                        size=$(( base + 1 ))
+                    else
+                        start=$(( extra * (base + 1) + (SHARD - 1 - extra) * base ))
+                        size=$base
+                    fi
+                    sliced=("${suites[@]:start:size}")
+                    echo "ROBOT_SUITES=${sliced[*]}" >> "$GITHUB_ENV"
+                    echo "Shard ${SHARD}/${TOTAL}: ${size} of ${n} suites"
+
+            -   name: Boot Project
+                run: |
+                    git clone --depth 1 https://github.com/spryker/docker-sdk.git ./docker
+                    docker/sdk boot deploy.ci.acceptance.mariadb.robot.yml
+
+            # Must land between boot and up -t, as it did when the list was pasted inline.
+            -   uses: ./.github/actions/setup-etc-hosts
+
+            -   name: Install Project
+                # The pipeline override restores the shared dump instead of importing demodata;
+                # the deploy file's own pipeline key is untouched.
+                env:
+                    SPRYKER_PIPELINE: ci.restore-db.stage2
+                run: |
+                    docker/sdk up -t
+                    docker/sdk cli composer dump-autoload -o -a --apcu
+
+            -   name: Validate sync completeness
+                uses: ./.github/actions/validate-sync-completeness
+
+            -   name: Pre-warm Yves Twig cache
+                # The restore pipeline's twig warmers don't compile CMS string templates (built
+                # lazily by the CMS content renderer on first render), so pabot workers race on
+                # Twig's FilesystemCache::mkdir. One sequential render compiles it up front.
+                run: |
+                    docker/sdk exec robot-framework curl -sf http://yves.eu.spryker.local/ -o /dev/null || true
+
+            -   name: Run Dynamic Tests Set
+                id: run_dynamic_tests
+                if: env.ROBOT_SUITES != ''
+                continue-on-error: true
+                # --name Suites pins the root suite name: with the slice passed as explicit
+                # suite arguments robot/pabot would otherwise derive a per-shard root name,
+                # which breaks the longnames rebot --merge and --rerunfailed rely on.
+                run: |
+                    read -ra suites <<< "$ROBOT_SUITES"
+                    docker/sdk exec robot-framework pabot --processes 6 -v env:ui_b2c -v docker:True -v headless:true -v ignore_console:false -v dms:true -d results/dynamic_set --name Suites --exclude skip-due-to-issueORskip-due-to-refactoringORstatic-set --runemptysuite "${suites[@]}"
+
+            -   name: Run Static Tests Set
+                id: run_static_tests
+                if: env.ROBOT_SUITES != ''
+                continue-on-error: true
+                # Tag-driven, not path-driven: the dynamic phase above excludes static-set and
+                # this phase includes it, both over the same shard slice — so the single tagged
+                # file runs exactly once, in whichever shard's slice holds it.
+                run: |
+                    read -ra suites <<< "$ROBOT_SUITES"
+                    docker/sdk exec robot-framework robot -v env:ui_b2c -v docker:True -v headless:true -v ignore_console:false -v dms:true -d results/static_set --name Suites --exclude skip-due-to-issueORskip-due-to-refactoring --include static-set --runemptysuite "${suites[@]}"
+
+            -   name: Merge Initial Test Results
+                id: merge_initial_results
+                continue-on-error: true
+                # rebot exits with the failed-test count, so a non-success outcome here means a
+                # rerun is needed; it also rejects a zero-test source, hence the empty guard.
+                # Counting runs on the runner, not in the container, which has no `python`.
+                run: |
+                    sudo chmod -R a+rX .robot/results 2>/dev/null || true
+                    count_tests() {
+                        python3 -c 'import os, sys, xml.etree.ElementTree as ET; p = sys.argv[1]; print(len(ET.parse(p).findall(".//test")) if os.path.isfile(p) else 0)' "$1" 2>/dev/null || echo 0
+                    }
+                    DYNAMIC_TESTS=$(count_tests .robot/results/dynamic_set/output.xml)
+                    STATIC_TESTS=$(count_tests .robot/results/static_set/output.xml)
+                    echo "Dynamic: ${DYNAMIC_TESTS} test(s); Static: ${STATIC_TESTS} test(s)"
+                    if [ "${DYNAMIC_TESTS:-0}" -gt 0 ] && [ "${STATIC_TESTS:-0}" -gt 0 ]; then
+                        docker/sdk exec robot-framework rebot -d results --output output.xml --merge results/dynamic_set/output.xml results/static_set/output.xml
+                    elif [ "${DYNAMIC_TESTS:-0}" -gt 0 ]; then
+                        docker/sdk exec robot-framework rebot -d results --output output.xml results/dynamic_set/output.xml
+                    elif [ "${STATIC_TESTS:-0}" -gt 0 ]; then
+                        docker/sdk exec robot-framework rebot -d results --output output.xml results/static_set/output.xml
+                    else
+                        echo "Both phases produced 0 tests; nothing to merge."
+                    fi
+
+            -   name: Rerun Failed Tests
+                id: rerun_failed_tests
+                # Gate on a merge FAILURE, not on "not success": an earlier red step *skips* the
+                # merge, and `!= 'success'` matched that too, firing a rerun with nothing to rerun.
+                if: success() && steps.merge_initial_results.outcome == 'failure'
+                # Same sliced suite files, so the --rerunfailed longnames resolve. The only
+                # step without continue-on-error, so it is the job's pass/fail gate.
+                run: |
+                    read -ra suites <<< "$ROBOT_SUITES"
+                    docker/sdk exec robot-framework robot -v env:ui_b2c -v docker:True -v dms:true -v headless:true -v ignore_console:false -d results/rerun --name Suites --runemptysuite --rerunfailed results/output.xml --output rerun.xml "${suites[@]}"
+
+            -   name: Merge Final Test Results
+                if: always() && steps.rerun_failed_tests.outcome != 'skipped'
+                continue-on-error: true
+                run: |
+                    docker/sdk exec robot-framework rebot -d results --merge results/output.xml results/rerun/rerun.xml
+
+            -   name: Upload artifacts
+                # Any run that needed a rerun, not just a red one: a test that failed first and
+                # passed on rerun leaves the job green, and its log.html is the only evidence.
+                if: always() && steps.rerun_failed_tests.outcome != 'skipped'
+                run: |
+                    AWS_DEFAULT_REGION=${{env.ROBOT_TESTS_ARTIFACTS_BUCKET_REGION}} AWS_ACCESS_KEY_ID=${{ secrets.ROBOT_TESTS_ARTIFACTS_KEY }} AWS_SECRET_ACCESS_KEY=${{ secrets.ROBOT_TESTS_ARTIFACTS_SECRET }} aws s3 cp .robot/results/log.html s3://${{vars.ROBOT_TESTS_ARTIFACTS_BUCKET}}/b2c/dms-on/robot-ui/${GITHUB_RUN_ID}/PHP8.4MariaDB/shard-${{ matrix.shard.shard }}/log.html
+
+            -   name: Slack Notification for failed job
+                uses: ./.github/actions/job-slack-notifications
+                if: always()
