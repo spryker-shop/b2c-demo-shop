@@ -226,31 +226,30 @@ jobs:
 
     # Publishes the dump every test consumer restores, so demodata is imported once per run.
     build-db:
-        needs: [js-validation]
         uses: ./.github/workflows/_build-db.yml
         secrets: inherit
 
     codeception:
-        needs: [validation, js-validation, build-db]
+        needs: [build-db]
         uses: ./.github/workflows/_codeception.yml
         secrets: inherit
 
     # The E2E tier is skipped while a PR is a draft and starts on ready_for_review. A push to
     # master is not a pull_request event, so master keeps running the full set.
     robot-api:
-        needs: [validation, build-db]
+        needs: [build-db]
         if: ${{ github.event_name != 'pull_request' || github.event.pull_request.draft == false }}
         uses: ./.github/workflows/_robot-api.yml
         secrets: inherit
 
     robot-ui:
-        needs: [validation, js-validation, build-db]
+        needs: [build-db]
         if: ${{ github.event_name != 'pull_request' || github.event.pull_request.draft == false }}
         uses: ./.github/workflows/_robot-ui.yml
         secrets: inherit
 
     cypress:
-        needs: [validation, js-validation, build-db]
+        needs: [build-db]
         if: ${{ github.event_name != 'pull_request' || github.event.pull_request.draft == false }}
         uses: ./.github/workflows/_cypress.yml
         secrets: inherit
