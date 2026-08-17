@@ -23,7 +23,7 @@ export default class SuggestSearch extends SuggestSearchCore {
         this.closeTriggers = <HTMLElement[]>Array.from(document.getElementsByClassName(this.closeClassName));
         this.openTriggers = <HTMLElement[]>Array.from(document.getElementsByClassName(this.openClassName));
 
-        super.readyCallback();
+        super.init();
     }
 
     protected mapEvents(): void {
