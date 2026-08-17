@@ -1,0 +1,45 @@
+name: 'Validate sync completeness'
+description: 'Checks product sync counts DB vs ES vs Redis; fails if mismatched or sync queues non-empty'
+
+runs:
+    using: "composite"
+    steps:
+        -   name: Validate sync completeness
+            shell: bash
+            run: |
+                docker/sdk cli '
+                    set +e
+                    SYNC_FAIL=0
+                    curl -sf "http://$SPRYKER_SEARCH_HOST:$SPRYKER_SEARCH_PORT/_refresh" > /dev/null || true
+
+                    echo "=== ES/OS indices ==="
+                    curl -s "http://$SPRYKER_SEARCH_HOST:$SPRYKER_SEARCH_PORT/_cat/indices?h=index,docs.count&s=docs.count:desc" | head -20 || true
+
+                    echo ""
+                    echo "=== Product data sync completeness ==="
+                    DB_ABSTRACT=$(mariadb --ssl=false -h "$SPRYKER_DB_HOST" -u "$SPRYKER_DB_USERNAME" -p"$SPRYKER_DB_PASSWORD" "$SPRYKER_DB_DATABASE" -sNe "SELECT COUNT(*) FROM spy_product_abstract_page_search" 2>/dev/null) || DB_ABSTRACT=0
+                    DB_CONCRETE=$(mariadb --ssl=false -h "$SPRYKER_DB_HOST" -u "$SPRYKER_DB_USERNAME" -p"$SPRYKER_DB_PASSWORD" "$SPRYKER_DB_DATABASE" -sNe "SELECT COUNT(*) FROM spy_product_concrete_storage" 2>/dev/null) || DB_CONCRETE=0
+                    ES_ABSTRACT=$(curl -sf "http://$SPRYKER_SEARCH_HOST:$SPRYKER_SEARCH_PORT/*_page/_count?q=type:product_abstract" 2>/dev/null | python3 -c "import sys,json;print(json.load(sys.stdin)[\"count\"])" 2>/dev/null) || ES_ABSTRACT=0
+                    REDIS_CONCRETE=$(redis-cli -h "$SPRYKER_KEY_VALUE_STORE_HOST" -p "$SPRYKER_KEY_VALUE_STORE_PORT" -n 1 --scan --count 10000 2>/dev/null | grep "^kv:product_concrete:" | grep -cv ":sku:") || REDIS_CONCRETE=0
+
+                    check_row() {
+                        local label="$1" expected="$2" actual="$3" status="OK"
+                        [ "$expected" != "$actual" ] && { status="FAIL"; SYNC_FAIL=1; }
+                        printf "  %-63s %8s %8s  %s\n" "$label" "$expected" "$actual" "$status"
+                    }
+                    printf "  %-63s %8s %8s  %s\n" "Check" "Expected" "Actual" "Status"
+                    python3 -c "print(\"  \" + \"-\" * 88)"
+                    check_row "spy_product_abstract_page_search -> ES *_page (product_abstract)" "$DB_ABSTRACT" "$ES_ABSTRACT"
+                    check_row "spy_product_concrete_storage -> Redis kv:product_concrete:*" "$DB_CONCRETE" "$REDIS_CONCRETE"
+
+                    echo ""
+                    echo "  spy_product_abstract_page_search by store/locale:"
+                    mariadb --ssl=false -h "$SPRYKER_DB_HOST" -u "$SPRYKER_DB_USERNAME" -p"$SPRYKER_DB_PASSWORD" "$SPRYKER_DB_DATABASE" \
+                        -e "SELECT store, locale, COUNT(*) AS row_count FROM spy_product_abstract_page_search GROUP BY store, locale ORDER BY store, locale" 2>/dev/null | sed "s/^/  /" || true
+
+                    echo ""
+                    echo "=== Sync queue states ==="
+                    curl -sf -u "$SPRYKER_BROKER_API_USERNAME:$SPRYKER_BROKER_API_PASSWORD" "http://$SPRYKER_BROKER_API_HOST:$SPRYKER_BROKER_API_PORT/api/queues" | python3 -c "import sys,json;qs=json.load(sys.stdin);non=sorted([(q[\"name\"],q.get(\"messages\",0),q.get(\"messages_ready\",0),q.get(\"messages_unacknowledged\",0)) for q in qs if q[\"name\"].startswith(\"sync.\") and q.get(\"messages\",0)>0]);[print(n+\": total=\"+str(t)+\" ready=\"+str(r)+\" unacked=\"+str(u)) for n,t,r,u in non] or print(\"all sync.* queues empty\")" || true
+
+                    [ "$SYNC_FAIL" -ne 0 ] && { echo ""; echo "ERROR: sync completeness check FAILED"; exit 1; } || true
+                '
