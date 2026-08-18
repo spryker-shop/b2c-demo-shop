@@ -20,7 +20,7 @@ export default class AutocompleteForm extends AutocompleteFormCore {
         }
 
         if (!this.textInput) {
-            super.readyCallback();
+            super.init();
         }
     }
 
