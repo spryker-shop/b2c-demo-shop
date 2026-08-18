@@ -6,8 +6,6 @@ export default class CustomSelect extends Component {
     protected select: HTMLSelectElement;
     protected $select: $;
 
-    protected readyCallback(): void {}
-
     protected init(): void {
         this.select = <HTMLSelectElement>this.getElementsByClassName(`${this.jsName}`)[0];
         this.$select = $(this.select);

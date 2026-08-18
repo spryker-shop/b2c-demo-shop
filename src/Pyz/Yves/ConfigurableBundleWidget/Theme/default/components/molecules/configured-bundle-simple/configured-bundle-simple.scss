@@ -1,4 +1,4 @@
-@import '../configured-bundle/configured-bundle';
+@use 'sass:map';
 
 @mixin configurable-bundle-widget-configured-bundle-simple($name: '.configured-bundle-simple') {
     @include configurable-bundle-widget-configured-bundle($name) {
@@ -7,7 +7,7 @@
         padding-bottom: rem(10);
 
         &__title {
-            font-size: map-get($setting-font-size, default);
+            font-size: map.get($setting-font-size, default);
         }
 
         @content;

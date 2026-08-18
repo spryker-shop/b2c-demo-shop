@@ -1,5 +1,7 @@
+@use 'sass:map';
+
 @include shop-ui-link {
-    font: map-get($setting-font-size, default) $setting-font-family;
+    font: map.get($setting-font-size, default) $setting-font-family;
 
     &--darkest {
         @include helper-effect-transition(all);
