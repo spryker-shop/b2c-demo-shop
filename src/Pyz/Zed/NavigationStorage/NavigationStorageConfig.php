@@ -15,17 +15,11 @@ use Spryker\Zed\NavigationStorage\NavigationStorageConfig as SprykerNavigationSt
 
 class NavigationStorageConfig extends SprykerNavigationStorageConfig
 {
-    /**
-     * @return string|null
-     */
     public function getNavigationSynchronizationPoolName(): ?string
     {
         return SynchronizationConfig::DEFAULT_SYNCHRONIZATION_POOL_NAME;
     }
 
-    /**
-     * @return string|null
-     */
     public function getEventQueueName(): ?string
     {
         return PublisherConfig::PUBLISH_QUEUE;

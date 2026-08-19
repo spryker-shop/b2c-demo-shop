@@ -21,19 +21,12 @@ use Spryker\Client\SearchHttp\Plugin\Search\SearchHttpSearchContextExpanderPlugi
 
 class SearchDependencyProvider extends SprykerSearchDependencyProvider
 {
-    /**
-     * @param \Spryker\Client\Kernel\Container $container
-     *
-     * @return \Spryker\Client\Search\Dependency\Plugin\SearchConfigBuilderInterface
-     */
     protected function createSearchConfigBuilderPlugin(Container $container): SearchConfigBuilderInterface // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
     {
         return new CatalogSearchConfigBuilder();
     }
 
     /**
-     * @param \Spryker\Client\Kernel\Container $container
-     *
      * @return array<\Spryker\Client\SearchExtension\Dependency\Plugin\SearchConfigExpanderPluginInterface>
      */
     protected function createSearchConfigExpanderPlugins(Container $container): array
@@ -51,8 +44,8 @@ class SearchDependencyProvider extends SprykerSearchDependencyProvider
     protected function getClientAdapterPlugins(): array
     {
         return [
-            new SearchHttpSearchAdapterPlugin(),
-            new ElasticsearchSearchAdapterPlugin(),
+        new SearchHttpSearchAdapterPlugin(),
+        new ElasticsearchSearchAdapterPlugin(),
         ];
     }
 
@@ -62,8 +55,8 @@ class SearchDependencyProvider extends SprykerSearchDependencyProvider
     protected function getSearchContextExpanderPlugins(): array
     {
         return [
-            new SearchHttpSearchContextExpanderPlugin(),
-            new ElasticsearchSearchContextExpanderPlugin(),
+        new SearchHttpSearchContextExpanderPlugin(),
+        new ElasticsearchSearchContextExpanderPlugin(),
         ];
     }
 }

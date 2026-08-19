@@ -46,9 +46,6 @@ class ShipmentStepTest extends Unit
      */
     public $tester;
 
-    /**
-     * @return void
-     */
     public function testShipmentStepExecuteShouldTriggerPlugins(): void
     {
         $shipmentPluginMock = $this->createShipmentMock();
@@ -67,9 +64,6 @@ class ShipmentStepTest extends Unit
         $shipmentStep->execute($this->createRequest(), $quoteTransfer);
     }
 
-    /**
-     * @return void
-     */
     public function testShipmentPostConditionsShouldReturnTrueWhenShipmentSet(): void
     {
         $this->markTestSkipped('This test is skipped because it is no longer relevant after https://spryker.atlassian.net/browse/SUPESC-435.');
@@ -84,9 +78,6 @@ class ShipmentStepTest extends Unit
         $this->assertTrue($shipmentStep->postCondition($quoteTransfer));
     }
 
-    /**
-     * @return void
-     */
     public function testShipmentRequireInputShouldReturnTrue(): void
     {
         $shipmentStep = $this->createShipmentStep(new StepHandlerPluginCollection());
@@ -97,11 +88,6 @@ class ShipmentStepTest extends Unit
         $this->assertTrue($shipmentStep->requireInput($quoteTransfer));
     }
 
-    /**
-     * @param \Spryker\Yves\StepEngine\Dependency\Plugin\Handler\StepHandlerPluginCollection $shipmentPlugins
-     *
-     * @return \SprykerShop\Yves\CheckoutPage\Process\Steps\ShipmentStep
-     */
     protected function createShipmentStep(StepHandlerPluginCollection $shipmentPlugins): ShipmentStep
     {
         return new ShipmentStep(
@@ -115,9 +101,6 @@ class ShipmentStepTest extends Unit
         );
     }
 
-    /**
-     * @return \Symfony\Component\HttpFoundation\Request
-     */
     protected function createRequest(): Request
     {
         return Request::createFromGlobals();

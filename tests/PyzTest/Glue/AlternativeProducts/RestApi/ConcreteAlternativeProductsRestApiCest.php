@@ -26,16 +26,8 @@ use Spryker\Glue\ProductsRestApi\ProductsRestApiConfig;
  */
 class ConcreteAlternativeProductsRestApiCest
 {
-    /**
-     * @var \PyzTest\Glue\AlternativeProducts\RestApi\ConcreteAlternativeProductsRestApiFixtures
-     */
     protected ConcreteAlternativeProductsRestApiFixtures $fixtures;
 
-    /**
-     * @param \PyzTest\Glue\AlternativeProducts\AlternativeProductsRestApiTester $I
-     *
-     * @return void
-     */
     public function loadFixtures(AlternativeProductsRestApiTester $I): void
     {
         /** @var \PyzTest\Glue\AlternativeProducts\RestApi\ConcreteAlternativeProductsRestApiFixtures $fixtures */
@@ -46,10 +38,6 @@ class ConcreteAlternativeProductsRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\AlternativeProducts\AlternativeProductsRestApiTester $I
-     *
-     * @return void
      */
     public function requestConcreteAlternativeProducts(AlternativeProductsRestApiTester $I): void
     {
@@ -80,10 +68,6 @@ class ConcreteAlternativeProductsRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\AlternativeProducts\AlternativeProductsRestApiTester $I
-     *
-     * @return void
      */
     public function requestConcreteAlternativeProductsByNotExistingProductConcreteSku(
         AlternativeProductsRestApiTester $I,

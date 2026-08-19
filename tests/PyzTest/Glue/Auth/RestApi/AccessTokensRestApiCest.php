@@ -26,16 +26,8 @@ use Spryker\Glue\AuthRestApi\AuthRestApiConfig;
  */
 class AccessTokensRestApiCest
 {
-    /**
-     * @var \PyzTest\Glue\Auth\RestApi\AccessTokensRestApiFixtures
-     */
     protected AccessTokensRestApiFixtures $fixtures;
 
-    /**
-     * @param \PyzTest\Glue\Auth\AuthRestApiTester $I
-     *
-     * @return void
-     */
     public function loadFixtures(AuthRestApiTester $I): void
     {
         /** @var \PyzTest\Glue\Auth\RestApi\AccessTokensRestApiFixtures $fixtures */
@@ -46,10 +38,6 @@ class AccessTokensRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Auth\AuthRestApiTester $I
-     *
-     * @return void
      */
     public function requestAccessTokenForExistingCustomer(AuthRestApiTester $I): void
     {
@@ -74,10 +62,6 @@ class AccessTokensRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Auth\AuthRestApiTester $I
-     *
-     * @return void
      */
     public function requestAccessTokenForNotExistingCustomer(AuthRestApiTester $I): void
     {
@@ -101,10 +85,6 @@ class AccessTokensRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Auth\AuthRestApiTester $I
-     *
-     * @return void
      */
     public function requestAccessTokenWithWrongCredentials(AuthRestApiTester $I): void
     {
@@ -128,10 +108,6 @@ class AccessTokensRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Auth\AuthRestApiTester $I
-     *
-     * @return void
      */
     public function requestAccessTokenWithEmptyPassword(AuthRestApiTester $I): void
     {
@@ -155,10 +131,6 @@ class AccessTokensRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Auth\AuthRestApiTester $I
-     *
-     * @return void
      */
     public function requestAccessTokenWithEmptyUsername(AuthRestApiTester $I): void
     {
@@ -182,10 +154,6 @@ class AccessTokensRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Auth\AuthRestApiTester $I
-     *
-     * @return void
      */
     public function requestAccessTokenWithInvalidPostData(AuthRestApiTester $I): void
     {
@@ -207,10 +175,6 @@ class AccessTokensRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Auth\AuthRestApiTester $I
-     *
-     * @return void
      */
     public function requestAccessTokenWithInvalidType(AuthRestApiTester $I): void
     {

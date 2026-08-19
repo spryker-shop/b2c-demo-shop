@@ -42,11 +42,6 @@ class DiscountStoreWriterStep implements DataImportStepInterface
      */
     protected static $idStoreBuffer = [];
 
-    /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     *
-     * @return void
-     */
     public function execute(DataSetInterface $dataSet): void
     {
         (new SpyDiscountStoreQuery())
@@ -56,11 +51,6 @@ class DiscountStoreWriterStep implements DataImportStepInterface
             ->save();
     }
 
-    /**
-     * @param string $discountKey
-     *
-     * @return int
-     */
     protected function getIdDiscountByKey(string $discountKey): int
     {
         if (!isset(static::$idDiscountBuffer[$discountKey])) {
@@ -71,11 +61,6 @@ class DiscountStoreWriterStep implements DataImportStepInterface
         return static::$idDiscountBuffer[$discountKey];
     }
 
-    /**
-     * @param string $storeName
-     *
-     * @return int
-     */
     protected function getIdStoreByName(string $storeName): int
     {
         if (!isset(static::$idStoreBuffer[$storeName])) {

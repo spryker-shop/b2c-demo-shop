@@ -30,22 +30,12 @@ use PyzTest\Zed\NavigationGui\PageObject\NavigationPage;
  */
 class NavigationTreeCest
 {
-    /**
-     * @param \PyzTest\Zed\NavigationGui\NavigationGuiPresentationTester $i
-     *
-     * @return void
-     */
     public function _before(NavigationGuiPresentationTester $i): void
     {
         $i->amZed();
         $i->amLoggedInUser();
     }
 
-    /**
-     * @param \PyzTest\Zed\NavigationGui\NavigationGuiPresentationTester $i
-     *
-     * @return void
-     */
     public function testSeeEmptyNavigationTree(NavigationGuiPresentationTester $i): void
     {
         $i->wantTo('See navigation tree.');
@@ -53,10 +43,10 @@ class NavigationTreeCest
 
         $i->amLoggedInUser();
         $navigationTreeTransfer = $i->prepareTestNavigationTreeEntities((new NavigationTreeTransfer())
-            ->setNavigation((new NavigationTransfer())
-                ->setName('Create child node without type test 1')
-                ->setKey('Create child node without type test 1')
-                ->setIsActive(true)));
+        ->setNavigation((new NavigationTransfer())
+            ->setName('Create child node without type test 1')
+            ->setKey('Create child node without type test 1')
+            ->setIsActive(true)));
         $i->amOnPage(NavigationPage::URL);
 
         $i->waitForNavigationTree();
@@ -65,11 +55,6 @@ class NavigationTreeCest
         $i->cleanUpNavigationTree($navigationTreeTransfer);
     }
 
-    /**
-     * @param \PyzTest\Zed\NavigationGui\NavigationGuiPresentationTester $i
-     *
-     * @return void
-     */
     public function testCreateChildNodeWithoutType(NavigationGuiPresentationTester $i): void
     {
         $i->wantTo('Create child node without type.');
@@ -77,10 +62,10 @@ class NavigationTreeCest
 
         $i->amLoggedInUser();
         $navigationTreeTransfer = $i->prepareTestNavigationTreeEntities((new NavigationTreeTransfer())
-            ->setNavigation((new NavigationTransfer())
-                ->setName('Create child node without type test 2')
-                ->setKey('Create child node without type test 2')
-                ->setIsActive(true)));
+        ->setNavigation((new NavigationTransfer())
+            ->setName('Create child node without type test 2')
+            ->setKey('Create child node without type test 2')
+            ->setIsActive(true)));
         $i->amOnPage(NavigationPage::URL);
 
         $i->waitForNavigationTree();
@@ -96,11 +81,6 @@ class NavigationTreeCest
         $i->cleanUpNavigationTree($navigationTreeTransfer);
     }
 
-    /**
-     * @param \PyzTest\Zed\NavigationGui\NavigationGuiPresentationTester $i
-     *
-     * @return void
-     */
     public function testCreateChildNodeWithExternalUrlType(NavigationGuiPresentationTester $i): void
     {
         $i->wantTo('Create external URL child node.');
@@ -108,15 +88,15 @@ class NavigationTreeCest
 
         $i->amLoggedInUser();
         $navigationTreeTransfer = $i->prepareTestNavigationTreeEntities((new NavigationTreeTransfer())
-            ->setNavigation((new NavigationTransfer())
-                ->setName('Create child node with external URL type test 3')
-                ->setKey('Create child node with external URL type test 3')
-                ->setIsActive(true))
-            ->addNode((new NavigationTreeNodeTransfer())
-                ->setNavigationNode((new NavigationNodeTransfer())
-                    ->addNavigationNodeLocalizedAttribute((new NavigationNodeLocalizedAttributesTransfer())
-                        ->setFkLocale($i->getIdLocale('en_US'))
-                        ->setTitle('foo')))));
+        ->setNavigation((new NavigationTransfer())
+            ->setName('Create child node with external URL type test 3')
+            ->setKey('Create child node with external URL type test 3')
+            ->setIsActive(true))
+        ->addNode((new NavigationTreeNodeTransfer())
+            ->setNavigationNode((new NavigationNodeTransfer())
+                ->addNavigationNodeLocalizedAttribute((new NavigationNodeLocalizedAttributesTransfer())
+                    ->setFkLocale($i->getIdLocale('en_US'))
+                    ->setTitle('foo')))));
         $i->amOnPage(NavigationPage::URL);
 
         $i->waitForNavigationTree();
@@ -132,29 +112,24 @@ class NavigationTreeCest
         $i->cleanUpNavigationTree($navigationTreeTransfer);
     }
 
-    /**
-     * @param \PyzTest\Zed\NavigationGui\NavigationGuiPresentationTester $i
-     *
-     * @return void
-     */
     public function testCreateChildNodeWithCmsPageType(NavigationGuiPresentationTester $i): void
     {
         $i->wantTo('Create CMS page child node.');
         $i->expect('Navigation should have a new child node persisted.');
         $i->amLoggedInUser();
         $navigationTreeTransfer = $i->prepareTestNavigationTreeEntities((new NavigationTreeTransfer())
-            ->setNavigation((new NavigationTransfer())
-                ->setName('Create child node with CMS page type test 5')
-                ->setKey('Create child node with CMS page type test 5')
-                ->setIsActive(true))
-            ->addNode((new NavigationTreeNodeTransfer())
-                ->setNavigationNode((new NavigationNodeTransfer())
-                    ->addNavigationNodeLocalizedAttribute((new NavigationNodeLocalizedAttributesTransfer())
-                        ->setFkLocale($i->getIdLocale('en_US'))
-                        ->setTitle('foo'))
-                    ->addNavigationNodeLocalizedAttribute((new NavigationNodeLocalizedAttributesTransfer())
-                        ->setFkLocale($i->getIdLocale('de_DE'))
-                        ->setTitle('foo')))));
+        ->setNavigation((new NavigationTransfer())
+            ->setName('Create child node with CMS page type test 5')
+            ->setKey('Create child node with CMS page type test 5')
+            ->setIsActive(true))
+        ->addNode((new NavigationTreeNodeTransfer())
+            ->setNavigationNode((new NavigationNodeTransfer())
+                ->addNavigationNodeLocalizedAttribute((new NavigationNodeLocalizedAttributesTransfer())
+                    ->setFkLocale($i->getIdLocale('en_US'))
+                    ->setTitle('foo'))
+                ->addNavigationNodeLocalizedAttribute((new NavigationNodeLocalizedAttributesTransfer())
+                    ->setFkLocale($i->getIdLocale('de_DE'))
+                    ->setTitle('foo')))));
         $i->amOnPage(NavigationPage::URL);
         $idNavigationNode = $navigationTreeTransfer->getNodes()[0]->getNavigationNode()->getIdNavigationNode();
         $i->waitForNavigationTree();
@@ -177,10 +152,6 @@ class NavigationTreeCest
 
     /**
      * @group singleNavigationTest
-     *
-     * @param \PyzTest\Zed\NavigationGui\NavigationGuiPresentationTester $i
-     *
-     * @return void
      */
     public function testChangeNavigationTreeStructure(NavigationGuiPresentationTester $i): void
     {
@@ -191,43 +162,43 @@ class NavigationTreeCest
 
         $i->amLoggedInUser();
         $navigationTreeTransfer = $i->prepareTestNavigationTreeEntities((new NavigationTreeTransfer())
-            ->setNavigation((new NavigationTransfer())
-                ->setName('Create child node with CMS page type test 6')
-                ->setKey('Create child node with CMS page type test 6')
-                ->setIsActive(true))
-            ->addNode((new NavigationTreeNodeTransfer())
+        ->setNavigation((new NavigationTransfer())
+            ->setName('Create child node with CMS page type test 6')
+            ->setKey('Create child node with CMS page type test 6')
+            ->setIsActive(true))
+        ->addNode((new NavigationTreeNodeTransfer())
+            ->setNavigationNode((new NavigationNodeTransfer())
+                ->addNavigationNodeLocalizedAttribute((new NavigationNodeLocalizedAttributesTransfer())
+                    ->setFkLocale($i->getIdLocale('en_US'))
+                    ->setTitle('node_1'))
+                ->addNavigationNodeLocalizedAttribute((new NavigationNodeLocalizedAttributesTransfer())
+                    ->setFkLocale($i->getIdLocale('de_DE'))
+                    ->setTitle('node_1')))
+            ->addChild((new NavigationTreeNodeTransfer())
                 ->setNavigationNode((new NavigationNodeTransfer())
                     ->addNavigationNodeLocalizedAttribute((new NavigationNodeLocalizedAttributesTransfer())
                         ->setFkLocale($i->getIdLocale('en_US'))
-                        ->setTitle('node_1'))
+                        ->setTitle('node_1.1'))
                     ->addNavigationNodeLocalizedAttribute((new NavigationNodeLocalizedAttributesTransfer())
                         ->setFkLocale($i->getIdLocale('de_DE'))
-                        ->setTitle('node_1')))
-                ->addChild((new NavigationTreeNodeTransfer())
-                    ->setNavigationNode((new NavigationNodeTransfer())
-                        ->addNavigationNodeLocalizedAttribute((new NavigationNodeLocalizedAttributesTransfer())
-                            ->setFkLocale($i->getIdLocale('en_US'))
-                            ->setTitle('node_1.1'))
-                        ->addNavigationNodeLocalizedAttribute((new NavigationNodeLocalizedAttributesTransfer())
-                            ->setFkLocale($i->getIdLocale('de_DE'))
-                            ->setTitle('node_1.1')))))
-            ->addNode((new NavigationTreeNodeTransfer())
-                ->setNavigationNode((new NavigationNodeTransfer())
-                    ->addNavigationNodeLocalizedAttribute((new NavigationNodeLocalizedAttributesTransfer())
-                        ->setFkLocale($i->getIdLocale('en_US'))
-                        ->setTitle('node_2'))
-                    ->addNavigationNodeLocalizedAttribute((new NavigationNodeLocalizedAttributesTransfer())
-                        ->setFkLocale($i->getIdLocale('de_DE'))
-                        ->setTitle('node_2')))));
+                        ->setTitle('node_1.1')))))
+        ->addNode((new NavigationTreeNodeTransfer())
+            ->setNavigationNode((new NavigationNodeTransfer())
+                ->addNavigationNodeLocalizedAttribute((new NavigationNodeLocalizedAttributesTransfer())
+                    ->setFkLocale($i->getIdLocale('en_US'))
+                    ->setTitle('node_2'))
+                ->addNavigationNodeLocalizedAttribute((new NavigationNodeLocalizedAttributesTransfer())
+                    ->setFkLocale($i->getIdLocale('de_DE'))
+                    ->setTitle('node_2')))));
         $i->amOnPage(NavigationPage::URL);
 
         $idNavigationNode = $navigationTreeTransfer->getNodes()[0]
-            ->getChildren()[0]
-            ->getNavigationNode()
-            ->getIdNavigationNode();
+        ->getChildren()[0]
+        ->getNavigationNode()
+        ->getIdNavigationNode();
         $idTargetNavigationNode = $navigationTreeTransfer->getNodes()[1]
-            ->getNavigationNode()
-            ->getIdNavigationNode();
+        ->getNavigationNode()
+        ->getIdNavigationNode();
 
         $i->waitForNavigationTree();
         $i->repeatUnstableActions(function () use ($i, $idNavigationNode, $idTargetNavigationNode): void {
@@ -239,11 +210,6 @@ class NavigationTreeCest
         $i->cleanUpNavigationTree($navigationTreeTransfer);
     }
 
-    /**
-     * @param \PyzTest\Zed\NavigationGui\NavigationGuiPresentationTester $i
-     *
-     * @return void
-     */
     public function testDeleteNavigationNode(NavigationGuiPresentationTester $i): void // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
     {
         /*

@@ -15,17 +15,11 @@ use Spryker\Zed\TaxProductStorage\TaxProductStorageConfig as SprykerTaxProductSt
 
 class TaxProductStorageConfig extends SprykerTaxProductStorageConfig
 {
-    /**
-     * @return string|null
-     */
     public function getTaxProductSynchronizationPoolName(): ?string
     {
         return SynchronizationConfig::DEFAULT_SYNCHRONIZATION_POOL_NAME;
     }
 
-    /**
-     * @return string|null
-     */
     public function getEventQueueName(): ?string
     {
         return PublisherConfig::PUBLISH_QUEUE;

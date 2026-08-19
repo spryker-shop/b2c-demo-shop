@@ -19,11 +19,6 @@ class LocaleRepository implements LocaleRepositoryInterface
      */
     protected static $localeMap;
 
-    /**
-     * @param string $locale
-     *
-     * @return int
-     */
     public function getIdLocaleByLocale(string $locale): int
     {
         if (!static::$localeMap) {
@@ -33,9 +28,6 @@ class LocaleRepository implements LocaleRepositoryInterface
         return static::$localeMap[$locale];
     }
 
-    /**
-     * @return void
-     */
     private function loadLocaleMap(): void
     {
         /** @var array<array<string, mixed>> $localeCollection */

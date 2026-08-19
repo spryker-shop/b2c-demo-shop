@@ -25,32 +25,17 @@ use PyzTest\Yves\Customer\PageObject\CustomerRegistrationPage;
  */
 class CustomerRegistrationCest
 {
-    /**
-     * @param \PyzTest\Yves\Customer\CustomerPresentationTester $i
-     *
-     * @return void
-     */
     public function _before(CustomerPresentationTester $i): void
     {
         $i->amYves();
     }
 
-    /**
-     * @param \PyzTest\Yves\Customer\CustomerPresentationTester $i
-     *
-     * @return void
-     */
     public function testICanOpenRegistrationPage(CustomerPresentationTester $i): void
     {
         $i->amOnPage(CustomerRegistrationPage::URL);
         $i->see(CustomerRegistrationPage::TITLE_CREATE_ACCOUNT);
     }
 
-    /**
-     * @param \PyzTest\Yves\Customer\CustomerPresentationTester $i
-     *
-     * @return void
-     */
     public function testICanRegisterWithValidData(CustomerPresentationTester $i): void
     {
         $i->amOnPage(CustomerRegistrationPage::URL);

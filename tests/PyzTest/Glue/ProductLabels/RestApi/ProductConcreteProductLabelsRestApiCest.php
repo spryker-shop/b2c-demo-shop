@@ -26,16 +26,8 @@ use Spryker\Glue\ProductLabelsRestApi\ProductLabelsRestApiConfig;
  */
 class ProductConcreteProductLabelsRestApiCest
 {
-    /**
-     * @var \PyzTest\Glue\ProductLabels\RestApi\ProductLabelsRestApiFixtures
-     */
     protected ProductLabelsRestApiFixtures $fixtures;
 
-    /**
-     * @param \PyzTest\Glue\ProductLabels\ProductLabelsApiTester $I
-     *
-     * @return void
-     */
     public function loadFixtures(ProductLabelsApiTester $I): void
     {
         /** @var \PyzTest\Glue\ProductLabels\RestApi\ProductLabelsRestApiFixtures $fixtures */
@@ -46,10 +38,6 @@ class ProductConcreteProductLabelsRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\ProductLabels\ProductLabelsApiTester $I
-     *
-     * @return void
      */
     public function requestProductConcreteWithProductLabelsRelationship(ProductLabelsApiTester $I): void
     {
@@ -95,10 +83,6 @@ class ProductConcreteProductLabelsRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\ProductLabels\ProductLabelsApiTester $I
-     *
-     * @return void
      */
     public function requestProductConcreteWithoutProductLabelRelationship(ProductLabelsApiTester $I): void
     {
@@ -125,10 +109,6 @@ class ProductConcreteProductLabelsRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\ProductLabels\ProductLabelsApiTester $I
-     *
-     * @return void
      */
     public function requestProductConcreteWithProductLabelRelationshipByPost(ProductLabelsApiTester $I): void
     {
@@ -150,10 +130,6 @@ class ProductConcreteProductLabelsRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\ProductLabels\ProductLabelsApiTester $I
-     *
-     * @return void
      */
     public function requestProductConcreteWithProductLabelRelationshipByPatch(ProductLabelsApiTester $I): void
     {

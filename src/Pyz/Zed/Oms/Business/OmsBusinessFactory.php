@@ -21,9 +21,6 @@ use Spryker\Zed\Oms\Business\OmsBusinessFactory as SprykerOmsBusinessFactory;
  */
 class OmsBusinessFactory extends SprykerOmsBusinessFactory
 {
-    /**
-     * @return \Pyz\Zed\Oms\Business\Calculator\TimeoutProcessorTimeoutCalculatorInterface
-     */
     public function createInitiationTimeoutCalculator(): TimeoutProcessorTimeoutCalculatorInterface
     {
         return new InitiationTimeoutCalculator();

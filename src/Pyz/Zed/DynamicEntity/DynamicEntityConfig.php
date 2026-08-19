@@ -18,9 +18,6 @@ class DynamicEntityConfig extends SprykerDynamicEntityConfig
      */
     protected const CONFIGURATION_FILE_PATH = '%s/src/Pyz/Zed/DynamicEntity/data/installer/configuration.json';
 
-    /**
-     * @return string
-     */
     public function getInstallerConfigurationDataFilePath(): string
     {
         return sprintf(static::CONFIGURATION_FILE_PATH, APPLICATION_ROOT_DIR);

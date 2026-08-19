@@ -57,11 +57,6 @@ class ExampleProductSalePageDependencyProvider extends AbstractDependencyProvide
      */
     public const CLIENT_STORE = 'CLIENT_STORE';
 
-    /**
-     * @param \Spryker\Client\Kernel\Container $container
-     *
-     * @return \Spryker\Client\Kernel\Container
-     */
     public function provideServiceLayerDependencies(Container $container): Container
     {
         $container = $this->addSearchClient($container);
@@ -74,11 +69,6 @@ class ExampleProductSalePageDependencyProvider extends AbstractDependencyProvide
         return $container;
     }
 
-    /**
-     * @param \Spryker\Client\Kernel\Container $container
-     *
-     * @return \Spryker\Client\Kernel\Container
-     */
     protected function addSearchClient(Container $container): Container
     {
         $container->set(static::CLIENT_SEARCH, function () {
@@ -88,11 +78,6 @@ class ExampleProductSalePageDependencyProvider extends AbstractDependencyProvide
         return $container;
     }
 
-    /**
-     * @param \Spryker\Client\Kernel\Container $container
-     *
-     * @return \Spryker\Client\Kernel\Container
-     */
     protected function addProductLabelClient(Container $container): Container
     {
         $container->set(static::CLIENT_PRODUCT_LABEL_STORAGE, function (Container $container) {
@@ -102,11 +87,6 @@ class ExampleProductSalePageDependencyProvider extends AbstractDependencyProvide
         return $container;
     }
 
-    /**
-     * @param \Spryker\Client\Kernel\Container $container
-     *
-     * @return \Spryker\Client\Kernel\Container
-     */
     protected function addSaleSearchQueryPlugin(Container $container): Container
     {
         $container->set(static::SALE_SEARCH_QUERY_PLUGIN, function () {
@@ -116,11 +96,6 @@ class ExampleProductSalePageDependencyProvider extends AbstractDependencyProvide
         return $container;
     }
 
-    /**
-     * @param \Spryker\Client\Kernel\Container $container
-     *
-     * @return \Spryker\Client\Kernel\Container
-     */
     protected function addSaleSearchQueryExpanderPlugins(Container $container): Container
     {
         $container->set(static::SALE_SEARCH_QUERY_EXPANDER_PLUGINS, function () {
@@ -149,11 +124,6 @@ class ExampleProductSalePageDependencyProvider extends AbstractDependencyProvide
         ];
     }
 
-    /**
-     * @param \Spryker\Client\Kernel\Container $container
-     *
-     * @return \Spryker\Client\Kernel\Container
-     */
     protected function addSaleSearchResultFormatterPlugins(Container $container): Container
     {
         $container->set(static::SALE_SEARCH_RESULT_FORMATTER_PLUGINS, function () {
@@ -178,11 +148,6 @@ class ExampleProductSalePageDependencyProvider extends AbstractDependencyProvide
         ];
     }
 
-    /**
-     * @param \Spryker\Client\Kernel\Container $container
-     *
-     * @return \Spryker\Client\Kernel\Container
-     */
     protected function addClientStore(Container $container): Container
     {
         $container->set(static::CLIENT_STORE, function (Container $container) {

@@ -20,9 +20,6 @@ class ExampleStateMachineItemReader
      */
     protected $exampleStateMachineQueryContainer;
 
-    /**
-     * @param \Pyz\Zed\ExampleStateMachine\Persistence\ExampleStateMachineQueryContainerInterface $exampleStateMachineQueryContainer
-     */
     public function __construct(ExampleStateMachineQueryContainerInterface $exampleStateMachineQueryContainer)
     {
         $this->exampleStateMachineQueryContainer = $exampleStateMachineQueryContainer;

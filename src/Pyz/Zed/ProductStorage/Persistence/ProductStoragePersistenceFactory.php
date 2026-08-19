@@ -19,9 +19,6 @@ use Spryker\Zed\ProductStorage\Persistence\ProductStoragePersistenceFactory as S
  */
 class ProductStoragePersistenceFactory extends SprykerProductStoragePersistenceFactory
 {
-    /**
-     * @return \Orm\Zed\ProductBundle\Persistence\SpyProductBundleQuery
-     */
     public function getProductBundleQuery(): SpyProductBundleQuery
     {
         return SpyProductBundleQuery::create();

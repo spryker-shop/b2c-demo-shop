@@ -15,17 +15,11 @@ use Spryker\Zed\CategoryImageStorage\CategoryImageStorageConfig as SprykerCatego
 
 class CategoryImageStorageConfig extends SprykerCategoryImageStorageConfig
 {
-    /**
-     * @return string|null
-     */
     public function getCategoryImageSynchronizationPoolName(): ?string
     {
         return SynchronizationConfig::DEFAULT_SYNCHRONIZATION_POOL_NAME;
     }
 
-    /**
-     * @return string|null
-     */
     public function getEventQueueName(): ?string
     {
         return PublisherConfig::PUBLISH_QUEUE;

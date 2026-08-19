@@ -13,9 +13,6 @@ use SprykerShop\Yves\ConfigurableBundleWidget\ConfigurableBundleWidgetConfig as 
 
 class ConfigurableBundleWidgetConfig extends SprykerShopConfigurableBundleWidgetConfig
 {
-    /**
-     * @return bool
-     */
     public function isQuantityChangeable(): bool
     {
         return true;

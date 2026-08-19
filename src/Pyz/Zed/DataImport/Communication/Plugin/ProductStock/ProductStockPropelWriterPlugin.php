@@ -20,19 +20,11 @@ use Spryker\Zed\Kernel\Communication\AbstractPlugin;
  */
 class ProductStockPropelWriterPlugin extends AbstractPlugin implements DataSetWriterPluginInterface
 {
-    /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     *
-     * @return void
-     */
     public function write(DataSetInterface $dataSet): void
     {
         $this->getFacade()->writeProductStockDataSet($dataSet);
     }
 
-    /**
-     * @return void
-     */
     public function flush(): void
     {
         $this->getFacade()->flushProductStockDataImporter();

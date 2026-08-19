@@ -37,19 +37,11 @@ class ProductSearchAttributeWriter extends PublishAwareStep implements DataImpor
      */
     protected $glossaryKeyBuilder;
 
-    /**
-     * @param \Spryker\Shared\ProductSearch\Code\KeyBuilder\GlossaryKeyBuilderInterface $glossaryKeyBuilder
-     */
     public function __construct(GlossaryKeyBuilderInterface $glossaryKeyBuilder)
     {
         $this->glossaryKeyBuilder = $glossaryKeyBuilder;
     }
 
-    /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     *
-     * @return void
-     */
     public function execute(DataSetInterface $dataSet): void
     {
         $productSearchAttributeEntity = SpyProductSearchAttributeQuery::create()

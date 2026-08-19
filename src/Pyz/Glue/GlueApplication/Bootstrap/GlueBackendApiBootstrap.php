@@ -17,8 +17,6 @@ class GlueBackendApiBootstrap extends GlueBootstrap
 {
     /**
      * @param array<string> $glueApplicationBootstrapPluginClassNames
-     *
-     * @return \Spryker\Shared\Application\ApplicationInterface
      */
     public function boot(array $glueApplicationBootstrapPluginClassNames = []): ApplicationInterface // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
     {

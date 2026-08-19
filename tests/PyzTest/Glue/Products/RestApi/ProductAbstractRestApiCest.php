@@ -29,16 +29,8 @@ use Spryker\Glue\ProductsRestApi\ProductsRestApiConfig;
  */
 class ProductAbstractRestApiCest
 {
-    /**
-     * @var \PyzTest\Glue\Products\RestApi\Fixtures\ProductsRestApiFixtures
-     */
     protected ProductsRestApiFixtures $fixtures;
 
-    /**
-     * @param \PyzTest\Glue\Products\ProductsApiTester $I
-     *
-     * @return void
-     */
     public function loadFixtures(ProductsApiTester $I): void
     {
         /** @var \PyzTest\Glue\Products\RestApi\Fixtures\ProductsRestApiFixtures $fixtures */
@@ -49,10 +41,6 @@ class ProductAbstractRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Products\ProductsApiTester $I
-     *
-     * @return void
      */
     public function requestProductAbstractByNotExistingProductAbstractSku(ProductsApiTester $I): void
     {
@@ -67,10 +55,6 @@ class ProductAbstractRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Products\ProductsApiTester $I
-     *
-     * @return void
      */
     public function requestProductAbstractWithoutId(ProductsApiTester $I): void
     {
@@ -84,10 +68,6 @@ class ProductAbstractRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Products\ProductsApiTester $I
-     *
-     * @return void
      */
     public function requestProductAbstract(ProductsApiTester $I): void
     {
@@ -121,10 +101,6 @@ class ProductAbstractRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Products\ProductsApiTester $I
-     *
-     * @return void
      */
     public function requestProductAbstractWithProductConcreteRelationship(ProductsApiTester $I): void
     {
@@ -170,10 +146,6 @@ class ProductAbstractRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Products\ProductsApiTester $I
-     *
-     * @return void
      */
     public function requestProductAbstractWithProductPriceRelationship(ProductsApiTester $I): void
     {

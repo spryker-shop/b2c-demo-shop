@@ -38,9 +38,6 @@ class SearchHttpCommunicationTester extends Actor
 {
     use _generated\SearchHttpCommunicationTesterActions;
 
-    /**
-     * @return void
-     */
     public function assertSearchHttpConfigExistsForStore(): void
     {
         $searchHttpConfigEntity = $this->getSearchHttpConfigEntity();
@@ -48,9 +45,6 @@ class SearchHttpCommunicationTester extends Actor
         $this->assertNotNull($searchHttpConfigEntity);
     }
 
-    /**
-     * @return void
-     */
     public function assertSearchHttpConfigIsRemoved(): void
     {
         $searchHttpConfigEntity = $this->getSearchHttpConfigEntity();
@@ -61,9 +55,6 @@ class SearchHttpCommunicationTester extends Actor
         );
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\SearchEndpointAvailableTransfer
-     */
     public function buildSearchEndpointAvailableTransfer(): SearchEndpointAvailableTransfer
     {
         return (new SearchEndpointAvailableBuilder())
@@ -71,9 +62,6 @@ class SearchHttpCommunicationTester extends Actor
             ->build();
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\SearchEndpointRemovedTransfer
-     */
     public function buildSearchEndpointRemovedTransfer(): SearchEndpointRemovedTransfer
     {
         return (new SearchEndpointRemovedBuilder())
@@ -81,20 +69,12 @@ class SearchHttpCommunicationTester extends Actor
             ->build();
     }
 
-    /**
-     * @return void
-     */
     public function removeHttpConfig(): void
     {
         (new SpySearchHttpConfigQuery())
             ->deleteAll();
     }
 
-    /**
-     * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $searchMessageTransfer
-     *
-     * @return void
-     */
     public function handleSearchMessage(TransferInterface $searchMessageTransfer): void
     {
         $channelName = 'search-commands';
@@ -108,9 +88,6 @@ class SearchHttpCommunicationTester extends Actor
         $this->resetInMemoryMessages();
     }
 
-    /**
-     * @return \Orm\Zed\SearchHttp\Persistence\SpySearchHttpConfig|null
-     */
     protected function getSearchHttpConfigEntity(): ?SpySearchHttpConfig
     {
         return (new SpySearchHttpConfigQuery())

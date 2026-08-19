@@ -60,37 +60,20 @@ class CartsRestApiFixtures implements FixturesBuilderInterface, FixturesContaine
      */
     protected const TEST_USERNAME = 'UserCartsRestApiFixtures';
 
-    /**
-     * @var \Generated\Shared\Transfer\CustomerTransfer
-     */
     protected CustomerTransfer $customerTransfer;
 
-    /**
-     * @var \Generated\Shared\Transfer\ProductConcreteTransfer
-     */
     protected ProductConcreteTransfer $productConcreteTransfer;
 
-    /**
-     * @return \Generated\Shared\Transfer\CustomerTransfer
-     */
     public function getCustomerTransfer(): CustomerTransfer
     {
         return $this->customerTransfer;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\ProductConcreteTransfer
-     */
     public function getProductConcreteTransfer(): ProductConcreteTransfer
     {
         return $this->productConcreteTransfer;
     }
 
-    /**
-     * @param \PyzTest\Glue\Carts\CartsApiTester $I
-     *
-     * @return \SprykerTest\Shared\Testify\Fixtures\FixturesContainerInterface
-     */
     public function buildFixtures(CartsApiTester $I): FixturesContainerInterface
     {
         $I->truncateSalesOrderThresholds();
@@ -102,11 +85,6 @@ class CartsRestApiFixtures implements FixturesBuilderInterface, FixturesContaine
         return $this;
     }
 
-    /**
-     * @param \PyzTest\Glue\Carts\CartsApiTester $I
-     *
-     * @return \Generated\Shared\Transfer\CustomerTransfer
-     */
     protected function createCustomer(CartsApiTester $I): CustomerTransfer
     {
         return $I->haveCustomer([

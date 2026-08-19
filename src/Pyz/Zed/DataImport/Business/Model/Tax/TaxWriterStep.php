@@ -63,19 +63,11 @@ class TaxWriterStep extends PublishAwareStep implements DataImportStepInterface
         'Tax Exempt' => true,
     ];
 
-    /**
-     * @param \Pyz\Zed\DataImport\Business\Model\Country\Repository\CountryRepositoryInterface $countryRepository
-     */
     public function __construct(CountryRepositoryInterface $countryRepository)
     {
         $this->countryRepository = $countryRepository;
     }
 
-    /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     *
-     * @return void
-     */
     public function execute(DataSetInterface $dataSet): void
     {
         $taxRateEntity = $this->findOrCreateTaxRate($dataSet);
@@ -93,11 +85,6 @@ class TaxWriterStep extends PublishAwareStep implements DataImportStepInterface
         $this->addPublishEvents(TaxEvents::TAX_SET_PUBLISH, $taxSetEntity->getIdTaxSet());
     }
 
-    /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     *
-     * @return \Orm\Zed\Tax\Persistence\SpyTaxRate
-     */
     protected function findOrCreateTaxRate(DataSetInterface $dataSet): SpyTaxRate
     {
         $idCountry = null;
@@ -116,11 +103,6 @@ class TaxWriterStep extends PublishAwareStep implements DataImportStepInterface
         return $taxRateEntity;
     }
 
-    /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     *
-     * @return \Orm\Zed\Tax\Persistence\SpyTaxSet
-     */
     protected function findOrCreateTaxSet(DataSetInterface $dataSet): SpyTaxSet
     {
         $taxSetEntity = SpyTaxSetQuery::create()
@@ -132,12 +114,6 @@ class TaxWriterStep extends PublishAwareStep implements DataImportStepInterface
         return $taxSetEntity;
     }
 
-    /**
-     * @param \Orm\Zed\Tax\Persistence\SpyTaxRate $taxRateEntity
-     * @param \Orm\Zed\Tax\Persistence\SpyTaxSet $taxSetEntity
-     *
-     * @return \Orm\Zed\Tax\Persistence\SpyTaxSetTax
-     */
     protected function findOrCreateTaxSetTax(SpyTaxRate $taxRateEntity, SpyTaxSet $taxSetEntity): SpyTaxSetTax
     {
         $taxSetTaxEntity = SpyTaxSetTaxQuery::create()
@@ -150,11 +126,6 @@ class TaxWriterStep extends PublishAwareStep implements DataImportStepInterface
         return $taxSetTaxEntity;
     }
 
-    /**
-     * @param \Orm\Zed\Tax\Persistence\SpyTaxSet $taxSetEntity
-     *
-     * @return void
-     */
     protected function addShipmentTax(SpyTaxSet $taxSetEntity): void
     {
         if (!isset($this->shipmentSets[$taxSetEntity->getName()])) {

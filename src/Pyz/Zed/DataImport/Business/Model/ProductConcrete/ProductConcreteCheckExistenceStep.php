@@ -36,9 +36,6 @@ class ProductConcreteCheckExistenceStep implements DataImportStepInterface
      */
     protected $resolved = [];
 
-    /**
-     * @param \Pyz\Zed\DataImport\Business\Model\Product\Repository\ProductRepositoryInterface $productRepository
-     */
     public function __construct(ProductRepositoryInterface $productRepository)
     {
         $this->productRepository = $productRepository;
@@ -46,22 +43,13 @@ class ProductConcreteCheckExistenceStep implements DataImportStepInterface
         $this->skuProductAbstractList = array_flip($productRepository->getSkuProductAbstractList());
     }
 
-    /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     *
-     * @return void
-     */
     public function execute(DataSetInterface $dataSet): void
     {
         $this->checkSkuProductAlreadyExists($dataSet);
     }
 
     /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     *
      * @throws \Pyz\Zed\DataImport\Business\Exception\InvalidSkuProductException
-     *
-     * @return void
      */
     protected function checkSkuProductAlreadyExists(DataSetInterface $dataSet): void
     {

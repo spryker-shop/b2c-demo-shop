@@ -66,22 +66,12 @@ class ProductStockHydratorStep implements DataImportStepInterface
      */
     public const STOCK_PRODUCT_ENTITY_TRANSFER = 'STOCK_PRODUCT_ENTITY_TRANSFER';
 
-    /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     *
-     * @return void
-     */
     public function execute(DataSetInterface $dataSet): void
     {
         $this->importStock($dataSet);
         $this->importStockProduct($dataSet);
     }
 
-    /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     *
-     * @return void
-     */
     protected function importStock(DataSetInterface $dataSet): void
     {
         $stockEntityTransfer = new SpyStockEntityTransfer();
@@ -90,11 +80,6 @@ class ProductStockHydratorStep implements DataImportStepInterface
         $dataSet[static::STOCK_ENTITY_TRANSFER] = $stockEntityTransfer;
     }
 
-    /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     *
-     * @return void
-     */
     protected function importStockProduct(DataSetInterface $dataSet): void
     {
         $stockProductEntityTransfer = new SpyStockProductEntityTransfer();

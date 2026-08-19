@@ -15,33 +15,21 @@ use Spryker\Zed\UrlStorage\UrlStorageConfig as SprykerUrlStorageConfig;
 
 class UrlStorageConfig extends SprykerUrlStorageConfig
 {
-    /**
-     * @return string|null
-     */
     public function getUrlSynchronizationPoolName(): ?string
     {
         return SynchronizationConfig::DEFAULT_SYNCHRONIZATION_POOL_NAME;
     }
 
-    /**
-     * @return string|null
-     */
     public function getUrlRedirectSynchronizationPoolName(): ?string
     {
         return SynchronizationConfig::DEFAULT_SYNCHRONIZATION_POOL_NAME;
     }
 
-    /**
-     * @return string|null
-     */
     public function getUrlEventQueueName(): ?string
     {
         return SprykerSharedUrlStorageConfig::PUBLISH_URL;
     }
 
-    /**
-     * @return string|null
-     */
     public function getUrlRedirectEventQueueName(): ?string
     {
         return SprykerSharedUrlStorageConfig::PUBLISH_URL;

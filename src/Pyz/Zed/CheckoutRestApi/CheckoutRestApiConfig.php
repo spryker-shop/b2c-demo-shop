@@ -13,17 +13,11 @@ use Spryker\Zed\CheckoutRestApi\CheckoutRestApiConfig as SprykerCheckoutRestApiC
 
 class CheckoutRestApiConfig extends SprykerCheckoutRestApiConfig
 {
-    /**
-     * @return bool
-     */
     public function shouldExecuteQuotePostRecalculationPlugins(): bool
     {
         return false;
     }
 
-    /**
-     * @return bool
-     */
     public function isRecalculationEnabledForQuoteMapperPlugins(): bool
     {
         return false;

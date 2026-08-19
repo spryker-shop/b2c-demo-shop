@@ -13,9 +13,6 @@ use Spryker\Zed\ProductManagement\ProductManagementConfig as SprykerProductManag
 
 class ProductManagementConfig extends SprykerProductManagementConfig
 {
-    /**
-     * @return bool
-     */
     public function isConcreteSkuSearchInProductTableEnabled(): bool
     {
         return true;

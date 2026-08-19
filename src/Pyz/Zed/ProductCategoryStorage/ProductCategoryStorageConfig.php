@@ -15,17 +15,11 @@ use Spryker\Zed\ProductCategoryStorage\ProductCategoryStorageConfig as SprykerPr
 
 class ProductCategoryStorageConfig extends SprykerProductCategoryStorageConfig
 {
-    /**
-     * @return string|null
-     */
     public function getProductCategorySynchronizationPoolName(): ?string
     {
         return SynchronizationConfig::DEFAULT_SYNCHRONIZATION_POOL_NAME;
     }
 
-    /**
-     * @return string|null
-     */
     public function getEventQueueName(): ?string
     {
         return PublisherConfig::PUBLISH_QUEUE;

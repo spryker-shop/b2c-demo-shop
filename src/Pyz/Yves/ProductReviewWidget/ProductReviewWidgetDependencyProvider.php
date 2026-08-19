@@ -19,11 +19,6 @@ class ProductReviewWidgetDependencyProvider extends SprykerProductReviewWidgetDe
      */
     public const CLIENT_GLOSSARY_STORAGE = 'CLIENT_GLOSSARY_STORAGE';
 
-    /**
-     * @param \Spryker\Yves\Kernel\Container $container
-     *
-     * @return \Spryker\Yves\Kernel\Container
-     */
     public function provideDependencies(Container $container): Container
     {
         $container = parent::provideDependencies($container);
@@ -32,11 +27,6 @@ class ProductReviewWidgetDependencyProvider extends SprykerProductReviewWidgetDe
         return $container;
     }
 
-    /**
-     * @param \Spryker\Yves\Kernel\Container $container
-     *
-     * @return \Spryker\Yves\Kernel\Container
-     */
     protected function addGlossaryStorageClient(Container $container): Container
     {
         $container->set(static::CLIENT_GLOSSARY_STORAGE, function (Container $container) {

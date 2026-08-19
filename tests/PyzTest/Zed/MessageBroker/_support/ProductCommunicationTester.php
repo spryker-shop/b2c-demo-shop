@@ -35,8 +35,6 @@ class ProductCommunicationTester extends Actor
 
     /**
      * @param array<string, mixed> $messageAttributeSeedData
-     *
-     * @return \Generated\Shared\Transfer\InitializeProductExportTransfer
      */
     public function buildInitializeProductExportTransfer(array $messageAttributeSeedData = []): InitializeProductExportTransfer
     {

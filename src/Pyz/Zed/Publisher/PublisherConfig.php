@@ -14,9 +14,6 @@ use Spryker\Zed\Publisher\PublisherConfig as SprykerPublisherConfig;
 
 class PublisherConfig extends SprykerPublisherConfig
 {
-    /**
-     * @return string|null
-     */
     public function getPublishQueueName(): ?string
     {
         return SharedPublisherConfig::PUBLISH_QUEUE;

@@ -32,9 +32,6 @@ class ConsoleConsoleTester extends Actor
 {
     use _generated\ConsoleConsoleTesterActions;
 
-    /**
-     * @return string
-     */
     public function runConsoleApplication(): string
     {
         $cmd = 'vendor/bin/console';

@@ -41,33 +41,21 @@ class AgentAuthRestApiTester extends ApiEndToEndTester
      */
     protected const REFRESH_TOKEN_JSON_PATH = '$.data.attributes.refreshToken';
 
-    /**
-     * @return void
-     */
     public function seeResponseHasAccessToken(): void
     {
         $this->assertNotEmpty($this->getDataFromResponseByJsonPath(static::ACCESS_TOKEN_JSON_PATH));
     }
 
-    /**
-     * @return void
-     */
     public function seeResponseHasRefreshToken(): void
     {
         $this->assertNotEmpty($this->getDataFromResponseByJsonPath(static::REFRESH_TOKEN_JSON_PATH));
     }
 
-    /**
-     * @return void
-     */
     public function seeResponseDoesNotHaveAccessToken(): void
     {
         $this->assertFalse($this->getDataFromResponseByJsonPath(static::ACCESS_TOKEN_JSON_PATH));
     }
 
-    /**
-     * @return void
-     */
     public function seeResponseDoesNotHaveRefreshToken(): void
     {
         $this->assertFalse($this->getDataFromResponseByJsonPath(static::REFRESH_TOKEN_JSON_PATH));

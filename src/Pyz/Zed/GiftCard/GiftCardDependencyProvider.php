@@ -17,9 +17,6 @@ use Spryker\Zed\GiftCardBalance\Communication\Plugin\GiftCardBalanceValueProvide
 
 class GiftCardDependencyProvider extends SprykerGiftCardDependencyProvider
 {
-    /**
-     * @return \Spryker\Zed\GiftCard\Dependency\Plugin\GiftCardValueProviderPluginInterface
-     */
     protected function getValueProviderPlugin(): GiftCardValueProviderPluginInterface
     {
         return new GiftCardBalanceValueProviderPlugin();
@@ -31,7 +28,7 @@ class GiftCardDependencyProvider extends SprykerGiftCardDependencyProvider
     protected function getPaymentSaverPlugins(): array
     {
         return [
-            new BalanceTransactionLogPaymentSaverPlugin(),
+        new BalanceTransactionLogPaymentSaverPlugin(),
         ];
     }
 
@@ -41,7 +38,7 @@ class GiftCardDependencyProvider extends SprykerGiftCardDependencyProvider
     protected function getDecisionRulePlugins(): array
     {
         return array_merge(parent::getDecisionRulePlugins(), [
-            new BalanceCheckerApplicabilityPlugin(),
+        new BalanceCheckerApplicabilityPlugin(),
         ]);
     }
 }

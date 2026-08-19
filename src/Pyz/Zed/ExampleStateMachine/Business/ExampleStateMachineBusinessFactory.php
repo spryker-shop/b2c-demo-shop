@@ -18,17 +18,11 @@ use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
  */
 class ExampleStateMachineBusinessFactory extends AbstractBusinessFactory
 {
-    /**
-     * @return \Pyz\Zed\ExampleStateMachine\Business\Model\ExampleStateMachineItemSaver
-     */
     public function createStateMachineSaver(): ExampleStateMachineItemSaver
     {
         return new ExampleStateMachineItemSaver($this->getQueryContainer());
     }
 
-    /**
-     * @return \Pyz\Zed\ExampleStateMachine\Business\Model\ExampleStateMachineItemReader
-     */
     public function createExampleStateMachineItemReader(): ExampleStateMachineItemReader
     {
         return new ExampleStateMachineItemReader($this->getQueryContainer());

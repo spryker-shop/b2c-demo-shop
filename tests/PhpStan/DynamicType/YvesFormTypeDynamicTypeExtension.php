@@ -23,9 +23,6 @@ class YvesFormTypeDynamicTypeExtension extends AbstractSprykerDynamicTypeExtensi
         'getQueryContainer' => true,
     ];
 
-    /**
-     * @return string
-     */
     public function getClass(): string
     {
         return AbstractType::class;

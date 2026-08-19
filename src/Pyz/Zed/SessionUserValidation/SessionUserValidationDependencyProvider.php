@@ -17,17 +17,11 @@ use Spryker\Zed\SessionUserValidationExtension\Dependency\Plugin\SessionUserVali
 
 class SessionUserValidationDependencyProvider extends SprykerSessionUserValidationDependencyProvider
 {
-    /**
-     * @return \Spryker\Zed\SessionUserValidationExtension\Dependency\Plugin\SessionUserSaverPluginInterface
-     */
     protected function getSessionUserSaverPlugin(): SessionUserSaverPluginInterface
     {
         return new SessionRedisSessionUserSaverPlugin();
     }
 
-    /**
-     * @return \Spryker\Zed\SessionUserValidationExtension\Dependency\Plugin\SessionUserValidatorPluginInterface
-     */
     protected function getSessionUserValidatorPlugin(): SessionUserValidatorPluginInterface
     {
         return new SessionRedisSessionUserValidatorPlugin();

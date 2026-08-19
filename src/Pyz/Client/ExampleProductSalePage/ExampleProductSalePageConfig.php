@@ -14,9 +14,6 @@ use Spryker\Client\Kernel\AbstractBundleConfig;
 
 class ExampleProductSalePageConfig extends AbstractBundleConfig
 {
-    /**
-     * @return string
-     */
     public function getLabelSaleName(): string
     {
         return SharedExampleProductSaleConfig::DEFAULT_LABEL_NAME;

@@ -49,8 +49,6 @@ class TestStateMachineHandlerPlugin extends AbstractPlugin implements StateMachi
 
     /**
      * Name of state machine used by this handler.
-     *
-     * @return string
      */
     public function getStateMachineName(): string
     {
@@ -75,8 +73,6 @@ class TestStateMachineHandlerPlugin extends AbstractPlugin implements StateMachi
      * @param string $processName
      *
      * @throws \InvalidArgumentException
-     *
-     * @return string
      */
     public function getInitialStateForProcess($processName): string // phpcs:ignore
     {
@@ -96,10 +92,6 @@ class TestStateMachineHandlerPlugin extends AbstractPlugin implements StateMachi
     /**
      * This method is called when state of item was changed, client can create custom logic for example update it's related table with new state id/name.
      * StateMachineItemTransfer:identifier is id of entity from implementor.
-     *
-     * @param \Generated\Shared\Transfer\StateMachineItemTransfer $stateMachineItemTransfer
-     *
-     * @return bool
      */
     public function itemStateUpdated(StateMachineItemTransfer $stateMachineItemTransfer): bool
     {

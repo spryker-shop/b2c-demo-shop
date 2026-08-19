@@ -219,9 +219,6 @@ abstract class ProductTestAbstract extends Unit
      */
     protected $storeFacade;
 
-    /**
-     * @return void
-     */
     protected function setUp(): void
     {
         parent::setUp();
@@ -261,9 +258,6 @@ abstract class ProductTestAbstract extends Unit
         );
     }
 
-    /**
-     * @return void
-     */
     protected function setupLocales(): void
     {
         $this->locales['de_DE'] = new LocaleTransfer();
@@ -273,9 +267,6 @@ abstract class ProductTestAbstract extends Unit
         $this->locales['en_US']->setIdLocale(66)->setIsActive(true)->setLocaleName('en_US');
     }
 
-    /**
-     * @return void
-     */
     protected function setupProductAbstract(): void
     {
         $this->productAbstractTransfer = new ProductAbstractTransfer();
@@ -294,9 +285,6 @@ abstract class ProductTestAbstract extends Unit
         $this->productAbstractTransfer->setStoreRelation((new StoreRelationTransfer())->setIdStores([]));
     }
 
-    /**
-     * @return void
-     */
     protected function setupProductConcrete(): void
     {
         $this->productConcreteTransfer = new ProductConcreteTransfer();
@@ -313,9 +301,6 @@ abstract class ProductTestAbstract extends Unit
         $this->productConcreteTransfer->addLocalizedAttributes($localizedAttribute);
     }
 
-    /**
-     * @return void
-     */
     protected function setupTaxes(): void
     {
         $taxSet = new SpyTaxSet();
@@ -333,9 +318,6 @@ abstract class ProductTestAbstract extends Unit
         $this->productAbstractTransfer->setIdTaxSet($taxSet->getIdTaxSet());
     }
 
-    /**
-     * @return void
-     */
     protected function setupStocks(): void
     {
         $stockEntity = new SpyStock();
@@ -349,9 +331,6 @@ abstract class ProductTestAbstract extends Unit
         $this->productConcreteTransfer->setStocks(new ArrayObject($stock));
     }
 
-    /**
-     * @return void
-     */
     protected function setupPluginImages(): void
     {
         $imageSetTransfer = (new ProductImageSetTransfer())
@@ -374,9 +353,6 @@ abstract class ProductTestAbstract extends Unit
         );
     }
 
-    /**
-     * @return void
-     */
     protected function setupPluginPrices(): void
     {
         $currencyTransfer = $this->currencyFacade->fromIsoCode(static::CURRENCY_ISO_CODE);
@@ -407,35 +383,21 @@ abstract class ProductTestAbstract extends Unit
         $this->productConcreteTransfer->addPrice($priceProductTransfer2);
     }
 
-    /**
-     * @return void
-     */
     protected function setupAbstractPluginData(): void
     {
         $this->setupTaxes();
     }
 
-    /**
-     * @return void
-     */
     protected function setupConcretePluginData(): void
     {
         $this->setupStocks();
     }
 
-    /**
-     * @return void
-     */
     protected function setupDefaultProducts(): void
     {
         $this->productManager->addProduct($this->productAbstractTransfer, [$this->productConcreteTransfer]);
     }
 
-    /**
-     * @param int $idProductAbstract
-     *
-     * @return \Orm\Zed\Product\Persistence\SpyProductAbstract
-     */
     protected function getProductAbstractEntityById(int $idProductAbstract): SpyProductAbstract
     {
         return $this->productQueryContainer
@@ -444,11 +406,6 @@ abstract class ProductTestAbstract extends Unit
             ->findOne();
     }
 
-    /**
-     * @param int $idProductAbstract
-     *
-     * @return \Orm\Zed\Product\Persistence\SpyProduct
-     */
     protected function getProductConcreteEntityByAbstractId(int $idProductAbstract): SpyProduct
     {
         return $this->productQueryContainer

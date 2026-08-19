@@ -21,9 +21,6 @@ class ClientDynamicTypeExtension extends AbstractSprykerDynamicTypeExtension imp
         'getFactory' => true,
     ];
 
-    /**
-     * @return string
-     */
     public function getClass(): string
     {
         return AbstractClient::class;

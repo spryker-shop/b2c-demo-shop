@@ -99,8 +99,6 @@ class CatalogDependencyProvider extends SprykerCatalogDependencyProvider
 
     /**
      * @phpstan-return \Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface
-     *
-     * @return \Spryker\Client\Search\Dependency\Plugin\QueryInterface
      */
     protected function createCatalogSearchQueryPlugin(): QueryInterface
     {

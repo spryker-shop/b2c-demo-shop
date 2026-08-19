@@ -15,8 +15,6 @@ class CustomerConfig extends SprykerCustomerConfig
 {
     /**
      * @api
-     *
-     * @return bool
      */
     public function isDoubleOptInEnabled(): bool
     {

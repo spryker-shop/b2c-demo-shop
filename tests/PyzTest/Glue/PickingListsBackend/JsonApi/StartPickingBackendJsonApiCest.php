@@ -61,16 +61,8 @@ class StartPickingBackendJsonApiCest
      */
     protected const ERROR_DETAIL_PICKED_BY_ANOTHER_USER = 'Picklist is already being picked by another user.';
 
-    /**
-     * @var \PyzTest\Glue\PickingListsBackend\JsonApi\Fixtures\StartPickingBackendJsonApiFixtures
-     */
     protected StartPickingBackendJsonApiFixtures $fixtures;
 
-    /**
-     * @param \PyzTest\Glue\PickingListsBackend\PickingListsBackendApiTester $I
-     *
-     * @return void
-     */
     public function loadFixtures(PickingListsBackendApiTester $I): void
     {
         /** @var \PyzTest\Glue\PickingListsBackend\JsonApi\Fixtures\StartPickingBackendJsonApiFixtures $fixtures */
@@ -80,10 +72,6 @@ class StartPickingBackendJsonApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\PickingListsBackend\PickingListsBackendApiTester $I
-     *
-     * @return void
      */
     public function requestAssignsWarehouseUserToPickingList(PickingListsBackendApiTester $I): void
     {
@@ -121,10 +109,6 @@ class StartPickingBackendJsonApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\PickingListsBackend\PickingListsBackendApiTester $I
-     *
-     * @return void
      */
     public function requestReturnsPickingListResponseWhenWarehouseUserAlreadyAssignedToPickingListWithPickingStartedStatus(
         PickingListsBackendApiTester $I,
@@ -163,10 +147,6 @@ class StartPickingBackendJsonApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\PickingListsBackend\PickingListsBackendApiTester $I
-     *
-     * @return void
      */
     public function requestReturnsPickingListResponseWhenWarehouseUserAlreadyAssignedToPickingListWithPickingFinishedStatus(
         PickingListsBackendApiTester $I,
@@ -205,10 +185,6 @@ class StartPickingBackendJsonApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\PickingListsBackend\PickingListsBackendApiTester $I
-     *
-     * @return void
      */
     public function requestReturnsNotFoundErrorWhenUserDoNotHaveWarehouseAssignment(PickingListsBackendApiTester $I): void
     {
@@ -232,10 +208,6 @@ class StartPickingBackendJsonApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\PickingListsBackend\PickingListsBackendApiTester $I
-     *
-     * @return void
      */
     public function requestReturnsNotFoundErrorWhenUserWarehouseAssignmentIsInactive(PickingListsBackendApiTester $I): void
     {
@@ -259,10 +231,6 @@ class StartPickingBackendJsonApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\PickingListsBackend\PickingListsBackendApiTester $I
-     *
-     * @return void
      */
     public function requestReturnsNotFoundErrorWhenUserIsNotWarehouseUser(PickingListsBackendApiTester $I): void
     {
@@ -286,10 +254,6 @@ class StartPickingBackendJsonApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\PickingListsBackend\PickingListsBackendApiTester $I
-     *
-     * @return void
      */
     public function requestReturnsNotFoundErrorWhenNonExistingPickingListUuidIsProvided(PickingListsBackendApiTester $I): void
     {
@@ -313,10 +277,6 @@ class StartPickingBackendJsonApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\PickingListsBackend\PickingListsBackendApiTester $I
-     *
-     * @return void
      */
     public function requestReturnsConflictErrorWhenPickingListIsAlreadyAssignedToAnotherWarehouseUser(PickingListsBackendApiTester $I): void
     {
@@ -346,10 +306,6 @@ class StartPickingBackendJsonApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\PickingListsBackend\PickingListsBackendApiTester $I
-     *
-     * @return void
      */
     public function requestReturnsUnauthorizedErrorResponseWhenAuthTokenIsNotProvided(PickingListsBackendApiTester $I): void
     {

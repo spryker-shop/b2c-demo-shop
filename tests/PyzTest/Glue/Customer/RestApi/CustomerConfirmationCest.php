@@ -30,21 +30,10 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class CustomerConfirmationCest
 {
-    /**
-     * @var \PyzTest\Glue\Customer\RestApi\CustomerRestApiFixtures
-     */
     protected CustomerRestApiFixtures $fixtures;
 
-    /**
-     * @var \Generated\Shared\Transfer\CustomerTransfer
-     */
     protected CustomerTransfer $customerTransfer;
 
-    /**
-     * @param \PyzTest\Glue\Customer\CustomerApiTester $I
-     *
-     * @return void
-     */
     public function _before(CustomerApiTester $I): void
     {
         /** @var \PyzTest\Glue\Customer\RestApi\CustomerRestApiFixtures $fixtures */
@@ -61,11 +50,6 @@ class CustomerConfirmationCest
         );
     }
 
-    /**
-     * @param \PyzTest\Glue\Customer\CustomerApiTester $I
-     *
-     * @return void
-     */
     public function requestPostCustomerConfirmationActivatesCustomerProfile(CustomerApiTester $I): void
     {
         // Arrange
@@ -87,11 +71,6 @@ class CustomerConfirmationCest
         $I->seeResponseCodeIs(HttpCode::NO_CONTENT);
     }
 
-    /**
-     * @param \PyzTest\Glue\Customer\CustomerApiTester $I
-     *
-     * @return void
-     */
     public function requestPostCustomerConfirmationFailsOnUsedConfirmationCode(CustomerApiTester $I): void
     {
         // Arrange
@@ -122,11 +101,6 @@ class CustomerConfirmationCest
         $I->seeResponseErrorsHaveDetail(CustomersRestApiConfig::RESPONSE_MESSAGE_CONFIRMATION_CODE_INVALID);
     }
 
-    /**
-     * @param \PyzTest\Glue\Customer\CustomerApiTester $I
-     *
-     * @return void
-     */
     public function requestPostCustomerConfirmationFailsOnEmptyConfirmationCode(CustomerApiTester $I): void
     {
         // Arrange

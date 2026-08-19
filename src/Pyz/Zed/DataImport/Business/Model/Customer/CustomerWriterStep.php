@@ -23,11 +23,6 @@ class CustomerWriterStep implements DataImportStepInterface
      */
     public const COL_CUSTOMER_REFERENCE = 'customer_reference';
 
-    /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     *
-     * @return void
-     */
     public function execute(DataSetInterface $dataSet): void
     {
         $customerEntity = SpyCustomerQuery::create()
@@ -51,11 +46,7 @@ class CustomerWriterStep implements DataImportStepInterface
     }
 
     /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     *
      * @throws \Pyz\Zed\DataImport\Business\Exception\InvalidDataException
-     *
-     * @return int
      */
     protected function getCurrentId(DataSetInterface $dataSet): int
     {

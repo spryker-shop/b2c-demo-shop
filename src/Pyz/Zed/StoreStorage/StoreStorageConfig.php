@@ -19,9 +19,6 @@ use Spryker\Zed\StoreStorage\StoreStorageConfig as SprykerStoreStorageConfig;
 
 class StoreStorageConfig extends SprykerStoreStorageConfig
 {
-    /**
-     * @return string|null
-     */
     public function getStoreSynchronizationPoolName(): ?string
     {
         return SynchronizationConfig::DEFAULT_SYNCHRONIZATION_POOL_NAME;
@@ -33,11 +30,11 @@ class StoreStorageConfig extends SprykerStoreStorageConfig
     public function getStoreCreationResourcesToReSync(): array
     {
         return [
-            GlossaryStorageConfig::TRANSLATION_RESOURCE_NAME,
-            ProductReviewSearchConfig::PRODUCT_REVIEW_RESOURCE_NAME,
-            NavigationStorageConstants::RESOURCE_NAME,
-            CustomerAccessStorageConstants::CUSTOMER_ACCESS_RESOURCE_NAME,
-            SalesReturnSearchConfig::RETURN_REASON_RESOURCE_NAME,
+        GlossaryStorageConfig::TRANSLATION_RESOURCE_NAME,
+        ProductReviewSearchConfig::PRODUCT_REVIEW_RESOURCE_NAME,
+        NavigationStorageConstants::RESOURCE_NAME,
+        CustomerAccessStorageConstants::CUSTOMER_ACCESS_RESOURCE_NAME,
+        SalesReturnSearchConfig::RETURN_REASON_RESOURCE_NAME,
         ];
     }
 }

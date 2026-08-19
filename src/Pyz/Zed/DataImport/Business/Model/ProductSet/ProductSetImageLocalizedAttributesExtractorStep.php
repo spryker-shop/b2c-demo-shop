@@ -20,11 +20,6 @@ class ProductSetImageLocalizedAttributesExtractorStep implements DataImportStepI
      */
     public const KEY_IMAGE_ALT_TEXT_LOCALIZED_ATTRIBUTES = 'imageAltTextLocalizedAttributes';
 
-    /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     *
-     * @return void
-     */
     public function execute(DataSetInterface $dataSet): void
     {
         $imageAltTextLocalizedAttributes = [];

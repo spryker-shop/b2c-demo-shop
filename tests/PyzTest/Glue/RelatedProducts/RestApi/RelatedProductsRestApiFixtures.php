@@ -31,37 +31,20 @@ use SprykerTest\Shared\Testify\Fixtures\FixturesContainerInterface;
  */
 class RelatedProductsRestApiFixtures implements FixturesBuilderInterface, FixturesContainerInterface
 {
-    /**
-     * @var \Generated\Shared\Transfer\ProductConcreteTransfer
-     */
     protected ProductConcreteTransfer $productConcreteTransfer;
 
-    /**
-     * @var \Generated\Shared\Transfer\ProductConcreteTransfer
-     */
     protected ProductConcreteTransfer $anotherProductConcreteTransfer;
 
-    /**
-     * @return \Generated\Shared\Transfer\ProductConcreteTransfer
-     */
     public function getProductConcreteTransfer(): ProductConcreteTransfer
     {
         return $this->productConcreteTransfer;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\ProductConcreteTransfer
-     */
     public function getAnotherProductConcreteTransfer(): ProductConcreteTransfer
     {
         return $this->anotherProductConcreteTransfer;
     }
 
-    /**
-     * @param \PyzTest\Glue\RelatedProducts\RelatedProductsApiTester $I
-     *
-     * @return \SprykerTest\Shared\Testify\Fixtures\FixturesContainerInterface
-     */
     public function buildFixtures(RelatedProductsApiTester $I): FixturesContainerInterface
     {
         $this->createRelationBetweenProducts($I);
@@ -69,11 +52,6 @@ class RelatedProductsRestApiFixtures implements FixturesBuilderInterface, Fixtur
         return $this;
     }
 
-    /**
-     * @param \PyzTest\Glue\RelatedProducts\RelatedProductsApiTester $I
-     *
-     * @return void
-     */
     protected function createRelationBetweenProducts(RelatedProductsApiTester $I): void
     {
         $storeTransfer = $I->haveStore([

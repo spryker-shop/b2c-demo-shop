@@ -17,9 +17,6 @@ class MessageBrokerHelper extends Module
 {
     use DependencyProviderHelperTrait;
 
-    /**
-     * @return void
-     */
     public function setupMessageBrokerPlugins(): void
     {
         $this->getDependencyProviderHelper()->setDependency(MessageBrokerDependencyProvider::PLUGINS_EXTERNAL_VALIDATOR, []);

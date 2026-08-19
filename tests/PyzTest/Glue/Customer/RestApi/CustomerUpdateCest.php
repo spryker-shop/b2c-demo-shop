@@ -32,21 +32,10 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class CustomerUpdateCest
 {
-    /**
-     * @var \PyzTest\Glue\Customer\RestApi\CustomerRestApiFixtures
-     */
     protected CustomerRestApiFixtures $fixtures;
 
-    /**
-     * @var \Generated\Shared\Transfer\CustomerTransfer
-     */
     protected CustomerTransfer $customerTransfer;
 
-    /**
-     * @param \PyzTest\Glue\Customer\CustomerApiTester $I
-     *
-     * @return void
-     */
     public function _before(CustomerApiTester $I): void
     {
         /** @var \PyzTest\Glue\Customer\RestApi\CustomerRestApiFixtures $fixtures */
@@ -66,11 +55,6 @@ class CustomerUpdateCest
         $I->amBearerAuthenticated($oauthResponseTransfer->getAccessToken());
     }
 
-    /**
-     * @param \PyzTest\Glue\Customer\CustomerApiTester $I
-     *
-     * @return void
-     */
     public function requestPatchCustomerUpdatesCustomerProfile(CustomerApiTester $I): void
     {
         // Arrange
@@ -130,11 +114,6 @@ class CustomerUpdateCest
             );
     }
 
-    /**
-     * @param \PyzTest\Glue\Customer\CustomerApiTester $I
-     *
-     * @return void
-     */
     public function requestPatchCustomerFailsToUseAnotherCustomersEmail(CustomerApiTester $I): void
     {
         // Arrange
@@ -178,11 +157,6 @@ class CustomerUpdateCest
         $I->seeResponseErrorsHaveDetail(CustomersRestApiConfig::RESPONSE_MESSAGE_CUSTOMER_ALREADY_EXISTS);
     }
 
-    /**
-     * @param \PyzTest\Glue\Customer\CustomerApiTester $I
-     *
-     * @return void
-     */
     public function requestPatchCustomerFailsToUseAnotherCustomersCustomerReference(CustomerApiTester $I): void
     {
         // Arrange
@@ -226,11 +200,6 @@ class CustomerUpdateCest
         $I->seeResponseErrorsHaveDetail(CustomersRestApiConfig::RESPONSE_DETAILS_CUSTOMER_UNAUTHORIZED);
     }
 
-    /**
-     * @param \PyzTest\Glue\Customer\CustomerApiTester $I
-     *
-     * @return void
-     */
     public function requestPatchCustomerFailsWithoutCustomerReference(CustomerApiTester $I): void
     {
         // Arrange
@@ -267,11 +236,6 @@ class CustomerUpdateCest
         $I->seeResponseErrorsHaveDetail('Resource id is not specified.');
     }
 
-    /**
-     * @param \PyzTest\Glue\Customer\CustomerApiTester $I
-     *
-     * @return void
-     */
     public function requestPatchCustomerFailsWhenPasswordsDoNotMatch(CustomerApiTester $I): void
     {
         // Arrange
@@ -315,11 +279,6 @@ class CustomerUpdateCest
 
     /**
      * @dataProvider requestPatchCustomerFailsValidationDataProvider
-     *
-     * @param \PyzTest\Glue\Customer\CustomerApiTester $I
-     * @param \Codeception\Example $example
-     *
-     * @return void
      */
     public function requestPatchCustomerFailsValidation(CustomerApiTester $I, Example $example): void
     {
@@ -353,9 +312,6 @@ class CustomerUpdateCest
         }
     }
 
-    /**
-     * @return array
-     */
     protected function requestPatchCustomerFailsValidationDataProvider(): array
     {
         return [

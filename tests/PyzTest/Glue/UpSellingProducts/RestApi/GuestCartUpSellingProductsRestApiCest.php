@@ -26,16 +26,8 @@ use Spryker\Glue\CartsRestApi\CartsRestApiConfig;
  */
 class GuestCartUpSellingProductsRestApiCest
 {
-    /**
-     * @var \PyzTest\Glue\UpSellingProducts\RestApi\GuestCartUpSellingProductsRestApiFixtures
-     */
     protected GuestCartUpSellingProductsRestApiFixtures $fixtures;
 
-    /**
-     * @param \PyzTest\Glue\UpSellingProducts\UpSellingProductsApiTester $I
-     *
-     * @return void
-     */
     public function loadFixtures(UpSellingProductsApiTester $I): void
     {
         /** @var \PyzTest\Glue\UpSellingProducts\RestApi\GuestCartUpSellingProductsRestApiFixtures $fixtures */
@@ -46,10 +38,6 @@ class GuestCartUpSellingProductsRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\UpSellingProducts\UpSellingProductsApiTester $I
-     *
-     * @return void
      */
     public function requestGuestCartUpSellingProductsByNotExistingCartUuid(UpSellingProductsApiTester $I): void
     {

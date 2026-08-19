@@ -20,19 +20,11 @@ class ExampleStateMachineItemSaver
      */
     protected $exampleStateMachineQueryContainer;
 
-    /**
-     * @param \Pyz\Zed\ExampleStateMachine\Persistence\ExampleStateMachineQueryContainerInterface $exampleStateMachineQueryContainer
-     */
     public function __construct(ExampleStateMachineQueryContainerInterface $exampleStateMachineQueryContainer)
     {
         $this->exampleStateMachineQueryContainer = $exampleStateMachineQueryContainer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\StateMachineItemTransfer $stateMachineItemTransfer
-     *
-     * @return bool
-     */
     public function updateItemState(StateMachineItemTransfer $stateMachineItemTransfer): bool
     {
         $exampleStateMachineItemEntity = $this->exampleStateMachineQueryContainer
@@ -45,9 +37,6 @@ class ExampleStateMachineItemSaver
         return $affectedRowCount > 0;
     }
 
-    /**
-     * @return bool
-     */
     public function createExampleItem(): bool
     {
         $exampleStateMachineItemEntity = new ExampleStateMachineItem();

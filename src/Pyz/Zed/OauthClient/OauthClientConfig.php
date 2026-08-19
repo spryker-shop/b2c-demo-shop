@@ -15,8 +15,6 @@ class OauthClientConfig extends SprykerOauthClientConfig
 {
     /**
      * @api
-     *
-     * @return bool
      */
     public function isAccessTokenRequestExpandedByMessageAttributes(): bool
     {

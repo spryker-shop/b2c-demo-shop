@@ -49,50 +49,27 @@ class GuestCartsRestApiFixtures implements FixturesBuilderInterface, FixturesCon
      */
     public const ANONYMOUS_PREFIX = 'anonymous:';
 
-    /**
-     * @var \Generated\Shared\Transfer\ProductConcreteTransfer
-     */
     protected ProductConcreteTransfer $productConcreteTransfer;
 
-    /**
-     * @var \Generated\Shared\Transfer\ProductConcreteTransfer
-     */
     protected ProductConcreteTransfer $productConcreteTransfer1;
 
-    /**
-     * @var \Generated\Shared\Transfer\ProductConcreteTransfer
-     */
     protected ProductConcreteTransfer $productConcreteTransfer2;
 
-    /**
-     * @return \Generated\Shared\Transfer\ProductConcreteTransfer
-     */
     public function getProductConcreteTransfer(): ProductConcreteTransfer
     {
         return $this->productConcreteTransfer;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\ProductConcreteTransfer
-     */
     public function getProductConcreteTransfer1(): ProductConcreteTransfer
     {
         return $this->productConcreteTransfer1;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\ProductConcreteTransfer
-     */
     public function getProductConcreteTransfer2(): ProductConcreteTransfer
     {
         return $this->productConcreteTransfer2;
     }
 
-    /**
-     * @param \PyzTest\Glue\Carts\CartsApiTester $I
-     *
-     * @return \SprykerTest\Shared\Testify\Fixtures\FixturesContainerInterface
-     */
     public function buildFixtures(CartsApiTester $I): FixturesContainerInterface
     {
         $I->truncateSalesOrderThresholds();

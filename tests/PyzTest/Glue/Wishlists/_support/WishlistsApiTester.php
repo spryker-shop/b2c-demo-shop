@@ -36,8 +36,6 @@ class WishlistsApiTester extends ApiEndToEndTester
 
     /**
      * @param array<string> $includes
-     *
-     * @return string
      */
     public function formatQueryInclude(array $includes = []): string
     {
@@ -50,8 +48,6 @@ class WishlistsApiTester extends ApiEndToEndTester
 
     /**
      * @param array<string> $includes
-     *
-     * @return string
      */
     public function buildWishlistsUrl(array $includes = []): string
     {
@@ -64,10 +60,7 @@ class WishlistsApiTester extends ApiEndToEndTester
     }
 
     /**
-     * @param string $wishlistUuid
      * @param array<string> $includes
-     *
-     * @return string
      */
     public function buildWishlistUrl(string $wishlistUuid, array $includes = []): string
     {
@@ -81,11 +74,7 @@ class WishlistsApiTester extends ApiEndToEndTester
     }
 
     /**
-     * @param string $wishlistUuid
-     * @param string $productConcreteSku
      * @param array<string> $includes
-     *
-     * @return string
      */
     public function buildWishlistItemUrl(string $wishlistUuid, string $productConcreteSku, array $includes = []): string
     {
@@ -101,10 +90,7 @@ class WishlistsApiTester extends ApiEndToEndTester
     }
 
     /**
-     * @param string $productConcreteSku
      * @param array<string> $includes
-     *
-     * @return string
      */
     public function buildProductConcreteUrl(string $productConcreteSku, array $includes = []): string
     {

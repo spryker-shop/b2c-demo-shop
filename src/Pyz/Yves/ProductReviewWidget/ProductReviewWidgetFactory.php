@@ -18,8 +18,6 @@ class ProductReviewWidgetFactory extends SprykerShopProductReviewWidgetFactory
 {
     /**
      * @param int $idProductAbstract
-     *
-     * @return \Symfony\Component\Form\FormInterface
      */
     public function createProductReviewForm($idProductAbstract): FormInterface // phpcs:ignore
     {
@@ -32,9 +30,6 @@ class ProductReviewWidgetFactory extends SprykerShopProductReviewWidgetFactory
         );
     }
 
-    /**
-     * @return \Spryker\Client\GlossaryStorage\GlossaryStorageClient
-     */
     public function getGlossaryClient(): GlossaryStorageClient
     {
         return $this->getProvidedDependency(ProductReviewWidgetDependencyProvider::CLIENT_GLOSSARY_STORAGE);

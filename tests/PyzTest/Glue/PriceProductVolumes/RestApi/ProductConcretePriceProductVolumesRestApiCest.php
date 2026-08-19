@@ -27,16 +27,8 @@ use Spryker\Glue\ProductsRestApi\ProductsRestApiConfig;
  */
 class ProductConcretePriceProductVolumesRestApiCest
 {
-    /**
-     * @var \PyzTest\Glue\PriceProductVolumes\RestApi\Fixtures\PriceProductVolumesRestApiFixtures
-     */
     protected PriceProductVolumesRestApiFixtures $fixtures;
 
-    /**
-     * @param \PyzTest\Glue\PriceProductVolumes\PriceProductVolumesApiTester $I
-     *
-     * @return void
-     */
     public function loadFixtures(PriceProductVolumesApiTester $I): void
     {
         /** @var \PyzTest\Glue\PriceProductVolumes\RestApi\Fixtures\PriceProductVolumesRestApiFixtures $fixtures */
@@ -47,10 +39,6 @@ class ProductConcretePriceProductVolumesRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\PriceProductVolumes\PriceProductVolumesApiTester $I
-     *
-     * @return void
      */
     public function requestConcreteProductPrices(PriceProductVolumesApiTester $I): void
     {

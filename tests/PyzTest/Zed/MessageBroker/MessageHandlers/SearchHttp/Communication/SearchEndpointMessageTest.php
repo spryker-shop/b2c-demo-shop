@@ -26,14 +26,8 @@ use PyzTest\Zed\MessageBroker\SearchHttpCommunicationTester;
  */
 class SearchEndpointMessageTest extends Unit
 {
-    /**
-     * @var \PyzTest\Zed\MessageBroker\SearchHttpCommunicationTester
-     */
     protected SearchHttpCommunicationTester $tester;
 
-    /**
-     * @return void
-     */
     public function testSearchEndpointAvailableMessageIsSuccessfullyHandled(): void
     {
         // Arrange
@@ -47,9 +41,6 @@ class SearchEndpointMessageTest extends Unit
         $this->tester->assertSearchHttpConfigExistsForStore();
     }
 
-    /**
-     * @return void
-     */
     public function testSearchEndpointRemovedMessageIsSuccessfullyHandled(): void
     {
         // Arrange

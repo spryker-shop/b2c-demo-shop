@@ -92,9 +92,6 @@ class CategoryDependencyProvider extends SprykerDependencyProvider
         ];
     }
 
-    /**
-     * @return \Spryker\Zed\CategoryExtension\Dependency\Plugin\CategoryStoreAssignerPluginInterface
-     */
     protected function getCategoryStoreAssignerPlugin(): CategoryStoreAssignerPluginInterface
     {
         return new MainChildrenPropagationCategoryStoreAssignerPlugin();

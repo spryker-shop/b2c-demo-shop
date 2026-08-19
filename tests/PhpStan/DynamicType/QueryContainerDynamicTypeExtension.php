@@ -21,9 +21,6 @@ class QueryContainerDynamicTypeExtension extends AbstractSprykerDynamicTypeExten
         'getFactory' => true,
     ];
 
-    /**
-     * @return string
-     */
     public function getClass(): string
     {
         return AbstractQueryContainer::class;

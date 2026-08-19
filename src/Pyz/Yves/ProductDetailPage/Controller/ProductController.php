@@ -21,7 +21,6 @@ class ProductController extends SprykerShopProductController
 {
     /**
      * @param array<mixed> $productData
-     * @param \Symfony\Component\HttpFoundation\Request $request
      *
      * @return array<mixed>
      */

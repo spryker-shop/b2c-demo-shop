@@ -46,63 +46,34 @@ class ConvertGuestCartToCustomerCartRestApiFixtures implements FixturesBuilderIn
      */
     protected const ANONYMOUS_PREFIX = 'anonymous:';
 
-    /**
-     * @var \Generated\Shared\Transfer\ProductConcreteTransfer
-     */
     protected ProductConcreteTransfer $productConcreteTransfer;
 
-    /**
-     * @var \Generated\Shared\Transfer\CustomerTransfer
-     */
     protected CustomerTransfer $customerTransfer;
 
-    /**
-     * @var string
-     */
     protected string $guestCustomerReference;
 
-    /**
-     * @var \Generated\Shared\Transfer\QuoteTransfer
-     */
     protected QuoteTransfer $guestQuoteTransfer;
 
-    /**
-     * @return \Generated\Shared\Transfer\ProductConcreteTransfer
-     */
     public function getProductConcreteTransfer(): ProductConcreteTransfer
     {
         return $this->productConcreteTransfer;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\CustomerTransfer
-     */
     public function getCustomerTransfer(): CustomerTransfer
     {
         return $this->customerTransfer;
     }
 
-    /**
-     * @return string
-     */
     public function getGuestCustomerReference(): string
     {
         return $this->guestCustomerReference;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\QuoteTransfer
-     */
     public function getGuestQuoteTransfer(): QuoteTransfer
     {
         return $this->guestQuoteTransfer;
     }
 
-    /**
-     * @param \PyzTest\Glue\Carts\CartsApiTester $I
-     *
-     * @return \SprykerTest\Shared\Testify\Fixtures\FixturesContainerInterface
-     */
     public function buildFixtures(CartsApiTester $I): FixturesContainerInterface
     {
         $I->truncateSalesOrderThresholds();
@@ -113,11 +84,6 @@ class ConvertGuestCartToCustomerCartRestApiFixtures implements FixturesBuilderIn
         return $this;
     }
 
-    /**
-     * @param \PyzTest\Glue\Carts\CartsApiTester $I
-     *
-     * @return void
-     */
     protected function createGuestQuote(CartsApiTester $I): void
     {
         $this->productConcreteTransfer = $this->createProduct($I);
@@ -127,11 +93,6 @@ class ConvertGuestCartToCustomerCartRestApiFixtures implements FixturesBuilderIn
         $this->guestQuoteTransfer = $this->createPersistentQuote($I, $guestCustomerTransfer, [$this->productConcreteTransfer]);
     }
 
-    /**
-     * @param \PyzTest\Glue\Carts\CartsApiTester $I
-     *
-     * @return void
-     */
     protected function createCustomer(CartsApiTester $I): void
     {
         $customerTransfer = $I->haveCustomer([

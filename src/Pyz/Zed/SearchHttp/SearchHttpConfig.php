@@ -14,9 +14,6 @@ use Spryker\Zed\SearchHttp\SearchHttpConfig as SprykerSearchHttpConfig;
 
 class SearchHttpConfig extends SprykerSearchHttpConfig
 {
-    /**
-     * @return string|null
-     */
     public function getSearchHttpSynchronizationPoolName(): ?string
     {
         return SynchronizationConfig::DEFAULT_SYNCHRONIZATION_POOL_NAME;

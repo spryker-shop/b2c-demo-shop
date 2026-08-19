@@ -32,16 +32,8 @@ class ConvertGuestCartToCustomerCartRestApiCest
      */
     protected const ANONYMOUS_PREFIX = 'anonymous:';
 
-    /**
-     * @var \PyzTest\Glue\Carts\RestApi\Fixtures\ConvertGuestCartToCustomerCartRestApiFixtures
-     */
     protected ConvertGuestCartToCustomerCartRestApiFixtures $fixtures;
 
-    /**
-     * @param \PyzTest\Glue\Carts\CartsApiTester $I
-     *
-     * @return void
-     */
     public function loadFixtures(CartsApiTester $I): void
     {
         /** @var \PyzTest\Glue\Carts\RestApi\Fixtures\ConvertGuestCartToCustomerCartRestApiFixtures $fixtures */
@@ -52,10 +44,6 @@ class ConvertGuestCartToCustomerCartRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Carts\CartsApiTester $I
-     *
-     * @return void
      */
     public function requestGuestCartWithXAnonymousAndAuthorizationTokenValidationError(CartsApiTester $I): void
     {
@@ -74,10 +62,6 @@ class ConvertGuestCartToCustomerCartRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Carts\CartsApiTester $I
-     *
-     * @return void
      */
     public function requestGuestCartCollectionIsEmpty(CartsApiTester $I): void
     {
@@ -94,11 +78,6 @@ class ConvertGuestCartToCustomerCartRestApiCest
         $I->seeResponseDataContainsEmptyCollection();
     }
 
-    /**
-     * @param \PyzTest\Glue\Carts\CartsApiTester $I
-     *
-     * @return void
-     */
     protected function authorizeCustomer(CartsApiTester $I): void
     {
         $token = $I->haveAuthorizationToGlue($this->fixtures->getCustomerTransfer())->getAccessToken();
@@ -108,10 +87,6 @@ class ConvertGuestCartToCustomerCartRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Carts\CartsApiTester $I
-     *
-     * @return void
      */
     protected function requestCustomerLoginWithXAnonymousCustomerUniqueIdHeader(CartsApiTester $I): void
     {

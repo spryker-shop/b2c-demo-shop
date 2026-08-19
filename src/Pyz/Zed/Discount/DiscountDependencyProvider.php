@@ -194,9 +194,6 @@ class DiscountDependencyProvider extends SprykerDiscountDependencyProvider
         ];
     }
 
-    /**
-     * @return \Spryker\Zed\Kernel\Communication\Form\FormTypeInterface
-     */
     protected function getStoreRelationFormTypePlugin(): FormTypeInterface
     {
         return new StoreRelationToggleFormTypePlugin();
@@ -212,9 +209,6 @@ class DiscountDependencyProvider extends SprykerDiscountDependencyProvider
         ];
     }
 
-    /**
-     * @return \Spryker\Zed\Kernel\Communication\Form\FormTypeInterface
-     */
     protected function getMoneyCollectionFormTypePlugin(): FormTypeInterface
     {
         return new MoneyCollectionFormTypePlugin();

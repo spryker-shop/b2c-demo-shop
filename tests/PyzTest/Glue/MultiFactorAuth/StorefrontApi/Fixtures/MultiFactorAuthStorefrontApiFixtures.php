@@ -26,16 +26,8 @@ class MultiFactorAuthStorefrontApiFixtures implements FixturesBuilderInterface, 
      */
     protected const MFA_TYPE = 'email';
 
-    /**
-     * @var \Generated\Shared\Transfer\CustomerTransfer
-     */
     protected CustomerTransfer $customerTransfer;
 
-    /**
-     * @param \PyzTest\Glue\MultiFactorAuth\MultiFactorAuthStorefrontApiTester $I
-     *
-     * @return \SprykerTest\Shared\Testify\Fixtures\FixturesContainerInterface
-     */
     public function buildFixtures(MultiFactorAuthStorefrontApiTester $I): FixturesContainerInterface
     {
         $this->customerTransfer = $I->createCustomer(static::TEST_CUSTOMER_NAME);
@@ -43,17 +35,12 @@ class MultiFactorAuthStorefrontApiFixtures implements FixturesBuilderInterface, 
         return $this;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\CustomerTransfer
-     */
     public function getCustomerTransfer(): CustomerTransfer
     {
         return $this->customerTransfer;
     }
 
     /**
-     * @param string $resourceType
-     *
      * @return array<string, mixed>
      */
     public function createRequestPayload(string $resourceType): array
@@ -68,11 +55,6 @@ class MultiFactorAuthStorefrontApiFixtures implements FixturesBuilderInterface, 
         ];
     }
 
-    /**
-     * @param string $resourceName
-     *
-     * @return string
-     */
     public function generateUrl(string $resourceName): string
     {
         return sprintf('/%s', $resourceName);

@@ -23,9 +23,6 @@ class ConsoleDynamicTypeExtension extends AbstractSprykerDynamicTypeExtension im
         'getFactory' => true,
     ];
 
-    /**
-     * @return string
-     */
     public function getClass(): string
     {
         return Console::class;

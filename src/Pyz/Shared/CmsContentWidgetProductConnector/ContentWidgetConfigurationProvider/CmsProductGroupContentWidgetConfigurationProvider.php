@@ -29,9 +29,6 @@ class CmsProductGroupContentWidgetConfigurationProvider extends SprykerCmsProduc
         return $availableTemplates;
     }
 
-    /**
-     * @return string
-     */
     public function getUsageInformation(): string
     {
         return "{{ product_group(['sku1', 'sku2']) }}, to use different template {{ product_group(['sku1', 'sku2'], 'default') }}";

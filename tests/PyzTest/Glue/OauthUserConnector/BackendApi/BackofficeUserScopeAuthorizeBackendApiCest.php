@@ -27,16 +27,8 @@ use Spryker\Glue\PushNotificationsBackendApi\PushNotificationsBackendApiConfig;
  */
 class BackofficeUserScopeAuthorizeBackendApiCest
 {
-    /**
-     * @var \PyzTest\Glue\OauthUserConnector\BackendApi\Fixtures\OauthUserConnectorBackendApiFixtures
-     */
     protected OauthUserConnectorBackendApiFixtures $fixtures;
 
-    /**
-     * @param \PyzTest\Glue\OauthUserConnector\OauthUserConnectorBackendApiTester $I
-     *
-     * @return void
-     */
     public function loadFixtures(OauthUserConnectorBackendApiTester $I): void
     {
         /** @var \PyzTest\Glue\OauthUserConnector\BackendApi\Fixtures\OauthUserConnectorBackendApiFixtures $fixtures */
@@ -47,10 +39,6 @@ class BackofficeUserScopeAuthorizeBackendApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\OauthUserConnector\OauthUserConnectorBackendApiTester $I
-     *
-     * @return void
      */
     public function requestPushNotificationProvidersForBackofficeUserAllowed(OauthUserConnectorBackendApiTester $I): void
     {

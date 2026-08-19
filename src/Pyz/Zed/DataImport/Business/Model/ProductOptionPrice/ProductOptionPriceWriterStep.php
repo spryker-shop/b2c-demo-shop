@@ -63,11 +63,7 @@ class ProductOptionPriceWriterStep extends PublishAwareStep implements DataImpor
     protected static $idCurrencyBuffer = [];
 
     /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     *
      * @throws \Pyz\Zed\DataImport\Business\Exception\InvalidDataException
-     *
-     * @return void
      */
     public function execute(DataSetInterface $dataSet): void
     {
@@ -94,11 +90,6 @@ class ProductOptionPriceWriterStep extends PublishAwareStep implements DataImpor
         $this->publishRelatedProductAbstracts($priceEntity->getFkProductOptionValue());
     }
 
-    /**
-     * @param int $idProductOptionValue
-     *
-     * @return void
-     */
     protected function publishRelatedProductAbstracts(int $idProductOptionValue): void
     {
         $productAbstractCollection = SpyProductAbstractQuery::create()
@@ -119,11 +110,6 @@ class ProductOptionPriceWriterStep extends PublishAwareStep implements DataImpor
         }
     }
 
-    /**
-     * @param string|null $storeName
-     *
-     * @return int|null
-     */
     protected function getIdStore(?string $storeName): ?int
     {
         if ($storeName === '' || $storeName === null) {
@@ -138,11 +124,6 @@ class ProductOptionPriceWriterStep extends PublishAwareStep implements DataImpor
         return static::$idStoreBuffer[$storeName];
     }
 
-    /**
-     * @param string $currencyIsoCode
-     *
-     * @return int
-     */
     protected function getIdCurrency(string $currencyIsoCode): int
     {
         if (!isset(static::$idCurrencyBuffer[$currencyIsoCode])) {
@@ -156,8 +137,6 @@ class ProductOptionPriceWriterStep extends PublishAwareStep implements DataImpor
 
     /**
      * @param string|int|null $price
-     *
-     * @return int|null
      */
     protected function formatPrice($price): ?int
     {

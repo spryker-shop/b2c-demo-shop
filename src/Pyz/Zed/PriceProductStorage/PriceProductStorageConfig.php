@@ -14,17 +14,11 @@ use Spryker\Zed\PriceProductStorage\PriceProductStorageConfig as SprykerPricePro
 
 class PriceProductStorageConfig extends SprykerPriceProductStorageConfig
 {
-    /**
-     * @return string|null
-     */
     public function getPriceProductAbstractEventQueueName(): ?string
     {
         return SprykerSharedPriceProductStorageConfig::PUBLISH_PRICE_PRODUCT_ABSTRACT;
     }
 
-    /**
-     * @return string|null
-     */
     public function getPriceProductConcreteEventQueueName(): ?string
     {
         return SprykerSharedPriceProductStorageConfig::PUBLISH_PRICE_PRODUCT_CONCRETE;

@@ -69,11 +69,6 @@ class DocumentationGeneratorApiDependencyProvider extends SprykerDocumentationGe
         ];
     }
 
-    /**
-     * @param \Spryker\Glue\DocumentationGeneratorApi\Expander\ContextExpanderCollectionInterface $contextExpanderCollection
-     *
-     * @return \Spryker\Glue\DocumentationGeneratorApi\Expander\ContextExpanderCollectionInterface
-     */
     protected function getContextExpanderPlugins(ContextExpanderCollectionInterface $contextExpanderCollection): ContextExpanderCollectionInterface
     {
         $apiApplications = [];
@@ -100,9 +95,6 @@ class DocumentationGeneratorApiDependencyProvider extends SprykerDocumentationGe
         return $contextExpanderCollection;
     }
 
-    /**
-     * @return \Spryker\Glue\DocumentationGeneratorApiExtension\Dependency\Plugin\ContentGeneratorStrategyPluginInterface
-     */
     protected function getContentGeneratorStrategyPlugin(): ContentGeneratorStrategyPluginInterface
     {
         return new DocumentationGeneratorOpenApiContentGeneratorStrategyPlugin();

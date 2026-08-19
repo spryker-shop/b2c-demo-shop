@@ -36,9 +36,6 @@ class PaymentAppWidgetConfig extends SprykerPaymentAppWidgetConfig
         QuoteTransfer::PRE_ORDER_PAYMENT_DATA,
     ];
 
-    /**
-     * @return string
-     */
     public function getExpressCheckoutStartPageRouteName(): string
     {
         return CheckoutPageRouteProviderPlugin::ROUTE_NAME_CHECKOUT_INDEX;

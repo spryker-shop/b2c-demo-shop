@@ -13,12 +13,6 @@ use Codeception\Module;
 
 class LoginHelper extends Module
 {
-    /**
-     * @param string $username
-     * @param string $password
-     *
-     * @return void
-     */
     public function amLoggedInUser(string $username = 'admin@spryker.com', string $password = 'change123'): void
     {
         $i = $this->getClient();

@@ -26,9 +26,6 @@ use Generated\Shared\Transfer\ProductImageTransfer;
  */
 class ProductAbstractManagerTest extends ProductTestAbstract
 {
-    /**
-     * @return void
-     */
     public function testCreateProductAbstractShouldCreateProductAbstractAndTriggerPlugins(): void
     {
         $idProductAbstract = $this->productAbstractManager->createProductAbstract($this->productAbstractTransfer);
@@ -38,9 +35,6 @@ class ProductAbstractManagerTest extends ProductTestAbstract
         $this->assertCreateProductAbstract($this->productAbstractTransfer);
     }
 
-    /**
-     * @return void
-     */
     public function testSaveProductAbstractShouldUpdateProductAbstractAndTriggerPlugins(): void
     {
         $idProductAbstract = $this->productAbstractManager->createProductAbstract($this->productAbstractTransfer);
@@ -58,9 +52,6 @@ class ProductAbstractManagerTest extends ProductTestAbstract
         $this->assertSaveProductAbstract($this->productAbstractTransfer);
     }
 
-    /**
-     * @return void
-     */
     public function testGetProductAbstractByIdShouldReturnFullyLoadedTransferObject(): void
     {
         $this->setupDefaultProducts();
@@ -72,33 +63,23 @@ class ProductAbstractManagerTest extends ProductTestAbstract
         $this->assertReadProductAbstract($productAbstract);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\ProductAbstractTransfer $productAbstractTransfer
-     *
-     * @return void
-     */
     protected function assertCreateProductAbstract(ProductAbstractTransfer $productAbstractTransfer): void
     {
         $createdProductEntity = $this->productQueryContainer
-            ->queryProductAbstract()
-            ->filterByIdProductAbstract($productAbstractTransfer->getIdProductAbstract())
-            ->findOne();
+        ->queryProductAbstract()
+        ->filterByIdProductAbstract($productAbstractTransfer->getIdProductAbstract())
+        ->findOne();
 
         $this->assertNotNull($createdProductEntity);
         $this->assertSame($productAbstractTransfer->getSku(), $createdProductEntity->getSku());
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\ProductAbstractTransfer $productAbstractTransfer
-     *
-     * @return void
-     */
     protected function assertSaveProductAbstract(ProductAbstractTransfer $productAbstractTransfer): void
     {
         $updatedProductEntity = $this->productQueryContainer
-            ->queryProductAbstract()
-            ->filterByIdProductAbstract($productAbstractTransfer->getIdProductAbstract())
-            ->findOne();
+        ->queryProductAbstract()
+        ->filterByIdProductAbstract($productAbstractTransfer->getIdProductAbstract())
+        ->findOne();
 
         $this->assertNotNull($updatedProductEntity);
         $this->assertSame($this->productAbstractTransfer->getSku(), $updatedProductEntity->getSku());
@@ -110,22 +91,12 @@ class ProductAbstractManagerTest extends ProductTestAbstract
         }
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\ProductAbstractTransfer $productAbstractTransfer
-     *
-     * @return void
-     */
     protected function assertReadProductAbstract(ProductAbstractTransfer $productAbstractTransfer): void
     {
         $this->assertProductPrice($productAbstractTransfer);
         $this->assertProductImages($productAbstractTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\ProductAbstractTransfer $productAbstractTransfer
-     *
-     * @return void
-     */
     protected function assertProductPrice(ProductAbstractTransfer $productAbstractTransfer): void
     {
         foreach ($productAbstractTransfer->getPrices() as $priceProductTransfer) {
@@ -135,18 +106,19 @@ class ProductAbstractManagerTest extends ProductTestAbstract
         }
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\ProductAbstractTransfer $productAbstractTransfer
-     *
-     * @return void
-     */
     protected function assertProductImages(ProductAbstractTransfer $productAbstractTransfer): void
     {
-        /** @var array<\Generated\Shared\Transfer\ProductImageSetTransfer> $imageSetCollection */
+        /**
+                 *
+ @var array<\Generated\Shared\Transfer\ProductImageSetTransfer> $imageSetCollection
+                 */
         $imageSetCollection = (array)$productAbstractTransfer->getImageSets();
         $this->assertNotEmpty($imageSetCollection);
 
-        /** @var \Generated\Shared\Transfer\ProductImageSetTransfer $imageSet */
+        /**
+                 *
+ @var \Generated\Shared\Transfer\ProductImageSetTransfer $imageSet
+                 */
         $imageSet = $imageSetCollection[0];
         $this->assertInstanceOf(ProductImageSetTransfer::class, $imageSet);
         $this->assertNotNull($imageSet->getIdProductImageSet());
@@ -155,7 +127,10 @@ class ProductAbstractManagerTest extends ProductTestAbstract
         $productImageCollection = (array)$imageSet->getProductImages();
         $this->assertNotEmpty($imageSetCollection);
 
-        /** @var \Generated\Shared\Transfer\ProductImageTransfer $productImage */
+        /**
+                 *
+ @var \Generated\Shared\Transfer\ProductImageTransfer $productImage
+                 */
         $productImage = $productImageCollection[0];
         $this->assertInstanceOf(ProductImageTransfer::class, $productImage);
         $this->assertSame(self::IMAGE_URL_LARGE, $productImage->getExternalUrlLarge());

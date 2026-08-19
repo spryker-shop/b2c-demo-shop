@@ -26,11 +26,6 @@ class ExampleProductSaleRouteProviderPlugin extends AbstractRouteProviderPlugin
      */
     public const ROUTE_NAME_SALE = 'sale';
 
-    /**
-     * @param \Spryker\Yves\Router\Route\RouteCollection $routeCollection
-     *
-     * @return \Spryker\Yves\Router\Route\RouteCollection
-     */
     public function addRoutes(RouteCollection $routeCollection): RouteCollection
     {
         $route = $this->buildRoute('/outlet{categoryPath}', 'ExampleProductSalePage', 'Sale', 'indexAction');

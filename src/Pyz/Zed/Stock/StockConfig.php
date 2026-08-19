@@ -33,17 +33,11 @@ class StockConfig extends SprykerStockConfig
         ];
     }
 
-    /**
-     * @return bool
-     */
     public function isConditionalStockUpdateApplied(): bool
     {
         return true;
     }
 
-    /**
-     * @return string|null
-     */
     public function getEventQueueName(): ?string
     {
         return PublisherConfig::PUBLISH_QUEUE;

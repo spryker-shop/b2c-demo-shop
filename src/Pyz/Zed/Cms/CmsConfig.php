@@ -13,9 +13,6 @@ use Spryker\Zed\Cms\CmsConfig as SprykerCmsConfig;
 
 class CmsConfig extends SprykerCmsConfig
 {
-    /**
-     * @return bool
-     */
     public function appendPrefixToCmsPageUrl(): bool
     {
         return true;

@@ -42,16 +42,8 @@ class PickingListItemsBackendJsonApiCest
      */
     protected const STATUS_PICKING_FINISHED = 'picking-finished';
 
-    /**
-     * @var \PyzTest\Glue\PickingListsBackend\JsonApi\Fixtures\PickingListItemsBackendJsonApiFixtures
-     */
     protected PickingListItemsBackendJsonApiFixtures $fixtures;
 
-    /**
-     * @param \PyzTest\Glue\PickingListsBackend\PickingListsBackendApiTester $I
-     *
-     * @return void
-     */
     public function loadFixtures(PickingListsBackendApiTester $I): void
     {
         /** @var \PyzTest\Glue\PickingListsBackend\JsonApi\Fixtures\PickingListItemsBackendJsonApiFixtures $fixtures */
@@ -61,10 +53,6 @@ class PickingListItemsBackendJsonApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\PickingListsBackend\PickingListsBackendApiTester $I
-     *
-     * @return void
      */
     public function requestDoesNotChangesPickingListStatusWhenPickingIsNotComplete(
         PickingListsBackendApiTester $I,
@@ -113,10 +101,6 @@ class PickingListItemsBackendJsonApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\PickingListsBackend\PickingListsBackendApiTester $I
-     *
-     * @return void
      */
     public function requestChangesPickingListStatusToPickingFinishedWhenPickingIsComplete(
         PickingListsBackendApiTester $I,

@@ -23,11 +23,6 @@ use PyzTest\Zed\Console\ConsoleConsoleTester;
  */
 class GenerateDataBuildersCest
 {
-    /**
-     * @param \PyzTest\Zed\Console\ConsoleConsoleTester $i
-     *
-     * @return void
-     */
     public function dataBuilder(ConsoleConsoleTester $i): void
     {
         $i->runSprykerCommand('transfer:databuilder:generate -vvv');

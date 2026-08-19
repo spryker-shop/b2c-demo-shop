@@ -13,9 +13,6 @@ use Spryker\Zed\Shipment\ShipmentConfig as SprykerShipmentConfig;
 
 class ShipmentConfig extends SprykerShipmentConfig
 {
-    /**
-     * @return bool
-     */
     public function shouldExecuteQuotePostRecalculationPlugins(): bool
     {
         return false;

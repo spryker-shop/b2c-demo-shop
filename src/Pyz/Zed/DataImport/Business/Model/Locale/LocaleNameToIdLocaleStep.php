@@ -42,10 +42,6 @@ class LocaleNameToIdLocaleStep implements DataImportStepInterface
      */
     protected $resolved = [];
 
-    /**
-     * @param string $source
-     * @param string $target
-     */
     public function __construct(string $source = self::KEY_SOURCE, string $target = self::KEY_TARGET)
     {
         $this->source = $source;
@@ -53,11 +49,7 @@ class LocaleNameToIdLocaleStep implements DataImportStepInterface
     }
 
     /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     *
      * @throws \Spryker\Zed\DataImport\Business\Exception\DataKeyNotFoundInDataSetException
-     *
-     * @return void
      */
     public function execute(DataSetInterface $dataSet): void
     {
@@ -79,11 +71,7 @@ class LocaleNameToIdLocaleStep implements DataImportStepInterface
     }
 
     /**
-     * @param string $localeName
-     *
      * @throws \Pyz\Zed\DataImport\Business\Exception\EntityNotFoundException
-     *
-     * @return int
      */
     protected function resolveIdLocale(string $localeName): int
     {

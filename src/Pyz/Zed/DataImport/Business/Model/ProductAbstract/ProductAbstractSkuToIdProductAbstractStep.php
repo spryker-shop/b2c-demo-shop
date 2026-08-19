@@ -41,21 +41,12 @@ class ProductAbstractSkuToIdProductAbstractStep implements DataImportStepInterfa
      */
     protected static $resolved = [];
 
-    /**
-     * @param string $source
-     * @param string $target
-     */
     public function __construct(string $source = self::KEY_SOURCE, string $target = self::KEY_TARGET)
     {
         $this->source = $source;
         $this->target = $target;
     }
 
-    /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     *
-     * @return void
-     */
     public function execute(DataSetInterface $dataSet): void
     {
         if (empty($dataSet[$this->source])) {
@@ -72,11 +63,7 @@ class ProductAbstractSkuToIdProductAbstractStep implements DataImportStepInterfa
     }
 
     /**
-     * @param string $sku
-     *
      * @throws \Pyz\Zed\DataImport\Business\Exception\EntityNotFoundException
-     *
-     * @return int
      */
     protected function resolveIdProductAbstract(string $sku): int
     {

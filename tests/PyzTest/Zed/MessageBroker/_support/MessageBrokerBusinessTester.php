@@ -32,9 +32,6 @@ class MessageBrokerBusinessTester extends Actor
 {
     use _generated\MessageBrokerBusinessTesterActions;
 
-    /**
-     * @return \Spryker\Zed\MessageBroker\Business\MessageBrokerFacadeInterface
-     */
     public function getMessageBrokerFacade(): MessageBrokerFacadeInterface
     {
         return $this->getLocator()->messageBroker()->facade();

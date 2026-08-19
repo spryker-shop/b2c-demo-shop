@@ -19,25 +19,16 @@ use Spryker\Service\Flysystem\Plugin\FileSystem\FileSystemWriterPlugin;
 
 class FileSystemDependencyProvider extends SprykerFileSystemDependencyProvider
 {
-    /**
-     * @return \Spryker\Service\FileSystemExtension\Dependency\Plugin\FileSystemReaderPluginInterface
-     */
     protected function getFileSystemReaderPlugin(): FileSystemReaderPluginInterface
     {
         return new FileSystemReaderPlugin();
     }
 
-    /**
-     * @return \Spryker\Service\FileSystemExtension\Dependency\Plugin\FileSystemStreamPluginInterface
-     */
     protected function getFileSystemStreamPlugin(): FileSystemStreamPluginInterface
     {
         return new FileSystemStreamPlugin();
     }
 
-    /**
-     * @return \Spryker\Service\FileSystemExtension\Dependency\Plugin\FileSystemWriterPluginInterface
-     */
     protected function getFileSystemWriterPlugin(): FileSystemWriterPluginInterface
     {
         return new FileSystemWriterPlugin();

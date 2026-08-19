@@ -26,9 +26,6 @@ use Spryker\Glue\MultiFactorAuth\MultiFactorAuthConfig;
  */
 class MultiFactorAuthStorefrontApiCest
 {
-    /**
-     * @var string|null
-     */
     protected ?string $mfaCode = null;
 
     /**
@@ -41,16 +38,8 @@ class MultiFactorAuthStorefrontApiCest
      */
     protected const INVALID_MFA_TYPE = 'invalid-type';
 
-    /**
-     * @var \PyzTest\Glue\MultiFactorAuth\StorefrontApi\Fixtures\MultiFactorAuthStorefrontApiFixtures|null
-     */
     protected ?MultiFactorAuthStorefrontApiFixtures $fixtures = null;
 
-    /**
-     * @param \PyzTest\Glue\MultiFactorAuth\MultiFactorAuthStorefrontApiTester $I
-     *
-     * @return void
-     */
     public function loadFixtures(MultiFactorAuthStorefrontApiTester $I): void
     {
         /** @var \PyzTest\Glue\MultiFactorAuth\StorefrontApi\Fixtures\MultiFactorAuthStorefrontApiFixtures $fixtures */
@@ -58,11 +47,6 @@ class MultiFactorAuthStorefrontApiCest
         $this->fixtures = $fixtures;
     }
 
-    /**
-     * @param \PyzTest\Glue\MultiFactorAuth\MultiFactorAuthStorefrontApiTester $I
-     *
-     * @return void
-     */
     public function requestGetMultiFactorAuthTypes(MultiFactorAuthStorefrontApiTester $I): void
     {
         // Arrange
@@ -77,11 +61,6 @@ class MultiFactorAuthStorefrontApiCest
         $I->seeJsonApiResponseDataContainsResourceCollectionOfType(MultiFactorAuthConfig::RESOURCE_MULTI_FACTOR_AUTH_TYPES);
     }
 
-    /**
-     * @param \PyzTest\Glue\MultiFactorAuth\MultiFactorAuthStorefrontApiTester $I
-     *
-     * @return void
-     */
     public function requestActivateMultiFactorAuthType(MultiFactorAuthStorefrontApiTester $I): void
     {
         // Arrange
@@ -96,11 +75,6 @@ class MultiFactorAuthStorefrontApiCest
         $this->deactivateMultiFactorAuth($I);
     }
 
-    /**
-     * @param \PyzTest\Glue\MultiFactorAuth\MultiFactorAuthStorefrontApiTester $I
-     *
-     * @return void
-     */
     public function requestActivateMultiFactorAuthTypeWithInvalidType(MultiFactorAuthStorefrontApiTester $I): void
     {
         // Arrange
@@ -124,11 +98,6 @@ class MultiFactorAuthStorefrontApiCest
         $this->deactivateMultiFactorAuth($I);
     }
 
-    /**
-     * @param \PyzTest\Glue\MultiFactorAuth\MultiFactorAuthStorefrontApiTester $I
-     *
-     * @return void
-     */
     public function requestVerifyMultiFactorAuthType(MultiFactorAuthStorefrontApiTester $I): void
     {
         // Arrange
@@ -146,11 +115,6 @@ class MultiFactorAuthStorefrontApiCest
         $this->deactivateMultiFactorAuth($I);
     }
 
-    /**
-     * @param \PyzTest\Glue\MultiFactorAuth\MultiFactorAuthStorefrontApiTester $I
-     *
-     * @return void
-     */
     public function requestVerifyMultiFactorAuthTypeWithoutActivation(MultiFactorAuthStorefrontApiTester $I): void
     {
         // Arrange
@@ -166,11 +130,6 @@ class MultiFactorAuthStorefrontApiCest
         $this->deactivateMultiFactorAuth($I);
     }
 
-    /**
-     * @param \PyzTest\Glue\MultiFactorAuth\MultiFactorAuthStorefrontApiTester $I
-     *
-     * @return void
-     */
     public function requestVerifyMultiFactorAuthTypeWithInvalidCode(MultiFactorAuthStorefrontApiTester $I): void
     {
         // Arrange
@@ -191,11 +150,6 @@ class MultiFactorAuthStorefrontApiCest
         $this->deactivateMultiFactorAuth($I);
     }
 
-    /**
-     * @param \PyzTest\Glue\MultiFactorAuth\MultiFactorAuthStorefrontApiTester $I
-     *
-     * @return void
-     */
     public function requestDeactivateMultiFactorAuthType(MultiFactorAuthStorefrontApiTester $I): void
     {
         // Arrange
@@ -213,11 +167,6 @@ class MultiFactorAuthStorefrontApiCest
         $I->seeJsonApiResponseCodeIs(HttpCode::NO_CONTENT);
     }
 
-    /**
-     * @param \PyzTest\Glue\MultiFactorAuth\MultiFactorAuthStorefrontApiTester $I
-     *
-     * @return void
-     */
     public function requestDeactivateMultiFactorAuthTypeWithoutActivation(MultiFactorAuthStorefrontApiTester $I): void
     {
         // Arrange
@@ -231,11 +180,6 @@ class MultiFactorAuthStorefrontApiCest
         $I->seeResponseIsJson();
     }
 
-    /**
-     * @param \PyzTest\Glue\MultiFactorAuth\MultiFactorAuthStorefrontApiTester $I
-     *
-     * @return void
-     */
     public function requestDeactivateMultiFactorAuthTypeWithInvalidCode(MultiFactorAuthStorefrontApiTester $I): void
     {
         // Arrange
@@ -259,11 +203,6 @@ class MultiFactorAuthStorefrontApiCest
         $this->deactivateMultiFactorAuth($I);
     }
 
-    /**
-     * @param \PyzTest\Glue\MultiFactorAuth\MultiFactorAuthStorefrontApiTester $I
-     *
-     * @return void
-     */
     public function requestDeactivateMultiFactorAuthTypeWithoutVerification(MultiFactorAuthStorefrontApiTester $I): void
     {
         // Arrange
@@ -285,22 +224,12 @@ class MultiFactorAuthStorefrontApiCest
         $this->deactivateMultiFactorAuth($I);
     }
 
-    /**
-     * @param \PyzTest\Glue\MultiFactorAuth\MultiFactorAuthStorefrontApiTester $I
-     *
-     * @return void
-     */
     protected function activateMultiFactorAuth(MultiFactorAuthStorefrontApiTester $I): void
     {
         $requestPayload = $this->fixtures->createRequestPayload(MultiFactorAuthConfig::RESOURCE_MULTI_FACTOR_AUTH_TYPE_ACTIVATE);
         $I->sendJsonApiPost($this->fixtures->generateUrl(MultiFactorAuthConfig::RESOURCE_MULTI_FACTOR_AUTH_TYPE_ACTIVATE), $requestPayload);
     }
 
-    /**
-     * @param \PyzTest\Glue\MultiFactorAuth\MultiFactorAuthStorefrontApiTester $I
-     *
-     * @return void
-     */
     protected function verifyMultiFactorAuth(MultiFactorAuthStorefrontApiTester $I): void
     {
         $this->mfaCode = $I->getCustomerMultiFactorAuthCodeFromDatabase(
@@ -315,11 +244,6 @@ class MultiFactorAuthStorefrontApiCest
         $I->sendJsonApiPost($this->fixtures->generateUrl(MultiFactorAuthConfig::RESOURCE_MULTI_FACTOR_AUTH_TYPE_VERIFY), $requestPayload);
     }
 
-    /**
-     * @param \PyzTest\Glue\MultiFactorAuth\MultiFactorAuthStorefrontApiTester $I
-     *
-     * @return void
-     */
     protected function deactivateMultiFactorAuth(MultiFactorAuthStorefrontApiTester $I): void
     {
         if ($this->mfaCode === null) {

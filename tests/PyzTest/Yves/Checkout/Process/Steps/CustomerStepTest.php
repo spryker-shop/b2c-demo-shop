@@ -30,9 +30,6 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class CustomerStepTest extends Unit
 {
-    /**
-     * @return void
-     */
     public function testExecuteShouldTriggerAuthHandler(): void
     {
         $authHandlerMock = $this->createAuthHandlerMock();
@@ -42,18 +39,12 @@ class CustomerStepTest extends Unit
         $customerStep->execute($this->createRequest(), new QuoteTransfer());
     }
 
-    /**
-     * @return void
-     */
     public function testPostConditionWhenCustomerTransferNotSetShouldReturnFalse(): void
     {
         $customerStep = $this->createCustomerStep();
         $this->assertFalse($customerStep->postCondition(new QuoteTransfer()));
     }
 
-    /**
-     * @return void
-     */
     public function testPostConditionWhenCustomerIsLoggedInAndTriesToLoginAsAGuestShouldReturnFalse(): void
     {
         $customerClientMock = $this->createCustomerClientMock();
@@ -68,9 +59,6 @@ class CustomerStepTest extends Unit
         $this->assertFalse($customerStep->postCondition($quoteTransfer));
     }
 
-    /**
-     * @return void
-     */
     public function testPostConditionWhenInvalidCustomerSetShouldReturnFalse(): void
     {
         $customerStep = $this->createCustomerStep();
@@ -80,9 +68,6 @@ class CustomerStepTest extends Unit
         $this->assertFalse($customerStep->postCondition($quoteTransfer));
     }
 
-    /**
-     * @return void
-     */
     public function testPostConditionWhenGuestCustomerSetShouldReturnTrue(): void
     {
         $customerStep = $this->createCustomerStep();
@@ -94,9 +79,6 @@ class CustomerStepTest extends Unit
         $this->assertTrue($customerStep->postCondition($quoteTransfer));
     }
 
-    /**
-     * @return void
-     */
     public function testRequireInputWhenCustomerIsSetShouldReturnTrue(): void
     {
         $customerStep = $this->createCustomerStep();
@@ -106,9 +88,6 @@ class CustomerStepTest extends Unit
         $this->assertTrue($customerStep->requireInput($quoteTransfer));
     }
 
-    /**
-     * @return void
-     */
     public function testRequireInputWhenCustomerLoggedInShouldReturnFalse(): void
     {
         $customerClientMock = $this->createCustomerClientMock();
@@ -120,9 +99,6 @@ class CustomerStepTest extends Unit
         $this->assertFalse($customerStep->requireInput($quoteTransfer));
     }
 
-    /**
-     * @return void
-     */
     public function testRequireInputWhenNotLoggedInAndNotYetSetInQuoteShouldReturnTrue(): void
     {
         $customerStep = $this->createCustomerStep();
@@ -132,8 +108,6 @@ class CustomerStepTest extends Unit
     /**
      * @param \PHPUnit\Framework\MockObject\MockObject|\SprykerShop\Yves\CheckoutPage\Dependency\Client\CheckoutPageToCustomerClientInterface|null $customerClientMock
      * @param \PHPUnit\Framework\MockObject\MockObject|\Spryker\Yves\StepEngine\Dependency\Plugin\Handler\StepHandlerPluginInterface|null $authHandlerMock
-     *
-     * @return \SprykerShop\Yves\CheckoutPage\Process\Steps\CustomerStep
      */
     protected function createCustomerStep($customerClientMock = null, $authHandlerMock = null): CustomerStep
     {
@@ -161,9 +135,6 @@ class CustomerStepTest extends Unit
         return $this->getMockBuilder(StepHandlerPluginInterface::class)->getMock();
     }
 
-    /**
-     * @return \Symfony\Component\HttpFoundation\Request
-     */
     protected function createRequest(): Request
     {
         return Request::createFromGlobals();

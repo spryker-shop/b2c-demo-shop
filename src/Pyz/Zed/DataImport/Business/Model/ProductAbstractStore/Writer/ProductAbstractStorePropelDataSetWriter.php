@@ -30,21 +30,11 @@ class ProductAbstractStorePropelDataSetWriter implements DataSetWriterInterface
      */
     protected static $idStoreBuffer;
 
-    /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     *
-     * @return void
-     */
     public function write(DataSetInterface $dataSet): void
     {
         $this->createOrUpdateProductAbstractStore($dataSet);
     }
 
-    /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     *
-     * @return void
-     */
     protected function createOrUpdateProductAbstractStore(DataSetInterface $dataSet): void
     {
         $productAbstractStoreTransfer = $this->getProductAbstractStoreTransfers($dataSet);
@@ -59,11 +49,6 @@ class ProductAbstractStorePropelDataSetWriter implements DataSetWriterInterface
             ->save();
     }
 
-    /**
-     * @param string $productAbstractSku
-     *
-     * @return int
-     */
     protected function getIdProductAbstractBySku(string $productAbstractSku): int
     {
         if (!isset(static::$idProductAbstractBuffer[$productAbstractSku])) {
@@ -74,11 +59,6 @@ class ProductAbstractStorePropelDataSetWriter implements DataSetWriterInterface
         return static::$idProductAbstractBuffer[$productAbstractSku];
     }
 
-    /**
-     * @param string $storeName
-     *
-     * @return int
-     */
     protected function getIdStoreByName(string $storeName): int
     {
         if (!isset(static::$idStoreBuffer[$storeName])) {
@@ -89,19 +69,11 @@ class ProductAbstractStorePropelDataSetWriter implements DataSetWriterInterface
         return static::$idStoreBuffer[$storeName];
     }
 
-    /**
-     * @return void
-     */
     public function flush(): void
     {
         DataImporterPublisher::triggerEvents();
     }
 
-    /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     *
-     * @return \Generated\Shared\Transfer\ProductAbstractStoreTransfer
-     */
     protected function getProductAbstractStoreTransfers(DataSetInterface $dataSet): ProductAbstractStoreTransfer
     {
         return $dataSet[ProductAbstractStoreHydratorStep::DATA_PRODUCT_ABSTRACT_STORE_ENTITY_TRANSFER];

@@ -15,25 +15,16 @@ use Spryker\Zed\ConfigurableBundleStorage\ConfigurableBundleStorageConfig as Spr
 
 class ConfigurableBundleStorageConfig extends SprykerConfigurableBundleStorageConfig
 {
-    /**
-     * @return string|null
-     */
     public function getConfigurableBundleTemplateSynchronizationPoolName(): ?string
     {
         return SynchronizationConfig::DEFAULT_SYNCHRONIZATION_POOL_NAME;
     }
 
-    /**
-     * @return string|null
-     */
     public function getConfigurableBundleTemplateEventQueueName(): ?string
     {
         return PublisherConfig::PUBLISH_QUEUE;
     }
 
-    /**
-     * @return string|null
-     */
     public function getConfigurableBundleTemplateImageEventQueueName(): ?string
     {
         return PublisherConfig::PUBLISH_QUEUE;

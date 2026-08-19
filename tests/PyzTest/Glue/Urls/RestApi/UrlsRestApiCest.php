@@ -31,16 +31,8 @@ class UrlsRestApiCest
      */
     protected const DEFAULT_LOCALE = 'en_US';
 
-    /**
-     * @var \PyzTest\Glue\Urls\RestApi\UrlsRestApiFixtures
-     */
     protected UrlsRestApiFixtures $fixtures;
 
-    /**
-     * @param \PyzTest\Glue\Urls\UrlsRestApiTester $I
-     *
-     * @return void
-     */
     public function loadFixtures(UrlsRestApiTester $I): void
     {
         /** @var \PyzTest\Glue\Urls\RestApi\UrlsRestApiFixtures $fixtures */
@@ -51,10 +43,6 @@ class UrlsRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Urls\UrlsRestApiTester $I
-     *
-     * @return void
      */
     public function requestNonExistingUrl(UrlsRestApiTester $I): void
     {
@@ -77,10 +65,6 @@ class UrlsRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Urls\UrlsRestApiTester $I
-     *
-     * @return void
      */
     public function requestUrlWithoutUrlParameter(UrlsRestApiTester $I): void
     {
@@ -101,10 +85,6 @@ class UrlsRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Urls\UrlsRestApiTester $I
-     *
-     * @return void
      */
     public function requestExistingProductAbstractUrl(UrlsRestApiTester $I): void
     {

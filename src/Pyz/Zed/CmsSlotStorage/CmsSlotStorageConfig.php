@@ -15,17 +15,11 @@ use Spryker\Zed\CmsSlotStorage\CmsSlotStorageConfig as SprykerCmsSlotStorageConf
 
 class CmsSlotStorageConfig extends SprykerCmsSlotStorageConfig
 {
-    /**
-     * @return string|null
-     */
     public function getCmsSlotStorageSynchronizationPoolName(): ?string
     {
         return SynchronizationConfig::DEFAULT_SYNCHRONIZATION_POOL_NAME;
     }
 
-    /**
-     * @return string|null
-     */
     public function getEventQueueName(): ?string
     {
         return PublisherConfig::PUBLISH_QUEUE;

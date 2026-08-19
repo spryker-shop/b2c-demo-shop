@@ -18,9 +18,6 @@ class CatalogPageConfig extends SprykerCatalogPageConfig
      */
     protected const IS_MINI_CART_ASYNC_MODE_ENABLED = true;
 
-    /**
-     * @return bool
-     */
     public function isVisibleEmptyRangeFilters(): bool
     {
         return false;

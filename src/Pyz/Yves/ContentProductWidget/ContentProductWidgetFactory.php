@@ -16,12 +16,6 @@ use Twig\Environment;
 
 class ContentProductWidgetFactory extends SprykerContentProductWidgetFactory
 {
-    /**
-     * @param \Twig\Environment $twig
-     * @param string $localeName
-     *
-     * @return \Spryker\Shared\Twig\TwigFunctionProvider
-     */
     public function createContentProductAbstractListTwigFunctionProvider(Environment $twig, string $localeName): TwigFunctionProvider
     {
         return new ContentProductAbstractListTwigFunctionProvider(

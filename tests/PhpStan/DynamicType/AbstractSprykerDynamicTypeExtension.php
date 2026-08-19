@@ -24,11 +24,6 @@ abstract class AbstractSprykerDynamicTypeExtension implements DynamicMethodRetur
      */
     protected $methodResolves = [];
 
-    /**
-     * @param \PHPStan\Reflection\MethodReflection $methodReflection
-     *
-     * @return bool
-     */
     public function isMethodSupported(MethodReflection $methodReflection): bool
     {
         if (isset($this->methodResolves[$methodReflection->getName()])) {
@@ -39,13 +34,7 @@ abstract class AbstractSprykerDynamicTypeExtension implements DynamicMethodRetur
     }
 
     /**
-     * @param \PHPStan\Reflection\MethodReflection $methodReflection
-     * @param \PhpParser\Node\Expr\MethodCall $methodCall
-     * @param \PHPStan\Analyser\Scope $scope
-     *
      * @throws \Exception
-     *
-     * @return \PHPStan\Type\Type
      */
     public function getTypeFromMethodCall(MethodReflection $methodReflection, MethodCall $methodCall, Scope $scope): Type // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
     {

@@ -15,17 +15,11 @@ use Spryker\Zed\ProductOptionStorage\ProductOptionStorageConfig as SprykerProduc
 
 class ProductOptionStorageConfig extends SprykerProductOptionStorageConfig
 {
-    /**
-     * @return string|null
-     */
     public function getProductAbstractOptionSynchronizationPoolName(): ?string
     {
         return SynchronizationConfig::DEFAULT_SYNCHRONIZATION_POOL_NAME;
     }
 
-    /**
-     * @return string|null
-     */
     public function getEventQueueName(): ?string
     {
         return PublisherConfig::PUBLISH_QUEUE;

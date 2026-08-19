@@ -15,33 +15,21 @@ use Spryker\Zed\CategoryStorage\CategoryStorageConfig as SprykerCategoryStorageC
 
 class CategoryStorageConfig extends SprykerCategoryStorageConfig
 {
-    /**
-     * @return string|null
-     */
     public function getCategoryTreeSynchronizationPoolName(): ?string
     {
         return SynchronizationConfig::DEFAULT_SYNCHRONIZATION_POOL_NAME;
     }
 
-    /**
-     * @return string|null
-     */
     public function getCategoryNodeSynchronizationPoolName(): ?string
     {
         return SynchronizationConfig::DEFAULT_SYNCHRONIZATION_POOL_NAME;
     }
 
-    /**
-     * @return string|null
-     */
     public function getCategoryNodeEventQueueName(): ?string
     {
         return PublisherConfig::PUBLISH_QUEUE;
     }
 
-    /**
-     * @return string|null
-     */
     public function getCategoryTreeEventQueueName(): ?string
     {
         return PublisherConfig::PUBLISH_QUEUE;

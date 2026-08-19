@@ -22,9 +22,6 @@ use Spryker\Zed\Translator\Business\TranslatorFacadeInterface;
  */
 class OmsCommunicationFactory extends SprykerOmsCommunicationFactory
 {
-    /**
-     * @return \Spryker\Zed\Translator\Business\TranslatorFacadeInterface
-     */
     public function getTranslatorFacade(): TranslatorFacadeInterface
     {
         return $this->getProvidedDependency(OmsDependencyProvider::FACADE_TRANSLATOR);

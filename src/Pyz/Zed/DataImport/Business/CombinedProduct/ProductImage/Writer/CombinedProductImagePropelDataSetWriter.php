@@ -14,9 +14,6 @@ use Pyz\Zed\DataImport\Business\Model\ProductImage\Writer\ProductImagePropelData
 
 class CombinedProductImagePropelDataSetWriter extends ProductImagePropelDataSetWriter
 {
-    /**
-     * @param \Pyz\Zed\DataImport\Business\Model\ProductImage\Repository\ProductImageRepositoryInterface $productImageRepository
-     */
     public function __construct(ProductImageRepositoryInterface $productImageRepository)
     {
         parent::__construct($productImageRepository);

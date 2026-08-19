@@ -65,11 +65,6 @@ class CustomerAddressesPage extends Customer
         ],
     ];
 
-    /**
-     * @param string $address
-     *
-     * @return \Generated\Shared\Transfer\AddressTransfer
-     */
     public static function getAddressData(string $address): AddressTransfer
     {
         $addressTransfer = new AddressTransfer();

@@ -43,11 +43,6 @@ class Customer
         ],
     ];
 
-    /**
-     * @param string $email
-     *
-     * @return \Generated\Shared\Transfer\CustomerTransfer
-     */
     public static function getCustomerData(string $email): CustomerTransfer
     {
         $customerTransfer = new CustomerTransfer();

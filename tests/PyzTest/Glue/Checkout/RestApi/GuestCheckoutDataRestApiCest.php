@@ -32,16 +32,8 @@ class GuestCheckoutDataRestApiCest
      */
     protected const HEADER_ANONYMOUS_CUSTOMER_UNIQUE_ID = 'X-Anonymous-Customer-Unique-Id';
 
-    /**
-     * @var \PyzTest\Glue\Checkout\RestApi\Fixtures\GuestCheckoutDataRestApiFixtures
-     */
     protected GuestCheckoutDataRestApiFixtures $fixtures;
 
-    /**
-     * @param \PyzTest\Glue\Checkout\CheckoutApiTester $I
-     *
-     * @return void
-     */
     public function loadFixtures(CheckoutApiTester $I): void
     {
         /** @var \PyzTest\Glue\Checkout\RestApi\Fixtures\GuestCheckoutDataRestApiFixtures $fixtures */
@@ -51,10 +43,6 @@ class GuestCheckoutDataRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Checkout\CheckoutApiTester $I
-     *
-     * @return void
      */
     public function requestEmptyRequestWithOneItemInQuote(CheckoutApiTester $I): void
     {
@@ -92,10 +80,6 @@ class GuestCheckoutDataRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Checkout\CheckoutApiTester $I
-     *
-     * @return void
      */
     public function requestWithOneItemInQuoteAndBillingAndShippingAddresses(CheckoutApiTester $I): void
     {
@@ -136,10 +120,6 @@ class GuestCheckoutDataRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Checkout\CheckoutApiTester $I
-     *
-     * @return void
      */
     public function requestWithOneItemInQuoteWithoutShipment(CheckoutApiTester $I): void
     {
@@ -181,10 +161,6 @@ class GuestCheckoutDataRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Checkout\CheckoutApiTester $I
-     *
-     * @return void
      */
     public function requestWithOneItemInQuoteWithoutPayment(CheckoutApiTester $I): void
     {
@@ -227,10 +203,6 @@ class GuestCheckoutDataRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Checkout\CheckoutApiTester $I
-     *
-     * @return void
      */
     public function requestWithOneItemInQuoteAndCustomerAndBillingAndShippingAddressesAndCart(CheckoutApiTester $I): void
     {
@@ -272,10 +244,6 @@ class GuestCheckoutDataRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Checkout\CheckoutApiTester $I
-     *
-     * @return void
      */
     public function requestWithOneItemInQuoteAndFullBody(CheckoutApiTester $I): void
     {

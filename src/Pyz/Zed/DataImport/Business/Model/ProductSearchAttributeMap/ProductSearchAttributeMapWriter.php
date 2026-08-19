@@ -34,11 +34,7 @@ class ProductSearchAttributeMapWriter implements DataImportStepInterface
     public const KEY_SYNCED = 'synced';
 
     /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     *
      * @throws \InvalidArgumentException
-     *
-     * @return void
      */
     public function execute(DataSetInterface $dataSet): void
     {

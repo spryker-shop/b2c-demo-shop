@@ -19,12 +19,6 @@ use Twig\Environment;
  */
 class QuoteTwigPlugin extends AbstractPlugin implements TwigPluginInterface
 {
-    /**
-     * @param \Twig\Environment $twig
-     * @param \Spryker\Service\Container\ContainerInterface $container
-     *
-     * @return \Twig\Environment
-     */
     public function extend(Environment $twig, ContainerInterface $container): Environment
     {
         $container->set('quote', function () {

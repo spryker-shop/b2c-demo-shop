@@ -27,16 +27,8 @@ use Spryker\Glue\WishlistsRestApi\WishlistsRestApiConfig;
  */
 class WishlistRestApiCest
 {
-    /**
-     * @var \PyzTest\Glue\Wishlists\RestApi\WishlistsRestApiFixtures
-     */
     protected WishlistsRestApiFixtures $fixtures;
 
-    /**
-     * @param \PyzTest\Glue\Wishlists\WishlistsApiTester $I
-     *
-     * @return void
-     */
     public function loadFixtures(WishlistsApiTester $I): void
     {
         /** @var \PyzTest\Glue\Wishlists\RestApi\WishlistsRestApiFixtures $fixtures */
@@ -47,10 +39,6 @@ class WishlistRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Wishlists\WishlistsApiTester $I
-     *
-     * @return void
      */
     public function requestWishlistByUuid(WishlistsApiTester $I): void
     {
@@ -83,10 +71,6 @@ class WishlistRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Wishlists\WishlistsApiTester $I
-     *
-     * @return void
      */
     public function requestWishlists(WishlistsApiTester $I): void
     {
@@ -118,10 +102,6 @@ class WishlistRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Wishlists\WishlistsApiTester $I
-     *
-     * @return void
      */
     public function requestWishlistByUuidWithWishlistItemsRelationship(WishlistsApiTester $I): void
     {
@@ -170,10 +150,6 @@ class WishlistRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Wishlists\WishlistsApiTester $I
-     *
-     * @return void
      */
     public function requestWishlistByUuidWithProductConcreteRelationship(WishlistsApiTester $I): void
     {
@@ -224,10 +200,6 @@ class WishlistRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Wishlists\WishlistsApiTester $I
-     *
-     * @return void
      */
     public function requestWishlistByNotExistingWishlistUuid(WishlistsApiTester $I): void
     {

@@ -32,11 +32,6 @@ class AvailabilityNotificationsRestApiTester extends ApiEndToEndTester
 {
     use _generated\AvailabilityNotificationsRestApiTesterActions;
 
-    /**
-     * @param string $customerReference
-     *
-     * @return string
-     */
     public function buildCustomerAvailabilityNotificationsUrl(string $customerReference): string
     {
         return $this->formatFullUrl(

@@ -39,9 +39,6 @@ class CmsGuiDependencyProvider extends SprykerCmsGuiDependencyProvider
         ];
     }
 
-    /**
-     * @return \Spryker\Zed\Kernel\Communication\Form\FormTypeInterface
-     */
     protected function getStoreRelationFormTypePlugin(): FormTypeInterface
     {
         return new StoreRelationToggleFormTypePlugin();

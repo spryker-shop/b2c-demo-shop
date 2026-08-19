@@ -27,11 +27,6 @@ class SubmitController extends SprykerSubmitController
      */
     protected const PRODUCT_REVIEW_ERROR_PLEASE_LOGIN = 'product_review.error.please_login';
 
-    /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
-     * @return \Spryker\Yves\Kernel\View\View
-     */
     public function indexAction(Request $request): View
     {
         $viewData = $this->executeIndexAction($request);
@@ -39,12 +34,6 @@ class SubmitController extends SprykerSubmitController
         return $this->view($viewData, [], '@ProductReviewWidget/views/review-create/review-create.twig');
     }
 
-    /**
-     * @param \Symfony\Component\Form\FormInterface $form
-     * @param \Generated\Shared\Transfer\CustomerTransfer|null $customerTransfer
-     *
-     * @return bool
-     */
     protected function processProductReviewForm(
         FormInterface $form,
         ?CustomerTransfer $customerTransfer = null,
@@ -64,12 +53,6 @@ class SubmitController extends SprykerSubmitController
         return (bool)$result;
     }
 
-    /**
-     * @param \Symfony\Component\Form\FormInterface $form
-     * @param \Generated\Shared\Transfer\CustomerTransfer|null $customerTransfer
-     *
-     * @return \Generated\Shared\Transfer\CustomerTransfer|null
-     */
     protected function processCoreProductReviewForm(
         FormInterface $form,
         ?CustomerTransfer $customerTransfer = null,
@@ -108,19 +91,12 @@ class SubmitController extends SprykerSubmitController
         return null;
     }
 
-    /**
-     * @param \Symfony\Component\Form\FormInterface $form
-     *
-     * @return \Generated\Shared\Transfer\ProductReviewRequestTransfer
-     */
     protected function getProductReviewFormData(FormInterface $form): ProductReviewRequestTransfer
     {
         return $form->getData();
     }
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
      * @return array<mixed>
      */
     protected function executeIndexAction(Request $request): array

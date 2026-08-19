@@ -14,9 +14,6 @@ use Spryker\Zed\GlossaryStorage\GlossaryStorageConfig as SprykerGlossaryStorageC
 
 class GlossaryStorageConfig extends SprykerGlossaryStorageConfig
 {
-    /**
-     * @return string|null
-     */
     public function getGlossarySynchronizationPoolName(): ?string
     {
         return SynchronizationConfig::DEFAULT_SYNCHRONIZATION_POOL_NAME;

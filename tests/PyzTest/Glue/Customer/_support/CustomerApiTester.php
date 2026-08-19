@@ -34,10 +34,7 @@ class CustomerApiTester extends ApiEndToEndTester
     use _generated\CustomerApiTesterActions;
 
     /**
-     * @param \Generated\Shared\Transfer\CustomerTransfer $customerTransfer
      * @param array<string> $restCustomersAttributesTransferData
-     *
-     * @return void
      */
     public function assertCustomersAttributes(
         CustomerTransfer $customerTransfer,
@@ -76,12 +73,6 @@ class CustomerApiTester extends ApiEndToEndTester
         );
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\RestCustomersAttributesTransfer $expectedRestCustomersAttributesTransfer
-     * @param array $restCustomersAttributesTransferData
-     *
-     * @return void
-     */
     public function assertRegisteredCustomersAttributes(
         RestCustomersAttributesTransfer $expectedRestCustomersAttributesTransfer,
         array $restCustomersAttributesTransferData,

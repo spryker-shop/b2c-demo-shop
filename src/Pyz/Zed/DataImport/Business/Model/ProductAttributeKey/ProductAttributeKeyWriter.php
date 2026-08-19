@@ -25,11 +25,6 @@ class ProductAttributeKeyWriter implements DataImportStepInterface
      */
     public const IS_SUPER = 'is_super';
 
-    /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     *
-     * @return void
-     */
     public function execute(DataSetInterface $dataSet): void
     {
         $query = SpyProductAttributeKeyQuery::create();

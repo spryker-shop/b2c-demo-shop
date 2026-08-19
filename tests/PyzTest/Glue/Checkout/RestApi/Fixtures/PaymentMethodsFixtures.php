@@ -28,11 +28,6 @@ use SprykerTest\Shared\Testify\Fixtures\FixturesContainerInterface;
  */
 class PaymentMethodsFixtures implements FixturesBuilderInterface, FixturesContainerInterface
 {
-    /**
-     * @param \PyzTest\Glue\Checkout\CheckoutApiTester $I
-     *
-     * @return \SprykerTest\Shared\Testify\Fixtures\FixturesContainerInterface
-     */
     public function buildFixtures(CheckoutApiTester $I): FixturesContainerInterface
     {
         $paymentProviderTransfer = $I->havePaymentProvider([

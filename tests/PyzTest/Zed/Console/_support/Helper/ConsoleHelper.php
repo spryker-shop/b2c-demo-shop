@@ -28,11 +28,6 @@ class ConsoleHelper extends Module
      */
     public const SANDBOX_DIR = 'cli_sandbox/';
 
-    /**
-     * @param \Codeception\TestInterface $test
-     *
-     * @return void
-     */
     public function _after(TestInterface $test): void // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
     {
         foreach ($this->config['cleanup_dirs'] as $dir) {
@@ -42,20 +37,12 @@ class ConsoleHelper extends Module
         }
     }
 
-    /**
-     * @param string $command
-     *
-     * @return void
-     */
     public function runSprykerCommand(string $command): void
     {
         $command = 'php ' . codecept_data_dir() . self::RUNNER . " $command";
         $this->getCli()->runShellCommand($command);
     }
 
-    /**
-     * @return void
-     */
     protected function setDefaultConfig(): void
     {
         $this->config = [

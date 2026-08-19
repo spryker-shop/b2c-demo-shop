@@ -26,9 +26,6 @@ class RouterConfig extends SprykerRouterConfig
         return array_filter($controllerDirectories, 'glob');
     }
 
-    /**
-     * @return bool
-     */
     public function isRoutingCacheEnabled(): bool
     {
         return true;

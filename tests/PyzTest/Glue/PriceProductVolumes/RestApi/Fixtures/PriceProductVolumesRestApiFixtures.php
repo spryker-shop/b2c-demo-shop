@@ -45,24 +45,13 @@ class PriceProductVolumesRestApiFixtures implements FixturesBuilderInterface, Fi
      */
     public const VOLUME_PRICE_ATTRIBUTE_JSON_PATH = '.prices[0].volumePrices';
 
-    /**
-     * @var \Generated\Shared\Transfer\ProductConcreteTransfer
-     */
     protected ProductConcreteTransfer $productConcreteTransfer;
 
-    /**
-     * @return \Generated\Shared\Transfer\ProductConcreteTransfer
-     */
     public function getProductConcreteTransfer(): ProductConcreteTransfer
     {
         return $this->productConcreteTransfer;
     }
 
-    /**
-     * @param \PyzTest\Glue\PriceProductVolumes\PriceProductVolumesApiTester $I
-     *
-     * @return \SprykerTest\Shared\Testify\Fixtures\FixturesContainerInterface
-     */
     public function buildFixtures(PriceProductVolumesApiTester $I): FixturesContainerInterface
     {
         $this->createProductConcrete($I);
@@ -71,21 +60,11 @@ class PriceProductVolumesRestApiFixtures implements FixturesBuilderInterface, Fi
         return $this;
     }
 
-    /**
-     * @param \PyzTest\Glue\PriceProductVolumes\PriceProductVolumesApiTester $I
-     *
-     * @return void
-     */
     protected function createProductConcrete(PriceProductVolumesApiTester $I): void
     {
         $this->productConcreteTransfer = $I->haveFullProduct();
     }
 
-    /**
-     * @param \PyzTest\Glue\PriceProductVolumes\PriceProductVolumesApiTester $I
-     *
-     * @return void
-     */
     protected function createPriceProduct(PriceProductVolumesApiTester $I): void
     {
         $I->havePriceProduct([
@@ -96,9 +75,6 @@ class PriceProductVolumesRestApiFixtures implements FixturesBuilderInterface, Fi
         ]);
     }
 
-    /**
-     * @return string
-     */
     protected function createVolumePriceData(): string
     {
         return json_encode([

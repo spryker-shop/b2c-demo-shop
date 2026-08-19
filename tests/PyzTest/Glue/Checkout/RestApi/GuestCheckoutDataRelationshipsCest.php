@@ -32,16 +32,8 @@ class GuestCheckoutDataRelationshipsCest
      */
     protected const HEADER_ANONYMOUS_CUSTOMER_UNIQUE_ID = 'X-Anonymous-Customer-Unique-Id';
 
-    /**
-     * @var \PyzTest\Glue\Checkout\RestApi\Fixtures\GuestCheckoutDataShipmentRelationshipsFixtures
-     */
     protected GuestCheckoutDataShipmentRelationshipsFixtures $guestCheckoutDataShipmentRelationshipsFixtures;
 
-    /**
-     * @param \PyzTest\Glue\Checkout\CheckoutApiTester $I
-     *
-     * @return void
-     */
     public function loadShipmentFixtures(CheckoutApiTester $I): void
     {
         /** @var \PyzTest\Glue\Checkout\RestApi\Fixtures\GuestCheckoutDataShipmentRelationshipsFixtures $fixtures */
@@ -51,10 +43,6 @@ class GuestCheckoutDataRelationshipsCest
 
     /**
      * @depends loadShipmentFixtures
-     *
-     * @param \PyzTest\Glue\Checkout\CheckoutApiTester $I
-     *
-     * @return void
      */
     public function requestCheckoutDataIncludesShipmentsRelationship(CheckoutApiTester $I): void
     {
@@ -116,10 +104,6 @@ class GuestCheckoutDataRelationshipsCest
 
     /**
      * @depends loadShipmentFixtures
-     *
-     * @param \PyzTest\Glue\Checkout\CheckoutApiTester $I
-     *
-     * @return void
      */
     public function requestCheckoutDataIncludesShipmentMethodsRelationship(CheckoutApiTester $I): void
     {

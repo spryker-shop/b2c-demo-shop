@@ -14,9 +14,6 @@ use Spryker\Zed\CmsBlockStorage\CmsBlockStorageConfig as SprykerCmsBlockStorageC
 
 class CmsBlockStorageConfig extends SprykerCmsBlockStorageConfig
 {
-    /**
-     * @return string|null
-     */
     public function getEventQueueName(): ?string
     {
         return PublisherConfig::PUBLISH_QUEUE;

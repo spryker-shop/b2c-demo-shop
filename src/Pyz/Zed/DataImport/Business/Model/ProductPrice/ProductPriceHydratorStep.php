@@ -206,10 +206,6 @@ class ProductPriceHydratorStep implements DataImportStepInterface
      */
     protected $priceProductFacade;
 
-    /**
-     * @param \Spryker\Zed\PriceProduct\Business\PriceProductFacadeInterface $priceProductFacade
-     * @param \Spryker\Zed\DataImport\Dependency\Service\DataImportToUtilEncodingServiceInterface $utilEncodingService
-     */
     public function __construct(
         PriceProductFacadeInterface $priceProductFacade,
         DataImportToUtilEncodingServiceInterface $utilEncodingService,
@@ -218,11 +214,6 @@ class ProductPriceHydratorStep implements DataImportStepInterface
         $this->utilEncodingService = $utilEncodingService;
     }
 
-    /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     *
-     * @return void
-     */
     public function execute(DataSetInterface $dataSet): void
     {
         $this->importPriceData($dataSet);
@@ -231,11 +222,7 @@ class ProductPriceHydratorStep implements DataImportStepInterface
     }
 
     /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     *
      * @throws \Spryker\Zed\DataImport\Business\Exception\DataKeyNotFoundInDataSetException
-     *
-     * @return void
      */
     protected function importProductPrice(DataSetInterface $dataSet): void
     {
@@ -265,8 +252,6 @@ class ProductPriceHydratorStep implements DataImportStepInterface
 
     /**
      * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet $dataSet
-     *
-     * @return \Generated\Shared\Transfer\SpyPriceProductStoreEntityTransfer
      */
     protected function importPriceProductStore(DataSetInterface $dataSet): SpyPriceProductStoreEntityTransfer
     {
@@ -288,11 +273,6 @@ class ProductPriceHydratorStep implements DataImportStepInterface
         return $priceProductStoreEntityTransfer;
     }
 
-    /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     *
-     * @return \Generated\Shared\Transfer\SpyPriceTypeEntityTransfer
-     */
     protected function importPriceType(DataSetInterface $dataSet): SpyPriceTypeEntityTransfer
     {
         $priceTypeTransfer = new SpyPriceTypeEntityTransfer();
@@ -305,11 +285,6 @@ class ProductPriceHydratorStep implements DataImportStepInterface
         return $priceTypeTransfer;
     }
 
-    /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     *
-     * @return \Generated\Shared\Transfer\SpyProductAbstractEntityTransfer
-     */
     protected function importProductAbstract(DataSetInterface $dataSet): SpyProductAbstractEntityTransfer
     {
         $productAbstractTransfer = new SpyProductAbstractEntityTransfer();
@@ -318,11 +293,6 @@ class ProductPriceHydratorStep implements DataImportStepInterface
         return $productAbstractTransfer;
     }
 
-    /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     *
-     * @return \Generated\Shared\Transfer\SpyProductEntityTransfer
-     */
     protected function importProductConcrete(DataSetInterface $dataSet): SpyProductEntityTransfer
     {
         $productConcreteTransfer = new SpyProductEntityTransfer();
@@ -331,11 +301,6 @@ class ProductPriceHydratorStep implements DataImportStepInterface
         return $productConcreteTransfer;
     }
 
-    /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     *
-     * @return void
-     */
     protected function importPriceData(DataSetInterface $dataSet): void
     {
         $priceData = $this->getPriceData($dataSet);
@@ -352,8 +317,6 @@ class ProductPriceHydratorStep implements DataImportStepInterface
     }
 
     /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     *
      * @return array<string, mixed>
      */
     protected function getPriceData(DataSetInterface $dataSet): array
@@ -371,22 +334,13 @@ class ProductPriceHydratorStep implements DataImportStepInterface
         return $priceData;
     }
 
-    /**
-     * @param string $key
-     *
-     * @return bool
-     */
     protected function isPriceDataKey(string $key): bool
     {
         return mb_strpos($key, static::KEY_PRICE_DATA_PREFIX) === 0;
     }
 
     /**
-     * @param string $key
-     *
      * @throws \Pyz\Zed\DataImport\Business\Exception\InvalidPriceDataKeyException
-     *
-     * @return string
      */
     protected function getPriceDataKey(string $key): string
     {
@@ -406,8 +360,6 @@ class ProductPriceHydratorStep implements DataImportStepInterface
 
     /**
      * @param array<string, mixed> $priceData
-     * @param string $key
-     * @param string $value
      *
      * @return array<string, mixed>
      */

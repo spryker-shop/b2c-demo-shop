@@ -212,9 +212,6 @@ class DataImportConfig extends SprykerDataImportConfig
      */
     protected const READ_COLLECTION_BATCH_SIZE = 500;
 
-    /**
-     * @return string|null
-     */
     public function getDefaultYamlConfigPath(): ?string
     {
         $regionDir = defined('APPLICATION_REGION') ? APPLICATION_REGION : 'EU';
@@ -234,9 +231,6 @@ class DataImportConfig extends SprykerDataImportConfig
         return array_merge(parent::getFullImportTypes(), $customImportTypes);
     }
 
-    /**
-     * @return int
-     */
     public function getReadCollectionBatchSize(): int
     {
         return static::READ_COLLECTION_BATCH_SIZE;

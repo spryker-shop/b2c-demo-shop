@@ -124,19 +124,11 @@ class ProductSetWriterStep extends PublishAwareStep implements DataImportStepInt
      */
     protected $productRepository;
 
-    /**
-     * @param \Pyz\Zed\DataImport\Business\Model\Product\Repository\ProductRepositoryInterface $productRepository
-     */
     public function __construct(ProductRepositoryInterface $productRepository)
     {
         $this->productRepository = $productRepository;
     }
 
-    /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     *
-     * @return void
-     */
     public function execute(DataSetInterface $dataSet): void
     {
         $productSetEntity = $this->findOrCreateProductSet($dataSet);
@@ -146,11 +138,6 @@ class ProductSetWriterStep extends PublishAwareStep implements DataImportStepInt
         $this->findOrCreateProductImageSet($dataSet, $productSetEntity);
     }
 
-    /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     *
-     * @return \Orm\Zed\ProductSet\Persistence\SpyProductSet
-     */
     protected function findOrCreateProductSet(DataSetInterface $dataSet): SpyProductSet
     {
         $productSetEntity = SpyProductSetQuery::create()
@@ -169,12 +156,6 @@ class ProductSetWriterStep extends PublishAwareStep implements DataImportStepInt
         return $productSetEntity;
     }
 
-    /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     * @param \Orm\Zed\ProductSet\Persistence\SpyProductSet $productSetEntity
-     *
-     * @return void
-     */
     protected function findOrCreateProductAbstractSet(DataSetInterface $dataSet, SpyProductSet $productSetEntity): void
     {
         $productAbstractSkus = explode(',', $dataSet[static::KEY_ABSTRACT_SKUS]);
@@ -203,12 +184,6 @@ class ProductSetWriterStep extends PublishAwareStep implements DataImportStepInt
         }
     }
 
-    /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     * @param \Orm\Zed\ProductSet\Persistence\SpyProductSet $productSetEntity
-     *
-     * @return void
-     */
     protected function findOrCreateProductSetData(DataSetInterface $dataSet, SpyProductSet $productSetEntity): void
     {
         foreach ($dataSet[LocalizedAttributesExtractorStep::KEY_LOCALIZED_ATTRIBUTES] as $idLocale => $localizedAttributes) {
@@ -248,12 +223,6 @@ class ProductSetWriterStep extends PublishAwareStep implements DataImportStepInt
         }
     }
 
-    /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     * @param \Orm\Zed\ProductSet\Persistence\SpyProductSet $productSetEntity
-     *
-     * @return void
-     */
     protected function findOrCreateProductImageSet(DataSetInterface $dataSet, SpyProductSet $productSetEntity): void
     {
         foreach ($dataSet[ProductSetImageExtractorStep::KEY_TARGET] as $imageSetIndex => $imageSet) {
@@ -301,14 +270,6 @@ class ProductSetWriterStep extends PublishAwareStep implements DataImportStepInt
         }
     }
 
-    /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     * @param \Orm\Zed\ProductImage\Persistence\SpyProductImage $productImageEntity
-     * @param string $keyAltTextSmall
-     * @param string $keyAltTextLarge
-     *
-     * @return void
-     */
     protected function createOrUpdateProductImageAltTexts(
         DataSetInterface $dataSet,
         SpyProductImage $productImageEntity,
@@ -333,11 +294,6 @@ class ProductSetWriterStep extends PublishAwareStep implements DataImportStepInt
         }
     }
 
-    /**
-     * @param \Orm\Zed\ProductImage\Persistence\SpyProductImage $productImageEntity
-     *
-     * @return \Orm\Zed\ProductImage\Persistence\SpyProductImage
-     */
     protected function saveProductImageAltTextGlossaryKeys(SpyProductImage $productImageEntity): SpyProductImage
     {
         $altTextLargeGlossaryKey = sprintf(
@@ -359,13 +315,6 @@ class ProductSetWriterStep extends PublishAwareStep implements DataImportStepInt
         return $productImageEntity;
     }
 
-    /**
-     * @param string $glossaryKey
-     * @param int $idLocale
-     * @param string $value
-     *
-     * @return void
-     */
     protected function createOrUpdateGlossaryKey(
         string $glossaryKey,
         int $idLocale,

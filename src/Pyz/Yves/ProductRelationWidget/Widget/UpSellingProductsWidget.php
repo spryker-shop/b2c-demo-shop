@@ -16,9 +16,6 @@ use SprykerShop\Yves\ProductRelationWidget\Widget\UpSellingProductsWidget as Spr
  */
 class UpSellingProductsWidget extends SprykerUpSellingProductsWidget
 {
-    /**
-     * @return string
-     */
     public static function getTemplate(): string
     {
         return '@ProductRelationWidget/views/pdp-upsell-products-carousel/pdp-upsell-products-carousel.twig';

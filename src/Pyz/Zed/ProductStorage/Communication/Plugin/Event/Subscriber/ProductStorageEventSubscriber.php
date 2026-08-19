@@ -22,11 +22,6 @@ use Spryker\Zed\ProductStorage\Communication\Plugin\Event\Subscriber\ProductStor
  */
 class ProductStorageEventSubscriber extends SprykerProductStorageEventSubscriber
 {
-    /**
-     * @param \Spryker\Zed\Event\Dependency\EventCollectionInterface $eventCollection
-     *
-     * @return \Spryker\Zed\Event\Dependency\EventCollectionInterface
-     */
     public function getSubscribedEvents(EventCollectionInterface $eventCollection): EventCollectionInterface
     {
         $eventCollection = parent::getSubscribedEvents($eventCollection);
@@ -37,11 +32,6 @@ class ProductStorageEventSubscriber extends SprykerProductStorageEventSubscriber
         return $eventCollection;
     }
 
-    /**
-     * @param \Spryker\Zed\Event\Dependency\EventCollectionInterface $eventCollection
-     *
-     * @return \Spryker\Zed\Event\Dependency\EventCollectionInterface
-     */
     protected function addProductBundleCreateStorageListener(EventCollectionInterface $eventCollection): EventCollectionInterface
     {
         $eventCollection->addListenerQueued(
@@ -52,11 +42,6 @@ class ProductStorageEventSubscriber extends SprykerProductStorageEventSubscriber
         return $eventCollection;
     }
 
-    /**
-     * @param \Spryker\Zed\Event\Dependency\EventCollectionInterface $eventCollection
-     *
-     * @return \Spryker\Zed\Event\Dependency\EventCollectionInterface
-     */
     protected function addProductBundleUpdateStorageListener(EventCollectionInterface $eventCollection): EventCollectionInterface
     {
         $eventCollection->addListenerQueued(
@@ -67,11 +52,6 @@ class ProductStorageEventSubscriber extends SprykerProductStorageEventSubscriber
         return $eventCollection;
     }
 
-    /**
-     * @param \Spryker\Zed\Event\Dependency\EventCollectionInterface $eventCollection
-     *
-     * @return \Spryker\Zed\Event\Dependency\EventCollectionInterface
-     */
     protected function addProductBundleDeleteStorageListener(EventCollectionInterface $eventCollection): EventCollectionInterface
     {
         $eventCollection->addListenerQueued(

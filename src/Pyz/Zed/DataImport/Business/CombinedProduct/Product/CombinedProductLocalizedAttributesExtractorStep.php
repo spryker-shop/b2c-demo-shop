@@ -21,17 +21,11 @@ class CombinedProductLocalizedAttributesExtractorStep extends ProductLocalizedAt
         parent::__construct($defaultAttributes);
     }
 
-    /**
-     * @return string
-     */
     protected function getAttributeKeyPrefix(): string
     {
         return 'product.attribute_key_';
     }
 
-    /**
-     * @return string
-     */
     protected function getAttributeValuePrefix(): string
     {
         return 'product.value_';

@@ -45,33 +45,22 @@ class SalesConfig extends SprykerSalesConfig
 
     /**
      * @api
-     *
-     * @return bool
      */
     public function isHydrateOrderHistoryToItems(): bool
     {
         return false;
     }
 
-    /**
-     * @return bool
-     */
     public function isOldDeterminationForOrderItemProcessEnabled(): bool
     {
         return false;
     }
 
-    /**
-     * @return bool
-     */
     public function useUniqueRandomIdOrderReferenceGenerator(): bool
     {
         return true;
     }
 
-    /**
-     * @return string
-     */
     public function getItemHashColumn(): string
     {
         return 'OrderItemReference';
