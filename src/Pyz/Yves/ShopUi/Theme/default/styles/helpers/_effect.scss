@@ -1,3 +1,5 @@
+@use '~ShopUi/styles/settings/effect' as *;
+
 /**
  * Povides transition property configured by the passed parameters.
  * @param {String} $props
@@ -12,7 +14,9 @@
     $transition: null;
 
     @each $prop in $props {
-        $transition: $prop $duration $ease, $transition;
+        $transition:
+            $prop $duration $ease,
+            $transition;
     }
     transition: $transition;
 

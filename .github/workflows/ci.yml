@@ -176,15 +176,21 @@ jobs:
     js-validation:
         name: "NPM validation"
         runs-on: ubuntu-latest
-        strategy:
-            fail-fast: false
-            matrix:
-                node-version: [ '18' ]
         env:
             APPLICATION_ENV: ci.mysql
             PROJECT: suite
         steps:
             -   uses: actions/checkout@v4
+
+            -   uses: ramsey/composer-install@26d8a556604053a9612623447203a691f406fbe6 # v4
+                with:
+                    composer-options: "-q --ignore-platform-reqs --no-interaction --prefer-install=auto"
+
+            -   name: Setup Node.js
+                uses: actions/setup-node@v5
+                with:
+                    node-version: '24'
+                    cache: 'npm'
 
             -   name: Install NPM packages
                 run: npm ci

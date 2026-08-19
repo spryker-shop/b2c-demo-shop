@@ -1,9 +1,8 @@
-@import '~ShopUi/styles/basic';
+@use '~ShopUi/styles/basic' as core;
+@use 'basics/grid' as *;
+@use 'basics/typography' as *;
 
-@import 'basics/grid';
-@import 'basics/typography';
-
-@include basic-reset;
+@include core.basic-reset;
 @include basic-typography;
 @include basic-grid;
-@include basic-animation;
+@include core.basic-animation;

@@ -6,8 +6,6 @@ export default class CartConfiguredBundleItemNote extends Component {
     protected formTarget: HTMLElement;
     protected textTarget: HTMLElement;
 
-    protected readyCallback(): void {}
-
     protected init(): void {
         this.editButton = <HTMLButtonElement>this.getElementsByClassName(`${this.jsName}__edit`)[0];
         this.removeButton = <HTMLButtonElement>this.getElementsByClassName(`${this.jsName}__remove`)[0];

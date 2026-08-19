@@ -10,8 +10,6 @@ export default class QuantityCounter extends Component {
     protected timeout = 0;
     protected formattedNumberInput: FormattedNumberInput;
 
-    protected readyCallback(): void {}
-
     protected init(): void {
         this.quantityInput = <HTMLInputElement>this.getElementsByClassName(`${this.jsName}__input`)[0];
         this.decrButton = <HTMLButtonElement>this.getElementsByClassName(`${this.jsName}__decr`)[0];

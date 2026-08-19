@@ -15,8 +15,6 @@ export default class ScrollParallax extends Component {
     protected distanceToWrapper: number;
     protected initialized = false;
 
-    protected readyCallback(): void {}
-
     protected init(): void {
         this.wrapper = <HTMLElement>document.getElementsByClassName(this.wrapperClassName)[0];
         this.target = <HTMLElement>this.wrapper.getElementsByClassName(this.targetClassName)[0];

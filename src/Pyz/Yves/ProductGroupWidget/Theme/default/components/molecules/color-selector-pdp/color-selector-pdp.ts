@@ -5,8 +5,6 @@ export default class ColorSelectorPdp extends Component {
     protected colors: HTMLAnchorElement[];
     protected image: HTMLImageElement;
 
-    protected readyCallback(): void {}
-
     protected init(): void {
         this.colors = <HTMLAnchorElement[]>Array.from(this.getElementsByClassName(`${this.jsName}__color`));
         this.container = <HTMLImageElement>document.getElementsByClassName(`${this.jsName}__image-container`)[0];
